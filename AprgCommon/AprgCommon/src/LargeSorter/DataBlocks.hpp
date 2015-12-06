@@ -8,7 +8,8 @@
 #include <LargeSorter/DataBlock.hpp>
 #include <sstream>
 
-namespace alba{
+namespace alba
+{
 
 template <typename ObjectToSort>
 class DataBlocks

@@ -107,7 +107,8 @@ bool BtsLogPrint::operator>(BtsLogPrint const& btsLogPrintToCompare) const
     }
     else
     {
-        return m_btsTime > btsLogPrintToCompare.m_btsTime;    }
+        return m_btsTime > btsLogPrintToCompare.m_btsTime;
+    }
     return false;
 }
 

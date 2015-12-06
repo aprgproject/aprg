@@ -4,7 +4,8 @@ include(${APRG_DIR}/zlib128/AprgCmakeInclude/zlib.cmake)
 #Assign curl directory, this needs aprg directory
 set(CURL_DIR ${APRG_DIR}/curl-7.38.0/curl-7.38.0/)
 
-#Include curl libraryset(CURL_INCLUDE_DIRECTORIES
+#Include curl library
+set(CURL_INCLUDE_DIRECTORIES
     ${CURL_DIR}/include
     ${CURL_DIR}
     ${CURL_DIR}/src

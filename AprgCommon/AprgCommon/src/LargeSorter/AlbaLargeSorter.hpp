@@ -7,7 +7,8 @@
 #include <LargeSorter/DataBlocks.hpp>
 #include <PathHandlers/AlbaWindowsPathHandler.hpp>
 
-namespace alba{
+namespace alba
+{
 
 template <typename ObjectToSort>
 class AlbaLargeSorter

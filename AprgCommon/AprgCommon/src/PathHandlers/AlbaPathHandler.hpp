@@ -5,6 +5,7 @@
 
 using std::string;
 using std::function;
+
 namespace alba{
 
 enum class PathType{Empty, Directory, File};

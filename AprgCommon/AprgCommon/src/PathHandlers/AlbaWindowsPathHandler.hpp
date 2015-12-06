@@ -7,6 +7,7 @@
 
 using std::set;
 using std::string;
+
 namespace alba{
 
 class AlbaWindowsPathHandler: public AlbaPathHandler

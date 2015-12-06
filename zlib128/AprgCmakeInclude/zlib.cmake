@@ -1,7 +1,8 @@
 #Assign curl directory, this needs aprg directory
 set(ZLIB_DIR ${APRG_DIR}/zlib128/zlib-1.2.8/)
 
-#Include curl libraryset(ZLIB_INCLUDE_DIRECTORIES
+#Include curl library
+set(ZLIB_INCLUDE_DIRECTORIES
     ${ZLIB_DIR}
 )
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")

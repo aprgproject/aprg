@@ -6,6 +6,7 @@
 
 using std::string;
 using std::function;
+
 namespace alba{
 
 class AlbaWebPathHandler: public AlbaPathHandler

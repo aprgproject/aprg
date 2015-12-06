@@ -5,7 +5,8 @@
 #include <LargeSorter/DataBlock.hpp>
 #include <deque>
 
-namespace alba{
+namespace alba
+{
 
 template <typename BlockInformation>
 class AlbaLargeSorterCache
