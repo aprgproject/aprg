@@ -166,15 +166,17 @@ bool CurlInterface::downloadAsBinaryWithAdditionalConfigUntilSuccessful(string c
     return isSuccessful;
 }
 
-bool CurlInterface::downloadAsBinaryWithAdditionalConfigWithFiniteNumberOfTries(string const& url, string const& fileLocation, function<void(curl_easy&)> additionalConfig)
+bool CurlInterface::downloadAsBinaryWithAdditionalConfigWithFiniteNumberOfTries(
+        string const& url,
+        string const& fileLocation,
+        int const totalNumberOfTries,
+        function<void(curl_easy&)> additionalConfig)
 {
-    int const totalNumberOfTries=20;
     bool isSuccessful(false);
-    for(int numberOfTries = 1; (!isSuccessful)&&(numberOfTries<=totalNumberOfTries); numberOfTries++)
+    for(int numberOfTries = 1; (!isSuccessful)&&(numberOfTries <= totalNumberOfTries); numberOfTries++)
     {
         cout<<"   --> Downloading binary file. Number of tries=" << numberOfTries << " \nFile: ["<<fileLocation<<"] \nFrom: ["<<url<<"]"<<endl;
-        ofstream outputFile(fileLocation, ofstream::binary);
-        isSuccessful = downloadForOutputFileStream(url, outputFile, [numberOfTries, additionalConfig](curl_easy& easy)
+        ofstream outputFile(fileLocation, ofstream::binary);        isSuccessful = downloadForOutputFileStream(url, outputFile, [numberOfTries, additionalConfig](curl_easy& easy)
         {
                 additionalConfig(easy);
                 addLowSpeedLimitToCurlEasy(easy, 1000, 10*numberOfTries);
