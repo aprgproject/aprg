@@ -105,14 +105,9 @@ bool BtsLogPrint::operator>(BtsLogPrint const& btsLogPrintToCompare) const
         }
         return m_pcTime > btsLogPrintToCompare.m_pcTime;
     }
-    else if(isStartup1 ^ isStartup2)
-    {
-        return true;
-    }
     else
     {
-        return m_btsTime > btsLogPrintToCompare.m_btsTime;
-    }
+        return m_btsTime > btsLogPrintToCompare.m_btsTime;    }
     return false;
 }
 

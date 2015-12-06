@@ -19,12 +19,11 @@ include(${APRG_DIR}/gtest-1.7.0/AprgCmakeInclude/gtest.cmake)
 set(SOURCES
     src/PeerReviewCollator.cpp
     src/PeerReviewCollator.hpp
-    src/main.cpp
-#    tst/PeerReviewCollator_unit.cpp
+    #src/main.cpp
+    tst/PeerReviewCollator_unit.cpp
 )
 
-SET(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
-SET(BUILD_SHARED_LIBRARIES OFF)
+SET(CMAKE_FIND_LIBRARY_SUFFIXES ".a")SET(BUILD_SHARED_LIBRARIES OFF)
 SET(CMAKE_EXE_LINKER_FLAGS "-static")
 
 add_executable(${OUTFILE} ${SOURCES})
