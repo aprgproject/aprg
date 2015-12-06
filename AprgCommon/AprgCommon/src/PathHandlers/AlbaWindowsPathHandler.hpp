@@ -1,14 +1,12 @@
 #pragma once
 
+#include <AlbaPathHandler.hpp>
 #include <functional>
 #include <set>
 #include <string>
 
-#include "AlbaPathHandler.hpp"
-
 using std::set;
 using std::string;
-
 namespace alba{
 
 class AlbaWindowsPathHandler: public AlbaPathHandler

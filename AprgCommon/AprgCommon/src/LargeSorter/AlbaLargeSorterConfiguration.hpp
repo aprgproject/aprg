@@ -1,9 +1,8 @@
 #pragma once
 
-#include "DataBlock.hpp"
+#include <LargeSorter/DataBlock.hpp>
 #include <PathHandlers/AlbaWindowsPathHandler.hpp>
 #include <string>
-
 using std::string;
 
 namespace alba

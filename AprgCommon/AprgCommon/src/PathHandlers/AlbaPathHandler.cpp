@@ -1,10 +1,9 @@
 #include "AlbaPathHandler.hpp"
 
+#include <AlbaStringHelper.hpp>
 #include <algorithm>
-#include "../AlbaStringHelper.hpp"
 
 namespace alba{
-
 AlbaPathHandler::AlbaPathHandler(string const& slashCharacterString)
     : m_slashCharacterString(slashCharacterString)
 {}

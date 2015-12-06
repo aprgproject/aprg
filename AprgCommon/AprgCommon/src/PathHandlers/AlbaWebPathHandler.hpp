@@ -1,12 +1,11 @@
 #pragma once
 
-#include <string>
+#include <AlbaPathHandler.hpp>
 #include <functional>
-#include "AlbaPathHandler.hpp"
+#include <string>
 
 using std::string;
 using std::function;
-
 namespace alba{
 
 class AlbaWebPathHandler: public AlbaPathHandler

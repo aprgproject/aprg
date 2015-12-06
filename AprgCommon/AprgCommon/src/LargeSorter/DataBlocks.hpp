@@ -1,15 +1,14 @@
 #pragma once
 
-#include "AlbaLargeSorterConfiguration.hpp"
-#include "AlbaLargeSorterCache.hpp"
-#include "AlbaLargeSorterTypes.hpp"
 #include <algorithm>
-#include "DataBlock.hpp"
 #include <functional>
+#include <LargeSorter/AlbaLargeSorterConfiguration.hpp>
+#include <LargeSorter/AlbaLargeSorterCache.hpp>
+#include <LargeSorter/AlbaLargeSorterTypes.hpp>
+#include <LargeSorter/DataBlock.hpp>
 #include <sstream>
 
-namespace alba
-{
+namespace alba{
 
 template <typename ObjectToSort>
 class DataBlocks
