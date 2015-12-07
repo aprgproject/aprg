@@ -1,11 +1,10 @@
+#include <AlbaWebPathHandler.hpp>
+#include <AlbaWindowsPathHandler.hpp>
 #include "gtest/gtest.h"
 #include <string>
-#include "../src/PathHandlers/AlbaWebPathHandler.hpp"
-#include "../src/PathHandlers/AlbaWindowsPathHandler.hpp"
 
 using std::string;
 using namespace alba;
-
 #define SIZE_TEST_FILE R"(C:\APRG\AprgCommon\AprgCommon\tst\FilesForTests\FileReaderTest\Test2_SizeTest.txt)"
 
 TEST(PathTest, FullPathWithDirectoryAndFileGiven)

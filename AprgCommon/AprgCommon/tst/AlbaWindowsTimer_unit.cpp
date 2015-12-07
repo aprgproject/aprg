@@ -1,9 +1,9 @@
+#include <AlbaWindowsTimer.hpp>
+
 #include "gtest/gtest.h"
-#include "../src/AlbaWindowsTimer.hpp"
 
 using namespace alba;
 using namespace std;
-
 TEST(AlbaWindowsTimer, DISABLED_TimerCanBeInitialized)
 {
     AlbaWindowsTimer timer;

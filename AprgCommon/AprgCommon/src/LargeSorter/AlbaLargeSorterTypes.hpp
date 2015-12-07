@@ -1,10 +1,9 @@
 #pragma once
 
-#include <LargeSorter/DataBlock.hpp>
+#include <DataBlock.hpp>
 #include <list>
 
-namespace alba
-{
+namespace alba{
 
 template <typename ObjectToSort> using AlbaLargeSorterBlockType = DataBlock<ObjectToSort>;
 template <typename ObjectToSort> using AlbaLargeSorterBlockContainer = std::list<AlbaLargeSorterBlockType<ObjectToSort>>;

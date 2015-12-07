@@ -1,8 +1,8 @@
+#include <AlbaMacroArgumentCounter.hpp>
+
 #include "gtest/gtest.h"
-#include "../src/AlbaMacroArgumentCounter.hpp"
 
 using namespace std;
-
 TEST(AlbaMacroArgumentCounter, IntegerTest)
 {
     EXPECT_EQ(ALBA_COUNT_ARGS(1), 1);

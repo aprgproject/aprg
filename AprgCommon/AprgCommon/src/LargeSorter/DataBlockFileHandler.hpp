@@ -1,12 +1,11 @@
 #pragma once
 
 #include <AlbaOptional.hpp>
+#include <AlbaWindowsPathHandler.hpp>
 #include <fstream>
-#include <PathHandlers/AlbaWindowsPathHandler.hpp>
 #include <string>
 
 using std::string;
-
 namespace alba
 {
 

@@ -1,11 +1,11 @@
+#include <AlbaLargeSorter.hpp>
+
 #include <algorithm>
 #include "gtest/gtest.h"
 #include <iostream>
-#include <LargeSorter/AlbaLargeSorter.hpp>
 #include <set>
 #include <string>
 #include <vector>
-
 using namespace alba;
 using namespace std;
 

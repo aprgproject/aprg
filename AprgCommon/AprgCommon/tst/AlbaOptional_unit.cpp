@@ -1,9 +1,9 @@
+#include <AlbaOptional.hpp>
+
 #include "gtest/gtest.h"
-#include "../src/AlbaOptional.hpp"
 
 using namespace alba;
 using namespace std;
-
 TEST(AlbaOptionalTest, IntegerTest)
 {
     AlbaOptional<int> integerOptional1(1111);
