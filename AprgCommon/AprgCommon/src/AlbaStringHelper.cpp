@@ -190,10 +190,27 @@ string stringHelper::getStringWithoutOpeningClosingOperators(string const& strin
     return string1.substr(start, end-start);
 }
 
+void stringHelper::copyBeforeStringAndAfterString(
+        string const& mainString,
+        string const& stringToSearch,
+        string & beforeString,
+        string & afterString,
+        int const indexToStartTheSearch)
+{
+    beforeString.clear();
+    afterString.clear();
+    int firstIndexOfFirstString = mainString.find(stringToSearch, indexToStartTheSearch);
+    if(isNotNpos(firstIndexOfFirstString))
+    {
+        int lastIndexOfFirstString = firstIndexOfFirstString + stringToSearch.length();
+        beforeString = mainString.substr(0, firstIndexOfFirstString);
+        afterString = mainString.substr(lastIndexOfFirstString);
+    }
+}
+
 string stringHelper::getStringAfterThisString(string const& mainString, string const& stringToSearch, int const indexToStart)
 {
-    string result;
-    int firstIndexOfFirstString = mainString.find(stringToSearch, indexToStart);
+    string result;    int firstIndexOfFirstString = mainString.find(stringToSearch, indexToStart);
     if(isNotNpos(firstIndexOfFirstString))
     {
         int lastIndexOfFirstString = firstIndexOfFirstString + stringToSearch.length();

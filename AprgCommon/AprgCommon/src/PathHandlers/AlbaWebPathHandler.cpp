@@ -15,19 +15,18 @@ void AlbaWebPathHandler::inputPath(string const& path)
 {
     clear();
 
-    string pathWithProtocol;
+    string protocolWithSymbols;
     string pathAfterProtocol;
-    splitPathInProtocol(path, pathWithProtocol, pathAfterProtocol);
+    splitPathInProtocol(path, protocolWithSymbols, pathAfterProtocol);
     string correctPathAfterProtocol(stringHelper::getCorrectPathWithReplacedSlashCharacters(pathAfterProtocol, m_slashCharacterString));
     string correctPathAfterProtocolWithoutUrlParameters(getCorrectPathWithoutUrlParameters(correctPathAfterProtocol));
 
     setExtensionFromPath(correctPathAfterProtocolWithoutUrlParameters);
-    setDirectoryAndFileFromPath(pathWithProtocol+correctPathAfterProtocolWithoutUrlParameters);
+    setDirectoryAndFileFromPath(protocolWithSymbols+correctPathAfterProtocolWithoutUrlParameters);
     setFileType();
-    setProtocolAndCorrectProtocolInDirectory(pathWithProtocol);
+    setProtocolAndCorrectProtocolInDirectory(protocolWithSymbols);
     setUrlParameters(correctPathAfterProtocol);
 }
-
 void AlbaWebPathHandler::clear()
 {
     AlbaPathHandler::clear();
@@ -65,22 +64,21 @@ void AlbaWebPathHandler::gotoLink(string const& newPath)
     }
 }
 
-void AlbaWebPathHandler::splitPathInProtocol(string const& path, string & pathWithProtocol, string & pathAfterProtocol)
+void AlbaWebPathHandler::splitPathInProtocol(string const& path, string & protocolWithSymbols, string & pathAfterProtocol)
 {
     int indexBeforeProtocol = path.find("://");
     int indexBeforeSlash = path.find_first_of(m_slashCharacterString);
     if(stringHelper::isNotNpos(indexBeforeProtocol) && stringHelper::isNotNpos(indexBeforeSlash) && indexBeforeProtocol < indexBeforeSlash)
     {
-        pathWithProtocol = path.substr(0,indexBeforeProtocol+3);
+        protocolWithSymbols = path.substr(0,indexBeforeProtocol+3);
         pathAfterProtocol = path.substr(indexBeforeProtocol+3);
     }
     else
     {
-        pathWithProtocol.clear();
+        protocolWithSymbols.clear();
         pathAfterProtocol = path;
     }
 }
-
 string AlbaWebPathHandler::getCorrectPathWithoutUrlParameters(string const& correctPath) const
 {
     string correctPathWithoutUrlParameters(correctPath);
@@ -92,13 +90,12 @@ string AlbaWebPathHandler::getCorrectPathWithoutUrlParameters(string const& corr
     return correctPathWithoutUrlParameters;
 }
 
-void AlbaWebPathHandler::setProtocolAndCorrectProtocolInDirectory(string const& pathWithProtocol)
+void AlbaWebPathHandler::setProtocolAndCorrectProtocolInDirectory(string const& protocolWithSymbols)
 {
-    int index = pathWithProtocol.find_first_of(R"(:/\)");
+    int index = protocolWithSymbols.find_first_of(R"(:/\)");
     if (stringHelper::isNotNpos(index) && m_directory[index]==':')
     {
-        m_protocol = stringHelper::getStringWithLowerCaseLetters(m_directory.substr(0,index));
-        m_hasProtocol = true;
+        m_protocol = stringHelper::getStringWithLowerCaseLetters(m_directory.substr(0,index));        m_hasProtocol = true;
     }
 }
 
