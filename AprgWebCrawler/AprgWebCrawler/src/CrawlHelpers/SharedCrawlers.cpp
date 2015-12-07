@@ -48,7 +48,8 @@ void AprgWebCrawler::crawlOneHtmlAndOneFileToDownload(string& webLink)
         downloadBinaryFileWithFiniteNumberOfTries<ConfigType::LowSpeedLimitAndMozillaFireFoxAndPrintDownloadProgress>(fileToDownloadWebPathHandler, downloadPathHandler, 20);
         if(links.linkForNextHtml.empty())
         {
-            cout << "Terminating the because next web link is empty." << endl;            return;
+            cout << "Terminating the because next web link is empty." << endl;
+            return;
         }
         AlbaWebPathHandler nextWebPathHandler(currentWebLinkPathHandler);
         nextWebPathHandler.gotoLink(links.linkForNextHtml);
