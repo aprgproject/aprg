@@ -33,6 +33,7 @@ void copyBeforeStringAndAfterString(string const& mainString, string const& stri
 string getStringAfterThisString(string const& mainString, string const& stringToSearch, int const indexToStart=0);
 string getStringInBetweenTwoStrings(string const& mainString, string const& firstString, string const& secondString, int const indexToStart=0);
 string getStringAndReplaceNonAlphanumericCharactersToUnderScore(string const& path);
+
 string getCorrectPathWithReplacedSlashCharacters(string const& path, string const& slashCharacterString);
 string getCorrectPathWithoutDoublePeriod(string const& string1, string const& slashCharacterString);
 string getStringBeforeDoublePeriod(string const& string1, string const& slashCharacterString);

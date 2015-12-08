@@ -1,4 +1,4 @@
-#include <AlbaWebPathHandler.hpp>
+#include "AlbaWebPathHandler.hpp"
 
 #include <AlbaStringHelper.hpp>
 #include <functional>
@@ -27,6 +27,7 @@ void AlbaWebPathHandler::inputPath(string const& path)
     setProtocolAndCorrectProtocolInDirectory(protocolWithSymbols);
     setUrlParameters(correctPathAfterProtocol);
 }
+
 void AlbaWebPathHandler::clear()
 {
     AlbaPathHandler::clear();
@@ -79,6 +80,7 @@ void AlbaWebPathHandler::splitPathInProtocol(string const& path, string & protoc
         pathAfterProtocol = path;
     }
 }
+
 string AlbaWebPathHandler::getCorrectPathWithoutUrlParameters(string const& correctPath) const
 {
     string correctPathWithoutUrlParameters(correctPath);
@@ -95,7 +97,8 @@ void AlbaWebPathHandler::setProtocolAndCorrectProtocolInDirectory(string const& 
     int index = protocolWithSymbols.find_first_of(R"(:/\)");
     if (stringHelper::isNotNpos(index) && m_directory[index]==':')
     {
-        m_protocol = stringHelper::getStringWithLowerCaseLetters(m_directory.substr(0,index));        m_hasProtocol = true;
+        m_protocol = stringHelper::getStringWithLowerCaseLetters(m_directory.substr(0,index));
+        m_hasProtocol = true;
     }
 }
 

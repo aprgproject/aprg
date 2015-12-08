@@ -1,7 +1,7 @@
-#include <AlbaGrepStringEvaluator.hpp>
-
-#include "gtest/gtest.h"
+#include <GrepStringEvaluator/AlbaGrepStringEvaluator.hpp>
+#include <gtest/gtest.h>
 #include <string>
+
 using namespace alba;
 
 TEST(AlbaGrepStringEvaluatorTest, FalseIsReturnedWhenconditionIsEmpty)

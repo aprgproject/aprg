@@ -1,10 +1,11 @@
 #include <AlbaStringHelper.hpp>
 
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 #include <string>
 
 using std::string;
 using namespace alba::stringHelper;
+
 TEST(GetDataFromStringTest, ConvertToCapitalLetters_AllEnglishLetters)
 {
     string testString("AbCDEFghIjKlMnopQRstUvWxYz");
@@ -47,7 +48,8 @@ TEST(GetDataFromStringTest, DecodeUrlString2)
 
 TEST(GetDataFromStringTest, GetWithoutStartingAndTrailingWhiteSpace_WhiteSpaceOnly)
 {
-    string testString("     \n\n    \t\t\t   ");    EXPECT_TRUE(getStringWithoutStartingAndTrailingWhiteSpace(testString).empty());
+    string testString("     \n\n    \t\t\t   ");
+    EXPECT_TRUE(getStringWithoutStartingAndTrailingWhiteSpace(testString).empty());
 }
 
 TEST(GetDataFromStringTest, GetWithoutStartingAndTrailingWhiteSpace_AllEnglishLettersWithSpecialCharacters)
@@ -115,7 +117,8 @@ TEST(GetDataFromStringTest, CopyBeforeStringAndAfterString_AllEnglishLettersWith
 
 TEST(GetDataFromStringTest, GetStringAfterThisString_AllEnglishLettersWithSpecialCharacters)
 {
-    string testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");    string stringInBetweenAtTheStart(R"(567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
+    string testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
+    string stringInBetweenAtTheStart(R"(567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
     string stringInBetweenInTheMiddle(R"(^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
 
     EXPECT_EQ(getStringAfterThisString(testString, R"("1234)"), stringInBetweenAtTheStart);

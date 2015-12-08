@@ -1,10 +1,10 @@
 #pragma once
 
-#include <AlbaWebPathHandler.hpp>
-#include <AlbaWindowsPathHandler.hpp>
 #include <deque>
 #include <fstream>
 #include "LinksStructures/LinksStructures.hpp"
+#include <PathHandlers/AlbaWebPathHandler.hpp>
+#include <PathHandlers/AlbaWindowsPathHandler.hpp>
 #include <string>
 
 using std::deque;
@@ -45,7 +45,8 @@ private:
     string getLinkManuallyUsingMozillaFirefox(AlbaWebPathHandler const& webPathHandler) const;
 
     void crawlOneHtmlAndOneFileToDownload();
-    void crawlOneHtmlAndOneFileToDownload(string& webLink);    LinksForHtmlAndFileToDownload getLinksBasedOnMode(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
+    void crawlOneHtmlAndOneFileToDownload(string& webLink);
+    LinksForHtmlAndFileToDownload getLinksBasedOnMode(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForGuroManga(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForMangaFox(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForMangaFoxSaveInVolumeAndChapter(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
@@ -67,7 +68,8 @@ private:
     LinksForYoutube getLinkForYoutube(AlbaWebPathHandler const& webLinkPathHandler) const;
 
     bool m_isModeRecognized;
-    CrawlerMode m_mode;    deque<string> m_webLinks;
+    CrawlerMode m_mode;
+    deque<string> m_webLinks;
     AlbaWindowsPathHandler m_workingPathHandler;
     AlbaWindowsPathHandler m_memoryCardPathHandler;
 };

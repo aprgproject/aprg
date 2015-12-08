@@ -1,10 +1,11 @@
 #pragma once
 
 #include <functional>
-#include <AlbaGrepStringEvaluatorTerm.hpp>
+#include <GrepStringEvaluator/AlbaGrepStringEvaluatorTerm.hpp>
 #include <string>
 #include <stack>
 #include <vector>
+
 using std::function;
 using std::string;
 using std::stack;

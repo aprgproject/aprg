@@ -1,11 +1,12 @@
 #include <AlbaRaiiafPointer.hpp>
 
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 #include <iostream>
 #include <string>
 
 using namespace alba;
 using namespace std;
+
 TEST(AlbaRaiiafPointerTest, IntegerTest)
 {
     AlbaRaiiafPointer integerPointer;

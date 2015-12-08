@@ -48,7 +48,8 @@ void AprgWebCrawler::crawlForYoutube(string & webLink, ofstream& convertedYoutub
         LinksForYoutube links(getLinkForYoutube(webPathHandler));
         if(links.isInvalid())
         {
-            cout << "Links are invalid." << endl;            links.printLinks();
+            cout << "Links are invalid." << endl;
+            links.printLinks();
             continue;
         }
         AlbaWebPathHandler videoWebPathHandler;
@@ -95,4 +96,5 @@ LinksForYoutube AprgWebCrawler::getLinkForYoutube(AlbaWebPathHandler const& webL
     links.localPathForCurrentVideo = m_workingPathHandler.getDirectory() + R"(\Video\)" + fileNameForVideo + ".mp4";
     return links;
 }
+
 }
