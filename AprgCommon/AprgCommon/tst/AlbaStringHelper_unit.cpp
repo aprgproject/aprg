@@ -37,10 +37,17 @@ TEST(GetDataFromStringTest, DecodeUrlString)
     EXPECT_EQ(getStringWithUrlDecodedString(testString), decodedUrl);
 }
 
+TEST(GetDataFromStringTest, DecodeUrlString2)
+{
+    string testString("Last+Week+Tonight+with+John+Oliver-+The+IRS+%28HBO%29");
+    string decodedUrl("Last+Week+Tonight+with+John+Oliver-+The+IRS+(HBO)");
+
+    EXPECT_EQ(getStringWithUrlDecodedString(testString), decodedUrl);
+}
+
 TEST(GetDataFromStringTest, GetWithoutStartingAndTrailingWhiteSpace_WhiteSpaceOnly)
 {
-    string testString("     \n\n    \t\t\t   ");
-    EXPECT_TRUE(getStringWithoutStartingAndTrailingWhiteSpace(testString).empty());
+    string testString("     \n\n    \t\t\t   ");    EXPECT_TRUE(getStringWithoutStartingAndTrailingWhiteSpace(testString).empty());
 }
 
 TEST(GetDataFromStringTest, GetWithoutStartingAndTrailingWhiteSpace_AllEnglishLettersWithSpecialCharacters)
