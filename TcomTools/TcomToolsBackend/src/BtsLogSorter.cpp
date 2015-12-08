@@ -52,15 +52,14 @@ void BtsLogFileReaderWithRollback::openIfNeeded(string const& filePath)
 
 BtsLogSorter::BtsLogSorter(
         string const& condition,
-        alba::AlbaLargeSorterConfiguration const& mainConfiguration,
+        alba::AlbaLargeSorterConfiguration const& configurationWithPcTime,
         alba::AlbaLargeSorterConfiguration const& configurationWithoutPcTime,
         string const& pathOfLogsWithoutPcTime)
     : m_evaluator(condition)
-    , m_sorterWithPcTime(mainConfiguration)
+    , m_sorterWithPcTime(configurationWithPcTime)
     , m_sorterWithoutPcTime(configurationWithoutPcTime)
 {
-    AlbaWindowsPathHandler pathHandlerOfLogsWithoutPcTime;
-    pathHandlerOfLogsWithoutPcTime.inputPath(pathOfLogsWithoutPcTime);
+    AlbaWindowsPathHandler pathHandlerOfLogsWithoutPcTime;    pathHandlerOfLogsWithoutPcTime.inputPath(pathOfLogsWithoutPcTime);
     m_directoryOfLogsWithoutPcTime = pathHandlerOfLogsWithoutPcTime.getDirectory();
 }
 
