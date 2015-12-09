@@ -6,11 +6,10 @@ isGrepTcomEnabled:0
 isGrepErrEnabled:0
 isGrepErrWrnTcomEnabled:0
 isGrepBtsStatusEnabled:0
-isGrepRecoveryEnabled:1
+isGrepRecoveryEnabled:0
 isGrepAllocationEnabled:0
 isGrepFaultEnabled:0
-isGrepLrmEnabled:0
-isGrepGrmEnabled:0
+isGrepLrmEnabled:0isGrepGrmEnabled:0
 isGrepToamEnabled:0
 isGrepTupcEnabled:0
 isGrepRlhEnabled:0
@@ -37,11 +36,10 @@ grepConditionForDmgr:[TCOM/DMGR]
 inputFileOrDirectory:E:\PR075191\sample\sample.zip
 extractGrepCondition:  [LRM] || [alarm] || [UDP] || [CPU] || [syslog] || [ccns] || [tcom] || [startup] || [runtime] || [system] || [radparam] || ([bts]&&([.log]||[.zip]||[.tar])) || [snapshot] || ([tech]&&[report]) || [BTSLogFiles]
 acceptedFilesGrepCondition: ([syslog]&&[.log]) || [ccns.log] || [tcom.log] || (([startup]||[runtime]||[system])&&[.log]) || ([UDP]&&([.log]||[.txt]))
-otherGrepCondition:
+otherGrepCondition:[cellId]
 pathOfLogsWithoutPcTime:C:\APRG\TcomTools\TcomToolsBackend\tst\TempFiles\LogsWithoutPcTime
 sorterConfigurationWithPcTime.m_directoryForBlocks:C:\APRG\TcomTools\TcomToolsBackend\tst\TempFiles\WithPcTimeBlocks
-sorterConfigurationWithPcTime.m_minimumNumberOfObjectsPerBlock:10000
-sorterConfigurationWithPcTime.m_maximumNumberOfObjectsPerBlock:100000
+sorterConfigurationWithPcTime.m_minimumNumberOfObjectsPerBlock:10000sorterConfigurationWithPcTime.m_maximumNumberOfObjectsPerBlock:100000
 sorterConfigurationWithPcTime.m_maximumNumberOfObjectsInMemory:200000
 sorterConfigurationWithPcTime.m_maximumFileStreams:70
 sorterConfigurationWithoutPcTime.m_directoryForBlocks:C:\APRG\TcomTools\TcomToolsBackend\tst\TempFiles\WithoutPcTimeBlocks
