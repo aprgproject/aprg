@@ -124,11 +124,10 @@ void AprgWebCrawler::crawl()
     case CrawlerMode::MangafoxWithVolume:
     case CrawlerMode::Mangahere:
     case CrawlerMode::Y8:
-        crawlOneHtmlAndOneFileToDownload();
+        crawlOneHtmlAndOneFileToDownload(100);
         break;
     case CrawlerMode::Youtube:
-        crawlForYoutube();
-        break;
+        crawlForYoutube();        break;
     }
 }
 
