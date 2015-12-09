@@ -61,7 +61,8 @@ LinksForHtmlAndFileToDownload AprgWebCrawler::getNextLinkAndImageLinkForMangaFox
             }
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(class="btn next_page"><span></span>next page</a>)"))
-        {            nextPageLink = getStringInBetweenTwoStrings(lineInHtmlFile, R"(<a href=")", R"(")");
+        {
+            nextPageLink = getStringInBetweenTwoStrings(lineInHtmlFile, R"(<a href=")", R"(")");
             onClickNextPage = getStringInBetweenTwoStrings(lineInHtmlFile, R"(onclick=")", R"(")");
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<p><span>Next Chapter:</span> <a href=")"))

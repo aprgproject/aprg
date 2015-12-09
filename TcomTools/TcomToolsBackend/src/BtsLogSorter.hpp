@@ -37,7 +37,8 @@ public:
             alba::AlbaLargeSorterConfiguration const& configurationWithPcTime,
             alba::AlbaLargeSorterConfiguration const& configurationWithoutPcTime,
             string const& pathOfLogsWithoutPcTime);
-    void processDirectory(string const& directoryPath);    void processFile(string const& filePath);
+    void processDirectory(string const& directoryPath);
+    void processFile(string const& filePath);
     void saveAllToOutputFile(string const& outputPath);
 
 private:

@@ -127,7 +127,8 @@ void AprgWebCrawler::crawl()
         crawlOneHtmlAndOneFileToDownload(100);
         break;
     case CrawlerMode::Youtube:
-        crawlForYoutube();        break;
+        crawlForYoutube();
+        break;
     }
 }
 

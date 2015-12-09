@@ -59,7 +59,8 @@ BtsLogSorter::BtsLogSorter(
     , m_sorterWithPcTime(configurationWithPcTime)
     , m_sorterWithoutPcTime(configurationWithoutPcTime)
 {
-    AlbaWindowsPathHandler pathHandlerOfLogsWithoutPcTime;    pathHandlerOfLogsWithoutPcTime.inputPath(pathOfLogsWithoutPcTime);
+    AlbaWindowsPathHandler pathHandlerOfLogsWithoutPcTime;
+    pathHandlerOfLogsWithoutPcTime.inputPath(pathOfLogsWithoutPcTime);
     m_directoryOfLogsWithoutPcTime = pathHandlerOfLogsWithoutPcTime.getDirectory();
 }
 

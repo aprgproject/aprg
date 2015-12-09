@@ -9,7 +9,8 @@
 
 using std::set;
 
-namespace alba{
+namespace alba
+{
 
 class AprgFileExtractor
 {
@@ -20,12 +21,12 @@ public:
     void copyRelativeFilePathsFromCompressedFile(string const& filePathOfCompressedFile, set<string>& files) const;
     string extractAll(string const& filePathOfCompressedFile) const;
     string extractOneFile(string const& filePathOfCompressedFile, string const& relativePathOfFile) const;
+    bool isRecognizedCompressedFile(string const& extension) const;
 private:
     void extractAllRelevantFilesInThisDirectory(string const& directoryPath) const;
     void extractAllRelevantFilesInThisCompressedFile(string const& filePathOfCompressedFile) const;
     void extractAllFilesRecursively(string const& filePathOfCompressedFile) const;
     void extractAllRelevantFilesRecursively(string const& filePathOfCompressedFile) const;
-    bool isCompressedFile(string const& extension) const;
     bool isTheExtensionXz(string const& extension) const;
     AlbaGrepStringEvaluator m_grepEvaluator;
 };

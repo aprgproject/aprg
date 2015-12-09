@@ -20,6 +20,7 @@ void AprgWebCrawler::crawlOneHtmlAndOneFileToDownload(int const minimumSizeOfDow
 void AprgWebCrawler::crawlOneHtmlAndOneFileToDownload(string& webLink, int const minimumSizeOfDownload)
 {
     cout << "AprgWebCrawler::crawlPerHtmlAndDownloadImage" << endl;
+
     while(1)
     {
         AlbaWebPathHandler currentWebLinkPathHandler;
@@ -52,7 +53,8 @@ void AprgWebCrawler::crawlOneHtmlAndOneFileToDownload(string& webLink, int const
         }
         if(links.linkForNextHtml.empty())
         {
-            cout << "Terminating the because next web link is empty." << endl;            return;
+            cout << "Terminating the because next web link is empty." << endl;
+            return;
         }
         AlbaWebPathHandler nextWebPathHandler(currentWebLinkPathHandler);
         nextWebPathHandler.gotoLink(links.linkForNextHtml);
