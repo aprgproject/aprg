@@ -42,11 +42,12 @@ private:
     string getCrawlerModeString() const;
     bool isWebLinksEmpty() const;
     bool isWebLinksValid() const;
-    string getLinkManuallyUsingMozillaFirefox(AlbaWebPathHandler const& webPathHandler) const;
+    string getUserInputAfterManuallyUsingMozillaFirefox(AlbaWebPathHandler const& webPathHandler) const;
     void gotoLinkManuallyUsingMozillaFirefox(AlbaWebPathHandler const& webPathHandler) const;
 
     void crawlOneHtmlAndOneFileToDownload(int const minimumSizeOfDownload);
-    void crawlOneHtmlAndOneFileToDownload(string& webLink, int const minimumSizeOfDownload);    LinksForHtmlAndFileToDownload getLinksBasedOnMode(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
+    void crawlOneHtmlAndOneFileToDownload(string& webLink, int const minimumSizeOfDownload);
+    LinksForHtmlAndFileToDownload getLinksBasedOnMode(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForGuroManga(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForMangaFox(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForMangaFoxSaveInVolumeAndChapter(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
@@ -68,7 +69,8 @@ private:
     void crawlForYoutube_Old(string& webLink, ofstream& convertedYoutubeLinkStream);
     LinksForYoutube getLinkForYoutube(AlbaWebPathHandler const& webLinkPathHandler) const;
 
-    bool m_isModeRecognized;    CrawlerMode m_mode;
+    bool m_isModeRecognized;
+    CrawlerMode m_mode;
     deque<string> m_webLinks;
     AlbaWindowsPathHandler m_workingPathHandler;
     AlbaWindowsPathHandler m_memoryCardPathHandler;
