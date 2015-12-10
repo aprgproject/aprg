@@ -370,7 +370,7 @@
       </layout>
      </item>
      <item row="11" column="0" colspan="2">
-      <widget class="QTextEdit" name="textEdit">
+      <widget class="QTextEdit" name="lineEditStreamOutput">
        <property name="enabled">
         <bool>true</bool>
        </property>

@@ -21,10 +21,6 @@ private:
     Ui::TcomTools *ui;
     tcomToolsGui::TcomToolsConfiguration m_configuration;
     tcomToolsGui::StepHandler m_stepHandler;
-    QProcess m_process;
-
-public slots:
-    void printOutput();
 
 private slots:
     void on_execute_clicked();
