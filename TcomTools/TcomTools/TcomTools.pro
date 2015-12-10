@@ -14,11 +14,10 @@ TEMPLATE = app
 
 SOURCES += src/main.cpp\
 src/StepHandler.cpp\
-src/tcomtools.cpp\
+src/TcomTools.cpp\
 src/TcomToolsConfiguration.cpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.cpp\
-../../AprgCommon/AprgCommon/src/AlbaFileReader.cpp\
-../../AprgCommon/AprgCommon/src/AlbaStringHelper.cpp\
+../../AprgCommon/AprgCommon/src/AlbaFileReader.cpp\../../AprgCommon/AprgCommon/src/AlbaStringHelper.cpp\
 ../../AprgCommon/AprgCommon/src/GrepStringEvaluator/AlbaGrepStringEvaluator.cpp\
 ../../AprgCommon/AprgCommon/src/GrepStringEvaluator/AlbaGrepStringEvaluatorTerm.cpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.cpp\
@@ -28,11 +27,10 @@ src/TcomToolsConfiguration.cpp\
 ../TcomToolsBackend/src/BtsLogTime.cpp
 
 HEADERS += src/StepHandler.hpp\
-src/tcomtools.h\
+src/TcomTools.h\
 src/TcomToolsConfiguration.hpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.hpp\
-../../AprgCommon/AprgCommon/src/AlbaFileReader.hpp\
-../../AprgCommon/AprgCommon/src/AlbaStringHelper.hpp\
+../../AprgCommon/AprgCommon/src/AlbaFileReader.hpp\../../AprgCommon/AprgCommon/src/AlbaStringHelper.hpp\
 ../../AprgCommon/AprgCommon/src/GrepStringEvaluator/AlbaGrepStringEvaluator.hpp\
 ../../AprgCommon/AprgCommon/src/GrepStringEvaluator/AlbaGrepStringEvaluatorTerm.hpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.hpp\
@@ -41,13 +39,12 @@ src/TcomToolsConfiguration.hpp\
 ../TcomToolsBackend/src/BtsLogSorter.hpp\
 ../TcomToolsBackend/src/BtsLogTime.hpp
 
-FORMS += src/tcomtools.ui
+FORMS += src/TcomTools.ui
 
 QMAKE_INCDIR += src\
-../../AprgFileExtractor/AprgFileExtractor/src\
-../../AprgCommon/AprgCommon/src\
+../../AprgFileExtractor/AprgFileExtractor/src\../../AprgCommon/AprgCommon/src\
 ../TcomToolsBackend/src
 
 DEFINES -= UNICODE
 
-CONFIG += c++11
+CONFIG += c++11 console
