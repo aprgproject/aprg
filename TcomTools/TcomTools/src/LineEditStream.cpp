@@ -9,20 +9,19 @@ LineEditStream::LineEditStream(std::ostream & stream, QTextEdit * text_edit)
     : m_stream(stream)
 {
     log_window = text_edit;
-    m_oldStreamBuffer = stream.rdbuf();
-    stream.rdbuf(this);
+    //m_oldStreamBuffer = stream.rdbuf();
+    //stream.rdbuf(this);
 }
 
 LineEditStream::~LineEditStream()
 {
-    if (!m_string.empty()){log_window->append(m_string.c_str());}
-    m_stream.rdbuf(m_oldStreamBuffer);
+    //if (!m_string.empty()){log_window->append(m_string.c_str());}
+    //m_stream.rdbuf(m_oldStreamBuffer);
 }
-
+/*
 std::basic_streambuf<char>::int_type LineEditStream::overflow(int_type v)
 {
-    if (v == '\n')
-    {
+    if (v == '\n')    {
         log_window->append(m_string.c_str());
         m_string.erase(m_string.begin(), m_string.end());
     }
@@ -49,5 +48,5 @@ std::streamsize LineEditStream::xsputn(const char *p, std::streamsize n)
     }
     return n;
 }
-
+*/
 }

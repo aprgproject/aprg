@@ -1,11 +1,10 @@
 #pragma once
+
 #include <QMainWindow>
-#include <QProcess>
-#include <StepHandler.hpp>
+#include <StepHandlerThread.hpp>
 #include <TcomToolsConfiguration.hpp>
 
-namespace Ui {
-class TcomTools;
+namespace Ui {class TcomTools;
 }
 
 class TcomTools : public QMainWindow
@@ -16,17 +15,11 @@ public:
     explicit TcomTools(QWidget *parent = 0);
     ~TcomTools();
 
-private:
-    void updateGuiUsingConfiguration();
-    Ui::TcomTools *ui;
-    tcomToolsGui::TcomToolsConfiguration m_configuration;
-    tcomToolsGui::StepHandler m_stepHandler;
-
 private slots:
+    void onExecutionIsFinished();
     void on_execute_clicked();
     void on_actionOpenFile_triggered();
-    void on_actionOpenFolder_triggered();
-    void on_actionAboutAprg_triggered();
+    void on_actionOpenFolder_triggered();    void on_actionAboutAprg_triggered();
     void on_actionQuit_triggered();
     void on_extractStep_toggled(bool checked);
     void on_combineAndSortStep_toggled(bool checked);
@@ -48,8 +41,15 @@ private slots:
     void on_tcom_toggled(bool checked);
     void on_toam_toggled(bool checked);
     void on_tupc_toggled(bool checked);
+    void on_inputFileAndFolder_editingFinished();
     void on_extractCondition_editingFinished();
     void on_acceptedFilesCondition_editingFinished();
     void on_other_editingFinished();
     void on_prioritizedLogPrint_editingFinished();
+
+private:
+    void updateGuiUsingConfiguration();
+    Ui::TcomTools *ui;
+    tcomToolsGui::TcomToolsConfiguration m_configuration;
+    tcomToolsGui::StepHandlerThread m_stepHandlerThread;
 };

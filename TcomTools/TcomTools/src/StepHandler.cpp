@@ -17,11 +17,10 @@ StepHandler::StepHandler(TcomToolsConfiguration & configuration)
     : m_configuration(configuration)
 {}
 
-void StepHandler::executeSteps() const
+void StepHandler::execute() const
 {
     AlbaWindowsPathHandler currentPathHandler;
-    currentPathHandler.inputPath(m_configuration.inputFileOrDirectory);
-    for(int step=1; step<4; step++)
+    currentPathHandler.inputPath(m_configuration.inputFileOrDirectory);    for(int step=1; step<4; step++)
     {
         currentPathHandler.reInputPath();
         if(!currentPathHandler.isFoundInLocalSystem())
@@ -55,10 +54,10 @@ void StepHandler::executeSteps() const
 
 void StepHandler::executeExtractStep(AlbaWindowsPathHandler & currentPathHandler) const
 {
+    cout<<"executeExtractStep "<<currentPathHandler.getFullPath()<<endl;
     AprgFileExtractor fileExtractor(m_configuration.extractGrepCondition);
     if(currentPathHandler.isDirectory())
-    {
-        fileExtractor.extractAllRelevantFiles(currentPathHandler.getFullPath());
+    {        fileExtractor.extractAllRelevantFiles(currentPathHandler.getFullPath());
     }
     else if(fileExtractor.isRecognizedCompressedFile(currentPathHandler.getExtension()))
     {
