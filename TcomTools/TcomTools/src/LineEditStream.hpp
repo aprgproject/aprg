@@ -20,7 +20,8 @@ protected:
     //virtual std::streamsize xsputn(const char *p, std::streamsize n);
 
 private:
-    std::ostream & m_stream;    std::streambuf * m_oldStreamBuffer;
+    std::ostream & m_stream;
+    std::streambuf * m_oldStreamBuffer;
     std::string m_string;
     QTextEdit* log_window;
 };
