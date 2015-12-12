@@ -19,13 +19,15 @@ enum class CrawlerMode
     ChiaAnime,
     Gehen,
     GuroManga,
+    HBrowse,
+    Hentai2Read,
     Mangafox,
     MangafoxWithVolume,
     Mangahere,
+    MangaPark,
     Y8,
     Youtube
 };
-
 class AprgWebCrawler
 {
 
@@ -49,13 +51,15 @@ private:
     void crawlOneHtmlAndOneFileToDownload(string& webLink, int const minimumSizeOfDownload);
     LinksForHtmlAndFileToDownload getLinksBasedOnMode(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForGuroManga(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
+    LinksForHtmlAndFileToDownload getLinksForHBrowse(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
+    LinksForHtmlAndFileToDownload getLinksForHentai2Read(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForMangaFox(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForMangaFoxSaveInVolumeAndChapter(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getNextLinkAndImageLinkForMangaFox(string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForMangaHere(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
+    LinksForHtmlAndFileToDownload getLinksForMangaPark(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForGehen(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForY8(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
-
     void saveImageListFromGoogleImages();
     void downloadGoogleImages() const;
 
