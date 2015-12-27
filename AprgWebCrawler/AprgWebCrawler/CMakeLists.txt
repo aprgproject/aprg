@@ -30,7 +30,8 @@ set(SOURCES
     src/CrawlHelpers/MangaPark.cpp
     src/CrawlHelpers/SharedCrawlers.cpp
     src/CrawlHelpers/Youtube.cpp
-    src/CrawlHelpers/Y8.cpp    src/LinksStructures/LinksStructures.cpp
+    src/CrawlHelpers/Y8.cpp
+    src/LinksStructures/LinksStructures.cpp
     src/LinksStructures/LinksStructures.hpp
     src/main.cpp
 )

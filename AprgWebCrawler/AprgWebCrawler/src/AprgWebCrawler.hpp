@@ -28,6 +28,7 @@ enum class CrawlerMode
     Y8,
     Youtube
 };
+
 class AprgWebCrawler
 {
 
@@ -60,6 +61,7 @@ private:
     LinksForHtmlAndFileToDownload getLinksForMangaPark(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForGehen(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForY8(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const;
+
     void saveImageListFromGoogleImages();
     void downloadGoogleImages() const;
 
