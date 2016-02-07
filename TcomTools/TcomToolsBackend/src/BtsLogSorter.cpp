@@ -29,7 +29,8 @@ void BtsLogSorter::processDirectory(string const& directoryPath)
         AlbaWindowsPathHandler filePathHandler(filePath);
         if(m_evaluator.evaluate(filePathHandler.getFile()))
         {
-            processFile(filePathHandler.getFullPath());        }
+            processFile(filePathHandler.getFullPath());
+        }
     }
 }
 
@@ -39,7 +40,8 @@ void BtsLogSorter::processFile(string const& filePath)
     AlbaWindowsPathHandler filePathHandler(filePath);
     cout<<"processFile: "<<filePathHandler.getFile()<<endl;
 
-    ifstream inputLogFileStream(filePath);    AlbaFileReader fileReader(inputLogFileStream);
+    ifstream inputLogFileStream(filePath);
+    AlbaFileReader fileReader(inputLogFileStream);
     while(fileReader.isNotFinished())
     {
         BtsLogPrint logPrint(filePathHandler.getFile(), fileReader.getLineAndIgnoreWhiteSpaces());
@@ -76,13 +78,15 @@ void BtsLogSorter::saveLogsToOutputFile(string const& outputPath)
     AlbaWindowsPathHandler directoryPathHandler(m_pathOfStartupLog);
     deleteFilesInDirectory(directoryPathHandler.getDirectory());
 }
+
 string BtsLogSorter::getPathOfLogWithoutPcTime(string const& directory, string const& name) const
 {
     string filename = name.empty() ? "NoHardwareAddress" : name;
     return AlbaWindowsPathHandler(directory + R"(\)" + filename + R"(.log)").getFullPath();
 }
 
-void BtsLogSorter::openStartupLogsIfNeeded(){
+void BtsLogSorter::openStartupLogsIfNeeded()
+{
     if(!m_startupLogStreamOptional)
     {
         m_startupLogStreamOptional.createObjectUsingDefaultConstructor();
@@ -213,4 +217,5 @@ void BtsLogSorter::deleteFilesInDirectory(string const& directoryOfLogs) const
         AlbaWindowsPathHandler(file).deleteFile();
     }
 }
+
 }

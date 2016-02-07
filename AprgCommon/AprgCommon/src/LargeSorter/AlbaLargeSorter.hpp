@@ -141,7 +141,8 @@ private:
             AlbaWindowsPathHandler(filePath).deleteFile();
         }
     }
-    AlbaLargeSorterConfiguration const m_configuration;    BlockCache m_memoryCache;
+    AlbaLargeSorterConfiguration const m_configuration;
+    BlockCache m_memoryCache;
     BlockCache m_fileStreamOpenedCache;
     DataBlocks<ObjectToSort> m_blocks;
 };

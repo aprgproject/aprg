@@ -19,7 +19,8 @@ AprgWebCrawler::AprgWebCrawler(string const& workingDirectory)
 {
     if (m_memoryCardPathHandler.isFoundInLocalSystem() && m_memoryCardPathHandler.isFile())
     {
-        loadMemoryCard();    }
+        loadMemoryCard();
+    }
 }
 
 bool AprgWebCrawler::isValid() const
@@ -63,7 +64,8 @@ void AprgWebCrawler::printStatus() const
             AlbaWebPathHandler webPathHandler(webLink);
             cout << "Url: ["<< webPathHandler.getFullPath() << "] isEmpty: " << webPathHandler.isEmpty() << " hasProtocol: " << webPathHandler.hasProtocol() << endl;
         }
-    }    else if(m_isModeRecognized)
+    }
+    else if(m_isModeRecognized)
     {
         cout << "Mode: ["<< getCrawlerModeString() << "] is not a recognized mode" << endl;
     }
@@ -101,7 +103,8 @@ void AprgWebCrawler::loadMemoryCard()
             AlbaWebPathHandler webPathHandler(memoryCardReader.getLineAndIgnoreWhiteSpaces());
             if(!webPathHandler.isEmpty())
             {
-                m_webLinks.push_back(webPathHandler.getFullPath());            }
+                m_webLinks.push_back(webPathHandler.getFullPath());
+            }
         }
     }
 }
@@ -218,6 +221,7 @@ bool AprgWebCrawler::isWebLinksValid() const
         return !webPathHandler.isEmpty() && webPathHandler.hasProtocol();
     });
 }
+
 string AprgWebCrawler::getUserInputAfterManuallyUsingMozillaFirefox(AlbaWebPathHandler const& webPathHandler) const
 {
     constexpr int bufferSize = 1000;

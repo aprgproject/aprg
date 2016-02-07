@@ -51,7 +51,8 @@ void BtsLogTime::setTimeByTimeStamp(BtsLogTimeType logTimeType, string const& ti
         timeValues.push_back(stringHelper::convertStringToNumber<int>(timeValueString));
     }
 
-    if(BtsLogTimeType::PcTimeStamp == logTimeType)    {
+    if(BtsLogTimeType::PcTimeStamp == logTimeType)
+    {
         if(6 == timeValues.size())
         {
             m_months = timeValues[1];

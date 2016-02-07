@@ -24,6 +24,7 @@ void AprgWebCrawler::crawlForYoutube()
     AlbaWindowsPathHandler convertedYoutubeLinksPathHandler(m_workingPathHandler.getDirectory() + R"(\ConvertedYoutubeLinks.txt)");
     convertedYoutubeLinksPathHandler.createDirectoriesIfItDoesNotExist();
     ofstream convertedYoutubeLinkStream(convertedYoutubeLinksPathHandler.getFullPath());
+
     for(string & webLink : m_webLinks)
     {
         crawlForYoutube(webLink, convertedYoutubeLinkStream);
@@ -47,7 +48,8 @@ void AprgWebCrawler::crawlForYoutube(string & webLink, ofstream& convertedYoutub
         AlbaWebPathHandler ssYoutubeLinkPathHandler(ssYoutubeLink);
         cout<<"Enter user input(done, retry):"<<endl;
         string userInput(getUserInputAfterManuallyUsingMozillaFirefox(ssYoutubeLinkPathHandler));
-        if(!stringHelper::isEqualNotCaseSensitive(userInput, "done"))        {
+        if(!stringHelper::isEqualNotCaseSensitive(userInput, "done"))
+        {
             continue;
         }
         convertedYoutubeLinkStream << ssYoutubeLinkPathHandler.getFullPath() << endl << flush;
@@ -71,7 +73,8 @@ void AprgWebCrawler::crawlForYoutube_Old(string & webLink, ofstream& convertedYo
         AlbaWebPathHandler webPathHandler(webLink);
         LinksForYoutube links(getLinkForYoutube(webPathHandler));
         if(links.isInvalid())
-        {            cout << "Links are invalid." << endl;
+        {
+            cout << "Links are invalid." << endl;
             links.printLinks();
             continue;
         }
@@ -79,7 +82,8 @@ void AprgWebCrawler::crawlForYoutube_Old(string & webLink, ofstream& convertedYo
         AlbaWindowsPathHandler downloadPathHandler(links.localPathForCurrentVideo);
         downloadPathHandler.createDirectoriesIfItDoesNotExist();
         if(!downloadBinaryFileWithFiniteNumberOfTries<ConfigType::LowSpeedLimitAndMozillaFireFoxAndPrintDownloadProgress>(videoWebPathHandler, downloadPathHandler, 10))
-        {            cout << "Download of video file failed, retrying from the start" << endl;
+        {
+            cout << "Download of video file failed, retrying from the start" << endl;
             continue;
         }
         convertedYoutubeLinkStream << links.linkForVideo << endl << flush;
@@ -97,7 +101,8 @@ LinksForYoutube AprgWebCrawler::getLinkForYoutube(AlbaWebPathHandler const& webL
     AlbaWebPathHandler ssYoutubeLinkPathHandler(ssYoutubeLink);
     string linkForVideo(getUserInputAfterManuallyUsingMozillaFirefox(ssYoutubeLinkPathHandler));
 
-    string fileNameForVideo1(getStringInBetweenTwoStrings(linkForVideo, "&title=", "&"));    string fileNameForVideo2(getStringAfterThisString(linkForVideo, "&title="));
+    string fileNameForVideo1(getStringInBetweenTwoStrings(linkForVideo, "&title=", "&"));
+    string fileNameForVideo2(getStringAfterThisString(linkForVideo, "&title="));
     string fileNameForVideo("NoName");
     if((!fileNameForVideo1.empty()))
     {

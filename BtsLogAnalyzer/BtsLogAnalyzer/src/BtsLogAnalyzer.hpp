@@ -12,6 +12,7 @@ namespace alba
 class BtsDelayInformation;
 
 typedef std::vector<BtsDelayInformation> BtsDelayInformationContainer;
+
 class BtsLogTime
 {
 public:

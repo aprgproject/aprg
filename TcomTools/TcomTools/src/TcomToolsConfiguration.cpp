@@ -148,7 +148,8 @@ void TcomToolsConfiguration::loadConfigurationFromFile()
             isGrepDmgrEnabled = !(0==stringHelper::convertStringToNumber<int>(afterColon));
         }
         else if("grepConditionForTcom" == beforeColon)
-        {            grepConditionForTcom = afterColon;
+        {
+            grepConditionForTcom = afterColon;
         }
         else if("grepConditionForErr" == beforeColon)
         {
@@ -263,7 +264,8 @@ void TcomToolsConfiguration::loadConfigurationFromFile()
             btsLogSorterConfiguration.m_configurationWithPcTime.m_maximumFileStreams = stringHelper::convertStringToNumber<int>(afterColon);
         }
         else if("btsLogSorterConfiguration.m_configurationWithoutPcTime.m_directoryForBlocks" == beforeColon)
-        {            btsLogSorterConfiguration.m_configurationWithoutPcTime.m_directoryForBlocks = afterColon;
+        {
+            btsLogSorterConfiguration.m_configurationWithoutPcTime.m_directoryForBlocks = afterColon;
         }
         else if("btsLogSorterConfiguration.m_configurationWithoutPcTime.m_minimumNumberOfObjectsPerBlock" == beforeColon)
         {
@@ -287,6 +289,7 @@ void TcomToolsConfiguration::loadConfigurationFromFile()
         }
     }
 }
+
 void TcomToolsConfiguration::saveConfigurationToFile() const
 {
     std::ofstream outputFileStream(CONFIGURATION_FILE);

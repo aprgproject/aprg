@@ -41,7 +41,8 @@ string getCorrectPathWithoutUrlParameters(string const& path);
 string getUrlParameters(string const& path);
 string getCorrectPathWithReplacedSlashCharacters(string const& path, string const& slashCharacterString);
 string getCorrectPathWithoutDoublePeriod(string const& string1, string const& slashCharacterString);
-string getStringBeforeDoublePeriod(string const& string1, string const& slashCharacterString);string getImmediateDirectoryName(string const& string1, string const& slashCharacterString);
+string getStringBeforeDoublePeriod(string const& string1, string const& slashCharacterString);
+string getImmediateDirectoryName(string const& string1, string const& slashCharacterString);
 template<char slashCharacterString> string getCorrectPathWithReplacedSlashCharacters(string const& path);
 template<char slashCharacterString> string getCorrectPathWithoutDoublePeriod(string const& path);
 template<char slashCharacterString> string getStringBeforeDoublePeriod(string const& path);
@@ -51,7 +52,8 @@ template <typename NumberType> NumberType convertStringToNumber(string const& st
 template <typename NumberType> NumberType convertHexStringToNumber(string const& stringToConvert);
 
 inline bool isWhiteSpace(char const c)
-{    return (' '==c || '\t'==c || '\n'==c || '\r'==c);
+{
+    return (' '==c || '\t'==c || '\n'==c || '\r'==c);
 }
 
 inline bool isNotNpos(int const index)

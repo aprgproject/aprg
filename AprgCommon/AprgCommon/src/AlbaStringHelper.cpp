@@ -109,7 +109,8 @@ string stringHelper::getStringWithUrlDecodedString(string const& string1)
             result += convertHexStringToNumber<char>(string1.substr(index + 1, 2));
             index += 3;
         }
-        else        {
+        else
+        {
             result += string1[index++];
         }
     }
@@ -303,7 +304,8 @@ string stringHelper::getUrlParameters(string const& path)
 
 string stringHelper::getCorrectPathWithReplacedSlashCharacters(string const& path, string const& slashCharacterString)
 {
-    bool isSlashDetected = false;    string correctPath = std::accumulate(path.cbegin(), path.cend(), string(""),
+    bool isSlashDetected = false;
+    string correctPath = std::accumulate(path.cbegin(), path.cend(), string(""),
                                          [&isSlashDetected, slashCharacterString]
                                          (string partialResult, char const currentCharacter)
     {
@@ -464,7 +466,8 @@ NumberType stringHelper::convertHexStringToNumber(string const& stringToConvert)
                 value += currentCharacter - 'a' + 10;
             }
         }
-    }    return value;
+    }
+    return value;
 }
 
 template char stringHelper::convertHexStringToNumber<char>(string const& stringToConvert);

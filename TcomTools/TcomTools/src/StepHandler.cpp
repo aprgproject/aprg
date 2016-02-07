@@ -25,7 +25,8 @@ void StepHandler::execute() const
         currentPathHandler.reInput();
         if(!currentPathHandler.isFoundInLocalSystem())
         {
-            cout << currentPathHandler.getFullPath() << " is not found in local system" << endl;            return;
+            cout << currentPathHandler.getFullPath() << " is not found in local system" << endl;
+            return;
         }
         if(1 == step && m_configuration.isExtractStepOn)
         {
@@ -69,7 +70,8 @@ void StepHandler::executeExtractStep(AlbaWindowsPathHandler & currentPathHandler
         currentPathHandler.input(currentPathHandler.getDirectory() + R"(\)" + currentPathHandler.getFilenameOnly());
     }
     else
-    {        cout<<"Extraction step did not proceed. CurrentPath: "<<currentPathHandler.getFullPath()<<endl;
+    {
+        cout<<"Extraction step did not proceed. CurrentPath: "<<currentPathHandler.getFullPath()<<endl;
     }
 }
 
@@ -84,7 +86,8 @@ void StepHandler::executeCombineAndSortStep(AlbaWindowsPathHandler & currentPath
         currentPathHandler.input(currentPathHandler.getDirectory() + R"(\sorted.log)");
         btsLogSorter.saveLogsToOutputFile(currentPathHandler.getFullPath());
     }
-    else    {
+    else
+    {
         cout<<"Combine and sort step did not proceed. CurrentPath: "<<currentPathHandler.getFullPath()<<endl;
     }
 }
@@ -103,7 +106,8 @@ void StepHandler::executeGrep(AlbaWindowsPathHandler & currentPathHandler) const
         currentPathHandler.input(currentPathHandler.getDirectory() + R"(\)" + m_configuration.getGrepFileName());
         ofstream outputFileStream(currentPathHandler.getFullPath());
         AlbaFileReader fileReader(inputFileStream);
-        while(fileReader.isNotFinished())        {
+        while(fileReader.isNotFinished())
+        {
             string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
             if(evaluator.evaluate(lineInLogs))
             {

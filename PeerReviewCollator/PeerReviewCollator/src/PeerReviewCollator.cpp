@@ -19,7 +19,8 @@ void PeerReviewCollator::processDirectory(string const& directoryPath)
     AlbaWindowsPathHandler(directoryPath).findFilesAndDirectoriesOneDepth("*.csv", listOfFiles, listOfDirectories);
     for(string const& filePath: listOfFiles)
     {
-        processFile(filePath);    }
+        processFile(filePath);
+    }
     if(listOfFiles.empty())
     {
         cout<<"processDirectory -> No csv files found"<<endl;
@@ -31,7 +32,8 @@ void PeerReviewCollator::processFile(string const& filePath)
     AlbaWindowsPathHandler pathHandler(filePath);
     cout<<"processFile -> Processing File: "<<pathHandler.getFile()<<endl;
     ifstream inputFile(filePath);
-    AlbaFileReader fileReader(inputFile);    while(fileReader.isNotFinished())
+    AlbaFileReader fileReader(inputFile);
+    while(fileReader.isNotFinished())
     {
         string lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
         processLineForPerson(pathHandler.getFilenameOnly(), lineInFile);
@@ -66,7 +68,8 @@ void PeerReviewCollator::processLineForPerson(string const& person, string const
                 m_currentQuestionNumber = convertStringToNumber<int>(cellString.substr(1));
             }
             isAnswerLine = " about "==cellString.substr(0, 7);
-            if(isAnswerLine)            {
+            if(isAnswerLine)
+            {
                 answerForPerson = getStringAfterThisString(cellString, " about ");
             }
         }
@@ -145,7 +148,8 @@ void PeerReviewCollator::generateOutput(string const& outputDirectoryPath) const
         ofstream outputFile(AlbaWindowsPathHandler(outputDirectoryPath + R"(\)" + mapOfPerson.first + ".csv").getFullPath());
         int questionNumber = 0;
         for(auto const& mapPerQuestion : mapOfPerson.second)
-        {            if(questionNumber != mapPerQuestion.first)
+        {
+            if(questionNumber != mapPerQuestion.first)
             {
                 questionNumber = mapPerQuestion.first;
                 outputFile << "Q" << questionNumber << R"(,")" << m_questions.at(questionNumber) << R"(")" << endl;

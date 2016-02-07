@@ -14,7 +14,8 @@ AlbaWindowsPathHandler::AlbaWindowsPathHandler(string const& path)
     save(path);
 }
 
-void AlbaWindowsPathHandler::clear(){
+void AlbaWindowsPathHandler::clear()
+{
     AlbaPathHandler::clear();
     m_drive.clear();
     m_foundInLocalSystem = false;
@@ -28,7 +29,8 @@ string AlbaWindowsPathHandler::getDrive() const
 
 double AlbaWindowsPathHandler::getFileSizeEstimate()
 {
-    double fileSizeEstimate;    WIN32_FILE_ATTRIBUTE_DATA attributeData;
+    double fileSizeEstimate;
+    WIN32_FILE_ATTRIBUTE_DATA attributeData;
     if (!GetFileAttributesEx(getFullPath().c_str(), GetFileExInfoStandard, &attributeData))
     {
         return 0; // error condition, could call GetLastError to find out more
@@ -54,7 +56,8 @@ void AlbaWindowsPathHandler::createDirectoriesIfItDoesNotExist() const
         AlbaWindowsPathHandler partialDirectoryPathHandler(partialDirectory);
         if(!partialDirectoryPathHandler.isFoundInLocalSystem())
         {
-            CreateDirectory(partialDirectoryPathHandler.getFullPath().c_str(), NULL);        }
+            CreateDirectory(partialDirectoryPathHandler.getFullPath().c_str(), NULL);
+        }
         index = indexWithSlashCharacter+1;
     }
 }
@@ -78,6 +81,7 @@ void AlbaWindowsPathHandler::renameFile(string const& newFileName)
         }
     }
 }
+
 bool AlbaWindowsPathHandler::isRelativePath() const
 {
     return m_relativePath;
@@ -112,7 +116,8 @@ void AlbaWindowsPathHandler::setDrive()
     m_relativePath = m_drive.empty();
 }
 
-void AlbaWindowsPathHandler::findFilesAndDirectoriesOneDepth(        string const& wildCardSearch,
+void AlbaWindowsPathHandler::findFilesAndDirectoriesOneDepth(
+        string const& wildCardSearch,
         set<string>& listOfFiles,
         set<string>& listOfDirectories) const
 {

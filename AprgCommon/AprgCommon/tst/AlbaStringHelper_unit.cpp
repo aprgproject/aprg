@@ -175,7 +175,8 @@ TEST (getStringNumberAfterThisStringTest, getStringNumberAfterThisStringTest)
 
 TEST(GetDataFromStringTest, GetStringWithoutRedundantSlashes_AllEnglishLettersWithSpecialCharacters)
 {
-    string testString(R"(////DIR1\\/\\/\\/DIR2\\\\DIR3///DIR4\\\\//DIR5////\\\\)");    string withoutRedundantSlashes(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
+    string testString(R"(////DIR1\\/\\/\\/DIR2\\\\DIR3///DIR4\\\\//DIR5////\\\\)");
+    string withoutRedundantSlashes(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
 
     EXPECT_EQ(getCorrectPathWithReplacedSlashCharacters(testString, R"(\)"), withoutRedundantSlashes);
 }
@@ -313,7 +314,8 @@ TEST(GetDataFromStringTest, HexConvertStringToInteger_WithNumbersOnly)
     EXPECT_EQ(convertHexStringToNumber<int>("xxxA#$%1@#$#@B^&*&^2%^&%^C*(&"), 0xA1B2C);
 }
 
-TEST(GetDataFromStringTest, RemoveWhitespacesFromString){
+TEST(GetDataFromStringTest, RemoveWhitespacesFromString)
+{
     string correctOutput("Mark is the no#1 guy in the world");
     EXPECT_EQ(getStringWithoutRedundantWhiteSpace("Mark is the no#1 guy in the world"), correctOutput);
     EXPECT_EQ(getStringWithoutRedundantWhiteSpace("    Mark    is the no#1 guy  in the     world    "), correctOutput);

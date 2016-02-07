@@ -15,7 +15,8 @@ public:
     AlbaWebPathHandler(string const& path);
     void clear() override;
     string getFullPath() const override;
-    bool hasProtocol() const;    string getProtocol() const;
+    bool hasProtocol() const;
+    string getProtocol() const;
     void gotoLink(string const& newPath);
 
 private:
@@ -25,6 +26,7 @@ private:
     void setUrlParameters(string const& urlParameters);
     string m_protocol;
     string m_urlParameters;
-    bool m_hasProtocol;};
+    bool m_hasProtocol;
+};
 
 }//namespace alba

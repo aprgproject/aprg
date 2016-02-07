@@ -19,7 +19,8 @@ public:
         AlbaWindowsPathHandler(m_path).deleteFile();
     }
     std::ofstream & getFileDumpStreamReference()
-    {        return m_fileOptional.getReference();
+    {
+        return m_fileOptional.getReference();
     }
     bool isFileStreamOpened()
     {
@@ -36,7 +37,8 @@ public:
             m_path = AlbaWindowsPathHandler(path).getFullPath();
             m_fileOptional.createObjectUsingDefaultConstructor();
             std::ofstream & fileStream (m_fileOptional.getReference());
-            fileStream.open(m_path, std::ios::ate|std::ios::app);        }
+            fileStream.open(m_path, std::ios::ate|std::ios::app);
+        }
     }
     void add(ObjectToSort const& objectToSort)
     {

@@ -7,7 +7,8 @@
 using namespace alba;
 using namespace std;
 
-TcomTools::TcomTools(QWidget *parent)    : QMainWindow(parent)
+TcomTools::TcomTools(QWidget *parent)
+    : QMainWindow(parent)
     , ui(new Ui::TcomTools)
     , m_configuration()
 {
@@ -20,7 +21,6 @@ TcomTools::TcomTools(QWidget *parent)    : QMainWindow(parent)
 
 TcomTools::~TcomTools()
 {
-    m_configuration.saveConfigurationToFile();
     delete ui;
 }
 
@@ -76,7 +76,8 @@ void TcomTools::on_actionOpenFile_triggered()
     AlbaWindowsPathHandler pathHandler(fileName.toStdString());
     if(!pathHandler.isEmpty())
     {
-        m_configuration.inputFileOrDirectory = pathHandler.getFullPath();        ui->inputFileAndFolder->setText(QString::fromStdString(pathHandler.getFullPath()));
+        m_configuration.inputFileOrDirectory = pathHandler.getFullPath();
+        ui->inputFileAndFolder->setText(QString::fromStdString(pathHandler.getFullPath()));
     }
 }
 
@@ -86,7 +87,8 @@ void TcomTools::on_actionOpenFolder_triggered()
     AlbaWindowsPathHandler pathHandler(directory.toStdString());
     if(!pathHandler.isEmpty())
     {
-        m_configuration.inputFileOrDirectory = pathHandler.getFullPath();        ui->inputFileAndFolder->setText(QString::fromStdString(pathHandler.getFullPath()));
+        m_configuration.inputFileOrDirectory = pathHandler.getFullPath();
+        ui->inputFileAndFolder->setText(QString::fromStdString(pathHandler.getFullPath()));
     }
 }
 

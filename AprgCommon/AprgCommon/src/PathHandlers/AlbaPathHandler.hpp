@@ -22,7 +22,8 @@ public:
     void goUp();
     string getImmediateDirectoryName() const;
     string getDirectory() const;
-    string getFile() const;    string getFilenameOnly() const;
+    string getFile() const;
+    string getFilenameOnly() const;
     string getExtension() const;
     PathType getPathType() const;
     bool isDirectory() const;
@@ -33,7 +34,8 @@ protected:
     virtual void save(string const& path);
     void setExtensionFromPath(string const& path);
     void setDirectoryAndFileFromPath(string const& path);
-    void setFileType();    PathType m_pathType;
+    void setFileType();
+    PathType m_pathType;
     string m_slashCharacterString;
     string m_directory;
     string m_file;

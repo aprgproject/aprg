@@ -162,6 +162,7 @@ TEST (BtsLogAnalyzerTest, Test1)
     ofstream messageListStream(messageListPathHandler.getFullPath());
     ofstream delayListStream(delayListPathHandler.getFullPath());
     ofstream delayListStatistic(delayListStatisticPathHandler.getFullPath());
+
     BtsDelayInformationContainer btsDelayInformationContainer;
 
     BtsLogAnalyzer btsLogAnalyzer(btsDelayInformationContainer, delayListStream);
@@ -185,6 +186,7 @@ TEST (BtsLogAnalyzerTest, Test2)
     ofstream messageListStream(messageListPathHandler.getFullPath());
     ofstream delayListStream(delayListPathHandler.getFullPath());
     ofstream delayListStatistic(delayListStatisticPathHandler.getFullPath());
+
     BtsDelayInformationContainer btsDelayInformationContainer;
 
     BtsLogAnalyzer btsLogAnalyzer(btsDelayInformationContainer, delayListStream);
