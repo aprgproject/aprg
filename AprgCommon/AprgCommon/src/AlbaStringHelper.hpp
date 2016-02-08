@@ -48,8 +48,10 @@ template<char slashCharacterString> string getCorrectPathWithoutDoublePeriod(str
 template<char slashCharacterString> string getStringBeforeDoublePeriod(string const& path);
 template<char slashCharacterString> string getImmediateDirectoryName(string const& path);
 
+bool convertStringToBool(string const& stringToConvert);
 template <typename NumberType> NumberType convertStringToNumber(string const& stringToConvert);
 template <typename NumberType> NumberType convertHexStringToNumber(string const& stringToConvert);
+template <typename NumberType> string convertNumberToString(NumberType number);
 
 inline bool isWhiteSpace(char const c)
 {

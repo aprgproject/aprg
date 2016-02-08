@@ -1,3 +1,4 @@
+#include <fstream>
 #include <gtest/gtest.h>
 #include <PathHandlers/AlbaWebPathHandler.hpp>
 #include <PathHandlers/AlbaWindowsPathHandler.hpp>
@@ -22,6 +23,18 @@ TEST(PathTest, FullPathWithDirectoryAndFileGiven)
 TEST(PathTest, FileOnly)
 {
     AlbaPathHandler pathHandler("src", R"(\)");
+    EXPECT_TRUE(pathHandler.getDirectory().empty());
+    EXPECT_EQ(pathHandler.getFile(), "src");
+    EXPECT_EQ(pathHandler.getFilenameOnly(), "src");
+    EXPECT_TRUE(pathHandler.getExtension().empty());
+    EXPECT_EQ(pathHandler.getPathType(), PathType::File);
+    EXPECT_TRUE(pathHandler.getImmediateDirectoryName().empty());
+}
+
+TEST(PathTest, ReInputFile)
+{
+    AlbaPathHandler pathHandler("src", R"(\)");
+    pathHandler.reInput();
     EXPECT_TRUE(pathHandler.getDirectory().empty());
     EXPECT_EQ(pathHandler.getFile(), "src");
     EXPECT_EQ(pathHandler.getFilenameOnly(), "src");
@@ -272,6 +285,33 @@ TEST(WindowsPathTest, FullPathWithDirectoryAndFile_ActualLocalDirectory)
     EXPECT_EQ(pathHandler.isFoundInLocalSystem(),true);
 }
 
+TEST(WindowsPathTest, ReInputFileThatIsToBeDeleted_ActualLocalDirectory)
+{
+    string const pathOfFileToBeDeleted(R"(C:\APRG\AprgCommon\AprgCommon\tst\FilesForTests\DirectoryTest\FileToBeDeleted.log)");
+    std::ofstream fileToBeDeleted(pathOfFileToBeDeleted);
+    fileToBeDeleted.close();
+
+    AlbaWindowsPathHandler pathHandler(pathOfFileToBeDeleted);
+    EXPECT_EQ(pathHandler.getDrive(), "C");
+    EXPECT_EQ(pathHandler.getDirectory(), R"(C:\APRG\AprgCommon\AprgCommon\tst\FilesForTests\DirectoryTest\)");
+    EXPECT_EQ(pathHandler.getFile(), "FileToBeDeleted.log");
+    EXPECT_EQ(pathHandler.getFilenameOnly(), "FileToBeDeleted");
+    EXPECT_EQ(pathHandler.getExtension(), "log");
+    EXPECT_EQ(pathHandler.getPathType(), PathType::File);
+    EXPECT_EQ(pathHandler.isFoundInLocalSystem(), true);
+
+    pathHandler.deleteFile();
+    pathHandler.reInput();
+
+    EXPECT_EQ(pathHandler.getDrive(), "C");
+    EXPECT_EQ(pathHandler.getDirectory(), R"(C:\APRG\AprgCommon\AprgCommon\tst\FilesForTests\DirectoryTest\)");
+    EXPECT_EQ(pathHandler.getFile(), "FileToBeDeleted.log");
+    EXPECT_EQ(pathHandler.getFilenameOnly(), "FileToBeDeleted");
+    EXPECT_EQ(pathHandler.getExtension(), "log");
+    EXPECT_EQ(pathHandler.getPathType(), PathType::File);
+    EXPECT_EQ(pathHandler.isFoundInLocalSystem(), false);
+}
+
 TEST(WindowsPathTest, FullPathWithDirectory_FindFileAndDirectoryOneDepth)
 {
     AlbaWindowsPathHandler pathHandler(R"(C:\APRG\AprgCommon\AprgCommon\tst\FilesForTests\DirectoryTest\)");
@@ -385,18 +425,4 @@ TEST(WindowsPathTest, FileSizeTest)
     ASSERT_EQ(pathHandler.getPathType(), PathType::File);
     ASSERT_EQ(pathHandler.isFoundInLocalSystem(), true);
     EXPECT_DOUBLE_EQ(pathHandler.getFileSizeEstimate(), 5000);
-}
-
-TEST(WindowsPathTest, DISABLED_ActualTest)
-{
-    AlbaWindowsPathHandler pathHandler(R"(C:\APRG\tcom_flexi3-trunk-cchh\I_Interface\Application_Env\Definitions\)");
-    ASSERT_EQ(pathHandler.getPathType(), PathType::Directory);
-    ASSERT_EQ(pathHandler.isFoundInLocalSystem(), true);
-
-    set<string> listOfFiles;
-    set<string> listOfDirectory;
-    pathHandler.findFilesAndDirectoriesOneDepth("TCellId.h", listOfFiles, listOfDirectory);
-    ASSERT_EQ(listOfFiles.size(), 1);
-    auto itFiles = listOfFiles.begin();
-    EXPECT_EQ(*(itFiles++), R"(C:\APRG\tcom_flexi3-trunk-cchh\I_Interface\Application_Env\Definitions\TCellId.h)");
 }

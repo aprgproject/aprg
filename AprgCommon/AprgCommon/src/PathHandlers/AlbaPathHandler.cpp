@@ -36,8 +36,9 @@ void AlbaPathHandler::input(string const& path)
 
 void AlbaPathHandler::reInput()
 {
+    string const previousFullPath(getFullPath());
     clear();
-    save(getFullPath());
+    save(previousFullPath);
 }
 
 void AlbaPathHandler::goUp()

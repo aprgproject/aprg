@@ -565,7 +565,7 @@ TEST(AlbaLargeSorterTest, ObjectsAreSortedWhenUsingRandomShuffle)
     EXPECT_EQ(16, expectedValue);
 }
 
-TEST(AlbaLargeSorterTest, FileStreamAreLimitedByMaximumFileStreams)
+TEST(AlbaLargeSorterTest, DISABLED_FileStreamAreLimitedByMaximumFileStreams)
 {
     AlbaLargeSorter<int> largeSorter(AlbaLargeSorterConfiguration(ALBA_LARGE_SORTER_BLOCK_DIR, 1, 2, 0, 100));
     vector<int> integersToShuffle;

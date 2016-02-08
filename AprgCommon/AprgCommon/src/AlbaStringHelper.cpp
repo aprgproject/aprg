@@ -403,6 +403,25 @@ string stringHelper::getImmediateDirectoryName(string const& path)
 template string stringHelper::getImmediateDirectoryName<'\\'>(string const& path);
 template string stringHelper::getImmediateDirectoryName<'/'>(string const& path);
 
+bool stringHelper::convertStringToBool(string const& stringToConvert)
+{
+    string allCapital(getStringWithCapitalLetters(stringToConvert));
+    bool result(false);
+    if("TRUE" == allCapital)
+    {
+        result = true;
+    }
+    else if("FALSE" == allCapital)
+    {
+        result = false;
+    }
+    else
+    {
+        result = (0 != convertStringToNumber<int>(stringToConvert));
+    }
+    return result;
+}
+
 template <typename NumberType>
 NumberType stringHelper::convertStringToNumber(string const& stringToConvert)
 {
@@ -473,5 +492,19 @@ NumberType stringHelper::convertHexStringToNumber(string const& stringToConvert)
 template char stringHelper::convertHexStringToNumber<char>(string const& stringToConvert);
 template int stringHelper::convertHexStringToNumber<int>(string const& stringToConvert);
 template unsigned int stringHelper::convertHexStringToNumber<unsigned int>(string const& stringToConvert);
+
+template <typename NumberType>
+string stringHelper::convertNumberToString(NumberType number)
+{
+    stringstream ss;
+    ss.precision(10);
+    ss << number;
+    return ss.str();
+}
+
+template string stringHelper::convertNumberToString<int>(int number);
+template string stringHelper::convertNumberToString<unsigned int>(unsigned int number);
+template string stringHelper::convertNumberToString<float>(float number);
+template string stringHelper::convertNumberToString<double>(double number);
 
 }//namespace alba

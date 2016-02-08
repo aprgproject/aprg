@@ -269,6 +269,20 @@ TEST(BooleanStringTest, StringCompareNotCaseSensitive)
     EXPECT_TRUE(isEqualNotCaseSensitive(testString, capitalLetters));
 }
 
+TEST(GetDataFromStringTest, ConvertStringToBool)
+{
+    EXPECT_EQ(convertStringToBool("true"), true);
+    EXPECT_EQ(convertStringToBool("false"), false);
+    EXPECT_EQ(convertStringToBool("TruE"), true);
+    EXPECT_EQ(convertStringToBool("fAlse"), false);
+    EXPECT_EQ(convertStringToBool("0"), false);
+    EXPECT_EQ(convertStringToBool("00000"), false);
+    EXPECT_EQ(convertStringToBool("1"), true);
+    EXPECT_EQ(convertStringToBool("-892347589"), true);
+    EXPECT_EQ(convertStringToBool("this is a random string"), false);
+    EXPECT_EQ(convertStringToNumber<int>("this is a random string"), 0);
+}
+
 TEST(GetDataFromStringTest, ConvertStringToInteger_WithNumbersOnly)
 {
     EXPECT_EQ(convertStringToNumber<int>("12345"), 12345);
@@ -312,6 +326,13 @@ TEST(GetDataFromStringTest, HexConvertStringToInteger_WithNumbersOnly)
     EXPECT_EQ(convertHexStringToNumber<int>("1A2B3"), 0x1A2B3);
     EXPECT_EQ(convertHexStringToNumber<int>("A1B2C"), 0xA1B2C);
     EXPECT_EQ(convertHexStringToNumber<int>("xxxA#$%1@#$#@B^&*&^2%^&%^C*(&"), 0xA1B2C);
+}
+
+TEST(GetDataFromStringTest, ConvertNumberToString)
+{
+    EXPECT_EQ(convertNumberToString(12345), "12345");
+    EXPECT_EQ(convertNumberToString(12345.6789), "12345.6789");
+    EXPECT_EQ(convertNumberToString(-67890.1111), "-67890.1111");
 }
 
 TEST(GetDataFromStringTest, RemoveWhitespacesFromString)
