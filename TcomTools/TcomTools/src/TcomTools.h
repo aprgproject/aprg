@@ -1,9 +1,9 @@
 #pragma once
 
+#include <ProgressBarThread.hpp>
 #include <QMainWindow>
 #include <StepHandlerThread.hpp>
 #include <TcomToolsConfiguration.hpp>
-
 namespace Ui {
 class TcomTools;
 }
@@ -18,10 +18,10 @@ public:
     void setInputFileOrDirectory(string const& inputFileOrDirectory);
 
 private slots:
+    void updateProgressBar();
     void onExecutionIsFinished();
     void on_execute_clicked();
-    void on_actionOpenFile_triggered();
-    void on_actionOpenFolder_triggered();
+    void on_actionOpenFile_triggered();    void on_actionOpenFolder_triggered();
     void on_actionAboutAprg_triggered();
     void on_actionQuit_triggered();
     void on_extractStep_toggled(bool checked);
@@ -53,8 +53,8 @@ private slots:
 
 private:
     void updateGuiUsingConfiguration();
-    void updateProgressBar(int percentage);
     Ui::TcomTools *ui;
     tcomToolsGui::TcomToolsConfiguration m_configuration;
     tcomToolsGui::StepHandlerThread m_stepHandlerThread;
+    tcomToolsGui::ProgressBarThread m_progressBarThread;
 };

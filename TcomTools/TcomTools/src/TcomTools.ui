@@ -26,11 +26,10 @@
       <x>20</x>
       <y>10</y>
       <width>661</width>
-      <height>571</height>
+      <height>573</height>
      </rect>
     </property>
-    <layout class="QFormLayout" name="formLayout_3">
-     <property name="fieldGrowthPolicy">
+    <layout class="QFormLayout" name="formLayout_3">     <property name="fieldGrowthPolicy">
       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
      </property>
      <item row="0" column="0" colspan="2">
@@ -371,11 +370,10 @@
        </layout>
       </widget>
      </item>
-     <item row="10" column="0" colspan="2">
+     <item row="11" column="0" colspan="2">
       <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
+        <spacer name="horizontalSpacer">         <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
@@ -408,11 +406,10 @@
        </item>
       </layout>
      </item>
-     <item row="11" column="0" colspan="2">
+     <item row="10" column="0" colspan="2">
       <widget class="QProgressBar" name="progressBar">
        <property name="value">
-        <number>24</number>
-       </property>
+        <number>24</number>       </property>
       </widget>
      </item>
     </layout>

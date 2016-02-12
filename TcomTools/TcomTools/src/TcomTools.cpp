@@ -8,20 +8,27 @@
 using namespace alba;
 using namespace std;
 
+namespace ProgressCounters
+{
+extern int getOverAllProgress();
+extern void resetProgressCounters();
+}
+
 TcomTools::TcomTools(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::TcomTools)
-    , m_configuration()
+    , ui(new Ui::TcomTools)    , m_configuration()
 {
     ui->setupUi(this);
     updateGuiUsingConfiguration();
-    updateProgressBar(0);
-    connect(&m_stepHandlerThread, SIGNAL(finished()), this, SLOT(onExecutionIsFinished()));
+    ProgressCounters::resetProgressCounters();
+    updateProgressBar();
+    connect(&m_stepHandlerThread, SIGNAL(executionDone()), this, SLOT(onExecutionIsFinished()));
+    connect(&m_progressBarThread, SIGNAL(triggerUpdateProgressBar()), this, SLOT(updateProgressBar()));
     m_stepHandlerThread.start();
+    m_progressBarThread.start();
 }
 
-TcomTools::~TcomTools()
-{
+TcomTools::~TcomTools(){
     delete ui;
 }
 
@@ -61,22 +68,23 @@ void TcomTools::updateGuiUsingConfiguration()
     ui->cropSize->setText(QString::fromStdString(stringHelper::convertNumberToString(m_configuration.cropSize)));
 }
 
-void TcomTools::updateProgressBar(int percentage)
+void TcomTools::updateProgressBar()
 {
-    ui->progressBar->setValue(percentage);
+    ui->progressBar->setValue(ProgressCounters::getOverAllProgress());
 }
 
 void TcomTools::onExecutionIsFinished()
 {
+    m_progressBarThread.stopUpdatingProgressBar();
+    ui->progressBar->setValue(100);
     ui->execute->setEnabled(true);
 }
-
 void TcomTools::on_execute_clicked()
 {
     ui->execute->setEnabled(false);
+    m_progressBarThread.startUpdatingProgressBar();
     m_stepHandlerThread.execute(m_configuration);
 }
-
 void TcomTools::on_actionOpenFile_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QString::fromStdString(AlbaWindowsPathHandler(m_configuration.inputFileOrDirectory).getFullPath()), tr("All Files (*)"));
