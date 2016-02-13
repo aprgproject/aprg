@@ -17,7 +17,8 @@ src/ProgressCounters.cpp\
 src/ProgressBarThread.cpp\
 src/StepHandler.cpp\
 src/StepHandlerThread.cpp\
-src/TcomTools.cpp\src/TcomToolsConfiguration.cpp\
+src/TcomTools.cpp\
+src/TcomToolsConfiguration.cpp\
 ../TcomToolsBackend/src/BtsLogPrint.cpp\
 ../TcomToolsBackend/src/BtsLogSorter.cpp\
 ../TcomToolsBackend/src/BtsLogTime.cpp\
@@ -36,7 +37,8 @@ src/ProgressCounters.hpp\
 src/ProgressBarThread.hpp\
 src/StepHandler.hpp\
 src/StepHandlerThread.hpp\
-src/TcomTools.h\src/TcomToolsConfiguration.hpp\
+src/TcomTools.h\
+src/TcomToolsConfiguration.hpp\
 ../TcomToolsBackend/src/BtsLogPrint.hpp\
 ../TcomToolsBackend/src/BtsLogSorter.hpp\
 ../TcomToolsBackend/src/BtsLogSorterConfiguration.hpp\

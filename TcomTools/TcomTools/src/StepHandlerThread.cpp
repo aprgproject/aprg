@@ -22,7 +22,8 @@ StepHandlerThread::~StepHandlerThread()
     m_state = ThreadState::Killed;
     m_mutex.unlock();
     m_condition.wakeOne();
-    wait();}
+    wait();
+}
 
 void StepHandlerThread::execute(TcomToolsConfiguration const& configuration)
 {
@@ -30,7 +31,8 @@ void StepHandlerThread::execute(TcomToolsConfiguration const& configuration)
     m_state = ThreadState::Active;
     m_configuration = configuration;
     m_mutex.unlock();
-    m_condition.wakeOne();}
+    m_condition.wakeOne();
+}
 
 void StepHandlerThread::run()
 {
@@ -52,4 +54,5 @@ void StepHandlerThread::run()
         }
     }
 }
+
 }

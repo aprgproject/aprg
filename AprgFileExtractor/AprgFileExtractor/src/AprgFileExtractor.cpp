@@ -9,14 +9,15 @@
 
 using namespace std;
 
+namespace alba
+{
+
 namespace ProgressCounters
 {
 extern int numberOfFilesToBeAnalyzedForExtraction;
 extern int numberOfFilesAnalyzedForExtraction;
 }
 
-namespace alba
-{
 AprgFileExtractor::AprgFileExtractor()
     : m_grepEvaluator("")
 {}
@@ -112,13 +113,15 @@ void AprgFileExtractor::extractAllRelevantFilesInThisDirectory(string const& dir
     ProgressCounters::numberOfFilesToBeAnalyzedForExtraction += listOfFiles.size();
     for(string const& filePath: listOfFiles)
     {
-        AlbaWindowsPathHandler extractedPathHandler(filePath);        if(isRecognizedCompressedFile(extractedPathHandler.getExtension()))
+        AlbaWindowsPathHandler extractedPathHandler(filePath);
+        if(isRecognizedCompressedFile(extractedPathHandler.getExtension()))
         {
             extractAllRelevantFilesInThisCompressedFile(extractedPathHandler.getFullPath());
         }
         ProgressCounters::numberOfFilesAnalyzedForExtraction++;
     }
 }
+
 void AprgFileExtractor::extractAllRelevantFilesInThisCompressedFile(string const& filePathOfCompressedFile) const
 {
     AlbaWindowsPathHandler compressedFilePathHandler(filePathOfCompressedFile);
@@ -149,7 +152,8 @@ void AprgFileExtractor::extractAllRelevantFilesRecursively(string const& filePat
     ProgressCounters::numberOfFilesToBeAnalyzedForExtraction += filePaths.size();
     for(string const filePath : filePaths)
     {
-        AlbaWindowsPathHandler filePathHandler(filePath);        if(m_grepEvaluator.evaluate(filePathHandler.getFile()))
+        AlbaWindowsPathHandler filePathHandler(filePath);
+        if(m_grepEvaluator.evaluate(filePathHandler.getFile()))
         {
             AlbaWindowsPathHandler extractedPathHandler(extractOneFile(filePathOfCompressedFile, filePath));
             if(isRecognizedCompressedFile(extractedPathHandler.getExtension()))
@@ -161,6 +165,7 @@ void AprgFileExtractor::extractAllRelevantFilesRecursively(string const& filePat
         ProgressCounters::numberOfFilesAnalyzedForExtraction++;
     }
 }
+
 bool AprgFileExtractor::isTheExtensionXz(string const& extension) const
 {
     return stringHelper::isEqualNotCaseSensitive("xz", extension);

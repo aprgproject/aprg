@@ -25,7 +25,8 @@ public:
         , m_configuration(configuration)
         , m_memoryCache()
         , m_fileStreamOpenedCache()
-        , m_blocks(m_configuration, m_memoryCache, m_fileStreamOpenedCache)    {
+        , m_blocks(m_configuration, m_memoryCache, m_fileStreamOpenedCache)
+    {
         deleteAllFilesInDirectory();
     }
     bool isEmpty() const
@@ -33,7 +34,8 @@ public:
         return 0 == m_size;
     }
     AlbaLargeSorterConfiguration getConfiguration() const
-    {        return m_configuration;
+    {
+        return m_configuration;
     }
     void add(ObjectToSort const& objectToSort)
     {
@@ -45,7 +47,8 @@ public:
         m_size++;
     }
     void addAtTheStart(ObjectToSort const& objectToSort)
-    {        m_blocks.moveMainInteratorToStart();
+    {
+        m_blocks.moveMainInteratorToStart();
         BlockIterator blockIterator(m_blocks.getNearestBlockIterator(objectToSort));
         m_blocks.addObjectToBlockAtTheStart(blockIterator, objectToSort);
         splitToSmallestBlocksIfOverflow(blockIterator);
@@ -64,7 +67,8 @@ public:
     }
 
 private:
-    void splitToSmallestBlocksIfOverflow(BlockIterator const & blockIterator)    {
+    void splitToSmallestBlocksIfOverflow(BlockIterator const & blockIterator)
+    {
         while(blockIterator->getNumberOfObjects() >= m_configuration.m_maximumNumberOfObjectsPerBlock)
         {
             splitToSmallestBlocks(blockIterator, DataBlockType::Memory);
@@ -148,7 +152,8 @@ private:
     unsigned long long m_size;
     AlbaLargeSorterConfiguration const m_configuration;
     BlockCache m_memoryCache;
-    BlockCache m_fileStreamOpenedCache;    DataBlocks<ObjectToSort> m_blocks;
+    BlockCache m_fileStreamOpenedCache;
+    DataBlocks<ObjectToSort> m_blocks;
 };
 
 }//namespace alba

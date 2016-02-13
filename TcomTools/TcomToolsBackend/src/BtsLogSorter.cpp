@@ -8,6 +8,9 @@
 using namespace alba;
 using namespace std;
 
+namespace alba
+{
+
 namespace ProgressCounters
 {
 extern double totalSizeToBeReadForCombine;
@@ -15,8 +18,11 @@ extern double totalSizeReadForCombine;
 extern int writeProgressForCombine;
 }
 
+}
+
 namespace tcomToolsBackend
 {
+
 BtsLogSorter::BtsLogSorter(BtsLogSorterConfiguration const& configuration)
     : m_evaluator(configuration.m_condition)
     , m_sorterWithPcTime(configuration.m_configurationWithPcTime)
@@ -47,7 +53,8 @@ void BtsLogSorter::processDirectory(string const& directoryPath)
     ProgressCounters::totalSizeToBeReadForCombine = getTotalSizeToBeRead(listOfFiles);
     for(string const& filePath : listOfFiles)
     {
-        AlbaWindowsPathHandler filePathHandler(filePath);        if(m_evaluator.evaluate(filePathHandler.getFile()))
+        AlbaWindowsPathHandler filePathHandler(filePath);
+        if(m_evaluator.evaluate(filePathHandler.getFile()))
         {
             processFile(filePathHandler.getFullPath());
         }
@@ -63,7 +70,8 @@ void BtsLogSorter::processFile(string const& filePath)
     double previousTotalSize(ProgressCounters::totalSizeReadForCombine);
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
-    while(fileReader.isNotFinished())    {
+    while(fileReader.isNotFinished())
+    {
         BtsLogPrint logPrint(filePathHandler.getFile(), fileReader.getLineAndIgnoreWhiteSpaces());
         m_foundHardwareAddresses.emplace(logPrint.getHardwareAddress());
         if(logPrint.getPcTime().isEmpty())
@@ -98,7 +106,8 @@ void BtsLogSorter::saveLogsToOutputFile(string const& outputPath)
         writeLogsWithoutPcTimeToOutputFile(outputLogFileStream);
         deleteFilesInDirectory(m_directoryOfLogsWithoutPcTime);
     }
-    AlbaWindowsPathHandler directoryPathHandler(m_pathOfStartupLog);    deleteFilesInDirectory(directoryPathHandler.getDirectory());
+    AlbaWindowsPathHandler directoryPathHandler(m_pathOfStartupLog);
+    deleteFilesInDirectory(directoryPathHandler.getDirectory());
 }
 
 string BtsLogSorter::getPathOfLogWithoutPcTime(string const& directory, string const& name) const
@@ -142,6 +151,7 @@ void BtsLogSorter::writeLogsWithoutPcTimeToOutputFile(ofstream & outputLogFileSt
     });
     writeLastPrintIfNeeded(outputLogFileStream);
 }
+
 void BtsLogSorter::separateLogsWithoutPcTimeIntoDifferentFiles()
 {
     cout << "Save sorted logs without PC time into different addresses." << endl;
@@ -182,7 +192,8 @@ void BtsLogSorter::writeLogsWithPcTimeToOutputFile(ofstream & outputLogFileStrea
     }
 }
 
-void BtsLogSorter::addPrintsFromFileReaderToSorterWithoutPcTime(BtsPrintReaderWithRollback & printReader){
+void BtsLogSorter::addPrintsFromFileReaderToSorterWithoutPcTime(BtsPrintReaderWithRollback & printReader)
+{
     while(printReader.isGood())
     {
         BtsLogPrint logPrintWithoutPcTime(printReader.getPrint());

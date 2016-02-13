@@ -34,7 +34,8 @@ private:
     void writeLogsWithPcTimeToOutputFile(ofstream & outputLogFileStream);
     void addPrintsFromFileReaderToSorterWithoutPcTime(BtsPrintReaderWithRollback & fileReader);
     void writePrintsFromFileReaderBeforeThisPrint(BtsPrintReaderWithRollback & fileReader, BtsLogPrint const& logPrint, ofstream & outputLogFileStream);
-    void bufferPrintAndWrite(BtsLogPrint const& logPrint, ofstream & outputLogFileStream);    void writeLastPrintIfNeeded(ofstream & outputLogFileStream);
+    void bufferPrintAndWrite(BtsLogPrint const& logPrint, ofstream & outputLogFileStream);
+    void writeLastPrintIfNeeded(ofstream & outputLogFileStream);
     void deleteFilesInDirectory(string const& directoryOfLogs) const;
     alba::AlbaGrepStringEvaluator m_evaluator;
     alba::AlbaLargeSorter<BtsLogPrint> m_sorterWithPcTime;

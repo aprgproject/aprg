@@ -8,15 +8,21 @@
 using namespace alba;
 using namespace std;
 
+namespace alba
+{
+
 namespace ProgressCounters
 {
 extern int getOverAllProgress();
 extern void resetProgressCounters();
 }
 
+}
+
 TcomTools::TcomTools(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::TcomTools)    , m_configuration()
+    , ui(new Ui::TcomTools)
+    , m_configuration()
 {
     ui->setupUi(this);
     updateGuiUsingConfiguration();
@@ -28,7 +34,8 @@ TcomTools::TcomTools(QWidget *parent)
     m_progressBarThread.start();
 }
 
-TcomTools::~TcomTools(){
+TcomTools::~TcomTools()
+{
     delete ui;
 }
 
@@ -79,12 +86,14 @@ void TcomTools::onExecutionIsFinished()
     ui->progressBar->setValue(100);
     ui->execute->setEnabled(true);
 }
+
 void TcomTools::on_execute_clicked()
 {
     ui->execute->setEnabled(false);
     m_progressBarThread.startUpdatingProgressBar();
     m_stepHandlerThread.execute(m_configuration);
 }
+
 void TcomTools::on_actionOpenFile_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QString::fromStdString(AlbaWindowsPathHandler(m_configuration.inputFileOrDirectory).getFullPath()), tr("All Files (*)"));
