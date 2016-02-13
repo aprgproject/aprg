@@ -8,10 +8,10 @@ using curl::curl_easy;
 using curl::make_option;
 
 using namespace curl::CurlInterface;
+using namespace alba;
 
 int main()
-{
-    AlbaWebPathHandler webPathHandler(R"(http://pronto.inside.nsn.com/pronto/home.html)");
+{    AlbaWebPathHandler webPathHandler(R"(http://pronto.inside.nsn.com/pronto/home.html)");
     AlbaWindowsPathHandler windowPathHandler(R"(C:\APRG\CurlCpp\CurlCpp\tst\home.html)");
     download<ConfigType::MozillaFireFoxAndPrintDownloadProgress>(webPathHandler, windowPathHandler);
     //downloadBinaryFile<ConfigType::PrintDownloadProgress>(webPathHandler, windowPathHandler);

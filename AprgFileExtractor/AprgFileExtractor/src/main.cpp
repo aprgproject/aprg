@@ -5,10 +5,20 @@
 using namespace alba;
 using namespace std;
 
+namespace alba
+{
+
+namespace ProgressCounters
+{
+int numberOfFilesToBeAnalyzedForExtraction;
+int numberOfFilesAnalyzedForExtraction;
+}
+
+}
+
 int main(int argc, char *argv[])
 {
-    if(argc!=3)
-    {
+    if(argc!=3)    {
         cout<<"There are must be only 2 arguments."<<endl;
         return 1;
     }

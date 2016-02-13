@@ -4,13 +4,8 @@
 #include <iostream>
 #include <string>
 
-using std::istream;
-using std::ostream;
-using std::string;
-
 namespace tcomToolsBackend
 {
-
 namespace BtsLogPrintStateMachine
 {
 
@@ -64,26 +59,25 @@ class BtsLogPrint
 {
 public:
     BtsLogPrint();
-    BtsLogPrint(string const& lineInLogs);
-    BtsLogPrint(string const& filename, string const& lineInLogs);
+    BtsLogPrint(std::string const& lineInLogs);
+    BtsLogPrint(std::string const& filename, std::string const& lineInLogs);
     BtsLogTime getBtsTime() const;
     BtsLogTime getPcTime() const;
-    string getHardwareAddress() const;
-    string getPrint() const;
-    string getPrintWithAllDetails() const;
+    std::string getHardwareAddress() const;
+    std::string getPrint() const;
+    std::string getPrintWithAllDetails() const;
     void updatePcTimeAndFileNameDetails(BtsLogPrint const& logPrint);
     bool operator<(BtsLogPrint const& btsLogPrintToCompare) const;
     bool operator>(BtsLogPrint const& btsLogPrintToCompare) const;
     bool operator==(BtsLogPrint const& btsLogPrintToCompare) const;
-    friend ostream& operator<<(ostream & out, BtsLogPrint const& btsLogPrint);
-    friend istream& operator>>(istream & in, BtsLogPrint& btsLogPrint);
+    friend std::ostream & operator<<(std::ostream & out, BtsLogPrint const& btsLogPrint);
+    friend std::istream & operator>>(std::istream & in, BtsLogPrint& btsLogPrint);
 
 private:
-    void analyzeLineInLogs(string const& lineInLogs);
+    void analyzeLineInLogs(std::string const& lineInLogs);
     inline void handleUnknownState(BtsLogPrintStateMachine::State & state, BtsLogPrintStateMachine::TransactionData & transactionData, int const index, char const character);
     inline void handlePcTimeState1(BtsLogPrintStateMachine::State & state, char const character);
-    inline void handlePcTimeState2(BtsLogPrintStateMachine::State & state, char const character);
-    inline void handlePcTimeState3(BtsLogPrintStateMachine::State & state, char const character);
+    inline void handlePcTimeState2(BtsLogPrintStateMachine::State & state, char const character);    inline void handlePcTimeState3(BtsLogPrintStateMachine::State & state, char const character);
     inline void handlePcTimeState4(BtsLogPrintStateMachine::State & state, char const character);
     inline void handlePcTimeState5(BtsLogPrintStateMachine::State & state, char const character);
     inline void handlePcTimeState6(BtsLogPrintStateMachine::State & state, BtsLogPrintStateMachine::TransactionData & transactionData, int const index, char const character);
@@ -96,9 +90,9 @@ private:
 
     BtsLogTime m_btsTime;
     BtsLogTime m_pcTime;
-    string m_hardwareAddress;
-    string m_print;
-    string m_fileName;
+    std::string m_hardwareAddress;
+    std::string m_print;
+    std::string m_fileName;
 };
 
 }

@@ -3,11 +3,10 @@
 #include <gtest/gtest.h>
 #include <string>
 
-using std::string;
+using namespace std;
 using namespace alba::stringHelper;
 
-TEST(GetDataFromStringTest, ConvertToCapitalLetters_AllEnglishLetters)
-{
+TEST(GetDataFromStringTest, ConvertToCapitalLetters_AllEnglishLetters){
     string testString("AbCDEFghIjKlMnopQRstUvWxYz");
     string capitalLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
