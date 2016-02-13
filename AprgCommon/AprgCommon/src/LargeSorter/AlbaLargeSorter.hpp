@@ -7,9 +7,10 @@
 #include <LargeSorter/DataBlocks.hpp>
 #include <PathHandlers/AlbaWindowsPathHandler.hpp>
 
+using namespace std;
+
 namespace alba
 {
-
 template <typename ObjectToSort>
 class AlbaLargeSorter
 {

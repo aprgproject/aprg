@@ -10,13 +10,8 @@
 
 #include <iostream>
 
-using std::cout;
-using std::endl;
-using std::string;
-
 namespace alba
 {
-
 enum class DataBlockType
 {
     Empty,
@@ -30,11 +25,10 @@ class DataBlock
     typedef DataBlockMemoryContainer<ObjectToSort> MemoryContainer;
 
 public:
-    DataBlock(DataBlockType const blockType, unsigned int const blockNumber, string const& fileDumpPath)
+    DataBlock(DataBlockType const blockType, unsigned int const blockNumber, std::string const& fileDumpPath)
         : m_blockType(blockType)
         , m_blockId(blockNumber)
-        , m_fileDumpPath(fileDumpPath)
-        , m_numberOfObjects(0)
+        , m_fileDumpPath(fileDumpPath)        , m_numberOfObjects(0)
     {
         switch(blockType)
         {
@@ -150,30 +144,19 @@ public:
             }
             if(contents.size() != m_numberOfObjects)
             {
-                cout<<"assert failed blockId:"<<m_blockId<<" contents: "<<contents.size()<<" NumObjects: "<<m_numberOfObjects<<" blockType:"<<(int const)m_blockType<<std::endl;
+                std::cout<<"assert failed blockId:"<<m_blockId<<" contents: "<<contents.size()<<" NumObjects: "<<m_numberOfObjects<<" blockType:"<<(int const)m_blockType<<std::endl;
             }
             assert(contents.size() == m_numberOfObjects);
-        }
-        m_blockFileHandler.clear();
+        }        m_blockFileHandler.clear();
         m_blockType = DataBlockType::Memory;
     }
     void releaseFileStream()
     {
         m_blockFileHandler.getReference().releaseFileStream();
     }
-    void printBlock()
-    {
-        switchToMemoryMode();
-        MemoryContainer & contents(m_memoryBlockHandler.getReference().getContainerReference());
-        for(ObjectToSort const& objectToSort : contents)
-        {
-            cout<<objectToSort<<std::endl;
-        }
-    }
 
 private:
-    void createMemoryHandlerIfNeeded()
-    {
+    void createMemoryHandlerIfNeeded()    {
         if(!m_memoryBlockHandler)
         {
             m_memoryBlockHandler.createObjectUsingDefaultConstructor();
@@ -202,11 +185,10 @@ private:
     }
     DataBlockType m_blockType;
     unsigned int const m_blockId;
-    string const m_fileDumpPath;
+    std::string  const m_fileDumpPath;
     unsigned int m_numberOfObjects;
     ObjectToSort m_lowestValue;
-    AlbaOptional<DataBlockMemoryHandler<ObjectToSort>> m_memoryBlockHandler;
-    AlbaOptional<DataBlockFileHandler<ObjectToSort>> m_blockFileHandler;
+    AlbaOptional<DataBlockMemoryHandler<ObjectToSort>> m_memoryBlockHandler;    AlbaOptional<DataBlockFileHandler<ObjectToSort>> m_blockFileHandler;
 };
 
 }//namespace alba

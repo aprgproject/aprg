@@ -3,11 +3,8 @@
 #include "../../Findings/Findings.hpp"
 #include <vector>
 
-using std::vector;
-
 namespace codeReview
 {
-
 class FindingsBuffer
 {
 public:
@@ -21,8 +18,7 @@ public:
     void addFinding(unsigned int const lineNumber, string const& fileLocator, string const& content, string const& locator);
     void clearAll();
 private:
-    vector<Findings> m_findingsBuffer;
+    std::vector<Findings> m_findingsBuffer;
     int m_currentIndex;
 };
-
 }

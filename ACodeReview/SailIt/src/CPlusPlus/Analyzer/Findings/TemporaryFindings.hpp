@@ -1,13 +1,9 @@
 #pragma once
 
 #include "FindingsBuffer.hpp"
-#include <vector>
-
-using std::vector;
 
 namespace codeReview
 {
-
 class TemporaryFindings
 {
 public:
