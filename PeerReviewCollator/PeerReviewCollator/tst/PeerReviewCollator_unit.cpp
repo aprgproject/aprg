@@ -10,7 +10,8 @@ using namespace alba;
 using namespace std;
 
 TEST(PeerReviewCollatorTest, GetStringForEachCell_QuestionsLine)
-{    PeerReviewCollator collator;
+{
+    PeerReviewCollator collator;
     vector<string> stringsInEachCell;
 
     collator.copyStringsInEachCell(",Q1,In what areas does your colleague exceed the expectations from your pov? Give some examples/specifics if possible.,", stringsInEachCell);

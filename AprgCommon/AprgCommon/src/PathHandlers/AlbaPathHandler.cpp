@@ -7,7 +7,8 @@ using namespace std;
 
 namespace alba{
 
-AlbaPathHandler::AlbaPathHandler(string const& slashCharacterString)    : m_slashCharacterString(slashCharacterString)
+AlbaPathHandler::AlbaPathHandler(string const& slashCharacterString)
+    : m_slashCharacterString(slashCharacterString)
 {}
 
 AlbaPathHandler::AlbaPathHandler(string const& path, string const& slashCharacterString)

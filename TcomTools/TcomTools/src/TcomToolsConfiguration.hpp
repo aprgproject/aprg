@@ -8,6 +8,7 @@
 
 namespace tcomToolsGui
 {
+
 struct TcomToolsConfiguration
 {
     TcomToolsConfiguration();
@@ -15,7 +16,8 @@ struct TcomToolsConfiguration
     std::string getGrepFileName() const;
     void loadConfigurationFromFile();
     void saveConfigurationToFile() const;
-    bool isExtractStepOn;    bool isCombineAndSortStepOn;
+    bool isExtractStepOn;
+    bool isCombineAndSortStepOn;
     bool isGrepStepOn;
     bool isCropStepOn;
     bool isGrepTcomEnabled;
@@ -58,4 +60,5 @@ struct TcomToolsConfiguration
     double cropSize;
     tcomToolsBackend::BtsLogSorterConfiguration btsLogSorterConfiguration;
 };
+
 }

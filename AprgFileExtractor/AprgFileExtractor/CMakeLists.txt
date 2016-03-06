@@ -8,6 +8,7 @@ set(TEST_MODE "ON")
 
 #Assign APRG Directory
 set(APRG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../)
+
 #Assign Flags
 set(CMAKE_C_FLAGS "-Wall -Wextra -pedantic --coverage -std=c99")
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic --coverage -std=c++11")

@@ -41,6 +41,7 @@ void WireSharkLogReader::processDirectoryForWireSharkDelay(string const& directo
         processFileForWireSharkDelay(AlbaWindowsPathHandler(filePath).getFullPath());
     }
 }
+
 void WireSharkLogReader::processFileForWireSharkDelay(string const& filePath)
 {
     m_wireSharkDelays.clear();
@@ -104,7 +105,8 @@ void WireSharkLogReader::processFileForBtsDelayForRlh(string const& filePath)
     AlbaWindowsPathHandler filePathHandler(filePath);
     cout<<"processFile: "<<filePathHandler.getFullPath()<<endl;
 
-    ifstream inputLogFileStream(filePath);    AlbaFileReader fileReader(inputLogFileStream);
+    ifstream inputLogFileStream(filePath);
+    AlbaFileReader fileReader(inputLogFileStream);
     while(fileReader.isNotFinished())
     {
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
@@ -116,7 +118,8 @@ void WireSharkLogReader::processFileForBtsDelayForRlh(string const& filePath)
             uniqueKey.transactionId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
             BtsLogDelay & delayForCrnccId = m_btsLogDelays[uniqueKey];
             BtsLogPrint logPrint(lineInLogs);
-            if(!logPrint.getBtsTime().isStartup())            {
+            if(!logPrint.getBtsTime().isStartup())
+            {
                 delayForCrnccId.startTimeOptional.setValue(logPrint.getBtsTime());
             }
         }
@@ -128,7 +131,8 @@ void WireSharkLogReader::processFileForBtsDelayForRlh(string const& filePath)
             uniqueKey.transactionId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
             BtsLogDelay & delayForCrnccId = m_btsLogDelays[uniqueKey];
             BtsLogPrint logPrint(lineInLogs);
-            if(!logPrint.getBtsTime().isStartup())            {
+            if(!logPrint.getBtsTime().isStartup())
+            {
                 delayForCrnccId.endTimeOptional.setValue(logPrint.getBtsTime());
             }
             if(delayForCrnccId.startTimeOptional && delayForCrnccId.endTimeOptional && delayForCrnccId.startTimeOptional.getReference().getTotalSeconds() <= delayForCrnccId.endTimeOptional.getReference().getTotalSeconds())
@@ -150,7 +154,8 @@ void WireSharkLogReader::processFileForBtsDelayForMikhailKnife(string const& fil
     AlbaWindowsPathHandler filePathHandler(filePath);
     cout<<"processFile: "<<filePathHandler.getFullPath()<<endl;
 
-    ifstream inputLogFileStream(filePath);    AlbaFileReader fileReader(inputLogFileStream);
+    ifstream inputLogFileStream(filePath);
+    AlbaFileReader fileReader(inputLogFileStream);
 
     ofstream grmFetchFileStream(filePathHandler.getDirectory()+R"(grmFetchFileStream.csv)");
     ofstream grmProcessFileStream(filePathHandler.getDirectory()+R"(grmProcessFileStream.csv)");
@@ -186,7 +191,8 @@ void WireSharkLogReader::processFileForBtsDelayForMikhailKnife(string const& fil
             unsigned int difference = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "diff in ms: "));
             if(difference!=0x80000000)
             {
-                grmFetchTotal += difference*1000;                grmFetchCount++;
+                grmFetchTotal += difference*1000;
+                grmFetchCount++;
                 grmFetchFileStream<<crnccId<<","<<nbccId<<","<<transactionId<<","<<setw(10)<<difference<<endl;
             }
         }
@@ -197,7 +203,8 @@ void WireSharkLogReader::processFileForBtsDelayForMikhailKnife(string const& fil
             uniqueKey.transactionId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
             BtsLogDelay & processMapInstance = grmProcessMap[uniqueKey];
             BtsLogPrint logPrint(lineInLogs);
-            if(!logPrint.getBtsTime().isStartup())            {
+            if(!logPrint.getBtsTime().isStartup())
+            {
                 processMapInstance.startTimeOptional.setValue(logPrint.getBtsTime());
             }
         }
@@ -208,7 +215,8 @@ void WireSharkLogReader::processFileForBtsDelayForMikhailKnife(string const& fil
             uniqueKey.transactionId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
             BtsLogDelay & processMapInstance = grmProcessMap[uniqueKey];
             BtsLogDelay & messageDeliveryInstance = messageDeliveryMap[uniqueKey];
-            BtsLogPrint logPrint(lineInLogs);            if(!logPrint.getBtsTime().isStartup())
+            BtsLogPrint logPrint(lineInLogs);
+            if(!logPrint.getBtsTime().isStartup())
             {
                 processMapInstance.endTimeOptional.setValue(logPrint.getBtsTime());
                 messageDeliveryInstance.startTimeOptional.setValue(logPrint.getBtsTime());
@@ -221,7 +229,8 @@ void WireSharkLogReader::processFileForBtsDelayForMikhailKnife(string const& fil
             uniqueKey.transactionId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
             BtsLogDelay & messageDeliveryInstance = messageDeliveryMap[uniqueKey];
             BtsLogDelay & rlSetupMapInstance = rlSetupMap[uniqueKey];
-            BtsLogPrint logPrint(lineInLogs);            if(!logPrint.getBtsTime().isStartup())
+            BtsLogPrint logPrint(lineInLogs);
+            if(!logPrint.getBtsTime().isStartup())
             {
                 messageDeliveryInstance.endTimeOptional.setValue(logPrint.getBtsTime());
                 rlSetupMapInstance.startTimeOptional.setValue(logPrint.getBtsTime());
@@ -234,7 +243,8 @@ void WireSharkLogReader::processFileForBtsDelayForMikhailKnife(string const& fil
             uniqueKey.transactionId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
             BtsLogDelay & rlSetupMapInstance = rlSetupMap[uniqueKey];
             BtsLogPrint logPrint(lineInLogs);
-            if(!logPrint.getBtsTime().isStartup())            {
+            if(!logPrint.getBtsTime().isStartup())
+            {
                 rlSetupMapInstance.endTimeOptional.setValue(logPrint.getBtsTime());
             }
         }
@@ -298,7 +308,8 @@ void WireSharkLogReader::processFileForBtsDelayForGrm(string const& filePath)
     AlbaWindowsPathHandler filePathHandler(filePath);
     cout<<"processFile: "<<filePathHandler.getFullPath()<<endl;
 
-    ifstream inputLogFileStream(filePath);    AlbaFileReader fileReader(inputLogFileStream);
+    ifstream inputLogFileStream(filePath);
+    AlbaFileReader fileReader(inputLogFileStream);
     while(fileReader.isNotFinished())
     {
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
@@ -307,7 +318,8 @@ void WireSharkLogReader::processFileForBtsDelayForGrm(string const& filePath)
             int nbccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
             BtsLogDelay & delayForCrnccId = m_btsLogDelaysGrm[nbccId];
             BtsLogPrint logPrint(lineInLogs);
-            if(!logPrint.getBtsTime().isStartup())            {
+            if(!logPrint.getBtsTime().isStartup())
+            {
                 delayForCrnccId.startTimeOptional.setValue(logPrint.getBtsTime());
             }
         }
@@ -318,7 +330,8 @@ void WireSharkLogReader::processFileForBtsDelayForGrm(string const& filePath)
             int transactionId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
             BtsLogDelay & delayForCrnccId = m_btsLogDelaysGrm[nbccId];
             BtsLogPrint logPrint(lineInLogs);
-            if(!logPrint.getBtsTime().isStartup())            {
+            if(!logPrint.getBtsTime().isStartup())
+            {
                 delayForCrnccId.endTimeOptional.setValue(logPrint.getBtsTime());
             }
             if(delayForCrnccId.startTimeOptional && delayForCrnccId.endTimeOptional && delayForCrnccId.startTimeOptional.getReference().getTotalSeconds() <= delayForCrnccId.endTimeOptional.getReference().getTotalSeconds())
@@ -344,7 +357,8 @@ void WireSharkLogReader::processFileForBtsDelayForGrm(string const& filePath)
             int nbccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
             m_btsLogDelaysGrm.erase(nbccId);
         }
-    }}
+    }
+}
 
 double WireSharkLogReader::getWireSharkTime(string const& lineInLogs) const
 {

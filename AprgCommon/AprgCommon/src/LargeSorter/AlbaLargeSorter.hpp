@@ -11,6 +11,7 @@ using namespace std;
 
 namespace alba
 {
+
 template <typename ObjectToSort>
 class AlbaLargeSorter
 {

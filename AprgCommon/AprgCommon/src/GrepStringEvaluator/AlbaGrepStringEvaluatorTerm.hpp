@@ -4,6 +4,7 @@
 
 namespace alba
 {
+
 enum class AlbaGrepStringEvaluatorTermType
 {
     AndOperator,
@@ -26,7 +27,8 @@ public:
     AlbaGrepStringEvaluatorTerm(AlbaGrepStringEvaluatorTermType type, std::string stringToFind);
     bool isToBeIgnored() const;
     bool isOperator() const;
-    bool isClosingParenthesis() const;    bool isOpeningParenthesis() const;
+    bool isClosingParenthesis() const;
+    bool isOpeningParenthesis() const;
     bool isString() const;
     bool isBiDirectionalOperation() const;
     bool isPrefixOperation() const;

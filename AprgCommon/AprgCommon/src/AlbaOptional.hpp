@@ -5,7 +5,8 @@
 
 namespace alba{
 
-template <typename ContentType> class AlbaOptional{
+template <typename ContentType> class AlbaOptional
+{
 public:
     AlbaOptional()
         : m_hasContent(false)
@@ -97,7 +98,8 @@ private:
     std::unique_ptr<ContentType> m_contentPointer;
 };
 
-template <typename ContentType> class AlbaOptional<ContentType &>{
+template <typename ContentType> class AlbaOptional<ContentType &>
+{
 public:
 
     AlbaOptional()

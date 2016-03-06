@@ -5,6 +5,7 @@
 
 namespace codeReview
 {
+
 class FindingsBuffer
 {
 public:
@@ -21,4 +22,5 @@ private:
     std::vector<Findings> m_findingsBuffer;
     int m_currentIndex;
 };
+
 }

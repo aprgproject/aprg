@@ -5,6 +5,7 @@
 namespace alba
 {
 template <typename ObjectToSort> using DataBlockMemoryContainer = std::deque<ObjectToSort>;
+
 template <typename ObjectToSort>
 class DataBlockMemoryHandler
 {

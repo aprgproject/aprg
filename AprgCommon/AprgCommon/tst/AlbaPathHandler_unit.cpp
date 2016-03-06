@@ -8,6 +8,7 @@ using namespace std;
 using namespace alba;
 
 #define SIZE_TEST_FILE R"(C:\APRG\AprgCommon\AprgCommon\tst\FilesForTests\FileReaderTest\Test2_SizeTest.txt)"
+
 TEST(PathTest, FullPathWithDirectoryAndFileGiven)
 {
     AlbaPathHandler pathHandler(R"(C:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)", R"(\)");

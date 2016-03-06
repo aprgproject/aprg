@@ -4,6 +4,7 @@
 
 namespace codeReview
 {
+
 class TemporaryFindings
 {
 public:

@@ -5,6 +5,7 @@
 
 namespace tcomToolsBackend
 {
+
 enum class BtsLogTimeType
 {
     BtsTimeStamp,
@@ -19,7 +20,8 @@ public:
     void setTimeByTimeStamp(BtsLogTimeType logTimeType, std::string const& timeStampString);
     bool isEmpty() const;
     bool isStartup() const;
-    int getYears() const;    int getMonths() const;
+    int getYears() const;
+    int getMonths() const;
     int getDays() const;
     int getHours() const;
     int getMinutes() const;
@@ -37,7 +39,8 @@ public:
     friend std::istream & operator>>(std::istream & in, BtsLogTime& btsLogTime);
 
 private:
-    void reorganizeOverflowValues();    void reorganizeUnderflowValues();
+    void reorganizeOverflowValues();
+    void reorganizeUnderflowValues();
     int m_years;
     int m_months;
     int m_days;

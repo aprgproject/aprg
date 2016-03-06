@@ -12,6 +12,7 @@
 
 namespace alba
 {
+
 enum class DataBlockType
 {
     Empty,
@@ -28,7 +29,8 @@ public:
     DataBlock(DataBlockType const blockType, unsigned int const blockNumber, std::string const& fileDumpPath)
         : m_blockType(blockType)
         , m_blockId(blockNumber)
-        , m_fileDumpPath(fileDumpPath)        , m_numberOfObjects(0)
+        , m_fileDumpPath(fileDumpPath)
+        , m_numberOfObjects(0)
     {
         switch(blockType)
         {
@@ -147,7 +149,8 @@ public:
                 std::cout<<"assert failed blockId:"<<m_blockId<<" contents: "<<contents.size()<<" NumObjects: "<<m_numberOfObjects<<" blockType:"<<(int const)m_blockType<<std::endl;
             }
             assert(contents.size() == m_numberOfObjects);
-        }        m_blockFileHandler.clear();
+        }
+        m_blockFileHandler.clear();
         m_blockType = DataBlockType::Memory;
     }
     void releaseFileStream()
@@ -156,7 +159,8 @@ public:
     }
 
 private:
-    void createMemoryHandlerIfNeeded()    {
+    void createMemoryHandlerIfNeeded()
+    {
         if(!m_memoryBlockHandler)
         {
             m_memoryBlockHandler.createObjectUsingDefaultConstructor();
@@ -188,7 +192,8 @@ private:
     std::string  const m_fileDumpPath;
     unsigned int m_numberOfObjects;
     ObjectToSort m_lowestValue;
-    AlbaOptional<DataBlockMemoryHandler<ObjectToSort>> m_memoryBlockHandler;    AlbaOptional<DataBlockFileHandler<ObjectToSort>> m_blockFileHandler;
+    AlbaOptional<DataBlockMemoryHandler<ObjectToSort>> m_memoryBlockHandler;
+    AlbaOptional<DataBlockFileHandler<ObjectToSort>> m_blockFileHandler;
 };
 
 }//namespace alba

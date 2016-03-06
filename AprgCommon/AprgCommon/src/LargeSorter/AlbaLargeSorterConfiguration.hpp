@@ -6,6 +6,7 @@
 
 namespace alba
 {
+
 struct AlbaLargeSorterConfiguration
 {
     AlbaLargeSorterConfiguration()
@@ -19,7 +20,8 @@ struct AlbaLargeSorterConfiguration
             std::string directoryForBlocks,
             unsigned int minimumNumberOfObjectsPerBlock,
             unsigned int maximumNumberOfObjectsPerBlock,
-            unsigned int maximumNumberOfObjectsInMemory,            unsigned int maximumFileStreams)
+            unsigned int maximumNumberOfObjectsInMemory,
+            unsigned int maximumFileStreams)
         : m_directoryForBlocks(directoryForBlocks)
         , m_minimumNumberOfObjectsPerBlock(minimumNumberOfObjectsPerBlock)
         , m_maximumNumberOfObjectsPerBlock(maximumNumberOfObjectsPerBlock)
@@ -29,7 +31,8 @@ struct AlbaLargeSorterConfiguration
     std::string m_directoryForBlocks;
     unsigned int m_minimumNumberOfObjectsPerBlock;
     unsigned int m_maximumNumberOfObjectsPerBlock;
-    unsigned int m_maximumNumberOfObjectsInMemory;    unsigned int m_maximumFileStreams;
+    unsigned int m_maximumNumberOfObjectsInMemory;
+    unsigned int m_maximumFileStreams;
     bool isConfigurationValid() const
     {
         if(m_minimumNumberOfObjectsPerBlock <= 0) { return false; }
