@@ -3,9 +3,9 @@
 #include <AlbaFileReader.hpp>
 #include <AlbaStringHelper.hpp>
 #include <CurlInterface.hpp>
+#include "CrawlerConfiguration.hpp"
 #include <fstream>
 #include <iostream>
-
 using namespace curl::CurlInterface;
 using namespace std;
 
@@ -27,11 +27,10 @@ void AprgWebCrawler::crawlForChiaAnime()
 void AprgWebCrawler::crawlForChiaAnime(string & webLink)
 {
     cout << "AprgWebCrawler::crawlForChiaAnime" << endl;
-
+    CrawlerConfiguration crawlerConfiguration(m_mode);
     while(1)
     {
-        AlbaWebPathHandler webPathHandler(webLink);
-        LinksForChiaAnime links(getLinksForChiaAnime(webPathHandler));
+        AlbaWebPathHandler webPathHandler(webLink);        LinksForChiaAnime links(getLinksForChiaAnime(webPathHandler));
         if(links.isInvalid())
         {
             cout << "Links are invalid." << endl;
@@ -54,13 +53,12 @@ void AprgWebCrawler::crawlForChiaAnime(string & webLink)
             cout << "Download of video file failed, retrying from the start" << endl;
             continue;
         }
-        if(1000000 > downloadPathHandler.getFileSizeEstimate())
+        if(downloadPathHandler.getFileSizeEstimate() < crawlerConfiguration.getMinimumFileSize())
         {
-            cout << "Video file is less than 1 mb. FileSize = "<< downloadPathHandler.getFileSizeEstimate() <<" Invalid file. Retrying from the start" << endl;
+            cout << "Video file is less than "<<crawlerConfiguration.getMinimumFileSize()<<". FileSize = "<< downloadPathHandler.getFileSizeEstimate() <<" Invalid file. Retrying from the start" << endl;
             continue;
         }
-        if(links.linkForNextHtml.empty())
-        {
+        if(links.linkForNextHtml.empty())        {
             cout << "Terminating the because next web link is empty." << endl;
             return;
         }

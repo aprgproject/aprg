@@ -2,33 +2,19 @@
 
 #include <deque>
 #include <fstream>
-#include "LinksStructures/LinksStructures.hpp"
+#include "CrawlMode.hpp"
+#include "LinksStructures/LinksForChiaAnime.hpp"
+#include "LinksStructures/LinksForHtmlAndFileToDownload.hpp"
+#include "LinksStructures/LinksForYoutube.hpp"
 #include <PathHandlers/AlbaWebPathHandler.hpp>
 #include <PathHandlers/AlbaWindowsPathHandler.hpp>
 #include <string>
-
 namespace alba
 {
 
-enum class CrawlerMode
-{
-    ChiaAnime,
-    Gehen,
-    GuroManga,
-    HBrowse,
-    Hentai2Read,
-    Mangafox,
-    MangafoxWithVolume,
-    Mangahere,
-    MangaPark,
-    Y8,
-    Youtube
-};
-
 class AprgWebCrawler
 {
-public:
-    typedef std::deque<std::string> WebLinks;
+public:    typedef std::deque<std::string> WebLinks;
     AprgWebCrawler(std::string const& workingDirectory);
     bool isValid() const;
     void printStatus() const;
@@ -44,13 +30,12 @@ private:
     std::string getUserInputAfterManuallyUsingMozillaFirefox(AlbaWebPathHandler const& webPathHandler) const;
     void gotoLinkManuallyUsingMozillaFirefox(AlbaWebPathHandler const& webPathHandler) const;
 
-    void crawlOneHtmlAndOneFileToDownload(int const minimumSizeOfDownload);
-    void crawlOneHtmlAndOneFileToDownload(std::string & webLink, int const minimumSizeOfDownload);
-    LinksForHtmlAndFileToDownload getLinksBasedOnMode(AlbaWebPathHandler const& webLinkPathHandler, std::string const& pathOfHtmlFile) const;
+    void crawlOneHtmlAndOneFileToDownload();
+    void crawlOneHtmlAndOneFileToDownload(std::string & webLink);
+    LinksForHtmlAndFileToDownload getLinks(AlbaWebPathHandler const& webLinkPathHandler, std::string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForGuroManga(AlbaWebPathHandler const& webLinkPathHandler, std::string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForHBrowse(AlbaWebPathHandler const& webLinkPathHandler, std::string const& pathOfHtmlFile) const;
-    LinksForHtmlAndFileToDownload getLinksForHentai2Read(AlbaWebPathHandler const& webLinkPathHandler, std::string const& pathOfHtmlFile) const;
-    LinksForHtmlAndFileToDownload getLinksForMangaFox(AlbaWebPathHandler const& webLinkPathHandler, std::string const& pathOfHtmlFile) const;
+    LinksForHtmlAndFileToDownload getLinksForHentai2Read(AlbaWebPathHandler const& webLinkPathHandler, std::string const& pathOfHtmlFile) const;    LinksForHtmlAndFileToDownload getLinksForMangaFox(AlbaWebPathHandler const& webLinkPathHandler, std::string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForMangaFoxSaveInVolumeAndChapter(AlbaWebPathHandler const& webLinkPathHandler, std::string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getNextLinkAndImageLinkForMangaFox(std::string const& pathOfHtmlFile) const;
     LinksForHtmlAndFileToDownload getLinksForMangaHere(AlbaWebPathHandler const& webLinkPathHandler, std::string const& pathOfHtmlFile) const;
@@ -74,8 +59,7 @@ private:
     AlbaWindowsPathHandler m_workingPathHandler;
     AlbaWindowsPathHandler m_memoryCardPathHandler;
     bool m_isModeRecognized;
-    CrawlerMode m_mode;
+    CrawlMode m_mode;
     WebLinks m_webLinks;
 };
-
 }

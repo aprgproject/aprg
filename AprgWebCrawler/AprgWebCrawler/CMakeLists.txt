@@ -20,10 +20,11 @@ set(SOURCES
     src/AprgWebCrawler.cpp
     src/AprgWebCrawler.hpp
     src/CrawlHelpers/ChiaAnime.cpp
+    src/CrawlHelpers/CrawlerConfiguration.cpp
+    src/CrawlHelpers/CrawlerConfiguration.hpp
     src/CrawlHelpers/Gehen.cpp
     src/CrawlHelpers/GoogleImages.cpp
-    src/CrawlHelpers/GuroManga.cpp
-    src/CrawlHelpers/HBrowse.cpp
+    src/CrawlHelpers/GuroManga.cpp    src/CrawlHelpers/HBrowse.cpp
     src/CrawlHelpers/Hentai2Read.cpp
     src/CrawlHelpers/MangaFox.cpp
     src/CrawlHelpers/MangaHere.cpp
@@ -31,11 +32,15 @@ set(SOURCES
     src/CrawlHelpers/SharedCrawlers.cpp
     src/CrawlHelpers/Youtube.cpp
     src/CrawlHelpers/Y8.cpp
-    src/LinksStructures/LinksStructures.cpp
-    src/LinksStructures/LinksStructures.hpp
+    src/CrawlMode.hpp
+    src/LinksStructures/LinksForChiaAnime.cpp
+    src/LinksStructures/LinksForChiaAnime.hpp
+    src/LinksStructures/LinksForHtmlAndFileToDownload.cpp
+    src/LinksStructures/LinksForHtmlAndFileToDownload.hpp
+    src/LinksStructures/LinksForYoutube.cpp
+    src/LinksStructures/LinksForYoutube.hpp
     src/main.cpp
 )
-
 set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
 set(BUILD_SHARED_LIBRARIES OFF)
 set(CMAKE_EXE_LINKER_FLAGS "-static")
