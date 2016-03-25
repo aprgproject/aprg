@@ -66,6 +66,7 @@ CrawlConfiguration::CrawlConfiguration(CrawlMode mode)
         break;
     }
 }
+
 bool CrawlConfiguration::isFileToBeDownloadUntilSuccessful() const
 {
     return m_isFileToBeDownloadUntilSuccessful;
