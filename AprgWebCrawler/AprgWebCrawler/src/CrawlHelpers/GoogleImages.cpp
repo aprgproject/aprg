@@ -1,8 +1,7 @@
-#include "AprgWebCrawler.hpp"
+#include "WebCrawler.hpp"
 
 #include <AlbaFileReader.hpp>
-#include <AlbaStringHelper.hpp>
-#include <deque>
+#include <AlbaStringHelper.hpp>#include <deque>
 #include <fstream>
 #include <iostream>
 #include <unordered_set>
@@ -15,11 +14,10 @@ using alba::stringHelper::isStringFoundInsideTheOtherStringCaseSensitive;
 namespace alba
 {
 
-void AprgWebCrawler::saveImageListFromGoogleImages()
+void WebCrawler::saveImageListFromGoogleImages()
 {
     AlbaWindowsPathHandler downloadPathHandler(m_workingPathHandler.getDirectory() + R"(\temp.html)");
-    AlbaWindowsPathHandler listPathHandler(m_workingPathHandler.getDirectory() + R"(\ListOfImages.txt)");
-    ifstream htmlFileStream(downloadPathHandler.getFullPath());
+    AlbaWindowsPathHandler listPathHandler(m_workingPathHandler.getDirectory() + R"(\ListOfImages.txt)");    ifstream htmlFileStream(downloadPathHandler.getFullPath());
     if(!htmlFileStream.is_open())
     {
         cout << "Cannot open html file." << endl;
@@ -54,11 +52,10 @@ void AprgWebCrawler::saveImageListFromGoogleImages()
     }
 }
 
-void AprgWebCrawler::downloadGoogleImages() const
+void WebCrawler::downloadGoogleImages() const
 {
     AlbaWindowsPathHandler listPathHandler(m_workingPathHandler.getDirectory() + R"(\ListOfImages.txt)");
-    ifstream listFileStream(listPathHandler.getFullPath());
-    if(!listFileStream.is_open())
+    ifstream listFileStream(listPathHandler.getFullPath());    if(!listFileStream.is_open())
     {
         cout << "Cannot open html file." << endl;
         cout << "File to read:" << listPathHandler.getFullPath() << endl;

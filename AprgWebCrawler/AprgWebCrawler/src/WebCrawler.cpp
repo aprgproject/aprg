@@ -1,4 +1,4 @@
-#include "AprgWebCrawler.hpp"
+#include "WebCrawler.hpp"
 
 #include <AlbaFileReader.hpp>
 #include <algorithm>
@@ -14,7 +14,7 @@ using namespace std;
 namespace alba
 {
 
-AprgWebCrawler::AprgWebCrawler(string const& workingDirectory)
+WebCrawler::WebCrawler(string const& workingDirectory)
     : m_workingPathHandler(workingDirectory)
     , m_memoryCardPathHandler(workingDirectory + R"(\MemoryCard.txt)")
     , m_isModeRecognized(false)
@@ -27,7 +27,7 @@ AprgWebCrawler::AprgWebCrawler(string const& workingDirectory)
     }
 }
 
-bool AprgWebCrawler::isValid() const
+bool WebCrawler::isValid() const
 {
     return m_workingPathHandler.isFoundInLocalSystem() &&
             m_workingPathHandler.isDirectory() &&
@@ -38,7 +38,7 @@ bool AprgWebCrawler::isValid() const
             isWebLinksValid();
 }
 
-void AprgWebCrawler::printStatus() const
+void WebCrawler::printStatus() const
 {
     if(!m_workingPathHandler.isFoundInLocalSystem())
     {
@@ -79,7 +79,7 @@ void AprgWebCrawler::printStatus() const
     }
 }
 
-void AprgWebCrawler::saveMemoryCard() const
+void WebCrawler::saveMemoryCard() const
 {
     ofstream memoryCardStream(m_memoryCardPathHandler.getFullPath());
     if(memoryCardStream.is_open())
@@ -96,7 +96,7 @@ void AprgWebCrawler::saveMemoryCard() const
     }
 }
 
-void AprgWebCrawler::loadMemoryCard()
+void WebCrawler::loadMemoryCard()
 {
     ifstream memoryCardStream(m_memoryCardPathHandler.getFullPath());
     if(memoryCardStream.is_open())
@@ -124,7 +124,7 @@ void AprgWebCrawler::loadMemoryCard()
     }
 }
 
-void AprgWebCrawler::crawl()
+void WebCrawler::crawl()
 {
     switch(m_mode)
     {
@@ -146,22 +146,22 @@ void AprgWebCrawler::crawl()
         crawlForYoutube();
         break;
     case CrawlMode::Empty:
-        cout<<"AprgWebCrawler::crawl | CrawlMode is still not set."<<endl;
+        cout<<"WebCrawler::crawl | CrawlMode is still not set."<<endl;
         break;
     }
 }
 
-void AprgWebCrawler::setCrawlerMode(CrawlMode mode)
+void WebCrawler::setCrawlerMode(CrawlMode mode)
 {
     m_mode = mode;
 }
 
-void AprgWebCrawler::setCrawlerState(CrawlState state)
+void WebCrawler::setCrawlerState(CrawlState state)
 {
     m_state = state;
 }
 
-void AprgWebCrawler::saveInvalidStateToMemoryCard(CrawlState state)
+void WebCrawler::saveInvalidStateToMemoryCard(CrawlState state)
 {
     setCrawlerState(state);
     saveMemoryCard();
@@ -171,7 +171,7 @@ void AprgWebCrawler::saveInvalidStateToMemoryCard(CrawlState state)
     case en: \
     return #en;
 
-string AprgWebCrawler::getCrawlerMode() const
+string WebCrawler::getCrawlerMode() const
 {
     switch(m_mode)
     {
@@ -191,7 +191,7 @@ string AprgWebCrawler::getCrawlerMode() const
     return "";
 }
 
-string AprgWebCrawler::getCrawlerState() const
+string WebCrawler::getCrawlerState() const
 {
     switch(m_state)
     {
@@ -204,7 +204,7 @@ string AprgWebCrawler::getCrawlerState() const
     return "";
 }
 
-CrawlMode AprgWebCrawler::convertStringToCrawlerMode(string const& modeString) const
+CrawlMode WebCrawler::convertStringToCrawlerMode(string const& modeString) const
 {
     CrawlMode mode(CrawlMode::Empty);
     if("chiaanime" == modeString || "CrawlerMode::ChiaAnime" == modeString || "CrawlMode::ChiaAnime" == modeString)
@@ -254,7 +254,7 @@ CrawlMode AprgWebCrawler::convertStringToCrawlerMode(string const& modeString) c
     return mode;
 }
 
-CrawlState AprgWebCrawler::convertStringToCrawlerState(string const& stateString) const
+CrawlState WebCrawler::convertStringToCrawlerState(string const& stateString) const
 {
     CrawlState state(CrawlState::Empty);
     if("CrawlState::Empty" == stateString)
@@ -280,19 +280,19 @@ CrawlState AprgWebCrawler::convertStringToCrawlerState(string const& stateString
     return state;
 }
 
-bool AprgWebCrawler::isCrawlStateInvalid() const
+bool WebCrawler::isCrawlStateInvalid() const
 {
     return m_state == CrawlState::DownloadedFileIsInvalid ||
             m_state == CrawlState::LinksAreInvalid ||
             m_state == CrawlState::NextLinkIsInvalid;
 }
 
-bool AprgWebCrawler::isWebLinksEmpty() const
+bool WebCrawler::isWebLinksEmpty() const
 {
     return m_webLinks.empty();
 }
 
-bool AprgWebCrawler::isWebLinksValid() const
+bool WebCrawler::isWebLinksValid() const
 {
     return all_of(m_webLinks.begin(), m_webLinks.end(), [](string const& webLink)
     {
@@ -301,7 +301,7 @@ bool AprgWebCrawler::isWebLinksValid() const
     });
 }
 
-string AprgWebCrawler::getUserInputAfterManuallyUsingMozillaFirefox(AlbaWebPathHandler const& webPathHandler) const
+string WebCrawler::getUserInputAfterManuallyUsingMozillaFirefox(AlbaWebPathHandler const& webPathHandler) const
 {
     constexpr int bufferSize = 1000;
     char buffer[bufferSize];
@@ -311,7 +311,7 @@ string AprgWebCrawler::getUserInputAfterManuallyUsingMozillaFirefox(AlbaWebPathH
     return string(buffer);
 }
 
-void AprgWebCrawler::gotoLinkManuallyUsingMozillaFirefox(AlbaWebPathHandler const& webPathHandler) const
+void WebCrawler::gotoLinkManuallyUsingMozillaFirefox(AlbaWebPathHandler const& webPathHandler) const
 {
     string firefoxCommand(string(FIREFOX_EXECUTABLE_PATH)+R"( ")"+webPathHandler.getFullPath()+R"(")");
     cout << firefoxCommand << endl;
