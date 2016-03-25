@@ -6,10 +6,10 @@ namespace alba
 enum class CrawlMode
 {
     Empty,
+    Unknown,
     ChiaAnime,
     Gehen,
-    GuroManga,
-    HBrowse,
+    GuroManga,    HBrowse,
     Hentai2Read,
     Mangafox,
     MangafoxWithVolume,
