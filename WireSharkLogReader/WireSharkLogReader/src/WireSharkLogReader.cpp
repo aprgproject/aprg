@@ -30,7 +30,8 @@ WireSharkLogReader::WireSharkLogReader(string const pathOfOutputFile)
     }
 }
 
-void WireSharkLogReader::processDirectoryForWireSharkDelay(string const& directoryPath){
+void WireSharkLogReader::processDirectoryForWireSharkDelay(string const& directoryPath)
+{
     set<string> listOfFiles;
     set<string> listOfDirectories;
     AlbaWindowsPathHandler(directoryPath).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
@@ -132,7 +133,8 @@ void WireSharkLogReader::processFileForBtsDelayForRlh(string const& filePath)
     m_outputStream<<"crnccId,nbccId,transactionId,delay"<<endl;
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
-    while(fileReader.isNotFinished())    {
+    while(fileReader.isNotFinished())
+    {
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlSetupReq3G)"))
         {
@@ -225,7 +227,8 @@ void WireSharkLogReader::processFileForBtsDelayForRlDeletion(string const& fileP
 
 void WireSharkLogReader::processFileForBtsDelayForMikhailKnife(string const& filePath)
 {
-    AlbaWindowsPathHandler filePathHandler(filePath);    cout<<"processFile: "<<filePathHandler.getFullPath()<<endl;
+    AlbaWindowsPathHandler filePathHandler(filePath);
+    cout<<"processFile: "<<filePathHandler.getFullPath()<<endl;
 
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
@@ -384,7 +387,8 @@ void WireSharkLogReader::processFileForBtsDelayForGrm(string const& filePath)
     m_outputStream<<"crnccId,nbccId,transactionId,delay"<<endl;
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
-    while(fileReader.isNotFinished())    {
+    while(fileReader.isNotFinished())
+    {
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(INF/TCOM/G, Received API_TCOM_RNC_MSG)"))
         {
@@ -423,7 +427,8 @@ void WireSharkLogReader::processFileForBtsDelayForGrm(string const& filePath)
         /*else if(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(INF/TCOM/R, CTRL_RLH_)")
                 || stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(INF/TCOM/R, RLH_CTRL_)")
                 || stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(LRM_RL_)")
-                || stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(TC_2_RL_SETUP_IND_MSG)")                || stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(BB_2_RL_)")
+                || stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(TC_2_RL_SETUP_IND_MSG)")
+                || stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(BB_2_RL_)")
                 )
         {
             int nbccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
@@ -431,6 +436,7 @@ void WireSharkLogReader::processFileForBtsDelayForGrm(string const& filePath)
         }*/
     }
 }
+
 double WireSharkLogReader::getWireSharkTime(string const& lineInLogs) const
 {
     int length(lineInLogs.length());

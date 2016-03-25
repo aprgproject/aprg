@@ -59,7 +59,8 @@ TEST(WireSharkLogReaderTest, DISABLED_ProcessFileForBtsRlDeletionDelay)
 
 TEST (WireSharkLogReaderTest, DISABLED_ProcessFileForBtsDelay_RLH_WBTS17Knife)
 {
-    WireSharkLogReader reader(R"(D:\W\ZZZ_Useless_Logs\wireshark_challenge\WBTS17Knife\bts_logs\RlhBtsLogTimeResults.csv)");    reader.processFileForBtsDelayForMikhailKnife(R"(D:\W\ZZZ_Useless_Logs\wireshark_challenge\WBTS17Knife\bts_logs\sorted.log)");
+    WireSharkLogReader reader(R"(D:\W\ZZZ_Useless_Logs\wireshark_challenge\WBTS17Knife\bts_logs\RlhBtsLogTimeResults.csv)");
+    reader.processFileForBtsDelayForMikhailKnife(R"(D:\W\ZZZ_Useless_Logs\wireshark_challenge\WBTS17Knife\bts_logs\sorted.log)");
 }
 
 TEST (WireSharkLogReaderTest, DISABLED_ProcessDirectoryWireshark)
@@ -78,7 +79,8 @@ TEST (WireSharkLogReaderTest, DISABLED_ProcessFileWireshark)
 
 TEST (WireSharkLogReaderTest, DISABLED_SizeOfTest)
 {
-    struct TraceSessionId    {
+    struct TraceSessionId
+    {
         unsigned char rncId[2]; //2
         unsigned char computer[2]; //2
         unsigned char family[2]; //2
