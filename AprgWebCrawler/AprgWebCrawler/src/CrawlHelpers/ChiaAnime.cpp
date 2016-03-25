@@ -1,7 +1,8 @@
 #include "WebCrawler.hpp"
 
 #include <AlbaFileReader.hpp>
-#include <AlbaStringHelper.hpp>#include <CrawlConfiguration/CrawlConfiguration.hpp>
+#include <AlbaStringHelper.hpp>
+#include <CrawlConfiguration/CrawlConfiguration.hpp>
 #include <fstream>
 #include <iostream>
 
@@ -17,7 +18,8 @@ namespace alba
 void WebCrawler::crawlForChiaAnime()
 {
     for(string & webLink : m_webLinks)
-    {        crawlForChiaAnime(webLink);
+    {
+        crawlForChiaAnime(webLink);
     }
 }
 
@@ -26,7 +28,8 @@ void WebCrawler::crawlForChiaAnime(string & webLink)
     cout << "WebCrawler::crawlForChiaAnime" << endl;
     CrawlConfiguration configuration(m_mode);
     while(!isCrawlStateInvalid())
-    {        AlbaWebPathHandler webPathHandler(webLink);
+    {
+        AlbaWebPathHandler webPathHandler(webLink);
         LinksForChiaAnime links(getLinksForChiaAnime(webPathHandler));
         if(links.isInvalid())
         {
@@ -75,7 +78,8 @@ void WebCrawler::crawlForChiaAnime(string & webLink)
 LinksForChiaAnime WebCrawler::getLinksForChiaAnime(AlbaWebPathHandler const& webLinkPathHandler) const
 {
     LinksForChiaAnime links;
-    AlbaWindowsPathHandler downloadPathHandler(m_workingPathHandler.getDirectory() + R"(\temp.html)");    downloadFileAsText(webLinkPathHandler, downloadPathHandler);
+    AlbaWindowsPathHandler downloadPathHandler(m_workingPathHandler.getDirectory() + R"(\temp.html)");
+    downloadFileAsText(webLinkPathHandler, downloadPathHandler);
     ifstream htmlFileStream(downloadPathHandler.getFullPath());
     if(!htmlFileStream.is_open())
     {
@@ -105,7 +109,8 @@ LinksForChiaAnime WebCrawler::getLinksForChiaAnime(AlbaWebPathHandler const& web
 string WebCrawler::getVideoLinkForChiaAnime(AlbaWebPathHandler const& webLinkPathHandler, string const& linkToDownloadPage) const
 {
     AlbaWindowsPathHandler downloadPathHandler(m_workingPathHandler.getDirectory() + R"(\temp.html)");
-    AlbaWebPathHandler downloadPagePathHandler(webLinkPathHandler);    downloadPagePathHandler.gotoLink(linkToDownloadPage);
+    AlbaWebPathHandler downloadPagePathHandler(webLinkPathHandler);
+    downloadPagePathHandler.gotoLink(linkToDownloadPage);
     downloadFileAsText(downloadPagePathHandler, downloadPathHandler);
     ifstream htmlFileStream(downloadPathHandler.getFullPath());
     if(!htmlFileStream.is_open())

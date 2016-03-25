@@ -1,7 +1,8 @@
 #include "WebCrawler.hpp"
 
 #include <AlbaFileReader.hpp>
-#include <AlbaStringHelper.hpp>#include <fstream>
+#include <AlbaStringHelper.hpp>
+#include <fstream>
 #include <iostream>
 
 using namespace std;
@@ -15,7 +16,8 @@ namespace alba
 LinksForHtmlAndFileToDownload WebCrawler::getLinksForHentai2Read(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const
 {
     LinksForHtmlAndFileToDownload links;
-    ifstream htmlFileStream(pathOfHtmlFile);    if(!htmlFileStream.is_open())
+    ifstream htmlFileStream(pathOfHtmlFile);
+    if(!htmlFileStream.is_open())
     {
         cout << "Cannot open html file." << endl;
         cout << "File to read:" << pathOfHtmlFile << endl;

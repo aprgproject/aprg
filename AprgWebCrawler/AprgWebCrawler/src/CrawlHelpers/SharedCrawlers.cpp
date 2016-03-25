@@ -2,6 +2,7 @@
 
 #include <CrawlConfiguration/CrawlConfiguration.hpp>
 #include <iostream>
+
 using namespace std;
 
 namespace alba
@@ -10,7 +11,8 @@ namespace alba
 void WebCrawler::crawlOneHtmlAndOneFileToDownload()
 {
     for(string & webLink : m_webLinks)
-    {        crawlOneHtmlAndOneFileToDownload(webLink);
+    {
+        crawlOneHtmlAndOneFileToDownload(webLink);
     }
 }
 
@@ -19,7 +21,8 @@ void WebCrawler::crawlOneHtmlAndOneFileToDownload(string& webLink)
     cout << "WebCrawler::crawlPerHtmlAndDownloadImage" << endl;
 
     CrawlConfiguration configuration(m_mode);
-    while(!isCrawlStateInvalid())    {
+    while(!isCrawlStateInvalid())
+    {
         AlbaWebPathHandler currentWebLinkPathHandler(webLink);
         AlbaWindowsPathHandler downloadPathHandler(m_workingPathHandler.getDirectory() + R"(\temp.html)");
         downloadFileAsText(currentWebLinkPathHandler, downloadPathHandler);
@@ -70,7 +73,8 @@ void WebCrawler::crawlOneHtmlAndOneFileToDownload(string& webLink)
 LinksForHtmlAndFileToDownload WebCrawler::getLinks(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const
 {
     switch(m_mode)
-    {    case CrawlMode::Gehen:
+    {
+    case CrawlMode::Gehen:
         return getLinksForGehen(webLinkPathHandler, pathOfHtmlFile);
     case CrawlMode::GuroManga:
         return getLinksForGuroManga(webLinkPathHandler, pathOfHtmlFile);
@@ -96,6 +100,7 @@ LinksForHtmlAndFileToDownload WebCrawler::getLinks(AlbaWebPathHandler const& web
         cout << "WebCrawler::getLinks | Mode is not set" << endl;
         break;
     }
-    return LinksForHtmlAndFileToDownload();}
+    return LinksForHtmlAndFileToDownload();
+}
 
 }
