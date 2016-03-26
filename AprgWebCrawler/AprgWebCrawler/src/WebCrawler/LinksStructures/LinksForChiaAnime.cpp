@@ -4,11 +4,10 @@
 
 using namespace std;
 
-namespace alba
+namespace aprgWebCrawler
 {
 
-bool LinksForChiaAnime::isInvalid() const
-{
+bool LinksForChiaAnime::isInvalid() const{
     return linkForDownloadPage.empty() || linkForCurrentVideo.empty() || localPathForCurrentVideo.empty();
 }
 

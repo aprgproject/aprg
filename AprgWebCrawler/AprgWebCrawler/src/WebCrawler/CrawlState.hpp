@@ -1,10 +1,9 @@
 #pragma once
 
-namespace alba
+namespace aprgWebCrawler
 {
 
-enum class CrawlState
-{
+enum class CrawlState{
     Empty,
     Unknown,
     Active,

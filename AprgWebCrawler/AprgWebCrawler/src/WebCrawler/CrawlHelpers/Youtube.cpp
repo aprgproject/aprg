@@ -5,20 +5,19 @@
 #include <fstream>
 #include <iostream>
 
+using namespace alba;
 using namespace std;
 
-using alba::stringHelper::getStringAfterThisString;
-using alba::stringHelper::getStringAndReplaceNonAlphanumericCharactersToUnderScore;
+using alba::stringHelper::getStringAfterThisString;using alba::stringHelper::getStringAndReplaceNonAlphanumericCharactersToUnderScore;
 using alba::stringHelper::getStringInBetweenTwoStrings;
 using alba::stringHelper::getStringWithUrlDecodedString;
 using alba::stringHelper::isStringFoundInsideTheOtherStringCaseSensitive;
 using alba::stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive;
 
-namespace alba
+namespace aprgWebCrawler
 {
 
-void WebCrawler::crawlForYoutube()
-{
+void WebCrawler::crawlForYoutube(){
     AlbaWindowsPathHandler convertedYoutubeLinksPathHandler(m_workingPathHandler.getDirectory() + R"(\ConvertedYoutubeLinks.txt)");
     convertedYoutubeLinksPathHandler.createDirectoriesIfItDoesNotExist();
     ofstream convertedYoutubeLinkStream(convertedYoutubeLinksPathHandler.getFullPath());

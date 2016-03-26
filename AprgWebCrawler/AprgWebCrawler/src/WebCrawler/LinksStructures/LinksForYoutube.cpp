@@ -4,11 +4,10 @@
 
 using namespace std;
 
-namespace alba
+namespace aprgWebCrawler
 {
 
-bool LinksForYoutube::isInvalid() const
-{
+bool LinksForYoutube::isInvalid() const{
     return linkForVideo.empty() || localPathForCurrentVideo.empty();
 }
 

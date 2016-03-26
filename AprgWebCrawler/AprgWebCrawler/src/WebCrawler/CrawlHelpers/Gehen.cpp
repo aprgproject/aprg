@@ -5,16 +5,16 @@
 #include <fstream>
 #include <iostream>
 
+using namespace alba;
 using namespace std;
 
 using alba::stringHelper::getStringInBetweenTwoStrings;
 using alba::stringHelper::isStringFoundInsideTheOtherStringCaseSensitive;
 
-namespace alba
+namespace aprgWebCrawler
 {
 
-LinksForHtmlAndFileToDownload WebCrawler::getLinksForGehen(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const
-{
+LinksForHtmlAndFileToDownload WebCrawler::getLinksForGehen(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const{
     LinksForHtmlAndFileToDownload links;
     ifstream htmlFileStream(pathOfHtmlFile);
     if(!htmlFileStream.is_open())

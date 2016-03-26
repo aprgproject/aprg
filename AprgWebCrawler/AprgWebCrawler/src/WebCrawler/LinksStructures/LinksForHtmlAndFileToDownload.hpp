@@ -2,11 +2,10 @@
 
 #include <string>
 
-namespace alba
+namespace aprgWebCrawler
 {
 
-struct LinksForHtmlAndFileToDownload
-{
+struct LinksForHtmlAndFileToDownload{
     std::string linkForNextHtml;
     std::string linkForCurrentFileToDownload;
     std::string localPathForCurrentFileToDownload;

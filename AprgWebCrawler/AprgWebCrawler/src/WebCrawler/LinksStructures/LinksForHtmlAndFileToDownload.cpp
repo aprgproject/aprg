@@ -4,11 +4,10 @@
 
 using namespace std;
 
-namespace alba
+namespace aprgWebCrawler
 {
 
-bool LinksForHtmlAndFileToDownload::isInvalid() const
-{
+bool LinksForHtmlAndFileToDownload::isInvalid() const{
     return linkForCurrentFileToDownload.empty() || localPathForCurrentFileToDownload.empty();
 }
 

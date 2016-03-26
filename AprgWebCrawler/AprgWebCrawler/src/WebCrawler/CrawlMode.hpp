@@ -1,10 +1,9 @@
 #pragma once
 
-namespace alba
+namespace aprgWebCrawler
 {
 
-enum class CrawlMode
-{
+enum class CrawlMode{
     Empty,
     Unknown,
     ChiaAnime,
