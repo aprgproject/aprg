@@ -3,11 +3,13 @@
 namespace aprgWebCrawler
 {
 
-enum class CrawlState{
+enum class CrawlState
+{
     Empty,
     Unknown,
     Active,
     DownloadedFileIsInvalid,
+    DownloadedFileSizeIsLessThanExpected,
     LinksAreInvalid,
     NextLinkIsInvalid
 };

@@ -5,7 +5,8 @@
 namespace aprgWebCrawler
 {
 
-struct LinksForYoutube{
+struct LinksForYoutube
+{
     std::string linkForVideo;
     std::string localPathForCurrentVideo;
     bool isInvalid() const;

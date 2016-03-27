@@ -7,7 +7,8 @@ using namespace std;
 namespace aprgWebCrawler
 {
 
-bool LinksForChiaAnime::isInvalid() const{
+bool LinksForChiaAnime::isInvalid() const
+{
     return linkForDownloadPage.empty() || linkForCurrentVideo.empty() || localPathForCurrentVideo.empty();
 }
 

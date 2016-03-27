@@ -9,7 +9,8 @@ using namespace curl::CurlInterface;
 namespace aprgWebCrawler
 {
 
-bool WebCrawler::downloadBinaryFile(        AlbaWebPathHandler const& fileToDownloadWebPathHandler,
+bool WebCrawler::downloadBinaryFile(
+        AlbaWebPathHandler const& fileToDownloadWebPathHandler,
         AlbaWindowsPathHandler const& downloadPathHandler) const
 {
     bool isSuccessful(false);

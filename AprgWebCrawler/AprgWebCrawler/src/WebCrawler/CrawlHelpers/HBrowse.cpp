@@ -6,15 +6,14 @@
 #include <iostream>
 
 using namespace alba;
+using namespace alba::stringHelper;
 using namespace std;
-
-using alba::stringHelper::getStringInBetweenTwoStrings;
-using alba::stringHelper::isStringFoundInsideTheOtherStringCaseSensitive;
 
 namespace aprgWebCrawler
 {
 
-LinksForHtmlAndFileToDownload WebCrawler::getLinksForHBrowse(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const{
+LinksForHtmlAndFileToDownload WebCrawler::getLinksForHBrowse(AlbaWebPathHandler const& webLinkPathHandler, string const& pathOfHtmlFile) const
+{
     LinksForHtmlAndFileToDownload links;
     ifstream htmlFileStream(pathOfHtmlFile);
     if(!htmlFileStream.is_open())
@@ -38,7 +37,7 @@ LinksForHtmlAndFileToDownload WebCrawler::getLinksForHBrowse(AlbaWebPathHandler 
     }
     AlbaWebPathHandler imageWebPathHandler(webLinkPathHandler);
     imageWebPathHandler.gotoLink(links.linkForCurrentFileToDownload);
-    links.localPathForCurrentFileToDownload = m_workingPathHandler.getDirectory() + imageWebPathHandler.getImmediateDirectoryName() + R"(\)" + imageWebPathHandler.getFile();
+    links.localPathForCurrentFileToDownload = m_downloadDirectoryPathHandler.getDirectory() + imageWebPathHandler.getImmediateDirectoryName() + R"(\)" + imageWebPathHandler.getFile();
     return links;
 }
 

@@ -7,7 +7,8 @@ using namespace std;
 namespace aprgWebCrawler
 {
 
-bool LinksForHtmlAndFileToDownload::isInvalid() const{
+bool LinksForHtmlAndFileToDownload::isInvalid() const
+{
     return linkForCurrentFileToDownload.empty() || localPathForCurrentFileToDownload.empty();
 }
 
