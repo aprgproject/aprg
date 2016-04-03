@@ -16,11 +16,10 @@ class TcomTools : public QMainWindow
 public:
     explicit TcomTools(QWidget *parent = 0);
     ~TcomTools();
-    void setInputFileOrDirectory(string const& inputFileOrDirectory);
+    void setInputFileOrDirectory(std::string const& inputFileOrDirectory);
 
 private slots:
-    void updateProgressBar();
-    void onExecutionIsFinished();
+    void updateProgressBar();    void onExecutionIsFinished();
     void on_execute_clicked();
     void on_actionOpenFile_triggered();
     void on_actionOpenFolder_triggered();

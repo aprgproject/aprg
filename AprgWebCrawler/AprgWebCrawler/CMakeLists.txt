@@ -17,13 +17,9 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${APRG_DIR}/CurlCpp/AprgCmakeInclude/CurlCpp.cmake)
 
 set(SOURCES
-    src/DirectoryAndFileCorrector/DirectoryAndFileCorrector.cpp
-    src/DirectoryAndFileCorrector/DirectoryAndFileCorrector.hpp
-    src/DirectoryAndFileCorrector/DirectoryAndFileCorrector.cpp
     src/UserInterface/UserInterface.cpp
     src/UserInterface/UserInterface.hpp
-    src/main.cpp
-    src/WebCrawler/CrawlConfiguration/CrawlConfiguration.cpp
+    src/main.cpp    src/WebCrawler/CrawlConfiguration/CrawlConfiguration.cpp
     src/WebCrawler/CrawlConfiguration/CrawlConfiguration.hpp
     src/WebCrawler/CrawlHelpers/ChiaAnime.cpp
     src/WebCrawler/CrawlHelpers/DownloadHelpers.cpp
@@ -52,11 +48,9 @@ set(SOURCES
 
 set(INCLUDE_DIRECTORIES
     src/
-    src/DirectoryAndFileCorrector
     src/UserInterface
     src/WebCrawler
 )
-
 set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
 set(BUILD_SHARED_LIBRARIES OFF)
 set(CMAKE_EXE_LINKER_FLAGS "-static")

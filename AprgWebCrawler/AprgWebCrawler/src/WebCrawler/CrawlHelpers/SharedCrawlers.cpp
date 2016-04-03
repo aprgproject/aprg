@@ -48,11 +48,10 @@ void WebCrawler::crawlOneHtmlAndOneFileToDownload(string& webLink)
             break;
         }
         downloadPathHandler.input(links.localPathForCurrentFileToDownload);
-        downloadPathHandler.createDirectoriesIfItDoesNotExist();
+        downloadPathHandler.createDirectoriesForNonExisitingDirectories();
         downloadBinaryFile(fileToDownloadWebPathHandler, downloadPathHandler);
         if(downloadPathHandler.getFileSizeEstimate() < configuration.getMinimumFileSize())
-        {
-            cout << "Download file size is less than "<<configuration.getMinimumFileSize()<<". FileSize = "<< downloadPathHandler.getFileSizeEstimate() <<" Invalid file. Retrying from the start" << endl;
+        {            cout << "Download file size is less than "<<configuration.getMinimumFileSize()<<". FileSize = "<< downloadPathHandler.getFileSizeEstimate() <<" Invalid file. Retrying from the start" << endl;
             saveStateToMemoryCard(CrawlState::DownloadedFileSizeIsLessThanExpected);
             continue;
         }

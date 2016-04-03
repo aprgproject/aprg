@@ -35,11 +35,10 @@ WebCrawler::WebCrawler(string const& workingDirectory, string const& webLink)
     , m_memoryCardPathHandler(m_downloadDirectoryPathHandler.getFullPath() + R"(\MemoryCard.txt)")
 {
     m_webLinks.push_back(webLink);
-    m_memoryCardPathHandler.createDirectoriesIfItDoesNotExist();
+    m_memoryCardPathHandler.createDirectoriesForNonExisitingDirectories();
     saveMemoryCard();
     m_downloadDirectoryPathHandler.reInput();
-    m_memoryCardPathHandler.reInput();
-}
+    m_memoryCardPathHandler.reInput();}
 
 bool WebCrawler::isValid() const
 {
