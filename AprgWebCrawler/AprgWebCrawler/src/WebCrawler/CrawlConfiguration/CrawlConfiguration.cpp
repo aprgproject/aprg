@@ -21,7 +21,8 @@ CrawlConfiguration::CrawlConfiguration(CrawlMode mode)
         m_lowSpeedLimitOptional.getReference().m_lowSpeedTime=10;
         break;
     case CrawlMode::GuroManga:
-        m_isFileToBeDownloadUntilSuccessful=true;        m_numberOfRetries = 0;
+        m_isFileToBeDownloadUntilSuccessful=true;
+        m_numberOfRetries = 0;
         m_minimumFileSize = 10000;
         break;
     case CrawlMode::HBrowse:

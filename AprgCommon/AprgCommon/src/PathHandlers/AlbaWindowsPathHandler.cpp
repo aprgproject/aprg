@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <windows.h>
+
 using namespace std;
 
 namespace alba
@@ -44,6 +45,7 @@ double AlbaWindowsPathHandler::getFileSizeEstimate()
     }
     return fileSizeEstimate;
 }
+
 bool AlbaWindowsPathHandler::isFoundInLocalSystem() const
 {
     return m_foundInLocalSystem;
@@ -52,7 +54,8 @@ bool AlbaWindowsPathHandler::isFoundInLocalSystem() const
 void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const
 {
     string fullPath(getFullPath());
-    int index = 0, length = fullPath.length();    while(index < length)
+    int index = 0, length = fullPath.length();
+    while(index < length)
     {
         int indexWithSlashCharacter = fullPath.find_first_of(m_slashCharacterString, index);
         if(stringHelper::isNpos(indexWithSlashCharacter)){break;}
@@ -118,7 +121,8 @@ bool AlbaWindowsPathHandler::renameImmediateDirectory(string const& newDirectory
     return isSuccessful;
 }
 
-bool AlbaWindowsPathHandler::isRelativePath() const{
+bool AlbaWindowsPathHandler::isRelativePath() const
+{
     return m_relativePath;
 }
 

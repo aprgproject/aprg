@@ -50,7 +50,8 @@ void WebCrawler::crawlForChiaAnime(string & webLink)
         downloadPathHandler.createDirectoriesForNonExisitingDirectories();
         if(!downloadBinaryFile(videoWebPathHandler, downloadPathHandler))
         {
-            cout << "Download fails repetitively. Retrying from the start" << endl;            continue;
+            cout << "Download fails repetitively. Retrying from the start" << endl;
+            continue;
         }
         if(downloadPathHandler.getFileSizeEstimate() < configuration.getMinimumFileSize())
         {

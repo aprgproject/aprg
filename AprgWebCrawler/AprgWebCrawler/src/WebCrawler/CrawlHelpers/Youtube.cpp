@@ -18,7 +18,8 @@ void WebCrawler::crawlForYoutube()
     convertedYoutubeLinksPathHandler.createDirectoriesForNonExisitingDirectories();
     ofstream convertedYoutubeLinkStream(convertedYoutubeLinksPathHandler.getFullPath());
 
-    for(string & webLink : m_webLinks)    {
+    for(string & webLink : m_webLinks)
+    {
         crawlForYoutube(webLink, convertedYoutubeLinkStream);
     }
 }
@@ -76,7 +77,8 @@ void WebCrawler::crawlForYoutube_Old(string & webLink, ofstream& convertedYoutub
         downloadPathHandler.createDirectoriesForNonExisitingDirectories();
         downloadBinaryFile(videoWebPathHandler, downloadPathHandler);
         convertedYoutubeLinkStream << links.linkForVideo << endl << flush;
-        webLink.clear();        setCrawlState(CrawlState::Active);
+        webLink.clear();
+        setCrawlState(CrawlState::Active);
         saveMemoryCard();
         break;
     }

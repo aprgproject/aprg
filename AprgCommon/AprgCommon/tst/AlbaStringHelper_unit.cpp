@@ -374,7 +374,8 @@ TEST(UniqueIdTest, GenerateUniqueId)
     string string2("MARK is the no#1 programmer in the world. MARK is also the nicest programmer.");
     unsigned int uniqueId1 = generateUniqueId(string1);
     unsigned int uniqueId2 = generateUniqueId(string2);
-    EXPECT_EQ(uniqueId1, 552749853);    EXPECT_EQ(uniqueId2, 1436619827);
+    EXPECT_EQ(uniqueId1, 552749853);
+    EXPECT_EQ(uniqueId2, 1436619827);
 }
 
 TEST(UniqueIdTest, CheckLevenshteinDistance)

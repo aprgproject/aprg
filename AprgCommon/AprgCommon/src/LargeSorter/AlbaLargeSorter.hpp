@@ -9,6 +9,7 @@
 
 namespace alba
 {
+
 template <typename ObjectToSort>
 class AlbaLargeSorter
 {
@@ -146,7 +147,8 @@ private:
         for(std::string const& filePath : listOfFiles)
         {
             AlbaWindowsPathHandler(filePath).deleteFile();
-        }    }
+        }
+    }
     unsigned long long m_size;
     AlbaLargeSorterConfiguration const m_configuration;
     BlockCache m_memoryCache;

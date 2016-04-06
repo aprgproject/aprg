@@ -365,7 +365,8 @@ TEST(AlbaLargeSorterTest, PrimitiveDataTypesForBlocksAreCreatedWhenBlocksWhenMem
     }
     int expectedValue=0;
     largeSorter.sortThenDoFunctionThenReleaseAllObjects([&expectedValue](int const& actualValue)
-    {        EXPECT_EQ(expectedValue++, actualValue);
+    {
+        EXPECT_EQ(expectedValue++, actualValue);
     });
     EXPECT_EQ(10, expectedValue);
 }

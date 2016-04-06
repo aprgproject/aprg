@@ -26,6 +26,7 @@ static int xferinfo(void *, curl_off_t dlTotal, curl_off_t dlNow, curl_off_t ulT
     cout<< "\rProgress: " << percentProgress << "% (DownLink: " << dlNow << " of " << dlTotal << "   UpLink: " << ulNow << " of " << ulTotal  << ")" << std::flush;
     return 0;
 }
+
 void CurlInterface::addLowSpeedLimitToCurlEasy(curl_easy& easy, LONG const lowSpeedLimit, LONG const duration)
 {
     easy.add<CURLOPT_LOW_SPEED_LIMIT>(lowSpeedLimit);
@@ -42,7 +43,8 @@ void CurlInterface::addToCurlEasy<ConfigType::LowSpeedLimit>(curl_easy& easy)
     addLowSpeedLimitToCurlEasy(easy, lowSpeedLimit, lowSpeedTime);
 }
 
-template <>void CurlInterface::addToCurlEasy<ConfigType::MozillaFireFox>(curl_easy& easy)
+template <>
+void CurlInterface::addToCurlEasy<ConfigType::MozillaFireFox>(curl_easy& easy)
 {
     struct curl_slist *chunk = NULL;
     chunk = curl_slist_append(chunk, "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0");
@@ -104,7 +106,8 @@ bool CurlInterface::downloadForOutputFileStream(string url, ofstream& outputFile
         status = true;
     }
     catch (curl_easy_exception error)
-    {        auto errors = error.what();
+    {
+        auto errors = error.what();
         printDownloadErrorMessage(string(errors));
         error.print_traceback();
     }
@@ -112,7 +115,8 @@ bool CurlInterface::downloadForOutputFileStream(string url, ofstream& outputFile
     return status;
 }
 
-bool CurlInterface::downloadWithAdditionalConfig(string const& url, string const& fileLocation, function<void(curl_easy&)> additionalConfig){
+bool CurlInterface::downloadWithAdditionalConfig(string const& url, string const& fileLocation, function<void(curl_easy&)> additionalConfig)
+{
     cout<<"   --> Downloading file. \nFile: ["<<fileLocation<<"] \nFrom: ["<<url<<"]"<<endl;
     ofstream outputFile(fileLocation);
     bool isSuccessful (downloadForOutputFileStream(url, outputFile, additionalConfig));
@@ -186,7 +190,8 @@ bool CurlInterface::downloadAsBinaryWithAdditionalConfigWithFiniteNumberOfTries(
                 additionalConfig(easy);
         });
         if(!isSuccessful)
-        {            cout<<"   --> Download failed and retrying in a few seconds. \nFile: ["<<fileLocation<<"] \nFrom: ["<<url<<"]"<<endl;
+        {
+            cout<<"   --> Download failed and retrying in a few seconds. \nFile: ["<<fileLocation<<"] \nFrom: ["<<url<<"]"<<endl;
             Sleep(5000);
         }
     }
