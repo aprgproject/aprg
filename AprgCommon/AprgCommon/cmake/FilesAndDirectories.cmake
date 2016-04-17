@@ -14,7 +14,8 @@ set(APRG_COMMON_SOURCES
     ${APRG_COMMON_DIR}/src/AlbaRandomizer.hpp
     ${APRG_COMMON_DIR}/src/AlbaStringHelper.cpp
     ${APRG_COMMON_DIR}/src/AlbaStringHelper.hpp
-    ${APRG_COMMON_DIR}/src/AlbaWindowsTimer.cpp    ${APRG_COMMON_DIR}/src/AlbaWindowsTimer.hpp
+    ${APRG_COMMON_DIR}/src/AlbaWindowsTimer.cpp
+    ${APRG_COMMON_DIR}/src/AlbaWindowsTimer.hpp
     ${APRG_COMMON_DIR}/src/GrepStringEvaluator/AlbaGrepStringEvaluator.cpp
     ${APRG_COMMON_DIR}/src/GrepStringEvaluator/AlbaGrepStringEvaluator.hpp
     ${APRG_COMMON_DIR}/src/GrepStringEvaluator/AlbaGrepStringEvaluatorTerm.cpp
@@ -45,7 +46,8 @@ set(APRG_COMMON_TESTS
     ${APRG_COMMON_DIR}/tst/AlbaRandomizer_unit.cpp
     ${APRG_COMMON_DIR}/tst/AlbaStringHelper_unit.cpp
     ${APRG_COMMON_DIR}/tst/AlbaWindowsTimer_unit.cpp
-    ${APRG_COMMON_DIR}/tst/GrepStringEvaluator/AlbaGrepStringEvaluator_unit.cpp)
+    ${APRG_COMMON_DIR}/tst/GrepStringEvaluator/AlbaGrepStringEvaluator_unit.cpp
+)
 
 set(APRG_COMMON_SOURCES_AND_TESTS
     ${APRG_COMMON_SOURCES}
