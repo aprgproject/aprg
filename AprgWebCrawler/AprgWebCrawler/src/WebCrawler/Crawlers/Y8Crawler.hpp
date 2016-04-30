@@ -20,7 +20,8 @@ private:
     void addWebLinksIfFound(int webLinkIndex);
     void retrieveLinks(alba::AlbaWebPathHandler const& webLinkPathHandler);
     void clearLinks();
-    bool areLinksInvalid() const;    void printLinks() const;
+    bool areLinksInvalid() const;
+    void printLinks() const;
     WebCrawler & m_webCrawler;
     CrawlConfiguration m_configuration;
     std::string m_linkForNextHtml;

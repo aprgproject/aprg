@@ -32,14 +32,16 @@ void ChiaAnimeCrawler::crawl(int webLinkIndex)
         retrieveLinks(webLinkPathHandler);
         if(areLinksInvalid())
         {
-            cout << "Links are invalid." << endl;            printLinks();
+            cout << "Links are invalid." << endl;
+            printLinks();
             m_webCrawler.saveStateToMemoryCard(CrawlState::LinksAreInvalid);
             break;
         }
         AlbaWebPathHandler videoWebPathHandler(webLinkPathHandler);
         videoWebPathHandler.gotoLink(m_linkForDownloadPage);
         videoWebPathHandler.gotoLink(m_linkForCurrentVideo);
-        if(!videoWebPathHandler.isFile())        {
+        if(!videoWebPathHandler.isFile())
+        {
             cout << "Video link is not to a file." << endl;
             cout << "VideoLinkWebPath : " << videoWebPathHandler.getFullPath() << endl;
             m_webCrawler.saveStateToMemoryCard(CrawlState::DownloadedFileIsInvalid);
@@ -76,6 +78,7 @@ void ChiaAnimeCrawler::crawl(int webLinkIndex)
         m_webCrawler.saveStateToMemoryCard(CrawlState::Active);
     }
 }
+
 void ChiaAnimeCrawler::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandler)
 {
     clearLinks();

@@ -33,14 +33,16 @@ void OneDownloadPerPageCrawler::crawl(int webLinkIndex)
         retrieveLinks(webLinkPathHandler);
         if(areLinksInvalid())
         {
-            cout << "Links are invalid." << endl;            printLinks();
+            cout << "Links are invalid." << endl;
+            printLinks();
             m_webCrawler.saveStateToMemoryCard(CrawlState::LinksAreInvalid);
             break;
         }
         AlbaWebPathHandler fileToDownloadWebPathHandler(webLinkPathHandler);
         fileToDownloadWebPathHandler.gotoLink(m_linkForCurrentFileToDownload);
         if(!fileToDownloadWebPathHandler.isFile())
-        {            cout << "Link is not to a file." << endl;
+        {
+            cout << "Link is not to a file." << endl;
             cout << "Link of file to Download: " << fileToDownloadWebPathHandler.getFullPath() << endl;
             m_webCrawler.saveStateToMemoryCard(CrawlState::LinksAreInvalid);
             break;
@@ -72,6 +74,7 @@ void OneDownloadPerPageCrawler::crawl(int webLinkIndex)
         m_webCrawler.saveStateToMemoryCard(CrawlState::Active);
     }
 }
+
 void OneDownloadPerPageCrawler::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandler)
 {
     clearLinks();

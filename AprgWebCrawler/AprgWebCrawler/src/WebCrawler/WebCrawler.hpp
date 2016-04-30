@@ -41,6 +41,7 @@ public:
 
     bool isValid() const;
     bool isCrawlStateInvalid() const;
+
     void saveMemoryCard() const;
     void saveStateToMemoryCard(CrawlState state);
     void loadMemoryCard();
