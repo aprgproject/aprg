@@ -19,10 +19,12 @@ private:
     void crawl(int webLinkIndex);
     void retrieveLinks(alba::AlbaWebPathHandler const& webLinkPathHandler);
     std::string getVideoLink(alba::AlbaWebPathHandler const& webLinkPathHandler, std::string const& linkToDownloadPage) const;
+    bool checkLinks();
+    bool downloadVideo(alba::AlbaWebPathHandler const& webLinkPathHandler);
+    bool gotoNextLink(alba::AlbaWebPathHandler const& webLinkPathHandler, int webLinkIndex);
     void clearLinks();
     bool areLinksInvalid() const;
-    void printLinks() const;
-    WebCrawler & m_webCrawler;
+    void printLinks() const;    WebCrawler & m_webCrawler;
     CrawlConfiguration m_configuration;
     std::string m_linkForNextHtml;
     std::string m_linkForDownloadPage;

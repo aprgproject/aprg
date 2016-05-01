@@ -19,10 +19,13 @@ CrawlMode WebCrawler::convertStringToCrawlerMode(string const& modeString) const
     {
         mode = CrawlMode::ChiaAnime;
     }
+    else if("doujinmoe" == modeString || "CrawlMode::DoujinMoe" == modeString)
+    {
+        mode = CrawlMode::DoujinMoe;
+    }
     else if("gehen" == modeString || "CrawlerMode::Gehen" == modeString || "CrawlMode::Gehen" == modeString)
     {
-        mode = CrawlMode::Gehen;
-    }
+        mode = CrawlMode::Gehen;    }
     else if("guromanga" == modeString || "CrawlerMode::GuroManga" == modeString || "CrawlMode::GuroManga" == modeString)
     {
         mode = CrawlMode::GuroManga;
@@ -69,10 +72,13 @@ CrawlMode WebCrawler::convertWebLinkToCrawlerMode(string const& webLink) const
     {
         mode = CrawlMode::ChiaAnime;
     }
+    else if(isStringFoundInsideTheOtherStringNotCaseSensitive(webLink, "doujin-moe.us"))
+    {
+        mode = CrawlMode::DoujinMoe;
+    }
     else if(isStringFoundInsideTheOtherStringNotCaseSensitive(webLink, "g.e-hentai.org"))
     {
-        mode = CrawlMode::Gehen;
-    }
+        mode = CrawlMode::Gehen;    }
     else if(isStringFoundInsideTheOtherStringNotCaseSensitive(webLink, "guromanga.com"))
     {
         mode = CrawlMode::GuroManga;
@@ -131,10 +137,13 @@ CrawlState WebCrawler::convertStringToCrawlerState(string const& stateString) co
     {
         state = CrawlState::DownloadedFileSizeIsLessThanExpected;
     }
+    else if("CrawlState::Finished" == stateString)
+    {
+        state = CrawlState::Finished;
+    }
     else if("CrawlState::LinksAreInvalid" == stateString)
     {
-        state = CrawlState::LinksAreInvalid;
-    }
+        state = CrawlState::LinksAreInvalid;    }
     else if("CrawlState::NextLinkIsInvalid" == stateString)
     {
         state = CrawlState::NextLinkIsInvalid;
@@ -151,12 +160,12 @@ string WebCrawler::convertCrawlerModeToString(CrawlMode mode) const
     switch(mode)
     {
     GET_ENUM_STRING(CrawlMode::Empty)
-    GET_ENUM_STRING(CrawlMode::Unknown)
+            GET_ENUM_STRING(CrawlMode::Unknown)
             GET_ENUM_STRING(CrawlMode::ChiaAnime)
+            GET_ENUM_STRING(CrawlMode::DoujinMoe)
             GET_ENUM_STRING(CrawlMode::Gehen)
             GET_ENUM_STRING(CrawlMode::GuroManga)
-            GET_ENUM_STRING(CrawlMode::HBrowse)
-            GET_ENUM_STRING(CrawlMode::Hentai2Read)
+            GET_ENUM_STRING(CrawlMode::HBrowse)            GET_ENUM_STRING(CrawlMode::Hentai2Read)
             GET_ENUM_STRING(CrawlMode::Mangafox)
             GET_ENUM_STRING(CrawlMode::MangafoxWithVolume)
             GET_ENUM_STRING(CrawlMode::Mangahere)
@@ -172,14 +181,14 @@ string WebCrawler::convertCrawlerStateToString(CrawlState state) const
     switch(state)
     {
     GET_ENUM_STRING(CrawlState::Empty)
-    GET_ENUM_STRING(CrawlState::Unknown)
+            GET_ENUM_STRING(CrawlState::Unknown)
             GET_ENUM_STRING(CrawlState::Active)
             GET_ENUM_STRING(CrawlState::DownloadedFileIsInvalid)
             GET_ENUM_STRING(CrawlState::DownloadedFileSizeIsLessThanExpected)
+            GET_ENUM_STRING(CrawlState::Finished)
             GET_ENUM_STRING(CrawlState::LinksAreInvalid)
             GET_ENUM_STRING(CrawlState::NextLinkIsInvalid)
-    }
-    return "";
+    }    return "";
 }
 
 #undef GET_ENUM_STRING
