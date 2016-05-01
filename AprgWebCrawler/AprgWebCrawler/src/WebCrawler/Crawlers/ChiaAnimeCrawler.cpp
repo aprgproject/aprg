@@ -40,6 +40,7 @@ void ChiaAnimeCrawler::crawl(int webLinkIndex)
         }
     }
 }
+
 void ChiaAnimeCrawler::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandler)
 {
     clearLinks();
@@ -163,7 +164,8 @@ bool ChiaAnimeCrawler::gotoNextLink(AlbaWebPathHandler const& webLinkPathHandler
 
 void ChiaAnimeCrawler::clearLinks()
 {
-    m_linkForNextHtml.clear();    m_linkForDownloadPage.clear();
+    m_linkForNextHtml.clear();
+    m_linkForDownloadPage.clear();
     m_linkForCurrentVideo.clear();
     m_localPathForCurrentVideo.clear();
 }

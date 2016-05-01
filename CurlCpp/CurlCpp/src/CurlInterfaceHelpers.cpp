@@ -98,6 +98,7 @@ void CurlInterface::createOutputStream(unique_ptr<ofstream> & outputStream, Outp
         break;
     }
 }
+
 bool CurlInterface::download(string url, ofstream& outputFile, function<void(curl_easy&)> additionalConfig)
 {
     if(!outputFile.is_open())
@@ -136,7 +137,8 @@ bool CurlInterface::downloadFile(string const& url, string const& fileLocation, 
     bool isSuccessful (download(url, *(outputFile.get()), additionalConfig));
     if(!isSuccessful)
     {
-        cout<<"   --> Download failed. \nFile: ["<<fileLocation<<"] \nFrom: ["<<url<<"]"<<endl;    }
+        cout<<"   --> Download failed. \nFile: ["<<fileLocation<<"] \nFrom: ["<<url<<"]"<<endl;
+    }
     return isSuccessful;
 }
 
@@ -151,7 +153,8 @@ bool CurlInterface::downloadFileUntilSuccessful(string const& url, string const&
         isSuccessful = download(url, *(outputFile.get()), additionalConfig);
         if(!isSuccessful)
         {
-            cout<<"   --> Download failed and retrying in a few seconds. \nFile: ["<<fileLocation<<"] \nFrom: ["<<url<<"]"<<endl;            Sleep(5000);
+            cout<<"   --> Download failed and retrying in a few seconds. \nFile: ["<<fileLocation<<"] \nFrom: ["<<url<<"]"<<endl;
+            Sleep(5000);
         }
     }
     return isSuccessful;
@@ -173,7 +176,8 @@ bool CurlInterface::downloadFileWithFiniteNumberOfTries(
         isSuccessful = download(url, *(outputFile.get()), [numberOfTries, additionalConfig](curl_easy& easy)
         {
                 additionalConfig(easy);
-        });        if(!isSuccessful)
+        });
+        if(!isSuccessful)
         {
             cout<<"   --> Download failed and retrying in a few seconds. \nFile: ["<<fileLocation<<"] \nFrom: ["<<url<<"]"<<endl;
             Sleep(5000);

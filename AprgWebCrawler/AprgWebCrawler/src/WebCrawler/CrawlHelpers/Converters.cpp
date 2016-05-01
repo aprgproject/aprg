@@ -25,7 +25,8 @@ CrawlMode WebCrawler::convertStringToCrawlerMode(string const& modeString) const
     }
     else if("gehen" == modeString || "CrawlerMode::Gehen" == modeString || "CrawlMode::Gehen" == modeString)
     {
-        mode = CrawlMode::Gehen;    }
+        mode = CrawlMode::Gehen;
+    }
     else if("guromanga" == modeString || "CrawlerMode::GuroManga" == modeString || "CrawlMode::GuroManga" == modeString)
     {
         mode = CrawlMode::GuroManga;
@@ -78,7 +79,8 @@ CrawlMode WebCrawler::convertWebLinkToCrawlerMode(string const& webLink) const
     }
     else if(isStringFoundInsideTheOtherStringNotCaseSensitive(webLink, "g.e-hentai.org"))
     {
-        mode = CrawlMode::Gehen;    }
+        mode = CrawlMode::Gehen;
+    }
     else if(isStringFoundInsideTheOtherStringNotCaseSensitive(webLink, "guromanga.com"))
     {
         mode = CrawlMode::GuroManga;
@@ -143,7 +145,8 @@ CrawlState WebCrawler::convertStringToCrawlerState(string const& stateString) co
     }
     else if("CrawlState::LinksAreInvalid" == stateString)
     {
-        state = CrawlState::LinksAreInvalid;    }
+        state = CrawlState::LinksAreInvalid;
+    }
     else if("CrawlState::NextLinkIsInvalid" == stateString)
     {
         state = CrawlState::NextLinkIsInvalid;
@@ -165,7 +168,8 @@ string WebCrawler::convertCrawlerModeToString(CrawlMode mode) const
             GET_ENUM_STRING(CrawlMode::DoujinMoe)
             GET_ENUM_STRING(CrawlMode::Gehen)
             GET_ENUM_STRING(CrawlMode::GuroManga)
-            GET_ENUM_STRING(CrawlMode::HBrowse)            GET_ENUM_STRING(CrawlMode::Hentai2Read)
+            GET_ENUM_STRING(CrawlMode::HBrowse)
+            GET_ENUM_STRING(CrawlMode::Hentai2Read)
             GET_ENUM_STRING(CrawlMode::Mangafox)
             GET_ENUM_STRING(CrawlMode::MangafoxWithVolume)
             GET_ENUM_STRING(CrawlMode::Mangahere)
@@ -188,7 +192,8 @@ string WebCrawler::convertCrawlerStateToString(CrawlState state) const
             GET_ENUM_STRING(CrawlState::Finished)
             GET_ENUM_STRING(CrawlState::LinksAreInvalid)
             GET_ENUM_STRING(CrawlState::NextLinkIsInvalid)
-    }    return "";
+    }
+    return "";
 }
 
 #undef GET_ENUM_STRING

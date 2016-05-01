@@ -41,6 +41,7 @@ void OneDownloadPerPageCrawler::crawl(int webLinkIndex)
         }
     }
 }
+
 void OneDownloadPerPageCrawler::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandler)
 {
     clearLinks();
@@ -77,7 +78,8 @@ void OneDownloadPerPageCrawler::retrieveLinks(AlbaWebPathHandler const& webLinkP
         cout << "OneDownloadPerPageCrawler::retrieveLinks | Mode is different" << endl;
         break;
     case CrawlMode::Empty:
-    case CrawlMode::Unknown:        cout << "OneDownloadPerPageCrawler::retrieveLinks | Mode is not set" << endl;
+    case CrawlMode::Unknown:
+        cout << "OneDownloadPerPageCrawler::retrieveLinks | Mode is not set" << endl;
         break;
     }
 }
@@ -139,7 +141,8 @@ bool OneDownloadPerPageCrawler::gotoNextLink(AlbaWebPathHandler const& webLinkPa
 
 void OneDownloadPerPageCrawler::clearLinks()
 {
-    m_linkForNextHtml.clear();    m_linkForCurrentFileToDownload.clear();
+    m_linkForNextHtml.clear();
+    m_linkForCurrentFileToDownload.clear();
     m_localPathForCurrentFileToDownload.clear();
 }
 

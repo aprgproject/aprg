@@ -7,7 +7,8 @@
 #include <Crawlers/DoujinMoeCrawler.hpp>
 #include <Crawlers/OneDownloadPerPageCrawler.hpp>
 #include <Crawlers/Y8Crawler.hpp>
-#include <fstream>#include <iostream>
+#include <fstream>
+#include <iostream>
 
 #define APRG_WEB_CRAWLER_TEMP_HTML_FILE R"(C:\APRG\AprgWebCrawler\temp.html)"
 
@@ -61,7 +62,8 @@ void WebCrawler::crawl()
     }
     case CrawlMode::Gehen:
     case CrawlMode::GuroManga:
-    case CrawlMode::HBrowse:    case CrawlMode::Hentai2Read:
+    case CrawlMode::HBrowse:
+    case CrawlMode::Hentai2Read:
     case CrawlMode::Mangafox:
     case CrawlMode::MangafoxWithVolume:
     case CrawlMode::Mangahere:
@@ -130,7 +132,8 @@ string WebCrawler::getNewDirectoryNameFromWeblink(string const& webLink) const
         break;
     case CrawlMode::Gehen:
     case CrawlMode::GuroManga:
-    case CrawlMode::HBrowse:    case CrawlMode::Youtube:
+    case CrawlMode::HBrowse:
+    case CrawlMode::Youtube:
         title = getTitleFromTitleWindow(webLink);
         break;
     case CrawlMode::Hentai2Read:
@@ -216,7 +219,8 @@ bool WebCrawler::shouldDownloadStopBaseOnCrawlState() const
             m_state == CrawlState::Finished;
 }
 
-void WebCrawler::saveMemoryCard() const{
+void WebCrawler::saveMemoryCard() const
+{
     ofstream memoryCardStream(m_memoryCardPathHandler.getFullPath());
     if(memoryCardStream.is_open())
     {

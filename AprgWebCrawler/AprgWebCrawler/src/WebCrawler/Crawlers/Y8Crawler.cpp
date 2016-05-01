@@ -21,7 +21,8 @@ void Y8Crawler::crawl()
     for(int webLinkIndex=0; webLinkIndex<m_webCrawler.getNumberOfWebLinks();)
     {
         if(!isStringFoundInsideTheOtherStringCaseSensitive(m_webCrawler.getWebLinkAtIndex(webLinkIndex), R"(/games/)"))
-        {            addWebLinksIfFound(webLinkIndex);
+        {
+            addWebLinksIfFound(webLinkIndex);
         }
         else
         {
@@ -49,6 +50,7 @@ void Y8Crawler::crawl(int webLinkIndex)
         }
     }
 }
+
 void Y8Crawler::addWebLinksIfFound(int webLinkIndex)
 {
     AlbaWebPathHandler webLinkPathHandler(m_webCrawler.getWebLinkAtIndex(webLinkIndex));
@@ -144,7 +146,8 @@ bool Y8Crawler::downloadFile(AlbaWebPathHandler const& webLinkPathHandler)
 
 void Y8Crawler::clearLinks()
 {
-    m_linkForNextHtml.clear();    m_linkForCurrentFileToDownload.clear();
+    m_linkForNextHtml.clear();
+    m_linkForCurrentFileToDownload.clear();
     m_localPathForCurrentFileToDownload.clear();
 }
 
