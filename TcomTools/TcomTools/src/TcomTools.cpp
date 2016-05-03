@@ -47,10 +47,10 @@ void TcomTools::setInputFileOrDirectory(string const& inputFileOrDirectory)
 
 void TcomTools::updateGuiUsingConfiguration()
 {
+    stringHelper::NumberToStringConverter converter;
     ui->extractStep->setChecked(m_configuration.isExtractStepOn);
     ui->combineAndSortStep->setChecked(m_configuration.isCombineAndSortStepOn);
-    ui->grepStep->setChecked(m_configuration.isGrepStepOn);
-    ui->cropStep->setChecked(m_configuration.isCropStepOn);
+    ui->grepStep->setChecked(m_configuration.isGrepStepOn);    ui->cropStep->setChecked(m_configuration.isCropStepOn);
     ui->tcom->setChecked(m_configuration.isGrepTcomEnabled);
     ui->err->setChecked(m_configuration.isGrepErrEnabled);
     ui->errWrnNoSpam->setChecked(m_configuration.isGrepErrWrnNoSpamEnabled);
@@ -72,11 +72,10 @@ void TcomTools::updateGuiUsingConfiguration()
     ui->acceptedFilesCondition->setText(QString::fromStdString(m_configuration.acceptedFilesGrepCondition));
     ui->other->setText(QString::fromStdString(m_configuration.otherGrepCondition));
     ui->prioritizedLogPrint->setText(QString::fromStdString(m_configuration.prioritizedLogPrint));
-    ui->cropSize->setText(QString::fromStdString(stringHelper::convertNumberToString(m_configuration.cropSize)));
+    ui->cropSize->setText(QString::fromStdString(converter.convert(m_configuration.cropSize)));
 }
 
-void TcomTools::updateProgressBar()
-{
+void TcomTools::updateProgressBar(){
     ui->progressBar->setValue(ProgressCounters::getOverAllProgress());
 }
 

@@ -6,10 +6,10 @@
 #include <fstream>
 #include <LargeSorter/DataBlockMemoryHandler.hpp>
 #include <LargeSorter/DataBlockFileHandler.hpp>
+#include <iostream>
 #include <string>
 
-namespace alba
-{
+namespace alba{
 
 enum class DataBlockType
 {
