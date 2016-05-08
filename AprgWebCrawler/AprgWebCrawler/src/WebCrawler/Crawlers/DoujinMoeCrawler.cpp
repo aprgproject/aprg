@@ -50,11 +50,10 @@ void DoujinMoeCrawler::crawl(int webLinkIndex)
             }
             if(downloadImages(webLinkPathHandler))
             {
-                m_webCrawler.saveStateToMemoryCard(CrawlState::Finished);
+                break;
             }
         }
-    }
-}
+    }}
 
 void DoujinMoeCrawler::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandler)
 {

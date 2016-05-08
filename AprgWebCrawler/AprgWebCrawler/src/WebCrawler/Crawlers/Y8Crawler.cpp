@@ -45,11 +45,10 @@ void Y8Crawler::crawl(int webLinkIndex)
         {
             if(downloadFile(webLinkPathHandler))
             {
-                m_webCrawler.saveStateToMemoryCard(CrawlState::Finished);
+                break;
             }
         }
-    }
-}
+    }}
 
 void Y8Crawler::addWebLinksIfFound(int webLinkIndex)
 {
