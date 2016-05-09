@@ -1,14 +1,15 @@
 #include <AlbaFileReader.hpp>
 #include <AlbaStringHelper.hpp>
 #include <Crawlers/DoujinMoeCrawler.hpp>
+#include <CrawlHelpers/Downloaders.hpp>
 #include <iostream>
 
 using namespace alba;
 using namespace alba::stringHelper;
+using namespace aprgWebCrawler::Downloaders;
 using namespace std;
 
-namespace aprgWebCrawler
-{
+namespace aprgWebCrawler{
 
 DoujinMoeCrawler::DoujinMoeCrawler(WebCrawler & webCrawler)
     : m_webCrawler(webCrawler)
@@ -59,11 +60,10 @@ void DoujinMoeCrawler::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandle
 {
     clearLinks();
     AlbaWindowsPathHandler downloadPathHandler(m_webCrawler.getDownloadDirectory() + R"(\temp.html)");
-    m_webCrawler.downloadFileAsText(webLinkPathHandler, downloadPathHandler);
+    downloadFileAsText(webLinkPathHandler, downloadPathHandler);
     ifstream htmlFileStream(downloadPathHandler.getFullPath());
     if(!htmlFileStream.is_open())
-    {
-        cout << "Cannot open html file." << endl;
+    {        cout << "Cannot open html file." << endl;
         cout << "File to read:" << downloadPathHandler.getFullPath() << endl;
     }
 
@@ -140,11 +140,10 @@ bool DoujinMoeCrawler::downloadImages(AlbaWebPathHandler const& webLinkPathHandl
         }
         AlbaWindowsPathHandler downloadPathHandler(m_webCrawler.getDownloadDirectory() + R"(\)" + m_title + R"(\)" + converter.convert(count) + "." + imageWebPathHandler.getExtension());
         downloadPathHandler.createDirectoriesForNonExisitingDirectories();
-        if(!m_webCrawler.downloadBinaryFile(imageWebPathHandler, downloadPathHandler))
+        if(!downloadBinaryFile(imageWebPathHandler, downloadPathHandler, m_webCrawler.getCrawlMode()))
         {
             cout << "Download fails repetitively. Retrying from the start" << endl;
-            return false;
-        }
+            return false;        }
         if(downloadPathHandler.getFileSizeEstimate() < m_configuration.getMinimumFileSize())
         {
             cout << "Image file is less than " << m_configuration.getMinimumFileSize() << ". FileSize = " << downloadPathHandler.getFileSizeEstimate() << " Invalid file. Retrying from the start" << endl;

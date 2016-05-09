@@ -1,26 +1,27 @@
-#include "WebCrawler.hpp"
+#include "Downloaders.hpp"
 
 #include <CrawlConfiguration/CrawlConfiguration.hpp>
 #include <CurlInterface.hpp>
-#include <string>
 #include <iostream>
+#include <string>
 #include <windows.h>
+
+#define PHANTOM_BIN_PATH R"(C:\APRG\PhantomJs\PhantomJs\bin\)"
 
 using namespace alba;
 using namespace curl::CurlInterface;
 using namespace std;
 
-#define PHANTOM_BIN_PATH R"(C:\APRG\PhantomJs\PhantomJs\bin\)"
-
 namespace aprgWebCrawler
 {
 
-bool WebCrawler::downloadBinaryFile(
+bool Downloaders::downloadBinaryFile(
         AlbaWebPathHandler const& fileToDownloadWebPathHandler,
-        AlbaWindowsPathHandler const& downloadPathHandler) const
+        AlbaWindowsPathHandler const& downloadPathHandler,
+        CrawlMode mode)
 {
     bool isSuccessful(false);
-    CrawlConfiguration configuration(m_mode);
+    CrawlConfiguration configuration(mode);
     DownloadLowSpeedLimitConfigurationOptional downloadLowSpeedLimitConfigurationOptional(configuration.getDownloadLowSpeedLimitConfigurationOptional());
     if(downloadLowSpeedLimitConfigurationOptional)
     {
@@ -38,16 +39,16 @@ bool WebCrawler::downloadBinaryFile(
     return isSuccessful;
 }
 
-bool WebCrawler::downloadFileAsText(
+bool Downloaders::downloadFileAsText(
         AlbaWebPathHandler const& fileToDownloadWebPathHandler,
-        AlbaWindowsPathHandler const& downloadPathHandler) const
+        AlbaWindowsPathHandler const& downloadPathHandler)
 {
     return downloadUntilSuccessful<DownloadType::LowSpeedLimitAndMozillaFireFox>(fileToDownloadWebPathHandler, downloadPathHandler);
 }
 
-void WebCrawler::downloadFileUsingPhantomJs(
+void Downloaders::downloadFileUsingPhantomJs(
         AlbaWebPathHandler const& fileToDownloadWebPathHandler,
-        AlbaWindowsPathHandler const& downloadPathHandler) const
+        AlbaWindowsPathHandler const& downloadPathHandler)
 {
     AlbaWindowsPathHandler const phantomJsFolder(PHANTOM_BIN_PATH);
     string const command(phantomJsFolder.getFullPath()+"phantomjs.exe "+phantomJsFolder.getFullPath()+R"(loadPage.js ")"+fileToDownloadWebPathHandler.getFullPath()+R"(" ")"+downloadPathHandler.getFullPath()+R"(")");
