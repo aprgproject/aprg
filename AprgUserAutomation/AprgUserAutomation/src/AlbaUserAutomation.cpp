@@ -1,4 +1,5 @@
 #include "AlbaUserAutomation.hpp"
+#include <AlbaStringHelper.hpp>
 #include <cctype>
 
 using namespace std;
@@ -12,9 +13,22 @@ bool AlbaUserAutomation::isLetterPressed(char letter) const
     return (( ( status & 0x8000 ) >> 15 ) == 1) || (( status & 1 ) == 1);
 }
 
+string AlbaUserAutomation::getStringFromClipboard() const
+{
+    string stringInClipboard;
+    if(OpenClipboard(NULL))
+    {
+      HANDLE clipboardData = GetClipboardData(CF_TEXT);
+      CloseClipboard();
+      stringInClipboard = (char*)clipboardData;
+    }
+    return stringInClipboard;
+}
+
 MousePosition AlbaUserAutomation::getMousePosition() const
 {
-    MousePosition position;    POINT mouse;
+    MousePosition position;
+    POINT mouse;
     GetCursorPos(&mouse);
     position.x = mouse.x;
     position.y = mouse.y;
@@ -51,23 +65,17 @@ void AlbaUserAutomation::doLeftClick() const
     });
 }
 
-void AlbaUserAutomation::typeCharacter(char character) const
+void AlbaUserAutomation::doRightClick() const
 {
-    doOperation([&](INPUT& input)
-    {        input.type = INPUT_KEYBOARD;
-        input.ki.wScan = 0;
-        input.ki.time = 0;
-        input.ki.dwExtraInfo = 0;
-        input.ki.wVk = ::toupper(character);
-        input.ki.dwFlags = 0;
+    doOperation([](INPUT& input)
+    {
+        input.type = INPUT_MOUSE;
+        input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
     });
-    doOperation([&](INPUT& input)    {
-        input.type = INPUT_KEYBOARD;
-        input.ki.wScan = 0;
-        input.ki.time = 0;
-        input.ki.dwExtraInfo = 0;
-        input.ki.wVk = ::toupper(character);
-        input.ki.dwFlags = KEYEVENTF_KEYUP;
+    doOperation([](INPUT& input)
+    {
+        input.type = INPUT_MOUSE;
+        input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;
     });
 }
 
@@ -79,7 +87,44 @@ void AlbaUserAutomation::typeString(string const& stringToType) const
     }
 }
 
-void AlbaUserAutomation::doOperation(AlbaUserAutomation::InputFunction inputFunction) const{
+void AlbaUserAutomation::typeCharacter(char character) const
+{
+    doOperation([&](INPUT& input)
+    {
+        input.type = INPUT_KEYBOARD;
+        input.ki.wScan = 0;
+        input.ki.time = 0;
+        input.ki.dwExtraInfo = 0;
+        input.ki.wVk = convertToVirtualKey(character);
+        input.ki.dwFlags = 0;
+    });
+    doOperation([&](INPUT& input)
+    {
+        input.type = INPUT_KEYBOARD;
+        input.ki.wScan = 0;
+        input.ki.time = 0;
+        input.ki.dwExtraInfo = 0;
+        input.ki.wVk = convertToVirtualKey(character);
+        input.ki.dwFlags = KEYEVENTF_KEYUP;
+    });
+}
+
+int AlbaUserAutomation::convertToVirtualKey(char character) const
+{
+    int virtualKey = character;
+    if(stringHelper::isLetter(character))
+    {
+        virtualKey = ::toupper(character);
+    }
+    else if('.' == character)
+    {
+        virtualKey = VK_OEM_PERIOD;
+    }
+    return virtualKey;
+}
+
+void AlbaUserAutomation::doOperation(AlbaUserAutomation::InputFunction inputFunction) const
+{
     INPUT input;
     memset(&input, 0, sizeof(INPUT));
     inputFunction(input);

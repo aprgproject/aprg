@@ -7,17 +7,20 @@
 #include <Crawlers/DoujinMoeCrawler.hpp>
 #include <Crawlers/OneDownloadPerPageCrawler.hpp>
 #include <Crawlers/Y8Crawler.hpp>
+#include <Crawlers/Youtube.hpp>
 #include <CrawlHelpers/Downloaders.hpp>
 #include <fstream>
 #include <iostream>
-#define APRG_WEB_CRAWLER_TEMP_HTML_FILE R"(C:\APRG\AprgWebCrawler\temp.html)"
+
+#define APRG_WEB_CRAWLER_TEMP_HTML_FILE R"(C:\CrawlDownload\TemporaryFiles\temp.html)"
 
 using namespace alba;
 using namespace alba::stringHelper;
 using namespace aprgWebCrawler::Downloaders;
 using namespace std;
 
-namespace aprgWebCrawler{
+namespace aprgWebCrawler
+{
 
 WebCrawler::WebCrawler(string const& downloadDirectory)
     : m_mode(CrawlMode::Unknown)
@@ -80,6 +83,11 @@ void WebCrawler::crawl()
         break;
     }
     case CrawlMode::Youtube:
+    {
+        Youtube youtubeCrawler(*this);
+        youtubeCrawler.crawl();
+        break;
+    }
     case CrawlMode::Empty:
     case CrawlMode::Unknown:
         cout<<"WebCrawler::crawl | CrawlMode is still not set."<<endl;
@@ -147,7 +155,8 @@ string WebCrawler::getNewDirectoryNameFromWeblink(string const& webLink) const
         title = getStringInBetweenTwoStrings(webLink, R"(/manga/)", R"(/)");
         break;
     case CrawlMode::Y8:
-        title = "Y8Games";        break;
+        title = "Y8Games";
+        break;
     case CrawlMode::Empty:
     case CrawlMode::Unknown:
         cout << "WebCrawler::getNewDirectoryNameFromWeblink | Mode is not set" << endl;
@@ -183,6 +192,10 @@ std::string WebCrawler::getFirstWebLinkIfPossible() const
     return webLink;
 }
 
+std::string WebCrawler::getTemporaryFilePath() const
+{
+    return APRG_WEB_CRAWLER_TEMP_HTML_FILE;
+}
 
 void WebCrawler::addWebLink(std::string const& webLink)
 {
@@ -210,12 +223,22 @@ bool WebCrawler::isValid() const
             isWebLinksValid();
 }
 
-bool WebCrawler::shouldDownloadStopBaseOnCrawlState() const
+bool WebCrawler::shouldDownloadStopBaseOnInvalidCrawlState() const
 {
     return m_state == CrawlState::DownloadedFileIsInvalid ||
             m_state == CrawlState::LinksAreInvalid ||
-            m_state == CrawlState::NextLinkIsInvalid ||
-            m_state == CrawlState::Finished;
+            m_state == CrawlState::NextLinkIsInvalid;
+}
+
+bool WebCrawler::shouldDownloadRestartBaseOnCrawlState() const
+{
+    return m_state == CrawlState::DownloadedFileSizeIsLessThanExpected ||
+            m_state == CrawlState::DownloadFailsRepetitively;
+}
+
+bool WebCrawler::isCurrentDownloadFinishedBaseOnCrawlState() const
+{
+    return m_state == CrawlState::CurrentDownloadIsFinished;
 }
 
 void WebCrawler::saveMemoryCard() const
@@ -314,7 +337,7 @@ string WebCrawler::getTitleFromTitleWindow(string const& webLink) const
 {
     string title;
     AlbaWebPathHandler webLinkPathHandler(webLink);
-    AlbaWindowsPathHandler downloadPathHandler(APRG_WEB_CRAWLER_TEMP_HTML_FILE);
+    AlbaWindowsPathHandler downloadPathHandler(getTemporaryFilePath());
     downloadFileAsText(webLinkPathHandler, downloadPathHandler);
     ifstream htmlFileStream(downloadPathHandler.getFullPath());
     if(!htmlFileStream.is_open())
