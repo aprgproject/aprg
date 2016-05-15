@@ -30,11 +30,10 @@ void DoujinMoeCrawler::crawl()
                 m_webCrawler.addWebLink(innerLink);
             }
         }
-        if(m_webCrawler.shouldDownloadStopBaseOnInvalidCrawlState())
+        if(m_webCrawler.isOnInvalidCrawlState())
         {
             break;
-        }
-        else
+        }        else
         {
             m_webCrawler.removeWebLink(webLinkIndex);
             m_webCrawler.saveMemoryCard();
@@ -45,11 +44,10 @@ void DoujinMoeCrawler::crawl()
 
 void DoujinMoeCrawler::crawl(int webLinkIndex)
 {
-    while(!m_webCrawler.shouldDownloadStopBaseOnInvalidCrawlState())
+    while(!m_webCrawler.isOnInvalidCrawlState())
     {
         m_webCrawler.saveStateToMemoryCard(CrawlState::Active);
-        AlbaWebPathHandler webLinkPathHandler(m_webCrawler.getWebLinkAtIndex(webLinkIndex));
-        retrieveLinks(webLinkPathHandler);
+        AlbaWebPathHandler webLinkPathHandler(m_webCrawler.getWebLinkAtIndex(webLinkIndex));        retrieveLinks(webLinkPathHandler);
         if(checkLinks())
         {
             if(!m_innerLinks.empty())
@@ -59,15 +57,14 @@ void DoujinMoeCrawler::crawl(int webLinkIndex)
             }
             downloadImages(webLinkPathHandler);
         }
-        if(m_webCrawler.shouldDownloadRestartBaseOnCrawlState())
+        if(m_webCrawler.isOnCrawlStatesWhichRetryIsNeeded())
         {
             continue;
         }
-        if(m_webCrawler.isCurrentDownloadFinishedBaseOnCrawlState())
+        if(m_webCrawler.isOnCurrentDownloadFinishedCrawlState())
         {
             break;
-        }
-    }
+        }    }
 }
 
 void DoujinMoeCrawler::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandler)
@@ -160,11 +157,10 @@ void DoujinMoeCrawler::downloadImages(AlbaWebPathHandler const& webLinkPathHandl
         if(!downloadBinaryFile(imageWebPathHandler, downloadPathHandler, m_webCrawler.getCrawlMode()))
         {
             cout << "Download fails repetitively. Retrying from the start" << endl;
-            m_webCrawler.saveStateToMemoryCard(CrawlState::DownloadFailsRepetitively);
+            m_webCrawler.saveStateToMemoryCard(CrawlState::DownloadFailsAndRetryIsNeeded);
             return;
         }
-        if(downloadPathHandler.getFileSizeEstimate() < m_configuration.getMinimumFileSize())
-        {
+        if(downloadPathHandler.getFileSizeEstimate() < m_configuration.getMinimumFileSize())        {
             cout << "Image file is less than " << m_configuration.getMinimumFileSize() << ". FileSize = " << downloadPathHandler.getFileSizeEstimate() << " Invalid file. Retrying from the start" << endl;
             m_webCrawler.saveStateToMemoryCard(CrawlState::DownloadedFileSizeIsLessThanExpected);
             return;
