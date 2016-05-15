@@ -30,12 +30,18 @@ void DoujinMoeCrawler::crawl()
                 m_webCrawler.addWebLink(innerLink);
             }
         }
-        m_webCrawler.removeWebLink(webLinkIndex);
-        m_webCrawler.saveMemoryCard();
-        webLinkIndex=0;
+        if(m_webCrawler.shouldDownloadStopBaseOnInvalidCrawlState())
+        {
+            break;
+        }
+        else
+        {
+            m_webCrawler.removeWebLink(webLinkIndex);
+            m_webCrawler.saveMemoryCard();
+            webLinkIndex=0;
+        }
     }
 }
-
 void DoujinMoeCrawler::crawl(int webLinkIndex)
 {
     while(!m_webCrawler.shouldDownloadStopBaseOnInvalidCrawlState())

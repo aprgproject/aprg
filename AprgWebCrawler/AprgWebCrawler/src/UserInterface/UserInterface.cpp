@@ -344,10 +344,13 @@ void UserInterface::readConfigurationFile()
             {
                 state=3;
             }
+            else if("TemporaryFilePath:" == lineFromConfigurationFile)
+            {
+                state=4;
+            }
             else if(1==state)
             {
-                m_workingDirectory = lineFromConfigurationFile;
-            }
+                m_workingDirectory = lineFromConfigurationFile;            }
             else if(2==state)
             {
                 m_workingDirectories.push_back(lineFromConfigurationFile);
@@ -356,19 +359,22 @@ void UserInterface::readConfigurationFile()
             {
                 m_downloadSchedule.push_back(createDownloadDirectoryDetails(lineFromConfigurationFile));
             }
+            else if(4==state)
+            {
+                m_temporaryFilePath = lineFromConfigurationFile;
+            }
         }
     }
 }
-
 void UserInterface::startDownload()
 {
     for(DownloadDirectoryDetails const& downloadDirectoryDetails : m_downloadSchedule)
     {
         WebCrawler crawler(downloadDirectoryDetails.downloadDirectory);
+        crawler.setTemporaryFilePath(m_temporaryFilePath);
         crawler.crawl();
     }
 }
-
 void UserInterface::renameImmediateDirectoryToTitle(string const& downloadDirectory) const
 {
     string title;
