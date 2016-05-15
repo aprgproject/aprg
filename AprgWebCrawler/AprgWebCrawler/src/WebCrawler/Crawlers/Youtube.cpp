@@ -7,7 +7,8 @@
 #include <windows.h>
 
 using namespace alba;
-using namespace alba::stringHelper;using namespace aprgWebCrawler::Downloaders;
+using namespace alba::stringHelper;
+using namespace aprgWebCrawler::Downloaders;
 using namespace std;
 
 namespace aprgWebCrawler
@@ -32,7 +33,8 @@ void Youtube::crawl()
         {
             m_webCrawler.removeWebLink(webLinkIndex);
             m_webCrawler.saveMemoryCard();
-            webLinkIndex=0;        }
+            webLinkIndex=0;
+        }
     }
 }
 
@@ -110,7 +112,8 @@ void Youtube::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandler)
     }
 }
 
-bool Youtube::checkLinks(){
+bool Youtube::checkLinks()
+{
     bool result(true);
     if(areLinksInvalid())
     {
@@ -118,7 +121,8 @@ bool Youtube::checkLinks(){
         printLinks();
         result = false;
     }
-    return result;}
+    return result;
+}
 
 void Youtube::downloadFile(AlbaWebPathHandler const& webLinkPathHandler)
 {
@@ -142,7 +146,8 @@ void Youtube::downloadFile(AlbaWebPathHandler const& webLinkPathHandler)
     /*downloadBinaryFile(videoWebPathHandler, downloadPathHandler, m_webCrawler.getCrawlMode());
     if(downloadPathHandler.getFileSizeEstimate() < m_configuration.getMinimumFileSize())
     {
-        cout << "Download file size is less than " << m_configuration.getMinimumFileSize() << ". FileSize = " << downloadPathHandler.getFileSizeEstimate() << " Invalid file. Retrying from the start" << endl;        m_webCrawler.saveStateToMemoryCard(CrawlState::DownloadedFileSizeIsLessThanExpected);
+        cout << "Download file size is less than " << m_configuration.getMinimumFileSize() << ". FileSize = " << downloadPathHandler.getFileSizeEstimate() << " Invalid file. Retrying from the start" << endl;
+        m_webCrawler.saveStateToMemoryCard(CrawlState::DownloadedFileSizeIsLessThanExpected);
     }
     else
     {
@@ -151,7 +156,8 @@ void Youtube::downloadFile(AlbaWebPathHandler const& webLinkPathHandler)
     m_webCrawler.saveStateToMemoryCard(CrawlState::CurrentDownloadIsFinished);
 }
 
-void Youtube::clearLinks(){
+void Youtube::clearLinks()
+{
     m_linkForVideo.clear();
     m_localPathForCurrentVideo.clear();
 }

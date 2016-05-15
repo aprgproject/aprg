@@ -42,6 +42,7 @@ void Y8Crawler::crawl()
         }
     }
 }
+
 void Y8Crawler::crawl(int webLinkIndex)
 {
     while(!m_webCrawler.shouldDownloadStopBaseOnInvalidCrawlState())

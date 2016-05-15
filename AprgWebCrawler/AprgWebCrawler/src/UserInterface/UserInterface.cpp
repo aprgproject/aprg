@@ -350,7 +350,8 @@ void UserInterface::readConfigurationFile()
             }
             else if(1==state)
             {
-                m_workingDirectory = lineFromConfigurationFile;            }
+                m_workingDirectory = lineFromConfigurationFile;
+            }
             else if(2==state)
             {
                 m_workingDirectories.push_back(lineFromConfigurationFile);
@@ -366,6 +367,7 @@ void UserInterface::readConfigurationFile()
         }
     }
 }
+
 void UserInterface::startDownload()
 {
     for(DownloadDirectoryDetails const& downloadDirectoryDetails : m_downloadSchedule)
@@ -375,6 +377,7 @@ void UserInterface::startDownload()
         crawler.crawl();
     }
 }
+
 void UserInterface::renameImmediateDirectoryToTitle(string const& downloadDirectory) const
 {
     string title;

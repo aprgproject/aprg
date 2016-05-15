@@ -42,6 +42,7 @@ void DoujinMoeCrawler::crawl()
         }
     }
 }
+
 void DoujinMoeCrawler::crawl(int webLinkIndex)
 {
     while(!m_webCrawler.shouldDownloadStopBaseOnInvalidCrawlState())

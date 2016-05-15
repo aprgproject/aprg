@@ -14,7 +14,8 @@
 
 using namespace alba;
 using namespace alba::stringHelper;
-using namespace aprgWebCrawler::Downloaders;using namespace std;
+using namespace aprgWebCrawler::Downloaders;
+using namespace std;
 
 namespace aprgWebCrawler
 {
@@ -116,6 +117,7 @@ string WebCrawler::getDownloadDirectory() const
 {
     return m_downloadDirectoryPathHandler.getDirectory();
 }
+
 string WebCrawler::getNewDirectoryName() const
 {
     return getNewDirectoryNameFromWeblink(getFirstWebLinkIfPossible());
@@ -181,7 +183,8 @@ string WebCrawler::getWebLinkAtIndex(int index)
 string WebCrawler::getFirstWebLinkIfPossible() const
 {
     string webLink;
-    if(!m_webLinks.empty())    {
+    if(!m_webLinks.empty())
+    {
         webLink = *(m_webLinks.begin());
     }
     return webLink;
@@ -210,6 +213,7 @@ void WebCrawler::modifyWebLink(string const& webLink, int index)
 {
     m_webLinks[index]=webLink;
 }
+
 void WebCrawler::removeWebLink(int index)
 {
     m_webLinks.erase(m_webLinks.begin()+index);
