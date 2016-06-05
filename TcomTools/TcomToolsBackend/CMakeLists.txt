@@ -21,7 +21,8 @@ include(${APRG_DIR}/AprgAlgorithm/AprgCmakeInclude/AprgAlgorithm.cmake)
 
 set(SOURCES
     src/BtsLogPrint.cpp
-    src/BtsLogPrint.hpp    src/BtsLogSorter.cpp
+    src/BtsLogPrint.hpp
+    src/BtsLogSorter.cpp
     src/BtsLogSorter.hpp
     src/BtsLogSorterConfiguration.hpp
     src/BtsLogTime.cpp

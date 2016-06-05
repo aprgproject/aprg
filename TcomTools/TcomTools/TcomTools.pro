@@ -31,6 +31,7 @@ src/TcomToolsConfiguration.cpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.cpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaWindowsPathHandler.cpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.cpp
+
 HEADERS += \
 src/ProgressCounters.hpp\
 src/ProgressBarThread.hpp\
@@ -51,6 +52,7 @@ src/TcomToolsConfiguration.hpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.hpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaWindowsPathHandler.hpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.hpp
+
 FORMS += src/TcomTools.ui
 
 QMAKE_INCDIR += \
@@ -61,6 +63,7 @@ src\
 ../../AprgCommon/AprgCommon/src
 
 QMAKE_LFLAGS += -Wl,-subsystem,windows
+
 DEFINES -= UNICODE
 
 CONFIG += c++11 console
