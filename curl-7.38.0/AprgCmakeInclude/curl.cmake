@@ -15,7 +15,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCURL_STATICLIB -DHAVE_ZLIB_H -DHAVE_LI
 
 set(CURL_LIB_SOURCES
     ${CURL_DIR}/include/curl/curl.h
-    ${CURL_DIR}/include/curl/curlbuild.h    ${CURL_DIR}/include/curl/curlrules.h
+    ${CURL_DIR}/include/curl/curlbuild.h
+    ${CURL_DIR}/include/curl/curlrules.h
     ${CURL_DIR}/include/curl/curlver.h
     ${CURL_DIR}/include/curl/easy.h
     ${CURL_DIR}/include/curl/mprintf.h

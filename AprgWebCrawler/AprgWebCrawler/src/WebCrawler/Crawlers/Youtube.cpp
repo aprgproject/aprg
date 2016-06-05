@@ -2,7 +2,6 @@
 #include <AlbaStringHelper.hpp>
 #include <Crawlers/Youtube.hpp>
 #include <CrawlHelpers/Downloaders.hpp>
-#include <CrawlHelpers/AutomationHelper.hpp>
 #include <iostream>
 #include <windows.h>
 
@@ -36,7 +35,8 @@ void Youtube::crawl()
             m_webCrawler.addWebLink(m_webCrawler.getWebLinkAtIndex(webLinkIndex));
             m_webCrawler.removeWebLink(webLinkIndex);
             m_webCrawler.saveMemoryCard();
-            webLinkIndex=0;        }
+            webLinkIndex=0;
+        }
     }
 }
 
@@ -53,6 +53,7 @@ void Youtube::crawl(int webLinkIndex)
         }
     }
 }
+
 bool Youtube::checkIfYoutubeLink(AlbaWebPathHandler const& webLinkPathHandler)
 {
     bool result(true);
@@ -73,7 +74,7 @@ void Youtube::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandler)
     AlbaWebPathHandler ssYoutubeLinkPathHandler(ssYoutubeLink);
     AlbaWindowsPathHandler downloadPathHandler(m_webCrawler.getTemporaryFilePath());
     downloadPathHandler.deleteFile();
-    AutomationHelper::saveWebPageManuallyUsingMozillaFirefox(ssYoutubeLinkPathHandler.getFullPath());
+    m_automationHelper.saveWebPageManuallyUsingMozillaFirefox(ssYoutubeLinkPathHandler.getFullPath());
     ifstream htmlFileStream(downloadPathHandler.getFullPath());
     if(!htmlFileStream.is_open())
     {
@@ -112,7 +113,8 @@ bool Youtube::checkLinks()
         m_webCrawler.saveStateToMemoryCard(CrawlState::LinksAreInvalid);
         result = false;
     }
-    return result;}
+    return result;
+}
 
 void Youtube::downloadFile(AlbaWebPathHandler const& webLinkPathHandler)
 {
@@ -124,7 +126,7 @@ void Youtube::downloadFile(AlbaWebPathHandler const& webLinkPathHandler)
     temporaryPath.input(temporaryPath.getDirectory());
     temporaryPath.findFilesAndDirectoriesOneDepth("*.*", files, directories);
     unsigned int initialNumberOfFiles(files.size());
-    AutomationHelper::downloadLinkUsingMozillaFirefoxAndFdm(videoWebPathHandler.getFullPath());
+    m_automationHelper.downloadLinkUsingMozillaFirefoxAndFdm(videoWebPathHandler.getFullPath());
     temporaryPath.findFilesAndDirectoriesOneDepth("*.*", files, directories);
     if(initialNumberOfFiles+1 == files.size())
     {
@@ -138,7 +140,8 @@ void Youtube::downloadFile(AlbaWebPathHandler const& webLinkPathHandler)
             cout<<"\risNotFinished:"<<isNotFinished<<" numberOfIncompleteFiles:"<<files.size();
             isNotFinished = !files.empty();
             Sleep(10000);
-        }        m_webCrawler.saveStateToMemoryCard(CrawlState::CurrentDownloadIsFinished);
+        }
+        m_webCrawler.saveStateToMemoryCard(CrawlState::CurrentDownloadIsFinished);
     }
     else
     {
@@ -146,7 +149,8 @@ void Youtube::downloadFile(AlbaWebPathHandler const& webLinkPathHandler)
     }
 }
 
-void Youtube::clearLinks(){
+void Youtube::clearLinks()
+{
     m_linkForVideo.clear();
     m_localPathForCurrentVideo.clear();
 }

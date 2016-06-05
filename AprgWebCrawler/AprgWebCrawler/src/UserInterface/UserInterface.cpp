@@ -314,7 +314,8 @@ void UserInterface::writeConfigurationFile() const
         configurationFile << m_temporaryFilePath << endl;
         configurationFile<<"DownloadSchedule:"<<endl;
         for(DownloadDirectoryDetails const& downloadDirectoryDetails : m_downloadSchedule)
-        {            configurationFile << downloadDirectoryDetails.downloadDirectory << endl;
+        {
+            configurationFile << downloadDirectoryDetails.downloadDirectory << endl;
         }
     }
 }
@@ -348,7 +349,8 @@ void UserInterface::readConfigurationFile()
             else if("DownloadSchedule:" == lineFromConfigurationFile)
             {
                 state=4;
-            }            else if(1==state)
+            }
+            else if(1==state)
             {
                 m_workingDirectory = lineFromConfigurationFile;
             }
@@ -365,7 +367,8 @@ void UserInterface::readConfigurationFile()
                 m_downloadSchedule.push_back(createDownloadDirectoryDetails(lineFromConfigurationFile));
             }
         }
-    }}
+    }
+}
 
 void UserInterface::startDownload()
 {
@@ -375,6 +378,7 @@ void UserInterface::startDownload()
         crawler.crawl();
     }
 }
+
 void UserInterface::renameImmediateDirectoryToTitle(string const& downloadDirectory) const
 {
     string title;
@@ -382,7 +386,8 @@ void UserInterface::renameImmediateDirectoryToTitle(string const& downloadDirect
         WebCrawler crawler(downloadDirectory, m_temporaryFilePath);
         title = crawler.getNewDirectoryName();
     }
-    cout << "WebCrawler::renameImmediateToTitle | downloadDirectory: " << downloadDirectory << " title: " << title << endl;    if(!title.empty())
+    cout << "WebCrawler::renameImmediateToTitle | downloadDirectory: " << downloadDirectory << " title: " << title << endl;
+    if(!title.empty())
     {
         AlbaWindowsPathHandler directoryPathHandler(downloadDirectory);
         cout<<"Directory rename error code is " << directoryPathHandler.renameImmediateDirectory(title) << endl;
@@ -408,7 +413,8 @@ void UserInterface::createBatchFile() const
             WebCrawler crawler(directory, m_temporaryFilePath);
             string newDirectoryName(crawler.getNewDirectoryName());
             if(newDirectoryName.empty())
-            {                newDirectoryName = getStringWithoutStartingAndTrailingCharacters(
+            {
+                newDirectoryName = getStringWithoutStartingAndTrailingCharacters(
                             getStringAndReplaceNonAlphanumericCharactersToUnderScore(
                                 directoryPathHandler.getImmediateDirectoryName()), "_");
             }
@@ -426,7 +432,8 @@ DownloadDirectoryDetails UserInterface::createDownloadDirectoryDetails(string co
     WebCrawler crawler(downloadDirectory, m_temporaryFilePath);
     DownloadDirectoryDetails downloadDirectoryDetails =
     {
-        downloadDirectory,        crawler.getCrawlMode(),
+        downloadDirectory,
+        crawler.getCrawlMode(),
         crawler.getCrawlState(),
         crawler.getCrawlModeString(),
         crawler.getCrawlStateString()
@@ -439,7 +446,8 @@ DownloadDirectoryDetails UserInterface::createDownloadDirectoryDetails(string co
     WebCrawler crawler(workingDirectory, webLink, m_temporaryFilePath);
     DownloadDirectoryDetails downloadDirectoryDetails =
     {
-        crawler.getDownloadDirectory(),        crawler.getCrawlMode(),
+        crawler.getDownloadDirectory(),
+        crawler.getCrawlMode(),
         crawler.getCrawlState(),
         crawler.getCrawlModeString(),
         crawler.getCrawlStateString()

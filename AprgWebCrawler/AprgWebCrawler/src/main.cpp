@@ -7,6 +7,7 @@
 
 using namespace aprgWebCrawler;
 using namespace std;
+
 int main(int argc, char** argv)
 {
     if(argc < 2)
@@ -20,6 +21,7 @@ int main(int argc, char** argv)
         WebCrawler crawler(path, APRG_CRAWLER_TEMPORARY_FILE_PATH);
         crawler.printStatus();
         crawler.crawl();
-    }    return 0;
+    }
+    return 0;
 }
 

@@ -18,7 +18,8 @@ include(${APRG_DIR}/CurlCpp/AprgCmakeInclude/CurlCpp.cmake)
 
 set(SOURCES
     src/UserInterface/UserInterface.cpp
-    src/UserInterface/UserInterface.hpp    src/main.cpp
+    src/UserInterface/UserInterface.hpp
+    src/main.cpp
     src/WebCrawler/CrawlConfiguration/CrawlConfiguration.cpp
     src/WebCrawler/CrawlConfiguration/CrawlConfiguration.hpp
     src/WebCrawler/Crawlers/ChiaAnimeCrawler.cpp

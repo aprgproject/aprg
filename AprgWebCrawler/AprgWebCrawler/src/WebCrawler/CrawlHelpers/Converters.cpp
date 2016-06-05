@@ -148,7 +148,8 @@ CrawlState WebCrawler::convertStringToCrawlerState(string const& stateString) co
         state = CrawlState::DownloadFailsAndRetryIsNeeded;
     }
     else if("CrawlState::LinksAreInvalid" == stateString)
-    {        state = CrawlState::LinksAreInvalid;
+    {
+        state = CrawlState::LinksAreInvalid;
     }
     else if("CrawlState::NextLinkIsInvalid" == stateString)
     {
@@ -196,7 +197,8 @@ string WebCrawler::convertCrawlerStateToString(CrawlState state) const
             GET_ENUM_STRING(CrawlState::DownloadFailsAndRetryIsNeeded)
             GET_ENUM_STRING(CrawlState::LinksAreInvalid)
             GET_ENUM_STRING(CrawlState::NextLinkIsInvalid)
-    }    return "";
+    }
+    return "";
 }
 
 #undef GET_ENUM_STRING

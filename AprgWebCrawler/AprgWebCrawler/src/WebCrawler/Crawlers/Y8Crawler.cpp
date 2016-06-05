@@ -33,7 +33,8 @@ void Y8Crawler::crawl()
         if(m_webCrawler.isOnInvalidCrawlState())
         {
             break;
-        }        else
+        }
+        else
         {
             m_webCrawler.removeWebLink(webLinkIndex);
             m_webCrawler.saveMemoryCard();
@@ -47,7 +48,8 @@ void Y8Crawler::crawl(int webLinkIndex)
     while(!m_webCrawler.isOnInvalidCrawlState())
     {
         m_webCrawler.saveStateToMemoryCard(CrawlState::Active);
-        AlbaWebPathHandler webLinkPathHandler(m_webCrawler.getWebLinkAtIndex(webLinkIndex));        retrieveLinks(webLinkPathHandler);
+        AlbaWebPathHandler webLinkPathHandler(m_webCrawler.getWebLinkAtIndex(webLinkIndex));
+        retrieveLinks(webLinkPathHandler);
         if(checkLinks())
         {
             downloadFile(webLinkPathHandler);
@@ -59,7 +61,8 @@ void Y8Crawler::crawl(int webLinkIndex)
         if(m_webCrawler.isOnCurrentDownloadFinishedCrawlState())
         {
             break;
-        }    }
+        }
+    }
 }
 
 void Y8Crawler::addWebLinksIfFound(int webLinkIndex)

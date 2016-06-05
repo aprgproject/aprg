@@ -19,6 +19,7 @@ public:
     WebCrawler(std::string const& workingDirectory, std::string const& webLink, std::string const& temporaryFilePath);
 
     void crawl();
+
     CrawlMode getCrawlMode() const;
     CrawlState getCrawlState() const;
     std::string getCrawlModeString() const;
@@ -42,7 +43,8 @@ public:
     bool isOnCurrentDownloadFinishedCrawlState() const;
 
     void saveMemoryCard() const;
-    void saveStateToMemoryCard(CrawlState state);    void loadMemoryCard();
+    void saveStateToMemoryCard(CrawlState state);
+    void loadMemoryCard();
 
     void printStatus() const;
 
