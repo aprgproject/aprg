@@ -20,25 +20,25 @@ using namespace std;
 namespace aprgWebCrawler
 {
 
-WebCrawler::WebCrawler(string const& downloadDirectory)
+WebCrawler::WebCrawler(string const& downloadDirectory, string const& temporaryFilePath)
     : m_mode(CrawlMode::Unknown)
     , m_state(CrawlState::Unknown)
+    , m_temporaryFilePath(temporaryFilePath)
     , m_downloadDirectoryPathHandler(downloadDirectory + R"(\)")
     , m_memoryCardPathHandler(downloadDirectory + R"(\MemoryCard.txt)")
-{
-    if (m_memoryCardPathHandler.isFoundInLocalSystem() && m_memoryCardPathHandler.isFile())
+{    if (m_memoryCardPathHandler.isFoundInLocalSystem() && m_memoryCardPathHandler.isFile())
     {
         loadMemoryCard();
     }
 }
 
-WebCrawler::WebCrawler(string const& workingDirectory, string const& webLink)
+WebCrawler::WebCrawler(string const& workingDirectory, string const& webLink, string const& temporaryFilePath)
     : m_mode(convertWebLinkToCrawlerMode(webLink))
     , m_state(CrawlState::Unknown)
+    , m_temporaryFilePath(temporaryFilePath)
     , m_downloadDirectoryPathHandler(workingDirectory + R"(\)" + getNewDirectoryNameFromWeblink(webLink) + R"(\)")
     , m_memoryCardPathHandler(m_downloadDirectoryPathHandler.getFullPath() + R"(\MemoryCard.txt)")
-{
-    m_webLinks.push_back(webLink);
+{    m_webLinks.push_back(webLink);
     m_memoryCardPathHandler.createDirectoriesForNonExisitingDirectories();
     saveMemoryCard();
     m_downloadDirectoryPathHandler.reInput();
