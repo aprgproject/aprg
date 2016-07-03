@@ -112,14 +112,17 @@ void WireSharkLogReader::processFileForMsgQueuingTime(string const& filePath)
     while(fileReader.isNotFinished())
     {
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
-
-        int msgQueuingTime = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "msgQueuingTime: "));
-        totalMsgQueuingTime += msgQueuingTime;
-        if(msgQueuingTime > highestMsgQueuingTime)
+        if(stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(lineInLogs, "MSG TIME, start queuing time"))
         {
-            highestMsgQueuingTime = msgQueuingTime;
+            int msgQueuingTime = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "msgQueuingTime: "));
+            totalMsgQueuingTime += msgQueuingTime;
+            if(msgQueuingTime > highestMsgQueuingTime)
+            {
+                highestMsgQueuingTime = msgQueuingTime;
+            }
+            m_outputStream<<msgQueuingTime<<","<<lineInLogs<<endl;
+            numberOfPrints++;
         }
-        numberOfPrints++;
     }
     cout<<"TotalMsgQueuingTime: "<<totalMsgQueuingTime<<" highestMsgQueuingTime: "<<highestMsgQueuingTime<<" AverageMsgQueuingTime: "<<((double)totalMsgQueuingTime)/numberOfPrints<<" numberOfPrints: "<<numberOfPrints<<endl;
 }
@@ -128,11 +131,11 @@ void WireSharkLogReader::processFileForMsgQueuingTime(string const& filePath)
 void WireSharkLogReader::processFileForBtsDelayForRlh(string const& filePath)
 {
     AlbaWindowsPathHandler filePathHandler(filePath);
-    cout<<"processFile: "<<filePathHandler.getFullPath()<<endl;
-
-    m_outputStream<<"crnccId,nbccId,transactionId,delay"<<endl;
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
+    cout<<"processFile: "<<filePathHandler.getFullPath() << " isOpen: " << inputLogFileStream.is_open() << " fileReader: " << fileReader.isNotFinished() <<endl;
+
+    m_outputStream<<"crnccId,nbccId,transactionId,delay"<<endl;
     while(fileReader.isNotFinished())
     {
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
@@ -344,11 +347,6 @@ void WireSharkLogReader::processFileForBtsDelayForMikhailKnife(string const& fil
         {
             if(messageDeliveryInstance.startTimeOptional.getReference() < messageDeliveryInstance.endTimeOptional.getReference())
             {
-                if(uniqueKey.crnccId==6077)
-                {
-                    cout<<messageDeliveryInstance.startTimeOptional.getReference().getEquivalentString()<<endl;
-                    cout<<messageDeliveryInstance.endTimeOptional.getReference().getEquivalentString()<<endl;
-                }
 
                 BtsLogTime delayTime = messageDeliveryInstance.endTimeOptional.getReference() - messageDeliveryInstance.startTimeOptional.getReference();
                 int delay = delayTime.getMicroSeconds()+delayTime.getSeconds()*1000000;

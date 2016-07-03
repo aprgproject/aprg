@@ -16,7 +16,7 @@ public:
     void* getBufferPointer();
     void reAllocateBuffer(unsigned int size);
     void releaseBufferIfNeeded();
-    void setBuffer(void* bufferPointer, unsigned int size);
+    void setNewBuffer(void* bufferPointer, unsigned int size);
 
 private:
     bool m_hasContent;

@@ -31,6 +31,7 @@ std::string getStringWithLowerCaseLetters(std::string const& mainString);
 std::string getStringWithUrlDecodedString(std::string const& mainString);
 std::string getStringWithoutStartingAndTrailingCharacters(std::string const& mainString, std::string const& characters);
 std::string getStringWithoutStartingAndTrailingWhiteSpace(std::string const& mainString);
+std::string getStringWithoutWhiteSpace(std::string const& mainString);
 std::string getStringWithoutRedundantWhiteSpace(std::string const& mainString);
 std::string getStringWithoutQuotations(std::string const& mainString);
 std::string getStringWithoutCharAtTheStartAndEnd(std::string const& mainString, char const char1);

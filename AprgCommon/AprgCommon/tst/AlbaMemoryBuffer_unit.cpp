@@ -16,7 +16,7 @@ TEST(AlbaMemoryBufferTest, PrimitiveTypesCanBeSaved)
 {
     AlbaMemoryBuffer buffer;
     int input = 11111111;
-    buffer.setBuffer((void*)&input, sizeof(input));
+    buffer.setNewBuffer((void*)&input, sizeof(input));
     int output = *reinterpret_cast<int*>(buffer.getBufferPointer());
 
     EXPECT_TRUE(buffer);
@@ -28,7 +28,7 @@ TEST(AlbaMemoryBufferTest, MemoryBufferCanBeCopied)
 {
     AlbaMemoryBuffer buffer;
     int input = 11111111;
-    buffer.setBuffer((void*)&input, sizeof(input));
+    buffer.setNewBuffer((void*)&input, sizeof(input));
     AlbaMemoryBuffer buffer2(buffer);
     int output = *reinterpret_cast<int*>(buffer2.getBufferPointer());
 
@@ -41,8 +41,8 @@ TEST(AlbaMemoryBufferTest, PrimitiveTypesCanBeSavedConsecutively2Times)
 {
     AlbaMemoryBuffer buffer;
     int input = 11111111, input2 = 22222222;
-    buffer.setBuffer((void*)&input, sizeof(input));
-    buffer.setBuffer((void*)&input2, sizeof(input2));
+    buffer.setNewBuffer((void*)&input, sizeof(input));
+    buffer.setNewBuffer((void*)&input2, sizeof(input2));
     int output = *reinterpret_cast<int*>(buffer.getBufferPointer());
 
     EXPECT_TRUE(buffer);
@@ -64,7 +64,7 @@ TEST(AlbaMemoryBufferTest, StructureCanBeSaved)
     input.param1 = true;
     input.param2 = 12345678;
     input.param3 = 1.234E56;
-    buffer.setBuffer((void*)&input, sizeof(input));
+    buffer.setNewBuffer((void*)&input, sizeof(input));
     Sample output = *reinterpret_cast<Sample *>(buffer.getBufferPointer());
 
     EXPECT_TRUE(buffer);
