@@ -6,6 +6,7 @@
 
 namespace DesignDocumentCreator
 {
+
 class GenericMessage
 {
 public:

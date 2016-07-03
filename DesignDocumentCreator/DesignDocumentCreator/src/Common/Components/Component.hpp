@@ -7,6 +7,7 @@
 
 namespace DesignDocumentCreator
 {
+
 class Component
 {
 public:

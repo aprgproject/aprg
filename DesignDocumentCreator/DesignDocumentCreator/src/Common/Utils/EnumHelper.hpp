@@ -6,6 +6,7 @@
 
 namespace DesignDocumentCreator
 {
+
 namespace EnumHelper
 {
     std::string convertToString(ComponentName const componentName);

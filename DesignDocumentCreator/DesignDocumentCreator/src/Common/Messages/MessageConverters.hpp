@@ -5,6 +5,7 @@
 
 namespace DesignDocumentCreator
 {
+
 template<MessageName messageName>
 SpecificMessage<messageName> convertGenericToSpecific(GenericMessage& genericMessage)
 {

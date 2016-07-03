@@ -4,6 +4,7 @@
 
 namespace DesignDocumentCreator
 {
+
 //singleton?
 
 class Environment

@@ -4,7 +4,8 @@
 #include <Common/Messages/MessageName.hpp>
 #include <string>
 
-namespace DesignDocumentCreator{
+namespace DesignDocumentCreator
+{
 
 template <MessageName messageName>
 struct MessageWrapper

@@ -5,6 +5,7 @@
 
 namespace DesignDocumentCreator
 {
+
 class SampleComponent : public Component
 {
 public:

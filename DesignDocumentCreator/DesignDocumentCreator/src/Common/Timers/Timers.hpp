@@ -4,6 +4,7 @@
 
 namespace DesignDocumentCreator
 {
+
 typedef unsigned int TimerId;
 
 class Timer

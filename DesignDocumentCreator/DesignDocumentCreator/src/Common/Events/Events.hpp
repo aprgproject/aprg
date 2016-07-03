@@ -5,6 +5,7 @@
 
 namespace DesignDocumentCreator
 {
+
 enum EventType
 {
     MessageEvent,
