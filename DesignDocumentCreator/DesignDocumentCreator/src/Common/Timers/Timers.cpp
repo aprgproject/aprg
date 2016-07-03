@@ -1,8 +1,7 @@
-#include "Timers.hpp"
+#include <Common/Timers/Timers.hpp>
 
 namespace DesignDocumentCreator
 {
-
 Timer::Timer()
     : m_timerType(TimerType::EMPTY)
     , m_timerId(0)

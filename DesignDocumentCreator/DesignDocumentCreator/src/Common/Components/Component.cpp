@@ -1,8 +1,7 @@
-#include "Component.hpp"
+#include <Common/Components/Component.hpp>
 #include <iostream>
 
 using namespace std;
-
 namespace DesignDocumentCreator
 {
 

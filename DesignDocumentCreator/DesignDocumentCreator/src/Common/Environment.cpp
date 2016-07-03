@@ -1,10 +1,8 @@
-#include "Environment.hpp"
-
+#include <Common/Environment.hpp>
+#include <Common/Utils/EnumHelper.hpp>
 #include <iostream>
-#include <Utils/EnumHelper.hpp>
 
 using namespace std;
-
 namespace DesignDocumentCreator
 {
 

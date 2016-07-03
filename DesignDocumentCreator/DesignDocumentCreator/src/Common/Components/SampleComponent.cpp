@@ -1,10 +1,8 @@
-#include "SampleComponent.hpp"
-
+#include <Common/Components/SampleComponent.hpp>
+#include <Common/Utils/EnumHelper.hpp>
 #include <iostream>
-#include <utils/EnumHelper.hpp>
 
 using namespace std;
-
 namespace DesignDocumentCreator
 {
 

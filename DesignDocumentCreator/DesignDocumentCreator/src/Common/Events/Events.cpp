@@ -1,8 +1,7 @@
-#include "Events.hpp"
+#include <Common/Events/Events.hpp>
 
 namespace DesignDocumentCreator
 {
-
 Event::Event(GenericMessage const& message)
     : m_eventType(EventType::MessageEvent)
     , m_message(message)

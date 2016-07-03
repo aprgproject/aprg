@@ -1,11 +1,10 @@
 #pragma once
 
-#include <Messages/GenericMessage.hpp>
-#include <Messages/SpecificMessage.hpp>
+#include <Common/Messages/GenericMessage.hpp>
+#include <Common/Messages/SpecificMessage.hpp>
 
 namespace DesignDocumentCreator
 {
-
 template<MessageName messageName>
 SpecificMessage<messageName> convertGenericToSpecific(GenericMessage& genericMessage)
 {

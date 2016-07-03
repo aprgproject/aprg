@@ -1,12 +1,11 @@
 #pragma once
 
-#include <Components//ComponentName.hpp>
-#include <Messages/MessageName.hpp>
-#include <Messages/MessageWrapper.hpp>
+#include <Common/Components//ComponentName.hpp>
+#include <Common/Messages/MessageName.hpp>
+#include <Common/Messages/MessageWrapper.hpp>
 
 namespace DesignDocumentCreator
 {
-
 template<MessageName messageName>
 class SpecificMessage
 {
