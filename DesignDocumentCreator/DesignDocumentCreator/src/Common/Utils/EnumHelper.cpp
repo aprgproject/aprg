@@ -13,20 +13,20 @@ std::string EnumHelper::convertToString(ComponentName const componentName)
     {
     GET_ENUM_STRING(ComponentName::EMPTY)
             GET_ENUM_STRING(ComponentName::SampleComponent)
+        #include <FeatureSpecificFiles/ConvertToStringComponentName.hpp>
     }
     return "";
 }
-
 std::string EnumHelper::convertToString(MessageName const messageName)
 {
     switch(messageName)
     {
     GET_ENUM_STRING(MessageName::EMPTY)
             GET_ENUM_STRING(MessageName::MESSAGE_SAMPLE)
+        #include <FeatureSpecificFiles/ConvertToStringMessageName.hpp>
     }
     return "";
 }
-
 std::string EnumHelper::convertToString(TimerType const timerType)
 {
     switch(timerType)
