@@ -1,4 +1,4 @@
-#include "WireSharkLogReader.hpp"
+#include <BtsLogAnalyzer.hpp>
 
 #include <AlbaFileReader.hpp>
 #include <AlbaStringHelper.hpp>
@@ -14,12 +14,12 @@ using namespace tcomToolsBackend;
 namespace alba
 {
 
-WireSharkLogReader::WireSharkLogReader()
+BtsLogAnalyzer::BtsLogAnalyzer()
     : m_totalDelay(0)
     , m_count(0)
 {}
 
-WireSharkLogReader::WireSharkLogReader(string const pathOfOutputFile)
+BtsLogAnalyzer::BtsLogAnalyzer(string const pathOfOutputFile)
     : m_outputStream(pathOfOutputFile)
     , m_totalDelay(0)
     , m_count(0)
@@ -30,7 +30,7 @@ WireSharkLogReader::WireSharkLogReader(string const pathOfOutputFile)
     }
 }
 
-void WireSharkLogReader::processFileForToCountUsersWithTracing(string const& filePath)
+void BtsLogAnalyzer::processFileForToCountUsersWithTracing(string const& filePath)
 {
     AlbaWindowsPathHandler filePathHandler(filePath);
     cout<<"processFile: "<<filePathHandler.getFullPath()<<endl;
@@ -62,7 +62,7 @@ void WireSharkLogReader::processFileForToCountUsersWithTracing(string const& fil
     }
 }
 
-void WireSharkLogReader::processDirectoryForWireSharkDelay(string const& directoryPath)
+void BtsLogAnalyzer::processDirectoryForWireSharkDelay(string const& directoryPath)
 {
     set<string> listOfFiles;
     set<string> listOfDirectories;
@@ -73,7 +73,7 @@ void WireSharkLogReader::processDirectoryForWireSharkDelay(string const& directo
     }
 }
 
-void WireSharkLogReader::processFileForWireSharkDelay(string const& filePath)
+void BtsLogAnalyzer::processFileForWireSharkDelay(string const& filePath)
 {
     m_wireSharkDelays.clear();
     cout<<"processFile: "<<AlbaWindowsPathHandler(filePath).getFile()<<endl;
@@ -131,7 +131,7 @@ void WireSharkLogReader::processFileForWireSharkDelay(string const& filePath)
     }
 }
 
-void WireSharkLogReader::processFileForMsgQueuingTime(string const& filePath)
+void BtsLogAnalyzer::processFileForMsgQueuingTime(string const& filePath)
 {
     AlbaWindowsPathHandler filePathHandler(filePath);
     cout<<"processFile: "<<filePathHandler.getFullPath()<<endl;
@@ -160,7 +160,7 @@ void WireSharkLogReader::processFileForMsgQueuingTime(string const& filePath)
 }
 
 
-void WireSharkLogReader::processFileForBtsDelayForRlh(string const& filePath)
+void BtsLogAnalyzer::processFileForBtsDelayForRlh(string const& filePath)
 {
     AlbaWindowsPathHandler filePathHandler(filePath);
     ifstream inputLogFileStream(filePath);
@@ -210,7 +210,7 @@ void WireSharkLogReader::processFileForBtsDelayForRlh(string const& filePath)
     }
 }
 
-void WireSharkLogReader::processFileForBtsDelayForRlDeletion(string const& filePath)
+void BtsLogAnalyzer::processFileForBtsDelayForRlDeletion(string const& filePath)
 {
     AlbaWindowsPathHandler filePathHandler(filePath);
     cout<<"processFile: "<<filePathHandler.getFullPath()<<endl;
@@ -260,7 +260,7 @@ void WireSharkLogReader::processFileForBtsDelayForRlDeletion(string const& fileP
     }
 }
 
-void WireSharkLogReader::processFileForBtsDelayForMikhailKnife(string const& filePath)
+void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePath)
 {
     AlbaWindowsPathHandler filePathHandler(filePath);
     cout<<"processFile: "<<filePathHandler.getFullPath()<<endl;
@@ -409,7 +409,7 @@ void WireSharkLogReader::processFileForBtsDelayForMikhailKnife(string const& fil
     cout<<"rlSetupTotal: "<<rlSetupTotal<<" count: "<<rlSetupCount<<" average:"<<rlSetupTotal/rlSetupCount<<endl;
 }
 
-void WireSharkLogReader::processFileForBtsDelayForGrm(string const& filePath)
+void BtsLogAnalyzer::processFileForBtsDelayForGrm(string const& filePath)
 {
     AlbaWindowsPathHandler filePathHandler(filePath);
     cout<<"processFile: "<<filePathHandler.getFullPath()<<endl;
@@ -467,7 +467,7 @@ void WireSharkLogReader::processFileForBtsDelayForGrm(string const& filePath)
     }
 }
 
-double WireSharkLogReader::getWireSharkTime(string const& lineInLogs) const
+double BtsLogAnalyzer::getWireSharkTime(string const& lineInLogs) const
 {
     int length(lineInLogs.length());
     int startIndexOfTime=0, endIndexOfTime=0;
@@ -481,7 +481,7 @@ double WireSharkLogReader::getWireSharkTime(string const& lineInLogs) const
     return stringHelper::convertStringToNumber<double>(lineInLogs.substr(startIndexOfTime, endIndexOfTime-startIndexOfTime));
 }
 
-string WireSharkLogReader::getNumberAfterThisString(string const& mainString, string const& stringToSearch) const
+string BtsLogAnalyzer::getNumberAfterThisString(string const& mainString, string const& stringToSearch) const
 {
     string result;
     int firstIndexOfFirstString = mainString.find(stringToSearch);
@@ -495,7 +495,7 @@ string WireSharkLogReader::getNumberAfterThisString(string const& mainString, st
     return result;
 }
 
-double WireSharkLogReader::getComputedAverageDelay() const
+double BtsLogAnalyzer::getComputedAverageDelay() const
 {
     cout<<"totalDelay: "<<m_totalDelay<<" count: "<<m_count<<endl;
     return (double)m_totalDelay/m_count;
