@@ -3,6 +3,7 @@
 #include <FeatureSpecificFiles/ComponentsIncludes.hpp>
 
 using namespace std;
+
 namespace DesignDocumentCreator
 {
 
@@ -15,6 +16,7 @@ Components::Components()
 
 #undef ADD_COMPONENT
 }
+
 Component* Components::getComponentPointer(ComponentName const componentName)
 {
     if(isComponentExisting(componentName))
