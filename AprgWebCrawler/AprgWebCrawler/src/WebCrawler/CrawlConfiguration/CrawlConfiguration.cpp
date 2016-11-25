@@ -34,7 +34,8 @@ CrawlConfiguration::CrawlConfiguration(CrawlMode mode)
         m_minimumFileSize = 1000;
         break;
     case CrawlMode::Youtube:
-        m_isFileToBeDownloadUntilSuccessful=true;        m_numberOfRetries = 0;
+        m_isFileToBeDownloadUntilSuccessful=true;
+        m_numberOfRetries = 0;
         m_minimumFileSize = 1000000;
         break;
     case CrawlMode::Empty:
