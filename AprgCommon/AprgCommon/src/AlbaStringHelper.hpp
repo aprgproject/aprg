@@ -144,7 +144,8 @@ inline bool isPrintable(char const c)
 
 inline bool isSlashCharacter(char const c)
 {
-    return ('\\'==c || '/'==c);}
+    return ('\\'==c || '/'==c);
+}
 
 inline bool isNotEmptyLine(std::string const& mainString)
 {

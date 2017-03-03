@@ -87,7 +87,8 @@ TEST(BtsLogAnalyzerTest, ProcessFileForBtsRlDeletionDelay2)
 
 TEST (BtsLogAnalyzerTest, DISABLED_ProcessFileForBtsDelay_RLH_WBTS17Knife)
 {
-    BtsLogAnalyzer reader(R"(D:\W\ZZZ_Useless_Logs\wireshark_challenge\WBTS17Knife\bts_logs\RlhBtsLogTimeResults.csv)");    reader.processFileForBtsDelayForMikhailKnife(R"(D:\W\ZZZ_Useless_Logs\wireshark_challenge\WBTS17Knife\bts_logs\sorted.log)");
+    BtsLogAnalyzer reader(R"(D:\W\ZZZ_Useless_Logs\wireshark_challenge\WBTS17Knife\bts_logs\RlhBtsLogTimeResults.csv)");
+    reader.processFileForBtsDelayForMikhailKnife(R"(D:\W\ZZZ_Useless_Logs\wireshark_challenge\WBTS17Knife\bts_logs\sorted.log)");
 }
 
 TEST (BtsLogAnalyzerTest, DISABLED_ProcessDirectoryWireshark)
@@ -107,7 +108,8 @@ TEST (BtsLogAnalyzerTest, DISABLED_ProcessFileWireshark)
 TEST (BtsLogAnalyzerTest, DISABLED_UesWithTracingWithCount)
 {
     BtsLogAnalyzer reader(R"(D:\W\ZZZ_Useless_Logs\RAN2861\WBTS17\TRACING_REPORT.csv)");
-    reader.processFileForToCountUsersWithTracing(R"(D:\W\ZZZ_Useless_Logs\RAN2861\WBTS17\TRACING_REPORT.log)");}
+    reader.processFileForToCountUsersWithTracing(R"(D:\W\ZZZ_Useless_Logs\RAN2861\WBTS17\TRACING_REPORT.log)");
+}
 
 TEST (BtsLogAnalyzerTest, DISABLED_SizeOfTest)
 {
