@@ -26,10 +26,10 @@ public:
     Implicant operator+(Implicant const& implicant) const;
     bool isCompatible(Implicant const& implicant) const;
     bool isSubset(Implicant const& implicant) const;
+    bool isSuperset(unsigned int minterm) const;
     unsigned int getLengthOfEquivalentString() const;
     std::string getEquivalentString() const;
-    std::string getEquivalentString(unsigned int length) const;
-    std::string getMintermString() const;
+    std::string getEquivalentString(unsigned int length) const;    std::string getMintermString() const;
     unsigned int getFirstMinterm() const;
     unsigned int getAndResultOfMinterms() const;
     unsigned int getOrResultOfMinterms() const;
@@ -72,9 +72,10 @@ public:
     void findCombinationOfImplicants(unsigned int degree, unsigned int cubeSize);
     void findAllCombinations();
 
+    std::string getOutputTable(Implicants const& finalImplicants);
+
 private:
     void addMintermForZeroCube(unsigned int minterm);
-
     unsigned int m_cubeSize;
     std::map<unsigned int, LogicalValue> m_functionMap;
     std::map<unsigned int, ImplicantsMap> m_computationalTable; // https://en.wikipedia.org/wiki/Quine%E2%80%93McCluskey_algorithm

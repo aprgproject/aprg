@@ -1,8 +1,9 @@
 #include "QuineMcCluskey.hpp"
 
+#include <AlbaTableDisplay.hpp>
+
 #include <iostream>
 #include <sstream>
-
 using namespace std;
 
 namespace alba
@@ -82,10 +83,27 @@ bool Implicant::isSubset(Implicant const& implicant) const
     return result;
 }
 
+bool Implicant::isSuperset(unsigned int minterm) const
+{
+    bool result(false);
+    if(m_minterms.size()>0)
+    {
+        auto it = m_minterms.find(minterm);
+        if (it == m_minterms.end())
+        {
+            result = false;
+        }
+        else
+        {
+            result = true;
+        }
+    }
+    return result;
+}
+
 unsigned int Implicant::getLengthOfEquivalentString() const
 {
-    unsigned int orResult(getOrResultOfMinterms());
-    unsigned int length=0;
+    unsigned int orResult(getOrResultOfMinterms());    unsigned int length=0;
     for(; orResult > 0; orResult >>= 1)
     {
         length++;
@@ -357,10 +375,48 @@ void QuineMcCluskey::findAllCombinations()
     m_cubeSize = (cubeSize>0) ? cubeSize-1 : 0;
 }
 
+string QuineMcCluskey::getOutputTable(Implicants const& finalImplicants)
+{
+    vector<unsigned int> inputsWithTrue;
+    for(auto inputOutputPair : m_functionMap)
+    {
+        if(inputOutputPair.second == LogicalValue::True)
+        {
+            inputsWithTrue.emplace_back(inputOutputPair.first);
+        }
+    }
+    DisplayTable displayTable;
+    displayTable.setBorders('-', '|');
+    displayTable.addRow();
+    displayTable.getLastRow().addCell(" ");
+    for(auto const& input : inputsWithTrue)
+    {
+        stringstream ss;
+        ss<<"0x"<<input;
+        displayTable.getLastRow().addCell(ss.str());
+    }
+    finalImplicants.loopAllImplicants([&](Implicant const& implicant)
+    {
+        displayTable.addRow();
+        displayTable.getLastRow().addCell(implicant.getEquivalentString(8));
+        for(auto const& input : inputsWithTrue)
+        {
+            if(implicant.isSuperset(input))
+            {
+                displayTable.getLastRow().addCell("X");
+            }
+            else
+            {
+                displayTable.getLastRow().addCell(" ");
+            }
+        }
+    });
+    return displayTable.drawOutput();
+}
+
 void QuineMcCluskey::addMintermForZeroCube(unsigned int minterm)
 {
-    unsigned int numberOfOnes = getNumberOfOnes(minterm);
-    Implicant implicant;
+    unsigned int numberOfOnes = getNumberOfOnes(minterm);    Implicant implicant;
     implicant.addMinterm(minterm);
     m_computationalTable[numberOfOnes].implicantsMap[0].addImplicant(implicant);
 }
