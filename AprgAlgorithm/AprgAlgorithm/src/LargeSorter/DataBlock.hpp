@@ -9,7 +9,8 @@
 //#include <iostream>
 #include <string>
 
-namespace alba{
+namespace alba
+{
 
 enum class DataBlockType
 {
@@ -148,7 +149,8 @@ public:
             }*/
             assert(contents.size() == m_numberOfObjects);
         }
-        m_blockFileHandler.clear();        m_blockType = DataBlockType::Memory;
+        m_blockFileHandler.clear();
+        m_blockType = DataBlockType::Memory;
     }
     void releaseFileStream()
     {

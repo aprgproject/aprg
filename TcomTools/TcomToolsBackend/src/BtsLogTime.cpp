@@ -178,7 +178,8 @@ string BtsLogTime::getEquivalentStringBtsTimeFormat() const
 
 bool BtsLogTime::operator<(BtsLogTime const& btsLogTimeToCompare) const
 {
-    if(m_years < btsLogTimeToCompare.m_years) return true;    if(m_years > btsLogTimeToCompare.m_years) return false;
+    if(m_years < btsLogTimeToCompare.m_years) return true;
+    if(m_years > btsLogTimeToCompare.m_years) return false;
     if(m_months < btsLogTimeToCompare.m_months) return true;
     if(m_months > btsLogTimeToCompare.m_months) return false;
     if(m_days < btsLogTimeToCompare.m_days) return true;

@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 project(BtsTraceDecoder C CXX)
 
 set(OUTFILE ${PROJECT_NAME})
+
 #Comment out TEST_MODE to build static executable
 set(TEST_MODE "ON")
 
@@ -24,14 +25,16 @@ set(SOURCES
     src/SymbolTableFileType.hpp
 )
 
-set(MAIN_SOURCES    src/main.cpp
+set(MAIN_SOURCES
+    src/main.cpp
 )
 
 set(TESTS
     tst/BtsTraceDecoder_unit.cpp
 )
 
-set(INCLUDE_DIRECTORIES    src/
+set(INCLUDE_DIRECTORIES
+    src/
 )
 
 if (TEST_MODE)

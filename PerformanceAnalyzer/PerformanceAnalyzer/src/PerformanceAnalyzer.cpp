@@ -16,6 +16,7 @@ using tcomToolsBackend::BtsLogTime;
 
 namespace alba
 {
+
 namespace ProgressCounters
 {
     int numberOfFilesToBeAnalyzedForExtraction;
@@ -57,7 +58,8 @@ int  PerformanceAnalyzer::UniqueUserId::getCrnccId(std::string const& lineInLogs
     int properCrnccId=0;
     int logCrnccId = stringHelper::convertStringToNumber<int>(stringHelper::getNumberAfterThisString(lineInLogs, "crnccId: "));
     int logCrncId = stringHelper::convertStringToNumber<int>(stringHelper::getNumberAfterThisString(lineInLogs, "crncId: "));
-    if(logCrncId>0)    {
+    if(logCrncId>0)
+    {
         properCrnccId = logCrncId;
     }
     if(logCrnccId>0)
@@ -90,7 +92,8 @@ int PerformanceAnalyzer::UniqueUserId::getTransactionId(std::string const& lineI
 
 bool PerformanceAnalyzer::UniqueUserId::operator <(UniqueUserId const& uniqueUserId) const
 {
-    if(nbccId != uniqueUserId.nbccId)    {
+    if(nbccId != uniqueUserId.nbccId)
+    {
         return nbccId < uniqueUserId.nbccId;
     }
     if(crnccId != uniqueUserId.crnccId)
@@ -188,7 +191,8 @@ void PerformanceAnalyzer::setFileForRawDataDump(string const& rawDataPath)
 void PerformanceAnalyzer::logLineInRawDataFile(string const& line)
 {
     if(m_RawDataFileOptional)
-    {        m_RawDataFileOptional.getReference()<<line<<endl;
+    {
+        m_RawDataFileOptional.getReference()<<line<<endl;
     }
 }
 
@@ -202,7 +206,8 @@ void PerformanceAnalyzer::logStringInRawDataFile(string const& line)
 
 void PerformanceAnalyzer::processFileForMsgQueuingTime(string const& filePath)
 {
-    AlbaWindowsPathHandler filePathHandler(filePath);    cout<<"processFile: "<<filePathHandler.getFullPath()<<endl;
+    AlbaWindowsPathHandler filePathHandler(filePath);
+    cout<<"processFile: "<<filePathHandler.getFullPath()<<endl;
 
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
@@ -221,7 +226,8 @@ void PerformanceAnalyzer::processFileForMsgQueuingTime(string const& filePath)
             logLineInRawDataFile(lineInLogs);
             numberOfInstances++;
         }
-    }    cout<<"TotalMsgQueuingTime: "<<totalMsgQueuingTime<<" highestMsgQueuingTime: "<<highestMsgQueuingTime<<" AverageMsgQueuingTime: "<<((double)totalMsgQueuingTime)/numberOfInstances<<" numberOfPrints: "<<numberOfInstances<<endl;
+    }
+    cout<<"TotalMsgQueuingTime: "<<totalMsgQueuingTime<<" highestMsgQueuingTime: "<<highestMsgQueuingTime<<" AverageMsgQueuingTime: "<<((double)totalMsgQueuingTime)/numberOfInstances<<" numberOfPrints: "<<numberOfInstances<<endl;
 }
 
 
@@ -235,13 +241,15 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInRlh(string const& filePath
     logLineInRawDataFile("crnccId,nbccId,transactionId,delay");
 
     UniqueUserId userIdForMaxDelay;
-    double maxDelay = 0;    double totalDelay = 0;
+    double maxDelay = 0;
+    double totalDelay = 0;
     int count = 0;
     std::map<UniqueUserId, BtsLogDelay> btsLogDelays;
     BtsLogTime startTest, endTest;
     while(fileReader.isNotFinished())
     {
-        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());        if(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlSetupReq3G)"))
+        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+        if(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlSetupReq3G)"))
         {
             UniqueUserId uniqueUserId(lineInLogs);
             BtsLogDelay & btsLogDelay = btsLogDelays[uniqueUserId];
@@ -273,7 +281,8 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInRlh(string const& filePath
                 int delay = getDelayTimeInUs(btsLogDelay.endTimeOptional.getReference(), btsLogDelay.startTimeOptional.getReference());
                 if(maxDelay<delay)
                 {
-                    maxDelay = delay;                    userIdForMaxDelay = uniqueUserId;
+                    maxDelay = delay;
+                    userIdForMaxDelay = uniqueUserId;
                 }
                 totalDelay += delay;
                 count++;
@@ -290,7 +299,8 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInRlh(string const& filePath
     cout<<"Test Duration: "<<delayTime.getEquivalentStringBtsTimeFormat()<<endl;
 }
 
-void PerformanceAnalyzer::processFileForRlDeletionDelayInRlh(string const& filePath){
+void PerformanceAnalyzer::processFileForRlDeletionDelayInRlh(string const& filePath)
+{
     AlbaWindowsPathHandler filePathHandler(filePath);
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
@@ -299,7 +309,8 @@ void PerformanceAnalyzer::processFileForRlDeletionDelayInRlh(string const& fileP
     logLineInRawDataFile("crnccId,nbccId,transactionId,delay");
 
     double maxDelay = 0;
-    double totalDelay = 0;    int count = 0;
+    double totalDelay = 0;
+    int count = 0;
     std::map<UniqueUserId, BtsLogDelay> btsLogDelays;
     while(fileReader.isNotFinished())
     {
