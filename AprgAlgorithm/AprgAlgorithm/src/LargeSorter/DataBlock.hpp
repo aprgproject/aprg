@@ -6,11 +6,10 @@
 #include <fstream>
 #include <LargeSorter/DataBlockMemoryHandler.hpp>
 #include <LargeSorter/DataBlockFileHandler.hpp>
-#include <iostream>
+//#include <iostream>
 #include <string>
 
-namespace alba
-{
+namespace alba{
 
 enum class DataBlockType
 {
@@ -143,14 +142,13 @@ public:
                 inputFileStream>>objectToSort;
                 if(inputFileStream.good()) { contents.push_back(objectToSort); }
             }
-            if(contents.size() != m_numberOfObjects)
+            /*if(contents.size() != m_numberOfObjects)
             {
                 std::cout<<"assert failed blockId:"<<m_blockId<<" contents: "<<contents.size()<<" NumObjects: "<<m_numberOfObjects<<" blockType:"<<(int const)m_blockType<<std::endl;
-            }
+            }*/
             assert(contents.size() == m_numberOfObjects);
         }
-        m_blockFileHandler.clear();
-        m_blockType = DataBlockType::Memory;
+        m_blockFileHandler.clear();        m_blockType = DataBlockType::Memory;
     }
     void releaseFileStream()
     {
