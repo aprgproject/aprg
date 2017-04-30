@@ -53,9 +53,9 @@ std::string getStringAfterThisString(std::string const& mainString, std::string 
 std::string getStringInBetweenTwoStrings(std::string const& mainString, std::string const& firstString, std::string const& secondString, int const indexToStart=0);
 std::string getStringBeforeThisCharacters(std::string const& mainString, std::string const& characters, int const indexToStart=0);//implement UTs
 std::string getStringAndReplaceNonAlphanumericCharactersToUnderScore(std::string const& path);
+std::string getStringByRepeatingUntilDesiredLength(std::string const& stringToRepeat, unsigned int desiredLength);
 std::string getNumberAfterThisString(std::string const& mainString, std::string const& stringToSearch);
 std::string getHexNumberAfterThisString(std::string const& mainString, std::string const& stringToSearch);
-
 std::string getStringUsingJustifyAlignment(std::string const& mainString, unsigned int length);
 std::string getStringUsingCenterAlignment(std::string const& mainString, unsigned int length);
 std::string getStringUsingRightAlignment(std::string const& mainString, unsigned int length);
