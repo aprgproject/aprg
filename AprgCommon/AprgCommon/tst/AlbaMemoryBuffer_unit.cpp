@@ -1,6 +1,7 @@
 #include <Memory/AlbaMemoryBuffer.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace alba;
 using namespace std;
 

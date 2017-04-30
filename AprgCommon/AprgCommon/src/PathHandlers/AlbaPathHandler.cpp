@@ -4,6 +4,7 @@
 #include <algorithm>
 
 using namespace std;
+
 namespace alba{
 
 AlbaPathHandler::AlbaPathHandler(string const& slashCharacterString)
