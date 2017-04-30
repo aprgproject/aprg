@@ -3,7 +3,8 @@
 #include <String/AlbaStringHelper.hpp>
 
 #include "Findings/TemporaryFindings.hpp"
-#include <iostream>#include "TermAnalyzer.hpp"
+#include <iostream>
+#include "TermAnalyzer.hpp"
 #include "../Term/CheckerHelpers.hpp"
 
 using namespace std;

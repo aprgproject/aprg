@@ -3,7 +3,8 @@
 #include <User/AlbaUserAutomation.hpp>
 #include <string>
 
-namespace aprgWebCrawler{
+namespace aprgWebCrawler
+{
 
 class AutomationHelper
 {

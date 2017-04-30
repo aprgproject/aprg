@@ -5,7 +5,8 @@
 #include <String/AlbaStringHelper.hpp>
 #include <algorithm>
 #include <gsl/gsl_multifit.h>
-#include <iomanip>#include <iostream>
+#include <iomanip>
+#include <iostream>
 #include <PathHandlers/AlbaWindowsPathHandler.hpp>
 #include <windows.h>
 

@@ -3,6 +3,7 @@
 #include <String/AlbaStringHelper.hpp>
 #include <algorithm>
 #include "TermChecker.hpp"
+
 using namespace alba::stringHelper;
 
 namespace codeReview

@@ -3,7 +3,8 @@
 #include <Optional/AlbaOptional.hpp>
 #include <QMutex>
 #include <QThread>
-#include <QWaitCondition>#include <TcomToolsConfiguration.hpp>
+#include <QWaitCondition>
+#include <TcomToolsConfiguration.hpp>
 
 namespace tcomToolsGui
 {

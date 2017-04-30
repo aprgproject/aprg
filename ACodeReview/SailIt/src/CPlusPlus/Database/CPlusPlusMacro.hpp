@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include "../Utilities.hpp"
+
 using std::string;
 using std::map;
 using std::pair;

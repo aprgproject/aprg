@@ -2,6 +2,7 @@
 #include "FindingsToAddHelper.hpp"
 #include <iostream>
 #include "../TermAnalyzer.hpp"
+
 using namespace std;
 using alba::stringHelper::constructFileLocator;
 

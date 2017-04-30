@@ -4,7 +4,8 @@
 #include <String/AlbaStringHelper.hpp>
 #include <fstream>
 
-using namespace alba;using namespace std;
+using namespace alba;
+using namespace std;
 
 namespace tcomToolsGui
 {

@@ -3,7 +3,8 @@
 #include <Optional/AlbaOptional.hpp>
 #include <BtsLogTime.hpp>
 #include <fstream>
-#include <map>#include <string>
+#include <map>
+#include <string>
 
 using alba::AlbaOptional;
 using tcomToolsBackend::BtsLogTime;

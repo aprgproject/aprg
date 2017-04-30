@@ -4,7 +4,8 @@
 #include <String/AlbaStringHelper.hpp>
 #include <AlbaWindowsPathHandler.hpp>
 #include <algorithm>
-#include <iostream>#include "TermListConstants.hpp"
+#include <iostream>
+#include "TermListConstants.hpp"
 #include <string>
 
 using namespace alba;

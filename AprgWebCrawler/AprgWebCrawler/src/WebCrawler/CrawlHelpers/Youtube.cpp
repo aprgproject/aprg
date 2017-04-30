@@ -5,6 +5,7 @@
 #include <CrawlConfiguration/CrawlConfiguration.hpp>
 #include <fstream>
 #include <iostream>
+
 using namespace alba;
 using namespace alba::stringHelper;
 using namespace std;

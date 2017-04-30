@@ -5,7 +5,8 @@
 #include <User/AlbaUserInterface.hpp>
 #include <fstream>
 #include <iomanip>
-#include <iostream>#include <PathHandlers/AlbaWindowsPathHandler.hpp>
+#include <iostream>
+#include <PathHandlers/AlbaWindowsPathHandler.hpp>
 #include <set>
 #include <windows.h>
 #include <WebCrawler.hpp>

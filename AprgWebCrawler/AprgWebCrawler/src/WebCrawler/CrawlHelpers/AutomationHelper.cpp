@@ -4,7 +4,8 @@
 #include <String/AlbaStringHelper.hpp>
 #include <fstream>
 #include <PathHandlers/AlbaWebPathHandler.hpp>
-#include <iostream>#include <windows.h>
+#include <iostream>
+#include <windows.h>
 
 
 #define APRG_WEB_CRAWLER_AUTOMATION_CONFIGURATION_FILE R"(C:\APRG\AprgWebCrawler\automationConfiguration.txt)"

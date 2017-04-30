@@ -3,6 +3,7 @@
 #include <Crawlers/DoujinMoeCrawler.hpp>
 #include <CrawlHelpers/Downloaders.hpp>
 #include <iostream>
+
 using namespace alba;
 using namespace alba::stringHelper;
 using namespace aprgWebCrawler::Downloaders;
