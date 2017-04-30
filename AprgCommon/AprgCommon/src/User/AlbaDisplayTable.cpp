@@ -72,13 +72,15 @@ unsigned int DisplayTableRow::getCharacters() const
     for(DisplayTableCell const & cell : m_cells)
     {
         numberOfCharacters+=cell.getText().size();
-    }    return numberOfCharacters;
+    }
+    return numberOfCharacters;
 }
 
 Cells& DisplayTableRow::getCellsReference()
 {
     return m_cells;
 }
+
 DisplayTableCell& DisplayTableRow::getCellReference(unsigned int columnIndex)
 {
     return m_cells[columnIndex];
@@ -117,7 +119,8 @@ unsigned int DisplayTable::getMaxCharactersInOneRow() const
     return maxCharacters;
 }
 
-DisplayTableRow& DisplayTable::getLastRow(){
+DisplayTableRow& DisplayTable::getLastRow()
+{
     return m_rows.back();
 }
 
@@ -145,7 +148,8 @@ void DisplayTable::setBorders(string const& horizontalBorder, string const& vert
 std::string DisplayTable::getCellText(DisplayTableCell const& cell, unsigned int length) const
 {
     DisplayTableCellMode mode = cell.getHorizontalMode();
-    string result;    switch(mode)
+    string result;
+    switch(mode)
     {
     case DisplayTableCellMode::justify:
         result = stringHelper::getStringUsingJustifyAlignment(cell.getText(), length);

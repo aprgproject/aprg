@@ -10,6 +10,7 @@
 using namespace std;
 
 namespace alba{
+
 unsigned int stringHelper::getLevenshteinDistance(string const& mainString, string const& string2)
 {
     int mainStringLength = mainString.size();
@@ -391,7 +392,8 @@ string stringHelper::getStringByRepeatingUntilDesiredLength(std::string const& s
 
 string stringHelper::getStringAndReplaceNonAlphanumericCharactersToUnderScore(string const& path)
 {
-    bool isPreviousCharacterNonAlphanumeric = false;    string correctPath = std::accumulate(path.cbegin(), path.cend(), string(""), [&isPreviousCharacterNonAlphanumeric](string const& currentString, char const currentCharacter)
+    bool isPreviousCharacterNonAlphanumeric = false;
+    string correctPath = std::accumulate(path.cbegin(), path.cend(), string(""), [&isPreviousCharacterNonAlphanumeric](string const& currentString, char const currentCharacter)
     {
         string partialResult(currentString);
         if(!isLetterOrNumber(currentCharacter))

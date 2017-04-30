@@ -14,7 +14,8 @@ TEST(AlbaTableDisplay, TableCanOutputProvideText)
     cout<<table.drawOutput();
 }
 
-TEST(AlbaTableDisplay, TableCanOutputTextWithBorders){
+TEST(AlbaTableDisplay, TableCanOutputTextWithBorders)
+{
     DisplayTable table;
     table.addRow();
     table.getLastRow().addCell("Test");
@@ -23,7 +24,8 @@ TEST(AlbaTableDisplay, TableCanOutputTextWithBorders){
     cout<<table.drawOutput();
 }
 
-TEST(AlbaTableDisplay, TableCanOutputTextFor3by3Table){
+TEST(AlbaTableDisplay, TableCanOutputTextFor3by3Table)
+{
     DisplayTable table;
     table.addRow();
     table.getLastRow().addCell("1000");

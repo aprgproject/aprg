@@ -62,7 +62,8 @@ void MeanSquareErrorCalculator::saveValuesFromFileToDatabase(string const& fileP
             stringHelper::splitToStrings<stringHelper::SplitStringType::WithoutDelimeters>(itemsFound, lineInFile, ",");
             if(m_columns==0)
             {
-                m_columns = itemsFound.size();            }
+                m_columns = itemsFound.size();
+            }
             for_each(itemsFound.begin(), itemsFound.end(), [&](string const& item)
             {
                 m_fileDatabase.emplace_back(stringHelper::convertStringToNumber<double>(item));
@@ -86,10 +87,11 @@ void MeanSquareErrorCalculator::randomizeSampleDatabase()
     }
 }
 
-void MeanSquareErrorCalculator::performModelingAndValidation()
+void MeanSquareErrorCalculator::performRegression()
 {
     vector<double> coefficients;
     vector<double> calculationResult;
+
     calculateCoefficients(coefficients);
 
     cout<<"coefficients: "<<endl;
