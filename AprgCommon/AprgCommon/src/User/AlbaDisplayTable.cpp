@@ -1,6 +1,6 @@
-#include <AlbaTableDisplay.hpp>
+#include "AlbaDisplayTable.hpp"
 
-#include <AlbaStringHelper.hpp>
+#include <String/AlbaStringHelper.hpp>
 
 using namespace std;
 

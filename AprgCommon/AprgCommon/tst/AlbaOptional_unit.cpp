@@ -1,7 +1,6 @@
-#include <AlbaOptional.hpp>
+#include <Optional/AlbaOptional.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace alba;
 using namespace std;
 

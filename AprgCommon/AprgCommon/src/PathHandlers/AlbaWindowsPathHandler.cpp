@@ -1,10 +1,9 @@
 #include "AlbaWindowsPathHandler.hpp"
 
-#include <AlbaStringHelper.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <functional>
 #include <iostream>
-#include <string>
-#include <windows.h>
+#include <string>#include <windows.h>
 
 using namespace std;
 

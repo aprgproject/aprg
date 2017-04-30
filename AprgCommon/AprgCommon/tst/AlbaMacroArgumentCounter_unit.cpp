@@ -1,7 +1,6 @@
-#include <AlbaMacroArgumentCounter.hpp>
+#include <Macros/AlbaMacroArgumentCounter.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 TEST(AlbaMacroArgumentCounter, IntegerTest)

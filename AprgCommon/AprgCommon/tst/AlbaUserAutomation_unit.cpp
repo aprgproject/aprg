@@ -1,8 +1,7 @@
-#include <AlbaUserAutomation.hpp>
+#include <User/AlbaUserAutomation.hpp>
 #include <gtest/gtest.h>
 #include <iostream>
 #include <windows.h>
-
 using namespace alba;
 using namespace std;
 

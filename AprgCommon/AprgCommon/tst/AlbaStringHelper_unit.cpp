@@ -1,8 +1,7 @@
-#include <AlbaStringHelper.hpp>
+#include <String/AlbaStringHelper.hpp>
 
 #include <gtest/gtest.h>
 #include <string>
-
 using namespace std;
 using namespace alba::stringHelper;
 
