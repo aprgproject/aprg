@@ -1,9 +1,8 @@
 #include "AlbaCombineAndGrepFiles.hpp"
 
-#include <AlbaFileReader.hpp>
+#include <File/AlbaFileReader.hpp>
 #include <iostream>
 #include <set>
-
 using namespace std;
 
 namespace alba

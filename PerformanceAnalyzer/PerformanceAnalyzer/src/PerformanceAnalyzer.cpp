@@ -4,12 +4,11 @@
 #include <iostream>
 #include <map>
 
-#include <AlbaFileReader.hpp>
-#include <AlbaStringHelper.hpp>
+#include <File/AlbaFileReader.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <AprgFileExtractor.hpp>
 #include <BtsLogSorter.hpp>
 #include <PathHandlers/AlbaWindowsPathHandler.hpp>
-
 using namespace std;
 using tcomToolsBackend::BtsLogPrint;
 using tcomToolsBackend::BtsLogTime;

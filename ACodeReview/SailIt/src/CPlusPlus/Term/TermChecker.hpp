@@ -1,10 +1,9 @@
 #pragma once
 
-#include <AlbaOptional.hpp>
+#include <Optional/AlbaOptional.hpp>
 #include "MultipleTerms.hpp"
 #include "Term.hpp"
-#include <ostream>
-#include <string>
+#include <ostream>#include <string>
 
 using std::ostream;
 using std::string;

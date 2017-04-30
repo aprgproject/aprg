@@ -1,10 +1,9 @@
 #include "CMakeDatabase.hpp"
 
-#include <AlbaStringHelper.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <AlbaWindowsPathHandler.hpp>
 
 #include <iostream>
-
 using namespace std;
 using namespace alba;
 

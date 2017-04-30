@@ -1,10 +1,9 @@
 #include "BtsLogPrint.hpp"
 
-#include <AlbaStringHelper.hpp>
+#include <String/AlbaStringHelper.hpp>
 
 using namespace alba;
 using namespace std;
-
 namespace tcomToolsBackend
 {
 

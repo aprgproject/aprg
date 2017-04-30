@@ -1,11 +1,10 @@
 #include "CMakeReader.hpp"
 
-#include <AlbaFileReader.hpp>
-#include <AlbaStringHelper.hpp>
+#include <File/AlbaFileReader.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <AlbaWindowsPathHandler.hpp>
 #include <algorithm>
-#include <functional>
-#include <fstream>
+#include <functional>#include <fstream>
 #include <iostream>
 #include <string>
 

@@ -1,11 +1,10 @@
 #include "WebCrawler.hpp"
 
-#include <AlbaFileReader.hpp>
-#include <AlbaStringHelper.hpp>
+#include <File/AlbaFileReader.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <deque>
 #include <fstream>
-#include <iostream>
-#include <unordered_set>
+#include <iostream>#include <unordered_set>
 
 using namespace alba;
 using namespace std;

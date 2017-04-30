@@ -1,10 +1,9 @@
 #include "Term.hpp"
 
-#include <AlbaStringHelper.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <iostream>
 #include <utility>
 #include <string>
-
 using namespace std;
 using namespace alba::stringHelper;
 

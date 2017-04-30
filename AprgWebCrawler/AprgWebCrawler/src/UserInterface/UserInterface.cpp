@@ -1,12 +1,11 @@
 #include "UserInterface.hpp"
 
-#include <AlbaFileReader.hpp>
-#include <AlbaStringHelper.hpp>
-#include <AlbaUserInterface.hpp>
+#include <File/AlbaFileReader.hpp>
+#include <String/AlbaStringHelper.hpp>
+#include <User/AlbaUserInterface.hpp>
 #include <fstream>
 #include <iomanip>
-#include <iostream>
-#include <PathHandlers/AlbaWindowsPathHandler.hpp>
+#include <iostream>#include <PathHandlers/AlbaWindowsPathHandler.hpp>
 #include <set>
 #include <windows.h>
 #include <WebCrawler.hpp>

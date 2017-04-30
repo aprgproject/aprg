@@ -1,11 +1,10 @@
 #include <Crawlers/OneDownloadPerPageCrawler.hpp>
 
-#include <AlbaFileReader.hpp>
-#include <AlbaStringHelper.hpp>
+#include <File/AlbaFileReader.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <CrawlHelpers/Downloaders.hpp>
 #include <fstream>
 #include <iostream>
-
 using namespace alba;
 using namespace alba::stringHelper;
 using namespace aprgWebCrawler::Downloaders;

@@ -1,9 +1,8 @@
-#include <AlbaFileReader.hpp>
-#include <AlbaStringHelper.hpp>
+#include <File/AlbaFileReader.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <gtest/gtest.h>
 #include <PathHandlers/AlbaWindowsPathHandler.hpp>
 #include <array>
-
 using namespace alba;
 using namespace std;
 

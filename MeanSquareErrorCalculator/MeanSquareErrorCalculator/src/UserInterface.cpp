@@ -1,10 +1,9 @@
 #include <UserInterface.hpp>
 
-#include <AlbaStringHelper.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <iostream>
 #include <MeanSquareErrorCalculator.hpp>
-#include <PathHandlers/AlbaWindowsPathHandler.hpp>
-#include <vector>
+#include <PathHandlers/AlbaWindowsPathHandler.hpp>#include <vector>
 
 using namespace alba;
 using namespace std;

@@ -1,10 +1,9 @@
 #pragma once
 
-#include <AlbaStringHelper.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <GrepStringEvaluator/AlbaGrepStringEvaluator.hpp>
 #include <PathHandlers/AlbaWindowsPathHandler.hpp>
-#include <map>
-#include <SackReader/AlbaSackReaderType.hpp>
+#include <map>#include <SackReader/AlbaSackReaderType.hpp>
 #include <string>
 
 namespace alba

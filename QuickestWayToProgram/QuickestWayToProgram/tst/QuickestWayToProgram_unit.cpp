@@ -7,19 +7,31 @@
 #include <string>
 #include <algorithm>
 
-#include <AlbaFileReader.hpp>
-#include <AlbaStringHelper.hpp>
+#include <File/AlbaFileReader.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <PathHandlers/AlbaWindowsPathHandler.hpp>
 #include <NsapHelper.hpp>
 #include <stdio.h>
-
 using namespace alba;
 using namespace std;
 
+TEST(SampleTest, FilesToFind)
+{
+    AlbaWindowsPathHandler::ListOfPaths files;
+    AlbaWindowsPathHandler::ListOfPaths directories;
+    AlbaWindowsPathHandler pathHandler(R"(C:\APRG\boost_1_51_0\boost_1_51_0\boost)");
+    pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
+
+    for(string const& file: files)
+    {
+        cout<<file<<endl;
+    }
+}
+
+/*
 TEST(SampleTest, MessageId_TcomTcom_test)
 {
-    AlbaWindowsPathHandler pathHandler(R"(D:\Branches\trunk\I_Interface\Private\SC_TCOM\Messages\MessageId_TcomTcom.sig)");
-    AlbaWindowsPathHandler pathHandler2(R"(D:\userdata\malba\Desktop\SCTRoutes\MessageId_TcomTcom_xml_format.txt)");
+    AlbaWindowsPathHandler pathHandler(R"(D:\Branches\trunk\I_Interface\Private\SC_TCOM\Messages\MessageId_TcomTcom.sig)");    AlbaWindowsPathHandler pathHandler2(R"(D:\userdata\malba\Desktop\SCTRoutes\MessageId_TcomTcom_xml_format.txt)");
     AlbaWindowsPathHandler pathHandler3(R"(D:\userdata\malba\Desktop\SCTRoutes\Unedited\routeList_VM.xml)");
     AlbaWindowsPathHandler pathHandler4(R"(D:\userdata\malba\Desktop\SCTRoutes\MessageId_comparison.csv)");
 
@@ -110,11 +122,10 @@ TEST(SampleTest, MessageId_TcomTcom_test)
     }
 }
 
-/*
+
 TEST(SampleTest, DISABLED_SampleTest1)
 {
-    QuickestWayToProgram entity;
-}
+    QuickestWayToProgram entity;}
 
 TEST(SampleTest, DISABLED_SampleTest2)
 {
@@ -199,22 +210,10 @@ TEST(SampleTest, DISABLED_ConfirmatoryTest)
     checkTrace();
 }
 
-TEST(SampleTest, DISABLED_FilesToFind)
-{
-    AlbaWindowsPathHandler::ListOfPaths files;
-    AlbaWindowsPathHandler::ListOfPaths directories;
-    AlbaWindowsPathHandler pathHandler(R"(C:\APRG\gsl\gsl-2.1)");
-    pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
 
-    for(string const& file: files)
-    {
-        cout<<file<<endl;
-    }
-}
 
 TEST(SampleTest, DISABLED_VectorAccumulate)
-{
-    std::vector<int> test ({5, 6, 7, 8});
+{    std::vector<int> test ({5, 6, 7, 8});
     std::vector<int> transfer = std::accumulate(test.begin(), test.end(), std::vector<int>{},
                                                 [](std::vector<int> const& ref, int a)
     {

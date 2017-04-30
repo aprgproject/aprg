@@ -1,10 +1,9 @@
 #include "WebCrawler.hpp"
 
-#include <AlbaStringHelper.hpp>
+#include <String/AlbaStringHelper.hpp>
 
 using namespace alba::stringHelper;
 using namespace std;
-
 namespace aprgWebCrawler
 {
 

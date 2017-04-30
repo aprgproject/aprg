@@ -1,10 +1,9 @@
-#include <AlbaFileReader.hpp>
+#include <File/AlbaFileReader.hpp>
 #include <AprgFileExtractor.hpp>
-#include <AlbaStringHelper.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <BtsLogSorter.hpp>
 #include <GrepStringEvaluator/AlbaGrepStringEvaluator.hpp>
-#include <fstream>
-#include <PathHandlers/AlbaWindowsPathHandler.hpp>
+#include <fstream>#include <PathHandlers/AlbaWindowsPathHandler.hpp>
 #include <StepHandler.hpp>
 #include <string>
 

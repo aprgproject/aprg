@@ -1,8 +1,7 @@
-#include <AlbaStringHelper.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include "StringHelpers.hpp"
 
-using namespace alba;
-using namespace DesignDocumentCreator::UmlConfiguration;
+using namespace alba;using namespace DesignDocumentCreator::UmlConfiguration;
 using namespace std;
 
 namespace DesignDocumentCreator

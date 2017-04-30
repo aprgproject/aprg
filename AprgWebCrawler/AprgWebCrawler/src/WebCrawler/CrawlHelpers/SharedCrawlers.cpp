@@ -1,10 +1,9 @@
 #include "WebCrawler.hpp"
 
-#include <AlbaFileReader.hpp>
-#include <AlbaStringHelper.hpp>
+#include <File/AlbaFileReader.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <CrawlConfiguration/CrawlConfiguration.hpp>
 #include <iostream>
-
 using namespace alba;
 using namespace alba::stringHelper;
 using namespace std;

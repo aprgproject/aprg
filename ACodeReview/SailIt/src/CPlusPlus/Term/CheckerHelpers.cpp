@@ -1,9 +1,8 @@
 #include "CheckerHelpers.hpp"
 
-#include <AlbaStringHelper.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <algorithm>
 #include "TermChecker.hpp"
-
 using namespace alba::stringHelper;
 
 namespace codeReview

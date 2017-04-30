@@ -1,8 +1,7 @@
-#include <AlbaStringHelper.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <ProgressCounters.hpp>
 #include <QApplication>
 #include "TcomTools.h"
-
 using namespace std;
 
 int main(int argc, char *argv[])

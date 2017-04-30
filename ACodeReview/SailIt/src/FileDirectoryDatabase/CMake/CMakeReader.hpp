@@ -2,11 +2,10 @@
 
 #include "CMakeDatabase.hpp"
 
-#include <AlbaFileReader.hpp>
+#include <File/AlbaFileReader.hpp>
 #include <functional>
 #include <fstream>
-#include <unordered_map>
-#include <set>
+#include <unordered_map>#include <set>
 #include <string>
 #include <vector>
 

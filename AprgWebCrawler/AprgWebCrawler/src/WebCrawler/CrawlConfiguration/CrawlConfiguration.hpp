@@ -1,10 +1,9 @@
 #pragma once
 
-#include <AlbaOptional.hpp>
+#include <Optional/AlbaOptional.hpp>
 #include "CrawlMode.hpp"
 
-namespace aprgWebCrawler
-{
+namespace aprgWebCrawler{
 
 struct DownloadLowSpeedLimitConfiguration
 {

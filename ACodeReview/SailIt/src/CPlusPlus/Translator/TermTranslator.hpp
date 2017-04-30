@@ -1,10 +1,9 @@
 #pragma once
 
-#include <AlbaFileReader.hpp>
+#include <File/AlbaFileReader.hpp>
 #include <fstream>
 #include <string>
-#include <vector>
-#include "../Builder/TermBuilder.hpp"
+#include <vector>#include "../Builder/TermBuilder.hpp"
 #include "../Findings/Findings.hpp"
 #include "../Term/Term.hpp"
 
