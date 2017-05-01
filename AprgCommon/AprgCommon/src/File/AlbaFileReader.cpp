@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <fstream>
 #include <string>
+
 using namespace std;
 
 namespace alba
@@ -51,7 +52,8 @@ template unsigned int AlbaFileReader::getFourByteData<unsigned int>();
 
 string AlbaFileReader::getLineAndIgnoreWhiteSpaces()
 {
-    while(!m_stream.eof())    {
+    while(!m_stream.eof())
+    {
         m_stream.clear();
         m_stream.getline(m_characterBuffer, m_bufferSize);
         string result(m_characterBuffer);
@@ -99,7 +101,8 @@ void AlbaFileReader::moveLocation(unsigned long long location) const
 void AlbaFileReader::setMaxBufferSize(unsigned int bufferSize)
 {
     if(bufferSize+1 < MAX_BUFFER_SIZE && bufferSize > 0)
-    {        m_bufferSize = bufferSize+1;
+    {
+        m_bufferSize = bufferSize+1;
     }
 }
 

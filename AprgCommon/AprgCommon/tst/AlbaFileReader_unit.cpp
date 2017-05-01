@@ -99,7 +99,8 @@ TEST(FileReadTest, ReadFromTestFile_ReadLineUsingVariousCharacters)
     ASSERT_TRUE(testFile.is_open());
     testFile << "1         " << endl;
     testFile << "12        " << endl;
-    testFile << "123       " << endl;    testFile << "1234      " << endl;
+    testFile << "123       " << endl;
+    testFile << "1234      " << endl;
     testFile << "12345     " << endl;
     testFile << "123456    " << endl;
     testFile << "1234567   " << endl;
@@ -149,6 +150,7 @@ TEST(FileReadTest, ReadFromTestFile_ReadLineWithSizeLimit)
 {
     ifstream inputTestFile(ALBA_FILE_READER_SIZE_TEST_FILE);
     ASSERT_TRUE(inputTestFile.is_open());
+
     AlbaFileReader fileReader(inputTestFile);
     fileReader.setMaxBufferSize(2000);
     EXPECT_EQ(5000, fileReader.getFileSize());
