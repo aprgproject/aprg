@@ -48,21 +48,20 @@ TEST(SplitStringTest, SplitBySpacesWithDelimeters)
 
 TEST(SplitStringTest, SplitLinesToAchieveTargetLength)
 {
-    string string1("   Mark is the no#1      guy in the  world.   ");
-    strings expectedStrings {"   Mark is", " the no#1 ", "     guy in", " the  world."};
+    string string1("   Mark is the no#1      guy in the  world.   ThisIsALongString");
+    strings expectedStrings {"   Mark is", " the no#1 ", "     guy in", " the  world.", "   ", "ThisIsALongString"};
     strings actualStrings;
     const int targetLength = 10;
 
     splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
 
-    ASSERT_EQ(actualStrings.size(), expectedStrings.size());
+    ASSERT_EQ(expectedStrings.size(), actualStrings.size());
     int size = expectedStrings.size();
     for(int i=0; i<size; i++)
     {
-        EXPECT_EQ(actualStrings[i], expectedStrings[i]);
+        EXPECT_EQ(expectedStrings[i], actualStrings[i]);
     }
 }
-
 TEST(UniqueIdTest, GenerateUniqueId)
 {
     string string1("Mark is the no#1 guy in the world. Mark is also the nicest guy.");
