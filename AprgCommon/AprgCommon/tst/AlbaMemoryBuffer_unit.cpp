@@ -9,9 +9,9 @@ TEST(AlbaMemoryBufferTest, DefaultValuesAreClear)
 {
     AlbaMemoryBuffer buffer;
     EXPECT_FALSE(buffer);
+    EXPECT_FALSE(buffer.hasContent());
     EXPECT_EQ(0, buffer.getSize());
 }
-
 TEST(AlbaMemoryBufferTest, PrimitiveTypesCanBeSaved)
 {
     AlbaMemoryBuffer buffer;
@@ -20,10 +20,10 @@ TEST(AlbaMemoryBufferTest, PrimitiveTypesCanBeSaved)
     int output = *reinterpret_cast<int*>(buffer.getBufferPointer());
 
     EXPECT_TRUE(buffer);
+    EXPECT_TRUE(buffer.hasContent());
     EXPECT_EQ(4, buffer.getSize());
     EXPECT_EQ(input, output);
 }
-
 TEST(AlbaMemoryBufferTest, MemoryBufferCanBeCopied)
 {
     AlbaMemoryBuffer buffer;
@@ -33,10 +33,10 @@ TEST(AlbaMemoryBufferTest, MemoryBufferCanBeCopied)
     int output = *reinterpret_cast<int*>(buffer2.getBufferPointer());
 
     EXPECT_TRUE(buffer2);
+    EXPECT_TRUE(buffer2.hasContent());
     EXPECT_EQ(4, buffer2.getSize());
     EXPECT_EQ(input, output);
 }
-
 TEST(AlbaMemoryBufferTest, PrimitiveTypesCanBeSavedConsecutively2Times)
 {
     AlbaMemoryBuffer buffer;
@@ -46,10 +46,10 @@ TEST(AlbaMemoryBufferTest, PrimitiveTypesCanBeSavedConsecutively2Times)
     int output = *reinterpret_cast<int*>(buffer.getBufferPointer());
 
     EXPECT_TRUE(buffer);
+    EXPECT_TRUE(buffer.hasContent());
     EXPECT_EQ(4, buffer.getSize());
     EXPECT_EQ(input2, output);
 }
-
 TEST(AlbaMemoryBufferTest, StructureCanBeSaved)
 {
     AlbaMemoryBuffer buffer;
@@ -68,8 +68,8 @@ TEST(AlbaMemoryBufferTest, StructureCanBeSaved)
     Sample output = *reinterpret_cast<Sample *>(buffer.getBufferPointer());
 
     EXPECT_TRUE(buffer);
+    EXPECT_TRUE(buffer.hasContent());
     EXPECT_EQ(sizeof(Sample), buffer.getSize());
     EXPECT_EQ(input.param1, output.param1);
-    EXPECT_EQ(input.param2, output.param2);
-    EXPECT_EQ(input.param3, output.param3);
+    EXPECT_EQ(input.param2, output.param2);    EXPECT_EQ(input.param3, output.param3);
 }

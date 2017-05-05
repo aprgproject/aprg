@@ -27,10 +27,14 @@ AlbaMemoryBuffer::operator bool() const
     return m_hasContent;
 }
 
+bool AlbaMemoryBuffer::hasContent() const
+{
+    return m_hasContent;
+}
+
 unsigned int AlbaMemoryBuffer::getSize() const
 {
-    return m_size;
-}
+    return m_size;}
 
 void* AlbaMemoryBuffer::getBufferPointer()
 {

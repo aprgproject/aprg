@@ -12,10 +12,10 @@ public:
     AlbaMemoryBuffer(AlbaMemoryBuffer const& memoryBuffer);
     ~AlbaMemoryBuffer();
     operator bool() const;
+    bool hasContent() const;
     unsigned int getSize() const;
     void* getBufferPointer();
-    void reAllocateBuffer(unsigned int size);
-    void releaseBufferIfNeeded();
+    void reAllocateBuffer(unsigned int size);    void releaseBufferIfNeeded();
     void setNewBuffer(void* bufferPointer, unsigned int size);
 
 private:
