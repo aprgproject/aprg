@@ -17,6 +17,7 @@ using tcomToolsBackend::BtsLogTimeType;
 
 namespace alba
 {
+
 namespace ProgressCounters
 {
     int numberOfFilesToBeAnalyzedForExtraction;
@@ -933,7 +934,8 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath)
     double maxCpuTcomGrm = 0;
     double maxCpuTupcConman = 0;
     double maxCpuTcomAalman = 0;
-    double startTime=0, endTime=0;    while(fileReader.isNotFinished())
+    double startTime=0, endTime=0;
+    while(fileReader.isNotFinished())
     {
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if(lineInLogs.length()>67)
@@ -955,7 +957,8 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath)
             else if(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(Aalman_EU)"))
             {
                 maxCpuTcomAalman = std::max(maxCpuTcomAalman, cpuLoad);
-            }            else if(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(top - )"))
+            }
+            else if(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(top - )"))
             {
                 string time = stringHelper::getStringInBetweenTwoStrings(lineInLogs, "top - ", " ");
                 unsigned int hours = stringHelper::convertStringToNumber<unsigned int>(time.substr(0,2));
@@ -974,7 +977,8 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath)
     cout<<"Max CPU LRM TCOM:"<<maxCpuTcomLrm<<endl;
     cout<<"Max CPU TUP Conman:"<<maxCpuTupcConman<<endl;
     cout<<"Max CPU TUP Aalman:"<<maxCpuTcomAalman<<endl;
-    double duration = endTime - startTime;    //cout<<"duration min:"<<duration/60<<" sec:"<<((int)duration)%60<<endl; // di reliable
+    double duration = endTime - startTime;
+    //cout<<"duration min:"<<duration/60<<" sec:"<<((int)duration)%60<<endl; // di reliable
 }
 
 void PerformanceAnalyzer::processFileForRlSetupPerSecond(string const& filePath)
