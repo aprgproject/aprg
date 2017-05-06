@@ -4,7 +4,8 @@
 
 #include <string>
 
-using namespace alba;using namespace std;
+using namespace alba;
+using namespace std;
 
 #define ALBA_FILE_READER_TEST_FILE APRG_DIR R"(\AprgCommon\AprgCommon\tst\FilesForTests\FileReaderTest\Test1.txt)"
 #define ALBA_FILE_READER_SIZE_TEST_FILE APRG_DIR R"(\AprgCommon\AprgCommon\tst\FilesForTests\FileReaderTest\Test2_SizeTest.txt)"
@@ -163,3 +164,6 @@ TEST(FileReadTest, ReadFromTestFile_ReadLineWithSizeLimit)
     EXPECT_FALSE(fileReader.isNotFinished());
     EXPECT_EQ("", fileReader.getLineAndIgnoreWhiteSpaces());
 }
+
+
+

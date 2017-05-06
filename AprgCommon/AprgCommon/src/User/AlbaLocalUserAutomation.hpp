@@ -6,7 +6,8 @@
 #include <string>
 
 #ifdef OS_WINDOWS
-#include <User/AlbaWindowsUserAutomation.hpp>#endif
+#include <User/AlbaWindowsUserAutomation.hpp>
+#endif
 
 namespace alba
 {
@@ -18,3 +19,6 @@ class AlbaLocalUserAutomation: public AlbaWindowsUserAutomation
 };
 
 }
+
+
+

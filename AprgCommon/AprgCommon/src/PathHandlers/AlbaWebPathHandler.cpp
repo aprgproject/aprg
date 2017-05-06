@@ -11,7 +11,8 @@ namespace alba
 {
 
 AlbaWebPathHandler::AlbaWebPathHandler(string const& path)
-    : AlbaPathHandler("/")    , m_hasProtocol(false)
+    : AlbaPathHandler("/")
+    , m_hasProtocol(false)
 {
     save(path);
 }
@@ -99,3 +100,6 @@ void AlbaWebPathHandler::setUrlParameters(string const& urlParameters)
 
 
 }
+
+
+

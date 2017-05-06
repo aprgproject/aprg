@@ -1,14 +1,14 @@
 #include "AprgFileExtractor.hpp"
 
-#include <cassert>
-#include <fstream>
-#include <iostream>
-#include <windows.h>
-
 #include <File/AlbaFileReader.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 #include <String/AlbaStringHelper.hpp>
 
+#include <windows.h>
+
+#include <cassert>
+#include <fstream>
+#include <iostream>
 
 #ifndef PATH_OF_7Z_EXECUTABLE
     static_assert(false, "PATH_OF_7Z_EXECUTABLE is not set in cmake");
@@ -74,7 +74,8 @@ void AprgFileExtractor::copyRelativeFilePathsFromCompressedFile(string const& fi
         string lineInFile(fileReader.getLine());
         if(stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(lineInFile, "Path = "))
         {
-            path = stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(stringHelper::getStringAfterThisString(lineInFile, "Path = "));        }
+            path = stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(stringHelper::getStringAfterThisString(lineInFile, "Path = "));
+        }
         else if(stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(lineInFile, "Attributes = "))
         {
             if(!stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(stringHelper::getStringAfterThisString(lineInFile, "Attributes = "), "D"))
@@ -186,3 +187,5 @@ bool AprgFileExtractor::isTheExtensionXz(string const& extension) const
 }
 
 }
+
+

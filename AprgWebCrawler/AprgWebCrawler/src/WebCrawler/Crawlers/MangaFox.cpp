@@ -1,8 +1,8 @@
+#include <CrawlHelpers/Downloaders.hpp>
 #include <Crawlers/OneDownloadPerPageCrawler.hpp>
-
 #include <File/AlbaFileReader.hpp>
 #include <String/AlbaStringHelper.hpp>
-#include <CrawlHelpers/Downloaders.hpp>
+
 #include <fstream>
 #include <iostream>
 
@@ -58,7 +58,8 @@ void OneDownloadPerPageCrawler::retrieveNextLinkAndImageLinkForMangaFox(AlbaWebP
                 string nextLineInHtmlFile(htmlFileReader.getLine());
                 if(isStringFoundInsideTheOtherStringCaseSensitive(nextLineInHtmlFile, R"(<img src=")"))
                 {
-                    m_linkForCurrentFileToDownload = getStringInBetweenTwoStrings(nextLineInHtmlFile, R"(img src=")", R"(")");                }
+                    m_linkForCurrentFileToDownload = getStringInBetweenTwoStrings(nextLineInHtmlFile, R"(img src=")", R"(")");
+                }
             }
             else if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(class="btn next_page"><span></span>next page</a>)"))
             {
@@ -83,3 +84,5 @@ void OneDownloadPerPageCrawler::retrieveNextLinkAndImageLinkForMangaFox(AlbaWebP
 }
 
 }
+
+

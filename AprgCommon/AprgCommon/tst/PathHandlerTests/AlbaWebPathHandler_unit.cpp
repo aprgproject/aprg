@@ -5,7 +5,8 @@
 #include <fstream>
 #include <string>
 
-using namespace std;using namespace alba;
+using namespace std;
+using namespace alba;
 
 TEST(WebPathTest, DirectoryWithColonAndFileGivenAndNoProtocol)
 {
@@ -70,3 +71,6 @@ TEST(WebPathTest, GotoLinkWhenWithProtocolIsGiven)
     EXPECT_EQ("ext", pathHandler.getExtension());
     EXPECT_EQ(PathType::File, pathHandler.getPathType());
 }
+
+
+

@@ -9,7 +9,8 @@ set(APRG_PROCESS_FILES_SOURCES
     ${APRG_PROCESS_FILES_DIR}/src/CPlusPlusFileFixer/CPlusPlusFileFixer.hpp
     ${APRG_PROCESS_FILES_DIR}/src/SackReader/AlbaSackReader.cpp
     ${APRG_PROCESS_FILES_DIR}/src/SackReader/AlbaSackReader.hpp
-    ${APRG_PROCESS_FILES_DIR}/src/SackReader/AlbaSackReaderParameter.cpp    ${APRG_PROCESS_FILES_DIR}/src/SackReader/AlbaSackReaderParameter.hpp
+    ${APRG_PROCESS_FILES_DIR}/src/SackReader/AlbaSackReaderParameter.cpp
+    ${APRG_PROCESS_FILES_DIR}/src/SackReader/AlbaSackReaderParameter.hpp
     ${APRG_PROCESS_FILES_DIR}/src/SackReader/AlbaSackReaderType.cpp
     ${APRG_PROCESS_FILES_DIR}/src/SackReader/AlbaSackReaderType.hpp
 )
@@ -20,6 +21,7 @@ set(APRG_PROCESS_FILES_TESTS
     ${APRG_PROCESS_FILES_DIR}/tst/CPlusPlusFileFixer_unit.cpp
     ${APRG_PROCESS_FILES_DIR}/tst/DirectoryConstants.hpp
 )
+
 set(APRG_PROCESS_FILES_SOURCES_AND_TESTS
     ${APRG_PROCESS_FILES_SOURCES}
     ${APRG_PROCESS_FILES_TESTS}

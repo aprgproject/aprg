@@ -10,6 +10,7 @@
 #include <string>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -268,3 +269,6 @@ string AlbaWindowsPathHandler::getLastFormattedErrorMessage() const
 }
 
 }//namespace alba
+
+
+

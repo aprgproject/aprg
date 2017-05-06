@@ -4,7 +4,8 @@
 
 #include <string>
 
-using namespace std;using namespace alba::stringHelper;
+using namespace std;
+using namespace alba::stringHelper;
 
 TEST(GetNewStringFromStringTest, FindAndReplaceStrings)
 {
@@ -609,5 +610,8 @@ TEST(ConvertToStringTest, ConvertNumberToStringWithFillCharacter)
     EXPECT_EQ("0000012345.6789", converter.convert(12345.6789));
     EXPECT_EQ("0000-67890.1111", converter.convert(-67890.1111));
 }
+
+
+
 
 

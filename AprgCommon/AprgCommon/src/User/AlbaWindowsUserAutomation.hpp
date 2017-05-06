@@ -7,6 +7,7 @@
 
 namespace alba
 {
+
 struct MousePosition
 {
     int x;
@@ -32,3 +33,6 @@ private:
 };
 
 }
+
+
+

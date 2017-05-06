@@ -1,14 +1,15 @@
 #include "WebCrawler.hpp"
 
-#include <File/AlbaFileReader.hpp>
-#include <String/AlbaStringHelper.hpp>
-#include <algorithm>
+#include <CrawlHelpers/Downloaders.hpp>
 #include <Crawlers/ChiaAnimeCrawler.hpp>
 #include <Crawlers/DoujinMoeCrawler.hpp>
 #include <Crawlers/OneDownloadPerPageCrawler.hpp>
 #include <Crawlers/Y8Crawler.hpp>
 #include <Crawlers/Youtube.hpp>
-#include <CrawlHelpers/Downloaders.hpp>
+#include <File/AlbaFileReader.hpp>
+#include <String/AlbaStringHelper.hpp>
+
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 
@@ -362,7 +363,8 @@ string WebCrawler::getTitleFromTitleWindow(string const& webLink) const
             string lineInHtmlFile(htmlFileReader.getLine());
             if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<title>)"))
             {
-                title = getStringInBetweenTwoStrings(lineInHtmlFile, R"(<title>)", R"(</title>)");            }
+                title = getStringInBetweenTwoStrings(lineInHtmlFile, R"(<title>)", R"(</title>)");
+            }
         }
     }
     return title;
@@ -398,3 +400,5 @@ void WebCrawler::setCrawlState(CrawlState state)
 }
 
 }
+
+

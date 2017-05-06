@@ -7,6 +7,7 @@
 
 using namespace alba;
 using namespace std;
+
 TEST(AlbaWindowsUserAutomationTest, DISABLED_SetMouseTest)
 {
     AlbaWindowsUserAutomation userAutomation;
@@ -77,3 +78,6 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_GetStringFromClipboard)
     AlbaWindowsUserAutomation userAutomation;
     cout <<  userAutomation.getStringFromClipboard() << endl;
 }
+
+
+

@@ -1,9 +1,11 @@
+#include <CrawlHelpers/Downloaders.hpp>
+#include <Crawlers/Youtube.hpp>
 #include <File/AlbaFileReader.hpp>
 #include <String/AlbaStringHelper.hpp>
-#include <Crawlers/Youtube.hpp>
-#include <CrawlHelpers/Downloaders.hpp>
-#include <iostream>
+
 #include <windows.h>
+
+#include <iostream>
 
 using namespace alba;
 using namespace alba::stringHelper;
@@ -90,7 +92,8 @@ void Youtube::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandler)
             string lineInHtmlFile(htmlFileReader.getLine());
             if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(Download)"))
             {
-                isDownloadFound=true;            }
+                isDownloadFound=true;
+            }
             else if(isDownloadFound && isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(http:/)"))
             {
                 m_linkForVideo = getStringWithoutOpeningClosingOperators(lineInHtmlFile, '<', '>');
@@ -166,3 +169,5 @@ void Youtube::printLinks() const
 }
 
 }
+
+

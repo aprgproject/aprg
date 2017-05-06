@@ -1,7 +1,8 @@
+#include <CrawlHelpers/Downloaders.hpp>
+#include <Crawlers/DoujinMoeCrawler.hpp>
 #include <File/AlbaFileReader.hpp>
 #include <String/AlbaStringHelper.hpp>
-#include <Crawlers/DoujinMoeCrawler.hpp>
-#include <CrawlHelpers/Downloaders.hpp>
+
 #include <iostream>
 
 using namespace alba;
@@ -90,7 +91,8 @@ void DoujinMoeCrawler::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandle
             string lineInHtmlFile(htmlFileReader.getLine());
             if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<title>)"))
             {
-                m_title = getStringAndReplaceNonAlphanumericCharactersToUnderScore(getStringInBetweenTwoStrings(lineInHtmlFile, R"(<title>)", R"(</title>)"));            }
+                m_title = getStringAndReplaceNonAlphanumericCharactersToUnderScore(getStringInBetweenTwoStrings(lineInHtmlFile, R"(<title>)", R"(</title>)"));
+            }
             else if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<div id="dircontent">)"))
             {
                 state=1;
@@ -186,3 +188,5 @@ bool DoujinMoeCrawler::areLinksInvalid() const
 }
 
 }
+
+

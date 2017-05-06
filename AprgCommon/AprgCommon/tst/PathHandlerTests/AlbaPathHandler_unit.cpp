@@ -5,7 +5,8 @@
 #include <fstream>
 #include <string>
 
-using namespace std;using namespace alba;
+using namespace std;
+using namespace alba;
 
 TEST(PathTest, FullPathWithDirectoryAndFileGiven)
 {
@@ -67,3 +68,6 @@ TEST(PathTest, GoUpUntilLastFolder)
     EXPECT_EQ(R"(APRG_DRIVE:\)", pathHandler.getFullPath());
     EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
 }
+
+
+

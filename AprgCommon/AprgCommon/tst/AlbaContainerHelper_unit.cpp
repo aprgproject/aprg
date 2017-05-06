@@ -4,7 +4,8 @@
 
 #include <string>
 
-using namespace std;using namespace alba::containerHelper;
+using namespace std;
+using namespace alba::containerHelper;
 
 TEST(ContainerSetTest, GetInclusiveRangeFromSet)
 {
@@ -16,3 +17,6 @@ TEST(ContainerSetTest, GetInclusiveRangeFromSet)
     EXPECT_EQ((pair<int,int>(23, 50)), getInclusiveRangeFromSet(sampleSet, 23));
     EXPECT_EQ((pair<int,int>(5, 23)), getInclusiveRangeFromSet(sampleSet, 7));
 }
+
+
+

@@ -8,7 +8,8 @@
 
 namespace alba{
 
-class AlbaWindowsPathHandler: public AlbaPathHandler{
+class AlbaWindowsPathHandler: public AlbaPathHandler
+{
 public:
     typedef std::set<std::string> ListOfPaths;
     AlbaWindowsPathHandler(PathInitialValueSource const initialValueSource);
@@ -52,3 +53,6 @@ private:
 };
 
 }//namespace alba
+
+
+

@@ -18,7 +18,8 @@ public:
     std::string getLine();
     double getCurrentLocation() const;
     double getFileSize() const;
-    void moveToTheBeginning() const;    void moveLocation(unsigned long long location) const;
+    void moveToTheBeginning() const;
+    void moveLocation(unsigned long long location) const;
     void setMaxBufferSize(unsigned int bufferSize);
 private:
     static const unsigned int MAX_BUFFER_SIZE = 10001;
@@ -28,3 +29,6 @@ private:
 };
 
 }//namespace alba
+
+
+

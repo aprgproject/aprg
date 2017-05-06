@@ -4,7 +4,8 @@
 
 #include <string>
 
-using namespace alba;using namespace std;
+using namespace alba;
+using namespace std;
 
 TEST(AlbaRaiiafPointerTest, IntegerTest)
 {
@@ -52,4 +53,7 @@ TEST(AlbaRaiiafPointerTest, IntAndStringTest)
     EXPECT_EQ(anyPointer.getReference<string>(), "Replace with new object");
     anyPointer.deAllocate<string>();
 }
+
+
+
 

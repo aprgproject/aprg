@@ -1,7 +1,8 @@
+#include <CrawlHelpers/Downloaders.hpp>
+#include <Crawlers/Y8Crawler.hpp>
 #include <File/AlbaFileReader.hpp>
 #include <String/AlbaStringHelper.hpp>
-#include <Crawlers/Y8Crawler.hpp>
-#include <CrawlHelpers/Downloaders.hpp>
+
 #include <iostream>
 
 using namespace alba;
@@ -87,7 +88,8 @@ void Y8Crawler::addWebLinksIfFound(int webLinkIndex)
             string lineInHtmlFile(htmlFileReader.getLine());
             if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<div class="item thumb videobox")"))
             {
-                isInsideVideoBox = true;            }
+                isInsideVideoBox = true;
+            }
             else if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(</div>)"))
             {
                 isInsideVideoBox = false;
@@ -125,7 +127,8 @@ void Y8Crawler::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandler)
             string lineInHtmlFile(htmlFileReader.getLine());
             if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<a class="controls-button maximize-button-no-js" href=")"))
             {
-                m_linkForCurrentFileToDownload = getStringInBetweenTwoStrings(lineInHtmlFile, R"(<a class="controls-button maximize-button-no-js" href=")", R"(")");            }
+                m_linkForCurrentFileToDownload = getStringInBetweenTwoStrings(lineInHtmlFile, R"(<a class="controls-button maximize-button-no-js" href=")", R"(")");
+            }
         }
         AlbaWebPathHandler flashWebPathHandler(webLinkPathHandler);
         flashWebPathHandler.gotoLink(m_linkForCurrentFileToDownload);
@@ -194,3 +197,5 @@ void Y8Crawler::printLinks() const
 }
 
 }
+
+

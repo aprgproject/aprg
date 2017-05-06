@@ -1,17 +1,17 @@
-#include <gtest/gtest.h>
+#include <File/AlbaFileReader.hpp>
+#include <NsapHelper.hpp>
+#include <PathHandlers/AlbaLocalPathHandler.hpp>
 #include <QuickestWayToProgram.hpp>
+#include <String/AlbaStringHelper.hpp>
+#include <stdio.h>
 
+#include <gtest/gtest.h>
 #include <windows.h>
+
+#include <algorithm>
 #include <iostream>
 #include <map>
 #include <string>
-#include <algorithm>
-
-#include <File/AlbaFileReader.hpp>
-#include <String/AlbaStringHelper.hpp>
-#include <PathHandlers/AlbaLocalPathHandler.hpp>
-#include <NsapHelper.hpp>
-#include <stdio.h>
 
 using namespace alba;
 using namespace std;
@@ -45,6 +45,7 @@ TEST(SampleTest, FilesToFind)
         }
     }
 }
+
 /*
 TEST(SampleTest, MessageId_TcomTcom_test)
 {
@@ -489,3 +490,5 @@ TEST(SampleTest, FindThoseIpAddresses)
     }
 }
 */
+
+
