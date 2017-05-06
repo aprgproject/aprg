@@ -9,7 +9,8 @@ namespace alba
 namespace containerHelper
 {
 
-template <typename ValueType> std::pair<ValueType,ValueType> getInclusiveRangeFromSet(std::set<ValueType> const& container, ValueType const& value){
+template <typename ValueType> std::pair<ValueType,ValueType> getInclusiveRangeFromSet(std::set<ValueType> const& container, ValueType const& value)
+{
     std::pair<ValueType,ValueType> result;
     typename std::set<ValueType>::const_iterator itUpper = container.upper_bound(value);
     typename std::set<ValueType>::const_iterator itLower(itUpper);

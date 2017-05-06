@@ -34,7 +34,8 @@ bool AlbaMemoryBuffer::hasContent() const
 
 unsigned int AlbaMemoryBuffer::getSize() const
 {
-    return m_size;}
+    return m_size;
+}
 
 void* AlbaMemoryBuffer::getBufferPointer()
 {
