@@ -1,12 +1,12 @@
 #pragma once
 
-#include <functional>
-#include <string>
 #include <windows.h>
 
+#include <functional>
+#include <string>
+
 #ifdef OS_WINDOWS
-#include <User/AlbaWindowsUserAutomation.hpp>
-#endif
+#include <User/AlbaWindowsUserAutomation.hpp>#endif
 
 namespace alba
 {

@@ -1,10 +1,10 @@
 #include <Container/AlbaContainerHelper.hpp>
 
 #include <gtest/gtest.h>
+
 #include <string>
 
-using namespace std;
-using namespace alba::containerHelper;
+using namespace std;using namespace alba::containerHelper;
 
 TEST(ContainerSetTest, GetInclusiveRangeFromSet)
 {

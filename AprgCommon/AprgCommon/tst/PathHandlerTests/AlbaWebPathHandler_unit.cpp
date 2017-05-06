@@ -1,11 +1,11 @@
 #include <PathHandlers/AlbaWebPathHandler.hpp>
 
-#include <fstream>
 #include <gtest/gtest.h>
+
+#include <fstream>
 #include <string>
 
-using namespace std;
-using namespace alba;
+using namespace std;using namespace alba;
 
 TEST(WebPathTest, DirectoryWithColonAndFileGivenAndNoProtocol)
 {

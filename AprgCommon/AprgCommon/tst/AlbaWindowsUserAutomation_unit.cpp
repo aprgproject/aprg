@@ -1,12 +1,12 @@
 #include <User/AlbaWindowsUserAutomation.hpp>
 
 #include <gtest/gtest.h>
-#include <iostream>
 #include <windows.h>
+
+#include <iostream>
 
 using namespace alba;
 using namespace std;
-
 TEST(AlbaWindowsUserAutomationTest, DISABLED_SetMouseTest)
 {
     AlbaWindowsUserAutomation userAutomation;

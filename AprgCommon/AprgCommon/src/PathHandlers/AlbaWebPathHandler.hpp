@@ -1,10 +1,10 @@
 #pragma once
 
 #include <PathHandlers/AlbaPathHandler.hpp>
+
 #include <string>
 
 namespace alba{
-
 class AlbaWebPathHandler: public AlbaPathHandler
 {
 public:

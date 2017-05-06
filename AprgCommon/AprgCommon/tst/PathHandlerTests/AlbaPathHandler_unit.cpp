@@ -1,11 +1,11 @@
 #include <PathHandlers/AlbaPathHandler.hpp>
 
-#include <fstream>
 #include <gtest/gtest.h>
+
+#include <fstream>
 #include <string>
 
-using namespace std;
-using namespace alba;
+using namespace std;using namespace alba;
 
 TEST(PathTest, FullPathWithDirectoryAndFileGiven)
 {

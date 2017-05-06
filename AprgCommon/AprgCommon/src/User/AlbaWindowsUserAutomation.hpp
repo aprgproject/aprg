@@ -1,12 +1,12 @@
 #pragma once
 
+#include <windows.h>
+
 #include <functional>
 #include <string>
-#include <windows.h>
 
 namespace alba
 {
-
 struct MousePosition
 {
     int x;

@@ -1,12 +1,12 @@
 #include "AlbaWindowsUserAutomation.hpp"
 
-#include <cctype>
-#include <windows.h>
-
 #include <String/AlbaStringHelper.hpp>
 
-using namespace std;
+#include <windows.h>
 
+#include <cctype>
+
+using namespace std;
 namespace alba
 {
 

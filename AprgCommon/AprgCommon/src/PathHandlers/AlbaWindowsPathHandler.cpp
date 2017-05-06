@@ -2,14 +2,14 @@
 
 #include <String/AlbaStringHelper.hpp>
 
+#include <windows.h>
+
 #include <functional>
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <windows.h>
 
 using namespace std;
-
 namespace alba
 {
 
