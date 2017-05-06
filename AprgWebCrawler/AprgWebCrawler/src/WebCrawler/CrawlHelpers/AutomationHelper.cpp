@@ -8,11 +8,10 @@
 #include <windows.h>
 
 
-#define APRG_WEB_CRAWLER_AUTOMATION_CONFIGURATION_FILE R"(C:\APRG\AprgWebCrawler\automationConfiguration.txt)"
+#define APRG_WEB_CRAWLER_AUTOMATION_CONFIGURATION_FILE APRG_DIR R"(AprgWebCrawler\automationConfiguration.txt)"
 
 using namespace alba;
-using namespace std;
-using namespace stringHelper;
+using namespace std;using namespace stringHelper;
 
 namespace aprgWebCrawler
 {

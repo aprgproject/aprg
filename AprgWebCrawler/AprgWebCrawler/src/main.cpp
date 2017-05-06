@@ -3,11 +3,10 @@
 #include <UserInterface.hpp>
 #include <WebCrawler.hpp>
 
-#define APRG_CRAWLER_TEMPORARY_FILE_PATH R"(C:\APRG\AprgWebCrawler\TemporaryFile)"
+#define APRG_CRAWLER_TEMPORARY_FILE_PATH APRG_DIR R"(AprgWebCrawler\TemporaryFile)"
 
 using namespace aprgWebCrawler;
 using namespace std;
-
 int main(int argc, char** argv)
 {
     if(argc < 2)

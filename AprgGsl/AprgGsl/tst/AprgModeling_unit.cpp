@@ -4,12 +4,11 @@
 using namespace alba;
 using namespace std;
 
-#define ALBA_MODELING_DATA_SET_FILE1 R"(C:\APRG\AprgGsl\AprgGsl\tst\ModelingDataSets\DataSet1.csv)"
-#define ALBA_MODELING_DATA_SET_FILE2 R"(C:\APRG\AprgGsl\AprgGsl\tst\ModelingDataSets\DataSet2.csv)"
+#define ALBA_MODELING_DATA_SET_FILE1 APRG_DIR R"(AprgGsl\AprgGsl\tst\ModelingDataSets\DataSet1.csv)"
+#define ALBA_MODELING_DATA_SET_FILE2 APRG_DIR R"(AprgGsl\AprgGsl\tst\ModelingDataSets\DataSet2.csv)"
 
 TEST(SampleTest, TestForDataSet)
-{
-    AprgModeling modeling;
+{    AprgModeling modeling;
     modeling.saveValuesFromFileToFileDataBuffer(ALBA_MODELING_DATA_SET_FILE1);
     modeling.fillSampleDataBufferFromFileDataBufferRandomly();
     modeling.divideSamplesToModelingAndValidation(50,50);

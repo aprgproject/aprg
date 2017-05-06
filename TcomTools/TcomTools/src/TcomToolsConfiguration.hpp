@@ -4,11 +4,10 @@
 #include <LargeSorter/AlbaLargeSorterConfiguration.hpp>
 #include <string>
 
-#define CONFIGURATION_FILE R"(C:\APRG\TcomTools\TcomTools\configuration\configuration.txt)"
+#define CONFIGURATION_FILE APRG_DIR R"(C:\APRG\TcomTools\TcomTools\configuration\configuration.txt)"
 
 namespace tcomToolsGui
 {
-
 struct TcomToolsConfiguration
 {
     TcomToolsConfiguration();

@@ -6,11 +6,10 @@
 #include <string>
 #include <windows.h>
 
-#define PHANTOM_BIN_PATH R"(C:\APRG\PhantomJs\PhantomJs\bin\)"
+#define PHANTOM_BIN_PATH APRG_DIR R"(PhantomJs\PhantomJs\bin\)"
 
 using namespace alba;
-using namespace curl::CurlInterface;
-using namespace std;
+using namespace curl::CurlInterface;using namespace std;
 
 namespace aprgWebCrawler
 {
