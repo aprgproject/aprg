@@ -1,11 +1,13 @@
 #include "AlbaUserAutomation.hpp"
-#include <String/AlbaStringHelper.hpp>
+
 #include <cctype>
+#include <windows.h>
+
+#include <String/AlbaStringHelper.hpp>
 
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 bool AlbaUserAutomation::isLetterPressed(char letter) const
 {
@@ -109,11 +111,10 @@ void AlbaUserAutomation::typeCharacter(char character) const
     });
 }
 
-int AlbaUserAutomation::convertToVirtualKey(char character) const
+unsigned int AlbaUserAutomation::convertToVirtualKey(char character) const
 {
     int virtualKey = character;
-    if(stringHelper::isLetter(character))
-    {
+    if(stringHelper::isLetter(character))    {
         virtualKey = ::toupper(character);
     }
     else if('.' == character)

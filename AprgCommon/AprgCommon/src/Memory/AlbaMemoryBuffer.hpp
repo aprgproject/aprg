@@ -1,10 +1,7 @@
 #pragma once
 
-#include <windows.h>
-
 namespace alba
 {
-
 class AlbaMemoryBuffer
 {
 public:
