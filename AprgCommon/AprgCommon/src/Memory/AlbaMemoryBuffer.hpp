@@ -2,6 +2,7 @@
 
 namespace alba
 {
+
 class AlbaMemoryBuffer
 {
 public:

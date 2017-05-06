@@ -25,6 +25,7 @@ endif()
 
 #Include gTest, this needs APRG Directory
 include(${APRG_DIR}/gtest-1.7.0/AprgCmakeInclude/gtest.cmake)
+
 #Add files and directories
 include(${APRG_COMMON_DIR}/cmake/FilesAndDirectories.cmake)
 
