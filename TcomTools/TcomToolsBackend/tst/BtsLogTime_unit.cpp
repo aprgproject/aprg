@@ -19,7 +19,8 @@ TEST(BtsLogTimeTest, BtsTimeStampWithSevenNumbersIsUsed)
     EXPECT_EQ("<2015-08-20T18:14:51.565172Z>", logTime.getEquivalentStringBtsTimeFormat());
 }
 
-TEST(BtsLogTimeTest, BtsTimeStampWithSpacesAreStartAndEnd){
+TEST(BtsLogTimeTest, BtsTimeStampWithSpacesAreStartAndEnd)
+{
     BtsLogTime logTime(BtsLogTimeType::BtsTimeStamp, " <2015-08-20T18:14:51.565172Z> ");
 
     EXPECT_EQ(2015, logTime.getYears());
@@ -37,6 +38,7 @@ TEST(BtsLogTimeTest, BtsTimeStampWithSpacesAreStartAndEnd){
 TEST(BtsLogTimeTest, PcTimeStampWithSixNumbersIsUsed)
 {
     BtsLogTime logTime(BtsLogTimeType::BtsTimeStamp, "13.09 05:24:24.772449");
+
     EXPECT_EQ(0, logTime.getYears());
     EXPECT_EQ(9, logTime.getMonths());
     EXPECT_EQ(13, logTime.getDays());
@@ -49,7 +51,8 @@ TEST(BtsLogTimeTest, PcTimeStampWithSixNumbersIsUsed)
     EXPECT_EQ("<0000-09-13T05:24:24.772449Z>", logTime.getEquivalentStringBtsTimeFormat());
 }
 
-TEST(BtsLogTimeTest, PcTimeStampIsUsed){
+TEST(BtsLogTimeTest, PcTimeStampIsUsed)
+{
     BtsLogTime logTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:02.982");
 
     EXPECT_EQ(0, logTime.getYears());
@@ -64,7 +67,8 @@ TEST(BtsLogTimeTest, PcTimeStampIsUsed){
     EXPECT_EQ("<0000-09-23T12:06:02.982000Z>", logTime.getEquivalentStringBtsTimeFormat());
 }
 
-TEST(BtsLogTimeTest, LessThanOperatorWorksAsIntended){
+TEST(BtsLogTimeTest, LessThanOperatorWorksAsIntended)
+{
     BtsLogTime logTime1(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565172Z");
     BtsLogTime logTime2(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565173Z");
     BtsLogTime logTime3(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:52.565172Z");

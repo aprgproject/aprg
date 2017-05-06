@@ -13,7 +13,8 @@ TEST(SampleTest, GenerateFeatureSpecificComponentFiles)
     AlbaWindowsPathHandler featureSpecificDirectory(APRG_DIR R"(DesignDocumentCreator\DesignDocumentCreator\src\RAN3374\FeatureSpecificFiles)");
 
     ofstream addComponentFile(featureSpecificDirectory.getFullPath()+"AddComponent.hpp");
-    ofstream componentsIncludesFile(featureSpecificDirectory.getFullPath()+"ComponentsIncludes.hpp");    ofstream convertToStringComponentNameFile(featureSpecificDirectory.getFullPath()+"ConvertToStringComponentName.hpp");
+    ofstream componentsIncludesFile(featureSpecificDirectory.getFullPath()+"ComponentsIncludes.hpp");
+    ofstream convertToStringComponentNameFile(featureSpecificDirectory.getFullPath()+"ConvertToStringComponentName.hpp");
 
     array<string> ran3374components = {"DMGR", "GRM", "LRM", "Rake", "RF", "TLH", "TOAM", "WRC"};
 

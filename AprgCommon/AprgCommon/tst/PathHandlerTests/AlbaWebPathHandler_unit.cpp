@@ -9,7 +9,8 @@ using namespace alba;
 
 TEST(WebPathTest, DirectoryWithColonAndFileGivenAndNoProtocol)
 {
-    AlbaWebPathHandler pathHandler(R"(\\::://directory!@#$%12345\\\\/\\\\/file.txt)");    EXPECT_FALSE(pathHandler.hasProtocol());
+    AlbaWebPathHandler pathHandler(R"(\\::://directory!@#$%12345\\\\/\\\\/file.txt)");
+    EXPECT_FALSE(pathHandler.hasProtocol());
     EXPECT_TRUE(pathHandler.getProtocol().empty());
     EXPECT_EQ(R"(\\::://directory!@#$%12345/)", pathHandler.getDirectory());
     EXPECT_EQ("file.txt", pathHandler.getFile());

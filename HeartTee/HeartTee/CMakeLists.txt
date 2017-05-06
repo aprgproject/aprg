@@ -23,6 +23,7 @@ add_definitions(-DAPRG_DIR="${APRG_DIR}")
 
 #Include gTest, this needs APRG Directory
 include(${APRG_DIR}/gtest-1.7.0/AprgCmakeInclude/gtest.cmake)
+
 set(SOURCES
     src/HeartTee/HeartTee.cpp
     src/HeartTee/HeartTee.hpp

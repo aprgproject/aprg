@@ -38,6 +38,7 @@ struct BtsLogSorterTest : public testing::Test
     }
     BtsLogSorterConfiguration m_configuration;
 };
+
 TEST_F(BtsLogSorterTest, PerformanceTest)
 {
     BtsLogSorter btsLogSorter(m_configuration);
@@ -55,7 +56,8 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotTest_PrintsAreMerged)
     ifstream inputLogFileStream(APRG_DIR R"(TcomTools\TcomToolsBackend\tst\ImportantTestingFiles\SyslogsAndSnapshotTest_PrintsAreMerged\output.log)");
     AlbaFileReader fileReader(inputLogFileStream);
     while(fileReader.isNotFinished())
-    {        fileReader.getLineAndIgnoreWhiteSpaces();
+    {
+        fileReader.getLineAndIgnoreWhiteSpaces();
         lines++;
     }
 
@@ -72,7 +74,8 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotTest_PrintsAreMerged2)
     ifstream inputLogFileStream(APRG_DIR R"(TcomTools\TcomToolsBackend\tst\ImportantTestingFiles\SyslogsAndSnapshotTest_PrintsAreMerged2\output.log)");
     AlbaFileReader fileReader(inputLogFileStream);
     while(fileReader.isNotFinished())
-    {        fileReader.getLineAndIgnoreWhiteSpaces();
+    {
+        fileReader.getLineAndIgnoreWhiteSpaces();
         lines++;
     }
 
@@ -89,7 +92,8 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotTest_PrintsAreOrderedBasedOnBtsTime)
     ifstream inputLogFileStream(APRG_DIR R"(TcomTools\TcomToolsBackend\tst\ImportantTestingFiles\SyslogsAndSnapshotTest_PrintsAreOrderedBasedOnBtsTime\output.log)");
     AlbaFileReader fileReader(inputLogFileStream);
     while(fileReader.isNotFinished())
-    {        fileReader.getLineAndIgnoreWhiteSpaces();
+    {
+        fileReader.getLineAndIgnoreWhiteSpaces();
         lines++;
     }
 

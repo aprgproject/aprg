@@ -23,7 +23,8 @@ add_definitions(-DAPRG_DIR="${APRG_DIR}")
 
 # Add MacPorts
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-  set(CMAKE_PREFIX_PATH /opt/local ${CMAKE_PREFIX_PATH})endif()
+  set(CMAKE_PREFIX_PATH /opt/local ${CMAKE_PREFIX_PATH})
+endif()
 
 #Include aprgCommon, this needs APRG Directory
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)

@@ -8,6 +8,7 @@
 
 namespace tcomToolsGui
 {
+
 struct TcomToolsConfiguration
 {
     TcomToolsConfiguration();

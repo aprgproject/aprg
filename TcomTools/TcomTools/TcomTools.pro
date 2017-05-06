@@ -33,7 +33,8 @@ src/TcomToolsConfiguration.cpp\
 ../../AprgCommon/AprgCommon/src/String/AlbaStringHelper.cpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.cpp
 
-HEADERS += \src/ProgressCounters.hpp\
+HEADERS += \
+src/ProgressCounters.hpp\
 src/ProgressBarThread.hpp\
 src/StepHandler.hpp\
 src/StepHandlerThread.hpp\

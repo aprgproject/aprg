@@ -20,7 +20,8 @@ TEST(AlbaSackReaderTest, ClassesAreRecognized)
     ofstream testFile(APRG_PROCESS_FILES_TEST_FILE_TO_READ);
     ASSERT_TRUE(testFile.is_open());
     testFile << "class myClass" << endl;
-    testFile << "{" << endl;    testFile << "unsigned long int integerParameter;" << endl;
+    testFile << "{" << endl;
+    testFile << "unsigned long int integerParameter;" << endl;
     testFile << "double doubleParameter;" << endl;
     testFile << "};" << endl;
     testFile.close();
@@ -28,7 +29,8 @@ TEST(AlbaSackReaderTest, ClassesAreRecognized)
     AlbaSackReader sackReader(APRG_PROCESS_FILES_TEST_FILE_TO_READ);
     sackReader.process();
     AlbaSackReaderType myClass = sackReader.getType("myClass");
-    AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();    ASSERT_EQ(2, myClassParameters.size());
+    AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
+    ASSERT_EQ(2, myClassParameters.size());
     EXPECT_EQ("unsigned long int", myClassParameters[0].getTypeName());
     EXPECT_EQ("integerParameter", myClassParameters[0].getParameterName());
     EXPECT_EQ("double", myClassParameters[1].getTypeName());
@@ -45,7 +47,8 @@ TEST(AlbaSackReaderTest, ClassesAreRecognizedInForwardDeclaration)
     AlbaSackReader sackReader(APRG_PROCESS_FILES_TEST_FILE_TO_READ);
     sackReader.process();
     AlbaSackReaderType myClass = sackReader.getType("myClass");
-    AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();    ASSERT_EQ(0, myClassParameters.size());
+    AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
+    ASSERT_EQ(0, myClassParameters.size());
 }
 
 TEST(AlbaSackReaderTest, TypedefAreRecognized)
@@ -58,7 +61,8 @@ TEST(AlbaSackReaderTest, TypedefAreRecognized)
     AlbaSackReader sackReader(APRG_PROCESS_FILES_TEST_FILE_TO_READ);
     sackReader.process();
     AlbaSackReaderType type1 = sackReader.getType("type1");
-    AlbaSackReaderType::Parameters type1Parameters = type1.getParameters();    AlbaSackReaderType::TypeNames type1OtherTypes = type1.getOtherTypes();
+    AlbaSackReaderType::Parameters type1Parameters = type1.getParameters();
+    AlbaSackReaderType::TypeNames type1OtherTypes = type1.getOtherTypes();
     AlbaSackReaderType type2 = sackReader.getType("type2");
     AlbaSackReaderType::Parameters type2Parameters = type2.getParameters();
     AlbaSackReaderType::TypeNames type2OtherTypes = type2.getOtherTypes();
@@ -80,7 +84,8 @@ TEST(AlbaSackReaderTest, TypedefArrayAreRecognized)
     AlbaSackReader sackReader(APRG_PROCESS_FILES_TEST_FILE_TO_READ);
     sackReader.process();
     AlbaSackReaderType type1 = sackReader.getType("type1");
-    AlbaSackReaderType::Parameters type1Parameters = type1.getParameters();    AlbaSackReaderType::TypeNames type1OtherTypes = type1.getOtherTypes();
+    AlbaSackReaderType::Parameters type1Parameters = type1.getParameters();
+    AlbaSackReaderType::TypeNames type1OtherTypes = type1.getOtherTypes();
     AlbaSackReaderType type2 = sackReader.getType("type2[5]");
     AlbaSackReaderType::Parameters type2Parameters = type2.getParameters();
     AlbaSackReaderType::TypeNames type2OtherTypes = type2.getOtherTypes();
@@ -102,7 +107,8 @@ TEST(AlbaSackReaderTest, TypedefWithStructAreRecognized)
     AlbaSackReader sackReader(APRG_PROCESS_FILES_TEST_FILE_TO_READ);
     sackReader.process();
     AlbaSackReaderType type2 = sackReader.getType("type2");
-    AlbaSackReaderType::Parameters type2Parameters = type2.getParameters();    AlbaSackReaderType::TypeNames type2OtherTypes = type2.getOtherTypes();
+    AlbaSackReaderType::Parameters type2Parameters = type2.getParameters();
+    AlbaSackReaderType::TypeNames type2OtherTypes = type2.getOtherTypes();
     ASSERT_EQ(0, type2Parameters.size());
     ASSERT_EQ(0, type2OtherTypes.size());
 }
@@ -112,7 +118,8 @@ TEST(AlbaSackReaderTest, TypedefWithStructWithParametersAreRecognized)
     ofstream testFile(APRG_PROCESS_FILES_TEST_FILE_TO_READ);
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef struct myStruct1" << endl;
-    testFile << "{" << endl;    testFile << "unsigned long int integerParameter;" << endl;
+    testFile << "{" << endl;
+    testFile << "unsigned long int integerParameter;" << endl;
     testFile << "double doubleParameter;" << endl;
     testFile << "} myStruct2;" << endl;
     testFile.close();
@@ -121,7 +128,8 @@ TEST(AlbaSackReaderTest, TypedefWithStructWithParametersAreRecognized)
     AlbaSackReader sackReader(APRG_PROCESS_FILES_TEST_FILE_TO_READ);
     sackReader.process();
     AlbaSackReaderType myClass = sackReader.getType("myStruct2");
-    AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();    AlbaSackReaderType::TypeNames myClassOtherTypes = myClass.getOtherTypes();
+    AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
+    AlbaSackReaderType::TypeNames myClassOtherTypes = myClass.getOtherTypes();
     ASSERT_EQ(2, myClassParameters.size());
     EXPECT_EQ("unsigned long int", myClassParameters[0].getTypeName());
     EXPECT_EQ("integerParameter", myClassParameters[0].getParameterName());
@@ -135,7 +143,8 @@ TEST(AlbaSackReaderTest, TypedefWithSingleStructWithParametersAreRecognized)
     ofstream testFile(APRG_PROCESS_FILES_TEST_FILE_TO_READ);
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef struct" << endl;
-    testFile << "{" << endl;    testFile << "unsigned long int integerParameter;" << endl;
+    testFile << "{" << endl;
+    testFile << "unsigned long int integerParameter;" << endl;
     testFile << "double doubleParameter;" << endl;
     testFile << "} myStruct1;" << endl;
     testFile.close();
@@ -144,7 +153,8 @@ TEST(AlbaSackReaderTest, TypedefWithSingleStructWithParametersAreRecognized)
     AlbaSackReader sackReader(APRG_PROCESS_FILES_TEST_FILE_TO_READ);
     sackReader.process();
     AlbaSackReaderType myClass = sackReader.getType("myStruct1");
-    AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();    AlbaSackReaderType::TypeNames myClassOtherTypes = myClass.getOtherTypes();
+    AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
+    AlbaSackReaderType::TypeNames myClassOtherTypes = myClass.getOtherTypes();
     ASSERT_EQ(2, myClassParameters.size());
     EXPECT_EQ("unsigned long int", myClassParameters[0].getTypeName());
     EXPECT_EQ("integerParameter", myClassParameters[0].getParameterName());
@@ -159,7 +169,8 @@ TEST(AlbaSackReaderTest, TypedefWithUnionWithParametersAreRecognized)
     ofstream testFile(APRG_PROCESS_FILES_TEST_FILE_TO_READ);
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef union myUnion1" << endl;
-    testFile << "{" << endl;    testFile << "unsigned long int integerParameter;" << endl;
+    testFile << "{" << endl;
+    testFile << "unsigned long int integerParameter;" << endl;
     testFile << "double doubleParameter;" << endl;
     testFile << "} myUnion2;" << endl;
     testFile.close();
@@ -168,7 +179,8 @@ TEST(AlbaSackReaderTest, TypedefWithUnionWithParametersAreRecognized)
     AlbaSackReader sackReader(APRG_PROCESS_FILES_TEST_FILE_TO_READ);
     sackReader.process();
     AlbaSackReaderType myClass = sackReader.getType("myUnion2");
-    AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();    AlbaSackReaderType::TypeNames myClassOtherTypes = myClass.getOtherTypes();
+    AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
+    AlbaSackReaderType::TypeNames myClassOtherTypes = myClass.getOtherTypes();
     ASSERT_EQ(2, myClassParameters.size());
     EXPECT_EQ("unsigned long int", myClassParameters[0].getTypeName());
     EXPECT_EQ("integerParameter", myClassParameters[0].getParameterName());
@@ -183,7 +195,8 @@ TEST(AlbaSackReaderTest, TypedefWithEnumAreRecognized)
     ofstream testFile(APRG_PROCESS_FILES_TEST_FILE_TO_READ);
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef enum {" << endl;
-    testFile << "MyEnum_Value0  = 0," << endl;    testFile << "MyEnum_Value2  = 2," << endl;
+    testFile << "MyEnum_Value0  = 0," << endl;
+    testFile << "MyEnum_Value2  = 2," << endl;
     testFile << "MyEnum_Value5  = 5" << endl;
     testFile << "} MyEnum;" << endl;
     testFile << "" << endl;
@@ -192,5 +205,6 @@ TEST(AlbaSackReaderTest, TypedefWithEnumAreRecognized)
     AlbaSackReader sackReader(APRG_PROCESS_FILES_TEST_FILE_TO_READ);
     sackReader.process();
     AlbaSackReaderType myClass = sackReader.getType("MyEnum");
-    AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();    ASSERT_EQ(0, myClassParameters.size());
+    AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
+    ASSERT_EQ(0, myClassParameters.size());
 }
