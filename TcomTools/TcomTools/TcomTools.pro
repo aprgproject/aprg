@@ -26,15 +26,14 @@ src/TcomToolsConfiguration.cpp\
 ../TcomToolsBackend/src/BtsPrintReaderWithRollback.cpp\
 ../../AprgAlgorithm/AprgAlgorithm/src/GrepStringEvaluator/AlbaGrepStringEvaluator.cpp\
 ../../AprgAlgorithm/AprgAlgorithm/src/GrepStringEvaluator/AlbaGrepStringEvaluatorTerm.cpp\
-../../AprgCommon/AprgCommon/src/AlbaFileReader.cpp\
-../../AprgCommon/AprgCommon/src/AlbaStringHelper.cpp\
-../../AprgCommon/AprgCommon/src/AlbaOptional.cpp\
+../../AprgCommon/AprgCommon/src/File/AlbaFileReader.cpp\
+../../AprgCommon/AprgCommon/src/Optional/AlbaOptional.cpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.cpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaWindowsPathHandler.cpp\
+../../AprgCommon/AprgCommon/src/String/AlbaStringHelper.cpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.cpp
 
-HEADERS += \
-src/ProgressCounters.hpp\
+HEADERS += \src/ProgressCounters.hpp\
 src/ProgressBarThread.hpp\
 src/StepHandler.hpp\
 src/StepHandlerThread.hpp\
