@@ -32,11 +32,10 @@ void OneDownloadPerPageCrawler::retrieveLinksForMangaHere(AlbaWebPathHandler con
         AlbaFileReader htmlFileReader(htmlFileStream);
         while (htmlFileReader.isNotFinished())
         {
-            string lineInHtmlFile(htmlFileReader.simpleGetLine());
+            string lineInHtmlFile(htmlFileReader.getLine());
             if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(section class="read_img")"))
             {
-                insideImportantSection = true;
-            }
+                insideImportantSection = true;            }
             else if(insideImportantSection && isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(onclick="return next_page();")"))
             {
                 nextPageLink = getStringInBetweenTwoStrings(lineInHtmlFile, R"(<a href=")", R"(")");

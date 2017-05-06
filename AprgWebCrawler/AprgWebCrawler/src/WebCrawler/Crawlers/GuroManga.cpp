@@ -31,11 +31,10 @@ void OneDownloadPerPageCrawler::retrieveLinksForGuroManga(AlbaWebPathHandler con
         AlbaFileReader htmlFileReader(htmlFileStream);
         while (htmlFileReader.isNotFinished())
         {
-            string lineInHtmlFile(htmlFileReader.simpleGetLine());
+            string lineInHtmlFile(htmlFileReader.getLine());
             if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<div class="page-image">)"))
             {
-                isDivClassImage = true;
-            }
+                isDivClassImage = true;            }
             else if(isDivClassImage && isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<a href=")"))
             {
                 m_linkForNextHtml = getStringInBetweenTwoStrings(lineInHtmlFile, R"(<a href=")", R"(")");

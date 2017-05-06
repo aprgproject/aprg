@@ -64,11 +64,10 @@ void ChiaAnimeCrawler::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandle
         AlbaFileReader htmlFileReader(htmlFileStream);
         while (htmlFileReader.isNotFinished())
         {
-            string lineInHtmlFile(htmlFileReader.simpleGetLine());
+            string lineInHtmlFile(htmlFileReader.getLine());
             if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<a id="download")"))
             {
-                m_linkForDownloadPage = getStringInBetweenTwoStrings(lineInHtmlFile, R"(href=")", R"(")");
-            }
+                m_linkForDownloadPage = getStringInBetweenTwoStrings(lineInHtmlFile, R"(href=")", R"(")");            }
             else if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(>Next Episode<)"))
             {
                 m_linkForNextHtml = getStringInBetweenTwoStrings(lineInHtmlFile, R"(<a href=")", R"(")");
@@ -98,11 +97,10 @@ string ChiaAnimeCrawler::getVideoLink(AlbaWebPathHandler const& webLinkPathHandl
         AlbaFileReader htmlFileReader(htmlFileStream);
         while (htmlFileReader.isNotFinished())
         {
-            string lineInHtmlFile(htmlFileReader.simpleGetLine());
+            string lineInHtmlFile(htmlFileReader.getLine());
             if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"( target="_blank" )") &&
                     isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"( download=")"))
-            {
-                string webLink1(getStringInBetweenTwoStrings(lineInHtmlFile, R"(href=")", R"(")"));
+            {                string webLink1(getStringInBetweenTwoStrings(lineInHtmlFile, R"(href=")", R"(")"));
                 string webLink2(getStringAfterThisString(lineInHtmlFile, R"(href=")"));
                 if(webLink1.empty())
                 {

@@ -29,11 +29,10 @@ void OneDownloadPerPageCrawler::retrieveLinksForHBrowse(AlbaWebPathHandler const
         AlbaFileReader htmlFileReader(htmlFileStream);
         while (htmlFileReader.isNotFinished())
         {
-            string lineInHtmlFile(htmlFileReader.simpleGetLine());
+            string lineInHtmlFile(htmlFileReader.getLine());
             if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<img id="mangaImage")"))
             {
-                m_linkForCurrentFileToDownload = getStringInBetweenTwoStrings(lineInHtmlFile, R"( src=")", R"(")");
-            }
+                m_linkForCurrentFileToDownload = getStringInBetweenTwoStrings(lineInHtmlFile, R"( src=")", R"(")");            }
             if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<a name="next")"))
             {
                 m_linkForNextHtml = getStringInBetweenTwoStrings(lineInHtmlFile, R"( href=")", R"(")");

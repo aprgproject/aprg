@@ -63,11 +63,10 @@ string AlbaFileReader::getLineAndIgnoreWhiteSpaces()
     return "";
 }
 
-string AlbaFileReader::simpleGetLine()
+string AlbaFileReader::getLine()
 {
     if(!m_stream.eof())
-    {
-        m_stream.clear();
+    {        m_stream.clear();
         m_stream.getline (m_characterBuffer, m_bufferSize);
         return string(m_characterBuffer);
     }

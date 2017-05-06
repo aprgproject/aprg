@@ -38,11 +38,10 @@ void WebCrawler::saveImageListFromGoogleImages()
     unordered_set<string> listOfImages;
     while (htmlFileReader.isNotFinished())
     {
-        string lineInHtmlFile(htmlFileReader.simpleGetLine());
+        string lineInHtmlFile(htmlFileReader.getLine());
         if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, "http://www.google.com/imgres?imgurl="))
         {
-            int indexOfImgres = lineInHtmlFile.find("http://www.google.com/imgres?");
-            while(stringHelper::isNotNpos(indexOfImgres))
+            int indexOfImgres = lineInHtmlFile.find("http://www.google.com/imgres?");            while(stringHelper::isNotNpos(indexOfImgres))
             {
                 listOfImages.emplace(getStringInBetweenTwoStrings(lineInHtmlFile, "imgurl=", "&", indexOfImgres));
                 indexOfImgres = lineInHtmlFile.find("http://www.google.com/imgres?", indexOfImgres);
@@ -69,10 +68,9 @@ void WebCrawler::downloadGoogleImages() const
     deque<string> listOfImages;
     while (listFileReader.isNotFinished())
     {
-        listOfImages.emplace_back(listFileReader.simpleGetLine());
+        listOfImages.emplace_back(listFileReader.getLine());
     }
     listFileStream.close();
-
 
     while(!listOfImages.empty())
     {

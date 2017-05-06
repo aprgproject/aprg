@@ -33,11 +33,10 @@ void BtsTraceDecoder::processInputTraceFile(std::string const& inputTraceFilePat
         AlbaFileReader traceFileReader(traceFile);
         while(traceFileReader.isNotFinished())
         {
-            string lineInTraceFile(traceFileReader.simpleGetLine());
+            string lineInTraceFile(traceFileReader.getLine());
             unsigned int traceAddressValue = convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInTraceFile, "[", "]"));
             if(traceAddressValue != 0)
-            {
-                cout<<"TraceAddressValue: [0x"<<std::hex<<traceAddressValue<<"] NearestSymbol: ["<<getNearestLowerSymbol(traceAddressValue)<<"]"<<endl;
+            {                cout<<"TraceAddressValue: [0x"<<std::hex<<traceAddressValue<<"] NearestSymbol: ["<<getNearestLowerSymbol(traceAddressValue)<<"]"<<endl;
             }
         }
     }

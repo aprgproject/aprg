@@ -87,11 +87,10 @@ void DoujinMoeCrawler::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandle
         AlbaFileReader htmlFileReader(htmlFileStream);
         while (htmlFileReader.isNotFinished())
         {
-            string lineInHtmlFile(htmlFileReader.simpleGetLine());
+            string lineInHtmlFile(htmlFileReader.getLine());
             if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<title>)"))
             {
-                m_title = getStringAndReplaceNonAlphanumericCharactersToUnderScore(getStringInBetweenTwoStrings(lineInHtmlFile, R"(<title>)", R"(</title>)"));
-            }
+                m_title = getStringAndReplaceNonAlphanumericCharactersToUnderScore(getStringInBetweenTwoStrings(lineInHtmlFile, R"(<title>)", R"(</title>)"));            }
             else if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<div id="dircontent">)"))
             {
                 state=1;

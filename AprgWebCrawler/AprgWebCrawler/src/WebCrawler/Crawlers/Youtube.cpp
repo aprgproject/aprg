@@ -87,11 +87,10 @@ void Youtube::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandler)
         int isDownloadFound(false);
         while (htmlFileReader.isNotFinished())
         {
-            string lineInHtmlFile(htmlFileReader.simpleGetLine());
+            string lineInHtmlFile(htmlFileReader.getLine());
             if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(Download)"))
             {
-                isDownloadFound=true;
-            }
+                isDownloadFound=true;            }
             else if(isDownloadFound && isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(http:/)"))
             {
                 m_linkForVideo = getStringWithoutOpeningClosingOperators(lineInHtmlFile, '<', '>');
