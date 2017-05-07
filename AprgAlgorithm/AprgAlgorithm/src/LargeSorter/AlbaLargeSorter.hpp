@@ -76,21 +76,19 @@ private:
             splitToSmallestBlocks(blockIterator, DataBlockType::Memory);
         }
     }
-    void splitToSmallestBlocks(BlockIterator const & blockIterator, DataBlockType const blockType)
+    void splitToSmallestBlocks(BlockIterator const & blockIterator, DataBlockType const blockTypeForNewBlocks)
     {
         BlockIterator iteratorAfterBlockToSplit(blockIterator);
-        iteratorAfterBlockToSplit++;
-        int numberOfObjectsInCurrentBlock=0;
+        iteratorAfterBlockToSplit++;        int numberOfObjectsInCurrentBlock=0;
         BlockIterator newBlockIterator(iteratorAfterBlockToSplit);
         blockIterator->sortThenDoFunctionThenRelease([&](ObjectToSort const& objectToSort)
         {
             if(numberOfObjectsInCurrentBlock == 0)
             {
-                m_blocks.createNewBlockBeforeThisIterator(iteratorAfterBlockToSplit, blockType);
+                m_blocks.createNewBlockBeforeThisIterator(iteratorAfterBlockToSplit, blockTypeForNewBlocks);
                 newBlockIterator = iteratorAfterBlockToSplit;
                 newBlockIterator--;
-            }
-            m_blocks.addObjectToBlock(newBlockIterator, objectToSort);
+            }            m_blocks.addObjectToBlock(newBlockIterator, objectToSort);
             numberOfObjectsInCurrentBlock++;
             numberOfObjectsInCurrentBlock = (numberOfObjectsInCurrentBlock < static_cast<int>(m_configuration.m_minimumNumberOfObjectsPerBlock)) ? numberOfObjectsInCurrentBlock : 0;
         });
@@ -103,13 +101,12 @@ private:
     }
     unsigned int calculateTotalMemoryConsumption()
     {
-        BlockInformationContainer memoryLimitCache = m_memoryCache.getContainerReference();
+        BlockInformationContainer const & memoryLimitCache(m_memoryCache.getContainerReference());
         unsigned int totalMemoryConsumption  =
-                accumulate(memoryLimitCache.begin(), memoryLimitCache.end(), 0, [](unsigned int memoryConsumption, BlockInformationPair const& blockInformationPair)
+                accumulate(memoryLimitCache.cbegin(), memoryLimitCache.cend(), 0, [](unsigned int memoryConsumption, BlockInformationPair const& blockInformationPair)
         {
             memoryConsumption += blockInformationPair.m_blockInformation->getNumberOfObjectsInMemory();
-            return memoryConsumption;
-        });
+            return memoryConsumption;        });
         return totalMemoryConsumption;
     }
     void transferMemoryBlocksToFileIfNeeded(unsigned int totalMemoryConsumption)
@@ -125,23 +122,18 @@ private:
             else
             {
                 blockToSwitchToFileMode->switchToFileMode();
-                m_fileStreamOpenedCache.addBlock(blockToSwitchToFileMode->getBlockId(), blockToSwitchToFileMode);
+                blockToSwitchToFileMode->releaseFileStream();
             }
         }
-    }
-    void limitFileStreams()
+    }    void limitFileStreams()
     {
         while(m_configuration.m_maximumFileStreams < m_fileStreamOpenedCache.getContainerReference().size())
         {
             BlockIterator iteratorOfBlockToReleaseFile(m_fileStreamOpenedCache.popTheEarliestAddedBlock());
-            if(iteratorOfBlockToReleaseFile->isFileStreamOpened())
-            {
-                iteratorOfBlockToReleaseFile->releaseFileStream();
-            }
+            iteratorOfBlockToReleaseFile->releaseFileStream();
         }
     }
-    void deleteAllFilesInDirectory()
-    {
+    void deleteAllFilesInDirectory()    {
         AlbaLocalPathHandler directoryPathHandler(m_configuration.m_directoryForBlocks);
         std::set<std::string> listOfFiles;
         std::set<std::string> listOfDirectories;

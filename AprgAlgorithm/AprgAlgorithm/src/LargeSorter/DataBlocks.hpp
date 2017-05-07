@@ -114,12 +114,9 @@ public:
         createNewBlockBeforeThisIterator(m_blocks.begin(), DataBlockType::Memory);
         m_mainIterator = m_blocks.begin();
     }
-
-private:
     void updateCaches(BlockIterator const& iteratorOfBlock)
     {
-        switch(iteratorOfBlock->getBlockType())
-        {
+        switch(iteratorOfBlock->getBlockType())        {
         case DataBlockType::File:
             m_fileStreamOpenedCache.addBlock(iteratorOfBlock->getBlockId(), iteratorOfBlock);
             break;
@@ -130,10 +127,11 @@ private:
             break;
         }
     }
+
+private:
     inline bool isLessThanOrEqual(ObjectToSort const& firstTerm, ObjectToSort const& secondTerm)
     {
-        return (firstTerm < secondTerm) || (firstTerm == secondTerm);
-    }
+        return (firstTerm < secondTerm) || (firstTerm == secondTerm);    }
     AlbaLargeSorterConfiguration const & m_configuration;
     BlockCache & m_memoryCache;
     BlockCache & m_fileStreamOpenedCache;

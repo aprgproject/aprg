@@ -6,10 +6,11 @@
 
 #ifdef OS_WINDOWS
 #include <PathHandlers/AlbaWindowsPathHandler.hpp>
+#else
+static_assert(false, "WINDOWS is only the supported OS yet.");
 #endif
 
 #include <PathHandlers/PathContantsAndTypes.hpp>
-
 namespace alba
 {
 
