@@ -2,13 +2,13 @@
 #include "ui_tcomtools.h"
 
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
+#include <String/AlbaStringHelper.hpp>
+
 #include <QFileDialog>
 #include <QMessageBox>
-#include <String/AlbaStringHelper.hpp>
 
 using namespace alba;
 using namespace std;
-
 namespace alba
 {
 

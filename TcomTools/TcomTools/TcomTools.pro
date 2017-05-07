@@ -29,10 +29,10 @@ src/TcomToolsConfiguration.cpp\
 ../../AprgCommon/AprgCommon/src/File/AlbaFileReader.cpp\
 ../../AprgCommon/AprgCommon/src/Optional/AlbaOptional.cpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.cpp\
+../../AprgCommon/AprgCommon/src/PathHandlers/AlbaLocalPathHandler.cpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaWindowsPathHandler.cpp\
 ../../AprgCommon/AprgCommon/src/String/AlbaStringHelper.cpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.cpp
-
 HEADERS += \
 src/ProgressCounters.hpp\
 src/ProgressBarThread.hpp\
@@ -51,9 +51,9 @@ src/TcomToolsConfiguration.hpp\
 ../../AprgCommon/AprgCommon/src/AlbaStringHelper.hpp\
 ../../AprgCommon/AprgCommon/src/AlbaOptional.hpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.hpp\
+../../AprgCommon/AprgCommon/src/PathHandlers/AlbaLocalPathHandler.hpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaWindowsPathHandler.hpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.hpp
-
 FORMS += src/TcomTools.ui
 
 QMAKE_INCDIR += \
@@ -74,5 +74,6 @@ DEFINES -= UNICODE
 DEFINES += APRG_DIR=\\\"$$PWD/../../\\\"
 DEFINES += PATH_OF_7Z_EXECUTABLE=\\\"$$PWD/../../AprgFileExtractor/7z32/7z.exe\\\"
 DEFINES += PATH_OF_7Z_TEMP_FILE=\\\"$$PWD/../../AprgFileExtractor/7z32/TempFile.txt\\\"
+DEFINES += OS_WINDOWS=\\\"WIN32\\\"
 
 CONFIG += c++11 console
