@@ -9,6 +9,7 @@
 
 namespace tcomToolsGui
 {
+
 class QImage;
 
 class StepHandlerThread : public QThread

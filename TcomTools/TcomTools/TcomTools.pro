@@ -33,6 +33,7 @@ src/TcomToolsConfiguration.cpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaWindowsPathHandler.cpp\
 ../../AprgCommon/AprgCommon/src/String/AlbaStringHelper.cpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.cpp
+
 HEADERS += \
 src/ProgressCounters.hpp\
 src/ProgressBarThread.hpp\
@@ -54,6 +55,7 @@ src/TcomToolsConfiguration.hpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaLocalPathHandler.hpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaWindowsPathHandler.hpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.hpp
+
 FORMS += src/TcomTools.ui
 
 QMAKE_INCDIR += \

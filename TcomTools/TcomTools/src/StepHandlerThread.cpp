@@ -6,7 +6,8 @@
 
 using namespace std;
 
-namespace tcomToolsGui{
+namespace tcomToolsGui
+{
 
 StepHandlerThread::StepHandlerThread(QObject *parent)
     : QThread(parent)
