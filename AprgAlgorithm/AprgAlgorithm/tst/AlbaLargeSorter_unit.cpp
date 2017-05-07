@@ -390,6 +390,7 @@ TEST(AlbaLargeSorterTest, FilesForBlocksAreDeletedAfterFileForBlocksAreCreated)
     {
         largeSorter.add(inputValue);
     }
+
     int expectedValue=0;
     largeSorter.sortThenDoFunctionThenReleaseAllObjects([&expectedValue](int const& actualValue)
     {
@@ -398,7 +399,8 @@ TEST(AlbaLargeSorterTest, FilesForBlocksAreDeletedAfterFileForBlocksAreCreated)
     EXPECT_EQ(200, expectedValue);
     directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
     EXPECT_TRUE(listOfFiles.empty());
-    EXPECT_TRUE(listOfDirectories.empty());}
+    EXPECT_TRUE(listOfDirectories.empty());
+}
 
 TEST(AlbaLargeSorterTest, PrimitiveDataTypesAreSortedWhenBlocksAreCreated)
 {
@@ -572,7 +574,8 @@ TEST(AlbaLargeSorterTest, DISABLED_FileStreamAreLimitedByMaximumFileStreams)
     AlbaLargeSorter<int> largeSorter(AlbaLargeSorterConfiguration(ALBA_LARGE_SORTER_BLOCK_DIR, 0, 1, 0, 200));
     vector<int> integersToShuffle;
     for(int inputValue=0; inputValue<1000; inputValue++)
-    {        integersToShuffle.emplace_back(inputValue);
+    {
+        integersToShuffle.emplace_back(inputValue);
     }
     random_shuffle(integersToShuffle.begin(), integersToShuffle.end());
     for(int value : integersToShuffle)

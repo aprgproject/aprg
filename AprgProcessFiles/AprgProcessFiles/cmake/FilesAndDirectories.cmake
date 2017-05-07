@@ -8,7 +8,8 @@ set(APRG_PROCESS_FILES_TEST_INCLUDE_DIRECTORIES
 
 set(APRG_PROCESS_FILES_SOURCES
     ${APRG_PROCESS_FILES_DIR}/src/CombineAndGrepFiles/AlbaCombineAndGrepFiles.cpp
-    ${APRG_PROCESS_FILES_DIR}/src/CombineAndGrepFiles/AlbaCombineAndGrepFiles.hpp    ${APRG_PROCESS_FILES_DIR}/src/CPlusPlusFileFixer/CPlusPlusFileFixer.cpp
+    ${APRG_PROCESS_FILES_DIR}/src/CombineAndGrepFiles/AlbaCombineAndGrepFiles.hpp
+    ${APRG_PROCESS_FILES_DIR}/src/CPlusPlusFileFixer/CPlusPlusFileFixer.cpp
     ${APRG_PROCESS_FILES_DIR}/src/CPlusPlusFileFixer/CPlusPlusFileFixer.hpp
     ${APRG_PROCESS_FILES_DIR}/src/SackReader/AlbaSackReader.cpp
     ${APRG_PROCESS_FILES_DIR}/src/SackReader/AlbaSackReader.hpp

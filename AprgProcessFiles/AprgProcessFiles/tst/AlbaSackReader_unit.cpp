@@ -1,7 +1,9 @@
 #include <DirectoryConstants.hpp>
+
 #include <SackReader/AlbaSackReader.hpp>
 
 #include <gtest/gtest.h>
+
 #include <fstream>
 #include <string>
 

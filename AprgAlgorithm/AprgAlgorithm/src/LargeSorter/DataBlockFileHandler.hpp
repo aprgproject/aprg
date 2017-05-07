@@ -41,7 +41,8 @@ public:
             assert(!fileStream.fail());
         }
     }
-    void add(ObjectToSort const& objectToSort)    {
+    void add(ObjectToSort const& objectToSort)
+    {
         m_fileOptional.getReference()<<objectToSort<<std::endl;
     }
     void releaseFileStream()

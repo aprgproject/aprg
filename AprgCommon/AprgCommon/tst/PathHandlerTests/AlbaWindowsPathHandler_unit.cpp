@@ -2,6 +2,7 @@
 #include <DirectoryConstants.hpp>
 
 #include <gtest/gtest.h>
+
 #include <fstream>
 #include <string>
 
@@ -10,7 +11,8 @@ using namespace alba;
 
 TEST(WindowsPathTest, FullPathWithOnlyDirectoryGiven_WindowsStyleInput)
 {
-    AlbaWindowsPathHandler pathHandler(APRG_DIR_SIMPLFIED R"(\AprgCommon\AprgCommon\tst\FilesForTests\)");    EXPECT_EQ("C", pathHandler.getDriveOrRoot());
+    AlbaWindowsPathHandler pathHandler(APRG_DIR_SIMPLFIED R"(\AprgCommon\AprgCommon\tst\FilesForTests\)");
+    EXPECT_EQ("C", pathHandler.getDriveOrRoot());
     EXPECT_EQ(APRG_DIR_SIMPLFIED R"(\AprgCommon\AprgCommon\tst\FilesForTests\)", pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
@@ -363,7 +365,7 @@ TEST(WindowsPathTest, FileSizeTest_FileIsNotExisting)
 
 TEST(WindowsPathTest, FileSizeTest_FileIsExisting)
 {
-    AlbaWindowsPathHandler pathHandler(ALBA_PATH_HANDLER_SIZE_TEST_FILE);
+    AlbaWindowsPathHandler pathHandler(ALBA_COMMON_SIZE_TEST_FILE);
 
     EXPECT_EQ(PathType::File, pathHandler.getPathType());
     ASSERT_TRUE(pathHandler.isFoundInLocalSystem());

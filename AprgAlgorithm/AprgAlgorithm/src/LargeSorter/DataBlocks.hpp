@@ -116,7 +116,8 @@ public:
     }
     void updateCaches(BlockIterator const& iteratorOfBlock)
     {
-        switch(iteratorOfBlock->getBlockType())        {
+        switch(iteratorOfBlock->getBlockType())
+        {
         case DataBlockType::File:
             m_fileStreamOpenedCache.addBlock(iteratorOfBlock->getBlockId(), iteratorOfBlock);
             break;
@@ -131,7 +132,8 @@ public:
 private:
     inline bool isLessThanOrEqual(ObjectToSort const& firstTerm, ObjectToSort const& secondTerm)
     {
-        return (firstTerm < secondTerm) || (firstTerm == secondTerm);    }
+        return (firstTerm < secondTerm) || (firstTerm == secondTerm);
+    }
     AlbaLargeSorterConfiguration const & m_configuration;
     BlockCache & m_memoryCache;
     BlockCache & m_fileStreamOpenedCache;
