@@ -1,10 +1,10 @@
 #include "AlbaStringHelper.hpp"
 
 #include <Container/AlbaContainerHelper.hpp>
+#include <Randomizer/AlbaRandomizer.hpp>
 
 #include <algorithm>
-#include <cctype>
-#include <functional>
+#include <cctype>#include <functional>
 #include <iomanip>
 #include <set>
 #include <sstream>
@@ -58,10 +58,22 @@ string stringHelper::constructFileLocator(string file, int lineNumber)
     return ss.str();
 }
 
+std::string stringHelper::getRandomAlphaNumericString(unsigned int const length)
+{
+    AlbaRandomizer randomizer;
+    int alphaNumericCharMapIndexMax = ALPHA_NUMERIC_CHAR_MAP.length()-1;
+    string result;
+    result.reserve(length);
+    std::generate_n(std::back_inserter(result), length, [&]()
+    {
+        return ALPHA_NUMERIC_CHAR_MAP[randomizer.getRandomValueInUniformDistribution(0, alphaNumericCharMapIndexMax)];
+    });
+    return result;
+}
+
 bool stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(string const& mainString, string const& string2)
 {
-    return isNotNpos(mainString.find(string2));
-}
+    return isNotNpos(mainString.find(string2));}
 
 bool stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(string const& mainString, string const& string2)
 {

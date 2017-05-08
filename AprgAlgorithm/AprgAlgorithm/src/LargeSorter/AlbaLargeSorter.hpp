@@ -82,11 +82,10 @@ private:
         iteratorAfterBlockToSplit++;
         int numberOfObjectsInCurrentBlock=0;
         BlockIterator newBlockIterator(iteratorAfterBlockToSplit);
-        blockIterator->sortThenDoFunctionThenRelease([&](ObjectToSort const& objectToSort)
+        blockIterator->sortThenDoFunctionThenRelease([&](ObjectToSort const& objectToSort) // this should be nth element
         {
             if(numberOfObjectsInCurrentBlock == 0)
-            {
-                m_blocks.createNewBlockBeforeThisIterator(iteratorAfterBlockToSplit, blockTypeForNewBlocks);
+            {                m_blocks.createNewBlockBeforeThisIterator(iteratorAfterBlockToSplit, blockTypeForNewBlocks);
                 newBlockIterator = iteratorAfterBlockToSplit;
                 newBlockIterator--;
             }

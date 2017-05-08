@@ -31,9 +31,9 @@ src/TcomToolsConfiguration.cpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.cpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaLocalPathHandler.cpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaWindowsPathHandler.cpp\
+../../AprgCommon/AprgCommon/src/Randomizer/AlbaRandomizer.cpp\
 ../../AprgCommon/AprgCommon/src/String/AlbaStringHelper.cpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.cpp
-
 HEADERS += \
 src/ProgressCounters.hpp\
 src/ProgressBarThread.hpp\
@@ -48,16 +48,16 @@ src/TcomToolsConfiguration.hpp\
 ../TcomToolsBackend/src/BtsPrintReaderWithRollback.hpp\
 ../../AprgAlgorithm/AprgAlgorithm/src/GrepStringEvaluator/AlbaGrepStringEvaluator.hpp\
 ../../AprgAlgorithm/AprgAlgorithm/src/GrepStringEvaluator/AlbaGrepStringEvaluatorTerm.hpp\
-../../AprgCommon/AprgCommon/src/AlbaFileReader.hpp\
-../../AprgCommon/AprgCommon/src/AlbaStringHelper.hpp\
-../../AprgCommon/AprgCommon/src/AlbaOptional.hpp\
+../../AprgCommon/AprgCommon/src/File/AlbaFileReader.hpp\
+../../AprgCommon/AprgCommon/src/Optional/AlbaOptional.hpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.hpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaLocalPathHandler.hpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaWindowsPathHandler.hpp\
+../../AprgCommon/AprgCommon/src/Randomizer/AlbaRandomizer.hpp\
+../../AprgCommon/AprgCommon/src/String/AlbaStringHelper.hpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.hpp
 
 FORMS += src/TcomTools.ui
-
 QMAKE_INCDIR += \
 src\
 ../TcomToolsBackend/src\
