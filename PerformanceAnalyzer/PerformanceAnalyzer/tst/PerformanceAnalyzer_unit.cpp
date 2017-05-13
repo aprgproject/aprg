@@ -10,19 +10,22 @@ namespace alba
 TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForMsgQueuingTime)
 {
     PerformanceAnalyzer analyzer;
-    analyzer.setFileForRawDataDump(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS18\MsgQueuingTimeRawData_1.txt)");    analyzer.processFileForMsgQueuingTime(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS18\TcomTupc.log)");
+    analyzer.setFileForRawDataDump(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS18\MsgQueuingTimeRawData_1.txt)");
+    analyzer.processFileForMsgQueuingTime(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS18\TcomTupc.log)");
 }
 
 TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupDelayInRlh)
 {
     PerformanceAnalyzer analyzer;
-    analyzer.setFileForRawDataDump(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS18\RlSetupRlhDelayRawData_1.csv)");    analyzer.processFileForRlSetupDelayInRlh(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS18\TcomTupc.log)");
+    analyzer.setFileForRawDataDump(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS18\RlSetupRlhDelayRawData_1.csv)");
+    analyzer.processFileForRlSetupDelayInRlh(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS18\TcomTupc.log)");
 }
 
 TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlDeletionDelayInRlh)
 {
     PerformanceAnalyzer analyzer;
-    analyzer.setFileForRawDataDump(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS18\RlDeletionRlhDelayRawData_1.csv)");    analyzer.processFileForRlDeletionDelayInRlh(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS18\TcomTupc.log)");
+    analyzer.setFileForRawDataDump(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS18\RlDeletionRlhDelayRawData_1.csv)");
+    analyzer.processFileForRlDeletionDelayInRlh(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS18\TcomTupc.log)");
 }
 
 TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupDelayInTupc)
@@ -35,19 +38,22 @@ TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupDelayInTupc)
 TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForMsgQueuingTime2)
 {
     PerformanceAnalyzer analyzer;
-    analyzer.setFileForRawDataDump(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS17\MsgQueuingTimeRawData_2.txt)");    analyzer.processFileForMsgQueuingTime(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS17\TcomTupc.log)");
+    analyzer.setFileForRawDataDump(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS17\MsgQueuingTimeRawData_2.txt)");
+    analyzer.processFileForMsgQueuingTime(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS17\TcomTupc.log)");
 }
 
 TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupDelayInRlh2)
 {
     PerformanceAnalyzer analyzer;
-    analyzer.setFileForRawDataDump(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS17\RlSetupRlhDelayRawData_2.csv)");    analyzer.processFileForRlSetupDelayInRlh(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS17\TcomTupc.log)");
+    analyzer.setFileForRawDataDump(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS17\RlSetupRlhDelayRawData_2.csv)");
+    analyzer.processFileForRlSetupDelayInRlh(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS17\TcomTupc.log)");
 }
 
 TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlDeletionDelayInRlh2)
 {
     PerformanceAnalyzer analyzer;
-    analyzer.setFileForRawDataDump(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS17\RlDeletionRlhDelayRawData_2.csv)");    analyzer.processFileForRlDeletionDelayInRlh(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS17\TcomTupc.log)");
+    analyzer.setFileForRawDataDump(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS17\RlDeletionRlhDelayRawData_2.csv)");
+    analyzer.processFileForRlDeletionDelayInRlh(R"(D:\ZZZ_Logs\PR224369_NEWEST\DegradationFound\WBTS17\TcomTupc.log)");
 }
 
 TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupDelayInTupc2)
@@ -96,7 +102,8 @@ TEST(PerformanceAnalyzerTest, ProcessFileForTopLogs)
     analyzer.processFileForTopLogs(R"(D:\ZZZ_Logs\PR224369_NEWEST\WBTS17vsWBTS18\WBTS18Second\TOPlogs\MSM_FSP1.log)");
 }
 
-TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForTopLogs2){
+TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForTopLogs2)
+{
     PerformanceAnalyzer analyzer;
     analyzer.processFileForTopLogs(R"(D:\ZZZ_Logs\RAN3321Degradation\RetestWithLongerTime\WBTS00_0000_2_T1_overload\TOPlogs_TCOM\0_0.log)");
 }

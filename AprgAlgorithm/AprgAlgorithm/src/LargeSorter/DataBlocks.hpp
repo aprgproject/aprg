@@ -4,6 +4,7 @@
 #include <LargeSorter/AlbaLargeSorterConfiguration.hpp>
 #include <LargeSorter/AlbaLargeSorterTypes.hpp>
 #include <LargeSorter/DataBlock.hpp>
+
 #include <algorithm>
 #include <functional>
 #include <sstream>
@@ -20,7 +21,8 @@ class DataBlocks
     using BlockCache = AlbaLargeSorterBlockCache<BlockIterator>;
 
 public:
-    DataBlocks(            AlbaLargeSorterConfiguration const& configuration,
+    DataBlocks(
+            AlbaLargeSorterConfiguration const& configuration,
             BlockCache & memoryCache,
             BlockCache & fileStreamOpenedCache)
         : m_configuration(configuration)

@@ -34,6 +34,7 @@ src/TcomToolsConfiguration.cpp\
 ../../AprgCommon/AprgCommon/src/Randomizer/AlbaRandomizer.cpp\
 ../../AprgCommon/AprgCommon/src/String/AlbaStringHelper.cpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.cpp
+
 HEADERS += \
 src/ProgressCounters.hpp\
 src/ProgressBarThread.hpp\
@@ -58,6 +59,7 @@ src/TcomToolsConfiguration.hpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.hpp
 
 FORMS += src/TcomTools.ui
+
 QMAKE_INCDIR += \
 src\
 ../TcomToolsBackend/src\

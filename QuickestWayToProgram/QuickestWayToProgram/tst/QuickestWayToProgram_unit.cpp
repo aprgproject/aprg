@@ -6,6 +6,7 @@
 
 #include <String/AlbaStringHelper.hpp>
 #include <stdio.h>
+
 #include <gtest/gtest.h>
 #include <windows.h>
 
@@ -32,6 +33,7 @@ TEST(SampleTest, FilesToFind)
         cout<<R"(cat )"<<filePathHandler.getFilenameOnly()<<R"(.log_flame ~/flamegraphs/FlameGraph-master/stackcollapse-perf.pl | ~/flamegraphs/FlameGraph-master/flamegraph.pl > generatedflamegraphs2/)"<<filePathHandler.getFilenameOnly()<<R"(.svg)"<<endl;
     }
 }
+
 /*
 TEST(SampleTest, MessageId_TcomTcom_test)
 {

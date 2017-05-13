@@ -12,7 +12,8 @@
 #include <unordered_map>
 
 using namespace std;
-using tcomToolsBackend::BtsLogPrint;using tcomToolsBackend::BtsLogTime;
+using tcomToolsBackend::BtsLogPrint;
+using tcomToolsBackend::BtsLogTime;
 using tcomToolsBackend::BtsLogTimeType;
 
 namespace alba
@@ -1001,7 +1002,8 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath)
 
             if(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(_LRM_)"))
             {
-                maxCpuTcomLrm = std::max(maxCpuTcomLrm, cpuLoad);            }
+                maxCpuTcomLrm = std::max(maxCpuTcomLrm, cpuLoad);
+            }
             else if(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(TCOM_GRM_TASK)"))
             {
                 maxCpuTcomGrm = std::max(maxCpuTcomGrm, cpuLoad);
@@ -1016,7 +1018,8 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath)
             }
         }
     }
-    cout<<"Max CPU GRM TCOM:"<<maxCpuTcomGrm<<endl;    cout<<"Max CPU LRM TCOM:"<<maxCpuTcomLrm<<endl;
+    cout<<"Max CPU GRM TCOM:"<<maxCpuTcomGrm<<endl;
+    cout<<"Max CPU LRM TCOM:"<<maxCpuTcomLrm<<endl;
     cout<<"Max CPU TUP Conman:"<<maxCpuTupcConman<<endl;
     cout<<"Max CPU TUP Aalman:"<<maxCpuTcomAalman<<endl;
 
@@ -1030,7 +1033,8 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath)
     logLineInRawDataFile(masterStringStream.str());
 }
 
-void PerformanceAnalyzer::processFileForRlSetupPerSecond(string const& filePath){
+void PerformanceAnalyzer::processFileForRlSetupPerSecond(string const& filePath)
+{
     AlbaLocalPathHandler filePathHandler(filePath);
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
