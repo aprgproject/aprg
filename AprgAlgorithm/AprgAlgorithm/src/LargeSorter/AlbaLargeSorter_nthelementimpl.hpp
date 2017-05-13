@@ -1,9 +1,8 @@
 #pragma once
 
-#include <LargeSorter/AlbaLargeSorterCache.hpp>
+#include <LargeSorter/DataBlockCache.hpp>
 #include <LargeSorter/AlbaLargeSorterConfiguration.hpp>
 #include <LargeSorter/AlbaLargeSorterTypes.hpp>
-
 #include <LargeSorter/DataBlocks.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 
@@ -17,10 +16,9 @@ class AlbaLargeSorter
 {
     typedef AlbaLargeSorterBlockType<ObjectToSort> BlockType;
     typedef AlbaLargeSorterBlockIterator<ObjectToSort> BlockIterator;
-    typedef AlbaLargeSorterCache<BlockIterator> BlockCache;
+    typedef DataBlockCache<BlockIterator> BlockCache;
     typedef typename BlockCache::BlockInformationPair BlockInformationPair;
     typedef typename BlockCache::BlocksInformationContainer BlockInformationContainer;
-
 public:
     AlbaLargeSorter(AlbaLargeSorterConfiguration const& configuration)
         : m_size(0)

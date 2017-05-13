@@ -10,19 +10,20 @@ namespace alba
 {
 
 template <typename BlockInformation>
-class AlbaLargeSorterCache
+class DataBlockCache
 {
 public:
-    struct BlockInformationPair
+    struct BlockCacheEntry
     {
-        BlockInformationPair(unsigned int blockId, BlockInformation const& blockInformation)
+        BlockCacheEntry(unsigned int blockId, BlockInformation const& blockInformation)
             : m_blockId(blockId)
             , m_blockInformation(blockInformation)
         {}
         unsigned int m_blockId;
         BlockInformation m_blockInformation;
     };
-    typedef std::deque<BlockInformationPair> BlocksInformationContainer;
+
+    using BlockCacheContainer = std::deque<BlockCacheEntry>;
 
     void addBlock(unsigned const int blockId, BlockInformation const& iterator)
     {
@@ -34,7 +35,7 @@ public:
     }
     void deleteBlock(unsigned const int blockId)
     {
-        m_blocksInformationCache.erase(std::remove_if(m_blocksInformationCache.begin(), m_blocksInformationCache.end(), [blockId](BlockInformationPair const& blockInformation)
+        m_blocksInformationCache.erase(std::remove_if(m_blocksInformationCache.begin(), m_blocksInformationCache.end(), [blockId](BlockCacheEntry const& blockInformation)
         {
             return blockId == blockInformation.m_blockId;
         }), m_blocksInformationCache.end());
@@ -49,7 +50,7 @@ public:
         }
         return BlockInformation();
     }
-    BlocksInformationContainer & getContainerReference()
+    BlockCacheContainer & getContainerReference()
     {
         return m_blocksInformationCache;
     }
@@ -59,7 +60,7 @@ public:
     }
 
 private:
-     BlocksInformationContainer m_blocksInformationCache;
+     BlockCacheContainer m_blocksInformationCache;
 };
 
 }
