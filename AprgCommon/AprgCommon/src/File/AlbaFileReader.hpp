@@ -15,6 +15,10 @@ public:
     char* getCharacters(unsigned int& numberOfCharacters);
     template<typename NumberType> NumberType getTwoByteData();
     template<typename NumberType> NumberType getFourByteData();
+    template<typename NumberType> NumberType getEightByteData();
+    template<typename NumberType> NumberType getTwoByteSwappedData();
+    template<typename NumberType> NumberType getFourByteSwappedData();
+    template<typename NumberType> NumberType getEightByteSwappedData();
     template<typename NumberType, unsigned int numberOfBytesToRead> NumberType getData();
     std::string getLineAndIgnoreWhiteSpaces();
     std::string getLine();

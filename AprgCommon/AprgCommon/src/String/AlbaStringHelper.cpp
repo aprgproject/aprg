@@ -752,7 +752,7 @@ NumberType stringHelper::convertStringToNumber(string const& stringToConvert)
     {
         if(isNumber(currentCharacter))
         {
-            if(isInteger || isPeriodNotYetEncountered)
+            if(isInteger || isPeriodNotYetEncountered) // consider "if constexpr"
             {
                 value = (value * 10) + currentCharacter - '0';
                 isNumberNotYetEncountered=false;

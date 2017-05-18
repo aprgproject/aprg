@@ -1,5 +1,6 @@
 #include "AlbaFileReader.hpp"
 
+#include <Bit/AlbaBitManipulation.hpp>
 #include <String/AlbaStringHelper.hpp>
 
 #include <algorithm>
@@ -32,7 +33,6 @@ char* AlbaFileReader::getCharacters(unsigned int& numberOfCharacters)
     numberOfCharacters = m_stream.gcount();
     return (char*)m_characterBuffer;
 }
-
 template <typename NumberType>
 NumberType AlbaFileReader::getTwoByteData()
 {
@@ -45,25 +45,55 @@ NumberType AlbaFileReader::getFourByteData()
     return getData<NumberType, 4>();
 }
 
+template <typename NumberType>
+NumberType AlbaFileReader::getEightByteData()
+{
+    return getData<NumberType, 8>();
+}
+
+template <typename NumberType>
+NumberType AlbaFileReader::getTwoByteSwappedData()
+{
+    return AlbaBitManipulation<NumberType>::swapForTwoBytes(getData<NumberType, 2>());
+}
+
+template <typename NumberType>
+NumberType AlbaFileReader::getFourByteSwappedData()
+{
+    return AlbaBitManipulation<NumberType>::swapForFourBytes(getData<NumberType, 4>());
+}
+
+template <typename NumberType>
+NumberType AlbaFileReader::getEightByteSwappedData()
+{
+    return AlbaBitManipulation<NumberType>::swapForEightBytes(getData<NumberType, 8>());
+}
+
+
 template <typename NumberType, unsigned int numberOfBytesToRead>
 NumberType AlbaFileReader::getData()
 {
-    NumberType result=0;
+    NumberType result(0);
     m_stream.read(m_characterBuffer, numberOfBytesToRead);
     unsigned int numberOfCharacters = m_stream.gcount();
-    result = accumulate(m_characterBuffer, m_characterBuffer+numberOfCharacters, 0, [&](NumberType partialSum, NumberType newValue)
+    result = accumulate(m_characterBuffer, m_characterBuffer+numberOfCharacters, 0ull, [&](NumberType partialSum, NumberType newValue)
     {
-        partialSum <<= 8;
+        partialSum = (NumberType)partialSum << 8;
         partialSum |= (0xFF & newValue);
-        return partialSum;
+        return (NumberType)partialSum;
     });
     return result;
 }
 
 template unsigned int AlbaFileReader::getTwoByteData<unsigned int>();
 template unsigned int AlbaFileReader::getFourByteData<unsigned int>();
+template unsigned long long AlbaFileReader::getEightByteData<unsigned long long>();
+template unsigned int AlbaFileReader::getTwoByteSwappedData<unsigned int>();
+template unsigned int AlbaFileReader::getFourByteSwappedData<unsigned int>();
+template unsigned long long AlbaFileReader::getEightByteSwappedData<unsigned long long>();
 template unsigned int AlbaFileReader::getData<unsigned int, 2>();
 template unsigned int AlbaFileReader::getData<unsigned int, 4>();
+template unsigned int AlbaFileReader::getData<unsigned int, 8>();
 
 string AlbaFileReader::getLineAndIgnoreWhiteSpaces()
 {
