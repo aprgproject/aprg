@@ -271,4 +271,4 @@ TEST(FileReadTest, ReadFromTestFile_ReadSwappedEightByteNumbers)
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0xBAA1674523010000, fileReader.getEightByteSwappedData<unsigned long long>());
     EXPECT_FALSE(fileReader.isNotFinished());
-}
+}

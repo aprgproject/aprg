@@ -100,4 +100,4 @@ constexpr unsigned long long AlbaBitManipulation<unsigned long long>::swapWithBy
 }
 
 
-}
+}
