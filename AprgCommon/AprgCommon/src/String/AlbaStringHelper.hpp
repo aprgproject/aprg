@@ -42,10 +42,10 @@ void splitLinesToAchieveTargetLength(stringHelper::strings & strings, std::strin
 std::string getStringWithCapitalLetters(std::string const& mainString);
 std::string getStringWithLowerCaseLetters(std::string const& mainString);
 std::string getStringWithUrlDecodedString(std::string const& mainString);
+std::string getStringThatContainsWhiteSpaceIndention(std::string const& mainString);
 std::string getStringWithoutStartingAndTrailingCharacters(std::string const& mainString, std::string const& characters);
 std::string getStringWithoutStartingAndTrailingWhiteSpace(std::string const& mainString);
-std::string getStringWithoutWhiteSpace(std::string const& mainString);
-std::string getStringWithoutRedundantWhiteSpace(std::string const& mainString);
+std::string getStringWithoutWhiteSpace(std::string const& mainString);std::string getStringWithoutRedundantWhiteSpace(std::string const& mainString);
 std::string getStringWithoutQuotations(std::string const& mainString);
 std::string getStringWithoutCharAtTheStartAndEnd(std::string const& mainString, char const char1);
 std::string getStringWithoutCharAtTheStart(std::string const& mainString, char const char1);
@@ -55,11 +55,10 @@ void copyBeforeStringAndAfterString(std::string const& mainString, std::string c
 std::string getStringBeforeThisString(std::string const& mainString, std::string const& stringToSearch, int const indexToStart=0);
 std::string getStringAfterThisString(std::string const& mainString, std::string const& stringToSearch, int const indexToStart=0);
 std::string getStringInBetweenTwoStrings(std::string const& mainString, std::string const& firstString, std::string const& secondString, int const indexToStart=0);
-std::string getStringBeforeThisCharacters(std::string const& mainString, std::string const& characters, int const indexToStart=0);//implement UTs
+std::string getStringBeforeThisCharacters(std::string const& mainString, std::string const& characters, int const indexToStart=0);
 std::string getStringAndReplaceNonAlphanumericCharactersToUnderScore(std::string const& path);
 std::string getStringByRepeatingUntilDesiredLength(std::string const& stringToRepeat, unsigned int desiredLength);
-std::string getNumberAfterThisString(std::string const& mainString, std::string const& stringToSearch);
-std::string getHexNumberAfterThisString(std::string const& mainString, std::string const& stringToSearch);
+std::string getNumberAfterThisString(std::string const& mainString, std::string const& stringToSearch);std::string getHexNumberAfterThisString(std::string const& mainString, std::string const& stringToSearch);
 
 std::string getStringWithJustifyAlignment(std::string const& mainString, unsigned int length);
 std::string getStringWithCenterAlignment(std::string const& mainString, unsigned int length);
