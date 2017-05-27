@@ -10,6 +10,7 @@
 #include <set>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -60,7 +61,8 @@ void CPlusPlusFileFixer::readContentsFromFile(string const& path)
 {
     AlbaLocalPathHandler filePathHandler(path);
     ifstream inputLogFileStream(filePathHandler.getFullPath());
-    AlbaFileReader fileReader(inputLogFileStream);    bool isOnHeaderPart(true);
+    AlbaFileReader fileReader(inputLogFileStream);
+    bool isOnHeaderPart(true);
     while(fileReader.isNotFinished())
     {
         string line(fileReader.getLine());
@@ -99,7 +101,8 @@ void CPlusPlusFileFixer::readContentsFromFile(string const& path)
 
 void CPlusPlusFileFixer::notifyIfThereAreCommentsInHeader(string const& path, std::string const& line) const
 {
-    if(stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(line, "//"))    {
+    if(stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(line, "//"))
+    {
         cout<<"CHECK THIS: Header comments on:["<<path<<"] in line:["<<line<<"]"<<endl;
     }
 }
@@ -158,7 +161,8 @@ void CPlusPlusFileFixer::fix(string const& path)
 
 void CPlusPlusFileFixer::fixHeaders(string const& path)
 {
-    AlbaLocalPathHandler filePathHandler(path);    set<string> mainHeaders;
+    AlbaLocalPathHandler filePathHandler(path);
+    set<string> mainHeaders;
     set<string> cPlusPlusHeaders;
     set<string> otherLibraryHeaders;
     set<string> aprgFiles;
@@ -332,7 +336,8 @@ bool CPlusPlusFileFixer::isLineWithALoopEnd(string const& line) const
 
 bool CPlusPlusFileFixer::isPathIgnored(string const& path) const
 {
-    bool result(false);    if(stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(path, "ACodeReview") ||
+    bool result(false);
+    if(stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(path, "ACodeReview") ||
             stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(path, "AprgCMakeHelpers") ||
             stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(path, "CImg") ||
             stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(path, "curl-7.38.0") ||

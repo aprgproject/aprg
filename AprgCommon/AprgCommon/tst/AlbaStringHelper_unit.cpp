@@ -171,7 +171,8 @@ TEST(GetPartialStringFromStringTest, GetStringThatContainsWhiteSpaceIndention)
 
 TEST(GetPartialStringFromStringTest, GetWithoutStartingAndTrailingWhiteSpaceUsingWhiteSpaceOnly)
 {
-    string testString("     \n\n    \t\t\t   ");    EXPECT_TRUE(getStringWithoutStartingAndTrailingWhiteSpace(testString).empty());
+    string testString("     \n\n    \t\t\t   ");
+    EXPECT_TRUE(getStringWithoutStartingAndTrailingWhiteSpace(testString).empty());
 }
 
 TEST(GetPartialStringFromStringTest, GetWithoutStartingAndTrailingWhiteSpaceUsingAllLettersWithSpecialCharacters)
@@ -273,7 +274,8 @@ TEST(GetPartialStringFromStringTest, GetStringBeforeThisCharacters)
 
 TEST(GetPartialStringFromStringTest, CopyBeforeStringAndAfterStringWhenStringIsFound)
 {
-    string testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");    string expectedBeforeString(R"("1234567890!@#$%^&*( ))");
+    string testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
+    string expectedBeforeString(R"("1234567890!@#$%^&*( ))");
     string expectedAfterString(R"(EFghIjKlMnopQRstUvWxYz")");
     string actualBeforeString;
     string actualAfterString;
