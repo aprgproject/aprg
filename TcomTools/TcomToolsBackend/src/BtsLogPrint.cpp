@@ -2,9 +2,10 @@
 
 #include <String/AlbaStringHelper.hpp>
 
+#include <iostream>
+
 using namespace alba;
 using namespace std;
-
 namespace tcomToolsBackend
 {
 

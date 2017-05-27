@@ -2,11 +2,9 @@
 
 #include "BtsLogTime.hpp"
 
-#include <iostream>
 #include <string>
 
-namespace tcomToolsBackend
-{
+namespace tcomToolsBackend{
 
 namespace BtsLogPrintStateMachine
 {

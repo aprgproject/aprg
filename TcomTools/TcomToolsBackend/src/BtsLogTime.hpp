@@ -1,10 +1,8 @@
 #pragma once
 
-#include <iostream>
 #include <string>
 
-namespace tcomToolsBackend
-{
+namespace tcomToolsBackend{
 
 enum class BtsLogTimeType
 {
