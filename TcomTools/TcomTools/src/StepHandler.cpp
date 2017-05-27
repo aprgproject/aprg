@@ -11,7 +11,8 @@
 #include <iostream>
 #include <string>
 
-namespace alba{
+namespace alba
+{
 namespace ProgressCounters
 {
 extern int grepProcessProgress;

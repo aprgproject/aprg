@@ -4,7 +4,8 @@
 
 #include <string>
 
-namespace tcomToolsBackend{
+namespace tcomToolsBackend
+{
 
 namespace BtsLogPrintStateMachine
 {

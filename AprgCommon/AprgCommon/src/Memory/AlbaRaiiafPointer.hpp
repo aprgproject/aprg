@@ -5,13 +5,15 @@
 
 namespace alba
 {
+
 //RAIIAF
 //Request Aquisition Is In A Function
 //anti RAII :(
 
 class AlbaRaiiafPointer
 {
-public:    AlbaRaiiafPointer()
+public:
+    AlbaRaiiafPointer()
         : m_hasContent(0)
     {}
 
@@ -20,7 +22,8 @@ public:    AlbaRaiiafPointer()
         assert(!m_hasContent);
     }
 
-    template <typename Type> Type get()    {
+    template <typename Type> Type get()
+    {
         return *((Type*)m_voidPointer);
     }
 
@@ -45,7 +48,8 @@ public:    AlbaRaiiafPointer()
         m_voidPointer = new Type(reference);
     }
 
-private:    bool m_hasContent;
+private:
+    bool m_hasContent;
     void* m_voidPointer;
 };
 
