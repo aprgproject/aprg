@@ -1,10 +1,7 @@
 #pragma once
 
-#include <iostream>
-
 namespace alba
 {
-
 namespace ProgressCounters
 {
 
