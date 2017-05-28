@@ -32,10 +32,14 @@ string AlbaPathHandler::getFullPath() const
     return m_directory+m_file;
 }
 
+string AlbaPathHandler::getDirectory() const
+{
+    return m_directory;
+}
+
 void AlbaPathHandler::input(string const& path)
 {
-    clear();
-    save(path);
+    clear();    save(path);
 }
 
 void AlbaPathHandler::reInput()
@@ -60,15 +64,9 @@ string AlbaPathHandler::getImmediateDirectoryName() const
     return stringHelper::getImmediateDirectoryName(m_directory, m_slashCharacterString);
 }
 
-string AlbaPathHandler::getDirectory() const
-{
-    return m_directory;
-}
-
 string AlbaPathHandler::getFile() const
 {
-    return m_file;
-}
+    return m_file;}
 
 string AlbaPathHandler::getFilenameOnly() const
 {

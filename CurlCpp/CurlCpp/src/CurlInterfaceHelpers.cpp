@@ -66,10 +66,16 @@ void CurlInterface::addToCurlEasy<DownloadType::PrintDownloadProgress>(curl_easy
 }
 
 template <>
+void CurlInterface::addToCurlEasy<DownloadType::Ssl>(curl_easy& easy)
+{
+    easy.add<CURLOPT_SSL_VERIFYPEER>(1);
+    easy.add<CURLOPT_SSL_VERIFYHOST>(1);
+}
+
+template <>
 void CurlInterface::addToCurlEasy<DownloadType::MozillaFireFoxAndPrintDownloadProgress>(curl_easy& easy)
 {
-    addToCurlEasy<DownloadType::MozillaFireFox>(easy);
-    addToCurlEasy<DownloadType::PrintDownloadProgress>(easy);
+    addToCurlEasy<DownloadType::MozillaFireFox>(easy);    addToCurlEasy<DownloadType::PrintDownloadProgress>(easy);
 }
 
 template <>
@@ -87,10 +93,18 @@ void CurlInterface::addToCurlEasy<DownloadType::LowSpeedLimitAndMozillaFireFoxAn
     addToCurlEasy<DownloadType::PrintDownloadProgress>(easy);
 }
 
+template <>
+void CurlInterface::addToCurlEasy<DownloadType::LowSpeedLimitAndMozillaFireFoxAndPrintDownloadProgressWithSsl>(curl_easy& easy)
+{
+    addToCurlEasy<DownloadType::LowSpeedLimit>(easy);
+    addToCurlEasy<DownloadType::MozillaFireFox>(easy);
+    addToCurlEasy<DownloadType::PrintDownloadProgress>(easy);
+    addToCurlEasy<DownloadType::Ssl>(easy);
+}
+
 void CurlInterface::createOutputStream(unique_ptr<ofstream> & outputStream, OutputFileType outputFileType, string const& fileLocation)
 {
-    switch (outputFileType)
-    {
+    switch (outputFileType)    {
     case OutputFileType::Binary:
         outputStream.reset(new ofstream(fileLocation, ofstream::binary));
         break;
