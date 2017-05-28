@@ -37,12 +37,11 @@ void CPlusPlusFileFixer::processFile(string const& path)
     //cout<<"ProcessFile: "<<path<<endl;
     clear();
     checkFile(path);
-    //fix(path);
-    //writeFile(path);
+    fix(path);
+    writeFile(path);
 }
 
-void CPlusPlusFileFixer::clear()
-{
+void CPlusPlusFileFixer::clear(){
     m_linesAfterTheHeader.clear();
     m_headerListFromAngleBrackets.clear();
     m_headerListFromQuotations.clear();
