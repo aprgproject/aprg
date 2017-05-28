@@ -39,7 +39,8 @@ string AlbaPathHandler::getDirectory() const
 
 void AlbaPathHandler::input(string const& path)
 {
-    clear();    save(path);
+    clear();
+    save(path);
 }
 
 void AlbaPathHandler::reInput()
@@ -66,7 +67,8 @@ string AlbaPathHandler::getImmediateDirectoryName() const
 
 string AlbaPathHandler::getFile() const
 {
-    return m_file;}
+    return m_file;
+}
 
 string AlbaPathHandler::getFilenameOnly() const
 {

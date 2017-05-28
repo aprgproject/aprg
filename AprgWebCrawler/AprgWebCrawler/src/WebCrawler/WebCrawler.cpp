@@ -149,7 +149,8 @@ string WebCrawler::getNewDirectoryNameFromWeblink(string const& webLink) const
         title = getStringInBetweenTwoStrings(webLink, R"(2read.com/)", R"(/)");
         break;
     case CrawlMode::Mangafox:
-    case CrawlMode::MangafoxWithVolume:    case CrawlMode::Mangahere:
+    case CrawlMode::MangafoxWithVolume:
+    case CrawlMode::Mangahere:
     case CrawlMode::MangaPark:
         title = getStringInBetweenTwoStrings(webLink, R"(/manga/)", R"(/)");
         break;

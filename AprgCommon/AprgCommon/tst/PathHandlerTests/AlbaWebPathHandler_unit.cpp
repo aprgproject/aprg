@@ -16,7 +16,8 @@ TEST(WebPathTest, DirectoryWithColonAndFileGivenAndNoProtocol)
     EXPECT_EQ(R"(\\::://directory!@#$%12345/file.txt)", pathHandler.getFullPath());
     EXPECT_EQ(R"(\\::://directory!@#$%12345/)", pathHandler.getDirectory());
     EXPECT_EQ("file.txt", pathHandler.getFile());
-    EXPECT_EQ("file", pathHandler.getFilenameOnly());    EXPECT_EQ("txt", pathHandler.getExtension());
+    EXPECT_EQ("file", pathHandler.getFilenameOnly());
+    EXPECT_EQ("txt", pathHandler.getExtension());
     EXPECT_EQ(PathType::File, pathHandler.getPathType());
 }
 
@@ -28,7 +29,8 @@ TEST(WebPathTest, FullPathWithOnlyDirectoryGiven_HttpStyleInput)
     EXPECT_EQ("hTTp://www.google.com/!@#$%12345/", pathHandler.getFullPath());
     EXPECT_EQ("hTTp://www.google.com/!@#$%12345/", pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
-    EXPECT_TRUE(pathHandler.getFilenameOnly().empty());    EXPECT_TRUE(pathHandler.getExtension().empty());
+    EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
+    EXPECT_TRUE(pathHandler.getExtension().empty());
     EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
 }
 
@@ -40,7 +42,8 @@ TEST(WebPathTest, FullPathWithQuestionMark)
     EXPECT_EQ("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522", pathHandler.getFullPath());
     EXPECT_EQ("http://a.mhcdn.net/store/manga/12114/001.0/compressed/", pathHandler.getDirectory());
     EXPECT_EQ("r049.jpg", pathHandler.getFile());
-    EXPECT_EQ("r049", pathHandler.getFilenameOnly());    EXPECT_EQ("jpg", pathHandler.getExtension());
+    EXPECT_EQ("r049", pathHandler.getFilenameOnly());
+    EXPECT_EQ("jpg", pathHandler.getExtension());
     EXPECT_EQ(PathType::File, pathHandler.getPathType());
 }
 
@@ -54,7 +57,8 @@ TEST(WebPathTest, GotoLinkWhenNoProtocolIsGiven)
     EXPECT_EQ("hTTp://www.google.com/!@#$%12345/NewDirectory1/NewFile2.ext", pathHandler.getFullPath());
     EXPECT_EQ("hTTp://www.google.com/!@#$%12345/NewDirectory1/", pathHandler.getDirectory());
     EXPECT_EQ("NewFile2.ext", pathHandler.getFile());
-    EXPECT_EQ("NewFile2", pathHandler.getFilenameOnly());    EXPECT_EQ("ext", pathHandler.getExtension());
+    EXPECT_EQ("NewFile2", pathHandler.getFilenameOnly());
+    EXPECT_EQ("ext", pathHandler.getExtension());
     EXPECT_EQ(PathType::File, pathHandler.getPathType());
 }
 
@@ -68,7 +72,8 @@ TEST(WebPathTest, GotoLinkWhenWithProtocolIsGiven)
     EXPECT_EQ("ftP://www.yahoo.com/NewDirectory1/NewFile2.ext", pathHandler.getFullPath());
     EXPECT_EQ("ftP://www.yahoo.com/NewDirectory1/", pathHandler.getDirectory());
     EXPECT_EQ("NewFile2.ext", pathHandler.getFile());
-    EXPECT_EQ("NewFile2", pathHandler.getFilenameOnly());    EXPECT_EQ("ext", pathHandler.getExtension());
+    EXPECT_EQ("NewFile2", pathHandler.getFilenameOnly());
+    EXPECT_EQ("ext", pathHandler.getExtension());
     EXPECT_EQ(PathType::File, pathHandler.getPathType());
 }
 

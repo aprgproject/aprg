@@ -75,7 +75,8 @@ void CurlInterface::addToCurlEasy<DownloadType::Ssl>(curl_easy& easy)
 template <>
 void CurlInterface::addToCurlEasy<DownloadType::MozillaFireFoxAndPrintDownloadProgress>(curl_easy& easy)
 {
-    addToCurlEasy<DownloadType::MozillaFireFox>(easy);    addToCurlEasy<DownloadType::PrintDownloadProgress>(easy);
+    addToCurlEasy<DownloadType::MozillaFireFox>(easy);
+    addToCurlEasy<DownloadType::PrintDownloadProgress>(easy);
 }
 
 template <>
@@ -104,7 +105,8 @@ void CurlInterface::addToCurlEasy<DownloadType::LowSpeedLimitAndMozillaFireFoxAn
 
 void CurlInterface::createOutputStream(unique_ptr<ofstream> & outputStream, OutputFileType outputFileType, string const& fileLocation)
 {
-    switch (outputFileType)    {
+    switch (outputFileType)
+    {
     case OutputFileType::Binary:
         outputStream.reset(new ofstream(fileLocation, ofstream::binary));
         break;

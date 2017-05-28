@@ -9,10 +9,10 @@
 
 namespace alba
 {
-struct AprgBitmapConfiguration
 
 class AprgBitmap
-{public:
+{
+public:
     AprgBitmap(std::string const& path);
 
     AprgBitmapConfiguration getConfiguration() const;
