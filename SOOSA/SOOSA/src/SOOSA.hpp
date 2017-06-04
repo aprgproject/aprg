@@ -1,10 +1,10 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 #define MAXQUESTIONS 30
 #define MAXQUESTIONSALL 60
-
 namespace alba
 {
 
@@ -12,17 +12,26 @@ class SOOSA
 {
 //NEW WAY:
 public:
+    struct SoosaFormDetails
+    {
+        std::string title;
+        unsigned int numberOfColumns;
+        unsigned int numberQuestionsOfColumn1;
+        unsigned int numberQuestionsOfColumn2;
+        std::vector<std::string> questions;
+    };
     struct SoosaConfiguration
     {
+        unsigned int numberOfRespondents;
         std::string path;
         std::string formDetailsPath;
         std::string area;
         std::string period;
         std::string discharge;
+        SoosaFormDetails formDetails;
     };
     SOOSA(SoosaConfiguration const& configuration);
-private:
-    SoosaConfiguration m_configuration;
+private:    SoosaConfiguration m_configuration;
 
 //OLD WAY
     FILE* m_logFile;
@@ -72,14 +81,11 @@ private:
         double intercept;
     }LineSlopeIntercept;
 
-    int numQuestionCol1,numQuestionCol2,numColumns;
     int ColumnAnswers1 [MAXQUESTIONS];
     int ColumnAnswers2 [MAXQUESTIONS];
-    int numOfResp;
     int m_frequencyDatabase[MAXQUESTIONSALL][6];
     int gddx, gddy;
     int G_x=-1, G_y=-1, G_value;
-
 
     void getChebyshevInt(ChebyshevCriterion* in_cc, int* arr, int num);
     void getChebyshevDouble(ChebyshevCriterion* in_cc, double* arr, int num);
@@ -130,8 +136,9 @@ private:
     int getQuestionsFromLine(DataDigital* in_dd, PairXY* out_questions, int numExpectedQuestions, double* tdoublearr, LineSlopeIntercept tslopeintercept, PairXY tcornerup, PairXY tcornerdown, int barheightsamplepixels);
     int processOneFile(char* fileName);
     void processDir(char* path);
-    FILE* selectFormDetailsFromFormDetailsDirectory();
+    void selectFormDetailsFromFormDetailsDirectory();
+
+public:
     int process();
 };
-
 }
