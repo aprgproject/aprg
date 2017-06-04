@@ -1,9 +1,10 @@
 #include "Line.hpp"
 
+#include <TwoDimensions/TwoDimensionsHelper.hpp>
+
 #include <algorithm>
 #include <iterator>
 #include <set>
-
 using namespace std;
 
 namespace alba
@@ -69,10 +70,19 @@ Line::Line(double const aCoefficient, double const bCoefficient, double const cC
     }
 }
 
+bool Line::operator==(Line const& line) const
+{
+    return (m_type == line.m_type) && (m_slope == line.m_slope) && (m_yIntercept == line.m_yIntercept) && (m_xIntercept == line.m_xIntercept);
+}
+
+bool Line::operator!=(Line const& line) const
+{
+    return !((*this)==line);
+}
+
 LineType Line::getType() const
 {
-    return m_type;
-}
+    return m_type;}
 
 double Line::getYIntercept() const
 {
@@ -122,10 +132,19 @@ Points Line::getPoints(Point const& first, Point const& second, double const int
     return points; //RVO
 }
 
+Points Line::getPointsWithoutLastPoint(Point const& first, Point const& second, double const interval) const
+{
+    Points pointsWithoutLastPoint(getPoints(first, second, interval));
+    if(!pointsWithoutLastPoint.empty())
+    {
+        pointsWithoutLastPoint.pop_back();
+    }
+    return pointsWithoutLastPoint; //RVO
+}
+
 double Line::calculateYFromX(double const x) const
 {
-    return (x*m_slope) + m_yIntercept; //y=mx+b
-}
+    return (x*m_slope) + m_yIntercept; //y=mx+b}
 
 double Line::calculateXFromY(double const y) const
 {
@@ -134,19 +153,17 @@ double Line::calculateXFromY(double const y) const
 
 void Line::getPointsForVerticalLine(Points & points, Point const& first, Point const& second, double const interval) const
 {
-    traverseValues(first.getY(), second.getY(), interval, [&](double traverseValue)
+    twoDimensionsHelper::traverseValues(first.getY(), second.getY(), interval, [&](double traverseValue)
     {
         points.emplace_back(Point(m_xIntercept, traverseValue));
-    });
-}
+    });}
 
 void Line::getPointsForHorizontalLine(Points & points, Point const& first, Point const& second, double const interval) const
 {
-    traverseValues(first.getX(), second.getX(), interval, [&](double traverseValue)
+    twoDimensionsHelper::traverseValues(first.getX(), second.getX(), interval, [&](double traverseValue)
     {
         points.emplace_back(Point(traverseValue, m_yIntercept));
-    });
-}
+    });}
 
 void Line::getPointsForLineWithSlope(Points & points, Point const& first, Point const& second, double const interval) const
 {
@@ -163,17 +180,16 @@ void Line::getPointsForLineWithSlope(Points & points, Point const& first, Point 
     double endValueOfY = isDirectionAscendingForY ? highestYValue : lowestYValue;
 
     Points pointsFromXCoordinate;
-    traverseValues(startValueOfX, endValueOfX, interval, [&](double traverseValueOfX)
+    twoDimensionsHelper::traverseValues(startValueOfX, endValueOfX, interval, [&](double traverseValueOfX)
     {
         pointsFromXCoordinate.emplace_back(Point(traverseValueOfX, calculateYFromX(traverseValueOfX)));
     });
 
     Points pointsFromYCoordinate;
-    traverseValues(startValueOfY, endValueOfY, interval, [&](double traverseValueOfY)
+    twoDimensionsHelper::traverseValues(startValueOfY, endValueOfY, interval, [&](double traverseValueOfY)
     {
         pointsFromYCoordinate.emplace_back(Point(calculateXFromY(traverseValueOfY), traverseValueOfY));
     });
-
     mergePointsFromPointsFromXAndY(points, pointsFromXCoordinate, pointsFromYCoordinate, isDirectionAscendingForX);
 }
 
@@ -229,29 +245,9 @@ void Line::mergePointsFromPointsFromXAndY(Points & points, Points const& pointsF
     }
 }
 
-void Line::traverseValues(double const startValue, double const endValue, double const interval, function<void(double)> performOperation) const
-{
-    bool isDirectionAscending = (startValue <= endValue);
-    double intervalWithSign = (isDirectionAscending) ? interval : -interval;
-    function<bool(double,double)> loopCondition;
-    if(isDirectionAscending)
-    {
-        loopCondition = less_equal<double>();
-    }
-    else
-    {
-        loopCondition = greater_equal<double>();
-    }
-    for(double traverseValue = startValue; loopCondition(traverseValue, endValue); traverseValue+=intervalWithSign)
-    {
-        performOperation(traverseValue);
-    }
-}
-
 LineType Line::determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX) const
 {
-    bool isNegativeDeltaY = (deltaY<0);
-    bool isNegativeDeltaX = (deltaX<0);
+    bool isNegativeDeltaY = (deltaY<0);    bool isNegativeDeltaX = (deltaX<0);
     LineType lineType(LineType::Invalid);
     if(deltaY == 0 && deltaX == 0)
     {

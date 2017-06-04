@@ -2,9 +2,10 @@
 
 #include <cmath>
 
+using namespace std;
+
 namespace alba
 {
-
 Point twoDimensionsHelper::getIntersection(Line const& line1, Line const& line2)
 {
     double xOfIntersection = ((line2.getCCoefficient()*line1.getBCoefficient())-(line1.getCCoefficient()*line2.getBCoefficient()))
@@ -21,15 +22,38 @@ double twoDimensionsHelper::getDistance(Point const& point1, Point const& point2
     return pow(pow(deltaX,2)+pow(deltaY,2), 0.5);
 }
 
+Line twoDimensionsHelper::getLineWithSameSlope(Line const& line, Point const& point)
+{
+    return Line(line.getACoefficient(), line.getBCoefficient(), -1*((line.getACoefficient()*point.getX())+(line.getBCoefficient()*point.getY())));
+}
+
 Line twoDimensionsHelper::getLineWithInverseSlope(Line const& line, Point const& point)
 {
-    return Line(line.getBCoefficient(), -line.getACoefficient(), (line.getACoefficient()*point.getY())-(line.getBCoefficient()*point.getX()));
-}
+    return Line(line.getBCoefficient(), -line.getACoefficient(), (line.getACoefficient()*point.getY())-(line.getBCoefficient()*point.getX()));}
 
 double twoDimensionsHelper::getDistance(Point const& point, Line const& line)
 {
     Point nearestPoint(getIntersection(line, getLineWithInverseSlope(line, point)));
     return getDistance(point, nearestPoint);
+}
+
+void twoDimensionsHelper::traverseValues(double const startValue, double const endValue, double const interval, function<void(double)> performOperation)
+{
+    bool isDirectionAscending = (startValue <= endValue);
+    double intervalWithSign = (isDirectionAscending) ? interval : -interval;
+    function<bool(double,double)> loopCondition;
+    if(isDirectionAscending)
+    {
+        loopCondition = less_equal<double>();
+    }
+    else
+    {
+        loopCondition = greater_equal<double>();
+    }
+    for(double traverseValue = startValue; loopCondition(traverseValue, endValue); traverseValue+=intervalWithSign)
+    {
+        performOperation(traverseValue);
+    }
 }
 
 }
