@@ -1,10 +1,15 @@
 #pragma once
 
+#include <SoosaConfiguration.hpp>
+
+#include <array>
+#include <map>
 #include <string>
 #include <vector>
 
 #define MAXQUESTIONS 30
 #define MAXQUESTIONSALL 60
+
 namespace alba
 {
 
@@ -12,26 +17,25 @@ class SOOSA
 {
 //NEW WAY:
 public:
-    struct SoosaFormDetails
-    {
-        std::string title;
-        unsigned int numberOfColumns;
-        unsigned int numberQuestionsOfColumn1;
-        unsigned int numberQuestionsOfColumn2;
-        std::vector<std::string> questions;
-    };
-    struct SoosaConfiguration
-    {
-        unsigned int numberOfRespondents;
-        std::string path;
-        std::string formDetailsPath;
-        std::string area;
-        std::string period;
-        std::string discharge;
-        SoosaFormDetails formDetails;
-    };
+
     SOOSA(SoosaConfiguration const& configuration);
-private:    SoosaConfiguration m_configuration;
+    void clearFrequencyDatabase();
+    void saveFormDetailsFromUserInterface();
+    void saveFormDetailsFromFormDetailsPath(std::string const& formDetailsFilePath);
+    unsigned int getAnswerToQuestion(unsigned int const questionNumber) const;
+private:
+    std::string getPathOfFormDetailsUsingUserInterface() const;
+    void setAnswerToQuestion(unsigned int const columnNumber, unsigned int const questionOffset, unsigned int const answer);
+    void addToFrequencyDatabase(unsigned int const questionNumber, unsigned int const answer);
+    SoosaConfiguration m_configuration;
+    std::map<unsigned int, unsigned int> m_questionToAnswersMap;
+    std::map<unsigned int, std::array<unsigned int, 6>> m_questionToAnswerFrequencyMap;
+
+
+
+
+
+
 
 //OLD WAY
     FILE* m_logFile;
@@ -81,11 +85,10 @@ private:    SoosaConfiguration m_configuration;
         double intercept;
     }LineSlopeIntercept;
 
-    int ColumnAnswers1 [MAXQUESTIONS];
-    int ColumnAnswers2 [MAXQUESTIONS];
     int m_frequencyDatabase[MAXQUESTIONSALL][6];
     int gddx, gddy;
     int G_x=-1, G_y=-1, G_value;
+
 
     void getChebyshevInt(ChebyshevCriterion* in_cc, int* arr, int num);
     void getChebyshevDouble(ChebyshevCriterion* in_cc, double* arr, int num);
@@ -136,9 +139,9 @@ private:    SoosaConfiguration m_configuration;
     int getQuestionsFromLine(DataDigital* in_dd, PairXY* out_questions, int numExpectedQuestions, double* tdoublearr, LineSlopeIntercept tslopeintercept, PairXY tcornerup, PairXY tcornerdown, int barheightsamplepixels);
     int processOneFile(char* fileName);
     void processDir(char* path);
-    void selectFormDetailsFromFormDetailsDirectory();
 
 public:
     int process();
 };
+
 }

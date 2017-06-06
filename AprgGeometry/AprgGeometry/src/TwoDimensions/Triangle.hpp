@@ -10,7 +10,8 @@ using TrianglePolygonParent = Polygon<3>;
 class Triangle : public TrianglePolygonParent
 {
 public:
-    Triangle();    Triangle(Point const& first, Point const& second, Point const& third);
+    Triangle();
+    Triangle(Point const& first, Point const& second, Point const& third);
 
 };
 

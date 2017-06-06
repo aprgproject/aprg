@@ -2,6 +2,7 @@
 #include <TwoDimensions/Polynomial.hpp>
 
 #include <gtest/gtest.h>
+
 #include <iostream>
 
 using namespace alba;

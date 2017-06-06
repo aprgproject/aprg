@@ -22,6 +22,7 @@ TEST(TriangleTest, TriangleCanBeCreated)
 TEST(TriangleTest, GetPointsAreCorrect)
 {
     Triangle triangle(Point(0,0), Point(3,3), Point(0,6));
+
     Points points(triangle.getPoints(1));
     ASSERT_EQ(12u, points.size());
     EXPECT_EQ(Point(0,0), points[0]);
@@ -46,6 +47,7 @@ TEST(TriangleTest, QuadilateralCanBeCreated)
 TEST(QuadrilateralTest, GetPointsAreCorrect)
 {
     Quadrilateral quadrilateral(Point(-2,0), Point(0,-2), Point(2,0), Point(0,2));
+
     Points points(quadrilateral.getPoints(1));
     ASSERT_EQ(8u, points.size());
     EXPECT_EQ(Point(-2,0), points[0]);

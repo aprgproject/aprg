@@ -45,7 +45,8 @@ TEST(TwoDimensionsHelperTest, GetLineWithSameSlopeAndPoint)
 
 TEST(TwoDimensionsHelperTest, GetLineWithInverseSlopeAndPoint)
 {
-    Line lineInput(Point(0,0), Point(1,1));    Line expectedLine(twoDimensionsHelper::getLineWithInverseSlope(lineInput, Point(2,2)));
+    Line lineInput(Point(0,0), Point(1,1));
+    Line expectedLine(twoDimensionsHelper::getLineWithInverseSlope(lineInput, Point(2,2)));
 
     EXPECT_EQ(4, expectedLine.getYIntercept());
     EXPECT_EQ(4, expectedLine.getXIntercept());

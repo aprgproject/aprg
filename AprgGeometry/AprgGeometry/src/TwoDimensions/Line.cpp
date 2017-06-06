@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <iterator>
 #include <set>
+
 using namespace std;
 
 namespace alba
@@ -82,7 +83,8 @@ bool Line::operator!=(Line const& line) const
 
 LineType Line::getType() const
 {
-    return m_type;}
+    return m_type;
+}
 
 double Line::getYIntercept() const
 {
@@ -144,7 +146,8 @@ Points Line::getPointsWithoutLastPoint(Point const& first, Point const& second, 
 
 double Line::calculateYFromX(double const x) const
 {
-    return (x*m_slope) + m_yIntercept; //y=mx+b}
+    return (x*m_slope) + m_yIntercept; //y=mx+b
+}
 
 double Line::calculateXFromY(double const y) const
 {
@@ -156,14 +159,16 @@ void Line::getPointsForVerticalLine(Points & points, Point const& first, Point c
     twoDimensionsHelper::traverseValues(first.getY(), second.getY(), interval, [&](double traverseValue)
     {
         points.emplace_back(Point(m_xIntercept, traverseValue));
-    });}
+    });
+}
 
 void Line::getPointsForHorizontalLine(Points & points, Point const& first, Point const& second, double const interval) const
 {
     twoDimensionsHelper::traverseValues(first.getX(), second.getX(), interval, [&](double traverseValue)
     {
         points.emplace_back(Point(traverseValue, m_yIntercept));
-    });}
+    });
+}
 
 void Line::getPointsForLineWithSlope(Points & points, Point const& first, Point const& second, double const interval) const
 {
@@ -190,6 +195,7 @@ void Line::getPointsForLineWithSlope(Points & points, Point const& first, Point 
     {
         pointsFromYCoordinate.emplace_back(Point(calculateXFromY(traverseValueOfY), traverseValueOfY));
     });
+
     mergePointsFromPointsFromXAndY(points, pointsFromXCoordinate, pointsFromYCoordinate, isDirectionAscendingForX);
 }
 
@@ -247,7 +253,8 @@ void Line::mergePointsFromPointsFromXAndY(Points & points, Points const& pointsF
 
 LineType Line::determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX) const
 {
-    bool isNegativeDeltaY = (deltaY<0);    bool isNegativeDeltaX = (deltaX<0);
+    bool isNegativeDeltaY = (deltaY<0);
+    bool isNegativeDeltaX = (deltaX<0);
     LineType lineType(LineType::Invalid);
     if(deltaY == 0 && deltaX == 0)
     {
