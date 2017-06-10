@@ -642,3 +642,4 @@ TEST(ConvertToStringTest, ConvertNumberToStringWithFillCharacter)
     EXPECT_EQ("0000-67890.1111", converter.convert(-67890.1111));
 }
 
+
