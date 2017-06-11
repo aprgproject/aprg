@@ -1,10 +1,9 @@
 #include <LargeSorter/AlbaLargeSorter.hpp>
 #include <String/AlbaStringHelper.hpp>
-#include <Timer/AlbaLocalTimer.hpp>
+#include <Time/AlbaLocalTimer.hpp>
 #include <User/AlbaUserInterface.hpp>
 
 #include <gtest/gtest.h>
-
 #include <algorithm>
 #include <iostream>
 #include <string>

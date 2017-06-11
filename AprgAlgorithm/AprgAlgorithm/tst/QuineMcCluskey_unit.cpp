@@ -1,9 +1,12 @@
 #include <QuineMcCluskey/QuineMcCluskey.hpp>
 
+#include <File/AlbaFileReader.hpp>
+#include <PathHandlers/AlbaLocalPathHandler.hpp>
+#include <String/AlbaStringHelper.hpp>
+
 #include <gtest/gtest.h>
 
 #include <iostream>
-
 using namespace alba;
 using namespace std;
 
@@ -206,11 +209,10 @@ TEST(QuineMcCluskeyTest, GetFinalImplicants)
     cout<<quineMcCluskey.getOutputTable(finalImplicants);
 }
 
-TEST(QuineMcCluskeyTest, TestFinalImplicants)
+TEST(QuineMcCluskeyTest, DISABLED_ExperimentalTest)
 {
     QuineMcCluskey quineMcCluskey;
-    /*quineMcCluskey.setInputOutput(0, LogicalValue::True);
-    quineMcCluskey.setInputOutput(1, LogicalValue::True);
+    /*quineMcCluskey.setInputOutput(0, LogicalValue::True);    quineMcCluskey.setInputOutput(1, LogicalValue::True);
     quineMcCluskey.setInputOutput(3, LogicalValue::DontCare);
     quineMcCluskey.setInputOutput(4, LogicalValue::True);
     quineMcCluskey.setInputOutput(5, LogicalValue::DontCare);
@@ -241,5 +243,34 @@ TEST(QuineMcCluskeyTest, TestFinalImplicants)
 
     Implicants finalImplicants(quineMcCluskey.getAllFinalImplicants());
 
+    cout<<quineMcCluskey.getOutputTable(finalImplicants);
+}
+
+TEST(QuineMcCluskeyTest, AnalyzeResultsFromFile)
+{
+    QuineMcCluskey quineMcCluskey;
+    AlbaLocalPathHandler pathOfNewAlgorithm(R"(C:\APRG\DateAlgorithmStudy.csv)");
+
+    ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getFullPath());
+    AlbaFileReader algorithmResultsReader(algorithmResultsFileStream);
+
+    while(algorithmResultsReader.isNotFinished())
+    {
+        string lineInFile(algorithmResultsReader.getLineAndIgnoreWhiteSpaces());
+        unsigned int input = stringHelper::convertStringToNumber<unsigned int>(stringHelper::getStringBeforeThisString(lineInFile, ","));
+        unsigned int output = stringHelper::convertStringToNumber<unsigned int>(stringHelper::getStringAfterThisString(lineInFile, ","));
+        if(output&0x1)
+        {
+            cout<<"input"<<input<<" output"<<output<<"is added"<<endl;
+            quineMcCluskey.setInputOutput(input, LogicalValue::True);
+        }
+    }
+
+    cout<<"quineMcCluskey.fillComputationalTableWithMintermsForZeroCube();"<<endl;
+    quineMcCluskey.fillComputationalTableWithMintermsForZeroCube();
+    cout<<"quineMcCluskey.findAllCombinations();"<<endl;
+    quineMcCluskey.findAllCombinations();
+    cout<<"quineMcCluskey.getAllFinalImplicants();"<<endl;
+    Implicants finalImplicants(quineMcCluskey.getAllFinalImplicants());
     cout<<quineMcCluskey.getOutputTable(finalImplicants);
 }
