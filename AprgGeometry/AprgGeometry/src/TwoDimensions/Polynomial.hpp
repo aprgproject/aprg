@@ -7,13 +7,8 @@
 #include <algorithm>
 #include <array>
 
-
-#include <iostream>
-using namespace std; //stop this
-
 namespace alba
 {
-
 template<unsigned int numberOfCoefficients>
 class Polynomial
 {
