@@ -5,6 +5,7 @@
 #else
 static_assert(false, "WINDOWS is only the supported OS yet.");
 #endif
+
 namespace alba
 {
 

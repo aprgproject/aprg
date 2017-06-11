@@ -7,6 +7,7 @@
 #include <gtest/gtest.h>
 
 #include <iostream>
+
 using namespace alba;
 using namespace std;
 
@@ -212,7 +213,8 @@ TEST(QuineMcCluskeyTest, GetFinalImplicants)
 TEST(QuineMcCluskeyTest, DISABLED_ExperimentalTest)
 {
     QuineMcCluskey quineMcCluskey;
-    /*quineMcCluskey.setInputOutput(0, LogicalValue::True);    quineMcCluskey.setInputOutput(1, LogicalValue::True);
+    /*quineMcCluskey.setInputOutput(0, LogicalValue::True);
+    quineMcCluskey.setInputOutput(1, LogicalValue::True);
     quineMcCluskey.setInputOutput(3, LogicalValue::DontCare);
     quineMcCluskey.setInputOutput(4, LogicalValue::True);
     quineMcCluskey.setInputOutput(5, LogicalValue::DontCare);

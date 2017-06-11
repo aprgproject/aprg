@@ -4,6 +4,7 @@
 #include <User/AlbaUserInterface.hpp>
 
 #include <gtest/gtest.h>
+
 #include <algorithm>
 #include <iostream>
 #include <string>

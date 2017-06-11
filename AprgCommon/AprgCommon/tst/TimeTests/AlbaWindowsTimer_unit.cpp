@@ -1,6 +1,7 @@
 #include <Time/AlbaWindowsTimer.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace alba;
 
 TEST(AlbaWindowsTimer, DISABLED_TimerCanBeInitialized)
