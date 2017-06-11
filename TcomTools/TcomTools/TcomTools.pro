@@ -38,7 +38,8 @@ src/TcomToolsConfiguration.cpp\
 ../../AprgCommon/AprgCommon/src/Time/AlbaDateTimeHelper.cpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.cpp
 
-HEADERS += \src/ProgressCounters.hpp\
+HEADERS += \
+src/ProgressCounters.hpp\
 src/ProgressBarThread.hpp\
 src/StepHandler.hpp\
 src/StepHandlerThread.hpp\
@@ -65,6 +66,7 @@ src/TcomToolsConfiguration.hpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.hpp
 
 FORMS += src/TcomTools.ui
+
 QMAKE_INCDIR += \
 src\
 ../TcomToolsBackend/src\

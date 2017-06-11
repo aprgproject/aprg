@@ -4,6 +4,7 @@
 
 namespace alba
 {
+
 AlbaWindowsTimer::AlbaWindowsTimer()
 {
     resetTimer();
@@ -29,6 +30,7 @@ unsigned int AlbaWindowsTimer::getElapsedTimeInMilliseconds() const
     difference = difference + (m_time2.wMilliseconds - m_time1.wMilliseconds);
     return difference;
 }
+
 unsigned int AlbaWindowsTimer::getElapsedTimeInSeconds() const
 {
     unsigned int difference;
@@ -37,6 +39,7 @@ unsigned int AlbaWindowsTimer::getElapsedTimeInSeconds() const
     difference = difference + (m_time2.wSecond - m_time1.wSecond);
     return difference;
 }
+
 unsigned int AlbaWindowsTimer::getElapsedTimeInMinutes() const
 {
     unsigned int difference;
@@ -44,6 +47,7 @@ unsigned int AlbaWindowsTimer::getElapsedTimeInMinutes() const
     difference = difference + (m_time2.wMinute - m_time1.wMinute);
     return difference;
 }
+
 unsigned int AlbaWindowsTimer::getElapsedTimeInHours() const
 {
     unsigned int difference;

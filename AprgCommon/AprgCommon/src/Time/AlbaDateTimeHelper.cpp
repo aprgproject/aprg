@@ -233,7 +233,8 @@ void dateTimeHelper::reorganizeOverflowValues(unsigned int & totalDays, unsigned
     totalSeconds = totalSeconds%NUMBER_OF_SECONDS_IN_A_DAY;
 }
 
-void dateTimeHelper::reorganizeUnderflowValues(int & totalDays, int & totalSeconds, int & totalMicroSeconds){
+void dateTimeHelper::reorganizeUnderflowValues(int & totalDays, int & totalSeconds, int & totalMicroSeconds)
+{
     if(totalMicroSeconds<0)
     {
         unsigned int neededSeconds = (unsigned int)(ceil(((double)-1*totalMicroSeconds)/NUMBER_OF_MICROSECONDS_IN_A_SECOND));
@@ -247,6 +248,7 @@ void dateTimeHelper::reorganizeUnderflowValues(int & totalDays, int & totalSecon
         totalSeconds+=neededDays*NUMBER_OF_SECONDS_IN_A_DAY;
     }
 }
+
 unsigned int dateTimeHelper::retrieveAndRemoveYearsFromTotalDays(unsigned int & remainingDays)
 {
     unsigned int years(remainingDays/NUMBER_OF_DAYS_IN_NON_LEAP_YEAR);
