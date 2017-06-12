@@ -22,11 +22,10 @@ AlbaYearMonthDay::AlbaYearMonthDay(unsigned short int const years, unsigned char
 
 unsigned int AlbaYearMonthDay::getYears() const
 {
-    return DateTimeBitHelper::shiftLeft<1>(DateTimeBitHelper::getByteAt<3>(m_yearMonthDay)) | DateTimeBitHelper::getByteAt<2>(m_yearMonthDay);
+    return DateTimeBitHelper::concatenateBytes(DateTimeBitHelper::getByteAt<3>(m_yearMonthDay) , DateTimeBitHelper::getByteAt<2>(m_yearMonthDay));
 }
 
-unsigned int AlbaYearMonthDay::getMonths() const
-{
+unsigned int AlbaYearMonthDay::getMonths() const{
     return DateTimeBitHelper::getByteAt<1>(m_yearMonthDay);
 }
 
