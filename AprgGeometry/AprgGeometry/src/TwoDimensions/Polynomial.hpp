@@ -35,20 +35,12 @@ public:
     Points getPoints(double const startValueOfX, double const endValueOfX, double const interval) const
     {
         Points points;
-        Point previousPoint(startValueOfX, calculateYfromX(startValueOfX));
         twoDimensionsHelper::traverseValues(startValueOfX, endValueOfX, interval, [&](double traverseValueOfX)
         {
-            Point currentPoint(traverseValueOfX, calculateYfromX(traverseValueOfX));
-            if(currentPoint != previousPoint)
-            {
-                getPointsFromTwoPointsWithoutLastPoint(points, previousPoint, currentPoint, interval);
-            }
-            previousPoint = currentPoint;
+            points.push_back(Point(traverseValueOfX, calculateYfromX(traverseValueOfX)));
         });
-        points.push_back(Point(endValueOfX, calculateYfromX(endValueOfX)));
         return points; //RVO
     }
-
     double calculateYfromX(double const x) const
     {
         double valueOfPowerOfX(1);
@@ -82,15 +74,7 @@ private:
         }
     }
 
-    void getPointsFromTwoPointsWithoutLastPoint(Points & points, Point const& previousPoint, Point const& currentPoint, double const interval) const
-    {
-        Line line(previousPoint, currentPoint);
-        Points pointsInLine(line.getPointsWithoutLastPoint(previousPoint, currentPoint, interval));
-        std::copy(pointsInLine.begin(), pointsInLine.end(), std::back_inserter(points));
-    }
-
     std::array<double, numberOfCoefficients> m_coefficients; //form is c0 + c1*x + c2*x2....
     std::array<double, numberOfCoefficients-1> m_coefficientsOfFirstDerivative; //form is c0 + c1*x + c2*x2....
 };
-
 }
