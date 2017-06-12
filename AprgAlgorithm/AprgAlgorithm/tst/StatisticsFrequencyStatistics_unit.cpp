@@ -7,10 +7,22 @@
 using namespace alba;
 using namespace std;
 
-TEST(FrequencyStatisticsTest, SingleSamplePerValueWithOddNumberOfValues)
+TEST(FrequencyStatisticsTest, SamplesAreEmpty)
 {
     using LocalFrequencyStatistics = FrequencyStatistics<double>;
     LocalFrequencyStatistics::FrequencySamples samples;
+
+    LocalFrequencyStatistics::MultipleValues modes(LocalFrequencyStatistics::calculateMode(samples));
+    EXPECT_EQ(0, LocalFrequencyStatistics::calculateNumberOfSamples(samples));
+    EXPECT_EQ(0, LocalFrequencyStatistics::calculateSum(samples));
+    EXPECT_EQ(0, LocalFrequencyStatistics::calculateMean(samples));
+    ASSERT_EQ(0, modes.size());
+    EXPECT_EQ(0, LocalFrequencyStatistics::calculateMedian(samples));
+}
+
+TEST(FrequencyStatisticsTest, SingleSamplePerValueWithOddNumberOfValues)
+{
+    using LocalFrequencyStatistics = FrequencyStatistics<double>;    LocalFrequencyStatistics::FrequencySamples samples;
     samples[1] = 1;
     samples[2] = 1;
     samples[3] = 1;
