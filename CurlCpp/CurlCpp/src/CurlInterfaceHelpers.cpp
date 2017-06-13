@@ -35,14 +35,9 @@ void CurlInterface::addLowSpeedLimitToCurlEasy(curl_easy& easy, LONG const lowSp
     easy.add<CURLOPT_LOW_SPEED_TIME>(duration);
 }
 
-template <DownloadType downloadType>
-void CurlInterface::addToCurlEasy(curl_easy&)
-{}
-
 template <>
 void CurlInterface::addToCurlEasy<DownloadType::LowSpeedLimit>(curl_easy& easy)
-{
-    addLowSpeedLimitToCurlEasy(easy, lowSpeedLimit, lowSpeedTime);
+{    addLowSpeedLimitToCurlEasy(easy, lowSpeedLimit, lowSpeedTime);
 }
 
 template <>
@@ -72,41 +67,9 @@ void CurlInterface::addToCurlEasy<DownloadType::Ssl>(curl_easy& easy)
     easy.add<CURLOPT_SSL_VERIFYHOST>(1);
 }
 
-template <>
-void CurlInterface::addToCurlEasy<DownloadType::MozillaFireFoxAndPrintDownloadProgress>(curl_easy& easy)
-{
-    addToCurlEasy<DownloadType::MozillaFireFox>(easy);
-    addToCurlEasy<DownloadType::PrintDownloadProgress>(easy);
-}
-
-template <>
-void CurlInterface::addToCurlEasy<DownloadType::LowSpeedLimitAndMozillaFireFox>(curl_easy& easy)
-{
-    addToCurlEasy<DownloadType::LowSpeedLimit>(easy);
-    addToCurlEasy<DownloadType::MozillaFireFox>(easy);
-}
-
-template <>
-void CurlInterface::addToCurlEasy<DownloadType::LowSpeedLimitAndMozillaFireFoxAndPrintDownloadProgress>(curl_easy& easy)
-{
-    addToCurlEasy<DownloadType::LowSpeedLimit>(easy);
-    addToCurlEasy<DownloadType::MozillaFireFox>(easy);
-    addToCurlEasy<DownloadType::PrintDownloadProgress>(easy);
-}
-
-template <>
-void CurlInterface::addToCurlEasy<DownloadType::LowSpeedLimitAndMozillaFireFoxAndPrintDownloadProgressWithSsl>(curl_easy& easy)
-{
-    addToCurlEasy<DownloadType::LowSpeedLimit>(easy);
-    addToCurlEasy<DownloadType::MozillaFireFox>(easy);
-    addToCurlEasy<DownloadType::PrintDownloadProgress>(easy);
-    addToCurlEasy<DownloadType::Ssl>(easy);
-}
-
 void CurlInterface::createOutputStream(unique_ptr<ofstream> & outputStream, OutputFileType outputFileType, string const& fileLocation)
 {
-    switch (outputFileType)
-    {
+    switch (outputFileType)    {
     case OutputFileType::Binary:
         outputStream.reset(new ofstream(fileLocation, ofstream::binary));
         break;
