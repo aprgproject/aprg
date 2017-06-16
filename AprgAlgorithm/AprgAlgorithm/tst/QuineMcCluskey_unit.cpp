@@ -253,6 +253,7 @@ TEST(QuineMcCluskeyTest, DISABLED_AnalyzeResultsFromFile)
 {
     QuineMcCluskey quineMcCluskey;
     AlbaLocalPathHandler pathOfNewAlgorithm(R"(C:\APRG\DateAlgorithmStudy.csv)");
+
     ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getFullPath());
     AlbaFileReader algorithmResultsReader(algorithmResultsFileStream);
 

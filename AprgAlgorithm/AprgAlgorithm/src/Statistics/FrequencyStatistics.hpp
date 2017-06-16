@@ -43,7 +43,8 @@ public:
         return result;
     }
 
-    static MultipleValues calculateMode(FrequencySamples const& samples)    {
+    static MultipleValues calculateMode(FrequencySamples const& samples)
+    {
         MultipleValues result;
         typename FrequencySamples::const_iterator iteratorForMaxFrequency = std::max_element(samples.begin(), samples.end(), [](FrequencyPair const& frequencyPair1, FrequencyPair const& frequencyPair2)
         {
@@ -64,7 +65,8 @@ public:
     static DataType calculateMedian(FrequencySamples const& samples)
     {
         unsigned int numberOfSamples = calculateNumberOfSamples(samples);
-        double medianLocation = ((double)numberOfSamples+1)/2;        unsigned int currentSampleRangeOffset=0;
+        double medianLocation = ((double)numberOfSamples+1)/2;
+        unsigned int currentSampleRangeOffset=0;
         unsigned int previousSampleRangeOffset=0;
         unsigned int currentMinimumFrequency=0;
         unsigned int previousMinimumFrequency=0;

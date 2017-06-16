@@ -40,6 +40,7 @@ bool Downloaders::downloadBinaryFile(
     }
     return isSuccessful;
 }
+
 bool Downloaders::downloadFileAsText(
         AlbaWebPathHandler const& fileToDownloadWebPathHandler,
         AlbaLocalPathHandler const& downloadPathHandler)
@@ -47,7 +48,8 @@ bool Downloaders::downloadFileAsText(
     return downloadUntilSuccessful<DownloadType::LowSpeedLimit, DownloadType::MozillaFireFox>(fileToDownloadWebPathHandler, downloadPathHandler);
 }
 
-void Downloaders::downloadFileUsingPhantomJs(        AlbaWebPathHandler const& fileToDownloadWebPathHandler,
+void Downloaders::downloadFileUsingPhantomJs(
+        AlbaWebPathHandler const& fileToDownloadWebPathHandler,
         AlbaLocalPathHandler const& downloadPathHandler)
 {
     AlbaLocalPathHandler const phantomJsFolder(PHANTOM_BIN_PATH);

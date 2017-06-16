@@ -22,7 +22,8 @@ TEST(FrequencyStatisticsTest, SamplesAreEmpty)
 
 TEST(FrequencyStatisticsTest, SingleSamplePerValueWithOddNumberOfValues)
 {
-    using LocalFrequencyStatistics = FrequencyStatistics<double>;    LocalFrequencyStatistics::FrequencySamples samples;
+    using LocalFrequencyStatistics = FrequencyStatistics<double>;
+    LocalFrequencyStatistics::FrequencySamples samples;
     samples[1] = 1;
     samples[2] = 1;
     samples[3] = 1;

@@ -129,6 +129,7 @@ string BtsLogSorter::getPathOfLogWithoutPcTimeBasedFromHardwareAddress(string co
     string filename = hardwareAddress.empty() ? "NoHardwareAddress" : hardwareAddress;
     return AlbaLocalPathHandler(directory + R"(\)" + filename + R"(.log)").getFullPath();
 }
+
 void BtsLogSorter::openStartupLogsIfNeeded()
 {
     if(!m_startupLogStreamOptional)
@@ -153,7 +154,8 @@ void BtsLogSorter::addStartupLogsOnSorterWithPcTime()
             m_sorterWithPcTime.add(startupLogPrint);
         }
         ProgressCounters::writeProgressForCombine = 25*printReader.getCurrentLocation()/fileSize;
-    }}
+    }
+}
 
 void BtsLogSorter::writeLogsWithoutPcTimeToOutputFile(ofstream & outputLogFileStream)
 {
@@ -185,6 +187,7 @@ void BtsLogSorter::separateLogsWithoutPcTimeIntoDifferentAddresses()
         ProgressCounters::writeProgressForCombine = 25 + (printCount++ * 25/size);
     });
 }
+
 void BtsLogSorter::writeLogsWithPcTimeToOutputFile(ofstream & outputLogFileStream)
 {
     cout << "Merge logs with and without PC time and save to output file." << endl;
@@ -215,7 +218,8 @@ void BtsLogSorter::addPrintsFromReaderToSorterWithoutPcTime(BtsPrintReaderWithRo
         if(!logPrintWithoutPcTime.isEmpty())
         {
             m_sorterWithoutPcTime.add(logPrintWithoutPcTime);
-        }    }
+        }
+    }
 }
 
 void BtsLogSorter::writePrintsFromFileReaderBeforeThisPrint(BtsPrintReaderWithRollback & printReader, BtsLogPrint const& logPrint, ofstream & outputLogFileStream)
@@ -241,7 +245,8 @@ void BtsLogSorter::writePrintsFromFileReaderBeforeThisPrint(BtsPrintReaderWithRo
 void BtsLogSorter::updateOrWriteCurrentPrint(BtsLogPrint const& logPrint, ofstream & outputLogFileStream)
 {
     if(m_currentPrintToWrite == logPrint)
-    {        m_currentPrintToWrite.updatePcTimeAndFileNameDetails(logPrint);
+    {
+        m_currentPrintToWrite.updatePcTimeAndFileNameDetails(logPrint);
     }
     else
     {

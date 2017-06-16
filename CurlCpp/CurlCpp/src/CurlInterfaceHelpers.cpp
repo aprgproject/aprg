@@ -37,7 +37,8 @@ void CurlInterface::addLowSpeedLimitToCurlEasy(curl_easy& easy, LONG const lowSp
 
 template <>
 void CurlInterface::addToCurlEasy<DownloadType::LowSpeedLimit>(curl_easy& easy)
-{    addLowSpeedLimitToCurlEasy(easy, lowSpeedLimit, lowSpeedTime);
+{
+    addLowSpeedLimitToCurlEasy(easy, lowSpeedLimit, lowSpeedTime);
 }
 
 template <>
@@ -69,7 +70,8 @@ void CurlInterface::addToCurlEasy<DownloadType::Ssl>(curl_easy& easy)
 
 void CurlInterface::createOutputStream(unique_ptr<ofstream> & outputStream, OutputFileType outputFileType, string const& fileLocation)
 {
-    switch (outputFileType)    {
+    switch (outputFileType)
+    {
     case OutputFileType::Binary:
         outputStream.reset(new ofstream(fileLocation, ofstream::binary));
         break;
