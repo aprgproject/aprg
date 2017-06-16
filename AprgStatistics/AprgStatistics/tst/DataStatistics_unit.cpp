@@ -1,4 +1,4 @@
-#include <Statistics/DataStatistics.hpp>
+#include <DataStatistics.hpp>
 
 #include <gtest/gtest.h>
 

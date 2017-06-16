@@ -1,4 +1,4 @@
-#include <Statistics/FrequencyStatistics.hpp>
+#include <FrequencyStatistics.hpp>
 
 #include <gtest/gtest.h>
 
