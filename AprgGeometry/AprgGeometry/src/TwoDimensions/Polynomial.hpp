@@ -1,9 +1,9 @@
 #pragma once
 
+#include <Container/AlbaRange.hpp>
 #include <TwoDimensions/Line.hpp>
 #include <TwoDimensions/Point.hpp>
 #include <TwoDimensions/TwoDimensionsHelper.hpp>
-
 #include <algorithm>
 #include <array>
 
@@ -35,11 +35,11 @@ public:
     Points getPoints(double const startValueOfX, double const endValueOfX, double const interval) const
     {
         Points points;
-        twoDimensionsHelper::traverseValues(startValueOfX, endValueOfX, interval, [&](double traverseValueOfX)
+        AlbaRange<double> range(startValueOfX, endValueOfX, interval);
+        range.traverse([&](double traverseValueOfX)
         {
             points.push_back(Point(traverseValueOfX, calculateYfromX(traverseValueOfX)));
-        });
-        return points; //RVO
+        });        return points; //RVO
     }
 
     double calculateYfromX(double const x) const
