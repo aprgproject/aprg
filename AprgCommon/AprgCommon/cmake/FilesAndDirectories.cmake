@@ -14,7 +14,8 @@ set(APRG_COMMON_MAIN_SOURCES
     ${APRG_COMMON_DIR}/src/Container/AlbaRange.hpp
     ${APRG_COMMON_DIR}/src/Container/AlbaXY.hpp
     ${APRG_COMMON_DIR}/src/Debug/AlbaDebug.hpp
-    ${APRG_COMMON_DIR}/src/File/AlbaFileReader.cpp    ${APRG_COMMON_DIR}/src/File/AlbaFileReader.hpp
+    ${APRG_COMMON_DIR}/src/File/AlbaFileReader.cpp
+    ${APRG_COMMON_DIR}/src/File/AlbaFileReader.hpp
     ${APRG_COMMON_DIR}/src/Macros/AlbaMacros.hpp
     ${APRG_COMMON_DIR}/src/Memory/AlbaMemoryBuffer.cpp
     ${APRG_COMMON_DIR}/src/Memory/AlbaMemoryBuffer.hpp
@@ -63,7 +64,8 @@ set(APRG_COMMON_MAIN_TESTS
     ${APRG_COMMON_DIR}/tst/ContainerTests/AlbaRange_unit.cpp
     ${APRG_COMMON_DIR}/tst/ContainerTests/AlbaXY_unit.cpp
     ${APRG_COMMON_DIR}/tst/DebugTests/AlbaDebug_unit.cpp
-    ${APRG_COMMON_DIR}/tst/FileTests/AlbaFileReader_unit.cpp    ${APRG_COMMON_DIR}/tst/MacrosTests/AlbaMacros_unit.cpp
+    ${APRG_COMMON_DIR}/tst/FileTests/AlbaFileReader_unit.cpp
+    ${APRG_COMMON_DIR}/tst/MacrosTests/AlbaMacros_unit.cpp
     ${APRG_COMMON_DIR}/tst/MemoryTests/AlbaMemoryBuffer_unit.cpp
     ${APRG_COMMON_DIR}/tst/MemoryTests/AlbaRaiiafPointer_unit.cpp
     ${APRG_COMMON_DIR}/tst/OptionalTests/AlbaOptional_unit.cpp

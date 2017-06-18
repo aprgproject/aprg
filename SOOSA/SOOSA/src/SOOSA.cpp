@@ -7,6 +7,7 @@
 #include <User/AlbaUserInterface.hpp>
 
 #include <Debug/AlbaDebug.hpp>
+
 #include <sstream>
 #include <iostream>
 
@@ -25,7 +26,8 @@
 
 #define FILE_PATH_BASIS_HTML APRG_DIR R"(SOOSA2014\basis.html)"
 #define MAXQUESTIONSCOOR 60 //2*30 -> MUST be twice of MAXQUESTIONS
-#define SAMPLESLINETOALLOC 1000#define ROBUSTSAMPLESLINE 1000
+#define SAMPLESLINETOALLOC 1000
+#define ROBUSTSAMPLESLINE 1000
 #define ROBUSTMINSAMPLESLINE 100
 #define ROBUSTSAMPLESLINETOPBOTTOM 500
 #define ROBUSTMINSAMPLESLINETOPBOTTOM 100
@@ -79,7 +81,8 @@ void SOOSA::FrequencyDatabase::clear()
         for(unsigned int j=0; j<5; j++)
         {
             m_questionToAnswerFrequencyMap[i][j]=0;
-        }    }
+        }
+    }
 }
 
 void SOOSA::FrequencyDatabase::addAnswer(unsigned int const questionNumber, unsigned int const answer)
@@ -109,7 +112,8 @@ SOOSA::SOOSA(SoosaConfiguration const& configuration)
 
 unsigned int SOOSA::getNumberOfAnswers() const
 {
-    return m_questionToAnswersMap.size();}
+    return m_questionToAnswersMap.size();
+}
 
 unsigned int SOOSA::getAnswerToQuestion(unsigned int const questionNumber) const
 {
@@ -148,7 +152,8 @@ void SOOSA::setAnswerToQuestionInColumn(unsigned int const columnNumber, unsigne
 
 
 void SOOSA::saveDataToCsvFile(string const& processedFilePath)
-{    ofstream outputCsvReportStream(getCsvFileName(m_configuration.getPath()), ofstream::app);
+{
+    ofstream outputCsvReportStream(getCsvFileName(m_configuration.getPath()), ofstream::app);
     if(m_configuration.getNumberOfQuestions() != m_questionToAnswersMap.size())
     {
         m_status = SoosaStatus::AlgorithmError;
@@ -162,7 +167,8 @@ void SOOSA::saveDataToCsvFile(string const& processedFilePath)
             m_frequencyDatabase.addAnswer(i, getAnswerToQuestion(i)-1);
         }
         outputCsvReportStream<<endl;
-    }    else
+    }
+    else
     {
         outputCsvReportStream<<processedFilePath<<","<<getString(m_status)<<endl;
     }
@@ -219,7 +225,8 @@ void SOOSA::saveOutputHtmlFile(string const& processedFilePath)
                 double median = FrequencyStatistics::calculateMedian(samples);
                 if(questionIndex==m_configuration.getNumberOfQuestions()-1)
                 {
-                    reportHtmlFileStream<<"<td style=\"text-align:left;padding:3px\"><b>"<<m_configuration.getQuestionAt(questionIndex)<<"</b></td>"<<endl;                }
+                    reportHtmlFileStream<<"<td style=\"text-align:left;padding:3px\"><b>"<<m_configuration.getQuestionAt(questionIndex)<<"</b></td>"<<endl;
+                }
                 else
                 {
                     reportHtmlFileStream<<"<td style=\"text-align:left;padding:3px\">"<<m_configuration.getQuestionAt(questionIndex)<<"</td>"<<endl;
@@ -234,7 +241,8 @@ void SOOSA::saveOutputHtmlFile(string const& processedFilePath)
                 reportHtmlFileStream<<"<td style=\"text-align:center;padding:3px\">"<<getPrintableStringForPercentage(m_frequencyDatabase.getFrequencyOfAnswer(questionIndex, 4)+m_frequencyDatabase.getFrequencyOfAnswer(questionIndex, 3)+m_frequencyDatabase.getFrequencyOfAnswer(questionIndex, 2),numberOfSamplesForQuestion)<<"</td>"<<endl;
                 reportHtmlFileStream<<"</tr>"<<endl;
             }
-        }        else
+        }
+        else
         {
             reportHtmlFileStream<<line<<endl;
         }
@@ -265,20 +273,25 @@ Line SOOSA::findTopLine(AprgBitmapSnippet const& snippet)
     BitmapRange rangeForX(snippet.getTopLeftCorner().getX(), snippet.getBottomRightCorner().getX(), incrementInX);
     BitmapRange rangeForY(snippet.getTopLeftCorner().getY(), snippet.getBottomRightCorner().getY(), 1);
 
-    return findHorizontalLine(snippet, rangeForY, rangeForX);
+    return findHorizontalLine(snippet, rangeForX, rangeForY);
 }
 
 Line SOOSA::findBottomLine(AprgBitmapSnippet const& snippet)
 {
-    unsigned int incrementInX(snippet.getDeltaY()/NUMBER_OF_SLICES_IN_FIND_LINE);
+    unsigned int incrementInX(snippet.getDeltaX()/NUMBER_OF_SLICES_IN_FIND_LINE);
     BitmapRange rangeForX(snippet.getTopLeftCorner().getX(), snippet.getBottomRightCorner().getX(), incrementInX);
     BitmapRange rangeForY(snippet.getBottomRightCorner().getY(), snippet.getTopLeftCorner().getY(), -1);
 
-    return findHorizontalLine(snippet, rangeForY, rangeForX);
+    return findHorizontalLine(snippet, rangeForX, rangeForY);
 }
 
 Line SOOSA::findVerticalLine(AprgBitmapSnippet const& snippet, BitmapRange const& rangeForX, BitmapRange const& rangeForY)
 {
+    ALBA_PRINT2(rangeForX.getDisplayableString(), rangeForY.getDisplayableString());
+    AprgBitmap bitmap(snippet.getConfiguration().getPath());
+    AprgBitmapSnippet writeSnippet(bitmap.getSnippetReadFromFile(snippet.getTopLeftCorner(), snippet.getBottomRightCorner()));
+    ALBA_PRINT2(writeSnippet.getTopLeftCorner().getDisplayableString(), writeSnippet.getBottomRightCorner().getDisplayableString());
+
     BitmapRange::TerminationCondition conditionForX(rangeForX.getTerminationCondition());
     BitmapRange::TerminationCondition conditionForY(rangeForY.getTerminationCondition());
     Samples samples;
@@ -289,6 +302,7 @@ Line SOOSA::findVerticalLine(AprgBitmapSnippet const& snippet, BitmapRange const
         {
             BitmapXY bitmapPoint(x, y);
             Sample samplePoint{(double) x, (double) y};
+            writeSnippet.setPixelAt(bitmapPoint, 0x0000AAAA);
             if(snippet.isBlackAt(bitmapPoint))
             {
                 samples.emplace_back(samplePoint);
@@ -296,17 +310,23 @@ Line SOOSA::findVerticalLine(AprgBitmapSnippet const& snippet, BitmapRange const
             }
             else if(isBlackEncountered)
             {
-                break;
+                //break;
             }
         }
     }
+
+    bitmap.setSnippetWriteToFile(writeSnippet);
+
     return getLineModel(samples);
 }
 
 Line SOOSA::findHorizontalLine(AprgBitmapSnippet const& snippet, BitmapRange const& rangeForX, BitmapRange const& rangeForY)
 {
-    ALBA_PRINT1(rangeForX.getDisplayableString());
-    ALBA_PRINT1(rangeForY.getDisplayableString());
+    ALBA_PRINT2(rangeForX.getDisplayableString(), rangeForY.getDisplayableString());
+    AprgBitmap bitmap(snippet.getConfiguration().getPath());
+    AprgBitmapSnippet writeSnippet(bitmap.getSnippetReadFromFile(snippet.getTopLeftCorner(), snippet.getBottomRightCorner()));
+    ALBA_PRINT2(writeSnippet.getTopLeftCorner().getDisplayableString(), writeSnippet.getBottomRightCorner().getDisplayableString());
+
     BitmapRange::TerminationCondition conditionForX(rangeForX.getTerminationCondition());
     BitmapRange::TerminationCondition conditionForY(rangeForY.getTerminationCondition());
     Samples samples;
@@ -317,6 +337,7 @@ Line SOOSA::findHorizontalLine(AprgBitmapSnippet const& snippet, BitmapRange con
         {
             BitmapXY bitmapPoint(x, y);
             Sample samplePoint{(double) x, (double) y};
+            writeSnippet.setPixelAt(bitmapPoint, 0x0000AAAA);
             if(snippet.isBlackAt(bitmapPoint))
             {
                 samples.emplace_back(samplePoint);
@@ -324,16 +345,19 @@ Line SOOSA::findHorizontalLine(AprgBitmapSnippet const& snippet, BitmapRange con
             }
             else if(isBlackEncountered)
             {
-                break;
+                //break;
             }
         }
     }
+
+    bitmap.setSnippetWriteToFile(writeSnippet);
+
     return getLineModel(samples);
 }
 
 Line SOOSA::getLineModel(Samples & samples)
 {
-    int const nonAllowableSquareErrorLimit(4);
+    int const nonAllowableSquareErrorLimit(2);
     double const samplesRetainRatio(0.90);
 
     LineModel lineModel;
@@ -343,9 +367,6 @@ Line SOOSA::getLineModel(Samples & samples)
         lineModel = calculateLineModelUsingLeastSquares(samples);
         sortSamplesBySquareError(samples, lineModel);
         maxSquareErrorInSamples = calculateSquareError(samples.back(), lineModel);
-        ALBA_PRINT1(maxSquareErrorInSamples);
-        ALBA_PRINT1(samples.size());
-        ALBA_PRINT1(samples.size()*samplesRetainRatio);
         if(maxSquareErrorInSamples>=nonAllowableSquareErrorLimit)
         {
             unsigned int totalSamples(samples.size());
@@ -360,8 +381,33 @@ void writeLineInBitmap(AprgBitmap & bitmap, Line const& line)
 {
     ALBA_PRINT3(line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient());
 
-    BitmapSignedXY topLeft(-1,-100);
-    BitmapSignedXY bottomRight(3195,3967);
+    BitmapSignedXY left(0,line. calculateYFromX(0));
+    BitmapSignedXY right(bitmap.getConfiguration().getBitmapWidth()-1, line.calculateYFromX(bitmap.getConfiguration().getBitmapWidth()-1));
+    BitmapSignedXY top(line.calculateXFromY(0), 0);
+    BitmapSignedXY bottom(line.calculateXFromY(bitmap.getConfiguration().getBitmapHeight()-1), bitmap.getConfiguration().getBitmapHeight()-1);
+
+    BitmapXY topLeft;
+    BitmapXY bottomRight;
+    if(bitmap.getConfiguration().isPositionWithinTheBitmap(left.getX(), left.getY()))
+    {
+        topLeft.saveMinimumXAndY(BitmapXY((unsigned int)left.getX(), (unsigned int)left.getY()));
+        bottomRight.saveMaximumXAndY(BitmapXY((unsigned int)left.getX(), (unsigned int)left.getY()));
+    }
+    if(bitmap.getConfiguration().isPositionWithinTheBitmap(right.getX(), right.getY()))
+    {
+        topLeft.saveMinimumXAndY(BitmapXY((unsigned int)right.getX(), (unsigned int)right.getY()));
+        bottomRight.saveMaximumXAndY(BitmapXY((unsigned int)right.getX(), (unsigned int)right.getY()));
+    }
+    if(bitmap.getConfiguration().isPositionWithinTheBitmap(top.getX(), top.getY()))
+    {
+        topLeft.saveMinimumXAndY(BitmapXY((unsigned int)top.getX(), (unsigned int)top.getY()));
+        bottomRight.saveMaximumXAndY(BitmapXY((unsigned int)top.getX(), (unsigned int)top.getY()));
+    }
+    if(bitmap.getConfiguration().isPositionWithinTheBitmap(bottom.getX(), bottom.getY()))
+    {
+        topLeft.saveMinimumXAndY(BitmapXY((unsigned int)bottom.getX(), (unsigned int)bottom.getY()));
+        bottomRight.saveMaximumXAndY(BitmapXY((unsigned int)bottom.getX(), (unsigned int)bottom.getY()));
+    }
 
     ALBA_PRINT2(topLeft.getDisplayableString(), bottomRight.getDisplayableString());
     AprgBitmapSnippet snippet(bitmap.getSnippetReadFromFileWithOutOfRangeCoordinates(topLeft.getX(), topLeft.getY(), bottomRight.getX(), bottomRight.getY()));
@@ -398,7 +444,8 @@ void writeLineInBitmap(AprgBitmap & bitmap, Line const& line)
 
 void SOOSA::getChebyshevInt(ChebyshevCriterion* in_cc, int* arr, int num)
 {
-    int i;    double mean=0, stddev=0;
+    int i;
+    double mean=0, stddev=0;
     for(i=0; i<num; i++){
         LOPPRINT("  FUNCLOOP:getChebyshevInt[i=%d]->(arr[i]=%d|mean=%lf)\n",i,arr[i],mean);
         mean=mean+arr[i];
@@ -1678,8 +1725,8 @@ void SOOSA::processOneFile(string const& filePath)
 
     //forfaster
     int barheightsamplepixels = 10;
-    int xsearchsize = bitmapWidth/8;
-    int ysearchsize = bitmapHeight/8;
+    int snippetSizeInX = bitmapWidth/4;
+    int snippetSizeInY = bitmapHeight/4;
 
     LineSlopeIntercept leftline, rightline, topline, bottomline, centerleftline, centerrightline, templine;
     PairXY uplfcorner, uprtcorner, dnlfcorner, dnrtcorner, upcenter, dncenter;
@@ -1697,13 +1744,14 @@ void SOOSA::processOneFile(string const& filePath)
         cout<<"INFO: Finding left line. NumOfSamples="<<maxLineSamples<<endl;
         gddx=0;
         gddy=0;
-        AprgBitmapSnippet snippet(bitmap.getSnippetReadFromFile(BitmapXY(gddx, gddy), BitmapXY(xsearchsize,bitmapHeight-1)));
+        AprgBitmapSnippet snippet(bitmap.getSnippetReadFromFile(BitmapXY(gddx, gddy), BitmapXY(snippetSizeInX,bitmapHeight-1)));
 
         writeLineInBitmap(bitmap, findLeftLine(snippet));
 
         numLineSamples = findLineImageFromLeft(snippet, lineSamples, maxLineSamples, createXY(0,0), createXY(0,bitmapHeight-1));
         DBGPRINT("INFO: BlackSamples=%d\n",numLineSamples);
-        numLineSamples = removeOutliersFromLine(lineSamples, tdoublearr, &ccSlope, numLineSamples, 0);        DBGPRINT("INFO: SucessfulSamples=%d\n",numLineSamples);
+        numLineSamples = removeOutliersFromLine(lineSamples, tdoublearr, &ccSlope, numLineSamples, 0);
+        DBGPRINT("INFO: SucessfulSamples=%d\n",numLineSamples);
         if(ROBUSTMINSAMPLESLINE>numLineSamples)
         {
             cout<<"ERROR: Error in finding the line. Number of samples is not enough (numLineSamples="<<numLineSamples<<")."<<endl;
@@ -1721,15 +1769,16 @@ void SOOSA::processOneFile(string const& filePath)
         //Right Line
         cout<<"INFO: Finding right line. NumOfSamples="<<maxLineSamples<<endl;
         snippet.clear();
-        gddx=bitmapWidth-1-xsearchsize;
+        gddx=bitmapWidth-1-snippetSizeInX;
         gddy=0;
         snippet = bitmap.getSnippetReadFromFile(BitmapXY(gddx, gddy), BitmapXY(bitmapWidth-1, bitmapHeight-1));
 
         writeLineInBitmap(bitmap, findRightLine(snippet));
 
-        numLineSamples = findLineImageFromRight(snippet, lineSamples, maxLineSamples, createXY(xsearchsize-1,0),createXY(xsearchsize-1,bitmapHeight-1));
+        numLineSamples = findLineImageFromRight(snippet, lineSamples, maxLineSamples, createXY(snippetSizeInX-1,0),createXY(snippetSizeInX-1,bitmapHeight-1));
         DBGPRINT("INFO: BlackSamples=%d\n",numLineSamples);
-        numLineSamples = removeOutliersFromLine(lineSamples, tdoublearr, &ccSlope, numLineSamples, 0);        DBGPRINT("INFO: SucessfulSamples=%d\n",numLineSamples);
+        numLineSamples = removeOutliersFromLine(lineSamples, tdoublearr, &ccSlope, numLineSamples, 0);
+        DBGPRINT("INFO: SucessfulSamples=%d\n",numLineSamples);
         if(ROBUSTMINSAMPLESLINE>numLineSamples)
         {
             cout<<"ERROR: Error in finding the line. Number of samples is not enough (numLineSamples="<<numLineSamples<<")."<<endl;
@@ -1750,13 +1799,14 @@ void SOOSA::processOneFile(string const& filePath)
         snippet.clear();
         gddx=0;
         gddy=0;
-        snippet = bitmap.getSnippetReadFromFile(BitmapXY(gddx, gddy), BitmapXY(bitmapWidth-1,ysearchsize));
+        snippet = bitmap.getSnippetReadFromFile(BitmapXY(gddx, gddy), BitmapXY(bitmapWidth-1,snippetSizeInY));
 
         writeLineInBitmap(bitmap, findTopLine(snippet));
 
         numLineSamples = findLineImageFromTop(snippet, lineSamples, maxLineSamples, createXY(0,0), createXY(bitmapWidth-1,0));
         DBGPRINT("INFO: BlackPerpendicularSamples=%d\n",numLineSamples);
-        numLineSamples = removeOutliersFromLine(lineSamples, tdoublearr, &ccSlope, numLineSamples, 1);        DBGPRINT("INFO: SucessfulSamples=%d\n",numLineSamples);
+        numLineSamples = removeOutliersFromLine(lineSamples, tdoublearr, &ccSlope, numLineSamples, 1);
+        DBGPRINT("INFO: SucessfulSamples=%d\n",numLineSamples);
         if(ROBUSTMINSAMPLESLINETOPBOTTOM>numLineSamples)
         {
             cout<<"ERROR: Error in finding the line. Number of samples is not enough (numLineSamples="<<numLineSamples<<")."<<endl;
@@ -1776,14 +1826,15 @@ void SOOSA::processOneFile(string const& filePath)
         cout<<"INFO: Finding bottom line. NumOfSamples="<<maxLineSamples<<endl;
         snippet.clear();
         gddx=0;
-        gddy=bitmapHeight-1-ysearchsize;
+        gddy=bitmapHeight-1-snippetSizeInY;
         snippet = bitmap.getSnippetReadFromFile(BitmapXY(gddx, gddy), BitmapXY(bitmapWidth-1,bitmapHeight-1));
 
         writeLineInBitmap(bitmap, findBottomLine(snippet));
 
-        numLineSamples = findLineImageFromBottom(snippet, lineSamples, maxLineSamples, createXY(0,ysearchsize-1),createXY(bitmapWidth-1,ysearchsize-1));
+        numLineSamples = findLineImageFromBottom(snippet, lineSamples, maxLineSamples, createXY(0,snippetSizeInY-1),createXY(bitmapWidth-1,snippetSizeInY-1));
         DBGPRINT("INFO: BlackPerpendicularSamples=%d\n",numLineSamples);
-        numLineSamples = removeOutliersFromLine(lineSamples, tdoublearr, &ccSlope, numLineSamples, 1);        DBGPRINT("INFO: SucessfulSamples=%d\n",numLineSamples);
+        numLineSamples = removeOutliersFromLine(lineSamples, tdoublearr, &ccSlope, numLineSamples, 1);
+        DBGPRINT("INFO: SucessfulSamples=%d\n",numLineSamples);
         if(ROBUSTMINSAMPLESLINETOPBOTTOM>numLineSamples)
         {
             cout<<"ERROR: Error in finding the line. Number of samples is not enough (numLineSamples="<<numLineSamples<<")."<<endl;
@@ -2072,7 +2123,8 @@ int SOOSA::process()
     AlbaLocalPathHandler pathHandler(m_configuration.getPath());
 
     saveHeadersToCsvFile();
-    if(pathHandler.isDirectory())    {
+    if(pathHandler.isDirectory())
+    {
         processDirectory(pathHandler.getFullPath());
     }
     else

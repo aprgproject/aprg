@@ -41,7 +41,8 @@ double twoDimensionsHelper::getDistance(Point const& point, Line const& line)
 
 Points twoDimensionsHelper::getConnectedPointsUsingALine(Points const& inputPoints, double const interval)
 {
-    Points resultingPoints;    if(!inputPoints.empty())
+    Points resultingPoints;
+    if(!inputPoints.empty())
     {
         Point previousPoint(inputPoints.front());
         for(Point const& currentPoint: inputPoints)
