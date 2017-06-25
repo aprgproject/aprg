@@ -28,11 +28,13 @@ Line twoDimensionsHelper::getLineWithPerpendicularSlope(Line const& line, Point 
 {
     return Line(line.getBCoefficient(), -line.getACoefficient(), (line.getACoefficient()*point.getY())-(line.getBCoefficient()*point.getX()));
 }
+
 double twoDimensionsHelper::getDistance(Line const& line, Point const& point)
 {
     Point nearestPoint(getIntersection(line, getLineWithPerpendicularSlope(line, point)));
     return getDistance(point, nearestPoint);
 }
+
 Point twoDimensionsHelper::getIntersection(Line const& line1, Line const& line2)
 {
     double xOfIntersection = ((line2.getCCoefficient()*line1.getBCoefficient())-(line1.getCCoefficient()*line2.getBCoefficient()))
@@ -66,6 +68,41 @@ void twoDimensionsHelper::savePointsFromTwoPointsUsingALineWithoutLastPoint(Poin
     Line line(previousPoint, currentPoint);
     Points pointsInLine(line.getPointsWithoutLastPoint(previousPoint, currentPoint, interval));
     std::copy(pointsInLine.begin(), pointsInLine.end(), std::back_inserter(points));
+}
+
+Point twoDimensionsHelper::popNearestPoint(Points & points, Point const& point)
+{
+    Point result;
+    if(!points.empty())
+    {
+        double nearestDistance=twoDimensionsHelper::getDistance(points[0], point);
+        Points::iterator nearestPointIterator = points.begin();
+        for(Points::iterator it = points.begin(); it != points.end(); it++)
+        {
+            double currentDistance(twoDimensionsHelper::getDistance(*it, point));
+            if(nearestDistance>currentDistance)
+            {
+                nearestDistance = currentDistance;
+                nearestPointIterator = it;
+            }
+        }
+        result = *nearestPointIterator;
+        points.erase(nearestPointIterator);
+    }
+    return result;
+}
+
+void twoDimensionsHelper::addPointIfInsideTwoPoints(Points & pointsAtBorder, Point const& point, Point const& minimumXAndY, Point const& maximumXAndY)
+{
+    if(isInsideTwoPoints(point, minimumXAndY, maximumXAndY))
+    {
+        pointsAtBorder.emplace_back(point);
+    }
+}
+
+bool twoDimensionsHelper::isInsideTwoPoints(Point const& point, Point const& minimumXAndY, Point const& maximumXAndY)
+{
+    return (point.getX() >= minimumXAndY.getX() && point.getY() >= minimumXAndY.getY() && point.getX() <= maximumXAndY.getX() && point.getY() <= maximumXAndY.getY());
 }
 
 

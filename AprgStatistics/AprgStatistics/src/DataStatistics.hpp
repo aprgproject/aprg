@@ -66,7 +66,8 @@ public:
     }
 private:
 
-    static Sample calculateVariance(Samples const& samples, unsigned int sampleSize)    {
+    static Sample calculateVariance(Samples const& samples, unsigned int sampleSize)
+    {
         Sample variance;
         if(!samples.empty())
         {

@@ -122,7 +122,8 @@ public:
 
 private:
 
-    TerminationCondition getTerminationCondition(AlbaRangeType const rangeType) const    {
+    TerminationCondition getTerminationCondition(AlbaRangeType const rangeType) const
+    {
         TerminationCondition terminationCondition;
         switch(rangeType)
         {

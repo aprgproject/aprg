@@ -4,6 +4,7 @@
 #include <TwoDimensions/Triangle.hpp>
 
 #include <gtest/gtest.h>
+
 #include <iostream>
 
 using namespace alba;
@@ -78,7 +79,8 @@ TEST(RectangleTest, GetPointsAreCorrect)
 
 TEST(QuadrilateralTest, DISABLED_PointsInQuadilateralAreCorrectWhenOutOfOrderVerticesAreUsed)
 {
-    //how can this be done?    Quadrilateral quadrilateral(Point(-2,0), Point(2,0), Point(0,2), Point(0,-2));
+    //how can this be done?
+    Quadrilateral quadrilateral(Point(-2,0), Point(2,0), Point(0,2), Point(0,-2));
     Points points(quadrilateral.getPoints(1));
 
     ASSERT_EQ(8u, points.size());
