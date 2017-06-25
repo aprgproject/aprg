@@ -57,10 +57,16 @@ public:
         dispersionCalculationTemp = dispersionCalculationTemp.calculateRaiseToPower(2);
         return pow((double)dispersionCalculationTemp.getSum(), 0.5);
     }
+
+    static double calculateDistance(Sample const& sample1, Sample const& sample2)
+    {
+        Sample distanceCalculationTemp(sample1-sample2);
+        distanceCalculationTemp = distanceCalculationTemp.calculateRaiseToPower(2);
+        return pow((double)distanceCalculationTemp.getSum(), 0.5);
+    }
 private:
 
-    static Sample calculateVariance(Samples const& samples, unsigned int sampleSize)
-    {
+    static Sample calculateVariance(Samples const& samples, unsigned int sampleSize)    {
         Sample variance;
         if(!samples.empty())
         {

@@ -17,10 +17,11 @@ set(APRG_GEOMETRY_SOURCES
     ${APRG_GEOMETRY_DIR}/src/TwoDimensions/Polynomial.hpp
     ${APRG_GEOMETRY_DIR}/src/TwoDimensions/Quadrilateral.cpp
     ${APRG_GEOMETRY_DIR}/src/TwoDimensions/Quadrilateral.hpp
+    ${APRG_GEOMETRY_DIR}/src/TwoDimensions/Rectangle.cpp
+    ${APRG_GEOMETRY_DIR}/src/TwoDimensions/Rectangle.hpp
     ${APRG_GEOMETRY_DIR}/src/TwoDimensions/Triangle.cpp
     ${APRG_GEOMETRY_DIR}/src/TwoDimensions/Triangle.hpp
-    ${APRG_GEOMETRY_DIR}/src/TwoDimensions/TwoDimensionsHelper.cpp
-    ${APRG_GEOMETRY_DIR}/src/TwoDimensions/TwoDimensionsHelper.hpp
+    ${APRG_GEOMETRY_DIR}/src/TwoDimensions/TwoDimensionsHelper.cpp    ${APRG_GEOMETRY_DIR}/src/TwoDimensions/TwoDimensionsHelper.hpp
 )
 
 set(APRG_GEOMETRY_TESTS
