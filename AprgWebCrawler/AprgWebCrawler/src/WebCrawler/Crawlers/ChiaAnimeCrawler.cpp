@@ -102,19 +102,13 @@ string ChiaAnimeCrawler::getVideoLink(AlbaWebPathHandler const& webLinkPathHandl
         {
             string lineInHtmlFile(htmlFileReader.getLine());
             if(isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"( target="_blank" )") &&
-                    isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"( download=")"))
+                    isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(href=")"))
             {
-                string webLink1(getStringInBetweenTwoStrings(lineInHtmlFile, R"(href=")", R"(")"));
-                string webLink2(getStringAfterThisString(lineInHtmlFile, R"(href=")"));
-                if(webLink1.empty())
-                {
-                    result = webLink2;
-                }
-                result = webLink1;
+                cout << lineInHtmlFile << endl;
+                result = getStringInBetweenTwoStrings(lineInHtmlFile, R"(href=")", R"(")");
             }
         }
-    }
-    return result;
+    }    return result;
 }
 
 bool ChiaAnimeCrawler::checkLinks()
