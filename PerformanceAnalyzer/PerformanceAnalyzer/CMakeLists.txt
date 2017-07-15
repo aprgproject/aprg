@@ -37,6 +37,7 @@ include(${APRG_DIR}/AprgStatistics/AprgCmakeInclude/AprgStatistics.cmake)
 
 #Include AprgFileExtractor, this needs APRG Directory
 include(${APRG_DIR}/AprgFileExtractor/AprgCmakeInclude/AprgFileExtractor.cmake)
+
 #Include TcomToolsBackend, this needs APRG Directory
 include(${APRG_DIR}/TcomTools/AprgCmakeInclude/TcomToolsBackend.cmake)
 
@@ -53,7 +54,8 @@ set(SOURCES
     src/UserIdentifiers.hpp
 )
 
-set(MAIN_SOURCES    src/main.cpp
+set(MAIN_SOURCES
+    src/main.cpp
 )
 
 set(TESTS

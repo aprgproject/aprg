@@ -108,7 +108,8 @@ string ChiaAnimeCrawler::getVideoLink(AlbaWebPathHandler const& webLinkPathHandl
                 result = getStringInBetweenTwoStrings(lineInHtmlFile, R"(href=")", R"(")");
             }
         }
-    }    return result;
+    }
+    return result;
 }
 
 bool ChiaAnimeCrawler::checkLinks()

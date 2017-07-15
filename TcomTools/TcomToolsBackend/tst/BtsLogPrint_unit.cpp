@@ -287,7 +287,8 @@ TEST(BtsLogPrintTest, SortingTestWithAndWithoutPcTime)
     EXPECT_EQ(4u, logPrints.size());
     EXPECT_EQ("FCT-1011-0-HWRSwDl <2015-01-01T00:01:33.827322Z> 3C0 WRN/HWA/SWDL, 1", logPrints[0].getPrint());
     EXPECT_EQ("FCT-1011-0-HWRSwDl <2015-01-01T00:01:33.827322Z> 3C0 WRN/HWA/SWDL, 1", logPrints[1].getPrint());
-    EXPECT_EQ("FCT-1011-0-HWRSwDl <2015-01-01T00:01:34.533125Z> 3C0 WRN/HWA/SWDL, 2", logPrints[2].getPrint());    EXPECT_EQ("FCT-1011-0-HWRSwDl <2015-01-01T00:01:34.533125Z> 3C0 WRN/HWA/SWDL, 2", logPrints[3].getPrint());
+    EXPECT_EQ("FCT-1011-0-HWRSwDl <2015-01-01T00:01:34.533125Z> 3C0 WRN/HWA/SWDL, 2", logPrints[2].getPrint());
+    EXPECT_EQ("FCT-1011-0-HWRSwDl <2015-01-01T00:01:34.533125Z> 3C0 WRN/HWA/SWDL, 2", logPrints[3].getPrint());
 }
 
 TEST(BtsLogPrintTest, SortingTestWithAndWithoutPcTime2)
@@ -303,7 +304,8 @@ TEST(BtsLogPrintTest, SortingTestWithAndWithoutPcTime2)
     EXPECT_EQ(4u, logPrints.size());
     EXPECT_EQ("FCT-1011-0-HWRSwDl <2015-01-01T00:01:33.827322Z> 3C0 WRN/HWA/SWDL, validateSrioWrite, [0x1331] ddal_rio_copy_from() failed", logPrints[0].getPrint());
     EXPECT_EQ("FCT-1011-0-HWRSwDl <2015-01-01T00:01:34.827322Z> 3C0 WRN/HWA/SWDL, validateSrioWrite, [0x1331] ddal_rio_copy_from() failed", logPrints[1].getPrint());
-    EXPECT_EQ("FCT-1011-0-HWRSwDl <2015-01-01T00:01:35.533125Z> 3C0 WRN/HWA/SWDL, validateSrioWrite, [0x1331] ddal_rio_copy_from() failed", logPrints[2].getPrint());    EXPECT_EQ("FCT-1011-0-HWRSwDl <2015-01-01T00:01:36.533125Z> 3C0 WRN/HWA/SWDL, validateSrioWrite, [0x1331] ddal_rio_copy_from() failed", logPrints[3].getPrint());
+    EXPECT_EQ("FCT-1011-0-HWRSwDl <2015-01-01T00:01:35.533125Z> 3C0 WRN/HWA/SWDL, validateSrioWrite, [0x1331] ddal_rio_copy_from() failed", logPrints[2].getPrint());
+    EXPECT_EQ("FCT-1011-0-HWRSwDl <2015-01-01T00:01:36.533125Z> 3C0 WRN/HWA/SWDL, validateSrioWrite, [0x1331] ddal_rio_copy_from() failed", logPrints[3].getPrint());
 }
 
 TEST(BtsLogPrintTest, DISABLED_InputStreamWorks)

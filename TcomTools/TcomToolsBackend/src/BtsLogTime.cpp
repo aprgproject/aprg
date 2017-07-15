@@ -140,6 +140,7 @@ unsigned int BtsLogTime::getMicroSeconds() const
 {
     return m_dateTime.getMicroSeconds();
 }
+
 string BtsLogTime::getPrintableString() const
 {
     return m_dateTime.getPrintableStringFormat1();
