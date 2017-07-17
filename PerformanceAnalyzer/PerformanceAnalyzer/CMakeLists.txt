@@ -46,24 +46,24 @@ include(${APRG_DIR}/gtest-1.7.0/AprgCmakeInclude/gtest.cmake)
 
 
 set(SOURCES
+    #AllAnalyzers.cpp next.
     src/BtsLogAnalyzer.cpp
     src/BtsLogAnalyzer.cpp
-    src/PerformanceAnalyzer.cpp
-    src/PerformanceAnalyzer.cpp
+    src/TopLogAnalyzer.cpp
+    src/TopLogAnalyzer.cpp
     src/UserIdentifiers.cpp
     src/UserIdentifiers.hpp
 )
-
 set(MAIN_SOURCES
     src/main.cpp
 )
 
 set(TESTS
-    tst/PerformanceAnalyzer_unit.cpp
+    tst/BtsLogAnalyzer_unit.cpp
+    tst/TopLogAnalyzer_unit.cpp
 )
 
-set(INCLUDE_DIRECTORIES
-    src/
+set(INCLUDE_DIRECTORIES    src/
 )
 
 if (TEST_MODE)
