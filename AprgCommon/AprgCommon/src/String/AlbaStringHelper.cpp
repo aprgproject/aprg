@@ -59,11 +59,10 @@ string stringHelper::constructFileLocator(string file, int lineNumber)
     return ss.str();
 }
 
-std::string stringHelper::getRandomAlphaNumericString(unsigned int const length)
+string stringHelper::getRandomAlphaNumericString(unsigned int const length)
 {
     AlbaRandomizer randomizer;
-    int alphaNumericCharMapIndexMax = ALPHA_NUMERIC_CHAR_MAP.length()-1;
-    string result;
+    int alphaNumericCharMapIndexMax = ALPHA_NUMERIC_CHAR_MAP.length()-1;    string result;
     result.reserve(length);
     std::generate_n(std::back_inserter(result), length, [&]()
     {
@@ -136,38 +135,49 @@ bool stringHelper::transformReplaceStringIfFound(string& mainString, string cons
     return found;
 }
 
-template <stringHelper::SplitStringType splitStringType> void stringHelper::splitToStrings(stringHelper::strings & strings, std::string const& mainString, std::string const& delimiters)
+template <stringHelper::SplitStringType splitStringType> void stringHelper::splitToStrings(stringHelper::strings & listOfStrings, std::string const& mainString, std::string const& delimiters)
 {
     int startingIndex(0);
-    int delimiterIndex = mainString.find_first_of(delimiters);
-    int delimeterLength = 1;
+    int delimiterIndex = mainString.find_first_of(delimiters);    int delimeterLength = 1;
     int mainStringLength = mainString.length();
     while(isNotNpos(delimiterIndex))
     {
         if(startingIndex != delimiterIndex)
         {
-            strings.emplace_back(mainString.substr(startingIndex, delimiterIndex-startingIndex));
+            listOfStrings.emplace_back(mainString.substr(startingIndex, delimiterIndex-startingIndex));
         }
         if(SplitStringType::WithDelimeters == splitStringType)
         {
-            strings.emplace_back(mainString.substr(delimiterIndex, delimeterLength));
+            listOfStrings.emplace_back(mainString.substr(delimiterIndex, delimeterLength));
         }
         startingIndex = delimiterIndex + delimeterLength;
-        delimiterIndex = mainString.find_first_of(delimiters, startingIndex);
-    }
+        delimiterIndex = mainString.find_first_of(delimiters, startingIndex);    }
     if(startingIndex != mainStringLength)
     {
-        strings.emplace_back(mainString.substr(startingIndex, mainStringLength-startingIndex));
+        listOfStrings.emplace_back(mainString.substr(startingIndex, mainStringLength-startingIndex));
     }
 }
 
-template void stringHelper::splitToStrings<stringHelper::SplitStringType::WithoutDelimeters> (stringHelper::strings & strings, std::string const& mainString, std::string const& delimiter);
-template void stringHelper::splitToStrings<stringHelper::SplitStringType::WithDelimeters> (stringHelper::strings & strings, std::string const& mainString, std::string const& delimiter);
+template void stringHelper::splitToStrings<stringHelper::SplitStringType::WithoutDelimeters> (stringHelper::strings & listOfStrings, std::string const& mainString, std::string const& delimiter);
+template void stringHelper::splitToStrings<stringHelper::SplitStringType::WithDelimeters> (stringHelper::strings & listOfStrings, std::string const& mainString, std::string const& delimiter);
+
+std::string stringHelper::combineStrings(stringHelper::strings & listOfStrings, std::string const& delimiters)
+{
+    string result = accumulate(listOfStrings.cbegin(), listOfStrings.cend(), string(""), [&delimiters](string const& previousResult, string const& currentString)
+    {
+        return string(previousResult + currentString + delimiters);
+    });
+
+    if(result.size() > delimiters.size())
+    {
+        result = result.substr(0, result.size() - delimiters.size());
+    }
+    return result;
+}
 
 void stringHelper::splitLinesToAchieveTargetLength(stringHelper::strings & strings, std::string const& mainString, unsigned int const targetLength)
 {
-    set<unsigned int> transitionIndexes;
-    unsigned int mainStringLength = mainString.length();
+    set<unsigned int> transitionIndexes;    unsigned int mainStringLength = mainString.length();
     bool isPreviousCharacterAWhitespace(false);
     transitionIndexes.emplace(0);
     for(unsigned int i = 0; i < mainStringLength; i++)
@@ -448,11 +458,10 @@ string stringHelper::getStringByRepeatingUntilDesiredLength(std::string const& s
 string stringHelper::getStringAndReplaceNonAlphanumericCharactersToUnderScore(string const& path)
 {
     bool isPreviousCharacterNonAlphanumeric = false;
-    string correctPath = std::accumulate(path.cbegin(), path.cend(), string(""), [&isPreviousCharacterNonAlphanumeric](string const& currentString, char const currentCharacter)
+    string correctPath = accumulate(path.cbegin(), path.cend(), string(""), [&isPreviousCharacterNonAlphanumeric](string const& currentString, char const currentCharacter)
     {
         string partialResult(currentString);
-        if(!isLetterOrNumber(currentCharacter))
-        {
+        if(!isLetterOrNumber(currentCharacter))        {
             if(!isPreviousCharacterNonAlphanumeric){partialResult += "_";}
         }
         else
@@ -632,11 +641,10 @@ string stringHelper::getUrlParameters(string const& path)
 string stringHelper::getCorrectPathWithReplacedSlashCharacters(string const& path, string const& slashCharacterString)
 {
     bool isSlashDetected = false;
-    string correctPath = std::accumulate(path.cbegin(), path.cend(), string(""),
+    string correctPath = accumulate(path.cbegin(), path.cend(), string(""),
                                          [&isSlashDetected, slashCharacterString]
                                          (string const& currentString, char const currentCharacter)
-    {
-        string partialResult(currentString);
+    {        string partialResult(currentString);
         if(isSlashCharacter(currentCharacter))
         {
             if(!isSlashDetected){partialResult += slashCharacterString;}
