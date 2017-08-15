@@ -8,6 +8,7 @@
 
 namespace alba
 {
+
 namespace TwoDimensionsStatistics
 {
     using Sample = DataSample<2>;
@@ -17,7 +18,8 @@ namespace TwoDimensionsStatistics
     using ValueToSampleUnorderedMultimap = std::unordered_multimap<double, Sample>;
     using ValueToSamplePair = std::pair<double, Sample>;
 
-    struct LineModel    {
+    struct LineModel
+    {
         double aCoefficient;
         double bCoefficient;
         double cCoefficient;

@@ -9,7 +9,8 @@
 
 using namespace std;
 using tcomToolsBackend::BtsLogPrint;
-using tcomToolsBackend::BtsLogTime;using tcomToolsBackend::BtsLogTimeType;
+using tcomToolsBackend::BtsLogTime;
+using tcomToolsBackend::BtsLogTimeType;
 
 namespace alba
 {
@@ -41,7 +42,8 @@ void BtsLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSor
 
     AlbaFileReader fileReader(inputLogFileStream);
     LogTimePairs rlSetupLogTimePairs;
-    LogTimePairs rlDeletionLogTimePairs;    while(fileReader.isNotFinished())
+    LogTimePairs rlDeletionLogTimePairs;
+    while(fileReader.isNotFinished())
     {
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         saveQueueingTime(lineInLogs, messageQueueingTimeFileStream);
@@ -49,6 +51,7 @@ void BtsLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSor
         saveRlhDeletionTime(lineInLogs, rlDeletionLogTimePairs, rlDeletionTimeFileStream);
     }
 }
+
 void BtsLogAnalyzer::saveQueueingTime(string const& lineInLogs, ofstream& messageQueueingTimeFileStream)
 {
     if(stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(lineInLogs, "MSG TIME, start queuing time"))
@@ -147,7 +150,8 @@ void BtsLogAnalyzer::setLogTimeIfNeeded(string const& lineInLogs, LogTime& logTi
 {
     BtsLogPrint logPrint(lineInLogs);
     if(!logPrint.getBtsTime().isStartup())
-    {        logTime.setValue(logPrint.getBtsTime());
+    {
+        logTime.setValue(logPrint.getBtsTime());
     }
 }
 

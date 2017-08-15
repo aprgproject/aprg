@@ -33,6 +33,7 @@
 #define MINIMUM_NUMBER_OF_LINE_SAMPLES 10
 #define RETAIN_RATIO_FOR_DEVIATION 0.90
 #define MAXIMUM_BAR_WIDTH 500
+
 #define FILE_PATH_BASIS_HTML APRG_DIR R"(SOOSA2014\basis.html)"
 #define MAXQUESTIONSCOOR 60 //2*30 -> MUST be twice of MAXQUESTIONS
 #define SAMPLESLINETOALLOC 1000
@@ -375,7 +376,8 @@ Line SOOSA::getLineModel(TwoDimensionsStatistics::Samples const & samples) const
     int const nonAllowableSquareErrorLimit(ALLOWABLE_LINE_DEVIATION_FOR_LINE_MODEL*ALLOWABLE_LINE_DEVIATION_FOR_LINE_MODEL);
 
     TwoDimensionsStatistics::LineModel lineModel;
-    double maxSquareErrorInSamples(nonAllowableSquareErrorLimit);    TwoDimensionsStatistics::Samples samplesForLineModeling(samples);
+    double maxSquareErrorInSamples(nonAllowableSquareErrorLimit);
+    TwoDimensionsStatistics::Samples samplesForLineModeling(samples);
     while (maxSquareErrorInSamples>=nonAllowableSquareErrorLimit && samplesForLineModeling.size() > MINIMUM_NUMBER_OF_LINE_SAMPLES)
     {
         lineModel = TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samplesForLineModeling);
@@ -537,7 +539,8 @@ SOOSA::LineAndBarWidths SOOSA::getAverageLineAndBarWidthUsingKMeans(TwoDimension
             widthAverages.barWidth = minMaxFromSecondGroup.getMidpointValue();
             break;
         }
-        else        {
+        else
+        {
             removeDeviatedWidthsUsingKMeans(kMeans, widthToSampleMultimap);
         }
     }
@@ -557,7 +560,8 @@ TwoDimensionsStatistics::ValueToSampleMultimap SOOSA::getWidthToSampleMultimap(T
 
 void SOOSA::initializeWidthsForKMeans(OneDimensionKMeans & kMeans, TwoDimensionsStatistics::ValueToSampleMultimap const& widthToSampleMultimap) const
 {
-    for(TwoDimensionsStatistics::ValueToSamplePair const& widthSamplePair : widthToSampleMultimap)    {
+    for(TwoDimensionsStatistics::ValueToSamplePair const& widthSamplePair : widthToSampleMultimap)
+    {
         kMeans.addSample(OneDimensionKMeans::Sample{widthSamplePair.first});
     }
 }
@@ -568,7 +572,8 @@ void SOOSA::removeDeviatedWidthsUsingKMeans(OneDimensionKMeans & kMeans, TwoDime
     ALBA_PRINT5(groupsOfSamples[0].size(), groupsOfSamples[1].size(), groupsOfSamples[2].size(), groupsOfSamples[3].size(), groupsOfSamples[4].size());
     kMeans.clear();
     set<unsigned int> groupSizes;
-    groupSizes.emplace(groupsOfSamples[0].size());    groupSizes.emplace(groupsOfSamples[1].size());
+    groupSizes.emplace(groupsOfSamples[0].size());
+    groupSizes.emplace(groupsOfSamples[1].size());
     groupSizes.emplace(groupsOfSamples[2].size());
     groupSizes.emplace(groupsOfSamples[3].size());
     groupSizes.emplace(groupsOfSamples[4].size());
@@ -640,7 +645,8 @@ Point SOOSA::getNearestBlackPointFromLine(AprgBitmapSnippet const& snippet, Line
     for(unsigned int deviation=1; deviation<=ALLOWABLE_HALF_LINE_WIDTH_DEVIATION; deviation++)
     {
         double lowerDeviatedInX = point.getX()-deviation;
-        Point lowerDeviatedPoint(lowerDeviatedInX, perpendicularLine.calculateYFromX(lowerDeviatedInX));        if(snippet.isBlackAt(convertToBitmapXY(lowerDeviatedPoint)))
+        Point lowerDeviatedPoint(lowerDeviatedInX, perpendicularLine.calculateYFromX(lowerDeviatedInX));
+        if(snippet.isBlackAt(convertToBitmapXY(lowerDeviatedPoint)))
         {
             blackPoint = lowerDeviatedPoint;
             break;
@@ -710,6 +716,7 @@ BitmapXY SOOSA::convertToBitmapXY(TwoDimensionsStatistics::Sample const& sample)
 {
     return BitmapXY((unsigned int)round(mathHelper::clampLowerBound(sample.getValueAt(0), (double)0)), (unsigned int)round(mathHelper::clampLowerBound(sample.getValueAt(1), (double)0)));
 }
+
 Point SOOSA::convertToPoint(BitmapXY const& bitmapXY) const
 {
     return Point((double)bitmapXY.getX(), (double)bitmapXY.getY());
@@ -747,9 +754,11 @@ TwoDimensionsStatistics::Sample SOOSA::convertToTwoDimensionSample(Point const& 
 
 
 
+
 void SOOSA::getChebyshevInt(ChebyshevCriterion* in_cc, int* arr, int num)
 {
-    int i;    double mean=0, stddev=0;
+    int i;
+    double mean=0, stddev=0;
     for(i=0; i<num; i++){
         LOPPRINT("  FUNCLOOP:getChebyshevInt[i=%d]->(arr[i]=%d|mean=%lf)\n",i,arr[i],mean);
         mean=mean+arr[i];
@@ -2052,7 +2061,8 @@ void SOOSA::processOneFile(string const& filePath)
 
         //Right Line
         cout<<"INFO: Finding right line."<<endl;
-        rightLine = findRightLine(globalSnippet);        rightline.intercept=rightLine.getXIntercept();
+        rightLine = findRightLine(globalSnippet);
+        rightline.intercept=rightLine.getXIntercept();
         rightline.slope=rightLine.getInverseSlope();
 
         getQuestionBarCoordinatesFromLine(globalSnippet, rightLine);
@@ -2060,7 +2070,8 @@ void SOOSA::processOneFile(string const& filePath)
 
         //Top Line
         cout<<"INFO: Finding top line."<<endl;
-        topLine = findTopLine(globalSnippet);        topline.intercept=topLine.getYIntercept();
+        topLine = findTopLine(globalSnippet);
+        topline.intercept=topLine.getYIntercept();
         topline.slope=topLine.getSlope();
         ALBA_PRINT2(topline.intercept, topline.slope);
         ALBA_PRINT4(topLine.getXIntercept(), topLine.getYIntercept(), topLine.getSlope(), topLine.getInverseSlope());

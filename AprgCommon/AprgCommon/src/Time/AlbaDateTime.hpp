@@ -17,7 +17,8 @@ public:
     void clear();
     unsigned int getYears() const;
     unsigned int getMonths() const;
-    unsigned int getDays() const;    unsigned int getYearMonthDay() const;
+    unsigned int getDays() const;
+    unsigned int getYearMonthDay() const;
     void setTime(unsigned int const totalDays);
     void setTime(unsigned short int const years, unsigned char const months, unsigned char const days);
     unsigned int convertToYearMonthDayFormat(unsigned short int const years, unsigned char const months, unsigned char const days) const;
@@ -33,7 +34,8 @@ public:
     void clear();
     unsigned int getHours() const;
     unsigned int getMinutes() const;
-    unsigned int getSeconds() const;    unsigned int getHourMinuteSecond() const;
+    unsigned int getSeconds() const;
+    unsigned int getHourMinuteSecond() const;
     void setTime(unsigned int const totalSeconds);
     void setTime(unsigned char const hours, unsigned char const minutes, unsigned char const seconds);
     unsigned int convertToHourMinuteSecondFormat(unsigned char const hours, unsigned char const minutes, unsigned char const seconds) const;
@@ -49,7 +51,8 @@ public:
     void clear();
     bool isEmpty() const;
     unsigned int getYears() const;
-    unsigned int getMonths() const;    unsigned int getDays() const;
+    unsigned int getMonths() const;
+    unsigned int getDays() const;
     unsigned int getHours() const;
     unsigned int getMinutes() const;
     unsigned int getSeconds() const;
@@ -60,7 +63,8 @@ public:
     std::string getPrintableStringFormat2() const; // HH:MM:SS
     bool operator<(AlbaDateTime const& secondDateTime) const;
     bool operator>(AlbaDateTime const& secondDateTime) const;
-    bool operator==(AlbaDateTime const& secondDateTime) const;    bool operator!=(AlbaDateTime const& secondDateTime) const;
+    bool operator==(AlbaDateTime const& secondDateTime) const;
+    bool operator!=(AlbaDateTime const& secondDateTime) const;
     AlbaDateTime operator+(AlbaDateTime const& secondDateTime) const;
     AlbaDateTime operator-(AlbaDateTime const& secondDateTime) const;
     void negate();
