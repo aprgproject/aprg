@@ -34,10 +34,11 @@ include(${APRG_DIR}/gtest-1.7.0/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCMakeHelpers/cmake/Macros.cmake)
 
 #Feature include
-include(${DesignDocumentCreatorDirectory}/cmake/RAN3374.cmake)
+include(${DesignDocumentCreatorDirectory}/cmake/CNI21985.cmake)
 
 #Assign Sack Directory
 set(SackDirectory "D:/Branches/trunk")
+
 #Sacks
 set(SACKS_DIR_TO_INCLUDE
     ${SackDirectory}/I_Interface/Private/SC_TCOM/Temp
@@ -96,13 +97,17 @@ set(COMMON_SOURCES
     src/Common/Messages/WrapMessages.hpp
     src/Common/Sacks/Sacks.hpp
     src/Common/Timers/Timers.cpp
-    src/Common/Timers/Timers.hpp    src/Common/Timers/TimerType.hpp
-    src/Common/Uml/UmlArrowConfiguration.cpp
-    src/Common/Uml/UmlArrowConfiguration.hpp
+    src/Common/Timers/Timers.hpp
+    src/Common/Timers/TimerType.hpp
+    src/Common/Uml/UmlArrow.cpp
+    src/Common/Uml/UmlArrow.hpp
     src/Common/Uml/UmlConfiguration.cpp
     src/Common/Uml/UmlConfiguration.hpp
     src/Common/Uml/UmlLogger.cpp
     src/Common/Uml/UmlLogger.hpp
+    src/Common/Uml/UmlParticipant.cpp
+    src/Common/Uml/UmlParticipant.hpp
+    src/Common/Uml/UmlPositionType.hpp
     src/Common/Utils/StringHelpers.cpp
     src/Common/Utils/StringHelpers.hpp
     src/Common/Environment.cpp
@@ -132,7 +137,8 @@ set(TESTS
 
 set(INCLUDE_DIRECTORIES
     src/
-    ${FEATURE_INCLUDE_DIRECTORIES}    ${SACKS_DIR_TO_INCLUDE}
+    ${FEATURE_INCLUDE_DIRECTORIES}
+    ${SACKS_DIR_TO_INCLUDE}
 )
 
 if (TEST_MODE)
