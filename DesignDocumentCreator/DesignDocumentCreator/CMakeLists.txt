@@ -38,6 +38,7 @@ include(${DesignDocumentCreatorDirectory}/cmake/CNI21985.cmake)
 
 #Assign Sack Directory
 set(SackDirectory "D:/Branches/trunk")
+
 #Sacks
 set(SACKS_DIR_TO_INCLUDE
     ${SackDirectory}/I_Interface/Private/SC_TCOM/Temp
@@ -116,6 +117,7 @@ set(SOURCES
     ${TCOM_PRIVATE_SACKS}
     ${BTS_SACKS}
 )
+
 set(MAIN_SOURCES
     src/Common/main.cpp
 )
@@ -129,13 +131,15 @@ set(TESTS
     ${FEATURE_TESTS}
 )
 
-message(STATUS "TCOM_PRIVATE_SACKS_DIR: ${TCOM_PRIVATE_SACKS_DIR}")message(STATUS "BTS_SACKS_DIR: ${BTS_SACKS_DIR}")
+message(STATUS "TCOM_PRIVATE_SACKS_DIR: ${TCOM_PRIVATE_SACKS_DIR}")
+message(STATUS "BTS_SACKS_DIR: ${BTS_SACKS_DIR}")
 
 set(INCLUDE_DIRECTORIES
     src/
     ${FEATURE_INCLUDE_DIRECTORIES}
     ${SACKS_DIR_TO_INCLUDE}
 )
+
 if (TEST_MODE)
     add_executable(${OUTFILE} ${SOURCES} ${TESTS})
     include_directories(${INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})

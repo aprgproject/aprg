@@ -11,7 +11,8 @@ namespace DesignDocumentCreator
 #define GET_ENUM_STRING(en) case en: result = #en; break;
 
 std::string StringHelpers::convertToString(ComponentName const componentName)
-{    string result;
+{
+    string result;
     switch(componentName)
     {
 #define COMPONENT_NAME_MACRO(COMPONENT_NAME) case ComponentName:: COMPONENT_NAME : result = #COMPONENT_NAME; break;
@@ -23,7 +24,8 @@ std::string StringHelpers::convertToString(ComponentName const componentName)
     return result;
 }
 
-std::string StringHelpers::convertToString(MessageName const messageName){
+std::string StringHelpers::convertToString(MessageName const messageName)
+{
     string result;
     switch(messageName)
     {
@@ -36,7 +38,8 @@ std::string StringHelpers::convertToString(MessageName const messageName){
     return result;
 }
 
-std::string StringHelpers::convertToString(TimerType const timerType){
+std::string StringHelpers::convertToString(TimerType const timerType)
+{
     string result;
     switch(timerType)
     {
