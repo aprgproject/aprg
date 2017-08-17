@@ -33,12 +33,11 @@ include(${APRG_DIR}/gtest-1.7.0/AprgCmakeInclude/gtest.cmake)
 #Include AprgCMakeHelpers, this needs APRG Directory
 include(${APRG_DIR}/AprgCMakeHelpers/cmake/Macros.cmake)
 
-#RAN3374
-include(${DesignDocumentCreatorDirectory}/cmake/CNI21985.cmake)
+#Feature include
+include(${DesignDocumentCreatorDirectory}/cmake/RAN3374.cmake)
 
 #Assign Sack Directory
 set(SackDirectory "D:/Branches/trunk")
-
 #Sacks
 set(SACKS_DIR_TO_INCLUDE
     ${SackDirectory}/I_Interface/Private/SC_TCOM/Temp
@@ -94,10 +93,10 @@ set(COMMON_SOURCES
     src/Common/Messages/Messages.hpp
     src/Common/Messages/MessageWrapper.hpp
     src/Common/Messages/SpecificMessage.hpp
+    src/Common/Messages/WrapMessages.hpp
     src/Common/Sacks/Sacks.hpp
     src/Common/Timers/Timers.cpp
-    src/Common/Timers/Timers.hpp
-    src/Common/Timers/TimerType.hpp
+    src/Common/Timers/Timers.hpp    src/Common/Timers/TimerType.hpp
     src/Common/Uml/UmlArrowConfiguration.cpp
     src/Common/Uml/UmlArrowConfiguration.hpp
     src/Common/Uml/UmlConfiguration.cpp
@@ -131,13 +130,9 @@ set(TESTS
     ${FEATURE_TESTS}
 )
 
-message(STATUS "TCOM_PRIVATE_SACKS_DIR: ${TCOM_PRIVATE_SACKS_DIR}")
-message(STATUS "BTS_SACKS_DIR: ${BTS_SACKS_DIR}")
-
 set(INCLUDE_DIRECTORIES
     src/
-    ${FEATURE_INCLUDE_DIRECTORIES}
-    ${SACKS_DIR_TO_INCLUDE}
+    ${FEATURE_INCLUDE_DIRECTORIES}    ${SACKS_DIR_TO_INCLUDE}
 )
 
 if (TEST_MODE)
