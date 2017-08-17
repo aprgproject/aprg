@@ -33,13 +33,11 @@ include(${APRG_DIR}/gtest-1.7.0/AprgCmakeInclude/gtest.cmake)
 #Include AprgCMakeHelpers, this needs APRG Directory
 include(${APRG_DIR}/AprgCMakeHelpers/cmake/Macros.cmake)
 
-#RAN3374 Files
-MACRO_GET_ALL_SOURCES(${DesignDocumentCreatorDirectory}/src/RAN3374 RAN3374_SOURCES)
-MACRO_GET_ALL_SOURCES(${DesignDocumentCreatorDirectory}/tst/RAN3374 RAN3374_TESTS)
+#RAN3374
+include(${DesignDocumentCreatorDirectory}/cmake/CNI21985.cmake)
 
 #Assign Sack Directory
 set(SackDirectory "D:/Branches/trunk")
-
 #Sacks
 set(SACKS_DIR_TO_INCLUDE
     ${SackDirectory}/I_Interface/Private/SC_TCOM/Temp
@@ -110,26 +108,14 @@ set(COMMON_SOURCES
     src/Common/Environment.cpp
     src/Common/Environment.hpp
 )
-set(FEATURE_SPECIFIC_SOURCES
-    src/FeatureSpecificFiles/AddComponent.hpp
-    src/FeatureSpecificFiles/ComponentName.hpp
-    src/FeatureSpecificFiles/ComponentsIncludes.hpp
-    src/FeatureSpecificFiles/ConvertToStringComponentName.hpp
-    src/FeatureSpecificFiles/ConvertToStringMessageName.hpp
-    src/FeatureSpecificFiles/MessageName.hpp
-    src/FeatureSpecificFiles/Sacks.hpp
-    src/FeatureSpecificFiles/WrapMessage.hpp
-)
 
 #Collecting files and directories
 set(SOURCES
     ${COMMON_SOURCES}
-    ${FEATURE_SPECIFIC_SOURCES}
-    #${RAN3374_SOURCES}
+    ${FEATURE_SOURCES}
     ${TCOM_PRIVATE_SACKS}
     ${BTS_SACKS}
 )
-
 set(MAIN_SOURCES
     src/Common/main.cpp
 )
@@ -140,17 +126,16 @@ set(INTERNAL_TESTS
 
 set(TESTS
     ${INTERNAL_TESTS}
-    #${RAN3374_TESTS}
+    ${FEATURE_TESTS}
 )
 
-message(STATUS "TCOM_PRIVATE_SACKS_DIR: ${TCOM_PRIVATE_SACKS_DIR}")
-message(STATUS "BTS_SACKS_DIR: ${BTS_SACKS_DIR}")
+message(STATUS "TCOM_PRIVATE_SACKS_DIR: ${TCOM_PRIVATE_SACKS_DIR}")message(STATUS "BTS_SACKS_DIR: ${BTS_SACKS_DIR}")
 
 set(INCLUDE_DIRECTORIES
     src/
+    ${FEATURE_INCLUDE_DIRECTORIES}
     ${SACKS_DIR_TO_INCLUDE}
 )
-
 if (TEST_MODE)
     add_executable(${OUTFILE} ${SOURCES} ${TESTS})
     include_directories(${INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
