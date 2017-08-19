@@ -10,7 +10,7 @@ namespace DesignDocumentCreator
 {
 
 SampleComponent::SampleComponent()
-    : m_componentName(ComponentName::EMPTY)
+    : m_componentName(ComponentName::Empty)
 {}
 
 SampleComponent::SampleComponent(ComponentName const componentName)

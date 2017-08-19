@@ -7,7 +7,7 @@ namespace DesignDocumentCreator
 
 enum class ComponentName
 {
-    EMPTY,
+    Empty,
     SampleComponent
 
 #define COMPONENT_NAME_MACRO(COMPONENT_NAME) ,COMPONENT_NAME

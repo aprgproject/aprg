@@ -93,7 +93,9 @@ set(COMMON_SOURCES
     src/Common/Messages/MessageName.hpp
     src/Common/Messages/Messages.hpp
     src/Common/Messages/MessageWrapper.hpp
-    src/Common/Messages/SpecificMessage.hpp
+    src/Common/Messages/SpecificDynamicArrayMessage.hpp
+    src/Common/Messages/SpecificDynamicPolymorphicMessage.hpp
+    src/Common/Messages/SpecificStaticMessage.hpp
     src/Common/Messages/WrapMessages.hpp
     src/Common/Sacks/Sacks.hpp
     src/Common/Timers/Timers.cpp
