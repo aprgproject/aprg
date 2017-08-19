@@ -88,10 +88,10 @@ set(COMMON_SOURCES
     src/Common/Components/SampleComponent.hpp
     src/Common/Events/Events.cpp
     src/Common/Events/Events.hpp
+    src/Common/Messages/Message.hpp
     src/Common/Messages/GenericMessage.hpp
     src/Common/Messages/MessageConverters.hpp
-    src/Common/Messages/MessageName.hpp
-    src/Common/Messages/Messages.hpp
+    src/Common/Messages/MessageName.hpp    src/Common/Messages/Messages.hpp
     src/Common/Messages/MessageWrapper.hpp
     src/Common/Messages/SpecificDynamicArrayMessage.hpp
     src/Common/Messages/SpecificDynamicPolymorphicMessage.hpp
