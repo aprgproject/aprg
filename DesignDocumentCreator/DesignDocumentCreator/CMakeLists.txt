@@ -91,7 +91,8 @@ set(COMMON_SOURCES
     src/Common/Messages/Message.hpp
     src/Common/Messages/GenericMessage.hpp
     src/Common/Messages/MessageConverters.hpp
-    src/Common/Messages/MessageName.hpp    src/Common/Messages/Messages.hpp
+    src/Common/Messages/MessageName.hpp
+    src/Common/Messages/Messages.hpp
     src/Common/Messages/MessageWrapper.hpp
     src/Common/Messages/SpecificDynamicArrayMessage.hpp
     src/Common/Messages/SpecificDynamicPolymorphicMessage.hpp
@@ -130,6 +131,8 @@ set(MAIN_SOURCES
 
 set(INTERNAL_TESTS
     tst/Common/InternalTests_unit.cpp
+    tst/Common/CommonModuleTest.cpp
+    tst/Common/CommonModuleTest.hpp
 )
 
 set(TESTS
@@ -139,6 +142,7 @@ set(TESTS
 
 set(INCLUDE_DIRECTORIES
     src/
+    tst/
     ${FEATURE_INCLUDE_DIRECTORIES}
     ${SACKS_DIR_TO_INCLUDE}
 )

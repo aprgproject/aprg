@@ -9,6 +9,7 @@ using namespace DesignDocumentCreator::StringHelpers;
 
 namespace DesignDocumentCreator
 {
+
 TupcCm::TupcCm()
     : m_componentName(ComponentName::Empty)
 {}

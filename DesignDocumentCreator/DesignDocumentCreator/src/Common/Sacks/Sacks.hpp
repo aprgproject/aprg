@@ -15,7 +15,12 @@ struct DynamicArrayPartSack
 
 struct DynamicPlaceHolderSack
 {
-    int dynamicArrayParameter;
+    int dynamicPlaceHolderParameter;
+};
+
+struct DynamicPolymorphicPartSack
+{
+    int dynamicPolymorphicParameter;
 };
 
 struct StaticMessageSack
@@ -33,6 +38,18 @@ struct DynamicPolymorphicMessageSack
 {
     StaticPartSack staticPart;
     DynamicPlaceHolderSack dynamicPart;
+};
+
+struct SampleActualDynamicArrayMessageSack
+{
+    StaticPartSack staticPart;
+    DynamicArrayPartSack dynamicPart[10];
+};
+
+struct SampleActualDynamicPolymorphicMessageSack
+{
+    StaticPartSack staticPart;
+    DynamicPolymorphicPartSack dynamicPart;
 };
 
 #include <FeatureSpecificFiles/Sacks.hpp>

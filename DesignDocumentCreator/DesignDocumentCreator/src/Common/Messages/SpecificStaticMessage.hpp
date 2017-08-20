@@ -4,14 +4,15 @@
 #include <Common/Messages/Message.hpp>
 #include <Common/Messages/MessageWrapper.hpp>
 
-namespace DesignDocumentCreator{
+namespace DesignDocumentCreator
+{
 
 template<MessageName messageName>
 class SpecificStaticMessage : public Message
 {
 public:
     typedef MessageWrapper<messageName> SpecificStaticMessageWrapper;
-    typedef typename SpecificStaticMessageWrapper::SackType SackType;
+    typedef typename SpecificStaticMessageWrapper::MessageStaticSackType SackType;
     SpecificStaticMessage()
     {}
     SpecificStaticMessage(alba::AlbaMemoryBuffer const& payloadBufferReference, ComponentName const sender, ComponentName const receiver)
@@ -24,11 +25,22 @@ public:
     {
         return SpecificStaticMessageWrapper::getMessageName();
     }
-    SackType& getPayloadReference()    {
+    SackType& getPayloadReference()
+    {
         return m_payload;
+    }
+    alba::AlbaMemoryBuffer createBuffer() const
+    {
+        return createBufferFromStaticPayload();
     }
 
 private:
+    alba::AlbaMemoryBuffer createBufferFromStaticPayload() const
+    {
+        SackType payload(m_payload);
+        return alba::AlbaMemoryBuffer(&payload, sizeof(payload));
+    }
     SackType m_payload;
 };
+
 }

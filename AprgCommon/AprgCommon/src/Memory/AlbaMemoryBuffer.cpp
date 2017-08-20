@@ -17,7 +17,6 @@ AlbaMemoryBuffer::AlbaMemoryBuffer(void* bufferPointer, unsigned int size)
     addData(bufferPointer, size);
 }
 
-
 AlbaMemoryBuffer::operator bool() const
 {
     return hasContent();
@@ -54,7 +53,12 @@ void AlbaMemoryBuffer::clearAndSetNewData(void* bufferPointer, unsigned int size
     addData(bufferPointer, size);
 }
 
-void* AlbaMemoryBuffer::addDataForWritingOutside(unsigned int additionalSize)
+void AlbaMemoryBuffer::resize(unsigned int size)
+{
+    m_buffer.resize(size);
+}
+
+void* AlbaMemoryBuffer::addDataAndReturnBeginOfAdditionalData(unsigned int additionalSize)
 {
     unsigned int oldSize = getSize();
     m_buffer.resize(oldSize+additionalSize);
