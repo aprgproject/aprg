@@ -38,11 +38,10 @@ public:
     {
         return m_payloadBuffer;
     }
-    alba::AlbaMemoryBuffer const& getPayloadBufferConstReference()
+    alba::AlbaMemoryBuffer const& getPayloadBufferConstReference() const
     {
         return m_payloadBuffer;
     }
-
 private:
     MessageName m_messageName;
     alba::AlbaMemoryBuffer m_payloadBuffer;

@@ -11,15 +11,13 @@ namespace DesignDocumentCreator
 {
 
 TupcTbm::TupcTbm()
-    : m_componentName(ComponentName::Empty)
 {}
 
 TupcTbm::TupcTbm(ComponentName const componentName)
-    : m_componentName(componentName)
+    : Component(componentName)
 {}
 
-void TupcTbm::handleMessageEvent(GenericMessage const& genericMessage)
-{
+void TupcTbm::handleMessageEvent(GenericMessage const& genericMessage){
     MessageName messageName(genericMessage.getMessageName());
     switch(messageName)
     {

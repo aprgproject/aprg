@@ -11,15 +11,13 @@ namespace DesignDocumentCreator
 {
 
 TupcLom::TupcLom()
-    : m_componentName(ComponentName::Empty)
 {}
 
 TupcLom::TupcLom(ComponentName const componentName)
-    : m_componentName(componentName)
+    : Component(componentName)
 {}
 
-void TupcLom::handleMessageEvent(GenericMessage const& genericMessage)
-{
+void TupcLom::handleMessageEvent(GenericMessage const& genericMessage){
     MessageName messageName(genericMessage.getMessageName());
     switch(messageName)
     {

@@ -11,15 +11,13 @@ namespace DesignDocumentCreator
 {
 
 Tcom::Tcom()
-    : m_componentName(ComponentName::Empty)
 {}
 
 Tcom::Tcom(ComponentName const componentName)
-    : m_componentName(componentName)
+    : Component(componentName)
 {}
 
-void Tcom::handleMessageEvent(GenericMessage const& genericMessage)
-{
+void Tcom::handleMessageEvent(GenericMessage const& genericMessage){
     MessageName messageName(genericMessage.getMessageName());
     switch(messageName)
     {

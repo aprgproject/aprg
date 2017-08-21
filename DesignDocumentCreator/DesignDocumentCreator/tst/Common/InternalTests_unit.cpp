@@ -279,11 +279,10 @@ TEST(EnvironmentTest, SentMessagesAreReceivedByRecipientComponent)
     Environment environment;
     StaticMessageSack payload;
     GenericMessage genericMessage(MessageName::SampleStaticMessage, &payload, sizeof(payload));
-    Component* componentPointer(environment.getComponentReference().getComponentPointer(ComponentName::SampleComponent));
+    Component* componentPointer(environment.getComponentsReference().getComponentPointer(ComponentName::SampleComponent));
     ASSERT_NE(nullptr, componentPointer);
 
-    EXPECT_TRUE(componentPointer->isEventQueueEmpty());
-    environment.send(ComponentName::SampleComponent, ComponentName::SampleComponent, genericMessage);
+    EXPECT_TRUE(componentPointer->isEventQueueEmpty());    environment.send(ComponentName::SampleComponent, ComponentName::SampleComponent, genericMessage);
 
     EXPECT_FALSE(componentPointer->isEventQueueEmpty());
 }
@@ -293,11 +292,10 @@ TEST(EnvironmentTest, SentMessagesAreExecutedByRecipientComponent)
     Environment environment;
     StaticMessageSack payload;
     GenericMessage genericMessage(MessageName::SampleStaticMessage, &payload, sizeof(payload));
-    Component* componentPointer(environment.getComponentReference().getComponentPointer(ComponentName::SampleComponent));
+    Component* componentPointer(environment.getComponentsReference().getComponentPointer(ComponentName::SampleComponent));
     ASSERT_NE(nullptr, componentPointer);
 
-    EXPECT_TRUE(componentPointer->isEventQueueEmpty());
-    environment.send(ComponentName::SampleComponent, ComponentName::SampleComponent, genericMessage);
+    EXPECT_TRUE(componentPointer->isEventQueueEmpty());    environment.send(ComponentName::SampleComponent, ComponentName::SampleComponent, genericMessage);
     environment.execute();
 
     EXPECT_TRUE(componentPointer->isEventQueueEmpty());
