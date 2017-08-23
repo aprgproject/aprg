@@ -13,6 +13,7 @@ namespace DesignDocumentCreator
 Tcom::Tcom(ComponentName const componentName)
     : Component(componentName)
 {}
+
 void Tcom::handleMessageEvent(GenericMessage const& genericMessage)
 {
     MessageName messageName(genericMessage.getMessageName());
@@ -24,6 +25,7 @@ void Tcom::handleMessageEvent(GenericMessage const& genericMessage)
         cout<<"No handler for messageName: "<<genericMessage.getMessageNameInString()<<endl;
     }
 }
+
 void Tcom::handleTimerEvent(Timer const& timer)
 {
     cout<<"Handle Timer, timerType: "<<convertToString(timer.getType())<<" timerId:"<<(int)timer.getId()<<endl;

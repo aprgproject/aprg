@@ -28,6 +28,7 @@ void GRM::handleMessageEvent(GenericMessage const& genericMessage)
         cout<<"Handle Message, messageName: "<<StringHelpers::genericMessage.getMessageNameInString()<<endl;
     }
 }
+
 void GRM::handleTimerEvent(Timer const& timer)
 {
     cout<<"Handle Timer, timerType: "<<StringHelpers::convertToString(timer.getType())<<" timerId:"<<(int)timer.getId()<<endl;

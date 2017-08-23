@@ -249,7 +249,8 @@ TEST(ComponentsTest, MessageEventsAreHandledByComponents)
     SampleComponent component(ComponentName::SampleComponent);
     component.pushBackEvent(event);
     EXPECT_FALSE(component.isEventQueueEmpty());
-    component.handleOneEvent();    EXPECT_TRUE(component.isEventQueueEmpty());
+    component.handleOneEvent();
+    EXPECT_TRUE(component.isEventQueueEmpty());
 }
 
 TEST(ComponentsTest, TimerEventsAreHandledByComponents)
@@ -262,7 +263,8 @@ TEST(ComponentsTest, TimerEventsAreHandledByComponents)
     SampleComponent component(ComponentName::SampleComponent);
     component.pushBackEvent(event);
     EXPECT_FALSE(component.isEventQueueEmpty());
-    component.handleOneEvent();    EXPECT_TRUE(component.isEventQueueEmpty());
+    component.handleOneEvent();
+    EXPECT_TRUE(component.isEventQueueEmpty());
 }
 
 TEST(ComponentsTest, SpecificComponentCanBeFetchedFromComponents)
@@ -274,7 +276,8 @@ TEST(ComponentsTest, SpecificComponentCanBeFetchedFromComponents)
 
 TEST(EnvironmentTest, SentMessagesAreReceivedByRecipientComponent)
 {
-    Environment environment;
+    Environment& environment(Environment::getInstance());
+    environment.clear();
     StaticMessageSack payload;
     GenericMessage genericMessage(MessageName::SampleStaticMessage, &payload, sizeof(payload));
     Component* componentPointer(environment.getComponentsReference().getComponentPointer(ComponentName::SampleComponent));
@@ -288,7 +291,8 @@ TEST(EnvironmentTest, SentMessagesAreReceivedByRecipientComponent)
 
 TEST(EnvironmentTest, SentMessagesAreExecutedByRecipientComponent)
 {
-    Environment environment;
+    Environment& environment(Environment::getInstance());
+    environment.clear();
     StaticMessageSack payload;
     GenericMessage genericMessage(MessageName::SampleStaticMessage, &payload, sizeof(payload));
     Component* componentPointer(environment.getComponentsReference().getComponentPointer(ComponentName::SampleComponent));

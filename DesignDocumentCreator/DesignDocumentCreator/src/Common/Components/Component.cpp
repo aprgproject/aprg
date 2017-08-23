@@ -17,7 +17,8 @@ Component::Component(ComponentName const componentName)
     , m_componentNameInString(convertToString(componentName))
 {}
 
-void Component::pushBackEvent(Event const& event){
+void Component::pushBackEvent(Event const& event)
+{
     m_eventQueue.push_back(event);
 }
 
@@ -48,12 +49,18 @@ GenericMessage Component::peekMessageAtStartOfTheEventQueue() const
     return GenericMessage(m_eventQueue.front().getMessage());
 }
 
+ComponentName Component::getComponentName() const
+{
+    return m_componentName;
+}
+
 string Component::getComponentNameInString() const
 {
     return m_componentNameInString;
 }
 
-string Component::getQueueAsString() const{
+string Component::getQueueAsString() const
+{
     return accumulate(m_eventQueue.begin(), m_eventQueue.end(), string("Event Queue: "), [](string const& partialResult, Event const& event)
     {
         return partialResult+event.getString()+", ";

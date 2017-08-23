@@ -13,6 +13,7 @@ namespace DesignDocumentCreator
 TupcCm::TupcCm(ComponentName const componentName)
     : Component(componentName)
 {}
+
 void TupcCm::handleMessageEvent(GenericMessage const& genericMessage)
 {
     MessageName messageName(genericMessage.getMessageName());
@@ -24,6 +25,7 @@ void TupcCm::handleMessageEvent(GenericMessage const& genericMessage)
         cout<<"No handler for messageName: "<<genericMessage.getMessageNameInString()<<endl;
     }
 }
+
 void TupcCm::handleTimerEvent(Timer const& timer)
 {
     cout<<"Handle Timer, timerType: "<<convertToString(timer.getType())<<" timerId:"<<(int)timer.getId()<<endl;
