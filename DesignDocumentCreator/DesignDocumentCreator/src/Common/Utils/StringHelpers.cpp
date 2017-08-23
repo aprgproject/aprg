@@ -53,10 +53,20 @@ string StringHelpers::convertToString(TimerType const timerType)
     return stringHelper::getStringAfterThisString(result, "TimerType::");
 }
 
-string StringHelpers::convertToString(UmlPositionType const position)
+string StringHelpers::convertToString(OtherEventType const otherEventType)
 {
     string result;
-    switch(position)
+    switch(otherEventType)
+    {
+    GET_ENUM_STRING(OtherEventType::Empty)
+            GET_ENUM_STRING(OtherEventType::ProcessStartup)
+    }
+    return stringHelper::getStringAfterThisString(result, "OtherEventType::");
+}
+
+string StringHelpers::convertToString(UmlPositionType const position)
+{
+    string result;    switch(position)
     {
     GET_ENUM_STRING(UmlPositionType::right)
             GET_ENUM_STRING(UmlPositionType::left)

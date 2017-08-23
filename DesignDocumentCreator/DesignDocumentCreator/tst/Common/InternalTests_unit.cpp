@@ -4,9 +4,9 @@
 #include <Common/Events/Events.hpp>
 #include <Common/Messages/Messages.hpp>
 #include <Common/Timers/Timers.hpp>
+#include <Common/Events/OtherEvent.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace DesignDocumentCreator;
 using namespace std;
 
@@ -239,10 +239,18 @@ TEST(EventsTest, TimerEventsCanBeCreated)
     EXPECT_EQ(cellId, event.getTimer().getId());
 }
 
+TEST(EventsTest, OtherEventsCanBeCreated)
+{
+    OtherEvent otherEvent(OtherEventType::ProcessStartup);
+    Event event(otherEvent);
+
+    EXPECT_EQ(EventType::OtherEvent, event.getType());
+    EXPECT_EQ(OtherEventType::ProcessStartup, event.getOtherEvent().getType());
+}
+
 TEST(ComponentsTest, MessageEventsAreHandledByComponents)
 {
-    StaticMessageSack payload;
-    payload.sampleParameter=5678;
+    StaticMessageSack payload;    payload.sampleParameter=5678;
     GenericMessage genericMessage(MessageName::SampleStaticMessage, &payload, sizeof(payload));
     Event event(genericMessage);
 
