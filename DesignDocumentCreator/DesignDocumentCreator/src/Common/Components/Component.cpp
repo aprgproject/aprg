@@ -12,16 +12,12 @@ using namespace DesignDocumentCreator::StringHelpers;
 namespace DesignDocumentCreator
 {
 
-Component::Component()
-    : m_componentName(ComponentName::Empty)
-{}
-
 Component::Component(ComponentName const componentName)
     : m_componentName(componentName)
+    , m_componentNameInString(convertToString(componentName))
 {}
 
-void Component::pushBackEvent(Event const& event)
-{
+void Component::pushBackEvent(Event const& event){
     m_eventQueue.push_back(event);
 }
 
@@ -52,13 +48,12 @@ GenericMessage Component::peekMessageAtStartOfTheEventQueue() const
     return GenericMessage(m_eventQueue.front().getMessage());
 }
 
-string Component::getComponentNameString() const
+string Component::getComponentNameInString() const
 {
-    return convertToString(m_componentName);
+    return m_componentNameInString;
 }
 
-string Component::getQueueAsString() const
-{
+string Component::getQueueAsString() const{
     return accumulate(m_eventQueue.begin(), m_eventQueue.end(), string("Event Queue: "), [](string const& partialResult, Event const& event)
     {
         return partialResult+event.getString()+", ";

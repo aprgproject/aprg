@@ -11,13 +11,9 @@ using namespace DesignDocumentCreator::StringHelpers;
 namespace DesignDocumentCreator
 {
 
-TupcLom::TupcLom()
-{}
-
 TupcLom::TupcLom(ComponentName const componentName)
     : Component(componentName)
 {}
-
 void TupcLom::handleMessageEvent(GenericMessage const& genericMessage)
 {
     MessageName messageName(genericMessage.getMessageName());
@@ -26,10 +22,9 @@ void TupcLom::handleMessageEvent(GenericMessage const& genericMessage)
         case MessageName::OAM_ATM_HW_CONFIGURATION_MSG:
             handleHwConfiguration(genericMessage);
     default:
-        cout<<"No handler for messageName: "<<convertToString(genericMessage.getMessageName())<<endl;
+        cout<<"No handler for messageName: "<<genericMessage.getMessageNameInString()<<endl;
     }
 }
-
 void TupcLom::handleHwConfiguration(GenericMessage const& genericMessage)
 {
     cout<<"Handle Message, OAM_ATM_HW_CONFIGURATION_MSG: "<<endl;

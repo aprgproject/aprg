@@ -246,11 +246,10 @@ TEST(ComponentsTest, MessageEventsAreHandledByComponents)
     GenericMessage genericMessage(MessageName::SampleStaticMessage, &payload, sizeof(payload));
     Event event(genericMessage);
 
-    SampleComponent component;
+    SampleComponent component(ComponentName::SampleComponent);
     component.pushBackEvent(event);
     EXPECT_FALSE(component.isEventQueueEmpty());
-    component.handleOneEvent();
-    EXPECT_TRUE(component.isEventQueueEmpty());
+    component.handleOneEvent();    EXPECT_TRUE(component.isEventQueueEmpty());
 }
 
 TEST(ComponentsTest, TimerEventsAreHandledByComponents)
@@ -260,11 +259,10 @@ TEST(ComponentsTest, TimerEventsAreHandledByComponents)
     Timer timer(type, cellId);
     Event event(timer);
 
-    SampleComponent component;
+    SampleComponent component(ComponentName::SampleComponent);
     component.pushBackEvent(event);
     EXPECT_FALSE(component.isEventQueueEmpty());
-    component.handleOneEvent();
-    EXPECT_TRUE(component.isEventQueueEmpty());
+    component.handleOneEvent();    EXPECT_TRUE(component.isEventQueueEmpty());
 }
 
 TEST(ComponentsTest, SpecificComponentCanBeFetchedFromComponents)
