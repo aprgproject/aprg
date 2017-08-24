@@ -24,7 +24,8 @@ Event::Event(OtherEvent const& otherEvent)
 
 EventType Event::getType() const
 {
-    return m_eventType;}
+    return m_eventType;
+}
 
 Timer Event::getTimer() const
 {
@@ -48,6 +49,7 @@ string Event::getString() const
     }
     return result;
 }
+
 GenericMessage Event::getMessage() const
 {
     return m_message;

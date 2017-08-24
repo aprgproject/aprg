@@ -4,6 +4,7 @@
 #include <Common/Events/OtherEvent.hpp>
 #include <Common/Messages/Messages.hpp>
 #include <Common/Timers/Timers.hpp>
+
 #include <deque>
 #include <string>
 
@@ -33,6 +34,7 @@ protected:
 
     ComponentName m_componentName;
     std::string m_componentNameInString;
-    std::deque<Event> m_eventQueue;};
+    std::deque<Event> m_eventQueue;
+};
 
 }
