@@ -242,15 +242,14 @@ TEST(EventsTest, TimerEventsCanBeCreated)
 
 TEST(EventsTest, OtherEventsCanBeCreated)
 {
-    OtherEvent otherEvent(OtherEventType::ProcessStartup);
+    OtherEvent otherEvent(OtherEventType::MainProcessStartup);
     Event event(otherEvent);
 
     EXPECT_EQ(EventType::OtherEvent, event.getType());
-    EXPECT_EQ(OtherEventType::ProcessStartup, event.getOtherEvent().getType());
+    EXPECT_EQ(OtherEventType::MainProcessStartup, event.getOtherEvent().getType());
 }
 
-TEST(ComponentsTest, MessageEventsAreHandledByComponents)
-{
+TEST(ComponentsTest, MessageEventsAreHandledByComponents){
     StaticMessageSack payload;
     payload.sampleParameter=5678;
     GenericMessage genericMessage(MessageName::SampleStaticMessage, &payload, sizeof(payload));
