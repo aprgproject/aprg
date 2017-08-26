@@ -66,6 +66,7 @@ string StringHelpers::convertToString(OtherEventType const otherEventType)
     }
     return stringHelper::getStringAfterThisString(result, "OtherEventType::");
 }
+
 string StringHelpers::convertToString(UmlPositionType const position)
 {
     string result;

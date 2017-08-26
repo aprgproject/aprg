@@ -25,7 +25,8 @@ public:
     
 private:
     std::string getUmlLogsForStart() const;
-    std::string getUmlLogsForEnd() const;    std::stringstream m_umlLogBuffer;
+    std::string getUmlLogsForEnd() const;
+    std::stringstream m_umlLogBuffer;
     UmlParticipants m_participants;
 };
 
