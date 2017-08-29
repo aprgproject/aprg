@@ -16,11 +16,10 @@ TupcTbm::TupcTbm(ComponentName const componentName)
 
 void TupcTbm::handleStartup()
 {
-    logNoteOnComponent("TupcTbm is **automatically**  starts when TUPCexe starts.");
+    logNoteOnComponent("TupcTbm **automatically**  starts when TUPCexe starts.");
 }
 
-void TupcTbm::handleMessageEvent(GenericMessage const& genericMessage)
-{
+void TupcTbm::handleMessageEvent(GenericMessage const& genericMessage){
     MessageName messageName(genericMessage.getMessageName());
     switch(messageName)
     {
