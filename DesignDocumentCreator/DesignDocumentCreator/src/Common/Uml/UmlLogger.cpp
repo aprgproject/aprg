@@ -6,7 +6,8 @@
 #include <math/AlbaMathHelper.hpp>
 
 #include <fstream>
-#include <iostream>#include <string>
+#include <iostream>
+#include <string>
 
 using namespace std;
 using namespace alba;
@@ -59,7 +60,8 @@ void UmlLogger::logNote(std::string const& note)
         stringHelper::splitLinesToAchieveTargetLength(linesInNoteWithTargetLength, lineInNote, optimizedTargetLength);
     }
     for(string const& line: linesInNoteWithTargetLength)
-    {        m_umlLogBuffer<<line<<endl;
+    {
+        m_umlLogBuffer<<line<<endl;
     }
 }
 
@@ -98,7 +100,8 @@ unsigned int UmlLogger::getOptimizedTargetLength(stringHelper::strings const& li
 
 string UmlLogger::getUmlLogsForStart() const
 {
-    stringstream startStream;    startStream<<"@startuml"<<endl;
+    stringstream startStream;
+    startStream<<"@startuml"<<endl;
     startStream<<"hide footbox"<<endl;
     for(UmlParticipant participant : m_participants)
     {

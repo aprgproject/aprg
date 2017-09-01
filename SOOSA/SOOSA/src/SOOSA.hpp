@@ -9,6 +9,7 @@
 #include <SoosaConfiguration.hpp>
 #include <TwoDimensions/Line.hpp>
 #include <TwoDimensionsStatistics.hpp>
+
 #include <array>
 #include <deque>
 #include <fstream>
@@ -60,7 +61,8 @@ public:
         alba::stringHelper::strings m_errors;
     };
 
-    struct LineAndBarWidths    {
+    struct LineAndBarWidths
+    {
         double lineWidth;
         double barWidth;
     };
