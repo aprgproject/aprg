@@ -37,11 +37,10 @@ enum class SplitStringType
     WithoutDelimeters
 };
 template <SplitStringType splitStringType> void splitToStrings(strings & listOfStrings, std::string const& mainString,  std::string const& delimiters);
-std::string combineStrings(strings & strings, std::string const& delimiters);
+std::string combineStrings(strings const& strings, std::string const& delimiters);
 void splitLinesToAchieveTargetLength(stringHelper::strings & listOfStrings, std::string const& mainString, unsigned int const targetLength);
 
-std::string getStringWithCapitalLetters(std::string const& mainString);
-std::string getStringWithLowerCaseLetters(std::string const& mainString);
+std::string getStringWithCapitalLetters(std::string const& mainString);std::string getStringWithLowerCaseLetters(std::string const& mainString);
 std::string getStringWithUrlDecodedString(std::string const& mainString);
 std::string getStringThatContainsWhiteSpaceIndention(std::string const& mainString);
 std::string getStringWithoutStartingAndTrailingCharacters(std::string const& mainString, std::string const& characters);

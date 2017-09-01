@@ -41,11 +41,8 @@ set(SOURCES
     src/SOOSA.hpp
     src/SoosaConfiguration.cpp
     src/SoosaConfiguration.hpp
-    src/SoosaStatus.cpp
-    src/SoosaStatus.hpp
     src/SoosaUi.cpp
     src/SoosaUi.hpp
-
 )
 
 set(MAIN_SOURCES

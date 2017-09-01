@@ -5,11 +5,10 @@
 #include <Container/AlbaRange.hpp>
 #include <DataCollection.hpp>
 #include <KMeansClustering.hpp>
+#include <String/AlbaStringHelper.hpp>
 #include <SoosaConfiguration.hpp>
-#include <SoosaStatus.hpp>
 #include <TwoDimensions/Line.hpp>
 #include <TwoDimensionsStatistics.hpp>
-
 #include <array>
 #include <deque>
 #include <fstream>
@@ -48,20 +47,20 @@ public:
         double m_width;
     };
 
-    class StatusSingleton
+    class StatusStatus
     {
-        StatusSingleton();
+        StatusStatus();
     public:
-        static StatusSingleton getInstance();
-        SoosaStatus getSoosaStatus() const;
-        void setSoosaStatus(SoosaStatus const status);
+        static StatusStatus getInstance();
+        std::string getSoosaStatus() const;
+        void setError(std::string const& error);
+        void clearErrors();
         bool isStatusNoError() const;
     private:
-        SoosaStatus m_status;
+        alba::stringHelper::strings m_errors;
     };
 
-    struct LineAndBarWidths
-    {
+    struct LineAndBarWidths    {
         double lineWidth;
         double barWidth;
     };
