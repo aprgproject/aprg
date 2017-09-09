@@ -15,10 +15,23 @@ AprgBitmapConfiguration AprgBitmap::getConfiguration() const
     return m_configuration;
 }
 
+AprgBitmapSnippet AprgBitmap::createColorFilledSnippetWithSizeOfWholeBitmap(unsigned int const color) const
+{
+    BitmapXY topLeftCorner(getUpLeftCornerPoint());
+    BitmapXY bottomRightCorner(getDownRightCornerPoint());
+    AprgBitmapSnippet snippet(getUpLeftCornerPoint(), getDownRightCornerPoint(), m_configuration);
+    int byteOffsetInXForStart = (int)m_configuration.convertPixelsToBytesRoundToFloor(topLeftCorner.getX());
+    int byteOffsetInXForEnd = (int)m_configuration.convertPixelsToBytesRoundToFloor(bottomRightCorner.getX());
+    int numberOfBytesToBeCopiedForX = m_configuration.getOneRowSizeInBytesFromBytes(byteOffsetInXForStart, byteOffsetInXForEnd);
+    int yDifference = bottomRightCorner.getY()-topLeftCorner.getY()+1;
+    PixelData& pixelData(snippet.getPixelDataReference());
+    pixelData.resize(numberOfBytesToBeCopiedForX*yDifference, color);
+    return snippet;
+}
+
 AprgBitmapSnippet AprgBitmap::getSnippetReadFromFileWholeBitmap() const
 {
-    return getSnippetReadFromFile(getUpLeftCornerPoint(), getDownRightCornerPoint());
-}
+    return getSnippetReadFromFile(getUpLeftCornerPoint(), getDownRightCornerPoint());}
 
 AprgBitmapSnippet AprgBitmap::getSnippetReadFromFileWithOutOfRangeCoordinates(int outOfRangeLeft, int outOfRangeTop, int outOfRangeRight, int outOfRangeBottom) const
 {
@@ -68,10 +81,10 @@ AprgBitmapSnippet AprgBitmap::getSnippetReadFromFile(BitmapXY const topLeftCorne
 
             snippet = AprgBitmapSnippet(BitmapXY(startPixelInX, topLeftCorner.getY()), BitmapXY(endPixelInX, bottomRightCorner.getY()), m_configuration);
 
+
             for(int y=offsetInYForStart; y>=offsetInYForEnd; y--)
             {
-                unsigned long long fileOffsetForStart = m_configuration.getPixelArrayAddress()+((unsigned long long)m_configuration.getNumberOfBytesPerRowInFile()*y)+byteOffsetInXForStart;
-                fileReader.moveLocation(fileOffsetForStart);
+                unsigned long long fileOffsetForStart = m_configuration.getPixelArrayAddress()+((unsigned long long)m_configuration.getNumberOfBytesPerRowInFile()*y)+byteOffsetInXForStart;                fileReader.moveLocation(fileOffsetForStart);
                 fileReader.saveDataToMemoryBuffer(snippet.getPixelDataReference(), numberOfBytesToBeCopiedForX);
             }
         }
