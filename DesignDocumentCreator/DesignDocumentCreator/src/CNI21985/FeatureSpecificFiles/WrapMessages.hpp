@@ -5,7 +5,8 @@
 #include <FeatureSpecificFiles/Sacks.hpp>
 #include <STransportBearerRegisterMsg.h>
 #include <STransportBearerRegisterResponseMsg.h>
-#include <STransportBearerUnregisterMsg.h>#include <STransportBearerUnregisterResponseMsg.h>
+#include <STransportBearerUnregisterMsg.h>
+#include <STransportBearerUnregisterResponseMsg.h>
 #include <STransportBearerReallocationPrepareReq.h>
 #include <STransportBearerReallocationPrepareResp.h>
 #include <STransportBearerReallocationCommitReq.h>
@@ -29,6 +30,7 @@
 
 namespace DesignDocumentCreator
 {
+
 WRAP_STATIC_MESSAGE(MessageName::OAM_ATM_HW_CONFIGURATION_MSG, SAtmHwConfigurationMsgFake)
 WRAP_DYNAMIC_ARRAY_MESSAGE(MessageName::TUP_CmConfigurationCmd_Msg, TUP_CmConfigurationCmd, SFspInformation)
 WRAP_DYNAMIC_ARRAY_MESSAGE(MessageName::TC_TRANSPORT_BEARER_REGISTER_MSG, STransportBearerRegisterMsg, STransportBearerLocationData)
@@ -60,3 +62,4 @@ WRAP_DYNAMIC_ARRAY_MESSAGE(MessageName::TUP_CM_BEARER_SETUP_RESP_MSG, SCmBearerS
 
 
 }
+

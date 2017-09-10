@@ -18,6 +18,7 @@ TEST(SampleTest, BitmapGraph24Bits)
     AlbaLocalPathHandler graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);
     graphOutputFile.deleteFile();
     defaultFile.copyToNewFile(graphOutputFile.getFullPath());
+
     AprgGraph graph(graphOutputFile.getFullPath(), BitmapXY(800,450), BitmapDoubleXY(1, 1));
     graph.drawGrid(BitmapDoubleXY((double)1000/3, (double)1000/9));
     graph.drawLine(Line(1,1,1), 0x00FF0000);
