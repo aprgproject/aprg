@@ -18,11 +18,11 @@ TEST(BitmapFilterTest, BitmapFilterFindPen)
     sampleFile.copyToNewFile(outputFile.getFullPath());
 
     AprgBitmapFilters bitmapFilter(outputFile.getFullPath());
-    bitmapFilter.findPenPixel(3);
-    bitmapFilter.saveNotPenPixelsToCanvas();
+    bitmapFilter.setSimilarityLimit(0x10);
+    bitmapFilter.findPenPixel(4);
+    bitmapFilter.saveBlurredNotPenPixelsToCanvas(5);
     bitmapFilter.saveCanvasToBitmapFile();
     outputFile.copyToNewFile(outputFile.getDirectory()+"BitmapNotPenPixels.bmp");
-
     bitmapFilter.clearCanvas();
     bitmapFilter.setPenPixelsToCanvas();
     bitmapFilter.saveCanvasToBitmapFile();
