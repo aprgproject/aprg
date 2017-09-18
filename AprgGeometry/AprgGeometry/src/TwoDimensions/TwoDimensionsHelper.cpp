@@ -5,6 +5,7 @@
 #include <algorithm>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -15,7 +16,8 @@ double twoDimensionsHelper::getDistance(Point const& point1, Point const& point2
     return mathHelper::getSquareRootOfXSquaredPlusYSquared<double>(deltaX, deltaY);
 }
 
-Point twoDimensionsHelper::getMidpoint(Point const& point1, Point const& point2){
+Point twoDimensionsHelper::getMidpoint(Point const& point1, Point const& point2)
+{
     return Point((point1.getX()+point2.getX())/2,  (point1.getY()+point2.getY())/2);
 }
 
