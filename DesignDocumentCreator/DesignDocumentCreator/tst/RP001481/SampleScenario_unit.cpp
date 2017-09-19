@@ -3,6 +3,7 @@
 #include <Common/Components/ComponentName.hpp>
 #include <Common/Utils/StringHelpers.hpp>
 #include <Components/TOAM.hpp>
+#include <Components/LRM.hpp>
 #include <ModuleTest.hpp>
 #include <MessageFactory.hpp>
 #include <MessageVerifier.hpp>
@@ -17,13 +18,8 @@ TEST_F(ModuleTest, SampleScenario)
 {
     UmlLogger& umlLogger(getUmlLogger());
     TOAM& toam(*dynamic_cast<TOAM*>(getComponentAndActivateAsParticipant(ComponentName::TOAM)));
+    LRM& lrm(*dynamic_cast<LRM*>(getComponentAndActivateAsParticipant(ComponentName::LRM)));
 
-    umlLogger.logNoteOnComponent(ComponentName::TOAM, "TOAM note starts");
-    umlLogger.logNoteOnComponents(ComponentNames{ComponentName::TOAM, ComponentName::TOAM}, "TOAM note starts");
-
-    toam.pushBackEvent(Event(OtherEvent(OtherEventType::MainProcessStartup)));
-    toam.handleOneEvent();
-
-    sendMessage(ComponentName::TOAM, ComponentName::TOAM, createLrmConfigurationDataForMoreThan2K2sWithNbic());
-    toam.handleOneEvent();
+    sendMessage(ComponentName::TOAM, ComponentName::LRM, createLrmConfigurationDataForMoreThan2K2sWithNbic());
+    lrm.handleOneEvent();
 }
