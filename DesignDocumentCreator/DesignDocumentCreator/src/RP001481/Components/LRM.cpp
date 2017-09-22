@@ -682,15 +682,9 @@ void LRM::handleLrmConfigurationData(GenericMessage const& genericMessage)
     saveDataFromLrmConfigurationDataInd(payload);
     processStartupForAllLcg();
 
-    //send MODE_CHANGE?
-    //check the node
-    //How to guarantee that no nyquist mode change will happen?
-    //Remake the RAN3374 flow chart
-
 }
 
-void LRM::handleMessageEvent(GenericMessage const& genericMessage)
-{
+void LRM::handleMessageEvent(GenericMessage const& genericMessage){
     MessageName messageName(genericMessage.getMessageName());
     switch(messageName)
     {
