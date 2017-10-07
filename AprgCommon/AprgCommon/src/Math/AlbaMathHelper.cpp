@@ -1,18 +1,26 @@
 #include "AlbaMathHelper.hpp"
 
+#include <algorithm>
 #include <cmath>
 
-namespace alba
+namespace alba{
+
+template <typename NumberType>
+NumberType mathHelper::getDistance(NumberType const value1, NumberType const value2)
 {
+    std::pair<NumberType, NumberType> minMaxPair = std::minmax(value1, value2);
+    return minMaxPair.second-minMaxPair.first;
+}
+template unsigned int mathHelper::getDistance<unsigned int>(unsigned int const value1, unsigned int const value2);
 
 template <typename NumberType>
 NumberType mathHelper::getAverage(NumberType const value1, NumberType const value2)
 {
     return (value1+value2)/2;
 }
+template unsigned int mathHelper::getAverage<unsigned int>(unsigned int const value1, unsigned int const value2);
 template int mathHelper::getAverage<int>(int const value1, int const value2);
 template double mathHelper::getAverage<double>(double const value1, double const value2);
-
 
 template <typename NumberType>
 NumberType mathHelper::getAbsoluteValue(NumberType const value)
