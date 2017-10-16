@@ -3,7 +3,8 @@
 #include <algorithm>
 #include <cmath>
 
-namespace alba{
+namespace alba
+{
 
 template <typename NumberType>
 NumberType mathHelper::getDistance(NumberType const value1, NumberType const value2)
@@ -21,6 +22,7 @@ NumberType mathHelper::getAverage(NumberType const value1, NumberType const valu
 template unsigned int mathHelper::getAverage<unsigned int>(unsigned int const value1, unsigned int const value2);
 template int mathHelper::getAverage<int>(int const value1, int const value2);
 template double mathHelper::getAverage<double>(double const value1, double const value2);
+
 
 template <typename NumberType>
 NumberType mathHelper::getAbsoluteValue(NumberType const value)
