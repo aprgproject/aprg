@@ -31,7 +31,8 @@ src/TcomToolsConfiguration.cpp\
 ../../AprgAlgorithm/AprgAlgorithm/src/GrepStringEvaluator/AlbaGrepStringToken.cpp\
 ../../AprgCommon/AprgCommon/src/File/AlbaFileReader.cpp\
 ../../AprgCommon/AprgCommon/src/Memory/AlbaMemoryBuffer.cpp\
-../../AprgCommon/AprgCommon/src/Optional/AlbaOptional.cpp\../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.cpp\
+../../AprgCommon/AprgCommon/src/Optional/AlbaOptional.cpp\
+../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.cpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaLocalPathHandler.cpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaWindowsPathHandler.cpp\
 ../../AprgCommon/AprgCommon/src/Randomizer/AlbaRandomizer.cpp\
@@ -61,7 +62,8 @@ src/TcomToolsConfiguration.hpp\
 ../../AprgAlgorithm/AprgAlgorithm/src/GrepStringEvaluator/AlbaGrepStringToken.hpp\
 ../../AprgCommon/AprgCommon/src/File/AlbaFileReader.hpp\
 ../../AprgCommon/AprgCommon/src/Memory/AlbaMemoryBuffer.hpp\
-../../AprgCommon/AprgCommon/src/Optional/AlbaOptional.hpp\../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.hpp\
+../../AprgCommon/AprgCommon/src/Optional/AlbaOptional.hpp\
+../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.hpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaLocalPathHandler.hpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaWindowsPathHandler.hpp\
 ../../AprgCommon/AprgCommon/src/Randomizer/AlbaRandomizer.hpp\

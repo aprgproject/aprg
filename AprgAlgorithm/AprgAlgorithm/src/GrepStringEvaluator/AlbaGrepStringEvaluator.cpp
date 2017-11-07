@@ -36,7 +36,8 @@ bool AlbaGrepStringEvaluator::evaluate(string const& stringToEvaluate)
     return result;
 }
 
-bool AlbaGrepStringEvaluator::isInvalid() const{
+bool AlbaGrepStringEvaluator::isInvalid() const
+{
     return m_isEvaluatorInvalid;
 }
 

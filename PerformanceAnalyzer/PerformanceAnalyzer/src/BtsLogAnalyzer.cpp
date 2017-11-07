@@ -11,7 +11,8 @@
 
 using namespace std;
 using tcomToolsBackend::BtsLogPrint;
-using tcomToolsBackend::BtsLogTime;using tcomToolsBackend::BtsLogTimeType;
+using tcomToolsBackend::BtsLogTime;
+using tcomToolsBackend::BtsLogTimeType;
 
 namespace alba
 {
@@ -27,7 +28,8 @@ BtsLogAnalyzer::BtsLogAnalyzer()
     : m_btsLogPathHandler("")
 {}
 
-void BtsLogAnalyzer::clear(){
+void BtsLogAnalyzer::clear()
+{
     m_messageQueueingTime.clear();
     m_rlhRlSetupLatency.clear();
     m_rlhRlDeletionLatency.clear();
@@ -50,7 +52,8 @@ void BtsLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSor
     //initializeDataDumpOfAllDspsForR2();
 
     AlbaFileReader fileReader(inputLogFileStream);
-    LogTimePairs rlSetupLogTimePairs;    LogTimePairs rlDeletionLogTimePairs;
+    LogTimePairs rlSetupLogTimePairs;
+    LogTimePairs rlDeletionLogTimePairs;
     while(fileReader.isNotFinished())
     {
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
@@ -580,7 +583,8 @@ void BtsLogAnalyzer::saveMaxDspInformation(DspData const& dspData)
 
 void BtsLogAnalyzer::saveQueueingTime(string const& lineInLogs, ofstream& messageQueueingTimeFileStream)
 {
-    if(stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(lineInLogs, "MSG TIME, start queuing time"))    {
+    if(stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(lineInLogs, "MSG TIME, start queuing time"))
+    {
         unsigned int messsageQueueingTime(stringHelper::convertStringToNumber<int>(stringHelper::getNumberAfterThisString(lineInLogs, "msgQueuingTime: ")));
         m_messageQueueingTime.addData(messsageQueueingTime);
         saveMessageQueueingTimeToCsvFile(lineInLogs, messsageQueueingTime, messageQueueingTimeFileStream);
@@ -602,6 +606,7 @@ void BtsLogAnalyzer::saveRlhSetupTime(string const& lineInLogs, LogTimePairs& rl
         m_rlSetupPrintsAvailableMap.erase(userIdentifiers);
     }
 }
+
 void BtsLogAnalyzer::saveRlhDeletionTime(string const& lineInLogs, LogTimePairs& rlDeletionLogTimePairs, ofstream& rlDeletionTimeFileStream)
 {
     if(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlDeletionReq3G)"))
@@ -646,7 +651,8 @@ void BtsLogAnalyzer::saveAdditionalPrintsRlSetup(string const& lineInLogs, LogTi
 
 void BtsLogAnalyzer::setFirstLogTimeInPair(string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) const
 {
-    LogTimePair & logTimePairOfTheUser(logTimePairs[userIdentifiers]);    setLogTimeIfNeeded(lineInLogs, logTimePairOfTheUser.first);
+    LogTimePair & logTimePairOfTheUser(logTimePairs[userIdentifiers]);
+    setLogTimeIfNeeded(lineInLogs, logTimePairOfTheUser.first);
 }
 
 void BtsLogAnalyzer::setSecondLogTimeInPair(string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) const
@@ -678,6 +684,7 @@ void BtsLogAnalyzer::computeLatencyAndUpdateIfLogTimePairIsValid(LogType const l
     }
     logTimePairs.erase(userIdentifiers);
 }
+
 void BtsLogAnalyzer::initializeCsvFileStreams(ofstream& messageQueueingTimeFileStream, ofstream& rlSetupTimeFileStream, ofstream& rlDeletionTimeFileStream) const
 {
     setPrecisionOfFileStreams(messageQueueingTimeFileStream, rlSetupTimeFileStream, rlDeletionTimeFileStream);
@@ -698,7 +705,8 @@ void BtsLogAnalyzer::saveHeadersOnCsvFiles(ofstream& messageQueueingTimeFileStre
     rlDeletionTimeFileStream<<"CrnccId,NbccId,TransactionId,Latency(microseconds),BB_2_RL_SETUP_REQ_MSG,BB_2_RL_SETUP_ACK_MSG,TC_TRANSPORT_BEARER_REGISTER_MSG,TC_TRANSPORT_BEARER_REGISTER_RESP_MSG"<<endl;
 }
 
-void BtsLogAnalyzer::saveMessageQueueingTimeToCsvFile(string const& lineInLogs, unsigned int const messageQueueingTime, ofstream& csvFileStream) const{
+void BtsLogAnalyzer::saveMessageQueueingTimeToCsvFile(string const& lineInLogs, unsigned int const messageQueueingTime, ofstream& csvFileStream) const
+{
     csvFileStream<<messageQueueingTime<<","<<lineInLogs<<endl;
 }
 
@@ -715,7 +723,8 @@ void BtsLogAnalyzer::savePrintsAvailableToCsvFile(UserIdentifiers const& userIde
 
 void BtsLogAnalyzer::setLogTimeIfNeeded(string const& lineInLogs, LogTime& logTime) const
 {
-    BtsLogPrint logPrint(lineInLogs);    //if(!logPrint.getBtsTime().isStartup())
+    BtsLogPrint logPrint(lineInLogs);
+    //if(!logPrint.getBtsTime().isStartup())
     //{
         logTime.setValue(logPrint.getBtsTime());
     //}

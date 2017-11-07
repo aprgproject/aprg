@@ -154,6 +154,7 @@ TEST(ExpressionPostfixEvaluatorTest, DoesNotCrashWhenValueAreEmpty)
     EXPECT_FALSE(evaluator.isEvaluationPossible());
     evaluator.evaluate();
 }
+
 TEST(ExpressionPostfixEvaluatorTest, SingleValueIsEvaluatedCorrectly)
 {
     PostfixEvaluatorForTest evaluator;
@@ -161,6 +162,7 @@ TEST(ExpressionPostfixEvaluatorTest, SingleValueIsEvaluatedCorrectly)
     EXPECT_TRUE(evaluator.isEvaluationPossible());
     EXPECT_EQ(5, evaluator.evaluate());
 }
+
 TEST(ExpressionPostfixEvaluatorTest, PrefixUnaryOperationAreCorrectlyEvaluated)
 {
     PostfixEvaluatorForTest evaluator;
@@ -169,6 +171,7 @@ TEST(ExpressionPostfixEvaluatorTest, PrefixUnaryOperationAreCorrectlyEvaluated)
     EXPECT_TRUE(evaluator.isEvaluationPossible());
     EXPECT_EQ(0xFFFFFFFF, evaluator.evaluate());
 }
+
 TEST(ExpressionPostfixEvaluatorTest, BinaryOperationAreCorrectlyEvaluated)
 {
     PostfixEvaluatorForTest evaluator;
@@ -178,6 +181,7 @@ TEST(ExpressionPostfixEvaluatorTest, BinaryOperationAreCorrectlyEvaluated)
     EXPECT_TRUE(evaluator.isEvaluationPossible());
     EXPECT_EQ(777, evaluator.evaluate());
 }
+
 TEST(ExpressionPostfixEvaluatorTest,ParenthesesAreIgnoredWhenEvaluated)
 {
     PostfixEvaluatorForTest evaluator;
@@ -190,6 +194,7 @@ TEST(ExpressionPostfixEvaluatorTest,ParenthesesAreIgnoredWhenEvaluated)
     EXPECT_TRUE(evaluator.isEvaluationPossible());
     EXPECT_EQ(777, evaluator.evaluate());
 }
+
 TEST(ExpressionPostfixEvaluatorTest, ComplicatedOperationssAreCorrectlyEvaluated)
 {
     PostfixEvaluatorForTest evaluator;
@@ -225,7 +230,8 @@ TEST(ExpressionPostfixEvaluatorTest, EvaluationIsNotPossibleForIncompleteOperand
 
 TEST(ExpressionEvaluatorConverterTest, InfixToPostfixConvertionWorksForUnaryOperation)
 {
-    InfixEvaluatorForTest infixEvaluator;    infixEvaluator.addTerm(InfixEvaluatorForTest::Term("~", InfixEvaluatorForTest::Term::OperatorSyntaxType::PrefixUnary));
+    InfixEvaluatorForTest infixEvaluator;
+    infixEvaluator.addTerm(InfixEvaluatorForTest::Term("~", InfixEvaluatorForTest::Term::OperatorSyntaxType::PrefixUnary));
     infixEvaluator.addTerm(InfixEvaluatorForTest::Term(0));
     EXPECT_EQ(0xFFFFFFFF, infixEvaluator.evaluate());
 
