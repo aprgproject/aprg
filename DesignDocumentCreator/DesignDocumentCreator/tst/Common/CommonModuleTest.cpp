@@ -4,7 +4,8 @@
 #include <Uml/UmlHelpers.hpp>
 
 using namespace std;
-using namespace DesignDocumentCreator::StringHelpers;using testing::FLAGS_gtest_break_on_failure;
+using namespace DesignDocumentCreator::StringHelpers;
+using testing::FLAGS_gtest_break_on_failure;
 
 namespace DesignDocumentCreator
 {
@@ -38,6 +39,7 @@ Component* CommonModuleTest::getComponentAndActivateAsParticipant(ComponentName 
     getUmlLogger().addParticipant(UmlParticipant(UmlParticipantType::participant, convertToString(componentName), UmlHelpers::getUmlAlias(componentName)));
     return m_environment.getComponentPointer(componentName);
 }
+
 void CommonModuleTest::saveUmlLog()
 {
     const ::testing::TestInfo* const test_info = ::testing::UnitTest::GetInstance()->current_test_info();

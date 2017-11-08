@@ -93,6 +93,7 @@ bool StringHelpers::isTcomMessage(string const& messageName)
 {
     return stringHelper::isEqualWithLowestCommonLength(messageName, "TC_");
 }
+
 bool StringHelpers::isDspMessage(string const& messageName)
 {
     return stringHelper::isEqualWithLowestCommonLength(messageName, "BB_");

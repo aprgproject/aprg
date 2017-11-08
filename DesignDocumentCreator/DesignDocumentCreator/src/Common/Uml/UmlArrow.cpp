@@ -50,7 +50,8 @@ string UmlArrow::getArrowBaseFromMessageName(string const& messageName)
     else if(isTcomMessage(messageName))
     {
         result = getBlueArrow();
-    }    else if(isDspMessage(messageName))
+    }
+    else if(isDspMessage(messageName))
     {
         result = getDarkerGreenArrow();
     }
