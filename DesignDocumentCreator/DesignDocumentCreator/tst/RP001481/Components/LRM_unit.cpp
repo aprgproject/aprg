@@ -2,20 +2,18 @@
 
 #include <Components/LRM.hpp>
 #include <MessageFactory.hpp>
-#include <Utils/AddressHelper.hpp>
+#include <Utils/FakeFrameworkHelpers.hpp>
 
 using namespace std;
 using namespace DesignDocumentCreator;
-
 TEST(LrmTest, MasterTcomNidIsInvalidByDefault)
 {
     LRM lrm(ComponentName::LRM);
 
-    EXPECT_EQ(AddressHelper::INVALID_DSP_ADDRESS, lrm.getMasterTcomNid());
+    EXPECT_EQ(FakeFrameworkHelpers::INVALID_DSP_ADDRESS, lrm.getMasterTcomNid());
 }
 
-TEST(LrmTest, MasterTcomCanBeSet)
-{
+TEST(LrmTest, MasterTcomCanBeSet){
     LRM lrm(ComponentName::LRM);
     lrm.setMasterTcomNid(0xA1BA);
 

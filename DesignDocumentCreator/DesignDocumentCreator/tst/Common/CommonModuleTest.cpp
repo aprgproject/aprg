@@ -1,9 +1,10 @@
 #include "CommonModuleTest.hpp"
+
 #include <Common/Utils/StringHelpers.hpp>
+#include <Uml/UmlHelpers.hpp>
 
 using namespace std;
-using namespace DesignDocumentCreator::StringHelpers;
-using testing::FLAGS_gtest_break_on_failure;
+using namespace DesignDocumentCreator::StringHelpers;using testing::FLAGS_gtest_break_on_failure;
 
 namespace DesignDocumentCreator
 {
@@ -34,10 +35,9 @@ void CommonModuleTest::sendMessage(ComponentName const sender, ComponentName con
 
 Component* CommonModuleTest::getComponentAndActivateAsParticipant(ComponentName const componentName)
 {
-    getUmlLogger().addParticipant(UmlParticipant(convertToString(componentName), UmlParticipantType::participant));
+    getUmlLogger().addParticipant(UmlParticipant(UmlParticipantType::participant, convertToString(componentName), UmlHelpers::getUmlAlias(componentName)));
     return m_environment.getComponentPointer(componentName);
 }
-
 void CommonModuleTest::saveUmlLog()
 {
     const ::testing::TestInfo* const test_info = ::testing::UnitTest::GetInstance()->current_test_info();
