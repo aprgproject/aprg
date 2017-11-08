@@ -3,7 +3,8 @@
 #include <Components/TcomToam.hpp>
 #include <Components/TupcTbm.hpp>
 #include <Common/Utils/StringHelpers.hpp>
-#include <ModuleTest.hpp>#include <MessageFactory.hpp>
+#include <ModuleTest.hpp>
+#include <MessageFactory.hpp>
 #include <MessageVerifier.hpp>
 
 using namespace std;
