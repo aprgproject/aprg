@@ -2,10 +2,9 @@
 
 #include <Common/Environment.hpp>
 #include <Common/Utils/StringHelpers.hpp>
-#include <utils/FakeFrameworkHelpers.hpp>
+#include <FakeFramework/FakeFrameworkHelpers.hpp>
 
 #include <iostream>
-
 using namespace std;
 using namespace DesignDocumentCreator::StringHelpers;
 
