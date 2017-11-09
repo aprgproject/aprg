@@ -18,11 +18,10 @@ UmlParticipant::UmlParticipant(UmlParticipantType const type, string const& name
 
 string UmlParticipant::getParticipantLog() const
 {
-    return getParticipantTypeString() + " " + m_name + " as " + m_alias;
+    return getParticipantTypeString() + " " + m_name + R"( as ")" + m_alias + R"(")";
 }
 
-string UmlParticipant::getParticipantTypeString() const
-{
+string UmlParticipant::getParticipantTypeString() const{
         string result;
         switch(m_type)
         {

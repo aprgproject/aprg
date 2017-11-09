@@ -12,11 +12,10 @@ namespace alba
 AlbaMemoryBuffer::AlbaMemoryBuffer()
 {}
 
-AlbaMemoryBuffer::AlbaMemoryBuffer(void* bufferPointer, unsigned int const size)
+AlbaMemoryBuffer::AlbaMemoryBuffer(void const* bufferPointer, unsigned int const size)
 {
     addData(bufferPointer, size);
 }
-
 AlbaMemoryBuffer::operator bool() const
 {
     return hasContent();
@@ -70,18 +69,19 @@ void* AlbaMemoryBuffer::addDataAndReturnBeginOfAdditionalData(unsigned int const
     return m_buffer.begin().base()+oldSize;
 }
 
-void AlbaMemoryBuffer::addData(void* bufferPointer, unsigned int const additionalSize)
+void AlbaMemoryBuffer::addData(void const* bufferPointer, unsigned int const additionalSize)
 {
-    unsigned char* bufferPointerByteType = (unsigned char*)bufferPointer;
-    for(unsigned int i=0; i<additionalSize; i++)
+    unsigned char const* copyPointerStart = (unsigned char const*)bufferPointer;
+    unsigned char const* copyPointerEnd = copyPointerStart+additionalSize;
+    for(unsigned char const* copyPointer = copyPointerStart; copyPointer<copyPointerEnd; copyPointer++)
     {
-        m_buffer.emplace_back(bufferPointerByteType[i]);
+        m_buffer.emplace_back(*copyPointer);
     }
 }
+
 string AlbaMemoryBuffer::getDisplayableString() const
 {
-    return containerHelper::getStringFromContentsOfContainerWithNumberFormat(m_buffer, ", ");
-}
+    return containerHelper::getStringFromContentsOfContainerWithNumberFormat(m_buffer, ", ");}
 
 
 }//namespace alba

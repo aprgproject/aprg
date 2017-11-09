@@ -126,17 +126,16 @@ TEST(FileReadTest, ReadFromTestFile_ReadMultipleCharacters)
     EXPECT_TRUE(fileReader.isNotFinished());
     unsigned int numberOfCharacters=3;
     EXPECT_EQ("123", string(fileReader.getCharacters(numberOfCharacters), numberOfCharacters));
-    EXPECT_EQ(numberOfCharacters, 3);
+    EXPECT_EQ(3u, numberOfCharacters);
     EXPECT_EQ("!@#", string(fileReader.getCharacters(numberOfCharacters), numberOfCharacters));
-    EXPECT_EQ(numberOfCharacters, 3);
+    EXPECT_EQ(3u, numberOfCharacters);
     EXPECT_EQ(" \t\r", string(fileReader.getCharacters(numberOfCharacters), numberOfCharacters));
-    EXPECT_EQ(numberOfCharacters, 3);
+    EXPECT_EQ(3u, numberOfCharacters);
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ("\n", string(fileReader.getCharacters(numberOfCharacters), 1));
-    EXPECT_EQ(numberOfCharacters, 1);
+    EXPECT_EQ(1u, numberOfCharacters);
     EXPECT_FALSE(fileReader.isNotFinished());
 }
-
 TEST(FileReadTest, ReadFromTestFile_ReadTwoByteNumbers)
 {
     ofstream testFile(APRG_COMMON_TEST_FILE_TO_READ);
@@ -157,16 +156,15 @@ TEST(FileReadTest, ReadFromTestFile_ReadTwoByteNumbers)
     ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(0x0123, fileReader.getTwoByteData<unsigned int>());
+    EXPECT_EQ(0x0123u, fileReader.getTwoByteData<unsigned int>());
     EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(0x4567, fileReader.getTwoByteData<unsigned int>());
+    EXPECT_EQ(0x4567u, fileReader.getTwoByteData<unsigned int>());
     EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(0xA1BA, fileReader.getTwoByteData<unsigned int>());
+    EXPECT_EQ(0xA1BAu, fileReader.getTwoByteData<unsigned int>());
     EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(0x0, fileReader.getTwoByteData<unsigned int>());
+    EXPECT_EQ(0x0u, fileReader.getTwoByteData<unsigned int>());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
-
 TEST(FileReadTest, ReadFromTestFile_ReadFourByteNumbers)
 {
     ofstream testFile(APRG_COMMON_TEST_FILE_TO_READ);
@@ -187,12 +185,11 @@ TEST(FileReadTest, ReadFromTestFile_ReadFourByteNumbers)
     ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(0x01234567, fileReader.getFourByteData<unsigned int>());
+    EXPECT_EQ(0x01234567u, fileReader.getFourByteData<unsigned int>());
     EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(0xA1BA, fileReader.getFourByteData<unsigned int>());
+    EXPECT_EQ(0xA1BAu, fileReader.getFourByteData<unsigned int>());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
-
 TEST(FileReadTest, ReadFromTestFile_ReadEightByteNumbers)
 {
     ofstream testFile(APRG_COMMON_TEST_FILE_TO_READ);
@@ -213,10 +210,9 @@ TEST(FileReadTest, ReadFromTestFile_ReadEightByteNumbers)
     ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(0x000001234567A1BA, fileReader.getEightByteData<unsigned long long>());
+    EXPECT_EQ(0x000001234567A1BAu, fileReader.getEightByteData<unsigned long long>());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
-
 TEST(FileReadTest, ReadFromTestFile_ReadSwappedTwoByteNumbers)
 {
     ofstream testFile(APRG_COMMON_TEST_FILE_TO_READ);
@@ -237,16 +233,15 @@ TEST(FileReadTest, ReadFromTestFile_ReadSwappedTwoByteNumbers)
     ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(0x2301, fileReader.getTwoByteSwappedData<unsigned int>());
+    EXPECT_EQ(0x2301u, fileReader.getTwoByteSwappedData<unsigned int>());
     EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(0x6745, fileReader.getTwoByteSwappedData<unsigned int>());
+    EXPECT_EQ(0x6745u, fileReader.getTwoByteSwappedData<unsigned int>());
     EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(0xBAA1, fileReader.getTwoByteSwappedData<unsigned int>());
+    EXPECT_EQ(0xBAA1u, fileReader.getTwoByteSwappedData<unsigned int>());
     EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(0x0, fileReader.getTwoByteSwappedData<unsigned int>());
+    EXPECT_EQ(0x0u, fileReader.getTwoByteSwappedData<unsigned int>());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
-
 TEST(FileReadTest, ReadFromTestFile_ReadSwappedEightByteNumbers)
 {
     ofstream testFile(APRG_COMMON_TEST_FILE_TO_READ);
@@ -267,10 +262,9 @@ TEST(FileReadTest, ReadFromTestFile_ReadSwappedEightByteNumbers)
     ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ(0xBAA1674523010000, fileReader.getEightByteSwappedData<unsigned long long>());
+    EXPECT_EQ(0xBAA1674523010000u, fileReader.getEightByteSwappedData<unsigned long long>());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
-
 TEST(FileReadTest, ReadFromTestFile_FileContentsCanBeSavedInMemoryBuffer)
 {
     ofstream testFile(APRG_COMMON_TEST_FILE_TO_READ);
@@ -295,11 +289,11 @@ TEST(FileReadTest, ReadFromTestFile_FileContentsCanBeSavedInMemoryBuffer)
     AlbaMemoryBuffer buffer;
     fileReader.saveDataToMemoryBuffer(buffer, 8);
     unsigned char* reader = reinterpret_cast<unsigned char*>(buffer.getBufferPointer());
-    EXPECT_EQ(0x01, reader[0]);
-    EXPECT_EQ(0x23, reader[1]);
-    EXPECT_EQ(0x45, reader[2]);
-    EXPECT_EQ(0x67, reader[3]);
-    EXPECT_EQ(0xA1, reader[4]);
-    EXPECT_EQ(0xBA, reader[5]);
+    EXPECT_EQ(0x01u, reader[0]);
+    EXPECT_EQ(0x23u, reader[1]);
+    EXPECT_EQ(0x45u, reader[2]);
+    EXPECT_EQ(0x67u, reader[3]);
+    EXPECT_EQ(0xA1u, reader[4]);
+    EXPECT_EQ(0xBAu, reader[5]);
     EXPECT_FALSE(fileReader.isNotFinished());
 }

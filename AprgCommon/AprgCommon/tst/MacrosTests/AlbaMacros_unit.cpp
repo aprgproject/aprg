@@ -62,10 +62,11 @@ TEST(AlbaMacros, CaseEnumStringLiteral)
             {
             ALBA_MACROS_CASE_ENUM_STRING(SampleEnumClass::Type1)
                     ALBA_MACROS_CASE_ENUM_STRING(SampleEnumClass::Type2)
+                    default:
+                return "default";
             }
         }
-    };
-    SampleEnumClass enumValue1 = SampleEnumClass::Type1;
+    };    SampleEnumClass enumValue1 = SampleEnumClass::Type1;
     SampleEnumClass enumValue2 = SampleEnumClass::Type2;
 
     SampleClass sampleObject;

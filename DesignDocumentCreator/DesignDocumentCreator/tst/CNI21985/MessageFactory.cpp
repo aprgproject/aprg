@@ -152,17 +152,16 @@ GenericMessage MessageFactory::createHwConfigurationMessageForRel3BasedFromLogs(
 
 GenericMessage MessageFactory::createOneTransportBearerRegisterForCell()
 {
-    SpecificDynamicArrayMessage<MessageName::TC_TRANSPORT_BEARER_REGISTER_MSG, 1> tbRegisterMessage;
+    SpecificDynamicArrayMessage<MessageName::TC_TRANSPORT_BEARER_REGISTER_MSG> tbRegisterMessage;
     STransportBearerRegisterMsg& tbRegisterStaticPayload(tbRegisterMessage.getStaticPayloadReference());
     tbRegisterStaticPayload.transactionId = 100001;
     tbRegisterStaticPayload.cellId = 100002;
     tbRegisterStaticPayload.nbccId = 0;
     tbRegisterStaticPayload.numConnections = 1;
-    STransportBearerLocationData& dynamicPayload1(tbRegisterMessage.getDynamicPayloadReferenceAt(0));
+    STransportBearerLocationData& dynamicPayload1(tbRegisterMessage.getAndCreateDynamicPayloadReferenceAt(0));
     dynamicPayload1.bearerType=EBearerType_ATM;
     dynamicPayload1.transportId=100003;
-    dynamicPayload1.fpLocation.fpId=100004;
-    dynamicPayload1.fpLocation.fpAddress=100005;
+    dynamicPayload1.fpLocation.fpId=100004;    dynamicPayload1.fpLocation.fpAddress=100005;
     dynamicPayload1.fpLocation.messagingAddress=100006;
     dynamicPayload1.messageTypeNumber=100007;
     dynamicPayload1.ulParameters.maxBitRateInIpPayloadLayer=100008;
@@ -200,10 +199,16 @@ GenericMessage MessageFactory::createTcomHwConfigurationResponseMsg()
     return convertSpecificStaticToGeneric(message);
 }
 
+GenericMessage MessageFactory::createTcomHwConfigurationChangeMsg()
+{
+    SpecificStaticMessage<MessageName::TC_HW_CONFIGURATION_CHANGE_MSG> message;
+    //SHwConfigurationMsg& payload(message.getPayloadReference());
+    return convertSpecificStaticToGeneric(message);
+}
+
 GenericMessage MessageFactory::createLinkStatesMsg()
 {
-    SpecificStaticMessage<MessageName::TC_LINK_STATES_MSG> message;
-    SLinkStatesMsg& payload(message.getPayloadReference());
+    SpecificStaticMessage<MessageName::TC_LINK_STATES_MSG> message;    SLinkStatesMsg& payload(message.getPayloadReference());
     payload.cnbapLinkState = ELinkState_InService;
     STtpSignalingLinkStates& signalingLinkState(payload.ttpSignalingLinkStates[0]);
     signalingLinkState.dnbapLinkState = ELinkState_InService;
