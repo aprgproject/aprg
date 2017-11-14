@@ -52,7 +52,8 @@ void BtsLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSor
     initializeDataDumpOfAllDspsForR3();
 
     AlbaFileReader fileReader(inputLogFileStream);
-    LogTimePairs rlSetupLogTimePairs;    LogTimePairs rlDeletionLogTimePairs;
+    LogTimePairs rlSetupLogTimePairs;
+    LogTimePairs rlDeletionLogTimePairs;
     while(fileReader.isNotFinished())
     {
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
@@ -63,6 +64,7 @@ void BtsLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSor
         //saveDspCapacityInformationForR3(lineInLogs);
     }
 }
+
 void BtsLogAnalyzer::saveDspCapacityInformationForR3(string const& lineInLogs)
 {
     if(stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(lineInLogs, "printDspCapacityInd(): 0x"))
@@ -77,6 +79,7 @@ void BtsLogAnalyzer::saveDspCapacityInformationForR3(string const& lineInLogs)
         }
     }
 }
+
 void BtsLogAnalyzer::saveDspCapacityInformationOfOneDspForR3(string const& dspCapacityOfOneDsp, unsigned int const boardId, BtsLogPrint const& logPrint)
 {
     unsigned int state=0;
@@ -454,7 +457,8 @@ void BtsLogAnalyzer::saveDspCapacityInformationOfOneDspForR3BeforeCni1738(string
 
 void BtsLogAnalyzer::saveDspCapacityInformationForR2(string const& lineInLogs)
 {
-    if(stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(lineInLogs, "INF/TCOM/LRM/Rep, |0x"))    {
+    if(stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(lineInLogs, "INF/TCOM/LRM/Rep, |0x"))
+    {
         BtsLogPrint logPrint(lineInLogs);
         stringHelper::strings dspCapacitiesPerDsp;
         string logsAfterLrmPrint(stringHelper::getStringAfterThisString(lineInLogs, "INF/TCOM/LRM/Rep"));
@@ -471,7 +475,8 @@ void BtsLogAnalyzer::saveDspCapacityInformationOfOneDspForR2(string const& dspCa
 {
     unsigned int state=0;
     string temp;
-    DspData dspData;    dspData.boardId=boardId;
+    DspData dspData;
+    dspData.boardId=boardId;
     for(char const character: dspCapacityOfOneDsp)
     {
         ALBA_PRINT2(character, state);
@@ -633,7 +638,8 @@ void BtsLogAnalyzer::initializeDataDumpOfAllDspsForR3()
     initializeSaveAllUsersAndCfsDump();
 }
 
-void BtsLogAnalyzer::initializeDataDumpOfAllDspsForR2(){
+void BtsLogAnalyzer::initializeDataDumpOfAllDspsForR2()
+{
     /*initializeDataDumpOfOneDsp("1230");
     initializeDataDumpOfOneDsp("1240");
     initializeDataDumpOfOneDsp("1250");
@@ -690,7 +696,8 @@ void BtsLogAnalyzer::initializeSaveAllUsersAndCfsDump()
 
 void BtsLogAnalyzer::saveDataDumpOfOneDsp(string const& fileName, DspData const& dspData, BtsLogPrint const& logPrint)
 {
-    AlbaLocalPathHandler dspDataPathHandler(m_btsLogPathHandler.getDirectory()+fileName+".csv");    ofstream dspDataFileStream(dspDataPathHandler.getFullPath(), std::ios::ate|std::ios::app);
+    AlbaLocalPathHandler dspDataPathHandler(m_btsLogPathHandler.getDirectory()+fileName+".csv");
+    ofstream dspDataFileStream(dspDataPathHandler.getFullPath(), std::ios::ate|std::ios::app);
     dspDataFileStream<<logPrint.getBtsTime().getEquivalentStringBtsTimeFormat()<<",";
     dspDataFileStream<<dspData.availableUlCEs<<","<<dspData.availableDlCEs<<",";
     dspDataFileStream<<dspData.rakeState<<","<<dspData.rachHand<<","<<dspData.rakeLoad<<",";
@@ -703,7 +710,8 @@ void BtsLogAnalyzer::saveTotalUsersAndCfs(BtsLogPrint const& logPrint)
 {
     AlbaLocalPathHandler dspDataPathHandler(m_btsLogPathHandler.getDirectory()+"TotalUsersAndCfs.csv");
     ofstream totalCfsFileStream(dspDataPathHandler.getFullPath(), std::ios::ate|std::ios::app);
-    unsigned int totalCfs(0);    unsigned int totalR99Users(0);
+    unsigned int totalCfs(0);
+    unsigned int totalR99Users(0);
     unsigned int totalHsupaUsers(0);
     for(DspDataPair const& dspDataPair : m_maxDspDataMap)
     {
@@ -712,7 +720,8 @@ void BtsLogAnalyzer::saveTotalUsersAndCfs(BtsLogPrint const& logPrint)
         totalHsupaUsers+=dspDataPair.second.hsupaUsers;
     }
     totalCfsFileStream<<logPrint.getBtsTime().getEquivalentStringBtsTimeFormat()<<",";
-    totalCfsFileStream<<totalCfs<<",";    totalCfsFileStream<<totalR99Users<<",";
+    totalCfsFileStream<<totalCfs<<",";
+    totalCfsFileStream<<totalR99Users<<",";
     totalCfsFileStream<<totalHsupaUsers<<",";
     totalCfsFileStream<<endl;
 }
@@ -737,7 +746,8 @@ void BtsLogAnalyzer::saveAllUsersAndCfs(BtsLogPrint const& logPrint)
 
 void BtsLogAnalyzer::saveDspInformation(unsigned int const dspAddress, DspData const& dspData)
 {
-    m_maxDspDataMap[dspAddress] = dspData;}
+    m_maxDspDataMap[dspAddress] = dspData;
+}
 
 void BtsLogAnalyzer::saveMaxDspInformation(DspData const& dspData)
 {

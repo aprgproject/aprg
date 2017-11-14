@@ -12,7 +12,8 @@ namespace DesignDocumentCreator
 template<MessageName messageName>
 class SpecificDynamicArrayMessage : public Message
 {
-public:    typedef MessageWrapper<messageName> SpecificDynamicArrayMessageWrapper;
+public:
+    typedef MessageWrapper<messageName> SpecificDynamicArrayMessageWrapper;
     typedef typename SpecificDynamicArrayMessageWrapper::MessageDynamicArraySackType SackType;
     typedef typename SpecificDynamicArrayMessageWrapper::DynamicPartSackType DynamicPartSackType;
     SpecificDynamicArrayMessage()
@@ -27,11 +28,11 @@ public:    typedef MessageWrapper<messageName> SpecificDynamicArrayMessageWrappe
     {
         return m_staticPayload;
     }
-    DynamicPartSackType& addDynamicPart(DynamicPartSackType const& dynamicPart)
+    void addDynamicPart(DynamicPartSackType const& dynamicPart)
     {
         m_dynamicArrayPayload.emplace_back(dynamicPart);
     }
-    DynamicPartSackType& getAndCreateDynamicPayloadReferenceAt(unsigned int const position)
+    DynamicPartSackType& getDynamicPayloadReferenceAtAndCreateIfNeeded(unsigned int const position)
     {
         if(position+1>m_dynamicArrayPayload.size())
         {
@@ -39,7 +40,8 @@ public:    typedef MessageWrapper<messageName> SpecificDynamicArrayMessageWrappe
         }
         return m_dynamicArrayPayload[position];
     }
-    alba::AlbaMemoryBuffer createBuffer() const    {
+    alba::AlbaMemoryBuffer createBuffer() const
+    {
         return createBufferFromStaticAndDynamicPart();
     }
 

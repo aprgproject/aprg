@@ -66,7 +66,8 @@ TEST(AlbaMacros, CaseEnumStringLiteral)
                 return "default";
             }
         }
-    };    SampleEnumClass enumValue1 = SampleEnumClass::Type1;
+    };
+    SampleEnumClass enumValue1 = SampleEnumClass::Type1;
     SampleEnumClass enumValue2 = SampleEnumClass::Type2;
 
     SampleClass sampleObject;

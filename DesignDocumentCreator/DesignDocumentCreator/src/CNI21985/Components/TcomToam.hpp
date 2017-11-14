@@ -23,7 +23,8 @@ private:
     void handleHwConfigurationChangeMessage(GenericMessage const& genericMessage) const;
     void handleLinkStatesMessage(GenericMessage const& genericMessage) const;
     void sendHwConfigurationResponseAck() const;
-    void sendsLinkStatesResponse() const;    void sendsTcomDeploymentInd() const;
+    void sendsLinkStatesResponse() const;
+    void sendsTcomDeploymentInd() const;
     void saveConfiguration(SHwConfigurationMsg const& hwConfigurationMsg);
 
     virtual void handleMessageEvent(GenericMessage const& genericMessage);

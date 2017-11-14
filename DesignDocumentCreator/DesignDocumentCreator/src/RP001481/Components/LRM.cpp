@@ -5,7 +5,8 @@
 #include <FakeFramework/FakeFrameworkHelpers.hpp>
 
 #include <algorithm>
-#include <iostream>#include <iterator>
+#include <iostream>
+#include <iterator>
 #include <set>
 #include <vector>
 
@@ -675,7 +676,7 @@ void LRM::handleLrmConfigurationData(GenericMessage const& genericMessage)
     Environment & environment(Environment::getInstance());
 
     SpecificStaticMessage<MessageName::TC_LRM_CONFIGURATION_DATA_IND_MSG> message(convertGenericToSpecificStatic<MessageName::TC_LRM_CONFIGURATION_DATA_IND_MSG>(genericMessage));
-    SLrmConfigurationDataInd payload(message.getPayloadReference());
+    SLrmConfigurationDataInd payload(message.getStaticPayloadReference());
 
     logNoteOnPreviousMessage("TOAM sends configuration data with NBIC from HW_CONF");
     saveDataFromLrmConfigurationDataInd(payload);

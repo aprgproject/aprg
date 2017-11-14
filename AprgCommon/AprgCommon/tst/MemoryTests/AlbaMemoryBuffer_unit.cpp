@@ -65,6 +65,7 @@ TEST(AlbaMemoryBufferTest, MemoryBufferCanBeResizedToBeLarger)
     EXPECT_EQ(8u, buffer.getSize());
     EXPECT_EQ(input, output);
 }
+
 TEST(AlbaMemoryBufferTest, MemoryBufferCanBeResizedToBeSmaller)
 {
     AlbaMemoryBuffer buffer;

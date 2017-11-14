@@ -57,7 +57,8 @@ TEST(AlbaMathHelperTest, DifferenceFromGreaterMultipleCanBeComputed)
     EXPECT_EQ(48u, getDifferenceFromGreaterMultiple(57, 2346));
 }
 
-TEST(AlbaMathHelperTest, CumulativeStandardDistributionApproximationCanBeComputed){
+TEST(AlbaMathHelperTest, CumulativeStandardDistributionApproximationCanBeComputed)
+{
     //comparing with Z table, http://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_probability/standardnormaltable.pdf
     EXPECT_EQ(0.5, calculateCumulativeStandardDistributionApproximation(0));
     EXPECT_EQ(0.86433393905361732834, calculateCumulativeStandardDistributionApproximation(1.1));

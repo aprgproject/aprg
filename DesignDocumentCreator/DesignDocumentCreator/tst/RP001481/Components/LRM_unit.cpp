@@ -6,6 +6,7 @@
 
 using namespace std;
 using namespace DesignDocumentCreator;
+
 TEST(LrmTest, MasterTcomNidIsInvalidByDefault)
 {
     LRM lrm(ComponentName::LRM);
