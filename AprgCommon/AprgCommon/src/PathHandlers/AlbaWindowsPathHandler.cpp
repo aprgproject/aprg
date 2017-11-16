@@ -1,9 +1,9 @@
 #include "AlbaWindowsPathHandler.hpp"
 
 #include <String/AlbaStringHelper.hpp>
+#include <Windows/AlbaWindowsHelper.hpp>
 
 #include <windows.h>
-
 #include <functional>
 #include <iostream>
 #include <sstream>
@@ -53,11 +53,10 @@ double AlbaWindowsPathHandler::getFileSizeEstimate()
     else
     {
         cout<<"Error in AlbaWindowsPathHandler::getFileSizeEstimate() path:"<<getFullPath()<<endl;
-        cout<<getLastFormattedErrorMessage()<<endl;
+        cout<<AlbaWindowsHelper::getLastFormattedErrorMessage()<<endl;
     }
     return fileSizeEstimate;
 }
-
 bool AlbaWindowsPathHandler::isFoundInLocalSystem() const
 {
     return m_foundInLocalSystem;
@@ -78,10 +77,9 @@ void AlbaWindowsPathHandler::setPathToDetectedLocalPath()
     else
     {
         cout<<"Error in AlbaWindowsPathHandler::setPathToDetectedLocalPath() path:"<<getFullPath()<<endl;
-        cout<<getLastFormattedErrorMessage()<<endl;
+        cout<<AlbaWindowsHelper::getLastFormattedErrorMessage()<<endl;
     }
 }
-
 void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const
 {
     string fullPath(getFullPath());
@@ -109,11 +107,10 @@ bool AlbaWindowsPathHandler::deleteFile()
         if(!isSuccessful)
         {
             cout<<"Error in AlbaWindowsPathHandler::deleteFile() path:"<<getFullPath()<<endl;
-            cout<<getLastFormattedErrorMessage()<<endl;
+            cout<<AlbaWindowsHelper::getLastFormattedErrorMessage()<<endl;
         }
         reInput();
-    }
-    return isSuccessful;
+    }    return isSuccessful;
 }
 
 void AlbaWindowsPathHandler::deleteFilesInDirectory()
@@ -137,11 +134,10 @@ bool AlbaWindowsPathHandler::copyToNewFile(string const& newFilePath)
         if(!isSuccessful)
         {
             cout<<"Error in AlbaWindowsPathHandler::CopyFile() path:["<<getFullPath()<<"] newFilePath:["<<newFilePath<<"]"<<endl;
-            cout<<getLastFormattedErrorMessage()<<endl;
+            cout<<AlbaWindowsHelper::getLastFormattedErrorMessage()<<endl;
         }
         reInput();
-    }
-    return isSuccessful;
+    }    return isSuccessful;
 }
 
 bool AlbaWindowsPathHandler::renameFile(string const& newFileName)
@@ -154,11 +150,10 @@ bool AlbaWindowsPathHandler::renameFile(string const& newFileName)
         if(!isSuccessful)
         {
             cout<<"Error in AlbaWindowsPathHandler::renameFile() path:"<<getFullPath()<<" newFileName:"<<newFileName<<endl;
-            cout<<getLastFormattedErrorMessage()<<endl;
+            cout<<AlbaWindowsHelper::getLastFormattedErrorMessage()<<endl;
         }
         input(newPath);
-    }
-    return isSuccessful;
+    }    return isSuccessful;
 }
 
 bool AlbaWindowsPathHandler::renameImmediateDirectory(string const& newDirectoryName)
@@ -173,11 +168,10 @@ bool AlbaWindowsPathHandler::renameImmediateDirectory(string const& newDirectory
         if(!isSuccessful)
         {
             cout<<"Error in AlbaWindowsPathHandler::renameImmediateDirectory() path:"<<getFullPath()<<" newDirectoryName:"<<newDirectoryName<<endl;
-            cout<<getLastFormattedErrorMessage()<<endl;
+            cout<<AlbaWindowsHelper::getLastFormattedErrorMessage()<<endl;
         }
         input(newPathHandler.getFullPath());
-    }
-    return isSuccessful;
+    }    return isSuccessful;
 }
 
 void AlbaWindowsPathHandler::findFilesAndDirectoriesOneDepth(
@@ -267,33 +261,6 @@ void AlbaWindowsPathHandler::setDriveOrRoot()
         m_driveOrRoot = stringHelper::getStringWithCapitalLetters(m_directory.substr(0,index));
     }
     m_relativePath = m_driveOrRoot.empty();
-}
-
-string AlbaWindowsPathHandler::getLastFormattedErrorMessage() const
-{
-    stringstream lastError("No message from windows");
-    unsigned int errorCode = GetLastError();
-    if (errorCode)
-    {
-        LPVOID lpMessageBuffer;
-        DWORD bufferLength = FormatMessage(
-                    FORMAT_MESSAGE_ALLOCATE_BUFFER |
-                    FORMAT_MESSAGE_FROM_SYSTEM |
-                    FORMAT_MESSAGE_IGNORE_INSERTS,
-                    NULL,
-                    errorCode,
-                    MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-                    (LPTSTR) &lpMessageBuffer,
-                    0, NULL );
-        if(bufferLength)
-        {
-            LPCSTR lpMessageString = (LPCSTR)lpMessageBuffer;
-            std::string errorMessageFromWindows(lpMessageString, lpMessageString+bufferLength);
-            LocalFree(lpMessageBuffer);
-            lastError<<"Error from windows: ["<<errorMessageFromWindows<<"] ErrorCode:["<<errorCode<<"]"<<endl;
-        }
-    }
-    return lastError.str();
 }
 
 }//namespace alba
