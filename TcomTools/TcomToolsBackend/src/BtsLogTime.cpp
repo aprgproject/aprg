@@ -141,10 +141,15 @@ unsigned int BtsLogTime::getMicroSeconds() const
     return m_dateTime.getMicroSeconds();
 }
 
+void BtsLogTime::clearMicroSeconds()
+{
+    m_dateTime.clearMicroSeconds();
+}
+
+
 string BtsLogTime::getPrintableString() const
 {
-    return m_dateTime.getPrintableStringFormat1();
-}
+    return m_dateTime.getPrintableStringFormat1();}
 
 string BtsLogTime::getEquivalentStringPcTimeFormat() const
 {

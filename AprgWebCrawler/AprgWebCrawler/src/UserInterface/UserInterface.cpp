@@ -12,13 +12,9 @@
 #include <iostream>
 #include <set>
 
-#define APRG_WEB_CRAWLER_CONFIGURATION_FILE APRG_DIR R"(AprgWebCrawler\Configuration\configuration.txt)"
-#define APRG_WEB_CRAWLER_FIX_BATCH_FILE R"(AprgWebCrawler\fixDirectoryNames.bat)"
-
 using namespace alba;
 using namespace alba::stringHelper;
 using namespace std;
-
 namespace aprgWebCrawler
 {
 

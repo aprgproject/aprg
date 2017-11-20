@@ -17,11 +17,10 @@ typedef alba::AlbaOptional<DownloadLowSpeedLimitConfiguration> DownloadLowSpeedL
 class CrawlConfiguration
 {
 public:
-    CrawlConfiguration(CrawlMode mode);
+    CrawlConfiguration(CrawlMode const mode);
     bool isFileToBeDownloadUntilSuccessful() const;
     int getNumberOfRetries() const;
-    double getMinimumFileSize() const;
-    DownloadLowSpeedLimitConfigurationOptional getDownloadLowSpeedLimitConfigurationOptional() const;
+    double getMinimumFileSize() const;    DownloadLowSpeedLimitConfigurationOptional getDownloadLowSpeedLimitConfigurationOptional() const;
 
 private:
     bool m_isFileToBeDownloadUntilSuccessful;

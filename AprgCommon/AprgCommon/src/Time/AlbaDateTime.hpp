@@ -57,10 +57,10 @@ public:
     unsigned int getMinutes() const;
     unsigned int getSeconds() const;
     unsigned int getMicroSeconds() const;
+    void clearMicroSeconds();
     unsigned int getTotalDaysInYearMonthDays() const;
     unsigned int getTotalSecondsInHourMinutesSeconds() const;
-    std::string getPrintableStringFormat1() const; //NN YYYY-MM-DD HH:MM:SS.MMMMMM
-    std::string getPrintableStringFormat2() const; // HH:MM:SS
+    std::string getPrintableStringFormat1() const; //NN YYYY-MM-DD HH:MM:SS.MMMMMM    std::string getPrintableStringFormat2() const; // HH:MM:SS
     bool operator<(AlbaDateTime const& secondDateTime) const;
     bool operator>(AlbaDateTime const& secondDateTime) const;
     bool operator==(AlbaDateTime const& secondDateTime) const;

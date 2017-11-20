@@ -93,10 +93,10 @@ private:
     void saveDspInformation(unsigned int const dspAddress, DspData const& dspData);
     void saveMaxDspInformation(DspData const& dspData);
     void saveQueueingTime(std::string const& lineInLogs, std::ofstream& messageQueueingTimeFileStream);
+    void saveRlSetupPerSecond(std::string const& lineInLogs, std::ofstream& rlSetupPerSecondFileStream);
     void saveRlhSetupTime(std::string const& lineInLogs, LogTimePairs& rlSetupLogTimePairs, std::ofstream& rlSetupTimeFileStream);
     void saveRlhDeletionTime(std::string const& lineInLogs, LogTimePairs& rlDeletionLogTimePairs, std::ofstream& rlDeletionTimeFileStream);
-    void saveAdditionalPrintsRlSetup(std::string const& lineInLogs, LogTimePairs& rlSetupLogTimePairs);
-    void setFirstLogTimeInPair(std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) const;
+    void saveAdditionalPrintsRlSetup(std::string const& lineInLogs, LogTimePairs& rlSetupLogTimePairs);    void setFirstLogTimeInPair(std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) const;
     void setSecondLogTimeInPair(std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) const;
     void computeLatencyAndUpdateIfLogTimePairIsValid(LogType const logType, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs, std::ofstream& csvFileStream);
     void initializeCsvFileStreams(std::ofstream& messageQueueingTimeFileStream, std::ofstream& rlSetupTimeFileStream, std::ofstream& rlDeletionTimeFileStream) const;

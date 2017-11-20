@@ -43,17 +43,19 @@ void BtsLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSor
     AlbaLocalPathHandler messageQueueingTimeFilePathHandler(m_btsLogPathHandler.getDirectory()+m_btsLogPathHandler.getFilenameOnly()+"_MessageQueueingTime.csv");
     AlbaLocalPathHandler rlSetupTimeFilePathHandler(m_btsLogPathHandler.getDirectory()+m_btsLogPathHandler.getFilenameOnly()+"_RlSetupTime.csv");
     AlbaLocalPathHandler rlDeletionTimeFilePathHandler(m_btsLogPathHandler.getDirectory()+m_btsLogPathHandler.getFilenameOnly()+"_RlDeletionTime.csv");
+    AlbaLocalPathHandler rlSetupPerSecond(m_btsLogPathHandler.getDirectory()+m_btsLogPathHandler.getFilenameOnly()+"_RlSetupPerSecond.csv");
 
     ifstream inputLogFileStream(m_btsLogPathHandler.getFullPath());
     ofstream messageQueueingTimeFileStream(messageQueueingTimeFilePathHandler.getFullPath());
     ofstream rlSetupTimeFileStream(rlSetupTimeFilePathHandler.getFullPath());
     ofstream rlDeletionTimeFileStream(rlDeletionTimeFilePathHandler.getFullPath());
+    ofstream rlSetupPerSecondFileStream(rlSetupPerSecond.getFullPath());
     initializeCsvFileStreams(messageQueueingTimeFileStream, rlSetupTimeFileStream, rlDeletionTimeFileStream);
-    initializeDataDumpOfAllDspsForR3();
+    rlSetupPerSecondFileStream<<"Time,Number Of RL setup in a second"<<endl;
+    //initializeDataDumpOfAllDspsForR3();
 
     AlbaFileReader fileReader(inputLogFileStream);
-    LogTimePairs rlSetupLogTimePairs;
-    LogTimePairs rlDeletionLogTimePairs;
+    LogTimePairs rlSetupLogTimePairs;    LogTimePairs rlDeletionLogTimePairs;
     while(fileReader.isNotFinished())
     {
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
@@ -61,10 +63,10 @@ void BtsLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSor
         saveRlhSetupTime(lineInLogs, rlSetupLogTimePairs, rlSetupTimeFileStream);
         saveRlhDeletionTime(lineInLogs, rlDeletionLogTimePairs, rlDeletionTimeFileStream);
         saveAdditionalPrintsRlSetup(lineInLogs, rlSetupLogTimePairs);
+        saveRlSetupPerSecond(lineInLogs, rlSetupPerSecondFileStream);
         //saveDspCapacityInformationForR3(lineInLogs);
     }
 }
-
 void BtsLogAnalyzer::saveDspCapacityInformationForR3(string const& lineInLogs)
 {
     if(stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(lineInLogs, "printDspCapacityInd(): 0x"))
@@ -801,10 +803,32 @@ void BtsLogAnalyzer::saveQueueingTime(string const& lineInLogs, ofstream& messag
     }
 }
 
-void BtsLogAnalyzer::saveRlhSetupTime(string const& lineInLogs, LogTimePairs& rlSetupLogTimePairs, ofstream& rlSetupTimeFileStream)
+void BtsLogAnalyzer::saveRlSetupPerSecond(string const& lineInLogs, ofstream& rlSetupPerSecondFileStream)
 {
+    static BtsLogTime savedSecond;
+    static unsigned int numberOfUsersInSecond=0;
     if(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlSetupReq3G)"))
     {
+        BtsLogTime currentLogTime;
+        BtsLogPrint logPrint(lineInLogs);
+        currentLogTime = logPrint.getBtsTime();
+        currentLogTime.clearMicroSeconds();
+        if(savedSecond == currentLogTime)
+        {
+            numberOfUsersInSecond++;
+        }
+        else
+        {
+            rlSetupPerSecondFileStream<<savedSecond.getEquivalentStringBtsTimeFormat()<<","<<numberOfUsersInSecond<<endl;
+            savedSecond=currentLogTime;
+            numberOfUsersInSecond=0;
+        }
+    }
+}
+
+void BtsLogAnalyzer::saveRlhSetupTime(string const& lineInLogs, LogTimePairs& rlSetupLogTimePairs, ofstream& rlSetupTimeFileStream)
+{
+    if(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlSetupReq3G)"))    {
         UserIdentifiers userIdentifiers(lineInLogs);
         setFirstLogTimeInPair(lineInLogs, userIdentifiers, rlSetupLogTimePairs);
     }

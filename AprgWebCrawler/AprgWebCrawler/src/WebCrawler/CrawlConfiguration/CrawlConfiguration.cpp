@@ -3,11 +3,10 @@
 namespace aprgWebCrawler
 {
 
-CrawlConfiguration::CrawlConfiguration(CrawlMode mode)
+CrawlConfiguration::CrawlConfiguration(CrawlMode const mode)
 {
     switch(mode)
-    {
-    case CrawlMode::ChiaAnime:
+    {    case CrawlMode::ChiaAnime:
         m_isFileToBeDownloadUntilSuccessful=false;
         m_numberOfRetries = 10;
         m_minimumFileSize = 1000000;
