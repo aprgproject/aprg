@@ -63,7 +63,8 @@ set(APRG_COMMON_WINDOWS_SOURCES
     ${APRG_COMMON_DIR}/src/Windows/AlbaWindowsHelper.hpp
 )
 
-set(APRG_COMMON_MAIN_TESTS    ${APRG_COMMON_DIR}/tst/BitTests/AlbaBitManipulation_unit.cpp
+set(APRG_COMMON_MAIN_TESTS
+    ${APRG_COMMON_DIR}/tst/BitTests/AlbaBitManipulation_unit.cpp
     ${APRG_COMMON_DIR}/tst/ContainerTests/AlbaContainerHelper_unit.cpp
     ${APRG_COMMON_DIR}/tst/ContainerTests/AlbaRange_unit.cpp
     ${APRG_COMMON_DIR}/tst/ContainerTests/AlbaXY_unit.cpp

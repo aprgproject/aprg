@@ -18,7 +18,8 @@
 #define APRG_WEB_CRAWLER_AUTOMATION_CONFIGURATION_FILE APRG_DIR R"(AprgWebCrawler\Configuration\firefoxConfiguration.txt)"
 
 using namespace alba;
-using namespace std;using namespace stringHelper;
+using namespace std;
+using namespace stringHelper;
 
 namespace aprgWebCrawler
 {

@@ -9,6 +9,7 @@
 #include <cctype>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -35,7 +36,8 @@ void AlbaWindowsUserAutomation::setStringToClipboard(std::string const& clipBoar
 
 string AlbaWindowsUserAutomation::getStringFromClipboard() const
 {
-    string stringInClipboard;    if(OpenClipboard(NULL))
+    string stringInClipboard;
+    if(OpenClipboard(NULL))
     {
       HANDLE clipboardData = GetClipboardData(CF_TEXT);
       CloseClipboard();
@@ -55,7 +57,8 @@ MousePosition AlbaWindowsUserAutomation::getMousePosition() const
 void AlbaWindowsUserAutomation::setMousePosition(MousePosition const& position) const
 {
     long screenWidth = GetSystemMetrics( SM_CXSCREEN ) - 1;
-    long screenHeight = GetSystemMetrics( SM_CYSCREEN ) - 1;    float ratioInX = position.getX() * ( 65535.0f / screenWidth  );
+    long screenHeight = GetSystemMetrics( SM_CYSCREEN ) - 1;
+    float ratioInX = position.getX() * ( 65535.0f / screenWidth  );
     float ratioInY = position.getY() * ( 65535.0f / screenHeight );
 
     doOperation([&](INPUT& input)
@@ -106,7 +109,8 @@ void AlbaWindowsUserAutomation::typeString(string const& stringToType) const
 void AlbaWindowsUserAutomation::typeCharacter(char const character) const
 {
     doOperation([&](INPUT& input)
-    {        input.type = INPUT_KEYBOARD;
+    {
+        input.type = INPUT_KEYBOARD;
         input.ki.wScan = 0;
         input.ki.time = 0;
         input.ki.dwExtraInfo = 0;
@@ -154,7 +158,8 @@ unsigned int AlbaWindowsUserAutomation::convertToVirtualKey(char const character
 {
     int virtualKey = character;
     if(stringHelper::isLetter(character))
-    {        virtualKey = ::toupper(character);
+    {
+        virtualKey = ::toupper(character);
     }
     else if('.' == character)
     {
@@ -179,7 +184,8 @@ void AlbaWindowsUserAutomation::setForegroundWindowWithWindowHandle(HWND const w
 
 void AlbaWindowsUserAutomation::doOperation(AlbaWindowsUserAutomation::InputFunction inputFunction) const
 {
-    INPUT input;    memset(&input, 0, sizeof(INPUT));
+    INPUT input;
+    memset(&input, 0, sizeof(INPUT));
     inputFunction(input);
     SendInput(1, &input, sizeof(INPUT));
     Sleep(REALISTIC_DELAY_IN_MILLISECONDS);
