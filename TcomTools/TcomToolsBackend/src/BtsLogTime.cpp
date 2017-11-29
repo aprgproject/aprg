@@ -149,7 +149,8 @@ void BtsLogTime::clearMicroSeconds()
 
 string BtsLogTime::getPrintableString() const
 {
-    return m_dateTime.getPrintableStringFormat1();}
+    return m_dateTime.getPrintableStringFormat1();
+}
 
 string BtsLogTime::getEquivalentStringPcTimeFormat() const
 {

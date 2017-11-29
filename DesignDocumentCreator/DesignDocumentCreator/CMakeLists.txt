@@ -46,6 +46,7 @@ add_definitions(-DLOG_LOCATION="${APRG_DIR}/DesignDocumentCreator/DesignDocument
 #Assign Sack Directory
 set(SackDirectory "D:/Branches/trunk")
 
+
 #Sacks
 set(SACKS_DIR_TO_INCLUDE
     ${SackDirectory}/I_Interface/Private/SC_TCOM/Temp

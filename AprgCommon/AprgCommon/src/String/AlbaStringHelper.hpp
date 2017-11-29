@@ -42,7 +42,8 @@ void splitLinesToAchieveTargetLength(stringHelper::strings & listOfStrings, std:
 void splitToStringsUsingASeriesOfDelimeters(strings & listOfStrings, std::string const& mainString,  std::string const& seriesOfDelimiters);
 
 std::string getStringWithCapitalLetters(std::string const& mainString);
-std::string getStringWithLowerCaseLetters(std::string const& mainString);std::string getStringWithUrlDecodedString(std::string const& mainString);
+std::string getStringWithLowerCaseLetters(std::string const& mainString);
+std::string getStringWithUrlDecodedString(std::string const& mainString);
 std::string getStringThatContainsWhiteSpaceIndention(std::string const& mainString);
 std::string getStringWithoutStartingAndTrailingCharacters(std::string const& mainString, std::string const& characters);
 std::string getStringWithoutStartingAndTrailingWhiteSpace(std::string const& mainString);

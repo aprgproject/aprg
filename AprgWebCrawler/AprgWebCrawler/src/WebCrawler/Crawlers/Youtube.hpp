@@ -5,6 +5,7 @@
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 #include <PathHandlers/AlbaWebPathHandler.hpp>
 #include <WebCrawler.hpp>
+
 #include <string>
 
 namespace aprgWebCrawler
@@ -17,8 +18,8 @@ public:
     void crawl();
 
 private:
-    void crawl(int webLinkIndex);
-    bool checkIfYoutubeLink(alba::AlbaWebPathHandler const& webLinkPathHandler);
+    void crawl(unsigned int const webLinkIndex);
+    bool isYoutubeLink(alba::AlbaWebPathHandler const& webLinkPathHandler);
     void retrieveLinks(alba::AlbaWebPathHandler const& webLinkPathHandler);
     bool checkLinks();
     void downloadFile(alba::AlbaWebPathHandler const& webLinkPathHandler);
@@ -29,7 +30,6 @@ private:
     CrawlConfiguration m_configuration;
     std::string m_linkForVideo;
     std::string m_localPathForCurrentVideo;
-    AutomatedFirefoxBrowser m_automatedFirefoxBrowser;
 };
 
 }
