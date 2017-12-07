@@ -25,29 +25,26 @@ unsigned int tcomSetSfn(unsigned int sfn)
 
 namespace DMeas {
 
-TimerStack::TimerIterator TimerStack::timerTableNbrOfElements = 0 ;
+TimerStack::TimerIndex TimerStack::timerTableNbrOfElements = 0 ;
 
 inline int TimerStack::ARRAY_timers_empty(void)
-{
-    return !TimerStack::timerTableNbrOfElements;
+{    return !TimerStack::timerTableNbrOfElements;
 }
 
-TimerStack::TimerIterator TimerStack::ARRAY_timers_insert(TimeCounter timeValue, TimerData timerData)
+TimerStack::TimerIndex TimerStack::ARRAY_timers_insert(TimeCounter timeValue, TimerData timerData)
 {
     int insertRetry = 0;
     int driveLoop   = 0;
-
     do // while( !(insertRetry < driveLoop) )
     {
         driveLoop++;
 
         if( TimerStack::timerTableNbrOfElements < TIMER_TABLE_MAX_NBR_OF_ELEMENTS )
         {
-            TimerIterator timerIndex = 0;
+            TimerIndex timerIndex = 0;
 
             while( timerIndex < TIMER_TABLE_MAX_NBR_OF_ELEMENTS )
-            {
-                if( timers[timerIndex].second.timerType == TimerType::FreeTimer )
+            {                if( timers[timerIndex].second.timerType == TimerType::FreeTimer )
                 {
                     timers[timerIndex].first  = timeValue;
                     timers[timerIndex].second = timerData;
@@ -108,11 +105,10 @@ TimerStack::TimerIterator TimerStack::ARRAY_timers_insert(TimeCounter timeValue,
     return ARRAY_timers_end();
 }
 
-TimerStack::TimerIterator TimerStack::ARRAY_timers_find( TimeCounter timeToSearch )
+TimerStack::TimerIndex TimerStack::ARRAY_timers_find( TimeCounter timeToSearch )
 {
     for( TNumberOfItems timerIndex = 0;
-         (timerIndex < ARRAY_timers_max_index);
-         timerIndex++ )
+         (timerIndex < ARRAY_timers_max_index);         timerIndex++ )
     {
         if( timers[timerIndex].first == timeToSearch )
         {
@@ -125,11 +121,10 @@ TimerStack::TimerIterator TimerStack::ARRAY_timers_find( TimeCounter timeToSearc
     return ARRAY_timers_end();
 }
 
-TimerStack::TimerIterator TimerStack::ARRAY_timers_begin(void)
+TimerStack::TimerIndex TimerStack::ARRAY_timers_begin(void)
 {
     if( TimerStack::timerTableNbrOfElements > 0 )
-    {
-        return 0;
+    {        return 0;
     }
     else {
         return ARRAY_timers_end();
@@ -137,18 +132,16 @@ TimerStack::TimerIterator TimerStack::ARRAY_timers_begin(void)
 }
 
 
-inline TimerStack::TimerIterator TimerStack::ARRAY_timers_end(void)
+inline TimerStack::TimerIndex TimerStack::ARRAY_timers_end(void)
 {
     return TIMER_TABLE_MAX_NBR_OF_ELEMENTS;
 }
 
-
 EBoolean
-TimerStack::ARRAY_timers_erase( TimerStack::TimerIterator & iter )
+TimerStack::ARRAY_timers_erase( TimerStack::TimerIndex & iter )
 {
     EBoolean  retStatus = EBoolean_False;
-    if( timers[iter].second.timerType != TimerType::FreeTimer )
-    {
+    if( timers[iter].second.timerType != TimerType::FreeTimer )    {
         if (timers[iter].second.timerType == TimerType::NbccRecovery)
         {
             if (timers[iter].second.value.nbccRecovery.msg)
@@ -195,11 +188,10 @@ TimerStack::ARRAY_timers_clear(void)
 }
 
 TimeCounter
-TimerStack::ARRAY_timers_first( TimerStack::TimerIterator iter )
+TimerStack::ARRAY_timers_first( TimerStack::TimerIndex iter )
 {
     if( !ARRAY_timers_empty() )
-    {
-        if(iter < TIMER_TABLE_MAX_NBR_OF_ELEMENTS )
+    {        if(iter < TIMER_TABLE_MAX_NBR_OF_ELEMENTS )
         {
             return timers[iter].first;
         }
@@ -218,11 +210,10 @@ TimerStack::ARRAY_timers_first( TimerStack::TimerIterator iter )
 
 
 TimerData *
-TimerStack::ARRAY_timers_second( TimerStack::TimerIterator iter )
+TimerStack::ARRAY_timers_second( TimerStack::TimerIndex iter )
 {
     if( !ARRAY_timers_empty() )
-    {
-        if(iter < TIMER_TABLE_MAX_NBR_OF_ELEMENTS )
+    {        if(iter < TIMER_TABLE_MAX_NBR_OF_ELEMENTS )
         {
             return &timers[iter].second;
         }
@@ -240,12 +231,11 @@ TimerStack::ARRAY_timers_second( TimerStack::TimerIterator iter )
 }
 
 
-TimerStack::TimerIterator
-TimerStack::ARRAY_timers_next( TimerStack::TimerIterator elem )
+TimerStack::TimerIndex
+TimerStack::ARRAY_timers_next( TimerStack::TimerIndex elem )
 {
     if(elem < TIMER_TABLE_MAX_NBR_OF_ELEMENTS )
-    {
-        for( u32 timerIndex = 0;
+    {        for( u32 timerIndex = 0;
              timerIndex < TIMER_TABLE_MAX_NBR_OF_ELEMENTS;
              timerIndex++ )
         {
@@ -296,10 +286,9 @@ TimerStack::~TimerStack()
 }
 
 void
-TimerStack::trigExpired( TimerIterator expired )
+TimerStack::trigExpired( TimerIndex expired )
 {
     TimerData* timerData = ARRAY_timers_second( expired );
-
     if ( NULL == timerData )
     {
         DM_ERR_HIGH( "Cannot trigger expiry for a NULL timerData" );
@@ -307,10 +296,9 @@ TimerStack::trigExpired( TimerIterator expired )
         return;
     }
 
-    TimerType::Value  timerType = timerData->timerType;
+    TimerType  timerType = timerData->timerType;
 
     timerData->timerType = TimerType::ExpiryLock;
-
     switch( timerType )
     {
     case TimerType::MeasurementPeriod:
@@ -478,19 +466,17 @@ TimerStack::refresh( const TSfn newSfn )
     {
         TimeCounter timeToExpire = timeCounter;
 
-        TimerIterator expiredItem = ARRAY_timers_find( timeToExpire );
+        TimerIndex expiredItem = ARRAY_timers_find( timeToExpire );
 
         if( expiredItem != ARRAY_timers_end() )
-        {
-            timersTrigged = EBoolean_True;
+        {            timersTrigged = EBoolean_True;
             MTPRINTF("_____________________________________________________[%u]\n\n",timeToExpire);
             do {
                 trigExpired( expiredItem );
 
-                TimerIterator itemToBeDeleted  = expiredItem;
+                TimerIndex itemToBeDeleted  = expiredItem;
 
                 expiredItem = ARRAY_timers_next( expiredItem );
-
                 remove( itemToBeDeleted );
 
             }
@@ -508,28 +494,26 @@ EBoolean TimerStack::insert(
         const TimerData      & timerData )
 {
     MTPRINTF("DMEAS: TimerStack: insert - start\n");
-    TimerIterator   iter;
+    TimerIndex   iter;
     TimeCounter     timeValue = timeOffsetToSFN + sfn;
 
-    if( sfn < DMeas::currSfn ) {
-        timeValue += MAX_SFN_CYCLE_LEN;
+    if( sfn < DMeas::currSfn ) {        timeValue += MAX_SFN_CYCLE_LEN;
     }
 
     return this->insert( timeValue, timerData, iter );
 }
 
 void TimerStack::initIterator(
-        TimerIterator                       & iter )
+        TimerIndex                       & iter )
 {
     iter = ARRAY_timers_end();
 }
 
 EBoolean TimerStack::isValidIterator(
-        const TimerIterator                 & iter )
+        const TimerIndex                 & iter )
 {
     if( ARRAY_timers_end() != iter )
-    {
-        return EBoolean_True;
+    {        return EBoolean_True;
     }
     else {
         return EBoolean_False;
@@ -537,15 +521,14 @@ EBoolean TimerStack::isValidIterator(
 }
 
 EBoolean TimerStack::insertMeasurement(
-        const DMeas::TimerType::Value timerType,
+        const DMeas::TimerType timerType,
         const TimeCounter timeAdvance,
         const TMeasurementID measurementId,
         const TUserId userId,
-        TimerIterator & iter,
+        TimerIndex & iter,
         TAaSysComSicad const sicadToWait,
         EFaultId const faultId)
-{
-    TimerData timerData;
+{    TimerData timerData;
     timerData.timerType = timerType;
     timerData.value.measurement.measurementId = measurementId;
     timerData.value.measurement.userId = userId;
@@ -581,11 +564,10 @@ EBoolean TimerStack::mayIPrint()
     return ret;
 }
 
-EBoolean TimerStack::insert(TimeCounter timeValue, TimerData const& timerData, TimerIterator& iter)
+EBoolean TimerStack::insert(TimeCounter timeValue, TimerData const& timerData, TimerIndex& iter)
 {
 
     TSfn realSfn = tcomGetSfn(); //provided by HWRel
-
     MTPRINTF("DMEAS MT environment: realSFN read from MT app by genio_sfn_ctrl_read(): %u \n", realSfn);
 
     DM_DBG_LOW( "timeValue: %u (before realSfn handling!)", timeValue);
@@ -637,11 +619,10 @@ EBoolean TimerStack::insert(TimeCounter timeValue, TimerData const& timerData, T
 }
 
 EBoolean
-TimerStack::renewMeasurement(TimerIterator & iter, TimeCounter const timeAdvance)
+TimerStack::renewMeasurement(TimerIndex & iter, TimeCounter const timeAdvance)
 {
     if( iter != ARRAY_timers_end() )
-    {
-        TimerData *timerDataPtr = ARRAY_timers_second( iter );
+    {        TimerData *timerDataPtr = ARRAY_timers_second( iter );
         if ( NULL == timerDataPtr )
         {
             DM_ERR_HIGH( "Cannot renew measurement for a NULL timerData" );
@@ -682,11 +663,10 @@ TimerStack::renewMeasurement(TimerIterator & iter, TimeCounter const timeAdvance
  *
  */
 EBoolean
-TimerStack::remove(TimerIterator& iter)
+TimerStack::remove(TimerIndex& iter)
 {
     EBoolean  retStatus = EBoolean_False;
-    if( iter != ARRAY_timers_end() )
-    {
+    if( iter != ARRAY_timers_end() )    {
         TimerData* timerData = ARRAY_timers_second( iter );
 
         if ( NULL == timerData )
@@ -719,10 +699,9 @@ TimerStack::remove(TimerIterator& iter)
 }
 
 EBoolean
-TimerStack::trigExpiredAndRemove(TimerIterator &timerIter)
+TimerStack::trigExpiredAndRemove(TimerIndex &timerIter)
 {
     this->trigExpired( timerIter );
-
     return this->remove( timerIter );
 }
 
@@ -731,11 +710,10 @@ void TimerStack::clearUserTimers( const TNodeBCommunicationContextId nBCCId )
 {
     if( !ARRAY_timers_empty() )
     {
-        for( TimerIterator iter = ARRAY_timers_begin(); iter != ARRAY_timers_end(); ++iter )
+        for( TimerIndex iter = ARRAY_timers_begin(); iter != ARRAY_timers_end(); ++iter )
         {
             TimerData *data = ARRAY_timers_second( iter );
-            if(NULL != data)
-            {
+            if(NULL != data)            {
                 if( data->timerType != TimerType::FreeTimer )
                 {
                     if( ( data->timerType == TimerType::ChangeDSPInd  &&  data->value.changeDSPInd.userId == nBCCId )
@@ -760,11 +738,10 @@ void TimerStack::clearUserTimers( const TNodeBCommunicationContextId nBCCId )
 }
 
 
-void TimerStack::removeTimerPrint( const TimerType::Value timerType, const TNodeBCommunicationContextId nBCCId )
+void TimerStack::removeTimerPrint( const TimerType timerType, const TNodeBCommunicationContextId nBCCId )
 {
     if ( TimerType::ChangeDSPInd == timerType)
-    {
-        DM_DBG_LOW(
+    {        DM_DBG_LOW(
                     "Removed timer for nbccId: %u, timer type: ChangeDSP",
                     nBCCId);
     }
@@ -793,16 +770,15 @@ void TimerStack::dump(void)
 }
 
 TimerData     *
-TimerStack::timersFindNbccRecovery(TNodeBCommunicationContextId nbccId, TimerIterator &iter)
+TimerStack::timersFindNbccRecovery(TNodeBCommunicationContextId nbccId, TimerIndex &iter)
 {
     initIterator( iter );
     if( !ARRAY_timers_empty() )
     {
-        for( TimerIterator itr = ARRAY_timers_begin(); itr != ARRAY_timers_end(); itr ++ )
+        for( TimerIndex itr = ARRAY_timers_begin(); itr != ARRAY_timers_end(); itr ++ )
         {
             TimerData *data = ARRAY_timers_second( itr );
-            if(NULL != data)
-            {
+            if(NULL != data)            {
                 if (data->timerType == TimerType::NbccRecovery && data->value.nbccRecovery.nodeBCommunicationContextId == nbccId)
                 {
                     MTPRINTF("TimerStack::timersFindNbccRecovery: nbccId: %u  iter=%u",nbccId,iter);
@@ -816,16 +792,15 @@ TimerStack::timersFindNbccRecovery(TNodeBCommunicationContextId nbccId, TimerIte
     return NULL;
 }
 
-void TimerStack::dump(TimerIterator begin, TimerIterator end)
+void TimerStack::dump(TimerIndex begin, TimerIndex end)
 {
     MTPRINTF("TimersTable[id]: timeVal |    type    | value  ( timeCounter = %u timeOffsetToSFN = %u DMeas::currSfn = %u )\n",
              timeCounter, timeOffsetToSFN, DMeas::currSfn);
 
-    TimerIterator iter = begin;
+    TimerIndex iter = begin;
     for (u32 counter = 0; counter < 10; counter++)
     {
-        if (EBoolean_True == isValidIterator(iter))
-        {
+        if (EBoolean_True == isValidIterator(iter))        {
             std::string timerTypeStr = "UNKNOWN   ";
             switch(timers[iter].second.timerType)
             {

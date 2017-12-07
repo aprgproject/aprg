@@ -70,11 +70,10 @@ typedef struct SNBCCRecovery
 
 typedef struct
 {
-    TimerType::Value timerType;
+    TimerType timerType;
     union Value
     {
-        TMeasurementTimer  measurement;
-        SRLChangeDSPInd_Ver2          changeDSPInd;
+        TMeasurementTimer  measurement;        SRLChangeDSPInd_Ver2          changeDSPInd;
         SRLPrepareChangeInd           prepareChangeInd;
         SRLReconfCommitInd reconfCommitInd;
         SRLDeletionInd     rlDeletion;
@@ -159,11 +158,10 @@ public: // methods
     EBoolean        insert      ( TimeCounter           expirationTime,
             const TimerData     & timerData,
             TimerIterator       & timerIterator );
-    EBoolean insertMeasurement(DMeas::TimerType::Value const timerType,
+    EBoolean insertMeasurement(DMeas::TimerType const timerType,
          TimeCounter const timeAdvance,
          TMeasurementID const measurementId,
-         TUserId const userId,
-         TimerIterator & itr,
+         TUserId const userId,         TimerIterator & itr,
          TAaSysComSicad const timedOutSicad = 0,
          EFaultId const faultId = EFaultId_NoResponseAl);
     EBoolean renewMeasurement(TimerIterator& timerIter, TimeCounter const timeAdvance);
@@ -172,10 +170,9 @@ public: // methods
     EBoolean isValidIterator(TimerIterator const& iter);
     void clearUserTimers(TNodeBCommunicationContextId const nBCCId);
 
-    void removeTimerPrint(TimerType::Value const timerType, TNodeBCommunicationContextId const nBCCId);
+    void removeTimerPrint(TimerType const timerType, TNodeBCommunicationContextId const nBCCId);
 
     void dump (TimerIterator begin, TimerIterator end);
-
     void dump (void);
 
 #ifdef MEASURE_DEDICATED_MT_TEST
