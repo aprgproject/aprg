@@ -161,6 +161,7 @@ template <stringHelper::SplitStringType splitStringType> void stringHelper::spli
         listOfStrings.emplace_back(mainString.substr(startingIndexOfFind, mainStringLength-startingIndexOfFind));
     }
 }
+
 template void stringHelper::splitToStrings<stringHelper::SplitStringType::WithoutDelimeters> (stringHelper::strings & listOfStrings, std::string const& mainString, std::string const& delimiter);
 template void stringHelper::splitToStrings<stringHelper::SplitStringType::WithDelimeters> (stringHelper::strings & listOfStrings, std::string const& mainString, std::string const& delimiter);
 
@@ -269,6 +270,7 @@ void stringHelper::splitToStringsUsingASeriesOfDelimeters(strings & listOfString
         }
     }
 }
+
 string stringHelper::getStringWithCapitalLetters(string const& mainString)
 {
     string result;

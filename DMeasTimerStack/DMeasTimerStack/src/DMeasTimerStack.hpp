@@ -28,7 +28,8 @@ enum class TimerType
 {
     FreeTimer       = 42,
     MeasurementInit,
-    MeasurementPeriod,    ChangeDSPInd,
+    MeasurementPeriod,
+    ChangeDSPInd,
     PrepareChangeInd,
     ReconfCommitInd,
     SlaveMeasurementInit,

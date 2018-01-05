@@ -125,7 +125,8 @@ TEST(SplitStringTest, SplitBySeriesOfDelimeters)
 
 TEST(CombineStringTest, CombinedStringsWithComma)
 {
-    strings stringsToCombine {"Mark", "is", "the", "no#1", "guy", "in", "the", "world.", "Mark", "is", "also", "the", "nicest", "guy."};    string expectedString("Mark,is,the,no#1,guy,in,the,world.,Mark,is,also,the,nicest,guy.");
+    strings stringsToCombine {"Mark", "is", "the", "no#1", "guy", "in", "the", "world.", "Mark", "is", "also", "the", "nicest", "guy."};
+    string expectedString("Mark,is,the,no#1,guy,in,the,world.,Mark,is,also,the,nicest,guy.");
     string actualString(combineStrings(stringsToCombine, ","));
 
     EXPECT_EQ(expectedString, actualString);

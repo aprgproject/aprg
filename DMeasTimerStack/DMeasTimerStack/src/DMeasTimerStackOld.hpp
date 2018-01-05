@@ -73,7 +73,8 @@ typedef struct
     TimerType timerType;
     union Value
     {
-        TMeasurementTimer  measurement;        SRLChangeDSPInd_Ver2          changeDSPInd;
+        TMeasurementTimer  measurement;
+        SRLChangeDSPInd_Ver2          changeDSPInd;
         SRLPrepareChangeInd           prepareChangeInd;
         SRLReconfCommitInd reconfCommitInd;
         SRLDeletionInd     rlDeletion;
@@ -161,7 +162,8 @@ public: // methods
     EBoolean insertMeasurement(DMeas::TimerType const timerType,
          TimeCounter const timeAdvance,
          TMeasurementID const measurementId,
-         TUserId const userId,         TimerIterator & itr,
+         TUserId const userId,
+         TimerIterator & itr,
          TAaSysComSicad const timedOutSicad = 0,
          EFaultId const faultId = EFaultId_NoResponseAl);
     EBoolean renewMeasurement(TimerIterator& timerIter, TimeCounter const timeAdvance);
@@ -173,6 +175,7 @@ public: // methods
     void removeTimerPrint(TimerType const timerType, TNodeBCommunicationContextId const nBCCId);
 
     void dump (TimerIterator begin, TimerIterator end);
+
     void dump (void);
 
 #ifdef MEASURE_DEDICATED_MT_TEST
