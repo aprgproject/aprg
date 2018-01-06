@@ -1,4 +1,4 @@
-#include <SimplestDesignToCopy.hpp>
+#include <SimplestDesignToCopyForPrograms.hpp>
 
 using namespace alba;
 
