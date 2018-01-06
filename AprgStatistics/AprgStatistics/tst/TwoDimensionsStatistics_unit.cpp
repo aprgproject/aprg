@@ -191,11 +191,10 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
     LocalLineModel lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
     LocalValueToSampleMultimap squareErrorToSampleMultimap(TwoDimensionsStatistics::getSquareErrorToSampleMultimap(samples, lineModel));
 
-    ASSERT_EQ(5, squareErrorToSampleMultimap.size());
+    ASSERT_EQ(5u, squareErrorToSampleMultimap.size());
     LocalValueToSampleMultimap::iterator it=squareErrorToSampleMultimap.begin();
     EXPECT_EQ((LocalSample{5,3}), it++->second);
-    EXPECT_EQ((LocalSample{5,3}), it++->second);
-    EXPECT_EQ((LocalSample{5,3}), it++->second);
+    EXPECT_EQ((LocalSample{5,3}), it++->second);    EXPECT_EQ((LocalSample{5,3}), it++->second);
     EXPECT_EQ((LocalSample{5,3}), it++->second);
     EXPECT_EQ((LocalSample{5,3}), it++->second);
 }
@@ -212,11 +211,10 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
     LocalLineModel lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
     LocalValueToSampleMultimap squareErrorToSampleMultimap(TwoDimensionsStatistics::getSquareErrorToSampleMultimap(samples, lineModel));
 
-    ASSERT_EQ(6, squareErrorToSampleMultimap.size());
+    ASSERT_EQ(6u, squareErrorToSampleMultimap.size());
     LocalValueToSampleMultimap::iterator it=squareErrorToSampleMultimap.begin();
     EXPECT_EQ((LocalSample{5,0}), it++->second);
-    EXPECT_EQ((LocalSample{5,1}), it++->second);
-    EXPECT_EQ((LocalSample{5,2}), it++->second);
+    EXPECT_EQ((LocalSample{5,1}), it++->second);    EXPECT_EQ((LocalSample{5,2}), it++->second);
     EXPECT_EQ((LocalSample{5,3}), it++->second);
     EXPECT_EQ((LocalSample{5,4}), it++->second);
     EXPECT_EQ((LocalSample{5,5}), it++->second);
@@ -234,11 +232,10 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
     LocalLineModel lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
     LocalValueToSampleMultimap squareErrorToSampleMultimap(TwoDimensionsStatistics::getSquareErrorToSampleMultimap(samples, lineModel));
 
-    ASSERT_EQ(6, squareErrorToSampleMultimap.size());
+    ASSERT_EQ(6u, squareErrorToSampleMultimap.size());
     LocalValueToSampleMultimap::iterator it=squareErrorToSampleMultimap.begin();
     EXPECT_EQ((LocalSample{0,5}), it++->second);
-    EXPECT_EQ((LocalSample{1,5}), it++->second);
-    EXPECT_EQ((LocalSample{2,5}), it++->second);
+    EXPECT_EQ((LocalSample{1,5}), it++->second);    EXPECT_EQ((LocalSample{2,5}), it++->second);
     EXPECT_EQ((LocalSample{3,5}), it++->second);
     EXPECT_EQ((LocalSample{4,5}), it++->second);
     EXPECT_EQ((LocalSample{5,5}), it++->second);
@@ -266,11 +263,10 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
     LocalLineModel lineModel(-61.27218654211062443, 1, 39.061955918843921154);
     LocalValueToSampleMultimap squareErrorToSampleMultimap(TwoDimensionsStatistics::getSquareErrorToSampleMultimap(samples, lineModel));
 
-    ASSERT_EQ(15, squareErrorToSampleMultimap.size());
+    ASSERT_EQ(15u, squareErrorToSampleMultimap.size());
     LocalValueToSampleMultimap::iterator it=squareErrorToSampleMultimap.begin();
     EXPECT_EQ((LocalSample{1.75, 68.10}), it++->second);
-    EXPECT_EQ((LocalSample{1.57, 57.20}), it++->second);
-    EXPECT_EQ((LocalSample{1.55, 55.84}), it++->second);
+    EXPECT_EQ((LocalSample{1.57, 57.20}), it++->second);    EXPECT_EQ((LocalSample{1.55, 55.84}), it++->second);
     EXPECT_EQ((LocalSample{1.78, 69.92}), it++->second);
     EXPECT_EQ((LocalSample{1.50, 53.12}), it++->second);
     EXPECT_EQ((LocalSample{1.60, 58.57}), it++->second);

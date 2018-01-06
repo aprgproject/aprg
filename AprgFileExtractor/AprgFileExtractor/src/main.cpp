@@ -1,8 +1,7 @@
-#include <AprgFileExtractor.hpp>
+/*#include <AprgFileExtractor.hpp>
 
 #include <iostream>
 #include <string>
-
 using namespace alba;
 using namespace std;
 
@@ -28,4 +27,4 @@ int main(int argc, char *argv[])
     string inputPath(argv[2]);
     AprgFileExtractor fileExtractor(condition);
     fileExtractor.extractAllRelevantFiles(inputPath);
-}
+}*/

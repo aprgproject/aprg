@@ -1,8 +1,7 @@
-include(${CMAKE_CURRENT_LIST_DIR}/PrintMacros.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
 
 # Subdirectory traverse implementation
-macro(TRAVERSE_DIRECTORY resultingSubDirectories currentDirectory exclude_filter)
-    file(GLOB children ${currentDirectory}/*)
+macro(TRAVERSE_DIRECTORY resultingSubDirectories currentDirectory exclude_filter)    file(GLOB children ${currentDirectory}/*)
     foreach(child ${children})
         if(IS_DIRECTORY ${child})
             if("${child}" MATCHES "^\\.svn$" OR (NOT("${exclude_filter}" STREQUAL "") AND "${child}" MATCHES "${exclude_filter}"))
