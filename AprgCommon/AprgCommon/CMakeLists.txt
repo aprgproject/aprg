@@ -15,7 +15,8 @@ include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
 include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
 
 #Include gtest, this needs APRG Directory
-include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)#You can also add it as add subdirectory
+include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
+#You can also add it as add subdirectory
 #add_subdirectory(${APRG_DIR}/gtest/AprgCmakeInclude gtest)
 
 #Add files and directories

@@ -17,7 +17,8 @@ include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
 include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
 if(WIN32)
     #set for path of 7Zip for windows 32
-    add_definitions(-DPATH_OF_7Z_EXECUTABLE="${APRG_DIR}AprgFileExtractor/7z32/7z.exe")    add_definitions(-DPATH_OF_7Z_TEMP_FILE="${APRG_DIR}AprgFileExtractor/7z32/TempFile.txt")
+    add_definitions(-DPATH_OF_7Z_EXECUTABLE="${APRG_DIR}AprgFileExtractor/7z32/7z.exe")
+    add_definitions(-DPATH_OF_7Z_TEMP_FILE="${APRG_DIR}AprgFileExtractor/7z32/TempFile.txt")
 endif()
 
 #Include gtest, this needs APRG Directory

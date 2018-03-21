@@ -22,6 +22,7 @@ add_definitions(-DCCS_BIG_ENDIAN)
 
 #Include gtest, this needs APRG Directory
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
+
 #Include AprgCommon, this needs APRG Directory
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 

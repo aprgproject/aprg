@@ -50,7 +50,8 @@ void Lrm::clearLcgPicPools(unsigned int const lcgId)
 SelectionDspResult Lrm::allocateMcdForLcgIdAccordingToMark(unsigned int const lcgId)
 {
     SelectionDspResult result;
-    SelectionDspResult fspSelectionResult = selectFspForEmptyDspForMcd(lcgId);    if(fspSelectionResult.isSelectionSuccessful)
+    SelectionDspResult fspSelectionResult = selectFspForEmptyDspForMcd(lcgId);
+    if(fspSelectionResult.isSelectionSuccessful)
     {
         SelectionDspResult dspSelectionResult = selectEmptyDspPriotizingNyquistTypeAndAddressInFsp(lcgId, fspSelectionResult.address);
         if(dspSelectionResult.isSelectionSuccessful)
@@ -76,7 +77,8 @@ SelectionDspResult Lrm::allocateMcdForLcgIdAccordingToMark(unsigned int const lc
 SelectionDspResultForCcdAndMcd Lrm::allocateCcdMcdForLcgIdAccordingToMark(unsigned int const lcgId)
 {
     SelectionDspResultForCcdAndMcd ccdMcdAddress;
-    FspAddresses selectedFspAddresses = selectFspsForCcdMcd(lcgId);    unsigned int ccdFspAddress(0), mcdFspAddress(0);
+    FspAddresses selectedFspAddresses = selectFspsForCcdMcd(lcgId);
+    unsigned int ccdFspAddress(0), mcdFspAddress(0);
     if(selectedFspAddresses.size()==1)
     {
         ccdFspAddress = selectedFspAddresses[0];
@@ -106,7 +108,8 @@ SelectionDspResultForCcdAndMcd Lrm::allocateCcdMcdForLcgIdAccordingToMark(unsign
 SelectionDspResult Lrm::allocateNbicMcdForLcgIdAccordingToMark(unsigned int const lcgId)
 {
     SelectionDspResult result;
-    SelectionDspResult fspSelectionResult = selectFspForEmptyDspForNbicMcd(lcgId);    if(fspSelectionResult.isSelectionSuccessful)
+    SelectionDspResult fspSelectionResult = selectFspForEmptyDspForNbicMcd(lcgId);
+    if(fspSelectionResult.isSelectionSuccessful)
     {
         SelectionDspResult dspSelectionResult = selectEmptyDspPriotizingNyquistTypeAndAddressInFsp(lcgId, fspSelectionResult.address);
         if(dspSelectionResult.isSelectionSuccessful)
@@ -142,7 +145,8 @@ SelectionDspResult Lrm::allocateNbicMcdForLcgIdAccordingToMark(unsigned int cons
 SelectionDspResultForCcdAndMcd Lrm::allocateCcdNbicMcdForLcgIdAccordingToMark(unsigned int const lcgId)
 {
     SelectionDspResultForCcdAndMcd ccdMcdAddress;
-    FspAddresses selectedFspAddresses = selectFspsForCcdNbicMcd(lcgId);    unsigned int ccdFspAddress(0), mcdFspAddress(0);
+    FspAddresses selectedFspAddresses = selectFspsForCcdNbicMcd(lcgId);
+    unsigned int ccdFspAddress(0), mcdFspAddress(0);
     if(selectedFspAddresses.size()==1)
     {
         ccdFspAddress = selectedFspAddresses[0];
@@ -177,7 +181,8 @@ SelectionDspResultForCcdAndMcd Lrm::allocateCcdNbicMcdForLcgIdAccordingToMark(un
 SelectionDspResult Lrm::allocatePicForLcgIdAccordingToMark(unsigned int const lcgId)
 {
     SelectionDspResult result;
-    SelectionDspResult fspSelectionResult = selectFspForPic(lcgId);    if(fspSelectionResult.isSelectionSuccessful)
+    SelectionDspResult fspSelectionResult = selectFspForPic(lcgId);
+    if(fspSelectionResult.isSelectionSuccessful)
     {
         SelectionDspResult dspSelectionResult = selectTnPriotizingLessUsersAndHsupaCfsInFsp(lcgId, fspSelectionResult.address);
         if(dspSelectionResult.isSelectionSuccessful)
@@ -338,7 +343,8 @@ void Lrm::removeNotNeededFspsForMcd(FspAddresses& fspAddresses, unsigned int con
     saveNeededFspsForCcdOrMcdBasedOnNOrTn(neededUniqueFspAddresses, numberOfDspToAllocate, fspAddresses, lcgId);
     fspAddresses.clear();
     copy(neededUniqueFspAddresses.cbegin(), neededUniqueFspAddresses.cend(), back_inserter(fspAddresses));
-    sortFspBasedPriorityForMcdSelection(fspAddresses, lcgId);}
+    sortFspBasedPriorityForMcdSelection(fspAddresses, lcgId);
+}
 
 FspAddresses Lrm::selectFspsForCcdMcd(unsigned int const lcgId) const
 {
@@ -544,14 +550,16 @@ void Lrm::saveNeededFspsForCcdNbicMcdBasedOnNOrTnWithDliRestrictions(UniqueFspAd
             if(numberOfDspToAllocate==1 && !isFspValidBasedOnDliPoolRestrictions)//for NBIC MCD
             {
                 break;
-            }            isFspNeeded=true; numberOfDspToAllocate--; emptyNyquists--;
+            }
+            isFspNeeded=true; numberOfDspToAllocate--; emptyNyquists--;
         }
         while(numberOfDspToAllocate>0 && emptyTurboNyquists>0 && isThereSpaceForTnForMcdOrCcdConsideringPic(currentFsp,  lcgId))
         {
             if(numberOfDspToAllocate==1 && !isFspValidBasedOnDliPoolRestrictions)//for NBIC MCD
             {
                 break;
-            }            isFspNeeded=true; numberOfDspToAllocate--; emptyTurboNyquists--;
+            }
+            isFspNeeded=true; numberOfDspToAllocate--; emptyTurboNyquists--;
         }
         if(isFspNeeded)
         {
@@ -839,6 +847,7 @@ void Lrm::copyFspWithAtLeastThisNumberOfEmptyNAndTnWithDliRestrictions(FspAddres
         return isNumberOfEmptyDspsSufficient && isDliPoolAvailableInFsp;
     });
 }
+
 void Lrm::copyFspWithAtLeastThisNumberOfTnDcdsWithoutHsRachCfsWithDliRestrictions(FspAddresses& fspAddresses, unsigned int const lcgId) const
 {
     DliPools freeDliPools;
@@ -849,7 +858,8 @@ void Lrm::copyFspWithAtLeastThisNumberOfTnDcdsWithoutHsRachCfsWithDliRestriction
         bool isDliPoolAvailableInFsp(canAFreeDliBeAllocatedInFsp(freeDliPools, currentFsp.getAddress(), lcgId));
         if(isDliPoolAvailableInFsp)
         {
-            DspAddresses const& dspAddresses(currentFsp.getDspAddresses());            for(unsigned int const dspAddress : dspAddresses)
+            DspAddresses const& dspAddresses(currentFsp.getDspAddresses());
+            for(unsigned int const dspAddress : dspAddresses)
             {
                 Dsp& currentDsp(m_addressToDspMap.at(dspAddress));
                 DspMode mode(currentDsp.getMode());
@@ -1169,6 +1179,7 @@ bool Lrm::canAFreeDliBeAllocatedInFsp(DliPools const& freeDliPools, unsigned int
     }
     return result;
 }
+
 bool Lrm::canTnBeAllocatedBasedOnPicAndNumberOfTnToBeAllocated(
         NyquistAndTurboNyquistCount const& nAndTnCountInMsmOfLcg,
         unsigned int const numberOfTurboNyquistToBeUsed,
@@ -1178,7 +1189,8 @@ bool Lrm::canTnBeAllocatedBasedOnPicAndNumberOfTnToBeAllocated(
     return (getNumberOfPicPoolsForLcg(lcgId) + numberOfTurboNyquistToBeUsed) <= nAndTnCountInMsmOfLcg.numberOfTurboNyquists;
 }
 
-bool Lrm::isSharedLcg(unsigned int const lcgId) const{
+bool Lrm::isSharedLcg(unsigned int const lcgId) const
+{
     return lcgId == m_hardwareConfigurationReference.getSharedLcgId();
 }
 

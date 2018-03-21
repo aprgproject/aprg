@@ -16,7 +16,8 @@ include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
 include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
 
 # Add MacPorts
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")  set(CMAKE_PREFIX_PATH /opt/local ${CMAKE_PREFIX_PATH})
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  set(CMAKE_PREFIX_PATH /opt/local ${CMAKE_PREFIX_PATH})
 endif()
 
 #Include AprgCommon, this needs APRG Directory
