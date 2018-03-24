@@ -43,7 +43,8 @@ public:
     void changeConfigurationToSharedLcgWithOneDspInMsm();
     unsigned int getTcomFspAddress() const;
     unsigned int getSharedLcgId() const;
-    void printDspAllocations(unsigned int const printFlags=0);private:
+    void printDspAllocations(unsigned int const printFlags=0);
+private:
     void addFsp(unsigned int const fspAddress);
     void addDsp(unsigned int const dspAddress);
     void setLcgIdOfDsps(LcgIds const& lcgIds);

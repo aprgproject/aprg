@@ -57,7 +57,8 @@ public:
 
 private:
     //MCD
-    SelectionDspResult selectFspForEmptyDspForMcd(unsigned int const lcgId) const;    void sortFspBasedPriorityForMcdSelection(FspAddresses& fspAddresses, unsigned int const lcgId) const;
+    SelectionDspResult selectFspForEmptyDspForMcd(unsigned int const lcgId) const;
+    void sortFspBasedPriorityForMcdSelection(FspAddresses& fspAddresses, unsigned int const lcgId) const;
     unsigned int getPriorityBasedOnNAndTnCountForFspMcdSelection(Fsp const& fsp, unsigned int const lcgId) const;
     SelectionDspResult selectNonEmptyDspToClearForMcd(unsigned int const lcgId) const;
     void removeNotNeededFspsForMcd(FspAddresses& fspAddresses, unsigned int const lcgId) const;
@@ -84,7 +85,8 @@ private:
     unsigned int getPriorityBasedSharedLcgTnInPicSelection(Fsp const& fsp, unsigned int const lcgId) const;
     unsigned int getPriorityBasedOnTnWithoutCfsForFspPicSelection(Fsp const& fsp, unsigned int const lcgId) const;
 
-    //Common    //void saveNeededFspsForCcdOrMcdBasedOnNyquist(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int& numberOfDspToAllocate, FspAddresses const& fspAddresses, unsigned int const lcgId) const;
+    //Common
+    //void saveNeededFspsForCcdOrMcdBasedOnNyquist(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int& numberOfDspToAllocate, FspAddresses const& fspAddresses, unsigned int const lcgId) const;
     //void saveNeededFspsForCcdOrMcdBasedOnTurboNyquist(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int& numberOfDspToAllocate, FspAddresses const& fspAddresses, unsigned int const lcgId) const;
     unsigned int getPriorityBasedOnLessUsersAndHsupaCfsForDsp(Dsp const& dsp) const;
     void saveNeededFspsForCcdOrMcdBasedOnNOrTn(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int& numberOfDspCcdAndMcd, FspAddresses const& fspAddresses, unsigned int const lcgId) const;
@@ -92,7 +94,8 @@ private:
     bool isThereSpaceForTnForMcdOrCcdConsideringPic(unsigned int const fspAddress, unsigned int const lcgId) const;
     SelectionDspResult selectEmptyDspPriotizingNyquistTypeAndAddressInFsp(unsigned int const lcgId, unsigned int const fspAddress) const;
     SelectionDspResult selectTnPriotizingLessUsersAndHsupaCfsInFsp(unsigned int const lcgId, unsigned int const fspAddress) const;
-    void copyFspWithAtLeastThisNumberOfEmptyNAndTn(FspAddresses& fspAddresses, unsigned int const requiredEmptyCount, unsigned int const lcgId) const;    void copyFspWithAtLeastThisNumberOfEmptyNAndTnWithDliRestrictions(FspAddresses& fspAddresses, unsigned int const requiredEmptyCount, unsigned int const lcgId) const;
+    void copyFspWithAtLeastThisNumberOfEmptyNAndTn(FspAddresses& fspAddresses, unsigned int const requiredEmptyCount, unsigned int const lcgId) const;
+    void copyFspWithAtLeastThisNumberOfEmptyNAndTnWithDliRestrictions(FspAddresses& fspAddresses, unsigned int const requiredEmptyCount, unsigned int const lcgId) const;
     void copyFspWithAtLeastThisNumberOfTnDcdsWithoutHsRachCfsWithDliRestrictions(FspAddresses& fspAddresses, unsigned int const lcgId) const;
     NyquistAndTurboNyquistCount getNumberOfEmptyNAndTnOfFspAndLcg(unsigned int const fspAddress, unsigned int const lcgId) const;
     NyquistAndTurboNyquistCount getNumberOfNAndTnWithoutCfsOfFspAndLcg(unsigned int const fspAddress, unsigned int const lcgId) const;
@@ -126,7 +129,8 @@ private:
     bool canAFreeDliBeAllocatedInFsp(unsigned int const fspAddress, unsigned int const lcgId) const;
 
     void changeModeForCcdAndUpdateDspDetails(SelectionDspResultForCcdAndMcd const& selectionDspResultForCcdAndMcd);
-    void changeModeForMcdAndUpdateDspDetails(SelectionDspResultForCcdAndMcd const& selectionDspResultForCcdAndMcd);    void changeModeAndUpdateDspDetails(SelectionDspResult const& selectionDspResult, DspMode const dspMode);
+    void changeModeForMcdAndUpdateDspDetails(SelectionDspResultForCcdAndMcd const& selectionDspResultForCcdAndMcd);
+    void changeModeAndUpdateDspDetails(SelectionDspResult const& selectionDspResult, DspMode const dspMode);
     void changeMode(Dsp& dspToChange, DspMode const dspMode);
     void setDliIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic, unsigned int const dliPool);
     void setAsNbicIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic);
