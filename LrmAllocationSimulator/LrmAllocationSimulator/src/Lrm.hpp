@@ -45,12 +45,12 @@ class Lrm
 public:
     Lrm(HardwareConfiguration& hardwareConfiguration);
     void setHibernationCommissioned(bool const isHibernationCommissioned);
-    void setNumberOfPicPoolsPerLcg(unsigned int const lcgId, unsigned int const numberOfPicPools);
-    void clearLcgPicPools(unsigned int const lcgId);
+    void setNumberOfUnallocatedPicPoolsPerLcg(unsigned int const lcgId, unsigned int const numberOfPicPools);
+    void clearLcgToUnallocatedPicPools(unsigned int const lcgId);
+    void setMaxAmountOfNonDcdsPerFsp(unsigned int const maxAmountOfNonDcdsPerFsp);
 
     SelectionDspResult allocateMcdForLcgIdAccordingToMark(unsigned int const lcgId);
-    SelectionDspResultForCcdAndMcd allocateCcdMcdForLcgIdAccordingToMark(unsigned int const lcgId);
-    SelectionDspResult allocateNbicMcdForLcgIdAccordingToMark(unsigned int const lcgId);
+    SelectionDspResultForCcdAndMcd allocateCcdMcdForLcgIdAccordingToMark(unsigned int const lcgId);    SelectionDspResult allocateNbicMcdForLcgIdAccordingToMark(unsigned int const lcgId);
     SelectionDspResultForCcdAndMcd allocateCcdNbicMcdForLcgIdAccordingToMark(unsigned int const lcgId);
     SelectionDspResult allocatePicForLcgIdAccordingToMark(unsigned int const lcgId);
 
@@ -94,18 +94,16 @@ private:
     bool isThereSpaceForTnForMcdOrCcdConsideringPic(unsigned int const fspAddress, unsigned int const lcgId) const;
     SelectionDspResult selectEmptyDspPriotizingNyquistTypeAndAddressInFsp(unsigned int const lcgId, unsigned int const fspAddress) const;
     SelectionDspResult selectTnPriotizingLessUsersAndHsupaCfsInFsp(unsigned int const lcgId, unsigned int const fspAddress) const;
-    void copyFspWithAtLeastThisNumberOfEmptyNAndTn(FspAddresses& fspAddresses, unsigned int const requiredEmptyCount, unsigned int const lcgId) const;
+    void copyFspWithAtLeastThisNumberOfEmptyNAndTnAndBelowMaxAmountOfNonDcds(FspAddresses& fspAddresses, unsigned int const requiredEmptyCount, unsigned int const lcgId) const;
     void copyFspWithAtLeastThisNumberOfEmptyNAndTnWithDliRestrictions(FspAddresses& fspAddresses, unsigned int const requiredEmptyCount, unsigned int const lcgId) const;
     void copyFspWithAtLeastThisNumberOfTnDcdsWithoutHsRachCfsWithDliRestrictions(FspAddresses& fspAddresses, unsigned int const lcgId) const;
-    NyquistAndTurboNyquistCount getNumberOfEmptyNAndTnOfFspAndLcg(unsigned int const fspAddress, unsigned int const lcgId) const;
-    NyquistAndTurboNyquistCount getNumberOfNAndTnWithoutCfsOfFspAndLcg(unsigned int const fspAddress, unsigned int const lcgId) const;
+    NyquistAndTurboNyquistCount getNumberOfEmptyNAndTnOfFspAndLcg(unsigned int const fspAddress, unsigned int const lcgId) const;    NyquistAndTurboNyquistCount getNumberOfNAndTnWithoutCfsOfFspAndLcg(unsigned int const fspAddress, unsigned int const lcgId) const;
     NyquistAndTurboNyquistCount getNumberOfEmptyNAndTnOfLcg(unsigned int const lcgId) const;
     NyquistAndTurboNyquistCount getNumberOfEmptyNAndTnInMsmOfLcg(unsigned int const lcgId) const;
-    unsigned int getNumberOfNonDcdsOfFsp(unsigned int const fspAddress) const;
+    unsigned int getNumberOfNonDcdsInFsp(unsigned int const fspAddress) const;
     unsigned int getNumberOfFreeDliPoolsOfFsp(unsigned int const fspAddress) const;
 
-    void copyFspAddressesThatSatisfiesThisCondition(FspAddresses & fspAddresses, FspBooleanCondition const& condition) const;
-    void sortFspAddressesBasedOnCondition(FspAddresses & fspAddresses, FspComparisonCondition const& condition) const;
+    void copyFspAddressesThatSatisfiesThisCondition(FspAddresses & fspAddresses, FspBooleanCondition const& condition) const;    void sortFspAddressesBasedOnCondition(FspAddresses & fspAddresses, FspComparisonCondition const& condition) const;
 
     void copyDspAddressesThatSatisfiesThisCondition(DspAddresses & dspAddressesForLcgInFsp, DspBooleanCondition const& condition) const;
     void copyDspAddressesInFspThatSatisfiesThisCondition(DspAddresses & dspAddressesForLcgInFsp, unsigned int fspAddress, DspBooleanCondition const& condition) const;
@@ -135,14 +133,13 @@ private:
     void setDliIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic, unsigned int const dliPool);
     void setAsNbicIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic);
 
-    unsigned int getNumberOfPicPoolsForLcg(unsigned int const lcgId) const;
+    unsigned int getNumberOfUnallocatedPicPoolsForLcg(unsigned int const lcgId) const;
 
-
-    std::map<unsigned int, bool> m_lcgToValidPicPools;
     bool m_isHibernationCommissioned;
+    unsigned int m_maxAmountOfNonDcdsPerFsp;
+    std::map<unsigned int, bool> m_lcgToUnallocatedPicPools;
     HardwareConfiguration& m_hardwareConfigurationReference;
     AddressToDspMap& m_addressToDspMap;
-    AddressToFspMap& m_addressToFspMap;
-};
+    AddressToFspMap& m_addressToFspMap;};
 
 }

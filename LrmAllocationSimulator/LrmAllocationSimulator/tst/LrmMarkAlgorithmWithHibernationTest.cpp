@@ -12,12 +12,11 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgTwoFspTwoCcdMcd)
 
     hardwareConfiguration.changeConfigurationToTwoFspTwoLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-
     hardwareConfiguration.printDspAllocations();
 
     ASSERT_TRUE(resultCcdMcdLcg1.isSelectionSuccessful);
@@ -35,12 +34,11 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgTwoFspTwoCcdMcdPic)
 
     hardwareConfiguration.changeConfigurationToTwoFspTwoLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
@@ -70,12 +68,11 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgTwoFspTwoCcdNbicMcdPic)
 
     hardwareConfiguration.changeConfigurationToTwoFspTwoLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
@@ -105,13 +102,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgTwoFspThreeCcdMcdPic)
 
     hardwareConfiguration.changeConfigurationToTwoFspThreeLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
     SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
@@ -149,13 +145,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgTwoFspThreeCcdNbicMcdPic)
 
     hardwareConfiguration.changeConfigurationToTwoFspThreeLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
     SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
@@ -191,14 +186,13 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgTwoFspFourCcdMcdPic)
 
     hardwareConfiguration.changeConfigurationToTwoFspFourLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
-    lrm.setNumberOfPicPoolsPerLcg(4, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdMcdForLcgIdAccordingToMark(4));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
@@ -246,14 +240,13 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgTwoFspFourCcdNbicMcdPic)
 
     hardwareConfiguration.changeConfigurationToTwoFspFourLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
-    lrm.setNumberOfPicPoolsPerLcg(4, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(4));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
@@ -277,16 +270,16 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgTwoFspFourCcdNbicMcdPic)
     EXPECT_EQ(0x1350u, resultCcdMcdLcg3.mcdAddress);
     EXPECT_EQ(2u, resultCcdMcdLcg3.dliPool);
     EXPECT_TRUE(resultCcdMcdLcg3.isNbicAllocated);
-    ASSERT_FALSE(resultCcdMcdLcg4.isSelectionSuccessful);
-    EXPECT_EQ(0x1250u, resultCcdMcdLcg4.ccdAddress);
+    ASSERT_TRUE(resultCcdMcdLcg4.isSelectionSuccessful);
+    EXPECT_EQ(0x1370u, resultCcdMcdLcg4.ccdAddress);
+    EXPECT_EQ(0x1250u, resultCcdMcdLcg4.mcdAddress);
+    EXPECT_EQ(3u, resultCcdMcdLcg4.dliPool);
+    EXPECT_TRUE(resultCcdMcdLcg4.isNbicAllocated);
     ASSERT_FALSE(resultPicLcg1.isSelectionSuccessful);
     ASSERT_FALSE(resultPicLcg2.isSelectionSuccessful);
-    ASSERT_TRUE(resultPicLcg3.isSelectionSuccessful);
-    EXPECT_EQ(0x1280u, resultPicLcg3.address);
-    EXPECT_EQ(3u, resultPicLcg3.dliPool);
+    ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
     ASSERT_FALSE(resultPicLcg4.isSelectionSuccessful);
 }
-
 TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgThreeFspTwoCcdMcdPic)
 {
     HardwareConfiguration hardwareConfiguration;
@@ -294,12 +287,11 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgThreeFspTwoCcdMcdPic)
 
     hardwareConfiguration.changeConfigurationToThreeFspTwoLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
@@ -329,12 +321,11 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgThreeFspTwoCcdNbicMcdPic)
 
     hardwareConfiguration.changeConfigurationToThreeFspTwoLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
@@ -364,13 +355,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgThreeFspThreeCcdMcdPic)
 
     hardwareConfiguration.changeConfigurationToThreeFspThreeLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
     SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
@@ -410,13 +400,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgThreeFspThreeCcdNbicMcdPic)
 
     hardwareConfiguration.changeConfigurationToThreeFspThreeLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
     SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
@@ -456,14 +445,13 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgThreeFspFourCcdMcdPic)
 
     hardwareConfiguration.changeConfigurationToThreeFspFourLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
-    lrm.setNumberOfPicPoolsPerLcg(4, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdMcdForLcgIdAccordingToMark(4));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
@@ -513,14 +501,13 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgThreeFspFourCcdNbicMcdPic)
 
     hardwareConfiguration.changeConfigurationToThreeFspFourLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
-    lrm.setNumberOfPicPoolsPerLcg(4, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(4));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
@@ -562,12 +549,11 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFourFspTwoCcdMcdPic)
 
     hardwareConfiguration.changeConfigurationToFourFspTwoLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
@@ -597,12 +583,11 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFourFspTwoCcdNbicMcdPic)
 
     hardwareConfiguration.changeConfigurationToFourFspTwoLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
@@ -632,13 +617,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFourFspThreeCcdMcdPic)
 
     hardwareConfiguration.changeConfigurationToFourFspThreeLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
     SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
@@ -678,13 +662,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFourFspThreeCcdNbicMcdPic)
 
     hardwareConfiguration.changeConfigurationToFourFspThreeLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
     SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
@@ -720,14 +703,13 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFourFspFourCcdNMcdPic)
 
     hardwareConfiguration.changeConfigurationToFourFspFourLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
-    lrm.setNumberOfPicPoolsPerLcg(4, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdMcdForLcgIdAccordingToMark(4));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
@@ -780,14 +762,13 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFourFspFourCcdNbicMcdPic)
 
     hardwareConfiguration.changeConfigurationToFourFspFourLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
-    lrm.setNumberOfPicPoolsPerLcg(4, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(4));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
@@ -829,12 +810,11 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFiveFspTwoCcdMcdPic)
 
     hardwareConfiguration.changeConfigurationToFiveFspTwoLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
@@ -864,12 +844,11 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFiveFspTwoCcdNbicMcdPic)
 
     hardwareConfiguration.changeConfigurationToFiveFspTwoLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
@@ -880,18 +859,17 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFiveFspTwoCcdNbicMcdPic)
     EXPECT_EQ(1u, resultCcdMcdLcg1.dliPool);
     EXPECT_TRUE(resultCcdMcdLcg1.isNbicAllocated);
     ASSERT_TRUE(resultCcdMcdLcg2.isSelectionSuccessful);
-    EXPECT_EQ(0x1260u, resultCcdMcdLcg2.ccdAddress);
-    EXPECT_EQ(0x1340u, resultCcdMcdLcg2.mcdAddress);
-    EXPECT_EQ(4u, resultCcdMcdLcg2.dliPool);
+    EXPECT_EQ(0x2230u, resultCcdMcdLcg2.ccdAddress);
+    EXPECT_EQ(0x1260u, resultCcdMcdLcg2.mcdAddress);
+    EXPECT_EQ(3u, resultCcdMcdLcg2.dliPool);
     EXPECT_TRUE(resultCcdMcdLcg2.isNbicAllocated);
     ASSERT_TRUE(resultPicLcg1.isSelectionSuccessful);
-    EXPECT_EQ(0x1240u, resultPicLcg1.address);
-    EXPECT_EQ(3u, resultPicLcg1.dliPool);
+    EXPECT_EQ(0x1440u, resultPicLcg1.address);
+    EXPECT_EQ(4u, resultPicLcg1.dliPool);
     ASSERT_TRUE(resultPicLcg2.isSelectionSuccessful);
-    EXPECT_EQ(0x1380u, resultPicLcg2.address);
+    EXPECT_EQ(0x1340u, resultPicLcg2.address);
     EXPECT_EQ(2u, resultPicLcg2.dliPool);
 }
-
 TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFiveFspThreeCcdMcdPic)
 {
     HardwareConfiguration hardwareConfiguration;
@@ -899,13 +877,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFiveFspThreeCcdMcdPic)
 
     hardwareConfiguration.changeConfigurationToFiveFspThreeLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
     SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
@@ -945,13 +922,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFiveFspThreeCcdNbicMcdPic)
 
     hardwareConfiguration.changeConfigurationToFiveFspThreeLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
     SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
@@ -987,14 +963,13 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFiveFspFourCcdMcdPic)
 
     hardwareConfiguration.changeConfigurationToFiveFspFourLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
-    lrm.setNumberOfPicPoolsPerLcg(4, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdMcdForLcgIdAccordingToMark(4));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
@@ -1044,14 +1019,13 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFiveFspFourCcdNbicMcdPic)
 
     hardwareConfiguration.changeConfigurationToFiveFspFourLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
-    lrm.setNumberOfPicPoolsPerLcg(4, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(4));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
@@ -1093,12 +1067,11 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgSixFspTwoCcdNMcdPic)
 
     hardwareConfiguration.changeConfigurationToSixFspTwoLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
@@ -1128,12 +1101,11 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgSixFspTwoCcdNbicMcdPic)
 
     hardwareConfiguration.changeConfigurationToSixFspTwoLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
@@ -1163,13 +1135,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgSixFspThreeCcdNMcdPic)
 
     hardwareConfiguration.changeConfigurationToSixFspThreeLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
     SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
@@ -1209,13 +1180,12 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgSixFspThreeCcdNbicMcdPic)
 
     hardwareConfiguration.changeConfigurationToSixFspThreeLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
     SelectionDspResult resultPicLcg3(lrm.allocatePicForLcgIdAccordingToMark(3));
@@ -1251,14 +1221,13 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgSixFspFourCcdMcdPic)
 
     hardwareConfiguration.changeConfigurationToSixFspFourLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
-    lrm.setNumberOfPicPoolsPerLcg(4, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdMcdForLcgIdAccordingToMark(3));
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdMcdForLcgIdAccordingToMark(4));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
@@ -1308,14 +1277,13 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgSixFspFourCcdNbicMcdPic)
 
     hardwareConfiguration.changeConfigurationToSixFspFourLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
-    lrm.setNumberOfPicPoolsPerLcg(3, 1);
-    lrm.setNumberOfPicPoolsPerLcg(4, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(3, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(4, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResultForCcdAndMcd resultCcdMcdLcg3(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(3));
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg4(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(4));
     SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
@@ -1357,11 +1325,10 @@ TEST(LrmMarkAlgorithmWithHibenationTest, SharedLcgWithOneDspCcdNbicMcdWithoutPic
 
     hardwareConfiguration.changeConfigurationToSharedLcgWithOneDspInMsm();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResultForCcdAndMcd resultCcdMcdLcg2(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -1370,11 +1337,14 @@ TEST(LrmMarkAlgorithmWithHibenationTest, SharedLcgWithOneDspCcdNbicMcdWithoutPic
     EXPECT_EQ(0x1250u, resultCcdMcdLcg1.mcdAddress);
     EXPECT_EQ(1u, resultCcdMcdLcg1.dliPool);
     EXPECT_TRUE(resultCcdMcdLcg1.isNbicAllocated);
-    ASSERT_FALSE(resultCcdMcdLcg2.isSelectionSuccessful);
+    ASSERT_TRUE(resultCcdMcdLcg2.isSelectionSuccessful);
+    EXPECT_EQ(0x2230u, resultCcdMcdLcg2.ccdAddress);
+    EXPECT_EQ(0x1260u, resultCcdMcdLcg2.mcdAddress);
+    EXPECT_EQ(3u, resultCcdMcdLcg2.dliPool);
+    EXPECT_TRUE(resultCcdMcdLcg1.isNbicAllocated);
     ASSERT_TRUE(resultPicLcg1.isSelectionSuccessful);
     EXPECT_EQ(0x1340u, resultPicLcg1.address);
-    EXPECT_EQ(4u, resultPicLcg1.dliPool);
-}
+    EXPECT_EQ(4u, resultPicLcg1.dliPool);}
 
 TEST(LrmMarkAlgorithmWithHibenationTest, SharedLcgWithOneDspNbicMcdWithoutPicInMsm)
 {
@@ -1383,11 +1353,10 @@ TEST(LrmMarkAlgorithmWithHibenationTest, SharedLcgWithOneDspNbicMcdWithoutPicInM
 
     hardwareConfiguration.changeConfigurationToSharedLcgWithOneDspInMsm();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResult resultMcdLcg2(lrm.allocateNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult resultMcdLcg2(lrm.allocateNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
 
     hardwareConfiguration.printDspAllocations(2);
 
@@ -1412,12 +1381,11 @@ TEST(LrmMarkAlgorithmWithHibenationTest, SharedLcgWithOneDspNbicMcdWithPicInMsm)
 
     hardwareConfiguration.changeConfigurationToSharedLcgWithOneDspInMsm();
     lrm.setHibernationCommissioned(true);
-    lrm.setNumberOfPicPoolsPerLcg(1, 1);
-    lrm.setNumberOfPicPoolsPerLcg(2, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(1, 1);
+    lrm.setNumberOfUnallocatedPicPoolsPerLcg(2, 1);
 
     SelectionDspResultForCcdAndMcd resultCcdMcdLcg1(lrm.allocateCcdNbicMcdForLcgIdAccordingToMark(1));
-    SelectionDspResult resultMcdLcg2(lrm.allocateNbicMcdForLcgIdAccordingToMark(2));
-    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
+    SelectionDspResult resultMcdLcg2(lrm.allocateNbicMcdForLcgIdAccordingToMark(2));    SelectionDspResult resultPicLcg1(lrm.allocatePicForLcgIdAccordingToMark(1));
     SelectionDspResult resultPicLcg2(lrm.allocatePicForLcgIdAccordingToMark(2));
 
     hardwareConfiguration.printDspAllocations(2);
