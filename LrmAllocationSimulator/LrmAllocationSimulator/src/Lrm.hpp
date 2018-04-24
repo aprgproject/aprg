@@ -5,20 +5,14 @@
 #include <functional>
 #include <map>
 #include <set>
+#include <vector>
 
 namespace alba
 {
 
-using DspBooleanCondition = std::function<bool(Dsp const&)>;
-using DspComparisonCondition = std::function<bool(Dsp const&, Dsp const&)>;
-using FspBooleanCondition = std::function<bool(Fsp const&)>;
-using FspComparisonCondition = std::function<bool(Fsp const&, Fsp const&)>;
-using DliPools = std::set<unsigned int>;
-
 struct NyquistAndTurboNyquistCount
 {
-    unsigned int numberOfNyquists;
-    unsigned int numberOfTurboNyquists;
+    unsigned int numberOfNyquists;    unsigned int numberOfTurboNyquists;
 };
 
 struct SelectionDspResult
@@ -40,10 +34,26 @@ struct SelectionDspResultForCcdAndMcd
     unsigned int dliPool;
 };
 
+struct FspPairDetails
+{
+    FspPairDetails(unsigned int const firstFspAddress, unsigned int const secondFspAddress, unsigned int const priority);
+    unsigned int firstFspAddress;
+    unsigned int secondFspAddress;
+    unsigned int priority;
+};
+
+using FspPairsDetails = std::vector<FspPairDetails>;
+using DspBooleanCondition = std::function<bool(Dsp const&)>;
+using DspComparisonCondition = std::function<bool(Dsp const&, Dsp const&)>;
+using FspBooleanCondition = std::function<bool(Fsp const&)>;
+using FspComparisonCondition = std::function<bool(Fsp const&, Fsp const&)>;
+using FspPairDetailsComparisonCondition = std::function<bool(FspPairDetails const&, FspPairDetails const&)>;
+using FspPairDetailsCondition = std::function<bool(FspPairDetails const&)>;
+using DliPools = std::set<unsigned int>;
+
 class Lrm
 {
-public:
-    Lrm(HardwareConfiguration& hardwareConfiguration);
+public:    Lrm(HardwareConfiguration& hardwareConfiguration);
     void setHibernationCommissioned(bool const isHibernationCommissioned);
     void setNumberOfUnallocatedPicPoolsPerLcg(unsigned int const lcgId, unsigned int const numberOfPicPools);
     void clearLcgToUnallocatedPicPools(unsigned int const lcgId);
@@ -60,18 +70,19 @@ private:
     //MCD
     SelectionDspResult selectFspForEmptyDspForMcd(unsigned int const lcgId) const;
     void sortFspBasedPriorityForMcdSelection(FspAddresses& fspAddresses, unsigned int const lcgId) const;
+    void sortFspBasedPriorityForMcdSelection2(FspAddresses& fspAddresses, unsigned int const lcgId) const;
     void sortFspBasedPriorityForNbicMcdSelection(FspAddresses& fspAddresses, unsigned int const lcgId) const;
+    void sortFspBasedPriorityForNbicMcdSelection2(FspAddresses& fspAddresses, unsigned int const lcgId) const;
     unsigned int getPriorityBasedOnNAndTnCountForFspMcdSelection(Fsp const& fsp, unsigned int const lcgId) const;
     unsigned int getPriorityBasedSharedLcgFspMcdSelection(Fsp const& fsp, unsigned int const lcgId) const;
-    SelectionDspResult selectNonEmptyDspToClearForMcd(unsigned int const lcgId) const;
-    void removeNotNeededFspsForMcd(FspAddresses& fspAddresses, unsigned int const lcgId) const;
+    SelectionDspResult selectNonEmptyDspToClearForMcd(unsigned int const lcgId) const;    void removeNotNeededFspsForMcd(FspAddresses& fspAddresses, unsigned int const lcgId) const;
 
     //CCD+MCD
     FspAddresses selectFspsForCcdMcd(unsigned int const lcgId) const;
+    FspAddresses selectFspsForCcdMcd2(unsigned int const lcgId) const;
     void sortFspBasedPriorityForCcdMcdSelection(FspAddresses& fspAddresses, unsigned int const lcgId) const;
     unsigned int getPriorityBasedOnNAndTnCountForFspCcdMcdSelection(Fsp const& fsp, unsigned int const lcgId) const;
     void removeNotNeededFspsForCcdMcd(FspAddresses& fspAddresses, unsigned int const lcgId) const;
-
     //NBIC MCD
     SelectionDspResult selectFspForEmptyDspForNbicMcd(unsigned int const lcgId) const;
     void removeNotNeededFspsForNbicMcd(FspAddresses& fspAddresses, unsigned int const lcgId) const;
@@ -80,10 +91,10 @@ private:
 
     //CCD NBIC MCD
     FspAddresses selectFspsForCcdNbicMcd(unsigned int const lcgId) const;
+    FspAddresses selectFspsForCcdNbicMcd2(unsigned int const lcgId) const;
     void removeNotNeededFspsForCcdNbicMcd(FspAddresses& fspAddresses, unsigned int const lcgId) const;
 
-    //PIC
-    SelectionDspResult selectFspForPic(unsigned int const lcgId) const;
+    //PIC    SelectionDspResult selectFspForPic(unsigned int const lcgId) const;
     void sortFspBasedPriorityForPicSelection(FspAddresses& fspAddresses, unsigned int const lcgId) const;
     unsigned int getPriorityBasedSharedLcgTnInPicSelection(Fsp const& fsp, unsigned int const lcgId) const;
     unsigned int getPriorityBasedOnTnWithoutCfsForFspPicSelection(Fsp const& fsp, unsigned int const lcgId) const;
@@ -94,11 +105,10 @@ private:
     unsigned int getPriorityBasedOnLessUsersAndHsupaCfsForDsp(Dsp const& dsp) const;
     void saveNeededFspsForCcdOrMcdBasedOnNOrTn(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int& numberOfDspCcdAndMcd, FspAddresses const& fspAddresses, unsigned int const lcgId) const;
     void saveNeededFspsForCcdOrNbicMcdBasedOnNOrTnWithDliRestrictions(UniqueFspAddresses & neededUniqueFspAddresses, FspAddresses const& fspAddresses, unsigned int const lcgId, unsigned int const numberOfDspToAllocate) const;
-    bool isThereSpaceForTnForMcdOrCcdConsideringPic(unsigned int const fspAddress, unsigned int const lcgId) const;
+    bool isThereSpaceForTnForMcdOrCcdConsideringPic(unsigned int const fspAddress, unsigned int const numberOfMcdOrCcd, unsigned int const lcgId) const;
     SelectionDspResult selectEmptyDspPriotizingNyquistTypeAndAddressInFsp(unsigned int const lcgId, unsigned int const fspAddress) const;
     SelectionDspResult selectTnPriotizingLessUsersAndHsupaCfsInFsp(unsigned int const lcgId, unsigned int const fspAddress) const;
-    void copyFspWithAtLeastThisNumberOfEmptyNAndTnAndBelowMaxAmountOfNonDcds(FspAddresses& fspAddresses, unsigned int const requiredEmptyCount, unsigned int const lcgId) const;
-    void copyFspWithAtLeastThisNumberOfEmptyNAndTnWithDliRestrictions(FspAddresses& fspAddresses, unsigned int const requiredEmptyCount, unsigned int const lcgId) const;
+    void copyFspWithAtLeastThisNumberOfEmptyNAndTnAndBelowMaxAmountOfNonDcds(FspAddresses& fspAddresses, unsigned int const requiredEmptyCount, unsigned int const lcgId) const;    void copyFspWithAtLeastThisNumberOfEmptyNAndTnWithDliRestrictions(FspAddresses& fspAddresses, unsigned int const requiredEmptyCount, unsigned int const lcgId) const;
     void copyFspWithAtLeastThisNumberOfTnDcdsWithoutHsRachCfsWithDliRestrictions(FspAddresses& fspAddresses, unsigned int const lcgId) const;
     NyquistAndTurboNyquistCount getNumberOfEmptyNAndTnOfFspAndLcg(unsigned int const fspAddress, unsigned int const lcgId) const;
     NyquistAndTurboNyquistCount getNumberOfNAndTnWithoutCfsOfFspAndLcg(unsigned int const fspAddress, unsigned int const lcgId) const;
@@ -131,10 +141,18 @@ private:
     unsigned int getLeastConflictingDliPoolForThisDli(unsigned int const dliPool) const;
     bool canAFreeDliBeAllocatedInFsp(unsigned int const fspAddress, unsigned int const lcgId) const;
 
+    void copyAllFspPairs(FspPairsDetails & fspPairsDetails) const;
+    void sortFspPairsForCcdMcdSelection(FspPairsDetails & fspPairsDetails) const;
+    void removeFspPairsForCcdMcdSelection(FspPairsDetails & fspPairsDetails, unsigned int const lcgId) const;
+    void removeFspPairsForCcdNbicMcdSelection(FspPairsDetails & fspPairsDetails, unsigned int const lcgId) const;
+    void sortFspPairsBasedOnCondition(FspPairsDetails & fspPairsDetails, FspPairDetailsComparisonCondition const& condition) const;
+    void removeFspPairsBasedOnCondition(FspPairsDetails & fspPairsDetails, FspPairDetailsCondition const& condition) const;
+    void updatePriorityForAllFspPairs(FspPairsDetails & fspPairsDetail, unsigned int const lcgId) const;
+    unsigned int getPriorityForFspPair(FspPairDetails const& fspPairDetails, unsigned int const lcgId) const;
+
     void changeModeForCcdAndUpdateDspDetails(SelectionDspResultForCcdAndMcd const& selectionDspResultForCcdAndMcd);
     void changeModeForMcdAndUpdateDspDetails(SelectionDspResultForCcdAndMcd const& selectionDspResultForCcdAndMcd);
-    void changeModeAndUpdateDspDetails(SelectionDspResult const& selectionDspResult, DspMode const dspMode);
-    void changeMode(Dsp& dspToChange, DspMode const dspMode);
+    void changeModeAndUpdateDspDetails(SelectionDspResult const& selectionDspResult, DspMode const dspMode);    void changeMode(Dsp& dspToChange, DspMode const dspMode);
     void setDliIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic, unsigned int const dliPool);
     void setAsNbicIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic);
 
