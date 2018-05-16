@@ -99,11 +99,13 @@ void TextEdit::keyPressEvent(QKeyEvent *e)
         case Qt::Key_Return:
         case Qt::Key_Enter:
         {
-            QPlainTextEdit::keyPressEvent(e);
+            QString nextLine;
+            nextLine = QChar('\n');
+            textCursor().insertText(nextLine);
+            //QPlainTextEdit::keyPressEvent(e);
             QTextCursor updateCursor = textCursor();
 
-            // Auto-indent
-            if (_autoIndent)
+            // Auto-indent            if (_autoIndent)
             {
                 QTextBlock block          = updateCursor.block().previous();
                 QString    data           = block.text();
