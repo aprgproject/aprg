@@ -1,5 +1,7 @@
 #pragma once
 
+#include <User/AlbaDisplayTable.hpp>
+
 #include <map>
 #include <string>
 #include <vector>
@@ -114,13 +116,21 @@ public:
     void checkAllFiles();
     void saveDatabaseToFile(std::string const& path);
     void loadDatabaseFromFile(std::string const& path);
-    void loadOamTcomMessage();
-    void readStructureRecursion(std::string const& structureFileName);
+    void checkOamTcomTupcMessages();
+    void readDefiinitionFileFromStructureRecursively(std::string const& structureFileName);
     void readFile(std::string const& fileName);
+    void generateMessageTables() const;
+    void generateMessageTable(std::string const& messageName, std::ofstream & messageTableStrea) const;
+    void saveMessageTable(DisplayTable const& messageTable, std::ofstream & messageTableStream) const;
+    void saveMessageSection(std::string const& messageName, std::ofstream & messageTableStream) const;
+    void generateStructureForMessageTablesIfNeeded(std::string const& structureName, DisplayTable & messageTable, std::string const& indentionInType) const;
     std::string getFileFullPath(std::string const& fileName) const;
     ConstantDetails getConstantDetails(std::string const& constantName) const;
     std::string getMessageStructure(std::string const& messageName) const;
+    StructureDetails getStructureDetails(std::string const& structureName) const;
     ParameterDetails getParameterDetails(std::string const& structureName, std::string const& parameterName) const;
+    bool doesThisStructureAndParameterExists(std::string const& structureName, std::string const& parameterName) const;
+    bool doesThisStructureExists(std::string const& structureName) const;
     EnumParameterDetails getEnumParameterDetails(std::string const& enumName, std::string const& enumParameterName) const;
 
 private:

@@ -141,7 +141,8 @@ bool AlbaWindowsPathHandler::deleteDirectoryWithoutFilesAndDirectories()
 
 void AlbaWindowsPathHandler::deleteFilesInDirectory()
 {
-    set<string> listOfFiles;    set<string> listOfDirectories;
+    set<string> listOfFiles;
+    set<string> listOfDirectories;
     findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
     for(string const& file: listOfFiles)
     {
@@ -170,7 +171,8 @@ void AlbaWindowsPathHandler::deleteDirectoryWithFilesAndDirectories()
 
 bool AlbaWindowsPathHandler::copyToNewFile(string const& newFilePath)
 {
-    bool isSuccessful(false);    if(isFile())
+    bool isSuccessful(false);
+    if(isFile())
     {
         isSuccessful = (bool)CopyFile(getFullPath().c_str(), newFilePath.c_str(), 0);
         if(!isSuccessful)
@@ -185,6 +187,7 @@ bool AlbaWindowsPathHandler::copyToNewFile(string const& newFilePath)
     }
     return isSuccessful;
 }
+
 bool AlbaWindowsPathHandler::renameFile(string const& newFileName)
 {
     bool isSuccessful(false);
@@ -204,6 +207,7 @@ bool AlbaWindowsPathHandler::renameFile(string const& newFileName)
     }
     return isSuccessful;
 }
+
 bool AlbaWindowsPathHandler::renameImmediateDirectory(string const& newDirectoryName)
 {
     bool isSuccessful(false);
@@ -225,6 +229,7 @@ bool AlbaWindowsPathHandler::renameImmediateDirectory(string const& newDirectory
     }
     return isSuccessful;
 }
+
 void AlbaWindowsPathHandler::findFilesAndDirectoriesOneDepth(
         string const& wildCardSearch,
         set<string>& listOfFiles,

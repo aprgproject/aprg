@@ -467,7 +467,7 @@ void SackReader::loadDatabaseFromFile(std::string const& path)
     }
 }
 
-void SackReader::loadOamTcomMessage()
+void SackReader::checkOamTcomTupcMessages()
 {
     readFile("MessageId_OamAtm.sig");
     readFile("MessageId_OamTcom.sig");
@@ -479,12 +479,12 @@ void SackReader::loadOamTcomMessage()
         if(!pair.second.empty())
         {
             string structureFileName(pair.second+".h");
-            readStructureRecursion(structureFileName);
+            readDefiinitionFileFromStructureRecursively(structureFileName);
         }
     }
 }
 
-void SackReader::readStructureRecursion(string const& structureFileName)
+void SackReader::readDefiinitionFileFromStructureRecursively(string const& structureFileName)
 {
     ALBA_PRINT1(structureFileName);
     readFile(structureFileName);
@@ -495,7 +495,7 @@ void SackReader::readStructureRecursion(string const& structureFileName)
         {
             string structureFileNameInStructure(parameterPair.second.type+".h");
             ALBA_PRINT1(structureFileNameInStructure);
-            readStructureRecursion(structureFileNameInStructure);
+            readDefiinitionFileFromStructureRecursively(structureFileNameInStructure);
         }
     }
 
@@ -790,7 +790,10 @@ void SackReader::readFile(string const& fileName)
                 {
                     if(paramDescriptionState==1)
                     {
-                        m_structureNameToStructureDetailsMap[previousStructureName].parameters[parameterDetails.name].description = getStringWithoutRedundantWhiteSpace(partialString);
+                        if(doesThisStructureAndParameterExists(previousStructureName, parameterDetails.name))
+                        {
+                            m_structureNameToStructureDetailsMap[previousStructureName].parameters[parameterDetails.name].description = getStringWithoutRedundantWhiteSpace(partialString);
+                        }
                     }
                     else if(paramDescriptionState==2)
                     {
@@ -916,6 +919,139 @@ void SackReader::readFile(string const& fileName)
     }
 }
 
+void SackReader::generateMessageTables() const
+{
+    ofstream lyxOutputFileStream(R"(C:\APRG\SackReader\SackReader\TempFiles\MessageTables.txt)");
+    for(MessageNameToStructureNamePair const& structurePair : m_messageNameToStructureNameMap)
+    {
+        string messageName(structurePair.first);
+        if(!messageName.empty())
+        {
+            saveMessageSection(messageName, lyxOutputFileStream);
+            generateMessageTable(messageName, lyxOutputFileStream);
+        }
+    }
+}
+
+void SackReader::generateMessageTable(string const& messageName, ofstream & messageTableStream) const
+{
+    cout<<"Message: "<<messageName<<endl;
+    DisplayTable messageTable;
+    messageTable.setBorders("-"," | ");
+    messageTable.addRow();
+    messageTable.getLastRow().addCell("IE/Group Name");
+    messageTable.getLastRow().addCell("IE Type");
+    messageTable.getLastRow().addCell("Description");
+    generateStructureForMessageTablesIfNeeded(getMessageStructure(messageName), messageTable, "");
+    cout<<messageTable.drawOutput()<<endl;
+    saveMessageTable(messageTable, messageTableStream);
+}
+
+void SackReader::saveMessageTable(DisplayTable const& messageTable, ofstream & messageTableStream) const
+{
+    ifstream tableTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\table.txt)");
+    AlbaFileReader tableTemplateReader(tableTemplateStream);
+    while(tableTemplateReader.isNotFinished())
+    {
+        string tableTemplateLine(tableTemplateReader.getLine());
+        if(isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_REPLACE"))
+        {
+            for(unsigned int row=0; row<messageTable.getTotalRows(); row++)
+            {
+                ifstream tableRowTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\tableRow.txt)");
+                AlbaFileReader tableRowTemplateReader(tableRowTemplateStream);
+                while(tableRowTemplateReader.isNotFinished())
+                {
+                    string tableRowTemplateLine(tableRowTemplateReader.getLine());
+                    if(isStringFoundInsideTheOtherStringCaseSensitive(tableRowTemplateLine,"LYX_TABLE_ROW_REPLACE"))
+                    {
+                        for(unsigned int column=0; column<messageTable.getTotalColumns(); column++)
+                        {
+                            ifstream tableCellTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\tableCell.txt)");
+                            AlbaFileReader tableCellTemplateReader(tableCellTemplateStream);
+                            while(tableCellTemplateReader.isNotFinished())
+                            {
+                                string tableCellTemplateLine(tableCellTemplateReader.getLine());
+                                if(isStringFoundInsideTheOtherStringCaseSensitive(tableCellTemplateLine,"LYX_TABLE_CELL_REPLACE"))
+                                {
+                                    messageTableStream << messageTable.getCellConstReference(row, column).getText()<<endl;
+                                }
+                                else
+                                {
+                                    messageTableStream << tableCellTemplateLine << endl;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        messageTableStream << tableRowTemplateLine << endl;
+                    }
+                }
+            }
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_NUM_ROW_REPLACE")
+                || isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_NUM_COLUMN_REPLACE"))
+        {
+            NumberToStringConverter converter;
+            transformReplaceStringIfFound(tableTemplateLine, "LYX_TABLE_NUM_ROW_REPLACE", converter.convert(messageTable.getTotalRows()));
+            transformReplaceStringIfFound(tableTemplateLine, "LYX_TABLE_NUM_COLUMN_REPLACE", converter.convert(messageTable.getTotalColumns()));
+            messageTableStream << tableTemplateLine << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_COLUMN_REPLACE"))
+        {
+            for(unsigned int i=0; i<messageTable.getTotalColumns(); i++)
+            {
+                messageTableStream << tableTemplateLine << endl;
+            }
+        }
+        else
+        {
+            messageTableStream << tableTemplateLine << endl;
+        }
+    }
+}
+
+void SackReader::saveMessageSection(string const& messageName, ofstream & messageTableStream) const
+{
+    ifstream messageSectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\messageSection.txt)");
+    AlbaFileReader messageSectionReader(messageSectionStream);
+
+    while(messageSectionReader.isNotFinished())
+    {
+        string messageSectionLine(messageSectionReader.getLine());
+        if(isStringFoundInsideTheOtherStringCaseSensitive(messageSectionLine,"LYX_TABLE_MESSAGE_NAME_REPLACE")
+                || isStringFoundInsideTheOtherStringCaseSensitive(messageSectionLine,"LYX_TABLE_STRUCTURE_NAME_REPLACE"))
+        {
+            transformReplaceStringIfFound(messageSectionLine, "LYX_TABLE_MESSAGE_NAME_REPLACE", messageName);
+            transformReplaceStringIfFound(messageSectionLine, "LYX_TABLE_STRUCTURE_NAME_REPLACE", getMessageStructure(messageName));
+            messageTableStream << messageSectionLine << endl;
+        }
+        else
+        {
+            messageTableStream << messageSectionLine << endl;
+        }
+    }
+}
+
+
+void SackReader::generateStructureForMessageTablesIfNeeded(string const& structureName, DisplayTable & messageTable, string const& indentionInType) const
+{
+    if(doesThisStructureExists(structureName))
+    {
+        StructureDetails structureDetails(getStructureDetails(structureName));
+        for(StructureDetails::ParameterPair const& parameterPair : structureDetails.parameters)
+        {
+            messageTable.addRow();
+            messageTable.getLastRow().addCell(indentionInType+parameterPair.second.name);
+            messageTable.getLastRow().addCell(parameterPair.second.type);
+            //messageTable.getLastRow().addCell(parameterPair.second.descriptionFromUser);
+            messageTable.getLastRow().addCell(getStringWithFirstLetterCapital(parameterPair.second.description));
+            generateStructureForMessageTablesIfNeeded(parameterPair.second.type, messageTable, indentionInType+">");
+        }
+    }
+}
+
 string SackReader::getFileFullPath(string const& fileName) const
 {
     string result;
@@ -946,17 +1082,47 @@ string SackReader::getMessageStructure(string const& messageName) const
     return result;
 }
 
+StructureDetails SackReader::getStructureDetails(string const& structureName) const
+{
+    StructureDetails result;
+    if(m_structureNameToStructureDetailsMap.find(structureName)!=m_structureNameToStructureDetailsMap.cend())
+    {
+        result = m_structureNameToStructureDetailsMap.at(structureName);
+    }
+    return result;
+}
+
 ParameterDetails SackReader::getParameterDetails(string const& structureName, string const& parameterName) const
 {
     ParameterDetails result;
-    if(m_structureNameToStructureDetailsMap.find(structureName)!=m_structureNameToStructureDetailsMap.cend())
+    if(doesThisStructureAndParameterExists(structureName, parameterName))
+    {
+        result = m_structureNameToStructureDetailsMap.at(structureName).parameters.at(parameterName);
+    }
+    return result;
+}
+
+bool SackReader::doesThisStructureAndParameterExists(string const& structureName, string const& parameterName) const
+{
+    bool result(false);
+    if(doesThisStructureExists(structureName))
     {
         StructureDetails const & structureDetails = m_structureNameToStructureDetailsMap.at(structureName);
         StructureDetails::ParameterMap const & parameters(structureDetails.parameters);
         if(parameters.find(parameterName)!=parameters.cend())
         {
-            result = parameters.at(parameterName);
+            result=true;
         }
+    }
+    return result;
+}
+
+bool SackReader::doesThisStructureExists(string const& structureName) const
+{
+    bool result(false);
+    if(m_structureNameToStructureDetailsMap.find(structureName)!=m_structureNameToStructureDetailsMap.cend())
+    {
+        return true;
     }
     return result;
 }

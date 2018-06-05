@@ -1,6 +1,7 @@
 #include <SackReader.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace alba;
 using namespace std;
 
@@ -159,9 +160,14 @@ TEST(SackReaderTest, SaveAndLoadFile_EHspaMapping)
 TEST(RealTest, UpdateTrunkFiles)
 {
     SackReader sackReader(R"(D:\Branches\trunk\wbts_integration\I_Interface)");
-    //SackReader sackReader(R"(C:\APRG\SackReader\SackReader\SampleFiles)");
+
     //sackReader.checkAllFiles();
-    sackReader.loadDatabaseFromFile(R"(C:\APRG\SackReader\SackReader\TempFiles\Database_05_29_2018.txt)");
-    sackReader.loadOamTcomMessage();
-    sackReader.saveDatabaseToFile(R"(C:\APRG\SackReader\SackReader\TempFiles\Database_05_30_2018.txt)");
+    sackReader.loadDatabaseFromFile(R"(C:\APRG\SackReader\SackReader\TempFiles\Database_05_31_2018.txt)");
+
+    sackReader.checkOamTcomTupcMessages();
+
+    sackReader.generateMessageTables();
+
+    //sackReader.saveDatabaseToFile(R"(C:\APRG\SackReader\SackReader\TempFiles\Database_05_31_2018.txt)");
 }
+

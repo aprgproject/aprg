@@ -105,7 +105,8 @@ void TextEdit::keyPressEvent(QKeyEvent *e)
             //QPlainTextEdit::keyPressEvent(e);
             QTextCursor updateCursor = textCursor();
 
-            // Auto-indent            if (_autoIndent)
+            // Auto-indent
+            if (_autoIndent)
             {
                 QTextBlock block          = updateCursor.block().previous();
                 QString    data           = block.text();
