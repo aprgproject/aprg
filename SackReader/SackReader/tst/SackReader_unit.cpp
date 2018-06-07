@@ -137,10 +137,29 @@ TEST(SackReaderTest, ReadFile_EHspaMapping)
     sackReader.saveDatabaseToFile(R"(C:\APRG\SackReader\SackReader\ReadFile_EHspaMapping.txt)");
 }
 
-TEST(SackReaderTest, SaveAndLoadFile_EHspaMapping)
+TEST(SackReaderTest, EControlUnitType)
 {
     SackReader sackReader(R"(C:\APRG\SackReader\SackReader\SampleFiles)");
     sackReader.checkAllFiles();
+    sackReader.readFile("EControlUnitType.h");
+
+    EnumParameterDetails details(sackReader.getEnumParameterDetails("EControlUnitType", "EControlUnitType_Fcm"));
+    EXPECT_EQ("EControlUnitType_Fcm", details.name);
+    EXPECT_EQ("1", details.value);
+    EXPECT_EQ("FCM type if Flexi rel 1 platform is used", details.description);
+
+    details = sackReader.getEnumParameterDetails("EControlUnitType", "EControlUnitType_Wspf");
+    EXPECT_EQ("EControlUnitType_Wspf", details.name);
+    EXPECT_EQ("5", details.value);
+    EXPECT_EQ("if EUBB WSPF is control unit", details.description);
+
+    sackReader.saveDatabaseToFile(R"(C:\APRG\SackReader\SackReader\ReadFile_EHspaMapping.txt)");
+}
+
+
+TEST(SackReaderTest, SaveAndLoadFile_EHspaMapping)
+{
+    SackReader sackReader(R"(C:\APRG\SackReader\SackReader\SampleFiles)");    sackReader.checkAllFiles();
     sackReader.readFile("EHspaMapping.h");
     sackReader.saveDatabaseToFile(R"(C:\APRG\SackReader\SackReader\TempFiles\ReadFile_EHspaMapping.txt)");
     SackReader sackReader2(R"(C:\APRG\SackReader\SackReader\SampleFiles)");
@@ -162,12 +181,14 @@ TEST(RealTest, UpdateTrunkFiles)
     SackReader sackReader(R"(D:\Branches\trunk\wbts_integration\I_Interface)");
 
     //sackReader.checkAllFiles();
-    sackReader.loadDatabaseFromFile(R"(C:\APRG\SackReader\SackReader\TempFiles\Database_05_31_2018.txt)");
+    sackReader.loadDatabaseFromFile(R"(C:\APRG\SackReader\SackReader\TempFiles\Database_06_07_2018.txt)");
+    sackReader.loadMessagesToGenerate(R"(D:\Specifications\OAM-TCOM-IFS\MessagesToGenerate.txt)");
+    sackReader.loadDescriptionToAdd(R"(D:\Specifications\OAM-TCOM-IFS\DescriptionsToAdd.txt)");
 
     sackReader.checkOamTcomTupcMessages();
+    sackReader.performHacks();
 
-    sackReader.generateMessageTables();
+    sackReader.generateLyxDocument(R"(D:\Specifications\OAM-TCOM-IFS\OAM_CPLANE_IFS.lyx)", R"(D:\Specifications\OAM-TCOM-IFS\OAM_CPLANE_IFS_Final.lyx)");
 
-    //sackReader.saveDatabaseToFile(R"(C:\APRG\SackReader\SackReader\TempFiles\Database_05_31_2018.txt)");
+    //sackReader.saveDatabaseToFile(R"(C:\APRG\SackReader\SackReader\TempFiles\Database_06_07_2018.txt)");
 }
-

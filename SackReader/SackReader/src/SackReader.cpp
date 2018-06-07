@@ -4,8 +4,8 @@
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 #include <String/AlbaStringHelper.hpp>
 
+#include <algorithm>
 #include <fstream>
-
 
 #include <Debug/AlbaDebug.hpp>
 
@@ -257,13 +257,18 @@ ostream& operator<<(ostream & out, StructureDetails const& structureDetails)
         out << structureDetails.name << endl;
     }
     out << structureDetails.parameters.size() << endl;
-    for(std::pair<std::string, ParameterDetails> parameter : structureDetails.parameters)
+    for(std::pair<std::string, ParameterDetails> const& parameter : structureDetails.parameters)
     {
         out << parameter.second << endl;
     }
+    out << structureDetails.parametersWithCorrectOrder.size() << endl;
+    for(std::string const& parameterName : structureDetails.parametersWithCorrectOrder)
+    {
+        out << parameterName << endl;
+    }
+
     return out;
 }
-
 istream& operator>>(istream & in, StructureDetails& structureDetails)
 {
     bool isExisting(false);
@@ -281,9 +286,16 @@ istream& operator>>(istream & in, StructureDetails& structureDetails)
         in >> parameterDetails;
         structureDetails.parameters.emplace(parameterDetails.name, parameterDetails);
     }
+    in >> size;
+    for(unsigned int i=0; i<size; i++)
+    {
+        string parameterName;
+        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
+        getline(in, parameterName);
+        structureDetails.parametersWithCorrectOrder.emplace_back(parameterName);
+    }
     return in;
 }
-
 SackReader::SackReader(string const& path)
     : m_path(path)
 {
@@ -471,38 +483,46 @@ void SackReader::checkOamTcomTupcMessages()
 {
     readFile("MessageId_OamAtm.sig");
     readFile("MessageId_OamTcom.sig");
+    readFile("MessageId_TassuTtm.sig");
+    readFile("MessageId_OamFault.h");
+    readFile("MessageId_Platform.h");
     readFile("Oam_Atm.h");
     readFile("oam_tcom.h");
-
+    readFile("Oam_Tcom_TestModelService.h");
+    readFile("Oam_Tcom_LoopTestService.h");
+    readFile("tassu_ttm.h");
+    readFile("SFaultInd.h");
+    readFile("SModeChangeReq.h");
+    readFile("SModeChangeResp.h");
     for(MessageNameToStructureNamePair const& pair: m_messageNameToStructureNameMap)
     {
         if(!pair.second.empty())
         {
             string structureFileName(pair.second+".h");
-            readDefiinitionFileFromStructureRecursively(structureFileName);
+            readDefinitionFileFromStructureRecursively(structureFileName);
         }
     }
 }
 
-void SackReader::readDefiinitionFileFromStructureRecursively(string const& structureFileName)
+void SackReader::readDefinitionFileFromStructureRecursively(string const& structureFileName)
 {
-    ALBA_PRINT1(structureFileName);
     readFile(structureFileName);
     AlbaLocalPathHandler pathHandler(structureFileName);
-    for(StructureDetails::ParameterPair const& parameterPair: m_structureNameToStructureDetailsMap[pathHandler.getFilenameOnly()].parameters)
+    string structureName(pathHandler.getFilenameOnly());
+    if(doesThisStructureExists(structureName))
     {
-        if(!parameterPair.second.type.empty())
+        for(StructureDetails::ParameterPair const& parameterPair: m_structureNameToStructureDetailsMap[structureName].parameters)
         {
-            string structureFileNameInStructure(parameterPair.second.type+".h");
-            ALBA_PRINT1(structureFileNameInStructure);
-            readDefiinitionFileFromStructureRecursively(structureFileNameInStructure);
+            if(!parameterPair.second.type.empty())
+            {
+                string structureFileNameInStructure(parameterPair.second.type+".h");
+                readDefinitionFileFromStructureRecursively(structureFileNameInStructure);
+            }
         }
     }
-
 }
 
-void SackReader::readFile(string const& fileName)
-{
+void SackReader::readFile(string const& fileName){
     //this should be a class
 
     string fileFullPath(getFileFullPath(fileName));
@@ -513,11 +533,10 @@ void SackReader::readFile(string const& fileName)
     unsigned int innerState=0;
     unsigned int paramDescriptionState=0;
     string partialString;
-    bool isSigFile = fileFullPathHandler.getExtension() == "sig";
+    bool isMessageIdFile = isStringFoundInsideTheOtherStringNotCaseSensitive(fileFullPathHandler.getFilenameOnly(), "MessageId_");
     ConstantDetails commentDetails;
     StructureDetails structureDetails;
-    ParameterDetails parameterDetails;
-    EnumDetails enumDetails;
+    ParameterDetails parameterDetails;    EnumDetails enumDetails;
     EnumParameterDetails enumParameterDetails;
     unsigned int commentState=0;
     string arraySize;
@@ -592,11 +611,10 @@ void SackReader::readFile(string const& fileName)
             {
                 if(token == "#define" && isNotInComment)
                 {
-                    if(isSigFile)
+                    if(isMessageIdFile)
                     {
                         state=3;
-                    }
-                    else
+                    }                    else
                     {
                         state=1;
                     }
@@ -722,11 +740,10 @@ void SackReader::readFile(string const& fileName)
                     {
                         if("MESSAGEHEADER" == token)
                         {
-                            structureDetails.isMessage = true;
+                            m_structureNameToStructureDetailsMap[structureDetails.name].isMessage = true;
                             break;
                         }
-                        else if("}" == token)
-                        {
+                        else if("}" == token)                        {
                             previousStructureName=structureDetails.name;
                             structureDetails.clear();
                             state = 0;
@@ -737,10 +754,13 @@ void SackReader::readFile(string const& fileName)
                             innerState=2;
                             if(!parameterDetails.name.empty())
                             {
+                                if(!doesThisStructureAndParameterExistsInVector(structureDetails.name, parameterDetails.name))
+                                {
+                                    m_structureNameToStructureDetailsMap[structureDetails.name].parametersWithCorrectOrder.emplace_back(parameterDetails.name);
+                                }
                                 m_structureNameToStructureDetailsMap[structureDetails.name].parameters[parameterDetails.name].name = parameterDetails.name;
                                 m_structureNameToStructureDetailsMap[structureDetails.name].parameters[parameterDetails.name].type = parameterDetails.type;
-                                if(!arraySize.empty())
-                                {
+                                if(!arraySize.empty())                                {
                                     m_structureNameToStructureDetailsMap[structureDetails.name].parameters[parameterDetails.name].isAnArray = true;
                                     m_structureNameToStructureDetailsMap[structureDetails.name].parameters[parameterDetails.name].arraySize = arraySize;
                                     arraySize.clear();
@@ -797,11 +817,18 @@ void SackReader::readFile(string const& fileName)
                     }
                     else if(paramDescriptionState==2)
                     {
-                        m_enumNameToEnumDetailsMap[previousEnumName].parameters[parameterDetails.name].description = getStringWithoutRedundantWhiteSpace(partialString);
+                        if(doesThisEnumAndParameterExists(previousEnumName, parameterDetails.name))
+                        {
+                            m_enumNameToEnumDetailsMap[previousEnumName].parameters[parameterDetails.name].description = getStringWithoutRedundantWhiteSpace(partialString);
+                        }
+                        string anotherParameterName = previousEnumName+"_"+parameterDetails.name;
+                        if(doesThisEnumAndParameterExists(previousEnumName, anotherParameterName))
+                        {
+                            m_enumNameToEnumDetailsMap[previousEnumName].parameters[anotherParameterName].description = getStringWithoutRedundantWhiteSpace(partialString);
+                        }
                     }
 
-                    partialString.clear();
-                    innerState=0;
+                    partialString.clear();                    innerState=0;
                     if(token == "Additional")
                     {
                         paramDescriptionState=0;
@@ -919,139 +946,411 @@ void SackReader::readFile(string const& fileName)
     }
 }
 
-void SackReader::generateMessageTables() const
+void SackReader::saveSubsection(string const& subsectionName, ofstream & lyxOutputFileStream) const
 {
-    ofstream lyxOutputFileStream(R"(C:\APRG\SackReader\SackReader\TempFiles\MessageTables.txt)");
-    for(MessageNameToStructureNamePair const& structurePair : m_messageNameToStructureNameMap)
+    ifstream subsectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\Subsection.txt)");
+    AlbaFileReader subsectionReader(subsectionStream);
+
+    while(subsectionReader.isNotFinished())
     {
-        string messageName(structurePair.first);
-        if(!messageName.empty())
+        string subsectionLine(subsectionReader.getLine());
+        if(isStringFoundInsideTheOtherStringCaseSensitive(subsectionLine,"LYX_SUBSECTION_NAME_REPLACE"))
         {
-            saveMessageSection(messageName, lyxOutputFileStream);
-            generateMessageTable(messageName, lyxOutputFileStream);
+            lyxOutputFileStream << subsectionName << endl;
+        }
+        else
+        {
+            lyxOutputFileStream << subsectionLine << endl;
         }
     }
 }
 
-void SackReader::generateMessageTable(string const& messageName, ofstream & messageTableStream) const
+void SackReader::saveMessageDefinitions(ofstream & lyxOutputFileStream)
 {
-    cout<<"Message: "<<messageName<<endl;
+    saveSubsection("Message Definitions", lyxOutputFileStream);
+    for(string const& messageName : m_messagesToGenerate)
+    {
+        saveMessageDefinitionSubsubsection(messageName, lyxOutputFileStream);
+    }
+}
+
+void SackReader::saveStructureDefinitions(ofstream & lyxOutputFileStream)
+{
+    saveSubsection("Structure Definitions", lyxOutputFileStream);
+    for(StructureNameToStructureDetailsPair const& pair : m_structureNameToStructureDetailsMap)
+    {
+        if(!pair.second.isMessage && pair.second.isUsedInIfs)
+        {
+            saveStructureDefinitionSubsubsection(pair.first, lyxOutputFileStream);
+        }
+    }
+}
+
+void SackReader::saveEnumDefinitions(ofstream & lyxOutputFileStream)
+{
+    saveSubsection("Enum Definitions", lyxOutputFileStream);
+    for(EnumNameToEnumDetailsPair const& pair : m_enumNameToEnumDetailsMap)
+    {
+        if(pair.second.isUsedInIfs)
+        {
+            saveEnumDefinitionSubsubsection(pair.first, lyxOutputFileStream);
+        }
+    }
+}
+
+void SackReader::saveMessageDefinitionSubsubsection(string const& messageName, ofstream & messageDefinitionsStream)
+{
+    ifstream messageSubsubsectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\MessageSubsubsection.txt)");
+    AlbaFileReader messageSubsubsectionReader(messageSubsubsectionStream);
+
+    while(messageSubsubsectionReader.isNotFinished())
+    {
+        string messageSubsubsectionLine(messageSubsubsectionReader.getLine());
+        if(isStringFoundInsideTheOtherStringCaseSensitive(messageSubsubsectionLine,"LYX_TABLE_MESSAGE_NAME_REPLACE"))
+        {
+            transformReplaceStringIfFound(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_NAME_REPLACE", messageName);
+            messageDefinitionsStream << messageSubsubsectionLine << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(messageSubsubsectionLine,"LYX_TABLE_MESSAGE_STRUCTURE_NAME_REPLACE"))
+        {
+            transformReplaceStringIfFound(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_STRUCTURE_NAME_REPLACE", getMessageStructure(messageName));
+            messageDefinitionsStream << messageSubsubsectionLine << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(messageSubsubsectionLine,"LYX_TABLE_REPLACE"))
+        {
+            saveMessageTable(messageName, messageDefinitionsStream);
+        }
+        else
+        {
+            messageDefinitionsStream << messageSubsubsectionLine << endl;
+        }
+    }
+}
+
+void SackReader::saveStructureDefinitionSubsubsection(string const& structureName, ofstream & structureDefinitionsStream)
+{
+    ifstream structureSubsubsectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\StructureSubsubsection.txt)");
+    AlbaFileReader structureSubsubsectionReader(structureSubsubsectionStream);
+
+    while(structureSubsubsectionReader.isNotFinished())
+    {
+        string structureSubsubsectionLine(structureSubsubsectionReader.getLine());
+        if(isStringFoundInsideTheOtherStringCaseSensitive(structureSubsubsectionLine,"LYX_TABLE_STRUCTURE_NAME_REPLACE"))
+        {
+            transformReplaceStringIfFound(structureSubsubsectionLine, "LYX_TABLE_STRUCTURE_NAME_REPLACE", structureName);
+            structureDefinitionsStream << structureSubsubsectionLine << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(structureSubsubsectionLine,"LYX_TABLE_REPLACE"))
+        {
+            saveStructureTable(structureName, structureDefinitionsStream);
+        }
+        else
+        {
+            structureDefinitionsStream << structureSubsubsectionLine << endl;
+        }
+    }
+}
+
+void SackReader::saveEnumDefinitionSubsubsection(string const& enumName, ofstream & enumDefinitionsStream)
+{
+    ifstream enumSubsubsectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\EnumSubsubsection.txt)");
+    AlbaFileReader enumSubsubsectionReader(enumSubsubsectionStream);
+
+    while(enumSubsubsectionReader.isNotFinished())
+    {
+        string enumSubsubsectionLine(enumSubsubsectionReader.getLine());
+        if(isStringFoundInsideTheOtherStringCaseSensitive(enumSubsubsectionLine,"LYX_TABLE_ENUM_NAME_REPLACE"))
+        {
+            transformReplaceStringIfFound(enumSubsubsectionLine, "LYX_TABLE_ENUM_NAME_REPLACE", enumName);
+            enumDefinitionsStream << enumSubsubsectionLine << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(enumSubsubsectionLine,"LYX_TABLE_REPLACE"))
+        {
+            saveEnumTable(enumName, enumDefinitionsStream);
+        }
+        else
+        {
+            enumDefinitionsStream << enumSubsubsectionLine << endl;
+        }
+    }
+}
+
+void SackReader::generateLyxDocument(string const& templatePath, string const& finalDocumentPath)
+{
+    ifstream lyxDocumentTemplate(templatePath);
+    ofstream lyxFinalDocumentStream(finalDocumentPath);
+    AlbaFileReader lyxDocumentTemplateReader(lyxDocumentTemplate);
+
+    bool isInsideGeneratedCode(false);
+    while(lyxDocumentTemplateReader.isNotFinished())
+    {
+        string line(lyxDocumentTemplateReader.getLine());
+        if(isStringFoundInsideTheOtherStringCaseSensitive(line,"LYX_START_GENERATED_CODE"))
+        {
+            isInsideGeneratedCode = true;
+            lyxFinalDocumentStream << line << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(line,"LYX_END_GENERATED_CODE"))
+        {
+            isInsideGeneratedCode = false;
+            saveMessageDefinitions(lyxFinalDocumentStream);
+            saveStructureDefinitions(lyxFinalDocumentStream);
+            saveEnumDefinitions(lyxFinalDocumentStream);
+            lyxFinalDocumentStream << line << endl;
+        }
+        else if(!isInsideGeneratedCode)
+        {
+            lyxFinalDocumentStream << line << endl;
+        }
+    }
+}
+
+void SackReader::loadMessagesToGenerate(string const& path)
+{
+    ifstream messageToGenerateStream(path);
+    AlbaFileReader messageToGenerateReader(messageToGenerateStream);
+    while(messageToGenerateReader.isNotFinished())
+    {
+        string line(messageToGenerateReader.getLine());
+        if(!line.empty())
+        {
+            m_messagesToGenerate.emplace(line);
+        }
+    }
+}
+
+void SackReader::loadDescriptionToAdd(string const& path)
+{
+    ifstream messageToGenerateStream(path);
+    AlbaFileReader messageToGenerateReader(messageToGenerateStream);
+    string structureName, parameterName;
+    while(messageToGenerateReader.isNotFinished())
+    {
+        string line(messageToGenerateReader.getLine());
+        if(!line.empty())
+        {
+            if(isStringFoundInsideTheOtherStringCaseSensitive(line, "&&&struct:"))
+            {
+                structureName = getStringAfterThisString(line, "&&&struct:");
+            }
+            else if(isStringFoundInsideTheOtherStringCaseSensitive(line, "&&&param:"))
+            {
+                parameterName = getStringAfterThisString(line, "&&&param:");
+            }
+            else if(isStringFoundInsideTheOtherStringCaseSensitive(line, "&&&description:"))
+            {
+                string description(getStringAfterThisString(line, "&&&description:"));
+                m_structureNameToStructureDetailsMap[structureName].parameters[parameterName].name = parameterName;
+                m_structureNameToStructureDetailsMap[structureName].parameters[parameterName].descriptionFromUser = description;
+            }
+        }
+    }
+}
+
+void SackReader::saveMessageTable(string const& messageName, ofstream & messageTableStream)
+{
     DisplayTable messageTable;
     messageTable.setBorders("-"," | ");
     messageTable.addRow();
-    messageTable.getLastRow().addCell("IE/Group Name");
-    messageTable.getLastRow().addCell("IE Type");
-    messageTable.getLastRow().addCell("Description");
-    generateStructureForMessageTablesIfNeeded(getMessageStructure(messageName), messageTable, "");
-    cout<<messageTable.drawOutput()<<endl;
-    saveMessageTable(messageTable, messageTableStream);
+    messageTable.getLastRow().addCell("\\series bold \nIE/Group Name");
+    messageTable.getLastRow().addCell("\\series bold \nIE Type");
+    messageTable.getLastRow().addCell("\\series bold \nDescription");
+    generateStructureForDisplayTablesIfNeeded(getMessageStructure(messageName), messageTable, "", true);
+    //cout<<messageTable.drawOutput()<<endl;
+    saveDisplayTable(messageTable, messageTableStream);
 }
 
-void SackReader::saveMessageTable(DisplayTable const& messageTable, ofstream & messageTableStream) const
+void SackReader::saveStructureTable(string const& structureName, ofstream & structureTableStream)
 {
-    ifstream tableTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\table.txt)");
+    DisplayTable structureTable;
+    structureTable.setBorders("-"," | ");
+    structureTable.addRow();
+    structureTable.getLastRow().addCell("\\series bold \nIE/Group Name");
+    structureTable.getLastRow().addCell("\\series bold \nIE Type");
+    structureTable.getLastRow().addCell("\\series bold \nDescription");
+    generateStructureForDisplayTablesIfNeeded(structureName, structureTable, "", false);
+    if(structureTable.getTotalRows()>1)
+    {
+        //cout<<structureTable.drawOutput()<<endl;
+        saveDisplayTable(structureTable, structureTableStream);
+    }
+}
+
+void SackReader::saveEnumTable(string const& enumName, ofstream & enumTableStream)
+{
+    DisplayTable enumTable;
+    enumTable.setBorders("-"," | ");
+    enumTable.addRow();
+    enumTable.getLastRow().addCell("\\series bold \nIE/Group Name");
+    enumTable.getLastRow().addCell("\\series bold \n Value");
+    enumTable.getLastRow().addCell("\\series bold \nDescription");
+    generateEnumForDisplayTablesIfNeeded(enumName, enumTable);
+    //cout<<enumTable.drawOutput()<<endl;
+    saveDisplayTable(enumTable, enumTableStream);
+}
+
+void SackReader::saveDisplayTable(DisplayTable const& displayTable, ofstream & displayTableStream) const
+{
+    ifstream tableTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\Table.txt)");
     AlbaFileReader tableTemplateReader(tableTemplateStream);
     while(tableTemplateReader.isNotFinished())
-    {
-        string tableTemplateLine(tableTemplateReader.getLine());
+    {        string tableTemplateLine(tableTemplateReader.getLine());
         if(isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_REPLACE"))
         {
-            for(unsigned int row=0; row<messageTable.getTotalRows(); row++)
+            for(unsigned int row=0; row<displayTable.getTotalRows(); row++)
             {
-                ifstream tableRowTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\tableRow.txt)");
+                ifstream tableRowTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\TableRow.txt)");
                 AlbaFileReader tableRowTemplateReader(tableRowTemplateStream);
                 while(tableRowTemplateReader.isNotFinished())
-                {
-                    string tableRowTemplateLine(tableRowTemplateReader.getLine());
+                {                    string tableRowTemplateLine(tableRowTemplateReader.getLine());
                     if(isStringFoundInsideTheOtherStringCaseSensitive(tableRowTemplateLine,"LYX_TABLE_ROW_REPLACE"))
                     {
-                        for(unsigned int column=0; column<messageTable.getTotalColumns(); column++)
+                        for(unsigned int column=0; column<displayTable.getTotalColumns(); column++)
                         {
-                            ifstream tableCellTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\tableCell.txt)");
+                            ifstream tableCellTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\TableCell.txt)");
                             AlbaFileReader tableCellTemplateReader(tableCellTemplateStream);
                             while(tableCellTemplateReader.isNotFinished())
-                            {
-                                string tableCellTemplateLine(tableCellTemplateReader.getLine());
+                            {                                string tableCellTemplateLine(tableCellTemplateReader.getLine());
                                 if(isStringFoundInsideTheOtherStringCaseSensitive(tableCellTemplateLine,"LYX_TABLE_CELL_REPLACE"))
                                 {
-                                    messageTableStream << messageTable.getCellConstReference(row, column).getText()<<endl;
+                                    displayTableStream << displayTable.getCellConstReference(row, column).getText()<<endl;
                                 }
                                 else
                                 {
-                                    messageTableStream << tableCellTemplateLine << endl;
+                                    displayTableStream << tableCellTemplateLine << endl;
                                 }
                             }
-                        }
-                    }
+                        }                    }
                     else
                     {
-                        messageTableStream << tableRowTemplateLine << endl;
+                        displayTableStream << tableRowTemplateLine << endl;
                     }
                 }
-            }
-        }
+            }        }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_NUM_ROW_REPLACE")
                 || isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_NUM_COLUMN_REPLACE"))
         {
             NumberToStringConverter converter;
-            transformReplaceStringIfFound(tableTemplateLine, "LYX_TABLE_NUM_ROW_REPLACE", converter.convert(messageTable.getTotalRows()));
-            transformReplaceStringIfFound(tableTemplateLine, "LYX_TABLE_NUM_COLUMN_REPLACE", converter.convert(messageTable.getTotalColumns()));
-            messageTableStream << tableTemplateLine << endl;
+            transformReplaceStringIfFound(tableTemplateLine, "LYX_TABLE_NUM_ROW_REPLACE", converter.convert(displayTable.getTotalRows()));
+            transformReplaceStringIfFound(tableTemplateLine, "LYX_TABLE_NUM_COLUMN_REPLACE", converter.convert(displayTable.getTotalColumns()));
+            displayTableStream << tableTemplateLine << endl;
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_COLUMN_REPLACE"))
         {
-            for(unsigned int i=0; i<messageTable.getTotalColumns(); i++)
+            for(unsigned int i=0; i<displayTable.getTotalColumns()-1; i++) //until description
             {
-                messageTableStream << tableTemplateLine << endl;
+                displayTableStream << tableTemplateLine << endl;
             }
         }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_DESCRIPTION_COLUMN_REPLACE"))
+        {
+            displayTableStream << tableTemplateLine << endl; //for description
+        }
         else
         {
-            messageTableStream << tableTemplateLine << endl;
+            displayTableStream << tableTemplateLine << endl;
         }
     }
 }
 
-void SackReader::saveMessageSection(string const& messageName, ofstream & messageTableStream) const
+void SackReader::generateStructureForDisplayTablesIfNeeded(string const& structureName, DisplayTable & displayTable, string const& indentionInType, bool const areInnerStructuresGenerated)
 {
-    ifstream messageSectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\messageSection.txt)");
-    AlbaFileReader messageSectionReader(messageSectionStream);
-
-    while(messageSectionReader.isNotFinished())
-    {
-        string messageSectionLine(messageSectionReader.getLine());
-        if(isStringFoundInsideTheOtherStringCaseSensitive(messageSectionLine,"LYX_TABLE_MESSAGE_NAME_REPLACE")
-                || isStringFoundInsideTheOtherStringCaseSensitive(messageSectionLine,"LYX_TABLE_STRUCTURE_NAME_REPLACE"))
-        {
-            transformReplaceStringIfFound(messageSectionLine, "LYX_TABLE_MESSAGE_NAME_REPLACE", messageName);
-            transformReplaceStringIfFound(messageSectionLine, "LYX_TABLE_STRUCTURE_NAME_REPLACE", getMessageStructure(messageName));
-            messageTableStream << messageSectionLine << endl;
-        }
-        else
-        {
-            messageTableStream << messageSectionLine << endl;
-        }
-    }
-}
-
-
-void SackReader::generateStructureForMessageTablesIfNeeded(string const& structureName, DisplayTable & messageTable, string const& indentionInType) const
-{
+    string smallTextModifier("\\size footnotesize\n");
     if(doesThisStructureExists(structureName))
     {
+        m_structureNameToStructureDetailsMap[structureName].isUsedInIfs=true;
         StructureDetails structureDetails(getStructureDetails(structureName));
-        for(StructureDetails::ParameterPair const& parameterPair : structureDetails.parameters)
+        for(string const& parameterName : structureDetails.parametersWithCorrectOrder)
         {
-            messageTable.addRow();
-            messageTable.getLastRow().addCell(indentionInType+parameterPair.second.name);
-            messageTable.getLastRow().addCell(parameterPair.second.type);
-            //messageTable.getLastRow().addCell(parameterPair.second.descriptionFromUser);
-            messageTable.getLastRow().addCell(getStringWithFirstLetterCapital(parameterPair.second.description));
-            generateStructureForMessageTablesIfNeeded(parameterPair.second.type, messageTable, indentionInType+">");
+            ParameterDetails parameterDetails = getParameterDetails(structureName, parameterName);
+            displayTable.addRow();
+            displayTable.getLastRow().addCell(smallTextModifier+indentionInType+" "+parameterDetails.name);
+            string finalType(parameterDetails.type);
+            if(parameterDetails.isAnArray)
+            {
+                finalType = finalType+" ["+parameterDetails.arraySize+"]";
+            }
+            displayTable.getLastRow().addCell(smallTextModifier+finalType);
+
+            string sackDescription(getStringWithoutStartingAndTrailingWhiteSpace(getStringWithFirstLetterCapital(parameterDetails.description)));
+            string userDescription(getStringWithoutStartingAndTrailingWhiteSpace(getStringWithFirstLetterCapital(parameterDetails.descriptionFromUser)));
+            string finalDescription;
+            if(!userDescription.empty())
+            {
+                if(sackDescription!=userDescription)
+                {
+                    //cout <<"The description needs to be aligned with sack."<<endl;
+                    /*cout<<"Structure: "<<structureName<<" Parameter: "<<parameterDetails.name<<endl;
+                    cout<<"sackDescription: ["<<sackDescription<<"]"<<endl;
+                    cout<<"userDescription: ["<<userDescription<<"]"<<endl;*/
+                }
+                finalDescription = userDescription;
+            }
+            else
+            {
+                finalDescription = sackDescription;
+            }
+            displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
+            if(areInnerStructuresGenerated)
+            {
+                string typeName(parameterDetails.type);
+                if(doesThisEnumExists(typeName))
+                {
+                    m_enumNameToEnumDetailsMap[typeName].isUsedInIfs=true;
+                }
+                generateStructureForDisplayTablesIfNeeded(parameterDetails.type, displayTable, indentionInType+">", true);
+            }
         }
     }
 }
 
+void SackReader::generateEnumForDisplayTablesIfNeeded(string const& enumName, DisplayTable & displayTable)
+{
+    string smallTextModifier("\\size footnotesize\n");
+    if(doesThisEnumExists(enumName))
+    {
+        EnumDetails enumDetails(getEnumDetails(enumName));
+
+        vector<string> sortedEnumParameterNamesByValue;
+        for(EnumDetails::ParameterPair const& parameterPair : enumDetails.parameters)
+        {
+            sortedEnumParameterNamesByValue.emplace_back(parameterPair.first);
+        }
+        std::sort(sortedEnumParameterNamesByValue.begin(), sortedEnumParameterNamesByValue.end(), [&](string const& parameterName1, string const& parameterName2)
+        {
+            EnumParameterDetails parameterDetails1 = getEnumParameterDetails(enumName, parameterName1);
+            EnumParameterDetails parameterDetails2 = getEnumParameterDetails(enumName, parameterName2);
+            return convertHexStringToNumber<unsigned int>(parameterDetails1.value)<convertHexStringToNumber<unsigned int>(parameterDetails2.value);
+        });
+
+        for(string const& parameterName : sortedEnumParameterNamesByValue)
+        {
+            EnumParameterDetails parameterDetails = getEnumParameterDetails(enumName, parameterName);
+            displayTable.addRow();
+            displayTable.getLastRow().addCell(smallTextModifier+" "+parameterDetails.name);
+            displayTable.getLastRow().addCell(smallTextModifier+parameterDetails.value);
+            string sackDescription(getStringWithoutStartingAndTrailingWhiteSpace(getStringWithFirstLetterCapital(parameterDetails.description)));
+            string userDescription(getStringWithoutStartingAndTrailingWhiteSpace(getStringWithFirstLetterCapital(parameterDetails.descriptionFromUser)));
+            string finalDescription;
+            if(!userDescription.empty())
+            {
+                if(sackDescription!=userDescription)
+                {
+                    //cout <<"The description needs to be aligned with sack."<<endl;
+                    /*cout<<"Enum: "<<enumName<<" Parameter: "<<parameterDetails.name<<endl;
+                    cout<<"sackDescription: ["<<sackDescription<<"]"<<endl;
+                    cout<<"userDescription: ["<<userDescription<<"]"<<endl;*/
+                }
+                finalDescription = userDescription;
+            }
+            else
+            {
+                finalDescription = sackDescription;
+            }
+            displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
+        }
+    }
+}
 string SackReader::getFileFullPath(string const& fileName) const
 {
     string result;
@@ -1102,10 +1401,29 @@ ParameterDetails SackReader::getParameterDetails(string const& structureName, st
     return result;
 }
 
+EnumDetails SackReader::getEnumDetails(string const& enumName) const
+{
+    EnumDetails result;
+    if(m_enumNameToEnumDetailsMap.find(enumName)!=m_enumNameToEnumDetailsMap.cend())
+    {
+        result = m_enumNameToEnumDetailsMap.at(enumName);
+    }
+    return result;
+}
+
+EnumParameterDetails SackReader::getEnumParameterDetails(string const& enumName, string const& parameterName) const
+{
+    EnumParameterDetails result;
+    if(doesThisEnumAndParameterExists(enumName, parameterName))
+    {
+        result = m_enumNameToEnumDetailsMap.at(enumName).parameters.at(parameterName);
+    }
+    return result;
+}
+
 bool SackReader::doesThisStructureAndParameterExists(string const& structureName, string const& parameterName) const
 {
-    bool result(false);
-    if(doesThisStructureExists(structureName))
+    bool result(false);    if(doesThisStructureExists(structureName))
     {
         StructureDetails const & structureDetails = m_structureNameToStructureDetailsMap.at(structureName);
         StructureDetails::ParameterMap const & parameters(structureDetails.parameters);
@@ -1117,29 +1435,77 @@ bool SackReader::doesThisStructureAndParameterExists(string const& structureName
     return result;
 }
 
-bool SackReader::doesThisStructureExists(string const& structureName) const
+bool SackReader::doesThisEnumAndParameterExists(string const& enumName, string const& parameterName) const
 {
     bool result(false);
-    if(m_structureNameToStructureDetailsMap.find(structureName)!=m_structureNameToStructureDetailsMap.cend())
+    if(doesThisEnumExists(enumName))
+    {
+        EnumDetails const & enumDetails = m_enumNameToEnumDetailsMap.at(enumName);
+        EnumDetails::ParameterMap const & parameters(enumDetails.parameters);
+        if(parameters.find(parameterName)!=parameters.cend())
+        {
+            result=true;
+        }
+    }
+    return result;
+}
+
+bool SackReader::doesThisStructureAndParameterExistsInVector(string const& structureName, string const& parameterName) const
+{
+    bool result(false);
+    if(doesThisStructureExists(structureName))
+    {
+        StructureDetails const & structureDetails = m_structureNameToStructureDetailsMap.at(structureName);
+        vector<string> const & parametersWithCorrectOrder(structureDetails.parametersWithCorrectOrder);
+        if(std::find(parametersWithCorrectOrder.cbegin(), parametersWithCorrectOrder.cend(), parameterName)!=parametersWithCorrectOrder.cend())
+        {
+            result=true;
+        }
+    }
+    return result;
+}
+
+bool SackReader::doesThisStructureExists(string const& structureName) const
+{
+    bool result(false);    if(m_structureNameToStructureDetailsMap.find(structureName)!=m_structureNameToStructureDetailsMap.cend())
     {
         return true;
     }
     return result;
 }
 
-EnumParameterDetails SackReader::getEnumParameterDetails(string const& enumName, string const& enumParameterName) const
+bool SackReader::doesThisEnumExists(string const& enumName) const
 {
-    EnumParameterDetails result;
+    bool result(false);
     if(m_enumNameToEnumDetailsMap.find(enumName)!=m_enumNameToEnumDetailsMap.cend())
     {
-        EnumDetails const & enumDetails = m_enumNameToEnumDetailsMap.at(enumName);
-        EnumDetails::ParameterMap const & parameters(enumDetails.parameters);
-        if(parameters.find(enumParameterName)!=parameters.cend())
-        {
-            result = parameters.at(enumParameterName);
-        }
+        return true;
     }
     return result;
+}
+
+void SackReader::performHacks()
+{
+    StructureDetails & structureDetails(m_structureNameToStructureDetailsMap["SMessageAddress"]);
+    structureDetails.name = "SMessageAddress";
+    structureDetails.isMessage = false;
+    structureDetails.isUsedInIfs = true;
+    structureDetails.parametersWithCorrectOrder.clear();
+    structureDetails.parametersWithCorrectOrder.emplace_back("board");
+    structureDetails.parametersWithCorrectOrder.emplace_back("cpu");
+    structureDetails.parametersWithCorrectOrder.emplace_back("task");
+    structureDetails.parameters["board"].name = "board";
+    structureDetails.parameters["board"].type = "TBoard";
+    structureDetails.parameters["board"].isAnArray = false;
+    structureDetails.parameters["board"].descriptionFromUser = "Board in SMessageAddress";
+    structureDetails.parameters["cpu"].name = "cpu";
+    structureDetails.parameters["cpu"].type = "TCpu";
+    structureDetails.parameters["cpu"].isAnArray = false;
+    structureDetails.parameters["cpu"].descriptionFromUser = "Cpu in SMessageAddress";
+    structureDetails.parameters["task"].name = "task";
+    structureDetails.parameters["task"].type = "TTask";
+    structureDetails.parameters["task"].isAnArray = false;
+    structureDetails.parameters["task"].descriptionFromUser = "Task in SMessageAddress";
 }
 
 
