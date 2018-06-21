@@ -159,7 +159,8 @@ TEST(SackReaderTest, EControlUnitType)
 
 TEST(SackReaderTest, SaveAndLoadFile_EHspaMapping)
 {
-    SackReader sackReader(R"(C:\APRG\SackReader\SackReader\SampleFiles)");    sackReader.checkAllFiles();
+    SackReader sackReader(R"(C:\APRG\SackReader\SackReader\SampleFiles)");
+    sackReader.checkAllFiles();
     sackReader.readFile("EHspaMapping.h");
     sackReader.saveDatabaseToFile(R"(C:\APRG\SackReader\SackReader\TempFiles\ReadFile_EHspaMapping.txt)");
     SackReader sackReader2(R"(C:\APRG\SackReader\SackReader\SampleFiles)");
@@ -192,3 +193,4 @@ TEST(RealTest, UpdateTrunkFiles)
 
     //sackReader.saveDatabaseToFile(R"(C:\APRG\SackReader\SackReader\TempFiles\Database_06_07_2018.txt)");
 }
+

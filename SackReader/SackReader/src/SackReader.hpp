@@ -6,6 +6,7 @@
 #include <set>
 #include <string>
 #include <vector>
+
 namespace alba
 {
 
@@ -57,7 +58,8 @@ struct EnumDetails
         isUsedInIfs=false;
     }
     friend std::ostream & operator<<(std::ostream & out, EnumDetails const& enumDetails);
-    friend std::istream & operator>>(std::istream & in, EnumDetails& enumDetails);};
+    friend std::istream & operator>>(std::istream & in, EnumDetails& enumDetails);
+};
 
 struct ParameterDetails
 {
@@ -97,6 +99,7 @@ struct StructureDetails
         isUsedInIfs=false;
     }
 };
+
 
 
 using FileToPathMap = std::map<std::string, std::string>;
@@ -153,7 +156,8 @@ public:
     void performHacks();
 
 private:
-    std::string m_path;    FileToPathMap m_fileToPathMap;
+    std::string m_path;
+    FileToPathMap m_fileToPathMap;
     ConstantNameToConstantDetailsMap m_constantNameToConstantDetailsMap;
     MessageNameToStructureNameMap m_messageNameToStructureNameMap;
     StructureNameToStructureDetailsMap m_structureNameToStructureDetailsMap;

@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <fstream>
 
+
 #include <Debug/AlbaDebug.hpp>
 
 
@@ -269,6 +270,7 @@ ostream& operator<<(ostream & out, StructureDetails const& structureDetails)
 
     return out;
 }
+
 istream& operator>>(istream & in, StructureDetails& structureDetails)
 {
     bool isExisting(false);
@@ -296,6 +298,7 @@ istream& operator>>(istream & in, StructureDetails& structureDetails)
     }
     return in;
 }
+
 SackReader::SackReader(string const& path)
     : m_path(path)
 {
@@ -522,7 +525,8 @@ void SackReader::readDefinitionFileFromStructureRecursively(string const& struct
     }
 }
 
-void SackReader::readFile(string const& fileName){
+void SackReader::readFile(string const& fileName)
+{
     //this should be a class
 
     string fileFullPath(getFileFullPath(fileName));
@@ -536,7 +540,8 @@ void SackReader::readFile(string const& fileName){
     bool isMessageIdFile = isStringFoundInsideTheOtherStringNotCaseSensitive(fileFullPathHandler.getFilenameOnly(), "MessageId_");
     ConstantDetails commentDetails;
     StructureDetails structureDetails;
-    ParameterDetails parameterDetails;    EnumDetails enumDetails;
+    ParameterDetails parameterDetails;
+    EnumDetails enumDetails;
     EnumParameterDetails enumParameterDetails;
     unsigned int commentState=0;
     string arraySize;
@@ -614,7 +619,8 @@ void SackReader::readFile(string const& fileName){
                     if(isMessageIdFile)
                     {
                         state=3;
-                    }                    else
+                    }
+                    else
                     {
                         state=1;
                     }
@@ -743,7 +749,8 @@ void SackReader::readFile(string const& fileName){
                             m_structureNameToStructureDetailsMap[structureDetails.name].isMessage = true;
                             break;
                         }
-                        else if("}" == token)                        {
+                        else if("}" == token)
+                        {
                             previousStructureName=structureDetails.name;
                             structureDetails.clear();
                             state = 0;
@@ -760,7 +767,8 @@ void SackReader::readFile(string const& fileName){
                                 }
                                 m_structureNameToStructureDetailsMap[structureDetails.name].parameters[parameterDetails.name].name = parameterDetails.name;
                                 m_structureNameToStructureDetailsMap[structureDetails.name].parameters[parameterDetails.name].type = parameterDetails.type;
-                                if(!arraySize.empty())                                {
+                                if(!arraySize.empty())
+                                {
                                     m_structureNameToStructureDetailsMap[structureDetails.name].parameters[parameterDetails.name].isAnArray = true;
                                     m_structureNameToStructureDetailsMap[structureDetails.name].parameters[parameterDetails.name].arraySize = arraySize;
                                     arraySize.clear();
@@ -828,7 +836,8 @@ void SackReader::readFile(string const& fileName){
                         }
                     }
 
-                    partialString.clear();                    innerState=0;
+                    partialString.clear();
+                    innerState=0;
                     if(token == "Additional")
                     {
                         paramDescriptionState=0;
@@ -1194,7 +1203,8 @@ void SackReader::saveDisplayTable(DisplayTable const& displayTable, ofstream & d
     ifstream tableTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\Table.txt)");
     AlbaFileReader tableTemplateReader(tableTemplateStream);
     while(tableTemplateReader.isNotFinished())
-    {        string tableTemplateLine(tableTemplateReader.getLine());
+    {
+        string tableTemplateLine(tableTemplateReader.getLine());
         if(isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_REPLACE"))
         {
             for(unsigned int row=0; row<displayTable.getTotalRows(); row++)
@@ -1202,7 +1212,8 @@ void SackReader::saveDisplayTable(DisplayTable const& displayTable, ofstream & d
                 ifstream tableRowTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\TableRow.txt)");
                 AlbaFileReader tableRowTemplateReader(tableRowTemplateStream);
                 while(tableRowTemplateReader.isNotFinished())
-                {                    string tableRowTemplateLine(tableRowTemplateReader.getLine());
+                {
+                    string tableRowTemplateLine(tableRowTemplateReader.getLine());
                     if(isStringFoundInsideTheOtherStringCaseSensitive(tableRowTemplateLine,"LYX_TABLE_ROW_REPLACE"))
                     {
                         for(unsigned int column=0; column<displayTable.getTotalColumns(); column++)
@@ -1210,7 +1221,8 @@ void SackReader::saveDisplayTable(DisplayTable const& displayTable, ofstream & d
                             ifstream tableCellTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\TableCell.txt)");
                             AlbaFileReader tableCellTemplateReader(tableCellTemplateStream);
                             while(tableCellTemplateReader.isNotFinished())
-                            {                                string tableCellTemplateLine(tableCellTemplateReader.getLine());
+                            {
+                                string tableCellTemplateLine(tableCellTemplateReader.getLine());
                                 if(isStringFoundInsideTheOtherStringCaseSensitive(tableCellTemplateLine,"LYX_TABLE_CELL_REPLACE"))
                                 {
                                     displayTableStream << displayTable.getCellConstReference(row, column).getText()<<endl;
@@ -1220,13 +1232,15 @@ void SackReader::saveDisplayTable(DisplayTable const& displayTable, ofstream & d
                                     displayTableStream << tableCellTemplateLine << endl;
                                 }
                             }
-                        }                    }
+                        }
+                    }
                     else
                     {
                         displayTableStream << tableRowTemplateLine << endl;
                     }
                 }
-            }        }
+            }
+        }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_NUM_ROW_REPLACE")
                 || isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_NUM_COLUMN_REPLACE"))
         {
@@ -1351,6 +1365,7 @@ void SackReader::generateEnumForDisplayTablesIfNeeded(string const& enumName, Di
         }
     }
 }
+
 string SackReader::getFileFullPath(string const& fileName) const
 {
     string result;
@@ -1423,7 +1438,8 @@ EnumParameterDetails SackReader::getEnumParameterDetails(string const& enumName,
 
 bool SackReader::doesThisStructureAndParameterExists(string const& structureName, string const& parameterName) const
 {
-    bool result(false);    if(doesThisStructureExists(structureName))
+    bool result(false);
+    if(doesThisStructureExists(structureName))
     {
         StructureDetails const & structureDetails = m_structureNameToStructureDetailsMap.at(structureName);
         StructureDetails::ParameterMap const & parameters(structureDetails.parameters);
@@ -1467,7 +1483,8 @@ bool SackReader::doesThisStructureAndParameterExistsInVector(string const& struc
 
 bool SackReader::doesThisStructureExists(string const& structureName) const
 {
-    bool result(false);    if(m_structureNameToStructureDetailsMap.find(structureName)!=m_structureNameToStructureDetailsMap.cend())
+    bool result(false);
+    if(m_structureNameToStructureDetailsMap.find(structureName)!=m_structureNameToStructureDetailsMap.cend())
     {
         return true;
     }
