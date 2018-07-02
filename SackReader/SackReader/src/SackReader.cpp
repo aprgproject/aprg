@@ -1,9 +1,10 @@
 #include "SackReader.hpp"
 
 #include <File/AlbaFileReader.hpp>
+#include <File/AlbaFileParameterReader.hpp>
+#include <File/AlbaFileParameterWriter.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 #include <String/AlbaStringHelper.hpp>
-
 #include <algorithm>
 #include <fstream>
 
@@ -19,286 +20,101 @@ namespace alba
 
 ostream& operator<<(ostream & out, ConstantDetails const& constantDetails)
 {
-    bool isExisting(false);
-    isExisting = !constantDetails.name.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << constantDetails.name << endl;
-    }
-    isExisting = !constantDetails.value.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << constantDetails.value << endl;
-    }
-    isExisting = !constantDetails.description.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << constantDetails.description << endl;
-    }
-    isExisting = !constantDetails.descriptionFromUser.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << constantDetails.descriptionFromUser << endl;
-    }
+    AlbaFileParameterWriter writer(out);
+    writer.writeData<string>(constantDetails.name);
+    writer.writeData<string>(constantDetails.value);
+    writer.writeData<string>(constantDetails.description);
+    writer.writeData<string>(constantDetails.descriptionFromUser);
     return out;
 }
 
 istream& operator>>(istream & in, ConstantDetails& constantDetails)
 {
-    bool isExisting(false);
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, constantDetails.name);
-    }
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, constantDetails.value);
-    }
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, constantDetails.description);
-    }
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, constantDetails.descriptionFromUser);
-    }
+    AlbaFileParameterReader reader(in);
+    constantDetails.name = reader.readData<string>();
+    constantDetails.value = reader.readData<string>();
+    constantDetails.description = reader.readData<string>();
+    constantDetails.descriptionFromUser = reader.readData<string>();
     return in;
 }
 
 ostream& operator<<(ostream & out, EnumParameterDetails const& enumParameterDetails)
 {
-    bool isExisting(false);
-    isExisting = !enumParameterDetails.name.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << enumParameterDetails.name << endl;
-    }
-    isExisting = !enumParameterDetails.value.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << enumParameterDetails.value << endl;
-    }
-    isExisting = !enumParameterDetails.description.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << enumParameterDetails.description << endl;
-    }
-    isExisting = !enumParameterDetails.descriptionFromUser.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << enumParameterDetails.descriptionFromUser << endl;
-    }
+    AlbaFileParameterWriter writer(out);
+    writer.writeData<string>(enumParameterDetails.name);
+    writer.writeData<string>(enumParameterDetails.value);
+    writer.writeData<string>(enumParameterDetails.description);
+    writer.writeData<string>(enumParameterDetails.descriptionFromUser);
     return out;
 }
 
 istream& operator>>(istream & in, EnumParameterDetails& enumParameterDetails)
 {
-    bool isExisting(false);
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, enumParameterDetails.name);
-    }
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, enumParameterDetails.value);
-    }
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, enumParameterDetails.description);
-    }
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, enumParameterDetails.descriptionFromUser);
-    }
+    AlbaFileParameterReader reader(in);
+    enumParameterDetails.name = reader.readData<string>();
+    enumParameterDetails.value = reader.readData<string>();
+    enumParameterDetails.description = reader.readData<string>();
+    enumParameterDetails.descriptionFromUser = reader.readData<string>();
     return in;
 }
 
 ostream& operator<<(ostream & out, EnumDetails const& enumDetails)
 {
-    bool isExisting(false);
-    isExisting = !enumDetails.name.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << enumDetails.name << endl;
-    }
-    out << enumDetails.parameters.size() << endl;
-    for(EnumDetails::ParameterPair parameter : enumDetails.parameters)
-    {
-        out << parameter.second << endl;
-    }
+    AlbaFileParameterWriter writer(out);
+    writer.writeData<string>(enumDetails.name);
+    writer.writeData(enumDetails.parameters);
     return out;
 }
 
 istream& operator>>(istream & in, EnumDetails& enumDetails)
 {
-    bool isExisting(false);
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, enumDetails.name);
-    }
-    unsigned int size(0);
-    in >> size;
-    for(unsigned int i=0; i<size; i++)
-    {
-        EnumParameterDetails enumParameterDetails;
-        in >> enumParameterDetails;
-        enumDetails.parameters.emplace(enumParameterDetails.name, enumParameterDetails);
-    }
+    AlbaFileParameterReader reader(in);
+    enumDetails.name = reader.readData<string>();
+    reader.readData(enumDetails.parameters);
     return in;
 }
 
 ostream& operator<<(ostream & out, ParameterDetails const& parameterDetails)
 {
-    bool isExisting(false);
-    isExisting = !parameterDetails.type.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << parameterDetails.type << endl;
-    }
-    isExisting = !parameterDetails.name.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << parameterDetails.name << endl;
-    }
-    isExisting = !parameterDetails.description.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << parameterDetails.description << endl;
-    }
-    isExisting = !parameterDetails.descriptionFromUser.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << parameterDetails.descriptionFromUser << endl;
-    }
-    out << parameterDetails.isAnArray << endl;
-    isExisting = !parameterDetails.arraySize.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << parameterDetails.arraySize;
-    }
+    AlbaFileParameterWriter writer(out);
+    writer.writeData<string>(parameterDetails.type);
+    writer.writeData<string>(parameterDetails.name);
+    writer.writeData<string>(parameterDetails.description);
+    writer.writeData<string>(parameterDetails.descriptionFromUser);
+    writer.writeData<bool>(parameterDetails.isAnArray);
+    writer.writeData<string>(parameterDetails.arraySize);
     return out;
 }
 
 istream& operator>>(istream & in, ParameterDetails& parameterDetails)
 {
-    bool isExisting(false);
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, parameterDetails.type);
-    }
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, parameterDetails.name);
-    }
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, parameterDetails.description);
-    }
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, parameterDetails.descriptionFromUser);
-    }
-    in >> parameterDetails.isAnArray;
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, parameterDetails.arraySize);
-    }
+    AlbaFileParameterReader reader(in);
+    parameterDetails.type = reader.readData<string>();
+    parameterDetails.name = reader.readData<string>();
+    parameterDetails.description = reader.readData<string>();
+    parameterDetails.descriptionFromUser = reader.readData<string>();
+    parameterDetails.isAnArray = reader.readData<bool>();
+    parameterDetails.arraySize = reader.readData<string>();
     return in;
 }
 
 ostream& operator<<(ostream & out, StructureDetails const& structureDetails)
 {
-    bool isExisting(false);
-    isExisting = !structureDetails.name.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << structureDetails.name << endl;
-    }
-    out << structureDetails.parameters.size() << endl;
-    for(std::pair<std::string, ParameterDetails> const& parameter : structureDetails.parameters)
-    {
-        out << parameter.second << endl;
-    }
-    out << structureDetails.parametersWithCorrectOrder.size() << endl;
-    for(std::string const& parameterName : structureDetails.parametersWithCorrectOrder)
-    {
-        out << parameterName << endl;
-    }
-
+    AlbaFileParameterWriter writer(out);
+    writer.writeData<string>(structureDetails.name);
+    writer.writeData(structureDetails.parameters);
+    writer.writeData(structureDetails.parametersWithCorrectOrder);
     return out;
 }
 
 istream& operator>>(istream & in, StructureDetails& structureDetails)
 {
-    bool isExisting(false);
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, structureDetails.name);
-    }
-    unsigned int size(0);
-    in >> size;
-    for(unsigned int i=0; i<size; i++)
-    {
-        ParameterDetails parameterDetails;
-        in >> parameterDetails;
-        structureDetails.parameters.emplace(parameterDetails.name, parameterDetails);
-    }
-    in >> size;
-    for(unsigned int i=0; i<size; i++)
-    {
-        string parameterName;
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, parameterName);
-        structureDetails.parametersWithCorrectOrder.emplace_back(parameterName);
-    }
+    AlbaFileParameterReader reader(in);
+    structureDetails.name = reader.readData<string>();
+    reader.readData(structureDetails.parameters);
+    reader.readData(structureDetails.parametersWithCorrectOrder);
     return in;
 }
-
 SackReader::SackReader(string const& path)
     : m_path(path)
 {
@@ -325,165 +141,28 @@ void SackReader::checkAllFiles()
 void SackReader::saveDatabaseToFile(std::string const& path)
 {
     ofstream fileStream(path);
-    bool isExisting(false);
-    isExisting = !m_path.empty();
-    fileStream << isExisting << endl;
-    if(isExisting)
-    {
-        fileStream << m_path << endl;
-    }
-    fileStream << m_fileToPathMap.size() << endl;
-    for(FileToPathPair const& pair: m_fileToPathMap)
-    {
-        isExisting = !pair.first.empty();
-        fileStream << isExisting << endl;
-        if(isExisting)
-        {
-            fileStream << pair.first << endl;
-        }
-        isExisting = !pair.second.empty();
-        fileStream << isExisting << endl;
-        if(isExisting)
-        {
-            fileStream << pair.second << endl;
-        }
-    }
-    fileStream << m_constantNameToConstantDetailsMap.size() << endl;
-    for(ConstantNameToConstantDetailsPair const& pair: m_constantNameToConstantDetailsMap)
-    {
-        isExisting = !pair.first.empty();
-        fileStream << isExisting << endl;
-        if(isExisting)
-        {
-            fileStream << pair.first << endl;
-        }
-        fileStream << pair.second << endl;
-    }
-    fileStream << m_messageNameToStructureNameMap.size() << endl;
-    for(MessageNameToStructureNamePair const& pair: m_messageNameToStructureNameMap)
-    {
-        isExisting = !pair.first.empty();
-        fileStream << isExisting << endl;
-        if(isExisting)
-        {
-            fileStream << pair.first << endl;
-        }
-        fileStream << pair.second << endl;
-    }
-    fileStream << m_structureNameToStructureDetailsMap.size() << endl;
-    for(StructureNameToStructureDetailsPair const& pair: m_structureNameToStructureDetailsMap)
-    {
-        isExisting = !pair.first.empty();
-        fileStream << isExisting << endl;
-        if(isExisting)
-        {
-            fileStream << pair.first << endl;
-        }
-        fileStream << pair.second << endl;
-    }
-    fileStream << m_enumNameToEnumDetailsMap.size() << endl;
-    for(EnumNameToEnumDetailsPair const& pair: m_enumNameToEnumDetailsMap)
-    {
-        isExisting = !pair.first.empty();
-        fileStream << isExisting << endl;
-        if(isExisting)
-        {
-            fileStream << pair.first << endl;
-        }
-        fileStream << pair.second << endl;
-    }
+    AlbaFileParameterWriter writer(fileStream);
+    writer.writeData<string>(m_path);
+    writer.writeData(m_fileToPathMap);
+    writer.writeData(m_constantNameToConstantDetailsMap);
+    writer.writeData(m_messageNameToStructureNameMap);
+    writer.writeData(m_structureNameToStructureDetailsMap);
+    writer.writeData(m_enumNameToEnumDetailsMap);
 }
 
 void SackReader::loadDatabaseFromFile(std::string const& path)
 {
     ifstream fileStream(path);
-    bool isExisting(false);
-    unsigned int size(0);
-    fileStream >> isExisting;
-    if(isExisting)
-    {
-        while(fileStream.peek()=='\r' || fileStream.peek()=='\n') { fileStream.ignore(1); }
-        getline(fileStream, m_path);
-    }
-
-    fileStream >> size;
-    for(unsigned int i=0; i<size; i++)
-    {
-        FileToPathPair pair;
-        fileStream >> isExisting;
-        if(isExisting)
-        {
-            while(fileStream.peek()=='\r' || fileStream.peek()=='\n') { fileStream.ignore(1); }
-            getline(fileStream, pair.first);
-        }
-        fileStream >> isExisting;
-        if(isExisting)
-        {
-            while(fileStream.peek()=='\r' || fileStream.peek()=='\n') { fileStream.ignore(1); }
-            getline(fileStream, pair.second);
-        }
-        m_fileToPathMap.emplace(pair);
-    }
-
-    fileStream >> size;
-    for(unsigned int i=0; i<size; i++)
-    {
-        ConstantNameToConstantDetailsPair pair;
-        fileStream >> isExisting;
-        if(isExisting)
-        {
-            while(fileStream.peek()=='\r' || fileStream.peek()=='\n') { fileStream.ignore(1); }
-            getline(fileStream, pair.first);
-        }
-        fileStream >> pair.second;
-        m_constantNameToConstantDetailsMap.emplace(pair);
-    }
-
-    fileStream >> size;
-    for(unsigned int i=0; i<size; i++)
-    {
-        MessageNameToStructureNamePair pair;
-        fileStream >> isExisting;
-        if(isExisting)
-        {
-            while(fileStream.peek()=='\r' || fileStream.peek()=='\n') { fileStream.ignore(1); }
-            getline(fileStream, pair.first);
-        }
-        fileStream >> pair.second;
-        m_messageNameToStructureNameMap.emplace(pair);
-    }
-
-    fileStream >> size;
-    for(unsigned int i=0; i<size; i++)
-    {
-        StructureNameToStructureDetailsPair pair;
-        fileStream >> isExisting;
-        if(isExisting)
-        {
-            while(fileStream.peek()=='\r' || fileStream.peek()=='\n') { fileStream.ignore(1); }
-            getline(fileStream, pair.first);
-        }
-        fileStream >> pair.second;
-        m_structureNameToStructureDetailsMap.emplace(pair);
-    }
-
-    fileStream >> size;
-    for(unsigned int i=0; i<size; i++)
-    {
-        EnumNameToEnumDetailsPair pair;
-        fileStream >> isExisting;
-        if(isExisting)
-        {
-            while(fileStream.peek()=='\r' || fileStream.peek()=='\n') { fileStream.ignore(1); }
-            getline(fileStream, pair.first);
-        }
-        fileStream >> pair.second;
-        m_enumNameToEnumDetailsMap.emplace(pair);
-    }
+    AlbaFileParameterReader reader(fileStream);
+    m_path = reader.readData<string>();
+    reader.readData(m_fileToPathMap);
+    reader.readData(m_constantNameToConstantDetailsMap);
+    reader.readData(m_messageNameToStructureNameMap);
+    reader.readData(m_structureNameToStructureDetailsMap);
+    reader.readData(m_enumNameToEnumDetailsMap);
 }
 
-void SackReader::checkOamTcomTupcMessages()
-{
+void SackReader::checkOamTcomTupcMessages(){
     readFile("MessageId_OamAtm.sig");
     readFile("MessageId_OamTcom.sig");
     readFile("MessageId_TassuTtm.sig");
