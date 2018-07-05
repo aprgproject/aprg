@@ -18,31 +18,29 @@ void SampleStateMachine::processInput(Action const& action)
     switch(m_stateIdentifier)
     {
     case State::StateWithNoValue:
-        processInput(StateType<State::StateWithNoValue>(), action);
+        processStateWithNoValue(action);
         break;
     case State::State1:
-        processInput(StateType<State::State1>(), action);
+        processState1(action);
         break;
     case State::State2:
-        processInput(StateType<State::State2>(), action);
+        processState2(action);
         break;
     case State::State3:
-        processInput(StateType<State::State3>(), action);
+        processState3(action);
         break;
     case State::State4:
-        processInput(StateType<State::State4>(), action);
+        processState4(action);
         break;
     default:
-        assert(false);
-        break;
+        assert(false);        break;
     }
 }
 
-void SampleStateMachine::processInput(StateType<State::StateWithNoValue>, Action const& action)
+void SampleStateMachine::processStateWithNoValue(Action const& action)
 {
     saveActionToOutput(action);
-    switch(action)
-    {
+    switch(action)    {
     case Action::InitializeTo1:
         gotoState(State::State1);
         break;
@@ -61,11 +59,10 @@ void SampleStateMachine::processInput(StateType<State::StateWithNoValue>, Action
     }
 }
 
-void SampleStateMachine::processInput(StateType<State::State1>, Action const& action)
+void SampleStateMachine::processState1(Action const& action)
 {
     saveActionToOutput(action);
-    switch(action)
-    {
+    switch(action)    {
     case Action::InitializeTo1:
         gotoState(State::State1);
         break;
@@ -84,11 +81,10 @@ void SampleStateMachine::processInput(StateType<State::State1>, Action const& ac
     }
 }
 
-void SampleStateMachine::processInput(StateType<State::State2>, Action const& action)
+void SampleStateMachine::processState2(Action const& action)
 {
     saveActionToOutput(action);
-    switch(action)
-    {
+    switch(action)    {
     case Action::InitializeTo1:
         gotoState(State::State1);
         break;
@@ -107,11 +103,10 @@ void SampleStateMachine::processInput(StateType<State::State2>, Action const& ac
     }
 }
 
-void SampleStateMachine::processInput(StateType<State::State3>, Action const& action)
+void SampleStateMachine::processState3(Action const& action)
 {
     saveActionToOutput(action);
-    switch(action)
-    {
+    switch(action)    {
     case Action::InitializeTo1:
         gotoState(State::State1);
         break;
@@ -130,11 +125,10 @@ void SampleStateMachine::processInput(StateType<State::State3>, Action const& ac
     }
 }
 
-void SampleStateMachine::processInput(StateType<State::State4>, Action const& action)
+void SampleStateMachine::processState4(Action const& action)
 {
     saveActionToOutput(action);
-    switch(action)
-    {
+    switch(action)    {
     case Action::InitializeTo1:
         gotoState(State::State1);
         break;
