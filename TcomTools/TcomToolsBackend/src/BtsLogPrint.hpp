@@ -62,6 +62,7 @@ public:
     BtsLogPrint();
     BtsLogPrint(std::string const& lineInLogs);
     BtsLogPrint(std::string const& filename, std::string const& lineInLogs);
+    void clear();
     bool isEmpty() const;
     BtsLogTime getBtsTime() const;
     BtsLogTime getPcTime() const;

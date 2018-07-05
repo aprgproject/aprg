@@ -5,6 +5,7 @@
 #include <File/AlbaFileParameterWriter.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 #include <String/AlbaStringHelper.hpp>
+
 #include <algorithm>
 #include <fstream>
 
@@ -115,6 +116,7 @@ istream& operator>>(istream & in, StructureDetails& structureDetails)
     reader.readData(structureDetails.parametersWithCorrectOrder);
     return in;
 }
+
 SackReader::SackReader(string const& path)
     : m_path(path)
 {
@@ -162,7 +164,8 @@ void SackReader::loadDatabaseFromFile(std::string const& path)
     reader.readData(m_enumNameToEnumDetailsMap);
 }
 
-void SackReader::checkOamTcomTupcMessages(){
+void SackReader::checkOamTcomTupcMessages()
+{
     readFile("MessageId_OamAtm.sig");
     readFile("MessageId_OamTcom.sig");
     readFile("MessageId_TassuTtm.sig");

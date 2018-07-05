@@ -1,5 +1,7 @@
 #include "BtsLogPrint.hpp"
 
+#include <File/AlbaFileParameterReader.hpp>
+#include <File/AlbaFileParameterWriter.hpp>
 #include <String/AlbaStringHelper.hpp>
 
 #include <iostream>
@@ -29,6 +31,15 @@ BtsLogPrint::BtsLogPrint(string const& filename, string const& lineInLogs)
 {
     m_fileName.resize(NUMBER_OF_CHARACTER_FOR_FILE, ' ');
     analyzeLineInLogs(lineInLogs);
+}
+
+void BtsLogPrint::clear()
+{
+    m_btsTime.clear();
+    m_pcTime.clear();
+    m_hardwareAddress.clear();
+    m_print.clear();
+    m_fileName.clear();
 }
 
 bool BtsLogPrint::isEmpty() const
@@ -383,53 +394,23 @@ void BtsLogPrint::handleBtsTimeState(State & state, TransactionData & transactio
 
 ostream& operator<<(ostream & out, BtsLogPrint const& btsLogPrint)
 {
-    bool isExisting(false);
-    out << btsLogPrint.m_btsTime << endl;
-    out << btsLogPrint.m_pcTime << endl;
-    isExisting = !btsLogPrint.m_hardwareAddress.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << btsLogPrint.m_hardwareAddress << endl;
-    }
-    isExisting = !btsLogPrint.m_print.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << btsLogPrint.m_print << endl;
-    }
-    isExisting = !btsLogPrint.m_fileName.empty();
-    out << isExisting << endl;
-    if(isExisting)
-    {
-        out << btsLogPrint.m_fileName;
-    }
+    AlbaFileParameterWriter writer(out);
+    writer.writeData<BtsLogTime>(btsLogPrint.m_btsTime);
+    writer.writeData<BtsLogTime>(btsLogPrint.m_pcTime);
+    writer.writeData<string>(btsLogPrint.m_hardwareAddress);
+    writer.writeData<string>(btsLogPrint.m_print);
+    writer.writeData<string>(btsLogPrint.m_fileName);
     return out;
 }
 
 istream& operator>>(istream & in, BtsLogPrint& btsLogPrint)
 {
-    bool isExisting(false);
-    in >> btsLogPrint.m_btsTime;
-    in >> btsLogPrint.m_pcTime;
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, btsLogPrint.m_hardwareAddress);
-    }
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, btsLogPrint.m_print);
-    }
-    in >> isExisting;
-    if(isExisting)
-    {
-        while(in.peek()=='\r' || in.peek()=='\n') { in.ignore(1); }
-        getline(in, btsLogPrint.m_fileName);
-    }
+    AlbaFileParameterReader reader(in);
+    btsLogPrint.m_btsTime = reader.readData<BtsLogTime>();
+    btsLogPrint.m_pcTime = reader.readData<BtsLogTime>();
+    btsLogPrint.m_hardwareAddress = reader.readData<string>();
+    btsLogPrint.m_print = reader.readData<string>();
+    btsLogPrint.m_fileName = reader.readData<string>();
     return in;
 }
 

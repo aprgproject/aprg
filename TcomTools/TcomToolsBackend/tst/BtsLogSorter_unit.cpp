@@ -3,6 +3,8 @@
 
 #include <gtest/gtest.h>
 
+#include <Debug/AlbaDebug.hpp>
+
 namespace alba
 {
 

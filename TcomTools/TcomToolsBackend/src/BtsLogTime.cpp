@@ -1,5 +1,7 @@
 #include "BtsLogTime.hpp"
 
+#include <File/AlbaFileParameterReader.hpp>
+#include <File/AlbaFileParameterWriter.hpp>
 #include <String/AlbaStringHelper.hpp>
 
 #include <iomanip>
@@ -20,6 +22,11 @@ BtsLogTime::BtsLogTime(BtsLogTimeType logTimeType, string const& timeStampString
     : m_dateTime()
 {
     setTimeByTimeStamp(logTimeType, timeStampString);
+}
+
+void BtsLogTime::clear()
+{
+    m_dateTime.clear();
 }
 
 void BtsLogTime::setTimeByTimeStamp(BtsLogTimeType logTimeType, string const& timeStampString)
@@ -212,32 +219,27 @@ BtsLogTime BtsLogTime::operator-(BtsLogTime const& btsLogTime2) const
 
 ostream& operator<<(ostream & out, BtsLogTime const& btsLogTime)
 {
-    out << btsLogTime.getYears() << endl;
-    out << btsLogTime.getMonths() << endl;
-    out << btsLogTime.getDays() << endl;
-    out << btsLogTime.getHours() << endl;
-    out << btsLogTime.getMinutes() << endl;
-    out << btsLogTime.getSeconds() << endl;
-    out << btsLogTime.getMicroSeconds();
+    AlbaFileParameterWriter writer(out);
+    writer.writeData<unsigned int>(btsLogTime.getYears());
+    writer.writeData<unsigned int>(btsLogTime.getMonths());
+    writer.writeData<unsigned int>(btsLogTime.getDays());
+    writer.writeData<unsigned int>(btsLogTime.getHours());
+    writer.writeData<unsigned int>(btsLogTime.getMinutes());
+    writer.writeData<unsigned int>(btsLogTime.getSeconds());
+    writer.writeData<unsigned int>(btsLogTime.getMicroSeconds());
     return out;
 }
 
 istream& operator>>(istream & in, BtsLogTime& btsLogTime)
 {
-    unsigned int years=0;
-    unsigned int months=0;
-    unsigned int days=0;
-    unsigned int hours=0;
-    unsigned int minutes=0;
-    unsigned int seconds=0;
-    unsigned int microseconds=0;
-    in >> years;
-    in >> months;
-    in >> days;
-    in >> hours;
-    in >> minutes;
-    in >> seconds;
-    in >> microseconds;
+    AlbaFileParameterReader reader(in);
+    unsigned int years(reader.readData<unsigned int>());
+    unsigned int months(reader.readData<unsigned int>());
+    unsigned int days(reader.readData<unsigned int>());
+    unsigned int hours(reader.readData<unsigned int>());
+    unsigned int minutes(reader.readData<unsigned int>());
+    unsigned int seconds(reader.readData<unsigned int>());
+    unsigned int microseconds(reader.readData<unsigned int>());
     btsLogTime.m_dateTime.setTime((unsigned short int)years, (unsigned char)months, (unsigned char)days, (unsigned char)hours, (unsigned char)minutes, (unsigned char)seconds, microseconds);
     return in;
 }

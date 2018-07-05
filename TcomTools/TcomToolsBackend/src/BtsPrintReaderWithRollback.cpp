@@ -7,6 +7,16 @@ using namespace std;
 namespace tcomToolsBackend
 {
 
+BtsPrintReaderWithRollback::BtsPrintReaderWithRollback()
+    : m_isRollbackActivated(false)
+{}
+
+void BtsPrintReaderWithRollback::clear()
+{
+    m_isRollbackActivated = false;
+    m_previousPrint.clear();
+}
+
 bool BtsPrintReaderWithRollback::isGood() const
 {
     return m_inputStream.good();

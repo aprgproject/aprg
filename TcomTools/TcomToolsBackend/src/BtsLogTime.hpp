@@ -18,6 +18,7 @@ class BtsLogTime
 public:
     BtsLogTime();
     BtsLogTime(BtsLogTimeType logTimeType, std::string const& timeStampString);
+    void clear();
     void setTimeByTimeStamp(BtsLogTimeType logTimeType, std::string const& timeStampString);
     bool isEmpty() const;
     bool isStartup() const;
