@@ -436,12 +436,11 @@ void SackReader::generateStructureForDisplayTablesIfNeeded(string const& structu
             }
             displayTable.getLastRow().addCell(smallTextModifier+finalType);
 
-            string sackDescription(getStringWithoutStartingAndTrailingWhiteSpace(getStringWithFirstLetterCapital(parameterDetails.description)));
-            string userDescription(getStringWithoutStartingAndTrailingWhiteSpace(getStringWithFirstLetterCapital(parameterDetails.descriptionFromUser)));
+            string sackDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(parameterDetails.description)));
+            string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(parameterDetails.descriptionFromUser)));
             string finalDescription;
             if(!userDescription.empty())
-            {
-                if(sackDescription!=userDescription)
+            {                if(sackDescription!=userDescription)
                 {
                     //cout <<"The description needs to be aligned with sack."<<endl;
                     /*cout<<"Structure: "<<structureName<<" Parameter: "<<parameterDetails.name<<endl;
@@ -493,12 +492,11 @@ void SackReader::generateEnumForDisplayTablesIfNeeded(string const& enumName, Di
             displayTable.addRow();
             displayTable.getLastRow().addCell(smallTextModifier+" "+parameterDetails.name);
             displayTable.getLastRow().addCell(smallTextModifier+parameterDetails.value);
-            string sackDescription(getStringWithoutStartingAndTrailingWhiteSpace(getStringWithFirstLetterCapital(parameterDetails.description)));
-            string userDescription(getStringWithoutStartingAndTrailingWhiteSpace(getStringWithFirstLetterCapital(parameterDetails.descriptionFromUser)));
+            string sackDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(parameterDetails.description)));
+            string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(parameterDetails.descriptionFromUser)));
             string finalDescription;
             if(!userDescription.empty())
-            {
-                if(sackDescription!=userDescription)
+            {                if(sackDescription!=userDescription)
                 {
                     //cout <<"The description needs to be aligned with sack."<<endl;
                     /*cout<<"Enum: "<<enumName<<" Parameter: "<<parameterDetails.name<<endl;
