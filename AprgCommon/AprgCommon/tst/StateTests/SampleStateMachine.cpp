@@ -15,7 +15,7 @@ SampleStateMachine::SampleStateMachine(State const stateIdentifier)
 
 void SampleStateMachine::processInput(Action const& action)
 {
-    switch(m_stateIdentifier)
+    switch(m_state)
     {
     case State::StateWithNoValue:
         processStateWithNoValue(action);
@@ -33,14 +33,15 @@ void SampleStateMachine::processInput(Action const& action)
         processState4(action);
         break;
     default:
-        assert(false);        break;
+        assert(false);
+        break;
     }
 }
 
 void SampleStateMachine::processStateWithNoValue(Action const& action)
 {
-    saveActionToOutput(action);
-    switch(action)    {
+    switch(action)
+    {
     case Action::InitializeTo1:
         gotoState(State::State1);
         break;
@@ -61,8 +62,8 @@ void SampleStateMachine::processStateWithNoValue(Action const& action)
 
 void SampleStateMachine::processState1(Action const& action)
 {
-    saveActionToOutput(action);
-    switch(action)    {
+    switch(action)
+    {
     case Action::InitializeTo1:
         gotoState(State::State1);
         break;
@@ -83,8 +84,8 @@ void SampleStateMachine::processState1(Action const& action)
 
 void SampleStateMachine::processState2(Action const& action)
 {
-    saveActionToOutput(action);
-    switch(action)    {
+    switch(action)
+    {
     case Action::InitializeTo1:
         gotoState(State::State1);
         break;
@@ -105,8 +106,8 @@ void SampleStateMachine::processState2(Action const& action)
 
 void SampleStateMachine::processState3(Action const& action)
 {
-    saveActionToOutput(action);
-    switch(action)    {
+    switch(action)
+    {
     case Action::InitializeTo1:
         gotoState(State::State1);
         break;
@@ -127,8 +128,8 @@ void SampleStateMachine::processState3(Action const& action)
 
 void SampleStateMachine::processState4(Action const& action)
 {
-    saveActionToOutput(action);
-    switch(action)    {
+    switch(action)
+    {
     case Action::InitializeTo1:
         gotoState(State::State1);
         break;
@@ -143,28 +144,6 @@ void SampleStateMachine::processState4(Action const& action)
         break;
     case Action::MultiplyBy2:
         gotoState(State::StateWithNoValue);
-        break;
-    }
-}
-
-void SampleStateMachine::saveActionToOutput(Action const& action)
-{
-    switch(action)
-    {
-    case Action::InitializeTo1:
-        m_currentOutput = "InitializeTo1";
-        break;
-    case Action::Increase:
-        m_currentOutput = "Increase";
-        break;
-    case Action::Decrease:
-        m_currentOutput = "Decrease";
-        break;
-    case Action::NoAction:
-        m_currentOutput = "NoAction";
-        break;
-    case Action::MultiplyBy2:
-        m_currentOutput = "MultiplyBy2";
         break;
     }
 }

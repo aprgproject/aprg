@@ -29,16 +29,19 @@ src/TcomToolsConfiguration.cpp\
 ../../AprgAlgorithm/AprgAlgorithm/src/GrepStringEvaluator/AlbaGrepStringEvaluatorTerm.cpp\
 ../../AprgAlgorithm/AprgAlgorithm/src/GrepStringEvaluator/AlbaGrepStringSingletionForString.cpp\
 ../../AprgAlgorithm/AprgAlgorithm/src/GrepStringEvaluator/AlbaGrepStringToken.cpp\
+../../AprgCommon/AprgCommon/src/File/AlbaFileParameterReader.cpp\
+../../AprgCommon/AprgCommon/src/File/AlbaFileParameterWriter.cpp\
 ../../AprgCommon/AprgCommon/src/File/AlbaFileReader.cpp\
 ../../AprgCommon/AprgCommon/src/Memory/AlbaMemoryBuffer.cpp\
 ../../AprgCommon/AprgCommon/src/Optional/AlbaOptional.cpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.cpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaLocalPathHandler.cpp\
-../../AprgCommon/AprgCommon/src/PathHandlers/AlbaWindowsPathHandler.cpp\
 ../../AprgCommon/AprgCommon/src/Randomizer/AlbaRandomizer.cpp\
 ../../AprgCommon/AprgCommon/src/String/AlbaStringHelper.cpp\
 ../../AprgCommon/AprgCommon/src/Time/AlbaDateTime.cpp\
 ../../AprgCommon/AprgCommon/src/Time/AlbaDateTimeHelper.cpp\
+../../AprgCommon/AprgCommon/srcWindows/PathHandlers/AlbaWindowsPathHandler.cpp\
+../../AprgCommon/AprgCommon/srcWindows/Windows/AlbaWindowsHelper.cpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.cpp
 
 HEADERS += \
@@ -60,17 +63,20 @@ src/TcomToolsConfiguration.hpp\
 ../../AprgAlgorithm/AprgAlgorithm/src/GrepStringEvaluator/AlbaGrepStringOperatorType.hpp\
 ../../AprgAlgorithm/AprgAlgorithm/src/GrepStringEvaluator/AlbaGrepStringSingletionForString.hpp\
 ../../AprgAlgorithm/AprgAlgorithm/src/GrepStringEvaluator/AlbaGrepStringToken.hpp\
+../../AprgCommon/AprgCommon/src/File/AlbaFileParameterReader.hpp\
+../../AprgCommon/AprgCommon/src/File/AlbaFileParameterWriter.hpp\
 ../../AprgCommon/AprgCommon/src/File/AlbaFileReader.hpp\
 ../../AprgCommon/AprgCommon/src/Memory/AlbaMemoryBuffer.hpp\
 ../../AprgCommon/AprgCommon/src/Optional/AlbaOptional.hpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.hpp\
 ../../AprgCommon/AprgCommon/src/PathHandlers/AlbaLocalPathHandler.hpp\
-../../AprgCommon/AprgCommon/src/PathHandlers/AlbaWindowsPathHandler.hpp\
 ../../AprgCommon/AprgCommon/src/Randomizer/AlbaRandomizer.hpp\
 ../../AprgCommon/AprgCommon/src/String/AlbaStringHelper.hpp\
 ../../AprgCommon/AprgCommon/src/Time/AlbaDateTime.hpp\
 ../../AprgCommon/AprgCommon/src/Time/AlbaDateTimeHelper.hpp\
 ../../AprgCommon/AprgCommon/src/Time/AlbaDateTimeConstants.hpp\
+../../AprgCommon/AprgCommon/srcWindows/PathHandlers/AlbaWindowsPathHandler.hpp\
+../../AprgCommon/AprgCommon/srcWindows/Windows/AlbaWindowsHelper.hpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/AprgFileExtractor.hpp
 
 FORMS += src/TcomTools.ui
@@ -80,7 +86,8 @@ src\
 ../TcomToolsBackend/src\
 ../../AprgFileExtractor/AprgFileExtractor/src\
 ../../AprgAlgorithm/AprgAlgorithm/src\
-../../AprgCommon/AprgCommon/src
+../../AprgCommon/AprgCommon/src\
+../../AprgCommon/AprgCommon/srcWindows
 
 
 win32 {
