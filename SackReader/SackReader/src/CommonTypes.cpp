@@ -94,6 +94,7 @@ ostream& operator<<(ostream & out, StructureDetails const& structureDetails)
     writer.writeData<string>(structureDetails.name);
     writer.writeData(structureDetails.parameters);
     writer.writeData(structureDetails.parametersWithCorrectOrder);
+    writer.writeData<bool>(structureDetails.isMessage);
     return out;
 }
 
@@ -103,6 +104,7 @@ istream& operator>>(istream & in, StructureDetails& structureDetails)
     structureDetails.name = reader.readData<string>();
     reader.readData(structureDetails.parameters);
     reader.readData(structureDetails.parametersWithCorrectOrder);
+    structureDetails.isMessage = reader.readData<bool>();
     return in;
 }
 

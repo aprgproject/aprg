@@ -25,7 +25,7 @@ public:
         return m_state;
     }
 protected:
-    virtual void gotoState(StateIdentifierType const newState)
+    virtual void saveNextState(StateIdentifierType const newState)
     {
         m_state = newState;
     }

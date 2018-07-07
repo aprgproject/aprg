@@ -1,5 +1,7 @@
 #include "CommentStateMachine.hpp"
 
+#include <Debug/AlbaDebug.hpp>
+
 using namespace std;
 using namespace std::placeholders;
 
@@ -9,8 +11,8 @@ namespace alba
 namespace CommentStateMachineNamespace
 {
 
-CommentStateMachine::CommentStateMachine(State const stateIdentifier)
-    : AlbaBaseStateMachine(stateIdentifier)
+CommentStateMachine::CommentStateMachine()
+    : AlbaBaseStateMachine(State::NotInComment)
 {}
 
 bool CommentStateMachine::isInSingleLineComment() const
@@ -41,10 +43,10 @@ void CommentStateMachine::processInput(InputToken const& inputToken)
     case State::DoubleSlash:
         processStateDoubleSlash(inputToken);
         break;
-    case State::InCommentAsterisk:
+    case State::InCommentNotInAsterisk:
         processStateInCommentNotInAsterisk(inputToken);
         break;
-    case State::InCommentNotInAsterisk:
+    case State::InCommentAsterisk:
         processStateInCommentAsterisk(inputToken);
         break;
     default:
@@ -57,7 +59,7 @@ void CommentStateMachine::processStateNotInComment(InputToken const& inputToken)
 {
     if(inputToken.token=="/")
     {
-        gotoState(State::Slash);
+        saveNextState(State::Slash);
     }
 }
 
@@ -65,15 +67,15 @@ void CommentStateMachine::processStateSlash(InputToken const& inputToken)
 {
     if(inputToken.token=="/")
     {
-        gotoState(State::DoubleSlash);
+        saveNextState(State::DoubleSlash);
     }
     else if(inputToken.token=="*")
     {
-        gotoState(State::InCommentNotInAsterisk);
+        saveNextState(State::InCommentNotInAsterisk);
     }
     else
     {
-        gotoState(State::NotInComment);
+        saveNextState(State::NotInComment);
     }
 }
 
@@ -81,7 +83,7 @@ void CommentStateMachine::processStateDoubleSlash(InputToken const& inputToken)
 {
     if(inputToken.isNewLine)
     {
-        gotoState(State::NotInComment);
+        saveNextState(State::NotInComment);
         processInput(inputToken);
     }
 }
@@ -90,7 +92,7 @@ void CommentStateMachine::processStateInCommentNotInAsterisk(InputToken const& i
 {
     if(inputToken.token=="*")
     {
-        gotoState(State::InCommentAsterisk);
+        saveNextState(State::InCommentAsterisk);
     }
 }
 
@@ -98,11 +100,11 @@ void CommentStateMachine::processStateInCommentAsterisk(InputToken const& inputT
 {
     if(inputToken.token=="/")
     {
-        gotoState(State::NotInComment);
+        saveNextState(State::NotInComment);
     }
     else if(inputToken.token!="*")
     {
-        gotoState(State::InCommentNotInAsterisk);
+        saveNextState(State::InCommentNotInAsterisk);
     }
 }
 

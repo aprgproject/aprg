@@ -144,3 +144,22 @@ TEST(SackFileReaderTest, EControlUnitType)
     EXPECT_EQ("5", details.value);
     EXPECT_EQ("if EUBB WSPF is control unit", details.description);
 }
+
+TEST(SackFileReaderTest, CommentInStructure)
+{
+    Database database;
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\Oam_Tcom_TestModelService.h)");
+
+    ParameterDetails details(database.getParameterDetails("STestModelSetupReqMsg", "numberOfHsPdsch"));
+    EXPECT_EQ("numberOfHsPdsch", details.name);
+    EXPECT_EQ("TNumberOfItems", details.type);
+    EXPECT_FALSE(details.isAnArray);
+    //EXPECT_EQ("indicates how many HS-PDSCH is setup for TM5", details.description); //TooHard
+
+    details = database.getParameterDetails("STestModelSetupReqMsg", "testPattern");
+    EXPECT_EQ("testPattern", details.name);
+    EXPECT_EQ("ECdmaTestDataPattern", details.type);
+    EXPECT_FALSE(details.isAnArray);
+    //EXPECT_EQ("indicates what kind of testdata is generated to test channels", details.description); //TooHard
+}

@@ -27,7 +27,7 @@ using BaseCommentStateMachine = AlbaBaseStateMachine<State, InputToken>;
 class CommentStateMachine : public BaseCommentStateMachine
 {
 public:
-    CommentStateMachine(State const stateIdentifier);
+    CommentStateMachine();
     bool isInSingleLineComment() const;
     bool isInMultilineComment() const;
     bool isInComment() const;
@@ -38,7 +38,6 @@ private:
     void processStateDoubleSlash(InputToken const& inputToken);
     void processStateInCommentNotInAsterisk(InputToken const& inputToken);
     void processStateInCommentAsterisk(InputToken const& inputToken);
-
 };
 
 }
