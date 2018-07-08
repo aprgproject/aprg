@@ -108,4 +108,22 @@ istream& operator>>(istream & in, StructureDetails& structureDetails)
     return in;
 }
 
+ostream& operator<<(ostream & out, UnionDetails const& unionDetails)
+{
+    AlbaFileParameterWriter writer(out);
+    writer.writeData<string>(unionDetails.name);
+    writer.writeData(unionDetails.parameters);
+    writer.writeData(unionDetails.parametersWithCorrectOrder);
+    return out;
+}
+
+istream& operator>>(istream & in, UnionDetails& unionDetails)
+{
+    AlbaFileParameterReader reader(in);
+    unionDetails.name = reader.readData<string>();
+    reader.readData(unionDetails.parameters);
+    reader.readData(unionDetails.parametersWithCorrectOrder);
+    return in;
+}
+
 }

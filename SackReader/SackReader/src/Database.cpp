@@ -18,9 +18,9 @@ void Database::saveDatabaseToFile(string const& path)
     writer.writeData(constantNameToConstantDetailsMap);
     writer.writeData(messageNameToStructureNameMap);
     writer.writeData(structureNameToStructureDetailsMap);
+    writer.writeData(unionNameToUnionDetailsMap);
     writer.writeData(enumNameToEnumDetailsMap);
 }
-
 void Database::loadDatabaseFromFile(string const& path)
 {
     ifstream fileStream(path);
@@ -29,9 +29,9 @@ void Database::loadDatabaseFromFile(string const& path)
     reader.readData(constantNameToConstantDetailsMap);
     reader.readData(messageNameToStructureNameMap);
     reader.readData(structureNameToStructureDetailsMap);
+    reader.readData(unionNameToUnionDetailsMap);
     reader.readData(enumNameToEnumDetailsMap);
 }
-
 string Database::getFileFullPath(string const& fileName) const
 {
     string result;
@@ -102,28 +102,32 @@ EnumParameterDetails Database::getEnumParameterDetails(string const& enumName, s
     return result;
 }
 
-bool Database::doesThisStructureAndParameterExists(string const& structureName, string const& parameterName) const
+UnionDetails Database::getUnionDetails(string const& unionName) const
 {
-    bool result(false);
-    if(doesThisStructureExists(structureName))
+    UnionDetails result;
+    if(unionNameToUnionDetailsMap.find(unionName)!=unionNameToUnionDetailsMap.cend())
     {
-        StructureDetails const & structureDetails = structureNameToStructureDetailsMap.at(structureName);
-        StructureDetails::ParameterMap const & parameters(structureDetails.parameters);
-        if(parameters.find(parameterName)!=parameters.cend())
-        {
-            result=true;
-        }
+        result = unionNameToUnionDetailsMap.at(unionName);
     }
     return result;
 }
 
-bool Database::doesThisEnumAndParameterExists(string const& enumName, string const& parameterName) const
+ParameterDetails Database::getUnionParameterDetails(string const& unionName, string const& parameterName) const
 {
-    bool result(false);
-    if(doesThisEnumExists(enumName))
+    ParameterDetails result;
+    if(doesThisUnionAndParameterExists(unionName, parameterName))
     {
-        EnumDetails const & enumDetails = enumNameToEnumDetailsMap.at(enumName);
-        EnumDetails::ParameterMap const & parameters(enumDetails.parameters);
+        result = unionNameToUnionDetailsMap.at(unionName).parameters.at(parameterName);
+    }
+    return result;
+}
+
+bool Database::doesThisStructureAndParameterExists(string const& structureName, string const& parameterName) const
+{
+    bool result(false);    if(doesThisStructureExists(structureName))
+    {
+        StructureDetails const & structureDetails = structureNameToStructureDetailsMap.at(structureName);
+        StructureDetails::ParameterMap const & parameters(structureDetails.parameters);
         if(parameters.find(parameterName)!=parameters.cend())
         {
             result=true;
@@ -147,6 +151,49 @@ bool Database::doesThisStructureAndParameterExistsInVector(string const& structu
     return result;
 }
 
+bool Database::doesThisEnumAndParameterExists(string const& enumName, string const& parameterName) const
+{
+    bool result(false);    if(doesThisEnumExists(enumName))
+    {
+        EnumDetails const & enumDetails = enumNameToEnumDetailsMap.at(enumName);
+        EnumDetails::ParameterMap const & parameters(enumDetails.parameters);
+        if(parameters.find(parameterName)!=parameters.cend())
+        {
+            result=true;
+        }
+    }
+    return result;
+}
+
+bool Database::doesThisUnionAndParameterExists(string const& unionName, string const& parameterName) const
+{
+    bool result(false);
+    if(doesThisUnionExists(unionName))
+    {
+        UnionDetails const & unionDetails = unionNameToUnionDetailsMap.at(unionName);
+        UnionDetails::ParameterMap const & parameters(unionDetails.parameters);
+        if(parameters.find(parameterName)!=parameters.cend())
+        {
+            result=true;
+        }
+    }
+    return result;
+}
+
+bool Database::doesThisUnionAndParameterExistsInVector(string const& unionName, string const& parameterName) const
+{
+    bool result(false);
+    if(doesThisUnionExists(unionName))
+    {
+        UnionDetails const & unionDetails = unionNameToUnionDetailsMap.at(unionName);
+        vector<string> const & parametersWithCorrectOrder(unionDetails.parametersWithCorrectOrder);
+        if(find(parametersWithCorrectOrder.cbegin(), parametersWithCorrectOrder.cend(), parameterName)!=parametersWithCorrectOrder.cend())
+        {
+            result=true;        }
+    }
+    return result;
+}
+
 bool Database::doesThisStructureExists(string const& structureName) const
 {
     bool result(false);
@@ -166,5 +213,16 @@ bool Database::doesThisEnumExists(string const& enumName) const
     }
     return result;
 }
+
+bool Database::doesThisUnionExists(string const& unionName) const
+{
+    bool result(false);
+    if(unionNameToUnionDetailsMap.find(unionName)!=unionNameToUnionDetailsMap.cend())
+    {
+        return true;
+    }
+    return result;
+}
+
 
 }

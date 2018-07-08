@@ -163,3 +163,66 @@ TEST(SackFileReaderTest, CommentInStructure)
     EXPECT_FALSE(details.isAnArray);
     //EXPECT_EQ("indicates what kind of testdata is generated to test channels", details.description); //TooHard
 }
+
+TEST(SackFileReaderTest, UConfigInfoElement)
+{
+    Database database;
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\UConfigInfoElement.h)");
+
+    ParameterDetails details(database.getUnionParameterDetails("UConfigInfoElement", "wamUnit"));
+    EXPECT_EQ("wamUnit", details.name);
+    EXPECT_EQ("SWamUnit", details.type);
+    EXPECT_FALSE(details.isAnArray);
+    EXPECT_EQ("WAM info", details.description);
+
+    details = database.getUnionParameterDetails("UConfigInfoElement", "wspUnit");
+    EXPECT_EQ("wspUnit", details.name);
+    EXPECT_EQ("SWspUnit", details.type);
+    EXPECT_FALSE(details.isAnArray);
+    EXPECT_EQ("WSP info", details.description);
+
+    details = database.getUnionParameterDetails("UConfigInfoElement", "rxTxResource");
+    EXPECT_EQ("rxTxResource", details.name);
+    EXPECT_EQ("SRxTxResource", details.type);
+    EXPECT_FALSE(details.isAnArray);
+    EXPECT_EQ("Rx or Tx resource info", details.description);
+}
+
+TEST(SackFileReaderTest, UIpMacAddress)
+{
+    Database database;
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\UIpMacAddress.h)");
+
+    ParameterDetails details(database.getUnionParameterDetails("UIpMacAddress", "ipMacv4"));
+    EXPECT_EQ("ipMacv4", details.name);
+    EXPECT_EQ("SIpMacAddressV4", details.type);
+    EXPECT_FALSE(details.isAnArray);
+    EXPECT_EQ("<TODO>", details.description);
+
+    details = database.getUnionParameterDetails("UIpMacAddress", "ipMacv6");
+    EXPECT_EQ("ipMacv6", details.name);
+    EXPECT_EQ("SIpMacAddressV6", details.type);
+    EXPECT_FALSE(details.isAnArray);
+    EXPECT_EQ("<TODO>", details.description);
+}
+
+TEST(SackFileReaderTest, URxAntennaBusParameters)
+{
+    Database database;
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\URxAntennaBusParameters.h)");
+
+    ParameterDetails details(database.getUnionParameterDetails("URxAntennaBusParameters", "paramsForRfBus"));
+    EXPECT_EQ("paramsForRfBus", details.name);
+    EXPECT_EQ("SAntennaBusParametersForRfBus", details.type);
+    EXPECT_FALSE(details.isAnArray);
+    EXPECT_EQ("Index of R-bus and R-bus Antennas mapped to the current LCR id.", details.description);
+
+    details = database.getUnionParameterDetails("URxAntennaBusParameters", "paramsForRp3");
+    EXPECT_EQ("paramsForRp3", details.name);
+    EXPECT_EQ("SAntennaPhysicalAddress", details.type);
+    EXPECT_FALSE(details.isAnArray);
+    EXPECT_EQ("RP3 RX Antenna address information mapped to current LCR ID.", details.description);
+}

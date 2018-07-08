@@ -516,10 +516,10 @@ void SackReader::generateEnumForDisplayTablesIfNeeded(string const& enumName, Di
 
 void SackReader::performHacks()
 {
+    //This should be hacked because syscom defines causes a different definition.
     StructureDetails & structureDetails(m_database.structureNameToStructureDetailsMap["SMessageAddress"]);
     structureDetails.name = "SMessageAddress";
-    structureDetails.isMessage = false;
-    structureDetails.isUsedInIfs = true;
+    structureDetails.isMessage = false;    structureDetails.isUsedInIfs = true;
     structureDetails.parametersWithCorrectOrder.clear();
     structureDetails.parametersWithCorrectOrder.emplace_back("board");
     structureDetails.parametersWithCorrectOrder.emplace_back("cpu");

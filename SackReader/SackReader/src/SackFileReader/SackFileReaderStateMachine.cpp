@@ -19,10 +19,11 @@ InnerStates::InnerStates()
     , stateForStructAfterOpeningBraces(StateForStructAfterOpeningBraces::BeforeParameterType)
     , stateForEnum(StateForEnum::BeforeName)
     , stateForEnumAfterOpeningBraces(StateForEnumAfterOpeningBraces::BeforeEnumParameterName)
+    , stateForUnion(StateForUnion::BeforeName)
+    , stateForUnionAfterOpeningBraces(StateForUnionAfterOpeningBraces::BeforeParameterType)
     , stateForAtDefDescription(StateForAtDefDescription::BeforeName)
     , stateForAtParamDescription(StateForAtParamDescription::BeforeName)
 {}
-
 void InnerStates::reset()
 {
     stateForConstant = StateForConstant::BeforeName;
@@ -30,17 +31,19 @@ void InnerStates::reset()
     stateForStructAfterOpeningBraces = StateForStructAfterOpeningBraces::BeforeParameterType;
     stateForEnum = StateForEnum::BeforeName;
     stateForEnumAfterOpeningBraces = StateForEnumAfterOpeningBraces::BeforeEnumParameterName;
+    stateForUnion = StateForUnion::BeforeName;
+    stateForUnionAfterOpeningBraces = StateForUnionAfterOpeningBraces::BeforeParameterType;
     stateForAtDefDescription = StateForAtDefDescription::BeforeName;
     stateForAtParamDescription = StateForAtParamDescription::BeforeName;
 }
 
-SackFileReaderStateMachine::SackFileReaderStateMachine(Database & database)
+SackFileReaderStateMachine::SackFileReaderStateMachine(Database & database, string const& fileNameOnly)
     : BaseSackFileReaderStateMachine(State::Idle)
     , m_isMessageIdFile(false)
     , m_isNextLineNeeded(false)
+    , m_fileNameOnly(fileNameOnly)
     , m_database(database)
 {}
-
 bool SackFileReaderStateMachine::isNextLineNeeded() const
 {
     return m_isNextLineNeeded;
@@ -64,74 +67,107 @@ void SackFileReaderStateMachine::processInput(InputToken const& inputToken)
     case State::Idle:
         processStateIdle(inputToken);
         break;
-    case State::EnumKeyword:
-        processStateEnumKeyword(inputToken);
-        break;
     case State::SharpDefineForConstant:
         processStateSharpDefineForConstant(inputToken);
-        break;
-    case State::SharpDefineForMessageId:
+        break;    case State::SharpDefineForMessageId:
         processStateSharpDefineForMessageId(inputToken);
         break;
     case State::StructKeyword:
         processStateStructKeyword(inputToken);
         break;
+    case State::EnumKeyword:
+        processStateEnumKeyword(inputToken);
+        break;
+    case State::UnionKeyword:
+        processStateUnionKeyword(inputToken);
+        break;
     case State::AtDefDescription:
         processStateAtDefDescription(inputToken);
-        break;
-    case State::AtEnumDescription:
-        processStateAtEnumDescription(inputToken);
-        break;
-    case State::AtParamDescription:
-        processStateAtParamDescription(inputToken);
         break;
     case State::AtStructDescription:
         processStateAtStructDescription(inputToken);
         break;
+    case State::AtEnumDescription:
+        processStateAtEnumDescription(inputToken);
+        break;
+    case State::AtUnionDescription:
+        processStateAtUnionDescription(inputToken);
+        break;
+    case State::AtParamDescription:
+        processStateAtParamDescription(inputToken);
+        break;
     default:
         assert(false);
-        break;
-    }
+        break;    }
+}
+
+
+bool SackFileReaderStateMachine::isNotWhiteSpaceAndNotInComment(InputToken const& inputToken) const
+{
+    return !isWhiteSpace(inputToken.token) && inputToken.isNotInComment;
 }
 
 void SackFileReaderStateMachine::processStateIdle(InputToken const& inputToken)
 {
-    //refactor this
     string const& token(inputToken.token);
-    if(token == "#define" && inputToken.isNotInComment)
+    if(inputToken.isNotInComment)
     {
-        if(m_isMessageIdFile)
+        if(token == "#define")
         {
-            saveNextStateAndResetInnerStates(State::SharpDefineForMessageId);
+            if(m_isMessageIdFile)
+            {
+                saveNextStateAndResetInnerStates(State::SharpDefineForMessageId);
+            }
+            else
+            {
+                saveNextStateAndResetInnerStates(State::SharpDefineForConstant);
+            }
         }
-        else
+        else if(token == "struct")
         {
-            saveNextStateAndResetInnerStates(State::SharpDefineForConstant);
+            saveNextStateAndResetInnerStates(State::StructKeyword);
+        }
+        else if(token == "enum")
+        {
+            saveNextStateAndResetInnerStates(State::EnumKeyword);
+        }
+        else if(token == "union")
+        {
+            saveNextStateAndResetInnerStates(State::UnionKeyword);
         }
     }
-    else if(token == "@def" && inputToken.isInMultilineComment)
+    else if(inputToken.isInMultilineComment)
     {
-        saveNextStateAndResetInnerStates(State::AtDefDescription);
+        if(token == "@def")
+        {
+            saveNextStateAndResetInnerStates(State::AtDefDescription);
+        }
+        else if(token == "@struct")
+        {
+            saveNextStateAndResetInnerStates(State::AtStructDescription);
+        }
+        else if(token == "@enum")
+        {
+            saveNextStateAndResetInnerStates(State::AtEnumDescription);
+        }
+        else if(token == "@Union")
+        {
+            saveNextStateAndResetInnerStates(State::AtUnionDescription);
+        }
+        else if(token == "@param")
+        {
+            saveNextStateAndResetInnerStates(State::AtParamDescription);
+        }
     }
-    else if(token == "struct" && inputToken.isNotInComment)
+}
+void SackFileReaderStateMachine::processStateSharpDefineForMessageId(InputToken const& inputToken)
+{
+    string const& token(inputToken.token);
+    if(isNotWhiteSpaceAndNotInComment(inputToken))
     {
-        saveNextStateAndResetInnerStates(State::StructKeyword);
-    }
-    else if(token == "@param" && inputToken.isInMultilineComment)
-    {
-        saveNextStateAndResetInnerStates(State::AtParamDescription);
-    }
-    else if(token == "@struct" && inputToken.isInMultilineComment)
-    {
-        saveNextStateAndResetInnerStates(State::AtStructDescription);
-    }
-    else if(token == "@enum" && inputToken.isInMultilineComment)
-    {
-        saveNextStateAndResetInnerStates(State::AtEnumDescription);
-    }
-    else if(token == "enum" && inputToken.isNotInComment)
-    {
-        saveNextStateAndResetInnerStates(State::EnumKeyword);
+        saveMessageToDatabase(token, getStringInBetweenTwoStrings(inputToken.line, "/* !- SIGNO(struct ", ") -! */"));
+        m_isNextLineNeeded = true;
+        saveNextState(State::Idle);
     }
 }
 
@@ -142,77 +178,23 @@ void SackFileReaderStateMachine::processStateSharpDefineForConstant(InputToken c
     {
         if(StateForConstant::BeforeName == m_innerStates.stateForConstant)
         {
-            m_commentDetails.name = token;
+            m_constantDetails.name = token;
             m_innerStates.stateForConstant = StateForConstant::AfterNameBeforeValue;
         }
         else if(StateForConstant::AfterNameBeforeValue == m_innerStates.stateForConstant)
         {
-            m_commentDetails.value = token;
-            m_database.constantNameToConstantDetailsMap[m_commentDetails.name].name = m_commentDetails.name;
-            m_database.constantNameToConstantDetailsMap[m_commentDetails.name].value = m_commentDetails.value;
+            m_constantDetails.value = token;
+            saveConstantToDatabase();
             saveNextState(State::Idle);
-        }
-    }
-}
-
-void SackFileReaderStateMachine::processStateSharpDefineForMessageId(InputToken const& inputToken)
-{
-    string const& token(inputToken.token);
-    if(isNotWhiteSpaceAndNotInComment(inputToken))
-    {
-        m_database.messageNameToStructureNameMap.emplace(token, getStringInBetweenTwoStrings(inputToken.line, "/* !- SIGNO(struct ", ") -! */"));
-        m_isNextLineNeeded = true;
-        saveNextState(State::Idle);
-    }
-}
-
-void SackFileReaderStateMachine::processStateAtDefDescription(InputToken const& inputToken)
-{
-    static string partialString;
-    string const& token(inputToken.token);
-    if(token == "@def" || token == "Additional")
-    {
-        m_database.constantNameToConstantDetailsMap[m_commentDetails.name].name = m_commentDetails.name;
-        m_database.constantNameToConstantDetailsMap[m_commentDetails.name].description = getStringWithoutRedundantWhiteSpace(partialString);
-        partialString.clear();
-        m_innerStates.stateForAtDefDescription = StateForAtDefDescription::BeforeName;
-        if(token == "Additional")
-        {
-            saveNextState(State::Idle);
-        }
-    }
-    else if(StateForAtDefDescription::BeforeName == m_innerStates.stateForAtDefDescription)
-    {
-        if(!isWhiteSpace(token))
-        {
-            m_commentDetails.name = token;
-            m_innerStates.stateForAtDefDescription = StateForAtDefDescription::AfterNameBeforeColon;
-        }
-    }
-    else if(StateForAtDefDescription::AfterNameBeforeColon == m_innerStates.stateForAtDefDescription)
-    {
-        if(":" == token)
-        {
-            partialString.clear();
-            m_innerStates.stateForAtDefDescription = StateForAtDefDescription::AfterColon;
-        }
-    }
-    else if(StateForAtDefDescription::AfterColon == m_innerStates.stateForAtDefDescription)
-    {
-        if("*" != token)
-        {
-            partialString+=token;
         }
     }
 }
 
 void SackFileReaderStateMachine::processStateStructKeyword(InputToken const& inputToken)
 {
-    static string partialString;
     string const& token(inputToken.token);
     if(isNotWhiteSpaceAndNotInComment(inputToken) && token!="/")
-    {
-        if(StateForStruct::BeforeName == m_innerStates.stateForStruct)
+    {        if(StateForStruct::BeforeName == m_innerStates.stateForStruct)
         {
             m_structureDetails.name = token;
             m_innerStates.stateForStruct=StateForStruct::AfterName;
@@ -232,152 +214,63 @@ void SackFileReaderStateMachine::processStateStructKeyword(InputToken const& inp
         }
         else if(StateForStruct::AfterOpeningBraces == m_innerStates.stateForStruct)
         {
-            if("MESSAGEHEADER" == token)
+            processStateForStructAfterOpeningBraces(token);
+        }
+    }
+}
+
+void SackFileReaderStateMachine::processStateForStructAfterOpeningBraces(string const& token)
+{
+    static string partialString;
+    if("MESSAGEHEADER" == token)
+    {
+        saveStructureAsMessageStructureInDatabase();
+        m_isNextLineNeeded = true;
+    }
+    else if("}" == token)
+    {
+        m_previousStructureName = m_structureDetails.name;
+        m_parameterDescriptionType = ParameterDescriptionType::Structure;
+        m_structureDetails.clear();
+        saveNextState(State::Idle);
+    }
+    else if(";" == token)
+    {
+        m_innerStates.stateForStructAfterOpeningBraces = StateForStructAfterOpeningBraces::BeforeParameterType;
+        saveParameterInStructureToDatabase();
+    }
+    else
+    {
+        if(StateForStructAfterOpeningBraces::BeforeParameterType == m_innerStates.stateForStructAfterOpeningBraces)
+        {
+            m_parameterDetails.type = token;
+            m_innerStates.stateForStructAfterOpeningBraces = StateForStructAfterOpeningBraces::AfterParameterTypeBeforeParameterName;
+        }
+        else if(StateForStructAfterOpeningBraces::AfterParameterTypeBeforeParameterName == m_innerStates.stateForStructAfterOpeningBraces)
+        {
+            m_parameterDetails.name = token;
+            m_innerStates.stateForStructAfterOpeningBraces = StateForStructAfterOpeningBraces::AfterParameterName;
+        }
+        else if(StateForStructAfterOpeningBraces::AfterParameterName == m_innerStates.stateForStructAfterOpeningBraces)
+        {
+            if("[" == token)
             {
-                m_database.structureNameToStructureDetailsMap[m_structureDetails.name].isMessage = true;
-                m_isNextLineNeeded = true;
+                m_innerStates.stateForStructAfterOpeningBraces = StateForStructAfterOpeningBraces::AfterOpeningBracket;
             }
-            else if("}" == token)
+        }
+        else if(StateForStructAfterOpeningBraces::AfterOpeningBracket == m_innerStates.stateForStructAfterOpeningBraces)
+        {
+            if("]" == token)
             {
-                m_previousStructureName=m_structureDetails.name;
-                m_structureDetails.clear();
-                saveNextState(State::Idle);
-            }
-            else if(";" == token)
-            {
-                m_innerStates.stateForStructAfterOpeningBraces = StateForStructAfterOpeningBraces::BeforeParameterType;
-                if(!m_parameterDetails.name.empty())
-                {
-                    if(!m_database.doesThisStructureAndParameterExistsInVector(m_structureDetails.name, m_parameterDetails.name))
-                    {
-                        m_database.structureNameToStructureDetailsMap[m_structureDetails.name].parametersWithCorrectOrder.emplace_back(m_parameterDetails.name);
-                    }
-                    m_database.structureNameToStructureDetailsMap[m_structureDetails.name].parameters[m_parameterDetails.name].name = m_parameterDetails.name;
-                    m_database.structureNameToStructureDetailsMap[m_structureDetails.name].parameters[m_parameterDetails.name].type = m_parameterDetails.type;
-                    if(!m_arraySize.empty())
-                    {
-                        m_database.structureNameToStructureDetailsMap[m_structureDetails.name].parameters[m_parameterDetails.name].isAnArray = true;
-                        m_database.structureNameToStructureDetailsMap[m_structureDetails.name].parameters[m_parameterDetails.name].arraySize = m_arraySize;
-                        m_arraySize.clear();
-                    }
-                    m_parameterDetails.clear();
-                }
+                m_arraySize = partialString;
+                partialString.clear();
+                m_innerStates.stateForStructAfterOpeningBraces = StateForStructAfterOpeningBraces::AfterClosingBracket;
             }
             else
             {
-                if(StateForStructAfterOpeningBraces::BeforeParameterType == m_innerStates.stateForStructAfterOpeningBraces)
-                {
-                    m_parameterDetails.type = token;
-                    m_innerStates.stateForStructAfterOpeningBraces = StateForStructAfterOpeningBraces::AfterParameterTypeBeforeParameterName;
-                }
-                else if(StateForStructAfterOpeningBraces::AfterParameterTypeBeforeParameterName == m_innerStates.stateForStructAfterOpeningBraces)
-                {
-                    m_parameterDetails.name = token;
-                    m_innerStates.stateForStructAfterOpeningBraces = StateForStructAfterOpeningBraces::AfterParameterName;
-                }
-                else if(StateForStructAfterOpeningBraces::AfterParameterName == m_innerStates.stateForStructAfterOpeningBraces)
-                {
-                    if("[" == token)
-                    {
-                        m_innerStates.stateForStructAfterOpeningBraces = StateForStructAfterOpeningBraces::AfterOpeningBracket;
-                    }
-                }
-                else if(StateForStructAfterOpeningBraces::AfterOpeningBracket == m_innerStates.stateForStructAfterOpeningBraces)
-                {
-                    if("]" == token)
-                    {
-                        m_arraySize = partialString;
-                        partialString.clear();
-                        m_innerStates.stateForStructAfterOpeningBraces = StateForStructAfterOpeningBraces::AfterClosingBracket;
-                    }
-                    else
-                    {
-                        partialString += token;
-                    }
-                }
+                partialString += token;
             }
         }
-    }
-}
-
-void SackFileReaderStateMachine::processStateAtParamDescription(InputToken const& inputToken)
-{
-    static string partialString;
-    string const& token(inputToken.token);
-    if(token == "@param" || token == "Additional")
-    {
-        if(ParameterDescriptionType::Structure == m_parameterDescriptionType)
-        {
-            if(m_database.doesThisStructureAndParameterExists(m_previousStructureName, m_parameterDetails.name))
-            {
-                m_database.structureNameToStructureDetailsMap[m_previousStructureName].parameters[m_parameterDetails.name].description = getStringWithoutRedundantWhiteSpace(partialString);
-            }
-        }
-        else if(ParameterDescriptionType::Enum == m_parameterDescriptionType)
-        {
-            if(m_database.doesThisEnumAndParameterExists(m_previousEnumName, m_parameterDetails.name))
-            {
-                m_database.enumNameToEnumDetailsMap[m_previousEnumName].parameters[m_parameterDetails.name].description = getStringWithoutRedundantWhiteSpace(partialString);
-            }
-            string anotherParameterName = m_previousEnumName+"_"+m_parameterDetails.name;
-            if(m_database.doesThisEnumAndParameterExists(m_previousEnumName, anotherParameterName))
-            {
-                m_database.enumNameToEnumDetailsMap[m_previousEnumName].parameters[anotherParameterName].description = getStringWithoutRedundantWhiteSpace(partialString);
-            }
-        }
-
-        partialString.clear();
-        m_innerStates.stateForAtParamDescription = StateForAtParamDescription::BeforeName;
-        if(token == "Additional")
-        {
-            m_parameterDescriptionType = ParameterDescriptionType::None;
-            saveNextState(State::Idle);
-        }
-    }
-    else if(StateForAtParamDescription::BeforeName == m_innerStates.stateForAtParamDescription)
-    {
-        if(!isWhiteSpace(token))
-        {
-            m_parameterDetails.name = token;
-            m_innerStates.stateForAtParamDescription = StateForAtParamDescription::AfterNameBeforeColon;
-        }
-    }
-    else if(StateForAtParamDescription::AfterNameBeforeColon == m_innerStates.stateForAtParamDescription)
-    {
-        if(":" == token)
-        {
-            m_innerStates.stateForAtParamDescription = StateForAtParamDescription::AfterColon;
-            partialString.clear();
-        }
-    }
-    else if(StateForAtParamDescription::AfterColon == m_innerStates.stateForAtParamDescription)
-    {
-        if("*" != token)
-        {
-            partialString+=token;
-        }
-    }
-}
-
-void SackFileReaderStateMachine::processStateAtStructDescription(InputToken const& inputToken)
-{
-    string const& token(inputToken.token);
-    if(!isWhiteSpace(token) && inputToken.isInMultilineComment)
-    {
-        m_previousStructureName = token;
-        m_parameterDescriptionType = ParameterDescriptionType::Structure;
-        saveNextState(State::Idle);
-    }
-}
-
-void SackFileReaderStateMachine::processStateAtEnumDescription(InputToken const& inputToken)
-{
-    string const& token(inputToken.token);
-    if(!isWhiteSpace(token) && inputToken.isInMultilineComment)
-    {
-        m_previousEnumName = token;
-        m_parameterDescriptionType = ParameterDescriptionType::Enum;
-        saveNextState(State::Idle);
     }
 }
 
@@ -405,58 +298,363 @@ void SackFileReaderStateMachine::processStateEnumKeyword(InputToken const& input
         }
         else if(StateForEnum::AfterOpeningBraces == m_innerStates.stateForEnum)
         {
-            if("}" == token || "," == token)
-            {
-                m_innerStates.stateForEnumAfterOpeningBraces = StateForEnumAfterOpeningBraces::BeforeEnumParameterName;
-                if(!m_enumParameterDetails.name.empty())
-                {
-                    m_database.enumNameToEnumDetailsMap[m_enumDetails.name].parameters[m_enumParameterDetails.name].name = m_enumParameterDetails.name;
-                    m_database.enumNameToEnumDetailsMap[m_enumDetails.name].parameters[m_enumParameterDetails.name].value = m_enumParameterDetails.value;
-                    m_database.enumNameToEnumDetailsMap[m_enumDetails.name].parameters[m_enumParameterDetails.name].description = m_enumParameterDetails.description;
-                    m_enumParameterDetails.clear();
-                }
-                if("}" == token)
-                {
-                    m_previousEnumName=m_enumDetails.name;
-                    m_enumDetails.clear();
-                    saveNextState(State::Idle);
-                }
-            }
-            else
-            {
-                if(StateForEnumAfterOpeningBraces::BeforeEnumParameterName == m_innerStates.stateForEnumAfterOpeningBraces)
-                {
-                    m_enumParameterDetails.name = token;
-                    m_innerStates.stateForEnumAfterOpeningBraces = StateForEnumAfterOpeningBraces::AfterEnumParameterNameBeforeEqualSymbol;
-                }
-                else if(StateForEnumAfterOpeningBraces::AfterEnumParameterNameBeforeEqualSymbol == m_innerStates.stateForEnumAfterOpeningBraces)
-                {
-                    if("=" == token)
-                    {
-                        m_innerStates.stateForEnumAfterOpeningBraces = StateForEnumAfterOpeningBraces::AfterEqualSymbolBeforeValue;
-                    }
-                }
-                else if(StateForEnumAfterOpeningBraces::AfterEqualSymbolBeforeValue == m_innerStates.stateForEnumAfterOpeningBraces)
-                {
-                    m_enumParameterDetails.value = token;
-                    m_innerStates.stateForEnumAfterOpeningBraces = StateForEnumAfterOpeningBraces::AfterValue;
-                }
-            }
+            processStateForEnumAfterOpeningBraces(token);
         }
     }
 }
 
-void SackFileReaderStateMachine::saveNextStateAndResetInnerStates(State const& state)
+void SackFileReaderStateMachine::processStateForEnumAfterOpeningBraces(string const& token)
 {
+    if("}" == token || "," == token)
+    {
+        m_innerStates.stateForEnumAfterOpeningBraces = StateForEnumAfterOpeningBraces::BeforeEnumParameterName;
+        if(!m_enumParameterDetails.name.empty())
+        {
+            saveParameterInEnumToDatabase();
+            m_enumParameterDetails.clear();
+        }
+        if("}" == token)
+        {
+            m_previousEnumName = m_enumDetails.name;
+            m_parameterDescriptionType = ParameterDescriptionType::Enum;
+            m_enumDetails.clear();
+            saveNextState(State::Idle);
+        }
+    }
+    else
+    {
+        if(StateForEnumAfterOpeningBraces::BeforeEnumParameterName == m_innerStates.stateForEnumAfterOpeningBraces)
+        {
+            m_enumParameterDetails.name = token;
+            m_innerStates.stateForEnumAfterOpeningBraces = StateForEnumAfterOpeningBraces::AfterEnumParameterNameBeforeEqualSymbol;
+        }
+        else if(StateForEnumAfterOpeningBraces::AfterEnumParameterNameBeforeEqualSymbol == m_innerStates.stateForEnumAfterOpeningBraces)
+        {
+            if("=" == token)
+            {
+                m_innerStates.stateForEnumAfterOpeningBraces = StateForEnumAfterOpeningBraces::AfterEqualSymbolBeforeValue;
+            }
+        }
+        else if(StateForEnumAfterOpeningBraces::AfterEqualSymbolBeforeValue == m_innerStates.stateForEnumAfterOpeningBraces)
+        {
+            m_enumParameterDetails.value = token;
+            m_innerStates.stateForEnumAfterOpeningBraces = StateForEnumAfterOpeningBraces::AfterValue;
+        }
+    }
+}
+
+void SackFileReaderStateMachine::processStateUnionKeyword(InputToken const& inputToken)
+{
+    string const& token(inputToken.token);
+    if(isNotWhiteSpaceAndNotInComment(inputToken) && token!="/")
+    {
+        if(StateForUnion::BeforeName == m_innerStates.stateForUnion)
+        {
+            if("{" == token)
+            {
+                m_unionDetails.name = m_fileNameOnly;
+                m_innerStates.stateForUnion = StateForUnion::AfterOpeningBraces;
+                m_innerStates.stateForUnionAfterOpeningBraces = StateForUnionAfterOpeningBraces::BeforeParameterType;
+            }
+            else
+            {
+                m_unionDetails.name = token;
+                m_innerStates.stateForUnion = StateForUnion::AfterName;
+            }
+        }
+        else if(StateForUnion::AfterName == m_innerStates.stateForUnion)
+        {
+            if("{" == token)
+            {
+                m_innerStates.stateForUnion = StateForUnion::AfterOpeningBraces;
+                m_innerStates.stateForUnionAfterOpeningBraces = StateForUnionAfterOpeningBraces::BeforeParameterType;
+            }
+            else if(";" == token)
+            {
+                m_unionDetails.clear();
+                saveNextState(State::Idle);
+            }
+        }
+        else if(StateForUnion::AfterOpeningBraces == m_innerStates.stateForUnion)
+        {
+            processStateForUnionAfterOpeningBraces(token);
+        }
+    }
+}
+
+void SackFileReaderStateMachine::processStateForUnionAfterOpeningBraces(string const& token)
+{
+    if("}" == token)
+    {
+        m_previousUnionName = m_unionDetails.name;
+        m_parameterDescriptionType = ParameterDescriptionType::Union;
+        m_unionDetails.clear();
+        saveNextState(State::Idle);
+    }
+    else if(";" == token)
+    {
+        m_innerStates.stateForUnionAfterOpeningBraces = StateForUnionAfterOpeningBraces::BeforeParameterType;
+        saveParameterInUnionToDatabase();
+    }
+    else
+    {
+        if(StateForUnionAfterOpeningBraces::BeforeParameterType == m_innerStates.stateForUnionAfterOpeningBraces)
+        {
+            m_parameterDetails.type = token;
+            m_innerStates.stateForUnionAfterOpeningBraces = StateForUnionAfterOpeningBraces::AfterParameterTypeBeforeParameterName;
+        }
+        else if(StateForUnionAfterOpeningBraces::AfterParameterTypeBeforeParameterName == m_innerStates.stateForUnionAfterOpeningBraces)
+        {
+            m_parameterDetails.name = token;
+            m_innerStates.stateForUnionAfterOpeningBraces = StateForUnionAfterOpeningBraces::AfterParameterName;
+        }
+    }
+}
+
+void SackFileReaderStateMachine::processStateAtDefDescription(InputToken const& inputToken)
+{
+    static string partialString;
+    string const& token(inputToken.token);
+    if(inputToken.isInMultilineComment)
+    {
+        if(token == "@def" || token == "Additional" || token == "Definition")
+        {
+            saveConstantDescriptionToDatabase(partialString);
+            partialString.clear();
+            m_innerStates.stateForAtDefDescription = StateForAtDefDescription::BeforeName;
+            if(token == "Additional" || token == "Definition")
+            {
+                saveNextState(State::Idle);
+            }
+        }
+        else if(StateForAtDefDescription::BeforeName == m_innerStates.stateForAtDefDescription)
+        {
+            if(!isWhiteSpace(token))
+            {
+                m_constantDetails.name = token;
+                m_innerStates.stateForAtDefDescription = StateForAtDefDescription::AfterNameBeforeColon;
+            }
+        }
+        else if(StateForAtDefDescription::AfterNameBeforeColon == m_innerStates.stateForAtDefDescription)
+        {
+            if(":" == token)
+            {
+                partialString.clear();
+                m_innerStates.stateForAtDefDescription = StateForAtDefDescription::AfterColon;
+            }
+        }
+        else if(StateForAtDefDescription::AfterColon == m_innerStates.stateForAtDefDescription)
+        {
+            if("*" != token)
+            {
+                partialString+=token;
+            }
+        }
+    }
+    else
+    {
+        saveNextState(State::Idle);
+    }
+}
+
+void SackFileReaderStateMachine::processStateAtStructDescription(InputToken const& inputToken)
+{
+    string const& token(inputToken.token);
+    if(inputToken.isInMultilineComment)
+    {
+        if(!isWhiteSpace(token))
+        {
+            m_previousStructureName = token;
+            m_parameterDescriptionType = ParameterDescriptionType::Structure;
+            saveNextState(State::Idle);
+        }
+    }
+    else
+    {
+        saveNextState(State::Idle);
+    }
+}
+void SackFileReaderStateMachine::processStateAtEnumDescription(InputToken const& inputToken)
+{
+    string const& token(inputToken.token);
+    if(inputToken.isInMultilineComment)
+    {
+        if(!isWhiteSpace(token))
+        {
+            m_previousEnumName = token;
+            m_parameterDescriptionType = ParameterDescriptionType::Enum;
+            saveNextState(State::Idle);
+        }
+    }
+    else
+    {
+        saveNextState(State::Idle);
+    }
+}
+
+void SackFileReaderStateMachine::processStateAtUnionDescription(InputToken const& inputToken)
+{
+    string const& token(inputToken.token);
+    if(inputToken.isInMultilineComment)
+    {
+        if(!isWhiteSpace(token))
+        {
+            m_previousUnionName = token;
+            m_parameterDescriptionType = ParameterDescriptionType::Union;
+            saveNextState(State::Idle);
+        }
+    }
+    else
+    {
+        saveNextState(State::Idle);
+    }
+}
+
+void SackFileReaderStateMachine::processStateAtParamDescription(InputToken const& inputToken)
+{
+    static string partialString;
+    string const& token(inputToken.token);
+    if(inputToken.isInMultilineComment)
+    {
+        if(token == "@param" || token == "Additional" || token == "Definition")
+        {
+            saveParameterDescriptionToDatabase(partialString);
+            partialString.clear();
+            m_innerStates.stateForAtParamDescription = StateForAtParamDescription::BeforeName;
+            if(token == "Additional" || token == "Definition")
+            {
+                m_parameterDescriptionType = ParameterDescriptionType::None;
+                saveNextState(State::Idle);
+            }
+        }
+        else if(StateForAtParamDescription::BeforeName == m_innerStates.stateForAtParamDescription)
+        {
+            if(!isWhiteSpace(token))
+            {
+                m_parameterDetails.name = token;
+                m_innerStates.stateForAtParamDescription = StateForAtParamDescription::AfterNameBeforeColon;
+            }
+        }
+        else if(StateForAtParamDescription::AfterNameBeforeColon == m_innerStates.stateForAtParamDescription)
+        {
+            if(":" == token)
+            {
+                partialString.clear();
+                m_innerStates.stateForAtParamDescription = StateForAtParamDescription::AfterColon;
+            }
+        }
+        else if(StateForAtParamDescription::AfterColon == m_innerStates.stateForAtParamDescription)
+        {
+            if("*" != token)
+            {
+                partialString+=token;
+            }
+        }
+    }
+    else
+    {
+        saveNextState(State::Idle);
+    }
+}
+
+void SackFileReaderStateMachine::saveNextStateAndResetInnerStates(State const& state){
     m_innerStates.reset();
     saveNextState(state);
 }
 
-
-bool SackFileReaderStateMachine::isNotWhiteSpaceAndNotInComment(InputToken const& inputToken) const
+void SackFileReaderStateMachine::saveMessageToDatabase(string const& token, string const& structureName)
 {
-    return !isWhiteSpace(inputToken.token) && inputToken.isNotInComment;
+    m_database.messageNameToStructureNameMap.emplace(token, structureName);
 }
+
+void SackFileReaderStateMachine::saveConstantToDatabase()
+{
+    m_database.constantNameToConstantDetailsMap[m_constantDetails.name].name = m_constantDetails.name;
+    m_database.constantNameToConstantDetailsMap[m_constantDetails.name].value = m_constantDetails.value;
+}
+
+void SackFileReaderStateMachine::saveStructureAsMessageStructureInDatabase()
+{
+    m_database.structureNameToStructureDetailsMap[m_structureDetails.name].isMessage = true;
+}
+
+void SackFileReaderStateMachine::saveParameterInStructureToDatabase()
+{
+    if(!m_parameterDetails.name.empty())
+    {
+        if(!m_database.doesThisStructureAndParameterExistsInVector(m_structureDetails.name, m_parameterDetails.name))
+        {
+            m_database.structureNameToStructureDetailsMap[m_structureDetails.name].parametersWithCorrectOrder.emplace_back(m_parameterDetails.name);
+        }
+        m_database.structureNameToStructureDetailsMap[m_structureDetails.name].parameters[m_parameterDetails.name].name = m_parameterDetails.name;
+        m_database.structureNameToStructureDetailsMap[m_structureDetails.name].parameters[m_parameterDetails.name].type = m_parameterDetails.type;
+        if(!m_arraySize.empty())
+        {
+            m_database.structureNameToStructureDetailsMap[m_structureDetails.name].parameters[m_parameterDetails.name].isAnArray = true;
+            m_database.structureNameToStructureDetailsMap[m_structureDetails.name].parameters[m_parameterDetails.name].arraySize = m_arraySize;
+            m_arraySize.clear();
+        }
+        m_parameterDetails.clear();
+    }
+}
+
+void SackFileReaderStateMachine::saveParameterInUnionToDatabase()
+{
+    if(!m_parameterDetails.name.empty())
+    {
+        if(!m_database.doesThisUnionAndParameterExistsInVector(m_unionDetails.name, m_parameterDetails.name))
+        {
+            m_database.unionNameToUnionDetailsMap[m_unionDetails.name].parametersWithCorrectOrder.emplace_back(m_parameterDetails.name);
+        }
+        m_database.unionNameToUnionDetailsMap[m_unionDetails.name].parameters[m_parameterDetails.name].name = m_parameterDetails.name;
+        m_database.unionNameToUnionDetailsMap[m_unionDetails.name].parameters[m_parameterDetails.name].type = m_parameterDetails.type;
+        m_parameterDetails.clear();
+    }
+}
+
+void SackFileReaderStateMachine::saveParameterInEnumToDatabase()
+{
+    m_database.enumNameToEnumDetailsMap[m_enumDetails.name].parameters[m_enumParameterDetails.name].name = m_enumParameterDetails.name;
+    m_database.enumNameToEnumDetailsMap[m_enumDetails.name].parameters[m_enumParameterDetails.name].value = m_enumParameterDetails.value;
+    m_database.enumNameToEnumDetailsMap[m_enumDetails.name].parameters[m_enumParameterDetails.name].description = m_enumParameterDetails.description;
+}
+
+void SackFileReaderStateMachine::saveConstantDescriptionToDatabase(string const& partialString)
+{
+    m_database.constantNameToConstantDetailsMap[m_constantDetails.name].name = m_constantDetails.name;
+    m_database.constantNameToConstantDetailsMap[m_constantDetails.name].description = getStringWithoutRedundantWhiteSpace(partialString);
+}
+
+void SackFileReaderStateMachine::saveParameterDescriptionToDatabase(string const& partialString)
+{
+    if(ParameterDescriptionType::Structure == m_parameterDescriptionType)
+    {
+        if(m_database.doesThisStructureAndParameterExists(m_previousStructureName, m_parameterDetails.name))
+        {
+            m_database.structureNameToStructureDetailsMap[m_previousStructureName].parameters[m_parameterDetails.name].description = getStringWithoutRedundantWhiteSpace(partialString);
+        }
+    }
+    else if(ParameterDescriptionType::Enum == m_parameterDescriptionType)
+    {
+        if(m_database.doesThisEnumAndParameterExists(m_previousEnumName, m_parameterDetails.name))
+        {
+            m_database.enumNameToEnumDetailsMap[m_previousEnumName].parameters[m_parameterDetails.name].description = getStringWithoutRedundantWhiteSpace(partialString);
+        }
+        string anotherParameterName = m_previousEnumName+"_"+m_parameterDetails.name;
+        if(m_database.doesThisEnumAndParameterExists(m_previousEnumName, anotherParameterName))
+        {
+            m_database.enumNameToEnumDetailsMap[m_previousEnumName].parameters[anotherParameterName].description = getStringWithoutRedundantWhiteSpace(partialString);
+        }
+    }
+    else if(ParameterDescriptionType::Union == m_parameterDescriptionType)
+    {
+        if(m_database.doesThisUnionAndParameterExists(m_previousUnionName, m_parameterDetails.name))
+        {
+            m_database.unionNameToUnionDetailsMap[m_previousUnionName].parameters[m_parameterDetails.name].description = getStringWithoutRedundantWhiteSpace(partialString);
+        }
+    }
+}
+
 
 }
 
