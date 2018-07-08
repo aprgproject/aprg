@@ -13,12 +13,14 @@ struct ConstantDetails
     std::string value;
     std::string description;
     std::string descriptionFromUser;
+    bool isUsedInIfs;
     void clear()
     {
         name.clear();
         value.clear();
         description.clear();
         descriptionFromUser.clear();
+        isUsedInIfs=false;
     }
     friend std::ostream & operator<<(std::ostream & out, ConstantDetails const& constantDetails);
     friend std::istream & operator>>(std::istream & in, ConstantDetails& constantDetails);
@@ -95,7 +97,8 @@ struct StructureDetails
         parametersWithCorrectOrder.clear();
         isMessage=false;
         isUsedInIfs=false;
-    }    friend std::ostream & operator<<(std::ostream & out, StructureDetails const& structureDetails);
+    }
+    friend std::ostream & operator<<(std::ostream & out, StructureDetails const& structureDetails);
     friend std::istream & operator>>(std::istream & in, StructureDetails& structureDetails);
 };
 
@@ -121,7 +124,8 @@ struct UnionDetails
 
 using FileToPathMap = std::map<std::string, std::string>;
 using FileToPathPair = std::pair<std::string, std::string>;
-using ConstantNameToConstantDetailsMap = std::map<std::string, ConstantDetails>;using ConstantNameToConstantDetailsPair = std::pair<std::string, ConstantDetails>;
+using ConstantNameToConstantDetailsMap = std::map<std::string, ConstantDetails>;
+using ConstantNameToConstantDetailsPair = std::pair<std::string, ConstantDetails>;
 using MessageNameToStructureNameMap = std::map<std::string, std::string>;
 using MessageNameToStructureNamePair = std::pair<std::string, std::string>;
 using StructureNameToStructureDetailsMap = std::map<std::string, StructureDetails>;
@@ -130,4 +134,5 @@ using UnionNameToUnionDetailsMap = std::map<std::string, UnionDetails>;
 using UnionNameToUnionDetailsPair = std::pair<std::string, UnionDetails>;
 using EnumNameToEnumDetailsMap = std::map<std::string, EnumDetails>;
 using EnumNameToEnumDetailsPair = std::pair<std::string, EnumDetails>;
+
 } // namespace alba

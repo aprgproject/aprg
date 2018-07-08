@@ -20,6 +20,51 @@ TEST(SackFileReaderTest, ReadFile_Constants)
     EXPECT_EQ("2", details.value);
 }
 
+TEST(SackFileReaderTest, ReadFile_DTechLogDef)
+{
+    Database database;
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\DTechLogDef.h)");
+
+    ConstantDetails details(database.getConstantDetails("MAX_FILENAME_SIZE"));
+    EXPECT_EQ("", details.description);
+    EXPECT_EQ("48", details.value);
+
+    details = (database.getConstantDetails("MAX_USERNAME_AND_PASSWORD_SIZE"));
+    EXPECT_EQ("", details.description);
+    EXPECT_EQ("16", details.value);
+}
+
+TEST(SackFileReaderTest, ReadFile_IfAaSysComGw_Defs)
+{
+    Database database;
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\IfAaSysComGw_Defs.h)");
+
+    ConstantDetails details(database.getConstantDetails("AASYSCOM_GW_IP_ADDRESS_MAX_STR_LEN"));
+    EXPECT_EQ("", details.description);
+    EXPECT_EQ("48", details.value);
+}
+
+TEST(SackFileReaderTest, CommentInStructure)
+{
+    Database database;
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\Oam_Tcom_TestModelService.h)");
+
+    ParameterDetails details(database.getParameterDetails("STestModelSetupReqMsg", "numberOfHsPdsch"));
+    EXPECT_EQ("numberOfHsPdsch", details.name);
+    EXPECT_EQ("TNumberOfItems", details.type);
+    EXPECT_FALSE(details.isAnArray);
+    //EXPECT_EQ("indicates how many HS-PDSCH is setup for TM5", details.description); //TooHard
+
+    details = database.getParameterDetails("STestModelSetupReqMsg", "testPattern");
+    EXPECT_EQ("testPattern", details.name);
+    EXPECT_EQ("ECdmaTestDataPattern", details.type);
+    EXPECT_FALSE(details.isAnArray);
+    //EXPECT_EQ("indicates what kind of testdata is generated to test channels", details.description); //TooHard
+}
+
 TEST(SackFileReaderTest, ReadFile_MessageOamAtmSigFile)
 {
     Database database;
@@ -143,25 +188,6 @@ TEST(SackFileReaderTest, EControlUnitType)
     EXPECT_EQ("EControlUnitType_Wspf", details.name);
     EXPECT_EQ("5", details.value);
     EXPECT_EQ("if EUBB WSPF is control unit", details.description);
-}
-
-TEST(SackFileReaderTest, CommentInStructure)
-{
-    Database database;
-    SackFileReader sackFileReader(database);
-    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\Oam_Tcom_TestModelService.h)");
-
-    ParameterDetails details(database.getParameterDetails("STestModelSetupReqMsg", "numberOfHsPdsch"));
-    EXPECT_EQ("numberOfHsPdsch", details.name);
-    EXPECT_EQ("TNumberOfItems", details.type);
-    EXPECT_FALSE(details.isAnArray);
-    //EXPECT_EQ("indicates how many HS-PDSCH is setup for TM5", details.description); //TooHard
-
-    details = database.getParameterDetails("STestModelSetupReqMsg", "testPattern");
-    EXPECT_EQ("testPattern", details.name);
-    EXPECT_EQ("ECdmaTestDataPattern", details.type);
-    EXPECT_FALSE(details.isAnArray);
-    //EXPECT_EQ("indicates what kind of testdata is generated to test channels", details.description); //TooHard
 }
 
 TEST(SackFileReaderTest, UConfigInfoElement)

@@ -27,6 +27,7 @@ SackReader::SackReader(string const& path)
 void SackReader::readFileUsingFileNameOnly(string const& fileName)
 {
     SackFileReader sackFileReader(m_database);
+    ALBA_PRINT1(m_database.getFileFullPath(fileName));
     sackFileReader.readFile(m_database.getFileFullPath(fileName));
 }
 
@@ -77,29 +78,46 @@ void SackReader::checkOamTcomTupcMessages()
     readFileUsingFileNameOnly("SFaultInd.h");
     readFileUsingFileNameOnly("SModeChangeReq.h");
     readFileUsingFileNameOnly("SModeChangeResp.h");
+    //constants
+    readFileUsingFileNameOnly("IfAaSysComGw_Defs.h");
+    readFileUsingFileNameOnly("DBtsomTcomConstants.h");
+    readFileUsingFileNameOnly("DOpenIUBCommonDefs.h");
+    readFileUsingFileNameOnly("Glo_bs.h");
+    readFileUsingFileNameOnly("DTechLogDef.h");
     for(MessageNameToStructureNamePair const& pair: m_database.messageNameToStructureNameMap)
     {
         if(!pair.second.empty())
         {
             string structureFileName(pair.second+".h");
-            readDefinitionFileFromStructureRecursively(structureFileName);
+            readDefinitionFileFromRecursively(structureFileName);
         }
     }
 }
 
-void SackReader::readDefinitionFileFromStructureRecursively(string const& structureFileName)
+void SackReader::readDefinitionFileFromRecursively(string const& typeFileName)
 {
-    readFileUsingFileNameOnly(structureFileName);
-    AlbaLocalPathHandler pathHandler(structureFileName);
-    string structureName(pathHandler.getFilenameOnly());
-    if(m_database.doesThisStructureExists(structureName))
+    readFileUsingFileNameOnly(typeFileName);
+    AlbaLocalPathHandler pathHandler(typeFileName);
+    string typeName(pathHandler.getFilenameOnly());
+    if(m_database.doesThisStructureExists(typeName))
     {
-        for(StructureDetails::ParameterPair const& parameterPair: m_database.structureNameToStructureDetailsMap[structureName].parameters)
+        for(StructureDetails::ParameterPair const& parameterPair: m_database.structureNameToStructureDetailsMap[typeName].parameters)
         {
             if(!parameterPair.second.type.empty())
             {
                 string structureFileNameInStructure(parameterPair.second.type+".h");
-                readDefinitionFileFromStructureRecursively(structureFileNameInStructure);
+                readDefinitionFileFromRecursively(structureFileNameInStructure);
+            }
+        }
+    }
+    if(m_database.doesThisUnionExists(typeName))
+    {
+        for(UnionDetails::ParameterPair const& parameterPair: m_database.unionNameToUnionDetailsMap[typeName].parameters)
+        {
+            if(!parameterPair.second.type.empty())
+            {
+                string unionFileNameInUnion(parameterPair.second.type+".h");
+                readDefinitionFileFromRecursively(unionFileNameInUnion);
             }
         }
     }
@@ -153,6 +171,38 @@ void SackReader::saveEnumDefinitions(ofstream & lyxOutputFileStream)
         if(pair.second.isUsedInIfs)
         {
             saveEnumDefinitionSubsubsection(pair.first, lyxOutputFileStream);
+        }
+    }
+}
+
+void SackReader::saveUnionDefinitions(ofstream & lyxOutputFileStream)
+{
+    saveSubsection("Union Definitions", lyxOutputFileStream);
+    for(UnionNameToUnionDetailsPair const& pair : m_database.unionNameToUnionDetailsMap)
+    {
+        if(pair.second.isUsedInIfs)
+        {
+            saveUnionDefinitionSubsubsection(pair.first, lyxOutputFileStream);
+        }
+    }
+}
+
+void SackReader::saveConstantDefinitions(ofstream & lyxOutputFileStream)
+{
+    saveSubsection("Constant Definitions", lyxOutputFileStream);
+    for(ConstantNameToConstantDetailsPair const& pair : m_database.constantNameToConstantDetailsMap)
+    {
+        if(!pair.first.empty())
+        {
+            char firstCharacter = pair.first[0];
+            if(firstCharacter!='E' && isCapitalLetter(firstCharacter))
+            {
+                if(pair.second.isUsedInIfs)
+                {
+                    ALBA_PRINT1(pair.first);
+                    saveConstantDefinitionSubsubsection(pair.first, lyxOutputFileStream);
+                }
+            }
         }
     }
 }
@@ -234,6 +284,54 @@ void SackReader::saveEnumDefinitionSubsubsection(string const& enumName, ofstrea
     }
 }
 
+void SackReader::saveUnionDefinitionSubsubsection(string const& unionName, ofstream & unionDefinitionsStream)
+{
+    ifstream unionSubsubsectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\UnionSubsubsection.txt)");
+    AlbaFileReader unionSubsubsectionReader(unionSubsubsectionStream);
+
+    while(unionSubsubsectionReader.isNotFinished())
+    {
+        string unionSubsubsectionLine(unionSubsubsectionReader.getLine());
+        if(isStringFoundInsideTheOtherStringCaseSensitive(unionSubsubsectionLine,"LYX_TABLE_UNION_NAME_REPLACE"))
+        {
+            transformReplaceStringIfFound(unionSubsubsectionLine, "LYX_TABLE_UNION_NAME_REPLACE", unionName);
+            unionDefinitionsStream << unionSubsubsectionLine << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(unionSubsubsectionLine,"LYX_TABLE_REPLACE"))
+        {
+            saveUnionTable(unionName, unionDefinitionsStream);
+        }
+        else
+        {
+            unionDefinitionsStream << unionSubsubsectionLine << endl;
+        }
+    }
+}
+
+void SackReader::saveConstantDefinitionSubsubsection(string const& constantName, ofstream & constantDefinitionsStream)
+{
+    ifstream constantSubsubsectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\CommentSubsubsection.txt)");
+    AlbaFileReader constantSubsubsectionReader(constantSubsubsectionStream);
+
+    while(constantSubsubsectionReader.isNotFinished())
+    {
+        string constantSubsubsectionLine(constantSubsubsectionReader.getLine());
+        if(isStringFoundInsideTheOtherStringCaseSensitive(constantSubsubsectionLine,"LYX_TABLE_COMMENT_NAME_REPLACE"))
+        {
+            transformReplaceStringIfFound(constantSubsubsectionLine, "LYX_TABLE_COMMENT_NAME_REPLACE", constantName);
+            constantDefinitionsStream << constantSubsubsectionLine << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(constantSubsubsectionLine,"LYX_TABLE_REPLACE"))
+        {
+            saveConstantTable(constantName, constantDefinitionsStream);
+        }
+        else
+        {
+            constantDefinitionsStream << constantSubsubsectionLine << endl;
+        }
+    }
+}
+
 void SackReader::generateLyxDocument(string const& templatePath, string const& finalDocumentPath)
 {
     ifstream lyxDocumentTemplate(templatePath);
@@ -254,7 +352,9 @@ void SackReader::generateLyxDocument(string const& templatePath, string const& f
             isInsideGeneratedCode = false;
             saveMessageDefinitions(lyxFinalDocumentStream);
             saveStructureDefinitions(lyxFinalDocumentStream);
+            saveUnionDefinitions(lyxFinalDocumentStream);
             saveEnumDefinitions(lyxFinalDocumentStream);
+            saveConstantDefinitions(lyxFinalDocumentStream);
             lyxFinalDocumentStream << line << endl;
         }
         else if(!isInsideGeneratedCode)
@@ -348,6 +448,38 @@ void SackReader::saveEnumTable(string const& enumName, ofstream & enumTableStrea
     saveDisplayTable(enumTable, enumTableStream);
 }
 
+void SackReader::saveUnionTable(string const& unionName, ofstream & unionTableStream)
+{
+    DisplayTable unionTable;
+    unionTable.setBorders("-"," | ");
+    unionTable.addRow();
+    unionTable.getLastRow().addCell("\\series bold \nIE/Group Name");
+    unionTable.getLastRow().addCell("\\series bold \nIE Type");
+    unionTable.getLastRow().addCell("\\series bold \nDescription");
+    generateUnionForDisplayTablesIfNeeded(unionName, unionTable, "", false);
+    if(unionTable.getTotalRows()>1)
+    {
+        //cout<<unionTable.drawOutput()<<endl;
+        saveDisplayTable(unionTable, unionTableStream);
+    }
+}
+
+void SackReader::saveConstantTable(string const& constantName, ofstream & constantTableStream)
+{
+    DisplayTable constantTable;
+    constantTable.setBorders("-"," | ");
+    constantTable.addRow();
+    constantTable.getLastRow().addCell("\\series bold \nIE/Group Name");
+    constantTable.getLastRow().addCell("\\series bold \nIE Value");
+    constantTable.getLastRow().addCell("\\series bold \nDescription");
+    generateConstantForDisplayTablesIfNeeded(constantName, constantTable);
+    if(constantTable.getTotalRows()>1)
+    {
+        //cout<<constantTable.drawOutput()<<endl;
+        saveDisplayTable(constantTable, constantTableStream);
+    }
+}
+
 void SackReader::saveDisplayTable(DisplayTable const& displayTable, ofstream & displayTableStream) const
 {
     ifstream tableTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\Table.txt)");
@@ -433,6 +565,10 @@ void SackReader::generateStructureForDisplayTablesIfNeeded(string const& structu
             if(parameterDetails.isAnArray)
             {
                 finalType = finalType+" ["+parameterDetails.arraySize+"]";
+                //if(m_database.doesThisConstantExists(parameterDetails.arraySize))
+                //{
+                m_database.constantNameToConstantDetailsMap[parameterDetails.arraySize].isUsedInIfs = true;
+                //}
             }
             displayTable.getLastRow().addCell(smallTextModifier+finalType);
 
@@ -440,7 +576,8 @@ void SackReader::generateStructureForDisplayTablesIfNeeded(string const& structu
             string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(parameterDetails.descriptionFromUser)));
             string finalDescription;
             if(!userDescription.empty())
-            {                if(sackDescription!=userDescription)
+            {
+                if(sackDescription!=userDescription)
                 {
                     //cout <<"The description needs to be aligned with sack."<<endl;
                     /*cout<<"Structure: "<<structureName<<" Parameter: "<<parameterDetails.name<<endl;
@@ -460,6 +597,10 @@ void SackReader::generateStructureForDisplayTablesIfNeeded(string const& structu
                 if(m_database.doesThisEnumExists(typeName))
                 {
                     m_database.enumNameToEnumDetailsMap[typeName].isUsedInIfs=true;
+                }
+                if(m_database.doesThisUnionExists(typeName))
+                {
+                    m_database.unionNameToUnionDetailsMap[typeName].isUsedInIfs=true;
                 }
                 generateStructureForDisplayTablesIfNeeded(parameterDetails.type, displayTable, indentionInType+">", true);
             }
@@ -496,7 +637,8 @@ void SackReader::generateEnumForDisplayTablesIfNeeded(string const& enumName, Di
             string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(parameterDetails.descriptionFromUser)));
             string finalDescription;
             if(!userDescription.empty())
-            {                if(sackDescription!=userDescription)
+            {
+                if(sackDescription!=userDescription)
                 {
                     //cout <<"The description needs to be aligned with sack."<<endl;
                     /*cout<<"Enum: "<<enumName<<" Parameter: "<<parameterDetails.name<<endl;
@@ -514,12 +656,103 @@ void SackReader::generateEnumForDisplayTablesIfNeeded(string const& enumName, Di
     }
 }
 
+void SackReader::generateUnionForDisplayTablesIfNeeded(string const& unionName, DisplayTable & displayTable, string const& indentionInType, bool const areInnerStructuresGenerated)
+{
+    string smallTextModifier("\\size footnotesize\n");
+    if(m_database.doesThisUnionExists(unionName))
+    {
+        m_database.unionNameToUnionDetailsMap[unionName].isUsedInIfs=true;
+        UnionDetails unionDetails(m_database.getUnionDetails(unionName));
+        for(string const& parameterName : unionDetails.parametersWithCorrectOrder)
+        {
+            ParameterDetails parameterDetails = m_database.getUnionParameterDetails(unionName, parameterName);
+            displayTable.addRow();
+            displayTable.getLastRow().addCell(smallTextModifier+indentionInType+" "+parameterDetails.name);
+            string finalType(parameterDetails.type);
+            if(parameterDetails.isAnArray)
+            {
+                finalType = finalType+" ["+parameterDetails.arraySize+"]";
+                //if(m_database.doesThisConstantExists(parameterDetails.arraySize))
+                //{
+                m_database.constantNameToConstantDetailsMap[parameterDetails.arraySize].isUsedInIfs = true;
+                //}
+            }
+            displayTable.getLastRow().addCell(smallTextModifier+finalType);
+
+            string sackDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(parameterDetails.description)));
+            string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(parameterDetails.descriptionFromUser)));
+            string finalDescription;
+            if(!userDescription.empty())
+            {
+                if(sackDescription!=userDescription)
+                {
+                    //cout <<"The description needs to be aligned with sack."<<endl;
+                    /*cout<<"Union: "<<unionName<<" Parameter: "<<parameterDetails.name<<endl;
+                    cout<<"sackDescription: ["<<sackDescription<<"]"<<endl;
+                    cout<<"userDescription: ["<<userDescription<<"]"<<endl;*/
+                }
+                finalDescription = userDescription;
+            }
+            else
+            {
+                finalDescription = sackDescription;
+            }
+            displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
+            if(areInnerStructuresGenerated)
+            {
+                string typeName(parameterDetails.type);
+                if(m_database.doesThisEnumExists(typeName))
+                {
+                    m_database.enumNameToEnumDetailsMap[typeName].isUsedInIfs=true;
+                }
+                if(m_database.doesThisUnionExists(typeName))
+                {
+                    m_database.unionNameToUnionDetailsMap[typeName].isUsedInIfs=true;
+                }
+                generateUnionForDisplayTablesIfNeeded(parameterDetails.type, displayTable, indentionInType+">", true);
+            }
+        }
+    }
+}
+
+void SackReader::generateConstantForDisplayTablesIfNeeded(string const& constantName, DisplayTable & displayTable)
+{
+    string smallTextModifier("\\size footnotesize\n");
+    if(m_database.doesThisConstantExists(constantName))
+    {
+        ConstantDetails constantDetails(m_database.getConstantDetails(constantName));
+        displayTable.addRow();
+        displayTable.getLastRow().addCell(smallTextModifier+constantDetails.name);
+        displayTable.getLastRow().addCell(smallTextModifier+constantDetails.value);
+        string sackDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(constantDetails.description)));
+        string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(constantDetails.descriptionFromUser)));
+        string finalDescription;
+        if(!userDescription.empty())
+        {
+            if(sackDescription!=userDescription)
+            {
+                //cout <<"The description needs to be aligned with sack."<<endl;
+                /*cout<<"Constant: "<<constantName<<" Parameter: "<<parameterDetails.name<<endl;
+                    cout<<"sackDescription: ["<<sackDescription<<"]"<<endl;
+                    cout<<"userDescription: ["<<userDescription<<"]"<<endl;*/
+            }
+            finalDescription = userDescription;
+        }
+        else
+        {
+            finalDescription = sackDescription;
+        }
+        displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
+    }
+}
+
 void SackReader::performHacks()
 {
     //This should be hacked because syscom defines causes a different definition.
     StructureDetails & structureDetails(m_database.structureNameToStructureDetailsMap["SMessageAddress"]);
     structureDetails.name = "SMessageAddress";
-    structureDetails.isMessage = false;    structureDetails.isUsedInIfs = true;
+    structureDetails.isMessage = false;
+    structureDetails.isUsedInIfs = true;
     structureDetails.parametersWithCorrectOrder.clear();
     structureDetails.parametersWithCorrectOrder.emplace_back("board");
     structureDetails.parametersWithCorrectOrder.emplace_back("cpu");

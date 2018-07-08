@@ -24,6 +24,7 @@ TEST(BtsLogTimeTest, ClearingMakesItEmpty)
 TEST(BtsLogTimeTest, BtsTimeStampWithSevenNumbersIsUsed)
 {
     BtsLogTime logTime(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565172Z");
+
     EXPECT_EQ(2015u, logTime.getYears());
     EXPECT_EQ(8u, logTime.getMonths());
     EXPECT_EQ(20u, logTime.getDays());

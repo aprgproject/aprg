@@ -25,7 +25,8 @@ enum class State
     AtParamDescription
 };
 
-//#define MAX_NR_OF_CODES 2                /* 3GPP 10 Nokia 2*/enum class StateForConstant
+//#define MAX_NR_OF_CODES 2                /* 3GPP 10 Nokia 2*/
+enum class StateForConstant
 {
     BeforeName,
     AfterNameBeforeValue
@@ -147,6 +148,7 @@ enum class ParameterDescriptionType
     Union
 };
 
+
 struct InputToken
 {
     bool isInMultilineComment;
@@ -226,6 +228,7 @@ private:
     ParameterDescriptionType m_parameterDescriptionType;
     Database & m_database;
 };
+
 }
 
 }//namespace alba

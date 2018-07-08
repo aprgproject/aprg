@@ -26,6 +26,7 @@ struct Database
     bool doesThisEnumAndParameterExists(std::string const& enumName, std::string const& parameterName) const;
     bool doesThisUnionAndParameterExists(std::string const& unionName, std::string const& parameterName) const;
     bool doesThisUnionAndParameterExistsInVector(std::string const& unionName, std::string const& parameterName) const;
+    bool doesThisConstantExists(std::string const& constantName) const;
     bool doesThisStructureExists(std::string const& structureName) const;
     bool doesThisEnumExists(std::string const& structureName) const;
     bool doesThisUnionExists(std::string const& unionName) const;
@@ -37,4 +38,5 @@ struct Database
     EnumNameToEnumDetailsMap enumNameToEnumDetailsMap;
     std::set<std::string> messagesToGenerate;
 };
+
 } // namespace alba

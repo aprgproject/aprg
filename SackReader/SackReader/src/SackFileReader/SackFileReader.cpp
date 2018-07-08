@@ -33,7 +33,8 @@ void SackFileReader::readFile(string const& fileFullPath)
     SackFileReaderStateMachine sackFileReaderStateMachine(m_database, fileFullPathHandler.getFilenameOnly());
     sackFileReaderStateMachine.setIsMessageIdFileFlag(isStringFoundInsideTheOtherStringNotCaseSensitive(fileFullPathHandler.getFilenameOnly(), "MessageId_"));
     while(fileReader.isNotFinished())
-    {        string line(getStringWithoutRedundantWhiteSpace(fileReader.getLineAndIgnoreWhiteSpaces()));
+    {
+        string line(getStringWithoutRedundantWhiteSpace(fileReader.getLineAndIgnoreWhiteSpaces()));
         strings tokens;
         splitToStrings<SplitStringType::WithDelimeters>(tokens, line, " ()[]{};\r\n:;/*/,");
         CommentStateMachineNamespace::InputToken commentStateMachineInputToken;

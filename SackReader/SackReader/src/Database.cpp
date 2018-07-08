@@ -21,6 +21,7 @@ void Database::saveDatabaseToFile(string const& path)
     writer.writeData(unionNameToUnionDetailsMap);
     writer.writeData(enumNameToEnumDetailsMap);
 }
+
 void Database::loadDatabaseFromFile(string const& path)
 {
     ifstream fileStream(path);
@@ -32,6 +33,7 @@ void Database::loadDatabaseFromFile(string const& path)
     reader.readData(unionNameToUnionDetailsMap);
     reader.readData(enumNameToEnumDetailsMap);
 }
+
 string Database::getFileFullPath(string const& fileName) const
 {
     string result;
@@ -124,7 +126,8 @@ ParameterDetails Database::getUnionParameterDetails(string const& unionName, str
 
 bool Database::doesThisStructureAndParameterExists(string const& structureName, string const& parameterName) const
 {
-    bool result(false);    if(doesThisStructureExists(structureName))
+    bool result(false);
+    if(doesThisStructureExists(structureName))
     {
         StructureDetails const & structureDetails = structureNameToStructureDetailsMap.at(structureName);
         StructureDetails::ParameterMap const & parameters(structureDetails.parameters);
@@ -153,7 +156,8 @@ bool Database::doesThisStructureAndParameterExistsInVector(string const& structu
 
 bool Database::doesThisEnumAndParameterExists(string const& enumName, string const& parameterName) const
 {
-    bool result(false);    if(doesThisEnumExists(enumName))
+    bool result(false);
+    if(doesThisEnumExists(enumName))
     {
         EnumDetails const & enumDetails = enumNameToEnumDetailsMap.at(enumName);
         EnumDetails::ParameterMap const & parameters(enumDetails.parameters);
@@ -189,7 +193,18 @@ bool Database::doesThisUnionAndParameterExistsInVector(string const& unionName, 
         vector<string> const & parametersWithCorrectOrder(unionDetails.parametersWithCorrectOrder);
         if(find(parametersWithCorrectOrder.cbegin(), parametersWithCorrectOrder.cend(), parameterName)!=parametersWithCorrectOrder.cend())
         {
-            result=true;        }
+            result=true;
+        }
+    }
+    return result;
+}
+
+bool Database::doesThisConstantExists(string const& constantName) const
+{
+    bool result(false);
+    if(constantNameToConstantDetailsMap.find(constantName)!=constantNameToConstantDetailsMap.cend())
+    {
+        return true;
     }
     return result;
 }

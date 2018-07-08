@@ -206,7 +206,8 @@ TEST(ConvertCaseFromStringTest, ConvertToFirstNonWhiteSpaceCharacterToCapitalWit
 
 TEST(ConvertCaseFromStringTest, ConvertToLowerCaseLettersUsingAllLettersWithSpecialCharacters)
 {
-    string testString("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");    string lowerCaseLetters("1234567890!@#$%^&*( )abcdefghijklmnopqrstuvwxyz");
+    string testString("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
+    string lowerCaseLetters("1234567890!@#$%^&*( )abcdefghijklmnopqrstuvwxyz");
 
     EXPECT_EQ(lowerCaseLetters, getStringWithLowerCaseLetters(testString));
 }

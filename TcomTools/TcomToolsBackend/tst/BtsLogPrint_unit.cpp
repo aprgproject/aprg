@@ -25,7 +25,8 @@ TEST(BtsLogPrintTest, ClearingMakesItEmpty)
 
 TEST(BtsLogPrintTest, PrintFromBtsSyslogsIsUsed)
 {
-    BtsLogPrint logPrint("000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSP-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, averagePowerRxLevel: 65");    BtsLogTime expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-09-23T09:06:04.156235Z");
+    BtsLogPrint logPrint("000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSP-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, averagePowerRxLevel: 65");
+    BtsLogTime expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-09-23T09:06:04.156235Z");
     BtsLogTime expectedPcTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:04.213");
     string expectedHardwareType("FSP-120D");
     string expectedPrint("FSP-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, averagePowerRxLevel: 65");

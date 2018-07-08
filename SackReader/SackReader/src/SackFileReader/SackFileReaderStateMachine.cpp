@@ -24,6 +24,7 @@ InnerStates::InnerStates()
     , stateForAtDefDescription(StateForAtDefDescription::BeforeName)
     , stateForAtParamDescription(StateForAtParamDescription::BeforeName)
 {}
+
 void InnerStates::reset()
 {
     stateForConstant = StateForConstant::BeforeName;
@@ -44,6 +45,7 @@ SackFileReaderStateMachine::SackFileReaderStateMachine(Database & database, stri
     , m_fileNameOnly(fileNameOnly)
     , m_database(database)
 {}
+
 bool SackFileReaderStateMachine::isNextLineNeeded() const
 {
     return m_isNextLineNeeded;
@@ -69,7 +71,8 @@ void SackFileReaderStateMachine::processInput(InputToken const& inputToken)
         break;
     case State::SharpDefineForConstant:
         processStateSharpDefineForConstant(inputToken);
-        break;    case State::SharpDefineForMessageId:
+        break;
+    case State::SharpDefineForMessageId:
         processStateSharpDefineForMessageId(inputToken);
         break;
     case State::StructKeyword:
@@ -98,7 +101,8 @@ void SackFileReaderStateMachine::processInput(InputToken const& inputToken)
         break;
     default:
         assert(false);
-        break;    }
+        break;
+    }
 }
 
 
@@ -176,7 +180,11 @@ void SackFileReaderStateMachine::processStateSharpDefineForConstant(InputToken c
     string const& token(inputToken.token);
     if(isNotWhiteSpaceAndNotInComment(inputToken))
     {
-        if(StateForConstant::BeforeName == m_innerStates.stateForConstant)
+        if("#define" == token)
+        {
+            m_innerStates.stateForConstant = StateForConstant::BeforeName;
+        }
+        else if(StateForConstant::BeforeName == m_innerStates.stateForConstant)
         {
             m_constantDetails.name = token;
             m_innerStates.stateForConstant = StateForConstant::AfterNameBeforeValue;
@@ -194,7 +202,12 @@ void SackFileReaderStateMachine::processStateStructKeyword(InputToken const& inp
 {
     string const& token(inputToken.token);
     if(isNotWhiteSpaceAndNotInComment(inputToken) && token!="/")
-    {        if(StateForStruct::BeforeName == m_innerStates.stateForStruct)
+    {
+        if("#define" == token)
+        {
+            m_innerStates.stateForConstant = StateForConstant::BeforeName;
+        }
+        else if(StateForStruct::BeforeName == m_innerStates.stateForStruct)
         {
             m_structureDetails.name = token;
             m_innerStates.stateForStruct=StateForStruct::AfterName;
@@ -474,6 +487,7 @@ void SackFileReaderStateMachine::processStateAtStructDescription(InputToken cons
         saveNextState(State::Idle);
     }
 }
+
 void SackFileReaderStateMachine::processStateAtEnumDescription(InputToken const& inputToken)
 {
     string const& token(inputToken.token);
@@ -557,7 +571,8 @@ void SackFileReaderStateMachine::processStateAtParamDescription(InputToken const
     }
 }
 
-void SackFileReaderStateMachine::saveNextStateAndResetInnerStates(State const& state){
+void SackFileReaderStateMachine::saveNextStateAndResetInnerStates(State const& state)
+{
     m_innerStates.reset();
     saveNextState(state);
 }
