@@ -30,12 +30,10 @@ void SackFileReader::readFile(string const& fileFullPath)
     ifstream fileStream(fileFullPath);
     AlbaLocalPathHandler fileFullPathHandler(fileFullPath);
     AlbaFileReader fileReader(fileStream);
-    SackFileReaderStateMachine sackFileReaderStateMachine(m_database, fileFullPathHandler.getFilenameOnly());
-    sackFileReaderStateMachine.setIsMessageIdFileFlag(isStringFoundInsideTheOtherStringNotCaseSensitive(fileFullPathHandler.getFilenameOnly(), "MessageId_"));
+    SackFileReaderStateMachine sackFileReaderStateMachine(m_database, fileFullPathHandler.getFullPath());
     while(fileReader.isNotFinished())
     {
-        string line(getStringWithoutRedundantWhiteSpace(fileReader.getLineAndIgnoreWhiteSpaces()));
-        strings tokens;
+        string line(getStringWithoutRedundantWhiteSpace(fileReader.getLineAndIgnoreWhiteSpaces()));        strings tokens;
         splitToStrings<SplitStringType::WithDelimeters>(tokens, line, " ()[]{};\r\n:;/*/,");
         CommentStateMachineNamespace::InputToken commentStateMachineInputToken;
         commentStateMachineInputToken.isNewLine = true;

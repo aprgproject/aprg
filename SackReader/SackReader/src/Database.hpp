@@ -27,16 +27,16 @@ struct Database
     bool doesThisUnionAndParameterExists(std::string const& unionName, std::string const& parameterName) const;
     bool doesThisUnionAndParameterExistsInVector(std::string const& unionName, std::string const& parameterName) const;
     bool doesThisConstantExists(std::string const& constantName) const;
+    bool doesThisFullDetailedStructureExists(std::string const& structureName) const;
     bool doesThisStructureExists(std::string const& structureName) const;
     bool doesThisEnumExists(std::string const& structureName) const;
     bool doesThisUnionExists(std::string const& unionName) const;
     FileToPathMap fileToPathMap;
     ConstantNameToConstantDetailsMap constantNameToConstantDetailsMap;
-    MessageNameToStructureNameMap messageNameToStructureNameMap;
+    MessageNameToMessageDetailsMap messageNameToMessageDetailsMap;
     StructureNameToStructureDetailsMap structureNameToStructureDetailsMap;
     UnionNameToUnionDetailsMap unionNameToUnionDetailsMap;
-    EnumNameToEnumDetailsMap enumNameToEnumDetailsMap;
-    std::set<std::string> messagesToGenerate;
+    EnumNameToEnumDetailsMap enumNameToEnumDetailsMap;    std::set<std::string> messagesToGenerate;
 };
 
 } // namespace alba

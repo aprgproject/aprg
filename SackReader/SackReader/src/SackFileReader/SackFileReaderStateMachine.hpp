@@ -2,10 +2,10 @@
 
 #include <CommonTypes.hpp>
 #include <Database.hpp>
+#include <PathHandlers/AlbaLocalPathHandler.hpp>
 #include <State/AlbaBaseStateMachine.hpp>
 
-namespace alba
-{
+namespace alba{
 
 namespace SackFileReaderStateMachineNamespace
 {
@@ -179,13 +179,10 @@ using BaseSackFileReaderStateMachine = AlbaBaseStateMachine<State, InputToken>;
 class SackFileReaderStateMachine : public BaseSackFileReaderStateMachine
 {
 public:
-    SackFileReaderStateMachine(Database & database, std::string const& fileNameOnly);
+    SackFileReaderStateMachine(Database & database, std::string const& fullPath);
     bool isNextLineNeeded() const;
-    bool isMessageIdFile() const;
-    void setIsMessageIdFileFlag(bool const isMessageIdFile);
 
     void processInput(InputToken const& inputToken);
-
 private:
     bool isNotWhiteSpaceAndNotInComment(InputToken const& inputToken) const;
     void processStateIdle(InputToken const& inputToken);
@@ -211,14 +208,14 @@ private:
     void saveParameterInEnumToDatabase();
     void saveConstantDescriptionToDatabase(std::string const& partialString);
     void saveParameterDescriptionToDatabase(std::string const& partialString);
+    AlbaLocalPathHandler m_filePathHandler;
     bool m_isMessageIdFile;
     bool m_isNextLineNeeded;
     InnerStates m_innerStates;
-    std::string m_fileNameOnly;
+    std::string m_pathFromIInterface;
     std::string m_arraySize;
     std::string m_previousStructureName;
-    std::string m_previousEnumName;
-    std::string m_previousUnionName;
+    std::string m_previousEnumName;    std::string m_previousUnionName;
     ConstantDetails m_constantDetails;
     StructureDetails m_structureDetails;
     UnionDetails m_unionDetails;

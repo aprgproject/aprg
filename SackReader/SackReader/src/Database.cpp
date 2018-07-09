@@ -16,11 +16,10 @@ void Database::saveDatabaseToFile(string const& path)
     AlbaFileParameterWriter writer(fileStream);
     writer.writeData(fileToPathMap);
     writer.writeData(constantNameToConstantDetailsMap);
-    writer.writeData(messageNameToStructureNameMap);
+    writer.writeData(messageNameToMessageDetailsMap);
     writer.writeData(structureNameToStructureDetailsMap);
     writer.writeData(unionNameToUnionDetailsMap);
-    writer.writeData(enumNameToEnumDetailsMap);
-}
+    writer.writeData(enumNameToEnumDetailsMap);}
 
 void Database::loadDatabaseFromFile(string const& path)
 {
@@ -28,11 +27,10 @@ void Database::loadDatabaseFromFile(string const& path)
     AlbaFileParameterReader reader(fileStream);
     reader.readData(fileToPathMap);
     reader.readData(constantNameToConstantDetailsMap);
-    reader.readData(messageNameToStructureNameMap);
+    reader.readData(messageNameToMessageDetailsMap);
     reader.readData(structureNameToStructureDetailsMap);
     reader.readData(unionNameToUnionDetailsMap);
-    reader.readData(enumNameToEnumDetailsMap);
-}
+    reader.readData(enumNameToEnumDetailsMap);}
 
 string Database::getFileFullPath(string const& fileName) const
 {
@@ -57,13 +55,12 @@ ConstantDetails Database::getConstantDetails(string const& constantName) const
 string Database::getMessageStructure(string const& messageName) const
 {
     string result;
-    if(messageNameToStructureNameMap.find(messageName)!=messageNameToStructureNameMap.cend())
+    if(messageNameToMessageDetailsMap.find(messageName)!=messageNameToMessageDetailsMap.cend())
     {
-        result = messageNameToStructureNameMap.at(messageName);
+        result = messageNameToMessageDetailsMap.at(messageName).structureName;
     }
     return result;
 }
-
 StructureDetails Database::getStructureDetails(string const& structureName) const
 {
     StructureDetails result;
@@ -133,11 +130,10 @@ bool Database::doesThisStructureAndParameterExists(string const& structureName, 
         StructureDetails::ParameterMap const & parameters(structureDetails.parameters);
         if(parameters.find(parameterName)!=parameters.cend())
         {
-            result=true;
+            result = true;
         }
     }
-    return result;
-}
+    return result;}
 
 bool Database::doesThisStructureAndParameterExistsInVector(string const& structureName, string const& parameterName) const
 {
@@ -148,11 +144,10 @@ bool Database::doesThisStructureAndParameterExistsInVector(string const& structu
         vector<string> const & parametersWithCorrectOrder(structureDetails.parametersWithCorrectOrder);
         if(find(parametersWithCorrectOrder.cbegin(), parametersWithCorrectOrder.cend(), parameterName)!=parametersWithCorrectOrder.cend())
         {
-            result=true;
+            result = true;
         }
     }
-    return result;
-}
+    return result;}
 
 bool Database::doesThisEnumAndParameterExists(string const& enumName, string const& parameterName) const
 {
@@ -178,11 +173,10 @@ bool Database::doesThisUnionAndParameterExists(string const& unionName, string c
         UnionDetails::ParameterMap const & parameters(unionDetails.parameters);
         if(parameters.find(parameterName)!=parameters.cend())
         {
-            result=true;
+            result = true;
         }
     }
-    return result;
-}
+    return result;}
 
 bool Database::doesThisUnionAndParameterExistsInVector(string const& unionName, string const& parameterName) const
 {
@@ -193,18 +187,27 @@ bool Database::doesThisUnionAndParameterExistsInVector(string const& unionName, 
         vector<string> const & parametersWithCorrectOrder(unionDetails.parametersWithCorrectOrder);
         if(find(parametersWithCorrectOrder.cbegin(), parametersWithCorrectOrder.cend(), parameterName)!=parametersWithCorrectOrder.cend())
         {
-            result=true;
+            result = true;
         }
     }
-    return result;
-}
+    return result;}
 
 bool Database::doesThisConstantExists(string const& constantName) const
 {
     bool result(false);
     if(constantNameToConstantDetailsMap.find(constantName)!=constantNameToConstantDetailsMap.cend())
     {
-        return true;
+        result = true;
+    }
+    return result;
+}
+
+bool Database::doesThisFullDetailedStructureExists(string const& structureName) const
+{
+    bool result(false);
+    if(doesThisStructureExists(structureName))
+    {
+        result = !getStructureDetails(structureName).name.empty();
     }
     return result;
 }
@@ -214,30 +217,27 @@ bool Database::doesThisStructureExists(string const& structureName) const
     bool result(false);
     if(structureNameToStructureDetailsMap.find(structureName)!=structureNameToStructureDetailsMap.cend())
     {
-        return true;
+        result = true;
     }
     return result;
 }
-
 bool Database::doesThisEnumExists(string const& enumName) const
 {
     bool result(false);
     if(enumNameToEnumDetailsMap.find(enumName)!=enumNameToEnumDetailsMap.cend())
     {
-        return true;
+        result = true;
     }
     return result;
 }
-
 bool Database::doesThisUnionExists(string const& unionName) const
 {
     bool result(false);
     if(unionNameToUnionDetailsMap.find(unionName)!=unionNameToUnionDetailsMap.cend())
     {
-        return true;
+        result = true;
     }
     return result;
 }
-
 
 }

@@ -11,11 +11,10 @@ TEST(DatabaseTest, InitialContentsAreEmpty)
     Database database;
     EXPECT_TRUE(database.fileToPathMap.empty());
     EXPECT_TRUE(database.constantNameToConstantDetailsMap.empty());
-    EXPECT_TRUE(database.messageNameToStructureNameMap.empty());
+    EXPECT_TRUE(database.messageNameToMessageDetailsMap.empty());
     EXPECT_TRUE(database.structureNameToStructureDetailsMap.empty());
     EXPECT_TRUE(database.enumNameToEnumDetailsMap.empty());
-    EXPECT_TRUE(database.messagesToGenerate.empty());
-}
+    EXPECT_TRUE(database.messagesToGenerate.empty());}
 
 TEST(DatabaseTest, SaveAndLoadFile)
 {
@@ -25,11 +24,11 @@ TEST(DatabaseTest, SaveAndLoadFile)
     databaseToBeSaved.constantNameToConstantDetailsMap["ConstantName"].value = "ConstantValue";
     databaseToBeSaved.constantNameToConstantDetailsMap["ConstantName"].description = "ConstantDescription";
     databaseToBeSaved.constantNameToConstantDetailsMap["ConstantName"].descriptionFromUser = "ConstantDescriptionFromUser";
-    databaseToBeSaved.messageNameToStructureNameMap["MessageName"] = "StructureName";
+    databaseToBeSaved.messageNameToMessageDetailsMap["MessageName"].name = "MessageName";
+    databaseToBeSaved.messageNameToMessageDetailsMap["MessageName"].name = "StructureName";
     databaseToBeSaved.structureNameToStructureDetailsMap["StructureName"].name = "StructureName";
     databaseToBeSaved.structureNameToStructureDetailsMap["StructureName"].parameters["ParameterName"].type = "ParameterType";
-    databaseToBeSaved.structureNameToStructureDetailsMap["StructureName"].parameters["ParameterName"].name = "ParameterName";
-    databaseToBeSaved.structureNameToStructureDetailsMap["StructureName"].parameters["ParameterName"].description = "ParameterDescription";
+    databaseToBeSaved.structureNameToStructureDetailsMap["StructureName"].parameters["ParameterName"].name = "ParameterName";    databaseToBeSaved.structureNameToStructureDetailsMap["StructureName"].parameters["ParameterName"].description = "ParameterDescription";
     databaseToBeSaved.structureNameToStructureDetailsMap["StructureName"].parameters["ParameterName"].descriptionFromUser = "ParameterDescriptionFromUser";
     databaseToBeSaved.structureNameToStructureDetailsMap["StructureName"].parametersWithCorrectOrder.emplace_back("ParameterName");
     databaseToBeSaved.structureNameToStructureDetailsMap["StructureName"].isMessage = true;
@@ -50,11 +49,11 @@ TEST(DatabaseTest, SaveAndLoadFile)
     EXPECT_EQ("ConstantValue", loadedDatabase.constantNameToConstantDetailsMap.at("ConstantName").value);
     EXPECT_EQ("ConstantDescription", loadedDatabase.constantNameToConstantDetailsMap.at("ConstantName").description);
     EXPECT_EQ("ConstantDescriptionFromUser", loadedDatabase.constantNameToConstantDetailsMap.at("ConstantName").descriptionFromUser);
-    EXPECT_EQ("StructureName", loadedDatabase.messageNameToStructureNameMap.at("MessageName"));
+    EXPECT_EQ("MessageName", loadedDatabase.messageNameToMessageDetailsMap.at("MessageName").name);
+    EXPECT_EQ("StructureName", loadedDatabase.messageNameToMessageDetailsMap.at("MessageName").structureName);
     EXPECT_EQ("ParameterType", loadedDatabase.structureNameToStructureDetailsMap.at("StructureName").parameters.at("ParameterName").type);
     EXPECT_EQ("ParameterName", loadedDatabase.structureNameToStructureDetailsMap.at("StructureName").parameters.at("ParameterName").name);
-    EXPECT_EQ("ParameterDescription", loadedDatabase.structureNameToStructureDetailsMap.at("StructureName").parameters.at("ParameterName").description);
-    EXPECT_EQ("ParameterDescriptionFromUser", loadedDatabase.structureNameToStructureDetailsMap.at("StructureName").parameters.at("ParameterName").descriptionFromUser);
+    EXPECT_EQ("ParameterDescription", loadedDatabase.structureNameToStructureDetailsMap.at("StructureName").parameters.at("ParameterName").description);    EXPECT_EQ("ParameterDescriptionFromUser", loadedDatabase.structureNameToStructureDetailsMap.at("StructureName").parameters.at("ParameterName").descriptionFromUser);
     EXPECT_EQ("ParameterName", loadedDatabase.structureNameToStructureDetailsMap.at("StructureName").parametersWithCorrectOrder.front());
     EXPECT_TRUE(loadedDatabase.structureNameToStructureDetailsMap.at("StructureName").isMessage);
     //EXPECT_TRUE(loadedDatabase.structureNameToStructureDetailsMap.at("StructureName").isUsedInIfs);

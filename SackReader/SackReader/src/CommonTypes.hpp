@@ -7,16 +7,33 @@
 namespace alba
 {
 
-struct ConstantDetails
+struct MessageDetails
 {
     std::string name;
-    std::string value;
-    std::string description;
-    std::string descriptionFromUser;
+    std::string structureName;
+    std::string path;
     bool isUsedInIfs;
     void clear()
     {
         name.clear();
+        structureName.clear();
+        path.clear();
+        isUsedInIfs=false;
+    }
+    friend std::ostream & operator<<(std::ostream & out, MessageDetails const& messageDetails);
+    friend std::istream & operator>>(std::istream & in, MessageDetails& messageDetails);
+};
+
+
+struct ConstantDetails
+{
+    std::string name;    std::string value;
+    std::string description;
+    std::string descriptionFromUser;
+    std::string path;
+    bool isUsedInIfs;
+    void clear()
+    {        name.clear();
         value.clear();
         description.clear();
         descriptionFromUser.clear();
@@ -49,10 +66,10 @@ struct EnumDetails
     using ParameterPair = std::pair<std::string, EnumParameterDetails>;
     std::string name;
     ParameterMap parameters;
+    std::string path;
     bool isUsedInIfs;
     void clear()
-    {
-        name.clear();
+    {        name.clear();
         parameters.clear();
         isUsedInIfs=false;
     }
@@ -88,10 +105,10 @@ struct StructureDetails
     std::string name;
     ParameterMap parameters;
     std::vector<std::string> parametersWithCorrectOrder; // unordered_map
+    std::string path;
     bool isMessage;
     bool isUsedInIfs;
-    void clear()
-    {
+    void clear()    {
         name.clear();
         parameters.clear();
         parametersWithCorrectOrder.clear();
@@ -109,10 +126,10 @@ struct UnionDetails
     std::string name;
     ParameterMap parameters;
     std::vector<std::string> parametersWithCorrectOrder; // unordered_map
+    std::string path;
     bool isUsedInIfs;
     void clear()
-    {
-        name.clear();
+    {        name.clear();
         parameters.clear();
         parametersWithCorrectOrder.clear();
         isUsedInIfs=false;
@@ -126,12 +143,11 @@ using FileToPathMap = std::map<std::string, std::string>;
 using FileToPathPair = std::pair<std::string, std::string>;
 using ConstantNameToConstantDetailsMap = std::map<std::string, ConstantDetails>;
 using ConstantNameToConstantDetailsPair = std::pair<std::string, ConstantDetails>;
-using MessageNameToStructureNameMap = std::map<std::string, std::string>;
-using MessageNameToStructureNamePair = std::pair<std::string, std::string>;
+using MessageNameToMessageDetailsMap = std::map<std::string, MessageDetails>;
+using MessageNameToMessageDetailsPair = std::pair<std::string, MessageDetails>;
 using StructureNameToStructureDetailsMap = std::map<std::string, StructureDetails>;
 using StructureNameToStructureDetailsPair = std::pair<std::string, StructureDetails>;
-using UnionNameToUnionDetailsMap = std::map<std::string, UnionDetails>;
-using UnionNameToUnionDetailsPair = std::pair<std::string, UnionDetails>;
+using UnionNameToUnionDetailsMap = std::map<std::string, UnionDetails>;using UnionNameToUnionDetailsPair = std::pair<std::string, UnionDetails>;
 using EnumNameToEnumDetailsMap = std::map<std::string, EnumDetails>;
 using EnumNameToEnumDetailsPair = std::pair<std::string, EnumDetails>;
 
