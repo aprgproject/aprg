@@ -7,6 +7,26 @@
 namespace alba
 {
 
+struct ConstantDetails
+{
+    std::string name;
+    std::string value;
+    std::string description;
+    std::string descriptionFromUser;
+    std::string path;
+    bool isUsedInIfs;
+    void clear()
+    {
+        name.clear();
+        value.clear();
+        description.clear();
+        descriptionFromUser.clear();
+        isUsedInIfs=false;
+    }
+    friend std::ostream & operator<<(std::ostream & out, ConstantDetails const& constantDetails);
+    friend std::istream & operator>>(std::istream & in, ConstantDetails& constantDetails);
+};
+
 struct MessageDetails
 {
     std::string name;
@@ -22,25 +42,6 @@ struct MessageDetails
     }
     friend std::ostream & operator<<(std::ostream & out, MessageDetails const& messageDetails);
     friend std::istream & operator>>(std::istream & in, MessageDetails& messageDetails);
-};
-
-
-struct ConstantDetails
-{
-    std::string name;    std::string value;
-    std::string description;
-    std::string descriptionFromUser;
-    std::string path;
-    bool isUsedInIfs;
-    void clear()
-    {        name.clear();
-        value.clear();
-        description.clear();
-        descriptionFromUser.clear();
-        isUsedInIfs=false;
-    }
-    friend std::ostream & operator<<(std::ostream & out, ConstantDetails const& constantDetails);
-    friend std::istream & operator>>(std::istream & in, ConstantDetails& constantDetails);
 };
 
 struct EnumParameterDetails
@@ -69,7 +70,8 @@ struct EnumDetails
     std::string path;
     bool isUsedInIfs;
     void clear()
-    {        name.clear();
+    {
+        name.clear();
         parameters.clear();
         isUsedInIfs=false;
     }
@@ -108,7 +110,8 @@ struct StructureDetails
     std::string path;
     bool isMessage;
     bool isUsedInIfs;
-    void clear()    {
+    void clear()
+    {
         name.clear();
         parameters.clear();
         parametersWithCorrectOrder.clear();
@@ -129,13 +132,31 @@ struct UnionDetails
     std::string path;
     bool isUsedInIfs;
     void clear()
-    {        name.clear();
+    {
+        name.clear();
         parameters.clear();
         parametersWithCorrectOrder.clear();
         isUsedInIfs=false;
     }
     friend std::ostream & operator<<(std::ostream & out, UnionDetails const& unionDetails);
     friend std::istream & operator>>(std::istream & in, UnionDetails& unionDetails);
+};
+
+struct TypedefDetails
+{
+    std::string name;
+    std::string typedefDerivedName;
+    std::string path;
+    bool isUsedInIfs;
+    void clear()
+    {
+        name.clear();
+        typedefDerivedName.clear();
+        path.clear();
+        isUsedInIfs=false;
+    }
+    friend std::ostream & operator<<(std::ostream & out, TypedefDetails const& typedefDetails);
+    friend std::istream & operator>>(std::istream & in, TypedefDetails& typedefDetails);
 };
 
 
@@ -147,8 +168,12 @@ using MessageNameToMessageDetailsMap = std::map<std::string, MessageDetails>;
 using MessageNameToMessageDetailsPair = std::pair<std::string, MessageDetails>;
 using StructureNameToStructureDetailsMap = std::map<std::string, StructureDetails>;
 using StructureNameToStructureDetailsPair = std::pair<std::string, StructureDetails>;
-using UnionNameToUnionDetailsMap = std::map<std::string, UnionDetails>;using UnionNameToUnionDetailsPair = std::pair<std::string, UnionDetails>;
+using UnionNameToUnionDetailsMap = std::map<std::string, UnionDetails>;
+using UnionNameToUnionDetailsPair = std::pair<std::string, UnionDetails>;
 using EnumNameToEnumDetailsMap = std::map<std::string, EnumDetails>;
 using EnumNameToEnumDetailsPair = std::pair<std::string, EnumDetails>;
+using TypedefNameToTypedefDetailsMap = std::map<std::string, TypedefDetails>;
+using TypedefNameToTypedefDetailsPair = std::pair<std::string, TypedefDetails>;
+
 
 } // namespace alba

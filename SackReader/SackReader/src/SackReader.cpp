@@ -8,6 +8,7 @@
 
 #include <fstream>
 
+
 #include <Debug/AlbaDebug.hpp>
 
 
@@ -31,7 +32,8 @@ string SackReader::getFileFullPath(string const& fileName) const
 void SackReader::gatherAllFiles()
 {
     AlbaLocalPathHandler pathHandler(m_path);
-    ListOfPaths files;    ListOfPaths directories;
+    ListOfPaths files;
+    ListOfPaths directories;
     pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
     for(string const& file : files)
     {
@@ -71,7 +73,8 @@ void SackReader::loadDatabaseFromFile(string const& path)
 
 void SackReader::loadMessagesToGenerate(string const& path)
 {
-    ifstream messageToGenerateStream(path);    AlbaFileReader messageToGenerateReader(messageToGenerateStream);
+    ifstream messageToGenerateStream(path);
+    AlbaFileReader messageToGenerateReader(messageToGenerateStream);
     while(messageToGenerateReader.isNotFinished())
     {
         string line(messageToGenerateReader.getLine());
@@ -143,8 +146,6 @@ void SackReader::generateLyxDocument(string const& ifsTemplatePath, string const
 
 void SackReader::readAndMarkTypeAsNeededInIfs(string const& typeName)
 {
-    ALBA_PRINT2("readAndMarkTypeAsNeededInIfs", typeName);
-    ALBA_PRINT3(m_database.doesThisFullDetailedStructureExists(typeName), m_database.doesThisUnionExists(typeName), m_database.doesThisEnumExists(typeName));
     if(!m_database.doesThisFullDetailedStructureExists(typeName) && !m_database.doesThisUnionExists(typeName) && !m_database.doesThisEnumExists(typeName))
     {
         readFileUsingTypeName(typeName);
@@ -169,7 +170,6 @@ void SackReader::markStructureAsNeededForIfs(string const& structureName)
     StructureDetails structureDetails(m_database.getStructureDetails(structureName));
     for(string const& parameterName : structureDetails.parametersWithCorrectOrder)
     {
-        ALBA_PRINT2(structureName, parameterName);
         ParameterDetails parameterDetails = m_database.getParameterDetails(structureName, parameterName);
         if(parameterDetails.isAnArray)
         {
@@ -181,7 +181,6 @@ void SackReader::markStructureAsNeededForIfs(string const& structureName)
 
 void SackReader::markUnionAsNeededForIfs(string const& unionName)
 {
-    ALBA_PRINT1(unionName);
     m_database.unionNameToUnionDetailsMap[unionName].isUsedInIfs=true;
     UnionDetails unionDetails(m_database.getUnionDetails(unionName));
     for(string const& parameterName : unionDetails.parametersWithCorrectOrder)
@@ -197,7 +196,6 @@ void SackReader::markUnionAsNeededForIfs(string const& unionName)
 
 void SackReader::markEnumAsNeededForIfs(string const& enumName)
 {
-    ALBA_PRINT1(enumName);
     m_database.enumNameToEnumDetailsMap[enumName].isUsedInIfs=true;
 }
 
@@ -208,7 +206,6 @@ void SackReader::markConstantAsNeededForIfs(string const& constantName)
         char firstCharacter = constantName[0];
         if(firstCharacter!='E' && isCapitalLetter(firstCharacter))
         {
-            ALBA_PRINT1(constantName);
             m_database.constantNameToConstantDetailsMap[constantName].isUsedInIfs = true;
         }
     }
@@ -242,16 +239,15 @@ void SackReader::readConstantFiles()
 
 void SackReader::readFileUsingTypeName(string const& typeName)
 {
-    ALBA_PRINT1(typeName);
     readFileUsingTypeFileName(typeName+".h");
 }
 
 void SackReader::readFileUsingTypeFileName(string const& typeFileName)
 {
     SackFileReader sackFileReader(m_database);
-    ALBA_PRINT2(typeFileName, m_database.getFileFullPath(typeFileName));
     sackFileReader.readFile(m_database.getFileFullPath(typeFileName));
 }
+
 
 
 }

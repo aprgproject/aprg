@@ -73,7 +73,6 @@ void LyxGenerator::saveSubsection(string const& subsectionName, ofstream & lyxOu
 
 void LyxGenerator::saveMessageDefinitions(ofstream & lyxOutputFileStream)
 {
-    ALBA_PRINT1("saveMessageDefinitions");
     saveSubsection("Message Definitions", lyxOutputFileStream);
     for(string const& messageName : m_database.messagesToGenerate)
     {
@@ -131,14 +130,12 @@ void LyxGenerator::saveConstantDefinitions(ofstream & lyxOutputFileStream)
 
 void LyxGenerator::saveMessageDefinitionSubsubsection(string const& messageName, ofstream & messageDefinitionsStream)
 {
-    ALBA_PRINT2("saveMessageDefinitionSubsubsection", messageName);
     ifstream messageSubsubsectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\MessageSubsubsection.txt)");
     AlbaFileReader messageSubsubsectionReader(messageSubsubsectionStream);
 
     while(messageSubsubsectionReader.isNotFinished())
     {
         string messageSubsubsectionLine(messageSubsubsectionReader.getLine());
-        ALBA_PRINT1(messageSubsubsectionLine);
         if(isStringFoundInsideTheOtherStringCaseSensitive(messageSubsubsectionLine,"LYX_TABLE_MESSAGE_NAME_REPLACE"))
         {
             transformReplaceStringIfFound(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_NAME_REPLACE", messageName);
@@ -258,7 +255,6 @@ void LyxGenerator::saveConstantDefinitionSubsubsection(string const& constantNam
 
 void LyxGenerator::saveMessageTable(string const& messageName, ofstream & messageTableStream)
 {
-    ALBA_PRINT2("saveMessageTable", messageName);
     DisplayTable messageTable;
     messageTable.setBorders("-"," | ");
     messageTable.addRow();
@@ -403,7 +399,6 @@ void LyxGenerator::saveDisplayTable(DisplayTable const& displayTable, ofstream &
 void LyxGenerator::generateStructureForDisplayTablesIfNeeded(string const& structureName, DisplayTable & displayTable, string const& indentionInType, bool const areInnerStructuresGenerated)
 {
     string smallTextModifier("\\size footnotesize\n");
-    ALBA_PRINT2(structureName, m_database.doesThisStructureExists(structureName));
     if(m_database.doesThisStructureExists(structureName))
     {
         StructureDetails structureDetails(m_database.getStructureDetails(structureName));
@@ -419,24 +414,7 @@ void LyxGenerator::generateStructureForDisplayTablesIfNeeded(string const& struc
             }
             displayTable.getLastRow().addCell(smallTextModifier+finalType);
 
-            string sackDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(parameterDetails.description)));
-            string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(parameterDetails.descriptionFromUser)));
-            string finalDescription;
-            if(!userDescription.empty())
-            {
-                if(sackDescription!=userDescription)
-                {
-                    //cout <<"The description needs to be aligned with sack."<<endl;
-                    /*cout<<"Structure: "<<structureName<<" Parameter: "<<parameterDetails.name<<endl;
-                    cout<<"sackDescription: ["<<sackDescription<<"]"<<endl;
-                    cout<<"userDescription: ["<<userDescription<<"]"<<endl;*/
-                }
-                finalDescription = userDescription;
-            }
-            else
-            {
-                finalDescription = sackDescription;
-            }
+            string finalDescription(getDescriptionString(parameterDetails.description, parameterDetails.descriptionFromUser));
             displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
             if(areInnerStructuresGenerated)
             {
@@ -471,24 +449,7 @@ void LyxGenerator::generateEnumForDisplayTablesIfNeeded(string const& enumName, 
             displayTable.addRow();
             displayTable.getLastRow().addCell(smallTextModifier+" "+parameterDetails.name);
             displayTable.getLastRow().addCell(smallTextModifier+parameterDetails.value);
-            string sackDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(parameterDetails.description)));
-            string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(parameterDetails.descriptionFromUser)));
-            string finalDescription;
-            if(!userDescription.empty())
-            {
-                if(sackDescription!=userDescription)
-                {
-                    //cout <<"The description needs to be aligned with sack."<<endl;
-                    /*cout<<"Enum: "<<enumName<<" Parameter: "<<parameterDetails.name<<endl;
-                    cout<<"sackDescription: ["<<sackDescription<<"]"<<endl;
-                    cout<<"userDescription: ["<<userDescription<<"]"<<endl;*/
-                }
-                finalDescription = userDescription;
-            }
-            else
-            {
-                finalDescription = sackDescription;
-            }
+            string finalDescription(getDescriptionString(parameterDetails.description, parameterDetails.descriptionFromUser));
             displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
         }
     }
@@ -511,25 +472,7 @@ void LyxGenerator::generateUnionForDisplayTablesIfNeeded(string const& unionName
                 finalType = finalType+" ["+parameterDetails.arraySize+"]";
             }
             displayTable.getLastRow().addCell(smallTextModifier+finalType);
-
-            string sackDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(parameterDetails.description)));
-            string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(parameterDetails.descriptionFromUser)));
-            string finalDescription;
-            if(!userDescription.empty())
-            {
-                if(sackDescription!=userDescription)
-                {
-                    //cout <<"The description needs to be aligned with sack."<<endl;
-                    /*cout<<"Union: "<<unionName<<" Parameter: "<<parameterDetails.name<<endl;
-                    cout<<"sackDescription: ["<<sackDescription<<"]"<<endl;
-                    cout<<"userDescription: ["<<userDescription<<"]"<<endl;*/
-                }
-                finalDescription = userDescription;
-            }
-            else
-            {
-                finalDescription = sackDescription;
-            }
+            string finalDescription(getDescriptionString(parameterDetails.description, parameterDetails.descriptionFromUser));
             displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
             if(areInnerStructuresGenerated)
             {
@@ -548,28 +491,31 @@ void LyxGenerator::generateConstantForDisplayTablesIfNeeded(string const& consta
         displayTable.addRow();
         displayTable.getLastRow().addCell(smallTextModifier+constantDetails.name);
         displayTable.getLastRow().addCell(smallTextModifier+constantDetails.value);
-        string sackDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(constantDetails.description)));
-        string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(constantDetails.descriptionFromUser)));
-        string finalDescription;
-        if(!userDescription.empty())
-        {
-            if(sackDescription!=userDescription)
-            {
-                //cout <<"The description needs to be aligned with sack."<<endl;
-                /*cout<<"Constant: "<<constantName<<" Parameter: "<<parameterDetails.name<<endl;
-                    cout<<"sackDescription: ["<<sackDescription<<"]"<<endl;
-                    cout<<"userDescription: ["<<userDescription<<"]"<<endl;*/
-            }
-            finalDescription = userDescription;
-        }
-        else
-        {
-            finalDescription = sackDescription;
-        }
+        string finalDescription(getDescriptionString(constantDetails.description, constantDetails.descriptionFromUser));
         displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
     }
 }
 
-
+string LyxGenerator::getDescriptionString(string const& description, string const& descriptionFromUser) const
+{
+    string sackDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(description)));
+    string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(descriptionFromUser)));
+    string finalDescription;
+    if(!userDescription.empty())
+    {
+        if(sackDescription!=userDescription)
+        {
+            //cout <<"The description needs to be aligned with sack."<<endl;
+            cout<<"sackDescription: ["<<sackDescription<<"]"<<endl;
+            cout<<"userDescription: ["<<userDescription<<"]"<<endl;
+        }
+        finalDescription = userDescription;
+    }
+    else
+    {
+        finalDescription = sackDescription;
+    }
+    return finalDescription;
+}
 
 }

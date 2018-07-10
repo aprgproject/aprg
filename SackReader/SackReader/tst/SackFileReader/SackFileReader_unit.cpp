@@ -5,7 +5,7 @@
 using namespace alba;
 using namespace std;
 
-TEST(SackFileReaderTest, ReadFile_Constants)
+TEST(SackFileReaderTest, Constants)
 {
     Database database;
     SackFileReader sackFileReader(database);
@@ -20,7 +20,7 @@ TEST(SackFileReaderTest, ReadFile_Constants)
     EXPECT_EQ("2", details.value);
 }
 
-TEST(SackFileReaderTest, ReadFile_DTechLogDef)
+TEST(SackFileReaderTest, DTechLogDef)
 {
     Database database;
     SackFileReader sackFileReader(database);
@@ -35,7 +35,7 @@ TEST(SackFileReaderTest, ReadFile_DTechLogDef)
     EXPECT_EQ("16", details.value);
 }
 
-TEST(SackFileReaderTest, ReadFile_IfAaSysComGw_Defs)
+TEST(SackFileReaderTest, IfAaSysComGw_Defs)
 {
     Database database;
     SackFileReader sackFileReader(database);
@@ -65,7 +65,7 @@ TEST(SackFileReaderTest, CommentInStructure)
     //EXPECT_EQ("indicates what kind of testdata is generated to test channels", details.description); //TooHard
 }
 
-TEST(SackFileReaderTest, ReadFile_MessageOamAtmSigFile)
+TEST(SackFileReaderTest, MessageOamAtmSigFile)
 {
     Database database;
     SackFileReader sackFileReader(database);
@@ -75,7 +75,7 @@ TEST(SackFileReaderTest, ReadFile_MessageOamAtmSigFile)
     EXPECT_EQ("STupcAalmanInternalConfigurationResp", database.getMessageStructure("OAM_ATM_TUPC_AALMAN_INTERNAL_CONFIGURATION_RESP_MSG"));
 }
 
-TEST(SackFileReaderTest, ReadFile_MessageOamTcomFile)
+TEST(SackFileReaderTest, MessageOamTcomFile)
 {
     Database database;
     SackFileReader sackFileReader(database);
@@ -85,7 +85,7 @@ TEST(SackFileReaderTest, ReadFile_MessageOamTcomFile)
     EXPECT_EQ("SetCellParamResp", database.getMessageStructure("TC_SET_CELL_PARAM_RESP_MSG"));
 }
 
-TEST(SackFileReaderTest, ReadFile_OamTupcStructures)
+TEST(SackFileReaderTest, OamTupcStructures)
 {
     Database database;
     SackFileReader sackFileReader(database);
@@ -111,7 +111,7 @@ TEST(SackFileReaderTest, ReadFile_OamTupcStructures)
     EXPECT_EQ("", details.description);
 }
 
-TEST(SackFileReaderTest, ReadFile_OamTcomStructures)
+TEST(SackFileReaderTest, OamTcomStructures)
 {
     Database database;
     SackFileReader sackFileReader(database);
@@ -137,7 +137,7 @@ TEST(SackFileReaderTest, ReadFile_OamTcomStructures)
     EXPECT_EQ("", details.description);
 }
 
-TEST(SackFileReaderTest, ReadFile_SWamUnit)
+TEST(SackFileReaderTest, SWamUnit)
 {
     Database database;
     SackFileReader sackFileReader(database);
@@ -251,4 +251,37 @@ TEST(SackFileReaderTest, URxAntennaBusParameters)
     EXPECT_EQ("SAntennaPhysicalAddress", details.type);
     EXPECT_FALSE(details.isAnArray);
     EXPECT_EQ("RP3 RX Antenna address information mapped to current LCR ID.", details.description);
+}
+
+TEST(SackFileReaderTest, TAichPower)
+{
+    Database database;
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\TAichPower.h)");
+
+    TypedefDetails details(database.getTypedefDetails("TAichPower"));
+    EXPECT_EQ("TAichPower", details.name);
+    EXPECT_EQ("i32", details.typedefDerivedName);
+}
+
+TEST(SackFileReaderTest, TSubrackNbr)
+{
+    Database database;
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\TSubrackNbr.h)");
+
+    TypedefDetails details(database.getTypedefDetails("TSubrackNbr"));
+    EXPECT_EQ("TSubrackNbr", details.name);
+    EXPECT_EQ("u32", details.typedefDerivedName);
+}
+
+TEST(SackFileReaderTest, TSubunits)
+{
+    Database database;
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\TSubunits.h)");
+
+    TypedefDetails details(database.getTypedefDetails("TSubunits"));
+    EXPECT_EQ("TSubunits", details.name);
+    EXPECT_EQ("r32", details.typedefDerivedName);
 }

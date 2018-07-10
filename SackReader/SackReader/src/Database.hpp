@@ -21,6 +21,7 @@ struct Database
     EnumParameterDetails getEnumParameterDetails(std::string const& enumName, std::string const& enumParameterName) const;
     UnionDetails getUnionDetails(std::string const& unionName) const;
     ParameterDetails getUnionParameterDetails(std::string const& unionName, std::string const& parameterName) const;
+    TypedefDetails getTypedefDetails(std::string const& typedefName) const;
     bool doesThisStructureAndParameterExists(std::string const& structureName, std::string const& parameterName) const;
     bool doesThisStructureAndParameterExistsInVector(std::string const& structureName, std::string const& parameterName) const;
     bool doesThisEnumAndParameterExists(std::string const& enumName, std::string const& parameterName) const;
@@ -36,7 +37,9 @@ struct Database
     MessageNameToMessageDetailsMap messageNameToMessageDetailsMap;
     StructureNameToStructureDetailsMap structureNameToStructureDetailsMap;
     UnionNameToUnionDetailsMap unionNameToUnionDetailsMap;
-    EnumNameToEnumDetailsMap enumNameToEnumDetailsMap;    std::set<std::string> messagesToGenerate;
+    EnumNameToEnumDetailsMap enumNameToEnumDetailsMap;
+    TypedefNameToTypedefDetailsMap typedefNameToTypedefDetailsMap;
+    std::set<std::string> messagesToGenerate;
 };
 
 } // namespace alba

@@ -5,7 +5,8 @@
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 #include <State/AlbaBaseStateMachine.hpp>
 
-namespace alba{
+namespace alba
+{
 
 namespace SackFileReaderStateMachineNamespace
 {
@@ -15,6 +16,7 @@ enum class State
     Idle,
     SharpDefineForMessageId,
     SharpDefineForConstant,
+    TypedefKeyword,
     StructKeyword,
     EnumKeyword,
     UnionKeyword,
@@ -138,6 +140,13 @@ enum class StateForUnionAfterOpeningBraces
     AfterParameterName
 };
 
+//typedef u32 TSubrackNbr; /* subrack number*/
+enum class StateForTypedef
+{
+    BeforeDerivedName,
+    AfterDerivedNameBeforeName,
+    AfterNameBeforeSemiColon,
+};
 
 
 enum class ParameterDescriptionType
@@ -168,6 +177,7 @@ struct InnerStates
     StateForEnumAfterOpeningBraces stateForEnumAfterOpeningBraces;
     StateForUnion stateForUnion;
     StateForUnionAfterOpeningBraces stateForUnionAfterOpeningBraces;
+    StateForTypedef stateForTypedef;
     StateForAtDefDescription stateForAtDefDescription;
     StateForAtParamDescription stateForAtParamDescription;
 };
@@ -183,6 +193,8 @@ public:
     bool isNextLineNeeded() const;
 
     void processInput(InputToken const& inputToken);
+    void processEndOfLine();
+
 private:
     bool isNotWhiteSpaceAndNotInComment(InputToken const& inputToken) const;
     void processStateIdle(InputToken const& inputToken);
@@ -194,6 +206,7 @@ private:
     void processStateForEnumAfterOpeningBraces(std::string const& token);
     void processStateUnionKeyword(InputToken const& inputToken);
     void processStateForUnionAfterOpeningBraces(std::string const& token);
+    void processStateTypedefKeyword(InputToken const& inputToken);
     void processStateAtDefDescription(InputToken const& inputToken);
     void processStateAtStructDescription(InputToken const& inputToken);
     void processStateAtEnumDescription(InputToken const& inputToken);
@@ -208,6 +221,7 @@ private:
     void saveParameterInEnumToDatabase();
     void saveConstantDescriptionToDatabase(std::string const& partialString);
     void saveParameterDescriptionToDatabase(std::string const& partialString);
+    void saveTypedefToDatabase();
     AlbaLocalPathHandler m_filePathHandler;
     bool m_isMessageIdFile;
     bool m_isNextLineNeeded;
@@ -215,8 +229,10 @@ private:
     std::string m_pathFromIInterface;
     std::string m_arraySize;
     std::string m_previousStructureName;
-    std::string m_previousEnumName;    std::string m_previousUnionName;
+    std::string m_previousEnumName;
+    std::string m_previousUnionName;
     ConstantDetails m_constantDetails;
+    TypedefDetails m_typedefDetails;
     StructureDetails m_structureDetails;
     UnionDetails m_unionDetails;
     ParameterDetails m_parameterDetails;

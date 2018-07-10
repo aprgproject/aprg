@@ -19,7 +19,10 @@ void Database::saveDatabaseToFile(string const& path)
     writer.writeData(messageNameToMessageDetailsMap);
     writer.writeData(structureNameToStructureDetailsMap);
     writer.writeData(unionNameToUnionDetailsMap);
-    writer.writeData(enumNameToEnumDetailsMap);}
+    writer.writeData(enumNameToEnumDetailsMap);
+    writer.writeData(typedefNameToTypedefDetailsMap);
+    writer.writeData(messagesToGenerate);
+}
 
 void Database::loadDatabaseFromFile(string const& path)
 {
@@ -30,7 +33,10 @@ void Database::loadDatabaseFromFile(string const& path)
     reader.readData(messageNameToMessageDetailsMap);
     reader.readData(structureNameToStructureDetailsMap);
     reader.readData(unionNameToUnionDetailsMap);
-    reader.readData(enumNameToEnumDetailsMap);}
+    reader.readData(enumNameToEnumDetailsMap);
+    reader.readData(typedefNameToTypedefDetailsMap);
+    reader.readData(messagesToGenerate);
+}
 
 string Database::getFileFullPath(string const& fileName) const
 {
@@ -61,6 +67,7 @@ string Database::getMessageStructure(string const& messageName) const
     }
     return result;
 }
+
 StructureDetails Database::getStructureDetails(string const& structureName) const
 {
     StructureDetails result;
@@ -121,6 +128,16 @@ ParameterDetails Database::getUnionParameterDetails(string const& unionName, str
     return result;
 }
 
+TypedefDetails Database::getTypedefDetails(string const& typedefName) const
+{
+    TypedefDetails result;
+    if(typedefNameToTypedefDetailsMap.find(typedefName)!=typedefNameToTypedefDetailsMap.cend())
+    {
+        result = typedefNameToTypedefDetailsMap.at(typedefName);
+    }
+    return result;
+}
+
 bool Database::doesThisStructureAndParameterExists(string const& structureName, string const& parameterName) const
 {
     bool result(false);
@@ -133,7 +150,8 @@ bool Database::doesThisStructureAndParameterExists(string const& structureName, 
             result = true;
         }
     }
-    return result;}
+    return result;
+}
 
 bool Database::doesThisStructureAndParameterExistsInVector(string const& structureName, string const& parameterName) const
 {
@@ -147,7 +165,8 @@ bool Database::doesThisStructureAndParameterExistsInVector(string const& structu
             result = true;
         }
     }
-    return result;}
+    return result;
+}
 
 bool Database::doesThisEnumAndParameterExists(string const& enumName, string const& parameterName) const
 {
@@ -176,7 +195,8 @@ bool Database::doesThisUnionAndParameterExists(string const& unionName, string c
             result = true;
         }
     }
-    return result;}
+    return result;
+}
 
 bool Database::doesThisUnionAndParameterExistsInVector(string const& unionName, string const& parameterName) const
 {
@@ -190,7 +210,8 @@ bool Database::doesThisUnionAndParameterExistsInVector(string const& unionName, 
             result = true;
         }
     }
-    return result;}
+    return result;
+}
 
 bool Database::doesThisConstantExists(string const& constantName) const
 {
@@ -221,6 +242,7 @@ bool Database::doesThisStructureExists(string const& structureName) const
     }
     return result;
 }
+
 bool Database::doesThisEnumExists(string const& enumName) const
 {
     bool result(false);
@@ -230,6 +252,7 @@ bool Database::doesThisEnumExists(string const& enumName) const
     }
     return result;
 }
+
 bool Database::doesThisUnionExists(string const& unionName) const
 {
     bool result(false);
@@ -239,5 +262,6 @@ bool Database::doesThisUnionExists(string const& unionName) const
     }
     return result;
 }
+
 
 }

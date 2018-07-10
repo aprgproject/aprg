@@ -36,6 +36,7 @@ private:
     void generateEnumForDisplayTablesIfNeeded(std::string const& enumName, DisplayTable & displayTable);
     void generateUnionForDisplayTablesIfNeeded(std::string const& unionName, DisplayTable & displayTable, std::string const& indentionInType, bool const areInnerStructuresGenerated);
     void generateConstantForDisplayTablesIfNeeded(std::string const& constantName, DisplayTable & displayTable);
+    std::string getDescriptionString(std::string const& description, std::string const& descriptionFromUser) const;
     Database const& m_database;
 };
 

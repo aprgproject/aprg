@@ -10,6 +10,7 @@
 
 namespace alba
 {
+
 class SackReader
 {
 public:
@@ -38,6 +39,7 @@ private:
 
 private:
     std::string m_path;
-    Database m_database;};
+    Database m_database;
+};
 
 }

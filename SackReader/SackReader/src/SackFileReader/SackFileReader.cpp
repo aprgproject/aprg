@@ -33,7 +33,8 @@ void SackFileReader::readFile(string const& fileFullPath)
     SackFileReaderStateMachine sackFileReaderStateMachine(m_database, fileFullPathHandler.getFullPath());
     while(fileReader.isNotFinished())
     {
-        string line(getStringWithoutRedundantWhiteSpace(fileReader.getLineAndIgnoreWhiteSpaces()));        strings tokens;
+        string line(getStringWithoutRedundantWhiteSpace(fileReader.getLineAndIgnoreWhiteSpaces()));
+        strings tokens;
         splitToStrings<SplitStringType::WithDelimeters>(tokens, line, " ()[]{};\r\n:;/*/,");
         CommentStateMachineNamespace::InputToken commentStateMachineInputToken;
         commentStateMachineInputToken.isNewLine = true;
@@ -56,6 +57,7 @@ void SackFileReader::readFile(string const& fileFullPath)
                  break;
             }
         }
+        sackFileReaderStateMachine.processEndOfLine();
     }
 }
 

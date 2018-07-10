@@ -8,6 +8,30 @@ using namespace std;
 namespace alba
 {
 
+ostream& operator<<(ostream & out, ConstantDetails const& constantDetails)
+{
+    AlbaFileParameterWriter writer(out);
+    writer.writeData<string>(constantDetails.name);
+    writer.writeData<string>(constantDetails.value);
+    writer.writeData<string>(constantDetails.description);
+    writer.writeData<string>(constantDetails.descriptionFromUser);
+    writer.writeData<string>(constantDetails.path);
+    writer.writeData<bool>(constantDetails.isUsedInIfs);
+    return out;
+}
+
+istream& operator>>(istream & in, ConstantDetails& constantDetails)
+{
+    AlbaFileParameterReader reader(in);
+    constantDetails.name = reader.readData<string>();
+    constantDetails.value = reader.readData<string>();
+    constantDetails.description = reader.readData<string>();
+    constantDetails.descriptionFromUser = reader.readData<string>();
+    constantDetails.path = reader.readData<string>();
+    constantDetails.isUsedInIfs = reader.readData<bool>();
+    return in;
+}
+
 ostream& operator<<(ostream & out, MessageDetails const& messageDetails)
 {
     AlbaFileParameterWriter writer(out);
@@ -28,27 +52,6 @@ istream& operator>>(istream & in, MessageDetails& messageDetails)
     return in;
 }
 
-ostream& operator<<(ostream & out, ConstantDetails const& constantDetails)
-{
-    AlbaFileParameterWriter writer(out);    writer.writeData<string>(constantDetails.name);
-    writer.writeData<string>(constantDetails.value);
-    writer.writeData<string>(constantDetails.description);
-    writer.writeData<string>(constantDetails.descriptionFromUser);
-    writer.writeData<string>(constantDetails.path);
-    writer.writeData<bool>(constantDetails.isUsedInIfs);
-    return out;
-}
-istream& operator>>(istream & in, ConstantDetails& constantDetails)
-{
-    AlbaFileParameterReader reader(in);
-    constantDetails.name = reader.readData<string>();
-    constantDetails.value = reader.readData<string>();
-    constantDetails.description = reader.readData<string>();
-    constantDetails.descriptionFromUser = reader.readData<string>();
-    constantDetails.path = reader.readData<string>();
-    constantDetails.isUsedInIfs = reader.readData<bool>();
-    return in;
-}
 ostream& operator<<(ostream & out, EnumParameterDetails const& enumParameterDetails)
 {
     AlbaFileParameterWriter writer(out);
@@ -78,6 +81,7 @@ ostream& operator<<(ostream & out, EnumDetails const& enumDetails)
     writer.writeData<bool>(enumDetails.isUsedInIfs);
     return out;
 }
+
 istream& operator>>(istream & in, EnumDetails& enumDetails)
 {
     AlbaFileParameterReader reader(in);
@@ -87,6 +91,7 @@ istream& operator>>(istream & in, EnumDetails& enumDetails)
     enumDetails.isUsedInIfs = reader.readData<bool>();
     return in;
 }
+
 ostream& operator<<(ostream & out, ParameterDetails const& parameterDetails)
 {
     AlbaFileParameterWriter writer(out);
@@ -122,6 +127,7 @@ ostream& operator<<(ostream & out, StructureDetails const& structureDetails)
     writer.writeData<bool>(structureDetails.isUsedInIfs);
     return out;
 }
+
 istream& operator>>(istream & in, StructureDetails& structureDetails)
 {
     AlbaFileParameterReader reader(in);
@@ -133,6 +139,7 @@ istream& operator>>(istream & in, StructureDetails& structureDetails)
     structureDetails.isUsedInIfs = reader.readData<bool>();
     return in;
 }
+
 ostream& operator<<(ostream & out, UnionDetails const& unionDetails)
 {
     AlbaFileParameterWriter writer(out);
@@ -143,6 +150,7 @@ ostream& operator<<(ostream & out, UnionDetails const& unionDetails)
     writer.writeData<bool>(unionDetails.isUsedInIfs);
     return out;
 }
+
 istream& operator>>(istream & in, UnionDetails& unionDetails)
 {
     AlbaFileParameterReader reader(in);
@@ -153,4 +161,25 @@ istream& operator>>(istream & in, UnionDetails& unionDetails)
     unionDetails.isUsedInIfs = reader.readData<bool>();
     return in;
 }
+
+ostream& operator<<(ostream & out, TypedefDetails const& typedefDetails)
+{
+    AlbaFileParameterWriter writer(out);
+    writer.writeData<string>(typedefDetails.name);
+    writer.writeData<string>(typedefDetails.typedefDerivedName);
+    writer.writeData<string>(typedefDetails.path);
+    writer.writeData<bool>(typedefDetails.isUsedInIfs);
+    return out;
+}
+
+istream& operator>>(istream & in, TypedefDetails& typedefDetails)
+{
+    AlbaFileParameterReader reader(in);
+    typedefDetails.name = reader.readData<string>();
+    typedefDetails.typedefDerivedName = reader.readData<string>();
+    typedefDetails.path = reader.readData<string>();
+    typedefDetails.isUsedInIfs = reader.readData<bool>();
+    return in;
+}
+
 }

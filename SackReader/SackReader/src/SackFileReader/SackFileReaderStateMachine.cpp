@@ -21,6 +21,7 @@ InnerStates::InnerStates()
     , stateForEnumAfterOpeningBraces(StateForEnumAfterOpeningBraces::BeforeEnumParameterName)
     , stateForUnion(StateForUnion::BeforeName)
     , stateForUnionAfterOpeningBraces(StateForUnionAfterOpeningBraces::BeforeParameterType)
+    , stateForTypedef(StateForTypedef::BeforeDerivedName)
     , stateForAtDefDescription(StateForAtDefDescription::BeforeName)
     , stateForAtParamDescription(StateForAtParamDescription::BeforeName)
 {}
@@ -34,6 +35,7 @@ void InnerStates::reset()
     stateForEnumAfterOpeningBraces = StateForEnumAfterOpeningBraces::BeforeEnumParameterName;
     stateForUnion = StateForUnion::BeforeName;
     stateForUnionAfterOpeningBraces = StateForUnionAfterOpeningBraces::BeforeParameterType;
+    stateForTypedef = StateForTypedef::BeforeDerivedName;
     stateForAtDefDescription = StateForAtDefDescription::BeforeName;
     stateForAtParamDescription = StateForAtParamDescription::BeforeName;
 }
@@ -46,6 +48,7 @@ SackFileReaderStateMachine::SackFileReaderStateMachine(Database & database, stri
     , m_pathFromIInterface(string(R"(\I_Interface\)") + getStringAfterThisString(m_filePathHandler.getFullPath(), R"(\I_Interface\)"))
     , m_database(database)
 {}
+
 bool SackFileReaderStateMachine::isNextLineNeeded() const
 {
     return m_isNextLineNeeded;
@@ -53,7 +56,8 @@ bool SackFileReaderStateMachine::isNextLineNeeded() const
 
 void SackFileReaderStateMachine::processInput(InputToken const& inputToken)
 {
-    m_isNextLineNeeded = false;    switch(m_state)
+    m_isNextLineNeeded = false;
+    switch(m_state)
     {
     case State::Idle:
         processStateIdle(inputToken);
@@ -73,6 +77,9 @@ void SackFileReaderStateMachine::processInput(InputToken const& inputToken)
     case State::UnionKeyword:
         processStateUnionKeyword(inputToken);
         break;
+    case State::TypedefKeyword:
+        processStateTypedefKeyword(inputToken);
+        break;
     case State::AtDefDescription:
         processStateAtDefDescription(inputToken);
         break;
@@ -91,6 +98,14 @@ void SackFileReaderStateMachine::processInput(InputToken const& inputToken)
     default:
         assert(false);
         break;
+    }
+}
+
+void SackFileReaderStateMachine::processEndOfLine()
+{
+    if(m_state == State::SharpDefineForConstant || m_state == State::SharpDefineForMessageId)
+    {
+        saveNextState(State::Idle);
     }
 }
 
@@ -127,6 +142,10 @@ void SackFileReaderStateMachine::processStateIdle(InputToken const& inputToken)
         else if(token == "union")
         {
             saveNextStateAndResetInnerStates(State::UnionKeyword);
+        }
+        else if(token == "typedef")
+        {
+            saveNextStateAndResetInnerStates(State::TypedefKeyword);
         }
     }
     else if(inputToken.isInMultilineComment)
@@ -169,11 +188,7 @@ void SackFileReaderStateMachine::processStateSharpDefineForConstant(InputToken c
     string const& token(inputToken.token);
     if(isNotWhiteSpaceAndNotInComment(inputToken))
     {
-        if("#define" == token)
-        {
-            m_innerStates.stateForConstant = StateForConstant::BeforeName;
-        }
-        else if(StateForConstant::BeforeName == m_innerStates.stateForConstant)
+        if(StateForConstant::BeforeName == m_innerStates.stateForConstant)
         {
             m_constantDetails.name = token;
             m_innerStates.stateForConstant = StateForConstant::AfterNameBeforeValue;
@@ -192,11 +207,7 @@ void SackFileReaderStateMachine::processStateStructKeyword(InputToken const& inp
     string const& token(inputToken.token);
     if(isNotWhiteSpaceAndNotInComment(inputToken) && token!="/")
     {
-        if("#define" == token)
-        {
-            m_innerStates.stateForConstant = StateForConstant::BeforeName;
-        }
-        else if(StateForStruct::BeforeName == m_innerStates.stateForStruct)
+        if(StateForStruct::BeforeName == m_innerStates.stateForStruct)
         {
             m_structureDetails.name = token;
             m_innerStates.stateForStruct=StateForStruct::AfterName;
@@ -357,7 +368,8 @@ void SackFileReaderStateMachine::processStateUnionKeyword(InputToken const& inpu
                 m_unionDetails.name = m_filePathHandler.getFilenameOnly();
                 m_innerStates.stateForUnion = StateForUnion::AfterOpeningBraces;
                 m_innerStates.stateForUnionAfterOpeningBraces = StateForUnionAfterOpeningBraces::BeforeParameterType;
-            }            else
+            }
+            else
             {
                 m_unionDetails.name = token;
                 m_innerStates.stateForUnion = StateForUnion::AfterName;
@@ -408,6 +420,44 @@ void SackFileReaderStateMachine::processStateForUnionAfterOpeningBraces(string c
         {
             m_parameterDetails.name = token;
             m_innerStates.stateForUnionAfterOpeningBraces = StateForUnionAfterOpeningBraces::AfterParameterName;
+        }
+    }
+}
+
+void SackFileReaderStateMachine::processStateTypedefKeyword(InputToken const& inputToken)
+{
+    string const& token(inputToken.token);
+    if(isNotWhiteSpaceAndNotInComment(inputToken))
+    {
+        if("struct" == token)
+        {
+            saveNextStateAndResetInnerStates(State::StructKeyword);
+        }
+        else if("union" == token)
+        {
+            saveNextStateAndResetInnerStates(State::UnionKeyword);
+        }
+        else if("enum" == token)
+        {
+            saveNextStateAndResetInnerStates(State::EnumKeyword);
+        }
+        else if(StateForTypedef::BeforeDerivedName == m_innerStates.stateForTypedef)
+        {
+            m_typedefDetails.typedefDerivedName = token;
+            m_innerStates.stateForTypedef = StateForTypedef::AfterDerivedNameBeforeName;
+        }
+        else if(StateForTypedef::AfterDerivedNameBeforeName == m_innerStates.stateForTypedef)
+        {
+            m_typedefDetails.name = token;
+            m_innerStates.stateForTypedef = StateForTypedef::AfterNameBeforeSemiColon;
+        }
+        else if(StateForTypedef::AfterNameBeforeSemiColon == m_innerStates.stateForTypedef)
+        {
+            if(";" == token)
+            {
+                saveTypedefToDatabase();
+                saveNextState(State::Idle);
+            }
         }
     }
 }
@@ -572,13 +622,15 @@ void SackFileReaderStateMachine::saveMessageToDatabase(string const& token, stri
     m_database.messageNameToMessageDetailsMap[token].path = m_pathFromIInterface;
 }
 
-void SackFileReaderStateMachine::saveConstantToDatabase(){
+void SackFileReaderStateMachine::saveConstantToDatabase()
+{
     m_database.constantNameToConstantDetailsMap[m_constantDetails.name].name = m_constantDetails.name;
     m_database.constantNameToConstantDetailsMap[m_constantDetails.name].value = m_constantDetails.value;
     m_database.constantNameToConstantDetailsMap[m_constantDetails.name].path = m_pathFromIInterface;
 }
 
-void SackFileReaderStateMachine::saveStructureAsMessageStructureInDatabase(){
+void SackFileReaderStateMachine::saveStructureAsMessageStructureInDatabase()
+{
     m_database.structureNameToStructureDetailsMap[m_structureDetails.name].isMessage = true;
 }
 
@@ -616,6 +668,7 @@ void SackFileReaderStateMachine::saveParameterInUnionToDatabase()
         m_parameterDetails.clear();
     }
 }
+
 void SackFileReaderStateMachine::saveParameterInEnumToDatabase()
 {
     m_database.enumNameToEnumDetailsMap[m_enumDetails.name].parameters[m_enumParameterDetails.name].name = m_enumParameterDetails.name;
@@ -624,7 +677,8 @@ void SackFileReaderStateMachine::saveParameterInEnumToDatabase()
     m_database.enumNameToEnumDetailsMap[m_enumDetails.name].path = m_pathFromIInterface;
 }
 
-void SackFileReaderStateMachine::saveConstantDescriptionToDatabase(string const& partialString){
+void SackFileReaderStateMachine::saveConstantDescriptionToDatabase(string const& partialString)
+{
     m_database.constantNameToConstantDetailsMap[m_constantDetails.name].name = m_constantDetails.name;
     m_database.constantNameToConstantDetailsMap[m_constantDetails.name].description = getStringWithoutRedundantWhiteSpace(partialString);
 }
@@ -657,6 +711,13 @@ void SackFileReaderStateMachine::saveParameterDescriptionToDatabase(string const
             m_database.unionNameToUnionDetailsMap[m_previousUnionName].parameters[m_parameterDetails.name].description = getStringWithoutRedundantWhiteSpace(partialString);
         }
     }
+}
+
+void SackFileReaderStateMachine::saveTypedefToDatabase()
+{
+    m_database.typedefNameToTypedefDetailsMap[m_typedefDetails.name].name = m_typedefDetails.name;
+    m_database.typedefNameToTypedefDetailsMap[m_typedefDetails.name].typedefDerivedName = m_typedefDetails.typedefDerivedName;
+    m_database.typedefNameToTypedefDetailsMap[m_typedefDetails.name].path = m_pathFromIInterface;
 }
 
 
