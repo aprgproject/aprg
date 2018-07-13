@@ -42,10 +42,10 @@ void LyxGenerator::generateLyxDocument(string const& ifsTemplatePath, string con
             saveStructureDefinitions(lyxFinalDocumentStream);
             saveUnionDefinitions(lyxFinalDocumentStream);
             saveEnumDefinitions(lyxFinalDocumentStream);
+            saveTypedefDefinitions(lyxFinalDocumentStream);
             saveConstantDefinitions(lyxFinalDocumentStream);
             lyxFinalDocumentStream << line << endl;
-        }
-        else if(!isInsideGeneratedCode)
+        }        else if(!isInsideGeneratedCode)
         {
             lyxFinalDocumentStream << line << endl;
         }
@@ -128,28 +128,50 @@ void LyxGenerator::saveConstantDefinitions(ofstream & lyxOutputFileStream)
     }
 }
 
+void LyxGenerator::saveTypedefDefinitions(ofstream & lyxOutputFileStream)
+{
+    saveSubsection("Typedef Definitions", lyxOutputFileStream);
+    for(TypedefNameToTypedefDetailsPair const& pair : m_database.typedefNameToTypedefDetailsMap)
+    {
+        if(pair.second.isUsedInIfs)
+        {
+            saveTypedefDefinitionSubsubsection(pair.first, lyxOutputFileStream);
+        }
+    }
+}
+
 void LyxGenerator::saveMessageDefinitionSubsubsection(string const& messageName, ofstream & messageDefinitionsStream)
 {
     ifstream messageSubsubsectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\MessageSubsubsection.txt)");
     AlbaFileReader messageSubsubsectionReader(messageSubsubsectionStream);
+    MessageDetails messageDetails(m_database.getMessageDetails(messageName));
+    StructureDetails structureDetails(m_database.getStructureDetails(messageDetails.structureName));
 
     while(messageSubsubsectionReader.isNotFinished())
-    {
-        string messageSubsubsectionLine(messageSubsubsectionReader.getLine());
+    {        string messageSubsubsectionLine(messageSubsubsectionReader.getLine());
         if(isStringFoundInsideTheOtherStringCaseSensitive(messageSubsubsectionLine,"LYX_TABLE_MESSAGE_NAME_REPLACE"))
         {
-            transformReplaceStringIfFound(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_NAME_REPLACE", messageName);
+            transformReplaceStringIfFound(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_NAME_REPLACE", messageDetails.name);
+            messageDefinitionsStream << messageSubsubsectionLine << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(messageSubsubsectionLine,"LYX_TABLE_MESSAGE_PATH_REPLACE"))
+        {
+            transformReplaceStringIfFound(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_PATH_REPLACE", messageDetails.path);
             messageDefinitionsStream << messageSubsubsectionLine << endl;
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(messageSubsubsectionLine,"LYX_TABLE_MESSAGE_STRUCTURE_NAME_REPLACE"))
         {
-            transformReplaceStringIfFound(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_STRUCTURE_NAME_REPLACE", m_database.getMessageStructure(messageName));
+            transformReplaceStringIfFound(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_STRUCTURE_NAME_REPLACE", structureDetails.name);
+            messageDefinitionsStream << messageSubsubsectionLine << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(messageSubsubsectionLine,"LYX_TABLE_MESSAGE_STRUCTURE_PATH_REPLACE"))
+        {
+            transformReplaceStringIfFound(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_STRUCTURE_PATH_REPLACE", structureDetails.path);
             messageDefinitionsStream << messageSubsubsectionLine << endl;
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(messageSubsubsectionLine,"LYX_TABLE_REPLACE"))
         {
-            saveMessageTable(messageName, messageDefinitionsStream);
-        }
+            saveMessageTable(messageName, messageDefinitionsStream);        }
         else
         {
             messageDefinitionsStream << messageSubsubsectionLine << endl;
@@ -161,19 +183,23 @@ void LyxGenerator::saveStructureDefinitionSubsubsection(string const& structureN
 {
     ifstream structureSubsubsectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\StructureSubsubsection.txt)");
     AlbaFileReader structureSubsubsectionReader(structureSubsubsectionStream);
+    StructureDetails structureDetails(m_database.getStructureDetails(structureName));
 
     while(structureSubsubsectionReader.isNotFinished())
-    {
-        string structureSubsubsectionLine(structureSubsubsectionReader.getLine());
+    {        string structureSubsubsectionLine(structureSubsubsectionReader.getLine());
         if(isStringFoundInsideTheOtherStringCaseSensitive(structureSubsubsectionLine,"LYX_TABLE_STRUCTURE_NAME_REPLACE"))
         {
-            transformReplaceStringIfFound(structureSubsubsectionLine, "LYX_TABLE_STRUCTURE_NAME_REPLACE", structureName);
+            transformReplaceStringIfFound(structureSubsubsectionLine, "LYX_TABLE_STRUCTURE_NAME_REPLACE", structureDetails.name);
+            structureDefinitionsStream << structureSubsubsectionLine << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(structureSubsubsectionLine,"LYX_TABLE_STRUCTURE_PATH_REPLACE"))
+        {
+            transformReplaceStringIfFound(structureSubsubsectionLine, "LYX_TABLE_STRUCTURE_PATH_REPLACE", structureDetails.path);
             structureDefinitionsStream << structureSubsubsectionLine << endl;
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(structureSubsubsectionLine,"LYX_TABLE_REPLACE"))
         {
-            saveStructureTable(structureName, structureDefinitionsStream);
-        }
+            saveStructureTable(structureName, structureDefinitionsStream);        }
         else
         {
             structureDefinitionsStream << structureSubsubsectionLine << endl;
@@ -185,19 +211,23 @@ void LyxGenerator::saveEnumDefinitionSubsubsection(string const& enumName, ofstr
 {
     ifstream enumSubsubsectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\EnumSubsubsection.txt)");
     AlbaFileReader enumSubsubsectionReader(enumSubsubsectionStream);
+    EnumDetails enumDetails(m_database.getEnumDetails(enumName));
 
     while(enumSubsubsectionReader.isNotFinished())
-    {
-        string enumSubsubsectionLine(enumSubsubsectionReader.getLine());
+    {        string enumSubsubsectionLine(enumSubsubsectionReader.getLine());
         if(isStringFoundInsideTheOtherStringCaseSensitive(enumSubsubsectionLine,"LYX_TABLE_ENUM_NAME_REPLACE"))
         {
-            transformReplaceStringIfFound(enumSubsubsectionLine, "LYX_TABLE_ENUM_NAME_REPLACE", enumName);
+            transformReplaceStringIfFound(enumSubsubsectionLine, "LYX_TABLE_ENUM_NAME_REPLACE", enumDetails.name);
+            enumDefinitionsStream << enumSubsubsectionLine << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(enumSubsubsectionLine,"LYX_TABLE_ENUM_PATH_REPLACE"))
+        {
+            transformReplaceStringIfFound(enumSubsubsectionLine, "LYX_TABLE_ENUM_PATH_REPLACE", enumDetails.path);
             enumDefinitionsStream << enumSubsubsectionLine << endl;
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(enumSubsubsectionLine,"LYX_TABLE_REPLACE"))
         {
-            saveEnumTable(enumName, enumDefinitionsStream);
-        }
+            saveEnumTable(enumName, enumDefinitionsStream);        }
         else
         {
             enumDefinitionsStream << enumSubsubsectionLine << endl;
@@ -209,19 +239,23 @@ void LyxGenerator::saveUnionDefinitionSubsubsection(string const& unionName, ofs
 {
     ifstream unionSubsubsectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\UnionSubsubsection.txt)");
     AlbaFileReader unionSubsubsectionReader(unionSubsubsectionStream);
+    UnionDetails unionDetails(m_database.getUnionDetails(unionName));
 
     while(unionSubsubsectionReader.isNotFinished())
-    {
-        string unionSubsubsectionLine(unionSubsubsectionReader.getLine());
+    {        string unionSubsubsectionLine(unionSubsubsectionReader.getLine());
         if(isStringFoundInsideTheOtherStringCaseSensitive(unionSubsubsectionLine,"LYX_TABLE_UNION_NAME_REPLACE"))
         {
-            transformReplaceStringIfFound(unionSubsubsectionLine, "LYX_TABLE_UNION_NAME_REPLACE", unionName);
+            transformReplaceStringIfFound(unionSubsubsectionLine, "LYX_TABLE_UNION_NAME_REPLACE", unionDetails.name);
+            unionDefinitionsStream << unionSubsubsectionLine << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(unionSubsubsectionLine,"LYX_TABLE_UNION_PATH_REPLACE"))
+        {
+            transformReplaceStringIfFound(unionSubsubsectionLine, "LYX_TABLE_UNION_PATH_REPLACE", unionDetails.path);
             unionDefinitionsStream << unionSubsubsectionLine << endl;
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(unionSubsubsectionLine,"LYX_TABLE_REPLACE"))
         {
-            saveUnionTable(unionName, unionDefinitionsStream);
-        }
+            saveUnionTable(unionName, unionDefinitionsStream);        }
         else
         {
             unionDefinitionsStream << unionSubsubsectionLine << endl;
@@ -233,19 +267,23 @@ void LyxGenerator::saveConstantDefinitionSubsubsection(string const& constantNam
 {
     ifstream constantSubsubsectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\CommentSubsubsection.txt)");
     AlbaFileReader constantSubsubsectionReader(constantSubsubsectionStream);
+    ConstantDetails constantDetails(m_database.getConstantDetails(constantName));
 
     while(constantSubsubsectionReader.isNotFinished())
-    {
-        string constantSubsubsectionLine(constantSubsubsectionReader.getLine());
+    {        string constantSubsubsectionLine(constantSubsubsectionReader.getLine());
         if(isStringFoundInsideTheOtherStringCaseSensitive(constantSubsubsectionLine,"LYX_TABLE_COMMENT_NAME_REPLACE"))
         {
-            transformReplaceStringIfFound(constantSubsubsectionLine, "LYX_TABLE_COMMENT_NAME_REPLACE", constantName);
+            transformReplaceStringIfFound(constantSubsubsectionLine, "LYX_TABLE_COMMENT_NAME_REPLACE", constantDetails.name);
+            constantDefinitionsStream << constantSubsubsectionLine << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(constantSubsubsectionLine,"LYX_TABLE_COMMENT_PATH_REPLACE"))
+        {
+            transformReplaceStringIfFound(constantSubsubsectionLine, "LYX_TABLE_COMMENT_PATH_REPLACE", constantDetails.path);
             constantDefinitionsStream << constantSubsubsectionLine << endl;
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(constantSubsubsectionLine,"LYX_TABLE_REPLACE"))
         {
-            saveConstantTable(constantName, constantDefinitionsStream);
-        }
+            saveConstantTable(constantName, constantDefinitionsStream);        }
         else
         {
             constantDefinitionsStream << constantSubsubsectionLine << endl;
@@ -253,10 +291,39 @@ void LyxGenerator::saveConstantDefinitionSubsubsection(string const& constantNam
     }
 }
 
+void LyxGenerator::saveTypedefDefinitionSubsubsection(string const& typedefName, ofstream & typedefDefinitionsStream)
+{
+    ifstream typedefSubsubsectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\TypedefSubsubsection.txt)");
+    AlbaFileReader typedefSubsubsectionReader(typedefSubsubsectionStream);
+    TypedefDetails typedefDetails(m_database.getTypedefDetails(typedefName));
+
+    while(typedefSubsubsectionReader.isNotFinished())
+    {
+        string typedefSubsubsectionLine(typedefSubsubsectionReader.getLine());
+        if(isStringFoundInsideTheOtherStringCaseSensitive(typedefSubsubsectionLine,"LYX_TABLE_TYPEDEF_NAME_REPLACE"))
+        {
+            transformReplaceStringIfFound(typedefSubsubsectionLine, "LYX_TABLE_TYPEDEF_NAME_REPLACE", typedefDetails.name);
+            typedefDefinitionsStream << typedefSubsubsectionLine << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(typedefSubsubsectionLine,"LYX_TABLE_TYPEDEF_PATH_REPLACE"))
+        {
+            transformReplaceStringIfFound(typedefSubsubsectionLine, "LYX_TABLE_TYPEDEF_PATH_REPLACE", typedefDetails.path);
+            typedefDefinitionsStream << typedefSubsubsectionLine << endl;
+        }
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(typedefSubsubsectionLine,"LYX_TABLE_REPLACE"))
+        {
+            saveTypedefTable(typedefName, typedefDefinitionsStream);
+        }
+        else
+        {
+            typedefDefinitionsStream << typedefSubsubsectionLine << endl;
+        }
+    }
+}
+
 void LyxGenerator::saveMessageTable(string const& messageName, ofstream & messageTableStream)
 {
-    DisplayTable messageTable;
-    messageTable.setBorders("-"," | ");
+    DisplayTable messageTable;    messageTable.setBorders("-"," | ");
     messageTable.addRow();
     messageTable.getLastRow().addCell("\\series bold \nIE/Group Name");
     messageTable.getLastRow().addCell("\\series bold \nIE Type");
@@ -327,10 +394,25 @@ void LyxGenerator::saveConstantTable(string const& constantName, ofstream & cons
     }
 }
 
+void LyxGenerator::saveTypedefTable(string const& typedefName, ofstream & typedefTableStream)
+{
+    DisplayTable typedefTable;
+    typedefTable.setBorders("-"," | ");
+    typedefTable.addRow();
+    typedefTable.getLastRow().addCell("\\series bold \nIE/Group Name");
+    typedefTable.getLastRow().addCell("\\series bold \nIE Type");
+    typedefTable.getLastRow().addCell("\\series bold \nDescription");
+    generateTypedefForDisplayTablesIfNeeded(typedefName, typedefTable);
+    if(typedefTable.getTotalRows()>1)
+    {
+        //cout<<typedefTable.drawOutput()<<endl;
+        saveDisplayTable(typedefTable, typedefTableStream);
+    }
+}
+
 void LyxGenerator::saveDisplayTable(DisplayTable const& displayTable, ofstream & displayTableStream) const
 {
-    ifstream tableTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\Table.txt)");
-    AlbaFileReader tableTemplateReader(tableTemplateStream);
+    ifstream tableTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\Table.txt)");    AlbaFileReader tableTemplateReader(tableTemplateStream);
     while(tableTemplateReader.isNotFinished())
     {
         string tableTemplateLine(tableTemplateReader.getLine());
@@ -496,10 +578,25 @@ void LyxGenerator::generateConstantForDisplayTablesIfNeeded(string const& consta
     }
 }
 
+void LyxGenerator::generateTypedefForDisplayTablesIfNeeded(string const& typedefName, DisplayTable & displayTable)
+{
+    string smallTextModifier("\\size footnotesize\n");
+    if(m_database.doesThisTypedefExists(typedefName))
+    {
+        TypedefDetails typedefDetails(m_database.getTypedefDetails(typedefName));
+        displayTable.addRow();
+        displayTable.getLastRow().addCell(smallTextModifier+typedefDetails.name);
+        displayTable.getLastRow().addCell(smallTextModifier+typedefDetails.typedefDerivedName);
+        string finalDescription(
+                    getPrimitiveTypeDescription(typedefDetails.typedefDerivedName)+" "+
+                    getDescriptionString(typedefDetails.description, typedefDetails.descriptionFromUser));
+        displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
+    }
+}
+
 string LyxGenerator::getDescriptionString(string const& description, string const& descriptionFromUser) const
 {
-    string sackDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(description)));
-    string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(descriptionFromUser)));
+    string sackDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(description)));    string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(descriptionFromUser)));
     string finalDescription;
     if(!userDescription.empty())
     {

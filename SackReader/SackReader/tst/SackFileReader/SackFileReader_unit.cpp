@@ -262,10 +262,10 @@ TEST(SackFileReaderTest, TAichPower)
     TypedefDetails details(database.getTypedefDetails("TAichPower"));
     EXPECT_EQ("TAichPower", details.name);
     EXPECT_EQ("i32", details.typedefDerivedName);
+    EXPECT_EQ("Definition of Aich power Defined in Iub spec 3.2.0. ch 4.6.4", details.description);
 }
 
-TEST(SackFileReaderTest, TSubrackNbr)
-{
+TEST(SackFileReaderTest, TSubrackNbr){
     Database database;
     SackFileReader sackFileReader(database);
     sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\TSubrackNbr.h)");
@@ -273,10 +273,10 @@ TEST(SackFileReaderTest, TSubrackNbr)
     TypedefDetails details(database.getTypedefDetails("TSubrackNbr"));
     EXPECT_EQ("TSubrackNbr", details.name);
     EXPECT_EQ("u32", details.typedefDerivedName);
+    EXPECT_EQ("", details.description);
 }
 
-TEST(SackFileReaderTest, TSubunits)
-{
+TEST(SackFileReaderTest, TSubunits){
     Database database;
     SackFileReader sackFileReader(database);
     sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\TSubunits.h)");
@@ -284,4 +284,5 @@ TEST(SackFileReaderTest, TSubunits)
     TypedefDetails details(database.getTypedefDetails("TSubunits"));
     EXPECT_EQ("TSubunits", details.name);
     EXPECT_EQ("r32", details.typedefDerivedName);
+    EXPECT_EQ("Subunits in floating point format.", details.description);
 }

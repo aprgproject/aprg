@@ -3,10 +3,9 @@ LYX_TABLE_ENUM_NAME_REPLACE
 \end_layout
 
 \begin_layout Standard
-LYX_TABLE_ENUM_NAME_REPLACE
+LYX_TABLE_ENUM_PATH_REPLACE
 \end_layout
 
 LYX_TABLE_REPLACE
-
 
 

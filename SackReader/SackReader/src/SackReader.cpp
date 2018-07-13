@@ -116,93 +116,119 @@ void SackReader::loadDescriptionToAdd(string const& path)
 void SackReader::performHacks()
 {
     //This should be hacked because syscom defines causes a different definition.
-    StructureDetails & structureDetails(m_database.structureNameToStructureDetailsMap["SMessageAddress"]);
-    structureDetails.name = "SMessageAddress";
-    structureDetails.isMessage = false;
-    structureDetails.isUsedInIfs = true;
-    structureDetails.parametersWithCorrectOrder.clear();
-    structureDetails.parametersWithCorrectOrder.emplace_back("board");
-    structureDetails.parametersWithCorrectOrder.emplace_back("cpu");
-    structureDetails.parametersWithCorrectOrder.emplace_back("task");
-    structureDetails.parameters["board"].name = "board";
-    structureDetails.parameters["board"].type = "TBoard";
-    structureDetails.parameters["board"].isAnArray = false;
-    structureDetails.parameters["board"].descriptionFromUser = "Board in SMessageAddress";
-    structureDetails.parameters["cpu"].name = "cpu";
-    structureDetails.parameters["cpu"].type = "TCpu";
-    structureDetails.parameters["cpu"].isAnArray = false;
-    structureDetails.parameters["cpu"].descriptionFromUser = "Cpu in SMessageAddress";
-    structureDetails.parameters["task"].name = "task";
-    structureDetails.parameters["task"].type = "TTask";
-    structureDetails.parameters["task"].isAnArray = false;
-    structureDetails.parameters["task"].descriptionFromUser = "Task in SMessageAddress";
+    StructureDetails & structureDetailsSMessageAddress(m_database.structureNameToStructureDetailsMap["SMessageAddress"]);
+    structureDetailsSMessageAddress.name = "SMessageAddress";
+    structureDetailsSMessageAddress.isMessage = false;
+    structureDetailsSMessageAddress.isUsedInIfs = true;
+    structureDetailsSMessageAddress.parametersWithCorrectOrder.clear();
+    structureDetailsSMessageAddress.parametersWithCorrectOrder.emplace_back("board");
+    structureDetailsSMessageAddress.parametersWithCorrectOrder.emplace_back("cpu");
+    structureDetailsSMessageAddress.parametersWithCorrectOrder.emplace_back("task");
+    structureDetailsSMessageAddress.parameters["board"].name = "board";
+    structureDetailsSMessageAddress.parameters["board"].type = "TBoard";
+    structureDetailsSMessageAddress.parameters["board"].isAnArray = false;
+    structureDetailsSMessageAddress.parameters["board"].descriptionFromUser = "Board in SMessageAddress";
+    structureDetailsSMessageAddress.parameters["cpu"].name = "cpu";
+    structureDetailsSMessageAddress.parameters["cpu"].type = "TCpu";
+    structureDetailsSMessageAddress.parameters["cpu"].isAnArray = false;
+    structureDetailsSMessageAddress.parameters["cpu"].descriptionFromUser = "Cpu in SMessageAddress";
+    structureDetailsSMessageAddress.parameters["task"].name = "task";
+    structureDetailsSMessageAddress.parameters["task"].type = "TTask";
+    structureDetailsSMessageAddress.parameters["task"].isAnArray = false;
+    structureDetailsSMessageAddress.parameters["task"].descriptionFromUser = "Task in SMessageAddress";
+    performHackPrimitiveType("u8");
+    performHackPrimitiveType("u16");
+    performHackPrimitiveType("u32");
+    performHackPrimitiveType("i8");
+    performHackPrimitiveType("i16");
+    performHackPrimitiveType("i32");
+    performHackPrimitiveType("r32");
+    performHackPrimitiveType("r64");
+    performHackPrimitiveType("r128");
+    m_database.constantNameToConstantDetailsMap["MAX_NUM_OF_HSPA_SCHEDULERS"].value = "16";
+}
+
+void SackReader::performHackPrimitiveType(string const& primitiveType)
+{
+    m_database.typedefNameToTypedefDetailsMap[primitiveType].name = primitiveType;
+    m_database.typedefNameToTypedefDetailsMap[primitiveType].typedefDerivedName = primitiveType;
 }
 
 void SackReader::generateLyxDocument(string const& ifsTemplatePath, string const& finalDocumentPath)
 {
-    LyxGenerator generator(m_database);
-    generator.generateLyxDocument(ifsTemplatePath, finalDocumentPath);
+    LyxGenerator generator(m_database);    generator.generateLyxDocument(ifsTemplatePath, finalDocumentPath);
 }
 
 void SackReader::readAndMarkTypeAsNeededInIfs(string const& typeName)
 {
-    if(!m_database.doesThisFullDetailedStructureExists(typeName) && !m_database.doesThisUnionExists(typeName) && !m_database.doesThisEnumExists(typeName))
+    if(!m_database.doesThisFullDetailedStructureExists(typeName) &&
+            !m_database.doesThisUnionExists(typeName) &&
+            !m_database.doesThisEnumExists(typeName) &&
+            !m_database.doesThisTypedefExists(typeName))
     {
         readFileUsingTypeName(typeName);
     }
-    if(m_database.doesThisStructureExists(typeName))
-    {
-        markStructureAsNeededForIfs(typeName);
-    }
-    else if(m_database.doesThisUnionExists(typeName))
-    {
-        markUnionAsNeededForIfs(typeName);
-    }
-    else if(m_database.doesThisEnumExists(typeName))
-    {
-        markEnumAsNeededForIfs(typeName);
-    }
+    markStructureAsNeededForIfs(typeName);
+    markUnionAsNeededForIfs(typeName);
+    markEnumAsNeededForIfs(typeName);
+    markTypedefAsNeededForIfs(typeName);
 }
 
 void SackReader::markStructureAsNeededForIfs(string const& structureName)
 {
-    m_database.structureNameToStructureDetailsMap[structureName].isUsedInIfs=true;
-    StructureDetails structureDetails(m_database.getStructureDetails(structureName));
-    for(string const& parameterName : structureDetails.parametersWithCorrectOrder)
+    if(m_database.doesThisStructureExists(structureName))
     {
-        ParameterDetails parameterDetails = m_database.getParameterDetails(structureName, parameterName);
-        if(parameterDetails.isAnArray)
+        m_database.structureNameToStructureDetailsMap[structureName].isUsedInIfs=true;
+        StructureDetails structureDetails(m_database.getStructureDetails(structureName));
+        for(string const& parameterName : structureDetails.parametersWithCorrectOrder)
         {
-            markConstantAsNeededForIfs(parameterDetails.arraySize);
+            ParameterDetails parameterDetails = m_database.getParameterDetails(structureName, parameterName);
+            if(parameterDetails.isAnArray)
+            {
+                markConstantAsNeededForIfs(parameterDetails.arraySize);
+            }
+            readAndMarkTypeAsNeededInIfs(parameterDetails.type);
         }
-        readAndMarkTypeAsNeededInIfs(parameterDetails.type);
     }
 }
 
 void SackReader::markUnionAsNeededForIfs(string const& unionName)
 {
-    m_database.unionNameToUnionDetailsMap[unionName].isUsedInIfs=true;
-    UnionDetails unionDetails(m_database.getUnionDetails(unionName));
-    for(string const& parameterName : unionDetails.parametersWithCorrectOrder)
+    if(m_database.doesThisUnionExists(unionName))
     {
-        ParameterDetails parameterDetails = m_database.getUnionParameterDetails(unionName, parameterName);
-        if(parameterDetails.isAnArray)
+        m_database.unionNameToUnionDetailsMap[unionName].isUsedInIfs=true;
+        UnionDetails unionDetails(m_database.getUnionDetails(unionName));
+        for(string const& parameterName : unionDetails.parametersWithCorrectOrder)
         {
-            markConstantAsNeededForIfs(parameterDetails.arraySize);
+            ParameterDetails parameterDetails = m_database.getUnionParameterDetails(unionName, parameterName);
+            if(parameterDetails.isAnArray)
+            {
+                markConstantAsNeededForIfs(parameterDetails.arraySize);
+            }
+            readAndMarkTypeAsNeededInIfs(parameterDetails.type);
         }
-        readAndMarkTypeAsNeededInIfs(parameterDetails.type);
     }
 }
 
 void SackReader::markEnumAsNeededForIfs(string const& enumName)
 {
-    m_database.enumNameToEnumDetailsMap[enumName].isUsedInIfs=true;
+    if(m_database.doesThisEnumExists(enumName))
+    {
+        m_database.enumNameToEnumDetailsMap[enumName].isUsedInIfs=true;
+    }
+}
+
+void SackReader::markTypedefAsNeededForIfs(string const& typedefName)
+{
+    if(m_database.doesThisTypedefExists(typedefName))
+    {
+        m_database.typedefNameToTypedefDetailsMap[typedefName].isUsedInIfs=true;
+    }
 }
 
 void SackReader::markConstantAsNeededForIfs(string const& constantName)
 {
-    if(!constantName.empty())
-    {
+    if(!constantName.empty())    {
         char firstCharacter = constantName[0];
         if(firstCharacter!='E' && isCapitalLetter(firstCharacter))
         {

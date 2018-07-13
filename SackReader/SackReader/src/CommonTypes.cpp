@@ -167,19 +167,64 @@ ostream& operator<<(ostream & out, TypedefDetails const& typedefDetails)
     AlbaFileParameterWriter writer(out);
     writer.writeData<string>(typedefDetails.name);
     writer.writeData<string>(typedefDetails.typedefDerivedName);
+    writer.writeData<string>(typedefDetails.description);
+    writer.writeData<string>(typedefDetails.descriptionFromUser);
     writer.writeData<string>(typedefDetails.path);
     writer.writeData<bool>(typedefDetails.isUsedInIfs);
-    return out;
-}
+    return out;}
 
 istream& operator>>(istream & in, TypedefDetails& typedefDetails)
 {
     AlbaFileParameterReader reader(in);
     typedefDetails.name = reader.readData<string>();
     typedefDetails.typedefDerivedName = reader.readData<string>();
+    typedefDetails.description = reader.readData<string>();
+    typedefDetails.descriptionFromUser = reader.readData<string>();
     typedefDetails.path = reader.readData<string>();
     typedefDetails.isUsedInIfs = reader.readData<bool>();
     return in;
+}
+
+string getPrimitiveTypeDescription(string const& primitiveType)
+{
+    string result;
+    if("u8"==primitiveType)
+    {
+        result="Eight bits unsigned character.";
+    }
+    else if("u16"==primitiveType)
+    {
+        result="Sixteen bits unsigned integer.";
+    }
+    else if("u32"==primitiveType)
+    {
+        result="Thirty two bits unsigned integer.";
+    }
+    else if("i8"==primitiveType)
+    {
+        result="Eight bits signed character.";
+    }
+    else if("i16"==primitiveType)
+    {
+        result="Sixteen bits signed integer.";
+    }
+    else if("i32"==primitiveType)
+    {
+        result="Thirty two bits signed integer.";
+    }
+    else if("r32"==primitiveType)
+    {
+        result="Thirty two bits single-precision floating-point value.";
+    }
+    else if("r64"==primitiveType)
+    {
+        result="Sixty four bits double-precision floating-point value.";
+    }
+    else if("r128"==primitiveType)
+    {
+        result="One hundred twenty eight bits quadruple-precision floating-point value.";
+    }
+    return result;
 }
 
 }

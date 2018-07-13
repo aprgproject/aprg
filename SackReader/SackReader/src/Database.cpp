@@ -51,9 +51,18 @@ string Database::getFileFullPath(string const& fileName) const
 ConstantDetails Database::getConstantDetails(string const& constantName) const
 {
     ConstantDetails result;
-    if(constantNameToConstantDetailsMap.find(constantName)!=constantNameToConstantDetailsMap.cend())
+    if(doesThisConstantExists(constantName))
     {
         result = constantNameToConstantDetailsMap.at(constantName);
+    }    return result;
+}
+
+MessageDetails Database::getMessageDetails(string const& messageName) const
+{
+    MessageDetails result;
+    if(doesThisMessageExists(messageName))
+    {
+        result = messageNameToMessageDetailsMap.at(messageName);
     }
     return result;
 }
@@ -61,21 +70,19 @@ ConstantDetails Database::getConstantDetails(string const& constantName) const
 string Database::getMessageStructure(string const& messageName) const
 {
     string result;
-    if(messageNameToMessageDetailsMap.find(messageName)!=messageNameToMessageDetailsMap.cend())
+    if(doesThisMessageExists(messageName))
     {
         result = messageNameToMessageDetailsMap.at(messageName).structureName;
-    }
-    return result;
+    }    return result;
 }
 
 StructureDetails Database::getStructureDetails(string const& structureName) const
 {
     StructureDetails result;
-    if(structureNameToStructureDetailsMap.find(structureName)!=structureNameToStructureDetailsMap.cend())
+    if(doesThisStructureExists(structureName))
     {
         result = structureNameToStructureDetailsMap.at(structureName);
-    }
-    return result;
+    }    return result;
 }
 
 ParameterDetails Database::getParameterDetails(string const& structureName, string const& parameterName) const
@@ -91,11 +98,10 @@ ParameterDetails Database::getParameterDetails(string const& structureName, stri
 EnumDetails Database::getEnumDetails(string const& enumName) const
 {
     EnumDetails result;
-    if(enumNameToEnumDetailsMap.find(enumName)!=enumNameToEnumDetailsMap.cend())
+    if(doesThisEnumExists(enumName))
     {
         result = enumNameToEnumDetailsMap.at(enumName);
-    }
-    return result;
+    }    return result;
 }
 
 EnumParameterDetails Database::getEnumParameterDetails(string const& enumName, string const& parameterName) const
@@ -111,11 +117,10 @@ EnumParameterDetails Database::getEnumParameterDetails(string const& enumName, s
 UnionDetails Database::getUnionDetails(string const& unionName) const
 {
     UnionDetails result;
-    if(unionNameToUnionDetailsMap.find(unionName)!=unionNameToUnionDetailsMap.cend())
+    if(doesThisUnionExists(unionName))
     {
         result = unionNameToUnionDetailsMap.at(unionName);
-    }
-    return result;
+    }    return result;
 }
 
 ParameterDetails Database::getUnionParameterDetails(string const& unionName, string const& parameterName) const
@@ -131,11 +136,10 @@ ParameterDetails Database::getUnionParameterDetails(string const& unionName, str
 TypedefDetails Database::getTypedefDetails(string const& typedefName) const
 {
     TypedefDetails result;
-    if(typedefNameToTypedefDetailsMap.find(typedefName)!=typedefNameToTypedefDetailsMap.cend())
+    if(doesThisTypedefExists(typedefName))
     {
         result = typedefNameToTypedefDetailsMap.at(typedefName);
-    }
-    return result;
+    }    return result;
 }
 
 bool Database::doesThisStructureAndParameterExists(string const& structureName, string const& parameterName) const
@@ -223,10 +227,19 @@ bool Database::doesThisConstantExists(string const& constantName) const
     return result;
 }
 
-bool Database::doesThisFullDetailedStructureExists(string const& structureName) const
+bool Database::doesThisMessageExists(string const& messageName) const
 {
     bool result(false);
-    if(doesThisStructureExists(structureName))
+    if(messageNameToMessageDetailsMap.find(messageName)!=messageNameToMessageDetailsMap.cend())
+    {
+        result = true;
+    }
+    return result;
+}
+
+bool Database::doesThisFullDetailedStructureExists(string const& structureName) const
+{
+    bool result(false);    if(doesThisStructureExists(structureName))
     {
         result = !getStructureDetails(structureName).name.empty();
     }
@@ -257,6 +270,16 @@ bool Database::doesThisUnionExists(string const& unionName) const
 {
     bool result(false);
     if(unionNameToUnionDetailsMap.find(unionName)!=unionNameToUnionDetailsMap.cend())
+    {
+        result = true;
+    }
+    return result;
+}
+
+bool Database::doesThisTypedefExists(string const& typedefName) const
+{
+    bool result(false);
+    if(typedefNameToTypedefDetailsMap.find(typedefName)!=typedefNameToTypedefDetailsMap.cend())
     {
         result = true;
     }

@@ -3,10 +3,17 @@ LYX_TABLE_MESSAGE_NAME_REPLACE
 \end_layout
 
 \begin_layout Standard
-LYX_TABLE_MESSAGE_STRUCTURE_NAME_REPLACE
+ 
+\end_layout
+
+\begin_layout Standard
+LYX_TABLE_MESSAGE_PATH_REPLACE
+\end_layout
+
+\begin_layout Standard
+LYX_TABLE_MESSAGE_STRUCTURE_NAME_REPLACE LYX_TABLE_MESSAGE_STRUCTURE_PATH_REPLACE
 \end_layout
 
 LYX_TABLE_REPLACE
-
 
 

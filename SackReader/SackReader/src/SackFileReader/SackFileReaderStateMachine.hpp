@@ -24,11 +24,11 @@ enum class State
     AtStructDescription,
     AtEnumDescription,
     AtUnionDescription,
-    AtParamDescription
+    AtParamDescription,
+    AtTypedefDescription
 };
 
-//#define MAX_NR_OF_CODES 2                /* 3GPP 10 Nokia 2*/
-enum class StateForConstant
+//#define MAX_NR_OF_CODES 2                /* 3GPP 10 Nokia 2*/enum class StateForConstant
 {
     BeforeName,
     AfterNameBeforeValue
@@ -148,10 +148,23 @@ enum class StateForTypedef
     AfterNameBeforeSemiColon,
 };
 
+/*
+* @typedef TSubunits
+*
+* Description : Subunits in floating point format.
+*
+* Reference   : BTSOM IFS, < BTSOM IFS version >
+*/
+enum class StateForAtTypedefDescription
+{
+    BeforeName,
+    AfterNameBeforeDescriptionKeyword,
+    AfterDescriptionKeywordBeforeColon,
+    AfterColon,
+};
 
 enum class ParameterDescriptionType
-{
-    None,
+{    None,
     Structure,
     Enum,
     Union
@@ -180,8 +193,8 @@ struct InnerStates
     StateForTypedef stateForTypedef;
     StateForAtDefDescription stateForAtDefDescription;
     StateForAtParamDescription stateForAtParamDescription;
+    StateForAtTypedefDescription stateForAtTypedefDescription;
 };
-
 
 
 
@@ -212,20 +225,20 @@ private:
     void processStateAtEnumDescription(InputToken const& inputToken);
     void processStateAtUnionDescription(InputToken const& inputToken);
     void processStateAtParamDescription(InputToken const& inputToken);
+    void processStateAtTypedefDescription(InputToken const& inputToken);
     void saveNextStateAndResetInnerStates(State const& state);
     void saveMessageToDatabase(std::string const& token, std::string const& structureName);
-    void saveConstantToDatabase();
-    void saveStructureAsMessageStructureInDatabase();
+    void saveConstantToDatabase();    void saveStructureAsMessageStructureInDatabase();
     void saveParameterInUnionToDatabase();
     void saveParameterInStructureToDatabase();
     void saveParameterInEnumToDatabase();
     void saveConstantDescriptionToDatabase(std::string const& partialString);
     void saveParameterDescriptionToDatabase(std::string const& partialString);
     void saveTypedefToDatabase();
+    void saveTypedefDescriptionToDatabase(std::string const& partialString);
     AlbaLocalPathHandler m_filePathHandler;
     bool m_isMessageIdFile;
-    bool m_isNextLineNeeded;
-    InnerStates m_innerStates;
+    bool m_isNextLineNeeded;    InnerStates m_innerStates;
     std::string m_pathFromIInterface;
     std::string m_arraySize;
     std::string m_previousStructureName;

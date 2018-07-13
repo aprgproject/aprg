@@ -24,17 +24,17 @@ public:
     void loadMessagesToGenerate(std::string const& path);
     void loadDescriptionToAdd(std::string const& path);
     void performHacks();
+    void performHackPrimitiveType(std::string const& primitiveType);
     void generateLyxDocument(std::string const& ifsTemplatePath, std::string const& finalDocumentPath);
 
-private:
-    void readAndMarkTypeAsNeededInIfs(std::string const& typeName);
+private:    void readAndMarkTypeAsNeededInIfs(std::string const& typeName);
     void markStructureAsNeededForIfs(std::string const & structureName);
     void markUnionAsNeededForIfs(std::string const & unionName);
     void markEnumAsNeededForIfs(std::string const& enumName);
+    void markTypedefAsNeededForIfs(std::string const& typedefName);
     void markConstantAsNeededForIfs(std::string const& enumName);
     void readOamTcomTupcMessageFiles();
-    void readConstantFiles();
-    void readFileUsingTypeName(std::string const& fileName);
+    void readConstantFiles();    void readFileUsingTypeName(std::string const& fileName);
     void readFileUsingTypeFileName(std::string const& typeFileName);
 
 private:

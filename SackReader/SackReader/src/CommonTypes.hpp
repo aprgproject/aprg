@@ -146,23 +146,25 @@ struct TypedefDetails
 {
     std::string name;
     std::string typedefDerivedName;
+    std::string description;
+    std::string descriptionFromUser;
     std::string path;
     bool isUsedInIfs;
-    void clear()
-    {
+    void clear()    {
         name.clear();
         typedefDerivedName.clear();
+        description.clear();
+        descriptionFromUser.clear();
         path.clear();
         isUsedInIfs=false;
-    }
-    friend std::ostream & operator<<(std::ostream & out, TypedefDetails const& typedefDetails);
+    }    friend std::ostream & operator<<(std::ostream & out, TypedefDetails const& typedefDetails);
     friend std::istream & operator>>(std::istream & in, TypedefDetails& typedefDetails);
 };
 
+std::string getPrimitiveTypeDescription(std::string const& primitiveType);
 
 using FileToPathMap = std::map<std::string, std::string>;
-using FileToPathPair = std::pair<std::string, std::string>;
-using ConstantNameToConstantDetailsMap = std::map<std::string, ConstantDetails>;
+using FileToPathPair = std::pair<std::string, std::string>;using ConstantNameToConstantDetailsMap = std::map<std::string, ConstantDetails>;
 using ConstantNameToConstantDetailsPair = std::pair<std::string, ConstantDetails>;
 using MessageNameToMessageDetailsMap = std::map<std::string, MessageDetails>;
 using MessageNameToMessageDetailsPair = std::pair<std::string, MessageDetails>;
