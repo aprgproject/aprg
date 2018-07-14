@@ -171,7 +171,8 @@ ostream& operator<<(ostream & out, TypedefDetails const& typedefDetails)
     writer.writeData<string>(typedefDetails.descriptionFromUser);
     writer.writeData<string>(typedefDetails.path);
     writer.writeData<bool>(typedefDetails.isUsedInIfs);
-    return out;}
+    return out;
+}
 
 istream& operator>>(istream & in, TypedefDetails& typedefDetails)
 {

@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <map>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -14,6 +15,7 @@ public:
     explicit AlbaFileParameterReader(std::istream& stream);
     template<typename TypeToRetrieve> TypeToRetrieve readData() const;
     template<typename TypeToRetrieve> void readData(std::vector<TypeToRetrieve> & vectorOfData) const;
+    template<typename TypeToRetrieve> void readData(std::set<TypeToRetrieve> & setOfData) const;
     template<typename TypeToRetrieve1, typename TypeToRetrieve2> void readData(std::map<TypeToRetrieve1, TypeToRetrieve2> & mapOfData) const
 ;
 private:
@@ -39,6 +41,17 @@ void AlbaFileParameterReader::readData(std::vector<TypeToRetrieve> & vectorOfDat
     for(unsigned int i=0; i<size; i++)
     {
         vectorOfData.emplace_back(readData<TypeToRetrieve>());
+    }
+}
+
+template<typename TypeToRetrieve>
+void AlbaFileParameterReader::readData(std::set<TypeToRetrieve> & setOfData) const //test
+{
+    unsigned int size;
+    m_stream >> size;
+    for(unsigned int i=0; i<size; i++)
+    {
+        setOfData.emplace(readData<TypeToRetrieve>());
     }
 }
 

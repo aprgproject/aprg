@@ -33,7 +33,6 @@ void LyxGenerator::generateLyxDocument(string const& ifsTemplatePath, string con
         if(isStringFoundInsideTheOtherStringCaseSensitive(line,"LYX_START_GENERATED_CODE"))
         {
             isInsideGeneratedCode = true;
-            lyxFinalDocumentStream << line << endl;
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(line,"LYX_END_GENERATED_CODE"))
         {
@@ -44,8 +43,8 @@ void LyxGenerator::generateLyxDocument(string const& ifsTemplatePath, string con
             saveEnumDefinitions(lyxFinalDocumentStream);
             saveTypedefDefinitions(lyxFinalDocumentStream);
             saveConstantDefinitions(lyxFinalDocumentStream);
-            lyxFinalDocumentStream << line << endl;
-        }        else if(!isInsideGeneratedCode)
+        }
+        else if(!isInsideGeneratedCode)
         {
             lyxFinalDocumentStream << line << endl;
         }
@@ -131,13 +130,8 @@ void LyxGenerator::saveConstantDefinitions(ofstream & lyxOutputFileStream)
 void LyxGenerator::saveTypedefDefinitions(ofstream & lyxOutputFileStream)
 {
     saveSubsection("Typedef Definitions", lyxOutputFileStream);
-    for(TypedefNameToTypedefDetailsPair const& pair : m_database.typedefNameToTypedefDetailsMap)
-    {
-        if(pair.second.isUsedInIfs)
-        {
-            saveTypedefDefinitionSubsubsection(pair.first, lyxOutputFileStream);
-        }
-    }
+    saveTypedefDefinitionSubsubsectionForPrimitiveTypes(lyxOutputFileStream);
+    saveTypedefDefinitionSubsubsectionFromDatabase(lyxOutputFileStream);
 }
 
 void LyxGenerator::saveMessageDefinitionSubsubsection(string const& messageName, ofstream & messageDefinitionsStream)
@@ -148,7 +142,8 @@ void LyxGenerator::saveMessageDefinitionSubsubsection(string const& messageName,
     StructureDetails structureDetails(m_database.getStructureDetails(messageDetails.structureName));
 
     while(messageSubsubsectionReader.isNotFinished())
-    {        string messageSubsubsectionLine(messageSubsubsectionReader.getLine());
+    {
+        string messageSubsubsectionLine(messageSubsubsectionReader.getLine());
         if(isStringFoundInsideTheOtherStringCaseSensitive(messageSubsubsectionLine,"LYX_TABLE_MESSAGE_NAME_REPLACE"))
         {
             transformReplaceStringIfFound(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_NAME_REPLACE", messageDetails.name);
@@ -171,7 +166,8 @@ void LyxGenerator::saveMessageDefinitionSubsubsection(string const& messageName,
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(messageSubsubsectionLine,"LYX_TABLE_REPLACE"))
         {
-            saveMessageTable(messageName, messageDefinitionsStream);        }
+            saveMessageTable(messageName, messageDefinitionsStream);
+        }
         else
         {
             messageDefinitionsStream << messageSubsubsectionLine << endl;
@@ -186,7 +182,8 @@ void LyxGenerator::saveStructureDefinitionSubsubsection(string const& structureN
     StructureDetails structureDetails(m_database.getStructureDetails(structureName));
 
     while(structureSubsubsectionReader.isNotFinished())
-    {        string structureSubsubsectionLine(structureSubsubsectionReader.getLine());
+    {
+        string structureSubsubsectionLine(structureSubsubsectionReader.getLine());
         if(isStringFoundInsideTheOtherStringCaseSensitive(structureSubsubsectionLine,"LYX_TABLE_STRUCTURE_NAME_REPLACE"))
         {
             transformReplaceStringIfFound(structureSubsubsectionLine, "LYX_TABLE_STRUCTURE_NAME_REPLACE", structureDetails.name);
@@ -199,7 +196,8 @@ void LyxGenerator::saveStructureDefinitionSubsubsection(string const& structureN
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(structureSubsubsectionLine,"LYX_TABLE_REPLACE"))
         {
-            saveStructureTable(structureName, structureDefinitionsStream);        }
+            saveStructureTable(structureName, structureDefinitionsStream);
+        }
         else
         {
             structureDefinitionsStream << structureSubsubsectionLine << endl;
@@ -214,7 +212,8 @@ void LyxGenerator::saveEnumDefinitionSubsubsection(string const& enumName, ofstr
     EnumDetails enumDetails(m_database.getEnumDetails(enumName));
 
     while(enumSubsubsectionReader.isNotFinished())
-    {        string enumSubsubsectionLine(enumSubsubsectionReader.getLine());
+    {
+        string enumSubsubsectionLine(enumSubsubsectionReader.getLine());
         if(isStringFoundInsideTheOtherStringCaseSensitive(enumSubsubsectionLine,"LYX_TABLE_ENUM_NAME_REPLACE"))
         {
             transformReplaceStringIfFound(enumSubsubsectionLine, "LYX_TABLE_ENUM_NAME_REPLACE", enumDetails.name);
@@ -227,7 +226,8 @@ void LyxGenerator::saveEnumDefinitionSubsubsection(string const& enumName, ofstr
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(enumSubsubsectionLine,"LYX_TABLE_REPLACE"))
         {
-            saveEnumTable(enumName, enumDefinitionsStream);        }
+            saveEnumTable(enumName, enumDefinitionsStream);
+        }
         else
         {
             enumDefinitionsStream << enumSubsubsectionLine << endl;
@@ -242,7 +242,8 @@ void LyxGenerator::saveUnionDefinitionSubsubsection(string const& unionName, ofs
     UnionDetails unionDetails(m_database.getUnionDetails(unionName));
 
     while(unionSubsubsectionReader.isNotFinished())
-    {        string unionSubsubsectionLine(unionSubsubsectionReader.getLine());
+    {
+        string unionSubsubsectionLine(unionSubsubsectionReader.getLine());
         if(isStringFoundInsideTheOtherStringCaseSensitive(unionSubsubsectionLine,"LYX_TABLE_UNION_NAME_REPLACE"))
         {
             transformReplaceStringIfFound(unionSubsubsectionLine, "LYX_TABLE_UNION_NAME_REPLACE", unionDetails.name);
@@ -255,7 +256,8 @@ void LyxGenerator::saveUnionDefinitionSubsubsection(string const& unionName, ofs
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(unionSubsubsectionLine,"LYX_TABLE_REPLACE"))
         {
-            saveUnionTable(unionName, unionDefinitionsStream);        }
+            saveUnionTable(unionName, unionDefinitionsStream);
+        }
         else
         {
             unionDefinitionsStream << unionSubsubsectionLine << endl;
@@ -270,7 +272,8 @@ void LyxGenerator::saveConstantDefinitionSubsubsection(string const& constantNam
     ConstantDetails constantDetails(m_database.getConstantDetails(constantName));
 
     while(constantSubsubsectionReader.isNotFinished())
-    {        string constantSubsubsectionLine(constantSubsubsectionReader.getLine());
+    {
+        string constantSubsubsectionLine(constantSubsubsectionReader.getLine());
         if(isStringFoundInsideTheOtherStringCaseSensitive(constantSubsubsectionLine,"LYX_TABLE_COMMENT_NAME_REPLACE"))
         {
             transformReplaceStringIfFound(constantSubsubsectionLine, "LYX_TABLE_COMMENT_NAME_REPLACE", constantDetails.name);
@@ -283,7 +286,8 @@ void LyxGenerator::saveConstantDefinitionSubsubsection(string const& constantNam
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(constantSubsubsectionLine,"LYX_TABLE_REPLACE"))
         {
-            saveConstantTable(constantName, constantDefinitionsStream);        }
+            saveConstantTable(constantName, constantDefinitionsStream);
+        }
         else
         {
             constantDefinitionsStream << constantSubsubsectionLine << endl;
@@ -291,11 +295,48 @@ void LyxGenerator::saveConstantDefinitionSubsubsection(string const& constantNam
     }
 }
 
-void LyxGenerator::saveTypedefDefinitionSubsubsection(string const& typedefName, ofstream & typedefDefinitionsStream)
+void LyxGenerator::saveTypedefDefinitionSubsubsectionFromDatabase(ofstream& lyxOutputFileStream)
+{
+    for(TypedefNameToTypedefDetailsPair const& pair : m_database.typedefNameToTypedefDetailsMap)
+    {
+        if(pair.second.isUsedInIfs)
+        {
+            saveTypedefDefinitionSubsubsectionUsingTypedefName(pair.first, lyxOutputFileStream);
+        }
+    }
+}
+
+void LyxGenerator::saveTypedefDefinitionSubsubsectionUsingTypedefName(string const& typedefName, ofstream & typedefDefinitionsStream)
+{
+    TypedefDetails typedefDetails(m_database.getTypedefDetails(typedefName));
+    saveTypedefDefinitionSubsubsectionWithTypedefDetails(typedefDetails, typedefDefinitionsStream);
+}
+
+void LyxGenerator::saveTypedefDefinitionSubsubsectionForPrimitiveTypes(ofstream & typedefDefinitionsStream)
+{
+    saveTypedefDefinitionSubsubsectionForPrimitiveType("u8", typedefDefinitionsStream);
+    saveTypedefDefinitionSubsubsectionForPrimitiveType("u16", typedefDefinitionsStream);
+    saveTypedefDefinitionSubsubsectionForPrimitiveType("u32", typedefDefinitionsStream);
+    saveTypedefDefinitionSubsubsectionForPrimitiveType("i8", typedefDefinitionsStream);
+    saveTypedefDefinitionSubsubsectionForPrimitiveType("i16", typedefDefinitionsStream);
+    saveTypedefDefinitionSubsubsectionForPrimitiveType("i32", typedefDefinitionsStream);
+    saveTypedefDefinitionSubsubsectionForPrimitiveType("r32", typedefDefinitionsStream);
+    saveTypedefDefinitionSubsubsectionForPrimitiveType("r64", typedefDefinitionsStream);
+    saveTypedefDefinitionSubsubsectionForPrimitiveType("r128", typedefDefinitionsStream);
+}
+
+void LyxGenerator::saveTypedefDefinitionSubsubsectionForPrimitiveType(string const& primitiveTypeName, ofstream & typedefDefinitionsStream)
+{
+    TypedefDetails typedefDetails;
+    typedefDetails.name = primitiveTypeName;
+    typedefDetails.description = getPrimitiveTypeDescription(primitiveTypeName);
+    saveTypedefDefinitionSubsubsectionWithTypedefDetails(typedefDetails, typedefDefinitionsStream);
+}
+
+void LyxGenerator::saveTypedefDefinitionSubsubsectionWithTypedefDetails(TypedefDetails const& typedefDetails, ofstream& typedefDefinitionsStream)
 {
     ifstream typedefSubsubsectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\TypedefSubsubsection.txt)");
     AlbaFileReader typedefSubsubsectionReader(typedefSubsubsectionStream);
-    TypedefDetails typedefDetails(m_database.getTypedefDetails(typedefName));
 
     while(typedefSubsubsectionReader.isNotFinished())
     {
@@ -312,7 +353,7 @@ void LyxGenerator::saveTypedefDefinitionSubsubsection(string const& typedefName,
         }
         else if(isStringFoundInsideTheOtherStringCaseSensitive(typedefSubsubsectionLine,"LYX_TABLE_REPLACE"))
         {
-            saveTypedefTable(typedefName, typedefDefinitionsStream);
+            saveTypedefTable(typedefDetails, typedefDefinitionsStream);
         }
         else
         {
@@ -323,7 +364,8 @@ void LyxGenerator::saveTypedefDefinitionSubsubsection(string const& typedefName,
 
 void LyxGenerator::saveMessageTable(string const& messageName, ofstream & messageTableStream)
 {
-    DisplayTable messageTable;    messageTable.setBorders("-"," | ");
+    DisplayTable messageTable;
+    messageTable.setBorders("-"," | ");
     messageTable.addRow();
     messageTable.getLastRow().addCell("\\series bold \nIE/Group Name");
     messageTable.getLastRow().addCell("\\series bold \nIE Type");
@@ -394,7 +436,7 @@ void LyxGenerator::saveConstantTable(string const& constantName, ofstream & cons
     }
 }
 
-void LyxGenerator::saveTypedefTable(string const& typedefName, ofstream & typedefTableStream)
+void LyxGenerator::saveTypedefTable(TypedefDetails const& typedefDetails, ofstream & typedefTableStream)
 {
     DisplayTable typedefTable;
     typedefTable.setBorders("-"," | ");
@@ -402,7 +444,7 @@ void LyxGenerator::saveTypedefTable(string const& typedefName, ofstream & typede
     typedefTable.getLastRow().addCell("\\series bold \nIE/Group Name");
     typedefTable.getLastRow().addCell("\\series bold \nIE Type");
     typedefTable.getLastRow().addCell("\\series bold \nDescription");
-    generateTypedefForDisplayTablesIfNeeded(typedefName, typedefTable);
+    generateTypedefForDisplayTablesIfNeeded(typedefDetails, typedefTable);
     if(typedefTable.getTotalRows()>1)
     {
         //cout<<typedefTable.drawOutput()<<endl;
@@ -412,7 +454,8 @@ void LyxGenerator::saveTypedefTable(string const& typedefName, ofstream & typede
 
 void LyxGenerator::saveDisplayTable(DisplayTable const& displayTable, ofstream & displayTableStream) const
 {
-    ifstream tableTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\Table.txt)");    AlbaFileReader tableTemplateReader(tableTemplateStream);
+    ifstream tableTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\Table.txt)");
+    AlbaFileReader tableTemplateReader(tableTemplateStream);
     while(tableTemplateReader.isNotFinished())
     {
         string tableTemplateLine(tableTemplateReader.getLine());
@@ -496,7 +539,7 @@ void LyxGenerator::generateStructureForDisplayTablesIfNeeded(string const& struc
             }
             displayTable.getLastRow().addCell(smallTextModifier+finalType);
 
-            string finalDescription(getDescriptionString(parameterDetails.description, parameterDetails.descriptionFromUser));
+            string finalDescription(getDescriptionString(structureName+" "+parameterName, parameterDetails.description, parameterDetails.descriptionFromUser));
             displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
             if(areInnerStructuresGenerated)
             {
@@ -531,7 +574,7 @@ void LyxGenerator::generateEnumForDisplayTablesIfNeeded(string const& enumName, 
             displayTable.addRow();
             displayTable.getLastRow().addCell(smallTextModifier+" "+parameterDetails.name);
             displayTable.getLastRow().addCell(smallTextModifier+parameterDetails.value);
-            string finalDescription(getDescriptionString(parameterDetails.description, parameterDetails.descriptionFromUser));
+            string finalDescription(getDescriptionString(enumName+" "+parameterName, parameterDetails.description, parameterDetails.descriptionFromUser));
             displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
         }
     }
@@ -554,7 +597,7 @@ void LyxGenerator::generateUnionForDisplayTablesIfNeeded(string const& unionName
                 finalType = finalType+" ["+parameterDetails.arraySize+"]";
             }
             displayTable.getLastRow().addCell(smallTextModifier+finalType);
-            string finalDescription(getDescriptionString(parameterDetails.description, parameterDetails.descriptionFromUser));
+            string finalDescription(getDescriptionString(unionName+" "+parameterName, parameterDetails.description, parameterDetails.descriptionFromUser));
             displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
             if(areInnerStructuresGenerated)
             {
@@ -573,38 +616,34 @@ void LyxGenerator::generateConstantForDisplayTablesIfNeeded(string const& consta
         displayTable.addRow();
         displayTable.getLastRow().addCell(smallTextModifier+constantDetails.name);
         displayTable.getLastRow().addCell(smallTextModifier+constantDetails.value);
-        string finalDescription(getDescriptionString(constantDetails.description, constantDetails.descriptionFromUser));
+        string finalDescription(getDescriptionString(constantName, constantDetails.description, constantDetails.descriptionFromUser));
         displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
     }
 }
 
-void LyxGenerator::generateTypedefForDisplayTablesIfNeeded(string const& typedefName, DisplayTable & displayTable)
+void LyxGenerator::generateTypedefForDisplayTablesIfNeeded(TypedefDetails const& typedefDetails, DisplayTable & displayTable)
 {
     string smallTextModifier("\\size footnotesize\n");
-    if(m_database.doesThisTypedefExists(typedefName))
-    {
-        TypedefDetails typedefDetails(m_database.getTypedefDetails(typedefName));
-        displayTable.addRow();
-        displayTable.getLastRow().addCell(smallTextModifier+typedefDetails.name);
-        displayTable.getLastRow().addCell(smallTextModifier+typedefDetails.typedefDerivedName);
-        string finalDescription(
-                    getPrimitiveTypeDescription(typedefDetails.typedefDerivedName)+" "+
-                    getDescriptionString(typedefDetails.description, typedefDetails.descriptionFromUser));
-        displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
-    }
+    displayTable.addRow();
+    displayTable.getLastRow().addCell(smallTextModifier+typedefDetails.name);
+    displayTable.getLastRow().addCell(smallTextModifier+typedefDetails.typedefDerivedName);
+    string finalDescription(
+                getPrimitiveTypeDescription(typedefDetails.typedefDerivedName)+" "+
+                getDescriptionString(typedefDetails.name, typedefDetails.description, typedefDetails.descriptionFromUser));
+    displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
 }
 
-string LyxGenerator::getDescriptionString(string const& description, string const& descriptionFromUser) const
+string LyxGenerator::getDescriptionString(string const& printIdentifier, string const& description, string const& descriptionFromUser) const
 {
-    string sackDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(description)));    string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(descriptionFromUser)));
+    string sackDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(description)));
+    string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(descriptionFromUser)));
     string finalDescription;
     if(!userDescription.empty())
     {
         if(sackDescription!=userDescription)
         {
             //cout <<"The description needs to be aligned with sack."<<endl;
-            cout<<"sackDescription: ["<<sackDescription<<"]"<<endl;
-            cout<<"userDescription: ["<<userDescription<<"]"<<endl;
+            cout<<printIdentifier<<" sackDescription: ["<<sackDescription<<"] userDescription: ["<<userDescription<<"]"<<endl;
         }
         finalDescription = userDescription;
     }

@@ -136,7 +136,7 @@ void SackReader::performHacks()
     structureDetailsSMessageAddress.parameters["task"].type = "TTask";
     structureDetailsSMessageAddress.parameters["task"].isAnArray = false;
     structureDetailsSMessageAddress.parameters["task"].descriptionFromUser = "Task in SMessageAddress";
-    performHackPrimitiveType("u8");
+    /*performHackPrimitiveType("u8");
     performHackPrimitiveType("u16");
     performHackPrimitiveType("u32");
     performHackPrimitiveType("i8");
@@ -144,7 +144,7 @@ void SackReader::performHacks()
     performHackPrimitiveType("i32");
     performHackPrimitiveType("r32");
     performHackPrimitiveType("r64");
-    performHackPrimitiveType("r128");
+    performHackPrimitiveType("r128");*/
     m_database.constantNameToConstantDetailsMap["MAX_NUM_OF_HSPA_SCHEDULERS"].value = "16";
 }
 
@@ -156,7 +156,8 @@ void SackReader::performHackPrimitiveType(string const& primitiveType)
 
 void SackReader::generateLyxDocument(string const& ifsTemplatePath, string const& finalDocumentPath)
 {
-    LyxGenerator generator(m_database);    generator.generateLyxDocument(ifsTemplatePath, finalDocumentPath);
+    LyxGenerator generator(m_database);
+    generator.generateLyxDocument(ifsTemplatePath, finalDocumentPath);
 }
 
 void SackReader::readAndMarkTypeAsNeededInIfs(string const& typeName)
@@ -215,6 +216,11 @@ void SackReader::markEnumAsNeededForIfs(string const& enumName)
     if(m_database.doesThisEnumExists(enumName))
     {
         m_database.enumNameToEnumDetailsMap[enumName].isUsedInIfs=true;
+        EnumDetails::ParameterMap const& parameters(m_database.enumNameToEnumDetailsMap[enumName].parameters);
+        for(EnumDetails::ParameterPair pair : parameters)
+        {
+            markConstantAsNeededForIfs(pair.second.value);
+        }
     }
 }
 
@@ -228,7 +234,8 @@ void SackReader::markTypedefAsNeededForIfs(string const& typedefName)
 
 void SackReader::markConstantAsNeededForIfs(string const& constantName)
 {
-    if(!constantName.empty())    {
+    if(!constantName.empty())
+    {
         char firstCharacter = constantName[0];
         if(firstCharacter!='E' && isCapitalLetter(firstCharacter))
         {
@@ -261,6 +268,7 @@ void SackReader::readConstantFiles()
     readFileUsingTypeFileName("DOpenIUBCommonDefs.h");
     readFileUsingTypeFileName("Glo_bs.h");
     readFileUsingTypeFileName("DTechLogDef.h");
+    readFileUsingTypeFileName("DFromTc_dsp.h");
 }
 
 void SackReader::readFileUsingTypeName(string const& typeName)

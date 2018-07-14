@@ -3,7 +3,11 @@ LYX_TABLE_TYPEDEF_NAME_REPLACE
 \end_layout
 
 \begin_layout Standard
-LYX_TABLE_TYPEDEF_PATH_REPLACE
+:
+\end_layout
+
+\begin_layout Standard
+Path: LYX_TABLE_TYPEDEF_PATH_REPLACE
 \end_layout
 
 LYX_TABLE_REPLACE

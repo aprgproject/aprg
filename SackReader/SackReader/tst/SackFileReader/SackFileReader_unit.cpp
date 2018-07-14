@@ -265,7 +265,8 @@ TEST(SackFileReaderTest, TAichPower)
     EXPECT_EQ("Definition of Aich power Defined in Iub spec 3.2.0. ch 4.6.4", details.description);
 }
 
-TEST(SackFileReaderTest, TSubrackNbr){
+TEST(SackFileReaderTest, TSubrackNbr)
+{
     Database database;
     SackFileReader sackFileReader(database);
     sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\TSubrackNbr.h)");
@@ -276,7 +277,8 @@ TEST(SackFileReaderTest, TSubrackNbr){
     EXPECT_EQ("", details.description);
 }
 
-TEST(SackFileReaderTest, TSubunits){
+TEST(SackFileReaderTest, TSubunits)
+{
     Database database;
     SackFileReader sackFileReader(database);
     sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\TSubunits.h)");

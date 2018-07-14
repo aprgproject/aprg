@@ -17,7 +17,8 @@ struct Database
     MessageDetails getMessageDetails(std::string const& messageName) const;
     std::string getMessageStructure(std::string const& messageName) const;
     StructureDetails getStructureDetails(std::string const& structureName) const;
-    ParameterDetails getParameterDetails(std::string const& structureName, std::string const& parameterName) const;    EnumDetails getEnumDetails(std::string const& enumName) const;
+    ParameterDetails getParameterDetails(std::string const& structureName, std::string const& parameterName) const;
+    EnumDetails getEnumDetails(std::string const& enumName) const;
     EnumParameterDetails getEnumParameterDetails(std::string const& enumName, std::string const& enumParameterName) const;
     UnionDetails getUnionDetails(std::string const& unionName) const;
     ParameterDetails getUnionParameterDetails(std::string const& unionName, std::string const& parameterName) const;
@@ -36,7 +37,8 @@ struct Database
     bool doesThisTypedefExists(std::string const& typedefName) const;
     FileToPathMap fileToPathMap;
     ConstantNameToConstantDetailsMap constantNameToConstantDetailsMap;
-    MessageNameToMessageDetailsMap messageNameToMessageDetailsMap;    StructureNameToStructureDetailsMap structureNameToStructureDetailsMap;
+    MessageNameToMessageDetailsMap messageNameToMessageDetailsMap;
+    StructureNameToStructureDetailsMap structureNameToStructureDetailsMap;
     UnionNameToUnionDetailsMap unionNameToUnionDetailsMap;
     EnumNameToEnumDetailsMap enumNameToEnumDetailsMap;
     TypedefNameToTypedefDetailsMap typedefNameToTypedefDetailsMap;

@@ -28,7 +28,8 @@ enum class State
     AtTypedefDescription
 };
 
-//#define MAX_NR_OF_CODES 2                /* 3GPP 10 Nokia 2*/enum class StateForConstant
+//#define MAX_NR_OF_CODES 2                /* 3GPP 10 Nokia 2*/
+enum class StateForConstant
 {
     BeforeName,
     AfterNameBeforeValue
@@ -164,7 +165,8 @@ enum class StateForAtTypedefDescription
 };
 
 enum class ParameterDescriptionType
-{    None,
+{
+    None,
     Structure,
     Enum,
     Union
@@ -198,6 +200,7 @@ struct InnerStates
 
 
 
+
 using BaseSackFileReaderStateMachine = AlbaBaseStateMachine<State, InputToken>;
 class SackFileReaderStateMachine : public BaseSackFileReaderStateMachine
 {
@@ -228,7 +231,8 @@ private:
     void processStateAtTypedefDescription(InputToken const& inputToken);
     void saveNextStateAndResetInnerStates(State const& state);
     void saveMessageToDatabase(std::string const& token, std::string const& structureName);
-    void saveConstantToDatabase();    void saveStructureAsMessageStructureInDatabase();
+    void saveConstantToDatabase();
+    void saveStructureAsMessageStructureInDatabase();
     void saveParameterInUnionToDatabase();
     void saveParameterInStructureToDatabase();
     void saveParameterInEnumToDatabase();
@@ -238,7 +242,8 @@ private:
     void saveTypedefDescriptionToDatabase(std::string const& partialString);
     AlbaLocalPathHandler m_filePathHandler;
     bool m_isMessageIdFile;
-    bool m_isNextLineNeeded;    InnerStates m_innerStates;
+    bool m_isNextLineNeeded;
+    InnerStates m_innerStates;
     std::string m_pathFromIInterface;
     std::string m_arraySize;
     std::string m_previousStructureName;

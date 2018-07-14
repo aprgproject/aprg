@@ -54,7 +54,8 @@ ConstantDetails Database::getConstantDetails(string const& constantName) const
     if(doesThisConstantExists(constantName))
     {
         result = constantNameToConstantDetailsMap.at(constantName);
-    }    return result;
+    }
+    return result;
 }
 
 MessageDetails Database::getMessageDetails(string const& messageName) const
@@ -73,7 +74,8 @@ string Database::getMessageStructure(string const& messageName) const
     if(doesThisMessageExists(messageName))
     {
         result = messageNameToMessageDetailsMap.at(messageName).structureName;
-    }    return result;
+    }
+    return result;
 }
 
 StructureDetails Database::getStructureDetails(string const& structureName) const
@@ -82,7 +84,8 @@ StructureDetails Database::getStructureDetails(string const& structureName) cons
     if(doesThisStructureExists(structureName))
     {
         result = structureNameToStructureDetailsMap.at(structureName);
-    }    return result;
+    }
+    return result;
 }
 
 ParameterDetails Database::getParameterDetails(string const& structureName, string const& parameterName) const
@@ -101,7 +104,8 @@ EnumDetails Database::getEnumDetails(string const& enumName) const
     if(doesThisEnumExists(enumName))
     {
         result = enumNameToEnumDetailsMap.at(enumName);
-    }    return result;
+    }
+    return result;
 }
 
 EnumParameterDetails Database::getEnumParameterDetails(string const& enumName, string const& parameterName) const
@@ -120,7 +124,8 @@ UnionDetails Database::getUnionDetails(string const& unionName) const
     if(doesThisUnionExists(unionName))
     {
         result = unionNameToUnionDetailsMap.at(unionName);
-    }    return result;
+    }
+    return result;
 }
 
 ParameterDetails Database::getUnionParameterDetails(string const& unionName, string const& parameterName) const
@@ -139,7 +144,8 @@ TypedefDetails Database::getTypedefDetails(string const& typedefName) const
     if(doesThisTypedefExists(typedefName))
     {
         result = typedefNameToTypedefDetailsMap.at(typedefName);
-    }    return result;
+    }
+    return result;
 }
 
 bool Database::doesThisStructureAndParameterExists(string const& structureName, string const& parameterName) const
@@ -239,7 +245,8 @@ bool Database::doesThisMessageExists(string const& messageName) const
 
 bool Database::doesThisFullDetailedStructureExists(string const& structureName) const
 {
-    bool result(false);    if(doesThisStructureExists(structureName))
+    bool result(false);
+    if(doesThisStructureExists(structureName))
     {
         result = !getStructureDetails(structureName).name.empty();
     }

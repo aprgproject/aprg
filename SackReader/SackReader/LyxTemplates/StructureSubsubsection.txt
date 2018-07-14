@@ -3,9 +3,14 @@ LYX_TABLE_STRUCTURE_NAME_REPLACE
 \end_layout
 
 \begin_layout Standard
-LYX_TABLE_STRUCTURE_PATH_REPLACE
+:
+\end_layout
+
+\begin_layout Standard
+Path: LYX_TABLE_STRUCTURE_PATH_REPLACE
 \end_layout
 
 LYX_TABLE_REPLACE
+
 
 
