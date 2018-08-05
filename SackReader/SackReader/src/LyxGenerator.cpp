@@ -16,14 +16,16 @@ using namespace std;
 namespace alba
 {
 
-LyxGenerator::LyxGenerator(Database const& database)
-    : m_database(database)
-{}
+LyxGenerator::LyxGenerator(std::string const& pathOfLog, Database const& database)
+    : m_logStream(pathOfLog)
+    , m_database(database)
+{
+
+}
 
 void LyxGenerator::generateLyxDocument(string const& ifsTemplatePath, string const& finalDocumentPath)
 {
-    ifstream lyxDocumentTemplate(ifsTemplatePath);
-    ofstream lyxFinalDocumentStream(finalDocumentPath);
+    ifstream lyxDocumentTemplate(ifsTemplatePath);    ofstream lyxFinalDocumentStream(finalDocumentPath);
     AlbaFileReader lyxDocumentTemplateReader(lyxDocumentTemplate);
 
     bool isInsideGeneratedCode(false);
@@ -529,11 +531,10 @@ void LyxGenerator::generateStructureForDisplayTablesIfNeeded(string const& struc
         StructureDetails structureDetails(m_database.getStructureDetails(structureName));
         for(string const& parameterName : structureDetails.parametersWithCorrectOrder)
         {
-            ParameterDetails parameterDetails = m_database.getParameterDetails(structureName, parameterName);
+            ParameterDetails parameterDetails = m_database.getStructureParameterDetails(structureName, parameterName);
             displayTable.addRow();
             displayTable.getLastRow().addCell(smallTextModifier+indentionInType+" "+parameterDetails.name);
-            string finalType(parameterDetails.type);
-            if(parameterDetails.isAnArray)
+            string finalType(parameterDetails.type);            if(parameterDetails.isAnArray)
             {
                 finalType = finalType+" ["+parameterDetails.arraySize+"]";
             }
@@ -633,21 +634,18 @@ void LyxGenerator::generateTypedefForDisplayTablesIfNeeded(TypedefDetails const&
     displayTable.getLastRow().addCell(smallTextModifier+finalDescription);
 }
 
-string LyxGenerator::getDescriptionString(string const& printIdentifier, string const& description, string const& descriptionFromUser) const
+string LyxGenerator::getDescriptionString(string const& printIdentifier, string const& description, string const& descriptionFromUser)
 {
     string sackDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(description)));
-    string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(descriptionFromUser)));
-    string finalDescription;
+    string userDescription(getStringWithFirstNonWhiteSpaceCharacterToCapital(getStringWithoutStartingAndTrailingWhiteSpace(descriptionFromUser)));    string finalDescription;
     if(!userDescription.empty())
     {
         if(sackDescription!=userDescription)
         {
-            //cout <<"The description needs to be aligned with sack."<<endl;
-            cout<<printIdentifier<<" sackDescription: ["<<sackDescription<<"] userDescription: ["<<userDescription<<"]"<<endl;
+            m_logStream<<"The description needs to be aligned with sack. "<<printIdentifier<<" sackDescription: ["<<sackDescription<<"] userDescription: ["<<userDescription<<"]"<<endl;
         }
         finalDescription = userDescription;
-    }
-    else
+    }    else
     {
         finalDescription = sackDescription;
     }

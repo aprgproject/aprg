@@ -7,10 +7,18 @@
 namespace alba
 {
 
+enum class IfsDefinitionType
+{
+    Struct,
+    Union,
+    Enum,
+    Typedef,
+    Constant
+};
+
 struct ConstantDetails
 {
-    std::string name;
-    std::string value;
+    std::string name;    std::string value;
     std::string description;
     std::string descriptionFromUser;
     std::string path;

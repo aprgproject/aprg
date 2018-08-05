@@ -18,12 +18,12 @@ using namespace std;
 namespace alba
 {
 
-SackReader::SackReader(string const& path)
+SackReader::SackReader(string const& path, string const& pathOfLog)
     : m_path(path)
+    , m_pathOfLog(pathOfLog)
 {
     m_path = AlbaLocalPathHandler(path).getFullPath();
 }
-
 string SackReader::getFileFullPath(string const& fileName) const
 {
     return m_database.getFileFullPath(fileName);
@@ -57,10 +57,9 @@ void SackReader::readAndMarkFilesNecessaryForIfs()
     for(string const& messageName : m_database.messagesToGenerate)
     {
         string typeName(m_database.getMessageStructure(messageName));
-        readAndMarkTypeAsNeededInIfs(typeName);
+        readAndMarkTypeAsNeededInIfsRecursively(typeName);
     }
 }
-
 void SackReader::saveDatabaseToFile(string const& path)
 {
     m_database.saveDatabaseToFile(path);
@@ -89,30 +88,53 @@ void SackReader::loadDescriptionToAdd(string const& path)
 {
     ifstream messageToGenerateStream(path);
     AlbaFileReader messageToGenerateReader(messageToGenerateStream);
-    string structureName, parameterName;
+    string name, parameterName;
+    IfsDefinitionType currentDefinitionType;
     while(messageToGenerateReader.isNotFinished())
     {
-        string line(messageToGenerateReader.getLine());
+        string line(messageToGenerateReader.getLineAndIgnoreWhiteSpaces());
         if(!line.empty())
         {
-            if(isStringFoundInsideTheOtherStringCaseSensitive(line, "&&&struct:"))
+            if(line.substr(0,2) != R"(//)")
             {
-                structureName = getStringAfterThisString(line, "&&&struct:");
-            }
-            else if(isStringFoundInsideTheOtherStringCaseSensitive(line, "&&&param:"))
-            {
-                parameterName = getStringAfterThisString(line, "&&&param:");
-            }
-            else if(isStringFoundInsideTheOtherStringCaseSensitive(line, "&&&description:"))
-            {
-                string description(getStringAfterThisString(line, "&&&description:"));
-                m_database.structureNameToStructureDetailsMap[structureName].parameters[parameterName].name = parameterName;
-                m_database.structureNameToStructureDetailsMap[structureName].parameters[parameterName].descriptionFromUser = description;
+                if(isStringFoundInsideTheOtherStringCaseSensitive(line, "&&&struct:"))
+                {
+                    name = getStringWithoutStartingAndTrailingWhiteSpace(getStringAfterThisString(line, "&&&struct:"));
+                    currentDefinitionType = IfsDefinitionType::Struct;
+                }
+                else if(isStringFoundInsideTheOtherStringCaseSensitive(line, "&&&union:"))
+                {
+                    name = getStringWithoutStartingAndTrailingWhiteSpace(getStringAfterThisString(line, "&&union:"));
+                    currentDefinitionType = IfsDefinitionType::Union;
+                }
+                else if(isStringFoundInsideTheOtherStringCaseSensitive(line, "&&&enum:"))
+                {
+                    name = getStringWithoutStartingAndTrailingWhiteSpace(getStringAfterThisString(line, "&&enum:"));
+                    currentDefinitionType = IfsDefinitionType::Enum;
+                }
+                else if(isStringFoundInsideTheOtherStringCaseSensitive(line, "&&&typedef:"))
+                {
+                    name = getStringWithoutStartingAndTrailingWhiteSpace(getStringAfterThisString(line, "&&typedef:"));
+                    currentDefinitionType = IfsDefinitionType::Typedef;
+                }
+                else if(isStringFoundInsideTheOtherStringCaseSensitive(line, "&&&constant:"))
+                {
+                    name = getStringWithoutStartingAndTrailingWhiteSpace(getStringAfterThisString(line, "&&constant:"));
+                    currentDefinitionType = IfsDefinitionType::Constant;
+                }
+                else if(isStringFoundInsideTheOtherStringCaseSensitive(line, "&&&param:"))
+                {
+                    parameterName = getStringWithoutStartingAndTrailingWhiteSpace(getStringAfterThisString(line, "&&&param:"));
+                }
+                else if(isStringFoundInsideTheOtherStringCaseSensitive(line, "&&&description:"))
+                {
+                    string description(getStringWithoutStartingAndTrailingWhiteSpace(getStringAfterThisString(line, "&&&description:")));
+                    updateDescriptionFromUser(currentDefinitionType, name, parameterName, description);
+                }
             }
         }
     }
 }
-
 void SackReader::performHacks()
 {
     //This should be hacked because syscom defines causes a different definition.
@@ -156,48 +178,45 @@ void SackReader::performHackPrimitiveType(string const& primitiveType)
 
 void SackReader::generateLyxDocument(string const& ifsTemplatePath, string const& finalDocumentPath)
 {
-    LyxGenerator generator(m_database);
+    LyxGenerator generator(m_pathOfLog, m_database);
     generator.generateLyxDocument(ifsTemplatePath, finalDocumentPath);
 }
 
-void SackReader::readAndMarkTypeAsNeededInIfs(string const& typeName)
+void SackReader::readAndMarkTypeAsNeededInIfsRecursively(string const& typeName)
 {
     if(!m_database.doesThisFullDetailedStructureExists(typeName) &&
-            !m_database.doesThisUnionExists(typeName) &&
-            !m_database.doesThisEnumExists(typeName) &&
+            !m_database.doesThisUnionExists(typeName) &&            !m_database.doesThisEnumExists(typeName) &&
             !m_database.doesThisTypedefExists(typeName))
     {
         readFileUsingTypeName(typeName);
     }
-    markStructureAsNeededForIfs(typeName);
-    markUnionAsNeededForIfs(typeName);
-    markEnumAsNeededForIfs(typeName);
-    markTypedefAsNeededForIfs(typeName);
+    markStructureAsNeededForIfsRecursively(typeName);
+    markUnionAsNeededForIfsRecursively(typeName);
+    markEnumAsNeededForIfsRecursively(typeName);
+    markTypedefAsNeededForIfsRecursively(typeName);
 }
 
-void SackReader::markStructureAsNeededForIfs(string const& structureName)
+void SackReader::markStructureAsNeededForIfsRecursively(string const& structureName)
 {
     if(m_database.doesThisStructureExists(structureName))
-    {
-        m_database.structureNameToStructureDetailsMap[structureName].isUsedInIfs=true;
+    {        m_database.structureNameToStructureDetailsMap[structureName].isUsedInIfs=true;
         StructureDetails structureDetails(m_database.getStructureDetails(structureName));
         for(string const& parameterName : structureDetails.parametersWithCorrectOrder)
         {
-            ParameterDetails parameterDetails = m_database.getParameterDetails(structureName, parameterName);
+            ParameterDetails parameterDetails = m_database.getStructureParameterDetails(structureName, parameterName);
             if(parameterDetails.isAnArray)
             {
                 markConstantAsNeededForIfs(parameterDetails.arraySize);
             }
-            readAndMarkTypeAsNeededInIfs(parameterDetails.type);
+            readAndMarkTypeAsNeededInIfsRecursively(parameterDetails.type);
         }
     }
 }
 
-void SackReader::markUnionAsNeededForIfs(string const& unionName)
+void SackReader::markUnionAsNeededForIfsRecursively(string const& unionName)
 {
     if(m_database.doesThisUnionExists(unionName))
-    {
-        m_database.unionNameToUnionDetailsMap[unionName].isUsedInIfs=true;
+    {        m_database.unionNameToUnionDetailsMap[unionName].isUsedInIfs=true;
         UnionDetails unionDetails(m_database.getUnionDetails(unionName));
         for(string const& parameterName : unionDetails.parametersWithCorrectOrder)
         {
@@ -206,16 +225,15 @@ void SackReader::markUnionAsNeededForIfs(string const& unionName)
             {
                 markConstantAsNeededForIfs(parameterDetails.arraySize);
             }
-            readAndMarkTypeAsNeededInIfs(parameterDetails.type);
+            readAndMarkTypeAsNeededInIfsRecursively(parameterDetails.type);
         }
     }
 }
 
-void SackReader::markEnumAsNeededForIfs(string const& enumName)
+void SackReader::markEnumAsNeededForIfsRecursively(string const& enumName)
 {
     if(m_database.doesThisEnumExists(enumName))
-    {
-        m_database.enumNameToEnumDetailsMap[enumName].isUsedInIfs=true;
+    {        m_database.enumNameToEnumDetailsMap[enumName].isUsedInIfs=true;
         EnumDetails::ParameterMap const& parameters(m_database.enumNameToEnumDetailsMap[enumName].parameters);
         for(EnumDetails::ParameterPair pair : parameters)
         {
@@ -224,11 +242,10 @@ void SackReader::markEnumAsNeededForIfs(string const& enumName)
     }
 }
 
-void SackReader::markTypedefAsNeededForIfs(string const& typedefName)
+void SackReader::markTypedefAsNeededForIfsRecursively(string const& typedefName)
 {
     if(m_database.doesThisTypedefExists(typedefName))
-    {
-        m_database.typedefNameToTypedefDetailsMap[typedefName].isUsedInIfs=true;
+    {        m_database.typedefNameToTypedefDetailsMap[typedefName].isUsedInIfs=true;
     }
 }
 
@@ -251,18 +268,20 @@ void SackReader::readOamTcomTupcMessageFiles()
     readFileUsingTypeFileName("MessageId_TassuTtm.sig");
     readFileUsingTypeFileName("MessageId_OamFault.h");
     readFileUsingTypeFileName("MessageId_Platform.h");
+    readFileUsingTypeFileName("MessageId_OamPmService.h");
     readFileUsingTypeFileName("Oam_Atm.h");
     readFileUsingTypeFileName("oam_tcom.h");
-    readFileUsingTypeFileName("Oam_Tcom_TestModelService.h");
-    readFileUsingTypeFileName("Oam_Tcom_LoopTestService.h");
+    readFileUsingTypeFileName("Oam_Tcom_TestModelService.h");    readFileUsingTypeFileName("Oam_Tcom_LoopTestService.h");
     readFileUsingTypeFileName("tassu_ttm.h");
     readFileUsingTypeFileName("SFaultInd.h");
     readFileUsingTypeFileName("SModeChangeReq.h");
     readFileUsingTypeFileName("SModeChangeResp.h");
+    readFileUsingTypeFileName("FetchCountersReq.h");
+    readFileUsingTypeFileName("FetchCountersResp.h");
+    readFileUsingTypeFileName("StoreCountersInd.h");
 }
 
-void SackReader::readConstantFiles()
-{
+void SackReader::readConstantFiles(){
     readFileUsingTypeFileName("IfAaSysComGw_Defs.h");
     readFileUsingTypeFileName("DBtsomTcomConstants.h");
     readFileUsingTypeFileName("DOpenIUBCommonDefs.h");
@@ -280,6 +299,61 @@ void SackReader::readFileUsingTypeFileName(string const& typeFileName)
 {
     SackFileReader sackFileReader(m_database);
     sackFileReader.readFile(m_database.getFileFullPath(typeFileName));
+}
+
+void SackReader::updateDescriptionFromUser(IfsDefinitionType const currentDefinitionType, string const& name, string const& parameterName, string const& description)
+{
+    if(currentDefinitionType == IfsDefinitionType::Typedef || currentDefinitionType == IfsDefinitionType::Constant)
+    {
+        updateDescriptionFromUserWithoutParameter(currentDefinitionType, name, description);
+    }
+    else if(currentDefinitionType == IfsDefinitionType::Struct || currentDefinitionType == IfsDefinitionType::Union || currentDefinitionType == IfsDefinitionType::Enum)
+    {
+        updateDescriptionFromUserWithParameter(currentDefinitionType, name, parameterName, description);
+    }
+}
+
+void SackReader::updateDescriptionFromUserWithoutParameter(IfsDefinitionType const currentDefinitionType, string const& name, string const& description)
+{
+    if(currentDefinitionType == IfsDefinitionType::Typedef)
+    {
+        if(m_database.doesThisTypedefExists(name))
+        {
+            m_database.typedefNameToTypedefDetailsMap[name].descriptionFromUser = description;
+        }
+    }
+    else if(currentDefinitionType == IfsDefinitionType::Constant)
+    {
+        if(m_database.doesThisConstantExists(name))
+        {
+            m_database.constantNameToConstantDetailsMap[name].descriptionFromUser = description;
+        }
+    }
+}
+
+void SackReader::updateDescriptionFromUserWithParameter(IfsDefinitionType const currentDefinitionType, string const& name, string const& parameterName, string const& description)
+{
+    if(currentDefinitionType == IfsDefinitionType::Struct)
+    {
+        if(m_database.doesThisStructureAndParameterExists(name, parameterName))
+        {
+            m_database.structureNameToStructureDetailsMap[name].parameters[parameterName].descriptionFromUser = description;
+        }
+    }
+    else if(currentDefinitionType == IfsDefinitionType::Union)
+    {
+        if(m_database.doesThisUnionAndParameterExists(name, parameterName))
+        {
+            m_database.unionNameToUnionDetailsMap[name].parameters[parameterName].descriptionFromUser = description;
+        }
+    }
+    else if(currentDefinitionType == IfsDefinitionType::Enum)
+    {
+        if(m_database.doesThisEnumAndParameterExists(name, parameterName))
+        {
+            m_database.enumNameToEnumDetailsMap[name].parameters[parameterName].descriptionFromUser = description;
+        }
+    }
 }
 
 

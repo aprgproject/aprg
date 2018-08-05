@@ -52,17 +52,16 @@ TEST(SackFileReaderTest, CommentInStructure)
     SackFileReader sackFileReader(database);
     sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\Oam_Tcom_TestModelService.h)");
 
-    ParameterDetails details(database.getParameterDetails("STestModelSetupReqMsg", "numberOfHsPdsch"));
+    ParameterDetails details(database.getStructureParameterDetails("STestModelSetupReqMsg", "numberOfHsPdsch"));
     EXPECT_EQ("numberOfHsPdsch", details.name);
     EXPECT_EQ("TNumberOfItems", details.type);
     EXPECT_FALSE(details.isAnArray);
     //EXPECT_EQ("indicates how many HS-PDSCH is setup for TM5", details.description); //TooHard
 
-    details = database.getParameterDetails("STestModelSetupReqMsg", "testPattern");
+    details = database.getStructureParameterDetails("STestModelSetupReqMsg", "testPattern");
     EXPECT_EQ("testPattern", details.name);
     EXPECT_EQ("ECdmaTestDataPattern", details.type);
-    EXPECT_FALSE(details.isAnArray);
-    //EXPECT_EQ("indicates what kind of testdata is generated to test channels", details.description); //TooHard
+    EXPECT_FALSE(details.isAnArray);    //EXPECT_EQ("indicates what kind of testdata is generated to test channels", details.description); //TooHard
 }
 
 TEST(SackFileReaderTest, MessageOamAtmSigFile)
@@ -91,23 +90,22 @@ TEST(SackFileReaderTest, OamTupcStructures)
     SackFileReader sackFileReader(database);
     sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\Oam_Atm.h)");
 
-    ParameterDetails details(database.getParameterDetails("SAtmHwConfigurationMsg", "typeOfConfiguration"));
+    ParameterDetails details(database.getStructureParameterDetails("SAtmHwConfigurationMsg", "typeOfConfiguration"));
     EXPECT_EQ("typeOfConfiguration", details.name);
     EXPECT_EQ("EControlUnitType", details.type);
     EXPECT_FALSE(details.isAnArray);
     EXPECT_EQ("", details.description);
 
-    details = database.getParameterDetails("SAtmOamCpuStateChangeMsg", "cpuAddress");
+    details = database.getStructureParameterDetails("SAtmOamCpuStateChangeMsg", "cpuAddress");
     EXPECT_EQ("cpuAddress", details.name);
     EXPECT_EQ("SMessageAddress", details.type);
     EXPECT_FALSE(details.isAnArray);
     EXPECT_EQ("", details.description);
 
-    details = database.getParameterDetails("SAtmHwConfigurationMsg", "dynamicData");
+    details = database.getStructureParameterDetails("SAtmHwConfigurationMsg", "dynamicData");
     EXPECT_EQ("dynamicData", details.name);
     EXPECT_EQ("TDynamicData", details.type);
-    EXPECT_TRUE(details.isAnArray);
-    EXPECT_EQ("1", details.arraySize);
+    EXPECT_TRUE(details.isAnArray);    EXPECT_EQ("1", details.arraySize);
     EXPECT_EQ("", details.description);
 }
 
@@ -117,24 +115,22 @@ TEST(SackFileReaderTest, OamTcomStructures)
     SackFileReader sackFileReader(database);
     sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\oam_tcom.h)");
 
-    ParameterDetails details(database.getParameterDetails("SHwConfigurationMsg", "btsomTelecomServiceAddr"));
+    ParameterDetails details(database.getStructureParameterDetails("SHwConfigurationMsg", "btsomTelecomServiceAddr"));
     EXPECT_EQ("btsomTelecomServiceAddr", details.name);
     EXPECT_EQ("SMessageAddress", details.type);
     EXPECT_FALSE(details.isAnArray);
     EXPECT_EQ("", details.description);
 
-    details = database.getParameterDetails("SHwConfigurationMsg", "btsSwVersion");
+    details = database.getStructureParameterDetails("SHwConfigurationMsg", "btsSwVersion");
     EXPECT_EQ("btsSwVersion", details.name);
     EXPECT_EQ("TDynamicData", details.type);
-    EXPECT_TRUE(details.isAnArray);
-    EXPECT_EQ("1", details.arraySize);
+    EXPECT_TRUE(details.isAnArray);    EXPECT_EQ("1", details.arraySize);
     EXPECT_EQ("", details.description);
 
-    details = database.getParameterDetails("SCellInformationInd", "dssDspAddress");
+    details = database.getStructureParameterDetails("SCellInformationInd", "dssDspAddress");
     EXPECT_EQ("dssDspAddress", details.name);
     EXPECT_EQ("TAaSysComSicad", details.type);
-    EXPECT_FALSE(details.isAnArray);
-    EXPECT_EQ("", details.description);
+    EXPECT_FALSE(details.isAnArray);    EXPECT_EQ("", details.description);
 }
 
 TEST(SackFileReaderTest, SWamUnit)
@@ -143,17 +139,16 @@ TEST(SackFileReaderTest, SWamUnit)
     SackFileReader sackFileReader(database);
     sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\SWamUnit.h)");
 
-    ParameterDetails details(database.getParameterDetails("SWamUnit", "logUnitAddr"));
+    ParameterDetails details(database.getStructureParameterDetails("SWamUnit", "logUnitAddr"));
     EXPECT_EQ("logUnitAddr", details.name);
     EXPECT_EQ("TBoard", details.type);
     EXPECT_FALSE(details.isAnArray);
     EXPECT_EQ("logical unit address (e.g. WAM10)", details.description);
 
-    details = database.getParameterDetails("SWamUnit", "numOfFspUnits");
+    details = database.getStructureParameterDetails("SWamUnit", "numOfFspUnits");
     EXPECT_EQ("numOfFspUnits", details.name);
     EXPECT_EQ("u8", details.type);
-    EXPECT_FALSE(details.isAnArray);
-    EXPECT_EQ("Number of FSP units in System Module. Valid only for EControlUnitType_Fcm2 from Extension System Module in TC_HW_CONFIGURATION_CHANGE_MSG.", details.description);
+    EXPECT_FALSE(details.isAnArray);    EXPECT_EQ("Number of FSP units in System Module. Valid only for EControlUnitType_Fcm2 from Extension System Module in TC_HW_CONFIGURATION_CHANGE_MSG.", details.description);
 }
 
 TEST(SackFileReaderTest, EHspaMapping)
