@@ -11,11 +11,10 @@ using namespace std;
 #define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_FILE2 APRG_DIR "AprgGsl\\AprgGsl\\tst\\ModelingDataSets\\DataSet2.csv"
 #define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT2_FILE3 APRG_DIR "AprgGsl\\AprgGsl\\tst\\ModelingDataSets\\DataSet3_FileFormat2.csv"
 
-TEST(SampleTest, DISABLED_TestForDataSet)
+TEST(SampleTest, TestForDataSet)
 {
     AprgModeling modeling;
-    modeling.retrieveDataFromFileWithFileFormat1(ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_FILE1);
-    modeling.printRetrievedData();
+    modeling.retrieveDataFromFileWithFileFormat1(ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_FILE1);    modeling.printRetrievedData();
     unsigned int numberOfSamples (modeling.getNumberOfSamples());
     modeling.saveRetrievedDataToModelingDataRandomly(numberOfSamples/2);
     modeling.saveRetrievedDataToValidationDataRandomly(numberOfSamples/2);
@@ -36,11 +35,10 @@ TEST(SampleTest, DISABLED_TestForDataSet)
     });
 }
 
-TEST(SampleTest, TestForDataSet3_FileFormat2)
+TEST(SampleTest, DISABLED_TestForDataSet3_FileFormat2)
 {
     AprgModeling modeling;
-    modeling.retrieveDataFromFileWithFileFormat2(ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT2_FILE3);
-    modeling.printRetrievedData();
+    modeling.retrieveDataFromFileWithFileFormat2(ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT2_FILE3);    modeling.printRetrievedData();
     unsigned int numberOfSamples (modeling.getNumberOfSamples());
     modeling.saveRetrievedDataToModelingData(numberOfSamples);
     modeling.saveRetrievedDataToValidationData(numberOfSamples);
