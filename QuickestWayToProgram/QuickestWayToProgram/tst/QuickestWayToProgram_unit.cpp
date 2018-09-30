@@ -155,7 +155,8 @@ TEST(SampleTest, MessageIdCounter)
 
 TEST(SampleTest, ConstTest)
 {
-    #define GLO_NULL 1    void * pointer= (void*)GLO_NULL;
+    #define GLO_NULL 1
+    void * pointer= (void*)GLO_NULL;
     if(pointer==(void*)GLO_NULL)
     {
         cout<<"GLO NULL works! "<<endl;
@@ -170,7 +171,8 @@ TEST(SampleTest, ConstTest)
 
 class UglyDataType
 {
-    public:    unsigned int * uglyPointer; // this is allocated at some point
+    public:
+    unsigned int * uglyPointer; // this is allocated at some point
 };
 void function1(UglyDataType input)
 {

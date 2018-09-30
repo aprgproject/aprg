@@ -75,7 +75,8 @@ public:
 
     template <unsigned char size>
     static constexpr DataTypeToManipulate swapWithBytes(DataTypeToManipulate const)
-    {        static_assert(size != size, "The swapWithSize with this size or type is not supported. Please add a specialization.");
+    {
+        static_assert(size != size, "The swapWithSize with this size or type is not supported. Please add a specialization.");
         return 0;
     }
 
@@ -125,6 +126,7 @@ private:
         return arg & AlbaBitConstants::NIBBLE_MASK;
     }
 };
+
 
 template <>
 template <>

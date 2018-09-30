@@ -49,6 +49,7 @@ TEST(AlbaBitManipulationTest, ConcatenationBytes_ArgumentsSizeLessThanResult)
     // Given
     const unsigned char byte1 = 0xA1;
     const unsigned char byte2 = 0xBA;
+
     // When
     unsigned int result = AlbaBitManipulation<unsigned int>::concatenateBytes(byte1, byte2);
 
@@ -59,7 +60,8 @@ TEST(AlbaBitManipulationTest, ConcatenationBytes_ArgumentsSizeLessThanResult)
 TEST(AlbaBitManipulationTest, ConcatenationBytes_ArgumentsSameSizeAsResult)
 {
     // Given
-    const unsigned char byte1 = 0xA1;    const unsigned char byte2 = 0xBA;
+    const unsigned char byte1 = 0xA1;
+    const unsigned char byte2 = 0xBA;
 
     // When
     unsigned int result = AlbaBitManipulation<unsigned int>::concatenateBytes(byte1, byte2, byte1, byte2);
@@ -96,7 +98,8 @@ TEST(AlbaBitManipulationTest, ConcatenationNibbles_ArgumentsSameSizeAsResult)
 
 TEST(AlbaBitManipulationTest, BytesAreSuccessfullyObtainedWhenU32IsUsed)
 {
-    // Given    const unsigned int input = 0x12345678;
+    // Given
+    const unsigned int input = 0x12345678;
 
     // When
 
@@ -127,7 +130,8 @@ TEST(AlbaBitManipulationTest, NibblesAreSuccessfullyObtainedWhenU32IsUsed)
 
 TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedWhenU16IsUsed)
 {
-    // Given    const short unsigned int input = 0x1234;
+    // Given
+    const short unsigned int input = 0x1234;
 
     // When
 
