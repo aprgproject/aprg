@@ -5,20 +5,17 @@
 
 #include <string>
 
-#define CONFIGURATION_FILE APRG_DIR R"(TcomTools\TcomTools\configuration\configuration.txt)"
-
 namespace tcomToolsGui
 {
-
 struct TcomToolsConfiguration
 {
     TcomToolsConfiguration();
     std::string getGrepCondition() const;
     std::string getGrepFileName() const;
+    void determineVariousLocationsBasedOnCurrentLocation();
     void loadConfigurationFromFile();
     void saveConfigurationToFile() const;
-    bool isExtractStepOn;
-    bool isCombineAndSortStepOn;
+    bool isExtractStepOn;    bool isCombineAndSortStepOn;
     bool isGrepStepOn;
     bool isCropStepOn;
     bool isGrepTcomEnabled;
@@ -60,6 +57,8 @@ struct TcomToolsConfiguration
     std::string prioritizedLogPrint;
     double cropSize;
     tcomToolsBackend::BtsLogSorterConfiguration btsLogSorterConfiguration;
+    std::string configurationFileLocation;
+    std::string locationOf7zExecutable;
 };
 
 }
