@@ -71,11 +71,10 @@ string StepHandler::executeExtractStep(TcomToolsConfiguration const& configurati
     cout<<" (Extract) tempFileFor7z: "<<tempFileFor7zPathHandler.getFullPath()<<endl;
     AprgFileExtractor fileExtractor(
                 configuration.extractGrepCondition,
-                string(R"(")")+configuration.locationOf7zExecutable+R"(")",
+                configuration.locationOf7zExecutable,
                 tempFileFor7zPathHandler.getFullPath());
     AlbaLocalPathHandler pathHandler(inputPath);
-    string outputPath(inputPath);
-    if(pathHandler.isDirectory())
+    string outputPath(inputPath);    if(pathHandler.isDirectory())
     {
         fileExtractor.extractAllRelevantFiles(pathHandler.getFullPath());
     }
