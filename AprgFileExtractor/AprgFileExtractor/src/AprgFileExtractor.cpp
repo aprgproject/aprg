@@ -12,6 +12,7 @@
 #ifndef PATH_OF_7Z_EXECUTABLE
     static_assert(false, "PATH_OF_7Z_EXECUTABLE is not set in cmake");
 #endif
+
 #ifndef PATH_OF_7Z_TEMP_FILE
     static_assert(false, "PATH_OF_7Z_TEMP_FILE is not set in cmake");
 #endif
@@ -71,7 +72,8 @@ void AprgFileExtractor::copyRelativeFilePathsFromCompressedFile(string const& fi
     system(command.c_str());
 
     ifstream tempFile(m_pathOf7zTempFile);
-    string path;    AlbaFileReader fileReader(tempFile);
+    string path;
+    AlbaFileReader fileReader(tempFile);
     while(fileReader.isNotFinished())
     {
         string lineInFile(fileReader.getLine());
@@ -100,6 +102,7 @@ string AprgFileExtractor::extractAll(string const& filePathOfCompressedFile) con
     cout<<"extractAll: "<<outputPathHandler.getImmediateDirectoryName()<<R"(\)"<<endl;
     return outputPathHandler.getFullPath();
 }
+
 string AprgFileExtractor::extractOneFile(string const& filePathOfCompressedFile, string const& relativePathOfFile) const
 {
     AlbaLocalPathHandler compressedFilePathHandler(filePathOfCompressedFile);
@@ -112,6 +115,7 @@ string AprgFileExtractor::extractOneFile(string const& filePathOfCompressedFile,
     cout<<"extractOneFile: "<<outputPathHandler.getFile()<<endl;
     return outputPathHandler.getFullPath();
 }
+
 bool AprgFileExtractor::isRecognizedCompressedFile(string const& extension) const
 {
     return stringHelper::isEqualNotCaseSensitive("zip", extension) ||

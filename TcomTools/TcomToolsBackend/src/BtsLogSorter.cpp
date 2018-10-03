@@ -124,7 +124,8 @@ void BtsLogSorter::deleteTempFilesAndDirectoriesOfOneDayOld() const
             cout<<"Difference: ["<<difference.getPrintableStringFormat1()<<"] deleted temporaryPath:"<<directoryPath<<endl;
             temporaryDirectoryPathHandler.deleteDirectoryWithFilesAndDirectories();
         }
-    }}
+    }
+}
 
 void BtsLogSorter::deleteStartupLog() const
 {
