@@ -16,11 +16,18 @@ namespace alba
 bool AlbaWindowsUserAutomation::isLetterPressed(char const letter) const
 {
     USHORT status = GetAsyncKeyState(::toupper(letter));
-    return (( ( status & 0x8000 ) >> 15 ) == 1) || (( status & 1 ) == 1);
+    return (( ( status & 0x8000 ) >> 15 ) == 1); //|| (( status & 1 ) == 1);
+
+    /*
+     https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getasynckeystate
+If the function succeeds, the return value specifies whether the key was pressed since the last call to GetAsyncKeyState,
+and whether the key is currently up or down. I
+f the most significant bit is set, the key is down, and if the least significant bit is set, the key was pressed after the previous call to GetAsyncKeyState.
+However, you should not rely on this last behavior; for more information, see the Remarks.
+*/
 }
 
-void AlbaWindowsUserAutomation::setStringToClipboard(std::string const& clipBoardText) const
-{
+void AlbaWindowsUserAutomation::setStringToClipboard(std::string const& clipBoardText) const{
     HANDLE hData;
     char *pointerData = NULL;//pointer to allow char copying
 
@@ -39,13 +46,12 @@ string AlbaWindowsUserAutomation::getStringFromClipboard() const
     string stringInClipboard;
     if(OpenClipboard(NULL))
     {
-      HANDLE clipboardData = GetClipboardData(CF_TEXT);
-      CloseClipboard();
-      stringInClipboard = (char*)clipboardData;
+        HANDLE clipboardData = GetClipboardData(CF_TEXT);
+        stringInClipboard = (char*)clipboardData;
+        CloseClipboard();
     }
     return stringInClipboard;
 }
-
 MousePosition AlbaWindowsUserAutomation::getMousePosition() const
 {
     MousePosition position;
@@ -84,10 +90,53 @@ void AlbaWindowsUserAutomation::doLeftClick() const
     });
 }
 
+void AlbaWindowsUserAutomation::doDoubleLeftClick() const
+{
+    doOperation([](INPUT& input)
+    {
+        input.type = INPUT_MOUSE;
+        input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
+    });
+    doOperation([](INPUT& input)
+    {
+        input.type = INPUT_MOUSE;
+        input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
+    });
+    doOperation([](INPUT& input)
+    {
+        input.type = INPUT_MOUSE;
+        input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
+    });
+    doOperation([](INPUT& input)
+    {
+        input.type = INPUT_MOUSE;
+        input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
+    });
+    sleepWithRealisticDelay();
+}
+
+void AlbaWindowsUserAutomation::doLeftClickAt(MousePosition const& position) const
+{
+    setMousePosition(position);
+    doLeftClick();
+}
+
+void AlbaWindowsUserAutomation::doDoubleLeftClickAt(MousePosition const& position) const
+{
+    setMousePosition(position);
+    doDoubleLeftClick();
+}
+
+void AlbaWindowsUserAutomation::doRightClickAt(MousePosition const& position) const
+{
+    setMousePosition(position);
+    doRightClick();
+}
+
+
 void AlbaWindowsUserAutomation::doRightClick() const
 {
-    doOperationWithRealisticDelay([](INPUT& input)
-    {
+    doOperationWithRealisticDelay([](INPUT& input)    {
         input.type = INPUT_MOUSE;
         input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
     });
@@ -154,10 +203,18 @@ void AlbaWindowsUserAutomation::typeString(string const& stringToType) const
     }
 }
 
+void AlbaWindowsUserAutomation::typeControlAndLetterSimultaneously(unsigned int const letter) const
+{
+    pressDownKey(VK_CONTROL);
+    pressDownKey(letter);
+    sleepWithRealisticDelay();
+    pressUpKey(letter);
+    pressUpKey(VK_CONTROL);
+}
+
 string AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() const
 {
-    int const LENGTH = 1000;
-    char className[LENGTH];
+    int const LENGTH = 1000;    char className[LENGTH];
     GetClassName (GetForegroundWindow(), className, LENGTH);
     return string(className);
 }
@@ -211,17 +268,16 @@ void AlbaWindowsUserAutomation::setForegroundWindowWithWindowHandle(HWND const w
     if(windowHandle != nullptr)
     {
         isSuccessful = (bool)SetWindowPos(windowHandle,       // handle to window
-                    HWND_TOPMOST,  // placement-order handle
-                    0,     // horizontal position
-                    0,      // vertical position
-                    0,  // width
-                    0, // height
-                    SWP_SHOWWINDOW|SWP_NOSIZE|SWP_NOMOVE// window-positioning options
-                    );
+                                          HWND_TOPMOST,  // placement-order handle
+                                          0,     // horizontal position
+                                          0,      // vertical position
+                                          0,  // width
+                                          0, // height
+                                          SWP_SHOWWINDOW|SWP_NOSIZE|SWP_NOMOVE// window-positioning options
+                                          );
     }
     if(!isSuccessful)
-    {
-        cout<<"Error in AlbaWindowsUserAutomation::setActiveWindow()"<<endl;
+    {        cout<<"Error in AlbaWindowsUserAutomation::setActiveWindow()"<<endl;
         cout<<AlbaWindowsHelper::getLastFormattedErrorMessage()<<endl;
     }
 }

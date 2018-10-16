@@ -65,11 +65,20 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeString)
 TEST(AlbaWindowsUserAutomationTest, DISABLED_IsLetterPressedTest)
 {
     AlbaWindowsUserAutomation userAutomation;
-    EXPECT_TRUE(userAutomation.isLetterPressed('q'));
+    while(1)
+    {
+        char letter = 'q';
+        bool isPressed = userAutomation.isLetterPressed(letter);
+        cout<<"letter: "<<letter<<" isPressed: "<<isPressed<<endl;
+        if(isPressed)
+        {
+            break;
+        }
+        Sleep(100);
+    }
 }
 
-TEST(AlbaWindowsUserAutomationTest, DISABLED_ShowMousePosition)
-{
+TEST(AlbaWindowsUserAutomationTest, DISABLED_ShowMousePosition){
     AlbaWindowsUserAutomation userAutomation;
     while(1)
     {
