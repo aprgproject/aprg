@@ -20,10 +20,37 @@ using namespace alba;
 using namespace std;
 
 
+TEST(SampleTest, Shit)
+{
+    u32 m_bitContainerForAllocations=1;
+    u32 hellomellow = m_bitContainerForAllocations & 0x2;
+    cout<<"shouldCellBeAllocatedBasedOnDssKepler start:"<<endl;
+    cout<<"shouldCellBeAllocatedBasedOnDssKepler hellomellow: "<<hellomellow<<endl;
+    if(m_bitContainerForAllocations & 0x2 != 0)
+    {
+        cout<<"shouldCellBeAllocatedBasedOnDssKepler true:"<<endl;
+    }
+    else
+    {
+        cout<<"shouldCellBeAllocatedBasedOnDssKepler false:"<<endl;
+    }
+
+    u32 resultInU32 = m_bitContainerForAllocations & 0x2;
+    bool result = resultInU32;
+    if(result)
+    {
+        cout<<"shouldCellBeAllocatedBasedOnDssKepler corrected true:"<<endl;
+    }
+    else
+    {
+        cout<<"shouldCellBeAllocatedBasedOnDssKepler corrected false:"<<endl;
+    }
+}
+
+/*
 TEST(SampleTest, CounterOfCounts)
 {
-    AlbaLocalPathHandler pathHandler(R"(H:\Logs\111_MessagePoolExhaustion\09_09_2018\TC_2_LRM_RL_SETUP_REQ_MSG_queue.log)");
-    ifstream queueLogStream(pathHandler.getFullPath());
+    AlbaLocalPathHandler pathHandler(R"(H:\Logs\111_MessagePoolExhaustion\09_09_2018\TC_2_LRM_RL_SETUP_REQ_MSG_queue.log)");    ifstream queueLogStream(pathHandler.getFullPath());
 
     map<int, string> highestJumpsQueueLengths;
     map<int, string> highestJumpsMsgQueueingTimes;
@@ -86,12 +113,9 @@ TEST(SampleTest, CounterOfCounts)
     }
 }
 
-/*
-
 TEST(SampleTest, MessageIdCounter)
 {
-    AlbaLocalPathHandler pathHandler(R"(H:\Logs\111_MessagePoolExhaustion\09_09_2018\TC_2_LRM_RL_SETUP_REQ_MSG_queue.log)");
-    ifstream queueLogStream(pathHandler.getFullPath());
+    AlbaLocalPathHandler pathHandler(R"(H:\Logs\111_MessagePoolExhaustion\09_09_2018\TC_2_LRM_RL_SETUP_REQ_MSG_queue.log)");    ifstream queueLogStream(pathHandler.getFullPath());
 
     map<unsigned int, unsigned int> lastMsgRcvdToCount;
     map<unsigned int, unsigned int> lastMsgSentToCount;
