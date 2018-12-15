@@ -63,11 +63,10 @@ void AprgFileExtractor::extractAllRelevantFiles(string const& pathOfFileOrDirect
     }
 }
 
-void AprgFileExtractor::copyRelativeFilePathsFromCompressedFile(string const& filePathOfCompressedFile, set<string>& files) const
+void AprgFileExtractor::copyRelativeFilePathsFromCompressedFile(string const& filePathOfCompressedFile, SetOfFilePaths& files) const
 {
     AlbaLocalPathHandler filePathHandler(filePathOfCompressedFile);
-    string command = string(R"(cmd /S /C "")") + m_pathOf7zExecutable + R"(" l -slt ")"
-            + filePathHandler.getFullPath() + R"(" > ")"
+    string command = string(R"(cmd /S /C "")") + m_pathOf7zExecutable + R"(" l -slt ")"            + filePathHandler.getFullPath() + R"(" > ")"
             + m_pathOf7zTempFile + R"("")";
     system(command.c_str());
 
@@ -121,11 +120,11 @@ bool AprgFileExtractor::isRecognizedCompressedFile(string const& extension) cons
     return stringHelper::isEqualNotCaseSensitive("zip", extension) ||
             stringHelper::isEqualNotCaseSensitive("tar", extension) ||
             stringHelper::isEqualNotCaseSensitive("7z", extension) ||
-            stringHelper::isEqualNotCaseSensitive("xz", extension);
+            stringHelper::isEqualNotCaseSensitive("xz", extension)||
+            stringHelper::isEqualNotCaseSensitive("gz", extension);
 }
 
-void AprgFileExtractor::extractAllRelevantFilesInThisDirectory(string const& directoryPath)
-{
+void AprgFileExtractor::extractAllRelevantFilesInThisDirectory(string const& directoryPath){
     AlbaLocalPathHandler directoryPathHandler(directoryPath);
     set<string> listOfFiles;
     set<string> listOfDirectories;
@@ -145,11 +144,10 @@ void AprgFileExtractor::extractAllRelevantFilesInThisDirectory(string const& dir
 void AprgFileExtractor::extractAllRelevantFilesInThisCompressedFile(string const& filePathOfCompressedFile)
 {
     AlbaLocalPathHandler compressedFilePathHandler(filePathOfCompressedFile);
-    if(isTheExtensionXz(compressedFilePathHandler.getExtension()))
+    if(isTheExtensionXzOrGzOrTar(compressedFilePathHandler.getExtension()))
     {
         extractAllFilesRecursively(filePathOfCompressedFile);
-    }
-    else
+    }    else
     {
         extractAllRelevantFilesRecursively(filePathOfCompressedFile);
     }
@@ -158,15 +156,10 @@ void AprgFileExtractor::extractAllRelevantFilesInThisCompressedFile(string const
 void AprgFileExtractor::extractAllFilesRecursively(string const& filePathOfCompressedFile)
 {
     AlbaLocalPathHandler extractedPathHandler(extractAll(filePathOfCompressedFile));
-    if(isRecognizedCompressedFile(extractedPathHandler.getExtension()))
-    {
-        extractAllRelevantFilesInThisDirectory(extractedPathHandler.getFullPath());
-        extractedPathHandler.deleteFile();
-    }
+    extractAllRelevantFilesInThisDirectory(extractedPathHandler.getFullPath());
 }
 
-void AprgFileExtractor::extractAllRelevantFilesRecursively(string const& filePathOfCompressedFile)
-{
+void AprgFileExtractor::extractAllRelevantFilesRecursively(string const& filePathOfCompressedFile){
     set<string> filePaths;
     copyRelativeFilePathsFromCompressedFile(filePathOfCompressedFile, filePaths);
     ProgressCounters::numberOfFilesToBeAnalyzedForExtraction += filePaths.size();
@@ -186,9 +179,9 @@ void AprgFileExtractor::extractAllRelevantFilesRecursively(string const& filePat
     }
 }
 
-bool AprgFileExtractor::isTheExtensionXz(string const& extension) const
+bool AprgFileExtractor::isTheExtensionXzOrGzOrTar(string const& extension) const
 {
-    return stringHelper::isEqualNotCaseSensitive("xz", extension);
+    return stringHelper::isEqualNotCaseSensitive("xz", extension) || stringHelper::isEqualNotCaseSensitive("gz", extension) || stringHelper::isEqualNotCaseSensitive("tar", extension);
 }
 
 }

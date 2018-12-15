@@ -75,10 +75,10 @@ string StepHandler::executeExtractStep(TcomToolsConfiguration const& configurati
                 tempFileFor7zPathHandler.getFullPath());
     AlbaLocalPathHandler pathHandler(inputPath);
     string outputPath(inputPath);
+    cout<<" (Extract) Extracting: "<<pathHandler.getFullPath()<<endl;
     if(pathHandler.isDirectory())
     {
-        fileExtractor.extractAllRelevantFiles(pathHandler.getFullPath());
-    }
+        fileExtractor.extractAllRelevantFiles(pathHandler.getFullPath());    }
     else if(fileExtractor.isRecognizedCompressedFile(pathHandler.getExtension()))
     {
         fileExtractor.extractAllRelevantFiles(pathHandler.getFullPath());
