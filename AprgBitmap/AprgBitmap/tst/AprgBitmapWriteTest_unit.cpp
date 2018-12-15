@@ -24,9 +24,7 @@ TEST(BitmapWriteTest, TestForWritingBitmap)
         snippet.setPixelAt(BitmapXY(i, round((double)100+40*(sin((double)i/10)))), 0x00FF0000);
     }
     bitmap.setSnippetWriteToFile(snippet);
-
 }
-
 
 TEST(BitmapWriteTest, TestForWritingMissingBitmapFile)
 {

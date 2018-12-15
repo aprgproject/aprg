@@ -2,13 +2,14 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(AlbaXYTest, DefaultValuesAreZero)
 {
-    AlbaXY<int> xy;
-    EXPECT_EQ(0, xy.getX());
+    AlbaXY<int> xy;    EXPECT_EQ(0, xy.getX());
     EXPECT_EQ(0, xy.getY());
 }
 
@@ -71,4 +72,6 @@ TEST(AlbaXYTest, XYSaveBottomRightCorner)
     xy.saveMaximumXAndY(AlbaXY<int>(5,5));
 
     EXPECT_EQ(AlbaXY<int>(5,5), xy);
+}
+
 }

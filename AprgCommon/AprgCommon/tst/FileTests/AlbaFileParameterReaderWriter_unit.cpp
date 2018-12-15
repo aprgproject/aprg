@@ -6,13 +6,14 @@
 
 #include <string>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(ReaderWriterParameterTest, EmptyFileTest)
 {
-    ifstream readTestFile(APRG_COMMON_EMPTY_TEST_FILE);
-    ASSERT_TRUE(readTestFile.is_open());
+    ifstream readTestFile(APRG_COMMON_EMPTY_TEST_FILE);    ASSERT_TRUE(readTestFile.is_open());
 
     AlbaFileParameterReader reader(readTestFile);
     ASSERT_TRUE(readTestFile.good());
@@ -92,4 +93,6 @@ TEST(ReaderWriterParameterTest, MapTest)
     EXPECT_EQ("one", retrievedmap.at(1));
     EXPECT_EQ("two", retrievedmap.at(2));
     EXPECT_EQ("three", retrievedmap.at(3));
+}
+
 }

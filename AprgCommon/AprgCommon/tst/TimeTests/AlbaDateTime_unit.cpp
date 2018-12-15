@@ -4,13 +4,14 @@
 
 #include <iostream>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(AlbaDateTimeTest, EmptyDateTimeCanBeCreated)
 {
     AlbaDateTime timeSample;
-
     EXPECT_TRUE(timeSample.isEmpty());
     EXPECT_EQ(0u, timeSample.getYears());
     EXPECT_EQ(1u, timeSample.getMonths());
@@ -211,4 +212,6 @@ TEST(AlbaDateTimeTest, SubtractionOperatorWorksInRealScenario)
 
     AlbaDateTime actualAnswer = timeSample1 - timeSample2;
     EXPECT_EQ(expectedAnswer, actualAnswer);
+}
+
 }

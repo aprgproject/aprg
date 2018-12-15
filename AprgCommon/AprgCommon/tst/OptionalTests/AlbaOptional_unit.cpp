@@ -2,13 +2,14 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(OptionalTest, OptionalCanBeContructedByConstructorWithContentTypeTest)
 {
-    // Given
-    AlbaOptional<int> integerOptional1(1111);
+    // Given    AlbaOptional<int> integerOptional1(1111);
 
     // When
     // Then
@@ -227,4 +228,6 @@ TEST(OptionalTest, OptionalCanBeMovedByMoveContructorTest)
     EXPECT_FALSE((bool)integerOptional1);
     EXPECT_TRUE((bool)integerOptional2);
     EXPECT_EQ(1111, integerOptional2.get());
+}
+
 }
