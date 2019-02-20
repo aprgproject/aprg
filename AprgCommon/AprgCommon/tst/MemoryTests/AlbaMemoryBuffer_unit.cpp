@@ -9,7 +9,8 @@ namespace alba
 
 TEST(AlbaMemoryBufferTest, DefaultValuesAreClear)
 {
-    AlbaMemoryBuffer buffer;    EXPECT_FALSE(buffer);
+    AlbaMemoryBuffer buffer;
+    EXPECT_FALSE(buffer);
     EXPECT_FALSE(buffer.hasContent());
     EXPECT_EQ(0u, buffer.getSize());
 }
@@ -131,7 +132,8 @@ TEST(AlbaMemoryBufferTest, DataForMemoryBufferCanBeWrittenConsecutivelyOutsideTh
     memcpy(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(4), inputBuffer2, 4);
 
     EXPECT_TRUE(buffer);
-    EXPECT_TRUE(buffer.hasContent());    EXPECT_EQ(8u, buffer.getSize());
+    EXPECT_TRUE(buffer.hasContent());
+    EXPECT_EQ(8u, buffer.getSize());
 
     unsigned char* reader = reinterpret_cast<unsigned char*>(buffer.getBufferPointer());
     EXPECT_EQ(0x12u, reader[0]);

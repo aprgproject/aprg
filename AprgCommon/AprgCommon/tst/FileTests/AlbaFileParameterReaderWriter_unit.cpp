@@ -13,7 +13,8 @@ namespace alba
 
 TEST(ReaderWriterParameterTest, EmptyFileTest)
 {
-    ifstream readTestFile(APRG_COMMON_EMPTY_TEST_FILE);    ASSERT_TRUE(readTestFile.is_open());
+    ifstream readTestFile(APRG_COMMON_EMPTY_TEST_FILE);
+    ASSERT_TRUE(readTestFile.is_open());
 
     AlbaFileParameterReader reader(readTestFile);
     ASSERT_TRUE(readTestFile.good());

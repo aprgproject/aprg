@@ -12,7 +12,8 @@ namespace alba
 
 TEST(AlbaDateTimeHelperTest, LeapYearsCanBeDetermined)
 {
-    EXPECT_FALSE(isLeapYear(3));    EXPECT_TRUE(isLeapYear(4));
+    EXPECT_FALSE(isLeapYear(3));
+    EXPECT_TRUE(isLeapYear(4));
     EXPECT_FALSE(isLeapYear(5));
     EXPECT_FALSE(isLeapYear(99));
     EXPECT_FALSE(isLeapYear(100));
@@ -238,3 +239,4 @@ TEST(AlbaDateTimeHelperTest, ValuesCanBeReorganizedIfThereIsUnderflow)
 }
 
 }
+

@@ -12,7 +12,8 @@ namespace alba
 
 TEST(AlbaRandomizer, RandomUniformValuesAreWithinLimits)
 {
-    AlbaRandomizer randomizer;    int const minimumRandomValue(0);
+    AlbaRandomizer randomizer;
+    int const minimumRandomValue(0);
     int const maximumRandomValue(9);
     for(int i=0; i<1000; i++)
     {

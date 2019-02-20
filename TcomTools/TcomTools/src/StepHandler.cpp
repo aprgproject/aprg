@@ -78,7 +78,8 @@ string StepHandler::executeExtractStep(TcomToolsConfiguration const& configurati
     cout<<" (Extract) Extracting: "<<pathHandler.getFullPath()<<endl;
     if(pathHandler.isDirectory())
     {
-        fileExtractor.extractAllRelevantFiles(pathHandler.getFullPath());    }
+        fileExtractor.extractAllRelevantFiles(pathHandler.getFullPath());
+    }
     else if(fileExtractor.isRecognizedCompressedFile(pathHandler.getExtension()))
     {
         fileExtractor.extractAllRelevantFiles(pathHandler.getFullPath());

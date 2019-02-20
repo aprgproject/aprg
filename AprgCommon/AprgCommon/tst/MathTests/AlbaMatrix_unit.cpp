@@ -12,6 +12,7 @@ namespace alba
 TEST(AlbaMatrixTest, AlbaMatrixCanBeCreatedByDefaultConstructor)
 {
     AlbaMatrix<unsigned int> matrix;
+
     EXPECT_EQ(0u, matrix.getColumns());
     EXPECT_EQ(0u, matrix.getRows());
 }

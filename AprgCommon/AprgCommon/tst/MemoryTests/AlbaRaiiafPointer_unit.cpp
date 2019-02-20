@@ -11,7 +11,8 @@ namespace alba
 
 TEST(AlbaRaiiafPointerTest, IntegerTest)
 {
-    AlbaRaiiafPointer integerPointer;    integerPointer.setAndAllocateNewContent<int>(0xA1BA);
+    AlbaRaiiafPointer integerPointer;
+    integerPointer.setAndAllocateNewContent<int>(0xA1BA);
     EXPECT_EQ(integerPointer.get<int>(), 0xA1BA);
     EXPECT_EQ(integerPointer.getReference<int>(), 0xA1BA);
     integerPointer.deAllocate<int>();

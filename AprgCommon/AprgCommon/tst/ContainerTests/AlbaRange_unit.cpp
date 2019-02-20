@@ -11,7 +11,8 @@ namespace alba
 
 TEST(AlbaRangeTest, TraverseIsNotInfiniteWhenRangeIsEmpty)
 {
-    AlbaRange<int> range;    vector<int> traversedValues;
+    AlbaRange<int> range;
+    vector<int> traversedValues;
     range.traverse([&](int const traverseValue)
     {
         traversedValues.emplace_back(traverseValue);

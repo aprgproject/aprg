@@ -13,6 +13,7 @@ namespace alba
 TEST(GetNewStringFromStringTest, FindAndReplaceStrings)
 {
     string string1("Mark is the no#1 guy in the world. Mark is also the nicest guy.");
+
     EXPECT_FALSE(transformReplaceStringIfFound(string1, "alba", "ALBA"));
     EXPECT_TRUE(transformReplaceStringIfFound(string1, "Mark", "MARK"));
     EXPECT_EQ("MARK is the no#1 guy in the world. MARK is also the nicest guy.", string1);
@@ -712,3 +713,4 @@ TEST(ConvertToStringTest, ConvertNumberToStringWithFillCharacter)
 }
 
 }
+

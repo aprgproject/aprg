@@ -9,7 +9,8 @@ namespace alba
 
 TEST(OptionalTest, OptionalCanBeContructedByConstructorWithContentTypeTest)
 {
-    // Given    AlbaOptional<int> integerOptional1(1111);
+    // Given
+    AlbaOptional<int> integerOptional1(1111);
 
     // When
     // Then
@@ -126,7 +127,8 @@ TEST(OptionalTest, OptionalCanBeCopiedTest)
     // Then
     EXPECT_EQ(1111, (int)integerOptional1);
     EXPECT_EQ(1111, integerOptional1.get());
-    EXPECT_EQ(1111, (int)integerOptional2);    EXPECT_EQ(1111, integerOptional2.get());
+    EXPECT_EQ(1111, (int)integerOptional2);
+    EXPECT_EQ(1111, integerOptional2.get());
 }
 
 TEST(OptionalTest, OptionalReferenceCanBeCopiedTest)
@@ -142,7 +144,8 @@ TEST(OptionalTest, OptionalReferenceCanBeCopiedTest)
     // Then
     EXPECT_EQ(2222, (int)integerOptional1);
     EXPECT_EQ(2222, integerOptional1.get());
-    EXPECT_EQ(2222, (int)integerOptional2);    EXPECT_EQ(2222, integerOptional2.get());
+    EXPECT_EQ(2222, (int)integerOptional2);
+    EXPECT_EQ(2222, integerOptional2.get());
     EXPECT_EQ(2222, (int)integerOptional3);
     EXPECT_EQ(2222, integerOptional3.get());
 }
@@ -159,7 +162,8 @@ TEST(OptionalTest, OptionalCanBeAssignedTest)
     // Then
     EXPECT_EQ(1111, (int)integerOptional1);
     EXPECT_EQ(1111, integerOptional1.get());
-    EXPECT_EQ(1111, (int)integerOptional2);    EXPECT_EQ(1111, integerOptional2.get());
+    EXPECT_EQ(1111, (int)integerOptional2);
+    EXPECT_EQ(1111, integerOptional2.get());
 }
 
 TEST(OptionalTest, OptionalReferenceCanBeAssignedTest)
@@ -176,7 +180,8 @@ TEST(OptionalTest, OptionalReferenceCanBeAssignedTest)
     // Then
     EXPECT_EQ(2222, (int)integerOptional1);
     EXPECT_EQ(2222, integerOptional1.get());
-    EXPECT_EQ(2222, (int)integerOptional2);    EXPECT_EQ(2222, integerOptional2.get());
+    EXPECT_EQ(2222, (int)integerOptional2);
+    EXPECT_EQ(2222, integerOptional2.get());
     EXPECT_EQ(2222, (int)integerOptional3);
     EXPECT_EQ(2222, integerOptional3.get());
 }
@@ -231,3 +236,4 @@ TEST(OptionalTest, OptionalCanBeMovedByMoveContructorTest)
 }
 
 }
+

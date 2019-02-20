@@ -26,6 +26,7 @@ TEST(BitmapWriteTest, TestForWritingBitmap)
     bitmap.setSnippetWriteToFile(snippet);
 }
 
+
 TEST(BitmapWriteTest, TestForWritingMissingBitmapFile)
 {
     AprgBitmap bitmap("FileThatDoesNotExist");

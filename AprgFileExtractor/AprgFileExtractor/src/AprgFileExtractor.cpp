@@ -66,7 +66,8 @@ void AprgFileExtractor::extractAllRelevantFiles(string const& pathOfFileOrDirect
 void AprgFileExtractor::copyRelativeFilePathsFromCompressedFile(string const& filePathOfCompressedFile, SetOfFilePaths& files) const
 {
     AlbaLocalPathHandler filePathHandler(filePathOfCompressedFile);
-    string command = string(R"(cmd /S /C "")") + m_pathOf7zExecutable + R"(" l -slt ")"            + filePathHandler.getFullPath() + R"(" > ")"
+    string command = string(R"(cmd /S /C "")") + m_pathOf7zExecutable + R"(" l -slt ")"
+            + filePathHandler.getFullPath() + R"(" > ")"
             + m_pathOf7zTempFile + R"("")";
     system(command.c_str());
 
@@ -124,7 +125,8 @@ bool AprgFileExtractor::isRecognizedCompressedFile(string const& extension) cons
             stringHelper::isEqualNotCaseSensitive("gz", extension);
 }
 
-void AprgFileExtractor::extractAllRelevantFilesInThisDirectory(string const& directoryPath){
+void AprgFileExtractor::extractAllRelevantFilesInThisDirectory(string const& directoryPath)
+{
     AlbaLocalPathHandler directoryPathHandler(directoryPath);
     set<string> listOfFiles;
     set<string> listOfDirectories;
@@ -147,7 +149,8 @@ void AprgFileExtractor::extractAllRelevantFilesInThisCompressedFile(string const
     if(isTheExtensionXzOrGzOrTar(compressedFilePathHandler.getExtension()))
     {
         extractAllFilesRecursively(filePathOfCompressedFile);
-    }    else
+    }
+    else
     {
         extractAllRelevantFilesRecursively(filePathOfCompressedFile);
     }
@@ -159,7 +162,8 @@ void AprgFileExtractor::extractAllFilesRecursively(string const& filePathOfCompr
     extractAllRelevantFilesInThisDirectory(extractedPathHandler.getFullPath());
 }
 
-void AprgFileExtractor::extractAllRelevantFilesRecursively(string const& filePathOfCompressedFile){
+void AprgFileExtractor::extractAllRelevantFilesRecursively(string const& filePathOfCompressedFile)
+{
     set<string> filePaths;
     copyRelativeFilePathsFromCompressedFile(filePathOfCompressedFile, filePaths);
     ProgressCounters::numberOfFilesToBeAnalyzedForExtraction += filePaths.size();

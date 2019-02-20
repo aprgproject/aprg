@@ -65,7 +65,8 @@ public:
 
     operator bool() const
     {
-        return m_hasContent;    }
+        return m_hasContent;
+    }
 
     operator ContentType() const
     {
@@ -80,7 +81,8 @@ public:
         }
     }
 
-    void createObjectUsingDefaultConstructor()    {
+    void createObjectUsingDefaultConstructor()
+    {
         m_hasContent = true;
         m_contentPointer.reset(new ContentType);
     }
@@ -94,7 +96,8 @@ public:
     void setReference(ContentType& content)
     {
         m_hasContent = true;
-        m_contentPointer.reset(new ContentType(content));    }
+        m_contentPointer.reset(new ContentType(content));
+    }
 
     void clear()
     {
@@ -134,7 +137,8 @@ public:
         }
     }
 
-private:    bool m_hasContent;
+private:
+    bool m_hasContent;
     std::unique_ptr<ContentType> m_contentPointer;
 };
 
@@ -146,7 +150,8 @@ public:
 
     AlbaOptional()
         : m_hasContent(false)
-        , m_contentPointer(nullptr)    {}
+        , m_contentPointer(nullptr)
+    {}
 
     AlbaOptional(ContentType & content)
         : m_hasContent(true)
@@ -175,7 +180,8 @@ public:
     void setReference(ContentType& content)
     {
         m_hasContent = true;
-        m_contentPointer = &content;    }
+        m_contentPointer = &content;
+    }
 
     void clear()
     {
@@ -193,7 +199,8 @@ public:
         if(m_hasContent && isContentPointerValid())
         {
             return *m_contentPointer;
-        }        return m_empty;
+        }
+        return m_empty;
     }
 
     operator bool() const
@@ -206,7 +213,8 @@ public:
         if(m_hasContent && isContentPointerValid())
         {
             return *m_contentPointer;
-        }        return m_empty;
+        }
+        return m_empty;
     }
 
 private:

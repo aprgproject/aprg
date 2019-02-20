@@ -17,7 +17,8 @@ TEST(UnionFindTest, UnionFindUnsignedIntegerTest)
     UnionFindUsingMap<unsigned int> unionFind;
     unionFind.connect(4, 3);
     unionFind.connect(3, 8);
-    unionFind.connect(6, 5);    unionFind.connect(9, 4);
+    unionFind.connect(6, 5);
+    unionFind.connect(9, 4);
     unionFind.connect(2, 1);
 
     EXPECT_TRUE(unionFind.isConnected(8,9));
