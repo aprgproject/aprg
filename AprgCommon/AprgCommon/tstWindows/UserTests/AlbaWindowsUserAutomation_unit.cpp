@@ -11,7 +11,8 @@ using namespace std;
 TEST(AlbaWindowsUserAutomationTest, DISABLED_DeleteThisTestDontGoToSleepSetMouseTest)
 {
     AlbaWindowsUserAutomation userAutomation;
-    for(int x=0; x<300; x+=10)    {
+    for(int x=0; x<300; x+=10)
+    {
         MousePosition position{x,x};
         userAutomation.setMousePosition(position);
         userAutomation.sleep(10000);

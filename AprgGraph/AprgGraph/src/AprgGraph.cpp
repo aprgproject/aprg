@@ -46,7 +46,8 @@ void AprgGraph::drawContinuousPoints(Points const& points, unsigned int const co
 
     Points connectedPointsInBitmap(twoDimensionsHelper::getConnectedPointsUsingALine(pointsInBitmap, 1));
     for(Point const& pointInBitmap : connectedPointsInBitmap)
-    {        m_bitmapSnippet.setPixelAt(convertBitmapPointToBitmapXY(pointInBitmap), color);
+    {
+        m_bitmapSnippet.setPixelAt(convertBitmapPointToBitmapXY(pointInBitmap), color);
     }
 }
 
