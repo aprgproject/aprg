@@ -25,6 +25,7 @@ public:
         std::copy(coefficients.begin(), coefficients.begin()+limit, m_coefficients.begin());
         saveFirstDerivativeCoefficients();
     }
+
     Line getTangentLineAt(double const x) const
     {
         double slope = getSlopeAt(x);

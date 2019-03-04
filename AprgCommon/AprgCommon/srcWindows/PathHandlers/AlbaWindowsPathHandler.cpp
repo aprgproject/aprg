@@ -34,7 +34,8 @@ AlbaWindowsPathHandler::AlbaWindowsPathHandler(string const& path)
 AlbaWindowsPathHandler::~AlbaWindowsPathHandler()
 {}
 
-void AlbaWindowsPathHandler::clear(){
+void AlbaWindowsPathHandler::clear()
+{
     AlbaPathHandler::clear();
     m_driveOrRoot.clear();
     m_foundInLocalSystem = false;

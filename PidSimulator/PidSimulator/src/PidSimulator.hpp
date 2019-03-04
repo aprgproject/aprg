@@ -4,6 +4,7 @@
 #include <PidSimulatorConfiguration.hpp>
 
 #include <vector>
+
 namespace alba
 {
 
@@ -20,12 +21,16 @@ public:
     void generateStepDownForInput();
     void generateRandomForInput();
     void calculateAndGenerateOutputImage();
+    double computeFromMachsModel(double const inputDemandSample, double const psuedoMaxTxPower, double & adjustedDemand);
+    double computeFromMachsModel1(double const inputDemandSample, double const psuedoMaxTxPower, double & adjustedDemand);
+    double computeFromMachsModel2(double const inputDemandSample, double const psuedoMaxTxPower, double & adjustedDemand);
 
 private:
     void updateAllMaxWithBuffer(int& xLeftMax, int& xRightMax, int& yBottomMax, int& yTopMax);
     void updateMaxWithBuffer(int& lowerValue, int& higherValue);
     void calculateMagnificationAndOffset(
-            double const xLeftMax,            double const xRightMax,
+            double const xLeftMax,
+            double const xRightMax,
             double const yBottomMax,
             double const yTopMax,
             double const bitmapSizeInX,
@@ -48,7 +53,7 @@ private:
     unsigned int m_yOffsetToGraph;
     double m_xGridInterval;
     double m_yGridInterval;
-    std::vector<double> m_input;
+    std::vector<double> m_inputSample;
     AlbaRandomizer m_randomizer;
 };
 

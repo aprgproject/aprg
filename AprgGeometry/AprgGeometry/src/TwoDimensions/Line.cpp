@@ -7,6 +7,7 @@
 #include <cmath>
 #include <iterator>
 #include <set>
+
 using namespace std;
 
 namespace alba
@@ -41,7 +42,8 @@ Line::Line(Point const& first, Point const& second)
         m_slope = static_cast<double>(INFINITY);
         m_yIntercept = 0;
         m_xIntercept = first.getX();
-        m_aCoefficient = deltaY;        m_bCoefficient = 0;
+        m_aCoefficient = deltaY;
+        m_bCoefficient = 0;
         m_cCoefficient = -first.getX()*deltaY;
         break;
     default:
@@ -72,7 +74,8 @@ Line::Line(double const aCoefficient, double const bCoefficient, double const cC
         m_slope = static_cast<double>(INFINITY);
         m_yIntercept = 0;
         m_xIntercept = -cCoefficient/aCoefficient;
-        break;    default:
+        break;
+    default:
         m_slope = -aCoefficient/bCoefficient;
         m_yIntercept = -cCoefficient/bCoefficient;
         m_xIntercept = -cCoefficient/aCoefficient;
