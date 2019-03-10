@@ -30,10 +30,10 @@ bool isWhiteSpace(std::string const& mainString);
 bool isNewline(std::string const& mainString);
 bool isIdentifier(std::string const& mainString);
 bool isOneWord(std::string const& mainString);
+bool isWildcardMatch(std::string const& mainString, std::string const& wildcard, unsigned int const mainStringIndex=0, unsigned int const wildcardIndex=0);
 
 void fetchArgumentsToStringInMain(strings & argumentsInMain, int const argc, char const * const argv[]);
-bool transformReplaceStringIfFound(std::string & mainString, std::string const& toReplace, std::string const& replaceWith);
-enum class SplitStringType
+bool transformReplaceStringIfFound(std::string & mainString, std::string const& toReplace, std::string const& replaceWith);enum class SplitStringType
 {
     WithDelimeters,
     WithoutDelimeters

@@ -19,12 +19,11 @@ namespace alba
 
 unsigned int stringHelper::getLevenshteinDistance(string const& mainString, string const& string2)
 {
-    unsigned int mainStringLength = mainString.size();
-    unsigned int string2Length = string2.size();
+    unsigned int mainStringLength = static_cast<unsigned int>(mainString.size());
+    unsigned int string2Length = static_cast<unsigned int>(string2.size());
 
     vector<unsigned int> current(string2Length + 1);
     vector<unsigned int> previous(string2Length + 1);
-
     unsigned int i = 0;
     generate(previous.begin(), previous.end(), [&] {return i++; });
 
@@ -73,10 +72,49 @@ string stringHelper::getRandomAlphaNumericString(unsigned int const length)
     return result;
 }
 
+bool stringHelper::isWildcardMatch(string const& mainString, string const& wildcard, unsigned int const mainStringIndex, unsigned int const wildcardIndex)
+{
+    bool result(false);
+    bool isMainStringDone = mainStringIndex >= mainString.size();
+    bool isWildcardDone = wildcardIndex >= wildcard.size();
+    if(isMainStringDone && isWildcardDone)
+    {
+        result = true;
+    }
+    else if(isWildcardDone)
+    {
+        result = false;
+    }
+    else if(isMainStringDone)
+    {
+        bool isWildcardDoneOnNextIndex = wildcardIndex+1 >= wildcard.size();
+        if (wildcard[wildcardIndex] == '*' && isWildcardDoneOnNextIndex)
+        {
+            result = true;
+        }
+        else
+        {
+            result = false;
+        }
+    }
+    else if(wildcard[wildcardIndex] == mainString[mainStringIndex])
+    {
+        result = isWildcardMatch(mainString, wildcard, mainStringIndex+1, wildcardIndex+1);
+    }
+    else if(wildcard[wildcardIndex] == '?')
+    {
+        result = isWildcardMatch(mainString, wildcard, mainStringIndex+1, wildcardIndex+1) || isWildcardMatch(mainString, wildcard, mainStringIndex, wildcardIndex+1);
+    }
+    else if(wildcard[wildcardIndex] == '*')
+    {
+        result = isWildcardMatch(mainString, wildcard, mainStringIndex, wildcardIndex+1) || isWildcardMatch(mainString, wildcard, mainStringIndex+1, wildcardIndex);
+    }
+    return result;
+}
+
 bool stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(string const& mainString, string const& string2)
 {
-    return isNotNpos(static_cast<int>(mainString.find(string2)));
-}
+    return isNotNpos(static_cast<int>(mainString.find(string2)));}
 
 bool stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(string const& mainString, string const& string2)
 {
@@ -183,12 +221,11 @@ std::string stringHelper::combineStrings(stringHelper::strings const& listOfStri
 {
     string result = accumulate(listOfStrings.cbegin(), listOfStrings.cend(), string(""), [&delimiters](string const& previousResult, string const& currentString)
     {
-        return string(previousResult + currentString + delimiters);
-    });
+            return string(previousResult + currentString + delimiters);
+});
 
     if(result.size() > delimiters.size())
-    {
-        result = result.substr(0, result.size() - delimiters.size());
+    {        result = result.substr(0, result.size() - delimiters.size());
     }
     return result;
 }
@@ -531,21 +568,20 @@ string stringHelper::getStringAndReplaceNonAlphanumericCharactersToUnderScore(st
     bool isPreviousCharacterNonAlphanumeric = false;
     string correctPath = accumulate(path.cbegin(), path.cend(), string(""), [&isPreviousCharacterNonAlphanumeric](string const& currentString, char const currentCharacter)
     {
-        string partialResult(currentString);
-        if(!isLetterOrNumber(currentCharacter))
-        {
+            string partialResult(currentString);
+            if(!isLetterOrNumber(currentCharacter))
+    {
             if(!isPreviousCharacterNonAlphanumeric){partialResult += "_";}
-        }
-        else
-        {
+}
+            else
+    {
             partialResult += currentCharacter;
-        }
-        isPreviousCharacterNonAlphanumeric = !isLetterOrNumber(currentCharacter);
-        return partialResult;
-    });
+}
+            isPreviousCharacterNonAlphanumeric = !isLetterOrNumber(currentCharacter);
+            return partialResult;
+});
     return correctPath;
 }
-
 string stringHelper::getNumberAfterThisString(string const& mainString, string const& stringToSearch)
 {
     string result;
@@ -694,32 +730,29 @@ string stringHelper::getCorrectPathWithoutUrlParameters(string const& path)
     unsigned int indexOfQuestionMark = path.find_first_of("?");
     if(stringHelper::isNotNpos(static_cast<int>(indexOfQuestionMark)))
     {
-            correctPathWithoutUrlParameters = path.substr(0, indexOfQuestionMark);
+        correctPathWithoutUrlParameters = path.substr(0, indexOfQuestionMark);
     }
     return correctPathWithoutUrlParameters;
 }
-
 string stringHelper::getUrlParameters(string const& path)
 {
     string urlParameters;
     unsigned int indexOfQuestionMark = path.find_first_of("?");
     if(stringHelper::isNotNpos(static_cast<int>(indexOfQuestionMark)))
     {
-            urlParameters = path.substr(indexOfQuestionMark);
+        urlParameters = path.substr(indexOfQuestionMark);
     }
     return urlParameters;
 }
-
 string stringHelper::getCorrectPathWithReplacedSlashCharacters(string const& path, string const& slashCharacterString)
 {
     bool isSlashDetected = false;
     string correctPath = accumulate(path.cbegin(), path.cend(), string(""),
-                                         [&isSlashDetected, slashCharacterString]
-                                         (string const& currentString, char const currentCharacter)
+                                    [&isSlashDetected, slashCharacterString]
+                                    (string const& currentString, char const currentCharacter)
     {
         string partialResult(currentString);
-        if(isSlashCharacter(currentCharacter))
-        {
+        if(isSlashCharacter(currentCharacter))        {
             if(!isSlashDetected){partialResult += slashCharacterString;}
         }
         else

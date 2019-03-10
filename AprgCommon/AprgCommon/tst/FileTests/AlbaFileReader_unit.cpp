@@ -11,10 +11,20 @@ using namespace std;
 namespace alba
 {
 
+TEST(FileReadTest, ReadFromTestFile_SetAndGetBufferSizeWorks)
+{
+    ifstream inputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ASSERT_TRUE(inputTestFile.is_open());
+
+    AlbaFileReader fileReader(inputTestFile);
+    EXPECT_EQ(10000, fileReader.getMaxBufferSize());
+    fileReader.setMaxBufferSize(200);
+    EXPECT_EQ(200, fileReader.getMaxBufferSize());
+}
+
 TEST(FileReadTest, ReadFromTestFile_ReadLineUsingVariousCharacters)
 {
-    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);
-    ofstream testFile(commonTestFileToRead.getFullPath());
+    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);    ofstream testFile(commonTestFileToRead.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "1         " << endl;
     testFile << "12        " << endl;
@@ -106,12 +116,16 @@ TEST(FileReadTest, ReadFromTestFile_ReadSingleCharacterFromBinaryFile)
     EXPECT_EQ('#' ,fileReader.getCharacter());
     EXPECT_EQ(' ' ,fileReader.getCharacter());
     EXPECT_EQ('\t' ,fileReader.getCharacter());
+#ifdef OS_WINDOWS
     EXPECT_EQ('\r' ,fileReader.getCharacter());
     EXPECT_EQ('\n' ,fileReader.getCharacter());
+#endif
+#ifdef OS_LINUX
+   EXPECT_EQ('\n' ,fileReader.getCharacter());
+#endif
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(fileReader.getCharacter(), 0);
-    EXPECT_FALSE(fileReader.isNotFinished());
-}
+    EXPECT_FALSE(fileReader.isNotFinished());}
 
 TEST(FileReadTest, ReadFromTestFile_ReadMultipleCharacters)
 {
@@ -129,22 +143,67 @@ TEST(FileReadTest, ReadFromTestFile_ReadMultipleCharacters)
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     unsigned int numberOfCharacters=3;
-    EXPECT_EQ("123", string(fileReader.getCharacters(numberOfCharacters), numberOfCharacters));
+    char* charPointer;
+    charPointer = fileReader.getCharacters(numberOfCharacters);
+    EXPECT_EQ("123", string(charPointer, numberOfCharacters));
     EXPECT_EQ(3u, numberOfCharacters);
-    EXPECT_EQ("!@#", string(fileReader.getCharacters(numberOfCharacters), numberOfCharacters));
+    charPointer = fileReader.getCharacters(numberOfCharacters);
+    EXPECT_EQ("!@#", string(charPointer, numberOfCharacters));
     EXPECT_EQ(3u, numberOfCharacters);
-    EXPECT_EQ(" \t\r", string(fileReader.getCharacters(numberOfCharacters), numberOfCharacters));
+
+#ifdef OS_WINDOWS
+    charPointer = fileReader.getCharacters(numberOfCharacters);
+    EXPECT_EQ(" \t\r", string(charPointer, numberOfCharacters));
     EXPECT_EQ(3u, numberOfCharacters);
     EXPECT_TRUE(fileReader.isNotFinished());
-    EXPECT_EQ("\n", string(fileReader.getCharacters(numberOfCharacters), 1));
+    charPointer = fileReader.getCharacters(numberOfCharacters);
+    EXPECT_EQ("\n", string(charPointer, numberOfCharacters));
     EXPECT_EQ(1u, numberOfCharacters);
+#endif
+#ifdef OS_LINUX
+    charPointer = fileReader.getCharacters(numberOfCharacters);
+    EXPECT_EQ(" \t\n", string(charPointer, numberOfCharacters));
+    EXPECT_EQ(3u, numberOfCharacters);
+    EXPECT_TRUE(fileReader.isNotFinished());
+    charPointer = fileReader.getCharacters(numberOfCharacters);
+    EXPECT_EQ("", string(charPointer, numberOfCharacters));
+    EXPECT_EQ(0, numberOfCharacters);
+#endif
+    EXPECT_FALSE(fileReader.isNotFinished());
+}
+
+TEST(FileReadTest, ReadFromTestFile_RequestToReadMultipleCharactersThatIsTheBeyondBufferSize)
+{
+    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream testFile(commonTestFileToRead.getFullPath());
+    ASSERT_TRUE(testFile.is_open());
+    testFile << "12345";
+    testFile.close();
+
+    ifstream inputTestFile(commonTestFileToRead.getFullPath(), ios::binary);
+    ASSERT_TRUE(inputTestFile.is_open());
+
+    AlbaFileReader fileReader(inputTestFile);
+    fileReader.setMaxBufferSize(3);
+    ASSERT_TRUE(inputTestFile.good());
+    ASSERT_FALSE(inputTestFile.eof());
+    EXPECT_TRUE(fileReader.isNotFinished());
+    unsigned int numberOfCharacters=20000;
+    char* charPointer;
+    charPointer = fileReader.getCharacters(numberOfCharacters);
+    EXPECT_EQ("123", string(charPointer, numberOfCharacters));
+    EXPECT_EQ(3u, numberOfCharacters);
+    EXPECT_TRUE(fileReader.isNotFinished());
+    numberOfCharacters=20000;
+    charPointer = fileReader.getCharacters(numberOfCharacters);
+    EXPECT_EQ("45", string(charPointer, numberOfCharacters));
+    EXPECT_EQ(2, numberOfCharacters);
     EXPECT_FALSE(fileReader.isNotFinished());
 }
 
 TEST(FileReadTest, ReadFromTestFile_ReadTwoByteNumbers)
 {
-    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);
-    ofstream testFile(commonTestFileToRead.getFullPath());
+    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);    ofstream testFile(commonTestFileToRead.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile.put(0x01);
     testFile.put(0x23);

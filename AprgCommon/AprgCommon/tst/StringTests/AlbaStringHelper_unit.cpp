@@ -596,10 +596,21 @@ TEST(BooleanStringTest, IsOneWordTest)
     EXPECT_FALSE(isOneWord(testString5));
 }
 
+TEST(BooleanStringTest, IsWildcardMatchTest)
+{
+    EXPECT_TRUE(isWildcardMatch("alba", "a*ba"));
+    EXPECT_TRUE(isWildcardMatch("albaisthebest", "al?ba*"));
+    EXPECT_FALSE(isWildcardMatch("alba", "a*m"));
+    EXPECT_FALSE(isWildcardMatch("markalba", "*mark"));
+    EXPECT_TRUE(isWildcardMatch("markisthebest", "mark*best"));
+    EXPECT_FALSE(isWildcardMatch("alba", "alb*b?a"));
+    EXPECT_TRUE(isWildcardMatch("alba", "*l*a"));
+    EXPECT_TRUE(isWildcardMatch("alba", "*?l*a"));
+}
+
 TEST(ConvertFromStringTest, ConvertStringToBool)
 {
-    EXPECT_TRUE(convertStringToBool("true"));
-    EXPECT_FALSE(convertStringToBool("false"));
+    EXPECT_TRUE(convertStringToBool("true"));    EXPECT_FALSE(convertStringToBool("false"));
     EXPECT_TRUE(convertStringToBool("TruE"));
     EXPECT_FALSE(convertStringToBool("fAlse"));
     EXPECT_FALSE(convertStringToBool("0"));
