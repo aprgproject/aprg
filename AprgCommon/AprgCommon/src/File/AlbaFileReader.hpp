@@ -8,6 +8,7 @@
 
 namespace alba
 {
+
 class AlbaFileReader
 {
 public:
@@ -37,4 +38,5 @@ private:
     std::vector<char> m_characterBuffer;
     std::ifstream& m_stream;
 };
+
 }//namespace alba

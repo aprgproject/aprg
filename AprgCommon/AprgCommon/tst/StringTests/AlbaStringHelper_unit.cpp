@@ -610,7 +610,8 @@ TEST(BooleanStringTest, IsWildcardMatchTest)
 
 TEST(ConvertFromStringTest, ConvertStringToBool)
 {
-    EXPECT_TRUE(convertStringToBool("true"));    EXPECT_FALSE(convertStringToBool("false"));
+    EXPECT_TRUE(convertStringToBool("true"));
+    EXPECT_FALSE(convertStringToBool("false"));
     EXPECT_TRUE(convertStringToBool("TruE"));
     EXPECT_FALSE(convertStringToBool("fAlse"));
     EXPECT_FALSE(convertStringToBool("0"));

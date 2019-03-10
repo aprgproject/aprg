@@ -20,7 +20,8 @@ AlbaFileReader::AlbaFileReader(ifstream& stream)
 }
 
 bool AlbaFileReader::isNotFinished()
-{    //return (!m_stream.eof()) && (m_stream.peek()!=EOF);
+{
+    //return (!m_stream.eof()) && (m_stream.peek()!=EOF);
     return !m_stream.eof();
 }
 
@@ -44,7 +45,8 @@ char* AlbaFileReader::getCharacters(unsigned int& numberOfCharacters)
     return getCharacterBufferPointer();
 }
 template <typename NumberType>
-NumberType AlbaFileReader::getTwoByteData(){
+NumberType AlbaFileReader::getTwoByteData()
+{
     return getData<NumberType, 2>();
 }
 
@@ -93,6 +95,7 @@ NumberType AlbaFileReader::getData()
     });
     return result;
 }
+
 template unsigned int AlbaFileReader::getTwoByteData<unsigned int>();
 template unsigned int AlbaFileReader::getFourByteData<unsigned int>();
 template unsigned long long AlbaFileReader::getEightByteData<unsigned long long>();
@@ -108,6 +111,7 @@ void AlbaFileReader::saveDataToMemoryBuffer(AlbaMemoryBuffer& buffer, unsigned i
     char* writer = static_cast<char*>(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(numberOfBytesToRead));
     m_stream.read(writer, numberOfBytesToRead);
 }
+
 string AlbaFileReader::getLineAndIgnoreWhiteSpaces()
 {
     while(!m_stream.eof())
@@ -117,7 +121,8 @@ string AlbaFileReader::getLineAndIgnoreWhiteSpaces()
         string result(getCharacterBufferPointer());
         result = stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(result);
         if(""!=result){ return result; }
-    }    return "";
+    }
+    return "";
 }
 
 string AlbaFileReader::getLine()
@@ -130,6 +135,7 @@ string AlbaFileReader::getLine()
     }
     return "";
 }
+
 double AlbaFileReader::getCurrentLocation() const
 {
     double location = m_stream.tellg();

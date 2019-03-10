@@ -24,6 +24,7 @@ unsigned int stringHelper::getLevenshteinDistance(string const& mainString, stri
 
     vector<unsigned int> current(string2Length + 1);
     vector<unsigned int> previous(string2Length + 1);
+
     unsigned int i = 0;
     generate(previous.begin(), previous.end(), [&] {return i++; });
 
@@ -114,7 +115,8 @@ bool stringHelper::isWildcardMatch(string const& mainString, string const& wildc
 
 bool stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(string const& mainString, string const& string2)
 {
-    return isNotNpos(static_cast<int>(mainString.find(string2)));}
+    return isNotNpos(static_cast<int>(mainString.find(string2)));
+}
 
 bool stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(string const& mainString, string const& string2)
 {
@@ -225,7 +227,8 @@ std::string stringHelper::combineStrings(stringHelper::strings const& listOfStri
 });
 
     if(result.size() > delimiters.size())
-    {        result = result.substr(0, result.size() - delimiters.size());
+    {
+        result = result.substr(0, result.size() - delimiters.size());
     }
     return result;
 }
@@ -582,6 +585,7 @@ string stringHelper::getStringAndReplaceNonAlphanumericCharactersToUnderScore(st
 });
     return correctPath;
 }
+
 string stringHelper::getNumberAfterThisString(string const& mainString, string const& stringToSearch)
 {
     string result;
@@ -734,6 +738,7 @@ string stringHelper::getCorrectPathWithoutUrlParameters(string const& path)
     }
     return correctPathWithoutUrlParameters;
 }
+
 string stringHelper::getUrlParameters(string const& path)
 {
     string urlParameters;
@@ -744,6 +749,7 @@ string stringHelper::getUrlParameters(string const& path)
     }
     return urlParameters;
 }
+
 string stringHelper::getCorrectPathWithReplacedSlashCharacters(string const& path, string const& slashCharacterString)
 {
     bool isSlashDetected = false;
@@ -752,7 +758,8 @@ string stringHelper::getCorrectPathWithReplacedSlashCharacters(string const& pat
                                     (string const& currentString, char const currentCharacter)
     {
         string partialResult(currentString);
-        if(isSlashCharacter(currentCharacter))        {
+        if(isSlashCharacter(currentCharacter))
+        {
             if(!isSlashDetected){partialResult += slashCharacterString;}
         }
         else
