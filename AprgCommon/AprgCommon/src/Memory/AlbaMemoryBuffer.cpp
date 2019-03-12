@@ -57,7 +57,7 @@ void AlbaMemoryBuffer::resize(unsigned int const size)
     m_buffer.resize(size);
 }
 
-void AlbaMemoryBuffer::resize(unsigned int size, unsigned int const initialValue)
+void AlbaMemoryBuffer::resize(unsigned int size, unsigned char const initialValue)
 {
     m_buffer.resize(size, initialValue);
 }

@@ -4,7 +4,7 @@ using namespace std;
 
 namespace alba
 {
-
+/*
 bool AlbaLinuxUserAutomation::isLetterPressed(char const letter) const
 {
     return false;
@@ -119,4 +119,5 @@ unsigned int AlbaLinuxUserAutomation::convertToVirtualKey(char const character) 
 {
     return 0;
 }
+*/
 }

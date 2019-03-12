@@ -14,6 +14,9 @@ public:
         : m_state(initialState)
     {}
 
+    virtual ~AlbaBaseStateMachine()
+    {}
+
     virtual void processInput(InputType const&)
     {
         // This should not be accessed

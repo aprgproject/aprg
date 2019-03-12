@@ -6,7 +6,7 @@
 
 using namespace alba;
 
-TEST(AlbaLinuxTimer, TimerCanBeInitialized)
+TEST(AlbaLinuxTimer, DISABLED_TimerCanBeInitialized)
 {
     AlbaLinuxTimer timer;
     usleep(2000000);
@@ -15,7 +15,7 @@ TEST(AlbaLinuxTimer, TimerCanBeInitialized)
     EXPECT_EQ(2u, secondsElapsed);
 }
 
-TEST(AlbaLinuxTimer, TimerCanBeRestarted)
+TEST(AlbaLinuxTimer, DISABLED_TimerCanBeRestarted)
 {
     AlbaLinuxTimer timer;
     usleep(1000000);

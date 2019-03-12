@@ -24,9 +24,9 @@ enum class DisplayTableRowMode
 class DisplayTableCell
 {
 public:
-    DisplayTableCell(unsigned int columnIndex);
-    DisplayTableCell(unsigned int columnIndex, std::string const& text);
-    DisplayTableCell(unsigned int columnIndex, std::string const& text, DisplayTableCellMode const horizontalMode, DisplayTableCellMode const verticalMode);
+    DisplayTableCell();
+    DisplayTableCell(std::string const& text);
+    DisplayTableCell(std::string const& text, DisplayTableCellMode const horizontalMode, DisplayTableCellMode const verticalMode);
 
     std::string getText() const;
     DisplayTableCellMode getHorizontalMode() const;
@@ -36,7 +36,6 @@ public:
     void setHorizontalMode(DisplayTableCellMode const mode);
     void setVerticalMode(DisplayTableCellMode const mode);
 private:
-    int m_columnIndex;
     std::string m_textToDisplay;
     DisplayTableCellMode m_horizontalMode;
     DisplayTableCellMode m_verticalMode;
@@ -47,7 +46,7 @@ using Cells = std::vector<DisplayTableCell>;
 class DisplayTableRow
 {
 public:
-    DisplayTableRow(unsigned int rowIndex);
+    DisplayTableRow();
     bool isAlign() const;
     unsigned int getNumberOfColumns() const;
     unsigned int getCharacters() const;
@@ -59,7 +58,6 @@ public:
     void addCell(std::string const & text, DisplayTableCellMode const horizontalMode, DisplayTableCellMode const verticalMode);
 
 private:
-    int m_rowIndex;
     DisplayTableRowMode m_rowMode;
     Cells m_cells;
 };

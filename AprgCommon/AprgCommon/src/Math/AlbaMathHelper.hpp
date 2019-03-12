@@ -5,6 +5,8 @@ namespace alba
 
 namespace mathHelper
 {
+
+template <typename NumberType> bool isConsideredEqual(NumberType const value1, NumberType const value2);
 template <typename NumberType> NumberType getDistance(NumberType const value1, NumberType const value2);
 template <typename NumberType> NumberType getAverage(NumberType const value1, NumberType const value2);
 template <typename NumberType> NumberType getAbsoluteValue(NumberType const value);
