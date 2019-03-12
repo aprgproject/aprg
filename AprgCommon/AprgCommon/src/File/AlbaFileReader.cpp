@@ -19,10 +19,16 @@ AlbaFileReader::AlbaFileReader(ifstream& stream)
     setMaxBufferSize(INITIAL_MAX_BUFFER_SIZE);
 }
 
+AlbaFileReader::AlbaFileReader(ifstream& stream, unsigned int const size)
+    : m_characterBuffer()
+    , m_stream(stream)
+{
+    setMaxBufferSize(size);
+}
+
 bool AlbaFileReader::isNotFinished()
 {
-    //return (!m_stream.eof()) && (m_stream.peek()!=EOF);
-    return !m_stream.eof();
+    //return (!m_stream.eof()) && (m_stream.peek()!=EOF);    return !m_stream.eof();
 }
 
 char AlbaFileReader::getCharacter()
@@ -39,11 +45,10 @@ char* AlbaFileReader::getCharacters(unsigned int& numberOfCharacters)
     {
         numberOfCharacters=bufferSize-1;
     }
-    m_stream.read(getCharacterBufferPointer(), numberOfCharacters);
+    m_stream.read(getCharacterBufferPointer(), static_cast<streamsize>(numberOfCharacters));
     numberOfCharacters = static_cast<unsigned int>(m_stream.gcount());
     m_characterBuffer[numberOfCharacters] = '\0';
-    return getCharacterBufferPointer();
-}
+    return getCharacterBufferPointer();}
 template <typename NumberType>
 NumberType AlbaFileReader::getTwoByteData()
 {
@@ -87,11 +92,10 @@ NumberType AlbaFileReader::getData()
     NumberType result(0);
     m_stream.read(getCharacterBufferPointer(), numberOfBytesToRead);
     unsigned int numberOfCharacters = static_cast<unsigned int>(m_stream.gcount());
-    result = accumulate(m_characterBuffer.cbegin(), m_characterBuffer.cbegin()+numberOfCharacters, static_cast<NumberType>(0u), [&](NumberType partialSum, NumberType newValue)
+    result = accumulate(m_characterBuffer.cbegin(), m_characterBuffer.cbegin()+static_cast<int>(numberOfCharacters), static_cast<NumberType>(0u), [&](NumberType partialSum, NumberType newValue)
     {
         partialSum = static_cast<NumberType>(partialSum << 8);
-        partialSum |= (0xFF & newValue);
-        return partialSum;
+        partialSum |= (0xFF & newValue);        return partialSum;
     });
     return result;
 }
@@ -109,19 +113,17 @@ template unsigned int AlbaFileReader::getData<unsigned int, 8>();
 void AlbaFileReader::saveDataToMemoryBuffer(AlbaMemoryBuffer& buffer, unsigned int numberOfBytesToRead)
 {
     char* writer = static_cast<char*>(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(numberOfBytesToRead));
-    m_stream.read(writer, numberOfBytesToRead);
+    m_stream.read(writer, static_cast<streamsize>(numberOfBytesToRead));
 }
 
-string AlbaFileReader::getLineAndIgnoreWhiteSpaces()
-{
+string AlbaFileReader::getLineAndIgnoreWhiteSpaces(){
     while(!m_stream.eof())
     {
         m_stream.clear();
-        m_stream.getline(getCharacterBufferPointer(), static_cast<unsigned int>(m_characterBuffer.size()));
+        m_stream.getline(getCharacterBufferPointer(), static_cast<streamsize>(m_characterBuffer.size()));
         string result(getCharacterBufferPointer());
         result = stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(result);
-        if(""!=result){ return result; }
-    }
+        if(""!=result){ return result; }    }
     return "";
 }
 
@@ -130,11 +132,10 @@ string AlbaFileReader::getLine()
     if(!m_stream.eof())
     {
         m_stream.clear();
-        m_stream.getline(getCharacterBufferPointer(), static_cast<unsigned int>(m_characterBuffer.size()));
+        m_stream.getline(getCharacterBufferPointer(), static_cast<streamsize>(m_characterBuffer.size()));
         return string(getCharacterBufferPointer());
     }
-    return "";
-}
+    return "";}
 
 double AlbaFileReader::getCurrentLocation() const
 {
