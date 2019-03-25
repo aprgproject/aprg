@@ -7,7 +7,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 TEST(AlbaMemoryBufferTest, DefaultValuesAreClear)
 {
@@ -23,7 +24,8 @@ TEST(AlbaMemoryBufferTest, PrimitiveTypesCanBeSavedDuringConstructionOfBuffer)
     AlbaMemoryBuffer buffer(static_cast<void*>(&input), sizeof(input));
     int output = *reinterpret_cast<int*>(buffer.getBufferPointer());
 
-    EXPECT_TRUE(buffer);    EXPECT_TRUE(buffer.hasContent());
+    EXPECT_TRUE(buffer);
+    EXPECT_TRUE(buffer.hasContent());
     EXPECT_EQ(4u, buffer.getSize());
     EXPECT_EQ(input, output);
 }
@@ -35,7 +37,8 @@ TEST(AlbaMemoryBufferTest, PrimitiveTypesCanBeSaved)
     buffer.addData(static_cast<void*>(&input), sizeof(input));
     int output = *reinterpret_cast<int*>(buffer.getBufferPointer());
 
-    EXPECT_TRUE(buffer);    EXPECT_TRUE(buffer.hasContent());
+    EXPECT_TRUE(buffer);
+    EXPECT_TRUE(buffer.hasContent());
     EXPECT_EQ(4u, buffer.getSize());
     EXPECT_EQ(input, output);
 }
@@ -47,6 +50,7 @@ TEST(AlbaMemoryBufferTest, MemoryBufferCanBeCopied)
     buffer.addData(static_cast<void*>(&input), sizeof(input));
     AlbaMemoryBuffer buffer2(buffer);
     int output = *reinterpret_cast<int*>(buffer2.getBufferPointer());
+
     EXPECT_TRUE(buffer2);
     EXPECT_TRUE(buffer2.hasContent());
     EXPECT_EQ(4u, buffer2.getSize());
@@ -60,6 +64,7 @@ TEST(AlbaMemoryBufferTest, MemoryBufferCanBeResizedToBeLarger)
     buffer.addData(static_cast<void*>(&input), sizeof(input));
     buffer.resize(8);
     int output = *reinterpret_cast<int*>(buffer.getBufferPointer());
+
     EXPECT_TRUE(buffer);
     EXPECT_TRUE(buffer.hasContent());
     EXPECT_EQ(8u, buffer.getSize());
@@ -73,6 +78,7 @@ TEST(AlbaMemoryBufferTest, MemoryBufferCanBeResizedToBeSmaller)
     buffer.addData(static_cast<void*>(&input), sizeof(input));
     buffer.resize(3);
     char* bufferPointer = reinterpret_cast<char*>(buffer.getBufferPointer());
+
     EXPECT_TRUE(buffer);
     EXPECT_TRUE(buffer.hasContent());
     EXPECT_EQ(3u, buffer.getSize());
@@ -89,7 +95,8 @@ TEST(AlbaMemoryBufferTest, PrimitiveTypesCanBeClearedAndSavedConsecutively2Times
     buffer.clearAndSetNewData(static_cast<void*>(&input2), sizeof(input2));
     int output = *reinterpret_cast<int*>(buffer.getBufferPointer());
 
-    EXPECT_TRUE(buffer);    EXPECT_TRUE(buffer.hasContent());
+    EXPECT_TRUE(buffer);
+    EXPECT_TRUE(buffer.hasContent());
     EXPECT_EQ(4u, buffer.getSize());
     EXPECT_EQ(input2, output);
 }
@@ -111,7 +118,8 @@ TEST(AlbaMemoryBufferTest, StructureCanBeSaved)
     buffer.addData(static_cast<void*>(&input), sizeof(input));
     Sample output = *reinterpret_cast<Sample *>(buffer.getBufferPointer());
 
-    EXPECT_TRUE(buffer);    EXPECT_TRUE(buffer.hasContent());
+    EXPECT_TRUE(buffer);
+    EXPECT_TRUE(buffer.hasContent());
     EXPECT_EQ(sizeof(Sample), buffer.getSize());
     EXPECT_EQ(input.param1, output.param1);
     EXPECT_EQ(input.param2, output.param2);
@@ -147,7 +155,8 @@ TEST(AlbaMemoryBufferTest, GetDisplayableStringWorks)
     AlbaMemoryBuffer buffer(static_cast<void*>(&input), sizeof(input));
 
     EXPECT_TRUE(buffer);
-    EXPECT_TRUE(buffer.hasContent());    EXPECT_EQ(4u, buffer.getSize());
+    EXPECT_TRUE(buffer.hasContent());
+    EXPECT_EQ(4u, buffer.getSize());
     EXPECT_FALSE(buffer.getDisplayableString().empty());
 }
 
@@ -161,6 +170,7 @@ TEST(AlbaMemoryBufferTest, SettingAndRetrievingPrimitiveObjectWorks)
 
     EXPECT_EQ(input, output);
 }
+
 TEST(AlbaMemoryBufferTest, SettingAndRetrievingDynamicSizeObjectWorks)
 {
     AlbaMemoryBuffer buffer;
@@ -172,13 +182,15 @@ TEST(AlbaMemoryBufferTest, SettingAndRetrievingDynamicSizeObjectWorks)
 
     dynamicInput.integers.emplace_back(11);
     dynamicInput.integers.emplace_back(22);
-    dynamicInput.integers.emplace_back(33);    dynamicInput.integers.emplace_back(44);
+    dynamicInput.integers.emplace_back(33);
+    dynamicInput.integers.emplace_back(44);
     buffer.saveObject<SampleDynamicClass>(dynamicInput);
     SampleDynamicClass& output(buffer.retrieveObject<SampleDynamicClass>());
 
     ASSERT_EQ(4, output.integers.size());
     EXPECT_EQ(11, output.integers[0]);
-    EXPECT_EQ(22, output.integers[1]);    EXPECT_EQ(33, output.integers[2]);
+    EXPECT_EQ(22, output.integers[1]);
+    EXPECT_EQ(33, output.integers[2]);
     EXPECT_EQ(44, output.integers[3]);
 }
 

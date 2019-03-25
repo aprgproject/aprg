@@ -16,7 +16,8 @@ public:
     explicit AlbaFileReader(std::ifstream& stream, unsigned int const size);
     bool isNotFinished();
     char getCharacter();
-    char* getCharacters(unsigned int& numberOfCharacters);    template<typename NumberType> NumberType getTwoByteData();
+    char* getCharacters(unsigned int& numberOfCharacters);
+    template<typename NumberType> NumberType getTwoByteData();
     template<typename NumberType> NumberType getFourByteData();
     template<typename NumberType> NumberType getEightByteData();
     template<typename NumberType> NumberType getTwoByteSwappedData();

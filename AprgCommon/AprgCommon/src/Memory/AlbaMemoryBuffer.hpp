@@ -3,6 +3,7 @@
 #include <cstring>
 #include <string>
 #include <vector>
+
 namespace alba
 {
 
@@ -36,6 +37,8 @@ public:
         return *reinterpret_cast<ObjectType *>(getBufferPointer());
     }
 
-private:    std::vector<unsigned char> m_buffer;};
+private:
+    std::vector<unsigned char> m_buffer;
+};
 
 }//namespace alba

@@ -24,7 +24,8 @@ TEST(FileReadTest, ReadFromTestFile_ConstructorsWorks)
 
 TEST(FileReadTest, ReadFromTestFile_SetAndGetBufferSizeWorks)
 {
-    ifstream inputTestFile(APRG_COMMON_TEST_FILE_TO_READ);    ASSERT_TRUE(inputTestFile.is_open());
+    ifstream inputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ASSERT_TRUE(inputTestFile.is_open());
 
     AlbaFileReader fileReader(inputTestFile);
     EXPECT_EQ(10000, fileReader.getMaxBufferSize());

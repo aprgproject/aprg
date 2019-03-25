@@ -28,7 +28,8 @@ AlbaFileReader::AlbaFileReader(ifstream& stream, unsigned int const size)
 
 bool AlbaFileReader::isNotFinished()
 {
-    //return (!m_stream.eof()) && (m_stream.peek()!=EOF);    return !m_stream.eof();
+    //return (!m_stream.eof()) && (m_stream.peek()!=EOF);
+    return !m_stream.eof();
 }
 
 char AlbaFileReader::getCharacter()
@@ -48,7 +49,8 @@ char* AlbaFileReader::getCharacters(unsigned int& numberOfCharacters)
     m_stream.read(getCharacterBufferPointer(), static_cast<streamsize>(numberOfCharacters));
     numberOfCharacters = static_cast<unsigned int>(m_stream.gcount());
     m_characterBuffer[numberOfCharacters] = '\0';
-    return getCharacterBufferPointer();}
+    return getCharacterBufferPointer();
+}
 template <typename NumberType>
 NumberType AlbaFileReader::getTwoByteData()
 {
@@ -95,7 +97,8 @@ NumberType AlbaFileReader::getData()
     result = accumulate(m_characterBuffer.cbegin(), m_characterBuffer.cbegin()+static_cast<int>(numberOfCharacters), static_cast<NumberType>(0u), [&](NumberType partialSum, NumberType newValue)
     {
         partialSum = static_cast<NumberType>(partialSum << 8);
-        partialSum |= (0xFF & newValue);        return partialSum;
+        partialSum |= (0xFF & newValue);
+        return partialSum;
     });
     return result;
 }
@@ -116,14 +119,16 @@ void AlbaFileReader::saveDataToMemoryBuffer(AlbaMemoryBuffer& buffer, unsigned i
     m_stream.read(writer, static_cast<streamsize>(numberOfBytesToRead));
 }
 
-string AlbaFileReader::getLineAndIgnoreWhiteSpaces(){
+string AlbaFileReader::getLineAndIgnoreWhiteSpaces()
+{
     while(!m_stream.eof())
     {
         m_stream.clear();
         m_stream.getline(getCharacterBufferPointer(), static_cast<streamsize>(m_characterBuffer.size()));
         string result(getCharacterBufferPointer());
         result = stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(result);
-        if(""!=result){ return result; }    }
+        if(""!=result){ return result; }
+    }
     return "";
 }
 
@@ -135,7 +140,8 @@ string AlbaFileReader::getLine()
         m_stream.getline(getCharacterBufferPointer(), static_cast<streamsize>(m_characterBuffer.size()));
         return string(getCharacterBufferPointer());
     }
-    return "";}
+    return "";
+}
 
 double AlbaFileReader::getCurrentLocation() const
 {
