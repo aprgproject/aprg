@@ -126,15 +126,13 @@ public:
     ContentType& getReference()
     {
         assert(m_hasContent); //we will not allow mistakes
-        if(m_hasContent)
-        {
-            return *(m_contentPointer.get());
-        }
-        else
-        {
-            m_contentPointer.reset(new ContentType);
-            return *(m_contentPointer.get());
-        }
+        return *(m_contentPointer.get());
+    }
+
+    ContentType const& getConstReference() const
+    {
+        assert(m_hasContent); //we will not allow mistakes
+        return *(m_contentPointer.get());
     }
 
 private:

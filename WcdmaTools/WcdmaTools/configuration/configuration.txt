@@ -36,7 +36,8 @@ grepConditionForHsch:[TCOM/HSCH]
 grepConditionForDmgr:[TCOM/DMGR]
 inputFileOrDirectory:D:\W\ZZZ_Useless_Logs\FZPDeployment\2016-01-10\sorted.log
 extractGrepCondition:([LRM] || [alarm] || [UDP] || [CPU] || [syslog] || [ccns] || [tcom] || [startup] || [runtime] || [system] || [pm_] || [radparam] || ([bts]&&([.log]||[.zip]||[.tar])) || [snapshot] || ([tech]&&[report]) || [BTSLogFiles] || [SMOD]) && !([ProcessCpu] || [ProcessMemory])
-acceptedFilesGrepCondition: [ccns.log] || [tcom.log] || [system.log] || (([SYSLOG_] || [startup] || [runtime]|| [pm_] || [CPU]) && [.log]) || ([UDP] && ![.tar]) || (SMOD && ![.tar])
+acceptedFilesGrepCondition: [ccns.log] || [tcom.log] || [system.log] || (([SYSLOG_] || [startup] || [runtime]|| [pm_] || [CPU]) && [.log]) || ([UDP] && ![.tar]) || ([SMOD] && ![.tar])
+filterGrepCondition:
 otherGrepCondition:
 prioritizedLogPrint:
 cropSize:100

@@ -53,6 +53,7 @@ WcdmaToolsConfiguration::WcdmaToolsConfiguration()
     , inputFileOrDirectory()
     , extractGrepCondition()
     , acceptedFilesGrepCondition()
+    , filterGrepCondition()
     , otherGrepCondition()
     , prioritizedLogPrint()
     , cropSize(0)
@@ -252,6 +253,10 @@ void WcdmaToolsConfiguration::loadConfigurationFromFile()
             {
                 acceptedFilesGrepCondition = afterColon;
             }
+            else if("filterGrepCondition" == beforeColon)
+            {
+                filterGrepCondition = afterColon;
+            }
             else if("otherGrepCondition" == beforeColon)
             {
                 otherGrepCondition = afterColon;
@@ -350,6 +355,7 @@ void WcdmaToolsConfiguration::saveConfigurationToFile() const
     outputFileStream << "inputFileOrDirectory:" << inputFileOrDirectory<< endl;
     outputFileStream << "extractGrepCondition:" << extractGrepCondition<< endl;
     outputFileStream << "acceptedFilesGrepCondition:" << acceptedFilesGrepCondition<< endl;
+    outputFileStream << "filterGrepCondition:" << filterGrepCondition<< endl;
     outputFileStream << "otherGrepCondition:" << otherGrepCondition << endl;
     outputFileStream << "btsLogSorterConfiguration.m_configurationWithPcTime.m_minimumNumberOfObjectsPerBlock:" << btsLogSorterConfiguration.m_configurationWithPcTime.m_minimumNumberOfObjectsPerBlock << endl;
     outputFileStream << "btsLogSorterConfiguration.m_configurationWithPcTime.m_maximumNumberOfObjectsPerBlock:" << btsLogSorterConfiguration.m_configurationWithPcTime.m_maximumNumberOfObjectsPerBlock << endl;

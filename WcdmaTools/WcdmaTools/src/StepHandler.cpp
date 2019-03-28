@@ -102,7 +102,8 @@ string StepHandler::executeCombineAndSortStep(WcdmaToolsConfiguration const& con
     if(pathHandler.isDirectory())
     {
         wcdmaToolsBackend::BtsLogSorterConfiguration sorterConfiguration(configuration.btsLogSorterConfiguration);
-        sorterConfiguration.m_condition = configuration.acceptedFilesGrepCondition;
+        sorterConfiguration.m_acceptedFilesGrepCondition = configuration.acceptedFilesGrepCondition;
+        sorterConfiguration.m_filterGrepCondition = configuration.filterGrepCondition;
         wcdmaToolsBackend::BtsLogSorter btsLogSorter(sorterConfiguration);
         btsLogSorter.processDirectory(pathHandler.getDirectory());
         pathHandler.goUp();

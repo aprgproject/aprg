@@ -61,11 +61,12 @@ public:
     }
     unsigned int getNumberOfObjectsInMemory() const
     {
+        unsigned int numberOfObjectsInMemory(0);
         if(m_memoryBlockHandler)
         {
-            return m_memoryBlockHandler.getReference().getContainerReference().size();
+            numberOfObjectsInMemory = m_memoryBlockHandler.getConstReference().getContainerConstReference().size();
         }
-        return 0;
+        return numberOfObjectsInMemory;
     }
     ObjectToSort getLowestObject() const
     {
@@ -73,11 +74,12 @@ public:
     }
     bool isFileStreamOpened() const
     {
+        bool isOpened = false;
         if(m_blockFileHandler)
         {
-            return m_blockFileHandler.getReference().isFileStreamOpened();
+            isOpened = m_blockFileHandler.getReference().isFileStreamOpened();
         }
-        return false;
+        return isOpened;
     }
     void add(ObjectToSort const& objectToSort)
     {

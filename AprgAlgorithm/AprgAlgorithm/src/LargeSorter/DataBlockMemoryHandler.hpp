@@ -24,6 +24,10 @@ public:
     {
         return m_DataBlockMemoryContainer;
     }
+    MemoryContainer const& getContainerConstReference() const
+    {
+        return m_DataBlockMemoryContainer;
+    }
 
 private:
     MemoryContainer m_DataBlockMemoryContainer;

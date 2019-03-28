@@ -20,10 +20,12 @@ public:
     BtsLogSorter(BtsLogSorterConfiguration const& configuration);
     void processDirectory(std::string const& directoryPath);
     void processFile(std::string const& filePath);
+    void processLineInFile(std::string const& filename, std::string const& lineInFile);
     void saveLogsToOutputFile(std::string const& outputPath);
 
     double getTotalSizeToBeRead();
     double getTotalSizeToBeRead(std::set<std::string> listOfFiles);
+
 
 private:
     void createTempDirectories() const;
@@ -43,7 +45,8 @@ private:
     void updateOrWriteCurrentPrint(BtsLogPrint const& logPrint, std::ofstream & outputLogFileStream);
     void writeLastPrint(std::ofstream & outputLogFileStream);
     void deleteFilesInDirectory(std::string const& directoryOfLogs) const;
-    alba::AlbaGrepStringEvaluator m_evaluator;
+    alba::AlbaGrepStringEvaluator m_acceptedFilesGrepEvaluator;
+    alba::AlbaGrepStringEvaluator m_filterGrepEvaluator;
     std::string m_pathOfAllTempFiles;
     std::string m_pathOfCurrentTempFiles;
     alba::AlbaLargeSorter<BtsLogPrint> m_sorterWithPcTime;

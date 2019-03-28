@@ -49,6 +49,7 @@ private slots:
     void on_inputFileAndFolder_editingFinished();
     void on_extractCondition_editingFinished();
     void on_acceptedFilesCondition_editingFinished();
+    void on_filterCondition_editingFinished();
     void on_other_editingFinished();
     void on_prioritizedLogPrint_editingFinished();
     void on_cropSize_editingFinished();

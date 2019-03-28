@@ -148,7 +148,10 @@ void AprgFileExtractor::extractAllRelevantFilesInThisCompressedFile(string const
     AlbaLocalPathHandler compressedFilePathHandler(filePathOfCompressedFile);
     if(isTheExtensionXzOrGzOrTar(compressedFilePathHandler.getExtension()))
     {
-        extractAllFilesRecursively(filePathOfCompressedFile);
+        if(m_grepEvaluator.evaluate(compressedFilePathHandler.getFile())) // this is a needless check because if there is a zip file, we need to extract it
+        {
+            extractAllFilesRecursively(filePathOfCompressedFile);
+        }
     }
     else
     {
