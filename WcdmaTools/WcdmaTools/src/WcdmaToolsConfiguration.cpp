@@ -7,13 +7,10 @@
 #include <fstream>
 #include <iostream>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 using namespace alba;
 using namespace std;
 
-constexpr char* orOperator = " || ";
+char const*const orOperator = " || ";
 
 namespace wcdmaToolsGui
 {
@@ -80,11 +77,8 @@ WcdmaToolsConfiguration::WcdmaToolsConfiguration()
     , prioritizedLogCondition()
     , cropSize(0)
 {
-    ALBA_PRINT0("WcdmaToolsConfiguration()1");
     determineVariousLocationsBasedOnCurrentLocation();
-    ALBA_PRINT0("WcdmaToolsConfiguration()2");
     loadConfigurationFromFile(configurationFileLocation);
-    ALBA_PRINT0("WcdmaToolsConfiguration()3");
 }
 
 void WcdmaToolsConfiguration::loadDefaultConfigurationFile()
@@ -273,13 +267,9 @@ void WcdmaToolsConfiguration::determineVariousLocationsBasedOnCurrentLocation()
 
 void WcdmaToolsConfiguration::loadConfigurationFromFile(string const& filePath)
 {
-    ALBA_PRINT0("loadConfigurationFromFile()1");
     NameToValueMap nameToValueMap;
-    ALBA_PRINT0("loadConfigurationFromFile()2");
     copyNamesAndValuesFromFile(nameToValueMap, filePath);
-    ALBA_PRINT0("loadConfigurationFromFile()3");
     loadNamesAndValues(nameToValueMap);
-    ALBA_PRINT0("loadConfigurationFromFile()4");
 }
 
 void WcdmaToolsConfiguration::copyNamesAndValuesFromFile(NameToValueMap & nameToValueMap, string const& filePath)

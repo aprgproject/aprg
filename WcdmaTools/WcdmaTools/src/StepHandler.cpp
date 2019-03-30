@@ -11,9 +11,6 @@
 #include <iostream>
 #include <string>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 namespace alba
 {
 namespace ProgressCounters
@@ -258,7 +255,6 @@ StepHandler::LocationsInFile StepHandler::getLocationsInFile(WcdmaToolsConfigura
     double startingLocation = foundLocation - (outputSize/2);
     locations.startLocation = (startingLocation<0) ? 0 : startingLocation;
     locations.endLocation = locations.startLocation + outputSize;
-    ALBA_PRINT4(locations.startLocation, locations.endLocation, outputSize, foundLocation);
     return locations;
 }
 

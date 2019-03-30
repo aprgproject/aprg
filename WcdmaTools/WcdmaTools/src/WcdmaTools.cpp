@@ -6,9 +6,7 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
-
-
-#include <Debug/AlbaDebug.hpp>
+#include <QPixmap>
 
 using namespace alba;
 using namespace std;
@@ -30,23 +28,14 @@ WcdmaTools::WcdmaTools(QWidget *parent)
     , m_configuration()
     , m_stepHandlerThread(m_configuration)
 {
-    ALBA_PRINT0("WcdmaTools1");
     ui->setupUi(this);
-    ALBA_PRINT0("WcdmaTools2");
     updateGuiUsingConfiguration();
-    ALBA_PRINT0("WcdmaTools3");
     ProgressCounters::resetProgressCounters();
-    ALBA_PRINT0("WcdmaTools4");
     updateProgressBar();
-    ALBA_PRINT0("WcdmaTools5");
     connect(&m_stepHandlerThread, SIGNAL(executionDone()), this, SLOT(onExecutionIsFinished()));
-    ALBA_PRINT0("WcdmaTools6");
     connect(&m_progressBarThread, SIGNAL(triggerUpdateProgressBar()), this, SLOT(updateProgressBar()));
-    ALBA_PRINT0("WcdmaTools7");
     m_stepHandlerThread.start();
-    ALBA_PRINT0("WcdmaTools8");
     m_progressBarThread.start();
-    ALBA_PRINT0("WcdmaTools9");
 }
 
 WcdmaTools::~WcdmaTools()
@@ -185,7 +174,14 @@ void WcdmaTools::on_actionReset_to_default_triggered()
 
 void WcdmaTools::on_actionAboutAprg_triggered()
 {
-    QMessageBox::about(this, tr("About Menu"), tr("Insert sample text here"));
+    QMessageBox about;
+    about.setWindowTitle("About APRG");
+    //about.setInformativeText("APRG is created by Mark Earvin Alba");
+    about.setIconPixmap(QPixmap(":/resources/resources/About.png"));
+    //about.setStandardButtons(QMessageBox::Ok);
+    //about.setDefaultButton(QMessageBox::Ok);
+    about.show();
+    about.exec();
 }
 
 void WcdmaTools::on_actionQuit_triggered()
