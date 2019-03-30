@@ -73,7 +73,8 @@ void RttAnalyzer::processLine(std::string const& line)
     static string dateTime;
     if(isStringFoundInsideTheOtherStringNotCaseSensitive(line, "0x4179"))
     {
-        dateTime = getStringWithoutStartingAndTrailingWhiteSpace(getStringBeforeThisString(line,"["));    }
+        dateTime = getStringWithoutStartingAndTrailingWhiteSpace(getStringBeforeThisString(line,"["));
+    }
     else if(isStringFoundInsideTheOtherStringNotCaseSensitive(line, "(Cx8)") && isStringFoundInsideTheOtherStringNotCaseSensitive(line, "PN Pos"))
     {
         strings titles;
@@ -99,7 +100,8 @@ void RttAnalyzer::processLine(std::string const& line)
 */
 
 void RttAnalyzer::processTitles(strings const& titles)
-{    unsigned int index=0;
+{
+    unsigned int index=0;
     for(string const& title : titles)
     {
         if(isStringFoundInsideTheOtherStringNotCaseSensitive(title, "(cx8)") && !m_cx8IndexOptional.hasContent())
@@ -120,7 +122,8 @@ void RttAnalyzer::processTitles(strings const& titles)
     {
         if(isStringFoundInsideTheOtherStringNotCaseSensitive(title, "(Cx8)") && !m_cx8IndexOptional.hasContent())
         {
-            m_cx8IndexOptional.setValue(index);        }
+            m_cx8IndexOptional.setValue(index);
+        }
         else if(isStringFoundInsideTheOtherStringNotCaseSensitive(title, "PN Pos") && !m_pnPosIndexOptional.hasContent())
         {
             m_pnPosIndexOptional.setValue(index);
@@ -154,7 +157,8 @@ void RttAnalyzer::processValues(string const& dateTime, strings const& values)
 /*
 void RttAnalyzer::processValues(string const& dateTime, strings const& values)
 {
-    static RttDetails rttDetails;    if(m_cx8IndexOptional.hasContent() && m_pnPosIndexOptional.hasContent())
+    static RttDetails rttDetails;
+    if(m_cx8IndexOptional.hasContent() && m_pnPosIndexOptional.hasContent())
     {
         if(m_cx8IndexOptional.getReference()<values.size() && m_pnPosIndexOptional.getReference()<values.size() && m_posNumber<6)
         {
@@ -190,6 +194,7 @@ void RttAnalyzer::saveAllRttDetails(ofstream & collectedRttDetails) const
 void RttAnalyzer::saveAllRttDetails(ofstream & collectedRttDetails) const
 {
     collectedRttDetails << "dateTime,pos1,pos2,pos3,pos4,pos5,pos6,pn pos,diffPos1,diffPos2,diffPos3,diffPos4,diffPos5,diffPos6,minDifferencePos,maxDifferencePos"<<endl;
+
     for(RttDetails const& rttDetails : m_allRttDetails)
     {
         collectedRttDetails << rttDetails.dateTime << ", ";

@@ -6,7 +6,8 @@
 #include <unordered_map>
 #include <string>
 
-namespace wcdmaToolsGui{
+namespace wcdmaToolsGui
+{
 
 struct WcdmaToolsConfiguration
 {
@@ -30,7 +31,8 @@ struct WcdmaToolsConfiguration
     bool isFilterSubStepOn;
     bool isGrepTcomEnabled;
     bool isGrepErrEnabled;
-    bool isGrepErrWrnNoSpamEnabled;    bool isGrepBtsStatusEnabled;
+    bool isGrepErrWrnNoSpamEnabled;
+    bool isGrepBtsStatusEnabled;
     bool isGrepRecoveryEnabled;
     bool isGrepAllocationEnabled;
     bool isGrepFaultEnabled;
@@ -53,7 +55,8 @@ struct WcdmaToolsConfiguration
     bool isGrepHsupaL2Enabled;
     std::string grepConditionForTcom;
     std::string grepConditionForErr;
-    std::string grepConditionForErrWrn;    std::string grepConditionForBtsStatus;
+    std::string grepConditionForErrWrn;
+    std::string grepConditionForBtsStatus;
     std::string grepConditionForRecovery;
     std::string grepConditionForAllocation;
     std::string grepConditionForFault;

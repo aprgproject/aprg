@@ -16,7 +16,8 @@
 
 namespace alba
 {
-namespace ProgressCounters{
+namespace ProgressCounters
+{
 extern int grepProcessProgress;
 extern int cropProcessProgress;
 extern int numberOfStepsEnabled;
@@ -149,7 +150,8 @@ string StepHandler::grepFile(WcdmaToolsConfiguration const& configuration, strin
     AlbaGrepStringEvaluator grepEvaluator(configuration.getGrepCondition());
     AlbaLocalPathHandler pathHandler(inputPath);
     ifstream inputFileStream(pathHandler.getFullPath());
-    pathHandler.input(pathHandler.getDirectory() + R"(\)" + configuration.getGrepFileName());    ofstream outputFileStream(pathHandler.getFullPath());
+    pathHandler.input(pathHandler.getDirectory() + R"(\)" + configuration.getGrepFileName());
+    ofstream outputFileStream(pathHandler.getFullPath());
     AlbaFileReader fileReader(inputFileStream);
     double sizeOfFile = fileReader.getFileSize();
     while(fileReader.isNotFinished())
@@ -158,7 +160,8 @@ string StepHandler::grepFile(WcdmaToolsConfiguration const& configuration, strin
         if(grepEvaluator.evaluate(lineInLogs))
         {
             outputFileStream << lineInLogs << endl;
-        }        ProgressCounters::grepProcessProgress = fileReader.getCurrentLocation()*100/sizeOfFile;
+        }
+        ProgressCounters::grepProcessProgress = fileReader.getCurrentLocation()*100/sizeOfFile;
     }
     ProgressCounters::grepProcessProgress = 100;
     return pathHandler.getFullPath();
@@ -181,7 +184,8 @@ string StepHandler::executeCropStep(WcdmaToolsConfiguration const& configuration
             cout<<"Crop step did not proceed. Prioritized log print not found: "<<configuration.prioritizedLogCondition<<endl;
         }
     }
-    else    {
+    else
+    {
         cout<<"Crop step did not proceed. Current path: "<<pathHandler.getFullPath()<<endl;
     }
     cout<<" (Crop) done | Output path: "<<outputPath<<endl;
@@ -202,7 +206,8 @@ string StepHandler::cropFile(WcdmaToolsConfiguration const& configuration, strin
 
     double locationDifference = locations.endLocation-locations.startLocation;
     while(fileReader.isNotFinished())
-    {        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
+    {
+        string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         double currentLocation = fileReader.getCurrentLocation();
         if(currentLocation < locations.endLocation)
         {
@@ -232,7 +237,8 @@ double StepHandler::getLocationOfPriotizedPrint(WcdmaToolsConfiguration const& c
         if(evaluatorForPrioritizedPrint.evaluate(lineInLogs))
         {
             cout<<"Found prioritized log print in input file. Log print: "<<lineInLogs<<endl;
-            foundLocation = fileReader.getCurrentLocation();            break;
+            foundLocation = fileReader.getCurrentLocation();
+            break;
         }
         ProgressCounters::cropProcessProgress = fileReader.getCurrentLocation()*50/sizeOfFile;
     }
@@ -255,4 +261,5 @@ StepHandler::LocationsInFile StepHandler::getLocationsInFile(WcdmaToolsConfigura
     ALBA_PRINT4(locations.startLocation, locations.endLocation, outputSize, foundLocation);
     return locations;
 }
+
 }

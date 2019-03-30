@@ -115,7 +115,8 @@ void BtsLogSorter::deleteTempFilesAndDirectoriesOfOneDayOld() const
     AlbaDateTime currentTime(getCurrentDateTime());
     AlbaDateTime oneDay(0,0,1,0,0,0,0);
     for(string const& directoryPath : listOfDirectories)
-    {        AlbaLocalPathHandler temporaryDirectoryPathHandler(directoryPath);
+    {
+        AlbaLocalPathHandler temporaryDirectoryPathHandler(directoryPath);
         AlbaDateTime fileCreationTime(temporaryDirectoryPathHandler.getFileCreationTime());
         AlbaDateTime difference = currentTime-fileCreationTime;
         if(difference > oneDay)

@@ -17,6 +17,7 @@ constexpr char* orOperator = " || ";
 
 namespace wcdmaToolsGui
 {
+
 WcdmaToolsConfiguration::WcdmaToolsConfiguration()
     : isExtractStepOn(false)
     , isCombineAndSortStepOn(false)
@@ -25,7 +26,8 @@ WcdmaToolsConfiguration::WcdmaToolsConfiguration()
     , isFilterSubStepOn(false)
     , isGrepTcomEnabled(false)
     , isGrepErrEnabled(false)
-    , isGrepErrWrnNoSpamEnabled(false)    , isGrepBtsStatusEnabled(false)
+    , isGrepErrWrnNoSpamEnabled(false)
+    , isGrepBtsStatusEnabled(false)
     , isGrepRecoveryEnabled(false)
     , isGrepAllocationEnabled(false)
     , isGrepFaultEnabled(false)
@@ -48,7 +50,8 @@ WcdmaToolsConfiguration::WcdmaToolsConfiguration()
     , isGrepHsupaL2Enabled(false)
     , grepConditionForTcom()
     , grepConditionForErr()
-    , grepConditionForErrWrn()    , grepConditionForBtsStatus()
+    , grepConditionForErrWrn()
+    , grepConditionForBtsStatus()
     , grepConditionForRecovery()
     , grepConditionForAllocation()
     , grepConditionForFault()
@@ -123,7 +126,8 @@ void WcdmaToolsConfiguration::saveToConfigurationFile() const
     outputFileStream << "isGrepHsupaL2Enabled:" << static_cast<int>(isGrepHsupaL2Enabled) << endl;
     outputFileStream << "grepConditionForTcom:" << grepConditionForTcom << endl;
     outputFileStream << "grepConditionForErr:" << grepConditionForErr << endl;
-    outputFileStream << "grepConditionForErrWrn:" << grepConditionForErrWrn << endl;    outputFileStream << "grepConditionForBtsStatus:" << grepConditionForBtsStatus << endl;
+    outputFileStream << "grepConditionForErrWrn:" << grepConditionForErrWrn << endl;
+    outputFileStream << "grepConditionForBtsStatus:" << grepConditionForBtsStatus << endl;
     outputFileStream << "grepConditionForRecovery:" << grepConditionForRecovery << endl;
     outputFileStream << "grepConditionForAllocation:" << grepConditionForAllocation << endl;
     outputFileStream << "grepConditionForFault:" << grepConditionForFault << endl;
@@ -190,13 +194,15 @@ string WcdmaToolsConfiguration::getGrepCondition() const
     addConditionIntoGrepCondition(condition, isGrepHsupaL2Enabled, grepConditionForHsupaL2);
     if(!stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(otherGrepCondition).empty())
     {
-        condition += otherGrepCondition + orOperator;    }
+        condition += otherGrepCondition + orOperator;
+    }
     if(!condition.empty())
     {
         condition = condition.substr(0, condition.length()-string(orOperator).length());
     }
     return condition;
 }
+
 string WcdmaToolsConfiguration::getGrepFileName() const
 {
     string fileName;

@@ -43,7 +43,8 @@
          <widget class="QLineEdit" name="inputFileAndFolderTextBox">
           <property name="enabled">
            <bool>true</bool>
-          </property>          <property name="readOnly">
+          </property>
+          <property name="readOnly">
            <bool>false</bool>
           </property>
          </widget>
@@ -62,7 +63,8 @@
       <widget class="QCheckBox" name="extractStepCheckBox">
        <property name="font">
         <font>
-         <family>Century Gothic</family>         <pointsize>10</pointsize>
+         <family>Century Gothic</family>
+         <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -93,7 +95,8 @@
              <widget class="QLineEdit" name="extractConditionTextBox"/>
             </item>
            </layout>
-          </item>         </layout>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -102,7 +105,8 @@
       <widget class="QCheckBox" name="combineAndSortStepCheckBox">
        <property name="font">
         <font>
-         <family>Century Gothic</family>         <pointsize>10</pointsize>
+         <family>Century Gothic</family>
+         <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -133,7 +137,8 @@
              <widget class="QLineEdit" name="acceptedFilesConditionTextBox"/>
             </item>
            </layout>
-          </item>          <item>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
              <widget class="QCheckBox" name="filterSubStepCheckBox">
@@ -169,7 +174,8 @@
       <widget class="QCheckBox" name="grepStepCheckBox">
        <property name="font">
         <font>
-         <family>Century Gothic</family>         <pointsize>10</pointsize>
+         <family>Century Gothic</family>
+         <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -450,7 +456,8 @@
            <widget class="QLineEdit" name="prioritizedLogConditionTextBox"/>
           </item>
           <item>
-           <widget class="QLabel" name="label_4">            <property name="text">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
              <string>Crop size(MB):</string>
             </property>
            </widget>
@@ -459,7 +466,8 @@
            <widget class="QLineEdit" name="cropSizeTextBox">
             <property name="enabled">
              <bool>true</bool>
-            </property>            <property name="sizePolicy">
+            </property>
+            <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
@@ -497,7 +505,8 @@
         <widget class="QPushButton" name="executeButton">
          <property name="text">
           <string>Execute!</string>
-         </property>        </widget>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer name="horizontalSpacer_2">
@@ -549,7 +558,8 @@
     <addaction name="actionReset_to_default"/>
     <addaction name="actionQuit"/>
    </widget>
-   <widget class="QMenu" name="menuAbout">    <property name="title">
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
      <string>About</string>
     </property>
     <addaction name="actionAboutAprg"/>
@@ -585,5 +595,6 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/> <connections/>
+ <resources/>
+ <connections/>
 </ui>

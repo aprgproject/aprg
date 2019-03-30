@@ -12,6 +12,7 @@
 
 using namespace alba;
 using namespace std;
+
 namespace alba
 {
 
@@ -48,7 +49,8 @@ WcdmaTools::WcdmaTools(QWidget *parent)
     ALBA_PRINT0("WcdmaTools9");
 }
 
-WcdmaTools::~WcdmaTools(){
+WcdmaTools::~WcdmaTools()
+{
     delete ui;
 }
 
@@ -152,6 +154,7 @@ void WcdmaTools::on_executeButton_clicked()
     m_progressBarThread.startUpdatingProgressBar();
     m_stepHandlerThread.execute();
 }
+
 void WcdmaTools::on_actionOpenFile_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QString::fromStdString(AlbaLocalPathHandler(m_configuration.inputFileOrDirectory).getFullPath()), tr("All Files (*)"));
@@ -162,6 +165,7 @@ void WcdmaTools::on_actionOpenFile_triggered()
         ui->inputFileAndFolderTextBox->setText(QString::fromStdString(pathHandler.getFullPath()));
     }
 }
+
 void WcdmaTools::on_actionOpenFolder_triggered()
 {
     QString directory = QFileDialog::getExistingDirectory(this, tr("Open folder"), QString::fromStdString(AlbaLocalPathHandler(m_configuration.inputFileOrDirectory).getDirectory()), QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
@@ -181,7 +185,8 @@ void WcdmaTools::on_actionReset_to_default_triggered()
 
 void WcdmaTools::on_actionAboutAprg_triggered()
 {
-    QMessageBox::about(this, tr("About Menu"), tr("Insert sample text here"));}
+    QMessageBox::about(this, tr("About Menu"), tr("Insert sample text here"));
+}
 
 void WcdmaTools::on_actionQuit_triggered()
 {
