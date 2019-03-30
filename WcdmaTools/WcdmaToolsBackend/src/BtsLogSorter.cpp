@@ -28,7 +28,8 @@ namespace wcdmaToolsBackend
 {
 
 BtsLogSorter::BtsLogSorter(BtsLogSorterConfiguration const& configuration)
-    : m_acceptedFilesGrepEvaluator(configuration.m_acceptedFilesGrepCondition)
+    : m_isFilterOn(configuration.m_isFilterGrepOn)
+    , m_acceptedFilesGrepEvaluator(configuration.m_acceptedFilesGrepCondition)
     , m_filterGrepEvaluator(configuration.m_filterGrepCondition)
     , m_pathOfAllTempFiles(configuration.m_pathOfTempFiles)
     , m_pathOfCurrentTempFiles(configuration.m_pathOfTempFiles +R"(\)" + stringHelper::getRandomAlphaNumericString(30))
@@ -84,7 +85,7 @@ void BtsLogSorter::processFile(string const& filePath)
     while(fileReader.isNotFinished())
     {
         string lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
-        if(m_filterGrepEvaluator.evaluate(lineInFile))
+        if(!m_isFilterOn || m_filterGrepEvaluator.evaluate(lineInFile))
         {
             processLineInFile(filePathHandler.getFile(), lineInFile);
         }

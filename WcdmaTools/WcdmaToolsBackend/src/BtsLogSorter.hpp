@@ -45,6 +45,7 @@ private:
     void updateOrWriteCurrentPrint(BtsLogPrint const& logPrint, std::ofstream & outputLogFileStream);
     void writeLastPrint(std::ofstream & outputLogFileStream);
     void deleteFilesInDirectory(std::string const& directoryOfLogs) const;
+    bool m_isFilterOn;
     alba::AlbaGrepStringEvaluator m_acceptedFilesGrepEvaluator;
     alba::AlbaGrepStringEvaluator m_filterGrepEvaluator;
     std::string m_pathOfAllTempFiles;

@@ -9,6 +9,7 @@ namespace wcdmaToolsBackend
 
 struct BtsLogSorterConfiguration
 {
+    bool m_isFilterGrepOn;
     std::string m_acceptedFilesGrepCondition;
     std::string m_filterGrepCondition;
     std::string m_pathOfTempFiles;
