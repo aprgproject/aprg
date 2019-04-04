@@ -6,6 +6,8 @@
 #include <sstream>
 #include <string>
 
+using namespace alba::mathHelper;
+
 namespace alba
 {
 
@@ -32,7 +34,7 @@ public:
     AlbaRange(DataType const startValue, DataType const endValue, DataType const intervalMagnitude)
         : m_startValue(startValue)
         , m_endValue(endValue)
-        , m_intervalMagnitude(mathHelper::getAbsoluteValue(intervalMagnitude))
+        , m_intervalMagnitude(getAbsoluteValue(intervalMagnitude))
     {}
 
     bool isEmpty() const
@@ -112,7 +114,7 @@ public:
     {
         m_startValue = startValue;
         m_endValue = endValue;
-        m_intervalMagnitude = mathHelper::getAbsoluteValue(intervalMagnitude);
+        m_intervalMagnitude = getAbsoluteValue(intervalMagnitude);
     }
 
     void setStartValue(DataType const startValue)

@@ -10,6 +10,28 @@ using namespace std;
 namespace alba
 {
 
+TEST(AlbaMathHelperTest, DoubleTypesCanBeConsideredEqual)
+{
+    EXPECT_TRUE(isConsideredEqual(static_cast<double>(1)/3,static_cast<double>(1)/3));
+    EXPECT_FALSE(isConsideredEqual(static_cast<double>(1)/3,static_cast<double>(1)/3+0.1));
+    EXPECT_TRUE(isConsideredEqual(static_cast<double>(1)/3,static_cast<double>(1)/3+0.000000000001));
+    EXPECT_TRUE(isConsideredEqual(static_cast<double>(0),0.000000000001));
+    EXPECT_TRUE(isConsideredEqual(0.000000000001,0.000000000000000000000001));
+}
+
+TEST(AlbaMathHelperTest, IntegerTypesCanBeConsideredEqual)
+{
+    EXPECT_TRUE(isConsideredEqual(static_cast<int>(100), static_cast<int>(100)));
+}
+
+TEST(AlbaMathHelperTest, DistanceOfTwoNumbersCanBeComputed)
+{
+    EXPECT_EQ(90, getDistance(-100,-10));
+    EXPECT_EQ(20, getDistance(10,-10));
+    EXPECT_EQ(20, getDistance(-10,10));
+    EXPECT_EQ(90, getDistance(10,100));
+}
+
 TEST(AlbaMathHelperTest, AverageOfTwoNumbersCanBeComputed)
 {
     EXPECT_EQ(0, getAverage(-10,10));
@@ -23,6 +45,23 @@ TEST(AlbaMathHelperTest, AbsoluteValueCanBeComputed)
     EXPECT_EQ(0, getAbsoluteValue(0));
     EXPECT_EQ(0.5, getAbsoluteValue(0.5));
     EXPECT_EQ(0.5, getAbsoluteValue(-0.5));
+}
+
+TEST(AlbaMathHelperTest, SquareRootOfXSquaredPlusYSquaredCanBeComputed)
+{
+    EXPECT_EQ(5, getSquareRootOfXSquaredPlusYSquared(3,4));
+    EXPECT_EQ(13, getSquareRootOfXSquaredPlusYSquared(5,-12));
+    EXPECT_EQ(25, getSquareRootOfXSquaredPlusYSquared(-7,24));
+    EXPECT_EQ(17, getSquareRootOfXSquaredPlusYSquared(-8,-15));
+}
+
+TEST(AlbaMathHelperTest, SquareRootOfXSquaredPlusYSquaredPlusZSquaredCanBeComputed)
+{
+    EXPECT_EQ(3, getSquareRootOfXSquaredPlusYSquaredPlusZSquared(1,2,2));
+    EXPECT_EQ(15, getSquareRootOfXSquaredPlusYSquaredPlusZSquared(-2,10,11));
+    EXPECT_EQ(21, getSquareRootOfXSquaredPlusYSquaredPlusZSquared(4,-13,16));
+    EXPECT_EQ(27, getSquareRootOfXSquaredPlusYSquaredPlusZSquared(2,10,-25));
+    EXPECT_EQ(7, getSquareRootOfXSquaredPlusYSquaredPlusZSquared(-2,-3,-6));
 }
 
 TEST(AlbaMathHelperTest, SignCanBeFetched)

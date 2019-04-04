@@ -1,7 +1,11 @@
 #pragma once
 
+#include <Math/AlbaMathHelper.hpp>
+
 #include <sstream>
 #include <string>
+
+using namespace alba::mathHelper;
 
 namespace alba
 {
@@ -42,7 +46,7 @@ public:
 
     bool operator==(AlbaXY<CoordinateType> const& xy) const
     {
-        return (x == xy.x) && (y == xy.y);
+        return isConsideredEqual(x, xy.x) && isConsideredEqual(y, xy.y);
     }
 
     bool operator!=(AlbaXY<CoordinateType> const& secondXy) const
