@@ -1,4 +1,4 @@
-#include <Math/AlbaMatrix.hpp>
+#include <AlbaMatrix.hpp>
 
 #include <gtest/gtest.h>
 
