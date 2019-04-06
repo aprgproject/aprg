@@ -2,11 +2,9 @@
 
 #include <Container/AlbaXY.hpp>
 
-#include <set>
 #include <vector>
 
-namespace alba
-{
+namespace alba{
 
 namespace TwoDimensions
 {
