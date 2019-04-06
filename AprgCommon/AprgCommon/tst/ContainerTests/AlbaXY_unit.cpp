@@ -24,8 +24,8 @@ TEST(AlbaXYTest, ValuesAreSetAtConstruction)
 TEST(AlbaXYTest,  ValuesCanBeSetAfterConstruction)
 {
     AlbaXY<int> xy(-5,5);
-    xy.setXAndY(10,10);
-    EXPECT_EQ(AlbaXY<int>(10,10), xy);
+    xy.setXAndY(10,20);
+    EXPECT_EQ(AlbaXY<int>(10,20), xy);
 
     xy.setX(23);
     xy.setY(45);

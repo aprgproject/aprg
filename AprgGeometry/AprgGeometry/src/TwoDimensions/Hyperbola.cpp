@@ -12,6 +12,9 @@ using namespace std;
 namespace alba
 {
 
+namespace TwoDimensions
+{
+
 Hyperbola::Hyperbola()
     : m_center()
     , m_aValue(0)
@@ -147,4 +150,5 @@ Points Hyperbola::getPointsInTraversingX(double const signOfX, double const sign
     return result;
 }
 
+}
 }

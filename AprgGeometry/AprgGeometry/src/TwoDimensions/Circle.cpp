@@ -12,6 +12,9 @@ using namespace std;
 namespace alba
 {
 
+namespace TwoDimensions
+{
+
 Circle::Circle()
     : m_center()
     , m_radius(0)
@@ -161,4 +164,5 @@ Points Circle::getPointsInTraversingX(double const signOfX, double const signOfY
     return result;
 }
 
+}
 }

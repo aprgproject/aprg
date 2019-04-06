@@ -6,10 +6,13 @@
 #include <Container/AlbaRange.hpp>
 
 #include <cassert>
-#include <functional>#include <sstream>
+#include <functional>
+#include <sstream>
 #include <vector>
 
 //this is done, but refactor this code, extract till you drop! -> maybe create a helper function
+//next stop determinants vectors vector spaces
+//This is based on "Introductory Linear Algebra with Applications"
 
 namespace alba
 {
@@ -95,14 +98,16 @@ public:
         assert((yInput < m_numberOfRows) && (yOutput < m_numberOfRows));
         traverseWithUnaryOperationForDifferentRows(yInput, yOutput, [&](DataType const& input)
         {
-            return input*multiplierForInput;        });
+            return input*multiplierForInput;
+        });
     }
     void subtractRowsWithMultiplier(unsigned int const yInput1, unsigned int const yInput2, DataType const& multiplierForInput2, unsigned int const yOutput)
     {
         assert((yInput1 < m_numberOfRows) && (yInput2 < m_numberOfRows) && (yOutput < m_numberOfRows));
         traverseWithBinaryOperationForDifferentRows(yInput1, yInput2, yOutput, [&](DataType const& input1, DataType const& input2)
         {
-            return input1-(input2*multiplierForInput2);        });
+            return input1-(input2*multiplierForInput2);
+        });
     }
     void transpose()
     {
@@ -119,6 +124,7 @@ public:
     }
     void invert()
     {
+        assert((m_numberOfColumns == m_numberOfRows));
         unsigned int newColumns = m_numberOfColumns*2;
         AlbaMatrix tempMatrix(newColumns, m_numberOfRows);
         MatrixIndexRange yRange(0, m_numberOfRows-1, 1);
@@ -138,12 +144,32 @@ public:
             m_matrixData[getMatrixIndex(x, y)] = tempMatrix.m_matrixData.at(getMatrixIndex(m_numberOfColumns+x, y, newColumns));
         });
     }
+    bool isIdentityMatrix() const
+    {
+        bool isIdentityMatrix(m_numberOfColumns==m_numberOfRows);
+        for(unsigned int y=0; isIdentityMatrix && y<m_numberOfRows; y++)
+        {
+            for(unsigned int x=0; isIdentityMatrix && x<m_numberOfColumns; x++)
+            {
+                if(x==y)
+                {
+                    isIdentityMatrix = isIdentityMatrix && m_matrixData.at(getMatrixIndex(x, y)) == 1;
+                }
+                else
+                {
+                    isIdentityMatrix = isIdentityMatrix && m_matrixData.at(getMatrixIndex(x, y)) == 0;
+                }
+            }
+        }
+        return isIdentityMatrix;
+    }
     bool isReducedRowEchelonForm() const
     {
         return areRowsWithAllZeroInTheBottom() && areLeadingEntriesInReducedRowEchelonForm();
     }
     void transformToReducedEchelonForm()
     {
+        //gauss jordan reduction
         unsigned int yWithLeadingEntry = 0;
         for(unsigned int x=0; x<m_numberOfColumns; x++)
         {
@@ -203,7 +229,8 @@ public:
     bool operator==(AlbaMatrix const& secondMatrix) const
     {
         if(m_numberOfColumns != secondMatrix.m_numberOfColumns)
-        {            return false;
+        {
+            return false;
         }
         else if(m_numberOfRows != secondMatrix.m_numberOfRows)
         {
@@ -237,7 +264,8 @@ private:
         });
     }
     void traverseWithUnaryOperationWithSameDimensions(
-            AlbaMatrix const& inputMatrix,            AlbaMatrix & resultMatrix,
+            AlbaMatrix const& inputMatrix,
+            AlbaMatrix & resultMatrix,
             UnaryFunction const& unaryFunction) const
     {
         assert((inputMatrix.m_numberOfColumns == resultMatrix.m_numberOfColumns) &&
@@ -251,14 +279,16 @@ private:
         });
     }
     void traverseWithBinaryOperationForDifferentRows(
-            unsigned int const yInput1,            unsigned int const yInput2,
+            unsigned int const yInput1,
+            unsigned int const yInput2,
             unsigned int const yOutput,
             BinaryFunction const& binaryFunction)
     {
         assert((yInput1 < m_numberOfRows) && (yInput2 < m_numberOfRows) && (yOutput < m_numberOfRows));
         for(unsigned int x=0; x<m_numberOfColumns; x++)
         {
-            m_matrixData[getMatrixIndex(x, yOutput)]                    = binaryFunction(m_matrixData.at(getMatrixIndex(x, yInput1)),
+            m_matrixData[getMatrixIndex(x, yOutput)]
+                    = binaryFunction(m_matrixData.at(getMatrixIndex(x, yInput1)),
                                      m_matrixData.at(getMatrixIndex(x, yInput2)));
         }
     }
@@ -270,7 +300,8 @@ private:
         assert((yInput < m_numberOfRows) && (yOutput < m_numberOfRows));
         for(unsigned int x=0; x<m_numberOfColumns; x++)
         {
-            m_matrixData[getMatrixIndex(x, yOutput)]                    = unaryFunction(m_matrixData.at(getMatrixIndex(x, yInput)));
+            m_matrixData[getMatrixIndex(x, yOutput)]
+                    = unaryFunction(m_matrixData.at(getMatrixIndex(x, yInput)));
         }
     }
     bool areRowsWithAllZeroInTheBottom() const
@@ -371,4 +402,4 @@ private:
     MatrixData m_matrixData;
 };
 
-}//namespace alba
+}//namespace alba

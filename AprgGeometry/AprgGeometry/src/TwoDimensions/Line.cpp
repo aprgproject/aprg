@@ -14,6 +14,9 @@ using namespace std;
 namespace alba
 {
 
+namespace TwoDimensions
+{
+
 Line::Line()
     : m_type(LineType::Invalid)
     , m_yIntercept(0)
@@ -346,4 +349,5 @@ LineType Line::determineLineTypeUsingCoefficients(double const aCoefficient, dou
     return lineType;
 }
 
+}
 }

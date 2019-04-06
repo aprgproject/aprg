@@ -7,6 +7,9 @@
 namespace alba
 {
 
+namespace TwoDimensions
+{
+
 enum class LineType
 {
     Horizontal,
@@ -54,4 +57,5 @@ private:
 
 using Lines = std::vector<Line>;
 
+}
 }

@@ -143,6 +143,7 @@ TEST(AlbaMatrixTest, MatrixCanBeAdded)
     EXPECT_EQ(10u, outputMatrix.get(0,2));
     EXPECT_EQ(12u, outputMatrix.get(1,2));
 }
+
 TEST(AlbaMatrixTest, MatrixCanBeSubtracted)
 {
     AlbaMatrix<unsigned int> inputMatrix1(2,3);
@@ -196,6 +197,26 @@ TEST(AlbaMatrixTest, MatrixCanBeMultipliedWithAnotherMatrix)
     EXPECT_EQ(16u, outputMatrix.get(1,1));
     EXPECT_EQ(25u, outputMatrix.get(0,2));
     EXPECT_EQ(36u, outputMatrix.get(1,2));
+}
+
+TEST(AlbaMatrixTest, MatrixCanBeCheckedIfItsIdentityMatrix)
+{
+    AlbaMatrix<unsigned int> inputMatrix1(3,3);
+    AlbaMatrix<unsigned int> inputMatrix2(3,3);
+    AlbaMatrix<unsigned int> inputMatrix3(4,3);
+    inputMatrix1.set({1,0,0,
+                      0,1,0,
+                      0,0,1});
+    inputMatrix2.set({1,0,2,
+                      0,1,1,
+                      0,0,1});
+    inputMatrix3.set({1,0,0,0,
+                      0,1,0,0,
+                      0,0,1,0});
+
+    EXPECT_TRUE(inputMatrix1.isIdentityMatrix());
+    EXPECT_FALSE(inputMatrix2.isIdentityMatrix());
+    EXPECT_FALSE(inputMatrix3.isIdentityMatrix());
 }
 
 TEST(AlbaMatrixTest, MatrixCanBeCheckedIfItsInReducedRowEchelonForm)
@@ -351,7 +372,10 @@ TEST(AlbaMatrixTest, InverseOfMatrixCanBeComputed)
     inputMatrix.set({1.0,1.0,1.0,
                      0.0,2.0,3.0,
                      5.0,5.0,1});
+    AlbaMatrix<double> copiedMatrix(inputMatrix);
     inputMatrix.invert();
+    AlbaMatrix<double> multipliedMatrix(copiedMatrix*inputMatrix);
+    multipliedMatrix.transformToReducedEchelonForm();
 
     EXPECT_DOUBLE_EQ(1.625, inputMatrix.get(0,0));
     EXPECT_DOUBLE_EQ(-0.5, inputMatrix.get(1,0));
@@ -362,6 +386,7 @@ TEST(AlbaMatrixTest, InverseOfMatrixCanBeComputed)
     EXPECT_DOUBLE_EQ(1.25, inputMatrix.get(0,2));
     EXPECT_DOUBLE_EQ(0.0, inputMatrix.get(1,2));
     EXPECT_DOUBLE_EQ(-0.25, inputMatrix.get(2,2));
+    EXPECT_TRUE(multipliedMatrix.isIdentityMatrix());
 }
 
 }

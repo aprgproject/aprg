@@ -91,7 +91,8 @@ unsigned int getAbsoluteValue<unsigned int>(unsigned int const value)
 
 //getSquareRootOfXSquaredPlusYSquared
 template <typename NumberType>
-NumberType getSquareRootOfXSquaredPlusYSquared(NumberType const x, NumberType const y){
+NumberType getSquareRootOfXSquaredPlusYSquared(NumberType const x, NumberType const y)
+{
     return static_cast<NumberType>(pow(pow(x, 2)+pow(y, 2), 0.5));
 }
 template int getSquareRootOfXSquaredPlusYSquared<int>(int const x, int const y);

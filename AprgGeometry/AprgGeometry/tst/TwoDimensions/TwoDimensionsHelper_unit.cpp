@@ -5,10 +5,9 @@
 #include <gtest/gtest.h>
 
 #include <cmath>
-#include <iostream>
 
-using namespace alba;
-using namespace alba::twoDimensionsHelper;
+using namespace alba::TwoDimensions;
+using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace std;
 
 TEST(TwoDimensionsHelperTest, MidpointBetweenTwoPointsCanBeCalculated)

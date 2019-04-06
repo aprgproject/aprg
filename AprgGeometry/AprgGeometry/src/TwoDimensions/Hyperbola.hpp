@@ -7,6 +7,9 @@
 namespace alba
 {
 
+namespace TwoDimensions
+{
+
 class Hyperbola
 {
 public:
@@ -37,4 +40,5 @@ private:
 
 using Hyperbolas = std::vector<Hyperbola>;
 
+}
 }

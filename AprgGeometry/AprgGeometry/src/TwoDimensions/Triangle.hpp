@@ -5,6 +5,9 @@
 namespace alba
 {
 
+namespace TwoDimensions
+{
+
 using TrianglePolygonParent = Polygon<3>;
 
 class Triangle : public TrianglePolygonParent
@@ -15,4 +18,5 @@ public:
 
 };
 
+}
 }

@@ -7,6 +7,9 @@
 namespace alba
 {
 
+namespace TwoDimensions
+{
+
 class Circle
 {
 public:
@@ -37,4 +40,5 @@ private:
 
 using Circles = std::vector<Circle>;
 
+}
 }

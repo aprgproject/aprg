@@ -8,6 +8,9 @@
 namespace alba
 {
 
+namespace TwoDimensions
+{
+
 using PointParent = AlbaXY<double>;
 
 class Point : public PointParent
@@ -19,4 +22,5 @@ public:
 
 using Points = std::vector<Point>;
 
+}
 }

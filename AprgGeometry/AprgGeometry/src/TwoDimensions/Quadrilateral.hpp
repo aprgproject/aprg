@@ -5,6 +5,9 @@
 namespace alba
 {
 
+namespace TwoDimensions
+{
+
 using QuadrilateralPolygonParent = Polygon<4>;
 
 class Quadrilateral : public QuadrilateralPolygonParent
@@ -15,4 +18,5 @@ public:
 
 };
 
+}
 }

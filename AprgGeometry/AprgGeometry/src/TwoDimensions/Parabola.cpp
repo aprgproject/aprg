@@ -3,6 +3,9 @@
 namespace alba
 {
 
+namespace TwoDimensions
+{
+
 Parabola::Parabola()
     : ParabolaPolynomialParent()
 {}
@@ -11,4 +14,5 @@ Parabola::Parabola(double const aCoefficient, double const bCoefficient, double 
     : ParabolaPolynomialParent{cCoefficient, bCoefficient, aCoefficient}
 {}
 
+}
 }

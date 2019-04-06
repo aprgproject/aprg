@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include <iostream>
-
-using namespace alba;
+using namespace alba::TwoDimensions;
 using namespace std;
 
 TEST(PolynomialTest, PolynomialCanBeCreated)

@@ -3,6 +3,9 @@
 namespace alba
 {
 
+namespace TwoDimensions
+{
+
 Quadrilateral::Quadrilateral()
     : QuadrilateralPolygonParent()
 {}
@@ -11,4 +14,5 @@ Quadrilateral::Quadrilateral(Point const& first, Point const& second, Point cons
     : QuadrilateralPolygonParent{first, second, third, fourth}
 {}
 
+}
 }

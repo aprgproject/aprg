@@ -9,6 +9,9 @@
 namespace alba
 {
 
+namespace ThreeDimensions
+{
+
 enum class PlaneType
 {
     Horizontal,
@@ -22,7 +25,7 @@ class Plane
 {
 public:
     Plane();
-    Plane(Point const& first, Point const& second);
+    Plane(TwoDimensions::Point const& first, TwoDimensions::Point const& second);
     Plane(double const aCoefficient, double const bCoefficient, double const cCoefficient); //ax+by+c=0
     bool operator==(Plane const& line) const;
     bool operator!=(Plane const& line) const;
@@ -33,15 +36,15 @@ public:
     double getACoefficient() const;
     double getBCoefficient() const;
     double getCCoefficient() const;
-    Points getPoints(Point const& first, Point const& second, double const interval) const;
-    Points getPointsWithoutLastPoint(Point const& first, Point const& second, double const interval) const;
+    TwoDimensions::Points getPoints(TwoDimensions::Point const& first, TwoDimensions::Point const& second, double const interval) const;
+    TwoDimensions::Points getPointsWithoutLastPoint(TwoDimensions::Point const& first, TwoDimensions::Point const& second, double const interval) const;
     double calculateYFromX(double const x) const;
     double calculateXFromY(double const y) const;
 private:
-    void getPointsForVerticalPlane(Points & points, Point const& first, Point const& second, double const interval) const;
-    void getPointsForHorizontalPlane(Points & points, Point const& first, Point const& second, double const interval) const;
-    void getPointsForPlaneWithSlope(Points & points, Point const& first, Point const& second, double const interval) const;
-    void mergePointsFromPointsFromXAndY(Points & points, Points const& pointsFromXCoordinate, Points const& pointsFromYCoordinate, bool const isDirectionAscendingForX) const;
+    void getPointsForVerticalPlane(TwoDimensions::Points & points, TwoDimensions::Point const& first, TwoDimensions::Point const& second, double const interval) const;
+    void getPointsForHorizontalPlane(TwoDimensions::Points & points, TwoDimensions::Point const& first, TwoDimensions::Point const& second, double const interval) const;
+    void getPointsForPlaneWithSlope(TwoDimensions::Points & points, TwoDimensions::Point const& first, TwoDimensions::Point const& second, double const interval) const;
+    void mergePointsFromPointsFromXAndY(TwoDimensions::Points & points, TwoDimensions::Points const& pointsFromXCoordinate, TwoDimensions::Points const& pointsFromYCoordinate, bool const isDirectionAscendingForX) const;
     PlaneType determinePlaneTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX) const;
     PlaneType determinePlaneTypeUsingCoefficients(double const aCoefficient, double const bCoefficient) const;
     PlaneType m_type;
@@ -56,4 +59,5 @@ private:
 
 using Planes = std::vector<Plane>;
 
+}
 }

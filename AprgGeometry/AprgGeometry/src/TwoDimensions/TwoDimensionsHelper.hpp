@@ -12,6 +12,9 @@
 namespace alba
 {
 
+namespace TwoDimensions
+{
+
 namespace twoDimensionsHelper
 {
 
@@ -40,6 +43,8 @@ Line getPolynomialTangentLineAt(Polynomial<numberOfCoefficients> polynomial, dou
     double slope = polynomial.getSlopeAt(x);
     double y = polynomial.calculateYfromX(x);
     return Line(Point(x, y), Point(x+1, y+slope));
+}
+
 }
 
 }

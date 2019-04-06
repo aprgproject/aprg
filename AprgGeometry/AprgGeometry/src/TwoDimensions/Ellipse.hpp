@@ -7,6 +7,9 @@
 namespace alba
 {
 
+namespace TwoDimensions
+{
+
 class Ellipse
 {
 public:
@@ -41,4 +44,5 @@ private:
 
 using Ellipses = std::vector<Ellipse>;
 
+}
 }

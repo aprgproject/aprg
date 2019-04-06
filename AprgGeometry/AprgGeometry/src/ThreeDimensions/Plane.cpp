@@ -10,8 +10,12 @@
 #include <set>
 
 using namespace std;
+using namespace alba::TwoDimensions;
 
 namespace alba
+{
+
+namespace ThreeDimensions
 {
 
 Plane::Plane()
@@ -189,14 +193,14 @@ void Plane::getPointsForPlaneWithSlope(Points & points, Point const& first, Poin
     minimumXAndY.saveMinimumXAndY(second);
     maximumXAndY.saveMaximumXAndY(first);
     maximumXAndY.saveMaximumXAndY(second);
-    twoDimensionsHelper::addPointIfInsideTwoPoints(pointsAtBorder, Point(first.getX(), calculateYFromX(first.getX())), minimumXAndY, maximumXAndY);
-    twoDimensionsHelper::addPointIfInsideTwoPoints(pointsAtBorder, Point(calculateXFromY(first.getY()), first.getY()), minimumXAndY, maximumXAndY);
-    twoDimensionsHelper::addPointIfInsideTwoPoints(pointsAtBorder, Point(second.getX(), calculateYFromX(second.getX())), minimumXAndY, maximumXAndY);
-    twoDimensionsHelper::addPointIfInsideTwoPoints(pointsAtBorder, Point(calculateXFromY(second.getY()), second.getY()), minimumXAndY, maximumXAndY);
+    TwoDimensions::twoDimensionsHelper::addPointIfInsideTwoPoints(pointsAtBorder, Point(first.getX(), calculateYFromX(first.getX())), minimumXAndY, maximumXAndY);
+    TwoDimensions::twoDimensionsHelper::addPointIfInsideTwoPoints(pointsAtBorder, Point(calculateXFromY(first.getY()), first.getY()), minimumXAndY, maximumXAndY);
+    TwoDimensions::twoDimensionsHelper::addPointIfInsideTwoPoints(pointsAtBorder, Point(second.getX(), calculateYFromX(second.getX())), minimumXAndY, maximumXAndY);
+    TwoDimensions::twoDimensionsHelper::addPointIfInsideTwoPoints(pointsAtBorder, Point(calculateXFromY(second.getY()), second.getY()), minimumXAndY, maximumXAndY);
     if(pointsAtBorder.size()>=2)
     {
-        Point startingPoint(twoDimensionsHelper::popNearestPoint(pointsAtBorder, first));
-        Point endPoint(twoDimensionsHelper::popNearestPoint(pointsAtBorder, second));
+        Point startingPoint(TwoDimensions::twoDimensionsHelper::popNearestPoint(pointsAtBorder, first));
+        Point endPoint(TwoDimensions::twoDimensionsHelper::popNearestPoint(pointsAtBorder, second));
         bool isDirectionAscendingForX = startingPoint.getX() <= endPoint.getX();
 
         Points pointsFromXCoordinate;
@@ -215,11 +219,11 @@ void Plane::getPointsForPlaneWithSlope(Points & points, Point const& first, Poin
 
         if(isDirectionAscendingForX)
         {
-            points = twoDimensionsHelper::getMergedPointsInIncreasingX(pointsFromXCoordinate, pointsFromYCoordinate);
+            points = TwoDimensions::twoDimensionsHelper::getMergedPointsInIncreasingX(pointsFromXCoordinate, pointsFromYCoordinate);
         }
         else
         {
-            points = twoDimensionsHelper::getMergedPointsInDecreasingX(pointsFromXCoordinate, pointsFromYCoordinate);
+            points = TwoDimensions::twoDimensionsHelper::getMergedPointsInDecreasingX(pointsFromXCoordinate, pointsFromYCoordinate);
         }
     }
 }
@@ -333,4 +337,5 @@ PlaneType Plane::determinePlaneTypeUsingCoefficients(double const aCoefficient, 
     return lineType;
 }
 
+}
 }

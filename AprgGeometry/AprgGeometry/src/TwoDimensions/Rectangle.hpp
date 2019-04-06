@@ -5,6 +5,9 @@
 namespace alba
 {
 
+namespace TwoDimensions
+{
+
 class Rectangle : public Quadrilateral
 {
 public:
@@ -13,4 +16,5 @@ public:
 
 };
 
+}
 }

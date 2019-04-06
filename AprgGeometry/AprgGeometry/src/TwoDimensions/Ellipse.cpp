@@ -12,6 +12,9 @@ using namespace std;
 namespace alba
 {
 
+namespace TwoDimensions
+{
+
 Ellipse::Ellipse()
     : m_center()
     , m_aValue(0)
@@ -191,4 +194,5 @@ Points Ellipse::getPointsInTraversingX(double const signOfX, double const signOf
     return result;
 }
 
+}
 }

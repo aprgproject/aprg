@@ -7,6 +7,7 @@
 #include <cmath>
 
 using namespace alba;
+using namespace alba::TwoDimensions;
 using namespace std;
 
 #define APRG_GRAPH_24_BIT_DEFAULT_FILE APRG_DIR R"(AprgGraph\AprgGraph\tst\Bitmaps\Default24Bit.bmp)"
@@ -27,7 +28,8 @@ TEST(SampleTest, BitmapGraph24Bits)
     graph.drawHyperbola(Hyperbola(Point(0,0), 200, 150), 0x0000FFFF);
     graph.drawFunctionUsingX(0x00FF00FF, [](double xValue)->double
     {
-        return 100*sin(xValue/100);    });
+        return 100*sin(xValue/100);
+    });
     graph.drawFunctionUsingY(0x00FF00FF, [](double yValue)->double
     {
         return 100*sin(yValue/100);
