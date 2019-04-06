@@ -46,7 +46,8 @@ public:
         return z;
     }
 
-    CoordinateType getXTimesYTimesZ() const    {
+    CoordinateType getXTimesYTimesZ() const
+    {
         return x*y*z;
     }
 

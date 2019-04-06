@@ -4,7 +4,8 @@
 
 #include <vector>
 
-namespace alba{
+namespace alba
+{
 
 namespace TwoDimensions
 {

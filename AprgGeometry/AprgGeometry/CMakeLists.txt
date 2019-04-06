@@ -22,6 +22,9 @@ include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 #Include AprgCommon, this needs APRG Directory
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
+#Include AprgMatrix, this needs APRG Directory
+include(${APRG_DIR}/AprgMatrix/AprgCmakeInclude/AprgMatrix.cmake)
+
 #Add files and directories
 include(${APRG_GEOMETRY_DIR}/cmake/FilesAndDirectories.cmake)
 

@@ -9,6 +9,7 @@
 #include <iterator>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -19,13 +20,20 @@ Line::Line()
     : m_type(LineType::Invalid)
     , m_yIntercept(0)
     , m_xIntercept(0)
-    , m_aCoefficient(0) //form: a*x + b*y + c
-    , m_bCoefficient(0) //form: a*x + b*y + c
-    , m_cCoefficient(0) //form: a*x + b*y + c
+    , m_aCoefficient(0)
+    , m_bCoefficient(0)
+    , m_cCoefficient(0)
     , m_slope(0)
 {}
 
 Line::Line(Point const& first, Point const& second)
+    : m_type(LineType::Invalid)
+    , m_yIntercept(0)
+    , m_xIntercept(0)
+    , m_aCoefficient(0)
+    , m_bCoefficient(0)
+    , m_cCoefficient(0)
+    , m_slope(0)
 {
     double deltaY = second.getY() - first.getY();
     double deltaX = second.getX() - first.getX();
@@ -113,7 +121,8 @@ double Line::getYIntercept() const
     return m_yIntercept;
 }
 
-double Line::getSlope() const{
+double Line::getSlope() const
+{
     return m_slope;
 }
 

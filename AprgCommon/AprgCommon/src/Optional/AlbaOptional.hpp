@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <memory>
+#include <ostream>
 
 namespace alba
 {
@@ -135,6 +136,16 @@ public:
         return *(m_contentPointer.get());
     }
 
+    friend std::ostream & operator<<(std::ostream & out, AlbaOptional<ContentType> const& optional)
+    {
+        out << "hasContent: " << optional.m_hasContent;
+        if(optional.m_hasContent)
+        {
+            out << " value: " << optional.getConstReference();
+        }
+        return out;
+    }
+
 private:
     bool m_hasContent;
     std::unique_ptr<ContentType> m_contentPointer;
@@ -213,6 +224,16 @@ public:
             return *m_contentPointer;
         }
         return m_empty;
+    }
+
+    friend std::ostream & operator<<(std::ostream & out, AlbaOptional<ContentType> const& optional)
+    {
+        out << "hasContent: " << optional.m_hasContent;
+        if(optional.m_hasContent)
+        {
+            out << " value: " << optional.get();
+        }
+        return out;
     }
 
 private:
