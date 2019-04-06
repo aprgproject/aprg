@@ -103,18 +103,17 @@ LineType Line::getType() const
     return m_type;
 }
 
-double Line::getYIntercept() const
-{
-    return m_yIntercept;
-}
-
 double Line::getXIntercept() const
 {
     return m_xIntercept;
 }
 
-double Line::getSlope() const
+double Line::getYIntercept() const
 {
+    return m_yIntercept;
+}
+
+double Line::getSlope() const{
     return m_slope;
 }
 
