@@ -18,12 +18,11 @@ class Plane
 public:
     Plane();
     Plane(Point const& first, Point const& second, Point const& third);
-    bool operator==(Plane const& line) const;
-    bool operator!=(Plane const& line) const;
+    bool operator==(Plane const& plane) const;
+    bool operator!=(Plane const& plane) const;
     double getACoefficient() const;
     double getBCoefficient() const;
-    double getCCoefficient() const;
-    double getDCoefficient() const;
+    double getCCoefficient() const;    double getDCoefficient() const;
     AlbaOptional<double> getXIntercept() const;
     AlbaOptional<double> getYIntercept() const;
     AlbaOptional<double> getZIntercept() const;
