@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
-project(Boost C CXX)
+project(BoostTest C CXX)
 
 set(OUTFILE ${PROJECT_NAME})
-
 #Comment out TEST_MODE to build static executable
 set(TEST_MODE "ON")
 
@@ -22,10 +21,10 @@ include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 #Include AprgCommon, this needs APRG Directory
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
-#Add files and directories
 include(${BOOST_DIR}/cmake/FilesAndDirectories.cmake)
+include(${BOOST_DIR}/cmake/IncludeBoost.cmake)
 
 add_executable(${OUTFILE} ${BOOST_SOURCES_AND_TESTS})
 include_directories(${BOOST_INCLUDE_DIRECTORIES} ${BOOST_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
-target_link_libraries(${OUTFILE} ${CMAKE_THREAD_LIBS_INIT} APRG_COMMON gtest)
+target_link_libraries(${OUTFILE} ${CMAKE_THREAD_LIBS_INIT} APRG_COMMON gtest  ${Boost_LIBRARIES} iconv)
 add_test(${OUTFILE} ${OUTFILE})
