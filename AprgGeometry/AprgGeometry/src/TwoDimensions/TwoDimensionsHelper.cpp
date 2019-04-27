@@ -17,10 +17,14 @@ namespace TwoDimensions
 namespace twoDimensionsHelper
 {
 
+bool isPointInLine(Point const& point, Line const& line)
+{
+    return isConsideredEqual(point.getY(), line.calculateYFromX(point.getX()));
+}
+
 double getDistance(Point const& point1, Point const& point2)
 {
-    double deltaX = point2.getX() - point1.getX();
-    double deltaY = point2.getY() - point1.getY();
+    double deltaX = point2.getX() - point1.getX();    double deltaY = point2.getY() - point1.getY();
     return getSquareRootOfXSquaredPlusYSquared<double>(deltaX, deltaY);
 }
 

@@ -10,10 +10,20 @@ using namespace alba::TwoDimensions;
 using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace std;
 
+
+TEST(TwoDimensionsHelperTest, PointCanBeCheckedIfItsOnLine)
+{
+    Point pointOnLine(-2,2);
+    Point pointNotOnLine(2,2);
+    Line line(Point(0,0), Point(-1,1));
+
+    EXPECT_TRUE(isPointInLine(pointOnLine, line));
+    EXPECT_FALSE(isPointInLine(pointNotOnLine, line));
+}
+
 TEST(TwoDimensionsHelperTest, MidpointBetweenTwoPointsCanBeCalculated)
 {
-    EXPECT_EQ(Point(0,0), getMidpoint(Point(0,0), Point(0,0)));
-    EXPECT_EQ(Point(2,2), getMidpoint(Point(1,1), Point(3,3)));
+    EXPECT_EQ(Point(0,0), getMidpoint(Point(0,0), Point(0,0)));    EXPECT_EQ(Point(2,2), getMidpoint(Point(1,1), Point(3,3)));
     EXPECT_EQ(Point(-450,-900), getMidpoint(Point(100,200), Point(-1000,-2000)));
 }
 
