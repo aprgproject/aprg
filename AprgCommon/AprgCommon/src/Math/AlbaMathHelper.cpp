@@ -39,7 +39,8 @@ bool isConsideredEqual(NumberType const value1, NumberType const value2)
 
 template bool isConsideredEqual<double>(double const value1, double const value2);
 
-template <>bool isConsideredEqual<int>(int const value1, int const value2)
+template <>
+bool isConsideredEqual<int>(int const value1, int const value2)
 {
     return value1==value2;
 }
