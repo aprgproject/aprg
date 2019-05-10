@@ -30,10 +30,10 @@ WebCrawler::WebCrawler(string const& downloadDirectory, string const& temporaryF
     , m_temporaryFilePath(temporaryFilePath)
     , m_downloadDirectoryPathHandler(downloadDirectory + R"(\)")
     , m_memoryCardPathHandler(downloadDirectory + R"(\MemoryCard.txt)")
+    , m_importantLinksPathHandler(downloadDirectory + R"(\ImportantLinks.txt)")
 {
     if (m_memoryCardPathHandler.isFoundInLocalSystem() && m_memoryCardPathHandler.isFile())
-    {
-        loadMemoryCard();
+    {        loadMemoryCard();
     }
 }
 
@@ -43,10 +43,10 @@ WebCrawler::WebCrawler(string const& workingDirectory, string const& webLink, st
     , m_temporaryFilePath(temporaryFilePath)
     , m_downloadDirectoryPathHandler(workingDirectory + R"(\)" + getNewDirectoryNameFromWeblink(webLink) + R"(\)")
     , m_memoryCardPathHandler(m_downloadDirectoryPathHandler.getFullPath() + R"(\MemoryCard.txt)")
+    , m_importantLinksPathHandler(m_downloadDirectoryPathHandler.getFullPath() + R"(\ImportantLinks.txt)")
 {
     ALBA_PRINT1(m_memoryCardPathHandler.getFullPath());
-    m_webLinks.push_back(webLink);
-    m_memoryCardPathHandler.createDirectoriesForNonExisitingDirectories();
+    m_webLinks.push_back(webLink);    m_memoryCardPathHandler.createDirectoriesForNonExisitingDirectories();
     saveMemoryCard();
     m_downloadDirectoryPathHandler.reInput();
     m_memoryCardPathHandler.reInput();
@@ -303,10 +303,18 @@ void WebCrawler::loadMemoryCard()
     }
 }
 
+void WebCrawler::saveImportantLink(string const& link) const
+{
+    ofstream importantLinkFileStream(m_importantLinksPathHandler.getFullPath(), ofstream::app);
+    if(importantLinkFileStream.is_open())
+    {
+        importantLinkFileStream<<link<<endl;
+    }
+}
+
 void WebCrawler::printStatus() const
 {
-    if(!m_downloadDirectoryPathHandler.isFoundInLocalSystem())
-    {
+    if(!m_downloadDirectoryPathHandler.isFoundInLocalSystem())    {
         cout << "Working directory: ["<< m_downloadDirectoryPathHandler.getFullPath() << "] is not found" << endl;
     }
     else if(!m_downloadDirectoryPathHandler.isDirectory())

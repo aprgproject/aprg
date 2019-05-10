@@ -46,9 +46,9 @@ public:
     void saveMemoryCard() const;
     void saveStateToMemoryCard(CrawlState const state);
     void loadMemoryCard();
+    void saveImportantLink(std::string const& link) const;
 
     void printStatus() const;
-
 private:
     bool isModeUnrecognized() const;
     bool isWebLinksEmpty() const;
@@ -67,7 +67,7 @@ private:
     std::string m_temporaryFilePath;
     alba::AlbaLocalPathHandler m_downloadDirectoryPathHandler;
     alba::AlbaLocalPathHandler m_memoryCardPathHandler;
+    alba::AlbaLocalPathHandler m_importantLinksPathHandler;
     WebLinks m_webLinks;
 };
-
 }
