@@ -194,10 +194,19 @@ double calculateInverseCumulativeStandardDistributionApproximation(double const 
     return z;
 }
 
+double convertDegreesToRadians(double const valueInDegrees)
+{
+    return valueInDegrees/180*getPi();
+}
+
+double convertRadiansToDegrees(double const valueInRadians)
+{
+    return valueInRadians/getPi()*180;
+}
+
 double getPi()
 {
-    return 3.14159265358979323846;
-}
+    return 3.14159265358979323846;}
 
 double getE()
 {
