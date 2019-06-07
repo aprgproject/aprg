@@ -176,10 +176,31 @@ void AlbaWindowsUserAutomation::pressUpKey(unsigned int const key) const
     });
 }
 
-void AlbaWindowsUserAutomation::typeCharacter(char const character) const
+void AlbaWindowsUserAutomation::typeKey(unsigned int const key) const
 {
     doOperationWithRealisticDelay([&](INPUT& input)
     {
+        input.type = INPUT_KEYBOARD;
+        input.ki.wScan = 0;
+        input.ki.time = 0;
+        input.ki.dwExtraInfo = 0;
+        input.ki.wVk = (WORD)key;
+        input.ki.dwFlags = 0;
+    });
+    doOperationWithRealisticDelay([&](INPUT& input)
+    {
+        input.type = INPUT_KEYBOARD;
+        input.ki.wScan = 0;
+        input.ki.time = 0;
+        input.ki.dwExtraInfo = 0;
+        input.ki.wVk = (WORD)key;
+        input.ki.dwFlags = KEYEVENTF_KEYUP;
+    });
+}
+
+void AlbaWindowsUserAutomation::typeCharacter(char const character) const
+{
+    doOperationWithRealisticDelay([&](INPUT& input)    {
         input.type = INPUT_KEYBOARD;
         input.ki.wScan = 0;
         input.ki.time = 0;

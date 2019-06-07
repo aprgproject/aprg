@@ -6,9 +6,11 @@
 
 #include <cmath>
 
+
+#include <Debug/AlbaDebug.hpp>
+
 using namespace alba::mathHelper;
 using namespace std;
-
 namespace alba
 {
 
@@ -135,11 +137,10 @@ AlbaOptional<double> Circle::calculateXFromYWithoutCenter(double const y, double
 {
     AlbaOptional<double> result;
     double discriminant = m_radiusSquared - pow(y, 2);
-    if(discriminant > 0)
+    if(discriminant >= 0)
     {
         result.setValue(pow(discriminant, 0.5)*signOfRoot);
-    }
-    return result;
+    }    return result;
 }
 
 Point Circle::getNearestPointInCircumference(Point const& point) const
