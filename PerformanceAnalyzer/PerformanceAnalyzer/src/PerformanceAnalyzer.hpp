@@ -40,11 +40,10 @@ public:
     void logStringInRawDataFile(std::string const& line);
     std::string extract(std::string const& inputPath) const;
     std::string combineAndSort(std::string const& inputPath) const;
-    void processFileForMsgQueuingTime(std::string const& filePath);
+    void processFileForMsgQueueingTime(std::string const& filePath);
     void processFileForRlSetupDelayInRlh(std::string const& filePath);
     void processFileForRlDeletionDelayInRlh(std::string const& filePath);
-    void processFileForRlSetupDelayInTupcWithSymonKnife(std::string const& filePath);
-    void processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(std::string const& filePath);
+    void processFileForRlSetupDelayInTupcWithSymonKnife(std::string const& filePath);    void processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(std::string const& filePath);
     void processFileForFtmFcmWireshark(std::string const& filePath);
     void processFileForTopLogs(std::string const& filePath);
     void processFileForTopLogsMem(std::string const& filePath);

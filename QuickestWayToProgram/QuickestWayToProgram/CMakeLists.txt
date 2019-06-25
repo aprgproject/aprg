@@ -15,10 +15,14 @@ include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
 
 #Assign Definitions
 include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
+if(WIN32)
+    #set for path of 7Zip for windows 32
+    add_definitions(-DPATH_OF_7Z_EXECUTABLE="${APRG_DIR}AprgFileExtractor/7z32/7z.exe")
+    add_definitions(-DPATH_OF_7Z_TEMP_FILE="${APRG_DIR}AprgFileExtractor/7z32/TempFile.txt")
+endif()
 
 #Include gtest, this needs APRG Directory
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
-
 #Include AprgCommon, this needs APRG Directory
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
@@ -33,5 +37,5 @@ include(${QUICKEST_WAY_TO_PROGRAM_DIR}/cmake/FilesAndDirectories.cmake)
 
 add_executable(${OUTFILE} ${QUICKEST_WAY_TO_PROGRAM_SOURCES_AND_TESTS})
 include_directories(${QUICKEST_WAY_TO_PROGRAM_INCLUDE_DIRECTORIES} ${QUICKEST_WAY_TO_PROGRAM_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
-target_link_libraries(${OUTFILE} ${CMAKE_THREAD_LIBS_INIT} APRG_COMMON APRG_FILE_EXTRACTOR APRG_ALGORITHM gtest)
+target_link_libraries(${OUTFILE} ${CMAKE_THREAD_LIBS_INIT} APRG_FILE_EXTRACTOR APRG_ALGORITHM APRG_COMMON gtest)
 add_test(${OUTFILE} ${OUTFILE})
