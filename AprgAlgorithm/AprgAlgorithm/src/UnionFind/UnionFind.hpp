@@ -8,12 +8,10 @@ namespace alba
 template <typename ObjectType>
 class UnionFindUsingMap
 {
-    using ConnectionMap = std::map<ObjectType, ObjectType>;
-    using ConnectionPair = std::pair<ObjectType, ObjectType>;
+    using ConnectionMap = std::map<ObjectType, ObjectType>; // you are using map, so log N but this should to be near linear (boo!)
 public:
     UnionFindUsingMap()
     {}
-
     void connect(ObjectType const& object1, ObjectType const& object2)
     {
         bool isObject1LowerThanObject2(object1<object2);
