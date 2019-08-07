@@ -16,7 +16,8 @@ TEST(RealAutomationTest, NormalizeAudioForMp3Files) //DISABLED_
     AlbaLocalPathHandler mp3FilesPathHandler(R"(N:\MUSIC\AnimeSongs2)");
 
     while(1)
-    {        if(userAutomation.isLetterPressed('s'))  //s for start
+    {
+        if(userAutomation.isLetterPressed('s'))  //s for start
         {
             ListOfPaths filePaths;
             ListOfPaths directoryPaths;
@@ -29,7 +30,8 @@ TEST(RealAutomationTest, NormalizeAudioForMp3Files) //DISABLED_
                 if(filePathHandler.getExtension() == "mp3" && filePathHandler.getFileSizeEstimate() < 100000000) //100MB
                 {
                     //close previous file
-                    userAutomation.typeControlAndLetterSimultaneously('W');                    userAutomation.typeKey(VK_RIGHT);
+                    userAutomation.typeControlAndLetterSimultaneously('W');
+                    userAutomation.typeKey(VK_RIGHT);
                     userAutomation.typeKey(VK_RETURN);
 
                     //open file
@@ -48,6 +50,7 @@ TEST(RealAutomationTest, NormalizeAudioForMp3Files) //DISABLED_
 
                     //select all track
                     userAutomation.typeControlAndLetterSimultaneously('A');
+
                     //click effect
                     userAutomation.doDoubleLeftClickAt(MousePosition(344,33));
 
@@ -61,7 +64,8 @@ TEST(RealAutomationTest, NormalizeAudioForMp3Files) //DISABLED_
                     userAutomation.sleep(20000);
 
                     //export
-                    userAutomation.pressDownKey(VK_CONTROL);                    userAutomation.pressDownKey(VK_SHIFT);
+                    userAutomation.pressDownKey(VK_CONTROL);
+                    userAutomation.pressDownKey(VK_SHIFT);
                     userAutomation.pressDownKey('E');
                     userAutomation.sleepWithRealisticDelay();
                     userAutomation.pressUpKey('E');
@@ -79,7 +83,8 @@ TEST(RealAutomationTest, NormalizeAudioForMp3Files) //DISABLED_
                     userAutomation.sleep(20000);
 
                     //close file
-                    userAutomation.typeControlAndLetterSimultaneously('W');                    userAutomation.typeKey(VK_RIGHT);
+                    userAutomation.typeControlAndLetterSimultaneously('W');
+                    userAutomation.typeKey(VK_RIGHT);
                     userAutomation.typeKey(VK_RETURN);
 
                     //break;

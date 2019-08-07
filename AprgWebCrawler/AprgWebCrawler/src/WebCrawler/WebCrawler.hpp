@@ -49,6 +49,7 @@ public:
     void saveImportantLink(std::string const& link) const;
 
     void printStatus() const;
+
 private:
     bool isModeUnrecognized() const;
     bool isWebLinksEmpty() const;
@@ -70,4 +71,5 @@ private:
     alba::AlbaLocalPathHandler m_importantLinksPathHandler;
     WebLinks m_webLinks;
 };
+
 }

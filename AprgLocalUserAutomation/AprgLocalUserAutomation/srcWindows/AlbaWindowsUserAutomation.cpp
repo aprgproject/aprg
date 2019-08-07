@@ -200,7 +200,8 @@ void AlbaWindowsUserAutomation::typeKey(unsigned int const key) const
 
 void AlbaWindowsUserAutomation::typeCharacter(char const character) const
 {
-    doOperationWithRealisticDelay([&](INPUT& input)    {
+    doOperationWithRealisticDelay([&](INPUT& input)
+    {
         input.type = INPUT_KEYBOARD;
         input.ki.wScan = 0;
         input.ki.time = 0;

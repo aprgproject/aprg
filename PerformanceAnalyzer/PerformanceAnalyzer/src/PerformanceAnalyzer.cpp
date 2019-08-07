@@ -116,7 +116,8 @@ PerformanceAnalyzer::PerformanceAnalyzer()
     pathHandler.createDirectoriesForNonExisitingDirectories();
     m_sorterConfiguration.m_configurationWithPcTime.m_directoryForBlocks = pathHandler.getFullPath() + R"(WithPcTimeBlocks\)";
     AlbaLocalPathHandler(m_sorterConfiguration.m_configurationWithPcTime.m_directoryForBlocks).createDirectoriesForNonExisitingDirectories();
-    m_sorterConfiguration.m_configurationWithPcTime.m_minimumNumberOfObjectsPerBlock = 10000;    m_sorterConfiguration.m_configurationWithPcTime.m_maximumNumberOfObjectsPerBlock = 100000;
+    m_sorterConfiguration.m_configurationWithPcTime.m_minimumNumberOfObjectsPerBlock = 10000;
+    m_sorterConfiguration.m_configurationWithPcTime.m_maximumNumberOfObjectsPerBlock = 100000;
     m_sorterConfiguration.m_configurationWithPcTime.m_maximumNumberOfObjectsInMemory = 200000;
     m_sorterConfiguration.m_configurationWithPcTime.m_maximumFileStreams = 50;
     m_sorterConfiguration.m_configurationWithoutPcTime.m_directoryForBlocks = pathHandler.getFullPath() + R"(WithoutPcTimeBlocks\)";
@@ -127,7 +128,8 @@ PerformanceAnalyzer::PerformanceAnalyzer()
     m_sorterConfiguration.m_configurationWithoutPcTime.m_maximumFileStreams = 70;
 }
 
-string PerformanceAnalyzer::extract(string const& inputPath) const{
+string PerformanceAnalyzer::extract(string const& inputPath) const
+{
     cout<<" (Extract) start | Input path: "<<inputPath<<endl;
     AprgFileExtractor fileExtractor(m_extractGrepCondition);
     AlbaLocalPathHandler pathHandler(inputPath);
@@ -206,13 +208,15 @@ void PerformanceAnalyzer::processFileForMsgQueueingTime(string const& filePath)
 {
     AlbaLocalPathHandler filePathHandler(filePath);
     cout<<"processFile: "<<filePathHandler.getFullPath()<<endl;
+
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
     int totalMsgQueueingTime = 0;
     int highestMsgQueueingTime = 0;
     int numberOfInstances=0;
 
-    while(fileReader.isNotFinished())    {
+    while(fileReader.isNotFinished())
+    {
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if(stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(lineInLogs, "MSG TIME, start queuing time"))
         {
@@ -225,6 +229,7 @@ void PerformanceAnalyzer::processFileForMsgQueueingTime(string const& filePath)
     }
     cout<<"TotalMsgQueueingTime: "<<totalMsgQueueingTime<<" highestMsgQueueingTime: "<<highestMsgQueueingTime<<" AverageMsgQueueingTime: "<<((double)totalMsgQueueingTime)/numberOfInstances<<" numberOfPrints: "<<numberOfInstances<<endl;
 }
+
 
 void PerformanceAnalyzer::processFileForRlSetupDelayInRlh(string const& filePath)
 {
@@ -419,7 +424,8 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
                     (rlhTbRegisterResponseTimeOptional.getConstReference()<rlhRlSetupResponseOptional.getConstReference());
 
             return isCorrect;
-        }    };
+        }
+    };
 
     std::map<UniqueUserId, BtsLogDelay> btsLogDelays;
     std::map<UniqueUserId, TupcDelaysData> tupcLogDelays;
@@ -645,7 +651,8 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
                     (tupcFirstTransportConnectionSetupOptional.getConstReference()<rlhRlSetupResponseOptional.getConstReference());
 
             return isCorrect;
-        }    };
+        }
+    };
 
     std::map<UniqueUserId, BtsLogDelay> btsLogDelays;
     std::map<UniqueUserId, TupcDelaysData> tupcLogDelays;

@@ -206,7 +206,8 @@ double convertRadiansToDegrees(double const valueInRadians)
 
 double getPi()
 {
-    return 3.14159265358979323846;}
+    return 3.14159265358979323846;
+}
 
 double getE()
 {

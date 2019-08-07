@@ -12,6 +12,7 @@ class UnionFindUsingMap
 public:
     UnionFindUsingMap()
     {}
+
     void connect(ObjectType const& object1, ObjectType const& object2)
     {
         bool isObject1LowerThanObject2(object1<object2);

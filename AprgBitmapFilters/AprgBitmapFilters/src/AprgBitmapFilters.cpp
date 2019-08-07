@@ -10,7 +10,8 @@
 using namespace alba::TwoDimensions;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 AprgBitmapFilters::AprgBitmapFilters(string const& path)
     : m_backgroundColor(0x00FFFFFF)
