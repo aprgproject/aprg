@@ -30,12 +30,11 @@ Ellipse::Ellipse(Point const& center, double const aCoefficient, double const bC
 bool Ellipse::operator==(Ellipse const& ellipse) const
 {
     return (m_center == ellipse.m_center)
-            && isConsideredEqual(m_aValue, ellipse.m_aValue)
-            && isConsideredEqual(m_bValue, ellipse.m_bValue);
+            && isAlmostEqual(m_aValue, ellipse.m_aValue)
+            && isAlmostEqual(m_bValue, ellipse.m_bValue);
 }
 
-bool Ellipse::operator!=(Ellipse const& ellipse) const
-{
+bool Ellipse::operator!=(Ellipse const& ellipse) const{
     return !((*this)==ellipse);
 }
 

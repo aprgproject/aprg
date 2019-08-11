@@ -175,17 +175,16 @@ public:
         {
             for(unsigned int y=yWithLeadingEntry; y<m_numberOfRows; y++)
             {
-                if(!mathHelper::isConsideredEqual(m_matrixData.at(getMatrixIndex(x, y)), static_cast<DataType>(0)))
+                if(!mathHelper::isAlmostEqual(m_matrixData.at(getMatrixIndex(x, y)), static_cast<DataType>(0)))
                 {
                     interchangeRows(y, yWithLeadingEntry);
                     multiplyValueInRow(yWithLeadingEntry, static_cast<DataType>(1)/m_matrixData.at(getMatrixIndex(x, yWithLeadingEntry)), yWithLeadingEntry);
                     for(unsigned int yToZero=0; yToZero<m_numberOfRows; yToZero++)
                     {
-                        if(yToZero != yWithLeadingEntry && !mathHelper::isConsideredEqual(m_matrixData.at(getMatrixIndex(x, yToZero)), static_cast<DataType>(0)))
+                        if(yToZero != yWithLeadingEntry && !mathHelper::isAlmostEqual(m_matrixData.at(getMatrixIndex(x, yToZero)), static_cast<DataType>(0)))
                         {
                             subtractRowsWithMultiplier(
-                                        yToZero,
-                                        yWithLeadingEntry,
+                                        yToZero,                                        yWithLeadingEntry,
                                         m_matrixData.at(getMatrixIndex(x, yToZero))/m_matrixData.at(getMatrixIndex(x, yWithLeadingEntry)),
                                         yToZero);
                         }
@@ -313,11 +312,10 @@ private:
             bool isRowWithAllZero(true);
             for(unsigned int x=0; x<m_numberOfColumns; x++)
             {
-                if(isRowWithAllZero && !mathHelper::isConsideredEqual(m_matrixData.at(getMatrixIndex(x, y)), static_cast<DataType>(0)))
+                if(isRowWithAllZero && !mathHelper::isAlmostEqual(m_matrixData.at(getMatrixIndex(x, y)), static_cast<DataType>(0)))
                 {
                     isRowWithAllZero = false;
-                    break;
-                }
+                    break;                }
             }
             if(!isRowWithNonZeroEncountered)
             {
@@ -338,18 +336,17 @@ private:
         {
             for(unsigned int x=0; x<m_numberOfColumns; x++)
             {
-                if(mathHelper::isConsideredEqual(m_matrixData.at(getMatrixIndex(x, y)), static_cast<DataType>(0))) {}
-                else if(mathHelper::isConsideredEqual(m_matrixData.at(getMatrixIndex(x, y)), static_cast<DataType>(1)))
+                if(mathHelper::isAlmostEqual(m_matrixData.at(getMatrixIndex(x, y)), static_cast<DataType>(0))) {}
+                else if(mathHelper::isAlmostEqual(m_matrixData.at(getMatrixIndex(x, y)), static_cast<DataType>(1)))
                 {
                     if(currentLeadingEntryColumn < static_cast<int>(x))
                     {
                         for(unsigned int yZeroCheck=0; yZeroCheck<m_numberOfRows; yZeroCheck++)
                         {
-                            if(yZeroCheck!=y && !mathHelper::isConsideredEqual(m_matrixData.at(getMatrixIndex(x, yZeroCheck)), static_cast<DataType>(0)))
+                            if(yZeroCheck!=y && !mathHelper::isAlmostEqual(m_matrixData.at(getMatrixIndex(x, yZeroCheck)), static_cast<DataType>(0)))
                             {
                                 //4. If a column contains a leading entry of some row, then all other entries in that column are zero
-                                return false;
-                            }
+                                return false;                            }
                         }
                     }
                     else

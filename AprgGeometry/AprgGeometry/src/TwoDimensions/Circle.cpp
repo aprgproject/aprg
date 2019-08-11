@@ -32,11 +32,10 @@ Circle::Circle(Point const& center, double const radius)
 
 bool Circle::operator==(Circle const& circle) const
 {
-    return (m_center == circle.m_center) && isConsideredEqual(m_radius, circle.m_radius);
+    return (m_center == circle.m_center) && isAlmostEqual(m_radius, circle.m_radius);
 }
 
-bool Circle::operator!=(Circle const& circle) const
-{
+bool Circle::operator!=(Circle const& circle) const{
     return !((*this)==circle);
 }
 

@@ -53,11 +53,10 @@ public:
 
     bool operator==(AlbaXYZ<CoordinateType> const& xyz) const
     {
-        return isConsideredEqual(x, xyz.x) && isConsideredEqual(y, xyz.y) && isConsideredEqual(z, xyz.z);
+        return isAlmostEqual(x, xyz.x) && isAlmostEqual(y, xyz.y) && isAlmostEqual(z, xyz.z);
     }
 
-    bool operator!=(AlbaXYZ<CoordinateType> const& secondXyz) const
-    {
+    bool operator!=(AlbaXYZ<CoordinateType> const& secondXyz) const    {
         AlbaXYZ<CoordinateType> const& firstXyz(*this);
         return !(firstXyz==secondXyz);
     }
