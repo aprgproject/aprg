@@ -29,10 +29,10 @@ double getDistance(Line const& line, Point const& point);
 bool areLinesParallel(Line const& line1, Line const& line2);
 
 Dimensionless::Angle getTheSmallerAngleBetweenTwoLines(Line const& line1, Line const& line2);
+Dimensionless::Angle getTheLargerAngleBetweenTwoLines(Line const& line1, Line const& line2);
 
 Point getMidpoint(Point const& point1, Point const& point2);
-Point getPointOfIntersectionOfTwoLines(Line const& line1, Line const& line2);
-Point getPointOfIntersectionOfAPlaneAndALine(Plane const& plane, Line const& line);
+Point getPointOfIntersectionOfTwoLines(Line const& line1, Line const& line2);Point getPointOfIntersectionOfAPlaneAndALine(Plane const& plane, Line const& line);
 
 double getDotProduct(Coefficients const coefficients1, Coefficients const coefficients2);
 Coefficients getCrossProduct(Coefficients const coefficients1, Coefficients const coefficients2);
