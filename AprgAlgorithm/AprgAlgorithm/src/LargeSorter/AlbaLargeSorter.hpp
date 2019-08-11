@@ -84,7 +84,8 @@ private:
 
     //nth element implementation
     void splitToSmallestBlocks(BlockIterator const & blockIterator, DataBlockType const blockTypeForNewBlocks)
-    {        BlockIterator iteratorAfterBlockToSplit(blockIterator);
+    {
+        BlockIterator iteratorAfterBlockToSplit(blockIterator);
         iteratorAfterBlockToSplit++;
         unsigned int index=0, indexOfIndexes=0;
         BlockIterator newBlockIterator(iteratorAfterBlockToSplit);
@@ -111,7 +112,8 @@ private:
     /*
     void splitToSmallestBlocks(BlockIterator const & blockIterator, DataBlockType const blockTypeForNewBlocks)
     {
-        BlockIterator iteratorAfterBlockToSplit(blockIterator);        iteratorAfterBlockToSplit++;
+        BlockIterator iteratorAfterBlockToSplit(blockIterator);
+        iteratorAfterBlockToSplit++;
         int numberOfObjectsInCurrentBlock=0;
         BlockIterator newBlockIterator(iteratorAfterBlockToSplit);
         blockIterator->sortThenDoFunctionThenRelease([&](ObjectToSort const& objectToSort)
@@ -131,7 +133,8 @@ private:
     }*/
 
     void limitMemoryConsumption()
-    {        unsigned int totalMemoryConsumption = calculateTotalMemoryConsumption();
+    {
+        unsigned int totalMemoryConsumption = calculateTotalMemoryConsumption();
         transferMemoryBlocksToFileIfNeeded(totalMemoryConsumption);
     }
     unsigned int calculateTotalMemoryConsumption()
@@ -182,7 +185,8 @@ private:
             temporaryLocalDirectory.deleteInnerFilesAndDirectories();
         }
     }
-    void putIndexesWithMultiplesOfNumber(Indexes & indexes, unsigned int number, unsigned int numberOfObjects)    {
+    void putIndexesWithMultiplesOfNumber(Indexes & indexes, unsigned int number, unsigned int numberOfObjects)
+    {
         for(unsigned int index=0; index<numberOfObjects; index+=number)
         {
             indexes.emplace_back(index);

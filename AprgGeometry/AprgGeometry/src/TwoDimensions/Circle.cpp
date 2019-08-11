@@ -6,9 +6,6 @@
 
 #include <cmath>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 using namespace alba::mathHelper;
 using namespace std;
 
@@ -35,7 +32,8 @@ bool Circle::operator==(Circle const& circle) const
     return (m_center == circle.m_center) && isAlmostEqual(m_radius, circle.m_radius);
 }
 
-bool Circle::operator!=(Circle const& circle) const{
+bool Circle::operator!=(Circle const& circle) const
+{
     return !((*this)==circle);
 }
 

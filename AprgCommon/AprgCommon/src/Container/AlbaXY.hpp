@@ -49,7 +49,8 @@ public:
         return isAlmostEqual(x, xy.x) && isAlmostEqual(y, xy.y);
     }
 
-    bool operator!=(AlbaXY<CoordinateType> const& secondXy) const    {
+    bool operator!=(AlbaXY<CoordinateType> const& secondXy) const
+    {
         AlbaXY<CoordinateType> const& firstXy(*this);
         return !(firstXy==secondXy);
     }
@@ -70,6 +71,26 @@ public:
             result = false;
         }
         return result;
+    }
+
+    AlbaXY<CoordinateType> operator+(AlbaXY<CoordinateType> const& secondXy) const
+    {
+        return AlbaXY<CoordinateType>(x+secondXy.x, y+secondXy.y);
+    }
+
+    AlbaXY<CoordinateType> operator-(AlbaXY<CoordinateType> const& secondXy) const
+    {
+        return AlbaXY<CoordinateType>(x-secondXy.x, y-secondXy.y);
+    }
+
+    AlbaXY<CoordinateType> operator+() const
+    {
+        return *this;
+    }
+
+    AlbaXY<CoordinateType> operator-() const
+    {
+        return AlbaXY<CoordinateType>(-x, -y);
     }
 
     std::string getDisplayableString() const

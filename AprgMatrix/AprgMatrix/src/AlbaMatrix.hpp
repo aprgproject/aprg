@@ -184,7 +184,8 @@ public:
                         if(yToZero != yWithLeadingEntry && !mathHelper::isAlmostEqual(m_matrixData.at(getMatrixIndex(x, yToZero)), static_cast<DataType>(0)))
                         {
                             subtractRowsWithMultiplier(
-                                        yToZero,                                        yWithLeadingEntry,
+                                        yToZero,
+                                        yWithLeadingEntry,
                                         m_matrixData.at(getMatrixIndex(x, yToZero))/m_matrixData.at(getMatrixIndex(x, yWithLeadingEntry)),
                                         yToZero);
                         }
@@ -315,7 +316,8 @@ private:
                 if(isRowWithAllZero && !mathHelper::isAlmostEqual(m_matrixData.at(getMatrixIndex(x, y)), static_cast<DataType>(0)))
                 {
                     isRowWithAllZero = false;
-                    break;                }
+                    break;
+                }
             }
             if(!isRowWithNonZeroEncountered)
             {
@@ -346,7 +348,8 @@ private:
                             if(yZeroCheck!=y && !mathHelper::isAlmostEqual(m_matrixData.at(getMatrixIndex(x, yZeroCheck)), static_cast<DataType>(0)))
                             {
                                 //4. If a column contains a leading entry of some row, then all other entries in that column are zero
-                                return false;                            }
+                                return false;
+                            }
                         }
                     }
                     else

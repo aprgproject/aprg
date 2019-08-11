@@ -88,7 +88,8 @@ bool Line::operator==(Line const& line) const
             && isAlmostEqual(m_xIntercept, line.m_xIntercept);
 }
 
-bool Line::operator!=(Line const& line) const{
+bool Line::operator!=(Line const& line) const
+{
     return !((*this)==line);
 }
 
@@ -168,6 +169,13 @@ double Line::calculateYFromX(double const x) const
 double Line::calculateXFromY(double const y) const
 {
     return (y/m_slope) + m_xIntercept; //x=y/m+a
+}
+
+string Line::getDisplayableString() const
+{
+    std::stringstream ss;
+    ss << m_aCoefficient << "*x + "<< m_bCoefficient << "*y + " << m_cCoefficient << " = 0";
+    return ss.str();
 }
 
 void Line::setLineParametersBasedOnDeltas(double const deltaX, double const deltaY, Point const& point)
@@ -278,7 +286,8 @@ void Line::mergePointsFromPointsFromXAndY(Points & points, Points const& pointsF
                 if(isAlmostEqual(iteratorForX->getX(), iteratorForY->getX()))
                 {
                     points.emplace_back(*iteratorForX++);
-                    iteratorForY++;                }
+                    iteratorForY++;
+                }
                 else if(iteratorForX->getX() < iteratorForY->getX())
                 {
                     points.emplace_back(*iteratorForX++);
@@ -293,7 +302,8 @@ void Line::mergePointsFromPointsFromXAndY(Points & points, Points const& pointsF
                 if(isAlmostEqual(iteratorForX->getX(), iteratorForY->getX()))
                 {
                     points.emplace_back(*iteratorForX++);
-                    iteratorForY++;                }
+                    iteratorForY++;
+                }
                 else if(iteratorForX->getX() > iteratorForY->getX())
                 {
                     points.emplace_back(*iteratorForX++);
@@ -331,7 +341,8 @@ LineType Line::determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double
     else if(isAlmostEqual(deltaX, 0.0))
     {
         lineType = LineType::Vertical;
-    }    else if(isNegativeDeltaY == isNegativeDeltaX)
+    }
+    else if(isNegativeDeltaY == isNegativeDeltaX)
     {
         lineType = LineType::WithPositiveSlope;
     }
@@ -358,7 +369,8 @@ LineType Line::determineLineTypeUsingCoefficients(double const aCoefficient, dou
     else if(isAlmostEqual(bCoefficient, 0.0))
     {
         lineType = LineType::Vertical;
-    }    else if(isNegativeA == isNegativeB)
+    }
+    else if(isNegativeA == isNegativeB)
     {
         lineType = LineType::WithNegativeSlope;
     }

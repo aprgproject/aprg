@@ -176,7 +176,8 @@ void AlbaWindowsPathHandler::deleteFilesInDirectory()
 void AlbaWindowsPathHandler::deleteInnerFilesAndDirectories()
 {
     set<string> listOfFiles;
-    set<string> listOfDirectories;    findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
+    set<string> listOfDirectories;
+    findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
     for(string const& file: listOfFiles)
     {
         AlbaWindowsPathHandler(file).deleteFile();
@@ -195,6 +196,7 @@ void AlbaWindowsPathHandler::deleteDirectoryWithFilesAndDirectories()
     deleteDirectoryWithoutFilesAndDirectories();
     reInput();
 }
+
 bool AlbaWindowsPathHandler::copyToNewFile(string const& newFilePath)
 {
     bool isSuccessful(false);
