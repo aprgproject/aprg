@@ -133,16 +133,6 @@ TEST(ThreeDimensionsHelperTest, DistanceBetweenPointAndLineCanBeCalculated)
     EXPECT_EQ(1, getDistance(Line(Point(0,0,0), Point(1,0,0)), Point(0,0,1)));
 }
 
-TEST(ThreeDimensionsHelperTest, GetCrossProductWorksCorrectly)
-{
-    Coefficients input1(1,2,3);    Coefficients input2(4,5,6);
-    Coefficients expectedCoefficients(getCrossProduct(input1, input2));
-
-    EXPECT_EQ(-3, expectedCoefficients.getX());
-    EXPECT_EQ(6, expectedCoefficients.getY());
-    EXPECT_EQ(-3, expectedCoefficients.getZ());
-}
-
 TEST(ThreeDimensionsHelperTest, MidpointBetweenTwoPointsCanBeCalculated)
 {
     EXPECT_EQ(Point(0,0,0), getMidpoint(Point(0,0,0), Point(0,0,0)));
@@ -150,7 +140,7 @@ TEST(ThreeDimensionsHelperTest, MidpointBetweenTwoPointsCanBeCalculated)
     EXPECT_EQ(Point(-450,-900,-1350), getMidpoint(Point(100,200,300), Point(-1000,-2000,-3000)));
 }
 
-TEST(ThreeDimensionsHelperTest, LineAndLineIntersectionCanBeFound)
+TEST(ThreeDimensionsHelperTest, GetPointOfIntersectionOfTwoLinesWorksCorrectly)
 {
     Line line1(Point(2,4,6), Point(3,3,3));
     Line line2(Point(4,4,4), Point(3,3,3));
@@ -169,9 +159,28 @@ TEST(ThreeDimensionsHelperTest, GetPointOfIntersectionOfAPlaneAndALineWorksCorre
     EXPECT_EQ(static_cast<double>(1)/3, expectedPoint.getZ());
 }
 
+TEST(TwoDimensionsHelperTest, GetAngleBetweenTwoLinesWorksCorrectly)
+{
+    EXPECT_EQ(180, getTheSmallerAngleBetweenTwoLines(Line(Point(0,0,0), Point(0,0,1)), Line(Point(0,0,0), Point(0,0,1))).getDegrees());
+    EXPECT_EQ(90, getTheSmallerAngleBetweenTwoLines(Line(Point(0,0,0), Point(0,0,1)), Line(Point(0,0,0), Point(0,1,0))).getDegrees());
+    EXPECT_DOUBLE_EQ(45, getTheSmallerAngleBetweenTwoLines(Line(Point(0,0,0), Point(0,0,1)), Line(Point(0,0,0), Point(0,1,1))).getDegrees());
+}
+
+TEST(ThreeDimensionsHelperTest, GetCrossProductWorksCorrectly)
+{
+    Coefficients input1(1,2,3);
+    Coefficients input2(4,5,6);
+    Coefficients expectedCoefficients(getCrossProduct(input1, input2));
+
+    EXPECT_EQ(-3, expectedCoefficients.getX());
+    EXPECT_EQ(6, expectedCoefficients.getY());
+    EXPECT_EQ(-3, expectedCoefficients.getZ());
+}
+
 TEST(ThreeDimensionsHelperTest, GetLineWithSameSlopeAndPoint)
 {
-    Line lineInput(Point(0,0,0), Point(-1,1,1));    Line expectedLine(getLineWithSameSlope(lineInput, Point(2,2,2)));
+    Line lineInput(Point(0,0,0), Point(-1,1,1));
+    Line expectedLine(getLineWithSameSlope(lineInput, Point(2,2,2)));
 
     EXPECT_EQ(-1, expectedLine.getACoefficient());
     EXPECT_EQ(1, expectedLine.getBCoefficient());
@@ -183,7 +192,8 @@ TEST(ThreeDimensionsHelperTest, GetLineWithSameSlopeAndPoint)
 
 TEST(ThreeDimensionsHelperTest, GetLineOfIntersectionOfTwoPlaneWorksCorrectly)
 {
-    Plane input1(Point(1,0,0), Point(0,1,0), Point(0,0,1));    Plane input2(Point(0,0,0), Point(1,1,1), Point(0,1,1));
+    Plane input1(Point(1,0,0), Point(0,1,0), Point(0,0,1));
+    Plane input2(Point(0,0,0), Point(1,1,1), Point(0,1,1));
     Line expectedLine(getLineOfIntersectionOfTwoPlanes(input1, input2));
 
     EXPECT_EQ(-2, expectedLine.getACoefficient());
@@ -197,6 +207,7 @@ TEST(ThreeDimensionsHelperTest, GetLineOfIntersectionOfTwoPlaneWorksCorrectly)
 TEST(ThreeDimensionsHelperTest, GetPerpendicularPlaneWithALineAndAPointWorksCorrectly)
 {
     Plane expectedLine(getPerpendicularPlaneOfALineAndUsingAPointInThePlane(Line(Point(0,0,0), Point(1,1,1)), Point(1,0,0)));
+
     EXPECT_EQ(1, expectedLine.getACoefficient());
     EXPECT_EQ(1, expectedLine.getBCoefficient());
     EXPECT_EQ(1, expectedLine.getCCoefficient());

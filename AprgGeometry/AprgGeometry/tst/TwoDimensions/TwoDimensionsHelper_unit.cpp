@@ -6,6 +6,7 @@
 
 #include <cmath>
 
+using namespace alba::Dimensionless;
 using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace std;
 
@@ -30,7 +31,8 @@ TEST(TwoDimensionsHelperTest, IsInsideTwoPointsWorks)
 }
 
 TEST(TwoDimensionsHelperTest, PointCanBeCheckedIfItsOnLine)
-{    Point pointOnLine(-2,2);
+{
+    Point pointOnLine(-2,2);
     Point pointNotOnLine(2,2);
     Line line(Point(0,0), Point(-1,1));
 
@@ -45,7 +47,8 @@ TEST(TwoDimensionsHelperTest, DistanceBetween2PointsCanBeCalculated)
 
 TEST(TwoDimensionsHelperTest, DistanceBetweenPointAndLineCanBeCalculated)
 {
-    EXPECT_EQ(2, getDistance(Line(0,-1,4), Point(2,2)));    EXPECT_EQ(2, getDistance(Line(-1,0,4), Point(2,2)));
+    EXPECT_EQ(2, getDistance(Line(0,-1,4), Point(2,2)));
+    EXPECT_EQ(2, getDistance(Line(-1,0,4), Point(2,2)));
     EXPECT_EQ(2*pow(2, 0.5), getDistance(Line(1,1,0), Point(2,2)));
 }
 
@@ -54,14 +57,14 @@ TEST(TwoDimensionsHelperTest, LineAndLineIntersectionCanBeFound)
     Line line1(Point(2,4), Point(3,3));
     Line line2(Point(4,4), Point(3,3));
 
-    EXPECT_EQ(Point(3,3), getIntersection(line1, line2));
+    EXPECT_EQ(Point(3,3), getIntersectionOfTwoLines(line1, line2));
 }
 
 TEST(TwoDimensionsHelperTest, VerticalLineAndHorizontalLineIntersectionCanBeFound)
 {
     Line line1(Point(4,3), Point(3,3));
     Line line2(Point(3,4), Point(3,3));
-    EXPECT_EQ(Point(3,3), getIntersection(line1, line2));
+    EXPECT_EQ(Point(3,3), getIntersectionOfTwoLines(line1, line2));
 }
 
 TEST(TwoDimensionsHelperTest, MidpointBetweenTwoPointsCanBeCalculated)
@@ -87,9 +90,17 @@ TEST(TwoDimensionsHelperTest, PopNearestPointWorks)
     EXPECT_EQ(Point(0,0), popNearestPoint(points, Point(0,0)));
 }
 
+TEST(TwoDimensionsHelperTest, GetAngleBetweenTwoLinesWorksCorrectly)
+{
+    EXPECT_EQ(180, getTheSmallerAngleBetweenTwoLines(Line(Point(0,0), Point(0,1)), Line(Point(0,0), Point(0,1))).getDegrees());
+    EXPECT_EQ(90, getTheSmallerAngleBetweenTwoLines(Line(Point(0,0), Point(0,1)), Line(Point(0,0), Point(1,0))).getDegrees());
+    EXPECT_DOUBLE_EQ(45, getTheSmallerAngleBetweenTwoLines(Line(Point(0,0), Point(0,1)), Line(Point(0,0), Point(1,1))).getDegrees());
+}
+
 TEST(TwoDimensionsHelperTest, PointsInParabolaCanBeConnected)
 {
-    Parabola parabola{1,2,3};    Points parabolaPoints(parabola.getPoints(-2, 2, 1));
+    Parabola parabola{1,2,3};
+    Points parabolaPoints(parabola.getPoints(-2, 2, 1));
     Points connectedPoints(getConnectedPointsUsingALine(parabolaPoints, 1));
 
     ASSERT_EQ(11u, connectedPoints.size());
@@ -154,7 +165,8 @@ TEST(TwoDimensionsHelperTest, GetTangentLineForCircleIsCorrect)
     EXPECT_DOUBLE_EQ(-1, expectedLine3.getSlope());
 }
 
-TEST(TwoDimensionsHelperTest, GetTangentLineForPolynomialIsCorrect){
+TEST(TwoDimensionsHelperTest, GetTangentLineForPolynomialIsCorrect)
+{
     Parabola parabola{1,2,3};
     Line expectedLine1(getPolynomialTangentLineAt(parabola, -1));
     Line expectedLine2(getPolynomialTangentLineAt(parabola, 0));
@@ -195,7 +207,7 @@ TEST(TwoDimensionsHelperTest, AddPointIfInsideTwoPointsWorks)
     EXPECT_EQ(Point(1,1), points[2]);
 }
 
-TEST(TwoDimensionsHelperTest, GetPointsFromTwoPointsUsingALineWithoutLastPointCanBeDone)
+TEST(TwoDimensionsHelperTest, GetPointsFromTwoPointsUsingALineWithoutLastPointWorksCorrectly)
 {
     Points pointsWithoutLastPoint;
     savePointsFromTwoPointsUsingALineWithoutLastPoint(pointsWithoutLastPoint, Point(0,0), Point(-5,-5), 1);
@@ -209,4 +221,5 @@ TEST(TwoDimensionsHelperTest, GetPointsFromTwoPointsUsingALineWithoutLastPointCa
 }
 
 }
+
 }
