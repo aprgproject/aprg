@@ -28,17 +28,9 @@ bool isPointInLine(Point const& point, Line const& line)
     return isAlmostEqual(point.getY(), line.calculateYFromX(point.getX()));
 }
 
-bool areLinesParallel(Line const& line1, Line const& line2)
-{
-    return (line1.getType()==LineType::Horizontal && line2.getType()==LineType::Horizontal) ||
-            (line1.getType()==LineType::Vertical && line2.getType()==LineType::Vertical) ||
-            (isAlmostEqual(line1.getSlope(), line2.getSlope()));
-}
-
 bool isCongruent(Triangle const& triangle1, Triangle const& triangle2)
 {
-    Dimensionless::Angles anglesInTriangle1(triangle1.getAnglesAtVertices());
-    Dimensionless::Angles anglesInTriangle2(triangle2.getAnglesAtVertices());
+    Dimensionless::Angles anglesInTriangle1(triangle1.getAnglesAtVertices());    Dimensionless::Angles anglesInTriangle2(triangle2.getAnglesAtVertices());
     sort(anglesInTriangle1.begin(), anglesInTriangle1.end());
     sort(anglesInTriangle2.begin(), anglesInTriangle2.end());
     return (anglesInTriangle1[0]==anglesInTriangle2[0]) &&
@@ -46,10 +38,16 @@ bool isCongruent(Triangle const& triangle1, Triangle const& triangle2)
             (anglesInTriangle1[2]==anglesInTriangle2[2]);
 }
 
+bool areLinesParallel(Line const& line1, Line const& line2)
+{
+    return (line1.getType()==LineType::Horizontal && line2.getType()==LineType::Horizontal) ||
+            (line1.getType()==LineType::Vertical && line2.getType()==LineType::Vertical) ||
+            (isAlmostEqual(line1.getSlope(), line2.getSlope()));
+}
+
 bool areLinesPerpendicular(Line const& line1, Line const& line2)
 {
-    return (line1.getType()==LineType::Horizontal && line2.getType()==LineType::Vertical) ||
-            (line1.getType()==LineType::Vertical && line2.getType()==LineType::Horizontal) ||
+    return (line1.getType()==LineType::Horizontal && line2.getType()==LineType::Vertical) ||            (line1.getType()==LineType::Vertical && line2.getType()==LineType::Horizontal) ||
             (isAlmostEqual(line1.getSlope(), line2.getInverseSlope()));
 }
 
