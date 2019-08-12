@@ -106,7 +106,8 @@ TEST(TwoDimensionsHelperTest, GetLargerAngleBetweenTwoLinesWorksCorrectly)
 
 TEST(TwoDimensionsHelperTest, PointsInParabolaCanBeConnected)
 {
-    Parabola parabola{1,2,3};    Points parabolaPoints(parabola.getPoints(-2, 2, 1));
+    Parabola parabola{1,2,3};
+    Points parabolaPoints(parabola.getPoints(-2, 2, 1));
     Points connectedPoints(getConnectedPointsUsingALine(parabolaPoints, 1));
 
     ASSERT_EQ(11u, connectedPoints.size());
