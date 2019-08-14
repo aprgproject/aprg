@@ -111,10 +111,21 @@ public:
         return AlbaXYZ<CoordinateType>(-x, -y, -z);
     }
 
+    AlbaXYZ<CoordinateType>& operator+=(AlbaXYZ<CoordinateType> const& secondXyz)
+    {
+        x+=secondXyz.x; y+=secondXyz.y; z+=secondXyz.z;
+        return *this;
+    }
+
+    AlbaXYZ<CoordinateType>& operator-=(AlbaXYZ<CoordinateType> const& secondXyz)
+    {
+        x-=secondXyz.x; y-=secondXyz.y; z-=secondXyz.z;
+        return *this;
+    }
+
     std::string getDisplayableString() const
     {
-        std::stringstream ss;
-        ss<<"("<<x<<","<<y<<","<<z<<")";
+        std::stringstream ss;        ss<<"("<<x<<","<<y<<","<<z<<")";
         return ss.str();
     }
 
