@@ -21,8 +21,8 @@ Line::Line()
     , m_aCoefficient(0)
     , m_bCoefficient(0)
     , m_cCoefficient(0)
-    , m_yIntercept(0)
     , m_xIntercept(0)
+    , m_yIntercept(0)
 {}
 
 Line::Line(Point const& first, Point const& second)
@@ -30,11 +30,12 @@ Line::Line(Point const& first, Point const& second)
     , m_aCoefficient(0)
     , m_bCoefficient(0)
     , m_cCoefficient(0)
-    , m_yIntercept(0)
     , m_xIntercept(0)
+    , m_yIntercept(0)
 {
     double deltaY = second.getY() - first.getY();
-    double deltaX = second.getX() - first.getX();    setLineParametersBasedOnDeltas(deltaX, deltaY, first);
+    double deltaX = second.getX() - first.getX();
+    setLineParametersBasedOnDeltas(deltaX, deltaY, first);
 }
 
 Line::Line(double const aCoefficient, double const bCoefficient, double const cCoefficient)
@@ -42,21 +43,23 @@ Line::Line(double const aCoefficient, double const bCoefficient, double const cC
     , m_aCoefficient(0)
     , m_bCoefficient(0)
     , m_cCoefficient(0)
-    , m_yIntercept(0)
     , m_xIntercept(0)
+    , m_yIntercept(0)
 {
     setLineParametersBasedOnCoefficients(aCoefficient, bCoefficient, cCoefficient);
 }
 
-Line::Line(double const aCoefficient, double const bCoefficient, Point const& point)    : m_type(LineType::Invalid)
-    , m_yIntercept(0)
-    , m_xIntercept(0)
+Line::Line(double const aCoefficient, double const bCoefficient, Point const& point)
+    : m_type(LineType::Invalid)
     , m_aCoefficient(0)
     , m_bCoefficient(0)
     , m_cCoefficient(0)
+    , m_xIntercept(0)
+    , m_yIntercept(0)
 {
     double deltaX = aCoefficient;
-    double deltaY = bCoefficient;    setLineParametersBasedOnDeltas(deltaX, deltaY, point);
+    double deltaY = bCoefficient;
+    setLineParametersBasedOnDeltas(deltaX, deltaY, point);
 }
 
 bool Line::operator==(Line const& line) const
@@ -69,7 +72,8 @@ bool Line::operator==(Line const& line) const
             && isAlmostEqual(m_cCoefficient/commonFactor1, line.m_cCoefficient/commonFactor2);
 }
 
-bool Line::operator!=(Line const& line) const{
+bool Line::operator!=(Line const& line) const
+{
     return !((*this)==line);
 }
 
@@ -98,7 +102,8 @@ double Line::getInverseSlope() const
     return m_bCoefficient/m_aCoefficient;
 }
 
-double Line::getACoefficient() const{
+double Line::getACoefficient() const
+{
     return m_aCoefficient;
 }
 
@@ -160,7 +165,8 @@ double Line::calculateXFromY(double const y) const
     return -1*(m_bCoefficient*y + m_cCoefficient)/m_aCoefficient; //form: x = -(b*y + c)/a
 }
 
-string Line::getDisplayableString() const{
+string Line::getDisplayableString() const
+{
     std::stringstream ss;
     ss << m_aCoefficient << "*x + "<< m_bCoefficient << "*y + " << m_cCoefficient << " = 0";
     return ss.str();
@@ -215,23 +221,24 @@ void Line::setInterceptsBasedOnSavedCoefficients()
     switch(m_type)
     {
     case LineType::Invalid:
-        m_yIntercept = 0;
         m_xIntercept = 0;
+        m_yIntercept = 0;
         break;
     case LineType::Horizontal:
-        m_yIntercept = -m_cCoefficient/m_bCoefficient;
         m_xIntercept = 0;
+        m_yIntercept = -m_cCoefficient/m_bCoefficient;
         break;
     case LineType::Vertical:
-        m_yIntercept = 0;
         m_xIntercept = -m_cCoefficient/m_aCoefficient;
+        m_yIntercept = 0;
         break;
     default:
-        m_yIntercept = -m_cCoefficient/m_bCoefficient;
         m_xIntercept = -m_cCoefficient/m_aCoefficient;
+        m_yIntercept = -m_cCoefficient/m_bCoefficient;
         break;
     }
 }
+
 void Line::getPointsForVerticalLine(Points & points, Point const& first, Point const& second, double const interval) const
 {
     AlbaRange<double> range(first.getY(), second.getY(), interval);

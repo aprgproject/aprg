@@ -23,7 +23,8 @@ TEST(TwoDimensionsLineTest, EmptyLine)
     EXPECT_TRUE(isnan(line.getInverseSlope()));
     EXPECT_EQ(0, line.getACoefficient());
     EXPECT_EQ(0, line.getBCoefficient());
-    EXPECT_EQ(0, line.getCCoefficient());    EXPECT_EQ(0, line.getAUnitIncreaseInX());
+    EXPECT_EQ(0, line.getCCoefficient());
+    EXPECT_EQ(0, line.getAUnitIncreaseInX());
     EXPECT_EQ(0, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(-10,-10), Point(10,10), 1));
@@ -41,7 +42,8 @@ TEST(TwoDimensionsLineTest, InvalidLine)
     EXPECT_TRUE(isnan(line.getInverseSlope()));
     EXPECT_EQ(0, line.getACoefficient());
     EXPECT_EQ(0, line.getBCoefficient());
-    EXPECT_EQ(0, line.getCCoefficient());    EXPECT_EQ(0, line.getAUnitIncreaseInX());
+    EXPECT_EQ(0, line.getCCoefficient());
+    EXPECT_EQ(0, line.getAUnitIncreaseInX());
     EXPECT_EQ(0, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(-10,-10), Point(10,10), 1));
@@ -82,7 +84,8 @@ TEST(TwoDimensionsLineTest, VerticalLine)
     EXPECT_EQ(-INFINITY, line.getSlope());
     EXPECT_EQ(0, line.getInverseSlope());
     EXPECT_EQ(6, line.getACoefficient());
-    EXPECT_EQ(0, line.getBCoefficient());    EXPECT_EQ(-12, line.getCCoefficient());
+    EXPECT_EQ(0, line.getBCoefficient());
+    EXPECT_EQ(-12, line.getCCoefficient());
     EXPECT_EQ(0, line.getAUnitIncreaseInX());
     EXPECT_EQ(-6, line.getAUnitIncreaseInY());
 
@@ -236,7 +239,8 @@ TEST(TwoDimensionsLineTest, InvalidLineConstructedByCoefficients)
     EXPECT_TRUE(isnan(line.getInverseSlope()));
     EXPECT_EQ(0, line.getACoefficient());
     EXPECT_EQ(0, line.getBCoefficient());
-    EXPECT_EQ(10, line.getCCoefficient());    EXPECT_EQ(0, line.getAUnitIncreaseInX());
+    EXPECT_EQ(10, line.getCCoefficient());
+    EXPECT_EQ(0, line.getAUnitIncreaseInX());
     EXPECT_EQ(0, line.getAUnitIncreaseInY());
 }
 
@@ -274,7 +278,8 @@ TEST(TwoDimensionsLineTest, VerticalLineConstructedByCoefficients)
     EXPECT_EQ(-INFINITY, line.getSlope());
     EXPECT_EQ(0, line.getInverseSlope());
     EXPECT_EQ(1, line.getACoefficient());
-    EXPECT_EQ(0, line.getBCoefficient());    EXPECT_EQ(-2, line.getCCoefficient());
+    EXPECT_EQ(0, line.getBCoefficient());
+    EXPECT_EQ(-2, line.getCCoefficient());
     EXPECT_EQ(0, line.getAUnitIncreaseInX());
     EXPECT_EQ(-1, line.getAUnitIncreaseInY());
 
