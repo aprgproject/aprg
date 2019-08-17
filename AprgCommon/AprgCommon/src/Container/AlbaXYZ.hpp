@@ -125,7 +125,8 @@ public:
 
     std::string getDisplayableString() const
     {
-        std::stringstream ss;        ss<<"("<<x<<","<<y<<","<<z<<")";
+        std::stringstream ss;
+        ss<<"("<<x<<","<<y<<","<<z<<")";
         return ss.str();
     }
 

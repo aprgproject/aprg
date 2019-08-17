@@ -86,7 +86,8 @@ private:
     /*
     void splitToSmallestBlocks(BlockIterator const & blockIterator, DataBlockType const blockTypeForNewBlocks)
     {
-        BlockIterator iteratorAfterBlockToSplit(blockIterator);        iteratorAfterBlockToSplit++;
+        BlockIterator iteratorAfterBlockToSplit(blockIterator);
+        iteratorAfterBlockToSplit++;
         unsigned int index=0, indexOfIndexes=0;
         BlockIterator newBlockIterator(iteratorAfterBlockToSplit);
 
@@ -113,7 +114,8 @@ private:
 
     void splitToSmallestBlocks(BlockIterator const & blockIterator, DataBlockType const blockTypeForNewBlocks)
     {
-        BlockIterator iteratorAfterBlockToSplit(blockIterator);        iteratorAfterBlockToSplit++;
+        BlockIterator iteratorAfterBlockToSplit(blockIterator);
+        iteratorAfterBlockToSplit++;
         int numberOfObjectsInCurrentBlock=0;
         BlockIterator newBlockIterator(iteratorAfterBlockToSplit);
         blockIterator->sortThenDoFunctionThenRelease([&](ObjectToSort const& objectToSort)
@@ -133,7 +135,8 @@ private:
     }
 
     void limitMemoryConsumption()
-    {        unsigned int totalMemoryConsumption = calculateTotalMemoryConsumption();
+    {
+        unsigned int totalMemoryConsumption = calculateTotalMemoryConsumption();
         transferMemoryBlocksToFileIfNeeded(totalMemoryConsumption);
     }
     unsigned int calculateTotalMemoryConsumption()
