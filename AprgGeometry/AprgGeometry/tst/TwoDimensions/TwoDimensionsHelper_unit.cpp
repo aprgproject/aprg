@@ -237,11 +237,10 @@ TEST(TwoDimensionsHelperTest, GetTangentLineForCircleIsCorrect)
     EXPECT_DOUBLE_EQ(4, expectedLine2.getXIntercept());
 
     EXPECT_EQ(LineType::WithNegativeSlope, expectedLine3.getType());
-    EXPECT_DOUBLE_EQ(7.2426406871192865, expectedLine3.getYIntercept());
-    EXPECT_DOUBLE_EQ(7.2426406871192865, expectedLine3.getXIntercept());
+    EXPECT_DOUBLE_EQ(7.2426406871192821, expectedLine3.getYIntercept());
+    EXPECT_DOUBLE_EQ(7.2426406871192821, expectedLine3.getXIntercept());
     EXPECT_DOUBLE_EQ(-1, expectedLine3.getSlope());
 }
-
 TEST(TwoDimensionsHelperTest, GetTangentLineForPolynomialIsCorrect)
 {
     Parabola parabola{1,2,3};
