@@ -2,6 +2,9 @@
 
 #include <algorithm>
 
+using namespace alba::TwoDimensions::twoDimensionsHelper;
+using namespace std;
+
 namespace alba
 {
 
@@ -40,6 +43,33 @@ Points Polygon<numberOfVertices>::getVertices() const
 }
 
 template<unsigned int numberOfVertices>
+array<double, numberOfVertices> Polygon<numberOfVertices>::getLengthOfSides() const
+{
+    array<double, numberOfVertices> lengthOfSides;
+    int sizeMinusOne = static_cast<int>(m_vertices.size())-1;
+    for(int i=0; i<sizeMinusOne; i++)
+    {
+        lengthOfSides[i]=getDistance(m_vertices[i], m_vertices[i+1]);
+    }
+    lengthOfSides[sizeMinusOne]=getDistance(m_vertices[sizeMinusOne], m_vertices[0]);
+    return lengthOfSides; //RVO
+}
+
+template<unsigned int numberOfVertices>
+Dimensionless::Angles Polygon<numberOfVertices>::getAnglesAtVertices() const
+{
+    Dimensionless::Angles anglesAtVertices;
+    int sizeMinusOne = static_cast<int>(m_vertices.size())-1;
+    anglesAtVertices.emplace_back(getTheInnerAngleUsingThreePoints(m_vertices[0], m_vertices[sizeMinusOne], m_vertices[1]));
+    for(int i=1; i<sizeMinusOne; i++)
+    {
+        anglesAtVertices.emplace_back(getTheInnerAngleUsingThreePoints(m_vertices[i], m_vertices[i-1], m_vertices[i+1]));
+    }
+    anglesAtVertices.emplace_back(getTheInnerAngleUsingThreePoints(m_vertices[sizeMinusOne], m_vertices[sizeMinusOne-1], m_vertices[0]));
+    return anglesAtVertices; //RVO
+}
+
+template<unsigned int numberOfVertices>
 Points Polygon<numberOfVertices>::getPoints(double const interval) const
 {
     Points points;
@@ -50,20 +80,6 @@ Points Polygon<numberOfVertices>::getPoints(double const interval) const
     }
     getPointsFromVerticesWithoutLastPoint(points, interval, sizeMinusOne, 0);
     return points; //RVO
-}
-
-template<unsigned int numberOfVertices>
-Dimensionless::Angles Polygon<numberOfVertices>::getAnglesAtVertices() const
-{
-    Dimensionless::Angles anglesAtVertices;
-    int sizeMinusOne = static_cast<int>(m_vertices.size())-1;
-    anglesAtVertices.emplace_back(twoDimensionsHelper::getTheInnerAngleUsingThreePoints(m_vertices[0], m_vertices[sizeMinusOne], m_vertices[1]));
-    for(int i=1; i<sizeMinusOne; i++)
-    {
-        anglesAtVertices.emplace_back(twoDimensionsHelper::getTheInnerAngleUsingThreePoints(m_vertices[i], m_vertices[i-1], m_vertices[i+1]));
-    }
-    anglesAtVertices.emplace_back(twoDimensionsHelper::getTheInnerAngleUsingThreePoints(m_vertices[sizeMinusOne], m_vertices[sizeMinusOne-1], m_vertices[0]));
-    return anglesAtVertices; //RVO
 }
 
 template<unsigned int numberOfVertices>

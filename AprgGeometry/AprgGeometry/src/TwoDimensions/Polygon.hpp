@@ -22,10 +22,10 @@ public:
 
     Lines getLines() const;
     Points getVertices() const;
-    Points getPoints(double const interval) const;
-
+    std::array<double, numberOfVertices> getLengthOfSides() const;
     Dimensionless::Angles getAnglesAtVertices() const;
 
+    Points getPoints(double const interval) const;
     void getPointsFromVerticesWithoutLastPoint(Points & points, double const interval, unsigned int vertexIndex1, unsigned int vertexIndex2) const;
 
 private:
