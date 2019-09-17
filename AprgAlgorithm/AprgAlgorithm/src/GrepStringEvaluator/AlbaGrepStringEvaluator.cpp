@@ -169,7 +169,8 @@ void AlbaGrepStringEvaluator::addOperator(char const characterOperator)
             previousToken.appendToString(currentCharacter);
             previousToken.setOperatorType(AlbaGrepStringOperatorType::XnorOperator);
             break;
-        case '!': previousToken.setOperatorType(AlbaGrepStringOperatorType::IgnoreOperator); break;        default: invalidOperator = true; break;
+        case '!': previousToken.setOperatorType(AlbaGrepStringOperatorType::IgnoreOperator); break;
+        default: invalidOperator = true; break;
         }
         break;
     case AlbaGrepStringOperatorType::OrOperator:
@@ -187,7 +188,8 @@ void AlbaGrepStringEvaluator::addOperator(char const characterOperator)
             previousToken.appendToString(currentCharacter);
             previousToken.setOperatorType(AlbaGrepStringOperatorType::XnorOperator);
             break;
-        default: invalidOperator = true; break;        }
+        default: invalidOperator = true; break;
+        }
         break;
     case AlbaGrepStringOperatorType::XnorOperator:
         switch(currentCharacter)
@@ -205,13 +207,15 @@ void AlbaGrepStringEvaluator::addOperator(char const characterOperator)
         case '^': m_tokens.emplace_back(AlbaGrepStringOperatorType::XorOperator, string("")+currentCharacter); break;
         default: break;
         }
-        break;    }
+        break;
+    }
     if(invalidOperator)
     {
         previousToken.appendToString(currentCharacter);
         setErrorMessage("Invalid operator : [" + previousToken.getStringToFind() + "]");
     }
 }
+
 void AlbaGrepStringEvaluator::addParenthesis(char const currentCharacter, int& parenthesisCount)
 {
     switch(currentCharacter)
@@ -236,7 +240,8 @@ char AlbaGrepStringEvaluator::convertTildeToExclamationPointIfNeeded(char const 
 
 bool AlbaGrepStringEvaluator::isOperator(char const character) const
 {
-    return '!' == character || '~' == character || '&' == character || '|' == character || '^' == character;}
+    return '!' == character || '~' == character || '&' == character || '|' == character || '^' == character;
+}
 
 bool AlbaGrepStringEvaluator::isParenthesis(char const character) const
 {
