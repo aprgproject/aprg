@@ -27,7 +27,8 @@ AprgBitmapSnippet AprgBitmap::getSnippetReadFromFileWholeBitmap() const
     return getSnippetReadFromFile(m_configuration.getUpLeftCornerPoint(), m_configuration.getDownRightCornerPoint());
 }
 
-AprgBitmapSnippet AprgBitmap::getSnippetReadFromFileWithOutOfRangeCoordinates(int outOfRangeLeft, int outOfRangeTop, int outOfRangeRight, int outOfRangeBottom) const{
+AprgBitmapSnippet AprgBitmap::getSnippetReadFromFileWithOutOfRangeCoordinates(int outOfRangeLeft, int outOfRangeTop, int outOfRangeRight, int outOfRangeBottom) const
+{
     if(outOfRangeLeft > outOfRangeRight)
     {
         swap(outOfRangeLeft, outOfRangeRight);
@@ -40,6 +41,7 @@ AprgBitmapSnippet AprgBitmap::getSnippetReadFromFileWithOutOfRangeCoordinates(in
     BitmapXY const bottomRightCorner = m_configuration.getPointWithinTheBitmap(outOfRangeRight, outOfRangeBottom);
     return getSnippetReadFromFile(topLeftCorner, bottomRightCorner);
 }
+
 AprgBitmapSnippet AprgBitmap::getSnippetReadFromFileWithNumberOfBytesToRead(BitmapXY const center, unsigned int const numberOfBytesToRead) const
 {
     AprgBitmapSnippet snippet;
@@ -63,7 +65,8 @@ AprgBitmapSnippet AprgBitmap::getSnippetReadFromFile(BitmapXY const topLeftCorne
     return AprgBitmapSnippet(BitmapXY(startPixelInX, topLeftCorner.getY()), BitmapXY(endPixelInX, bottomRightCorner.getY()), m_configuration);
 }
 
-void AprgBitmap::setSnippetWriteToFile(AprgBitmapSnippet const& snippet) const{
+void AprgBitmap::setSnippetWriteToFile(AprgBitmapSnippet const& snippet) const
+{
     if(m_configuration == snippet.getConfiguration())
     {
         if(m_configuration.isPositionWithinTheBitmap(snippet.getTopLeftCorner()) && m_configuration.isPositionWithinTheBitmap(snippet.getBottomRightCorner()))
@@ -101,14 +104,16 @@ void AprgBitmap::calculateNewCornersBasedOnCenterAndNumberOfBytes(BitmapXY & top
     int right(m_configuration.getXCoordinateWithinTheBitmap(center.getX()+halfSide));
     adjustToTargetLength(left, right, side, m_configuration.getBitmapWidth());
 
-    int xSizeInBytes(m_configuration.getOneRowSizeInBytesFromPixels(left, right));    xSizeInBytes = (xSizeInBytes > 0) ? xSizeInBytes : 1;
+    int xSizeInBytes(m_configuration.getOneRowSizeInBytesFromPixels(left, right));
+    xSizeInBytes = (xSizeInBytes > 0) ? xSizeInBytes : 1;
     int ySizeInBytes(numberOfBytes/xSizeInBytes);
     int halfYSizeInBytes(ySizeInBytes/2);
     int top(m_configuration.getYCoordinateWithinTheBitmap(center.getY()-halfYSizeInBytes));
     int bottom(m_configuration.getYCoordinateWithinTheBitmap(center.getY()+halfYSizeInBytes));
     adjustToTargetLength(top, bottom, ySizeInBytes, m_configuration.getBitmapHeight());
 
-    topLeftCorner.setX(left);    topLeftCorner.setY(top);
+    topLeftCorner.setX(left);
+    topLeftCorner.setY(top);
     bottomRightCorner.setX(right);
     bottomRightCorner.setY(bottom);
 }

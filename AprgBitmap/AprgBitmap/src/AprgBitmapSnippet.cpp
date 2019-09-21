@@ -20,13 +20,15 @@ AprgBitmapSnippet::AprgBitmapSnippet(BitmapXY const topLeftCornerPosition, Bitma
 }
 
 AprgBitmapConfiguration AprgBitmapSnippet::getConfiguration() const
-{    return m_configuration;
+{
+    return m_configuration;
 }
 
 bool AprgBitmapSnippet::isPositionInsideTheSnippet(BitmapXY const position) const
 {
     return m_topLeftCorner.getX() <= position.getX() && m_topLeftCorner.getY() <= position.getY() && m_bottomRightCorner.getX() >= position.getX() && m_bottomRightCorner.getY() >= position.getY();
 }
+
 BitmapXY AprgBitmapSnippet::getTopLeftCorner() const
 {
     return m_topLeftCorner;
@@ -39,7 +41,8 @@ BitmapXY AprgBitmapSnippet::getBottomRightCorner() const
 
 unsigned int AprgBitmapSnippet::getDeltaX() const
 {
-    return m_bottomRightCorner.getX() - m_topLeftCorner.getX();}
+    return m_bottomRightCorner.getX() - m_topLeftCorner.getX();
+}
 
 unsigned int AprgBitmapSnippet::getDeltaY() const
 {
@@ -98,7 +101,8 @@ void AprgBitmapSnippet::loadPixelDataFromFileInConfiguration()
 
 PixelData& AprgBitmapSnippet::getPixelDataReference()
 {
-    return m_pixelData;}
+    return m_pixelData;
+}
 
 PixelData const& AprgBitmapSnippet::getPixelDataConstReference() const
 {
@@ -111,7 +115,8 @@ unsigned int AprgBitmapSnippet::getPixelAt(BitmapXY const position) const
     if(isPositionInsideTheSnippet(position))
     {
         unsigned int index = calculateIndexInPixelData(position);
-        unsigned char const* reader = (unsigned char const*)m_pixelData.getConstantBufferPointer();        if(m_configuration.getNumberOfBitsPerPixel() < AlbaBitConstants::BYTE_SIZE_IN_BITS)
+        unsigned char const* reader = (unsigned char const*)m_pixelData.getConstantBufferPointer();
+        if(m_configuration.getNumberOfBitsPerPixel() < AlbaBitConstants::BYTE_SIZE_IN_BITS)
         {
             result = getPixelAtForPixelInAByte(reader, index, position);
         }
@@ -138,7 +143,8 @@ void AprgBitmapSnippet::setPixelAt(BitmapXY const position, unsigned int const v
     if(isPositionInsideTheSnippet(position))
     {
         unsigned int index = calculateIndexInPixelData(position);
-        unsigned char* writer = (unsigned char *)m_pixelData.getConstantBufferPointer();        if(m_configuration.getNumberOfBitsPerPixel() < AlbaBitConstants::BYTE_SIZE_IN_BITS)
+        unsigned char* writer = (unsigned char *)m_pixelData.getConstantBufferPointer();
+        if(m_configuration.getNumberOfBitsPerPixel() < AlbaBitConstants::BYTE_SIZE_IN_BITS)
         {
             setPixelAtForPixelInAByte(writer, index, position, value);
         }
@@ -177,7 +183,8 @@ void AprgBitmapSnippet::traverseAndUpdate(TraverseAndUpdateFunction const& trave
 
 unsigned int AprgBitmapSnippet::calculateShiftValue(BitmapXY const position) const
 {
-    unsigned int numberOfPixelsInOneByte = m_configuration.getNumberOfPixelsForOneByte();    unsigned int numberOfBitsPerPixel = m_configuration.getNumberOfBitsPerPixel();
+    unsigned int numberOfPixelsInOneByte = m_configuration.getNumberOfPixelsForOneByte();
+    unsigned int numberOfBitsPerPixel = m_configuration.getNumberOfBitsPerPixel();
     unsigned int positionRemainder = position.getX()%numberOfPixelsInOneByte;
     unsigned int loopAround = numberOfPixelsInOneByte-positionRemainder-1;
     return numberOfBitsPerPixel*loopAround;

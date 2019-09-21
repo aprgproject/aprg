@@ -34,7 +34,8 @@ AprgBitmapConfiguration::AprgBitmapConfiguration()
     , m_colors()
 {}
 
-bool AprgBitmapConfiguration::isValid() const{
+bool AprgBitmapConfiguration::isValid() const
+{
     return isSignatureValid() && isHeaderValid() && isNumberOfColorPlanesValid() && isNumberOfBitsPerPixelValid();
 }
 
@@ -150,7 +151,8 @@ BitmapXY AprgBitmapConfiguration::getDownRightCornerPoint() const
 
 unsigned int AprgBitmapConfiguration::getColorUsingPixelValue(unsigned int pixelValue) const
 {
-    unsigned int color(0);    switch(m_numberOfBitsPerPixel)
+    unsigned int color(0);
+    switch(m_numberOfBitsPerPixel)
     {
     case 1:
     case 2:

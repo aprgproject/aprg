@@ -46,7 +46,8 @@ public:
 
     int getNumSamplesPerChannel() const;
 
-    /** @Returns the length in seconds of the audio file based on the number of samples and sample rate */    double getLengthInSeconds() const;
+    /** @Returns the length in seconds of the audio file based on the number of samples and sample rate */
+    double getLengthInSeconds() const;
 
     /** Prints a summary of the audio file to the console */
     void printSummary() const;
@@ -77,7 +78,8 @@ public:
     void setSampleRate (unsigned int newSampleRate);
 
     /** A vector of vectors holding the audio samples for the AprgAudio. You can
-     * access the samples by channel and then by sample index, i.e:     *
+     * access the samples by channel and then by sample index, i.e:
+     *
      *      samples[channel][sampleIndex]
      */
     AudioBuffer samples;
@@ -96,6 +98,7 @@ private:
 
     bool saveToWaveFile (std::string filePath);
     bool saveToAiffFile (std::string filePath);
+
     void clearAudioBuffer();
 
     int32_t fourBytesToInt (std::vector<unsigned char>& source, int startIndex, Endianness endianness = Endianness::LittleEndian);
@@ -123,4 +126,5 @@ private:
     unsigned int sampleRate;
     int bitDepth;
 };
+
 }

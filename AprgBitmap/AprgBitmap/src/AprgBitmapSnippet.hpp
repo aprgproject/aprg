@@ -32,7 +32,8 @@ public:
 
     PixelData& getPixelDataReference();
     PixelData const& getPixelDataConstReference() const;
-    unsigned int getPixelAt(BitmapXY const position) const;    unsigned int getColorAt(BitmapXY const position) const;
+    unsigned int getPixelAt(BitmapXY const position) const;
+    unsigned int getColorAt(BitmapXY const position) const;
     bool isBlackAt(BitmapXY const position) const;
     void setPixelAt(BitmapXY const position, unsigned int const value);
 
@@ -41,7 +42,8 @@ public:
 
 private:
     unsigned int calculateShiftValue(BitmapXY const position) const;
-    unsigned int calculateIndexInPixelData(BitmapXY const position) const;    unsigned int getPixelAtForPixelInAByte(unsigned char const* reader, unsigned int const index, BitmapXY const position) const;
+    unsigned int calculateIndexInPixelData(BitmapXY const position) const;
+    unsigned int getPixelAtForPixelInAByte(unsigned char const* reader, unsigned int const index, BitmapXY const position) const;
     unsigned int getPixelAtForMultipleBytePixels(unsigned char const* reader, unsigned int const index) const;
     void setPixelAtForPixelInAByte(unsigned char * writer, unsigned int const index, BitmapXY const position, unsigned int const value);
     void setPixelAtForMultipleBytePixels(unsigned char * writer, unsigned int const index, unsigned int const value);

@@ -11,7 +11,8 @@
 #include <TwoDimensions/Point.hpp>
 #include <TwoDimensionsStatistics.hpp>
 
-#include <array>#include <deque>
+#include <array>
+#include <deque>
 #include <fstream>
 #include <map>
 #include <string>
@@ -47,6 +48,7 @@ public:
         TwoDimensions::Point m_point;
         double m_width;
     };
+
     class StatusStatus
     {
         StatusStatus();
@@ -78,7 +80,8 @@ public:
     using DequeOfPoints = std::deque<TwoDimensions::Point>;
 
     SOOSA(SoosaConfiguration const& configuration);
-    unsigned int getNumberOfAnswers() const;    unsigned int getAnswerToQuestion(unsigned int const questionNumber) const;
+    unsigned int getNumberOfAnswers() const;
+    unsigned int getAnswerToQuestion(unsigned int const questionNumber) const;
     void process();
 private:
     std::string getCsvFileName(std::string const& path) const;
@@ -116,7 +119,8 @@ private:
     VectorOfPointAndWidth getPointsAndWidths(AprgBitmapSnippet const& snippet, TwoDimensions::Line const& line) const;
     LineAndBarWidths getAverageLineAndBarWidthUsingKMeans(VectorOfPointAndWidth const& widthToSampleUnorderedMultimap) const;
     TwoDimensionsStatistics::ValueToSampleMultimap getWidthToSampleMultimap(VectorOfPointAndWidth const& widthToSampleUnorderedMultimap) const;
-    void initializeWidthsForKMeans(OneDimensionKMeans & kMeans, TwoDimensionsStatistics::ValueToSampleMultimap const& widthToSampleMultimap) const;    void removeDeviatedWidthsUsingKMeans(OneDimensionKMeans & kMeans, TwoDimensionsStatistics::ValueToSampleMultimap const& widthToSampleMultimap) const;
+    void initializeWidthsForKMeans(OneDimensionKMeans & kMeans, TwoDimensionsStatistics::ValueToSampleMultimap const& widthToSampleMultimap) const;
+    void removeDeviatedWidthsUsingKMeans(OneDimensionKMeans & kMeans, TwoDimensionsStatistics::ValueToSampleMultimap const& widthToSampleMultimap) const;
     void addWidthToKMeansIfNeeded(OneDimensionKMeans & kMeans, OneDimensionKMeans::Samples const& groupOfSamples, TwoDimensionsStatistics::ValueToSampleMultimap const& widthToSampleMultimap, unsigned int const minimumGroupSize) const;
     RangeOfDoubles getMinMaxRangeFromKMeansSamples(OneDimensionKMeans::Samples const& samples) const;
     TwoDimensions::Points getNearestBlackPointsFromLine(AprgBitmapSnippet const& snippet, TwoDimensions::Line const& line) const;
@@ -124,7 +128,8 @@ private:
     double getBarWidthFromBlackPoint(AprgBitmapSnippet const& snippet, TwoDimensions::Line const& line, TwoDimensions::Point const& blackPoint) const;
     void initializeKMeansWithBarPoints(TwoDimensionKMeans & barPointKMeans, VectorOfPointAndWidth const& pointsAndWidths, LineAndBarWidths const& widthAverages) const;
     void saveHeightDetailsFromBarPoints(TwoDimensionKMeans::GroupOfSamples const& groupOfGroupOfBarPoints, OneDimensionStatistics::Samples & barHeights, DataCollection<double> & heightCollection) const;
-    void removeIncorrectBarPointsWithKMeans(TwoDimensionKMeans & barPointKMeans, TwoDimensionKMeans & barPointKMeansForCalculation, unsigned int const numberQuestionsInColumn, double const totalHeight) const;    void removeIncorrectBarPointsByHeight(TwoDimensionKMeans & barPointKMeans, TwoDimensionKMeans & barPointKMeansForCalculation, DataCollection<double> const& heightCollection, TwoDimensionKMeans::GroupOfSamples const& groupOfGroupOfBarPoints) const;
+    void removeIncorrectBarPointsWithKMeans(TwoDimensionKMeans & barPointKMeans, TwoDimensionKMeans & barPointKMeansForCalculation, unsigned int const numberQuestionsInColumn, double const totalHeight) const;
+    void removeIncorrectBarPointsByHeight(TwoDimensionKMeans & barPointKMeans, TwoDimensionKMeans & barPointKMeansForCalculation, DataCollection<double> const& heightCollection, TwoDimensionKMeans::GroupOfSamples const& groupOfGroupOfBarPoints) const;
     void adjustHeightUntilTargetHeight(DequeOfPoints & dequeWithHighestHeight, DataCollection<double> const& heightCollection, double height) const;
     void saveQuestionBarCoordinatesFromKMeansWithBarPoints(TwoDimensionKMeans const& barPointKMeans, QuestionBarCoordinates & questionBarCoordinates, unsigned int const numberQuestionsInColumn) const;
     void writeLineInBitmap(AprgBitmap & bitmap, TwoDimensions::Line const& line) const;
@@ -135,7 +140,8 @@ private:
     TwoDimensionsStatistics::Sample convertToTwoDimensionSample(TwoDimensions::Point const& point) const;
 
     SoosaConfiguration m_configuration;
-    unsigned int m_numberOfRespondents;    std::map<unsigned int, unsigned int> m_questionToAnswersMap;
+    unsigned int m_numberOfRespondents;
+    std::map<unsigned int, unsigned int> m_questionToAnswersMap;
     FrequencyDatabase m_frequencyDatabase;
 };
 

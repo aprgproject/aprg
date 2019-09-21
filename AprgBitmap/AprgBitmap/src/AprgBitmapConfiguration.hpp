@@ -38,7 +38,8 @@ public:
 
     CompressedMethodType getCompressedMethodType() const;
     std::string getPath() const;
-    unsigned int getPixelArrayAddress() const;    unsigned int getBitmapWidth() const;
+    unsigned int getPixelArrayAddress() const;
+    unsigned int getBitmapWidth() const;
     unsigned int getBitmapHeight() const;
     unsigned int getNumberOfBitsPerPixel() const;
     unsigned int getNumberOfBytesPerRowInFile() const;
@@ -53,7 +54,8 @@ public:
 
     unsigned int getColorUsingPixelValue(unsigned int pixelValue) const;
     unsigned int convertPixelsToBytesRoundToFloor(unsigned int pixels) const;
-    unsigned int convertPixelsToBytesRoundToCeil(unsigned int pixels) const;    unsigned int convertBytesToPixels(unsigned int bytes) const;
+    unsigned int convertPixelsToBytesRoundToCeil(unsigned int pixels) const;
+    unsigned int convertBytesToPixels(unsigned int bytes) const;
     unsigned int getNumberOfPixelsForOneByte() const;
     unsigned int getMaximumNumberOfPixelsBeforeOneByte() const;
     unsigned int getMinimumNumberOfBytesForOnePixel() const;
