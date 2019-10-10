@@ -3,10 +3,10 @@
 #include <algorithm>
 
 using namespace alba::TwoDimensions::twoDimensionsHelper;
+using namespace alba::Dimensionless;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace TwoDimensions
 {
@@ -56,13 +56,12 @@ array<double, numberOfVertices> Polygon<numberOfVertices>::getLengthOfSides() co
 }
 
 template<unsigned int numberOfVertices>
-Dimensionless::Angles Polygon<numberOfVertices>::getAnglesAtVertices() const
+Angles Polygon<numberOfVertices>::getAnglesAtVertices() const
 {
-    Dimensionless::Angles anglesAtVertices;
+    Angles anglesAtVertices;
     int sizeMinusOne = static_cast<int>(m_vertices.size())-1;
     anglesAtVertices.emplace_back(getTheInnerAngleUsingThreePoints(m_vertices[0], m_vertices[sizeMinusOne], m_vertices[1]));
-    for(int i=1; i<sizeMinusOne; i++)
-    {
+    for(int i=1; i<sizeMinusOne; i++)    {
         anglesAtVertices.emplace_back(getTheInnerAngleUsingThreePoints(m_vertices[i], m_vertices[i-1], m_vertices[i+1]));
     }
     anglesAtVertices.emplace_back(getTheInnerAngleUsingThreePoints(m_vertices[sizeMinusOne], m_vertices[sizeMinusOne-1], m_vertices[0]));
@@ -70,10 +69,15 @@ Dimensionless::Angles Polygon<numberOfVertices>::getAnglesAtVertices() const
 }
 
 template<unsigned int numberOfVertices>
+Angle Polygon<numberOfVertices>::getSumOfAngles() const
+{
+    return Angle(AngleUnitType::Degrees, (numberOfVertices - 2) * 180);
+}
+
+template<unsigned int numberOfVertices>
 Points Polygon<numberOfVertices>::getPoints(double const interval) const
 {
-    Points points;
-    int sizeMinusOne = static_cast<int>(m_vertices.size())-1;
+    Points points;    int sizeMinusOne = static_cast<int>(m_vertices.size())-1;
     for(int i=0; i<sizeMinusOne; i++)
     {
         getPointsFromVerticesWithoutLastPoint(points, interval, i, i+1);
