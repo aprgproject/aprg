@@ -283,6 +283,7 @@ TEST(ThreeDimensionsHelperTest, GetPlaneOfTwoDifferentLinesWithSameSlopeWorksCor
 TEST(ThreeDimensionsHelperTest, GetPerpendicularPlaneWithALineAndAPointWorksCorrectly)
 {
     Plane expectedPlane(getPerpendicularPlaneOfALineAndUsingAPointInThePlane(Line(Point(0,0,0), Point(1,1,1)), Point(1,0,0)));
+
     EXPECT_EQ(1, expectedPlane.getACoefficient());
     EXPECT_EQ(1, expectedPlane.getBCoefficient());
     EXPECT_EQ(1, expectedPlane.getCCoefficient());

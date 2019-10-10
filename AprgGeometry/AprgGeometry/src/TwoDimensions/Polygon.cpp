@@ -6,7 +6,8 @@ using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace alba::Dimensionless;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace TwoDimensions
 {
@@ -61,7 +62,8 @@ Angles Polygon<numberOfVertices>::getAnglesAtVertices() const
     Angles anglesAtVertices;
     int sizeMinusOne = static_cast<int>(m_vertices.size())-1;
     anglesAtVertices.emplace_back(getTheInnerAngleUsingThreePoints(m_vertices[0], m_vertices[sizeMinusOne], m_vertices[1]));
-    for(int i=1; i<sizeMinusOne; i++)    {
+    for(int i=1; i<sizeMinusOne; i++)
+    {
         anglesAtVertices.emplace_back(getTheInnerAngleUsingThreePoints(m_vertices[i], m_vertices[i-1], m_vertices[i+1]));
     }
     anglesAtVertices.emplace_back(getTheInnerAngleUsingThreePoints(m_vertices[sizeMinusOne], m_vertices[sizeMinusOne-1], m_vertices[0]));
@@ -77,7 +79,8 @@ Angle Polygon<numberOfVertices>::getSumOfAngles() const
 template<unsigned int numberOfVertices>
 Points Polygon<numberOfVertices>::getPoints(double const interval) const
 {
-    Points points;    int sizeMinusOne = static_cast<int>(m_vertices.size())-1;
+    Points points;
+    int sizeMinusOne = static_cast<int>(m_vertices.size())-1;
     for(int i=0; i<sizeMinusOne; i++)
     {
         getPointsFromVerticesWithoutLastPoint(points, interval, i, i+1);

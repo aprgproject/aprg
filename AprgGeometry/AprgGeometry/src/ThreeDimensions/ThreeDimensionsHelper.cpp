@@ -340,7 +340,8 @@ Angle getTheLargerDihedralAngleBetweenTwoPlanes(Plane const& plane1, Plane const
 
 Angle getTheLargerAngleBetweenTwoLines(Line const& line1, Line const& line2)
 {
-    Angle smallerAngle(getTheSmallerAngleBetweenTwoLines(line1, line2));    return Angle(AngleUnitType::Degrees, 180-smallerAngle.getDegrees());
+    Angle smallerAngle(getTheSmallerAngleBetweenTwoLines(line1, line2));
+    return Angle(AngleUnitType::Degrees, 180-smallerAngle.getDegrees());
 }
 
 double getDotProduct(Coefficients const coefficients1, Coefficients const coefficients2)
@@ -410,7 +411,8 @@ Plane getPlaneOfTwoDifferentLinesWithSameSlope(Line const& line1, Line const& li
 
 Plane getPerpendicularPlaneOfALineAndUsingAPointInThePlane(Line const& line, Point const& pointInPerpendicularPlane)
 {
-    return Plane(line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient(), pointInPerpendicularPlane);}
+    return Plane(line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient(), pointInPerpendicularPlane);
+}
 
 }
 }

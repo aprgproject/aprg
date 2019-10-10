@@ -3,6 +3,7 @@
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 
 #include <gtest/gtest.h>
+
 #include <windows.h>
 
 using namespace alba;
@@ -14,7 +15,8 @@ TEST(RealAutomationTest, NormalizeAudioForMp3Files) //DISABLED_
     AlbaLocalPathHandler mp3FilesPathHandler(R"(N:\MUSIC\111_DoAutomationHere)");
 
     while(1)
-    {        if(userAutomation.isLetterPressed('s'))  //s for start
+    {
+        if(userAutomation.isLetterPressed('s'))  //s for start
         {
             ListOfPaths filePaths;
             ListOfPaths directoryPaths;
@@ -34,7 +36,8 @@ TEST(RealAutomationTest, NormalizeAudioForMp3Files) //DISABLED_
                     userAutomation.sleep(2000);
 
                     //open file
-                    userAutomation.typeControlAndLetterSimultaneously('O');                    userAutomation.sleep(1000);
+                    userAutomation.typeControlAndLetterSimultaneously('O');
+                    userAutomation.sleep(1000);
 
                     //paste file name
                     userAutomation.setStringToClipboard(filePathHandler.getFile());
@@ -48,6 +51,7 @@ TEST(RealAutomationTest, NormalizeAudioForMp3Files) //DISABLED_
 
                     //select all track
                     userAutomation.typeControlAndLetterSimultaneously('A');
+
                     //click effect
                     userAutomation.doDoubleLeftClickAt(MousePosition(344,33));
 
@@ -61,7 +65,8 @@ TEST(RealAutomationTest, NormalizeAudioForMp3Files) //DISABLED_
                     userAutomation.sleep(10000);
 
                     //export
-                    userAutomation.pressDownKey(VK_CONTROL);                    userAutomation.pressDownKey(VK_SHIFT);
+                    userAutomation.pressDownKey(VK_CONTROL);
+                    userAutomation.pressDownKey(VK_SHIFT);
                     userAutomation.pressDownKey('E');
                     userAutomation.sleepWithRealisticDelay();
                     userAutomation.pressUpKey('E');
@@ -105,7 +110,8 @@ TEST(RealAutomationTest, NormalizeAudioForMp3Files) //DISABLED_
                     cout << "Ignored file: " << filePath << ": size: " << filePathHandler.getFileSizeEstimate() << endl;
                 }
             }
-            break;        }
+            break;
+        }
         Sleep(100);
     }
 

@@ -28,6 +28,7 @@ public:
 
     Points getPoints(double const interval) const;
     void getPointsFromVerticesWithoutLastPoint(Points & points, double const interval, unsigned int vertexIndex1, unsigned int vertexIndex2) const;
+
 private:
     std::array<Point, numberOfVertices> m_vertices;
 };
