@@ -316,10 +316,31 @@ Angle getTheSmallerAngleBetweenTwoLines(Line const& line1, Line const& line2)
     return smallerAngle;
 }
 
+Angle getTheSmallerDihedralAngleBetweenTwoPlanes(Plane const& plane1, Plane const& plane2)
+{
+    Angle smallerAngle;
+    if(arePlanesParallel(plane1, plane2))
+    {
+        smallerAngle = Angle(AngleUnitType::Degrees, 0);
+    }
+    else
+    {
+        Coefficients c1(plane1.getACoefficient(), plane1.getBCoefficient(), plane1.getCCoefficient());
+        Coefficients c2(plane2.getACoefficient(), plane2.getBCoefficient(), plane2.getCCoefficient());
+        smallerAngle = Angle(AngleUnitType::Radians, acos(getAbsoluteValue(getCosineOfAngleUsing2Deltas(c1,c2))));
+    }
+    return smallerAngle;
+}
+
+Angle getTheLargerDihedralAngleBetweenTwoPlanes(Plane const& plane1, Plane const& line2)
+{
+    Angle smallerAngle(getTheSmallerDihedralAngleBetweenTwoPlanes(plane1, line2));
+    return Angle(AngleUnitType::Degrees, 180-smallerAngle.getDegrees());
+}
+
 Angle getTheLargerAngleBetweenTwoLines(Line const& line1, Line const& line2)
 {
-    Angle smallerAngle(getTheSmallerAngleBetweenTwoLines(line1, line2));
-    return Angle(AngleUnitType::Degrees, 180-smallerAngle.getDegrees());
+    Angle smallerAngle(getTheSmallerAngleBetweenTwoLines(line1, line2));    return Angle(AngleUnitType::Degrees, 180-smallerAngle.getDegrees());
 }
 
 double getDotProduct(Coefficients const coefficients1, Coefficients const coefficients2)
