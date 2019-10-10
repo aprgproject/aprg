@@ -1,10 +1,8 @@
 #include <AlbaLocalUserAutomation.hpp>
 
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
-#include <Debug/AlbaDebug.hpp>
 
 #include <gtest/gtest.h>
-
 #include <windows.h>
 
 using namespace alba;
@@ -13,11 +11,10 @@ using namespace std;
 TEST(RealAutomationTest, NormalizeAudioForMp3Files) //DISABLED_
 {
     AlbaWindowsUserAutomation userAutomation;
-    AlbaLocalPathHandler mp3FilesPathHandler(R"(N:\MUSIC\AnimeSongs2)");
+    AlbaLocalPathHandler mp3FilesPathHandler(R"(N:\MUSIC\111_DoAutomationHere)");
 
     while(1)
-    {
-        if(userAutomation.isLetterPressed('s'))  //s for start
+    {        if(userAutomation.isLetterPressed('s'))  //s for start
         {
             ListOfPaths filePaths;
             ListOfPaths directoryPaths;
@@ -31,12 +28,13 @@ TEST(RealAutomationTest, NormalizeAudioForMp3Files) //DISABLED_
                 {
                     //close previous file
                     userAutomation.typeControlAndLetterSimultaneously('W');
+                    userAutomation.sleep(1000);
                     userAutomation.typeKey(VK_RIGHT);
                     userAutomation.typeKey(VK_RETURN);
+                    userAutomation.sleep(2000);
 
                     //open file
-                    userAutomation.typeControlAndLetterSimultaneously('O');
-                    userAutomation.sleep(1000);
+                    userAutomation.typeControlAndLetterSimultaneously('O');                    userAutomation.sleep(1000);
 
                     //paste file name
                     userAutomation.setStringToClipboard(filePathHandler.getFile());
@@ -46,11 +44,10 @@ TEST(RealAutomationTest, NormalizeAudioForMp3Files) //DISABLED_
                     userAutomation.typeKey(VK_RETURN);
 
                     //wait for the file to load
-                    userAutomation.sleep(20000);
+                    userAutomation.sleep(10000);
 
                     //select all track
                     userAutomation.typeControlAndLetterSimultaneously('A');
-
                     //click effect
                     userAutomation.doDoubleLeftClickAt(MousePosition(344,33));
 
@@ -61,41 +58,54 @@ TEST(RealAutomationTest, NormalizeAudioForMp3Files) //DISABLED_
                     userAutomation.typeKey(VK_RETURN);
 
                     //wait for normalization process
-                    userAutomation.sleep(20000);
+                    userAutomation.sleep(10000);
 
                     //export
-                    userAutomation.pressDownKey(VK_CONTROL);
-                    userAutomation.pressDownKey(VK_SHIFT);
+                    userAutomation.pressDownKey(VK_CONTROL);                    userAutomation.pressDownKey(VK_SHIFT);
                     userAutomation.pressDownKey('E');
                     userAutomation.sleepWithRealisticDelay();
                     userAutomation.pressUpKey('E');
                     userAutomation.pressUpKey(VK_SHIFT);
                     userAutomation.pressUpKey(VK_CONTROL);
+                    userAutomation.sleep(2000);
 
-                    //type enter key
+                    //type enter key multiple times
                     userAutomation.sleep(1000);
-                    userAutomation.typeKey(VK_RETURN);
+                    userAutomation.typeKey(VK_RETURN); // save
                     userAutomation.sleep(1000);
-                    userAutomation.typeKey(VK_RETURN);
+                    userAutomation.typeKey('Y'); //yes to replace
                     userAutomation.sleep(1000);
+                    userAutomation.doDoubleLeftClickAt(MousePosition(1074,687)); //click ok
+                    userAutomation.typeKey(VK_RIGHT); //type right to avoid stop button
 
                     //wait for export process
-                    userAutomation.sleep(20000);
+                    userAutomation.sleep(15000);
+
+                    //type enter key multiple times to ensure everything is closed
+                    userAutomation.sleep(250);
+                    userAutomation.typeKey(VK_RETURN);
+                    userAutomation.sleep(250);
+                    userAutomation.typeKey(VK_RETURN);
+                    userAutomation.sleep(250);
+                    userAutomation.typeKey(VK_RETURN);
+                    userAutomation.sleep(250);
+                    userAutomation.typeKey(VK_RETURN);
 
                     //close file
                     userAutomation.typeControlAndLetterSimultaneously('W');
+                    userAutomation.sleep(1000);
                     userAutomation.typeKey(VK_RIGHT);
                     userAutomation.typeKey(VK_RETURN);
+                    userAutomation.sleep(2000);
 
                     //break;
                 }
                 else
                 {
-                    ALBA_PRINT2(filePath, filePathHandler.getFileSizeEstimate());
+                    cout << "Ignored file: " << filePath << ": size: " << filePathHandler.getFileSizeEstimate() << endl;
                 }
             }
-            break;
-        }
+            break;        }
         Sleep(100);
     }
 
