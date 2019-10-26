@@ -46,7 +46,8 @@ public:
     void processFileForPeriodicCpuLogging(std::string const& filePath);
     void processFileForRlSetupDelayInTupcWithSymonKnife(std::string const& filePath);
     void processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(std::string const& filePath);
-    void processFileForFtmFcmWireshark(std::string const& filePath);    void processFileForTopLogs(std::string const& filePath);
+    void processFileForFtmFcmWireshark(std::string const& filePath);
+    void processFileForTopLogs(std::string const& filePath);
     void processFileForTopLogsMem(std::string const& filePath);
     void processFileForRlSetupPerSecond(std::string const& filePath);
     void processFileForTraceLog(std::string const& traceLogPath);

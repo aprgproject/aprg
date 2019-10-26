@@ -277,7 +277,8 @@ CoefficientRatios getRatioOfEachCoefficient(Coefficients const& first, Coefficie
     return CoefficientRatios(AlbaRatio(first.getX(), second.getX()), AlbaRatio(first.getY(), second.getY()), AlbaRatio(first.getZ(), second.getZ()));
 }
 
-Angle getTheInnerAngleUsingThreePoints(Point const& pointA, Point const& pointB, Point const& pointC){
+Angle getTheInnerAngleUsingThreePoints(Point const& pointA, Point const& pointB, Point const& pointC)
+{
     Point deltaBA(pointB-pointA);
     Point deltaCA(pointC-pointA);
     Coefficients c1(deltaBA.getX(), deltaBA.getY(), deltaBA.getZ());
@@ -311,7 +312,8 @@ Angle getTheLargerAngleBetweenTwoLines(Line const& line1, Line const& line2)
 
 Angle getTheSmallerDihedralAngleBetweenTwoPlanes(Plane const& plane1, Plane const& plane2)
 {
-    Angle smallerAngle;    if(arePlanesParallel(plane1, plane2))
+    Angle smallerAngle;
+    if(arePlanesParallel(plane1, plane2))
     {
         smallerAngle = Angle(AngleUnitType::Degrees, 0);
     }
@@ -365,7 +367,8 @@ Point getPointOfIntersectionOfAPlaneAndALine(Plane const& plane, Line const& lin
 
 Line getLineWithSameSlope(Line const& line, Point const& point)
 {
-    return Line(line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient(), point);}
+    return Line(line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient(), point);
+}
 
 Line getLineOfIntersectionOfTwoPlanes(Plane const& plane1, Plane const& plane2)
 {
@@ -395,7 +398,8 @@ Line getProjectedLineInPlaneOfASkewedPlaneAndLine(Plane const& plane, Line const
 
 Plane getPlaneWithContainsALineAndAPoint(Line const& line, Point const& point)
 {
-    Point point1InLine(line.getXInitialValue(), line.getYInitialValue(), line.getZInitialValue());    Point point2InLine(point1InLine+Point(line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient()));
+    Point point1InLine(line.getXInitialValue(), line.getYInitialValue(), line.getZInitialValue());
+    Point point2InLine(point1InLine+Point(line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient()));
     return Plane(point, point1InLine, point2InLine);
 }
 

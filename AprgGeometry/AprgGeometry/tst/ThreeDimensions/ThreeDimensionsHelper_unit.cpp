@@ -229,7 +229,8 @@ TEST(TwoDimensionsHelperTest, GetTheLargerDihedralAngleBetweenTwoPlanesWorksCorr
 
 TEST(ThreeDimensionsHelperTest, GetCrossProductWorksCorrectly)
 {
-    Coefficients input1(1,2,3);    Coefficients input2(4,5,6);
+    Coefficients input1(1,2,3);
+    Coefficients input2(4,5,6);
     Coefficients expectedCoefficients(getCrossProduct(input1, input2));
 
     EXPECT_EQ(-3, expectedCoefficients.getX());
@@ -281,6 +282,7 @@ TEST(ThreeDimensionsHelperTest, GetProjectedLineInPlaneOfASkewedPlaneAndLineWork
 TEST(ThreeDimensionsHelperTest, GetPlaneWithContainsALineAndAPointWorksCorrectly)
 {
     Plane expectedPlane(getPlaneWithContainsALineAndAPoint(Line(Point(0,0,0), Point(1,1,1)), Point(1,0,0)));
+
     EXPECT_EQ(0, expectedPlane.getACoefficient());
     EXPECT_EQ(1, expectedPlane.getBCoefficient());
     EXPECT_EQ(-1, expectedPlane.getCCoefficient());

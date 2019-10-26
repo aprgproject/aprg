@@ -4,7 +4,8 @@
 #include <TwoDimensions/Rectangle.hpp>
 
 #include <algorithm>
-#include <cmath>#include <stack>
+#include <cmath>
+#include <stack>
 
 using namespace alba::Dimensionless;
 using namespace alba::mathHelper;
@@ -59,7 +60,8 @@ bool areLinesPerpendicular(Line const& line1, Line const& line2)
             (isAlmostEqual(line1.getSlope(), line2.getPerpendicularSlope()));
 }
 
-double getDistance(Point const& point1, Point const& point2){
+double getDistance(Point const& point1, Point const& point2)
+{
     double deltaX = point2.getX() - point1.getX();
     double deltaY = point2.getY() - point1.getY();
     return getSquareRootOfXSquaredPlusYSquared<double>(deltaX, deltaY);
@@ -123,7 +125,8 @@ template double getArea<4>(Polygon<4> const& polygon);
 
 Quadrant getQuadrantOfAPoint(Point const& point)
 {
-    Quadrant result(Quadrant::I);    double signOfX = getSign(point.getX());
+    Quadrant result(Quadrant::I);
+    double signOfX = getSign(point.getX());
     double signOfY = getSign(point.getY());
     if(signOfX==1)
     {
@@ -281,7 +284,8 @@ Point popNearestPoint(Points & points, Point const& point)
 
 Points getConnectedPointsUsingALine(Points const& inputPoints, double const interval)
 {
-    Points resultingPoints;    if(!inputPoints.empty())
+    Points resultingPoints;
+    if(!inputPoints.empty())
     {
         Point previousPoint(inputPoints.front());
         for(Point const& currentPoint: inputPoints)

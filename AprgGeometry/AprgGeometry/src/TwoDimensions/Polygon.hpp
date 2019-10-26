@@ -30,6 +30,7 @@ public:
     Distances getLengthOfSides() const;
     Dimensionless::Angles getAnglesAtVertices() const;
     Dimensionless::Angle getSumOfAngles() const;
+
     Points getPoints(double const interval) const;
     void getPointsFromVerticesWithoutLastPoint(Points & points, double const interval, unsigned int vertexIndex1, unsigned int vertexIndex2) const;
 

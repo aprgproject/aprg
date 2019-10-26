@@ -102,7 +102,8 @@ TEST(TriangleTest, IsRightTriangleWorksCorrect)
 
 TEST(TriangleTest, GetPointsAreCorrect)
 {
-    Triangle triangle(Point(0,0), Point(3,3), Point(0,6));    Points points(triangle.getPoints(1));
+    Triangle triangle(Point(0,0), Point(3,3), Point(0,6));
+    Points points(triangle.getPoints(1));
 
     ASSERT_EQ(12u, points.size());
     EXPECT_EQ(Point(0,0), points[0]);
