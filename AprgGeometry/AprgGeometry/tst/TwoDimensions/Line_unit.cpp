@@ -20,11 +20,10 @@ TEST(TwoDimensionsLineTest, EmptyLine)
     EXPECT_TRUE(isnan(line.getYIntercept()));
     EXPECT_TRUE(isnan(line.getXIntercept()));
     EXPECT_TRUE(isnan(line.getSlope()));
-    EXPECT_TRUE(isnan(line.getInverseSlope()));
+    EXPECT_TRUE(isnan(line.getPerpendicularSlope()));
     EXPECT_EQ(0, line.getACoefficient());
     EXPECT_EQ(0, line.getBCoefficient());
-    EXPECT_EQ(0, line.getCCoefficient());
-    EXPECT_EQ(0, line.getAUnitIncreaseInX());
+    EXPECT_EQ(0, line.getCCoefficient());    EXPECT_EQ(0, line.getAUnitIncreaseInX());
     EXPECT_EQ(0, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(-10,-10), Point(10,10), 1));
@@ -39,11 +38,10 @@ TEST(TwoDimensionsLineTest, InvalidLine)
     EXPECT_TRUE(isnan(line.getYIntercept()));
     EXPECT_TRUE(isnan(line.getXIntercept()));
     EXPECT_TRUE(isnan(line.getSlope()));
-    EXPECT_TRUE(isnan(line.getInverseSlope()));
+    EXPECT_TRUE(isnan(line.getPerpendicularSlope()));
     EXPECT_EQ(0, line.getACoefficient());
     EXPECT_EQ(0, line.getBCoefficient());
-    EXPECT_EQ(0, line.getCCoefficient());
-    EXPECT_EQ(0, line.getAUnitIncreaseInX());
+    EXPECT_EQ(0, line.getCCoefficient());    EXPECT_EQ(0, line.getAUnitIncreaseInX());
     EXPECT_EQ(0, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(-10,-10), Point(10,10), 1));
@@ -58,11 +56,10 @@ TEST(TwoDimensionsLineTest, HorizontalLine)
     EXPECT_EQ(3, line.getYIntercept());
     EXPECT_EQ(-INFINITY, line.getXIntercept());
     EXPECT_EQ(0, line.getSlope());
-    EXPECT_EQ(-INFINITY, line.getInverseSlope());
+    EXPECT_EQ(-INFINITY, line.getPerpendicularSlope());
     EXPECT_EQ(0, line.getACoefficient());
     EXPECT_EQ(-4, line.getBCoefficient());
-    EXPECT_EQ(12, line.getCCoefficient());
-    EXPECT_EQ(-4, line.getAUnitIncreaseInX());
+    EXPECT_EQ(12, line.getCCoefficient());    EXPECT_EQ(-4, line.getAUnitIncreaseInX());
     EXPECT_EQ(0, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(-2,10), Point(2,-10), 1));
@@ -82,11 +79,10 @@ TEST(TwoDimensionsLineTest, VerticalLine)
     EXPECT_EQ(INFINITY, line.getYIntercept());
     EXPECT_EQ(2, line.getXIntercept());
     EXPECT_EQ(-INFINITY, line.getSlope());
-    EXPECT_EQ(0, line.getInverseSlope());
+    EXPECT_EQ(0, line.getPerpendicularSlope());
     EXPECT_EQ(6, line.getACoefficient());
     EXPECT_EQ(0, line.getBCoefficient());
-    EXPECT_EQ(-12, line.getCCoefficient());
-    EXPECT_EQ(0, line.getAUnitIncreaseInX());
+    EXPECT_EQ(-12, line.getCCoefficient());    EXPECT_EQ(0, line.getAUnitIncreaseInX());
     EXPECT_EQ(-6, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(10,-3), Point(-10,3), 1));
@@ -108,11 +104,10 @@ TEST(TwoDimensionsLineTest, LineWithSlope)
     EXPECT_EQ(0, line.getYIntercept());
     EXPECT_EQ(0, line.getXIntercept());
     EXPECT_EQ(1.5, line.getSlope());
-    EXPECT_EQ(static_cast<double>(-2)/3, line.getInverseSlope());
+    EXPECT_EQ(static_cast<double>(-2)/3, line.getPerpendicularSlope());
     EXPECT_EQ(6, line.getACoefficient());
     EXPECT_EQ(-4, line.getBCoefficient());
-    EXPECT_EQ(0, line.getCCoefficient());
-    EXPECT_EQ(-4, line.getAUnitIncreaseInX());
+    EXPECT_EQ(0, line.getCCoefficient());    EXPECT_EQ(-4, line.getAUnitIncreaseInX());
     EXPECT_EQ(-6, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(-2,-3), Point(2,3), 1));
@@ -136,11 +131,10 @@ TEST(TwoDimensionsLineTest, HorizontalLineWithPointsReversed)
     EXPECT_EQ(3, line.getYIntercept());
     EXPECT_EQ(INFINITY, line.getXIntercept());
     EXPECT_EQ(0, line.getSlope());
-    EXPECT_EQ(INFINITY, line.getInverseSlope());
+    EXPECT_EQ(INFINITY, line.getPerpendicularSlope());
     EXPECT_EQ(0, line.getACoefficient());
     EXPECT_EQ(4, line.getBCoefficient());
-    EXPECT_EQ(-12, line.getCCoefficient());
-    EXPECT_EQ(4, line.getAUnitIncreaseInX());
+    EXPECT_EQ(-12, line.getCCoefficient());    EXPECT_EQ(4, line.getAUnitIncreaseInX());
     EXPECT_EQ(0, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(2,10), Point(-2,-10), 1));
@@ -160,11 +154,10 @@ TEST(TwoDimensionsLineTest, VerticalLineWithPointsReversed)
     EXPECT_EQ(-INFINITY, line.getYIntercept());
     EXPECT_EQ(2, line.getXIntercept());
     EXPECT_EQ(INFINITY, line.getSlope());
-    EXPECT_EQ(0, line.getInverseSlope());
+    EXPECT_EQ(0, line.getPerpendicularSlope());
     EXPECT_EQ(-6, line.getACoefficient());
     EXPECT_EQ(0, line.getBCoefficient());
-    EXPECT_EQ(12, line.getCCoefficient());
-    EXPECT_EQ(0, line.getAUnitIncreaseInX());
+    EXPECT_EQ(12, line.getCCoefficient());    EXPECT_EQ(0, line.getAUnitIncreaseInX());
     EXPECT_EQ(6, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(10,3), Point(-10,-3), 1));
@@ -186,11 +179,10 @@ TEST(TwoDimensionsLineTest, LineWithSlopeWithPointsReversed)
     EXPECT_EQ(0, line.getYIntercept());
     EXPECT_EQ(0, line.getXIntercept());
     EXPECT_EQ(1.5, line.getSlope());
-    EXPECT_EQ(static_cast<double>(-2)/3, line.getInverseSlope());
+    EXPECT_EQ(static_cast<double>(-2)/3, line.getPerpendicularSlope());
     EXPECT_EQ(-6, line.getACoefficient());
     EXPECT_EQ(4, line.getBCoefficient());
-    EXPECT_EQ(0, line.getCCoefficient());
-    EXPECT_EQ(4, line.getAUnitIncreaseInX());
+    EXPECT_EQ(0, line.getCCoefficient());    EXPECT_EQ(4, line.getAUnitIncreaseInX());
     EXPECT_EQ(6, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(2,3), Point(-2,-3), 1));
@@ -214,11 +206,10 @@ TEST(TwoDimensionsLineTest, LineWithNegativeSlope)
     EXPECT_EQ(2, line.getYIntercept());
     EXPECT_EQ(2, line.getXIntercept());
     EXPECT_EQ(-1, line.getSlope());
-    EXPECT_EQ(1, line.getInverseSlope());
+    EXPECT_EQ(1, line.getPerpendicularSlope());
     EXPECT_EQ(2, line.getACoefficient());
     EXPECT_EQ(2, line.getBCoefficient());
-    EXPECT_EQ(-4, line.getCCoefficient());
-    EXPECT_EQ(2, line.getAUnitIncreaseInX());
+    EXPECT_EQ(-4, line.getCCoefficient());    EXPECT_EQ(2, line.getAUnitIncreaseInX());
     EXPECT_EQ(-2, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(2,0), Point(0,2), 1));
@@ -236,11 +227,10 @@ TEST(TwoDimensionsLineTest, InvalidLineConstructedByCoefficients)
     EXPECT_EQ(-INFINITY, line.getYIntercept());
     EXPECT_EQ(-INFINITY, line.getXIntercept());
     EXPECT_TRUE(isnan(line.getSlope()));
-    EXPECT_TRUE(isnan(line.getInverseSlope()));
+    EXPECT_TRUE(isnan(line.getPerpendicularSlope()));
     EXPECT_EQ(0, line.getACoefficient());
     EXPECT_EQ(0, line.getBCoefficient());
-    EXPECT_EQ(10, line.getCCoefficient());
-    EXPECT_EQ(0, line.getAUnitIncreaseInX());
+    EXPECT_EQ(10, line.getCCoefficient());    EXPECT_EQ(0, line.getAUnitIncreaseInX());
     EXPECT_EQ(0, line.getAUnitIncreaseInY());
 }
 
@@ -252,11 +242,10 @@ TEST(TwoDimensionsLineTest, HorizontalLineConstructedByCoefficients)
     EXPECT_EQ(3, line.getYIntercept());
     EXPECT_EQ(-INFINITY, line.getXIntercept());
     EXPECT_EQ(0, line.getSlope());
-    EXPECT_EQ(-INFINITY, line.getInverseSlope());
+    EXPECT_EQ(-INFINITY, line.getPerpendicularSlope());
     EXPECT_EQ(0, line.getACoefficient());
     EXPECT_EQ(-1, line.getBCoefficient());
-    EXPECT_EQ(3, line.getCCoefficient());
-    EXPECT_EQ(-1, line.getAUnitIncreaseInX());
+    EXPECT_EQ(3, line.getCCoefficient());    EXPECT_EQ(-1, line.getAUnitIncreaseInX());
     EXPECT_EQ(0, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(-2,10), Point(2,-10), 1));
@@ -276,11 +265,10 @@ TEST(TwoDimensionsLineTest, VerticalLineConstructedByCoefficients)
     EXPECT_EQ(INFINITY, line.getYIntercept());
     EXPECT_EQ(2, line.getXIntercept());
     EXPECT_EQ(-INFINITY, line.getSlope());
-    EXPECT_EQ(0, line.getInverseSlope());
+    EXPECT_EQ(0, line.getPerpendicularSlope());
     EXPECT_EQ(1, line.getACoefficient());
     EXPECT_EQ(0, line.getBCoefficient());
-    EXPECT_EQ(-2, line.getCCoefficient());
-    EXPECT_EQ(0, line.getAUnitIncreaseInX());
+    EXPECT_EQ(-2, line.getCCoefficient());    EXPECT_EQ(0, line.getAUnitIncreaseInX());
     EXPECT_EQ(-1, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(10,-3), Point(-10,3), 1));
@@ -302,11 +290,10 @@ TEST(TwoDimensionsLineTest, LineWithSlopeConstructedByCoefficients)
     EXPECT_EQ(0, line.getYIntercept());
     EXPECT_EQ(0, line.getXIntercept());
     EXPECT_EQ(1.5, line.getSlope());
-    EXPECT_EQ(static_cast<double>(-2)/3, line.getInverseSlope());
+    EXPECT_EQ(static_cast<double>(-2)/3, line.getPerpendicularSlope());
     EXPECT_EQ(3, line.getACoefficient());
     EXPECT_EQ(-2, line.getBCoefficient());
-    EXPECT_EQ(0, line.getCCoefficient());
-    EXPECT_EQ(-2, line.getAUnitIncreaseInX());
+    EXPECT_EQ(0, line.getCCoefficient());    EXPECT_EQ(-2, line.getAUnitIncreaseInX());
     EXPECT_EQ(-3, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(-2,-3), Point(2,3), 1));
@@ -330,11 +317,10 @@ TEST(TwoDimensionsLineTest, PointsAreCorrectForLineWithSteepSlope)
     EXPECT_EQ(0, line.getYIntercept());
     EXPECT_EQ(0, line.getXIntercept());
     EXPECT_EQ(5, line.getSlope());
-    EXPECT_EQ(static_cast<double>(-1)/5, line.getInverseSlope());
+    EXPECT_EQ(static_cast<double>(-1)/5, line.getPerpendicularSlope());
     EXPECT_EQ(-5, line.getACoefficient());
     EXPECT_EQ(1, line.getBCoefficient());
-    EXPECT_EQ(0, line.getCCoefficient());
-    EXPECT_EQ(1, line.getAUnitIncreaseInX());
+    EXPECT_EQ(0, line.getCCoefficient());    EXPECT_EQ(1, line.getAUnitIncreaseInX());
     EXPECT_EQ(5, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(-2,-2), Point(2,2), 1));
@@ -354,11 +340,10 @@ TEST(TwoDimensionsLineTest, LineWithExtremeSlopeWithManyPoints)
     EXPECT_EQ(3790.9553222602962705, line.getYIntercept());
     EXPECT_EQ(868.451, line.getXIntercept());
     EXPECT_EQ(-4.3651919593164105748, line.getSlope());
-    EXPECT_EQ(0.229085, line.getInverseSlope());
+    EXPECT_EQ(0.229085, line.getPerpendicularSlope());
     EXPECT_EQ(1, line.getACoefficient());
     EXPECT_EQ(0.229085, line.getBCoefficient());
-    EXPECT_EQ(-868.451, line.getCCoefficient());
-    EXPECT_EQ(0.229085, line.getAUnitIncreaseInX());
+    EXPECT_EQ(-868.451, line.getCCoefficient());    EXPECT_EQ(0.229085, line.getAUnitIncreaseInX());
     EXPECT_EQ(-1, line.getAUnitIncreaseInY());
 
     Points points(line.getPoints(Point(0,0), Point(3194,3966), 1));

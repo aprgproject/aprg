@@ -1,9 +1,9 @@
 #include <TwoDimensions/TwoDimensionsHelper.hpp>
 
 #include <TwoDimensions/Parabola.hpp>
+#include <TwoDimensions/Rectangle.hpp>
 
 #include <gtest/gtest.h>
-
 #include <cmath>
 
 using namespace alba::Dimensionless;
@@ -81,10 +81,16 @@ TEST(TwoDimensionsHelperTest, GetAreaForPolygonWorksForTriangle)
     Triangle triangle(Point(0,0), Point(0,4), Point(4,0));
     EXPECT_EQ(8, getArea<3>(triangle));
 }
+
+TEST(TwoDimensionsHelperTest, GetAreaForPolygonWorksForRectangle)
+{
+    Rectangle rectangle(Point(0,5), Point(4,0));
+    EXPECT_EQ(20, getArea<4>(rectangle));
+}
+
 TEST(TwoDimensionsHelperTest, LineAndLineIntersectionCanBeFound)
 {
-    Line line1(Point(2,4), Point(3,3));
-    Line line2(Point(4,4), Point(3,3));
+    Line line1(Point(2,4), Point(3,3));    Line line2(Point(4,4), Point(3,3));
 
     EXPECT_EQ(Point(3,3), getIntersectionOfTwoLines(line1, line2));
 }
