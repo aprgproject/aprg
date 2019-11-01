@@ -83,10 +83,78 @@ TEST(SampleTest, MathSetCreatedWithASetRuleWorks)
               }));
 }
 
+TEST(SampleTest, IsASubsetOfWorks)
+{
+    AprgMathSet<unsigned int> mathSet1({2,4});
+    AprgMathSet<unsigned int> mathSet2("set of even numbers", [](unsigned int const& elementToCheck)
+    {
+        return elementToCheck % 2 == 0;
+    });
+
+    AprgMathSet<unsigned int>::GenerateFunction generateFunction = [&](
+            AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+    {
+        for(unsigned int i=0; i<=10; i++)
+        {
+            elementFunction(i);
+        }
+    };
+
+    EXPECT_TRUE(mathSet1.isASubsetOf(mathSet2, generateFunction));
+    EXPECT_FALSE(mathSet2.isASubsetOf(mathSet1, generateFunction));
+}
+
+TEST(SampleTest, IsASupersetOfWorks)
+{
+    AprgMathSet<unsigned int> mathSet1({3,5});
+    AprgMathSet<unsigned int> mathSet2("set of odd numbers", [](unsigned int const& elementToCheck)
+    {
+        return elementToCheck % 2 == 1;
+    });
+
+    AprgMathSet<unsigned int>::GenerateFunction generateFunction = [&](
+            AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+    {
+        for(unsigned int i=0; i<=10; i++)
+        {
+            elementFunction(i);
+        }
+    };
+
+    EXPECT_TRUE(mathSet2.isASupersetOf(mathSet1, generateFunction));
+    EXPECT_FALSE(mathSet1.isASupersetOf(mathSet2, generateFunction));
+}
+
+TEST(SampleTest, IsDisjointWithWorks)
+{
+    AprgMathSet<unsigned int> mathSet1("set of even numbers", [](unsigned int const& elementToCheck)
+    {
+        return elementToCheck % 2 == 0;
+    });
+    AprgMathSet<unsigned int> mathSet2("set of odd numbers", [](unsigned int const& elementToCheck)
+    {
+        return elementToCheck % 2 == 1;
+    });
+    AprgMathSet<unsigned int> mathSet3({2,4});
+
+    AprgMathSet<unsigned int>::GenerateFunction generateFunction = [&](
+            AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+    {
+        for(unsigned int i=0; i<=10; i++)
+        {
+            elementFunction(i);
+        }
+    };
+
+    EXPECT_TRUE(mathSet1.isDisjointWith(mathSet2, generateFunction));
+    EXPECT_TRUE(mathSet2.isDisjointWith(mathSet1, generateFunction));
+    EXPECT_FALSE(mathSet1.isDisjointWith(mathSet3, generateFunction));
+    EXPECT_FALSE(mathSet3.isDisjointWith(mathSet1, generateFunction));
+}
+
 TEST(SampleTest, GetUnionWithWorks)
 {
-    AprgMathSet<unsigned int> mathSet1({1,2,3});
-    AprgMathSet<unsigned int> mathSet2("set of even numbers", [](unsigned int const& elementToCheck)
+    AprgMathSet<unsigned int> mathSet1({1,2,3});    AprgMathSet<unsigned int> mathSet2("set of even numbers", [](unsigned int const& elementToCheck)
     {
         return elementToCheck % 2 == 0;
     });
@@ -188,19 +256,19 @@ TEST(SampleTest, GetCartesianWorks)
     AprgMathSet<unsigned int> mathSet1({1,2});
     AprgMathSet<char> mathSet2({'x','y'});
 
-    AprgMathSet<unsigned int>::GenerateFunction generateFunction1 = [&](AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+    AprgMathSet<unsigned int>::GenerateFunction generateFunction1 = [&](
+            AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
     {
         for(unsigned int i=0; i<=10; i++)
-        {
-            elementFunction(i);
+        {            elementFunction(i);
         }
     };
 
-    AprgMathSet<char>::GenerateFunction generateFunction2 = [&](AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+    AprgMathSet<char>::GenerateFunction generateFunction2 = [&](
+            AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
     {
         for(char c='a'; c<='z'; c++)
-        {
-            elementFunction(c);
+        {            elementFunction(c);
         }
     };
 
