@@ -212,11 +212,10 @@ bool AlbaWindowsPathHandler::copyToNewFile(string const& newFilePath)
         isSuccessful = (bool)CopyFileW(stringHelper::convertStringToWideString(getFullPath()).c_str(), stringHelper::convertStringToWideString(newFilePath).c_str(), 0);
         if(!isSuccessful)
         {
-            cout<<"Error in AlbaWindowsPathHandler::CopyFile() path:["<<getFullPath()<<"] newFilePath:["<<newFilePath<<"]"<<endl;
+            cout<<"Error in AlbaWindowsPathHandler::copyToNewFile() path:["<<getFullPath()<<"] newFilePath:["<<newFilePath<<"]"<<endl;
             cout<<AlbaWindowsHelper::getLastFormattedErrorMessage()<<endl;
         }
-        else
-        {
+        else        {
             reInput();
         }
     }
