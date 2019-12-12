@@ -70,7 +70,8 @@ void AprgBitmap::setSnippetWriteToFile(AprgBitmapSnippet const& snippet) const
     if(areBitmapConfigurationsCompatibleForChangingPixelData(m_configuration, snippet.getConfiguration()))
     {
         if(m_configuration.isPositionWithinTheBitmap(snippet.getTopLeftCorner()) && m_configuration.isPositionWithinTheBitmap(snippet.getBottomRightCorner()))
-        {            fstream streamFile(m_configuration.getPath(), fstream::in | fstream::out | fstream::binary);
+        {
+            fstream streamFile(m_configuration.getPath(), fstream::in | fstream::out | fstream::binary);
             if(streamFile.is_open())
             {
                 int byteOffsetInXForStart = (int)m_configuration.convertPixelsToBytesRoundToFloor(snippet.getTopLeftCorner().getX());

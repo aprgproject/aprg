@@ -162,7 +162,8 @@ void AprgBitmapSnippet::traverse(TraverseFunction const& traverseFunction) const
         for(unsigned int x=m_topLeftCorner.getX(); x<=m_bottomRightCorner.getX(); x++)
         {
             BitmapXY currentPoint(x,y);
-            traverseFunction(currentPoint, getPixelAt(currentPoint));        }
+            traverseFunction(currentPoint, getPixelAt(currentPoint));
+        }
     }
 }
 

@@ -68,7 +68,8 @@ public:
     void readBitmap(std::string const& path);
 
 private:
-    void readBitmapFileHeader(AlbaFileReader& fileReader);    void readDibHeader(AlbaFileReader& fileReader);
+    void readBitmapFileHeader(AlbaFileReader& fileReader);
+    void readDibHeader(AlbaFileReader& fileReader);
     void readColors(AlbaFileReader& fileReader);
     void calculateOtherValuesAfterReading();
     CompressedMethodType determineCompressedMethodType(unsigned int compressedMethodValue) const;
