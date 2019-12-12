@@ -157,13 +157,12 @@ void AprgBitmapSnippet::setPixelAt(BitmapXY const position, unsigned int const v
 
 void AprgBitmapSnippet::traverse(TraverseFunction const& traverseFunction) const
 {
-    for(unsigned int x=m_topLeftCorner.getX(); x<=m_bottomRightCorner.getX(); x++)
+    for(unsigned int y=m_topLeftCorner.getY(); y<=m_bottomRightCorner.getY(); y++)
     {
-        for(unsigned int y=m_topLeftCorner.getY(); y<=m_bottomRightCorner.getY(); y++)
+        for(unsigned int x=m_topLeftCorner.getX(); x<=m_bottomRightCorner.getX(); x++)
         {
             BitmapXY currentPoint(x,y);
-            traverseFunction(currentPoint, getPixelAt(currentPoint));
-        }
+            traverseFunction(currentPoint, getPixelAt(currentPoint));        }
     }
 }
 
