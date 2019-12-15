@@ -3,12 +3,14 @@
 #include <AprgColorUtilities.hpp>
 #include <Math/AlbaMathHelper.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
-#include <Randomizer/AlbaRandomizer.hpp>#include <TwoDimensions/Circle.hpp>
+#include <Randomizer/AlbaRandomizer.hpp>
+#include <TwoDimensions/Circle.hpp>
 #include <TwoDimensions/TwoDimensionsHelper.hpp>
 
 using namespace alba::ColorUtilities;
 using namespace alba::TwoDimensions;
 using namespace std;
+
 namespace alba
 {
 
@@ -26,6 +28,7 @@ bool AprgBitmapFilters::isSimilar(unsigned int const color1, unsigned int const 
     bool isBlueDifferenceBeyondLimit(mathHelper::getAbsoluteValue<int>((int)extractBlue(color1)-(int)extractBlue(color2))>(int)similarityColorLimit);
     return  !(isRedDifferenceBeyondLimit || isGreenDifferenceBeyondLimit || isBlueDifferenceBeyondLimit);
 }
+
 /*
 bool AprgBitmapFilters::isSimilar(unsigned int const color1, unsigned int const color2) const//Pythagorean algo
 {
@@ -276,7 +279,8 @@ void AprgBitmapFilters::setBlankGapsUsingBlurToOutputCanvas(double const blurRad
                 newColor = getBlurredColor(canvas1, bitmapPoint, blurRadius, [&](unsigned int , unsigned int currentColor, BitmapXY )
                 {
                     return m_backgroundColor!=currentColor;
-                });                if(m_backgroundColor != newColor)
+                });
+                if(m_backgroundColor != newColor)
                 {
                     numberOfPixelsWithChangedColor++;
                 }
@@ -471,17 +475,19 @@ unsigned int AprgBitmapFilters::getBlurredColor(AprgBitmapSnippet const& canvas,
                 totalBlurredColorBlue+=blurWeight*extractBlue(currentColor);
                 totalBlurWeight+=blurWeight;
             }
-        }    });
+        }
+    });
     unsigned int blurredColor(m_backgroundColor);
     if(isChanged)
     {
-        blurredColor = combineRgbColor(
+        blurredColor = combineRgbToColor(
                     static_cast<unsigned char>(totalBlurredColorRed/totalBlurWeight),
                     static_cast<unsigned char>(totalBlurredColorGreen/totalBlurWeight),
                     static_cast<unsigned char>(totalBlurredColorBlue/totalBlurWeight));
     }
     return blurredColor;
 }
+
 double AprgBitmapFilters::getBlurWeight(double const distanceFromCenter, double const blurRadius) const
 {
     return (blurRadius-distanceFromCenter+1)/(blurRadius+1);
@@ -491,7 +497,8 @@ void AprgBitmapFilters::setLabelToColorMapForStableRun(map<unsigned int, unsigne
 {
     labelToColorMap[1]=0xff;
     labelToColorMap[2]=0xff00;
-    labelToColorMap[3]=0xff0000;    labelToColorMap[4]=0xffff;
+    labelToColorMap[3]=0xff0000;
+    labelToColorMap[4]=0xffff;
     labelToColorMap[5]=0xffff00;
     labelToColorMap[6]=0x9c2e00;
     labelToColorMap[7]=0xca6600;

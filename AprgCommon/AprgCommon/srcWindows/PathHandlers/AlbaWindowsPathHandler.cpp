@@ -215,7 +215,8 @@ bool AlbaWindowsPathHandler::copyToNewFile(string const& newFilePath)
             cout<<"Error in AlbaWindowsPathHandler::copyToNewFile() path:["<<getFullPath()<<"] newFilePath:["<<newFilePath<<"]"<<endl;
             cout<<AlbaWindowsHelper::getLastFormattedErrorMessage()<<endl;
         }
-        else        {
+        else
+        {
             reInput();
         }
     }
