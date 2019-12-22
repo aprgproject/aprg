@@ -6,12 +6,10 @@
 #include <algorithm>
 #include <cmath>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 using namespace std;
 
 //https://en.wikipedia.org/wiki/HSL_and_HSV
+
 namespace alba
 {
 
@@ -41,23 +39,29 @@ double calculateHueDegrees(ColorPercentagesData const& colorPercentagesData)
     if(colorPercentagesData.deltaMaxMinPercentage == 0)
     {
         hueDegrees = 0;
-    }    else
+    }
+    else
     {
         double hueBy60Degrees(0);
         if(colorPercentagesData.colorPercentageMax==colorPercentagesData.redPercentage)
         {
-            hueBy60Degrees=fmod(((colorPercentagesData.greenPercentage-colorPercentagesData.bluePercentage)/colorPercentagesData.deltaMaxMinPercentage), 6);
+            hueBy60Degrees=(colorPercentagesData.greenPercentage-colorPercentagesData.bluePercentage)/colorPercentagesData.deltaMaxMinPercentage;
         }
         else if(colorPercentagesData.colorPercentageMax==colorPercentagesData.greenPercentage)
         {
-            hueBy60Degrees=(((colorPercentagesData.bluePercentage-colorPercentagesData.redPercentage)/colorPercentagesData.deltaMaxMinPercentage)+2);
+            hueBy60Degrees=((colorPercentagesData.bluePercentage-colorPercentagesData.redPercentage)/colorPercentagesData.deltaMaxMinPercentage)+2;
         }
         else if(colorPercentagesData.colorPercentageMax==colorPercentagesData.bluePercentage)
         {
-            hueBy60Degrees=(((colorPercentagesData.redPercentage-colorPercentagesData.greenPercentage)/colorPercentagesData.deltaMaxMinPercentage)+4);
+            hueBy60Degrees=((colorPercentagesData.redPercentage-colorPercentagesData.greenPercentage)/colorPercentagesData.deltaMaxMinPercentage)+4;
         }
         hueDegrees = hueBy60Degrees*60;
-    }    return hueDegrees;
+        if(hueDegrees<0)
+        {
+            hueDegrees += 360;
+        }
+    }
+    return hueDegrees;
 }
 
 double calculateColorIntensityDecimal(unsigned int const color)
@@ -98,7 +102,8 @@ double calculateSaturationColorIntensityDecimal(unsigned int const color)
 
 HueSaturationLightnessData createHueSaturationLightnessData(
         double const hueDegrees,
-        double const saturationLightnessDecimal,        double const lightnessDecimal)
+        double const saturationLightnessDecimal,
+        double const lightnessDecimal)
 {
     HueSaturationLightnessData result;
     result.hueDegrees = hueDegrees;
@@ -157,10 +162,6 @@ unsigned int convertChromaColorDataToColor(ChromaColorData const& chromaColorDat
     {
         redPrime = c; greenPrime = 0; bluePrime=x;
     }
-    ALBA_PRECISION(20);
-    ALBA_PRINT4(c,x,m,hueDegrees);
-    ALBA_PRINT3(redPrime,greenPrime,bluePrime);
-    ALBA_PRINT3(round((redPrime+m)*MAX_COLOR_VALUE),round((greenPrime+m)*MAX_COLOR_VALUE),round((bluePrime+m)*MAX_COLOR_VALUE));
     return combineRgbToColor(
                 static_cast<unsigned char>(round((redPrime+m)*MAX_COLOR_VALUE)),
                 static_cast<unsigned char>(round((greenPrime+m)*MAX_COLOR_VALUE)),
@@ -183,6 +184,7 @@ HueSaturationLightnessData convertColorToHueSaturationLightnessData(unsigned int
     }
     return result;
 }
+
 HueSaturationValueData convertColorToHueSaturationValueData(unsigned int const color)
 {
     ColorPercentagesData colorPercentagesData(calculateColorPercentagesData(color));
@@ -199,6 +201,7 @@ HueSaturationValueData convertColorToHueSaturationValueData(unsigned int const c
     }
     return result;
 }
+
 unsigned int convertHueSaturationLightnessDataToColor(HueSaturationLightnessData const& hslData)
 {
     ChromaColorData chromaColorData;
@@ -252,7 +255,8 @@ HueSaturationLightnessData convertHsvDataToHslData(HueSaturationValueData const&
     return result;
 }
 
-unsigned char extractRed(unsigned int const color){
+unsigned char extractRed(unsigned int const color)
+{
     return (AlbaBitManipulation<unsigned int>::getByteAt<2>(color));
 }
 
