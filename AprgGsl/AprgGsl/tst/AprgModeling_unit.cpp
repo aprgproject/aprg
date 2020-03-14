@@ -2,7 +2,8 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba;using namespace std;
+using namespace alba;
+using namespace std;
 
 
 #define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_FILE1 APRG_DIR "AprgGsl\\AprgGsl\\tst\\ModelingDataSets\\DataSet1.csv"
