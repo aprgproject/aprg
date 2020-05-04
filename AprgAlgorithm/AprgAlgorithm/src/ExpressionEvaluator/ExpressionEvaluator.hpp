@@ -4,6 +4,7 @@
 #include <functional>
 #include <stack>
 #include <vector>
+
 namespace alba
 {
 
@@ -46,7 +47,8 @@ public:
     {}
     ExpressionEvaluatorTerm(OperatorTemplateType const& operatorValue, OperatorSyntaxType const& operatorSyntaxValue)
         : m_termType(TermType::Operator)
-        , m_value()        , m_operator(operatorValue)
+        , m_value()
+        , m_operator(operatorValue)
         , m_operatorSyntaxType(operatorSyntaxValue)
         , m_operatorPriority(0)
     {}
@@ -306,13 +308,15 @@ public:
     using TermsStack = std::stack<Terms>;
 
     static PostfixEvaluator convertInfixToPostfix(InfixEvaluator const& infixEvaluator)
-    {        PostfixEvaluator postfixEvaluator;
+    {
+        PostfixEvaluator postfixEvaluator;
         Terms const& termsInInfix(infixEvaluator.m_terms);
         Terms & termsInPostfix(postfixEvaluator.m_terms);
         TermStack operatorStack;
         for(Term const& term : termsInInfix)
         {
-            if (term.isStartGroupOperator())            {
+            if (term.isStartGroupOperator())
+            {
                 operatorStack.push(term);
             }
             else if (term.isEndGroupOperator())
@@ -330,7 +334,8 @@ public:
                     return term.getOperatorPriority() <= termStack.top().getOperatorPriority() && !termStack.top().isStartGroupOperator();
                 });
                 operatorStack.push(term);
-            }            else
+            }
+            else
             {
                 termsInPostfix.push_back(term);
             }
@@ -422,4 +427,5 @@ private:
 };
 
 }
+
 }

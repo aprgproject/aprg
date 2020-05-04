@@ -21,6 +21,7 @@ namespace alba
 
 namespace ExpressionEvaluator
 {
+
 int performUnaryOperation(string const& operatorString, int const value)
 {
     int result(0);
@@ -57,6 +58,7 @@ int performBinaryOperation(int const value1, string const& operatorString, int c
 using InfixEvaluatorForTest = ExpressionInfixEvaluator<int, string>;
 using PostfixEvaluatorForTest = ExpressionPostfixEvaluator<int, string>;
 using EvaluatorConverterForTest = ExpressionEvaluatorConverter<int, string>;
+
 
 TEST(ExpressionInfixEvaluatorTest, DoesNotCrashWhenValueAreEmpty)
 {

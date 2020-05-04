@@ -11,7 +11,8 @@ namespace alba
 
 TEST(UnionFindTest, UnionFindCanBeCreated)
 {
-    UnionFindUsingMap<unsigned int> unionFind;}
+    UnionFindUsingMap<unsigned int> unionFind;
+}
 
 TEST(UnionFindTest, UnionFindUnsignedIntegerTest)
 {

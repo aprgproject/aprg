@@ -20,7 +20,8 @@ namespace alba
 
 class TestObject
 {
-public:    TestObject()
+public:
+    TestObject()
     {}
 
     TestObject(int valueInteger, double valueDouble, char valueCharacter, string valueString)
