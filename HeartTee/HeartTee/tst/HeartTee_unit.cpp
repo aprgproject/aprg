@@ -6,12 +6,14 @@
 
 #include <iostream>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
+
 /*
 TEST(SampleTest, DISABLED_SampleTest1)
-{
-    unsigned char buffer[100];
+{    unsigned char buffer[100];
     SerialPort serialPort;
     serialPort.openSerial();
     while(serialPort.getFd() >= 0)
@@ -53,4 +55,6 @@ TEST(SampleTest, ProcessTest)
     heartTee.transferDataFromReadToProcess();
     heartTee.processData();
     heartTee.printDatabase();
+}
+
 }

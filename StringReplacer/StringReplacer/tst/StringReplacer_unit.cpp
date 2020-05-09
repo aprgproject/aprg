@@ -2,13 +2,14 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(PrintReplacerTest, ReplaceCStylePrintWithCPlusPlusStylePrint)
 {
-    StringReplacer replacer;
-    string result(replacer.gethCPlusPlusStylePrintFromC(R"(TLH_DEBUG_PRINT("Creating new licence entry in DB for featureCode: %d.", featureCode);)"));
+    StringReplacer replacer;    string result(replacer.gethCPlusPlusStylePrintFromC(R"(TLH_DEBUG_PRINT("Creating new licence entry in DB for featureCode: %d.", featureCode);)"));
     EXPECT_EQ(R"(debug() << "Creating new licence entry in DB for featureCode: " << featureCode << "." << flush();)",  result);
 }
 
@@ -40,4 +41,6 @@ TEST(PrintReplacerTest, ReplaceCStylePrintWithCPlusPlusStyleInDirectories)
     replacer.replaceCToCPlusPlusStylePrintOnDirectories(
                 R"(D:\Branches\MODERNIZATION\TLH\C_Application\SC_TCOM\CP_TLH\)",
                 R"(D:\Branches\MODERNIZATION\TLH\C_Application\SC_TCOM\NewTLH\)");
+}
+
 }

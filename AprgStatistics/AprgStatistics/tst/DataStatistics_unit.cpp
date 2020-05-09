@@ -4,13 +4,14 @@
 
 #include <iostream>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(DataStatisticsTest, StatisticsAreCorrectWhenSamplesAreEmpty)
 {
-    using LocalStatistics = DataStatistics<3>;
-    using LocalSamples = LocalStatistics::Samples;
+    using LocalStatistics = DataStatistics<3>;    using LocalSamples = LocalStatistics::Samples;
     using LocalSample = LocalStatistics::Sample;
     LocalSample expectedSum{0, 0, 0};
     LocalSample expectedMean{0, 0, 0};
@@ -110,4 +111,6 @@ TEST(DataStatisticsTest, StatisticsCanBeClearedAfterCalculation)
     EXPECT_EQ(expectedPopulationVariance, populationVariance);
     EXPECT_EQ(expectedPopulationStandardDeviation, populationStandardDeviation);
     EXPECT_DOUBLE_EQ(expectedDispersion, dispersion);
+}
+
 }

@@ -6,13 +6,14 @@
 #include <fstream>
 #include <string>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(AlbaSackReaderTest, SackTest)
 {
-    AlbaSackReader sackReader(R"(D:\W\trunk\I_Interface)", "[.cpp] || [.hpp] || [.c] || [.h]");
-    sackReader.process();
+    AlbaSackReader sackReader(R"(D:\W\trunk\I_Interface)", "[.cpp] || [.hpp] || [.c] || [.h]");    sackReader.process();
     sackReader.printAll();
 }
 
@@ -208,4 +209,6 @@ TEST(AlbaSackReaderTest, TypedefWithEnumAreRecognized)
     AlbaSackReaderType myClass = sackReader.getType("MyEnum");
     AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
     ASSERT_EQ(0u, myClassParameters.size());
+}
+
 }

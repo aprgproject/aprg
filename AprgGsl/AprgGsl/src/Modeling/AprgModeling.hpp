@@ -8,11 +8,9 @@
 namespace alba
 {
 
-
 class AprgModeling
 {
-public:
-    struct ValidationResult
+public:    struct ValidationResult
     {
         double totalSquareError;
         double resultSize;

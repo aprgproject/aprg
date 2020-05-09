@@ -4,19 +4,19 @@
 
 #include <iostream>
 
-using namespace alba;
 using namespace std;
 
-#define APRG_BITMAP_MONOCHROME_TEST_FILE APRG_DIR R"(AprgBitmap\AprgBitmap\tst\Bitmaps\Monochrome.bmp)"
-#define APRG_BITMAP_16_COLOR_TEST_FILE APRG_DIR R"(AprgBitmap\AprgBitmap\tst\Bitmaps\16ColorBitmap.bmp)"
+#define APRG_BITMAP_MONOCHROME_TEST_FILE APRG_DIR R"(AprgBitmap\AprgBitmap\tst\Bitmaps\Monochrome.bmp)"#define APRG_BITMAP_16_COLOR_TEST_FILE APRG_DIR R"(AprgBitmap\AprgBitmap\tst\Bitmaps\16ColorBitmap.bmp)"
 #define APRG_BITMAP_256_COLOR_TEST_FILE APRG_DIR R"(AprgBitmap\AprgBitmap\tst\Bitmaps\256ColorBitmap.bmp)"
 #define APRG_BITMAP_24_BIT_TEST_FILE APRG_DIR R"(AprgBitmap\AprgBitmap\tst\Bitmaps\24BitBitmap.bmp)"
 #define APRG_BITMAP_32_BIT_TEST_FILE APRG_DIR R"(AprgBitmap\AprgBitmap\tst\Bitmaps\32BitBitmap.bmp)"
 
+namespace alba
+{
+
 TEST(BitmapReadTest, TestForMonochromeBitmap)
 {
-    AprgBitmap bitmap(APRG_BITMAP_MONOCHROME_TEST_FILE);
-    ASSERT_TRUE(bitmap.getConfiguration().isValid());
+    AprgBitmap bitmap(APRG_BITMAP_MONOCHROME_TEST_FILE);    ASSERT_TRUE(bitmap.getConfiguration().isValid());
     ASSERT_EQ(CompressedMethodType::BI_RGB, bitmap.getConfiguration().getCompressedMethodType());
     ASSERT_TRUE(bitmap.getConfiguration().isCompressedMethodSupported());
 
@@ -363,10 +363,12 @@ TEST(BitmapReadTest, TestForMonochromeBitmapWithOutOfRangeValues)
 
     EXPECT_EQ(0x00000000, snippet.getPixelAt(BitmapXY(99999999, 99999999)));
 }
+
 TEST(BitmapReadTest, TestForFileThatDoesExist)
 {
-    AprgBitmap bitmap("FileThatDoesNotExist");
-    AprgBitmapSnippet snippet(bitmap.getSnippetReadFromFileWithOutOfRangeCoordinates(-100, -100, 99999999, 99999999));
+    AprgBitmap bitmap("FileThatDoesNotExist");    AprgBitmapSnippet snippet(bitmap.getSnippetReadFromFileWithOutOfRangeCoordinates(-100, -100, 99999999, 99999999));
     EXPECT_EQ(BitmapXY(0, 0), snippet.getTopLeftCorner());
     EXPECT_EQ(BitmapXY(0, 0), snippet.getBottomRightCorner());
+}
+
 }

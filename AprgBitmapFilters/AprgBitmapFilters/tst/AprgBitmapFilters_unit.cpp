@@ -4,15 +4,15 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba;
 using namespace std;
 
 #define APRG_BITMAP_FILTERS_BITMAP_DIRECTORY APRG_DIR R"(AprgBitmapFilters\AprgBitmapFilters\tst\Bitmaps\)"
 
+namespace alba
+{
 
 TEST(BitmapFilterTest, DISABLED_AnimizeTest)
-{
-    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+{    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
     AlbaLocalPathHandler inputDirectory(bitmapDirectory.getDirectory()+R"(AnimizeTests\input\)");
     ListOfPaths inputSubDirectories;
     ListOfPaths inputFiles;
@@ -142,5 +142,7 @@ TEST(BitmapFilterTest, DISABLED_SpecialPurpose)
     bitmapFilter.copyOutputCanvasToInputCanvas();
     bitmapFilter.drawBlankGapsUsingBlurInOutputCanvas(2);
     bitmapFilter.saveOutputCanvasIntoFileInTheSameDirectory("BitmapNonPenPixelsFilled.bmp");
+
+}
 
 }

@@ -2,13 +2,14 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(LrmDssWcdmaLteLoadMonitoringTest, ConsecutiveLowerLoadStateCountIsInitiallyZero)
 {
-    //Given
-    LrmDssWcdmaLteLoadMonitoring loadMonitoring;
+    //Given    LrmDssWcdmaLteLoadMonitoring loadMonitoring;
 
     //When
 
@@ -306,3 +307,4 @@ TEST(LrmDssWcdmaLteLoadMonitoringTest, ConversionOfLoadStateToFilterBandwidthWor
     EXPECT_EQ(EDssWcdmaLoad_High, loadMonitoring.convertFilterBandwidthToLoadState(EDssWcdmaFilterBandwidth_0_KHz));
 }
 
+}

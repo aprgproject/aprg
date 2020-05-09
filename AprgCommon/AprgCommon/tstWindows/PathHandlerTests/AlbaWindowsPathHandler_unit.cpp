@@ -8,12 +8,13 @@
 #include <string>
 
 using namespace std;
-using namespace alba;
+
+namespace alba
+{
 
 TEST_F(AlbaWindowsPathHandlerTest, FullPathWithOnlyDirectoryGiven_WindowsStyleInput)
 {
-    AlbaWindowsPathHandler pathHandler(pathOfAprgDirectory + R"(AprgCommon\AprgCommon\tst\FilesForTests\)");
-    EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
+    AlbaWindowsPathHandler pathHandler(pathOfAprgDirectory + R"(AprgCommon\AprgCommon\tst\FilesForTests\)");    EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
     EXPECT_EQ(convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\AprgCommon\tst\FilesForTests\)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
@@ -410,4 +411,6 @@ TEST_F(AlbaWindowsPathHandlerTest, SetCurrentDirectoryFromDetectedLocalPath)
 
     EXPECT_EQ(PathType::File, pathHandler.getPathType());
     ASSERT_TRUE(pathHandler.isFoundInLocalSystem());
+}
+
 }

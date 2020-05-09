@@ -5,13 +5,14 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(SoosaTest, SampleTest1)
 {
-    AlbaLocalPathHandler fileToTest(APRG_DIR R"(SOOSA\SOOSA\tst\FilesForTests\TestSoosaBasicScenario.bmp)");
-    AlbaLocalPathHandler fileForSoosa(APRG_DIR R"(SOOSA\SOOSA\tst\FilesForTests\TestSoosa.bmp)");
+    AlbaLocalPathHandler fileToTest(APRG_DIR R"(SOOSA\SOOSA\tst\FilesForTests\TestSoosaBasicScenario.bmp)");    AlbaLocalPathHandler fileForSoosa(APRG_DIR R"(SOOSA\SOOSA\tst\FilesForTests\TestSoosa.bmp)");
     fileForSoosa.deleteFile();
     fileToTest.copyToNewFile(fileForSoosa.getFullPath());
 
@@ -102,4 +103,6 @@ TEST(SoosaTest, SampleTest1)
     EXPECT_EQ(1u, soosa.getAnswerToQuestion(36));
     EXPECT_EQ(2u, soosa.getAnswerToQuestion(37));
     EXPECT_EQ(3u, soosa.getAnswerToQuestion(38));
+}
+
 }

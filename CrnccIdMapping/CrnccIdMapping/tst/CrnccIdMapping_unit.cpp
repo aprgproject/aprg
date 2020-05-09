@@ -5,13 +5,14 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(SampleTest, PerformanceAccessTestWithRandomValues)
 {
-    constexpr unsigned int initialSize=2500;
-    constexpr unsigned int accessIterations=1000000;
+    constexpr unsigned int initialSize=2500;    constexpr unsigned int accessIterations=1000000;
 
     AlbaRandomizer randomizer;
     vector<unsigned int> crnccIds;
@@ -47,4 +48,6 @@ TEST(SampleTest, DISABLED_PerformanceAddTestWithRandomValues)
         setCrnccIdMapping(crnccId, nbccId);
         ALBA_PRINT2(crnccId, nbccId);
     }
+}
+
 }

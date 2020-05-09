@@ -2,13 +2,14 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(FspTest, FspDetailsCanAssignedCorrectlyAtConstruction)
 {
-    FspDetails fspDetails;
-    fspDetails.smType=SmType::ESM;
+    FspDetails fspDetails;    fspDetails.smType=SmType::ESM;
     fspDetails.isMasterTcom=true;
     fspDetails.address = 0x1200;
     fspDetails.dspAddresses.emplace_back(0x1230);
@@ -19,4 +20,6 @@ TEST(FspTest, FspDetailsCanAssignedCorrectlyAtConstruction)
     EXPECT_EQ(0x1200u, fsp.getAddress());
     ASSERT_EQ(1u, fsp.getDspAddresses().size());
     EXPECT_EQ(0x1230u, fsp.getDspAddresses().back());
+}
+
 }

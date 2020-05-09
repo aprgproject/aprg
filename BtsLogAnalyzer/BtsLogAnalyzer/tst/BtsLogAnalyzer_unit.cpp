@@ -5,13 +5,14 @@
 
 #include <iostream>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(BtsLogAnalyzerTest, DISABLED_WireSharkTimeCanBeExtracted)
 {
-    BtsLogAnalyzer reader;
-    double timeStamp = reader.getWireSharkTime("94 0.004714000    10.34.246.5           10.34.46.6            NBAP     238    id-radioLinkSetup , RadioLinkSetupRequestFDD ");
+    BtsLogAnalyzer reader;    double timeStamp = reader.getWireSharkTime("94 0.004714000    10.34.246.5           10.34.46.6            NBAP     238    id-radioLinkSetup , RadioLinkSetupRequestFDD ");
 
     EXPECT_DOUBLE_EQ(0.004714, timeStamp);
 }
@@ -46,17 +47,16 @@ TEST(BtsLogAnalyzerTestBtsDelay, DISABLED_ProcessFileForBtsDelay2)
     cout<<"Average Delay:"<<reader.getComputedAverageDelay()<<endl;
 }
 
-TEST(BtsLogAnalyzerTestQueuingTime, GetMsgQueuingTime)
+TEST(BtsLogAnalyzerTestQueuingTime, DISABLED_GetMsgQueuingTime)
 {
     BtsLogAnalyzer reader(R"(D:\ZZZ_Logs\RAN3321Degradation\WBTS17_0000_0242_06\Rel3\GetMsgQueuingTime.csv)");
     reader.processFileForMsgQueuingTime(R"(D:\ZZZ_Logs\RAN3321Degradation\WBTS17_0000_0242_06\Rel3\Tcom.log)");
 }
 
-TEST(BtsLogAnalyzerTestQueuingTime, GetMsgQueuingTime2)
+TEST(BtsLogAnalyzerTestQueuingTime, DISABLED_GetMsgQueuingTime2)
 {
     BtsLogAnalyzer reader(R"(D:\ZZZ_Logs\RAN3321Degradation\WBTS00_0000_2092_00\Rel3\GetMsgQueuingTime.csv)");
-    reader.processFileForMsgQueuingTime(R"(D:\ZZZ_Logs\RAN3321Degradation\WBTS00_0000_2092_00\Rel3\Tcom.log)");
-}
+    reader.processFileForMsgQueuingTime(R"(D:\ZZZ_Logs\RAN3321Degradation\WBTS00_0000_2092_00\Rel3\Tcom.log)");}
 
 TEST (BtsLogAnalyzerTest, DISABLED_ProcessFileForBtsDelay_GRM)
 {
@@ -130,4 +130,6 @@ TEST (BtsLogAnalyzerTest, DISABLED_SizeOfTest)
     };
     TraceReportHeader traceReportHeader;
     cout<<"Size of:"<<sizeof(traceReportHeader)<<endl;
+}
+
 }

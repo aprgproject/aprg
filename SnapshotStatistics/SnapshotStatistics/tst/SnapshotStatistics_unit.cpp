@@ -3,14 +3,15 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba;
 using namespace std;
 
-TEST(SnapshotStatistics, DISABLED_SnapshotFilesRel2)
+namespace alba
+{
+
+TEST(SnapshotStatisticsTest, DISABLED_SnapshotFilesRel2)
 {
     cout<<PATH_OF_7Z_EXECUTABLE<<endl;
     cout<<PATH_OF_7Z_TEMP_FILE<<endl;
-
     SnapshotStatistics statistics;
     statistics.fetchFileSizesForSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 1\Snapshot1_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1810.zip)");
     statistics.fetchFileSizesForSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 2\Snapshot2_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1841.zip)");
@@ -45,11 +46,10 @@ TEST(SnapshotStatistics, DISABLED_SnapshotFilesRel2)
     statistics.saveStatisticsToFile(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\results\outputFileSizesStatistics.csv)");
 }
 
-TEST(SnapshotStatistics, DISABLED_RomUsageRel2)
+TEST(SnapshotStatisticsTest, DISABLED_RomUsageRel2)
 {
     SnapshotStatistics statistics;
-    statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 1\s1_rom.txt)", "Snapshot1_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1810");
-    statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 2\s2_rom.txt)", "Snapshot2_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1841");
+    statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 1\s1_rom.txt)", "Snapshot1_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1810");    statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 2\s2_rom.txt)", "Snapshot2_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1841");
     statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 3\s3_rom.txt)", "Snapshot3_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1911");
     statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 4\s4_rom.txt)", "Snapshot4_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1941");
     statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 5\s5_rom.txt)", "Snapshot5_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-2011");
@@ -69,11 +69,10 @@ TEST(SnapshotStatistics, DISABLED_RomUsageRel2)
     statistics.saveStatisticsToFile(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\results\outputRomStatistics.csv)");
 }
 
-TEST(SnapshotStatistics, DISABLED_RamUsageRel2)
+TEST(SnapshotStatisticsTest, DISABLED_RamUsageRel2)
 {
     SnapshotStatistics statistics;
-    statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 1\s1_ram.txt)", "Snapshot1_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1810");
-    statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 2\s2_ram.txt)", "Snapshot2_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1841");
+    statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 1\s1_ram.txt)", "Snapshot1_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1810");    statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 2\s2_ram.txt)", "Snapshot2_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1841");
     statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 3\s3_ram.txt)", "Snapshot3_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1911");
     statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 4\s4_ram.txt)", "Snapshot4_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1941");
     statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 5\s5_ram.txt)", "Snapshot5_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-2011");
@@ -93,11 +92,10 @@ TEST(SnapshotStatistics, DISABLED_RamUsageRel2)
     statistics.saveStatisticsToFile(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\results\outputRamStatistics.csv)");
 }
 
-TEST(SnapshotStatistics, DISABLED_SnapshotFilesRel3)
+TEST(SnapshotStatisticsTest, DISABLED_SnapshotFilesRel3)
 {
     cout<<PATH_OF_7Z_EXECUTABLE<<endl;
     cout<<PATH_OF_7Z_TEMP_FILE<<endl;
-
     SnapshotStatistics statistics;
     statistics.processSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot1_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
     statistics.processSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot2_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
@@ -120,10 +118,9 @@ TEST(SnapshotStatistics, DISABLED_SnapshotFilesRel3)
     statistics.saveStatisticsToFile(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\results\outputFileSizesStatistics.csv)");
 }
 
-TEST(SnapshotStatistics, DISABLED_RomUsageRel3)
+TEST(SnapshotStatisticsTest, DISABLED_RomUsageRel3)
 {
     SnapshotStatistics statistics;
-
     statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\BB RESET_REL3\rom.txt)", "Snapshot_baseband reset rel3_WBTS-669_WBTS18_2000_0449_07.zip)");
     statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\CELL BLOCK UNBLOCK\rom.txt)", "Snapshot_cell block unblock_WBTS-669_WBTS18_2000_0449_07.zip)");
     statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\CELL LOCK UNLOCK\rom.txt)", "Snapshot_cell lock unlock_WBTS-669_WBTS18_2000_0449_07.zip)");
@@ -139,10 +136,9 @@ TEST(SnapshotStatistics, DISABLED_RomUsageRel3)
     statistics.saveStatisticsToFile(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\results\outputRomStatistics.csv)");
 }
 
-TEST(SnapshotStatistics, RamUsageRel3)
+TEST(SnapshotStatisticsTest, RamUsageRel3)
 {
     SnapshotStatistics statistics;
-
     statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\BB RESET_REL3\ram.txt)", "Snapshot_baseband reset rel3_WBTS-669_WBTS18_2000_0449_07.zip)");
     statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\CELL BLOCK UNBLOCK\ram.txt)", "Snapshot_cell block unblock_WBTS-669_WBTS18_2000_0449_07.zip)");
     statistics.processMemory(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\CELL LOCK UNLOCK\ram.txt)", "Snapshot_cell lock unlock_WBTS-669_WBTS18_2000_0449_07.zip)");
@@ -158,4 +154,4 @@ TEST(SnapshotStatistics, RamUsageRel3)
     statistics.saveStatisticsToFile(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\results\outputRamStatistics.csv)");
 }
 
-
+}

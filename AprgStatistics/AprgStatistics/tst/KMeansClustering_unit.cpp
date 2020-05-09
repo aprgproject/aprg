@@ -2,13 +2,14 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 using LocalKMeans = KMeansClustering<2>;
 using LocalSamples = LocalKMeans::Samples;
-using LocalSample = LocalKMeans::Sample;
-using LocalGroupOfSamples = LocalKMeans::GroupOfSamples;
+using LocalSample = LocalKMeans::Sample;using LocalGroupOfSamples = LocalKMeans::GroupOfSamples;
 
 TEST(KMeansClusteringTestTwoDimensions, KMeansObjectCanbeCreated)
 {
@@ -125,3 +126,4 @@ TEST(KMeansClusteringTestTwoDimensions, PerformKMeansForTwoGroupsWithManyDiffere
     EXPECT_EQ((LocalSample{3.5,4.5}), result[1][4]);
 }
 
+}

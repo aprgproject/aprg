@@ -2,13 +2,14 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgTwoFspTwoCcdMcd)
 {
-    HardwareConfiguration hardwareConfiguration;
-    Lrm lrm(hardwareConfiguration);
+    HardwareConfiguration hardwareConfiguration;    Lrm lrm(hardwareConfiguration);
 
     hardwareConfiguration.changeConfigurationToTwoFspTwoLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);
@@ -1441,3 +1442,4 @@ TEST(LrmMarkAlgorithmWithHibenationTest, SharedLcgWithOneDspNbicMcdWithPicInMsm)
     EXPECT_EQ(3u, resultPicLcg2.dliPool);
 }
 
+}

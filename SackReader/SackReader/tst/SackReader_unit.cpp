@@ -2,15 +2,13 @@
 
 #include <gtest/gtest.h>
 
-#include <Debug/AlbaDebug.hpp>
-
-using namespace alba;
 using namespace std;
 
+namespace alba
+{
 
 TEST(SackReaderTest, CheckAllFiles)
-{
-    SackReader sackReader(R"(C:\APRG\SackReader\SackReader\SampleFiles)", R"(C:\APRG\SackReader\SackReader\SampleFiles\SackReaderExecution.txt)");
+{    SackReader sackReader(R"(C:\APRG\SackReader\SackReader\SampleFiles)", R"(C:\APRG\SackReader\SackReader\SampleFiles\SackReaderExecution.txt)");
     sackReader.gatherAllFiles();
     EXPECT_EQ(R"(C:\APRG\SackReader\SackReader\SampleFiles\oam_tcom.h)", sackReader.getFileFullPath("oam_tcom.h"));
 }
@@ -33,3 +31,4 @@ TEST(RealTest, UpdateTrunkFiles)
     sackReader.saveDatabaseToFile(R"(C:\APRG\SackReader\SackReader\TempFiles\Database_07_24_2018.txt)");
 }
 
+}

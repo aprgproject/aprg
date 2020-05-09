@@ -4,13 +4,14 @@
 
 #include <fstream>
 
-using namespace wcdmaToolsBackend;
 using namespace std;
+
+namespace wcdmaToolsBackend
+{
 
 TEST(BtsLogTimeTest, DefaultConstructorIsEmpty)
 {
-    BtsLogTime logTime;
-    EXPECT_TRUE(logTime.isEmpty());
+    BtsLogTime logTime;    EXPECT_TRUE(logTime.isEmpty());
 }
 
 TEST(BtsLogTimeTest, ClearingMakesItEmpty)
@@ -232,4 +233,6 @@ TEST(BtsLogTimeTest, TheDataCanBeSavedToAndRetrieveFromFile)
         inputStream>>testLogTime;
     }
     EXPECT_EQ(sampleLogTime, testLogTime);
+}
+
 }

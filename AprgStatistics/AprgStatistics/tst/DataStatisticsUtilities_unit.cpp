@@ -4,13 +4,14 @@
 
 #include <iostream>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(DataStatisticsUtilitiesTest, SumAreCorrect)
 {
-    using LocalStatisticsUtilities = DataStatisticsUtilities<3>;
-    using LocalSamples = LocalStatisticsUtilities::Samples;
+    using LocalStatisticsUtilities = DataStatisticsUtilities<3>;    using LocalSamples = LocalStatisticsUtilities::Samples;
     using LocalSample = LocalStatisticsUtilities::Sample;
 
     LocalSamples samples1;
@@ -31,4 +32,6 @@ TEST(DataStatisticsUtilitiesTest, DistancesAreCorrect)
     EXPECT_EQ(0, LocalStatisticsUtilities::calculateDistance(LocalSample{1, 10, 100}, LocalSample{1, 10, 100}));
     EXPECT_EQ(3, LocalStatisticsUtilities::calculateDistance(LocalSample{1, 10, 100}, LocalSample{2, 12, 102}));
     EXPECT_EQ(7, LocalStatisticsUtilities::calculateDistance(LocalSample{1, 10, 100}, LocalSample{3, 13, 106}));
+}
+
 }

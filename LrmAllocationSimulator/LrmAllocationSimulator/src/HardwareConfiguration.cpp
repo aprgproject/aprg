@@ -1,10 +1,9 @@
 #include "HardwareConfiguration.hpp"
 
-#include <User/AlbaDisplayTable.hpp>
+#include <User/DisplayTable.hpp>
 
 #include <cassert>
-#include <iostream>
-#include <sstream>
+#include <iostream>#include <sstream>
 
 #include <Debug/AlbaDebug.hpp>
 

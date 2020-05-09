@@ -5,13 +5,14 @@
 
 #include <iostream>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_DeleteThisTestDontGoToSleepSetMouseTest) // DISABLED_DeleteThisTestDontGoToSleepSetMouseTest)
 {
-    AlbaWindowsUserAutomation userAutomation;
-    for(int x=0; x<300; x+=10)
+    AlbaWindowsUserAutomation userAutomation;    for(int x=0; x<300; x+=10)
     {
         MousePosition position{x,x};
         userAutomation.setMousePosition(position);
@@ -136,4 +137,6 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_SetActiveWindowBasedWindowName)
 {
     AlbaWindowsUserAutomation userAutomation;
     userAutomation.setForegroundWindowWithWindowName("Untitled - Notepad");
+}
+
 }

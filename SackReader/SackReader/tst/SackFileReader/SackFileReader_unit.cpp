@@ -2,13 +2,14 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 TEST(SackFileReaderTest, Constants)
 {
-    Database database;
-    SackFileReader sackFileReader(database);
+    Database database;    SackFileReader sackFileReader(database);
     sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\DOpenIUBCommonDefs.h)");
 
     ConstantDetails details(database.getConstantDetails("MAX_NR_OF_CODES"));
@@ -287,4 +288,6 @@ TEST(SackFileReaderTest, TSubunits)
     EXPECT_EQ("TSubunits", details.name);
     EXPECT_EQ("r32", details.typedefDerivedName);
     EXPECT_EQ("Subunits in floating point format.", details.description);
+}
+
 }

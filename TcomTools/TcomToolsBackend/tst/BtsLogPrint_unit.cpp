@@ -6,13 +6,14 @@
 #include <fstream>
 #include <vector>
 
-using namespace tcomToolsBackend;
 using namespace std;
+
+namespace tcomToolsBackend
+{
 
 TEST(BtsLogPrintTest, DefaultConstructorIsEmpty)
 {
-    BtsLogPrint logPrint;
-    EXPECT_TRUE(logPrint.isEmpty());
+    BtsLogPrint logPrint;    EXPECT_TRUE(logPrint.isEmpty());
 }
 
 TEST(BtsLogPrintTest, ClearingMakesItEmpty)
@@ -333,4 +334,6 @@ TEST(BtsLogPrintTest, DISABLED_InputStreamWorks)
         count++;
     }
     EXPECT_EQ(1001, count);
+}
+
 }

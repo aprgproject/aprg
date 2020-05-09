@@ -26,13 +26,14 @@
 
 #include <Debug/AlbaDebug.hpp>
 
-using namespace alba;
 using namespace std;
+
+namespace alba
+{
 
 unsigned int swap4(unsigned int temp)
 {
-    return alba::AlbaBitManipulation<unsigned int>::swapForFourBytes(temp);
-    //return temp;
+    return alba::AlbaBitManipulation<unsigned int>::swapForFourBytes(temp);    //return temp;
 }
 
 TEST(SampleTest, SampleTest1)
@@ -728,4 +729,6 @@ TEST(SampleTest, SampleTest2)
                 + (sizeof(SAddiEdchRlMappingInfo)*swap4(rlSetupReqPointer->numOfAddiEdchRlMappingInfo));
 
     */
+}
+
 }

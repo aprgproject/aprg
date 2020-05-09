@@ -18,14 +18,15 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba;
 using namespace alba::mathHelper;
 using namespace std;
 
+namespace alba
+{
+
 TEST(AiffLoadingTests, Stereo_8bit_44100)
 {
-    AprgAudio<double> audioFile;
-    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\ActualAudioFiles\aiff_stereo_8bit_44100.aif)");
+    AprgAudio<double> audioFile;    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\ActualAudioFiles\aiff_stereo_8bit_44100.aif)");
 
     ASSERT_TRUE(isLoadingSuccessful);
     EXPECT_EQ(audioFile.getNumSamplesPerChannel(), aiff_stereo_8bit_44100::numSamplesPerChannel);
@@ -370,4 +371,6 @@ TEST(WritingTest, WriteSineToneToManyFormats)
             }
         }
     }
+}
+
 }
