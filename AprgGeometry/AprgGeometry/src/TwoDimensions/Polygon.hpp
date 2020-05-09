@@ -19,11 +19,10 @@ public:
     using Distances=std::array<double, numberOfVertices>;
     Polygon();
 
-    Polygon(std::initializer_list<Point> vertices);
+    Polygon(std::initializer_list<Point> const& vertices);
 
     bool isEquilateral() const;
-    bool isEquiangular() const;
-    bool isRegular() const;
+    bool isEquiangular() const;    bool isRegular() const;
 
     Lines getLines() const;
     Points getVertices() const;

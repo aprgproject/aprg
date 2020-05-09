@@ -19,11 +19,10 @@ TermChecker::TermChecker(Term const& term)
     , m_term(term)
 {}
 
-TermChecker::TermChecker(std::initializer_list<Term> const initializerList)
+TermChecker::TermChecker(std::initializer_list<Term> const& initializerList)
     : m_termCheckerType(TermCheckerType::MultipleTerms)
     , m_term(TermType::Empty)
-    , m_multipleTermsOptional(MultipleTerms(initializerList))
-{}
+    , m_multipleTermsOptional(MultipleTerms(initializerList)){}
 
 TermChecker::operator Term() const
 {

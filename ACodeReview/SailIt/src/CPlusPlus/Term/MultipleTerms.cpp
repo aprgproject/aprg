@@ -8,10 +8,9 @@ using namespace std;
 namespace codeReview
 {
 
-MultipleTerms::MultipleTerms(initializer_list<Term> initializerList)
+MultipleTerms::MultipleTerms(initializer_list<Term> const& initializerList)
     : m_terms(initializerList.begin(), initializerList.end())
 {}
-
 bool MultipleTerms::isEqualToAnyOfTheTerms(Term const& termToCompare) const
 {
     return any_of(m_terms.begin(), m_terms.end(), [termToCompare](Term term)
