@@ -9,7 +9,8 @@ namespace alba
 
 TEST(LrmMarkAlgorithmWithoutHibernationTest, McdAllocation_MasterTcomIsPrioritizedForNyquist)
 {
-    HardwareConfiguration hardwareConfiguration;    Lrm lrm(hardwareConfiguration);
+    HardwareConfiguration hardwareConfiguration;
+    Lrm lrm(hardwareConfiguration);
 
     hardwareConfiguration.changeConfigurationToOneFspOneLcgEvenDistribution();
     lrm.setHibernationCommissioned(false);

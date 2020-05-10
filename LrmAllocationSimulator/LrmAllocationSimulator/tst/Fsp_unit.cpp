@@ -9,7 +9,8 @@ namespace alba
 
 TEST(FspTest, FspDetailsCanAssignedCorrectlyAtConstruction)
 {
-    FspDetails fspDetails;    fspDetails.smType=SmType::ESM;
+    FspDetails fspDetails;
+    fspDetails.smType=SmType::ESM;
     fspDetails.isMasterTcom=true;
     fspDetails.address = 0x1200;
     fspDetails.dspAddresses.emplace_back(0x1230);

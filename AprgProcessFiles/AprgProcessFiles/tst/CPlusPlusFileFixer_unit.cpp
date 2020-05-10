@@ -14,7 +14,8 @@ namespace alba
 
 TEST(CPlusPlusFileFixerTest, ActualRun)
 {
-    CPlusPlusFileFixer fixer;    fixer.processDirectory(R"(C:\APRG_CLEAN_COPY\)");
+    CPlusPlusFileFixer fixer;
+    fixer.processDirectory(R"(C:\APRG_CLEAN_COPY\)");
     //fixer.processDirectory(R"(C:\APRG\TcomTools\)");
     //fixer.processFile(R"(C:\APRG\AprgCommon\AprgCommon\tst\AlbaStringHelper_unit.cpp)");
 }

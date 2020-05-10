@@ -13,7 +13,8 @@ namespace alba
 
 TEST(AlbaSackReaderTest, SackTest)
 {
-    AlbaSackReader sackReader(R"(D:\W\trunk\I_Interface)", "[.cpp] || [.hpp] || [.c] || [.h]");    sackReader.process();
+    AlbaSackReader sackReader(R"(D:\W\trunk\I_Interface)", "[.cpp] || [.hpp] || [.c] || [.h]");
+    sackReader.process();
     sackReader.printAll();
 }
 

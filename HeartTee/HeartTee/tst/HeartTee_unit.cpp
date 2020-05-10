@@ -13,7 +13,8 @@ namespace alba
 
 /*
 TEST(SampleTest, DISABLED_SampleTest1)
-{    unsigned char buffer[100];
+{
+    unsigned char buffer[100];
     SerialPort serialPort;
     serialPort.openSerial();
     while(serialPort.getFd() >= 0)

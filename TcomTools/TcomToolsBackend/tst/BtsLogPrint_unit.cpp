@@ -13,7 +13,8 @@ namespace tcomToolsBackend
 
 TEST(BtsLogPrintTest, DefaultConstructorIsEmpty)
 {
-    BtsLogPrint logPrint;    EXPECT_TRUE(logPrint.isEmpty());
+    BtsLogPrint logPrint;
+    EXPECT_TRUE(logPrint.isEmpty());
 }
 
 TEST(BtsLogPrintTest, ClearingMakesItEmpty)

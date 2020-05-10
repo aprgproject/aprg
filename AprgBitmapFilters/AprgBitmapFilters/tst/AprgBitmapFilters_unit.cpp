@@ -12,7 +12,8 @@ namespace alba
 {
 
 TEST(BitmapFilterTest, DISABLED_AnimizeTest)
-{    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+{
+    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
     AlbaLocalPathHandler inputDirectory(bitmapDirectory.getDirectory()+R"(AnimizeTests\input\)");
     ListOfPaths inputSubDirectories;
     ListOfPaths inputFiles;

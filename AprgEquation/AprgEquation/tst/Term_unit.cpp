@@ -68,7 +68,8 @@ TEST(TermTest, TermsAsOperatorsWorkAsExpected)
 
 TEST(TermTest, TermsAsMonomialsWorkAsExpected)
 {
-    Term monomial1(Monomial(3, {}));    Term monomial2(Monomial(1.5, {{"distance", 3.75}}));
+    Term monomial1(Monomial(3, {}));
+    Term monomial2(Monomial(1.5, {{"distance", 3.75}}));
     Term monomial3(Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}}));
 
     EXPECT_EQ(TermType::Monomial, monomial1.getTermType());

@@ -20,7 +20,8 @@ public:
     BinarySearch(std::initializer_list<ObjectType> const& initialObjects)
         : m_indexOfLowest{0}
         , m_indexOfHighest{0}
-    {        add(initialObjects);
+    {
+        add(initialObjects);
     }
     ObjectType findNearestValue(ObjectType const& value)
     {
@@ -66,7 +67,8 @@ public:
     void add(std::initializer_list<ObjectType> const& initialObjects)
     {
         for(ObjectType const& object : initialObjects)
-        {            add(object);
+        {
+            add(object);
         }
     }
     void add(ObjectType const& value)

@@ -11,7 +11,8 @@ namespace tcomToolsBackend
 
 TEST(BtsLogTimeTest, DefaultConstructorIsEmpty)
 {
-    BtsLogTime logTime;    EXPECT_TRUE(logTime.isEmpty());
+    BtsLogTime logTime;
+    EXPECT_TRUE(logTime.isEmpty());
 }
 
 TEST(BtsLogTimeTest, ClearingMakesItEmpty)

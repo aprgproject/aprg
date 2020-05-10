@@ -8,7 +8,8 @@ namespace alba
 {
 
 TEST(DatabaseTest, InitialContentsAreEmpty)
-{    Database database;
+{
+    Database database;
     EXPECT_TRUE(database.fileToPathMap.empty());
     EXPECT_TRUE(database.constantNameToConstantDetailsMap.empty());
     EXPECT_TRUE(database.messageNameToMessageDetailsMap.empty());

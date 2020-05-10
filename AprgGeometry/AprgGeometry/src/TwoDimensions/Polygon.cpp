@@ -20,7 +20,8 @@ template<unsigned int numberOfVertices>
 Polygon<numberOfVertices>::Polygon(std::initializer_list<Point> const& vertices)
 {
     static_assert(numberOfVertices>2, "The numberOfVertices is less than 2. Its not a polygon by definition.");
-    unsigned int limit = std::min(numberOfVertices, static_cast<unsigned int>(vertices.size()));    std::copy(vertices.begin(), vertices.begin()+limit, m_vertices.begin());
+    unsigned int limit = std::min(numberOfVertices, static_cast<unsigned int>(vertices.size()));
+    std::copy(vertices.begin(), vertices.begin()+limit, m_vertices.begin());
 }
 
 template<unsigned int numberOfVertices>

@@ -9,7 +9,8 @@ namespace alba
 
 TEST(SymbolMapTest, DISABLED_InputTraceFileIsProcessedByTraceDecoder)
 {
-    BtsTraceDecoder traceDecoder;    traceDecoder.saveSymbolTableFromObjdump(R"(C:\APRG\symbols.txt)");
+    BtsTraceDecoder traceDecoder;
+    traceDecoder.saveSymbolTableFromObjdump(R"(C:\APRG\symbols.txt)");
     cout<<traceDecoder.getNearestLowerSymbol(0x08a0c623)<<endl;
 }
 

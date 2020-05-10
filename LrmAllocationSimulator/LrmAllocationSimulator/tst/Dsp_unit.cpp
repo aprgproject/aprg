@@ -9,7 +9,8 @@ namespace alba
 
 TEST(DspTest, DspDetailsCanAssignedCorrectlyAtDefaultConstruction)
 {
-    Dsp dsp;    EXPECT_EQ(0u, dsp.getAddress());
+    Dsp dsp;
+    EXPECT_EQ(0u, dsp.getAddress());
     EXPECT_EQ(0u, dsp.getFspAddress());
     EXPECT_EQ(0u, dsp.getLcgId());
     EXPECT_EQ(0u, dsp.getNumberOfDchUsers());

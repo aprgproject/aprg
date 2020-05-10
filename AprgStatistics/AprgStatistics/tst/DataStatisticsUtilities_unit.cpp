@@ -11,7 +11,8 @@ namespace alba
 
 TEST(DataStatisticsUtilitiesTest, SumAreCorrect)
 {
-    using LocalStatisticsUtilities = DataStatisticsUtilities<3>;    using LocalSamples = LocalStatisticsUtilities::Samples;
+    using LocalStatisticsUtilities = DataStatisticsUtilities<3>;
+    using LocalSamples = LocalStatisticsUtilities::Samples;
     using LocalSample = LocalStatisticsUtilities::Sample;
 
     LocalSamples samples1;

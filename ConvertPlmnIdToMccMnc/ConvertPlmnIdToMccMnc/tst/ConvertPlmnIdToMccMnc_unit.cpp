@@ -9,7 +9,8 @@ namespace alba
 
 TEST(SampleTest, ConvertPlmnIdToMccMncFirstNibbleOfPlmnId)
 {
-    MccMncPair mccMncPair(convertPlmnIdToMccMnc(0x100000));    EXPECT_EQ(10, mccMncPair.mcc);
+    MccMncPair mccMncPair(convertPlmnIdToMccMnc(0x100000));
+    EXPECT_EQ(10, mccMncPair.mcc);
     EXPECT_EQ(0, mccMncPair.mnc);
 }
 

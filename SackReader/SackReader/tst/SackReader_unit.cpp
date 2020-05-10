@@ -8,7 +8,8 @@ namespace alba
 {
 
 TEST(SackReaderTest, CheckAllFiles)
-{    SackReader sackReader(R"(C:\APRG\SackReader\SackReader\SampleFiles)", R"(C:\APRG\SackReader\SackReader\SampleFiles\SackReaderExecution.txt)");
+{
+    SackReader sackReader(R"(C:\APRG\SackReader\SackReader\SampleFiles)", R"(C:\APRG\SackReader\SackReader\SampleFiles\SackReaderExecution.txt)");
     sackReader.gatherAllFiles();
     EXPECT_EQ(R"(C:\APRG\SackReader\SackReader\SampleFiles\oam_tcom.h)", sackReader.getFileFullPath("oam_tcom.h"));
 }

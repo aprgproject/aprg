@@ -12,7 +12,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace ProgressCounters
 {
@@ -22,7 +23,8 @@ int numberOfFilesAnalyzedForExtraction;
 
 TEST(AprgFileExtractorTest, ActualTest)
 {
-    AprgFileExtractor fileExtractor(R"([LRM] || [alarm] || [UDP] || [CPU] || [syslog] || [ccns] || [tcom] || [startup] || [runtime] || [system] || [radparam] || ([bts]&&([.log]||[.zip]||[.tar])) || [snapshot] || ([tech]&&[report]) || [BTSLogFiles])");    fileExtractor.extractAllRelevantFiles(R"(D:\W\ZZZ_Useless_Logs\PR103380\New folder\)");
+    AprgFileExtractor fileExtractor(R"([LRM] || [alarm] || [UDP] || [CPU] || [syslog] || [ccns] || [tcom] || [startup] || [runtime] || [system] || [radparam] || ([bts]&&([.log]||[.zip]||[.tar])) || [snapshot] || ([tech]&&[report]) || [BTSLogFiles])");
+    fileExtractor.extractAllRelevantFiles(R"(D:\W\ZZZ_Useless_Logs\PR103380\New folder\)");
 }
 
 TEST(AprgFileExtractorTest, ListOfFilesFromZipFileAreCorrectlyRetrieved)

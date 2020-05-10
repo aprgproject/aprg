@@ -14,7 +14,8 @@ namespace alba
 
 TEST_F(AlbaLinuxPathHandlerTest, FullPathWithOnlyDirectoryGiven_WindowsStyleInput)
 {
-    AlbaLinuxPathHandler pathHandler(APRG_DIR R"(AprgCommon\AprgCommon\tst\FilesForTests\)");    EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(AprgCommon\AprgCommon\tst\FilesForTests\)"), pathHandler.getDirectory());
+    AlbaLinuxPathHandler pathHandler(APRG_DIR R"(AprgCommon\AprgCommon\tst\FilesForTests\)");
+    EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(AprgCommon\AprgCommon\tst\FilesForTests\)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
     EXPECT_TRUE(pathHandler.getExtension().empty());

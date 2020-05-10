@@ -9,7 +9,8 @@ namespace alba
 
 TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgTwoFspTwoCcdMcd)
 {
-    HardwareConfiguration hardwareConfiguration;    Lrm lrm(hardwareConfiguration);
+    HardwareConfiguration hardwareConfiguration;
+    Lrm lrm(hardwareConfiguration);
 
     hardwareConfiguration.changeConfigurationToTwoFspTwoLcgEvenDistribution();
     lrm.setHibernationCommissioned(true);

@@ -22,7 +22,8 @@ public:
     Polygon(std::initializer_list<Point> const& vertices);
 
     bool isEquilateral() const;
-    bool isEquiangular() const;    bool isRegular() const;
+    bool isEquiangular() const;
+    bool isRegular() const;
 
     Lines getLines() const;
     Points getVertices() const;

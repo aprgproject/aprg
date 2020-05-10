@@ -14,7 +14,8 @@ namespace alba
 
 TEST(BitmapWriteTest, TestForWritingBitmap)
 {
-    AprgBitmap bitmap(APRG_BITMAP_WRITE_TEST_FILE);    ASSERT_TRUE(bitmap.getConfiguration().isValid());
+    AprgBitmap bitmap(APRG_BITMAP_WRITE_TEST_FILE);
+    ASSERT_TRUE(bitmap.getConfiguration().isValid());
     ASSERT_EQ(CompressedMethodType::BI_RGB, bitmap.getConfiguration().getCompressedMethodType());
     ASSERT_TRUE(bitmap.getConfiguration().isCompressedMethodSupported());
 

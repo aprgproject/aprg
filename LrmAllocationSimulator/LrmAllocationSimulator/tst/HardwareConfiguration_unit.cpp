@@ -9,7 +9,8 @@ namespace alba
 
 TEST(HardwareConfigurationTest, OneFspOneLcgEvenDistribution)
 {
-    HardwareConfiguration hardwareConfiguration;    hardwareConfiguration.changeConfigurationToOneFspOneLcgEvenDistribution();
+    HardwareConfiguration hardwareConfiguration;
+    hardwareConfiguration.changeConfigurationToOneFspOneLcgEvenDistribution();
     AddressToDspMap& addressToDspMap(hardwareConfiguration.getAddressToDspMapReference());
     AddressToFspMap& addressToFspMap(hardwareConfiguration.getAddressToFspMapReference());
     Dsp& dspIn1230(addressToDspMap.at(0x1230));

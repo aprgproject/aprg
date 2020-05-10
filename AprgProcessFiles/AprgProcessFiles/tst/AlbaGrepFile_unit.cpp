@@ -14,7 +14,8 @@ namespace alba
 
 TEST(AlbaGrepFileTest, NoOutputIsWrittenWhenInputIsNonExisting)
 {
-    AlbaGrepFile grepFile("[.]");    EXPECT_FALSE(grepFile.isOutputFileWritten());
+    AlbaGrepFile grepFile("[.]");
+    EXPECT_FALSE(grepFile.isOutputFileWritten());
     grepFile.processFile(APRG_PROCESS_FILES_NON_EXISTING_FILE, APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
     EXPECT_FALSE(grepFile.isOutputFileWritten());
 }

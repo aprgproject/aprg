@@ -1,6 +1,6 @@
 #pragma once
 
-#include <BaseTerm.hpp>
+#include <BaseTermData.hpp>
 #include <Constant.hpp>
 #include <Container/AlbaUniqueVariant.hpp>
 #include <Expression.hpp>
@@ -13,6 +13,7 @@
 
 #include <string>
 #include <vector>
+
 namespace alba
 {
 
@@ -27,9 +28,10 @@ enum class TermType
     Operator,
     Monomial,
     Polynomial,
-    Expression};
+    Expression
+};
 
-class Term : public BaseTerm
+class Term : public BaseTermData
 {
 public:
     Term();
@@ -37,6 +39,7 @@ public:
     Term(std::string const& variableOrOperator);
     Term(Monomial const& monomial);
     Term(Polynomial const& polynomial);
+
     TermType getTermType() const;
     Constant & getConstantReference();
     Variable & getVariableReference();
@@ -50,4 +53,5 @@ private:
 };
 
 }
+
 }

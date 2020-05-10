@@ -12,7 +12,8 @@ namespace alba
 
 TEST(KeplerTest, KeplerWorksCorrectly)
 {
-    Kepler kepler1(0x1450);    Kepler kepler2(0x1460);
+    Kepler kepler1(0x1450);
+    Kepler kepler2(0x1460);
 
     EXPECT_TRUE(kepler1.operator<(kepler2));
     EXPECT_FALSE(kepler2.operator<(kepler1));

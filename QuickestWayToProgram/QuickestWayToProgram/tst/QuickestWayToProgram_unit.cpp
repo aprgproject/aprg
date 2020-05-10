@@ -20,7 +20,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace ProgressCounters
 {
@@ -30,7 +31,8 @@ int numberOfFilesAnalyzedForExtraction;
 
 TEST(SampleTest, RenameFiles)
 {
-    AlbaLocalPathHandler::ListOfPaths files;    AlbaLocalPathHandler::ListOfPaths directories;
+    AlbaLocalPathHandler::ListOfPaths files;
+    AlbaLocalPathHandler::ListOfPaths directories;
     AlbaLocalPathHandler pathHandler(R"(N:\MUSIC\111_DoAutomationHere)");
     pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
 

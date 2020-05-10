@@ -11,7 +11,8 @@ namespace alba
 
 using DataCollectionOfDoubles = DataCollection<double>;
 
-TEST(DataCollectionTest, CollectionDataAreCorrect){
+TEST(DataCollectionTest, CollectionDataAreCorrect)
+{
     DataCollectionOfDoubles collection;
     collection.addData(-100);
     collection.addData(-10);

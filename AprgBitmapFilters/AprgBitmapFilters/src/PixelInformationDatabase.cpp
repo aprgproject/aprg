@@ -10,7 +10,8 @@ PixelInformation::PixelInformation()
     , label(INITIAL_LABEL_VALUE)
 {}
 
-PixelInformationDatabase::PixelInformationDatabase(){}
+PixelInformationDatabase::PixelInformationDatabase()
+{}
 
 void PixelInformationDatabase::saveAsPenPoints(BitmapXYs const& bitmapPoints)
 {

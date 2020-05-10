@@ -24,6 +24,7 @@ AprgGraph::AprgGraph(string const& bitmapPath, BitmapXY const& originInBitmap, B
 {
     m_numberToStringConverter.setPrecision(5);
 }
+
 void AprgGraph::drawPoint(Point const& point, unsigned int const color)
 {
     m_bitmapSnippet.setPixelAt(convertRealPointToBitmapXY(point), color);
@@ -265,7 +266,8 @@ unsigned int AprgGraph::convertRealYCoordinateToBitmapYCoordinate(double const y
     return m_bitmap.getConfiguration().getYCoordinateWithinTheBitmap(calculatedYCoordinate);
 }
 
-double AprgGraph::convertBitmapXCoordinateToRealXCoordinate(double const xCoordinate) const{
+double AprgGraph::convertBitmapXCoordinateToRealXCoordinate(double const xCoordinate) const
+{
     return (xCoordinate-m_originInBitmap.getX())/m_magnification.getX();
 }
 

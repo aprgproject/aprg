@@ -12,7 +12,8 @@ namespace alba
 
 TEST(SampleTest, PerformanceAccessTestWithRandomValues)
 {
-    constexpr unsigned int initialSize=2500;    constexpr unsigned int accessIterations=1000000;
+    constexpr unsigned int initialSize=2500;
+    constexpr unsigned int accessIterations=1000000;
 
     AlbaRandomizer randomizer;
     vector<unsigned int> crnccIds;

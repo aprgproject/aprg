@@ -13,7 +13,8 @@ namespace alba
 
 TEST(SampleTest, TestForDataSet)
 {
-    AprgModeling modeling;    modeling.retrieveDataFromFileWithFileFormat1(ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_FILE1);
+    AprgModeling modeling;
+    modeling.retrieveDataFromFileWithFileFormat1(ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_FILE1);
     modeling.printRetrievedData();
     unsigned int numberOfSamples (modeling.getNumberOfSamples());
     modeling.saveRetrievedDataToModelingDataRandomly(numberOfSamples/2);

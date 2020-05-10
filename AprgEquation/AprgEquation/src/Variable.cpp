@@ -14,6 +14,7 @@ Variable::Variable()
 Variable::Variable(string const& variableName)
     : m_variableName(variableName)
 {}
+
 string Variable::getVariableName() const
 {
     return m_variableName;

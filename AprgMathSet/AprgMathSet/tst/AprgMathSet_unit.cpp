@@ -10,6 +10,7 @@ namespace alba
 TEST(SampleTest, NullSetWorks)
 {
     AprgMathSet<unsigned int> nullSet;
+
     EXPECT_FALSE(nullSet.contains(4));
     EXPECT_TRUE(nullSet.doesNotContain(3));
     EXPECT_EQ("{Null set}", nullSet.getDescription());
