@@ -2,13 +2,15 @@
 
 namespace alba
 {
+
 namespace equation
 {
 
-class BaseTermData
+class BaseTerm
 {
 public:
-    BaseTermData();    virtual ~BaseTermData();
+    BaseTerm();
+    virtual ~BaseTerm();
 
 private:
 

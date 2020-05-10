@@ -1,13 +1,10 @@
 #pragma once
 
 #include <BaseTermData.hpp>
-
-#include <memory>
-#include <vector>
+#include <WrappedTerms.hpp>
 
 namespace alba
 {
-
 namespace equation
 {
 
@@ -15,11 +12,14 @@ class Expression : public BaseTermData
 {
 public:
     Expression();
+    ~Expression();
+
+    WrappedTerms & getWrappedTermsReference();
+    WrappedTerms const& getWrappedTermsConstReference() const;
 
 private:
-    std::vector<std::unique_ptr<BaseTermData>> m_terms;
+    WrappedTerms m_wrappedTerms;
 };
 
 }
-
 }
