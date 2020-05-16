@@ -13,11 +13,11 @@ bool isOperator(string const& variableOrOperator)
     return "+" == variableOrOperator ||
             "-" == variableOrOperator ||
             "*" == variableOrOperator ||
-            "/" == variableOrOperator;
+            "/" == variableOrOperator ||
+            "^" == variableOrOperator;
 }
 
-bool isOperatorForMultipleTerms(string const& variableOrOperator)
-{
+bool isOperatorForMultipleTerms(string const& variableOrOperator){
     return "+" == variableOrOperator || "-" == variableOrOperator;
 }
 
