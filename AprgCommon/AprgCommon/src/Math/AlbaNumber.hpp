@@ -42,22 +42,25 @@ public:
     AlbaNumber operator-(AlbaNumber const& second) const;
     AlbaNumber operator*(AlbaNumber const& second) const;
     AlbaNumber operator/(AlbaNumber const& second) const;
+    AlbaNumber operator^(AlbaNumber const& second) const;
     AlbaNumber operator+(int const signedValue) const;
     AlbaNumber operator-(int const signedValue) const;
     AlbaNumber operator*(int const signedValue) const;
     AlbaNumber operator/(int const signedValue) const;
+    AlbaNumber operator^(int const signedValue) const;
     AlbaNumber operator+(unsigned int const unsignedValue) const;
     AlbaNumber operator-(unsigned int const unsignedValue) const;
     AlbaNumber operator*(unsigned int const unsignedValue) const;
     AlbaNumber operator/(unsigned int const unsignedValue) const;
+    AlbaNumber operator^(unsigned int const unsignedValue) const;
     AlbaNumber operator+(double const doubleValue) const;
     AlbaNumber operator-(double const doubleValue) const;
     AlbaNumber operator*(double const doubleValue) const;
     AlbaNumber operator/(double const doubleValue) const;
+    AlbaNumber operator^(double const doubleValue) const;
 
 private:
-    void convertToIntegerIfNeeded();
-    AlbaNumber addBothIntegersAndReturnNumber(int const signedValue1, int const signedValue2) const;
+    void convertToIntegerIfNeeded();    AlbaNumber addBothIntegersAndReturnNumber(int const signedValue1, int const signedValue2) const;
     AlbaNumber addBothFractionsAndReturnNumber(FractionData const& fractionData1, FractionData const& fractionData2) const;
     AlbaNumber addBothDoubleAndReturnNumber(double const doubleValue1, double const doubleValue2) const;
     AlbaNumber addIntegerAndFractionAndReturnNumber(int const signedValue, FractionData const& fractionData) const;
@@ -69,11 +72,12 @@ private:
     AlbaNumber multiplyIntegerAndFractionAndReturnNumber(int const signedValue, FractionData const& fractionData) const;
     AlbaNumber multiplyIntegerAndDoubleAndReturnNumber(int const signedValue, double const doubleValue) const;
     AlbaNumber multiplyFractionAndDoubleAndReturnNumber(FractionData const& fractionData, double const doubleValue) const;
-    AlbaNumber divideBothIntegersAndReturnNumber(int const signedValue1, int const signedValue2) const;
-    AlbaNumber divideBothFractionsAndReturnNumber(FractionData const& fractionData1, FractionData const& fractionData2) const;
+    AlbaNumber divideBothIntegersAndReturnNumber(int const dividend, int const divisor) const;
+    AlbaNumber divideBothFractionsAndReturnNumber(FractionData const& dividendFractionData, FractionData const& divisorFractionData) const;
+    AlbaNumber raisePowerOfBothIntegersAndReturnNumber(int const base, int const exponent) const;
+    AlbaNumber raisePowerOfFractionsAndIntegerAndReturnNumber(FractionData const& baseFractionData, int const exponent) const;
 
     Type m_type;
-    NumberUnionData m_data;
-};
+    NumberUnionData m_data;};
 
 }
