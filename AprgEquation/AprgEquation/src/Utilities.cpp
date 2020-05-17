@@ -17,7 +17,8 @@ bool isOperator(string const& variableOrOperator)
             "^" == variableOrOperator;
 }
 
-bool isOperatorForMultipleTerms(string const& variableOrOperator){
+bool isOperatorForMultipleTerms(string const& variableOrOperator)
+{
     return "+" == variableOrOperator || "-" == variableOrOperator;
 }
 

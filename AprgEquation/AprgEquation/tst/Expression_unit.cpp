@@ -51,7 +51,8 @@ TEST(ExpressionTest, GetWrappedTermsReferenceWorksCorrectly)
     Term term3(*dynamic_cast<Term*>(baseTermPointersToVerify.at(2).get()));
     EXPECT_EQ(TermType::Constant, term1.getTermType());
     EXPECT_DOUBLE_EQ(5, term1.getConstantConstReference().getNumberConstReference().getDouble());
-    EXPECT_EQ(TermType::Operator, term2.getTermType());    EXPECT_EQ("+", term2.getOperatorConstReference().getOperatorString());
+    EXPECT_EQ(TermType::Operator, term2.getTermType());
+    EXPECT_EQ("+", term2.getOperatorConstReference().getOperatorString());
     EXPECT_EQ(TermType::Variable, term3.getTermType());
     EXPECT_EQ("interest", term3.getVariableConstReference().getVariableName());
 }
@@ -68,7 +69,8 @@ TEST(ExpressionTest, GetWrappedTermsConstReferenceWorksCorrectly)
     Term term3(*dynamic_cast<Term*>(baseTermPointersToVerify.at(2).get()));
     EXPECT_EQ(TermType::Constant, term1.getTermType());
     EXPECT_DOUBLE_EQ(6, term1.getConstantConstReference().getNumberConstReference().getDouble());
-    EXPECT_EQ(TermType::Operator, term2.getTermType());    EXPECT_EQ("*", term2.getOperatorConstReference().getOperatorString());
+    EXPECT_EQ(TermType::Operator, term2.getTermType());
+    EXPECT_EQ("*", term2.getOperatorConstReference().getOperatorString());
     EXPECT_EQ(TermType::Variable, term3.getTermType());
     EXPECT_EQ("force", term3.getVariableConstReference().getVariableName());
 }

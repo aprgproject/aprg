@@ -120,6 +120,21 @@ double AlbaNumber::getDouble() const
     return result;
 }
 
+bool AlbaNumber::operator==(AlbaNumber const& second) const
+{
+    return isAlmostEqual(getDouble(), second.getDouble());
+}
+
+bool AlbaNumber::operator!=(AlbaNumber const& second) const
+{
+    AlbaNumber const& first(*this);
+    return !(first==second);
+}
+
+bool AlbaNumber::operator<(AlbaNumber const& second) const
+{
+    return getDouble() < second.getDouble();
+}
 
 AlbaNumber AlbaNumber::operator+() const
 {
@@ -390,7 +405,8 @@ AlbaNumber AlbaNumber::operator^(AlbaNumber const& second) const
 
 AlbaNumber AlbaNumber::operator+(int const signedValue) const
 {
-    return operator+(AlbaNumber(signedValue));}
+    return operator+(AlbaNumber(signedValue));
+}
 
 AlbaNumber AlbaNumber::operator-(int const signedValue) const
 {
@@ -414,7 +430,8 @@ AlbaNumber AlbaNumber::operator^(int const signedValue) const
 
 AlbaNumber AlbaNumber::operator+(unsigned int const unsignedValue) const
 {
-    return operator+(AlbaNumber(unsignedValue));}
+    return operator+(AlbaNumber(unsignedValue));
+}
 
 AlbaNumber AlbaNumber::operator-(unsigned int const unsignedValue) const
 {
@@ -438,7 +455,8 @@ AlbaNumber AlbaNumber::operator^(unsigned int const unsignedValue) const
 
 AlbaNumber AlbaNumber::operator+(double const doubleValue) const
 {
-    return operator+(AlbaNumber(doubleValue));}
+    return operator+(AlbaNumber(doubleValue));
+}
 
 AlbaNumber AlbaNumber::operator-(double const doubleValue) const
 {
@@ -462,7 +480,8 @@ AlbaNumber AlbaNumber::operator^(double const doubleValue) const
 
 void AlbaNumber::convertToIntegerIfNeeded()
 {
-    if(m_type == Type::Fraction)    {
+    if(m_type == Type::Fraction)
+    {
         FractionData& fractionDataReference(m_data.fractionData);
         if(isDivisible(getAbsoluteValue(fractionDataReference.numerator), fractionDataReference.denominator))
         {

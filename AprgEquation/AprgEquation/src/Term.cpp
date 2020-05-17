@@ -24,7 +24,8 @@ Term::Term(Term const& term)
     resetBaseDataTermPointerBasedFromTerm(term);
 }
 
-Term::Term(Constant const& constant)    : m_type(TermType::Constant)
+Term::Term(Constant const& constant)
+    : m_type(TermType::Constant)
     , m_baseDataTermPointer(new Constant(constant))
 {}
 
@@ -35,7 +36,8 @@ Term::Term(string const& variableOrOperator)
     if(equation::isOperator(variableOrOperator))
     {
         m_type=TermType::Operator;
-        m_baseDataTermPointer.reset(new Operator(variableOrOperator));    }
+        m_baseDataTermPointer.reset(new Operator(variableOrOperator));
+    }
     else
     {
         m_type=TermType::Variable;
@@ -59,7 +61,8 @@ Term::Term(Operator const& operatorTerm)
 
 Term::Term(Monomial const& monomial)
     : m_type(TermType::Monomial)
-    , m_baseDataTermPointer(new Monomial(monomial)){}
+    , m_baseDataTermPointer(new Monomial(monomial))
+{}
 
 Term::Term(Polynomial const& polynomial)
     : m_type(TermType::Polynomial)
@@ -149,7 +152,8 @@ bool Term::isExpressionWithMutipleTerms() const
 
 Constant & Term::getConstantReference()
 {
-    assert(m_type==TermType::Constant);    return *dynamic_cast<Constant*>(m_baseDataTermPointer.get());
+    assert(m_type==TermType::Constant);
+    return *dynamic_cast<Constant*>(m_baseDataTermPointer.get());
 }
 
 Variable & Term::getVariableReference()
