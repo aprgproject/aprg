@@ -83,6 +83,7 @@ TEST(UtilitiesTest, PerformChangeForVariablesWorksAsExpected)
 TEST(UtilitiesTest, WrappingTermsWorksCorrectly)
 {
     WrappedTerms wrappedTerms;
+
     wrapTerms(wrappedTerms, Terms{Term(5), Term("+"), Term("interest")});
 
     WrappedTerms::BaseTermPointers & baseTermPointersToVerify(wrappedTerms.getBaseTermPointersReference());
@@ -97,6 +98,7 @@ TEST(UtilitiesTest, WrappingTermsWorksCorrectly)
     ASSERT_EQ(TermType::Variable, term3.getTermType());
     EXPECT_EQ("interest", term3.getVariableConstReference().getVariableName());
 }
+
 TEST(UtilitiesTest, UnwrappingTermsWorksCorrectly)
 {
     WrappedTerms wrappedTerms;
@@ -112,6 +114,7 @@ TEST(UtilitiesTest, UnwrappingTermsWorksCorrectly)
     ASSERT_EQ(TermType::Variable, termsToVerify.at(2).getTermType());
     EXPECT_EQ("count", termsToVerify.at(2).getVariableConstReference().getVariableName());
 }
+
 TEST(UtilitiesTest, CreateExpressionWorksCorrectly)
 {
     Expression expressionToTest(createExpression(Terms{Term(7.625), Term("-"), Term("compoundinterest")}));
@@ -128,6 +131,7 @@ TEST(UtilitiesTest, CreateExpressionWorksCorrectly)
     ASSERT_EQ(TermType::Variable, term3.getTermType());
     EXPECT_EQ("compoundinterest", term3.getVariableConstReference().getVariableName());
 }
+
 TEST(UtilitiesTest, GetTermsInAnExpressionWorksCorrectly)
 {
     Expression expression(createExpression(Terms{Term(-54654.25), Term("+"), Term("x"), Term("*"), Term("y")}));
@@ -146,6 +150,7 @@ TEST(UtilitiesTest, GetTermsInAnExpressionWorksCorrectly)
     ASSERT_EQ(TermType::Variable, termsToVerify.at(4).getTermType());
     EXPECT_EQ("y", termsToVerify.at(4).getVariableConstReference().getVariableName());
 }
+
 }
 
 }
