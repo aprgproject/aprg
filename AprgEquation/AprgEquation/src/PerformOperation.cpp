@@ -98,7 +98,8 @@ Term performOperation(
 }\
     else if(term1.isVariable())\
 {\
-    if(term2.isConstant())\{\
+    if(term2.isConstant())\
+{\
     newTerm = term1.getVariableConstReference() operation term2.getConstantConstReference();\
 }\
     else if(term2.isVariable())\
@@ -116,7 +117,8 @@ Term performOperation(
 }\
     else if(term1.isMonomial())\
 {\
-    if(term2.isConstant())\{\
+    if(term2.isConstant())\
+{\
     newTerm = term1.getMonomialConstReference() operation term2.getConstantConstReference();\
 }\
     else if(term2.isVariable())\
@@ -152,6 +154,7 @@ Term performOperation(
 }\
 }\
     return newTerm;
+
 
 Term performUnaryPlus(Term const& term)
 {
