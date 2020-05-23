@@ -46,7 +46,8 @@ TEST(ExpressionTest, GetWrappedTermsReferenceWorksCorrectly)
     BaseTermSharedPointers & baseTermPointersToVerify(expression.getWrappedTermsReference().getBaseTermPointersReference());
 
     ASSERT_EQ(3u, baseTermPointersToVerify.size());
-    Term term1(*dynamic_cast<Term*>(baseTermPointersToVerify.at(0).get()));    Term term2(*dynamic_cast<Term*>(baseTermPointersToVerify.at(1).get()));
+    Term term1(*dynamic_cast<Term*>(baseTermPointersToVerify.at(0).get()));
+    Term term2(*dynamic_cast<Term*>(baseTermPointersToVerify.at(1).get()));
     Term term3(*dynamic_cast<Term*>(baseTermPointersToVerify.at(2).get()));
     ASSERT_EQ(TermType::Constant, term1.getTermType());
     EXPECT_DOUBLE_EQ(5, term1.getConstantConstReference().getNumberConstReference().getDouble());
@@ -63,7 +64,8 @@ TEST(ExpressionTest, GetWrappedTermsConstReferenceWorksCorrectly)
     BaseTermSharedPointers const& baseTermPointersToVerify(expression.getWrappedTermsConstReference().getBaseTermPointersConstReference());
 
     ASSERT_EQ(3u, baseTermPointersToVerify.size());
-    Term term1(*dynamic_cast<Term*>(baseTermPointersToVerify.at(0).get()));    Term term2(*dynamic_cast<Term*>(baseTermPointersToVerify.at(1).get()));
+    Term term1(*dynamic_cast<Term*>(baseTermPointersToVerify.at(0).get()));
+    Term term2(*dynamic_cast<Term*>(baseTermPointersToVerify.at(1).get()));
     Term term3(*dynamic_cast<Term*>(baseTermPointersToVerify.at(2).get()));
     ASSERT_EQ(TermType::Constant, term1.getTermType());
     EXPECT_DOUBLE_EQ(6, term1.getConstantConstReference().getNumberConstReference().getDouble());

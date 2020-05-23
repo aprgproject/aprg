@@ -73,7 +73,8 @@ void StartupLogAnalyzer::saveDataToCsv(string const& csvPath)
     //saveDataTimeToCsv(outputFileStream, m_auditRequestResponseWithRncTimeDescriptionString, m_auditRequestResponseWithRncTime);
     saveDataTimeToCsv(outputFileStream, m_auditToFirstCellSetupTimeDescriptionString, m_auditToFirstCellSetupTime);
     saveDataTimeToCsv(outputFileStream, m_cellAllocationInTelecomTimeDescriptionString, m_cellAllocationInTelecomTime);
-    saveDataTimeToCsv(outputFileStream, m_cellSetupInDspTimeDescriptionString, m_cellSetupInDspTime);    saveDataTimeToCsv(outputFileStream, m_antennaCarrierSetupRequestResponseTimeDescriptionString, m_antennaCarrierSetupRequestResponseTime);
+    saveDataTimeToCsv(outputFileStream, m_cellSetupInDspTimeDescriptionString, m_cellSetupInDspTime);
+    saveDataTimeToCsv(outputFileStream, m_antennaCarrierSetupRequestResponseTimeDescriptionString, m_antennaCarrierSetupRequestResponseTime);
     saveDataTimeToCsv(outputFileStream, m_antennaCarrierActivateRequestResponseTimeDescriptionString, m_antennaCarrierActivateRequestResponseTime);
     saveDataTimeToCsv(outputFileStream, m_commonChannelsSetupInDspDescriptionString, m_commonChannelsSetupInDsp);
     saveDataTimeToCsv(outputFileStream, m_commonChannelsActivationInDspDescriptionString, m_commonChannelsActivationInDsp);

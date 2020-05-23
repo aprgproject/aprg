@@ -1,10 +1,7 @@
 #pragma once
 
-#include <BaseTerm.hpp>
 #include <BaseTermPointers.hpp>
 
-#include <memory>
-#include <vector>
 namespace alba
 {
 
@@ -26,4 +23,5 @@ private:
 };
 
 }
+
 }
