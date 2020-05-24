@@ -19,15 +19,9 @@ bool isOperator(string const& variableOrOperator)
             "^" == variableOrOperator;
 }
 
-bool isOperatorForMultipleTerms(string const& variableOrOperator)
-{
-    return "+" == variableOrOperator || "-" == variableOrOperator;
-}
-
 bool canBeAddedOrSubtracted(Monomial const& monomial1, Monomial const& monomial2)
 {
-    Monomial::VariablesToExponentsMap const& variablesMap1(monomial1.getVariablesToExponentsMapConstReference());
-    Monomial::VariablesToExponentsMap const& variablesMap2(monomial2.getVariablesToExponentsMapConstReference());
+    Monomial::VariablesToExponentsMap const& variablesMap1(monomial1.getVariablesToExponentsMapConstReference());    Monomial::VariablesToExponentsMap const& variablesMap2(monomial2.getVariablesToExponentsMapConstReference());
     bool result(false);
     if(variablesMap1.size() == variablesMap2.size())
     {
@@ -54,64 +48,63 @@ bool canBeAddedOrSubtracted(Monomial const& monomial, Variable const& variable)
     return result;
 }
 
-Term createTerm(BaseTermUniquePointer const& baseTerm)
+Term convertPolynomialToSimplestTerm(Polynomial const& polynomial)
 {
-    Term* termPointer = dynamic_cast<Term*>(baseTerm.get());
-    return *termPointer;
-}
-
-BaseTermUniquePointer createBaseTermUniquePointer(Term const& term)
-{
-    BaseTermUniquePointer baseTerm(new Term(term));
-    return move(baseTerm);
-}
-
-Term convertMonomialToSimplestTerm(Monomial const& monomial)
-{
-    Term newTerm(monomial);
-    if(monomial.isZero())
+    Polynomial simplifiedPolynomial(createSimplifiedPolynomial(polynomial));
+    Term newTerm(simplifiedPolynomial);
+    if(simplifiedPolynomial.isZero())
     {
         newTerm = Term(Constant(0));
     }
-    else if(monomial.isConstantOnly())
+    else if(simplifiedPolynomial.isOneMonomial())
     {
-        newTerm = Term(monomial.getConstantConstReference());
-    }
-    else if(monomial.isVariableOnly())
-    {
-        newTerm = Term(monomial.getFirstVariableName());
+        newTerm = convertMonomialToSimplestTerm(simplifiedPolynomial.getFirstMonomial());
     }
     return newTerm;
 }
 
-Monomial addSameMonomials(Monomial const& monomial1, Monomial const& monomial2)
+Polynomial createSimplifiedPolynomial(Polynomial const& polynomial)
 {
-    Monomial newMonomial;
-    if(canBeAddedOrSubtracted(monomial1, monomial2))
+    Polynomial simplifiedPolynomial;
+    for(Monomial const& monomial : polynomial.getMonomialsConstReference())
     {
-        newMonomial = Monomial(
-                    monomial1.getConstantConstReference() + monomial2.getConstantConstReference(),
-                    removeZeroExponents(monomial1.getVariablesToExponentsMapConstReference()));
+        if(!monomial.isZero())
+        {
+            simplifiedPolynomial.addMonomial(monomial);
+        }
     }
-    return newMonomial;
+    return simplifiedPolynomial;
 }
 
-Monomial subtractSameMonomials(Monomial const& monomial1, Monomial const& monomial2)
+Term convertMonomialToSimplestTerm(Monomial const& monomial)
 {
-    Monomial newMonomial;
-    if(canBeAddedOrSubtracted(monomial1, monomial2))
+    Monomial simplifiedMonomial(createSimplifiedMonomial(monomial));
+    Term newTerm(simplifiedMonomial);
+    if(simplifiedMonomial.isZero())
     {
-        newMonomial = Monomial(
-                    monomial1.getConstantConstReference() - monomial2.getConstantConstReference(),
-                    removeZeroExponents(monomial1.getVariablesToExponentsMapConstReference()));
+        newTerm = Term(Constant(0));
     }
-    return newMonomial;
+    else if(simplifiedMonomial.isConstantOnly())
+    {
+        newTerm = Term(simplifiedMonomial.getConstantConstReference());
+    }
+    else if(simplifiedMonomial.isVariableOnly())
+    {
+        newTerm = Term(simplifiedMonomial.getFirstVariableName());
+    }
+    return newTerm;
+}
+
+Monomial createSimplifiedMonomial(Monomial const& monomial)
+{
+    return Monomial(
+                monomial.getConstantConstReference(),
+                createVariableMapAndRemoveZeroExponents(monomial.getVariablesToExponentsMapConstReference()));
 }
 
 Monomial multiplyMonomials(Monomial const& monomial1, Monomial const& monomial2)
 {
-    Monomial::VariablesToExponentsMap newVariablesMap(
-                combineVariableExponentMapByMultiplication(
+    Monomial::VariablesToExponentsMap newVariablesMap(                combineVariableExponentMapByMultiplication(
                     monomial1.getVariablesToExponentsMapConstReference(),
                     monomial2.getVariablesToExponentsMapConstReference()));
     return Monomial(monomial1.getConstantConstReference()*monomial2.getConstantConstReference(), newVariablesMap);
@@ -126,11 +119,10 @@ Monomial divideMonomials(Monomial const& monomial1, Monomial const& monomial2)
     return Monomial(monomial1.getConstantConstReference()/monomial2.getConstantConstReference(), newVariablesMap);
 }
 
-Monomial::VariablesToExponentsMap removeZeroExponents(Monomial::VariablesToExponentsMap const& variablesMap)
+Monomial::VariablesToExponentsMap createVariableMapAndRemoveZeroExponents(Monomial::VariablesToExponentsMap const& variablesMap)
 {
     Monomial::VariablesToExponentsMap newVariableMap;
-    for(Monomial::VariableExponentPair const variableExponentPair : variablesMap)
-    {
+    for(Monomial::VariableExponentPair const variableExponentPair : variablesMap)    {
         if(variableExponentPair.second != 0)
         {
             newVariableMap.emplace(variableExponentPair.first, variableExponentPair.second);
@@ -162,11 +154,10 @@ Monomial::VariablesToExponentsMap combineVariableExponentMapByMultiplication(
     {
         newVariableMap[variableExponentPair.first] = newVariableMap[variableExponentPair.first] + variableExponentPair.second;
     }
-    return removeZeroExponents(newVariableMap);
+    return newVariableMap;
 }
 
-Monomial::VariablesToExponentsMap combineVariableExponentMapByDivision(
-        Monomial::VariablesToExponentsMap const& variablesMap1,
+Monomial::VariablesToExponentsMap combineVariableExponentMapByDivision(        Monomial::VariablesToExponentsMap const& variablesMap1,
         Monomial::VariablesToExponentsMap const& variablesMap2)
 {
     Monomial::VariablesToExponentsMap newVariableMap;
@@ -178,13 +169,24 @@ Monomial::VariablesToExponentsMap combineVariableExponentMapByDivision(
     {
         newVariableMap[variableExponentPair.first] = newVariableMap[variableExponentPair.first] - variableExponentPair.second;
     }
-    return removeZeroExponents(newVariableMap);
+    return newVariableMap;
 }
+
+/*Term createTerm(BaseTermUniquePointer const& baseTerm)
+{
+    Term* termPointer = dynamic_cast<Term*>(baseTerm.get());
+    return *termPointer;
+}
+
+BaseTermUniquePointer createBaseTermUniquePointer(Term const& term)
+{
+    BaseTermUniquePointer baseTerm(new Term(term));
+    return move(baseTerm);
+}*/
 
 void wrapTerms(WrappedTerms & wrappedTerms, Terms const& terms)
 {
-    BaseTermSharedPointers & baseTermPointers(wrappedTerms.getBaseTermPointersReference());
-    for(Term const& term : terms)
+    BaseTermSharedPointers & baseTermPointers(wrappedTerms.getBaseTermPointersReference());    for(Term const& term : terms)
     {
         baseTermPointers.emplace_back(new Term(term));
     }

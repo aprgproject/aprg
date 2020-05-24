@@ -22,10 +22,10 @@ public:
     bool isMultiplication() const;
     bool isDivision() const;
     bool isRaiseToPower() const;
+
     std::string getOperatorString() const;
 
     void setOperatorString(std::string const& operatingString);
-
 private:
     std::string m_operatingString;
 };

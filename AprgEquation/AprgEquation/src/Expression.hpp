@@ -16,11 +16,8 @@ public:
     Expression();
     ~Expression();
 
-    bool isMultipleTermsExpression() const;
-    TermType getTermTypeForExpression() const;
     WrappedTerms & getWrappedTermsReference();
     WrappedTerms const& getWrappedTermsConstReference() const;
-
 private:
     WrappedTerms m_wrappedTerms;
 };
