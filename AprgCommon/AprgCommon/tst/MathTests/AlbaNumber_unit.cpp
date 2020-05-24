@@ -5,11 +5,10 @@
 namespace alba
 {
 
-TEST(AlbaNumberTest, ConstructionWorkAsExpected)
+TEST(AlbaNumberTest, ConstructionWorksAsExpected)
 {
     AlbaNumber number1;
-    AlbaNumber number2(-81237);
-    AlbaNumber number3(34095093u);
+    AlbaNumber number2(-81237);    AlbaNumber number3(34095093u);
     AlbaNumber number4(-87408, -9802);
     AlbaNumber number5(-100, 10);
     AlbaNumber number6(4564.38794);
@@ -30,10 +29,60 @@ TEST(AlbaNumberTest, ConstructionWorkAsExpected)
     EXPECT_DOUBLE_EQ(4564.38794, number6.getDouble());
 }
 
-TEST(AlbaNumberTest, GetIntegerWorksAsExpected)
+TEST(AlbaNumberTest, IsIntegerTypeWorksAsExpected)
 {
     AlbaNumber number1;
     AlbaNumber number2(-81237);
+    AlbaNumber number3(34095093u);
+    AlbaNumber number4(-87408, -9802);
+    AlbaNumber number5(-100, 10);
+    AlbaNumber number6(4564.38794);
+
+    EXPECT_TRUE(number1.isIntegerType());
+    EXPECT_TRUE(number2.isIntegerType());
+    EXPECT_TRUE(number3.isIntegerType());
+    EXPECT_FALSE(number4.isIntegerType());
+    EXPECT_TRUE(number5.isIntegerType());
+    EXPECT_FALSE(number6.isIntegerType());
+}
+
+TEST(AlbaNumberTest, IsFractionTypeWorksAsExpected)
+{
+    AlbaNumber number1;
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(34095093u);
+    AlbaNumber number4(-87408, -9802);
+    AlbaNumber number5(-100, 10);
+    AlbaNumber number6(4564.38794);
+
+    EXPECT_FALSE(number1.isFractionType());
+    EXPECT_FALSE(number2.isFractionType());
+    EXPECT_FALSE(number3.isFractionType());
+    EXPECT_TRUE(number4.isFractionType());
+    EXPECT_FALSE(number5.isFractionType());
+    EXPECT_FALSE(number6.isFractionType());
+}
+
+TEST(AlbaNumberTest, IsDoubleTypeWorksAsExpected)
+{
+    AlbaNumber number1;
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(34095093u);
+    AlbaNumber number4(-87408, -9802);
+    AlbaNumber number5(-100, 10);
+    AlbaNumber number6(4564.38794);
+
+    EXPECT_FALSE(number1.isDoubleType());
+    EXPECT_FALSE(number2.isDoubleType());
+    EXPECT_FALSE(number3.isDoubleType());
+    EXPECT_FALSE(number4.isDoubleType());
+    EXPECT_FALSE(number5.isDoubleType());
+    EXPECT_TRUE(number6.isDoubleType());
+}
+
+TEST(AlbaNumberTest, GetIntegerWorksAsExpected)
+{
+    AlbaNumber number1;    AlbaNumber number2(-81237);
     AlbaNumber number3(34095093u);
     AlbaNumber number4(-87408, -9802);
     AlbaNumber number5(4564.38794);
