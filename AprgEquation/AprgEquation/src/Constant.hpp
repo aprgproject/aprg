@@ -3,9 +3,10 @@
 #include <BaseTermData.hpp>
 #include <Math/AlbaNumber.hpp>
 
+#include <string>
+
 namespace alba
 {
-
 namespace equation
 {
 
@@ -21,10 +22,10 @@ public:
 
     bool operator==(Constant const& second) const;
 
+    std::string getDisplayableString() const;
     AlbaNumber const& getNumberConstReference() const;
 
     void setNumber(AlbaNumber const& constantValue);
-
 private:
     AlbaNumber m_constantValue;
 };

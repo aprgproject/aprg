@@ -1,9 +1,10 @@
 #include "Monomial.hpp"
 
+#include <sstream>
+
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace equation
 {
@@ -44,10 +45,24 @@ bool Monomial::isVariableOnly() const
             (m_variablesToExponentsMap.cbegin())->second == 1;
 }
 
+string Monomial::getDisplayableString() const
+{
+    stringstream result;
+    result << m_constant.getDisplayableString();
+    for(VariableExponentPair const& variableExponentsPair : m_variablesToExponentsMap)
+    {
+        result << "|"
+               << variableExponentsPair.first
+               << "^"
+               << variableExponentsPair.second.getDisplayableString()
+               << "|";
+    }
+    return result.str();
+}
+
 string Monomial::getFirstVariableName() const
 {
-    string variableName;
-    if(!m_variablesToExponentsMap.empty())
+    string variableName;    if(!m_variablesToExponentsMap.empty())
     {
         variableName = (m_variablesToExponentsMap.cbegin())->first;
     }

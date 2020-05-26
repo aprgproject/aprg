@@ -3,9 +3,10 @@
 #include <BaseTermData.hpp>
 #include <Monomial.hpp>
 
+#include <string>
+
 namespace alba
 {
-
 namespace equation
 {
 
@@ -21,10 +22,10 @@ public:
     bool isZero() const;
     bool isOneMonomial() const;
 
+    std::string getDisplayableString() const;
     Monomial getFirstMonomial() const;
 
-    Monomials & getMonomialsReference();
-    Monomials const& getMonomialsConstReference() const;
+    Monomials & getMonomialsReference();    Monomials const& getMonomialsConstReference() const;
 
     void addMonomial(Monomial const& monomial);
     void addPolynomial(Polynomial const& polynomial);

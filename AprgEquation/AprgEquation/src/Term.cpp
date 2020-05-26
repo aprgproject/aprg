@@ -3,9 +3,9 @@
 #include <Utilities.hpp>
 
 #include <cassert>
+#include <string>
 
 using namespace std;
-
 namespace alba
 {
 
@@ -146,15 +146,9 @@ void Term::resetBaseDataTermPointerBasedFromTerm(Term const& term)
     }
 }
 
-TermType Term::getTermType() const
-{
-    return m_type;
-}
-
 bool Term::isConstant() const
 {
-    return TermType::Constant == m_type;
-}
+    return TermType::Constant == m_type;}
 
 bool Term::isVariable() const
 {
@@ -181,10 +175,44 @@ bool Term::isExpression() const
     return TermType::Expression == m_type;
 }
 
+string Term::getDisplayableString() const
+{
+    string result;
+    if(m_type==TermType::Constant)
+    {
+        result = getConstantConstReference().getDisplayableString();
+    }
+    else if(m_type==TermType::Variable)
+    {
+        result = getVariableConstReference().getDisplayableString();
+    }
+    else if(m_type==TermType::Operator)
+    {
+        result = getOperatorConstReference().getDisplayableString();
+    }
+    else if(m_type==TermType::Monomial)
+    {
+        result = getMonomialConstReference().getDisplayableString();
+    }
+    else if(m_type==TermType::Polynomial)
+    {
+        result = getPolynomialConstReference().getDisplayableString();
+    }
+    else if(m_type==TermType::Expression)
+    {
+        result = getExpressionConstReference().getDisplayableString();
+    }
+    return result;
+}
+
+TermType Term::getTermType() const
+{
+    return m_type;
+}
+
 Constant & Term::getConstantReference()
 {
-    assert(m_type==TermType::Constant);
-    return *dynamic_cast<Constant*>(m_baseDataTermPointer.get());
+    assert(m_type==TermType::Constant);    return *dynamic_cast<Constant*>(m_baseDataTermPointer.get());
 }
 
 Variable & Term::getVariableReference()

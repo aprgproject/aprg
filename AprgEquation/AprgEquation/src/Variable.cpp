@@ -20,10 +20,14 @@ bool Variable::operator==(Variable const& second) const
     return m_variableName == second.m_variableName;
 }
 
-string Variable::getVariableName() const
+string Variable::getDisplayableString() const
 {
     return m_variableName;
 }
+
+string Variable::getVariableName() const
+{
+    return m_variableName;}
 
 void Variable::setVariableName(string const& variableName)
 {

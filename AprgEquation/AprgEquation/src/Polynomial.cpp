@@ -2,10 +2,11 @@
 
 #include <Utilities.hpp>
 
+#include <sstream>
+
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace equation
 {
@@ -47,10 +48,34 @@ bool Polynomial::isOneMonomial() const
     return m_monomials.size() == 1;
 }
 
+string Polynomial::getDisplayableString() const
+{
+    stringstream result;
+    if(m_monomials.empty())
+    {
+        result << "(EmptyPolynomial)";
+    }
+    else
+    {
+        result << "(";
+        bool shouldPutPlusSymbol(false);
+        for(Monomial const& monomial : m_monomials)
+        {
+            if(shouldPutPlusSymbol)
+            {
+                result << " + ";
+            }
+            shouldPutPlusSymbol=true;
+            result << monomial.getDisplayableString();
+        }
+        result << ")";
+    }
+    return result.str();
+}
+
 Monomial Polynomial::getFirstMonomial() const
 {
-    Monomial result;
-    if(!m_monomials.empty())
+    Monomial result;    if(!m_monomials.empty())
     {
         result = m_monomials.front();
     }
