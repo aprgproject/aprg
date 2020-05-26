@@ -2,9 +2,10 @@
 
 #include <Container/AlbaUniqueVariant.hpp>
 
+#include <string>
+
 namespace alba
 {
-
 class AlbaNumber
 {
 public:
@@ -31,19 +32,9 @@ public:
     AlbaNumber(int const numerator, unsigned int const denominator);
     AlbaNumber(double const doubleValue);
 
-    bool isIntegerType() const;
-    bool isFractionType() const;
-    bool isDoubleType() const;
-
-    Type getType() const;
-    int getInteger() const;
-    FractionData getFractionData() const;
-    double getDouble() const;
-
     bool operator==(AlbaNumber const& second) const;
     bool operator!=(AlbaNumber const& second) const;
-    bool operator<(AlbaNumber const& second) const;
-    AlbaNumber operator+() const;
+    bool operator<(AlbaNumber const& second) const;    AlbaNumber operator+() const;
     AlbaNumber operator-() const;
     AlbaNumber operator+(AlbaNumber const& second) const;
     AlbaNumber operator-(AlbaNumber const& second) const;
@@ -66,10 +57,20 @@ public:
     AlbaNumber operator/(double const doubleValue) const;
     AlbaNumber operator^(double const doubleValue) const;
 
+    bool isIntegerType() const;
+    bool isFractionType() const;
+    bool isDoubleType() const;
+
+    Type getType() const;
+    int getInteger() const;
+    FractionData getFractionData() const;
+    double getDouble() const;
+
+    std::string getDisplayableString() const;
+
 private:
     void convertToIntegerIfNeeded();
-    AlbaNumber addBothIntegersAndReturnNumber(int const signedValue1, int const signedValue2) const;
-    AlbaNumber addBothFractionsAndReturnNumber(FractionData const& fractionData1, FractionData const& fractionData2) const;
+    AlbaNumber addBothIntegersAndReturnNumber(int const signedValue1, int const signedValue2) const;    AlbaNumber addBothFractionsAndReturnNumber(FractionData const& fractionData1, FractionData const& fractionData2) const;
     AlbaNumber addBothDoubleAndReturnNumber(double const doubleValue1, double const doubleValue2) const;
     AlbaNumber addIntegerAndFractionAndReturnNumber(int const signedValue, FractionData const& fractionData) const;
     AlbaNumber addIntegerAndDoubleAndReturnNumber(int const signedValue, double const doubleValue) const;
