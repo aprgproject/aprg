@@ -65,7 +65,8 @@ bool AlbaNumber::isDoubleType() const
 
 AlbaNumber::Type AlbaNumber::getType() const
 {
-    return m_type;}
+    return m_type;
+}
 
 int AlbaNumber::getInteger() const
 {

@@ -32,7 +32,10 @@ public:
     Term(Monomial const& monomial);
     Term(Polynomial const& polynomial);
     Term(Expression const& expression);
+
     Term & operator=(Term const& term);
+    bool operator==(Term const& second) const;
+
     void resetBaseDataTermPointerBasedFromTerm(Term const& term);
 
     TermType getTermType() const;
@@ -44,7 +47,8 @@ public:
     bool isExpression() const;
 
     Constant & getConstantReference();
-    Variable & getVariableReference();    Operator & getOperatorReference();
+    Variable & getVariableReference();
+    Operator & getOperatorReference();
     Monomial & getMonomialReference();
     Polynomial & getPolynomialReference();
     Expression & getExpressionReference();

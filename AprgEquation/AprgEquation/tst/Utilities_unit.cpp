@@ -23,7 +23,8 @@ TEST(UtilitiesTest, IsOperatorWorksCorrectly)
 
 TEST(UtilitiesTest, CanBeAddedOrSubtractedForBothMonomialsWorksCorrectly)
 {
-    Monomial monomial1;    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial monomial1;
+    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
     Monomial monomial3(100, {{"x", 6}, {"y", -1.25}});
     Monomial monomial4(100, {{"x", 5}, {"y", -1}});
     Monomial monomial5(645, {{"i", 20}, {"y", 30}});
@@ -180,7 +181,8 @@ TEST(UtilitiesTest, PerformChangeForVariablesWorksCorrectly)
 {
     Monomial::VariablesToExponentsMap variablesToExponents{{"x", 1}, {"y", 2}, {"z", 3}};
 
-    performChangeForVariables(variablesToExponents, [](string const &, AlbaNumber & exponent)    {
+    performChangeForVariables(variablesToExponents, [](string const &, AlbaNumber & exponent)
+    {
         exponent=exponent*3;
     });
 
@@ -229,6 +231,7 @@ TEST(UtilitiesTest, CombineVariableExponentMapByDivisionWorksCorrectly)
 TEST(UtilitiesTest, WrappingTermsWorksCorrectly)
 {
     WrappedTerms wrappedTerms;
+
     wrapTerms(wrappedTerms, Terms{Term(5), Term("+"), Term("interest")});
 
     BaseTermSharedPointers & baseTermPointersToVerify(wrappedTerms.getBaseTermPointersReference());

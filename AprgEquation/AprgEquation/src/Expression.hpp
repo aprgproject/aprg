@@ -16,8 +16,11 @@ public:
     Expression();
     ~Expression();
 
+    bool operator==(Expression const& second) const;
+
     WrappedTerms & getWrappedTermsReference();
     WrappedTerms const& getWrappedTermsConstReference() const;
+
 private:
     WrappedTerms m_wrappedTerms;
 };
