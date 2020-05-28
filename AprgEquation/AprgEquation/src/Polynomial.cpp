@@ -6,7 +6,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace equation
 {
@@ -75,7 +76,8 @@ string Polynomial::getDisplayableString() const
 
 Monomial Polynomial::getFirstMonomial() const
 {
-    Monomial result;    if(!m_monomials.empty())
+    Monomial result;
+    if(!m_monomials.empty())
     {
         result = m_monomials.front();
     }

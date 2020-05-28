@@ -7,6 +7,7 @@
 
 namespace alba
 {
+
 namespace equation
 {
 
@@ -26,6 +27,7 @@ public:
     AlbaNumber const& getNumberConstReference() const;
 
     void setNumber(AlbaNumber const& constantValue);
+
 private:
     AlbaNumber m_constantValue;
 };

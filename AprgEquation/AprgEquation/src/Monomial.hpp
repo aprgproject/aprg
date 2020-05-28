@@ -35,7 +35,8 @@ public:
     std::string getDisplayableString() const;
     std::string getFirstVariableName() const;
     AlbaNumber const& getConstantConstReference() const;
-    VariablesToExponentsMap & getVariablesToExponentsMapReference();    VariablesToExponentsMap const& getVariablesToExponentsMapConstReference() const;
+    VariablesToExponentsMap & getVariablesToExponentsMapReference();
+    VariablesToExponentsMap const& getVariablesToExponentsMapConstReference() const;
 
     void setConstant(AlbaNumber const& constant);
     void setVariableWtihExponent(

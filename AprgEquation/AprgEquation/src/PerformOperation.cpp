@@ -115,7 +115,8 @@ Term performOperation(
     newTerm = term1.getVariableConstReference() operation term2.getPolynomialConstReference();\
 }\
 }\
-    else if(term1.isMonomial())\{\
+    else if(term1.isMonomial())\
+{\
     if(term2.isConstant())\
 {\
     newTerm = term1.getMonomialConstReference() operation term2.getConstantConstReference();\
@@ -133,7 +134,8 @@ Term performOperation(
     newTerm = term1.getMonomialConstReference() operation term2.getPolynomialConstReference();\
 }\
 }\
-    else if(term1.isPolynomial())\{\
+    else if(term1.isPolynomial())\
+{\
     if(term2.isConstant())\
 {\
     newTerm = term1.getPolynomialConstReference() operation term2.getConstantConstReference();\
