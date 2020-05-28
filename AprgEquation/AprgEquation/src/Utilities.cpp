@@ -1,16 +1,12 @@
 #include "Utilities.hpp"
 
-#include <TermsSimplificator.hpp>
+#include <TermsAggregator.hpp>
 
 #include <algorithm>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace equation
 {
@@ -267,48 +263,26 @@ BaseTermSharedPointer createBaseTermSharedPointerFromTermReference(Term& term)
 Expression createExpression(Terms const& terms)
 {
     Expression result;
-    ALBA_PRINT1(terms.size());
-    for(Term const& term : terms)
-    {
-        ALBA_PRINT2(getTermPriorityValue(term), term.getDisplayableString());
-    }
-    TermsSimplificator simplificator(terms);
-    simplificator.buildExpressionFromTerms();
-    Terms const& simplifiedTerms(simplificator.getTermsConstReference());
-    ALBA_PRINT1(simplifiedTerms.size());
-    for(Term const& simplifiedTerm : simplifiedTerms)
-    {
-        ALBA_PRINT2(getTermPriorityValue(simplifiedTerm), simplifiedTerm.getDisplayableString());
-    }
-    if(!simplifiedTerms.empty())
+    TermsAggregator aggregator(terms);
+    aggregator.buildExpressionFromTerms();
+    Terms const& simplifiedTerms(aggregator.getTermsConstReference());
+    if(simplifiedTerms.size() == 1)
     {
         result = convertTermToExpression(simplifiedTerms.at(0));
     }
-    return result;
-}
+    return result;}
 
 Expression createSimplifiedExpression(Terms const& terms)
 {
     Expression result;
-    ALBA_PRINT1(terms.size());
-    for(Term const& term : terms)
-    {
-        ALBA_PRINT2(getTermPriorityValue(term), term.getDisplayableString());
-    }
-    TermsSimplificator simplificator(terms);
-    simplificator.simplifyTerms();
-    Terms const& simplifiedTerms(simplificator.getTermsConstReference());
-    ALBA_PRINT1(simplifiedTerms.size());
-    for(Term const& simplifiedTerm : simplifiedTerms)
-    {
-        ALBA_PRINT2(getTermPriorityValue(simplifiedTerm), simplifiedTerm.getDisplayableString());
-    }
-    if(!simplifiedTerms.empty())
+    TermsAggregator aggregator(terms);
+    aggregator.simplifyTerms();
+    Terms const& simplifiedTerms(aggregator.getTermsConstReference());
+    if(simplifiedTerms.size() == 1)
     {
         result = convertTermToExpression(simplifiedTerms.at(0));
     }
-    return result;
-}
+    return result;}
 
 Expression convertTermToExpression(Term const& term)
 {

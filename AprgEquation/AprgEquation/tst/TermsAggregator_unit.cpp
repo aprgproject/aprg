@@ -1,4 +1,4 @@
-#include <TermsSimplificator.hpp>
+#include <TermsAggregator.hpp>
 
 #include <gtest/gtest.h>
 
@@ -10,13 +10,13 @@ namespace alba
 namespace equation
 {
 
-TEST(TermsSimplificatorTest, ThreeTermsCanBeSimplified)
+TEST(TermsAggregatorTest, ThreeTermsCanBeSimplified)
 {
-    TermsSimplificator simplificator(Terms{Term(5), Term("+"), Term(2)});
+    TermsAggregator aggregator(Terms{Term(5), Term("+"), Term(2)});
 
-    simplificator.simplifyTerms();
+    aggregator.simplifyTerms();
 
-    Terms termsToVerify(simplificator.getTermsConstReference());
+    Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1u, termsToVerify.size());
     ASSERT_EQ(TermType::Constant, termsToVerify.at(0).getTermType());
     EXPECT_DOUBLE_EQ(7, termsToVerify.at(0).getConstantConstReference().getNumberConstReference().getDouble());

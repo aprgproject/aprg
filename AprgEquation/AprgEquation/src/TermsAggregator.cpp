@@ -1,10 +1,7 @@
-#include "TermsSimplificator.hpp"
+#include "TermsAggregator.hpp"
 
 #include <PerformOperation.hpp>
 #include <Utilities.hpp>
-
-
-#include <Debug/AlbaDebug.hpp>
 
 using namespace std;
 
@@ -14,68 +11,54 @@ namespace alba
 namespace equation
 {
 
-TermsSimplificator::TermsSimplificator(Terms const& terms)
+TermsAggregator::TermsAggregator(Terms const& terms)
     : m_terms(terms)
 {}
 
-Terms const& TermsSimplificator::getTermsConstReference() const
+Terms const& TermsAggregator::getTermsConstReference() const
 {
     return m_terms;
 }
 
-void TermsSimplificator::buildExpressionFromTerms()
+void TermsAggregator::buildExpressionFromTerms()
 {
     bool continueToSimplify(true);
     while(continueToSimplify)
     {
         AlbaOptional<unsigned int> nextOperatorIndexOptional(getNextOperatorIndexToPerform());
         continueToSimplify = nextOperatorIndexOptional.hasContent();
-        ALBA_PRINT2(continueToSimplify, nextOperatorIndexOptional.hasContent());
         if(nextOperatorIndexOptional.hasContent())
         {
             unsigned int nextOperatorIndex = nextOperatorIndexOptional.get();
-            ALBA_PRINT3(continueToSimplify, nextOperatorIndex, m_terms.size());
             continueToSimplify = buildExpressionWithBinaryOperationAndReturnIfBuilt(nextOperatorIndex);
             if(!continueToSimplify)
             {
                 continueToSimplify = buildExpressionWithUnaryOperationAndReturnIfBuilt(nextOperatorIndex);
             }
         }
-        ALBA_PRINT2(continueToSimplify, m_terms.size());
-        for(Term const& term : m_terms)
-        {
-            ALBA_PRINT2(static_cast<unsigned int>(term.getTermType()), term.getDisplayableString());
-        }
     }
 }
 
-void TermsSimplificator::simplifyTerms()
+void TermsAggregator::simplifyTerms()
 {
     bool continueToSimplify(true);
     while(continueToSimplify)
     {
         AlbaOptional<unsigned int> nextOperatorIndexOptional(getNextOperatorIndexToPerform());
         continueToSimplify = nextOperatorIndexOptional.hasContent();
-        ALBA_PRINT2(continueToSimplify, nextOperatorIndexOptional.hasContent());
         if(nextOperatorIndexOptional.hasContent())
         {
             unsigned int nextOperatorIndex = nextOperatorIndexOptional.get();
-            ALBA_PRINT3(continueToSimplify, nextOperatorIndex, m_terms.size());
             continueToSimplify = simplifyBinaryOperationAndReturnIfSimplified(nextOperatorIndex);
             if(!continueToSimplify)
             {
                 continueToSimplify=simplifyUnaryOperationAndReturnIfSimplified(nextOperatorIndex);
             }
         }
-        ALBA_PRINT2(continueToSimplify, m_terms.size());
-        for(Term const& term : m_terms)
-        {
-            ALBA_PRINT2(getTermPriorityValue(term), term.getDisplayableString());
-        }
     }
 }
 
-AlbaOptional<unsigned int> TermsSimplificator::getNextOperatorIndexToPerform() const
+AlbaOptional<unsigned int> TermsAggregator::getNextOperatorIndexToPerform() const
 {
     AlbaOptional<unsigned int> operatorIndexOptional;
     multimap<unsigned int, unsigned int> operatorLevelToIndexMap;
@@ -95,7 +78,7 @@ AlbaOptional<unsigned int> TermsSimplificator::getNextOperatorIndexToPerform() c
     return operatorIndexOptional;
 }
 
-bool TermsSimplificator::buildExpressionWithBinaryOperationAndReturnIfBuilt(unsigned int const index)
+bool TermsAggregator::buildExpressionWithBinaryOperationAndReturnIfBuilt(unsigned int const index)
 {
     bool isSimplified(false);
     if(index>0 && index+1 < m_terms.size())
@@ -136,7 +119,7 @@ bool TermsSimplificator::buildExpressionWithBinaryOperationAndReturnIfBuilt(unsi
     return isSimplified;
 }
 
-bool TermsSimplificator::buildExpressionWithUnaryOperationAndReturnIfBuilt(unsigned int const index)
+bool TermsAggregator::buildExpressionWithUnaryOperationAndReturnIfBuilt(unsigned int const index)
 {
     bool isSimplified(false);
     if(index>0 && index+1 < m_terms.size())
@@ -165,7 +148,7 @@ bool TermsSimplificator::buildExpressionWithUnaryOperationAndReturnIfBuilt(unsig
     return isSimplified;
 }
 
-bool TermsSimplificator::simplifyBinaryOperationAndReturnIfSimplified(unsigned int const index)
+bool TermsAggregator::simplifyBinaryOperationAndReturnIfSimplified(unsigned int const index)
 {
     bool isSimplified(false);
     if(index>0 && index+1 < m_terms.size())
@@ -184,7 +167,7 @@ bool TermsSimplificator::simplifyBinaryOperationAndReturnIfSimplified(unsigned i
     return isSimplified;
 }
 
-bool TermsSimplificator::simplifyUnaryOperationAndReturnIfSimplified(unsigned int const index)
+bool TermsAggregator::simplifyUnaryOperationAndReturnIfSimplified(unsigned int const index)
 {
     bool isSimplified(false);
     if(index>0 && index+1 < m_terms.size())
@@ -203,14 +186,14 @@ bool TermsSimplificator::simplifyUnaryOperationAndReturnIfSimplified(unsigned in
     return isSimplified;
 }
 
-void TermsSimplificator::eraseTermsInclusive(
+void TermsAggregator::eraseTermsInclusive(
         unsigned int const firstIndex,
         unsigned int const secondIndex)
 {
     m_terms.erase(m_terms.cbegin()+firstIndex, m_terms.cbegin()+secondIndex+1);
 }
 
-void TermsSimplificator::insertTerm(
+void TermsAggregator::insertTerm(
         unsigned int const index,
         Term const& term)
 {

@@ -7,13 +7,9 @@
 
 #include <sstream>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace equation
 {
@@ -302,11 +298,9 @@ void Expression::simplify()
     for(TermsWithPriorityAndAssociation::TermWithDetails const& termWithDetails : inputTerms)
     {
         Term const& term = *dynamic_cast<Term const*const>(termWithDetails.baseTermSharedPointer.get());
-        ALBA_PRINT3(term.isExpression(), term.isValueTermButNotAnExpression(), term.getDisplayableString());
         if(term.isExpression())
         {
-            Expression expression(term.getExpressionConstReference());
-            expression.simplify();
+            Expression expression(term.getExpressionConstReference());            expression.simplify();
             if(expression.containsOnlyOneTerm())
             {
                 Term const& oneTermInExpression = *dynamic_cast<Term const*const>(expression.getFirstTermConstReference().get());
@@ -351,11 +345,9 @@ void Expression::simplify()
     for(TermsWithPriorityAndAssociation::TermWithDetails const& termWithDetails : onlyValueTermsNonExpressions)
     {
         Term const& term = *dynamic_cast<Term const*const>(termWithDetails.baseTermSharedPointer.get());
-        ALBA_PRINT2(isFirst, term.getDisplayableString());
         if((OperatorLevel::AdditionAndSubtraction == m_commonOperatorLevel &&  term.isTheValueZero()) ||
                 (OperatorLevel::MultiplicationAndDivision == m_commonOperatorLevel &&  term.isTheValueOne()) ||
-                (OperatorLevel::RaiseToPower == m_commonOperatorLevel &&  term.isTheValueOne()))
-        {
+                (OperatorLevel::RaiseToPower == m_commonOperatorLevel &&  term.isTheValueOne()))        {
             continue;
         }
         else if(isFirst)
@@ -373,11 +365,9 @@ void Expression::simplify()
     for(TermsWithPriorityAndAssociation::TermWithDetails const& termWithDetails : onlyValueTermsNonExpressions)
     {
         Term const& term = *dynamic_cast<Term const*const>(termWithDetails.baseTermSharedPointer.get());
-        ALBA_PRINT2(static_cast<unsigned int>(term.getTermType()), term.getDisplayableString());
         m_termsWithPriorityAndAssociation.putTermWithDetails(termWithDetails);
     }
 }
-
 }
 
 }
