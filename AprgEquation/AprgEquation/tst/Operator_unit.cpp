@@ -185,7 +185,7 @@ TEST(OperatorTest, GetOperatorStringValueAsExpected)
     EXPECT_EQ("invalid", invalidOperator.getOperatorString());
 }
 
-TEST(OperatorTest, GetDisplayableStringValueAsExpected)
+TEST(OperatorTest, GetDisplayableStringWorks)
 {
     Operator nullOperator;
     Operator addOperator("+");

@@ -275,7 +275,7 @@ TEST(MonomialTest, SettingANewConstantWorks)
     EXPECT_DOUBLE_EQ(512, monomial.getConstantConstReference().getDouble());
 }
 
-TEST(MonomialTest, SettingANewVariableWithExponentWorks)
+TEST(MonomialTest, PuttingANewVariableWithExponentWorks)
 {
     Monomial monomial;
     ASSERT_TRUE(monomial.getVariablesToExponentsMapConstReference().empty());
@@ -286,12 +286,12 @@ TEST(MonomialTest, SettingANewVariableWithExponentWorks)
     EXPECT_DOUBLE_EQ(62, variableMap.at("i").getDouble());
 }
 
-TEST(MonomialTest, SettingASetOfNewVariablesWithExponentWorks)
+TEST(MonomialTest, PuttingASetOfNewVariablesWithExponentWorks)
 {
     Monomial monomial;
     ASSERT_TRUE(monomial.getVariablesToExponentsMapConstReference().empty());
 
-    monomial.setVariablesWithExponents({{"j", -4}, {"k", -0.75}});
+    monomial.putVariablesWithExponents({{"j", -4}, {"k", -0.75}});
     Monomial::VariablesToExponentsMap const& variableMap(monomial.getVariablesToExponentsMapConstReference());
     ASSERT_EQ(2u, variableMap.size());
     EXPECT_DOUBLE_EQ(-4, variableMap.at("j").getDouble());

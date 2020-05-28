@@ -148,7 +148,7 @@ TEST(TermTest, TermsAsPolynomialsWorkAsExpected)
 TEST(TermTest, TermsAsExpressionsWorkAsExpected)
 {
     Term expressionTerm1(Expression{});
-    Term expressionTerm2(createExpression(Terms{Term(5), Term("+"), Term("interest")}));
+    Term expressionTerm2(createExpressionIfPossible(Terms{Term(5), Term("+"), Term("interest")}));
 
     //For expression1
     ASSERT_EQ(TermType::Expression, expressionTerm1.getTermType());
@@ -190,7 +190,7 @@ TEST(TermTest, EqualityOperatorWorks)
 TEST(TermTest, IsConstantWorks)
 {
     Term term1;
-    Term term2(Constant(1));
+    Term term2(1);
     Term term3(Variable("length"));
     Term term4(Operator("+"));
     Term term5(Monomial(1, {}));
@@ -209,7 +209,7 @@ TEST(TermTest, IsConstantWorks)
 TEST(TermTest, IsVariableWorks)
 {
     Term term1;
-    Term term2(Constant(1));
+    Term term2(1);
     Term term3(Variable("length"));
     Term term4(Operator("+"));
     Term term5(Monomial(1, {}));
@@ -228,7 +228,7 @@ TEST(TermTest, IsVariableWorks)
 TEST(TermTest, IsOperatorWorks)
 {
     Term term1;
-    Term term2(Constant(1));
+    Term term2(1);
     Term term3(Variable("length"));
     Term term4(Operator("+"));
     Term term5(Monomial(1, {}));
@@ -247,7 +247,7 @@ TEST(TermTest, IsOperatorWorks)
 TEST(TermTest, IsMonomialWorks)
 {
     Term term1;
-    Term term2(Constant(1));
+    Term term2(1);
     Term term3(Variable("length"));
     Term term4(Operator("+"));
     Term term5(Monomial(1, {}));
@@ -266,7 +266,7 @@ TEST(TermTest, IsMonomialWorks)
 TEST(TermTest, IsPolynomialWorks)
 {
     Term term1;
-    Term term2(Constant(1));
+    Term term2(1);
     Term term3(Variable("length"));
     Term term4(Operator("+"));
     Term term5(Monomial(1, {}));
@@ -285,7 +285,7 @@ TEST(TermTest, IsPolynomialWorks)
 TEST(TermTest, IsExpressionWorks)
 {
     Term term1;
-    Term term2(Constant(1));
+    Term term2(1);
     Term term3(Variable("length"));
     Term term4(Operator("+"));
     Term term5(Monomial(1, {}));
@@ -304,7 +304,7 @@ TEST(TermTest, IsExpressionWorks)
 TEST(TermTest, IsValueTermWorks)
 {
     Term term1;
-    Term term2(Constant(1));
+    Term term2(1);
     Term term3(Variable("length"));
     Term term4(Operator("+"));
     Term term5(Monomial(1, {}));
@@ -323,7 +323,7 @@ TEST(TermTest, IsValueTermWorks)
 TEST(TermTest, IsValueTermButNotAnExpressionWorks)
 {
     Term term1;
-    Term term2(Constant(1));
+    Term term2(1);
     Term term3(Variable("length"));
     Term term4(Operator("+"));
     Term term5(Monomial(1, {}));
@@ -342,7 +342,7 @@ TEST(TermTest, IsValueTermButNotAnExpressionWorks)
 TEST(TermTest, IsTheValueZeroWorks)
 {
     Term term1;
-    Term term2(Constant(1));
+    Term term2(1);
     Term term3(Variable("length"));
     Term term4(Operator("+"));
     Term term5(Monomial(1, {}));
@@ -369,7 +369,7 @@ TEST(TermTest, IsTheValueOneWorks)
     Term term5(Monomial(1, {}));
     Term term6(Polynomial{});
     Term term7(Expression{});
-    Term term8(Constant(1));
+    Term term8(1);
 
     EXPECT_FALSE(term1.isTheValueOne());
     EXPECT_FALSE(term2.isTheValueOne());
@@ -408,7 +408,7 @@ TEST(TermTest, GetDisplayableStringWorks)
     Term term4(Operator("+"));
     Term term5(Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}}));
     Term term6(Polynomial({Monomial(3, {}), Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}})}));
-    Term term7(createExpression(Terms{Term(5), Term("+"), Term("interest")}));
+    Term term7(createExpressionIfPossible(Terms{Term(5), Term("+"), Term("interest")}));
 
     EXPECT_TRUE(term1.getDisplayableString().empty());
     EXPECT_EQ("0", term2.getDisplayableString());

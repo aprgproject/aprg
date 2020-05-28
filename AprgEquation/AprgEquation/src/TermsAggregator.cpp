@@ -88,27 +88,27 @@ bool TermsAggregator::buildExpressionWithBinaryOperationAndReturnIfBuilt(unsigne
         Term const& term3(m_terms[index+1]);
         if(term1.isValueTerm() && term2.isOperator() && term3.isValueTerm())
         {
-            Expression newExpression(convertTermToExpression(term1));
+            Expression newExpression(createExpressionFromTerm(term1));
             Operator const& operatorTerm(term2.getOperatorConstReference());
             if(operatorTerm.isAddition())
             {
-                newExpression.addTerm(createBaseTermSharedPointerFromTerm(term3));
+                newExpression.addTerm(copyAndCreateNewTermAndReturnSharedPointer(term3));
             }
             else if(operatorTerm.isSubtraction())
             {
-                newExpression.subtractTerm(createBaseTermSharedPointerFromTerm(term3));
+                newExpression.subtractTerm(copyAndCreateNewTermAndReturnSharedPointer(term3));
             }
             else if(operatorTerm.isMultiplication())
             {
-                newExpression.multiplyTerm(createBaseTermSharedPointerFromTerm(term3));
+                newExpression.multiplyTerm(copyAndCreateNewTermAndReturnSharedPointer(term3));
             }
             else if(operatorTerm.isDivision())
             {
-                newExpression.divideTerm(createBaseTermSharedPointerFromTerm(term3));
+                newExpression.divideTerm(copyAndCreateNewTermAndReturnSharedPointer(term3));
             }
             else if(operatorTerm.isRaiseToPower())
             {
-                newExpression.raiseToPowerTerm(createBaseTermSharedPointerFromTerm(term3));
+                newExpression.raiseToPowerTerm(copyAndCreateNewTermAndReturnSharedPointer(term3));
             }
             Term newTerm(newExpression);
             eraseTermsInclusive(index-1, index+1);
@@ -133,11 +133,11 @@ bool TermsAggregator::buildExpressionWithUnaryOperationAndReturnIfBuilt(unsigned
             Operator const& operatorTerm(term1.getOperatorConstReference());
             if(operatorTerm.isAddition())
             {
-                newExpression.addTerm(createBaseTermSharedPointerFromTerm(term2));
+                newExpression.addTerm(copyAndCreateNewTermAndReturnSharedPointer(term2));
             }
             else if(operatorTerm.isSubtraction())
             {
-                newExpression.subtractTerm(createBaseTermSharedPointerFromTerm(term2));
+                newExpression.subtractTerm(copyAndCreateNewTermAndReturnSharedPointer(term2));
             }
             Term newTerm(newExpression);
             eraseTermsInclusive(index, index+1);

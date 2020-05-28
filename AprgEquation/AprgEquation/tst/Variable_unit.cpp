@@ -33,6 +33,15 @@ TEST(VariableTest, EqualityVariableWorks)
     EXPECT_TRUE(variable2==variable4);
 }
 
+TEST(VariableTest, GetDisplayableStringWorks)
+{
+    Variable variable1;
+    Variable variable2("time");
+
+    EXPECT_EQ("", variable1.getDisplayableString());
+    EXPECT_EQ("time", variable2.getDisplayableString());
+}
+
 TEST(VariableTest, SettingANewVariableNameWorks)
 {
     Variable variableForTest;
