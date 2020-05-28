@@ -58,7 +58,8 @@ Monomial::VariablesToExponentsMap Monomial::combineVariableExponentMapByDivision
 
 bool Monomial::operator==(Monomial const& second) const
 {
-    return m_constant == second.m_constant && m_variablesToExponentsMap == second.m_variablesToExponentsMap;}
+    return m_constant == second.m_constant && m_variablesToExponentsMap == second.m_variablesToExponentsMap;
+}
 
 bool Monomial::isZero() const
 {
@@ -79,7 +80,8 @@ bool Monomial::isVariableOnly() const
 
 string Monomial::getFirstVariableName() const
 {
-    string variableName;    if(!m_variablesToExponentsMap.empty())
+    string variableName;
+    if(!m_variablesToExponentsMap.empty())
     {
         variableName = (m_variablesToExponentsMap.cbegin())->first;
     }
@@ -111,7 +113,8 @@ string Monomial::getDisplayableString() const
     return result.str();
 }
 
-void Monomial::simplify(){
+void Monomial::simplify()
+{
     removeZeroExponents();
 }
 
@@ -123,7 +126,8 @@ void Monomial::multiplyNumber(AlbaNumber const& number)
 void Monomial::raiseToPowerNumber(AlbaNumber const& number)
 {
     m_constant = m_constant ^ number;
-    for(VariablesToExponentsMapIterator it = m_variablesToExponentsMap.begin();        it != m_variablesToExponentsMap.end();
+    for(VariablesToExponentsMapIterator it = m_variablesToExponentsMap.begin();
+        it != m_variablesToExponentsMap.end();
         it++)
     {
         AlbaNumber & exponent(it->second);

@@ -35,7 +35,8 @@ public:
     void divideMonomial(Monomial const& monomial);
 
 private:
-    Monomials m_monomials;};
+    Monomials m_monomials;
+};
 
 }
 

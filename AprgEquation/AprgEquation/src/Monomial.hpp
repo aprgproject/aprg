@@ -59,6 +59,7 @@ private:
     AlbaNumber m_constant;
     VariablesToExponentsMap m_variablesToExponentsMap;
 };
+
 using Monomials=std::vector<Monomial>;
 
 }

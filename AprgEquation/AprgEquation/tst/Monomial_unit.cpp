@@ -35,7 +35,8 @@ TEST(MonomialTest, MonomialsAreConstructedCorrectly)
 TEST(MonomialTest, CombineVariableExponentMapByMultiplicationWorks)
 {
     Monomial::VariablesToExponentsMap variableMap1{{"x", 7}, {"y", 8}};
-    Monomial::VariablesToExponentsMap variableMap2{{"x", 1}, {"y", -8}};    Monomial::VariablesToExponentsMap variableMap3{{"z", 5}};
+    Monomial::VariablesToExponentsMap variableMap2{{"x", 1}, {"y", -8}};
+    Monomial::VariablesToExponentsMap variableMap3{{"z", 5}};
 
     Monomial::VariablesToExponentsMap variableMapToVerify1(Monomial::combineVariableExponentMapByMultiplication(variableMap1, variableMap2));
     Monomial::VariablesToExponentsMap variableMapToVerify2(Monomial::combineVariableExponentMapByMultiplication(variableMap1, variableMap3));
@@ -52,7 +53,8 @@ TEST(MonomialTest, CombineVariableExponentMapByMultiplicationWorks)
 TEST(MonomialTest, CombineVariableExponentMapByDivisionWorks)
 {
     Monomial::VariablesToExponentsMap variableMap1{{"x", 7}, {"y", 8}};
-    Monomial::VariablesToExponentsMap variableMap2{{"x", 1}, {"y", 8}};    Monomial::VariablesToExponentsMap variableMap3{{"z", 5}};
+    Monomial::VariablesToExponentsMap variableMap2{{"x", 1}, {"y", 8}};
+    Monomial::VariablesToExponentsMap variableMap3{{"z", 5}};
 
     Monomial::VariablesToExponentsMap variableMapToVerify1(Monomial::combineVariableExponentMapByDivision(variableMap1, variableMap2));
     Monomial::VariablesToExponentsMap variableMapToVerify2(Monomial::combineVariableExponentMapByDivision(variableMap1, variableMap3));
@@ -166,7 +168,8 @@ TEST(MonomialTest, SimplifyWorks)
     Monomial monomial1;
     Monomial monomial2(6, {});
     Monomial monomial3(1, {{"x", 1}});
-    Monomial monomial4(10, {{"x", 0}});    Monomial monomial5(58, {{"x", 7}, {"y", 0}});
+    Monomial monomial4(10, {{"x", 0}});
+    Monomial monomial5(58, {{"x", 7}, {"y", 0}});
 
     monomial1.simplify();
     monomial2.simplify();
@@ -232,6 +235,7 @@ TEST(MonomialTest, MultiplyMonomialWorks)
 
     monomial1.multiplyMonomial(Monomial(8, {{"x", 3}}));
     monomial2.multiplyMonomial(Monomial(8, {{"y", 4}}));
+
     EXPECT_DOUBLE_EQ(128, monomial1.getConstantConstReference().getDouble());
     Monomial::VariablesToExponentsMap const& variableMap1(monomial1.getVariablesToExponentsMapConstReference());
     ASSERT_EQ(1u, variableMap1.size());
@@ -247,6 +251,7 @@ TEST(MonomialTest, DivideMonomialWorks)
 {
     Monomial monomial1(16, {{"x", 5}});
     Monomial monomial2(20, {{"x", 7}});
+
     monomial1.divideMonomial(Monomial(8, {{"x", 3}}));
     monomial2.divideMonomial(Monomial(8, {{"y", 4}}));
 
@@ -263,7 +268,8 @@ TEST(MonomialTest, DivideMonomialWorks)
 
 TEST(MonomialTest, SettingANewConstantWorks)
 {
-    Monomial monomial;    EXPECT_DOUBLE_EQ(0, monomial.getConstantConstReference().getDouble());
+    Monomial monomial;
+    EXPECT_DOUBLE_EQ(0, monomial.getConstantConstReference().getDouble());
 
     monomial.setConstant(512);
     EXPECT_DOUBLE_EQ(512, monomial.getConstantConstReference().getDouble());
@@ -277,7 +283,8 @@ TEST(MonomialTest, SettingANewVariableWithExponentWorks)
     monomial.putVariableWithExponent("i", 62);
     Monomial::VariablesToExponentsMap const& variableMap(monomial.getVariablesToExponentsMapConstReference());
     ASSERT_EQ(1u, variableMap.size());
-    EXPECT_DOUBLE_EQ(62, variableMap.at("i").getDouble());}
+    EXPECT_DOUBLE_EQ(62, variableMap.at("i").getDouble());
+}
 
 TEST(MonomialTest, SettingASetOfNewVariablesWithExponentWorks)
 {

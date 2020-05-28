@@ -79,6 +79,7 @@ string Operator::getDisplayableString() const
 {
     return m_operatingString;
 }
+
 void Operator::setOperatorString(string const& operatingString)
 {
     m_operatingString = operatingString;

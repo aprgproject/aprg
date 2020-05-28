@@ -66,7 +66,8 @@ Monomials const& Polynomial::getMonomialsConstReference() const
 
 string Polynomial::getDisplayableString() const
 {
-    stringstream result;    if(m_monomials.empty())
+    stringstream result;
+    if(m_monomials.empty())
     {
         result << "(EmptyPolynomial)";
     }
@@ -90,7 +91,8 @@ string Polynomial::getDisplayableString() const
 
 void Polynomial::simplify()
 {
-    Monomials oldMonomials(m_monomials);    m_monomials.clear();
+    Monomials oldMonomials(m_monomials);
+    m_monomials.clear();
     for(Monomial const& monomial : oldMonomials)
     {
         if(!monomial.isZero())
@@ -128,21 +130,24 @@ void Polynomial::addPolynomial(Polynomial const& polynomial)
 void Polynomial::multiplyNumber(AlbaNumber const& number)
 {
     for(Monomial & monomial : m_monomials)
-    {        monomial.setConstant(monomial.getConstantConstReference()*number);
+    {
+        monomial.setConstant(monomial.getConstantConstReference()*number);
     }
 }
 
 void Polynomial::multiplyMonomial(Monomial const& monomial)
 {
     for(Monomial & monomialInternal : m_monomials)
-    {        monomialInternal.multiplyMonomial(monomial);
+    {
+        monomialInternal.multiplyMonomial(monomial);
     }
 }
 
 void Polynomial::multiplyPolynomial(Polynomial const& polynomial)
 {
     Monomials monomialsCopy(m_monomials);
-    m_monomials.clear();    for(Monomial const& monomial2 : polynomial.getMonomialsConstReference())
+    m_monomials.clear();
+    for(Monomial const& monomial2 : polynomial.getMonomialsConstReference())
     {
         for(Monomial const& monomial1 : monomialsCopy)
         {
@@ -156,7 +161,8 @@ void Polynomial::multiplyPolynomial(Polynomial const& polynomial)
 void Polynomial::divideMonomial(Monomial const& monomial)
 {
     for(Monomial & monomialInternal : m_monomials)
-    {        monomialInternal.divideMonomial(monomial);
+    {
+        monomialInternal.divideMonomial(monomial);
     }
 }
 
