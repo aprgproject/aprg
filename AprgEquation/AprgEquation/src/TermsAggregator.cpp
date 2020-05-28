@@ -127,7 +127,7 @@ bool TermsAggregator::buildExpressionWithUnaryOperationAndReturnIfBuilt(unsigned
         Term const& term1(m_terms[index]);
         Term const& term2(m_terms[index+1]);
         if(term1.isOperator() && term2.isValueTerm() &&
-                OperatorLevel::AdditionAndSubtraction == term2.getOperatorConstReference().getOperatorLevel())
+                OperatorLevel::AdditionAndSubtraction == term1.getOperatorConstReference().getOperatorLevel())
         {
             Expression newExpression;
             Operator const& operatorTerm(term1.getOperatorConstReference());
@@ -175,9 +175,9 @@ bool TermsAggregator::simplifyUnaryOperationAndReturnIfSimplified(unsigned int c
         Term const& term1(m_terms[index]);
         Term const& term2(m_terms[index+1]);
         if(term1.isOperator() && term2.isValueTerm() &&
-                OperatorLevel::AdditionAndSubtraction == term2.getOperatorConstReference().getOperatorLevel())
+                OperatorLevel::AdditionAndSubtraction == term1.getOperatorConstReference().getOperatorLevel())
         {
-            Term newTerm = performOperation(term2.getOperatorConstReference(), term1);
+            Term newTerm = performOperation(term1.getOperatorConstReference(), term1);
             eraseTermsInclusive(index, index+1);
             insertTerm(index, newTerm);
             isSimplified=true;

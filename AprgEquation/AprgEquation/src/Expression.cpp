@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace equation
 {
@@ -300,7 +301,8 @@ void Expression::simplify()
         Term const& term = *dynamic_cast<Term const*const>(termWithDetails.baseTermSharedPointer.get());
         if(term.isExpression())
         {
-            Expression expression(term.getExpressionConstReference());            expression.simplify();
+            Expression expression(term.getExpressionConstReference());
+            expression.simplify();
             if(expression.containsOnlyOneTerm())
             {
                 Term const& oneTermInExpression = *dynamic_cast<Term const*const>(expression.getFirstTermConstReference().get());
@@ -347,7 +349,8 @@ void Expression::simplify()
         Term const& term = *dynamic_cast<Term const*const>(termWithDetails.baseTermSharedPointer.get());
         if((OperatorLevel::AdditionAndSubtraction == m_commonOperatorLevel &&  term.isTheValueZero()) ||
                 (OperatorLevel::MultiplicationAndDivision == m_commonOperatorLevel &&  term.isTheValueOne()) ||
-                (OperatorLevel::RaiseToPower == m_commonOperatorLevel &&  term.isTheValueOne()))        {
+                (OperatorLevel::RaiseToPower == m_commonOperatorLevel &&  term.isTheValueOne()))
+        {
             continue;
         }
         else if(isFirst)
@@ -368,6 +371,7 @@ void Expression::simplify()
         m_termsWithPriorityAndAssociation.putTermWithDetails(termWithDetails);
     }
 }
+
 }
 
 }
