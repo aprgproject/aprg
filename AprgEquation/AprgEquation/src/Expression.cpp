@@ -317,11 +317,10 @@ void Expression::simplify()
             }
             else if(expression.getCommonOperatorLevel() == m_commonOperatorLevel)
             {
-                TermsWithPriorityAndAssociation::TermsWithDetails termsInSubExpression(
+                TermsWithPriorityAndAssociation::TermsWithDetails const& termsInSubExpression(
                             m_termsWithPriorityAndAssociation.getTermsWithDetails());
                 for(TermsWithPriorityAndAssociation::TermWithDetails const& termWithDetailsInSubExpression : termsInSubExpression)
-                {
-                    Term const& termInSubExpression = *dynamic_cast<Term const*const>(termWithDetailsInSubExpression.baseTermSharedPointer.get());
+                {                    Term const& termInSubExpression = *dynamic_cast<Term const*const>(termWithDetailsInSubExpression.baseTermSharedPointer.get());
                     if(termInSubExpression.isExpression())
                     {
                         onlySimplifiedExpressions.emplace_back(createBaseTermSharedPointerFromTerm(termInSubExpression), termWithDetailsInSubExpression.association);

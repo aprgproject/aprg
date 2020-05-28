@@ -70,16 +70,15 @@ unsigned int Operator::getOperatorLevelValue() const
     return equation::getOperatorLevelValue(getOperatorLevel());
 }
 
-string Operator::getDisplayableString() const
-{
-    return m_operatingString;
-}
-
 string Operator::getOperatorString() const
 {
     return m_operatingString;
 }
 
+string Operator::getDisplayableString() const
+{
+    return m_operatingString;
+}
 void Operator::setOperatorString(string const& operatingString)
 {
     m_operatingString = operatingString;
