@@ -4,13 +4,9 @@
 
 #include <gtest/gtest.h>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace equation
 {
@@ -27,10 +23,9 @@ TEST(ExpressionTest, ConstructionWorks)
     TermsWithPriorityAndAssociation::TermsWithDetails const& termsToVerify2(expression2.getTerms().getTermsWithDetails());
     ASSERT_EQ(1u, termsToVerify2.size());
     EXPECT_EQ(TermsWithPriorityAndAssociation::AssociationType::Positive, termsToVerify2.at(0).association);
-    Term const& termToVerify = *dynamic_cast<Term const*const>(termsToVerify2.at(0).baseTermSharedPointer.get());
+    Term const& termToVerify(getTermConstReferenceFromBaseTerm(getBaseTermConstReferenceFromSharedPointer(termsToVerify2.at(0).baseTermSharedPointer)));
     EXPECT_EQ(Term(12), termToVerify);
 }
-
 TEST(ExpressionTest, EqualityOperatorWorks)
 {
     Expression expression1;
@@ -49,10 +44,20 @@ TEST(ExpressionTest, EqualityOperatorWorks)
     EXPECT_TRUE(expression2==expression6);
 }
 
-TEST(ExpressionTest, ContainsOnlyOneTermWorks)
+TEST(ExpressionTest, ContainsNoTermsWorks)
 {
     Expression expression1;
     Expression expression2(createExpressionIfPossible(Terms{Term(5)}));
+    Expression expression3(createExpressionIfPossible(Terms{Term(6), Term("+"), Term("interest")}));
+
+    EXPECT_TRUE(expression1.containsNoTerms());
+    EXPECT_FALSE(expression2.containsNoTerms());
+    EXPECT_FALSE(expression3.containsNoTerms());
+}
+
+TEST(ExpressionTest, ContainsOnlyOneTermWorks)
+{
+    Expression expression1;    Expression expression2(createExpressionIfPossible(Terms{Term(5)}));
     Expression expression3(createExpressionIfPossible(Terms{Term(6), Term("+"), Term("interest")}));
 
     EXPECT_FALSE(expression1.containsOnlyOneTerm());
@@ -94,10 +99,10 @@ TEST(ExpressionTest, GetTermsWorks)
 
     TermsWithPriorityAndAssociation terms(expression.getTerms());
     TermsWithPriorityAndAssociation::TermsWithDetails termsWithDetailsToVerify(terms.getTermsWithDetails());
+
     ASSERT_EQ(3u, termsWithDetailsToVerify.size());
     EXPECT_EQ(Term(695), getTermConstReferenceFromSharedPointer(termsWithDetailsToVerify.at(0).baseTermSharedPointer));
-    EXPECT_EQ(TermsWithPriorityAndAssociation::AssociationType::Positive, termsWithDetailsToVerify.at(0).association);
-    EXPECT_EQ(Term("interest"), getTermConstReferenceFromSharedPointer(termsWithDetailsToVerify.at(1).baseTermSharedPointer));
+    EXPECT_EQ(TermsWithPriorityAndAssociation::AssociationType::Positive, termsWithDetailsToVerify.at(0).association);    EXPECT_EQ(Term("interest"), getTermConstReferenceFromSharedPointer(termsWithDetailsToVerify.at(1).baseTermSharedPointer));
     EXPECT_EQ(TermsWithPriorityAndAssociation::AssociationType::Negative, termsWithDetailsToVerify.at(1).association);
     EXPECT_EQ(Term("debt"), getTermConstReferenceFromSharedPointer(termsWithDetailsToVerify.at(2).baseTermSharedPointer));
     EXPECT_EQ(TermsWithPriorityAndAssociation::AssociationType::Positive, termsWithDetailsToVerify.at(2).association);
@@ -117,10 +122,45 @@ TEST(ExpressionTest, GetDisplayableStringWorks)
     EXPECT_EQ("((695-interest+debt)^cash)", expression4.getDisplayableString());
 }
 
-TEST(ExpressionTest, AddTermWorks)
+TEST(ExpressionTest, SimplifyWorksOnSingleTermExpression)
+{
+    Term expressionTerm(createExpressionIfPossible(Terms{Term("x"), Term("^"), Term("x")}));
+    Term expressionInExpressionTerm(Expression(getBaseTermConstReferenceFromTerm(expressionTerm)));
+    Term expressionInExpressionInExpressionTerm(Expression(getBaseTermConstReferenceFromTerm(expressionInExpressionTerm)));
+    Expression expression(createExpressionIfPossible(Terms{expressionInExpressionInExpressionTerm}));
+
+    expression.simplify();
+
+    EXPECT_EQ(expressionTerm, expression);
+}
+
+TEST(ExpressionTest, SimplifyWorksOnContinuousSingleTermExpression)
+{
+    Term expressionTerm(Expression(getBaseTermConstReferenceFromTerm(Term(967))));
+    Term expressionInExpressionTerm(Expression(getBaseTermConstReferenceFromTerm(expressionTerm)));
+    Term expressionInExpressionInExpressionTerm(Expression(getBaseTermConstReferenceFromTerm(expressionInExpressionTerm)));
+    Expression expression(createExpressionIfPossible(Terms{expressionInExpressionInExpressionTerm}));
+
+    expression.simplify();
+
+    EXPECT_EQ(createExpressionIfPossible(Terms{Term(967)}), expression);
+}
+
+TEST(ExpressionTest, ClearAndSetTermWorks)
 {
     Expression expression1;
-    Expression expression2(createExpressionIfPossible(Terms{Term(695), Term("+"), Term("interest")}));
+    Expression expression2(createExpressionIfPossible(Terms{Term(695), Term("-"), Term("interest"), Term("+"), Term("debt")}));
+
+    expression1.clearAndSetTerm(Term(24));
+    expression2.clearAndSetTerm(Term(65));
+
+    EXPECT_EQ(createExpressionIfPossible(Terms{Term(24)}), expression1);
+    EXPECT_EQ(createExpressionIfPossible(Terms{Term(65)}), expression2);
+}
+
+TEST(ExpressionTest, AddTermWorks)
+{
+    Expression expression1;    Expression expression2(createExpressionIfPossible(Terms{Term(695), Term("+"), Term("interest")}));
     Expression expression3(createExpressionIfPossible(Terms{Term(695), Term("*"), Term("interest")}));
     Expression expressionInMultiplication(createExpressionIfPossible(Terms{Term(695), Term("*"), Term("interest")}));
     Expression expressionToExpect1(createExpressionIfPossible(Terms{Term(42)}));

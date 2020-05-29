@@ -3,13 +3,9 @@
 #include <PerformOperation.hpp>
 #include <Utilities.hpp>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace equation
 {
@@ -30,21 +26,16 @@ void TermsAggregator::buildExpressionFromTerms()
     {
         AlbaOptional<unsigned int> nextOperatorIndexOptional(getNextOperatorIndexToPerform());
         continueToSimplify = nextOperatorIndexOptional.hasContent();
-        //ALBA_PRINT1(continueToSimplify);
         if(nextOperatorIndexOptional.hasContent())
         {
             unsigned int nextOperatorIndex = nextOperatorIndexOptional.get();
-            //ALBA_PRINT3(m_terms.at(nextOperatorIndex).getDisplayableString(), continueToSimplify, nextOperatorIndex);
             continueToSimplify = buildExpressionWithBinaryOperationAndReturnIfBuilt(nextOperatorIndex);
-            //ALBA_PRINT3("daan1", continueToSimplify, nextOperatorIndex);
             if(!continueToSimplify)
             {
                 continueToSimplify = buildExpressionWithUnaryOperationAndReturnIfBuilt(nextOperatorIndex);
-                //ALBA_PRINT3("daan2", continueToSimplify, nextOperatorIndex);
             }
         }
-    }
-}
+    }}
 
 void TermsAggregator::simplifyTerms()
 {
@@ -95,11 +86,10 @@ bool TermsAggregator::buildExpressionWithBinaryOperationAndReturnIfBuilt(unsigne
         Term const& term3(m_terms[index+1]);
         if(term1.isValueTerm() && term2.isOperator() && term3.isValueTerm())
         {
-            Expression newExpression(createExpressionFromTerm(term1));
+            Expression newExpression(createExpressionFromTermAndSimplifyIfNeeded(term1));
             Operator const& operatorTerm(term2.getOperatorConstReference());
             if(operatorTerm.isAddition())
-            {
-                newExpression.addTerm(getBaseTermConstReferenceFromTerm(term3));
+            {                newExpression.addTerm(getBaseTermConstReferenceFromTerm(term3));
             }
             else if(operatorTerm.isSubtraction())
             {

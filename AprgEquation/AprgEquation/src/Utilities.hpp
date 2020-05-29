@@ -25,12 +25,12 @@ std::string getOperatingString(
 
 Monomial createMonomialConstant(AlbaNumber const& number);
 Monomial createMonomialVariable(std::string const& variableName);
-Expression createExpressionIfPossible(Terms const& terms);
 Expression createExpressionFromTerm(Term const& term);
+Expression createExpressionFromTermAndSimplifyIfNeeded(Term const& term);
+Expression createExpressionIfPossible(Terms const& terms);
 Expression createSimplifiedExpressionIfPossible(Terms const& terms);
 
-Term convertExpressionToSimplestTerm(Expression const& expression);
-Term convertPolynomialToSimplestTerm(Polynomial const& polynomial);
+Term convertExpressionToSimplestTerm(Expression const& expression);Term convertPolynomialToSimplestTerm(Polynomial const& polynomial);
 Term convertMonomialToSimplestTerm(Monomial const& monomial);
 
 BaseTermSharedPointer createNewTermAndReturnSharedPointer(BaseTermSharedPointer const& sharedPointer);
@@ -38,10 +38,11 @@ BaseTermSharedPointer copyAndCreateNewTermAndReturnSharedPointer(Term const& ter
 Term & getTermReferenceFromSharedPointer(BaseTermSharedPointer & sharedPointer);
 Term const& getTermConstReferenceFromSharedPointer(BaseTermSharedPointer const& sharedPointer);
 BaseTermSharedPointer getSharedPointerFromTermReference(Term & term);
-BaseTerm const& getBaseTermConstReferenceFromTerm(Term const& term);
 BaseTerm const& getBaseTermConstReferenceFromSharedPointer(BaseTermSharedPointer const& sharedPointer);
+BaseTerm const& getBaseTermConstReferenceFromTerm(Term const& term);
 Term const& getTermConstReferenceFromBaseTerm(BaseTerm const& baseTerm);
+BaseTerm & getBaseTermReferenceFromTerm(Term & term);
+Term & getTermReferenceFromBaseTerm(BaseTerm & baseTerm);
 
 }
-
 }
