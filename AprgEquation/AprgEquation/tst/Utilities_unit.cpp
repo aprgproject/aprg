@@ -56,14 +56,13 @@ TEST(UtilitiesTest, CanBeAddedOrSubtractedForMonomialAndVariableWorks)
 
 TEST(UtilitiesTest, GetOperatorLevelValueWorks)
 {
-    EXPECT_EQ(0u, getOperatorLevelValue(OperatorLevel::Unknown));
-    EXPECT_EQ(1u, getOperatorLevelValue(OperatorLevel::AdditionAndSubtraction));
-    EXPECT_EQ(2u, getOperatorLevelValue(OperatorLevel::MultiplicationAndDivision));
-    EXPECT_EQ(3u, getOperatorLevelValue(OperatorLevel::RaiseToPower));
+    EXPECT_EQ(0u, getOperatorLevelInversePriority(OperatorLevel::Unknown));
+    EXPECT_EQ(3u, getOperatorLevelInversePriority(OperatorLevel::AdditionAndSubtraction));
+    EXPECT_EQ(2u, getOperatorLevelInversePriority(OperatorLevel::MultiplicationAndDivision));
+    EXPECT_EQ(1u, getOperatorLevelInversePriority(OperatorLevel::RaiseToPower));
 }
 
-TEST(UtilitiesTest, GetTermPriorityValueWorks)
-{
+TEST(UtilitiesTest, GetTermPriorityValueWorks){
     EXPECT_EQ(6u, getTermPriorityValue(Term(1)));
     EXPECT_EQ(5u, getTermPriorityValue(Term(Variable("length"))));
     EXPECT_EQ(4u, getTermPriorityValue(Term(Operator("+"))));
@@ -156,22 +155,26 @@ TEST(UtilitiesTest, CreateSimplifiedExpressionReturnsEmptyIfListOfTermsAreWrong)
 
 TEST(UtilitiesTest, ConvertExpressionToSimplestTermWorks)
 {
+    Term expressionTerm(createExpressionIfPossible(Terms{Term(88)}));
+    Term expressionInExpressionTerm(createExpressionIfPossible(Terms{expressionTerm}));
+    Term expressionInExpressionInExpressionTerm(createExpressionIfPossible(Terms{expressionInExpressionTerm}));
     Term termToVerify1(convertExpressionToSimplestTerm(createExpressionIfPossible(Terms{})));
     Term termToVerify2(convertExpressionToSimplestTerm(createExpressionIfPossible(Terms{Term(88)})));
-    Term termToVerify3(convertExpressionToSimplestTerm(createExpressionIfPossible(Terms{termToVerify2})));
-    Term termToVerify4(convertExpressionToSimplestTerm(createExpressionIfPossible(Terms{termToVerify3})));
+    Term termToVerify3(convertExpressionToSimplestTerm(createExpressionIfPossible(Terms{expressionTerm})));
+    Term termToVerify4(convertExpressionToSimplestTerm(createExpressionIfPossible(Terms{expressionInExpressionTerm})));
+    Term termToVerify5(convertExpressionToSimplestTerm(createExpressionIfPossible(Terms{expressionInExpressionInExpressionTerm})));
 
     ASSERT_EQ(TermType::Empty, termToVerify1.getTermType());
-    ASSERT_EQ(TermType::Constant, termToVerify2.getTermType());
-    EXPECT_DOUBLE_EQ(88, termToVerify2.getConstantConstReference().getNumberConstReference().getDouble());
+    ASSERT_EQ(TermType::Constant, termToVerify2.getTermType());    EXPECT_DOUBLE_EQ(88, termToVerify2.getConstantConstReference().getNumberConstReference().getDouble());
     ASSERT_EQ(TermType::Constant, termToVerify3.getTermType());
     EXPECT_DOUBLE_EQ(88, termToVerify3.getConstantConstReference().getNumberConstReference().getDouble());
     ASSERT_EQ(TermType::Constant, termToVerify4.getTermType());
     EXPECT_DOUBLE_EQ(88, termToVerify4.getConstantConstReference().getNumberConstReference().getDouble());
+    ASSERT_EQ(TermType::Constant, termToVerify5.getTermType());
+    EXPECT_DOUBLE_EQ(88, termToVerify5.getConstantConstReference().getNumberConstReference().getDouble());
 }
 
-TEST(UtilitiesTest, ConvertPolynomialToSimplestTermWorks)
-{
+TEST(UtilitiesTest, ConvertPolynomialToSimplestTermWorks){
     Term termToVerify1(convertPolynomialToSimplestTerm(Polynomial{}));
     Term termToVerify2(convertPolynomialToSimplestTerm(Polynomial{Monomial(6, {})}));
     Term termToVerify3(convertPolynomialToSimplestTerm(Polynomial{Monomial(6, {{"x", 1}}), Monomial(-6, {{"x", 1}})}));
@@ -253,6 +256,24 @@ TEST(UtilitiesTest, GetSharedPointerFromTermReferenceWorks)
     EXPECT_EQ(Term(1459), termToVerify);
     EXPECT_EQ(1, sharedPointer.use_count());
 }
+
+TEST(UtilitiesTest, GetBaseTermConstReferenceWorks)
+{
+    Term term(7896);
+    BaseTerm const& baseTerm(getBaseTermConstReferenceFromTerm(term));
+
+    EXPECT_EQ("7896", baseTerm.getDisplayableString());
+}
+
+TEST(UtilitiesTest, GetTermConstReferenceFromBaseTermWorks)
+{
+    Term term(7896);
+    Term const& termToVerify(getTermConstReferenceFromBaseTerm(dynamic_cast<BaseTerm const&>(term)));
+
+    EXPECT_EQ("7896", termToVerify.getDisplayableString());
+}
+
+
 
 }
 

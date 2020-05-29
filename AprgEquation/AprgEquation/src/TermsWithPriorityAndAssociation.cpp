@@ -5,10 +5,12 @@
 
 #include <algorithm>
 
+
+#include <Debug/AlbaDebug.hpp>
+
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace equation
 {
@@ -68,10 +70,10 @@ bool TermsWithPriorityAndAssociation::operator==(TermsWithPriorityAndAssociation
     TermsWithDetails const& terms1(m_termsWithDetails);
     TermsWithDetails const& terms2(second.m_termsWithDetails);
     bool result(false);
+    ALBA_PRINT2(terms1.size(), terms2.size());
     if(terms1.size() == terms2.size())
     {
-        using TermsWithDetailsIterator=TermsWithDetails::const_iterator;
-        using MismatchResultType=pair<TermsWithDetailsIterator, TermsWithDetailsIterator>;
+        using TermsWithDetailsIterator=TermsWithDetails::const_iterator;        using MismatchResultType=pair<TermsWithDetailsIterator, TermsWithDetailsIterator>;
         MismatchResultType mismatchResult = mismatch(terms1.cbegin(), terms1.end(), terms2.cbegin());
         result = mismatchResult.first == terms1.cend();
     }
@@ -113,7 +115,20 @@ void TermsWithPriorityAndAssociation::putTermWithNegativeAssociation(BaseTermSha
     m_termsWithDetails.emplace_back(createNewTermAndReturnSharedPointer(baseTermSharedPointer), AssociationType::Negative);
 }
 
-
+void TermsWithPriorityAndAssociation::reverseTheAssociationOfTheTerms()
+{
+    for(TermWithDetails & termWithDetails : m_termsWithDetails)
+    {
+        if(termWithDetails.hasPositiveAssociation())
+        {
+            termWithDetails.association = AssociationType::Negative;
+        }
+        else if(termWithDetails.hasNegativeAssociation())
+        {
+            termWithDetails.association = AssociationType::Positive;
+        }
+    }
+}
 
 }
 

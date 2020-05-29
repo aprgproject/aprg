@@ -1,9 +1,7 @@
 #include <Term.hpp>
-
 #include <Utilities.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
@@ -416,9 +414,8 @@ TEST(TermTest, GetDisplayableStringWorks)
     EXPECT_EQ("+", term4.getDisplayableString());
     EXPECT_EQ("-1.5|distance^-3.75||power^4.5|", term5.getDisplayableString());
     EXPECT_EQ("(3 + -1.5|distance^-3.75||power^4.5|)", term6.getDisplayableString());
-    EXPECT_EQ("5+interest", term7.getDisplayableString());
+    EXPECT_EQ("(5+interest)", term7.getDisplayableString());
 }
 
 }
-
 }

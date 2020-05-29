@@ -1,9 +1,7 @@
 #include <TermOperators.hpp>
-
 #include <Utilities.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
