@@ -10,13 +10,14 @@ using TermsWithDetails=alba::equation::TermsWithPriorityAndAssociation::TermsWit
 
 namespace alba
 {
+
 namespace equation
 {
 
 TEST(TermsWithPriorityAndAssociationTest, TermWithDetailsConstructionWorks)
 {
     TermWithDetails termWithDetails1(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Negative);
     TermWithDetails termWithDetails2(termWithDetails1);
 
@@ -29,14 +30,14 @@ TEST(TermsWithPriorityAndAssociationTest, TermWithDetailsConstructionWorks)
 TEST(TermsWithPriorityAndAssociationTest, TermWithDetailsEqualityOperatorWorks)
 {
     TermWithDetails termWithDetails1(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Negative);
     TermWithDetails termWithDetails2(termWithDetails1);
     TermWithDetails termWithDetails3(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(20)),
+                getBaseTermConstReferenceFromTerm(Term(20)),
                 AssociationType::Negative);
     TermWithDetails termWithDetails4(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Positive);
 
     EXPECT_TRUE(termWithDetails1==termWithDetails1);
@@ -48,10 +49,10 @@ TEST(TermsWithPriorityAndAssociationTest, TermWithDetailsEqualityOperatorWorks)
 TEST(TermsWithPriorityAndAssociationTest, HasPositiveAssociationWorks)
 {
     TermWithDetails termWithDetails1(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Positive);
     TermWithDetails termWithDetails2(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Negative);
 
     EXPECT_TRUE(termWithDetails1.hasPositiveAssociation());
@@ -61,10 +62,10 @@ TEST(TermsWithPriorityAndAssociationTest, HasPositiveAssociationWorks)
 TEST(TermsWithPriorityAndAssociationTest, HasNegativeAssociationWorks)
 {
     TermWithDetails termWithDetails1(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Positive);
     TermWithDetails termWithDetails2(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Negative);
 
     EXPECT_FALSE(termWithDetails1.hasNegativeAssociation());
@@ -74,10 +75,10 @@ TEST(TermsWithPriorityAndAssociationTest, HasNegativeAssociationWorks)
 TEST(TermsWithPriorityAndAssociationTest, GetAssociationPriorityWorks)
 {
     TermWithDetails termWithDetails1(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Positive);
     TermWithDetails termWithDetails2(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Negative);
 
     EXPECT_EQ(1u, termWithDetails1.getAssociationPriority());
@@ -87,10 +88,10 @@ TEST(TermsWithPriorityAndAssociationTest, GetAssociationPriorityWorks)
 TEST(TermsWithPriorityAndAssociationTest, TermsWithPriorityAndAssociationEqualityOperatorWorks)
 {
     TermWithDetails termWithDetails1(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Negative);
     TermWithDetails termWithDetails2(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(20)),
+                getBaseTermConstReferenceFromTerm(Term(20)),
                 AssociationType::Positive);
     TermsWithPriorityAndAssociation terms1;
     TermsWithPriorityAndAssociation terms2;
@@ -111,7 +112,7 @@ TEST(TermsWithPriorityAndAssociationTest, TermsWithPriorityAndAssociationEqualit
 TEST(TermsWithPriorityAndAssociationTest, GetSizeWorks)
 {
     TermWithDetails termWithDetails(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Negative);
     TermsWithPriorityAndAssociation terms1;
     TermsWithPriorityAndAssociation terms2;
@@ -128,27 +129,27 @@ TEST(TermsWithPriorityAndAssociationTest, GetSizeWorks)
 TEST(TermsWithPriorityAndAssociationTest, GetFirstTermConstReferenceWorks)
 {
     TermWithDetails termWithDetails1(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Negative);
     TermWithDetails termWithDetails2(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(20)),
+                getBaseTermConstReferenceFromTerm(Term(20)),
                 AssociationType::Positive);
     TermsWithPriorityAndAssociation terms1;
     TermsWithPriorityAndAssociation terms2;
     terms1.putTermWithDetails(termWithDetails1);
     terms2.putTermWithDetails(termWithDetails2);
 
-    EXPECT_EQ(Term(10), getTermConstReferenceFromSharedPointer(terms1.getFirstTermConstReference()));
-    EXPECT_EQ(Term(20), getTermConstReferenceFromSharedPointer(terms2.getFirstTermConstReference()));
+    EXPECT_EQ(Term(10), getTermConstReferenceFromBaseTerm(terms1.getFirstTermConstReference()));
+    EXPECT_EQ(Term(20), getTermConstReferenceFromBaseTerm(terms2.getFirstTermConstReference()));
 }
 
 TEST(TermsWithPriorityAndAssociationTest, GetTermsWithDetailsWorks)
 {
     TermWithDetails termWithDetails1(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Negative);
     TermWithDetails termWithDetails2(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(20)),
+                getBaseTermConstReferenceFromTerm(Term(20)),
                 AssociationType::Positive);
     TermsWithPriorityAndAssociation terms;
     terms.putTermWithDetails(termWithDetails1);
@@ -157,16 +158,17 @@ TEST(TermsWithPriorityAndAssociationTest, GetTermsWithDetailsWorks)
     TermsWithDetails termsToVerify(terms.getTermsWithDetails());
 
     ASSERT_EQ(2u, termsToVerify.size());
-    EXPECT_TRUE(termWithDetails1==termsToVerify.at(0));    EXPECT_TRUE(termWithDetails2==termsToVerify.at(1));
+    EXPECT_TRUE(termWithDetails1==termsToVerify.at(0));
+    EXPECT_TRUE(termWithDetails2==termsToVerify.at(1));
 }
 
 TEST(TermsWithPriorityAndAssociationTest, ClearWorks)
 {
     TermWithDetails termWithDetails1(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Negative);
     TermWithDetails termWithDetails2(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(20)),
+                getBaseTermConstReferenceFromTerm(Term(20)),
                 AssociationType::Positive);
     TermsWithPriorityAndAssociation terms;
     terms.putTermWithDetails(termWithDetails1);
@@ -177,10 +179,11 @@ TEST(TermsWithPriorityAndAssociationTest, ClearWorks)
     TermsWithDetails termsToVerify(terms.getTermsWithDetails());
     EXPECT_TRUE(termsToVerify.empty());
 }
+
 TEST(TermsWithPriorityAndAssociationTest, PutTermWithDetailsWorks)
 {
     TermWithDetails termWithDetails(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Negative);
     TermsWithPriorityAndAssociation terms;
 
@@ -189,24 +192,26 @@ TEST(TermsWithPriorityAndAssociationTest, PutTermWithDetailsWorks)
     TermsWithDetails termsToVerify(terms.getTermsWithDetails());
     ASSERT_EQ(1u, termsToVerify.size());
     EXPECT_EQ(Term(10), getTermConstReferenceFromSharedPointer(termsToVerify.at(0).baseTermSharedPointer));
-    EXPECT_EQ(AssociationType::Negative, termsToVerify.at(0).association);}
+    EXPECT_EQ(AssociationType::Negative, termsToVerify.at(0).association);
+}
 
 TEST(TermsWithPriorityAndAssociationTest, PutTermWithPositiveAssociationWorks)
 {
     TermsWithPriorityAndAssociation terms;
 
-    terms.putTermWithPositiveAssociation(copyAndCreateNewTermAndReturnSharedPointer(Term(10)));
+    terms.putTermWithPositiveAssociation(getBaseTermConstReferenceFromTerm(Term(10)));
 
     TermsWithDetails termsToVerify(terms.getTermsWithDetails());
     ASSERT_EQ(1u, termsToVerify.size());
     EXPECT_EQ(Term(10), getTermConstReferenceFromSharedPointer(termsToVerify.at(0).baseTermSharedPointer));
-    EXPECT_EQ(AssociationType::Positive, termsToVerify.at(0).association);}
+    EXPECT_EQ(AssociationType::Positive, termsToVerify.at(0).association);
+}
 
 TEST(TermsWithPriorityAndAssociationTest, PutTermWithNegativeAssociationWorks)
 {
     TermsWithPriorityAndAssociation terms;
 
-    terms.putTermWithNegativeAssociation(copyAndCreateNewTermAndReturnSharedPointer(Term(10)));
+    terms.putTermWithNegativeAssociation(getBaseTermConstReferenceFromTerm(Term(10)));
 
     TermsWithDetails termsToVerify(terms.getTermsWithDetails());
     ASSERT_EQ(1u, termsToVerify.size());
@@ -217,7 +222,7 @@ TEST(TermsWithPriorityAndAssociationTest, PutTermWithNegativeAssociationWorks)
 TEST(TermsWithPriorityAndAssociationTest, ReverseTheAssociationOfTheTermsWorks)
 {
     TermWithDetails termWithDetails(
-                copyAndCreateNewTermAndReturnSharedPointer(Term(10)),
+                getBaseTermConstReferenceFromTerm(Term(10)),
                 AssociationType::Positive);
     TermsWithPriorityAndAssociation terms;
     terms.putTermWithDetails(termWithDetails);
@@ -236,3 +241,4 @@ TEST(TermsWithPriorityAndAssociationTest, ReverseTheAssociationOfTheTermsWorks)
 }
 
 }
+

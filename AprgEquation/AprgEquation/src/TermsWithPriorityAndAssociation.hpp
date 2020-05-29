@@ -21,7 +21,7 @@ public:
     };
     struct TermWithDetails
     {
-        TermWithDetails(BaseTermSharedPointer const& baseTermSharedPointerParameter, AssociationType const associationParameter);
+        TermWithDetails(BaseTerm const& baseTerm, AssociationType const associationParameter);
         TermWithDetails(TermWithDetails const& termWithDetails);
         bool operator==(TermWithDetails const& second) const;
         bool hasPositiveAssociation() const;
@@ -39,17 +39,18 @@ public:
     bool operator==(TermsWithPriorityAndAssociation const& second) const;
 
     unsigned int getSize() const;
-    BaseTermSharedPointer const& getFirstTermConstReference() const;
+    BaseTerm const& getFirstTermConstReference() const;
     TermsWithDetails const& getTermsWithDetails() const;
 
     void clear();
     void putTermWithDetails(TermWithDetails const& termWithDetails);
-    void putTermWithPositiveAssociation(BaseTermSharedPointer const& baseTermSharedPointer);
-    void putTermWithNegativeAssociation(BaseTermSharedPointer const& baseTermSharedPointer);
+    void putTermWithPositiveAssociation(BaseTerm const& baseTerm);
+    void putTermWithNegativeAssociation(BaseTerm const& baseTerm);
     void reverseTheAssociationOfTheTerms();
 
 private:
-    TermsWithDetails m_termsWithDetails;};
+    TermsWithDetails m_termsWithDetails;
+};
 
 }
 

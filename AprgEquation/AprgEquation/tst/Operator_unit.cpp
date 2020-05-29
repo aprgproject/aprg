@@ -149,7 +149,8 @@ TEST(OperatorTest, GetOperatorLevelAsExpected)
 
 TEST(OperatorTest, GetOperatorStringValueAsExpected)
 {
-    Operator nullOperator;    Operator addOperator("+");
+    Operator nullOperator;
+    Operator addOperator("+");
     Operator subtractOperator("-");
     Operator multiplyOperator("*");
     Operator divideOperator("/");

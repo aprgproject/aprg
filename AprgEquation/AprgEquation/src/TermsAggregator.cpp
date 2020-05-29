@@ -8,7 +8,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace equation
 {
@@ -42,7 +43,8 @@ void TermsAggregator::buildExpressionFromTerms()
                 //ALBA_PRINT3("daan2", continueToSimplify, nextOperatorIndex);
             }
         }
-    }}
+    }
+}
 
 void TermsAggregator::simplifyTerms()
 {
@@ -80,7 +82,8 @@ AlbaOptional<unsigned int> TermsAggregator::getNextOperatorIndexToPerform() cons
         pair<unsigned int, unsigned int> operatorLevelToIndexPair(*operatorLevelToIndexMap.begin());
         operatorIndexOptional.setValue(operatorLevelToIndexPair.second);
     }
-    return operatorIndexOptional;}
+    return operatorIndexOptional;
+}
 
 bool TermsAggregator::buildExpressionWithBinaryOperationAndReturnIfBuilt(unsigned int const index)
 {
@@ -96,23 +99,23 @@ bool TermsAggregator::buildExpressionWithBinaryOperationAndReturnIfBuilt(unsigne
             Operator const& operatorTerm(term2.getOperatorConstReference());
             if(operatorTerm.isAddition())
             {
-                newExpression.addTerm(copyAndCreateNewTermAndReturnSharedPointer(term3));
+                newExpression.addTerm(getBaseTermConstReferenceFromTerm(term3));
             }
             else if(operatorTerm.isSubtraction())
             {
-                newExpression.subtractTerm(copyAndCreateNewTermAndReturnSharedPointer(term3));
+                newExpression.subtractTerm(getBaseTermConstReferenceFromTerm(term3));
             }
             else if(operatorTerm.isMultiplication())
             {
-                newExpression.multiplyTerm(copyAndCreateNewTermAndReturnSharedPointer(term3));
+                newExpression.multiplyTerm(getBaseTermConstReferenceFromTerm(term3));
             }
             else if(operatorTerm.isDivision())
             {
-                newExpression.divideTerm(copyAndCreateNewTermAndReturnSharedPointer(term3));
+                newExpression.divideTerm(getBaseTermConstReferenceFromTerm(term3));
             }
             else if(operatorTerm.isRaiseToPower())
             {
-                newExpression.raiseToPowerTerm(copyAndCreateNewTermAndReturnSharedPointer(term3));
+                newExpression.raiseToPowerTerm(getBaseTermConstReferenceFromTerm(term3));
             }
             Term newTerm(newExpression);
             eraseTermsInclusive(index-1, index+1);
@@ -137,11 +140,11 @@ bool TermsAggregator::buildExpressionWithUnaryOperationAndReturnIfBuilt(unsigned
             Operator const& operatorTerm(term1.getOperatorConstReference());
             if(operatorTerm.isAddition())
             {
-                newExpression.addTerm(copyAndCreateNewTermAndReturnSharedPointer(term2));
+                newExpression.addTerm(getBaseTermConstReferenceFromTerm(term2));
             }
             else if(operatorTerm.isSubtraction())
             {
-                newExpression.subtractTerm(copyAndCreateNewTermAndReturnSharedPointer(term2));
+                newExpression.subtractTerm(getBaseTermConstReferenceFromTerm(term2));
             }
             Term newTerm(newExpression);
             eraseTermsInclusive(index, index+1);

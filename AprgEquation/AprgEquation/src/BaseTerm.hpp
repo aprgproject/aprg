@@ -4,6 +4,7 @@
 
 namespace alba
 {
+
 namespace equation
 {
 
@@ -18,6 +19,7 @@ public:
 private:
 
 };
+
 }
 
 }
