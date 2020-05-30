@@ -163,12 +163,13 @@ TEST(TermTest, TermsAsExpressionsWorkAsExpected)
     TermsWithPriorityAndAssociation::TermsWithDetails const& termsToVerify2(expression2.getTerms().getTermsWithDetails());
     ASSERT_EQ(2u, termsToVerify2.size());
     EXPECT_EQ(TermsWithPriorityAndAssociation::AssociationType::Positive, termsToVerify2.at(0).association);
-    Term const& termToVerify1(getTermConstReferenceFromBaseTerm(getBaseTermConstReferenceFromSharedPointer(termsToVerify2.at(0).baseTermSharedPointer)));
+    Term const& termToVerify1(getTermConstReferenceFromSharedPointer(termsToVerify2.at(0).baseTermSharedPointer));
     EXPECT_EQ(Term(5), termToVerify1);
     EXPECT_EQ(TermsWithPriorityAndAssociation::AssociationType::Positive, termsToVerify2.at(1).association);
-    Term const& termToVerify2(getTermConstReferenceFromBaseTerm(getBaseTermConstReferenceFromSharedPointer(termsToVerify2.at(1).baseTermSharedPointer)));
+    Term const& termToVerify2(getTermConstReferenceFromSharedPointer(termsToVerify2.at(1).baseTermSharedPointer));
     EXPECT_EQ(Term("interest"), termToVerify2);
 }
+
 TEST(TermTest, EqualityOperatorWorks)
 {
     Term term1;

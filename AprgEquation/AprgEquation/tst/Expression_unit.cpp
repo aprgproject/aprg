@@ -6,7 +6,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace equation
 {
@@ -23,9 +24,10 @@ TEST(ExpressionTest, ConstructionWorks)
     TermsWithPriorityAndAssociation::TermsWithDetails const& termsToVerify2(expression2.getTerms().getTermsWithDetails());
     ASSERT_EQ(1u, termsToVerify2.size());
     EXPECT_EQ(TermsWithPriorityAndAssociation::AssociationType::Positive, termsToVerify2.at(0).association);
-    Term const& termToVerify(getTermConstReferenceFromBaseTerm(getBaseTermConstReferenceFromSharedPointer(termsToVerify2.at(0).baseTermSharedPointer)));
+    Term const& termToVerify(getTermConstReferenceFromSharedPointer(termsToVerify2.at(0).baseTermSharedPointer));
     EXPECT_EQ(Term(12), termToVerify);
 }
+
 TEST(ExpressionTest, EqualityOperatorWorks)
 {
     Expression expression1;
@@ -57,7 +59,8 @@ TEST(ExpressionTest, ContainsNoTermsWorks)
 
 TEST(ExpressionTest, ContainsOnlyOneTermWorks)
 {
-    Expression expression1;    Expression expression2(createExpressionIfPossible(Terms{Term(5)}));
+    Expression expression1;
+    Expression expression2(createExpressionIfPossible(Terms{Term(5)}));
     Expression expression3(createExpressionIfPossible(Terms{Term(6), Term("+"), Term("interest")}));
 
     EXPECT_FALSE(expression1.containsOnlyOneTerm());
@@ -102,7 +105,8 @@ TEST(ExpressionTest, GetTermsWorks)
 
     ASSERT_EQ(3u, termsWithDetailsToVerify.size());
     EXPECT_EQ(Term(695), getTermConstReferenceFromSharedPointer(termsWithDetailsToVerify.at(0).baseTermSharedPointer));
-    EXPECT_EQ(TermsWithPriorityAndAssociation::AssociationType::Positive, termsWithDetailsToVerify.at(0).association);    EXPECT_EQ(Term("interest"), getTermConstReferenceFromSharedPointer(termsWithDetailsToVerify.at(1).baseTermSharedPointer));
+    EXPECT_EQ(TermsWithPriorityAndAssociation::AssociationType::Positive, termsWithDetailsToVerify.at(0).association);
+    EXPECT_EQ(Term("interest"), getTermConstReferenceFromSharedPointer(termsWithDetailsToVerify.at(1).baseTermSharedPointer));
     EXPECT_EQ(TermsWithPriorityAndAssociation::AssociationType::Negative, termsWithDetailsToVerify.at(1).association);
     EXPECT_EQ(Term("debt"), getTermConstReferenceFromSharedPointer(termsWithDetailsToVerify.at(2).baseTermSharedPointer));
     EXPECT_EQ(TermsWithPriorityAndAssociation::AssociationType::Positive, termsWithDetailsToVerify.at(2).association);
@@ -160,7 +164,8 @@ TEST(ExpressionTest, ClearAndSetTermWorks)
 
 TEST(ExpressionTest, AddTermWorks)
 {
-    Expression expression1;    Expression expression2(createExpressionIfPossible(Terms{Term(695), Term("+"), Term("interest")}));
+    Expression expression1;
+    Expression expression2(createExpressionIfPossible(Terms{Term(695), Term("+"), Term("interest")}));
     Expression expression3(createExpressionIfPossible(Terms{Term(695), Term("*"), Term("interest")}));
     Expression expressionInMultiplication(createExpressionIfPossible(Terms{Term(695), Term("*"), Term("interest")}));
     Expression expressionToExpect1(createExpressionIfPossible(Terms{Term(42)}));

@@ -127,7 +127,8 @@ bool Term::isEmpty() const
 
 bool Term::isConstant() const
 {
-    return TermType::Constant == m_type;}
+    return TermType::Constant == m_type;
+}
 
 bool Term::isVariable() const
 {

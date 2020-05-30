@@ -25,7 +25,8 @@ public:
     bool containsNoTerms() const;
     bool containsOnlyOneTerm() const;
 
-    OperatorLevel getCommonOperatorLevel() const;    BaseTerm const& getFirstTermConstReference() const;
+    OperatorLevel getCommonOperatorLevel() const;
+    BaseTerm const& getFirstTermConstReference() const;
     TermsWithPriorityAndAssociation const& getTerms() const;
     std::string getDisplayableString() const;
 
@@ -54,13 +55,11 @@ private:
             TermsWithPriorityAndAssociation::TermsWithDetails & termsNotToCombine);
     void processTermsNotToCombine(TermsWithPriorityAndAssociation::TermsWithDetails const& termsNotToCombine);
     void combineTerms(BaseTerm & combinedTerm, TermsWithPriorityAndAssociation::TermsWithDetails const& termsToCombine);
-    void putAllTermsFromExpression(
-            TermsWithPriorityAndAssociation::TermsWithDetails & termsWithDetails,
-            Expression const& expression);
 
     OperatorLevel m_commonOperatorLevel;
     TermsWithPriorityAndAssociation m_termsWithPriorityAndAssociation;
 };
+
 }
 
 }

@@ -4,6 +4,7 @@
 #include <Utilities.hpp>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -196,11 +197,11 @@ void accumulateAndDoOperationOnTermDetails(
         OperatorLevel const operatorLevel,
         TermsWithPriorityAndAssociation::TermWithDetails const& termWithDetails)
 {
-    BaseTerm const& baseTerm(getBaseTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
-    Term const& term(getTermConstReferenceFromBaseTerm(baseTerm));
+    Term const& term(getTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
     switch(operatorLevel)
     {
-    case OperatorLevel::AdditionAndSubtraction:    {
+    case OperatorLevel::AdditionAndSubtraction:
+    {
         if(termWithDetails.hasPositiveAssociation())
         {
             partialResultTerm = performAddition(partialResultTerm, term);

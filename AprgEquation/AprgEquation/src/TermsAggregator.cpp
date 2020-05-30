@@ -5,7 +5,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace equation
 {
@@ -35,7 +36,8 @@ void TermsAggregator::buildExpressionFromTerms()
                 continueToSimplify = buildExpressionWithUnaryOperationAndReturnIfBuilt(nextOperatorIndex);
             }
         }
-    }}
+    }
+}
 
 void TermsAggregator::simplifyTerms()
 {
@@ -89,7 +91,8 @@ bool TermsAggregator::buildExpressionWithBinaryOperationAndReturnIfBuilt(unsigne
             Expression newExpression(createExpressionFromTermAndSimplifyIfNeeded(term1));
             Operator const& operatorTerm(term2.getOperatorConstReference());
             if(operatorTerm.isAddition())
-            {                newExpression.addTerm(getBaseTermConstReferenceFromTerm(term3));
+            {
+                newExpression.addTerm(getBaseTermConstReferenceFromTerm(term3));
             }
             else if(operatorTerm.isSubtraction())
             {

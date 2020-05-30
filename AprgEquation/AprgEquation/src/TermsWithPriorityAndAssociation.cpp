@@ -7,7 +7,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace equation
 {
@@ -26,10 +27,11 @@ TermsWithPriorityAndAssociation::TermWithDetails::TermWithDetails(TermWithDetail
 
 bool TermsWithPriorityAndAssociation::TermWithDetails::operator==(TermWithDetails const& second) const
 {
-    Term const& term1(getTermConstReferenceFromBaseTerm(getBaseTermConstReferenceFromSharedPointer(baseTermSharedPointer)));
-    Term const& term2(getTermConstReferenceFromBaseTerm(getBaseTermConstReferenceFromSharedPointer(second.baseTermSharedPointer)));
+    Term const& term1(getTermConstReferenceFromSharedPointer(baseTermSharedPointer));
+    Term const& term2(getTermConstReferenceFromSharedPointer(second.baseTermSharedPointer));
     return term1 == term2 && association == second.association;
 }
+
 bool TermsWithPriorityAndAssociation::TermWithDetails::hasPositiveAssociation() const
 {
     return AssociationType::Positive == association;
@@ -68,7 +70,8 @@ bool TermsWithPriorityAndAssociation::operator==(TermsWithPriorityAndAssociation
     bool result(false);
     if(terms1.size() == terms2.size())
     {
-        using TermsWithDetailsIterator=TermsWithDetails::const_iterator;        using MismatchResultType=pair<TermsWithDetailsIterator, TermsWithDetailsIterator>;
+        using TermsWithDetailsIterator=TermsWithDetails::const_iterator;
+        using MismatchResultType=pair<TermsWithDetailsIterator, TermsWithDetailsIterator>;
         MismatchResultType mismatchResult = mismatch(terms1.cbegin(), terms1.end(), terms2.cbegin());
         result = mismatchResult.first == terms1.cend();
     }

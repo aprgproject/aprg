@@ -6,6 +6,9 @@
 #include <algorithm>
 
 using namespace std;
+using AssociationType=alba::equation::TermsWithPriorityAndAssociation::AssociationType;
+using TermWithDetails=alba::equation::TermsWithPriorityAndAssociation::TermWithDetails;
+using TermsWithDetails=alba::equation::TermsWithPriorityAndAssociation::TermsWithDetails;
 
 namespace alba
 {
@@ -104,11 +107,11 @@ unsigned int getTermPriorityValue(Term const& term)
 }
 
 string getOperatingString(
-        TermsWithPriorityAndAssociation::AssociationType const association,
-        OperatorLevel const operatorLevel)
+        OperatorLevel const operatorLevel,
+        AssociationType const association)
 {
     string result;
-    if(TermsWithPriorityAndAssociation::AssociationType::Positive == association)
+    if(AssociationType::Positive == association)
     {
         switch(operatorLevel)
         {
@@ -125,7 +128,7 @@ string getOperatingString(
             break;
         }
     }
-    else if(TermsWithPriorityAndAssociation::AssociationType::Negative == association)
+    else if(AssociationType::Negative == association)
     {
         switch(operatorLevel)
         {
@@ -137,6 +140,25 @@ string getOperatingString(
             break;
         default:
             break;
+        }
+    }
+    return result;
+}
+
+string getFirstStringIfNegativeAssociation(
+        OperatorLevel const operatorLevel,
+        AssociationType const association)
+{
+    string result;
+    if(AssociationType::Negative == association)
+    {
+        if(OperatorLevel::AdditionAndSubtraction == operatorLevel)
+        {
+            result = "-";
+        }
+        else if(OperatorLevel::MultiplicationAndDivision == operatorLevel)
+        {
+            result = "1/";
         }
     }
     return result;
@@ -164,7 +186,8 @@ Expression createExpressionFromTermAndSimplifyIfNeeded(Term const& term)
     Expression result;
     if(term.isExpression())
     {
-        result=term.getExpressionConstReference();    }
+        result=term.getExpressionConstReference();
+    }
     else
     {
         result=Expression(getBaseTermConstReferenceFromTerm(term));
@@ -184,6 +207,7 @@ Expression createExpressionIfPossible(Terms const& terms)
     }
     return result;
 }
+
 Expression createSimplifiedExpressionIfPossible(Terms const& terms)
 {
     Expression result;
@@ -196,6 +220,7 @@ Expression createSimplifiedExpressionIfPossible(Terms const& terms)
     }
     return result;
 }
+
 Term convertExpressionToSimplestTerm(Expression const& expression)
 {
     Expression newExpression(expression);
@@ -209,7 +234,8 @@ Term convertExpressionToSimplestTerm(Expression const& expression)
     {
         Term const& term = dynamic_cast<Term const&>(newExpression.getFirstTermConstReference());
         newTerm = term;
-    }    return newTerm;
+    }
+    return newTerm;
 }
 
 Term convertPolynomialToSimplestTerm(Polynomial const& polynomial)
@@ -270,24 +296,29 @@ BaseTermSharedPointer copyAndCreateNewTermAndReturnSharedPointer(Term const& ter
                         new Term(term))));
 }
 
-Term & getTermReferenceFromSharedPointer(BaseTermSharedPointer & sharedPointer)
-{
-    return *dynamic_cast<Term*>(sharedPointer.get());
-}
-
-Term const& getTermConstReferenceFromSharedPointer(BaseTermSharedPointer const& sharedPointer)
-{
-    return *dynamic_cast<Term const*const>(sharedPointer.get());
-}
-
 BaseTermSharedPointer getSharedPointerFromTermReference(Term & term)
 {
     return move(BaseTermSharedPointer(dynamic_cast<BaseTerm*>(&term)));
 }
 
-BaseTerm const& getBaseTermConstReferenceFromSharedPointer(BaseTermSharedPointer const& sharedPointer)
+Term const& getTermConstReferenceFromBaseTerm(BaseTerm const& baseTerm)
 {
-    return dynamic_cast<BaseTerm const&>(*sharedPointer.get());
+    return dynamic_cast<Term const&>(baseTerm);
+}
+
+Term const& getTermConstReferenceFromSharedPointer(BaseTermSharedPointer const& sharedPointer)
+{
+    return dynamic_cast<Term const&>(*sharedPointer.get());
+}
+
+Term & getTermReferenceFromBaseTerm(BaseTerm & baseTerm)
+{
+    return dynamic_cast<Term &>(baseTerm);
+}
+
+Term & getTermReferenceFromSharedPointer(BaseTermSharedPointer & sharedPointer)
+{
+    return *dynamic_cast<Term*>(sharedPointer.get());
 }
 
 BaseTerm const& getBaseTermConstReferenceFromTerm(Term const& term)
@@ -295,18 +326,14 @@ BaseTerm const& getBaseTermConstReferenceFromTerm(Term const& term)
     return dynamic_cast<BaseTerm const&>(term);
 }
 
-Term const& getTermConstReferenceFromBaseTerm(BaseTerm const& baseTerm){
-    return dynamic_cast<Term const&>(baseTerm);
+BaseTerm const& getBaseTermConstReferenceFromSharedPointer(BaseTermSharedPointer const& sharedPointer)
+{
+    return dynamic_cast<BaseTerm const&>(*sharedPointer.get());
 }
 
 BaseTerm & getBaseTermReferenceFromTerm(Term & term)
 {
     return dynamic_cast<BaseTerm &>(term);
-}
-
-Term & getTermReferenceFromBaseTerm(BaseTerm & baseTerm)
-{
-    return dynamic_cast<Term &>(baseTerm);
 }
 
 }

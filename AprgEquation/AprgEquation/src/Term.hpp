@@ -38,7 +38,8 @@ public:
     bool isEmpty() const;
     bool isConstant() const;
     bool isVariable() const;
-    bool isOperator() const;    bool isMonomial() const;
+    bool isOperator() const;
+    bool isMonomial() const;
     bool isPolynomial() const;
     bool isExpression() const;
     bool isValueTerm() const;
