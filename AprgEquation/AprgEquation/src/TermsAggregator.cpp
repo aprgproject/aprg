@@ -91,7 +91,8 @@ bool TermsAggregator::buildExpressionWithBinaryOperationAndReturnIfBuilt(unsigne
             Expression newExpression(createOrCopyExpressionFromATerm(term1));
             Operator const& operatorTerm(term2.getOperatorConstReference());
             if(operatorTerm.isAddition())
-            {                newExpression.addTerm(getBaseTermConstReferenceFromTerm(term3));
+            {
+                newExpression.addTerm(getBaseTermConstReferenceFromTerm(term3));
             }
             else if(operatorTerm.isSubtraction())
             {

@@ -122,7 +122,8 @@ bool Term::operator==(Term const& second) const
 
 bool Term::isConstant() const
 {
-    return TermType::Constant == m_type;}
+    return TermType::Constant == m_type;
+}
 
 bool Term::isVariable() const
 {
@@ -190,6 +191,7 @@ bool Term::isTheValueZero() const
     }
     return result;
 }
+
 bool Term::isTheValueOne() const
 {
     bool result(false);
@@ -207,6 +209,7 @@ bool Term::isTheValueOne() const
     }
     return result;
 }
+
 TermType Term::getTermType() const
 {
     return m_type;

@@ -46,7 +46,8 @@ bool Polynomial::isOne() const
 
 bool Polynomial::isZero() const
 {
-    return m_monomials.empty();}
+    return m_monomials.empty();
+}
 
 bool Polynomial::isOneMonomial() const
 {

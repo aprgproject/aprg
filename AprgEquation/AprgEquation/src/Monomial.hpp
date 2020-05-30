@@ -39,6 +39,7 @@ public:
     bool isZero() const;
     bool isConstantOnly() const;
     bool isVariableOnly() const;
+
     std::string getFirstVariableName() const;
     AlbaNumber const& getConstantConstReference() const;
     VariablesToExponentsMap const& getVariablesToExponentsMapConstReference() const;

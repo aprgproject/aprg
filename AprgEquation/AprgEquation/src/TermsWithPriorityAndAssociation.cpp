@@ -85,7 +85,8 @@ bool TermsWithPriorityAndAssociation::isEmpty() const
 
 unsigned int TermsWithPriorityAndAssociation::getSize() const
 {
-    return m_termsWithDetails.size();}
+    return m_termsWithDetails.size();
+}
 
 BaseTerm const& TermsWithPriorityAndAssociation::getFirstTermConstReference() const
 {
