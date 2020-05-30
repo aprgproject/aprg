@@ -259,27 +259,31 @@ Expression createSimplifiedExpressionIfPossible(Terms const& terms)
     return result;
 }
 
-Term simplifyAndConvertExpressionToSimplestTerm(Expression const& expression)
+Term convertExpressionToSimplestTerm(Expression const& expression)
 {
-    Expression newExpression(expression);
-    newExpression.simplify();
-    Term newTerm(newExpression);
-    if(newExpression.isEmpty())
+    Term newTerm(expression);
+    if(expression.isEmpty())
     {
         newTerm = Term();
     }
-    else if(newExpression.containsOnlyOneTerm())
+    else if(expression.containsOnlyOneTerm())
     {
-        Term const& term = dynamic_cast<Term const&>(newExpression.getFirstTermConstReference());
+        Term const& term = dynamic_cast<Term const&>(expression.getFirstTermConstReference());
         newTerm = term;
     }
     return newTerm;
 }
 
+Term simplifyAndConvertExpressionToSimplestTerm(Expression const& expression)
+{
+    Expression newExpression(expression);
+    newExpression.simplify();
+    return convertExpressionToSimplestTerm(newExpression);
+}
+
 Term simplifyAndConvertPolynomialToSimplestTerm(Polynomial const& polynomial)
 {
-    Polynomial newPolynomial(polynomial);
-    newPolynomial.simplify();
+    Polynomial newPolynomial(polynomial);    newPolynomial.simplify();
     Term newTerm;
     if(newPolynomial.isZero())
     {
