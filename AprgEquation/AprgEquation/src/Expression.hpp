@@ -84,12 +84,12 @@ private:
     void putTermForExpressionAndNonExpressions(
             BaseTerm const& baseTerm,
             TermsWithPriorityAndAssociation::AssociationType const overallAssociation);
-    void putTerm(BaseTerm const& baseTerm,
-                 TermsWithPriorityAndAssociation::AssociationType const overallAssociation);
+    void putTerm(
+            BaseTerm const& baseTerm,
+            TermsWithPriorityAndAssociation::AssociationType const overallAssociation);
     void putTermsWithAssociation(
             TermsWithPriorityAndAssociation const& termsWithAssociation,
             TermsWithPriorityAndAssociation::AssociationType const overallAssociation);
-
     bool mergeForAdditionAndSubtraction(
             TermsWithPriorityAndAssociation::TermWithDetails & termExpressionWithDetails1,
             TermsWithPriorityAndAssociation::TermWithDetails & termExpressionWithDetails2);
