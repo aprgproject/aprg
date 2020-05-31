@@ -29,10 +29,10 @@ public:
         bool hasPositiveAssociation() const;
         bool hasNegativeAssociation() const;
         unsigned int getAssociationPriority() const;
+        void clear();
         BaseTermSharedPointer baseTermSharedPointer;
         AssociationType association;
-    };
-    using TermsWithDetails=std::vector<TermWithDetails>;
+    };    using TermsWithDetails=std::vector<TermWithDetails>;
     using TermsWithDetailsFunction = std::function<void(TermWithDetails const&)>;
 
     TermsWithPriorityAndAssociation();

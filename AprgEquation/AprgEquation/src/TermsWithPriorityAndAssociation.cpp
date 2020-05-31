@@ -66,9 +66,14 @@ unsigned int TermsWithPriorityAndAssociation::TermWithDetails::getAssociationPri
     return equation::getAssociationPriority(association);
 }
 
+void TermsWithPriorityAndAssociation::TermWithDetails::clear()
+{
+    baseTermSharedPointer.reset();
+    association=AssociationType::Positive;
+}
+
 TermsWithPriorityAndAssociation::TermsWithPriorityAndAssociation()
 {}
-
 TermsWithPriorityAndAssociation::~TermsWithPriorityAndAssociation()
 {}
 
