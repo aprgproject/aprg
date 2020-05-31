@@ -67,12 +67,12 @@ TEST(UtilitiesTest, GetOperatorLevelValueWorks)
 
 TEST(UtilitiesTest, GetTermPriorityValueWorks)
 {
-    EXPECT_EQ(6u, getTermPriorityValue(Term(1)));
-    EXPECT_EQ(5u, getTermPriorityValue(Term(Variable("length"))));
-    EXPECT_EQ(4u, getTermPriorityValue(Term(Operator("+"))));
-    EXPECT_EQ(3u, getTermPriorityValue(Term(Monomial(1, {}))));
-    EXPECT_EQ(2u, getTermPriorityValue(Term(Polynomial{})));
-    EXPECT_EQ(1u, getTermPriorityValue(Term(Expression{})));
+    EXPECT_EQ(1u, getTermTypePriorityValue(TermType::Operator));
+    EXPECT_EQ(2u, getTermTypePriorityValue(TermType::Constant));
+    EXPECT_EQ(3u, getTermTypePriorityValue(TermType::Variable));
+    EXPECT_EQ(4u, getTermTypePriorityValue(TermType::Monomial));
+    EXPECT_EQ(5u, getTermTypePriorityValue(TermType::Polynomial));
+    EXPECT_EQ(6u, getTermTypePriorityValue(TermType::Expression));
 }
 
 TEST(UtilitiesTest, CreateMonomialConstantWorks)

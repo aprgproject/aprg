@@ -24,6 +24,8 @@ public:
         TermWithDetails(BaseTerm const& baseTerm, AssociationType const associationParameter);
         TermWithDetails(TermWithDetails const& termWithDetails);
         bool operator==(TermWithDetails const& second) const;
+        bool operator!=(TermWithDetails const& second) const;
+        bool operator<(TermWithDetails const& second) const;
         bool hasPositiveAssociation() const;
         bool hasNegativeAssociation() const;
         unsigned int getAssociationPriority() const;
@@ -37,6 +39,8 @@ public:
     ~TermsWithPriorityAndAssociation();
 
     bool operator==(TermsWithPriorityAndAssociation const& second) const;
+    bool operator!=(TermsWithPriorityAndAssociation const& second) const;
+    bool operator<(TermsWithPriorityAndAssociation const& second) const;
     bool isEmpty() const;
 
     unsigned int getSize() const;

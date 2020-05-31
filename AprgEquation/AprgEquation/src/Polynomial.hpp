@@ -19,6 +19,8 @@ public:
     Polynomial(std::initializer_list<Monomial> const& monomials);
 
     bool operator==(Polynomial const& second) const;
+    bool operator!=(Polynomial const& second) const;
+    bool operator<(Polynomial const& second) const;
     bool isOne() const;
     bool isZero() const;
     bool isOneMonomial() const;

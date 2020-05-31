@@ -18,8 +18,10 @@ bool canBeAddedOrSubtracted(Monomial const& monomial, Variable const& variable);
 bool willHaveNoEffectOnAdditionOrSubtraction(Term const& term);
 bool willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(Term const& term);
 
+unsigned int getOperatorPriority(std::string const& operatorString);
+unsigned int getAssociationPriority(TermsWithPriorityAndAssociation::AssociationType const association);
 unsigned int getOperatorLevelInversePriority(OperatorLevel const operatorLevel);
-unsigned int getTermPriorityValue(Term const& term);
+unsigned int getTermTypePriorityValue(TermType const termType);
 
 std::string getOperatingString(
         OperatorLevel const operatorLevel,
@@ -42,6 +44,7 @@ Term convertExpressionToSimplestTerm(Expression const& expression);
 Term simplifyAndConvertExpressionToSimplestTerm(Expression const& expression);
 Term simplifyAndConvertPolynomialToSimplestTerm(Polynomial const& polynomial);
 Term simplifyAndConvertMonomialToSimplestTerm(Monomial const& monomial);
+
 BaseTermSharedPointer createNewTermAndReturnSharedPointer(BaseTermSharedPointer const& sharedPointer);
 BaseTermSharedPointer copyAndCreateNewTermAndReturnSharedPointer(Term const& term);
 BaseTermSharedPointer getSharedPointerFromTermReference(Term & term);

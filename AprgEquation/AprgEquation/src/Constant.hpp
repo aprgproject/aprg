@@ -22,6 +22,8 @@ public:
     Constant(double const doubleValue);
 
     bool operator==(Constant const& second) const;
+    bool operator!=(Constant const& second) const;
+    bool operator<(Constant const& second) const;
 
     AlbaNumber const& getNumberConstReference() const;
     std::string getDisplayableString() const;

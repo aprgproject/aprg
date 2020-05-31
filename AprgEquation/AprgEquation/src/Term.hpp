@@ -35,6 +35,8 @@ public:
 
     Term & operator=(Term const& term);
     bool operator==(Term const& second) const;
+    bool operator!=(Term const& second) const;
+    bool operator<(Term const& second) const;
     bool isEmpty() const;
     bool isConstant() const;
     bool isVariable() const;

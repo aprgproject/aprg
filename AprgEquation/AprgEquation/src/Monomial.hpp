@@ -35,6 +35,8 @@ public:
             VariablesToExponentsMap const& variablesMap2);
 
     bool operator==(Monomial const& second) const;
+    bool operator!=(Monomial const& second) const;
+    bool operator<(Monomial const& second) const;
     bool isOne() const;
     bool isZero() const;
     bool isConstantOnly() const;

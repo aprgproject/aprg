@@ -22,6 +22,8 @@ public:
     ~Expression();
 
     bool operator==(Expression const& second) const;
+    bool operator!=(Expression const& second) const;
+    bool operator<(Expression const& second) const;
     bool isEmpty() const;
     bool containsOnlyOneTerm() const;
 
@@ -29,9 +31,10 @@ public:
     BaseTerm const& getFirstTermConstReference() const;
     TermsWithPriorityAndAssociation const& getTerms() const;
     std::string getDisplayableString() const;
+    std::string getDebugString() const;
 
     void simplify();
-    void clearAndSetTerm(BaseTerm const& baseTerm);
+    void saveTerm(BaseTerm const& baseTerm);
     void addTerm(BaseTerm const& baseTerm);
     void subtractTerm(BaseTerm const& baseTerm);
     void multiplyTerm(BaseTerm const& baseTerm);
@@ -39,16 +42,9 @@ public:
     void raiseToPowerTerm(BaseTerm const& baseTerm);
     void setCommonOperatorLevel(OperatorLevel const operatorLevel);
     void reverseTheAssociationOfTheTerms();
+    void clearAndPutTermInTermsWithAssociation(BaseTerm const& baseTerm);
 
 private:
-    void putTermForExpressionAndNonExpressions(
-            BaseTerm const& baseTerm,
-            TermsWithPriorityAndAssociation::AssociationType const overallAssociation);
-    void putTerm(BaseTerm const& baseTerm,
-                 TermsWithPriorityAndAssociation::AssociationType const overallAssociation);
-    void putTermsWithAssociation(
-            TermsWithPriorityAndAssociation const& termsWithAssociation,
-            TermsWithPriorityAndAssociation::AssociationType const overallAssociation);
     void simplifyAndCopyTerms(
             TermsWithPriorityAndAssociation::TermsWithDetails & termsToUpdate,
             TermsWithPriorityAndAssociation::TermsWithDetails const& termsToSegregate);
@@ -64,8 +60,9 @@ private:
     void processAndSaveTermsForAdditionAndSubtraction(
             BaseTerm & combinedBaseTerm,
             TermsWithPriorityAndAssociation::TermsWithDetails & termsToCombine);
-    void sortTermsForAdditionAndSubtraction(
-            TermsWithPriorityAndAssociation::TermsWithDetails & termsToCombine);
+    TermsWithPriorityAndAssociation::TermsWithDetails::iterator
+    partitionNonExpressionsAndExpressions(
+            TermsWithPriorityAndAssociation::TermsWithDetails & termsToPartition);
     void accumulateTermsForAdditionAndSubtraction(
             BaseTerm & combinedBaseTerm,
             TermsWithPriorityAndAssociation::TermsWithDetails & termsToCombine);
@@ -75,10 +72,24 @@ private:
     void accumulateTermsForRaiseToPower(
             BaseTerm & combinedBaseTerm,
             TermsWithPriorityAndAssociation::TermsWithDetails & termsToCombine);
-    void saveCombinedTerm(BaseTerm const& combinedBaseTerm);
-    void saveTerms(TermsWithPriorityAndAssociation::TermsWithDetails const& termsToSave);
+    void putCombinedTerm(BaseTerm const& combinedBaseTerm);
+    void putTermsWithDetails(TermsWithPriorityAndAssociation::TermsWithDetails const& termsToSave);
+    void addTermForNonEmptyTerms(BaseTerm const& baseTerm);
+    void subtractTermForNonEmptyTerms(BaseTerm const& baseTerm);
+    void multiplyTermForNonEmptyTerms(BaseTerm const& baseTerm);
+    void divideTermForNonEmptyTerms(BaseTerm const& baseTerm);
+    void raiseToPowerTermForNonEmptyTerms(BaseTerm const& baseTerm);
+    void putTermForExpressionAndNonExpressions(
+            BaseTerm const& baseTerm,
+            TermsWithPriorityAndAssociation::AssociationType const overallAssociation);
+    void putTerm(BaseTerm const& baseTerm,
+                 TermsWithPriorityAndAssociation::AssociationType const overallAssociation);
+    void putTermsWithAssociation(
+            TermsWithPriorityAndAssociation const& termsWithAssociation,
+            TermsWithPriorityAndAssociation::AssociationType const overallAssociation);
 
-    OperatorLevel m_commonOperatorLevel;    TermsWithPriorityAndAssociation m_termsWithPriorityAndAssociation;
+    OperatorLevel m_commonOperatorLevel;
+    TermsWithPriorityAndAssociation m_termsWithPriorityAndAssociation;
 };
 
 }

@@ -80,7 +80,8 @@ Term performOperation(
 }\
     return newTerm;
 
-#define TERM_BINARY_OPERATION_MACRO(operation) \    Term newTerm;\
+#define TERM_BINARY_OPERATION_MACRO(operation) \
+    Term newTerm;\
     if(term1.isConstant())\
 {\
     if(term2.isConstant())\
@@ -106,7 +107,8 @@ Term performOperation(
 }\
     else if(term1.isVariable())\
 {\
-    if(term2.isConstant())\{\
+    if(term2.isConstant())\
+{\
     newTerm = term1.getVariableConstReference() operation term2.getConstantConstReference();\
 }\
     else if(term2.isVariable())\
@@ -128,7 +130,8 @@ Term performOperation(
 }\
     else if(term1.isMonomial())\
 {\
-    if(term2.isConstant())\{\
+    if(term2.isConstant())\
+{\
     newTerm = term1.getMonomialConstReference() operation term2.getConstantConstReference();\
 }\
     else if(term2.isVariable())\
@@ -150,7 +153,8 @@ Term performOperation(
 }\
     else if(term1.isPolynomial())\
 {\
-    if(term2.isConstant())\{\
+    if(term2.isConstant())\
+{\
     newTerm = term1.getPolynomialConstReference() operation term2.getConstantConstReference();\
 }\
     else if(term2.isVariable())\
@@ -194,6 +198,7 @@ Term performOperation(
 }\
 }\
     return newTerm;
+
 
 Term performUnaryPlus(Term const& term)
 {

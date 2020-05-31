@@ -22,6 +22,16 @@ bool Operator::operator==(Operator const& second) const
     return m_operatingString == second.m_operatingString;
 }
 
+bool Operator::operator!=(Operator const& second) const
+{
+    return m_operatingString != second.m_operatingString;
+}
+
+bool Operator::operator<(Operator const& second) const
+{
+    return getOperatorPriority(m_operatingString) < getOperatorPriority(second.m_operatingString);
+}
+
 bool Operator::isAddition() const
 {
     return "+" == m_operatingString;
