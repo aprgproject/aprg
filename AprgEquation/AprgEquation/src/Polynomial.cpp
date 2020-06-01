@@ -6,6 +6,7 @@
 #include <sstream>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -129,8 +130,9 @@ void Polynomial::simplify()
 {
     Monomials oldMonomials(m_monomials);
     m_monomials.clear();
-    for(Monomial const& monomial : oldMonomials)
+    for(Monomial & monomial : oldMonomials)
     {
+        monomial.simplify();
         if(!monomial.isZero())
         {
             addMonomial(monomial);
@@ -145,7 +147,8 @@ void Polynomial::sort()
 
 void Polynomial::addMonomial(Monomial const& monomial)
 {
-    bool isFoundInPolynomial(false);    for(Monomial & monomialInternal : m_monomials)
+    bool isFoundInPolynomial(false);
+    for(Monomial & monomialInternal : m_monomials)
     {
         if(canBeMergedByAdditionOrSubtraction(monomialInternal, monomial))
         {
@@ -172,6 +175,14 @@ void Polynomial::multiplyNumber(AlbaNumber const& number)
     for(Monomial & monomial : m_monomials)
     {
         monomial.setConstant(monomial.getConstantConstReference()*number);
+    }
+}
+
+void Polynomial::divideNumber(AlbaNumber const& number)
+{
+    for(Monomial & monomial : m_monomials)
+    {
+        monomial.setConstant(monomial.getConstantConstReference()/number);
     }
 }
 

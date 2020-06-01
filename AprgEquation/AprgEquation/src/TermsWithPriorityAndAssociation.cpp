@@ -7,7 +7,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace equation
 {
@@ -162,7 +163,8 @@ void TermsWithPriorityAndAssociation::sort()
 
 void TermsWithPriorityAndAssociation::putTermWithDetails(TermWithDetails const& termWithDetails)
 {
-    m_termsWithDetails.emplace_back(getBaseTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer), termWithDetails.association);}
+    m_termsWithDetails.emplace_back(getBaseTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer), termWithDetails.association);
+}
 
 void TermsWithPriorityAndAssociation::putTermWithPositiveAssociation(BaseTerm const& baseTerm)
 {

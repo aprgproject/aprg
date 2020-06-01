@@ -377,7 +377,8 @@ void Term::sort()
 
 void Term::resetBaseDataTermPointerBasedFromTerm(Term const& term)
 {
-    switch(term.getTermType())    {
+    switch(term.getTermType())
+    {
     case TermType::Empty:
         break;
     case TermType::Constant:

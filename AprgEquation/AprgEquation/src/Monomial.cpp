@@ -88,6 +88,7 @@ bool Monomial::operator<(Monomial const& second) const
     }
     return result;
 }
+
 bool Monomial::isOne() const
 {
     return m_constant == 1 && isConstantOnly();
@@ -142,7 +143,8 @@ AlbaNumber Monomial::getDegree() const
 
 string Monomial::getDisplayableString() const
 {
-    stringstream result;    result << m_constant.getDisplayableString();
+    stringstream result;
+    result << m_constant.getDisplayableString();
     for(VariableExponentPair const& variableExponentsPair : m_variablesToExponentsMap)
     {
         result << "|"

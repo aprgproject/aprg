@@ -42,7 +42,8 @@ public:
     void sort();
 
     void addTerm(BaseTerm const& baseTerm);
-    void subtractTerm(BaseTerm const& baseTerm);    void multiplyTerm(BaseTerm const& baseTerm);
+    void subtractTerm(BaseTerm const& baseTerm);
+    void multiplyTerm(BaseTerm const& baseTerm);
     void divideTerm(BaseTerm const& baseTerm);
     void raiseToPowerTerm(BaseTerm const& baseTerm);
 
@@ -56,7 +57,8 @@ private:
     void simplifyFurtherIfNeeded(Expression const& beforeSimplify, Expression const& afterSimplify);
     void simplifyAndCopyTerms(
             TermsWithPriorityAndAssociation::TermsWithDetails & termsToUpdate,
-            TermsWithPriorityAndAssociation::TermsWithDetails const& termsToSegregate);    void simplifyAndCopyTermsFromAnExpression(
+            TermsWithPriorityAndAssociation::TermsWithDetails const& termsToSegregate);
+    void simplifyAndCopyTermsFromAnExpression(
             TermsWithPriorityAndAssociation::TermsWithDetails & termsToUpdate,
             Expression const& expression,
             TermsWithPriorityAndAssociation::AssociationType const association);
@@ -78,7 +80,8 @@ private:
             TermsWithPriorityAndAssociation::TermsWithDetails const& termsToSegregate);
     void accumulateTermsForAdditionAndSubtraction(
             BaseTerm & combinedBaseTerm,
-            TermsWithPriorityAndAssociation::TermsWithDetails const& termsToCombine);    void accumulateTermsForMultiplicationAndDivision(
+            TermsWithPriorityAndAssociation::TermsWithDetails const& termsToCombine);
+    void accumulateTermsForMultiplicationAndDivision(
             BaseTerm & combinedBaseTerm,
             TermsWithPriorityAndAssociation::TermsWithDetails const& termsToCombine);
     void accumulateTermsForRaiseToPower(
@@ -100,7 +103,6 @@ private:
     void putTermsWithAssociation(
             TermsWithPriorityAndAssociation const& termsWithAssociation,
             TermsWithPriorityAndAssociation::AssociationType const overallAssociation);
-
     void accumulateTermsForAdditionAndSubtractionForTermsWithExpressions(
             BaseTerm & combinedBaseTerm,
             TermsWithPriorityAndAssociation::TermsWithDetails const& termsWithExpressions);
@@ -114,7 +116,9 @@ private:
             BaseTerm const& mergeTerm2) const;
     Expression getUniqueExpressionForAdditionOrSubtractionMergeChecking(Expression const& expression);
     void accumulateMergeTermForAdditionOrSubtractionMergeChecking(BaseTerm & combinedBaseTerm, Expression const& expression);
-
+    void removeSameTermsInNumeratorAndDenominatorForMultiplicationAndDivision(
+            TermsWithPriorityAndAssociation::TermsWithDetails & expressionsForNumerator,
+            TermsWithPriorityAndAssociation::TermsWithDetails & expressionsForDenominator);
     OperatorLevel m_commonOperatorLevel;
     TermsWithPriorityAndAssociation m_termsWithPriorityAndAssociation;
 };
