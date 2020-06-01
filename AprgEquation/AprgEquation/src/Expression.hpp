@@ -39,11 +39,10 @@ public:
     std::string getDebugString() const;
 
     void simplify();
-    void simplifyFurtherIfNeeded(Expression const& beforeSimplify, Expression const& afterSimplify);
+    void sort();
 
     void addTerm(BaseTerm const& baseTerm);
-    void subtractTerm(BaseTerm const& baseTerm);
-    void multiplyTerm(BaseTerm const& baseTerm);
+    void subtractTerm(BaseTerm const& baseTerm);    void multiplyTerm(BaseTerm const& baseTerm);
     void divideTerm(BaseTerm const& baseTerm);
     void raiseToPowerTerm(BaseTerm const& baseTerm);
 
@@ -54,10 +53,10 @@ public:
     void clearAndPutTermInTermsWithAssociation(BaseTerm const& baseTerm);
 
 private:
+    void simplifyFurtherIfNeeded(Expression const& beforeSimplify, Expression const& afterSimplify);
     void simplifyAndCopyTerms(
             TermsWithPriorityAndAssociation::TermsWithDetails & termsToUpdate,
-            TermsWithPriorityAndAssociation::TermsWithDetails const& termsToSegregate);
-    void simplifyAndCopyTermsFromAnExpression(
+            TermsWithPriorityAndAssociation::TermsWithDetails const& termsToSegregate);    void simplifyAndCopyTermsFromAnExpression(
             TermsWithPriorityAndAssociation::TermsWithDetails & termsToUpdate,
             Expression const& expression,
             TermsWithPriorityAndAssociation::AssociationType const association);
@@ -73,10 +72,13 @@ private:
             TermsWithPriorityAndAssociation::TermsWithDetails & termsWithNonExpressions,
             TermsWithPriorityAndAssociation::TermsWithDetails & termsWithExpressions,
             TermsWithPriorityAndAssociation::TermsWithDetails const& termsToSegregate);
+    void segregateNumeratorAndDenominatorForMultiplicationAndDivision(
+            TermsWithPriorityAndAssociation::TermsWithDetails & termsForNumerator,
+            TermsWithPriorityAndAssociation::TermsWithDetails & termsForDenominator,
+            TermsWithPriorityAndAssociation::TermsWithDetails const& termsToSegregate);
     void accumulateTermsForAdditionAndSubtraction(
             BaseTerm & combinedBaseTerm,
-            TermsWithPriorityAndAssociation::TermsWithDetails const& termsToCombine);
-    void accumulateTermsForMultiplicationAndDivision(
+            TermsWithPriorityAndAssociation::TermsWithDetails const& termsToCombine);    void accumulateTermsForMultiplicationAndDivision(
             BaseTerm & combinedBaseTerm,
             TermsWithPriorityAndAssociation::TermsWithDetails const& termsToCombine);
     void accumulateTermsForRaiseToPower(

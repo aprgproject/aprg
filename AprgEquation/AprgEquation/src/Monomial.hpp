@@ -45,10 +45,10 @@ public:
     std::string getFirstVariableName() const;
     AlbaNumber const& getConstantConstReference() const;
     VariablesToExponentsMap const& getVariablesToExponentsMapConstReference() const;
+    AlbaNumber getDegree() const;
     std::string getDisplayableString() const;
 
-    void simplify();
-    void multiplyNumber(AlbaNumber const& number);
+    void simplify();    void multiplyNumber(AlbaNumber const& number);
     void raiseToPowerNumber(AlbaNumber const& number);
     void multiplyMonomial(Monomial const& monomial);
     void divideMonomial(Monomial const& monomial);

@@ -3,10 +3,11 @@
 #include <Term.hpp>
 #include <Utilities.hpp>
 
+#include <algorithm>
+
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace equation
 {
@@ -149,10 +150,19 @@ void TermsWithPriorityAndAssociation::clear()
     m_termsWithDetails.clear();
 }
 
+void TermsWithPriorityAndAssociation::sort()
+{
+    for(TermWithDetails & termWithDetails : m_termsWithDetails)
+    {
+        Term & term(getTermReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
+        term.sort();
+    }
+    stable_sort(m_termsWithDetails.begin(), m_termsWithDetails.end());
+}
+
 void TermsWithPriorityAndAssociation::putTermWithDetails(TermWithDetails const& termWithDetails)
 {
-    m_termsWithDetails.emplace_back(getBaseTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer), termWithDetails.association);
-}
+    m_termsWithDetails.emplace_back(getBaseTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer), termWithDetails.association);}
 
 void TermsWithPriorityAndAssociation::putTermWithPositiveAssociation(BaseTerm const& baseTerm)
 {

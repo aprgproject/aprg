@@ -363,10 +363,21 @@ Expression & Term::getExpressionReference()
     return *dynamic_cast<Expression*>(m_baseDataTermPointer.get());
 }
 
+void Term::sort()
+{
+    if(isPolynomial())
+    {
+        getPolynomialReference().sort();
+    }
+    else if(isExpression())
+    {
+        getExpressionReference().sort();
+    }
+}
+
 void Term::resetBaseDataTermPointerBasedFromTerm(Term const& term)
 {
-    switch(term.getTermType())
-    {
+    switch(term.getTermType())    {
     case TermType::Empty:
         break;
     case TermType::Constant:

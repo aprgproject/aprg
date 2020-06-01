@@ -51,10 +51,10 @@ public:
     TermsWithDetails const& getTermsWithDetails() const;
 
     void clear();
+    void sort();
     void putTermWithDetails(TermWithDetails const& termWithDetails);
     void putTermWithPositiveAssociation(BaseTerm const& baseTerm);
-    void putTermWithNegativeAssociation(BaseTerm const& baseTerm);
-    void reverseTheAssociationOfTheTerms();
+    void putTermWithNegativeAssociation(BaseTerm const& baseTerm);    void reverseTheAssociationOfTheTerms();
 
 private:
     TermsWithDetails m_termsWithDetails;

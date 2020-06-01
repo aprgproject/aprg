@@ -2,10 +2,12 @@
 
 #include <gtest/gtest.h>
 
+
+#include <Debug/AlbaDebug.hpp>
+
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace equation
 {
@@ -142,10 +144,21 @@ TEST(PolynomialTest, SimplifyWorks)
     ASSERT_TRUE(monomials3.at(0).getVariablesToExponentsMapConstReference().empty());
 }
 
-TEST(PolynomialTest, AddMonomialWorks)
+TEST(PolynomialTest, SortWorks)
 {
     Polynomial polynomial1;
-    Polynomial polynomial2{Monomial(1, {})};
+    Polynomial polynomial2{Monomial(100, {}), Monomial(5, {{"x", 2}, {"y", 3}, {"z", 4}}), Monomial(9, {{"x", 8}}), Monomial(10, {})};
+
+    polynomial1.sort();
+    polynomial2.sort();
+
+    EXPECT_EQ(Polynomial(), polynomial1);
+    EXPECT_EQ((Polynomial{Monomial(10, {}), Monomial(100, {}), Monomial(9, {{"x", 8}}), Monomial(5, {{"x", 2}, {"y", 3}, {"z", 4}})}), polynomial2);
+}
+
+TEST(PolynomialTest, AddMonomialWorks)
+{
+    Polynomial polynomial1;    Polynomial polynomial2{Monomial(1, {})};
     Polynomial polynomial3{Monomial(2, {}), Monomial(3, {{"x", 4}})};
 
     polynomial1.addMonomial(Monomial(5, {{"x", 4}}));

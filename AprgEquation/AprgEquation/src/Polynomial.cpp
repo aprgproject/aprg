@@ -2,10 +2,10 @@
 
 #include <Utilities.hpp>
 
+#include <algorithm>
 #include <sstream>
 
 using namespace std;
-
 namespace alba
 {
 
@@ -138,10 +138,14 @@ void Polynomial::simplify()
     }
 }
 
+void Polynomial::sort()
+{
+    stable_sort(m_monomials.begin(), m_monomials.end());
+}
+
 void Polynomial::addMonomial(Monomial const& monomial)
 {
-    bool isFoundInPolynomial(false);
-    for(Monomial & monomialInternal : m_monomials)
+    bool isFoundInPolynomial(false);    for(Monomial & monomialInternal : m_monomials)
     {
         if(canBeMergedByAdditionOrSubtraction(monomialInternal, monomial))
         {
