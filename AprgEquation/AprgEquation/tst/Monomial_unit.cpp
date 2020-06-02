@@ -117,6 +117,7 @@ TEST(MonomialTest, LessThanOperatorWorks)
     EXPECT_FALSE(Monomial(54, {{"x", 6}}) < Monomial(54, {{"x", 3}, {"y", 2}}));
     EXPECT_TRUE(Monomial(54, {{"x", 6}}) < Monomial(54, {{"x", 3}, {"y", 4}}));
 }
+
 TEST(MonomialTest, IsZeroFunctionWorks)
 {
     Monomial monomial1;

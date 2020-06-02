@@ -4,6 +4,7 @@
 #include <sstream>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -82,7 +83,8 @@ bool Monomial::operator<(Monomial const& second) const
             result = isLessThanByComparingVariableNameMaps(*this, second);
         }
         else
-        {            result = degree1 < degree2;
+        {
+            result = degree1 < degree2;
         }
     }
     return result;
@@ -152,7 +154,8 @@ AlbaNumber Monomial::getExponentForVariable(string const& variableName) const
 
 string Monomial::getDisplayableString() const
 {
-    stringstream result;    result << m_constant.getDisplayableString();
+    stringstream result;
+    result << m_constant.getDisplayableString();
     for(VariableExponentPair const& variableExponentsPair : m_variablesToExponentsMap)
     {
         result << "|"
@@ -273,7 +276,8 @@ bool Monomial::isLessThanByComparingVariableNameMaps(
 
 void Monomial::removeZeroExponents()
 {
-    VariablesToExponentsMap oldVariableMap(m_variablesToExponentsMap);    m_variablesToExponentsMap.clear();
+    VariablesToExponentsMap oldVariableMap(m_variablesToExponentsMap);
+    m_variablesToExponentsMap.clear();
     for(VariableExponentPair const& variableExponentPair : oldVariableMap)
     {
         if(variableExponentPair.second != 0)

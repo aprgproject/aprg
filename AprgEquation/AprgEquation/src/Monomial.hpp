@@ -49,7 +49,8 @@ public:
     AlbaNumber getExponentForVariable(std::string const& variableName) const;
     std::string getDisplayableString() const;
 
-    void simplify();    void multiplyNumber(AlbaNumber const& number);
+    void simplify();
+    void multiplyNumber(AlbaNumber const& number);
     void raiseToPowerNumber(AlbaNumber const& number);
     void multiplyMonomial(Monomial const& monomial);
     void divideMonomial(Monomial const& monomial);
@@ -65,7 +66,8 @@ private:
             Monomial const& monomial2) const;
     void removeZeroExponents();
     AlbaNumber m_constant;
-    VariablesToExponentsMap m_variablesToExponentsMap;};
+    VariablesToExponentsMap m_variablesToExponentsMap;
+};
 
 using Monomials=std::vector<Monomial>;
 

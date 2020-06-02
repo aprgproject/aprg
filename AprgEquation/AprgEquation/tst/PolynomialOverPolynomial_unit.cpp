@@ -2,12 +2,10 @@
 
 #include <gtest/gtest.h>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace equation
 {
@@ -38,11 +36,10 @@ TEST(PolynomialOverPolynomialTest, SimplifyWorksOnRemovingCommonFactorInCoeffici
 
     polynomialOverPolynomial.simplify();
 
-    ALBA_PRINT1(polynomialOverPolynomial.getNumerator().getDisplayableString());
-    ALBA_PRINT1(polynomialOverPolynomial.getDenominator().getDisplayableString());
     EXPECT_EQ((Polynomial{Monomial(0.15, {}), Monomial(1, {{"x", 1}}), Monomial(1, {{"y", 1}})}), polynomialOverPolynomial.getNumerator());
     EXPECT_EQ((Polynomial{Monomial(1, {{"y", 1}}), Monomial(1, {{"z", 1}})}), polynomialOverPolynomial.getDenominator());
 }
+
 TEST(PolynomialOverPolynomialTest, SimplifyWorksOnConvertingNegativeExponentsToPositive)
 {
     Polynomial numerator{Monomial(1, {{"x", 1}, {"y", -1}}), Monomial(2, {{"x", -1}, {"y", 1}})};
