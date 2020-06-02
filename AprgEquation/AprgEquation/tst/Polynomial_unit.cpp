@@ -2,10 +2,12 @@
 
 #include <gtest/gtest.h>
 
+
+#include <Debug/AlbaDebug.hpp>
+
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace equation
 {
@@ -153,16 +155,19 @@ TEST(PolynomialTest, SortWorks)
 {
     Polynomial polynomial1;
     Polynomial polynomial2{Monomial(100, {}), Monomial(5, {{"x", 2}, {"y", 3}, {"z", 4}}), Monomial(9, {{"x", 8}}), Monomial(10, {})};
+    Polynomial polynomial3{Monomial(1, {{"y", 3}}), Monomial(1, {{"x", 1}, {"y", 2}}), Monomial(1, {{"x", 2}, {"y", 1}}), Monomial(5, {{"x", 3}})};
 
     polynomial1.sort();
     polynomial2.sort();
+    polynomial3.sort();
 
+    ALBA_PRINT1(polynomial3.getDisplayableString());
     EXPECT_EQ(Polynomial(), polynomial1);
     EXPECT_EQ((Polynomial{Monomial(10, {}), Monomial(100, {}), Monomial(9, {{"x", 8}}), Monomial(5, {{"x", 2}, {"y", 3}, {"z", 4}})}), polynomial2);
+    EXPECT_EQ((Polynomial{Monomial(1, {{"y", 3}}), Monomial(1, {{"x", 1}, {"y", 2}}), Monomial(1, {{"x", 2}, {"y", 1}}), Monomial(5, {{"x", 3}})}), polynomial3);
 }
 
-TEST(PolynomialTest, AddMonomialWorks)
-{
+TEST(PolynomialTest, AddMonomialWorks){
     Polynomial polynomial1;
     Polynomial polynomial2{Monomial(1, {})};
     Polynomial polynomial3{Monomial(2, {}), Monomial(3, {{"x", 4}})};

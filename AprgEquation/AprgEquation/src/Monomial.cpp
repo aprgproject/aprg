@@ -1,9 +1,9 @@
 #include "Monomial.hpp"
 
+#include <set>
 #include <sstream>
 
 using namespace std;
-
 namespace alba
 {
 
@@ -79,11 +79,10 @@ bool Monomial::operator<(Monomial const& second) const
         AlbaNumber degree2(second.getDegree());
         if(degree1 == degree2)
         {
-            result = m_variablesToExponentsMap < second.m_variablesToExponentsMap;
+            result = isLessThanByComparingVariableNameMaps(*this, second);
         }
         else
-        {
-            result = degree1 < degree2;
+        {            result = degree1 < degree2;
         }
     }
     return result;
@@ -141,10 +140,19 @@ AlbaNumber Monomial::getDegree() const
     return degree;
 }
 
+AlbaNumber Monomial::getExponentForVariable(string const& variableName) const
+{
+    AlbaNumber exponent(0);
+    if(m_variablesToExponentsMap.find(variableName) != m_variablesToExponentsMap.cend())
+    {
+        exponent = m_variablesToExponentsMap.at(variableName);
+    }
+    return exponent;
+}
+
 string Monomial::getDisplayableString() const
 {
-    stringstream result;
-    result << m_constant.getDisplayableString();
+    stringstream result;    result << m_constant.getDisplayableString();
     for(VariableExponentPair const& variableExponentsPair : m_variablesToExponentsMap)
     {
         result << "|"
@@ -211,15 +219,61 @@ void Monomial::putVariablesWithExponents(initializer_list<VariableExponentPair> 
     }
 }
 
+void Monomial::putVariablesWithExponents(VariablesToExponentsMap const& variablesWithExponents)
+{
+    for(VariableExponentPair const& variableExponentsPair : variablesWithExponents)
+    {
+        putVariableWithExponent(variableExponentsPair.first, variableExponentsPair.second);
+    }
+}
+
 void Monomial::putVariableWithExponent(string const& variable, AlbaNumber const& exponent)
 {
     m_variablesToExponentsMap[variable]=exponent;
 }
 
+void Monomial::saveIntersectionOfVariableExponentsMap(Monomial const& monomial)
+{
+    m_constant=1;
+    for(VariablesToExponentsMapIterator it = m_variablesToExponentsMap.begin();
+        it != m_variablesToExponentsMap.end();
+        it++)
+    {
+        m_variablesToExponentsMap[it->first]
+                = min(monomial.getExponentForVariable(it->first), it->second);
+    }
+}
+
+bool Monomial::isLessThanByComparingVariableNameMaps(
+        Monomial const& monomial1,
+        Monomial const& monomial2) const
+{
+    set<string> variableNames;
+    for(VariableExponentPair const& nameExponentPair : monomial1.getVariablesToExponentsMapConstReference())
+    {
+        variableNames.emplace(nameExponentPair.first);
+    }
+    for(VariableExponentPair const& nameExponentPair : monomial2.getVariablesToExponentsMapConstReference())
+    {
+        variableNames.emplace(nameExponentPair.first);
+    }
+    bool result(false);
+    for(string const& variableName : variableNames)
+    {
+        AlbaNumber exponent1(monomial1.getExponentForVariable(variableName));
+        AlbaNumber exponent2(monomial2.getExponentForVariable(variableName));
+        if(exponent1 != exponent2)
+        {
+            result = exponent1 < exponent2;
+            break;
+        }
+    }
+    return result;
+}
+
 void Monomial::removeZeroExponents()
 {
-    VariablesToExponentsMap oldVariableMap(m_variablesToExponentsMap);
-    m_variablesToExponentsMap.clear();
+    VariablesToExponentsMap oldVariableMap(m_variablesToExponentsMap);    m_variablesToExponentsMap.clear();
     for(VariableExponentPair const& variableExponentPair : oldVariableMap)
     {
         if(variableExponentPair.second != 0)
