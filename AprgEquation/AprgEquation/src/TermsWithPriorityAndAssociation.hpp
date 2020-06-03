@@ -1,10 +1,10 @@
 #pragma once
 
 #include <BaseTermPointers.hpp>
+#include <VariablesToValuesTypes.hpp>
 
 #include <functional>
-#include <list>
-#include <vector>
+#include <list>#include <vector>
 
 namespace alba
 {
@@ -35,12 +35,9 @@ public:
         AssociationType association;
     };
     using TermsWithDetails=std::vector<TermWithDetails>;
-    using ListOfTermsWithDetails=std::list<TermWithDetails>;
-    using TermsWithDetailsFunction = std::function<void(TermWithDetails const&)>;
 
     TermsWithPriorityAndAssociation();
     ~TermsWithPriorityAndAssociation();
-
     bool operator==(TermsWithPriorityAndAssociation const& second) const;
     bool operator!=(TermsWithPriorityAndAssociation const& second) const;
     bool operator<(TermsWithPriorityAndAssociation const& second) const;
@@ -52,10 +49,10 @@ public:
 
     void clear();
     void sort();
+    void substituteVariablesToValues(VariablesToValuesMap const& variableValueMap);
     void putTermWithDetails(TermWithDetails const& termWithDetails);
     void putTermWithPositiveAssociation(BaseTerm const& baseTerm);
-    void putTermWithNegativeAssociation(BaseTerm const& baseTerm);
-    void reverseTheAssociationOfTheTerms();
+    void putTermWithNegativeAssociation(BaseTerm const& baseTerm);    void reverseTheAssociationOfTheTerms();
 
 private:
     TermsWithDetails m_termsWithDetails;

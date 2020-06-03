@@ -1,8 +1,9 @@
 #include "Monomial.hpp"
 
+#include <SubstitutionOfVariablesToValues.hpp>
+
 #include <set>
 #include <sstream>
-
 using namespace std;
 
 namespace alba
@@ -187,10 +188,27 @@ void Monomial::simplify()
     removeZeroExponents();
 }
 
+void Monomial::substituteVariablesToValues(VariablesToValuesMap const& variableValueMap)
+{
+    SubstitutionOfVariablesToValues substitution(variableValueMap);
+    VariablesToExponentsMap previousVariableExponentMap(getVariablesToExponentsMapConstReference());
+    m_variablesToExponentsMap.clear();
+    for(Monomial::VariableExponentPair const& variableExponentPair : previousVariableExponentMap)
+    {
+        if(substitution.isVariableFound(variableExponentPair.first))
+        {
+            m_constant = m_constant*(substitution.getValueForVariable(variableExponentPair.first)^variableExponentPair.second);
+        }
+        else
+        {
+            putVariableWithExponent(variableExponentPair.first, variableExponentPair.second);
+        }
+    }
+}
+
 void Monomial::multiplyNumber(AlbaNumber const& number)
 {
-    m_constant = m_constant * number;
-}
+    m_constant = m_constant * number;}
 
 void Monomial::raiseToPowerNumber(AlbaNumber const& number)
 {

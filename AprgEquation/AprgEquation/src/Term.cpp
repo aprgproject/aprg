@@ -1,9 +1,9 @@
 #include "Term.hpp"
 
+#include <SubstitutionOfVariablesToValues.hpp>
 #include <Utilities.hpp>
 
-#include <cassert>
-#include <string>
+#include <cassert>#include <string>
 
 using namespace std;
 
@@ -375,10 +375,34 @@ void Term::sort()
     }
 }
 
+void Term::substituteVariablesToValues(VariablesToValuesMap const& variableValueMap)
+{
+    if(m_type==TermType::Variable)
+    {
+        SubstitutionOfVariablesToValues substitution(variableValueMap);
+        string variableName(getVariableConstReference().getVariableName());
+        if(substitution.isVariableFound(variableName))
+        {
+            *this = Term(substitution.getValueForVariable(variableName));
+        }
+    }
+    else if(m_type==TermType::Monomial)
+    {
+        getMonomialReference().substituteVariablesToValues(variableValueMap);
+    }
+    else if(m_type==TermType::Polynomial)
+    {
+        getPolynomialReference().substituteVariablesToValues(variableValueMap);
+    }
+    else if(m_type==TermType::Expression)
+    {
+        getExpressionReference().substituteVariablesToValues(variableValueMap);
+    }
+}
+
 void Term::resetBaseDataTermPointerBasedFromTerm(Term const& term)
 {
-    switch(term.getTermType())
-    {
+    switch(term.getTermType())    {
     case TermType::Empty:
         break;
     case TermType::Constant:
