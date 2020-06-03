@@ -62,7 +62,8 @@ private:
 
     //simplify functions
     void simplifyAndCopyTerms(
-            TermsWithPriorityAndAssociation::TermsWithDetails & termsToUpdate,            TermsWithPriorityAndAssociation::TermsWithDetails const& termsToSegregate);
+            TermsWithPriorityAndAssociation::TermsWithDetails & termsToUpdate,
+            TermsWithPriorityAndAssociation::TermsWithDetails const& termsToSegregate);
     void simplifyAndCopyTermsFromAnExpressionAndSetOperatorLevelIfNeeded(
             TermsWithPriorityAndAssociation::TermsWithDetails & termsToUpdate,
             Expression const& expression,
@@ -92,7 +93,8 @@ private:
 
     //segregate functions
     void segregateNonExpressionsAndExpressions(
-            TermsWithPriorityAndAssociation::TermsWithDetails & termsWithNonExpressions,            TermsWithPriorityAndAssociation::TermsWithDetails & termsWithExpressions,
+            TermsWithPriorityAndAssociation::TermsWithDetails & termsWithNonExpressions,
+            TermsWithPriorityAndAssociation::TermsWithDetails & termsWithExpressions,
             TermsWithPriorityAndAssociation::TermsWithDetails const& termsToSegregate) const;
     void segregateNumeratorAndDenominatorForMultiplicationAndDivision(
             TermsWithPriorityAndAssociation::TermsWithDetails & termsForNumerator,

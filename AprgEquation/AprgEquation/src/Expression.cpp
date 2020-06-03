@@ -10,12 +10,10 @@
 #include <algorithm>
 #include <sstream>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 using namespace std;
 using AssociationType=alba::equation::TermsWithPriorityAndAssociation::AssociationType;
-using TermWithDetails=alba::equation::TermsWithPriorityAndAssociation::TermWithDetails;using TermsWithDetails=alba::equation::TermsWithPriorityAndAssociation::TermsWithDetails;
+using TermWithDetails=alba::equation::TermsWithPriorityAndAssociation::TermWithDetails;
+using TermsWithDetails=alba::equation::TermsWithPriorityAndAssociation::TermsWithDetails;
 using ListOfTermsWithDetails=alba::equation::TermsWithPriorityAndAssociation::ListOfTermsWithDetails;
 
 namespace alba
@@ -400,7 +398,8 @@ void Expression::sort()
 
 void Expression::simplifyAndCopyTerms(
         TermsWithDetails & termsToUpdate,
-        TermsWithDetails const& termsToCheck){
+        TermsWithDetails const& termsToCheck)
+{
     for(TermWithDetails const& termWithDetails : termsToCheck)
     {
         BaseTerm const& baseTerm(getBaseTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
@@ -654,7 +653,8 @@ void Expression::accumulateTermsForRaiseToPower(
 
 void Expression::segregateNonExpressionsAndExpressions(
         TermsWithDetails & termsWithNonExpressions,
-        TermsWithDetails & termsWithExpressions,        TermsWithDetails const& termsToSegregate) const
+        TermsWithDetails & termsWithExpressions,
+        TermsWithDetails const& termsToSegregate) const
 {
     for(TermWithDetails const& termToSegregate : termsToSegregate)
     {

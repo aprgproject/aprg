@@ -3,12 +3,10 @@
 #include <set>
 #include <sstream>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace equation
 {
@@ -81,7 +79,8 @@ bool Monomial::operator<(Monomial const& second) const
         //highest degree is the lower priority for sorting
         AlbaNumber degree1(getDegree());
         AlbaNumber degree2(second.getDegree());
-        if(degree1 == degree2)        {
+        if(degree1 == degree2)
+        {
             result = isLessThanByComparingVariableNameMaps(*this, second);
         }
         else
@@ -130,7 +129,8 @@ bool Monomial::hasNegativeExponents() const
 
 AlbaNumber const& Monomial::getConstantConstReference() const
 {
-    return m_constant;}
+    return m_constant;
+}
 
 Monomial::VariablesToExponentsMap const& Monomial::getVariablesToExponentsMapConstReference() const
 {

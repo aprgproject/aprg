@@ -30,7 +30,8 @@ private:
     QuotientAndRemainder divide() const;
     unsigned int getLcmForDenominatorCoefficients(Polynomial const& polynomial);
     unsigned int getGcfForIntegerCoefficients(Polynomial const& polynomial);
-    Monomial getAndPositiveExponentsMonomialWithNegativeExponents(Polynomial const& polynomial);    void convertFractionCoefficientsToInteger();
+    Monomial getAndPositiveExponentsMonomialWithNegativeExponents(Polynomial const& polynomial);
+    void convertFractionCoefficientsToInteger();
     void removeGcfOnCoefficients();
     void convertNegativeExponentsToPositive();
     void removeCommonVariableExponents();

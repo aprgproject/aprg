@@ -4,12 +4,10 @@
 
 #include <gtest/gtest.h>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace equation
 {
@@ -1220,7 +1218,8 @@ TEST(ExpressionTest, SimplifyWorksOnMultiplyingAndDividingRaiseToPowerExpression
 TEST(ExpressionTest, SimplifyWorksOnPutPolynomialFirstWithMultiplication)
 {
     Expression expression1;
-    Expression expression2(createExpressionIfPossible(Terms{Term(100), Term("+"), Term("a"), Term("-"), Term("b")}));    Expression expression3(createExpressionIfPossible(Terms{Term(200), Term("*"), Term("a"), Term("/"), Term("b")}));
+    Expression expression2(createExpressionIfPossible(Terms{Term(100), Term("+"), Term("a"), Term("-"), Term("b")}));
+    Expression expression3(createExpressionIfPossible(Terms{Term(200), Term("*"), Term("a"), Term("/"), Term("b")}));
     Expression expression4(createExpressionIfPossible(Terms{Term("a"), Term("^"), Term("b")}));
     Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {{"y", 1}})};
     expression1.putPolynomialFirstWithMultiplication(polynomial);
@@ -1266,7 +1265,8 @@ TEST(ExpressionTest, SimplifyWorksOnPutPolynomialFirstWithMultiplication)
 TEST(ExpressionTest, SimplifyWorksOnPutPolynomialSecondWithMultiplication)
 {
     Expression expression1;
-    Expression expression2(createExpressionIfPossible(Terms{Term(100), Term("+"), Term("a"), Term("-"), Term("b")}));    Expression expression3(createExpressionIfPossible(Terms{Term(200), Term("*"), Term("a"), Term("/"), Term("b")}));
+    Expression expression2(createExpressionIfPossible(Terms{Term(100), Term("+"), Term("a"), Term("-"), Term("b")}));
+    Expression expression3(createExpressionIfPossible(Terms{Term(200), Term("*"), Term("a"), Term("/"), Term("b")}));
     Expression expression4(createExpressionIfPossible(Terms{Term("a"), Term("^"), Term("b")}));
     Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {{"y", 1}})};
     expression1.putPolynomialSecondWithMultiplication(polynomial);
@@ -1322,7 +1322,8 @@ TEST(ExpressionTest, SimplifyWorksOnPutExpressionWithMultiplication)
                     }));
     Expression expression1;
     Expression expression2(createExpressionIfPossible(Terms{Term(subExpression1), Term("-"), Term(subExpression2)}));
-    Expression expression3(createExpressionIfPossible(Terms{Term(subExpression1), Term("/"), Term(subExpression2)}));    Expression expression4(createExpressionIfPossible(Terms{Term(subExpression1), Term("^"), Term(subExpression2)}));
+    Expression expression3(createExpressionIfPossible(Terms{Term(subExpression1), Term("/"), Term(subExpression2)}));
+    Expression expression4(createExpressionIfPossible(Terms{Term(subExpression1), Term("^"), Term(subExpression2)}));
     Expression expression5(createExpressionIfPossible(Terms{Term(subExpression1), Term("-"), Term(subExpression2)}));
     Expression expressionToApply1(createExpressionIfPossible(Terms{Term(subExpression3), Term("-"), Term(subExpression4)}));
     expression1.putExpressionWithMultiplication(expressionToApply1);
@@ -1440,7 +1441,8 @@ TEST(ExpressionTest, SimplifyWorksOnRaiseToPowerWithMultipleTerms)
 
 TEST(ExpressionTest, SortWorks)
 {
-    Expression expression(                createExpressionIfPossible(
+    Expression expression(
+                createExpressionIfPossible(
                     Terms{
                         Term("-"), Term(2),
                         Term("-"), Term(3),
