@@ -4,10 +4,12 @@
 
 #include <gtest/gtest.h>
 
+
+#include <Debug/AlbaDebug.hpp>
+
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace equation
 {
@@ -1215,11 +1217,10 @@ TEST(ExpressionTest, SimplifyWorksOnMultiplyingAndDividingRaiseToPowerExpression
     EXPECT_EQ(expressionToExpect, expression);
 }
 
-TEST(ExpressionTest, SimplifyWorksOnMultiplyPolynomialFirst)
+TEST(ExpressionTest, SimplifyWorksOnPutPolynomialFirstWithMultiplication)
 {
     Expression expression1;
-    Expression expression2(createExpressionIfPossible(Terms{Term(100), Term("+"), Term("a"), Term("-"), Term("b")}));
-    Expression expression3(createExpressionIfPossible(Terms{Term(200), Term("*"), Term("a"), Term("/"), Term("b")}));
+    Expression expression2(createExpressionIfPossible(Terms{Term(100), Term("+"), Term("a"), Term("-"), Term("b")}));    Expression expression3(createExpressionIfPossible(Terms{Term(200), Term("*"), Term("a"), Term("/"), Term("b")}));
     Expression expression4(createExpressionIfPossible(Terms{Term("a"), Term("^"), Term("b")}));
     Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {{"y", 1}})};
     expression1.putPolynomialFirstWithMultiplication(polynomial);
@@ -1262,11 +1263,10 @@ TEST(ExpressionTest, SimplifyWorksOnMultiplyPolynomialFirst)
     EXPECT_EQ(expressionToExpect4, expression4);
 }
 
-TEST(ExpressionTest, SimplifyWorksOnMultiplyPolynomialSecond)
+TEST(ExpressionTest, SimplifyWorksOnPutPolynomialSecondWithMultiplication)
 {
     Expression expression1;
-    Expression expression2(createExpressionIfPossible(Terms{Term(100), Term("+"), Term("a"), Term("-"), Term("b")}));
-    Expression expression3(createExpressionIfPossible(Terms{Term(200), Term("*"), Term("a"), Term("/"), Term("b")}));
+    Expression expression2(createExpressionIfPossible(Terms{Term(100), Term("+"), Term("a"), Term("-"), Term("b")}));    Expression expression3(createExpressionIfPossible(Terms{Term(200), Term("*"), Term("a"), Term("/"), Term("b")}));
     Expression expression4(createExpressionIfPossible(Terms{Term("a"), Term("^"), Term("b")}));
     Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {{"y", 1}})};
     expression1.putPolynomialSecondWithMultiplication(polynomial);
@@ -1309,17 +1309,20 @@ TEST(ExpressionTest, SimplifyWorksOnMultiplyPolynomialSecond)
     EXPECT_EQ(expressionToExpect4, expression4);
 }
 
-TEST(ExpressionTest, SimplifyWorksOnMultiplyExpression)
+TEST(ExpressionTest, SimplifyWorksOnPutExpressionWithMultiplication)
 {
     Expression subExpression1(createExpressionIfPossible(Terms{Term("a"), Term("^"), Term("b")}));
     Expression subExpression2(createExpressionIfPossible(Terms{Term("c"), Term("^"), Term("d")}));
     Expression subExpression3(createExpressionIfPossible(Terms{Term("x"), Term("^"), Term("x")}));
     Expression subExpression4(createExpressionIfPossible(Terms{Term("y"), Term("^"), Term("y")}));
-    Expression subExpression5(createExpressionIfPossible(Terms{Term("a"), Term("^"), Term("b"), Term("^"), Term("c"), Term("^"), Term("d")}));
+    Expression subExpression5(
+                createExpressionIfPossible(
+                    Terms{
+                        Term("a"), Term("^"), Term(createExpressionIfPossible(Terms{Term(Monomial(1, {{"b", 1}, {"c", 1}, {"d", 1}}))}))
+                    }));
     Expression expression1;
     Expression expression2(createExpressionIfPossible(Terms{Term(subExpression1), Term("-"), Term(subExpression2)}));
-    Expression expression3(createExpressionIfPossible(Terms{Term(subExpression1), Term("/"), Term(subExpression2)}));
-    Expression expression4(createExpressionIfPossible(Terms{Term(subExpression1), Term("^"), Term(subExpression2)}));
+    Expression expression3(createExpressionIfPossible(Terms{Term(subExpression1), Term("/"), Term(subExpression2)}));    Expression expression4(createExpressionIfPossible(Terms{Term(subExpression1), Term("^"), Term(subExpression2)}));
     Expression expression5(createExpressionIfPossible(Terms{Term(subExpression1), Term("-"), Term(subExpression2)}));
     Expression expressionToApply1(createExpressionIfPossible(Terms{Term(subExpression3), Term("-"), Term(subExpression4)}));
     expression1.putExpressionWithMultiplication(expressionToApply1);
@@ -1371,10 +1374,73 @@ TEST(ExpressionTest, SimplifyWorksOnMultiplyExpression)
     EXPECT_EQ(expressionToExpect5, expression5);
 }
 
+TEST(ExpressionTest, SimplifyWorksOnRaiseToPowerIfBaseIsOneOrZero)
+{
+    Expression expression1(createExpressionIfPossible(Terms{Term(1), Term("^"), Term("a"), Term("^"), Term("b")}));
+    Expression expression2(createExpressionIfPossible(Terms{Term(Constant(0)), Term("^"), Term("c"), Term("^"), Term("d")}));
+
+    expression1.simplify();
+    expression2.simplify();
+
+    Expression expressionToExpect1(createExpressionIfPossible(Terms{Term(1)}));
+    Expression expressionToExpect2(createExpressionIfPossible(Terms{Term(Constant(0))}));
+    EXPECT_EQ(expressionToExpect1, expression1);
+    EXPECT_EQ(expressionToExpect2, expression2);
+}
+
+TEST(ExpressionTest, SimplifyWorksOnRaiseToPowerIfExponentIsOne)
+{
+    Expression expression1(createExpressionIfPossible(Terms{Term("a"), Term("^"), Term(1)}));
+    Expression expression2(createExpressionIfPossible(Terms{Term("b"), Term("^"), Term(1), Term("^"), Term(1), Term("^"), Term(1)}));
+
+    expression1.simplify();
+    expression2.simplify();
+
+    Expression expressionToExpect1(createExpressionIfPossible(Terms{Term("a")}));
+    Expression expressionToExpect2(createExpressionIfPossible(Terms{Term("b")}));
+    EXPECT_EQ(expressionToExpect1, expression1);
+    EXPECT_EQ(expressionToExpect2, expression2);
+}
+
+TEST(ExpressionTest, SimplifyWorksOnRaiseToPowerIfExponentIsZero)
+{
+    Expression expression1(createExpressionIfPossible(Terms{Term("a"), Term("^"), Term(Constant(0))}));
+    Expression expression2(createExpressionIfPossible(Terms{Term("b"), Term("^"), Term("a"), Term("^"), Term(Constant(0)), Term("^"), Term("b")}));
+
+    expression1.simplify();
+    expression2.simplify();
+
+    Expression expressionToExpect1(createExpressionIfPossible(Terms{Term(1)}));
+    Expression expressionToExpect2(createExpressionIfPossible(Terms{Term(1)}));
+    EXPECT_EQ(expressionToExpect1, expression1);
+    EXPECT_EQ(expressionToExpect2, expression2);
+}
+
+TEST(ExpressionTest, SimplifyWorksOnRaiseToPowerWithMultipleTerms)
+{
+    Expression expression1(createExpressionIfPossible(Terms{Term("a"), Term("^"), Term("b"), Term("^"), Term("c"), Term("^"), Term("d")}));
+    Expression expression2(createExpressionIfPossible(Terms{Term("x"), Term("^"), Term(2), Term("^"), Term(3), Term("^"), Term("y")}));
+
+    expression1.simplify();
+    expression2.simplify();
+
+    Expression expressionToExpect1(
+                createExpressionIfPossible(
+                    Terms{
+                        Term("a"), Term("^"), Term(createExpressionIfPossible(Terms{Term(Monomial(1, {{"b", 1}, {"c", 1}, {"d", 1}}))}))
+                    }));
+    Expression expressionToExpect2(
+                createExpressionIfPossible(
+                    Terms{
+                        Term("x"), Term("^"), Term(createExpressionIfPossible(Terms{Term(Monomial(6, {{"y", 1}}))}))
+                    }));
+    EXPECT_EQ(expressionToExpect1, expression1);
+    EXPECT_EQ(expressionToExpect2, expression2);
+}
+
 TEST(ExpressionTest, SortWorks)
 {
-    Expression expression(
-                createExpressionIfPossible(
+    Expression expression(                createExpressionIfPossible(
                     Terms{
                         Term("-"), Term(2),
                         Term("-"), Term(3),
