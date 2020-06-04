@@ -22,11 +22,12 @@ bool isOperator(string const& variableOrOperator)
             "-" == variableOrOperator ||
             "*" == variableOrOperator ||
             "/" == variableOrOperator ||
-            "^" == variableOrOperator;
+            "^" == variableOrOperator ||
+            "(" == variableOrOperator ||
+            ")" == variableOrOperator;
 }
 
-bool canBeMergedByAdditionOrSubtraction(Term const& term1, Term const& term2)
-{
+bool canBeMergedByAdditionOrSubtraction(Term const& term1, Term const& term2){
     bool result(false);
     if(term1.isConstant() && term2.isConstant())
     {

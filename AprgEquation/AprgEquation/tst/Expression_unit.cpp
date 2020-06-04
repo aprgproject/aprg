@@ -1460,11 +1460,10 @@ TEST(ExpressionTest, SortWorks)
                         Term("+"), Term(5),
                         Term("-"), Term(2),
                         Term("-"), Term(3),
-                        Term("-"), Term(Polynomial{Monomial(10, {}), Monomial(100, {}), Monomial(9, {{"x", 8}}), Monomial(5, {{"x", 2}, {"y", 3}, {"z", 4}})})
+                        Term("-"), Term(Polynomial{Monomial(5, {{"x", 2}, {"y", 3}, {"z", 4}}), Monomial(9, {{"x", 8}}), Monomial(100, {}), Monomial(10, {})})
                     }));
     EXPECT_EQ(expressionToExpect, expression);
 }
-
 TEST(ExpressionTest, SubstituteVariablesToValuesWorks)
 {
     Expression expression1;
