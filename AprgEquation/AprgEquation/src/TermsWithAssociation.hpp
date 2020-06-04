@@ -1,10 +1,12 @@
 #pragma once
 
 #include <BaseTermPointers.hpp>
+#include <TermAssociationType.hpp>
 #include <VariablesToValuesTypes.hpp>
 
 #include <functional>
-#include <list>#include <vector>
+#include <list>
+#include <vector>
 
 namespace alba
 {
@@ -12,17 +14,12 @@ namespace alba
 namespace equation
 {
 
-class TermsWithPriorityAndAssociation
+class TermsWithAssociation
 {
 public:
-    enum class AssociationType
-    {
-        Positive,
-        Negative
-    };
     struct TermWithDetails
     {
-        TermWithDetails(BaseTerm const& baseTerm, AssociationType const associationParameter);
+        TermWithDetails(BaseTerm const& baseTerm, TermAssociationType const associationParameter);
         TermWithDetails(TermWithDetails const& termWithDetails);
         bool operator==(TermWithDetails const& second) const;
         bool operator!=(TermWithDetails const& second) const;
@@ -32,15 +29,16 @@ public:
         unsigned int getAssociationPriority() const;
         void clear();
         BaseTermSharedPointer baseTermSharedPointer;
-        AssociationType association;
+        TermAssociationType association;
     };
     using TermsWithDetails=std::vector<TermWithDetails>;
 
-    TermsWithPriorityAndAssociation();
-    ~TermsWithPriorityAndAssociation();
-    bool operator==(TermsWithPriorityAndAssociation const& second) const;
-    bool operator!=(TermsWithPriorityAndAssociation const& second) const;
-    bool operator<(TermsWithPriorityAndAssociation const& second) const;
+    TermsWithAssociation();
+    ~TermsWithAssociation();
+
+    bool operator==(TermsWithAssociation const& second) const;
+    bool operator!=(TermsWithAssociation const& second) const;
+    bool operator<(TermsWithAssociation const& second) const;
     bool isEmpty() const;
 
     unsigned int getSize() const;
@@ -52,7 +50,8 @@ public:
     void substituteVariablesToValues(VariablesToValuesMap const& variableValueMap);
     void putTermWithDetails(TermWithDetails const& termWithDetails);
     void putTermWithPositiveAssociation(BaseTerm const& baseTerm);
-    void putTermWithNegativeAssociation(BaseTerm const& baseTerm);    void reverseTheAssociationOfTheTerms();
+    void putTermWithNegativeAssociation(BaseTerm const& baseTerm);
+    void reverseTheAssociationOfTheTerms();
 
 private:
     TermsWithDetails m_termsWithDetails;

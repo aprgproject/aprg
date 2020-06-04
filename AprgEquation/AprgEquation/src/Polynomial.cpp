@@ -140,7 +140,8 @@ void Polynomial::simplify()
     for(Monomial & monomial : previousMonomials)
     {
         monomial.simplify();
-        if(!monomial.isZero())        {
+        if(!monomial.isZero())
+        {
             addMonomial(monomial);
         }
     }
@@ -166,7 +167,8 @@ void Polynomial::substituteVariablesToValues(VariablesToValuesMap const& variabl
 
 void Polynomial::addMonomial(Monomial const& monomial)
 {
-    bool isFoundInPolynomial(false);    for(Monomial & monomialInternal : m_monomials)
+    bool isFoundInPolynomial(false);
+    for(Monomial & monomialInternal : m_monomials)
     {
         if(canBeMergedByAdditionOrSubtraction(monomialInternal, monomial))
         {

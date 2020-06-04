@@ -3,7 +3,8 @@
 #include <SubstitutionOfVariablesToValues.hpp>
 #include <Utilities.hpp>
 
-#include <cassert>#include <string>
+#include <cassert>
+#include <string>
 
 using namespace std;
 
@@ -402,7 +403,8 @@ void Term::substituteVariablesToValues(VariablesToValuesMap const& variableValue
 
 void Term::resetBaseDataTermPointerBasedFromTerm(Term const& term)
 {
-    switch(term.getTermType())    {
+    switch(term.getTermType())
+    {
     case TermType::Empty:
         break;
     case TermType::Constant:

@@ -152,7 +152,8 @@ TEST(PolynomialTest, SimplifyAndSortWorks)
 
 TEST(PolynomialTest, SimplifyWorks)
 {
-    Polynomial polynomial1{Monomial(0, {{"x", 1}}), Monomial(0, {{"x", 1}})};    Polynomial polynomial2{Monomial(6, {})};
+    Polynomial polynomial1{Monomial(0, {{"x", 1}}), Monomial(0, {{"x", 1}})};
+    Polynomial polynomial2{Monomial(6, {})};
     Polynomial polynomial3{Monomial(6, {}), Monomial(-6, {})};
     Polynomial polynomial4{Monomial(-6, {{"y", 0}, {"z", 0}})};
 
@@ -220,7 +221,8 @@ TEST(PolynomialTest, SubstituteVariablesToValuesAndThenSimplifyWorks)
 
 TEST(PolynomialTest, AddMonomialWorks)
 {
-    Polynomial polynomial1;    Polynomial polynomial2{Monomial(1, {})};
+    Polynomial polynomial1;
+    Polynomial polynomial2{Monomial(1, {})};
     Polynomial polynomial3{Monomial(2, {}), Monomial(3, {{"x", 4}})};
 
     polynomial1.addMonomial(Monomial(5, {{"x", 4}}));

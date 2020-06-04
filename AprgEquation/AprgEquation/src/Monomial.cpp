@@ -4,6 +4,7 @@
 
 #include <set>
 #include <sstream>
+
 using namespace std;
 
 namespace alba
@@ -208,7 +209,8 @@ void Monomial::substituteVariablesToValues(VariablesToValuesMap const& variableV
 
 void Monomial::multiplyNumber(AlbaNumber const& number)
 {
-    m_constant = m_constant * number;}
+    m_constant = m_constant * number;
+}
 
 void Monomial::raiseToPowerNumber(AlbaNumber const& number)
 {
