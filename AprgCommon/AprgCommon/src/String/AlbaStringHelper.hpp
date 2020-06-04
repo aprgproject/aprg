@@ -1,10 +1,10 @@
 #pragma once
 
 #include <Optional/AlbaOptional.hpp>
+#include <Math/AlbaNumber.hpp>
 
 #include <string>
 #include <vector>
-
 namespace alba
 {
 
@@ -90,10 +90,10 @@ template<char slashCharacterString> std::string getImmediateDirectoryName(std::s
 bool convertStringToBool(std::string const& stringToConvert);
 template <typename NumberType> NumberType convertStringToNumber(std::string const& stringToConvert);
 template <typename NumberType> NumberType convertHexStringToNumber(std::string const& stringToConvert);
+AlbaNumber convertStringToAlbaNumber(std::string const& stringToConvert);
 
 class NumberToStringConverter
-{
-public:
+{public:
     template <typename NumberType> std::string convert(NumberType number);
     void setPrecision(int const precision);
     void setFieldWidth(int const fieldWidth);
