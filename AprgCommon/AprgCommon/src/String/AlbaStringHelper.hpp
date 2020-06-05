@@ -5,6 +5,7 @@
 
 #include <string>
 #include <vector>
+
 namespace alba
 {
 
@@ -93,7 +94,8 @@ template <typename NumberType> NumberType convertHexStringToNumber(std::string c
 AlbaNumber convertStringToAlbaNumber(std::string const& stringToConvert);
 
 class NumberToStringConverter
-{public:
+{
+public:
     template <typename NumberType> std::string convert(NumberType number);
     void setPrecision(int const precision);
     void setFieldWidth(int const fieldWidth);

@@ -31,7 +31,8 @@ public:
     bool isClosingGroupOperator() const;
 
     OperatorLevel getOperatorLevel() const;
-    std::string getOperatorString() const;    std::string getDisplayableString() const;
+    std::string getOperatorString() const;
+    std::string getDisplayableString() const;
 
     void setOperatorString(std::string const& operatingString);
 

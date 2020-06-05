@@ -20,6 +20,7 @@ public:
     TermsAggregator(Terms const& terms);
 
     Terms const& getTermsConstReference() const;
+
     void buildExpressionFromTerms();
     void simplifyTerms();
 
@@ -36,7 +37,8 @@ private:
     AlbaOptional<unsigned int> getNextOperatorIndexToTraverse() const;
 
     bool buildExpressionWithBinaryOperationAndReturnIfBuilt(unsigned int const index);
-    bool buildExpressionWithUnaryOperationAndReturnIfBuilt(unsigned int const index);    bool simplifyBinaryOperationAndReturnIfSimplified(unsigned int const index);
+    bool buildExpressionWithUnaryOperationAndReturnIfBuilt(unsigned int const index);
+    bool simplifyBinaryOperationAndReturnIfSimplified(unsigned int const index);
     bool simplifyUnaryOperationAndReturnIfSimplified(unsigned int const index);
 
     void eraseTermsInclusive(
@@ -50,6 +52,7 @@ private:
     unsigned int m_endIndex;
     Terms m_terms;
 };
+
 }
 
 }

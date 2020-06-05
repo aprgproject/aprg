@@ -1464,6 +1464,7 @@ TEST(ExpressionTest, SortWorks)
                     }));
     EXPECT_EQ(expressionToExpect, expression);
 }
+
 TEST(ExpressionTest, SubstituteVariablesToValuesWorks)
 {
     Expression expression1;
