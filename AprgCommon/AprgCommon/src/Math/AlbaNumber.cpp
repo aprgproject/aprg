@@ -47,10 +47,10 @@ AlbaNumber::AlbaNumber(double const doubleValue)
 {
     double& doubleDataReference(m_data.doubleData);
     doubleDataReference = doubleValue;
+    convertToIntegerIfNeeded();
 }
 
-bool AlbaNumber::operator==(AlbaNumber const& second) const
-{
+bool AlbaNumber::operator==(AlbaNumber const& second) const{
     return isAlmostEqual(getDouble(), second.getDouble());
 }
 
@@ -60,10 +60,19 @@ bool AlbaNumber::operator!=(AlbaNumber const& second) const
     return !(first==second);
 }
 
+bool AlbaNumber::operator<=(AlbaNumber const& second) const
+{
+    return getDouble() <= second.getDouble();
+}
+
+bool AlbaNumber::operator>=(AlbaNumber const& second) const
+{
+    return getDouble() >= second.getDouble();
+}
+
 bool AlbaNumber::operator<(AlbaNumber const& second) const
 {
-    return getDouble() < second.getDouble();
-}
+    return getDouble() < second.getDouble();}
 
 bool AlbaNumber::operator>(AlbaNumber const& second) const
 {
@@ -427,10 +436,14 @@ bool AlbaNumber::isDoubleType() const
     return m_type==Type::Double;
 }
 
+bool AlbaNumber::isIntegerOrFractionType() const
+{
+    return isIntegerType() || isFractionType();
+}
+
 AlbaNumber::Type AlbaNumber::getType() const
 {
-    return m_type;
-}
+    return m_type;}
 
 int AlbaNumber::getInteger() const
 {
@@ -521,16 +534,19 @@ string AlbaNumber::getDisplayableString() const
 
 void AlbaNumber::convertToIntegerIfNeeded()
 {
-    if(m_type == Type::Fraction)
+    /*if(m_type == Type::Fraction)
     {
         FractionData& fractionDataReference(m_data.fractionData);
-        if(isDivisible(getAbsoluteValue(fractionDataReference.numerator), fractionDataReference.denominator))
-        {
+        if(isDivisible(getAbsoluteValue(fractionDataReference.numerator), fractionDataReference.denominator))        {
             *this = AlbaNumber(static_cast<int>(fractionDataReference.numerator/fractionDataReference.denominator));
         }
+    }*/
+    double realValue(getDouble());
+    if(canConvertedToInteger(realValue))
+    {
+        *this = AlbaNumber(getIntegerAfterRoundingDoubleValue(realValue));
     }
 }
-
 AlbaNumber AlbaNumber::addBothIntegersAndReturnNumber(int const signedValue1, int const signedValue2) const
 {
     return AlbaNumber(signedValue1 + signedValue2);

@@ -3,10 +3,10 @@
 #include <Container/AlbaUniqueVariant.hpp>
 
 #include <string>
+#include <vector>
 
 namespace alba
 {
-
 class AlbaNumber
 {
 public:
@@ -35,10 +35,11 @@ public:
 
     bool operator==(AlbaNumber const& second) const;
     bool operator!=(AlbaNumber const& second) const;
+    bool operator<=(AlbaNumber const& second) const;
+    bool operator>=(AlbaNumber const& second) const;
     bool operator<(AlbaNumber const& second) const;
     bool operator>(AlbaNumber const& second) const;
-    AlbaNumber operator+() const;
-    AlbaNumber operator-() const;
+    AlbaNumber operator+() const;    AlbaNumber operator-() const;
     AlbaNumber operator+(AlbaNumber const& second) const;
     AlbaNumber operator-(AlbaNumber const& second) const;
     AlbaNumber operator*(AlbaNumber const& second) const;
@@ -63,10 +64,10 @@ public:
     bool isIntegerType() const;
     bool isFractionType() const;
     bool isDoubleType() const;
+    bool isIntegerOrFractionType() const;
 
     Type getType() const;
-    int getInteger() const;
-    FractionData getFractionData() const;
+    int getInteger() const;    FractionData getFractionData() const;
     double getDouble() const;
 
     std::string getDisplayableString() const;
@@ -93,5 +94,7 @@ private:
     Type m_type;
     NumberUnionData m_data;
 };
+
+using AlbaNumbers=std::vector<AlbaNumber>;
 
 }
