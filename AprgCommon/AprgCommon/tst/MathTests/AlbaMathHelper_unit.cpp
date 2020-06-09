@@ -94,19 +94,26 @@ TEST(AlbaMathHelperTest, HigherBoundCanBeComputed)
     EXPECT_EQ(3, clampHigherBound(5, 3));
 }
 
-TEST(AlbaMathHelperTest, CanConvertedToIntegerAsExpected)
+TEST(AlbaMathHelperTest, CanConvertedToIntegerAsWorkExpected)
 {
     EXPECT_TRUE(canConvertedToInteger(0));
-    EXPECT_TRUE(canConvertedToInteger(1));
-    EXPECT_TRUE(canConvertedToInteger(2));
+    EXPECT_TRUE(canConvertedToInteger(1));    EXPECT_TRUE(canConvertedToInteger(2));
     EXPECT_FALSE(canConvertedToInteger(3.00000001));
     EXPECT_TRUE(canConvertedToInteger(3.0000000000001));
 }
 
+TEST(AlbaMathHelperTest, AreNumberOfDigitsOnTheIntegerLimitWorkAsExpected)
+{
+    EXPECT_FALSE(areNumberOfDigitsOnTheIntegerLimit(0));
+    EXPECT_FALSE(areNumberOfDigitsOnTheIntegerLimit(1));
+    EXPECT_FALSE(areNumberOfDigitsOnTheIntegerLimit(9));
+    EXPECT_TRUE(areNumberOfDigitsOnTheIntegerLimit(10));
+    EXPECT_TRUE(areNumberOfDigitsOnTheIntegerLimit(11));
+}
+
 TEST(AlbaMathHelperTest, IsDivisibleWorksAsExpected)
 {
-    EXPECT_FALSE(isDivisible(0u, 0u));
-    EXPECT_TRUE(isDivisible(0u, 1u));
+    EXPECT_FALSE(isDivisible(0u, 0u));    EXPECT_TRUE(isDivisible(0u, 1u));
     EXPECT_TRUE(isDivisible(1u, 1u));
     EXPECT_FALSE(isDivisible(1u, 5u));
     EXPECT_TRUE(isDivisible(5u, 1u));
@@ -196,10 +203,25 @@ TEST(AlbaMathHelperTest, GetEWorksAsExpected)
     EXPECT_DOUBLE_EQ(2.7182818284590452354, getE());
 }
 
+TEST(AlbaMathHelperTest, GetNumberOfDigitsWorksAsExpected)
+{
+    EXPECT_EQ(0u, getNumberOfIntegerDigits<unsigned int>(0));
+    EXPECT_EQ(1u, getNumberOfIntegerDigits<unsigned int>(1));
+    EXPECT_EQ(2u, getNumberOfIntegerDigits<unsigned int>(54));
+    EXPECT_EQ(4u, getNumberOfIntegerDigits<unsigned int>(1000));
+    EXPECT_EQ(0u, getNumberOfIntegerDigits<int>(0));
+    EXPECT_EQ(1u, getNumberOfIntegerDigits<int>(-1));
+    EXPECT_EQ(2u, getNumberOfIntegerDigits<int>(-54));
+    EXPECT_EQ(4u, getNumberOfIntegerDigits<int>(-1000));
+    EXPECT_EQ(0u, getNumberOfIntegerDigits<double>(0));
+    EXPECT_EQ(1u, getNumberOfIntegerDigits<double>(1.1));
+    EXPECT_EQ(2u, getNumberOfIntegerDigits<double>(-54.123));
+    EXPECT_EQ(4u, getNumberOfIntegerDigits<double>(1000.12345));
+}
+
 TEST(AlbaMathHelperTest, GetRaiseToPowerForIntegersWorksAsExpected)
 {
-    EXPECT_EQ(1, getRaiseToPowerForIntegers(0, 0u));
-    EXPECT_EQ(1, getRaiseToPowerForIntegers(1, 0u));
+    EXPECT_EQ(1, getRaiseToPowerForIntegers(0, 0u));    EXPECT_EQ(1, getRaiseToPowerForIntegers(1, 0u));
     EXPECT_EQ(0, getRaiseToPowerForIntegers(0, 1u));
     EXPECT_EQ(243, getRaiseToPowerForIntegers(3, 5u));
     EXPECT_EQ(-128, getRaiseToPowerForIntegers(-2, 7u));
@@ -231,10 +253,14 @@ TEST(AlbaMathHelperTest, FractionDetailsInLowestFormCanBeComputed)
     EXPECT_EQ(1, fractionDetails5.sign);
     EXPECT_EQ(3u, fractionDetails5.numerator);
     EXPECT_EQ(4u, fractionDetails5.denominator);
+
+    FractionDetails fractionDetails6(getFractionDetailsInLowestForm(1234567891, -1234567892));
+    EXPECT_EQ(-1, fractionDetails6.sign);
+    EXPECT_EQ(1234567891u, fractionDetails6.numerator);
+    EXPECT_EQ(1234567892u, fractionDetails6.denominator);
 }
 
-TEST(AlbaMathHelperTest, BestFractionDetailsForDoubleValueCanBeComputed)
-{
+TEST(AlbaMathHelperTest, BestFractionDetailsForDoubleValueCanBeComputed){
     FractionDetails fractionDetails1(getBestFractionDetailsForDoubleValue(0));
     EXPECT_EQ(1, fractionDetails1.sign);
     EXPECT_EQ(0u, fractionDetails1.numerator);
@@ -276,10 +302,10 @@ TEST(AlbaMathHelperTest, GreatestCommonFactorCanBeComputed)
     EXPECT_EQ(1u, getGreatestCommonFactor(1, 1));
     EXPECT_EQ(16u, getGreatestCommonFactor(16, 32));
     EXPECT_EQ(14u, getGreatestCommonFactor(98, 56));
+    EXPECT_EQ(1u, getGreatestCommonFactor(1234567891, 3));
 }
 
-TEST(AlbaMathHelperTest, GreatestCommonFactorWithAlbaNumberCanBeComputed)
-{
+TEST(AlbaMathHelperTest, GreatestCommonFactorWithAlbaNumberCanBeComputed){
     EXPECT_EQ(AlbaNumber(0), getGreatestCommonFactor(AlbaNumber(0), AlbaNumber(0)));
     EXPECT_EQ(AlbaNumber(1), getGreatestCommonFactor(AlbaNumber(1), AlbaNumber(1)));
     EXPECT_EQ(AlbaNumber(1, 12), getGreatestCommonFactor(AlbaNumber(1, 6), AlbaNumber(1, 4)));
@@ -294,10 +320,10 @@ TEST(AlbaMathHelperTest, LeastCommonMultipleCanBeComputed)
     EXPECT_EQ(1u, getLeastCommonMultiple(1, 1));
     EXPECT_EQ(256u, getLeastCommonMultiple(8, 256));
     EXPECT_EQ(60u, getLeastCommonMultiple(15, 20));
+    EXPECT_EQ(262144u, getLeastCommonMultiple(65536, 262144));
 }
 
-TEST(AlbaMathHelperTest, DifferenceFromGreaterMultipleCanBeComputed)
-{
+TEST(AlbaMathHelperTest, DifferenceFromGreaterMultipleCanBeComputed){
     EXPECT_EQ(0u, getDifferenceFromGreaterMultiple(0, 0));
     EXPECT_EQ(0u, getDifferenceFromGreaterMultiple(10, 10));
     EXPECT_EQ(0u, getDifferenceFromGreaterMultiple(5, 10));
