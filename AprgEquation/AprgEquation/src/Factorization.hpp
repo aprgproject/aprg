@@ -1,9 +1,9 @@
 #pragma once
 
+#include <Math/AlbaNumberTypes.hpp>
 #include <Polynomial.hpp>
 
-namespace alba
-{
+namespace alba{
 
 namespace equation
 {
