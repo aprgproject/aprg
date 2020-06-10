@@ -1,13 +1,14 @@
 #include "PolynomialOverPolynomial.hpp"
 
+#include <Factorization.hpp>
 #include <Math/AlbaMathHelper.hpp>
 #include <Utilities.hpp>
 
 using namespace alba::mathHelper;
+using namespace alba::equation::Factorization;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace equation
 {
@@ -43,10 +44,51 @@ void PolynomialOverPolynomial::simplify()
     removeCommonMonomialOnAllMonomialsInNumeratorAndDenominator();
     m_numerator.simplify();
     m_denominator.simplify();
+
+
+    Polynomials numeratorFactors(factorize(m_numerator));
+    Polynomials denominatorFactors(factorize(m_denominator));
+
+    bool areSomeFactorsCancelled(false);
+    for(Polynomials::iterator numeratorIterator = numeratorFactors.begin();
+        numeratorIterator != numeratorFactors.end();
+        numeratorIterator++)
+    {
+        for(Polynomials::iterator denominatorIterator = denominatorFactors.begin();
+            denominatorIterator != denominatorFactors.end();
+            denominatorIterator++)
+        {
+            if(*numeratorIterator == *denominatorIterator)
+            {
+                numeratorFactors.erase(numeratorIterator);
+                denominatorFactors.erase(denominatorIterator);
+                numeratorIterator--;
+                denominatorIterator--;
+                areSomeFactorsCancelled = true;
+            }
+        }
+    }
+    if(areSomeFactorsCancelled)
+    {
+        Polynomial newNumerator{Monomial(1, {})};
+        Polynomial newDenominator{Monomial(1, {})};
+        for(Polynomial const& numeratorFactor : numeratorFactors)
+        {
+            newNumerator.multiplyPolynomial(numeratorFactor);
+        }
+
+        for(Polynomial const& denominatorFactor : denominatorFactors)
+        {
+            newDenominator.multiplyPolynomial(denominatorFactor);
+        }
+        newNumerator.simplify();
+        newDenominator.simplify();
+        m_numerator = newNumerator;
+        m_denominator = newDenominator;
+    }
 }
 
-void PolynomialOverPolynomial::sortNumeratorAndDenominator()
-{
+void PolynomialOverPolynomial::sortNumeratorAndDenominator(){
     m_numerator.sortMonomialsWithInversePriority();
     m_denominator.sortMonomialsWithInversePriority();
 }
