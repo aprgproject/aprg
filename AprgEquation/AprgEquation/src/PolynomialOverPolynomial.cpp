@@ -45,11 +45,8 @@ void PolynomialOverPolynomial::simplify()
     removeCommonMonomialOnAllMonomialsInNumeratorAndDenominator();
     m_numerator.simplify();
     m_denominator.simplify();
-
-
     factorizeAndRemoveCommonFactorsInNumeratorAndDenominator();
 }
-
 void PolynomialOverPolynomial::sortNumeratorAndDenominator()
 {
     m_numerator.sortMonomialsWithInversePriority();
