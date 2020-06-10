@@ -7,13 +7,15 @@
 
 namespace alba
 {
+
 class AlbaNumber
 {
 public:
     friend std::ostream & operator<<(std::ostream & out, AlbaNumber const& number);
     enum class Type
     {
-        Integer,        Fraction,
+        Integer,
+        Fraction,
         Double
     };
     struct FractionData
@@ -84,7 +86,8 @@ private:
     bool isDoubleConversionNeededForRaiseToPower(AlbaNumber const& first, AlbaNumber const& second) const;
     void convertToIntegerIfNeeded();
     AlbaNumber addBothIntegersAndReturnNumber(int const signedValue1, int const signedValue2) const;
-    AlbaNumber addBothFractionsAndReturnNumber(FractionData const& fractionData1, FractionData const& fractionData2) const;    AlbaNumber addBothDoubleAndReturnNumber(double const doubleValue1, double const doubleValue2) const;
+    AlbaNumber addBothFractionsAndReturnNumber(FractionData const& fractionData1, FractionData const& fractionData2) const;
+    AlbaNumber addBothDoubleAndReturnNumber(double const doubleValue1, double const doubleValue2) const;
     AlbaNumber addIntegerAndFractionAndReturnNumber(int const signedValue, FractionData const& fractionData) const;
     AlbaNumber addIntegerAndDoubleAndReturnNumber(int const signedValue, double const doubleValue) const;
     AlbaNumber addFractionAndDoubleAndReturnNumber(FractionData const& fractionData, double const doubleValue) const;

@@ -6,6 +6,7 @@
 #include <Utilities.hpp>
 
 #include <algorithm>
+
 using namespace alba::mathHelper;
 using namespace std;
 
@@ -158,7 +159,8 @@ Polynomials factorizeIncreasingAndDecreasingExponentsFormIfNotFactorized(Polynom
         unsigned int exponentDivisor(calculateExponentDivisor(firstMonomial, lastMonomial));
         if(areExponentsDivisible(firstMonomial, exponentDivisor) && areExponentsDivisible(lastMonomial, exponentDivisor))
         {
-            Monomial unitFirstMonomial(1, firstMonomial.getVariablesToExponentsMapConstReference());            Monomial unitSecondMonomial(1, lastMonomial.getVariablesToExponentsMapConstReference());
+            Monomial unitFirstMonomial(1, firstMonomial.getVariablesToExponentsMapConstReference());
+            Monomial unitSecondMonomial(1, lastMonomial.getVariablesToExponentsMapConstReference());
             unitFirstMonomial.raiseToPowerNumber(AlbaNumber(1, exponentDivisor));
             unitSecondMonomial.raiseToPowerNumber(AlbaNumber(1, exponentDivisor));
             Monomials monomialsWithExponentsInOrder(getMonomialsWithExponentsInOrder(exponentDivisor, unitFirstMonomial, unitSecondMonomial));
@@ -173,7 +175,8 @@ Polynomials factorizeIncreasingAndDecreasingExponentsFormIfNotFactorized(Polynom
                             unitSecondMonomial.getVariablesToExponentsMapConstReference());
             }
         }
-    }    return result;
+    }
+    return result;
 }
 
 void factorizeRootsInIncreasingAndDecreasingExponentsForm(
@@ -204,7 +207,8 @@ void factorizeRootsInIncreasingAndDecreasingExponentsForm(
 
 void factorizeQuadraticForm(
         Polynomials & result,
-        AlbaNumbers const& coefficients,        Monomial::VariablesToExponentsMap const& firstVariableExponent,
+        AlbaNumbers const& coefficients,
+        Monomial::VariablesToExponentsMap const& firstVariableExponent,
         Monomial::VariablesToExponentsMap const& secondVariableExponent)
 {
     if(coefficients.size() == 3)
@@ -267,6 +271,7 @@ void factorizeOneRootInIncreasingAndDecreasingExponentsForm(
         simplifyPolynomialThenEmplaceBack(result, quotientAndRemainder.quotient);
     }
 }
+
 void addFactorsOfDifferenceOfSquares(Polynomials & result, Polynomial const& polynomial)
 {
     Monomials monomials(polynomial.getMonomialsConstReference());
@@ -351,6 +356,7 @@ void fixCoefficientsOfFactors(
     rootSecondCoefficient = rootSecondCoefficient * multiplier;
     aCoefficient = aCoefficient / multiplier;
 }
+
 bool isDifferenceOfSquares(Polynomial const& polynomial)
 {
     bool result(false);
@@ -543,6 +549,7 @@ unsigned int calculateExponentDivisor(
     }
     return exponentDivisor;
 }
+
 }
 
 }

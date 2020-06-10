@@ -30,8 +30,14 @@ public:
 private:
     unsigned int getLcmForDenominatorCoefficients(Polynomial const& polynomial);
     Monomial getAndPositiveExponentsMonomialWithNegativeExponents(Polynomial const& polynomial);
-    void convertFractionCoefficientsToInteger();    void convertNegativeExponentsToPositive();
+    void convertFractionCoefficientsToInteger();
+    void convertNegativeExponentsToPositive();
     void removeCommonMonomialOnAllMonomialsInNumeratorAndDenominator();
+    void factorizeAndRemoveCommonFactorsInNumeratorAndDenominator();
+    bool removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(
+            Polynomials & numeratorFactors,
+            Polynomials & denominatorFactors) const;
+    Polynomial multiplyAndSimplifyFactors(Polynomials const& factors) const;
     Polynomial m_numerator;
     Polynomial m_denominator;
 };

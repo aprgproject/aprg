@@ -171,7 +171,8 @@ AlbaNumber Monomial::getMaxExponent() const
 
 AlbaNumber Monomial::getExponentForVariable(string const& variableName) const
 {
-    AlbaNumber exponent(0);    if(m_variablesToExponentsMap.find(variableName) != m_variablesToExponentsMap.cend())
+    AlbaNumber exponent(0);
+    if(m_variablesToExponentsMap.find(variableName) != m_variablesToExponentsMap.cend())
     {
         exponent = m_variablesToExponentsMap.at(variableName);
     }

@@ -95,6 +95,7 @@ TEST(AlbaNumberTest, GetIntegerWorksAsExpected)
     EXPECT_EQ(9, number4.getInteger());
     EXPECT_EQ(4564, number5.getInteger());
 }
+
 TEST(AlbaNumberTest, GetFractionDataWorksAsExpected)
 {
     AlbaNumber number1;
@@ -120,7 +121,8 @@ TEST(AlbaNumberTest, GetFractionDataWorksAsExpected)
     EXPECT_EQ(50000, fractionData5.denominator);
 }
 
-TEST(AlbaNumberTest, GetDoubleWorksAsExpected){
+TEST(AlbaNumberTest, GetDoubleWorksAsExpected)
+{
     AlbaNumber number1;
     AlbaNumber number2(-81237);
     AlbaNumber number3(34095093u);
@@ -285,7 +287,8 @@ TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromInteger)
     AlbaNumber number5 = AlbaNumber(1234567891) + AlbaNumber(1234567891);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
-    EXPECT_EQ(0, number1.getInteger());    EXPECT_EQ(AlbaNumber::Type::Integer, number2.getType());
+    EXPECT_EQ(0, number1.getInteger());
+    EXPECT_EQ(AlbaNumber::Type::Integer, number2.getType());
     EXPECT_EQ(110, number2.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number3.getType());
     AlbaNumber::FractionData fractionData(number3.getFractionData());
@@ -297,7 +300,8 @@ TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromInteger)
     EXPECT_DOUBLE_EQ(2469135782, number5.getDouble());
 }
 
-TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromFraction){
+TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromFraction)
+{
     AlbaNumber number1 = AlbaNumber(0, 1) + AlbaNumber(0, 1);
     AlbaNumber number2 = AlbaNumber(100, 6) + 5;
     AlbaNumber number3 = AlbaNumber(100, 6) + AlbaNumber(10, 7);
@@ -308,7 +312,8 @@ TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromFraction){
     AlbaNumber number8 = AlbaNumber(1234567890, 1234567891) + AlbaNumber(1234567890, 1234567893);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
-    EXPECT_EQ(0, number1.getInteger());    EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
+    EXPECT_EQ(0, number1.getInteger());
+    EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
     AlbaNumber::FractionData fractionData2(number2.getFractionData());
     EXPECT_EQ(65, fractionData2.numerator);
     EXPECT_EQ(3u, fractionData2.denominator);
@@ -328,7 +333,8 @@ TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromFraction){
     EXPECT_DOUBLE_EQ(1.9999999967600002, number8.getDouble());
 }
 
-TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromDouble){
+TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromDouble)
+{
     AlbaNumber number1 = AlbaNumber(0.1) + AlbaNumber(0);
     AlbaNumber number2 = AlbaNumber(10.5) + 5;
     AlbaNumber number3 = AlbaNumber(10.5) + AlbaNumber(10, 7);
@@ -336,7 +342,8 @@ TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromDouble){
     AlbaNumber number5 = AlbaNumber(1234567891.1) + AlbaNumber(1234567891);
 
     EXPECT_EQ(AlbaNumber::Type::Double, number1.getType());
-    EXPECT_DOUBLE_EQ(0.1, number1.getDouble());    EXPECT_EQ(AlbaNumber::Type::Double, number2.getType());
+    EXPECT_DOUBLE_EQ(0.1, number1.getDouble());
+    EXPECT_EQ(AlbaNumber::Type::Double, number2.getType());
     EXPECT_DOUBLE_EQ(15.5, number2.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Double, number3.getType());
     EXPECT_DOUBLE_EQ(11.928571428571429, number3.getDouble());
@@ -346,7 +353,8 @@ TEST(AlbaNumberTest, AdditionWorksOnTypesStartingFromDouble){
     EXPECT_DOUBLE_EQ(2469135782.0999999, number5.getDouble());
 }
 
-TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromInteger){
+TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromInteger)
+{
     AlbaNumber number1 = AlbaNumber() - AlbaNumber();
     AlbaNumber number2 = AlbaNumber(100) - 10;
     AlbaNumber number3 = AlbaNumber(100) - AlbaNumber(10, 3);
@@ -354,7 +362,8 @@ TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromInteger){
     AlbaNumber number5 = AlbaNumber(1234567891) - AlbaNumber(1234567891);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
-    EXPECT_EQ(0, number1.getInteger());    EXPECT_EQ(AlbaNumber::Type::Integer, number2.getType());
+    EXPECT_EQ(0, number1.getInteger());
+    EXPECT_EQ(AlbaNumber::Type::Integer, number2.getType());
     EXPECT_EQ(90, number2.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number3.getType());
     AlbaNumber::FractionData fractionData(number3.getFractionData());
@@ -366,7 +375,8 @@ TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromInteger){
     EXPECT_EQ(0, number5.getInteger());
 }
 
-TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromFraction){
+TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromFraction)
+{
     AlbaNumber number1 = AlbaNumber(0, 1) - AlbaNumber(0, 1);
     AlbaNumber number2 = AlbaNumber(100, 6) - 5;
     AlbaNumber number3 = AlbaNumber(100, 6) - AlbaNumber(10, 7);
@@ -378,7 +388,8 @@ TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromFraction){
     AlbaNumber number9 = AlbaNumber(169, 65536) - AlbaNumber(1, 262144);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
-    EXPECT_EQ(0, number1.getInteger());    EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
+    EXPECT_EQ(0, number1.getInteger());
+    EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
     AlbaNumber::FractionData fractionData2(number2.getFractionData());
     EXPECT_EQ(35, fractionData2.numerator);
     EXPECT_EQ(3u, fractionData2.denominator);
@@ -402,7 +413,8 @@ TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromFraction){
     EXPECT_DOUBLE_EQ(0.002574920654296875, number9.getDouble());
 }
 
-TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromDouble){
+TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromDouble)
+{
     AlbaNumber number1 = AlbaNumber(0.1) - AlbaNumber(0);
     AlbaNumber number2 = AlbaNumber(10.5) - 5;
     AlbaNumber number3 = AlbaNumber(10.5) - AlbaNumber(10, 7);
@@ -410,7 +422,8 @@ TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromDouble){
     AlbaNumber number5 = AlbaNumber(1234567891.1) - AlbaNumber(1234567891);
 
     EXPECT_EQ(AlbaNumber::Type::Double, number1.getType());
-    EXPECT_DOUBLE_EQ(0.1, number1.getDouble());    EXPECT_EQ(AlbaNumber::Type::Double, number2.getType());
+    EXPECT_DOUBLE_EQ(0.1, number1.getDouble());
+    EXPECT_EQ(AlbaNumber::Type::Double, number2.getType());
     EXPECT_DOUBLE_EQ(5.5, number2.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Double, number3.getType());
     EXPECT_DOUBLE_EQ(9.0714285714285712, number3.getDouble());
@@ -420,7 +433,8 @@ TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromDouble){
     EXPECT_DOUBLE_EQ(0.099999904632568359, number5.getDouble());
 }
 
-TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromInteger){
+TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromInteger)
+{
     AlbaNumber number1 = AlbaNumber() * AlbaNumber();
     AlbaNumber number2 = AlbaNumber(100) * 10;
     AlbaNumber number3 = AlbaNumber(100) * AlbaNumber(10, 3);
@@ -428,7 +442,8 @@ TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromInteger){
     AlbaNumber number5 = AlbaNumber(1234567891) * AlbaNumber(1234567891);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
-    EXPECT_EQ(0, number1.getInteger());    EXPECT_EQ(AlbaNumber::Type::Integer, number2.getType());
+    EXPECT_EQ(0, number1.getInteger());
+    EXPECT_EQ(AlbaNumber::Type::Integer, number2.getType());
     EXPECT_EQ(1000, number2.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number3.getType());
     AlbaNumber::FractionData fractionData(number3.getFractionData());
@@ -440,7 +455,8 @@ TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromInteger){
     EXPECT_DOUBLE_EQ(1.5241578774881879e+018, number5.getDouble());
 }
 
-TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromFraction){
+TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromFraction)
+{
     AlbaNumber number1 = AlbaNumber(0, 1) * AlbaNumber(0, 1);
     AlbaNumber number2 = AlbaNumber(100, 6) * 5;
     AlbaNumber number3 = AlbaNumber(100, 6) * AlbaNumber(10, 7);
@@ -451,7 +467,8 @@ TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromFraction){
     AlbaNumber number8 = AlbaNumber(1234567890, 1234567891) * AlbaNumber(1234567890, 1234567893);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
-    EXPECT_EQ(0, number1.getInteger());    EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
+    EXPECT_EQ(0, number1.getInteger());
+    EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
     AlbaNumber::FractionData fractionData2(number2.getFractionData());
     EXPECT_EQ(250, fractionData2.numerator);
     EXPECT_EQ(3u, fractionData2.denominator);
@@ -472,7 +489,8 @@ TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromFraction){
     EXPECT_DOUBLE_EQ(0.99999999676000006, number8.getDouble());
 }
 
-TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromDouble){
+TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromDouble)
+{
     AlbaNumber number1 = AlbaNumber(0.1) * AlbaNumber(0);
     AlbaNumber number2 = AlbaNumber(10.5) * 5;
     AlbaNumber number3 = AlbaNumber(10.5) * AlbaNumber(10, 7);
@@ -480,7 +498,8 @@ TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromDouble){
     AlbaNumber number5 = AlbaNumber(1234567891.1) * AlbaNumber(1234567891);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
-    EXPECT_EQ(0, number1.getInteger());    EXPECT_EQ(AlbaNumber::Type::Double, number2.getType());
+    EXPECT_EQ(0, number1.getInteger());
+    EXPECT_EQ(AlbaNumber::Type::Double, number2.getType());
     EXPECT_DOUBLE_EQ(52.5, number2.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Integer, number3.getType());
     EXPECT_EQ(15, number3.getInteger());
@@ -490,7 +509,8 @@ TEST(AlbaNumberTest, MultiplyWorksOnTypesStartingFromDouble){
     EXPECT_DOUBLE_EQ(1.5241578776116447e+018, number5.getDouble());
 }
 
-TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromInteger){
+TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromInteger)
+{
     AlbaNumber number1 = AlbaNumber() / AlbaNumber(1);
     AlbaNumber number2 = AlbaNumber(100) / 10;
     AlbaNumber number3 = AlbaNumber(100) / AlbaNumber(11, 3);
@@ -498,7 +518,8 @@ TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromInteger){
     AlbaNumber number5 = AlbaNumber(1234567893) / AlbaNumber(1234567891);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
-    EXPECT_EQ(0, number1.getInteger());    EXPECT_EQ(AlbaNumber::Type::Integer, number2.getType());
+    EXPECT_EQ(0, number1.getInteger());
+    EXPECT_EQ(AlbaNumber::Type::Integer, number2.getType());
     EXPECT_EQ(10, number2.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number3.getType());
     AlbaNumber::FractionData fractionData(number3.getFractionData());
@@ -512,7 +533,8 @@ TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromInteger){
     EXPECT_EQ(1234567891u, fractionData1.denominator);
 }
 
-TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromFraction){
+TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromFraction)
+{
     AlbaNumber number1 = AlbaNumber(0, 1) / AlbaNumber(1, 1);
     AlbaNumber number2 = AlbaNumber(100, 6) / 5;
     AlbaNumber number3 = AlbaNumber(100, 6) / AlbaNumber(10, 7);
@@ -523,7 +545,8 @@ TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromFraction){
     AlbaNumber number8 = AlbaNumber(1234567890, 1234567891) / AlbaNumber(1234567890, 1234567893);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
-    EXPECT_EQ(0, number1.getInteger());    EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
+    EXPECT_EQ(0, number1.getInteger());
+    EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
     AlbaNumber::FractionData fractionData2(number2.getFractionData());
     EXPECT_EQ(10, fractionData2.numerator);
     EXPECT_EQ(3u, fractionData2.denominator);
@@ -543,7 +566,8 @@ TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromFraction){
     EXPECT_DOUBLE_EQ(1.0000000016200001, number8.getDouble());
 }
 
-TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromDouble){
+TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromDouble)
+{
     AlbaNumber number1 = AlbaNumber(0.1) / AlbaNumber(1);
     AlbaNumber number2 = AlbaNumber(10.5) / 5;
     AlbaNumber number3 = AlbaNumber(10.5) / AlbaNumber(10, 7);
@@ -551,7 +575,8 @@ TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromDouble){
     AlbaNumber number5 = AlbaNumber(1234567891.1) / AlbaNumber(1234567891);
 
     EXPECT_EQ(AlbaNumber::Type::Double, number1.getType());
-    EXPECT_DOUBLE_EQ(0.10000000000000001, number1.getDouble());    EXPECT_EQ(AlbaNumber::Type::Double, number2.getType());
+    EXPECT_DOUBLE_EQ(0.10000000000000001, number1.getDouble());
+    EXPECT_EQ(AlbaNumber::Type::Double, number2.getType());
     EXPECT_DOUBLE_EQ(2.1000000000000001, number2.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Double, number3.getType());
     EXPECT_DOUBLE_EQ(7.3499999999999996, number3.getDouble());
@@ -561,7 +586,8 @@ TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromDouble){
     EXPECT_DOUBLE_EQ(1.0000000000809999, number5.getDouble());
 }
 
-TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromInteger){
+TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromInteger)
+{
     AlbaNumber number1 = AlbaNumber() ^ AlbaNumber(1);
     AlbaNumber number2 = AlbaNumber(-10) ^ 5;
     AlbaNumber number3 = AlbaNumber(10) ^ AlbaNumber(11, 3);
@@ -569,7 +595,8 @@ TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromInteger){
     AlbaNumber number5 = AlbaNumber(1234567891) ^ AlbaNumber(3);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
-    EXPECT_EQ(0, number1.getInteger());    EXPECT_EQ(AlbaNumber::Type::Integer, number2.getType());
+    EXPECT_EQ(0, number1.getInteger());
+    EXPECT_EQ(AlbaNumber::Type::Integer, number2.getType());
     EXPECT_EQ(-100000, number2.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Double, number3.getType());
     EXPECT_DOUBLE_EQ(4641.5888336127773, number3.getDouble());
@@ -579,7 +606,8 @@ TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromInteger){
     EXPECT_DOUBLE_EQ(1.8816763763616284e+027, number5.getDouble());
 }
 
-TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromFraction){
+TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromFraction)
+{
     AlbaNumber number1 = AlbaNumber(0, 1) ^ AlbaNumber(1, 1);
     AlbaNumber number2 = AlbaNumber(10, 6) ^ 5;
     AlbaNumber number3 = AlbaNumber(10, 6) ^ AlbaNumber(10, 7);
@@ -589,7 +617,8 @@ TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromFraction){
     AlbaNumber number8 = AlbaNumber(1234567890, 1234567891) ^ AlbaNumber(1234567890, 1234567893);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
-    EXPECT_EQ(0, number1.getInteger());    EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
+    EXPECT_EQ(0, number1.getInteger());
+    EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
     AlbaNumber::FractionData fractionData2(number2.getFractionData());
     EXPECT_EQ(3125, fractionData2.numerator);
     EXPECT_EQ(243u, fractionData2.denominator);
@@ -605,7 +634,8 @@ TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromFraction){
     EXPECT_DOUBLE_EQ(0.99999999919000004, number8.getDouble());
 }
 
-TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromDouble){
+TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromDouble)
+{
     AlbaNumber number1 = AlbaNumber(0.1) ^ AlbaNumber(1);
     AlbaNumber number2 = AlbaNumber(10.5) ^ 5;
     AlbaNumber number3 = AlbaNumber(10.5) ^ AlbaNumber(10, 7);
@@ -613,7 +643,8 @@ TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromDouble){
     AlbaNumber number5 = AlbaNumber(1234567891.1) ^ AlbaNumber(3);
 
     EXPECT_EQ(AlbaNumber::Type::Double, number1.getType());
-    EXPECT_DOUBLE_EQ(0.10000000000000001, number1.getDouble());    EXPECT_EQ(AlbaNumber::Type::Double, number2.getType());
+    EXPECT_DOUBLE_EQ(0.10000000000000001, number1.getDouble());
+    EXPECT_EQ(AlbaNumber::Type::Double, number2.getType());
     EXPECT_DOUBLE_EQ(127628.15625, number2.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Double, number3.getType());
     EXPECT_DOUBLE_EQ(28.763508283430014, number3.getDouble());
@@ -623,7 +654,8 @@ TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromDouble){
     EXPECT_DOUBLE_EQ(1.8816763768188754e+027, number5.getDouble());
 }
 
-TEST(AlbaNumberTest, GetDisplayableStringWorks){
+TEST(AlbaNumberTest, GetDisplayableStringWorks)
+{
     AlbaNumber number1;
     AlbaNumber number2(3484);
     AlbaNumber number3(-1561);

@@ -51,6 +51,7 @@ public:
     AlbaNumber getMaxExponent() const;
     AlbaNumber getExponentForVariable(std::string const& variableName) const;
     std::string getDisplayableString() const;
+
     void simplify();
     void substituteVariablesToValues(VariablesToValuesMap const& variableValueMap);
     void multiplyNumber(AlbaNumber const& number);
