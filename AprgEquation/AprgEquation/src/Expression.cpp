@@ -1,19 +1,18 @@
 #include "Expression.hpp"
 
+#include <Factorization.hpp>
 #include <Optional/AlbaOptional.hpp>
 #include <PerformOperations.hpp>
-#include <PolynomialOverPolynomial.hpp>
 #include <Term.hpp>
 #include <TermOperators.hpp>
 #include <Utilities.hpp>
-
 #include <algorithm>
 #include <sstream>
 
+using namespace alba::equation::Factorization;
 using namespace std;
 using TermWithDetails=alba::equation::TermsWithAssociation::TermWithDetails;
 using TermsWithDetails=alba::equation::TermsWithAssociation::TermsWithDetails;
-
 namespace alba
 {
 
@@ -142,11 +141,10 @@ string Expression::getDebugString() const
         {
             result << getOperatingString(m_commonOperatorLevel, termWithDetails.association);
         }
-        result << getEnumShortString(termWithDetails.association) << term.getDisplayableString();
+        result << getEnumShortString(termWithDetails.association) << term.getDebugString();
     }
     result << " )";
-    return result.str();
-}
+    return result.str();}
 
 void Expression::clear()
 {
@@ -389,10 +387,23 @@ void Expression::simplify()
     simplifyFurtherIfNeeded(beforeSimplify, afterSimplify);
 }
 
+void Expression::simplifyToOneFraction()
+{
+    simplify();
+
+    Terms denominatorTerms;
+    retrieveDenominatorTerms(denominatorTerms, *this);
+    for(Term const& denominatorTerm : denominatorTerms)
+    {
+        putTermWithMultiplication(getBaseTermConstReferenceFromTerm(denominatorTerm));
+    }
+
+    simplify();
+}
+
 void Expression::sort()
 {
-    m_termsWithPriorityAndAssociation.sort();
-}
+    m_termsWithPriorityAndAssociation.sort();}
 
 void Expression::substituteVariablesToValues(VariablesToValuesMap const& variableValueMap)
 {
@@ -506,13 +517,14 @@ void Expression::processAndSaveTermsForMultiplicationAndDivision(
     TermsWithDetails expressionsForNumerator;
     TermsWithDetails expressionsForDenominator;
     segregateNonExpressionsAndExpressions(termsWithNonExpressions, termsWithExpressions, termsToProcess);
+
     segregateNumeratorAndDenominatorForMultiplicationAndDivision(nonExpressionsForNumerator, nonExpressionsForDenominator, termsWithNonExpressions);
     segregateNumeratorAndDenominatorForMultiplicationAndDivision(expressionsForNumerator, expressionsForDenominator, termsWithExpressions);
     processNonExpressionsForMultiplicationAndDivision(getBaseTermReferenceFromTerm(combinedTerm), nonExpressionsForNumerator, nonExpressionsForDenominator);
     processExpressionForMultiplicationAndDivision(combinedBaseTerm, expressionsForNumerator, expressionsForDenominator);
+    //processAllForMultiplicationAndDivision(combinedBaseTerm, nonExpressionsForNumerator, nonExpressionsForDenominator, expressionsForNumerator, expressionsForDenominator);
     setTerm(combinedBaseTerm);
 }
-
 void Expression::processAndSaveTermsForRaiseToPower(
         TermsWithDetails const& termsToProcess)
 {
@@ -993,17 +1005,16 @@ void Expression::processNonExpressionsForMultiplicationAndDivision(
     }
     if(!nonExpressionsForDenominator.empty())
     {
-        TermsWithDetails newDenominator(nonExpressionsForDenominator);
+        TermsWithDetails newDenominators(nonExpressionsForDenominator);
         Term nonExpressionCombinedTermDenominator;
-        for(TermWithDetails & termWithDetails : newDenominator)
+        for(TermWithDetails & termWithDetails : newDenominators)
         {
             termWithDetails.association = TermAssociationType::Positive;
         }
-        accumulateTermsForMultiplicationAndDivision(getBaseTermReferenceFromTerm(nonExpressionCombinedTermDenominator), newDenominator);
+        accumulateTermsForMultiplicationAndDivision(getBaseTermReferenceFromTerm(nonExpressionCombinedTermDenominator), newDenominators);
         PolynomialOverPolynomial numeratorAndDenominator(
                     createPolynomialIfPossible(nonExpressionCombinedTermNumerator),
-                    createPolynomialIfPossible(nonExpressionCombinedTermDenominator));
-        numeratorAndDenominator.simplify();
+                    createPolynomialIfPossible(nonExpressionCombinedTermDenominator));        numeratorAndDenominator.simplify();
         combinedTerm = simplifyAndConvertPolynomialToSimplestTerm(numeratorAndDenominator.getNumerator())
                 /simplifyAndConvertPolynomialToSimplestTerm(numeratorAndDenominator.getDenominator());
     }
@@ -1021,10 +1032,49 @@ void Expression::processExpressionForMultiplicationAndDivision(
     accumulateTermsForMultiplicationAndDivision(combinedBaseTerm, denominator);
 }
 
+//void Expression::processAllForMultiplicationAndDivision(
+//        BaseTerm & combinedBaseTerm,
+//        TermsWithDetails const& nonExpressionsForNumerator,
+//        TermsWithDetails const& nonExpressionsForDenominator,
+//        TermsWithDetails const& expressionsForNumerator,
+//        TermsWithDetails const& expressionsForDenominator) const
+//{
+//    PolynomialOverPolynomial polynomialFraction = getPolynomialOverPolynomial(nonExpressionsForNumerator, nonExpressionsForDenominator);
+//    TermsWithDetails allNumerators(expressionsForNumerator);
+//    TermsWithDetails allDenominators(expressionsForDenominator);
+//    allNumerators.emplace_back(getBaseTermConstReferenceFromTerm(Term(polynomialFraction.getNumerator())), TermAssociationType::Positive);
+//    allDenominators.emplace_back(getBaseTermConstReferenceFromTerm(Term(polynomialFraction.getDenominator())), TermAssociationType::Negative);
+//    removeSameTermsInNumeratorAndDenominatorForMultiplicationAndDivision(allNumerators, allDenominators);
+//    accumulateTermsForMultiplicationAndDivision(combinedBaseTerm, allNumerators);
+//    accumulateTermsForMultiplicationAndDivision(combinedBaseTerm, allDenominators);
+//}
+
+//PolynomialOverPolynomial Expression::getPolynomialOverPolynomial(
+//        TermsWithDetails const& nonExpressionsForNumerator,
+//        TermsWithDetails const& nonExpressionsForDenominator) const
+//{
+//    Term nonExpressionCombinedTermNumerator(1);
+//    Term nonExpressionCombinedTermDenominator(1);
+//    accumulateTermsForMultiplicationAndDivision(getBaseTermReferenceFromTerm(nonExpressionCombinedTermNumerator), nonExpressionsForNumerator);
+//    if(!nonExpressionsForDenominator.empty())
+//    {
+//        TermsWithDetails newDenominators(nonExpressionsForDenominator);
+//        for(TermWithDetails & termWithDetails : newDenominators)
+//        {
+//            termWithDetails.association = TermAssociationType::Positive;
+//        }
+//        accumulateTermsForMultiplicationAndDivision(getBaseTermReferenceFromTerm(nonExpressionCombinedTermDenominator), newDenominators);
+//    }
+//    PolynomialOverPolynomial numeratorAndDenominator(
+//                createPolynomialIfPossible(nonExpressionCombinedTermNumerator),
+//                createPolynomialIfPossible(nonExpressionCombinedTermDenominator));
+//    numeratorAndDenominator.simplify();
+//    return numeratorAndDenominator;
+//}
+
 void Expression::removeSameTermsInNumeratorAndDenominatorForMultiplicationAndDivision(
         TermsWithDetails & expressionsForNumerator,
-        TermsWithDetails & expressionsForDenominator) const
-{
+        TermsWithDetails & expressionsForDenominator) const{
     bool areSomeTermsCancelled(false);
     for(TermsWithDetails::iterator first = expressionsForNumerator.begin();
         first != expressionsForNumerator.end();

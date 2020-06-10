@@ -327,10 +327,39 @@ string Term::getDisplayableString() const
     }
     else if(m_type==TermType::Expression)
     {
-        result = getExpressionConstReference().getDebugString();
+        result = getExpressionConstReference().getDisplayableString();
     }
     return result;
 }
+
+string Term::getDebugString() const
+{
+    string result;
+    if(m_type==TermType::Constant)
+    {
+        result = getConstantConstReference().getDisplayableString();
+    }
+    else if(m_type==TermType::Variable)
+    {
+        result = getVariableConstReference().getDisplayableString();
+    }
+    else if(m_type==TermType::Operator)
+    {
+        result = getOperatorConstReference().getDisplayableString();
+    }
+    else if(m_type==TermType::Monomial)
+    {
+        result = getMonomialConstReference().getDisplayableString();
+    }
+    else if(m_type==TermType::Polynomial)
+    {
+        result = getPolynomialConstReference().getDisplayableString();
+    }
+    else if(m_type==TermType::Expression)
+    {
+        result = getExpressionConstReference().getDebugString();
+    }
+    return result;}
 
 Constant & Term::getConstantReference()
 {

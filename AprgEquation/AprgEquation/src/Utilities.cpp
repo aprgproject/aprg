@@ -1,17 +1,18 @@
 #include "Utilities.hpp"
 
+#include <Factorization.hpp>
 #include <Macros/AlbaMacros.hpp>
 #include <Math/AlbaMathHelper.hpp>
+#include <PolynomialOverPolynomial.hpp>
 #include <TermOperators.hpp>
 #include <TermsAggregator.hpp>
 #include <String/AlbaStringHelper.hpp>
-
 #include <algorithm>
 
+using namespace alba::equation::Factorization;
 using namespace alba::mathHelper;
 using namespace std;
-using TermWithDetails=alba::equation::TermsWithAssociation::TermWithDetails;
-using TermsWithDetails=alba::equation::TermsWithAssociation::TermsWithDetails;
+using TermWithDetails=alba::equation::TermsWithAssociation::TermWithDetails;using TermsWithDetails=alba::equation::TermsWithAssociation::TermsWithDetails;
 
 namespace alba
 {
@@ -91,10 +92,18 @@ bool canBeMergedByAdditionOrSubtraction(Variable const& variable1, Variable cons
     return variable1.getVariableName() == variable2.getDisplayableString();
 }
 
+bool canBeConvertedToPolynomial(Term const& term)
+{
+    TermType termType(term.getTermType());
+    return TermType::Constant==termType
+            || TermType::Variable==termType
+            || TermType::Monomial==termType
+            || TermType::Polynomial==termType;
+}
+
 bool willHaveNoEffectOnAdditionOrSubtraction(Term const& term)
 {
-    return term.isEmpty() || term.isTheValueZero();
-}
+    return term.isEmpty() || term.isTheValueZero();}
 
 bool willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(Term const& term)
 {
@@ -527,10 +536,83 @@ Term simplifyAndConvertMonomialToSimplestTerm(Monomial const& monomial)
     return newTerm;
 }
 
+void factorizeAndEmplaceBackTermIfNotFound(Terms & terms, Term const& term)
+{
+    if(canBeConvertedToPolynomial(term))
+    {
+        Polynomials polynomials(factorize(createPolynomialIfPossible(term)));
+        for(Polynomial const& polynomial : polynomials)
+        {
+            emplaceBackTermIfNotFound(terms, Term(polynomial));
+        }
+    }
+    else
+    {
+        emplaceBackTermIfNotFound(terms, term);
+    }
+}
+
+void emplaceBackTermIfNotFound(Terms & terms, Term const& term)
+{
+    if(find(terms.cbegin(), terms.cend(), term) == terms.cend())
+    {
+        terms.emplace_back(term);
+    }
+}
+
+void retrieveDenominatorTerms(Terms & terms, Expression const& expression)
+{
+    if(expression.getCommonOperatorLevel() == OperatorLevel::AdditionAndSubtraction)
+    {
+        for(TermWithDetails const& termWithDetails : expression.getTerms().getTermsWithDetails())
+        {
+            BaseTerm const& baseTerm(getBaseTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
+            Term const& term(getTermConstReferenceFromBaseTerm(baseTerm));
+            if(term.isExpression())
+            {
+                retrieveDenominatorTerms(terms, term.getExpressionConstReference());
+            }
+            else if(canBeConvertedToPolynomial(term))
+            {
+                PolynomialOverPolynomial fractionInTerm(createPolynomialIfPossible(term), createPolynomialFromConstant(Constant(1)));
+                Polynomial denominatorInTerm(fractionInTerm.getDenominator());
+                if(!denominatorInTerm.isOne())
+                {
+                    factorizeAndEmplaceBackTermIfNotFound(terms, Term(denominatorInTerm));
+                }
+            }
+        }
+    }
+    else if(expression.getCommonOperatorLevel() == OperatorLevel::MultiplicationAndDivision)
+    {
+        for(TermWithDetails const& termWithDetails : expression.getTerms().getTermsWithDetails())
+        {
+            BaseTerm const& baseTerm(getBaseTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
+            Term const& term(getTermConstReferenceFromBaseTerm(baseTerm));
+            if(termWithDetails.hasNegativeAssociation())
+            {
+                factorizeAndEmplaceBackTermIfNotFound(terms, term);
+            }
+            else if(term.isExpression())
+            {
+                retrieveDenominatorTerms(terms, term.getExpressionConstReference());
+            }
+            else if(canBeConvertedToPolynomial(term))
+            {
+                PolynomialOverPolynomial fractionInTerm(createPolynomialIfPossible(term), createPolynomialFromConstant(Constant(1)));
+                Polynomial denominatorInTerm(fractionInTerm.getDenominator());
+                if(!denominatorInTerm.isOne())
+                {
+                    factorizeAndEmplaceBackTermIfNotFound(terms, Term(denominatorInTerm));
+                }
+            }
+        }
+    }
+}
+
 Terms tokenizeToTerms(string const& inputString)
 {
-    Terms tokenizedTerms;
-    string valueTerm;
+    Terms tokenizedTerms;    string valueTerm;
     for(char const c : inputString)
     {
         if(!stringHelper::isWhiteSpace(c))
