@@ -7,7 +7,8 @@
 #include <PolynomialOverPolynomial.hpp>
 #include <Term.hpp>
 #include <TermOperators.hpp>
-#include <TermsOverTerms.hpp>#include <Utilities.hpp>
+#include <TermsOverTerms.hpp>
+#include <Utilities.hpp>
 
 #include <algorithm>
 #include <sstream>
@@ -510,6 +511,7 @@ void Expression::processAndSaveTermsForAdditionAndSubtraction(
     addOrSubtractTermsWithExpressions(combinedBaseTerm, termsWithExpressions);
     setTerm(combinedBaseTerm);
 }
+
 void Expression::processAndSaveTermsForMultiplicationAndDivision(
         TermsWithDetails const& termsToProcess)
 {
@@ -521,12 +523,17 @@ void Expression::processAndSaveTermsForMultiplicationAndDivision(
     TermsWithDetails nonExpressionsForDenominator;
     TermsWithDetails expressionsForNumerator;
     TermsWithDetails expressionsForDenominator;
-    segregateNonExpressionsAndExpressions(termsWithNonExpressions, termsWithExpressions, termsToProcess);
-    segregateTermsWithPositiveAndNegativeAssociations(nonExpressionsForNumerator, nonExpressionsForDenominator, termsWithNonExpressions);
-    segregateTermsWithPositiveAndNegativeAssociations(expressionsForNumerator, expressionsForDenominator, termsWithExpressions);
-    processNonExpressionsForMultiplicationAndDivision(getBaseTermReferenceFromTerm(combinedTerm), nonExpressionsForNumerator, nonExpressionsForDenominator);
+    //segregateNonExpressionsAndExpressions(termsWithNonExpressions, termsWithExpressions, termsToProcess);
+    //segregateTermsWithPositiveAndNegativeAssociations(nonExpressionsForNumerator, nonExpressionsForDenominator, termsWithNonExpressions);
+    //segregateTermsWithPositiveAndNegativeAssociations(expressionsForNumerator, expressionsForDenominator, termsWithExpressions);
+    //processNonExpressionsForMultiplicationAndDivision(getBaseTermReferenceFromTerm(combinedTerm), nonExpressionsForNumerator, nonExpressionsForDenominator);
+    //processExpressionForMultiplicationAndDivision(combinedBaseTerm, expressionsForNumerator, expressionsForDenominator);
+
+    segregateTermsWithPositiveAndNegativeAssociations(expressionsForNumerator, expressionsForDenominator, termsToProcess);
     processExpressionForMultiplicationAndDivision(combinedBaseTerm, expressionsForNumerator, expressionsForDenominator);
-    setTerm(combinedBaseTerm);}
+
+    setTerm(combinedBaseTerm);
+}
 
 void Expression::processAndSaveTermsForRaiseToPower(
         TermsWithDetails const& termsToProcess)
@@ -570,7 +577,8 @@ void Expression::processAndSaveTermsForRaiseToPower(
 
 void Expression::putTermsWithDetails(TermsWithDetails const& termsToSave)
 {
-    for(TermWithDetails const& termWithDetails : termsToSave)    {
+    for(TermWithDetails const& termWithDetails : termsToSave)
+    {
         m_termsWithPriorityAndAssociation.putTermWithDetails(termWithDetails);
     }
 }
@@ -749,7 +757,8 @@ void Expression::addOrSubtractTermsWithExpressions(
 
 void Expression::processNonExpressionsForMultiplicationAndDivision(
         BaseTerm & combinedBaseTerm,
-        TermsWithDetails const& nonExpressionsForNumerator,        TermsWithDetails const& nonExpressionsForDenominator) const
+        TermsWithDetails const& nonExpressionsForNumerator,
+        TermsWithDetails const& nonExpressionsForDenominator) const
 {
     Term & combinedTerm(getTermReferenceFromBaseTerm(combinedBaseTerm));
     Term nonExpressionCombinedTermNumerator(1);

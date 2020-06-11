@@ -7,6 +7,7 @@
 #include <TermsWithAssociation.hpp>
 #include <TermType.hpp>
 #include <VariablesToValuesTypes.hpp>
+
 #include <functional>
 #include <string>
 
@@ -68,7 +69,8 @@ private:
             TermsWithAssociation::TermsWithDetails const& termsToCheck);
     void simplifyAndCopyTermsFromAnExpressionAndSetOperatorLevelIfNeeded(
             TermsWithAssociation::TermsWithDetails & termsToUpdate,
-            Expression const& expression,            TermAssociationType const association);
+            Expression const& expression,
+            TermAssociationType const association);
     void simplifyFurtherIfNeeded(Expression const& beforeSimplify, Expression const& afterSimplify);
 
     //process functions
@@ -83,7 +85,8 @@ private:
 
     //put functions
     void putTermsWithDetails(TermsWithAssociation::TermsWithDetails const& termsToSave);
-    void putTermWithAddition(BaseTerm const& baseTerm);    void putTermWithSubtraction(BaseTerm const& baseTerm);
+    void putTermWithAddition(BaseTerm const& baseTerm);
+    void putTermWithSubtraction(BaseTerm const& baseTerm);
     void putTermWithMultiplication(BaseTerm const& baseTerm);
     void putTermWithDivision(BaseTerm const& baseTerm);
     void putTermWithRaiseToPower(BaseTerm const& baseTerm);
@@ -103,7 +106,8 @@ private:
             TermsWithAssociation::TermsWithDetails const& termsWithExpressions) const;
 
     //functions for multiplication
-    void processNonExpressionsForMultiplicationAndDivision(            BaseTerm & combinedBaseTerm,
+    void processNonExpressionsForMultiplicationAndDivision(
+            BaseTerm & combinedBaseTerm,
             TermsWithAssociation::TermsWithDetails const& nonExpressionsForNumerator,
             TermsWithAssociation::TermsWithDetails const& nonExpressionsForDenominator) const;
     void processExpressionForMultiplicationAndDivision(
