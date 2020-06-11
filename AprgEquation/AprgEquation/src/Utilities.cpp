@@ -7,12 +7,14 @@
 #include <TermOperators.hpp>
 #include <TermsAggregator.hpp>
 #include <String/AlbaStringHelper.hpp>
+
 #include <algorithm>
 
 using namespace alba::equation::Factorization;
 using namespace alba::mathHelper;
 using namespace std;
-using TermWithDetails=alba::equation::TermsWithAssociation::TermWithDetails;using TermsWithDetails=alba::equation::TermsWithAssociation::TermsWithDetails;
+using TermWithDetails=alba::equation::TermsWithAssociation::TermWithDetails;
+using TermsWithDetails=alba::equation::TermsWithAssociation::TermsWithDetails;
 
 namespace alba
 {
@@ -103,7 +105,8 @@ bool canBeConvertedToPolynomial(Term const& term)
 
 bool willHaveNoEffectOnAdditionOrSubtraction(Term const& term)
 {
-    return term.isEmpty() || term.isTheValueZero();}
+    return term.isEmpty() || term.isTheValueZero();
+}
 
 bool willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(Term const& term)
 {
@@ -612,7 +615,8 @@ void retrieveDenominatorTerms(Terms & terms, Expression const& expression)
 
 Terms tokenizeToTerms(string const& inputString)
 {
-    Terms tokenizedTerms;    string valueTerm;
+    Terms tokenizedTerms;
+    string valueTerm;
     for(char const c : inputString)
     {
         if(!stringHelper::isWhiteSpace(c))

@@ -30,7 +30,8 @@ Polynomials factorizeSumOfCubesIfPossible(Polynomial const& polynomial);
 Polynomials factorizeIncreasingAndDecreasingExponentsFormIfPossible(Polynomial const& polynomial);
 void factorizeRootsInIncreasingAndDecreasingExponentsForm(
         Polynomials & result,
-        Polynomial const& polynomial,        AlbaNumbers const& coefficients,
+        Polynomial const& polynomial,
+        AlbaNumbers const& coefficients,
         Monomial::VariablesToExponentsMap const& firstVariableExponent,
         Monomial::VariablesToExponentsMap const& secondVariableExponent);
 void factorizeQuadraticForm(
@@ -58,7 +59,8 @@ void fixCoefficientsOfFactors(
         AlbaNumber & rootSecondCoefficient);
 bool isDifferenceOfSquares(Polynomial const& polynomial);
 bool isDifferenceOfCubes(Polynomial const& polynomial);
-bool isSumOfCubes(Polynomial const& polynomial);bool isPerfectSquare(Monomial const& monomial);
+bool isSumOfCubes(Polynomial const& polynomial);
+bool isPerfectSquare(Monomial const& monomial);
 bool isPerfectCube(Monomial const& monomial);
 bool isPerfectNthPower(Monomial const& monomial, unsigned int const nthPower);
 bool areExponentsDivisible(Monomial const& monomial, unsigned int const divisor);

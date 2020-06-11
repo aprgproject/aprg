@@ -8,6 +8,7 @@
 #include <TermsWithAssociation.hpp>
 #include <TermType.hpp>
 #include <VariablesToValuesTypes.hpp>
+
 #include <functional>
 #include <string>
 
@@ -57,9 +58,10 @@ public:
     void setCommonOperatorLevel(OperatorLevel const operatorLevel);
 
     void simplify();
-    void simplifyToOneFraction();
+    void simplifyToCommonDenominators();
     void sort();
     void substituteVariablesToValues(VariablesToValuesMap const& variableValueMap);
+
 private:
 
     //simplify functions
@@ -151,18 +153,11 @@ private:
             BaseTerm & combinedBaseTerm,
             TermsWithAssociation::TermsWithDetails const& expressionsForNumerator,
             TermsWithAssociation::TermsWithDetails const& expressionsForDenominator) const;
-//    void processAllForMultiplicationAndDivision(
-//            BaseTerm & combinedBaseTerm,
-//            TermsWithAssociation::TermsWithDetails const& nonExpressionsForNumerator,
-//            TermsWithAssociation::TermsWithDetails const& nonExpressionsForDenominator,
-//            TermsWithAssociation::TermsWithDetails const& expressionsForNumerator,
-//            TermsWithAssociation::TermsWithDetails const& expressionsForDenominator) const;
-//    PolynomialOverPolynomial getPolynomialOverPolynomial(
-//            TermsWithAssociation::TermsWithDetails const& nonExpressionsForNumerator,
-//            TermsWithAssociation::TermsWithDetails const& nonExpressionsForDenominator) const;
     void removeSameTermsInNumeratorAndDenominatorForMultiplicationAndDivision(
             TermsWithAssociation::TermsWithDetails & expressionsForNumerator,
-            TermsWithAssociation::TermsWithDetails & expressionsForDenominator) const;    void multiplyThenPutTermAsAddIfTrueAndAsSubtractIfFalse(
+            TermsWithAssociation::TermsWithDetails & expressionsForDenominator) const;
+
+    void multiplyThenPutTermAsAddIfTrueAndAsSubtractIfFalse(
             Expression const& multiplicand,
             BaseTerm const& multiplier,
             bool const isAdd);

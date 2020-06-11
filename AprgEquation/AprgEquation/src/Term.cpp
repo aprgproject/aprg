@@ -359,7 +359,8 @@ string Term::getDebugString() const
     {
         result = getExpressionConstReference().getDebugString();
     }
-    return result;}
+    return result;
+}
 
 Constant & Term::getConstantReference()
 {

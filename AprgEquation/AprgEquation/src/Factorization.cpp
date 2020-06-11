@@ -31,7 +31,8 @@ Polynomials factorize(Polynomial const& polynomial)
     if(result.size() == 1){result = factorizeBySplittingSmallerPolynomials(polynomialToFactorize); }
     if(result.size() != 1)
     {
-        result = factorizePolynomials(result);    }
+        result = factorizePolynomials(result);
+    }
     return result;
 }
 
@@ -71,24 +72,28 @@ Polynomials factorizeCommonMonomial(Polynomial const& polynomial)
                 factorizeCommonMonomialIfPossible(polynomial),
                 polynomial);
 }
+
 Polynomials factorizeDifferenceOfSquares(Polynomial const& polynomial)
 {
     return returnPolynomialsOrSinglePolynomialIfEmpty(
                 factorizeDifferenceOfSquaresIfPossible(polynomial),
                 polynomial);
 }
+
 Polynomials factorizeDifferenceOfCubes(Polynomial const& polynomial)
 {
     return returnPolynomialsOrSinglePolynomialIfEmpty(
                 factorizeDifferenceOfCubesIfPossible(polynomial),
                 polynomial);
 }
+
 Polynomials factorizeSumOfCubes(Polynomial const& polynomial)
 {
     return returnPolynomialsOrSinglePolynomialIfEmpty(
                 factorizeSumOfCubesIfPossible(polynomial),
                 polynomial);
 }
+
 Polynomials factorizeIncreasingAndDecreasingExponentsForm(Polynomial const& polynomial)
 {
     return returnPolynomialsOrSinglePolynomialIfEmpty(
@@ -107,7 +112,8 @@ Polynomials factorizeCommonMonomialIfPossible(Polynomial const& polynomial)
 {
     Polynomials result;
     if(!polynomial.isOneMonomial())
-    {        Monomial commonMonomial(getCommonMonomialInMonomials(polynomial.getMonomialsConstReference()));
+    {
+        Monomial commonMonomial(getCommonMonomialInMonomials(polynomial.getMonomialsConstReference()));
         if(!commonMonomial.isOne())
         {
             Polynomial reducedPolynomial(polynomial);
@@ -123,7 +129,8 @@ Polynomials factorizeCommonMonomialIfPossible(Polynomial const& polynomial)
 Polynomials factorizeDifferenceOfSquaresIfPossible(Polynomial const& polynomial)
 {
     Polynomials result;
-    if(isDifferenceOfSquares(polynomial))    {
+    if(isDifferenceOfSquares(polynomial))
+    {
         addFactorsOfDifferenceOfSquares(result, polynomial);
     }
     return result;
@@ -132,7 +139,8 @@ Polynomials factorizeDifferenceOfSquaresIfPossible(Polynomial const& polynomial)
 Polynomials factorizeDifferenceOfCubesIfPossible(Polynomial const& polynomial)
 {
     Polynomials result;
-    if(isDifferenceOfCubes(polynomial))    {
+    if(isDifferenceOfCubes(polynomial))
+    {
         addFactorsOfDifferenceOfCubes(result, polynomial);
     }
     return result;
@@ -141,7 +149,8 @@ Polynomials factorizeDifferenceOfCubesIfPossible(Polynomial const& polynomial)
 Polynomials factorizeSumOfCubesIfPossible(Polynomial const& polynomial)
 {
     Polynomials result;
-    if(isSumOfCubes(polynomial))    {
+    if(isSumOfCubes(polynomial))
+    {
         addFactorsOfSumOfCubes(result, polynomial);
     }
     return result;
@@ -150,7 +159,8 @@ Polynomials factorizeSumOfCubesIfPossible(Polynomial const& polynomial)
 Polynomials factorizeIncreasingAndDecreasingExponentsFormIfPossible(Polynomial const& polynomial)
 {
     Polynomials result;
-    Monomials monomials(polynomial.getMonomialsConstReference());    if(monomials.size() > 1)
+    Monomials monomials(polynomial.getMonomialsConstReference());
+    if(monomials.size() > 1)
     {
         Monomial firstMonomial(monomials.front());
         Monomial lastMonomial(monomials.back());
@@ -193,6 +203,7 @@ void factorizeRootsInIncreasingAndDecreasingExponentsForm(
         factorizeOneRootInIncreasingAndDecreasingExponentsForm(result, polynomial, coefficients, firstVariableExponent, secondVariableExponent);
     }
 }
+
 void factorizeQuadraticForm(
         Polynomials & result,
         AlbaNumbers const& coefficients,
@@ -371,7 +382,8 @@ void combinePolynomialsByAdditionAndEmplaceBack(Polynomials & result, Polynomial
 
 void addFactorsOfDifferenceOfSquares(Polynomials & result, Polynomial const& polynomial)
 {
-    Monomials monomials(polynomial.getMonomialsConstReference());    Monomial firstMonomial(monomials.at(0));
+    Monomials monomials(polynomial.getMonomialsConstReference());
+    Monomial firstMonomial(monomials.at(0));
     Monomial secondMonomial(monomials.at(1));
     if(firstMonomial.getConstantConstReference() > 0 && secondMonomial.getConstantConstReference() < 0)
     {
@@ -549,7 +561,8 @@ bool areExponentsDivisible(Monomial const& monomial, unsigned int const divisor)
                 || !isDivisible(getAbsoluteValue(variableExponentPair.second.getInteger()), divisor))
         {
             result=false;
-            break;        }
+            break;
+        }
     }
     return result;
 }
@@ -640,7 +653,8 @@ unsigned int calculateExponentDivisor(
                 && areExponentsDivisible(lastMonomial, exponentDivisor))
         {
             break;
-        }    }
+        }
+    }
     return exponentDivisor;
 }
 

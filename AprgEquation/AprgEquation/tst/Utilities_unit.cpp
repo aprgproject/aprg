@@ -474,6 +474,7 @@ TEST(UtilitiesTest, RetrieveDenominatorTermsWorks)
 TEST(UtilitiesTest, TokenizeToTermsWorks)
 {
     Terms termsToVerify1(tokenizeToTerms(" 5yyy + x1*y1^20.15"));
+
     ASSERT_EQ(7u, termsToVerify1.size());
     EXPECT_EQ(TermType::Constant, termsToVerify1.at(0).getTermType());
     EXPECT_DOUBLE_EQ(5, termsToVerify1.at(0).getConstantConstReference().getNumberConstReference().getDouble());
