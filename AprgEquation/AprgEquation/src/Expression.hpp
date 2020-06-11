@@ -51,6 +51,7 @@ public:
     void putPolynomialFirstWithMultiplication(Polynomial const& polynomial);
     void putPolynomialSecondWithMultiplication(Polynomial const& polynomial);
     void putExpressionWithMultiplication(Expression const& expression);
+
     void reverseTheAssociationOfTheTerms();
     void set(OperatorLevel const operatorLevel, TermsWithAssociation const& termsWithPriorityAndAssociation);
     void setTerm(BaseTerm const& baseTerm);
@@ -83,17 +84,6 @@ private:
     void processAndSaveTermsForRaiseToPower(
             TermsWithAssociation::TermsWithDetails const& termsToProcess);
 
-    //accumulate functions
-    void accumulateTermsForAdditionAndSubtraction(
-            BaseTerm & combinedBaseTerm,
-            TermsWithAssociation::TermsWithDetails const& termsToCombine) const;
-    void accumulateTermsForMultiplicationAndDivision(
-            BaseTerm & combinedBaseTerm,
-            TermsWithAssociation::TermsWithDetails const& termsToCombine) const;
-    void accumulateTermsForRaiseToPower(
-            BaseTerm & combinedBaseTerm,
-            TermsWithAssociation::TermsWithDetails const& termsToCombine) const;
-
     //segregate functions
     void segregateNonExpressionsAndExpressions(
             TermsWithAssociation::TermsWithDetails & termsWithNonExpressions,
@@ -113,7 +103,8 @@ private:
     void putTermWithRaiseToPower(BaseTerm const& baseTerm);
     void putTermForExpressionAndNonExpressions(
             BaseTerm const& baseTerm,
-            TermAssociationType const overallAssociation);    void putTerm(
+            TermAssociationType const overallAssociation);
+    void putTerm(
             BaseTerm const& baseTerm,
             TermAssociationType const overallAssociation);
     void putTermsWithAssociation(
@@ -153,7 +144,8 @@ private:
             TermsWithAssociation::TermsWithDetails const& expressionsForDenominator) const;
 
     void multiplyThenPutTermAsAddIfTrueAndAsSubtractIfFalse(
-            Expression const& multiplicand,            BaseTerm const& multiplier,
+            Expression const& multiplicand,
+            BaseTerm const& multiplier,
             bool const isAdd);
     OperatorLevel m_commonOperatorLevel;
     TermsWithAssociation m_termsWithPriorityAndAssociation;

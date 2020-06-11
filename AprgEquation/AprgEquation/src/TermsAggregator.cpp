@@ -193,7 +193,8 @@ bool TermsAggregator::buildExpressionWithBinaryOperationAndReturnIfBuilt(unsigne
                 newExpression.putTermWithRaiseToPowerIfNeeded(getBaseTermConstReferenceFromTerm(term3));
             }
             Term newTerm(newExpression);
-            eraseTermsInclusive(index-1, index+1);            insertTerm(index-1, newTerm);
+            eraseTermsInclusive(index-1, index+1);
+            insertTerm(index-1, newTerm);
             isBuilt=true;
         }
     }
@@ -221,7 +222,8 @@ bool TermsAggregator::buildExpressionWithUnaryOperationAndReturnIfBuilt(unsigned
                 newExpression.putTermWithSubtractionIfNeeded(getBaseTermConstReferenceFromTerm(term2));
             }
             Term newTerm(newExpression);
-            eraseTermsInclusive(index, index+1);            insertTerm(index, newTerm);
+            eraseTermsInclusive(index, index+1);
+            insertTerm(index, newTerm);
             isBuilt=true;
         }
     }

@@ -19,7 +19,8 @@ public:
 
     TermsWithAssociation::TermsWithDetails getNumeratorAndDenominatorAsTermWithDetails() const;
 
-private:    void removeSameTermsInNumeratorAndDenominator();
+private:
+    void removeSameTermsInNumeratorAndDenominator();
     bool areTermsEmptyOrValueOne(Terms const& terms) const;
     Terms m_numerators;
     Terms m_denominators;
