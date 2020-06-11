@@ -4,11 +4,9 @@
 #include <BaseTermPointers.hpp>
 #include <OperatorLevel.hpp>
 #include <Polynomial.hpp>
-#include <PolynomialOverPolynomial.hpp>
 #include <TermsWithAssociation.hpp>
 #include <TermType.hpp>
 #include <VariablesToValuesTypes.hpp>
-
 #include <functional>
 #include <string>
 
@@ -67,11 +65,10 @@ private:
     //simplify functions
     void simplifyAndCopyTerms(
             TermsWithAssociation::TermsWithDetails & termsToUpdate,
-            TermsWithAssociation::TermsWithDetails const& termsToSegregate);
+            TermsWithAssociation::TermsWithDetails const& termsToCheck);
     void simplifyAndCopyTermsFromAnExpressionAndSetOperatorLevelIfNeeded(
             TermsWithAssociation::TermsWithDetails & termsToUpdate,
-            Expression const& expression,
-            TermAssociationType const association);
+            Expression const& expression,            TermAssociationType const association);
     void simplifyFurtherIfNeeded(Expression const& beforeSimplify, Expression const& afterSimplify);
 
     //process functions
@@ -84,20 +81,9 @@ private:
     void processAndSaveTermsForRaiseToPower(
             TermsWithAssociation::TermsWithDetails const& termsToProcess);
 
-    //segregate functions
-    void segregateNonExpressionsAndExpressions(
-            TermsWithAssociation::TermsWithDetails & termsWithNonExpressions,
-            TermsWithAssociation::TermsWithDetails & termsWithExpressions,
-            TermsWithAssociation::TermsWithDetails const& termsToSegregate) const;
-    void segregateNumeratorAndDenominatorForMultiplicationAndDivision(
-            TermsWithAssociation::TermsWithDetails & termsForNumerator,
-            TermsWithAssociation::TermsWithDetails & termsForDenominator,
-            TermsWithAssociation::TermsWithDetails const& termsToSegregate) const;
-
     //put functions
     void putTermsWithDetails(TermsWithAssociation::TermsWithDetails const& termsToSave);
-    void putTermWithAddition(BaseTerm const& baseTerm);
-    void putTermWithSubtraction(BaseTerm const& baseTerm);
+    void putTermWithAddition(BaseTerm const& baseTerm);    void putTermWithSubtraction(BaseTerm const& baseTerm);
     void putTermWithMultiplication(BaseTerm const& baseTerm);
     void putTermWithDivision(BaseTerm const& baseTerm);
     void putTermWithRaiseToPower(BaseTerm const& baseTerm);
@@ -112,30 +98,12 @@ private:
             TermAssociationType const overallAssociation);
 
     //functions for addition
-    void accumulateTermsForAdditionAndSubtractionForTermsWithExpressions(
+    void addOrSubtractTermsWithExpressions(
             BaseTerm & combinedBaseTerm,
             TermsWithAssociation::TermsWithDetails const& termsWithExpressions) const;
-    bool mergeForAdditionAndSubtractionAndReturnIfMerged(
-            TermsWithAssociation::TermWithDetails & termExpressionWithDetails1,
-            TermsWithAssociation::TermWithDetails & termExpressionWithDetails2) const;
-    void retrieveUniqueExpressionsAndMergeTerms(
-            Expression & uniqueExpression1,
-            Expression & uniqueExpression2,
-            BaseTerm & mergeTerm1,
-            BaseTerm & mergeTerm2,
-            TermsWithAssociation::TermWithDetails const& termExpressionWithDetails1,
-            TermsWithAssociation::TermWithDetails const& termExpressionWithDetails2) const;
-    Expression getUniqueExpressionForAdditionOrSubtractionMergeChecking(Expression const& expression) const;
-    void accumulateMergeTermForAdditionOrSubtractionMergeChecking(BaseTerm & combinedBaseTerm, Expression const& expression) const;
-    bool canBeMergedForAdditionAndSubtraction(
-            Expression const& uniqueExpression1,
-            Expression const& uniqueExpression2,
-            BaseTerm const& mergeTerm1,
-            BaseTerm const& mergeTerm2) const;
 
     //functions for multiplication
-    void processNonExpressionsForMultiplicationAndDivision(
-            BaseTerm & combinedBaseTerm,
+    void processNonExpressionsForMultiplicationAndDivision(            BaseTerm & combinedBaseTerm,
             TermsWithAssociation::TermsWithDetails const& nonExpressionsForNumerator,
             TermsWithAssociation::TermsWithDetails const& nonExpressionsForDenominator) const;
     void processExpressionForMultiplicationAndDivision(
