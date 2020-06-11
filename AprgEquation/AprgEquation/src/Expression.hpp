@@ -43,15 +43,14 @@ public:
     void clear();
     void clearAndPutTermInTermsWithAssociation(BaseTerm const& baseTerm);
 
-    void putTermWithAddition(BaseTerm const& baseTerm);
-    void putTermWithSubtraction(BaseTerm const& baseTerm);
-    void putTermWithMultiplication(BaseTerm const& baseTerm);
-    void putTermWithDivision(BaseTerm const& baseTerm);
-    void putTermWithRaiseToPower(BaseTerm const& baseTerm);
+    void putTermWithAdditionIfNeeded(BaseTerm const& baseTerm);
+    void putTermWithSubtractionIfNeeded(BaseTerm const& baseTerm);
+    void putTermWithMultiplicationIfNeeded(BaseTerm const& baseTerm);
+    void putTermWithDivisionIfNeeded(BaseTerm const& baseTerm);
+    void putTermWithRaiseToPowerIfNeeded(BaseTerm const& baseTerm);
     void putPolynomialFirstWithMultiplication(Polynomial const& polynomial);
     void putPolynomialSecondWithMultiplication(Polynomial const& polynomial);
     void putExpressionWithMultiplication(Expression const& expression);
-
     void reverseTheAssociationOfTheTerms();
     void set(OperatorLevel const operatorLevel, TermsWithAssociation const& termsWithPriorityAndAssociation);
     void setTerm(BaseTerm const& baseTerm);
@@ -107,15 +106,14 @@ private:
 
     //put functions
     void putTermsWithDetails(TermsWithAssociation::TermsWithDetails const& termsToSave);
-    void putTermWithAdditionForNonEmptyTerms(BaseTerm const& baseTerm);
-    void putTermWithSubtractionForNonEmptyTerms(BaseTerm const& baseTerm);
-    void putTermWithMultiplicationForNonEmptyTerms(BaseTerm const& baseTerm);
-    void putTermWithDivisionForNonEmptyTerms(BaseTerm const& baseTerm);
-    void putTermWithRaiseToPowerForNonEmptyTerms(BaseTerm const& baseTerm);
+    void putTermWithAddition(BaseTerm const& baseTerm);
+    void putTermWithSubtraction(BaseTerm const& baseTerm);
+    void putTermWithMultiplication(BaseTerm const& baseTerm);
+    void putTermWithDivision(BaseTerm const& baseTerm);
+    void putTermWithRaiseToPower(BaseTerm const& baseTerm);
     void putTermForExpressionAndNonExpressions(
             BaseTerm const& baseTerm,
-            TermAssociationType const overallAssociation);
-    void putTerm(
+            TermAssociationType const overallAssociation);    void putTerm(
             BaseTerm const& baseTerm,
             TermAssociationType const overallAssociation);
     void putTermsWithAssociation(
