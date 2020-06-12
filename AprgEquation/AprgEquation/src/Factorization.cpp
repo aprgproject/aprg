@@ -25,7 +25,8 @@ Polynomials factorize(Polynomial const& polynomial)
     polynomialToFactorize.simplify();
     Polynomials result(factorizeCommonMonomial(polynomialToFactorize));
     if(result.size() == 1){result = factorizeDifferenceOfSquares(polynomialToFactorize); }
-    if(result.size() == 1){result = factorizeDifferenceOfCubes(polynomialToFactorize); }    if(result.size() == 1){result = factorizeSumOfCubes(polynomialToFactorize); }
+    if(result.size() == 1){result = factorizeDifferenceOfCubes(polynomialToFactorize); }
+    if(result.size() == 1){result = factorizeSumOfCubes(polynomialToFactorize); }
     if(result.size() == 1){result = factorizeIncreasingAndDecreasingExponentsForm(polynomialToFactorize); }
     if(result.size() == 1){result = factorizeBySplittingSmallerPolynomials(polynomialToFactorize); }
     if(result.size() != 1)

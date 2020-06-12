@@ -79,7 +79,8 @@ PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::divide(
             currentRemainder.simplify();
         }
     }
-    return QuotientAndRemainder{currentQuotient, currentRemainder};}
+    return QuotientAndRemainder{currentQuotient, currentRemainder};
+}
 
 unsigned int PolynomialOverPolynomial::getLcmForDenominatorCoefficients(Polynomial const& polynomial)
 {

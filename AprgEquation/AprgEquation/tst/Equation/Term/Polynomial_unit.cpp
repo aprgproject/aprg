@@ -170,7 +170,8 @@ TEST(PolynomialTest, SimplifyAndSortWorks)
     polynomial3.simplify();
 
     EXPECT_EQ(Polynomial(), polynomial1);
-    EXPECT_EQ((Polynomial{Monomial(5, {{"x", 2}, {"y", 3}, {"z", 4}}), Monomial(9, {{"x", 8}}), Monomial(110, {})}), polynomial2);    EXPECT_EQ((Polynomial{Monomial(6, {{"x", 3}}), Monomial(2, {{"x", 1}, {"y", 2}})}), polynomial3);
+    EXPECT_EQ((Polynomial{Monomial(5, {{"x", 2}, {"y", 3}, {"z", 4}}), Monomial(9, {{"x", 8}}), Monomial(110, {})}), polynomial2);
+    EXPECT_EQ((Polynomial{Monomial(6, {{"x", 3}}), Monomial(2, {{"x", 1}, {"y", 2}})}), polynomial3);
 }
 
 TEST(PolynomialTest, SimplifyWorks)

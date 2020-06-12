@@ -305,6 +305,7 @@ TEST(FactorizationTest, CommonMonomialCanBeFactored_FactorizeCommonMonomialWorks
     EXPECT_EQ(polynomialToExpect1, polynomialsToVerify.at(0));
     EXPECT_EQ(polynomialToExpect2, polynomialsToVerify.at(1));
 }
+
 TEST(FactorizationTest, DifferenceOfSquaresCanBeFactored_FactorizeDifferenceOfSquaresWorks)
 {
     Polynomial polynomialToTest{Monomial(9, {{"x", 8}, {"y", 2}}), Monomial(-16, {{"z", 4}})};

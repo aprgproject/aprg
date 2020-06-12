@@ -404,7 +404,8 @@ AlbaNumber getLeastCommonMultiple(AlbaNumber const& firstNumber, AlbaNumber cons
 
 unsigned int getDifferenceFromGreaterMultiple(unsigned int const multiple, unsigned int const number)
 {
-    unsigned result(0);    if(multiple>0)
+    unsigned result(0);
+    if(multiple>0)
     {
         unsigned int numberOfMultiples(getNumberOfMultiplesInclusive(multiple, number));
         result = (numberOfMultiples*multiple) - number;

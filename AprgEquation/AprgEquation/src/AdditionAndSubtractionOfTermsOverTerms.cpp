@@ -35,6 +35,7 @@ void AdditionAndSubtractionOfTermsOverTerms::putAsAddition(TermsOverTerms const&
     m_items.emplace_back(addendSimplified);
     m_associations.emplace_back(TermAssociationType::Positive);
 }
+
 void AdditionAndSubtractionOfTermsOverTerms::putAsSubtraction(TermsOverTerms const& subtrahend)
 {
     TermsOverTerms subtrahendSimplified(subtrahend);
@@ -42,6 +43,7 @@ void AdditionAndSubtractionOfTermsOverTerms::putAsSubtraction(TermsOverTerms con
     m_items.emplace_back(subtrahendSimplified);
     m_associations.emplace_back(TermAssociationType::Negative);
 }
+
 Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpression() const
 {
     Terms lcmDenominatorTerms(getLcmOfDenominatorTerms());

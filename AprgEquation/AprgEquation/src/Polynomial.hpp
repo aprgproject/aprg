@@ -35,7 +35,8 @@ public:
     void clear();
     void simplify();
     void sortMonomialsWithInversePriority();
-    void substituteVariablesToValues(VariablesToValuesMap const& variableValueMap);    void addMonomial(Monomial const& monomial);
+    void substituteVariablesToValues(VariablesToValuesMap const& variableValueMap);
+    void addMonomial(Monomial const& monomial);
     void addPolynomial(Polynomial const& polynomial);
     void multiplyNumber(AlbaNumber const& number);
     void divideNumber(AlbaNumber const& number);
@@ -53,6 +54,7 @@ private:
     void simplifyMonomialsAndReAdd();
     Monomials m_monomials;
 };
+
 using Polynomials=std::vector<Polynomial>;
 
 }

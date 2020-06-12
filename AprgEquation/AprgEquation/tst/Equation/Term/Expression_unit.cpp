@@ -1051,6 +1051,7 @@ TEST(ExpressionTest, SimplifyWorksOnAddingAndSubtractingConstantsMonomialPolynom
                         })}));
     EXPECT_EQ(expressionToExpect, expression);
 }
+
 TEST(ExpressionTest, SimplifyWorksOnAddingAndSubtractingConstantsWithExpressionInBetween)
 {
     Expression expression(
@@ -1243,7 +1244,8 @@ TEST(ExpressionTest, SimplifyWorksOnPutPolynomialFirstWithMultiplication)
                              Monomial(100, {{"y", 1}})
                          })));
     Expression expressionToExpect3(
-                createOrCopyExpressionFromATerm(                    Term(Polynomial{
+                createOrCopyExpressionFromATerm(
+                    Term(Polynomial{
                              Monomial(200, {{"a", 1}, {"b", -1}, {"x", 1}}),
                              Monomial(200, {{"a", 1}, {"b", -1}, {"y", 1}})
                          })));
@@ -1289,7 +1291,8 @@ TEST(ExpressionTest, SimplifyWorksOnPutPolynomialSecondWithMultiplication)
                              Monomial(100, {{"y", 1}})
                          })));
     Expression expressionToExpect3(
-                createOrCopyExpressionFromATerm(                    Term(Polynomial{
+                createOrCopyExpressionFromATerm(
+                    Term(Polynomial{
                              Monomial(200, {{"a", 1}, {"b", -1}, {"x", 1}}),
                              Monomial(200, {{"a", 1}, {"b", -1}, {"y", 1}})
                          })));
@@ -1451,6 +1454,7 @@ TEST(ExpressionTest, SimplifyToACommonDenominatorWorks)
                     }));
     EXPECT_EQ(expressionToExpect, expression);
 }
+
 TEST(ExpressionTest, SortWorks)
 {
     Expression expression(

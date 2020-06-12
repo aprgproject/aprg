@@ -46,7 +46,8 @@ unsigned int getLeastCommonMultiple(unsigned int const firstNumber, unsigned int
 AlbaNumber getLeastCommonMultiple(AlbaNumber const& firstNumber, AlbaNumber const& secondNumber);
 unsigned int getDifferenceFromGreaterMultiple(unsigned int const multiple, unsigned int const number);
 int getIntegerAfterRoundingDoubleValue(double const doubleValue);
-int getIntegerPartInDouble(double const doubleValue);double getFractionalPartInDouble(double const doubleValue);
+int getIntegerPartInDouble(double const doubleValue);
+double getFractionalPartInDouble(double const doubleValue);
 double calculateCumulativeStandardDistributionApproximation(double const value);
 double calculateInverseCumulativeStandardDistributionApproximation(double const p, unsigned int const numberOfIterations);
 double convertDegreesToRadians(double const valueInDegrees);
