@@ -14,22 +14,34 @@ namespace equation
 AdditionAndSubtractionOfTermsOverTerms::AdditionAndSubtractionOfTermsOverTerms()
 {}
 
+void AdditionAndSubtractionOfTermsOverTerms::putAsAddOrSubtraction(
+        TermsOverTerms const& item,
+        TermAssociationType const associationType)
+{
+    if(TermAssociationType::Positive == associationType)
+    {
+        putAsAddition(item);
+    }
+    else
+    {
+        putAsSubtraction(item);
+    }
+}
+
 void AdditionAndSubtractionOfTermsOverTerms::putAsAddition(TermsOverTerms const& addend)
 {
     TermsOverTerms addendSimplified(addend);
-    addendSimplified.simplifyAndFactorize();
+    addendSimplified.simplifyToFactors();
     m_items.emplace_back(addendSimplified);
     m_associations.emplace_back(TermAssociationType::Positive);
 }
-
 void AdditionAndSubtractionOfTermsOverTerms::putAsSubtraction(TermsOverTerms const& subtrahend)
 {
     TermsOverTerms subtrahendSimplified(subtrahend);
-    subtrahendSimplified.simplifyAndFactorize();
+    subtrahendSimplified.simplifyToFactors();
     m_items.emplace_back(subtrahendSimplified);
     m_associations.emplace_back(TermAssociationType::Negative);
 }
-
 Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpression() const
 {
     Terms lcmDenominatorTerms(getLcmOfDenominatorTerms());

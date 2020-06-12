@@ -16,9 +16,9 @@ class AdditionAndSubtractionOfTermsOverTerms
 public:
     AdditionAndSubtractionOfTermsOverTerms();
 
+    void putAsAddOrSubtraction(TermsOverTerms const& item, TermAssociationType const associationType);
     void putAsAddition(TermsOverTerms const& addend);
     void putAsSubtraction(TermsOverTerms const& subtrahend);
-
     Expression getCombinedExpression() const;
     Terms getLcmOfDenominatorTerms() const;
     Terms getNewNumeratorTermsOnLcm(

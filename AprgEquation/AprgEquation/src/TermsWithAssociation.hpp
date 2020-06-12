@@ -17,10 +17,10 @@ namespace equation
 class TermsWithAssociation
 {
 public:
+    friend class Expression;
     struct TermWithDetails
     {
-        TermWithDetails(BaseTerm const& baseTerm, TermAssociationType const associationParameter);
-        TermWithDetails(TermWithDetails const& termWithDetails);
+        TermWithDetails(BaseTerm const& baseTerm, TermAssociationType const associationParameter);        TermWithDetails(TermWithDetails const& termWithDetails);
         bool operator==(TermWithDetails const& second) const;
         bool operator!=(TermWithDetails const& second) const;
         bool operator<(TermWithDetails const& second) const;

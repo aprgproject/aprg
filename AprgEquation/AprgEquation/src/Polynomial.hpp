@@ -33,11 +33,9 @@ public:
     std::string getDisplayableString() const;
 
     void clear();
-    void simplifyAndSort();
     void simplify();
     void sortMonomialsWithInversePriority();
-    void substituteVariablesToValues(VariablesToValuesMap const& variableValueMap);
-    void addMonomial(Monomial const& monomial);
+    void substituteVariablesToValues(VariablesToValuesMap const& variableValueMap);    void addMonomial(Monomial const& monomial);
     void addPolynomial(Polynomial const& polynomial);
     void multiplyNumber(AlbaNumber const& number);
     void divideNumber(AlbaNumber const& number);
@@ -49,11 +47,12 @@ public:
     bool isVariableExponentFound(Monomial const& monomial) const;
     AlbaNumber getCoefficientOfVariableExponent(Monomial const& monomial) const;
 
+
 private:
     void simplifyFurtherIfNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify);
+    void simplifyMonomialsAndReAdd();
     Monomials m_monomials;
 };
-
 using Polynomials=std::vector<Polynomial>;
 
 }

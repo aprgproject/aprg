@@ -4,10 +4,11 @@
 #include <PolynomialOverPolynomial.hpp>
 #include <Utilities.hpp>
 
+#include <sstream>
+
 using namespace alba::equation::Factorization;
 using namespace std;
-using TermWithDetails=alba::equation::TermsWithAssociation::TermWithDetails;
-using TermsWithDetails=alba::equation::TermsWithAssociation::TermsWithDetails;
+using TermWithDetails=alba::equation::TermsWithAssociation::TermWithDetails;using TermsWithDetails=alba::equation::TermsWithAssociation::TermsWithDetails;
 
 namespace alba
 {
@@ -38,15 +39,15 @@ TermsOverTerms::TermsOverTerms(
 
 void TermsOverTerms::simplify()
 {
+    //remove common terms first don't make it big
     simplifyPolynomialsAndShouldFactorize(false);
     removeSameTermsInNumeratorAndDenominator();
 }
 
-void TermsOverTerms::simplifyAndFactorize()
+void TermsOverTerms::simplifyToFactors()
 {
     simplifyPolynomialsAndShouldFactorize(true);
-    removeSameTermsInNumeratorAndDenominator();
-}
+    removeSameTermsInNumeratorAndDenominator();}
 
 TermsWithDetails TermsOverTerms::getNumeratorAndDenominatorAsTermWithDetails() const
 {
@@ -76,10 +77,25 @@ Terms TermsOverTerms::getDenominators() const
     return m_denominators;
 }
 
+std::string TermsOverTerms::getDisplayableString() const
+{
+    stringstream result;
+    result << "Numerators:" << endl;
+    for(Term const& numerator : m_numerators)
+    {
+        result << "[" << numerator.getDisplayableString() << "]" << endl;
+    }
+    result << "Denominators:" << endl;
+    for(Term const& denominator : m_denominators)
+    {
+        result << "[" << denominator.getDisplayableString() << "]" << endl;
+    }
+    return result.str();
+}
+
 void TermsOverTerms::simplifyPolynomialsAndShouldFactorize(bool const shouldFactorize)
 {
-    Polynomial polynomialNumerator(createPolynomialFromConstant(1));
-    Terms remainingNumerators;
+    Polynomial polynomialNumerator(createPolynomialFromConstant(1));    Terms remainingNumerators;
     for(Term const& numeratorTerm : m_numerators)
     {
         if(canBeConvertedToPolynomial(numeratorTerm))

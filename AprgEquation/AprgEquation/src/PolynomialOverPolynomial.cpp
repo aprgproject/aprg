@@ -75,12 +75,11 @@ PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::divide(
             polynomialToSubtract.multiplyMonomial(currentQuotientMonomial);
             polynomialToSubtract.multiplyNumber(-1);
             currentRemainder.addPolynomial(polynomialToSubtract);
-            currentQuotient.simplifyAndSort();
-            currentRemainder.simplifyAndSort();
+            currentQuotient.simplify();
+            currentRemainder.simplify();
         }
     }
-    return QuotientAndRemainder{currentQuotient, currentRemainder};
-}
+    return QuotientAndRemainder{currentQuotient, currentRemainder};}
 
 unsigned int PolynomialOverPolynomial::getLcmForDenominatorCoefficients(Polynomial const& polynomial)
 {
