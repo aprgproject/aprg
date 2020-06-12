@@ -90,27 +90,11 @@ bool Polynomial::isOneMonomial() const
     return m_monomials.size() == 1;
 }
 
-Monomial Polynomial::getFirstMonomial() const
-{
-    Monomial result;
-    if(!m_monomials.empty())
-    {
-        result = m_monomials.front();
-    }
-    return result;
-}
-
-Monomials const& Polynomial::getMonomialsConstReference() const
-{
-    return m_monomials;
-}
-
-bool Polynomial::isVariableExponentFound(Monomial const& monomial) const
+bool Polynomial::isVariableExponentContentFound(Monomial const& monomial) const
 {
     bool result(false);
     for(Monomial const& monomialInternal : m_monomials)
-    {
-        if(monomial.getVariablesToExponentsMapConstReference()
+    {        if(monomial.getVariablesToExponentsMapConstReference()
                 == monomialInternal.getVariablesToExponentsMapConstReference())
         {
             result = true;
@@ -135,10 +119,24 @@ AlbaNumber Polynomial::getCoefficientOfVariableExponent(Monomial const& monomial
     return coefficient;
 }
 
+Monomial Polynomial::getFirstMonomial() const
+{
+    Monomial result;
+    if(!m_monomials.empty())
+    {
+        result = m_monomials.front();
+    }
+    return result;
+}
+
+Monomials const& Polynomial::getMonomialsConstReference() const
+{
+    return m_monomials;
+}
+
 string Polynomial::getDisplayableString() const
 {
-    stringstream result;
-    if(m_monomials.empty())
+    stringstream result;    if(m_monomials.empty())
     {
         result << "(EmptyPolynomial)";
     }

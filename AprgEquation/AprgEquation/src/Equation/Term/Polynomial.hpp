@@ -26,11 +26,12 @@ public:
     bool isOne() const;
     bool isZero() const;
     bool isOneMonomial() const;
+    bool isVariableExponentContentFound(Monomial const& monomial) const;
 
+    AlbaNumber getCoefficientOfVariableExponent(Monomial const& monomial) const;
     Monomial getFirstMonomial() const;
     Monomials const& getMonomialsConstReference() const;
     std::string getDisplayableString() const;
-
     void clear();
     void simplify();
     void sortMonomialsWithInversePriority();
@@ -43,15 +44,9 @@ public:
     void multiplyPolynomial(Polynomial const& polynomial);
     void divideMonomial(Monomial const& monomial);
 
-
-    bool isVariableExponentFound(Monomial const& monomial) const;
-    AlbaNumber getCoefficientOfVariableExponent(Monomial const& monomial) const;
-
-
 private:
     void simplifyFurtherIfNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify);
-    void simplifyMonomialsAndReAdd();
-    Monomials m_monomials;
+    void simplifyMonomialsAndReAdd();    Monomials m_monomials;
 };
 
 using Polynomials=std::vector<Polynomial>;

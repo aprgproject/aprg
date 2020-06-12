@@ -574,11 +574,10 @@ bool areAllMonomialsFoundInMonomialsWithExponentsInOrder(
     bool areAllMonomialsFoundInPolynomialWithExponentsInOrder(false);
     for(Monomial const& monomialToCheck : monomialsToCheck)
     {
-        if(polynomialWithExponentsInOrder.isVariableExponentFound(monomialToCheck))
+        if(polynomialWithExponentsInOrder.isVariableExponentContentFound(monomialToCheck))
         {
             areAllMonomialsFoundInPolynomialWithExponentsInOrder = true;
-            break;
-        }
+            break;        }
     }
 
     return areAllMonomialsFoundInPolynomialWithExponentsInOrder;

@@ -32,11 +32,10 @@ public:
 
     OperatorLevel getCommonOperatorLevel() const;
     BaseTerm const& getFirstTermConstReference() const;
-    TermsWithAssociation const& getTerms() const;
+    TermsWithAssociation const& getTermsWithAssociation() const;
     TermsWithAssociation getTermsWithDetailsThatSatisfiesCondition(
             ConditionFunctionForTermsWithDetails const& conditionFunction) const;
-    std::string getDisplayableString() const;
-    std::string getDebugString() const;
+    std::string getDisplayableString() const;    std::string getDebugString() const;
 
     void clear();
     void clearAndPutTermInTermsWithAssociation(BaseTerm const& baseTerm);
