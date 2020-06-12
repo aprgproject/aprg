@@ -1,10 +1,9 @@
 #include "AdditionAndSubtractionOfTermsOverTerms.hpp"
 
-#include <TermOperators.hpp>
-#include <Utilities.hpp>
+#include <Equation/Term/TermOperators.hpp>
+#include <Equation/Utilities.hpp>
 
 #include <algorithm>
-
 namespace alba
 {
 

@@ -1,10 +1,9 @@
 #include "TermsWithAssociation.hpp"
 
-#include <Term.hpp>
-#include <Utilities.hpp>
+#include <Equation/Term/Term.hpp>
+#include <Equation/Utilities.hpp>
 
 #include <algorithm>
-
 using namespace std;
 
 namespace alba

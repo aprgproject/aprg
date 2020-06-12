@@ -1,10 +1,9 @@
 #pragma once
 
-#include <BaseTermData.hpp>
+#include <Equation/Term/BaseTermData.hpp>
 #include <Math/AlbaNumber.hpp>
 
 #include <string>
-
 namespace alba
 {
 

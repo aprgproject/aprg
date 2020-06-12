@@ -1,7 +1,6 @@
-#include <Monomial.hpp>
+#include <Equation/Term/Monomial.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba

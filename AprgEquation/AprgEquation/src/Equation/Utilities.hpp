@@ -1,11 +1,10 @@
 #pragma once
 
-#include <BaseTermPointers.hpp>
+#include <Equation/Term/BaseTermPointers.hpp>
+#include <Equation/Term/Term.hpp>
 #include <Optional/AlbaOptional.hpp>
-#include <Term.hpp>
 
 #include <string>
-
 namespace alba
 {
 

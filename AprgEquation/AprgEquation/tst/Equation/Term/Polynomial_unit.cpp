@@ -1,7 +1,6 @@
-#include <Polynomial.hpp>
+#include <Equation/Term/Polynomial.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba

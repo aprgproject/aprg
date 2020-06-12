@@ -1,7 +1,6 @@
-#include <BaseTermData.hpp>
+#include <Equation/Term/BaseTermData.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba

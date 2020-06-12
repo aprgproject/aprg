@@ -1,11 +1,10 @@
 #pragma once
 
-#include <BaseTermData.hpp>
+#include <Equation/Term/BaseTermData.hpp>
+#include <Equation/Term/OperatorLevel.hpp>
 #include <Math/AlbaNumber.hpp>
-#include <OperatorLevel.hpp>
 
 #include <string>
-
 namespace alba
 {
 

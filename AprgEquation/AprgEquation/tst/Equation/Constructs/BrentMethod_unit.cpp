@@ -1,7 +1,6 @@
-#include <BrentMethod.hpp>
+#include <Equation/Constructs/BrentMethod.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba

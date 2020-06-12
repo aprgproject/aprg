@@ -1,11 +1,10 @@
 #pragma once
 
-#include <Term.hpp>
-#include <TermsWithAssociation.hpp>
+#include <Equation/Term/Term.hpp>
+#include <Equation/Term/TermsWithAssociation.hpp>
 
 namespace alba
 {
-
 namespace equation
 {
 

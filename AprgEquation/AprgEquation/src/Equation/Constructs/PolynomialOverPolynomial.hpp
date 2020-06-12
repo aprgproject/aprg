@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Polynomial.hpp>
+#include <Equation/Term/Polynomial.hpp>
 
 namespace alba
 {
-
 namespace equation
 {
 

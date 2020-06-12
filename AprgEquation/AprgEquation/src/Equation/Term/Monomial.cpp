@@ -1,10 +1,9 @@
 #include "Monomial.hpp"
 
-#include <SubstitutionOfVariablesToValues.hpp>
+#include <Equation/Constructs/SubstitutionOfVariablesToValues.hpp>
 
 #include <set>
 #include <sstream>
-
 using namespace std;
 
 namespace alba

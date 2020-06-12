@@ -1,11 +1,10 @@
 #include "Term.hpp"
 
-#include <SubstitutionOfVariablesToValues.hpp>
-#include <Utilities.hpp>
+#include <Equation/Constructs/SubstitutionOfVariablesToValues.hpp>
+#include <Equation/Utilities.hpp>
 
 #include <cassert>
 #include <string>
-
 using namespace std;
 
 namespace alba

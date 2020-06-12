@@ -1,7 +1,6 @@
-#include <Operator.hpp>
+#include <Equation/Term/Operator.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba

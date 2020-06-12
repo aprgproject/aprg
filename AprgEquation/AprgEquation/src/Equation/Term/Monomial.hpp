@@ -1,12 +1,11 @@
 #pragma once
 
-#include <BaseTermData.hpp>
+#include <Equation/Constructs/VariablesToValuesTypes.hpp>
+#include <Equation/Term/BaseTermData.hpp>
 #include <Math/AlbaNumber.hpp>
-#include <VariablesToValuesTypes.hpp>
 
 #include <functional>
-#include <map>
-#include <string>
+#include <map>#include <string>
 #include <vector>
 
 namespace alba

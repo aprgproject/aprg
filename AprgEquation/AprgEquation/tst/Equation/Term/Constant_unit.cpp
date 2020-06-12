@@ -1,7 +1,6 @@
-#include <Constant.hpp>
+#include <Equation/Term/Constant.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
