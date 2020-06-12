@@ -18,10 +18,10 @@ namespace equation
 
 class Expression : public BaseTermData
 {
+    friend std::ostream & operator<<(std::ostream & out, Expression const& expression);
 public:
     using ConditionFunctionForTermsWithDetails = std::function<bool(TermsWithAssociation::TermWithDetails const&)>;
-    Expression();
-    Expression(BaseTerm const& baseTerm);
+    Expression();    Expression(BaseTerm const& baseTerm);
     ~Expression();
 
     bool operator==(Expression const& second) const;
@@ -119,6 +119,8 @@ private:
     OperatorLevel m_commonOperatorLevel;
     TermsWithAssociation m_termsWithAssociation;
 };
+
+std::ostream & operator<<(std::ostream & out, Expression const& expression);
 
 }
 

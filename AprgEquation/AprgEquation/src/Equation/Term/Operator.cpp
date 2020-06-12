@@ -104,6 +104,12 @@ void Operator::setOperatorString(string const& operatingString)
     m_operatingString = operatingString;
 }
 
+ostream & operator<<(ostream & out, Operator const& operatorTerm)
+{
+    out << operatorTerm.getDisplayableString();
+    return out;
+}
+
 }
 
 }

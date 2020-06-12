@@ -461,6 +461,12 @@ void Term::resetBaseDataTermPointerBasedFromTerm(Term const& term)
     }
 }
 
+ostream & operator<<(ostream & out, Term const& term)
+{
+    out << term.getDisplayableString();
+    return out;
+}
+
 
 }
 

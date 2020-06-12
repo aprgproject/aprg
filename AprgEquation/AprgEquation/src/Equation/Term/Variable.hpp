@@ -11,10 +11,10 @@ namespace equation
 
 class Variable : public BaseTermData
 {
+    friend std::ostream & operator<<(std::ostream & out, Variable const& variable);
 public:
     Variable();
     Variable(std::string const& variableName);
-
     bool operator==(Variable const& second) const;
     bool operator!=(Variable const& second) const;
     bool operator<(Variable const& second) const;
@@ -27,6 +27,8 @@ public:
 private:
     std::string m_variableName;
 };
+
+std::ostream & operator<<(std::ostream & out, Variable const& variable);
 
 }
 

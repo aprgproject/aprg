@@ -282,6 +282,12 @@ void Polynomial::simplifyMonomialsAndReAdd()
     }
 }
 
+ostream & operator<<(ostream & out, Polynomial const& polynomial)
+{
+    out << polynomial.getDisplayableString();
+    return out;
+}
+
 }
 
 }

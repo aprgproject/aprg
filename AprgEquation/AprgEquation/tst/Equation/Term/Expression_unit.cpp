@@ -182,14 +182,13 @@ TEST(ExpressionTest, GetDebugStringWorks)
     expression3.putTermWithDivisionIfNeeded(getBaseTermConstReferenceFromTerm(Term(96)));
     Expression expression4(createExpressionIfPossible(Terms{Term(expression2), Term("^"), Term("cash")}));
 
-    EXPECT_EQ("( <?>|| )", expression1.getDebugString());
-    EXPECT_EQ("( <+->||<POS>695-<NEG>interest+<POS>debt )", expression2.getDebugString());
-    EXPECT_EQ("( <*/>||1/<NEG>96 )", expression3.getDebugString());
-    EXPECT_EQ("( <^>||<POS>( <+->||<POS>695-<NEG>interest+<POS>debt )^<POS>cash )", expression4.getDebugString());
+    EXPECT_EQ("( [?]|| )", expression1.getDebugString());
+    EXPECT_EQ("( [+-]||695[POS]-interest[NEG]+debt[POS] )", expression2.getDebugString());
+    EXPECT_EQ("( [*/]||1/96[NEG] )", expression3.getDebugString());
+    EXPECT_EQ("( [^]||( [+-]||695[POS]-interest[NEG]+debt[POS] )[POS]^cash[POS] )", expression4.getDebugString());
 }
 
-TEST(ExpressionTest, ClearWorks)
-{
+TEST(ExpressionTest, ClearWorks){
     Expression expression1;    Expression expression2(createExpressionIfPossible(Terms{Term(695), Term("-"), Term("interest"), Term("+"), Term("debt")}));
 
     expression1.clear();

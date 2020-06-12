@@ -294,11 +294,9 @@ void Monomial::compareMonomialsAndSaveMinimumExponentsForEachVariable(Monomial c
         it != m_variablesToExponentsMap.end();
         it++)
     {
-        m_variablesToExponentsMap[it->first]
-                = min(monomial.getExponentForVariable(it->first), it->second);
+        it->second = min(monomial.getExponentForVariable(it->first), it->second);
     }
 }
-
 void Monomial::compareMonomialsAndSaveMaximumExponentsForEachVariable(Monomial const& monomial)
 {
     m_constant=1;
@@ -306,13 +304,24 @@ void Monomial::compareMonomialsAndSaveMaximumExponentsForEachVariable(Monomial c
         it != m_variablesToExponentsMap.end();
         it++)
     {
-        m_variablesToExponentsMap[it->first]
-                = max(monomial.getExponentForVariable(it->first), it->second);
+        it->second = max(monomial.getExponentForVariable(it->first), it->second);
+    }
+    for(VariableExponentPair const& pair : monomial.getVariablesToExponentsMapConstReference())
+    {
+        string const& otherVariableName(pair.first);
+        AlbaNumber const& otherExponent(pair.second);
+        if(m_variablesToExponentsMap.find(otherVariableName) != m_variablesToExponentsMap.end())
+        {
+            m_variablesToExponentsMap[otherVariableName] = max(m_variablesToExponentsMap[otherVariableName], otherExponent);
+        }
+        else
+        {
+            m_variablesToExponentsMap[otherVariableName] = otherExponent;
+        }
     }
 }
 
-bool Monomial::isLessThanByComparingVariableNameMaps(
-        Monomial const& monomial1,
+bool Monomial::isLessThanByComparingVariableNameMaps(        Monomial const& monomial1,
         Monomial const& monomial2) const
 {
     set<string> variableNames;
@@ -349,6 +358,12 @@ void Monomial::removeZeroExponents()
             m_variablesToExponentsMap.emplace(variableExponentPair.first, variableExponentPair.second);
         }
     }
+}
+
+ostream & operator<<(ostream & out, Monomial const& monomial)
+{
+    out << monomial.getDisplayableString();
+    return out;
 }
 
 }

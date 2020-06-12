@@ -555,11 +555,10 @@ TEST(TermTest, GetDebugStringWorks)
     EXPECT_EQ("+", term4.getDebugString());
     EXPECT_EQ("-1.5|distance^-3.75||power^4.5|", term5.getDebugString());
     EXPECT_EQ("(3 + -1.5|distance^-3.75||power^4.5|)", term6.getDebugString());
-    EXPECT_EQ("( <+->||<POS>5+<POS>interest )", term7.getDebugString());
+    EXPECT_EQ("( [+-]||5[POS]+interest[POS] )", term7.getDebugString());
 }
 
-TEST(TermTest, SortWorks)
-{
+TEST(TermTest, SortWorks){
     Term term1;    Term term2(Polynomial{});
     Term term3(Expression{});
     Term term4(Polynomial{Monomial(100, {}), Monomial(5, {{"x", 2}, {"y", 3}, {"z", 4}}), Monomial(9, {{"x", 8}}), Monomial(10, {})});

@@ -145,11 +145,10 @@ string Expression::getDebugString() const
         {
             result << getOperatingString(m_commonOperatorLevel, termWithDetails.association);
         }
-        result << getEnumShortString(termWithDetails.association) << term.getDebugString();
+        result << term.getDebugString() << getEnumShortString(termWithDetails.association);
     }
     result << " )";
-    return result.str();
-}
+    return result.str();}
 
 void Expression::clear()
 {
@@ -836,6 +835,12 @@ void Expression::multiplyThenPutTermAsAddIfTrueAndAsSubtractIfFalse(
     {
         putTermWithSubtractionIfNeeded(Term(expressionToAddOrSubtract));
     }
+}
+
+ostream & operator<<(ostream & out, Expression const& expression)
+{
+    out << expression.getDisplayableString();
+    return out;
 }
 
 }

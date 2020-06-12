@@ -13,10 +13,10 @@ namespace equation
 
 class Operator : public BaseTermData
 {
+    friend std::ostream & operator<<(std::ostream & out, Operator const& operatorTerm);
 public:
     Operator();
     Operator(std::string const& operatingString);
-
     bool operator==(Operator const& second) const;
     bool operator!=(Operator const& second) const;
     bool operator<(Operator const& second) const;
@@ -38,6 +38,8 @@ public:
 private:
     std::string m_operatingString;
 };
+
+std::ostream & operator<<(std::ostream & out, Operator const& operatorTerm);
 
 }
 
