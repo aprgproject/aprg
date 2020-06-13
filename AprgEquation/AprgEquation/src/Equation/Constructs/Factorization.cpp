@@ -6,6 +6,7 @@
 #include <Math/AlbaMathHelper.hpp>
 
 #include <algorithm>
+
 using namespace alba::mathHelper;
 using namespace std;
 
@@ -577,7 +578,8 @@ bool areAllMonomialsFoundInMonomialsWithExponentsInOrder(
         if(polynomialWithExponentsInOrder.isVariableExponentContentFound(monomialToCheck))
         {
             areAllMonomialsFoundInPolynomialWithExponentsInOrder = true;
-            break;        }
+            break;
+        }
     }
 
     return areAllMonomialsFoundInPolynomialWithExponentsInOrder;

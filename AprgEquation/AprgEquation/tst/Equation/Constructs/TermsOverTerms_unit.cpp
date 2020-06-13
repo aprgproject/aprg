@@ -1,6 +1,7 @@
 #include <Equation/Constructs/TermsOverTerms.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba

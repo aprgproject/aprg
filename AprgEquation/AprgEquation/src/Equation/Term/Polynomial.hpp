@@ -6,6 +6,7 @@
 
 #include <string>
 #include <vector>
+
 namespace alba
 {
 
@@ -17,7 +18,8 @@ class Polynomial : public BaseTermData
     friend std::ostream & operator<<(std::ostream & out, Polynomial const& polynomial);
 public:
     Polynomial();
-    Polynomial(Monomials const& monomials);    Polynomial(std::initializer_list<Monomial> const& monomials);
+    Polynomial(Monomials const& monomials);
+    Polynomial(std::initializer_list<Monomial> const& monomials);
 
     bool operator==(Polynomial const& second) const;
     bool operator!=(Polynomial const& second) const;
@@ -32,6 +34,7 @@ public:
     Monomial getFirstMonomial() const;
     Monomials const& getMonomialsConstReference() const;
     std::string getDisplayableString() const;
+
     void clear();
     void simplify();
     void sortMonomialsWithInversePriority();
@@ -46,7 +49,8 @@ public:
 
 private:
     void simplifyFurtherIfNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify);
-    void simplifyMonomialsAndReAdd();    Monomials m_monomials;
+    void simplifyMonomialsAndReAdd();
+    Monomials m_monomials;
 };
 
 using Polynomials=std::vector<Polynomial>;

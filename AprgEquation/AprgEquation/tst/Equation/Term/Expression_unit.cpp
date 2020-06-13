@@ -3,6 +3,7 @@
 #include <Equation/Utilities.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba
@@ -23,7 +24,8 @@ TEST(ExpressionTest, ConstructionWorks)
     TermsWithAssociation::TermsWithDetails const& termsToVerify2(expression2.getTermsWithAssociation().getTermsWithDetails());
     ASSERT_EQ(1u, termsToVerify2.size());
     EXPECT_EQ(TermAssociationType::Positive, termsToVerify2.at(0).association);
-    Term const& termToVerify(getTermConstReferenceFromSharedPointer(termsToVerify2.at(0).baseTermSharedPointer));    EXPECT_EQ(Term(12), termToVerify);
+    Term const& termToVerify(getTermConstReferenceFromSharedPointer(termsToVerify2.at(0).baseTermSharedPointer));
+    EXPECT_EQ(Term(12), termToVerify);
 }
 
 TEST(ExpressionTest, EqualityOperatorWorks)
@@ -136,7 +138,8 @@ TEST(ExpressionTest, GetTermsWithAssociationWorks)
     TermsWithAssociation terms(expression.getTermsWithAssociation());
     TermsWithAssociation::TermsWithDetails termsWithDetailsToVerify(terms.getTermsWithDetails());
 
-    ASSERT_EQ(3u, termsWithDetailsToVerify.size());    EXPECT_EQ(Term(695), getTermConstReferenceFromSharedPointer(termsWithDetailsToVerify.at(0).baseTermSharedPointer));
+    ASSERT_EQ(3u, termsWithDetailsToVerify.size());
+    EXPECT_EQ(Term(695), getTermConstReferenceFromSharedPointer(termsWithDetailsToVerify.at(0).baseTermSharedPointer));
     EXPECT_EQ(TermAssociationType::Positive, termsWithDetailsToVerify.at(0).association);
     EXPECT_EQ(Term("interest"), getTermConstReferenceFromSharedPointer(termsWithDetailsToVerify.at(1).baseTermSharedPointer));
     EXPECT_EQ(TermAssociationType::Negative, termsWithDetailsToVerify.at(1).association);
@@ -183,13 +186,15 @@ TEST(ExpressionTest, GetDebugStringWorks)
     Expression expression4(createExpressionIfPossible(Terms{Term(expression2), Term("^"), Term("cash")}));
 
     EXPECT_EQ("( [?]|| )", expression1.getDebugString());
-    EXPECT_EQ("( [+-]||695[POS]-interest[NEG]+debt[POS] )", expression2.getDebugString());
-    EXPECT_EQ("( [*/]||1/96[NEG] )", expression3.getDebugString());
-    EXPECT_EQ("( [^]||( [+-]||695[POS]-interest[NEG]+debt[POS] )[POS]^cash[POS] )", expression4.getDebugString());
+    EXPECT_EQ("( [+-]||695[Constant][POS]-interest[Variable][NEG]+debt[Variable][POS] )", expression2.getDebugString());
+    EXPECT_EQ("( [*/]||1/96[Constant][NEG] )", expression3.getDebugString());
+    EXPECT_EQ("( [^]||( [+-]||695[Constant][POS]-interest[Variable][NEG]+debt[Variable][POS] )[Expression][POS]^cash[Variable][POS] )", expression4.getDebugString());
 }
 
-TEST(ExpressionTest, ClearWorks){
-    Expression expression1;    Expression expression2(createExpressionIfPossible(Terms{Term(695), Term("-"), Term("interest"), Term("+"), Term("debt")}));
+TEST(ExpressionTest, ClearWorks)
+{
+    Expression expression1;
+    Expression expression2(createExpressionIfPossible(Terms{Term(695), Term("-"), Term("interest"), Term("+"), Term("debt")}));
 
     expression1.clear();
     expression2.clear();
@@ -903,7 +908,8 @@ TEST(ExpressionTest, ReverseTheAssociationOfTheTermsWorks)
     TermsWithAssociation::TermsWithDetails const& termsToVerify2(expression2.getTermsWithAssociation().getTermsWithDetails());
     ASSERT_EQ(1u, termsToVerify2.size());
     EXPECT_EQ(TermAssociationType::Negative, termsToVerify2.at(0).association);
-    Term const& termToVerify(getTermConstReferenceFromSharedPointer(termsToVerify2.at(0).baseTermSharedPointer));    EXPECT_EQ(Term(695), termToVerify);
+    Term const& termToVerify(getTermConstReferenceFromSharedPointer(termsToVerify2.at(0).baseTermSharedPointer));
+    EXPECT_EQ(Term(695), termToVerify);
 }
 
 TEST(ExpressionTest, SetWorks)

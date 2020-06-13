@@ -14,6 +14,7 @@ class BaseTerm
 public:
     BaseTerm();
     virtual ~BaseTerm();
+
     virtual std::string getDisplayableString() const;
     virtual std::string getDebugString() const;
 

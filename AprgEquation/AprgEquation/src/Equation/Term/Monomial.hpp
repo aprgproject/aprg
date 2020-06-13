@@ -5,7 +5,8 @@
 #include <Math/AlbaNumber.hpp>
 
 #include <functional>
-#include <map>#include <string>
+#include <map>
+#include <string>
 #include <vector>
 
 namespace alba
@@ -24,6 +25,7 @@ public:
     using VariableExponentPair = std::pair<std::string, AlbaNumber>;
     using VariableExponentReferencePair = std::pair<std::string & , AlbaNumber &>;
     using ChangeExponentsForVariableFunction = std::function<void(std::string const&, AlbaNumber&)>;
+
     Monomial();
     Monomial(AlbaNumber const& constant, std::initializer_list<VariableExponentPair> const& variablesWithExponents);
     Monomial(AlbaNumber const& constant, VariablesToExponentsMap const& variablesWithExponents);

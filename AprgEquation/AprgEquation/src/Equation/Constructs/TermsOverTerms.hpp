@@ -4,6 +4,8 @@
 #include <Equation/Term/TermsWithAssociation.hpp>
 
 #include <string>
+#include <vector>
+
 namespace alba
 {
 
@@ -20,8 +22,8 @@ public:
     void simplifyToFactors();
 
     TermsWithAssociation::TermsWithDetails getNumeratorAndDenominatorAsTermWithDetails() const;
-    Terms getNumerators() const;
-    Terms getDenominators() const;
+    Terms const& getNumerators() const;
+    Terms const& getDenominators() const;
 
     std::string getDisplayableString() const;
 
@@ -32,6 +34,8 @@ private:
     Terms m_numerators;
     Terms m_denominators;
 };
+
+using VectorOfTermsOverTerms = std::vector<TermsOverTerms>;
 
 }
 

@@ -5,6 +5,7 @@
 
 #include <cassert>
 #include <string>
+
 using namespace std;
 
 namespace alba
@@ -358,6 +359,9 @@ string Term::getDebugString() const
     {
         result = getExpressionConstReference().getDebugString();
     }
+    result += "[";
+    result += getEnumShortString(m_type);
+    result += "]";
     return result;
 }
 

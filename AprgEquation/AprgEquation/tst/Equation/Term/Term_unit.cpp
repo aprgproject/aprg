@@ -2,6 +2,7 @@
 #include <Equation/Utilities.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba
@@ -66,7 +67,8 @@ TEST(TermTest, TermsAsOperatorsWorkAsExpected)
     EXPECT_EQ("/", operator4.getOperatorConstReference().getOperatorString());
 }
 
-TEST(TermTest, TermsAsMonomialsWorkAsExpected){
+TEST(TermTest, TermsAsMonomialsWorkAsExpected)
+{
     Term monomial1(Monomial(3, {}));
     Term monomial2(Monomial(1.5, {{"distance", 3.75}}));
     Term monomial3(Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}}));
@@ -154,13 +156,15 @@ TEST(TermTest, TermsAsExpressionsWorkAsExpected)
     TermsWithAssociation::TermsWithDetails const& termsToVerify1(expression1.getTermsWithAssociation().getTermsWithDetails());
     ASSERT_TRUE(termsToVerify1.empty());
 
-    //For expression2    ASSERT_EQ(TermType::Expression, expressionTerm2.getTermType());
+    //For expression2
+    ASSERT_EQ(TermType::Expression, expressionTerm2.getTermType());
     Expression const& expression2(expressionTerm2.getExpressionConstReference());
     EXPECT_EQ(OperatorLevel::AdditionAndSubtraction, expression2.getCommonOperatorLevel());
     TermsWithAssociation::TermsWithDetails const& termsToVerify2(expression2.getTermsWithAssociation().getTermsWithDetails());
     ASSERT_EQ(2u, termsToVerify2.size());
     EXPECT_EQ(TermAssociationType::Positive, termsToVerify2.at(0).association);
-    Term const& termToVerify1(getTermConstReferenceFromSharedPointer(termsToVerify2.at(0).baseTermSharedPointer));    EXPECT_EQ(Term(5), termToVerify1);
+    Term const& termToVerify1(getTermConstReferenceFromSharedPointer(termsToVerify2.at(0).baseTermSharedPointer));
+    EXPECT_EQ(Term(5), termToVerify1);
     EXPECT_EQ(TermAssociationType::Positive, termsToVerify2.at(1).association);
     Term const& termToVerify2(getTermConstReferenceFromSharedPointer(termsToVerify2.at(1).baseTermSharedPointer));
     EXPECT_EQ(Term("interest"), termToVerify2);
@@ -228,7 +232,8 @@ TEST(TermTest, TermsAsExpressionsCanBeChangedAsExpected)
 
 TEST(TermTest, EqualityOperatorWorks)
 {
-    Term term1;    Term term2(Constant(5));
+    Term term1;
+    Term term2(Constant(5));
     Term term3(Constant(10));
     Term term4(Variable("length"));
     Term term5(Constant(5));
@@ -532,7 +537,8 @@ TEST(TermTest, GetDisplayableStringWorks)
     Term term7(createExpressionIfPossible(Terms{Term(5), Term("+"), Term("interest")}));
 
     EXPECT_TRUE(term1.getDisplayableString().empty());
-    EXPECT_EQ("0", term2.getDisplayableString());    EXPECT_EQ("length", term3.getDisplayableString());
+    EXPECT_EQ("0", term2.getDisplayableString());
+    EXPECT_EQ("length", term3.getDisplayableString());
     EXPECT_EQ("+", term4.getDisplayableString());
     EXPECT_EQ("-1.5|distance^-3.75||power^4.5|", term5.getDisplayableString());
     EXPECT_EQ("(3 + -1.5|distance^-3.75||power^4.5|)", term6.getDisplayableString());
@@ -549,17 +555,19 @@ TEST(TermTest, GetDebugStringWorks)
     Term term6(Polynomial({Monomial(3, {}), Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}})}));
     Term term7(createExpressionIfPossible(Terms{Term(5), Term("+"), Term("interest")}));
 
-    EXPECT_TRUE(term1.getDebugString().empty());
-    EXPECT_EQ("0", term2.getDebugString());
-    EXPECT_EQ("length", term3.getDebugString());
-    EXPECT_EQ("+", term4.getDebugString());
-    EXPECT_EQ("-1.5|distance^-3.75||power^4.5|", term5.getDebugString());
-    EXPECT_EQ("(3 + -1.5|distance^-3.75||power^4.5|)", term6.getDebugString());
-    EXPECT_EQ("( [+-]||5[POS]+interest[POS] )", term7.getDebugString());
+    EXPECT_EQ("[Empty]", term1.getDebugString());
+    EXPECT_EQ("0[Constant]", term2.getDebugString());
+    EXPECT_EQ("length[Variable]", term3.getDebugString());
+    EXPECT_EQ("+[Operator]", term4.getDebugString());
+    EXPECT_EQ("-1.5|distance^-3.75||power^4.5|[Monomial]", term5.getDebugString());
+    EXPECT_EQ("(3 + -1.5|distance^-3.75||power^4.5|)[Polynomial]", term6.getDebugString());
+    EXPECT_EQ("( [+-]||5[Constant][POS]+interest[Variable][POS] )[Expression]", term7.getDebugString());
 }
 
-TEST(TermTest, SortWorks){
-    Term term1;    Term term2(Polynomial{});
+TEST(TermTest, SortWorks)
+{
+    Term term1;
+    Term term2(Polynomial{});
     Term term3(Expression{});
     Term term4(Polynomial{Monomial(100, {}), Monomial(5, {{"x", 2}, {"y", 3}, {"z", 4}}), Monomial(9, {{"x", 8}}), Monomial(10, {})});
     Term term5(createExpressionIfPossible(Terms{Term(1), Term("-"), Term(3), Term("-"), Term(2), Term("+"), Term(5), Term("+"), Term(4)}));

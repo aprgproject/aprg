@@ -1,6 +1,7 @@
 #include <Equation/Term/Monomial.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba
@@ -124,6 +125,7 @@ TEST(MonomialTest, IsOneFunctionWorks)
     Monomial monomial3(0, {{"x", 6}, {"y", -1.25}});
     Monomial monomial4(23, {});
     Monomial monomial5(1, {});
+
     EXPECT_FALSE(monomial1.isOne());
     EXPECT_FALSE(monomial2.isOne());
     EXPECT_FALSE(monomial3.isOne());
@@ -146,7 +148,8 @@ TEST(MonomialTest, IsZeroFunctionWorks)
     EXPECT_TRUE(monomial5.isZero());
 }
 
-TEST(MonomialTest, IsConstantOnlyFunctionWorks){
+TEST(MonomialTest, IsConstantOnlyFunctionWorks)
+{
     Monomial monomial1;
     Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
     Monomial monomial3(23, {});
@@ -200,7 +203,8 @@ TEST(MonomialTest, HasNegativeExponentsWorks)
 
 TEST(MonomialTest, GetConstantConstReferenceWorks)
 {
-    Monomial monomial1;    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial monomial1;
+    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
 
     EXPECT_DOUBLE_EQ(0, monomial1.getConstantConstReference().getDouble());
     EXPECT_DOUBLE_EQ(-54, monomial2.getConstantConstReference().getDouble());
@@ -281,7 +285,8 @@ TEST(MonomialTest, GetMaxExponentWorks)
 
 TEST(MonomialTest, GetExponentForVariableWorks)
 {
-    Monomial monomial1;    Monomial monomial2(-54, {{"x", 6}, {"y1", -1.25}});
+    Monomial monomial1;
+    Monomial monomial2(-54, {{"x", 6}, {"y1", -1.25}});
 
     EXPECT_DOUBLE_EQ(0, monomial1.getExponentForVariable("x").getDouble());
     EXPECT_DOUBLE_EQ(6, monomial2.getExponentForVariable("x").getDouble());
@@ -443,7 +448,8 @@ TEST(MonomialTest, SettingANewConstantWorks)
     EXPECT_DOUBLE_EQ(512, monomial2.getConstantConstReference().getDouble());
 }
 
-TEST(MonomialTest, PuttingANewVariableWithExponentWorks){
+TEST(MonomialTest, PuttingANewVariableWithExponentWorks)
+{
     Monomial monomial;
 
     monomial.putVariableWithExponent("i", 62);
@@ -495,6 +501,7 @@ TEST(MonomialTest, SaveMinimumExponentsForEachVariableWorks)
 {
     Monomial monomial(85, {{"x", 3}, {"y", 4}});
     Monomial monomialToApply(356, {{"x", 5}, {"y", 2}});
+
     monomial.compareMonomialsAndSaveMinimumExponentsForEachVariable(monomialToApply);
 
     EXPECT_DOUBLE_EQ(1, monomial.getConstantConstReference().getDouble());

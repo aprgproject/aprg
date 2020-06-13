@@ -1,6 +1,7 @@
 #include <Equation/Term/Operator.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba
@@ -195,7 +196,8 @@ TEST(OperatorTest, IsAnOperatorThatCanPerformedWorksAsExpected)
 
 TEST(OperatorTest, IsOpeningGroupOperatorWorksAsExpected)
 {
-    Operator nullOperator;    Operator addOperator("+");
+    Operator nullOperator;
+    Operator addOperator("+");
     Operator subtractOperator("-");
     Operator multiplyOperator("*");
     Operator divideOperator("/");
@@ -319,4 +321,5 @@ TEST(OperatorTest, SettingANewOperatingStringWorks)
 }
 
 }
+
 }

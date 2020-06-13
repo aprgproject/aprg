@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <sstream>
+
 using namespace std;
 
 namespace alba
@@ -94,7 +95,8 @@ bool Polynomial::isVariableExponentContentFound(Monomial const& monomial) const
 {
     bool result(false);
     for(Monomial const& monomialInternal : m_monomials)
-    {        if(monomial.getVariablesToExponentsMapConstReference()
+    {
+        if(monomial.getVariablesToExponentsMapConstReference()
                 == monomialInternal.getVariablesToExponentsMapConstReference())
         {
             result = true;
@@ -136,7 +138,8 @@ Monomials const& Polynomial::getMonomialsConstReference() const
 
 string Polynomial::getDisplayableString() const
 {
-    stringstream result;    if(m_monomials.empty())
+    stringstream result;
+    if(m_monomials.empty())
     {
         result << "(EmptyPolynomial)";
     }

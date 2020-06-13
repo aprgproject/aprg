@@ -4,6 +4,7 @@
 #include <Equation/Utilities.hpp>
 
 #include <algorithm>
+
 using namespace std;
 
 namespace alba

@@ -4,6 +4,7 @@
 
 #include <set>
 #include <sstream>
+
 using namespace std;
 
 namespace alba
@@ -176,6 +177,7 @@ AlbaNumber Monomial::getMaxExponent() const
     }
     return maxExponent;
 }
+
 AlbaNumber Monomial::getExponentForVariable(string const& variableName) const
 {
     AlbaNumber exponent(0);
@@ -297,6 +299,7 @@ void Monomial::compareMonomialsAndSaveMinimumExponentsForEachVariable(Monomial c
         it->second = min(monomial.getExponentForVariable(it->first), it->second);
     }
 }
+
 void Monomial::compareMonomialsAndSaveMaximumExponentsForEachVariable(Monomial const& monomial)
 {
     m_constant=1;
@@ -321,7 +324,8 @@ void Monomial::compareMonomialsAndSaveMaximumExponentsForEachVariable(Monomial c
     }
 }
 
-bool Monomial::isLessThanByComparingVariableNameMaps(        Monomial const& monomial1,
+bool Monomial::isLessThanByComparingVariableNameMaps(
+        Monomial const& monomial1,
         Monomial const& monomial2) const
 {
     set<string> variableNames;

@@ -5,6 +5,7 @@
 #include <Math/AlbaNumber.hpp>
 
 #include <string>
+
 namespace alba
 {
 
@@ -17,6 +18,7 @@ class Operator : public BaseTermData
 public:
     Operator();
     Operator(std::string const& operatingString);
+
     bool operator==(Operator const& second) const;
     bool operator!=(Operator const& second) const;
     bool operator<(Operator const& second) const;

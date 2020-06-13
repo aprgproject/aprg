@@ -10,6 +10,7 @@
 
 #include <functional>
 #include <string>
+
 namespace alba
 {
 
@@ -21,7 +22,8 @@ class Expression : public BaseTermData
     friend std::ostream & operator<<(std::ostream & out, Expression const& expression);
 public:
     using ConditionFunctionForTermsWithDetails = std::function<bool(TermsWithAssociation::TermWithDetails const&)>;
-    Expression();    Expression(BaseTerm const& baseTerm);
+    Expression();
+    Expression(BaseTerm const& baseTerm);
     ~Expression();
 
     bool operator==(Expression const& second) const;
@@ -35,7 +37,8 @@ public:
     TermsWithAssociation const& getTermsWithAssociation() const;
     TermsWithAssociation getTermsWithDetailsThatSatisfiesCondition(
             ConditionFunctionForTermsWithDetails const& conditionFunction) const;
-    std::string getDisplayableString() const;    std::string getDebugString() const;
+    std::string getDisplayableString() const;
+    std::string getDebugString() const;
 
     void clear();
     void clearAndPutTermInTermsWithAssociation(BaseTerm const& baseTerm);
