@@ -43,11 +43,10 @@ void PolynomialOverPolynomial::simplify()
     removeCommonMonomialOnAllMonomialsInNumeratorAndDenominator();
     m_numerator.simplify();
     m_denominator.simplify();
-    factorizeAndRemoveCommonFactorsInNumeratorAndDenominator();
+    factorizeRemoveCommonFactorsInNumeratorAndDenominatorAndCombineRemainingFactors();
 }
 
-PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::divide() const
-{
+PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::divide() const{
     Polynomial currentQuotient;    Polynomial currentRemainder(m_numerator);
     while(!currentRemainder.isZero())
     {
@@ -112,15 +111,13 @@ void PolynomialOverPolynomial::removeCommonMonomialOnAllMonomialsInNumeratorAndD
 
 }
 
-void PolynomialOverPolynomial::factorizeAndRemoveCommonFactorsInNumeratorAndDenominator()
+void PolynomialOverPolynomial::factorizeRemoveCommonFactorsInNumeratorAndDenominatorAndCombineRemainingFactors()
 {
     Polynomials numeratorFactors(factorize(m_numerator));
     Polynomials denominatorFactors(factorize(m_denominator));
-
     bool areSomeFactorsRemoved(removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(numeratorFactors, denominatorFactors));
     if(areSomeFactorsRemoved)
-    {
-        m_numerator = multiplyAndSimplifyFactors(numeratorFactors);
+    {        m_numerator = multiplyAndSimplifyFactors(numeratorFactors);
         m_denominator = multiplyAndSimplifyFactors(denominatorFactors);
     }
 }
