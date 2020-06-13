@@ -34,10 +34,8 @@ Polynomial const& PolynomialOverPolynomial::getDenominator() const
 PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::simplifyAndDivide()
 {
     simplify();
-    sortNumeratorAndDenominator();
     return divide();
 }
-
 void PolynomialOverPolynomial::simplify()
 {
     convertFractionCoefficientsToInteger();
@@ -48,16 +46,9 @@ void PolynomialOverPolynomial::simplify()
     factorizeAndRemoveCommonFactorsInNumeratorAndDenominator();
 }
 
-void PolynomialOverPolynomial::sortNumeratorAndDenominator()
-{
-    m_numerator.sortMonomialsWithInversePriority();
-    m_denominator.sortMonomialsWithInversePriority();
-}
-
 PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::divide() const
 {
-    Polynomial currentQuotient;
-    Polynomial currentRemainder(m_numerator);
+    Polynomial currentQuotient;    Polynomial currentRemainder(m_numerator);
     while(!currentRemainder.isZero())
     {
         Monomial const& dividendMonomial(currentRemainder.getFirstMonomial());
@@ -82,51 +73,9 @@ PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::divide(
     return QuotientAndRemainder{currentQuotient, currentRemainder};
 }
 
-unsigned int PolynomialOverPolynomial::getLcmForDenominatorCoefficients(Polynomial const& polynomial)
-{
-    unsigned int lcm(1);
-    for(Monomial const& monomial : polynomial.getMonomialsConstReference())
-    {
-        AlbaNumber const& coefficient(monomial.getConstantConstReference());
-        if(coefficient.isFractionType())
-        {
-            AlbaNumber::FractionData fractionData(coefficient.getFractionData());
-            lcm = getLeastCommonMultiple(lcm, fractionData.denominator);
-        }
-    }
-    return lcm;
-}
-
-Monomial PolynomialOverPolynomial::getMonomialWithMaxNegativeExponentsAndConvertItToPositive(Polynomial const& polynomial)
-{
-    Monomial resultMonomial(1, {});
-    Monomial::VariablesToExponentsMap const& resultVariableMap(resultMonomial.getVariablesToExponentsMapConstReference());
-    for(Monomial const& monomial : polynomial.getMonomialsConstReference())
-    {
-        for(Monomial::VariableExponentPair const& variablePair : monomial.getVariablesToExponentsMapConstReference())
-        {
-            if(variablePair.second < 0)
-            {
-                AlbaNumber existingExponent;
-                if(resultVariableMap.find(variablePair.first) != resultVariableMap.end())
-                {
-                    existingExponent = resultVariableMap.at(variablePair.first);
-                }
-                AlbaNumber newPositiveExponent(variablePair.second*-1);
-                if(newPositiveExponent > existingExponent)
-                {
-                    resultMonomial.putVariableWithExponent(variablePair.first, newPositiveExponent);
-                }
-            }
-        }
-    }
-    return resultMonomial;
-}
-
 void PolynomialOverPolynomial::convertFractionCoefficientsToInteger()
 {
-    unsigned int numeratorMultiplier(getLcmForDenominatorCoefficients(m_numerator));
-    m_numerator.multiplyNumber(numeratorMultiplier);
+    unsigned int numeratorMultiplier(getLcmForDenominatorCoefficients(m_numerator));    m_numerator.multiplyNumber(numeratorMultiplier);
     m_denominator.multiplyNumber(numeratorMultiplier);
     unsigned int denominatorMultiplier(getLcmForDenominatorCoefficients(m_denominator));
     m_numerator.multiplyNumber(denominatorMultiplier);
@@ -176,10 +125,50 @@ void PolynomialOverPolynomial::factorizeAndRemoveCommonFactorsInNumeratorAndDeno
     }
 }
 
+unsigned int PolynomialOverPolynomial::getLcmForDenominatorCoefficients(Polynomial const& polynomial)
+{
+    unsigned int lcm(1);
+    for(Monomial const& monomial : polynomial.getMonomialsConstReference())
+    {
+        AlbaNumber const& coefficient(monomial.getConstantConstReference());
+        if(coefficient.isFractionType())
+        {
+            AlbaNumber::FractionData fractionData(coefficient.getFractionData());
+            lcm = getLeastCommonMultiple(lcm, fractionData.denominator);
+        }
+    }
+    return lcm;
+}
+
+Monomial PolynomialOverPolynomial::getMonomialWithMaxNegativeExponentsAndConvertItToPositive(Polynomial const& polynomial)
+{
+    Monomial resultMonomial(1, {});
+    Monomial::VariablesToExponentsMap const& resultVariableMap(resultMonomial.getVariablesToExponentsMapConstReference());
+    for(Monomial const& monomial : polynomial.getMonomialsConstReference())
+    {
+        for(Monomial::VariableExponentPair const& variablePair : monomial.getVariablesToExponentsMapConstReference())
+        {
+            if(variablePair.second < 0)
+            {
+                AlbaNumber existingExponent;
+                if(resultVariableMap.find(variablePair.first) != resultVariableMap.end())
+                {
+                    existingExponent = resultVariableMap.at(variablePair.first);
+                }
+                AlbaNumber newPositiveExponent(variablePair.second*-1);
+                if(newPositiveExponent > existingExponent)
+                {
+                    resultMonomial.putVariableWithExponent(variablePair.first, newPositiveExponent);
+                }
+            }
+        }
+    }
+    return resultMonomial;
+}
+
 bool PolynomialOverPolynomial::removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(
         Polynomials & numeratorFactors,
-        Polynomials & denominatorFactors) const
-{
+        Polynomials & denominatorFactors) const{
     bool areSomeFactorsRemoved(false);
     for(Polynomials::iterator numeratorIterator = numeratorFactors.begin();
         numeratorIterator != numeratorFactors.end();
