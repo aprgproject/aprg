@@ -36,6 +36,7 @@ PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::simplif
     simplify();
     return divide();
 }
+
 void PolynomialOverPolynomial::simplify()
 {
     convertFractionCoefficientsToInteger();
@@ -46,8 +47,10 @@ void PolynomialOverPolynomial::simplify()
     factorizeRemoveCommonFactorsInNumeratorAndDenominatorAndCombineRemainingFactors();
 }
 
-PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::divide() const{
-    Polynomial currentQuotient;    Polynomial currentRemainder(m_numerator);
+PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::divide() const
+{
+    Polynomial currentQuotient;
+    Polynomial currentRemainder(m_numerator);
     while(!currentRemainder.isZero())
     {
         Monomial const& dividendMonomial(currentRemainder.getFirstMonomial());
@@ -74,7 +77,8 @@ PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::divide(
 
 void PolynomialOverPolynomial::convertFractionCoefficientsToInteger()
 {
-    unsigned int numeratorMultiplier(getLcmForDenominatorCoefficients(m_numerator));    m_numerator.multiplyNumber(numeratorMultiplier);
+    unsigned int numeratorMultiplier(getLcmForDenominatorCoefficients(m_numerator));
+    m_numerator.multiplyNumber(numeratorMultiplier);
     m_denominator.multiplyNumber(numeratorMultiplier);
     unsigned int denominatorMultiplier(getLcmForDenominatorCoefficients(m_denominator));
     m_numerator.multiplyNumber(denominatorMultiplier);
@@ -117,7 +121,8 @@ void PolynomialOverPolynomial::factorizeRemoveCommonFactorsInNumeratorAndDenomin
     Polynomials denominatorFactors(factorize(m_denominator));
     bool areSomeFactorsRemoved(removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(numeratorFactors, denominatorFactors));
     if(areSomeFactorsRemoved)
-    {        m_numerator = multiplyAndSimplifyFactors(numeratorFactors);
+    {
+        m_numerator = multiplyAndSimplifyFactors(numeratorFactors);
         m_denominator = multiplyAndSimplifyFactors(denominatorFactors);
     }
 }
@@ -165,7 +170,8 @@ Monomial PolynomialOverPolynomial::getMonomialWithMaxNegativeExponentsAndConvert
 
 bool PolynomialOverPolynomial::removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(
         Polynomials & numeratorFactors,
-        Polynomials & denominatorFactors) const{
+        Polynomials & denominatorFactors) const
+{
     bool areSomeFactorsRemoved(false);
     for(Polynomials::iterator numeratorIterator = numeratorFactors.begin();
         numeratorIterator != numeratorFactors.end();

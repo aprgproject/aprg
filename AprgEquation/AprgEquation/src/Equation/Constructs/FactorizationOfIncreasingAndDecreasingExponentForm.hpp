@@ -49,7 +49,8 @@ private:
     unsigned int calculateMaxExponentDivisor(Monomial const& firstMonomial, Monomial const& lastMonomial);
     bool areAllMonomialsFoundInMonomialsWithExponentsInOrder(
             Monomials const& monomialsToCheck,
-            Monomials const& monomialsWithExponentsInOrder);};
+            Monomials const& monomialsWithExponentsInOrder);
+};
 
 }
 

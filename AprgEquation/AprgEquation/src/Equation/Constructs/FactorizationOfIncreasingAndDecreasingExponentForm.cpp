@@ -51,7 +51,8 @@ Polynomials FactorizationOfIncreasingAndDecreasingExponentForm::factorizeIfPossi
                 }
             }
         }
-    }    return result;
+    }
+    return result;
 }
 
 void FactorizationOfIncreasingAndDecreasingExponentForm::factorizeUsingQuadraticFormulaOrBrentMethod(
@@ -209,16 +210,17 @@ unsigned int FactorizationOfIncreasingAndDecreasingExponentForm::calculateMaxExp
     return maxExponentDivisor;
 }
 
-bool FactorizationOfIncreasingAndDecreasingExponentForm::areAllMonomialsFoundInMonomialsWithExponentsInOrder(        Monomials const& monomialsToCheck,
+bool FactorizationOfIncreasingAndDecreasingExponentForm::areAllMonomialsFoundInMonomialsWithExponentsInOrder(
+        Monomials const& monomialsToCheck,
         Monomials const& monomialsWithExponentsInOrder)
 {
     Polynomial polynomialWithExponentsInOrder(monomialsWithExponentsInOrder);
-    bool areAllMonomialsFoundInPolynomialWithExponentsInOrder(false);
+    bool areAllMonomialsFoundInPolynomialWithExponentsInOrder(true);
     for(Monomial const& monomialToCheck : monomialsToCheck)
     {
-        if(polynomialWithExponentsInOrder.isVariableExponentContentFound(monomialToCheck))
+        if(!polynomialWithExponentsInOrder.isVariableExponentContentFound(monomialToCheck))
         {
-            areAllMonomialsFoundInPolynomialWithExponentsInOrder = true;
+            areAllMonomialsFoundInPolynomialWithExponentsInOrder = false;
             break;
         }
     }

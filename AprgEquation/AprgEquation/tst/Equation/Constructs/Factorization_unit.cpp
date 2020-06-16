@@ -102,6 +102,7 @@ TEST(FactorizationTest, DifferenceOfSquaresWithBigExponent)
 TEST(FactorizationTest, DifferenceOfCubesCanBeFactored_FactorizeWorks)
 {
     Polynomial polynomialToTest{Monomial(27, {{"x", 12}, {"y", 3}}), Monomial(-64, {{"z", 6}})};
+
     Polynomials polynomialsToVerify(factorize(polynomialToTest));
 
     ASSERT_EQ(2u, polynomialsToVerify.size());
@@ -309,6 +310,23 @@ TEST(FactorizationTest, Example2_FactorizeWorks)
     EXPECT_EQ(polynomialToExpect1, polynomialsToVerify.at(0));
     EXPECT_EQ(polynomialToExpect2, polynomialsToVerify.at(1));
     EXPECT_EQ(polynomialToExpect3, polynomialsToVerify.at(2));
+}
+
+TEST(FactorizationTest, Example3_FactorizeWorks)
+{
+    Polynomial polynomialToTest{Monomial(3, {{"x", 4}}), Monomial(-32, {{"x", 2}}), Monomial(-80, {{"x", 1}}), Monomial(-12, {})};
+
+    Polynomials polynomialsToVerify(factorize(polynomialToTest));
+
+    ASSERT_EQ(4u, polynomialsToVerify.size());
+    Polynomial polynomialToExpect1{Monomial(1, {{"x", 1}}), Monomial(0.160246899469294, {})};
+    Polynomial polynomialToExpect2{Monomial(3, {})};
+    Polynomial polynomialToExpect3{Monomial(1, {{"x", 1}}), Monomial(-4.16024689946928, {})};
+    Polynomial polynomialToExpect4{Monomial(1, {{"x", 2}}), Monomial(4, {{"x", 1}}), Monomial(6, {})};
+    EXPECT_EQ(polynomialToExpect1, polynomialsToVerify.at(0));
+    EXPECT_EQ(polynomialToExpect2, polynomialsToVerify.at(1));
+    EXPECT_EQ(polynomialToExpect3, polynomialsToVerify.at(2));
+    EXPECT_EQ(polynomialToExpect4, polynomialsToVerify.at(3));
 }
 
 TEST(FactorizationTest, FactorizePolynomialsWorksWhenPolynomialsCannotBeFactorized)
@@ -732,7 +750,8 @@ TEST(FactorizationTest, FactorizeBySplittingSmallerPolynomialsIfPossible_WorksOn
 
 TEST(FactorizationTest, SplitPolynomialIntoSmallerPolynomialsWorks)
 {
-    Polynomial polynomialToTest{        Monomial(1, {{"a", 1}, {"x", 1}}),
+    Polynomial polynomialToTest{
+        Monomial(1, {{"a", 1}, {"x", 1}}),
                 Monomial(1, {{"a", 1}, {"y", 1}}),
                 Monomial(1, {{"b", 1}, {"x", 1}}),
                 Monomial(1, {{"b", 1}, {"y", 1}})};
