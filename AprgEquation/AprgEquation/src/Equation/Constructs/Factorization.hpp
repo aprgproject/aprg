@@ -30,11 +30,10 @@ Polynomials factorizeBySplittingSmallerPolynomialsIfPossible(Polynomial const& p
 Polynomials splitPolynomialIntoSmallerPolynomials(Polynomial const& polynomial);
 Polynomials getCommonFactorsInThesePolynomials(Polynomials const& smallerPolynomials);
 Polynomials getPolynomialsWithRemovedCommonFactors(Polynomials const& polynomialsWithCommonFactors, Polynomials const& commonFactors);
-void combinePolynomialsByAdditionAndEmplaceBack(Polynomials & result, Polynomials const& smallerPolynomials);
+void combinePolynomialsByAdditionAndThenEmplaceBack(Polynomials & result, Polynomials const& smallerPolynomials);
 void addFactorsOfDifferenceOfSquares(Polynomials & result, Polynomial const& polynomial);
 void addFactorsOfDifferenceOfCubes(Polynomials & result, Polynomial const& polynomial);
-void addFactorsOfSumOfCubes(Polynomials & result, Polynomial const& polynomial);
-bool isDifferenceOfSquares(Polynomial const& polynomial);
+void addFactorsOfSumOfCubes(Polynomials & result, Polynomial const& polynomial);bool isDifferenceOfSquares(Polynomial const& polynomial);
 bool isDifferenceOfCubes(Polynomial const& polynomial);
 bool isSumOfCubes(Polynomial const& polynomial);
 bool isPerfectSquare(Monomial const& monomial);
