@@ -964,11 +964,10 @@ TEST(ExpressionTest, SetCommonOperatorLevelWorks)
     EXPECT_EQ(OperatorLevel::RaiseToPower, expression4.getCommonOperatorLevel());
 }
 
-TEST(ExpressionTest, SimplifyWorksOnSingleTermExpression)
+TEST(ExpressionTest, SimplifyWorksOnExpressionInExpressionForAMultipleTermExpression)
 {
     Term expressionTerm(createExpressionIfPossible(Terms{Term("x"), Term("^"), Term("x")}));
-    Term expressionInExpressionTerm(createExpressionInAnExpression(expressionTerm));
-    Term expressionInExpressionInExpressionTerm(createExpressionInAnExpression(expressionInExpressionTerm));
+    Term expressionInExpressionTerm(createExpressionInAnExpression(expressionTerm));    Term expressionInExpressionInExpressionTerm(createExpressionInAnExpression(expressionInExpressionTerm));
     Expression expression(createExpressionIfPossible(Terms{expressionInExpressionInExpressionTerm}));
 
     expression.simplify();
@@ -976,11 +975,10 @@ TEST(ExpressionTest, SimplifyWorksOnSingleTermExpression)
     EXPECT_EQ(expressionTerm, expression);
 }
 
-TEST(ExpressionTest, SimplifyWorksOnContinuousSingleTermExpression)
+TEST(ExpressionTest, SimplifyWorksOnExpressionInExpressionForASingleTermExpression)
 {
     Term expressionTerm(createAndWrapExpressionFromATerm(Term(967)));
-    Term expressionInExpressionTerm(createExpressionInAnExpression(expressionTerm));
-    Term expressionInExpressionInExpressionTerm(createExpressionInAnExpression(expressionInExpressionTerm));
+    Term expressionInExpressionTerm(createExpressionInAnExpression(expressionTerm));    Term expressionInExpressionInExpressionTerm(createExpressionInAnExpression(expressionInExpressionTerm));
     Expression expression(createExpressionIfPossible(Terms{expressionInExpressionInExpressionTerm}));
 
     expression.simplify();

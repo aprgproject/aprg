@@ -14,22 +14,20 @@ class AdditionAndSubtractionOfTermsOverTerms
 public:
     AdditionAndSubtractionOfTermsOverTerms();
 
-    void putAsAddition(TermsOverTerms const& addend);
-    void putAsSubtraction(TermsOverTerms const& subtrahend);
-    void putAsAddOrSubtraction(TermsOverTerms const& item, TermAssociationType const association);
-
     VectorOfTermsOverTerms const& getItems() const;
     TermAssociationTypes const& getAssociations() const;
-    Expression getCombinedExpression() const;
-    Terms getLcmOfDenominatorTerms() const;
+    Expression getCombinedExpression() const;    Terms getLcmOfDenominatorTerms() const;
     Terms getRevisedNumeratorTermsBasedOnLcmOnIndex(
             unsigned int itemIndex,
             Terms const& lcmOfDenominatorTerms) const;
 
+    void putAsAddition(TermsOverTerms const& addend);
+    void putAsSubtraction(TermsOverTerms const& subtrahend);
+    void putAsAddOrSubtraction(TermsOverTerms const& item, TermAssociationType const association);
+
 private:
     void eraseCommonFactorOrAddDistinctFactor(
-            Term const& termToCheck,
-            Terms & commonFactors,
+            Term const& termToCheck,            Terms & commonFactors,
             Terms & outputFactors) const;
     Monomial getCombinedMonomialMultiplier(Terms const& monomialMultiplierTerms) const;
     void updateMonomialAndNonMonomialMultipliersBasedOnDenominatorOnIndex(

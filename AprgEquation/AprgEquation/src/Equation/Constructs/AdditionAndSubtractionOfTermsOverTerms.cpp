@@ -14,27 +14,9 @@ namespace equation
 AdditionAndSubtractionOfTermsOverTerms::AdditionAndSubtractionOfTermsOverTerms()
 {}
 
-void AdditionAndSubtractionOfTermsOverTerms::putAsAddition(TermsOverTerms const& addend)
-{
-    putItem(getSimplifiedTermsOverTerms(addend), TermAssociationType::Positive);
-}
-
-void AdditionAndSubtractionOfTermsOverTerms::putAsSubtraction(TermsOverTerms const& subtrahend)
-{
-    putItem(getSimplifiedTermsOverTerms(subtrahend), TermAssociationType::Negative);
-}
-
-void AdditionAndSubtractionOfTermsOverTerms::putAsAddOrSubtraction(
-        TermsOverTerms const& item,
-        TermAssociationType const association)
-{
-    putItem(getSimplifiedTermsOverTerms(item), association);
-}
-
 VectorOfTermsOverTerms const& AdditionAndSubtractionOfTermsOverTerms::getItems() const
 {
-    return m_items;
-}
+    return m_items;}
 
 TermAssociationTypes const& AdditionAndSubtractionOfTermsOverTerms::getAssociations() const
 {
@@ -52,30 +34,9 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpression() const
     return combinedExpression;
 }
 
-Terms AdditionAndSubtractionOfTermsOverTerms::getRevisedNumeratorTermsBasedOnLcmOnIndex(
-        unsigned int itemIndex,
-        Terms const& lcmOfDenominatorTerms) const
-{
-    Terms numeratorTerms;
-    if(itemIndex < m_items.size())
-    {
-        Terms multipliers(lcmOfDenominatorTerms);
-        Terms monomialMultiplierTerms;
-        Terms nonMonomialMultiplierTerms;
-        segregateMonomialsAndNonMonomials(multipliers, monomialMultiplierTerms, nonMonomialMultiplierTerms);
-        Monomial monomialMultiplier(getCombinedMonomialMultiplier(monomialMultiplierTerms));
-        updateMonomialAndNonMonomialMultipliersBasedOnDenominatorOnIndex(itemIndex, monomialMultiplier, nonMonomialMultiplierTerms);
-        emplaceExistingNumeratorTerms(numeratorTerms, itemIndex);
-        emplaceMonomialMultiplierIfNeeded(numeratorTerms, monomialMultiplier);
-        emplaceNonMonomialMultipliers(numeratorTerms, nonMonomialMultiplierTerms);
-    }
-    return numeratorTerms;
-}
-
 Terms AdditionAndSubtractionOfTermsOverTerms::getLcmOfDenominatorTerms() const
 {
-    Terms lcmTerms;
-    Monomials lcmMonomials;
+    Terms lcmTerms;    Monomials lcmMonomials;
     for(TermsOverTerms const& item : m_items)
     {
         Terms currentCommonFactors = lcmTerms;
@@ -106,10 +67,46 @@ Terms AdditionAndSubtractionOfTermsOverTerms::getLcmOfDenominatorTerms() const
     return lcmTerms;
 }
 
+Terms AdditionAndSubtractionOfTermsOverTerms::getRevisedNumeratorTermsBasedOnLcmOnIndex(
+        unsigned int itemIndex,
+        Terms const& lcmOfDenominatorTerms) const
+{
+    Terms numeratorTerms;
+    if(itemIndex < m_items.size())
+    {
+        Terms multipliers(lcmOfDenominatorTerms);
+        Terms monomialMultiplierTerms;
+        Terms nonMonomialMultiplierTerms;
+        segregateMonomialsAndNonMonomials(multipliers, monomialMultiplierTerms, nonMonomialMultiplierTerms);
+        Monomial monomialMultiplier(getCombinedMonomialMultiplier(monomialMultiplierTerms));
+        updateMonomialAndNonMonomialMultipliersBasedOnDenominatorOnIndex(itemIndex, monomialMultiplier, nonMonomialMultiplierTerms);
+        emplaceExistingNumeratorTerms(numeratorTerms, itemIndex);
+        emplaceMonomialMultiplierIfNeeded(numeratorTerms, monomialMultiplier);
+        emplaceNonMonomialMultipliers(numeratorTerms, nonMonomialMultiplierTerms);
+    }
+    return numeratorTerms;
+}
+
+void AdditionAndSubtractionOfTermsOverTerms::putAsAddition(TermsOverTerms const& addend)
+{
+    putItem(getSimplifiedTermsOverTerms(addend), TermAssociationType::Positive);
+}
+
+void AdditionAndSubtractionOfTermsOverTerms::putAsSubtraction(TermsOverTerms const& subtrahend)
+{
+    putItem(getSimplifiedTermsOverTerms(subtrahend), TermAssociationType::Negative);
+}
+
+void AdditionAndSubtractionOfTermsOverTerms::putAsAddOrSubtraction(
+        TermsOverTerms const& item,
+        TermAssociationType const association)
+{
+    putItem(getSimplifiedTermsOverTerms(item), association);
+}
+
 void AdditionAndSubtractionOfTermsOverTerms::eraseCommonFactorOrAddDistinctFactor(
         Term const& termToCheck,
-        Terms & commonFactors,
-        Terms & outputFactors) const
+        Terms & commonFactors,        Terms & outputFactors) const
 {
     Terms::iterator matchedTermIterator = find(commonFactors.begin(), commonFactors.end(), termToCheck);
     if(matchedTermIterator == commonFactors.end())
