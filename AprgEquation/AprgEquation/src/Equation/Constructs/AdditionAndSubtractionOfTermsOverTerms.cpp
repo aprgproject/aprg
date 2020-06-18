@@ -16,7 +16,8 @@ AdditionAndSubtractionOfTermsOverTerms::AdditionAndSubtractionOfTermsOverTerms()
 
 VectorOfTermsOverTerms const& AdditionAndSubtractionOfTermsOverTerms::getItems() const
 {
-    return m_items;}
+    return m_items;
+}
 
 TermAssociationTypes const& AdditionAndSubtractionOfTermsOverTerms::getAssociations() const
 {
@@ -36,7 +37,8 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpression() const
 
 Terms AdditionAndSubtractionOfTermsOverTerms::getLcmOfDenominatorTerms() const
 {
-    Terms lcmTerms;    Monomials lcmMonomials;
+    Terms lcmTerms;
+    Monomials lcmMonomials;
     for(TermsOverTerms const& item : m_items)
     {
         Terms currentCommonFactors = lcmTerms;
@@ -106,7 +108,8 @@ void AdditionAndSubtractionOfTermsOverTerms::putAsAddOrSubtraction(
 
 void AdditionAndSubtractionOfTermsOverTerms::eraseCommonFactorOrAddDistinctFactor(
         Term const& termToCheck,
-        Terms & commonFactors,        Terms & outputFactors) const
+        Terms & commonFactors,
+        Terms & outputFactors) const
 {
     Terms::iterator matchedTermIterator = find(commonFactors.begin(), commonFactors.end(), termToCheck);
     if(matchedTermIterator == commonFactors.end())

@@ -170,7 +170,8 @@ Polynomials factorizeBySplittingSmallerPolynomialsIfPossible(Polynomial const& p
             combinePolynomialsByAdditionAndThenEmplaceBack(result, smallerPolynomials);
             for(Polynomial const& commonFactor : commonFactors)
             {
-                simplifyPolynomialThenEmplaceBack(result, commonFactor);            }
+                simplifyPolynomialThenEmplaceBack(result, commonFactor);
+            }
         }
     }
     return result;
@@ -288,7 +289,8 @@ Polynomials getPolynomialsWithRemovedCommonFactors(Polynomials const& polynomial
 void combinePolynomialsByAdditionAndThenEmplaceBack(Polynomials & result, Polynomials const& smallerPolynomials)
 {
     Polynomial combinedPolynomial;
-    for(Polynomial const& smallerPolynomial : smallerPolynomials)    {
+    for(Polynomial const& smallerPolynomial : smallerPolynomials)
+    {
         combinedPolynomial.addPolynomial(smallerPolynomial);
     }
     simplifyPolynomialThenEmplaceBack(result, combinedPolynomial);

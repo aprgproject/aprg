@@ -14,6 +14,7 @@ namespace equation
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, ConstructionWorks)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
+
     EXPECT_TRUE(additionAndSubtraction.getItems().empty());
     EXPECT_TRUE(additionAndSubtraction.getAssociations().empty());
 }
@@ -23,7 +24,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithNoT
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
     TermsOverTerms fraction1({Term(1)}, {});
     TermsOverTerms fraction2({Term(1)}, {});
-    TermsOverTerms fraction3({Term(1)}, {});    additionAndSubtraction.putAsAddition(fraction1);
+    TermsOverTerms fraction3({Term(1)}, {});
+    additionAndSubtraction.putAsAddition(fraction1);
     additionAndSubtraction.putAsAddition(fraction2);
     additionAndSubtraction.putAsAddition(fraction3);
 
@@ -37,7 +39,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithNoT
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithTermsThatAreEmptyWorks)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    TermsOverTerms fraction1({Term(1)}, {Term()});    TermsOverTerms fraction2({Term(1)}, {Term()});
+    TermsOverTerms fraction1({Term(1)}, {Term()});
+    TermsOverTerms fraction2({Term(1)}, {Term()});
     TermsOverTerms fraction3({Term(1)}, {Term()});
     additionAndSubtraction.putAsAddition(fraction1);
     additionAndSubtraction.putAsAddition(fraction2);
@@ -52,7 +55,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithTer
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithAllOneWorks)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    TermsOverTerms fraction1({Term(1)}, {Term(1)});    TermsOverTerms fraction2({Term(1)}, {Term(1)});
+    TermsOverTerms fraction1({Term(1)}, {Term(1)});
+    TermsOverTerms fraction2({Term(1)}, {Term(1)});
     TermsOverTerms fraction3({Term(1)}, {Term(1)});
     additionAndSubtraction.putAsAddition(fraction1);
     additionAndSubtraction.putAsAddition(fraction2);
@@ -68,7 +72,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithAll
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithLcmMonomialWorks)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    TermsOverTerms fraction1({Term(1)}, {Term(Polynomial{Monomial(3, {{"x", 3}})})});    TermsOverTerms fraction2({Term(1)}, {Term(Monomial(5, {{"x", 5}}))});
+    TermsOverTerms fraction1({Term(1)}, {Term(Polynomial{Monomial(3, {{"x", 3}})})});
+    TermsOverTerms fraction2({Term(1)}, {Term(Monomial(5, {{"x", 5}}))});
     TermsOverTerms fraction3({Term(1)}, {Term(Monomial(7, {{"y", 7}}))});
     additionAndSubtraction.putAsAddition(fraction1);
     additionAndSubtraction.putAsAddition(fraction2);
@@ -84,7 +89,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithLcm
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithNoCommonFactorsWorks)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    TermsOverTerms fraction1({Term(1)}, {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(3, {})})});    TermsOverTerms fraction2({Term(1)}, {Term(Polynomial{Monomial(1, {{"y", 1}}), Monomial(5, {})})});
+    TermsOverTerms fraction1({Term(1)}, {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(3, {})})});
+    TermsOverTerms fraction2({Term(1)}, {Term(Polynomial{Monomial(1, {{"y", 1}}), Monomial(5, {})})});
     TermsOverTerms fraction3({Term(1)}, {Term(Polynomial{Monomial(1, {{"z", 1}}), Monomial(7, {})})});
     additionAndSubtraction.putAsAddition(fraction1);
     additionAndSubtraction.putAsAddition(fraction2);
@@ -104,7 +110,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithNoC
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithCommonFactorsWorks)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(3, {})};    TermsOverTerms fraction1({Term(1)}, {Term(polynomial)});
+    Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(3, {})};
+    TermsOverTerms fraction1({Term(1)}, {Term(polynomial)});
     TermsOverTerms fraction2({Term(1)}, {Term(), Term(polynomial)});
     TermsOverTerms fraction3({Term(1)}, {Term(polynomial), Term(polynomial), Term(polynomial)});
     additionAndSubtraction.putAsAddition(fraction1);
@@ -123,7 +130,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithCom
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithFactorsOfDifferenceOfSquaresWorks)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    TermsOverTerms fraction1({Term(1)}, {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {})})});    TermsOverTerms fraction2({Term(1)}, {Term(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-4, {})})});
+    TermsOverTerms fraction1({Term(1)}, {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {})})});
+    TermsOverTerms fraction2({Term(1)}, {Term(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-4, {})})});
     TermsOverTerms fraction3({Term(1)}, {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})})});
     additionAndSubtraction.putAsAddition(fraction1);
     additionAndSubtraction.putAsAddition(fraction2);
@@ -141,6 +149,7 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetLcmOfDenominatorTermsWithFac
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetNumeratorTermsBasedOnLcmOnIndexUsingOutOfRangeIndexReturnsEmpty)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
+
     Terms termsToVerify1(additionAndSubtraction.getRevisedNumeratorTermsBasedOnLcmOnIndex(0, {}));
     Terms termsToVerify2(additionAndSubtraction.getRevisedNumeratorTermsBasedOnLcmOnIndex(1, {}));
     Terms termsToVerify3(additionAndSubtraction.getRevisedNumeratorTermsBasedOnLcmOnIndex(2, {}));
@@ -153,7 +162,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetNumeratorTermsBasedOnLcmOnIn
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetNumeratorTermsBasedOnLcmOnIndexReturnsNumeratorTermsWhenLcmIsEmpty)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    TermsOverTerms fraction({Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(17, {})})}, {Term(1)});    additionAndSubtraction.putAsAddition(fraction);
+    TermsOverTerms fraction({Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(17, {})})}, {Term(1)});
+    additionAndSubtraction.putAsAddition(fraction);
 
     Terms termsToVerify(additionAndSubtraction.getRevisedNumeratorTermsBasedOnLcmOnIndex(0, {}));
 
@@ -165,7 +175,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetNumeratorTermsBasedOnLcmOnIn
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetNumeratorTermsBasedOnLcmOnIndexReturnsNumeratorTermsWhenLcmIsOne)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    TermsOverTerms fraction({Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(17, {})})}, {Term(1)});    additionAndSubtraction.putAsAddition(fraction);
+    TermsOverTerms fraction({Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(17, {})})}, {Term(1)});
+    additionAndSubtraction.putAsAddition(fraction);
 
     Terms termsToVerify(additionAndSubtraction.getRevisedNumeratorTermsBasedOnLcmOnIndex(0, {Term(1)}));
 
@@ -177,7 +188,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetNumeratorTermsBasedOnLcmOnIn
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetNumeratorTermsBasedOnLcmOnIndexReturnsGcfOfDenominatorAndLcm)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    TermsOverTerms fraction({Term(1)}, {Term(Monomial(4, {{"x", 5}, {"y", 3}}))});    additionAndSubtraction.putAsAddition(fraction);
+    TermsOverTerms fraction({Term(1)}, {Term(Monomial(4, {{"x", 5}, {"y", 3}}))});
+    additionAndSubtraction.putAsAddition(fraction);
 
     Terms termsToVerify(additionAndSubtraction.getRevisedNumeratorTermsBasedOnLcmOnIndex(0, {Term(Monomial(52, {{"x", 7}, {"y", 8}}))}));
 
@@ -189,7 +201,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetNumeratorTermsBasedOnLcmOnIn
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetNumeratorTermsBasedOnLcmOnIndexReturnsWithCommonFactorsFromDenominatorAndLcmRemoved)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(3, {})};    TermsOverTerms fraction({Term(1)}, {Term(polynomial)});
+    Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(3, {})};
+    TermsOverTerms fraction({Term(1)}, {Term(polynomial)});
     additionAndSubtraction.putAsAddition(fraction);
 
     Terms termsToVerify(additionAndSubtraction.getRevisedNumeratorTermsBasedOnLcmOnIndex(0, {Term(polynomial), Term(polynomial), Term(polynomial)}));
@@ -203,7 +216,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetNumeratorTermsBasedOnLcmOnIn
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetNumeratorTermsBasedOnLcmOnIndexUsingAComplicatedExampleWorks)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    TermsOverTerms fraction1({Term(4)}, {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {})})});    TermsOverTerms fraction2({Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(3, {})})}, {Term(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-4, {})})});
+    TermsOverTerms fraction1({Term(4)}, {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {})})});
+    TermsOverTerms fraction2({Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(3, {})})}, {Term(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-4, {})})});
     TermsOverTerms fraction3({Term(Polynomial{Monomial(2, {{"x", 1}}), Monomial(1, {})})}, {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})})});
     additionAndSubtraction.putAsAddition(fraction1);
     additionAndSubtraction.putAsAddition(fraction2);
@@ -232,7 +246,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetNumeratorTermsBasedOnLcmOnIn
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionForNumeratorTermsWorks)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    TermsOverTerms fraction1({Term(7)}, {Term(1)});    TermsOverTerms fraction2({Term(11)}, {Term(1)});
+    TermsOverTerms fraction1({Term(7)}, {Term(1)});
+    TermsOverTerms fraction2({Term(11)}, {Term(1)});
     TermsOverTerms fraction3({Term(13)}, {Term(1)});
     additionAndSubtraction.putAsAddition(fraction1);
     additionAndSubtraction.putAsSubtraction(fraction2);
@@ -251,7 +266,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionForNumerat
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionForLcmDenominatorWorks)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    TermsOverTerms fraction1({Term(1)}, {Term(2)});    TermsOverTerms fraction2({Term(1)}, {Term(3)});
+    TermsOverTerms fraction1({Term(1)}, {Term(2)});
+    TermsOverTerms fraction2({Term(1)}, {Term(3)});
     TermsOverTerms fraction3({Term(1)}, {Term(4)});
     additionAndSubtraction.putAsAddition(fraction1);
     additionAndSubtraction.putAsAddition(fraction2);
@@ -271,7 +287,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionForLcmDeno
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionForRevisedNumeratorTermsWorks)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    TermsOverTerms fraction1({Term(7)}, {Term(2)});    TermsOverTerms fraction2({Term(11)}, {Term(3)});
+    TermsOverTerms fraction1({Term(7)}, {Term(2)});
+    TermsOverTerms fraction2({Term(11)}, {Term(3)});
     TermsOverTerms fraction3({Term(13)}, {Term(4)});
     additionAndSubtraction.putAsAddition(fraction1);
     additionAndSubtraction.putAsSubtraction(fraction2);
@@ -291,7 +308,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionForRevised
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionUsingExample1Works)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    TermsOverTerms fraction1({Term(4)}, {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {})})});    TermsOverTerms fraction2({Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(3, {})})}, {Term(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-4, {})})});
+    TermsOverTerms fraction1({Term(4)}, {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {})})});
+    TermsOverTerms fraction2({Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(3, {})})}, {Term(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-4, {})})});
     TermsOverTerms fraction3({Term(Polynomial{Monomial(2, {{"x", 1}}), Monomial(1, {})})}, {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})})});
     additionAndSubtraction.putAsAddition(fraction1);
     additionAndSubtraction.putAsAddition(fraction2);
@@ -314,7 +332,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionUsingExamp
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionAndSimplifyWorksOnExponentPlusPolynomialDenominator)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {})};    Expression exponentExpression(createExpressionIfPossible({Term(2), Term("^"), Term("x")}));
+    Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {})};
+    Expression exponentExpression(createExpressionIfPossible({Term(2), Term("^"), Term("x")}));
     TermsOverTerms fraction1({Term(exponentExpression)}, {});
     TermsOverTerms fraction2({}, {Term(polynomial)});
     additionAndSubtraction.putAsAddition(fraction1);
@@ -333,7 +352,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionAndSimplif
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionAndSimplifyUsingExample1Works)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    TermsOverTerms fraction1({Term(4)}, {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {})})});    TermsOverTerms fraction2({Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(3, {})})}, {Term(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-4, {})})});
+    TermsOverTerms fraction1({Term(4)}, {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {})})});
+    TermsOverTerms fraction2({Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(3, {})})}, {Term(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-4, {})})});
     TermsOverTerms fraction3({Term(Polynomial{Monomial(2, {{"x", 1}}), Monomial(1, {})})}, {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})})});
     additionAndSubtraction.putAsAddition(fraction1);
     additionAndSubtraction.putAsAddition(fraction2);
@@ -351,7 +371,8 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionAndSimplif
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionAndSimplifyUsingExample2Works)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
-    Polynomial polynomial1{Monomial(2, {{"x", 1}}), Monomial(-1, {})};    Polynomial polynomial2{Monomial(2, {{"x", 2}}), Monomial(-1, {{"x", 1}}), Monomial(-6, {})};
+    Polynomial polynomial1{Monomial(2, {{"x", 1}}), Monomial(-1, {})};
+    Polynomial polynomial2{Monomial(2, {{"x", 2}}), Monomial(-1, {{"x", 1}}), Monomial(-6, {})};
     Polynomial polynomial3{Monomial(1, {{"x", 1}}), Monomial(3, {})};
     Polynomial polynomial4{Monomial(6, {{"x", 2}}), Monomial(1, {{"x", 1}}), Monomial(-12, {})};
     Polynomial polynomial5{Monomial(2, {{"x", 1}}), Monomial(-3, {})};

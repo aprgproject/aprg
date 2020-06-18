@@ -14,6 +14,7 @@
 
 namespace alba
 {
+
 namespace equation
 {
 
@@ -128,4 +129,5 @@ using Expressions=std::vector<Expression>;
 std::ostream & operator<<(std::ostream & out, Expression const& expression);
 
 }
+
 }

@@ -16,7 +16,8 @@ public:
 
     VectorOfTermsOverTerms const& getItems() const;
     TermAssociationTypes const& getAssociations() const;
-    Expression getCombinedExpression() const;    Terms getLcmOfDenominatorTerms() const;
+    Expression getCombinedExpression() const;
+    Terms getLcmOfDenominatorTerms() const;
     Terms getRevisedNumeratorTermsBasedOnLcmOnIndex(
             unsigned int itemIndex,
             Terms const& lcmOfDenominatorTerms) const;
@@ -27,7 +28,8 @@ public:
 
 private:
     void eraseCommonFactorOrAddDistinctFactor(
-            Term const& termToCheck,            Terms & commonFactors,
+            Term const& termToCheck,
+            Terms & commonFactors,
             Terms & outputFactors) const;
     Monomial getCombinedMonomialMultiplier(Terms const& monomialMultiplierTerms) const;
     void updateMonomialAndNonMonomialMultipliersBasedOnDenominatorOnIndex(
