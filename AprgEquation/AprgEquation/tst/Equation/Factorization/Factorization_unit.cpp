@@ -1,4 +1,4 @@
-#include <Equation/Constructs/Factorization.hpp>
+#include <Equation/Factorization/Factorization.hpp>
 
 #include <gtest/gtest.h>
 

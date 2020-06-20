@@ -1,9 +1,8 @@
 #pragma once
 
-#include <Equation/Constructs/VariablesToValuesTypes.hpp>
+#include <Equation/Substitution/VariablesToValuesTypes.hpp>
 #include <Equation/Term/BaseTermPointers.hpp>
 #include <Equation/Term/TermAssociationType.hpp>
-
 #include <functional>
 #include <list>
 #include <vector>

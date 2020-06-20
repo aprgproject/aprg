@@ -1,9 +1,8 @@
 #include "PolynomialOverPolynomial.hpp"
 
-#include <Equation/Constructs/Factorization.hpp>
+#include <Equation/Factorization/Factorization.hpp>
 #include <Equation/Utilities.hpp>
 #include <Math/AlbaMathHelper.hpp>
-
 using namespace alba::mathHelper;
 using namespace alba::equation::Factorization;
 using namespace std;

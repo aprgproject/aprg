@@ -1,8 +1,8 @@
 #include "FactorizationOfIncreasingAndDecreasingExponentForm.hpp"
 
-#include <Equation/Constructs/BrentMethod.hpp>
-#include <Equation/Constructs/Factorization.hpp>
 #include <Equation/Constructs/PolynomialOverPolynomial.hpp>
+#include <Equation/Factorization/BrentMethod.hpp>
+#include <Equation/Factorization/Factorization.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
 using namespace alba::mathHelper;

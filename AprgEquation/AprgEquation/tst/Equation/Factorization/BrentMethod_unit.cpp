@@ -1,4 +1,4 @@
-#include <Equation/Constructs/BrentMethod.hpp>
+#include <Equation/Factorization/BrentMethod.hpp>
 
 #include <gtest/gtest.h>
 

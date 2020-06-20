@@ -1,7 +1,7 @@
 #include "Factorization.hpp"
 
-#include <Equation/Constructs/FactorizationOfIncreasingAndDecreasingExponentForm.hpp>
 #include <Equation/Constructs/PolynomialOverPolynomial.hpp>
+#include <Equation/Factorization/FactorizationOfIncreasingAndDecreasingExponentForm.hpp>
 #include <Equation/Utilities.hpp>
 #include <Math/AlbaMathHelper.hpp>
 

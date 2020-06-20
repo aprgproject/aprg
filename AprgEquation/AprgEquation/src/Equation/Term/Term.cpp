@@ -1,10 +1,9 @@
 #include "Term.hpp"
 
-#include <Equation/Constructs/SubstitutionOfVariablesToValues.hpp>
+#include <Equation/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Equation/Utilities.hpp>
 
-#include <cassert>
-#include <string>
+#include <cassert>#include <string>
 
 using namespace std;
 

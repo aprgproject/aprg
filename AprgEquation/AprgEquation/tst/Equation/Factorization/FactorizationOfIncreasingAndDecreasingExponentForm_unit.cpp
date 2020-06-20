@@ -1,4 +1,4 @@
-#include <Equation/Constructs/FactorizationOfIncreasingAndDecreasingExponentForm.hpp>
+#include <Equation/Factorization/FactorizationOfIncreasingAndDecreasingExponentForm.hpp>
 
 #include <gtest/gtest.h>
 
