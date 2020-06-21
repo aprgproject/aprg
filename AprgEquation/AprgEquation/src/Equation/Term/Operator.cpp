@@ -88,7 +88,8 @@ bool Operator::isSameOperatorInputType(OperatorInputType const operatorInputType
 
 OperatorLevel Operator::getOperatorLevel() const
 {
-    OperatorLevel result(OperatorLevel::Unknown);    if(isAddition() || isSubtraction())
+    OperatorLevel result(OperatorLevel::Unknown);
+    if(isAddition() || isSubtraction())
     {
         result = OperatorLevel::AdditionAndSubtraction;
     }

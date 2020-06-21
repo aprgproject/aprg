@@ -987,7 +987,8 @@ TEST(ExpressionTest, FactorizeWorks)
 
 TEST(ExpressionTest, SimplifyWorksOnExpressionInExpressionForAMultipleTermExpression)
 {
-    Term expressionTerm(createExpressionIfPossible(Terms{Term("x"), Term("^"), Term("x")}));    Term expressionInExpressionTerm(createExpressionInAnExpression(expressionTerm));
+    Term expressionTerm(createExpressionIfPossible(Terms{Term("x"), Term("^"), Term("x")}));
+    Term expressionInExpressionTerm(createExpressionInAnExpression(expressionTerm));
     Term expressionInExpressionInExpressionTerm(createExpressionInAnExpression(expressionInExpressionTerm));
     Expression expression(createExpressionIfPossible(Terms{expressionInExpressionInExpressionTerm}));
 
@@ -1532,6 +1533,7 @@ TEST(ExpressionTest, SimplifyToACommonDenominatorWorksWithNegativeExponents)
 TEST(ExpressionTest, SimplifyToACommonDenominatorWorksOnExponentPlusPolynomialDenominator)
 {
     Expression expression(createExpressionIfPossible(tokenizeToTerms("2^x+((1)/(x+2))")));
+
     expression.simplifyToACommonDenominator();
 
     Polynomial polynomialToExpect{Monomial(1, {{"x", 1}}), Monomial(2, {})};
@@ -1540,7 +1542,8 @@ TEST(ExpressionTest, SimplifyToACommonDenominatorWorksOnExponentPlusPolynomialDe
     Expression subExpression3(createExpressionIfPossible(Terms{Term(subExpression1), Term("*"), Term(2)}));
     Expression subExpression4(createExpressionIfPossible(Terms{Term(1), Term("+"), Term(subExpression2), Term("+"), Term(subExpression3)}));
     Expression expressionToExpect(createExpressionIfPossible(Terms{Term(subExpression4), Term("/"), Term(polynomialToExpect)}));
-    EXPECT_EQ(expressionToExpect, expression);}
+    EXPECT_EQ(expressionToExpect, expression);
+}
 
 TEST(ExpressionTest, SimplifyToACommonDenominatorWorksOnExponentWithFractionExpressions)
 {

@@ -6,6 +6,7 @@
 #include <Math/AlbaNumber.hpp>
 
 #include <string>
+
 namespace alba
 {
 
@@ -33,7 +34,8 @@ public:
     bool isSameOperatorInputType(OperatorInputType const operatorInputType) const;
 
     OperatorLevel getOperatorLevel() const;
-    std::string getOperatorString() const;    std::string getDisplayableString() const;
+    std::string getOperatorString() const;
+    std::string getDisplayableString() const;
 
     void setOperatorString(std::string const& operatingString);
 

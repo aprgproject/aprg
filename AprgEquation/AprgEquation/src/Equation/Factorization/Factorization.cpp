@@ -28,7 +28,8 @@ Expression factorize(Expression const& expression)
 
 Polynomials factorize(Polynomial const& polynomial)
 {
-    Polynomial polynomialToFactorize(polynomial);    polynomialToFactorize.simplify();
+    Polynomial polynomialToFactorize(polynomial);
+    polynomialToFactorize.simplify();
     Polynomials result(factorizeCommonMonomial(polynomialToFactorize));
     if(result.size() == 1){result = factorizeDifferenceOfSquares(polynomialToFactorize); }
     if(result.size() == 1){result = factorizeDifferenceOfCubes(polynomialToFactorize); }
