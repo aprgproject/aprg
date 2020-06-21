@@ -2,10 +2,10 @@
 
 #include <Equation/Term/BaseTermData.hpp>
 #include <Equation/Term/OperatorLevel.hpp>
+#include <Equation/Term/OperatorInputType.hpp>
 #include <Math/AlbaNumber.hpp>
 
 #include <string>
-
 namespace alba
 {
 
@@ -30,10 +30,10 @@ public:
     bool isAnOperatorThatCanPerformed() const;
     bool isOpeningGroupOperator() const;
     bool isClosingGroupOperator() const;
+    bool isSameOperatorInputType(OperatorInputType const operatorInputType) const;
 
     OperatorLevel getOperatorLevel() const;
-    std::string getOperatorString() const;
-    std::string getDisplayableString() const;
+    std::string getOperatorString() const;    std::string getDisplayableString() const;
 
     void setOperatorString(std::string const& operatingString);
 

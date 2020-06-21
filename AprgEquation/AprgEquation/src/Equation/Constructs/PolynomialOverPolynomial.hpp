@@ -2,9 +2,10 @@
 
 #include <Equation/Term/Polynomial.hpp>
 
+#include <vector>
+
 namespace alba
 {
-
 namespace equation
 {
 
@@ -40,6 +41,8 @@ private:
     Polynomial m_numerator;
     Polynomial m_denominator;
 };
+
+using ListOfPolynomialOverPolynomial=std::vector<PolynomialOverPolynomial>;
 
 }
 
