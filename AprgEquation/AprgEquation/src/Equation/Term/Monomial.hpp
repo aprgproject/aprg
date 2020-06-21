@@ -55,7 +55,6 @@ public:
     std::string getDisplayableString() const;
 
     void simplify();
-    void substituteVariablesToValues(VariablesToValuesMap const& variableValueMap);
     void multiplyNumber(AlbaNumber const& number);
     void divideNumber(AlbaNumber const& number);
     void raiseToPowerNumber(AlbaNumber const& number);

@@ -88,6 +88,11 @@ TermsWithAssociation const& Expression::getTermsWithAssociation() const
     return m_termsWithAssociation;
 }
 
+TermsWithAssociation & Expression::getTermsWithAssociationReference()
+{
+    return m_termsWithAssociation;
+}
+
 TermsWithAssociation Expression::getTermsWithDetailsThatSatisfiesCondition(
         ConditionFunctionForTermsWithDetails const& conditionFunction) const
 {
@@ -358,11 +363,6 @@ void Expression::simplifyToACommonDenominator()
 void Expression::sort()
 {
     m_termsWithAssociation.sort();
-}
-
-void Expression::substituteVariablesToValues(VariablesToValuesMap const& variableValueMap)
-{
-    m_termsWithAssociation.substituteVariablesToValues(variableValueMap);
 }
 
 void Expression::factorize(Expression & expression)

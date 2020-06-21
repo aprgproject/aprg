@@ -38,7 +38,6 @@ public:
     void clear();
     void simplify();
     void sortMonomialsWithInversePriority();
-    void substituteVariablesToValues(VariablesToValuesMap const& variableValueMap);
     void addMonomial(Monomial const& monomial);
     void addPolynomial(Polynomial const& polynomial);
     void multiplyNumber(AlbaNumber const& number);

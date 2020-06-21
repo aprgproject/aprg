@@ -38,6 +38,7 @@ public:
     OperatorLevel getCommonOperatorLevel() const;
     BaseTerm const& getFirstTermConstReference() const;
     TermsWithAssociation const& getTermsWithAssociation() const;
+    TermsWithAssociation & getTermsWithAssociationReference();
     TermsWithAssociation getTermsWithDetailsThatSatisfiesCondition(
             ConditionFunctionForTermsWithDetails const& conditionFunction) const;
     std::string getDisplayableString() const;
@@ -64,7 +65,6 @@ public:
     void simplify();
     void simplifyToACommonDenominator();
     void sort();
-    void substituteVariablesToValues(VariablesToValuesMap const& variableValueMap);
 
 private:
 

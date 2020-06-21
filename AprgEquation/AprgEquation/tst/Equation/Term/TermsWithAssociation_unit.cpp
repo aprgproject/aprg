@@ -337,22 +337,6 @@ TEST(TermsWithAssociationTest, SortWorks)
     EXPECT_EQ(TermAssociationType::Negative, termsToVerify.at(2).association);
 }
 
-TEST(TermsWithAssociationTest, SubstituteVariablesToValuesWorks)
-{
-    TermsWithAssociation terms;
-    TermWithDetails termWithDetails(
-                getBaseTermConstReferenceFromTerm(Term(Variable("x"))),
-                TermAssociationType::Negative);
-    terms.putTermWithDetails(termWithDetails);
-
-    terms.substituteVariablesToValues({{"x", 2}});
-
-    TermsWithDetails termsToVerify(terms.getTermsWithDetails());
-    ASSERT_EQ(1u, termsToVerify.size());
-    EXPECT_EQ(Term(2), getTermConstReferenceFromSharedPointer(termsToVerify.at(0).baseTermSharedPointer));
-    EXPECT_EQ(TermAssociationType::Negative, termsToVerify.at(0).association);
-}
-
 TEST(TermsWithAssociationTest, PutTermWithDetailsWorks)
 {
     TermsWithAssociation terms;
