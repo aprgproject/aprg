@@ -70,11 +70,15 @@ private:
 
     //factorize functions
     void factorize(Expression & expression);
-    void factorizePolynomialsAndEmplaceInTermsWithDetails(
+    void factorizePolynomialAndUpdate(
+            Expression & expression,
+            TermsWithAssociation::TermsWithDetails & termsToPut,
+            Polynomial const& polynomial,
+            TermAssociationType const overallAssociation);
+    void factorizePolynomialAndEmplaceInTermsWithDetails(
             TermsWithAssociation::TermsWithDetails & factorizedTermsWithDetails,
             Polynomial const& polynomial,
             TermAssociationType const overallAssociation);
-
     //simplify functions
     void simplifyAndCopyTerms(
             TermsWithAssociation::TermsWithDetails & termsToUpdate,
