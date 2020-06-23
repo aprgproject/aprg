@@ -537,7 +537,8 @@ TEST(TermTest, IsValueTermAndDoesNotHaveAExpressionWorks)
     EXPECT_TRUE(term8.isValueTermAndNotAnExpression());
 }
 
-TEST(TermTest, IsTheValueZeroWorks){
+TEST(TermTest, IsTheValueZeroWorks)
+{
     Term term1;
     Term term2(Constant(0));
     Term term3(1);

@@ -248,7 +248,8 @@ bool Term::isValueTermAndNotAnExpression() const
     return isConstant() || isVariable() || isMonomial() || isPolynomial() || isFunction();
 }
 
-bool Term::isTheValueZero() const{
+bool Term::isTheValueZero() const
+{
     bool result(false);
     if(m_type==TermType::Constant)
     {

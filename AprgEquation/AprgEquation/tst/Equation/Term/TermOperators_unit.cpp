@@ -10,7 +10,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace equation
 {
@@ -94,7 +95,8 @@ TEST(TermOperatorsTest, UnaryMinusOperator_MinusExpressionOperationWorks)
     EXPECT_EQ(Term(createExpressionIfPossible({Term(-1), Term("*"), Term(54)})), term);
 }
 
-TEST(TermOperatorsTest, UnaryMinusOperator_MinusFunctionOperationWorks){
+TEST(TermOperatorsTest, UnaryMinusOperator_MinusFunctionOperationWorks)
+{
     Function absoluteValueFunction(Functions::abs(Expression{}));
 
     Term term(-absoluteValueFunction);
@@ -105,6 +107,7 @@ TEST(TermOperatorsTest, UnaryMinusOperator_MinusFunctionOperationWorks){
     ALBA_PRINT1(term.getDebugString());
     EXPECT_EQ(Term(expressionToExpect), term);
 }
+
 TEST(TermOperatorsTest, BinaryPlusOperator_ConstantAddConstantOperationWorks)
 {
     Term term(Constant(6) + Constant(2));
@@ -146,6 +149,17 @@ TEST(TermOperatorsTest, BinaryPlusOperator_ConstantAddExpressionOperationWorks)
 
     Expression expressionToExpect(
                 createExpressionIfPossible({Term(10), Term("+"), Term(54)}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryPlusOperator_ConstantAddFunctionOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(Constant(10) + absoluteValueFunction);
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term(10), Term("+"), Term(absoluteValueFunction)}));
     EXPECT_EQ(Term(expressionToExpect), term);
 }
 
@@ -197,6 +211,17 @@ TEST(TermOperatorsTest, BinaryPlusOperator_VariableAddExpressionOperationWorks)
 
     Expression expressionToExpect(
                 createExpressionIfPossible({Term("x"), Term("+"), Term(54)}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryPlusOperator_VariableAddFunctionOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(Variable("x") + absoluteValueFunction);
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term("x"), Term("+"), Term(absoluteValueFunction)}));
     EXPECT_EQ(Term(expressionToExpect), term);
 }
 
@@ -258,6 +283,17 @@ TEST(TermOperatorsTest, BinaryPlusOperator_MonomialAddExpressionOperationWorks)
     EXPECT_EQ(Term(expressionToExpect), term);
 }
 
+TEST(TermOperatorsTest, BinaryPlusOperator_MonomialAddFunctionOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(Monomial(3, {{"x", 1}}) + absoluteValueFunction);
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Monomial(3, {{"x", 1}}), Term("+"), Term(absoluteValueFunction)}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
 TEST(TermOperatorsTest, BinaryPlusOperator_PolynomialAddConstantOperationWorks)
 {
     Term term(Polynomial{Monomial(5, {}), Monomial(1, {{"x", 1}})} + Constant(10));
@@ -292,6 +328,17 @@ TEST(TermOperatorsTest, BinaryPlusOperator_PolynomialAddExpressionOperationWorks
 
     Expression expressionToExpect(
                 createExpressionIfPossible({Polynomial{Monomial(5, {}), Monomial(1, {{"x", 1}})}, Term("+"), Term(54)}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryPlusOperator_PolynomialAddFunctionOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(Polynomial{Monomial(5, {}), Monomial(1, {{"x", 1}})} + absoluteValueFunction);
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Polynomial{Monomial(5, {}), Monomial(1, {{"x", 1}})}, Term("+"), Term(absoluteValueFunction)}));
     EXPECT_EQ(Term(expressionToExpect), term);
 }
 
@@ -342,6 +389,83 @@ TEST(TermOperatorsTest, BinaryPlusOperator_ExpressionAddExpressionOperationWorks
     EXPECT_EQ(Term(expressionToExpect), term);
 }
 
+TEST(TermOperatorsTest, BinaryPlusOperator_ExpressionAddFunctionOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(createExpressionIfPossible({Term(54)}) + absoluteValueFunction);
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({createExpressionIfPossible({Term(54)}), Term("+"), Term(absoluteValueFunction)}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryPlusOperator_FunctionAddConstantOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(absoluteValueFunction + Constant(10));
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term(absoluteValueFunction), Term("+"), Term(10)}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryPlusOperator_FunctionAddVariableOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(absoluteValueFunction + Variable("x"));
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term(absoluteValueFunction), Term("+"), Term("x")}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryPlusOperator_FunctionAddMonomialOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(absoluteValueFunction + Monomial(3, {{"x", 1}}));
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term(absoluteValueFunction), Term("+"), Monomial(3, {{"x", 1}})}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryPlusOperator_FunctionAddPolynomialOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(absoluteValueFunction + Polynomial{Monomial(5, {}), Monomial(1, {{"x", 1}})});
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term(absoluteValueFunction), Term("+"), Polynomial{Monomial(5, {}), Monomial(1, {{"x", 1}})}}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryPlusOperator_FunctionAddExpressionOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(absoluteValueFunction + createExpressionIfPossible({Term(54)}));
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term(absoluteValueFunction), Term("+"), createExpressionIfPossible({Term(54)})}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryPlusOperator_FunctionAddFunctionOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(absoluteValueFunction + absoluteValueFunction);
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term(absoluteValueFunction), Term("+"), Term(absoluteValueFunction)}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
 TEST(TermOperatorsTest, BinaryMinusOperator_ConstantSubtractConstantOperationWorks)
 {
     Term term(Constant(6) - Constant(2));
@@ -383,6 +507,17 @@ TEST(TermOperatorsTest, BinaryMinusOperator_ConstantSubtractExpressionOperationW
 
     Expression expressionToExpect(
                 createExpressionIfPossible({Term(10), Term("-"), Term(54)}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryMinusOperator_ConstantSubtractFunctionOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(Constant(10) - absoluteValueFunction);
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term(10), Term("-"), Term(absoluteValueFunction)}));
     EXPECT_EQ(Term(expressionToExpect), term);
 }
 
@@ -434,6 +569,17 @@ TEST(TermOperatorsTest, BinaryMinusOperator_VariableSubtractExpressionOperationW
 
     Expression expressionToExpect(
                 createExpressionIfPossible({Term("x"), Term("-"), Term(54)}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryMinusOperator_VariableSubtractFunctionOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(Variable("x") - absoluteValueFunction);
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term("x"), Term("-"), Term(absoluteValueFunction)}));
     EXPECT_EQ(Term(expressionToExpect), term);
 }
 
@@ -502,6 +648,17 @@ TEST(TermOperatorsTest, BinaryMinusOperator_MonomialSubtractExpressionOperationW
     EXPECT_EQ(Term(expressionToExpect), term);
 }
 
+TEST(TermOperatorsTest, BinaryMinusOperator_MonomialSubtractFunctionOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(Monomial(3, {{"x", 1}}) - absoluteValueFunction);
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Monomial(3, {{"x", 1}}), Term("-"), Term(absoluteValueFunction)}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
 TEST(TermOperatorsTest, BinaryMinusOperator_PolynomialSubtractConstantOperationWorks)
 {
     Term term(Polynomial{Monomial(5, {}), Monomial(1, {{"x", 1}})} - Constant(10));
@@ -543,6 +700,17 @@ TEST(TermOperatorsTest, BinaryMinusOperator_PolynomialSubtractExpressionOperatio
 
     Expression expressionToExpect(
                 createExpressionIfPossible({Polynomial{Monomial(5, {}), Monomial(1, {{"x", 1}})}, Term("-"), Term(54)}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryMinusOperator_PolynomialSubtractFunctionOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(Polynomial{Monomial(5, {}), Monomial(1, {{"x", 1}})} - absoluteValueFunction);
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Polynomial{Monomial(5, {}), Monomial(1, {{"x", 1}})}, Term("-"), Term(absoluteValueFunction)}));
     EXPECT_EQ(Term(expressionToExpect), term);
 }
 
@@ -588,6 +756,83 @@ TEST(TermOperatorsTest, BinaryMinusOperator_ExpressionSubtractExpressionOperatio
 
     Expression expressionToExpect(
                 createExpressionIfPossible({Term(54), Term("+"), Term(87)}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryMinusOperator_ExpressionSubtractFunctionOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(createExpressionIfPossible({Term(54)}) - absoluteValueFunction);
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({createExpressionIfPossible({Term(54)}), Term("-"), Term(absoluteValueFunction)}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryMinusOperator_FunctionSubtractConstantOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(absoluteValueFunction - Constant(10));
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term(absoluteValueFunction), Term("-"), Term(10)}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryMinusOperator_FunctionSubtractVariableOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(absoluteValueFunction - Variable("x"));
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term(absoluteValueFunction), Term("-"), Term("x")}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryMinusOperator_FunctionSubtractMonomialOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(absoluteValueFunction - Monomial(3, {{"x", 1}}));
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term(absoluteValueFunction), Term("-"), Monomial(3, {{"x", 1}})}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryMinusOperator_FunctionSubtractPolynomialOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(absoluteValueFunction - Polynomial{Monomial(5, {}), Monomial(1, {{"x", 1}})});
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term(absoluteValueFunction), Term("-"), Polynomial{Monomial(5, {}), Monomial(1, {{"x", 1}})}}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryMinusOperator_FunctionSubtractExpressionOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(absoluteValueFunction - createExpressionIfPossible({Term(54)}));
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term(absoluteValueFunction), Term("-"), createExpressionIfPossible({Term(54)})}));
+    EXPECT_EQ(Term(expressionToExpect), term);
+}
+
+TEST(TermOperatorsTest, BinaryMinusOperator_FunctionSubtractFunctionOperationWorks)
+{
+    Function absoluteValueFunction(Functions::abs(Expression{}));
+
+    Term term(absoluteValueFunction - absoluteValueFunction);
+
+    Expression expressionToExpect(
+                createExpressionIfPossible({Term(absoluteValueFunction), Term("-"), Term(absoluteValueFunction)}));
     EXPECT_EQ(Term(expressionToExpect), term);
 }
 

@@ -53,6 +53,7 @@ public:
     bool isValueTermAndNotAnExpression() const;
     bool isTheValueZero() const;
     bool isTheValueOne() const;
+
     TermType getTermType() const;
     Constant const& getConstantConstReference() const;
     Variable const& getVariableConstReference() const;

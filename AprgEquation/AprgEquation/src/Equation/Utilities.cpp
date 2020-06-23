@@ -841,7 +841,8 @@ void segregateNonExpressionsAndExpressions(
         else if(term.isValueTermAndNotAnExpression())
         {
             termsWithNonExpressions.emplace_back(termToSegregate);
-        }    }
+        }
+    }
 }
 
 void segregateTermsWithPositiveAndNegativeAssociations(
