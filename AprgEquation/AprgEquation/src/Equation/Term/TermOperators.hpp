@@ -19,6 +19,7 @@ Term operator+(Variable const& variable);
 Term operator+(Monomial const& monomial);
 Term operator+(Polynomial const& polynomial);
 Term operator+(Expression const& expression);
+Term operator+(Function const& functionAsParameter);
 Term operator+(Term const& term);
 
 //Unary minus: -a
@@ -27,6 +28,7 @@ Term operator-(Variable const& variable);
 Term operator-(Monomial const& monomial);
 Term operator-(Polynomial const& polynomial);
 Term operator-(Expression const& expression);
+Term operator-(Function const& functionAsParameter);
 Term operator-(Term const& term);
 
 //Addition: a + b

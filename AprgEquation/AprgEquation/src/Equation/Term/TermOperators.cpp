@@ -40,6 +40,11 @@ Term operator+(Expression const& expression)
     return Term(expression);
 }
 
+Term operator+(Function const& functionAsParameter)
+{
+    return Term(functionAsParameter);
+}
+
 Term operator+(Term const& term)
 {
     return performUnaryPlus(term);
@@ -74,6 +79,15 @@ Term operator-(Expression const& expression)
 {
     Expression newExpression(expression);
     newExpression.putTermWithMultiplicationIfNeeded(getBaseTermConstReferenceFromTerm(Term(-1)));
+    return Term(newExpression);
+}
+
+Term operator-(Function const& functionAsParameter)
+{
+    Expression newExpression(createOrCopyExpressionFromATerm(Term(-1)));
+    newExpression.putTermWithMultiplicationIfNeeded(
+                getBaseTermConstReferenceFromTerm(
+                    Term(functionAsParameter)));
     return Term(newExpression);
 }
 
@@ -792,7 +806,7 @@ Term operator/(Constant const& constant, Monomial const& monomial)
 
 Term operator/(Constant const& constant, Polynomial const& polynomial)
 {
-    return Term(createExpressionIfPossible(Terms{Term(constant), Term("/"), Term(polynomial)}));
+    return Term(createExpressionIfPossible({Term(constant), Term("/"), Term(polynomial)}));
 }
 
 Term operator/(Constant const& constant, Expression const& expression)
@@ -835,7 +849,7 @@ Term operator/(Variable const& variable, Monomial const& monomial)
 
 Term operator/(Variable const& variable, Polynomial const& polynomial)
 {
-    return Term(createExpressionIfPossible(Terms{Term(variable), Term("/"), Term(polynomial)}));
+    return Term(createExpressionIfPossible({Term(variable), Term("/"), Term(polynomial)}));
 }
 
 Term operator/(Variable const& variable, Expression const& expression)
@@ -876,7 +890,7 @@ Term operator/(Monomial const& monomial1, Monomial const& monomial2)
 
 Term operator/(Monomial const& monomial, Polynomial const& polynomial)
 {
-    return Term(createExpressionIfPossible(Terms{Term(monomial), Term("/"), Term(polynomial)}));
+    return Term(createExpressionIfPossible({Term(monomial), Term("/"), Term(polynomial)}));
 }
 
 Term operator/(Monomial const& monomial, Expression const& expression)
@@ -909,7 +923,7 @@ Term operator/(Polynomial const& polynomial, Monomial const& monomial)
 
 Term operator/(Polynomial const& polynomial1, Polynomial const& polynomial2)
 {
-    return Term(createExpressionIfPossible(Terms{Term(polynomial1), Term("/"), Term(polynomial2)}));
+    return Term(createExpressionIfPossible({Term(polynomial1), Term("/"), Term(polynomial2)}));
 }
 
 Term operator/(Polynomial const& polynomial, Expression const& expression)
@@ -969,7 +983,7 @@ Term operator^(Constant const& constant1, Constant const& constant2)
 
 Term operator^(Constant const& constant, Variable const& variable)
 {
-    return Term(createExpressionIfPossible(Terms{Term(constant), Term("^"), Term(variable)}));
+    return Term(createExpressionIfPossible({Term(constant), Term("^"), Term(variable)}));
 }
 
 Term operator^(Constant const& constant, Monomial const& monomial)
@@ -980,13 +994,13 @@ Term operator^(Constant const& constant, Monomial const& monomial)
     }
     else
     {
-        return Term(createExpressionIfPossible(Terms{Term(constant), Term("^"), Term(monomial)}));
+        return Term(createExpressionIfPossible({Term(constant), Term("^"), Term(monomial)}));
     }
 }
 
 Term operator^(Constant const& constant, Polynomial const& polynomial)
 {
-    return Term(createExpressionIfPossible(Terms{Term(constant), Term("^"), Term(polynomial)}));
+    return Term(createExpressionIfPossible({Term(constant), Term("^"), Term(polynomial)}));
 }
 
 Term operator^(Constant const& constant, Expression const& expression)
@@ -1003,17 +1017,17 @@ Term operator^(Variable const& variable, Constant const& constant)
 
 Term operator^(Variable const& variable1, Variable const& variable2)
 {
-    return Term(createExpressionIfPossible(Terms{Term(variable1), Term("^"), Term(variable2)}));
+    return Term(createExpressionIfPossible({Term(variable1), Term("^"), Term(variable2)}));
 }
 
 Term operator^(Variable const& variable, Monomial const& monomial)
 {
-    return Term(createExpressionIfPossible(Terms{Term(variable), Term("^"), Term(monomial)}));
+    return Term(createExpressionIfPossible({Term(variable), Term("^"), Term(monomial)}));
 }
 
 Term operator^(Variable const& variable, Polynomial const& polynomial)
 {
-    return Term(createExpressionIfPossible(Terms{Term(variable), Term("^"), Term(polynomial)}));
+    return Term(createExpressionIfPossible({Term(variable), Term("^"), Term(polynomial)}));
 }
 
 Term operator^(Variable const& variable, Expression const& expression)
@@ -1032,17 +1046,17 @@ Term operator^(Monomial const& monomial, Constant const& constant)
 
 Term operator^(Monomial const& monomial, Variable const& variable)
 {
-    return Term(createExpressionIfPossible(Terms{Term(monomial), Term("^"), Term(variable)}));
+    return Term(createExpressionIfPossible({Term(monomial), Term("^"), Term(variable)}));
 }
 
 Term operator^(Monomial const& monomial1, Monomial const& monomial2)
 {
-    return Term(createExpressionIfPossible(Terms{Term(monomial1), Term("^"), Term(monomial2)}));
+    return Term(createExpressionIfPossible({Term(monomial1), Term("^"), Term(monomial2)}));
 }
 
 Term operator^(Monomial const& monomial, Polynomial const& polynomial)
 {
-    return Term(createExpressionIfPossible(Terms{Term(monomial), Term("^"), Term(polynomial)}));
+    return Term(createExpressionIfPossible({Term(monomial), Term("^"), Term(polynomial)}));
 }
 
 Term operator^(Monomial const& monomial, Expression const& expression)
@@ -1077,30 +1091,30 @@ Term operator^(Polynomial const& polynomial, Constant const& constant)
             }
             else
             {
-                newTerm = Term(createExpressionIfPossible(Terms{Term(1), Term("/"), simplifyAndConvertPolynomialToSimplestTerm(newPolynomial)}));
+                newTerm = Term(createExpressionIfPossible({Term(1), Term("/"), simplifyAndConvertPolynomialToSimplestTerm(newPolynomial)}));
             }
         }
     }
     else
     {
-        newTerm = Term(createExpressionIfPossible(Terms{Term(polynomial), Term("^"), Term(constant)}));
+        newTerm = Term(createExpressionIfPossible({Term(polynomial), Term("^"), Term(constant)}));
     }
     return newTerm;
 }
 
 Term operator^(Polynomial const& polynomial, Variable const& variable)
 {
-    return Term(createExpressionIfPossible(Terms{Term(polynomial), Term("^"), Term(variable)}));
+    return Term(createExpressionIfPossible({Term(polynomial), Term("^"), Term(variable)}));
 }
 
 Term operator^(Polynomial const& polynomial, Monomial const& monomial)
 {
-    return Term(createExpressionIfPossible(Terms{Term(polynomial), Term("^"), Term(monomial)}));
+    return Term(createExpressionIfPossible({Term(polynomial), Term("^"), Term(monomial)}));
 }
 
 Term operator^(Polynomial const& polynomial1, Polynomial const& polynomial2)
 {
-    return Term(createExpressionIfPossible(Terms{Term(polynomial1), Term("^"), Term(polynomial2)}));
+    return Term(createExpressionIfPossible({Term(polynomial1), Term("^"), Term(polynomial2)}));
 }
 
 Term operator^(Polynomial const& polynomial, Expression const& expression)

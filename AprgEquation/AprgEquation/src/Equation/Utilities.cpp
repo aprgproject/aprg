@@ -6,7 +6,8 @@
 #include <Equation/Functions/CommonFunctionLibrary.hpp>
 #include <Equation/Term/TermOperators.hpp>
 #include <Macros/AlbaMacros.hpp>
-#include <Math/AlbaMathHelper.hpp>#include <String/AlbaStringHelper.hpp>
+#include <Math/AlbaMathHelper.hpp>
+#include <String/AlbaStringHelper.hpp>
 
 #include <algorithm>
 
@@ -40,7 +41,8 @@ bool isFunction(string const& name)
 
 bool canBeMergedInAMonomialByAdditionOrSubtraction(Term const& term1, Term const& term2)
 {
-    bool result(false);    if(term1.isConstant() && term2.isConstant())
+    bool result(false);
+    if(term1.isConstant() && term2.isConstant())
     {
         result = true;
     }
@@ -134,7 +136,8 @@ bool willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(Term const& term)
 unsigned int getOperatorPriority(string const& operatorString)
 {
     unsigned int result=0;
-    if("+" == operatorString)    {
+    if("+" == operatorString)
+    {
         result=1;
     }
     else if("-" == operatorString)
@@ -236,7 +239,8 @@ string getEnumShortString(TermType const termType)
             ALBA_MACROS_CASE_ENUM_SHORT_STRING(TermType::Function, "Function")
             default:
         return "default";
-    }}
+    }
+}
 
 string getEnumShortString(TermAssociationType const association)
 {
@@ -534,7 +538,8 @@ Function createFunctionWithEmptyInputExpression(string const& functionName)
 
 Term simplifyAndConvertMonomialToSimplestTerm(Monomial const& monomial)
 {
-    Monomial newMonomial(monomial);    newMonomial.simplify();
+    Monomial newMonomial(monomial);
+    newMonomial.simplify();
     Term newTerm(newMonomial);
     if(newMonomial.isZero())
     {
@@ -589,7 +594,8 @@ Term simplifyAndConvertFunctionToSimplestTerm(Function const& functionAsParamete
     return convertFunctionToSimplestTerm(newFunction);
 }
 
-Term convertExpressionToSimplestTerm(Expression const& expression){
+Term convertExpressionToSimplestTerm(Expression const& expression)
+{
     Term newTerm(expression);
     if(expression.isEmpty())
     {
@@ -615,7 +621,8 @@ Term convertFunctionToSimplestTerm(Function const& functionAsParameter)
 
 Terms tokenizeToTerms(string const& inputString)
 {
-    Terms tokenizedTerms;    string valueTerm;
+    Terms tokenizedTerms;
+    string valueTerm;
     for(char const c : inputString)
     {
         if(!stringHelper::isWhiteSpace(c))
@@ -834,7 +841,8 @@ void segregateNonExpressionsAndExpressions(
         else if(term.isValueTermAndDoesNotHaveAExpression())
         {
             termsWithNonExpressions.emplace_back(termToSegregate);
-        }    }
+        }
+    }
 }
 
 void segregateTermsWithPositiveAndNegativeAssociations(

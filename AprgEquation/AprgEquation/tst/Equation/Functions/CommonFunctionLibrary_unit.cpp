@@ -25,6 +25,7 @@ TEST(CommonFunctionLibraryTest, AbsoluteValueWorks)
     EXPECT_EQ(expressionToExpect, absoluteValueFunction.getInputExpressionConstReference());
     EXPECT_EQ(constantToExpect, absoluteValueFunction.performFunctionAndReturnResultIfPossible());
 }
+
 }
 
 }

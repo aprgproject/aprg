@@ -51,6 +51,7 @@ Term::Term(string const& stringTerm)
         m_baseDataTermPointer.reset(new Variable(stringTerm));
     }
 }
+
 Term::Term(Variable const& variable)
     : m_type(TermType::Variable)
     , m_baseDataTermPointer(nullptr)
@@ -87,7 +88,8 @@ Term::Term(Function const& function)
 
 Term& Term::operator=(Term const& term)
 {
-    m_type = term.getTermType();    m_baseDataTermPointer.reset(nullptr);
+    m_type = term.getTermType();
+    m_baseDataTermPointer.reset(nullptr);
     resetBaseDataTermPointerBasedFromTerm(term);
     return *this;
 }
@@ -132,6 +134,7 @@ bool Term::operator==(Term const& second) const
     }
     return result;
 }
+
 bool Term::operator!=(Term const& second) const
 {
     return !(operator==(second));
@@ -176,7 +179,8 @@ bool Term::operator<(Term const& second) const
         }
     }
     else
-    {        result = getTermTypePriorityValue(m_type) < getTermTypePriorityValue(second.m_type);
+    {
+        result = getTermTypePriorityValue(m_type) < getTermTypePriorityValue(second.m_type);
     }
     return result;
 }
@@ -201,7 +205,8 @@ bool Term::isEmpty() const
 
 bool Term::isConstant() const
 {
-    return TermType::Constant == m_type;}
+    return TermType::Constant == m_type;
+}
 
 bool Term::isVariable() const
 {
@@ -243,7 +248,8 @@ bool Term::isValueTermAndDoesNotHaveAExpression() const
     return isConstant() || isVariable() || isMonomial() || isPolynomial();
 }
 
-bool Term::isTheValueZero() const{
+bool Term::isTheValueZero() const
+{
     bool result(false);
     if(m_type==TermType::Constant)
     {
@@ -327,7 +333,8 @@ Function const& Term::getFunctionConstReference() const
 
 string Term::getDisplayableString() const
 {
-    string result;    if(m_type==TermType::Constant)
+    string result;
+    if(m_type==TermType::Constant)
     {
         result = getConstantConstReference().getDisplayableString();
     }
@@ -357,6 +364,7 @@ string Term::getDisplayableString() const
     }
     return result;
 }
+
 string Term::getDebugString() const
 {
     string result;
@@ -390,7 +398,8 @@ string Term::getDebugString() const
     }
     result += "[";
     result += getEnumShortString(m_type);
-    result += "]";    return result;
+    result += "]";
+    return result;
 }
 
 Constant & Term::getConstantReference()
@@ -437,7 +446,8 @@ Function & Term::getFunctionReference()
 
 void Term::simplify()
 {
-    if(m_type==TermType::Monomial)    {
+    if(m_type==TermType::Monomial)
+    {
         *this = simplifyAndConvertMonomialToSimplestTerm(getMonomialConstReference());
     }
     else if(m_type==TermType::Polynomial)
@@ -454,7 +464,8 @@ void Term::simplify()
     }
 }
 
-void Term::simplifyToCommonDenominator(){
+void Term::simplifyToCommonDenominator()
+{
     if(m_type==TermType::Monomial)
     {
         *this = simplifyAndConvertMonomialToSimplestTerm(getMonomialConstReference());
@@ -478,7 +489,8 @@ void Term::simplifyToCommonDenominator(){
     }
 }
 
-void Term::sort(){
+void Term::sort()
+{
     if(isPolynomial())
     {
         getPolynomialReference().sortMonomialsWithInversePriority();
@@ -518,6 +530,7 @@ void Term::resetBaseDataTermPointerBasedFromTerm(Term const& term)
         break;
     }
 }
+
 ostream & operator<<(ostream & out, Term const& term)
 {
     out << term.getDisplayableString();

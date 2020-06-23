@@ -167,8 +167,8 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksOnA
 
     additionAndSubtraction.combineExpressionsIfPossible();
 
-    Expression subExpression(createExpressionIfPossible(Terms{Term("y"), Term("^"), Term("y")}));
-    Expression expressionToExpect(createExpressionIfPossible(Terms{Term(3), Term("*"), Term(subExpression)}));
+    Expression subExpression(createExpressionIfPossible({Term("y"), Term("^"), Term("y")}));
+    Expression expressionToExpect(createExpressionIfPossible({Term(3), Term("*"), Term(subExpression)}));
     Expressions expressions(additionAndSubtraction.getExpressions());
     ASSERT_EQ(1u, expressions.size());
     EXPECT_EQ(expressionToExpect, expressions.at(0));
@@ -195,10 +195,10 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksOnA
 
     additionAndSubtraction.combineExpressionsIfPossible();
 
-    Expression subExpression1(createExpressionIfPossible(Terms{Term("x"), Term("^"), Term("y")}));
-    Expression subExpression2(createExpressionIfPossible(Terms{Term("y"), Term("^"), Term("y")}));
-    Expression expressionToExpect1(createExpressionIfPossible(Terms{Term(2), Term("*"), Term(subExpression1)}));
-    Expression expressionToExpect2(createExpressionIfPossible(Terms{Term(4), Term("*"), Term(subExpression2)}));
+    Expression subExpression1(createExpressionIfPossible({Term("x"), Term("^"), Term("y")}));
+    Expression subExpression2(createExpressionIfPossible({Term("y"), Term("^"), Term("y")}));
+    Expression expressionToExpect1(createExpressionIfPossible({Term(2), Term("*"), Term(subExpression1)}));
+    Expression expressionToExpect2(createExpressionIfPossible({Term(4), Term("*"), Term(subExpression2)}));
     Expressions expressions(additionAndSubtraction.getExpressions());
     ASSERT_EQ(2u, expressions.size());
     EXPECT_EQ(expressionToExpect1, expressions.at(0));
@@ -219,10 +219,10 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksOnA
 
     additionAndSubtraction.combineExpressionsIfPossible();
 
-    Expression subExpression1(createExpressionIfPossible(Terms{Term("x"), Term("^"), Term("x")}));
-    Expression subExpression2(createExpressionIfPossible(Terms{Term("y"), Term("^"), Term("y")}));
-    Expression subExpression3(createExpressionIfPossible(Terms{Term(subExpression1), Term("*"), Term(subExpression2)}));
-    Expression expressionToExpect(createExpressionIfPossible(Terms{Term(90), Term("*"), Term(subExpression3)}));
+    Expression subExpression1(createExpressionIfPossible({Term("x"), Term("^"), Term("x")}));
+    Expression subExpression2(createExpressionIfPossible({Term("y"), Term("^"), Term("y")}));
+    Expression subExpression3(createExpressionIfPossible({Term(subExpression1), Term("*"), Term(subExpression2)}));
+    Expression expressionToExpect(createExpressionIfPossible({Term(90), Term("*"), Term(subExpression3)}));
     Expressions expressions(additionAndSubtraction.getExpressions());
     ASSERT_EQ(1u, expressions.size());
     EXPECT_EQ(expressionToExpect, expressions.at(0));
@@ -245,9 +245,9 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksOnA
 
     additionAndSubtraction.combineExpressionsIfPossible();
 
-    Expression subExpression1(createExpressionIfPossible(Terms{Term("y"), Term("^"), Term("y")}));
-    Expression expressionToExpect1(createExpressionIfPossible(Terms{Term(2), Term("*"), Term(subExpression1)}));
-    Expression expressionToExpect2(createExpressionIfPossible(Terms{Term(Monomial(-5, {{"x", 1}})), Term("*"), Term(subExpression1)}));
+    Expression subExpression1(createExpressionIfPossible({Term("y"), Term("^"), Term("y")}));
+    Expression expressionToExpect1(createExpressionIfPossible({Term(2), Term("*"), Term(subExpression1)}));
+    Expression expressionToExpect2(createExpressionIfPossible({Term(Monomial(-5, {{"x", 1}})), Term("*"), Term(subExpression1)}));
     Expressions expressions(additionAndSubtraction.getExpressions());
     ASSERT_EQ(2u, expressions.size());
     EXPECT_EQ(expressionToExpect1, expressions.at(0));

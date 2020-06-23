@@ -13,7 +13,7 @@ namespace equation
 
 TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithNoTerms)
 {
-    TermsAggregator aggregator(Terms{});
+    TermsAggregator aggregator({});
 
     aggregator.buildExpressionFromTerms();
 
@@ -23,35 +23,35 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithNoTerms)
 
 TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithUnaryOperation)
 {
-    TermsAggregator aggregator(Terms{Term("-"), Term("x")});
+    TermsAggregator aggregator({Term("-"), Term("x")});
 
     aggregator.buildExpressionFromTerms();
 
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1u, termsToVerify.size());
     ASSERT_EQ(TermType::Expression, termsToVerify.at(0).getTermType());
-    Expression expressionToExpect(createExpressionIfPossible(Terms{Term("-"), Term("x")}));
+    Expression expressionToExpect(createExpressionIfPossible({Term("-"), Term("x")}));
     Expression expressionToVerify(termsToVerify.at(0).getExpressionConstReference());
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
 
 TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithBinaryOperation)
 {
-    TermsAggregator aggregator(Terms{Term("x"), Term("+"), Term("x")});
+    TermsAggregator aggregator({Term("x"), Term("+"), Term("x")});
 
     aggregator.buildExpressionFromTerms();
 
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1u, termsToVerify.size());
     ASSERT_EQ(TermType::Expression, termsToVerify.at(0).getTermType());
-    Expression expressionToExpect(createExpressionIfPossible(Terms{Term("x"), Term("+"), Term("x")}));
+    Expression expressionToExpect(createExpressionIfPossible({Term("x"), Term("+"), Term("x")}));
     Expression expressionToVerify(termsToVerify.at(0).getExpressionConstReference());
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
 
 TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithDifferentOperationLevels)
 {
-    TermsAggregator aggregator(Terms{Term("a"), Term("+"), Term("b"),
+    TermsAggregator aggregator({Term("a"), Term("+"), Term("b"),
                                      Term("*"), Term("c"),
                                      Term("^"), Term("d")});
 
@@ -60,9 +60,9 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithDifferentOperationLevels)
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1u, termsToVerify.size());
     ASSERT_EQ(TermType::Expression, termsToVerify.at(0).getTermType());
-    Expression subExpression1(createExpressionIfPossible(Terms{Term("c"), Term("^"), Term("d")}));
-    Expression subExpression2(createExpressionIfPossible(Terms{Term("b"), Term("*"), Term(subExpression1)}));
-    Expression subExpression3(createExpressionIfPossible(Terms{Term("a"), Term("+"), Term(subExpression2)}));
+    Expression subExpression1(createExpressionIfPossible({Term("c"), Term("^"), Term("d")}));
+    Expression subExpression2(createExpressionIfPossible({Term("b"), Term("*"), Term(subExpression1)}));
+    Expression subExpression3(createExpressionIfPossible({Term("a"), Term("+"), Term(subExpression2)}));
     Expression expressionToExpect(subExpression3);
     Expression expressionToVerify(termsToVerify.at(0).getExpressionConstReference());
     EXPECT_EQ(expressionToExpect, expressionToVerify);
@@ -70,7 +70,7 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithDifferentOperationLevels)
 
 TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithParenthesis)
 {
-    TermsAggregator aggregator(Terms{Term("("), Term("("),
+    TermsAggregator aggregator({Term("("), Term("("),
                                      Term("("), Term("a"), Term("+"), Term("b"), Term(")"),
                                      Term("*"), Term("c"), Term(")"),
                                      Term("^"), Term("d"), Term(")")});
@@ -80,9 +80,9 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithParenthesis)
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1u, termsToVerify.size());
     ASSERT_EQ(TermType::Expression, termsToVerify.at(0).getTermType());
-    Expression subExpression1(createExpressionIfPossible(Terms{Term("a"), Term("+"), Term("b")}));
-    Expression subExpression2(createExpressionIfPossible(Terms{Term(subExpression1), Term("*"), Term("c")}));
-    Expression subExpression3(createExpressionIfPossible(Terms{Term(subExpression2), Term("^"), Term("d")}));
+    Expression subExpression1(createExpressionIfPossible({Term("a"), Term("+"), Term("b")}));
+    Expression subExpression2(createExpressionIfPossible({Term(subExpression1), Term("*"), Term("c")}));
+    Expression subExpression3(createExpressionIfPossible({Term(subExpression2), Term("^"), Term("d")}));
     Expression expressionToExpect(subExpression3);
     Expression expressionToVerify(termsToVerify.at(0).getExpressionConstReference());
     EXPECT_EQ(expressionToExpect, expressionToVerify);
@@ -90,7 +90,7 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithParenthesis)
 
 TEST(TermsAggregatorTest, SimplifyWorksWithNoTerms)
 {
-    TermsAggregator aggregator(Terms{});
+    TermsAggregator aggregator({});
 
     aggregator.simplifyTerms();
 
@@ -100,7 +100,7 @@ TEST(TermsAggregatorTest, SimplifyWorksWithNoTerms)
 
 TEST(TermsAggregatorTest, SimplifyWorksWithUnaryOperation)
 {
-    TermsAggregator aggregator(Terms{Term("-"), Term(14)});
+    TermsAggregator aggregator({Term("-"), Term(14)});
 
     aggregator.simplifyTerms();
 
@@ -112,7 +112,7 @@ TEST(TermsAggregatorTest, SimplifyWorksWithUnaryOperation)
 
 TEST(TermsAggregatorTest, SimplifyWorksWithBinaryOperation)
 {
-    TermsAggregator aggregator(Terms{Term(2), Term("+"), Term(3)});
+    TermsAggregator aggregator({Term(2), Term("+"), Term(3)});
 
     aggregator.simplifyTerms();
 
@@ -124,7 +124,7 @@ TEST(TermsAggregatorTest, SimplifyWorksWithBinaryOperation)
 
 TEST(TermsAggregatorTest, SimplifyWorksWithDifferentOperationLevels)
 {
-    TermsAggregator aggregator(Terms{Term(2), Term("+"), Term(3),
+    TermsAggregator aggregator({Term(2), Term("+"), Term(3),
                                      Term("*"), Term(4),
                                      Term("^"), Term(5)});
 
@@ -138,7 +138,7 @@ TEST(TermsAggregatorTest, SimplifyWorksWithDifferentOperationLevels)
 
 TEST(TermsAggregatorTest, SimplifyWorksWithParenthesis)
 {
-    TermsAggregator aggregator(Terms{Term("("), Term("("),
+    TermsAggregator aggregator({Term("("), Term("("),
                                      Term("("), Term(2), Term("+"), Term(3), Term(")"),
                                      Term("*"), Term(4), Term(")"),
                                      Term("^"), Term(5), Term(")")});

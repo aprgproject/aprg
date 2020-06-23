@@ -419,7 +419,8 @@ void Expression::simplifyAndCopyTerms(
         else if(term.isValueTermAndDoesNotHaveAExpression())
         {
             termsToUpdate.emplace_back(baseTerm, termWithDetails.association);
-        }    }
+        }
+    }
 }
 
 void Expression::simplifyAndCopyTermsFromAnExpressionAndSetOperatorLevelIfNeeded(
@@ -767,7 +768,8 @@ void Expression::putTermForExpressionAndNonExpressions(
     else if(term.isValueTermAndDoesNotHaveAExpression())
     {
         putTerm(baseTerm, overallAssociation);
-    }}
+    }
+}
 
 void Expression::putTerm(BaseTerm const& baseTerm, TermAssociationType const overallAssociation)
 {
@@ -872,7 +874,7 @@ void Expression::multiplyThenAddOrSubtract(
 {
     for(Monomial const& monomial : polynomial.getMonomialsConstReference())
     {
-        Expression monomialExpression(createExpressionIfPossible(Terms{monomial}));
+        Expression monomialExpression(createExpressionIfPossible({monomial}));
         monomialExpression.putTermWithMultiplicationIfNeeded(getBaseTermConstReferenceFromTerm(Term(expression)));
         putTermWithAdditionIfNeeded(Term(monomialExpression));
     }

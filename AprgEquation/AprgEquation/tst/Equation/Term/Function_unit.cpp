@@ -103,7 +103,8 @@ TEST(FunctionTest, LessThanOperatorWorks)
 
 TEST(FunctionTest, IsInputExpressionAConstantWorks)
 {
-    Function function1;    Function function2("functionName", createOrCopyExpressionFromATerm(Term(5)), [](Constant const&  constant) -> Constant
+    Function function1;
+    Function function2("functionName", createOrCopyExpressionFromATerm(Term(5)), [](Constant const&  constant) -> Constant
     {
         return constant;
     });
@@ -137,7 +138,8 @@ TEST(FunctionTest, PerformFunctionAndReturnResultIfPossibleWorks)
 TEST(FunctionTest, GetInputExpressionConstReferenceWorks)
 {
     Function function1;
-    Function function2("functionName", createOrCopyExpressionFromATerm(Term(5)), [](Constant const&  constant) -> Constant    {
+    Function function2("functionName", createOrCopyExpressionFromATerm(Term(5)), [](Constant const&  constant) -> Constant
+    {
         return constant;
     });
 
@@ -150,7 +152,8 @@ TEST(FunctionTest, GetInputExpressionConstReferenceWorks)
 TEST(FunctionTest, GetInputExpressionReferenceWorks)
 {
     Function function1;
-    Function function2("functionName", createOrCopyExpressionFromATerm(Term(5)), [](Constant const&  constant) -> Constant    {
+    Function function2("functionName", createOrCopyExpressionFromATerm(Term(5)), [](Constant const&  constant) -> Constant
+    {
         return constant;
     });
 
@@ -160,7 +163,8 @@ TEST(FunctionTest, GetInputExpressionReferenceWorks)
     EXPECT_EQ(expressionToExpect2, function2.getInputExpressionReference());
 }
 
-TEST(FunctionTest, SimplifyWorks){
+TEST(FunctionTest, SimplifyWorks)
+{
     Function function1("functionName", createExpressionIfPossible({Term(5), Term("+"), Term(5)}), [](Constant const&  constant) -> Constant
     {
         return constant;
@@ -172,7 +176,8 @@ TEST(FunctionTest, SimplifyWorks){
     EXPECT_EQ(expressionToExpect1, function1.getInputExpressionReference());
 }
 
-TEST(FunctionTest, GetDisplayableStringWorks){
+TEST(FunctionTest, GetDisplayableStringWorks)
+{
     Function function1("functionName", createOrCopyExpressionFromATerm(Term(5)), [](Constant const&  constant) -> Constant
     {
         return constant;

@@ -22,7 +22,8 @@ TEST(VariableTest, VariablesAreConstructedCorrectly)
 TEST(VariableTest, EqualityOperatorWorks)
 {
     Variable variable1;
-    Variable variable2("x");    Variable variable3("power");
+    Variable variable2("x");
+    Variable variable3("power");
     Variable variable4("x");
 
     EXPECT_TRUE(variable1==variable1);
@@ -35,7 +36,8 @@ TEST(VariableTest, EqualityOperatorWorks)
 TEST(VariableTest, InequalityOperatorWorks)
 {
     Variable variable1;
-    Variable variable2("x");    Variable variable3("power");
+    Variable variable2("x");
+    Variable variable3("power");
     Variable variable4("x");
 
     EXPECT_FALSE(variable1!=variable1);
