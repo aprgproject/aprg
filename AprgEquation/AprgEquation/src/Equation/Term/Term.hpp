@@ -50,10 +50,9 @@ public:
     bool isExpression() const;
     bool isFunction() const;
     bool isValueTerm() const;
-    bool isValueTermAndDoesNotHaveAExpression() const;
+    bool isValueTermAndNotAnExpression() const;
     bool isTheValueZero() const;
     bool isTheValueOne() const;
-
     TermType getTermType() const;
     Constant const& getConstantConstReference() const;
     Variable const& getVariableConstReference() const;

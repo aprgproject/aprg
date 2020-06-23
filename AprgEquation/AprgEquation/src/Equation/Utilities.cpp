@@ -838,11 +838,10 @@ void segregateNonExpressionsAndExpressions(
         {
             termsWithExpressions.emplace_back(termToSegregate);
         }
-        else if(term.isValueTermAndDoesNotHaveAExpression())
+        else if(term.isValueTermAndNotAnExpression())
         {
             termsWithNonExpressions.emplace_back(termToSegregate);
-        }
-    }
+        }    }
 }
 
 void segregateTermsWithPositiveAndNegativeAssociations(

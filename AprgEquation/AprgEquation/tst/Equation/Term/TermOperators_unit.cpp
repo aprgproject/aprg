@@ -4,10 +4,13 @@
 
 #include <gtest/gtest.h>
 
+
+
+#include <Debug/AlbaDebug.hpp>
+
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace equation
 {
@@ -88,19 +91,20 @@ TEST(TermOperatorsTest, UnaryMinusOperator_MinusExpressionOperationWorks)
 {
     Term term(-createExpressionIfPossible({Term(54)}));
 
-    EXPECT_EQ(Term(createExpressionIfPossible({Term(54), Term("*"), Term(-1)})), term);
+    EXPECT_EQ(Term(createExpressionIfPossible({Term(-1), Term("*"), Term(54)})), term);
 }
 
-TEST(TermOperatorsTest, UnaryMinusOperator_MinusFunctionOperationWorks)
-{
+TEST(TermOperatorsTest, UnaryMinusOperator_MinusFunctionOperationWorks){
     Function absoluteValueFunction(Functions::abs(Expression{}));
 
     Term term(-absoluteValueFunction);
 
     Expression expressionToExpect(createExpressionIfPossible({Term(-1), Term("*"), Term(absoluteValueFunction)}));
+
+    ALBA_PRINT1(expressionToExpect.getDebugString());
+    ALBA_PRINT1(term.getDebugString());
     EXPECT_EQ(Term(expressionToExpect), term);
 }
-
 TEST(TermOperatorsTest, BinaryPlusOperator_ConstantAddConstantOperationWorks)
 {
     Term term(Constant(6) + Constant(2));

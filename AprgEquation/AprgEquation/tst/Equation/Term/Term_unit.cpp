@@ -527,18 +527,17 @@ TEST(TermTest, IsValueTermAndDoesNotHaveAExpressionWorks)
     Term term7(Expression{});
     Term term8(Function{});
 
-    EXPECT_FALSE(term1.isValueTermAndDoesNotHaveAExpression());
-    EXPECT_TRUE(term2.isValueTermAndDoesNotHaveAExpression());
-    EXPECT_TRUE(term3.isValueTermAndDoesNotHaveAExpression());
-    EXPECT_FALSE(term4.isValueTermAndDoesNotHaveAExpression());
-    EXPECT_TRUE(term5.isValueTermAndDoesNotHaveAExpression());
-    EXPECT_TRUE(term6.isValueTermAndDoesNotHaveAExpression());
-    EXPECT_FALSE(term7.isValueTermAndDoesNotHaveAExpression());
-    EXPECT_FALSE(term8.isValueTermAndDoesNotHaveAExpression());
+    EXPECT_FALSE(term1.isValueTermAndNotAnExpression());
+    EXPECT_TRUE(term2.isValueTermAndNotAnExpression());
+    EXPECT_TRUE(term3.isValueTermAndNotAnExpression());
+    EXPECT_FALSE(term4.isValueTermAndNotAnExpression());
+    EXPECT_TRUE(term5.isValueTermAndNotAnExpression());
+    EXPECT_TRUE(term6.isValueTermAndNotAnExpression());
+    EXPECT_FALSE(term7.isValueTermAndNotAnExpression());
+    EXPECT_TRUE(term8.isValueTermAndNotAnExpression());
 }
 
-TEST(TermTest, IsTheValueZeroWorks)
-{
+TEST(TermTest, IsTheValueZeroWorks){
     Term term1;
     Term term2(Constant(0));
     Term term3(1);
