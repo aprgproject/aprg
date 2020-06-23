@@ -79,6 +79,7 @@ private:
             TermsWithAssociation::TermsWithDetails & factorizedTermsWithDetails,
             Polynomial const& polynomial,
             TermAssociationType const overallAssociation);
+
     //simplify functions
     void simplifyAndCopyTerms(
             TermsWithAssociation::TermsWithDetails & termsToUpdate,
