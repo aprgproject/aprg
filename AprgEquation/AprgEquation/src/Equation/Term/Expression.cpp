@@ -416,11 +416,10 @@ void Expression::simplifyAndCopyTerms(
             expression.simplify();
             simplifyAndCopyTermsFromAnExpressionAndSetOperatorLevelIfNeeded(termsToUpdate, expression, termWithDetails.association);
         }
-        else if(term.isValueTermButNotAnExpression())
+        else if(term.isValueTermAndDoesNotHaveAExpression())
         {
             termsToUpdate.emplace_back(baseTerm, termWithDetails.association);
-        }
-    }
+        }    }
 }
 
 void Expression::simplifyAndCopyTermsFromAnExpressionAndSetOperatorLevelIfNeeded(
@@ -765,11 +764,10 @@ void Expression::putTermForExpressionAndNonExpressions(
             }
         }
     }
-    else if(term.isValueTermButNotAnExpression())
+    else if(term.isValueTermAndDoesNotHaveAExpression())
     {
         putTerm(baseTerm, overallAssociation);
-    }
-}
+    }}
 
 void Expression::putTerm(BaseTerm const& baseTerm, TermAssociationType const overallAssociation)
 {
