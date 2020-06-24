@@ -54,15 +54,14 @@ TermsWithDetails TermsOverTerms::getNumeratorAndDenominatorAsTermWithDetails() c
     TermsWithDetails result;
     for(Term const& numerator : m_numerators)
     {
-        result.emplace_back(getBaseTermConstReferenceFromTerm(numerator), TermAssociationType::Positive);
+        result.emplace_back(numerator, TermAssociationType::Positive);
     }
     for(Term const& denominator : m_denominators)
     {
-        result.emplace_back(getBaseTermConstReferenceFromTerm(denominator), TermAssociationType::Negative);
+        result.emplace_back(denominator, TermAssociationType::Negative);
     }
     return result;
 }
-
 std::string TermsOverTerms::getDisplayableString() const
 {
     stringstream result;

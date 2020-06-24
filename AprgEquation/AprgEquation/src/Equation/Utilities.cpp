@@ -475,16 +475,15 @@ Polynomial createPolynomialIfPossible(Term const& term)
 
 Expression createExpressionInAnExpression(Expression const& expression)
 {
-    return Expression(getBaseTermConstReferenceFromTerm(Term(expression)));
+    return Expression(Term(expression));
 }
 
 Expression createAndWrapExpressionFromATerm(Term const& term)
 {
-    return Expression(getBaseTermConstReferenceFromTerm(term));
+    return Expression(term);
 }
 
-Expression createOrCopyExpressionFromATerm(Term const& term)
-{
+Expression createOrCopyExpressionFromATerm(Term const& term){
     Expression result;
     if(!term.isEmpty())
     {
@@ -494,11 +493,10 @@ Expression createOrCopyExpressionFromATerm(Term const& term)
         }
         else
         {
-            result=Expression(getBaseTermConstReferenceFromTerm(term));
+            result=Expression(term);
         }
     }
-    return result;
-}
+    return result;}
 
 Expression createExpressionIfPossible(Terms const& terms)
 {

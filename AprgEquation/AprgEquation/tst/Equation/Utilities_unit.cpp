@@ -222,22 +222,18 @@ TEST(UtilitiesTest, GetFirstStringIfNegativeAssociationWorks)
 
 TEST(TermWithDetailsTest, GetStringForTermWithDetailsWorks)
 {
-    TermWithDetails termWithDetails(
-                getBaseTermConstReferenceFromTerm(Term(10)),
-                TermAssociationType::Negative);
+    TermWithDetails termWithDetails(Term(10), TermAssociationType::Negative);
 
     EXPECT_EQ("[10][[NEG]]", getString(termWithDetails));
 }
-
 TEST(TermWithDetailsTest, GetStringForTermsWithDetailsWorks)
 {
     TermsWithDetails termsWithDetails;
-    termsWithDetails.emplace_back(getBaseTermConstReferenceFromTerm(Term(10)), TermAssociationType::Negative);
-    termsWithDetails.emplace_back(getBaseTermConstReferenceFromTerm(Term(20)), TermAssociationType::Positive);
+    termsWithDetails.emplace_back(Term(10), TermAssociationType::Negative);
+    termsWithDetails.emplace_back(Term(20), TermAssociationType::Positive);
 
     EXPECT_EQ("[10][[NEG]], [20][[POS]]", getString(termsWithDetails));
 }
-
 TEST(UtilitiesTest, CreateNewTermAndReturnSharedPointerWorks)
 {
     BaseTermSharedPointer sharedPointer(dynamic_cast<BaseTerm*>(new Term(9652)));
@@ -398,11 +394,10 @@ TEST(UtilitiesTest, CreateExpressionInExpressionWorks)
     Expression expressionToVerify2(createExpressionInAnExpression(createExpressionInAnExpression(expression2)));
 
     Expression expressionToExpect1(getBaseTermConstReferenceFromTerm(Term(expression1)));
-    Expression expressionToExpect2(getBaseTermConstReferenceFromTerm(Term(Expression(getBaseTermConstReferenceFromTerm(Term(expression2))))));
+    Expression expressionToExpect2(getBaseTermConstReferenceFromTerm(Term(Expression(Term(expression2)))));
     EXPECT_EQ(expressionToExpect1, expressionToVerify1);
     EXPECT_EQ(expressionToExpect2, expressionToVerify2);
 }
-
 TEST(UtilitiesTest, CreateAndWrapExpressionFromATermWorks)
 {
     Expression expression1(createExpressionIfPossible({Term(254)}));
@@ -838,11 +833,10 @@ TEST(UtilitiesTest, SegregateNonExpressionsAndExpressionsWorks)
     TermsWithDetails termsWithNonExpressions;
     TermsWithDetails termsWithExpressions;
     Term termExpression(createExpressionIfPossible({Term("x"), Term("^"), Term("x")}));
-    termsWithAssociation.putTermWithNegativeAssociation(getBaseTermConstReferenceFromTerm(Term(753)));
-    termsWithAssociation.putTermWithPositiveAssociation(getBaseTermConstReferenceFromTerm(termExpression));
+    termsWithAssociation.putTermWithNegativeAssociation(Term(753));
+    termsWithAssociation.putTermWithPositiveAssociation(termExpression);
 
     segregateNonExpressionsAndExpressions(termsWithAssociation.getTermsWithDetails(), termsWithNonExpressions, termsWithExpressions);
-
     ASSERT_EQ(1u, termsWithNonExpressions.size());
     TermWithDetails const& termWithDetails1(termsWithNonExpressions.at(0));
     EXPECT_EQ(Term(753), getTermConstReferenceFromSharedPointer(termWithDetails1.baseTermSharedPointer));
@@ -858,11 +852,10 @@ TEST(UtilitiesTest, SegregateTermsWithPositiveAndNegativeAssociationsWorks)
     TermsWithAssociation termsWithAssociation;
     TermsWithDetails termsInPositive;
     TermsWithDetails termsInNegative;
-    termsWithAssociation.putTermWithNegativeAssociation(getBaseTermConstReferenceFromTerm(Term(753)));
-    termsWithAssociation.putTermWithPositiveAssociation(getBaseTermConstReferenceFromTerm(Term(159)));
+    termsWithAssociation.putTermWithNegativeAssociation(Term(753));
+    termsWithAssociation.putTermWithPositiveAssociation(Term(159));
 
     segregateTermsWithPositiveAndNegativeAssociations(termsWithAssociation.getTermsWithDetails(), termsInPositive, termsInNegative);
-
     ASSERT_EQ(1u, termsInPositive.size());
     TermWithDetails const& termWithDetails1(termsInPositive.at(0));
     EXPECT_EQ(Term(159), getTermConstReferenceFromSharedPointer(termWithDetails1.baseTermSharedPointer));

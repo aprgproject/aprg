@@ -135,16 +135,11 @@ TEST(AdditionAndSubtractionOfExpressionsTest, PutTermsWithDetailsWorks)
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
     Expression expression1(createExpressionIfPossible({Term("x")}));
     Expression expression2(createExpressionIfPossible({Term("y")}));
-    TermWithDetails termWithDetails1(
-                getBaseTermConstReferenceFromTerm(Term(expression1)),
-                TermAssociationType::Negative);
-    TermWithDetails termWithDetails2(
-                getBaseTermConstReferenceFromTerm(Term(expression2)),
-                TermAssociationType::Positive);
+    TermWithDetails termWithDetails1(Term(expression1), TermAssociationType::Negative);
+    TermWithDetails termWithDetails2(Term(expression2), TermAssociationType::Positive);
     TermsWithDetails termsWithDetails{termWithDetails1, termWithDetails2};
 
     additionAndSubtraction.putTermsWithDetails(termsWithDetails);
-
     Expressions expressions(additionAndSubtraction.getExpressions());
     ASSERT_EQ(2u, expressions.size());
     EXPECT_EQ(expression1, expressions.at(0));

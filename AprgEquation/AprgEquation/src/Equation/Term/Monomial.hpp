@@ -1,9 +1,7 @@
 #pragma once
 
-#include <Equation/Substitution/VariablesToValuesTypes.hpp>
 #include <Equation/Term/BaseTermData.hpp>
 #include <Math/AlbaNumber.hpp>
-
 #include <functional>
 #include <map>
 #include <string>
