@@ -17,7 +17,8 @@ SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms()
 
 SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms(std::initializer_list<TermTermPair> const& variablesWithValues)
 {
-    putTermsToTermsMapping(variablesWithValues);}
+    putTermsToTermsMapping(variablesWithValues);
+}
 
 SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms(TermToTermMap const& variablesWithValues)
 {

@@ -44,7 +44,8 @@ std::string getString(
 std::string createVariableNameForSubstitution(Polynomial const& polynomial);
 
 BaseTermSharedPointer createNewTermAndReturnSharedPointer(BaseTermSharedPointer const& sharedPointer);
-BaseTermSharedPointer copyAndCreateNewTermAndReturnSharedPointer(Term const& term);BaseTermSharedPointer getSharedPointerFromTermReference(Term & term);
+BaseTermSharedPointer copyAndCreateNewTermAndReturnSharedPointer(Term const& term);
+BaseTermSharedPointer getSharedPointerFromTermReference(Term & term);
 Term const& getTermConstReferenceFromBaseTerm(BaseTerm const& baseTerm);
 Term const& getTermConstReferenceFromSharedPointer(BaseTermSharedPointer const& sharedPointer);
 Term & getTermReferenceFromBaseTerm(BaseTerm & baseTerm);
@@ -85,7 +86,8 @@ Monomial getMonomialWithMaximumExponentsInMonomials(Monomials const& monomials);
 Polynomial addAllPolynomials(Polynomials const& polynomials);
 
 void segregateMonomialsAndNonMonomials(
-        Terms const& termsToSegregate,        Terms & monomials,
+        Terms const& termsToSegregate,
+        Terms & monomials,
         Terms & nonMonomials);
 void segregatePolynomialAndNonPolynomials(
         Terms const& termsToSegregate,

@@ -17,7 +17,8 @@ TEST(SubstitutionOfVariablesToValuesTest, ConstructionWorks)
     SubstitutionOfVariablesToValues();
     SubstitutionOfVariablesToValues({{"x", 1}, {"y", 2}});
     VariablesToValuesMap variableWithValues{{"x", 1}, {"y", 2}};
-    SubstitutionOfVariablesToValues{variableWithValues};}
+    SubstitutionOfVariablesToValues{variableWithValues};
+}
 
 TEST(SubstitutionOfVariablesToValuesTest, IsVariableFoundWorks)
 {

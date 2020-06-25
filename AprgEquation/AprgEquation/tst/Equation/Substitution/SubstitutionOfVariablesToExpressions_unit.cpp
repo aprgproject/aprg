@@ -17,7 +17,8 @@ TEST(SubstitutionOfVariablesToExpressionsTest, ConstructionWorks)
     SubstitutionOfVariablesToExpressions();
     SubstitutionOfVariablesToExpressions({{"x", createOrCopyExpressionFromATerm(Term("y"))}});
     VariablesToExpressionsMap variableWithExpressions{{"x", createOrCopyExpressionFromATerm(Term("y"))}};
-    SubstitutionOfVariablesToExpressions{variableWithExpressions};}
+    SubstitutionOfVariablesToExpressions{variableWithExpressions};
+}
 
 TEST(SubstitutionOfVariablesToExpressionsTest, IsVariableFoundWorks)
 {

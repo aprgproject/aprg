@@ -354,7 +354,8 @@ string createVariableNameForSubstitution(Polynomial const& polynomial)
 
 BaseTermSharedPointer createNewTermAndReturnSharedPointer(BaseTermSharedPointer const& sharedPointer)
 {
-    return move(BaseTermSharedPointer(                    dynamic_cast<BaseTerm*>(
+    return move(BaseTermSharedPointer(
+                    dynamic_cast<BaseTerm*>(
                         new Term(*dynamic_cast<Term*>(sharedPointer.get())))));
 }
 
@@ -705,7 +706,8 @@ AlbaNumber getCommonSignInMonomials(Monomials const& monomials)
     return (isFirstMonomialNegative||(negativeSignCount>0 && negativeSignCount == monomials.size())) ? -1 : 1;
 }
 
-Monomial getGcfMonomialInMonomials(Monomials const& monomials){
+Monomial getGcfMonomialInMonomials(Monomials const& monomials)
+{
     AlbaNumber commonCoefficient(getGcfCoefficientInMonomials(monomials));
     Monomial minExponentMonomial(getMonomialWithMinimumExponentsInMonomials(monomials));
     minExponentMonomial.setConstant(getCommonSignInMonomials(monomials)*commonCoefficient);
@@ -774,7 +776,8 @@ Polynomial addAllPolynomials(Polynomials const& polynomials)
 
 void segregateMonomialsAndNonMonomials(
         Terms const& termsToSegregate,
-        Terms & monomials,        Terms & nonMonomials)
+        Terms & monomials,
+        Terms & nonMonomials)
 {
     for(Term const& termToSegregate : termsToSegregate)
     {
