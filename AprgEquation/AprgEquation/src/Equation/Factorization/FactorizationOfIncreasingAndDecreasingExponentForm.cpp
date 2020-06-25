@@ -30,7 +30,8 @@ Polynomials factorizeIncreasingAndDecreasingExponentsForm(Polynomial const& poly
 Polynomials factorizeIncreasingAndDecreasingExponentsFormIfPossible(Polynomial const& polynomial)
 {
     Polynomials result;
-    Monomials monomials(polynomial.getMonomialsConstReference());    if(monomials.size() > 1)
+    Monomials monomials(polynomial.getMonomialsConstReference());
+    if(monomials.size() > 1)
     {
         Monomial firstMonomial(monomials.front());
         Monomial lastMonomial(monomials.back());
@@ -72,7 +73,8 @@ void factorizePolynomialForm(
         Monomial::VariablesToExponentsMap const& secondVariableExponent)
 {
     AlbaNumbers rootValues(calculatePolynomialRoots(coefficients));
-    Polynomial remainingPolynomial(polynomial);    for(AlbaNumber const& rootValue : rootValues)
+    Polynomial remainingPolynomial(polynomial);
+    for(AlbaNumber const& rootValue : rootValues)
     {
         AlbaNumber rootFirstCoefficient(1);
         AlbaNumber rootSecondCoefficient(rootValue*-1);
@@ -101,7 +103,8 @@ void fixCoefficientsOfFactors(
         AlbaNumber & rootSecondCoefficient)
 {
     AlbaNumber::FractionData firstFractionData(aCoefficient.getFractionData());
-    AlbaNumber::FractionData secondFractionData(rootSecondCoefficient.getFractionData());    unsigned multiplier = getGreatestCommonFactor(firstFractionData.numerator, secondFractionData.denominator);
+    AlbaNumber::FractionData secondFractionData(rootSecondCoefficient.getFractionData());
+    unsigned multiplier = getGreatestCommonFactor(firstFractionData.numerator, secondFractionData.denominator);
     rootFirstCoefficient = rootFirstCoefficient * multiplier;
     rootSecondCoefficient = rootSecondCoefficient * multiplier;
     aCoefficient = aCoefficient / multiplier;
@@ -112,7 +115,8 @@ bool areAllMonomialsFoundInMonomialsWithExponentsInOrder(
         Monomials const& monomialsWithExponentsInOrder)
 {
     Polynomial polynomialWithExponentsInOrder(monomialsWithExponentsInOrder);
-    bool areAllMonomialsFoundInPolynomialWithExponentsInOrder(true);    for(Monomial const& monomialToCheck : monomialsToCheck)
+    bool areAllMonomialsFoundInPolynomialWithExponentsInOrder(true);
+    for(Monomial const& monomialToCheck : monomialsToCheck)
     {
         if(!polynomialWithExponentsInOrder.isVariableExponentContentFound(monomialToCheck))
         {
@@ -128,7 +132,8 @@ unsigned int calculateMaxExponentDivisor(
         Monomial const& lastMonomial)
 {
     AlbaNumber maxExponent = max(firstMonomial.getMaxExponent(), lastMonomial.getMaxExponent());
-    unsigned int maxExponentDivisor = getAbsoluteValue(maxExponent.getInteger());    return maxExponentDivisor;
+    unsigned int maxExponentDivisor = getAbsoluteValue(maxExponent.getInteger());
+    return maxExponentDivisor;
 }
 
 AlbaNumbers getCoefficientsInMonomialsWithExponentsInOrder(
@@ -136,7 +141,8 @@ AlbaNumbers getCoefficientsInMonomialsWithExponentsInOrder(
         Monomials const& monomialsWithExponentsInOrder)
 {
     AlbaNumbers coefficients;
-    for(Monomial const& monomialWithExponentInOrder : monomialsWithExponentsInOrder)    {
+    for(Monomial const& monomialWithExponentInOrder : monomialsWithExponentsInOrder)
+    {
         coefficients.emplace_back(
                     polynomial.getCoefficientOfVariableExponent(monomialWithExponentInOrder));
     }
@@ -147,7 +153,8 @@ AlbaNumbers getCoefficientsInMonomialsWithExponentsInOrder(
 AlbaNumbers calculatePolynomialRoots(AlbaNumbers const& coefficients)
 {
     AlbaNumbers result;
-    if(coefficients.size() == 3)    {
+    if(coefficients.size() == 3)
+    {
         result = calculateQuadraticRoots(coefficients.at(0), coefficients.at(1), coefficients.at(2));
     }
     else
@@ -164,7 +171,8 @@ AlbaNumbers calculateQuadraticRoots(
         AlbaNumber const& c)
 {
     AlbaNumbers result;
-    AlbaNumber discriminant((b^2)-(a*c*4));    if(discriminant >= 0)
+    AlbaNumber discriminant((b^2)-(a*c*4));
+    if(discriminant >= 0)
     {
         AlbaNumber discriminantSquaredRoot = discriminant^(AlbaNumber(1, 2));
         AlbaNumber firstPart((-b)/(a*2));
@@ -180,7 +188,8 @@ AlbaNumbers calculatePolynomialRootsUsingBrentMethod(
         AlbaNumbers const& coefficients)
 {
     AlbaNumbers result;
-    AlbaNumbers valuesForRootFinding(previousDerivativeRoots);    AlbaNumber maxAbsoluteValue(getMaxAbsoluteValueForRootFinding(coefficients));
+    AlbaNumbers valuesForRootFinding(previousDerivativeRoots);
+    AlbaNumber maxAbsoluteValue(getMaxAbsoluteValueForRootFinding(coefficients));
     valuesForRootFinding.emplace_back(maxAbsoluteValue*-1);
     valuesForRootFinding.emplace_back(maxAbsoluteValue);
     sort(valuesForRootFinding.begin(), valuesForRootFinding.end());
@@ -201,7 +210,8 @@ AlbaNumbers calculatePolynomialRootsUsingBrentMethod(
 AlbaNumber getMaxAbsoluteValueForRootFinding(AlbaNumbers const& coefficients)
 {
     AlbaNumber result(0);
-    if(!coefficients.empty())    {
+    if(!coefficients.empty())
+    {
         result = max(getAbsoluteValue(coefficients.front()), getAbsoluteValue(coefficients.back()));
     }
     return result;
@@ -210,7 +220,8 @@ AlbaNumber getMaxAbsoluteValueForRootFinding(AlbaNumbers const& coefficients)
 AlbaNumbers getDerivativeCoefficients(AlbaNumbers const& coefficients)
 {
     AlbaNumbers derivativeCoefficients(coefficients);
-    if(!derivativeCoefficients.empty())    {
+    if(!derivativeCoefficients.empty())
+    {
         derivativeCoefficients.pop_back();
         AlbaNumber derivativeMultiplier = derivativeCoefficients.size();
         for(AlbaNumber & derivativeCoefficient : derivativeCoefficients)
@@ -228,7 +239,8 @@ Monomials getMonomialsWithExponentsInOrder(
         Monomial const& lastInPolynomial)
 {
     Monomials monomialsWithExponentsInOrder;
-    for(unsigned int i=0; i<=exponentDivisor; i++)    {
+    for(unsigned int i=0; i<=exponentDivisor; i++)
+    {
         Monomial firstPart(firstInPolynomial);
         firstPart.raiseToPowerNumber(exponentDivisor-i);
         Monomial secondPart(lastInPolynomial);

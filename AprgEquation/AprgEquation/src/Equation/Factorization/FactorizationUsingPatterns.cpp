@@ -38,7 +38,8 @@ Polynomials factorizeUsingPatternsIfPossible(Polynomial const& polynomial)
 
 Polynomials factorizeDifferenceOfSquaresIfPossible(Polynomial const& polynomial)
 {
-    Polynomials result;    if(isDifferenceOfSquares(polynomial))
+    Polynomials result;
+    if(isDifferenceOfSquares(polynomial))
     {
         addFactorsOfDifferenceOfSquares(result, polynomial);
     }
