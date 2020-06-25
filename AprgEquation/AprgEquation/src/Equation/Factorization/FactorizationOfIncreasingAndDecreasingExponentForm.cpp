@@ -88,15 +88,14 @@ void factorizePolynomialForm(
         Polynomial rootPolynomial{rootFirstMonomial, rootSecondMonomial};
         PolynomialOverPolynomial divideProcess(remainingPolynomial, rootPolynomial);
         PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(divideProcess.divide());
-        simplifyPolynomialThenEmplaceBack(result, rootPolynomial);
+        simplifyPolynomialThenEmplaceBackIfNotEmpty(result, rootPolynomial);
         remainingPolynomial = quotientAndRemainder.quotient;
     }
     if(!remainingPolynomial.isOne())
     {
-        simplifyPolynomialThenEmplaceBack(result, remainingPolynomial);
+        simplifyPolynomialThenEmplaceBackIfNotEmpty(result, remainingPolynomial);
     }
 }
-
 void fixCoefficientsOfFactors(
         AlbaNumber & aCoefficient,
         AlbaNumber & rootFirstCoefficient,

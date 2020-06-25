@@ -24,11 +24,10 @@ Polynomials factorizePolynomials(Polynomials const& polynomials)
         Polynomials factorizedPolynomials(factorize(polynomialToFactorize));
         if(factorizedPolynomials.size() == 1)
         {
-            simplifyPolynomialThenEmplaceBack(result, polynomialToFactorize);
+            simplifyPolynomialThenEmplaceBackIfNotEmpty(result, polynomialToFactorize);
         }
         else
-        {
-            copy(factorizedPolynomials.cbegin(), factorizedPolynomials.cend(), back_inserter(result));
+        {            copy(factorizedPolynomials.cbegin(), factorizedPolynomials.cend(), back_inserter(result));
         }
     }
     return result;
@@ -41,11 +40,10 @@ Polynomials returnPolynomialsOrSinglePolynomialIfEmpty(
     Polynomials result(polynomials);
     if(result.empty())
     {
-        simplifyPolynomialThenEmplaceBack(result, polynomial);
+        simplifyPolynomialThenEmplaceBackIfNotEmpty(result, polynomial);
     }
     return result;
 }
-
 Polynomials factorizeCommonMonomial(Polynomial const& polynomial)
 {
     return returnPolynomialsOrSinglePolynomialIfEmpty(
@@ -64,12 +62,11 @@ Polynomials factorizeCommonMonomialIfPossible(Polynomial const& polynomial)
             Polynomial reducedPolynomial(polynomial);
             reducedPolynomial.divideMonomial(gcfMonomial);
             reducedPolynomial.simplify();
-            simplifyPolynomialThenEmplaceBack(result, createPolynomialFromMonomial(gcfMonomial));
-            simplifyPolynomialThenEmplaceBack(result, reducedPolynomial);
+            simplifyPolynomialThenEmplaceBackIfNotEmpty(result, createPolynomialFromMonomial(gcfMonomial));
+            simplifyPolynomialThenEmplaceBackIfNotEmpty(result, reducedPolynomial);
         }
     }
-    return result;
-}
+    return result;}
 
 bool isPerfectSquare(Monomial const& monomial)
 {
@@ -107,15 +104,14 @@ bool areExponentsDivisible(Monomial const& monomial, unsigned int const divisor)
     return result;
 }
 
-void simplifyPolynomialThenEmplaceBack(Polynomials & polynomials, Polynomial const& polynomial)
+void simplifyPolynomialThenEmplaceBackIfNotEmpty(Polynomials & polynomials, Polynomial const& polynomial)
 {
     Polynomial simplifiedPolynomial(polynomial);
     simplifiedPolynomial.simplify();
-    polynomials.emplace_back(simplifiedPolynomial);
+    emplaceBackIfNotEmpty(polynomials, simplifiedPolynomial);
 }
 
-void emplaceBackIfNotEmpty(Polynomials & polynomials, Polynomial const& polynomial)
-{
+void emplaceBackIfNotEmpty(Polynomials & polynomials, Polynomial const& polynomial){
     if(!polynomial.isEmpty())
     {
         polynomials.emplace_back(polynomial);

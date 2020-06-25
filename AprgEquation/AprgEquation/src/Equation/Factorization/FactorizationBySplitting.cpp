@@ -88,11 +88,10 @@ Polynomials factorizeSmallerPolynomialsByFactoringOutCommonFactors(Polynomials c
             combinePolynomialsByAdditionAndThenEmplaceBack(result, remainingSmallerPolynomials);
             for(Polynomial const& commonFactor : commonFactors)
             {
-                simplifyPolynomialThenEmplaceBack(result, commonFactor);
+                simplifyPolynomialThenEmplaceBackIfNotEmpty(result, commonFactor);
             }
         }
-    }
-    return result;
+    }    return result;
 }
 
 Polynomials factorizeSmallerPolynomialsBySubstitutingCommonFactorsToVariables(Polynomials const& smallerPolynomials)
@@ -132,11 +131,10 @@ Polynomials factorizeSmallerPolynomialsBySubstitutingCommonFactorsToVariables(Po
                 for(Polynomial const& factorizedPolynomialWithVariables : factorizedPolynomialsWithVariables)
                 {
                     Polynomial finalPolynomial(createPolynomialIfPossible(substitution.performSubstitutionTo(factorizedPolynomialWithVariables)));
-                    result.emplace_back(finalPolynomial);
+                    simplifyPolynomialThenEmplaceBackIfNotEmpty(result, finalPolynomial);
                 }
             }
-        }
-    }
+        }    }
     return result;
 }
 
@@ -316,11 +314,10 @@ void combinePolynomialsByAdditionAndThenEmplaceBack(Polynomials & result, Polyno
     {
         combinedPolynomial.addPolynomial(smallerPolynomial);
     }
-    simplifyPolynomialThenEmplaceBack(result, combinedPolynomial);
+    simplifyPolynomialThenEmplaceBackIfNotEmpty(result, combinedPolynomial);
 }
 
 }
-
 }
 
 }
