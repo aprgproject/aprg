@@ -19,6 +19,7 @@ TEST(TermsOverTermsTest, ConstructionWorks)
     TermsOverTerms termsOverTerms1(Terms{}, Terms{});
     TermsOverTerms termsOverTerms2({Term(5)}, {Term("x")});
     TermsOverTerms termsOverTerms3({termWithDetails}, {termWithDetails});
+
     EXPECT_TRUE(termsOverTerms1.getNumerators().empty());
     EXPECT_TRUE(termsOverTerms1.getDenominators().empty());
     Terms numeratorsToVerify1(termsOverTerms2.getNumerators());

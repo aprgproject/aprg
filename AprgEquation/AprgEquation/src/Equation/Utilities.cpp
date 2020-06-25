@@ -483,7 +483,8 @@ Expression createAndWrapExpressionFromATerm(Term const& term)
     return Expression(term);
 }
 
-Expression createOrCopyExpressionFromATerm(Term const& term){
+Expression createOrCopyExpressionFromATerm(Term const& term)
+{
     Expression result;
     if(!term.isEmpty())
     {
@@ -496,7 +497,8 @@ Expression createOrCopyExpressionFromATerm(Term const& term){
             result=Expression(term);
         }
     }
-    return result;}
+    return result;
+}
 
 Expression createExpressionIfPossible(Terms const& terms)
 {
@@ -607,6 +609,7 @@ Term convertExpressionToSimplestTerm(Expression const& expression)
     }
     return newTerm;
 }
+
 Term convertFunctionToSimplestTerm(Function const& functionAsParameter)
 {
     Term newTerm(functionAsParameter);

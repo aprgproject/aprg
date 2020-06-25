@@ -226,6 +226,7 @@ TEST(TermWithDetailsTest, GetStringForTermWithDetailsWorks)
 
     EXPECT_EQ("[10][[NEG]]", getString(termWithDetails));
 }
+
 TEST(TermWithDetailsTest, GetStringForTermsWithDetailsWorks)
 {
     TermsWithDetails termsWithDetails;
@@ -234,6 +235,7 @@ TEST(TermWithDetailsTest, GetStringForTermsWithDetailsWorks)
 
     EXPECT_EQ("[10][[NEG]], [20][[POS]]", getString(termsWithDetails));
 }
+
 TEST(UtilitiesTest, CreateNewTermAndReturnSharedPointerWorks)
 {
     BaseTermSharedPointer sharedPointer(dynamic_cast<BaseTerm*>(new Term(9652)));
@@ -398,6 +400,7 @@ TEST(UtilitiesTest, CreateExpressionInExpressionWorks)
     EXPECT_EQ(expressionToExpect1, expressionToVerify1);
     EXPECT_EQ(expressionToExpect2, expressionToVerify2);
 }
+
 TEST(UtilitiesTest, CreateAndWrapExpressionFromATermWorks)
 {
     Expression expression1(createExpressionIfPossible({Term(254)}));
@@ -610,7 +613,8 @@ TEST(UtilitiesTest, ConvertExpressionToSimplestTermWorks)
     EXPECT_EQ(Term(444), termToVerify3);
 }
 
-TEST(UtilitiesTest, ConvertFunctionToSimplestTermWorks){
+TEST(UtilitiesTest, ConvertFunctionToSimplestTermWorks)
+{
     Function function1;
     Function function2("functionName", createOrCopyExpressionFromATerm(Term(5)), [](Constant const&  constant) -> Constant
     {
@@ -838,6 +842,7 @@ TEST(UtilitiesTest, SegregateNonExpressionsAndExpressionsWorks)
     termsWithAssociation.putTermWithPositiveAssociation(termExpression);
 
     segregateNonExpressionsAndExpressions(termsWithAssociation.getTermsWithDetails(), termsWithNonExpressions, termsWithExpressions);
+
     ASSERT_EQ(1u, termsWithNonExpressions.size());
     TermWithDetails const& termWithDetails1(termsWithNonExpressions.at(0));
     EXPECT_EQ(Term(753), getTermConstReferenceFromSharedPointer(termWithDetails1.baseTermSharedPointer));
@@ -857,6 +862,7 @@ TEST(UtilitiesTest, SegregateTermsWithPositiveAndNegativeAssociationsWorks)
     termsWithAssociation.putTermWithPositiveAssociation(Term(159));
 
     segregateTermsWithPositiveAndNegativeAssociations(termsWithAssociation.getTermsWithDetails(), termsInPositive, termsInNegative);
+
     ASSERT_EQ(1u, termsInPositive.size());
     TermWithDetails const& termWithDetails1(termsInPositive.at(0));
     EXPECT_EQ(Term(159), getTermConstReferenceFromSharedPointer(termWithDetails1.baseTermSharedPointer));

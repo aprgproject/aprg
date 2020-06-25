@@ -48,7 +48,8 @@ Term SubstitutionOfVariablesToExpressions::performSubstitutionTo(Variable const&
         result = Term(simplifyAndConvertExpressionToSimplestTerm(getExpressionForVariable(variableName)));
     }
     else
-    {        result = Term(variable);
+    {
+        result = Term(variable);
     }
     return result;
 }
@@ -75,7 +76,8 @@ Term SubstitutionOfVariablesToExpressions::performSubstitutionTo(Function const&
 
 Term SubstitutionOfVariablesToExpressions::performSubstitutionTo(Term const& term) const
 {
-    Term newTerm;    if(term.isVariable())
+    Term newTerm(term);
+    if(term.isVariable())
     {
         newTerm = performSubstitutionTo(term.getVariableConstReference());
     }
@@ -91,9 +93,13 @@ Term SubstitutionOfVariablesToExpressions::performSubstitutionTo(Term const& ter
     {
         newTerm = performSubstitutionTo(term.getExpressionConstReference());
     }
-    //newTerm.simplify();
+    else if(term.isFunction())
+    {
+        newTerm = performSubstitutionTo(term.getFunctionConstReference());
+    }
     return newTerm;
 }
+
 Expression SubstitutionOfVariablesToExpressions::performSubstitutionForMonomial(Monomial const& monomial) const
 {
     Monomial newMonomial(createMonomialFromConstant(monomial.getConstantConstReference()));
@@ -144,7 +150,8 @@ Function SubstitutionOfVariablesToExpressions::performSubstitutionForFunction(Fu
 
 void SubstitutionOfVariablesToExpressions::performSubstitutionForTermsWithAssociation(TermsWithAssociation & termsWithAssociation) const
 {
-    for(TermWithDetails & termWithDetails : termsWithAssociation.getTermsWithDetailsReference())    {
+    for(TermWithDetails & termWithDetails : termsWithAssociation.getTermsWithDetailsReference())
+    {
         Term & term(getTermReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
         term = performSubstitutionTo(term);
     }
@@ -155,7 +162,7 @@ void SubstitutionOfVariablesToExpressions::putVariablesWithExpressions(
 {
     for(VariableExpressionPair const& variableValuesPair : variablesWithExpressions)
     {
-        putVariableWithValue(variableValuesPair.first, variableValuesPair.second);
+        putVariableWithExpression(variableValuesPair.first, variableValuesPair.second);
     }
 }
 
@@ -164,11 +171,11 @@ void SubstitutionOfVariablesToExpressions::putVariablesWithExpressions(
 {
     for(VariableExpressionPair const& variableValuesPair : variablesWithExpressions)
     {
-        putVariableWithValue(variableValuesPair.first, variableValuesPair.second);
+        putVariableWithExpression(variableValuesPair.first, variableValuesPair.second);
     }
 }
 
-void SubstitutionOfVariablesToExpressions::putVariableWithValue(string const& variable, Expression const& expression)
+void SubstitutionOfVariablesToExpressions::putVariableWithExpression(string const& variable, Expression const& expression)
 {
     m_variableToExpressionsMap[variable]=expression;
 }

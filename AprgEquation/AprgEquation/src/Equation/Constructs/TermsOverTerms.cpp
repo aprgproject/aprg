@@ -62,6 +62,7 @@ TermsWithDetails TermsOverTerms::getNumeratorAndDenominatorAsTermWithDetails() c
     }
     return result;
 }
+
 std::string TermsOverTerms::getDisplayableString() const
 {
     stringstream result;

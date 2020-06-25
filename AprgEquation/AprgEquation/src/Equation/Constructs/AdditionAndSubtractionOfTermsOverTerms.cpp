@@ -34,6 +34,7 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpression() const
     combinedExpression.putTermWithDivisionIfNeeded(Term(combinedDenominator));
     return combinedExpression;
 }
+
 Terms AdditionAndSubtractionOfTermsOverTerms::getLcmOfDenominatorTerms() const
 {
     Terms lcmTerms;
@@ -206,6 +207,7 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedDenominatorExpress
     }
     return combinedDenominator;
 }
+
 Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpressionForNumeratorOnIndex(
         unsigned int numeratorIndex,
         Terms const& lcmDenominatorTerms) const
@@ -217,7 +219,8 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpressionForNumer
         combinedNumeratorOnIndex.putTermWithMultiplicationIfNeeded(numeratorTermOnIndex);
     }
     if(combinedNumeratorOnIndex.isEmpty())
-    {        combinedNumeratorOnIndex = createExpressionIfPossible({Term(1)});
+    {
+        combinedNumeratorOnIndex = createExpressionIfPossible({Term(1)});
     }
     return combinedNumeratorOnIndex;
 }
@@ -236,6 +239,7 @@ void AdditionAndSubtractionOfTermsOverTerms::combineExpressionAsAddOrSubtract(
         combinedExpression.putTermWithSubtractionIfNeeded(Term(expression));
     }
 }
+
 TermsOverTerms AdditionAndSubtractionOfTermsOverTerms::getSimplifiedTermsOverTerms(TermsOverTerms const& termsOverTerms)
 {
     TermsOverTerms termsOverTermsSimplified(termsOverTerms);

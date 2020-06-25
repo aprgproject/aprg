@@ -19,6 +19,7 @@ Term createTermWithAnExpressionAdding2Terms(Term const& term1, Term const& term2
     newExpression.putTermWithAdditionIfNeeded(term2);
     return convertExpressionToSimplestTerm(newExpression);
 }
+
 Term createTermAddingAnExpressionAndATerm(Expression const& expression, Term const& term)
 {
     Expression newExpression(expression);
@@ -32,6 +33,7 @@ Term createTermWithAnExpressionSubtracting2Terms(Term const& term1, Term const& 
     newExpression.putTermWithSubtractionIfNeeded(term2);
     return convertExpressionToSimplestTerm(newExpression);
 }
+
 Term createTermSubtractingAnExpressionAndATerm(Expression const& expression, Term const& term)
 {
     Expression newExpression(expression);
@@ -45,6 +47,7 @@ Term createTermWithAnExpressionMultiplying2Terms(Term const& term1, Term const& 
     newExpression.putTermWithMultiplicationIfNeeded(term2);
     return convertExpressionToSimplestTerm(newExpression);
 }
+
 Term createTermMultiplyingAnExpressionAndATerm(Expression const& expression, Term const& term)
 {
     Expression newExpression(expression);
@@ -58,6 +61,7 @@ Term createTermWithAnExpressionDividing2Terms(Term const& term1, Term const& ter
     newExpression.putTermWithDivisionIfNeeded(term2);
     return convertExpressionToSimplestTerm(newExpression);
 }
+
 Term createTermDividingAnExpressionAndATerm(Expression const& expression, Term const& term)
 {
     Expression newExpression(expression);
@@ -71,12 +75,14 @@ Term createTermWithAnExpressionRaisingToPower2Terms(Term const& term1, Term cons
     newExpression.putTermWithRaiseToPowerIfNeeded(term2);
     return convertExpressionToSimplestTerm(newExpression);
 }
+
 Term createTermRaisingToPowerAnExpressionAndATerm(Expression const& expression, Term const& term)
 {
     Expression newExpression(expression);
     newExpression.putTermWithRaiseToPowerIfNeeded(term);
     return convertExpressionToSimplestTerm(newExpression);
 }
+
 
 
 //Unary plus: +a

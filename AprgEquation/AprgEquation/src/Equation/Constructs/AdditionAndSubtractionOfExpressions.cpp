@@ -44,6 +44,7 @@ TermsWithDetails AdditionAndSubtractionOfExpressions::getAsTermsWithDetails() co
     }
     return result;
 }
+
 void AdditionAndSubtractionOfExpressions::putAsAddition(Expression const& expression)
 {
     putItem(expression, TermAssociationType::Positive);
@@ -110,6 +111,7 @@ bool AdditionAndSubtractionOfExpressions::mergeForAdditionAndSubtractionAndRetur
         accumulateTermsForAdditionAndSubtraction(resultMergeTerm, termsToMerge);
         expression1 = createOrCopyExpressionFromATerm(resultMergeTerm*Term(uniqueExpression1));
         expression2.clear();
+
         isMerged = true;
     }
     return isMerged;
