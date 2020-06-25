@@ -14,10 +14,10 @@ namespace equation
 
 TEST(SubstitutionOfTermsToTermsTest, ConstructionWorks)
 {
+    SubstitutionOfTermsToTerms();
     SubstitutionOfTermsToTerms({{Term("x"), Term(2)}, {Term("y"), Term(5)}});
     TermToTermMap variableWithValues{{Term("x"), Term(2)}, {Term("y"), Term(5)}};
-    SubstitutionOfTermsToTerms{variableWithValues};
-}
+    SubstitutionOfTermsToTerms{variableWithValues};}
 
 TEST(SubstitutionOfTermsToTermsTest, IsTermFoundWorks)
 {
