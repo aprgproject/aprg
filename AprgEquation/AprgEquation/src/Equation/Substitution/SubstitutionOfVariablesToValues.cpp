@@ -12,10 +12,12 @@ namespace alba
 namespace equation
 {
 
+SubstitutionOfVariablesToValues::SubstitutionOfVariablesToValues()
+{}
+
 SubstitutionOfVariablesToValues::SubstitutionOfVariablesToValues(std::initializer_list<VariableValuePair> const& variablesWithValues)
 {
-    putVariablesWithValues(variablesWithValues);
-}
+    putVariablesWithValues(variablesWithValues);}
 
 SubstitutionOfVariablesToValues::SubstitutionOfVariablesToValues(VariablesToValuesMap const& variablesWithValues)
 {

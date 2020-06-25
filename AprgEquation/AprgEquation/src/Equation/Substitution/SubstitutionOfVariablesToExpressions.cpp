@@ -12,10 +12,12 @@ namespace alba
 namespace equation
 {
 
+SubstitutionOfVariablesToExpressions::SubstitutionOfVariablesToExpressions()
+{}
+
 SubstitutionOfVariablesToExpressions::SubstitutionOfVariablesToExpressions(
         initializer_list<VariableExpressionPair> const& variablesWithExpressions)
-{
-    putVariablesWithExpressions(variablesWithExpressions);
+{    putVariablesWithExpressions(variablesWithExpressions);
 }
 
 SubstitutionOfVariablesToExpressions::SubstitutionOfVariablesToExpressions(
