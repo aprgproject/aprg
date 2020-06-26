@@ -14,12 +14,10 @@ namespace Factorization
 
 Polynomials factorizeIncreasingAndDecreasingExponentsForm(Polynomial const& polynomial);
 Polynomials factorizeIncreasingAndDecreasingExponentsFormIfPossible(Polynomial const& polynomial);
-void factorizePolynomialForm(
-        Polynomials & result,
+Polynomials factorizePolynomialForm(
         Polynomial const& polynomial,
         AlbaNumbers const& coefficients,
-        Monomial::VariablesToExponentsMap const& firstVariableExponent,
-        Monomial::VariablesToExponentsMap const& secondVariableExponent);
+        Monomial::VariablesToExponentsMap const& firstVariableExponent,        Monomial::VariablesToExponentsMap const& secondVariableExponent);
 void fixCoefficientsOfFactors(
         AlbaNumber & aCoefficient,
         AlbaNumber & rootFirstCoefficient,
