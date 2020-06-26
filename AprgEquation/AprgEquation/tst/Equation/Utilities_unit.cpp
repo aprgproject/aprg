@@ -247,6 +247,7 @@ TEST(TermWithDetailsTest, CreateVariableNameForSubstitutionWorks)
 TEST(UtilitiesTest, CreateNewTermAndReturnSharedPointerWorks)
 {
     BaseTermSharedPointer sharedPointer(dynamic_cast<BaseTerm*>(new Term(9652)));
+
     BaseTermSharedPointer sharedPointerToVerify(createNewTermAndReturnSharedPointer(sharedPointer));
 
     Term const& termToVerify(getTermConstReferenceFromSharedPointer(sharedPointerToVerify));

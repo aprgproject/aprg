@@ -811,7 +811,8 @@ Monomial getMonomialWithMaximumExponentsInMonomials(Monomials const& monomials)
 
 void segregateMonomialsAndNonMonomials(
         Terms const& termsToSegregate,
-        Terms & monomials,        Terms & nonMonomials)
+        Terms & monomials,
+        Terms & nonMonomials)
 {
     for(Term const& termToSegregate : termsToSegregate)
     {

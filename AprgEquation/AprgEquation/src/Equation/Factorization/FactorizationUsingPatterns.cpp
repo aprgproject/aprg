@@ -87,7 +87,8 @@ void addFactorsOfDifferenceOfSquares(Polynomials & result, Polynomial const& pol
     simplifyPolynomialThenEmplaceBackIfNotEmpty(result, Polynomial{firstMonomial, secondMonomial});
 }
 
-void addFactorsOfDifferenceOfCubes(Polynomials & result, Polynomial const& polynomial){
+void addFactorsOfDifferenceOfCubes(Polynomials & result, Polynomial const& polynomial)
+{
     Monomials monomials(polynomial.getMonomialsConstReference());
     Monomial firstMonomial(monomials.at(0));
     Monomial secondMonomial(monomials.at(1));
@@ -101,7 +102,8 @@ void addFactorsOfDifferenceOfCubes(Polynomials & result, Polynomial const& polyn
         simplifyPolynomialThenEmplaceBackIfNotEmpty(result, createPolynomialFromConstant(Constant(-1)));
     }
     firstMonomial.raiseToPowerNumber(AlbaNumber(1, 3));
-    secondMonomial.raiseToPowerNumber(AlbaNumber(1, 3));    Monomial firstMonomialSquared(firstMonomial);
+    secondMonomial.raiseToPowerNumber(AlbaNumber(1, 3));
+    Monomial firstMonomialSquared(firstMonomial);
     Monomial secondMonomialSquared(secondMonomial);
     Monomial productOfFirstAndSecond(firstMonomial);
     firstMonomialSquared.raiseToPowerNumber(2);
@@ -112,7 +114,8 @@ void addFactorsOfDifferenceOfCubes(Polynomials & result, Polynomial const& polyn
     simplifyPolynomialThenEmplaceBackIfNotEmpty(result, Polynomial{firstMonomialSquared, productOfFirstAndSecond, secondMonomialSquared});
 }
 
-void addFactorsOfSumOfCubes(Polynomials & result, Polynomial const& polynomial){
+void addFactorsOfSumOfCubes(Polynomials & result, Polynomial const& polynomial)
+{
     Monomials monomials(polynomial.getMonomialsConstReference());
     Monomial firstMonomial(monomials.at(0));
     Monomial secondMonomial(monomials.at(1));
@@ -123,7 +126,8 @@ void addFactorsOfSumOfCubes(Polynomials & result, Polynomial const& polynomial){
         simplifyPolynomialThenEmplaceBackIfNotEmpty(result, createPolynomialFromConstant(Constant(-1)));
     }
     firstMonomial.raiseToPowerNumber(AlbaNumber(1, 3));
-    secondMonomial.raiseToPowerNumber(AlbaNumber(1, 3));    Monomial firstMonomialSquared(firstMonomial);
+    secondMonomial.raiseToPowerNumber(AlbaNumber(1, 3));
+    Monomial firstMonomialSquared(firstMonomial);
     Monomial secondMonomialSquared(secondMonomial);
     Monomial productOfFirstAndSecond(firstMonomial);
     firstMonomialSquared.raiseToPowerNumber(2);
@@ -134,7 +138,8 @@ void addFactorsOfSumOfCubes(Polynomials & result, Polynomial const& polynomial){
     simplifyPolynomialThenEmplaceBackIfNotEmpty(result, Polynomial{firstMonomialSquared, productOfFirstAndSecond, secondMonomialSquared});
 }
 
-bool isDifferenceOfSquares(Polynomial const& polynomial){
+bool isDifferenceOfSquares(Polynomial const& polynomial)
+{
     bool result(false);
     Monomials monomials(polynomial.getMonomialsConstReference());
     if(monomials.size() == 2)

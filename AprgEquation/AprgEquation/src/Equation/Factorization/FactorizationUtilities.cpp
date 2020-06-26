@@ -27,7 +27,8 @@ Polynomials factorizePolynomials(Polynomials const& polynomials)
             simplifyPolynomialThenEmplaceBackIfNotEmpty(result, polynomialToFactorize);
         }
         else
-        {            copy(factorizedPolynomials.cbegin(), factorizedPolynomials.cend(), back_inserter(result));
+        {
+            copy(factorizedPolynomials.cbegin(), factorizedPolynomials.cend(), back_inserter(result));
         }
     }
     return result;
@@ -44,6 +45,7 @@ Polynomials returnPolynomialsOrSinglePolynomialIfEmpty(
     }
     return result;
 }
+
 Polynomials factorizeCommonMonomial(Polynomial const& polynomial)
 {
     return returnPolynomialsOrSinglePolynomialIfEmpty(
@@ -66,7 +68,8 @@ Polynomials factorizeCommonMonomialIfPossible(Polynomial const& polynomial)
             simplifyPolynomialThenEmplaceBackIfNotEmpty(result, reducedPolynomial);
         }
     }
-    return result;}
+    return result;
+}
 
 bool isPerfectSquare(Monomial const& monomial)
 {
@@ -111,7 +114,8 @@ void simplifyPolynomialThenEmplaceBackIfNotEmpty(Polynomials & polynomials, Poly
     emplaceBackIfNotEmpty(polynomials, simplifiedPolynomial);
 }
 
-void emplaceBackIfNotEmpty(Polynomials & polynomials, Polynomial const& polynomial){
+void emplaceBackIfNotEmpty(Polynomials & polynomials, Polynomial const& polynomial)
+{
     if(!polynomial.isEmpty())
     {
         polynomials.emplace_back(polynomial);

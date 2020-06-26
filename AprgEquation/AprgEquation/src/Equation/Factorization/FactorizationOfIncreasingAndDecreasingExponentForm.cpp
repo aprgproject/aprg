@@ -96,6 +96,7 @@ void factorizePolynomialForm(
         simplifyPolynomialThenEmplaceBackIfNotEmpty(result, remainingPolynomial);
     }
 }
+
 void fixCoefficientsOfFactors(
         AlbaNumber & aCoefficient,
         AlbaNumber & rootFirstCoefficient,
