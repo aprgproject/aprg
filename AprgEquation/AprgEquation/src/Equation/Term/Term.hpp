@@ -74,11 +74,9 @@ public:
     Function & getFunctionReference();
 
     void simplify();
-    void simplifyToCommonDenominator();
     void sort();
 
-private:
-    void resetBaseDataTermPointerBasedFromTerm(Term const& term);
+private:    void resetBaseDataTermPointerBasedFromTerm(Term const& term);
     TermType m_type;
     std::unique_ptr<BaseTermData> m_baseDataTermPointer;
 };

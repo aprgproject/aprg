@@ -1,6 +1,6 @@
-#include "FactorizationOfExpressions.hpp"
+#include "FactorizationOfExpression.hpp"
 
-#include <Equation/Factorization/FactorizationOfPolynomials.hpp>
+#include <Equation/Factorization/FactorizationOfPolynomial.hpp>
 #include <Equation/Term/Term.hpp>
 #include <Equation/Utilities.hpp>
 

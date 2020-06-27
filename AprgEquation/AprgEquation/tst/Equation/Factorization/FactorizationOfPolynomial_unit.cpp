@@ -1,4 +1,4 @@
-#include <Equation/Factorization/FactorizationOfPolynomials.hpp>
+#include <Equation/Factorization/FactorizationOfPolynomial.hpp>
 
 #include <gtest/gtest.h>
 

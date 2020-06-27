@@ -1,4 +1,4 @@
-#include "FactorizationOfPolynomials.hpp"
+#include "FactorizationOfPolynomial.hpp"
 
 #include <Equation/Factorization/FactorizationBySplitting.hpp>
 #include <Equation/Factorization/FactorizationOfIncreasingAndDecreasingExponentForm.hpp>

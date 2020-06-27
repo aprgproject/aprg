@@ -1,13 +1,14 @@
 #include <Equation/Constructs/TermsAggregator.hpp>
+#include <Equation/Simplification/SimplificationOfExpression.hpp>
 #include <Equation/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Equation/Utilities.hpp>
 
 #include <gtest/gtest.h>
 
+using namespace alba::equation::Simplification;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace equation
 {
@@ -56,11 +57,11 @@ TEST(ComboTest, SimplifyToCommonDenominatorAndSubstitutionWorksUsingExample4)
     aggregator.simplifyTerms();
     Terms simplifiedTerms(aggregator.getTermsConstReference());
     ASSERT_EQ(1u, simplifiedTerms.size());
-    Term & simplifiedTerm(simplifiedTerms.at(0));
-    simplifiedTerm.simplifyToCommonDenominator();
-    EXPECT_EQ(Term(AlbaNumber(-252, 25)), substitution.performSubstitutionTo(simplifiedTerm));
+    Expression simplifiedExpression(createExpressionIfPossible(simplifiedTerms));
+    SimplificationOfExpression simplification(simplifiedExpression);
+    simplification.simplifyToACommonDenominator();
+    EXPECT_EQ(Term(AlbaNumber(-252, 25)), substitution.performSubstitutionTo(simplification.getExpression()));
 }
 
 }
-
 }
