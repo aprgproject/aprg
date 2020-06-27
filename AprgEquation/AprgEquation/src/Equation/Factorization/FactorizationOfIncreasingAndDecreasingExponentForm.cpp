@@ -121,7 +121,8 @@ bool areAllMonomialsFoundInMonomialsWithExponentsInOrder(
         if(!polynomialWithExponentsInOrder.isVariableExponentInMonomialFound(monomialToCheck))
         {
             areAllMonomialsFoundInPolynomialWithExponentsInOrder = false;
-            break;        }
+            break;
+        }
     }
     return areAllMonomialsFoundInPolynomialWithExponentsInOrder;
 }

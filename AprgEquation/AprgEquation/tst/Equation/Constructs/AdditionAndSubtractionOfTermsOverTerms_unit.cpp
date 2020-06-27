@@ -282,6 +282,7 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionForLcmDeno
     Expression expressionToExpect(createExpressionIfPossible({Term(subExpression4), Term("/"), Term(12)}));
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
+
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionForRevisedNumeratorTermsWorks)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
@@ -301,6 +302,7 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionForRevised
     Expression expressionToExpect(createExpressionIfPossible({Term(subExpression4), Term("/"), Term(12)}));
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
+
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionUsingExample1Works)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;

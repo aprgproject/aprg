@@ -321,7 +321,8 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnMultiplyingAndDividingRaiseT
 TEST(SimplificationOfExpressionTest, SimplifyWorksOnRaiseToPowerIfBaseIsOneOrZero)
 {
     Expression expression1(createExpressionIfPossible({Term(1), Term("^"), Term("a"), Term("^"), Term("b")}));
-    Expression expression2(createExpressionIfPossible({Term(Constant(0)), Term("^"), Term("c"), Term("^"), Term("d")}));    SimplificationOfExpression simplification1(expression1);
+    Expression expression2(createExpressionIfPossible({Term(Constant(0)), Term("^"), Term("c"), Term("^"), Term("d")}));
+    SimplificationOfExpression simplification1(expression1);
     SimplificationOfExpression simplification2(expression2);
 
     simplification1.simplify();
@@ -338,7 +339,8 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnRaiseToPowerIfBaseIsOneOrZer
 TEST(SimplificationOfExpressionTest, SimplifyWorksOnRaiseToPowerIfExponentIsOne)
 {
     Expression expression1(createExpressionIfPossible({Term("a"), Term("^"), Term(1)}));
-    Expression expression2(createExpressionIfPossible({Term("b"), Term("^"), Term(1), Term("^"), Term(1), Term("^"), Term(1)}));    SimplificationOfExpression simplification1(expression1);
+    Expression expression2(createExpressionIfPossible({Term("b"), Term("^"), Term(1), Term("^"), Term(1), Term("^"), Term(1)}));
+    SimplificationOfExpression simplification1(expression1);
     SimplificationOfExpression simplification2(expression2);
 
     simplification1.simplify();
@@ -355,7 +357,8 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnRaiseToPowerIfExponentIsOne)
 TEST(SimplificationOfExpressionTest, SimplifyWorksOnRaiseToPowerIfExponentIsZero)
 {
     Expression expression1(createExpressionIfPossible({Term("a"), Term("^"), Term(Constant(0))}));
-    Expression expression2(createExpressionIfPossible({Term("b"), Term("^"), Term("a"), Term("^"), Term(Constant(0)), Term("^"), Term("b")}));    SimplificationOfExpression simplification1(expression1);
+    Expression expression2(createExpressionIfPossible({Term("b"), Term("^"), Term("a"), Term("^"), Term(Constant(0)), Term("^"), Term("b")}));
+    SimplificationOfExpression simplification1(expression1);
     SimplificationOfExpression simplification2(expression2);
 
     simplification1.simplify();
@@ -372,7 +375,8 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnRaiseToPowerIfExponentIsZero
 TEST(SimplificationOfExpressionTest, SimplifyWorksOnRaiseToPowerWithMultipleTerms)
 {
     Expression expression1(createExpressionIfPossible({Term("a"), Term("^"), Term("b"), Term("^"), Term("c"), Term("^"), Term("d")}));
-    Expression expression2(createExpressionIfPossible({Term("x"), Term("^"), Term(2), Term("^"), Term(3), Term("^"), Term("y")}));    SimplificationOfExpression simplification1(expression1);
+    Expression expression2(createExpressionIfPossible({Term("x"), Term("^"), Term(2), Term("^"), Term(3), Term("^"), Term("y")}));
+    SimplificationOfExpression simplification1(expression1);
     SimplificationOfExpression simplification2(expression2);
 
     simplification1.simplify();
@@ -397,7 +401,8 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnRaiseToPowerWithMultipleTerm
 TEST(SimplificationOfExpressionTest, SimplifyWorksMultiplyingPolynomialOverPolynomials)
 {
     Polynomial polynomial1{Monomial(3, {{"x", 2}}), Monomial(-12, {{"x", 1}}), Monomial(-2, {})};
-    Polynomial polynomial2{Monomial(1, {{"x", 2}}), Monomial(-6, {{"x", 1}}), Monomial(9, {})};    Polynomial polynomial3{Monomial(1, {{"x", 2}}), Monomial(4, {{"x", 1}}), Monomial(6, {})};
+    Polynomial polynomial2{Monomial(1, {{"x", 2}}), Monomial(-6, {{"x", 1}}), Monomial(9, {})};
+    Polynomial polynomial3{Monomial(1, {{"x", 2}}), Monomial(4, {{"x", 1}}), Monomial(6, {})};
     Polynomial polynomial4{Monomial(1, {{"x", 2}}), Monomial(6, {{"x", 1}}), Monomial(9, {})};
     Polynomial polynomial5{Monomial(3, {{"x", 4}}), Monomial(-32, {{"x", 2}}), Monomial(-80, {{"x", 1}}), Monomial(-12, {})};
     Polynomial polynomial6{Monomial(1, {{"x", 4}}), Monomial(-18, {{"x", 2}}), Monomial(81, {})};
@@ -422,7 +427,8 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksMultiplyingPolynomialOverPolyn
 TEST(SimplificationOfExpressionTest, SimplifyWorksInsideAFunction)
 {
     Function absoluteValueFunction(Functions::abs(createOrCopyExpressionFromATerm(Term(-100))));
-    Expression expressionToTest(createOrCopyExpressionFromATerm(absoluteValueFunction));    SimplificationOfExpression simplification(expressionToTest);
+    Expression expressionToTest(createOrCopyExpressionFromATerm(absoluteValueFunction));
+    SimplificationOfExpression simplification(expressionToTest);
 
     simplification.simplify();
 
@@ -440,7 +446,8 @@ TEST(SimplificationOfExpressionTest, SimplifyToACommonDenominatorWorks)
     simplification.simplify();
 
     Expression expressionToVerify(simplification.getExpression());
-    Expression expressionToExpect(                createExpressionIfPossible(
+    Expression expressionToExpect(
+                createExpressionIfPossible(
                     {
                         Term(Polynomial{Monomial(2, {{"x", 2}}), Monomial(10, {{"x", 1}}), Monomial(-3, {})}),
                         Term("/"),
@@ -458,7 +465,8 @@ TEST(SimplificationOfExpressionTest, SimplifyToACommonDenominatorWorksWithNegati
     simplification.simplify();
 
     Expression expressionToVerify(simplification.getExpression());
-    Expression expressionToExpect(                createExpressionIfPossible(
+    Expression expressionToExpect(
+                createExpressionIfPossible(
                     {
                         Term(Monomial(1, {{"x", 2}, {"z", 4}})),
                         Term("/"),
@@ -482,7 +490,8 @@ TEST(SimplificationOfExpressionTest, SimplifyToACommonDenominatorWorksOnExponent
     Expression subExpression3(createExpressionIfPossible({Term(2), Term("*"), Term(subExpression1)}));
     Expression subExpression4(createExpressionIfPossible({Term(1), Term("+"), Term(subExpression2), Term("+"), Term(subExpression3)}));
     Expression expressionToExpect(createExpressionIfPossible({Term(subExpression4), Term("/"), Term(polynomialToExpect)}));
-    EXPECT_EQ(expressionToExpect, expressionToVerify);}
+    EXPECT_EQ(expressionToExpect, expressionToVerify);
+}
 
 TEST(SimplificationOfExpressionTest, SimplifyToACommonDenominatorWorksOnExponentWithFractionExpressions)
 {
@@ -493,7 +502,8 @@ TEST(SimplificationOfExpressionTest, SimplifyToACommonDenominatorWorksOnExponent
     simplification.simplify();
 
     Expression expressionToVerify(simplification.getExpression());
-    Polynomial polynomialToExpect{Monomial(1, {{"x", 2}}), Monomial(-4, {})};    Expression subExpression(createExpressionIfPossible({Term(Monomial(2, {{"x", 1}})), Term("/"), Term(polynomialToExpect)}));
+    Polynomial polynomialToExpect{Monomial(1, {{"x", 2}}), Monomial(-4, {})};
+    Expression subExpression(createExpressionIfPossible({Term(Monomial(2, {{"x", 1}})), Term("/"), Term(polynomialToExpect)}));
     Expression expressionToExpect(createExpressionIfPossible({Term(2), Term("^"), Term(subExpression)}));
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
@@ -507,7 +517,8 @@ TEST(SimplificationOfExpressionTest, SimplifyToACommonDenominatorWorksInsideAFun
     simplification.simplify();
 
     Expression expressionToVerify(simplification.getExpression());
-    Expression expressionToExpect(                createExpressionIfPossible(
+    Expression expressionToExpect(
+                createExpressionIfPossible(
                     {
                         Term(Monomial(1, {{"x", 2}, {"z", 4}})),
                         Term("/"),

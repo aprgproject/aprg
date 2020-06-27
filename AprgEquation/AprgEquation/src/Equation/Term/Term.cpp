@@ -466,7 +466,8 @@ void Term::simplify()
 
 void Term::sort()
 {
-    if(isPolynomial())    {
+    if(isPolynomial())
+    {
         getPolynomialReference().sortMonomialsWithInversePriority();
     }
     else if(isExpression())

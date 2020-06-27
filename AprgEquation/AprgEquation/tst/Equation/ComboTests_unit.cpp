@@ -8,7 +8,8 @@
 using namespace alba::equation::Simplification;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace equation
 {
@@ -63,5 +64,7 @@ TEST(ComboTest, SimplifyToCommonDenominatorAndSubstitutionWorksUsingExample4)
     simplification.simplify();
     EXPECT_EQ(Term(AlbaNumber(-252, 25)), substitution.performSubstitutionTo(simplification.getExpression()));
 }
+
 }
+
 }

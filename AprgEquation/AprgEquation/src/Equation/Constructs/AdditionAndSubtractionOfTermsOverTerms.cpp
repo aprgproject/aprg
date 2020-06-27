@@ -34,6 +34,7 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpression() const
     combinedExpression.putTermWithDivisionIfNeeded(convertExpressionToSimplestTerm(combinedDenominator));
     return combinedExpression;
 }
+
 Terms AdditionAndSubtractionOfTermsOverTerms::getLcmOfDenominatorTerms() const
 {
     Terms lcmTerms;
