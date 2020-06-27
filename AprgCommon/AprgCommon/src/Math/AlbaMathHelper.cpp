@@ -238,10 +238,19 @@ bool isDivisible(unsigned int const dividend, unsigned int const divisor)
     return result;
 }
 
+bool isEven(unsigned int const number)
+{
+    return isDivisible(number, 2u);
+}
+
+bool isOdd(unsigned int const number)
+{
+    return !isDivisible(number, 2u);
+}
+
 bool isPerfectNthPower(
         unsigned int const value,
-        unsigned int const nthPower)
-{
+        unsigned int const nthPower){
     double valueRaiseToTheReciprocal = pow(value, static_cast<double>(1)/nthPower);
     return canConvertedToInteger(valueRaiseToTheReciprocal);
 }
