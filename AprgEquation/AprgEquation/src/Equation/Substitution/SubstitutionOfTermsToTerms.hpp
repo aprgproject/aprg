@@ -28,7 +28,8 @@ public:
     unsigned int getSize() const;
     Term getTermForTerm(Term const& term) const;
     Term performSubstitutionTo(Expression const& expression) const;
-    Term performSubstitutionTo(Function const& functionAsParameter) const;    Term performSubstitutionTo(Term const& term) const;
+    Term performSubstitutionTo(Function const& functionAsParameter) const;
+    Term performSubstitutionTo(Term const& term) const;
 
     void putTermsToTermsMapping(std::initializer_list<TermTermPair> const& variablesWithValues);
     void putTermsToTermsMapping(TermToTermMap const& variablesWithValues);
