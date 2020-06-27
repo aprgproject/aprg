@@ -91,11 +91,10 @@ bool Polynomial::isOneMonomial() const
     return m_monomials.size() == 1;
 }
 
-bool Polynomial::isVariableExponentContentFound(Monomial const& monomial) const
+bool Polynomial::isVariableExponentInMonomialFound(Monomial const& monomial) const
 {
     bool result(false);
-    for(Monomial const& monomialInternal : m_monomials)
-    {
+    for(Monomial const& monomialInternal : m_monomials)    {
         if(monomial.getVariablesToExponentsMapConstReference()
                 == monomialInternal.getVariablesToExponentsMapConstReference())
         {
@@ -106,10 +105,23 @@ bool Polynomial::isVariableExponentContentFound(Monomial const& monomial) const
     return result;
 }
 
+bool Polynomial::hasNegativeExponents() const
+{
+    bool result(false);
+    for(Monomial const& monomial : m_monomials)
+    {
+        if(monomial.hasNegativeExponents())
+        {
+            result = true;
+            break;
+        }
+    }
+    return result;
+}
+
 AlbaNumber Polynomial::getCoefficientOfVariableExponent(Monomial const& monomial) const
 {
-    AlbaNumber coefficient;
-    for(Monomial const& monomialInternal : m_monomials)
+    AlbaNumber coefficient;    for(Monomial const& monomialInternal : m_monomials)
     {
         if(monomial.getVariablesToExponentsMapConstReference()
                 == monomialInternal.getVariablesToExponentsMapConstReference())

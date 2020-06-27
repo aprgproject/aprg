@@ -279,11 +279,9 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionForLcmDeno
     Expression subExpression2(createExpressionIfPossible({Term(createMonomialFromConstant(4))}));
     Expression subExpression3(createExpressionIfPossible({Term(createMonomialFromConstant(3))}));
     Expression subExpression4(createExpressionIfPossible({Term(subExpression1), Term("+"), Term(subExpression2), Term("+"), Term(subExpression3)}));
-    Expression subExpression5(createExpressionIfPossible({Term(createMonomialFromConstant(12))}));
-    Expression expressionToExpect(createExpressionIfPossible({Term(subExpression4), Term("/"), Term(subExpression5)}));
+    Expression expressionToExpect(createExpressionIfPossible({Term(subExpression4), Term("/"), Term(12)}));
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
-
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionForRevisedNumeratorTermsWorks)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
@@ -300,11 +298,9 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionForRevised
     Expression subExpression2(createExpressionIfPossible({Term(11), Term("*"), Term(createMonomialFromConstant(4))}));
     Expression subExpression3(createExpressionIfPossible({Term(13), Term("*"), Term(createMonomialFromConstant(3))}));
     Expression subExpression4(createExpressionIfPossible({Term(subExpression1), Term("-"), Term(subExpression2), Term("+"), Term(subExpression3)}));
-    Expression subExpression5(createExpressionIfPossible({Term(createMonomialFromConstant(12))}));
-    Expression expressionToExpect(createExpressionIfPossible({Term(subExpression4), Term("/"), Term(subExpression5)}));
+    Expression expressionToExpect(createExpressionIfPossible({Term(subExpression4), Term("/"), Term(12)}));
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
-
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionUsingExample1Works)
 {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;

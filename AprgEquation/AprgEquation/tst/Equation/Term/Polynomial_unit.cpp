@@ -116,13 +116,12 @@ TEST(PolynomialTest, IsVariableExponentMapContentFoundWorks)
     Polynomial polynomial2{Monomial(6, {{"x", 1}})};
     Polynomial polynomial3{Monomial(6, {{"x", 1}}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
 
-    EXPECT_FALSE(polynomial1.isVariableExponentContentFound(Monomial(98, {{"x", 2}, {"y", 3}, {"z", 4}})));
-    EXPECT_FALSE(polynomial2.isVariableExponentContentFound(Monomial(98, {{"x", 2}, {"y", 3}, {"z", 4}})));
-    EXPECT_TRUE(polynomial3.isVariableExponentContentFound(Monomial(98, {{"x", 2}, {"y", 3}, {"z", 4}})));
+    EXPECT_FALSE(polynomial1.isVariableExponentInMonomialFound(Monomial(98, {{"x", 2}, {"y", 3}, {"z", 4}})));
+    EXPECT_FALSE(polynomial2.isVariableExponentInMonomialFound(Monomial(98, {{"x", 2}, {"y", 3}, {"z", 4}})));
+    EXPECT_TRUE(polynomial3.isVariableExponentInMonomialFound(Monomial(98, {{"x", 2}, {"y", 3}, {"z", 4}})));
 }
 
-TEST(PolynomialTest, GetCoefficientOfVariableExponentWorks)
-{
+TEST(PolynomialTest, GetCoefficientOfVariableExponentWorks){
     Polynomial polynomial1;
     Polynomial polynomial2{Monomial(6, {{"x", 1}})};
     Polynomial polynomial3{Monomial(6, {{"x", 1}}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};

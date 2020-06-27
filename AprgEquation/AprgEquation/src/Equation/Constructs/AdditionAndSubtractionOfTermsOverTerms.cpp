@@ -30,11 +30,10 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpression() const
     Expression combinedNumerator = getCombinedNumeratorExpression(lcmDenominatorTerms);
     Expression combinedDenominator = getCombinedDenominatorExpression(lcmDenominatorTerms);
     Expression combinedExpression;
-    combinedExpression.putTermWithMultiplicationIfNeeded(Term(combinedNumerator));
-    combinedExpression.putTermWithDivisionIfNeeded(Term(combinedDenominator));
+    combinedExpression.putTermWithMultiplicationIfNeeded(convertExpressionToSimplestTerm(combinedNumerator));
+    combinedExpression.putTermWithDivisionIfNeeded(convertExpressionToSimplestTerm(combinedDenominator));
     return combinedExpression;
 }
-
 Terms AdditionAndSubtractionOfTermsOverTerms::getLcmOfDenominatorTerms() const
 {
     Terms lcmTerms;
