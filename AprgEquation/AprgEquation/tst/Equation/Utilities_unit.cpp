@@ -21,9 +21,16 @@ TEST(UtilitiesTest, IsOperatorWorks)
     EXPECT_TRUE(isOperator("*"));
     EXPECT_TRUE(isOperator("/"));
     EXPECT_TRUE(isOperator("^"));
+    EXPECT_TRUE(isOperator("("));
+    EXPECT_TRUE(isOperator(")"));
+    EXPECT_TRUE(isOperator("=="));
+    EXPECT_TRUE(isOperator("!="));
+    EXPECT_TRUE(isOperator("<"));
+    EXPECT_TRUE(isOperator(">"));
+    EXPECT_TRUE(isOperator("<="));
+    EXPECT_TRUE(isOperator(">="));
     EXPECT_FALSE(isOperator("notAnOperator"));
 }
-
 TEST(UtilitiesTest, IsFunctionWorks)
 {
     EXPECT_FALSE(isFunction(""));

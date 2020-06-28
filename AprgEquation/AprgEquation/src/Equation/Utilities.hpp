@@ -13,12 +13,11 @@ namespace alba
 namespace equation
 {
 
-bool isOperator(std::string const& name);
-bool isFunction(std::string const& name);
+bool isOperator(std::string const& stringAsParameter);
+bool isFunction(std::string const& stringAsParameter);
 bool canBeMergedInAMonomialByAdditionOrSubtraction(Term const& term1, Term const& term2);
 bool canBeMergedInAMonomialByAdditionOrSubtraction(Monomial const& monomial1, Monomial const& monomial2);
-bool canBeMergedInAMonomialByAdditionOrSubtraction(Monomial const& monomial, Variable const& variable);
-bool canBeMergedInAMonomialByAdditionOrSubtraction(Variable const& variable1, Variable const& variable2);
+bool canBeMergedInAMonomialByAdditionOrSubtraction(Monomial const& monomial, Variable const& variable);bool canBeMergedInAMonomialByAdditionOrSubtraction(Variable const& variable1, Variable const& variable2);
 bool canBeConvertedToMonomial(Term const& term);
 bool canBeConvertedToPolynomial(Term const& term);
 bool willHaveNoEffectOnAdditionOrSubtraction(Term const& term);
