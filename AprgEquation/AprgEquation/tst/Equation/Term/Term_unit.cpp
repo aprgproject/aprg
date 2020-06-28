@@ -632,12 +632,11 @@ TEST(TermTest, GetDisplayableStringWorks)
     EXPECT_EQ("0", term2.getDisplayableString());
     EXPECT_EQ("length", term3.getDisplayableString());
     EXPECT_EQ("+", term4.getDisplayableString());
-    EXPECT_EQ("-1.5|distance^-3.75||power^4.5|", term5.getDisplayableString());
-    EXPECT_EQ("(3 + -1.5|distance^-3.75||power^4.5|)", term6.getDisplayableString());
+    EXPECT_EQ("-1.5[distance^-3.75][power^4.5]", term5.getDisplayableString());
+    EXPECT_EQ("(3 + -1.5[distance^-3.75][power^4.5])", term6.getDisplayableString());
     EXPECT_EQ("(5+interest)", term7.getDisplayableString());
     EXPECT_EQ("functionName(5)", term8.getDisplayableString());
 }
-
 TEST(TermTest, GetDebugStringWorks)
 {
     Term term1;
@@ -653,18 +652,17 @@ TEST(TermTest, GetDebugStringWorks)
     });
     Term term8(function1);
 
-    EXPECT_EQ("[Empty]", term1.getDebugString());
-    EXPECT_EQ("0[Constant]", term2.getDebugString());
-    EXPECT_EQ("length[Variable]", term3.getDebugString());
-    EXPECT_EQ("+[Operator]", term4.getDebugString());
-    EXPECT_EQ("-1.5|distance^-3.75||power^4.5|[Monomial]", term5.getDebugString());
-    EXPECT_EQ("(3 + -1.5|distance^-3.75||power^4.5|)[Polynomial]", term6.getDebugString());
-    EXPECT_EQ("( [+-]||5[Constant][POS]+interest[Variable][POS] )[Expression]", term7.getDebugString());
-    EXPECT_EQ("functionName( [?]||5[Constant][POS] )[Function]", term8.getDebugString());
+    EXPECT_EQ("{Empty}", term1.getDebugString());
+    EXPECT_EQ("0{Constant}", term2.getDebugString());
+    EXPECT_EQ("length{Variable}", term3.getDebugString());
+    EXPECT_EQ("+{Operator}", term4.getDebugString());
+    EXPECT_EQ("-1.5[distance^-3.75][power^4.5]{Monomial}", term5.getDebugString());
+    EXPECT_EQ("(3 + -1.5[distance^-3.75][power^4.5]){Polynomial}", term6.getDebugString());
+    EXPECT_EQ("( {+-}||5{Constant}{POS}+interest{Variable}{POS} ){Expression}", term7.getDebugString());
+    EXPECT_EQ("functionName( {?}||5{Constant}{POS} ){Function}", term8.getDebugString());
 }
 
-TEST(TermTest, SimplifyWorks)
-{
+TEST(TermTest, SimplifyWorks){
     Term term1(1475);
     Term term2(Monomial(1475,{}));
     Term term3(Polynomial{Monomial(1475,{})});

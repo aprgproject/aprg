@@ -396,12 +396,11 @@ string Term::getDebugString() const
     {
         result = getFunctionConstReference().getDebugString();
     }
-    result += "[";
+    result += "{";
     result += getEnumShortString(m_type);
-    result += "]";
+    result += "}";
     return result;
 }
-
 Constant & Term::getConstantReference()
 {
     assert(m_type==TermType::Constant);

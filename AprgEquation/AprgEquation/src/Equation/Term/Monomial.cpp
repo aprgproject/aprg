@@ -199,15 +199,16 @@ string Monomial::getDisplayableString() const
     result << m_constant.getDisplayableString();
     for(VariableExponentPair const& variableExponentsPair : m_variablesToExponentsMap)
     {
-        result << "|"
-               << variableExponentsPair.first
-               << "^"
-               << variableExponentsPair.second.getDisplayableString()
-               << "|";
+        result << "[" << variableExponentsPair.first;
+        AlbaNumber const& exponent(variableExponentsPair.second);
+        if(!(exponent.isIntegerType() && exponent.getInteger()==1))
+        {
+            result << "^" << variableExponentsPair.second.getDisplayableString();
+        }
+        result << "]";
     }
     return result.str();
 }
-
 void Monomial::simplify()
 {
     removeZeroExponents();

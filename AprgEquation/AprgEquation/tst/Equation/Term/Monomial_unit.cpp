@@ -316,14 +316,13 @@ TEST(MonomialTest, GetDisplayableStringWorks)
     Monomial monomial7(1, {});
 
     EXPECT_EQ("0", monomial1.getDisplayableString());
-    EXPECT_EQ("-54|x^6||y^-1.25|", monomial2.getDisplayableString());
-    EXPECT_EQ("-54|x^6|", monomial3.getDisplayableString());
-    EXPECT_EQ("-54|x^1|", monomial4.getDisplayableString());
-    EXPECT_EQ("0|x^1|", monomial5.getDisplayableString());
-    EXPECT_EQ("1|x^1|", monomial6.getDisplayableString());
+    EXPECT_EQ("-54[x^6][y^-1.25]", monomial2.getDisplayableString());
+    EXPECT_EQ("-54[x^6]", monomial3.getDisplayableString());
+    EXPECT_EQ("-54[x]", monomial4.getDisplayableString());
+    EXPECT_EQ("0[x]", monomial5.getDisplayableString());
+    EXPECT_EQ("1[x]", monomial6.getDisplayableString());
     EXPECT_EQ("1", monomial7.getDisplayableString());
 }
-
 TEST(MonomialTest, SimplifyWorks)
 {
     Monomial monomial1;
