@@ -27,10 +27,10 @@ public:
     using PixelSet = std::set<BitmapXY>;
 
     PixelInformationDatabase();
+    void saveAsPenPoint(BitmapXY const& bitmapPoint);
     void saveAsPenPoints(BitmapXYs const& bitmapPoints);
     void clear();
-    PixelInformation getPixelInformation(BitmapXY const& bitmapXY) const;
-    PixelInformation & getPixelInformationReferenceAndCreateIfNeeded(BitmapXY const& bitmapXY);
+    PixelInformation getPixelInformation(BitmapXY const& bitmapXY) const;    PixelInformation & getPixelInformationReferenceAndCreateIfNeeded(BitmapXY const& bitmapXY);
     PixelSet const & getPenPixelsConstReference() const;
     TwoDimensions::Circles & getPenCirclesReference();
     TwoDimensions::Circles const & getPenCirclesConstReference() const;
