@@ -17,7 +17,8 @@ class Plane
 
 public:
     Plane();
-    Plane(Point const& first, Point const& second, Point const& third);    Plane(
+    Plane(Point const& first, Point const& second, Point const& third);
+    Plane(
             double const aCoefficient,
             double const bCoefficient,
             double const cCoefficient,

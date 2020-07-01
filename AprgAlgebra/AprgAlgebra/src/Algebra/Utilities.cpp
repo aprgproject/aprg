@@ -187,6 +187,7 @@ unsigned int getOperatorPriority(string const& operatorString)
     }
     return result;
 }
+
 unsigned int getAssociationPriority(TermAssociationType const association)
 {
     unsigned int result(0);

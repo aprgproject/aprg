@@ -16,7 +16,8 @@ class Circle
     friend std::ostream & operator<<(std::ostream & out, Circle const& circle);
 public:
     using TraverseOperation = std::function<void(Point const&)>;
-    Circle();    Circle(Point const& center, double const radius);
+    Circle();
+    Circle(Point const& center, double const radius);
     bool operator==(Circle const& circle) const;
     bool operator!=(Circle const& circle) const;
     Point getCenter() const;

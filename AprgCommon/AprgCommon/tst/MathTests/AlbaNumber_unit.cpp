@@ -8,6 +8,7 @@ using namespace std;
 
 namespace alba
 {
+
 TEST(AlbaNumberTest, ConstructionWorksAsExpected)
 {
     AlbaNumber number1;
@@ -124,7 +125,8 @@ TEST(AlbaNumberTest, GetFractionDataWorksAsExpected)
     EXPECT_EQ(50000u, fractionData5.denominator);
 }
 
-TEST(AlbaNumberTest, GetDoubleWorksAsExpected){
+TEST(AlbaNumberTest, GetDoubleWorksAsExpected)
+{
     AlbaNumber number1;
     AlbaNumber number2(-81237);
     AlbaNumber number3(34095093u);
@@ -618,6 +620,7 @@ TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromFraction)
     AlbaNumber number6 = AlbaNumber(1234567890, 1234567891) ^ AlbaNumber(3);
     AlbaNumber number7 = AlbaNumber(1234567891) ^ AlbaNumber(1234567890, 1234567891);
     AlbaNumber number8 = AlbaNumber(1234567890, 1234567891) ^ AlbaNumber(1234567890, 1234567893);
+
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
     EXPECT_EQ(0, number1.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
@@ -632,7 +635,8 @@ TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromFraction)
     EXPECT_DOUBLE_EQ(0.90487772997589355, number5.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Double, number6.getType());
     EXPECT_DOUBLE_EQ(0.99999999757000013, number6.getDouble());
-    EXPECT_EQ(AlbaNumber::Type::Double, number7.getType());    EXPECT_DOUBLE_EQ(1234567870.0660145, number7.getDouble());
+    EXPECT_EQ(AlbaNumber::Type::Double, number7.getType());
+    EXPECT_DOUBLE_EQ(1234567870.0660145, number7.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Double, number8.getType());
     EXPECT_DOUBLE_EQ(0.99999999919000004, number8.getDouble());
 }

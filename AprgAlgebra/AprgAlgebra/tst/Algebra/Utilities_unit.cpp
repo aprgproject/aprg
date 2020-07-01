@@ -161,6 +161,7 @@ TEST(UtilitiesTest, GetOperatorLevelValueWorks)
     EXPECT_EQ(13u, getOperatorPriority(">="));
     EXPECT_EQ(0u, getOperatorPriority("operator"));
 }
+
 TEST(UtilitiesTest, GetAssociationPriorityWorks)
 {
     EXPECT_EQ(1u, getAssociationPriority(TermAssociationType::Positive));

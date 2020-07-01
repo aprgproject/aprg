@@ -16,7 +16,8 @@ class Line
     friend std::ostream & operator<<(std::ostream & out, Line const& line);
 public:
     Line();
-    Line(Point const& first, Point const& second);    Line(double const aCoefficient,
+    Line(Point const& first, Point const& second);
+    Line(double const aCoefficient,
          double const bCoefficient,
          double const cCoefficient,
          double const xInitialValue,

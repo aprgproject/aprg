@@ -49,7 +49,8 @@ AlbaNumber::AlbaNumber(int const numerator, unsigned int const denominator)
     }
 }
 
-AlbaNumber::AlbaNumber(double const doubleValue)    : m_type(Type::Double)
+AlbaNumber::AlbaNumber(double const doubleValue)
+    : m_type(Type::Double)
 {
     double& doubleDataReference(m_data.doubleData);
     doubleDataReference = doubleValue;
@@ -602,14 +603,16 @@ bool AlbaNumber::isDoubleConversionNeededForAdditionAndSubtraction(AlbaNumber co
                 || areNumberOfDigitsOnTheIntegerLimit(secondNumeratorIntDigits);
     }
     else if(first.m_type == Type::Fraction && second.m_type == Type::Integer)
-    {        unsigned int firstNumeratorIntDigits = getNumberOfIntegerDigits(first.m_data.fractionData.numerator);
+    {
+        unsigned int firstNumeratorIntDigits = getNumberOfIntegerDigits(first.m_data.fractionData.numerator);
         unsigned int firstDenominatorIntDigits = getNumberOfIntegerDigits(first.m_data.fractionData.denominator);
         unsigned int secondIntDigits = getNumberOfIntegerDigits(second.m_data.intData);
         result = areNumberOfDigitsOnTheIntegerLimit(firstNumeratorIntDigits)
                 || areNumberOfDigitsOnTheIntegerLimit(firstDenominatorIntDigits+secondIntDigits);
     }
     else if(first.m_type == Type::Fraction && second.m_type == Type::Fraction)
-    {        unsigned int firstNumeratorIntDigits = getNumberOfIntegerDigits(first.m_data.fractionData.numerator);
+    {
+        unsigned int firstNumeratorIntDigits = getNumberOfIntegerDigits(first.m_data.fractionData.numerator);
         unsigned int firstDenominatorIntDigits = getNumberOfIntegerDigits(first.m_data.fractionData.denominator);
         unsigned int secondNumeratorIntDigits = getNumberOfIntegerDigits(second.m_data.fractionData.numerator);
         unsigned int secondDenominatorIntDigits = getNumberOfIntegerDigits(second.m_data.fractionData.denominator);
@@ -652,6 +655,7 @@ bool AlbaNumber::isDoubleConversionNeededForMultiplication(AlbaNumber const& fir
     }
     return result;
 }
+
 bool AlbaNumber::isDoubleConversionNeededForDivision(AlbaNumber const& first, AlbaNumber const& second) const
 {
     bool result(false);
@@ -678,6 +682,7 @@ bool AlbaNumber::isDoubleConversionNeededForDivision(AlbaNumber const& first, Al
     }
     return result;
 }
+
 bool AlbaNumber::isDoubleConversionNeededForRaiseToPower(AlbaNumber const& first, AlbaNumber const& second) const
 {
     bool result(false);
@@ -697,6 +702,7 @@ bool AlbaNumber::isDoubleConversionNeededForRaiseToPower(AlbaNumber const& first
     }
     return result;
 }
+
 void AlbaNumber::convertToIntegerIfNeeded()
 {
     if(m_type == Type::Fraction)

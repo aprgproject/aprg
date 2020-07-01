@@ -37,6 +37,7 @@ public:
 protected:
     std::array<Point, numberOfVertices> m_vertices;
 };
+
 template class Polygon<3>;
 template class Polygon<4>;
 

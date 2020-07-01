@@ -7,6 +7,7 @@
 
 using namespace alba::mathHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -93,7 +94,8 @@ string Angle::getDisplayableString() const
 
 double Angle::calculateAngleValueInDegrees(AngleUnitType const angleInputType, double const angleValue) const
 {
-    double angleValueInDegrees=0;    if(AngleUnitType::Degrees == angleInputType)
+    double angleValueInDegrees=0;
+    if(AngleUnitType::Degrees == angleInputType)
     {
         angleValueInDegrees = angleValue;
     }
