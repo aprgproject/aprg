@@ -22,10 +22,10 @@ enum class LineType
 
 class Line
 {
+    friend std::ostream & operator<<(std::ostream & out, Line const& line);
 public:
     Line();
-    Line(Point const& first, Point const& second);
-    Line(double const aCoefficient, double const bCoefficient, double const cCoefficient); //ax+by+c=0
+    Line(Point const& first, Point const& second);    Line(double const aCoefficient, double const bCoefficient, double const cCoefficient); //ax+by+c=0
     Line(double const aCoefficient, double const bCoefficient, Point const& first); //ax+by+c=0
     bool operator==(Line const& line) const;
     bool operator!=(Line const& line) const;
@@ -63,6 +63,8 @@ private:
 };
 
 using Lines = std::vector<Line>;
+
+std::ostream & operator<<(std::ostream & out, Line const& line);
 
 }
 }

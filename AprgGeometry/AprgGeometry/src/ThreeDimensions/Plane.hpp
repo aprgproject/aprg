@@ -13,10 +13,11 @@ namespace ThreeDimensions
 
 class Plane
 {
+    friend std::ostream & operator<<(std::ostream & out, Plane const& plane);
+
 public:
     Plane();
-    Plane(Point const& first, Point const& second, Point const& third);
-    Plane(
+    Plane(Point const& first, Point const& second, Point const& third);    Plane(
             double const aCoefficient,
             double const bCoefficient,
             double const cCoefficient,
@@ -50,6 +51,8 @@ private:
 };
 
 using Planes = std::vector<Plane>;
+
+std::ostream & operator<<(std::ostream & out, Plane const& plane);
 
 }
 }
