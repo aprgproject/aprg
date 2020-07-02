@@ -4,7 +4,8 @@
 #include <PixelInformation.hpp>
 #include <TwoDimensions/Circle.hpp>
 
-#include <map>#include <set>
+#include <map>
+#include <set>
 #include <vector>
 
 namespace alba
@@ -12,7 +13,8 @@ namespace alba
 
 class PixelInformationDatabase
 {
-public:    using PixelInformationMap = std::map<BitmapXY, PixelInformation>;
+public:
+    using PixelInformationMap = std::map<BitmapXY, PixelInformation>;
     using PixelSet = std::set<BitmapXY>;
 
     PixelInformationDatabase();
