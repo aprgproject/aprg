@@ -1,8 +1,9 @@
 #pragma once
 
+#include <TwoDimensions/Circle.hpp>
+
 namespace alba
 {
-
 class PixelInformation
 {
 public:
@@ -15,13 +16,16 @@ public:
     bool isInvalidLabel() const;
     bool isInitialOrInvalidLabel() const;
     unsigned int getLabel() const;
+    TwoDimensions::Circle getPenCircle() const;
 
     void setAsPenPoint(bool const isPenPixel);
     void setLabel(unsigned int const label);
+    void setPenCircle(TwoDimensions::Circle const& penCircle);
 
 private:
-    bool m_isPenPixel;
     unsigned int m_label;
+    bool m_isPenPixel;
+    TwoDimensions::Circle m_penCircle;
 };
 
 }

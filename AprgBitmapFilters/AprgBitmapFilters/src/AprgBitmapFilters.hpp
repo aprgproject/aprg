@@ -62,11 +62,11 @@ public:
             AprgBitmapSnippet & snippet,
             double const blurRadius);
     void drawPenCircles(
-            AprgBitmapSnippet & snippet);
+            AprgBitmapSnippet const& inputSnippet,
+            AprgBitmapSnippet & outputSnippet);
     void drawAnimeColor(
             AprgBitmapSnippet & snippet);
-    void drawNewColorForLabels(
-            AprgBitmapSnippet & snippet);
+    void drawNewColorForLabels(            AprgBitmapSnippet & snippet);
 
     void saveOutputCanvasIntoCurrentBitmapFile(
             AprgBitmapSnippet const& snippet) const;
@@ -81,13 +81,10 @@ public:
     void gatherAndSaveColorDataAndStatistics();
 
 private:
-    void retainMaxRadiusPenCircles(
-            TwoDimensions::Circles & penCircles,
-            std::map<TwoDimensions::Point, TwoDimensions::Circles> const& penPointToPenCircles);
+    void savePenCirclesInPenPixels();
     unsigned int analyzeFourConnectivityNeighborPointsForConnectedComponentsTwoPassAndReturnSmallestLabel(
             AprgBitmapSnippet const& inputSnippet,
-            UnionFindForLabels & unionFindForLabels,
-            BitmapXY const & neighborPoint);
+            UnionFindForLabels & unionFindForLabels,            BitmapXY const & neighborPoint);
     unsigned int analyzeNeighborPointForConnectedComponentsTwoPassAneReturnLabel(
             AprgBitmapSnippet const& inputSnippet,
             BitmapXY const & neighborPoint);
