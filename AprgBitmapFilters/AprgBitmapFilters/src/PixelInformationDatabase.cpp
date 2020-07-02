@@ -5,20 +5,14 @@ using namespace std;
 namespace alba
 {
 
-PixelInformation::PixelInformation()
-    : isPenPixel(false)
-    , label(INITIAL_LABEL_VALUE)
-{}
-
 PixelInformationDatabase::PixelInformationDatabase()
 {}
 
 void PixelInformationDatabase::saveAsPenPoint(BitmapXY const& bitmapPoint)
 {
-    m_pixelsInformationMap[bitmapPoint].isPenPixel = true;
+    m_pixelsInformationMap[bitmapPoint].setAsPenPoint(true);
     m_penPixels.emplace(bitmapPoint);
 }
-
 void PixelInformationDatabase::saveAsPenPoints(BitmapXYs const& bitmapPoints)
 {
     for(BitmapXY const& bitmapPoint : bitmapPoints)

@@ -1,29 +1,18 @@
 #pragma once
 
 #include <CommonTypes.hpp>
+#include <PixelInformation.hpp>
 #include <TwoDimensions/Circle.hpp>
 
-#include <map>
-#include <set>
+#include <map>#include <set>
 #include <vector>
 
 namespace alba
 {
 
-struct PixelInformation
-{
-    PixelInformation();
-    bool isPenPixel;
-    unsigned int label;
-    std::vector<unsigned int> temporaryColors;
-    static constexpr unsigned int INITIAL_LABEL_VALUE=0;
-    static constexpr unsigned int INVALID_LABEL_VALUE=0x1FFFFFFF;
-};
-
 class PixelInformationDatabase
 {
-public:
-    using PixelInformationMap = std::map<BitmapXY, PixelInformation>;
+public:    using PixelInformationMap = std::map<BitmapXY, PixelInformation>;
     using PixelSet = std::set<BitmapXY>;
 
     PixelInformationDatabase();
