@@ -3,8 +3,8 @@
 #include <Bitmap/Bitmap.hpp>
 #include <Bitmap/BitmapSnippet.hpp>
 #include <BitmapFilters/LabelForPoints.hpp>
+#include <BitmapFilters/PenCircles.hpp>
 #include <BitmapFilters/PenPoints.hpp>
-#include <BitmapFilters/PixelInformationDatabase.hpp>
 #include <TwoDimensions/Point.hpp>
 #include <TwoDimensions/Circle.hpp>
 #include <UnionFind/UnionFind.hpp>
@@ -27,6 +27,7 @@ public:
     using PenPointPenCirclePair=std::pair<BitmapXY, TwoDimensions::Circle>;
 
     BitmapFilters(std::string const& path);
+
     bool isSimilar(unsigned int const color1, unsigned int const color2, unsigned int const similarityColorLimit) const;
     bool isNotBackgroundColor(unsigned int const color) const;
 
@@ -47,7 +48,8 @@ public:
     void determinePenCirclesFromPenPoints(
             BitmapSnippet const& inputSnippet,
             unsigned int const similarityColorLimit,
-            double const acceptablePenPercentage);    void determineConnectedComponentsByOneComponentAtATime(
+            double const acceptablePenPercentage);
+    void determineConnectedComponentsByOneComponentAtATime(
             BitmapSnippet const& inputSnippet);
     void determineConnectedComponentsUsingTwoPass(
             BitmapSnippet const& inputSnippet);
@@ -61,7 +63,8 @@ public:
     void drawBlurredNonPenPoints(
             BitmapSnippet const& inputSnippet,
             BitmapSnippet & outputSnippet,
-            double const blurRadius,            unsigned int const similarityColorLimit);
+            double const blurRadius,
+            unsigned int const similarityColorLimit);
     void drawToFillGapsUsingBlur(
             BitmapSnippet & snippet,
             double const blurRadius);
@@ -99,7 +102,8 @@ private:
     void savePenCircles(PenPointToPenCircleMap const& penPointsToPenCircles);
     unsigned int analyzeFourConnectivityNeighborPointsForConnectedComponentsTwoPassAndReturnSmallestLabel(
             BitmapSnippet const& inputSnippet,
-            UnionFindForLabels & unionFindForLabels,            BitmapXY const & neighborPoint);
+            UnionFindForLabels & unionFindForLabels,
+            BitmapXY const & neighborPoint);
     unsigned int analyzeNeighborPointForConnectedComponentsTwoPassAneReturnLabel(
             BitmapSnippet const& inputSnippet,
             BitmapXY const & neighborPoint);
@@ -134,9 +138,9 @@ private:
 
     unsigned int m_backgroundColor;
     Bitmap m_bitmap;
-    PixelInformationDatabase m_pixelInformationDatabase;
     LabelForPoints m_labelForPixels;
     PenPoints m_penPoints;
+    PenCircles m_penCircles;
 };
 
 }
