@@ -18,10 +18,14 @@ bool isInvalidLabel(unsigned int const label);
 bool isInitialOrInvalidLabel(unsigned int const label);
 unsigned int getLabelColor(unsigned int const label);
 
-class LabelForPixels
-{public:
+class LabelForPoints
+{
+public:
     using PixelsToLabelsMap=std::map<BitmapXY, unsigned int>;
+    using PixelsToLabelsPair=std::pair<BitmapXY, unsigned int>;
     unsigned int getLabel(BitmapXY const& point) const;
+    PixelsToLabelsMap const& getPixelsToLabels() const;
+
     void setLabel(
             BitmapXY const& point,
             unsigned int const label);

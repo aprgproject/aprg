@@ -1,4 +1,4 @@
-#include "LabelForPixels.hpp"
+#include "LabelForPoints.hpp"
 
 #include <Math/AlbaMathHelper.hpp>
 
@@ -6,6 +6,7 @@
 
 namespace alba
 {
+
 namespace AprgBitmap
 {
 
@@ -31,9 +32,10 @@ unsigned int getLabelColor(unsigned int const label)
     return static_cast<unsigned int>(newValue) % 0xFFFFFF;
 }
 
-unsigned int LabelForPixels::getLabel(BitmapXY const& point) const
+unsigned int LabelForPoints::getLabel(BitmapXY const& point) const
 {
-    unsigned int label(INITIAL_LABEL_VALUE);    PixelsToLabelsMap::const_iterator it = m_pixelsTolabelsMap.find(point);
+    unsigned int label(INITIAL_LABEL_VALUE);
+    PixelsToLabelsMap::const_iterator it = m_pixelsTolabelsMap.find(point);
     if(it != m_pixelsTolabelsMap.cend())
     {
         label = it->second;
@@ -41,7 +43,12 @@ unsigned int LabelForPixels::getLabel(BitmapXY const& point) const
     return label;
 }
 
-void LabelForPixels::setLabel(
+LabelForPoints::PixelsToLabelsMap const& LabelForPoints::getPixelsToLabels() const
+{
+    return m_pixelsTolabelsMap;
+}
+
+void LabelForPoints::setLabel(
         BitmapXY const& point,
         unsigned int const label)
 {
