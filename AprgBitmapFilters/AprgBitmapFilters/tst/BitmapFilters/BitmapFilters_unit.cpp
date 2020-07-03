@@ -22,7 +22,7 @@ void animize(string const& inputFile, string const& outputFile)
     BitmapSnippet tempSnippet(bitmapFilter.getWholeBitmapSnippet());
     BitmapSnippet outputSnippet(bitmapFilter.getBlankSnippetWithBackground());
 
-    bitmapFilter.determinePenPixels(tempSnippet, 2, 0x08);
+    bitmapFilter.determinePenPixels(tempSnippet, 3, 0x08);
     bitmapFilter.determinePenCirclesFromPenPixels(tempSnippet, 0x06, 0.80);
 
     bitmapFilter.drawAnimeColor(tempSnippet);
@@ -53,8 +53,8 @@ TEST(BitmapFilterTest, DISABLED_AnimizeMultipleFilesTest)
 TEST(BitmapFilterTest, DISABLED_AnimizeSingleFileTest)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler inputFilePathHandler(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\JohnMayerDark.bmp)");
-    AlbaLocalPathHandler outputFilePathHandler(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\JohnMayerDark_Animized.bmp)");
+    AlbaLocalPathHandler inputFilePathHandler(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\GilmoreGirls.bmp)");
+    AlbaLocalPathHandler outputFilePathHandler(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\GilmoreGirls_Animized.bmp)");
     animize(inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath());
 }
 
