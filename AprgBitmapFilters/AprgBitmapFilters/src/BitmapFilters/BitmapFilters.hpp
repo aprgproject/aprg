@@ -118,12 +118,9 @@ private:
     void determineConnectedComponentsUsingTwoPassInSecondPass(
             BitmapSnippet const& inputSnippet,
             UnionFindForLabels const& unionFindForLabels);
-    TwoDimensions::Point convertBitmapXYToPoint(BitmapXY const& bitmapPosition) const;
-    BitmapXY convertPointToBitmapXY(TwoDimensions::Point const& pointPosition) const;
 
     unsigned int getBlurredColor(BitmapSnippet const& canvas, BitmapXY const& centerXY, double const blurRadius, BlurCondition const& isIncludedInBlur) const;
     double getBlurWeight(double const distanceFromCenter, double const blurRadius) const;
-
     unsigned int m_backgroundColor;
     Bitmap m_bitmap;
     PixelInformationDatabase m_pixelInformationDatabase;

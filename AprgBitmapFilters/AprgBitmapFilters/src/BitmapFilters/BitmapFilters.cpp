@@ -3,10 +3,10 @@
 #include <BitmapFilters/AnimizeColor.hpp>
 #include <BitmapFilters/ColorStatistics.hpp>
 #include <BitmapFilters/ColorUtilities.hpp>
+#include <BitmapFilters/Utilities.hpp>
 #include <Math/AlbaMathHelper.hpp>
 #include <Optional/AlbaOptional.hpp>
-#include <PathHandlers/AlbaLocalPathHandler.hpp>
-#include <TwoDimensions/TwoDimensionsHelper.hpp>
+#include <PathHandlers/AlbaLocalPathHandler.hpp>#include <TwoDimensions/TwoDimensionsHelper.hpp>
 
 using namespace alba::AprgBitmap::ColorUtilities;
 using namespace alba::TwoDimensions;
@@ -573,20 +573,9 @@ void BitmapFilters::determineConnectedComponentsUsingTwoPassInSecondPass(
     });
 }
 
-Point BitmapFilters::convertBitmapXYToPoint(BitmapXY const& bitmapPosition) const
-{
-    return Point(bitmapPosition.getX(), bitmapPosition.getY());
-}
-
-BitmapXY BitmapFilters::convertPointToBitmapXY(Point const& pointPosition) const
-{
-    return BitmapXY(round(pointPosition.getX()), round(pointPosition.getY()));
-}
-
 unsigned int BitmapFilters::getBlurredColor(BitmapSnippet const& canvas, BitmapXY const& centerXY, double const blurRadius, BlurCondition const& isIncludedInBlur) const
 {
-    unsigned int const centerColor(canvas.getColorAt(centerXY));
-    double totalBlurredColorRed(0);
+    unsigned int const centerColor(canvas.getColorAt(centerXY));    double totalBlurredColorRed(0);
     double totalBlurredColorGreen(0);
     double totalBlurredColorBlue(0);
     double totalBlurWeight(0);
