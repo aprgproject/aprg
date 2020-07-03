@@ -23,7 +23,8 @@ public:
     bool operator<(Circle const& circle) const;
     Point getCenter() const;
     double getRadius() const;
-    double getArea() const;    double getCircumference() const;
+    double getArea() const;
+    double getCircumference() const;
     bool isInside(Point const& point) const;
     Points getPointsForCircumference(double const interval) const;
     void traverseArea(double const interval, TraverseOperation const& traverseOperation) const;
