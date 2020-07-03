@@ -1,15 +1,19 @@
 #include "AnimizeColor.hpp"
 
-#include <AprgBitmap.hpp>
-#include <AprgBitmapSnippet.hpp>
-#include <AprgColorUtilities.hpp>
+#include <Bitmap/Bitmap.hpp>
+#include <Bitmap/BitmapSnippet.hpp>
+#include <BitmapFilters/ColorUtilities.hpp>
 #include <Container/AlbaContainerHelper.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 
-using namespace alba::ColorUtilities;
+using namespace alba::AprgBitmap;
+using namespace alba::AprgBitmap::ColorUtilities;
 using namespace std;
 
 namespace alba
+{
+
+namespace AprgBitmap
 {
 
 void gatherAndSaveDataInAnimizeColor(string const& bitmapPath)
@@ -49,8 +53,8 @@ double AnimizeColor::getNewSaturation(double const originalValue)
 
 void AnimizeColor::gatherStatistics(string const& bitmapPath)
 {
-    AprgBitmap bitmap(bitmapPath);
-    AprgBitmapSnippet canvas(bitmap.getSnippetReadFromFileWholeBitmap());
+    Bitmap bitmap(bitmapPath);
+    BitmapSnippet canvas(bitmap.getSnippetReadFromFileWholeBitmap());
     canvas.traverse([&](BitmapXY const&, unsigned int const color)
     {
         HueSaturationLightnessData hslData(convertColorToHueSaturationLightnessData(color));
@@ -151,6 +155,8 @@ double AnimizeColor::getNewValue(
         }
     }
     return newValue;
+}
+
 }
 
 }

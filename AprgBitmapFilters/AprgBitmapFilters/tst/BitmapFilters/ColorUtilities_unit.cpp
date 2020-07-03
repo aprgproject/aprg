@@ -1,11 +1,14 @@
-#include <AprgColorUtilities.hpp>
+#include <BitmapFilters/ColorUtilities.hpp>
 
 #include <gtest/gtest.h>
 
-using namespace alba::ColorUtilities;
+using namespace alba::AprgBitmap::ColorUtilities;
 using namespace std;
 
 namespace alba
+{
+
+namespace AprgBitmap
 {
 
 TEST(ColorUtilitiesTest, CalculateColorPercentagesDataWorks)
@@ -221,6 +224,8 @@ TEST(ColorUtilitiesTest, ExtractBlueWorks)
     EXPECT_EQ(0xFFu, extractBlue(0xFFFFFF));
     EXPECT_EQ(0x0u, extractBlue(0x0));
     EXPECT_EQ(0x57u, extractBlue(0x2E8B57));
+}
+
 }
 
 }

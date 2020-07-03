@@ -1,4 +1,4 @@
-#include <AprgBitmapFilters.hpp>
+#include <BitmapFilters/BitmapFilters.hpp>
 
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 
@@ -8,12 +8,32 @@
 
 using namespace std;
 
-#define APRG_BITMAP_FILTERS_BITMAP_DIRECTORY APRG_DIR R"(AprgBitmapFilters\AprgBitmapFilters\tst\Bitmaps\)"
+#define APRG_BITMAP_FILTERS_BITMAP_DIRECTORY APRG_DIR R"(AprgBitmapFilters\SampleBitmaps\)"
 
 namespace alba
 {
 
-TEST(BitmapFilterTest, DISABLED_AnimizeTest)
+namespace AprgBitmap
+{
+
+void animize(string const& inputFile, string const& outputFile)
+{
+    BitmapFilters bitmapFilter(inputFile);
+    BitmapSnippet tempSnippet(bitmapFilter.getWholeBitmapSnippet());
+    BitmapSnippet outputSnippet(bitmapFilter.getBlankSnippetWithBackground());
+
+    bitmapFilter.determinePenPixels(tempSnippet, 3, 0x08);
+    bitmapFilter.determinePenCirclesFromPenPixels(tempSnippet, 0x06, 0.80);
+
+    bitmapFilter.drawAnimeColor(tempSnippet);
+    bitmapFilter.drawNonPenPixels(tempSnippet, outputSnippet);
+    bitmapFilter.drawToFillGapsUsingBlur(outputSnippet, 2);
+    bitmapFilter.drawPenCircles(tempSnippet, outputSnippet);
+
+    bitmapFilter.saveOutputCanvasIntoFileWithFullFilePath(outputSnippet, outputFile);
+}
+
+TEST(BitmapFilterTest, DISABLED_AnimizeMultipleFilesTest)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
     AlbaLocalPathHandler inputDirectory(bitmapDirectory.getDirectory()+R"(AnimizeTests\input\)");
@@ -25,30 +45,26 @@ TEST(BitmapFilterTest, DISABLED_AnimizeTest)
     {
         AlbaLocalPathHandler inputFilePathHandler(inputFile);
         AlbaLocalPathHandler outputFilePathHandler(bitmapDirectory.getDirectory()+R"(AnimizeTests\output\Out_)"+inputFilePathHandler.getFile());
-        AprgBitmapFilters bitmapFilter(inputFilePathHandler.getFullPath());
-        AprgBitmapSnippet tempSnippet(bitmapFilter.getWholeBitmapSnippet());
-        AprgBitmapSnippet outputSnippet(bitmapFilter.getBlankSnippetWithBackground());
-
-        bitmapFilter.drawAnimeColor(tempSnippet);
-        bitmapFilter.determinePenPixels(tempSnippet, 3, 0x08);
-        bitmapFilter.determinePenCirclesFromPenPixels(tempSnippet, 0x06, 0.80);
-
-        bitmapFilter.drawNonPenPixels(tempSnippet, outputSnippet);
-        bitmapFilter.drawToFillGapsUsingBlur(outputSnippet, 2);
-        bitmapFilter.drawPenCircles(tempSnippet, outputSnippet);
-
-        bitmapFilter.saveOutputCanvasIntoFileWithFullFilePath(outputSnippet, outputFilePathHandler.getFullPath());
+        animize(inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath());
         cout << "Finished: " << outputFilePathHandler.getFullPath() << endl;
     }
+}
+
+TEST(BitmapFilterTest, AnimizeSingleFileTest)
+{
+    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+    AlbaLocalPathHandler inputFilePathHandler(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\Witcher.bmp)");
+    AlbaLocalPathHandler outputFilePathHandler(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\Witcher_Animized.bmp)");
+    animize(inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath());
 }
 
 TEST(BitmapFilterTest, DISABLED_DeterminePenCircles)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
     AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\Witcher.bmp)");
-    AprgBitmapFilters bitmapFilter(sampleFile.getFullPath());
-    AprgBitmapSnippet tempSnippet(bitmapFilter.getWholeBitmapSnippet());
-    AprgBitmapSnippet outputSnippet(bitmapFilter.getBlankSnippetWithBackground());
+    BitmapFilters bitmapFilter(sampleFile.getFullPath());
+    BitmapSnippet tempSnippet(bitmapFilter.getWholeBitmapSnippet());
+    BitmapSnippet outputSnippet(bitmapFilter.getBlankSnippetWithBackground());
 
     bitmapFilter.determinePenPixels(tempSnippet, 2, 0x08);
     bitmapFilter.determinePenCirclesFromPenPixels(tempSnippet, 0x06, 0.50);
@@ -60,9 +76,9 @@ TEST(BitmapFilterTest, DISABLED_DeterminePenAndNonPen)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
     AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\JohnMayerDark.bmp)");
-    AprgBitmapFilters bitmapFilter(sampleFile.getFullPath());
-    AprgBitmapSnippet tempSnippet(bitmapFilter.getWholeBitmapSnippet());
-    AprgBitmapSnippet outputSnippet(bitmapFilter.getBlankSnippetWithBackground());
+    BitmapFilters bitmapFilter(sampleFile.getFullPath());
+    BitmapSnippet tempSnippet(bitmapFilter.getWholeBitmapSnippet());
+    BitmapSnippet outputSnippet(bitmapFilter.getBlankSnippetWithBackground());
 
     bitmapFilter.determinePenPixels(tempSnippet, 2, 0x08);
     bitmapFilter.drawPenPixels(tempSnippet, outputSnippet);
@@ -72,8 +88,8 @@ TEST(BitmapFilterTest, DISABLED_DeterminePenAndNonPen)
 TEST(BitmapFilterTest, DISABLED_ConvertToAnimeColorWorks)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AprgBitmapFilters bitmapFilter(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\JohnMayerDark.bmp)");
-    AprgBitmapSnippet outputSnippet(bitmapFilter.getWholeBitmapSnippet());
+    BitmapFilters bitmapFilter(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\JohnMayerDark.bmp)");
+    BitmapSnippet outputSnippet(bitmapFilter.getWholeBitmapSnippet());
 
     bitmapFilter.drawAnimeColor(outputSnippet);
     bitmapFilter.saveOutputCanvasIntoFileInTheSameDirectory(outputSnippet, "JohnMayerDark_AnimeOutput.bmp");
@@ -82,7 +98,7 @@ TEST(BitmapFilterTest, DISABLED_ConvertToAnimeColorWorks)
 TEST(BitmapFilterTest, DISABLED_GatherAndSaveStatisticsWorks)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AprgBitmapFilters bitmapFilter(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\Foals.bmp)");
+    BitmapFilters bitmapFilter(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\Foals.bmp)");
 
     bitmapFilter.gatherAndSaveColorDataAndStatistics();
 }
@@ -91,8 +107,8 @@ TEST(BitmapFilterTest, DISABLED_CclTestOneComponentAtATime)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
     AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory()+R"(CCL\CclTest.bmp)");
-    AprgBitmapFilters bitmapFilter(sampleFile.getFullPath());
-    AprgBitmapSnippet outputSnippet(bitmapFilter.getWholeBitmapSnippet());
+    BitmapFilters bitmapFilter(sampleFile.getFullPath());
+    BitmapSnippet outputSnippet(bitmapFilter.getWholeBitmapSnippet());
 
     bitmapFilter.determineConnectedComponentsByOneComponentAtATime(outputSnippet);
     bitmapFilter.drawNewColorForLabels(outputSnippet);
@@ -103,8 +119,8 @@ TEST(BitmapFilterTest, DISABLED_CclTestTwoPass)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
     AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory()+R"(CCL\CclTest.bmp)");
-    AprgBitmapFilters bitmapFilter(sampleFile.getFullPath());
-    AprgBitmapSnippet outputSnippet(bitmapFilter.getWholeBitmapSnippet());
+    BitmapFilters bitmapFilter(sampleFile.getFullPath());
+    BitmapSnippet outputSnippet(bitmapFilter.getWholeBitmapSnippet());
 
     bitmapFilter.determineConnectedComponentsUsingTwoPass(outputSnippet);
     bitmapFilter.drawNewColorForLabels(outputSnippet);
@@ -115,8 +131,8 @@ TEST(BitmapFilterTest, DISABLED_FillNonPenGaps)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
     AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory()+R"(PenPixelsExperiments\BitmapNonPenPixels.bmp)");
-    AprgBitmapFilters bitmapFilter(sampleFile.getFullPath());
-    AprgBitmapSnippet outputSnippet(bitmapFilter.getWholeBitmapSnippet());
+    BitmapFilters bitmapFilter(sampleFile.getFullPath());
+    BitmapSnippet outputSnippet(bitmapFilter.getWholeBitmapSnippet());
 
     bitmapFilter.drawToFillGapsUsingBlur(outputSnippet, 2);
     bitmapFilter.saveOutputCanvasIntoFileInTheSameDirectory(outputSnippet, "BitmapNonPenPixelsFilled.bmp");
@@ -126,9 +142,9 @@ TEST(BitmapFilterTest, DISABLED_FindPenAndNonPenAndFillNonPenGaps)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
     AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory()+R"(PenPixelsExperiments\sample.bmp)");
-    AprgBitmapFilters bitmapFilter(sampleFile.getFullPath());
-    AprgBitmapSnippet tempSnippet(bitmapFilter.getWholeBitmapSnippet());
-    AprgBitmapSnippet outputSnippet(bitmapFilter.getBlankSnippetWithBackground());
+    BitmapFilters bitmapFilter(sampleFile.getFullPath());
+    BitmapSnippet tempSnippet(bitmapFilter.getWholeBitmapSnippet());
+    BitmapSnippet outputSnippet(bitmapFilter.getBlankSnippetWithBackground());
 
     bitmapFilter.determinePenPixels(tempSnippet, 3, 0x20);
     bitmapFilter.drawPenPixels(tempSnippet, outputSnippet);
@@ -141,6 +157,8 @@ TEST(BitmapFilterTest, DISABLED_FindPenAndNonPenAndFillNonPenGaps)
     outputSnippet = bitmapFilter.getBlankSnippetWithBackground();
     bitmapFilter.drawToFillGapsUsingBlur(outputSnippet, 2);
     bitmapFilter.saveOutputCanvasIntoFileInTheSameDirectory(outputSnippet, "BitmapNonPenPixelsFilled.bmp");
+}
+
 }
 
 }

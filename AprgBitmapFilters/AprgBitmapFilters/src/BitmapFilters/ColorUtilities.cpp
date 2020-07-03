@@ -1,4 +1,4 @@
-#include "AprgColorUtilities.hpp"
+#include "ColorUtilities.hpp"
 
 #include <Bit/AlbaBitManipulation.hpp>
 #include <Math/AlbaMathHelper.hpp>
@@ -11,6 +11,9 @@ using namespace std;
 //https://en.wikipedia.org/wiki/HSL_and_HSV
 
 namespace alba
+{
+
+namespace AprgBitmap
 {
 
 namespace ColorUtilities
@@ -278,6 +281,8 @@ unsigned char extractMaxForOneColor(unsigned int const color)
 unsigned char extractMinForOneColor(unsigned int const color)
 {
     return min(min(extractRed(color), extractGreen(color)), extractBlue(color));
+}
+
 }
 
 }

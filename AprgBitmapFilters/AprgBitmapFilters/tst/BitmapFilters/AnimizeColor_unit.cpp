@@ -1,4 +1,4 @@
-#include <AnimizeColor.hpp>
+#include <BitmapFilters/AnimizeColor.hpp>
 
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 
@@ -6,9 +6,12 @@
 
 using namespace std;
 
-#define APRG_BITMAP_FILTERS_BITMAP_DIRECTORY APRG_DIR R"(AprgBitmapFilters\AprgBitmapFilters\tst\Bitmaps\)"
+#define APRG_BITMAP_FILTERS_BITMAP_DIRECTORY APRG_DIR R"(AprgBitmapFilters\SampleBitmaps\)"
 
 namespace alba
+{
+
+namespace AprgBitmap
 {
 
 TEST(AnimizeColorTest, DISABLED_GatherAndSaveStatistics)
@@ -16,6 +19,8 @@ TEST(AnimizeColorTest, DISABLED_GatherAndSaveStatistics)
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
 
     gatherAndSaveDataInAnimizeColor(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\Foals.bmp)");
+}
+
 }
 
 }

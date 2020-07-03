@@ -1,14 +1,16 @@
 #pragma once
 
-#include <CommonTypes.hpp>
-#include <PixelInformation.hpp>
+#include <Bitmap/CommonTypes.hpp>
+#include <BitmapFilters/PixelInformation.hpp>
 #include <TwoDimensions/Circle.hpp>
 
 #include <map>
 #include <set>
-#include <vector>
 
 namespace alba
+{
+
+namespace AprgBitmap
 {
 
 class PixelInformationDatabase
@@ -32,5 +34,7 @@ private:
     TwoDimensions::Circles m_penCircles;
 
 };
+
+}
 
 }

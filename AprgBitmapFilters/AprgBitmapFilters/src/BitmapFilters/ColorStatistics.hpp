@@ -8,6 +8,9 @@
 namespace alba
 {
 
+namespace AprgBitmap
+{
+
 void gatherAndSaveColorStatistics(std::string const& bitmapPath);
 
 class AprgColorStatistics
@@ -36,5 +39,7 @@ private:
     OneDimensionStatistics::Samples luma601Samples;
     OneDimensionStatistics::Samples luma709Samples;
 };
+
+}
 
 }

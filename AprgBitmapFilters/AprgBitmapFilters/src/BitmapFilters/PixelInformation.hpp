@@ -5,6 +5,9 @@
 namespace alba
 {
 
+namespace AprgBitmap
+{
+
 class PixelInformation
 {
 public:
@@ -28,5 +31,7 @@ private:
     bool m_isPenPixel;
     TwoDimensions::Circle m_penCircle;
 };
+
+}
 
 }

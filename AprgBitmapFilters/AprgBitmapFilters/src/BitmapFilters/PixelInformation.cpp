@@ -3,6 +3,9 @@
 namespace alba
 {
 
+namespace AprgBitmap
+{
+
 PixelInformation::PixelInformation()
     : m_label(INITIAL_LABEL_VALUE)
     , m_isPenPixel(false)
@@ -52,6 +55,8 @@ void PixelInformation::setLabel(unsigned int const label)
 void PixelInformation::setPenCircle(TwoDimensions::Circle const& penCircle)
 {
     m_penCircle=penCircle;
+}
+
 }
 
 }

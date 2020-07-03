@@ -6,6 +6,9 @@
 namespace alba
 {
 
+namespace AprgBitmap
+{
+
 void gatherAndSaveDataInAnimizeColor(std::string const& bitmapPath);
 
 class AnimizeColor
@@ -41,5 +44,7 @@ private:
     ColorDataMap m_lightnessData;
     ColorDataMap m_saturationData;
 };
+
+}
 
 }

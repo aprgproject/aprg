@@ -5,6 +5,9 @@ using namespace std;
 namespace alba
 {
 
+namespace AprgBitmap
+{
+
 PixelInformationDatabase::PixelInformationDatabase()
 {}
 
@@ -56,5 +59,6 @@ TwoDimensions::Circles const & PixelInformationDatabase::getPenCirclesConstRefer
     return m_penCircles;
 }
 
+}
 
 }
