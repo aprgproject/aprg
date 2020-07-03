@@ -66,7 +66,8 @@ public:
             AprgBitmapSnippet & outputSnippet);
     void drawAnimeColor(
             AprgBitmapSnippet & snippet);
-    void drawNewColorForLabels(            AprgBitmapSnippet & snippet);
+    void drawNewColorForLabels(
+            AprgBitmapSnippet & snippet);
 
     void saveOutputCanvasIntoCurrentBitmapFile(
             AprgBitmapSnippet const& snippet) const;
@@ -84,7 +85,8 @@ private:
     void savePenCirclesInPenPixels();
     unsigned int analyzeFourConnectivityNeighborPointsForConnectedComponentsTwoPassAndReturnSmallestLabel(
             AprgBitmapSnippet const& inputSnippet,
-            UnionFindForLabels & unionFindForLabels,            BitmapXY const & neighborPoint);
+            UnionFindForLabels & unionFindForLabels,
+            BitmapXY const & neighborPoint);
     unsigned int analyzeNeighborPointForConnectedComponentsTwoPassAneReturnLabel(
             AprgBitmapSnippet const& inputSnippet,
             BitmapXY const & neighborPoint);

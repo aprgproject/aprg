@@ -178,7 +178,8 @@ void AprgBitmapFilters::determinePenCirclesFromPenPixels(
     savePenCirclesInPenPixels();
 }
 
-void AprgBitmapFilters::determineConnectedComponentsByOneComponentAtATime(        AprgBitmapSnippet const& inputSnippet)
+void AprgBitmapFilters::determineConnectedComponentsByOneComponentAtATime(
+        AprgBitmapSnippet const& inputSnippet)
 {
     unsigned int currentLabel=1;
     deque<BitmapXY> pointsInDeque;
@@ -252,7 +253,8 @@ void AprgBitmapFilters::drawBlurredNonPenPixels(
                                    unsigned int centerColor, unsigned int currentColor, BitmapXY pointInCircle)
             {
                 PixelInformation const& pointInCirclePixelInfo(m_pixelInformationDatabase.getPixelInformation(pointInCircle));
-                return isSimilar(centerColor, currentColor, similarityColorLimit)                        && currentColor!=m_backgroundColor
+                return isSimilar(centerColor, currentColor, similarityColorLimit)
+                        && currentColor!=m_backgroundColor
                         && !pointInCirclePixelInfo.isPenPixel();
             }));
         }
@@ -308,7 +310,8 @@ void AprgBitmapFilters::drawPenCircles(
                 outputSnippet.setPixelAt(pointInCircle, centerColor);
             }
         });
-    }    /*    outputSnippet.traverse([&](BitmapXY const& bitmapPoint, unsigned int const)
+    }
+    /*    outputSnippet.traverse([&](BitmapXY const& bitmapPoint, unsigned int const)
     {
         PixelInformation & pixelInfo(m_pixelInformationDatabase.getPixelInformationReferenceAndCreateIfNeeded(bitmapPoint));
         vector<unsigned int> & tempColors(pixelInfo.temporaryColors);
@@ -423,7 +426,8 @@ void AprgBitmapFilters::savePenCirclesInPenPixels()
     copy(setOfPenCircles.cbegin(), setOfPenCircles.cend(), back_inserter(penCircles));
 }
 
-unsigned int AprgBitmapFilters::analyzeFourConnectivityNeighborPointsForConnectedComponentsTwoPassAndReturnSmallestLabel(        AprgBitmapSnippet const& inputSnippet,
+unsigned int AprgBitmapFilters::analyzeFourConnectivityNeighborPointsForConnectedComponentsTwoPassAndReturnSmallestLabel(
+        AprgBitmapSnippet const& inputSnippet,
         UnionFindForLabels & unionFindForLabels,
         BitmapXY const & neighborPoint)
 {

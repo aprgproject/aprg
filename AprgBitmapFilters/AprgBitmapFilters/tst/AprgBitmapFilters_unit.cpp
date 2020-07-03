@@ -9,6 +9,7 @@
 using namespace std;
 
 #define APRG_BITMAP_FILTERS_BITMAP_DIRECTORY APRG_DIR R"(AprgBitmapFilters\AprgBitmapFilters\tst\Bitmaps\)"
+
 namespace alba
 {
 
@@ -40,6 +41,7 @@ TEST(BitmapFilterTest, DISABLED_AnimizeTest)
         cout << "Finished: " << outputFilePathHandler.getFullPath() << endl;
     }
 }
+
 TEST(BitmapFilterTest, DISABLED_DeterminePenCircles)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
@@ -53,6 +55,7 @@ TEST(BitmapFilterTest, DISABLED_DeterminePenCircles)
     bitmapFilter.drawPenCircles(tempSnippet, outputSnippet);
     bitmapFilter.saveOutputCanvasIntoFileInTheSameDirectory(outputSnippet, "Witcher_PenCircles.bmp");
 }
+
 TEST(BitmapFilterTest, DISABLED_DeterminePenAndNonPen)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
@@ -99,7 +102,8 @@ TEST(BitmapFilterTest, DISABLED_CclTestOneComponentAtATime)
 TEST(BitmapFilterTest, DISABLED_CclTestTwoPass)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory()+R"(CCL\CclTest.bmp)");    AprgBitmapFilters bitmapFilter(sampleFile.getFullPath());
+    AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory()+R"(CCL\CclTest.bmp)");
+    AprgBitmapFilters bitmapFilter(sampleFile.getFullPath());
     AprgBitmapSnippet outputSnippet(bitmapFilter.getWholeBitmapSnippet());
 
     bitmapFilter.determineConnectedComponentsUsingTwoPass(outputSnippet);

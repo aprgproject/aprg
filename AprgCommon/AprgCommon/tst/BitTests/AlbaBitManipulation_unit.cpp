@@ -79,7 +79,8 @@ TEST(AlbaBitManipulationTest, RotateBitToTheRightWithShiftValueWorks)
 
 TEST(AlbaBitManipulationTest, ConcatenationBytes_ArgumentsSizeLessThanResult)
 {
-    // Given    const unsigned char byte1 = 0xA1;
+    // Given
+    const unsigned char byte1 = 0xA1;
     const unsigned char byte2 = 0xBA;
 
     // When

@@ -4,6 +4,7 @@
 
 namespace alba
 {
+
 class PixelInformation
 {
 public:

@@ -38,6 +38,7 @@ public:
                       "shiftBytesToTheLeft: sizeof(DataTypeToManipulate) size is greater than shift value");
         return static_cast<DataTypeToManipulate>(static_cast<DataTypeToManipulate>(value) << shiftValue*AlbaBitConstants::BYTE_SIZE_IN_BITS);
     }
+
     template <unsigned char shiftValue, typename ArgumentType>
     static constexpr DataTypeToManipulate shiftBytesToTheRight(ArgumentType const value)
     {
@@ -45,6 +46,7 @@ public:
                       "shiftBytesToTheRight: sizeof(DataTypeToManipulate) size is greater than shift value");
         return (static_cast<DataTypeToManipulate>(value) >> shiftValue*AlbaBitConstants::BYTE_SIZE_IN_BITS);
     }
+
     template <unsigned char shiftValue, typename ArgumentType>
     static constexpr DataTypeToManipulate shiftNibblesToTheLeft(ArgumentType const value)
     {
@@ -52,6 +54,7 @@ public:
                       "shiftNibblesToTheLeft: sizeof(DataTypeToManipulate) size is greater than shift value");
         return (static_cast<DataTypeToManipulate>(value) << shiftValue*AlbaBitConstants::NIBBLE_SIZE_IN_BITS);
     }
+
     template <unsigned char shiftValue, typename ArgumentType>
     static constexpr DataTypeToManipulate shiftNibblesToTheRight(ArgumentType const value)
     {
@@ -109,6 +112,7 @@ public:
                       "getByteAt: position is greater than DataTypeToManipulate size");
         return static_cast<unsigned char>(shiftBytesToTheRight<position>(value));
     }
+
     template <unsigned char position>
     static constexpr unsigned char getNibbleAt(DataTypeToManipulate const value)
     {
@@ -116,6 +120,7 @@ public:
                       "getNibbleAt: position is greater than two times DataTypeToManipulate size");
         return shiftNibblesToTheRight<position>(value) & AlbaBitConstants::NIBBLE_MASK;
     }
+
     template <unsigned char size>
     static constexpr DataTypeToManipulate swapWithBytes(DataTypeToManipulate const)
     {
@@ -154,6 +159,7 @@ public:
                       "The swapWithSize with this size or type is not supported. Please add a specialization.");
         return 0;
     }
+
 private:
     template <typename ArgumentType>
     static constexpr DataTypeToManipulate concatenateBytes(ArgumentType arg)
