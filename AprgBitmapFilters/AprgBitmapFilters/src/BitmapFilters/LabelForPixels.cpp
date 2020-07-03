@@ -1,8 +1,11 @@
 #include "LabelForPixels.hpp"
 
+#include <Math/AlbaMathHelper.hpp>
+
+#include <cmath>
+
 namespace alba
 {
-
 namespace AprgBitmap
 {
 
@@ -21,10 +24,16 @@ bool isInitialOrInvalidLabel(unsigned int const label)
     return isInitialLabel(label) || isInvalidLabel(label);
 }
 
+unsigned int getLabelColor(unsigned int const label)
+{
+    unsigned int digits = mathHelper::getNumberOfIntegerDigits(label);
+    double newValue = (static_cast<double>(1)/label) * pow(10, digits+8);
+    return static_cast<unsigned int>(newValue) % 0xFFFFFF;
+}
+
 unsigned int LabelForPixels::getLabel(BitmapXY const& point) const
 {
-    unsigned int label(INITIAL_LABEL_VALUE);
-    PixelsToLabelsMap::const_iterator it = m_pixelsTolabelsMap.find(point);
+    unsigned int label(INITIAL_LABEL_VALUE);    PixelsToLabelsMap::const_iterator it = m_pixelsTolabelsMap.find(point);
     if(it != m_pixelsTolabelsMap.cend())
     {
         label = it->second;
