@@ -13,10 +13,11 @@ namespace alba
 template <typename CoordinateType>
 class AlbaXYZ
 {
+    template <typename CoordinateType2>
+    friend std::ostream & operator<<(std::ostream & out, AlbaXYZ<CoordinateType2> const& xyz);
 public:
     AlbaXYZ()
-        : x(0)
-        , y(0)
+        : x(0)        , y(0)
         , z(0)
     {}
 
@@ -205,5 +206,12 @@ private:
     CoordinateType y;
     CoordinateType z;
 };
+
+template <typename CoordinateType>
+std::ostream & operator<<(std::ostream & out, AlbaXYZ<CoordinateType> const& xyz)
+{
+    out << xyz.getDisplayableString();
+    return out;
+}
 
 }
