@@ -175,9 +175,9 @@ NumberType clampLowerBound(NumberType const value, NumberType const limit)
 {
     return (value<limit) ? limit : value;
 }
+template unsigned int clampLowerBound<unsigned int>(unsigned int const value, unsigned int const limit);
 template int clampLowerBound<int>(int const value, int const limit);
 template double clampLowerBound<double>(double const value, double const limit);
-
 
 //clampHigherBound
 template <typename NumberType>
@@ -185,9 +185,9 @@ NumberType clampHigherBound(NumberType const value, NumberType const limit)
 {
     return (value>limit) ? limit : value;
 }
+template unsigned int clampHigherBound<unsigned int>(unsigned int const value, unsigned int const limit);
 template int clampHigherBound<int>(int const value, int const limit);
 template double clampHigherBound<double>(double const value, double const limit);
-
 
 //isPerfectSquare
 template <typename NumberType>
