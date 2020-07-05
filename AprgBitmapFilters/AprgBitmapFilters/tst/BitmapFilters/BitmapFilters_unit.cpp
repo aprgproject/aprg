@@ -65,10 +65,9 @@ TEST(BitmapFilterTest, DISABLED_BlurringDisimilarColors)
     BitmapFilters bitmapFilter(sampleFile.getFullPath());
     BitmapSnippet outputSnippet(bitmapFilter.getWholeBitmapSnippet());
 
-    bitmapFilter.drawWithBlurringDisimilarColors(outputSnippet, 0x02);
+    bitmapFilter.drawWithBlurringDisimilarColors(outputSnippet, 5, 0x02);
     bitmapFilter.saveOutputCanvasIntoFileInTheSameDirectory(outputSnippet, "santanaPixelatedBlurredOut.bmp");
 }
-
 TEST(BitmapFilterTest, DISABLED_BlurUsingSnakeLikeTraversal)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
@@ -80,11 +79,10 @@ TEST(BitmapFilterTest, DISABLED_BlurUsingSnakeLikeTraversal)
     bitmapFilter.saveOutputCanvasIntoFileInTheSameDirectory(outputSnippet, "santanaPixelatedBlurredOut.bmp");
 }
 
-TEST(BitmapFilterTest, BlurredColors)
+TEST(BitmapFilterTest, DISABLED_BlurredColors)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\santanaPixelated.bmp)");
-    BitmapFilters bitmapFilter(sampleFile.getFullPath());
+    AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\santanaPixelated.bmp)");    BitmapFilters bitmapFilter(sampleFile.getFullPath());
     BitmapSnippet outputSnippet(bitmapFilter.getWholeBitmapSnippet());
 
     bitmapFilter.drawBlurredColorsUsingCircles(outputSnippet, 8, 0x20);
