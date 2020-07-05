@@ -43,9 +43,13 @@ public:
 
     //determine functions
     void determinePenPoints(
+            PenPoints & penPoints,
             BitmapSnippet const& inputSnippet,
-            double const penSearchRadius,            unsigned int const similarityColorLimit);
+            double const penSearchRadius,
+            unsigned int const similarityColorLimit);
     void determinePenCirclesFromPenPoints(
+            PenCircles & penCircles,
+            PenPoints const& penPoints,
             BitmapSnippet const& inputSnippet,
             unsigned int const similarityColorLimit,
             double const acceptablePenPercentage);
@@ -56,11 +60,15 @@ public:
 
     //draw functions
     void drawPenPoints(
+            PenPoints const& penPoints,
             BitmapSnippet const& inputSnippet,
-            BitmapSnippet & outputSnippet);    void drawNonPenPoints(
+            BitmapSnippet & outputSnippet);
+    void drawNonPenPoints(
+            PenPoints const& penPoints,
             BitmapSnippet const& inputSnippet,
             BitmapSnippet & outputSnippet);
     void drawBlurredNonPenPoints(
+            PenPoints const& penPoints,
             BitmapSnippet const& inputSnippet,
             BitmapSnippet & outputSnippet,
             double const blurRadius,
@@ -73,6 +81,7 @@ public:
             BitmapSnippet & snippet,
             double const blurRadius);
     void drawPenCircles(
+            PenCircles const& penCircles,
             BitmapSnippet const& inputSnippet,
             BitmapSnippet & outputSnippet);
 
@@ -81,7 +90,8 @@ public:
             unsigned int const numberOfPasses,
             unsigned int const similarityColorLimit);
     void drawWithBlurUsingSnakeLikeTraversal(
-            BitmapSnippet & snippet,            unsigned int const similarityColorLimit);
+            BitmapSnippet & snippet,
+            unsigned int const similarityColorLimit);
     void drawAnimeColor(
             BitmapSnippet & snippet);
     void drawNewColorForLabels(
@@ -115,7 +125,8 @@ private:
             BitmapXY const & neighborPoint);
     void analyzeNeighborPointForConnectedComponentsOneComponentAtATime(
             BitmapSnippet const& inputSnippet,
-            std::deque<BitmapXY> & pointsInQueue,            BitmapXY const & neighborPoint,
+            std::deque<BitmapXY> & pointsInQueue,
+            BitmapXY const & neighborPoint,
             unsigned int const currentLabel);
     void determineConnectedComponentsUsingTwoPassInFirstPass(
             BitmapSnippet const& inputSnippet,
@@ -125,6 +136,7 @@ private:
             UnionFindForLabels const& unionFindForLabels);
     void determinePenPointsToPenCircles(
             PenPointToPenCircleMap & penPointsToPenCircles,
+            PenPoints const& penPoints,
             BitmapSnippet const& inputSnippet,
             unsigned int const similarityColorLimit,
             double const acceptablePenPercentage);
@@ -144,7 +156,6 @@ private:
             unsigned int const smallestLabel,
             unsigned int const neighbor1Label,
             unsigned int const neighbor2Label) const;
-    void savePenCircles(PenPointToPenCircleMap const& penPointsToPenCircles);
 
     bool isThisPenCircleBetter(
             BitmapXY const& penBitmapXY,
@@ -152,7 +163,8 @@ private:
             TwoDimensions::Circle const& circleToCompare) const;
     unsigned int getBlurredColor(
             unsigned int const centerColor,
-            unsigned int const colorToCompare,            unsigned int const similarityColorLimit) const;
+            unsigned int const colorToCompare,
+            unsigned int const similarityColorLimit) const;
     unsigned char getBlurredColorPart(
             unsigned char const centerColorPart,
             unsigned char const colorToComparePart,
@@ -167,8 +179,6 @@ private:
     unsigned int m_backgroundColor;
     Bitmap m_bitmap;
     LabelForPoints m_labelForPixels;
-    PenPoints m_penPoints;
-    PenCircles m_penCircles;
 };
 
 }

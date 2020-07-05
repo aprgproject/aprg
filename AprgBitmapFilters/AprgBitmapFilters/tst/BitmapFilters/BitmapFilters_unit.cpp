@@ -21,14 +21,16 @@ void animize(string const& inputFile, string const& outputFile)
     BitmapFilters bitmapFilter(inputFile);
     BitmapSnippet tempSnippet(bitmapFilter.getWholeBitmapSnippet());
     BitmapSnippet outputSnippet(bitmapFilter.getBlankSnippetWithBackground());
+    PenPoints penPoints;
+    PenCircles penCircles;
 
-    bitmapFilter.determinePenPoints(tempSnippet, 3, 0x08);
-    bitmapFilter.determinePenCirclesFromPenPoints(tempSnippet, 0x06, 0.80);
+    bitmapFilter.determinePenPoints(penPoints, tempSnippet, 3, 0x08);
+    bitmapFilter.determinePenCirclesFromPenPoints(penCircles, penPoints, tempSnippet, 0x06, 0.80);
 
     bitmapFilter.drawAnimeColor(tempSnippet);
-    bitmapFilter.drawNonPenPoints(tempSnippet, outputSnippet);
+    bitmapFilter.drawNonPenPoints(penPoints, tempSnippet, outputSnippet);
     bitmapFilter.drawToFillGapsUsingBlur(outputSnippet, 2);
-    bitmapFilter.drawPenCircles(tempSnippet, outputSnippet);
+    bitmapFilter.drawPenCircles(penCircles, tempSnippet, outputSnippet);
 
     bitmapFilter.saveOutputCanvasIntoFileWithFullFilePath(outputSnippet, outputFile);
 }
@@ -53,8 +55,8 @@ TEST(BitmapFilterTest, DISABLED_AnimizeMultipleFilesTest)
 TEST(BitmapFilterTest, DISABLED_AnimizeSingleFileTest)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler inputFilePathHandler(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\GilmoreGirls.bmp)");
-    AlbaLocalPathHandler outputFilePathHandler(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\GilmoreGirls_Animized.bmp)");
+    AlbaLocalPathHandler inputFilePathHandler(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\VeronicaMars.bmp)");
+    AlbaLocalPathHandler outputFilePathHandler(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\VeronicaMars_Animized.bmp)");
     animize(inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath());
 }
 
@@ -68,6 +70,7 @@ TEST(BitmapFilterTest, DISABLED_BlurringDisimilarColors)
     bitmapFilter.drawWithBlurringDisimilarColors(outputSnippet, 5, 0x02);
     bitmapFilter.saveOutputCanvasIntoFileInTheSameDirectory(outputSnippet, "santanaPixelatedBlurredOut.bmp");
 }
+
 TEST(BitmapFilterTest, DISABLED_BlurUsingSnakeLikeTraversal)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
@@ -82,7 +85,8 @@ TEST(BitmapFilterTest, DISABLED_BlurUsingSnakeLikeTraversal)
 TEST(BitmapFilterTest, DISABLED_BlurredColors)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\santanaPixelated.bmp)");    BitmapFilters bitmapFilter(sampleFile.getFullPath());
+    AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\santanaPixelated.bmp)");
+    BitmapFilters bitmapFilter(sampleFile.getFullPath());
     BitmapSnippet outputSnippet(bitmapFilter.getWholeBitmapSnippet());
 
     bitmapFilter.drawBlurredColorsUsingCircles(outputSnippet, 8, 0x20);
@@ -96,10 +100,12 @@ TEST(BitmapFilterTest, DISABLED_DeterminePenCircles)
     BitmapFilters bitmapFilter(sampleFile.getFullPath());
     BitmapSnippet tempSnippet(bitmapFilter.getWholeBitmapSnippet());
     BitmapSnippet outputSnippet(bitmapFilter.getBlankSnippetWithBackground());
+    PenPoints penPoints;
+    PenCircles penCircles;
 
-    bitmapFilter.determinePenPoints(tempSnippet, 2, 0x08);
-    bitmapFilter.determinePenCirclesFromPenPoints(tempSnippet, 0x06, 0.80);
-    bitmapFilter.drawPenCircles(tempSnippet, outputSnippet);
+    bitmapFilter.determinePenPoints(penPoints, tempSnippet, 2, 0x08);
+    bitmapFilter.determinePenCirclesFromPenPoints(penCircles, penPoints, tempSnippet, 0x06, 0.80);
+    bitmapFilter.drawPenCircles(penCircles, tempSnippet, outputSnippet);
     bitmapFilter.saveOutputCanvasIntoFileInTheSameDirectory(outputSnippet, "VeronicaMars_PenCircles.bmp");
 }
 
@@ -110,13 +116,14 @@ TEST(BitmapFilterTest, DISABLED_DeterminePenAndNonPen)
     BitmapFilters bitmapFilter(sampleFile.getFullPath());
     BitmapSnippet tempSnippet(bitmapFilter.getWholeBitmapSnippet());
     BitmapSnippet outputSnippet(bitmapFilter.getBlankSnippetWithBackground());
+    PenPoints penPoints;
 
-    bitmapFilter.determinePenPoints(tempSnippet, 2, 0x08);
-    bitmapFilter.drawPenPoints(tempSnippet, outputSnippet);
+    bitmapFilter.determinePenPoints(penPoints, tempSnippet, 2, 0x08);
+    bitmapFilter.drawPenPoints(penPoints, tempSnippet, outputSnippet);
     bitmapFilter.saveOutputCanvasIntoFileInTheSameDirectory(outputSnippet, "VeronicaMars_Pen.bmp");
 
     outputSnippet = bitmapFilter.getBlankSnippetWithBackground();
-    bitmapFilter.drawNonPenPoints(tempSnippet, outputSnippet);
+    bitmapFilter.drawNonPenPoints(penPoints, tempSnippet, outputSnippet);
     bitmapFilter.saveOutputCanvasIntoFileInTheSameDirectory(outputSnippet, "VeronicaMars_NonPen.bmp");
 }
 
@@ -138,17 +145,18 @@ TEST(BitmapFilterTest, DISABLED_FindPenAndNonPenAndFillNonPenGaps)
     BitmapFilters bitmapFilter(sampleFile.getFullPath());
     BitmapSnippet tempSnippet(bitmapFilter.getWholeBitmapSnippet());
     BitmapSnippet outputSnippet(bitmapFilter.getBlankSnippetWithBackground());
+    PenPoints penPoints;
 
-    bitmapFilter.determinePenPoints(tempSnippet, 2, 0x08);
-    bitmapFilter.drawPenPoints(tempSnippet, outputSnippet);
+    bitmapFilter.determinePenPoints(penPoints, tempSnippet, 2, 0x08);
+    bitmapFilter.drawPenPoints(penPoints, tempSnippet, outputSnippet);
     bitmapFilter.saveOutputCanvasIntoFileInTheSameDirectory(outputSnippet, "BitmapPenPoints.bmp");
 
     outputSnippet = bitmapFilter.getBlankSnippetWithBackground();
-    bitmapFilter.drawNonPenPoints(tempSnippet, outputSnippet);
+    bitmapFilter.drawNonPenPoints(penPoints, tempSnippet, outputSnippet);
     bitmapFilter.saveOutputCanvasIntoFileInTheSameDirectory(outputSnippet, "BitmapNonPenPoints.bmp");
 
     outputSnippet = bitmapFilter.getBlankSnippetWithBackground();
-    bitmapFilter.drawBlurredNonPenPoints(tempSnippet, outputSnippet, 3, 0x40);
+    bitmapFilter.drawBlurredNonPenPoints(penPoints, tempSnippet, outputSnippet, 3, 0x40);
     bitmapFilter.saveOutputCanvasIntoFileInTheSameDirectory(outputSnippet, "BitmapBlurredNonPenPoints.bmp");
 
     bitmapFilter.drawToFillGapsUsingBlur(outputSnippet, 2);
