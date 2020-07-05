@@ -17,7 +17,8 @@ class AlbaXYZ
     friend std::ostream & operator<<(std::ostream & out, AlbaXYZ<CoordinateType2> const& xyz);
 public:
     AlbaXYZ()
-        : x(0)        , y(0)
+        : x(0)
+        , y(0)
         , z(0)
     {}
 

@@ -179,6 +179,7 @@ template unsigned int clampLowerBound<unsigned int>(unsigned int const value, un
 template int clampLowerBound<int>(int const value, int const limit);
 template double clampLowerBound<double>(double const value, double const limit);
 
+
 //clampHigherBound
 template <typename NumberType>
 NumberType clampHigherBound(NumberType const value, NumberType const limit)
@@ -188,6 +189,7 @@ NumberType clampHigherBound(NumberType const value, NumberType const limit)
 template unsigned int clampHigherBound<unsigned int>(unsigned int const value, unsigned int const limit);
 template int clampHigherBound<int>(int const value, int const limit);
 template double clampHigherBound<double>(double const value, double const limit);
+
 
 //isPerfectSquare
 template <typename NumberType>
@@ -298,7 +300,8 @@ unsigned int getPositiveDelta(unsigned int const number1, unsigned int const num
 
 int getRaiseToPowerForIntegers(int const base, unsigned int exponent)
 {
-    return static_cast<int>(ceil(pow(base, exponent)));}
+    return static_cast<int>(ceil(pow(base, exponent)));
+}
 
 FractionDetails getFractionDetailsInLowestForm(int const numerator, int const denominator)
 {

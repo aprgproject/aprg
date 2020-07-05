@@ -12,7 +12,14 @@ namespace AprgBitmap
 class OutwardCircleTraversal
 {
 public:
-    using Coordinate=std::pair<unsigned int, unsigned int>;
+    struct Coordinate
+    {
+        Coordinate(
+                unsigned int const firstValue,
+                unsigned int const secondValue);
+        unsigned int coordinate1;
+        unsigned int coordinate2;
+    };
     using RadiusToCoordinates=std::multimap<double, Coordinate>;
     using RadiusCoordinatesPair=std::pair<double, Coordinate>;
 

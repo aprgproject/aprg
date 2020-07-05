@@ -35,7 +35,8 @@ bool BitmapSnippet::isPositionInsideTheSnippet(BitmapXY const position) const
             && m_bottomRightCorner.getY() >= position.getY();
 }
 
-BitmapXY BitmapSnippet::getTopLeftCorner() const{
+BitmapXY BitmapSnippet::getTopLeftCorner() const
+{
     return m_topLeftCorner;
 }
 
