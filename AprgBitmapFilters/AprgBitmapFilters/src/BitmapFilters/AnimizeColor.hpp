@@ -23,9 +23,9 @@ public:
     using ColorDataMap=std::map<double, ColorDetails>;
     using ColorDataPair=std::pair<double, ColorDetails>;
 
-    unsigned int getNewColor(unsigned int const originalColor);
-    double getNewLightness(double const originalValue);
-    double getNewSaturation(double const originalValue);
+    unsigned int getNewColor(unsigned int const originalColor) const;
+    double getNewLightness(double const originalValue) const;
+    double getNewSaturation(double const originalValue) const;
     void gatherStatistics(std::string const& bitmapPath);
     void calculateNewValues();
     void saveColorData(std::string const& path);
@@ -37,8 +37,8 @@ private:
             double const lightness);
     void calculateNewValues(ColorDataMap & colorDataMap);
     double getNewValue(
-            ColorDataMap & colorDataMap,
-            double const originalLightnessValue);
+            ColorDataMap const& colorDataMap,
+            double const originalLightnessValue) const;
     double m_lowestIncludedValue;
     double m_highestIncludedValue;
     ColorDataMap m_lightnessData;

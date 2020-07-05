@@ -2,6 +2,7 @@
 
 #include <Bitmap/Bitmap.hpp>
 #include <Bitmap/BitmapSnippet.hpp>
+#include <BitmapFilters/AnimizeColor.hpp>
 #include <BitmapFilters/LabelForPoints.hpp>
 #include <BitmapFilters/PenCircles.hpp>
 #include <BitmapFilters/PenPoints.hpp>
@@ -9,6 +10,7 @@
 #include <TwoDimensions/Point.hpp>
 #include <TwoDimensions/Circle.hpp>
 #include <UnionFind/UnionFind.hpp>
+
 #include <functional>
 #include <deque>
 
@@ -27,6 +29,7 @@ public:
     using PointColorPair=std::pair<BitmapXY, unsigned int>;
     using PenPointToPenCircleMap=std::map<BitmapXY, TwoDimensions::Circle>;
     using PenPointPenCirclePair=std::pair<BitmapXY, TwoDimensions::Circle>;
+
     BitmapFilters(std::string const& path);
 
     bool isSimilar(unsigned int const color1, unsigned int const color2, unsigned int const similarityColorLimit) const;
@@ -62,7 +65,8 @@ public:
     //draw pen and non pen functions
     void drawPenPoints(
             PenPoints const& penPoints,
-            BitmapSnippet const& inputSnippet,            BitmapSnippet & outputSnippet);
+            BitmapSnippet const& inputSnippet,
+            BitmapSnippet & outputSnippet);
     void drawNonPenPoints(
             PenPoints const& penPoints,
             BitmapSnippet const& inputSnippet,
@@ -75,8 +79,7 @@ public:
             unsigned int const similarityColorLimit);
     void drawPenCircles(
             PenCircles const& penCircles,
-            BitmapSnippet const& inputSnippet,
-            BitmapSnippet & outputSnippet);
+            BitmapSnippet & snippet);
 
     //draw blur functions
     void drawWithBlurringDisimilarColors(
@@ -96,15 +99,17 @@ public:
             BitmapSnippet & snippet,
             double const blurRadius);
     void drawAnimeColor(
+            BitmapSnippet & snippet,
+            AnimizeColor const& animizeColor);
+    void drawNewColorForLabels(
             BitmapSnippet & snippet);
-    void drawNewColorForLabels(            BitmapSnippet & snippet);
 
-    void saveOutputCanvasIntoCurrentBitmapFile(
+    void saveSnippetIntoCurrentBitmapFile(
             BitmapSnippet const& snippet) const;
-    void saveOutputCanvasIntoFileInTheSameDirectory(
+    void saveSnippetIntoFileInTheSameDirectory(
             BitmapSnippet const& snippet,
             std::string const& filename);
-    void saveOutputCanvasIntoFileWithFullFilePath(
+    void saveSnippetIntoFileWithFullFilePath(
             BitmapSnippet const& snippet,
             std::string const& fullFilePath);
 
@@ -119,7 +124,8 @@ private:
             unsigned int const similarityColorLimit);
     unsigned int analyzeFourConnectivityNeighborPointsForConnectedComponentsTwoPassAndReturnSmallestLabel(
             BitmapSnippet const& inputSnippet,
-            UnionFindForLabels & unionFindForLabels,            BitmapXY const & neighborPoint);
+            UnionFindForLabels & unionFindForLabels,
+            BitmapXY const & neighborPoint);
     void analyzeFourConnectivityNeighborPointsForConnectedComponentsOneComponentAtATime(
             BitmapSnippet const& inputSnippet,
             std::deque<BitmapXY> & pointsInQueue,

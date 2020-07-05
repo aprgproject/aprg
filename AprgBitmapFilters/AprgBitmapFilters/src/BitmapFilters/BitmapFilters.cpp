@@ -1,12 +1,12 @@
 #include "BitmapFilters.hpp"
 
-#include <BitmapFilters/AnimizeColor.hpp>
 #include <BitmapFilters/ColorStatistics.hpp>
 #include <BitmapFilters/ColorUtilities.hpp>
 #include <BitmapFilters/Utilities.hpp>
 #include <BitmapTraversal/OutwardCircleTraversal.hpp>
 #include <BitmapTraversal/OutwardSnakeLikeTraversal.hpp>
-#include <Optional/AlbaOptional.hpp>#include <PathHandlers/AlbaLocalPathHandler.hpp>
+#include <Optional/AlbaOptional.hpp>
+#include <PathHandlers/AlbaLocalPathHandler.hpp>
 #include <TwoDimensions/TwoDimensionsHelper.hpp>
 
 using namespace alba::AprgBitmap::ColorUtilities;
@@ -151,9 +151,9 @@ void BitmapFilters::determinePenCirclesFromPenPoints(
 {
     map<BitmapXY, Circle> penPointsToPenCircles;
     determinePenPointsToPenCircles(penPointsToPenCircles, penPoints, inputSnippet, similarityColorLimit, acceptablePenPercentage);
-    for(PenPointPenCirclePair const& penPointNewPenCirclePair : penPointsToPenCircles)
+    for(PenPointPenCirclePair const& pair : penPointsToPenCircles)
     {
-        penCircles.addAsPenCircle(penPointNewPenCirclePair.second);
+        penCircles.addAsPenCircle(pair.first, pair.second.getRadius(), inputSnippet.getColorAt(pair.first));
     }
 }
 
@@ -247,16 +247,16 @@ void BitmapFilters::drawBlurredNonPenPoints(
 
 void BitmapFilters::drawPenCircles(
         PenCircles const& penCircles,
-        BitmapSnippet const& inputSnippet,        BitmapSnippet & outputSnippet)
+        BitmapSnippet & snippet)
 {
-    for(Circle const& penCircle : penCircles.getPenCircles())
+    for(PenCircles::PointPenCircleDetailsPair const& pair : penCircles.getPenCircles())
     {
-        BitmapXY centerPoint(convertPointToBitmapXY(penCircle.getCenter()));
-        unsigned int const centerColor(inputSnippet.getColorAt(centerPoint));
-        BitmapSnippetTraversal snippetTraversal(inputSnippet);
+        BitmapXY const& centerPoint(pair.first);
+        BitmapSnippetTraversal snippetTraversal(snippet);
+        Circle penCircle(convertBitmapXYToPoint(centerPoint), pair.second.radius);
         snippetTraversal.traverseCircleArea(penCircle, [&](BitmapXY const& pointInPenCircle)
         {
-            outputSnippet.setPixelAt(pointInPenCircle, centerColor);
+            snippet.setPixelAt(pointInPenCircle, pair.second.color);
         });
     }
 }
@@ -300,7 +300,8 @@ void BitmapFilters::drawBlurredColorsUsingCircles(
 
 void BitmapFilters::drawWithBlurUsingSnakeLikeTraversal(
         BitmapSnippet & snippet,
-        unsigned int const similarityColorLimit){
+        unsigned int const similarityColorLimit)
+{
     BitmapXY const topLeft(snippet.getTopLeftCorner());
     BitmapXY const bottomRight(snippet.getBottomRightCorner());
     BitmapXY const middle((topLeft.getX()+bottomRight.getX())/2, (topLeft.getY()+bottomRight.getY())/2);
@@ -363,10 +364,9 @@ void BitmapFilters::drawToFillGapsUsingBlur(
 }
 
 void BitmapFilters::drawAnimeColor(
-        BitmapSnippet & snippet)
-{    AnimizeColor animizeColor;
-    animizeColor.gatherStatistics(m_bitmap.getConfiguration().getPath());
-    animizeColor.calculateNewValues();
+        BitmapSnippet & snippet,
+        AnimizeColor const& animizeColor)
+{
     snippet.traverse([&](BitmapXY const& position, unsigned int const color)
     {
         unsigned int newColor = animizeColor.getNewColor(color);
@@ -387,21 +387,21 @@ void BitmapFilters::drawNewColorForLabels(
     });
 }
 
-void BitmapFilters::saveOutputCanvasIntoCurrentBitmapFile(
+void BitmapFilters::saveSnippetIntoCurrentBitmapFile(
         BitmapSnippet const& snippet) const
 {
     m_bitmap.setSnippetWriteToFile(snippet);
 }
 
-void BitmapFilters::saveOutputCanvasIntoFileInTheSameDirectory(
+void BitmapFilters::saveSnippetIntoFileInTheSameDirectory(
         BitmapSnippet const& snippet,
         string const& filename)
 {
     AlbaLocalPathHandler originalBitmapPathHandler(m_bitmap.getConfiguration().getPath());
-    saveOutputCanvasIntoFileWithFullFilePath(snippet, originalBitmapPathHandler.getDirectory()+filename);
+    saveSnippetIntoFileWithFullFilePath(snippet, originalBitmapPathHandler.getDirectory()+filename);
 }
 
-void BitmapFilters::saveOutputCanvasIntoFileWithFullFilePath(
+void BitmapFilters::saveSnippetIntoFileWithFullFilePath(
         BitmapSnippet const& snippet,
         string const& fullFilePath)
 {
@@ -461,7 +461,8 @@ void BitmapFilters::collectDisimilarPointsToNewColors(
 
 unsigned int BitmapFilters::analyzeFourConnectivityNeighborPointsForConnectedComponentsTwoPassAndReturnSmallestLabel(
         BitmapSnippet const& inputSnippet,
-        UnionFindForLabels & unionFindForLabels,        BitmapXY const & neighborPoint)
+        UnionFindForLabels & unionFindForLabels,
+        BitmapXY const & neighborPoint)
 {
     //4-connectivity
     unsigned int smallestLabel = INVALID_LABEL_VALUE;
