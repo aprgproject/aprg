@@ -65,7 +65,8 @@ public:
     std::string getPrintableStringFormat3() const; // HH:MM:SS.MMMMMM
     bool operator<(AlbaDateTime const& secondDateTime) const;
     bool operator>(AlbaDateTime const& secondDateTime) const;
-    bool operator==(AlbaDateTime const& secondDateTime) const;    bool operator!=(AlbaDateTime const& secondDateTime) const;
+    bool operator==(AlbaDateTime const& secondDateTime) const;
+    bool operator!=(AlbaDateTime const& secondDateTime) const;
     AlbaDateTime operator+(AlbaDateTime const& secondDateTime) const;
     AlbaDateTime operator-(AlbaDateTime const& secondDateTime) const;
     void negate();

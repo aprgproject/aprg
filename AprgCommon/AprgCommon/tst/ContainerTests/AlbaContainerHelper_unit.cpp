@@ -55,7 +55,8 @@ TEST(ContainerSetTest, GetLowerAndUpperConstIteratorsInMap)
 
 TEST(ContainerSetTest, GetLowerAndUpperIteratorsInMap)
 {
-    map<unsigned int, unsigned int> sampleMap{{1, 10}, {3, 30}, {5, 50}};    using MapIterator=map<unsigned int, unsigned int>::iterator;
+    map<unsigned int, unsigned int> sampleMap{{1, 10}, {3, 30}, {5, 50}};
+    using MapIterator=map<unsigned int, unsigned int>::iterator;
     using PairOfIterators=pair<MapIterator, MapIterator>;
 
     MapIterator firstIterator=sampleMap.find(1);

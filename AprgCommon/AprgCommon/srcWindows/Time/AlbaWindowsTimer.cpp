@@ -7,6 +7,7 @@ using namespace std;
 
 namespace alba
 {
+
 AlbaWindowsTimer::AlbaWindowsTimer()
 {
     resetTimer();
@@ -33,7 +34,8 @@ unsigned int AlbaWindowsTimer::getElapsedTimeInMilliseconds() const
     AlbaDateTime difference(getDifferenceBetweenTimes());
     unsigned int elapsedTime =
             static_cast<unsigned int>(
-            (difference.getHours()*static_cast<int>(AlbaDateTimeConstants::NUMBER_OF_MILLISECONDS_IN_AN_HOUR))            + (difference.getMinutes()*static_cast<int>(AlbaDateTimeConstants::NUMBER_OF_MILLISECONDS_IN_A_MINUTE))
+            (difference.getHours()*static_cast<int>(AlbaDateTimeConstants::NUMBER_OF_MILLISECONDS_IN_AN_HOUR))
+            + (difference.getMinutes()*static_cast<int>(AlbaDateTimeConstants::NUMBER_OF_MILLISECONDS_IN_A_MINUTE))
             + (difference.getSeconds()*static_cast<int>(AlbaDateTimeConstants::NUMBER_OF_MILLISECONDS_IN_A_SECOND))
             + difference.getMicroSeconds());
     return elapsedTime;
@@ -44,7 +46,8 @@ unsigned int AlbaWindowsTimer::getElapsedTimeInSeconds() const
     AlbaDateTime difference(getDifferenceBetweenTimes());
     unsigned int elapsedTime =
             static_cast<unsigned int>(
-            (difference.getHours()*static_cast<int>(AlbaDateTimeConstants::NUMBER_OF_SECONDS_IN_AN_HOUR))            + (difference.getMinutes()*static_cast<int>(AlbaDateTimeConstants::NUMBER_OF_SECONDS_IN_A_MINUTE))
+            (difference.getHours()*static_cast<int>(AlbaDateTimeConstants::NUMBER_OF_SECONDS_IN_AN_HOUR))
+            + (difference.getMinutes()*static_cast<int>(AlbaDateTimeConstants::NUMBER_OF_SECONDS_IN_A_MINUTE))
             + difference.getSeconds());
     return elapsedTime;
 }
@@ -54,7 +57,8 @@ unsigned int AlbaWindowsTimer::getElapsedTimeInMinutes() const
     AlbaDateTime difference(getDifferenceBetweenTimes());
     unsigned int elapsedTime =
             static_cast<unsigned int>(
-            (difference.getHours()*static_cast<int>(AlbaDateTimeConstants::NUMBER_OF_MINUTES_IN_AN_HOUR))            + difference.getMinutes());
+            (difference.getHours()*static_cast<int>(AlbaDateTimeConstants::NUMBER_OF_MINUTES_IN_AN_HOUR))
+            + difference.getMinutes());
     return elapsedTime;
 }
 
