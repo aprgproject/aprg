@@ -32,10 +32,10 @@ public:
     AlbaOptional<double> calculateXFromY(double const y, double const signOfRoot) const;
     AlbaOptional<double> calculateYFromXWithoutCenter(double const x, double const signOfRoot) const;
     AlbaOptional<double> calculateXFromYWithoutCenter(double const y, double const signOfRoot) const;
+    Point getPointAtAngle(double const angleInRadians);
     Point getNearestPointInCircumference(Point const& pointNotCircumference) const;
 
     std::string getDisplayableString() const;
-
 private:
     Points getPointsInTraversingXAndY(double const signOfX, double const signOfY, double const interval) const;
     Points getPointsInTraversingY(double const signOfX, double const signOfY, double const interval) const;
