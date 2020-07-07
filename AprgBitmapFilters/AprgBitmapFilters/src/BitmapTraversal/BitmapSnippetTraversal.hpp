@@ -3,9 +3,9 @@
 #include <Bitmap/BitmapSnippet.hpp>
 #include <Bitmap/CommonTypes.hpp>
 #include <TwoDimensions/Circle.hpp>
+#include <TwoDimensions/Quadrilateral.hpp>
 
 #include <functional>
-
 namespace alba
 {
 
@@ -22,10 +22,12 @@ public:
     void traverseCircleArea(
             TwoDimensions::Circle const& circle,
             TraverseOperation const& traverseOperation) const;
+    void traverseQuadrilateralArea(
+            TwoDimensions::Quadrilateral const& quadrilateral,
+            TraverseOperation const& traverseOperation) const;
     void traverseCoordinatesCombinations(
             BitmapXY const& centerPoint,
-            unsigned int const coordinate1,
-            unsigned int const coordinate2,
+            unsigned int const coordinate1,            unsigned int const coordinate2,
             TraverseOperation const& traverseOperation) const;
     void traverse4WayConnectivity(
             BitmapXY const& centerPoint,
