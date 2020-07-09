@@ -7,6 +7,7 @@
 
 namespace alba
 {
+
 /** The different types of audio file, plus some other types to
  * indicate a failure to load a file, or that one hasn't been
  * loaded yet
@@ -34,6 +35,7 @@ public:
     bool save (std::string const& filePath, AprgAudioFormat format = AprgAudioFormat::Wave);
 
     unsigned int getSampleRate() const;
+
     int getNumChannels() const;
 
     bool isMono() const;
@@ -43,6 +45,8 @@ public:
     int getBitDepth() const;
 
     int getNumSamplesPerChannel() const;
+
+    T* getSamplesAtChannel(unsigned int const channelIndex);
 
     /** @Returns the length in seconds of the audio file based on the number of samples and sample rate */
     double getLengthInSeconds() const;
@@ -105,6 +109,7 @@ private:
 
     T sixteenBitIntToSample (int16_t sample);
     int16_t sampleToSixteenBitInt (T sample);
+
     unsigned char sampleToSingleByte (T sample);
     T singleByteToSample (unsigned char sample);
 
@@ -120,7 +125,8 @@ private:
     bool writeDataToFile (std::vector<unsigned char>& fileData, std::string const& filePath);
 
     AprgAudioFormat audioFileFormat;
-    unsigned int sampleRate;    int bitDepth;
+    int sampleRate;
+    int bitDepth;
 };
 
 }
