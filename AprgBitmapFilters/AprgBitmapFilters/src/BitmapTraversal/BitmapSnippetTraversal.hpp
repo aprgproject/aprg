@@ -6,6 +6,7 @@
 #include <TwoDimensions/Quadrilateral.hpp>
 
 #include <functional>
+
 namespace alba
 {
 
@@ -27,7 +28,8 @@ public:
             TraverseOperation const& traverseOperation) const;
     void traverseCoordinatesCombinations(
             BitmapXY const& centerPoint,
-            unsigned int const coordinate1,            unsigned int const coordinate2,
+            unsigned int const coordinate1,
+            unsigned int const coordinate2,
             TraverseOperation const& traverseOperation) const;
     void traverse4WayConnectivity(
             BitmapXY const& centerPoint,

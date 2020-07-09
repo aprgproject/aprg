@@ -18,6 +18,7 @@ enum class AlbaRangeType
     Forward,
     Backward
 };
+
 template <typename DataType>
 class AlbaRange
 {
@@ -155,6 +156,7 @@ public:
             }
         }
     }
+
     void clear()
     {
         m_startValue=0;
@@ -211,7 +213,8 @@ private:
             rangeType = AlbaRangeType::Once;
         }
         else if(startValue < endValue)
-        {            rangeType = AlbaRangeType::Forward;
+        {
+            rangeType = AlbaRangeType::Forward;
         }
         else
         {

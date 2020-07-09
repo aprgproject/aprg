@@ -59,7 +59,8 @@ TEST(AlbaRangeTest, OnceTraversalWorks)
 
 TEST(AlbaRangeTest, ForwardTraversalWorks)
 {
-    AlbaRange<int> range(1, 10, -1);    vector<int> traversedValues;
+    AlbaRange<int> range(1, 10, -1);
+    vector<int> traversedValues;
     range.traverse([&](int const traverseValue)
     {
         traversedValues.emplace_back(traverseValue);
