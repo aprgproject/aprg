@@ -5,10 +5,8 @@
 #include <assert.h>
 #include <string>
 
-
 namespace alba
 {
-
 /** The different types of audio file, plus some other types to
  * indicate a failure to load a file, or that one hasn't been
  * loaded yet
@@ -31,12 +29,11 @@ public:
 
     AprgAudio();
 
-    bool load (std::string filePath);
+    bool load (std::string const& filePath);
 
-    bool save (std::string filePath, AprgAudioFormat format = AprgAudioFormat::Wave);
+    bool save (std::string const& filePath, AprgAudioFormat format = AprgAudioFormat::Wave);
 
     unsigned int getSampleRate() const;
-
     int getNumChannels() const;
 
     bool isMono() const;
@@ -97,18 +94,17 @@ private:
     bool decodeWaveFile (std::vector<unsigned char>& fileData);
     bool decodeAiffFile (std::vector<unsigned char>& fileData);
 
-    bool saveToWaveFile (std::string filePath);
-    bool saveToAiffFile (std::string filePath);
+    bool saveToWaveFile (std::string const& filePath);
+    bool saveToAiffFile (std::string const& filePath);
 
     void clearAudioBuffer();
 
     int32_t fourBytesToInt (std::vector<unsigned char>& source, int startIndex, Endianness endianness = Endianness::LittleEndian);
     int16_t twoBytesToInt (std::vector<unsigned char>& source, int startIndex, Endianness endianness = Endianness::LittleEndian);
-    int getIndexOfString (std::vector<unsigned char>& source, std::string s);
+    int getIndexOfString (std::vector<unsigned char>& source, std::string const& s);
 
     T sixteenBitIntToSample (int16_t sample);
     int16_t sampleToSixteenBitInt (T sample);
-
     unsigned char sampleToSingleByte (T sample);
     T singleByteToSample (unsigned char sample);
 
@@ -117,15 +113,14 @@ private:
     void addSampleRateToAiffData (std::vector<unsigned char>& fileData, unsigned int sampleRate);
     T clamp (T v1, T minValue, T maxValue);
 
-    void addStringToFileData (std::vector<unsigned char>& fileData, std::string s);
+    void addStringToFileData (std::vector<unsigned char>& fileData, std::string const& s);
     void addInt32ToFileData (std::vector<unsigned char>& fileData, int32_t i, Endianness endianness = Endianness::LittleEndian);
     void addInt16ToFileData (std::vector<unsigned char>& fileData, int16_t i, Endianness endianness = Endianness::LittleEndian);
 
-    bool writeDataToFile (std::vector<unsigned char>& fileData, std::string filePath);
+    bool writeDataToFile (std::vector<unsigned char>& fileData, std::string const& filePath);
 
     AprgAudioFormat audioFileFormat;
-    unsigned int sampleRate;
-    int bitDepth;
+    unsigned int sampleRate;    int bitDepth;
 };
 
 }

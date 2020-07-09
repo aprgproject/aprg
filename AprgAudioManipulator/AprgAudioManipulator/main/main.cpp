@@ -1,4 +1,4 @@
-#include <AprgWavManipulator.hpp>
+#include <AprgAudioManipulator.hpp>
 
 using namespace alba;
 
