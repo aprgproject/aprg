@@ -1,23 +1,22 @@
-#include <AprgAudio.hpp>
+#include <Audio/AprgAudio.hpp>
 
-#include <ExpectedValues/aiff_stereo_8bit_44100.hpp>
-#include <ExpectedValues/aiff_stereo_16bit_44100.hpp>
-#include <ExpectedValues/aiff_stereo_24bit_44100.hpp>
-#include <ExpectedValues/aiff_stereo_8bit_48000.hpp>
-#include <ExpectedValues/aiff_stereo_16bit_48000.hpp>
-#include <ExpectedValues/aiff_stereo_24bit_48000.hpp>
-#include <ExpectedValues/wav_mono_16bit_44100.hpp>
-#include <ExpectedValues/wav_mono_16bit_48000.hpp>
-#include <ExpectedValues/wav_stereo_8bit_44100.hpp>
-#include <ExpectedValues/wav_stereo_16bit_44100.hpp>
-#include <ExpectedValues/wav_stereo_24bit_44100.hpp>
-#include <ExpectedValues/wav_stereo_8bit_48000.hpp>
-#include <ExpectedValues/wav_stereo_16bit_48000.hpp>
-#include <ExpectedValues/wav_stereo_24bit_48000.hpp>
+#include <Audio/ExpectedValues/aiff_stereo_8bit_44100.hpp>
+#include <Audio/ExpectedValues/aiff_stereo_16bit_44100.hpp>
+#include <Audio/ExpectedValues/aiff_stereo_24bit_44100.hpp>
+#include <Audio/ExpectedValues/aiff_stereo_8bit_48000.hpp>
+#include <Audio/ExpectedValues/aiff_stereo_16bit_48000.hpp>
+#include <Audio/ExpectedValues/aiff_stereo_24bit_48000.hpp>
+#include <Audio/ExpectedValues/wav_mono_16bit_44100.hpp>
+#include <Audio/ExpectedValues/wav_mono_16bit_48000.hpp>
+#include <Audio/ExpectedValues/wav_stereo_8bit_44100.hpp>
+#include <Audio/ExpectedValues/wav_stereo_16bit_44100.hpp>
+#include <Audio/ExpectedValues/wav_stereo_24bit_44100.hpp>
+#include <Audio/ExpectedValues/wav_stereo_8bit_48000.hpp>
+#include <Audio/ExpectedValues/wav_stereo_16bit_48000.hpp>
+#include <Audio/ExpectedValues/wav_stereo_24bit_48000.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace alba::mathHelper;
 using namespace std;
 
@@ -35,13 +34,12 @@ TEST(AiffLoadingTests, Stereo_8bit_44100)
     EXPECT_EQ(audioFile.getSampleRate(), aiff_stereo_8bit_44100::sampleRate);
     EXPECT_EQ(audioFile.getNumChannels(), aiff_stereo_8bit_44100::numChannels);
 
-    for (int i = 0; i < aiff_stereo_8bit_44100::testBuffer.size(); i++)
+    for (unsigned int i = 0; i < aiff_stereo_8bit_44100::testBuffer.size(); i++)
     {
-        for (int k = 0; k < audioFile.getNumChannels(); k++)
+        for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
         {
             EXPECT_TRUE(isAlmostEqual(audioFile.samples[k][i], aiff_stereo_8bit_44100::testBuffer[k][i]));
-        }
-    }
+        }    }
 }
 
 TEST(AiffLoadingTests, Stereo_16bit_44100)
@@ -55,13 +53,12 @@ TEST(AiffLoadingTests, Stereo_16bit_44100)
     EXPECT_EQ(audioFile.getSampleRate(), aiff_stereo_16bit_44100::sampleRate);
     EXPECT_EQ(audioFile.getNumChannels(), aiff_stereo_16bit_44100::numChannels);
 
-    for (int i = 0; i < aiff_stereo_16bit_44100::testBuffer.size(); i++)
+    for (unsigned int i = 0; i < aiff_stereo_16bit_44100::testBuffer.size(); i++)
     {
-        for (int k = 0; k < audioFile.getNumChannels(); k++)
+        for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
         {
             EXPECT_TRUE(isAlmostEqual(audioFile.samples[k][i], aiff_stereo_16bit_44100::testBuffer[k][i]));
-        }
-    }
+        }    }
 }
 
 TEST(AiffLoadingTests, Stereo_24bit_44100)
@@ -75,13 +72,12 @@ TEST(AiffLoadingTests, Stereo_24bit_44100)
     EXPECT_EQ(audioFile.getSampleRate(), aiff_stereo_24bit_44100::sampleRate);
     EXPECT_EQ(audioFile.getNumChannels(), aiff_stereo_24bit_44100::numChannels);
 
-    for (int i = 0; i < aiff_stereo_24bit_44100::testBuffer.size(); i++)
+    for (unsigned int i = 0; i < aiff_stereo_24bit_44100::testBuffer.size(); i++)
     {
-        for (int k = 0; k < audioFile.getNumChannels(); k++)
+        for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
         {
             EXPECT_TRUE(isAlmostEqual(audioFile.samples[k][i], aiff_stereo_24bit_44100::testBuffer[k][i]));
-        }
-    }
+        }    }
 }
 
 TEST(AiffLoadingTests, Stereo_8bit_48000)
@@ -95,13 +91,12 @@ TEST(AiffLoadingTests, Stereo_8bit_48000)
     EXPECT_EQ(audioFile.getSampleRate(), aiff_stereo_8bit_48000::sampleRate);
     EXPECT_EQ(audioFile.getNumChannels(), aiff_stereo_8bit_48000::numChannels);
 
-    for (int i = 0; i < aiff_stereo_8bit_48000::testBuffer.size(); i++)
+    for (unsigned int i = 0; i < aiff_stereo_8bit_48000::testBuffer.size(); i++)
     {
-        for (int k = 0; k < audioFile.getNumChannels(); k++)
+        for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
         {
             EXPECT_TRUE(isAlmostEqual(audioFile.samples[k][i], aiff_stereo_8bit_48000::testBuffer[k][i]));
-        }
-    }
+        }    }
 }
 
 TEST(AiffLoadingTests, Stereo_16bit_48000)
@@ -115,13 +110,12 @@ TEST(AiffLoadingTests, Stereo_16bit_48000)
     EXPECT_EQ(audioFile.getSampleRate(), aiff_stereo_16bit_48000::sampleRate);
     EXPECT_EQ(audioFile.getNumChannels(), aiff_stereo_16bit_48000::numChannels);
 
-    for (int i = 0; i < aiff_stereo_16bit_48000::testBuffer.size(); i++)
+    for (unsigned int i = 0; i < aiff_stereo_16bit_48000::testBuffer.size(); i++)
     {
-        for (int k = 0; k < audioFile.getNumChannels(); k++)
+        for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
         {
             EXPECT_TRUE(isAlmostEqual(audioFile.samples[k][i], aiff_stereo_16bit_48000::testBuffer[k][i]));
-        }
-    }
+        }    }
 }
 
 TEST(AiffLoadingTests, Stereo_24bit_48000)
@@ -135,13 +129,12 @@ TEST(AiffLoadingTests, Stereo_24bit_48000)
     EXPECT_EQ(audioFile.getSampleRate(), aiff_stereo_24bit_48000::sampleRate);
     EXPECT_EQ(audioFile.getNumChannels(), aiff_stereo_24bit_48000::numChannels);
 
-    for (int i = 0; i < aiff_stereo_24bit_48000::testBuffer.size(); i++)
+    for (unsigned int i = 0; i < aiff_stereo_24bit_48000::testBuffer.size(); i++)
     {
-        for (int k = 0; k < audioFile.getNumChannels(); k++)
+        for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
         {
             EXPECT_TRUE(isAlmostEqual(audioFile.samples[k][i], aiff_stereo_24bit_48000::testBuffer[k][i]));
-        }
-    }
+        }    }
 }
 
 TEST(WritingTest, WriteFromCopiedSampleBuffer)
@@ -166,13 +159,12 @@ TEST(WavLoadingTests, Stereo_8bit_44100)
     EXPECT_EQ(audioFile.getSampleRate(), wav_stereo_8bit_44100::sampleRate);
     EXPECT_EQ(audioFile.getNumChannels(), wav_stereo_8bit_44100::testBuffer.size());
 
-    for (int i = 0; i < wav_stereo_8bit_44100::testBuffer[0].size(); i++)
+    for (unsigned int i = 0; i < wav_stereo_8bit_44100::testBuffer[0].size(); i++)
     {
-        for (int k = 0; k < audioFile.getNumChannels(); k++)
+        for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
         {
             EXPECT_TRUE(isAlmostEqual(audioFile.samples[k][i], wav_stereo_8bit_44100::testBuffer[k][i]));
-        }
-    }
+        }    }
 }
 
 TEST(WavLoadingTests, Stereo_16bit_44100)
@@ -186,13 +178,12 @@ TEST(WavLoadingTests, Stereo_16bit_44100)
     EXPECT_EQ(audioFile.getSampleRate(), wav_stereo_16bit_44100::sampleRate);
     EXPECT_EQ(audioFile.getNumChannels(), wav_stereo_16bit_44100::testBuffer.size());
 
-    for (int i = 0; i < wav_stereo_16bit_44100::testBuffer[0].size(); i++)
+    for (unsigned int i = 0; i < wav_stereo_16bit_44100::testBuffer[0].size(); i++)
     {
-        for (int k = 0; k < audioFile.getNumChannels(); k++)
+        for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
         {
             EXPECT_TRUE(isAlmostEqual(audioFile.samples[k][i], wav_stereo_16bit_44100::testBuffer[k][i]));
-        }
-    }
+        }    }
 }
 
 TEST(WavLoadingTests, Stereo_24bit_44100)
@@ -206,13 +197,12 @@ TEST(WavLoadingTests, Stereo_24bit_44100)
     EXPECT_EQ(audioFile.getSampleRate(), wav_stereo_24bit_44100::sampleRate);
     EXPECT_EQ(audioFile.getNumChannels(), wav_stereo_24bit_44100::testBuffer.size());
 
-    for (int i = 0; i < wav_stereo_24bit_44100::testBuffer[0].size(); i++)
+    for (unsigned int i = 0; i < wav_stereo_24bit_44100::testBuffer[0].size(); i++)
     {
-        for (int k = 0; k < audioFile.getNumChannels(); k++)
+        for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
         {
             EXPECT_TRUE(isAlmostEqual(audioFile.samples[k][i], wav_stereo_24bit_44100::testBuffer[k][i]));
-        }
-    }
+        }    }
 }
 
 TEST(WavLoadingTests, Mono_16bit_44100)
@@ -226,13 +216,12 @@ TEST(WavLoadingTests, Mono_16bit_44100)
     EXPECT_EQ(audioFile.getSampleRate(), wav_mono_16bit_44100::sampleRate);
     EXPECT_EQ(audioFile.getNumChannels(), wav_mono_16bit_44100::numChannels);
 
-    for (int i = 0; i < wav_mono_16bit_44100::testBuffer.size(); i++)
+    for (unsigned int i = 0; i < wav_mono_16bit_44100::testBuffer.size(); i++)
     {
-        for (int k = 0; k < audioFile.getNumChannels(); k++)
+        for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
         {
             EXPECT_TRUE(isAlmostEqual(audioFile.samples[k][i], wav_mono_16bit_44100::testBuffer[i]));
-        }
-    }
+        }    }
 }
 
 TEST(WavLoadingTests, Stereo_8bit_48000)
@@ -246,13 +235,12 @@ TEST(WavLoadingTests, Stereo_8bit_48000)
     EXPECT_EQ(audioFile.getSampleRate(), wav_stereo_8bit_48000::sampleRate);
     EXPECT_EQ(audioFile.getNumChannels(), wav_stereo_8bit_48000::testBuffer.size());
 
-    for (int i = 0; i < wav_stereo_8bit_48000::testBuffer[0].size(); i++)
+    for (unsigned int i = 0; i < wav_stereo_8bit_48000::testBuffer[0].size(); i++)
     {
-        for (int k = 0; k < audioFile.getNumChannels(); k++)
+        for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
         {
             EXPECT_TRUE(isAlmostEqual(audioFile.samples[k][i], wav_stereo_8bit_48000::testBuffer[k][i]));
-        }
-    }
+        }    }
 }
 
 TEST(WavLoadingTests, Stereo_16bit_48000)
@@ -266,13 +254,12 @@ TEST(WavLoadingTests, Stereo_16bit_48000)
     EXPECT_EQ(audioFile.getSampleRate(), wav_stereo_16bit_48000::sampleRate);
     EXPECT_EQ(audioFile.getNumChannels(), wav_stereo_16bit_48000::testBuffer.size());
 
-    for (int i = 0; i < wav_stereo_16bit_48000::testBuffer[0].size(); i++)
+    for (unsigned int i = 0; i < wav_stereo_16bit_48000::testBuffer[0].size(); i++)
     {
-        for (int k = 0; k < audioFile.getNumChannels(); k++)
+        for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
         {
             EXPECT_TRUE(isAlmostEqual(audioFile.samples[k][i], wav_stereo_16bit_48000::testBuffer[k][i]));
-        }
-    }
+        }    }
 }
 
 TEST(WavLoadingTests, Stereo_24bit_48000)
@@ -286,13 +273,12 @@ TEST(WavLoadingTests, Stereo_24bit_48000)
     EXPECT_EQ(audioFile.getSampleRate(), wav_stereo_24bit_48000::sampleRate);
     EXPECT_EQ(audioFile.getNumChannels(), wav_stereo_24bit_48000::testBuffer.size());
 
-    for (int i = 0; i < wav_stereo_24bit_48000::testBuffer[0].size(); i++)
+    for (unsigned int i = 0; i < wav_stereo_24bit_48000::testBuffer[0].size(); i++)
     {
-        for (int k = 0; k < audioFile.getNumChannels(); k++)
+        for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
         {
             EXPECT_TRUE(isAlmostEqual(audioFile.samples[k][i], wav_stereo_24bit_48000::testBuffer[k][i]));
-        }
-    }
+        }    }
 }
 
 TEST(WavLoadingTests, Mono_16bit_48000)
@@ -306,13 +292,12 @@ TEST(WavLoadingTests, Mono_16bit_48000)
     EXPECT_EQ(audioFile.getSampleRate(), wav_mono_16bit_48000::sampleRate);
     EXPECT_EQ(audioFile.getNumChannels(), wav_mono_16bit_48000::numChannels);
 
-    for (int i = 0; i < wav_mono_16bit_48000::testBuffer.size(); i++)
+    for (unsigned int i = 0; i < wav_mono_16bit_48000::testBuffer.size(); i++)
     {
-        for (int k = 0; k < audioFile.getNumChannels(); k++)
+        for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
         {
             EXPECT_TRUE(isAlmostEqual(audioFile.samples[k][i], wav_mono_16bit_48000::testBuffer[i]));
-        }
-    }
+        }    }
 }
 
 bool writeTest(int numChannels, int sampleRate, int bitDepth, AprgAudioFormat format)
@@ -323,14 +308,13 @@ bool writeTest(int numChannels, int sampleRate, int bitDepth, AprgAudioFormat fo
 
     audioFile.setAudioBufferSize (numChannels, sampleRate * 4);
 
-    for (int i = 0; i < audioFile.getNumSamplesPerChannel(); i++)
+    for (unsigned int i = 0; i < static_cast<unsigned int>(audioFile.getNumSamplesPerChannel()); i++)
     {
         float sample = sinf (2. * getPi() * ((float) i / sampleRateAsFloat) * 440.) ;
 
-        for (int k = 0; k < audioFile.getNumChannels(); k++)
+        for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
             audioFile.samples[k][i] = sample * 0.5;
     }
-
     audioFile.setSampleRate (sampleRate);
     audioFile.setBitDepth (bitDepth);
 
