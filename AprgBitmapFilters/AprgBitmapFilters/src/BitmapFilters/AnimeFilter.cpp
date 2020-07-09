@@ -72,19 +72,17 @@ void animize(string const& inputFile,
     bitmapFilters.drawPenCircles(penCirclesAfterAnimeColor, outputSnippet);
     debugSnippet=bitmapFilters.getBlankSnippetWithBackground();
     bitmapFilters.drawPenCircles(penCirclesAfterAnimeColor, debugSnippet);
-    doStuffsAfterSteps(localTimer, bitmapFilters, debugSnippet, inputFile, "Determining pen circles (after anime color)");
+    doStuffsAfterSteps(localTimer, bitmapFilters, debugSnippet, inputFile, "Drawing pen circles (after anime color)");
 
     animeColorsInPenCircles(penCirclesBeforeAnimeColor, animizeColor);
     doStuffsAfterSteps(localTimer, "Convert pen circles (before anime color) to anime color");
-
     bitmapFilters.drawPenCircles(penCirclesBeforeAnimeColor, outputSnippet);
     debugSnippet=bitmapFilters.getBlankSnippetWithBackground();
     bitmapFilters.drawPenCircles(penCirclesBeforeAnimeColor, debugSnippet);
-    doStuffsAfterSteps(localTimer, bitmapFilters, debugSnippet, inputFile, "Determining pen circles (before anime color)");
+    doStuffsAfterSteps(localTimer, bitmapFilters, debugSnippet, inputFile, "Drawing pen circles (before anime color)");
 
     bitmapFilters.saveSnippetIntoFileWithFullFilePath(outputSnippet, outputFilePathHandler.getFullPath());
 }
-
 void doStuffsAfterSteps(
         AlbaLocalTimer & localTimer,
         string const& description)
