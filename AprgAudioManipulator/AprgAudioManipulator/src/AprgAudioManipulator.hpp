@@ -1,10 +1,9 @@
 #pragma once
 
-#include <AprgAudio.hpp>
+#include <Audio/AprgAudio.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 
-namespace alba
-{
+namespace alba{
 
 class AprgAudioManipulator
 {
