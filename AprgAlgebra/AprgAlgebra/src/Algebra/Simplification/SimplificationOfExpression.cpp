@@ -119,11 +119,9 @@ void SimplificationOfExpression::simplifyExpression()
 
     Expression afterSimplify(m_expression);
     simplifyFurtherIfNeeded(beforeSimplify, afterSimplify);
-
 }
 
-void SimplificationOfExpression::simplifyAndCopyTerms(
-        TermsWithDetails & termsToUpdate,
+void SimplificationOfExpression::simplifyAndCopyTerms(        TermsWithDetails & termsToUpdate,
         TermsWithDetails const& termsToCheck)
 {
     for(TermWithDetails const& termWithDetails : termsToCheck)
@@ -253,11 +251,10 @@ void SimplificationOfExpression::putNegativeExponentsOnDenominator(Expression & 
     TermsWithDetails & termsWithDetails(expression.getTermsWithAssociationReference().getTermsWithDetailsReference());
     if((termsWithDetails.size()==1 || expression.getCommonOperatorLevel()==OperatorLevel::MultiplicationAndDivision))
     {
-        ListOfPolynomialOverPolynomial numeratorsAndDenominators;
+        ListOfPolynomialOverPolynomial numeratorsAndDenominatorPolynomials;
         bool isExpressionChanged(false);
         for(TermsWithDetails::iterator it=termsWithDetails.begin(); it!=termsWithDetails.end(); it++)
-        {
-            Term & term(getTermReferenceFromSharedPointer(it->baseTermSharedPointer));
+        {            Term & term(getTermReferenceFromSharedPointer(it->baseTermSharedPointer));
             if(term.isExpression())
             {
                 Expression & subExpression(term.getExpressionReference());
@@ -265,11 +262,10 @@ void SimplificationOfExpression::putNegativeExponentsOnDenominator(Expression & 
             }
             else if(canBeConvertedToPolynomial(term))
             {
-                emplaceToNumeratorsAndDenominators(numeratorsAndDenominators, createPolynomialIfPossible(term), it->association);
+                emplaceToNumeratorsAndDenominators(numeratorsAndDenominatorPolynomials, createPolynomialIfPossible(term), it->association);
                 isExpressionChanged=true;
                 termsWithDetails.erase(it);
-                it--;
-            }
+                it--;            }
         }
         if(isExpressionChanged)
         {
@@ -280,13 +276,12 @@ void SimplificationOfExpression::putNegativeExponentsOnDenominator(Expression & 
                         expression.getTermsWithAssociation().getTermsWithDetails(),
                         termsInNumerator,
                         termsInDenominator);
-            putNumeratorsInExpression(newExpression, numeratorsAndDenominators);
+            putNumeratorsInExpression(newExpression, numeratorsAndDenominatorPolynomials);
             putNumeratorsInExpression(newExpression, termsInNumerator);
-            putDenominatorsInExpression(newExpression, numeratorsAndDenominators);
+            putDenominatorsInExpression(newExpression, numeratorsAndDenominatorPolynomials);
             putDenominatorsInExpression(newExpression, termsInDenominator);
             expression = newExpression;
-        }
-    }
+        }    }
 }
 
 void SimplificationOfExpression::processTermsBaseOnOperatorLevel(
