@@ -15,11 +15,10 @@ std::string const ALPHA_NUMERIC_CHAR_MAP = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ
 namespace stringHelper
 {
 
-typedef std::vector<std::string> strings;
+using strings=std::vector<std::string>;
 
 std::wstring convertStringToWideString(std::string const& stringInput);
 std::string convertWideStringToString(std::wstring const& wstringInput);
-
 unsigned int getLevenshteinDistance(std::string const& mainString, std::string const& string2);
 unsigned int generateUniqueId(std::string const& mainString);
 std::string constructFileLocator(std::string file, int lineNumber);
