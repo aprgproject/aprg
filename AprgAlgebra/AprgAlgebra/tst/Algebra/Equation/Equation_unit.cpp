@@ -22,6 +22,7 @@ TEST(EquationTest, EquationsAreConstructedCorrectly)
     EXPECT_EQ(Term(7), equation2.getLeftHandTerm());
     EXPECT_EQ(Term(8), equation2.getRightHandTerm());
 }
+
 TEST(EquationTest, EqualityOperatorWorks)
 {
     Equation equation1(Term(), "=", Term());
@@ -32,7 +33,8 @@ TEST(EquationTest, EqualityOperatorWorks)
     Equation equation6(Term(Monomial(1, {{"x", 1}})), ">=", Term(8));
 
     EXPECT_TRUE(equation1==equation1);
-    EXPECT_FALSE(equation1==equation2);    EXPECT_TRUE(equation2==equation2);
+    EXPECT_FALSE(equation1==equation2);
+    EXPECT_TRUE(equation2==equation2);
     EXPECT_TRUE(equation2==equation3);
     EXPECT_FALSE(equation2==equation4);
     EXPECT_FALSE(equation2==equation5);
@@ -49,7 +51,8 @@ TEST(EquationTest, InequalityOperatorWorks)
     Equation equation6(Term(Monomial(1, {{"x", 1}})), ">=", Term(8));
 
     EXPECT_FALSE(equation1!=equation1);
-    EXPECT_TRUE(equation1!=equation2);    EXPECT_FALSE(equation2!=equation2);
+    EXPECT_TRUE(equation1!=equation2);
+    EXPECT_FALSE(equation2!=equation2);
     EXPECT_FALSE(equation2!=equation3);
     EXPECT_TRUE(equation2!=equation4);
     EXPECT_TRUE(equation2!=equation5);
@@ -69,7 +72,8 @@ TEST(EquationTest, LessThanOperatorWorks)
     Equation equation9(Term(7), ">", Term(17));
 
     EXPECT_FALSE(equation1<equation1);
-    EXPECT_FALSE(equation2<equation3);    EXPECT_FALSE(equation2<equation4);
+    EXPECT_FALSE(equation2<equation3);
+    EXPECT_FALSE(equation2<equation4);
     EXPECT_TRUE(equation2<equation5);
     EXPECT_FALSE(equation2<equation6);
     EXPECT_TRUE(equation2<equation7);
@@ -92,7 +96,8 @@ TEST(EquationTest, GetLeftHandTermWorks)
     Equation equation2(Term(7), ">", Term(8));
 
     EXPECT_TRUE(equation1.getLeftHandTerm().isEmpty());
-    EXPECT_EQ(Term(7), equation2.getLeftHandTerm());}
+    EXPECT_EQ(Term(7), equation2.getLeftHandTerm());
+}
 
 TEST(EquationTest, GetRightHandTermWorks)
 {
@@ -100,7 +105,8 @@ TEST(EquationTest, GetRightHandTermWorks)
     Equation equation2(Term(7), ">", Term(8));
 
     EXPECT_TRUE(equation1.getRightHandTerm().isEmpty());
-    EXPECT_EQ(Term(8), equation2.getRightHandTerm());}
+    EXPECT_EQ(Term(8), equation2.getRightHandTerm());
+}
 
 TEST(EquationTest, GetDisplayableStringWorks)
 {
@@ -108,7 +114,8 @@ TEST(EquationTest, GetDisplayableStringWorks)
     Equation equation2(Term(7), ">", Term(8));
 
     EXPECT_EQ("{EmptyTerm} = {EmptyTerm}", equation1.getDisplayableString());
-    EXPECT_EQ("7 > 8", equation2.getDisplayableString());}
+    EXPECT_EQ("7 > 8", equation2.getDisplayableString());
+}
 
 }
 

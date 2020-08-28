@@ -5,6 +5,7 @@
 #include <climits>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -35,7 +36,8 @@ bool isAlmostEqual(NumberType const value1, NumberType const value2)
     return getAbsoluteValue(value1-value2) < DOUBLE_DIFFERENCE_TOLERANCE;
 }
 
-//Commented out: This implementation is not practical when value is equal to zero/*
+//Commented out: This implementation is not practical when value is equal to zero
+/*
 template <typename NumberType>
 bool isAlmostEqual(NumberType const value1, NumberType const value2)
 {
@@ -262,7 +264,8 @@ bool isValueBeyondUnsignedLongLongIntegerLimits(double const realValue)
 
 bool areNumberOfDigitsOnTheIntegerLimit(unsigned int const digits)
 {
-    return digits>=10;}
+    return digits>=10;
+}
 
 bool isDivisible(unsigned int const dividend, unsigned int const divisor)
 {
@@ -292,7 +295,8 @@ bool isPerfectNthPower(
     return isAlmostAnInteger(valueRaiseToTheReciprocal);
 }
 
-bool isPerfectNthPower(        AlbaNumber const& number,
+bool isPerfectNthPower(
+        AlbaNumber const& number,
         unsigned int const nthPower)
 {
     bool result(false);
@@ -377,22 +381,68 @@ FractionDetails getFractionDetailsInLowestFormWithUnsignedDenominator(int const 
     return result;
 }
 
-FractionDetails getBestFractionDetailsForDoubleValue(double const doubleValue)
+unsigned int getPartialNumeratorForFractionCalculation(
+        double const doubleValue,
+        double & fractionalPart,
+        double & doubleValueForNextIteration)
 {
-    constexpr double tolerance(1E-3);    FractionDetails result;
-    result.sign = getSign(doubleValue);
     double absoluteValueOfDouble = getAbsoluteValue(doubleValue);
-    result.numerator = static_cast<int>(absoluteValueOfDouble);
-    result.denominator = 1;
-    double fractionalPart = getFractionalPartInDouble(absoluteValueOfDouble);
-    double nextDoubleValueInIteration = 1/fractionalPart;
-    unsigned estimatedNumberOfDigits = getNumberOfIntegerDigits(result.numerator) + getNumberOfIntegerDigits(nextDoubleValueInIteration);
-    if(fractionalPart>tolerance && !areNumberOfDigitsOnTheIntegerLimit(estimatedNumberOfDigits))
+    fractionalPart = getFractionalPartInDouble(absoluteValueOfDouble);
+    doubleValueForNextIteration = 1/fractionalPart;
+    return static_cast<unsigned int>(absoluteValueOfDouble);
+}
+
+FractionDetails getFinalFractionDetails(
+        UnsignedIntegers const& calculatedPartialNumerators,
+        bool & isBeyondUnsignedIntegerLimits)
+{
+    double numerator, denominator;
+    bool isFirst(true);
+    for(UnsignedIntegers::const_reverse_iterator it=calculatedPartialNumerators.crbegin();
+        it!=calculatedPartialNumerators.crend();
+        it++)
     {
-        FractionDetails partialResult = getBestFractionDetailsForDoubleValue(nextDoubleValueInIteration);
-        result.numerator = (result.numerator * partialResult.numerator) + (partialResult.denominator);
-        result.denominator = partialResult.numerator;
+        unsigned int calculatedNumerator(*it);
+        if(isFirst)
+        {
+            numerator = calculatedNumerator;
+            denominator = 1;
+            isFirst = false;
+        }
+        else
+        {
+            double previousNumerator = numerator;
+            numerator = (calculatedNumerator * numerator) + denominator;
+            denominator = previousNumerator;
+        }
+        isBeyondUnsignedIntegerLimits =
+                isValueBeyondUnsignedIntegerLimits(numerator) || isValueBeyondUnsignedIntegerLimits(denominator);
+        if(isBeyondUnsignedIntegerLimits) { break; }
     }
+    return FractionDetails{1, getUnsignedIntegerAfterRoundingDoubleValue(numerator), getUnsignedIntegerAfterRoundingDoubleValue(denominator)};
+}
+
+FractionDetails getBestFractionDetailsForDoubleValue(
+        double const doubleValue)
+{
+    constexpr double tolerance(1E-12);
+    FractionDetails result{1, 0, 1};
+
+    UnsignedIntegers calculatedPartialNumerators;
+    double fractionalPart(getAbsoluteValue(doubleValue)), doubleValueForNextIteration(doubleValue);
+    bool isBeyondUnsignedIntegerLimits(false);
+    while(fractionalPart>tolerance && !isBeyondUnsignedIntegerLimits)
+    {
+        calculatedPartialNumerators.emplace_back(
+                    getPartialNumeratorForFractionCalculation(doubleValueForNextIteration, fractionalPart, doubleValueForNextIteration));
+        result = getFinalFractionDetails(calculatedPartialNumerators, isBeyondUnsignedIntegerLimits);
+    }
+    if(isBeyondUnsignedIntegerLimits)
+    {
+        calculatedPartialNumerators.pop_back();
+        result = getFinalFractionDetails(calculatedPartialNumerators, isBeyondUnsignedIntegerLimits);
+    }
+    result.sign = getSign(doubleValue);
     return result;
 }
 
@@ -497,7 +547,8 @@ double getLeastCommonMultipleInDouble(unsigned int const firstNumber, unsigned i
 
 unsigned int getDifferenceFromGreaterMultiple(unsigned int const multiple, unsigned int const number)
 {
-    unsigned result(0);    if(multiple>0)
+    unsigned result(0);
+    if(multiple>0)
     {
         unsigned int numberOfMultiples(getNumberOfMultiplesInclusive(multiple, number));
         result = (numberOfMultiples*multiple) - number;
@@ -522,7 +573,8 @@ unsigned int getUnsignedIntegerAfterRoundingDoubleValue(double const doubleValue
 
 double getFractionalPartInDouble(double const doubleValue)
 {
-    return doubleValue-getIntegerPartInDouble(doubleValue);}
+    return doubleValue-getIntegerPartInDouble(doubleValue);
+}
 
 double calculateCumulativeStandardDistributionApproximation(double const z)
 {

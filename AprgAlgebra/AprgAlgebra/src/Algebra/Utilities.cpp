@@ -29,7 +29,8 @@ bool isOperator(string const& stringAsParameter)
             || "^" == stringAsParameter || "(" == stringAsParameter || ")" == stringAsParameter;
 }
 
-bool isFunction(string const& stringAsParameter){
+bool isFunction(string const& stringAsParameter)
+{
     return "abs" == stringAsParameter;
 }
 
@@ -160,6 +161,7 @@ unsigned int getOperatorPriority(string const& operatorString)
     }
     return result;
 }
+
 unsigned int getAssociationPriority(TermAssociationType const association)
 {
     unsigned int result(0);

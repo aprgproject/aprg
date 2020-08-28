@@ -121,7 +121,8 @@ void SimplificationOfExpression::simplifyExpression()
     simplifyFurtherIfNeeded(beforeSimplify, afterSimplify);
 }
 
-void SimplificationOfExpression::simplifyAndCopyTerms(        TermsWithDetails & termsToUpdate,
+void SimplificationOfExpression::simplifyAndCopyTerms(
+        TermsWithDetails & termsToUpdate,
         TermsWithDetails const& termsToCheck)
 {
     for(TermWithDetails const& termWithDetails : termsToCheck)
@@ -254,7 +255,8 @@ void SimplificationOfExpression::putNegativeExponentsOnDenominator(Expression & 
         ListOfPolynomialOverPolynomial numeratorsAndDenominatorPolynomials;
         bool isExpressionChanged(false);
         for(TermsWithDetails::iterator it=termsWithDetails.begin(); it!=termsWithDetails.end(); it++)
-        {            Term & term(getTermReferenceFromSharedPointer(it->baseTermSharedPointer));
+        {
+            Term & term(getTermReferenceFromSharedPointer(it->baseTermSharedPointer));
             if(term.isExpression())
             {
                 Expression & subExpression(term.getExpressionReference());
@@ -265,7 +267,8 @@ void SimplificationOfExpression::putNegativeExponentsOnDenominator(Expression & 
                 emplaceToNumeratorsAndDenominators(numeratorsAndDenominatorPolynomials, createPolynomialIfPossible(term), it->association);
                 isExpressionChanged=true;
                 termsWithDetails.erase(it);
-                it--;            }
+                it--;
+            }
         }
         if(isExpressionChanged)
         {
@@ -281,7 +284,8 @@ void SimplificationOfExpression::putNegativeExponentsOnDenominator(Expression & 
             putDenominatorsInExpression(newExpression, numeratorsAndDenominatorPolynomials);
             putDenominatorsInExpression(newExpression, termsInDenominator);
             expression = newExpression;
-        }    }
+        }
+    }
 }
 
 void SimplificationOfExpression::processTermsBaseOnOperatorLevel(

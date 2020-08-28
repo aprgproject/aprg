@@ -26,7 +26,8 @@ public:
 
     bool isAddition() const;
     bool isSubtraction() const;
-    bool isMultiplication() const;    bool isDivision() const;
+    bool isMultiplication() const;
+    bool isDivision() const;
     bool isRaiseToPower() const;
     bool isAnOperatorThatCanPerformed() const;
     bool isOpeningGroupOperator() const;

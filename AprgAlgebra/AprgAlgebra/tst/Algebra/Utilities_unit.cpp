@@ -25,6 +25,7 @@ TEST(UtilitiesTest, IsOperatorWorks)
     EXPECT_TRUE(isOperator(")"));
     EXPECT_FALSE(isOperator("notAnOperator"));
 }
+
 TEST(UtilitiesTest, IsFunctionWorks)
 {
     EXPECT_FALSE(isFunction(""));
@@ -148,6 +149,7 @@ TEST(UtilitiesTest, GetOperatorLevelValueWorks)
     EXPECT_EQ(7u, getOperatorPriority("^"));
     EXPECT_EQ(0u, getOperatorPriority("operator"));
 }
+
 TEST(UtilitiesTest, GetAssociationPriorityWorks)
 {
     EXPECT_EQ(1u, getAssociationPriority(TermAssociationType::Positive));

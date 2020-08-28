@@ -35,7 +35,8 @@ public:
     AlbaNumber(int const numerator, int const denominator);
     AlbaNumber(double const doubleValue);
 
-    bool operator==(AlbaNumber const& second) const;    bool operator!=(AlbaNumber const& second) const;
+    bool operator==(AlbaNumber const& second) const;
+    bool operator!=(AlbaNumber const& second) const;
     bool operator<=(AlbaNumber const& second) const;
     bool operator>=(AlbaNumber const& second) const;
     bool operator<(AlbaNumber const& second) const;
@@ -134,7 +135,8 @@ private:
             int const exponent) const;
 
     Type m_type;
-    NumberUnionData m_data;};
+    NumberUnionData m_data;
+};
 
 std::ostream & operator<<(std::ostream & out, AlbaNumber const& number);
 
