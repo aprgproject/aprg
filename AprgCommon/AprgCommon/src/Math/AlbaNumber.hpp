@@ -12,10 +12,14 @@ class AlbaNumber
 {
     friend std::ostream & operator<<(std::ostream & out, AlbaNumber const& number);
 public:
+    enum class Value
+    {
+        PositiveInfinity,
+        NegativeInfinity
+    };
     enum class Type
     {
-        Integer,
-        Fraction,
+        Integer,        Fraction,
         Double
     };
     struct FractionData
@@ -34,10 +38,10 @@ public:
     AlbaNumber(unsigned int const unsignedValue);
     AlbaNumber(int const numerator, int const denominator);
     AlbaNumber(double const doubleValue);
+    AlbaNumber(Value const value);
 
     bool operator==(AlbaNumber const& second) const;
-    bool operator!=(AlbaNumber const& second) const;
-    bool operator<=(AlbaNumber const& second) const;
+    bool operator!=(AlbaNumber const& second) const;    bool operator<=(AlbaNumber const& second) const;
     bool operator>=(AlbaNumber const& second) const;
     bool operator<(AlbaNumber const& second) const;
     bool operator>(AlbaNumber const& second) const;
@@ -68,10 +72,11 @@ public:
     bool isFractionType() const;
     bool isDoubleType() const;
     bool isIntegerOrFractionType() const;
+    bool isPositiveInfinity() const;
+    bool isNegativeInfinity() const;
 
     Type getType() const;
-    int getInteger() const;
-    FractionData getFractionData() const;
+    int getInteger() const;    FractionData getFractionData() const;
     double getDouble() const;
 
     std::string getDisplayableString() const;
