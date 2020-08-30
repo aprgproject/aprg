@@ -74,14 +74,16 @@ AlbaNumber::AlbaNumber(Value const value)
 
 bool AlbaNumber::operator==(AlbaNumber const& second) const
 {
-    return isAlmostEqual(getDouble(), second.getDouble());}
+    return isAlmostEqual(getDouble(), second.getDouble());
+}
 
 bool AlbaNumber::operator!=(AlbaNumber const& second) const
 {
     return !operator==(second);
 }
 
-bool AlbaNumber::operator<=(AlbaNumber const& second) const{
+bool AlbaNumber::operator<=(AlbaNumber const& second) const
+{
     return getDouble() <= second.getDouble();
 }
 
@@ -512,7 +514,8 @@ bool AlbaNumber::isNegativeInfinity() const
 
 AlbaNumber::Type AlbaNumber::getType() const
 {
-    return m_type;}
+    return m_type;
+}
 
 int AlbaNumber::getInteger() const
 {
@@ -816,7 +819,7 @@ AlbaNumber AlbaNumber::raisePowerOfFractionsAndIntegerAndReturnNumber(
     return result;
 }
 
-ostream & operator<<(std::ostream & out, AlbaNumber const& number)
+ostream & operator<<(ostream & out, AlbaNumber const& number)
 {
     out << number.getDisplayableString();
     return out;

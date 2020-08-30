@@ -10,7 +10,6 @@ namespace alba
 
 class AlbaNumber
 {
-    friend std::ostream & operator<<(std::ostream & out, AlbaNumber const& number);
 public:
     enum class Value
     {
@@ -19,7 +18,8 @@ public:
     };
     enum class Type
     {
-        Integer,        Fraction,
+        Integer,
+        Fraction,
         Double
     };
     struct FractionData
@@ -41,7 +41,8 @@ public:
     AlbaNumber(Value const value);
 
     bool operator==(AlbaNumber const& second) const;
-    bool operator!=(AlbaNumber const& second) const;    bool operator<=(AlbaNumber const& second) const;
+    bool operator!=(AlbaNumber const& second) const;
+    bool operator<=(AlbaNumber const& second) const;
     bool operator>=(AlbaNumber const& second) const;
     bool operator<(AlbaNumber const& second) const;
     bool operator>(AlbaNumber const& second) const;
@@ -76,7 +77,8 @@ public:
     bool isNegativeInfinity() const;
 
     Type getType() const;
-    int getInteger() const;    FractionData getFractionData() const;
+    int getInteger() const;
+    FractionData getFractionData() const;
     double getDouble() const;
 
     std::string getDisplayableString() const;
