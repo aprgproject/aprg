@@ -9,10 +9,17 @@ using namespace std;
 namespace alba
 {
 
+TEST(AlbaNumberTest, SizeValueIsExpected)
+{
+    AlbaNumber number;
+
+    EXPECT_EQ(16u, sizeof(number));
+    EXPECT_EQ(8u, number.getNumberDataSize());
+}
+
 TEST(AlbaNumberTest, ConstructionWorksAsExpected)
 {
-    AlbaNumber number1;
-    AlbaNumber number2(-81237);
+    AlbaNumber number1;    AlbaNumber number2(-81237);
     AlbaNumber number3(34095093u);
     AlbaNumber number4(-87408, -9802);
     AlbaNumber number5(-100, 10);

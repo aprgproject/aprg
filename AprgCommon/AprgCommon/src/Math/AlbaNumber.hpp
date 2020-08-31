@@ -81,10 +81,10 @@ public:
     FractionData getFractionData() const;
     double getDouble() const;
 
+    unsigned int getNumberDataSize() const;
     std::string getDisplayableString() const;
 
-    void convertToInteger();
-    void convertToFraction();
+    void convertToInteger();    void convertToFraction();
 
 private:
     void convertToIntegerIfNeeded();
