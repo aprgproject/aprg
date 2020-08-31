@@ -71,9 +71,11 @@ AlbaNumber::AlbaNumber(Value const value)
     case Value::NegativeInfinity:
         doubleDataReference = -INFINITY;
         break;
+    case Value::NotANumber:
+        doubleDataReference = NAN;
+        break;
     }
 }
-
 bool AlbaNumber::operator==(AlbaNumber const& second) const
 {
     return isAlmostEqual(getDouble(), second.getDouble());
@@ -539,10 +541,19 @@ bool AlbaNumber::isNegativeInfinity() const
     return getDouble() == -INFINITY;
 }
 
+bool AlbaNumber::isNotANumber() const
+{
+    return isnan(getDouble());
+}
+
+bool AlbaNumber::hasValidValue() const
+{
+    return !isPositiveInfinity() && !isNegativeInfinity() && !isNotANumber();
+}
+
 AlbaNumber::Type AlbaNumber::getType() const
 {
-    return m_type;
-}
+    return m_type;}
 
 long long int AlbaNumber::getInteger() const
 {

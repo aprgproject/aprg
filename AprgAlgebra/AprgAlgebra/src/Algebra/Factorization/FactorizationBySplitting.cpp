@@ -161,11 +161,10 @@ Polynomials factorizeSmallerPolynomials(Polynomials const& smallerPolynomials)
     result = factorizeSmallerPolynomialsByFactoringOutCommonFactors(smallerPolynomials);
     if(result.empty())
     {
-        result = factorizeSmallerPolynomialsBySubstitutingCommonFactorsToVariables(smallerPolynomials);
+        result = factorizeSmallerPolynomialsBySubstitutingCommonFactorsToNewVariables(smallerPolynomials);
     }
     return result;
 }
-
 Polynomials factorizeSmallerPolynomialsByFactoringOutCommonFactors(Polynomials const& smallerPolynomials)
 {
     Polynomials result;
@@ -185,26 +184,25 @@ Polynomials factorizeSmallerPolynomialsByFactoringOutCommonFactors(Polynomials c
     return result;
 }
 
-Polynomials factorizeSmallerPolynomialsBySubstitutingCommonFactorsToVariables(Polynomials const& smallerPolynomials)
+Polynomials factorizeSmallerPolynomialsBySubstitutingCommonFactorsToNewVariables(Polynomials const& smallerPolynomials)
 {
     Polynomials result;
     SubstitutionOfVariablesToExpressions variableSubstitution;
     if(smallerPolynomials.size() > 1)
     {
-        Polynomial newPolynomialWithVariables(getNewPolynomialWithVariables(variableSubstitution, smallerPolynomials));
+        Polynomial newPolynomialWithVariables(getNewPolynomialWithNewVariables(variableSubstitution, smallerPolynomials));
         if(!variableSubstitution.isEmpty())
         {
-            result = factorizePolynomialWithVariables(newPolynomialWithVariables, variableSubstitution);
+            result = factorizePolynomialWithNewVariables(newPolynomialWithVariables, variableSubstitution);
         }
     }
     return result;
 }
 
-Polynomials factorizePolynomialWithVariables(
+Polynomials factorizePolynomialWithNewVariables(
         Polynomial const& newPolynomialWithVariables,
         SubstitutionOfVariablesToExpressions const& variableSubstitution)
-{
-    Polynomials result;
+{    Polynomials result;
     Polynomials factorizedPolynomialsWithVariables(factorize(newPolynomialWithVariables));
     if(factorizedPolynomialsWithVariables.size() > 1)
     {
@@ -237,11 +235,12 @@ Polynomials getCommonFactorsInThesePolynomials(Polynomials const& smallerPolynom
     return commonFactors;
 }
 
-Polynomial getNewPolynomialWithVariables(SubstitutionOfVariablesToExpressions & variableSubstitution, Polynomials const& smallerPolynomials)
+Polynomial getNewPolynomialWithNewVariables(
+        SubstitutionOfVariablesToExpressions & variableSubstitution,
+        Polynomials const& smallerPolynomials)
 {
     Polynomial newPolynomialWithVariables;
-    for(Polynomial const& smallerPolynomial : smallerPolynomials)
-    {
+    for(Polynomial const& smallerPolynomial : smallerPolynomials)    {
         Polynomial newSmallerPolynomialWithVariables(createPolynomialFromConstant(1));
         Polynomials factors(factorize(smallerPolynomial));
         for(Polynomial const& factor : factors)

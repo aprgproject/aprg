@@ -2,9 +2,9 @@
 
 #include <Algebra/Term/BaseTermPointers.hpp>
 #include <Algebra/Term/Term.hpp>
+#include <Math/AlbaNumberTypes.hpp>
 #include <Optional/AlbaOptional.hpp>
 #include <String/AlbaStringHelper.hpp>
-
 #include <set>
 #include <string>
 
@@ -32,10 +32,11 @@ unsigned int getAssociationPriority(TermAssociationType const association);
 unsigned int getOperatorLevelInversePriority(OperatorLevel const operatorLevel);
 unsigned int getTermTypePriorityValue(TermType const termType);
 
+AlbaNumbers getRoots(Polynomial const& polynomial);
+
 std::string getEnumShortString(TermType const termType);
 std::string getEnumShortString(TermAssociationType const association);
-std::string getEnumShortString(OperatorLevel const operatorLevel);
-std::string getOperatingString(
+std::string getEnumShortString(OperatorLevel const operatorLevel);std::string getOperatingString(
         OperatorLevel const operatorLevel,
         TermAssociationType const association);
 std::string getFirstStringIfNegativeAssociation(
