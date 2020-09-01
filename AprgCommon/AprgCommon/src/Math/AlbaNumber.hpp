@@ -18,7 +18,8 @@ public:
         NotANumber
     };
     enum class Type
-    {        Integer,
+    {
+        Integer,
         Fraction,
         Double
     };
@@ -86,7 +87,8 @@ public:
     bool hasValidValue() const;
 
     Type getType() const;
-    long long int getInteger() const;    FractionData getFractionData() const;
+    long long int getInteger() const;
+    FractionData getFractionData() const;
     double getDouble() const;
 
     unsigned int getNumberDataSize() const;

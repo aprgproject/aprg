@@ -76,6 +76,7 @@ AlbaNumber::AlbaNumber(Value const value)
         break;
     }
 }
+
 bool AlbaNumber::operator==(AlbaNumber const& second) const
 {
     return isAlmostEqual(getDouble(), second.getDouble());
@@ -553,7 +554,8 @@ bool AlbaNumber::hasValidValue() const
 
 AlbaNumber::Type AlbaNumber::getType() const
 {
-    return m_type;}
+    return m_type;
+}
 
 long long int AlbaNumber::getInteger() const
 {
