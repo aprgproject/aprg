@@ -58,6 +58,7 @@ template <typename NumberType> NumberType getPositiveDelta(NumberType const valu
 AlbaNumber getPositiveDelta(AlbaNumber const& value1, AlbaNumber const& value2);
 int convertToIntegerThenSubtract(unsigned int const number1, unsigned int const number2);
 
+
 //Computation functions
 template <typename NumberType> NumberType getAverage(NumberType const value1, NumberType const value2);
 AlbaNumber getAverage(AlbaNumber const& value1, AlbaNumber const& value2);

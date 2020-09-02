@@ -210,7 +210,8 @@ TEST(AlbaMathHelperTest, GetSignWorksForAlbaNumber)
 TEST(AlbaMathHelperTest, GetPositiveDeltaWorksForPrimitiveTypes)
 {
     EXPECT_EQ(0u, getPositiveDelta(0u, 0u));
-    EXPECT_EQ(0u, getPositiveDelta(5u, 5u));    EXPECT_EQ(5u, getPositiveDelta(5u, 10u));
+    EXPECT_EQ(0u, getPositiveDelta(5u, 5u));
+    EXPECT_EQ(5u, getPositiveDelta(5u, 10u));
     EXPECT_EQ(5u, getPositiveDelta(10u, 5u));
     EXPECT_EQ(90, getPositiveDelta(-100,-10));
     EXPECT_EQ(20, getPositiveDelta(10,-10));
@@ -226,7 +227,8 @@ TEST(AlbaMathHelperTest, GetPositiveDeltaWorksAlbaNumber)
 
 TEST(AlbaMathHelperTest, ConvertToIntegerThenSubtractWorks)
 {
-    EXPECT_EQ(0, convertToIntegerThenSubtract(0u, 0u));    EXPECT_EQ(0, convertToIntegerThenSubtract(5u, 5u));
+    EXPECT_EQ(0, convertToIntegerThenSubtract(0u, 0u));
+    EXPECT_EQ(0, convertToIntegerThenSubtract(5u, 5u));
     EXPECT_EQ(-5, convertToIntegerThenSubtract(5u, 10u));
     EXPECT_EQ(5, convertToIntegerThenSubtract(10u, 5u));
 }

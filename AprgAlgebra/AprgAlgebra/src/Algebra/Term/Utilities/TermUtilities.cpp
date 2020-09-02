@@ -216,7 +216,8 @@ AlbaNumbers getRoots(Polynomial const& polynomial)
             AlbaNumber maxDegree(factorizedPolynomial.getMaxDegree());
             if(monomials.size() == 1 && maxDegree > 0)
             {
-                result.emplace_back(AlbaNumber(0));            }
+                result.emplace_back(AlbaNumber(0));
+            }
             else if(monomials.size() == 2)
             {
                 Monomial firstMonomial(monomials.at(0));
@@ -434,7 +435,8 @@ void retrieveNumbers(Function const& functionTerm, AlbaNumbersSet & numbers)
 
 VariableNamesSet getVariableNames(Term const& term)
 {
-    VariableNamesSet result;    retrieveVariableNames(term, result);
+    VariableNamesSet result;
+    retrieveVariableNames(term, result);
     return result;
 }
 
@@ -594,7 +596,8 @@ Monomial compareMonomialsAndSaveMinimumExponentsForEachVariable(Monomial const& 
     retrieveVariableNames(secondMonomial, variableNames);
     for(string const& variableName : variableNames)
     {
-        newVariableExponentMap[variableName] = min(                    firstMonomial.getExponentForVariable(variableName),
+        newVariableExponentMap[variableName] = min(
+                    firstMonomial.getExponentForVariable(variableName),
                     secondMonomial.getExponentForVariable(variableName));
     }
     return Monomial(1, newVariableExponentMap);
@@ -608,7 +611,8 @@ Monomial compareMonomialsAndSaveMaximumExponentsForEachVariable(Monomial const& 
     retrieveVariableNames(secondMonomial, variableNames);
     for(string const& variableName : variableNames)
     {
-        newVariableExponentMap[variableName] = max(                    firstMonomial.getExponentForVariable(variableName),
+        newVariableExponentMap[variableName] = max(
+                    firstMonomial.getExponentForVariable(variableName),
                     secondMonomial.getExponentForVariable(variableName));
     }
     return Monomial(1, newVariableExponentMap);
