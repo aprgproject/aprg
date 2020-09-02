@@ -19,11 +19,12 @@ public:
         Polynomial remainder;
     };
 
+    PolynomialOverPolynomial();
     PolynomialOverPolynomial(Polynomial const& numerator, Polynomial const& denominator);
 
+    bool isEmpty() const;
     Polynomial const& getNumerator() const;
     Polynomial const& getDenominator() const;
-
     QuotientAndRemainder simplifyAndDivide();
     void simplify();
     QuotientAndRemainder divide() const;

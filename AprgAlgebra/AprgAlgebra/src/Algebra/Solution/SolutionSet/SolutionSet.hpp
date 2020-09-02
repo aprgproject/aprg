@@ -13,14 +13,13 @@ namespace algebra
 class SolutionSet
 {
 public:
-    SolutionSet();
-
     using FunctionForCheckingValues = std::function<bool(AlbaNumber const&)>;
+
+    SolutionSet();
 
     AlbaNumbers const& getAcceptedValues() const;
     AlbaNumbers const& getRejectedValues() const;
     AlbaNumberIntervals const& getAcceptedIntervals() const;
-
     void addAcceptedValue(AlbaNumber const& value);
     void addRejectedValue(AlbaNumber const& value);
     void addValue(

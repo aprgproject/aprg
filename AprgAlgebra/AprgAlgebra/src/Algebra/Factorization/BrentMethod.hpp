@@ -13,10 +13,22 @@ namespace algebra
 
 class BrentMethod
 {
+    struct CalculationValues
+    {
+        AlbaNumberOptional result;
+        AlbaNumber a;
+        AlbaNumber b;
+        AlbaNumber c;
+        AlbaNumber d;
+        AlbaNumber s;
+        AlbaNumber fa;
+        AlbaNumber fb;
+        bool mflag;
+    };
+
 public:
     using ListOfCoefficients = std::vector<AlbaNumbers>;
-    BrentMethod(AlbaNumbers const& coefficients);
-    AlbaNumberOptional calculateRoot(AlbaNumber const& start, AlbaNumber const& end);
+    BrentMethod(AlbaNumbers const& coefficients);    AlbaNumberOptional calculateRoot(AlbaNumber const& start, AlbaNumber const& end);
 private:
     AlbaNumberOptional calculateInverseQuadraticInterpolation(
             AlbaNumber const& a,
@@ -37,8 +49,8 @@ private:
             bool const mflag) const;
     AlbaNumber calculate(AlbaNumber const& inputValue) const;
     AlbaNumbers m_coefficients;
+    CalculationValues m_values;
 };
 
 }
-
 }

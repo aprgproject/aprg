@@ -799,10 +799,10 @@ TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromInteger)
     AlbaNumber number4 = AlbaNumber(10) ^ 2.324897;
     AlbaNumber number5 = AlbaNumber(1234567891) ^ AlbaNumber(3);
     AlbaNumber number6 = AlbaNumber(9223372036854775807) ^ AlbaNumber(5);
+    AlbaNumber number7 = AlbaNumber(-256) ^ AlbaNumber(-256);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
-    EXPECT_EQ(0, number1.getInteger());
-    EXPECT_EQ(AlbaNumber::Type::Integer, number2.getType());
+    EXPECT_EQ(0, number1.getInteger());    EXPECT_EQ(AlbaNumber::Type::Integer, number2.getType());
     EXPECT_EQ(-100000, number2.getInteger());
     EXPECT_EQ(AlbaNumber::Type::Double, number3.getType());
     EXPECT_DOUBLE_EQ(4641.5888336127773, number3.getDouble());
@@ -812,10 +812,11 @@ TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromInteger)
     EXPECT_DOUBLE_EQ(1.8816763763616284e+027, number5.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Double, number6.getType());
     EXPECT_DOUBLE_EQ(6.674959487252844e+094, number6.getDouble());
+    EXPECT_EQ(AlbaNumber::Type::Integer, number7.getType());
+    EXPECT_DOUBLE_EQ(0, number7.getDouble());
 }
 
-TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromFraction)
-{
+TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromFraction){
     AlbaNumber number1 = AlbaNumber(0, 1) ^ AlbaNumber(1, 1);
     AlbaNumber number2 = AlbaNumber(10, 6) ^ 5;
     AlbaNumber number3 = AlbaNumber(10, 6) ^ AlbaNumber(10, 7);
@@ -852,10 +853,11 @@ TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromDouble)
     AlbaNumber number3 = AlbaNumber(10.5) ^ AlbaNumber(10, 7);
     AlbaNumber number4 = AlbaNumber(10.5) ^ 2.324897;
     AlbaNumber number5 = AlbaNumber(1234567891.1) ^ AlbaNumber(3);
+    AlbaNumber number6 = AlbaNumber(256.000001) ^ AlbaNumber(256.000001);
+    AlbaNumber number7 = AlbaNumber(-256.000001) ^ AlbaNumber(-256.000001);
 
     EXPECT_EQ(AlbaNumber::Type::Double, number1.getType());
-    EXPECT_DOUBLE_EQ(0.10000000000000001, number1.getDouble());
-    EXPECT_EQ(AlbaNumber::Type::Double, number2.getType());
+    EXPECT_DOUBLE_EQ(0.10000000000000001, number1.getDouble());    EXPECT_EQ(AlbaNumber::Type::Double, number2.getType());
     EXPECT_DOUBLE_EQ(127628.15625, number2.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Double, number3.getType());
     EXPECT_DOUBLE_EQ(28.763508283430014, number3.getDouble());
@@ -863,10 +865,13 @@ TEST(AlbaNumberTest, RaisePowerWorksOnTypesStartingFromDouble)
     EXPECT_DOUBLE_EQ(236.67911563383956, number4.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Double, number5.getType());
     EXPECT_DOUBLE_EQ(1.8816763768188754e+027, number5.getDouble());
+    EXPECT_EQ(AlbaNumber::Type::Double, number6.getType());
+    EXPECT_TRUE(number6.isPositiveInfinity());
+    EXPECT_EQ(AlbaNumber::Type::Double, number7.getType());
+    EXPECT_TRUE(number7.isNotANumber());
 }
 
-TEST(AlbaNumberTest, GetDisplayableStringWorks)
-{
+TEST(AlbaNumberTest, GetDisplayableStringWorks){
     AlbaNumber number1;
     AlbaNumber number2(3484);
     AlbaNumber number3(-1561);
