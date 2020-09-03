@@ -101,6 +101,31 @@ bool willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(Term const& term)
     return term.isEmpty() || term.isTheValueOne();
 }
 
+bool isNotANumber(Term const& term)
+{
+    bool result(false);
+    if(term.isConstant())
+    {
+        result = term.getConstantConstReference().getNumberConstReference().isNotANumber();
+    }
+    else if(term.isExpression())
+    {
+        result = isNotANumber(term.getExpressionConstReference());
+    }
+    return result;
+}
+
+bool isNotANumber(Expression const& expression)
+{
+    bool result(false);
+    TermsWithDetails const& termsWithDetails(expression.getTermsWithAssociation().getTermsWithDetails());
+    if(termsWithDetails.size() == 1)
+    {
+        result = isNotANumber(getTermConstReferenceFromSharedPointer(termsWithDetails.front().baseTermSharedPointer));
+    }
+    return result;
+}
+
 unsigned int getOperatorPriority(string const& operatorString)
 {
     unsigned int result=0;
@@ -230,7 +255,8 @@ AlbaNumbers getRoots(Polynomial const& polynomial)
                     if(constant.isAFiniteValue())
                     {
                         result.emplace_back(constant);
-                    }                }
+                    }
+                }
             }
         }
     }

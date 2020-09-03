@@ -26,7 +26,8 @@ PolynomialOverPolynomialOptional createPolynomialOverPolynomialFromTermIfPossibl
         result.setConstReference(PolynomialOverPolynomial(createPolynomialIfPossible(simplifiedTerm), createPolynomialFromConstant(1)));
     }
     else if(simplifiedTerm.isExpression())
-    {        Expression expression(simplifiedTerm.getExpressionConstReference());
+    {
+        Expression expression(simplifiedTerm.getExpressionConstReference());
         if(OperatorLevel::MultiplicationAndDivision == expression.getCommonOperatorLevel())
         {
             bool canBeConvertedToPolynomialOverPolynomial(true);
@@ -65,6 +66,7 @@ PolynomialOverPolynomialOptional createPolynomialOverPolynomialFromTermIfPossibl
     }
     return result;
 }
+
 }
 
 }

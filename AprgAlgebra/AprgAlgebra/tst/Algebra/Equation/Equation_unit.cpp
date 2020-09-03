@@ -92,7 +92,8 @@ TEST(EquationTest, IsEquationSatisfiedWorks)
 
 TEST(EquationTest, GetEquationOperatorWorks)
 {
-    Equation equation1(Term(), "=", Term());    Equation equation2(Term(7), ">", Term(8));
+    Equation equation1(Term(), "=", Term());
+    Equation equation2(Term(7), ">", Term(8));
 
     EXPECT_EQ(EquationOperator("="), equation1.getEquationOperator());
     EXPECT_EQ(EquationOperator(">"), equation2.getEquationOperator());

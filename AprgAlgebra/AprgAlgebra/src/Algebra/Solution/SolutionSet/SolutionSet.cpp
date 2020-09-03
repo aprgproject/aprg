@@ -23,7 +23,8 @@ bool SolutionSet::isEmpty() const
 
 AlbaNumbers const& SolutionSet::getAcceptedValues() const
 {
-    return m_acceptedValues;}
+    return m_acceptedValues;
+}
 
 AlbaNumbers const& SolutionSet::getRejectedValues() const
 {
@@ -62,7 +63,8 @@ void SolutionSet::addAcceptedInterval(AlbaNumberInterval const& interval)
 
 void SolutionSet::addValue(
         AlbaNumber const& value,
-        FunctionForCheckingValues const& isValueAcceptedFunction){
+        FunctionForCheckingValues const& isValueAcceptedFunction)
+{
     if(isValueAcceptedFunction(value))
     {
         m_acceptedValues.emplace_back(value);

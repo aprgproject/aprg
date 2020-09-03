@@ -35,7 +35,8 @@ bool NewtonMethod::isFinished() const
     return !m_currentComputedValue.isAFiniteValue() || isSolved();
 }
 
-unsigned int NewtonMethod::getNumberOfIterationsExecuted() const{
+unsigned int NewtonMethod::getNumberOfIterationsExecuted() const
+{
     return m_numberOfIterationsExecuted;
 }
 

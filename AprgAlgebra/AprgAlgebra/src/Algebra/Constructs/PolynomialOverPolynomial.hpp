@@ -4,6 +4,7 @@
 #include <Optional/AlbaOptional.hpp>
 
 #include <vector>
+
 namespace alba
 {
 
@@ -49,4 +50,5 @@ using ListOfPolynomialOverPolynomial=std::vector<PolynomialOverPolynomial>;
 using PolynomialOverPolynomialOptional=AlbaOptional<PolynomialOverPolynomial>;
 
 }
+
 }

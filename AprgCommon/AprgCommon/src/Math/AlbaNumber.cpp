@@ -551,6 +551,7 @@ bool AlbaNumber::isAFiniteValue() const
 {
     return !isPositiveInfinity() && !isNegativeInfinity() && !isNotANumber();
 }
+
 AlbaNumber::Type AlbaNumber::getType() const
 {
     return m_type;
