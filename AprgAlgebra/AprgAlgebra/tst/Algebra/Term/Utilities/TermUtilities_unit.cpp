@@ -174,20 +174,18 @@ TEST(TermUtilitiesTest, GetRootsWorksAndFactorizesAPolynomial)
     AlbaNumbers roots(getRoots(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-16, {})}));
 
     ASSERT_EQ(2u, roots.size());
-    EXPECT_EQ(AlbaNumber(-4), roots[0]);
-    EXPECT_EQ(AlbaNumber(4), roots[1]);
+    EXPECT_EQ(AlbaNumber(-4), roots.at(0));
+    EXPECT_EQ(AlbaNumber(4), roots.at(1));
 }
 
-TEST(TermUtilitiesTest, GetRootsWorksAndRootIsZeroWhenExponentIsPositive)
-{
+TEST(TermUtilitiesTest, GetRootsWorksAndRootIsZeroWhenExponentIsPositive){
     AlbaNumbers roots(getRoots(Polynomial{Monomial(1, {{"x", AlbaNumber(4)/3}})}));
 
     ASSERT_EQ(1u, roots.size());
-    EXPECT_EQ(AlbaNumber(0), roots[0]);
+    EXPECT_EQ(AlbaNumber(0), roots.at(0));
 }
 
-TEST(TermUtilitiesTest, GetRootsWorksAndZeroIsNotIncludedWhenExponentIsNegative)
-{
+TEST(TermUtilitiesTest, GetRootsWorksAndZeroIsNotIncludedWhenExponentIsNegative){
     AlbaNumbers roots(getRoots(Polynomial{Monomial(1, {{"x", AlbaNumber(-4)/3}})}));
 
     EXPECT_TRUE(roots.empty());
@@ -198,19 +196,17 @@ TEST(TermUtilitiesTest, GetRootsWorksAndWhenPolynomialIsNotSorted)
     AlbaNumbers roots(getRoots(Polynomial{Monomial(-16, {}), Monomial(1, {{"x", 1}})}));
 
     ASSERT_EQ(1u, roots.size());
-    EXPECT_EQ(AlbaNumber(16), roots[0]);
+    EXPECT_EQ(AlbaNumber(16), roots.at(0));
 }
 
-TEST(TermUtilitiesTest, GetRootsWorksAndRootIsCorrectlyCalculatedWhenExponentIsNotAnInteger)
-{
+TEST(TermUtilitiesTest, GetRootsWorksAndRootIsCorrectlyCalculatedWhenExponentIsNotAnInteger){
     AlbaNumbers roots(getRoots(Polynomial{Monomial(1, {{"x", AlbaNumber(4)/3}}), Monomial(-16, {})}));
 
     ASSERT_EQ(1u, roots.size());
-    EXPECT_EQ(AlbaNumber(8), roots[0]);
+    EXPECT_EQ(AlbaNumber(8), roots.at(0));
 }
 
-TEST(TermUtilitiesTest, GetEnumShortStringForTermTypeWorks)
-{
+TEST(TermUtilitiesTest, GetEnumShortStringForTermTypeWorks){
     EXPECT_EQ("Empty", getEnumShortString(TermType::Empty));
     EXPECT_EQ("Constant", getEnumShortString(TermType::Constant));
     EXPECT_EQ("Variable", getEnumShortString(TermType::Variable));

@@ -84,11 +84,10 @@ public:
     bool isPositiveInfinity() const;
     bool isNegativeInfinity() const;
     bool isNotANumber() const;
-    bool hasValidValue() const;
+    bool isAFiniteValue() const;
 
     Type getType() const;
-    long long int getInteger() const;
-    FractionData getFractionData() const;
+    long long int getInteger() const;    FractionData getFractionData() const;
     double getDouble() const;
 
     unsigned int getNumberDataSize() const;

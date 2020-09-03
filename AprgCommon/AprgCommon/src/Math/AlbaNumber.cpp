@@ -547,11 +547,10 @@ bool AlbaNumber::isNotANumber() const
     return isnan(getDouble());
 }
 
-bool AlbaNumber::hasValidValue() const
+bool AlbaNumber::isAFiniteValue() const
 {
     return !isPositiveInfinity() && !isNegativeInfinity() && !isNotANumber();
 }
-
 AlbaNumber::Type AlbaNumber::getType() const
 {
     return m_type;
