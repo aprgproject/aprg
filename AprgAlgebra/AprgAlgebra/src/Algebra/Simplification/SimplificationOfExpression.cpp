@@ -174,11 +174,10 @@ void SimplificationOfExpression::simplifyFurtherIfNeeded(
         Expression const& beforeSimplify,
         Expression const& afterSimplify)
 {
-    if(beforeSimplify != afterSimplify && !isNotANumber(afterSimplify))
+    if(beforeSimplify != afterSimplify && !hasNotANumber(afterSimplify))
     {
         simplify();
-    }
-}
+    }}
 
 bool SimplificationOfExpression::simplifyToACommonDenominatorForExpressionAndReturnIfChanged(Expression & expression)
 {

@@ -35,10 +35,10 @@ public:
     Term performSubstitutionTo(Expression const& expression) const;
     Term performSubstitutionTo(Function const& functionAsParameter) const;
     Term performSubstitutionTo(Term const& term) const;
+    Equation performSubstitutionTo(Equation const& equation) const;
 
     void putVariablesWithValues(std::initializer_list<VariableValuePair> const& variablesWithValues);
-    void putVariablesWithValues(VariablesToValuesMap const& variablesWithValues);
-    void putVariableWithValue(std::string const& variable, AlbaNumber const& value);
+    void putVariablesWithValues(VariablesToValuesMap const& variablesWithValues);    void putVariableWithValue(std::string const& variable, AlbaNumber const& value);
 
 private:
     Monomial performSubstitutionForMonomial(Monomial const& monomial) const;
