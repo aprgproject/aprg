@@ -38,6 +38,7 @@ private:
 class AlbaNumberInterval
 {
 public:
+
     AlbaNumberInterval(
             AlbaNumberIntervalEndpoint const& firstEndpoint,
             AlbaNumberIntervalEndpoint const& secondEndpoint);

@@ -80,7 +80,8 @@ AlbaNumberInterval::AlbaNumberInterval(
 
 bool AlbaNumberInterval::operator==(AlbaNumberInterval const& second) const
 {
-    return m_lowerEndpoint==second.m_lowerEndpoint            && m_higherEndpoint==second.m_higherEndpoint;
+    return m_lowerEndpoint==second.m_lowerEndpoint
+            && m_higherEndpoint==second.m_higherEndpoint;
 }
 
 AlbaNumberIntervalEndpoint const& AlbaNumberInterval::getLowerEndpoint() const

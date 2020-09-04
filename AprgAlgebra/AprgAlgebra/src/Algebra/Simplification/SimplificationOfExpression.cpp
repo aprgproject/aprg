@@ -177,7 +177,8 @@ void SimplificationOfExpression::simplifyFurtherIfNeeded(
     if(beforeSimplify != afterSimplify && !hasNotANumber(afterSimplify))
     {
         simplify();
-    }}
+    }
+}
 
 bool SimplificationOfExpression::simplifyToACommonDenominatorForExpressionAndReturnIfChanged(Expression & expression)
 {

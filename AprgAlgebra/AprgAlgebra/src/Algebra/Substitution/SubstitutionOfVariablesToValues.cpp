@@ -124,7 +124,8 @@ Equation SubstitutionOfVariablesToValues::performSubstitutionTo(
 
 Monomial SubstitutionOfVariablesToValues::performSubstitutionForMonomial(Monomial const& monomial) const
 {
-    Monomial newMonomial(createMonomialFromConstant(monomial.getConstantConstReference()));    Monomial::VariablesToExponentsMap previousVariableExponentMap(monomial.getVariablesToExponentsMapConstReference());
+    Monomial newMonomial(createMonomialFromConstant(monomial.getConstantConstReference()));
+    Monomial::VariablesToExponentsMap previousVariableExponentMap(monomial.getVariablesToExponentsMapConstReference());
     for(Monomial::VariableExponentPair const& variableExponentPair : previousVariableExponentMap)
     {
         if(isVariableFound(variableExponentPair.first))
