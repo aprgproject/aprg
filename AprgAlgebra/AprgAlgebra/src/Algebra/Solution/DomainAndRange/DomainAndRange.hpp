@@ -19,11 +19,10 @@ namespace DomainAndRange
 using FunctionToCheck=std::function<AlbaNumber(AlbaNumber const&)>;
 
 SolutionSet calculateDomain(
-        AlbaNumbers const& valuesToCheck,
+        AlbaNumbers const& domainValuesToCheck,
         FunctionToCheck const& functionToCheck);
 SolutionSet calculateDomainForTermWithOneVariable(
-        AlbaNumbers const& valuesToCheck,
-        Term const& term);
+        AlbaNumbers const& valuesToCheck,        Term const& term);
 SolutionSet calculateDomainForTermWithOneVariable(
         Term const& term);
 
