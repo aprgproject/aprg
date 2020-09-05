@@ -23,6 +23,7 @@ TEST(CircleTest, EmptyCircle)
     Points points(circle.getLocus(1));
     ASSERT_TRUE(points.empty());
 }
+
 TEST(CircleTest, CircleAtOriginWithRadius)
 {
     Circle circle(Point(0,0), 3);
@@ -34,7 +35,8 @@ TEST(CircleTest, CircleAtOriginWithRadius)
     Points points(circle.getLocus(1));
     ASSERT_EQ(20u, points.size());
     EXPECT_EQ(Point(3,0), points[0]);
-    EXPECT_EQ(Point(2.8284271247461902909,1), points[1]);    EXPECT_EQ(Point(2.2360679774997898051,2), points[2]);
+    EXPECT_EQ(Point(2.8284271247461902909,1), points[1]);
+    EXPECT_EQ(Point(2.2360679774997898051,2), points[2]);
     EXPECT_EQ(Point(2,2.2360679774997898051), points[3]);
     EXPECT_EQ(Point(1,2.8284271247461902909), points[4]);
     EXPECT_EQ(Point(0,3), points[5]);

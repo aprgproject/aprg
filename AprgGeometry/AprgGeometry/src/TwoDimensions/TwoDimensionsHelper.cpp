@@ -109,7 +109,8 @@ double getArcLength(Dimensionless::Angle const& angle, double const radius)
 
 template<unsigned int numberOfVertices>
 double getArea(Polygon<numberOfVertices> const& polygon)
-{    //shoelace formula
+{
+    //shoelace formula
     //https://en.wikipedia.org/wiki/Shoelace_formula
     //check also: https://en.wikipedia.org/wiki/Green%27s_theorem
     double area(0);
