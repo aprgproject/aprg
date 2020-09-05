@@ -291,11 +291,10 @@ void Polynomial::divideMonomial(Monomial const& monomial)
 
 void Polynomial::simplifyFurtherIfNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify)
 {
-    if(beforeSimplify != afterSimplify)
+    if(beforeSimplify != afterSimplify && !hasNotANumber(afterSimplify))
     {
         simplify();
-    }
-}
+    }}
 
 void Polynomial::simplifyMonomialsAndReAdd()
 {

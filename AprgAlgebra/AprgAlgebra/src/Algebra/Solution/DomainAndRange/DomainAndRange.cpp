@@ -162,11 +162,10 @@ AlbaNumbers getNumbersWithTransitionValues(
     {
         numbersSet.emplace(sortedValues.front());
     }
-    else if(sortedValues.size() == 2)
+    else if(sortedValues.size() >= 2)
     {
         numbersSet.emplace(sortedValues.front());
-        numbersSet.emplace(sortedValues.back());
-    }
+        numbersSet.emplace(sortedValues.back());    }
 
     return AlbaNumbers(numbersSet.cbegin(), numbersSet.cend());
 }
