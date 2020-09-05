@@ -1,4 +1,4 @@
-#include "OneEquationOneUnknownEqualitySolver.hpp"
+#include "OneEquationOneVariableEqualitySolver.hpp"
 
 #include <Algebra/Constructs/ConstructUtilities.hpp>
 #include <Algebra/Solution/SolutionUtilities.hpp>
@@ -13,11 +13,11 @@ namespace alba
 namespace algebra
 {
 
-OneEquationOneUnknownEqualitySolver::OneEquationOneUnknownEqualitySolver()
-    : BaseOneEquationOneUnknownSolver()
+OneEquationOneVariableEqualitySolver::OneEquationOneVariableEqualitySolver()
+    : BaseOneEquationOneVariableSolver()
 {}
 
-void OneEquationOneUnknownEqualitySolver::calculateSolution(
+void OneEquationOneVariableEqualitySolver::calculateSolution(
         SolutionSet & solutionSet,
         Equation const& equation)
 {
@@ -36,7 +36,7 @@ void OneEquationOneUnknownEqualitySolver::calculateSolution(
     }
 }
 
-void OneEquationOneUnknownEqualitySolver::calculateForEquation(
+void OneEquationOneVariableEqualitySolver::calculateForEquation(
         SolutionSet & solutionSet,
         Equation const& equation)
 {
@@ -51,7 +51,7 @@ void OneEquationOneUnknownEqualitySolver::calculateForEquation(
     }
 }
 
-void OneEquationOneUnknownEqualitySolver::calculateForTermAndVariable(
+void OneEquationOneVariableEqualitySolver::calculateForTermAndVariable(
         Term const& term,
         string const& variableName)
 {
@@ -73,7 +73,7 @@ void OneEquationOneUnknownEqualitySolver::calculateForTermAndVariable(
     }
 }
 
-void OneEquationOneUnknownEqualitySolver::addValuesToSolutionSetIfNeeded(
+void OneEquationOneVariableEqualitySolver::addValuesToSolutionSetIfNeeded(
         SolutionSet& solutionSet,
         Term const& term,
         string const& variableName)
@@ -102,13 +102,13 @@ void OneEquationOneUnknownEqualitySolver::addValuesToSolutionSetIfNeeded(
     }
 }
 
-void OneEquationOneUnknownEqualitySolver::performNewtonMethodToFindSolution(
+void OneEquationOneVariableEqualitySolver::performNewtonMethodToFindSolution(
         Term const& termToCheck,
         string const& variableNameForSubstitution)
 {
     SubstitutionOfVariablesToValues substitution;
     NewtonMethod newtonMethod(
-                getInitialValueForNewtonMethod(termToCheck),
+                getPositiveLogarithmOfLargestNumber(termToCheck),
                 [&](AlbaNumber const& value)
     {
         substitution.putVariableWithValue(variableNameForSubstitution, value);

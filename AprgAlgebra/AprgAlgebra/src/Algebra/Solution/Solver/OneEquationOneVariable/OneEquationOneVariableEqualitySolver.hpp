@@ -2,7 +2,7 @@
 
 #include <Algebra/Equation/Equation.hpp>
 #include <Algebra/Solution/SolutionSet/SolutionSet.hpp>
-#include <Algebra/Solution/Solver/BaseOneEquationOneUnknownSolver.hpp>
+#include <Algebra/Solution/Solver/OneEquationOneVariable/BaseOneEquationOneVariableSolver.hpp>
 
 namespace alba
 {
@@ -10,10 +10,10 @@ namespace alba
 namespace algebra
 {
 
-class OneEquationOneUnknownEqualitySolver : public BaseOneEquationOneUnknownSolver
+class OneEquationOneVariableEqualitySolver : public BaseOneEquationOneVariableSolver
 {
 public:
-    OneEquationOneUnknownEqualitySolver();
+    OneEquationOneVariableEqualitySolver();
 
 private:
     void calculateSolution(SolutionSet & solutionSet, Equation const& equation);

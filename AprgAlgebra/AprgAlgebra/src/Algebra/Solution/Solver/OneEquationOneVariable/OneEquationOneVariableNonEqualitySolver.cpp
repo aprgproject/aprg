@@ -1,4 +1,4 @@
-#include "OneEquationOneUnknownNonEqualitySolver.hpp"
+#include "OneEquationOneVariableNonEqualitySolver.hpp"
 
 #include <Algebra/Constructs/ConstructUtilities.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
@@ -11,11 +11,11 @@ namespace alba
 namespace algebra
 {
 
-OneEquationOneUnknownNonEqualitySolver::OneEquationOneUnknownNonEqualitySolver()
-    : BaseOneEquationOneUnknownSolver()
+OneEquationOneVariableNonEqualitySolver::OneEquationOneVariableNonEqualitySolver()
+    : BaseOneEquationOneVariableSolver()
 {}
 
-void OneEquationOneUnknownNonEqualitySolver::calculateSolution(
+void OneEquationOneVariableNonEqualitySolver::calculateSolution(
         SolutionSet & solutionSet,
         Equation const& equation)
 {
@@ -34,7 +34,7 @@ void OneEquationOneUnknownNonEqualitySolver::calculateSolution(
     }
 }
 
-void OneEquationOneUnknownNonEqualitySolver::calculateForEquation(
+void OneEquationOneVariableNonEqualitySolver::calculateForEquation(
         SolutionSet & solutionSet,
         Equation const& equation)
 {
@@ -49,7 +49,7 @@ void OneEquationOneUnknownNonEqualitySolver::calculateForEquation(
     }
 }
 
-void OneEquationOneUnknownNonEqualitySolver::calculateForTermAndVariable(
+void OneEquationOneVariableNonEqualitySolver::calculateForTermAndVariable(
         Term const& term,
         string const& )
 {
@@ -67,7 +67,7 @@ void OneEquationOneUnknownNonEqualitySolver::calculateForTermAndVariable(
     }
 }
 
-void OneEquationOneUnknownNonEqualitySolver::addIntervalsToSolutionSetIfNeeded(
+void OneEquationOneVariableNonEqualitySolver::addIntervalsToSolutionSetIfNeeded(
         SolutionSet& solutionSet,
         Equation const& equation,
         string const& variableName)

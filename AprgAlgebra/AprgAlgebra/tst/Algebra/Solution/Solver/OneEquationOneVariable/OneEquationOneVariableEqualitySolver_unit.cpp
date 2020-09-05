@@ -1,5 +1,5 @@
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
-#include <Algebra/Solution/Solver/OneEquationOneUnknownEqualitySolver.hpp>
+#include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableEqualitySolver.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/ConvertHelpers.hpp>
 
@@ -13,14 +13,14 @@ namespace alba
 namespace algebra
 {
 
-TEST(OneEquationOneUnknownEqualitySolverTest, ConstructionWorks)
+TEST(OneEquationOneVariableEqualitySolverTest, ConstructionWorks)
 {
-    OneEquationOneUnknownEqualitySolver();
+    OneEquationOneVariableEqualitySolver();
 }
 
-TEST(OneEquationOneUnknownEqualitySolverTest, NonEqualityOperatorsAreNotSolved)
+TEST(OneEquationOneVariableEqualitySolverTest, NonEqualityOperatorsAreNotSolved)
 {
-    OneEquationOneUnknownEqualitySolver solver;
+    OneEquationOneVariableEqualitySolver solver;
 
     SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(Term("x"), "<", Term("x"))));
 
@@ -29,9 +29,9 @@ TEST(OneEquationOneUnknownEqualitySolverTest, NonEqualityOperatorsAreNotSolved)
     EXPECT_TRUE(solutionSet.isEmpty());
 }
 
-TEST(OneEquationOneUnknownEqualitySolverTest, MultipleVariableEquationsAreNotSolved)
+TEST(OneEquationOneVariableEqualitySolverTest, MultipleVariableEquationsAreNotSolved)
 {
-    OneEquationOneUnknownEqualitySolver solver;
+    OneEquationOneVariableEqualitySolver solver;
 
     SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(Term("x"), "=", Term("y"))));
 
@@ -40,9 +40,9 @@ TEST(OneEquationOneUnknownEqualitySolverTest, MultipleVariableEquationsAreNotSol
     EXPECT_TRUE(solutionSet.isEmpty());
 }
 
-TEST(OneEquationOneUnknownEqualitySolverTest, EquationsThatAreAlwaysSatisfiedResultsInInfiniteRange)
+TEST(OneEquationOneVariableEqualitySolverTest, EquationsThatAreAlwaysSatisfiedResultsInInfiniteRange)
 {
-    OneEquationOneUnknownEqualitySolver solver;
+    OneEquationOneVariableEqualitySolver solver;
 
     SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(Term("x"), "=", Term("x"))));
 
@@ -53,9 +53,9 @@ TEST(OneEquationOneUnknownEqualitySolverTest, EquationsThatAreAlwaysSatisfiedRes
     EXPECT_EQ(createAllRealValuesInterval(), actualIntervals.at(0));
 }
 
-TEST(OneEquationOneUnknownEqualitySolverTest, PolynomialAreSolvedCorrectly)
+TEST(OneEquationOneVariableEqualitySolverTest, PolynomialAreSolvedCorrectly)
 {
-    OneEquationOneUnknownEqualitySolver solver;
+    OneEquationOneVariableEqualitySolver solver;
 
     SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(Term(Monomial(1, {{"x", 4}})), "=", Term(16))));
 
@@ -67,12 +67,12 @@ TEST(OneEquationOneUnknownEqualitySolverTest, PolynomialAreSolvedCorrectly)
     EXPECT_EQ(AlbaNumber(2), acceptedValues.at(1));
 }
 
-TEST(OneEquationOneUnknownEqualitySolverTest, PolynomialOverPolynomialAreSolvedCorrectly)
+TEST(OneEquationOneVariableEqualitySolverTest, PolynomialOverPolynomialAreSolvedCorrectly)
 {
     Polynomial numerator{Monomial(1, {{"x", 2}}), Monomial(-25, {})};
     Polynomial denominator{Monomial(1, {{"x", 2}}), Monomial(-36, {})};
     Expression expression(createExpressionIfPossible({Term(numerator), Term("/"), Term(denominator)}));
-    OneEquationOneUnknownEqualitySolver solver;
+    OneEquationOneVariableEqualitySolver solver;
 
     SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(Term(expression), "=", Term(Constant(0)))));
 
@@ -88,10 +88,10 @@ TEST(OneEquationOneUnknownEqualitySolverTest, PolynomialOverPolynomialAreSolvedC
     EXPECT_EQ(AlbaNumber(6), rejectedValues.at(1));
 }
 
-TEST(OneEquationOneUnknownEqualitySolverTest, XToTheXAreSolvedCorrectly)
+TEST(OneEquationOneVariableEqualitySolverTest, XToTheXAreSolvedCorrectly)
 {
     Expression expression(createExpressionIfPossible({Term("x"), Term("^"), Term("x")}));
-    OneEquationOneUnknownEqualitySolver solver;
+    OneEquationOneVariableEqualitySolver solver;
 
     SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(Term(expression), "=", Term(823543))));
 
@@ -102,10 +102,10 @@ TEST(OneEquationOneUnknownEqualitySolverTest, XToTheXAreSolvedCorrectly)
     EXPECT_EQ(AlbaNumber(7), acceptedValues.at(0));
 }
 
-TEST(OneEquationOneUnknownEqualitySolverTest, XToTheXWithNegativeSolutionAreNotSolved)
+TEST(OneEquationOneVariableEqualitySolverTest, XToTheXWithNegativeSolutionAreNotSolved)
 {
     Expression expression(createExpressionIfPossible({Term("x"), Term("^"), Term("x")}));
-    OneEquationOneUnknownEqualitySolver solver;
+    OneEquationOneVariableEqualitySolver solver;
 
     SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(Term(expression), "=", Term(-823543))));
 
@@ -115,10 +115,10 @@ TEST(OneEquationOneUnknownEqualitySolverTest, XToTheXWithNegativeSolutionAreNotS
     EXPECT_EQ(0u, acceptedValues.size());
 }
 
-TEST(OneEquationOneUnknownEqualitySolverTest, AbsoluteValueFunctionsAreSolved)
+TEST(OneEquationOneVariableEqualitySolverTest, AbsoluteValueFunctionsAreSolved)
 {
     Term functionTerm(Functions::abs(createExpressionIfPossible({Term("x")})));
-    OneEquationOneUnknownEqualitySolver solver;
+    OneEquationOneVariableEqualitySolver solver;
 
     SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(functionTerm, "=", Term(526))));
 
@@ -130,10 +130,10 @@ TEST(OneEquationOneUnknownEqualitySolverTest, AbsoluteValueFunctionsAreSolved)
     EXPECT_EQ(AlbaNumber(526), acceptedValues.at(1));
 }
 
-TEST(OneEquationOneUnknownEqualitySolverTest, AbsoluteValueFunctionWithInputExpressionAreSolved)
+TEST(OneEquationOneVariableEqualitySolverTest, AbsoluteValueFunctionWithInputExpressionAreSolved)
 {
     Term functionTerm(Functions::abs(createExpressionIfPossible({Term("x"), Term("+"), Term(100)})));
-    OneEquationOneUnknownEqualitySolver solver;
+    OneEquationOneVariableEqualitySolver solver;
 
     SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(functionTerm, "=", Term(526))));
 
