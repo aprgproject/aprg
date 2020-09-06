@@ -16,9 +16,9 @@ TEST(SolutionUtilitiesTest, GetPositiveLogarithmOfLargestNumberWorks)
     EXPECT_EQ(AlbaNumber(0), getPositiveLogarithmOfLargestNumber(Term("x")));
 }
 
-TEST(SolutionUtilitiesTest, GetValuesForDomainSearchingWorksForTerm)
+TEST(SolutionUtilitiesTest, GetInitialValuesForIteratingMethodsWorksForTerm)
 {
-    AlbaNumbers actualValues(getValuesForDomainSearching(Term(Monomial(123, {{"x", 456}}))));
+    AlbaNumbers actualValues(getInitialValuesForIteratingMethods(Term(Monomial(123, {{"x", 456}}))));
 
     ASSERT_EQ(8u, actualValues.size());
     EXPECT_DOUBLE_EQ(-456, actualValues.at(0).getDouble());
@@ -31,10 +31,10 @@ TEST(SolutionUtilitiesTest, GetValuesForDomainSearchingWorksForTerm)
     EXPECT_DOUBLE_EQ(456, actualValues.at(7).getDouble());
 }
 
-TEST(SolutionUtilitiesTest, GetValuesForDomainSearchingWorksForEquation)
+TEST(SolutionUtilitiesTest, GetInitialValuesForIteratingMethodsWorksForEquation)
 {
     AlbaNumbers actualValues(
-                getValuesForDomainSearching(
+                getInitialValuesForIteratingMethods(
                     Equation(Term(Monomial(1, {{"x", 123}})), "=", Term(Monomial(1, {{"x", 456}})))));
 
     ASSERT_EQ(11u, actualValues.size());

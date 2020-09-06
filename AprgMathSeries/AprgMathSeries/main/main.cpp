@@ -1,4 +1,4 @@
-#include <SimplestDesignToCopyForLibrariesAndPrograms.hpp>
+#include <ArithmeticSeries.hpp>
 
 using namespace alba;
 

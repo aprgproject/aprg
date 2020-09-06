@@ -26,17 +26,17 @@ AlbaNumber getPositiveLogarithmOfLargestNumber(Term const& term)
     return initialValue;
 }
 
-AlbaNumbers getValuesForDomainSearching(Term const& term)
+AlbaNumbers getInitialValuesForIteratingMethods(Term const& term)
 {
     AlbaNumbers result;
     AlbaNumbersSet allValues;
-    retrieveValuesForDomainSearching(allValues, term);
+    retrieveInitialValuesForIteratingMethods(allValues, term);
     result.reserve(allValues.size());
     copy(allValues.cbegin(), allValues.cend(), back_inserter(result));
     return result;
 }
 
-void retrieveValuesForDomainSearching(
+void retrieveInitialValuesForIteratingMethods(
         AlbaNumbersSet & allValues,
         Term const& term)
 {
@@ -52,12 +52,12 @@ void retrieveValuesForDomainSearching(
     }
 }
 
-AlbaNumbers getValuesForDomainSearching(Equation const& equation)
+AlbaNumbers getInitialValuesForIteratingMethods(Equation const& equation)
 {
     AlbaNumbers result;
     AlbaNumbersSet allValues;
-    retrieveValuesForDomainSearching(allValues, equation.getLeftHandTerm());
-    retrieveValuesForDomainSearching(allValues, equation.getRightHandTerm());
+    retrieveInitialValuesForIteratingMethods(allValues, equation.getLeftHandTerm());
+    retrieveInitialValuesForIteratingMethods(allValues, equation.getRightHandTerm());
     result.reserve(allValues.size());
     copy(allValues.cbegin(), allValues.cend(), back_inserter(result));
     return result;

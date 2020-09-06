@@ -48,9 +48,18 @@ SolutionSet calculateDomainForEquationWithVariableToSubstitute(
         AlbaNumbers const& valuesToCheck,
         Equation const& equation);
 
-AlbaNumbers getNumbersWithTransitionValues(
-        AlbaNumbers const& valuesToCheck,
-        DomainAndRange::FunctionToCheck const& functionToCheck);
+void collectAndUniqueValuesAndSort(
+        AlbaNumbersSet & sortedValues,
+        AlbaNumbers const& valuesToCheck);
+void collectMinAndMaxValues(
+        AlbaNumbersSet & collectedValues,
+        AlbaNumbersSet const& sortedValues);
+void appendTransitionValues(
+        AlbaNumbersSet & collectedValues,
+        AlbaNumbersSet const& sortedValues,
+        FunctionToCheck const& functionToCheck);
+AlbaNumbers getNumbers(AlbaNumbersSet const& collectedValues);
+
 AlbaNumber getTransitionValue(
         AlbaNumber const& inputValueYieldsToFiniteValue,
         AlbaNumber const& inputValueYieldsToNonFiniteValue,
