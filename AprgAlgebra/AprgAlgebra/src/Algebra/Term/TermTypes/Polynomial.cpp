@@ -294,7 +294,8 @@ void Polynomial::simplifyFurtherIfNeeded(Polynomial const& beforeSimplify, Polyn
     if(beforeSimplify != afterSimplify && !hasNotANumber(afterSimplify))
     {
         simplify();
-    }}
+    }
+}
 
 void Polynomial::simplifyMonomialsAndReAdd()
 {

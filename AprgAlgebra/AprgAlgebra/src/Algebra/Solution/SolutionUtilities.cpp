@@ -39,7 +39,8 @@ AlbaNumbers getValuesForDomainSearching(Term const& term)
 void retrieveValuesForDomainSearching(
         AlbaNumbersSet & allValues,
         Term const& term)
-{    AlbaNumbersSet numbers(getNumbers(term));
+{
+    AlbaNumbersSet numbers(getNumbers(term));
     for(AlbaNumber const& number : numbers)
     {
         AlbaNumber positiveNumber(getAbsoluteValue(number));

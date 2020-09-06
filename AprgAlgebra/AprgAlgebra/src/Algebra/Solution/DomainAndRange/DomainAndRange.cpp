@@ -21,16 +21,18 @@ namespace algebra
 namespace DomainAndRange
 {
 
-SolutionSet calculateDomain(
+SolutionSet calculateDomainUsingTransitionValues(
         AlbaNumbers const& domainValuesToCheck,
         FunctionToCheck const& functionToCheck)
 {
+    //This would be better if we have differentiation.
     SolutionSet domain;
     AlbaNumbers numbersWithTransitionValues(
                 getNumbersWithTransitionValues(domainValuesToCheck, functionToCheck));
     domain.determineAndAddAcceptedIntervals(numbersWithTransitionValues, [&](AlbaNumber const& value)
     {
-        AlbaNumber computedValue(functionToCheck(value));        return computedValue.isAFiniteValue();
+        AlbaNumber computedValue(functionToCheck(value));
+        return computedValue.isAFiniteValue();
     });
     return domain;
 }
@@ -45,10 +47,11 @@ SolutionSet calculateDomainForTermWithOneVariable(
     {
         string variableName = *variableNames.cbegin();
         SubstitutionOfVariablesToValues substitution;
-        domain = calculateDomain(valuesToCheck, [&](AlbaNumber const& value)
+        domain = calculateDomainUsingTransitionValues(valuesToCheck, [&](AlbaNumber const& value)
         {
                 substitution.putVariableWithValue(variableName, value);
-                Term computedTerm(substitution.performSubstitutionTo(term));                AlbaNumber computedValue;
+                Term computedTerm(substitution.performSubstitutionTo(term));
+                AlbaNumber computedValue;
                 if(computedTerm.isConstant()){computedValue = computedTerm.getConstantConstReference().getNumberConstReference();}
                 return computedValue;
     });
@@ -116,14 +119,15 @@ SolutionSet calculateDomainForEquationWithVariableToSubstitute(
     SolutionSet domain;
     SubstitutionOfVariablesToValues substitution;
     OneEquationOneVariableEqualitySolver solver;
-    domain = calculateDomain(valuesToCheck, [&](AlbaNumber const& value)
+    domain = calculateDomainUsingTransitionValues(valuesToCheck, [&](AlbaNumber const& value)
     {
             substitution.putVariableWithValue(variableNameToSubstitute, value);
             Equation simplifiedEquation(substitution.performSubstitutionTo(equation));
             Equation equationToSolve(simplifiedEquation.getLeftHandTerm(), "=", Term(Constant(0)));
             SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(equationToSolve));
             AlbaNumber computedValue(AlbaNumber::Value::NotANumber);
-            AlbaNumbers acceptedValues(solutionSet.getAcceptedValues());            if(!acceptedValues.empty()){computedValue = acceptedValues.back();}
+            AlbaNumbers acceptedValues(solutionSet.getAcceptedValues());
+            if(!acceptedValues.empty()){computedValue = acceptedValues.back();}
             return computedValue;
 });
     return domain;
@@ -143,7 +147,8 @@ AlbaNumbers getNumbersWithTransitionValues(
     for(AlbaNumber const& inputValue : sortedValues)
     {
         AlbaNumber outputValue(functionToCheck(inputValue));
-        if(isFirst)        {
+        if(isFirst)
+        {
             isFirst = false;
         }
         else if(previousOutputValue.isAFiniteValue() && !outputValue.isAFiniteValue())
@@ -165,12 +170,14 @@ AlbaNumbers getNumbersWithTransitionValues(
     else if(sortedValues.size() >= 2)
     {
         numbersSet.emplace(sortedValues.front());
-        numbersSet.emplace(sortedValues.back());    }
+        numbersSet.emplace(sortedValues.back());
+    }
 
     return AlbaNumbers(numbersSet.cbegin(), numbersSet.cend());
 }
 
-AlbaNumber getTransitionValue(        AlbaNumber const& inputValueYieldsToFiniteValue,
+AlbaNumber getTransitionValue(
+        AlbaNumber const& inputValueYieldsToFiniteValue,
         AlbaNumber const& inputValueYieldsToNonFiniteValue,
         FunctionToCheck const& functionToCheck)
 {
