@@ -21,28 +21,26 @@ TEST(ParabolaTest, GetPointsAreCorrect)
     Points points(parabola.getPoints(-2, 2, 1));
 
     ASSERT_EQ(5u, points.size());
-    EXPECT_EQ(Point(-2,3), points[0]);
-    EXPECT_EQ(Point(-1,2), points[1]);
-    EXPECT_EQ(Point(0,3), points[2]);
-    EXPECT_EQ(Point(1,6), points[3]);
-    EXPECT_EQ(Point(2,11), points[4]);
+    EXPECT_EQ(Point(-2,3), points.at(0));
+    EXPECT_EQ(Point(-1,2), points.at(1));
+    EXPECT_EQ(Point(0,3), points.at(2));
+    EXPECT_EQ(Point(1,6), points.at(3));
+    EXPECT_EQ(Point(2,11), points.at(4));
 }
 
-TEST(ParabolaTest, GetPointsAreCorrectWhenBoundariesAreReversed)
-{
+TEST(ParabolaTest, GetPointsAreCorrectWhenBoundariesAreReversed){
     Parabola parabola{1,2,3};
     Points points(parabola.getPoints(2, -2, 1));
 
     ASSERT_EQ(5u, points.size());
-    EXPECT_EQ(Point(2,11), points[0]);
-    EXPECT_EQ(Point(1,6), points[1]);
-    EXPECT_EQ(Point(0,3), points[2]);
-    EXPECT_EQ(Point(-1,2), points[3]);
-    EXPECT_EQ(Point(-2,3), points[4]);
+    EXPECT_EQ(Point(2,11), points.at(0));
+    EXPECT_EQ(Point(1,6), points.at(1));
+    EXPECT_EQ(Point(0,3), points.at(2));
+    EXPECT_EQ(Point(-1,2), points.at(3));
+    EXPECT_EQ(Point(-2,3), points.at(4));
 }
 
-TEST(ParabolaTest, GetSlopeIsCorrect)
-{
+TEST(ParabolaTest, GetSlopeIsCorrect){
     Parabola parabola{1,2,3};
 
     EXPECT_DOUBLE_EQ(-198, parabola.getSlopeAt(-100));

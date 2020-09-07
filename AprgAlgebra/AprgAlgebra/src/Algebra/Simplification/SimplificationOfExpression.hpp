@@ -27,10 +27,12 @@ public:
     void simplify();
 
 private:
+    bool isFurtherSimplificationNeeded(
+            Expression const& beforeSimplify,
+            Expression const& afterSimplify) const;
     bool didEvenExponentCancellationHappened(
             TermsWithAssociation::TermsWithDetails const& exponents) const;
-    void prepareToACommonDenominatorIfNeeded();
-    void finalizeToACommonDenominatorIfNeeded();
+    void prepareToACommonDenominatorIfNeeded();    void finalizeToACommonDenominatorIfNeeded();
 
     void simplifyExpression();
     void simplifyAndCopyTerms(
@@ -40,11 +42,9 @@ private:
             TermsWithAssociation::TermsWithDetails & termsToUpdate,
             Expression const& expression,
             TermAssociationType const association);
-    void simplifyFurtherIfNeeded(Expression const& beforeSimplify, Expression const& afterSimplify);
     bool simplifyToACommonDenominatorForExpressionAndReturnIfChanged(Expression & expression);
     void simplifyTermsWithDetailsInExpressionToACommonDenominator(Expression & expression);
-    bool tryToAddSubtractTermsOverTermsAndReturnIfChanged(Expression & addSubtractExpression);
-    void putNegativeExponentsOnDenominator(Expression & expression);
+    bool tryToAddSubtractTermsOverTermsAndReturnIfChanged(Expression & addSubtractExpression);    void putNegativeExponentsOnDenominator(Expression & expression);
 
     void processTermsBaseOnOperatorLevel(
             TermsWithAssociation::TermsWithDetails const& termsToProcess);

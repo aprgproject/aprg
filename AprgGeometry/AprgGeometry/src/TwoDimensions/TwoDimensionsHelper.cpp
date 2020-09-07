@@ -94,11 +94,14 @@ double getCosineOfAngleUsing1Delta(double const deltaX1, double const deltaY1)
     return opposite/hypotenuse;
 }
 
-double getCosineOfAngleUsing2Deltas(double const deltaX1, double const deltaY1, double const deltaX2, double const deltaY2)
+double getCosineOfAngleUsing2Deltas(
+        double const deltaX1,
+        double const deltaY1,
+        double const deltaX2,
+        double const deltaY2)
 {
     double numeratorPart = (deltaX1*deltaX2) + (deltaY1*deltaY2);
-    double denominatorPart = getSquareRootOfXSquaredPlusYSquared(deltaX1, deltaY1) *
-            getSquareRootOfXSquaredPlusYSquared(deltaX2, deltaY2);
+    double denominatorPart = getSquareRootOfXSquaredPlusYSquared(deltaX1, deltaY1) *            getSquareRootOfXSquaredPlusYSquared(deltaX2, deltaY2);
     return numeratorPart/denominatorPart;
 }
 
@@ -196,11 +199,13 @@ Angle getAngleBasedOnAPointAndOrigin(Point const& point)
     return angle;
 }
 
-Angle getTheInnerAngleUsingThreePoints(Point const& commonPoint, Point const& firstPoint, Point const& secondPoint)
+Angle getTheInnerAngleUsingThreePoints(
+        Point const& commonPoint,
+        Point const& firstPoint,
+        Point const& secondPoint)
 {
     Point deltaBA(firstPoint-commonPoint);
-    Point deltaCA(secondPoint-commonPoint);
-    return Angle(AngleUnitType::Radians, acos(getCosineOfAngleUsing2Deltas(deltaBA.getX(), deltaBA.getY(), deltaCA.getX(), deltaCA.getY())));
+    Point deltaCA(secondPoint-commonPoint);    return Angle(AngleUnitType::Radians, acos(getCosineOfAngleUsing2Deltas(deltaBA.getX(), deltaBA.getY(), deltaCA.getX(), deltaCA.getY())));
 }
 
 Angle getTheSmallerAngleBetweenTwoLines(Line const& line1, Line const& line2)
@@ -249,11 +254,14 @@ Point getMidpoint(Point const& point1, Point const& point2)
     return Point((point1.getX()+point2.getX())/2,  (point1.getY()+point2.getY())/2);
 }
 
-Point getPointAlongALineWithDistanceFromAPoint(Line const& line, Point const& referencePoint, double const distance, bool const isIncreasedOnX)
+Point getPointAlongALineWithDistanceFromAPoint(
+        Line const& line,
+        Point const& referencePoint,
+        double const distance,
+        bool const isIncreasedOnX)
 {
     double commonRatioWithDistance = getSquareRootOfXSquaredPlusYSquared(line.getACoefficient(), line.getBCoefficient());
-    // delta x = a*D / (a2+b2)^0.5
-    // delta y = b*D / (a2+b2)^0.5
+    // delta x = a*D / (a2+b2)^0.5    // delta y = b*D / (a2+b2)^0.5
     double deltaX = line.getACoefficient()*distance/commonRatioWithDistance;
     double deltaY = -line.getBCoefficient()*distance/commonRatioWithDistance;
     if((isIncreasedOnX && deltaX<0) || (!isIncreasedOnX && deltaX>0))
@@ -265,10 +273,25 @@ Point getPointAlongALineWithDistanceFromAPoint(Line const& line, Point const& re
     return referencePoint + delta;
 }
 
+Points getIntersectionsOfLineAndParabola(
+        Parabola const& parabola,
+        Line const& line)
+{
+    Points result;
+    double newA = parabola.getA()*line.getBCoefficient();
+    double newB = line.getACoefficient() + (parabola.getB()*line.getBCoefficient());
+    double newC = (parabola.getC()*line.getBCoefficient()) + line.getCCoefficient();
+    AlbaNumbers xValues(calculateQuadraticRoots(AlbaNumber(newA), AlbaNumber(newB), AlbaNumber(newC)));
+    for(AlbaNumber const& xValue : xValues)
+    {
+        result.emplace_back(xValue.getDouble(), line.calculateYFromX(xValue.getDouble()));
+    }
+    return result;
+}
+
 Point popNearestPoint(Points & points, Point const& point)
 {
-    Point result;
-    if(!points.empty())
+    Point result;    if(!points.empty())
     {
         double nearestDistance=getDistance(points[0], point);
         Points::iterator nearestPointIterator = points.begin();
@@ -489,11 +512,14 @@ void addPointIfInsideTwoPoints(Points & pointsAtBorder, Point const& point, Poin
     }
 }
 
-void savePointsFromTwoPointsUsingALineWithoutLastPoint(Points & points, Point const& previousPoint, Point const& currentPoint, double const interval)
+void savePointsFromTwoPointsUsingALineWithoutLastPoint(
+        Points & points,
+        Point const& previousPoint,
+        Point const& currentPoint,
+        double const interval)
 {
     Line line(previousPoint, currentPoint);
-    Points pointsInLine(line.getPointsWithoutLastPoint(previousPoint, currentPoint, interval));
-    points.reserve(pointsInLine.size());
+    Points pointsInLine(line.getPointsWithoutLastPoint(previousPoint, currentPoint, interval));    points.reserve(pointsInLine.size());
     copy(pointsInLine.begin(), pointsInLine.end(), back_inserter(points));
 }
 
