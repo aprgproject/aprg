@@ -1,6 +1,6 @@
 #include "SolutionUtilities.hpp"
 
-#include <Algebra/Term/Utilities/TermUtilities.hpp>
+#include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
 #include <algorithm>
