@@ -66,7 +66,8 @@ bool SimplificationOfExpression::isFurtherSimplificationNeeded(
 
 bool SimplificationOfExpression::didEvenExponentCancellationHappened(
         TermsWithDetails const& exponents) const
-{    bool result(false);
+{
+    bool result(false);
     Term previousCombinedTerm(1);
     for(TermWithDetails const& exponentWithDetails : exponents)
     {
@@ -132,7 +133,8 @@ void SimplificationOfExpression::simplifyExpression()
     while(isFurtherSimplificationNeeded(beforeSimplify, m_expression));
 }
 
-void SimplificationOfExpression::simplifyAndCopyTerms(        TermsWithDetails & termsToUpdate,
+void SimplificationOfExpression::simplifyAndCopyTerms(
+        TermsWithDetails & termsToUpdate,
         TermsWithDetails const& termsToCheck)
 {
     for(TermWithDetails const& termWithDetails : termsToCheck)
@@ -178,7 +180,8 @@ void SimplificationOfExpression::simplifyAndCopyTermsFromAnExpressionAndSetOpera
 
 bool SimplificationOfExpression::simplifyToACommonDenominatorForExpressionAndReturnIfChanged(Expression & expression)
 {
-    bool isChanged(false);    if(expression.getCommonOperatorLevel() == OperatorLevel::AdditionAndSubtraction)
+    bool isChanged(false);
+    if(expression.getCommonOperatorLevel() == OperatorLevel::AdditionAndSubtraction)
     {
         isChanged = tryToAddSubtractTermsOverTermsAndReturnIfChanged(expression);
     }

@@ -65,7 +65,8 @@ TEST(HyperbolaTest, HyperbolaAtOriginWithRadius)
     EXPECT_EQ(Point(-6,-3.4641016151377543864), points.at(21));
 }
 
-TEST(HyperbolaTest, AreaTraversalIsCorrect){
+TEST(HyperbolaTest, AreaTraversalIsCorrect)
+{
     //traversal
 }
 

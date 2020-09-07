@@ -293,7 +293,8 @@ TEST(FactorizationOfIncreasingAndDecreasingExponentFormTest, CalculatePolynomial
 
 TEST(FactorizationOfIncreasingAndDecreasingExponentFormTest, CalculatePolynomialRootsUsingBrentMethodWorks)
 {
-    AlbaNumbers cubicCoefficients{1, 3, 3, 1};    AlbaNumbers previousDerivativeCoefficients{3, 6, 3};
+    AlbaNumbers cubicCoefficients{1, 3, 3, 1};
+    AlbaNumbers previousDerivativeCoefficients{3, 6, 3};
 
     AlbaNumbers roots(calculatePolynomialRootsUsingBrentMethod(previousDerivativeCoefficients, cubicCoefficients));
 

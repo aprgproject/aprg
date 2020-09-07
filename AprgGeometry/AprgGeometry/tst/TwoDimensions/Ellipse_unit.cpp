@@ -62,7 +62,8 @@ TEST(EllipseTest, EllipseAtOriginWithRadius)
     EXPECT_EQ(Point(2.5980762113533160118,-1), points.at(15));
 }
 
-TEST(EllipseTest, AreaTraversalIsCorrect){
+TEST(EllipseTest, AreaTraversalIsCorrect)
+{
     //traversal
 }
 
