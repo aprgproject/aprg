@@ -299,6 +299,7 @@ void AprgModeling::calculateCoefficientsUsingLeastSquares()
 
     gsl_multifit_linear_workspace *work = gsl_multifit_linear_alloc(dataHeight, dataWidth);
     gsl_multifit_linear(xModelingData, yModelingData, calculatedCoefficients, calculatedCovariance, &chisq, work);
+
     m_coefficients.clearAndResize(dataWidth, 1);
     for(unsigned int i=0; i<dataWidth; i++)
     {
