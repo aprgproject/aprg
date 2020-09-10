@@ -5,24 +5,26 @@
 #include <Math/AlbaNumberTypes.hpp>
 
 #include <functional>
+#include <map>
 
 namespace alba
 {
-
 namespace algebra
 {
 
 using FunctionCondition = std::function<bool(Function const&)>;
+using VariableToValueMap = std::map<std::string, AlbaNumber>;
 
 AlbaNumber getCoefficientWithNoVariables(
         Polynomial const& polynomial);
 AlbaNumber getCoefficientForVariableOnly(
-        std::string variableName,
+        std::string const& variableName,
+        Polynomial const& polynomial);
+VariableToValueMap getCoefficientsForVariablesOnly(
         Polynomial const& polynomial);
 
 AlbaNumbersSet retrieveAndReturnExponents(Term const& term);
-void retrieveExponents(AlbaNumbersSet & numbers, Term const& term);
-void retrieveExponents(AlbaNumbersSet & numbers, Monomial const& monomial);
+void retrieveExponents(AlbaNumbersSet & numbers, Term const& term);void retrieveExponents(AlbaNumbersSet & numbers, Monomial const& monomial);
 void retrieveExponents(AlbaNumbersSet & numbers, Polynomial const& polynomial);
 void retrieveExponents(AlbaNumbersSet & numbers, Expression const& expression);
 void retrieveExponents(AlbaNumbersSet & numbers, Function const& functionObject);

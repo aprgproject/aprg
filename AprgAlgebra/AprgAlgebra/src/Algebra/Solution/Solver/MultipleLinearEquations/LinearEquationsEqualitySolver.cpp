@@ -69,11 +69,10 @@ void LinearEquationsEqualitySolver::calculateSolution(
     {
         NumberMatrix coefficientsMatrix(variables.size()+1, polynomials.size());
         setMatrixCoefficients(coefficientsMatrix, variables, polynomials);
-        coefficientsMatrix.transformToReducedEchelonForm();
+        coefficientsMatrix.transformToReducedEchelonFormUsingGaussJordanReduction();
         if(coefficientsMatrix.isReducedRowEchelonForm())
         {
-            saveSolutionSetsFromTheCoefficientMatrix(solutionSets, coefficientsMatrix, variables);
-            setAsCompleteSolution();
+            saveSolutionSetsFromTheCoefficientMatrix(solutionSets, coefficientsMatrix, variables);            setAsCompleteSolution();
         }
     }
 }
@@ -96,14 +95,18 @@ void LinearEquationsEqualitySolver::setMatrixCoefficients(
     for(Polynomial const& polynomial : polynomials)
     {
         unsigned int columnIndex=0;
+        VariableToValueMap variableToValueMap(getCoefficientsForVariablesOnly(polynomial));
         for(string const& variableName : variableNames)
         {
-            coefficientsMatrix.set(columnIndex++, rowIndex, getCoefficientForVariableOnly(variableName, polynomial));
+            VariableToValueMap::const_iterator it = variableToValueMap.find(variableName);
+            if(it != variableToValueMap.cend())
+            {
+                coefficientsMatrix.setEntry(columnIndex++, rowIndex, it->second);
+            }
         }
-        coefficientsMatrix.set(columnIndex, rowIndex++, getCoefficientWithNoVariables(polynomial));
+        coefficientsMatrix.setEntry(columnIndex, rowIndex++, getCoefficientWithNoVariables(polynomial));
     }
 }
-
 void LinearEquationsEqualitySolver::saveSolutionSetsFromTheCoefficientMatrix(
         VariableNameToSolutionSetMap & solutionSets,
         NumberMatrix const& coefficientsMatrix,
@@ -113,14 +116,13 @@ void LinearEquationsEqualitySolver::saveSolutionSetsFromTheCoefficientMatrix(
     unsigned int columnEndIndex = variables.size();
     for(string const& variableName : variables)
     {
-        AlbaNumber identityDiagonalIndex(coefficientsMatrix.get(index, index));
+        AlbaNumber identityDiagonalIndex(coefficientsMatrix.getEntry(index, index));
         if(identityDiagonalIndex == 1)
         {
-            solutionSets[variableName].addAcceptedValue(-coefficientsMatrix.get(columnEndIndex, index));
+            solutionSets[variableName].addAcceptedValue(-coefficientsMatrix.getEntry(columnEndIndex, index));
         }
         index++;
-    }
-}
+    }}
 
 }
 
