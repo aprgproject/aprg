@@ -19,7 +19,7 @@ namespace alba
 {
 
 template <typename DataType>
-class Matrix
+class AlbaMatrix
 {
 public:
     using MatrixData = std::vector<DataType>;
@@ -30,12 +30,12 @@ public:
     using LoopWithValueFunction = std::function<void(unsigned int const x, unsigned int const y,DataType const& value)>;
     using MatrixIndexRange = AlbaRange<unsigned int>;
 
-    Matrix()
+    AlbaMatrix()
         : m_numberOfColumns(0) // can we make this as template parameter?
         , m_numberOfRows(0)
     {}
 
-    Matrix(
+    AlbaMatrix(
             unsigned int const numberOfColumns,
             unsigned int const numberOfRows)
         : m_numberOfColumns(numberOfColumns)
@@ -43,7 +43,7 @@ public:
         , m_matrixData(numberOfColumns*numberOfRows, 0)
     {}
 
-    Matrix(
+    AlbaMatrix(
             unsigned int const numberOfColumns,
             unsigned int const numberOfRows,
             MatrixData const& matrixData)
@@ -56,7 +56,7 @@ public:
         fillRemainingEntriesToZeroIfNeeded(numberOfColumns, numberOfRows);
     }
 
-    bool operator==(Matrix const& secondMatrix) const
+    bool operator==(AlbaMatrix const& secondMatrix) const
     {
         bool isEqual(true);
         if(m_numberOfColumns != secondMatrix.m_numberOfColumns)
@@ -81,41 +81,43 @@ public:
         }
         return isEqual;
     }
-    Matrix operator+(Matrix const& secondMatrix) const
+
+    AlbaMatrix operator+(AlbaMatrix const& secondMatrix) const
     {
         assert((m_numberOfColumns == secondMatrix.m_numberOfColumns) && (m_numberOfRows == secondMatrix.m_numberOfRows));
-        Matrix result(m_numberOfColumns, m_numberOfRows);
+        AlbaMatrix result(m_numberOfColumns, m_numberOfRows);
         traverseWithBinaryOperationWithSameDimensions(*this, secondMatrix, result, std::plus<DataType>());
         return result;
     }
 
-    Matrix operator-(Matrix const& secondMatrix) const
+    AlbaMatrix operator-(AlbaMatrix const& secondMatrix) const
     {
         assert((m_numberOfColumns == secondMatrix.m_numberOfColumns) && (m_numberOfRows == secondMatrix.m_numberOfRows));
-        Matrix result(m_numberOfColumns, m_numberOfRows);
+        AlbaMatrix result(m_numberOfColumns, m_numberOfRows);
         traverseWithBinaryOperationWithSameDimensions(*this, secondMatrix, result, std::minus<DataType>());
         return result;
     }
 
-    Matrix operator*(DataType const& scalarMultiplier) const //scalar multiplication
+    AlbaMatrix operator*(DataType const& scalarMultiplier) const //scalar multiplication
     {
-        Matrix result(m_numberOfColumns, m_numberOfRows);
+        AlbaMatrix result(m_numberOfColumns, m_numberOfRows);
         std::function<DataType(DataType const&)> scalarMultiplication = std::bind(std::multiplies<DataType>(), std::placeholders::_1, scalarMultiplier);
         traverseWithUnaryOperationWithSameDimensions(*this, result, scalarMultiplication);
         return result;
     }
 
-    Matrix operator*(Matrix const& secondMatrix) const //matrix multiplication
+    AlbaMatrix operator*(AlbaMatrix const& secondMatrix) const //matrix multiplication
     {
         assert(m_numberOfColumns == secondMatrix.m_numberOfRows);
-        Matrix result(m_numberOfRows, secondMatrix.m_numberOfColumns);
+        AlbaMatrix result(m_numberOfRows, secondMatrix.m_numberOfColumns);
         ListOfMatrixData rowsOfFirstMatrix;
         ListOfMatrixData columnsOfSecondMatrix;
         retrieveRows(rowsOfFirstMatrix);
         secondMatrix.retrieveColumns(columnsOfSecondMatrix);
         unsigned int y=0;
         for(MatrixData const& rowOfFirstMatrix : rowsOfFirstMatrix)
-        {            unsigned int x=0;
+        {
+            unsigned int x=0;
             for(MatrixData const& columnOfSecondMatrix : columnsOfSecondMatrix)
             {
                 result.setEntry(x,y,multiplyEachItemAndGetSum(rowOfFirstMatrix, columnOfSecondMatrix));
@@ -133,7 +135,8 @@ public:
 
     bool isZeroMatrix() const
     {
-        return std::all_of(m_matrixData.cbegin(), m_matrixData.cend(), [](DataType const& dataType)        {
+        return std::all_of(m_matrixData.cbegin(), m_matrixData.cend(), [](DataType const& dataType)
+        {
             return isAlmostEqual(dataType, 0);
         });
     }
@@ -154,7 +157,8 @@ public:
                     isIdentityMatrix = isIdentityMatrix && getEntry(x, y) == 0;
                 }
             }
-        }        return isIdentityMatrix;
+        }
+        return isIdentityMatrix;
     }
 
     bool isSingular() const // means the its non invertible
@@ -167,7 +171,8 @@ public:
 
     bool isReducedRowEchelonForm() const
     {
-        return areRowsWithAllZeroInTheBottom() && areLeadingEntriesInReducedRowEchelonForm();    }
+        return areRowsWithAllZeroInTheBottom() && areLeadingEntriesInReducedRowEchelonForm();
+    }
 
     unsigned int getColumns() const
     {
@@ -209,7 +214,7 @@ public:
             MatrixData const& newColumnValues) const
     {
         assert(m_numberOfColumns == m_numberOfRows);
-        Matrix matrixWithNewColumn(*this);
+        AlbaMatrix matrixWithNewColumn(*this);
         matrixWithNewColumn.setColumn(columnIndex, newColumnValues);
         return matrixWithNewColumn.getDeterminant()/getDeterminant();
     }
@@ -225,12 +230,12 @@ public:
         return m_matrixData;
     }
 
-    Matrix getMatrixWithOneColumnAndOneRowRemoved(
+    AlbaMatrix getMatrixWithOneColumnAndOneRowRemoved(
             unsigned int const columnIndex,
             unsigned int const rowIndex) const
     {
         assert((columnIndex < m_numberOfColumns) && (rowIndex < m_numberOfRows));
-        Matrix result(m_numberOfColumns-1, m_numberOfRows-1);
+        AlbaMatrix result(m_numberOfColumns-1, m_numberOfRows-1);
         iterateAllThroughYAndThenX([&](unsigned int const x, unsigned int const y)
         {
             if(columnIndex != x && rowIndex != y)
@@ -267,6 +272,7 @@ public:
             column.emplace_back(getEntry(x, y));
         }
     }
+
     void retrieveRow(MatrixData & row, unsigned int const y) const
     {
         row.reserve(m_numberOfColumns);
@@ -275,6 +281,7 @@ public:
             row.emplace_back(getEntry(x, y));
         }
     }
+
     void retrieveColumns(ListOfMatrixData & columns) const
     {
         for(unsigned int x=0; x<m_numberOfColumns; x++)
@@ -325,7 +332,8 @@ public:
 
     void clearAndResize(unsigned int const numberOfColumns, unsigned int const numberOfRows)
     {
-        m_numberOfColumns = numberOfColumns;        m_numberOfRows = numberOfRows;
+        m_numberOfColumns = numberOfColumns;
+        m_numberOfRows = numberOfRows;
         m_matrixData.clear();
         m_matrixData.resize(numberOfColumns*numberOfRows, 0);
     }
@@ -349,19 +357,21 @@ public:
         iterateThroughYAndThenXWithRanges(yRange, xRange, [&](unsigned int const x, unsigned int const y)
         {
             m_matrixData[getMatrixIndex(y, x)] = oldMatrixData[getMatrixIndex(x, y, oldColumns)];
-        });    }
+        });
+    }
 
     void invert()
     {
         assert((m_numberOfColumns == m_numberOfRows));
         unsigned int newColumns = m_numberOfColumns*2;
-        Matrix tempMatrix(newColumns, m_numberOfRows);
+        AlbaMatrix tempMatrix(newColumns, m_numberOfRows);
         iterateAllThroughYAndThenX([&](unsigned int const x, unsigned int const y)
         {
             tempMatrix.m_matrixData[getMatrixIndex(x, y, newColumns)] = getEntry(x, y);
         });
         unsigned int minValueForDiagonal = std::min(m_numberOfColumns, m_numberOfRows);
-        for(unsigned int d=0; d<minValueForDiagonal; d++)        {
+        for(unsigned int d=0; d<minValueForDiagonal; d++)
+        {
             tempMatrix.m_matrixData[getMatrixIndex(m_numberOfColumns+d, d, newColumns)] = 1;
         }
         tempMatrix.transformToReducedEchelonFormUsingGaussJordanReduction();
@@ -396,7 +406,8 @@ public:
                                         getEntry(x, yToZero)/getEntry(x, yWithLeadingEntry),
                                         yToZero);
                         }
-                    }                    yWithLeadingEntry++;
+                    }
+                    yWithLeadingEntry++;
                     break;
                 }
             }
@@ -449,7 +460,8 @@ private:
                 if(isRowWithAllZero && !mathHelper::isAlmostEqual(getEntry(x, y), static_cast<DataType>(0)))
                 {
                     isRowWithAllZero = false;
-                    break;                }
+                    break;
+                }
             }
             if(!isRowWithNonZeroEncountered)
             {
@@ -466,7 +478,8 @@ private:
 
     bool areLeadingEntriesInReducedRowEchelonForm() const
     {
-        int currentLeadingEntryColumn(-1);        for(unsigned int y=0; y<m_numberOfRows; y++)
+        int currentLeadingEntryColumn(-1);
+        for(unsigned int y=0; y<m_numberOfRows; y++)
         {
             for(unsigned int x=0; x<m_numberOfColumns; x++)
             {
@@ -480,7 +493,8 @@ private:
                             if(yZeroCheck!=y && !mathHelper::isAlmostEqual(getEntry(x, yZeroCheck), static_cast<DataType>(0)))
                             {
                                 //4. If a column contains a leading entry of some row, then all other entries in that column are zero
-                                return false;                            }
+                                return false;
+                            }
                         }
                     }
                     else
@@ -582,7 +596,8 @@ private:
 
     void fillRemainingEntriesToZeroIfNeeded(
             unsigned int const numberOfColumns,
-            unsigned int const numberOfRows)    {
+            unsigned int const numberOfRows)
+    {
         unsigned int targetSize = numberOfColumns*numberOfRows;
         if(m_matrixData.size() != targetSize)
         {
@@ -593,8 +608,9 @@ private:
     }
 
     void traverseWithBinaryOperationWithSameDimensions(
-            Matrix const& firstMatrix,
-            Matrix const& secondMatrix,            Matrix & resultMatrix,
+            AlbaMatrix const& firstMatrix,
+            AlbaMatrix const& secondMatrix,
+            AlbaMatrix & resultMatrix,
             BinaryFunction const& binaryFunction) const
     {
         assert((firstMatrix.m_numberOfColumns == secondMatrix.m_numberOfColumns) &&
@@ -610,8 +626,9 @@ private:
     }
 
     void traverseWithUnaryOperationWithSameDimensions(
-            Matrix const& inputMatrix,
-            Matrix & resultMatrix,            UnaryFunction const& unaryFunction) const
+            AlbaMatrix const& inputMatrix,
+            AlbaMatrix & resultMatrix,
+            UnaryFunction const& unaryFunction) const
     {
         assert((inputMatrix.m_numberOfColumns == resultMatrix.m_numberOfColumns) &&
                (inputMatrix.m_numberOfRows == resultMatrix.m_numberOfRows));
@@ -624,7 +641,8 @@ private:
 
     void traverseWithBinaryOperationForDifferentRows(
             unsigned int const yInput1,
-            unsigned int const yInput2,            unsigned int const yOutput,
+            unsigned int const yInput2,
+            unsigned int const yOutput,
             BinaryFunction const& binaryFunction)
     {
         assert((yInput1 < m_numberOfRows) && (yInput2 < m_numberOfRows) && (yOutput < m_numberOfRows));
@@ -638,7 +656,8 @@ private:
 
     void traverseWithUnaryOperationForDifferentRows(
             unsigned int const yInput,
-            unsigned int const yOutput,            UnaryFunction const& unaryFunction)
+            unsigned int const yOutput,
+            UnaryFunction const& unaryFunction)
     {
         assert((yInput < m_numberOfRows) && (yOutput < m_numberOfRows));
         for(unsigned int x=0; x<m_numberOfColumns; x++)
@@ -665,7 +684,8 @@ private:
             LoopFunction const& loopFunction) const
     {
         yRange.traverse([&](unsigned int const yValue)
-        {            xRange.traverse([&](unsigned int const xValue)
+        {
+            xRange.traverse([&](unsigned int const xValue)
             {
                 loopFunction(xValue, yValue);
             });
@@ -678,7 +698,8 @@ private:
             LoopFunction const& loopFunction) const
     {
         xRange.traverse([&](unsigned int const xValue)
-        {            yRange.traverse([&](unsigned int const yValue)
+        {
+            yRange.traverse([&](unsigned int const yValue)
             {
                 loopFunction(xValue, yValue);
             });
@@ -686,11 +707,12 @@ private:
     }
 
     unsigned int m_numberOfColumns;
-    unsigned int m_numberOfRows;    MatrixData m_matrixData;
+    unsigned int m_numberOfRows;
+    MatrixData m_matrixData;
 };
 
 template <typename DataType>
-std::ostream & operator<<(std::ostream & out, Matrix<DataType> const& matrix)
+std::ostream & operator<<(std::ostream & out, AlbaMatrix<DataType> const& matrix)
 {
     out << matrix.getString();
     return out;

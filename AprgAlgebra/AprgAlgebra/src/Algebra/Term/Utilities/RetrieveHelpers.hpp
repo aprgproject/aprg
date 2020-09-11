@@ -9,6 +9,7 @@
 
 namespace alba
 {
+
 namespace algebra
 {
 
@@ -24,7 +25,8 @@ VariableToValueMap getCoefficientsForVariablesOnly(
         Polynomial const& polynomial);
 
 AlbaNumbersSet retrieveAndReturnExponents(Term const& term);
-void retrieveExponents(AlbaNumbersSet & numbers, Term const& term);void retrieveExponents(AlbaNumbersSet & numbers, Monomial const& monomial);
+void retrieveExponents(AlbaNumbersSet & numbers, Term const& term);
+void retrieveExponents(AlbaNumbersSet & numbers, Monomial const& monomial);
 void retrieveExponents(AlbaNumbersSet & numbers, Polynomial const& polynomial);
 void retrieveExponents(AlbaNumbersSet & numbers, Expression const& expression);
 void retrieveExponents(AlbaNumbersSet & numbers, Function const& functionObject);

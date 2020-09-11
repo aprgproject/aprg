@@ -72,7 +72,8 @@ void LinearEquationsEqualitySolver::calculateSolution(
         coefficientsMatrix.transformToReducedEchelonFormUsingGaussJordanReduction();
         if(coefficientsMatrix.isReducedRowEchelonForm())
         {
-            saveSolutionSetsFromTheCoefficientMatrix(solutionSets, coefficientsMatrix, variables);            setAsCompleteSolution();
+            saveSolutionSetsFromTheCoefficientMatrix(solutionSets, coefficientsMatrix, variables);
+            setAsCompleteSolution();
         }
     }
 }
@@ -107,6 +108,7 @@ void LinearEquationsEqualitySolver::setMatrixCoefficients(
         coefficientsMatrix.setEntry(columnIndex, rowIndex++, getCoefficientWithNoVariables(polynomial));
     }
 }
+
 void LinearEquationsEqualitySolver::saveSolutionSetsFromTheCoefficientMatrix(
         VariableNameToSolutionSetMap & solutionSets,
         NumberMatrix const& coefficientsMatrix,
@@ -122,7 +124,8 @@ void LinearEquationsEqualitySolver::saveSolutionSetsFromTheCoefficientMatrix(
             solutionSets[variableName].addAcceptedValue(-coefficientsMatrix.getEntry(columnEndIndex, index));
         }
         index++;
-    }}
+    }
+}
 
 }
 

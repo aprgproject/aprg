@@ -29,7 +29,8 @@ AlbaNumber getCoefficientForVariableOnly(
         std::string const& variableName,
         Polynomial const& polynomial)
 {
-    AlbaNumber coefficientValue;    for(Monomial const& monomial : polynomial.getMonomialsConstReference())
+    AlbaNumber coefficientValue;
+    for(Monomial const& monomial : polynomial.getMonomialsConstReference())
     {
         Monomial::VariablesToExponentsMap const& variableToExponentMap(
                     monomial.getVariablesToExponentsMapConstReference());
@@ -64,7 +65,8 @@ VariableToValueMap getCoefficientsForVariablesOnly(
 }
 
 AlbaNumbersSet retrieveAndReturnExponents(Term const& term)
-{    AlbaNumbersSet result;
+{
+    AlbaNumbersSet result;
     retrieveExponents(result, term);
     return result;
 }
