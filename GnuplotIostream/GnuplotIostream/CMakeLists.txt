@@ -25,12 +25,8 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 #Include boost, this needs APRG Directory
 include(${APRG_DIR}/Boost/AprgCmakeInclude/boost.cmake)
 
-#Include AprgMatrix, this needs APRG Directory
-include(${APRG_DIR}/AprgMatrix/AprgCmakeInclude/AprgMatrix.cmake)
-
 #Include AprgGeometry, this needs APRG Directory
 include(${APRG_DIR}/AprgGeometry/AprgCmakeInclude/AprgGeometry.cmake)
-
 #Add files and directories
 include(${GNUPLOT_IOSTREAM_DIR}/cmake/FilesAndDirectories.cmake)
 

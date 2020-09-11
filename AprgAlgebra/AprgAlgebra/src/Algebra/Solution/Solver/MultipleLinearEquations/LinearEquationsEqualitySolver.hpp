@@ -5,22 +5,20 @@
 #include <Algebra/Solution/Solver/BaseSolver.hpp>
 #include <Algebra/Term/TermTypes/Polynomial.hpp>
 #include <Algebra/Term/TermTypes/TermContainerTypes.hpp>
-#include <Matrix/Matrix.hpp>
+#include <Math/AlbaMatrix.hpp>
 
 namespace alba
 {
-
 namespace algebra
 {
 
 class LinearEquationsEqualitySolver : public BaseSolver
 {
 public:
-    using NumberMatrix=Matrix<AlbaNumber>;
+    using NumberMatrix=AlbaMatrix<AlbaNumber>;
     LinearEquationsEqualitySolver();
 
-    VariableNameToSolutionSetMap calculateSolutionAndReturnSolutionSet(Equations const& equations);
-    VariableNameToSolutionSetMap calculateSolutionAndReturnSolutionSet(Polynomials const& polynomials);
+    VariableNameToSolutionSetMap calculateSolutionAndReturnSolutionSet(Equations const& equations);    VariableNameToSolutionSetMap calculateSolutionAndReturnSolutionSet(Polynomials const& polynomials);
 
 private:
     void calculateSolution(VariableNameToSolutionSetMap & solutionSets, Equations const& equations);

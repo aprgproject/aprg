@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Matrix/Matrix.hpp>
+#include <Math/AlbaMatrix.hpp>
 
 #include <string>
 #include <vector>
-
 namespace alba
 {
 
@@ -19,11 +18,10 @@ public:
         double rootMeanSquareError;
     };
     using VectorOfDoubles = std::vector<double>;
-    using MatrixOfDoubles = Matrix<double>;
+    using MatrixOfDoubles = AlbaMatrix<double>;
     AprgModeling();
     unsigned int getNumberOfSamples() const;
-    MatrixOfDoubles getCoefficients() const;
-    void retrieveDataFromFileWithFileFormat1(std::string const& filePath);
+    MatrixOfDoubles getCoefficients() const;    void retrieveDataFromFileWithFileFormat1(std::string const& filePath);
     void retrieveDataFromFileWithFileFormat2(std::string const& filePath);
     void saveRetrievedDataForXAndY(
             unsigned int numberOfIndicators,

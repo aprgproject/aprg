@@ -22,12 +22,8 @@ include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 #Include AprgCommon, this needs APRG Directory
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
-#Include AprgMatrix, this needs APRG Directory
-include(${APRG_DIR}/AprgMatrix/AprgCmakeInclude/AprgMatrix.cmake)
-
 #Add files and directories
 include(${APRG_ALGEBRA_DIR}/cmake/FilesAndDirectories.cmake)
-
 if (TEST_MODE)
     add_executable(${OUTFILE} ${APRG_ALGEBRA_SOURCES_AND_TESTS})
     include_directories(${APRG_ALGEBRA_INCLUDE_DIRECTORIES} ${APRG_ALGEBRA_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
