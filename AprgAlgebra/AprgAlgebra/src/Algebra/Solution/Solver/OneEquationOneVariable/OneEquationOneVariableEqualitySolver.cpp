@@ -4,11 +4,10 @@
 #include <Algebra/Solution/SolutionUtilities.hpp>
 #include <Algebra/Solution/Solver/NewtonMethod.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
+#include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
 #include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
-#include <Algebra/Term/Utilities/TermUtilities.hpp>
 
 using namespace std;
-
 namespace alba
 {
 

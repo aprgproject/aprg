@@ -2,12 +2,11 @@
 
 #include <Algebra/Constructs/ConstructUtilities.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
+#include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
 #include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
-#include <Algebra/Term/Utilities/TermUtilities.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 
 using namespace std;
-
 namespace alba
 {
 
@@ -82,12 +81,11 @@ void OneEquationOneVariableNonEqualitySolver::addIntervalsToSolutionSetIfNeeded(
         {
             substitution.putVariableWithValue(variableName, value);
             Equation substitutedEquation(substitution.performSubstitutionTo(equation));
-            return isAFiniteValue(substitutedEquation.getLeftHandTerm())
-                    && isAFiniteValue(substitutedEquation.getRightHandTerm())
+            return isAFiniteConstant(substitutedEquation.getLeftHandTerm())
+                    && isAFiniteConstant(substitutedEquation.getRightHandTerm())
                     && substitutedEquation.isEquationSatisfied();
         });
-        setAsCompleteSolution();
-    }
+        setAsCompleteSolution();    }
 }
 
 }
