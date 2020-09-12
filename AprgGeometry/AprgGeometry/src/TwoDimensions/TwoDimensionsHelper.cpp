@@ -284,11 +284,10 @@ Points getIntersectionsOfParabolaAndLine(
     double newA = parabola.getA()*line.getBCoefficient();
     double newB = line.getACoefficient() + (parabola.getB()*line.getBCoefficient());
     double newC = (parabola.getC()*line.getBCoefficient()) + line.getCCoefficient();
-    AlbaNumbers xValues(calculateQuadraticRoots(AlbaNumber(newA), AlbaNumber(newB), AlbaNumber(newC)));
+    AlbaNumbers xValues(getQuadraticRoots(AlbaNumber(newA), AlbaNumber(newB), AlbaNumber(newC)));
     for(AlbaNumber const& xValue : xValues)
     {
-        result.emplace_back(xValue.getDouble(), line.calculateYFromX(xValue.getDouble()));
-    }
+        result.emplace_back(xValue.getDouble(), line.calculateYFromX(xValue.getDouble()));    }
     return result;
 }
 
