@@ -4,14 +4,16 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace algebra
 {
 
 AlbaNumberPairs evaluateAndGetInputOutputPair(
         AlbaNumbers const& numbers,
-        string const& variableName,        Term const& term)
+        string const& variableName,
+        Term const& term)
 {
     AlbaNumberPairs result;
     SubstitutionOfVariablesToValues substitution;

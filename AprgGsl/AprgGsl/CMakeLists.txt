@@ -27,6 +27,7 @@ include(${APRG_DIR}/AprgAlgorithm/AprgCmakeInclude/AprgAlgorithm.cmake)
 
 #Include Gsl, this needs APRG Directory
 include(${APRG_DIR}/gsl1.8/AprgCmakeInclude/Gsl.cmake)
+
 #Add files and directories
 include(${APRG_GSL_DIR}/cmake/FilesAndDirectories.cmake)
 

@@ -162,14 +162,16 @@ AprgModeling::ValidationResult AprgModeling::validate()
             yPredicted += m_validationDataForX.getEntry(i, j)*m_coefficients.getEntry(i, 0);
             index++;
         }
-        calculationDataBuffer.emplace_back(yPredicted);    }
+        calculationDataBuffer.emplace_back(yPredicted);
+    }
 
     for(unsigned int j=0; j<dataHeight; j++)
     {
         calculationDataBuffer[j]=m_validationDataForY.getEntry(0, j)-calculationDataBuffer[j];
     }
 
-    for(unsigned int j=0; j<dataHeight; j++)    {
+    for(unsigned int j=0; j<dataHeight; j++)
+    {
         calculationDataBuffer[j] = pow(calculationDataBuffer[j], 2);
     }
 
@@ -217,7 +219,8 @@ void AprgModeling::printData(MatrixOfDoubles & matrixInX, MatrixOfDoubles & matr
             cout<<matrixInX.getEntry(i, j)<<", ";
         }
         cout<<endl;
-    }}
+    }
+}
 
 void AprgModeling::copyVectorToMatrix(unsigned int const numberOfColumns, unsigned int const numberOfRows, VectorOfDoubles const& retrievedDataForX, MatrixOfDoubles & matrixOfDoubles)
 {
@@ -228,7 +231,8 @@ void AprgModeling::copyVectorToMatrix(unsigned int const numberOfColumns, unsign
         matrixOfDoubles.setEntry(x, y, value);
         x++;
         if(x>=numberOfColumns)
-        {            x=0;
+        {
+            x=0;
             y++;
         }
     }
@@ -249,6 +253,7 @@ void AprgModeling::saveRetrievedDataToMatrixRandomly(MatrixOfDoubles & matrixInX
         }
     }
 }
+
 void AprgModeling::saveRetrievedDataToMatrix(MatrixOfDoubles & matrixInX, MatrixOfDoubles & matrixInY, unsigned int numberOfSamples)
 {
     matrixInX.clearAndResize(m_retrievedDataForX.getColumns(), numberOfSamples);
@@ -262,6 +267,7 @@ void AprgModeling::saveRetrievedDataToMatrix(MatrixOfDoubles & matrixInX, Matrix
         }
     }
 }
+
 void AprgModeling::calculateCoefficientsUsingLeastSquares()
 {
     unsigned int dataHeight = m_modelingDataForY.getRows();
@@ -283,12 +289,14 @@ void AprgModeling::calculateCoefficientsUsingLeastSquares()
             gsl_vector_set(yModelingData, y, m_modelingDataForY.getEntry(x, y));
         }
     }
-    for(unsigned int x=1; x<m_modelingDataForX.getColumns(); x++)    {
+    for(unsigned int x=1; x<m_modelingDataForX.getColumns(); x++)
+    {
         for(unsigned int y=0; y<m_modelingDataForX.getRows(); y++)
         {
             gsl_matrix_set(xModelingData, y, x, m_modelingDataForX.getEntry(x, y));
         }
     }
+
     gsl_multifit_linear_workspace *work = gsl_multifit_linear_alloc(dataHeight, dataWidth);
     gsl_multifit_linear(xModelingData, yModelingData, calculatedCoefficients, calculatedCovariance, &chisq, work);
 
@@ -298,7 +306,8 @@ void AprgModeling::calculateCoefficientsUsingLeastSquares()
         m_coefficients.setEntry(i, 0, gsl_vector_get(calculatedCoefficients, i));
     }
 
-    gsl_multifit_linear_free(work);    gsl_matrix_free(calculatedCovariance);
+    gsl_multifit_linear_free(work);
+    gsl_matrix_free(calculatedCovariance);
     gsl_vector_free(calculatedCoefficients);
     gsl_vector_free(yModelingData);
     gsl_matrix_free(xModelingData);

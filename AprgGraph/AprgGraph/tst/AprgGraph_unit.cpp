@@ -10,6 +10,7 @@ using namespace alba::algebra;
 using namespace alba::AprgBitmap;
 using namespace alba::TwoDimensions;
 using namespace std;
+
 #define APRG_GRAPH_24_BIT_DEFAULT_FILE APRG_DIR R"(AprgGraph\AprgGraph\tst\Bitmaps\Default24Bit.bmp)"
 #define APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE APRG_DIR R"(AprgGraph\AprgGraph\tst\Bitmaps\GraphOutput.bmp)"
 
@@ -44,7 +45,8 @@ TEST(SampleTest, BitmapGraph24Bits)
 
     graph.drawFunctionUsingX(0x00FF00FF, [](double xValue)->double
     {
-        return 100*sin(xValue/100);    });
+        return 100*sin(xValue/100);
+    });
     graph.drawFunctionUsingY(0x00FF00FF, [](double yValue)->double
     {
         return 100*sin(yValue/100);

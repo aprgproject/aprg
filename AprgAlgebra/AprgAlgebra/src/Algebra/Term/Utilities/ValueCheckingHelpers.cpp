@@ -150,7 +150,8 @@ bool hasNotANumber(Function const& function)
 bool isAFiniteConstant(Term const& term)
 {
     bool result(false);
-    if(term.isConstant())    {
+    if(term.isConstant())
+    {
         result = term.getConstantConstReference().getNumberConstReference().isAFiniteValue();
     }
     return result;

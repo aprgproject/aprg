@@ -8,6 +8,7 @@
 #include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
 
 using namespace std;
+
 namespace alba
 {
 

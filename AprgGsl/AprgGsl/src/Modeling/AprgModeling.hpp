@@ -4,6 +4,7 @@
 
 #include <string>
 #include <vector>
+
 namespace alba
 {
 
@@ -21,7 +22,8 @@ public:
     using MatrixOfDoubles = AlbaMatrix<double>;
     AprgModeling();
     unsigned int getNumberOfSamples() const;
-    MatrixOfDoubles getCoefficients() const;    void retrieveDataFromFileWithFileFormat1(std::string const& filePath);
+    MatrixOfDoubles getCoefficients() const;
+    void retrieveDataFromFileWithFileFormat1(std::string const& filePath);
     void retrieveDataFromFileWithFileFormat2(std::string const& filePath);
     void saveRetrievedDataForXAndY(
             unsigned int numberOfIndicators,

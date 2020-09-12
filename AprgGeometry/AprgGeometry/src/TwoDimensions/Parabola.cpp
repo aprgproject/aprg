@@ -2,7 +2,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace TwoDimensions
 {
@@ -38,6 +39,7 @@ Point Parabola::getVertex() const
 
     return Point(-b/(2*a), ((4*a*c)-(b*b))/(4*a));
 }
+
 string Parabola::getDisplayableString() const
 {
     std::stringstream ss;
