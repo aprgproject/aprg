@@ -39,7 +39,8 @@ void LinearEquationsEqualitySolver::calculateSolution(
         MultipleVariableSolutionSet & solutionSet,
         Equations const& equations)
 {
-    if(doesAllEquationsHaveEqualityOperator(equations))    {
+    if(doesAllEquationsHaveEqualityOperator(equations))
+    {
         Polynomials polynomials;
         for(Equation const& equation : equations)
         {
@@ -59,7 +60,8 @@ void LinearEquationsEqualitySolver::calculateSolution(
         MultipleVariableSolutionSet & solutionSet,
         Polynomials const& polynomials)
 {
-    VariableNamesSet variables;    AlbaNumbersSet exponents;
+    VariableNamesSet variables;
+    AlbaNumbersSet exponents;
     retrieveExponents(exponents, polynomials);
     retrieveVariableNames(variables, polynomials);
     if(areExponentsEqualToOneAndZero(exponents)
@@ -73,7 +75,8 @@ void LinearEquationsEqualitySolver::calculateSolution(
             saveSolutionSetsFromTheCoefficientMatrix(solutionSet, coefficientsMatrix, variables);
             setAsCompleteSolution();
         }
-    }}
+    }
+}
 
 bool LinearEquationsEqualitySolver::areExponentsEqualToOneAndZero(
         AlbaNumbersSet const& exponents) const
@@ -110,7 +113,8 @@ void LinearEquationsEqualitySolver::saveSolutionSetsFromTheCoefficientMatrix(
         MultipleVariableSolutionSet & solutionSet,
         NumberMatrix const& coefficientsMatrix,
         VariableNamesSet const& variables)
-{    unsigned int index=0;
+{
+    unsigned int index=0;
     unsigned int columnEndIndex = variables.size();
     for(string const& variableName : variables)
     {
@@ -122,7 +126,8 @@ void LinearEquationsEqualitySolver::saveSolutionSetsFromTheCoefficientMatrix(
             solutionSet.addSolutionSetForVariable(variableName, solutionSetForVariable);
         }
         index++;
-    }}
+    }
+}
 
 }
 

@@ -8,6 +8,7 @@
 
 namespace alba
 {
+
 namespace algebra
 {
 
@@ -26,7 +27,8 @@ public:
     std::string getDisplayableString() const;
 
     void addAcceptedValue(AlbaNumber const& value);
-    void addRejectedValue(AlbaNumber const& value);    void addAcceptedValues(AlbaNumbers const& values);
+    void addRejectedValue(AlbaNumber const& value);
+    void addAcceptedValues(AlbaNumbers const& values);
     void addRejectedValues(AlbaNumbers const& values);
     void addAcceptedInterval(AlbaNumberInterval const& interval);
 
@@ -56,4 +58,5 @@ private:
 std::ostream & operator<<(std::ostream & out, SolutionSet const& solutionSet);
 
 }
+
 }

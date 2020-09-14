@@ -29,7 +29,8 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     EXPECT_EQ(0u, solutionSet.getNumberOfVariablesWithSolutions());
 }
 
-TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor1Equation){
+TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor1Equation)
+{
     LinearEquationsEqualitySolver solver;
     Equations equations;
     Polynomial polynomial{Monomial(1, {{"x", 1}})};
@@ -44,6 +45,7 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     ASSERT_EQ(1u, acceptedValuesForX.size());
     EXPECT_EQ(AlbaNumber(4), acceptedValuesForX.at(0));
 }
+
 TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor2Equations)
 {
     LinearEquationsEqualitySolver solver;
@@ -65,6 +67,7 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     ASSERT_EQ(1u, acceptedValuesForY.size());
     EXPECT_EQ(AlbaNumber(3), acceptedValuesForY.at(0));
 }
+
 TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor3Equations)
 {
     LinearEquationsEqualitySolver solver;
@@ -91,6 +94,7 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     ASSERT_EQ(1u, acceptedValuesForZ.size());
     EXPECT_EQ(AlbaNumber(3), acceptedValuesForZ.at(0));
 }
+
 TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksAsDoesNotFindASolutionForNonLinearEquation)
 {
     LinearEquationsEqualitySolver solver;
@@ -104,7 +108,8 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     EXPECT_EQ(0u, solutionSet.getNumberOfVariablesWithSolutions());
 }
 
-TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksAsDoesNotFindASolutionWhenEquationNumberDoesNotMatchVariableNumber){
+TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksAsDoesNotFindASolutionWhenEquationNumberDoesNotMatchVariableNumber)
+{
     LinearEquationsEqualitySolver solver;
     Polynomials polynomials;
     polynomials.emplace_back(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 1}}), Monomial(-4, {})});
@@ -116,7 +121,8 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     EXPECT_EQ(0u, solutionSet.getNumberOfVariablesWithSolutions());
 }
 
-TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor1Polynomial){
+TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor1Polynomial)
+{
     LinearEquationsEqualitySolver solver;
     Polynomials polynomials;
     polynomials.emplace_back(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-4, {})});
@@ -130,6 +136,7 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     ASSERT_EQ(1u, acceptedValuesForX.size());
     EXPECT_EQ(AlbaNumber(4), acceptedValuesForX.at(0));
 }
+
 TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor2Polynomials)
 {
     LinearEquationsEqualitySolver solver;
@@ -149,6 +156,7 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     ASSERT_EQ(1u, acceptedValuesForY.size());
     EXPECT_EQ(AlbaNumber(3), acceptedValuesForY.at(0));
 }
+
 TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor3Polynomials)
 {
     LinearEquationsEqualitySolver solver;
@@ -172,6 +180,7 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     ASSERT_EQ(1u, acceptedValuesForZ.size());
     EXPECT_EQ(AlbaNumber(3), acceptedValuesForZ.at(0));
 }
+
 }
 
 }

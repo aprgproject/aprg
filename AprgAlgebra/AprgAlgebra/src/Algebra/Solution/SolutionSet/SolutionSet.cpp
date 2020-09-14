@@ -7,6 +7,7 @@
 
 using namespace alba::mathHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -60,7 +61,8 @@ string SolutionSet::getDisplayableString() const
 
 void SolutionSet::addAcceptedValue(AlbaNumber const& value)
 {
-    m_acceptedValues.emplace_back(value);}
+    m_acceptedValues.emplace_back(value);
+}
 
 void SolutionSet::addAcceptedValues(AlbaNumbers const& values)
 {

@@ -8,6 +8,7 @@
 
 using namespace alba::algebra::Factorization;
 using namespace std;
+
 namespace alba
 {
 

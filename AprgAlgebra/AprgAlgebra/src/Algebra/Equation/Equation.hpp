@@ -27,7 +27,8 @@ public:
     bool isEmpty() const;
     bool isEquationSatisfied() const;
 
-    EquationOperator const& getEquationOperator() const;    Term const& getLeftHandTerm() const;
+    EquationOperator const& getEquationOperator() const;
+    Term const& getLeftHandTerm() const;
     Term const& getRightHandTerm() const;
     std::string getDisplayableString() const;
 
