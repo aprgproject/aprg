@@ -19,28 +19,27 @@ LinearEquationsEqualitySolver::LinearEquationsEqualitySolver()
     : BaseSolver()
 {}
 
-VariableNameToSolutionSetMap LinearEquationsEqualitySolver::calculateSolutionAndReturnSolutionSet(
+MultipleVariableSolutionSet LinearEquationsEqualitySolver::calculateSolutionAndReturnSolutionSet(
         Equations const& equations)
 {
-    VariableNameToSolutionSetMap solutionSets;
-    calculateSolution(solutionSets, equations);
-    return solutionSets;
+    MultipleVariableSolutionSet solutionSet;
+    calculateSolution(solutionSet, equations);
+    return solutionSet;
 }
 
-VariableNameToSolutionSetMap LinearEquationsEqualitySolver::calculateSolutionAndReturnSolutionSet(
+MultipleVariableSolutionSet LinearEquationsEqualitySolver::calculateSolutionAndReturnSolutionSet(
         Polynomials const& polynomials)
 {
-    VariableNameToSolutionSetMap solutionSets;
-    calculateSolution(solutionSets, polynomials);
-    return solutionSets;
+    MultipleVariableSolutionSet solutionSet;
+    calculateSolution(solutionSet, polynomials);
+    return solutionSet;
 }
 
 void LinearEquationsEqualitySolver::calculateSolution(
-        VariableNameToSolutionSetMap & solutionSets,
+        MultipleVariableSolutionSet & solutionSet,
         Equations const& equations)
 {
-    if(doesAllEquationsHaveEqualityOperator(equations))
-    {
+    if(doesAllEquationsHaveEqualityOperator(equations))    {
         Polynomials polynomials;
         for(Equation const& equation : equations)
         {
@@ -52,16 +51,15 @@ void LinearEquationsEqualitySolver::calculateSolution(
                 polynomials.emplace_back(createPolynomialIfPossible(nonZeroLeftHandTerm));
             }
         }
-        calculateSolution(solutionSets, polynomials);
+        calculateSolution(solutionSet, polynomials);
     }
 }
 
 void LinearEquationsEqualitySolver::calculateSolution(
-        VariableNameToSolutionSetMap & solutionSets,
+        MultipleVariableSolutionSet & solutionSet,
         Polynomials const& polynomials)
 {
-    VariableNamesSet variables;
-    AlbaNumbersSet exponents;
+    VariableNamesSet variables;    AlbaNumbersSet exponents;
     retrieveExponents(exponents, polynomials);
     retrieveVariableNames(variables, polynomials);
     if(areExponentsEqualToOneAndZero(exponents)
@@ -72,11 +70,10 @@ void LinearEquationsEqualitySolver::calculateSolution(
         coefficientsMatrix.transformToReducedEchelonFormUsingGaussJordanReduction();
         if(coefficientsMatrix.isReducedRowEchelonForm())
         {
-            saveSolutionSetsFromTheCoefficientMatrix(solutionSets, coefficientsMatrix, variables);
+            saveSolutionSetsFromTheCoefficientMatrix(solutionSet, coefficientsMatrix, variables);
             setAsCompleteSolution();
         }
-    }
-}
+    }}
 
 bool LinearEquationsEqualitySolver::areExponentsEqualToOneAndZero(
         AlbaNumbersSet const& exponents) const
@@ -110,22 +107,22 @@ void LinearEquationsEqualitySolver::setMatrixCoefficients(
 }
 
 void LinearEquationsEqualitySolver::saveSolutionSetsFromTheCoefficientMatrix(
-        VariableNameToSolutionSetMap & solutionSets,
+        MultipleVariableSolutionSet & solutionSet,
         NumberMatrix const& coefficientsMatrix,
         VariableNamesSet const& variables)
-{
-    unsigned int index=0;
+{    unsigned int index=0;
     unsigned int columnEndIndex = variables.size();
     for(string const& variableName : variables)
     {
-        AlbaNumber identityDiagonalIndex(coefficientsMatrix.getEntry(index, index));
-        if(identityDiagonalIndex == 1)
+        AlbaNumber identityDiagonalEntry(coefficientsMatrix.getEntry(index, index));
+        if(identityDiagonalEntry == 1)
         {
-            solutionSets[variableName].addAcceptedValue(-coefficientsMatrix.getEntry(columnEndIndex, index));
+            SolutionSet solutionSetForVariable;
+            solutionSetForVariable.addAcceptedValue(-coefficientsMatrix.getEntry(columnEndIndex, index));
+            solutionSet.addSolutionSetForVariable(variableName, solutionSetForVariable);
         }
         index++;
-    }
-}
+    }}
 
 }
 

@@ -3,10 +3,10 @@
 #include <Math/AlbaMathHelper.hpp>
 
 #include <algorithm>
+#include <sstream>
 
 using namespace alba::mathHelper;
 using namespace std;
-
 namespace alba
 {
 
@@ -36,10 +36,31 @@ AlbaNumberIntervals const& SolutionSet::getAcceptedIntervals() const
     return m_acceptedIntervals;
 }
 
+string SolutionSet::getDisplayableString() const
+{
+    stringstream result;
+    result << "AcceptedValues:{";
+    for(AlbaNumber const& acceptedValue : m_acceptedValues)
+    {
+        result << acceptedValue << ", ";
+    }
+    result << "} RejectedValues:{";
+    for(AlbaNumber const& rejectedValue : m_rejectedValues)
+    {
+        result << rejectedValue << ", ";
+    }
+    result << "} AcceptedInterval:{";
+    for(AlbaNumberInterval const& acceptedInterval : m_acceptedIntervals)
+    {
+        result << acceptedInterval << ", ";
+    }
+    result << "}";
+    return result.str();
+}
+
 void SolutionSet::addAcceptedValue(AlbaNumber const& value)
 {
-    m_acceptedValues.emplace_back(value);
-}
+    m_acceptedValues.emplace_back(value);}
 
 void SolutionSet::addAcceptedValues(AlbaNumbers const& values)
 {
@@ -185,6 +206,12 @@ void SolutionSet::combineAcceptedIntervalsIfPossible()
     {
         m_acceptedIntervals.emplace_back(intervalToSaveOptional.getReference());
     }
+}
+
+ostream & operator<<(ostream & out, SolutionSet const& solutionSet)
+{
+    out << solutionSet.getDisplayableString();
+    return out;
 }
 
 }

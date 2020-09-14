@@ -4,10 +4,10 @@
 
 #include <functional>
 #include <map>
+#include <string>
 
 namespace alba
 {
-
 namespace algebra
 {
 
@@ -23,10 +23,10 @@ public:
     AlbaNumbers const& getAcceptedValues() const;
     AlbaNumbers const& getRejectedValues() const;
     AlbaNumberIntervals const& getAcceptedIntervals() const;
+    std::string getDisplayableString() const;
 
     void addAcceptedValue(AlbaNumber const& value);
-    void addRejectedValue(AlbaNumber const& value);
-    void addAcceptedValues(AlbaNumbers const& values);
+    void addRejectedValue(AlbaNumber const& value);    void addAcceptedValues(AlbaNumbers const& values);
     void addRejectedValues(AlbaNumbers const& values);
     void addAcceptedInterval(AlbaNumberInterval const& interval);
 
@@ -53,8 +53,7 @@ private:
     AlbaNumberIntervals m_acceptedIntervals;
 };
 
-using VariableNameToSolutionSetMap = std::map<std::string, SolutionSet>;
+std::ostream & operator<<(std::ostream & out, SolutionSet const& solutionSet);
 
 }
-
 }
