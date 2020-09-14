@@ -6,6 +6,7 @@
 
 namespace alba
 {
+
 namespace algebra
 {
 
@@ -18,7 +19,8 @@ public:
 
 private:
     void calculateSolutionForAllVariables(
-            MultipleVariableSolutionSet & multipleVariableSolutionSet,            Equations const& equations);
+            MultipleVariableSolutionSet & multipleVariableSolutionSet,
+            Equations const& equations);
     void calculateSolutionForOneVariable(
             MultipleVariableSolutionSet & multipleVariableSolutionSet,
             Equations const& equations);

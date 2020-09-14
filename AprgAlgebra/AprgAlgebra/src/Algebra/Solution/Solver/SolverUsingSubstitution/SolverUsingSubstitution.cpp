@@ -7,6 +7,7 @@
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 
 #include <algorithm>
+
 using namespace std;
 
 namespace alba
