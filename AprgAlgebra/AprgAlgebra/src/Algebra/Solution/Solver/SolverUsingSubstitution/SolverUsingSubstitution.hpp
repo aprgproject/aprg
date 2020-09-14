@@ -3,29 +3,22 @@
 #include <Algebra/Equation/Equation.hpp>
 #include <Algebra/Solution/SolutionSet/MultipleVariableSolutionSet.hpp>
 #include <Algebra/Solution/Solver/BaseSolver.hpp>
-#include <Algebra/Term/TermTypes/Polynomial.hpp>
-#include <Algebra/Term/TermTypes/TermContainerTypes.hpp>
-#include <Math/AlbaMatrix.hpp>
 
 namespace alba
 {
-
 namespace algebra
 {
 
 class SolverUsingSubstitution : public BaseSolver
 {
 public:
-    using NumberMatrix=AlbaMatrix<AlbaNumber>;
     SolverUsingSubstitution();
 
     MultipleVariableSolutionSet calculateSolutionAndReturnSolutionSet(Equations const& equations);
 
-
 private:
     void calculateSolutionForAllVariables(
-            MultipleVariableSolutionSet & multipleVariableSolutionSet,
-            Equations const& equations);
+            MultipleVariableSolutionSet & multipleVariableSolutionSet,            Equations const& equations);
     void calculateSolutionForOneVariable(
             MultipleVariableSolutionSet & multipleVariableSolutionSet,
             Equations const& equations);
