@@ -1,10 +1,9 @@
 #include "ArithmeticSeries.hpp"
 
-#include <Utilities.hpp>
+#include <Series/Utilities.hpp>
 
 namespace alba
 {
-
 namespace MathSeries
 {
 

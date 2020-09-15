@@ -1,7 +1,6 @@
-#include <ArithmeticSeries.hpp>
+#include <Series/ArithmeticSeries.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
