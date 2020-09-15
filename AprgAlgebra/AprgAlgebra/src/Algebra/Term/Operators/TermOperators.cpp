@@ -118,13 +118,12 @@ Term operator+(Expression const& expression)
     return Term(expression);
 }
 
-Term operator+(Function const& functionAsParameter)
+Term operator+(Function const& functionObject)
 {
-    return Term(functionAsParameter);
+    return Term(functionObject);
 }
 
-Term operator+(Term const& term)
-{
+Term operator+(Term const& term){
     return performUnaryPlus(term);
 }
 
@@ -158,13 +157,12 @@ Term operator-(Expression const& expression)
     return createTermWithAnExpressionMultiplying2Terms(Term(-1), Term(expression));
 }
 
-Term operator-(Function const& functionAsParameter)
+Term operator-(Function const& functionObject)
 {
-    return createTermWithAnExpressionMultiplying2Terms(Term(-1), Term(functionAsParameter));
+    return createTermWithAnExpressionMultiplying2Terms(Term(-1), Term(functionObject));
 }
 
-Term operator-(Term const& term)
-{
+Term operator-(Term const& term){
     return performUnaryMinus(term);
 }
 
@@ -214,15 +212,19 @@ Term operator+(Constant const& constant, Expression const& expression)
     return createTermWithAnExpressionAdding2Terms(Term(constant), Term(expression));
 }
 
-Term operator+(Constant const& constant, Function const& functionAsParameter)
+Term operator+(Constant const& constant, Function const& functionObject)
 {
-    return createTermWithAnExpressionAdding2Terms(Term(constant), Term(functionAsParameter));
+    return createTermWithAnExpressionAdding2Terms(Term(constant), Term(functionObject));
+}
+
+Term operator+(Constant const& constant, Term const& term)
+{
+    return performAddition(Term(constant), term);
 }
 
 Term operator+(Variable const& variable, Constant const& constant)
 {
-    return simplifyAndConvertPolynomialToSimplestTerm(
-                Polynomial{
+    return simplifyAndConvertPolynomialToSimplestTerm(                Polynomial{
                     createMonomialFromVariable(variable),
                     createMonomialFromConstant(constant)
                 });
@@ -273,15 +275,19 @@ Term operator+(Variable const& variable, Expression const& expression)
     return createTermWithAnExpressionAdding2Terms(Term(variable), Term(expression));
 }
 
-Term operator+(Variable const& variable, Function const& functionAsParameter)
+Term operator+(Variable const& variable, Function const& functionObject)
 {
-    return createTermWithAnExpressionAdding2Terms(Term(variable), Term(functionAsParameter));
+    return createTermWithAnExpressionAdding2Terms(Term(variable), Term(functionObject));
+}
+
+Term operator+(Variable const& variable, Term const& term)
+{
+    return performAddition(Term(variable), term);
 }
 
 Term operator+(Monomial const& monomial, Constant const& constant)
 {
-    if(monomial.isConstantOnly())
-    {
+    if(monomial.isConstantOnly())    {
         return Term(monomial.getConstantConstReference() + constant.getNumberConstReference());
     }
     else
@@ -337,15 +343,19 @@ Term operator+(Monomial const& monomial, Expression const& expression)
     return createTermWithAnExpressionAdding2Terms(Term(monomial), Term(expression));
 }
 
-Term operator+(Monomial const& monomial, Function const& functionAsParameter)
+Term operator+(Monomial const& monomial, Function const& functionObject)
 {
-    return createTermWithAnExpressionAdding2Terms(Term(monomial), Term(functionAsParameter));
+    return createTermWithAnExpressionAdding2Terms(Term(monomial), Term(functionObject));
+}
+
+Term operator+(Monomial const& monomial, Term const& term)
+{
+    return performAddition(Term(monomial), term);
 }
 
 Term operator+(Polynomial const& polynomial, Constant const& constant)
 {
-    Polynomial newPolynomial(polynomial);
-    newPolynomial.addMonomial(createMonomialFromConstant(constant));
+    Polynomial newPolynomial(polynomial);    newPolynomial.addMonomial(createMonomialFromConstant(constant));
     return simplifyAndConvertPolynomialToSimplestTerm(newPolynomial);
 }
 
@@ -375,15 +385,19 @@ Term operator+(Polynomial const& polynomial, Expression const& expression)
     return createTermWithAnExpressionAdding2Terms(Term(polynomial), Term(expression));
 }
 
-Term operator+(Polynomial const& polynomial, Function const& functionAsParameter)
+Term operator+(Polynomial const& polynomial, Function const& functionObject)
 {
-    return createTermWithAnExpressionAdding2Terms(Term(polynomial), Term(functionAsParameter));
+    return createTermWithAnExpressionAdding2Terms(Term(polynomial), Term(functionObject));
+}
+
+Term operator+(Polynomial const& polynomial, Term const& term)
+{
+    return performAddition(Term(polynomial), term);
 }
 
 Term operator+(Expression const& expression, Constant const& constant)
 {
-    return createTermAddingAnExpressionAndATerm(expression, Term(constant));
-}
+    return createTermAddingAnExpressionAndATerm(expression, Term(constant));}
 
 Term operator+(Expression const& expression, Variable const& variable)
 {
@@ -405,34 +419,39 @@ Term operator+(Expression const& expression1, Expression const& expression2)
     return createTermAddingAnExpressionAndATerm(expression1, Term(expression2));
 }
 
-Term operator+(Expression const& expression, Function const& functionAsParameter)
+Term operator+(Expression const& expression, Function const& functionObject)
 {
-    return createTermAddingAnExpressionAndATerm(expression, Term(functionAsParameter));
+    return createTermAddingAnExpressionAndATerm(expression, Term(functionObject));
 }
 
-Term operator+(Function const& functionAsParameter, Constant const& constant)
+Term operator+(Expression const& expression, Term const& term)
 {
-    return createTermWithAnExpressionAdding2Terms(Term(functionAsParameter), Term(constant));
+    return performAddition(Term(expression), term);
 }
 
-Term operator+(Function const& functionAsParameter, Variable const& variable)
+Term operator+(Function const& functionObject, Constant const& constant)
 {
-    return createTermWithAnExpressionAdding2Terms(Term(functionAsParameter), Term(variable));
+    return createTermWithAnExpressionAdding2Terms(Term(functionObject), Term(constant));
 }
 
-Term operator+(Function const& functionAsParameter, Monomial const& monomial)
+Term operator+(Function const& functionObject, Variable const& variable)
 {
-    return createTermWithAnExpressionAdding2Terms(Term(functionAsParameter), Term(monomial));
+    return createTermWithAnExpressionAdding2Terms(Term(functionObject), Term(variable));
 }
 
-Term operator+(Function const& functionAsParameter, Polynomial const& polynomial)
+Term operator+(Function const& functionObject, Monomial const& monomial)
 {
-    return createTermWithAnExpressionAdding2Terms(Term(functionAsParameter), Term(polynomial));
+    return createTermWithAnExpressionAdding2Terms(Term(functionObject), Term(monomial));
 }
 
-Term operator+(Function const& functionAsParameter, Expression const& expression)
+Term operator+(Function const& functionObject, Polynomial const& polynomial)
 {
-    return createTermWithAnExpressionAdding2Terms(Term(functionAsParameter), Term(expression));
+    return createTermWithAnExpressionAdding2Terms(Term(functionObject), Term(polynomial));
+}
+
+Term operator+(Function const& functionObject, Expression const& expression)
+{
+    return createTermWithAnExpressionAdding2Terms(Term(functionObject), Term(expression));
 }
 
 Term operator+(Function const& function1, Function const& function2)
@@ -440,10 +459,44 @@ Term operator+(Function const& function1, Function const& function2)
     return createTermWithAnExpressionAdding2Terms(Term(function1), Term(function2));
 }
 
+Term operator+(Function const& functionObject, Term const& term)
+{
+    return performAddition(Term(functionObject), term);
+}
+
+Term operator+(Term const& term, Constant const& constant)
+{
+    return performAddition(term, Term(constant));
+}
+
+Term operator+(Term const& term, Variable const& variable)
+{
+    return performAddition(term, Term(variable));
+}
+
+Term operator+(Term const& term, Monomial const& monomial)
+{
+    return performAddition(term, Term(monomial));
+}
+
+Term operator+(Term const& term, Polynomial const& polynomial)
+{
+    return performAddition(term, Term(polynomial));
+}
+
+Term operator+(Term const& term, Expression const& expression)
+{
+    return performAddition(term, Term(expression));
+}
+
+Term operator+(Term const& term, Function const& functionObject)
+{
+    return performAddition(term, Term(functionObject));
+}
+
 Term operator+(Term const& term1, Term const& term2)
 {
-    return performAddition(term1, term2);
-}
+    return performAddition(term1, term2);}
 
 
 //Subtraction: a - b
@@ -492,15 +545,19 @@ Term operator-(Constant const& constant, Expression const& expression)
     return createTermWithAnExpressionSubtracting2Terms(Term(constant), Term(expression));
 }
 
-Term operator-(Constant const& constant, Function const& functionAsParameter)
+Term operator-(Constant const& constant, Function const& functionObject)
 {
-    return createTermWithAnExpressionSubtracting2Terms(Term(constant), Term(functionAsParameter));
+    return createTermWithAnExpressionSubtracting2Terms(Term(constant), Term(functionObject));
+}
+
+Term operator-(Constant const& constant, Term const& term)
+{
+    return performSubtraction(Term(constant), term);
 }
 
 Term operator-(Variable const& variable, Constant const& constant)
 {
-    return simplifyAndConvertPolynomialToSimplestTerm(
-                Polynomial{
+    return simplifyAndConvertPolynomialToSimplestTerm(                Polynomial{
                     createMonomialFromVariable(variable),
                     Monomial(constant.getNumberConstReference()*-1, {})
                 });
@@ -552,15 +609,19 @@ Term operator-(Variable const& variable, Expression const& expression)
     return createTermWithAnExpressionSubtracting2Terms(Term(variable), Term(expression));
 }
 
-Term operator-(Variable const& variable, Function const& functionAsParameter)
+Term operator-(Variable const& variable, Function const& functionObject)
 {
-    return createTermWithAnExpressionSubtracting2Terms(Term(variable), Term(functionAsParameter));
+    return createTermWithAnExpressionSubtracting2Terms(Term(variable), Term(functionObject));
+}
+
+Term operator-(Variable const& variable, Term const& term)
+{
+    return performSubtraction(Term(variable), term);
 }
 
 Term operator-(Monomial const& monomial, Constant const& constant)
 {
-    if(monomial.isConstantOnly())
-    {
+    if(monomial.isConstantOnly())    {
         return Term(monomial.getConstantConstReference() - constant.getNumberConstReference());
     }
     else
@@ -622,15 +683,19 @@ Term operator-(Monomial const& monomial, Expression const& expression)
     return createTermWithAnExpressionSubtracting2Terms(Term(monomial), Term(expression));
 }
 
-Term operator-(Monomial const& monomial, Function const& functionAsParameter)
+Term operator-(Monomial const& monomial, Function const& functionObject)
 {
-    return createTermWithAnExpressionSubtracting2Terms(Term(monomial), Term(functionAsParameter));
+    return createTermWithAnExpressionSubtracting2Terms(Term(monomial), Term(functionObject));
+}
+
+Term operator-(Monomial const& monomial, Term const& term)
+{
+    return performSubtraction(Term(monomial), term);
 }
 
 Term operator-(Polynomial const& polynomial, Constant const& constant)
 {
-    Polynomial newPolynomial(polynomial);
-    newPolynomial.addMonomial(Monomial(constant.getNumberConstReference()*-1, {}));
+    Polynomial newPolynomial(polynomial);    newPolynomial.addMonomial(Monomial(constant.getNumberConstReference()*-1, {}));
     return simplifyAndConvertPolynomialToSimplestTerm(newPolynomial);
 }
 
@@ -662,15 +727,19 @@ Term operator-(Polynomial const& polynomial, Expression const& expression)
     return createTermWithAnExpressionSubtracting2Terms(Term(polynomial), Term(expression));
 }
 
-Term operator-(Polynomial const& polynomial, Function const& functionAsParameter)
+Term operator-(Polynomial const& polynomial, Function const& functionObject)
 {
-    return createTermWithAnExpressionSubtracting2Terms(Term(polynomial), Term(functionAsParameter));
+    return createTermWithAnExpressionSubtracting2Terms(Term(polynomial), Term(functionObject));
+}
+
+Term operator-(Polynomial const& polynomial, Term const& term)
+{
+    return performSubtraction(Term(polynomial), term);
 }
 
 Term operator-(Expression const& expression, Constant const& constant)
 {
-    return createTermSubtractingAnExpressionAndATerm(expression, Term(constant));
-}
+    return createTermSubtractingAnExpressionAndATerm(expression, Term(constant));}
 
 Term operator-(Expression const& expression, Variable const& variable)
 {
@@ -692,34 +761,39 @@ Term operator-(Expression const& expression1, Expression const& expression2)
     return createTermSubtractingAnExpressionAndATerm(expression1, Term(expression2));
 }
 
-Term operator-(Expression const& expression, Function const& functionAsParameter)
+Term operator-(Expression const& expression, Function const& functionObject)
 {
-    return createTermSubtractingAnExpressionAndATerm(expression, Term(functionAsParameter));
+    return createTermSubtractingAnExpressionAndATerm(expression, Term(functionObject));
 }
 
-Term operator-(Function const& functionAsParameter, Constant const& constant)
+Term operator-(Expression const& expression, Term const& term)
 {
-    return createTermWithAnExpressionSubtracting2Terms(Term(functionAsParameter), Term(constant));
+    return performSubtraction(Term(expression), term);
 }
 
-Term operator-(Function const& functionAsParameter, Variable const& variable)
+Term operator-(Function const& functionObject, Constant const& constant)
 {
-    return createTermWithAnExpressionSubtracting2Terms(Term(functionAsParameter), Term(variable));
+    return createTermWithAnExpressionSubtracting2Terms(Term(functionObject), Term(constant));
 }
 
-Term operator-(Function const& functionAsParameter, Monomial const& monomial)
+Term operator-(Function const& functionObject, Variable const& variable)
 {
-    return createTermWithAnExpressionSubtracting2Terms(Term(functionAsParameter), Term(monomial));
+    return createTermWithAnExpressionSubtracting2Terms(Term(functionObject), Term(variable));
 }
 
-Term operator-(Function const& functionAsParameter, Polynomial const& polynomial)
+Term operator-(Function const& functionObject, Monomial const& monomial)
 {
-    return createTermWithAnExpressionSubtracting2Terms(Term(functionAsParameter), Term(polynomial));
+    return createTermWithAnExpressionSubtracting2Terms(Term(functionObject), Term(monomial));
 }
 
-Term operator-(Function const& functionAsParameter, Expression const& expression)
+Term operator-(Function const& functionObject, Polynomial const& polynomial)
 {
-    return createTermWithAnExpressionSubtracting2Terms(Term(functionAsParameter), Term(expression));
+    return createTermWithAnExpressionSubtracting2Terms(Term(functionObject), Term(polynomial));
+}
+
+Term operator-(Function const& functionObject, Expression const& expression)
+{
+    return createTermWithAnExpressionSubtracting2Terms(Term(functionObject), Term(expression));
 }
 
 Term operator-(Function const& function1, Function const& function2)
@@ -727,10 +801,44 @@ Term operator-(Function const& function1, Function const& function2)
     return createTermWithAnExpressionSubtracting2Terms(Term(function1), Term(function2));
 }
 
+Term operator-(Function const& functionObject, Term const& term)
+{
+    return performSubtraction(Term(functionObject), term);
+}
+
+Term operator-(Term const& term, Constant const& constant)
+{
+    return performSubtraction(term, Term(constant));
+}
+
+Term operator-(Term const& term, Variable const& variable)
+{
+    return performSubtraction(term, Term(variable));
+}
+
+Term operator-(Term const& term, Monomial const& monomial)
+{
+    return performSubtraction(term, Term(monomial));
+}
+
+Term operator-(Term const& term, Polynomial const& polynomial)
+{
+    return performSubtraction(term, Term(polynomial));
+}
+
+Term operator-(Term const& term, Expression const& expression)
+{
+    return performSubtraction(term, Term(expression));
+}
+
+Term operator-(Term const& term, Function const& functionObject)
+{
+    return performSubtraction(term, Term(functionObject));
+}
+
 Term operator-(Term const& term1, Term const& term2)
 {
-    return performSubtraction(term1, term2);
-}
+    return performSubtraction(term1, term2);}
 
 
 //Multiplication: a * b
@@ -765,15 +873,19 @@ Term operator*(Constant const& constant, Expression const& expression)
     return createTermWithAnExpressionMultiplying2Terms(Term(constant), Term(expression));
 }
 
-Term operator*(Constant const& constant, Function const& functionAsParameter)
+Term operator*(Constant const& constant, Function const& functionObject)
 {
-    return createTermWithAnExpressionMultiplying2Terms(Term(constant), Term(functionAsParameter));
+    return createTermWithAnExpressionMultiplying2Terms(Term(constant), Term(functionObject));
+}
+
+Term operator*(Constant const& constant, Term const& term)
+{
+    return performMultiplication(Term(constant), term);
 }
 
 Term operator*(Variable const& variable, Constant const& constant)
 {
-    return simplifyAndConvertMonomialToSimplestTerm(Monomial(constant.getNumberConstReference(), {{variable.getVariableName(), 1}}));
-}
+    return simplifyAndConvertMonomialToSimplestTerm(Monomial(constant.getNumberConstReference(), {{variable.getVariableName(), 1}}));}
 
 Term operator*(Variable const& variable1, Variable const& variable2)
 {
@@ -813,15 +925,19 @@ Term operator*(Variable const& variable, Expression const& expression)
     return createTermWithAnExpressionMultiplying2Terms(Term(variable), Term(expression));
 }
 
-Term operator*(Variable const& variable, Function const& functionAsParameter)
+Term operator*(Variable const& variable, Function const& functionObject)
 {
-    return createTermWithAnExpressionMultiplying2Terms(Term(variable), Term(functionAsParameter));
+    return createTermWithAnExpressionMultiplying2Terms(Term(variable), Term(functionObject));
+}
+
+Term operator*(Variable const& variable, Term const& term)
+{
+    return performMultiplication(Term(variable), term);
 }
 
 Term operator*(Monomial const& monomial, Constant const& constant)
 {
-    return simplifyAndConvertMonomialToSimplestTerm(
-                Monomial(
+    return simplifyAndConvertMonomialToSimplestTerm(                Monomial(
                     monomial.getConstantConstReference()*constant.getNumberConstReference(),
                     monomial.getVariablesToExponentsMapConstReference()));
 }
@@ -859,15 +975,19 @@ Term operator*(Monomial const& monomial, Expression const& expression)
     return createTermWithAnExpressionMultiplying2Terms(Term(monomial), Term(expression));
 }
 
-Term operator*(Monomial const& monomial, Function const& functionAsParameter)
+Term operator*(Monomial const& monomial, Function const& functionObject)
 {
-    return createTermWithAnExpressionMultiplying2Terms(Term(monomial), Term(functionAsParameter));
+    return createTermWithAnExpressionMultiplying2Terms(Term(monomial), Term(functionObject));
+}
+
+Term operator*(Monomial const& monomial, Term const& term)
+{
+    return performMultiplication(Term(monomial), term);
 }
 
 Term operator*(Polynomial const& polynomial, Constant const& constant)
 {
-    Polynomial newPolynomial(polynomial);
-    newPolynomial.multiplyNumber(constant.getNumberConstReference());
+    Polynomial newPolynomial(polynomial);    newPolynomial.multiplyNumber(constant.getNumberConstReference());
     return simplifyAndConvertPolynomialToSimplestTerm(newPolynomial);
 }
 
@@ -899,15 +1019,19 @@ Term operator*(Polynomial const& polynomial, Expression const& expression)
     return convertExpressionToSimplestTerm(newExpression);
 }
 
-Term operator*(Polynomial const& polynomial, Function const& functionAsParameter)
+Term operator*(Polynomial const& polynomial, Function const& functionObject)
 {
-    return createTermWithAnExpressionMultiplying2Terms(Term(polynomial), Term(functionAsParameter));
+    return createTermWithAnExpressionMultiplying2Terms(Term(polynomial), Term(functionObject));
+}
+
+Term operator*(Polynomial const& polynomial, Term const& term)
+{
+    return performMultiplication(Term(polynomial), term);
 }
 
 Term operator*(Expression const& expression, Constant const& constant)
 {
-    return createTermMultiplyingAnExpressionAndATerm(expression, Term(constant));
-}
+    return createTermMultiplyingAnExpressionAndATerm(expression, Term(constant));}
 
 Term operator*(Expression const& expression, Variable const& variable)
 {
@@ -933,34 +1057,39 @@ Term operator*(Expression const& expression1, Expression const& expression2)
     return convertExpressionToSimplestTerm(newExpression);
 }
 
-Term operator*(Expression const& expression, Function const& functionAsParameter)
+Term operator*(Expression const& expression, Function const& functionObject)
 {
-    return createTermMultiplyingAnExpressionAndATerm(expression, Term(functionAsParameter));
+    return createTermMultiplyingAnExpressionAndATerm(expression, Term(functionObject));
 }
 
-Term operator*(Function const& functionAsParameter, Constant const& constant)
+Term operator*(Expression const& expression, Term const& term)
 {
-    return createTermWithAnExpressionMultiplying2Terms(Term(functionAsParameter), Term(constant));
+    return performMultiplication(Term(expression), term);
 }
 
-Term operator*(Function const& functionAsParameter, Variable const& variable)
+Term operator*(Function const& functionObject, Constant const& constant)
 {
-    return createTermWithAnExpressionMultiplying2Terms(Term(functionAsParameter), Term(variable));
+    return createTermWithAnExpressionMultiplying2Terms(Term(functionObject), Term(constant));
 }
 
-Term operator*(Function const& functionAsParameter, Monomial const& monomial)
+Term operator*(Function const& functionObject, Variable const& variable)
 {
-    return createTermWithAnExpressionMultiplying2Terms(Term(functionAsParameter), Term(monomial));
+    return createTermWithAnExpressionMultiplying2Terms(Term(functionObject), Term(variable));
 }
 
-Term operator*(Function const& functionAsParameter, Polynomial const& polynomial)
+Term operator*(Function const& functionObject, Monomial const& monomial)
 {
-    return createTermWithAnExpressionMultiplying2Terms(Term(functionAsParameter), Term(polynomial));
+    return createTermWithAnExpressionMultiplying2Terms(Term(functionObject), Term(monomial));
 }
 
-Term operator*(Function const& functionAsParameter, Expression const& expression)
+Term operator*(Function const& functionObject, Polynomial const& polynomial)
 {
-    return createTermWithAnExpressionMultiplying2Terms(Term(functionAsParameter), Term(expression));
+    return createTermWithAnExpressionMultiplying2Terms(Term(functionObject), Term(polynomial));
+}
+
+Term operator*(Function const& functionObject, Expression const& expression)
+{
+    return createTermWithAnExpressionMultiplying2Terms(Term(functionObject), Term(expression));
 }
 
 Term operator*(Function const& function1, Function const& function2)
@@ -968,10 +1097,44 @@ Term operator*(Function const& function1, Function const& function2)
     return createTermWithAnExpressionMultiplying2Terms(Term(function1), Term(function2));
 }
 
+Term operator*(Function const& functionObject, Term const& term)
+{
+    return performMultiplication(Term(functionObject), term);
+}
+
+Term operator*(Term const& term, Constant const& constant)
+{
+    return performMultiplication(term, Term(constant));
+}
+
+Term operator*(Term const& term, Variable const& variable)
+{
+    return performMultiplication(term, Term(variable));
+}
+
+Term operator*(Term const& term, Monomial const& monomial)
+{
+    return performMultiplication(term, Term(monomial));
+}
+
+Term operator*(Term const& term, Polynomial const& polynomial)
+{
+    return performMultiplication(term, Term(polynomial));
+}
+
+Term operator*(Term const& term, Expression const& expression)
+{
+    return performMultiplication(term, Term(expression));
+}
+
+Term operator*(Term const& term, Function const& functionObject)
+{
+    return performMultiplication(term, Term(functionObject));
+}
+
 Term operator*(Term const& term1, Term const& term2)
 {
-    return performMultiplication(term1, term2);
-}
+    return performMultiplication(term1, term2);}
 
 
 //Divsion: a / b
@@ -1003,15 +1166,19 @@ Term operator/(Constant const& constant, Expression const& expression)
     return createTermWithAnExpressionDividing2Terms(Term(constant), Term(expression));
 }
 
-Term operator/(Constant const& constant, Function const& functionAsParameter)
+Term operator/(Constant const& constant, Function const& functionObject)
 {
-    return createTermWithAnExpressionDividing2Terms(Term(constant), Term(functionAsParameter));
+    return createTermWithAnExpressionDividing2Terms(Term(constant), Term(functionObject));
+}
+
+Term operator/(Constant const& constant, Term const& term)
+{
+    return performDivision(Term(constant), term);
 }
 
 Term operator/(Variable const& variable, Constant const& constant)
 {
-    return simplifyAndConvertMonomialToSimplestTerm(Monomial(AlbaNumber(1)/constant.getNumberConstReference(), {{variable.getVariableName(), 1}}));
-}
+    return simplifyAndConvertMonomialToSimplestTerm(Monomial(AlbaNumber(1)/constant.getNumberConstReference(), {{variable.getVariableName(), 1}}));}
 
 Term operator/(Variable const& variable1, Variable const& variable2)
 {
@@ -1049,15 +1216,19 @@ Term operator/(Variable const& variable, Expression const& expression)
     return createTermWithAnExpressionDividing2Terms(Term(variable), Term(expression));
 }
 
-Term operator/(Variable const& variable, Function const& functionAsParameter)
+Term operator/(Variable const& variable, Function const& functionObject)
 {
-    return createTermWithAnExpressionDividing2Terms(Term(variable), Term(functionAsParameter));
+    return createTermWithAnExpressionDividing2Terms(Term(variable), Term(functionObject));
+}
+
+Term operator/(Variable const& variable, Term const& term)
+{
+    return performDivision(Term(variable), term);
 }
 
 Term operator/(Monomial const& monomial, Constant const& constant)
 {
-    return simplifyAndConvertMonomialToSimplestTerm(
-                Monomial(
+    return simplifyAndConvertMonomialToSimplestTerm(                Monomial(
                     monomial.getConstantConstReference()/constant.getNumberConstReference(),
                     monomial.getVariablesToExponentsMapConstReference()));
 }
@@ -1093,15 +1264,19 @@ Term operator/(Monomial const& monomial, Expression const& expression)
     return createTermWithAnExpressionDividing2Terms(Term(monomial), Term(expression));
 }
 
-Term operator/(Monomial const& monomial, Function const& functionAsParameter)
+Term operator/(Monomial const& monomial, Function const& functionObject)
 {
-    return createTermWithAnExpressionDividing2Terms(Term(monomial), Term(functionAsParameter));
+    return createTermWithAnExpressionDividing2Terms(Term(monomial), Term(functionObject));
+}
+
+Term operator/(Monomial const& monomial, Term const& term)
+{
+    return performDivision(Term(monomial), term);
 }
 
 Term operator/(Polynomial const& polynomial, Constant const& constant)
 {
-    Polynomial newPolynomial(polynomial);
-    newPolynomial.divideNumber(constant.getNumberConstReference());
+    Polynomial newPolynomial(polynomial);    newPolynomial.divideNumber(constant.getNumberConstReference());
     return simplifyAndConvertPolynomialToSimplestTerm(newPolynomial);
 }
 
@@ -1129,15 +1304,19 @@ Term operator/(Polynomial const& polynomial, Expression const& expression)
     return createTermWithAnExpressionDividing2Terms(Term(polynomial), Term(expression));
 }
 
-Term operator/(Polynomial const& polynomial, Function const& functionAsParameter)
+Term operator/(Polynomial const& polynomial, Function const& functionObject)
 {
-    return createTermWithAnExpressionDividing2Terms(Term(polynomial), Term(functionAsParameter));
+    return createTermWithAnExpressionDividing2Terms(Term(polynomial), Term(functionObject));
+}
+
+Term operator/(Polynomial const& polynomial, Term const& term)
+{
+    return performDivision(Term(polynomial), term);
 }
 
 Term operator/(Expression const& expression, Constant const& constant)
 {
-    return createTermDividingAnExpressionAndATerm(expression, Term(constant));
-}
+    return createTermDividingAnExpressionAndATerm(expression, Term(constant));}
 
 Term operator/(Expression const& expression, Variable const& variable)
 {
@@ -1159,34 +1338,39 @@ Term operator/(Expression const& expression1, Expression const& expression2)
     return createTermDividingAnExpressionAndATerm(expression1, Term(expression2));
 }
 
-Term operator/(Expression const& expression, Function const& functionAsParameter)
+Term operator/(Expression const& expression, Function const& functionObject)
 {
-    return createTermDividingAnExpressionAndATerm(expression, Term(functionAsParameter));
+    return createTermDividingAnExpressionAndATerm(expression, Term(functionObject));
 }
 
-Term operator/(Function const& functionAsParameter, Constant const& constant)
+Term operator/(Expression const& expression, Term const& term)
 {
-    return createTermWithAnExpressionDividing2Terms(Term(functionAsParameter), Term(constant));
+    return performDivision(Term(expression), term);
 }
 
-Term operator/(Function const& functionAsParameter, Variable const& variable)
+Term operator/(Function const& functionObject, Constant const& constant)
 {
-    return createTermWithAnExpressionDividing2Terms(Term(functionAsParameter), Term(variable));
+    return createTermWithAnExpressionDividing2Terms(Term(functionObject), Term(constant));
 }
 
-Term operator/(Function const& functionAsParameter, Monomial const& monomial)
+Term operator/(Function const& functionObject, Variable const& variable)
 {
-    return createTermWithAnExpressionDividing2Terms(Term(functionAsParameter), Term(monomial));
+    return createTermWithAnExpressionDividing2Terms(Term(functionObject), Term(variable));
 }
 
-Term operator/(Function const& functionAsParameter, Polynomial const& polynomial)
+Term operator/(Function const& functionObject, Monomial const& monomial)
 {
-    return createTermWithAnExpressionDividing2Terms(Term(functionAsParameter), Term(polynomial));
+    return createTermWithAnExpressionDividing2Terms(Term(functionObject), Term(monomial));
 }
 
-Term operator/(Function const& functionAsParameter, Expression const& expression)
+Term operator/(Function const& functionObject, Polynomial const& polynomial)
 {
-    return createTermWithAnExpressionDividing2Terms(Term(functionAsParameter), Term(expression));
+    return createTermWithAnExpressionDividing2Terms(Term(functionObject), Term(polynomial));
+}
+
+Term operator/(Function const& functionObject, Expression const& expression)
+{
+    return createTermWithAnExpressionDividing2Terms(Term(functionObject), Term(expression));
 }
 
 Term operator/(Function const& function1, Function const& function2)
@@ -1194,10 +1378,44 @@ Term operator/(Function const& function1, Function const& function2)
     return createTermWithAnExpressionDividing2Terms(Term(function1), Term(function2));
 }
 
+Term operator/(Function const& functionObject, Term const& term)
+{
+    return performDivision(Term(functionObject), term);
+}
+
+Term operator/(Term const& term, Constant const& constant)
+{
+    return performDivision(term, Term(constant));
+}
+
+Term operator/(Term const& term, Variable const& variable)
+{
+    return performDivision(term, Term(variable));
+}
+
+Term operator/(Term const& term, Monomial const& monomial)
+{
+    return performDivision(term, Term(monomial));
+}
+
+Term operator/(Term const& term, Polynomial const& polynomial)
+{
+    return performDivision(term, Term(polynomial));
+}
+
+Term operator/(Term const& term, Expression const& expression)
+{
+    return performDivision(term, Term(expression));
+}
+
+Term operator/(Term const& term, Function const& functionObject)
+{
+    return performDivision(term, Term(functionObject));
+}
+
 Term operator/(Term const& term1, Term const& term2)
 {
-    return performDivision(term1, term2);
-}
+    return performDivision(term1, term2);}
 
 
 //RaiseToThePower: a ^ b
@@ -1234,15 +1452,19 @@ Term operator^(Constant const& constant, Expression const& expression)
     return createTermWithAnExpressionRaisingToPower2Terms(Term(constant), Term(expression));
 }
 
-Term operator^(Constant const& constant, Function const& functionAsParameter)
+Term operator^(Constant const& constant, Function const& functionObject)
 {
-    return createTermWithAnExpressionRaisingToPower2Terms(Term(constant), Term(functionAsParameter));
+    return createTermWithAnExpressionRaisingToPower2Terms(Term(constant), Term(functionObject));
+}
+
+Term operator^(Constant const& constant, Term const& term)
+{
+    return performRaiseToPower(Term(constant), term);
 }
 
 Term operator^(Variable const& variable, Constant const& constant)
 {
-    return simplifyAndConvertMonomialToSimplestTerm(Monomial(1, {{variable.getVariableName(), constant.getNumberConstReference()}}));
-}
+    return simplifyAndConvertMonomialToSimplestTerm(Monomial(1, {{variable.getVariableName(), constant.getNumberConstReference()}}));}
 
 Term operator^(Variable const& variable1, Variable const& variable2)
 {
@@ -1264,15 +1486,19 @@ Term operator^(Variable const& variable, Expression const& expression)
     return createTermWithAnExpressionRaisingToPower2Terms(Term(variable), Term(expression));
 }
 
-Term operator^(Variable const& variable, Function const& functionAsParameter)
+Term operator^(Variable const& variable, Function const& functionObject)
 {
-    return createTermWithAnExpressionRaisingToPower2Terms(Term(variable), Term(functionAsParameter));
+    return createTermWithAnExpressionRaisingToPower2Terms(Term(variable), Term(functionObject));
+}
+
+Term operator^(Variable const& variable, Term const& term)
+{
+    return performRaiseToPower(Term(variable), term);
 }
 
 Term operator^(Monomial const& monomial, Constant const& constant)
 {
-    Monomial newMonomial(monomial);
-    newMonomial.raiseToPowerNumber(constant.getNumberConstReference());
+    Monomial newMonomial(monomial);    newMonomial.raiseToPowerNumber(constant.getNumberConstReference());
     return simplifyAndConvertMonomialToSimplestTerm(newMonomial);
 }
 
@@ -1296,15 +1522,19 @@ Term operator^(Monomial const& monomial, Expression const& expression)
     return createTermWithAnExpressionRaisingToPower2Terms(Term(monomial), Term(expression));
 }
 
-Term operator^(Monomial const& monomial, Function const& functionAsParameter)
+Term operator^(Monomial const& monomial, Function const& functionObject)
 {
-    return createTermWithAnExpressionRaisingToPower2Terms(Term(monomial), Term(functionAsParameter));
+    return createTermWithAnExpressionRaisingToPower2Terms(Term(monomial), Term(functionObject));
+}
+
+Term operator^(Monomial const& monomial, Term const& term)
+{
+    return performRaiseToPower(Term(monomial), term);
 }
 
 Term operator^(Polynomial const& polynomial, Constant const& constant)
 {
-    Term newTerm;
-    AlbaNumber exponentNumber(constant.getNumberConstReference());
+    Term newTerm;    AlbaNumber exponentNumber(constant.getNumberConstReference());
     if(exponentNumber.isIntegerType())
     {
         int exponentInteger(exponentNumber.getInteger());
@@ -1357,15 +1587,19 @@ Term operator^(Polynomial const& polynomial, Expression const& expression)
     return createTermWithAnExpressionRaisingToPower2Terms(Term(polynomial), Term(expression));
 }
 
-Term operator^(Polynomial const& polynomial, Function const& functionAsParameter)
+Term operator^(Polynomial const& polynomial, Function const& functionObject)
 {
-    return createTermWithAnExpressionRaisingToPower2Terms(Term(polynomial), Term(functionAsParameter));
+    return createTermWithAnExpressionRaisingToPower2Terms(Term(polynomial), Term(functionObject));
+}
+
+Term operator^(Polynomial const& polynomial, Term const& term)
+{
+    return performRaiseToPower(Term(polynomial), term);
 }
 
 Term operator^(Expression const& expression, Constant const& constant)
 {
-    return createTermRaisingToPowerAnExpressionAndATerm(expression, Term(constant));
-}
+    return createTermRaisingToPowerAnExpressionAndATerm(expression, Term(constant));}
 
 Term operator^(Expression const& expression, Variable const& variable)
 {
@@ -1387,34 +1621,39 @@ Term operator^(Expression const& expression1, Expression const& expression2)
     return createTermRaisingToPowerAnExpressionAndATerm(expression1, Term(expression2));
 }
 
-Term operator^(Expression const& expression, Function const& functionAsParameter)
+Term operator^(Expression const& expression, Function const& functionObject)
 {
-    return createTermRaisingToPowerAnExpressionAndATerm(expression, Term(functionAsParameter));
+    return createTermRaisingToPowerAnExpressionAndATerm(expression, Term(functionObject));
 }
 
-Term operator^(Function const& functionAsParameter, Constant const& constant)
+Term operator^(Expression const& expression, Term const& term)
 {
-    return createTermWithAnExpressionRaisingToPower2Terms(Term(functionAsParameter), Term(constant));
+    return performRaiseToPower(Term(expression), term);
 }
 
-Term operator^(Function const& functionAsParameter, Variable const& variable)
+Term operator^(Function const& functionObject, Constant const& constant)
 {
-    return createTermWithAnExpressionRaisingToPower2Terms(Term(functionAsParameter), Term(variable));
+    return createTermWithAnExpressionRaisingToPower2Terms(Term(functionObject), Term(constant));
 }
 
-Term operator^(Function const& functionAsParameter, Monomial const& monomial)
+Term operator^(Function const& functionObject, Variable const& variable)
 {
-    return createTermWithAnExpressionRaisingToPower2Terms(Term(functionAsParameter), Term(monomial));
+    return createTermWithAnExpressionRaisingToPower2Terms(Term(functionObject), Term(variable));
 }
 
-Term operator^(Function const& functionAsParameter, Polynomial const& polynomial)
+Term operator^(Function const& functionObject, Monomial const& monomial)
 {
-    return createTermWithAnExpressionRaisingToPower2Terms(Term(functionAsParameter), Term(polynomial));
+    return createTermWithAnExpressionRaisingToPower2Terms(Term(functionObject), Term(monomial));
 }
 
-Term operator^(Function const& functionAsParameter, Expression const& expression)
+Term operator^(Function const& functionObject, Polynomial const& polynomial)
 {
-    return createTermWithAnExpressionRaisingToPower2Terms(Term(functionAsParameter), Term(expression));
+    return createTermWithAnExpressionRaisingToPower2Terms(Term(functionObject), Term(polynomial));
+}
+
+Term operator^(Function const& functionObject, Expression const& expression)
+{
+    return createTermWithAnExpressionRaisingToPower2Terms(Term(functionObject), Term(expression));
 }
 
 Term operator^(Function const& function1, Function const& function2)
@@ -1422,10 +1661,44 @@ Term operator^(Function const& function1, Function const& function2)
     return createTermWithAnExpressionRaisingToPower2Terms(Term(function1), Term(function2));
 }
 
+Term operator^(Function const& functionObject, Term const& term)
+{
+    return performRaiseToPower(Term(functionObject), term);
+}
+
+Term operator^(Term const& term, Constant const& constant)
+{
+    return performRaiseToPower(term, Term(constant));
+}
+
+Term operator^(Term const& term, Variable const& variable)
+{
+    return performRaiseToPower(term, Term(variable));
+}
+
+Term operator^(Term const& term, Monomial const& monomial)
+{
+    return performRaiseToPower(term, Term(monomial));
+}
+
+Term operator^(Term const& term, Polynomial const& polynomial)
+{
+    return performRaiseToPower(term, Term(polynomial));
+}
+
+Term operator^(Term const& term, Expression const& expression)
+{
+    return performRaiseToPower(term, Term(expression));
+}
+
+Term operator^(Term const& term, Function const& functionObject)
+{
+    return performRaiseToPower(term, Term(functionObject));
+}
+
 Term operator^(Term const& term1, Term const& term2)
 {
-    return performRaiseToPower(term1, term2);
-}
+    return performRaiseToPower(term1, term2);}
 
 }
 
