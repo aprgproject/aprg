@@ -1,6 +1,7 @@
 #include <Series/ArithmeticSeries.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba
@@ -32,7 +33,8 @@ TEST(ArithmeticSeriesTest, GetValueAtIndexWorks)
     EXPECT_DOUBLE_EQ(-11, series.getValueAtIndex(2));
 }
 
-TEST(ArithmeticSeriesTest, GetSumWorks){
+TEST(ArithmeticSeriesTest, GetSumWorks)
+{
     ArithmeticSeries series(-15, 2);
 
     EXPECT_DOUBLE_EQ(420, series.getSum(0, 29));
@@ -41,5 +43,6 @@ TEST(ArithmeticSeriesTest, GetSumWorks){
 }
 
 }
+
 }
 

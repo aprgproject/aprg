@@ -26,7 +26,8 @@ public:
             int const endingIndex);
 
 private:
-    double m_firstTerm;    double m_commonDifference;
+    double m_firstTerm;
+    double m_commonDifference;
 };
 
 }

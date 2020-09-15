@@ -4,6 +4,7 @@
 
 namespace alba
 {
+
 namespace MathSeries
 {
 
@@ -40,4 +41,5 @@ double ArithmeticSeries::getSum(
 }
 
 }
+
 }
