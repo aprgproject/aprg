@@ -9,12 +9,11 @@ namespace alba
 namespace MathSeries
 {
 
-TEST(UtilitiesTest, GetSumOfArithmeticSeriesUsingFirstAndLastTermWorks)
+TEST(UtilitiesTest, GetSumOfArithmeticSeriesUsingFirstAndLastValueWorks)
 {
-    EXPECT_DOUBLE_EQ(60, getSumOfArithmeticSeriesUsingFirstAndLastTerm(12, 18, 4));
+    EXPECT_DOUBLE_EQ(60, getSumOfArithmeticSeriesUsingFirstAndLastValue(12, 18, 4));
 }
 
 }
-
 }
 

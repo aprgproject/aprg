@@ -8,10 +8,12 @@
 
 #include <algorithm>
 
+
+#include <Debug/AlbaDebug.hpp>
+
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace algebra
 {
@@ -35,21 +37,19 @@ void SolverUsingSubstitution::calculateSolutionForAllVariables(
         MultipleVariableSolutionSet & multipleVariableSolutionSet,
         Equations const& equations)
 {
-    VariableNamesSet variableAsUnknown;
-    retrieveVariableNames(variableAsUnknown, equations);
+    VariableNamesSet variablesWithUnknownValues;
+    retrieveVariableNames(variablesWithUnknownValues, equations);
     VariableNamesSet previousVariableWithSolution, variableWithSolution;
     do
-    {
-        previousVariableWithSolution=variableWithSolution;
+    {        previousVariableWithSolution=variableWithSolution;
         calculateSolutionForOneVariable(multipleVariableSolutionSet, equations);
         variableWithSolution = multipleVariableSolutionSet.getVariableNames();
     }
-    while(previousVariableWithSolution.size() != variableWithSolution.size() && variableAsUnknown.size() != variableWithSolution.size());
-    if(variableAsUnknown == variableWithSolution)
+    while(previousVariableWithSolution.size() != variableWithSolution.size() && variablesWithUnknownValues.size() != variableWithSolution.size());
+    if(variablesWithUnknownValues == variableWithSolution)
     {
         setAsCompleteSolution();
-    }
-}
+    }}
 
 void SolverUsingSubstitution::calculateSolutionForOneVariable(
         MultipleVariableSolutionSet & multipleVariableSolutionSet,
@@ -94,10 +94,10 @@ void SolverUsingSubstitution::isolateAndSubstituteUntilOneUnknown(
         string selectedVariableName;
         unsigned int selectedEquationIndex(0u);
         selectVariableNameAndEquationNumber(areVariableAndEquationSelected, selectedVariableName, selectedEquationIndex, substitutedEquations);
+        ALBA_PRINT4(areVariableAndEquationSelected, selectedVariableName, selectedEquationIndex, substitutedEquations.at(selectedEquationIndex));
         substituteEquationForSelectedEquationIndex(substitutedEquations, areVariableAndEquationSelected, selectedVariableName, selectedEquationIndex);
         removeEquationsWithoutUnknowns(substitutedEquations);
-        unknowns.clear();
-        retrieveVariableNames(unknowns, substitutedEquations);
+        unknowns.clear();        retrieveVariableNames(unknowns, substitutedEquations);
     }
 }
 
@@ -115,10 +115,10 @@ void SolverUsingSubstitution::solveUsingOneUnknownAndAddToSolutionSet(
             string variableNameToSolve(*(variableNamesToSolve.cbegin()));
             OneEquationOneVariableEqualitySolver solver;
             SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(equationToSolve));
+            ALBA_PRINT2(solutionSet, equationToSolve);
             multipleVariableSolutionSet.addSolutionSetForVariable(variableNameToSolve, solutionSet);
         }
-    }
-}
+    }}
 
 void SolverUsingSubstitution::selectVariableNameAndEquationNumber(
         bool & areVariableAndEquationSelected,
@@ -131,25 +131,26 @@ void SolverUsingSubstitution::selectVariableNameAndEquationNumber(
     selectedEquationIndex = 0u;
     VariableNamesSet variableNames;
     retrieveVariableNames(variableNames, equations);
+    unsigned int equationIndex=0;
     for(Equation const& equation : equations)
     {
         IsolationOfOneVariableOnEqualityEquation isolation(equation);
-        unsigned int index=0;
         for(string const& variableName : variableNames)
         {
+            ALBA_PRINT3(isolation.canBeIsolated(variableName), variableName, equation);
             if(isolation.canBeIsolated(variableName)
                     && isolation.getExponentOfIsolatedVariable(variableName) == 1)
             {
                 areVariableAndEquationSelected = true;
                 selectedVariableName = variableName;
-                selectedEquationIndex = index;
+                selectedEquationIndex = equationIndex;
+                ALBA_PRINT3(areVariableAndEquationSelected, selectedVariableName, selectedEquationIndex);
                 break;
             }
-            index++;
         }
+        equationIndex++;
     }
 }
-
 void SolverUsingSubstitution::substituteEquationForSelectedEquationIndex(
         Equations & substitutedEquations,
         bool const areVariableAndEquationSelected,
@@ -160,15 +161,16 @@ void SolverUsingSubstitution::substituteEquationForSelectedEquationIndex(
     {
         IsolationOfOneVariableOnEqualityEquation isolation(substitutedEquations.at(selectedEquationIndex));
         Equation isolatedEquation(isolation.isolate(selectedVariableName));
+        ALBA_PRINT2(substitutedEquations.at(selectedEquationIndex), isolatedEquation);
         substitutedEquations.erase(substitutedEquations.begin()+selectedEquationIndex);
         SubstitutionOfVariablesToTerms substitution;
         substitution.putVariableWithTerm(selectedVariableName, isolatedEquation.getLeftHandTerm());
         for(Equation & substitutedEquation : substitutedEquations)
         {
+            ALBA_PRINT2(substitutedEquation, substitution.performSubstitutionTo(substitutedEquation));
             substitutedEquation = substitution.performSubstitutionTo(substitutedEquation);
         }
-    }
-}
+    }}
 
 void SolverUsingSubstitution::removeEquationsWithoutUnknowns(Equations& substitutedEquations)
 {
