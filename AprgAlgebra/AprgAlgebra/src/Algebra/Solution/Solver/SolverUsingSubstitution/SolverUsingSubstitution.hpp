@@ -22,11 +22,10 @@ private:
     bool isTheValueAlreadyExisting(
             std::string const& variableName,
             AlbaNumber const& value) const;
-    bool isSolutionCorrectAndComplete(
+    bool isSolutionCorrect(
             MultipleVariableSolutionSet const& solutionSet,
             Equations const& equations) const;
-    SubstitutionOfVariablesToValues getSubstitutionFromSolutionSet(
-            MultipleVariableSolutionSet const& solutionSet) const;
+    SubstitutionOfVariablesToValues getSubstitutionFromSolutionSet(            MultipleVariableSolutionSet const& solutionSet) const;
 
     void clear();
     void calculateSolutions(
