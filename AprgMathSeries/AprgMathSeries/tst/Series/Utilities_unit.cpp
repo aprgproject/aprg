@@ -16,5 +16,6 @@ TEST(UtilitiesTest, GetSumOfArithmeticSeriesUsingFirstAndLastTermWorks)
 }
 
 }
+
 }
 
