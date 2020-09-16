@@ -19,11 +19,12 @@ namespace
 {
 //internal functions
 
-unsigned int getNumberOfMultiplesInclusive(unsigned int const multiple, unsigned int const number)
+unsigned int getNumberOfMultiplesInclusive(
+        unsigned int const multiple,
+        unsigned int const number)
 {
     unsigned int result(0);
-    if(multiple>0)
-    {
+    if(multiple>0)    {
         result = ((number+multiple-1)/multiple);
     }
     return result;
