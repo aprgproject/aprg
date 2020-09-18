@@ -62,7 +62,8 @@ bool SolverUsingSubstitution::isTheValueAlreadyExisting(
 bool SolverUsingSubstitution::isSolutionCorrect(
         MultipleVariableSolutionSet const& solutionSet,
         Equations const& equations) const
-{    bool result(true);
+{
+    bool result(true);
     SubstitutionOfVariablesToValues substitution(getSubstitutionFromSolutionSet(solutionSet));
     for(Equation const& equation : equations)
     {
@@ -88,7 +89,8 @@ SubstitutionOfVariablesToValues SolverUsingSubstitution::getSubstitutionFromSolu
         : variableNameToSolutionSetMap)
     {
         AlbaNumbers const& acceptedValues(variableNameToSolutionSet.second.getAcceptedValues());
-        if(!acceptedValues.empty())        {
+        if(!acceptedValues.empty())
+        {
             substitution.putVariableWithValue(variableNameToSolutionSet.first, acceptedValues.front());
         }
     }
@@ -134,6 +136,7 @@ void SolverUsingSubstitution::calculateASolutionForAllVariables(
     while(previousNumberOfVariables != variablesWithSolution.size()
           && m_variablesNames.size() != variablesWithSolution.size());
 }
+
 void SolverUsingSubstitution::addIfSolutionIsCompleteAndCorrect(
         MultipleVariableSolutionSet const& solutionSet,
         Equations const& equations)
@@ -143,7 +146,8 @@ void SolverUsingSubstitution::addIfSolutionIsCompleteAndCorrect(
         if(isSolutionCorrect(solutionSet, equations))
         {
             m_solutionsWithAllVariables.emplace_back(solutionSet);
-            setAsCompleteSolution();        }
+            setAsCompleteSolution();
+        }
     }
 }
 

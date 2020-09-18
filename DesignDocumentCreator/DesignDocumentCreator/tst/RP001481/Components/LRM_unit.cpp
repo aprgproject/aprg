@@ -25,6 +25,7 @@ TEST(LrmTest, MasterTcomCanBeSet)
 TEST(LrmTest, GetFspAddressWorks)
 {
     LRM lrm(ComponentName::LRM);
+
     EXPECT_EQ(0xA1u, lrm.getFspAddressFromDspAddress(0xA1BA));
     EXPECT_EQ(0xA1u, lrm.getFspAddressFromDspAddress(0xA100));
     EXPECT_EQ(0xBAu, lrm.getFspAddressFromDspAddress(0xBAA1));
@@ -34,6 +35,7 @@ TEST(LrmTest, GetFspAddressWorks)
 TEST(LrmTest, GetKeplerAddressWithoutCorWorks)
 {
     LRM lrm(ComponentName::LRM);
+
     EXPECT_EQ(0xA1B0u, lrm.getKeplerAddressWithoutCore(0xA1BA));
     EXPECT_EQ(0xA100u, lrm.getKeplerAddressWithoutCore(0xA100));
     EXPECT_EQ(0xBAA0u, lrm.getKeplerAddressWithoutCore(0xBAA1));
@@ -44,6 +46,7 @@ TEST(LrmTest, IsTcomInThisK2Works)
 {
     LRM lrm(ComponentName::LRM);
     lrm.setMasterTcomNid(0xA1BA);
+
     EXPECT_TRUE(lrm.isTcomInThisK2(0xA1BA));
     EXPECT_TRUE(lrm.isTcomInThisK2(0xA1BB));
     EXPECT_FALSE(lrm.isTcomInThisK2(0xA100));
@@ -55,7 +58,8 @@ TEST(LrmTest, IsTcomInThisK2Works)
 TEST(LrmTest, GetPowerGroupIdWorks)
 {
     SLrmConfigurationDataInd payload;
-    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);    LRM lrm(ComponentName::LRM);
+    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);
+    LRM lrm(ComponentName::LRM);
 
     lrm.saveDspInformation(payload);
 
@@ -69,7 +73,8 @@ TEST(LrmTest, GetPowerGroupIdWorks)
 TEST(LrmTest, GetDspModeIdWorks)
 {
     SLrmConfigurationDataInd payload;
-    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);    LRM lrm(ComponentName::LRM);
+    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);
+    LRM lrm(ComponentName::LRM);
 
     lrm.saveDspInformation(payload);
 
@@ -83,7 +88,8 @@ TEST(LrmTest, GetDspModeIdWorks)
 TEST(LrmTest, GetNumberOfK2sInPowerGroupWorks)
 {
     SLrmConfigurationDataInd payload;
-    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);    LRM lrm(ComponentName::LRM);
+    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);
+    LRM lrm(ComponentName::LRM);
 
     lrm.savePowerGroupInformation(payload);
 
@@ -95,7 +101,8 @@ TEST(LrmTest, GetNumberOfK2sInPowerGroupWorks)
 TEST(LrmTest, GetDspAddressesForLcgIdWorks)
 {
     SLrmConfigurationDataInd payload;
-    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);    LRM lrm(ComponentName::LRM);
+    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);
+    LRM lrm(ComponentName::LRM);
 
     lrm.saveDspInformation(payload);
 

@@ -5,11 +5,9 @@
 #include <algorithm>
 #include <sstream>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 using namespace alba::mathHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -46,7 +44,6 @@ string SolutionSet::getDisplayableString() const
     ss << "AcceptedValues:{";
     for(AlbaNumber const& acceptedValue : m_acceptedValues)
     {
-        ALBA_PRINT3(acceptedValue, isFirst, ss.str());
         if(isFirst)
         {
             isFirst = false;
@@ -61,7 +58,6 @@ string SolutionSet::getDisplayableString() const
     ss << "} RejectedValues:{";
     for(AlbaNumber const& rejectedValue : m_rejectedValues)
     {
-        ALBA_PRINT3(rejectedValue, isFirst, ss.str());
         if(isFirst)
         {
             isFirst = false;
@@ -76,7 +72,6 @@ string SolutionSet::getDisplayableString() const
     ss << "} AcceptedInterval:{";
     for(AlbaNumberInterval const& acceptedInterval : m_acceptedIntervals)
     {
-        ALBA_PRINT3(acceptedInterval, isFirst, ss.str());
         if(isFirst)
         {
             isFirst = false;
@@ -91,7 +86,8 @@ string SolutionSet::getDisplayableString() const
     return ss.str();
 }
 
-void SolutionSet::addAcceptedValue(AlbaNumber const& value){
+void SolutionSet::addAcceptedValue(AlbaNumber const& value)
+{
     m_acceptedValues.emplace_back(value);
 }
 

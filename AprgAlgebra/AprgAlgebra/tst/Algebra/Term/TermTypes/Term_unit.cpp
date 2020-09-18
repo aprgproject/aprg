@@ -15,7 +15,8 @@ namespace algebra
 TEST(TermTest, TermsAsConstantsWorks)
 {
     Term constant1(4353);
-    Term constant2(-3248);    Term constant3(AlbaNumber(3498, 3459));
+    Term constant2(-3248);
+    Term constant3(AlbaNumber(3498, 3459));
     Term constant4(-34.8767);
 
     ASSERT_EQ(TermType::Constant, constant1.getTermType());
@@ -34,7 +35,8 @@ TEST(TermTest, TermsAsConstantsWorks)
 TEST(TermTest, TermsAsVariablesWorks)
 {
     Term variable1("");
-    Term variable2("x");    Term variable3("power");
+    Term variable2("x");
+    Term variable3("power");
 
     ASSERT_EQ(TermType::Variable, variable1.getTermType());
     EXPECT_EQ("", variable1.getVariableConstReference().getVariableName());
@@ -49,7 +51,8 @@ TEST(TermTest, TermsAsVariablesWorks)
 TEST(TermTest, TermsAsOperatorsWorks)
 {
     Term operator1("+");
-    Term operator2("-");    Term operator3("*");
+    Term operator2("-");
+    Term operator3("*");
     Term operator4("/");
 
     ASSERT_EQ(TermType::Operator, operator1.getTermType());
@@ -68,7 +71,8 @@ TEST(TermTest, TermsAsOperatorsWorks)
 TEST(TermTest, TermsAsMonomialsWorks)
 {
     Term monomial1(Monomial(3, {}));
-    Term monomial2(Monomial(1.5, {{"distance", 3.75}}));    Term monomial3(Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}}));
+    Term monomial2(Monomial(1.5, {{"distance", 3.75}}));
+    Term monomial3(Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}}));
 
     ASSERT_EQ(TermType::Monomial, monomial1.getTermType());
     EXPECT_DOUBLE_EQ(3, monomial1.getMonomialConstReference().getConstantConstReference().getDouble());
@@ -100,7 +104,8 @@ TEST(TermTest, TermsAsMonomialsWorks)
 TEST(TermTest, TermsAsPolynomialsWorks)
 {
     Term polynomial1(Polynomial{});
-    Term polynomial2(Polynomial({Monomial(3, {})}));    Term polynomial3(Polynomial({Monomial(3, {}), Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}})}));
+    Term polynomial2(Polynomial({Monomial(3, {})}));
+    Term polynomial3(Polynomial({Monomial(3, {}), Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}})}));
 
     //For polynomial1
     ASSERT_EQ(TermType::Polynomial, polynomial1.getTermType());
@@ -144,6 +149,7 @@ TEST(TermTest, TermsAsExpressionsWorks)
 {
     Term expressionTerm1(Expression{});
     Term expressionTerm2(createExpressionIfPossible({Term(5), Term("+"), Term("interest")}));
+
     //For expression1
     ASSERT_EQ(TermType::Expression, expressionTerm1.getTermType());
     Expression const& expression1(expressionTerm1.getExpressionConstReference());
@@ -168,7 +174,8 @@ TEST(TermTest, TermsAsExpressionsWorks)
 TEST(TermTest, TermsAsFunctionsWorks)
 {
     Function function1;
-    Function function2("functionName", Term(5), [](AlbaNumber const&  number) -> AlbaNumber    {
+    Function function2("functionName", Term(5), [](AlbaNumber const&  number) -> AlbaNumber
+    {
         return number;
     });
     Term functionTerm1(function1);
@@ -197,6 +204,7 @@ TEST(TermTest, TermsAsFunctionsWorks)
 TEST(TermTest, TermsAsConstantsCanBeChanged)
 {
     Term term(Constant{});
+
     term.getConstantReference().setNumber(7575);
 
     ASSERT_EQ(TermType::Constant, term.getTermType());
@@ -206,6 +214,7 @@ TEST(TermTest, TermsAsConstantsCanBeChanged)
 TEST(TermTest, TermsAsVariablesCanBeChanged)
 {
     Term term(Variable{});
+
     term.getVariableReference().setVariableName("time");
 
     ASSERT_EQ(TermType::Variable, term.getTermType());
@@ -215,6 +224,7 @@ TEST(TermTest, TermsAsVariablesCanBeChanged)
 TEST(TermTest, TermsAsOperatorsCanBeChanged)
 {
     Term term(Operator{});
+
     term.getOperatorReference().setOperatorString("+");
 
     ASSERT_EQ(TermType::Operator, term.getTermType());
@@ -224,6 +234,7 @@ TEST(TermTest, TermsAsOperatorsCanBeChanged)
 TEST(TermTest, TermsAsMonomialsCanBeChanged)
 {
     Term term(Monomial{});
+
     term.getMonomialReference().setConstant(99);
 
     ASSERT_EQ(TermType::Monomial, term.getTermType());
@@ -233,6 +244,7 @@ TEST(TermTest, TermsAsMonomialsCanBeChanged)
 TEST(TermTest, TermsAsPolynomialsCanBeChanged)
 {
     Term term(Polynomial{});
+
     term.getPolynomialReference().addMonomial(Monomial(53, {}));
 
     ASSERT_EQ(TermType::Polynomial, term.getTermType());
@@ -242,6 +254,7 @@ TEST(TermTest, TermsAsPolynomialsCanBeChanged)
 TEST(TermTest, TermsAsExpressionsCanBeChanged)
 {
     Term term(Expression{});
+
     term.getExpressionReference().setCommonOperatorLevel(OperatorLevel::AdditionAndSubtraction);
 
     ASSERT_EQ(TermType::Expression, term.getTermType());
@@ -251,6 +264,7 @@ TEST(TermTest, TermsAsExpressionsCanBeChanged)
 TEST(TermTest, TermsAsFunctionsCanBeChanged)
 {
     Term term(Function{});
+
     getTermReferenceFromBaseTerm(term.getFunctionReference().getInputTermReference()) = Term(7);
 
     ASSERT_EQ(TermType::Function, term.getTermType());

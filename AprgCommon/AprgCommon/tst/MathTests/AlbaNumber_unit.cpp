@@ -20,7 +20,8 @@ TEST(AlbaNumberTest, SizeValueIsExpected)
 TEST(AlbaNumberTest, ConstructionWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(-81237);    AlbaNumber number3(34095093u);
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(34095093u);
     AlbaNumber number4(-87408, -9802);
     AlbaNumber number5(-100, 10);
     AlbaNumber number6(-100, -10);
@@ -56,7 +57,8 @@ TEST(AlbaNumberTest, ConstructionWorks)
 TEST(AlbaNumberTest, IsIntegerTypeWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(-81237);    AlbaNumber number3(34095093u);
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(34095093u);
     AlbaNumber number4(-87408, -9802);
     AlbaNumber number5(-100, 10);
     AlbaNumber number6(4564.38794);
@@ -72,7 +74,8 @@ TEST(AlbaNumberTest, IsIntegerTypeWorks)
 TEST(AlbaNumberTest, IsFractionTypeWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(-81237);    AlbaNumber number3(34095093u);
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(34095093u);
     AlbaNumber number4(-87408, -9802);
     AlbaNumber number5(-100, 10);
     AlbaNumber number6(4564.38794);
@@ -88,7 +91,8 @@ TEST(AlbaNumberTest, IsFractionTypeWorks)
 TEST(AlbaNumberTest, IsDoubleTypeWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(-81237);    AlbaNumber number3(34095093u);
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(34095093u);
     AlbaNumber number4(-87408, -9802);
     AlbaNumber number5(-100, 10);
     AlbaNumber number6(4564.38794);
@@ -104,7 +108,8 @@ TEST(AlbaNumberTest, IsDoubleTypeWorks)
 TEST(AlbaNumberTest, IsIntegerOrFractionTypeWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(-81237);    AlbaNumber number3(34095093u);
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(34095093u);
     AlbaNumber number4(-87408, -9802);
     AlbaNumber number5(-100, 10);
     AlbaNumber number6(4564.38794);
@@ -120,7 +125,8 @@ TEST(AlbaNumberTest, IsIntegerOrFractionTypeWorks)
 TEST(AlbaNumberTest, IsPositiveInfinityWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(-81237);    AlbaNumber number3(34095093u);
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(34095093u);
     AlbaNumber number4(-87408, -9802);
     AlbaNumber number5(-100, 10);
     AlbaNumber number6(4564.38794);
@@ -146,7 +152,8 @@ TEST(AlbaNumberTest, IsPositiveInfinityWorks)
 TEST(AlbaNumberTest, IsNegativeInfinityWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(-81237);    AlbaNumber number3(34095093u);
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(34095093u);
     AlbaNumber number4(-87408, -9802);
     AlbaNumber number5(-100, 10);
     AlbaNumber number6(4564.38794);
@@ -172,7 +179,8 @@ TEST(AlbaNumberTest, IsNegativeInfinityWorks)
 TEST(AlbaNumberTest, IsNotANumberWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(-81237);    AlbaNumber number3(34095093u);
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(34095093u);
     AlbaNumber number4(-87408, -9802);
     AlbaNumber number5(-100, 10);
     AlbaNumber number6(4564.38794);
@@ -198,7 +206,8 @@ TEST(AlbaNumberTest, IsNotANumberWorks)
 TEST(AlbaNumberTest, IsAFiniteValueWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(-81237);    AlbaNumber number3(34095093u);
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(34095093u);
     AlbaNumber number4(-87408, -9802);
     AlbaNumber number5(-100, 10);
     AlbaNumber number6(4564.38794);
@@ -224,7 +233,8 @@ TEST(AlbaNumberTest, IsAFiniteValueWorks)
 TEST(AlbaNumberTest, GetIntegerWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(-81237);    AlbaNumber number3(34095093u);
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(34095093u);
     AlbaNumber number4(-87408, -9802);
     AlbaNumber number5(4564.38794);
 
@@ -238,7 +248,8 @@ TEST(AlbaNumberTest, GetIntegerWorks)
 TEST(AlbaNumberTest, GetFractionDataWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(-81237);    AlbaNumber number3(34095093u);
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(34095093u);
     AlbaNumber number4(-87408, -9802);
     AlbaNumber number5(4564.38794);
 
@@ -262,7 +273,8 @@ TEST(AlbaNumberTest, GetFractionDataWorks)
 TEST(AlbaNumberTest, GetDoubleWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(-81237);    AlbaNumber number3(34095093u);
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(34095093u);
     AlbaNumber number4(-87408, -9802);
     AlbaNumber number5(4564.38794);
 
@@ -276,7 +288,8 @@ TEST(AlbaNumberTest, GetDoubleWorks)
 TEST(AlbaNumberTest, EqualityWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(-81237);    AlbaNumber number3(-81237);
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(-81237);
     AlbaNumber number4(static_cast<double>(1)/3);
     AlbaNumber number5(1, 3);
     AlbaNumber number6(AlbaNumber::Value::PositiveInfinity);
@@ -301,7 +314,8 @@ TEST(AlbaNumberTest, EqualityWorks)
 TEST(AlbaNumberTest, InequalityWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(-81237);    AlbaNumber number3(-81237);
+    AlbaNumber number2(-81237);
+    AlbaNumber number3(-81237);
     AlbaNumber number4(static_cast<double>(1)/3);
     AlbaNumber number5(1, 3);
 
@@ -319,7 +333,8 @@ TEST(AlbaNumberTest, InequalityWorks)
 TEST(AlbaNumberTest, LessThanWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(1, 3);    AlbaNumber number3(0.5);
+    AlbaNumber number2(1, 3);
+    AlbaNumber number3(0.5);
     AlbaNumber number4(AlbaNumber::Value::PositiveInfinity);
     AlbaNumber number5(AlbaNumber::Value::NegativeInfinity);
 
@@ -340,7 +355,8 @@ TEST(AlbaNumberTest, LessThanWorks)
 TEST(AlbaNumberTest, LessThanOrEqualWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(1, 3);    AlbaNumber number3(0.5);
+    AlbaNumber number2(1, 3);
+    AlbaNumber number3(0.5);
     AlbaNumber number4(AlbaNumber::Value::PositiveInfinity);
     AlbaNumber number5(AlbaNumber::Value::NegativeInfinity);
 
@@ -361,7 +377,8 @@ TEST(AlbaNumberTest, LessThanOrEqualWorks)
 TEST(AlbaNumberTest, GreaterThanWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(1, 3);    AlbaNumber number3(0.5);
+    AlbaNumber number2(1, 3);
+    AlbaNumber number3(0.5);
     AlbaNumber number4(AlbaNumber::Value::PositiveInfinity);
     AlbaNumber number5(AlbaNumber::Value::NegativeInfinity);
 
@@ -382,7 +399,8 @@ TEST(AlbaNumberTest, GreaterThanWorks)
 TEST(AlbaNumberTest, GreaterThanOrEqualWorks)
 {
     AlbaNumber number1;
-    AlbaNumber number2(1, 3);    AlbaNumber number3(0.5);
+    AlbaNumber number2(1, 3);
+    AlbaNumber number3(0.5);
     AlbaNumber number4(AlbaNumber::Value::PositiveInfinity);
     AlbaNumber number5(AlbaNumber::Value::NegativeInfinity);
 
@@ -922,7 +940,8 @@ TEST(AlbaNumberTest, ConvertToFractionWorks)
 TEST(AlbaNumberTest, DivisionOfAValueByZeroWorks)
 {
     AlbaNumber number1(5);
-    AlbaNumber number2(5, 0);    AlbaNumber number3(1.25);
+    AlbaNumber number2(5, 0);
+    AlbaNumber number3(1.25);
 
     number1 = number1/0;
     number3 = number3/0;
@@ -937,7 +956,8 @@ TEST(AlbaNumberTest, DivisionOfAValueByZeroWorks)
 TEST(AlbaNumberTest, DivisionOfZeroByZeroWorks)
 {
     AlbaNumber number1(0);
-    AlbaNumber number2(0, 0);    AlbaNumber number3(static_cast<double>(0));
+    AlbaNumber number2(0, 0);
+    AlbaNumber number3(static_cast<double>(0));
 
     number1 = number1/0;
     number3 = number3/0;
@@ -953,6 +973,7 @@ TEST(AlbaNumberTest, SquareRootOfNegativeNumberWorks)
 {
     AlbaNumber base(-5);
     AlbaNumber exponent(1, 2);
+
     AlbaNumber numberToVerify = base^exponent;
 
     EXPECT_EQ(AlbaNumber::Type::Double, numberToVerify.getType());

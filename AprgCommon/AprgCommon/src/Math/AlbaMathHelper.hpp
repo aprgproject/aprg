@@ -71,6 +71,7 @@ template <typename NumberType> NumberType getSquareRootOfXSquaredPlusYSquaredPlu
 double getLogarithm(double const base, double const value);
 AlbaNumbers getQuadraticRoots(AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c);
 
+
 //Combinatorics functions
 unsigned int getFactorial(unsigned int const number);
 unsigned int getNumberOfPermutations(unsigned int const p, unsigned int const r);

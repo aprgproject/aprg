@@ -15,7 +15,8 @@ namespace algebra
 TEST(SolutionSetTest, IsEmptyWorks)
 {
     SolutionSet solutionSet1;
-    SolutionSet solutionSet2;    SolutionSet solutionSet3;
+    SolutionSet solutionSet2;
+    SolutionSet solutionSet3;
     SolutionSet solutionSet4;
     solutionSet2.addAcceptedValue(45);
     solutionSet3.addRejectedValue(67);
@@ -34,6 +35,7 @@ TEST(SolutionSetTest, IsEmptyWorks)
 TEST(SolutionSetTest, AddAcceptedValueWorks)
 {
     SolutionSet solutionSet;
+
     solutionSet.addAcceptedValue(5863);
 
     AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
@@ -46,6 +48,7 @@ TEST(SolutionSetTest, AddAcceptedValueWorks)
 TEST(SolutionSetTest, AddRejectedValueWorks)
 {
     SolutionSet solutionSet;
+
     solutionSet.addRejectedValue(5863);
 
     AlbaNumbers const& rejectedValues(solutionSet.getRejectedValues());
@@ -58,6 +61,7 @@ TEST(SolutionSetTest, AddRejectedValueWorks)
 TEST(SolutionSetTest, AddAcceptedValuesWorks)
 {
     SolutionSet solutionSet;
+
     solutionSet.addAcceptedValues(AlbaNumbers{5863, 8546});
 
     AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
@@ -71,6 +75,7 @@ TEST(SolutionSetTest, AddAcceptedValuesWorks)
 TEST(SolutionSetTest, AddRejectedValuesWorks)
 {
     SolutionSet solutionSet;
+
     solutionSet.addRejectedValues(AlbaNumbers{5863, 8546});
 
     AlbaNumbers const& rejectedValues(solutionSet.getRejectedValues());
@@ -84,6 +89,7 @@ TEST(SolutionSetTest, AddRejectedValuesWorks)
 TEST(SolutionSetTest, AddAcceptedIntervalWorks)
 {
     SolutionSet solutionSet;
+
     solutionSet.addAcceptedInterval(AlbaNumberInterval(createOpenEndpoint(87), createOpenEndpoint(99)));
 
     AlbaNumberIntervals actualIntervals(solutionSet.getAcceptedIntervals());
@@ -94,6 +100,7 @@ TEST(SolutionSetTest, AddAcceptedIntervalWorks)
 TEST(SolutionSetTest, AddValueForAcceptedValueWorks)
 {
     SolutionSet solutionSet;
+
     solutionSet.addValue(5863, [](AlbaNumber const&){return true;});
 
     AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
@@ -106,6 +113,7 @@ TEST(SolutionSetTest, AddValueForAcceptedValueWorks)
 TEST(SolutionSetTest, AddValueForRejectedValueWorks)
 {
     SolutionSet solutionSet;
+
     solutionSet.addValue(5863, [](AlbaNumber const&){return false;});
 
     AlbaNumbers const& rejectedValues(solutionSet.getRejectedValues());

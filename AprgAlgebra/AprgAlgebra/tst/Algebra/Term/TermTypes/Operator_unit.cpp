@@ -58,7 +58,8 @@ TEST(OperatorTest, LessThanOperatorWorks)
 TEST(OperatorTest, IsAdditionWorks)
 {
     Operator nullOperator;
-    Operator addOperator("+");    Operator subtractOperator("-");
+    Operator addOperator("+");
+    Operator subtractOperator("-");
     Operator multiplyOperator("*");
     Operator divideOperator("/");
     Operator raiseToPowerOperator("^");
@@ -80,7 +81,8 @@ TEST(OperatorTest, IsAdditionWorks)
 TEST(OperatorTest, IsSubtractionWorks)
 {
     Operator nullOperator;
-    Operator addOperator("+");    Operator subtractOperator("-");
+    Operator addOperator("+");
+    Operator subtractOperator("-");
     Operator multiplyOperator("*");
     Operator divideOperator("/");
     Operator raiseToPowerOperator("^");
@@ -102,7 +104,8 @@ TEST(OperatorTest, IsSubtractionWorks)
 TEST(OperatorTest, IsMultiplicationWorks)
 {
     Operator nullOperator;
-    Operator addOperator("+");    Operator subtractOperator("-");
+    Operator addOperator("+");
+    Operator subtractOperator("-");
     Operator multiplyOperator("*");
     Operator divideOperator("/");
     Operator raiseToPowerOperator("^");
@@ -124,7 +127,8 @@ TEST(OperatorTest, IsMultiplicationWorks)
 TEST(OperatorTest, IsDivisionWorks)
 {
     Operator nullOperator;
-    Operator addOperator("+");    Operator subtractOperator("-");
+    Operator addOperator("+");
+    Operator subtractOperator("-");
     Operator multiplyOperator("*");
     Operator divideOperator("/");
     Operator raiseToPowerOperator("^");
@@ -146,7 +150,8 @@ TEST(OperatorTest, IsDivisionWorks)
 TEST(OperatorTest, IsRaiseToPowerWorks)
 {
     Operator nullOperator;
-    Operator addOperator("+");    Operator subtractOperator("-");
+    Operator addOperator("+");
+    Operator subtractOperator("-");
     Operator multiplyOperator("*");
     Operator divideOperator("/");
     Operator raiseToPowerOperator("^");
@@ -169,7 +174,8 @@ TEST(OperatorTest, IsRaiseToPowerWorks)
 TEST(OperatorTest, IsAnOperatorThatCanPerformedWorks)
 {
     Operator nullOperator;
-    Operator addOperator("+");    Operator subtractOperator("-");
+    Operator addOperator("+");
+    Operator subtractOperator("-");
     Operator multiplyOperator("*");
     Operator divideOperator("/");
     Operator raiseToPowerOperator("^");
@@ -191,7 +197,8 @@ TEST(OperatorTest, IsAnOperatorThatCanPerformedWorks)
 TEST(OperatorTest, IsOpeningGroupOperatorWorks)
 {
     Operator nullOperator;
-    Operator addOperator("+");    Operator subtractOperator("-");
+    Operator addOperator("+");
+    Operator subtractOperator("-");
     Operator multiplyOperator("*");
     Operator divideOperator("/");
     Operator raiseToPowerOperator("^");
@@ -213,7 +220,8 @@ TEST(OperatorTest, IsOpeningGroupOperatorWorks)
 TEST(OperatorTest, IsClosingGroupOperatorWorks)
 {
     Operator nullOperator;
-    Operator addOperator("+");    Operator subtractOperator("-");
+    Operator addOperator("+");
+    Operator subtractOperator("-");
     Operator multiplyOperator("*");
     Operator divideOperator("/");
     Operator raiseToPowerOperator("^");
@@ -235,7 +243,8 @@ TEST(OperatorTest, IsClosingGroupOperatorWorks)
 TEST(OperatorTest, GetOperatorLevelWorks)
 {
     Operator nullOperator;
-    Operator addOperator("+");    Operator subtractOperator("-");
+    Operator addOperator("+");
+    Operator subtractOperator("-");
     Operator multiplyOperator("*");
     Operator divideOperator("/");
     Operator raiseToPowerOperator("^");
@@ -257,7 +266,8 @@ TEST(OperatorTest, GetOperatorLevelWorks)
 TEST(OperatorTest, GetOperatorStringValueWorks)
 {
     Operator nullOperator;
-    Operator addOperator("+");    Operator subtractOperator("-");
+    Operator addOperator("+");
+    Operator subtractOperator("-");
     Operator multiplyOperator("*");
     Operator divideOperator("/");
     Operator raiseToPowerOperator("^");

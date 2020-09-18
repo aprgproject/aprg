@@ -18,7 +18,8 @@ TEST(AlbaComplexNumberTest, ConstructionWorks)
 
 TEST(AlbaComplexNumberTest, OperatorEqualsWorks)
 {
-    AlbaComplexNumber<double> complex1(3, 4);    AlbaComplexNumber<double> complex2(3, 4);
+    AlbaComplexNumber<double> complex1(3, 4);
+    AlbaComplexNumber<double> complex2(3, 4);
     AlbaComplexNumber<double> complex3(3, 3);
     AlbaComplexNumber<double> complex4(4, 4);
     AlbaComplexNumber<double> complex5(5, 5);

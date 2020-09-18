@@ -23,7 +23,8 @@ TEST(AlbaCropFileTest, NoOutputIsWrittenWhenInputIsNonExisting)
 TEST(AlbaCropFileTest, CropUpdatesWorks)
 {
     ofstream testFile(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
-    ASSERT_TRUE(testFile.is_open());    for(unsigned int i = 0; i<100; i++)
+    ASSERT_TRUE(testFile.is_open());
+    for(unsigned int i = 0; i<100; i++)
     {
         testFile << i << endl;
     }
@@ -43,7 +44,8 @@ TEST(AlbaCropFileTest, CropUpdatesWorks)
 TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocument) // windows handling is problematic
 {
     ofstream testFile(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
-    ASSERT_TRUE(testFile.is_open());    for(unsigned int i = 0; i<10; i++)
+    ASSERT_TRUE(testFile.is_open());
+    for(unsigned int i = 0; i<10; i++)
     {
         testFile << i << endl;
     }
@@ -75,7 +77,8 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocument) // windows
 TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsTwiceOfTheWholeDocument) // windows handling is problematic
 {
     ofstream testFile(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
-    ASSERT_TRUE(testFile.is_open());    for(unsigned int i = 0; i<10; i++)
+    ASSERT_TRUE(testFile.is_open());
+    for(unsigned int i = 0; i<10; i++)
     {
         testFile << i << endl;
     }
@@ -113,7 +116,8 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsTwiceOfTheWholeDocument) // window
 TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocumentAtTheStart) // windows handling is problematic
 {
     ofstream testFile(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
-    ASSERT_TRUE(testFile.is_open());    for(unsigned int i = 0; i<10; i++)
+    ASSERT_TRUE(testFile.is_open());
+    for(unsigned int i = 0; i<10; i++)
     {
         testFile << i << endl;
     }
@@ -144,7 +148,8 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocumentAtTheStart) 
 TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocumentAtTheEnd) // windows handling is problematic
 {
     ofstream testFile(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
-    ASSERT_TRUE(testFile.is_open());    for(unsigned int i = 0; i<10; i++)
+    ASSERT_TRUE(testFile.is_open());
+    for(unsigned int i = 0; i<10; i++)
     {
         testFile << i << endl;
     }

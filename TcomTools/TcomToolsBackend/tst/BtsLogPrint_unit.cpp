@@ -253,7 +253,8 @@ TEST(BtsLogPrintTest, OperatorGreaterThanWorksWhenHigherBtsTimeIsCompared)
 TEST(BtsLogPrintTest, OperatorEqualityWorksBasedOnBtsTime)
 {
     BtsLogPrint logPrint1("000009 23.09 12:08:04.251  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T00:00:16.700634Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
-    BtsLogPrint logPrint2("000009 23.09 12:08:04.251  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T00:00:16.700634Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");    BtsLogPrint logPrint3("FCT-1011-3-BTSOMex <1990-01-01T00:00:16.700634Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
+    BtsLogPrint logPrint2("000009 23.09 12:08:04.251  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T00:00:16.700634Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
+    BtsLogPrint logPrint3("FCT-1011-3-BTSOMex <1990-01-01T00:00:16.700634Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
     BtsLogPrint differentTimePrint4("FCT-1011-3-BTSOMex <2004-01-01T00:00:17.856856> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
 
     EXPECT_TRUE(logPrint1==logPrint2);
@@ -267,6 +268,7 @@ TEST(BtsLogPrintTest, OperatorEqualityWorksBasedPrint)
 {
     BtsLogPrint logPrint1("000009 23.09 12:08:04.251  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T00:00:16.700634Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
     BtsLogPrint differentPrint2("000009 23.09 12:08:04.251  [192.168.255.1]  19 FCT-1011-3-BTSOMex <1990-01-01T00:00:16.700634Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a different print");
+
     EXPECT_FALSE(differentPrint2==logPrint1);
 }
 
