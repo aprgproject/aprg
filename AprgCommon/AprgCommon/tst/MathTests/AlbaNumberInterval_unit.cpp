@@ -151,11 +151,10 @@ TEST(AlbaNumberIntervalTest, SetNewEndpointWorks)
     EXPECT_EQ(createCloseEndpoint(784), interval4.getHigherEndpoint());
 }
 
-TEST(AlbaNumberIntervalEndpointTest, GetEndpointTypeWithCheckingIfItsClosedAsExpected)
+TEST(AlbaNumberIntervalEndpointTest, GetEndpointTypeWithCheckingIfItsClosedWorks)
 {
     EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Close, getEndpointTypeWithCheckingIfItsClosed(true));
-    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Open, getEndpointTypeWithCheckingIfItsClosed(false));
-}
+    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Open, getEndpointTypeWithCheckingIfItsClosed(false));}
 
 TEST(AlbaNumberIntervalEndpointTest, CreateOpenEndpointWorks)
 {

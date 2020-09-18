@@ -232,11 +232,10 @@ TEST(OperatorTest, IsClosingGroupOperatorWorks)
     EXPECT_FALSE(invalidOperator.isClosingGroupOperator());
 }
 
-TEST(OperatorTest, GetOperatorLevelAsExpected)
+TEST(OperatorTest, GetOperatorLevelWorks)
 {
     Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
+    Operator addOperator("+");    Operator subtractOperator("-");
     Operator multiplyOperator("*");
     Operator divideOperator("/");
     Operator raiseToPowerOperator("^");
@@ -255,11 +254,10 @@ TEST(OperatorTest, GetOperatorLevelAsExpected)
     EXPECT_EQ(OperatorLevel::Unknown, invalidOperator.getOperatorLevel());
 }
 
-TEST(OperatorTest, GetOperatorStringValueAsExpected)
+TEST(OperatorTest, GetOperatorStringValueWorks)
 {
     Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
+    Operator addOperator("+");    Operator subtractOperator("-");
     Operator multiplyOperator("*");
     Operator divideOperator("/");
     Operator raiseToPowerOperator("^");
