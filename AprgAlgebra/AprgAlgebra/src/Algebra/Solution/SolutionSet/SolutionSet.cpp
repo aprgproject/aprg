@@ -5,9 +5,11 @@
 #include <algorithm>
 #include <sstream>
 
+
+#include <Debug/AlbaDebug.hpp>
+
 using namespace alba::mathHelper;
 using namespace std;
-
 namespace alba
 {
 
@@ -39,28 +41,57 @@ AlbaNumberIntervals const& SolutionSet::getAcceptedIntervals() const
 
 string SolutionSet::getDisplayableString() const
 {
-    stringstream result;
-    result << "AcceptedValues:{";
+    stringstream ss;
+    bool isFirst(true);
+    ss << "AcceptedValues:{";
     for(AlbaNumber const& acceptedValue : m_acceptedValues)
     {
-        result << acceptedValue << ", ";
+        ALBA_PRINT3(acceptedValue, isFirst, ss.str());
+        if(isFirst)
+        {
+            isFirst = false;
+        }
+        else
+        {
+            ss << ", ";
+        }
+        ss << acceptedValue;
     }
-    result << "} RejectedValues:{";
+    isFirst=true;
+    ss << "} RejectedValues:{";
     for(AlbaNumber const& rejectedValue : m_rejectedValues)
     {
-        result << rejectedValue << ", ";
+        ALBA_PRINT3(rejectedValue, isFirst, ss.str());
+        if(isFirst)
+        {
+            isFirst = false;
+        }
+        else
+        {
+            ss << ", ";
+        }
+        ss << rejectedValue;
     }
-    result << "} AcceptedInterval:{";
+    isFirst=true;
+    ss << "} AcceptedInterval:{";
     for(AlbaNumberInterval const& acceptedInterval : m_acceptedIntervals)
     {
-        result << acceptedInterval << ", ";
+        ALBA_PRINT3(acceptedInterval, isFirst, ss.str());
+        if(isFirst)
+        {
+            isFirst = false;
+        }
+        else
+        {
+            ss << ", ";
+        }
+        ss << acceptedInterval;
     }
-    result << "}";
-    return result.str();
+    ss << "}";
+    return ss.str();
 }
 
-void SolutionSet::addAcceptedValue(AlbaNumber const& value)
-{
+void SolutionSet::addAcceptedValue(AlbaNumber const& value){
     m_acceptedValues.emplace_back(value);
 }
 

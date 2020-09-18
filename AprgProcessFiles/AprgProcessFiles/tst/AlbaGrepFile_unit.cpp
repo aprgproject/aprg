@@ -20,11 +20,10 @@ TEST(AlbaGrepFileTest, NoOutputIsWrittenWhenInputIsNonExisting)
     EXPECT_FALSE(grepFile.isOutputFileWritten());
 }
 
-TEST(AlbaGrepFileTest, GrepUpdatesWorksAsExpected)
+TEST(AlbaGrepFileTest, GrepUpdatesWorks)
 {
     ofstream testFile(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
-    ASSERT_TRUE(testFile.is_open());
-    for(unsigned int i = 0; i<100; i++)
+    ASSERT_TRUE(testFile.is_open());    for(unsigned int i = 0; i<100; i++)
     {
         testFile << i << endl;
     }
@@ -41,11 +40,10 @@ TEST(AlbaGrepFileTest, GrepUpdatesWorksAsExpected)
     EXPECT_DOUBLE_EQ(100, capturedPercentage);
 }
 
-TEST(AlbaGrepFileTest, GrepWorksAsExpected)
+TEST(AlbaGrepFileTest, GrepWorks)
 {
     ofstream testFile(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
-    ASSERT_TRUE(testFile.is_open());
-    testFile << R"(As a person, I think that Mark is so cool)" << endl;
+    ASSERT_TRUE(testFile.is_open());    testFile << R"(As a person, I think that Mark is so cool)" << endl;
     testFile << R"(As a designer, I know that Mark Earvin is so cool)" << endl;
     testFile << R"(As a programmer, I know that Earvin is so cool)" << endl;
     testFile << R"(As a coder, I know that MARKalba is so cool)" << endl;

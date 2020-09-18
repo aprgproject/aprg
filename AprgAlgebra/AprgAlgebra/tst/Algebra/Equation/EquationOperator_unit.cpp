@@ -55,11 +55,10 @@ TEST(EquationOperatorTest, LessThanEquationOperatorWorks)
     EXPECT_TRUE(EquationOperator("=") < EquationOperator(">"));
 }
 
-TEST(EquationOperatorTest, IsEqualWorksAsExpected)
+TEST(EquationOperatorTest, IsEqualWorks)
 {
     EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
+    EquationOperator singleEqualityOperator("=");    EquationOperator doubleEqualityOperator("==");
     EquationOperator inequalityOperator("!=");
     EquationOperator lessThanOperator("<");
     EquationOperator greaterThanOperator(">");
@@ -78,11 +77,10 @@ TEST(EquationOperatorTest, IsEqualWorksAsExpected)
     EXPECT_FALSE(invalidEquationOperator.isEqual());
 }
 
-TEST(EquationOperatorTest, IsNotEqualWorksAsExpected)
+TEST(EquationOperatorTest, IsNotEqualWorks)
 {
     EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
+    EquationOperator singleEqualityOperator("=");    EquationOperator doubleEqualityOperator("==");
     EquationOperator inequalityOperator("!=");
     EquationOperator lessThanOperator("<");
     EquationOperator greaterThanOperator(">");
@@ -101,11 +99,10 @@ TEST(EquationOperatorTest, IsNotEqualWorksAsExpected)
     EXPECT_FALSE(invalidEquationOperator.isNotEqual());
 }
 
-TEST(EquationOperatorTest, IsLessThanWorksAsExpected)
+TEST(EquationOperatorTest, IsLessThanWorks)
 {
     EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
+    EquationOperator singleEqualityOperator("=");    EquationOperator doubleEqualityOperator("==");
     EquationOperator inequalityOperator("!=");
     EquationOperator lessThanOperator("<");
     EquationOperator greaterThanOperator(">");
@@ -124,11 +121,10 @@ TEST(EquationOperatorTest, IsLessThanWorksAsExpected)
     EXPECT_FALSE(invalidEquationOperator.isLessThan());
 }
 
-TEST(EquationOperatorTest, IsGreaterThanWorksAsExpected)
+TEST(EquationOperatorTest, IsGreaterThanWorks)
 {
     EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
+    EquationOperator singleEqualityOperator("=");    EquationOperator doubleEqualityOperator("==");
     EquationOperator inequalityOperator("!=");
     EquationOperator lessThanOperator("<");
     EquationOperator greaterThanOperator(">");
@@ -147,11 +143,10 @@ TEST(EquationOperatorTest, IsGreaterThanWorksAsExpected)
     EXPECT_FALSE(invalidEquationOperator.isGreaterThan());
 }
 
-TEST(EquationOperatorTest, IsLessThanOrEqualWorksAsExpected)
+TEST(EquationOperatorTest, IsLessThanOrEqualWorks)
 {
     EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
+    EquationOperator singleEqualityOperator("=");    EquationOperator doubleEqualityOperator("==");
     EquationOperator inequalityOperator("!=");
     EquationOperator lessThanOperator("<");
     EquationOperator greaterThanOperator(">");
@@ -170,11 +165,10 @@ TEST(EquationOperatorTest, IsLessThanOrEqualWorksAsExpected)
     EXPECT_FALSE(invalidEquationOperator.isLessThanOrEqual());
 }
 
-TEST(EquationOperatorTest, IsGreaterThanOrEqualWorksAsExpected)
+TEST(EquationOperatorTest, IsGreaterThanOrEqualWorks)
 {
     EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
+    EquationOperator singleEqualityOperator("=");    EquationOperator doubleEqualityOperator("==");
     EquationOperator inequalityOperator("!=");
     EquationOperator lessThanOperator("<");
     EquationOperator greaterThanOperator(">");
@@ -193,11 +187,10 @@ TEST(EquationOperatorTest, IsGreaterThanOrEqualWorksAsExpected)
     EXPECT_FALSE(invalidEquationOperator.isGreaterThanOrEqual());
 }
 
-TEST(EquationOperatorTest, IsAnEqualityVariantWorksAsExpected)
+TEST(EquationOperatorTest, IsAnEqualityVariantWorks)
 {
     EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
+    EquationOperator singleEqualityOperator("=");    EquationOperator doubleEqualityOperator("==");
     EquationOperator inequalityOperator("!=");
     EquationOperator lessThanOperator("<");
     EquationOperator greaterThanOperator(">");
@@ -216,11 +209,10 @@ TEST(EquationOperatorTest, IsAnEqualityVariantWorksAsExpected)
     EXPECT_FALSE(invalidEquationOperator.isAnEqualityVariant());
 }
 
-TEST(EquationOperatorTest, IsALessThanVariantWorksAsExpected)
+TEST(EquationOperatorTest, IsALessThanVariantWorks)
 {
     EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
+    EquationOperator singleEqualityOperator("=");    EquationOperator doubleEqualityOperator("==");
     EquationOperator inequalityOperator("!=");
     EquationOperator lessThanOperator("<");
     EquationOperator greaterThanOperator(">");
@@ -239,11 +231,10 @@ TEST(EquationOperatorTest, IsALessThanVariantWorksAsExpected)
     EXPECT_FALSE(invalidEquationOperator.isALessThanVariant());
 }
 
-TEST(EquationOperatorTest, IsAGreaterThanVariantWorksAsExpected)
+TEST(EquationOperatorTest, IsAGreaterThanVariantWorks)
 {
     EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
+    EquationOperator singleEqualityOperator("=");    EquationOperator doubleEqualityOperator("==");
     EquationOperator inequalityOperator("!=");
     EquationOperator lessThanOperator("<");
     EquationOperator greaterThanOperator(">");
