@@ -22,31 +22,28 @@ TEST(LrmTest, MasterTcomCanBeSet)
     EXPECT_EQ(0xA1BAu, lrm.getMasterTcomNid());
 }
 
-TEST(LrmTest, GetFspAddressWorksAsExpected)
+TEST(LrmTest, GetFspAddressWorks)
 {
     LRM lrm(ComponentName::LRM);
-
     EXPECT_EQ(0xA1u, lrm.getFspAddressFromDspAddress(0xA1BA));
     EXPECT_EQ(0xA1u, lrm.getFspAddressFromDspAddress(0xA100));
     EXPECT_EQ(0xBAu, lrm.getFspAddressFromDspAddress(0xBAA1));
     EXPECT_EQ(0u, lrm.getFspAddressFromDspAddress(0));
 }
 
-TEST(LrmTest, GetKeplerAddressWithoutCorWorksAsExpected)
+TEST(LrmTest, GetKeplerAddressWithoutCorWorks)
 {
     LRM lrm(ComponentName::LRM);
-
     EXPECT_EQ(0xA1B0u, lrm.getKeplerAddressWithoutCore(0xA1BA));
     EXPECT_EQ(0xA100u, lrm.getKeplerAddressWithoutCore(0xA100));
     EXPECT_EQ(0xBAA0u, lrm.getKeplerAddressWithoutCore(0xBAA1));
     EXPECT_EQ(0u, lrm.getKeplerAddressWithoutCore(0));
 }
 
-TEST(LrmTest, IsTcomInThisK2WorksAsExpected)
+TEST(LrmTest, IsTcomInThisK2Works)
 {
     LRM lrm(ComponentName::LRM);
     lrm.setMasterTcomNid(0xA1BA);
-
     EXPECT_TRUE(lrm.isTcomInThisK2(0xA1BA));
     EXPECT_TRUE(lrm.isTcomInThisK2(0xA1BB));
     EXPECT_FALSE(lrm.isTcomInThisK2(0xA100));
@@ -55,11 +52,10 @@ TEST(LrmTest, IsTcomInThisK2WorksAsExpected)
     EXPECT_FALSE(lrm.isTcomInThisK2(0x0000));
 }
 
-TEST(LrmTest, GetPowerGroupIdWorksAsExpected)
+TEST(LrmTest, GetPowerGroupIdWorks)
 {
     SLrmConfigurationDataInd payload;
-    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);
-    LRM lrm(ComponentName::LRM);
+    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);    LRM lrm(ComponentName::LRM);
 
     lrm.saveDspInformation(payload);
 
@@ -70,11 +66,10 @@ TEST(LrmTest, GetPowerGroupIdWorksAsExpected)
     EXPECT_EQ(2u, lrm.getPowerGroupId(0x1260));
 }
 
-TEST(LrmTest, GetDspModeIdWorksAsExpected)
+TEST(LrmTest, GetDspModeIdWorks)
 {
     SLrmConfigurationDataInd payload;
-    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);
-    LRM lrm(ComponentName::LRM);
+    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);    LRM lrm(ComponentName::LRM);
 
     lrm.saveDspInformation(payload);
 
@@ -85,11 +80,10 @@ TEST(LrmTest, GetDspModeIdWorksAsExpected)
     EXPECT_EQ(EDspMode_Kepler_DCD_DCD, lrm.getDspMode(0x1260));
 }
 
-TEST(LrmTest, GetNumberOfK2sInPowerGroupWorksAsExpected)
+TEST(LrmTest, GetNumberOfK2sInPowerGroupWorks)
 {
     SLrmConfigurationDataInd payload;
-    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);
-    LRM lrm(ComponentName::LRM);
+    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);    LRM lrm(ComponentName::LRM);
 
     lrm.savePowerGroupInformation(payload);
 
@@ -98,11 +92,10 @@ TEST(LrmTest, GetNumberOfK2sInPowerGroupWorksAsExpected)
     EXPECT_EQ(2u, lrm.getNumberOfK2sInPowerGroup(2));
 }
 
-TEST(LrmTest, GetDspAddressesForLcgIdWorksAsExpected)
+TEST(LrmTest, GetDspAddressesForLcgIdWorks)
 {
     SLrmConfigurationDataInd payload;
-    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);
-    LRM lrm(ComponentName::LRM);
+    MessageFactory::saveLrmConfigurationDataPayloadForMoreThan2K2sWithNbic(payload);    LRM lrm(ComponentName::LRM);
 
     lrm.saveDspInformation(payload);
 
