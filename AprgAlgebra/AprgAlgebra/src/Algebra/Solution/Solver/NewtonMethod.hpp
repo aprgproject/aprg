@@ -1,9 +1,8 @@
 #pragma once
 
-#include <Math/AlbaNumber.hpp>
+#include <Math/Number/AlbaNumber.hpp>
 
 #include <functional>
-
 namespace alba
 {
 

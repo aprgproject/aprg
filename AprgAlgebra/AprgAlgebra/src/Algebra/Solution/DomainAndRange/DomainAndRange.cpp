@@ -214,11 +214,10 @@ AlbaNumber getTransitionValue(
     while(previousInputValue != newInputValue)
     {
         previousInputValue = newInputValue;
-        newInputValue = getAverage(currentValueToFiniteValue, currentValueToNonFiniteValue);
+        newInputValue = getAverageForAlbaNumber(currentValueToFiniteValue, currentValueToNonFiniteValue);
         AlbaNumber newOutputValue(functionToCheck(newInputValue));
         if(newOutputValue.isAFiniteValue())
-        {
-            currentValueToFiniteValue = newInputValue;
+        {            currentValueToFiniteValue = newInputValue;
         }
         else
         {

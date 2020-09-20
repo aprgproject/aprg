@@ -42,12 +42,11 @@ Polynomials factorizeIncreasingAndDecreasingExponentsFormIfPossible(Polynomial c
             {
                 Monomial unitFirstMonomial(1, firstMonomial.getVariablesToExponentsMapConstReference());
                 Monomial unitSecondMonomial(1, lastMonomial.getVariablesToExponentsMapConstReference());
-                unitFirstMonomial.raiseToPowerNumber(AlbaNumber(1, exponentDivisor));
-                unitSecondMonomial.raiseToPowerNumber(AlbaNumber(1, exponentDivisor));
+                unitFirstMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, exponentDivisor));
+                unitSecondMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, exponentDivisor));
                 Monomials monomialsWithExponentsInOrder(getMonomialsWithExponentsInOrder(exponentDivisor, unitFirstMonomial, unitSecondMonomial));
                 if(areAllMonomialsFoundInMonomialsWithExponentsInOrder(monomials, monomialsWithExponentsInOrder))
-                {
-                    AlbaNumbers coefficients(getCoefficientsInMonomialsWithExponentsInOrder(polynomial, monomialsWithExponentsInOrder));
+                {                    AlbaNumbers coefficients(getCoefficientsInMonomialsWithExponentsInOrder(polynomial, monomialsWithExponentsInOrder));
                     result = factorizePolynomialForm(
                                 polynomial,
                                 coefficients,
@@ -155,11 +154,10 @@ AlbaNumbers calculatePolynomialRoots(AlbaNumbers const& coefficients)
     AlbaNumbers result;
     if(coefficients.size() == 3)
     {
-        result = getQuadraticRoots(coefficients.at(0), coefficients.at(1), coefficients.at(2));
+        result = getQuadraticRealRoots(coefficients.at(0), coefficients.at(1), coefficients.at(2));
     }
     else
-    {
-        AlbaNumbers derivativeRoots(calculatePolynomialRoots(getDerivativeCoefficients(coefficients)));
+    {        AlbaNumbers derivativeRoots(calculatePolynomialRoots(getDerivativeCoefficients(coefficients)));
         result = calculatePolynomialRootsUsingBrentMethod(derivativeRoots, coefficients);
     }
     return result;
@@ -196,11 +194,10 @@ AlbaNumber getMaxAbsoluteValueForRootFinding(AlbaNumbers const& coefficients)
     AlbaNumber result(0);
     if(!coefficients.empty())
     {
-        result = max(getAbsoluteValue(coefficients.front()), getAbsoluteValue(coefficients.back()));
+        result = max(getAbsoluteValueForAlbaNumber(coefficients.front()), getAbsoluteValueForAlbaNumber(coefficients.back()));
     }
     return result;
 }
-
 AlbaNumbers getDerivativeCoefficients(AlbaNumbers const& coefficients)
 {
     AlbaNumbers derivativeCoefficients(coefficients);

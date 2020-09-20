@@ -5,10 +5,10 @@
 
 #include <functional>
 #include <list>
+#include <string>
 #include <vector>
 
-namespace alba
-{
+namespace alba{
 
 namespace algebra
 {
@@ -27,10 +27,10 @@ public:
         bool hasPositiveAssociation() const;
         bool hasNegativeAssociation() const;
         unsigned int getAssociationPriority() const;
+        std::string getDisplayableString() const;
         void clear();
         BaseTermSharedPointer baseTermSharedPointer;
-        TermAssociationType association;
-    };
+        TermAssociationType association;    };
     using TermsWithDetails=std::vector<TermWithDetails>;
 
     TermsWithAssociation();
@@ -56,6 +56,8 @@ public:
 private:
     TermsWithDetails m_termsWithDetails;
 };
+
+std::ostream & operator<<(std::ostream & out, TermsWithAssociation::TermWithDetails const& termWithDetails);
 
 }
 

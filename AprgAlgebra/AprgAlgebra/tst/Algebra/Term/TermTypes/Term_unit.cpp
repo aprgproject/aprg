@@ -16,11 +16,10 @@ TEST(TermTest, TermsAsConstantsWorks)
 {
     Term constant1(4353);
     Term constant2(-3248);
-    Term constant3(AlbaNumber(3498, 3459));
+    Term constant3(AlbaNumber::createFraction(3498, 3459));
     Term constant4(-34.8767);
 
-    ASSERT_EQ(TermType::Constant, constant1.getTermType());
-    EXPECT_DOUBLE_EQ(4353, constant1.  getConstantConstReference().getNumberConstReference().getDouble());
+    ASSERT_EQ(TermType::Constant, constant1.getTermType());    EXPECT_DOUBLE_EQ(4353, constant1.  getConstantConstReference().getNumberConstReference().getDouble());
 
     ASSERT_EQ(TermType::Constant, constant2.getTermType());
     EXPECT_DOUBLE_EQ(-3248, constant2.  getConstantConstReference().getNumberConstReference().getDouble());

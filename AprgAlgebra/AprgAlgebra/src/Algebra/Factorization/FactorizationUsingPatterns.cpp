@@ -80,12 +80,11 @@ void addFactorsOfDifferenceOfSquares(Polynomials & result, Polynomial const& pol
         firstMonomial.multiplyNumber(-1);
         simplifyPolynomialThenEmplaceBackIfNotEmpty(result, createPolynomialFromConstant(Constant(-1)));
     }
-    firstMonomial.raiseToPowerNumber(AlbaNumber(1, 2));
-    secondMonomial.raiseToPowerNumber(AlbaNumber(1, 2));
+    firstMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, 2));
+    secondMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, 2));
     simplifyPolynomialThenEmplaceBackIfNotEmpty(result, Polynomial{firstMonomial, secondMonomial});
     secondMonomial.multiplyNumber(-1);
-    simplifyPolynomialThenEmplaceBackIfNotEmpty(result, Polynomial{firstMonomial, secondMonomial});
-}
+    simplifyPolynomialThenEmplaceBackIfNotEmpty(result, Polynomial{firstMonomial, secondMonomial});}
 
 void addFactorsOfDifferenceOfCubes(Polynomials & result, Polynomial const& polynomial)
 {
@@ -101,12 +100,11 @@ void addFactorsOfDifferenceOfCubes(Polynomials & result, Polynomial const& polyn
         firstMonomial.multiplyNumber(-1);
         simplifyPolynomialThenEmplaceBackIfNotEmpty(result, createPolynomialFromConstant(Constant(-1)));
     }
-    firstMonomial.raiseToPowerNumber(AlbaNumber(1, 3));
-    secondMonomial.raiseToPowerNumber(AlbaNumber(1, 3));
+    firstMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, 3));
+    secondMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, 3));
     Monomial firstMonomialSquared(firstMonomial);
     Monomial secondMonomialSquared(secondMonomial);
-    Monomial productOfFirstAndSecond(firstMonomial);
-    firstMonomialSquared.raiseToPowerNumber(2);
+    Monomial productOfFirstAndSecond(firstMonomial);    firstMonomialSquared.raiseToPowerNumber(2);
     secondMonomialSquared.raiseToPowerNumber(2);
     productOfFirstAndSecond.multiplyMonomial(secondMonomial);
     secondMonomial.multiplyNumber(-1);
@@ -125,12 +123,11 @@ void addFactorsOfSumOfCubes(Polynomials & result, Polynomial const& polynomial)
         secondMonomial.multiplyNumber(-1);
         simplifyPolynomialThenEmplaceBackIfNotEmpty(result, createPolynomialFromConstant(Constant(-1)));
     }
-    firstMonomial.raiseToPowerNumber(AlbaNumber(1, 3));
-    secondMonomial.raiseToPowerNumber(AlbaNumber(1, 3));
+    firstMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, 3));
+    secondMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, 3));
     Monomial firstMonomialSquared(firstMonomial);
     Monomial secondMonomialSquared(secondMonomial);
-    Monomial productOfFirstAndSecond(firstMonomial);
-    firstMonomialSquared.raiseToPowerNumber(2);
+    Monomial productOfFirstAndSecond(firstMonomial);    firstMonomialSquared.raiseToPowerNumber(2);
     secondMonomialSquared.raiseToPowerNumber(2);
     productOfFirstAndSecond.multiplyMonomial(secondMonomial);
     productOfFirstAndSecond.multiplyNumber(-1);

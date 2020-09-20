@@ -261,12 +261,11 @@ AlbaComplexNumber<DataType> AlbaComplexNumber<DataType>::getNthRoot(
         unsigned int const nthRoot,
         unsigned int const root) const
 {
-    assert(nthRoot<=root);
-    double modulusPart = pow(static_cast<double>(getModulus()), 1/static_cast<double>(root));
+    assert(nthRoot<root);
+    double modulusPart = pow(static_cast<double>(getModulus()), static_cast<double>(1)/root);
     double angleToBeUsed = (getAngleInRadians() + getPi()*2*nthRoot) / root;
     double realPart = modulusPart * cos(angleToBeUsed);
-    double imaginaryPart = modulusPart * sin(angleToBeUsed);
-    return AlbaComplexNumber<DataType>(static_cast<DataType>(realPart), static_cast<DataType>(imaginaryPart));
+    double imaginaryPart = modulusPart * sin(angleToBeUsed);    return AlbaComplexNumber<DataType>(static_cast<DataType>(realPart), static_cast<DataType>(imaginaryPart));
 }
 template AlbaComplexNumber<float> AlbaComplexNumber<float>::getNthRoot(
         unsigned int const nthRoot,

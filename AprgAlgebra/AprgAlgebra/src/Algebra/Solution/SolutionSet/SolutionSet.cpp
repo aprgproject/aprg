@@ -147,11 +147,10 @@ void SolutionSet::prepareValuesToCheck(AlbaNumbers & valuesToCheck)
                     valuesToCheck.begin(),
                     valuesToCheck.end(),
                     [](AlbaNumber const& number){
-                    return number.isPositiveInfinity() || number.isNegativeInfinity();
+                    return !number.isAFiniteValue() || number.isComplexNumberType();
                 }),
             valuesToCheck.end());
-    stable_sort(valuesToCheck.begin(), valuesToCheck.end());
-}
+    stable_sort(valuesToCheck.begin(), valuesToCheck.end());}
 
 void SolutionSet::checkValuesAndPutIntervals(
         AlbaNumbers const& valuesToCheck,
@@ -163,24 +162,22 @@ void SolutionSet::checkValuesAndPutIntervals(
     {
         if(isFirst)
         {
-            AlbaNumber intervalValueToCheck(valueToCheck-getAbsoluteValue(valueToCheck));
+            AlbaNumber intervalValueToCheck(valueToCheck-getAbsoluteValueForAlbaNumber(valueToCheck));
             addInterval(AlbaNumber::Value::NegativeInfinity, intervalValueToCheck, valueToCheck, isValueAcceptedFunction);
             isFirst=false;
         }
         else
         {
-            AlbaNumber intervalValueToCheck(getAverage(previousValueToCheck, valueToCheck));
+            AlbaNumber intervalValueToCheck(getAverageForAlbaNumber(previousValueToCheck, valueToCheck));
             addInterval(previousValueToCheck, intervalValueToCheck, valueToCheck, isValueAcceptedFunction);
         }
-        previousValueToCheck = valueToCheck;
-    }
+        previousValueToCheck = valueToCheck;    }
     if(!valuesToCheck.empty())
     {
-        AlbaNumber intervalValueToCheck(previousValueToCheck+getAbsoluteValue(previousValueToCheck));
+        AlbaNumber intervalValueToCheck(previousValueToCheck+getAbsoluteValueForAlbaNumber(previousValueToCheck));
         addInterval(previousValueToCheck, intervalValueToCheck, AlbaNumber::Value::PositiveInfinity, isValueAcceptedFunction);
     }
 }
-
 void SolutionSet::addInterval(
         AlbaNumber const& lowerEndpointValue,
         AlbaNumber const& intervalValueToCheck,

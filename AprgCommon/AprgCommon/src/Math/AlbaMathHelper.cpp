@@ -129,10 +129,15 @@ template <> bool isAlmostEqual<double>(double const value1, double const value2)
 //}
 
 
+bool isAlmostEqual(AlbaNumber const& value1, AlbaNumber const& value2)
+{
+    return value1 == value2;
+}
+
+
 bool isAlmostEqual(double const value1, double const value2, double const differenceTolerance)
 {
-    return value1 == value2 || getAbsoluteValue(value1-value2) <= differenceTolerance;
-}
+    return value1 == value2 || getAbsoluteValue(value1-value2) <= differenceTolerance;}
 
 
 //isAlmostAnInteger
@@ -340,26 +345,50 @@ AlbaNumber getAverageForAlbaNumber(AlbaNumber const& value1, AlbaNumber const& v
     return (value1+value2)/2;
 }
 
-
-AlbaNumbers getQuadraticRoots(
+AlbaNumbers getQuadraticRealRoots(
         AlbaNumber const& a,
         AlbaNumber const& b,
         AlbaNumber const& c)
 {
     AlbaNumbers result;
+    AlbaNumber twoA = a*2;
+    AlbaNumber firstPart((-b)/twoA);
     AlbaNumber discriminant((b^2)-(a*c*4));
     if(discriminant >= 0)
     {
         AlbaNumber discriminantSquaredRoot
                 = discriminant^(AlbaNumber::createFraction(1, 2));
-        AlbaNumber firstPart((-b)/(a*2));
-        AlbaNumber secondPart(discriminantSquaredRoot/(a*2));
+        AlbaNumber secondPart(discriminantSquaredRoot/twoA);
         result.emplace_back(firstPart + secondPart);
         result.emplace_back(firstPart - secondPart);
     }
     return result;
 }
 
+AlbaNumbers getQuadraticRoots(
+        AlbaNumber const& a,        AlbaNumber const& b,
+        AlbaNumber const& c)
+{
+    AlbaNumbers result;
+    AlbaNumber twoA = a*2;
+    AlbaNumber firstPart((-b)/twoA);
+    AlbaNumber discriminant((b^2)-(a*c*4));
+    if(discriminant >= 0)
+    {
+        AlbaNumber discriminantSquaredRoot
+                = discriminant^(AlbaNumber::createFraction(1, 2));
+        AlbaNumber secondPart(discriminantSquaredRoot/twoA);
+        result.emplace_back(firstPart + secondPart);
+        result.emplace_back(firstPart - secondPart);
+    }
+    else
+    {
+        AlbaComplexNumber<double> discriminantComplex(discriminant.getDouble(), 0.0);
+        result.emplace_back(firstPart + createNumberFromComplexNumber(discriminantComplex.getNthRoot(0, 2))/twoA);
+        result.emplace_back(firstPart + createNumberFromComplexNumber(discriminantComplex.getNthRoot(1, 2))/twoA);
+    }
+    return result;
+}
 unsigned int getFactorial(unsigned int const number)
 {
     unsigned int result(1);
@@ -742,10 +771,18 @@ AlbaComplexNumber<float> createComplexNumberFromData(AlbaNumber::ComplexNumberDa
     return AlbaComplexNumber<float>(data.realPart, data.imaginaryPart);
 }
 
+
+template <typename NumberType>
+AlbaNumber createNumberFromComplexNumber(AlbaComplexNumber<NumberType> const& complexNumber)
+{
+    return AlbaNumber::createComplexNumber(complexNumber.getRealPart(), complexNumber.getImaginaryPart());
+}
+template AlbaNumber createNumberFromComplexNumber<double>(AlbaComplexNumber<double> const& value);
+
+
 void saveToComplexNumberData(AlbaNumber::ComplexNumberData & data, AlbaComplexNumber<float> const& number)
 {
-    data.realPart = number.getRealPart();
-    data.imaginaryPart = number.getImaginaryPart();
+    data.realPart = number.getRealPart();    data.imaginaryPart = number.getImaginaryPart();
 }
 
 }//namespace mathHelper

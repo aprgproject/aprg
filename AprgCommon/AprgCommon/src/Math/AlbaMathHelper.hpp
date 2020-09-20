@@ -33,10 +33,10 @@ double convertRadiansToDegrees(double const valueInRadians);
 
 //Precision related functions
 template <typename NumberType> bool isAlmostEqual(NumberType const value1, NumberType const value2);
+bool isAlmostEqual(AlbaNumber const& value1, AlbaNumber const& value2);
 bool isAlmostEqual(double const value1, double const value2, double const differenceTolerance);
 template <typename NumberType1, typename NumberType2> bool isAlmostAnInteger(NumberType1 const value);
-bool isAlmostAnInteger(double const value, double const differenceTolerance);
-template <typename NumberType> bool isValueBeyondLimits(double const value);
+bool isAlmostAnInteger(double const value, double const differenceTolerance);template <typename NumberType> bool isValueBeyondLimits(double const value);
 template <> bool isValueBeyondLimits<int>(double const value);
 template <> bool isValueBeyondLimits<unsigned int>(double const value);
 template <> bool isValueBeyondLimits<short int>(double const value);
@@ -67,8 +67,8 @@ template <typename NumberType> NumberType getSquareRootOfXSquaredPlusYSquared(Nu
 template <typename NumberType> NumberType getSquareRootOfXSquaredPlusYSquaredPlusZSquared(NumberType const x, NumberType const y, NumberType const z);
 double getLogarithm(double const base, double const value);
 AlbaNumber getAverageForAlbaNumber(AlbaNumber const& value1, AlbaNumber const& value2);
+AlbaNumbers getQuadraticRealRoots(AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c);
 AlbaNumbers getQuadraticRoots(AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c);
-
 
 //Combinatorics functions
 unsigned int getFactorial(unsigned int const number);
@@ -125,8 +125,8 @@ bool areNumberOfDigitsOnTheIntegerLimit(unsigned int const digits);
 
 //Complex number related functions
 AlbaComplexNumber<float> createComplexNumberFromData(AlbaNumber::ComplexNumberData const& data);
+template <typename NumberType> AlbaNumber createNumberFromComplexNumber(AlbaComplexNumber<NumberType> const& number);
 void saveToComplexNumberData(AlbaNumber::ComplexNumberData & data, AlbaComplexNumber<float> const& number);
 
 }//namespace mathHelper
-
 }//namespace alba

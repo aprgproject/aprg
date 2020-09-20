@@ -1,11 +1,10 @@
 #pragma once
 
 #include <Algebra/Term/TermTypes/Term.hpp>
-#include <Math/AlbaNumber.hpp>
+#include <Math/Number/AlbaNumber.hpp>
 
 #include <set>
 #include <string>
-
 namespace alba
 {
 
