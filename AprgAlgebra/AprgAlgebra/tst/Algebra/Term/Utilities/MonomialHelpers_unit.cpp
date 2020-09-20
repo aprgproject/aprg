@@ -72,6 +72,7 @@ TEST(MonomialHelpersTest, GetGcfCoefficientInMonomialsWorks)
     EXPECT_EQ(AlbaNumber(5), getGcfCoefficientInMonomials({Monomial(0.33, {{"x", 1}}), Monomial(5, {{"x", -1}})}));
     EXPECT_EQ(AlbaNumber(3), getGcfCoefficientInMonomials({Monomial(6, {}), Monomial(9, {})}));
 }
+
 TEST(MonomialHelpersTest, GetLcmCoefficientInMonomialsWorks)
 {
     EXPECT_EQ(AlbaNumber(2), getLcmCoefficientInMonomials({Monomial(2, {{"x", 3}}), Monomial(2, {{"x", 7}})}));
@@ -81,6 +82,7 @@ TEST(MonomialHelpersTest, GetLcmCoefficientInMonomialsWorks)
     EXPECT_EQ(AlbaNumber(5), getLcmCoefficientInMonomials({Monomial(0.33, {{"x", 1}}), Monomial(5, {{"x", -1}})}));
     EXPECT_EQ(AlbaNumber(18), getLcmCoefficientInMonomials({Monomial(6, {}), Monomial(9, {})}));
 }
+
 TEST(MonomialHelpersTest, GetCommonSignInMonomialsWorks)
 {
     EXPECT_EQ(AlbaNumber(1), getCommonSignInMonomials({}));
@@ -96,7 +98,8 @@ TEST(MonomialHelpersTest, GetGcfMonomialInMonomialsWorks)
     Monomial monomialToVerify4(getGcfMonomialInMonomials({Monomial(AlbaNumber::createFraction(1, 4), {{"x", 1}}), Monomial(5, {})}));
     Monomial monomialToVerify5(getGcfMonomialInMonomials({Monomial(0.33, {{"x", 1}}), Monomial(5, {{"x", -1}})}));
     Monomial monomialToVerify6(getGcfMonomialInMonomials({Monomial(6, {}), Monomial(9, {})}));
-    Monomial monomialToVerify7(getGcfMonomialInMonomials({Monomial(-6, {}), Monomial(9, {})}));    Monomial monomialToVerify8(getGcfMonomialInMonomials({Monomial(6, {}), Monomial(-9, {})}));
+    Monomial monomialToVerify7(getGcfMonomialInMonomials({Monomial(-6, {}), Monomial(9, {})}));
+    Monomial monomialToVerify8(getGcfMonomialInMonomials({Monomial(6, {}), Monomial(-9, {})}));
     Monomial monomialToVerify9(getGcfMonomialInMonomials({Monomial(1, {}), Monomial(1, {})}));
     Monomial monomialToVerify10(getGcfMonomialInMonomials({Monomial(1, {}), Monomial(-1, {})}));
     Monomial monomialToVerify11(getGcfMonomialInMonomials({Monomial(-1, {}), Monomial(1, {})}));
@@ -108,7 +111,8 @@ TEST(MonomialHelpersTest, GetGcfMonomialInMonomialsWorks)
     Monomial monomialToExpect4(AlbaNumber::createFraction(1, 4), {});
     Monomial monomialToExpect5(5, {{"x", -1}});
     Monomial monomialToExpect6(3, {});
-    Monomial monomialToExpect7(-3, {});    Monomial monomialToExpect8(3, {});
+    Monomial monomialToExpect7(-3, {});
+    Monomial monomialToExpect8(3, {});
     Monomial monomialToExpect9(1, {});
     Monomial monomialToExpect10(1, {});
     Monomial monomialToExpect11(1, {});
@@ -135,6 +139,7 @@ TEST(MonomialHelpersTest, GetLcmMonomialInMonomialsWorks)
     Monomial monomialToVerify4(getLcmMonomialInMonomials({Monomial(AlbaNumber::createFraction(1, 4), {{"x", 1}}), Monomial(5, {})}));
     Monomial monomialToVerify5(getLcmMonomialInMonomials({Monomial(0.33, {{"x", 1}}), Monomial(5, {{"x", -1}})}));
     Monomial monomialToVerify6(getLcmMonomialInMonomials({Monomial(6, {}), Monomial(9, {})}));
+
     Monomial monomialToExpect1(2, {{"x", 7}});
     Monomial monomialToExpect2(8, {{"x", 3}, {"y", 7}});
     Monomial monomialToExpect3(4, {{"x", 1}});
@@ -189,6 +194,7 @@ TEST(MonomialHelpersTest, GetMonomialWithMinimumExponentsInMonomialsWorks)
     Monomial monomialToVerify4(getMonomialWithMinimumExponentsInMonomials({Monomial(AlbaNumber::createFraction(1, 4), {{"x", 1}}), Monomial(5, {})}));
     Monomial monomialToVerify5(getMonomialWithMinimumExponentsInMonomials({Monomial(0.33, {{"x", 1}}), Monomial(5, {{"x", -1}})}));
     Monomial monomialToVerify6(getMonomialWithMinimumExponentsInMonomials({Monomial(6, {}), Monomial(9, {})}));
+
     Monomial monomialToExpect1(1, {{"x", 3}});
     Monomial monomialToExpect2(1, {});
     Monomial monomialToExpect3(1, {{"x", 1}});
@@ -211,6 +217,7 @@ TEST(MonomialHelpersTest, GetMonomialWithMaximumExponentsInMonomialsWorks)
     Monomial monomialToVerify4(getMonomialWithMaximumExponentsInMonomials({Monomial(AlbaNumber::createFraction(1, 4), {{"x", 1}}), Monomial(5, {})}));
     Monomial monomialToVerify5(getMonomialWithMaximumExponentsInMonomials({Monomial(0.33, {{"x", 1}}), Monomial(5, {{"x", -1}})}));
     Monomial monomialToVerify6(getMonomialWithMaximumExponentsInMonomials({Monomial(6, {}), Monomial(9, {})}));
+
     Monomial monomialToExpect1(1, {{"x", 7}});
     Monomial monomialToExpect2(1, {{"x", 3}, {"y", 7}});
     Monomial monomialToExpect3(1, {{"x", 1}});

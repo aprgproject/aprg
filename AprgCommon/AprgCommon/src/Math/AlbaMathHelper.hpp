@@ -4,6 +4,7 @@
 #include <Math/Number/AlbaNumberTypes.hpp>
 
 #include <vector>
+
 namespace alba
 {
 
@@ -36,7 +37,8 @@ template <typename NumberType> bool isAlmostEqual(NumberType const value1, Numbe
 bool isAlmostEqual(AlbaNumber const& value1, AlbaNumber const& value2);
 bool isAlmostEqual(double const value1, double const value2, double const differenceTolerance);
 template <typename NumberType1, typename NumberType2> bool isAlmostAnInteger(NumberType1 const value);
-bool isAlmostAnInteger(double const value, double const differenceTolerance);template <typename NumberType> bool isValueBeyondLimits(double const value);
+bool isAlmostAnInteger(double const value, double const differenceTolerance);
+template <typename NumberType> bool isValueBeyondLimits(double const value);
 template <> bool isValueBeyondLimits<int>(double const value);
 template <> bool isValueBeyondLimits<unsigned int>(double const value);
 template <> bool isValueBeyondLimits<short int>(double const value);
@@ -69,6 +71,7 @@ double getLogarithm(double const base, double const value);
 AlbaNumber getAverageForAlbaNumber(AlbaNumber const& value1, AlbaNumber const& value2);
 AlbaNumbers getQuadraticRealRoots(AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c);
 AlbaNumbers getQuadraticRoots(AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c);
+
 
 //Combinatorics functions
 unsigned int getFactorial(unsigned int const number);
@@ -129,4 +132,5 @@ template <typename NumberType> AlbaNumber createNumberFromComplexNumber(AlbaComp
 void saveToComplexNumberData(AlbaNumber::ComplexNumberData & data, AlbaComplexNumber<float> const& number);
 
 }//namespace mathHelper
+
 }//namespace alba

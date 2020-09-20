@@ -8,7 +8,8 @@
 #include <string>
 #include <vector>
 
-namespace alba{
+namespace alba
+{
 
 namespace algebra
 {
@@ -30,7 +31,8 @@ public:
         std::string getDisplayableString() const;
         void clear();
         BaseTermSharedPointer baseTermSharedPointer;
-        TermAssociationType association;    };
+        TermAssociationType association;
+    };
     using TermsWithDetails=std::vector<TermWithDetails>;
 
     TermsWithAssociation();

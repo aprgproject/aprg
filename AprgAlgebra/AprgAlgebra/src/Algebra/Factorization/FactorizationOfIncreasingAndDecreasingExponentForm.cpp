@@ -4,6 +4,7 @@
 #include <Algebra/Factorization/BrentMethod.hpp>
 #include <Algebra/Factorization/Factorization.hpp>
 #include <Algebra/Factorization/FactorizationUtilities.hpp>
+#include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
 #include <algorithm>
@@ -46,7 +47,8 @@ Polynomials factorizeIncreasingAndDecreasingExponentsFormIfPossible(Polynomial c
                 unitSecondMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, exponentDivisor));
                 Monomials monomialsWithExponentsInOrder(getMonomialsWithExponentsInOrder(exponentDivisor, unitFirstMonomial, unitSecondMonomial));
                 if(areAllMonomialsFoundInMonomialsWithExponentsInOrder(monomials, monomialsWithExponentsInOrder))
-                {                    AlbaNumbers coefficients(getCoefficientsInMonomialsWithExponentsInOrder(polynomial, monomialsWithExponentsInOrder));
+                {
+                    AlbaNumbers coefficients(getCoefficientsInMonomialsWithExponentsInOrder(polynomial, monomialsWithExponentsInOrder));
                     result = factorizePolynomialForm(
                                 polynomial,
                                 coefficients,
@@ -89,7 +91,7 @@ Polynomials factorizePolynomialForm(
         simplifyPolynomialThenEmplaceBackIfNotEmpty(result, rootPolynomial);
         remainingPolynomial = quotientAndRemainder.quotient;
     }
-    if(!remainingPolynomial.isOne())
+    if(!isTheValue(remainingPolynomial, 1))
     {
         simplifyPolynomialThenEmplaceBackIfNotEmpty(result, remainingPolynomial);
     }
@@ -157,7 +159,8 @@ AlbaNumbers calculatePolynomialRoots(AlbaNumbers const& coefficients)
         result = getQuadraticRealRoots(coefficients.at(0), coefficients.at(1), coefficients.at(2));
     }
     else
-    {        AlbaNumbers derivativeRoots(calculatePolynomialRoots(getDerivativeCoefficients(coefficients)));
+    {
+        AlbaNumbers derivativeRoots(calculatePolynomialRoots(getDerivativeCoefficients(coefficients)));
         result = calculatePolynomialRootsUsingBrentMethod(derivativeRoots, coefficients);
     }
     return result;
@@ -198,6 +201,7 @@ AlbaNumber getMaxAbsoluteValueForRootFinding(AlbaNumbers const& coefficients)
     }
     return result;
 }
+
 AlbaNumbers getDerivativeCoefficients(AlbaNumbers const& coefficients)
 {
     AlbaNumbers derivativeCoefficients(coefficients);

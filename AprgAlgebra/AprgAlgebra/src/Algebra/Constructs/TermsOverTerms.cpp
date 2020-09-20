@@ -144,11 +144,11 @@ void TermsOverTerms::emplaceAndFactorizeTerm(Terms & termsResult, Term const& te
 
 void TermsOverTerms::emplaceAndFactorizePolynomialIfNeeded(Terms & termsResult, Polynomial const& polynomial) const
 {
-    if(polynomial.isZero())
+    if(isTheValue(polynomial, 0))
     {
         termsResult.emplace_back(Term(Constant(0)));
     }
-    else if(!polynomial.isOne())
+    else if(!isTheValue(polynomial, 1))
     {
         Polynomials polynomialFactors(factorize(polynomial));
         for(Polynomial const& polynomialFactor : polynomialFactors)
@@ -160,11 +160,11 @@ void TermsOverTerms::emplaceAndFactorizePolynomialIfNeeded(Terms & termsResult, 
 
 void TermsOverTerms::emplacePolynomialIfNeeded(Terms & termsResult, Polynomial const& polynomial) const
 {
-    if(polynomial.isZero())
+    if(isTheValue(polynomial, 0))
     {
         termsResult.emplace_back(Term(Constant(0)));
     }
-    else if(!polynomial.isOne())
+    else if(!isTheValue(polynomial, 1))
     {
         termsResult.emplace_back(simplifyAndConvertPolynomialToSimplestTerm(polynomial));
     }
@@ -194,7 +194,8 @@ void TermsOverTerms::removeSameTermsInNumeratorAndDenominator()
     bool hasZerosOnNumeratorAndDenominator(false);
     for(Terms::iterator numeratorIt = m_numerators.begin();
         numeratorIt != m_numerators.end();
-        numeratorIt++)    {
+        numeratorIt++)
+    {
         for(Terms::iterator denominatorIt = m_denominators.begin();
             denominatorIt != m_denominators.end();
             denominatorIt++)
@@ -203,13 +204,14 @@ void TermsOverTerms::removeSameTermsInNumeratorAndDenominator()
             Term const& term2(*denominatorIt);
             if(term1 == term2)
             {
-                if(term1.isTheValueZero())
+                if(isTheValue(term1, 0))
                 {
                     hasZerosOnNumeratorAndDenominator=true;
                 }
                 m_numerators.erase(numeratorIt);
                 m_denominators.erase(denominatorIt);
-                numeratorIt--;                denominatorIt--;
+                numeratorIt--;
+                denominatorIt--;
             }
         }
     }
@@ -219,7 +221,8 @@ void TermsOverTerms::removeSameTermsInNumeratorAndDenominator()
     }
 }
 
-void TermsOverTerms::removeTermsThatHaveNoEffect(Terms & terms) const{
+void TermsOverTerms::removeTermsThatHaveNoEffect(Terms & terms) const
+{
     terms.erase(remove_if(terms.begin(), terms.end(), [](Term const& term){
                     return willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(term);
                 }), terms.end());

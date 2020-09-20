@@ -26,6 +26,7 @@ Constant::Constant(unsigned int const unsignedValue)
 Constant::Constant(double const doubleValue)
     : m_constantValue(doubleValue)
 {}
+
 bool Constant::operator==(Constant const& second) const
 {
    return  m_constantValue == second.m_constantValue;

@@ -327,7 +327,8 @@ TEST(AlbaMathHelperTest, GetQuadraticRootsWorksWithImaginaryRoots)
 
 TEST(AlbaMathHelperTest, GetFactorialWorks)
 {
-    EXPECT_EQ(1u, getFactorial(0));    EXPECT_EQ(1u, getFactorial(1));
+    EXPECT_EQ(1u, getFactorial(0));
+    EXPECT_EQ(1u, getFactorial(1));
     EXPECT_EQ(120u, getFactorial(5));
     EXPECT_EQ(3628800u, getFactorial(10));
 }

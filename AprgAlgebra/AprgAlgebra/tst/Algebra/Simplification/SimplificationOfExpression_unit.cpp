@@ -578,7 +578,8 @@ TEST(SimplificationOfExpressionTest, EvenExponentsCancellationWithAbsoluteValueW
      Term("^"), Term(AlbaNumber::createFraction(1, 2))}));
     Expression expression2(expression1);
     SimplificationOfExpression simplification1(expression1);
-    SimplificationOfExpression simplification2(expression2);    simplification2.setAsShouldSimplifyEvenExponentsCancellationWithAbsoluteValue(true);
+    SimplificationOfExpression simplification2(expression2);
+    simplification2.setAsShouldSimplifyEvenExponentsCancellationWithAbsoluteValue(true);
 
     simplification1.simplify();
     simplification2.simplify();
@@ -601,6 +602,7 @@ TEST(SimplificationOfExpressionTest, ZeroOverZeroResultsToNanAndDoesNotCrash)
     SimplificationOfExpression simplification(expression);
 
     simplification.simplify();
+
     Expression expressionToVerify(simplification.getExpression());
     EXPECT_TRUE(isNotANumber(expressionToVerify));
 }

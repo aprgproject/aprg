@@ -93,7 +93,8 @@ AlbaNumber getGcfCoefficientInMonomials(Monomials const& monomials)
                 commonCoefficient = getGreatestCommonFactorForAlbaNumber(commonCoefficient, coefficient);
             }
         }
-    }    return commonCoefficient;
+    }
+    return commonCoefficient;
 }
 
 AlbaNumber getLcmCoefficientInMonomials(Monomials const& monomials)
@@ -115,7 +116,8 @@ AlbaNumber getLcmCoefficientInMonomials(Monomials const& monomials)
                 commonCoefficient = getLeastCommonMultipleForAlbaNumber(commonCoefficient, coefficient);
             }
         }
-    }    return commonCoefficient;
+    }
+    return commonCoefficient;
 }
 
 AlbaNumber getCommonSignInMonomials(Monomials const& monomials)

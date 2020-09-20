@@ -170,6 +170,7 @@ TEST(OneEquationOneVariableNonEqualitySolverTest, PolynomialsInEquationAreSolved
     Polynomial polynomialLeft{Monomial(AlbaNumber::createFraction(2, 3), {{"x", 1}}), Monomial(-4, {})};
     Polynomial polynomialRight{Monomial(5, {{"x", 1}}), Monomial(9, {})};
     OneEquationOneVariableNonEqualitySolver solver;
+
     SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(Term(polynomialLeft), "<", Term(polynomialRight))));
 
     EXPECT_TRUE(solver.isSolved());

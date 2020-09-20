@@ -8,6 +8,7 @@
 #include <sstream>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -79,7 +80,8 @@ string TermsWithAssociation::TermWithDetails::getDisplayableString() const
 
 void TermsWithAssociation::TermWithDetails::clear()
 {
-    baseTermSharedPointer.reset();    association=TermAssociationType::Positive;
+    baseTermSharedPointer.reset();
+    association=TermAssociationType::Positive;
 }
 
 TermsWithAssociation::TermsWithAssociation()

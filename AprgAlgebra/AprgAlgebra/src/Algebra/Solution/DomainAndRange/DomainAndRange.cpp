@@ -217,7 +217,8 @@ AlbaNumber getTransitionValue(
         newInputValue = getAverageForAlbaNumber(currentValueToFiniteValue, currentValueToNonFiniteValue);
         AlbaNumber newOutputValue(functionToCheck(newInputValue));
         if(newOutputValue.isAFiniteValue())
-        {            currentValueToFiniteValue = newInputValue;
+        {
+            currentValueToFiniteValue = newInputValue;
         }
         else
         {

@@ -4,7 +4,8 @@
 #include <Math/Number/AlbaNumber.hpp>
 
 #include <functional>
-#include <map>#include <string>
+#include <map>
+#include <string>
 #include <vector>
 
 namespace alba
@@ -37,8 +38,6 @@ public:
     bool operator==(Monomial const& second) const;
     bool operator!=(Monomial const& second) const;
     bool operator<(Monomial const& second) const;
-    bool isOne() const;
-    bool isZero() const;
     bool isConstantOnly() const;
     bool isVariableOnly() const;
     bool hasASingleVariable() const;
