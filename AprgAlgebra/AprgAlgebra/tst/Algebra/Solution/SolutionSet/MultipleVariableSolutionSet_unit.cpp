@@ -81,11 +81,10 @@ TEST(MultipleVariableSolutionSetTest, GetSolutionSetForVariableWorks)
     AlbaNumbers const& acceptedValues(solutionSet.getSolutionSetForVariable("a").getAcceptedValues());
 
     ASSERT_EQ(1u, acceptedValues.size());
-    EXPECT_EQ(58, acceptedValues.back().getInteger());
+    EXPECT_EQ(AlbaNumber(58), acceptedValues.at(0));
 }
 
-TEST(MultipleVariableSolutionSetTest, AddSolutionSetForVariableWorks)
-{
+TEST(MultipleVariableSolutionSetTest, AddSolutionSetForVariableWorks){
     MultipleVariableSolutionSet solutionSet;
     SolutionSet solutionSetForA;
     solutionSetForA.addAcceptedValue(AlbaNumber(58));
@@ -98,9 +97,8 @@ TEST(MultipleVariableSolutionSetTest, AddSolutionSetForVariableWorks)
     EXPECT_EQ("a", it->first);
     AlbaNumbers const& acceptedValues(it->second.getAcceptedValues());
     ASSERT_EQ(1u, acceptedValues.size());
-    EXPECT_EQ(58, acceptedValues.back().getInteger());
+    EXPECT_EQ(AlbaNumber(58), acceptedValues.at(0));
 }
 
 }
-
 }
