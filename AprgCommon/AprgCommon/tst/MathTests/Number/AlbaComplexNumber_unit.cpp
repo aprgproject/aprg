@@ -1,4 +1,4 @@
-#include <Math/AlbaComplexNumber.hpp>
+#include <Math/Number/AlbaComplexNumber.hpp>
 
 #include <gtest/gtest.h>
 

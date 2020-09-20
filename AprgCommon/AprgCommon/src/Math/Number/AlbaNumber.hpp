@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Math/AlbaComplexNumber.hpp>
+#include <Math/Number/AlbaComplexNumber.hpp>
 
 #include <ostream>
 #include <string>

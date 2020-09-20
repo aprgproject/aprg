@@ -1,4 +1,4 @@
-#include <Math/AlbaNumber.hpp>
+#include <Math/Number/AlbaNumber.hpp>
 
 #include <gtest/gtest.h>
 

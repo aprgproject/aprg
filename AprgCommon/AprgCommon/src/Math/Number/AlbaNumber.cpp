@@ -1,7 +1,7 @@
 #include "AlbaNumber.hpp"
 
-#include <Math/AlbaComplexNumber.hpp>
 #include <Math/AlbaMathHelper.hpp>
+#include <Math/Number/AlbaComplexNumber.hpp>
 
 #include <cmath>
 #include <sstream>
