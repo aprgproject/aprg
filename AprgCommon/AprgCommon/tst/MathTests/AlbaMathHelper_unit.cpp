@@ -69,7 +69,7 @@ TEST(AlbaMathHelperTest, IsAlmostAnIntegerWorks)
     EXPECT_TRUE((isAlmostAnInteger<float, int>(0)));
     EXPECT_TRUE((isAlmostAnInteger<float, int>(1)));
     EXPECT_TRUE((isAlmostAnInteger<float, int>(2)));
-    EXPECT_FALSE((isAlmostAnInteger<float, int>(3.000001)));
+    EXPECT_FALSE((isAlmostAnInteger<float, int>(3.00001)));
     EXPECT_TRUE((isAlmostAnInteger<float, int>(3.0000000000001)));
     EXPECT_TRUE((isAlmostAnInteger<double, int>(0)));
     EXPECT_TRUE((isAlmostAnInteger<double, int>(1)));
@@ -78,7 +78,8 @@ TEST(AlbaMathHelperTest, IsAlmostAnIntegerWorks)
     EXPECT_TRUE((isAlmostAnInteger<double, int>(3.0000000000001)));
 }
 
-TEST(AlbaMathHelperTest, IsAlmostAnIntegerWithDifferenceToleranceWorks){
+TEST(AlbaMathHelperTest, IsAlmostAnIntegerWithDifferenceToleranceWorks)
+{
     EXPECT_TRUE(isAlmostAnInteger(3.01, 1E-1));
     EXPECT_TRUE(isAlmostAnInteger(3.01, 1E-2));
     EXPECT_FALSE(isAlmostAnInteger(3.01, 1E-3));
@@ -192,25 +193,15 @@ TEST(AlbaMathHelperTest, GetAbsoluteValueWorksForPrimitiveTypes)
     EXPECT_EQ(0.5, getAbsoluteValue(-0.5));
 }
 
-TEST(AlbaMathHelperTest, GetAbsoluteValueWorksForAlbaNumber)
+TEST(AlbaMathHelperTest, GetSignWorksForPrimitiveTypes)
 {
-    EXPECT_EQ(AlbaNumber::createFraction(1, 3), getAbsoluteValue(AlbaNumber::createFraction(1, 3)));
-    EXPECT_EQ(AlbaNumber::createFraction(1, 3), getAbsoluteValue(AlbaNumber::createFraction(-1, 3)));
-}
-
-TEST(AlbaMathHelperTest, GetSignWorksForPrimitiveTypes){
     EXPECT_EQ(-1, getSign(-10));
     EXPECT_EQ(1, getSign(0));
     EXPECT_EQ(1, getSign(10));
 }
 
-TEST(AlbaMathHelperTest, GetSignWorksForAlbaNumber)
+TEST(AlbaMathHelperTest, GetPositiveDeltaWorksForPrimitiveTypes)
 {
-    EXPECT_EQ(AlbaNumber(1), getSign(AlbaNumber::createFraction(1, 3)));
-    EXPECT_EQ(AlbaNumber(-1), getSign(AlbaNumber::createFraction(-1, 3)));
-}
-
-TEST(AlbaMathHelperTest, GetPositiveDeltaWorksForPrimitiveTypes){
     EXPECT_EQ(0u, getPositiveDelta(0u, 0u));
     EXPECT_EQ(0u, getPositiveDelta(5u, 5u));
     EXPECT_EQ(5u, getPositiveDelta(5u, 10u));
@@ -221,18 +212,30 @@ TEST(AlbaMathHelperTest, GetPositiveDeltaWorksForPrimitiveTypes){
     EXPECT_EQ(90, getPositiveDelta(10,100));
 }
 
-TEST(AlbaMathHelperTest, GetPositiveDeltaWorksAlbaNumber)
-{
-    EXPECT_EQ(AlbaNumber(4.444), getPositiveDelta(1.234, 5.678));
-    EXPECT_EQ(AlbaNumber(4.444), getPositiveDelta(5.678, 1.234));
-}
-
 TEST(AlbaMathHelperTest, ConvertToIntegerThenSubtractWorks)
 {
     EXPECT_EQ(0, convertToIntegerThenSubtract(0u, 0u));
     EXPECT_EQ(0, convertToIntegerThenSubtract(5u, 5u));
-    EXPECT_EQ(-5, convertToIntegerThenSubtract(5u, 10u));
-    EXPECT_EQ(5, convertToIntegerThenSubtract(10u, 5u));
+    EXPECT_EQ(4, convertToIntegerThenSubtract(5u, 1u));
+    EXPECT_EQ(-4, convertToIntegerThenSubtract(1u, 5u));
+}
+
+TEST(AlbaMathHelperTest, GetAbsoluteValueForAlbaNumberWorks)
+{
+    EXPECT_EQ(AlbaNumber::createFraction(1, 3), getAbsoluteValueForAlbaNumber(AlbaNumber::createFraction(1, 3)));
+    EXPECT_EQ(AlbaNumber::createFraction(1, 3), getAbsoluteValueForAlbaNumber(AlbaNumber::createFraction(-1, 3)));
+}
+
+TEST(AlbaMathHelperTest, GetSignForAlbaNumberWorks)
+{
+    EXPECT_EQ(AlbaNumber(1), getSignForAlbaNumber(AlbaNumber::createFraction(1, 3)));
+    EXPECT_EQ(AlbaNumber(-1), getSignForAlbaNumber(AlbaNumber::createFraction(-1, 3)));
+}
+
+TEST(AlbaMathHelperTest, GetPositiveDeltaForAlbaNumberWorks)
+{
+    EXPECT_EQ(AlbaNumber(4.444), getPositiveDeltaForAlbaNumber(AlbaNumber(1.234), AlbaNumber(5.678)));
+    EXPECT_EQ(AlbaNumber(4.444), getPositiveDeltaForAlbaNumber(AlbaNumber(5.678), AlbaNumber(1.234)));
 }
 
 TEST(AlbaMathHelperTest, GetAverageOfTwoNumbersWorksForPrimitiveTypes)
@@ -241,15 +244,8 @@ TEST(AlbaMathHelperTest, GetAverageOfTwoNumbersWorksForPrimitiveTypes)
     EXPECT_EQ(55, getAverage(10, 100));
 }
 
-TEST(AlbaMathHelperTest, GetAverageOfTwoNumbersWorksForAlbaNumber)
+TEST(AlbaMathHelperTest, GetAverageOfThreeNumbersWorks)
 {
-    EXPECT_EQ(AlbaNumber(0),
-              getAverage(AlbaNumber::createFraction(1, 3), AlbaNumber::createFraction(-1, 3)));
-    EXPECT_EQ(AlbaNumber::createFraction(1, 3),
-              getAverage(AlbaNumber::createFraction(1, 3), AlbaNumber::createFraction(1, 3)));
-}
-
-TEST(AlbaMathHelperTest, GetAverageOfThreeNumbersWorks){
     EXPECT_EQ(0, getAverage(-10, 10, 0));
     EXPECT_EQ(370, getAverage(10, 100, 1000));
 }
@@ -285,6 +281,14 @@ TEST(AlbaMathHelperTest,  GetLogarithmWorks)
     EXPECT_DOUBLE_EQ(5, getLogarithm(2, 32));
     EXPECT_DOUBLE_EQ(-4, getLogarithm(2, 0.0625));
     EXPECT_DOUBLE_EQ(1.9534452978042594, getLogarithm(4, 15));
+}
+
+TEST(AlbaMathHelperTest, GetAverageOfTwoNumbersForAlbaNumberWorks)
+{
+    EXPECT_EQ(AlbaNumber(0),
+              getAverageForAlbaNumber(AlbaNumber::createFraction(1, 3), AlbaNumber::createFraction(-1, 3)));
+    EXPECT_EQ(AlbaNumber::createFraction(1, 3),
+              getAverageForAlbaNumber(AlbaNumber::createFraction(1, 3), AlbaNumber::createFraction(1, 3)));
 }
 
 TEST(AlbaMathHelperTest, GetQuadraticRootsWorks)
@@ -444,17 +448,6 @@ TEST(AlbaMathHelperTest, GetGreatestCommonFactorWorksForUnsignedInteger)
     EXPECT_EQ(1u, getGreatestCommonFactor(1234567891, 3));
 }
 
-TEST(AlbaMathHelperTest, GetGreatestCommonFactorWorksForAlbaNumber)
-{
-    EXPECT_EQ(AlbaNumber(0), getGreatestCommonFactor(AlbaNumber(0), AlbaNumber(0)));
-    EXPECT_EQ(AlbaNumber(1), getGreatestCommonFactor(AlbaNumber(1), AlbaNumber(1)));
-    EXPECT_EQ(AlbaNumber::createFraction(1, 12),
-              getGreatestCommonFactor(AlbaNumber::createFraction(1, 6), AlbaNumber::createFraction(1, 4)));
-    EXPECT_EQ(AlbaNumber(1), getGreatestCommonFactor(AlbaNumber(0.33), AlbaNumber::createFraction(1, 4)));
-    EXPECT_EQ(AlbaNumber::createFraction(1, 4),
-              getGreatestCommonFactor(AlbaNumber(5), AlbaNumber::createFraction(1, 4)));
-    EXPECT_EQ(AlbaNumber(3), getGreatestCommonFactor(AlbaNumber(6), AlbaNumber(9)));
-}
 TEST(AlbaMathHelperTest, GetLeastCommonMultipleWorksForUnsignedInteger)
 {
     EXPECT_EQ(0u, getLeastCommonMultiple(0, 0));
@@ -464,13 +457,8 @@ TEST(AlbaMathHelperTest, GetLeastCommonMultipleWorksForUnsignedInteger)
     EXPECT_EQ(262144u, getLeastCommonMultiple(65536, 262144));
 }
 
-TEST(AlbaMathHelperTest, GetLeastCommonMultipleWorksForAlbaNumber)
+TEST(AlbaMathHelperTest, GetLeastCommonMultipleInDoubleWorks)
 {
-    EXPECT_EQ(AlbaNumber(3),
-              getLeastCommonMultiple(AlbaNumber::createFraction(3, 2), AlbaNumber::createFraction(1, 3)));
-}
-
-TEST(AlbaMathHelperTest, GetLeastCommonMultipleInDoubleWorks){
     EXPECT_DOUBLE_EQ(262144, getLeastCommonMultipleInDouble(65536, 262144));
 }
 
@@ -481,6 +469,24 @@ TEST(AlbaMathHelperTest, GetDifferenceFromGreaterMultipleWorks)
     EXPECT_EQ(0u, getDifferenceFromGreaterMultiple(5, 10));
     EXPECT_EQ(5u, getDifferenceFromGreaterMultiple(10, 5));
     EXPECT_EQ(48u, getDifferenceFromGreaterMultiple(57, 2346));
+}
+
+TEST(AlbaMathHelperTest, GetGreatestCommonFactorForAlbaNumberWorks)
+{
+    EXPECT_EQ(AlbaNumber(0), getGreatestCommonFactorForAlbaNumber(AlbaNumber(0), AlbaNumber(0)));
+    EXPECT_EQ(AlbaNumber(1), getGreatestCommonFactorForAlbaNumber(AlbaNumber(1), AlbaNumber(1)));
+    EXPECT_EQ(AlbaNumber::createFraction(1, 12),
+              getGreatestCommonFactorForAlbaNumber(AlbaNumber::createFraction(1, 6), AlbaNumber::createFraction(1, 4)));
+    EXPECT_EQ(AlbaNumber(1), getGreatestCommonFactorForAlbaNumber(AlbaNumber(0.33), AlbaNumber::createFraction(1, 4)));
+    EXPECT_EQ(AlbaNumber::createFraction(1, 4),
+              getGreatestCommonFactorForAlbaNumber(AlbaNumber(5), AlbaNumber::createFraction(1, 4)));
+    EXPECT_EQ(AlbaNumber(3), getGreatestCommonFactorForAlbaNumber(AlbaNumber(6), AlbaNumber(9)));
+}
+
+TEST(AlbaMathHelperTest, GetLeastCommonMultipleForAlbaNumberWorks)
+{
+    EXPECT_EQ(AlbaNumber(3),
+              getLeastCommonMultipleForAlbaNumber(AlbaNumber::createFraction(3, 2), AlbaNumber::createFraction(1, 3)));
 }
 
 TEST(AlbaMathHelperTest, GetFractionDetailsInLowestFormWorks)
@@ -552,6 +558,21 @@ TEST(AlbaMathHelperTest, GetBestFractionDetailsForDoubleValueWorks)
     EXPECT_EQ(1, fractionDetails7.sign);
     EXPECT_EQ(2446376235u, fractionDetails7.numerator);
     EXPECT_EQ(1094052712u, fractionDetails7.denominator);
+
+    FractionDetails fractionDetails8(getBestFractionDetailsForDoubleValue(INFINITY));
+    EXPECT_EQ(1, fractionDetails8.sign);
+    EXPECT_EQ(1u, fractionDetails8.numerator);
+    EXPECT_EQ(0u, fractionDetails8.denominator);
+
+    FractionDetails fractionDetails9(getBestFractionDetailsForDoubleValue(-INFINITY));
+    EXPECT_EQ(-1, fractionDetails9.sign);
+    EXPECT_EQ(1u, fractionDetails9.numerator);
+    EXPECT_EQ(0u, fractionDetails9.denominator);
+
+    FractionDetails fractionDetails10(getBestFractionDetailsForDoubleValue(NAN));
+    EXPECT_EQ(1, fractionDetails10.sign);
+    EXPECT_EQ(0u, fractionDetails10.numerator);
+    EXPECT_EQ(1u, fractionDetails10.denominator);
 }
 
 TEST(AlbaMathHelperTest, IsPerfectCubeForUnsignedIntWorks)
@@ -564,19 +585,8 @@ TEST(AlbaMathHelperTest, IsPerfectCubeForUnsignedIntWorks)
     EXPECT_FALSE(isPerfectCube(1001u));
 }
 
-TEST(AlbaMathHelperTest, IsPerfectCubeForAlbaNumberWorks)
+TEST(AlbaMathHelperTest, IsPerfectSquareForUnsignedIntWorks)
 {
-    EXPECT_TRUE(isPerfectCube(AlbaNumber(0)));
-    EXPECT_TRUE(isPerfectCube(AlbaNumber(1)));
-    EXPECT_FALSE(isPerfectSquare(AlbaNumber(8)));
-    EXPECT_TRUE(isPerfectSquare(AlbaNumber(9)));
-    EXPECT_TRUE(isPerfectCube(AlbaNumber(1000)));
-    EXPECT_FALSE(isPerfectCube(AlbaNumber(1001)));
-    EXPECT_TRUE(isPerfectCube(AlbaNumber::createFraction(1000, 27)));
-    EXPECT_FALSE(isPerfectCube(AlbaNumber::createFraction(1000, 26)));
-}
-
-TEST(AlbaMathHelperTest, IsPerfectSquareForUnsignedIntWorks){
     EXPECT_TRUE(isPerfectSquare(0u));
     EXPECT_TRUE(isPerfectSquare(1u));
     EXPECT_FALSE(isPerfectSquare(3u));
@@ -585,19 +595,8 @@ TEST(AlbaMathHelperTest, IsPerfectSquareForUnsignedIntWorks){
     EXPECT_FALSE(isPerfectSquare(101u));
 }
 
-TEST(AlbaMathHelperTest, IsPerfectSquareForAlbaNumberWorks)
+TEST(AlbaMathHelperTest, IsPerfectNthPowerForUnsignedIntWorks)
 {
-    EXPECT_TRUE(isPerfectSquare(AlbaNumber(0)));
-    EXPECT_TRUE(isPerfectSquare(AlbaNumber(1)));
-    EXPECT_FALSE(isPerfectSquare(AlbaNumber(3)));
-    EXPECT_TRUE(isPerfectSquare(AlbaNumber(4)));
-    EXPECT_TRUE(isPerfectSquare(AlbaNumber(100)));
-    EXPECT_FALSE(isPerfectSquare(AlbaNumber(101)));
-    EXPECT_TRUE(isPerfectSquare(AlbaNumber::createFraction(100, 36)));
-    EXPECT_FALSE(isPerfectSquare(AlbaNumber::createFraction(100, 37)));
-}
-
-TEST(AlbaMathHelperTest, IsPerfectNthPowerForUnsignedIntWorks){
     EXPECT_TRUE(isPerfectNthPower(0u, 0u));
     EXPECT_TRUE(isPerfectNthPower(1u, 1u));
     EXPECT_FALSE(isPerfectNthPower(100u, 0u));
@@ -608,23 +607,48 @@ TEST(AlbaMathHelperTest, IsPerfectNthPowerForUnsignedIntWorks){
     EXPECT_FALSE(isPerfectNthPower(1001u, 3u));
 }
 
-TEST(AlbaMathHelperTest, IsPerfectNthPowerForAlbaNumberWorks)
+TEST(AlbaMathHelperTest, IsPerfectCubeForAlbaNumberWorks)
 {
-    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(0u), 0u));
-    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(1), 1u));
-    EXPECT_FALSE(isPerfectNthPower(AlbaNumber(100), 0u));
-    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(100), 1u));
-    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(100), 2u));
-    EXPECT_FALSE(isPerfectNthPower(AlbaNumber(101), 2u));
-    EXPECT_TRUE(isPerfectNthPower(AlbaNumber::createFraction(100, 36), 2u));
-    EXPECT_FALSE(isPerfectNthPower(AlbaNumber::createFraction(100, 37), 2u));
-    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(1000), 3u));
-    EXPECT_FALSE(isPerfectNthPower(AlbaNumber(1001), 3u));
-    EXPECT_TRUE(isPerfectNthPower(AlbaNumber::createFraction(1000, 27), 3u));
-    EXPECT_FALSE(isPerfectNthPower(AlbaNumber::createFraction(1001, 26), 3u));
+    EXPECT_TRUE(isPerfectCubeForAlbaNumber(AlbaNumber(0)));
+    EXPECT_TRUE(isPerfectCubeForAlbaNumber(AlbaNumber(1)));
+    EXPECT_FALSE(isPerfectSquareForAlbaNumber(AlbaNumber(8)));
+    EXPECT_TRUE(isPerfectSquareForAlbaNumber(AlbaNumber(9)));
+    EXPECT_TRUE(isPerfectCubeForAlbaNumber(AlbaNumber(1000)));
+    EXPECT_FALSE(isPerfectCubeForAlbaNumber(AlbaNumber(1001)));
+    EXPECT_TRUE(isPerfectCubeForAlbaNumber(AlbaNumber::createFraction(1000, 27)));
+    EXPECT_FALSE(isPerfectCubeForAlbaNumber(AlbaNumber::createFraction(1000, 26)));
 }
 
-TEST(AlbaMathHelperTest, GetRaiseToPowerForIntegersWorks){
+TEST(AlbaMathHelperTest, IsPerfectSquareForAlbaNumberWorks)
+{
+    EXPECT_TRUE(isPerfectSquareForAlbaNumber(AlbaNumber(0)));
+    EXPECT_TRUE(isPerfectSquareForAlbaNumber(AlbaNumber(1)));
+    EXPECT_FALSE(isPerfectSquareForAlbaNumber(AlbaNumber(3)));
+    EXPECT_TRUE(isPerfectSquareForAlbaNumber(AlbaNumber(4)));
+    EXPECT_TRUE(isPerfectSquareForAlbaNumber(AlbaNumber(100)));
+    EXPECT_FALSE(isPerfectSquareForAlbaNumber(AlbaNumber(101)));
+    EXPECT_TRUE(isPerfectSquareForAlbaNumber(AlbaNumber::createFraction(100, 36)));
+    EXPECT_FALSE(isPerfectSquareForAlbaNumber(AlbaNumber::createFraction(100, 37)));
+}
+
+TEST(AlbaMathHelperTest, IsPerfectNthPowerForAlbaNumberWorks)
+{
+    EXPECT_TRUE(isPerfectNthPowerForAlbaNumber(AlbaNumber(0u), 0u));
+    EXPECT_TRUE(isPerfectNthPowerForAlbaNumber(AlbaNumber(1), 1u));
+    EXPECT_FALSE(isPerfectNthPowerForAlbaNumber(AlbaNumber(100), 0u));
+    EXPECT_TRUE(isPerfectNthPowerForAlbaNumber(AlbaNumber(100), 1u));
+    EXPECT_TRUE(isPerfectNthPowerForAlbaNumber(AlbaNumber(100), 2u));
+    EXPECT_FALSE(isPerfectNthPowerForAlbaNumber(AlbaNumber(101), 2u));
+    EXPECT_TRUE(isPerfectNthPowerForAlbaNumber(AlbaNumber::createFraction(100, 36), 2u));
+    EXPECT_FALSE(isPerfectNthPowerForAlbaNumber(AlbaNumber::createFraction(100, 37), 2u));
+    EXPECT_TRUE(isPerfectNthPowerForAlbaNumber(AlbaNumber(1000), 3u));
+    EXPECT_FALSE(isPerfectNthPowerForAlbaNumber(AlbaNumber(1001), 3u));
+    EXPECT_TRUE(isPerfectNthPowerForAlbaNumber(AlbaNumber::createFraction(1000, 27), 3u));
+    EXPECT_FALSE(isPerfectNthPowerForAlbaNumber(AlbaNumber::createFraction(1001, 26), 3u));
+}
+
+TEST(AlbaMathHelperTest, GetRaiseToPowerForIntegersWorks)
+{
     EXPECT_EQ(1, getRaiseToPowerForIntegers(0, 0u));
     EXPECT_EQ(1, getRaiseToPowerForIntegers(1, 0u));
     EXPECT_EQ(0, getRaiseToPowerForIntegers(0, 1u));
@@ -655,6 +679,14 @@ TEST(AlbaMathHelperTest, AreNumberOfDigitsOnTheIntegerLimitWorks)
     EXPECT_FALSE(areNumberOfDigitsOnTheIntegerLimit(9));
     EXPECT_TRUE(areNumberOfDigitsOnTheIntegerLimit(10));
     EXPECT_TRUE(areNumberOfDigitsOnTheIntegerLimit(11));
+}
+
+TEST(AlbaMathHelperTest, CreateComplexNumberFromDataWorks)
+{
+    AlbaNumber::ComplexNumberData complexData{3.5, 4.5};
+
+    AlbaComplexNumber<float> expectedComplexNumber(3.5, 4.5);
+    EXPECT_EQ(expectedComplexNumber, createComplexNumberFromData(complexData));
 }
 
 }
