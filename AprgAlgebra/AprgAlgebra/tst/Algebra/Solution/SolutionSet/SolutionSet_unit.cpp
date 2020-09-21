@@ -44,6 +44,7 @@ TEST(SolutionSetTest, AddAcceptedValueWorks)
     EXPECT_TRUE(solutionSet.getRejectedValues().empty());
     EXPECT_TRUE(solutionSet.getAcceptedIntervals().empty());
 }
+
 TEST(SolutionSetTest, AddRejectedValueWorks)
 {
     SolutionSet solutionSet;
@@ -56,6 +57,7 @@ TEST(SolutionSetTest, AddRejectedValueWorks)
     EXPECT_TRUE(solutionSet.getAcceptedValues().empty());
     EXPECT_TRUE(solutionSet.getAcceptedIntervals().empty());
 }
+
 TEST(SolutionSetTest, AddAcceptedValuesWorks)
 {
     SolutionSet solutionSet;
@@ -69,6 +71,7 @@ TEST(SolutionSetTest, AddAcceptedValuesWorks)
     EXPECT_TRUE(solutionSet.getRejectedValues().empty());
     EXPECT_TRUE(solutionSet.getAcceptedIntervals().empty());
 }
+
 TEST(SolutionSetTest, AddRejectedValuesWorks)
 {
     SolutionSet solutionSet;
@@ -82,6 +85,7 @@ TEST(SolutionSetTest, AddRejectedValuesWorks)
     EXPECT_TRUE(solutionSet.getAcceptedValues().empty());
     EXPECT_TRUE(solutionSet.getAcceptedIntervals().empty());
 }
+
 TEST(SolutionSetTest, AddAcceptedIntervalWorks)
 {
     SolutionSet solutionSet;
@@ -105,6 +109,7 @@ TEST(SolutionSetTest, AddValueForAcceptedValueWorks)
     EXPECT_TRUE(solutionSet.getRejectedValues().empty());
     EXPECT_TRUE(solutionSet.getAcceptedIntervals().empty());
 }
+
 TEST(SolutionSetTest, AddValueForRejectedValueWorks)
 {
     SolutionSet solutionSet;
@@ -117,6 +122,7 @@ TEST(SolutionSetTest, AddValueForRejectedValueWorks)
     EXPECT_TRUE(solutionSet.getAcceptedValues().empty());
     EXPECT_TRUE(solutionSet.getAcceptedIntervals().empty());
 }
+
 TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithOnePoint)
 {
     SolutionSet solutionSet;

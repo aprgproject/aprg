@@ -41,7 +41,8 @@ public:
     void reverseOperation();
 
 private:
-    std::string m_operatingString;};
+    std::string m_operatingString;
+};
 
 std::ostream & operator<<(std::ostream & out, Operator const& operatorTerm);
 
