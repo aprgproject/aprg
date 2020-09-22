@@ -72,10 +72,12 @@ private:
     void putTermForExpressionAndNonExpressions(
             BaseTerm const& baseTerm,
             TermAssociationType const overallAssociation);
-    void putTerm(
+    void putTermWithRaiseToPowerForExpressionAndNonExpressions(
             BaseTerm const& baseTerm,
             TermAssociationType const overallAssociation);
-    void putTermsWithAssociation(
+    void putTerm(
+            BaseTerm const& baseTerm,
+            TermAssociationType const overallAssociation);    void putTermsWithAssociation(
             TermsWithAssociation const& termsWithAssociation,
             TermAssociationType const overallAssociation);
 
