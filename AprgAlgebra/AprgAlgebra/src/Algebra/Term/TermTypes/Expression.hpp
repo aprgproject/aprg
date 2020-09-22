@@ -77,7 +77,8 @@ private:
             TermAssociationType const overallAssociation);
     void putTerm(
             BaseTerm const& baseTerm,
-            TermAssociationType const overallAssociation);    void putTermsWithAssociation(
+            TermAssociationType const overallAssociation);
+    void putTermsWithAssociation(
             TermsWithAssociation const& termsWithAssociation,
             TermAssociationType const overallAssociation);
 

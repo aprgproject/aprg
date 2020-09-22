@@ -171,7 +171,8 @@ void SimplificationOfExpression::simplifyAndCopyTermsFromAnExpressionAndSetOpera
                 && OperatorLevel::MultiplicationAndDivision == m_expression.getCommonOperatorLevel()))
     {
         m_expression.setCommonOperatorLevelIfStillUnknown(expression.getCommonOperatorLevel());
-        TermsWithAssociation termsWithAssociation(getTermsWithAssociationAndReverseIfNeeded(expression, association));        simplifyAndCopyTerms(termsToUpdate, termsWithAssociation.getTermsWithDetails());
+        TermsWithAssociation termsWithAssociation(getTermsWithAssociationAndReverseIfNeeded(expression, association));
+        simplifyAndCopyTerms(termsToUpdate, termsWithAssociation.getTermsWithDetails());
     }
     else
     {
@@ -361,7 +362,8 @@ void SimplificationOfExpression::processAndSaveTermsForRaiseToPower(
         }
         else
         {
-            TermsWithDetails exponents(termsToProcess.cbegin()+1, termsToProcess.cend());            if(m_shouldSimplifyEvenExponentsCancellationWithAbsoluteValue
+            TermsWithDetails exponents(termsToProcess.cbegin()+1, termsToProcess.cend());
+            if(m_shouldSimplifyEvenExponentsCancellationWithAbsoluteValue
                     && didEvenExponentCancellationHappened(exponents))
             {
                 baseOfRaiseToPower=simplifyAndConvertFunctionToSimplestTerm(Functions::abs(createOrCopyExpressionFromATerm(baseOfRaiseToPower)));
@@ -468,7 +470,8 @@ void SimplificationOfExpression::saveBaseAndExponentsToTerm(
 
 }
 
-TermsWithAssociation SimplificationOfExpression::getTermsWithAssociationAndReverseIfNeeded(        Expression const& expression,
+TermsWithAssociation SimplificationOfExpression::getTermsWithAssociationAndReverseIfNeeded(
+        Expression const& expression,
         TermAssociationType const association)
 {
     TermsWithAssociation termsWithAssociation(expression.getTermsWithAssociation());

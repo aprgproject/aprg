@@ -76,7 +76,8 @@ Equation getLawOfCosineEquation(
 
 Term getSineSquared(Term const& term)
 {
-    return Term(createExpressionIfPossible({Term(sin(term)), Term("^"), Term(2)}));}
+    return Term(createExpressionIfPossible({Term(sin(term)), Term("^"), Term(2)}));
+}
 
 Term getCosineSquared(Term const& term)
 {
