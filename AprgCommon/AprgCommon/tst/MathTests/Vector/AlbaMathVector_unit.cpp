@@ -1,7 +1,6 @@
-#include <Math/AlbaMathVector.hpp>
+#include <Math/Vector/AlbaMathVector.hpp>
 
 #include <gtest/gtest.h>
-
 namespace alba
 {
 

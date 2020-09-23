@@ -690,24 +690,21 @@ AlbaNumber& AlbaNumber::operator+=(AlbaNumber const& second)
 AlbaNumber& AlbaNumber::operator-=(AlbaNumber const& second)
 {
     AlbaNumber & thisReference(*this);
-    thisReference = thisReference + second;
+    thisReference = thisReference - second;
     return thisReference;
 }
-
 AlbaNumber& AlbaNumber::operator*=(AlbaNumber const& second)
 {
     AlbaNumber & thisReference(*this);
-    thisReference = thisReference + second;
+    thisReference = thisReference * second;
     return thisReference;
 }
-
 AlbaNumber& AlbaNumber::operator/=(AlbaNumber const& second)
 {
     AlbaNumber & thisReference(*this);
-    thisReference = thisReference + second;
+    thisReference = thisReference / second;
     return thisReference;
 }
-
 AlbaNumber AlbaNumber::operator+=(int const integerValue)
 {
     return operator+=(AlbaNumber(integerValue));
