@@ -680,10 +680,117 @@ AlbaNumber AlbaNumber::operator^(double const doubleValue) const
     return operator^(AlbaNumber(doubleValue));
 }
 
+AlbaNumber& AlbaNumber::operator+=(AlbaNumber const& second)
+{
+    AlbaNumber & thisReference(*this);
+    thisReference = thisReference + second;
+    return thisReference;
+}
+
+AlbaNumber& AlbaNumber::operator-=(AlbaNumber const& second)
+{
+    AlbaNumber & thisReference(*this);
+    thisReference = thisReference + second;
+    return thisReference;
+}
+
+AlbaNumber& AlbaNumber::operator*=(AlbaNumber const& second)
+{
+    AlbaNumber & thisReference(*this);
+    thisReference = thisReference + second;
+    return thisReference;
+}
+
+AlbaNumber& AlbaNumber::operator/=(AlbaNumber const& second)
+{
+    AlbaNumber & thisReference(*this);
+    thisReference = thisReference + second;
+    return thisReference;
+}
+
+AlbaNumber AlbaNumber::operator+=(int const integerValue)
+{
+    return operator+=(AlbaNumber(integerValue));
+}
+
+AlbaNumber AlbaNumber::operator-=(int const integerValue)
+{
+    return operator-=(AlbaNumber(integerValue));
+}
+
+AlbaNumber AlbaNumber::operator*=(int const integerValue)
+{
+    return operator*=(AlbaNumber(integerValue));
+}
+
+AlbaNumber AlbaNumber::operator/=(int const integerValue)
+{
+    return operator/=(AlbaNumber(integerValue));
+}
+
+AlbaNumber AlbaNumber::operator+=(unsigned int const integerValue)
+{
+    return operator+=(AlbaNumber(integerValue));
+}
+
+AlbaNumber AlbaNumber::operator-=(unsigned int const integerValue)
+{
+    return operator-=(AlbaNumber(integerValue));
+}
+
+AlbaNumber AlbaNumber::operator*=(unsigned int const integerValue)
+{
+    return operator*=(AlbaNumber(integerValue));
+}
+
+AlbaNumber AlbaNumber::operator/=(unsigned int const integerValue)
+{
+    return operator/=(AlbaNumber(integerValue));
+}
+
+AlbaNumber AlbaNumber::operator+=(long long int const integerValue)
+{
+    return operator+=(AlbaNumber(integerValue));
+}
+
+AlbaNumber AlbaNumber::operator-=(long long int const integerValue)
+{
+    return operator-=(AlbaNumber(integerValue));
+}
+
+AlbaNumber AlbaNumber::operator*=(long long int const integerValue)
+{
+    return operator*=(AlbaNumber(integerValue));
+}
+
+AlbaNumber AlbaNumber::operator/=(long long int const integerValue)
+{
+    return operator/=(AlbaNumber(integerValue));
+}
+
+AlbaNumber AlbaNumber::operator+=(double const doubleValue)
+{
+    return operator+=(AlbaNumber(doubleValue));
+}
+
+AlbaNumber AlbaNumber::operator-=(double const doubleValue)
+{
+    return operator-=(AlbaNumber(doubleValue));
+}
+
+AlbaNumber AlbaNumber::operator*=(double const doubleValue)
+{
+    return operator*=(AlbaNumber(doubleValue));
+}
+
+AlbaNumber AlbaNumber::operator/=(double const doubleValue)
+{
+    return operator/=(AlbaNumber(doubleValue));
+}
+
 bool AlbaNumber::isIntegerType() const
 {
-    return m_type==Type::Integer;
-}
+    return m_type==Type::Integer;}
 
 bool AlbaNumber::isDoubleType() const
 {
