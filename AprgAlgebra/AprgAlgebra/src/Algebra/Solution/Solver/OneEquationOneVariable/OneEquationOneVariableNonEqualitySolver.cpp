@@ -47,11 +47,10 @@ void OneEquationOneVariableNonEqualitySolver::calculateForEquation(
     {
         string variableName = *variableNames.cbegin();
         calculateForTermAndCheckAbsoluteValueFunctions(nonZeroLeftHandTerm, variableName);
-        sortCalculatedValues();
+        sortAndRemoveDuplicateCalculatedValues();
         addIntervalsToSolutionSetIfNeeded(solutionSet, equation, variableName);
     }
 }
-
 void OneEquationOneVariableNonEqualitySolver::calculateForTermAndVariable(
         Term const& term,
         string const& )

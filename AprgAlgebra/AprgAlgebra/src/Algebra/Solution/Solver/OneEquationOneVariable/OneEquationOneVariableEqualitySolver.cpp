@@ -48,11 +48,10 @@ void OneEquationOneVariableEqualitySolver::calculateForEquation(
     {
         string variableName = *variableNames.cbegin();
         calculateForTermAndCheckAbsoluteValueFunctions(nonZeroLeftHandTerm, variableName);
-        sortCalculatedValues();
+        sortAndRemoveDuplicateCalculatedValues();
         addValuesToSolutionSetIfNeeded(solutionSet, nonZeroLeftHandTerm, variableName);
     }
 }
-
 void OneEquationOneVariableEqualitySolver::calculateForTermAndVariable(
         Term const& term,
         string const& variableName)
