@@ -29,14 +29,16 @@ TEST(AlbaMathVectorUtilitiesTest, AreVectorsParallelWorks)
 // This is always true.
 TEST(AlbaMathVectorUtilitiesTest, IsCauchySchwarzInequalitySatisfiedWorksAndAlwaysTrue)
 {
-    EXPECT_TRUE(isCauchySchwarzInequalitySatisfied(VectorTwoElements{0, 5}, VectorTwoElements{0, 10}));    EXPECT_TRUE(isCauchySchwarzInequalitySatisfied(VectorTwoElements{0, 5}, VectorTwoElements{10, 0}));
+    EXPECT_TRUE(isCauchySchwarzInequalitySatisfied(VectorTwoElements{0, 5}, VectorTwoElements{0, 10}));
+    EXPECT_TRUE(isCauchySchwarzInequalitySatisfied(VectorTwoElements{0, 5}, VectorTwoElements{10, 0}));
     EXPECT_TRUE(isCauchySchwarzInequalitySatisfied(VectorTwoElements{2, 3}, VectorTwoElements{4, 5}));
 }
 
 // This is always true.
 TEST(AlbaMathVectorUtilitiesTest, IsTriangleInequalitySatisfiedWorksAndAlwaysTrue)
 {
-    EXPECT_TRUE(isTriangleInequalitySatisfied(VectorTwoElements{0, 5}, VectorTwoElements{0, 10}));    EXPECT_TRUE(isTriangleInequalitySatisfied(VectorTwoElements{0, 5}, VectorTwoElements{10, 0}));
+    EXPECT_TRUE(isTriangleInequalitySatisfied(VectorTwoElements{0, 5}, VectorTwoElements{0, 10}));
+    EXPECT_TRUE(isTriangleInequalitySatisfied(VectorTwoElements{0, 5}, VectorTwoElements{10, 0}));
     EXPECT_TRUE(isTriangleInequalitySatisfied(VectorTwoElements{2, 3}, VectorTwoElements{4, 5}));
 }
 

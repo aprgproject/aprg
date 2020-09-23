@@ -95,7 +95,8 @@ TEST(StringHelpersTest, ConstructTermFromStringWorks)
     Term termToVerify2(constructTermFromString("x111"));
 
     EXPECT_EQ(TermType::Constant, termToVerify1.getTermType());
-    EXPECT_DOUBLE_EQ(5, termToVerify1.getConstantConstReference().getNumberConstReference().getDouble());    EXPECT_EQ(TermType::Variable, termToVerify2.getTermType());
+    EXPECT_DOUBLE_EQ(5, termToVerify1.getConstantConstReference().getNumberConstReference().getDouble());
+    EXPECT_EQ(TermType::Variable, termToVerify2.getTermType());
     EXPECT_EQ("x111", termToVerify2.getVariableConstReference().getVariableName());
 }
 
@@ -110,6 +111,7 @@ TEST(StringHelpersTest, BuildTermIfPossibleWorks)
 TEST(StringHelpersTest, TokenizeToTermsWorks)
 {
     Terms termsToVerify1(tokenizeToTerms(" 5yyy + x1*y1^20.15"));
+
     ASSERT_EQ(7u, termsToVerify1.size());
     EXPECT_EQ(TermType::Constant, termsToVerify1.at(0).getTermType());
     EXPECT_DOUBLE_EQ(5, termsToVerify1.at(0).getConstantConstReference().getNumberConstReference().getDouble());

@@ -35,7 +35,8 @@ TEST(EquationUtilitiesTest, IsEquationOperatorCharacterStringWorks)
 
 TEST(EquationUtilitiesTest, IsEqualWorks)
 {
-    Term term1(1234);    Term term2(1234);
+    Term term1(1234);
+    Term term2(1234);
     Term term3(1111);
     Term term4(5678);
     Term term5("x");

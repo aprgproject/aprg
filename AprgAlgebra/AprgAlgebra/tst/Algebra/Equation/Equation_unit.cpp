@@ -92,7 +92,8 @@ TEST(EquationTest, IsEmptyWorks)
 
 TEST(EquationTest, IsEquationSatisfiedWorks)
 {
-    Equation equation1(Term(7), "=", Term(7));    Equation equation2(Term(7), "=", Term(8));
+    Equation equation1(Term(7), "=", Term(7));
+    Equation equation2(Term(7), "=", Term(8));
 
     EXPECT_TRUE(equation1.isEquationSatisfied());
     EXPECT_FALSE(equation2.isEquationSatisfied());

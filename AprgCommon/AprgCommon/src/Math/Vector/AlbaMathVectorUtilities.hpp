@@ -44,6 +44,7 @@ bool isTriangleInequalitySatisfied(
 {
     return (vector1+vector2).getMagnitude() <= vector1.getMagnitude() + vector2.getMagnitude();
 }
+
 template <typename DataType, unsigned int SIZE>
 AlbaMathVector<DataType, SIZE> createZeroVector()
 {
