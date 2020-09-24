@@ -8,10 +8,10 @@
 #include <cmath>
 #include <iterator>
 
+using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace TwoDimensions
 {

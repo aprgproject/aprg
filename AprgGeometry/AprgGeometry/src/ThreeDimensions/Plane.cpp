@@ -6,9 +6,9 @@
 
 #include <cmath>
 
+using namespace alba::mathHelper;
 using namespace alba::ThreeDimensions::threeDimensionsHelper;
 using namespace std;
-
 namespace alba
 {
 
