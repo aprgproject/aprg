@@ -52,6 +52,7 @@ void OneEquationOneVariableEqualitySolver::calculateForEquation(
         addValuesToSolutionSetIfNeeded(solutionSet, nonZeroLeftHandTerm, variableName);
     }
 }
+
 void OneEquationOneVariableEqualitySolver::calculateForTermAndVariable(
         Term const& term,
         string const& variableName)

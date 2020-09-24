@@ -51,6 +51,7 @@ void OneEquationOneVariableNonEqualitySolver::calculateForEquation(
         addIntervalsToSolutionSetIfNeeded(solutionSet, equation, variableName);
     }
 }
+
 void OneEquationOneVariableNonEqualitySolver::calculateForTermAndVariable(
         Term const& term,
         string const& )

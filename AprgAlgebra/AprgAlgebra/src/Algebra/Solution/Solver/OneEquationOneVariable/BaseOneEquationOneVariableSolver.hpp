@@ -30,7 +30,8 @@ protected:
     void sortAndRemoveDuplicateCalculatedValues();
     void calculateForTermAndCheckAbsoluteValueFunctions(
             Term const& nonZeroLeftHandTerm,
-            std::string const& variableName);    void calculateAndSubstituteAbsoluteValueFunctions(
+            std::string const& variableName);
+    void calculateAndSubstituteAbsoluteValueFunctions(
             FunctionsSet const& absFunctions,
             Term const& term,
             std::string const& variableName);

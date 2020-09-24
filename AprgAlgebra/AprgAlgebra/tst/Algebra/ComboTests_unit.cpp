@@ -4,6 +4,7 @@
 #include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableNonEqualitySolver.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Term/Utilities/StringHelpers.hpp>
+
 #include <gtest/gtest.h>
 
 using namespace alba::algebra::Simplification;

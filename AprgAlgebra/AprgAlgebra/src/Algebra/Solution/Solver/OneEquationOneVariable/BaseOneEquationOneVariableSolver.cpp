@@ -3,7 +3,8 @@
 #include <Bit/AlbaBitManipulation.hpp>
 #include <Algebra/Substitution/SubstitutionOfTermsToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
-#include <Algebra/Term/Utilities/BaseTermHelpers.hpp>#include <Algebra/Term/Utilities/CreateHelpers.hpp>
+#include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
+#include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
 
 #include <algorithm>
@@ -69,7 +70,8 @@ void BaseOneEquationOneVariableSolver::sortAndRemoveDuplicateCalculatedValues()
     m_calculatedValues.erase(unique(m_calculatedValues.begin(), m_calculatedValues.end()), m_calculatedValues.end());
 }
 
-void BaseOneEquationOneVariableSolver::calculateAndSubstituteAbsoluteValueFunctions(        FunctionsSet const& absFunctions,
+void BaseOneEquationOneVariableSolver::calculateAndSubstituteAbsoluteValueFunctions(
+        FunctionsSet const& absFunctions,
         Term const& term,
         string const& variableName)
 {
@@ -101,6 +103,7 @@ void BaseOneEquationOneVariableSolver::calculateAndSubstituteAbsoluteValueFuncti
         calculateForTermAndVariable(termAfterSubstitution, variableName);
     }
 }
+
 void BaseOneEquationOneVariableSolver::addValuesToSolutionSetIfNeeded(
         SolutionSet& solutionSet,
         Term const& term,

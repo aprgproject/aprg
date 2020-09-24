@@ -65,7 +65,8 @@ TEST(AlbaBitManipulationTest, ShiftBitsToTheRightWorks)
 
 TEST(AlbaBitManipulationTest, RotateBitToTheLeftWorks)
 {
-    EXPECT_EQ(0x142u, AlbaBitManipulation<unsigned int>::rotateBitToTheLeft<1>(0xA1));    EXPECT_EQ(0xA10u, AlbaBitManipulation<unsigned int>::rotateBitToTheLeft<4>(0xA1));
+    EXPECT_EQ(0x142u, AlbaBitManipulation<unsigned int>::rotateBitToTheLeft<1>(0xA1));
+    EXPECT_EQ(0xA10u, AlbaBitManipulation<unsigned int>::rotateBitToTheLeft<4>(0xA1));
     EXPECT_EQ(0xA100u, AlbaBitManipulation<unsigned int>::rotateBitToTheLeft<8>(0xA1));
     EXPECT_EQ(0x1000000Au, AlbaBitManipulation<unsigned int>::rotateBitToTheLeft<28>(0xA1));
 }
@@ -195,7 +196,8 @@ TEST(AlbaBitManipulationTest, BitsAreSuccessfullyObtainedWhenU32IsUsed)
 
 TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedWhenU16IsUsed)
 {
-    // Given    const short unsigned int input = 0x1234;
+    // Given
+    const short unsigned int input = 0x1234;
 
     // When
 

@@ -82,7 +82,8 @@ public:
     template <unsigned char shiftValue, typename ArgumentType>
     static constexpr DataTypeToManipulate rotateBitToTheLeft(ArgumentType const value)
     {
-        constexpr unsigned char NUMBER_OF_BITS = sizeof(DataTypeToManipulate)*AlbaBitConstants::BYTE_SIZE_IN_BITS;        static_assert(shiftValue!=0,
+        constexpr unsigned char NUMBER_OF_BITS = sizeof(DataTypeToManipulate)*AlbaBitConstants::BYTE_SIZE_IN_BITS;
+        static_assert(shiftValue!=0,
                       "rotateBitToTheLeft: shiftValue is zero, so there should be nothing to do");
         static_assert(NUMBER_OF_BITS > shiftValue,
                       "rotateBitToTheLeft: sizeof(DataTypeToManipulate) size is greater than shift value");
@@ -146,7 +147,8 @@ public:
 
     template <unsigned char size>
     static constexpr DataTypeToManipulate swapWithBytes(DataTypeToManipulate const)
-    {        static_assert(size != size, "The swapWithSize with this size or type is not supported. Please add a specialization.");
+    {
+        static_assert(size != size, "The swapWithSize with this size or type is not supported. Please add a specialization.");
         return 0;
     }
 
@@ -174,6 +176,7 @@ public:
     {
         return static_cast<DataTypeToManipulate>(round(pow(static_cast<double>(2), static_cast<double>(numberOfOnes)))-1);
     }
+
     static constexpr DataTypeToManipulate getAllBitsAsserted()
     {
         static_assert(sizeof(DataTypeToManipulate) != sizeof(DataTypeToManipulate),

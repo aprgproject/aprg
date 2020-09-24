@@ -296,7 +296,8 @@ TEST(AlbaMathHelperTest, GetQuadraticWorksWithRealRootsOnlyWithInputHavingRealRo
     AlbaNumbers quadraticRoots(getQuadraticRoots(RootType::RealRootsOnly, 8, 22, 15));
 
     ASSERT_EQ(2u, quadraticRoots.size());
-    EXPECT_EQ(AlbaNumber(-1.25), quadraticRoots.at(0));    EXPECT_EQ(AlbaNumber(-1.5), quadraticRoots.at(1));
+    EXPECT_EQ(AlbaNumber(-1.25), quadraticRoots.at(0));
+    EXPECT_EQ(AlbaNumber(-1.5), quadraticRoots.at(1));
 }
 
 TEST(AlbaMathHelperTest, GetQuadraticWorksWithRealRootsOnlyWithInputHavingImaginaryRoots)
@@ -306,20 +307,22 @@ TEST(AlbaMathHelperTest, GetQuadraticWorksWithRealRootsOnlyWithInputHavingImagin
     EXPECT_TRUE(quadraticRoots.empty());
 }
 
-TEST(AlbaMathHelperTest, GetQuadraticWorksWithRealRootsAndImaginaryRootsWithInputHavingRealRoots)
+TEST(AlbaMathHelperTest, GetQuadraticWorksWithRealAndImaginaryRootsWithInputHavingRealRoots)
 {
-    AlbaNumbers quadraticRoots(getQuadraticRoots(RootType::RealRootsAndImaginaryRoots, 8, 22, 15));
+    AlbaNumbers quadraticRoots(getQuadraticRoots(RootType::RealAndImaginaryRoots, 8, 22, 15));
 
     ASSERT_EQ(2u, quadraticRoots.size());
-    EXPECT_EQ(AlbaNumber(-1.25), quadraticRoots.at(0));    EXPECT_EQ(AlbaNumber(-1.5), quadraticRoots.at(1));
+    EXPECT_EQ(AlbaNumber(-1.25), quadraticRoots.at(0));
+    EXPECT_EQ(AlbaNumber(-1.5), quadraticRoots.at(1));
 }
 
-TEST(AlbaMathHelperTest, GetQuadraticWorksWithRealRootsAndImaginaryRootsWithInputHavingImaginaryRoots)
+TEST(AlbaMathHelperTest, GetQuadraticWorksWithRealAndImaginaryRootsWithInputHavingImaginaryRoots)
 {
-    AlbaNumbers quadraticRoots(getQuadraticRoots(RootType::RealRootsAndImaginaryRoots, 1, 0, 4));
+    AlbaNumbers quadraticRoots(getQuadraticRoots(RootType::RealAndImaginaryRoots, 1, 0, 4));
 
     ASSERT_EQ(2u, quadraticRoots.size());
-    EXPECT_EQ(AlbaNumber::createComplexNumber(0, 2), quadraticRoots.at(0));    EXPECT_EQ(AlbaNumber::createComplexNumber(0, -2), quadraticRoots.at(1));
+    EXPECT_EQ(AlbaNumber::createComplexNumber(0, 2), quadraticRoots.at(0));
+    EXPECT_EQ(AlbaNumber::createComplexNumber(0, -2), quadraticRoots.at(1));
 }
 
 TEST(AlbaMathHelperTest, GetFactorialWorks)
