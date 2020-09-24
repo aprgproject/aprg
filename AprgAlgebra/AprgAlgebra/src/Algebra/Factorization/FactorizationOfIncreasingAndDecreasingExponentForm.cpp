@@ -159,7 +159,8 @@ AlbaNumbers calculatePolynomialRoots(AlbaNumbers const& coefficients)
         result = getQuadraticRoots(RootType::RealRootsOnly, coefficients.at(0), coefficients.at(1), coefficients.at(2));
     }
     else
-    {        AlbaNumbers derivativeRoots(calculatePolynomialRoots(getDerivativeCoefficients(coefficients)));
+    {
+        AlbaNumbers derivativeRoots(calculatePolynomialRoots(getDerivativeCoefficients(coefficients)));
         result = calculatePolynomialRootsUsingBrentMethod(derivativeRoots, coefficients);
     }
     return result;

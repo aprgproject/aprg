@@ -41,7 +41,8 @@ Circle::Circle(
 
 bool Circle::operator==(Circle const& circle) const
 {
-    return (m_center == circle.m_center) && isAlmostEqual(m_radius, circle.m_radius);}
+    return (m_center == circle.m_center) && isAlmostEqual(m_radius, circle.m_radius);
+}
 
 bool Circle::operator!=(Circle const& circle) const
 {
@@ -216,7 +217,8 @@ void Circle::determineAndSaveCenterAndRadiusFromCoefficients(
 
 Points Circle::getPointsInTraversingXAndY(double const signOfX, double const signOfY, double const interval) const
 {
-    Points result;    Points pointsFromTraversingX(getPointsInTraversingX(signOfX, signOfY, interval));
+    Points result;
+    Points pointsFromTraversingX(getPointsInTraversingX(signOfX, signOfY, interval));
     Points pointsFromTraversingY(getPointsInTraversingY(signOfX, signOfY, interval));
     if(signOfX>0 && signOfY>0)
     {

@@ -7,7 +7,8 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace TwoDimensions
 {
@@ -44,7 +45,8 @@ TEST(CircleTest, CircleAtOriginWithRadius)
     EXPECT_DOUBLE_EQ(18.849555921538758696, circle.getCircumference());
     Points points(circle.getLocus(1));
     ASSERT_EQ(20u, points.size());
-    EXPECT_EQ(Point(3,0), points.at(0));    EXPECT_EQ(Point(2.8284271247461902909,1), points.at(1));
+    EXPECT_EQ(Point(3,0), points.at(0));
+    EXPECT_EQ(Point(2.8284271247461902909,1), points.at(1));
     EXPECT_EQ(Point(2.2360679774997898051,2), points.at(2));
     EXPECT_EQ(Point(2,2.2360679774997898051), points.at(3));
     EXPECT_EQ(Point(1,2.8284271247461902909), points.at(4));

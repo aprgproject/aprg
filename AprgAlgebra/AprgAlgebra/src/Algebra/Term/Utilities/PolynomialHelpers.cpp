@@ -50,7 +50,8 @@ AlbaNumber getRemainderForOneVariablePolynomialDividedByVariableMinusConstantVal
 AlbaNumbers getRoots(RootType const rootType, Polynomial const& polynomial)
 {
     AlbaNumbers result;
-    if(doesThePolynomialHaveOnlyOneVariable(polynomial))    {
+    if(doesThePolynomialHaveOnlyOneVariable(polynomial))
+    {
         Polynomial polynomialToFactorize(polynomial);
         Polynomials factorizedPolynomials(factorize(polynomialToFactorize));
         for(Polynomial const& factorizedPolynomial : factorizedPolynomials)
@@ -86,7 +87,8 @@ AlbaNumbers getRoots(RootType const rootType, Polynomial const& polynomial)
                         }
                     }
                 }
-            }        }
+            }
+        }
     }
     return result;
 }
@@ -129,4 +131,5 @@ void removeEmptyPolynomials(Polynomials & polynomials)
 }
 
 }
+
 }

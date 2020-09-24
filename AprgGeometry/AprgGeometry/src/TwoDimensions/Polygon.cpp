@@ -7,7 +7,8 @@ using namespace alba::Dimensionless;
 using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace TwoDimensions
 {

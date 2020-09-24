@@ -5,6 +5,7 @@
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 
 #include <gtest/gtest.h>
+
 #include <cmath>
 
 using namespace alba::algebra;
@@ -54,4 +55,5 @@ TEST(SampleTest, BitmapGraph24Bits)
     });
     graph.saveChangesToBitmapFile();
 }
+
 }
