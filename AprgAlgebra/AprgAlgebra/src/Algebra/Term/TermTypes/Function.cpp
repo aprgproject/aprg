@@ -1,12 +1,13 @@
 #include "Function.hpp"
 
+#include <Algebra/Simplification/SimplificationOfFunction.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 
+using namespace alba::algebra::Simplification;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace algebra
 {
@@ -115,11 +116,12 @@ BaseTerm & Function::getInputTermReference()
 
 void Function::simplify()
 {
-    getTermReferenceFromBaseTerm(getInputTermReference()).simplify();
+    SimplificationOfFunction simplification(*this);
+    simplification.simplify();
+    *this = simplification.getFunction();
 }
 
-ostream & operator<<(ostream & out, Function const& functionAsParameter)
-{
+ostream & operator<<(ostream & out, Function const& functionAsParameter){
     out << functionAsParameter.getDisplayableString();
     return out;
 }

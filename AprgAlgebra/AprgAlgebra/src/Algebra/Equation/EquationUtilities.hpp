@@ -19,10 +19,10 @@ bool doesNegativeVariableSubstitutionYieldsToTheSameEquation(
         Equation const& equation, stringHelper::strings const& variableNames);
 bool isSymmetricAlongXAxis(Equation const& equation);
 bool isSymmetricAlongYAxis(Equation const& equation);
+bool isSymmetricOnOrigin(Equation const& equation);
 bool isEqual(Term const& leftTerm, Term const& rightTerm);
 bool isNotEqual(Term const& leftTerm, Term const& rightTerm);
-bool isLessThan(Term const& leftTerm, Term const& rightTerm);
-bool isGreaterThan(Term const& leftTerm, Term const& rightTerm);
+bool isLessThan(Term const& leftTerm, Term const& rightTerm);bool isGreaterThan(Term const& leftTerm, Term const& rightTerm);
 bool isLessThanOrEqual(Term const& leftTerm, Term const& rightTerm);
 bool isGreaterThanOrEqual(Term const& leftTerm, Term const& rightTerm);
 bool isEquationOperationSatisfied(
