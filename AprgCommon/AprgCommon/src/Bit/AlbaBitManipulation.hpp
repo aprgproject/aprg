@@ -64,10 +64,25 @@ public:
     }
 
     template <unsigned char shiftValue, typename ArgumentType>
+    static constexpr DataTypeToManipulate shiftBitsToTheLeft(ArgumentType const value)
+    {
+        static_assert(sizeof(DataTypeToManipulate)*AlbaBitConstants::BYTE_SIZE_IN_BITS > shiftValue,
+                      "shiftBitsToTheLeft: sizeof(DataTypeToManipulate) size is greater than shift value");
+        return (static_cast<DataTypeToManipulate>(value) << shiftValue);
+    }
+
+    template <unsigned char shiftValue, typename ArgumentType>
+    static constexpr DataTypeToManipulate shiftBitsToTheRight(ArgumentType const value)
+    {
+        static_assert(sizeof(DataTypeToManipulate)*AlbaBitConstants::BYTE_SIZE_IN_BITS > shiftValue,
+                      "shiftBitsToTheRight: sizeof(DataTypeToManipulate) size is greater than shift value");
+        return (static_cast<DataTypeToManipulate>(value) >> shiftValue);
+    }
+
+    template <unsigned char shiftValue, typename ArgumentType>
     static constexpr DataTypeToManipulate rotateBitToTheLeft(ArgumentType const value)
     {
-        constexpr unsigned char NUMBER_OF_BITS = sizeof(DataTypeToManipulate)*AlbaBitConstants::BYTE_SIZE_IN_BITS;
-        static_assert(shiftValue!=0,
+        constexpr unsigned char NUMBER_OF_BITS = sizeof(DataTypeToManipulate)*AlbaBitConstants::BYTE_SIZE_IN_BITS;        static_assert(shiftValue!=0,
                       "rotateBitToTheLeft: shiftValue is zero, so there should be nothing to do");
         static_assert(NUMBER_OF_BITS > shiftValue,
                       "rotateBitToTheLeft: sizeof(DataTypeToManipulate) size is greater than shift value");
@@ -121,10 +136,17 @@ public:
         return shiftNibblesToTheRight<position>(value) & AlbaBitConstants::NIBBLE_MASK;
     }
 
+    template <unsigned char position>
+    static constexpr unsigned char getBitAt(DataTypeToManipulate const value)
+    {
+        static_assert(sizeof(DataTypeToManipulate)*AlbaBitConstants::BYTE_SIZE_IN_BITS > position,
+                      "getBitAt: position is greater than BYTE_SIZE_IN_BITS times DataTypeToManipulate size");
+        return shiftBitsToTheRight<position>(value) & AlbaBitConstants::BIT_MASK;
+    }
+
     template <unsigned char size>
     static constexpr DataTypeToManipulate swapWithBytes(DataTypeToManipulate const)
-    {
-        static_assert(size != size, "The swapWithSize with this size or type is not supported. Please add a specialization.");
+    {        static_assert(size != size, "The swapWithSize with this size or type is not supported. Please add a specialization.");
         return 0;
     }
 
@@ -148,11 +170,10 @@ public:
         return swapWithBytes<8>(value);
     }
 
-    static constexpr DataTypeToManipulate generateOnesWithNumberOfBits(unsigned int numberOfOnes)
+    static constexpr DataTypeToManipulate generateOnesWithNumberOfBits(unsigned int const numberOfOnes)
     {
         return static_cast<DataTypeToManipulate>(round(pow(static_cast<double>(2), static_cast<double>(numberOfOnes)))-1);
     }
-
     static constexpr DataTypeToManipulate getAllBitsAsserted()
     {
         static_assert(sizeof(DataTypeToManipulate) != sizeof(DataTypeToManipulate),
