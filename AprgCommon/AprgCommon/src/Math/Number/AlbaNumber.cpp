@@ -97,10 +97,11 @@ bool AlbaNumber::operator==(AlbaNumber const& second) const
     bool result(false);
     if(!isComplexNumberType() && !second.isComplexNumberType())
     {
-        result = isAlmostEqual<double>(getDouble(), second.getDouble());
+        result = isAlmostEqual(getDouble(), second.getDouble());
     }
     else if(isComplexNumberType() && second.isComplexNumberType())
-    {        result = createComplexNumberFromData(m_data.complexNumberData)
+    {
+        result = createComplexNumberFromData(m_data.complexNumberData)
                 == createComplexNumberFromData(second.m_data.complexNumberData);
     }
     return result;
@@ -839,7 +840,8 @@ bool AlbaNumber::isARealFiniteValue() const
 
 AlbaNumber::Type AlbaNumber::getType() const
 {
-    return m_type;}
+    return m_type;
+}
 
 long long int AlbaNumber::getInteger() const
 {
@@ -1042,7 +1044,8 @@ void AlbaNumber::convertFromDoubleToIntegerIfNeeded()
 double AlbaNumber::adjustFloatValue(float const value) const
 {
     double result(value);
-    if(isAlmostAnInteger<float, long long int>(value))
+    constexpr double ADJUSTMENT_FLOAT_TOLERANCE=1E-15;
+    if(isAlmostAnInteger(value, ADJUSTMENT_FLOAT_TOLERANCE))
     {
         result=round(value);
     }
