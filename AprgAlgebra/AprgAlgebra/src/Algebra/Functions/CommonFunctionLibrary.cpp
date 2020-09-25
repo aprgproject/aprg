@@ -24,10 +24,17 @@ Function abs(Term const& term)
     });
 }
 
+Function greatestIntegerFunction(Term const& term)
+{
+    return Function("greatestIntegerFunction", term, [](AlbaNumber const&  number) -> AlbaNumber
+    {
+        return AlbaNumber(ceil(number.getDouble()));
+    });
+}
+
 Function sin(Term const& term)
 {
-    return Function("sin", term, [](AlbaNumber const&  number) -> AlbaNumber
-    {
+    return Function("sin", term, [](AlbaNumber const&  number) -> AlbaNumber    {
         return ::sin(number.getDouble());
     });
 }

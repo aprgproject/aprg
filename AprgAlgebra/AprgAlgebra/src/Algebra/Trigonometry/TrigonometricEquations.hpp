@@ -8,11 +8,10 @@ namespace alba
 namespace algebra
 {
 
-Equation getSineSquaredPlusCosineSquaredEqualsOne(Term const& term);
+Equation getTrigonometricPythagoreanIdentity(Term const& term);
 Equation getSineEquationOfRightTriangle(
         Term const& angle,
-        Term const& oppositeSideOfAngle,
-        Term const& hypotenuse);
+        Term const& oppositeSideOfAngle,        Term const& hypotenuse);
 Equation getCosineEquationOfRightTriangle(
         Term const& angle,
         Term const& adjacentSideOfAngle,
