@@ -181,10 +181,9 @@ TEST(PolynomialTest, SimplifyAndSortWorks)
 
 TEST(PolynomialTest, SimplifyWithNotANumberDoesNotCrash)
 {
-    Polynomial polynomial{Monomial(NAN, {})};
+    Polynomial polynomial{Monomial(AlbaNumber::Value::NotANumber, {})};
 
     polynomial.simplify();
-
     ASSERT_EQ(1u, polynomial.getMonomialsConstReference().size());
     EXPECT_TRUE(polynomial.getFirstMonomial().getConstantConstReference().isNotANumber());
 }

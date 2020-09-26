@@ -39,11 +39,10 @@ TEST(NewtonMethodTest, IsFinishedWorks)
     };
     NewtonMethod newtonMethod1(4, functionToIterate);
     NewtonMethod newtonMethod2(16, functionToIterate);
-    NewtonMethod newtonMethod3(INFINITY, functionToIterate);
+    NewtonMethod newtonMethod3(AlbaNumber::Value::PositiveInfinity, functionToIterate);
 
     EXPECT_TRUE(newtonMethod1.isFinished());
-    EXPECT_FALSE(newtonMethod2.isFinished());
-    EXPECT_TRUE(newtonMethod3.isFinished());
+    EXPECT_FALSE(newtonMethod2.isFinished());    EXPECT_TRUE(newtonMethod3.isFinished());
 }
 
 TEST(NewtonMethodTest, GetNumberOfIterationsExecutedWorksWhenNoIterationsAreExecuted)

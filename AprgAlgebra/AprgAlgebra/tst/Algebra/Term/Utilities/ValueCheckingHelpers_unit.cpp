@@ -4,9 +4,10 @@
 
 #include <gtest/gtest.h>
 
+#include <cmath>
+
 namespace alba
 {
-
 namespace algebra
 {
 

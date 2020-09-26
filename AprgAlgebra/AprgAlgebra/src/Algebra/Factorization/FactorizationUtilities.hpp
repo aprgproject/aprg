@@ -11,16 +11,18 @@ namespace algebra
 namespace Factorization
 {
 
+bool areExponentsDivisible(Monomial const& monomial, unsigned int const divisor);
 bool isPerfectSquare(Monomial const& monomial);
 bool isPerfectCube(Monomial const& monomial);
 bool isPerfectNthPower(Monomial const& monomial, unsigned int const nthPower);
-bool areExponentsDivisible(Monomial const& monomial, unsigned int const divisor);
+bool doesNotNeedToBeFactorized(Polynomial const& polynomial);
+
 void simplifyPolynomialThenEmplaceBackIfNotEmpty(Polynomials & polynomials, Polynomial const& polynomial);
 void emplaceBackIfNotEmpty(Polynomials & polynomials, Polynomial const& polynomial);
+
 Polynomials returnPolynomialsOrSinglePolynomialIfEmpty(
         Polynomials const& polynomials,
         Polynomial const& polynomial);
-
 }
 
 }

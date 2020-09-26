@@ -24,11 +24,10 @@ Polynomials factorizeAPolynomial(Polynomial const& polynomial)
     Polynomial polynomialToFactorize(polynomial);
     polynomialToFactorize.simplify();
     Polynomials result;
-    if(polynomialToFactorize.isOneMonomial())
+    if(doesNotNeedToBeFactorized(polynomial))
     {
         result.emplace_back(polynomialToFactorize);
-    }
-    else
+    }    else
     {
         result = factorizeCommonMonomialIfPossible(polynomialToFactorize);
         if(result.empty())
@@ -39,11 +38,10 @@ Polynomials factorizeAPolynomial(Polynomial const& polynomial)
         {
             result = factorizeIncreasingAndDecreasingExponentsFormIfPossible(polynomialToFactorize);
         }
-        if(result.empty())
+        if(result.empty() && polynomialToFactorize.getMonomialsConstReference().size() > 2)
         {
             result = factorizeBySplittingToSmallerPolynomialsIfPossible(polynomialToFactorize);
         }
-
         if(result.empty())
         {
             result.emplace_back(polynomialToFactorize);
