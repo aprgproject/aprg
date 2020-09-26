@@ -189,7 +189,8 @@ TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithRedundantInfiniti
                 AlbaNumber::Value::NegativeInfinity};
     AlbaNumbers valuesThatAreNotAccepted{1};
     solutionSet.determineAndAddAcceptedIntervals(addedValuesToCheck, [&](AlbaNumber const& numberToCheck)
-    {        return find(valuesThatAreNotAccepted.cbegin(), valuesThatAreNotAccepted.cend(), numberToCheck) == valuesThatAreNotAccepted.cend();
+    {
+        return find(valuesThatAreNotAccepted.cbegin(), valuesThatAreNotAccepted.cend(), numberToCheck) == valuesThatAreNotAccepted.cend();
     });
 
     AlbaNumberIntervals actualIntervals(solutionSet.getAcceptedIntervals());

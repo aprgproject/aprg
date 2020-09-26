@@ -27,7 +27,8 @@ Polynomials factorizeAPolynomial(Polynomial const& polynomial)
     if(doesNotNeedToBeFactorized(polynomial))
     {
         result.emplace_back(polynomialToFactorize);
-    }    else
+    }
+    else
     {
         result = factorizeCommonMonomialIfPossible(polynomialToFactorize);
         if(result.empty())
@@ -42,6 +43,7 @@ Polynomials factorizeAPolynomial(Polynomial const& polynomial)
         {
             result = factorizeBySplittingToSmallerPolynomialsIfPossible(polynomialToFactorize);
         }
+
         if(result.empty())
         {
             result.emplace_back(polynomialToFactorize);

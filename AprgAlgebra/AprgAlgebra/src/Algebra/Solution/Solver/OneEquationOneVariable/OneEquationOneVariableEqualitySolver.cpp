@@ -132,7 +132,8 @@ void OneEquationOneVariableEqualitySolver::performNewtonMethodToFindSolution(
             m_calculatedValues.emplace_back(newtonMethod.getCurrentValue());
             setAsIncompleteSolution();
             break;
-        }    }
+        }
+    }
 }
 
 }

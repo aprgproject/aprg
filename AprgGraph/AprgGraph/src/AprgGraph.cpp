@@ -3,7 +3,8 @@
 #include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableEqualitySolver.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Term/Utilities/ConvertHelpers.hpp>
-#include <Algebra/Term/Utilities/CreateHelpers.hpp>#include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
+#include <Algebra/Term/Utilities/CreateHelpers.hpp>
+#include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 #include <TwoDimensions/TwoDimensionsHelper.hpp>
 
@@ -379,7 +380,8 @@ void AprgGraph::drawEquationWithXSubstitution(Equation const& equation, unsigned
             points.emplace_back(xValue, acceptedValue.getDouble());
         }
     });
-    drawDiscontinuousPoints(points, color);}
+    drawDiscontinuousPoints(points, color);
+}
 
 void AprgGraph::drawEquationWithYSubstitution(Equation const& equation, unsigned int const color)
 {
@@ -398,7 +400,8 @@ void AprgGraph::drawEquationWithYSubstitution(Equation const& equation, unsigned
             points.emplace_back(acceptedValue.getDouble(), yValue);
         }
     });
-    drawDiscontinuousPoints(points, color);}
+    drawDiscontinuousPoints(points, color);
+}
 
 
 }

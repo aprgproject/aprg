@@ -11,8 +11,10 @@
 using namespace alba::algebra::Functions;
 using namespace alba::mathHelper;
 using namespace std;
+
 namespace alba
 {
+
 namespace algebra
 {
 
@@ -23,7 +25,8 @@ TEST(TrigonometricEquationsTest, GetTrigonometricPythagoreanIdentityWorks)
     Equation actualEquation(getTrigonometricPythagoreanIdentity(x));
 
     Term expectedSineSquaredTerm(createExpressionIfPossible({Term(sin(x)), Term("^"), Term(2)}));
-    Term expectedCosineSquaredTerm(createExpressionIfPossible({Term(cos(x)), Term("^"), Term(2)}));    Term leftHandSide(createExpressionIfPossible({expectedSineSquaredTerm, Term("+"), expectedCosineSquaredTerm}));
+    Term expectedCosineSquaredTerm(createExpressionIfPossible({Term(cos(x)), Term("^"), Term(2)}));
+    Term leftHandSide(createExpressionIfPossible({expectedSineSquaredTerm, Term("+"), expectedCosineSquaredTerm}));
     Equation expectedEquation(leftHandSide, "=", Term(1));
     EXPECT_EQ(expectedEquation, actualEquation);
 

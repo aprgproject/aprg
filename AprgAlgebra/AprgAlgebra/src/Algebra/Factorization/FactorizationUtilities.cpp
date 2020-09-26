@@ -2,9 +2,13 @@
 
 #include <Algebra/Factorization/Factorization.hpp>
 #include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
+#include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
-using namespace alba::mathHelper;using namespace std;
+#include <algorithm>
+
+using namespace alba::mathHelper;
+using namespace std;
 
 namespace alba
 {
@@ -32,7 +36,8 @@ bool areExponentsDivisible(Monomial const& monomial, unsigned int const divisor)
 
 bool isPerfectSquare(Monomial const& monomial)
 {
-    return isPerfectNthPower(monomial, 2);}
+    return isPerfectNthPower(monomial, 2);
+}
 
 bool isPerfectCube(Monomial const& monomial)
 {
@@ -60,15 +65,21 @@ bool doesNotNeedToBeFactorized(Polynomial const& polynomial)
     }
     else if(monomials.size() == 2)
     {
-        if(doesThePolynomialHaveOnlyOneVariable(polynomial))
+        Monomial const& first(monomials.at(0));
+        Monomial const& second(monomials.at(1));
+        bool areBothConstantIntegers = first.getConstantConstReference().isIntegerType() && second.getConstantConstReference().isIntegerType();
+        bool areEitherConstantOne = first.getConstantConstReference() == 1 || second.getConstantConstReference() == 1;
+        AlbaNumbersSet exponents;
+        retrieveExponents(exponents, polynomial);
+        bool areAllExponentsOneOrZero = all_of(exponents.cbegin(), exponents.cend(), [](AlbaNumber const& exponent)
         {
-            Monomial const& first(monomials.at(0));
-            Monomial const& second(monomials.at(1));
-            result = (first.getMaxExponent() == 0 && first.getConstantConstReference() == 1 && second.getMaxExponent() <= 1)
-                    || (first.getMaxExponent() <= 1 && first.getMaxExponent() == 0 && second.getConstantConstReference() == 1);
-        }
+            return exponent == 0 || exponent == 1;
+        });
+        bool areBothDegreeLessThanOne = first.getDegree() <= 1 && second.getDegree() <= 1;
+        result = areBothConstantIntegers && areEitherConstantOne && areAllExponentsOneOrZero && areBothDegreeLessThanOne;
     }
-    return result;}
+    return result;
+}
 
 void simplifyPolynomialThenEmplaceBackIfNotEmpty(Polynomials & polynomials, Polynomial const& polynomial)
 {

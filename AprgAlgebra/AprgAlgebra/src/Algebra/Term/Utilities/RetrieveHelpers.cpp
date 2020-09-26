@@ -235,6 +235,7 @@ AlbaNumber getFirstCoefficient(Variable const& )
 {
     return 1;
 }
+
 AlbaNumber getFirstCoefficient(Monomial const& monomial)
 {
     return monomial.getConstantConstReference();

@@ -69,7 +69,8 @@ AlbaNumbers getRoots(RootType const rootType, Polynomial const& polynomial)
                 Monomial secondMonomial(monomialsToCheck.at(1));
                 if(secondMonomial.isConstantOnly())
                 {
-                    AlbaNumber constant(-secondMonomial.getConstantConstReference());                    constant = constant/firstMonomial.getConstantConstReference();
+                    AlbaNumber constant(-secondMonomial.getConstantConstReference());
+                    constant = constant/firstMonomial.getConstantConstReference();
                     constant = constant^(AlbaNumber(1)/firstMonomial.getMaxExponent());
 
                     if(constant.isAFiniteValue())

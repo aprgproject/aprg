@@ -381,7 +381,8 @@ void Expression::putTermWithAddition(BaseTerm const& baseTerm)
         m_commonOperatorLevel = OperatorLevel::AdditionAndSubtraction;
         putTermForExpressionAndNonExpressions(baseTerm, TermAssociationType::Positive);
         break;
-    }    case OperatorLevel::MultiplicationAndDivision:
+    }
+    case OperatorLevel::MultiplicationAndDivision:
     case OperatorLevel::RaiseToPower:
     {
         clearAndPutTermInTermsWithAssociation(Term(Expression(*this)));
@@ -402,7 +403,8 @@ void Expression::putTermWithSubtraction(BaseTerm const& baseTerm)
         m_commonOperatorLevel = OperatorLevel::AdditionAndSubtraction;
         putTermForExpressionAndNonExpressions(baseTerm, TermAssociationType::Negative);
         break;
-    }    case OperatorLevel::MultiplicationAndDivision:
+    }
+    case OperatorLevel::MultiplicationAndDivision:
     case OperatorLevel::RaiseToPower:
     {
         clearAndPutTermInTermsWithAssociation(Term(Expression(*this)));
@@ -423,7 +425,8 @@ void Expression::putTermWithMultiplication(BaseTerm const& baseTerm)
         m_commonOperatorLevel = OperatorLevel::MultiplicationAndDivision;
         putTermForExpressionAndNonExpressions(baseTerm, TermAssociationType::Positive);
         break;
-    }    case OperatorLevel::AdditionAndSubtraction:
+    }
+    case OperatorLevel::AdditionAndSubtraction:
     case OperatorLevel::RaiseToPower:
     {
         clearAndPutTermInTermsWithAssociation(Term(Expression(*this)));
@@ -444,7 +447,8 @@ void Expression::putTermWithDivision(BaseTerm const& baseTerm)
         m_commonOperatorLevel = OperatorLevel::MultiplicationAndDivision;
         putTermForExpressionAndNonExpressions(baseTerm, TermAssociationType::Negative);
         break;
-    }    case OperatorLevel::AdditionAndSubtraction:
+    }
+    case OperatorLevel::AdditionAndSubtraction:
     case OperatorLevel::RaiseToPower:
     {
         clearAndPutTermInTermsWithAssociation(Term(Expression(*this)));
@@ -465,7 +469,8 @@ void Expression::putTermWithRaiseToPower(BaseTerm const& baseTerm)
         m_commonOperatorLevel = OperatorLevel::RaiseToPower;
         putTermWithRaiseToPowerForExpressionAndNonExpressions(baseTerm, TermAssociationType::Positive);
         break;
-    }    case OperatorLevel::AdditionAndSubtraction:
+    }
+    case OperatorLevel::AdditionAndSubtraction:
     case OperatorLevel::MultiplicationAndDivision:
     {
         clearAndPutTermInTermsWithAssociation(Term(Expression(*this)));

@@ -28,7 +28,8 @@ TEST(FactorizationUtilitiesTest, AreExponentsDivisibleWorks)
 
 TEST(FactorizationUtilitiesTest, ReturnPolynomialsOrSinglePolynomialIfEmptyWorksWhenPolynomialsIsNotEmpty)
 {
-    Polynomial polynomial1{Monomial(1, {{"x", 1}}), Monomial(11, {})};    Polynomial polynomial2{Monomial(1, {{"y", 1}}), Monomial(13, {})};
+    Polynomial polynomial1{Monomial(1, {{"x", 1}}), Monomial(11, {})};
+    Polynomial polynomial2{Monomial(1, {{"y", 1}}), Monomial(13, {})};
     Polynomial polynomial3{Monomial(1, {{"z", 1}}), Monomial(17, {})};
     Polynomial singlePolynomial{Monomial(1, {{"a", 1}}), Monomial(23, {})};
     Polynomials polynomials{polynomial1, polynomial2, polynomial3};
@@ -95,9 +96,22 @@ TEST(FactorizationUtilitiesTest, IsPerfectNthPowerWorks)
     EXPECT_FALSE(isPerfectNthPower(monomial4, 4));
 }
 
+TEST(FactorizationUtilitiesTest, DoesNotNeedToBeFactorizedWorks)
+{
+    EXPECT_TRUE(doesNotNeedToBeFactorized(Polynomial{Monomial(1, {{"x", 4}})}));
+    EXPECT_TRUE(doesNotNeedToBeFactorized(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {})}));
+    EXPECT_TRUE(doesNotNeedToBeFactorized(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 1}})}));
+    EXPECT_FALSE(doesNotNeedToBeFactorized(Polynomial{Monomial(1, {{"x", 1}}), Monomial(0.5, {})}));
+    EXPECT_FALSE(doesNotNeedToBeFactorized(Polynomial{Monomial(2, {{"x", 1}}), Monomial(3, {})}));
+    EXPECT_FALSE(doesNotNeedToBeFactorized(Polynomial{Monomial(1, {{"x", 0.5}}), Monomial(2, {})}));
+    EXPECT_FALSE(doesNotNeedToBeFactorized(Polynomial{Monomial(1, {{"x", 1}, {"y", 1}}), Monomial(2, {})}));
+    EXPECT_FALSE(doesNotNeedToBeFactorized(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 1}}), Monomial(2, {{"z", 1}})}));
+}
+
 TEST(FactorizationUtilitiesTest, SimplifyPolynomialThenEmplaceBackIfNotEmptyWorksIfNotEmpty)
 {
     Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(2, {{"x", 1}})};
+
     Polynomials polynomialsToVerify;
     simplifyPolynomialThenEmplaceBackIfNotEmpty(polynomialsToVerify, polynomialToTest);
 
