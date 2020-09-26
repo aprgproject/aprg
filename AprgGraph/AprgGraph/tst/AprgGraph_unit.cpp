@@ -19,11 +19,10 @@ using namespace std;
 namespace alba
 {
 
-TEST(SampleTest, BitmapGraph24Bits)
+TEST(SampleTest, DISABLED_BitmapGraph24Bits)
 {
     AlbaLocalPathHandler defaultFile(APRG_GRAPH_24_BIT_DEFAULT_FILE);
-    AlbaLocalPathHandler graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);
-    graphOutputFile.deleteFile();
+    AlbaLocalPathHandler graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);    graphOutputFile.deleteFile();
     defaultFile.copyToNewFile(graphOutputFile.getFullPath());
 
     AprgGraph graph(graphOutputFile.getFullPath(), BitmapXY(800,450), BitmapDoubleXY(50, 50));
