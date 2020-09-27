@@ -32,10 +32,26 @@ Function greatestIntegerFunction(Term const& term)
     });
 }
 
+Function sgn(Term const& term)
+{
+    return Function("sgn", term, [](AlbaNumber const&  number) -> AlbaNumber
+    {
+        AlbaNumber result(0);
+        if(number > 0)
+        {
+            result = 1;
+        }
+        else if(number < 0)
+        {
+            result = -1;
+        }
+        return result;
+    });
+}
+
 Function sin(Term const& term)
 {
-    return Function("sin", term, [](AlbaNumber const&  number) -> AlbaNumber
-    {
+    return Function("sin", term, [](AlbaNumber const&  number) -> AlbaNumber    {
         return ::sin(number.getDouble());
     });
 }
