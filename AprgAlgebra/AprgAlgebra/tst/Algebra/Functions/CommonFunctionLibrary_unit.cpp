@@ -47,6 +47,7 @@ TEST(CommonFunctionLibraryTest, SignumFunctionWorks)
 TEST(CommonFunctionLibraryTest, SineFunctionWorks)
 {
     Function sineFunction(sin(Term(getPi())));
+
     EXPECT_EQ("sin", sineFunction.getFunctionName());
     EXPECT_EQ(Term(getPi()), getTermConstReferenceFromBaseTerm(sineFunction.getInputTermConstReference()));
     EXPECT_EQ(AlbaNumber(0), sineFunction.performFunctionAndReturnResultIfPossible());

@@ -6,7 +6,8 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace algebra
 {
@@ -24,34 +25,36 @@ bool isRejectedLimitValueForDirectSubstitutionAndIterativeMethods(AlbaNumber con
     return !value.isARealFiniteValue() || value.getDouble() == 0;
 }
 
-AlbaNumber getLimitValueByApproachType(        Term const& term,
+AlbaNumber getLimitAtAValueByApproachType(
+        Term const& term,
         string const& variableName,
         AlbaNumber const& valueToApproach,
-        LimitApproachType const limitApproachType)
+        LimitAtAValueApproachType const limitApproachType)
 {
     AlbaNumber result;
-    if(LimitApproachType::BothSides == limitApproachType)
+    if(LimitAtAValueApproachType::BothSides == limitApproachType)
     {
-        result = getLimitInBothSides(term, variableName, valueToApproach);
+        result = getLimitAtAValueInBothSides(term, variableName, valueToApproach);
     }
-    else if(LimitApproachType::PositiveSide == limitApproachType)
+    else if(LimitAtAValueApproachType::PositiveSide == limitApproachType)
     {
-        result = getLimitInPositiveSide(term, variableName, valueToApproach);
+        result = getLimitAtAValueInThePositiveSide(term, variableName, valueToApproach);
     }
-    else if(LimitApproachType::NegativeSide == limitApproachType)
+    else if(LimitAtAValueApproachType::NegativeSide == limitApproachType)
     {
-        result = getLimitInNegativeSide(term, variableName, valueToApproach);
-    }    return result;
+        result = getLimitAtAValueInTheNegativeSide(term, variableName, valueToApproach);
+    }
+    return result;
 }
 
-AlbaNumber getLimitInBothSides(
+AlbaNumber getLimitAtAValueInBothSides(
         Term const& term,
         string const& variableName,
         AlbaNumber const& valueToApproach)
 {
     AlbaNumber result(AlbaNumber::Value::NotANumber);
-    AlbaNumber limitPositiveSide(getLimitInPositiveSide(term, variableName, valueToApproach));
-    AlbaNumber limitNegativeSide(getLimitInNegativeSide(term, variableName, valueToApproach));
+    AlbaNumber limitPositiveSide(getLimitAtAValueInThePositiveSide(term, variableName, valueToApproach));
+    AlbaNumber limitNegativeSide(getLimitAtAValueInTheNegativeSide(term, variableName, valueToApproach));
     if(limitPositiveSide == limitNegativeSide) //limit only exists if both sides are equal  (Calculus Theorem)
     {
         result = getAverageForAlbaNumber(limitPositiveSide, limitNegativeSide);
@@ -59,12 +62,12 @@ AlbaNumber getLimitInBothSides(
     return result;
 }
 
-AlbaNumber getLimitInPositiveSide(
+AlbaNumber getLimitAtAValueInThePositiveSide(
         Term const& term,
         string const& variableName,
         AlbaNumber const& valueToApproach)
 {
-    return getLimitByIterationAndLinearInterpolation(
+    return getLimitAtAValueByIterationAndLinearInterpolation(
                 term,
                 variableName,
                 valueToApproach,
@@ -72,12 +75,12 @@ AlbaNumber getLimitInPositiveSide(
                 MAX_NUMBER_OF_ITERATIONS);
 }
 
-AlbaNumber getLimitInNegativeSide(
+AlbaNumber getLimitAtAValueInTheNegativeSide(
         Term const& term,
         string const& variableName,
         AlbaNumber const& valueToApproach)
 {
-    return getLimitByIterationAndLinearInterpolation(
+    return getLimitAtAValueByIterationAndLinearInterpolation(
                 term,
                 variableName,
                 valueToApproach,
@@ -85,7 +88,7 @@ AlbaNumber getLimitInNegativeSide(
                 MAX_NUMBER_OF_ITERATIONS);
 }
 
-AlbaNumber getLimitByIterationAndLinearInterpolation(
+AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
         Term const& term,
         string const& variableName,
         AlbaNumber const& valueToApproach,
@@ -100,13 +103,15 @@ AlbaNumber getLimitByIterationAndLinearInterpolation(
     for(unsigned int i=0; i<maxNumberOfIterations && currentInput != previousRejectedInput; i++)
     {
         substitution.putVariableWithValue(variableName, currentInput);
-        Term currentOutputTerm = substitution.performSubstitutionTo(term);        if(currentOutputTerm.isConstant())
+        Term currentOutputTerm = substitution.performSubstitutionTo(term);
+        if(currentOutputTerm.isConstant())
         {
             AlbaNumber currentOutputNumber(currentOutputTerm.getConstantConstReference().getNumberConstReference());
             if(isRejectedLimitValueForDirectSubstitutionAndIterativeMethods(currentOutputNumber))
             {
                 previousRejectedInput = currentInput;
-            }            else
+            }
+            else
             {
                 previousPreviousAcceptedInput = previousAcceptedInput;
                 previousAcceptedInput = currentInput;
@@ -121,10 +126,10 @@ AlbaNumber getLimitByIterationAndLinearInterpolation(
         }
     }
 
-    return getLimitValue(term, variableName, valueToApproach, previousAcceptedInput, previousPreviousAcceptedInput);
+    return getLimitAtAValueUsingTrendOfValues(term, variableName, valueToApproach, previousAcceptedInput, previousPreviousAcceptedInput);
 }
 
-AlbaNumber getLimitValue(
+AlbaNumber getLimitAtAValueUsingTrendOfValues(
         Term const& term,
         string const& variableName,
         AlbaNumber const& valueToApproach,
@@ -169,6 +174,7 @@ AlbaNumber getLimitValue(
     }
     return result;
 }
+
 AlbaNumber getValueUsingLinearInterpolation(
         AlbaNumber const& input1,
         AlbaNumber const& input2,
@@ -191,23 +197,25 @@ AlbaNumber getValueUsingLinearInterpolation(
     return result;
 }
 
-Term getLimitAsItApproachesAValue(
+Term getLimitAtAValue(
         Term const& term,
         string const& variableName,
         AlbaNumber const& valueToApproach,
-        LimitApproachType const limitApproachType)
+        LimitAtAValueApproachType const limitApproachType)
 {
     SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
+
     Term limitResult(substitution.performSubstitutionTo(term));
     if(limitResult.isConstant())
     {
         AlbaNumber limitResultNumber(limitResult.getConstantConstReference().getNumberConstReference());
         if(isRejectedLimitValueForDirectSubstitutionAndIterativeMethods(limitResultNumber))
         {
-            limitResult = Term(getLimitValueByApproachType(term, variableName, valueToApproach, limitApproachType));
+            limitResult = Term(getLimitAtAValueByApproachType(term, variableName, valueToApproach, limitApproachType));
         }
     }
-    return limitResult;}
+    return limitResult;
+}
 
 }
 
