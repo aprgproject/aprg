@@ -19,10 +19,14 @@ enum class LimitAtAValueApproachType
 };
 
 bool isRejectedLimitValueForDirectSubstitutionAndIterativeMethods(AlbaNumber const& value);
-AlbaNumber getLimitAtAValueByApproachType(
+bool hasVerticalAsymptoteAtValue(
         Term const& term,
         std::string const& variableName,
-        AlbaNumber const& valueToApproach,
+        AlbaNumber const& valueToApproach);
+
+AlbaNumber getLimitAtAValueByApproachType(
+        Term const& term,
+        std::string const& variableName,        AlbaNumber const& valueToApproach,
         LimitAtAValueApproachType const limitApproachType);
 AlbaNumber getLimitAtAValueInBothSides(
         Term const& term,

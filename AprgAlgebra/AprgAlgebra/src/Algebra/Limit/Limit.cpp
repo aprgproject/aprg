@@ -25,10 +25,18 @@ bool isRejectedLimitValueForDirectSubstitutionAndIterativeMethods(AlbaNumber con
     return !value.isARealFiniteValue() || value.getDouble() == 0;
 }
 
+bool hasVerticalAsymptoteAtValue(
+        Term const& term,
+        std::string const& variableName,
+        AlbaNumber const& valueToApproach)
+{
+    return getLimitAtAValueInThePositiveSide(term, variableName, valueToApproach).isPositiveOrNegativeInfinity()
+            || getLimitAtAValueInTheNegativeSide(term, variableName, valueToApproach).isPositiveOrNegativeInfinity();
+}
+
 AlbaNumber getLimitAtAValueByApproachType(
         Term const& term,
-        string const& variableName,
-        AlbaNumber const& valueToApproach,
+        string const& variableName,        AlbaNumber const& valueToApproach,
         LimitAtAValueApproachType const limitApproachType)
 {
     AlbaNumber result;
@@ -151,11 +159,10 @@ AlbaNumber getLimitAtAValueUsingTrendOfValues(
         AlbaNumber outputAtValueToApproach(outputTermAtValueToApproach.getConstantConstReference().getNumberConstReference());
         AlbaNumber previousAcceptedOutput(previousAcceptedOutputTerm.getConstantConstReference().getNumberConstReference());
         AlbaNumber previousPreviousAcceptedOutput(previousPreviousAcceptedOutputTerm.getConstantConstReference().getNumberConstReference());
-        if(outputAtValueToApproach.isNegativeInfinity() || outputAtValueToApproach.isPositiveInfinity())
+        if(outputAtValueToApproach.isPositiveOrNegativeInfinity())
         {
             if(previousAcceptedOutput<0)
-            {
-                result = AlbaNumber(AlbaNumber::Value::NegativeInfinity);
+            {                result = AlbaNumber(AlbaNumber::Value::NegativeInfinity);
             }
             else
             {
