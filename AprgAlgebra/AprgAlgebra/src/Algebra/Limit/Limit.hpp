@@ -26,7 +26,8 @@ bool hasVerticalAsymptoteAtValue(
 
 AlbaNumber getLimitAtAValueByApproachType(
         Term const& term,
-        std::string const& variableName,        AlbaNumber const& valueToApproach,
+        std::string const& variableName,
+        AlbaNumber const& valueToApproach,
         LimitAtAValueApproachType const limitApproachType);
 AlbaNumber getLimitAtAValueInBothSides(
         Term const& term,
