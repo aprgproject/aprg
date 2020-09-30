@@ -4,11 +4,9 @@
 #include <Algebra/Retrieval/VariableNamesRetriever.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Term/TermTypes/TermContainerTypes.hpp>
-#include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
 #include <algorithm>
-
 using namespace alba::algebra::Factorization;
 using namespace std;
 

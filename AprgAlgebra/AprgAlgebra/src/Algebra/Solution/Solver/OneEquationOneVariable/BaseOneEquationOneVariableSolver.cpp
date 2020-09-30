@@ -6,10 +6,8 @@
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
-#include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
 
 #include <algorithm>
-
 using namespace std;
 
 namespace alba

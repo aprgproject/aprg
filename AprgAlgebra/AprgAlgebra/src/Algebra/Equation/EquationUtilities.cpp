@@ -4,10 +4,8 @@
 #include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableEqualitySolver.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
-#include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
 
 #include <algorithm>
-
 using namespace alba::stringHelper;
 using namespace std;
 

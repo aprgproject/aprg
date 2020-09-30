@@ -1,11 +1,9 @@
 #include "SolutionUtilities.hpp"
 
 #include <Algebra/Retrieval/NumbersRetriever.hpp>
-#include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
-#include <algorithm>
-#include <cmath>
+#include <algorithm>#include <cmath>
 
 using namespace alba::mathHelper;
 using namespace std;
