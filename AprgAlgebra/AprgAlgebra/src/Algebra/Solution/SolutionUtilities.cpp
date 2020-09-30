@@ -3,7 +3,8 @@
 #include <Algebra/Retrieval/NumbersRetriever.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
-#include <algorithm>#include <cmath>
+#include <algorithm>
+#include <cmath>
 
 using namespace alba::mathHelper;
 using namespace std;

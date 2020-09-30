@@ -26,7 +26,8 @@ TEST(FunctionsRetrieverTest, RetrieveFromEquationsWorks)
 
 TEST(FunctionsRetrieverTest, RetrieveFromEquationWorks)
 {
-    FunctionsRetriever::FunctionCondition conditionThatWillMatch = [](Function const& functionObject)    {
+    FunctionsRetriever::FunctionCondition conditionThatWillMatch = [](Function const& functionObject)
+    {
         return functionObject.getFunctionName() == "functionName";
     };
     FunctionsRetriever::FunctionCondition conditionThatWillNotMatch = [](Function const& functionObject)

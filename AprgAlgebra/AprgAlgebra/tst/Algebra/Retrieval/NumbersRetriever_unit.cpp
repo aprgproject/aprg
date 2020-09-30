@@ -32,7 +32,8 @@ TEST(NumbersRetrieverTest, RetrieveFromEquationsWorks)
 
 TEST(NumbersRetrieverTest, RetrieveFromEquationWorks)
 {
-    NumbersRetriever retriever;    Term leftHandTerm(Monomial(34, {{"x", 5}}));
+    NumbersRetriever retriever;
+    Term leftHandTerm(Monomial(34, {{"x", 5}}));
     Term rightHandTerm(Monomial(41, {{"y", 6}}));
     Equation equation(leftHandTerm, "=", rightHandTerm);
 
