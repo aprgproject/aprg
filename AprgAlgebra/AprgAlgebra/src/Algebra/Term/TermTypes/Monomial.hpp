@@ -41,20 +41,18 @@ public:
     bool isConstantOnly() const;
     bool isVariableOnly() const;
     bool hasASingleVariable() const;
-    bool hasNegativeExponents() const;
 
     AlbaNumber const& getConstantConstReference() const;
-    VariablesToExponentsMap const& getVariablesToExponentsMapConstReference() const;
-    std::string getFirstVariableName() const;
+    VariablesToExponentsMap const& getVariablesToExponentsMapConstReference() const;    std::string getFirstVariableName() const;
     AlbaNumber getDegree() const;
     AlbaNumber getMaxExponent() const;
     AlbaNumber getExponentForVariable(std::string const& variableName) const;
     std::string getDisplayableString() const;
 
+    void clear();
     void simplify();
     void multiplyNumber(AlbaNumber const& number);
-    void divideNumber(AlbaNumber const& number);
-    void raiseToPowerNumber(AlbaNumber const& number);
+    void divideNumber(AlbaNumber const& number);    void raiseToPowerNumber(AlbaNumber const& number);
     void multiplyMonomial(Monomial const& monomial);
     void divideMonomial(Monomial const& monomial);
     void setConstant(AlbaNumber const& constant);

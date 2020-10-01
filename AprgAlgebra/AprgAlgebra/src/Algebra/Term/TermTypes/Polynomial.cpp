@@ -98,24 +98,9 @@ bool Polynomial::isVariableExponentInMonomialFound(Monomial const& monomial) con
     return result;
 }
 
-bool Polynomial::hasNegativeExponents() const
-{
-    bool result(false);
-    for(Monomial const& monomial : m_monomials)
-    {
-        if(monomial.hasNegativeExponents())
-        {
-            result = true;
-            break;
-        }
-    }
-    return result;
-}
-
 AlbaNumber Polynomial::getCoefficientOfVariableExponent(Monomial const& monomial) const
 {
-    AlbaNumber coefficient;
-    for(Monomial const& monomialInternal : m_monomials)
+    AlbaNumber coefficient;    for(Monomial const& monomialInternal : m_monomials)
     {
         if(monomial.getVariablesToExponentsMapConstReference()
                 == monomialInternal.getVariablesToExponentsMapConstReference())

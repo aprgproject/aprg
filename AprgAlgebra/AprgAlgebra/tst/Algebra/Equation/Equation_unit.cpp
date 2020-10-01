@@ -135,10 +135,27 @@ TEST(EquationTest, GetDisplayableStringWorks)
     EXPECT_EQ("7 > 8", equation2.getDisplayableString());
 }
 
+TEST(EquationTest, GetLeftHandTermReferenceWorks)
+{
+    Equation equation2(Term(7), ">", Term(8));
+
+    equation2.getLeftHandTermReference() = Term("a");
+
+    EXPECT_EQ(Term("a"), equation2.getLeftHandTerm());
+}
+
+TEST(EquationTest, GetRightHandTermReferenceWorks)
+{
+    Equation equation2(Term(7), ">", Term(8));
+
+    equation2.getRightHandTermReference() = Term("b");
+
+    EXPECT_EQ(Term("b"), equation2.getRightHandTerm());
+}
+
 TEST(EquationTest, SimplifyWorks)
 {
     Equation equation(Term("x"), "<", Term("y"));
-
     equation.simplify();
 
     EXPECT_EQ(Term(Polynomial({Monomial(1, {{"x", 1}}), Monomial(-1, {{"y", 1}})})), equation.getLeftHandTerm());

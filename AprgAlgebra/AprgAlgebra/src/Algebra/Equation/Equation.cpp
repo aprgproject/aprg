@@ -89,10 +89,19 @@ string Equation::getDisplayableString() const
             + " " + m_rightHandTerm.getDisplayableString();
 }
 
+Term & Equation::getLeftHandTermReference()
+{
+    return m_leftHandTerm;
+}
+
+Term & Equation::getRightHandTermReference()
+{
+    return m_rightHandTerm;
+}
+
 void Equation::simplify()
 {
-    SimplificationOfEquation simplification(*this);
-    simplification.simplify();
+    SimplificationOfEquation simplification(*this);    simplification.simplify();
     *this = simplification.getEquation();
 }
 

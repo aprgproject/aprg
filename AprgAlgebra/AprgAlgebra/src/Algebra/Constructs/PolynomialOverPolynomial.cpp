@@ -74,11 +74,10 @@ PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::divide(
         Monomial const& divisorMonomial(m_denominator.getFirstMonomial());
         Monomial currentQuotientMonomial(dividendMonomial);
         currentQuotientMonomial.divideMonomial(divisorMonomial);
-        if(currentQuotientMonomial.hasNegativeExponents())
+        if(hasNegativeExponents(currentQuotientMonomial))
         {
             break;
-        }
-        else
+        }        else
         {
             currentQuotient.addMonomial(currentQuotientMonomial);
             Polynomial polynomialToSubtract(m_denominator);
