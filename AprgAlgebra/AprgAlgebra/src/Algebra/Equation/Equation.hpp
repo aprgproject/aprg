@@ -38,7 +38,8 @@ public:
 
     void simplify();
 
-private:    EquationOperator m_equationOperator;
+private:
+    EquationOperator m_equationOperator;
     Term m_leftHandTerm;
     Term m_rightHandTerm;
 };

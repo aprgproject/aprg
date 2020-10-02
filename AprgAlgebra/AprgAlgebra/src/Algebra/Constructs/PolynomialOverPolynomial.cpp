@@ -77,7 +77,8 @@ PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::divide(
         if(hasNegativeExponents(currentQuotientMonomial))
         {
             break;
-        }        else
+        }
+        else
         {
             currentQuotient.addMonomial(currentQuotientMonomial);
             Polynomial polynomialToSubtract(m_denominator);

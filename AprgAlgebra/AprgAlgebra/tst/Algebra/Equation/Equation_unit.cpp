@@ -156,6 +156,7 @@ TEST(EquationTest, GetRightHandTermReferenceWorks)
 TEST(EquationTest, SimplifyWorks)
 {
     Equation equation(Term("x"), "<", Term("y"));
+
     equation.simplify();
 
     EXPECT_EQ(Term(Polynomial({Monomial(1, {{"x", 1}}), Monomial(-1, {{"y", 1}})})), equation.getLeftHandTerm());

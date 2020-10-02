@@ -101,7 +101,8 @@ Term & Equation::getRightHandTermReference()
 
 void Equation::simplify()
 {
-    SimplificationOfEquation simplification(*this);    simplification.simplify();
+    SimplificationOfEquation simplification(*this);
+    simplification.simplify();
     *this = simplification.getEquation();
 }
 

@@ -161,7 +161,8 @@ TEST(MonomialTest, HasASingleVariableWorks)
 
 TEST(MonomialTest, GetConstantConstReferenceWorks)
 {
-    Monomial monomial1;    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial monomial1;
+    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
 
     EXPECT_DOUBLE_EQ(0, monomial1.getConstantConstReference().getDouble());
     EXPECT_DOUBLE_EQ(-54, monomial2.getConstantConstReference().getDouble());
@@ -288,7 +289,8 @@ TEST(MonomialTest, ClearWorks)
 
 TEST(MonomialTest, SimplifyWorks)
 {
-    Monomial monomial1;    Monomial monomial2(6, {});
+    Monomial monomial1;
+    Monomial monomial2(6, {});
     Monomial monomial3(1, {{"x", 1}});
     Monomial monomial4(10, {{"x", 0}});
     Monomial monomial5(58, {{"x", 7}, {"y", 0}});
