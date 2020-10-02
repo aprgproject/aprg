@@ -1,9 +1,9 @@
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
 #include <Algebra/Functions/FunctionUtilities.hpp>
+#include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
@@ -15,10 +15,23 @@ namespace algebra
 namespace Functions
 {
 
+TEST(FunctionUtilitiesTest, IsFunctionContinuousWorks)
+{
+    Function unknownFunction(
+                "functionToTest",
+                getBaseTermConstReferenceFromTerm(Term("x")),
+                [](AlbaNumber const& number)
+    {
+        return number;
+    });
+
+    EXPECT_FALSE(isFunctionContinuous(unknownFunction));
+    EXPECT_TRUE(isFunctionContinuous(abs(Term("x"))));
+}
+
 TEST(FunctionUtilitiesTest, EvaluateAndGetInputOutputPairWorks)
 {
     AlbaNumbers inputNumbers{-2,-1,0,1,2};
-
     AlbaNumberPairs inputAndOutputPairs(
                 evaluateAndGetInputOutputPair(
                     inputNumbers,

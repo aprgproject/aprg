@@ -1,11 +1,14 @@
 #include "FunctionUtilities.hpp"
 
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
+#include <String/AlbaStringHelper.hpp>
 
+#include <algorithm>
+
+using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace algebra
 {
@@ -13,10 +16,20 @@ namespace algebra
 namespace Functions
 {
 
+bool isFunctionContinuous(Function const& functionObject)
+{
+    strings continuousFunctionNames{"abs", "sin", "cos"};
+
+    return any_of(continuousFunctionNames.cbegin(), continuousFunctionNames.cend(),
+                  [&](string const& continuousFunctionName)
+    {
+        return continuousFunctionName == functionObject.getFunctionName();
+    });
+}
+
 AlbaNumberPairs evaluateAndGetInputOutputPair(
         AlbaNumbers const& numbers,
-        string const& variableName,
-        Function const& functionObject)
+        string const& variableName,        Function const& functionObject)
 {
     AlbaNumberPairs result;
     SubstitutionOfVariablesToValues substitution;

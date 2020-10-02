@@ -1,8 +1,8 @@
 #pragma once
 
+#include <Algebra/Limit/LimitAtAValueApproachType.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 #include <Math/Number/AlbaNumber.hpp>
-
 #include <string>
 
 namespace alba
@@ -11,17 +11,10 @@ namespace alba
 namespace algebra
 {
 
-enum class LimitAtAValueApproachType
-{
-    BothSides,
-    PositiveSide,
-    NegativeSide
-};
-
+bool isAlmostEqualForLimitChecking(AlbaNumber const& value1, AlbaNumber const& value2);
 bool isRejectedLimitValueForDirectSubstitutionAndIterativeMethods(AlbaNumber const& value);
 bool hasVerticalAsymptoteAtValue(
-        Term const& term,
-        std::string const& variableName,
+        Term const& term,        std::string const& variableName,
         AlbaNumber const& valueToApproach);
 bool hasHorizontalAsymptoteAtValue(
         Term const& term,

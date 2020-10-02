@@ -15,15 +15,20 @@ namespace algebra
 namespace
 {
 
-constexpr double POSITIVE_DELTA_FOR_INITIAL_VALUE=1;
+constexpr double LIMIT_DIFFERENCE_TOLERANCE=1E-5;
 constexpr unsigned int MAX_NUMBER_OF_ITERATIONS=100;
+constexpr double POSITIVE_DELTA_FOR_INITIAL_VALUE=1;
 
+}
+
+bool isAlmostEqualForLimitChecking(AlbaNumber const& value1, AlbaNumber const& value2)
+{
+    return isAlmostEqual(value1.getDouble(), value2.getDouble(), LIMIT_DIFFERENCE_TOLERANCE);
 }
 
 bool isRejectedLimitValueForDirectSubstitutionAndIterativeMethods(AlbaNumber const& value)
 {
-    return !value.isARealFiniteValue() || value.getDouble() == 0;
-}
+    return !value.isARealFiniteValue() || value.getDouble() == 0;}
 
 bool hasVerticalAsymptoteAtValue(
         Term const& term,
@@ -78,11 +83,10 @@ AlbaNumber getLimitAtAValueInBothSides(
     AlbaNumber result(AlbaNumber::Value::NotANumber);
     AlbaNumber limitPositiveSide(getLimitAtAValueInThePositiveSide(term, variableName, valueToApproach));
     AlbaNumber limitNegativeSide(getLimitAtAValueInTheNegativeSide(term, variableName, valueToApproach));
-    if(limitPositiveSide == limitNegativeSide) //limit only exists if both sides are equal  (Calculus Theorem)
+    if(isAlmostEqualForLimitChecking(limitPositiveSide, limitNegativeSide)) //limit only exists if both sides are equal  (Calculus Theorem)
     {
         result = getAverageForAlbaNumber(limitPositiveSide, limitNegativeSide);
-    }
-    return result;
+    }    return result;
 }
 
 AlbaNumber getLimitAtAValueInThePositiveSide(
@@ -140,11 +144,13 @@ AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
                 previousAcceptedInput = currentInput;
             }
             AlbaNumber newInput(getAverageForAlbaNumber(previousAcceptedInput, previousRejectedInput));
-            if(newInput == valueToApproach) { break; }
+            if(newInput == valueToApproach)
+            {
+                break;
+            }
             currentInput = newInput;
         }
-        else
-        {
+        else        {
             break;
         }
     }
