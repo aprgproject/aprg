@@ -23,10 +23,13 @@ bool hasVerticalAsymptoteAtValue(
         Term const& term,
         std::string const& variableName,
         AlbaNumber const& valueToApproach);
-
-AlbaNumber getLimitAtAValueByApproachType(
+bool hasHorizontalAsymptoteAtValue(
         Term const& term,
         std::string const& variableName,
+        AlbaNumber const& valueToApproach);
+
+AlbaNumber getLimitAtAValueByApproachType(
+        Term const& term,        std::string const& variableName,
         AlbaNumber const& valueToApproach,
         LimitAtAValueApproachType const limitApproachType);
 AlbaNumber getLimitAtAValueInBothSides(
@@ -53,11 +56,9 @@ AlbaNumber getLimitAtAValueUsingTrendOfValues(
         AlbaNumber const& valueToApproach,
         AlbaNumber const& previousAcceptedInput,
         AlbaNumber const& previousPreviousAcceptedInput);
-
 AlbaNumber getValueUsingLinearInterpolation(
         AlbaNumber const& input1,
-        AlbaNumber const& input2,
-        AlbaNumber const& inputValue,
+        AlbaNumber const& input2,        AlbaNumber const& inputValue,
         AlbaNumber const& output1,
         AlbaNumber const& output2);
 
@@ -66,7 +67,10 @@ Term getLimitAtAValue(
         std::string const& variableName,
         AlbaNumber const& value,
         LimitAtAValueApproachType const limitApproachType);
+Term getLimitAtInfinity(
+        Term const& term,
+        std::string const& variableName,
+        AlbaNumber::Value const infinityValue);
 
 }
-
 }
