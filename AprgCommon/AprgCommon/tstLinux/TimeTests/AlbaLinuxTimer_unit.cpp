@@ -1,7 +1,7 @@
 #include <Time/AlbaLinuxTimer.hpp>
-#include <unistd.h>
 
 #include <gtest/gtest.h>
+#include <unistd.h>
 
 namespace alba
 {
