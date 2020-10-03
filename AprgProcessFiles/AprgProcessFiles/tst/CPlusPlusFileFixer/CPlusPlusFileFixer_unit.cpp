@@ -12,11 +12,10 @@ using namespace std;
 namespace alba
 {
 
-TEST(CPlusPlusFileFixerTest, ActualRun)
+TEST(CPlusPlusFileFixerTest, DISABLED_ActualRun)
 {
     CPlusPlusFileFixer fixer;
-    fixer.processDirectory(R"(C:\APRG_CLEAN_COPY\)");
-    //fixer.processDirectory(R"(C:\APRG\TcomTools\)");
+    fixer.processDirectory(R"(C:\APRG_CLEAN_COPY\)");    //fixer.processDirectory(R"(C:\APRG\TcomTools\)");
     //fixer.processFile(R"(C:\APRG\AprgCommon\AprgCommon\tst\AlbaStringHelper_unit.cpp)");
 }
 
