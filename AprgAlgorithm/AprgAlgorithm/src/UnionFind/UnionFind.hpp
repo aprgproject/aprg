@@ -1,10 +1,9 @@
 #pragma once
 
-#include <map> //or unordered_map?
+#include <map>
 
 namespace alba
 {
-
 template <typename ObjectType>
 class UnionFindUsingMap
 {

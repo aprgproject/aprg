@@ -1,11 +1,10 @@
 #pragma once
 
-#include <memory>
 #include <iterator>
+#include <memory>
 #include <vector>
 
-namespace alba
-{
+namespace alba{
 
 template <typename ObjectType>
 class Tree

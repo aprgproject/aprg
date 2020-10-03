@@ -2,16 +2,15 @@
 
 #include <LargeSorter/AlbaLargeSorterConfiguration.hpp>
 #include <LargeSorter/AlbaLargeSorterTypes.hpp>
-
 #include <LargeSorter/DataBlockCache.hpp>
 #include <LargeSorter/DataBlocks.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 
 #include <functional>
+#include <numeric>
 
 namespace alba
 {
-
 template <typename ObjectToSort>
 class AlbaLargeSorter
 {

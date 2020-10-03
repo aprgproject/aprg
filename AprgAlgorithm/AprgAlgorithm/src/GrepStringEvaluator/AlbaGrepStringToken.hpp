@@ -1,11 +1,11 @@
 #pragma once
 
-#include <string>
 #include <GrepStringEvaluator/AlbaGrepStringOperatorType.hpp>
+
+#include <string>
 
 namespace alba
 {
-
 class AlbaGrepStringToken
 {
 public:
