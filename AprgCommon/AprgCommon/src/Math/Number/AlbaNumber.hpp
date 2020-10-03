@@ -119,6 +119,7 @@ public:
     bool isNotANumber() const;
     bool isAFiniteValue() const;
     bool isARealFiniteValue() const;
+
     Type getType() const;
     long long int getInteger() const;
     double getDouble() const;

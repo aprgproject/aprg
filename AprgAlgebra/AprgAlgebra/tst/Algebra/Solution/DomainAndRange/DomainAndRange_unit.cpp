@@ -18,6 +18,7 @@ namespace DomainAndRange
 TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunction)
 {
     AlbaNumbers values{5, 9.25};
+
     SolutionSet actualDomain = calculateDomainUsingTransitionValues(values, [](AlbaNumber const& number)
     {
         return (number-6)^0.5;
@@ -31,6 +32,7 @@ TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunction)
 TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunctionWithNanValues)
 {
     AlbaNumbers values{3};
+
     SolutionSet actualDomain = calculateDomainUsingTransitionValues(values, [](AlbaNumber const& number)
     {
         return (number == 3) ? AlbaNumber(AlbaNumber::Value::NotANumber) : number;
@@ -45,7 +47,8 @@ TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunctionWi
 TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTermWithValues)
 {
     AlbaNumbers values{1.3, 9.25};
-    Polynomial polynomial{Monomial(4, {}), Monomial(-1, {{"x", 2}})};    Expression expression(createExpressionIfPossible({Term(polynomial), Term("^"), Term(AlbaNumber::createFraction(1, 2))}));
+    Polynomial polynomial{Monomial(4, {}), Monomial(-1, {{"x", 2}})};
+    Expression expression(createExpressionIfPossible({Term(polynomial), Term("^"), Term(AlbaNumber::createFraction(1, 2))}));
 
     SolutionSet actualDomain = calculateDomainForTermWithOneVariable(values, Term(expression));
 
@@ -67,6 +70,7 @@ TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTerm)
 {
     Polynomial polynomial{Monomial(4, {}), Monomial(-1, {{"x", 2}})};
     Expression expression(createExpressionIfPossible({Term(polynomial), Term("^"), Term(AlbaNumber::createFraction(1, 2))}));
+
     SolutionSet actualDomain = calculateDomainForTermWithOneVariable(Term(expression));
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
@@ -78,6 +82,7 @@ TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTermWithE
 {
     Polynomial polynomial{Monomial(1, {{"x", 2}}), Monomial(-2, {{"x", 1}})};
     Expression expression(createExpressionIfPossible({Term(polynomial), Term("^"), Term(AlbaNumber::createFraction(1, 2))}));
+
     SolutionSet actualDomain = calculateDomainForTermWithOneVariable(Term(expression));
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
@@ -89,7 +94,8 @@ TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTermWithE
 TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquationWithValues)
 {
     Polynomial polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
-    Equation equation(Term(polynomialLeft), "=", Term(Constant(36)));    AlbaNumbers numbers{3.3, 9.9};
+    Equation equation(Term(polynomialLeft), "=", Term(Constant(36)));
+    AlbaNumbers numbers{3.3, 9.9};
 
     SolutionSet actualDomain = calculateDomainForEquation("x", numbers, equation);
 
@@ -102,6 +108,7 @@ TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquation)
 {
     Polynomial polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
     Equation equation(Term(polynomialLeft), "=", Term(Constant(36)));
+
     SolutionSet actualDomain = calculateDomainForEquation("x", equation);
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
@@ -112,7 +119,8 @@ TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquation)
 TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithSquareRootOfQuadratic)
 {
     Polynomial quadratic{Monomial(9, {}), Monomial(-1, {{"x", 2}})};
-    Expression expression(createExpressionIfPossible({Term(quadratic), Term("^"), Term(AlbaNumber::createFraction(1, 2))}));    Equation equation(Term(expression), "=", Term("y"));
+    Expression expression(createExpressionIfPossible({Term(quadratic), Term("^"), Term(AlbaNumber::createFraction(1, 2))}));
+    Equation equation(Term(expression), "=", Term("y"));
 
     SolutionSet actualDomain = calculateDomainForEquation("x", equation);
 
@@ -124,7 +132,8 @@ TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithSquareRootOfQuadrati
 TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWith2AbsoluteValues)
 {
     Function absoluteValueOfX(Functions::abs(createExpressionIfPossible({Term("x")})));
-    Function absoluteValueOfY(Functions::abs(createExpressionIfPossible({Term("y")})));    Expression leftHandExpression(createExpressionIfPossible({Term(absoluteValueOfX), Term("+"), Term(absoluteValueOfY)}));
+    Function absoluteValueOfY(Functions::abs(createExpressionIfPossible({Term("y")})));
+    Expression leftHandExpression(createExpressionIfPossible({Term(absoluteValueOfX), Term("+"), Term(absoluteValueOfY)}));
     Equation equation(Term(leftHandExpression), "=", Term(Constant(1)));
 
     SolutionSet actualDomain = calculateDomainForEquation("x", equation);
@@ -138,6 +147,7 @@ TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithXToTheXIsWrong)
 {
     Expression leftHandExpression(createExpressionIfPossible({Term("x"), Term("^"), Term("x"), Term("-"), Term(823543)}));
     Equation equation(Term(leftHandExpression), "=", Term("y"));
+
     SolutionSet actualDomain = calculateDomainForEquation("x", equation);
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
@@ -148,7 +158,8 @@ TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithXToTheXIsWrong)
 TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquationWithValues)
 {
     Polynomial polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
-    Equation equation(Term(polynomialLeft), "=", Term(Constant(36)));    AlbaNumbers numbers{3.3, 9.9};
+    Equation equation(Term(polynomialLeft), "=", Term(Constant(36)));
+    AlbaNumbers numbers{3.3, 9.9};
 
     SolutionSet actualDomain = calculateRangeForEquation("x", numbers, equation);
 
@@ -161,6 +172,7 @@ TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquation)
 {
     Polynomial polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
     Equation equation(Term(polynomialLeft), "=", Term(Constant(36)));
+
     SolutionSet actualDomain = calculateRangeForEquation("x", equation);
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
@@ -171,7 +183,8 @@ TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquation)
 TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWith2AbsoluteValues)
 {
     Function absoluteValueOfX(Functions::abs(createExpressionIfPossible({Term("x")})));
-    Function absoluteValueOfY(Functions::abs(createExpressionIfPossible({Term("y")})));    Expression leftHandExpression(createExpressionIfPossible({Term(absoluteValueOfX), Term("+"), Term(absoluteValueOfY)}));
+    Function absoluteValueOfY(Functions::abs(createExpressionIfPossible({Term("y")})));
+    Expression leftHandExpression(createExpressionIfPossible({Term(absoluteValueOfX), Term("+"), Term(absoluteValueOfY)}));
     Equation equation(Term(leftHandExpression), "=", Term(Constant(1)));
 
     SolutionSet actualDomain = calculateRangeForEquation("x", equation);
@@ -185,6 +198,7 @@ TEST(DomainAndRangeTest, AppendTransitionValuesWorks)
 {
     AlbaNumbersSet collectedValues;
     AlbaNumbersSet sortedValues{5, 9.25};
+
     appendTransitionValues(
                 collectedValues,
                 sortedValues,
@@ -201,7 +215,8 @@ TEST(DomainAndRangeTest, AppendTransitionValuesWorks)
 TEST(DomainAndRangeTest, GetTransitionValueWorks)
 {
     AlbaNumber actualTransitionValue = getTransitionValue(
-                AlbaNumber(9.25),                AlbaNumber(5),
+                AlbaNumber(9.25),
+                AlbaNumber(5),
                 [](AlbaNumber const& number)
     {
         return (number-6)^0.5;

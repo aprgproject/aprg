@@ -142,7 +142,8 @@ TEST(ConstructUtilitiesTest, CreateTermRaiseToANumberFromTermWorksForMonomialWit
 {
     Term monomialTerm(Monomial(1,
     {{"x", AlbaNumber::createFraction(1, 2)},
-     {"y", AlbaNumber::createFraction(2, 7)},     {"z", AlbaNumber::createFraction(9, 5)}}));
+     {"y", AlbaNumber::createFraction(2, 7)},
+     {"z", AlbaNumber::createFraction(9, 5)}}));
 
     TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromTerm(monomialTerm));
 

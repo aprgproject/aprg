@@ -84,6 +84,7 @@ TEST(MultipleVariableSolutionSetTest, GetSolutionSetForVariableWorks)
     ASSERT_EQ(1u, acceptedValues.size());
     EXPECT_EQ(AlbaNumber(58), acceptedValues.at(0));
 }
+
 TEST(MultipleVariableSolutionSetTest, AddSolutionSetForVariableWorks)
 {
     MultipleVariableSolutionSet solutionSet;

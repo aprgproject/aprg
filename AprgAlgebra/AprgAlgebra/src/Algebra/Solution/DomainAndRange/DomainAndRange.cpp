@@ -49,7 +49,7 @@ SolutionSet calculateDomainForTermWithOneVariable(
     VariableNamesRetriever variableNamesRetriever;
     variableNamesRetriever.retrieveFromTerm(term);
     VariableNamesSet const& variableNames(variableNamesRetriever.getSavedData());
-    if(variableNames.size() == 0)
+    if(variableNames.empty())
     {
         domain.addAcceptedInterval(createAllRealValuesInterval());
     }
@@ -57,7 +57,8 @@ SolutionSet calculateDomainForTermWithOneVariable(
     {
         string variableName = *variableNames.cbegin();
         SubstitutionOfVariablesToValues substitution;
-        domain = calculateDomainUsingTransitionValues(valuesToCheck, [&](AlbaNumber const& value)        {
+        domain = calculateDomainUsingTransitionValues(valuesToCheck, [&](AlbaNumber const& value)
+        {
                 substitution.putVariableWithValue(variableName, value);
                 Term computedTerm(substitution.performSubstitutionTo(term));
                 AlbaNumber computedValue;
@@ -66,6 +67,7 @@ SolutionSet calculateDomainForTermWithOneVariable(
     }
     return domain;
 }
+
 SolutionSet calculateDomainForTermWithOneVariable(
         Term const& term)
 {
@@ -142,6 +144,7 @@ SolutionSet calculateDomainForEquationWithVariableToSubstitute(
             return computedValue;});
     return domain;
 }
+
 void collectAndUniqueValuesAndSort(
         AlbaNumbersSet & sortedValues,
         AlbaNumbers const& valuesToCheck)

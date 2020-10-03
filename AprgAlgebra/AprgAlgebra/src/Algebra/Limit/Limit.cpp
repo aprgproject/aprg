@@ -3,6 +3,7 @@
 #include <Algebra/Limit/LimitsAtInfinity/LimitsAtInfinity.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Math/AlbaMathHelper.hpp>
+
 using namespace alba::mathHelper;
 using namespace std;
 
@@ -28,14 +29,16 @@ bool isAlmostEqualForLimitChecking(AlbaNumber const& value1, AlbaNumber const& v
 
 bool isRejectedLimitValueForDirectSubstitutionAndIterativeMethods(AlbaNumber const& value)
 {
-    return !value.isARealFiniteValue() || value.getDouble() == 0;}
+    return !value.isARealFiniteValue() || value.getDouble() == 0;
+}
 
 bool hasVerticalAsymptoteAtValue(
         Term const& term,
         string const& variableName,
         AlbaNumber const& valueToApproach)
 {
-    return getLimitAtAValueInThePositiveSide(term, variableName, valueToApproach).isPositiveOrNegativeInfinity()            || getLimitAtAValueInTheNegativeSide(term, variableName, valueToApproach).isPositiveOrNegativeInfinity();
+    return getLimitAtAValueInThePositiveSide(term, variableName, valueToApproach).isPositiveOrNegativeInfinity()
+            || getLimitAtAValueInTheNegativeSide(term, variableName, valueToApproach).isPositiveOrNegativeInfinity();
 }
 
 bool hasHorizontalAsymptoteAtValue(
@@ -56,7 +59,8 @@ bool hasHorizontalAsymptoteAtValue(
 
 AlbaNumber getLimitAtAValueByApproachType(
         Term const& term,
-        string const& variableName,        AlbaNumber const& valueToApproach,
+        string const& variableName,
+        AlbaNumber const& valueToApproach,
         LimitAtAValueApproachType const limitApproachType)
 {
     AlbaNumber result;
@@ -86,7 +90,8 @@ AlbaNumber getLimitAtAValueInBothSides(
     if(isAlmostEqualForLimitChecking(limitPositiveSide, limitNegativeSide)) //limit only exists if both sides are equal  (Calculus Theorem)
     {
         result = getAverageForAlbaNumber(limitPositiveSide, limitNegativeSide);
-    }    return result;
+    }
+    return result;
 }
 
 AlbaNumber getLimitAtAValueInThePositiveSide(
@@ -150,7 +155,8 @@ AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
             }
             currentInput = newInput;
         }
-        else        {
+        else
+        {
             break;
         }
     }
@@ -168,7 +174,8 @@ AlbaNumber getLimitAtAValueUsingTrendOfValues(
     AlbaNumber result(AlbaNumber::Value::NotANumber);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue(variableName, valueToApproach);
-    Term outputTermAtValueToApproach(substitution.performSubstitutionTo(term));    substitution.putVariableWithValue(variableName, previousAcceptedInput);
+    Term outputTermAtValueToApproach(substitution.performSubstitutionTo(term));
+    substitution.putVariableWithValue(variableName, previousAcceptedInput);
     Term previousAcceptedOutputTerm(substitution.performSubstitutionTo(term));
     substitution.putVariableWithValue(variableName, previousPreviousAcceptedInput);
     Term previousPreviousAcceptedOutputTerm(substitution.performSubstitutionTo(term));

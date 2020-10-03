@@ -6,6 +6,7 @@
 #include <Math/Number/AlbaNumber.hpp>
 
 #include <string>
+
 namespace alba
 {
 
@@ -19,6 +20,7 @@ enum class ContinuityType
     DiscontinuousWithRemovableDiscontinuity,
     DiscontinuousWithEssentialDiscontinuity
 };
+
 bool isContinuousAt(
         Term const& term,
         std::string const& variableName,

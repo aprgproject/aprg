@@ -16,7 +16,8 @@ TEST(AlbaMacroArgumentCounter, IntegerTest)
 
 TEST(AlbaMacroArgumentCounter, StringTest)
 {
-    EXPECT_EQ(1, ALBA_MACROS_COUNT_ARGS("one"));    EXPECT_EQ(2, ALBA_MACROS_COUNT_ARGS("one", "two"));
+    EXPECT_EQ(1, ALBA_MACROS_COUNT_ARGS("one"));
+    EXPECT_EQ(2, ALBA_MACROS_COUNT_ARGS("one", "two"));
     EXPECT_EQ(3, ALBA_MACROS_COUNT_ARGS("one", "two", "three"));
 }
 

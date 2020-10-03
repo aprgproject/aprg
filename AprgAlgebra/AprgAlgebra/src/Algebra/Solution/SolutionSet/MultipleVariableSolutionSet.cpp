@@ -31,7 +31,7 @@ unsigned int MultipleVariableSolutionSet::getNumberOfVariablesWithSolutions() co
 string MultipleVariableSolutionSet::getDisplayableString() const
 {
     stringstream result;
-    for(VariableNameToSolutionSetPair const& pair : m_variableNameToSolutionSetMap)
+    for(auto const& pair : m_variableNameToSolutionSetMap)
     {
         result << "Variable:{" << pair.first << "} SolutionSet:{" << pair.second << "} ";
     }
@@ -41,7 +41,7 @@ string MultipleVariableSolutionSet::getDisplayableString() const
 VariableNamesSet MultipleVariableSolutionSet::getVariableNames() const
 {
     VariableNamesSet result;
-    for(VariableNameToSolutionSetPair const& pair : m_variableNameToSolutionSetMap)
+    for(auto const& pair : m_variableNameToSolutionSetMap)
     {
         result.emplace(pair.first);
     }
@@ -72,7 +72,8 @@ void MultipleVariableSolutionSet::addSolutionSetForVariable(
     m_variableNameToSolutionSetMap[variableName] = solutionSet;
 }
 
-ostream & operator<<(ostream & out, MultipleVariableSolutionSet const& solutionSet){
+ostream & operator<<(ostream & out, MultipleVariableSolutionSet const& solutionSet)
+{
     out << solutionSet.getDisplayableString();
     return out;
 }

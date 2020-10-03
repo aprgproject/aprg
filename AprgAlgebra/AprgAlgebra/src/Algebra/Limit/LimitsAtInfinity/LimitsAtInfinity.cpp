@@ -9,6 +9,7 @@
 
 using namespace alba::algebra::Simplification;
 using namespace std;
+
 namespace alba
 {
 
@@ -24,7 +25,8 @@ LimitsAtInfinity::LimitsAtInfinity(
     , m_degreeOnlyMutator(variableName)
     , m_removeMonomialsWithNegativeExponentMutator(variableName)
     , m_simplificationMutator()
-{    SimplificationOfExpression simplification;
+{
+    SimplificationOfExpression simplification;
     simplification.setAsShouldSimplifyByCombiningMonomialAndRadicalExpressions(true);
     m_simplificationMutator.putSimplification(simplification);
     simplify();
@@ -49,7 +51,8 @@ void LimitsAtInfinity::simplify()
     simplifyPolynomialToMaxDegreeMonomialOnly();
 }
 
-void LimitsAtInfinity::simplifyAsATerm(){
+void LimitsAtInfinity::simplifyAsATerm()
+{
     m_simplifiedTermAtInfinity.simplify();
     m_removeMonomialsWithNegativeExponentMutator.mutateTerm(m_simplifiedTermAtInfinity);
 }
@@ -65,7 +68,8 @@ void LimitsAtInfinity::simplifyAsTermsOverTermsIfPossible()
     Term termToDivide(Monomial(1, {{m_variableName, degreeToRemove}}));
     numerator = numerator/termToDivide;
     numerator.simplify();
-    denominator = denominator/termToDivide;    denominator.simplify();
+    denominator = denominator/termToDivide;
+    denominator.simplify();
     m_simplificationMutator.mutateTerm(numerator);
     m_simplificationMutator.mutateTerm(denominator);
     m_removeMonomialsWithNegativeExponentMutator.mutateTerm(numerator);

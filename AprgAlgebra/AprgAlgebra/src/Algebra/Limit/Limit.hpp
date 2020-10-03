@@ -3,6 +3,7 @@
 #include <Algebra/Limit/LimitAtAValueApproachType.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 #include <Math/Number/AlbaNumber.hpp>
+
 #include <string>
 
 namespace alba
@@ -14,7 +15,8 @@ namespace algebra
 bool isAlmostEqualForLimitChecking(AlbaNumber const& value1, AlbaNumber const& value2);
 bool isRejectedLimitValueForDirectSubstitutionAndIterativeMethods(AlbaNumber const& value);
 bool hasVerticalAsymptoteAtValue(
-        Term const& term,        std::string const& variableName,
+        Term const& term,
+        std::string const& variableName,
         AlbaNumber const& valueToApproach);
 bool hasHorizontalAsymptoteAtValue(
         Term const& term,
@@ -22,7 +24,8 @@ bool hasHorizontalAsymptoteAtValue(
         AlbaNumber const& valueToApproach);
 
 AlbaNumber getLimitAtAValueByApproachType(
-        Term const& term,        std::string const& variableName,
+        Term const& term,
+        std::string const& variableName,
         AlbaNumber const& valueToApproach,
         LimitAtAValueApproachType const limitApproachType);
 AlbaNumber getLimitAtAValueInBothSides(
@@ -51,7 +54,8 @@ AlbaNumber getLimitAtAValueUsingTrendOfValues(
         AlbaNumber const& previousPreviousAcceptedInput);
 AlbaNumber getValueUsingLinearInterpolation(
         AlbaNumber const& input1,
-        AlbaNumber const& input2,        AlbaNumber const& inputValue,
+        AlbaNumber const& input2,
+        AlbaNumber const& inputValue,
         AlbaNumber const& output1,
         AlbaNumber const& output2);
 
@@ -66,4 +70,5 @@ Term getLimitAtInfinity(
         AlbaNumber::Value const infinityValue);
 
 }
+
 }

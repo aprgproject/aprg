@@ -13,7 +13,8 @@ BaseTermSharedPointer createNewTermAndReturnSharedPointer(BaseTermSharedPointer 
 BaseTermSharedPointer copyAndCreateNewTermAndReturnSharedPointer(Term const& term);
 Term const& getTermConstReferenceFromBaseTerm(BaseTerm const& baseTerm);
 Term const& getTermConstReferenceFromSharedPointer(BaseTermSharedPointer const& sharedPointer);
-Term const& getTermConstReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer);Term & getTermReferenceFromBaseTerm(BaseTerm & baseTerm);
+Term const& getTermConstReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer);
+Term & getTermReferenceFromBaseTerm(BaseTerm & baseTerm);
 Term & getTermReferenceFromSharedPointer(BaseTermSharedPointer & sharedPointer);
 Term & getTermReferenceFromUniquePointer(BaseTermUniquePointer & uniquePointer);
 BaseTerm const& getBaseTermConstReferenceFromTerm(Term const& term);

@@ -24,6 +24,7 @@ TEST(LimitsAtInfinityTest, XWorksAndSimplifiesToZero)
 TEST(LimitsAtInfinityTest, OneOverXWorksAndSimplifiesToZero)
 {
     Term term(createExpressionIfPossible({Term(1), Term("/"), Term("x")}));
+
     LimitsAtInfinity limits(term, "x");
 
     Term expectedTerm(AlbaNumber(0));
@@ -74,7 +75,8 @@ TEST(LimitsAtInfinityTest, PolynomialOverPolynomialWithNumeratorDegreeIsGreaterA
     EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::NegativeInfinity)), limits.getValueAtInfinity(AlbaNumber::Value::PositiveInfinity));
 }
 
-TEST(LimitsAtInfinityTest, PolynomialOverPolynomialWithDenominatorDegreeIsGreaterWorks){
+TEST(LimitsAtInfinityTest, PolynomialOverPolynomialWithDenominatorDegreeIsGreaterWorks)
+{
     Term numerator(Polynomial{Monomial(2, {{"x", 2}}), Monomial(-1, {{"x", 1}}), Monomial(5, {})});
     Term denominator(Polynomial{Monomial(4, {{"x", 3}}), Monomial(-1, {})});
     Term term(createExpressionIfPossible({numerator, Term("/"), denominator}));
