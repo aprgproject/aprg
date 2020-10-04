@@ -1,15 +1,12 @@
 #include "RttAnalyzer.hpp"
 
+#include <Debug/AlbaDebug.hpp>
 #include <File/AlbaFileReader.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 #include <String/AlbaStringHelper.hpp>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 using namespace alba::stringHelper;
 using namespace std;
-
 namespace alba
 {
 
