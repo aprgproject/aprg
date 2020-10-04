@@ -3,6 +3,7 @@
 #include <Bit/AlbaBitConstants.hpp>
 
 #include <cmath>
+#include <cstdint>
 
 namespace alba
 {
@@ -203,21 +204,14 @@ private:
 
 template <>
 template <>
-constexpr short unsigned int AlbaBitManipulation<short unsigned int>::swapWithBytes<2>(short unsigned int const value)
+constexpr uint16_t AlbaBitManipulation<uint16_t>::swapWithBytes<2>(uint16_t const value)
 {
     return concatenateBytes(getByteAt<0>(value), getByteAt<1>(value));
 }
 
 template <>
 template <>
-constexpr unsigned int AlbaBitManipulation<unsigned int>::swapWithBytes<2>(unsigned int const value)
-{
-    return concatenateBytes(getByteAt<0>(value), getByteAt<1>(value));
-}
-
-template <>
-template <>
-constexpr unsigned int AlbaBitManipulation<unsigned int>::swapWithBytes<4>(unsigned int const value)
+constexpr uint32_t AlbaBitManipulation<uint32_t>::swapWithBytes<4>(uint32_t const value)
 {
     return concatenateBytes(getByteAt<0>(value), getByteAt<1>(value),
                             getByteAt<2>(value), getByteAt<3>(value));
@@ -225,7 +219,7 @@ constexpr unsigned int AlbaBitManipulation<unsigned int>::swapWithBytes<4>(unsig
 
 template <>
 template <>
-constexpr unsigned long long AlbaBitManipulation<unsigned long long>::swapWithBytes<8>(unsigned long long const value)
+constexpr uint64_t AlbaBitManipulation<uint64_t>::swapWithBytes<8>(uint64_t const value)
 {
     return concatenateBytes(getByteAt<0>(value), getByteAt<1>(value),
                             getByteAt<2>(value), getByteAt<3>(value),
@@ -234,19 +228,19 @@ constexpr unsigned long long AlbaBitManipulation<unsigned long long>::swapWithBy
 }
 
 template <>
-constexpr short unsigned int AlbaBitManipulation<short unsigned int>::getAllBitsAsserted()
+constexpr uint16_t AlbaBitManipulation<uint16_t>::getAllBitsAsserted()
 {
     return 0xFFFF;
 }
 
 template <>
-constexpr unsigned int AlbaBitManipulation<unsigned int>::getAllBitsAsserted()
+constexpr uint32_t AlbaBitManipulation<uint32_t>::getAllBitsAsserted()
 {
     return 0xFFFFFFFF;
 }
 
 template <>
-constexpr unsigned long long AlbaBitManipulation<unsigned long long>::getAllBitsAsserted()
+constexpr uint64_t AlbaBitManipulation<uint64_t>::getAllBitsAsserted()
 {
     return 0xFFFFFFFFFFFFFFFF;
 }

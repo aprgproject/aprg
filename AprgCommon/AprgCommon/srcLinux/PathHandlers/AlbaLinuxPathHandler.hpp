@@ -30,6 +30,7 @@ public:
     bool deleteFile();
     bool deleteDirectoryWithoutFilesAndDirectories(); //do tests
     void deleteFilesInDirectory(); //do tests
+    void deleteInnerFilesAndDirectories(); //do tests
     void deleteDirectoryWithFilesAndDirectories(); //do tests
     bool copyToNewFile(std::string const& newFilePath);
     bool renameFile(std::string const& newFileName);
