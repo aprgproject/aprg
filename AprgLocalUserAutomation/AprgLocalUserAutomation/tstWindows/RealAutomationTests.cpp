@@ -5,6 +5,7 @@
 #include <windows.h>
 
 using namespace std;
+
 namespace alba
 {
 
