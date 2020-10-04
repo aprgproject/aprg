@@ -1,23 +1,25 @@
 #include "PenCircles.hpp"
 
+#include <Math/AlbaMathHelper.hpp>
+
+using namespace alba::mathHelper;
+
 namespace alba
 {
-
 namespace AprgBitmap
 {
 
 PenCircles::PenCircleDetails::PenCircleDetails()
     : radius(0)
-    , color(0u)
+    , color(0U)
 {}
 
 PenCircles::PenCircleDetails::PenCircleDetails(
         double const radiusParameter,
-        unsigned int const colorParameter)
+        uint32_t const colorParameter)
     : radius(radiusParameter)
     , color(colorParameter)
 {}
-
 bool PenCircles::isPenCircle(BitmapXY const& point) const
 {
     return m_penCircles.find(point)!=m_penCircles.cend();
@@ -45,26 +47,25 @@ PenCircles::CircleCenterConnections const& PenCircles::getCenterConnections() co
     return m_centerConnections;
 }
 
-PenCircles::PointPenCircleDetailsPairs PenCircles::getNearestPenCirclesToAPoint(
+PenCircles::PointAndPenCircleDetailsPairs PenCircles::getNearestPenCirclesToAPoint(
         BitmapXY const& point,
         unsigned int const distance) const
 {
-    PointPenCircleDetailsPairs result;
+    PointAndPenCircleDetailsPairs result;
     unsigned int minX=static_cast<unsigned int>(clampLowerBound(convertToIntegerThenSubtract(point.getX(), distance), 0));
     unsigned int maxX=point.getX()+distance;
     unsigned int minY=static_cast<unsigned int>(clampLowerBound(convertToIntegerThenSubtract(point.getY(), distance), 0));
     unsigned int maxY=point.getY()+distance;
-    for(PointPenCircleDetailsPair const& pair : m_penCircles)
+    for(auto const& pointAndPenCircleDetailsPair : m_penCircles)
     {
-        BitmapXY const& centerPoint(pair.first);
-        if(minX<=centerPoint.getX() && centerPoint.getX()<=maxX
-                && minY<=centerPoint.getY() && centerPoint.getY()<=maxY)
+        BitmapXY const& centerPoint(pointAndPenCircleDetailsPair.first);
+        if(minX <= centerPoint.getX() && centerPoint.getX() <= maxX
+                && minY <= centerPoint.getY() && centerPoint.getY() <= maxY)
         {
-            result.emplace_back(pair);
+            result.emplace_back(pointAndPenCircleDetailsPair);
         }
     }
-    return result;
-}
+    return result;}
 
 PenCircles::PointToPenCircleDetailsMap & PenCircles::getPenCirclesReference()
 {
@@ -74,13 +75,12 @@ PenCircles::PointToPenCircleDetailsMap & PenCircles::getPenCirclesReference()
 void PenCircles::addAsPenCircle(
         BitmapXY const& point,
         double const radius,
-        unsigned int const color)
+        uint32_t const color)
 {
-    m_penCircles[point]=PenCircleDetails(radius, color);
+    m_penCircles[point] = PenCircleDetails(radius, color);
 }
 
-void PenCircles::removePenCircleAt(
-        BitmapXY const& circleCenter)
+void PenCircles::removePenCircleAt(        BitmapXY const& circleCenter)
 {
     m_penCircles.erase(circleCenter);
 }

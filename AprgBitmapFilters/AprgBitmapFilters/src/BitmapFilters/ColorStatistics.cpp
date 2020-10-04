@@ -30,11 +30,10 @@ void AprgColorStatistics::gatherStatistics(string const& bitmapPath)
 {
     Bitmap bitmap(bitmapPath);
     BitmapSnippet canvas(bitmap.getSnippetReadFromFileWholeBitmap());
-    canvas.traverse([&](BitmapXY const&, unsigned int const color)
+    canvas.traverse([&](BitmapXY const&, uint32_t const color)
     {
         double colorIntensity(calculateColorIntensityDecimal(color));
-        double luma601(calculateLuma601Decimal(color));
-        double luma709(calculateLuma709Decimal(color));
+        double luma601(calculateLuma601Decimal(color));        double luma709(calculateLuma709Decimal(color));
         colorIntensitySet.emplace(colorIntensity);
         luma601Set.emplace(luma601);
         luma709Set.emplace(luma709);
