@@ -15,11 +15,10 @@ TEST(SampleTest, NullSetWorks)
     EXPECT_TRUE(nullSet.doesNotContain(3));
     EXPECT_EQ("{Null set}", nullSet.getDescription());
     EXPECT_EQ("{...  ...}", nullSet.getGeneratedRosterString(
-                  [&](AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+                  [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {
-                      elementFunction(i);
+                  {                      elementFunction(i);
                   }
               }));
 }
@@ -35,11 +34,10 @@ TEST(SampleTest, MathSetCreatedWithRosterListWorks)
     EXPECT_FALSE(mathSet.doesNotContain(5));
     EXPECT_EQ("{1, 2, 3, 4, 5}", mathSet.getDescription());
     EXPECT_EQ("{... 1, 2, 3, 4, 5 ...}", mathSet.getGeneratedRosterString(
-                  [&](AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+                  [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {
-                      elementFunction(i);
+                  {                      elementFunction(i);
                   }
               }));
 }
@@ -54,11 +52,10 @@ TEST(SampleTest, MathSetCreatedWithInitializerListWorks)
     EXPECT_FALSE(mathSet.doesNotContain(9));
     EXPECT_EQ("{2, 4, 6, 8, 9}", mathSet.getDescription());
     EXPECT_EQ("{... 2, 4, 6, 8, 9 ...}", mathSet.getGeneratedRosterString(
-                  [&](AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+                  [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {
-                      elementFunction(i);
+                  {                      elementFunction(i);
                   }
               }));
 }
@@ -76,11 +73,10 @@ TEST(SampleTest, MathSetCreatedWithASetRuleWorks)
     EXPECT_FALSE(mathSet.doesNotContain(4));
     EXPECT_EQ("{set of even numbers}", mathSet.getDescription());
     EXPECT_EQ("{... 0, 2, 4, 6, 8, 10 ...}", mathSet.getGeneratedRosterString(
-                  [&](AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+                  [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {
-                      elementFunction(i);
+                  {                      elementFunction(i);
                   }
               }));
 }
@@ -94,11 +90,10 @@ TEST(SampleTest, IsASubsetOfWorks)
     });
 
     AprgMathSet<unsigned int>::GenerateFunction generateFunction = [&](
-            AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+            AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
         for(unsigned int i=0; i<=10; i++)
-        {
-            elementFunction(i);
+        {            elementFunction(i);
         }
     };
 
@@ -115,11 +110,10 @@ TEST(SampleTest, IsASupersetOfWorks)
     });
 
     AprgMathSet<unsigned int>::GenerateFunction generateFunction = [&](
-            AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+            AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
         for(unsigned int i=0; i<=10; i++)
-        {
-            elementFunction(i);
+        {            elementFunction(i);
         }
     };
 
@@ -140,11 +134,10 @@ TEST(SampleTest, IsDisjointWithWorks)
     AprgMathSet<unsigned int> mathSet3({2,4});
 
     AprgMathSet<unsigned int>::GenerateFunction generateFunction = [&](
-            AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+            AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
         for(unsigned int i=0; i<=10; i++)
-        {
-            elementFunction(i);
+        {            elementFunction(i);
         }
     };
 
@@ -169,11 +162,10 @@ TEST(SampleTest, GetComplementWorks)
     EXPECT_FALSE(complementSet.doesNotContain(7));
     EXPECT_EQ("{complement of {set of even numbers}}", complementSet.getDescription());
     EXPECT_EQ("{... 1, 3, 5, 7, 9 ...}", complementSet.getGeneratedRosterString(
-                  [&](AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+                  [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {
-                      elementFunction(i);
+                  {                      elementFunction(i);
                   }
               }));
 }
@@ -194,11 +186,10 @@ TEST(SampleTest, GetUnionWithWorks)
     EXPECT_FALSE(unionSet.doesNotContain(4));
     EXPECT_EQ("{{1, 2, 3} union {set of even numbers}}", unionSet.getDescription());
     EXPECT_EQ("{... 0, 1, 2, 3, 4, 6, 8, 10 ...}", unionSet.getGeneratedRosterString(
-                  [&](AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+                  [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {
-                      elementFunction(i);
+                  {                      elementFunction(i);
                   }
               }));
 }
@@ -219,11 +210,10 @@ TEST(SampleTest, GetUnionWorks)
     EXPECT_FALSE(unionSet.doesNotContain(9));
     EXPECT_EQ("{{3, 4, 5} union {set of odd numbers}}", unionSet.getDescription());
     EXPECT_EQ("{... 1, 3, 4, 5, 7, 9 ...}", unionSet.getGeneratedRosterString(
-                  [&](AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+                  [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {
-                      elementFunction(i);
+                  {                      elementFunction(i);
                   }
               }));
 }
@@ -244,11 +234,10 @@ TEST(SampleTest, GetIntersectionWithWorks)
     EXPECT_FALSE(intersectionSet.doesNotContain(2));
     EXPECT_EQ("{{1, 2, 3} intersection {set of even numbers}}", intersectionSet.getDescription());
     EXPECT_EQ("{... 2 ...}", intersectionSet.getGeneratedRosterString(
-                  [&](AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+                  [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {
-                      elementFunction(i);
+                  {                      elementFunction(i);
                   }
               }));
 }
@@ -269,11 +258,10 @@ TEST(SampleTest, GetIntersectionWorks)
     EXPECT_FALSE(intersectionSet.doesNotContain(5));
     EXPECT_EQ("{{3, 4, 5} intersection {set of odd numbers}}", intersectionSet.getDescription());
     EXPECT_EQ("{... 3, 5 ...}", intersectionSet.getGeneratedRosterString(
-                  [&](AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+                  [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {
-                      elementFunction(i);
+                  {                      elementFunction(i);
                   }
               }));
 }
@@ -284,20 +272,18 @@ TEST(SampleTest, GetCartesianWorks)
     AprgMathSet<char> mathSet2({'x','y'});
 
     AprgMathSet<unsigned int>::GenerateFunction generateFunction1 = [&](
-            AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+            AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
         for(unsigned int i=0; i<=10; i++)
-        {
-            elementFunction(i);
+        {            elementFunction(i);
         }
     };
 
     AprgMathSet<char>::GenerateFunction generateFunction2 = [&](
-            AprgMathSet<unsigned int>::VoidElementFunction elementFunction)
+            AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
         for(char c='a'; c<='z'; c++)
-        {
-            elementFunction(c);
+        {            elementFunction(c);
         }
     };
 
