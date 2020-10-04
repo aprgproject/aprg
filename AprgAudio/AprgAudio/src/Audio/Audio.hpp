@@ -1,13 +1,13 @@
 #pragma once
 
-#include <iostream>
-#include <vector>
 #include <assert.h>
+
+#include <iostream>
 #include <string>
+#include <vector>
 
 namespace alba
 {
-
 namespace AprgAudio
 {
 
@@ -98,13 +98,12 @@ private:
         BigEndian
     };
 
-    AudioFormat determineAudioFormat (std::vector<unsigned char>& fileData);
-    bool decodeWaveFile (std::vector<unsigned char>& fileData);
-    bool decodeAiffFile (std::vector<unsigned char>& fileData);
+    AudioFormat determineAudioFormat (std::vector<unsigned char>& fileDataBytes);
+    bool decodeWaveFile (std::vector<unsigned char>& fileDataBytes);
+    bool decodeAiffFile (std::vector<unsigned char>& fileDataBytes);
 
     bool saveToWaveFile (std::string const& filePath);
     bool saveToAiffFile (std::string const& filePath);
-
     void clearAudioBuffer();
 
     int32_t fourBytesToInt (std::vector<unsigned char>& source, int startIndex, Endianness endianness = Endianness::LittleEndian);
@@ -117,20 +116,19 @@ private:
     unsigned char sampleToSingleByte (T sample);
     T singleByteToSample (unsigned char sample);
 
-    unsigned int getAiffSampleRate (std::vector<unsigned char>& fileData, int sampleRateStartIndex);
+    unsigned int getAiffSampleRate (std::vector<unsigned char>& fileDataBytes, int sampleRateStartIndex);
     bool tenByteMatch (std::vector<unsigned char>& v1, int startIndex1, std::vector<unsigned char>& v2, int startIndex2);
-    void addSampleRateToAiffData (std::vector<unsigned char>& fileData, unsigned int sampleRate);
-    T clamp (T v1, T minValue, T maxValue);
+    void addSampleRateToAiffData (std::vector<unsigned char>& fileDataBytes, unsigned int sampleRate);
+    T clamp (T value, T minValue, T maxValue);
 
-    void addStringToFileData (std::vector<unsigned char>& fileData, std::string const& s);
-    void addInt32ToFileData (std::vector<unsigned char>& fileData, int32_t i, Endianness endianness = Endianness::LittleEndian);
-    void addInt16ToFileData (std::vector<unsigned char>& fileData, int16_t i, Endianness endianness = Endianness::LittleEndian);
+    void addStringToFileData (std::vector<unsigned char>& fileDataBytes, std::string const& s);
+    void addInt32ToFileData (std::vector<unsigned char>& fileDataBytes, int32_t i, Endianness endianness = Endianness::LittleEndian);
+    void addInt16ToFileData (std::vector<unsigned char>& fileDataBytes, int16_t i, Endianness endianness = Endianness::LittleEndian);
 
-    bool writeDataToFile (std::vector<unsigned char>& fileData, std::string const& filePath);
+    bool writeDataToFile (std::vector<unsigned char>& fileDataBytes, std::string const& filePath);
 
     AudioFormat audioFileFormat;
-    int sampleRate;
-    int bitDepth;
+    int sampleRate;    int bitDepth;
 };
 
 }
