@@ -1,10 +1,8 @@
-#include <TwoDimensionsStatistics.hpp>
-
 #include <Math/AlbaMathHelper.hpp>
+#include <TwoDimensionsStatistics.hpp>
 
 #include <algorithm>
 #include <cmath>
-
 namespace alba
 {
 

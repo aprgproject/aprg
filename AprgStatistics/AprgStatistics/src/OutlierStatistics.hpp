@@ -1,11 +1,9 @@
 #pragma once
 
 #include <DataStatistics.hpp>
-
 #include <Math/AlbaMathHelper.hpp>
 
-namespace alba
-{
+namespace alba{
 
 template <unsigned int dimensions>
 class OutlierStatistics : public DataStatistics<dimensions>

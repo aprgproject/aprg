@@ -2,10 +2,10 @@
 
 #include <DataSample.hpp>
 
+#include <numeric>
 #include <vector>
 
-namespace alba
-{
+namespace alba{
 
 template <unsigned int dimensions>
 class DataStatisticsUtilities
