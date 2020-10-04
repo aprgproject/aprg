@@ -1,26 +1,33 @@
 #include "PidSimulator.hpp"
 
 #include <AprgGraph.hpp>
+#include <Bitmap/Bitmap.hpp>
 #include <Math/AlbaMathHelper.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
-
 #include <algorithm>
 #include <cmath>
 #include <iostream>
 
+using namespace alba::AprgBitmap;
 using namespace alba::mathHelper;
 using namespace alba::TwoDimensions;
 using namespace std;
-
 namespace alba
 {
 
 PidSimulator::PidSimulator(stringHelper::strings const& argumentsInMain)
     : m_conf(argumentsInMain)
+    , m_xMagnificationToGraph(0)
+    , m_yMagnificationToGraph(0)
+    , m_xOffsetToGraph(0)
+    , m_yOffsetToGraph(0)
+    , m_xGridInterval(0)
+    , m_yGridInterval(0)
+    , m_inputSample()
+    , m_randomizer()
 {}
 
-double PidSimulator::calculatePid(double const input, double const target)
-{
+double PidSimulator::calculatePid(double const input, double const target){
     //https://en.wikipedia.org/wiki/PID_controller
 
     static double integral = 0;
@@ -141,11 +148,10 @@ void PidSimulator::generateRandomForInput()
     {
         for (unsigned int i = 0; i < m_conf.numberOfSamplesOfInputDemandInOnePeriod; i++)
         {
-            m_inputSample.emplace_back(m_randomizer.getRandomValueInUniformDistribution(0, m_conf.amplitudeOfInputDemand) + m_conf.addedOffsetOfInputDemand);
+            m_inputSample.emplace_back(m_randomizer.getRandomValueInUniformDistribution(0, static_cast<int>(m_conf.amplitudeOfInputDemand)) + m_conf.addedOffsetOfInputDemand);
         }
     }
 }
-
 double PidSimulator::computeFromMachsModel(double const inputDemandSample, double const psuedoMaxTxPower, double & adjustedDemand)
 {
     double result(0);
@@ -211,11 +217,10 @@ void PidSimulator::calculateAndGenerateOutputImage()
         graphOutputFile.deleteFile();
         defaultFile.copyToNewFile(graphOutputFile.getFullPath());
 
-        AprgBitmap bitmap(graphOutputFile.getFullPath());
-        AprgBitmapConfiguration configuration(bitmap.getConfiguration());
+        Bitmap bitmap(graphOutputFile.getFullPath());
+        BitmapConfiguration configuration(bitmap.getConfiguration());
         calculateMagnificationAndOffset(xLeftMax, xRightMax, yBottomMax, yTopMax, configuration.getBitmapWidth(), configuration.getBitmapHeight());
         cout << "offset:[" << m_xOffsetToGraph << ", " << m_yOffsetToGraph << "] magnification:[" << m_xMagnificationToGraph << ", " << m_yMagnificationToGraph << "]" << endl;
-
         AprgGraph graph(graphOutputFile.getFullPath(), BitmapXY(m_xOffsetToGraph, m_yOffsetToGraph), BitmapDoubleXY(m_xMagnificationToGraph, m_yMagnificationToGraph));
         graph.drawGrid(BitmapDoubleXY(m_xGridInterval, m_yGridInterval));
         graph.drawContinuousPoints(targetSeries, 0x00444444);

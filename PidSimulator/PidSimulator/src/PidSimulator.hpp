@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Randomizer/AlbaRandomizer.hpp>
 #include <PidSimulatorConfiguration.hpp>
+#include <Randomizer/AlbaRandomizer.hpp>
 
 #include <vector>
-
 namespace alba
 {
 
