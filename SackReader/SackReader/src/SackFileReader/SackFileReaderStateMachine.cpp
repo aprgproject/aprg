@@ -2,10 +2,8 @@
 
 #include <String/AlbaStringHelper.hpp>
 
-
 using namespace alba::stringHelper;
 using namespace std;
-
 namespace alba
 {
 
