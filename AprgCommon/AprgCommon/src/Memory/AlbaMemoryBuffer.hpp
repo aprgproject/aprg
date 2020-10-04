@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <cstring>
 #include <string>
 #include <vector>
@@ -38,7 +39,7 @@ public:
     }
 
 private:
-    std::vector<unsigned char> m_buffer;
+    std::vector<uint8_t> m_buffer;
 };
 
 }//namespace alba
