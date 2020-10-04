@@ -1,10 +1,8 @@
-#include <NsapHelper.hpp>
-
 #include <ArraySize.hpp>
+#include <NsapHelper.hpp>
 
 #include <algorithm>
 #include <cstdio>
-
 namespace CommonClassLib
 {
 
