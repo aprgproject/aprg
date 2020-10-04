@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <cstdio>
+
 namespace CommonClassLib
 {
 

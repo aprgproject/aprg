@@ -30,6 +30,7 @@ TEST(HardwareConfigurationTest, OneFspOneLcgEvenDistribution)
     EXPECT_EQ(0x1200U, fspIn1200.getAddress());
     EXPECT_TRUE(fspIn1200.isMasterTcom());
 }
+
 TEST(HardwareConfigurationTest, OneFspTwoLcgEvenDistribution)
 {
     HardwareConfiguration hardwareConfiguration;
@@ -62,6 +63,7 @@ TEST(HardwareConfigurationTest, OneFspTwoLcgEvenDistribution)
     EXPECT_EQ(0x1200U, fspIn1200.getAddress());
     EXPECT_TRUE(fspIn1200.isMasterTcom());
 }
+
 TEST(HardwareConfigurationTest, TwoFspOneLcgEvenDistribution_CheckSecondFsp)
 {
     HardwareConfiguration hardwareConfiguration;
@@ -85,6 +87,7 @@ TEST(HardwareConfigurationTest, TwoFspOneLcgEvenDistribution_CheckSecondFsp)
     EXPECT_EQ(0x1300U, fspIn1300.getAddress());
     EXPECT_FALSE(fspIn1300.isMasterTcom());
 }
+
 TEST(HardwareConfigurationTest, TwoFspTwoLcgEvenDistribution)
 {
     HardwareConfiguration hardwareConfiguration;
@@ -132,4 +135,5 @@ TEST(HardwareConfigurationTest, TwoFspTwoLcgEvenDistribution)
     EXPECT_EQ(0x1300U, fspIn1300.getAddress());
     EXPECT_FALSE(fspIn1300.isMasterTcom());
 }
+
 }

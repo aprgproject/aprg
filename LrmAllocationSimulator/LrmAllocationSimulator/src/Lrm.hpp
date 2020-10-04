@@ -40,7 +40,8 @@ struct FspPairDetails
     FspPairDetails(unsigned int const firstFspTemp, unsigned int const secondFspTemp, unsigned int const priorityTemp);
     unsigned int firstFspAddress;
     unsigned int secondFspAddress;
-    unsigned int priority;};
+    unsigned int priority;
+};
 
 using FspPairsDetails = std::vector<FspPairDetails>;
 using DspBooleanCondition = std::function<bool(Dsp const&)>;
@@ -111,7 +112,8 @@ private:
     void saveNeededFspsForCcdOrNbicMcdBasedOnNOrTnWithDliRestrictions(UniqueFspAddresses & neededUniqueFspAddresses, FspAddresses const& fspAddresses, unsigned int const lcgId, unsigned int const numberOfDspCcdAndMcd) const;
     bool isThereSpaceForTnForMcdOrCcdConsideringPic(unsigned int const fspAddress, unsigned int const numberOfMcdOrCcd, unsigned int const lcgId) const;
     SelectionDspResult selectEmptyDspPriotizingNyquistTypeAndAddressInFsp(unsigned int const lcgId, unsigned int const fspAddress) const;
-    SelectionDspResult selectTnPriotizingLessUsersAndHsupaCfsInFsp(unsigned int const lcgId, unsigned int const fspAddress) const;    void copyFspWithAtLeastThisNumberOfEmptyNAndTnAndBelowMaxAmountOfNonDcds(FspAddresses& fspAddresses, unsigned int const requiredEmptyCount, unsigned int const lcgId) const;
+    SelectionDspResult selectTnPriotizingLessUsersAndHsupaCfsInFsp(unsigned int const lcgId, unsigned int const fspAddress) const;
+    void copyFspWithAtLeastThisNumberOfEmptyNAndTnAndBelowMaxAmountOfNonDcds(FspAddresses& fspAddresses, unsigned int const requiredEmptyCount, unsigned int const lcgId) const;
     void copyFspWithAtLeastThisNumberOfEmptyNAndTnWithDliRestrictions(FspAddresses& fspAddresses, unsigned int const requiredEmptyCount, unsigned int const lcgId) const;
     void copyFspWithAtLeastThisNumberOfTnDcdsWithoutHsRachCfsWithDliRestrictions(FspAddresses& fspAddresses, unsigned int const lcgId) const;
     NyquistAndTurboNyquistCount getNumberOfEmptyNAndTnOfFspAndLcg(unsigned int const fspAddress, unsigned int const lcgId) const;

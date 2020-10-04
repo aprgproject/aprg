@@ -18,6 +18,7 @@
 #include <string>
 
 using namespace std;
+
 namespace alba
 {
 

@@ -24,7 +24,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 unsigned int swap4(unsigned int temp)
 {

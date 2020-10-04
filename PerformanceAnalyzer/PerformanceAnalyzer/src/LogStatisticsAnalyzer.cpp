@@ -8,6 +8,7 @@
 
 using namespace alba::stringHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -46,6 +47,7 @@ void LogStatisticsAnalyzer::saveDataToCsv(string const& csvPath)
     ofstream outputFileStream(outputFileHandler.getFullPath());
     saveLogDetailsToCsv(outputFileStream);
 }
+
 void LogStatisticsAnalyzer::saveLogDetailsToCsv(ofstream & outputCsvFileStream)
 {
     outputCsvFileStream << "Log,Count,Percentage" <<endl;

@@ -20,7 +20,8 @@ TEST(DspTest, DspDetailsCanAssignedCorrectlyAtDefaultConstruction)
     EXPECT_EQ(0U, dsp.getNumberOfHsRachCfs());
     EXPECT_EQ(DspMode::NyquistDedicatedChannelDevice, dsp.getMode());
     EXPECT_EQ("DCD", dsp.getModeString());
-    EXPECT_EQ(NyquistType::Nyquist, dsp.getNyquistType());    EXPECT_TRUE(dsp.isEmpty());
+    EXPECT_EQ(NyquistType::Nyquist, dsp.getNyquistType());
+    EXPECT_TRUE(dsp.isEmpty());
     EXPECT_FALSE(dsp.hasEmergencyCalls());
 }
 
@@ -49,7 +50,8 @@ TEST(DspTest, DspDetailsCanAssignedCorrectlyAtConstruction)
     EXPECT_EQ(10U, dsp.getNumberOfHsRachCfs());
     EXPECT_EQ(DspMode::NyquistCommonChannelDeviceNormal, dsp.getMode());
     EXPECT_EQ("CCDn", dsp.getModeString());
-    EXPECT_EQ(NyquistType::TurboNyquist, dsp.getNyquistType());    EXPECT_FALSE(dsp.isEmpty());
+    EXPECT_EQ(NyquistType::TurboNyquist, dsp.getNyquistType());
+    EXPECT_FALSE(dsp.isEmpty());
     EXPECT_TRUE(dsp.hasEmergencyCalls());
 }
 

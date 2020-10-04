@@ -30,7 +30,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgTwoFspTwoCcdMcd)
     EXPECT_EQ(0x1260U, resultCcdMcdLcg2.mcdAddress);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgTwoFspTwoCcdMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgTwoFspTwoCcdMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -64,7 +65,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgTwoFspTwoCcdMcdPic){
     EXPECT_EQ(4U, resultPicLcg2.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgTwoFspTwoCcdNbicMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgTwoFspTwoCcdNbicMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -98,7 +100,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgTwoFspTwoCcdNbicMcdPic){
     EXPECT_EQ(2U, resultPicLcg2.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgTwoFspThreeCcdMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgTwoFspThreeCcdMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -140,6 +143,7 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgTwoFspThreeCcdMcdPic){
     EXPECT_EQ(3U, resultPicLcg2.dliPool);
     ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
 }
+
 TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgTwoFspThreeCcdNbicMcdPic)
 {
     HardwareConfiguration hardwareConfiguration;
@@ -181,6 +185,7 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgTwoFspThreeCcdNbicMcdPic)
     ASSERT_FALSE(resultPicLcg2.isSelectionSuccessful);
     ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
 }
+
 TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgTwoFspFourCcdMcdPic)
 {
     HardwareConfiguration hardwareConfiguration;
@@ -235,6 +240,7 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgTwoFspFourCcdMcdPic)
     EXPECT_EQ(4U, resultPicLcg3.dliPool);
     ASSERT_FALSE(resultPicLcg4.isSelectionSuccessful);
 }
+
 TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgTwoFspFourCcdNbicMcdPic)
 {
     HardwareConfiguration hardwareConfiguration;
@@ -279,7 +285,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgTwoFspFourCcdNbicMcdPic)
     EXPECT_EQ(3U, resultCcdMcdLcg4.dliPool);
     EXPECT_TRUE(resultCcdMcdLcg4.isNbicAllocated);
     ASSERT_FALSE(resultPicLcg1.isSelectionSuccessful);
-    ASSERT_FALSE(resultPicLcg2.isSelectionSuccessful);    ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
+    ASSERT_FALSE(resultPicLcg2.isSelectionSuccessful);
+    ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
     ASSERT_FALSE(resultPicLcg4.isSelectionSuccessful);
 }
 
@@ -318,7 +325,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgThreeFspTwoCcdMcdPic)
     EXPECT_EQ(3U, resultPicLcg2.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgThreeFspTwoCcdNbicMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgThreeFspTwoCcdNbicMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -352,7 +360,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgThreeFspTwoCcdNbicMcdPic){
     EXPECT_EQ(2U, resultPicLcg2.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgThreeFspThreeCcdMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgThreeFspThreeCcdMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -397,7 +406,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgThreeFspThreeCcdMcdPic){
     EXPECT_EQ(4U, resultPicLcg3.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgThreeFspThreeCcdNbicMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgThreeFspThreeCcdNbicMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -442,7 +452,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgThreeFspThreeCcdNbicMcdPic){
     EXPECT_EQ(4U, resultPicLcg3.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgThreeFspFourCcdMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgThreeFspFourCcdMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -498,7 +509,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgThreeFspFourCcdMcdPic){
     EXPECT_EQ(2U, resultPicLcg4.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgThreeFspFourCcdNbicMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgThreeFspFourCcdNbicMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -541,7 +553,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgThreeFspFourCcdNbicMcdPic){
     EXPECT_EQ(2U, resultCcdMcdLcg4.dliPool);
     EXPECT_TRUE(resultCcdMcdLcg4.isNbicAllocated);
     ASSERT_FALSE(resultPicLcg1.isSelectionSuccessful);
-    ASSERT_FALSE(resultPicLcg2.isSelectionSuccessful);    ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
+    ASSERT_FALSE(resultPicLcg2.isSelectionSuccessful);
+    ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
     ASSERT_FALSE(resultPicLcg4.isSelectionSuccessful);
 }
 
@@ -580,7 +593,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFourFspTwoCcdMcdPic)
     EXPECT_EQ(4U, resultPicLcg2.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFourFspTwoCcdNbicMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFourFspTwoCcdNbicMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -614,7 +628,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFourFspTwoCcdNbicMcdPic){
     EXPECT_EQ(2U, resultPicLcg2.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFourFspThreeCcdMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFourFspThreeCcdMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -659,7 +674,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFourFspThreeCcdMcdPic){
     EXPECT_EQ(3U, resultPicLcg3.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFourFspThreeCcdNbicMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFourFspThreeCcdNbicMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -699,6 +715,7 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFourFspThreeCcdNbicMcdPic){
     ASSERT_FALSE(resultPicLcg2.isSelectionSuccessful);
     ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
 }
+
 TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFourFspFourCcdNMcdPic)
 {
     HardwareConfiguration hardwareConfiguration;
@@ -759,7 +776,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFourFspFourCcdNMcdPic)
     EXPECT_EQ(2U, resultPicLcg4.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFourFspFourCcdNbicMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFourFspFourCcdNbicMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -802,7 +820,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFourFspFourCcdNbicMcdPic){
     EXPECT_EQ(2U, resultCcdMcdLcg4.dliPool);
     EXPECT_TRUE(resultCcdMcdLcg4.isNbicAllocated);
     ASSERT_FALSE(resultPicLcg1.isSelectionSuccessful);
-    ASSERT_FALSE(resultPicLcg2.isSelectionSuccessful);    ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
+    ASSERT_FALSE(resultPicLcg2.isSelectionSuccessful);
+    ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
     ASSERT_FALSE(resultPicLcg4.isSelectionSuccessful);
 }
 
@@ -841,7 +860,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFiveFspTwoCcdMcdPic)
     EXPECT_EQ(4U, resultPicLcg2.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFiveFspTwoCcdNbicMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFiveFspTwoCcdNbicMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -875,7 +895,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgFiveFspTwoCcdNbicMcdPic){
     EXPECT_EQ(2U, resultPicLcg2.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFiveFspThreeCcdMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFiveFspThreeCcdMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -920,7 +941,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFiveFspThreeCcdMcdPic){
     EXPECT_EQ(2U, resultPicLcg3.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFiveFspThreeCcdNbicMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFiveFspThreeCcdNbicMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -960,6 +982,7 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgFiveFspThreeCcdNbicMcdPic){
     ASSERT_FALSE(resultPicLcg2.isSelectionSuccessful);
     ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
 }
+
 TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFiveFspFourCcdMcdPic)
 {
     HardwareConfiguration hardwareConfiguration;
@@ -1017,7 +1040,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFiveFspFourCcdMcdPic)
     EXPECT_EQ(2U, resultPicLcg4.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFiveFspFourCcdNbicMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFiveFspFourCcdNbicMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -1060,7 +1084,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgFiveFspFourCcdNbicMcdPic){
     EXPECT_EQ(2U, resultCcdMcdLcg4.dliPool);
     EXPECT_TRUE(resultCcdMcdLcg4.isNbicAllocated);
     ASSERT_FALSE(resultPicLcg1.isSelectionSuccessful);
-    ASSERT_FALSE(resultPicLcg2.isSelectionSuccessful);    ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
+    ASSERT_FALSE(resultPicLcg2.isSelectionSuccessful);
+    ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
     ASSERT_FALSE(resultPicLcg4.isSelectionSuccessful);
 }
 
@@ -1099,7 +1124,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgSixFspTwoCcdNMcdPic)
     EXPECT_EQ(4U, resultPicLcg2.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgSixFspTwoCcdNbicMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgSixFspTwoCcdNbicMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -1133,7 +1159,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, TwoLcgSixFspTwoCcdNbicMcdPic){
     EXPECT_EQ(2U, resultPicLcg2.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgSixFspThreeCcdNMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgSixFspThreeCcdNMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -1178,7 +1205,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgSixFspThreeCcdNMcdPic){
     EXPECT_EQ(2U, resultPicLcg3.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgSixFspThreeCcdNbicMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgSixFspThreeCcdNbicMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -1218,6 +1246,7 @@ TEST(LrmMarkAlgorithmWithHibenationTest, ThreeLcgSixFspThreeCcdNbicMcdPic){
     ASSERT_FALSE(resultPicLcg2.isSelectionSuccessful);
     ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
 }
+
 TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgSixFspFourCcdMcdPic)
 {
     HardwareConfiguration hardwareConfiguration;
@@ -1275,7 +1304,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgSixFspFourCcdMcdPic)
     EXPECT_EQ(2U, resultPicLcg4.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgSixFspFourCcdNbicMcdPic){
+TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgSixFspFourCcdNbicMcdPic)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -1318,7 +1348,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, FourLcgSixFspFourCcdNbicMcdPic){
     EXPECT_EQ(2U, resultCcdMcdLcg4.dliPool);
     EXPECT_TRUE(resultCcdMcdLcg4.isNbicAllocated);
     ASSERT_FALSE(resultPicLcg1.isSelectionSuccessful);
-    ASSERT_FALSE(resultPicLcg2.isSelectionSuccessful);    ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
+    ASSERT_FALSE(resultPicLcg2.isSelectionSuccessful);
+    ASSERT_FALSE(resultPicLcg3.isSelectionSuccessful);
     ASSERT_FALSE(resultPicLcg4.isSelectionSuccessful);
 }
 
@@ -1352,7 +1383,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, SharedLcgWithOneDspCcdNbicMcdWithoutPic
     EXPECT_EQ(4U, resultPicLcg1.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, SharedLcgWithOneDspNbicMcdWithoutPicInMsm){
+TEST(LrmMarkAlgorithmWithHibenationTest, SharedLcgWithOneDspNbicMcdWithoutPicInMsm)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 
@@ -1380,7 +1412,8 @@ TEST(LrmMarkAlgorithmWithHibenationTest, SharedLcgWithOneDspNbicMcdWithoutPicInM
     EXPECT_EQ(4U, resultPicLcg1.dliPool);
 }
 
-TEST(LrmMarkAlgorithmWithHibenationTest, SharedLcgWithOneDspNbicMcdWithPicInMsm){
+TEST(LrmMarkAlgorithmWithHibenationTest, SharedLcgWithOneDspNbicMcdWithPicInMsm)
+{
     HardwareConfiguration hardwareConfiguration;
     Lrm lrm(hardwareConfiguration);
 

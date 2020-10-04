@@ -5,7 +5,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 SelectionDspResult::SelectionDspResult()
     : isSelectionSuccessful(false)
@@ -474,7 +475,8 @@ SelectionDspResult Lrm::selectNonEmptyDspToClearForMcd(unsigned int const lcgId)
             result = numberOfPrereservedHsupaCfsForDsp1<numberOfPrereservedHsupaCfsForDsp2;
         }
         else
-        {            result = dsp1.getAddress()<dsp2.getAddress();
+        {
+            result = dsp1.getAddress()<dsp2.getAddress();
         }
         return result;
     });
@@ -685,7 +687,8 @@ SelectionDspResult Lrm::selectNonEmptyDspToClearForNbicMcd(unsigned int const lc
             result = numberOfPrereservedHsupaCfsForDsp1<numberOfPrereservedHsupaCfsForDsp2;
         }
         else
-        {            result = dsp1.getAddress()<dsp2.getAddress();
+        {
+            result = dsp1.getAddress()<dsp2.getAddress();
         }
         return result;
     });
@@ -770,7 +773,8 @@ SelectionDspResult Lrm::selectFspForPic(unsigned int const lcgId) const
     sortFspBasedPriorityForPicSelection(fspAddresses, lcgId);
     if(!fspAddresses.empty())
     {
-        setSelectionDspResult(result, fspAddresses.front());    }
+        setSelectionDspResult(result, fspAddresses.front());
+    }
     return result;
 }
 
@@ -942,7 +946,8 @@ void Lrm::saveNeededFspsForCcdOrMcdBasedOnNOrTn(
         unsigned int const lcgId) const
 {
     for(unsigned int const currentFspAddress : fspAddresses)
-    {        bool isFspNeeded(false);
+    {
+        bool isFspNeeded(false);
         Fsp const & currentFsp(m_addressToFspMap.at(currentFspAddress));
         NyquistAndTurboNyquistCount emptyNAndTnCount = getNumberOfEmptyNAndTnOfFspAndLcg(currentFsp.getAddress(), lcgId);
         unsigned int emptyTurboNyquists(emptyNAndTnCount.numberOfTurboNyquists);
@@ -956,7 +961,8 @@ void Lrm::saveNeededFspsForCcdOrMcdBasedOnNOrTn(
             isFspNeeded=true; numberOfDspCcdAndMcd--; emptyTurboNyquists--;
         }
         if(isFspNeeded)
-        {            neededUniqueFspAddresses.emplace(currentFspAddress);
+        {
+            neededUniqueFspAddresses.emplace(currentFspAddress);
         }
     }
 }
@@ -1201,7 +1207,8 @@ NyquistAndTurboNyquistCount Lrm::getNumberOfEmptyNAndTnInMsmOfLcg(unsigned int c
     for(auto const& addressToDspPair : m_addressToDspMap)
     {
         Dsp const & currentDsp(addressToDspPair.second);
-        Fsp const & currentFsp(m_addressToFspMap.at(currentDsp.getFspAddress()));        if(currentDsp.getLcgId()==lcgId && currentDsp.isEmpty() && currentFsp.getSmType()==SmType::MSM)
+        Fsp const & currentFsp(m_addressToFspMap.at(currentDsp.getFspAddress()));
+        if(currentDsp.getLcgId()==lcgId && currentDsp.isEmpty() && currentFsp.getSmType()==SmType::MSM)
         {
             incrementNAndTnCountBasedOnNyquistType(result, currentDsp.getNyquistType());
         }
@@ -1215,7 +1222,8 @@ NyquistAndTurboNyquistCount Lrm::getNumberOfEmptyNAndTnOfLcg(unsigned int const 
     for(auto const& addressToDspPair : m_addressToDspMap)
     {
         Dsp const & currentDsp(addressToDspPair.second);
-        if(currentDsp.getLcgId()==lcgId && currentDsp.isEmpty())        {
+        if(currentDsp.getLcgId()==lcgId && currentDsp.isEmpty())
+        {
             incrementNAndTnCountBasedOnNyquistType(result, currentDsp.getNyquistType());
         }
     }
@@ -1260,7 +1268,8 @@ void Lrm::copyFspAddressesThatSatisfiesThisCondition(FspAddresses & fspAddresses
     for(auto const& addressToFspPair : m_addressToFspMap)
     {
         Fsp const & currentFsp(addressToFspPair.second);
-        unsigned int const currentFspAddress(currentFsp.getAddress());        if(condition(currentFsp))
+        unsigned int const currentFspAddress(currentFsp.getAddress());
+        if(condition(currentFsp))
         {
             fspAddresses.emplace_back(currentFspAddress);
         }
@@ -1282,7 +1291,8 @@ void Lrm::copyDspAddressesThatSatisfiesThisCondition(DspAddresses & dspAddresses
     for(auto const& addressToDspPair : m_addressToDspMap)
     {
         Dsp const & currentDsp(addressToDspPair.second);
-        unsigned int const currentDspAddress(currentDsp.getAddress());        if(condition(currentDsp))
+        unsigned int const currentDspAddress(currentDsp.getAddress());
+        if(condition(currentDsp))
         {
             dspAddresses.emplace_back(currentDspAddress);
         }
@@ -1401,7 +1411,8 @@ void Lrm::copyUsedDliPools(DliPools & usedDliPools) const
     for(auto const& addressToFspPair : m_addressToFspMap)
     {
         Fsp const & currentFsp(addressToFspPair.second);
-        unsigned int const currentFspAddress(currentFsp.getAddress());        copyUsedDliPoolsOnFsp(usedDliPools, currentFspAddress);
+        unsigned int const currentFspAddress(currentFsp.getAddress());
+        copyUsedDliPoolsOnFsp(usedDliPools, currentFspAddress);
     }
 }
 
@@ -1424,7 +1435,8 @@ void Lrm::copyUsedDliPoolsOnOtherFspsExceptThisFsp(DliPools & usedDliPools, unsi
     for(auto const& addressToFspPair : m_addressToFspMap)
     {
         Fsp const & currentFsp(addressToFspPair.second);
-        unsigned int const currentFspAddress(currentFsp.getAddress());        if(currentFspAddress != fspAddressOfSkippedFsp)
+        unsigned int const currentFspAddress(currentFsp.getAddress());
+        if(currentFspAddress != fspAddressOfSkippedFsp)
         {
             copyUsedDliPoolsOnFsp(usedDliPools, currentFspAddress);
         }
@@ -1457,7 +1469,8 @@ bool Lrm::canAFreeDliBeAllocatedInFsp(unsigned int const fspAddress, unsigned in
             if(canBeAllocated)
             {
                 result=true;
-                break;            }
+                break;
+            }
         }
     }
     return result;
@@ -1470,7 +1483,8 @@ void Lrm::copyAllFspPairs(FspPairsDetails & fspPairsDetails) const
         for(auto const& addressToFsp2 : m_addressToFspMap)
         {
             fspPairsDetails.emplace_back(addressToFsp1.first, addressToFsp2.first, 0);
-        }    }
+        }
+    }
 }
 
 void Lrm::sortFspPairsForCcdMcdSelection(FspPairsDetails & fspPairsDetails) const
@@ -1581,7 +1595,8 @@ void Lrm::removeFspPairsBasedOnCondition(FspPairsDetails & fspPairsDetails, FspP
                 }), fspPairsDetails.end());
 }
 
-void Lrm::updatePriorityForAllFspPairs(FspPairsDetails & fspPairsDetails, unsigned int const lcgId) const{
+void Lrm::updatePriorityForAllFspPairs(FspPairsDetails & fspPairsDetails, unsigned int const lcgId) const
+{
     for(FspPairDetails & fspPairDetails : fspPairsDetails)
     {
         fspPairDetails.priority = getPriorityForFspPair(fspPairDetails, lcgId);
@@ -1665,7 +1680,8 @@ unsigned int Lrm::getConflictingDliPoolForThisDli(unsigned int const dliPool) co
     unsigned int conflictPool(0);
     if(dliPool==1)
     {
-        conflictPool = 4;    }
+        conflictPool = 4;
+    }
     else if(dliPool==2)
     {
         conflictPool = 3;
@@ -1686,7 +1702,8 @@ unsigned int Lrm::getLeastConflictingDliPoolForThisDli(unsigned int const dliPoo
     unsigned int leastConflictPool(0);
     if(dliPool==1)
     {
-        leastConflictPool = 3;    }
+        leastConflictPool = 3;
+    }
     else if(dliPool==2)
     {
         leastConflictPool = 4;

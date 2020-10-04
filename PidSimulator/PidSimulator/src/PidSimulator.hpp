@@ -4,6 +4,7 @@
 #include <Randomizer/AlbaRandomizer.hpp>
 
 #include <vector>
+
 namespace alba
 {
 
