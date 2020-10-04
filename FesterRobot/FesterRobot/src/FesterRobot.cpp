@@ -1,11 +1,10 @@
 #include "FesterRobot.hpp"
 
-#include <User/AlbaLocalUserAutomation.hpp>
 #include <String/AlbaStringHelper.hpp>
+#include <User/AlbaLocalUserAutomation.hpp>
 
 #include <iostream>
 #include <sstream>
-
 #define POLLING_DELAY_TO_WAIT_FOR_START 1000
 #define EXCEL_CELL_COORDINATES1 1256,437
 #define EXCEL_CELL_COORDINATES2 1256,466
