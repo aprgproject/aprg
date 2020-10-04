@@ -71,7 +71,8 @@ public:
         m_blocks.emplace(iteratorAfterNewBlock, blockType, m_numberOfBlocks, m_configuration.getFilePathWithBlockNumber(m_numberOfBlocks));
         BlockIterator newBlockIterator(iteratorAfterNewBlock);
         newBlockIterator--;
-        m_numberOfBlocks++;    }
+        m_numberOfBlocks++;
+    }
     void deleteBlock(BlockIterator const& iteratorOfBlockToErase)
     {
         bool const isMainIteratorDeleted = m_mainIterator==iteratorOfBlockToErase;

@@ -21,6 +21,7 @@
 
 using namespace alba::mathHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -331,7 +332,8 @@ bool writeTest(int numChannels, int sampleRate, int bitDepth, AudioFormat format
         float sample = static_cast<float>(sin(2.0 * getPi() * i / sampleRateAsFloat * 440.0));
 
         for (unsigned int k = 0; k < static_cast<unsigned int>(audioFile.getNumChannels()); k++)
-            audioFile.samples[k][i] = sample * 0.5;    }
+            audioFile.samples[k][i] = sample * 0.5;
+    }
 
     audioFile.setSampleRate (sampleRate);
     audioFile.setBitDepth (bitDepth);

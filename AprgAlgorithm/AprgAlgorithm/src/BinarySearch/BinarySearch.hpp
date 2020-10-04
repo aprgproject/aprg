@@ -50,7 +50,8 @@ public:
         ObjectType distanceFromHighestValue(mathHelper::getPositiveDelta(value, getHighestValue()));
         ObjectType lowestDistance(std::min(std::min(distanceFromLowestValue, distanceFromMiddleValue), distanceFromHighestValue));
         ObjectType result;
-        if(lowestDistance==distanceFromLowestValue)        {
+        if(lowestDistance==distanceFromLowestValue)
+        {
             result = getLowestValue();
         }
         else if(lowestDistance==distanceFromMiddleValue)

@@ -6,6 +6,7 @@
 
 namespace alba
 {
+
 class AlbaGrepStringToken
 {
 public:

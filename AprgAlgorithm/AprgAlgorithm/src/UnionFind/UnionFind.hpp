@@ -4,6 +4,7 @@
 
 namespace alba
 {
+
 template <typename ObjectType>
 class UnionFindUsingMap
 {

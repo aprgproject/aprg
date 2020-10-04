@@ -4,6 +4,7 @@
 #include <String/AlbaStringHelper.hpp>
 
 #include <gtest/gtest.h>
+
 #include <iostream>
 
 using namespace std;
@@ -110,7 +111,8 @@ TEST(QuineMcCluskeyTest, GetImplicantsForCubeZero)
     ASSERT_EQ(1U, mintermsWithFour.getSize());
 
     EXPECT_EQ("", mintermsWithZero.getImplicantsString());
-    EXPECT_EQ("[0 : 4|], [1 : 8|], ", mintermsWithOne.getImplicantsString());    EXPECT_EQ("[0 : 9|], [1 : 10|], [2 : 12|], ", mintermsWithTwo.getImplicantsString());
+    EXPECT_EQ("[0 : 4|], [1 : 8|], ", mintermsWithOne.getImplicantsString());
+    EXPECT_EQ("[0 : 9|], [1 : 10|], [2 : 12|], ", mintermsWithTwo.getImplicantsString());
     EXPECT_EQ("[0 : 11|], [1 : 14|], ", mintermsWithThree.getImplicantsString());
     EXPECT_EQ("[0 : 15|], ", mintermsWithFour.getImplicantsString());
 }
@@ -147,7 +149,8 @@ TEST(QuineMcCluskeyTest, GetImplicantsCubeOne)
     ASSERT_EQ(0U, mintermsWithFour.getSize());
 
     EXPECT_EQ("", mintermsWithZero.getImplicantsString());
-    EXPECT_EQ("[0 : 4|12|], [1 : 8|9|], [2 : 8|10|], [3 : 8|12|], ", mintermsWithOne.getImplicantsString());    EXPECT_EQ("[0 : 9|11|], [1 : 10|11|], [2 : 10|14|], [3 : 12|14|], ", mintermsWithTwo.getImplicantsString());
+    EXPECT_EQ("[0 : 4|12|], [1 : 8|9|], [2 : 8|10|], [3 : 8|12|], ", mintermsWithOne.getImplicantsString());
+    EXPECT_EQ("[0 : 9|11|], [1 : 10|11|], [2 : 10|14|], [3 : 12|14|], ", mintermsWithTwo.getImplicantsString());
     EXPECT_EQ("[0 : 11|15|], [1 : 14|15|], ", mintermsWithThree.getImplicantsString());
     EXPECT_EQ("", mintermsWithFour.getImplicantsString());
 }
@@ -180,7 +183,8 @@ TEST(QuineMcCluskeyTest, GetImplicantsCubeTwo)
     ASSERT_EQ(0U, mintermsWithFour.getSize());
 
     EXPECT_EQ("", mintermsWithZero.getImplicantsString());
-    EXPECT_EQ("[0 : 8|9|10|11|], [1 : 8|10|12|14|], ", mintermsWithOne.getImplicantsString());    EXPECT_EQ("[0 : 10|11|14|15|], ", mintermsWithTwo.getImplicantsString());
+    EXPECT_EQ("[0 : 8|9|10|11|], [1 : 8|10|12|14|], ", mintermsWithOne.getImplicantsString());
+    EXPECT_EQ("[0 : 10|11|14|15|], ", mintermsWithTwo.getImplicantsString());
     EXPECT_EQ("", mintermsWithThree.getImplicantsString());
     EXPECT_EQ("", mintermsWithFour.getImplicantsString());
 }
@@ -206,6 +210,7 @@ TEST(QuineMcCluskeyTest, GetFinalImplicants)
     EXPECT_EQ("[0 : 4|12|], [1 : 8|9|10|11|], [2 : 8|10|12|14|], [3 : 10|11|14|15|], ", finalImplicants.getImplicantsString());
     cout<<quineMcCluskey.getOutputTable(finalImplicants);
 }
+
 TEST(QuineMcCluskeyTest, DISABLED_ExperimentalTest)
 {
 

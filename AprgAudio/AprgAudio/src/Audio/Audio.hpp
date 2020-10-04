@@ -8,6 +8,7 @@
 
 namespace alba
 {
+
 namespace AprgAudio
 {
 
@@ -104,6 +105,7 @@ private:
 
     bool saveToWaveFile (std::string const& filePath);
     bool saveToAiffFile (std::string const& filePath);
+
     void clearAudioBuffer();
 
     int32_t fourBytesToInt (std::vector<unsigned char>& source, int startIndex, Endianness endianness = Endianness::LittleEndian);
@@ -128,7 +130,8 @@ private:
     bool writeDataToFile (std::vector<unsigned char>& fileDataBytes, std::string const& filePath);
 
     AudioFormat audioFileFormat;
-    int sampleRate;    int bitDepth;
+    int sampleRate;
+    int bitDepth;
 };
 
 }

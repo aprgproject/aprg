@@ -67,7 +67,8 @@ void AlbaGrepStringEvaluator::extractTokens(string const& condition)
     if(m_tokens.empty())
     {
         setErrorMessage("There are no contents");
-    }    else if(isOnString)
+    }
+    else if(isOnString)
     {
         setErrorMessage("Incomplete '[' ']' found");
     }
@@ -90,6 +91,7 @@ void AlbaGrepStringEvaluator::extractTokensWhileOnString(bool& isOnString, strin
         stringToBuild += static_cast<char>(::toupper(currentCharacter));
     }
 }
+
 void AlbaGrepStringEvaluator::extractTokensWhileNotOnString(bool& isOnString, char const& currentCharacter, int& parenthesisCount)
 {
     if('[' == currentCharacter)

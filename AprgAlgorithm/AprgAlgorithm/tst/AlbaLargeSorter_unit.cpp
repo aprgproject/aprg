@@ -10,6 +10,7 @@
 #include <set>
 #include <string>
 #include <vector>
+
 using namespace std;
 
 #define ALBA_LARGE_SORTER_TEST_FILE APRG_DIR R"(AprgAlgorithm\AprgAlgorithm\tst\FilesForTests\LargeSorterTest\Test1.txt)"
@@ -35,7 +36,8 @@ public:
             string const& valueString)
         : m_valueInteger(valueInteger)
         , m_valueDouble(valueDouble)
-        , m_valueCharacter(valueCharacter)        , m_valueString(valueString)
+        , m_valueCharacter(valueCharacter)
+        , m_valueString(valueString)
     {}
     bool operator<(TestObject const& testObject) const
     {
@@ -166,7 +168,8 @@ TEST(AlbaLargeSorterTest, CacheTest_ObjectsCanBeAdded)
     EXPECT_EQ(5U, cache.getContainerReference().size());
 }
 
-TEST(AlbaLargeSorterTest, CacheTest_ObjectsCanNotBeDuplicated){
+TEST(AlbaLargeSorterTest, CacheTest_ObjectsCanNotBeDuplicated)
+{
     DataBlockCache<int> cache;
     cache.addBlock(1, 10);
     cache.addBlock(2, 20);
@@ -180,7 +183,8 @@ TEST(AlbaLargeSorterTest, CacheTest_ObjectsCanNotBeDuplicated){
     EXPECT_EQ(5U, cache.getContainerReference().size());
 }
 
-TEST(AlbaLargeSorterTest, CacheTest_ObjectsCanBeDeleted){
+TEST(AlbaLargeSorterTest, CacheTest_ObjectsCanBeDeleted)
+{
     DataBlockCache<int> cache;
     cache.addBlock(1, 10);
     cache.addBlock(2, 20);
@@ -211,7 +215,8 @@ TEST(AlbaLargeSorterTest, CacheTest_CacheIsUnchangedByDeletionOfNonExistingObjec
     EXPECT_EQ(5U, cache.getContainerReference().size());
 }
 
-TEST(AlbaLargeSorterTest, CacheTest_EarliestObjectsCanBePop){
+TEST(AlbaLargeSorterTest, CacheTest_EarliestObjectsCanBePop)
+{
     DataBlockCache<int> cache;
     cache.addBlock(1, 10);
     cache.addBlock(2, 20);
@@ -250,7 +255,8 @@ TEST(AlbaLargeSorterTest, CacheTest_ContainerReferenceCanFetched)
     ASSERT_EQ(5U, container.size());
     EXPECT_EQ(50, container[0].m_blockInformation);
     EXPECT_EQ(40, container[1].m_blockInformation);
-    EXPECT_EQ(30, container[2].m_blockInformation);    EXPECT_EQ(20, container[3].m_blockInformation);
+    EXPECT_EQ(30, container[2].m_blockInformation);
+    EXPECT_EQ(20, container[3].m_blockInformation);
     EXPECT_EQ(10, container[4].m_blockInformation);
 }
 
@@ -277,7 +283,8 @@ TEST(AlbaLargeSorterTest, FileHandlerTest_FileAreWrittenAtTheEndAgainAfterReleas
     ASSERT_TRUE(inputTestFile.is_open());
     inputTestFile>>valueFromFile;
     EXPECT_EQ(1, valueFromFile);
-    inputTestFile>>valueFromFile;    EXPECT_EQ(2, valueFromFile);
+    inputTestFile>>valueFromFile;
+    EXPECT_EQ(2, valueFromFile);
     inputTestFile>>valueFromFile;
     EXPECT_EQ(3, valueFromFile);
     inputTestFile>>valueFromFile;
@@ -350,7 +357,8 @@ TEST(AlbaLargeSorterTest, PrimitiveDataTypesForBlocksAreCreatedWhenBlocksWhenMem
     ifstream inputTestFile3(AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_4.txt)").getFullPath());
     ASSERT_TRUE(inputTestFile0.is_open());
     inputTestFile0>>integerInFile;
-    EXPECT_EQ(0, integerInFile);    inputTestFile0>>integerInFile;
+    EXPECT_EQ(0, integerInFile);
+    inputTestFile0>>integerInFile;
     EXPECT_EQ(1, integerInFile);
     inputTestFile0>>integerInFile;
     EXPECT_EQ(2, integerInFile);
@@ -545,7 +553,8 @@ TEST(AlbaLargeSorterTest, ObjectsAreSortedWhenUsingRandomShuffle)
     shuffle(objectsToShuffle.begin(), objectsToShuffle.end(), default_random_engine(getCurrentDateTime().getMicroSeconds()));
     AlbaLargeSorter<TestObject> largeSorter(AlbaLargeSorterConfiguration(ALBA_LARGE_SORTER_BLOCK_DIR, 3, 10, 0, 100));
 
-    for(TestObject const& testObject : objectsToShuffle)    {
+    for(TestObject const& testObject : objectsToShuffle)
+    {
         largeSorter.add(testObject);
     }
 
@@ -589,7 +598,8 @@ TEST(AlbaLargeSorterTest, DISABLED_FileStreamAreLimitedByMaximumFileStreams)
     shuffle(integersToShuffle.begin(), integersToShuffle.end(), default_random_engine(getCurrentDateTime().getMicroSeconds()));
     for(int value : integersToShuffle)
     {
-        largeSorter.add(value);    }
+        largeSorter.add(value);
+    }
 
     int expectedValue=0;
     largeSorter.sortThenDoFunctionThenReleaseAllObjects([&expectedValue](int const& actualValue)

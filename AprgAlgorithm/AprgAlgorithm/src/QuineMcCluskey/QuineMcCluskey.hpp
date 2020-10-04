@@ -46,6 +46,7 @@ public:
     void loopAllImplicants(std::function<void(Implicant const&)> const& doFunction) const;
     unsigned int getSize() const;
     std::string getImplicantsString() const;
+
     void addImplicant(Implicant const& implicant);
     void addFinalImplicant(Implicant const& implicant);
 private:
