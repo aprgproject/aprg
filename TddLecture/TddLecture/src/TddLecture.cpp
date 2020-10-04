@@ -1,8 +1,8 @@
 #include "TddLecture.hpp"
+
 #include <iostream>
 
 using namespace std;
-
 namespace alba
 {
 
