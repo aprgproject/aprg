@@ -33,7 +33,8 @@ TEST(DataSampleTest, SumCanBeCalculated)
     EXPECT_EQ(150U, dataSample.getSum());
 }
 
-TEST(DataSampleTest, IndexCanBeChecked){
+TEST(DataSampleTest, IndexCanBeChecked)
+{
     DataSample<5> dataSample{10, 20, 30, 40, 50};
     EXPECT_TRUE(dataSample.isIndexValid(0));
     EXPECT_TRUE(dataSample.isIndexValid(1));
@@ -51,7 +52,8 @@ TEST(DataSampleTest, GetValueAtInvalidIndexReturnsZero)
     EXPECT_EQ(0U, dataSample.getValueAt(-5));
 }
 
-TEST(DataSampleTest, DataSampleCanBeSet){
+TEST(DataSampleTest, DataSampleCanBeSet)
+{
     DataSample<5> dataSample{10, 20, 30, 40, 50};
     dataSample.setValueAt(0, 500);
     dataSample.setValueAt(1, 400);
@@ -65,7 +67,8 @@ TEST(DataSampleTest, DataSampleCanBeSet){
     EXPECT_EQ(100U, dataSample.getValueAt(4));
 }
 
-TEST(DataSampleTest, DataSampleCanBeCompared){
+TEST(DataSampleTest, DataSampleCanBeCompared)
+{
     DataSample<5> dataSample{10, 20, 30, 40, 50};
     DataSample<5> dataSample2{10, 20, 30, 40, 50};
     DataSample<5> dataSample3{10, 20, 25, 40, 50};
@@ -85,7 +88,8 @@ TEST(DataSampleTest, DataSamplesCanBeAddedTogether)
     EXPECT_EQ(100U, actualResult.getValueAt(4));
 }
 
-TEST(DataSampleTest, DataSamplesCanBeAddedWithSingleValue){
+TEST(DataSampleTest, DataSamplesCanBeAddedWithSingleValue)
+{
     DataSample<5> dataSample1{10, 20, 30, 40, 50};
     unsigned int singleValue = 1;
     DataSample<5> actualResult = dataSample1+singleValue;

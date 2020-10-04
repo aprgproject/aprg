@@ -21,7 +21,8 @@ std::ostream & operator<<(std::ostream & out, std::pair<ElementType1, ElementTyp
 
 template <typename ElementType>
 class AprgMathSet
-{public:
+{
+public:
     using Rule = std::function<bool(ElementType const&)>;
     using RosterInitializerList = std::initializer_list<ElementType>;
     using RosterList = std::vector<ElementType>;
@@ -78,7 +79,8 @@ std::string getGeneratedRosterString(GenerateFunction const& generateFunction) c
             enumerateElement(descriptionStream, element, index);
             index++;
         }
-    });    return std::string("{... ")+descriptionStream.str()+" ...}";
+    });
+    return std::string("{... ")+descriptionStream.str()+" ...}";
 }
 
 bool isASubsetOf(AprgMathSet const& mathSet2, GenerateFunction const& generateFunction) const
@@ -176,7 +178,8 @@ void constructSetBasedOnRosterList(RosterList const& rosterList)
 void enumerateElement(std::stringstream & descriptionStream, ElementType const& elementInRoster, unsigned int const index) const
 {
     if(index==0)
-    {        descriptionStream << elementInRoster;
+    {
+        descriptionStream << elementInRoster;
     }
     else
     {

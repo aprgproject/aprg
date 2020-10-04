@@ -18,7 +18,8 @@ TEST(SampleTest, NullSetWorks)
                   [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {                      elementFunction(i);
+                  {
+                      elementFunction(i);
                   }
               }));
 }
@@ -37,7 +38,8 @@ TEST(SampleTest, MathSetCreatedWithRosterListWorks)
                   [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {                      elementFunction(i);
+                  {
+                      elementFunction(i);
                   }
               }));
 }
@@ -55,7 +57,8 @@ TEST(SampleTest, MathSetCreatedWithInitializerListWorks)
                   [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {                      elementFunction(i);
+                  {
+                      elementFunction(i);
                   }
               }));
 }
@@ -76,7 +79,8 @@ TEST(SampleTest, MathSetCreatedWithASetRuleWorks)
                   [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {                      elementFunction(i);
+                  {
+                      elementFunction(i);
                   }
               }));
 }
@@ -93,7 +97,8 @@ TEST(SampleTest, IsASubsetOfWorks)
             AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
         for(unsigned int i=0; i<=10; i++)
-        {            elementFunction(i);
+        {
+            elementFunction(i);
         }
     };
 
@@ -113,7 +118,8 @@ TEST(SampleTest, IsASupersetOfWorks)
             AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
         for(unsigned int i=0; i<=10; i++)
-        {            elementFunction(i);
+        {
+            elementFunction(i);
         }
     };
 
@@ -137,7 +143,8 @@ TEST(SampleTest, IsDisjointWithWorks)
             AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
         for(unsigned int i=0; i<=10; i++)
-        {            elementFunction(i);
+        {
+            elementFunction(i);
         }
     };
 
@@ -165,7 +172,8 @@ TEST(SampleTest, GetComplementWorks)
                   [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {                      elementFunction(i);
+                  {
+                      elementFunction(i);
                   }
               }));
 }
@@ -189,7 +197,8 @@ TEST(SampleTest, GetUnionWithWorks)
                   [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {                      elementFunction(i);
+                  {
+                      elementFunction(i);
                   }
               }));
 }
@@ -213,7 +222,8 @@ TEST(SampleTest, GetUnionWorks)
                   [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {                      elementFunction(i);
+                  {
+                      elementFunction(i);
                   }
               }));
 }
@@ -237,7 +247,8 @@ TEST(SampleTest, GetIntersectionWithWorks)
                   [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {                      elementFunction(i);
+                  {
+                      elementFunction(i);
                   }
               }));
 }
@@ -261,7 +272,8 @@ TEST(SampleTest, GetIntersectionWorks)
                   [&](AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
                   for(unsigned int i=0; i<=10; i++)
-                  {                      elementFunction(i);
+                  {
+                      elementFunction(i);
                   }
               }));
 }
@@ -275,7 +287,8 @@ TEST(SampleTest, GetCartesianWorks)
             AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
         for(unsigned int i=0; i<=10; i++)
-        {            elementFunction(i);
+        {
+            elementFunction(i);
         }
     };
 
@@ -283,7 +296,8 @@ TEST(SampleTest, GetCartesianWorks)
             AprgMathSet<unsigned int>::VoidElementFunction const& elementFunction)
     {
         for(char c='a'; c<='z'; c++)
-        {            elementFunction(c);
+        {
+            elementFunction(c);
         }
     };
 

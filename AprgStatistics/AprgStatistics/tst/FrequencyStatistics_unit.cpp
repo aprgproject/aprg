@@ -21,7 +21,8 @@ TEST(FrequencyStatisticsTest, SamplesAreEmpty)
     ASSERT_EQ(0U, modes.size());
 }
 
-TEST(FrequencyStatisticsTest, SingleSamplePerValueWithOddNumberOfValues){
+TEST(FrequencyStatisticsTest, SingleSamplePerValueWithOddNumberOfValues)
+{
     FrequencyStatistics::FrequencySamples samples;
     samples[1] = 1;
     samples[2] = 1;
@@ -41,7 +42,8 @@ TEST(FrequencyStatisticsTest, SingleSamplePerValueWithOddNumberOfValues){
     ASSERT_EQ(9U, modes.size());
     EXPECT_EQ(1, modes[0]);
     EXPECT_EQ(2, modes[1]);
-    EXPECT_EQ(3, modes[2]);    EXPECT_EQ(4, modes[3]);
+    EXPECT_EQ(3, modes[2]);
+    EXPECT_EQ(4, modes[3]);
     EXPECT_EQ(5, modes[4]);
     EXPECT_EQ(6, modes[5]);
     EXPECT_EQ(7, modes[6]);
@@ -71,7 +73,8 @@ TEST(FrequencyStatisticsTest, SingleSamplePerValueWithEvenNumberOfValues)
     ASSERT_EQ(10U, modes.size());
     EXPECT_EQ(1, modes[0]);
     EXPECT_EQ(2, modes[1]);
-    EXPECT_EQ(3, modes[2]);    EXPECT_EQ(4, modes[3]);
+    EXPECT_EQ(3, modes[2]);
+    EXPECT_EQ(4, modes[3]);
     EXPECT_EQ(5, modes[4]);
     EXPECT_EQ(6, modes[5]);
     EXPECT_EQ(7, modes[6]);
@@ -97,6 +100,7 @@ TEST(FrequencyStatisticsTest, MulipleSamplesPerValue)
     ASSERT_EQ(1U, modes.size());
     EXPECT_EQ(4, modes[0]);
 }
+
 TEST(FrequencyStatisticsTest, MulipleSamplesWithEmptyValues)
 {
     FrequencyStatistics::FrequencySamples samples;
@@ -121,4 +125,5 @@ TEST(FrequencyStatisticsTest, MulipleSamplesWithEmptyValues)
     ASSERT_EQ(1U, modes.size());
     EXPECT_EQ(20, modes[0]);
 }
+
 }

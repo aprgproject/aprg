@@ -29,6 +29,7 @@ public:
         unsigned int limit = std::min(dimensions, static_cast<unsigned int>(dataSampleValues.size()));
         std::copy(dataSampleValues.begin(), dataSampleValues.begin()+limit, m_data.begin());
     }
+
     bool isIndexValid(unsigned int index) const
     {
         return index < dimensions;
