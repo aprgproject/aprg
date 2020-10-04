@@ -1,12 +1,10 @@
 #pragma once
 
-#include <BtsLogSorterConfiguration.hpp>
-
 #include <BtsLogPrint.hpp>
+#include <BtsLogSorterConfiguration.hpp>
 #include <BtsPrintReaderWithRollback.hpp>
 #include <GrepStringEvaluator/AlbaGrepStringEvaluator.hpp>
 #include <LargeSorter/AlbaLargeSorter.hpp>
-
 #include <fstream>
 #include <set>
 #include <string>

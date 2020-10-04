@@ -1,9 +1,7 @@
 #include <ProgressBarThread.hpp>
-
 #include <StepHandler.hpp>
 
 #include <QtWidgets>
-
 using namespace std;
 
 namespace tcomToolsGui

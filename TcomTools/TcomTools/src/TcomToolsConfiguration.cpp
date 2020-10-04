@@ -1,12 +1,10 @@
-#include <TcomToolsConfiguration.hpp>
-
 #include <File/AlbaFileReader.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 #include <String/AlbaStringHelper.hpp>
+#include <TcomToolsConfiguration.hpp>
 
 #include <fstream>
 #include <iostream>
-
 using namespace alba;
 using namespace std;
 
