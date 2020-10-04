@@ -6,7 +6,8 @@
 #include <StepHandler.hpp>
 #include <String/AlbaStringHelper.hpp>
 
-#include <fstream>#include <iostream>
+#include <fstream>
+#include <iostream>
 #include <string>
 
 namespace alba

@@ -4,6 +4,7 @@
 #include <QtWidgets>
 
 using namespace std;
+
 namespace tcomToolsGui
 {
 

@@ -10,6 +10,7 @@
 #include <TwoDimensions/Line.hpp>
 #include <TwoDimensions/Point.hpp>
 #include <TwoDimensionsStatistics.hpp>
+
 #include <array>
 #include <deque>
 #include <fstream>
@@ -127,7 +128,8 @@ private:
     double getBarWidthFromBlackPoint(AprgBitmap::BitmapSnippet const& snippet, TwoDimensions::Line const& line, TwoDimensions::Point const& blackPoint) const;
     void initializeKMeansWithBarPoints(TwoDimensionKMeans & barPointKMeans, VectorOfPointAndWidth const& pointsAndWidths, LineAndBarWidths const& widthAverages) const;
     void saveHeightDetailsFromBarPoints(TwoDimensionKMeans::GroupOfSamples const& groupOfGroupOfBarPoints, OneDimensionStatistics::Samples & barHeights, DataCollection<double> & heightCollection) const;
-    void removeIncorrectBarPointsWithKMeans(TwoDimensionKMeans & barPointKMeans, TwoDimensionKMeans & barPointKMeansForCalculation, unsigned int const numberQuestionsInColumn, double const totalHeight) const;    void removeIncorrectBarPointsByHeight(TwoDimensionKMeans & barPointKMeans, TwoDimensionKMeans & barPointKMeansForCalculation, DataCollection<double> const& heightCollection, TwoDimensionKMeans::GroupOfSamples const& groupOfGroupOfBarPoints) const;
+    void removeIncorrectBarPointsWithKMeans(TwoDimensionKMeans & barPointKMeans, TwoDimensionKMeans & barPointKMeansForCalculation, unsigned int const numberQuestionsInColumn, double const totalHeight) const;
+    void removeIncorrectBarPointsByHeight(TwoDimensionKMeans & barPointKMeans, TwoDimensionKMeans & barPointKMeansForCalculation, DataCollection<double> const& heightCollection, TwoDimensionKMeans::GroupOfSamples const& groupOfGroupOfBarPoints) const;
     void adjustHeightUntilTargetHeight(DequeOfPoints & dequeWithHighestHeight, DataCollection<double> const& heightCollection, double height) const;
     void saveQuestionBarCoordinatesFromKMeansWithBarPoints(TwoDimensionKMeans const& barPointKMeans, QuestionBarCoordinates & questionBarCoordinates, unsigned int const numberQuestionsInColumn) const;
     void writeLineInBitmap(AprgBitmap::Bitmap & bitmap, TwoDimensions::Line const& line) const;
@@ -136,6 +138,7 @@ private:
     TwoDimensions::Point convertToPoint(AprgBitmap::BitmapXY const& bitmapXY) const;
     TwoDimensions::Point convertToPoint(TwoDimensionsStatistics::Sample const& sample) const;
     TwoDimensionsStatistics::Sample convertToTwoDimensionSample(TwoDimensions::Point const& point) const;
+
     SoosaConfiguration m_configuration;
     unsigned int m_numberOfRespondents;
     std::map<unsigned int, unsigned int> m_questionToAnswersMap;

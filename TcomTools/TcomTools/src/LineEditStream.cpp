@@ -1,7 +1,8 @@
 #include <LineEditStream.hpp>
 #include <qtextedit.h>
 
-namespace tcomToolsGui{
+namespace tcomToolsGui
+{
 
 LineEditStream::LineEditStream(std::ostream & stream, QTextEdit * text_edit)
     : m_stream(stream)

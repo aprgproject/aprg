@@ -4,6 +4,7 @@
 #include <User/AlbaUserInterface.hpp>
 
 #include <string>
+
 namespace alba
 {
 
