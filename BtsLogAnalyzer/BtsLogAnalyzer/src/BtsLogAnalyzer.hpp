@@ -8,11 +8,10 @@
 #include <string>
 
 using alba::AlbaOptional;
-using tcomToolsBackend::BtsLogTime;
+using wcdmaToolsBackend::BtsLogTime;
 
 namespace alba
 {
-
 struct BtsLogDelay
 {
     AlbaOptional<BtsLogTime> startTimeOptional;

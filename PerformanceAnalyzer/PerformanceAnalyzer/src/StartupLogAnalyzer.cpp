@@ -9,13 +9,12 @@
 
 using namespace alba::stringHelper;
 using namespace std;
-using tcomToolsBackend::BtsLogPrint;
-using tcomToolsBackend::BtsLogTime;
-using tcomToolsBackend::BtsLogTimeType;
+using wcdmaToolsBackend::BtsLogPrint;
+using wcdmaToolsBackend::BtsLogTime;
+using wcdmaToolsBackend::BtsLogTimeType;
 
 namespace alba
 {
-
 StartupLogAnalyzer::StartupLogAnalyzer()
     : m_btsLogPathHandler("")
     , m_firstLogTime()
