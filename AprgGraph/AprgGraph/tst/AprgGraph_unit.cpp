@@ -1,11 +1,9 @@
-#include <AprgGraph.hpp>
-
 #include <Algebra/Equation/EquationUtilities.hpp>
 #include <Algebra/Term/Utilities/StringHelpers.hpp>
+#include <AprgGraph.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 
 #include <gtest/gtest.h>
-
 #include <cmath>
 
 using namespace alba::algebra;
@@ -19,11 +17,10 @@ using namespace std;
 namespace alba
 {
 
-TEST(SampleTest, DISABLED_BitmapGraph24Bits)
+TEST(AprgGraphTest, DISABLED_BitmapGraph24Bits)
 {
     AlbaLocalPathHandler defaultFile(APRG_GRAPH_24_BIT_DEFAULT_FILE);
-    AlbaLocalPathHandler graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);
-    graphOutputFile.deleteFile();
+    AlbaLocalPathHandler graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);    graphOutputFile.deleteFile();
     defaultFile.copyToNewFile(graphOutputFile.getFullPath());
 
     AprgGraph graph(graphOutputFile.getFullPath(), BitmapXY(800,450), BitmapDoubleXY(50, 50));
@@ -58,11 +55,10 @@ TEST(SampleTest, DISABLED_BitmapGraph24Bits)
     graph.saveChangesToBitmapFile();
 }
 
-TEST(SampleTest, TemporaryTest)
+TEST(AprgGraphTest, TemporaryTest)
 {
     AlbaLocalPathHandler defaultFile(APRG_GRAPH_24_BIT_DEFAULT_FILE);
-    AlbaLocalPathHandler graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);
-    graphOutputFile.deleteFile();
+    AlbaLocalPathHandler graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);    graphOutputFile.deleteFile();
     defaultFile.copyToNewFile(graphOutputFile.getFullPath());
 
     AprgGraph graph(graphOutputFile.getFullPath(), BitmapXY(800,450), BitmapDoubleXY(50, 50));
