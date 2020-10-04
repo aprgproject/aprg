@@ -17,7 +17,8 @@ TEST(SymbolMapTest, DISABLED_InputTraceFileIsProcessedByTraceDecoder)
 TEST(FileTest, DISABLED_InputTraceFileIsProcessedByTraceDecoderWithSymbolTableFromObjdump)
 {
     BtsTraceDecoder traceDecoder;
-    traceDecoder.saveSymbolTableFromObjdump(R"(C:\APRG\symbols.txt)");    traceDecoder.processInputTraceFile(R"(C:\APRG\input.txt)");
+    traceDecoder.saveSymbolTableFromObjdump(R"(C:\APRG\symbols.txt)");
+    traceDecoder.processInputTraceFile(R"(C:\APRG\input.txt)");
 }
 
 TEST(FileTest, DISABLED_InputTraceFileIsProcessedByTraceDecoderWithSymbolTableFromMappedFile)

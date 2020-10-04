@@ -5,7 +5,8 @@
 #include <SackReader/AlbaSackReaderType.hpp>
 #include <String/AlbaStringHelper.hpp>
 
-#include <map>#include <string>
+#include <map>
+#include <string>
 
 namespace alba
 {

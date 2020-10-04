@@ -4,6 +4,7 @@
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 
 #include <gtest/gtest.h>
+
 #include <fstream>
 #include <string>
 
@@ -28,7 +29,8 @@ TEST(AlbaGrepFileTest, GrepUpdatesWorks)
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     for(unsigned int i = 0; i<100; i++)
-    {        testFile << i << endl;
+    {
+        testFile << i << endl;
     }
     testFile.close();
 
@@ -42,6 +44,7 @@ TEST(AlbaGrepFileTest, GrepUpdatesWorks)
     EXPECT_TRUE(grepFile.isOutputFileWritten());
     EXPECT_DOUBLE_EQ(100, capturedPercentage);
 }
+
 TEST(AlbaGrepFileTest, GrepWorks)
 {
     AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
@@ -49,7 +52,8 @@ TEST(AlbaGrepFileTest, GrepWorks)
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << R"(As a person, I think that Mark is so cool)" << endl;
-    testFile << R"(As a designer, I know that Mark Earvin is so cool)" << endl;    testFile << R"(As a programmer, I know that Earvin is so cool)" << endl;
+    testFile << R"(As a designer, I know that Mark Earvin is so cool)" << endl;
+    testFile << R"(As a programmer, I know that Earvin is so cool)" << endl;
     testFile << R"(As a coder, I know that MARKalba is so cool)" << endl;
     testFile.close();
 
@@ -61,7 +65,8 @@ TEST(AlbaGrepFileTest, GrepWorks)
     ifstream outputTestFile(file2ToReadPathHandler.getFullPath());
     ASSERT_TRUE(outputTestFile.is_open());
 
-    AlbaFileReader fileReader(outputTestFile);    ASSERT_TRUE(outputTestFile.good());
+    AlbaFileReader fileReader(outputTestFile);
+    ASSERT_TRUE(outputTestFile.good());
     ASSERT_FALSE(outputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(R"(As a person, I think that Mark is so cool)", fileReader.getLine());

@@ -44,7 +44,8 @@ void BtsTraceDecoder::processInputTraceFile(std::string const& inputTraceFilePat
                      << "]" << endl;
             }
         }
-    }}
+    }
+}
 
 std::string BtsTraceDecoder::getNearestLowerSymbol(int const address, int const offset)
 {
@@ -56,7 +57,8 @@ std::string BtsTraceDecoder::getNearestLowerSymbol(int const address, int const 
         if(static_cast<int>(symbolIterator->first) <= addressWithOffset)
         {
             symbol = symbolIterator->second;
-        }        else
+        }
+        else
         {
             if(symbolIterator != m_symbolMap.begin())
             {

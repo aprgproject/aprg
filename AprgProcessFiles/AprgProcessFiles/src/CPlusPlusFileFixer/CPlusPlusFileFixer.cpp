@@ -26,7 +26,8 @@ set<string> listOfCPlusPlusHeaders
     "cuchar", "cwchar", "cwctype", "deque", "exception", "execution", "filesystem", "forward_list",
     "fstream", "functional", "future", "initializer_list", "iomanip", "ios", "iosfwd", "iostream",
     "istream", "iterator", "limits", "list", "locale", "map", "memory", "memory_resource", "mutex",
-    "new", "numeric", "optional", "ostream", "queue", "random", "ratio", "regex", "scoped_allocator",    "set", "shared_mutex", "sstream", "stack", "stdexcept", "streambuf", "string", "string_view",
+    "new", "numeric", "optional", "ostream", "queue", "random", "ratio", "regex", "scoped_allocator",
+    "set", "shared_mutex", "sstream", "stack", "stdexcept", "streambuf", "string", "string_view",
     "strstream", "system_error", "thread", "tuple", "typeindex", "typeinfo", "type_traits",
     "unordered_map", "unordered_set", "utility", "valarray", "variant", "vector"
 };
@@ -222,7 +223,8 @@ void CPlusPlusFileFixer::fix(string const& path)
 void CPlusPlusFileFixer::fixHeaders(string const& )
 {
     set<string> cPlusPlusHeaders;
-    set<string> otherLibraryHeaders;    set<string> aprgFiles;
+    set<string> otherLibraryHeaders;
+    set<string> aprgFiles;
     for(string const& header: m_headerListFromAngleBrackets)
     {
         if(isCPlusPlusHeader(header))
@@ -297,7 +299,8 @@ void CPlusPlusFileFixer::fixSmallUToCapitalUInNumbers()
         int indexOfU = line.find('u');
         while(isNotNpos(indexOfU))
         {
-            bool isCharacterBeforeUANumber(false);            bool isCharacterAfterUNotALetterOrNumberOrUnderscore(false);
+            bool isCharacterBeforeUANumber(false);
+            bool isCharacterAfterUNotALetterOrNumberOrUnderscore(false);
             if(indexOfU > 0)
             {
                 isCharacterBeforeUANumber = isNumber(line.at(indexOfU-1));
@@ -318,6 +321,7 @@ void CPlusPlusFileFixer::fixSmallUToCapitalUInNumbers()
         }
     }
 }
+
 void CPlusPlusFileFixer::addHeaderFileFromAngleBrackets(std::string const& header)
 {
     AlbaPathHandler headerPathHandler(header, "/");

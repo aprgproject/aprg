@@ -43,7 +43,8 @@ BtsLogSorter::BtsLogSorter(BtsLogSorterConfiguration const& configuration)
 double BtsLogSorter::getTotalSizeToBeRead(set<string> const& listOfFiles)
 {
     double totalFileSize(0);
-    for(string const& filePath : listOfFiles)    {
+    for(string const& filePath : listOfFiles)
+    {
         AlbaLocalPathHandler filePathHandler(filePath);
         if(m_evaluator.evaluate(filePathHandler.getFile()))
         {
@@ -199,6 +200,7 @@ void BtsLogSorter::addStartupLogsOnSorterWithPcTime()
         ProgressCounters::writeProgressForCombine = static_cast<int>(25*printReader.getCurrentLocation()/fileSize);
     }
 }
+
 void BtsLogSorter::writeLogsWithoutPcTimeToOutputFile(ofstream & outputLogFileStream)
 {
     cout << "Save sorted logs without PC time." << endl;
@@ -211,6 +213,7 @@ void BtsLogSorter::writeLogsWithoutPcTimeToOutputFile(ofstream & outputLogFileSt
     });
     writeLastPrint(outputLogFileStream);
 }
+
 void BtsLogSorter::separateLogsWithoutPcTimeIntoDifferentAddresses()
 {
     cout << "Save sorted logs without PC time into different addresses." << endl;
@@ -219,7 +222,8 @@ void BtsLogSorter::separateLogsWithoutPcTimeIntoDifferentAddresses()
     for(string const& hardwareAddress: m_foundHardwareAddresses)
     {
         hardwareAddressToOutputSteamMap[hardwareAddress].open(getPathOfLogWithoutPcTimeBasedFromHardwareAddress(m_directoryOfLogsWithoutPcTime, hardwareAddress));
-    }    unsigned long long printCount(0);
+    }
+    unsigned long long printCount(0);
     unsigned long long size(m_sorterWithoutPcTime.getSize());
     m_sorterWithoutPcTime.sortThenDoFunctionThenReleaseAllObjects([&](BtsLogPrint const& logPrint)
     {
@@ -227,6 +231,7 @@ void BtsLogSorter::separateLogsWithoutPcTimeIntoDifferentAddresses()
         ProgressCounters::writeProgressForCombine = static_cast<int>(25 + (printCount++ * 25/size));
     });
 }
+
 void BtsLogSorter::writeLogsWithPcTimeToOutputFile(ofstream & outputLogFileStream)
 {
     cout << "Merge logs with and without PC time and save to output file." << endl;
@@ -234,7 +239,8 @@ void BtsLogSorter::writeLogsWithPcTimeToOutputFile(ofstream & outputLogFileStrea
     for(string const& hardwareAddress: m_foundHardwareAddresses)
     {
         hardwareAddressToReaderMap[hardwareAddress].openIfNeeded(getPathOfLogWithoutPcTimeBasedFromHardwareAddress(m_directoryOfLogsWithoutPcTime, hardwareAddress));
-    }    unsigned long long printCount(0);
+    }
+    unsigned long long printCount(0);
     unsigned long long size(m_sorterWithPcTime.getSize());
     m_sorterWithPcTime.sortThenDoFunctionThenReleaseAllObjects([&](BtsLogPrint const& logPrint)
     {
@@ -243,7 +249,8 @@ void BtsLogSorter::writeLogsWithPcTimeToOutputFile(ofstream & outputLogFileStrea
         ProgressCounters::writeProgressForCombine = static_cast<int>(50 + (printCount++ * 25/size));
     });
     for(auto & hardwareAddressToReaderPair: hardwareAddressToReaderMap)
-    {        addPrintsFromReaderToSorterWithoutPcTime(hardwareAddressToReaderPair.second);
+    {
+        addPrintsFromReaderToSorterWithoutPcTime(hardwareAddressToReaderPair.second);
     }
 }
 

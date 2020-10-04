@@ -4,6 +4,7 @@
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 
 #include <gtest/gtest.h>
+
 #include <fstream>
 #include <string>
 
@@ -25,7 +26,8 @@ TEST(CPlusPlusFileFixerTest, CPlusPlusFileHeadersAreCorrected)
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << R"(#include <file2.hpp>)" << endl;
-    testFile << R"(#include<string>)" << endl;    testFile << R"(#include <gtest/gtest.h> )" << endl;
+    testFile << R"(#include<string>)" << endl;
+    testFile << R"(#include <gtest/gtest.h> )" << endl;
     testFile << R"(#include <windows.h> )" << endl;
     testFile << R"(#include <sys/types.h> )" << endl;
     testFile << "   #pragma once\t\t\t " << endl;
@@ -45,7 +47,8 @@ TEST(CPlusPlusFileFixerTest, CPlusPlusFileHeadersAreCorrected)
     ifstream inputTestFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);
+    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(R"(#pragma once)", fileReader.getLine());
@@ -77,7 +80,8 @@ TEST(CPlusPlusFileFixerTest, TrailingEmptyLineAreRemoved)
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << R"(         This is a line in the code)" << endl;
-    testFile << "       \t\t\t\t       This is another line in the code    " << endl;    testFile << R"()"<< endl;
+    testFile << "       \t\t\t\t       This is another line in the code    " << endl;
+    testFile << R"()"<< endl;
     testFile << R"()"<< endl;
     testFile << R"()"<< endl;
     testFile << R"()"<< endl;
@@ -89,7 +93,8 @@ TEST(CPlusPlusFileFixerTest, TrailingEmptyLineAreRemoved)
     ifstream inputTestFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);
+    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(R"(         This is a line in the code)", fileReader.getLine());
@@ -113,7 +118,8 @@ TEST(CPlusPlusFileFixerTest, NamespaceFormattingIsCorrected)
     ifstream inputTestFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);
+    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(R"(namespace samplenamespace )", fileReader.getLine());
@@ -130,7 +136,8 @@ TEST(CPlusPlusFileFixerTest, SmallUInNumberIsConvertedToCapitalU)
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << R"(u)" << endl;
-    testFile << R"(u1)" << endl;    testFile << R"(uname)" << endl;
+    testFile << R"(u1)" << endl;
+    testFile << R"(uname)" << endl;
     testFile << R"(u_)" << endl;
     testFile << R"(u )" << endl;
     testFile << R"(5uname)" << endl;
@@ -148,7 +155,8 @@ TEST(CPlusPlusFileFixerTest, SmallUInNumberIsConvertedToCapitalU)
     ifstream inputTestFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);
+    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(R"(u)", fileReader.getLine());
@@ -175,7 +183,8 @@ TEST(CPlusPlusFileFixerTest, DISABLED_TwoCascadingLoopsDetection)
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << R"(for(SomeDetailsHere))" << endl;
-    testFile << R"(    while(SomeAdditionalDetailsHere))" << endl;    testFile << R"(         while(SomeAdditionalDetailsHere))" << endl;
+    testFile << R"(    while(SomeAdditionalDetailsHere))" << endl;
+    testFile << R"(         while(SomeAdditionalDetailsHere))" << endl;
     testFile << R"(         })" << endl;
     testFile << R"(    })" << endl;
     testFile << R"(})" << endl;

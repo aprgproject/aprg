@@ -195,7 +195,8 @@ void AprgGraph::drawNumberLabel(LabelType const labelType, Point const& bitmapPo
         startPositionInX = numberPositionInX - (static_cast<int>(label.length()*widthOfCharacter/2));
         startPositionInY = numberPositionInY;
     }
-    else if(LabelType::VerticalLabel == labelType)    {
+    else if(LabelType::VerticalLabel == labelType)
+    {
         startPositionInX = numberPositionInX;
         startPositionInY = numberPositionInY - (static_cast<int>(heightOfCharacter/2));
     }

@@ -4,6 +4,7 @@
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 
 #include <gtest/gtest.h>
+
 #include <fstream>
 #include <string>
 
@@ -29,7 +30,8 @@ TEST(AlbaCropFileTest, CropUpdatesWorks)
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     for(unsigned int i = 0; i<100; i++)
-    {        testFile << i << endl;
+    {
+        testFile << i << endl;
     }
     testFile.close();
 
@@ -43,6 +45,7 @@ TEST(AlbaCropFileTest, CropUpdatesWorks)
     EXPECT_TRUE(cropFile.isOutputFileWritten());
     EXPECT_DOUBLE_EQ(100, capturedPercentage);
 }
+
 TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocument) // windows handling is problematic
 {
     AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
@@ -50,7 +53,8 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocument) // windows
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     for(unsigned int i = 0; i<10; i++)
-    {        testFile << i << endl;
+    {
+        testFile << i << endl;
     }
     testFile.close();
 
@@ -65,7 +69,8 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocument) // windows
     ifstream outputTestFile(file2ToReadPathHandler.getFullPath());
     ASSERT_TRUE(outputTestFile.is_open());
 
-    AlbaFileReader fileReader(outputTestFile);    ASSERT_TRUE(outputTestFile.good());
+    AlbaFileReader fileReader(outputTestFile);
+    ASSERT_TRUE(outputTestFile.good());
     ASSERT_FALSE(outputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(R"(4)", fileReader.getLine());
@@ -83,7 +88,8 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsTwiceOfTheWholeDocument) // window
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     for(unsigned int i = 0; i<10; i++)
-    {        testFile << i << endl;
+    {
+        testFile << i << endl;
     }
     testFile.close();
 
@@ -98,7 +104,8 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsTwiceOfTheWholeDocument) // window
     ifstream outputTestFile(file2ToReadPathHandler.getFullPath());
     ASSERT_TRUE(outputTestFile.is_open());
 
-    AlbaFileReader fileReader(outputTestFile);    ASSERT_TRUE(outputTestFile.good());
+    AlbaFileReader fileReader(outputTestFile);
+    ASSERT_TRUE(outputTestFile.good());
     ASSERT_FALSE(outputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(R"(0)", fileReader.getLine());
@@ -122,7 +129,8 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocumentAtTheStart) 
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     for(unsigned int i = 0; i<10; i++)
-    {        testFile << i << endl;
+    {
+        testFile << i << endl;
     }
     testFile.close();
 
@@ -137,7 +145,8 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocumentAtTheStart) 
     ifstream outputTestFile(file2ToReadPathHandler.getFullPath());
     ASSERT_TRUE(outputTestFile.is_open());
 
-    AlbaFileReader fileReader(outputTestFile);    ASSERT_TRUE(outputTestFile.good());
+    AlbaFileReader fileReader(outputTestFile);
+    ASSERT_TRUE(outputTestFile.good());
     ASSERT_FALSE(outputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(R"(0)", fileReader.getLine());
@@ -154,7 +163,8 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocumentAtTheEnd) //
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     for(unsigned int i = 0; i<10; i++)
-    {        testFile << i << endl;
+    {
+        testFile << i << endl;
     }
     testFile.close();
 
@@ -169,7 +179,8 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocumentAtTheEnd) //
     ifstream outputTestFile(file2ToReadPathHandler.getFullPath());
     ASSERT_TRUE(outputTestFile.is_open());
 
-    AlbaFileReader fileReader(outputTestFile);    ASSERT_TRUE(outputTestFile.good());
+    AlbaFileReader fileReader(outputTestFile);
+    ASSERT_TRUE(outputTestFile.good());
     ASSERT_FALSE(outputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(R"(5)", fileReader.getLine());

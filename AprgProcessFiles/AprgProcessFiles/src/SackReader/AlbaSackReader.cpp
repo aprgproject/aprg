@@ -9,6 +9,7 @@
 #include <numeric>
 #include <set>
 #include <vector>
+
 using namespace std;
 
 namespace alba
@@ -55,6 +56,7 @@ void AlbaSackReader::printAll() const
         cout << endl;
     }
 }
+
 void AlbaSackReader::processDirectory(string const& path)
 {
     set<string> listOfFiles;
@@ -128,7 +130,8 @@ void AlbaSackReader::combineWords(stringHelper::strings & tokens)
 
     struct TokenAndIndex
     {
-        unsigned int index;        string token;
+        unsigned int index;
+        string token;
     };
     vector<TokenAndIndex> recentWords;
     for(unsigned int i=0; i<tokens.size(); i++)
@@ -143,7 +146,8 @@ void AlbaSackReader::combineWords(stringHelper::strings & tokens)
             int lastIndex = static_cast<int>(recentWords.size())-1;
             if(lastIndex >= 2)
             {
-                string lastThreeWords = recentWords[lastIndex-2].token + " " + recentWords[lastIndex-1].token + " " + recentWords[lastIndex].token;                if(tokensToCombine.end() != std::find(tokensToCombine.begin(), tokensToCombine.end(), lastThreeWords))
+                string lastThreeWords = recentWords[lastIndex-2].token + " " + recentWords[lastIndex-1].token + " " + recentWords[lastIndex].token;
+                if(tokensToCombine.end() != std::find(tokensToCombine.begin(), tokensToCombine.end(), lastThreeWords))
                 {
                     tokens.erase(tokens.begin()+recentWords[lastIndex-2].index, tokens.begin()+recentWords[lastIndex].index+1);
                     tokens.insert(tokens.begin()+recentWords[lastIndex-2].index, lastThreeWords);
@@ -211,7 +215,8 @@ void AlbaSackReader::combineArrayOperators(stringHelper::strings & tokens)
             });
                 tokens.erase(tokens.begin()+nonWhiteSpaceIndex, tokens.begin()+closingBracketIndex+1);
                 tokens.insert(tokens.begin()+nonWhiteSpaceIndex, combinedArrayString);
-                i = nonWhiteSpaceIndex;                state = 0;
+                i = nonWhiteSpaceIndex;
+                state = 0;
                 continue;
             }
         }
@@ -402,6 +407,7 @@ void AlbaSackReader::analyze(stringHelper::strings const& tokens)
     for(string const& token : tokens)
     {
         //cout<<"analyze -> state: "<<getReaderStateString(transactionData.state)<<" typeName:["<<transactionData.typeName<<"] token:["<<token<<"]"<<endl;
+
 #define HANDLE_READER_STATE(en) \
     case en: \
     analyzeInReaderState<en>(transactionData, token); \

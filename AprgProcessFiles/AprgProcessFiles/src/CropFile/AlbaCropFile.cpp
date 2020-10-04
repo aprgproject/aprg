@@ -84,7 +84,8 @@ void AlbaCropFile::performCropForFile(string const& inputFilePath, string const&
     fileReader.moveLocation(static_cast<unsigned long long>(locations.startLocation));
 
     double locationDifference = locations.endLocation-locations.startLocation;
-    while(fileReader.isNotFinished())    {
+    while(fileReader.isNotFinished())
+    {
         double currentLocation = fileReader.getCurrentLocation();
         string lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if(currentLocation < locations.endLocation)
@@ -108,7 +109,8 @@ AlbaCropFile::LocationsInFile AlbaCropFile::getLocationsInFile(double const foun
     LocationsInFile locations{};
     locations.startLocation = foundLocation - (m_cropSize/2);
     locations.endLocation = foundLocation + (m_cropSize/2);
-    double overFlowOnTheRight = locations.endLocation - fileSize;    double overFlowOnTheLeft = -locations.startLocation;
+    double overFlowOnTheRight = locations.endLocation - fileSize;
+    double overFlowOnTheLeft = -locations.startLocation;
     if(overFlowOnTheRight>0 || overFlowOnTheLeft>0)
     {
         if(overFlowOnTheRight<0 && overFlowOnTheRight+overFlowOnTheLeft<=0)
