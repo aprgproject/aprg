@@ -1,11 +1,10 @@
 #include <HeartTee.hpp>
 #include <SerialPort.hpp>
-#include <unistd.h>
 
 #include <gtest/gtest.h>
+#include <unistd.h>
 
 #include <iostream>
-
 using namespace std;
 
 namespace alba
