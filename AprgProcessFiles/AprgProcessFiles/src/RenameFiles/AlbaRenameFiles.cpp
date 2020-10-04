@@ -20,11 +20,10 @@ void AlbaRenameFiles::renameWithIncreasingNumbers(
 {
     NumberToStringConverter converter;
     converter.setFillCharacter('0');
-    converter.setFieldWidth(fieldWidth);
+    converter.setFieldWidth(static_cast<int>(fieldWidth));
 
     ListOfPaths listOfFiles;
-    ListOfPaths listOfDirectories;
-    m_directoryPathHandler.findFilesAndDirectoriesOneDepth("*.*", listOfFiles, listOfDirectories);
+    ListOfPaths listOfDirectories;    m_directoryPathHandler.findFilesAndDirectoriesOneDepth("*.*", listOfFiles, listOfDirectories);
 
     unsigned int count=startingNumber;
     for(string const& file : listOfFiles)
