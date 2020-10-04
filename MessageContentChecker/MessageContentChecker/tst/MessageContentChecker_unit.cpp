@@ -2,7 +2,8 @@
 #include <Bit/AlbaBitManipulation.hpp>
 #include <MessageContentChecker.hpp>
 #include <SAddiEdchRlMappingInfo.h>
-#include <SAdditionalEdchCellInfo.h>#include <SAdditionalHsCellInfo.h>
+#include <SAdditionalEdchCellInfo.h>
+#include <SAdditionalHsCellInfo.h>
 #include <SCmActivePatternSeqInfo.h>
 #include <SCmTransGapPatternSeqInfo.h>
 #include <SCpcDtxDrxInfo.h>
@@ -201,7 +202,8 @@ TEST(SampleTest, SampleTest1)
 
     unsigned int offset = sizeof(BB_2_RlSetupReq) - sizeof(TDynamicData)
             + (sizeof(SDlDpchInfoRlSetup)*swap4(rlSetupReqPointer->numOfDlDpchInfo))
-            + (sizeof(SRadioLinkSetup_Ver2)*swap4(rlSetupReqPointer->numOfRlInfo))            + (sizeof(SCmTransGapPatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmTransGapPatternSeqInfo))
+            + (sizeof(SRadioLinkSetup_Ver2)*swap4(rlSetupReqPointer->numOfRlInfo))
+            + (sizeof(SCmTransGapPatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmTransGapPatternSeqInfo))
             + (sizeof(SCmTransGapPatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmTransGapPatternSeqInfoForCmSet2))
             + (sizeof(SCmActivePatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmActivePatternSeqInfo))
             + (sizeof(TCtfc)*swap4(rlSetupReqPointer->numOfUlTfc))
@@ -213,7 +215,8 @@ TEST(SampleTest, SampleTest1)
 
     /*
         unsigned int offset = (sizeof(SDlDpchInfoRlSetup)*swap4(rlSetupReqPointer->numOfDlDpchInfo))
-                + (sizeof(SRadioLinkSetup_Ver2)*swap4(rlSetupReqPointer->numOfRlInfo))                + (sizeof(SCmTransGapPatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmTransGapPatternSeqInfo))
+                + (sizeof(SRadioLinkSetup_Ver2)*swap4(rlSetupReqPointer->numOfRlInfo))
+                + (sizeof(SCmTransGapPatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmTransGapPatternSeqInfo))
                 + (sizeof(SCmTransGapPatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmTransGapPatternSeqInfoForCmSet2))
                 + (sizeof(SCmActivePatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmActivePatternSeqInfo))
                 + (sizeof(TCtfc)*swap4(rlSetupReqPointer->numOfUlTfc))
@@ -565,7 +568,8 @@ TEST(SampleTest, SampleTest2)
 
     unsigned int offset = sizeof(BB_2_RlSetupReq) - sizeof(TDynamicData)
             + (sizeof(SDlDpchInfoRlSetup)*swap4(rlSetupReqPointer->numOfDlDpchInfo))
-            + (sizeof(SRadioLinkSetup_Ver2)*swap4(rlSetupReqPointer->numOfRlInfo))            + (sizeof(SCmTransGapPatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmTransGapPatternSeqInfo))
+            + (sizeof(SRadioLinkSetup_Ver2)*swap4(rlSetupReqPointer->numOfRlInfo))
+            + (sizeof(SCmTransGapPatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmTransGapPatternSeqInfo))
             + (sizeof(SCmTransGapPatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmTransGapPatternSeqInfoForCmSet2))
             + (sizeof(SCmActivePatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmActivePatternSeqInfo))
             + (sizeof(TCtfc)*swap4(rlSetupReqPointer->numOfUlTfc))
@@ -596,7 +600,8 @@ TEST(SampleTest, SampleTest2)
 
     /*
         unsigned int offset = (sizeof(SDlDpchInfoRlSetup)*swap4(rlSetupReqPointer->numOfDlDpchInfo))
-                + (sizeof(SRadioLinkSetup_Ver2)*swap4(rlSetupReqPointer->numOfRlInfo))                + (sizeof(SCmTransGapPatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmTransGapPatternSeqInfo))
+                + (sizeof(SRadioLinkSetup_Ver2)*swap4(rlSetupReqPointer->numOfRlInfo))
+                + (sizeof(SCmTransGapPatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmTransGapPatternSeqInfo))
                 + (sizeof(SCmTransGapPatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmTransGapPatternSeqInfoForCmSet2))
                 + (sizeof(SCmActivePatternSeqInfo)*swap4(rlSetupReqPointer->numOfCmActivePatternSeqInfo))
                 + (sizeof(TCtfc)*swap4(rlSetupReqPointer->numOfUlTfc))

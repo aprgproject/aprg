@@ -29,6 +29,7 @@ void tcomSetSfn(unsigned int sfn)
 
 using namespace std;
 using namespace alba;
+
 namespace DMeas 
 {
 
@@ -60,6 +61,7 @@ TimerStack::TimerIndex TimerStack::ARRAY_timers_insert(TimeCounter timerValue, T
     m_timers[timerIndex] = timerDataToBeSaved;
     return timerIndex;
 }
+
 TimerStack::TimerIndex TimerStack::ARRAY_timers_find(TimeCounter timeToSearch)
 {
     TimerIndex timerIndex = 0;
@@ -522,7 +524,8 @@ EBoolean TimerStack::insert(TimeCounter timerValue, TimerData const& timerData, 
 
     if( ARRAY_timers_end() != timerIndex )
     {
-        MTPRINTF("DMEAS: TimerStack: insert - ready ok ( timerValue = %u )\n", ARRAY_timers_first( timerIndex ));        return EBoolean_True;
+        MTPRINTF("DMEAS: TimerStack: insert - ready ok ( timerValue = %u )\n", ARRAY_timers_first( timerIndex ));
+        return EBoolean_True;
     }
     else
     {
