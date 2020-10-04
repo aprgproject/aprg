@@ -5,16 +5,15 @@
 #include <FrequencyStatistics.hpp>
 #include <Math/AlbaMathHelper.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
-#include <User/AlbaUserInterface.hpp>
-#include <TwoDimensions/TwoDimensionsHelper.hpp>
 #include <TwoDimensions/Circle.hpp>
+#include <TwoDimensions/TwoDimensionsHelper.hpp>
+#include <User/AlbaUserInterface.hpp>
 
-#include <sstream>
 #include <iostream>
+#include <sstream>
 
 #define ALLOWABLE_LINE_DEVIATION_FOR_LINE_MODEL 2
-#define ALLOWABLE_HALF_LINE_WIDTH_DEVIATION 2
-#define ALLOWABLE_HALF_BAR_WIDTH_DEVIATION 4
+#define ALLOWABLE_HALF_LINE_WIDTH_DEVIATION 2#define ALLOWABLE_HALF_BAR_WIDTH_DEVIATION 4
 #define ALLOWABLE_LINE_WIDTH_DEVIATION ALLOWABLE_HALF_LINE_WIDTH_DEVIATION*2
 #define ALLOWABLE_BAR_WIDTH_DEVIATION ALLOWABLE_HALF_BAR_WIDTH_DEVIATION*2
 #define ALLOWABLE_BAR_HEIGHT_DEVIATION 10
@@ -26,9 +25,9 @@
 #define MINIMUM_PERCENTAGE_OF_BLACK_POINTS_FOR_FILLED_CIRCLE 0.7
 #define FILE_PATH_BASIS_HTML APRG_DIR R"(SOOSA2014\basis.html)"
 
+using namespace alba::AprgBitmap;
 using namespace alba::TwoDimensions;
 using namespace std;
-
 namespace alba
 {
 
@@ -317,12 +316,11 @@ void SOOSA::processFile(string const& filePath)
     cout<<"processFile: ["<<filePath<<"]"<<endl;
     StatusStatus::getInstance().clearErrors();
 
-    AprgBitmap bitmap(filePath);
-    AprgBitmapSnippet globalSnippet(bitmap.getSnippetReadFromFileWholeBitmap());
+    Bitmap bitmap(filePath);
+    BitmapSnippet globalSnippet(bitmap.getSnippetReadFromFileWholeBitmap());
 
     Line leftLine, rightLine, topLine, bottomLine, centerLeftLine, centerRightLine;
-    leftLine = findLeftLine(globalSnippet);
-    rightLine = findRightLine(globalSnippet);
+    leftLine = findLeftLine(globalSnippet);    rightLine = findRightLine(globalSnippet);
     topLine = findTopLine(globalSnippet);
     bottomLine = findBottomLine(globalSnippet);
 
@@ -357,39 +355,34 @@ void SOOSA::processFile(string const& filePath)
     saveFrequencyDatabaseIfNoError();
 }
 
-Line SOOSA::findLeftLine(AprgBitmapSnippet const& snippet) const
+Line SOOSA::findLeftLine(BitmapSnippet const& snippet) const
 {
     cout<<"findLeftLine"<<endl;
-    RangeOfInts rangeForX(snippet.getTopLeftCorner().getX(), snippet.getBottomRightCorner().getX(), 1);
-    return findVerticalLine(snippet, rangeForX);
+    RangeOfInts rangeForX(snippet.getTopLeftCorner().getX(), snippet.getBottomRightCorner().getX(), 1);    return findVerticalLine(snippet, rangeForX);
 }
 
-Line SOOSA::findRightLine(AprgBitmapSnippet const& snippet) const
+Line SOOSA::findRightLine(BitmapSnippet const& snippet) const
 {
     cout<<"findRightLine"<<endl;
-    RangeOfInts rangeForX(snippet.getBottomRightCorner().getX(), snippet.getTopLeftCorner().getX(), -1);
-    return findVerticalLine(snippet, rangeForX);
+    RangeOfInts rangeForX(snippet.getBottomRightCorner().getX(), snippet.getTopLeftCorner().getX(), -1);    return findVerticalLine(snippet, rangeForX);
 }
 
-Line SOOSA::findTopLine(AprgBitmapSnippet const& snippet) const
+Line SOOSA::findTopLine(BitmapSnippet const& snippet) const
 {
     cout<<"findTopLine"<<endl;
-    RangeOfInts rangeForY(snippet.getTopLeftCorner().getY(), snippet.getBottomRightCorner().getY(), 1);
-    return findHorizontalLine(snippet, rangeForY);
+    RangeOfInts rangeForY(snippet.getTopLeftCorner().getY(), snippet.getBottomRightCorner().getY(), 1);    return findHorizontalLine(snippet, rangeForY);
 }
 
-Line SOOSA::findBottomLine(AprgBitmapSnippet const& snippet) const
+Line SOOSA::findBottomLine(BitmapSnippet const& snippet) const
 {
     cout<<"findBottomLine"<<endl;
-    RangeOfInts rangeForY(snippet.getBottomRightCorner().getY(), snippet.getTopLeftCorner().getY(), -1);
-    return findHorizontalLine(snippet, rangeForY);
+    RangeOfInts rangeForY(snippet.getBottomRightCorner().getY(), snippet.getTopLeftCorner().getY(), -1);    return findHorizontalLine(snippet, rangeForY);
 }
 
-Line SOOSA::findVerticalLine(AprgBitmapSnippet const& snippet, RangeOfInts const& rangeForX) const
+Line SOOSA::findVerticalLine(BitmapSnippet const& snippet, RangeOfInts const& rangeForX) const
 {
     RangeOfInts::TerminationCondition conditionForX(rangeForX.getTerminationCondition());
-    TwoDimensionsStatistics::Samples samples;
-    for(unsigned int y=snippet.getTopLeftCorner().getY(); y<=snippet.getBottomRightCorner().getY(); y++)
+    TwoDimensionsStatistics::Samples samples;    for(unsigned int y=snippet.getTopLeftCorner().getY(); y<=snippet.getBottomRightCorner().getY(); y++)
     {
         AlbaRange<double> consecutiveBlackPixels;
         for(unsigned int x=rangeForX.getStartValue(); conditionForX(x, rangeForX.getEndValue()); x+=rangeForX.getInterval())
@@ -412,11 +405,10 @@ Line SOOSA::findVerticalLine(AprgBitmapSnippet const& snippet, RangeOfInts const
     return getLineModel(samples);
 }
 
-Line SOOSA::findHorizontalLine(AprgBitmapSnippet const& snippet, RangeOfInts const& rangeForY) const
+Line SOOSA::findHorizontalLine(BitmapSnippet const& snippet, RangeOfInts const& rangeForY) const
 {
     RangeOfInts::TerminationCondition conditionForY(rangeForY.getTerminationCondition());
-    TwoDimensionsStatistics::Samples samples;
-    for(unsigned int x=snippet.getTopLeftCorner().getX(); x<=snippet.getBottomRightCorner().getX(); x++)
+    TwoDimensionsStatistics::Samples samples;    for(unsigned int x=snippet.getTopLeftCorner().getX(); x<=snippet.getBottomRightCorner().getX(); x++)
     {
         AlbaRange<double> consecutiveBlackPixels;
         for(unsigned int y=rangeForY.getStartValue(); conditionForY(y, rangeForY.getEndValue()); y+=rangeForY.getInterval())
@@ -439,23 +431,22 @@ Line SOOSA::findHorizontalLine(AprgBitmapSnippet const& snippet, RangeOfInts con
     return getLineModel(samples);
 }
 
-Line SOOSA::findLeftLineUsingStartingLine(AprgBitmapSnippet const& snippet, Line const& startingLine) const
+Line SOOSA::findLeftLineUsingStartingLine(BitmapSnippet const& snippet, Line const& startingLine) const
 {
     RangeOfInts rangeForX(snippet.getTopLeftCorner().getX(), snippet.getBottomRightCorner().getX(), 1);
     return findVerticalLineUsingStartingLine(snippet, startingLine, rangeForX);
 }
 
-Line SOOSA::findRightLineUsingStartingLine(AprgBitmapSnippet const& snippet, Line const& startingLine) const
+Line SOOSA::findRightLineUsingStartingLine(BitmapSnippet const& snippet, Line const& startingLine) const
 {
     RangeOfInts rangeForX(snippet.getBottomRightCorner().getX(), snippet.getTopLeftCorner().getX(), -1);
     return findVerticalLineUsingStartingLine(snippet, startingLine, rangeForX);
 }
 
-Line SOOSA::findVerticalLineUsingStartingLine(AprgBitmapSnippet const& snippet, Line const& startingLine, RangeOfInts const& rangeForX) const
+Line SOOSA::findVerticalLineUsingStartingLine(BitmapSnippet const& snippet, Line const& startingLine, RangeOfInts const& rangeForX) const
 {
     RangeOfInts::TerminationCondition conditionForX(rangeForX.getTerminationCondition());
-    TwoDimensionsStatistics::Samples samples;
-    for(unsigned int y=snippet.getTopLeftCorner().getY(); y<=snippet.getBottomRightCorner().getY(); y++)
+    TwoDimensionsStatistics::Samples samples;    for(unsigned int y=snippet.getTopLeftCorner().getY(); y<=snippet.getBottomRightCorner().getY(); y++)
     {
         AlbaRange<double> consecutiveBlackPixels;
         double xInLine = round(startingLine.calculateXFromY(y));
@@ -521,11 +512,10 @@ SOOSA::VectorOfDoubles SOOSA::getAcceptableSquareErrorsUsingKMeans(TwoDimensions
     // not active anymore
     VectorOfDoubles squareErrors;
     OneDimensionKMeans kMeansForSquareErrors;
-    for(TwoDimensionsStatistics::ValueToSamplePair const& squareErrorToSamplePair : squareErrorToSampleMultimap)
+    for(auto const& squareErrorToSamplePair : squareErrorToSampleMultimap)
     {
         kMeansForSquareErrors.addSample(OneDimensionKMeans::Sample{squareErrorToSamplePair.first});
-    }
-    OneDimensionKMeans::GroupOfSamples groupOfSamples(kMeansForSquareErrors.getGroupOfSamplesUsingKMeans(2));
+    }    OneDimensionKMeans::GroupOfSamples groupOfSamples(kMeansForSquareErrors.getGroupOfSamplesUsingKMeans(2));
     transform(groupOfSamples[0].cbegin(), groupOfSamples[0].cend(), back_inserter(squareErrors), [](OneDimensionKMeans::Sample const& sample)
     {
         return sample.getValueAt(0);
@@ -538,11 +528,10 @@ SOOSA::VectorOfDoubles SOOSA::getAcceptableSquareErrorsUsingRetainRatio(TwoDimen
     VectorOfDoubles squareErrors;
     unsigned int retainedSize(RETAIN_RATIO_FOR_DEVIATION*squareErrorToSampleMultimap.size());
     unsigned int count(0);
-    for(TwoDimensionsStatistics::ValueToSamplePair const& squareErrorToSamplePair : squareErrorToSampleMultimap)
+    for(auto const& squareErrorToSamplePair : squareErrorToSampleMultimap)
     {
         squareErrors.emplace_back(squareErrorToSamplePair.first);
-        if(count++ >= retainedSize)
-        {
+        if(count++ >= retainedSize)        {
             break;
         }
     }
@@ -558,11 +547,10 @@ void SOOSA::updateSamplesForLineModelingFromSquareErrorToSampleMultimap(TwoDimen
     });
 }
 
-void SOOSA::processColumn(AprgBitmapSnippet const& snippet, Line const& leftLine, Line const& rightLine, unsigned int const columnNumber)
+void SOOSA::processColumn(BitmapSnippet const& snippet, Line const& leftLine, Line const& rightLine, unsigned int const columnNumber)
 {
     unsigned int numberQuestionsInColumn = m_configuration.getNumberOfQuestionsAtColumn(columnNumber);
-    QuestionBarCoordinates questionBarCoordinatesForLeftLine(getQuestionBarCoordinatesFromLine(snippet, leftLine, numberQuestionsInColumn));
-    QuestionBarCoordinates questionBarCoordinatesForRightLine(getQuestionBarCoordinatesFromLine(snippet, rightLine, numberQuestionsInColumn));
+    QuestionBarCoordinates questionBarCoordinatesForLeftLine(getQuestionBarCoordinatesFromLine(snippet, leftLine, numberQuestionsInColumn));    QuestionBarCoordinates questionBarCoordinatesForRightLine(getQuestionBarCoordinatesFromLine(snippet, rightLine, numberQuestionsInColumn));
     if(questionBarCoordinatesForLeftLine.size() == numberQuestionsInColumn && questionBarCoordinatesForRightLine.size() == numberQuestionsInColumn)
     {
         for(unsigned int questionIndex=0; questionIndex<numberQuestionsInColumn; questionIndex++)
@@ -587,11 +575,10 @@ void SOOSA::processColumn(AprgBitmapSnippet const& snippet, Line const& leftLine
     }
 }
 
-unsigned int SOOSA::getAnswerToQuestion(AprgBitmapSnippet const& snippet, QuestionBarCoordinate const& leftCoordinate, QuestionBarCoordinate const& rightCoordinate) const
+unsigned int SOOSA::getAnswerToQuestion(BitmapSnippet const& snippet, QuestionBarCoordinate const& leftCoordinate, QuestionBarCoordinate const& rightCoordinate) const
 {
     Point leftPoint(twoDimensionsHelper::getMidpoint(leftCoordinate.first, leftCoordinate.second));
-    Point rightPoint(twoDimensionsHelper::getMidpoint(rightCoordinate.first, rightCoordinate.second));
-    double leftBarHeight(twoDimensionsHelper::getDistance(leftCoordinate.first, leftCoordinate.second));
+    Point rightPoint(twoDimensionsHelper::getMidpoint(rightCoordinate.first, rightCoordinate.second));    double leftBarHeight(twoDimensionsHelper::getDistance(leftCoordinate.first, leftCoordinate.second));
     double rightBarHeight(twoDimensionsHelper::getDistance(rightCoordinate.first, rightCoordinate.second));
     double lowestHeightOfQuestion(min(leftBarHeight, rightBarHeight));
     double radius(lowestHeightOfQuestion*BAR_HEIGHT_TO_DIAMETER_RATIO/2);
@@ -599,11 +586,10 @@ unsigned int SOOSA::getAnswerToQuestion(AprgBitmapSnippet const& snippet, Questi
     bool isTwoChoicesShaded(false);
     for(unsigned int choiceIndex=0; choiceIndex<NUMBER_OF_CHOICES; choiceIndex++ )
     {
-        if(isChoiceShaded(snippet, leftPoint, rightPoint, choiceIndex, radius))
+        if(isChoiceShaded(snippet, leftPoint, rightPoint, choiceIndex, static_cast<unsigned int>(radius)))
         {
             isTwoChoicesShaded = (shadedChoice!=0) ? true : isTwoChoicesShaded;
-            shadedChoice = choiceIndex+1;
-        }
+            shadedChoice = choiceIndex+1;        }
     }
     if(isTwoChoicesShaded)
     {
@@ -613,11 +599,10 @@ unsigned int SOOSA::getAnswerToQuestion(AprgBitmapSnippet const& snippet, Questi
     return midpointChoice-(shadedChoice-midpointChoice);
 }
 
-bool SOOSA::isChoiceShaded(AprgBitmapSnippet const& snippet, Point const& leftPoint, Point const& rightPoint, unsigned int const choiceIndex, unsigned int const radius) const
+bool SOOSA::isChoiceShaded(BitmapSnippet const& snippet, Point const& leftPoint, Point const& rightPoint, unsigned int const choiceIndex, unsigned int const radius) const
 {
     double choiceIndexRatio((((double)choiceIndex*2)+1)/(NUMBER_OF_CHOICES*2));
-    double differenceFromLeftToRightInX(rightPoint.getX()-leftPoint.getX());
-    double differenceFromLeftToRightInY(rightPoint.getY()-leftPoint.getY());
+    double differenceFromLeftToRightInX(rightPoint.getX()-leftPoint.getX());    double differenceFromLeftToRightInY(rightPoint.getY()-leftPoint.getY());
     Point centerOfCircle(leftPoint.getX()+(differenceFromLeftToRightInX*choiceIndexRatio), leftPoint.getY()+(differenceFromLeftToRightInY*choiceIndexRatio));
     unsigned int totalPoints(0), numberOfBlackPoints(0);
     Circle circle(centerOfCircle, radius);
@@ -629,11 +614,10 @@ bool SOOSA::isChoiceShaded(AprgBitmapSnippet const& snippet, Point const& leftPo
     return ((double)numberOfBlackPoints/totalPoints) >= MINIMUM_PERCENTAGE_OF_BLACK_POINTS_FOR_FILLED_CIRCLE;
 }
 
-SOOSA::QuestionBarCoordinates SOOSA::getQuestionBarCoordinatesFromLine(AprgBitmapSnippet const& snippet, Line const& line, unsigned int const numberQuestionsInColumn) const
+SOOSA::QuestionBarCoordinates SOOSA::getQuestionBarCoordinatesFromLine(BitmapSnippet const& snippet, Line const& line, unsigned int const numberQuestionsInColumn) const
 {
     QuestionBarCoordinates questionBarCoordinates;
-    VectorOfPointAndWidth pointsAndWidths(getPointsAndWidths(snippet, line));
-    if(!pointsAndWidths.empty())
+    VectorOfPointAndWidth pointsAndWidths(getPointsAndWidths(snippet, line));    if(!pointsAndWidths.empty())
     {
         LineAndBarWidths widthAverages(getAverageLineAndBarWidthUsingKMeans(pointsAndWidths));
         TwoDimensionKMeans barPointKMeans, barPointKMeansForCalculation;
@@ -655,11 +639,10 @@ bool SOOSA::isWithinBarDeviation(double const barWidthAverage, double const curr
     return mathHelper::getAbsoluteValue(barWidthAverage-currentWidth) <= ALLOWABLE_HALF_BAR_WIDTH_DEVIATION;
 }
 
-SOOSA::VectorOfPointAndWidth SOOSA::getPointsAndWidths(AprgBitmapSnippet const& snippet, Line const& line) const
+SOOSA::VectorOfPointAndWidth SOOSA::getPointsAndWidths(BitmapSnippet const& snippet, Line const& line) const
 {
     Points nearestBlackPointsFromLine(getNearestBlackPointsFromLine(snippet, line));
-    VectorOfPointAndWidth pointsAndWidths;
-    for(Point const& point : nearestBlackPointsFromLine)
+    VectorOfPointAndWidth pointsAndWidths;    for(Point const& point : nearestBlackPointsFromLine)
     {
         double barWidth(getBarWidthFromBlackPoint(snippet, line, point));
         pointsAndWidths.emplace_back(point, barWidth);
@@ -669,11 +652,10 @@ SOOSA::VectorOfPointAndWidth SOOSA::getPointsAndWidths(AprgBitmapSnippet const& 
 
 SOOSA::LineAndBarWidths SOOSA::getAverageLineAndBarWidthUsingKMeans(VectorOfPointAndWidth const& pointsAndWidths) const
 {
-    LineAndBarWidths widthAverages;
+    LineAndBarWidths widthAverages{};
     OneDimensionKMeans kMeansForWidths;
     TwoDimensionsStatistics::ValueToSampleMultimap widthToSampleMultimap(getWidthToSampleMultimap(pointsAndWidths));
-    initializeWidthsForKMeans(kMeansForWidths, widthToSampleMultimap);
-    while(!kMeansForWidths.getSamples().empty())
+    initializeWidthsForKMeans(kMeansForWidths, widthToSampleMultimap);    while(!kMeansForWidths.getSamples().empty())
     {
         cout<<"getAverageLineAndBarWidthUsingKMeans samples: "<<kMeansForWidths.getSamples().size()<<endl;
         OneDimensionKMeans::GroupOfSamples twoGroupsOfSamples(kMeansForWidths.getGroupOfSamplesUsingKMeans(2));
@@ -706,11 +688,10 @@ TwoDimensionsStatistics::ValueToSampleMultimap SOOSA::getWidthToSampleMultimap(V
 
 void SOOSA::initializeWidthsForKMeans(OneDimensionKMeans & kMeansForWidths, TwoDimensionsStatistics::ValueToSampleMultimap const& widthToSampleMultimap) const
 {
-    for(TwoDimensionsStatistics::ValueToSamplePair const& widthToSamplePair : widthToSampleMultimap)
+    for(auto const& widthToSamplePair : widthToSampleMultimap)
     {
         kMeansForWidths.addSample(OneDimensionKMeans::Sample{widthToSamplePair.first});
-    }
-}
+    }}
 
 void SOOSA::removeDeviatedWidthsUsingKMeans(OneDimensionKMeans & kMeansForWidths, TwoDimensionsStatistics::ValueToSampleMultimap const& widthToSampleMultimap) const
 {
@@ -737,11 +718,10 @@ void SOOSA::addWidthToKMeansIfNeeded(OneDimensionKMeans & kMeans, OneDimensionKM
     if(groupOfSamples.size() > minimumGroupSize)
     {
         RangeOfDoubles minMaxFromGroupInThreeGroups(getMinMaxRangeFromKMeansSamples(groupOfSamples));
-        for(TwoDimensionsStatistics::ValueToSamplePair const& widthSamplePair : widthToSampleMultimap)
+        for(auto const& widthSamplePair : widthToSampleMultimap)
         {
             if(minMaxFromGroupInThreeGroups.isValueInsideInclusive(widthSamplePair.first))
-            {
-                kMeans.addSample(OneDimensionKMeans::Sample{widthSamplePair.first});
+            {                kMeans.addSample(OneDimensionKMeans::Sample{widthSamplePair.first});
             }
         }
     }
@@ -757,11 +737,10 @@ SOOSA::RangeOfDoubles SOOSA::getMinMaxRangeFromKMeansSamples(OneDimensionKMeans:
     return RangeOfDoubles(collection.getMinimum(), collection.getMaximum(), 1);
 }
 
-Points SOOSA::getNearestBlackPointsFromLine(AprgBitmapSnippet const& snippet, Line const& line) const
+Points SOOSA::getNearestBlackPointsFromLine(BitmapSnippet const& snippet, Line const& line) const
 {
     Points linePoints(line.getPoints(convertToPoint(snippet.getTopLeftCorner()), convertToPoint(snippet.getBottomRightCorner()), 1));
-    Points nearestBlackPointsFromLine;
-    for(Point const& point : linePoints)
+    Points nearestBlackPointsFromLine;    for(Point const& point : linePoints)
     {
         if(snippet.isBlackAt(convertToBitmapXY(point)))
         {
@@ -779,11 +758,10 @@ Points SOOSA::getNearestBlackPointsFromLine(AprgBitmapSnippet const& snippet, Li
     return nearestBlackPointsFromLine;
 }
 
-Point SOOSA::getNearestBlackPointFromLine(AprgBitmapSnippet const& snippet, Line const& line, Point const& point) const
+Point SOOSA::getNearestBlackPointFromLine(BitmapSnippet const& snippet, Line const& line, Point const& point) const
 {
     Point blackPoint;
-    Line perpendicularLine(twoDimensionsHelper::getLineWithPerpendicularSlope(line, point));
-    for(unsigned int deviation=1; deviation<=ALLOWABLE_HALF_LINE_WIDTH_DEVIATION; deviation++)
+    Line perpendicularLine(twoDimensionsHelper::getLineWithPerpendicularSlope(line, point));    for(unsigned int deviation=1; deviation<=ALLOWABLE_HALF_LINE_WIDTH_DEVIATION; deviation++)
     {
         double lowerDeviatedInX = point.getX()-deviation;
         Point lowerDeviatedPoint(lowerDeviatedInX, perpendicularLine.calculateYFromX(lowerDeviatedInX));
@@ -803,11 +781,10 @@ Point SOOSA::getNearestBlackPointFromLine(AprgBitmapSnippet const& snippet, Line
     return blackPoint;
 }
 
-double SOOSA::getBarWidthFromBlackPoint(AprgBitmapSnippet const& snippet, Line const& line, Point const& blackPoint) const
+double SOOSA::getBarWidthFromBlackPoint(BitmapSnippet const& snippet, Line const& line, Point const& blackPoint) const
 {
     Line perpendicularLine(twoDimensionsHelper::getLineWithPerpendicularSlope(line, blackPoint));
-    Point leftMostBlack(blackPoint);
-    Point rightMostBlack(blackPoint);
+    Point leftMostBlack(blackPoint);    Point rightMostBlack(blackPoint);
     bool isBlack(true);
     for(unsigned int offset=1; offset<=MAXIMUM_BAR_WIDTH && isBlack; offset++)
     {
@@ -957,16 +934,15 @@ void SOOSA::saveQuestionBarCoordinatesFromKMeansWithBarPoints(TwoDimensionKMeans
     }
 }
 
-void SOOSA::writeLineInBitmap(AprgBitmap & bitmap, Line const& line) const
+void SOOSA::writeLineInBitmap(Bitmap & bitmap, Line const& line) const
 {
     BitmapXY topLeft(0,0);
     BitmapXY bottomRight(bitmap.getConfiguration().getBitmapWidth()-1, bitmap.getConfiguration().getBitmapHeight()-1);
 
-    AprgBitmapSnippet snippet(bitmap.getSnippetReadFromFileWholeBitmap());
+    BitmapSnippet snippet(bitmap.getSnippetReadFromFileWholeBitmap());
     Points points(line.getPoints(Point(topLeft.getX(), topLeft.getY()), Point(bottomRight.getX(), bottomRight.getY()), 1));
     for (Point point: points)
-    {
-        snippet.setPixelAt(BitmapXY(point.getX(), point.getY()), 0x00EE0000);
+    {        snippet.setPixelAt(BitmapXY(point.getX(), point.getY()), 0x00EE0000);
     }
 
     bitmap.setSnippetWriteToFile(snippet);
