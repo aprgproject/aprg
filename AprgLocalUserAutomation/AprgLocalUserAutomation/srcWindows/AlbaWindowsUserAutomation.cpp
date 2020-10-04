@@ -5,11 +5,10 @@
 
 #include <windows.h>
 
-#include <iostream>
 #include <cctype>
+#include <iostream>
 
 using namespace std;
-
 namespace alba
 {
 
