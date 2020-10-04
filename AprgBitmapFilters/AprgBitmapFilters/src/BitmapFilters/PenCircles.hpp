@@ -7,6 +7,7 @@
 
 namespace alba
 {
+
 namespace AprgBitmap
 {
 
@@ -27,6 +28,7 @@ public:
     using PointAndPenCircleDetailsPairs = std::vector<PointAndPenCircleDetailsPair>;
     using CircleCenterConnection = std::pair<BitmapXY, BitmapXY>;
     using CircleCenterConnections = std::set<CircleCenterConnection>;
+
     bool isPenCircle(BitmapXY const& point) const;
 
     PenCircleDetails getPenCircleDetails(BitmapXY const& point) const;
@@ -35,6 +37,7 @@ public:
     PointAndPenCircleDetailsPairs getNearestPenCirclesToAPoint(
             BitmapXY const& point,
             unsigned int const distance) const;
+
     PointToPenCircleDetailsMap & getPenCirclesReference();
 
     void addAsPenCircle(
@@ -43,7 +46,8 @@ public:
             uint32_t const color);
     void removePenCircleAt(
             BitmapXY const& circleCenter);
-    void connectCircles(            BitmapXY const& circle1Center,
+    void connectCircles(
+            BitmapXY const& circle1Center,
             BitmapXY const& circle2Center);
     void clear();
 

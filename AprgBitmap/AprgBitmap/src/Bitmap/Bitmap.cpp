@@ -21,7 +21,8 @@ BitmapConfiguration Bitmap::getConfiguration() const
 BitmapSnippet Bitmap::createColorFilledSnippetWithSizeOfWholeBitmap(uint8_t const colorByte) const
 {
     BitmapSnippet snippet(m_configuration.getUpLeftCornerPoint(), m_configuration.getDownRightCornerPoint(), m_configuration);
-    snippet.clearAndPutOneColorOnWholeSnippet(colorByte);    return snippet;
+    snippet.clearAndPutOneColorOnWholeSnippet(colorByte);
+    return snippet;
 }
 
 BitmapSnippet Bitmap::getSnippetReadFromFileWholeBitmap() const
@@ -68,6 +69,7 @@ BitmapSnippet Bitmap::getSnippetReadFromFile(BitmapXY const topLeftCorner, Bitma
 
     return BitmapSnippet(BitmapXY(startPixelInX, topLeftCorner.getY()), BitmapXY(endPixelInX, bottomRightCorner.getY()), m_configuration);
 }
+
 void Bitmap::setSnippetWriteToFile(BitmapSnippet const& snippet) const
 {
     if(areBitmapConfigurationsCompatibleForChangingPixelData(m_configuration, snippet.getConfiguration()))
@@ -93,7 +95,8 @@ void Bitmap::setSnippetWriteToFile(BitmapSnippet const& snippet) const
                     char const* pixelDataPointer = static_cast<char const*>(snippet.getPixelDataConstReference().getConstantBufferPointer()) + snippetIndex;
                     streamFile.seekg(fileOffsetForStart, streamFile.beg);
                     streamFile.write(pixelDataPointer, numberOfBytesToBeCopiedForX);
-                    snippetIndex += numberOfBytesToBeCopiedForX;                }
+                    snippetIndex += numberOfBytesToBeCopiedForX;
+                }
                 streamFile.flush();
             }
         }
@@ -116,7 +119,8 @@ void Bitmap::calculateNewCornersBasedOnCenterAndNumberOfBytes(BitmapXY & topLeft
     int bottom(static_cast<int>(m_configuration.getYCoordinateWithinTheBitmap(static_cast<int>(center.getY()) + halfYSizeInBytes)));
     adjustToTargetLength(top, bottom, ySizeInBytes, m_configuration.getBitmapHeight());
 
-    topLeftCorner.setX(left);    topLeftCorner.setY(top);
+    topLeftCorner.setX(left);
+    topLeftCorner.setY(top);
     bottomRightCorner.setX(right);
     bottomRightCorner.setY(bottom);
 }

@@ -40,7 +40,8 @@ uint32_t AnimizeColor::getNewColor(uint32_t const originalColor) const
     return convertHueSaturationLightnessDataToColor(newHslData);
 }
 
-double AnimizeColor::getNewLightness(double const originalValue) const{
+double AnimizeColor::getNewLightness(double const originalValue) const
+{
     return getNewValue(m_lightnessData, originalValue);
 }
 
@@ -75,7 +76,8 @@ void AnimizeColor::saveColorData(string const& path)
     for(ValueAndColorDataPair const lightnessCountPair : m_lightnessData)
     {
         colorDataFileStream << lightnessCountPair.first
-                            << ", " << lightnessCountPair.second.newValue                            << endl;
+                            << ", " << lightnessCountPair.second.newValue
+                            << endl;
         /*for(unsigned int i=0; i<lightnessCountPair.second.count; i++)
         {
             colorDataFileStream << lightnessCountPair.first
@@ -101,7 +103,8 @@ void AnimizeColor::addCountToValue(
             ColorDetails details{};
             details.count=1;
             colorDataMap.emplace(value, details);
-        }        else
+        }
+        else
         {
             colorDataMap.at(value).count++;
         }
@@ -125,6 +128,7 @@ void AnimizeColor::calculateNewValues(ColorDataMap & colorDataMap)
         partialCount+=currentCount;
     }
 }
+
 double AnimizeColor::getNewValue(
         ColorDataMap const& colorDataMap,
         double const originalValue) const

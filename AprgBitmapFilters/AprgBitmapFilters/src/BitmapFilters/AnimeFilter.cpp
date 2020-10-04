@@ -46,6 +46,7 @@ void animize(string const& inputFile,
     debugSnippet = bitmapFilters.getBlankSnippetWithBackground();
     bitmapFilters.drawPenCircles(penCirclesBeforeAnimeColor, debugSnippet);
     doStuffsAfterSteps(localTimer, bitmapFilters, debugSnippet, inputFile, "Determining pen circles (before anime color)");
+
     bitmapFilters.drawAnimeColor(tempSnippet, animizeColor);
     doStuffsAfterSteps(localTimer, bitmapFilters, tempSnippet, inputFile, "Drawing to anime color");
 
@@ -61,6 +62,7 @@ void animize(string const& inputFile,
     debugSnippet = bitmapFilters.getBlankSnippetWithBackground();
     bitmapFilters.drawPenCircles(penCirclesAfterAnimeColor, debugSnippet);
     doStuffsAfterSteps(localTimer, bitmapFilters, debugSnippet, inputFile, "Determining pen circles (after anime color)");
+
     bitmapFilters.drawNonPenPoints(penPointsAfterAnimeColor, tempSnippet, outputSnippet);
     doStuffsAfterSteps(localTimer, bitmapFilters, outputSnippet, inputFile, "Drawing non pen points");
 
@@ -71,6 +73,7 @@ void animize(string const& inputFile,
     debugSnippet = bitmapFilters.getBlankSnippetWithBackground();
     bitmapFilters.drawPenCircles(penCirclesAfterAnimeColor, debugSnippet);
     doStuffsAfterSteps(localTimer, bitmapFilters, debugSnippet, inputFile, "Drawing pen circles (after anime color)");
+
     animeColorsInPenCircles(penCirclesBeforeAnimeColor, animizeColor);
     doStuffsAfterSteps(localTimer, "Convert pen circles (before anime color) to anime color");
 
@@ -78,6 +81,7 @@ void animize(string const& inputFile,
     debugSnippet = bitmapFilters.getBlankSnippetWithBackground();
     bitmapFilters.drawPenCircles(penCirclesBeforeAnimeColor, debugSnippet);
     doStuffsAfterSteps(localTimer, bitmapFilters, debugSnippet, inputFile, "Drawing pen circles (before anime color)");
+
     bitmapFilters.saveSnippetIntoFileWithFullFilePath(outputSnippet, outputFilePathHandler.getFullPath());
 }
 

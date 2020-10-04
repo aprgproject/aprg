@@ -20,7 +20,8 @@ TEST(OutwardCircleTraversalTest, ConstructedRadiusToCoordinatesAreCorrectForZero
     RadiusToCoordinates const& radiusToCoordinates(traversal.getRadiusToCoordinates());
 
     ExpectedRadiusToCoordinates expectation;
-    expectation.emplace_back(0, Coordinate(0,0));    RadiusToCoordinates::const_iterator itInVerify=radiusToCoordinates.cbegin();
+    expectation.emplace_back(0, Coordinate(0,0));
+    RadiusToCoordinates::const_iterator itInVerify=radiusToCoordinates.cbegin();
     ExpectedRadiusToCoordinates::const_iterator itInExpect=expectation.cbegin();
     ASSERT_EQ(expectation.size(), radiusToCoordinates.size());
     for(;itInExpect!=expectation.cend() && itInVerify!=radiusToCoordinates.cend();)
@@ -39,7 +40,8 @@ TEST(OutwardCircleTraversalTest, ConstructedRadiusToCoordinatesAreCorrectForRadi
     OutwardCircleTraversal::RadiusToCoordinates const& radiusToCoordinates(traversal.getRadiusToCoordinates());
 
     ExpectedRadiusToCoordinates expectation;
-    expectation.emplace_back(0, Coordinate(0,0));    expectation.emplace_back(1, Coordinate(0,1));
+    expectation.emplace_back(0, Coordinate(0,0));
+    expectation.emplace_back(1, Coordinate(0,1));
     expectation.emplace_back(1.4142135623730951, Coordinate(1,1));
     expectation.emplace_back(2, Coordinate(0,2));
     expectation.emplace_back(2.2360679774997898, Coordinate(1,2));

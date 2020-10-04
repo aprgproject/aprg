@@ -24,6 +24,7 @@ public:
     using RadiusAndCoordinatesPair = std::pair<double, Coordinate>;
 
     OutwardCircleTraversal(unsigned int const maxRadius);
+
     RadiusToCoordinates const& getRadiusToCoordinates() const;
 
 private:

@@ -19,6 +19,7 @@ public:
 
     BitmapSnippet();
     BitmapSnippet(BitmapXY const topLeftCornerPosition, BitmapXY const bottomRightCornerPosition, BitmapConfiguration const& configuration);
+
     bool isPositionInsideTheSnippet(BitmapXY const position) const;
     BitmapConfiguration getConfiguration() const;
     BitmapXY getTopLeftCorner() const;
@@ -51,7 +52,8 @@ private:
     void setPixelAtForMultipleBytePixels(uint8_t * writer, unsigned int const index, uint32_t const value);
     BitmapXY m_topLeftCorner;
     BitmapXY m_bottomRightCorner;
-    BitmapConfiguration m_configuration;    PixelData m_pixelData;
+    BitmapConfiguration m_configuration;
+    PixelData m_pixelData;
 };
 
 }

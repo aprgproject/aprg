@@ -31,7 +31,8 @@ public:
     using PointAndColorDetailsPair = std::pair<BitmapXY, ColorDetails>;
 
     PenCirclesDrawer(
-            PenCircles const& penCircles,            BitmapSnippet & snippet);
+            PenCircles const& penCircles,
+            BitmapSnippet & snippet);
 
     void draw();
     void drawUsingCirclesWithoutOverlay();
@@ -44,7 +45,8 @@ private:
             PenCircles::PointAndPenCircleDetailsPair const& pair2) const;
     void writeDrawnPointsInSnippet();
     void writeCirclesWithoutOverlay();
-    void writeCirclesWithOverlay();    void connectCirclesIfNeeded();
+    void writeCirclesWithOverlay();
+    void connectCirclesIfNeeded();
     void putCirclesWithoutOverlay();
     void putCirclesWithOverlay();
     void putCircleConnectionsAndRemoveProcessedCircles();

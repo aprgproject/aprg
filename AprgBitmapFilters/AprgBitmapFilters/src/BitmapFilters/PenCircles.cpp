@@ -6,6 +6,7 @@ using namespace alba::mathHelper;
 
 namespace alba
 {
+
 namespace AprgBitmap
 {
 
@@ -20,6 +21,7 @@ PenCircles::PenCircleDetails::PenCircleDetails(
     : radius(radiusParameter)
     , color(colorParameter)
 {}
+
 bool PenCircles::isPenCircle(BitmapXY const& point) const
 {
     return m_penCircles.find(point)!=m_penCircles.cend();
@@ -65,7 +67,8 @@ PenCircles::PointAndPenCircleDetailsPairs PenCircles::getNearestPenCirclesToAPoi
             result.emplace_back(pointAndPenCircleDetailsPair);
         }
     }
-    return result;}
+    return result;
+}
 
 PenCircles::PointToPenCircleDetailsMap & PenCircles::getPenCirclesReference()
 {
@@ -80,7 +83,8 @@ void PenCircles::addAsPenCircle(
     m_penCircles[point] = PenCircleDetails(radius, color);
 }
 
-void PenCircles::removePenCircleAt(        BitmapXY const& circleCenter)
+void PenCircles::removePenCircleAt(
+        BitmapXY const& circleCenter)
 {
     m_penCircles.erase(circleCenter);
 }

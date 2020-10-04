@@ -18,7 +18,8 @@ TEST(CPlusPlusFileFixerTest, ActualRun)
     fixer.processDirectory(R"(N:\Branches\APRG_LINUX_COPY\)");
 }
 
-TEST(CPlusPlusFileFixerTest, CPlusPlusFileHeadersAreCorrected){
+TEST(CPlusPlusFileFixerTest, CPlusPlusFileHeadersAreCorrected)
+{
     CPlusPlusFileFixer fixer;
     ofstream testFile(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
     ASSERT_TRUE(testFile.is_open());
@@ -29,7 +30,8 @@ TEST(CPlusPlusFileFixerTest, CPlusPlusFileHeadersAreCorrected){
     testFile << R"(#include <sys/types.h> )" << endl;
     testFile << "   #pragma once\t\t\t " << endl;
     testFile << R"()"<< endl;
-    testFile << R"(#include "file1.hpp")" << endl;    testFile << R"()"<< endl;
+    testFile << R"(#include "file1.hpp")" << endl;
+    testFile << R"()"<< endl;
     testFile << R"(#include <QDebug>)" << endl;
     testFile << R"(#include <QtWidgets>)" << endl;
     testFile << R"(#include <Test1\Test1.hpp>)" << endl;
@@ -62,7 +64,8 @@ TEST(CPlusPlusFileFixerTest, CPlusPlusFileHeadersAreCorrected){
     EXPECT_EQ(R"(#include <windows.h>)", fileReader.getLine());
     EXPECT_EQ(R"()", fileReader.getLine());
     EXPECT_EQ(R"(#include <string>)", fileReader.getLine());
-    EXPECT_EQ(R"()", fileReader.getLine());    EXPECT_EQ(R"(         This is a line in the code)", fileReader.getLine());
+    EXPECT_EQ(R"()", fileReader.getLine());
+    EXPECT_EQ(R"(         This is a line in the code)", fileReader.getLine());
     EXPECT_EQ("       \t\t\t\t       This is another line in the code    ", fileReader.getLine());
     EXPECT_EQ("", fileReader.getLine());
     EXPECT_FALSE(fileReader.isNotFinished());
@@ -143,6 +146,7 @@ TEST(CPlusPlusFileFixerTest, SmallUInNumberIsConvertedToCapitalU)
     testFile.close();
 
     fixer.processFile(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
+
     ifstream inputTestFile(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
     ASSERT_TRUE(inputTestFile.is_open());
 
@@ -166,6 +170,7 @@ TEST(CPlusPlusFileFixerTest, SmallUInNumberIsConvertedToCapitalU)
     EXPECT_EQ("", fileReader.getLine());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
+
 TEST(CPlusPlusFileFixerTest, DISABLED_TwoCascadingLoopsDetection)
 {
     CPlusPlusFileFixer fixer;

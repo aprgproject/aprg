@@ -25,6 +25,7 @@ public:
     using PixelAndLabelPair = std::pair<BitmapXY, unsigned int>;
     unsigned int getLabel(BitmapXY const& point) const;
     PixelsToLabelsMap const& getPixelsToLabels() const;
+
     void setLabel(
             BitmapXY const& point,
             unsigned int const label);
