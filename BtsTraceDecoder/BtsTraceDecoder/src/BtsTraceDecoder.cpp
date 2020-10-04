@@ -37,11 +37,14 @@ void BtsTraceDecoder::processInputTraceFile(std::string const& inputTraceFilePat
             unsigned int traceAddressValue = convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInTraceFile, "[", "]"));
             if(traceAddressValue != 0)
             {
-                cout<<"TraceAddressValue: [0x"<<std::hex<<traceAddressValue<<"] NearestSymbol: ["<<getNearestLowerSymbol(traceAddressValue)<<"]"<<endl;
+                cout << "TraceAddressValue: [0x"
+                     << std::hex<<traceAddressValue
+                     << "] NearestSymbol: ["
+                     << getNearestLowerSymbol(static_cast<int>(traceAddressValue))
+                     << "]" << endl;
             }
         }
-    }
-}
+    }}
 
 std::string BtsTraceDecoder::getNearestLowerSymbol(int const address, int const offset)
 {
@@ -50,11 +53,10 @@ std::string BtsTraceDecoder::getNearestLowerSymbol(int const address, int const 
     if(!m_symbolMap.empty())
     {
         BtsTraceDecoder::SymbolMapType::iterator symbolIterator = m_symbolMap.lower_bound(addressWithOffset);
-        if(symbolIterator->first <= addressWithOffset)
+        if(static_cast<int>(symbolIterator->first) <= addressWithOffset)
         {
             symbol = symbolIterator->second;
-        }
-        else
+        }        else
         {
             if(symbolIterator != m_symbolMap.begin())
             {

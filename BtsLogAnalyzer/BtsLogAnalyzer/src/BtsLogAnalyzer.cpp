@@ -20,11 +20,10 @@ BtsLogAnalyzer::BtsLogAnalyzer()
     , m_count(0)
 {}
 
-BtsLogAnalyzer::BtsLogAnalyzer(string const pathOfOutputFile)
+BtsLogAnalyzer::BtsLogAnalyzer(string const& pathOfOutputFile)
     : m_outputStream(pathOfOutputFile)
     , m_totalDelay(0)
-    , m_count(0)
-{
+    , m_count(0){
     if(m_outputStream.is_open())
     {
         cout<<"OutputStream is opened. Saving to output files"<<endl;
@@ -200,11 +199,10 @@ void BtsLogAnalyzer::processFileForBtsDelayForRlh(string const& filePath)
             if(delayForCrnccId.startTimeOptional && delayForCrnccId.endTimeOptional && delayForCrnccId.startTimeOptional.getReference().getTotalSeconds() <= delayForCrnccId.endTimeOptional.getReference().getTotalSeconds())
             {
                 BtsLogTime delayTime = delayForCrnccId.endTimeOptional.getReference() - delayForCrnccId.startTimeOptional.getReference();
-                int delay = delayTime.getMicroSeconds()+delayTime.getSeconds()*1000000;
+                int delay = static_cast<int>(delayTime.getMicroSeconds()+delayTime.getSeconds()*1000000);
                 //if(uniqueKey.crnccId == 15167){cout<<"crnccId "<<uniqueKey.crnccId<<"nbccId "<<uniqueKey.nbccId<<"delay "<<delay<<"startTimeOptional "<<delayForCrnccId.startTimeOptional.getReference()<<"endTimeOptional "<<delayForCrnccId.endTimeOptional.getReference()<<endl;}
                 m_totalDelay += delay;
-                m_count++;
-                m_outputStream<<uniqueKey.crnccId<<","<<uniqueKey.nbccId<<","<<uniqueKey.transactionId<<","<<setw(10)<<delay<<endl;
+                m_count++;                m_outputStream<<uniqueKey.crnccId<<","<<uniqueKey.nbccId<<","<<uniqueKey.transactionId<<","<<setw(10)<<delay<<endl;
                 m_btsLogDelays.erase(uniqueKey);
             }
         }
@@ -250,11 +248,10 @@ void BtsLogAnalyzer::processFileForBtsDelayForRlDeletion(string const& filePath)
             if(delayForCrnccId.startTimeOptional && delayForCrnccId.endTimeOptional && delayForCrnccId.startTimeOptional.getReference().getTotalSeconds() <= delayForCrnccId.endTimeOptional.getReference().getTotalSeconds())
             {
                 BtsLogTime delayTime = delayForCrnccId.endTimeOptional.getReference() - delayForCrnccId.startTimeOptional.getReference();
-                int delay = delayTime.getMicroSeconds()+delayTime.getSeconds()*1000000;
+                int delay = static_cast<int>(delayTime.getMicroSeconds()+delayTime.getSeconds()*1000000);
                 //if(uniqueKey.crnccId == 15167){cout<<"crnccId "<<uniqueKey.crnccId<<"nbccId "<<uniqueKey.nbccId<<"delay "<<delay<<"startTimeOptional "<<delayForCrnccId.startTimeOptional.getReference()<<"endTimeOptional "<<delayForCrnccId.endTimeOptional.getReference()<<endl;}
                 m_totalDelay += delay;
-                m_count++;
-                m_outputStream<<uniqueKey.crnccId<<","<<uniqueKey.nbccId<<","<<uniqueKey.transactionId<<","<<setw(10)<<delay<<endl;
+                m_count++;                m_outputStream<<uniqueKey.crnccId<<","<<uniqueKey.nbccId<<","<<uniqueKey.transactionId<<","<<setw(10)<<delay<<endl;
                 m_btsLogDelays.erase(uniqueKey);
             }
         }
@@ -367,11 +364,10 @@ void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePat
             if(processMapInstance.startTimeOptional.getReference() < processMapInstance.endTimeOptional.getReference())
             {
                 BtsLogTime delayTime = processMapInstance.endTimeOptional.getReference() - processMapInstance.startTimeOptional.getReference();
-                int delay = delayTime.getMicroSeconds()+delayTime.getSeconds()*1000000;
+                int delay = static_cast<int>(delayTime.getMicroSeconds()+delayTime.getSeconds()*1000000);
                 grmProcessTotal += delay;
                 grmProcessCount++;
-                grmProcessFileStream<<uniqueKey.crnccId<<","<<uniqueKey.nbccId<<","<<uniqueKey.transactionId<<","<<setw(10)<<delay<<endl;
-            }
+                grmProcessFileStream<<uniqueKey.crnccId<<","<<uniqueKey.nbccId<<","<<uniqueKey.transactionId<<","<<setw(10)<<delay<<endl;            }
             grmProcessMap.erase(uniqueKey);
         }
 
@@ -382,11 +378,10 @@ void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePat
             {
 
                 BtsLogTime delayTime = messageDeliveryInstance.endTimeOptional.getReference() - messageDeliveryInstance.startTimeOptional.getReference();
-                int delay = delayTime.getMicroSeconds()+delayTime.getSeconds()*1000000;
+                int delay = static_cast<int>(delayTime.getMicroSeconds()+delayTime.getSeconds()*1000000);
                 messageDeliveryTotal += delay;
                 messageDeliveryCount++;
-                messageDeliveryFileStream<<uniqueKey.crnccId<<","<<uniqueKey.nbccId<<","<<uniqueKey.transactionId<<","<<setw(10)<<delay<<endl;
-            }
+                messageDeliveryFileStream<<uniqueKey.crnccId<<","<<uniqueKey.nbccId<<","<<uniqueKey.transactionId<<","<<setw(10)<<delay<<endl;            }
             messageDeliveryMap.erase(uniqueKey);
         }
 
@@ -396,11 +391,10 @@ void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePat
             if(rlSetupMapInstance.startTimeOptional.getReference() < rlSetupMapInstance.endTimeOptional.getReference())
             {
                 BtsLogTime delayTime = rlSetupMapInstance.endTimeOptional.getReference() - rlSetupMapInstance.startTimeOptional.getReference();
-                int delay = delayTime.getMicroSeconds()+delayTime.getSeconds()*1000000;
+                int delay = static_cast<int>(delayTime.getMicroSeconds()+delayTime.getSeconds()*1000000);
                 rlSetupTotal += delay;
                 rlSetupCount++;
-                rlSetupFileStream<<uniqueKey.crnccId<<","<<uniqueKey.nbccId<<","<<uniqueKey.transactionId<<","<<setw(10)<<delay<<endl;
-            }
+                rlSetupFileStream<<uniqueKey.crnccId<<","<<uniqueKey.nbccId<<","<<uniqueKey.transactionId<<","<<setw(10)<<delay<<endl;            }
             rlSetupMap.erase(uniqueKey);
         }
     }
@@ -445,11 +439,10 @@ void BtsLogAnalyzer::processFileForBtsDelayForGrm(string const& filePath)
             if(delayForCrnccId.startTimeOptional && delayForCrnccId.endTimeOptional && delayForCrnccId.startTimeOptional.getReference().getTotalSeconds() <= delayForCrnccId.endTimeOptional.getReference().getTotalSeconds())
             {
                 BtsLogTime delayTime = delayForCrnccId.endTimeOptional.getReference() - delayForCrnccId.startTimeOptional.getReference();
-                int delay = delayTime.getMicroSeconds()+delayTime.getSeconds()*1000000;
+                int delay = static_cast<int>(delayTime.getMicroSeconds()+delayTime.getSeconds()*1000000);
                 if(delay<1000000)
                 {
-                    m_totalDelay += delay;
-                    m_count++;
+                    m_totalDelay += delay;                    m_count++;
                     m_outputStream<<crnccId<<","<<nbccId<<","<<transactionId<<","<<setw(10)<<delay<<endl;
                 }
                 m_btsLogDelaysGrm.erase(nbccId);
@@ -488,11 +481,10 @@ string BtsLogAnalyzer::getNumberAfterThisString(string const& mainString, string
     int firstIndexOfFirstString = mainString.find(stringToSearch);
     if(stringHelper::isNotNpos(firstIndexOfFirstString))
     {
-        int lastIndexOfFirstString = firstIndexOfFirstString + stringToSearch.length();
+        int lastIndexOfFirstString = static_cast<int>(firstIndexOfFirstString + stringToSearch.length());
         int lastIndexOfNumber;
         for(lastIndexOfNumber = lastIndexOfFirstString; stringHelper::isNumber(mainString[lastIndexOfNumber]); ++lastIndexOfNumber);
-        result = mainString.substr(lastIndexOfFirstString, lastIndexOfNumber-lastIndexOfFirstString);
-    }
+        result = mainString.substr(lastIndexOfFirstString, lastIndexOfNumber-lastIndexOfFirstString);    }
     return result;
 }
 
