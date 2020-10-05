@@ -1,8 +1,8 @@
-#include <ProgressBarThread.hpp>
+#include "ProgressBarThread.hpp"
+
 #include <StepHandler.hpp>
 
 #include <QtWidgets>
-
 using namespace std;
 
 namespace wcdmaToolsGui

@@ -1,15 +1,15 @@
 #pragma once
 
 #include <ProgressBarThread.hpp>
-#include <QMainWindow>
-#include <QLineEdit>
 #include <StepHandlerThread.hpp>
 #include <WcdmaToolsConfiguration.hpp>
 
+#include <QMainWindow>
+#include <QLineEdit>
+
 namespace Ui
 {
-class WcdmaTools;
-}
+class WcdmaTools;}
 
 class WcdmaTools : public QMainWindow
 {

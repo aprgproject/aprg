@@ -1,10 +1,10 @@
 #include <PathHandlerTests/AlbaWindowsPathHandlerTest.hpp>
 #include <String/AlbaStringHelper.hpp>
 
+using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 AlbaWindowsPathHandlerTest::AlbaWindowsPathHandlerTest()
     : pathOfAprgDirectory(APRG_DIR)
@@ -12,12 +12,12 @@ AlbaWindowsPathHandlerTest::AlbaWindowsPathHandlerTest()
 
 string AlbaWindowsPathHandlerTest::convertToSimplestPath(string const& path)
 {
-    return stringHelper::getCorrectPathWithoutDoublePeriod<'\\'>(stringHelper::getCorrectPathWithReplacedSlashCharacters<'\\'>(path));
+    return getCorrectPathWithoutDoublePeriod<'\\'>(getCorrectPathWithReplacedSlashCharacters<'\\'>(path));
 }
 
 string AlbaWindowsPathHandlerTest::getDriveOfAprgDir()
 {
-    return stringHelper::getStringBeforeThisString(pathOfAprgDirectory, ":");
+    return getStringBeforeThisString(pathOfAprgDirectory, ":");
 }
 
 }

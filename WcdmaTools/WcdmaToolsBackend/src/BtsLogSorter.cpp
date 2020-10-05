@@ -240,10 +240,10 @@ void BtsLogSorter::separateLogsWithoutPcTimeIntoDifferentAddresses()
     m_sorterWithoutPcTime.sortThenDoFunctionThenReleaseAllObjects([&](BtsLogPrint const& logPrint)
     {
         hardwareAddressToOutputSteamMap[logPrint.getHardwareAddress()] << logPrint << endl;
+
         ProgressCounters::writeProgressForCombine = static_cast<int>(25 + (printCount++ * 25/size));
     });
 }
-
 void BtsLogSorter::writeLogsWithPcTimeToOutputFile(ofstream & outputLogFileStream)
 {
     cout << "Merge logs with and without PC time and save to output file." << endl;

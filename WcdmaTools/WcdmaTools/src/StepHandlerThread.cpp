@@ -1,8 +1,8 @@
+#include "StepHandlerThread.hpp"
+
 #include <StepHandler.hpp>
-#include <StepHandlerThread.hpp>
 
 #include <QtWidgets>
-
 using namespace std;
 
 namespace wcdmaToolsGui

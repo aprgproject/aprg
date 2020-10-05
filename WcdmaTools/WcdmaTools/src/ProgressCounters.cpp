@@ -1,8 +1,7 @@
-#include <ProgressCounters.hpp>
+#include "ProgressCounters.hpp"
 
 namespace alba
 {
-
 namespace ProgressCounters
 {
 

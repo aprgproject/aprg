@@ -34,10 +34,12 @@ src/WcdmaToolsConfiguration.cpp\
 ../../AprgCommon/AprgCommon/src/File/AlbaFileParameterReader.cpp\
 ../../AprgCommon/AprgCommon/src/File/AlbaFileParameterWriter.cpp\
 ../../AprgCommon/AprgCommon/src/File/AlbaFileReader.cpp\
+../../AprgCommon/AprgCommon/src/Math/AlbaMathHelper.cpp\
+../../AprgCommon/AprgCommon/src/Math/Number/AlbaComplexNumber.cpp\
+../../AprgCommon/AprgCommon/src/Math/Number/AlbaNumber.cpp\
 ../../AprgCommon/AprgCommon/src/Memory/AlbaMemoryBuffer.cpp\
 ../../AprgCommon/AprgCommon/src/Optional/AlbaOptional.cpp\
-../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.cpp\
-../../AprgCommon/AprgCommon/src/PathHandlers/AlbaLocalPathHandler.cpp\
+../../AprgCommon/AprgCommon/src/PathHandlers/AlbaPathHandler.cpp\../../AprgCommon/AprgCommon/src/PathHandlers/AlbaLocalPathHandler.cpp\
 ../../AprgCommon/AprgCommon/src/Randomizer/AlbaRandomizer.cpp\
 ../../AprgCommon/AprgCommon/src/String/AlbaStringHelper.cpp\
 ../../AprgCommon/AprgCommon/src/Time/AlbaDateTime.cpp\

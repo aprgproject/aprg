@@ -4,17 +4,16 @@
 
 #include <algorithm>
 
+using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 DisplayTableCell::DisplayTableCell()
-    : m_textToDisplay("")
+    : m_textToDisplay()
     , m_horizontalMode(DisplayTableCellMode::center)
     , m_verticalMode(DisplayTableCellMode::center)
 {}
-
 DisplayTableCell::DisplayTableCell(string const& text)
     : m_textToDisplay(text)
     , m_horizontalMode(DisplayTableCellMode::center)
@@ -172,20 +171,19 @@ std::string DisplayTable::getCellText(DisplayTableCell const& cell, unsigned int
     switch(mode)
     {
     case DisplayTableCellMode::justify:
-        result = stringHelper::getStringWithJustifyAlignment(cell.getText(), length);
+        result = getStringWithJustifyAlignment(cell.getText(), length);
         break;
     case DisplayTableCellMode::center:
-        result = stringHelper::getStringWithCenterAlignment(cell.getText(), length);
+        result = getStringWithCenterAlignment(cell.getText(), length);
         break;
     case DisplayTableCellMode::right:
-        result = stringHelper::getStringWithRightAlignment(cell.getText(), length);
+        result = getStringWithRightAlignment(cell.getText(), length);
         break;
     case DisplayTableCellMode::left:
-        result = stringHelper::getStringWithLeftAlignment(cell.getText(), length);
+        result = getStringWithLeftAlignment(cell.getText(), length);
         break;
     }
-    return result;
-}
+    return result;}
 
 void DisplayTable::calculateLengthPerColumn()
 {
@@ -224,11 +222,10 @@ string DisplayTable::getHorizontalBorderLine() const
     string result;
     if(!m_horizontalBorder.empty())
     {
-        result = stringHelper::getStringByRepeatingUntilDesiredLength(m_horizontalBorder, getHorizontalBorderLength(getTotalColumnLength()))+"\n";
+        result = getStringByRepeatingUntilDesiredLength(m_horizontalBorder, getHorizontalBorderLength(getTotalColumnLength()))+"\n";
     }
     return result;
 }
-
 string DisplayTable::getVerticalBorderPoint() const
 {
     return m_verticalBorder;

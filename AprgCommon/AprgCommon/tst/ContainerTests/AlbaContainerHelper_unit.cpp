@@ -180,10 +180,9 @@ TEST(ContainerTest, SaveVectorOfIntegersToFile)
     EXPECT_EQ("379", fileReader.getLine());
     EXPECT_EQ("-482", fileReader.getLine());
     EXPECT_EQ("37", fileReader.getLine());
-    EXPECT_EQ("", fileReader.getLine());
+    EXPECT_TRUE(fileReader.getLine().empty());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
-
 TEST(ContainerTest, RetrieveVectorOfIntegersFromFile)
 {
     std::array<int, 4> temporaryArray{};
@@ -235,10 +234,9 @@ TEST(ContainerTest, SaveArrayOfIntegersToFile)
     EXPECT_EQ("379", fileReader.getLine());
     EXPECT_EQ("-482", fileReader.getLine());
     EXPECT_EQ("37", fileReader.getLine());
-    EXPECT_EQ("", fileReader.getLine());
+    EXPECT_TRUE(fileReader.getLine().empty());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
-
 TEST(ContainerTest, RetrieveArrayOfIntegersFromFile)
 {
     vector<int> temporaryVector;
@@ -289,10 +287,9 @@ TEST(ContainerTest, SaveSetOfIntegersToFile)
     EXPECT_EQ("4", fileReader.getLine());
     EXPECT_EQ("37", fileReader.getLine());
     EXPECT_EQ("379", fileReader.getLine());
-    EXPECT_EQ("", fileReader.getLine());
+    EXPECT_TRUE(fileReader.getLine().empty());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
-
 TEST(ContainerTest, RetrieveSetOfIntegersFromFile)
 {
     set<int> temporarySet;
@@ -347,10 +344,9 @@ TEST(ContainerTest, SaveMapOfIntegersToFile)
     EXPECT_EQ("95", fileReader.getLine());
     EXPECT_EQ("2348", fileReader.getLine());
     EXPECT_EQ("17", fileReader.getLine());
-    EXPECT_EQ("", fileReader.getLine());
+    EXPECT_TRUE(fileReader.getLine().empty());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
-
 TEST(ContainerTest, RetrieveMapOfIntegersFromFile)
 {
     map<int,int> temporaryMap;
