@@ -244,6 +244,7 @@ void BtsLogSorter::separateLogsWithoutPcTimeIntoDifferentAddresses()
         ProgressCounters::writeProgressForCombine = static_cast<int>(25 + (printCount++ * 25/size));
     });
 }
+
 void BtsLogSorter::writeLogsWithPcTimeToOutputFile(ofstream & outputLogFileStream)
 {
     cout << "Merge logs with and without PC time and save to output file." << endl;

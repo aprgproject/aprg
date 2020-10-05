@@ -3,6 +3,7 @@
 #include <StepHandler.hpp>
 
 #include <QtWidgets>
+
 using namespace std;
 
 namespace wcdmaToolsGui

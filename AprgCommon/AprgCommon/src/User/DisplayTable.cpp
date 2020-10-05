@@ -7,13 +7,15 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 DisplayTableCell::DisplayTableCell()
     : m_textToDisplay()
     , m_horizontalMode(DisplayTableCellMode::center)
     , m_verticalMode(DisplayTableCellMode::center)
 {}
+
 DisplayTableCell::DisplayTableCell(string const& text)
     : m_textToDisplay(text)
     , m_horizontalMode(DisplayTableCellMode::center)
@@ -183,7 +185,8 @@ std::string DisplayTable::getCellText(DisplayTableCell const& cell, unsigned int
         result = getStringWithLeftAlignment(cell.getText(), length);
         break;
     }
-    return result;}
+    return result;
+}
 
 void DisplayTable::calculateLengthPerColumn()
 {
@@ -226,6 +229,7 @@ string DisplayTable::getHorizontalBorderLine() const
     }
     return result;
 }
+
 string DisplayTable::getVerticalBorderPoint() const
 {
     return m_verticalBorder;

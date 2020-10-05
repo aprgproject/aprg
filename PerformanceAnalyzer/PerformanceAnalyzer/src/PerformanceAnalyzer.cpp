@@ -19,6 +19,7 @@ using wcdmaToolsBackend::BtsLogTimeType;
 
 namespace alba
 {
+
 namespace ProgressCounters
 {
     int numberOfFilesToBeAnalyzedForExtraction;
@@ -114,7 +115,8 @@ PerformanceAnalyzer::PerformanceAnalyzer()
     m_sorterConfiguration.m_acceptedFilesGrepCondition = R"( ([syslog]&&[.log]) || [ccns.log] || [tcom.log] || (([startup]||[runtime]||[system])&&[.log]) || ([UDP]&&([.log]||[.txt])) )";
     m_sorterConfiguration.m_pathOfTempFiles = pathHandler.getFullPath();
     pathHandler.createDirectoriesForNonExisitingDirectories();
-    m_sorterConfiguration.m_configurationWithPcTime.m_directoryForBlocks = pathHandler.getFullPath() + R"(WithPcTimeBlocks\)";    AlbaLocalPathHandler(m_sorterConfiguration.m_configurationWithPcTime.m_directoryForBlocks).createDirectoriesForNonExisitingDirectories();
+    m_sorterConfiguration.m_configurationWithPcTime.m_directoryForBlocks = pathHandler.getFullPath() + R"(WithPcTimeBlocks\)";
+    AlbaLocalPathHandler(m_sorterConfiguration.m_configurationWithPcTime.m_directoryForBlocks).createDirectoriesForNonExisitingDirectories();
     m_sorterConfiguration.m_configurationWithPcTime.m_minimumNumberOfObjectsPerBlock = 10000;
     m_sorterConfiguration.m_configurationWithPcTime.m_maximumNumberOfObjectsPerBlock = 100000;
     m_sorterConfiguration.m_configurationWithPcTime.m_maximumNumberOfObjectsInMemory = 200000;
@@ -161,7 +163,8 @@ string PerformanceAnalyzer::combineAndSort(string const& inputPath) const
         wcdmaToolsBackend::BtsLogSorter btsLogSorter(m_sorterConfiguration);
         btsLogSorter.processDirectory(pathHandler.getDirectory());
         pathHandler.goUp();
-        pathHandler.input(pathHandler.getDirectory() + R"(\sorted.log)");        outputPath = pathHandler.getFullPath();
+        pathHandler.input(pathHandler.getDirectory() + R"(\sorted.log)");
+        outputPath = pathHandler.getFullPath();
         btsLogSorter.saveLogsToOutputFile(outputPath);
     }
     else

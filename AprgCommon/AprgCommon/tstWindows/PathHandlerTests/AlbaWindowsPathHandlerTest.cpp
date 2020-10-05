@@ -4,7 +4,8 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 AlbaWindowsPathHandlerTest::AlbaWindowsPathHandlerTest()
     : pathOfAprgDirectory(APRG_DIR)

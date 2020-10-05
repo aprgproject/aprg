@@ -12,6 +12,7 @@ using wcdmaToolsBackend::BtsLogTime;
 
 namespace alba
 {
+
 struct BtsLogDelay
 {
     AlbaOptional<BtsLogTime> startTimeOptional;

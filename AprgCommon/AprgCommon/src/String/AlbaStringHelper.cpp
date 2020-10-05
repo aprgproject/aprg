@@ -231,6 +231,7 @@ string combineStrings(strings const& listOfStrings, string const& delimiters)
     {
             return string(previousResult + currentString + delimiters);
 });
+
     if(result.size() > delimiters.size())
     {
         result = result.substr(0, result.size() - delimiters.size());
@@ -448,7 +449,8 @@ string getStringWithoutRedundantWhiteSpace(string const& mainString)
         result += (!result.empty()) ? " " : string();
         result += mainString.substr(indexNotWhiteSpace, index-indexNotWhiteSpace);
     }
-    return result;}
+    return result;
+}
 
 string getStringWithoutQuotations(string const& mainString)
 {
@@ -577,7 +579,8 @@ string getStringAndReplaceNonAlphanumericCharactersToUnderScore(string const& pa
                 path.cbegin(), path.cend(), string(), [&isPreviousCharacterNonAlphanumeric]
                 (string const& currentString, char const currentCharacter)
     {
-            string partialResult(currentString);            if(!isLetterOrNumber(currentCharacter))
+            string partialResult(currentString);
+            if(!isLetterOrNumber(currentCharacter))
     {
             if(!isPreviousCharacterNonAlphanumeric)
     {
@@ -777,7 +780,8 @@ string getCorrectPathWithReplacedSlashCharacters(string const& path, string cons
         wasSlashDetected = isSlashCharacter(currentCharacter);
         return partialResult;
     });
-    return correctPath;}
+    return correctPath;
+}
 
 string getCorrectPathWithoutDoublePeriod(string const& mainString, string const& slashCharacterString)
 {
@@ -837,6 +841,7 @@ string getCorrectPathWithReplacedSlashCharacters(string const& path)
 }
 template string getCorrectPathWithReplacedSlashCharacters<'\\'>(string const& path);
 template string getCorrectPathWithReplacedSlashCharacters<'/'>(string const& path);
+
 template<char slashCharacter>
 string getCorrectPathWithoutDoublePeriod(string const& path)
 {
@@ -844,6 +849,7 @@ string getCorrectPathWithoutDoublePeriod(string const& path)
 }
 template string getCorrectPathWithoutDoublePeriod<'\\'>(string const& path);
 template string getCorrectPathWithoutDoublePeriod<'/'>(string const& path);
+
 template<char slashCharacter>
 string getStringBeforeDoublePeriod(string const& path)
 {
@@ -851,6 +857,7 @@ string getStringBeforeDoublePeriod(string const& path)
 }
 template string getStringBeforeDoublePeriod<'\\'>(string const& path);
 template string getStringBeforeDoublePeriod<'/'>(string const& path);
+
 template<char slashCharacter>
 string getImmediateDirectoryName(string const& path)
 {
@@ -858,6 +865,7 @@ string getImmediateDirectoryName(string const& path)
 }
 template string getImmediateDirectoryName<'\\'>(string const& path);
 template string getImmediateDirectoryName<'/'>(string const& path);
+
 bool convertStringToBool(string const& stringToConvert)
 {
     string allCapital(getStringWithCapitalLetters(stringToConvert));

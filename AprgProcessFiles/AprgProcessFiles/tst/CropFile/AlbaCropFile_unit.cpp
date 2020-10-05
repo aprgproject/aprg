@@ -49,7 +49,8 @@ TEST(AlbaCropFileTest, CropUpdatesWorks)
 TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocument)
 {
     AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
-    AlbaLocalPathHandler file2ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE2_TO_READ);    ofstream testFile(file1ToReadPathHandler.getFullPath());
+    AlbaLocalPathHandler file2ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE2_TO_READ);
+    ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     for(unsigned int i = 0; i<10; i++)
     {
@@ -93,7 +94,8 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocument)
 TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsTwiceOfTheWholeDocument)
 {
     AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
-    AlbaLocalPathHandler file2ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE2_TO_READ);    ofstream testFile(file1ToReadPathHandler.getFullPath());
+    AlbaLocalPathHandler file2ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE2_TO_READ);
+    ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     for(unsigned int i = 0; i<10; i++)
     {
@@ -133,7 +135,8 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsTwiceOfTheWholeDocument)
 TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocumentAtTheStart)
 {
     AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
-    AlbaLocalPathHandler file2ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE2_TO_READ);    ofstream testFile(file1ToReadPathHandler.getFullPath());
+    AlbaLocalPathHandler file2ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE2_TO_READ);
+    ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     for(unsigned int i = 0; i<10; i++)
     {
@@ -176,7 +179,8 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocumentAtTheStart)
 TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocumentAtTheEnd)
 {
     AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
-    AlbaLocalPathHandler file2ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE2_TO_READ);    ofstream testFile(file1ToReadPathHandler.getFullPath());
+    AlbaLocalPathHandler file2ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE2_TO_READ);
+    ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     for(unsigned int i = 0; i<10; i++)
     {
@@ -207,4 +211,5 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocumentAtTheEnd)
     EXPECT_TRUE(fileReader.getLine().empty());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
+
 }

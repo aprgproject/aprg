@@ -342,7 +342,8 @@ TEST(GetPartialStringFromStringTest, GetStringBeforeThisCharacters)
     EXPECT_TRUE(getStringBeforeThisCharacters(testString, "a").empty());
 }
 
-TEST(GetPartialStringFromStringTest, CopyBeforeStringAndAfterStringWhenStringIsFound){
+TEST(GetPartialStringFromStringTest, CopyBeforeStringAndAfterStringWhenStringIsFound)
+{
     string testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
     string expectedBeforeString(R"("1234567890!@#$%^&*( ))");
     string expectedAfterString(R"(EFghIjKlMnopQRstUvWxYz")");
@@ -389,6 +390,7 @@ TEST(GetNewStringFromStringTest, GetStringByRepeatingUntilDesiredLength)
     EXPECT_EQ("MARKMARKMA", getStringByRepeatingUntilDesiredLength("MARK",10));
 }
 
+
 TEST(GetStringNumberFromStringTest, GetStringNumberAfterThisString)
 {
     EXPECT_EQ(string("1234"), getNumberAfterThisString("INF/TCOM/R, nbccId: 1234, ", "nbccId: "));
@@ -412,26 +414,30 @@ TEST(GetStringWithAlignmentFromStringTest, GetStringUsingJustifyAlignment)
     EXPECT_EQ(string("                                                  "), getStringWithJustifyAlignment(string(), 50));
 }
 
-TEST(GetStringWithAlignmentFromStringTest, GetStringUsingCenterAlignment){
+TEST(GetStringWithAlignmentFromStringTest, GetStringUsingCenterAlignment)
+{
     EXPECT_EQ(string("                       Mark                       "), getStringWithCenterAlignment("Mark", 50));
     EXPECT_EQ(string("           Mark Earvin Alba 1234567890            "), getStringWithCenterAlignment("Mark Earvin Alba 1234567890", 50));
     EXPECT_EQ(string("Mark Earvin Alba 1234567890"), getStringWithCenterAlignment("Mark Earvin Alba 1234567890", 1));
     EXPECT_EQ(string("                                                  "), getStringWithCenterAlignment(string(), 50));
 }
 
-TEST(GetStringWithAlignmentFromStringTest, GetStringUsingRightAlignment){
+TEST(GetStringWithAlignmentFromStringTest, GetStringUsingRightAlignment)
+{
     EXPECT_EQ(string("                                              Mark"), getStringWithRightAlignment("Mark", 50));
     EXPECT_EQ(string("                       Mark Earvin Alba 1234567890"), getStringWithRightAlignment("Mark Earvin Alba 1234567890", 50));
     EXPECT_EQ(string("Mark Earvin Alba 1234567890"), getStringWithRightAlignment("Mark Earvin Alba 1234567890", 1));
     EXPECT_EQ(string("                                                  "), getStringWithRightAlignment(string(), 50));
 }
 
-TEST(GetStringWithAlignmentFromStringTest, GetStringUsingLeftAlignment){
+TEST(GetStringWithAlignmentFromStringTest, GetStringUsingLeftAlignment)
+{
     EXPECT_EQ(string("Mark                                              "), getStringWithLeftAlignment("Mark", 50));
     EXPECT_EQ(string("Mark Earvin Alba 1234567890                       "), getStringWithLeftAlignment("Mark Earvin Alba 1234567890", 50));
     EXPECT_EQ(string("Mark Earvin Alba 1234567890"), getStringWithLeftAlignment("Mark Earvin Alba 1234567890", 1));
     EXPECT_EQ(string("                                                  "), getStringWithLeftAlignment(string(), 50));
 }
+
 
 TEST(GetNewStringFromStringTest, GetStringWithoutRedundantSlashesUsingAllLettersWithSpecialCharacters)
 {

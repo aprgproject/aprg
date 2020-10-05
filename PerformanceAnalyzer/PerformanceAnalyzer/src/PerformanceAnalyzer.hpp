@@ -33,7 +33,8 @@ private:
         AlbaOptional<wcdmaToolsBackend::BtsLogTime> endTimeOptional;
     };
 
-public:    PerformanceAnalyzer();
+public:
+    PerformanceAnalyzer();
     void setFileForRawDataDump(std::string const& rawDataPath);
     void logLineInRawDataFile(std::string const& line);
     void logStringInRawDataFile(std::string const& line);
@@ -60,4 +61,5 @@ private:
     wcdmaToolsBackend::BtsLogSorterConfiguration m_sorterConfiguration;
     alba::AlbaOptional<std::ofstream> m_RawDataFileOptional;
 };
+
 }

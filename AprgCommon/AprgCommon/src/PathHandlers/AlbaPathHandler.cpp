@@ -7,7 +7,8 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 AlbaPathHandler::AlbaPathHandler(string const& slashCharacterString)
     : m_pathType(PathType::Empty)
@@ -62,7 +63,8 @@ void AlbaPathHandler::goUp()
     if (isNotNpos(indexOfSlash))
     {
         input(directoryWithoutSlash.substr(0, static_cast<string::size_type>(indexOfSlash)+1));
-    }}
+    }
+}
 
 string AlbaPathHandler::getImmediateDirectoryName() const
 {
@@ -80,7 +82,8 @@ string AlbaPathHandler::getFilenameOnly() const
     if (isNotNpos(indexOfSlashOrPeriod))
     {
         return m_file.substr(0, static_cast<string::size_type>(indexOfSlashOrPeriod));
-    }    return m_file;
+    }
+    return m_file;
 }
 
 string AlbaPathHandler::getExtension() const
@@ -113,7 +116,8 @@ void AlbaPathHandler::save(string const& path)
     string correctPath(getCorrectPathWithReplacedSlashCharacters(path, m_slashCharacterString));
     setExtensionFromPath(correctPath);
     setDirectoryAndFileFromPath(correctPath);
-    setFileType();}
+    setFileType();
+}
 
 void AlbaPathHandler::setExtensionFromPath(string const& path)
 {
@@ -121,7 +125,8 @@ void AlbaPathHandler::setExtensionFromPath(string const& path)
     if (isNotNpos(indexOfSlashOrPeriod) && path[static_cast<string::size_type>(indexOfSlashOrPeriod)]=='.')
     {
         m_extension = path.substr(static_cast<string::size_type>(indexOfSlashOrPeriod)+1);
-    }}
+    }
+}
 
 void AlbaPathHandler::setDirectoryAndFileFromPath(string const& path)
 {
@@ -129,13 +134,15 @@ void AlbaPathHandler::setDirectoryAndFileFromPath(string const& path)
     if (isNotNpos(indexOfSlash))
     {
         m_directory = path.substr(0, static_cast<string::size_type>(indexOfSlash)+1);
-        m_file = path.substr(static_cast<string::size_type>(indexOfSlash)+1);    }
+        m_file = path.substr(static_cast<string::size_type>(indexOfSlash)+1);
+    }
     else
     {
         m_directory.clear();
         m_file = path;
     }
 }
+
 void AlbaPathHandler::setFileType()
 {
     if(m_file.empty())

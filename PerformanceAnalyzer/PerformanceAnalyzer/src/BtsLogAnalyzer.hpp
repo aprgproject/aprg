@@ -65,7 +65,8 @@ public:
     using LogTime = alba::AlbaOptional<wcdmaToolsBackend::BtsLogTime>;
     using LogTimePair = std::pair<LogTime, LogTime>;
     using LogTimePairs = std::map<alba::UserIdentifiers, LogTimePair>;
-    using UserIdentifierToPrintsAvailablePair = std::pair<alba::UserIdentifiers, PrintsAvailable>;    using PrintsAvailableMap = std::map<alba::UserIdentifiers, PrintsAvailable>;
+    using UserIdentifierToPrintsAvailablePair = std::pair<alba::UserIdentifiers, PrintsAvailable>;
+    using PrintsAvailableMap = std::map<alba::UserIdentifiers, PrintsAvailable>;
     using DspDataPair = std::pair<unsigned int, DspData>;
     using DspDataMap = std::map<unsigned int, DspData>;
 
@@ -96,7 +97,8 @@ private:
     void saveAllUsersAndCfs(wcdmaToolsBackend::BtsLogPrint const& logPrint);
     void saveDspInformation(unsigned int const dspAddress, DspData const& dspData);
     void saveMaxDspInformation(DspData const& dspData);
-    void saveQueueingTime(std::string const& lineInLogs);    void saveRlSetupPerSecond(std::string const& lineInLogs);
+    void saveQueueingTime(std::string const& lineInLogs);
+    void saveRlSetupPerSecond(std::string const& lineInLogs);
     void saveRlhSetupTime(std::string const& lineInLogs, LogTimePairs& rlSetupLogTimePairs);
     void saveRlhDeletionTime(std::string const& lineInLogs, LogTimePairs& rlDeletionLogTimePairs);
     void saveAdditionalPrintsRlSetup(std::string const& lineInLogs, LogTimePairs& rlSetupLogTimePairs);
@@ -112,7 +114,8 @@ private:
     double getTotalMicroseconds(wcdmaToolsBackend::BtsLogTime const& btsLogTime) const;
     DataCollection<double> m_messageQueueingTime;
     DataCollection<double> m_rlhRlSetupLatency;
-    DataCollection<double> m_rlhRlDeletionLatency;    AlbaLocalPathHandler m_btsLogPathHandler;
+    DataCollection<double> m_rlhRlDeletionLatency;
+    AlbaLocalPathHandler m_btsLogPathHandler;
     DspData m_maxDspData;
     DspDataMap m_dspDataMap;
     PrintsAvailableMap m_rlSetupPrintsAvailableMap;

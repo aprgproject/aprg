@@ -20,7 +20,8 @@ AlbaSackReader::AlbaSackReader(string const& filePath)
     , m_fileEvaluator(string())
 {}
 
-AlbaSackReader::AlbaSackReader(string const& filePath, string const& fileCondition)    : m_inputPathHandler(filePath)
+AlbaSackReader::AlbaSackReader(string const& filePath, string const& fileCondition)
+    : m_inputPathHandler(filePath)
     , m_fileEvaluator(fileCondition)
 {}
 
@@ -112,6 +113,7 @@ string AlbaSackReader::getReaderStateString(ReaderState const state)
     return string();
 #undef GET_ENUM_STRING
 }
+
 
 void AlbaSackReader::tokenize(stringHelper::strings & tokens, string const& line)
 {

@@ -72,6 +72,7 @@ TEST(CPlusPlusFileFixerTest, CPlusPlusFileHeadersAreCorrected)
     EXPECT_TRUE(fileReader.getLine().empty());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
+
 TEST(CPlusPlusFileFixerTest, TrailingEmptyLineAreRemoved)
 {
     CPlusPlusFileFixer fixer;
@@ -101,6 +102,7 @@ TEST(CPlusPlusFileFixerTest, TrailingEmptyLineAreRemoved)
     EXPECT_TRUE(fileReader.getLine().empty());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
+
 TEST(CPlusPlusFileFixerTest, NamespaceFormattingIsCorrected)
 {
     CPlusPlusFileFixer fixer;
@@ -126,6 +128,7 @@ TEST(CPlusPlusFileFixerTest, NamespaceFormattingIsCorrected)
     EXPECT_TRUE(fileReader.getLine().empty());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
+
 TEST(CPlusPlusFileFixerTest, SmallUInNumberIsConvertedToCapitalU)
 {
     CPlusPlusFileFixer fixer;
@@ -172,6 +175,7 @@ TEST(CPlusPlusFileFixerTest, SmallUInNumberIsConvertedToCapitalU)
     EXPECT_TRUE(fileReader.getLine().empty());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
+
 TEST(CPlusPlusFileFixerTest, DISABLED_TwoCascadingLoopsDetection)
 {
     CPlusPlusFileFixer fixer;

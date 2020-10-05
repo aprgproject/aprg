@@ -11,7 +11,8 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 AlbaFileReader::AlbaFileReader(ifstream& stream)
     : m_characterBuffer()
@@ -157,7 +158,8 @@ string AlbaFileReader::getLine()
     return result;
 }
 
-double AlbaFileReader::getCurrentLocation() const{
+double AlbaFileReader::getCurrentLocation() const
+{
     double location = m_stream.tellg();
     return location;
 }

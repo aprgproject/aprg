@@ -9,7 +9,8 @@
 
 namespace Ui
 {
-class WcdmaTools;}
+class WcdmaTools;
+}
 
 class WcdmaTools : public QMainWindow
 {

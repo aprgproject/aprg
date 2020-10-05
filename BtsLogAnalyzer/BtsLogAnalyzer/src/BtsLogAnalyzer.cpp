@@ -14,6 +14,7 @@ using namespace wcdmaToolsBackend;
 
 namespace alba
 {
+
 BtsLogAnalyzer::BtsLogAnalyzer()
     : m_totalDelay(0)
     , m_count(0)

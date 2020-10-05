@@ -15,6 +15,7 @@ using wcdmaToolsBackend::BtsLogTimeType;
 
 namespace alba
 {
+
 StartupLogAnalyzer::StartupLogAnalyzer()
     : m_btsLogPathHandler("")
     , m_firstLogTime()
