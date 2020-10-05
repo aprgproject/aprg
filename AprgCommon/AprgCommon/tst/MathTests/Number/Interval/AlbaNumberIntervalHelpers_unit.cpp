@@ -1,4 +1,4 @@
-#include <Math/Number/AlbaNumberIntervalHelpers.hpp>
+#include <Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 #include <gtest/gtest.h>
 

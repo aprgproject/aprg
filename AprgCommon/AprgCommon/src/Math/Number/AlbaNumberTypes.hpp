@@ -1,11 +1,10 @@
 #pragma once
 
 #include <Math/Number/AlbaNumber.hpp>
-#include <Math/Number/AlbaNumberInterval.hpp>
+#include <Math/Number/Interval/AlbaNumberInterval.hpp>
 #include <Optional/AlbaOptional.hpp>
 
-#include <map>
-#include <set>
+#include <map>#include <set>
 #include <vector>
 
 namespace alba
