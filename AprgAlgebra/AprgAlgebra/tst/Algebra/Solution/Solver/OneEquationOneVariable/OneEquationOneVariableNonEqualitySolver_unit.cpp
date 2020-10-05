@@ -1,9 +1,9 @@
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
 #include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableNonEqualitySolver.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
+#include <Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
@@ -78,13 +78,12 @@ TEST(OneEquationOneVariableNonEqualitySolverTest, PolynomialOverPolynomialAreSol
     EXPECT_TRUE(solver.isACompleteSolution());
     AlbaNumberIntervals const& acceptedIntervals(solutionSet.getAcceptedIntervals());
     ASSERT_EQ(3U, acceptedIntervals.size());
-    EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(AlbaNumber::Value::NegativeInfinity), createOpenEndpoint(-6)), acceptedIntervals.at(0));
+    EXPECT_EQ(AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createOpenEndpoint(-6)), acceptedIntervals.at(0));
     EXPECT_EQ(AlbaNumberInterval(createCloseEndpoint(-5), createCloseEndpoint(5)), acceptedIntervals.at(1));
-    EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(6), createOpenEndpoint(AlbaNumber::Value::PositiveInfinity)), acceptedIntervals.at(2));
+    EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(6), createPositiveInfinityOpenEndpoint()), acceptedIntervals.at(2));
 }
 
-TEST(OneEquationOneVariableNonEqualitySolverTest, XToTheXAreNotSolved)
-{
+TEST(OneEquationOneVariableNonEqualitySolverTest, XToTheXAreNotSolved){
     Expression expression(createExpressionIfPossible({Term("x"), Term("^"), Term("x")}));
     OneEquationOneVariableNonEqualitySolver solver;
 
@@ -134,12 +133,11 @@ TEST(OneEquationOneVariableNonEqualitySolverTest, AbsoluteValueFunctionWithInput
     EXPECT_TRUE(solver.isACompleteSolution());
     AlbaNumberIntervals const& acceptedIntervals(solutionSet.getAcceptedIntervals());
     ASSERT_EQ(2U, acceptedIntervals.size());
-    EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(AlbaNumber::Value::NegativeInfinity), createCloseEndpoint(-626)), acceptedIntervals.at(0));
-    EXPECT_EQ(AlbaNumberInterval(createCloseEndpoint(426), createOpenEndpoint(AlbaNumber::Value::PositiveInfinity)), acceptedIntervals.at(1));
+    EXPECT_EQ(AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createCloseEndpoint(-626)), acceptedIntervals.at(0));
+    EXPECT_EQ(AlbaNumberInterval(createCloseEndpoint(426), createPositiveInfinityOpenEndpoint()), acceptedIntervals.at(1));
 }
 
-TEST(OneEquationOneVariableNonEqualitySolverTest, AbsoluteValueFunctionInDenominatorAreSolved)
-{
+TEST(OneEquationOneVariableNonEqualitySolverTest, AbsoluteValueFunctionInDenominatorAreSolved){
     Term functionTerm(Functions::abs(
                           createExpressionIfPossible({Term(Polynomial{Monomial(2, {{"x", 1}}), Monomial(3, {})}) })));
     Term fractionTerm(createExpressionIfPossible({Term(1), Term("/"), functionTerm}));
@@ -155,16 +153,15 @@ TEST(OneEquationOneVariableNonEqualitySolverTest, AbsoluteValueFunctionInDenomin
     ASSERT_EQ(2U, acceptedIntervals.size());
     EXPECT_EQ(
                 AlbaNumberInterval(
-                    createOpenEndpoint(AlbaNumber::Value::NegativeInfinity),
+                    createNegativeInfinityOpenEndpoint(),
                     createOpenEndpoint(AlbaNumber::createFraction(-7, 2))),
                 acceptedIntervals.at(0));
     EXPECT_EQ(
                 AlbaNumberInterval(
                     createOpenEndpoint(AlbaNumber::createFraction(1, 2)),
-                    createOpenEndpoint(AlbaNumber::Value::PositiveInfinity)),
+                    createPositiveInfinityOpenEndpoint()),
                 acceptedIntervals.at(1));
 }
-
 TEST(OneEquationOneVariableNonEqualitySolverTest, PolynomialsInEquationAreSolved)
 {
     Polynomial polynomialLeft{Monomial(AlbaNumber::createFraction(2, 3), {{"x", 1}}), Monomial(-4, {})};
@@ -177,9 +174,8 @@ TEST(OneEquationOneVariableNonEqualitySolverTest, PolynomialsInEquationAreSolved
     EXPECT_TRUE(solver.isACompleteSolution());
     AlbaNumberIntervals const& acceptedIntervals(solutionSet.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
-    EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(-3), createOpenEndpoint(AlbaNumber::Value::PositiveInfinity)), acceptedIntervals.at(0));
+    EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(-3), createPositiveInfinityOpenEndpoint()), acceptedIntervals.at(0));
 }
 
 }
-
 }
