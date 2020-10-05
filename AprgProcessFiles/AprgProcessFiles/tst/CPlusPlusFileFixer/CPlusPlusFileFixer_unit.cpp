@@ -15,12 +15,11 @@ namespace alba
 
 TEST(CPlusPlusFileFixerTest, DISABLED_ActualRun)
 {
-    //CPlusPlusFileFixer fixer;
-    //fixer.processDirectory(R"(N:\Branches\APRG_LINUX_COPY\)");
+    CPlusPlusFileFixer fixer;
+    fixer.processDirectory(R"(N:\Branches\APRG_TEMP\)");
 }
 
-TEST(CPlusPlusFileFixerTest, CPlusPlusFileHeadersAreCorrected)
-{
+TEST(CPlusPlusFileFixerTest, CPlusPlusFileHeadersAreCorrected){
     CPlusPlusFileFixer fixer;
     AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
@@ -46,11 +45,9 @@ TEST(CPlusPlusFileFixerTest, CPlusPlusFileHeadersAreCorrected)
 
     ifstream inputTestFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
-
     AlbaFileReader fileReader(inputTestFile);
     ASSERT_TRUE(inputTestFile.good());
-    ASSERT_FALSE(inputTestFile.eof());
-    EXPECT_TRUE(fileReader.isNotFinished());
+    ASSERT_FALSE(inputTestFile.eof());    EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(R"(#pragma once)", fileReader.getLine());
     EXPECT_EQ(R"()", fileReader.getLine());
     EXPECT_EQ(R"(#include "file1.hpp")", fileReader.getLine());
@@ -73,10 +70,35 @@ TEST(CPlusPlusFileFixerTest, CPlusPlusFileHeadersAreCorrected)
     EXPECT_FALSE(fileReader.isNotFinished());
 }
 
-TEST(CPlusPlusFileFixerTest, TrailingEmptyLineAreRemoved)
+TEST(CPlusPlusFileFixerTest, CPlusPlusFileMainHeaderIsConvertedToQuotationHeader)
 {
     CPlusPlusFileFixer fixer;
     AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
+    ofstream testFile(file1ToReadPathHandler.getFullPath());
+    ASSERT_TRUE(testFile.is_open());
+    testFile << R"(#include <)" << file1ToReadPathHandler.getFile() << R"(>)" << endl;
+    testFile << R"(#include <DirectoryDoesNotMatch/)" << file1ToReadPathHandler.getFile() << R"(>)" << endl;
+    testFile.close();
+
+    fixer.processFile(file1ToReadPathHandler.getFullPath());
+
+    ifstream inputTestFile(file1ToReadPathHandler.getFullPath());
+    ASSERT_TRUE(inputTestFile.is_open());
+    AlbaFileReader fileReader(inputTestFile);
+    ASSERT_TRUE(inputTestFile.good());
+    ASSERT_FALSE(inputTestFile.eof());
+    EXPECT_TRUE(fileReader.isNotFinished());
+    EXPECT_EQ(R"(#include "Test1.txt")", fileReader.getLine());
+    EXPECT_EQ(R"()", fileReader.getLine());
+    EXPECT_EQ(R"(#include <DirectoryDoesNotMatch/Test1.txt>)", fileReader.getLine());
+    EXPECT_TRUE(fileReader.getLine().empty());
+    EXPECT_TRUE(fileReader.getLine().empty());
+    EXPECT_FALSE(fileReader.isNotFinished());
+}
+
+TEST(CPlusPlusFileFixerTest, TrailingEmptyLineAreRemoved)
+{
+    CPlusPlusFileFixer fixer;    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << R"(         This is a line in the code)" << endl;
@@ -92,11 +114,9 @@ TEST(CPlusPlusFileFixerTest, TrailingEmptyLineAreRemoved)
 
     ifstream inputTestFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
-
     AlbaFileReader fileReader(inputTestFile);
     ASSERT_TRUE(inputTestFile.good());
-    ASSERT_FALSE(inputTestFile.eof());
-    EXPECT_TRUE(fileReader.isNotFinished());
+    ASSERT_FALSE(inputTestFile.eof());    EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(R"(         This is a line in the code)", fileReader.getLine());
     EXPECT_EQ("       \t\t\t\t       This is another line in the code    ", fileReader.getLine());
     EXPECT_TRUE(fileReader.getLine().empty());
@@ -117,11 +137,9 @@ TEST(CPlusPlusFileFixerTest, NamespaceFormattingIsCorrected)
 
     ifstream inputTestFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
-
     AlbaFileReader fileReader(inputTestFile);
     ASSERT_TRUE(inputTestFile.good());
-    ASSERT_FALSE(inputTestFile.eof());
-    EXPECT_TRUE(fileReader.isNotFinished());
+    ASSERT_FALSE(inputTestFile.eof());    EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(R"(namespace samplenamespace )", fileReader.getLine());
     EXPECT_EQ(R"({)", fileReader.getLine());
     EXPECT_EQ(R"(})", fileReader.getLine());
@@ -154,11 +172,9 @@ TEST(CPlusPlusFileFixerTest, SmallUInNumberIsConvertedToCapitalU)
 
     ifstream inputTestFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
-
     AlbaFileReader fileReader(inputTestFile);
     ASSERT_TRUE(inputTestFile.good());
-    ASSERT_FALSE(inputTestFile.eof());
-    EXPECT_TRUE(fileReader.isNotFinished());
+    ASSERT_FALSE(inputTestFile.eof());    EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(R"(u)", fileReader.getLine());
     EXPECT_EQ(R"(u1)", fileReader.getLine());
     EXPECT_EQ(R"(uname)", fileReader.getLine());
