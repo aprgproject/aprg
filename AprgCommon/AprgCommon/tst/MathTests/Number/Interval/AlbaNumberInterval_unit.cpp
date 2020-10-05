@@ -128,6 +128,7 @@ TEST(AlbaNumberIntervalTest, IsIntervalInsideTheIntervalWorks)
 TEST(AlbaNumberIntervalTest, GetLowerEndpointWorks)
 {
     AlbaNumberInterval interval(createOpenEndpoint(645), createCloseEndpoint(784));
+
     EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Open, interval.getLowerEndpoint().getType());
     EXPECT_EQ(645, interval.getLowerEndpoint().getValue().getInteger());
 }

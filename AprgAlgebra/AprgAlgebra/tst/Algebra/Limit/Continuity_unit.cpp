@@ -5,6 +5,7 @@
 #include <Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace alba::mathHelper;
 using namespace std;
 
@@ -85,7 +86,8 @@ TEST(ContinuityTest, IsIntermediateValueTheoremSatisfiedWorks)
 
 TEST(ContinuityTest, GetContinuityTypeAtWorksForRemovableDiscontinuityFunction)
 {
-    Function functionToTest(                "functionToTest",
+    Function functionToTest(
+                "functionToTest",
                 getBaseTermConstReferenceFromTerm(Term("x")),
                 [](AlbaNumber const& number)
     {
@@ -168,6 +170,7 @@ TEST(ContinuityTest, GetContinuityDomainWorksOnPolynomialOverPolynomial)
     EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(3), createPositiveInfinityOpenEndpoint()),
               intervalToVerify.at(2));
 }
+
 TEST(ContinuityTest, GetContinuityDomainWorksOnSquareRootOfPolynomial)
 {
     Term polynomialTerm(Polynomial{Monomial(-1, {{"x", 2}}), Monomial(4, {})});

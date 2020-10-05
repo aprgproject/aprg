@@ -10,7 +10,8 @@
 #include <Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 using namespace alba::algebra::DomainAndRange;
-using namespace alba::algebra::Functions;using namespace std;
+using namespace alba::algebra::Functions;
+using namespace std;
 
 namespace alba
 {
@@ -69,7 +70,8 @@ bool isIntermediateValueTheoremSatisfied(
 
 ContinuityType getContinuityTypeAt(
         Term const& term,
-        string const& variableName,        AlbaNumber const& value)
+        string const& variableName,
+        AlbaNumber const& value)
 {
     ContinuityType result(ContinuityType::Unknown);
     SubstitutionOfVariablesToValues substitution{{variableName, value}};
@@ -107,7 +109,8 @@ SolutionSet getContinuityDomain(
 
     SolutionSet continuityDomain;
     FunctionsRetriever functionsRetriever([](Function const& functionObject)
-    {        return isFunctionContinuous(functionObject);
+    {
+        return isFunctionContinuous(functionObject);
     });
     if(functionsRetriever.getSavedData().empty())
     {

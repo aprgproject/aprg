@@ -4,6 +4,7 @@
 #include <Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba
@@ -83,7 +84,8 @@ TEST(OneEquationOneVariableNonEqualitySolverTest, PolynomialOverPolynomialAreSol
     EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(6), createPositiveInfinityOpenEndpoint()), acceptedIntervals.at(2));
 }
 
-TEST(OneEquationOneVariableNonEqualitySolverTest, XToTheXAreNotSolved){
+TEST(OneEquationOneVariableNonEqualitySolverTest, XToTheXAreNotSolved)
+{
     Expression expression(createExpressionIfPossible({Term("x"), Term("^"), Term("x")}));
     OneEquationOneVariableNonEqualitySolver solver;
 
@@ -137,7 +139,8 @@ TEST(OneEquationOneVariableNonEqualitySolverTest, AbsoluteValueFunctionWithInput
     EXPECT_EQ(AlbaNumberInterval(createCloseEndpoint(426), createPositiveInfinityOpenEndpoint()), acceptedIntervals.at(1));
 }
 
-TEST(OneEquationOneVariableNonEqualitySolverTest, AbsoluteValueFunctionInDenominatorAreSolved){
+TEST(OneEquationOneVariableNonEqualitySolverTest, AbsoluteValueFunctionInDenominatorAreSolved)
+{
     Term functionTerm(Functions::abs(
                           createExpressionIfPossible({Term(Polynomial{Monomial(2, {{"x", 1}}), Monomial(3, {})}) })));
     Term fractionTerm(createExpressionIfPossible({Term(1), Term("/"), functionTerm}));
@@ -162,6 +165,7 @@ TEST(OneEquationOneVariableNonEqualitySolverTest, AbsoluteValueFunctionInDenomin
                     createPositiveInfinityOpenEndpoint()),
                 acceptedIntervals.at(1));
 }
+
 TEST(OneEquationOneVariableNonEqualitySolverTest, PolynomialsInEquationAreSolved)
 {
     Polynomial polynomialLeft{Monomial(AlbaNumber::createFraction(2, 3), {{"x", 1}}), Monomial(-4, {})};
@@ -178,4 +182,5 @@ TEST(OneEquationOneVariableNonEqualitySolverTest, PolynomialsInEquationAreSolved
 }
 
 }
+
 }

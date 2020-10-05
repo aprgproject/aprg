@@ -2,6 +2,7 @@
 #include <Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 #include <gtest/gtest.h>
+
 #include <algorithm>
 
 using namespace std;
@@ -139,7 +140,8 @@ TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithOnePoint)
     EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(1), createPositiveInfinityOpenEndpoint()), actualIntervals.at(1));
 }
 
-TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithAcceptedValue){
+TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithAcceptedValue)
+{
     SolutionSet solutionSet;
     solutionSet.addAcceptedValue(2);
 
@@ -157,7 +159,8 @@ TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithAcceptedValue){
     EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(2), createPositiveInfinityOpenEndpoint()), actualIntervals.at(2));
 }
 
-TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithRejectedValue){
+TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithRejectedValue)
+{
     SolutionSet solutionSet;
     solutionSet.addRejectedValue(2);
 
@@ -175,7 +178,8 @@ TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithRejectedValue){
     EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(2), createPositiveInfinityOpenEndpoint()), actualIntervals.at(2));
 }
 
-TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithRedundantInfinities){
+TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithRedundantInfinities)
+{
     SolutionSet solutionSet;
 
     AlbaNumbers addedValuesToCheck{
@@ -196,7 +200,8 @@ TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithRedundantInfiniti
     EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(1), createPositiveInfinityOpenEndpoint()), actualIntervals.at(1));
 }
 
-TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithAllKindOfIntervalsIncluded){
+TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithAllKindOfIntervalsIncluded)
+{
     SolutionSet solutionSet;
 
     AlbaNumbers valuesThatAreNotAccepted{4,5};
@@ -212,7 +217,8 @@ TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithAllKindOfInterval
     EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(5), createPositiveInfinityOpenEndpoint()), actualIntervals.at(2));
 }
 
-TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithAllConnectedIntervalsCombined){
+TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithAllConnectedIntervalsCombined)
+{
     SolutionSet solutionSet;
 
     AlbaNumbers addedValuesToCheck{1,2,3};
@@ -228,7 +234,8 @@ TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithAllConnectedInter
     EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(2), createPositiveInfinityOpenEndpoint()), actualIntervals.at(1));
 }
 
-TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksAndNotAcceptedIntervalsNotIncluded){
+TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksAndNotAcceptedIntervalsNotIncluded)
+{
     SolutionSet solutionSet;
 
     AlbaNumbers addedValuesToCheck{1,2};
@@ -244,7 +251,8 @@ TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksAndNotAcceptedInterva
     EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(2), createPositiveInfinityOpenEndpoint()), actualIntervals.at(1));
 }
 
-TEST(SolutionSetTest, GetDisplayableStringWorks){
+TEST(SolutionSetTest, GetDisplayableStringWorks)
+{
     SolutionSet solutionSet;
     solutionSet.addAcceptedValue(3.7);
     solutionSet.addAcceptedValue(5.6);

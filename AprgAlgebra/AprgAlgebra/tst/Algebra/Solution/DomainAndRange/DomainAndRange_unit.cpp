@@ -4,6 +4,7 @@
 #include <Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba
@@ -29,7 +30,8 @@ TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunction)
     EXPECT_EQ(AlbaNumberInterval(createCloseEndpoint(6), createPositiveInfinityOpenEndpoint()), acceptedIntervals.at(0));
 }
 
-TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunctionWithNanValues){
+TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunctionWithNanValues)
+{
     AlbaNumbers values{3};
 
     SolutionSet actualDomain = calculateDomainUsingTransitionValues(values, [](AlbaNumber const& number)
@@ -43,7 +45,8 @@ TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunctionWi
     EXPECT_EQ(AlbaNumberInterval(createOpenEndpoint(3), createPositiveInfinityOpenEndpoint()), acceptedIntervals.at(1));
 }
 
-TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTermWithValues){
+TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTermWithValues)
+{
     AlbaNumbers values{1.3, 9.25};
     Polynomial polynomial{Monomial(4, {}), Monomial(-1, {{"x", 2}})};
     Expression expression(createExpressionIfPossible({Term(polynomial), Term("^"), Term(AlbaNumber::createFraction(1, 2))}));
@@ -55,7 +58,8 @@ TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTermWithV
     EXPECT_EQ(AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createCloseEndpoint(2)), acceptedIntervals.at(0));
 }
 
-TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithConstant){
+TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithConstant)
+{
     SolutionSet actualDomain = calculateDomainForTermWithOneVariable(Term(5));
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
@@ -88,7 +92,8 @@ TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTermWithE
     EXPECT_EQ(AlbaNumberInterval(createCloseEndpoint(2), createPositiveInfinityOpenEndpoint()), acceptedIntervals.at(1));
 }
 
-TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquationWithValues){
+TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquationWithValues)
+{
     Polynomial polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
     Equation equation(Term(polynomialLeft), "=", Term(Constant(36)));
     AlbaNumbers numbers{3.3, 9.9};
@@ -100,7 +105,8 @@ TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquationWithValues){
     EXPECT_EQ(AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createCloseEndpoint(6)), acceptedIntervals.at(0));
 }
 
-TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquation){
+TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquation)
+{
     Polynomial polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
     Equation equation(Term(polynomialLeft), "=", Term(Constant(36)));
 
@@ -150,7 +156,8 @@ TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithXToTheXIsWrong)
     EXPECT_EQ(AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createCloseEndpoint(143.016087935746)), acceptedIntervals.at(0));
 }
 
-TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquationWithValues){
+TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquationWithValues)
+{
     Polynomial polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
     Equation equation(Term(polynomialLeft), "=", Term(Constant(36)));
     AlbaNumbers numbers{3.3, 9.9};
@@ -162,7 +169,8 @@ TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquationWithValues){
     EXPECT_EQ(AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createCloseEndpoint(6)), acceptedIntervals.at(0));
 }
 
-TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquation){
+TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquation)
+{
     Polynomial polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
     Equation equation(Term(polynomialLeft), "=", Term(Constant(36)));
 

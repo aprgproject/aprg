@@ -40,7 +40,8 @@ TEST(AlbaNumberIntervalHelpersTest, IsIntervalInsideTheIntervalsWorks)
 
 TEST(AlbaNumberIntervalHelpersTest, GetEndpointTypeWithCheckingIfItsClosedWorks)
 {
-    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Close, getEndpointTypeWithCheckingIfItsClosed(true));    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Open, getEndpointTypeWithCheckingIfItsClosed(false));
+    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Close, getEndpointTypeWithCheckingIfItsClosed(true));
+    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Open, getEndpointTypeWithCheckingIfItsClosed(false));
 }
 
 TEST(AlbaNumberIntervalHelpersTest, CreateOpenEndpointWorks)
@@ -93,5 +94,6 @@ TEST(AlbaNumberIntervalTest, CreateAllRealValuesIntervalWorks)
     EXPECT_EQ(createNegativeInfinityOpenEndpoint(), interval.getLowerEndpoint());
     EXPECT_EQ(createPositiveInfinityOpenEndpoint(), interval.getHigherEndpoint());
 }
+
 
 }

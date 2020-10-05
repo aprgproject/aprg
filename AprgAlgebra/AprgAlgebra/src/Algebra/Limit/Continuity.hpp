@@ -36,7 +36,8 @@ bool isIntermediateValueTheoremSatisfied(
 
 ContinuityType getContinuityTypeAt(
         Term const& term,
-        std::string const& variableName,        AlbaNumber const& value);
+        std::string const& variableName,
+        AlbaNumber const& value);
 
 SolutionSet getContinuityDomain(
         Term const& term);

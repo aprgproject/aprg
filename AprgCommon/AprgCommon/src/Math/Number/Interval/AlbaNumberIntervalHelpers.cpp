@@ -25,7 +25,8 @@ bool isIntervalInsideTheIntervals(AlbaNumberIntervals const& intervals, AlbaNumb
 
 AlbaNumberIntervalEndpoint::Type getEndpointTypeWithCheckingIfItsClosed(bool const isCloseEndpoint)
 {
-    return isCloseEndpoint ? AlbaNumberIntervalEndpoint::Type::Close : AlbaNumberIntervalEndpoint::Type::Open;}
+    return isCloseEndpoint ? AlbaNumberIntervalEndpoint::Type::Close : AlbaNumberIntervalEndpoint::Type::Open;
+}
 
 AlbaNumberIntervalEndpoint createOpenEndpoint(AlbaNumber const value)
 {
