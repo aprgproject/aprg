@@ -5,6 +5,7 @@
 #include <numeric>
 
 using namespace std;
+
 namespace alba
 {
 

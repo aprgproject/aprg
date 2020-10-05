@@ -10,6 +10,7 @@
 #include <Optional/AlbaOptional.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
 #include <TwoDimensions/TwoDimensionsHelper.hpp>
+
 using namespace alba::AprgBitmap::ColorUtilities;
 using namespace alba::mathHelper;
 using namespace alba::TwoDimensions;
