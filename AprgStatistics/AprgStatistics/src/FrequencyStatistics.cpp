@@ -1,11 +1,10 @@
 #include <FrequencyStatistics.hpp>
 
 #include <algorithm>
-#include <numeric>
 #include <iterator>
+#include <numeric>
 
 using namespace std;
-
 namespace alba
 {
 
