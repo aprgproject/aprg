@@ -56,7 +56,8 @@ public:
     static void setTolerancesToDefault();
 
     bool operator==(AlbaNumber const& second) const;
-    bool operator!=(AlbaNumber const& second) const;    bool operator<=(AlbaNumber const& second) const;
+    bool operator!=(AlbaNumber const& second) const;
+    bool operator<=(AlbaNumber const& second) const;
     bool operator>=(AlbaNumber const& second) const;
     bool operator<(AlbaNumber const& second) const;
     bool operator>(AlbaNumber const& second) const;

@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <climits>
 #include <cmath>
+
 using namespace std;
 
 namespace alba
@@ -16,6 +17,7 @@ namespace mathHelper
 namespace
 {
 //internal functions
+
 unsigned int getNumberOfMultiplesInclusive(
         unsigned int const multiple,
         unsigned int const number)
@@ -96,6 +98,7 @@ double convertRadiansToDegrees(double const valueInRadians)
     return valueInRadians / getPi() * 180;
 }
 
+
 //isAlmostEqual
 template <typename NumberType>
 bool isAlmostEqual(NumberType const value1, NumberType const value2)
@@ -113,7 +116,8 @@ template <> bool isAlmostEqual<double>(double const value1, double const value2)
     return value1 == value2 || getAbsoluteValue(value1-value2) < COMPARISON_TOLERANCE_FOR_DOUBLE;
 }
 //Commented out: This implementation is not practical when value is equal to zero
-//template <> bool isAlmostEqual<double>(double const value1, double const value2)//{
+//template <> bool isAlmostEqual<double>(double const value1, double const value2)
+//{
 //    constexpr double absoluteScaledDifferenceTolerance(1E-12);
 //    double absoluteMaxValue = max(getAbsoluteValue(value1), getAbsoluteValue(value2));
 //    double difference = getAbsoluteValue(value1-value2);
@@ -153,6 +157,7 @@ bool isAlmostAnInteger(double const value, double const differenceTolerance)
 {
     return isAlmostEqual(value, round(value), differenceTolerance);
 }
+
 
 //isValueBeyondLimits
 template <> bool isValueBeyondLimits<int>(double const value)

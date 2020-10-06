@@ -110,7 +110,8 @@ SolutionSet getContinuityDomain(
     // Calculus Theorem:  A cosine function is continuous at every number.
 
     SolutionSet continuityDomain;
-    FunctionsRetriever functionsRetriever([](Function const& functionObject)    {
+    FunctionsRetriever functionsRetriever([](Function const& functionObject)
+    {
         return isFunctionContinuous(functionObject);
     });
     if(functionsRetriever.getSavedData().empty())
