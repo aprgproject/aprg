@@ -1,12 +1,11 @@
 #include "AlbaNumber.hpp"
 
+#include <Math/AlbaMathConstants.hpp>
 #include <Math/AlbaMathHelper.hpp>
 #include <Math/Number/AlbaComplexNumber.hpp>
-#include <Math/Number/AlbaNumberValues.hpp>
 
 #include <cmath>
 #include <sstream>
-
 using namespace alba::mathHelper;
 using namespace std;
 
@@ -15,10 +14,14 @@ namespace alba
 
 using ComplexFloat = AlbaComplexNumber<float>;
 
+constexpr double ADJUSTMENT_FLOAT_TOLERANCE = 1E-15;
+
+double AlbaNumber::s_comparisonTolerance = COMPARISON_TOLERANCE_FOR_DOUBLE;
+double AlbaNumber::s_floatAdjustmentTolerance = ADJUSTMENT_FLOAT_TOLERANCE;
+
 AlbaNumber::AlbaNumber()
     : m_type(Type::Integer)
-    , m_data{}
-{
+    , m_data{}{
     m_data.intData = 0;
 }
 
@@ -99,16 +102,27 @@ AlbaNumber AlbaNumber::createComplexNumber(double const realPart, double const i
     return result;
 }
 
+void AlbaNumber::setTolerancesToZero()
+{
+    s_comparisonTolerance = 0;
+    s_floatAdjustmentTolerance = 0;
+}
+
+void AlbaNumber::setTolerancesToDefault()
+{
+    s_comparisonTolerance = COMPARISON_TOLERANCE_FOR_DOUBLE;
+    s_floatAdjustmentTolerance = ADJUSTMENT_FLOAT_TOLERANCE;
+}
+
 bool AlbaNumber::operator==(AlbaNumber const& second) const
 {
     bool result(false);
     if(!isComplexNumberType() && !second.isComplexNumberType())
     {
-        result = isAlmostEqual(getDouble(), second.getDouble());
+        result = isAlmostEqual(getDouble(), second.getDouble(), s_comparisonTolerance);
     }
     else if(isComplexNumberType() && second.isComplexNumberType())
-    {
-        result = createComplexNumberFromData(m_data.complexNumberData)
+    {        result = createComplexNumberFromData(m_data.complexNumberData)
                 == createComplexNumberFromData(second.m_data.complexNumberData);
     }
     return result;
@@ -966,11 +980,10 @@ string AlbaNumber::getDisplayableString() const
     }
     else if(m_type==Type::Double)
     {
-        result.precision(15);
+        result.precision(16);
         result << m_data.doubleData;
     }
-    else if(m_type==Type::Fraction)
-    {
+    else if(m_type==Type::Fraction)    {
         result << "(" << m_data.fractionData.numerator << "/" << m_data.fractionData.denominator << ")";
     }
     else if(m_type==Type::ComplexNumber)
@@ -1025,11 +1038,10 @@ void AlbaNumber::constructBasedFromComplexNumberDetails(NumberType1 const realPa
 {
     double adjustedRealPart = adjustFloatValue(realPart);
     double adjustedImaginaryPart = adjustFloatValue(imaginaryPart);
-    if(isAlmostEqual(adjustedImaginaryPart, 0.0)
+    if(isAlmostEqual(adjustedImaginaryPart, 0.0, s_comparisonTolerance)
             || POSITIVE_INFINITY_DOUBLE_VALUE == adjustedRealPart
             || NEGATIVE_INFINITY_DOUBLE_VALUE == adjustedRealPart
-            || isnan(adjustedRealPart))
-    {
+            || isnan(adjustedRealPart))    {
         *this = AlbaNumber(static_cast<double>(adjustedRealPart));
     }
     else
@@ -1047,21 +1059,18 @@ template void AlbaNumber::constructBasedFromComplexNumberDetails<float, float>(f
 void AlbaNumber::convertFromDoubleToIntegerIfNeeded()
 {
     double realValue(getDouble());
-    if(!isValueBeyondLimits<long long int>(realValue) && isAlmostAnInteger<double, long long int>(realValue))
+    if(!isValueBeyondLimits<long long int>(realValue) && isAlmostAnInteger(realValue, s_comparisonTolerance))
     {
         *this = AlbaNumber(getIntegerAfterRoundingDoubleValue<long long int>(realValue));
-    }
-}
+    }}
 
 double AlbaNumber::adjustFloatValue(float const value) const
 {
     double result(value);
-    constexpr double ADJUSTMENT_FLOAT_TOLERANCE=1E-15;
-    if(isAlmostAnInteger(value, ADJUSTMENT_FLOAT_TOLERANCE))
+    if(isAlmostAnInteger(value, s_floatAdjustmentTolerance))
     {
         result=round(value);
-    }
-    return result;
+    }    return result;
 }
 
 AlbaNumber AlbaNumber::addBothIntegersAndReturnNumber(
@@ -1272,10 +1281,22 @@ AlbaNumber AlbaNumber::raisePowerOfFractionsAndIntegerAndReturnNumber(
     return result;
 }
 
+AlbaNumberToleranceToZeroScopeObject::AlbaNumberToleranceToZeroScopeObject()
+{
+    AlbaNumber::setTolerancesToZero();
+}
+
+AlbaNumberToleranceToZeroScopeObject::~AlbaNumberToleranceToZeroScopeObject()
+{
+    AlbaNumber::setTolerancesToDefault();
+}
+
+void AlbaNumberToleranceToZeroScopeObject::doSomethingToAvoidWarning()
+{}
+
 ostream & operator<<(ostream & out, AlbaNumber const& number)
 {
-    out << number.getDisplayableString();
-    return out;
+    out << number.getDisplayableString();    return out;
 }
 
 
