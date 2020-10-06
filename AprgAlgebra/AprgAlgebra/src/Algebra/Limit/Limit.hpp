@@ -22,10 +22,15 @@ bool hasHorizontalAsymptoteAtValue(
         Term const& term,
         std::string const& variableName,
         AlbaNumber const& valueToApproach);
+bool isSqueezeTheoremSatisfied(
+        Term const& alwaysLowerTermAtInterval,
+        Term const& termInBetweenAtInterval,
+        Term const& alwaysHigherTermAtInterval,
+        std::string const& variableName,
+        AlbaNumber const& valueToApproach);
 
 AlbaNumber getLimitAtAValueByApproachType(
-        Term const& term,
-        std::string const& variableName,
+        Term const& term,        std::string const& variableName,
         AlbaNumber const& valueToApproach,
         LimitAtAValueApproachType const limitApproachType);
 AlbaNumber getLimitAtAValueInBothSides(
