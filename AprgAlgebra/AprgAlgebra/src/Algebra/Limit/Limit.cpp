@@ -226,11 +226,9 @@ AlbaNumber getLimitAtAValueUsingTrendOfValues(
             result = (previousAcceptedOutput<0) ?
                         AlbaNumber(AlbaNumber::Value::NegativeInfinity) :
                         AlbaNumber(AlbaNumber::Value::PositiveInfinity);
-
         }
         else
-        {
-            result = getValueUsingLinearInterpolation(
+        {            result = getValueUsingLinearInterpolation(
                         previousPreviousAcceptedInput,
                         previousAcceptedInput,
                         valueToApproach,
