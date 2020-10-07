@@ -23,7 +23,8 @@ constexpr double BRENT_METHOD_COMPARISON_TOLERANCE = 1E-13;
 constexpr double BRENT_METHOD_TOLERANCE_TO_ZERO_FOR_A_AND_B = 1E-11;
 }
 
-BrentMethod::BrentMethod(AlbaNumbers const& coefficients)    : m_numberOfIterationsExecuted(0)
+BrentMethod::BrentMethod(AlbaNumbers const& coefficients)
+    : m_numberOfIterationsExecuted(0)
     , m_coefficients(coefficients)
 {}
 
@@ -98,7 +99,8 @@ void BrentMethod::runOneIteration()
     if(!isAlmostEqualForBrentMethod(m_values.fa, fc) && !isAlmostEqualForBrentMethod(m_values.fb, fc))
     {
         AlbaNumberOptional sOptional(calculateInverseQuadraticInterpolation(m_values.a, m_values.b, m_values.c));
-        if(!sOptional.hasContent())        {
+        if(!sOptional.hasContent())
+        {
             return;
         }
         m_values.s = sOptional.getConstReference();
@@ -106,7 +108,8 @@ void BrentMethod::runOneIteration()
     else if(!isAlmostEqualForBrentMethod(m_values.fa, m_values.fb))
     {
         AlbaNumberOptional sOptional(calculateSecantMethod(m_values.a, m_values.b));
-        if(!sOptional.hasContent())        {
+        if(!sOptional.hasContent())
+        {
             return;
         }
         m_values.s = sOptional.getConstReference();
@@ -116,7 +119,8 @@ void BrentMethod::runOneIteration()
             || isAlmostEqualForBrentMethod(m_values.b, m_values.s))
     {
         m_values.s = calculateBiSectionMethod(m_values.a, m_values.b);
-        m_values.mflag = true;    }
+        m_values.mflag = true;
+    }
     else
     {
         m_values.mflag = false;
@@ -162,7 +166,8 @@ bool BrentMethod::isAlmostEqualForBrentMethod(AlbaNumber const& value1, double c
 
 AlbaNumber BrentMethod::calculate(AlbaNumber const& inputValue) const
 {
-    AlbaNumber result;    AlbaNumber partialProduct(1);
+    AlbaNumber result;
+    AlbaNumber partialProduct(1);
     for(AlbaNumbers::const_reverse_iterator it=m_coefficients.crbegin();
         it != m_coefficients.crend();
         it++)
@@ -190,7 +195,8 @@ AlbaNumberOptional BrentMethod::calculateInverseQuadraticInterpolation(
             && !isAlmostEqualForBrentMethod(thirdDenominator, 0))
     {
         AlbaNumber firstPart = (a*fb*fc) / firstDenominator;
-        AlbaNumber secondPart = (b*fa*fc) / secondDenominator;        AlbaNumber thirdPart = (c*fa*fb) / thirdDenominator;
+        AlbaNumber secondPart = (b*fa*fc) / secondDenominator;
+        AlbaNumber thirdPart = (c*fa*fb) / thirdDenominator;
         result.setValue(firstPart+secondPart+thirdPart);
     }
     return result;
@@ -207,7 +213,8 @@ AlbaNumberOptional BrentMethod::calculateSecantMethod(
     if(!isAlmostEqualForBrentMethod(denominator, 0))
     {
         AlbaNumber firstPart = b;
-        AlbaNumber secondPart = (fb*(b-a)) / (denominator);        result.setValue(firstPart-secondPart);
+        AlbaNumber secondPart = (fb*(b-a)) / (denominator);
+        result.setValue(firstPart-secondPart);
     }
     return result;
 }
@@ -253,7 +260,8 @@ void BrentMethod::convertSolutionToIntegerIfNeeded()
             if(calculate(possibleValue) == 0)
             {
                 m_values.solutionOptional.setValue(possibleValue);
-            }        }
+            }
+        }
     }
 }
 
