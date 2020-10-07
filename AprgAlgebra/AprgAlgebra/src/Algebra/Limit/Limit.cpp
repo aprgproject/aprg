@@ -1,13 +1,12 @@
 #include "Limit.hpp"
 
 #include <Algebra/Limit/LimitsAtInfinity/LimitsAtInfinity.hpp>
-#include <Algebra/Retrieval/FunctionsRetriever.hpp>
 #include <Algebra/Simplification/SimplificationMutator.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
+#include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
-using namespace alba::algebra::Simplification;
-using namespace alba::mathHelper;
+using namespace alba::algebra::Simplification;using namespace alba::mathHelper;
 using namespace std;
 
 namespace alba
@@ -275,17 +274,11 @@ Term getLimitAtAValue(
     if(limitResult.isConstant())
     {
         AlbaNumber limitResultNumber(limitResult.getConstantValueConstReference());
-        FunctionsRetriever functionsRetriever([](Function const&)
-        {
-            return true;
-        });
-        functionsRetriever.retrieveFromTerm(term);
-        if(!limitResultNumber.isARealFiniteValue() || !functionsRetriever.getSavedData().empty())
+        if(!limitResultNumber.isARealFiniteValue() || hasAnyFunctions(term))
         {
             limitResult = Term(getLimitAtAValueByApproachType(term, variableName, valueToApproach, limitApproachType));
         }
-    }
-    return limitResult;
+    }    return limitResult;
 }
 
 Term simplifyTermForLimit(Term const& term)
