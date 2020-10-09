@@ -4,6 +4,7 @@
 
 #include <map>
 #include <string>
+
 namespace alba
 {
 
@@ -16,7 +17,8 @@ bool hasAnyFunctions(Term const& term);
 
 AlbaNumber getCoefficientOfMonomialWithNoVariables(
         Polynomial const& polynomial);
-AlbaNumber getCoefficientOfMonomialWithVariableOnly(        Polynomial const& polynomial,
+AlbaNumber getCoefficientOfMonomialWithVariableOnly(
+        Polynomial const& polynomial,
         std::string const& variableName);
 VariableToValueMap getCoefficientsForVariablesOnly(
         Polynomial const& polynomial);

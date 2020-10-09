@@ -6,7 +6,8 @@
 #include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
-using namespace alba::algebra::Simplification;using namespace alba::mathHelper;
+using namespace alba::algebra::Simplification;
+using namespace alba::mathHelper;
 using namespace std;
 
 namespace alba
@@ -278,7 +279,8 @@ Term getLimitAtAValue(
         {
             limitResult = Term(getLimitAtAValueByApproachType(term, variableName, valueToApproach, limitApproachType));
         }
-    }    return limitResult;
+    }
+    return limitResult;
 }
 
 Term simplifyTermForLimit(Term const& term)
