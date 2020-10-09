@@ -73,10 +73,10 @@ public:
     public:
         ScopeObject();
         ~ScopeObject();
+        void setInThisScopeConfiguration(ConfigurationDetails const& configurationDetails) const;
         void setInThisScopeTheTolerancesToZero() const;
     private:
-        void setInThisScopeTheValuesBack() const;
-        ConfigurationDetails m_savedConfigurationDetails;
+        void setInThisScopeTheValuesBack() const;        ConfigurationDetails m_savedConfigurationDetails;
     };
 
     AlbaNumber();

@@ -71,10 +71,15 @@ AlbaNumber::ScopeObject::~ScopeObject()
     setInThisScopeTheValuesBack();
 }
 
+void AlbaNumber::ScopeObject::setInThisScopeThisConfiguration(
+        AlbaNumber::ConfigurationDetails const& configurationDetails) const
+{
+    AlbaNumber::Configuration::getInstance().setConfigurationDetails(configurationDetails);
+}
+
 void AlbaNumber::ScopeObject::setInThisScopeTheTolerancesToZero() const
 {
-    AlbaNumber::Configuration::getInstance().setConfigurationTolerancesToZero();
-}
+    AlbaNumber::Configuration::getInstance().setConfigurationTolerancesToZero();}
 
 void AlbaNumber::ScopeObject::setInThisScopeTheValuesBack() const
 {
