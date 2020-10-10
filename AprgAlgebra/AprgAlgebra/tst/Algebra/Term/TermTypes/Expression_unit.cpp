@@ -133,11 +133,10 @@ TEST(ExpressionTest, GetFirstTermConstReferenceWorks)
 
     EXPECT_EQ(Term(5412), getTermConstReferenceFromBaseTerm(expression1.getFirstTermConstReference()));
     EXPECT_EQ(Term(695), getTermConstReferenceFromBaseTerm(expression2.getFirstTermConstReference()));
-    EXPECT_EQ(Term(-16), getTermConstReferenceFromBaseTerm(expression3.getFirstTermConstReference()));
+    EXPECT_EQ(Term(16), getTermConstReferenceFromBaseTerm(expression3.getFirstTermConstReference()));
 }
 
-TEST(ExpressionTest, GetFirstAssociationTypeWorks)
-{
+TEST(ExpressionTest, GetFirstAssociationTypeWorks){
     Expression expression1(createExpressionIfPossible({Term(5412)}));
     Expression expression2(createExpressionIfPossible({Term(695), Term("+"), Term("interest")}));
     Expression expression3(createExpressionIfPossible({Term("-"), Term(16)}));
