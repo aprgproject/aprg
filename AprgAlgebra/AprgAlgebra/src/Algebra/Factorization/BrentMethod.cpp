@@ -76,12 +76,11 @@ void BrentMethod::resetCalculation(AlbaNumber const& start, AlbaNumber const& en
 
 void BrentMethod::runOneIteration()
 {
-    AlbaNumberToleranceToZeroScopeObject scopeObject;
-    scopeObject.doSomethingToAvoidWarning();
+    AlbaNumber::ScopeObject scopeObject;
+    scopeObject.setInThisScopeTheTolerancesToZero();
 
     if(isAlmostEqualForBrentMethod(calculate(m_values.s), 0))
-    {
-        m_values.solutionOptional.setValue(m_values.s);
+    {        m_values.solutionOptional.setValue(m_values.s);
         return;
     }
     if(isAlmostEqualForBrentMethod(calculate(m_values.b), 0))

@@ -1,11 +1,10 @@
 #include "Limit.hpp"
 
 #include <Algebra/Limit/LimitsAtInfinity/LimitsAtInfinity.hpp>
-#include <Algebra/Simplification/SimplificationMutator.hpp>
+#include <Algebra/Simplification/SimplificationOfExpression.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
 #include <Math/AlbaMathHelper.hpp>
-
 using namespace alba::algebra::Simplification;
 using namespace alba::mathHelper;
 using namespace std;
@@ -156,12 +155,11 @@ AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
         AlbaNumber const& initialValueForIteration,
         unsigned int maxNumberOfIterations)
 {
-    AlbaNumberToleranceToZeroScopeObject scopeObject;
-    scopeObject.doSomethingToAvoidWarning();
+    AlbaNumber::ScopeObject scopeObject;
+    scopeObject.setInThisScopeTheTolerancesToZero();
 
     SubstitutionOfVariablesToValues substitution;
-    AlbaNumber currentInput(initialValueForIteration);
-    AlbaNumber previousAcceptedInput(currentInput);
+    AlbaNumber currentInput(initialValueForIteration);    AlbaNumber previousAcceptedInput(currentInput);
     AlbaNumber previousPreviousAcceptedInput(currentInput);
     AlbaNumber previousRejectedInput(valueToApproach);
     for(unsigned int i=0; i<maxNumberOfIterations && currentInput != previousRejectedInput; i++)
@@ -204,12 +202,11 @@ AlbaNumber getLimitAtAValueUsingTrendOfValues(
         AlbaNumber const& previousAcceptedInput,
         AlbaNumber const& previousPreviousAcceptedInput)
 {
-    AlbaNumberToleranceToZeroScopeObject scopeObject;
-    scopeObject.doSomethingToAvoidWarning();
+    AlbaNumber::ScopeObject scopeObject;
+    scopeObject.setInThisScopeTheTolerancesToZero();
 
     AlbaNumber result(AlbaNumber::Value::NotANumber);
-    SubstitutionOfVariablesToValues substitution;
-    substitution.putVariableWithValue(variableName, valueToApproach);
+    SubstitutionOfVariablesToValues substitution;    substitution.putVariableWithValue(variableName, valueToApproach);
     Term outputTermAtValueToApproach(substitution.performSubstitutionTo(term));
     substitution.putVariableWithValue(variableName, previousAcceptedInput);
     Term previousAcceptedOutputTerm(substitution.performSubstitutionTo(term));
@@ -285,15 +282,18 @@ Term getLimitAtAValue(
 
 Term simplifyTermForLimit(Term const& term)
 {
-    SimplificationMutator mutator;
-    SimplificationOfExpression simplificationOfExpression;
-    simplificationOfExpression.setAsShouldSimplifyToACommonDenominator(true);
-    mutator.putSimplification(simplificationOfExpression);
+    SimplificationOfExpression::ConfigurationDetails limitConfigurationDetails(
+                SimplificationOfExpression::getDefaultConfigurationDetails());
+    limitConfigurationDetails.shouldSimplifyToACommonDenominator = true;
+
+    SimplificationOfExpression::ScopeObject scopeObject;
+    scopeObject.setInThisScopeThisConfiguration(limitConfigurationDetails);
+
     Term simplifiedTerm(term);
-    mutator.mutateTerm(simplifiedTerm);
+    simplifiedTerm.simplify();
+
     return simplifiedTerm;
 }
-
 Term simplifyAndGetLimitAtAValue(
         Term const& term,
         string const& variableName,

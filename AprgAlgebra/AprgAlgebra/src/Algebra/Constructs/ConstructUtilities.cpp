@@ -113,21 +113,14 @@ TermRaiseToANumber createTermRaiseToANumberFromTerm(Term const& term)
     if(simplifiedTerm.isMonomial())
     {
         Monomial newMonomial(simplifiedTerm.getMonomialConstReference());
-        AlbaNumber exponent;
         Monomial::VariablesToExponentsMap const& variablesToExponentsMap(
                     newMonomial.getVariablesToExponentsMapConstReference());
-        if(variablesToExponentsMap.size() == 1)
-        {
-            exponent = (variablesToExponentsMap.cbegin())->second;
-        }
-        else
-        {
-            exponent = getGcfOfExponentsInMonomial(newMonomial);
-        }
+        AlbaNumber exponent = (variablesToExponentsMap.size() == 1)
+                ? (variablesToExponentsMap.cbegin())->second
+                : getGcfOfExponentsInMonomial(newMonomial);
         newMonomial.raiseToPowerNumber(AlbaNumber(1)/exponent);
         resultDetailsOptional.setConstReference({Term(newMonomial), exponent});
-    }
-    else if(simplifiedTerm.isExpression())
+    }    else if(simplifiedTerm.isExpression())
     {
         Expression const& expression(simplifiedTerm.getExpressionConstReference());
         if(OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel())

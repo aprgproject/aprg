@@ -12,10 +12,10 @@ bool canBeMergedInAMonomialByAdditionOrSubtraction(Term const& term1, Term const
 bool canBeMergedInAMonomialByAdditionOrSubtraction(Monomial const& monomial1, Monomial const& monomial2);
 bool canBeMergedInAMonomialByAdditionOrSubtraction(Monomial const& monomial, Variable const& variable);
 bool canBeMergedInAMonomialByAdditionOrSubtraction(Variable const& variable1, Variable const& variable2);
+bool doesCoefficientsHaveSameSign(Monomial const& monomial1, Monomial const& monomial2);
 bool hasNegativeExponents(Monomial const& monomial);
 
-AlbaNumber getGcfOfExponentsInMonomial(Monomial const& monomial);
-AlbaNumber getGcfOfCoefficientsInMonomials(Monomials const& monomials);
+AlbaNumber getGcfOfExponentsInMonomial(Monomial const& monomial);AlbaNumber getGcfOfCoefficientsInMonomials(Monomials const& monomials);
 AlbaNumber getLcmOfCoefficientsInMonomials(Monomials const& monomials);
 AlbaNumber getCommonSignInMonomials(Monomials const& monomials);
 Monomial getGcfMonomialInMonomials(Monomials const& monomials);

@@ -3,10 +3,11 @@
 #include <Algebra/Constructs/AdditionAndSubtractionOfExpressions.hpp>
 #include <Algebra/Constructs/AdditionAndSubtractionOfTermsOverTerms.hpp>
 #include <Algebra/Constructs/ConstructUtilities.hpp>
+#include <Algebra/Constructs/PolynomialRaiseToANumber.hpp>
+#include <Algebra/Constructs/RationalizeTermOverTerm.hpp>
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
 #include <Algebra/Operations/AccumulateOperations.hpp>
-#include <Algebra/Term/Operators/TermOperators.hpp>
-#include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
+#include <Algebra/Term/Operators/TermOperators.hpp>#include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/ConvertHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/SegregateHelpers.hpp>
@@ -30,19 +31,59 @@ namespace algebra
 namespace Simplification
 {
 
+SimplificationOfExpression::Configuration::Configuration()
+    : m_configurationDetails{getDefaultConfigurationDetails()}
+{}
+
+SimplificationOfExpression::ConfigurationDetails const&
+SimplificationOfExpression::Configuration::getConfigurationDetails()
+{
+    return m_configurationDetails;
+}
+
+void SimplificationOfExpression::Configuration::setConfigurationDetails(
+        ConfigurationDetails const& configurationDetails)
+{
+    m_configurationDetails = configurationDetails;
+}
+
+void SimplificationOfExpression::Configuration::setConfigurationToDefault()
+{
+    setConfigurationDetails(SimplificationOfExpression::getDefaultConfigurationDetails());
+}
+
+SimplificationOfExpression::ScopeObject::ScopeObject()
+    : m_savedConfigurationDetails(Configuration::getInstance().getConfigurationDetails())
+{}
+
+SimplificationOfExpression::ScopeObject::~ScopeObject()
+{
+    setInThisScopeTheValuesBack();
+}
+
+void SimplificationOfExpression::ScopeObject::setInThisScopeThisConfiguration(
+        SimplificationOfExpression::ConfigurationDetails const& configurationDetails) const
+{
+    SimplificationOfExpression::Configuration::getInstance().setConfigurationDetails(configurationDetails);
+}
+
+void SimplificationOfExpression::ScopeObject::setInThisScopeTheValuesBack() const
+{
+    SimplificationOfExpression::Configuration::getInstance().setConfigurationDetails(m_savedConfigurationDetails);
+}
+
+SimplificationOfExpression::ConfigurationDetails SimplificationOfExpression::getDefaultConfigurationDetails()
+{
+    return SimplificationOfExpression::ConfigurationDetails{false, false, false, false, false, false, false};
+}
+
 SimplificationOfExpression::SimplificationOfExpression()
     : m_expression()
-    , m_shouldSimplifyToACommonDenominator(false)
-    , m_shouldSimplifyEvenExponentsCancellationWithAbsoluteValue(false)
-    , m_shouldSimplifyByCombiningMonomialAndRadicalExpressions(false)
 {}
 
 SimplificationOfExpression::SimplificationOfExpression(
         Expression const& expression)
     : m_expression(expression)
-    , m_shouldSimplifyToACommonDenominator(false)
-    , m_shouldSimplifyEvenExponentsCancellationWithAbsoluteValue(false)
-    , m_shouldSimplifyByCombiningMonomialAndRadicalExpressions(false)
 {}
 
 Expression SimplificationOfExpression::getExpression() const
@@ -50,28 +91,9 @@ Expression SimplificationOfExpression::getExpression() const
     return m_expression;
 }
 
-void SimplificationOfExpression::setAsShouldSimplifyToACommonDenominator(
-        bool const shouldSimplifyToACommonDenominator)
-{
-    m_shouldSimplifyToACommonDenominator = shouldSimplifyToACommonDenominator;
-}
-
-void SimplificationOfExpression::setAsShouldSimplifyEvenExponentsCancellationWithAbsoluteValue(
-        bool const shouldSimplifyEvenExponentsCancellationWithAbsoluteValue)
-{
-    m_shouldSimplifyEvenExponentsCancellationWithAbsoluteValue = shouldSimplifyEvenExponentsCancellationWithAbsoluteValue;
-}
-
-void SimplificationOfExpression::setAsShouldSimplifyByCombiningMonomialAndRadicalExpressions(
-        bool const shouldSimplifyByCombiningMonomialAndRadicalExpressions)
-{
-    m_shouldSimplifyByCombiningMonomialAndRadicalExpressions = shouldSimplifyByCombiningMonomialAndRadicalExpressions;
-}
-
 void SimplificationOfExpression::setExpression(
         Expression const& expression)
-{
-    m_expression = expression;
+{    m_expression = expression;
 }
 
 void SimplificationOfExpression::simplify()
@@ -81,25 +103,58 @@ void SimplificationOfExpression::simplify()
     finalizeToACommonDenominatorIfNeeded();
 }
 
+bool SimplificationOfExpression::shouldSimplifyToACommonDenominator() const
+{
+    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyToACommonDenominator;
+}
+
+bool SimplificationOfExpression::shouldSimplifyEvenExponentsCancellationWithAbsoluteValue() const
+{
+    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyEvenExponentsCancellationWithAbsoluteValue;
+}
+
+bool SimplificationOfExpression::shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision() const
+{
+    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision;
+}
+
+bool SimplificationOfExpression::shouldSimplifyByCombiningMonomialAndRadicalExpressionsInMultiplicationAndDivision() const
+{
+    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyByCombiningMonomialAndRadicalExpressionsInMultiplicationAndDivision;
+}
+
+bool SimplificationOfExpression::shouldSimplifyByCheckingPolynomialRaiseToANumber() const
+{
+    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyByCheckingPolynomialRaiseToANumber;
+}
+
+bool SimplificationOfExpression::shouldSimplifyByRationalizingNumerator() const
+{
+    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyByRationalizingNumerator;
+}
+
+bool SimplificationOfExpression::shouldSimplifyByRationalizingDenominator() const
+{
+    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyByRationalizingDenominator;
+}
+
 bool SimplificationOfExpression::isFurtherSimplificationNeeded(
         Expression const& beforeSimplify,
-        Expression const& afterSimplify) const
-{
+        Expression const& afterSimplify) const{
     return beforeSimplify != afterSimplify && !hasNotANumber(afterSimplify);
 }
 
-bool SimplificationOfExpression::didEvenExponentCancellationHappened(
+bool SimplificationOfExpression::doesEvenExponentCancellationHappen(
         TermsWithDetails const& exponents) const
 {
-    bool result(false);
-    Term previousCombinedTerm(1);
+    bool result(false);    Term previousCombinedTerm(1);
     for(TermWithDetails const& exponentWithDetails : exponents)
     {
         Term const& currentExponent(getTermConstReferenceFromSharedPointer(exponentWithDetails.baseTermSharedPointer));
+        // refactor instead of "combine" use currentAccumulatedExponentTerm
         Term currentCombineTerm(1);
         if(TermAssociationType::Positive == exponentWithDetails.association)
-        {
-            currentCombineTerm = previousCombinedTerm*currentExponent;
+        {            currentCombineTerm = previousCombinedTerm*currentExponent;
         }
         else
         {
@@ -128,20 +183,18 @@ bool SimplificationOfExpression::didEvenExponentCancellationHappened(
 
 void SimplificationOfExpression::prepareToACommonDenominatorIfNeeded()
 {
-    if(m_shouldSimplifyToACommonDenominator)
+    if(shouldSimplifyToACommonDenominator())
     {
         simplifyToACommonDenominatorForExpressionAndReturnIfChanged(m_expression);
-    }
-}
+    }}
 
 void SimplificationOfExpression::finalizeToACommonDenominatorIfNeeded()
 {
-    if(m_shouldSimplifyToACommonDenominator)
+    if(shouldSimplifyToACommonDenominator())
     {
-        putNegativeExponentsOnDenominator(m_expression);
+        putTermsWithNegativeExponentsOnDenominator(m_expression);
     }
 }
-
 void SimplificationOfExpression::simplifyExpression()
 {
     Expression beforeSimplify;
@@ -185,11 +238,10 @@ void SimplificationOfExpression::simplifyAndCopyTermsFromAnExpressionAndSetOpera
         TermAssociationType const association)
 {
     OperatorLevel expressionOperatorLevel(expression.getCommonOperatorLevel());
-    if(expression.containsOnlyOneTerm()
+    if(expression.containsOnlyOnePositivelyAssociatedTerm()
             || OperatorLevel::Unknown == m_expression.getCommonOperatorLevel()
             || (expressionOperatorLevel == m_expression.getCommonOperatorLevel()
-                && OperatorLevel::AdditionAndSubtraction == m_expression.getCommonOperatorLevel()
-                && OperatorLevel::MultiplicationAndDivision == m_expression.getCommonOperatorLevel()))
+                && OperatorLevel::AdditionAndSubtraction == m_expression.getCommonOperatorLevel()                && OperatorLevel::MultiplicationAndDivision == m_expression.getCommonOperatorLevel()))
     {
         m_expression.setCommonOperatorLevelIfStillUnknown(expression.getCommonOperatorLevel());
         TermsWithAssociation termsWithAssociation(getTermsWithAssociationAndReverseIfNeeded(expression, association));
@@ -240,11 +292,10 @@ void SimplificationOfExpression::simplifyTermsWithDetailsInExpressionToACommonDe
 bool SimplificationOfExpression::tryToAddSubtractTermsOverTermsAndReturnIfChanged(Expression & addSubtractExpression)
 {
     AdditionAndSubtractionOfTermsOverTerms addSubtractTermsOverTerms;
-    bool shouldTermsOverTermsBeAddedOrSubtracted(false);
+    bool isAddSubtractExpressionUpdateNeeded(false);
     for(TermWithDetails const& addSubtractTermWithDetails : addSubtractExpression.getTermsWithAssociation().getTermsWithDetails())
     {
-        Term const& addSubtractTerm(getTermConstReferenceFromSharedPointer(addSubtractTermWithDetails.baseTermSharedPointer));
-        bool isTermAddedOrSubtracted(false);
+        Term const& addSubtractTerm(getTermConstReferenceFromSharedPointer(addSubtractTermWithDetails.baseTermSharedPointer));        bool isTermAddedOrSubtracted(false);
         if(addSubtractTerm.isExpression())
         {
             Expression const& expression(addSubtractTerm.getExpressionConstReference());
@@ -255,31 +306,30 @@ bool SimplificationOfExpression::tryToAddSubtractTermsOverTermsAndReturnIfChange
                 segregateTermsWithPositiveAndNegativeAssociations(expression.getTermsWithAssociation().getTermsWithDetails(), numerators, denominators);
                 if(!denominators.empty())
                 {
-                    shouldTermsOverTermsBeAddedOrSubtracted=true;
+                    isAddSubtractExpressionUpdateNeeded=true;
                 }
                 addSubtractTermsOverTerms.putAsAddOrSubtraction(TermsOverTerms(numerators, denominators), addSubtractTermWithDetails.association);
-                isTermAddedOrSubtracted=true;
-            }
+                isTermAddedOrSubtracted=true;            }
         }
         if(!isTermAddedOrSubtracted)
         {
             addSubtractTermsOverTerms.putAsAddOrSubtraction(TermsOverTerms({addSubtractTerm}, {}), addSubtractTermWithDetails.association);
         }
     }
-    if(shouldTermsOverTermsBeAddedOrSubtracted)
+    if(isAddSubtractExpressionUpdateNeeded)
     {
         addSubtractExpression=addSubtractTermsOverTerms.getCombinedExpression();
         addSubtractExpression.simplify();
     }
-    return shouldTermsOverTermsBeAddedOrSubtracted;
+    return isAddSubtractExpressionUpdateNeeded;
 }
 
-void SimplificationOfExpression::putNegativeExponentsOnDenominator(Expression & expression)
+void SimplificationOfExpression::putTermsWithNegativeExponentsOnDenominator(Expression & expression)
 {
+    //refactor this its hard to understand
     TermsWithDetails & termsWithDetails(expression.getTermsWithAssociationReference().getTermsWithDetailsReference());
     if((termsWithDetails.size()==1 || expression.getCommonOperatorLevel()==OperatorLevel::MultiplicationAndDivision))
-    {
-        ListOfPolynomialOverPolynomial numeratorsAndDenominatorPolynomials;
+    {        ListOfPolynomialOverPolynomial numeratorsAndDenominatorPolynomials;
         bool isExpressionChanged(false);
         for(TermsWithDetails::iterator it=termsWithDetails.begin(); it!=termsWithDetails.end(); it++)
         {
@@ -287,32 +337,47 @@ void SimplificationOfExpression::putNegativeExponentsOnDenominator(Expression & 
             if(term.isExpression())
             {
                 Expression & subExpression(term.getExpressionReference());
-                putNegativeExponentsOnDenominator(subExpression);
+                putTermsWithNegativeExponentsOnDenominator(subExpression);
             }
             else if(canBeConvertedToPolynomial(term))
             {
                 emplaceToNumeratorsAndDenominators(numeratorsAndDenominatorPolynomials, createPolynomialIfPossible(term), it->association);
-                isExpressionChanged=true;
+                isExpressionChanged = true;
                 termsWithDetails.erase(it);
                 it--;
-            }
-        }
+            }        }
         if(isExpressionChanged)
         {
+            //refactor this and extract
             Expression newExpression(createOrCopyExpressionFromATerm(Term(1)));
             TermsWithDetails termsInNumerator;
-            TermsWithDetails termsInDenominator;
-            segregateTermsWithPositiveAndNegativeAssociations(
+            TermsWithDetails termsInDenominator;            segregateTermsWithPositiveAndNegativeAssociations(
                         expression.getTermsWithAssociation().getTermsWithDetails(),
                         termsInNumerator,
                         termsInDenominator);
-            putNumeratorsInExpression(newExpression, numeratorsAndDenominatorPolynomials);
+            //refactor the shit out of this
+            bool arePolynomialsOneMonomial = numeratorsAndDenominatorPolynomials.size() == 1
+                    && numeratorsAndDenominatorPolynomials.front().getNumerator().isOneMonomial()
+                    && numeratorsAndDenominatorPolynomials.front().getDenominator().isOneMonomial();
+            if(arePolynomialsOneMonomial)
+            {
+                PolynomialOverPolynomial const& pop(numeratorsAndDenominatorPolynomials.front());
+                Monomial monomial(pop.getNumerator().getFirstMonomial());
+                monomial.divideMonomial(pop.getDenominator().getFirstMonomial());
+                newExpression.putTermWithMultiplicationIfNeeded(simplifyAndConvertMonomialToSimplestTerm(monomial));
+            }
+            if(!arePolynomialsOneMonomial)
+            {
+                putNumeratorsInExpression(newExpression, numeratorsAndDenominatorPolynomials);
+            }
             putNumeratorsInExpression(newExpression, termsInNumerator);
-            putDenominatorsInExpression(newExpression, numeratorsAndDenominatorPolynomials);
+            if(!arePolynomialsOneMonomial)
+            {
+                putDenominatorsInExpression(newExpression, numeratorsAndDenominatorPolynomials);
+            }
             putDenominatorsInExpression(newExpression, termsInDenominator);
             expression = newExpression;
-        }
-    }
+        }    }
 }
 
 void SimplificationOfExpression::processTermsBaseOnOperatorLevel(
@@ -359,20 +424,44 @@ void SimplificationOfExpression::processAndSaveTermsForMultiplicationAndDivision
         TermsWithDetails const& termsToProcess)
 {
     TermsWithDetails numeratorsAndDenominators(termsToProcess);
-    if(m_shouldSimplifyByCombiningMonomialAndRadicalExpressions)
+
+    //refactor extract and merge this as a combine step
+    if(shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision())
     {
-        combineMonomialAndFirstRadical(numeratorsAndDenominators);
+        combineRadicalsInMultiplicationAndDivision(numeratorsAndDenominators);
+    }
+    if(shouldSimplifyByCombiningMonomialAndRadicalExpressionsInMultiplicationAndDivision())
+    {
+        combineMonomialAndFirstRadicalInMultiplicationAndDivision(numeratorsAndDenominators);
     }
     TermsWithDetails numerators;
     TermsWithDetails denominators;
     segregateTermsWithPositiveAndNegativeAssociations(numeratorsAndDenominators, numerators, denominators);
     TermsOverTerms termsOverTerms(numerators, denominators);
     termsOverTerms.simplify();
-    m_expression.setTerm(termsOverTerms.getCombinedTerm());
+
+    if(shouldSimplifyByRationalizingNumerator())
+    {
+        RationalizeTermOverTerm rationalizeTermOverTerm(
+                    termsOverTerms.getCombinedNumerator(), termsOverTerms.getCombinedDenominator());
+        rationalizeTermOverTerm.rationalizeNumerator();
+        m_expression.setTerm(rationalizeTermOverTerm.getCombinedTerm());
+    }
+    else if(shouldSimplifyByRationalizingDenominator())
+    {
+        RationalizeTermOverTerm rationalizeTermOverTerm(
+                    termsOverTerms.getCombinedNumerator(), termsOverTerms.getCombinedDenominator());
+        rationalizeTermOverTerm.rationalizeDenominator();
+        m_expression.setTerm(rationalizeTermOverTerm.getCombinedTerm());
+    }
+    else
+    {
+        m_expression.setTerm(termsOverTerms.getCombinedTerm());
+    }
+
 }
 
-void SimplificationOfExpression::processAndSaveTermsForRaiseToPower(
-        TermsWithDetails const& termsToProcess)
+void SimplificationOfExpression::processAndSaveTermsForRaiseToPower(        TermsWithDetails const& termsToProcess)
 {
     if(!termsToProcess.empty())
     {
@@ -389,13 +478,24 @@ void SimplificationOfExpression::processAndSaveTermsForRaiseToPower(
         else
         {
             TermsWithDetails exponents(termsToProcess.cbegin()+1, termsToProcess.cend());
-            if(m_shouldSimplifyEvenExponentsCancellationWithAbsoluteValue
-                    && didEvenExponentCancellationHappened(exponents))
+            if(shouldSimplifyByCheckingPolynomialRaiseToANumber() && canBeConvertedToPolynomial(baseOfRaiseToPower))
+            {
+                PolynomialRaiseToANumber polynomialRaiseToANumber(createPolynomialIfPossible(baseOfRaiseToPower));
+                if(!polynomialRaiseToANumber.isExponentOne())
+                {
+                    baseOfRaiseToPower = polynomialRaiseToANumber.getBase();
+                    exponents.emplace(exponents.begin(), Term(polynomialRaiseToANumber.getExponent()), TermAssociationType::Positive);
+                }
+            }
+            //refactor, extract this
+            // refactor put here factorization??? or just perfect squares or use another construct
+
+            if(shouldSimplifyEvenExponentsCancellationWithAbsoluteValue()
+                    && doesEvenExponentCancellationHappen(exponents))
             {
                 baseOfRaiseToPower=simplifyAndConvertFunctionToSimplestTerm(Functions::abs(createOrCopyExpressionFromATerm(baseOfRaiseToPower)));
             }
-            saveBaseAndExponentsToTerm(combinedTerm, baseOfRaiseToPower, exponents);
-        }
+            saveBaseAndExponentsToTerm(combinedTerm, baseOfRaiseToPower, exponents);        }
         m_expression.setTerm(combinedTerm);
     }
 }
@@ -456,13 +556,66 @@ void SimplificationOfExpression::addOrSubtractTermsWithExpressions(
     accumulateTermsForAdditionAndSubtraction(combinedTerm, additionAndSubtraction.getAsTermsWithDetails());
 }
 
-void SimplificationOfExpression::combineMonomialAndFirstRadical(
+void SimplificationOfExpression::combineRadicalsInMultiplicationAndDivision(
         TermsWithDetails & termsWithDetails)
 {
+    //refactor
+    ListOfTermRaiseToANumber termRaiseToNumbers;
+    termRaiseToNumbers.reserve(termsWithDetails.size());
+    AlbaNumber gcfOfExponents;
+    unsigned int radicalCount(0);
+    bool isFirst(true);
+    for(TermWithDetails const& termWithDetails : termsWithDetails)
+    {
+        Term const& termToConvert(getTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
+        TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromTerm(termToConvert));
+        if(termRaiseToANumber.isRadical())
+        {
+            if(isFirst)
+            {
+                gcfOfExponents = termRaiseToANumber.getExponent();
+                isFirst = false;
+            }
+            else
+            {
+                gcfOfExponents = getGreatestCommonFactorForAlbaNumber(gcfOfExponents, termRaiseToANumber.getExponent());
+            }
+            radicalCount++;
+        }
+        termRaiseToNumbers.emplace_back(termRaiseToANumber);
+    }
+    if(gcfOfExponents != 1 && radicalCount > 1)
+    {
+        Expression combinedRadicalBase;
+        combinedRadicalBase.setCommonOperatorLevel(OperatorLevel::MultiplicationAndDivision);
+        for(unsigned int i=0; i<termRaiseToNumbers.size(); )
+        {
+            TermRaiseToANumber const& termRaiseToNumber(termRaiseToNumbers.at(i));
+            if(termRaiseToNumber.isRadical())
+            {
+                Expression newBaseForRadical(termRaiseToNumber.getBase());
+                newBaseForRadical.putTermWithRaiseToPowerIfNeeded(Term(termRaiseToNumber.getExponent()/gcfOfExponents));
+                combinedRadicalBase.putTerm(Term(newBaseForRadical), termsWithDetails.at(i).association);
+                termRaiseToNumbers.erase(termRaiseToNumbers.begin()+i);
+                termsWithDetails.erase(termsWithDetails.begin()+i);
+            }
+            else
+            {
+                i++;
+            }
+        }
+        combinedRadicalBase.putTermWithRaiseToPowerIfNeeded(Term(gcfOfExponents));
+        termsWithDetails.emplace_back(Term(combinedRadicalBase), TermAssociationType::Positive);
+    }
+}
+
+void SimplificationOfExpression::combineMonomialAndFirstRadicalInMultiplicationAndDivision(
+        TermsWithDetails & termsWithDetails)
+{
+    //refactor
     TermsWithDetails monomials;
     TermsWithDetails remainingTerms;
     segregateMonomialsAndNonMonomials(termsWithDetails, monomials, remainingTerms);
-
     TermsWithDetails::iterator firstRadicalIt = find_if(
                 remainingTerms.begin(), remainingTerms.end(),
                 [](TermWithDetails const& remainingTerm)

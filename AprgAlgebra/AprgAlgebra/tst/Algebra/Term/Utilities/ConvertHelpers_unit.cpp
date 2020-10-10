@@ -157,14 +157,16 @@ TEST(ConvertHelpersTest, ConvertExpressionToSimplestTermWorks)
     Term termToVerify1(convertExpressionToSimplestTerm(createExpressionIfPossible({})));
     Term termToVerify2(convertExpressionToSimplestTerm(createExpressionIfPossible({Term(156)})));
     Term termToVerify3(convertExpressionToSimplestTerm(createExpressionIfPossible({Term(Monomial(444, {}))})));
+    Term termToVerify4(convertExpressionToSimplestTerm(createExpressionIfPossible({Term(1), Term("/"), Term(Monomial(444, {}))})));
 
     EXPECT_EQ(Term(), termToVerify1);
     EXPECT_EQ(Term(156), termToVerify2);
     EXPECT_EQ(Term(444), termToVerify3);
+    Term termToExpect4(createExpressionIfPossible({Term(1), Term("/"), Term(Monomial(444, {}))}));
+    EXPECT_EQ(termToExpect4, termToVerify4);
 }
 
-TEST(ConvertHelpersTest, ConvertFunctionToSimplestTermWorks)
-{
+TEST(ConvertHelpersTest, ConvertFunctionToSimplestTermWorks){
     Function function1;
     Function function2("functionName", Term(5), [](AlbaNumber const&  number) -> AlbaNumber
     {

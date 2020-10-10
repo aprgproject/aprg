@@ -2,11 +2,9 @@
 
 #include <Algebra/Limit/LimitsAtInfinity/DegreeOnlyMutator.hpp>
 #include <Algebra/Limit/LimitsAtInfinity/RemoveMonomialsWithNegativeExponentMutator.hpp>
-#include <Algebra/Simplification/SimplificationMutator.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 
 #include <string>
-
 namespace alba
 {
 
@@ -27,10 +25,10 @@ private:
     void simplify();
     void simplifyAsATerm();
     void simplifyAsTermsOverTermsIfPossible();
+    void simplifyByCombiningRadicals(Term & term) const;
     void simplifyPolynomialToMaxDegreeMonomialOnly();
     AlbaNumber getMaxDegree(Term const& term);
-    AlbaNumber getDegreeToRemove(
-            AlbaNumber const& numeratorDegree,
+    AlbaNumber getDegreeToRemove(            AlbaNumber const& numeratorDegree,
             AlbaNumber const& denominatorDegree);
 
     Term m_simplifiedTermAtInfinity;
@@ -38,9 +36,7 @@ private:
     bool m_isSimplifiedDenominatorZero;
     DegreeOnlyMutator m_degreeOnlyMutator;
     RemoveMonomialsWithNegativeExponentMutator m_removeMonomialsWithNegativeExponentMutator;
-    Simplification::SimplificationMutator m_simplificationMutator;
 };
 
 }
-
 }

@@ -66,13 +66,13 @@ bool Expression::isEmpty() const
     return m_termsWithAssociation.isEmpty();
 }
 
-bool Expression::containsOnlyOneTerm() const
+bool Expression::containsOnlyOnePositivelyAssociatedTerm() const
 {
-    return 1 == m_termsWithAssociation.getSize();
+    return 1 == m_termsWithAssociation.getSize()
+            && getFirstAssociationType() == TermAssociationType::Positive;
 }
 
-OperatorLevel Expression::getCommonOperatorLevel() const
-{
+OperatorLevel Expression::getCommonOperatorLevel() const{
     return m_commonOperatorLevel;
 }
 
@@ -81,10 +81,14 @@ BaseTerm const& Expression::getFirstTermConstReference() const
     return m_termsWithAssociation.getFirstTermConstReference();
 }
 
+TermAssociationType Expression::getFirstAssociationType() const
+{
+    return m_termsWithAssociation.getFirstAssociationType();
+}
+
 TermsWithAssociation const& Expression::getTermsWithAssociation() const
 {
-    return m_termsWithAssociation;
-}
+    return m_termsWithAssociation;}
 
 TermsWithAssociation & Expression::getTermsWithAssociationReference()
 {
@@ -173,11 +177,10 @@ void Expression::putTermWithAdditionIfNeeded(BaseTerm const& baseTerm)
     if(!willHaveNoEffectOnAdditionOrSubtraction(term))
     {
         if(isEmpty()
-                || (containsOnlyOneTerm()
+                || (containsOnlyOnePositivelyAssociatedTerm()
                  && willHaveNoEffectOnAdditionOrSubtraction(getTermConstReferenceFromBaseTerm(getFirstTermConstReference()))))
         {
-            setTerm(baseTerm);
-        }
+            setTerm(baseTerm);        }
         else
         {
             putTermWithAddition(baseTerm);
@@ -191,11 +194,10 @@ void Expression::putTermWithSubtractionIfNeeded(BaseTerm const& baseTerm)
     if(!willHaveNoEffectOnAdditionOrSubtraction(term))
     {
         if(isEmpty()
-                || (containsOnlyOneTerm()
+                || (containsOnlyOnePositivelyAssociatedTerm()
                  && willHaveNoEffectOnAdditionOrSubtraction(getTermConstReferenceFromBaseTerm(getFirstTermConstReference()))))
         {
-            clear();
-            m_commonOperatorLevel = OperatorLevel::AdditionAndSubtraction;
+            clear();            m_commonOperatorLevel = OperatorLevel::AdditionAndSubtraction;
             putTermForExpressionAndNonExpressions(baseTerm, TermAssociationType::Negative);
         }
         else
@@ -211,11 +213,10 @@ void Expression::putTermWithMultiplicationIfNeeded(BaseTerm const& baseTerm)
     if(!willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(term))
     {
         if(isEmpty()
-                || (containsOnlyOneTerm()
+                || (containsOnlyOnePositivelyAssociatedTerm()
                  && willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(getTermConstReferenceFromBaseTerm(getFirstTermConstReference()))))
         {
-            setTerm(baseTerm);
-        }
+            setTerm(baseTerm);        }
         else
         {
             putTermWithMultiplication(baseTerm);
@@ -229,11 +230,10 @@ void Expression::putTermWithDivisionIfNeeded(BaseTerm const& baseTerm)
     if(!willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(term))
     {
         if(isEmpty()
-                || (containsOnlyOneTerm()
+                || (containsOnlyOnePositivelyAssociatedTerm()
                  && willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(getTermConstReferenceFromBaseTerm(getFirstTermConstReference()))))
         {
-            clear();
-            m_commonOperatorLevel = OperatorLevel::MultiplicationAndDivision;
+            clear();            m_commonOperatorLevel = OperatorLevel::MultiplicationAndDivision;
             putTermForExpressionAndNonExpressions(baseTerm, TermAssociationType::Negative);
         }
         else
@@ -329,10 +329,21 @@ void Expression::putTermsWithDetails(TermsWithDetails const& termsToSave)
     }
 }
 
+void Expression::putTerm(BaseTerm const& baseTerm, TermAssociationType const overallAssociation)
+{
+    if(TermAssociationType::Positive == overallAssociation)
+    {
+        m_termsWithAssociation.putTermWithPositiveAssociation(baseTerm);
+    }
+    else if(TermAssociationType::Negative == overallAssociation)
+    {
+        m_termsWithAssociation.putTermWithNegativeAssociation(baseTerm);
+    }
+}
+
 void Expression::reverseTheAssociationOfTheTerms()
 {
-    m_termsWithAssociation.reverseTheAssociationOfTheTerms();
-}
+    m_termsWithAssociation.reverseTheAssociationOfTheTerms();}
 
 void Expression::set(OperatorLevel const operatorLevel, TermsWithAssociation const& termsWithPriorityAndAssociation)
 {
@@ -533,22 +544,9 @@ void Expression::putTermWithRaiseToPowerForExpressionAndNonExpressions(
     }
 }
 
-void Expression::putTerm(BaseTerm const& baseTerm, TermAssociationType const overallAssociation)
-{
-    if(TermAssociationType::Positive == overallAssociation)
-    {
-        m_termsWithAssociation.putTermWithPositiveAssociation(baseTerm);
-    }
-    else if(TermAssociationType::Negative == overallAssociation)
-    {
-        m_termsWithAssociation.putTermWithNegativeAssociation(baseTerm);
-    }
-}
-
 void Expression::putTermsWithAssociation(TermsWithAssociation const& termsWithAssociation, TermAssociationType const overallAssociation)
 {
-    TermsWithAssociation newTermsWithAssociation(termsWithAssociation);
-    if(TermAssociationType::Negative == overallAssociation)
+    TermsWithAssociation newTermsWithAssociation(termsWithAssociation);    if(TermAssociationType::Negative == overallAssociation)
     {
         newTermsWithAssociation.reverseTheAssociationOfTheTerms();
     }
