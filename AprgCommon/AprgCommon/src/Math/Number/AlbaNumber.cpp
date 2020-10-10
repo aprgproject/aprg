@@ -79,7 +79,8 @@ void AlbaNumber::ScopeObject::setInThisScopeThisConfiguration(
 
 void AlbaNumber::ScopeObject::setInThisScopeTheTolerancesToZero() const
 {
-    AlbaNumber::Configuration::getInstance().setConfigurationTolerancesToZero();}
+    AlbaNumber::Configuration::getInstance().setConfigurationTolerancesToZero();
+}
 
 void AlbaNumber::ScopeObject::setInThisScopeTheValuesBack() const
 {

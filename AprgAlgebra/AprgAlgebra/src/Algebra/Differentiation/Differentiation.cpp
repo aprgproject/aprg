@@ -10,7 +10,8 @@
 using namespace alba::algebra::Simplification;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace algebra
 {
@@ -49,7 +50,8 @@ Term getDerivativeByDefinition(
     simplifyDerivativeByDefinition(derivativeDefinition);
 
     Term limitAtPositiveSide(simplifyAndGetLimitAtAValue(derivativeDefinition, deltaXName, 0, LimitAtAValueApproachType::PositiveSide));
-    Term limitAtNegativeSide(simplifyAndGetLimitAtAValue(derivativeDefinition, deltaXName, 0, LimitAtAValueApproachType::NegativeSide));    if(limitAtPositiveSide.isConstant() && limitAtNegativeSide.isConstant())
+    Term limitAtNegativeSide(simplifyAndGetLimitAtAValue(derivativeDefinition, deltaXName, 0, LimitAtAValueApproachType::NegativeSide));
+    if(limitAtPositiveSide.isConstant() && limitAtNegativeSide.isConstant())
     {
         if(limitAtPositiveSide.getConstantValueConstReference().isPositiveOrNegativeInfinity()
                 && limitAtPositiveSide.getConstantValueConstReference().isPositiveOrNegativeInfinity())

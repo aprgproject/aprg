@@ -108,6 +108,7 @@ TEST(TermsAggregatorTest, BuildExpressionFromTermsWorksOnNegativeFractionInParen
 TEST(TermsAggregatorTest, SimplifyWorksWithNoTerms)
 {
     TermsAggregator aggregator({});
+
     aggregator.simplifyTerms();
 
     Terms termsToVerify(aggregator.getTermsConstReference());

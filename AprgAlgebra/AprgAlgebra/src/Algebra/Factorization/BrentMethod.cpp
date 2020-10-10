@@ -80,7 +80,8 @@ void BrentMethod::runOneIteration()
     scopeObject.setInThisScopeTheTolerancesToZero();
 
     if(isAlmostEqualForBrentMethod(calculate(m_values.s), 0))
-    {        m_values.solutionOptional.setValue(m_values.s);
+    {
+        m_values.solutionOptional.setValue(m_values.s);
         return;
     }
     if(isAlmostEqualForBrentMethod(calculate(m_values.b), 0))

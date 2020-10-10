@@ -287,7 +287,8 @@ void Polynomial::raiseToUnsignedInteger(unsigned int const exponent)
 
 bool Polynomial::isFurtherSimplificationNeeded(
         Polynomial const& beforeSimplify,
-        Polynomial const& afterSimplify) const{
+        Polynomial const& afterSimplify) const
+{
     return beforeSimplify != afterSimplify && !hasNotANumber(afterSimplify);
 }
 

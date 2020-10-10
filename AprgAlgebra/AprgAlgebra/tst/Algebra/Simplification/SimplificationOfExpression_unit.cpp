@@ -566,6 +566,7 @@ TEST(SimplificationOfExpressionTest, SimplifyToACommonDenominatorWorks)
     SimplificationOfExpression simplification(expressionToTest);
 
     simplification.simplify();
+
     Expression expressionToVerify(simplification.getExpression());
     Expression expressionToExpect(
                 createExpressionIfPossible(
@@ -615,6 +616,7 @@ TEST(SimplificationOfExpressionTest, SimplifyToACommonDenominatorWorksOnExponent
     SimplificationOfExpression simplification(expressionToTest);
 
     simplification.simplify();
+
     Expression expressionToVerify(simplification.getExpression());
     Polynomial polynomialToExpect{Monomial(1, {{"x", 1}}), Monomial(2, {})};
     Expression subExpression1(createExpressionIfPossible({Term(2), Term("^"), Term("x")}));
@@ -637,6 +639,7 @@ TEST(SimplificationOfExpressionTest, SimplifyToACommonDenominatorWorksOnExponent
     SimplificationOfExpression simplification(expressionToTest);
 
     simplification.simplify();
+
     Expression expressionToVerify(simplification.getExpression());
     Polynomial polynomialToExpect{Monomial(1, {{"x", 2}}), Monomial(-4, {})};
     Expression subExpression(createExpressionIfPossible({Term(Monomial(2, {{"x", 1}})), Term("/"), Term(polynomialToExpect)}));
@@ -678,6 +681,7 @@ TEST(ExpressionTest, SimplifyToACommonDenominatorMaintainsCorrectnessOfExpressio
     SimplificationOfExpression simplification(expressionToTest);
 
     simplification.simplify();
+
     Expression expressionToVerify(simplification.getExpression());
     Expression expressionToExpect(
                 createExpressionIfPossible(
@@ -703,6 +707,7 @@ TEST(SimplificationOfExpressionTest, SimplifyToACommonDenominatorWorksOnRaiseToP
 
     simplification1.simplify();
     simplification2.simplify();
+
     Expression expressionToVerify1(simplification1.getExpression());
     Expression expressionToVerify2(simplification2.getExpression());
     Expression expressionToExpect1(createExpressionIfPossible({Term(1)}));
@@ -868,7 +873,8 @@ TEST(SimplificationOfExpressionTest, SimplifyByCombiningRadicalsInMultiplication
 
 TEST(SimplificationOfExpressionTest, ZeroOverZeroResultsToNanAndDoesNotCrash)
 {
-    Expression expression(createExpressionIfPossible(    {Term(Constant(0)), Term("/"), Term(Constant(0))}));
+    Expression expression(createExpressionIfPossible(
+    {Term(Constant(0)), Term("/"), Term(Constant(0))}));
     SimplificationOfExpression simplification(expression);
 
     simplification.simplify();

@@ -12,7 +12,8 @@ using namespace alba::algebra::Factorization;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace algebra
 {
@@ -117,7 +118,8 @@ Polynomial raiseBinomialToAPowerUsingBinomialExpansion(
             firstPart.multiplyNumber(AlbaNumber(getValueAtPascalTriangle(power, i)));
             firstPart.simplify();
             result.addMonomial(firstPart);
-        }    }
+        }
+    }
     result.simplify();
     return result;
 }

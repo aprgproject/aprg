@@ -72,7 +72,8 @@ TEST(MonomialHelpersTest, DoesCoefficientsHaveSameSignWorks)
 
 TEST(MonomialHelpersTest, HasNegativeExponentsWorks)
 {
-    EXPECT_FALSE(hasNegativeExponents(Monomial()));    EXPECT_FALSE(hasNegativeExponents(Monomial(23, {})));
+    EXPECT_FALSE(hasNegativeExponents(Monomial()));
+    EXPECT_FALSE(hasNegativeExponents(Monomial(23, {})));
     EXPECT_FALSE(hasNegativeExponents(Monomial(-23, {})));
     EXPECT_FALSE(hasNegativeExponents(Monomial(-54, {{"x", 6}})));
     EXPECT_TRUE(hasNegativeExponents(Monomial(-54, {{"x", -6}})));

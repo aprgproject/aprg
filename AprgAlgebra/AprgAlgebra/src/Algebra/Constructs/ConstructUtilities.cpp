@@ -8,8 +8,6 @@
 #include <Optional/AlbaOptional.hpp>
 
 using namespace std;
-using TermWithDetails=alba::algebra::TermsWithAssociation::TermWithDetails;
-using TermsWithDetails=alba::algebra::TermsWithAssociation::TermsWithDetails;
 
 namespace alba
 {
@@ -120,7 +118,8 @@ TermRaiseToANumber createTermRaiseToANumberFromTerm(Term const& term)
                 : getGcfOfExponentsInMonomial(newMonomial);
         newMonomial.raiseToPowerNumber(AlbaNumber(1)/exponent);
         resultDetailsOptional.setConstReference({Term(newMonomial), exponent});
-    }    else if(simplifiedTerm.isExpression())
+    }
+    else if(simplifiedTerm.isExpression())
     {
         Expression const& expression(simplifiedTerm.getExpressionConstReference());
         if(OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel())

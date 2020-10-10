@@ -7,6 +7,7 @@
 
 namespace alba
 {
+
 namespace algebra
 {
 
@@ -74,15 +75,16 @@ private:
             Expression const& beforeSimplify,
             Expression const& afterSimplify) const;
     bool doesEvenExponentCancellationHappen(
-            TermsWithAssociation::TermsWithDetails const& exponents) const;
+            TermsWithDetails const& exponents) const;
     void prepareToACommonDenominatorIfNeeded();
     void finalizeToACommonDenominatorIfNeeded();
+
     void simplifyExpression();
     void simplifyAndCopyTerms(
-            TermsWithAssociation::TermsWithDetails & termsToUpdate,
-            TermsWithAssociation::TermsWithDetails const& termsToCheck);
+            TermsWithDetails & termsToUpdate,
+            TermsWithDetails const& termsToCheck);
     void simplifyAndCopyTermsFromAnExpressionAndSetOperatorLevelIfNeeded(
-            TermsWithAssociation::TermsWithDetails & termsToUpdate,
+            TermsWithDetails & termsToUpdate,
             Expression const& expression,
             TermAssociationType const association);
     bool simplifyToACommonDenominatorForExpressionAndReturnIfChanged(Expression & expression);
@@ -91,40 +93,43 @@ private:
     void putTermsWithNegativeExponentsOnDenominator(Expression & expression);
 
     void processTermsBaseOnOperatorLevel(
-            TermsWithAssociation::TermsWithDetails const& termsToProcess);    void processAndSaveTermsForAdditionAndSubtraction(
-            TermsWithAssociation::TermsWithDetails const& termsToProcess);
+            TermsWithDetails const& termsToProcess);
+    void processAndSaveTermsForAdditionAndSubtraction(
+            TermsWithDetails const& termsToProcess);
     void processAndSaveTermsForMultiplicationAndDivision(
-            TermsWithAssociation::TermsWithDetails const& termsToProcess);
+            TermsWithDetails const& termsToProcess);
     void processAndSaveTermsForRaiseToPower(
-            TermsWithAssociation::TermsWithDetails const& termsToProcess);
+            TermsWithDetails const& termsToProcess);
 
     void putNumeratorsInExpression(
             Expression& expression,
             ListOfPolynomialOverPolynomial const& numeratorsAndDenominators);
     void putNumeratorsInExpression(
             Expression& expression,
-            TermsWithAssociation::TermsWithDetails const& numerators);
+            TermsWithDetails const& numerators);
     void putDenominatorsInExpression(
             Expression& expression,
             ListOfPolynomialOverPolynomial const& numeratorsAndDenominators);
     void putDenominatorsInExpression(
             Expression& expression,
-            TermsWithAssociation::TermsWithDetails const& denominators);
+            TermsWithDetails const& denominators);
 
     //functions for addition/subtraction
     void addOrSubtractTermsWithExpressions(
-            Term & combinedTerm,            TermsWithAssociation::TermsWithDetails const& termsWithExpressions) const;
+            Term & combinedTerm,
+            TermsWithDetails const& termsWithExpressions) const;
 
     //functions for multiplication/division
     void combineRadicalsInMultiplicationAndDivision(
-            TermsWithAssociation::TermsWithDetails & termsWithDetails);
+            TermsWithDetails & termsWithDetails);
     void combineMonomialAndFirstRadicalInMultiplicationAndDivision(
-            TermsWithAssociation::TermsWithDetails & termsWithDetails);
+            TermsWithDetails & termsWithDetails);
 
     //functions for raise to power
-    void saveBaseAndExponentsToTerm(            Term & combinedTerm,
+    void saveBaseAndExponentsToTerm(
+            Term & combinedTerm,
             Term const& baseOfRaiseToPower,
-            TermsWithAssociation::TermsWithDetails const& exponents);
+            TermsWithDetails const& exponents);
 
     // other functions
     TermsWithAssociation getTermsWithAssociationAndReverseIfNeeded(
@@ -139,6 +144,7 @@ private:
 };
 
 }
+
 }
 
 }

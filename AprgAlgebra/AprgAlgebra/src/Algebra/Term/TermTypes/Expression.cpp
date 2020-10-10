@@ -13,8 +13,6 @@
 
 using namespace alba::algebra::Simplification;
 using namespace std;
-using TermWithDetails=alba::algebra::TermsWithAssociation::TermWithDetails;
-using TermsWithDetails=alba::algebra::TermsWithAssociation::TermsWithDetails;
 
 namespace alba
 {
@@ -72,7 +70,8 @@ bool Expression::containsOnlyOnePositivelyAssociatedTerm() const
             && getFirstAssociationType() == TermAssociationType::Positive;
 }
 
-OperatorLevel Expression::getCommonOperatorLevel() const{
+OperatorLevel Expression::getCommonOperatorLevel() const
+{
     return m_commonOperatorLevel;
 }
 
@@ -88,7 +87,8 @@ TermAssociationType Expression::getFirstAssociationType() const
 
 TermsWithAssociation const& Expression::getTermsWithAssociation() const
 {
-    return m_termsWithAssociation;}
+    return m_termsWithAssociation;
+}
 
 TermsWithAssociation & Expression::getTermsWithAssociationReference()
 {
@@ -180,7 +180,8 @@ void Expression::putTermWithAdditionIfNeeded(BaseTerm const& baseTerm)
                 || (containsOnlyOnePositivelyAssociatedTerm()
                  && willHaveNoEffectOnAdditionOrSubtraction(getTermConstReferenceFromBaseTerm(getFirstTermConstReference()))))
         {
-            setTerm(baseTerm);        }
+            setTerm(baseTerm);
+        }
         else
         {
             putTermWithAddition(baseTerm);
@@ -197,7 +198,8 @@ void Expression::putTermWithSubtractionIfNeeded(BaseTerm const& baseTerm)
                 || (containsOnlyOnePositivelyAssociatedTerm()
                  && willHaveNoEffectOnAdditionOrSubtraction(getTermConstReferenceFromBaseTerm(getFirstTermConstReference()))))
         {
-            clear();            m_commonOperatorLevel = OperatorLevel::AdditionAndSubtraction;
+            clear();
+            m_commonOperatorLevel = OperatorLevel::AdditionAndSubtraction;
             putTermForExpressionAndNonExpressions(baseTerm, TermAssociationType::Negative);
         }
         else
@@ -216,7 +218,8 @@ void Expression::putTermWithMultiplicationIfNeeded(BaseTerm const& baseTerm)
                 || (containsOnlyOnePositivelyAssociatedTerm()
                  && willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(getTermConstReferenceFromBaseTerm(getFirstTermConstReference()))))
         {
-            setTerm(baseTerm);        }
+            setTerm(baseTerm);
+        }
         else
         {
             putTermWithMultiplication(baseTerm);
@@ -233,7 +236,8 @@ void Expression::putTermWithDivisionIfNeeded(BaseTerm const& baseTerm)
                 || (containsOnlyOnePositivelyAssociatedTerm()
                  && willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(getTermConstReferenceFromBaseTerm(getFirstTermConstReference()))))
         {
-            clear();            m_commonOperatorLevel = OperatorLevel::MultiplicationAndDivision;
+            clear();
+            m_commonOperatorLevel = OperatorLevel::MultiplicationAndDivision;
             putTermForExpressionAndNonExpressions(baseTerm, TermAssociationType::Negative);
         }
         else
@@ -343,7 +347,8 @@ void Expression::putTerm(BaseTerm const& baseTerm, TermAssociationType const ove
 
 void Expression::reverseTheAssociationOfTheTerms()
 {
-    m_termsWithAssociation.reverseTheAssociationOfTheTerms();}
+    m_termsWithAssociation.reverseTheAssociationOfTheTerms();
+}
 
 void Expression::set(OperatorLevel const operatorLevel, TermsWithAssociation const& termsWithPriorityAndAssociation)
 {
@@ -546,7 +551,8 @@ void Expression::putTermWithRaiseToPowerForExpressionAndNonExpressions(
 
 void Expression::putTermsWithAssociation(TermsWithAssociation const& termsWithAssociation, TermAssociationType const overallAssociation)
 {
-    TermsWithAssociation newTermsWithAssociation(termsWithAssociation);    if(TermAssociationType::Negative == overallAssociation)
+    TermsWithAssociation newTermsWithAssociation(termsWithAssociation);
+    if(TermAssociationType::Negative == overallAssociation)
     {
         newTermsWithAssociation.reverseTheAssociationOfTheTerms();
     }

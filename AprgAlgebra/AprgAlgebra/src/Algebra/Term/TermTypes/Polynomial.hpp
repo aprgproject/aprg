@@ -47,7 +47,8 @@ public:
     void raiseToUnsignedInteger(unsigned int const exponent);
 
 private:
-    bool isFurtherSimplificationNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify) const;    void simplifyMonomialsAndReAdd();
+    bool isFurtherSimplificationNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify) const;
+    void simplifyMonomialsAndReAdd();
     Monomials m_monomials;
 };
 

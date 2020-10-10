@@ -5,6 +5,7 @@
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
 #include <Math/AlbaMathHelper.hpp>
+
 using namespace alba::algebra::Simplification;
 using namespace alba::mathHelper;
 using namespace std;
@@ -159,7 +160,8 @@ AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
     scopeObject.setInThisScopeTheTolerancesToZero();
 
     SubstitutionOfVariablesToValues substitution;
-    AlbaNumber currentInput(initialValueForIteration);    AlbaNumber previousAcceptedInput(currentInput);
+    AlbaNumber currentInput(initialValueForIteration);
+    AlbaNumber previousAcceptedInput(currentInput);
     AlbaNumber previousPreviousAcceptedInput(currentInput);
     AlbaNumber previousRejectedInput(valueToApproach);
     for(unsigned int i=0; i<maxNumberOfIterations && currentInput != previousRejectedInput; i++)
@@ -206,7 +208,8 @@ AlbaNumber getLimitAtAValueUsingTrendOfValues(
     scopeObject.setInThisScopeTheTolerancesToZero();
 
     AlbaNumber result(AlbaNumber::Value::NotANumber);
-    SubstitutionOfVariablesToValues substitution;    substitution.putVariableWithValue(variableName, valueToApproach);
+    SubstitutionOfVariablesToValues substitution;
+    substitution.putVariableWithValue(variableName, valueToApproach);
     Term outputTermAtValueToApproach(substitution.performSubstitutionTo(term));
     substitution.putVariableWithValue(variableName, previousAcceptedInput);
     Term previousAcceptedOutputTerm(substitution.performSubstitutionTo(term));
@@ -294,6 +297,7 @@ Term simplifyTermForLimit(Term const& term)
 
     return simplifiedTerm;
 }
+
 Term simplifyAndGetLimitAtAValue(
         Term const& term,
         string const& variableName,

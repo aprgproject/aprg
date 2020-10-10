@@ -134,7 +134,8 @@ TEST(AlbaNumberScopeObjectTest, SetInThisScopeConfigurationWorksAtDefaultValuesA
 
 TEST(AlbaNumberScopeObjectTest, SetInThisScopeTheTolerancesToZeroWorksAtDefaultValuesAndValuesAreSetBack)
 {
-    AlbaNumber number1(3.01);    AlbaNumber number2(3.0000000000001);
+    AlbaNumber number1(3.01);
+    AlbaNumber number2(3.0000000000001);
     EXPECT_TRUE(number1.isDoubleType());
     EXPECT_DOUBLE_EQ(3.01, number1.getDouble());
     EXPECT_TRUE(number2.isIntegerType());

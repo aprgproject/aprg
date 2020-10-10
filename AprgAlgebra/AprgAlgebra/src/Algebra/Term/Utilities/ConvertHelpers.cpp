@@ -106,7 +106,8 @@ Term convertExpressionToSimplestTerm(Expression const& expression)
     else if(expression.containsOnlyOnePositivelyAssociatedTerm())
     {
         Term const& term = dynamic_cast<Term const&>(expression.getFirstTermConstReference());
-        newTerm = term;        newTerm.simplify();
+        newTerm = term;
+        newTerm.simplify();
     }
     return newTerm;
 }
