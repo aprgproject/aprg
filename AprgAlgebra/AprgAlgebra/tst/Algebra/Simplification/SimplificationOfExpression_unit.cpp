@@ -757,7 +757,7 @@ TEST(SimplificationOfExpressionTest, SimplifyByCombiningMonomialAndRadicalExpres
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
                 SimplificationOfExpression::getDefaultConfigurationDetails());
-    configurationDetails.shouldSimplifyByCombiningMonomialAndRadicalExpressionsInMultiplicationAndDivision = false;
+    configurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = false;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
@@ -777,7 +777,7 @@ TEST(SimplificationOfExpressionTest, SimplifyByCombiningMonomialAndRadicalExpres
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
                 SimplificationOfExpression::getDefaultConfigurationDetails());
-    configurationDetails.shouldSimplifyByCombiningMonomialAndRadicalExpressionsInMultiplicationAndDivision = true;
+    configurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = true;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
@@ -812,7 +812,7 @@ TEST(SimplificationOfExpressionTest, SimplifyByCombiningMonomialAndRadicalExpres
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
                 SimplificationOfExpression::getDefaultConfigurationDetails());
-    configurationDetails.shouldSimplifyByCombiningMonomialAndRadicalExpressionsInMultiplicationAndDivision = false;
+    configurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = false;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
@@ -832,7 +832,7 @@ TEST(SimplificationOfExpressionTest, SimplifyByCombiningMonomialAndRadicalExpres
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
                 SimplificationOfExpression::getDefaultConfigurationDetails());
-    configurationDetails.shouldSimplifyByCombiningMonomialAndRadicalExpressionsInMultiplicationAndDivision = true;
+    configurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = true;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
@@ -854,7 +854,6 @@ TEST(SimplificationOfExpressionTest, SimplifyByCombiningRadicalsInMultiplication
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
                 SimplificationOfExpression::getDefaultConfigurationDetails());
     configurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = true;
-    configurationDetails.shouldSimplifyByCombiningMonomialAndRadicalExpressionsInMultiplicationAndDivision = true;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 

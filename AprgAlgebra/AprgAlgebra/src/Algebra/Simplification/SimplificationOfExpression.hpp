@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Algebra/Constructs/PolynomialOverPolynomial.hpp>
+#include <Algebra/Constructs/TermsOverTerms.hpp>
 #include <Algebra/Term/TermTypes/Expression.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 #include <Container/AlbaSingleton.hpp>
@@ -23,7 +24,6 @@ public:
         bool shouldSimplifyToACommonDenominator;
         bool shouldSimplifyEvenExponentsCancellationWithAbsoluteValue;
         bool shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision;
-        bool shouldSimplifyByCombiningMonomialAndRadicalExpressionsInMultiplicationAndDivision;
         bool shouldSimplifyByCheckingPolynomialRaiseToANumber;
         bool shouldSimplifyByRationalizingNumerator;
         bool shouldSimplifyByRationalizingDenominator;
@@ -67,30 +67,22 @@ private:
     bool shouldSimplifyToACommonDenominator() const;
     bool shouldSimplifyEvenExponentsCancellationWithAbsoluteValue() const;
     bool shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision() const;
-    bool shouldSimplifyByCombiningMonomialAndRadicalExpressionsInMultiplicationAndDivision() const;
     bool shouldSimplifyByCheckingPolynomialRaiseToANumber() const;
     bool shouldSimplifyByRationalizingNumerator() const;
     bool shouldSimplifyByRationalizingDenominator() const;
     bool isFurtherSimplificationNeeded(
             Expression const& beforeSimplify,
             Expression const& afterSimplify) const;
-    bool doesEvenExponentCancellationHappen(
-            TermsWithDetails const& exponents) const;
-    void prepareToACommonDenominatorIfNeeded();
-    void finalizeToACommonDenominatorIfNeeded();
 
     void simplifyExpression();
-    void simplifyAndCopyTerms(
+    void simplifyAndCopyTermsAndDetermineOperatorLevel(
             TermsWithDetails & termsToUpdate,
             TermsWithDetails const& termsToCheck);
     void simplifyAndCopyTermsFromAnExpressionAndSetOperatorLevelIfNeeded(
             TermsWithDetails & termsToUpdate,
             Expression const& expression,
             TermAssociationType const association);
-    bool simplifyToACommonDenominatorForExpressionAndReturnIfChanged(Expression & expression);
-    void simplifyTermsWithDetailsInExpressionToACommonDenominator(Expression & expression);
-    bool tryToAddSubtractTermsOverTermsAndReturnIfChanged(Expression & addSubtractExpression);
-    void putTermsWithNegativeExponentsOnDenominator(Expression & expression);
+    void simplifyToACommonDenominatorIfNeeded();
 
     void processTermsBaseOnOperatorLevel(
             TermsWithDetails const& termsToProcess);
@@ -101,44 +93,23 @@ private:
     void processAndSaveTermsForRaiseToPower(
             TermsWithDetails const& termsToProcess);
 
-    void putNumeratorsInExpression(
-            Expression& expression,
-            ListOfPolynomialOverPolynomial const& numeratorsAndDenominators);
-    void putNumeratorsInExpression(
-            Expression& expression,
-            TermsWithDetails const& numerators);
-    void putDenominatorsInExpression(
-            Expression& expression,
-            ListOfPolynomialOverPolynomial const& numeratorsAndDenominators);
-    void putDenominatorsInExpression(
-            Expression& expression,
-            TermsWithDetails const& denominators);
-
     //functions for addition/subtraction
     void addOrSubtractTermsWithExpressions(
             Term & combinedTerm,
             TermsWithDetails const& termsWithExpressions) const;
 
     //functions for multiplication/division
-    void combineRadicalsInMultiplicationAndDivision(
-            TermsWithDetails & termsWithDetails);
-    void combineMonomialAndFirstRadicalInMultiplicationAndDivision(
-            TermsWithDetails & termsWithDetails);
+    void simplifyByCombiningRadicalsInMultiplicationAndDivisionIfNeeded(
+            TermsWithDetails & numeratorsAndDenominators) const;
+    Term getCombinedTermAndSimplifyByRationalizingNumeratorOrDenominatorIfNeeded(
+            TermsOverTerms const& termsOverTerms) const;
 
     //functions for raise to power
-    void saveBaseAndExponentsToTerm(
-            Term & combinedTerm,
-            Term const& baseOfRaiseToPower,
-            TermsWithDetails const& exponents);
 
     // other functions
     TermsWithAssociation getTermsWithAssociationAndReverseIfNeeded(
             Expression const& expression,
             TermAssociationType const association);
-    void emplaceToNumeratorsAndDenominators(
-            ListOfPolynomialOverPolynomial & numeratorsAndDenominators,
-            Polynomial const& polynomial,
-            TermAssociationType const termAssociationType);
 
     Expression m_expression;
 };

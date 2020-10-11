@@ -79,7 +79,6 @@ void LimitsAtInfinity::simplifyByCombiningRadicals(Term & term) const
     SimplificationOfExpression::ConfigurationDetails limitAtInfinityConfigurationDetails(
                 SimplificationOfExpression::getDefaultConfigurationDetails());
     limitAtInfinityConfigurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = true;
-    limitAtInfinityConfigurationDetails.shouldSimplifyByCombiningMonomialAndRadicalExpressionsInMultiplicationAndDivision = true;
 
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(limitAtInfinityConfigurationDetails);

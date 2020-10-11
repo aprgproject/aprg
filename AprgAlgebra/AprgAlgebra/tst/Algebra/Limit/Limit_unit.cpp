@@ -121,7 +121,7 @@ TEST(LimitTest, GetLimitAtAValueUsingTrendOfValuesWorks)
 
     EXPECT_EQ(AlbaNumber(AlbaNumber::Value::PositiveInfinity), getLimitAtAValueUsingTrendOfValues(constantOverPolynomialTerm, "x", 2, 3, 4));
     EXPECT_EQ(AlbaNumber(AlbaNumber::Value::NegativeInfinity), getLimitAtAValueUsingTrendOfValues(constantOverPolynomialTerm, "x", 2, 1, 0));
-    EXPECT_EQ(AlbaNumber(AlbaNumber::createFraction(9, 10)), getLimitAtAValueUsingTrendOfValues(constantOverPolynomialTerm, "x", 5, 6, 7));
+    EXPECT_EQ(AlbaNumber::createFraction(9, 10), getLimitAtAValueUsingTrendOfValues(constantOverPolynomialTerm, "x", 5, 6, 7));
 }
 
 TEST(LimitTest, GetValueUsingLinearInterpolationWorks)

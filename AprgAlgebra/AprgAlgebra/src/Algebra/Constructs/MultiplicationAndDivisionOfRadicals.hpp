@@ -22,6 +22,10 @@ public:
     void simplify();
 
 private:
+    void combineRadicalsInMultiplicationAndDivision(
+            TermsWithDetails & termsWithDetails);
+    void combineMonomialAndFirstRadicalInMultiplicationAndDivision(
+            TermsWithDetails & termsWithDetails);
 
     TermsWithDetails m_termsWithDetails;
 };
