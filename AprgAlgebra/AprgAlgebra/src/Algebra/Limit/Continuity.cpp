@@ -37,10 +37,25 @@ bool isContinuousAt(
     return result;
 }
 
+bool isContinuousAt(
+        Term const& term,
+        string const& variableName,
+        AlbaNumber const& value,
+        LimitAtAValueApproachType const limitApproachType,
+        bool const isDifferentiableAtValue)
+{
+    //If a function is differentiable at X, then f is continuous at X.
+    bool result(true);
+    if(!isDifferentiableAtValue)
+    {
+        result = isContinuousAt(term, variableName, value, limitApproachType);
+    }
+    return result;
+}
+
 bool isIntermediateValueTheoremSatisfied(
         Term const& term,
-        std::string const& variableName,
-        AlbaNumber const& firstValue,
+        std::string const& variableName,        AlbaNumber const& firstValue,
         AlbaNumber const& secondValue,
         AlbaNumber const& valueToTest)
 {

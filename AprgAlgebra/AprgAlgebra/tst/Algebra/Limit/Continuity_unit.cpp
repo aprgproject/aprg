@@ -74,10 +74,18 @@ TEST(ContinuityTest, IsContinuousAtWorksOnTheEdgesOfSquareRootOfPolynomial)
     EXPECT_TRUE(isContinuousAt(termToTest, "x", 2, LimitAtAValueApproachType::NegativeSide));
 }
 
+TEST(ContinuityTest, IsContinuousAtWorksWithIsDifferentiableAtValue)
+{
+    Term polynomialTerm(Polynomial{Monomial(-1, {{"x", 2}}), Monomial(4, {})});
+    Term termToTest(createExpressionIfPossible({polynomialTerm, Term("^"), Term(AlbaNumber::createFraction(1, 2))}));
+
+    EXPECT_FALSE(isContinuousAt(termToTest, "x", -2, LimitAtAValueApproachType::BothSides, false));
+    EXPECT_TRUE(isContinuousAt(termToTest, "x", -2, LimitAtAValueApproachType::BothSides, true));
+}
+
 TEST(ContinuityTest, IsIntermediateValueTheoremSatisfiedWorks)
 {
-    Polynomial numerator{Monomial(2, {})};
-    Polynomial denominator{Monomial(1, {{"x", 1}}), Monomial(-4, {})};
+    Polynomial numerator{Monomial(2, {})};    Polynomial denominator{Monomial(1, {{"x", 1}}), Monomial(-4, {})};
     Term termToTest(createExpressionIfPossible({Term(numerator), Term("/"), Term(denominator)}));
 
     EXPECT_FALSE(isIntermediateValueTheoremSatisfied(termToTest, "x", 2, 5, 4));
