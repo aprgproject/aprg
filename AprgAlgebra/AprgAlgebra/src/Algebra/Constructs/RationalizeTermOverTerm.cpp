@@ -73,7 +73,7 @@ void RationalizeTermOverTerm::simplifyForRationalize(Term & term)
                 SimplificationOfExpression::getDefaultConfigurationDetails());
     rationalizeConfigurationDetails.shouldSimplifyToACommonDenominator = true;
     rationalizeConfigurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = true;
-    rationalizeConfigurationDetails.shouldSimplifyByCheckingPolynomialRaiseToANumber = true;
+    rationalizeConfigurationDetails.shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt = true;
 
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(rationalizeConfigurationDetails);
