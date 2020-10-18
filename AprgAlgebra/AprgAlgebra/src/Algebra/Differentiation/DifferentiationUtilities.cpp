@@ -1,8 +1,7 @@
-#include "Differentiation.hpp"
+#include "DifferentiationUtilities.hpp"
 
 #include <Algebra/Limit/Limit.hpp>
-#include <Algebra/Simplification/SimplificationOfExpression.hpp>
-#include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
+#include <Algebra/Simplification/SimplificationOfExpression.hpp>#include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
