@@ -55,7 +55,8 @@ bool isContinuousAt(
 
 bool isIntermediateValueTheoremSatisfied(
         Term const& term,
-        std::string const& variableName,        AlbaNumber const& firstValue,
+        std::string const& variableName,
+        AlbaNumber const& firstValue,
         AlbaNumber const& secondValue,
         AlbaNumber const& valueToTest)
 {

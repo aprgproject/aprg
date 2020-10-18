@@ -34,7 +34,8 @@ bool isContinuousAt(
         bool const isDifferentiableAtValue);
 
 bool isIntermediateValueTheoremSatisfied(
-        Term const& term,        std::string const& variableName,
+        Term const& term,
+        std::string const& variableName,
         AlbaNumber const& firstValue,
         AlbaNumber const& secondValue,
         AlbaNumber const& valueToTest);

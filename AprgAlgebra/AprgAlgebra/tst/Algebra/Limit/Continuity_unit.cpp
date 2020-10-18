@@ -85,7 +85,8 @@ TEST(ContinuityTest, IsContinuousAtWorksWithIsDifferentiableAtValue)
 
 TEST(ContinuityTest, IsIntermediateValueTheoremSatisfiedWorks)
 {
-    Polynomial numerator{Monomial(2, {})};    Polynomial denominator{Monomial(1, {{"x", 1}}), Monomial(-4, {})};
+    Polynomial numerator{Monomial(2, {})};
+    Polynomial denominator{Monomial(1, {{"x", 1}}), Monomial(-4, {})};
     Term termToTest(createExpressionIfPossible({Term(numerator), Term("/"), Term(denominator)}));
 
     EXPECT_FALSE(isIntermediateValueTheoremSatisfied(termToTest, "x", 2, 5, 4));

@@ -1,9 +1,10 @@
 #pragma once
 
-#include <Algebra/Limit/Limit.hpp>
+#include <Algebra/Limit/LimitAtAValueApproachType.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 
 #include <string>
+
 namespace alba
 {
 
@@ -20,7 +21,7 @@ Term getDerivativeDefinition(
         std::string const& variableName,
         Term const& x);
 
-Term getDerivativeUsingLimit(
+Term getDerivativeAtUsingLimit(
         Term const& term,
         std::string const& variableName,
         Term const& x,
@@ -29,4 +30,5 @@ Term getDerivativeUsingLimit(
 void simplifyDerivativeByDefinition(Term & term);
 
 }
+
 }
