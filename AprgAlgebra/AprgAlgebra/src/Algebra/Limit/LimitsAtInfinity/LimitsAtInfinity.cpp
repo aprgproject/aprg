@@ -77,11 +77,10 @@ void LimitsAtInfinity::simplifyAsTermsOverTermsIfPossible()
 void LimitsAtInfinity::simplifyByCombiningRadicals(Term & term) const
 {
     SimplificationOfExpression::ConfigurationDetails limitAtInfinityConfigurationDetails(
-                SimplificationOfExpression::getDefaultConfigurationDetails());
+                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     limitAtInfinityConfigurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = true;
 
-    SimplificationOfExpression::ScopeObject scopeObject;
-    scopeObject.setInThisScopeThisConfiguration(limitAtInfinityConfigurationDetails);
+    SimplificationOfExpression::ScopeObject scopeObject;    scopeObject.setInThisScopeThisConfiguration(limitAtInfinityConfigurationDetails);
 
     term.simplify();
 }

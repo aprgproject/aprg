@@ -577,11 +577,10 @@ TEST(SimplificationOfExpressionTest, ShouldSimplifyToACommonDenominatorWorksAsDe
 TEST(SimplificationOfExpressionTest, ShouldSimplifyToACommonDenominatorWorksIfItsNotSet)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
-                SimplificationOfExpression::getDefaultConfigurationDetails());
+                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     configurationDetails.shouldSimplifyToACommonDenominator = false;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
     Expression expressionToTest(createExpressionIfPossible(tokenizeToTerms("((4)/(x+2))+((x+3)/(x*x-4))+((2*x+1)/(x-2))")));
     SimplificationOfExpression simplification(expressionToTest);
 
@@ -598,11 +597,10 @@ TEST(SimplificationOfExpressionTest, ShouldSimplifyToACommonDenominatorWorksIfIt
 TEST(SimplificationOfExpressionTest, ShouldSimplifyToACommonDenominatorWorksIfItsSet)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
-                SimplificationOfExpression::getDefaultConfigurationDetails());
+                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     configurationDetails.shouldSimplifyToACommonDenominator = true;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
     Expression expressionToTest(createExpressionIfPossible(tokenizeToTerms("((4)/(x+2))+((x+3)/(x*x-4))+((2*x+1)/(x-2))")));
     SimplificationOfExpression simplification(expressionToTest);
 
@@ -638,11 +636,10 @@ TEST(SimplificationOfExpressionTest, SimplifyWithEvenExponentsCancellationAndPut
 TEST(SimplificationOfExpressionTest, SimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBaseWorksIfItsNotSet)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
-                SimplificationOfExpression::getDefaultConfigurationDetails());
+                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     configurationDetails.shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase = false;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
     Expression expression(createExpressionIfPossible(
     {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})}),
      Term("^"), Term(4),
@@ -660,11 +657,10 @@ TEST(SimplificationOfExpressionTest, SimplifyWithEvenExponentsCancellationAndPut
 TEST(SimplificationOfExpressionTest, SimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBaseWorksIfItsSet)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
-                SimplificationOfExpression::getDefaultConfigurationDetails());
+                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     configurationDetails.shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase = true;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
     Expression expression(createExpressionIfPossible(
     {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})}),
      Term("^"), Term(4),
@@ -697,11 +693,10 @@ TEST(SimplificationOfExpressionTest, SimplifyByCombiningRadicalsInMultiplication
 TEST(SimplificationOfExpressionTest, SimplifyByCombiningRadicalsInMultiplicationAndDivisionWorksIfItsNotSet)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
-                SimplificationOfExpression::getDefaultConfigurationDetails());
+                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     configurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = false;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
     Term xPlusOneTerm(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
     Expression squareRootOfXPlusOne(createExpressionIfPossible({xPlusOneTerm, Term("^"), Term(AlbaNumber::createFraction(1, 2))}));
     Expression expressionToTest(createExpressionIfPossible({Term("x"), Term("*"), Term(squareRootOfXPlusOne)}));
@@ -717,11 +712,10 @@ TEST(SimplificationOfExpressionTest, SimplifyByCombiningRadicalsInMultiplication
 TEST(SimplificationOfExpressionTest, SimplifyByCombiningRadicalsInMultiplicationAndDivisionWorksIfItsSet)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
-                SimplificationOfExpression::getDefaultConfigurationDetails());
+                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     configurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = true;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
     Term xPlusOneTerm(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
     Expression squareRootOfXPlusOne(createExpressionIfPossible({xPlusOneTerm, Term("^"), Term(AlbaNumber::createFraction(1, 2))}));
     Expression expressionToTest(createExpressionIfPossible({Term("x"), Term("*"), Term(squareRootOfXPlusOne)}));
@@ -751,11 +745,10 @@ TEST(SimplificationOfExpressionTest, SimplifyByCheckingPolynomialRaiseToAnUnsign
 TEST(SimplificationOfExpressionTest, SimplifyByCheckingPolynomialRaiseToAnUnsignedIntWorksIfItsNotSet)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
-                SimplificationOfExpression::getDefaultConfigurationDetails());
+                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     configurationDetails.shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt = false;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
     Term xPlusOneSquaredExpandedTerm(Polynomial{Monomial(1, {{"x", 2}}), Monomial(2, {{"x", 1}}), Monomial(1, {})});
     Expression expressionToTest(createExpressionIfPossible({xPlusOneSquaredExpandedTerm, Term("^"), Term("x")}));
     SimplificationOfExpression simplification(expressionToTest);
@@ -770,11 +763,10 @@ TEST(SimplificationOfExpressionTest, SimplifyByCheckingPolynomialRaiseToAnUnsign
 TEST(SimplificationOfExpressionTest, SimplifyByCheckingPolynomialRaiseToAnUnsignedIntWorksIfItsSet)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
-                SimplificationOfExpression::getDefaultConfigurationDetails());
+                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     configurationDetails.shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt = true;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
     Term xPlusOneSquaredExpandedTerm(Polynomial{Monomial(1, {{"x", 2}}), Monomial(2, {{"x", 1}}), Monomial(1, {})});
     Expression expressionToTest(createExpressionIfPossible({xPlusOneSquaredExpandedTerm, Term("^"), Term("x")}));
     SimplificationOfExpression simplification(expressionToTest);
@@ -806,11 +798,10 @@ TEST(SimplificationOfExpressionTest, SimplifyByRationalizingNumeratorWorksAsDefa
 TEST(SimplificationOfExpressionTest, SimplifyByRationalizingNumeratorWorksIfItsNotSet)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
-                SimplificationOfExpression::getDefaultConfigurationDetails());
+                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     configurationDetails.shouldSimplifyByRationalizingNumerator = false;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
     Term numerator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(2, {})});
     Term denominator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(3, {})});
     Expression expressionToTest(createExpressionIfPossible({numerator, Term("/"), denominator}));
@@ -828,11 +819,10 @@ TEST(SimplificationOfExpressionTest, SimplifyByRationalizingNumeratorWorksIfItsN
 TEST(SimplificationOfExpressionTest, SimplifyByRationalizingNumeratorWorksIfItsSet)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
-                SimplificationOfExpression::getDefaultConfigurationDetails());
+                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     configurationDetails.shouldSimplifyByRationalizingNumerator = true;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
     Term numerator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(2, {})});
     Term denominator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(3, {})});
     Expression expressionToTest(createExpressionIfPossible({numerator, Term("/"), denominator}));
@@ -866,11 +856,10 @@ TEST(SimplificationOfExpressionTest, SimplifyByRationalizingDenominatorWorksAsDe
 TEST(SimplificationOfExpressionTest, SimplifyByRationalizingDenominatorWorksIfItsNotSet)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
-                SimplificationOfExpression::getDefaultConfigurationDetails());
+                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     configurationDetails.shouldSimplifyByRationalizingDenominator = false;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
     Term numerator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(2, {})});
     Term denominator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(3, {})});
     Expression expressionToTest(createExpressionIfPossible({numerator, Term("/"), denominator}));
@@ -888,11 +877,10 @@ TEST(SimplificationOfExpressionTest, SimplifyByRationalizingDenominatorWorksIfIt
 TEST(SimplificationOfExpressionTest, SimplifyByRationalizingDenominatorWorksIfItsSet)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
-                SimplificationOfExpression::getDefaultConfigurationDetails());
+                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     configurationDetails.shouldSimplifyByRationalizingDenominator = true;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
     Term numerator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(2, {})});
     Term denominator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(3, {})});
     Expression expressionToTest(createExpressionIfPossible({numerator, Term("/"), denominator}));

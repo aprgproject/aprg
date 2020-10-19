@@ -3,11 +3,10 @@
 #include <Algebra/Constructs/TermsOverTerms.hpp>
 #include <Algebra/Term/TermTypes/Expression.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
-#include <Container/AlbaSingleton.hpp>
+#include <Container/AlbaConfigurationHolder.hpp>
 
 namespace alba
 {
-
 namespace algebra
 {
 
@@ -28,34 +27,15 @@ public:
         bool shouldPerformDebug;
     };
 
-    class Configuration : public AlbaSingleton<Configuration>
-    {
-    public:
-        Configuration();
-        ConfigurationDetails const& getConfigurationDetails();
+    class Configuration
+            : public AlbaConfigurationHolder<ConfigurationDetails>
+    {};
 
-        void setConfigurationDetails(ConfigurationDetails const& configurationDetails);
-        void setConfigurationToDefault();
-    private:
-        ConfigurationDetails m_configurationDetails;
-    };
-
-    class ScopeObject
-    {
-    public:
-        ScopeObject();
-        ~ScopeObject();
-        void setInThisScopeThisConfiguration(ConfigurationDetails const& configurationDetails) const;
-    private:
-        void setInThisScopeTheValuesBack() const;
-        ConfigurationDetails m_savedConfigurationDetails;
-    };
-
-    static ConfigurationDetails getDefaultConfigurationDetails();
+    class ScopeObject : public AlbaConfigurationScopeObject<ConfigurationDetails>
+    {};
 
     SimplificationOfExpression();
     SimplificationOfExpression(Expression const& expression);
-
     Expression getExpression() const;
 
     void setExpression(Expression const& expression);
@@ -109,5 +89,9 @@ private:
 }
 
 }
+
+template <>
+algebra::Simplification::SimplificationOfExpression::ConfigurationDetails
+getDefaultConfigurationDetails<algebra::Simplification::SimplificationOfExpression::ConfigurationDetails>();
 
 }
