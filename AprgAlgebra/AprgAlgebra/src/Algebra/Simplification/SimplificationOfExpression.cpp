@@ -152,11 +152,9 @@ void SimplificationOfExpression::simplifyBySubstitutingExpressionAndFunctionsToV
                     Configuration::getInstance().getConfigurationDetails());
         substitutionSimplificationConfigurationDetails.shouldSimplifyToACommonDenominator = true;
         substitutionSimplificationConfigurationDetails.shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables = false;
-        substitutionSimplificationConfigurationDetails.shouldPerformDebug = true;
 
         SimplificationOfExpression::ScopeObject scopeObject;
         scopeObject.setInThisScopeThisConfiguration(substitutionSimplificationConfigurationDetails);
-
         bool continueToTryToSubstitute(true);
         while(continueToTryToSubstitute)
         {
