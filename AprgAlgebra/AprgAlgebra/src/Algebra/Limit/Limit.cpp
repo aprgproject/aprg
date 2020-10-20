@@ -289,7 +289,8 @@ Term simplifyTermForLimit(Term const& term)
                 getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     limitConfigurationDetails.shouldSimplifyToACommonDenominator = true;
 
-    SimplificationOfExpression::ScopeObject scopeObject;    scopeObject.setInThisScopeThisConfiguration(limitConfigurationDetails);
+    SimplificationOfExpression::ScopeObject scopeObject;
+    scopeObject.setInThisScopeThisConfiguration(limitConfigurationDetails);
 
     Term simplifiedTerm(term);
     simplifiedTerm.simplify();

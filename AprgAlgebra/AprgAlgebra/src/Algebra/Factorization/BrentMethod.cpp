@@ -260,7 +260,8 @@ void BrentMethod::convertSolutionToIntegerIfNeeded()
             if(isAlmostEqualForBrentMethod(calculate(possibleValue), 0.0))
             {
                 m_values.solutionOptional.setValue(possibleValue);
-            }        }
+            }
+        }
     }
 }
 

@@ -7,6 +7,7 @@
 
 namespace alba
 {
+
 namespace algebra
 {
 
@@ -24,6 +25,7 @@ public:
         bool shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt;
         bool shouldSimplifyByRationalizingNumerator;
         bool shouldSimplifyByRationalizingDenominator;
+        bool shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables;
         bool shouldPerformDebug;
     };
 
@@ -36,6 +38,16 @@ public:
 
     SimplificationOfExpression();
     SimplificationOfExpression(Expression const& expression);
+
+    static bool shouldSimplifyToACommonDenominator();
+    static bool shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase();
+    static bool shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision();
+    static bool shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt();
+    static bool shouldSimplifyByRationalizingNumerator();
+    static bool shouldSimplifyByRationalizingDenominator();
+    static bool shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables();
+    static bool shouldPerformDebug();
+
     Expression getExpression() const;
 
     void setExpression(Expression const& expression);
@@ -43,29 +55,28 @@ public:
     void simplify();
 
 private:
-    bool shouldSimplifyToACommonDenominator() const;
-    bool shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase() const;
-    bool shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision() const;
-    bool shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt() const;
-    bool shouldSimplifyByRationalizingNumerator() const;
-    bool shouldSimplifyByRationalizingDenominator() const;
-    bool shouldPerformDebug() const;
     bool isChangeDetected(
-            Expression const& beforeSimplify,
-            Expression const& afterSimplify) const;
+            Expression const& expression1,
+            Expression const& expression2) const;
 
     void simplifyExpressionUntilNoChange();
-    void simplifyExpression();
+    void simplifyExpression(Expression & expression);
+    void simplifyExpressionUntilNoChangeInitiallyIfNeeded();
     void simplifyToACommonDenominatorIfNeeded();
+    void simplifyBySubstitutingExpressionAndFunctionsToVariablesIfNeeded();
 
     void processTermsBaseOnOperatorLevel(
+            Expression & expression,
             TermsWithDetails const& termsToProcess,
             OperatorLevel const operatorLevel);
     void processAndSaveTermsForAdditionAndSubtraction(
+            Expression & expression,
             TermsWithDetails const& termsToProcess);
     void processAndSaveTermsForMultiplicationAndDivision(
+            Expression & expression,
             TermsWithDetails const& termsToProcess);
     void processAndSaveTermsForRaiseToPower(
+            Expression & expression,
             TermsWithDetails const& termsToProcess);
 
     //functions for addition/subtraction
@@ -82,6 +93,8 @@ private:
     //functions for raise to power
 
     // other functions
+    Terms getSubExpressionsAndSubFunctions(Expression const& expression);
+    bool shouldBeIncludedFromSubExpressionsAndSubFunctions(Term const& term);
 
     Expression m_expression;
 };

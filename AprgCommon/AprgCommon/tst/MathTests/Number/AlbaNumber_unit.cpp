@@ -52,7 +52,8 @@ TEST(AlbaNumberConfigurationTest, FloatAdjustmentToleranceIsCorrectlyAtDefault)
 
 TEST(AlbaNumberTest, SettingTolerancesReflectsInAlbaNumber)
 {
-    AlbaNumber number1(3.01);    AlbaNumber number2(3.0000000000001);
+    AlbaNumber number1(3.01);
+    AlbaNumber number2(3.0000000000001);
     EXPECT_TRUE(number1.isDoubleType());
     EXPECT_DOUBLE_EQ(3.01, number1.getDouble());
     EXPECT_TRUE(number2.isIntegerType());
@@ -62,7 +63,8 @@ TEST(AlbaNumberTest, SettingTolerancesReflectsInAlbaNumber)
             (AlbaNumber::Configuration::getConfigurationDetailsWithZeroTolerance());
 
     AlbaNumber number3(3.01);
-    AlbaNumber number4(3.0000000000001);    EXPECT_TRUE(number3.isDoubleType());
+    AlbaNumber number4(3.0000000000001);
+    EXPECT_TRUE(number3.isDoubleType());
     EXPECT_DOUBLE_EQ(3.01, number3.getDouble());
     EXPECT_TRUE(number4.isDoubleType());
     EXPECT_DOUBLE_EQ(3.0000000000001, number4.getDouble());
@@ -80,7 +82,8 @@ TEST(AlbaNumberTest, SettingTolerancesReflectsInAlbaNumber)
 TEST(AlbaNumberScopeObjectTest, SetInThisScopeThisConfigurationWorksAtDefaultValuesAndValuesAreSetBack)
 {
     AlbaNumber number1(3.01);
-    AlbaNumber number2(3.0000000000001);    EXPECT_TRUE(number1.isDoubleType());
+    AlbaNumber number2(3.0000000000001);
+    EXPECT_TRUE(number1.isDoubleType());
     EXPECT_DOUBLE_EQ(3.01, number1.getDouble());
     EXPECT_TRUE(number2.isIntegerType());
     EXPECT_EQ(3, number2.getInteger());
@@ -90,7 +93,8 @@ TEST(AlbaNumberScopeObjectTest, SetInThisScopeThisConfigurationWorksAtDefaultVal
         scopeObject.setInThisScopeThisConfiguration(AlbaNumber::ConfigurationDetails{0.1, 0.1});
 
         AlbaNumber number3(3.01);
-        AlbaNumber number4(3.0000000000001);        EXPECT_TRUE(number3.isIntegerType());
+        AlbaNumber number4(3.0000000000001);
+        EXPECT_TRUE(number3.isIntegerType());
         EXPECT_EQ(3, number3.getInteger());
         EXPECT_TRUE(number4.isIntegerType());
         EXPECT_EQ(3, number4.getInteger());
@@ -141,7 +145,8 @@ TEST(AlbaNumberScopeObjectTest, SetInThisScopeTheTolerancesToZeroWorksWhenValues
     AlbaNumber::Configuration::getInstance().setConfigurationDetails(configurationDetailsInThisOutsideScope);
 
     AlbaNumber number1(3.01);
-    AlbaNumber number2(3.0000000000001);    EXPECT_TRUE(number1.isIntegerType());
+    AlbaNumber number2(3.0000000000001);
+    EXPECT_TRUE(number1.isIntegerType());
     EXPECT_EQ(3, number1.getInteger());
     EXPECT_TRUE(number2.isIntegerType());
     EXPECT_EQ(3, number2.getInteger());

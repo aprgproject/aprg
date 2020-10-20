@@ -80,7 +80,8 @@ void LimitsAtInfinity::simplifyByCombiningRadicals(Term & term) const
                 getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     limitAtInfinityConfigurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = true;
 
-    SimplificationOfExpression::ScopeObject scopeObject;    scopeObject.setInThisScopeThisConfiguration(limitAtInfinityConfigurationDetails);
+    SimplificationOfExpression::ScopeObject scopeObject;
+    scopeObject.setInThisScopeThisConfiguration(limitAtInfinityConfigurationDetails);
 
     term.simplify();
 }

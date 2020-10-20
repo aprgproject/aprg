@@ -47,6 +47,7 @@ TEST(ComboTest, SimplifyToCommonDenominatorAndSubstitutionWorksUsingExample1)
     configurationDetails.shouldSimplifyToACommonDenominator = true;
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
+
     SubstitutionOfVariablesToValues substitution({{"x", 2}});
     Term term(buildTermIfPossible("(((3*x)/(x-3))-((3*x+2)/(x^2-6*x+9)))*(((x+2)/(x+3))-((x)/(x^2+6*x+9)))"));
     Expression simplifiedTerm(term.getExpressionConstReference());

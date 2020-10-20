@@ -17,7 +17,8 @@ namespace Factorization
 TEST(FactorizationOfExpressionsTest, FactorizeWorksOnPolynomialOverPolynomial)
 {
     Polynomial polynomial1({Monomial(2, {{"x", 2}}), Monomial(5, {{"x", 1}}), Monomial(-12, {})});
-    Polynomial polynomial2({Monomial(4, {{"x", 2}}), Monomial(-4, {{"x", 1}}), Monomial(-3, {})});    Expression expressionToTest(createExpressionIfPossible({Term(polynomial1), Term("/"), Term(polynomial2)}));
+    Polynomial polynomial2({Monomial(4, {{"x", 2}}), Monomial(-4, {{"x", 1}}), Monomial(-3, {})});
+    Expression expressionToTest(createExpressionIfPossible({Term(polynomial1), Term("/"), Term(polynomial2)}));
 
     factorizeAnExpression(expressionToTest);
 
@@ -37,7 +38,8 @@ TEST(FactorizationOfExpressionsTest, FactorizeWorksOnPolynomialOverPolynomial)
 TEST(FactorizationOfExpressionsTest, FactorizeWorksOnPolynomialPlusPolynomial)
 {
     Polynomial polynomial1({Monomial(2, {{"x", 2}}), Monomial(5, {{"x", 1}}), Monomial(-12, {})});
-    Polynomial polynomial2({Monomial(4, {{"x", 2}}), Monomial(-4, {{"x", 1}}), Monomial(-3, {})});    Expression expressionToTest(createExpressionIfPossible({Term(polynomial1), Term("+"), Term(polynomial2)}));
+    Polynomial polynomial2({Monomial(4, {{"x", 2}}), Monomial(-4, {{"x", 1}}), Monomial(-3, {})});
+    Expression expressionToTest(createExpressionIfPossible({Term(polynomial1), Term("+"), Term(polynomial2)}));
 
     factorizeAnExpression(expressionToTest);
 

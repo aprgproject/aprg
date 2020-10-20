@@ -195,7 +195,8 @@ AlbaNumbers calculatePolynomialRootsUsingBrentMethod(
             result.emplace_back(root);
         }
     }
-    return result;}
+    return result;
+}
 
 AlbaNumber getMaxAbsoluteValueForRootFinding(AlbaNumbers const& coefficients)
 {

@@ -4,7 +4,8 @@
 #include <Math/AlbaMathConstants.hpp>
 #include <Math/Number/AlbaComplexNumber.hpp>
 
-#include <ostream>#include <string>
+#include <ostream>
+#include <string>
 
 namespace alba
 {
@@ -76,13 +77,15 @@ public:
 
     AlbaNumber();
     AlbaNumber(int const integerValue);
-    AlbaNumber(unsigned int const integerValue);    AlbaNumber(long long int const integerValue);
+    AlbaNumber(unsigned int const integerValue);
+    AlbaNumber(long long int const integerValue);
     AlbaNumber(double const doubleValue);
     AlbaNumber(Value const value);
 
     bool operator==(AlbaNumber const& second) const;
     bool operator!=(AlbaNumber const& second) const;
-    bool operator<=(AlbaNumber const& second) const;    bool operator>=(AlbaNumber const& second) const;
+    bool operator<=(AlbaNumber const& second) const;
+    bool operator>=(AlbaNumber const& second) const;
     bool operator<(AlbaNumber const& second) const;
     bool operator>(AlbaNumber const& second) const;
     AlbaNumber operator+() const;
