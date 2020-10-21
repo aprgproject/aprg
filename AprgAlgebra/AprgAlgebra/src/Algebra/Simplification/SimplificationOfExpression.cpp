@@ -155,6 +155,7 @@ void SimplificationOfExpression::simplifyBySubstitutingExpressionAndFunctionsToV
 
         SimplificationOfExpression::ScopeObject scopeObject;
         scopeObject.setInThisScopeThisConfiguration(substitutionSimplificationConfigurationDetails);
+
         bool continueToTryToSubstitute(true);
         while(continueToTryToSubstitute)
         {
@@ -259,8 +260,7 @@ void SimplificationOfExpression::addOrSubtractTermsWithExpressions(
         Term & combinedTerm,
         TermsWithDetails const& termsWithExpressions) const
 {
-    AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    additionAndSubtraction.putTermsWithDetails(termsWithExpressions);
+    AdditionAndSubtractionOfExpressions additionAndSubtraction(termsWithExpressions);
     additionAndSubtraction.combineExpressionsIfPossible();
     accumulateTermsForAdditionAndSubtraction(combinedTerm, additionAndSubtraction.getAsTermsWithDetails());
 }
