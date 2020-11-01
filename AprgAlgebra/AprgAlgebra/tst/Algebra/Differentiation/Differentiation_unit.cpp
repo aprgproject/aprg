@@ -58,6 +58,7 @@ TEST(DifferentiationTest, DifferentiateWorksForPolynomial)
 TEST(DifferentiationTest, DifferentiateConstantWorks)
 {
     Differentiation differentiationForX("x");
+
     EXPECT_EQ(AlbaNumber(0), differentiationForX.differentiateConstant(Constant(5)));
 }
 
