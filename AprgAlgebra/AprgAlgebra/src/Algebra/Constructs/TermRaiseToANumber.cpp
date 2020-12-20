@@ -20,11 +20,15 @@ TermRaiseToANumber::TermRaiseToANumber(
 
 Term TermRaiseToANumber::getCombinedTerm() const
 {
-    return Term(createExpressionIfPossible({m_base, Term("^"), Term(m_exponent)}));
+    Term combinedTerm(createExpressionIfPossible({m_base, Term("^"), Term(m_exponent)}));
+    if(m_exponent == 1)
+    {
+        combinedTerm = Term(m_base);
+    }
+    return combinedTerm;
 }
 
-bool TermRaiseToANumber::isEmpty() const
-{
+bool TermRaiseToANumber::isEmpty() const{
     return m_base.isEmpty();
 }
 

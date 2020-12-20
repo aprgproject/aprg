@@ -3,11 +3,9 @@
 #include <Algebra/Constructs/AdditionAndSubtractionOfExpressions.hpp>
 #include <Algebra/Constructs/MultiplicationAndDivisionOfRadicals.hpp>
 #include <Algebra/Constructs/RationalizeTermOverTerm.hpp>
-#include <Algebra/Constructs/TermRaiseToTerms.hpp>
 #include <Algebra/Operations/AccumulateOperations.hpp>
 #include <Algebra/Retrieval/ExpressionAndFunctionsRetriever.hpp>
-#include <Algebra/Simplification/SimplificationUtilities.hpp>
-#include <Algebra/Substitution/SubstitutionOfTermsToTerms.hpp>
+#include <Algebra/Simplification/SimplificationUtilities.hpp>#include <Algebra/Substitution/SubstitutionOfTermsToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
@@ -72,10 +70,14 @@ bool SimplificationOfExpression::shouldSimplifyBySubstitutingExpressionAndFuncti
     return Configuration::getInstance().getConfigurationDetails().shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables;
 }
 
+bool SimplificationOfExpression::shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase()
+{
+    return Configuration::getInstance().getConfigurationDetails().shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase;
+}
+
 bool SimplificationOfExpression::shouldPerformDebug()
 {
-    return Configuration::getInstance().getConfigurationDetails().shouldPerformDebug;
-}
+    return Configuration::getInstance().getConfigurationDetails().shouldPerformDebug;}
 
 Expression SimplificationOfExpression::getExpression() const
 {
@@ -156,35 +158,9 @@ void SimplificationOfExpression::simplifyBySubstitutingExpressionAndFunctionsToV
         SimplificationOfExpression::ScopeObject scopeObject;
         scopeObject.setInThisScopeThisConfiguration(substitutionSimplificationConfigurationDetails);
 
-        bool continueToTryToSubstitute(true);
-        while(continueToTryToSubstitute)
-        {
-            continueToTryToSubstitute = false;
-            Expression const& expression(m_expression);
-            unsigned int oldNumberOfTerms = expression.getTermsWithAssociation().getTermsWithDetails().size();
-            Terms expressionAndFunctionTerms(getSubExpressionsAndSubFunctions(expression));
-            for(Term const& expressionOrFunctionTerm : expressionAndFunctionTerms)
-            {
-                string variableNameForSubstitution(createVariableNameForSubstitution(expressionOrFunctionTerm));
-                SubstitutionOfTermsToTerms substitutionToVariable{{expressionOrFunctionTerm, variableNameForSubstitution}};
-                Term termWithNewVariable(substitutionToVariable.performSubstitutionTo(m_expression));
-                SubstitutionOfVariablesToTerms substitutionFromVariable{{variableNameForSubstitution, expressionOrFunctionTerm}};
-                Term termWithoutNewVariable(substitutionFromVariable.performSubstitutionTo(termWithNewVariable));
-                Expression newExpression(createOrCopyExpressionFromATerm(termWithoutNewVariable));
-                unsigned int newNumberOfTerms = newExpression.getTermsWithAssociation().getTermsWithDetails().size();
-
-                if(expression.getCommonOperatorLevel() != newExpression.getCommonOperatorLevel()
-                        || oldNumberOfTerms != newNumberOfTerms)
-                {
-                    m_expression = newExpression;
-                    continueToTryToSubstitute = true;
-                    break;
-                }
-            }
-        }
+        while(tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(m_expression));
     }
 }
-
 void SimplificationOfExpression::processTermsBaseOnOperatorLevel(
         Expression & expression,
         TermsWithDetails const& termsToProcess,
@@ -252,12 +228,10 @@ void SimplificationOfExpression::processAndSaveTermsForRaiseToPower(
     termRaiseToTerms.setAsShouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase(
                 shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase());
     termRaiseToTerms.simplify();
-    Term combinedTerm(termRaiseToTerms.getCombinedTerm());
-    expression.setTerm(combinedTerm);
+    expression.setTerm(getCombinedTermUsingTermsRaiseToTerms(termRaiseToTerms));
 }
 
-void SimplificationOfExpression::addOrSubtractTermsWithExpressions(
-        Term & combinedTerm,
+void SimplificationOfExpression::addOrSubtractTermsWithExpressions(        Term & combinedTerm,
         TermsWithDetails const& termsWithExpressions) const
 {
     AdditionAndSubtractionOfExpressions additionAndSubtraction(termsWithExpressions);
@@ -301,10 +275,88 @@ Term SimplificationOfExpression::getCombinedTermAndSimplifyByRationalizingNumera
     return combinedTerm;
 }
 
-Terms SimplificationOfExpression::getSubExpressionsAndSubFunctions(
+Term SimplificationOfExpression::getCombinedTermUsingTermsRaiseToTerms(
+        TermRaiseToTerms const& termRaiseToTerms)
+{
+    Term combinedTerm;
+    Term eachBasesRaisedToConstant(getEachBasesRaisedToConstantIfPossible(termRaiseToTerms));
+    if(!eachBasesRaisedToConstant.isEmpty())
+    {
+        combinedTerm = eachBasesRaisedToConstant;
+    }
+    else
+    {
+        combinedTerm = termRaiseToTerms.getCombinedTerm();
+    }
+    return combinedTerm;
+}
+
+Term SimplificationOfExpression::getEachBasesRaisedToConstantIfPossible(
+        TermRaiseToTerms const& termRaiseToTerms)
+{
+    Term result;
+    if(!shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase())
+    {
+        Term const& base(termRaiseToTerms.getBase());
+        TermsWithDetails const& exponents(termRaiseToTerms.getExponents());
+        if(base.isExpression() && exponents.size() == 1)
+        {
+            Expression const& baseExpression(base.getExpressionConstReference());
+            Term const& exponentTerm(getTermConstReferenceFromSharedPointer(exponents.front().baseTermSharedPointer));
+            if(baseExpression.getCommonOperatorLevel() == OperatorLevel::MultiplicationAndDivision
+                    && exponentTerm.isConstant())
+            {
+                Expression subBasesEachRaiseToConstant;
+                subBasesEachRaiseToConstant.setCommonOperatorLevel(OperatorLevel::MultiplicationAndDivision);
+                for(TermWithDetails const& subBaseWithDetails
+                    : baseExpression.getTermsWithAssociation().getTermsWithDetails())
+                {
+                    Term const& subBase(getTermConstReferenceFromSharedPointer(subBaseWithDetails.baseTermSharedPointer));
+                    Term newSubBase(createExpressionIfPossible({subBase, Term("^"), exponentTerm}));
+                    subBasesEachRaiseToConstant.putTerm(newSubBase, subBaseWithDetails.association);
+                }
+                result = Term(subBasesEachRaiseToConstant);
+            }
+        }
+    }
+    return result;
+}
+
+bool SimplificationOfExpression::tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(
         Expression const& expression)
 {
-    ExpressionAndFunctionsRetriever retriever;
+    bool continueToTryToSubstitute = false;
+    unsigned int oldNumberOfTerms = expression.getTermsWithAssociation().getTermsWithDetails().size();
+    Terms expressionAndFunctionTerms(getSubExpressionsAndSubFunctions(expression));
+    for(Term const& expressionOrFunctionTerm : expressionAndFunctionTerms)
+    {
+        Expression newExpression(getNewExpressionWithSubstitutedTerms(expressionOrFunctionTerm));
+        unsigned int newNumberOfTerms = newExpression.getTermsWithAssociation().getTermsWithDetails().size();
+        if(expression.getCommonOperatorLevel() != newExpression.getCommonOperatorLevel()
+                || oldNumberOfTerms != newNumberOfTerms)
+        {
+            m_expression = newExpression;
+            continueToTryToSubstitute = true;
+            break;
+        }
+    }
+    return continueToTryToSubstitute;
+}
+
+Expression SimplificationOfExpression::getNewExpressionWithSubstitutedTerms(
+        Term const& expressionOrFunctionTerm)
+{
+    string variableNameForSubstitution(createVariableNameForSubstitution(expressionOrFunctionTerm));
+    SubstitutionOfTermsToTerms substitutionToVariable{{expressionOrFunctionTerm, variableNameForSubstitution}};
+    Term termWithNewVariable(substitutionToVariable.performSubstitutionTo(m_expression));
+    SubstitutionOfVariablesToTerms substitutionFromVariable{{variableNameForSubstitution, expressionOrFunctionTerm}};
+    Term termWithoutNewVariable(substitutionFromVariable.performSubstitutionTo(termWithNewVariable));
+    return createOrCopyExpressionFromATerm(termWithoutNewVariable);
+}
+
+Terms SimplificationOfExpression::getSubExpressionsAndSubFunctions(
+        Expression const& expression)
+{    ExpressionAndFunctionsRetriever retriever;
     TermsWithDetails const& termsWithDetails(
                 expression.getTermsWithAssociation().getTermsWithDetails());
     if(termsWithDetails.size() > 1)
@@ -351,7 +403,7 @@ algebra::Simplification::SimplificationOfExpression::ConfigurationDetails
 getDefaultConfigurationDetails<alba::algebra::Simplification::SimplificationOfExpression::ConfigurationDetails>()
 {
     return algebra::Simplification::SimplificationOfExpression::ConfigurationDetails
-    {false, false, false, false, false, false, false, false};
+    {false, false, false, false, false, false, false, false, false};
 }
 
 }

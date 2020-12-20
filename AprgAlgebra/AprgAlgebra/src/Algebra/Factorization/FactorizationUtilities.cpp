@@ -82,10 +82,36 @@ bool doesNotNeedToBeFactorized(Polynomial const& polynomial)
     return result;
 }
 
+bool doesContainOnlyConstants(Polynomials const& polynomials)
+{
+    return all_of(polynomials.cbegin(), polynomials.cend(), [](Polynomial const& polynomial)
+    {
+        return doesThePolynomialHaveOnlyOneConstant(polynomial);
+    });
+}
+
+bool doesContainConstantsOrOnlyOneNonConstant(Polynomials const& polynomials)
+{
+    bool result(true);
+    unsigned int nonConstantsCount=0;
+    for(Polynomial const& polynomial : polynomials)
+    {
+        if(!doesThePolynomialHaveOnlyOneConstant(polynomial))
+        {
+            nonConstantsCount++;
+            if(nonConstantsCount > 1)
+            {
+                result = false;
+                break;
+            }
+        }
+    }
+    return result;
+}
+
 void simplifyPolynomialThenEmplaceBackIfNotEmpty(Polynomials & polynomials, Polynomial const& polynomial)
 {
-    Polynomial simplifiedPolynomial(polynomial);
-    simplifiedPolynomial.simplify();
+    Polynomial simplifiedPolynomial(polynomial);    simplifiedPolynomial.simplify();
     emplaceBackIfNotEmpty(polynomials, simplifiedPolynomial);
 }
 

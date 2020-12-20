@@ -8,10 +8,16 @@ namespace alba
 namespace algebra
 {
 
+TEST(PolynomialHelpersTest, DoesThePolynomialHaveOnlyOneConstantWorks)
+{
+    EXPECT_FALSE(doesThePolynomialHaveOnlyOneConstant(Polynomial{Monomial(1, {{"x", 4}}), Monomial(1, {{"x", 3}}), Monomial(-16, {})}));
+    EXPECT_FALSE(doesThePolynomialHaveOnlyOneConstant(Polynomial{Monomial(-16, {}), Monomial(32, {})}));
+    EXPECT_TRUE(doesThePolynomialHaveOnlyOneConstant(Polynomial{Monomial(-16, {})}));
+}
+
 TEST(PolynomialHelpersTest, DoesThePolynomialHaveOnlyOneVariableWorks)
 {
-    EXPECT_FALSE(doesThePolynomialHaveOnlyOneVariable(Polynomial{Monomial(1, {{"x", 4}}), Monomial(1, {{"y", 3}}), Monomial(-16, {})}));
-    EXPECT_TRUE(doesThePolynomialHaveOnlyOneVariable(Polynomial{Monomial(1, {{"x", 4}}), Monomial(1, {{"x", 3}}), Monomial(-16, {})}));
+    EXPECT_FALSE(doesThePolynomialHaveOnlyOneVariable(Polynomial{Monomial(1, {{"x", 4}}), Monomial(1, {{"y", 3}}), Monomial(-16, {})}));    EXPECT_TRUE(doesThePolynomialHaveOnlyOneVariable(Polynomial{Monomial(1, {{"x", 4}}), Monomial(1, {{"x", 3}}), Monomial(-16, {})}));
 }
 
 TEST(PolynomialHelpersTest, GetRemainderForOneVariablePolynomialDividedByVariableMinusConstantValueWorks)

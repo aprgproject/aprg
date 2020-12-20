@@ -175,11 +175,10 @@ Polynomials factorizeSmallerPolynomialsByFactoringOutCommonFactors(Polynomials c
     if(smallerPolynomials.size() > 1)
     {
         Polynomials commonFactors(getCommonFactorsInThesePolynomials(smallerPolynomials));
-        if(!commonFactors.empty())
+        if(!commonFactors.empty() && !doesContainOnlyConstants(commonFactors))
         {
             Polynomials remainingSmallerPolynomials(getPolynomialsWithRemovedCommonFactors(smallerPolynomials, commonFactors));
-            combinePolynomialsByAdditionAndThenEmplaceBack(result, remainingSmallerPolynomials);
-            for(Polynomial const& commonFactor : commonFactors)
+            combinePolynomialsByAdditionAndThenEmplaceBack(result, remainingSmallerPolynomials);            for(Polynomial const& commonFactor : commonFactors)
             {
                 simplifyPolynomialThenEmplaceBackIfNotEmpty(result, commonFactor);
             }
@@ -198,10 +197,13 @@ Polynomials factorizeSmallerPolynomialsBySubstitutingCommonFactorsToNewVariables
         if(!variableSubstitution.isEmpty())
         {
             result = factorizePolynomialWithNewVariables(newPolynomialWithVariables, variableSubstitution);
+            if(doesContainConstantsOrOnlyOneNonConstant(result))
+            {
+                result.clear();
+            }
         }
     }
-    return result;
-}
+    return result;}
 
 Polynomials factorizePolynomialWithNewVariables(
         Polynomial const& newPolynomialWithVariables,

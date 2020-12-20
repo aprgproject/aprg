@@ -14,10 +14,10 @@ namespace algebra
 class TermsOverTerms
 {
 public:
+    using BaseToExponentMap = std::map<Term, AlbaNumber>;
     TermsOverTerms();
     TermsOverTerms(TermsWithDetails const& termsInMultiplicationAndDivision);
-    TermsOverTerms(Terms const& numerators, Terms const& denominators);
-    TermsOverTerms(TermsWithDetails const& numerators, TermsWithDetails const& denominators);
+    TermsOverTerms(Terms const& numerators, Terms const& denominators);    TermsOverTerms(TermsWithDetails const& numerators, TermsWithDetails const& denominators);
 
     Terms const& getNumerators() const;
     Terms const& getDenominators() const;
@@ -41,10 +41,17 @@ private:
     bool removeTermsIfNeededAndReturnIfSomeTermsAreRemoved(
             Terms & numerators,
             Terms & denominators);
+    void updateBaseToExponentMap(
+            BaseToExponentMap & baseToExponentMap,
+            Terms const& termsToCheck,
+            int const signToBePutWithExponent);
+    void putTermsOnNumeratorAndDenominatorFromBaseExponentMap(
+            Terms & numeratorTerms,
+            Terms & denominatorTerms,
+            BaseToExponentMap const& baseToExponentMap);
     void clearTermsThenEmplacePolynomialAndRemainingTerms(
             Polynomial const& polynomialNumerator,
-            Terms const& remainingNumerators,
-            Terms & termsToUpdate) const;
+            Terms const& remainingNumerators,            Terms & termsToUpdate) const;
     void emplacePolynomialIfNeeded(Terms & termsResult, Polynomial const& polynomialNumerator) const;
     void retrievePolynomialAndNonPolynomialsTerms(
             Terms const& termsToCheck,
@@ -53,10 +60,13 @@ private:
     void removeSameTermsInNumeratorAndDenominator(
             Terms & numeratorTerms,
             Terms & denominatorTerms);
+    void populateTermsWithBase(
+            Terms & termsToUpdate,
+            Term const& base,
+            AlbaNumber const& exponent);
     void removeTermsThatHaveNoEffect(Terms & terms) const;
     void putTermsOnNumeratorAndDenominatorCorrectly(
-            Terms & numerators,
-            Terms & denominators);
+            Terms & numerators,            Terms & denominators);
     void putTermsToRetainAndOnTheOtherSide(
             Terms const& termsToSegregate,
             Terms & termsToRetain,

@@ -286,11 +286,10 @@ Term getLimitAtAValue(
 Term simplifyTermForLimit(Term const& term)
 {
     SimplificationOfExpression::ConfigurationDetails limitConfigurationDetails(
-                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
+                SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
     limitConfigurationDetails.shouldSimplifyToACommonDenominator = true;
 
-    SimplificationOfExpression::ScopeObject scopeObject;
-    scopeObject.setInThisScopeThisConfiguration(limitConfigurationDetails);
+    SimplificationOfExpression::ScopeObject scopeObject;    scopeObject.setInThisScopeThisConfiguration(limitConfigurationDetails);
 
     Term simplifiedTerm(term);
     simplifiedTerm.simplify();

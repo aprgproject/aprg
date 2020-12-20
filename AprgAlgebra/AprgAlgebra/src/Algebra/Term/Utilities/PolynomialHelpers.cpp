@@ -18,10 +18,19 @@ namespace alba
 namespace algebra
 {
 
+bool doesThePolynomialHaveOnlyOneConstant(Polynomial const& polynomial)
+{
+    bool result(false);
+    if(polynomial.isOneMonomial())
+    {
+        result = polynomial.getFirstMonomial().isConstantOnly();
+    }
+    return result;
+}
+
 bool doesThePolynomialHaveOnlyOneVariable(Polynomial const& polynomial)
 {
-    VariableNamesRetriever variableNamesRetriever;
-    variableNamesRetriever.retrieveFromPolynomial(polynomial);
+    VariableNamesRetriever variableNamesRetriever;    variableNamesRetriever.retrieveFromPolynomial(polynomial);
     return variableNamesRetriever.getSavedData().size() == 1;
 }
 

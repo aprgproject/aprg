@@ -1,9 +1,9 @@
 #pragma once
 
+#include <Algebra/Constructs/TermRaiseToTerms.hpp>
 #include <Algebra/Constructs/TermsOverTerms.hpp>
 #include <Algebra/Term/TermTypes/Expression.hpp>
-#include <Algebra/Term/TermTypes/Term.hpp>
-#include <Container/AlbaConfigurationHolder.hpp>
+#include <Algebra/Term/TermTypes/Term.hpp>#include <Container/AlbaConfigurationHolder.hpp>
 
 namespace alba
 {
@@ -26,9 +26,9 @@ public:
         bool shouldSimplifyByRationalizingNumerator;
         bool shouldSimplifyByRationalizingDenominator;
         bool shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables;
+        bool shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase;
         bool shouldPerformDebug;
     };
-
     class Configuration
             : public AlbaConfigurationHolder<ConfigurationDetails>
     {};
@@ -46,10 +46,10 @@ public:
     static bool shouldSimplifyByRationalizingNumerator();
     static bool shouldSimplifyByRationalizingDenominator();
     static bool shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables();
+    static bool shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase();
     static bool shouldPerformDebug();
 
     Expression getExpression() const;
-
     void setExpression(Expression const& expression);
 
     void simplify();
@@ -91,11 +91,16 @@ private:
             TermsOverTerms const& termsOverTerms) const;
 
     //functions for raise to power
+    Term getCombinedTermUsingTermsRaiseToTerms(
+            TermRaiseToTerms const& termRaiseToTerms);
+    Term getEachBasesRaisedToConstantIfPossible(
+            TermRaiseToTerms const& termRaiseToTerms);
 
     // other functions
+    bool tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(Expression const& expression);
+    Expression getNewExpressionWithSubstitutedTerms(Term const& expressionOrFunctionTerm);
     Terms getSubExpressionsAndSubFunctions(Expression const& expression);
     bool shouldBeIncludedFromSubExpressionsAndSubFunctions(Term const& term);
-
     Expression m_expression;
 };
 
