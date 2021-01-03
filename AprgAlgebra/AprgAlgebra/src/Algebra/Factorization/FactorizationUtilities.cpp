@@ -111,7 +111,8 @@ bool doesContainConstantsOrOnlyOneNonConstant(Polynomials const& polynomials)
 
 void simplifyPolynomialThenEmplaceBackIfNotEmpty(Polynomials & polynomials, Polynomial const& polynomial)
 {
-    Polynomial simplifiedPolynomial(polynomial);    simplifiedPolynomial.simplify();
+    Polynomial simplifiedPolynomial(polynomial);
+    simplifiedPolynomial.simplify();
     emplaceBackIfNotEmpty(polynomials, simplifiedPolynomial);
 }
 

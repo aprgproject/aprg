@@ -5,7 +5,8 @@
 #include <Algebra/Constructs/RationalizeTermOverTerm.hpp>
 #include <Algebra/Operations/AccumulateOperations.hpp>
 #include <Algebra/Retrieval/ExpressionAndFunctionsRetriever.hpp>
-#include <Algebra/Simplification/SimplificationUtilities.hpp>#include <Algebra/Substitution/SubstitutionOfTermsToTerms.hpp>
+#include <Algebra/Simplification/SimplificationUtilities.hpp>
+#include <Algebra/Substitution/SubstitutionOfTermsToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
@@ -77,7 +78,8 @@ bool SimplificationOfExpression::shouldNotSimplifyExpressionRaiseToAConstantByDi
 
 bool SimplificationOfExpression::shouldPerformDebug()
 {
-    return Configuration::getInstance().getConfigurationDetails().shouldPerformDebug;}
+    return Configuration::getInstance().getConfigurationDetails().shouldPerformDebug;
+}
 
 Expression SimplificationOfExpression::getExpression() const
 {
@@ -161,6 +163,7 @@ void SimplificationOfExpression::simplifyBySubstitutingExpressionAndFunctionsToV
         while(tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(m_expression));
     }
 }
+
 void SimplificationOfExpression::processTermsBaseOnOperatorLevel(
         Expression & expression,
         TermsWithDetails const& termsToProcess,
@@ -231,7 +234,8 @@ void SimplificationOfExpression::processAndSaveTermsForRaiseToPower(
     expression.setTerm(getCombinedTermUsingTermsRaiseToTerms(termRaiseToTerms));
 }
 
-void SimplificationOfExpression::addOrSubtractTermsWithExpressions(        Term & combinedTerm,
+void SimplificationOfExpression::addOrSubtractTermsWithExpressions(
+        Term & combinedTerm,
         TermsWithDetails const& termsWithExpressions) const
 {
     AdditionAndSubtractionOfExpressions additionAndSubtraction(termsWithExpressions);
@@ -356,7 +360,8 @@ Expression SimplificationOfExpression::getNewExpressionWithSubstitutedTerms(
 
 Terms SimplificationOfExpression::getSubExpressionsAndSubFunctions(
         Expression const& expression)
-{    ExpressionAndFunctionsRetriever retriever;
+{
+    ExpressionAndFunctionsRetriever retriever;
     TermsWithDetails const& termsWithDetails(
                 expression.getTermsWithAssociation().getTermsWithDetails());
     if(termsWithDetails.size() > 1)

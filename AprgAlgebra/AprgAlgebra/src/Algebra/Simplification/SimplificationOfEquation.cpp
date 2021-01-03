@@ -51,7 +51,8 @@ Expression SimplificationOfEquation::getNewCombinedExpression(
                 SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyToACommonDenominator = true;
 
-    SimplificationOfExpression::ScopeObject scopeObject;    scopeObject.setInThisScopeThisConfiguration(configurationDetails);
+    SimplificationOfExpression::ScopeObject scopeObject;
+    scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
     combinedExpression.simplify();
 

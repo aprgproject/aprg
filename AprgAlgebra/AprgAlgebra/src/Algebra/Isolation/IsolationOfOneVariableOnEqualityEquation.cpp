@@ -5,6 +5,7 @@
 #include <Algebra/Term/Utilities/MonomialHelpers.hpp>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -33,6 +34,7 @@ bool IsolationOfOneVariableOnEqualityEquation::canBeIsolated(
     }
     return result;
 }
+
 AlbaNumber IsolationOfOneVariableOnEqualityEquation::getExponentOfIsolatedVariable(
         string const& variableName) const
 {
@@ -70,7 +72,8 @@ Equation IsolationOfOneVariableOnEqualityEquation::isolate(
             Term leftHandSideTerm(createExpressionIfPossible({Term(numerator), Term("/"), Term(denominator)}));
             Term rightHandSideTerm(monomialToIsolate);
             leftHandSideTerm.simplify();
-            rightHandSideTerm.simplify();            equationWithIsolatedVariable = Equation(leftHandSideTerm, "=", rightHandSideTerm);
+            rightHandSideTerm.simplify();
+            equationWithIsolatedVariable = Equation(leftHandSideTerm, "=", rightHandSideTerm);
         }
     }
     return equationWithIsolatedVariable;
@@ -108,7 +111,8 @@ bool IsolationOfOneVariableOnEqualityEquation::canBeIsolated(
 
 AlbaNumber IsolationOfOneVariableOnEqualityEquation::getExponentOfIsolatedVariable(
         Polynomial const& polynomial,
-        string const& variableName) const{
+        string const& variableName) const
+{
     AlbaNumber exponent;
     unsigned int monomialCountWithVariable(0);
     for(Monomial const& monomial : polynomial.getMonomialsConstReference())

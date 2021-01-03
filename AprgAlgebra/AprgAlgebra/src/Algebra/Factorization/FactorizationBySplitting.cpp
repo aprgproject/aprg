@@ -178,7 +178,8 @@ Polynomials factorizeSmallerPolynomialsByFactoringOutCommonFactors(Polynomials c
         if(!commonFactors.empty() && !doesContainOnlyConstants(commonFactors))
         {
             Polynomials remainingSmallerPolynomials(getPolynomialsWithRemovedCommonFactors(smallerPolynomials, commonFactors));
-            combinePolynomialsByAdditionAndThenEmplaceBack(result, remainingSmallerPolynomials);            for(Polynomial const& commonFactor : commonFactors)
+            combinePolynomialsByAdditionAndThenEmplaceBack(result, remainingSmallerPolynomials);
+            for(Polynomial const& commonFactor : commonFactors)
             {
                 simplifyPolynomialThenEmplaceBackIfNotEmpty(result, commonFactor);
             }
@@ -203,7 +204,8 @@ Polynomials factorizeSmallerPolynomialsBySubstitutingCommonFactorsToNewVariables
             }
         }
     }
-    return result;}
+    return result;
+}
 
 Polynomials factorizePolynomialWithNewVariables(
         Polynomial const& newPolynomialWithVariables,

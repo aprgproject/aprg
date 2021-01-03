@@ -27,7 +27,8 @@ private:
     bool canBeIsolated(AlbaNumber const& variableExponent) const;
     AlbaNumber getExponentOfIsolatedVariable(
             Polynomial const& polynomial,
-            std::string const& variableName) const;    Term m_simplifiedLeftSideTerm;
+            std::string const& variableName) const;
+    Term m_simplifiedLeftSideTerm;
 };
 
 }

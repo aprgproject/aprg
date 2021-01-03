@@ -17,7 +17,8 @@ TEST(PolynomialHelpersTest, DoesThePolynomialHaveOnlyOneConstantWorks)
 
 TEST(PolynomialHelpersTest, DoesThePolynomialHaveOnlyOneVariableWorks)
 {
-    EXPECT_FALSE(doesThePolynomialHaveOnlyOneVariable(Polynomial{Monomial(1, {{"x", 4}}), Monomial(1, {{"y", 3}}), Monomial(-16, {})}));    EXPECT_TRUE(doesThePolynomialHaveOnlyOneVariable(Polynomial{Monomial(1, {{"x", 4}}), Monomial(1, {{"x", 3}}), Monomial(-16, {})}));
+    EXPECT_FALSE(doesThePolynomialHaveOnlyOneVariable(Polynomial{Monomial(1, {{"x", 4}}), Monomial(1, {{"y", 3}}), Monomial(-16, {})}));
+    EXPECT_TRUE(doesThePolynomialHaveOnlyOneVariable(Polynomial{Monomial(1, {{"x", 4}}), Monomial(1, {{"x", 3}}), Monomial(-16, {})}));
 }
 
 TEST(PolynomialHelpersTest, GetRemainderForOneVariablePolynomialDividedByVariableMinusConstantValueWorks)

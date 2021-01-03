@@ -3,7 +3,8 @@
 #include <Algebra/Constructs/TermRaiseToTerms.hpp>
 #include <Algebra/Constructs/TermsOverTerms.hpp>
 #include <Algebra/Term/TermTypes/Expression.hpp>
-#include <Algebra/Term/TermTypes/Term.hpp>#include <Container/AlbaConfigurationHolder.hpp>
+#include <Algebra/Term/TermTypes/Term.hpp>
+#include <Container/AlbaConfigurationHolder.hpp>
 
 namespace alba
 {
@@ -29,6 +30,7 @@ public:
         bool shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase;
         bool shouldPerformDebug;
     };
+
     class Configuration
             : public AlbaConfigurationHolder<ConfigurationDetails>
     {};
@@ -50,6 +52,7 @@ public:
     static bool shouldPerformDebug();
 
     Expression getExpression() const;
+
     void setExpression(Expression const& expression);
 
     void simplify();
@@ -101,6 +104,7 @@ private:
     Expression getNewExpressionWithSubstitutedTerms(Term const& expressionOrFunctionTerm);
     Terms getSubExpressionsAndSubFunctions(Expression const& expression);
     bool shouldBeIncludedFromSubExpressionsAndSubFunctions(Term const& term);
+
     Expression m_expression;
 };
 

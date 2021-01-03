@@ -30,7 +30,8 @@ bool doesThePolynomialHaveOnlyOneConstant(Polynomial const& polynomial)
 
 bool doesThePolynomialHaveOnlyOneVariable(Polynomial const& polynomial)
 {
-    VariableNamesRetriever variableNamesRetriever;    variableNamesRetriever.retrieveFromPolynomial(polynomial);
+    VariableNamesRetriever variableNamesRetriever;
+    variableNamesRetriever.retrieveFromPolynomial(polynomial);
     return variableNamesRetriever.getSavedData().size() == 1;
 }
 

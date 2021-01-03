@@ -137,6 +137,7 @@ TEST(FactorizationUtilitiesTest, DoesContainConstantsOrOnlyOneNonConstantWorks)
 TEST(FactorizationUtilitiesTest, SimplifyPolynomialThenEmplaceBackIfNotEmptyWorksIfNotEmpty)
 {
     Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(2, {{"x", 1}})};
+
     Polynomials polynomialsToVerify;
     simplifyPolynomialThenEmplaceBackIfNotEmpty(polynomialsToVerify, polynomialToTest);
 

@@ -4,7 +4,8 @@
 #include <Algebra/Isolation/IsolationOfOneVariableOnEqualityEquation.hpp>
 #include <Algebra/Simplification/SimplificationOfExpression.hpp>
 #include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableEqualitySolver.hpp>
-#include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableNonEqualitySolver.hpp>#include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
+#include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableNonEqualitySolver.hpp>
+#include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/StringHelpers.hpp>
 #include <Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
@@ -119,8 +120,8 @@ TEST(ComboTest, ImplicitDifferentiationAndIsolatingDerivativeWorks)
     IsolationOfOneVariableOnEqualityEquation isolation(differentiatedEquation);
 
     Polynomial numerator{
-                Monomial(7, {{"y", 3}}),
-                Monomial(-12, {{"x", 3}, {"y", 2}})};
+        Monomial(-12, {{"x", 3}, {"y", 2}}),
+                Monomial(7, {{"y", 3}})};
     Polynomial denominator{
         Monomial(6, {{"x", 4}, {"y", 1}}),
                 Monomial(-21, {{"x", 1}, {"y", 2}}),
