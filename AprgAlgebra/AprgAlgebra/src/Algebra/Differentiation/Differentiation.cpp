@@ -113,7 +113,8 @@ Monomial Differentiation::differentiateVariable(Variable const& variable) const
     DerivativeVariable derivativeVariable(nameOfVariable);
     if(isVariableToDifferentiate(nameOfVariable))
     {
-        result = Monomial(1, {});    }
+        result = Monomial(1, {});
+    }
     else if(isDependentVariable(nameOfVariable))
     {
         DerivativeVariable derivativeOfDependentVariable(1U, m_nameOfVariableToDifferentiate, nameOfVariable);
@@ -126,7 +127,8 @@ Monomial Differentiation::differentiateVariable(Variable const& variable) const
     }
     else
     {
-        result = Monomial(0, {});    }
+        result = Monomial(0, {});
+    }
     return result;
 }
 
@@ -148,7 +150,8 @@ Polynomial Differentiation::differentiateMonomial(Monomial const& monomial) cons
                     || isDerivativeVariablePartOfThisDifferentiation(derivativeVariable))
             {
                 affectedVariables.putVariableWithExponent(variableName, exponent);
-            }            else
+            }
+            else
             {
                 unaffectedVariablesAndConstant.putVariableWithExponent(variableName, exponent);
             }
@@ -165,7 +168,8 @@ Polynomial Differentiation::differentiateMonomial(Monomial const& monomial) cons
         DerivativeVariable derivativeVariable(variableName);
         if(isVariableToDifferentiate(variableName))
         {
-            monomialToAdd.putVariableWithExponent(variableName, exponent-1);            monomialToAdd.multiplyNumber(exponent);
+            monomialToAdd.putVariableWithExponent(variableName, exponent-1);
+            monomialToAdd.multiplyNumber(exponent);
         }
         else if(isDependentVariable(variableName))
         {
@@ -183,7 +187,8 @@ Polynomial Differentiation::differentiateMonomial(Monomial const& monomial) cons
         }
         result.addMonomial(monomialToAdd);
     }
-    result.multiplyMonomial(unaffectedVariablesAndConstant);    result.simplify();
+    result.multiplyMonomial(unaffectedVariablesAndConstant);
+    result.simplify();
     return result;
 }
 
@@ -274,7 +279,8 @@ bool Differentiation::isDerivativeVariablePartOfThisDifferentiation(
                 && isDependentVariable(derivativeVariable.getDependentVariable());
 }
 
-Term Differentiation::differentiateAsTermOrExpressionIfNeeded(        Expression const& expression) const
+Term Differentiation::differentiateAsTermOrExpressionIfNeeded(
+        Expression const& expression) const
 {
     Term result(AlbaNumber(AlbaNumber::Value::NotANumber));
     Term simplifiedTerm(expression);
