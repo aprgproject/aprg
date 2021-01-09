@@ -56,11 +56,10 @@ string const& DerivativeVariableName::getDependentVariable() const
     return m_dependentVariable;
 }
 
-std::string DerivativeVariableName::getNameInLeibnizNotation() const
+string DerivativeVariableName::getNameInLeibnizNotation() const
 {
     stringstream ss;
-    if(m_differentiationLevel == 1)
-    {
+    if(m_differentiationLevel == 1)    {
         ss << "d[" << m_dependentVariable << "]/d[" << m_baseVariable << "]";
     }
     else
