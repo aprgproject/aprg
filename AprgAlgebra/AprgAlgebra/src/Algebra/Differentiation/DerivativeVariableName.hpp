@@ -8,14 +8,14 @@ namespace alba
 namespace algebra
 {
 
-class DerivativeVariable
+class DerivativeVariableName
 {
 public:
-    DerivativeVariable(
+    DerivativeVariableName(
             unsigned int const differentiationLevel,
             std::string const& baseVariable,
             std::string const& dependentVariable);
-    DerivativeVariable(std::string const& derivativeVariableInLeibnizNotation);
+    DerivativeVariableName(std::string const& derivativeVariableInLeibnizNotation);
 
     bool isValid() const;
     unsigned int getDifferentiationLevel() const;

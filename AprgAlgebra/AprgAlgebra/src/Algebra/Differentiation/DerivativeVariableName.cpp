@@ -1,4 +1,4 @@
-#include "DerivativeVariable.hpp"
+#include "DerivativeVariableName.hpp"
 
 #include <String/AlbaStringHelper.hpp>
 
@@ -12,7 +12,7 @@ namespace alba
 namespace algebra
 {
 
-DerivativeVariable::DerivativeVariable(
+DerivativeVariableName::DerivativeVariableName(
         unsigned int const differentiationLevel,
         string const& baseVariable,
         string const& dependentVariable)
@@ -22,7 +22,7 @@ DerivativeVariable::DerivativeVariable(
     , m_dependentVariable(dependentVariable)
 {}
 
-DerivativeVariable::DerivativeVariable(
+DerivativeVariableName::DerivativeVariableName(
         string const& derivativeVariableInLeibnizNotation)
     : m_isValid(false)
     , m_differentiationLevel(0U)
@@ -36,27 +36,27 @@ DerivativeVariable::DerivativeVariable(
     }
 }
 
-bool DerivativeVariable::isValid() const
+bool DerivativeVariableName::isValid() const
 {
     return m_isValid;
 }
 
-unsigned int DerivativeVariable::getDifferentiationLevel() const
+unsigned int DerivativeVariableName::getDifferentiationLevel() const
 {
     return m_differentiationLevel;
 }
 
-string const& DerivativeVariable::getBaseVariable() const
+string const& DerivativeVariableName::getBaseVariable() const
 {
     return m_baseVariable;
 }
 
-string const& DerivativeVariable::getDependentVariable() const
+string const& DerivativeVariableName::getDependentVariable() const
 {
     return m_dependentVariable;
 }
 
-std::string DerivativeVariable::getNameInLeibnizNotation() const
+std::string DerivativeVariableName::getNameInLeibnizNotation() const
 {
     stringstream ss;
     if(m_differentiationLevel == 1)
@@ -70,12 +70,12 @@ std::string DerivativeVariable::getNameInLeibnizNotation() const
     return ss.str();
 }
 
-void DerivativeVariable::differentiate()
+void DerivativeVariableName::differentiate()
 {
     m_differentiationLevel++;
 }
 
-void DerivativeVariable::processNumerator(
+void DerivativeVariableName::processNumerator(
         string const& numerator)
 {
     enum class ProcessingState
@@ -164,7 +164,7 @@ void DerivativeVariable::processNumerator(
     }
 }
 
-void DerivativeVariable::processDenominator(
+void DerivativeVariableName::processDenominator(
         string const& denominator)
 {
     enum class ProcessingState
