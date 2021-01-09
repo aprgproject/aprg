@@ -7,6 +7,7 @@
 #include <cmath>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -174,7 +175,8 @@ template bool isValueBeyondLimits<long long int>(double const value);
 template bool isValueBeyondLimits<unsigned long long int>(double const value);
 
 
-//getIntegerAfterRoundingDoubleValuetemplate <typename NumberType>
+//getIntegerAfterRoundingDoubleValue
+template <typename NumberType>
 NumberType getIntegerAfterRoundingDoubleValue(double const doubleValue)
 {
     return static_cast<NumberType>(round(doubleValue));
@@ -211,7 +213,8 @@ AlbaNumber convertIfInfinityToNearestFiniteValue(AlbaNumber const& value)
 
 //getAbsoluteValue
 template <typename NumberType>
-NumberType getAbsoluteValue(NumberType const value){
+NumberType getAbsoluteValue(NumberType const value)
+{
     return (value<0) ? value*-1 : value;
 }
 template int getAbsoluteValue<int>(int const value);

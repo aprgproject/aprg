@@ -8,6 +8,7 @@
 
 namespace alba
 {
+
 namespace algebra
 {
 
@@ -24,7 +25,8 @@ struct MinimumAndMaximum
 };
 
 bool willYieldToAbsoluteMinimumValue(
-        Term const& term,        std::string const& variableName,
+        Term const& term,
+        std::string const& variableName,
         AlbaNumber const& valueForEvaluation);
 
 bool willYieldToAbsoluteMaximumValue(
@@ -46,7 +48,8 @@ bool willYieldToRelativeMaximumValue(
 
 bool willYieldToExtremumValue(
         ExtremumType const extremumType,
-        Term const& term,        std::string const& variableName,
+        Term const& term,
+        std::string const& variableName,
         AlbaNumber const& valueForEvaluation,
         AlbaNumbers const& valuesUsedForChecking);
 
@@ -66,10 +69,11 @@ MinimumAndMaximum getMinimumAndMaximumAtClosedInterval(
         AlbaNumberInterval const& closedInterval);
 
 void putArbitiaryValuesBasedFromDomainOfTerm(
-        AlbaNumbers & valuesUsedForChecking,
+        AlbaNumbers & arbitiaryValues,
         Term const& term);
+
 void putArbitiaryValuesFromInterval(
-        AlbaNumbers & values,
+        AlbaNumbers & arbitiaryValues,
         AlbaNumberInterval const& interval);
 
 }

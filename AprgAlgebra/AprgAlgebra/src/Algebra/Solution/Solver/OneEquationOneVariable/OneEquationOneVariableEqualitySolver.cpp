@@ -90,6 +90,7 @@ void OneEquationOneVariableEqualitySolver::calculateForTermAndVariable(
         }
     }
 }
+
 void OneEquationOneVariableEqualitySolver::addValuesToSolutionSetIfNeeded(
         SolutionSet& solutionSet,
         Term const& term,

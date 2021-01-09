@@ -51,7 +51,8 @@ double getFractionalPartInDouble(double const doubleValue);
 AlbaNumber convertIfInfinityToNearestFiniteValue(AlbaNumber const& value);
 
 
-//Sign related functionstemplate <typename NumberType> NumberType getAbsoluteValue(NumberType const value);
+//Sign related functions
+template <typename NumberType> NumberType getAbsoluteValue(NumberType const value);
 template <typename NumberType> NumberType getSign(NumberType const value);
 template <typename NumberType> NumberType getPositiveDelta(NumberType const value1, NumberType const value2);
 int convertToIntegerThenSubtract(unsigned int const number1, unsigned int const number2);

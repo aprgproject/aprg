@@ -7,6 +7,7 @@
 #include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableEqualitySolver.hpp>
 #include <Math/AlbaMathHelper.hpp>
 #include <Math/Number/Interval/AlbaNumberInterval.hpp>
+
 using namespace alba::mathHelper;
 using namespace alba::algebra::DomainAndRange;
 using namespace std;
@@ -58,7 +59,8 @@ bool willYieldToRelativeMaximumValue(
         putArbitiaryValuesFromInterval(valuesUsedForChecking, openInterval);
         result = willYieldToExtremumValue(ExtremumType::Maximum, term, variableName, valueForEvaluation, valuesUsedForChecking);
     }
-    return result;}
+    return result;
+}
 
 bool willYieldToRelativeMinimumValue(
         Term const& term,
@@ -77,7 +79,8 @@ bool willYieldToRelativeMinimumValue(
         putArbitiaryValuesFromInterval(valuesUsedForChecking, openInterval);
         return willYieldToExtremumValue(ExtremumType::Minimum, term, variableName, valueForEvaluation, valuesUsedForChecking);
     }
-    return result;}
+    return result;
+}
 
 bool willYieldToExtremumValue(
         ExtremumType const extremumType,
@@ -210,18 +213,19 @@ MinimumAndMaximum getMinimumAndMaximumAtClosedInterval(
 }
 
 void putArbitiaryValuesBasedFromDomainOfTerm(
-        AlbaNumbers & valuesUsedForChecking,
-        Term const& term){
+        AlbaNumbers & arbitiaryValues,
+        Term const& term)
+{
     SolutionSet domainSolutionSet = calculateDomainForTermWithOneVariable(term);
     AlbaNumberIntervals domains(domainSolutionSet.getAcceptedIntervals());
     for(AlbaNumberInterval const domain : domains)
     {
-        putArbitiaryValuesFromInterval(valuesUsedForChecking, domain);
+        putArbitiaryValuesFromInterval(arbitiaryValues, domain);
     }
 }
 
 void putArbitiaryValuesFromInterval(
-        AlbaNumbers & values,
+        AlbaNumbers & arbitiaryValues,
         AlbaNumberInterval const& interval)
 {
     AlbaNumberIntervalEndpoint lowEndpoint(interval.getLowerEndpoint());
@@ -230,20 +234,20 @@ void putArbitiaryValuesFromInterval(
     AlbaNumber highValue(convertIfInfinityToNearestFiniteValue(highEndpoint.getValue()));
     if(lowEndpoint.isClose())
     {
-        values.emplace_back(lowValue);
+        arbitiaryValues.emplace_back(lowValue);
     }
     if(highEndpoint.isClose())
     {
-        values.emplace_back(highValue);
+        arbitiaryValues.emplace_back(highValue);
     }
     for(unsigned int level=0; level<5; level++)
     {
         AlbaNumber midpoint = (lowValue+highValue)/2;
         lowValue = (lowValue + midpoint)/2;
         highValue = (highValue + midpoint)/2;
-        values.emplace_back(lowValue);
-        values.emplace_back(midpoint);
-        values.emplace_back(highValue);
+        arbitiaryValues.emplace_back(lowValue);
+        arbitiaryValues.emplace_back(midpoint);
+        arbitiaryValues.emplace_back(highValue);
     }
 }
 

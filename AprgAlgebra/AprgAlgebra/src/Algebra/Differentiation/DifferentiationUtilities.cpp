@@ -17,6 +17,7 @@ constexpr char const*const X_NAME = "x";
 constexpr char const*const DELTA_X_NAME = "deltaX";
 
 }
+
 namespace alba
 {
 
@@ -59,7 +60,8 @@ Term getDerivativeDefinition(
     Term x(X_NAME);
     Term deltaX(DELTA_X_NAME);
     Term xPlusDeltaX(createExpressionIfPossible({x, Term("+"), deltaX}));
-    SubstitutionOfVariablesToTerms substitution{{variableName, xPlusDeltaX}};    Term fOfXPlusDeltaX(substitution.performSubstitutionTo(term));
+    SubstitutionOfVariablesToTerms substitution{{variableName, xPlusDeltaX}};
+    Term fOfXPlusDeltaX(substitution.performSubstitutionTo(term));
     substitution.putVariableWithTerm(variableName, x);
     Term fOfX(substitution.performSubstitutionTo(term));
     Term derivativeDefinition(createExpressionIfPossible({Term("("), fOfXPlusDeltaX, Term("-"), fOfX, Term(")"), Term("/"), deltaX}));

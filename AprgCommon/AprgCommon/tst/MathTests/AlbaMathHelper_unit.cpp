@@ -196,7 +196,8 @@ TEST(AlbaMathHelperTest, ConvertIfInfinityToNearestFiniteValueWorks)
 
 TEST(AlbaMathHelperTest, GetAbsoluteValueWorksForPrimitiveTypes)
 {
-    EXPECT_EQ(1, getAbsoluteValue(1));    EXPECT_EQ(1, getAbsoluteValue(-1));
+    EXPECT_EQ(1, getAbsoluteValue(1));
+    EXPECT_EQ(1, getAbsoluteValue(-1));
     EXPECT_EQ(0, getAbsoluteValue(0));
     EXPECT_EQ(0.5, getAbsoluteValue(0.5));
     EXPECT_EQ(0.5, getAbsoluteValue(-0.5));
