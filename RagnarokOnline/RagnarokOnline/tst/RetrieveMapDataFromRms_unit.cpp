@@ -7,37 +7,33 @@ using namespace std;
 namespace alba
 {
 
-TEST(RagnarokOnlineTest, DISABLED_RetrieveMapDataFromRmsWebPagesAndThenSaveTheData)
+TEST(RagnarokOnlineMapUpdateTest, DISABLED_RetrieveMapDataFromRmsWebPagesAndThenSaveTheData)
 {
     RagnarokOnline ragnarokOnline;
-
     ragnarokOnline.retrieveMapDataFromRmsWebpages(R"(C:\Users\detectivemark7\Desktop\RO\RMS\MapDatabaseTraversal\)");
 
     ragnarokOnline.saveMapNameToRoMapToFile(R"(C:\Users\detectivemark7\Desktop\RO\MapNameToRoMap.txt)");
 }
 
-TEST(RagnarokOnlineTest, ReadMapNameToRoMapFromFileWorks)
+TEST(RagnarokOnlineMapTest, ReadMapNameToRoMapFromFileWorks)
 {
     RagnarokOnline ragnarokOnline;
-
     ragnarokOnline.readMapNameToRoMapFromFile(R"(C:\Users\detectivemark7\Desktop\RO\MapNameToRoMap.txt)");
 
     EXPECT_EQ(316U, ragnarokOnline.getMapNameToRoMap().size());
 }
 
-TEST(RagnarokOnlineTest, RetrieveMapDataFromRmsWebPagesWorks)
+TEST(RagnarokOnlineMapTest, RetrieveMapDataFromRmsWebPagesWorks)
 {
     RagnarokOnline ragnarokOnline;
-
     ragnarokOnline.retrieveMapDataFromRmsWebpages(R"(C:\Users\detectivemark7\Desktop\RO\RMS\MapDatabaseTraversal\)");
 
     EXPECT_EQ(316U, ragnarokOnline.getMapNameToRoMap().size());
 }
 
-TEST(RagnarokOnlineTest, RetrieveMapDataFromRmsWebPageWorksWithExample1)
+TEST(RagnarokOnlineMapTest, RetrieveMapDataFromRmsWebPageWorksWithExample1)
 {
     RagnarokOnline ragnarokOnline;
-
     ragnarokOnline.retrieveMapDataFromRmsWebPage(R"(C:\Users\detectivemark7\Desktop\RO\RMS\MapDatabaseTraversal\areaNumber_1001.html)");
 
     MapNameToRoMap const& mapNameToRoMap(ragnarokOnline.getMapNameToRoMap());
@@ -82,10 +78,9 @@ TEST(RagnarokOnlineTest, RetrieveMapDataFromRmsWebPageWorksWithExample1)
     EXPECT_EQ("30~40 min", roMap1.monstersDetailsOnMap.at(10).spawnRate);
 }
 
-TEST(RagnarokOnlineTest, RetrieveMapDataFromRmsWebPageWorksWithExample2)
+TEST(RagnarokOnlineMapTest, RetrieveMapDataFromRmsWebPageWorksWithExample2)
 {
     RagnarokOnline ragnarokOnline;
-
     ragnarokOnline.retrieveMapDataFromRmsWebPage(R"(C:\Users\detectivemark7\Desktop\RO\RMS\MapDatabaseTraversal\areaNumber_2001.html)");
 
     MapNameToRoMap const& mapNameToRoMap(ragnarokOnline.getMapNameToRoMap());

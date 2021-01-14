@@ -12,10 +12,11 @@ struct MapAnalyzerData
 {
     std::string mapName;
     double zenyPotential;
+    double baseExperiencePotential;
+    double jobExperiencePotential;
     double annoyanceHp;
     unsigned int mobCount;
 };
-
 using MapsAnalyzerData = std::vector<MapAnalyzerData>;
 
 class MapAnalyzer
@@ -31,12 +32,14 @@ public:
     double getPotentialZenyFromMonster(Monster const& monster) const;
     void printPotentialZenyFromMonster(
             std::string const& monsterName) const;
+    double getMultiplierForExperience(std::string const& mapName);
 
 private:
+    bool isDropRateAcceptable(double const dropRate) const;
     double getTalonRoDropRate(double const dropRate) const;
+    double getBestPrice(Item const& item) const;
     RagnarokOnline m_ragnarokOnline;
     MapsAnalyzerData m_mapsAnalyzerData;
 };
-
 
 }
