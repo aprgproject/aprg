@@ -19,10 +19,12 @@ public:
             std::string const& nameOfVariableToDifferentiate,
             VariableNamesSet const& namesOfDependentVariables);
 
+    Term differentiateMultipleTimes(Term const& term, unsigned int const numberOfTimes) const;
+    Equation differentiateMultipleTimes(Equation const& equation, unsigned int const numberOfTimes) const;
+
     Term differentiate(Term const& term) const;
     Term differentiate(Constant const& constant) const;
-    Term differentiate(Variable const& variable) const;
-    Term differentiate(Monomial const& monomial) const;
+    Term differentiate(Variable const& variable) const;    Term differentiate(Monomial const& monomial) const;
     Term differentiate(Polynomial const& polynomial) const;
     Term differentiate(Expression const& expression) const;
     Term differentiate(Function const& functionObject) const;
