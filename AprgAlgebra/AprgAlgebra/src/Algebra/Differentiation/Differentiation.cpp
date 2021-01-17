@@ -51,7 +51,8 @@ Equation Differentiation::differentiateMultipleTimes(
 
 Term Differentiation::differentiate(Term const& term) const
 {
-    return differentiateTerm(term);}
+    return differentiateTerm(term);
+}
 
 Term Differentiation::differentiate(Constant const& constant) const
 {

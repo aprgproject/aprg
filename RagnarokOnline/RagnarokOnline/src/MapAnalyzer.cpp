@@ -5,12 +5,14 @@
 #include <algorithm>
 #include <iostream>
 
+
 #include <Debug/AlbaDebug.hpp>
 
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 MapAnalyzer::MapAnalyzer()
 {}
@@ -27,6 +29,7 @@ void MapAnalyzer::initialize()
     m_ragnarokOnline.buildItemNameToItemId();
     m_ragnarokOnline.buildMonsterNameToMonsterId();
 }
+
 void MapAnalyzer::analyze()
 {
     for(auto const& mapNameToRoMap : m_ragnarokOnline.getMapNameToRoMap())
@@ -60,7 +63,8 @@ void MapAnalyzer::analyze()
                 //if(monster.hitRequiredFor100Percent > 154 || monster.hitRequiredFor100Percent > 254) // for knight
                 {
                     isMapAcceptable = false;
-                    break;                }
+                    break;
+                }
                 if(monstersNameToDataMap.find(monsterDetailsOnMap.monsterName) != monstersNameToDataMap.cend())
                 {
                     monstersNameToDataMap[monsterDetailsOnMap.monsterName].spawnCount = 0U;
@@ -103,7 +107,8 @@ void MapAnalyzer::analyze()
             mapAnalyzerData.jobExperiencePotential = totalPotentialJobExperience;
             double averagePotentialZeny = totalPotentialZeny/monstersNameToDataMap.size();
             for(auto & monsterNameToDataPair : monstersNameToDataMap)
-            {                Monster monster(m_ragnarokOnline.getMonster(monsterNameToDataPair.first));
+            {
+                Monster monster(m_ragnarokOnline.getMonster(monsterNameToDataPair.first));
                 MonsterData & monsterData(monsterNameToDataPair.second);
                 monsterData.isAnnoyance = monsterData.potentialZeny/averagePotentialZeny < 0.5;
                 if(monsterData.isAnnoyance)
@@ -113,7 +118,8 @@ void MapAnalyzer::analyze()
                 if(/*!monsterData.isAnnoyance && */monster.isAggressive())
                 {
                     mapAnalyzerData.mobCount += monsterData.spawnCount;
-                }            }
+                }
+            }
             m_mapsAnalyzerData.emplace_back(mapAnalyzerData);
         }
     }
@@ -145,7 +151,8 @@ void MapAnalyzer::analyze()
     //printPotentialZenyFromMonster("Flame Skull");
 }
 
-void MapAnalyzer::sortData(){
+void MapAnalyzer::sortData()
+{
     sort(m_mapsAnalyzerData.begin(), m_mapsAnalyzerData.end(), [](
          MapAnalyzerData const& first,
          MapAnalyzerData const& second)
@@ -168,7 +175,8 @@ void MapAnalyzer::sortData(){
                 return first.zenyPotential > second.zenyPotential;
             }
         }
-        else        {
+        else
+        {
             return first.zenyPotential > second.zenyPotential;
         }
     });
@@ -188,6 +196,7 @@ void MapAnalyzer::printResult() const
              << "]" << endl;
     }
 }
+
 double MapAnalyzer::getPotentialZenyFromMonster(
         Monster const& monster) const
 {
@@ -201,7 +210,8 @@ double MapAnalyzer::getPotentialZenyFromMonster(
             potentialZeny += bestPrice * getTalonRoDropRate(dropWithRate.rate) / 100;
         }
     }
-    return potentialZeny;}
+    return potentialZeny;
+}
 
 void MapAnalyzer::printPotentialZenyFromMonster(
         string const& monsterName) const
@@ -255,7 +265,8 @@ bool MapAnalyzer::isDropRateAcceptable(
 
 double MapAnalyzer::getTalonRoDropRate(
         double const dropRate) const
-{    double talonRoDropRate(dropRate*3);
+{
+    double talonRoDropRate(dropRate*3);
     if(talonRoDropRate > 100)
     {
         talonRoDropRate = 100;

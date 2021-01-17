@@ -18,7 +18,8 @@ enum class ShopType
 
 struct NameAndRate
 {
-    std::string name;    double rate;
+    std::string name;
+    double rate;
 };
 
 struct MonsterDetailsOnRoMap
@@ -104,7 +105,8 @@ struct Monster
     bool hasStoneCurseSkill() const;
 };
 
-struct RoMap{
+struct RoMap
+{
     std::string name;
     std::string fullName;
     MonstersDetailsOnRoMap monstersDetailsOnMap;
@@ -123,7 +125,8 @@ using MapNameToRoMap = std::map<std::string, RoMap>;
 using ItemNameToShopItemDetailMap = std::map<std::string, ShopItemDetail>;
 
 
-class RagnarokOnline{
+class RagnarokOnline
+{
 public:
     RagnarokOnline();
 
@@ -145,6 +148,7 @@ public:
 
     void buildItemNameToItemId();
     void buildMonsterNameToMonsterId();
+
     ItemIdToItemMap const& getItemIdToItemMap() const;
     MonsterIdToMonsterMap const& getMonsterIdToMonsterMap() const;
     MapNameToRoMap const& getMapNameToRoMap() const;
@@ -170,7 +174,8 @@ public:
     void printSellingShopItems() const;
 
 private:
-    std::string fixText(std::string const& text);    ItemIdToItemMap m_itemIdToItemMap;
+    std::string fixText(std::string const& text);
+    ItemIdToItemMap m_itemIdToItemMap;
     MonsterIdToMonsterMap m_monsterIdToMonsterMap;
     MapNameToRoMap m_mapNameToRoMap;
     std::map<std::string, unsigned int> m_itemNameToItemIdMap;
@@ -179,7 +184,8 @@ private:
     ItemNameToShopItemDetailMap m_sellingShopItems;
 };
 
-std::ostream & operator<<(std::ostream & out, NameAndRate const& nameAndRate);std::ostream & operator<<(std::ostream & out, MonsterDetailsOnRoMap const& monsterDetailsOnRoMap);
+std::ostream & operator<<(std::ostream & out, NameAndRate const& nameAndRate);
+std::ostream & operator<<(std::ostream & out, MonsterDetailsOnRoMap const& monsterDetailsOnRoMap);
 std::ostream & operator<<(std::ostream & out, Item const& item);
 std::ostream & operator<<(std::ostream & out, Monster const& monster);
 std::ostream & operator<<(std::ostream & out, ShopItemDetail const& shopItemDetail);

@@ -17,6 +17,7 @@ struct MapAnalyzerData
     double annoyanceHp;
     unsigned int mobCount;
 };
+
 using MapsAnalyzerData = std::vector<MapAnalyzerData>;
 
 class MapAnalyzer
@@ -41,5 +42,6 @@ private:
     RagnarokOnline m_ragnarokOnline;
     MapsAnalyzerData m_mapsAnalyzerData;
 };
+
 
 }
