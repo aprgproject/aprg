@@ -131,11 +131,10 @@ Monomials const& Polynomial::getMonomialsConstReference() const
 AlbaNumber Polynomial::getMaxDegree() const
 {
     bool isFirst(true);
-    AlbaNumber maxDegree;
+    AlbaNumber maxDegree(0);
     for(Monomial const& monomial : m_monomials)
     {
-        if(isFirst)
-        {
+        if(isFirst)        {
             maxDegree = monomial.getDegree();
             isFirst=false;
         }
@@ -147,10 +146,28 @@ AlbaNumber Polynomial::getMaxDegree() const
     return maxDegree;
 }
 
+AlbaNumber Polynomial::getDegreeForVariable(string const& variableName) const
+{
+    bool isFirst(true);
+    AlbaNumber maxDegree(0);
+    for(Monomial const& monomial : m_monomials)
+    {
+        if(isFirst)
+        {
+            maxDegree = monomial.getExponentForVariable(variableName);
+            isFirst=false;
+        }
+        else
+        {
+            maxDegree = max(maxDegree, monomial.getExponentForVariable(variableName));
+        }
+    }
+    return maxDegree;
+}
+
 string Polynomial::getDisplayableString() const
 {
-    stringstream result;
-    if(m_monomials.empty())
+    stringstream result;    if(m_monomials.empty())
     {
         result << "(EmptyPolynomial)";
     }

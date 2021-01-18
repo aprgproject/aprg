@@ -25,34 +25,9 @@ Differentiation::Differentiation(
     , m_namesOfDependentVariables(namesOfDependentVariables)
 {}
 
-Term Differentiation::differentiateMultipleTimes(
-        Term const& term,
-        unsigned int const numberOfTimes) const
-{
-    Term currentResult(term);
-    for(unsigned int i=0; i<numberOfTimes; i++)
-    {
-        currentResult = differentiate(currentResult);
-    }
-    return currentResult;
-}
-
-Equation Differentiation::differentiateMultipleTimes(
-        Equation const& equation,
-        unsigned int const numberOfTimes) const
-{
-    Equation currentResult(equation);
-    for(unsigned int i=0; i<numberOfTimes; i++)
-    {
-        currentResult = differentiate(currentResult);
-    }
-    return currentResult;
-}
-
 Term Differentiation::differentiate(Term const& term) const
 {
-    return differentiateTerm(term);
-}
+    return differentiateTerm(term);}
 
 Term Differentiation::differentiate(Constant const& constant) const
 {
@@ -95,10 +70,33 @@ Equation Differentiation::differentiate(Equation const& equation) const
     return differentiateEquation(equation);
 }
 
+Term Differentiation::differentiateMultipleTimes(
+        Term const& term,
+        unsigned int const numberOfTimes) const
+{
+    Term currentResult(term);
+    for(unsigned int i=0; i<numberOfTimes; i++)
+    {
+        currentResult = differentiate(currentResult);
+    }
+    return currentResult;
+}
+
+Equation Differentiation::differentiateMultipleTimes(
+        Equation const& equation,
+        unsigned int const numberOfTimes) const
+{
+    Equation currentResult(equation);
+    for(unsigned int i=0; i<numberOfTimes; i++)
+    {
+        currentResult = differentiate(currentResult);
+    }
+    return currentResult;
+}
+
 Term Differentiation::differentiateTerm(Term const& term) const
 {
-    Term result;
-    if(term.isConstant())
+    Term result;    if(term.isConstant())
     {
         result = differentiate(term.getConstantConstReference());
     }

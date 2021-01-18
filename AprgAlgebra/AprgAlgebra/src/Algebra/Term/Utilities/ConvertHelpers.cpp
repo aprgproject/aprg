@@ -1,9 +1,9 @@
 #include "ConvertHelpers.hpp"
 
+#include <Algebra/Functions/SimplifyingFunctionToExpression.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 
-namespace alba
-{
+namespace alba{
 
 namespace algebra
 {
