@@ -2,14 +2,15 @@
 
 #include <Algebra/Differentiation/DifferentiationUtilities.hpp>
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
+#include <Algebra/Simplification/SimplificationOfExpression.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 
 using namespace alba::algebra::Functions;
+using namespace alba::algebra::Simplification;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 namespace algebra
 {
 
@@ -240,10 +241,9 @@ Term Differentiation::differentiateFunction(
     Term const& inputTerm(getTermConstReferenceFromBaseTerm(functionObject.getInputTermConstReference()));
     Term derivativeOfInputTermOfFunction(differentiate(inputTerm));
     Term result(createExpressionIfPossible({derivativeOfFunctionOnly, Term("*"), derivativeOfInputTermOfFunction}));
-    result.simplify();
+    simplifyToFactors(result);
     return result;
 }
-
 Equation Differentiation::differentiateEquation(
         Equation const& equation) const
 {
@@ -465,6 +465,19 @@ Term Differentiation::differentiateFunctionOnly(
         derivativeOfFunction = Term(createExpressionIfPossible({Term(-1), Term("*"), csc(inputTerm), Term("^"), Term(2)}));
     }
     return derivativeOfFunction;
+}
+
+void Differentiation::simplifyToFactors(
+        Term& term) const
+{
+    SimplificationOfExpression::ConfigurationDetails configurationDetails(
+                SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
+    configurationDetails.shouldSimplifyToFactors = true;
+
+    SimplificationOfExpression::ScopeObject scopeObject;
+    scopeObject.setInThisScopeThisConfiguration(configurationDetails);
+
+    term.simplify();
 }
 
 

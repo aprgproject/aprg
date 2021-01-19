@@ -2,24 +2,24 @@
 
 #include <Algebra/Differentiation/Differentiation.hpp>
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
+#include <Algebra/Simplification/SimplificationOfExpression.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 
 using namespace alba::algebra::Functions;
+using namespace alba::algebra::Simplification;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 namespace algebra
 {
 
 namespace
 {
-    static string C = "C";
+static string C = "C";
 }
 
-Integration::Integration(
-        string const& nameOfVariableToIntegrate)
+Integration::Integration(        string const& nameOfVariableToIntegrate)
     : m_nameOfVariableToIntegrate(nameOfVariableToIntegrate)
 {}
 
@@ -67,10 +67,9 @@ Term Integration::integrate(Function const& functionObject) const
 Term Integration::integrateWithPlusC(Term const& term) const
 {
     Term result(createExpressionIfPossible({integrateTerm(term), Term("+"), Term(C)}));
-    result.simplify();
+    simplifyForIntegration(result);
     return result;
 }
-
 Term Integration::integrateTerm(Term const& term) const
 {
     Term result;
@@ -215,10 +214,9 @@ Term Integration::integrateSimplifiedExpressionOnly(
     {
         result = integrateTermsInRaiseToPower(expression.getTermsWithAssociation().getTermsWithDetails());
     }
-    result.simplify();
+    simplifyForIntegration(result);
     return result;
 }
-
 Term Integration::integrateTermsInAdditionOrSubtraction(
         TermsWithDetails const& termsWithDetails) const
 {
@@ -242,12 +240,35 @@ Term Integration::integrateTermsInAdditionOrSubtraction(
 Term Integration::integrateTermsInMultiplicationOrDivision(
         TermsWithDetails const& termsWithDetails) const
 {
-    //implement this
-    return Term(AlbaNumber(AlbaNumber::Value::NotANumber));
+    Term result(AlbaNumber(AlbaNumber::Value::NotANumber));
+    if(termsWithDetails.size() == 2)
+    {
+        Term const& firstTerm(getTermConstReferenceFromSharedPointer(termsWithDetails.at(0).baseTermSharedPointer));
+        Term const& secondTerm(getTermConstReferenceFromSharedPointer(termsWithDetails.at(1).baseTermSharedPointer));
+        if(firstTerm.isFunction() && secondTerm.isFunction())
+        {
+            Function const& firstFunction(firstTerm.getFunctionConstReference());
+            Function const& secondFunction(secondTerm.getFunctionConstReference());
+            Term const& firstInputOfFunctionTerm(getTermConstReferenceFromBaseTerm(firstFunction.getInputTermConstReference()));
+            Term const& secondInputOfFunctionTerm(getTermConstReferenceFromBaseTerm(secondFunction.getInputTermConstReference()));
+            if(firstInputOfFunctionTerm == secondInputOfFunctionTerm)
+            {
+                if(firstFunction.getFunctionName() == "sec" && secondFunction.getFunctionName() == "tan")
+                {
+                    result = integrateUsingChainRule(sec(firstInputOfFunctionTerm), firstInputOfFunctionTerm);
+                }
+                else if(firstFunction.getFunctionName() == "csc" && secondFunction.getFunctionName() == "cot")
+                {
+                    result = integrateUsingChainRule(createExpressionIfPossible(
+                    {Term(csc(firstInputOfFunctionTerm)), Term("*"), Term(-1)}), firstInputOfFunctionTerm);
+                }
+            }
+        }
+    }
+    return result;
 }
 
-Term Integration::integrateTermsInRaiseToPower(
-        TermsWithDetails const& termsWithDetails) const
+Term Integration::integrateTermsInRaiseToPower(        TermsWithDetails const& termsWithDetails) const
 {
     Term result(AlbaNumber(AlbaNumber::Value::NotANumber));
     if(termsWithDetails.size() == 2)
@@ -271,12 +292,11 @@ Term Integration::integrateTermsInRaiseToPower(
 }
 
 Term Integration::integrateConstantRaiseToTerm(
-        AlbaNumber const& number,
-        Term const& term) const
+        AlbaNumber const& ,
+        Term const& ) const
 {
     //implement this
-    return Term(AlbaNumber(AlbaNumber::Value::NotANumber));
-}
+    return Term(AlbaNumber(AlbaNumber::Value::NotANumber));}
 
 Term Integration::integrateTermRaiseToConstant(
         Term const& term,
@@ -288,9 +308,26 @@ Term Integration::integrateTermRaiseToConstant(
         result = integrateUsingChainRule(Term(createExpressionIfPossible(
         {term, Term("^"), Term(number+1), Term("/"), Term(number+1)})), term);
     }
+    else if(term.isFunction())
+    {
+        Function const& functionTerm(term.getFunctionConstReference());
+        Term const& inputOfFunctionTerm(getTermConstReferenceFromBaseTerm(functionTerm.getInputTermConstReference()));
+        if(number == 2
+                && functionTerm.getFunctionName() == "sec"
+                && getDegreeForVariableToIntegrate(inputOfFunctionTerm) == 1)
+        {
+            result = integrateUsingChainRule(Term(tan(inputOfFunctionTerm)), inputOfFunctionTerm);
+        }
+        else if(number == 2
+                && functionTerm.getFunctionName() == "csc"
+                && getDegreeForVariableToIntegrate(inputOfFunctionTerm) == 1)
+        {
+            result = integrateUsingChainRule(createExpressionIfPossible(
+            {Term(cot(inputOfFunctionTerm)), Term("*"), Term(-1)}), inputOfFunctionTerm);
+        }
+    }
     return result;
 }
-
 Term Integration::integrateTermRaiseToTerm(
         Term const& ,
         Term const& ) const
@@ -330,10 +367,9 @@ Term Integration::integrateFunctionOnly(
             integrationOfFunction = Term(createExpressionIfPossible({Term(-1), Term("*"), csc(inputTerm), Term("^"), Term(2)}));
         }*/
     }
-    integrationOfFunction.simplify();
+    simplifyForIntegration(integrationOfFunction);
     return integrationOfFunction;
 }
-
 AlbaNumber Integration::getDegreeForVariableToIntegrate(Term const& term) const
 {
     AlbaNumber result(0);
@@ -350,6 +386,19 @@ AlbaNumber Integration::getDegreeForVariableToIntegrate(Term const& term) const
         result = term.getPolynomialConstReference().getDegreeForVariable(m_nameOfVariableToIntegrate);
     }
     return result;
+}
+
+void Integration::simplifyForIntegration(
+        Term& term) const
+{
+    SimplificationOfExpression::ConfigurationDetails configurationDetails(
+                SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
+    configurationDetails.shouldSimplifyToFactors = true;
+
+    SimplificationOfExpression::ScopeObject scopeObject;
+    scopeObject.setInThisScopeThisConfiguration(configurationDetails);
+
+    term.simplify();
 }
 
 

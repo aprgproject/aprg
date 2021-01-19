@@ -321,9 +321,9 @@ void TermsOverTerms::removeSameTermsInNumeratorAndDenominator(
     BaseToExponentMap baseToExponentMap;
     updateBaseToExponentMap(baseToExponentMap, numeratorTerms, 1);
     updateBaseToExponentMap(baseToExponentMap, denominatorTerms, -1);
+
     numeratorTerms.clear();
     denominatorTerms.clear();
-
     putTermsOnNumeratorAndDenominatorFromBaseExponentMap(numeratorTerms, denominatorTerms, baseToExponentMap);
 }
 
