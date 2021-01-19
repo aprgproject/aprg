@@ -31,6 +31,7 @@ public:
         bool shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase;
         bool shouldPerformDebug;
     };
+
     class Configuration
             : public AlbaConfigurationHolder<ConfigurationDetails>
     {};
@@ -51,6 +52,7 @@ public:
     static bool shouldSimplifyToFactors();
     static bool shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase();
     static bool shouldPerformDebug();
+
     Expression getExpression() const;
 
     void setExpression(Expression const& expression);

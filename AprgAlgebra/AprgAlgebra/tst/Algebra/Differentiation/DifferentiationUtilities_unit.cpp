@@ -117,7 +117,8 @@ TEST(DifferentiationUtilitiesTest, GetDifferentiabilityDomainWorks)
               intervalToVerify.at(1));
 }
 
-TEST(DifferentiationUtilitiesTest, GetDerivativeDefinitionWorks){
+TEST(DifferentiationUtilitiesTest, GetDerivativeDefinitionWorks)
+{
     Term term(Polynomial{Monomial(1, {{"a", 2}}), Monomial(1, {})});
 
     Term derivative(getDerivativeDefinition(term, "a"));

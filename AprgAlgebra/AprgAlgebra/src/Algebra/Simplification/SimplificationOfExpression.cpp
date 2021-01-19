@@ -78,7 +78,8 @@ bool SimplificationOfExpression::shouldSimplifyToFactors()
 
 bool SimplificationOfExpression::shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase()
 {
-    return Configuration::getInstance().getConfigurationDetails().shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase;}
+    return Configuration::getInstance().getConfigurationDetails().shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase;
+}
 
 bool SimplificationOfExpression::shouldPerformDebug()
 {
@@ -195,7 +196,8 @@ void SimplificationOfExpression::processTermsBaseOnOperatorLevel(
         processAndSaveTermsForRaiseToPower(expression, termsToProcess);
         break;
     }
-    }}
+    }
+}
 
 void SimplificationOfExpression::processAndSaveTermsForAdditionAndSubtraction(
         Expression & expression,
@@ -218,10 +220,11 @@ void SimplificationOfExpression::processAndSaveTermsForMultiplicationAndDivision
     simplifyByCombiningRadicalsInMultiplicationAndDivisionIfNeeded(termsInMultiplicationAndDivision);
 
     TermsOverTerms termsOverTerms(termsInMultiplicationAndDivision);
-    termsOverTerms.setShouldSimplifyToFactors(shouldSimplifyToFactors());
+    termsOverTerms.setAsShouldSimplifyToFactors(shouldSimplifyToFactors());
     termsOverTerms.simplify();
 
-    Term combinedTerm(getCombinedTermAndSimplifyByRationalizingNumeratorOrDenominatorIfNeeded(termsOverTerms));    expression.setTerm(combinedTerm);
+    Term combinedTerm(getCombinedTermAndSimplifyByRationalizingNumeratorOrDenominatorIfNeeded(termsOverTerms));
+    expression.setTerm(combinedTerm);
 }
 
 void SimplificationOfExpression::processAndSaveTermsForRaiseToPower(
@@ -233,6 +236,7 @@ void SimplificationOfExpression::processAndSaveTermsForRaiseToPower(
                 shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt());
     termRaiseToTerms.setAsShouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase(
                 shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase());
+    termRaiseToTerms.setAsShouldSimplifyToFactors(shouldSimplifyToFactors());
     termRaiseToTerms.simplify();
     expression.setTerm(getCombinedTermUsingTermsRaiseToTerms(termRaiseToTerms));
 }

@@ -27,7 +27,8 @@ Differentiation::Differentiation(
 
 Term Differentiation::differentiate(Term const& term) const
 {
-    return differentiateTerm(term);}
+    return differentiateTerm(term);
+}
 
 Term Differentiation::differentiate(Constant const& constant) const
 {
@@ -96,7 +97,8 @@ Equation Differentiation::differentiateMultipleTimes(
 
 Term Differentiation::differentiateTerm(Term const& term) const
 {
-    Term result;    if(term.isConstant())
+    Term result;
+    if(term.isConstant())
     {
         result = differentiate(term.getConstantConstReference());
     }

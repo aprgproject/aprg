@@ -17,6 +17,7 @@ namespace algebra
 TEST(DifferentiationTest, DifferentiateWorksForTerm)
 {
     Differentiation differentiationForX("x");
+
     EXPECT_EQ(Term(Constant(0)), differentiationForX.differentiate(Term(5)));
 }
 
@@ -65,7 +66,8 @@ TEST(DifferentiationTest, DifferentiateWorksForPolynomial)
     EXPECT_EQ(expectedTerm2, differentiationForXWithY.differentiate(polynomial2));
 }
 
-TEST(DifferentiationTest, DifferentiateWorksForExpression){
+TEST(DifferentiationTest, DifferentiateWorksForExpression)
+{
     Differentiation differentiationForX("x");
     Term x("x");
     Expression expression01{createExpressionIfPossible({x})};
@@ -77,7 +79,8 @@ TEST(DifferentiationTest, DifferentiateWorksForExpression){
     EXPECT_EQ(expectedTerm02, differentiationForX.differentiate(expression02));
 }
 
-TEST(DifferentiationTest, DifferentiateWorksForFunction){
+TEST(DifferentiationTest, DifferentiateWorksForFunction)
+{
     Differentiation differentiationForX("x");
 
     Term x("x");
@@ -119,7 +122,8 @@ TEST(DifferentiationTest, DifferentiateMultipleTimesWorksForEquation)
 
 TEST(DifferentiationTest, DifferentiateTermWorks)
 {
-    Differentiation differentiationForX("x");    Term x("x");
+    Differentiation differentiationForX("x");
+    Term x("x");
     Term polynomialTerm(Polynomial({Monomial(7, {{"x", 4}}), Monomial(-2, {{"x", 3}}), Monomial(8, {{"x", 1}}), Monomial(5, {})}));
     Term expressionTerm(createExpressionIfPossible({cos(x)}));
 

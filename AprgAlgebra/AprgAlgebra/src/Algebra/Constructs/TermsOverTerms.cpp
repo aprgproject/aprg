@@ -28,9 +28,9 @@ namespace algebra
 {
 
 TermsOverTerms::TermsOverTerms()
-    : m_shouldSimplifyToFactors(false)
-    , m_numerators()
+    : m_numerators()
     , m_denominators()
+    , m_shouldSimplifyToFactors(false)
 {}
 
 TermsOverTerms::TermsOverTerms(
@@ -38,23 +38,26 @@ TermsOverTerms::TermsOverTerms(
     : m_shouldSimplifyToFactors(false)
 {
     TermsWithDetails numeratorsWithDetails;
-    TermsWithDetails denominatorsWithDetails;    segregateTermsWithPositiveAndNegativeAssociations(termsInMultiplicationAndDivision, numeratorsWithDetails, denominatorsWithDetails);
+    TermsWithDetails denominatorsWithDetails;
+    segregateTermsWithPositiveAndNegativeAssociations(termsInMultiplicationAndDivision, numeratorsWithDetails, denominatorsWithDetails);
     retrieveTermsOnly(m_numerators, numeratorsWithDetails);
     retrieveTermsOnly(m_denominators, denominatorsWithDetails);
 }
 
 TermsOverTerms::TermsOverTerms(Terms const& numerators, Terms const& denominators)
-    : m_shouldSimplifyToFactors(false)
-    , m_numerators(numerators)
+    : m_numerators(numerators)
     , m_denominators(denominators)
+    , m_shouldSimplifyToFactors(false)
 {}
+
 TermsOverTerms::TermsOverTerms(
         TermsWithDetails const& numeratorsWithDetails,
         TermsWithDetails const& denominatorsWithDetails)
     : m_shouldSimplifyToFactors(false)
 {
     retrieveTermsOnly(m_numerators, numeratorsWithDetails);
-    retrieveTermsOnly(m_denominators, denominatorsWithDetails);}
+    retrieveTermsOnly(m_denominators, denominatorsWithDetails);
+}
 
 Terms const& TermsOverTerms::getNumerators() const
 {
@@ -83,9 +86,16 @@ TermsWithDetails TermsOverTerms::getNumeratorAndDenominatorAsTermWithDetails() c
 Term TermsOverTerms::getCombinedTerm() const
 {
     Term combinedTerm(1);
-    accumulateTermsForMultiplicationAndDivision(
-                combinedTerm,
-                getNumeratorAndDenominatorAsTermWithDetails());
+    if(m_shouldSimplifyToFactors)
+    {
+        combinedTerm = getCombinedTermAsFactors(getNumeratorAndDenominatorAsTermWithDetails());
+    }
+    else
+    {
+        accumulateTermsForMultiplicationAndDivision(
+                    combinedTerm,
+                    getNumeratorAndDenominatorAsTermWithDetails());
+    }
     return combinedTerm;
 }
 
@@ -97,7 +107,14 @@ Term TermsOverTerms::getCombinedNumerator() const
     {
         numeratorsWithPositiveAssociation.emplace_back(numerator, TermAssociationType::Positive);
     }
-    accumulateTermsForMultiplicationAndDivision(combinedTerm, numeratorsWithPositiveAssociation);
+    if(m_shouldSimplifyToFactors)
+    {
+        combinedTerm = getCombinedTermAsFactors(numeratorsWithPositiveAssociation);
+    }
+    else
+    {
+        accumulateTermsForMultiplicationAndDivision(combinedTerm, numeratorsWithPositiveAssociation);
+    }
     return combinedTerm;
 }
 
@@ -109,7 +126,14 @@ Term TermsOverTerms::getCombinedDenominator() const
     {
         denominatorsWithPositiveAssociation.emplace_back(denominator, TermAssociationType::Positive);
     }
-    accumulateTermsForMultiplicationAndDivision(combinedTerm, denominatorsWithPositiveAssociation);
+    if(m_shouldSimplifyToFactors)
+    {
+        combinedTerm = getCombinedTermAsFactors(denominatorsWithPositiveAssociation);
+    }
+    else
+    {
+        accumulateTermsForMultiplicationAndDivision(combinedTerm, denominatorsWithPositiveAssociation);
+    }
     return combinedTerm;
 }
 
@@ -143,7 +167,7 @@ string TermsOverTerms::getDisplayableString() const
     return result.str();
 }
 
-void TermsOverTerms::setShouldSimplifyToFactors(
+void TermsOverTerms::setAsShouldSimplifyToFactors(
         bool const shouldSimplifyToFactors)
 {
     m_shouldSimplifyToFactors = shouldSimplifyToFactors;
@@ -162,6 +186,39 @@ void TermsOverTerms::simplify()
     {
         continueToSimplifyAndCombineFactors(factorizedNumerators, factorizedDenominators);
     }
+}
+
+Term TermsOverTerms::getCombinedTermAsFactors(
+        TermsWithDetails const& termsWithDetails) const
+{
+    Term combinedTerm;
+    if(termsWithDetails.size() == 0)
+    {
+        combinedTerm = Term(1);
+    }
+    else if(termsWithDetails.size() == 1)
+    {
+        TermWithDetails const& termWithDetails(termsWithDetails.at(0));
+        if(termWithDetails.hasPositiveAssociation())
+        {
+            combinedTerm = getTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer);
+        }
+        else
+        {
+            Expression combinedExpression;
+            combinedExpression.putTermWithDivisionIfNeeded(
+                        getBaseTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
+            combinedTerm = combinedExpression;
+        }
+    }
+    else
+    {
+        Expression combinedExpression;
+        combinedExpression.setCommonOperatorLevel(OperatorLevel::MultiplicationAndDivision);
+        combinedExpression.putTermsWithDetails(termsWithDetails);
+        combinedTerm = Term(combinedExpression);
+    }
+    return combinedTerm;
 }
 
 void TermsOverTerms::continueToSimplifyToFactors(
@@ -189,7 +246,8 @@ void TermsOverTerms::continueToSimplifyAndCombineFactors(
 
 Polynomial TermsOverTerms::multiplyPolynomialTerms(Terms const& polynomialTerms) const
 {
-    Polynomial polynomialResult(createPolynomialFromConstant(1));    for(Term const& polynomialTerm : polynomialTerms)
+    Polynomial polynomialResult(createPolynomialFromConstant(1));
+    for(Term const& polynomialTerm : polynomialTerms)
     {
         if(canBeConvertedToPolynomial(polynomialTerm))
         {
@@ -258,12 +316,14 @@ void TermsOverTerms::retrievePolynomialAndNonPolynomialsTerms(
 
 void TermsOverTerms::removeSameTermsInNumeratorAndDenominator(
         Terms & numeratorTerms,
-        Terms & denominatorTerms){
+        Terms & denominatorTerms)
+{
     BaseToExponentMap baseToExponentMap;
     updateBaseToExponentMap(baseToExponentMap, numeratorTerms, 1);
     updateBaseToExponentMap(baseToExponentMap, denominatorTerms, -1);
     numeratorTerms.clear();
     denominatorTerms.clear();
+
     putTermsOnNumeratorAndDenominatorFromBaseExponentMap(numeratorTerms, denominatorTerms, baseToExponentMap);
 }
 
@@ -326,7 +386,8 @@ void TermsOverTerms::putTermsOnNumeratorAndDenominatorFromBaseExponentMap(
             }
         }
     }
-    if(hasZerosOnNumeratorAndDenominator)    {
+    if(hasZerosOnNumeratorAndDenominator)
+    {
         numeratorTerms.emplace_back(Term(AlbaNumber(AlbaNumber::Value::NotANumber)));
     }
 }
@@ -418,7 +479,8 @@ void TermsOverTerms::simplifyPolynomialNumeratorAndPolynomialDenominator(
 void TermsOverTerms::simplifyMonomialsToPolynomialOverPolynomial()
 {
     Terms monomialsNumerators, nonMonomialNumerators, monomialDenominators, nonMonomialDenominators;
-    segregateMonomialsAndNonMonomials(m_numerators, monomialsNumerators, nonMonomialNumerators);    segregateMonomialsAndNonMonomials(m_denominators, monomialDenominators, nonMonomialDenominators);
+    segregateMonomialsAndNonMonomials(m_numerators, monomialsNumerators, nonMonomialNumerators);
+    segregateMonomialsAndNonMonomials(m_denominators, monomialDenominators, nonMonomialDenominators);
     Polynomial polynomialNumerator(multiplyPolynomialTerms(monomialsNumerators));
     Polynomial polynomialDenominator(multiplyPolynomialTerms(monomialDenominators));
     simplifyPolynomialNumeratorAndPolynomialDenominator(polynomialNumerator, polynomialDenominator);
@@ -429,7 +491,8 @@ void TermsOverTerms::simplifyMonomialsToPolynomialOverPolynomial()
 void TermsOverTerms::simplifyPolynomialsToPolynomialOverPolynomial()
 {
     Terms polynomialNumerators, nonPolynomialNumerators, polynomialDenominators, nonPolynomialDenominators;
-    segregatePolynomialAndNonPolynomials(m_numerators, polynomialNumerators, nonPolynomialNumerators);    segregatePolynomialAndNonPolynomials(m_denominators, polynomialDenominators, nonPolynomialDenominators);
+    segregatePolynomialAndNonPolynomials(m_numerators, polynomialNumerators, nonPolynomialNumerators);
+    segregatePolynomialAndNonPolynomials(m_denominators, polynomialDenominators, nonPolynomialDenominators);
     Polynomial polynomialNumerator(multiplyPolynomialTerms(polynomialNumerators));
     Polynomial polynomialDenominator(multiplyPolynomialTerms(polynomialDenominators));
     simplifyPolynomialNumeratorAndPolynomialDenominator(polynomialNumerator, polynomialDenominator);

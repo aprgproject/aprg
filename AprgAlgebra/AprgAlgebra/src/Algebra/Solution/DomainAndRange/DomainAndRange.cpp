@@ -220,7 +220,8 @@ AlbaNumber getTransitionValue(
     AlbaNumber previousInputValue(inputValueYieldsToNonFiniteValue);
     while(previousInputValue != newInputValue)
     {
-        previousInputValue = newInputValue;        newInputValue = getAverageForAlbaNumber(currentValueToRealFiniteValue, currentValueToNonRealFiniteValue);
+        previousInputValue = newInputValue;
+        newInputValue = getAverageForAlbaNumber(currentValueToRealFiniteValue, currentValueToNonRealFiniteValue);
         AlbaNumber newOutputValue(functionToCheck(newInputValue));
         if(newOutputValue.isARealFiniteValue())
         {

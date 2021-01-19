@@ -3,7 +3,8 @@
 #include <Algebra/Differentiation/Differentiation.hpp>
 #include <Algebra/Limit/Limit.hpp>
 #include <Algebra/Simplification/SimplificationOfExpression.hpp>
-#include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>#include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
+#include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
+#include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Solution/DomainAndRange/DomainAndRange.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
@@ -96,6 +97,7 @@ SolutionSet getDifferentiabilityDomain(
     Term derivativeTerm(differentiation.differentiate(term));
     return calculateDomainForTermWithOneVariable(derivativeTerm);
 }
+
 
 }
 

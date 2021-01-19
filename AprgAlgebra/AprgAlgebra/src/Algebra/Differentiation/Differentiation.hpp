@@ -21,7 +21,8 @@ public:
 
     Term differentiate(Term const& term) const;
     Term differentiate(Constant const& constant) const;
-    Term differentiate(Variable const& variable) const;    Term differentiate(Monomial const& monomial) const;
+    Term differentiate(Variable const& variable) const;
+    Term differentiate(Monomial const& monomial) const;
     Term differentiate(Polynomial const& polynomial) const;
     Term differentiate(Expression const& expression) const;
     Term differentiate(Function const& functionObject) const;
@@ -32,7 +33,8 @@ public:
 
     Term differentiateTerm(Term const& term) const;
     AlbaNumber differentiateConstant(Constant const&) const;
-    Monomial differentiateVariable(Variable const& variable) const;    Polynomial differentiateMonomial(Monomial const& monomial) const;
+    Monomial differentiateVariable(Variable const& variable) const;
+    Polynomial differentiateMonomial(Monomial const& monomial) const;
     Polynomial differentiatePolynomial(Polynomial const& polynomial) const;
     Term differentiateExpression(Expression const& expression) const;
     Term differentiateFunction(Function const& functionObject) const;
@@ -71,4 +73,5 @@ private:
 };
 
 }
+
 }
