@@ -247,10 +247,10 @@ void AdditionAndSubtractionOfTermsOverTerms::combineExpressionAsAddOrSubtract(
 TermsOverTerms AdditionAndSubtractionOfTermsOverTerms::getSimplifiedTermsOverTerms(TermsOverTerms const& termsOverTerms)
 {
     TermsOverTerms termsOverTermsSimplified(termsOverTerms);
-    termsOverTermsSimplified.simplifyToFactors();
+    termsOverTermsSimplified.setShouldSimplifyToFactors(true);
+    termsOverTermsSimplified.simplify();
     return termsOverTermsSimplified;
 }
-
 void AdditionAndSubtractionOfTermsOverTerms::putItem(TermsOverTerms const& item, TermAssociationType const association)
 {
     m_items.emplace_back(item);

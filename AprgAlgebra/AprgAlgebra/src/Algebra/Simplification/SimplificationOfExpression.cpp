@@ -71,10 +71,14 @@ bool SimplificationOfExpression::shouldSimplifyBySubstitutingExpressionAndFuncti
     return Configuration::getInstance().getConfigurationDetails().shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables;
 }
 
+bool SimplificationOfExpression::shouldSimplifyToFactors()
+{
+    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyToFactors;
+}
+
 bool SimplificationOfExpression::shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase()
 {
-    return Configuration::getInstance().getConfigurationDetails().shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase;
-}
+    return Configuration::getInstance().getConfigurationDetails().shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase;}
 
 bool SimplificationOfExpression::shouldPerformDebug()
 {
@@ -188,11 +192,10 @@ void SimplificationOfExpression::processTermsBaseOnOperatorLevel(
     }
     case OperatorLevel::RaiseToPower:
     {
-        processAndSaveTermsForRaiseToPower(expression,termsToProcess);
+        processAndSaveTermsForRaiseToPower(expression, termsToProcess);
         break;
     }
-    }
-}
+    }}
 
 void SimplificationOfExpression::processAndSaveTermsForAdditionAndSubtraction(
         Expression & expression,
@@ -215,10 +218,10 @@ void SimplificationOfExpression::processAndSaveTermsForMultiplicationAndDivision
     simplifyByCombiningRadicalsInMultiplicationAndDivisionIfNeeded(termsInMultiplicationAndDivision);
 
     TermsOverTerms termsOverTerms(termsInMultiplicationAndDivision);
+    termsOverTerms.setShouldSimplifyToFactors(shouldSimplifyToFactors());
     termsOverTerms.simplify();
 
-    Term combinedTerm(getCombinedTermAndSimplifyByRationalizingNumeratorOrDenominatorIfNeeded(termsOverTerms));
-    expression.setTerm(combinedTerm);
+    Term combinedTerm(getCombinedTermAndSimplifyByRationalizingNumeratorOrDenominatorIfNeeded(termsOverTerms));    expression.setTerm(combinedTerm);
 }
 
 void SimplificationOfExpression::processAndSaveTermsForRaiseToPower(
@@ -408,7 +411,7 @@ algebra::Simplification::SimplificationOfExpression::ConfigurationDetails
 getDefaultConfigurationDetails<alba::algebra::Simplification::SimplificationOfExpression::ConfigurationDetails>()
 {
     return algebra::Simplification::SimplificationOfExpression::ConfigurationDetails
-    {false, false, false, false, false, false, false, false, false};
+    {false, false, false, false, false, false, false, false, false, false};
 }
 
 }
