@@ -519,7 +519,8 @@ TEST(AlbaMathHelperTest, GetGreatestCommonFactorForAlbaNumberWorks)
     EXPECT_EQ(AlbaNumber(9), getGreatestCommonFactorForAlbaNumber(AlbaNumber(-36), AlbaNumber(27)));
 }
 
-TEST(AlbaMathHelperTest, GetLeastCommonMultipleForAlbaNumberWorks){
+TEST(AlbaMathHelperTest, GetLeastCommonMultipleForAlbaNumberWorks)
+{
     EXPECT_EQ(AlbaNumber(3),
               getLeastCommonMultipleForAlbaNumber(AlbaNumber::createFraction(3, 2), AlbaNumber::createFraction(1, 3)));
 }
