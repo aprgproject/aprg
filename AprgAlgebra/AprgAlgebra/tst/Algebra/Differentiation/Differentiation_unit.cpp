@@ -95,11 +95,11 @@ TEST(DifferentiationTest, DifferentiateWorksForEquation)
     Term term2ForEquation1(Polynomial{Monomial(3, {{"y", 6}}), Monomial(1, {{"y", 5}}), Monomial(-1, {{"y", 2}})});
     Equation equation1(term1ForEquation1, "=", term2ForEquation1);
 
-    EXPECT_EQ("(18[d[y]/d[x]][y^5] + 5[d[y]/d[x]][y^4] + -6[x^5] + -2[d[y]/d[x]][y] + 2) = 0", differentiationForXWithY.differentiate(equation1).getDisplayableString());
+    EXPECT_EQ("(18[d[y]/d[x]][y^5] + 5[d[y]/d[x]][y^4] + -6[x^5] + -2[d[y]/d[x]][y] + 2) = 0",
+              differentiationForXWithY.differentiate(equation1).getDisplayableString());
 }
 
-TEST(DifferentiationTest, DifferentiateMultipleTimesWorksForTerm)
-{
+TEST(DifferentiationTest, DifferentiateMultipleTimesWorksForTerm){
     Differentiation differentiationForX("x");
 
     Term termToTest(Monomial(3, {{"x", 4}}));

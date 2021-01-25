@@ -85,13 +85,20 @@ TEST(IntegrationTest, IntegrateWithPlusCWorks)
 {
     Integration integrationForX("x");
 
-    EXPECT_EQ(Term(Polynomial{Monomial(1, {{"C", 1}}), Monomial(5, {{"x", 1}})}), integrationForX.integrateWithPlusC(Constant(5)));
+    Term expectedTerm(Polynomial{Monomial(1, {{"C", 1}}), Monomial(5, {{"x", 1}})});
+    EXPECT_EQ(expectedTerm, integrationForX.integrateWithPlusC(Constant(5)));
+}
+
+TEST(IntegrationTest, IntegrateWithDefiniteValuesWorks)
+{
+    Integration integrationForX("x");
+
+    EXPECT_EQ(Term(10), integrationForX.integrateWithDefiniteValues(Term("x"), 4, 6));
 }
 
 TEST(IntegrationTest, IntegrateTermWorks)
 {
-    Integration integrationForX("x");
-    Polynomial polynomial{Monomial(28, {{"x", 3}}), Monomial(-6, {{"x", 2}}), Monomial(8, {})};
+    Integration integrationForX("x");    Polynomial polynomial{Monomial(28, {{"x", 3}}), Monomial(-6, {{"x", 2}}), Monomial(8, {})};
     Expression expression(createExpressionIfPossible(
     {Term(Polynomial{Monomial(3, {{"x", 1}}), Monomial(4, {})}),
      Term("^"),
