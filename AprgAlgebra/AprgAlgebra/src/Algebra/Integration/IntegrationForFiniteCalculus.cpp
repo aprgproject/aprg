@@ -5,10 +5,10 @@
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/ConvertHelpers.hpp>
+#include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
 #include <algorithm>
-
 using namespace alba::mathHelper;
 using namespace std;
 
@@ -179,11 +179,11 @@ Term IntegrationForFiniteCalculus::integrateMonomial(
                         convertMonomialWithPositiveExponentsFromRegularPowerToFallingPower(monomialWithOneLessExponent));
             Term termToIntegrate(createExpressionIfPossible({Term(1), Term("/"), Term(denominatorInFallingPower)}));
             Term integratedTermInFallingPower(integrateTerm(termToIntegrate));
-            if(canBeConvertedToPolynomial(integratedTermInFallingPower))
+            if(!isNotANumber(integratedTermInFallingPower)
+                    && canBeConvertedToPolynomial(integratedTermInFallingPower))
             {
                 Polynomial integratedPolynomial(
-                            convertPolynomialWithPositiveExponentsFromFallingPowerToRegularPower(
-                                createPolynomialIfPossible(integratedTermInFallingPower)));
+                            convertPolynomialWithPositiveExponentsFromFallingPowerToRegularPower(                                createPolynomialIfPossible(integratedTermInFallingPower)));
                 result = Term(integratedPolynomial);
             }
             else
