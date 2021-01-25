@@ -56,10 +56,9 @@ TEST(ExponentsRetrieverTest, RetrieveFromTermWorks)
     retriever.retrieveFromTerm(Term(Constant(1.234)));
     retriever.retrieveFromTerm(Term(Variable("x")));
     retriever.retrieveFromTerm(Term(Monomial(34, {{"x", 5}, {"y", 6}})));
-    retriever.retrieveFromTerm(Term(Polynomial({Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})})));
+    retriever.retrieveFromTerm(Term(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})}));
     retriever.retrieveFromTerm(Term(createExpressionIfPossible({Term(678), Term("+"), Term(Monomial(576, {{"x", 9}}))})));
     retriever.retrieveFromTerm(Term(functionObject));
-
     AlbaNumbersSet const& numbersSet(retriever.getSavedData());
     ASSERT_EQ(6U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
@@ -108,11 +107,10 @@ TEST(ExponentsRetrieverTest, RetrieveFromPolynomialWorks)
 {
     ExponentsRetriever retriever;
 
-    retriever.retrieveFromPolynomial(Polynomial({Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})}));
+    retriever.retrieveFromPolynomial(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})});
 
     AlbaNumbersSet const& numbersSet(retriever.getSavedData());
-    ASSERT_EQ(2U, numbersSet.size());
-    AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
+    ASSERT_EQ(2U, numbersSet.size());    AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
     EXPECT_EQ(AlbaNumber(7), *(it++));
     EXPECT_EQ(AlbaNumber(8), *(it++));
 }

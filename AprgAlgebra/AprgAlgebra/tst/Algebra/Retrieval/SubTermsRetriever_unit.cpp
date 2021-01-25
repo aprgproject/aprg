@@ -59,10 +59,9 @@ TEST(SubTermsRetrieverTest, RetrieveFromTermWorks)
     retriever.retrieveFromTerm(Term(Constant(1.234)));
     retriever.retrieveFromTerm(Term(Variable("b")));
     retriever.retrieveFromTerm(Term(Monomial(34, {{"c", 5}, {"d", 6}})));
-    retriever.retrieveFromTerm(Term(Polynomial({Monomial(516, {{"e", 7}}), Monomial(643, {{"f", 8}})})));
+    retriever.retrieveFromTerm(Term(Polynomial{Monomial(516, {{"e", 7}}), Monomial(643, {{"f", 8}})}));
     retriever.retrieveFromTerm(expesssionTerm2);
     retriever.retrieveFromTerm(functionTerm1);
-
     TermSet const& termsSet(retriever.getSavedData());
     ASSERT_EQ(11U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
@@ -73,11 +72,10 @@ TEST(SubTermsRetrieverTest, RetrieveFromTermWorks)
     EXPECT_EQ(Term("b"), *(it++));
     EXPECT_EQ(Term(Monomial(576, {{"g", 9}})), *(it++));
     EXPECT_EQ(Term(Monomial(34, {{"c", 5}, {"d", 6}})), *(it++));
-    EXPECT_EQ(Term(Polynomial({Monomial(516, {{"e", 7}}), Monomial(643, {{"f", 8}})})), *(it++));
+    EXPECT_EQ(Term(Polynomial{Monomial(516, {{"e", 7}}), Monomial(643, {{"f", 8}})}), *(it++));
     EXPECT_EQ(expesssionTerm1, *(it++));
     EXPECT_EQ(expesssionTerm2, *(it++));
-    EXPECT_EQ(functionTerm1, *(it++));
-}
+    EXPECT_EQ(functionTerm1, *(it++));}
 
 TEST(SubTermsRetrieverTest, RetrieveFromConstantWorks)
 {
@@ -119,16 +117,15 @@ TEST(SubTermsRetrieverTest, RetrieveFromPolynomialWorks)
 {
     SubTermsRetriever retriever;
 
-    retriever.retrieveFromPolynomial(Polynomial({Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})}));
+    retriever.retrieveFromPolynomial(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})});
 
     TermSet const& termsSet(retriever.getSavedData());
     ASSERT_EQ(1U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
-    EXPECT_EQ(Term(Polynomial({Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})})), *(it++));
+    EXPECT_EQ(Term(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})}), *(it++));
 }
 
-TEST(SubTermsRetrieverTest, RetrieveFromExpressionWorks)
-{
+TEST(SubTermsRetrieverTest, RetrieveFromExpressionWorks){
     SubTermsRetriever retriever;
     Expression expression(createExpressionIfPossible({Term(678), Term("+"), Term(Monomial(576, {{"g", 9}}))}));
 

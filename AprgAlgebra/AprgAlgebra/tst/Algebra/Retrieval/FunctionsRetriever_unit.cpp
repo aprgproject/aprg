@@ -154,11 +154,10 @@ TEST(FunctionsRetrieverTest, RetrieveFromPolynomialWorks)
         return false;
     });
 
-    retriever.retrieveFromPolynomial(Polynomial({Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})}));
+    retriever.retrieveFromPolynomial(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})});
 
     FunctionsSet const& functionsSet(retriever.getSavedData());
-    EXPECT_TRUE(functionsSet.empty());
-}
+    EXPECT_TRUE(functionsSet.empty());}
 
 TEST(FunctionsRetrieverTest, RetrieveFromExpressionWorks)
 {
