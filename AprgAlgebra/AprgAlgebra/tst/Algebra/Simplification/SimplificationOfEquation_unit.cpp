@@ -25,6 +25,7 @@ TEST(SimplificationOfEquationTest, SimplifyWorksOnEqualityOperator)
     EXPECT_EQ("=", simplifiedEquation.getEquationOperator().getOperatorString());
     EXPECT_EQ(Term(Constant(0)), simplifiedEquation.getRightHandTerm());
 }
+
 TEST(SimplificationOfEquationTest, SimplifyWorksOnLessThanOperator)
 {
     SimplificationOfEquation simplification(Equation(Term("x"), "<", Term("y")));
@@ -36,6 +37,7 @@ TEST(SimplificationOfEquationTest, SimplifyWorksOnLessThanOperator)
     EXPECT_EQ("<", simplifiedEquation.getEquationOperator().getOperatorString());
     EXPECT_EQ(Term(Constant(0)), simplifiedEquation.getRightHandTerm());
 }
+
 TEST(SimplificationOfEquationTest, SimplifyWorksOnGreaterThanOperator)
 {
     SimplificationOfEquation simplification(Equation(Term("x"), ">", Term("y")));
@@ -47,6 +49,7 @@ TEST(SimplificationOfEquationTest, SimplifyWorksOnGreaterThanOperator)
     EXPECT_EQ(">", simplifiedEquation.getEquationOperator().getOperatorString());
     EXPECT_EQ(Term(Constant(0)), simplifiedEquation.getRightHandTerm());
 }
+
 TEST(SimplificationOfEquationTest, SimplifyWorksOnLessThanOrEqualOperator)
 {
     SimplificationOfEquation simplification(Equation(Term("x"), "<=", Term("y")));
@@ -58,6 +61,7 @@ TEST(SimplificationOfEquationTest, SimplifyWorksOnLessThanOrEqualOperator)
     EXPECT_EQ("<=", simplifiedEquation.getEquationOperator().getOperatorString());
     EXPECT_EQ(Term(Constant(0)), simplifiedEquation.getRightHandTerm());
 }
+
 TEST(SimplificationOfEquationTest, SimplifyWorksToHaveCommonDenominator)
 {
     Polynomial denominatorLeft{Monomial(1, {{"x", 1}}), Monomial(1, {})};

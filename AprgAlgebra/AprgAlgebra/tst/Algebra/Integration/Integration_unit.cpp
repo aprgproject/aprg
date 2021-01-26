@@ -98,7 +98,8 @@ TEST(IntegrationTest, IntegrateWithDefiniteValuesWorks)
 
 TEST(IntegrationTest, IntegrateTermWorks)
 {
-    Integration integrationForX("x");    Polynomial polynomial{Monomial(28, {{"x", 3}}), Monomial(-6, {{"x", 2}}), Monomial(8, {})};
+    Integration integrationForX("x");
+    Polynomial polynomial{Monomial(28, {{"x", 3}}), Monomial(-6, {{"x", 2}}), Monomial(8, {})};
     Expression expression(createExpressionIfPossible(
     {Term(Polynomial{Monomial(3, {{"x", 1}}), Monomial(4, {})}),
      Term("^"),

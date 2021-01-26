@@ -27,7 +27,8 @@ Term getDerivativeDefinitionForFiniteCalculus(
 
 Term getDerivativeAtUsingLimit(
         Term const& term,
-        std::string const& variableName,        Term const& termSubstituteToBack,
+        std::string const& variableName,
+        Term const& termSubstituteToBack,
         LimitAtAValueApproachType const approachType);
 
 SolutionSet getDifferentiabilityDomain(

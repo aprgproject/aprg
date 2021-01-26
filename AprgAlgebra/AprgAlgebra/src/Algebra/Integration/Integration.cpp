@@ -6,7 +6,8 @@
 #include <Algebra/Integration/IntegrationUtilities.hpp>
 #include <Algebra/Isolation/IsolationOfOneVariableOnEqualityEquation.hpp>
 #include <Algebra/Retrieval/VariableNamesRetriever.hpp>
-#include <Algebra/Simplification/SimplificationOfExpression.hpp>#include <Algebra/Substitution/SubstitutionOfTermsToTerms.hpp>
+#include <Algebra/Simplification/SimplificationOfExpression.hpp>
+#include <Algebra/Substitution/SubstitutionOfTermsToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Term/Operators/TermOperators.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
@@ -51,21 +52,24 @@ Term Integration::integrate(
         Variable const& variable) const
 {
     Term result(integrateVariable(variable));
-    result.simplify();    return result;
+    result.simplify();
+    return result;
 }
 
 Term Integration::integrate(
         Monomial const& monomial) const
 {
     Term result(integrateMonomial(monomial));
-    result.simplify();    return result;
+    result.simplify();
+    return result;
 }
 
 Term Integration::integrate(
         Polynomial const& polynomial) const
 {
     Term result(integratePolynomial(polynomial));
-    result.simplify();    return result;
+    result.simplify();
+    return result;
 }
 
 Term Integration::integrate(
@@ -84,7 +88,8 @@ Term Integration::integrateWithPlusC(
         Term const& term) const
 {
     Term result(createExpressionIfPossible({integrateTerm(term), Term("+"), Term(C)}));
-    simplifyForIntegration(result);    return result;
+    simplifyForIntegration(result);
+    return result;
 }
 
 Term Integration::integrateWithDefiniteValues(
@@ -92,8 +97,7 @@ Term Integration::integrateWithDefiniteValues(
         AlbaNumber const& lowerValue,
         AlbaNumber const& higherValue) const
 {
-    return solveADefiniteIntegral(integrateTerm(term), m_nameOfVariableToIntegrate,
-                                  lowerValue, higherValue);
+    return substituteValuesAndGetDifference(integrateTerm(term), m_nameOfVariableToIntegrate, lowerValue, higherValue);
 }
 
 Term Integration::integrateTerm(
@@ -101,7 +105,8 @@ Term Integration::integrateTerm(
 {
     Term result;
     if(term.isConstant())
-    {        result = integrate(term.getConstantConstReference());
+    {
+        result = integrate(term.getConstantConstReference());
     }
     else if(term.isVariable())
     {
@@ -136,7 +141,8 @@ Monomial Integration::integrateVariable(
         Variable const& variable) const
 {
     Monomial result;
-    string const& nameOfVariable(variable.getVariableName());    if(isVariableToIntegrate(nameOfVariable))
+    string const& nameOfVariable(variable.getVariableName());
+    if(isVariableToIntegrate(nameOfVariable))
     {
         result = Monomial(AlbaNumber::createFraction(1, 2), {{variable.getVariableName(), 2}});
     }
@@ -151,7 +157,8 @@ Monomial Integration::integrateMonomial(
         Monomial const& monomial) const
 {
     Monomial result(monomial);
-    bool hasVariabletoIntegrate(false);    for(auto const& variableExponentPair :
+    bool hasVariabletoIntegrate(false);
+    for(auto const& variableExponentPair :
         monomial.getVariablesToExponentsMapConstReference())
     {
         string const& variableName(variableExponentPair.first);
@@ -175,7 +182,8 @@ Polynomial Integration::integratePolynomial(
         Polynomial const& polynomial) const
 {
     Polynomial result;
-    for(Monomial const& monomial : polynomial.getMonomialsConstReference())    {
+    for(Monomial const& monomial : polynomial.getMonomialsConstReference())
+    {
         result.addMonomial(integrateMonomial(monomial));
     }
     result.simplify();
@@ -204,7 +212,8 @@ Term Integration::integrateAsTermOrExpressionIfNeeded(
     Term result;
     Term simplifiedTerm(expression);
     simplifyForIntegration(simplifiedTerm);
-    if(simplifiedTerm.isExpression())    {
+    if(simplifiedTerm.isExpression())
+    {
         result = integrateSimplifiedExpressionOnly(simplifiedTerm.getExpressionConstReference());
     }
     else

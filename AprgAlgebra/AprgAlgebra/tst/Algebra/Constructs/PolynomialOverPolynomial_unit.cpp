@@ -26,7 +26,8 @@ TEST(PolynomialOverPolynomialTest, ConstructionWorks)
     EXPECT_EQ(Polynomial{Monomial(100, {})}, actual3.getDenominator());
 }
 
-TEST(PolynomialOverPolynomialTest, IsEmptyWorks){
+TEST(PolynomialOverPolynomialTest, IsEmptyWorks)
+{
     PolynomialOverPolynomial actual1;
     PolynomialOverPolynomial actual2(Polynomial{}, Polynomial{});
     PolynomialOverPolynomial actual3(Polynomial{}, (Polynomial{Monomial(100, {})}));

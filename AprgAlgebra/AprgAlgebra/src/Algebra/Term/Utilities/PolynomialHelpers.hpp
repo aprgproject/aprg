@@ -23,6 +23,7 @@ bool doesOnePolynomialHaveADoubleValue(Polynomials const& polynomials);
 AlbaNumber getRemainderForOneVariablePolynomialDividedByVariableMinusConstantValue(
         Polynomial const& polynomial,
         AlbaNumber const& value);
+
 AlbaNumbers getRoots(RootType const rootType, Polynomial const& polynomial);
 Polynomial raiseBinomialToAPowerUsingBinomialExpansion(
         Polynomial const& binomial,
