@@ -1,6 +1,7 @@
 #include <Algebra/Integration/Integration.hpp>
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
+#include <Algebra/Utilities/KnownNames.hpp>
 
 #include <gtest/gtest.h>
 
@@ -85,7 +86,7 @@ TEST(IntegrationTest, IntegrateWithPlusCWorks)
 {
     Integration integrationForX("x");
 
-    Term expectedTerm(Polynomial{Monomial(1, {{"C", 1}}), Monomial(5, {{"x", 1}})});
+    Term expectedTerm(Polynomial{Monomial(1, {{C, 1}}), Monomial(5, {{"x", 1}})});
     EXPECT_EQ(expectedTerm, integrationForX.integrateWithPlusC(Constant(5)));
 }
 
@@ -205,7 +206,8 @@ TEST(IntegrationTest, IntegrateExpressionWorks)
 TEST(IntegrationTest, IntegrateWorksUsingChainRuleInReverseUsingExample1)
 {
     Integration integrationForX("x");
-    Term numerator(Monomial(4, {{"x", 2}}));    Term denominatorPolynomial(Polynomial{Monomial(1, {}), Monomial(-8, {{"x", 3}})});
+    Term numerator(Monomial(4, {{"x", 2}}));
+    Term denominatorPolynomial(Polynomial{Monomial(1, {}), Monomial(-8, {{"x", 3}})});
     Term denominator(createExpressionIfPossible({denominatorPolynomial, Term("^"), Term(4)}));
     Term termToTest(createExpressionIfPossible({numerator, Term("/"), denominator}));
 
@@ -267,6 +269,7 @@ TEST(IntegrationTest, IntegrateWorksUsingSubstitutionUsingExample1)
 TEST(IntegrationTest, IntegrateFunctionWorks)
 {
     Integration integrationForX("x");
+
     Term x("x");
     Term expectedTerm01(createExpressionIfPossible({Term(-1), Term("*"), cos(x)}));
     Term expectedTerm02(createExpressionIfPossible({Term(-1), Term("*"), cos(Monomial(5, {{"x", 1}})), Term("/"), Term(5)}));

@@ -29,7 +29,8 @@ public:
             AlbaNumber const& higherValueInInterval) const;
 
     Term integrateTerm(Term const& term) const;
-    Monomial integrateConstant(Constant const& constant) const;    Monomial integrateVariable(Variable const& variable) const;
+    Monomial integrateConstant(Constant const& constant) const;
+    Monomial integrateVariable(Variable const& variable) const;
     Monomial integrateMonomial(Monomial const& monomial) const;
     Polynomial integratePolynomial(Polynomial const& polynomial) const;
     Term integrateExpression(Expression const& expression) const;
@@ -61,7 +62,8 @@ private:
             Term const& term) const;
     void integrateTermUsingSubstitution(
             Term & result,
-            Term const& term) const;    void integrateBySubstitutionAndUsingANewVariable(
+            Term const& term) const;
+    void integrateBySubstitutionAndUsingANewVariable(
             Term & result,
             Term const& mainTerm,
             Term const& termToSubstituteToVariable) const;
@@ -74,7 +76,8 @@ private:
     void integrateUsingChainRuleInReverseIfPossible(
             Term & result,
             Term const& firstOuterTerm,
-            Term const& firstInnerTerm,            Term const& secondTerm) const;
+            Term const& firstInnerTerm,
+            Term const& secondTerm) const;
     void findInnerAndOuterTermForChainRule(
             Term & innerTerm,
             Term & outerTerm) const;

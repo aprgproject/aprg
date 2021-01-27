@@ -3,7 +3,8 @@
 #include <Algebra/Differentiation/Differentiation.hpp>
 #include <Algebra/Extrema/ExtremaUtilities.hpp>
 #include <Algebra/Limit/LimitsAtInfinity/LimitsAtInfinity.hpp>
-#include <Algebra/Integration/Integration.hpp>#include <Algebra/Integration/IntegrationForFiniteCalculus.hpp>
+#include <Algebra/Integration/Integration.hpp>
+#include <Algebra/Integration/IntegrationForFiniteCalculus.hpp>
 #include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableEqualitySolver.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
@@ -43,7 +44,8 @@ bool isTheSecondFundamentalTheoremOfCalculusTrue(
 
 bool isTheIntegralDefinitionForFiniteCalculusIsTrue(
         Term const& term,
-        string const& variableName,        AlbaNumber const& a,
+        string const& variableName,
+        AlbaNumber const& a,
         AlbaNumber const& b)
 {
     // The fundamental theorem of finite calculus:
@@ -73,7 +75,8 @@ AlbaNumbers getInputForAverageValueInBetweenTwoValues(
         AlbaNumber const& higherValueInInterval)
 {
     // Mean-Value theorem for integrals:
-    // If the function f is continuous on the closed interval [a, b],    // there exists a number "average" in [a, b] such that:
+    // If the function f is continuous on the closed interval [a, b],
+    // there exists a number "average" in [a, b] such that:
     // The definite integral in [a, b] = f("average") * (b-a)
 
     Equation meanValueTheoremEquation(term, "=", getAverageValueInBetweenTwoValues(term, variableName, lowerValueInInterval, higherValueInInterval));
@@ -82,6 +85,7 @@ AlbaNumbers getInputForAverageValueInBetweenTwoValues(
     AlbaNumberInterval openInterval(createOpenEndpoint(lowerValueInInterval), createOpenEndpoint(higherValueInInterval));
     return getNumbersInsideTheInterval(solutionSet.getAcceptedValues(), openInterval);
 }
+
 Term getAverageValueInBetweenTwoValues(
         Term const& term,
         string const& variableName,
@@ -105,6 +109,20 @@ Term substituteValuesAndGetDifference(
     Term integralWithHigherValue(substitution.performSubstitutionTo(term));
     return integralWithHigherValue-integralWithLowerValue;
 }
+
+Term substituteTermsAndGetDifference(
+        Term const& term,
+        string const& variableName,
+        Term const& lowerValueTerm,
+        Term const& higherValueTerm)
+{
+    SubstitutionOfVariablesToTerms substitution({{variableName, lowerValueTerm}});
+    Term integralWithLowerValueTerm(substitution.performSubstitutionTo(term));
+    substitution.putVariableWithTerm(variableName, higherValueTerm);
+    Term integralWithHigherValueTerm(substitution.performSubstitutionTo(term));
+    return integralWithHigherValueTerm-integralWithLowerValueTerm;
+}
+
 Term getAreaUnderACurveUsingReimannSums(
         Term const& term,
         string const& variableName,
@@ -115,7 +133,8 @@ Term getAreaUnderACurveUsingReimannSums(
     Term inputForHeight(Polynomial{Monomial(lowerValueInInterval, {}), Monomial(deltaOfValues, {{"n", -1}, {variableName, 1}})});
     SubstitutionOfVariablesToTerms substitution({{variableName, inputForHeight}});
     Term heightOfARectangle(substitution.performSubstitutionTo(term));
-    Term widthOfARectangle(Monomial(deltaOfValues, {{"n", -1}}));    Term areaOfARectangle(heightOfARectangle * widthOfARectangle);
+    Term widthOfARectangle(Monomial(deltaOfValues, {{"n", -1}}));
+    Term areaOfARectangle(heightOfARectangle * widthOfARectangle);
     Summation summation(areaOfARectangle, variableName);
     Term sumOfAreaOfAllRectangles(summation.getSum(Term(1), Term("n")));
     LimitsAtInfinity limits(sumOfAreaOfAllRectangles, "n");
@@ -133,7 +152,8 @@ LowerAndHigherValues getApproximateValueForDefiniteIntegral(
     AlbaNumber delta(higherValueInInterval-lowerValueInInterval);
     LowerAndHigherValues result;
     result.higherValue = minMaxValues.maximumInputOutputValues.second * delta;
-    result.lowerValue = minMaxValues.minimumInputOutputValues.second * delta;    return result;
+    result.lowerValue = minMaxValues.minimumInputOutputValues.second * delta;
+    return result;
 }
 
 }

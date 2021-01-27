@@ -288,7 +288,8 @@ AlbaNumbers getInputValuesInIntervalWithSameAsMeanOfInterval(
         string const& variableName,
         AlbaNumber const& a,
         AlbaNumber const& b)
-{    // Mean-Value theorem:
+{
+    // Mean-Value theorem:
     // Let f be a function such that:
     // (i) it is continuous on the closed interval [a, b]
     // (ii) it is differentiable on the open interval (a, b)

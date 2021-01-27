@@ -34,6 +34,7 @@ public:
 
     Term differentiateMultipleTimes(Term const& term, unsigned int const numberOfTimes) const;
     Equation differentiateMultipleTimes(Equation const& equation, unsigned int const numberOfTimes) const;
+
     Term differentiateTerm(Term const& term) const;
     AlbaNumber differentiateConstant(Constant const&) const;
     Monomial differentiateVariable(Variable const& variable) const;

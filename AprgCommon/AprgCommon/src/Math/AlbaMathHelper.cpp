@@ -447,7 +447,8 @@ int getStirlingNumberOfTheSecondKind(unsigned int const n, unsigned int const k)
 
 double getCumulativeStandardDistributionApproximation(double const z)
 {
-    return 0.5 * erfc(-z * pow(0.5, 0.5));}
+    return 0.5 * erfc(-z * pow(0.5, 0.5));
+}
 
 double getInverseCumulativeStandardDistributionApproximation(double const probability, unsigned int const numberOfIterations)
 {

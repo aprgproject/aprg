@@ -7,6 +7,7 @@
 #include <Algebra/Term/Operators/TermOperators.hpp>
 #include <Algebra/Term/Utilities/ConvertHelpers.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
+#include <Algebra/Utilities/KnownNames.hpp>
 
 using namespace std;
 
@@ -16,17 +17,13 @@ namespace alba
 namespace algebra
 {
 
-namespace
-{
-static string C = "C";
-}
-
 Summation::Summation(
         Term const& termToSum,
         string const& variableToSubstitute)
     : m_termToSum(termToSum)
     , m_variableToSubstitute(variableToSubstitute)
-    , m_summationModel(getSummationModel()){}
+    , m_summationModel(getSummationModel())
+{}
 
 Term Summation::getSummationModelWithKnownConstant(
         AlbaNumber const& startNumber) const
