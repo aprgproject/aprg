@@ -1,10 +1,10 @@
 #include "DifferentiationUtilities.hpp"
 
 #include <Algebra/Differentiation/Differentiation.hpp>
+#include <Algebra/Integration/Integration.hpp>
 #include <Algebra/Limit/Limit.hpp>
 #include <Algebra/Simplification/SimplificationOfExpression.hpp>
-#include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
-#include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
+#include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>#include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Solution/DomainAndRange/DomainAndRange.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
@@ -27,10 +27,26 @@ namespace alba
 namespace algebra
 {
 
+bool isTheFirstFundamentalTheoremOfCalculusTrue(
+        Term const& term,
+        string const& variableName)
+{
+    // The first fundamental theorem of calculus
+    // Let the function f be continuous on the closed interval [a, b] and let x be any number in [a, b].
+    // If F is the definite integral of f from a to x then the derivative of F at x is equal to f at x.
+
+    Integration integration(variableName);
+    Differentiation differentiation(variableName);
+    Term capitalF(integration.integrate(term));
+    Term derivativeOfCapitalF(differentiation.differentiate(capitalF));
+    Term simplifiedTerm(term);
+    simplifiedTerm.simplify();
+    return derivativeOfCapitalF == simplifiedTerm;
+}
+
 bool isDifferentiableAt(
         Term const& term,
-        string const& variableName,
-        AlbaNumber const& value)
+        string const& variableName,        AlbaNumber const& value)
 {
     bool result(false);
     Term derivative(getDerivativeAtUsingLimit(term, variableName, Term("x"), LimitAtAValueApproachType::BothSides));
@@ -75,11 +91,10 @@ Term getDerivativeDefinition(
 
 Term getDerivativeDefinitionForFiniteCalculus(
         Term const& term,
-        std::string const& variableName)
+        string const& variableName)
 {
     // Discrete derivative
-    Polynomial variableNamePlusOne{Monomial(1, {{variableName, 1}}), Monomial(1, {})};
-    SubstitutionOfVariablesToTerms substitution{{variableName, Term(variableNamePlusOne)}};
+    Polynomial variableNamePlusOne{Monomial(1, {{variableName, 1}}), Monomial(1, {})};    SubstitutionOfVariablesToTerms substitution{{variableName, Term(variableNamePlusOne)}};
     Term discreteDerivativeDefinition(createExpressionIfPossible({substitution.performSubstitutionTo(term), Term("-"), term}));
     discreteDerivativeDefinition.simplify();
     return discreteDerivativeDefinition;

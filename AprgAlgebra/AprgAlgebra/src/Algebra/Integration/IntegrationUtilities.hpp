@@ -1,25 +1,24 @@
 #pragma once
 
 #include <Algebra/Term/TermTypes/Term.hpp>
+#include <Algebra/Utilities/LowerAndHigherValues.hpp>
 #include <Math/Number/AlbaNumberTypes.hpp>
 
 #include <string>
-
 namespace alba
 {
 
 namespace algebra
 {
 
-struct LowerAndHigherValues
-{
-    AlbaNumber lowerValue;
-    AlbaNumber higherValue;
-};
-
-bool isTheIntegralDefinitionForFiniteCalculusIsTrue(
+bool isTheSecondFundamentalTheoremOfCalculusTrue(
         Term const& term,
         std::string const& variableName,
+        AlbaNumber const& a,
+        AlbaNumber const& b);
+
+bool isTheIntegralDefinitionForFiniteCalculusIsTrue(
+        Term const& term,        std::string const& variableName,
         AlbaNumber const& a,
         AlbaNumber const& b);
 
@@ -32,38 +31,38 @@ bool isAreaUnderTheCurveEqualToDefiniteIntegral(
 AlbaNumbers getInputForAverageValueInBetweenTwoValues(
         Term const& term,
         std::string const& variableName,
-        AlbaNumber const& lowerValue,
-        AlbaNumber const& higherValue);
+        AlbaNumber const& lowerValueInInterval,
+        AlbaNumber const& higherValueInInterval);
 
 Term getAverageValueInBetweenTwoValues(
         Term const& term,
         std::string const& variableName,
-        AlbaNumber const& lowerValue,
-        AlbaNumber const& higherValue);
+        AlbaNumber const& lowerValueInInterval,
+        AlbaNumber const& higherValueInInterval);
 
 Term getAverageValueInBetweenTwoValues(
         Term const& term,
         std::string const& variableName,
-        AlbaNumber const& lowerValue,
-        AlbaNumber const& higherValue);
+        AlbaNumber const& lowerValueInInterval,
+        AlbaNumber const& higherValueInInterval);
 
 Term substituteValuesAndGetDifference(
         Term const& term,
         std::string const& variableName,
-        AlbaNumber const& lowerValue,
-        AlbaNumber const& higherValue);
+        AlbaNumber const& lowerValueInInterval,
+        AlbaNumber const& higherValueInInterval);
 
 Term getAreaUnderACurveUsingReimannSums(
         Term const& term,
         std::string const& variableName,
-        AlbaNumber const& lowerValue,
-        AlbaNumber const& higherValue);
+        AlbaNumber const& lowerValueInInterval,
+        AlbaNumber const& higherValueInInterval);
 
 LowerAndHigherValues getApproximateValueForDefiniteIntegral(
         Term const& term,
         std::string const& variableName,
-        AlbaNumber const& lowerValue,
-        AlbaNumber const& higherValue);
+        AlbaNumber const& lowerValueInInterval,
+        AlbaNumber const& higherValueInInterval);
 }
 
 }

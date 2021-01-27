@@ -12,10 +12,13 @@ namespace alba
 namespace algebra
 {
 
+bool isTheFirstFundamentalTheoremOfCalculusTrue(
+        Term const& term,
+        std::string const& variableName);
+
 bool isDifferentiableAt(
         Term const& term,
-        std::string const& variableName,
-        AlbaNumber const& value);
+        std::string const& variableName,        AlbaNumber const& value);
 
 Term getDerivativeDefinition(
         Term const& term,

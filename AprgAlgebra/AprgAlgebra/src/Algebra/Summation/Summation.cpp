@@ -23,11 +23,10 @@ static string C = "C";
 
 Summation::Summation(
         Term const& termToSum,
-        std::string const& variableToSubstitute)
+        string const& variableToSubstitute)
     : m_termToSum(termToSum)
     , m_variableToSubstitute(variableToSubstitute)
-    , m_summationModel(getSummationModel())
-{}
+    , m_summationModel(getSummationModel()){}
 
 Term Summation::getSummationModelWithKnownConstant(
         AlbaNumber const& startNumber) const

@@ -3,9 +3,9 @@
 #include <Algebra/Differentiation/DifferentiationUtilities.hpp>
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
 #include <Algebra/Simplification/SimplificationOfExpression.hpp>
+#include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
-
 using namespace alba::algebra::Functions;
 using namespace alba::algebra::Simplification;
 using namespace std;
@@ -81,10 +81,17 @@ Equation Differentiation::differentiate(
     return differentiateEquation(equation);
 }
 
+Term Differentiation::differentiateWithDefiniteValue(
+        Term const& term,
+        AlbaNumber const& value) const
+{
+    SubstitutionOfVariablesToTerms substitution{{m_nameOfVariableToDifferentiate, Term(value)}};
+    return substitution.performSubstitutionTo(differentiateTerm(term));
+}
+
 Term Differentiation::differentiateMultipleTimes(
         Term const& term,
-        unsigned int const numberOfTimes) const
-{
+        unsigned int const numberOfTimes) const{
     Term currentResult(term);
     for(unsigned int i=0; i<numberOfTimes; i++)
     {
@@ -433,9 +440,12 @@ Term Differentiation::differentiateFunctionOnly(
     {
         derivativeOfFunction = Term(createExpressionIfPossible({Term(-1), Term("*"), csc(inputTerm), Term("^"), Term(2)}));
     }
+    else if("abs" == functionObject.getFunctionName())
+    {
+        derivativeOfFunction = Term(sgn(inputTerm));
+    }
     return derivativeOfFunction;
 }
-
 void Differentiation::separateUnaffectedAndAffectedVariables(
         Monomial & unaffectedVariablesAndConstant,
         Monomial & affectedVariables,

@@ -28,9 +28,12 @@ public:
     Term differentiate(Function const& functionObject) const;
     Equation differentiate(Equation const& equation) const;
 
+    Term differentiateWithDefiniteValue(
+            Term const& term,
+            AlbaNumber const& value) const;
+
     Term differentiateMultipleTimes(Term const& term, unsigned int const numberOfTimes) const;
     Equation differentiateMultipleTimes(Equation const& equation, unsigned int const numberOfTimes) const;
-
     Term differentiateTerm(Term const& term) const;
     AlbaNumber differentiateConstant(Constant const&) const;
     Monomial differentiateVariable(Variable const& variable) const;
