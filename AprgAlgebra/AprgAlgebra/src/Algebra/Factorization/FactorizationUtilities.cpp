@@ -3,10 +3,10 @@
 #include <Algebra/Factorization/Factorization.hpp>
 #include <Algebra/Retrieval/ExponentsRetriever.hpp>
 #include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
+#include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
 #include <algorithm>
-
 using namespace alba::mathHelper;
 using namespace std;
 
@@ -59,14 +59,17 @@ bool doesNotNeedToBeFactorized(Polynomial const& polynomial)
 {
     Monomials const& monomials(polynomial.getMonomialsConstReference());
     bool result(false);
-    if(monomials.size() <= 1)
+    if(hasNumbersNotFinite(polynomial))
+    {
+        result = true;
+    }
+    else if(monomials.size() <= 1)
     {
         result = true;
     }
     else if(monomials.size() == 2)
     {
-        Monomial const& first(monomials.at(0));
-        Monomial const& second(monomials.at(1));
+        Monomial const& first(monomials.at(0));        Monomial const& second(monomials.at(1));
         bool areBothConstantIntegers = first.getConstantConstReference().isIntegerType() && second.getConstantConstReference().isIntegerType();
         bool areEitherConstantOne = first.getConstantConstReference() == 1 || second.getConstantConstReference() == 1;
         ExponentsRetriever retriever;

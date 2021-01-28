@@ -171,10 +171,23 @@ TEST(PolynomialOverPolynomialTest, SimplifyWorksOnConvertingNegativeExponentsToP
     EXPECT_EQ(denominatorToExpect, polynomialOverPolynomial.getDenominator());
 }
 
+TEST(PolynomialOverPolynomialTest, SimplifyWorksOnConvertingNegativeExponentsToPositiveAndDenominatorIsOne)
+{
+    Polynomial numerator{Monomial(1, {}), Monomial(2, {{"x", -1}})};
+    Polynomial denominator{Monomial(1, {})};
+    PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
+
+    polynomialOverPolynomial.simplify();
+
+    Polynomial numeratorToExpect{Monomial(1, {{"x", 1}}), Monomial(2, {})};
+    Polynomial denominatorToExpect{Monomial(1, {{"x", 1}})};
+    EXPECT_EQ(numeratorToExpect, polynomialOverPolynomial.getNumerator());
+    EXPECT_EQ(denominatorToExpect, polynomialOverPolynomial.getDenominator());
+}
+
 TEST(PolynomialOverPolynomialTest, SimplifyWorksOnCommonNegativeSignInNumerator)
 {
-    Polynomial numerator{Monomial(-1, {{"x", 1}}), Monomial(-1, {{"y", 1}})};
-    Polynomial denominator{Monomial(-1, {{"a", 1}}), Monomial(1, {{"b", 1}})};
+    Polynomial numerator{Monomial(-1, {{"x", 1}}), Monomial(-1, {{"y", 1}})};    Polynomial denominator{Monomial(-1, {{"a", 1}}), Monomial(1, {{"b", 1}})};
     PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
 
     polynomialOverPolynomial.simplify();

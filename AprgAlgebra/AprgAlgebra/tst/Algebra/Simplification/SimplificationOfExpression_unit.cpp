@@ -1006,10 +1006,35 @@ TEST(TermsOverTermsTest, SimplifyBySimplifyingToFactorsWorks)
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
 
-TEST(TermsOverTermsTest, SimplifyBySimplifyingToFactorsWithoutDoubleValueWorks)
+TEST(SimplificationOfExpressionTest, ShouldSimplifyToACommonDenominatorAndShouldSimplifyToFactorsWorksToConvertPolynomialOverPolynomial)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
                 getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
+    configurationDetails.shouldSimplifyToFactors = true;
+    configurationDetails.shouldSimplifyToACommonDenominator = true;
+    SimplificationOfExpression::ScopeObject scopeObject;
+    scopeObject.setInThisScopeThisConfiguration(configurationDetails);
+
+    Polynomial polynomial{Monomial(1, {}), Monomial(1, {{"x", -2}})};
+    Expression expressionToTest(createExpressionIfPossible({Term(polynomial), Term("^"), Term(AlbaNumber::createFraction(1, 2))}));
+    SimplificationOfExpression simplification(expressionToTest);
+
+    simplification.simplify();
+
+    Expression expressionToVerify(simplification.getExpression());
+    Polynomial polynomialToExpect{Monomial(1, {{"x", 2}}), Monomial(1, {})};
+    Expression expressionToExpect(createExpressionIfPossible(
+    {Term(polynomialToExpect),
+     Term("^"),
+     Term(AlbaNumber::createFraction(1, 2)),
+     Term("/"),
+     Term("x")}));
+    EXPECT_EQ(expressionToExpect, expressionToVerify);
+}
+
+TEST(TermsOverTermsTest, SimplifyBySimplifyingToFactorsWithoutDoubleValueWorks)
+{
+    SimplificationOfExpression::ConfigurationDetails configurationDetails(                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
     configurationDetails.shouldSimplifyToFactors = true;
     configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
     SimplificationOfExpression::ScopeObject scopeObject;

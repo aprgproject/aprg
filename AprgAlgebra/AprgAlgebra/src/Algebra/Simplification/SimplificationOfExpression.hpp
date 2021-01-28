@@ -106,10 +106,12 @@ private:
     // other functions
     bool tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(Expression const& expression);
     Expression getNewExpressionWithSubstitutedVariableForTerm(Term const& mainExpression, Term const& termToSubstitute);
+    void convertPolynomialOverPolynomialIfNeeded();
+    void convertPolynomialToPolynomialOverPolynomial(Term & term);
+    void convertPolynomialToPolynomialOverPolynomial(Expression & expression);
 
     Expression m_expression;
 };
-
 }
 
 }

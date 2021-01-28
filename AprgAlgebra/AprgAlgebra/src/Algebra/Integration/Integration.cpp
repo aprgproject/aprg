@@ -6,11 +6,9 @@
 #include <Algebra/Integration/IntegrationUtilities.hpp>
 #include <Algebra/Isolation/IsolationOfOneVariableOnEqualityEquation.hpp>
 #include <Algebra/Retrieval/VariableNamesRetriever.hpp>
-#include <Algebra/Simplification/SimplificationOfExpression.hpp>
 #include <Algebra/Substitution/SubstitutionOfTermsToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
-#include <Algebra/Term/Operators/TermOperators.hpp>
-#include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
+#include <Algebra/Term/Operators/TermOperators.hpp>#include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/ConvertHelpers.hpp>
 #include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
@@ -84,10 +82,9 @@ Term Integration::integrateWithPlusC(
         Term const& term) const
 {
     Term result(createExpressionIfPossible({integrateTerm(term), Term("+"), Term(C)}));
-    simplifyForIntegration(result);
+    simplifyForIntegration(result, getConfigurationWithFactors());
     return result;
 }
-
 Term Integration::integrateWithDefiniteValues(
         Term const& term,
         AlbaNumber const& lowerValueInInterval,
@@ -194,54 +191,37 @@ Term Integration::integrateExpression(
         Expression const& expression) const
 {
     Term result(integrateAsTermOrExpressionIfNeeded(expression));
-    simplifyForIntegration(result);
+    simplifyForIntegration(result, getConfigurationWithFactors());
     return result;
 }
-
 Term Integration::integrateFunction(
         Function const& functionObject) const
 {
     Term result(integrateFunctionOnly(functionObject));
-    simplifyForIntegration(result);
+    simplifyForIntegration(result, getConfigurationWithFactors());
     return result;
 }
-
 Term Integration::integrateAsTermOrExpressionIfNeeded(
         Expression const& expression) const
 {
     Term result;
-    Term simplifiedTerm(expression);
-    simplifyForIntegration(simplifiedTerm);
-    if(simplifiedTerm.isExpression())
+    Configurations configurations{getConfigurationWithFactors(), getConfigurationWithCommonDenominator()};
+    for(Configuration const& configuration : configurations)
     {
-        result = integrateSimplifiedExpressionOnly(simplifiedTerm.getExpressionConstReference());
-    }
-    else
-    {
-        result = integrate(simplifiedTerm);
-    }
-    return result;
-}
-
-Term Integration::integrateSimplifiedExpressionOnly(
-        Expression const& expression) const
-{
-    Term result;
-    if(OperatorLevel::AdditionAndSubtraction == expression.getCommonOperatorLevel())
-    {
-        result = integrateTermsInAdditionOrSubtraction(expression.getTermsWithAssociation().getTermsWithDetails());
-    }
-    else if(OperatorLevel::MultiplicationAndDivision == expression.getCommonOperatorLevel())
-    {
-        result = integrateTermsInMultiplicationOrDivision(expression.getTermsWithAssociation().getTermsWithDetails());
-    }
-    else if(OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel())
-    {
-        result = integrateTermsInRaiseToPower(expression.getTermsWithAssociation().getTermsWithDetails());
-    }
-    if(result.isEmpty())
-    {
-        integrateTermUsingSubstitutionWithMaxDepth(result, Term(expression));
+        Term simplifiedTerm(expression);
+        simplifyForIntegration(simplifiedTerm, configuration);
+        if(simplifiedTerm.isExpression())
+        {
+            integrateSimplifiedExpressionOnly(result, simplifiedTerm.getExpressionConstReference(), configuration);
+        }
+        else
+        {
+            result = integrate(simplifiedTerm);
+        }
+        if(!result.isEmpty())
+        {
+            break;
+        }
     }
     if(result.isEmpty())
     {
@@ -250,11 +230,35 @@ Term Integration::integrateSimplifiedExpressionOnly(
     return result;
 }
 
-Term Integration::integrateTermsInAdditionOrSubtraction(
+void Integration::integrateSimplifiedExpressionOnly(
+        Term & result,
+        Expression const& expression,
+        Configuration const& configuration) const
+{
+    TermsWithDetails const& termsWithDetails(expression.getTermsWithAssociation().getTermsWithDetails());
+    if(OperatorLevel::AdditionAndSubtraction == expression.getCommonOperatorLevel())
+    {
+        integrateTermsInAdditionOrSubtraction(result, termsWithDetails);
+    }
+    else if(OperatorLevel::MultiplicationAndDivision == expression.getCommonOperatorLevel())
+    {
+        integrateTermsInMultiplicationOrDivision(result, termsWithDetails);
+    }
+    else if(OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel())
+    {
+        integrateTermsInRaiseToPower(result, termsWithDetails);
+    }
+    if(result.isEmpty())
+    {
+        integrateTermUsingSubstitutionWithMaxDepth(result, Term(expression), configuration);
+    }
+}
+
+void Integration::integrateTermsInAdditionOrSubtraction(
+        Term & result,
         TermsWithDetails const& termsWithDetails) const
 {
-    Expression accumulatedExpression(createOrCopyExpressionFromATerm(Constant(0)));
-    for(TermWithDetails const& termWithDetails : termsWithDetails)
+    Expression accumulatedExpression(createOrCopyExpressionFromATerm(Constant(0)));    for(TermWithDetails const& termWithDetails : termsWithDetails)
     {
         Term const& currentTerm(getTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
         Term integratedTerm(integrate(currentTerm));
@@ -267,59 +271,56 @@ Term Integration::integrateTermsInAdditionOrSubtraction(
             accumulatedExpression.putTermWithSubtractionIfNeeded(integratedTerm);
         }
     }
-    return Term(accumulatedExpression);
+    result = Term(accumulatedExpression);
 }
 
-Term Integration::integrateTermsInMultiplicationOrDivision(
+void Integration::integrateTermsInMultiplicationOrDivision(
+        Term & result,
         TermsWithDetails const& termsWithDetails) const
 {
-    Term result;
     integrateRecognizedFunctionsIfPossible(result, termsWithDetails);
     integrateUsingChainRuleInReverseIfPossible(result, termsWithDetails);
-    return result;
 }
 
-Term Integration::integrateTermsInRaiseToPower(
+void Integration::integrateTermsInRaiseToPower(
+        Term & result,
         TermsWithDetails const& termsWithDetails) const
 {
-    Term result(AlbaNumber(AlbaNumber::Value::NotANumber));
     if(termsWithDetails.size() == 2)
     {
-        Term const& firstTerm(getTermConstReferenceFromSharedPointer(termsWithDetails.at(0).baseTermSharedPointer));
-        Term const& secondTerm(getTermConstReferenceFromSharedPointer(termsWithDetails.at(1).baseTermSharedPointer));
+        Term const& firstTerm(getTermConstReferenceFromSharedPointer(termsWithDetails.at(0).baseTermSharedPointer));        Term const& secondTerm(getTermConstReferenceFromSharedPointer(termsWithDetails.at(1).baseTermSharedPointer));
         if(firstTerm.isConstant())
         {
-            result = integrateConstantRaiseToTerm(firstTerm.getConstantValueConstReference(), secondTerm);
+            integrateConstantRaiseToTerm(result, firstTerm.getConstantValueConstReference(), secondTerm);
         }
         else if(secondTerm.isConstant())
         {
-            result = integrateTermRaiseToConstant(firstTerm, secondTerm.getConstantValueConstReference());
+            integrateTermRaiseToConstant(result, firstTerm, secondTerm.getConstantValueConstReference());
         }
         else
         {
-            result = integrateTermRaiseToTerm(firstTerm, secondTerm);
+            integrateTermRaiseToTerm(result, firstTerm, secondTerm);
         }
     }
-    return result;
 }
 
-Term Integration::integrateConstantRaiseToTerm(
+void Integration::integrateConstantRaiseToTerm(
+        Term & result,
         AlbaNumber const& ,
         Term const& ) const
 {
     //implement this
-    return Term(AlbaNumber(AlbaNumber::Value::NotANumber));
+    result = Term(AlbaNumber(AlbaNumber::Value::NotANumber));
 }
 
-Term Integration::integrateTermRaiseToConstant(
+void Integration::integrateTermRaiseToConstant(
+        Term & result,
         Term const& base,
         AlbaNumber const& exponent) const
 {
-    Term result(AlbaNumber(AlbaNumber::Value::NotANumber));
     if(wouldDifferentiationYieldToAConstant(base))
     {
-        result = divideFirstTermAndDerivativeOfSecondTerm(Term(createExpressionIfPossible(
-        {base, Term("^"), Term(exponent+1), Term("/"), Term(exponent+1)})), base);
+        result = divideFirstTermAndDerivativeOfSecondTerm(Term(createExpressionIfPossible(        {base, Term("^"), Term(exponent+1), Term("/"), Term(exponent+1)})), base);
     }
     else if(base.isFunction())
     {
@@ -339,18 +340,17 @@ Term Integration::integrateTermRaiseToConstant(
             {Term(cot(inputOfFunctionTerm)), Term("*"), Term(-1)}), inputOfFunctionTerm);
         }
     }
-    return result;
 }
 
-Term Integration::integrateTermRaiseToTerm(
+void Integration::integrateTermRaiseToTerm(
+        Term & result,
         Term const& ,
         Term const& ) const
 {
-    return Term(AlbaNumber(AlbaNumber::Value::NotANumber));
+    result = Term(AlbaNumber(AlbaNumber::Value::NotANumber));
 }
 
-Term Integration::integrateFunctionOnly(
-        Function const& functionObject) const
+Term Integration::integrateFunctionOnly(        Function const& functionObject) const
 {
     Term result;
     Term const& inputTerm(getTermConstReferenceFromBaseTerm(functionObject.getInputTermConstReference()));
@@ -383,45 +383,44 @@ Term Integration::integrateFunctionOnly(
     }
     if(result.isEmpty())
     {
-        integrateTermUsingSubstitutionWithMaxDepth(result, Term(functionObject));
+        integrateTermUsingSubstitutionWithMaxDepth(result, Term(functionObject), getConfigurationWithFactors());
     }
     if(result.isEmpty())
-    {
-        result = Term(AlbaNumber(AlbaNumber::Value::NotANumber));
+    {        result = Term(AlbaNumber(AlbaNumber::Value::NotANumber));
     }
     return result;
 }
 
 void Integration::integrateTermUsingSubstitutionWithMaxDepth(
         Term & result,
-        Term const& term) const
+        Term const& term,
+        Configuration const& configuration) const
 {
-    constexpr unsigned int MAX_DEPTH=3;
+    constexpr unsigned int MAX_DEPTH=2;
     static unsigned int depth=0;
     depth++;
-    if(depth < MAX_DEPTH)
+    if(depth <= MAX_DEPTH)
     {
-        integrateTermUsingSubstitution(result, term);
+        integrateTermUsingSubstitution(result, term, configuration);
     }
     depth--;
 }
-
 void Integration::integrateTermUsingSubstitution(
         Term & result,
-        Term const& term) const
+        Term const& term,
+        Configuration const& configuration) const
 {
     Term simplifiedTerm(term);
-    simplifyForIntegration(simplifiedTerm);
+    simplifyForIntegration(simplifiedTerm, configuration);
     Terms subTerms(retrieveSubTerms(simplifiedTerm));
     for(Term const& subTerm : subTerms)
     {
         if(!subTerm.isConstant() && !subTerm.isVariable())
         {
-            integrateBySubstitutionAndUsingANewVariable(result, simplifiedTerm, subTerm);
+            integrateBySubstitutionAndUsingANewVariable(result, simplifiedTerm, subTerm, configuration);
             if(!result.isEmpty())
             {
-                break;
-            }
+                break;            }
         }
     }
 }
@@ -429,17 +428,17 @@ void Integration::integrateTermUsingSubstitution(
 void Integration::integrateBySubstitutionAndUsingANewVariable(
         Term & result,
         Term const& mainTerm,
-        Term const& termToSubstituteToVariable) const
+        Term const& termToSubstituteToVariable,
+        Configuration const& configuration) const
 {
     Differentiation differentiation(m_nameOfVariableToIntegrate);
     Term firstDerivative(differentiation.differentiate(termToSubstituteToVariable));
     Term termToIntegrate = mainTerm/firstDerivative;
     Term termToIntegrateWithNewVariable(getTermWithNewVariableSubstitution(termToIntegrate, termToSubstituteToVariable));
-    simplifyForIntegration(termToIntegrateWithNewVariable);
+    simplifyForIntegration(termToIntegrateWithNewVariable, configuration);
     if(isVariableToIntegrateNotFoundInTerm(termToIntegrateWithNewVariable))
     {
-        string newVariableName(createVariableNameForSubstitution(termToSubstituteToVariable));
-        Integration integrationWithNewVariable(newVariableName);
+        string newVariableName(createVariableNameForSubstitution(termToSubstituteToVariable));        Integration integrationWithNewVariable(newVariableName);
         Term integratedTermWithNewVariable(integrationWithNewVariable.integrateTerm(termToIntegrateWithNewVariable));
         SubstitutionOfVariablesToTerms substitutionVariableToTerm({{newVariableName, termToSubstituteToVariable}});
         Term integratedTerm(substitutionVariableToTerm.performSubstitutionTo(integratedTermWithNewVariable));
@@ -610,26 +609,40 @@ void Integration::integrateRecognizedFunctionsIfPossible(
 }
 
 void Integration::simplifyForIntegration(
-        Term& term) const
+        Term & term,
+        Configuration const& configuration) const
 {
     term.simplify();
     {
-        SimplificationOfExpression::ConfigurationDetails configurationDetails(
-                    SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
-        configurationDetails.shouldSimplifyToFactors = true;
-        configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
-
         SimplificationOfExpression::ScopeObject scopeObject;
-        scopeObject.setInThisScopeThisConfiguration(configurationDetails);
+        scopeObject.setInThisScopeThisConfiguration(configuration);
 
         term.simplify();
     }
 }
 
+Integration::Configuration Integration::getConfigurationWithFactors() const
+{
+    Configuration configurationDetails(
+                SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
+    configurationDetails.shouldSimplifyToFactors = true;
+    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
+    return configurationDetails;
+}
+
+Integration::Configuration Integration::getConfigurationWithCommonDenominator() const
+{
+    Configuration configurationDetails(
+                SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
+    configurationDetails.shouldSimplifyToFactors = true;
+    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
+    configurationDetails.shouldSimplifyToACommonDenominator = true;
+    return configurationDetails;
+}
+
 bool Integration::isVariableToIntegrate(string const& variableName) const
 {
-    return variableName == m_nameOfVariableToIntegrate;
-}
+    return variableName == m_nameOfVariableToIntegrate;}
 
 bool Integration::isVariableToIntegrateNotFoundInTerm(Term const& term) const
 {

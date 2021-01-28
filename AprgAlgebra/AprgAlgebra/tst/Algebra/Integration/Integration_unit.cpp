@@ -266,10 +266,21 @@ TEST(IntegrationTest, IntegrateWorksUsingSubstitutionUsingExample1)
     EXPECT_EQ(expectedTerm, integrationForX.integrate(termToTest));
 }
 
+TEST(IntegrationTest, IntegrateWorksWithSimplificationToACommonDenominator)
+{
+    Integration integrationForX("x");
+    Term termWithNegativeExponents(Polynomial{Monomial(1, {}), Monomial(AlbaNumber::createFraction(4, 9), {{"x", AlbaNumber::createFraction(-2, 3)}})});
+    Term termToTest(createExpressionIfPossible(
+    {termWithNegativeExponents, Term("^"), Term(AlbaNumber::createFraction(1, 2))}));
+
+    Term expectedPolynomial(Polynomial{Monomial(9, {{"x", AlbaNumber::createFraction(2, 3)}}), Monomial(4, {})});
+    Term expectedTerm(createExpressionIfPossible({expectedPolynomial, Term("^"), Term(AlbaNumber::createFraction(3, 2)), Term("/"), Term(27)}));
+    EXPECT_EQ(expectedTerm, integrationForX.integrate(termToTest));
+}
+
 TEST(IntegrationTest, IntegrateFunctionWorks)
 {
     Integration integrationForX("x");
-
     Term x("x");
     Term expectedTerm01(createExpressionIfPossible({Term(-1), Term("*"), cos(x)}));
     Term expectedTerm02(createExpressionIfPossible({Term(-1), Term("*"), cos(Monomial(5, {{"x", 1}})), Term("/"), Term(5)}));
