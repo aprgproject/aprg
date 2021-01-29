@@ -1,9 +1,9 @@
 #pragma once
 
+#include <Algebra/Equation/Equation.hpp>
 #include <Algebra/Limit/LimitAtAValueApproachType.hpp>
 #include <Algebra/Solution/SolutionSet/SolutionSet.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
-
 #include <string>
 
 namespace alba
@@ -16,10 +16,15 @@ bool isTheFirstFundamentalTheoremOfCalculusTrue(
         Term const& term,
         std::string const& variableName);
 
-bool isDifferentiableAt(
+Equation getRelationshipOfDerivativeOfTheInverseAndTheDerivative(
         Term const& term,
         std::string const& variableName,
-        AlbaNumber const& value);
+        std::string const& variableForNonInverse,
+        std::string const& variableForInverse);
+
+bool isDifferentiableAt(
+        Term const& term,
+        std::string const& variableName,        AlbaNumber const& value);
 
 Term getDerivativeDefinition(
         Term const& term,

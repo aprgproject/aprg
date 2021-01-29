@@ -3,14 +3,17 @@
 #include <Algebra/Constructs/ConstructUtilities.hpp>
 #include <Algebra/Factorization/FactorizationOfExpression.hpp>
 #include <Algebra/Factorization/FactorizationOfPolynomial.hpp>
+#include <Algebra/Isolation/IsolationOfOneVariableOnEqualityEquation.hpp>
 #include <Algebra/Retrieval/FirstCoefficientRetriever.hpp>
 #include <Algebra/Retrieval/NumberOfTermsRetriever.hpp>
+#include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
+#include <Algebra/Term/Operators/TermOperators.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
+#include <Algebra/Term/Utilities/StringHelpers.hpp>
 
 using namespace alba::algebra::Factorization;
 using namespace std;
-
 namespace alba
 {
 
@@ -97,12 +100,10 @@ bool isANegativeExpression(Expression const& expression)
 {
     bool result(false);
     TermsWithDetails termsWithDetails(expression.getTermsWithAssociation().getTermsWithDetails());
-    if(OperatorLevel::AdditionAndSubtraction == expression.getCommonOperatorLevel()
-       || OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel())
+    if(OperatorLevel::AdditionAndSubtraction == expression.getCommonOperatorLevel())
     {
         if(!termsWithDetails.empty())
-        {
-            Term const& firstTerm(getTermConstReferenceFromSharedPointer(termsWithDetails.front().baseTermSharedPointer));
+        {            Term const& firstTerm(getTermConstReferenceFromSharedPointer(termsWithDetails.front().baseTermSharedPointer));
             result = isANegativeTerm(firstTerm);
         }
     }
@@ -116,9 +117,12 @@ bool isANegativeExpression(Expression const& expression)
         }
         result = isNegative;
     }
+    else if(OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel())
+    {
+        result = false;
+    }
     return result;
 }
-
 AlbaNumber getConstantFactor(Term const& term)
 {
     AlbaNumber result(1);
@@ -163,17 +167,37 @@ AlbaNumberPairs evaluateAndGetInputOutputPair(
     return result;
 }
 
+Term convertPositiveTermIfNegative(Term const& term)
+{
+    Term result;
+    if(isANegativeTerm(term))
+    {
+        result = negateTerm(term);
+    }
+    else
+    {
+        result = term;
+    }
+    return result;
+}
+
 Term negateTerm(Term const& term)
 {
-    Term negatedTerm(createExpressionIfPossible({term, Term("*"), Term(-1)}));
-    negatedTerm.simplify();
-    return negatedTerm;
+    return term*Term(-1);
+}
+
+Term invertTerm(Term const& term, string const& variableName)
+{
+    string newVariableName(createVariableNameForSubstitution(term));
+    Equation equationToIsolate(Term(newVariableName), "=", term);
+    IsolationOfOneVariableOnEqualityEquation isolation(equationToIsolate);
+    SubstitutionOfVariablesToTerms substitution{{newVariableName, Term(variableName)}};
+    return substitution.performSubstitutionTo(isolation.getTermByIsolatingVariable(variableName));
 }
 
 Expression negateExpression(Expression const& expression)
 {
-    Expression negatedExpression(expression);
-    negatedExpression.putTermWithMultiplicationIfNeeded(Term(-1));
+    Expression negatedExpression(expression);    negatedExpression.putTermWithMultiplicationIfNeeded(Term(-1));
     negatedExpression.simplify();
     return negatedExpression;
 }

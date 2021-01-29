@@ -8,12 +8,15 @@
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Solution/DomainAndRange/DomainAndRange.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
+#include <Algebra/Term/Utilities/TermUtilities.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
+
+
+#include <Debug/AlbaDebug.hpp>
 
 using namespace alba::algebra::DomainAndRange;
 using namespace alba::algebra::Simplification;
 using namespace std;
-
 namespace
 {
 
@@ -45,10 +48,32 @@ bool isTheFirstFundamentalTheoremOfCalculusTrue(
     return derivativeOfCapitalF == simplifiedTerm;
 }
 
-bool isDifferentiableAt(
+Equation getRelationshipOfDerivativeOfTheInverseAndTheDerivative(
         Term const& term,
         string const& variableName,
-        AlbaNumber const& value)
+        string const& variableForNonInverse,
+        string const& variableForInverse)
+{
+    // Suppose the function f is continuous and monotonic on a closed interval [a, b] containing the number c, and let f(c) = d.
+    // If f'(c) exists and f'(c) != 0, then (f-1)'(d) exists and:
+
+    Differentiation differentiation(variableName);
+    Term inverseOfTerm(invertTerm(term, variableName));
+    Term derivative(differentiation.differentiate(term));
+    Term derivativeOfInverse(differentiation.differentiate(inverseOfTerm));
+    SubstitutionOfVariablesToTerms substitution{{variableName, Term(variableForNonInverse)}};
+    Term derivativeWithNewVariable(substitution.performSubstitutionTo(derivative));
+    substitution.putVariableWithTerm(variableName, Term(variableForInverse));
+    Term derivativeOfInverseWithNewVariable(substitution.performSubstitutionTo(derivativeOfInverse));
+    Term oneOverDerivativeWithNewVariable(createExpressionIfPossible({Term(1), Term("/"), derivativeWithNewVariable}));
+    derivativeOfInverseWithNewVariable.simplify();
+    oneOverDerivativeWithNewVariable.simplify();
+    return Equation(derivativeOfInverseWithNewVariable, "=", oneOverDerivativeWithNewVariable);
+}
+
+bool isDifferentiableAt(
+        Term const& term,
+        string const& variableName,        AlbaNumber const& value)
 {
     bool result(false);
     Term derivative(getDerivativeAtUsingLimit(term, variableName, Term("x"), LimitAtAValueApproachType::BothSides));

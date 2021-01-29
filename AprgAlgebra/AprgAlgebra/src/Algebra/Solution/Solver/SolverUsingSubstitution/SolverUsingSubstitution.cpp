@@ -259,11 +259,10 @@ void SolverUsingSubstitution::selectVariableNameAndEquationNumber(
         for(string const& variableName : variableNamesRetriever.getSavedData())
         {
             if(isolation.canBeIsolated(variableName)
-                    && isolation.getExponentOfIsolatedVariable(variableName) == 1)
+                    && isolation.getIdenticalExponentForVariableIfPossible(variableName) == 1)
             {
                 areVariableAndEquationSelected = true;
-                selectedVariableName = variableName;
-                selectedEquationIndex = equationIndex;
+                selectedVariableName = variableName;                selectedEquationIndex = equationIndex;
                 break;
             }
         }
@@ -280,14 +279,12 @@ void SolverUsingSubstitution::substituteEquationForSelectedEquationIndex(
     if(areVariableAndEquationSelected)
     {
         IsolationOfOneVariableOnEqualityEquation isolation(substitutedEquations.at(selectedEquationIndex));
-        Equation isolatedEquation(isolation.isolate(selectedVariableName));
-        substitutedEquations.erase(substitutedEquations.begin()+selectedEquationIndex);
+        substitutedEquations.erase(substitutedEquations.begin() + selectedEquationIndex);
         SubstitutionOfVariablesToTerms substitution;
-        substitution.putVariableWithTerm(selectedVariableName, isolatedEquation.getLeftHandTerm());
+        substitution.putVariableWithTerm(selectedVariableName, isolation.getTermByIsolatingVariable(selectedVariableName));
         for(Equation & substitutedEquation : substitutedEquations)
         {
-            substitutedEquation = substitution.performSubstitutionTo(substitutedEquation);
-        }
+            substitutedEquation = substitution.performSubstitutionTo(substitutedEquation);        }
     }
 }
 
