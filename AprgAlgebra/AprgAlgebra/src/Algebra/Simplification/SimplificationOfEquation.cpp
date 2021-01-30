@@ -15,7 +15,8 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace algebra
 {
@@ -130,6 +131,7 @@ void SimplificationOfEquation::simplifyLeftHandTerm(
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
                 SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyToACommonDenominator = true;
+
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
@@ -144,6 +146,7 @@ bool SimplificationOfEquation::areTheSignsOfTwoTermsDifferent(
 }
 
 }
+
 }
 
 }

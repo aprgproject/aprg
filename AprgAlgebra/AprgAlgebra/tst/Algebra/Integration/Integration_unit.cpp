@@ -281,6 +281,7 @@ TEST(IntegrationTest, IntegrateWorksWithSimplificationToACommonDenominator)
 TEST(IntegrationTest, IntegrateFunctionWorks)
 {
     Integration integrationForX("x");
+
     Term x("x");
     Term expectedTerm01(createExpressionIfPossible({Term(-1), Term("*"), cos(x)}));
     Term expectedTerm02(createExpressionIfPossible({Term(-1), Term("*"), cos(Monomial(5, {{"x", 1}})), Term("/"), Term(5)}));

@@ -187,7 +187,8 @@ TEST(PolynomialOverPolynomialTest, SimplifyWorksOnConvertingNegativeExponentsToP
 
 TEST(PolynomialOverPolynomialTest, SimplifyWorksOnCommonNegativeSignInNumerator)
 {
-    Polynomial numerator{Monomial(-1, {{"x", 1}}), Monomial(-1, {{"y", 1}})};    Polynomial denominator{Monomial(-1, {{"a", 1}}), Monomial(1, {{"b", 1}})};
+    Polynomial numerator{Monomial(-1, {{"x", 1}}), Monomial(-1, {{"y", 1}})};
+    Polynomial denominator{Monomial(-1, {{"a", 1}}), Monomial(1, {{"b", 1}})};
     PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
 
     polynomialOverPolynomial.simplify();

@@ -37,6 +37,7 @@ private:
 
     Equation m_equation;
 };
+
 }
 
 }

@@ -292,7 +292,8 @@ bool hasNumbersNotFinite(Function const& function)
 
 bool isAFiniteConstant(Term const& term)
 {
-    bool result(false);    if(term.isConstant())
+    bool result(false);
+    if(term.isConstant())
     {
         result = term.getConstantValueConstReference().isAFiniteValue();
     }

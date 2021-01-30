@@ -131,6 +131,7 @@ TEST(ValueCheckingHelpersTest, IsANegativeExpressionWorks)
     EXPECT_FALSE(isANegativeExpression(createExpressionIfPossible({Term(-5), Term("^"), x})));
     EXPECT_FALSE(isANegativeExpression(createExpressionIfPossible({Term(5), Term("^"), x})));
 }
+
 TEST(TermUtilitiesTest, GetConstantFactorWorks)
 {
     Term x("x");
@@ -192,7 +193,8 @@ TEST(TermUtilitiesTest, InvertTermWorks)
 
 TEST(TermUtilitiesTest, NegateExpressionWorks)
 {
-    Term x("x");    Expression expectedExpression1(createExpressionIfPossible({Term(Polynomial{Monomial(-1, {{"x", 1}}), Monomial(5, {})})}));
+    Term x("x");
+    Expression expectedExpression1(createExpressionIfPossible({Term(Polynomial{Monomial(-1, {{"x", 1}}), Monomial(5, {})})}));
     Expression expectedExpression2(createExpressionIfPossible({Term(Polynomial{Monomial(-1, {{"x", 1}}), Monomial(-5, {})})}));
     Expression expectedExpression3(createExpressionIfPossible({Term(Monomial(5, {{"x", 1}}))}));
     Expression expectedExpression4(createExpressionIfPossible({Term(-15)}));

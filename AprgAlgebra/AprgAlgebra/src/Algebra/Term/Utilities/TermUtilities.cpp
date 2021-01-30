@@ -14,6 +14,7 @@
 
 using namespace alba::algebra::Factorization;
 using namespace std;
+
 namespace alba
 {
 
@@ -103,7 +104,8 @@ bool isANegativeExpression(Expression const& expression)
     if(OperatorLevel::AdditionAndSubtraction == expression.getCommonOperatorLevel())
     {
         if(!termsWithDetails.empty())
-        {            Term const& firstTerm(getTermConstReferenceFromSharedPointer(termsWithDetails.front().baseTermSharedPointer));
+        {
+            Term const& firstTerm(getTermConstReferenceFromSharedPointer(termsWithDetails.front().baseTermSharedPointer));
             result = isANegativeTerm(firstTerm);
         }
     }
@@ -123,6 +125,7 @@ bool isANegativeExpression(Expression const& expression)
     }
     return result;
 }
+
 AlbaNumber getConstantFactor(Term const& term)
 {
     AlbaNumber result(1);
@@ -197,7 +200,8 @@ Term invertTerm(Term const& term, string const& variableName)
 
 Expression negateExpression(Expression const& expression)
 {
-    Expression negatedExpression(expression);    negatedExpression.putTermWithMultiplicationIfNeeded(Term(-1));
+    Expression negatedExpression(expression);
+    negatedExpression.putTermWithMultiplicationIfNeeded(Term(-1));
     negatedExpression.simplify();
     return negatedExpression;
 }

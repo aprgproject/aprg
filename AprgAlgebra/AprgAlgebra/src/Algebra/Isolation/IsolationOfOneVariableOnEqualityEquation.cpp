@@ -4,6 +4,7 @@
 #include <Algebra/Term/Utilities/ConvertHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/MonomialHelpers.hpp>
+
 using namespace std;
 
 namespace alba
@@ -38,7 +39,8 @@ bool IsolationOfOneVariableOnEqualityEquation::canBeIsolated(
 AlbaNumber IsolationOfOneVariableOnEqualityEquation::getIdenticalExponentForVariableIfPossible(
         string const& variableName) const
 {
-    AlbaNumber exponent(0);    if(canBeConvertedToPolynomial(m_simplifiedLeftSideTerm))
+    AlbaNumber exponent(0);
+    if(canBeConvertedToPolynomial(m_simplifiedLeftSideTerm))
     {
         Polynomial polynomial(createPolynomialIfPossible(m_simplifiedLeftSideTerm));
         exponent = getIdenticalExponentForVariableIfPossible(variableName, polynomial);
@@ -97,7 +99,8 @@ void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
         if(canBeIsolated(identicalExponentForVariable))
         {
             Monomials monomialsWithVariable;
-            Monomials monomialsWithoutVariable;            segregateMonomialsWithAndWithoutVariable(
+            Monomials monomialsWithoutVariable;
+            segregateMonomialsWithAndWithoutVariable(
                         polynomial.getMonomialsConstReference(),
                         variableName,
                         monomialsWithVariable,
@@ -140,7 +143,8 @@ AlbaNumber IsolationOfOneVariableOnEqualityEquation::getIdenticalExponentForVari
                 exponent = 0;
                 break;
             }
-        }    }
+        }
+    }
     return exponent;
 }
 

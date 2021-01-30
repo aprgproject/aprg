@@ -5,7 +5,8 @@
 #include <Algebra/Constructs/PolynomialOverPolynomial.hpp>
 #include <Algebra/Constructs/RationalizeTermOverTerm.hpp>
 #include <Algebra/Operations/AccumulateOperations.hpp>
-#include <Algebra/Retrieval/ExpressionAndFunctionsRetriever.hpp>#include <Algebra/Simplification/SimplificationUtilities.hpp>
+#include <Algebra/Retrieval/ExpressionAndFunctionsRetriever.hpp>
+#include <Algebra/Simplification/SimplificationUtilities.hpp>
 #include <Algebra/Substitution/SubstitutionOfTermsToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
@@ -151,6 +152,7 @@ void SimplificationOfExpression::simplifyExpressionUntilNoChangeInitiallyIfNeede
         simplifyExpressionUntilNoChange();
     }
 }
+
 void SimplificationOfExpression::simplifyToACommonDenominatorIfNeeded()
 {
     if(shouldSimplifyToACommonDenominator())
@@ -424,7 +426,8 @@ void SimplificationOfExpression::convertPolynomialToPolynomialOverPolynomial(
 
 template <>
 algebra::Simplification::SimplificationOfExpression::ConfigurationDetails
-getDefaultConfigurationDetails<alba::algebra::Simplification::SimplificationOfExpression::ConfigurationDetails>(){
+getDefaultConfigurationDetails<alba::algebra::Simplification::SimplificationOfExpression::ConfigurationDetails>()
+{
     return algebra::Simplification::SimplificationOfExpression::ConfigurationDetails
     {false, false, false, false, false, false, false, false, false, false, false};
 }
