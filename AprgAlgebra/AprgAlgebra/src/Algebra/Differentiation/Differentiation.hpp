@@ -56,6 +56,10 @@ private:
             TermsWithDetails const& termsWithDetails) const;
     Term differentiateTermsInMultiplicationOrDivision(
             TermsWithDetails const& termsWithDetails) const;
+    Term differentiateByProcessingAsPolynomialsOverPolynomials(
+            Term const& term) const;
+    Term differentiateTermsInMultiplicationOrDivisionTermByTerm(
+            TermsWithDetails const& termsWithDetails) const;
     Term differentiateTermsInRaiseToPower(
             TermsWithDetails const& termsWithDetails) const;
     Term differentiateConstantRaiseToTerm(

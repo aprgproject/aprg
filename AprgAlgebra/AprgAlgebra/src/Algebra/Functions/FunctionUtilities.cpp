@@ -1,5 +1,6 @@
 #include "FunctionUtilities.hpp"
 
+#include <Algebra/Functions/CommonFunctionLibrary.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 
 #include <algorithm>
@@ -63,6 +64,12 @@ AlbaNumberPairs evaluateAndGetInputOutputPair(
         }
     }
     return result;
+}
+
+Term getNaturalLogarithmOfTheAbsoluteValueOfTerm(
+        Term const& term)
+{
+    return Term(ln(Term(abs(term))));
 }
 
 }

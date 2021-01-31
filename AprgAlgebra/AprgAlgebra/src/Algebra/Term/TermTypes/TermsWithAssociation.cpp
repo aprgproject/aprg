@@ -17,6 +17,17 @@ namespace algebra
 TermsWithAssociation::TermsWithAssociation()
 {}
 
+TermsWithAssociation::TermsWithAssociation(
+        initializer_list<TermWithDetails> const& termsWithDetails)
+{
+    putTermsWithDetails(termsWithDetails);
+}
+
+TermsWithAssociation::TermsWithAssociation(
+        TermsWithDetails const& termsWithDetails)
+    : m_termsWithDetails(termsWithDetails)
+{}
+
 TermsWithAssociation::~TermsWithAssociation()
 {}
 
@@ -120,6 +131,12 @@ void TermsWithAssociation::sort()
 void TermsWithAssociation::putTermWithDetails(TermWithDetails const& termWithDetails)
 {
     m_termsWithDetails.emplace_back(getBaseTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer), termWithDetails.association);
+}
+
+void TermsWithAssociation::putTermsWithDetails(initializer_list<TermWithDetails> const& termsWithDetails)
+{
+    m_termsWithDetails.reserve(m_termsWithDetails.size() + termsWithDetails.size());
+    copy(termsWithDetails.begin(), termsWithDetails.end(), back_inserter(m_termsWithDetails));
 }
 
 void TermsWithAssociation::putTermsWithDetails(TermsWithDetails const& termsWithDetails)

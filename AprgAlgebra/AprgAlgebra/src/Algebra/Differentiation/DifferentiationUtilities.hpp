@@ -22,11 +22,12 @@ bool isDifferentiableAt(
         std::string const& variableName,
         AlbaNumber const& value);
 
-Term getDerivativeDefinition(
-        Term const& term,
-        std::string const& variableName);
+bool isFirstOrderDifferentialEquation(
+        Equation const& equation,
+        std::string const& xVariableName,
+        std::string const& yVariableName);
 
-Term getDerivativeDefinitionForFiniteCalculus(
+Term getDerivativeDefinition(
         Term const& term,
         std::string const& variableName);
 
@@ -35,6 +36,15 @@ Term getDerivativeAtUsingLimit(
         std::string const& variableName,
         Term const& termSubstituteToBack,
         LimitAtAValueApproachType const approachType);
+
+Term getDerivativeDefinitionForFiniteCalculus(
+        Term const& term,
+        std::string const& variableName);
+
+Term getLogarithmicDifferentiationToYieldDyOverDx(
+        Term const& yInTermsOfX,
+        std::string const& xVariableName,
+        std::string const& yVariableName);
 
 SolutionSet getDifferentiabilityDomain(
         Term const& term,
@@ -46,12 +56,21 @@ Equation getRelationshipOfDerivativeOfTheInverseAndTheDerivative(
         std::string const& variableForNonInverse,
         std::string const& variableForInverse);
 
-void simplifyDerivativeByDefinition(Term & term);
-
-Term performLogarithmicDifferentiationToYieldDyOverDx(
-        Term const& yInTermsOfX,
+Equation getIntegralEquationForFirstOrderDifferentialEquation(
+        Equation const& equation,
         std::string const& xVariableName,
         std::string const& yVariableName);
+
+Equation getIntegralEquationForFirstOrderDifferentialEquation(
+        Term const& p,
+        Term const& q,
+        std::string const& xVariableName,
+        std::string const& yVariableName);
+
+void simplifyDerivativeByDefinition(Term & term);
+
+void simplifyToNonDoubleFactors(
+        Term& term);
 
 }
 

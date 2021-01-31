@@ -87,8 +87,14 @@ bool TermRaiseToTerms::doesEvenExponentCancellationHappen() const
 
 Term TermRaiseToTerms::getCombinedTerm() const
 {
-    Term combinedTerm(combineBaseAndExponentsAndReturn());
-    return combinedTerm;
+    return getCombinedBaseAndExponents();
+}
+
+Term TermRaiseToTerms::getCombinedExponents() const
+{
+    Term exponentCombinedTerm;
+    accumulateTermsForMultiplicationAndDivision(exponentCombinedTerm, m_exponents);
+    return exponentCombinedTerm;
 }
 
 Term const& TermRaiseToTerms::getBase() const
@@ -220,7 +226,7 @@ void TermRaiseToTerms::initializeExponentsInTerms(
     });
 }
 
-Term TermRaiseToTerms::combineBaseAndExponentsAndReturn() const
+Term TermRaiseToTerms::getCombinedBaseAndExponents() const
 {
     Term combinedTerm;
     if(m_exponents.empty())
@@ -229,14 +235,13 @@ Term TermRaiseToTerms::combineBaseAndExponentsAndReturn() const
     }
     else
     {
-        Term exponentCombinedTerm;
-        accumulateTermsForMultiplicationAndDivision(exponentCombinedTerm, m_exponents);
         Expression raiseToPowerExpression(createOrCopyExpressionFromATerm(m_base));
-        raiseToPowerExpression.putTermWithRaiseToPowerIfNeeded(exponentCombinedTerm);
+        raiseToPowerExpression.putTermWithRaiseToPowerIfNeeded(getCombinedExponents());
         combinedTerm = Term(raiseToPowerExpression);
     }
     return combinedTerm;
 }
+
 
 }
 

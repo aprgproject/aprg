@@ -24,6 +24,7 @@ public:
 
     bool doesEvenExponentCancellationHappen() const;
     Term getCombinedTerm() const;
+    Term getCombinedExponents() const;
     Term const& getBase() const;
     TermsWithDetails const& getExponents() const;
 
@@ -41,7 +42,7 @@ private:
             TermsWithDetails const& termsInRaiseToPowerExpression);
     void initializeExponentsInTerms(
             Terms const& exponents);
-    Term combineBaseAndExponentsAndReturn() const;
+    Term getCombinedBaseAndExponents() const;
 
     Term m_base;
     TermsWithDetails m_exponents;

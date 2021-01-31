@@ -30,6 +30,13 @@ Expression::Expression(BaseTerm const& baseTerm)
     m_termsWithAssociation.putTermWithPositiveAssociation(baseTerm);
 }
 
+Expression::Expression(
+        OperatorLevel const operatorLevel,
+        TermsWithDetails const& termsWithDetails)
+    : m_commonOperatorLevel(operatorLevel)
+    , m_termsWithAssociation(termsWithDetails)
+{}
+
 Expression::~Expression()
 {}
 

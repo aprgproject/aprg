@@ -16,12 +16,7 @@ namespace algebra
 IsolationOfOneVariableOnEqualityEquation::IsolationOfOneVariableOnEqualityEquation(
         Equation const& equation)
 {
-    if(equation.getEquationOperator().isEqual())
-    {
-        Equation simplifiedEquation(equation);
-        simplifiedEquation.simplify();
-        m_simplifiedLeftSideTerm = simplifiedEquation.getLeftHandTerm();
-    }
+    setEquation(equation);
 }
 
 bool IsolationOfOneVariableOnEqualityEquation::canBeIsolated(
@@ -48,24 +43,6 @@ AlbaNumber IsolationOfOneVariableOnEqualityEquation::getIdenticalExponentForVari
     return exponent;
 }
 
-Equation IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariableOnLeftSideOfEquation(
-        string const& variableName) const
-{
-    Term termWithVariable;
-    Term termWithWithoutVariable;
-    isolateTermWithVariable(variableName, termWithVariable, termWithWithoutVariable);
-    return Equation(termWithVariable, "=", termWithWithoutVariable);
-}
-
-Equation IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariableOnRightSideOfEquation(
-        string const& variableName) const
-{
-    Term termWithVariable;
-    Term termWithWithoutVariable;
-    isolateTermWithVariable(variableName, termWithVariable, termWithWithoutVariable);
-    return Equation(termWithWithoutVariable, "=", termWithVariable);
-}
-
 Term IsolationOfOneVariableOnEqualityEquation::getTermByIsolatingVariable(
         string const& variableName) const
 {
@@ -85,6 +62,24 @@ Term IsolationOfOneVariableOnEqualityEquation::getTermByIsolatingVariable(
         result = termWithWithoutVariable^Term(exponent);
     }
     return result;
+}
+
+Equation IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariableOnLeftSideOfEquation(
+        string const& variableName) const
+{
+    Term termWithVariable;
+    Term termWithWithoutVariable;
+    isolateTermWithVariable(variableName, termWithVariable, termWithWithoutVariable);
+    return Equation(termWithVariable, "=", termWithWithoutVariable);
+}
+
+Equation IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariableOnRightSideOfEquation(
+        string const& variableName) const
+{
+    Term termWithVariable;
+    Term termWithWithoutVariable;
+    isolateTermWithVariable(variableName, termWithVariable, termWithWithoutVariable);
+    return Equation(termWithWithoutVariable, "=", termWithVariable);
 }
 
 void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
@@ -115,6 +110,17 @@ void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
             termWithVariable.simplify();
             termWithWithoutVariable.simplify();
         }
+    }
+}
+
+void IsolationOfOneVariableOnEqualityEquation::setEquation(
+        Equation const& equation)
+{
+    if(equation.getEquationOperator().isEqual())
+    {
+        Equation simplifiedEquation(equation);
+        simplifiedEquation.simplify();
+        m_simplifiedLeftSideTerm = simplifiedEquation.getLeftHandTerm();
     }
 }
 
