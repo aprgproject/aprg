@@ -220,15 +220,16 @@ Function sech(Term const& term)
 
 Function coth(Term const& term)
 {
-    return Function("sech", term, [](AlbaNumber const&  number) -> AlbaNumber
+    return Function("coth", term, [](AlbaNumber const&  number) -> AlbaNumber
     {
-        return ::sinh(number.getDouble()) / ::cosh(number.getDouble());
+        return ::cosh(number.getDouble()) / ::sinh(number.getDouble());
     });
 }
 
 Function sinHarmonic(
         Term const& term,
-        AlbaNumber const& amplitude,        AlbaNumber const& period,
+        AlbaNumber const& amplitude,
+        AlbaNumber const& period,
         AlbaNumber const& phaseDifference)
 {
     return Function("sinHarmonic", term, [&](AlbaNumber const&  number) -> AlbaNumber

@@ -467,7 +467,8 @@ Term Differentiation::differentiateFunctionOnly(
     {
         derivativeOfFunction = Term(cos(inputTerm));
     }
-    else if("cos" == functionObject.getFunctionName())    {
+    else if("cos" == functionObject.getFunctionName())
+    {
         derivativeOfFunction = Term(createExpressionIfPossible({Term(-1), Term("*"), sin(inputTerm)}));
     }
     else if("tan" == functionObject.getFunctionName())
@@ -520,8 +521,33 @@ Term Differentiation::differentiateFunctionOnly(
         Term onePlusInputSquared(createExpressionIfPossible({Term(1), Term("+"), inputTerm, Term("^"), Term(2)}));
         derivativeOfFunction = Term(createExpressionIfPossible({Term(-1), Term("/"), onePlusInputSquared}));
     }
+    else if("sinh" == functionObject.getFunctionName())
+    {
+        derivativeOfFunction = Term(cosh(inputTerm));
+    }
+    else if("cosh" == functionObject.getFunctionName())
+    {
+        derivativeOfFunction = Term(sinh(inputTerm));
+    }
+    else if("tanh" == functionObject.getFunctionName())
+    {
+        derivativeOfFunction = Term(createExpressionIfPossible({sech(inputTerm), Term("^"), Term(2)}));
+    }
+    else if("csch" == functionObject.getFunctionName())
+    {
+        derivativeOfFunction = Term(createExpressionIfPossible({Term(-1), Term("*"), csch(inputTerm), Term("*"), coth(inputTerm)}));
+    }
+    else if("sech" == functionObject.getFunctionName())
+    {
+        derivativeOfFunction = Term(createExpressionIfPossible({Term(-1), Term("*"), sech(inputTerm), Term("*"), tanh(inputTerm)}));
+    }
+    else if("coth" == functionObject.getFunctionName())
+    {
+        derivativeOfFunction = Term(createExpressionIfPossible({Term(-1), Term("*"), csch(inputTerm), Term("^"), Term(2)}));
+    }
     return derivativeOfFunction;
 }
+
 void Differentiation::separateUnaffectedAndAffectedVariables(
         Monomial & unaffectedVariablesAndConstant,
         Monomial & affectedVariables,

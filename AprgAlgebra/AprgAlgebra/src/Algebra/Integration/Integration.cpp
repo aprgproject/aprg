@@ -377,6 +377,19 @@ void Integration::integrateTermRaiseToConstant(
             result = divideFirstTermAndDerivativeOfSecondTerm(createExpressionIfPossible(
             {Term(cot(inputOfFunctionTerm)), Term("*"), Term(-1)}), inputOfFunctionTerm);
         }
+        else if(exponent == 2
+                && functionTerm.getFunctionName() == "sech"
+                && wouldDifferentiationYieldToAConstant(inputOfFunctionTerm))
+        {
+            result = divideFirstTermAndDerivativeOfSecondTerm(Term(tanh(inputOfFunctionTerm)), inputOfFunctionTerm);
+        }
+        else if(exponent == 2
+                && functionTerm.getFunctionName() == "csch"
+                && wouldDifferentiationYieldToAConstant(inputOfFunctionTerm))
+        {
+            result = divideFirstTermAndDerivativeOfSecondTerm(createExpressionIfPossible(
+            {Term(coth(inputOfFunctionTerm)), Term("*"), Term(-1)}), inputOfFunctionTerm);
+        }
     }
 }
 
@@ -422,6 +435,14 @@ Term Integration::integrateFunctionOnly(
         else if("cot" == functionObject.getFunctionName())
         {
             result = getNaturalLogarithmOfTheAbsoluteValueOfTerm(Term(sin(inputTerm)));
+        }
+        else if("sinh" == functionObject.getFunctionName())
+        {
+            result = divideFirstTermAndDerivativeOfSecondTerm(Term(createExpressionIfPossible({Term(-1), Term("*"), cosh(inputTerm)})), inputTerm);
+        }
+        else if("cosh" == functionObject.getFunctionName())
+        {
+            result = divideFirstTermAndDerivativeOfSecondTerm(Term(sinh(inputTerm)), inputTerm);
         }
     }
     if(result.isEmpty())

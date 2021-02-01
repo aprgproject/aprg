@@ -12,7 +12,8 @@ bool isIntervalInsideTheIntervals(AlbaNumberInterval const& innerInterval, AlbaN
 bool areTheIntervalsInsideTheInterval(AlbaNumberIntervals const& innerIntervals, AlbaNumberInterval const& outerInterval);
 AlbaNumberIntervalEndpoint::Type getEndpointTypeWithCheckingIfItsClosed(bool const isCloseEndpoint);
 AlbaNumberIntervalEndpoint createOpenEndpoint(AlbaNumber const value);
-AlbaNumberIntervalEndpoint createCloseEndpoint(AlbaNumber const value);AlbaNumberIntervalEndpoint createEndpoint(
+AlbaNumberIntervalEndpoint createCloseEndpoint(AlbaNumber const value);
+AlbaNumberIntervalEndpoint createEndpoint(
         bool const isCloseEndpoint,
         AlbaNumber const value);
 AlbaNumberIntervalEndpoint createPositiveInfinityOpenEndpoint();
