@@ -360,39 +360,11 @@ void Integration::integrateTermRaiseToConstant(
         result = divideFirstTermAndDerivativeOfSecondTerm(Term(createExpressionIfPossible(
         {base, Term("^"), Term(exponent+1), Term("/"), Term(exponent+1)})), base);
     }
-    else if(base.isFunction())
+    else if(base.isFunction() && exponent == 2)
     {
-        Function const& functionTerm(base.getFunctionConstReference());
-        Term const& inputOfFunctionTerm(getTermConstReferenceFromBaseTerm(functionTerm.getInputTermConstReference()));
-        if(exponent == 2
-                && functionTerm.getFunctionName() == "sec"
-                && wouldDifferentiationYieldToAConstant(inputOfFunctionTerm))
-        {
-            result = divideFirstTermAndDerivativeOfSecondTerm(Term(tan(inputOfFunctionTerm)), inputOfFunctionTerm);
-        }
-        else if(exponent == 2
-                && functionTerm.getFunctionName() == "csc"
-                && wouldDifferentiationYieldToAConstant(inputOfFunctionTerm))
-        {
-            result = divideFirstTermAndDerivativeOfSecondTerm(createExpressionIfPossible(
-            {Term(cot(inputOfFunctionTerm)), Term("*"), Term(-1)}), inputOfFunctionTerm);
-        }
-        else if(exponent == 2
-                && functionTerm.getFunctionName() == "sech"
-                && wouldDifferentiationYieldToAConstant(inputOfFunctionTerm))
-        {
-            result = divideFirstTermAndDerivativeOfSecondTerm(Term(tanh(inputOfFunctionTerm)), inputOfFunctionTerm);
-        }
-        else if(exponent == 2
-                && functionTerm.getFunctionName() == "csch"
-                && wouldDifferentiationYieldToAConstant(inputOfFunctionTerm))
-        {
-            result = divideFirstTermAndDerivativeOfSecondTerm(createExpressionIfPossible(
-            {Term(coth(inputOfFunctionTerm)), Term("*"), Term(-1)}), inputOfFunctionTerm);
-        }
+        integrateRecognizedFunctionsSquared(result, base);
     }
 }
-
 void Integration::integrateTermRaiseToTerm(
         Term & result,
         Term const& ,
@@ -438,11 +410,10 @@ Term Integration::integrateFunctionOnly(
         }
         else if("sinh" == functionObject.getFunctionName())
         {
-            result = divideFirstTermAndDerivativeOfSecondTerm(Term(createExpressionIfPossible({Term(-1), Term("*"), cosh(inputTerm)})), inputTerm);
+            result = divideFirstTermAndDerivativeOfSecondTerm(Term(cosh(inputTerm)), inputTerm);
         }
         else if("cosh" == functionObject.getFunctionName())
-        {
-            result = divideFirstTermAndDerivativeOfSecondTerm(Term(sinh(inputTerm)), inputTerm);
+        {            result = divideFirstTermAndDerivativeOfSecondTerm(Term(sinh(inputTerm)), inputTerm);
         }
     }
     if(result.isEmpty())
@@ -456,10 +427,38 @@ Term Integration::integrateFunctionOnly(
     return result;
 }
 
+void Integration::integrateRecognizedFunctionsSquared(
+        Term & result,
+        Term const& functionTerm) const
+{
+    Function const& functionObject(functionTerm.getFunctionConstReference());
+    Term const& inputOfFunctionTerm(getTermConstReferenceFromBaseTerm(functionObject.getInputTermConstReference()));
+    if(wouldDifferentiationYieldToAConstant(inputOfFunctionTerm))
+    {
+        if(functionObject.getFunctionName() == "sec")
+        {
+            result = divideFirstTermAndDerivativeOfSecondTerm(Term(tan(inputOfFunctionTerm)), inputOfFunctionTerm);
+        }
+        else if(functionObject.getFunctionName() == "csc")
+        {
+            result = divideFirstTermAndDerivativeOfSecondTerm(createExpressionIfPossible(
+            {Term(cot(inputOfFunctionTerm)), Term("*"), Term(-1)}), inputOfFunctionTerm);
+        }
+        else if(functionObject.getFunctionName() == "sech")
+        {
+            result = divideFirstTermAndDerivativeOfSecondTerm(Term(tanh(inputOfFunctionTerm)), inputOfFunctionTerm);
+        }
+        else if(functionObject.getFunctionName() == "csch")
+        {
+            result = divideFirstTermAndDerivativeOfSecondTerm(createExpressionIfPossible(
+            {Term(coth(inputOfFunctionTerm)), Term("*"), Term(-1)}), inputOfFunctionTerm);
+        }
+    }
+}
+
 void Integration::integrateTermUsingSubstitutionWithMaxDepth(
         Term & result,
-        Term const& term,
-        Configuration const& configuration) const
+        Term const& term,        Configuration const& configuration) const
 {
     constexpr unsigned int MAX_DEPTH=2;
     static unsigned int depth=0;

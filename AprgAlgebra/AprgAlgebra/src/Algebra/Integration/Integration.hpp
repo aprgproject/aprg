@@ -42,10 +42,10 @@ public:
     Term integrateExpression(Expression const& expression) const;
     Term integrateFunction(Function const& functionObject) const;
 
+
 private:
     Term integrateMonomialWhenExponentIsNegativeOne(
-            Monomial const& monomial) const;
-    Monomial integrateMonomialWhenExponentIsNotNegativeOne(
+            Monomial const& monomial) const;    Monomial integrateMonomialWhenExponentIsNotNegativeOne(
             Monomial const& monomial) const;
     Term integrateAsTermOrExpressionIfNeeded(
             Expression const& expression) const;
@@ -75,10 +75,10 @@ private:
             Term const& firstTerm,
             Term const& secondTerm) const;
     Term integrateFunctionOnly(Function const& functionObject) const;
+    void integrateRecognizedFunctionsSquared(Term & result, Term const& base) const;
     void integrateTermUsingSubstitutionWithMaxDepth(
             Term & result,
-            Term const& term,
-            Configuration const& configuration) const;
+            Term const& term,            Configuration const& configuration) const;
     void integrateTermUsingSubstitution(
             Term & result,
             Term const& term,
