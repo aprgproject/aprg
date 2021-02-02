@@ -15,7 +15,8 @@ Term getEToTheXMinusEToTheNegativeX(Term const& term);
 
 Equation getHyperbolicSineDefinition(Term const& term);
 Equation getHyperbolicCosineDefinition(Term const& term);
-Equation getHyperbolicTangentDefinition(Term const& term);Equation getHyperbolicCosecantDefinition(Term const& term);
+Equation getHyperbolicTangentDefinition(Term const& term);
+Equation getHyperbolicCosecantDefinition(Term const& term);
 Equation getHyperbolicSecantDefinition(Term const& term);
 Equation getHyperbolicCotangentDefinition(Term const& term);
 Equation getHyperbolicFunctionIdentityEquation(Term const& term);

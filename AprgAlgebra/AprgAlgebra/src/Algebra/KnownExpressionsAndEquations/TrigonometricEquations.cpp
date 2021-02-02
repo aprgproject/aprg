@@ -195,7 +195,8 @@ Term getSineOfHalvedValue(Term const& term, bool const isPositiveRoot)
     Term result(createExpressionIfPossible({insideSquareRoot, Term("^"), Term(AlbaNumber::createFraction(1, 2))}));
     if(!isPositiveRoot)
     {
-        result = Term(createExpressionIfPossible({Term(-1), Term("*"), Term(result)}));    }
+        result = Term(createExpressionIfPossible({Term(-1), Term("*"), Term(result)}));
+    }
     return result;
 }
 
@@ -208,7 +209,8 @@ Term getCosineOfHalvedValue(Term const& term, bool const isPositiveRoot)
     Term result(createExpressionIfPossible({insideSquareRoot, Term("^"), Term(AlbaNumber::createFraction(1, 2))}));
     if(!isPositiveRoot)
     {
-        result = Term(createExpressionIfPossible({Term(-1), Term("*"), Term(result)}));    }
+        result = Term(createExpressionIfPossible({Term(-1), Term("*"), Term(result)}));
+    }
     return result;
 }
 
