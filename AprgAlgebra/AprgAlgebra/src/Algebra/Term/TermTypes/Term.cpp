@@ -92,7 +92,6 @@ Term::Term(Function const& function)
 Term& Term::operator=(Term const& term)
 {
     m_type = term.getTermType();
-    m_baseDataTermPointer.reset(nullptr);
     resetBaseDataTermPointerBasedFromTerm(term);
     return *this;
 }

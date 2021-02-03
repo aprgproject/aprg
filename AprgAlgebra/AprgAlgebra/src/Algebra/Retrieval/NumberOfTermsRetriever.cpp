@@ -26,11 +26,6 @@ void NumberOfTermsRetriever::retrieveFromMonomial(Monomial const&)
     m_savedData++;
 }
 
-void NumberOfTermsRetriever::retrieveFromPolynomial(Polynomial const&)
-{
-    m_savedData++;
-}
-
 void NumberOfTermsRetriever::retrieveFromExpression(Expression const& expression)
 {
     m_savedData++;

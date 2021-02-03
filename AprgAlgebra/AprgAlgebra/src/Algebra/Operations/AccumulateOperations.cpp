@@ -120,7 +120,7 @@ void accumulateTermsForMultiplicationAndDivision(
                 }
                 else if(termWithDetails.hasNegativeAssociation())
                 {
-                    combinedTerm = Term(Constant(1))/term;
+                    combinedTerm = Term(1)/term;
                 }
                 isFirst=false;
             }

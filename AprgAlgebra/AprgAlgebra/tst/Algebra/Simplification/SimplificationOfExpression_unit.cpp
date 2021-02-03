@@ -2,10 +2,12 @@
 #include <Algebra/Simplification/SimplificationOfExpression.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/StringHelpers.hpp>
+#include <Algebra/Term/Utilities/TermUtilities.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 
 #include <gtest/gtest.h>
 
+using namespace alba::algebra::Functions;
 using namespace std;
 
 namespace alba
@@ -617,6 +619,30 @@ TEST(SimplificationOfExpressionTest, ShouldSimplifyToACommonDenominatorWorksIfIt
                         Term(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-4, {})}),
                     }));
     EXPECT_EQ(expressionToExpect, expressionToVerify);
+}
+
+TEST(SimplificationOfExpressionTest, ShouldSimplifyToACommonDenominatorWorksWithExponentialAndTrigonometricFunction)
+{
+    SimplificationOfExpression::ConfigurationDetails configurationDetails(
+                getDefaultConfigurationDetails<SimplificationOfExpression::ConfigurationDetails>());
+    configurationDetails.shouldSimplifyToACommonDenominator = true;
+    SimplificationOfExpression::ScopeObject scopeObject;
+    scopeObject.setInThisScopeThisConfiguration(configurationDetails);
+
+    Term x("x");
+    Term eToTheX(createExpressionIfPossible({getEAsTerm(), Term("^"), x}));
+    Term eToTheXTimesSinX(createExpressionIfPossible({eToTheX, Term("*"), Term(sin(x))}));
+    Term eToTheXTimesCosX(createExpressionIfPossible({eToTheX, Term("*"), Term(cos(x))}));
+    Term expression1(createExpressionIfPossible({eToTheXTimesSinX, Term("-"), eToTheXTimesCosX}));
+    Term expression2(createExpressionIfPossible({expression1, Term("/"), Term(2)}));
+    Term expressionToTest(createExpressionIfPossible({eToTheXTimesSinX, Term("-"), eToTheXTimesCosX, Term("-"), expression2}));
+    SimplificationOfExpression simplification(expressionToTest);
+
+    simplification.simplify();
+
+    Expression expressionToVerify(simplification.getExpression());
+    EXPECT_EQ("(((((e)^x)*sin(x))-(((e)^x)*cos(x)))/2)",
+              expressionToVerify.getDisplayableString());
 }
 
 TEST(SimplificationOfExpressionTest, SimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBaseWorksAsDefault)

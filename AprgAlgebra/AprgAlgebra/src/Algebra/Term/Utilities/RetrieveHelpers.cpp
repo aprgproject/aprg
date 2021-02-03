@@ -3,6 +3,7 @@
 #include <Algebra/Retrieval/ExpressionAndFunctionsRetriever.hpp>
 #include <Algebra/Retrieval/FunctionsRetriever.hpp>
 #include <Algebra/Retrieval/SubTermsRetriever.hpp>
+#include <Algebra/Retrieval/VariableNamesRetriever.hpp>
 
 #include <algorithm>
 
@@ -22,6 +23,33 @@ bool hasAnyFunctions(Term const& term)
     });
     functionsRetriever.retrieveFromTerm(term);
     return !functionsRetriever.getSavedData().empty();
+}
+
+bool hasExponentialExpression(Term const& term)
+{
+    SubTermsRetriever retriever;
+    retriever.retrieveFromTerm(term);
+    bool result(false);
+    for(Term const& retrievedTerm : retriever.getSavedData())
+    {
+        if(retrievedTerm.isExpression()
+                && OperatorLevel::RaiseToPower == retrievedTerm.getExpressionConstReference().getCommonOperatorLevel())
+        {
+            result = true;
+            break;
+        }
+    }
+    return result;
+}
+
+bool isVariableFoundInTerm(
+        Term const& term,
+        string const& variableName)
+{
+    VariableNamesRetriever retriever;
+    retriever.retrieveFromTerm(term);
+    VariableNamesSet const& variableNames(retriever.getSavedData());
+    return variableNames.find(variableName) != variableNames.cend();
 }
 
 AlbaNumber getCoefficientOfMonomialWithNoVariables(

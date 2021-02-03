@@ -150,11 +150,11 @@ TEST(TermsOverTermsTest, RetrieveBaseToExponentMapWorks)
     EXPECT_EQ(AlbaNumber(-1), itVerify->second);
 }
 
-TEST(TermsOverTermsTest, InvertWorks)
+TEST(TermsOverTermsTest, FlipWorks)
 {
     TermsOverTerms termsOverTerms({Term("a"), Term("b")}, {Term("x"), Term("y")});
 
-    termsOverTerms.invert();
+    termsOverTerms.flip();
 
     Terms numeratorsToVerify(termsOverTerms.getNumerators());
     ASSERT_EQ(2U, numeratorsToVerify.size());

@@ -12,11 +12,11 @@ class RemoveMonomialsWithNegativeExponentMutator final : public BaseMutator
 {
 public:
     RemoveMonomialsWithNegativeExponentMutator(std::string const& variableName);
-    void mutateTerm(Term & term) const override;
-    void mutateMonomial(Monomial & monomial) const override;
-    void mutatePolynomial(Polynomial & polynomial) const override;
-    void mutateExpression(Expression & expression) const override;
-    void mutateFunction(Function & functionObject) const override;
+    void mutateTerm(Term & term) override;
+    void mutateMonomial(Monomial & monomial) override;
+    void mutatePolynomial(Polynomial & polynomial) override;
+    void mutateExpression(Expression & expression) override;
+    void mutateFunction(Function & functionObject) override;
 
 private:
     bool isMonomialToBeRemoved(Monomial const& monomial) const;

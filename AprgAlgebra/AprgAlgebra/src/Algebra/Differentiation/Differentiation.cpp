@@ -34,7 +34,32 @@ Differentiation::Differentiation(
 Term Differentiation::differentiate(
         Term const& term) const
 {
-    return differentiateTerm(term);
+    Term result;
+    if(term.isConstant())
+    {
+        result = differentiate(term.getConstantConstReference());
+    }
+    else if(term.isVariable())
+    {
+        result = differentiate(term.getVariableConstReference());
+    }
+    else if(term.isMonomial())
+    {
+        result = differentiate(term.getMonomialConstReference());
+    }
+    else if(term.isPolynomial())
+    {
+        result = differentiate(term.getPolynomialConstReference());
+    }
+    else if(term.isExpression())
+    {
+        result = differentiate(term.getExpressionConstReference());
+    }
+    else if(term.isFunction())
+    {
+        result = differentiate(term.getFunctionConstReference());
+    }
+    return result;
 }
 
 Term Differentiation::differentiate(
@@ -90,7 +115,7 @@ Term Differentiation::differentiateWithDefiniteValue(
         AlbaNumber const& value) const
 {
     SubstitutionOfVariablesToTerms substitution{{m_nameOfVariableToDifferentiate, Term(value)}};
-    return substitution.performSubstitutionTo(differentiateTerm(term));
+    return substitution.performSubstitutionTo(differentiate(term));
 }
 
 Term Differentiation::differentiateMultipleTimes(
@@ -115,37 +140,6 @@ Equation Differentiation::differentiateMultipleTimes(
         currentResult = differentiate(currentResult);
     }
     return currentResult;
-}
-
-Term Differentiation::differentiateTerm(
-        Term const& term) const
-{
-    Term result;
-    if(term.isConstant())
-    {
-        result = differentiate(term.getConstantConstReference());
-    }
-    else if(term.isVariable())
-    {
-        result = differentiate(term.getVariableConstReference());
-    }
-    else if(term.isMonomial())
-    {
-        result = differentiate(term.getMonomialConstReference());
-    }
-    else if(term.isPolynomial())
-    {
-        result = differentiate(term.getPolynomialConstReference());
-    }
-    else if(term.isExpression())
-    {
-        result = differentiate(term.getExpressionConstReference());
-    }
-    else if(term.isFunction())
-    {
-        result = differentiate(term.getFunctionConstReference());
-    }
-    return result;
 }
 
 AlbaNumber Differentiation::differentiateConstant(

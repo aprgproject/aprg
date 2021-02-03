@@ -9,6 +9,7 @@ namespace alba
 namespace algebra
 {
 
+bool isTermSimpler(Term const& supposeToBeComplicatedTerm, Term const& supposeToBeSimpleTerm);
 bool isNegatedTermSimpler(Term const& term, Term const& negatedTerm);
 bool isNonEmptyOrNonOperatorType(Term const& term);
 bool isNonEmptyOrNonOperatorOrNonExpressionType(Term const& term);

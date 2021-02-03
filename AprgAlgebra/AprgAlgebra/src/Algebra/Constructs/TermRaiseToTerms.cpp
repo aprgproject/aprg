@@ -2,6 +2,7 @@
 
 #include <Algebra/Constructs/PolynomialRaiseToAnUnsignedInt.hpp>
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
+#include <Algebra/Functions/FunctionUtilities.hpp>
 #include <Algebra/Operations/AccumulateOperations.hpp>
 #include <Algebra/Term/Operators/TermOperators.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
@@ -13,6 +14,7 @@
 
 #include <algorithm>
 
+using namespace alba::algebra::Functions;
 using namespace alba::mathHelper;
 using namespace std;
 
@@ -178,6 +180,19 @@ void TermRaiseToTerms::simplifyBaseAndExponents()
     }
     else if(exponentCombinedTerm.isConstant() && exponentCombinedTerm.getConstantValueConstReference() == 1)
     {}
+    else if(m_base.isConstant() && exponentCombinedTerm.isFunction())
+    {
+        Function const& functionObject(exponentCombinedTerm.getFunctionConstReference());
+        string const& functionName(functionObject.getFunctionName());
+        if((getEAsTerm() == m_base && "ln" == functionName) || (Term(10) == m_base && "log" == functionName))
+        {
+            m_base = getTermConstReferenceFromBaseTerm(functionObject.getInputTermConstReference());
+        }
+        else
+        {
+            m_exponents.emplace_back(exponentCombinedTerm, TermAssociationType::Positive);
+        }
+    }
     else if(canBeConvertedToMonomial(m_base)  && exponentCombinedTerm.isConstant())
     {
         Monomial monomialBase(createMonomialIfPossible(m_base));
@@ -198,7 +213,28 @@ void TermRaiseToTerms::simplifyBaseAndExponents()
     else if(exponentCombinedTerm.isExpression()
             && OperatorLevel::MultiplicationAndDivision == exponentCombinedTerm.getExpressionConstReference().getCommonOperatorLevel())
     {
-        m_exponents = exponentCombinedTerm.getExpressionConstReference().getTermsWithAssociation().getTermsWithDetails();
+        TermsWithDetails termsWithDetails(
+                    exponentCombinedTerm.getExpressionConstReference().getTermsWithAssociation().getTermsWithDetails());
+        if(m_base.isConstant())
+        {
+            for(unsigned int i=0; i<termsWithDetails.size(); i++)
+            {
+                TermWithDetails const& exponentWithDetails(termsWithDetails.at(i));
+                Term const& exponent(getTermConstReferenceFromSharedPointer(exponentWithDetails.baseTermSharedPointer));
+                if(exponentWithDetails.hasPositiveAssociation() && exponent.isFunction())
+                {
+                    Function const& functionObject(exponent.getFunctionConstReference());
+                    string const& functionName(functionObject.getFunctionName());
+                    if((getEAsTerm() == m_base && "ln" == functionName) || (Term(10) == m_base && "log" == functionName))
+                    {
+                        m_base = getTermConstReferenceFromBaseTerm(functionObject.getInputTermConstReference());
+                        termsWithDetails.erase(termsWithDetails.begin()+i);
+                        break;
+                    }
+                }
+            }
+        }
+        m_exponents = termsWithDetails;
     }
     else
     {

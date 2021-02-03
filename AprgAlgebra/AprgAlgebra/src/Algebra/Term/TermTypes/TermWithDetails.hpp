@@ -24,6 +24,7 @@ struct TermWithDetails
     unsigned int getAssociationPriority() const;
     std::string getDisplayableString() const;
     void clear();
+    void reverseAssociation();
     BaseTermSharedPointer baseTermSharedPointer;
     TermAssociationType association;
 };

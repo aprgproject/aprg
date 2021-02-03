@@ -36,7 +36,7 @@ public:
             BaseToExponentMap & baseToExponentMap) const;
     std::string getDisplayableString() const;
 
-    void invert();
+    void flip();
     void saveBaseToExponentMap(BaseToExponentMap const& baseToExponentMap);
 
     void setAsShouldSimplifyToFactors(bool const shouldSimplifyToFactors);

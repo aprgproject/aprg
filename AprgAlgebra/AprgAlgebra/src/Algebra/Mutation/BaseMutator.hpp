@@ -14,13 +14,13 @@ class BaseMutator
 {
 public:
 
-    virtual void mutateEquation(Equation & equation) const
+    virtual void mutateEquation(Equation & equation)
     {
         mutateTerm(equation.getLeftHandTermReference());
         mutateTerm(equation.getRightHandTermReference());
     }
 
-    virtual void mutateTerm(Term & term) const
+    virtual void mutateTerm(Term & term)
     {
         if(term.isConstant())
         {
@@ -48,16 +48,16 @@ public:
         }
     }
 
-    virtual void mutateConstant(Constant &) const
+    virtual void mutateConstant(Constant &)
     {}
 
-    virtual void mutateVariable(Variable &) const
+    virtual void mutateVariable(Variable &)
     {}
 
-    virtual void mutateMonomial(Monomial &) const
+    virtual void mutateMonomial(Monomial &)
     {}
 
-    virtual void mutatePolynomial(Polynomial & polynomial) const
+    virtual void mutatePolynomial(Polynomial & polynomial)
     {
         for(Monomial & monomial : polynomial.getMonomialsReference())
         {
@@ -65,7 +65,7 @@ public:
         }
     }
 
-    virtual void mutateExpression(Expression & expression) const
+    virtual void mutateExpression(Expression & expression)
     {
         for(TermWithDetails & termWithDetails
             : expression.getTermsWithAssociationReference().getTermsWithDetailsReference())
@@ -74,7 +74,7 @@ public:
         }
     }
 
-    virtual void mutateFunction(Function & functionObject) const
+    virtual void mutateFunction(Function & functionObject)
     {
         mutateTerm(getTermReferenceFromBaseTerm(functionObject.getInputTermReference()));
     }

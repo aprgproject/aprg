@@ -2,6 +2,7 @@
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
+#include <Algebra/Term/Utilities/TermUtilities.hpp>
 
 #include <gtest/gtest.h>
 
@@ -171,7 +172,7 @@ TEST(AdditionAndSubtractionOfExpressionsTest, PutTermsWithDetailsWorks)
     EXPECT_EQ(TermAssociationType::Positive, associations.at(1));
 }
 
-TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksOnAddingAndSubtractingRaiseToPowerExpressions)
+TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksOnAddingAndSubtractingRaiseToPowerExpressions)
 {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
     Expression expression1(createExpressionIfPossible({Term(5), Term("*"), Term("y"), Term("^"), Term("y")}));
@@ -193,7 +194,7 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksOnA
     EXPECT_EQ(TermAssociationType::Positive, associations.at(0));
 }
 
-TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksOnAddingAndSubtractingMultipleRaiseToPowerExpressions)
+TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksOnAddingAndSubtractingMultipleRaiseToPowerExpressions)
 {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
     Expression expression1(createExpressionIfPossible({Term("x"), Term("^"), Term("y")}));
@@ -225,7 +226,7 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksOnA
     EXPECT_EQ(TermAssociationType::Positive, associations.at(1));
 }
 
-TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksOnAddingAndSubtractingNonSortedRaiseToPowerExpressions)
+TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksOnAddingAndSubtractingNonSortedRaiseToPowerExpressions)
 {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
     Expression expression1(createExpressionIfPossible({Term(100), Term("*"), Term("y"), Term("^"), Term("y"), Term("*"), Term("x"), Term("^"), Term("x")}));
@@ -247,7 +248,7 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksOnA
     EXPECT_EQ(TermAssociationType::Positive, associations.at(0));
 }
 
-TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksOnAddingAndSubtractingRaiseToPowerExpressionsThatCannotBeAdded)
+TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksOnAddingAndSubtractingRaiseToPowerExpressionsThatCannotBeAdded)
 {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
     Expression expression1(createExpressionIfPossible({Term(10), Term("*"), Term("y"), Term("^"), Term("y")}));
@@ -274,7 +275,7 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksOnA
     EXPECT_EQ(TermAssociationType::Positive, associations.at(1));
 }
 
-TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksAndSquareRootExpressionAreAddedCorrectly)
+TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksAndSquareRootExpressionAreAddedCorrectly)
 {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
     Term xPlusOneTerm(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
@@ -293,7 +294,7 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksAnd
     EXPECT_EQ(TermAssociationType::Positive, associations.at(0));
 }
 
-TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksWithNegativeTermWithTrigonometricFunctions)
+TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksWithNegativeTermWithTrigonometricFunctions)
 {
     Term x("x");
     Expression positiveCosX(createExpressionIfPossible({cos(x)}));
@@ -314,6 +315,33 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CreateExpressionIfPossibleWorksWit
     ASSERT_EQ(2U, associations.size());
     EXPECT_EQ(TermAssociationType::Positive, associations.at(0));
     EXPECT_EQ(TermAssociationType::Negative, associations.at(1));
+}
+
+TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksWithEToTheXWithTrigonometricEquations)
+{
+    Term x("x");
+    Term eToTheX(createExpressionIfPossible({getEAsTerm(), Term("^"), x}));
+    Term eToTheXTimesSinX(createExpressionIfPossible({eToTheX, Term("*"), Term(sin(x))}));
+    Term eToTheXTimesCosX(createExpressionIfPossible({eToTheX, Term("*"), Term(cos(x))}));
+    Term eToTheXTimesSinXTimes2(createExpressionIfPossible({Term(2), Term("*"), eToTheXTimesSinX}));
+    Term eToTheXTimesCosXTimes2(createExpressionIfPossible({Term(2), Term("*"), eToTheXTimesCosX}));
+    AdditionAndSubtractionOfExpressions additionAndSubtraction;
+    additionAndSubtraction.putAsAddition(eToTheXTimesSinXTimes2);
+    additionAndSubtraction.putAsSubtraction(eToTheXTimesCosXTimes2);
+    additionAndSubtraction.putAsSubtraction(eToTheXTimesSinX);
+    additionAndSubtraction.putAsAddition(eToTheXTimesCosX);
+
+    additionAndSubtraction.combineExpressionsIfPossible();
+
+    Term negativeEToTheXTimesCosX(createExpressionIfPossible({Term(-1), Term("*"), eToTheXTimesCosX}));
+    Expressions const& expressions(additionAndSubtraction.getExpressions());
+    ASSERT_EQ(2U, expressions.size());
+    EXPECT_EQ(eToTheXTimesSinX, expressions.at(0));
+    EXPECT_EQ(negativeEToTheXTimesCosX, expressions.at(1));
+    TermAssociationTypes const& associations(additionAndSubtraction.getAssociations());
+    ASSERT_EQ(2U, associations.size());
+    EXPECT_EQ(TermAssociationType::Positive, associations.at(0));
+    EXPECT_EQ(TermAssociationType::Positive, associations.at(1));
 }
 
 }

@@ -41,7 +41,6 @@ public:
             AlbaNumber const& lowerValueInInterval,
             AlbaNumber const& higherValueInInterval) const;
 
-    Term integrateTerm(Term const& term) const;
     Monomial integrateConstant(Constant const& constant) const;
     Monomial integrateVariable(Variable const& variable) const;
     Term integrateMonomial(Monomial const& monomial) const;
@@ -150,6 +149,7 @@ private:
     void setIsIntegrationUsingSubstitutionAllowed(bool const isIntegrationUsingSubstitutionAllowed);
     void setIsIntegrationByPartsAllowed(bool const isIntegrationByPartsAllowed);
     void simplifyForIntegration(Term & term, Configuration const& configuration) const;
+    void finalizeTermForIntegration(Term & term) const;
     Configuration getConfigurationWithFactors() const;
     Configuration getConfigurationWithCommonDenominator() const;
     bool isVariableToIntegrate(std::string const& variableName) const;

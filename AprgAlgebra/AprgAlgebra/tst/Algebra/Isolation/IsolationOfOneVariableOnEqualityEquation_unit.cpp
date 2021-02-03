@@ -178,6 +178,21 @@ TEST(IsolationOfOneVariableOnEqualityEquationTest, IsolateTermWithVariableWorksO
     EXPECT_EQ(expectedTermWithoutB, termWithoutVariable);
 }
 
+TEST(IsolationOfOneVariableOnEqualityEquationTest, IsolateTermWithVariableWorksOnExpressionWithAdditionAndSubtractionOperation)
+{
+    Term leftHandSide(Polynomial{Monomial(1, {{"x", 1}, {"y", 2}})});
+    Term rightHandSide(createExpressionIfPossible({Term(2), Term("^"), Term("z")}));
+    Equation equation(Term(leftHandSide), "=", Term(rightHandSide));
+    IsolationOfOneVariableOnEqualityEquation isolation(equation);
+
+    Term termWithVariable;
+    Term termWithoutVariable;
+    Term expectedTermWithX("x");
+    isolation.isolateTermWithVariable("x", termWithVariable, termWithoutVariable);
+    EXPECT_EQ(expectedTermWithX, termWithVariable);
+    EXPECT_EQ("((2^z)/1[y^2])", termWithoutVariable.getDisplayableString());
+}
+
 TEST(IsolationOfOneVariableOnEqualityEquationTest, IsolateTermWithVariableWorkssOnPolynomialEquation_Example1UsingDerivatives)
 {
     Polynomial leftHandSide{

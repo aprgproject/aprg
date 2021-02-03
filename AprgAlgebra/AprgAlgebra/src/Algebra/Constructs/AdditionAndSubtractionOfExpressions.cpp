@@ -20,6 +20,24 @@ namespace alba
 namespace algebra
 {
 
+namespace
+{
+
+ConditionFunctionForTermsWithDetails isUniquePartOfTerm
+= [](TermWithDetails const& termWithDetails) -> bool
+{
+    Term const& term(getTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
+    return termWithDetails.hasNegativeAssociation() || term.isExpression()  || term.isFunction();
+};
+
+ConditionFunctionForTermsWithDetails isNotUniquePartOfTerm
+= [](TermWithDetails const& termWithDetails) -> bool
+{
+    return !isUniquePartOfTerm(termWithDetails);
+};
+
+}
+
 AdditionAndSubtractionOfExpressions::AdditionAndSubtractionOfExpressions()
 {}
 
@@ -119,6 +137,7 @@ bool AdditionAndSubtractionOfExpressions::mergeForAdditionAndSubtractionAndRetur
     Expression & expression2(m_expressions.at(index2));
     Expression uniqueExpression1, uniqueExpression2;
     Term mergeTerm1, mergeTerm2;
+
     retrieveUniqueExpressionsAndMergeTerms(uniqueExpression1, uniqueExpression2, mergeTerm1, mergeTerm2, expression1, expression2);
     if(canBeMergedForAdditionAndSubtraction(uniqueExpression1, uniqueExpression2, mergeTerm1, mergeTerm2))
     {
@@ -165,9 +184,7 @@ Expression AdditionAndSubtractionOfExpressions::getUniqueExpressionForAdditionOr
         TermsWithDetails uniqueExpressions
                 = retrieveTermsWithDetailsThatSatisfiesCondition(
                     expression.getTermsWithAssociation().getTermsWithDetails(),
-                    [](TermWithDetails const& termWithDetails) -> bool {
-                Term const& term(getTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
-                return termWithDetails.hasNegativeAssociation() || term.isExpression();});
+                    isUniquePartOfTerm);
         result.set(OperatorLevel::MultiplicationAndDivision, uniqueExpressions);
         result.simplify();
     }
@@ -182,12 +199,11 @@ void AdditionAndSubtractionOfExpressions::accumulateMergeTermForAdditionOrSubtra
 {
     if(OperatorLevel::MultiplicationAndDivision == expression.getCommonOperatorLevel())
     {
+        combinedTerm = Term(1);
         TermsWithDetails termsToBeMerged
                 = retrieveTermsWithDetailsThatSatisfiesCondition(
                     expression.getTermsWithAssociation().getTermsWithDetails(),
-                    [](TermWithDetails const& termWithDetails) -> bool {
-                    Term const& term(getTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
-                    return !(termWithDetails.hasNegativeAssociation() || term.isExpression());});
+                    isNotUniquePartOfTerm);
 
         accumulateTermsForMultiplicationAndDivision(combinedTerm, termsToBeMerged);
     }
@@ -208,16 +224,16 @@ bool AdditionAndSubtractionOfExpressions::canBeMergedForAdditionAndSubtraction(
 
 void AdditionAndSubtractionOfExpressions::putItem(Expression const& expression, TermAssociationType const association)
 {
+    Expression correctedExpression(expression);
+    TermAssociationType correctedAssociation(association);
     if(isANegativeExpression(expression))
     {
-        m_expressions.emplace_back(negateExpression(expression));
-        m_associations.emplace_back(getReversedAssociationType(association));
+        correctedExpression = negateExpression(expression);
+        correctedAssociation = getReversedAssociationType(association);
     }
-    else
-    {
-        m_expressions.emplace_back(expression);
-        m_associations.emplace_back(association);
-    }
+    correctedExpression.simplify();
+    m_expressions.emplace_back(correctedExpression);
+    m_associations.emplace_back(correctedAssociation);
 }
 
 }
