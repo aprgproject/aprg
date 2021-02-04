@@ -222,12 +222,11 @@ Term invertTerm(Term const& term, string const& variableName)
 
 Expression negateExpression(Expression const& expression)
 {
+    NegationMutator negationMutator;
     Expression negatedExpression(expression);
-    negatedExpression.putTermWithMultiplicationIfNeeded(Term(-1));
-    negatedExpression.simplify();
+    negationMutator.mutateExpression(negatedExpression);
     return negatedExpression;
 }
-
 }
 
 }
