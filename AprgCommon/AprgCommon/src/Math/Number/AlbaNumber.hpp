@@ -10,6 +10,7 @@
 
 namespace alba
 {
+
 class AlbaNumber
 {
 public:
@@ -24,7 +25,8 @@ public:
         e
     };
     enum class Type
-    {        Integer,
+    {
+        Integer,
         Double,
         Fraction,
         ComplexNumber
@@ -232,7 +234,8 @@ private:
             double const& doubleValue) const;
 
     Type m_type;
-    NumberUnionData m_data;};
+    NumberUnionData m_data;
+};
 
 template <> AlbaNumber::ConfigurationDetails getDefaultConfigurationDetails<AlbaNumber::ConfigurationDetails>();
 

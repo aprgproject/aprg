@@ -7,6 +7,7 @@
 
 using namespace alba::mathHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -126,6 +127,7 @@ AlbaNumber::AlbaNumber(Value const value)
         break;
     }
 }
+
 bool AlbaNumber::operator==(AlbaNumber const& second) const
 {
     bool result(false);
@@ -999,7 +1001,8 @@ string AlbaNumber::getDisplayableString() const
         putDisplayableStringForDouble(result, m_data.doubleData);
     }
     else if(m_type==Type::Fraction)
-    {        result << "(" << m_data.fractionData.numerator << "/" << m_data.fractionData.denominator << ")";
+    {
+        result << "(" << m_data.fractionData.numerator << "/" << m_data.fractionData.denominator << ")";
     }
     else if(m_type==Type::ComplexNumber)
     {
@@ -1321,7 +1324,8 @@ void AlbaNumber::putDisplayableStringForDouble(
 
 template <>
 AlbaNumber::ConfigurationDetails getDefaultConfigurationDetails<AlbaNumber::ConfigurationDetails>()
-{    return AlbaNumber::ConfigurationDetails{COMPARISON_TOLERANCE_FOR_DOUBLE, AlbaNumber::ADJUSTMENT_FLOAT_TOLERANCE};
+{
+    return AlbaNumber::ConfigurationDetails{COMPARISON_TOLERANCE_FOR_DOUBLE, AlbaNumber::ADJUSTMENT_FLOAT_TOLERANCE};
 }
 
 ostream & operator<<(ostream & out, AlbaNumber const& number)

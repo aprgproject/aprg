@@ -259,7 +259,8 @@ TEST(AlbaNumberTest, ConstructionWorks)
 {
     AlbaNumber number6(AlbaNumber::Value::PositiveInfinity);
     AlbaNumber number7(AlbaNumber::Value::NegativeInfinity);
-    AlbaNumber number8(AlbaNumber::Value::NotANumber);    AlbaNumber number9(AlbaNumber::createFraction(-87408, -9802));
+    AlbaNumber number8(AlbaNumber::Value::NotANumber);
+    AlbaNumber number9(AlbaNumber::createFraction(-87408, -9802));
     AlbaNumber number10(AlbaNumber::createFraction(-100, 10));
     AlbaNumber number11(AlbaNumber::createFraction(-100, -10));
     AlbaNumber number12(AlbaNumber::createComplexNumber(-4, 3));
@@ -269,7 +270,8 @@ TEST(AlbaNumberTest, ConstructionWorks)
 
     EXPECT_EQ(AlbaNumber::Type::Double, number6.getType());
     EXPECT_DOUBLE_EQ(INFINITY, number6.getDouble());
-    EXPECT_EQ(AlbaNumber::Type::Double, number7.getType());    EXPECT_DOUBLE_EQ(-INFINITY, number7.getDouble());
+    EXPECT_EQ(AlbaNumber::Type::Double, number7.getType());
+    EXPECT_DOUBLE_EQ(-INFINITY, number7.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Double, number8.getType());
     EXPECT_TRUE(isnan(number8.getDouble()));
     EXPECT_EQ(AlbaNumber::Type::Fraction, number9.getType());
@@ -1671,7 +1673,8 @@ TEST(AlbaNumberTest, GetDisplayableStringWorks)
     EXPECT_EQ("(8.9 + 7.8i)", number8.getDisplayableString());
 }
 
-TEST(AlbaNumberTest, ConvertToIntegerWorks){
+TEST(AlbaNumberTest, ConvertToIntegerWorks)
+{
     AlbaNumber number1(-1561);
     AlbaNumber number2(-85.25);
     AlbaNumber number3(-2.99999821186066);
