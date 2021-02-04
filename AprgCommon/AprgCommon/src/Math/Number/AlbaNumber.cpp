@@ -4,11 +4,9 @@
 #include <Math/Number/AlbaComplexNumber.hpp>
 
 #include <cmath>
-#include <sstream>
 
 using namespace alba::mathHelper;
 using namespace std;
-
 namespace alba
 {
 
@@ -120,9 +118,14 @@ AlbaNumber::AlbaNumber(Value const value)
     case Value::NotANumber:
         m_data.doubleData = NAN_DOUBLE_VALUE;
         break;
+    case Value::pi:
+        m_data.doubleData = PI_DOUBLE_VALUE;
+        break;
+    case Value::e:
+        m_data.doubleData = E_DOUBLE_VALUE;
+        break;
     }
 }
-
 bool AlbaNumber::operator==(AlbaNumber const& second) const
 {
     bool result(false);
@@ -993,12 +996,10 @@ string AlbaNumber::getDisplayableString() const
     }
     else if(m_type==Type::Double)
     {
-        result.precision(16);
-        result << m_data.doubleData;
+        putDisplayableStringForDouble(result, m_data.doubleData);
     }
     else if(m_type==Type::Fraction)
-    {
-        result << "(" << m_data.fractionData.numerator << "/" << m_data.fractionData.denominator << ")";
+    {        result << "(" << m_data.fractionData.numerator << "/" << m_data.fractionData.denominator << ")";
     }
     else if(m_type==Type::ComplexNumber)
     {
@@ -1299,10 +1300,28 @@ AlbaNumber AlbaNumber::raisePowerOfFractionsAndIntegerAndReturnNumber(
     return result;
 }
 
+void AlbaNumber::putDisplayableStringForDouble(
+        stringstream & result,
+        double const& doubleValue) const
+{
+    if(PI_DOUBLE_VALUE == doubleValue)
+    {
+        result << "(pi)";
+    }
+    else if(E_DOUBLE_VALUE == doubleValue)
+    {
+        result << "(e)";
+    }
+    else
+    {
+        result.precision(16);
+        result << m_data.doubleData;
+    }
+}
+
 template <>
 AlbaNumber::ConfigurationDetails getDefaultConfigurationDetails<AlbaNumber::ConfigurationDetails>()
-{
-    return AlbaNumber::ConfigurationDetails{COMPARISON_TOLERANCE_FOR_DOUBLE, AlbaNumber::ADJUSTMENT_FLOAT_TOLERANCE};
+{    return AlbaNumber::ConfigurationDetails{COMPARISON_TOLERANCE_FOR_DOUBLE, AlbaNumber::ADJUSTMENT_FLOAT_TOLERANCE};
 }
 
 ostream & operator<<(ostream & out, AlbaNumber const& number)

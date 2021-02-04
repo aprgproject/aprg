@@ -6,10 +6,10 @@
 
 #include <ostream>
 #include <string>
+#include <sstream>
 
 namespace alba
 {
-
 class AlbaNumber
 {
 public:
@@ -19,11 +19,12 @@ public:
     {
         PositiveInfinity,
         NegativeInfinity,
-        NotANumber
+        NotANumber,
+        pi,
+        e
     };
     enum class Type
-    {
-        Integer,
+    {        Integer,
         Double,
         Fraction,
         ComplexNumber
@@ -226,10 +227,12 @@ private:
             bool & shouldBeConvertedToDouble,
             FractionData const& baseFractionData,
             long long int const exponent) const;
+    void putDisplayableStringForDouble(
+            std::stringstream & result,
+            double const& doubleValue) const;
 
     Type m_type;
-    NumberUnionData m_data;
-};
+    NumberUnionData m_data;};
 
 template <> AlbaNumber::ConfigurationDetails getDefaultConfigurationDetails<AlbaNumber::ConfigurationDetails>();
 
