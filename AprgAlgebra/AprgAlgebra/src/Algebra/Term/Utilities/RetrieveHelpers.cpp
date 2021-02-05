@@ -25,27 +25,9 @@ bool hasAnyFunctions(Term const& term)
     return !functionsRetriever.getSavedData().empty();
 }
 
-bool hasExponentialExpression(Term const& term)
-{
-    SubTermsRetriever retriever;
-    retriever.retrieveFromTerm(term);
-    bool result(false);
-    for(Term const& retrievedTerm : retriever.getSavedData())
-    {
-        if(retrievedTerm.isExpression()
-                && OperatorLevel::RaiseToPower == retrievedTerm.getExpressionConstReference().getCommonOperatorLevel())
-        {
-            result = true;
-            break;
-        }
-    }
-    return result;
-}
-
 bool isVariableFoundInTerm(
         Term const& term,
-        string const& variableName)
-{
+        string const& variableName){
     VariableNamesRetriever retriever;
     retriever.retrieveFromTerm(term);
     VariableNamesSet const& variableNames(retriever.getSavedData());

@@ -216,19 +216,14 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpressionForNumer
         unsigned int numeratorIndex,
         Terms const& lcmDenominatorTerms) const
 {
-    Expression combinedNumeratorOnIndex;
+    Expression combinedNumeratorOnIndex(Term(1));
     Terms numeratorTermsOnIndex(getRevisedNumeratorTermsBasedOnLcmOnIndex(numeratorIndex, lcmDenominatorTerms));
     for(Term const& numeratorTermOnIndex : numeratorTermsOnIndex)
     {
         combinedNumeratorOnIndex.putTermWithMultiplicationIfNeeded(numeratorTermOnIndex);
     }
-    if(combinedNumeratorOnIndex.isEmpty())
-    {
-        combinedNumeratorOnIndex = createExpressionIfPossible({Term(1)});
-    }
     return combinedNumeratorOnIndex;
 }
-
 void AdditionAndSubtractionOfTermsOverTerms::combineExpressionAsAddOrSubtract(
         Expression & combinedExpression,
         Expression const& expression,
