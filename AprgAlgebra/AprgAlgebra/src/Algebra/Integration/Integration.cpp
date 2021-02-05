@@ -11,7 +11,8 @@
 #include <Algebra/Retrieval/SubTermsRetriever.hpp>
 #include <Algebra/Retrieval/VariableNamesRetriever.hpp>
 #include <Algebra/Substitution/SubstitutionOfTermsToTerms.hpp>
-#include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>#include <Algebra/Term/Operators/TermOperators.hpp>
+#include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
+#include <Algebra/Term/Operators/TermOperators.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/ConvertHelpers.hpp>
@@ -23,6 +24,7 @@
 #include <Math/AlbaMathHelper.hpp>
 
 #include <algorithm>
+
 
 using namespace alba::algebra::Functions;
 using namespace alba::algebra::Simplification;
@@ -364,6 +366,17 @@ void Integration::integrateCosRaiseToAnIntegerGreaterThanOne(
     }
 }
 
+void Integration::integrateTanRaiseToAnIntegerGreaterThanOne(
+        Term & result,
+        Function const& baseTrigFunction,
+        unsigned int const exponent) const
+{
+    Term const& inputTerm(getTermConstReferenceFromBaseTerm(baseTrigFunction.getInputTermConstReference()));
+    Term tanRaiseToExponentMinus2(createExpressionIfPossible({Term(tan(inputTerm)), Term("^"), Term(exponent-2)}));
+    Term termToIntegrate = getTangentSquaredInSecant(inputTerm) * tanRaiseToExponentMinus2;
+    result = integrate(termToIntegrate);
+}
+
 void Integration::integrateCscRaiseToAnIntegerGreaterThanOne(
         Term & result,
         Function const& baseTrigFunction,
@@ -406,6 +419,17 @@ void Integration::integrateSecRaiseToAnIntegerGreaterThanOne(
         Term nonIntegralTerm(createExpressionIfPossible({secRaiseToExponentMinus2, Term("*"), Term(tan(inputTerm))}));
         result = (nonIntegralTerm - Term(exponentMinus2) * integrate(secRaiseToExponentMinus2))/exponentMinus1;
     }
+}
+
+void Integration::integrateCotRaiseToAnIntegerGreaterThanOne(
+        Term & result,
+        Function const& baseTrigFunction,
+        unsigned int const exponent) const
+{
+    Term const& inputTerm(getTermConstReferenceFromBaseTerm(baseTrigFunction.getInputTermConstReference()));
+    Term tanRaiseToExponentMinus2(createExpressionIfPossible({Term(cot(inputTerm)), Term("^"), Term(exponent-2)}));
+    Term termToIntegrate = getCotangentSquaredInCosecant(inputTerm) * tanRaiseToExponentMinus2;
+    result = integrate(termToIntegrate);
 }
 
 void Integration::integrateInMultiplicationOrDivisionIfTrigonometricCombination(
@@ -479,15 +503,28 @@ void Integration::integrateInMultiplicationOrDivisionIfTrigonometricCombination(
         else if(exponents.sinExponent == 0
                 && exponents.cosExponent == 0
                 && exponents.tanExponent == 0
-                && exponents.cscExponent.isIntegerType() && exponents.cscExponent > 0
+                && exponents.cscExponent.isIntegerType() && exponents.cscExponent > 2
                 && exponents.secExponent == 0
-                && exponents.cotExponent.isIntegerType() && exponents.cotExponent > 0)
+                && exponents.cotExponent.isIntegerType() && exponents.cotExponent > 1)
         {
-            /*integrateCscAndCotCombinationWithPositiveExponents(
+            integrateCscAndCotCombinationWithExponentsGreaterThanOne(
                         result,
                         inputTerm,
                         static_cast<unsigned int>(exponents.cscExponent.getInteger()),
-                        static_cast<unsigned int>(exponents.cotExponent.getInteger()));*/
+                        static_cast<unsigned int>(exponents.cotExponent.getInteger()));
+        }
+        else if(exponents.sinExponent == 0
+                && exponents.cosExponent == 0
+                && exponents.tanExponent.isIntegerType() && exponents.tanExponent > 1
+                && exponents.cscExponent == 0
+                && exponents.secExponent.isIntegerType() && exponents.secExponent > 2
+                && exponents.cotExponent == 0)
+        {
+            integrateSecAndTanCombinationWithExponentsGreaterThanOne(
+                        result,
+                        inputTerm,
+                        static_cast<unsigned int>(exponents.secExponent.getInteger()),
+                        static_cast<unsigned int>(exponents.tanExponent.getInteger()));
         }
     }
 }
@@ -495,7 +532,8 @@ void Integration::integrateInMultiplicationOrDivisionIfTrigonometricCombination(
 void Integration::integrateSinAndCosCombinationWithExponentsGreaterThanOne(
         Term & result,
         Term const& inputTerm,
-        unsigned int const sinExponent,        unsigned int const cosExponent) const
+        unsigned int const sinExponent,
+        unsigned int const cosExponent) const
 {
     Term termToIntegrate(1);
     if(isEven(sinExponent) && isEven(cosExponent))
@@ -525,30 +563,52 @@ void Integration::integrateSinAndCosCombinationWithExponentsGreaterThanOne(
     result = integrate(termToIntegrate);
 }
 
-void Integration::integrateCscAndCotCombinationWithPositiveExponents(
+void Integration::integrateCscAndCotCombinationWithExponentsGreaterThanOne(
         Term & result,
         Term const& inputTerm,
         unsigned int const cscExponent,
         unsigned int const cotExponent) const
 {
-    if(isEven(cotExponent))
+    if(isEven(cscExponent))
     {
-        Term termToIntegrate(createExpressionIfPossible({csc(inputTerm), Term("^"), Term(cscExponent)}));
-        putCotangentSquaredToCosecantSquaredTerms(termToIntegrate, inputTerm, cotExponent);
+        Term termToIntegrate(createExpressionIfPossible({cot(inputTerm), Term("^"), Term(cotExponent), Term("*"), csc(inputTerm), Term("^"), Term(2)}));
+        putCosecantSquaredToCotangentSquaredTerms(termToIntegrate, inputTerm, cscExponent-2);
         result = integrate(termToIntegrate);
     }
     else
     {
-        Term termToIntegrate(createExpressionIfPossible({csc(inputTerm), Term("^"), Term(cscExponent)}));
+        Term termToIntegrate(createExpressionIfPossible({csc(inputTerm), Term("^"), Term(cscExponent), Term("*"), cot(inputTerm)}));
         putCotangentSquaredToCosecantSquaredTerms(termToIntegrate, inputTerm, cotExponent-1);
-        termToIntegrate = termToIntegrate * Term(cot(inputTerm));
         result = integrate(termToIntegrate);
+        // what if cotExponent is even, then squareroot will happen, this is still not solved
+    }
+}
+
+void Integration::integrateSecAndTanCombinationWithExponentsGreaterThanOne(
+        Term & result,
+        Term const& inputTerm,
+        unsigned int const secExponent,
+        unsigned int const tanExponent) const
+{
+    if(isEven(secExponent))
+    {
+        Term termToIntegrate(createExpressionIfPossible({tan(inputTerm), Term("^"), Term(tanExponent), Term("*"), sec(inputTerm), Term("^"), Term(2)}));
+        putSecantSquaredToTangentSquaredTerms(termToIntegrate, inputTerm, secExponent-2);
+        result = integrate(termToIntegrate);
+    }
+    else
+    {
+        Term termToIntegrate(createExpressionIfPossible({sec(inputTerm), Term("^"), Term(secExponent), Term("*"), tan(inputTerm)}));
+        putTangentSquaredToSecantSquaredTerms(termToIntegrate, inputTerm, tanExponent-1);
+        result = integrate(termToIntegrate);
+        // what if tanExponent is even, then squareroot will happen, this is still not solved
     }
 }
 
 Term Integration::integrateAsTermOrExpressionIfNeeded(
         Expression const& expression) const
-{    Term result;
+{
+    Term result;
     Configurations configurations{getConfigurationWithFactors(), getConfigurationWithCommonDenominator()};
     for(Configuration const& configuration : configurations)
     {
@@ -808,7 +868,8 @@ void Integration::integrateChangingTermsInMultiplicationOrDivision(
     integrateInMultiplicationOrDivisionIfTrigonometricCombination(result, changingTerms);
     if(result.isEmpty())
     {
-        integrateByTryingTwoTermsInMultiplicationAndDivision(result, changingTerms);    }
+        integrateByTryingTwoTermsInMultiplicationAndDivision(result, changingTerms);
+    }
 }
 
 void Integration::integrateByTryingTwoTermsInMultiplicationAndDivision(
@@ -1121,26 +1182,35 @@ void Integration::integrateChangingTermRaiseToNonChangingTerm(
             Function const& functionObject(base.getFunctionConstReference());
             AlbaNumber const& exponentValue(exponent.getConstantValueConstReference());
             string const& functionName(functionObject.getFunctionName());
-            bool isExponentAPositiveInteger = exponentValue.isIntegerType() && exponentValue > 1;
-            if(functionName == "sin" && isExponentAPositiveInteger)
+            bool isExponentGreaterThan1 = exponentValue.isIntegerType() && exponentValue > 1;
+            if(functionName == "sin" && isExponentGreaterThan1)
             {
                 integrateSinRaiseToAnIntegerGreaterThanOne(result, base.getFunctionConstReference(), static_cast<unsigned int>(exponentValue.getInteger()));
             }
-            else if(functionName == "cos" && isExponentAPositiveInteger)
+            else if(functionName == "cos" && isExponentGreaterThan1)
             {
                 integrateCosRaiseToAnIntegerGreaterThanOne(result, base.getFunctionConstReference(), static_cast<unsigned int>(exponentValue.getInteger()));
             }
-            else if(functionName == "csc" && isExponentAPositiveInteger)
+            else if(functionName == "tan" && isExponentGreaterThan1)
+            {
+                integrateTanRaiseToAnIntegerGreaterThanOne(result, base.getFunctionConstReference(), static_cast<unsigned int>(exponentValue.getInteger()));
+            }
+            else if(functionName == "csc" && isExponentGreaterThan1)
             {
                 integrateCscRaiseToAnIntegerGreaterThanOne(result, base.getFunctionConstReference(), static_cast<unsigned int>(exponentValue.getInteger()));
             }
-            else if(functionName == "sec" && isExponentAPositiveInteger)
+            else if(functionName == "sec" && isExponentGreaterThan1)
             {
                 integrateSecRaiseToAnIntegerGreaterThanOne(result, base.getFunctionConstReference(), static_cast<unsigned int>(exponentValue.getInteger()));
+            }
+            else if(functionName == "cot" && isExponentGreaterThan1)
+            {
+                integrateCotRaiseToAnIntegerGreaterThanOne(result, base.getFunctionConstReference(), static_cast<unsigned int>(exponentValue.getInteger()));
             }
         }
     }
 }
+
 void Integration::integrateChangingTermRaiseToChangingTerm(
         Term & result,
         Term const& ,
@@ -1194,16 +1264,22 @@ void Integration::putReducedCosineSquaredToDoubleAngleCosineTerms(
     }
 }
 
+void Integration::putTangentSquaredToSecantSquaredTerms(
+        Term & outputTerm,
+        Term const& inputTerm,
+        unsigned int const exponent) const
+{
+    Term termToMultiply(createExpressionIfPossible({getTangentSquaredInSecant(inputTerm), Term("^"), Term(AlbaNumber(exponent)/2)}));
+    outputTerm = outputTerm * termToMultiply;
+}
+
 void Integration::putCosecantSquaredToCotangentSquaredTerms(
         Term & outputTerm,
         Term const& inputTerm,
         unsigned int const exponent) const
 {
-    Term equivalentToSecantSquared(getCosecantSquaredInCotangent(inputTerm));
-    for(unsigned int i=0; i<exponent; i+=2)
-    {
-        outputTerm = outputTerm * equivalentToSecantSquared;
-    }
+    Term termToMultiply(createExpressionIfPossible({getCosecantSquaredInCotangent(inputTerm), Term("^"), Term(AlbaNumber(exponent)/2)}));
+    outputTerm = outputTerm * termToMultiply;
 }
 
 void Integration::putSecantSquaredToTangentSquaredTerms(
@@ -1211,11 +1287,8 @@ void Integration::putSecantSquaredToTangentSquaredTerms(
         Term const& inputTerm,
         unsigned int const exponent) const
 {
-    Term equivalentToSecantSquared(getSecantSquaredInTangent(inputTerm));
-    for(unsigned int i=0; i<exponent; i+=2)
-    {
-        outputTerm = outputTerm * equivalentToSecantSquared;
-    }
+    Term termToMultiply(createExpressionIfPossible({getSecantSquaredInTangent(inputTerm), Term("^"), Term(AlbaNumber(exponent)/2)}));
+    outputTerm = outputTerm * termToMultiply;
 }
 
 void Integration::putCotangentSquaredToCosecantSquaredTerms(
@@ -1223,16 +1296,14 @@ void Integration::putCotangentSquaredToCosecantSquaredTerms(
         Term const& inputTerm,
         unsigned int const exponent) const
 {
-    Term equivalentToCotangentSquared(getCotangentSquaredInCosecant(inputTerm));
-    for(unsigned int i=0; i<exponent; i+=2)
-    {
-        outputTerm = outputTerm * equivalentToCotangentSquared;
-    }
+    Term termToMultiply(createExpressionIfPossible({getCotangentSquaredInCosecant(inputTerm), Term("^"), Term(AlbaNumber(exponent)/2)}));
+    outputTerm = outputTerm * termToMultiply;
 }
 
 void Integration::setIsIntegrationUsingSubstitutionAllowed(
         bool const isIntegrationUsingSubstitutionAllowed)
-{    m_isIntegrationUsingSubstitutionAllowed = isIntegrationUsingSubstitutionAllowed;
+{
+    m_isIntegrationUsingSubstitutionAllowed = isIntegrationUsingSubstitutionAllowed;
 }
 
 void Integration::setIsIntegrationByPartsAllowed(
@@ -1331,7 +1402,8 @@ bool Integration::hasExponentialExpression(Term const& term) const
 
 bool Integration::wouldDifferentiationYieldToAConstant(
         Term const& term) const
-{    bool result(0);
+{
+    bool result(0);
     if(term.isVariable() && isVariableToIntegrate(term.getVariableConstReference().getVariableName()))
     {
         result = true;

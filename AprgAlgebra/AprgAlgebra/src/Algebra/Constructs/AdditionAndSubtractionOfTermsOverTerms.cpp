@@ -224,6 +224,7 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpressionForNumer
     }
     return combinedNumeratorOnIndex;
 }
+
 void AdditionAndSubtractionOfTermsOverTerms::combineExpressionAsAddOrSubtract(
         Expression & combinedExpression,
         Expression const& expression,

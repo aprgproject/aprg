@@ -7,6 +7,7 @@
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -81,7 +82,8 @@ void accumulateTermsForAdditionAndSubtraction(
                 combinedTerm = negateTerm(term);
             }
             isFirst=false;
-        }        else
+        }
+        else
         {
             accumulateAndDoOperationOnTermDetails(combinedTerm, OperatorLevel::AdditionAndSubtraction, termWithDetails);
         }

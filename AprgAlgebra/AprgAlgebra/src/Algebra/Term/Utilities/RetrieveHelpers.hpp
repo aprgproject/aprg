@@ -17,7 +17,8 @@ using VariableToValueMap = std::map<std::string, AlbaNumber>;
 bool hasAnyFunctions(Term const& term);
 bool isVariableFoundInTerm(Term const& term, std::string const& variableName);
 
-AlbaNumber getCoefficientOfMonomialWithNoVariables(Polynomial const& polynomial);AlbaNumber getCoefficientOfMonomialWithVariableOnly(
+AlbaNumber getCoefficientOfMonomialWithNoVariables(Polynomial const& polynomial);
+AlbaNumber getCoefficientOfMonomialWithVariableOnly(
         Polynomial const& polynomial,
         std::string const& variableName);
 VariableToValueMap getCoefficientsForVariablesOnly(Polynomial const& polynomial);

@@ -31,6 +31,7 @@ Term TermRaiseToANumber::getCombinedTerm() const
     }
     return combinedTerm;
 }
+
 bool TermRaiseToANumber::isEmpty() const
 {
     return m_base.isEmpty();
