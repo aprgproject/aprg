@@ -135,25 +135,9 @@ bool isANegativeExpression(Expression const& expression)
     return result;
 }
 
-void saveSignAndPositiveTerm(
-        bool & savedSign,
-        Term & savedPositiveTerm,
-        TermWithDetails const& termWithDetails)
-{
-    savedSign = termWithDetails.hasNegativeAssociation();
-    savedPositiveTerm = getTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer);
-    if(isANegativeTerm(savedPositiveTerm))
-    {
-        savedSign = !savedSign;
-        savedPositiveTerm = negateTerm(savedPositiveTerm);
-    }
-
-}
-
 AlbaNumber getConstantFactor(Term const& term)
 {
-    AlbaNumber result(1);
-    if(term.isConstant())
+    AlbaNumber result(1);    if(term.isConstant())
     {
         result = term.getConstantValueConstReference();
     }
@@ -226,10 +210,20 @@ Term negateTerm(Term const& term)
     return negatedTerm;
 }
 
+Term negateTermIfHasNegativeAssociation(
+        TermWithDetails const& termWithDetails)
+{
+    Term result(getTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
+    if(termWithDetails.hasNegativeAssociation())
+    {
+        result == negateTerm(result);
+    }
+    return result;
+}
+
 Term invertTerm(Term const& term, string const& variableName)
 {
-    string newVariableName(createVariableNameForSubstitution(term));
-    Equation equationToIsolate(Term(newVariableName), "=", term);
+    string newVariableName(createVariableNameForSubstitution(term));    Equation equationToIsolate(Term(newVariableName), "=", term);
     IsolationOfOneVariableOnEqualityEquation isolation(equationToIsolate);
     SubstitutionOfVariablesToTerms substitution{{newVariableName, Term(variableName)}};
     return substitution.performSubstitutionTo(isolation.getTermByIsolatingVariable(variableName));
