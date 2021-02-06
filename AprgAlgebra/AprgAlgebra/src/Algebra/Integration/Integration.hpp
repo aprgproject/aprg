@@ -32,6 +32,20 @@ public:
         AlbaNumber cotExponent;
     };
 
+    struct TrigonometricSubstitutionDetails
+    {
+        bool isTrigonometricSubstitutionPossible;
+        std::string thetaName;
+        Term a;
+        Term u;
+        Term aSquaredAndUSquared;
+        Term uEquivalent;
+        Term thetaEquivalent;
+        Term aSquaredAndUSquaredEquivalent;
+        Term theta;
+        Term opposite, adjacent, hypotenuse;
+    };
+
     struct Configuration
     {
         bool shouldFixTrigonometricFunctions;
@@ -43,6 +57,7 @@ public:
     using Configurations = std::vector<Configuration>;
 
     Integration(std::string const& nameOfVariableToIntegrate);
+
     Term integrate(Term const& term) const;
     Term integrate(Constant const& constant) const;
     Term integrate(Variable const& variable) const;
@@ -61,10 +76,10 @@ public:
     Term integrateExpression(Expression const& expression) const;
     Term integrateFunction(Function const& functionObject) const;
 
-
 private:
     //Monomial
-    Term integrateMonomialWhenExponentIsNegativeOne(Monomial const& monomial) const;    Monomial integrateMonomialWhenExponentIsNotNegativeOne(Monomial const& monomial) const;
+    Term integrateMonomialWhenExponentIsNegativeOne(Monomial const& monomial) const;
+    Monomial integrateMonomialWhenExponentIsNotNegativeOne(Monomial const& monomial) const;
 
     //Expression
     Term integrateAsTermOrExpressionIfNeeded(Expression const& expression) const;
@@ -75,12 +90,17 @@ private:
     void integrateTermUsingSubstitutionWithMaxDepth(Term & result, Term const& term, Configuration const& configuration) const;
     void integrateTermUsingSubstitution(Term & result, Term const& term, Configuration const& configuration) const;
     void integrateBySubstitutionAndUsingANewVariable(Term & result, Term const& mainTerm, Term const& termToSubstituteToVariable, Configuration const& configuration) const;
-    Term getTermWithNewVariableSubstitution(Term const& mainTerm, Term const& termToSubstituteWithVariable) const;
-    void integrateUsingTrigonometricSubstitution(Term & result, Term const& mainTerm, Term const& termToSubstitute, Configuration const& configuration) const;
+    Term substituteToNewVariable(Term const& mainTerm, Term const& termToSubstituteWithVariable) const;
+    Term substituteBackToOldVariable(Term const& mainTerm, std::string const& newVariableName, Term const& termForNewVariable) const;
+    void integrateUsingTrigonometricSubstitutionIfPossible(Term & result, Term const& mainTerm, Term const& termToSubstitute, Configuration const& configuration) const;
     void integrateUsingTrigonometricSubstitution(Term & result, Term const& mainTerm, Term const& aSquareAndUSquared, Term const& aSquaredWithSign, Term const& uSquaredWithSign, Configuration const& configuration) const;
+    TrigonometricSubstitutionDetails calculateTrigonometricSubstitutionDetails(Term const& a, Term const& u, Term const& aSquaredAndUSquared, bool const isANegative, bool const isUNegative) const;
+    Term substituteToTrigonometricFunctions(Term const& mainTerm, TrigonometricSubstitutionDetails const& details) const;
+    Term substituteFromTrigonometricFunctionsBackToNormal(Term const& mainTerm, TrigonometricSubstitutionDetails const& details) const;
     void integrateNonChangingAndChangingTermsInMultiplicationOrDivision(Term& result, TermsWithDetails const& termsWithDetails) const;
     void integrateChangingTermsInMultiplicationOrDivision(Term & result, TermsWithDetails const& changingTerms) const;
-    void integrateByTryingTwoTermsInMultiplicationOrDivision(Term & result, TermsWithDetails const& termsWithDetailsInMultiplicationOrDivision) const;    void integrateUsingChainRuleInReverseIfPossible(Term & result, Term const& firstOuterTerm, Term const& firstInnerTerm, Term const& secondTerm) const;
+    void integrateByTryingTwoTermsInMultiplicationOrDivision(Term & result, TermsWithDetails const& termsWithDetailsInMultiplicationOrDivision) const;
+    void integrateUsingChainRuleInReverseIfPossible(Term & result, Term const& firstOuterTerm, Term const& firstInnerTerm, Term const& secondTerm) const;
     void findInnerAndOuterTermForChainRule(Term & innerTerm, Term & outerTerm) const;
     Term divideFirstTermAndDerivativeOfSecondTerm(Term const& firstTerm, Term const& secondTerm) const;
     void integrateByProcessingAsPolynomialsOverPolynomials(Term & result, Term const& term) const;
@@ -94,6 +114,7 @@ private:
     void integrateNonChangingTermRaiseToChangingTerm(Term & result, Term const& base, Term const& exponent) const;
     void integrateChangingTermRaiseToNonChangingTerm(Term & result, Term const& base, Term const& exponent) const;
     void integrateChangingTermRaiseToChangingTerm(Term & result, Term const& firstTerm, Term const& secondTerm) const;
+
     //Function
     Term integrateFunctionOnly(Function const& functionObject) const;
     void retrieveInputTermsAndTrigonometricExponents(InputTermToTrigonometryFunctionExponentsMap & inputTermToExponents, TermsOverTerms::BaseToExponentMap & remainingTerms, TermsOverTerms::BaseToExponentMap const& termToCheck) const;
@@ -111,7 +132,8 @@ private:
     void integrateSecAndTanCombinationWithExponentsGreaterThanOne(Term & result, Term const& functionInputTerm, unsigned int const secExponent, unsigned int const tanExponent) const;
 
     //Miscellaneous
-    void segregateNonChangingAndChangingTerms(TermsWithDetails const& termsToSegregate, TermsWithDetails & nonChangingTerms, TermsWithDetails & changingTerms) const;    void convertLeftHandSideAndRightHandSideIfLogarithmic(Term & leftHandSide, Term & rightHandSide) const;
+    void segregateNonChangingAndChangingTerms(TermsWithDetails const& termsToSegregate, TermsWithDetails & nonChangingTerms, TermsWithDetails & changingTerms) const;
+    void convertLeftHandSideAndRightHandSideIfLogarithmic(Term & leftHandSide, Term & rightHandSide) const;
     void putReducedSineSquaredToDoubleAngleCosineTerms(Term & outputTerm, Term const& inputTerm, unsigned int const exponent) const;
     void putReducedCosineSquaredToDoubleAngleCosineTerms(Term & outputTerm, Term const& inputTerm, unsigned int const exponent) const;
     void putTangentSquaredToSecantSquaredTerms(Term & outputTerm, Term const& inputTerm, unsigned int const exponent) const;
@@ -127,13 +149,15 @@ private:
     Configuration getConfigurationWithoutFactors() const;
     Configuration getConfigurationWithFactors() const;
     Configuration getConfigurationWithCommonDenominator() const;
-    bool isVariableToIntegrate(std::string const& variableName) const;    bool isChangingTerm(Term const& term) const;
+    bool isVariableToIntegrate(std::string const& variableName) const;
+    bool isChangingTerm(Term const& term) const;
     bool hasExponentialExpression(Term const& term) const;
     bool wouldDifferentiationYieldToAConstant(Term const& term) const;
     bool areExponentsSame(TrigonometryFunctionExponents const& oldExponents, TrigonometryFunctionExponents const& newExponents) const;
     std::string m_nameOfVariableToIntegrate;
     bool m_isIntegrationUsingSubstitutionAllowed;
-    bool m_isIntegrationByPartsAllowed;};
+    bool m_isIntegrationByPartsAllowed;
+};
 
 }
 

@@ -137,7 +137,8 @@ bool isANegativeExpression(Expression const& expression)
 
 AlbaNumber getConstantFactor(Term const& term)
 {
-    AlbaNumber result(1);    if(term.isConstant())
+    AlbaNumber result(1);
+    if(term.isConstant())
     {
         result = term.getConstantValueConstReference();
     }
@@ -223,7 +224,8 @@ Term negateTermIfHasNegativeAssociation(
 
 Term invertTerm(Term const& term, string const& variableName)
 {
-    string newVariableName(createVariableNameForSubstitution(term));    Equation equationToIsolate(Term(newVariableName), "=", term);
+    string newVariableName(createVariableNameForSubstitution(term));
+    Equation equationToIsolate(Term(newVariableName), "=", term);
     IsolationOfOneVariableOnEqualityEquation isolation(equationToIsolate);
     SubstitutionOfVariablesToTerms substitution{{newVariableName, Term(variableName)}};
     return substitution.performSubstitutionTo(isolation.getTermByIsolatingVariable(variableName));
