@@ -21,12 +21,11 @@ bool isANegativeMonomial(Monomial const& monomial);
 bool isANegativePolynomial(Polynomial const& polynomial);
 bool isANegativeExpression(Expression const& expression);
 
+void saveSignAndPositiveTerm(bool & savedSign, Term & savedPositiveTerm, TermWithDetails const& termWithDetails);
+
 AlbaNumber getConstantFactor(Term const& term);
 
-AlbaNumberPairs evaluateAndGetInputOutputPair(
-        AlbaNumbers const& numbers,
-        std::string const& variableName,
-        Term const& term);
+AlbaNumberPairs evaluateAndGetInputOutputPair(AlbaNumbers const& numbers, std::string const& variableName, Term const& term);
 
 Term getPiAsTerm();
 Term getEAsTerm();
