@@ -431,6 +431,22 @@ TEST(DifferentiationTest, DifferentiateEquationWorks)
     EXPECT_EQ(stringToExpect2, equationToVerify2.getDisplayableString());
 }
 
+TEST(DifferentiationTest, DifferentiateWorksOnOneOverPolynomial)
+{
+    Differentiation differentiationForX("x");
+    Term numerator(1);
+    Term denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(2, {{"x", 1}}), Monomial(2, {})});
+    Term termToTest(createExpressionIfPossible({numerator, Term("/"), denominator}));
+
+    Term termToVerify(differentiationForX.differentiate(termToTest));
+
+    Term expectedNumeratorPart(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
+    Term expectedNumerator(createExpressionIfPossible({Term(-2), Term("*"), expectedNumeratorPart}));
+    Term expectedDenominator(Polynomial{Monomial(1, {{"x", 4}}), Monomial(4, {{"x", 3}}), Monomial(8, {{"x", 2}}), Monomial(8, {{"x", 1}}), Monomial(4, {})});
+    Term termToExpect(createExpressionIfPossible({expectedNumerator, Term("/"), expectedDenominator}));
+    EXPECT_EQ(termToExpect, termToVerify);
+}
+
 TEST(DifferentiationTest, DifferentiateTwoMultipliedTermsWorks)
 {
     Differentiation differentiationForX("x");

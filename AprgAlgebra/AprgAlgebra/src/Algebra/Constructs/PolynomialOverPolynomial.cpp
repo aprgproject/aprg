@@ -1,6 +1,7 @@
 #include "PolynomialOverPolynomial.hpp"
 
 #include <Algebra/Factorization/Factorization.hpp>
+#include <Algebra/Factorization/FactorizationConfiguration.hpp>
 #include <Algebra/Factorization/FactorizationUtilities.hpp>
 #include <Algebra/Term/Utilities/ConvertHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
@@ -11,8 +12,8 @@
 
 #include <algorithm>
 
-using namespace alba::mathHelper;
 using namespace alba::algebra::Factorization;
+using namespace alba::mathHelper;
 using namespace std;
 
 namespace alba
@@ -24,6 +25,7 @@ namespace algebra
 PolynomialOverPolynomial::PolynomialOverPolynomial()
     : m_numerator()
     , m_denominator()
+    , m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(false)
 {}
 
 PolynomialOverPolynomial::PolynomialOverPolynomial(
@@ -31,6 +33,7 @@ PolynomialOverPolynomial::PolynomialOverPolynomial(
         Polynomial const& denominator)
     : m_numerator(numerator)
     , m_denominator(denominator)
+    , m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(false)
 {}
 
 bool PolynomialOverPolynomial::isEmpty() const
@@ -46,6 +49,12 @@ Polynomial const& PolynomialOverPolynomial::getNumerator() const
 Polynomial const& PolynomialOverPolynomial::getDenominator() const
 {
     return m_denominator;
+}
+
+void PolynomialOverPolynomial::setAsShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(
+        bool const shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue)
+{
+    m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue;
 }
 
 PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::simplifyAndDivide()
@@ -141,6 +150,13 @@ void PolynomialOverPolynomial::removeCommonMonomialOnAllMonomialsInNumeratorAndD
 
 void PolynomialOverPolynomial::factorizeRemoveCommonFactorsInNumeratorAndDenominatorAndCombineRemainingFactors()
 {
+    ConfigurationDetails configurationDetails(
+                Factorization::Configuration::getInstance().getConfigurationDetails());
+    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue
+            = m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue;
+    ScopeObject scopeObject;
+    scopeObject.setInThisScopeThisConfiguration(configurationDetails);
+
     if(shouldPerformFactorization())
     {
         Polynomials numeratorFactors(factorize(m_numerator));
