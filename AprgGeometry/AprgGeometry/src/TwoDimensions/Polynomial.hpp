@@ -50,6 +50,7 @@ public:
         }
         return result;
     }
+
 protected:
     void saveFirstDerivativeCoefficients()
     {
