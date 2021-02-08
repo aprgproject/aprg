@@ -23,11 +23,10 @@ TEST(EllipseTest, EmptyEllipse)
     EXPECT_DOUBLE_EQ(0, ellipse.getBValue());
     EXPECT_DOUBLE_EQ(0, ellipse.getCValue());
     EXPECT_NE(0, ellipse.getEccentricity());
-    EXPECT_NE(0, ellipse.getSemiLactusRectum());
+    EXPECT_NE(0, ellipse.getSemiLatusRectum());
     EXPECT_DOUBLE_EQ(0, ellipse.getArea());
 
-    Points points(ellipse.getPointsForCircumference(1));
-    ASSERT_TRUE(points.empty());
+    Points points(ellipse.getPointsForCircumference(1));    ASSERT_TRUE(points.empty());
 }
 
 TEST(EllipseTest, EllipseAtOriginWithRadius)
@@ -39,11 +38,10 @@ TEST(EllipseTest, EllipseAtOriginWithRadius)
     EXPECT_DOUBLE_EQ(2, ellipse.getBValue());
     EXPECT_DOUBLE_EQ(2.2360679774997898, ellipse.getCValue());
     EXPECT_DOUBLE_EQ(0.7453559924999299, ellipse.getEccentricity());
-    EXPECT_DOUBLE_EQ(1.3333333333333333, ellipse.getSemiLactusRectum());
+    EXPECT_DOUBLE_EQ(1.3333333333333333, ellipse.getSemiLatusRectum());
     EXPECT_DOUBLE_EQ(18.849555921538759, ellipse.getArea());
 
-    Points points(ellipse.getPointsForCircumference(1));
-    ASSERT_EQ(16U, points.size());
+    Points points(ellipse.getPointsForCircumference(1));    ASSERT_EQ(16U, points.size());
     EXPECT_EQ(Point(3,0), points.at(0));
     EXPECT_EQ(Point(2.5980762113533160118,1), points.at(1));
     EXPECT_EQ(Point(2,1.490711984999859796), points.at(2));

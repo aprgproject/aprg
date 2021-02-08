@@ -124,22 +124,32 @@ TEST(TwoDimensionsHelperTest, GetPointAlongALineWithDistanceFromAPointWorksCorre
     EXPECT_EQ(Point(-2,-2), getPointAlongALineWithDistanceFromAPoint(Line(Point(0,0), Point(-1,-1)), Point(-1,-1), sqrt(2), false));
 }
 
-TEST(TwoDimensionsHelperTest, GetIntersectionsOfParabolaAndLineWorks)
+TEST(TwoDimensionsHelperTest, GetIntersectionsOfParabolaAndLineWorksOnParabolaWithPolynomialX)
 {
-    Parabola parabola(1, -5, 4);
+    Parabola<ParabolaOrientation::PolynomialX> parabola(1, -5, 4);
     Line line(Point(0,-0.25), Point(1,0));
 
     Points points(getIntersectionsOfParabolaAndLine(parabola, line));
-
     ASSERT_EQ(2U, points.size());
     EXPECT_EQ(Point(1,0), points.at(0));
     EXPECT_EQ(Point(4.25,0.8125), points.at(1));
 }
 
+TEST(TwoDimensionsHelperTest, GetIntersectionsOfParabolaAndLineWorksOnParabolaWithPolynomialY)
+{
+    Parabola<ParabolaOrientation::PolynomialY> parabola(1, -5, 4);
+    Line line(Point(-0.25,0), Point(0,1));
+
+    Points points(getIntersectionsOfParabolaAndLine(parabola, line));
+
+    ASSERT_EQ(2U, points.size());
+    EXPECT_EQ(Point(0.8125,4.25), points.at(0));
+    EXPECT_EQ(Point(0,1), points.at(1));
+}
+
 TEST(TwoDimensionsHelperTest, PopNearestPointWorks)
 {
-    Points points;
-    points.emplace_back(4,4);
+    Points points;    points.emplace_back(4,4);
     points.emplace_back(1,1);
     points.emplace_back(3,3);
     points.emplace_back(2,2);
@@ -193,10 +203,9 @@ TEST(TwoDimensionsHelperTest, GetLargerAngleBetweenTwoLinesWorksCorrectly)
 
 TEST(TwoDimensionsHelperTest, PointsInParabolaCanBeConnected)
 {
-    Parabola parabola{1,2,3};
+    Parabola<ParabolaOrientation::PolynomialX> parabola{1,2,3};
     Points parabolaPoints(parabola.getPoints(-2, 2, 1));
     Points connectedPoints(getConnectedPointsUsingALine(parabolaPoints, 1));
-
     ASSERT_EQ(11U, connectedPoints.size());
     EXPECT_EQ(Point(-2,3), connectedPoints.at(0));
     EXPECT_EQ(Point(-1,2), connectedPoints.at(1));
@@ -277,11 +286,10 @@ TEST(TwoDimensionsHelperTest, GetTangentLineForCircleIsCorrect)
 
 TEST(TwoDimensionsHelperTest, GetTangentLineForPolynomialIsCorrect)
 {
-    Parabola parabola{1,2,3};
+    Parabola<ParabolaOrientation::PolynomialX> parabola{1,2,3};
     Line expectedLine1(getPolynomialTangentLineAt(parabola, -1));
     Line expectedLine2(getPolynomialTangentLineAt(parabola, 0));
     Line expectedLine3(getPolynomialTangentLineAt(parabola, 1));
-
     EXPECT_EQ(LineType::Horizontal, expectedLine1.getType());
     EXPECT_DOUBLE_EQ(2, expectedLine1.getYIntercept());
     EXPECT_DOUBLE_EQ(-INFINITY, expectedLine1.getXIntercept());

@@ -83,10 +83,14 @@ double Circle::getCircumference() const
     return getPi()*2*m_radius;
 }
 
+double Circle::getEccentricity() const
+{
+    return 0;
+}
+
 bool Circle::isInside(Point const& point) const
 {
-    return twoDimensionsHelper::getDistance(m_center, point) <= m_radius;
-}
+    return twoDimensionsHelper::getDistance(m_center, point) <= m_radius;}
 
 Points Circle::getLocus(double const interval) const //points for circumference
 {
