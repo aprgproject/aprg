@@ -186,6 +186,7 @@ TEST(TermRaiseToTermsTest, SimplifyWorksWhenExponentsResultsInAnMultiplicationEx
     Term expectedCombinedTerm(createExpressionIfPossible({base, Term("^"), expectedExponent}));
     EXPECT_EQ(expectedCombinedTerm, termRaiseToTerms.getCombinedTerm());
 }
+
 TEST(TermRaiseToTermsTest, SimplifyWorksWhenExponentsResultsInAnAdditionExpression)
 {
     Term base("base");

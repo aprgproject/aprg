@@ -47,7 +47,8 @@ private:
 
     void initializeUsingTermsInRaiseToPowerExpression(
             TermsWithDetails const& termsInRaiseToPowerExpression);
-    void initializeExponentsInTerms(            Terms const& exponents);
+    void initializeExponentsInTerms(
+            Terms const& exponents);
     Term getCombinedBaseAndExponents() const;
 
     Term m_base;

@@ -10,7 +10,8 @@ using namespace alba::mathHelper;
 using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace TwoDimensions
 {
@@ -299,6 +300,7 @@ Points Ellipse::getPointsInTraversingXAndY(double const signOfX, double const si
     }
     return result;
 }
+
 Points Ellipse::getPointsInTraversingY(double const signOfX, double const signOfY, double const interval) const
 {
     Points result;

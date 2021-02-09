@@ -112,7 +112,8 @@ Term substituteValuesAndGetDifference(
     return result;
 }
 
-Term substituteTermsAndGetDifference(        Term const& term,
+Term substituteTermsAndGetDifference(
+        Term const& term,
         string const& variableName,
         Term const& lowerValueTerm,
         Term const& higherValueTerm)
@@ -127,7 +128,8 @@ Term substituteTermsAndGetDifference(        Term const& term,
     return result;
 }
 
-Term getAreaUnderACurveUsingReimannSums(        Term const& term,
+Term getAreaUnderACurveUsingReimannSums(
+        Term const& term,
         string const& variableName,
         AlbaNumber const& lowerValueInInterval,
         AlbaNumber const& higherValueInInterval)

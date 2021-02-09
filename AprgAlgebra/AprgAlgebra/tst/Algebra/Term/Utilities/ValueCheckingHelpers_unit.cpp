@@ -366,7 +366,8 @@ TEST(ValueCheckingHelpersTest, IsAFiniteConstantWorks)
 {
     EXPECT_FALSE(isAFiniteConstant(Term("x")));
     EXPECT_TRUE(isAFiniteConstant(Term(1)));
-    EXPECT_FALSE(isAFiniteConstant(Term(NAN)));}
+    EXPECT_FALSE(isAFiniteConstant(Term(NAN)));
+}
 
 }
 

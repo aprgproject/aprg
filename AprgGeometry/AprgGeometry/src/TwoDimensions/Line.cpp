@@ -12,7 +12,8 @@ using namespace alba::mathHelper;
 using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace TwoDimensions
 {
@@ -246,7 +247,8 @@ void Line::getPointsForLineWithSlope(Points & points, Point const& first, Point 
         Point endPoint(popNearestPoint(pointsAtBorder, second));
         bool isDirectionAscendingForX = startingPoint.getX() <= endPoint.getX();
 
-        Points pointsFromXCoordinate;        AlbaRange<double> rangeForX(startingPoint.getX(), endPoint.getX(), interval);
+        Points pointsFromXCoordinate;
+        AlbaRange<double> rangeForX(startingPoint.getX(), endPoint.getX(), interval);
         rangeForX.traverse([&](double const traverseValueOfX)
         {
             pointsFromXCoordinate.emplace_back(traverseValueOfX, calculateYFromX(traverseValueOfX));
@@ -269,6 +271,7 @@ void Line::getPointsForLineWithSlope(Points & points, Point const& first, Point 
         }
     }
 }
+
 
 void Line::mergePointsFromPointsFromXAndY(Points & points, Points const& pointsFromXCoordinate, Points const& pointsFromYCoordinate, bool const isDirectionAscendingForX) const
 {

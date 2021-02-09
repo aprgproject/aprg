@@ -10,7 +10,8 @@ using namespace alba::mathHelper;
 using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace TwoDimensions
 {
@@ -180,6 +181,7 @@ Points Hyperbola::getPointsInTraversingXAndY(double const signOfX, double const 
     }
     return result;
 }
+
 Points Hyperbola::getPointsInTraversingY(double const signOfX, double const signOfY, double const interval) const
 {
     Points result;
