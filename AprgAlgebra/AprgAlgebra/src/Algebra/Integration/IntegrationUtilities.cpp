@@ -107,11 +107,12 @@ Term substituteValuesAndGetDifference(
     Term integralWithLowerValue(substitution.performSubstitutionTo(term));
     substitution.putVariableWithValue(variableName, higherValueInInterval);
     Term integralWithHigherValue(substitution.performSubstitutionTo(term));
-    return integralWithHigherValue-integralWithLowerValue;
+    Term result(integralWithHigherValue-integralWithLowerValue);
+    result.simplify();
+    return result;
 }
 
-Term substituteTermsAndGetDifference(
-        Term const& term,
+Term substituteTermsAndGetDifference(        Term const& term,
         string const& variableName,
         Term const& lowerValueTerm,
         Term const& higherValueTerm)
@@ -121,10 +122,12 @@ Term substituteTermsAndGetDifference(
     substitution.putVariableWithTerm(variableName, higherValueTerm);
     Term integralWithHigherValueTerm(substitution.performSubstitutionTo(term));
     return integralWithHigherValueTerm-integralWithLowerValueTerm;
+    Term result(integralWithHigherValueTerm-integralWithLowerValueTerm);
+    result.simplify();
+    return result;
 }
 
-Term getAreaUnderACurveUsingReimannSums(
-        Term const& term,
+Term getAreaUnderACurveUsingReimannSums(        Term const& term,
         string const& variableName,
         AlbaNumber const& lowerValueInInterval,
         AlbaNumber const& higherValueInInterval)
