@@ -126,11 +126,10 @@ void segregateTermsWithPositiveAndNegativeAssociations(
 
 void segregateTermsWithAndWithoutVariable(
         TermsWithDetails const& termsToSegregate,
-        std::string const& variableName,
+        string const& variableName,
         TermsWithDetails & termsWithVariable,
         TermsWithDetails & termsWithoutVariable)
-{
-    for(TermWithDetails const& termToSegregate : termsToSegregate)
+{    for(TermWithDetails const& termToSegregate : termsToSegregate)
     {
         Term const& term(getTermConstReferenceFromSharedPointer(termToSegregate.baseTermSharedPointer));
         if(isVariableFoundInTerm(term, variableName))

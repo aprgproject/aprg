@@ -1,9 +1,9 @@
 #include "DifferentiationUtilities.hpp"
 
+#include <Algebra/Constructs/ConstructUtilities.hpp>
 #include <Algebra/Differentiation/DerivativeVariableName.hpp>
 #include <Algebra/Differentiation/Differentiation.hpp>
-#include <Algebra/Functions/CommonFunctionLibrary.hpp>
-#include <Algebra/Integration/Integration.hpp>
+#include <Algebra/Functions/CommonFunctionLibrary.hpp>#include <Algebra/Integration/Integration.hpp>
 #include <Algebra/Isolation/IsolationOfOneVariableOnEqualityEquation.hpp>
 #include <Algebra/Limit/Limit.hpp>
 #include <Algebra/Retrieval/SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever.hpp>
@@ -171,11 +171,10 @@ Term getLogarithmicDifferentiationToYieldDyOverDx(
 
 Term getCartesianDerivativeOfTermInPolarCoordinates(
         Term const& radiusInTermsOfTheta,
-        std::string const& thetaName)
+        string const& thetaName)
 {
     Term theta(thetaName);
-    Differentiation differentiation(thetaName);
-    Term drOverDTheta(differentiation.differentiate(radiusInTermsOfTheta));
+    Differentiation differentiation(thetaName);    Term drOverDTheta(differentiation.differentiate(radiusInTermsOfTheta));
     Term sinTheta(sin(theta));
     Term cosTheta(cos(theta));
     Term numerator(createExpressionIfPossible({sinTheta, Term("*"), drOverDTheta, Term("+"), radiusInTermsOfTheta, Term("*"), cosTheta}));
@@ -187,18 +186,41 @@ Term getCartesianDerivativeOfTermInPolarCoordinates(
 
 Term getSlopeOfTermInPolarCoordinates(
         Term const& radiusInTermsOfTheta,
-        std::string const& thetaName,
+        string const& thetaName,
         AlbaNumber const& thetaValue)
 {
-    Term dyOverDx(getCartesianDerivativeOfTermInPolarCoordinates(radiusInTermsOfTheta, thetaName));
-    SubstitutionOfVariablesToValues substitution{{thetaName, thetaValue}};
+    Term dyOverDx(getCartesianDerivativeOfTermInPolarCoordinates(radiusInTermsOfTheta, thetaName));    SubstitutionOfVariablesToValues substitution{{thetaName, thetaValue}};
     return substitution.performSubstitutionTo(dyOverDx);
+}
+
+Term getLimitOfZeroOverZeroUsingLhopitalsRule(
+        Term const& term,
+        string const& variableName,
+        AlbaNumber const& value)
+{
+    Differentiation differentiation(variableName);
+    SubstitutionOfVariablesToValues substitution{{variableName, value}};
+    TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(term));
+    Term numerator(termsOverTerms.getCombinedNumerator());
+    Term denominator(termsOverTerms.getCombinedDenominator());
+    Term numeratorValue(getLimit(numerator, variableName, value));
+    Term denominatorValue(getLimit(denominator, variableName, value));
+    Term zeroTerm(Constant(0));
+    while(zeroTerm == numeratorValue && zeroTerm == denominatorValue)
+    {
+        numerator = differentiation.differentiate(numerator);
+        denominator = differentiation.differentiate(denominator);
+        numeratorValue = getLimit(numerator, variableName, value);
+        denominatorValue = getLimit(denominator, variableName, value);
+    }
+    Term result(numeratorValue/denominatorValue);
+    result.simplify();
+    return result;
 }
 
 SolutionSet getDifferentiabilityDomain(
         Term const& term,
-        string const& variableName)
-{
+        string const& variableName){
     // This code is not accurate.
     // How about piecewise function?
     // How about absolute value function?

@@ -268,10 +268,26 @@ AlbaNumber getValueUsingLinearInterpolation(
     return result;
 }
 
-Term getLimitAtAValue(
+Term getLimit(
         Term const& term,
         string const& variableName,
-        AlbaNumber const& valueToApproach,
+        AlbaNumber const& valueToApproach)
+{
+   Term result;
+   if(valueToApproach.isPositiveOrNegativeInfinity())
+   {
+       result = getLimitAtInfinity(term, variableName, valueToApproach.getDefinedValue());
+   }
+   else
+   {
+       result = simplifyAndGetLimitAtAValue(term, variableName, valueToApproach, LimitAtAValueApproachType::BothSides);
+   }
+   return result;
+}
+
+Term getLimitAtAValue(
+        Term const& term,
+        string const& variableName,        AlbaNumber const& valueToApproach,
         LimitAtAValueApproachType const limitApproachType)
 {
     SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
