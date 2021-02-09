@@ -18,10 +18,10 @@ public:
 
     enum class Value
     {
+        Unknown,
         PositiveInfinity,
         NegativeInfinity,
-        NotANumber,
-        pi,
+        NotANumber,        pi,
         e
     };
     enum class Type
@@ -155,9 +155,9 @@ public:
     Type getType() const;
     long long int getInteger() const;
     double getDouble() const;
+    Value getDefinedValue() const;
     FractionData getFractionData() const;
     ComplexNumberData getComplexNumberData() const;
-
     unsigned int getNumberDataSize() const;
     std::string getDisplayableString() const;
 
