@@ -54,10 +54,11 @@ Point getIntersectionOfTwoLines(Line const& line1, Line const& line2);
 Point getMidpoint(Point const& point1, Point const& point2);
 Point getPointAlongALineWithDistanceFromAPoint(Line const& line, Point const& referencePoint, double const distance, bool const isIncreasedOnX);
 Point popNearestPoint(Points & points, Point const& point);
+Point rotateAxisByAngle(Point const& point, Dimensionless::Angle const& angle);
+Point rotateAxisBackByAngle(Point const& point, Dimensionless::Angle const& angle);
 
 template<ParabolaOrientation parabolaOrientation> Points getIntersectionsOfParabolaAndLine(Parabola<parabolaOrientation> const& parabola, Line const& line);
-template<> Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::PolynomialX> const& parabola, Line const& line);
-template<> Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::PolynomialY> const& parabola, Line const& line);
+template<> Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::PolynomialX> const& parabola, Line const& line);template<> Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::PolynomialY> const& parabola, Line const& line);
 
 Points getConnectedPointsUsingALine(Points const& inputPoints, double const interval);
 Points getMergedPointsInIncreasingX(Points const& firstPointsToBeMerged, Points const& secondPointsToBeMerged);//UT

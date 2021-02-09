@@ -1,9 +1,9 @@
 #pragma once
 
+#include <TwoDimensions/Line.hpp>
 #include <TwoDimensions/Point.hpp>
 
 #include <functional>
-
 namespace alba
 {
 
@@ -24,11 +24,15 @@ public:
     double getCValue() const;
     double getEccentricity() const;
     double getSemiLactusRectum() const;
+
+    Points getFoci() const;
+    Points getVertices() const;
     Points getPointsForShape(double const interval) const;
+    Lines getAsymptotes() const;
+
     double calculateYFromX(double const x, double const signOfRoot) const;
     double calculateXFromY(double const y, double const signOfRoot) const;
-    double calculateYFromXWithoutCenter(double const x, double const signOfRoot) const;
-    double calculateXFromYWithoutCenter(double const y, double const signOfRoot) const;
+    double calculateYFromXWithoutCenter(double const x, double const signOfRoot) const;    double calculateXFromYWithoutCenter(double const y, double const signOfRoot) const;
 
     std::string getDisplayableString() const;
 

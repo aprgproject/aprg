@@ -164,10 +164,25 @@ TEST(TwoDimensionsHelperTest, PopNearestPointWorks)
     EXPECT_EQ(Point(0,0), popNearestPoint(points, Point(0,0)));
 }
 
+TEST(TwoDimensionsHelperTest, RotateAxisByAngleWorks)
+{
+    EXPECT_EQ(Point(1,-1), rotateAxisByAngle(Point(1, 1), Angle(AngleUnitType::Degrees, 90)));
+    EXPECT_EQ(Point(-1,-1), rotateAxisByAngle(Point(1, 1), Angle(AngleUnitType::Degrees, 180)));
+    EXPECT_EQ(Point(-1,1), rotateAxisByAngle(Point(1, 1), Angle(AngleUnitType::Degrees, 270)));
+    EXPECT_EQ(Point(1,1), rotateAxisByAngle(Point(1, 1), Angle(AngleUnitType::Degrees, 360)));
+}
+
+TEST(TwoDimensionsHelperTest, RotateAxisBackByAngleWorks)
+{
+    EXPECT_EQ(Point(-1,1), rotateAxisBackByAngle(Point(1, 1), Angle(AngleUnitType::Degrees, 90)));
+    EXPECT_EQ(Point(-1,-1), rotateAxisBackByAngle(Point(1, 1), Angle(AngleUnitType::Degrees, 180)));
+    EXPECT_EQ(Point(1,-1), rotateAxisBackByAngle(Point(1, 1), Angle(AngleUnitType::Degrees, 270)));
+    EXPECT_EQ(Point(1,1), rotateAxisBackByAngle(Point(1, 1), Angle(AngleUnitType::Degrees, 360)));
+}
+
 TEST(TwoDimensionsHelperTest, GetConicSectionBasedOnEccentricityWorks)
 {
-    Circle circle(Point(1, 1), 1);
-    Parabola<ParabolaOrientation::PolynomialX> parabola(1, 1, 1);
+    Circle circle(Point(1, 1), 1);    Parabola<ParabolaOrientation::PolynomialX> parabola(1, 1, 1);
     Ellipse ellipse(Point(1, 1), 2, 3);
     Hyperbola hyperbola(Point(1, 1), 2, 3);
 
