@@ -145,7 +145,8 @@ Points Ellipse::getFoci() const
         double c(getCValue());
         foci.emplace_back(m_center + Point(0, c));
         foci.emplace_back(m_center - Point(0, c));
-    }    return foci;
+    }
+    return foci;
 }
 
 Points Ellipse::getMajorVertices() const

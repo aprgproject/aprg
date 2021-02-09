@@ -4,6 +4,7 @@
 #include <TwoDimensions/Point.hpp>
 
 #include <functional>
+
 namespace alba
 {
 
@@ -32,7 +33,8 @@ public:
 
     double calculateYFromX(double const x, double const signOfRoot) const;
     double calculateXFromY(double const y, double const signOfRoot) const;
-    double calculateYFromXWithoutCenter(double const x, double const signOfRoot) const;    double calculateXFromYWithoutCenter(double const y, double const signOfRoot) const;
+    double calculateYFromXWithoutCenter(double const x, double const signOfRoot) const;
+    double calculateXFromYWithoutCenter(double const y, double const signOfRoot) const;
 
     std::string getDisplayableString() const;
 

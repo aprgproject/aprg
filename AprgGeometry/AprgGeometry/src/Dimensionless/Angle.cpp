@@ -22,7 +22,8 @@ Angle::Angle(AngleUnitType const angleUnitType, double const angleValue)
     : m_angleValueInDegrees(calculateAngleValueInDegrees(angleUnitType, angleValue))
 {}
 
-bool Angle::operator==(Angle const& angle) const{
+bool Angle::operator==(Angle const& angle) const
+{
     return isAlmostEqual(m_angleValueInDegrees, angle.m_angleValueInDegrees);
 }
 

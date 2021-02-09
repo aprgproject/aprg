@@ -106,7 +106,8 @@ Points Hyperbola::getVertices() const
 
 Points Hyperbola::getPointsForShape(double const interval) const
 {
-    Points result;    if(m_aValue!=0 && m_bValue!=0)
+    Points result;
+    if(m_aValue!=0 && m_bValue!=0)
     {
         Points pointsInFirstQuarter(getPointsInTraversingXAndY(1, 1, interval));
         Points pointsInFourthQuarter(getPointsInTraversingXAndY(1, -1, interval));
@@ -131,7 +132,8 @@ Lines Hyperbola::getAsymptotes() const
 
 double Hyperbola::calculateYFromX(double const x, double const signOfRoot) const
 {
-    return pow(pow((x-m_center.getX())/m_aValue, 2) - 1, 0.5)*signOfRoot*m_bValue + m_center.getY();}
+    return pow(pow((x-m_center.getX())/m_aValue, 2) - 1, 0.5)*signOfRoot*m_bValue + m_center.getY();
+}
 
 double Hyperbola::calculateXFromY(double const y, double const signOfRoot) const
 {

@@ -8,6 +8,7 @@
 #include <TwoDimensions/Line.hpp>
 #include <TwoDimensions/Parabola.hpp>
 #include <TwoDimensions/Point.hpp>
+#include <TwoDimensions/PolarCoordinate.hpp>
 #include <TwoDimensions/Polygon.hpp>
 #include <TwoDimensions/Polynomial.hpp>
 #include <TwoDimensions/Quadrants.hpp>
@@ -57,8 +58,12 @@ Point popNearestPoint(Points & points, Point const& point);
 Point rotateAxisByAngle(Point const& point, Dimensionless::Angle const& angle);
 Point rotateAxisBackByAngle(Point const& point, Dimensionless::Angle const& angle);
 
+Point convertFromPolarCoordinates(PolarCoordinate const& coordinate);
+PolarCoordinate convertToPolarCoordinate(Point const& point);
+
 template<ParabolaOrientation parabolaOrientation> Points getIntersectionsOfParabolaAndLine(Parabola<parabolaOrientation> const& parabola, Line const& line);
-template<> Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::PolynomialX> const& parabola, Line const& line);template<> Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::PolynomialY> const& parabola, Line const& line);
+template<> Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::PolynomialX> const& parabola, Line const& line);
+template<> Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::PolynomialY> const& parabola, Line const& line);
 
 Points getConnectedPointsUsingALine(Points const& inputPoints, double const interval);
 Points getMergedPointsInIncreasingX(Points const& firstPointsToBeMerged, Points const& secondPointsToBeMerged);//UT
