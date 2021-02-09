@@ -7,10 +7,10 @@
 #include <cmath>
 
 using namespace alba::mathHelper;
+using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace TwoDimensions
 {
@@ -90,11 +90,10 @@ double Circle::getEccentricity() const
 
 bool Circle::isInside(Point const& point) const
 {
-    return twoDimensionsHelper::getDistance(m_center, point) <= m_radius;
+    return getDistance(m_center, point) <= m_radius;
 }
 
-Points Circle::getLocus(double const interval) const //points for circumference
-{
+Points Circle::getLocus(double const interval) const //points for circumference{
     Points result;
     Points pointsInFirstQuarter(getPointsInTraversingXAndY(1, 1, interval));
     Points pointsInSecondQuarter(getPointsInTraversingXAndY(-1, 1, interval));
@@ -227,23 +226,22 @@ Points Circle::getPointsInTraversingXAndY(double const signOfX, double const sig
     Points pointsFromTraversingY(getPointsInTraversingY(signOfX, signOfY, interval));
     if(signOfX>0 && signOfY>0)
     {
-        result = twoDimensionsHelper::getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
+        result = getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
     else if(signOfX<0 && signOfY>0)
     {
-        result = twoDimensionsHelper::getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
+        result = getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
     else if(signOfX<0 && signOfY<0)
     {
-        result = twoDimensionsHelper::getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
+        result = getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
     else if(signOfX>0 && signOfY<0)
     {
-        result = twoDimensionsHelper::getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
+        result = getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
     return result;
 }
-
 Points Circle::getPointsInTraversingY(double const signOfX, double const signOfY, double const interval) const
 {
     Points result;

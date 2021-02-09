@@ -9,10 +9,10 @@
 #include <iterator>
 
 using namespace alba::mathHelper;
+using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace TwoDimensions
 {
@@ -236,18 +236,17 @@ void Line::getPointsForLineWithSlope(Points & points, Point const& first, Point 
     minimumXAndY.saveMinimumXAndY(second);
     maximumXAndY.saveMaximumXAndY(first);
     maximumXAndY.saveMaximumXAndY(second);
-    twoDimensionsHelper::addPointIfInsideTwoPoints(pointsAtBorder, Point(first.getX(), calculateYFromX(first.getX())), minimumXAndY, maximumXAndY);
-    twoDimensionsHelper::addPointIfInsideTwoPoints(pointsAtBorder, Point(calculateXFromY(first.getY()), first.getY()), minimumXAndY, maximumXAndY);
-    twoDimensionsHelper::addPointIfInsideTwoPoints(pointsAtBorder, Point(second.getX(), calculateYFromX(second.getX())), minimumXAndY, maximumXAndY);
-    twoDimensionsHelper::addPointIfInsideTwoPoints(pointsAtBorder, Point(calculateXFromY(second.getY()), second.getY()), minimumXAndY, maximumXAndY);
+    addPointIfInsideTwoPoints(pointsAtBorder, Point(first.getX(), calculateYFromX(first.getX())), minimumXAndY, maximumXAndY);
+    addPointIfInsideTwoPoints(pointsAtBorder, Point(calculateXFromY(first.getY()), first.getY()), minimumXAndY, maximumXAndY);
+    addPointIfInsideTwoPoints(pointsAtBorder, Point(second.getX(), calculateYFromX(second.getX())), minimumXAndY, maximumXAndY);
+    addPointIfInsideTwoPoints(pointsAtBorder, Point(calculateXFromY(second.getY()), second.getY()), minimumXAndY, maximumXAndY);
     if(pointsAtBorder.size()>=2)
     {
-        Point startingPoint(twoDimensionsHelper::popNearestPoint(pointsAtBorder, first));
-        Point endPoint(twoDimensionsHelper::popNearestPoint(pointsAtBorder, second));
+        Point startingPoint(popNearestPoint(pointsAtBorder, first));
+        Point endPoint(popNearestPoint(pointsAtBorder, second));
         bool isDirectionAscendingForX = startingPoint.getX() <= endPoint.getX();
 
-        Points pointsFromXCoordinate;
-        AlbaRange<double> rangeForX(startingPoint.getX(), endPoint.getX(), interval);
+        Points pointsFromXCoordinate;        AlbaRange<double> rangeForX(startingPoint.getX(), endPoint.getX(), interval);
         rangeForX.traverse([&](double const traverseValueOfX)
         {
             pointsFromXCoordinate.emplace_back(traverseValueOfX, calculateYFromX(traverseValueOfX));
@@ -262,15 +261,14 @@ void Line::getPointsForLineWithSlope(Points & points, Point const& first, Point 
 
         if(isDirectionAscendingForX)
         {
-            points = twoDimensionsHelper::getMergedPointsInIncreasingX(pointsFromXCoordinate, pointsFromYCoordinate);
+            points = getMergedPointsInIncreasingX(pointsFromXCoordinate, pointsFromYCoordinate);
         }
         else
         {
-            points = twoDimensionsHelper::getMergedPointsInDecreasingX(pointsFromXCoordinate, pointsFromYCoordinate);
+            points = getMergedPointsInDecreasingX(pointsFromXCoordinate, pointsFromYCoordinate);
         }
     }
 }
-
 
 void Line::mergePointsFromPointsFromXAndY(Points & points, Points const& pointsFromXCoordinate, Points const& pointsFromYCoordinate, bool const isDirectionAscendingForX) const
 {

@@ -7,10 +7,10 @@
 #include <cmath>
 
 using namespace alba::mathHelper;
+using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace TwoDimensions
 {
@@ -283,23 +283,22 @@ Points Ellipse::getPointsInTraversingXAndY(double const signOfX, double const si
     Points pointsFromTraversingY(getPointsInTraversingY(signOfX, signOfY, interval));
     if(signOfX>0 && signOfY>0)
     {
-        result = twoDimensionsHelper::getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
+        result = getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
     else if(signOfX<0 && signOfY>0)
     {
-        result = twoDimensionsHelper::getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
+        result = getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
     else if(signOfX<0 && signOfY<0)
     {
-        result = twoDimensionsHelper::getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
+        result = getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
     else if(signOfX>0 && signOfY<0)
     {
-        result = twoDimensionsHelper::getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
+        result = getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
     return result;
 }
-
 Points Ellipse::getPointsInTraversingY(double const signOfX, double const signOfY, double const interval) const
 {
     Points result;

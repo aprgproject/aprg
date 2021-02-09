@@ -7,10 +7,10 @@
 #include <cmath>
 
 using namespace alba::mathHelper;
+using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace TwoDimensions
 {
@@ -164,23 +164,22 @@ Points Hyperbola::getPointsInTraversingXAndY(double const signOfX, double const 
     Points pointsFromTraversingY(getPointsInTraversingY(signOfX, signOfY, interval));
     if(signOfX>0 && signOfY>0) //first quarter
     {
-        result = twoDimensionsHelper::getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
+        result = getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
     else if(signOfX>0 && signOfY<0) //fourth quarter
     {
-        result = twoDimensionsHelper::getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
+        result = getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
     else if(signOfX<0 && signOfY>0) //second quarter
     {
-        result = twoDimensionsHelper::getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
+        result = getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
     else if(signOfX<0 && signOfY<0) //third quarter
     {
-        result = twoDimensionsHelper::getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
+        result = getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
     return result;
 }
-
 Points Hyperbola::getPointsInTraversingY(double const signOfX, double const signOfY, double const interval) const
 {
     Points result;
