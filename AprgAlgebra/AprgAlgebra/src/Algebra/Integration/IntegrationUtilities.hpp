@@ -48,13 +48,13 @@ Term getAverageValueInBetweenTwoValues(
         AlbaNumber const& lowerValueInInterval,
         AlbaNumber const& higherValueInInterval);
 
-Term evaluateAndGetDifference(
+Term evaluateValuesAndGetDifference(
         Term const& term,
         std::string const& variableName,
         AlbaNumber const& lowerValueInInterval,
         AlbaNumber const& higherValueInInterval);
 
-Term evaluateAndGetDifference(
+Term evaluateTermsAndGetDifference(
         Term const& term,
         std::string const& variableName,
         Term const& lowerValueTerm,
@@ -67,7 +67,8 @@ Term evaluate(
 
 Term getAreaUnderACurveUsingReimannSums(
         Term const& term,
-        std::string const& variableName,        AlbaNumber const& lowerValueInInterval,
+        std::string const& variableName,
+        AlbaNumber const& lowerValueInInterval,
         AlbaNumber const& higherValueInInterval);
 
 LowerAndHigherValues getApproximateValuesForDefiniteIntegral(

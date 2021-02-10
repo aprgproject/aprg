@@ -24,7 +24,7 @@ Term getAreaInBetweenTwoTermsInAnInterval(
 {
     Integration integration(variableName);
     Term difference(higherTerm-lowerTerm);
-    return integration.integrateWithDefiniteValues(difference, lowerValueInInterval, higherValueInInterval);
+    return integration.integrateAtDefiniteValues(difference, lowerValueInInterval, higherValueInInterval);
 }
 
 Term getVolumeUsingOnCrossSectionalArea(
@@ -34,10 +34,11 @@ Term getVolumeUsingOnCrossSectionalArea(
         Term const& higherValueTerm)
 {
     Integration integration(variableName);
-    return evaluateAndGetDifference(integration.integrate(crossSectionalArea), variableName, lowerValueTerm, higherValueTerm);
+    return integration.integrateAtDefiniteTerms(crossSectionalArea, lowerValueTerm, higherValueTerm);
 }
 
-Term getVolumeUsingOnSolidOfRevolution(        Term const& term,
+Term getVolumeUsingOnSolidOfRevolution(
+        Term const& term,
         string const& variableName,
         Term const& lowerValueTerm,
         Term const& higherValueTerm)
@@ -51,10 +52,11 @@ Term getVolumeUsingOnSolidOfRevolution(        Term const& term,
 
     Integration integration(variableName);
     Term termToIntegrate = getPiAsTerm()*(term^Term(2));
-    return evaluateAndGetDifference(integration.integrate(termToIntegrate), variableName, lowerValueTerm, higherValueTerm);
+    return integration.integrateAtDefiniteTerms(termToIntegrate, lowerValueTerm, higherValueTerm);
 }
 
-Term getVolumeUsingOnSolidOfRevolution(        Term const& lowerFunctionTerm,
+Term getVolumeUsingOnSolidOfRevolution(
+        Term const& lowerFunctionTerm,
         Term const& higherFunctionTerm,
         string const& variableName,
         Term const& lowerValueTerm,
@@ -69,10 +71,11 @@ Term getVolumeUsingOnSolidOfRevolution(        Term const& lowerFunctionTerm,
 
     Integration integration(variableName);
     Term termToIntegrate = getPiAsTerm()*((higherFunctionTerm-lowerFunctionTerm)^Term(2));
-    return evaluateAndGetDifference(integration.integrate(termToIntegrate), variableName, lowerValueTerm, higherValueTerm);
+    return integration.integrateAtDefiniteTerms(termToIntegrate, lowerValueTerm, higherValueTerm);
 }
 
-Term getVolumeUsingCylindricalShells(        Term const& term,
+Term getVolumeUsingCylindricalShells(
+        Term const& term,
         string const& variableName,
         Term const& lowerValueTerm,
         Term const& higherValueTerm)
@@ -87,10 +90,11 @@ Term getVolumeUsingCylindricalShells(        Term const& term,
 
     Integration integration(variableName);
     Term termToIntegrate = Term(2)*getPiAsTerm()*(Term(variableName)*term);
-    return evaluateAndGetDifference(integration.integrate(termToIntegrate), variableName, lowerValueTerm, higherValueTerm);
+    return integration.integrateAtDefiniteTerms(termToIntegrate, lowerValueTerm, higherValueTerm);
 }
 
-Term getLengthOfTheEdge(        Term const& term,
+Term getLengthOfTheEdge(
+        Term const& term,
         string const& variableName,
         Term const& lowerValueTerm,
         Term const& higherValueTerm)
@@ -105,10 +109,11 @@ Term getLengthOfTheEdge(        Term const& term,
     Term differentiatedTerm(differentiation.differentiate(term));
     Term termToIntegrate = (Term(1)+(differentiatedTerm^Term(2)))^Term(AlbaNumber::createFraction(1, 2));
     termToIntegrate.simplify();
-    return evaluateAndGetDifference(integration.integrate(termToIntegrate), variableName, lowerValueTerm, higherValueTerm);
+    return integration.integrateAtDefiniteTerms(termToIntegrate, lowerValueTerm, higherValueTerm);
 }
 
-Term getTotalMassOfARod(        Term const& term,
+Term getTotalMassOfARod(
+        Term const& term,
         string const& variableName,
         Term const& lowerValueTerm,
         Term const& higherValueTerm)
@@ -119,10 +124,11 @@ Term getTotalMassOfARod(        Term const& term,
     // The total mass of the rod is the definite integral of p(x) from 0 to L.
 
     Integration integration(variableName);
-    return evaluateAndGetDifference(integration.integrate(term), variableName, lowerValueTerm, higherValueTerm);
+    return integration.integrateAtDefiniteTerms(term, lowerValueTerm, higherValueTerm);
 }
 
-Term getMomentOfMassOfARod(        Term const& term,
+Term getMomentOfMassOfARod(
+        Term const& term,
         string const& variableName,
         Term const& lowerValueTerm,
         Term const& higherValueTerm)
@@ -134,10 +140,11 @@ Term getMomentOfMassOfARod(        Term const& term,
 
     Integration integration(variableName);
     Term termToIntegrate = Term(variableName)*term;
-    return evaluateAndGetDifference(integration.integrate(termToIntegrate), variableName, lowerValueTerm, higherValueTerm);
+    return integration.integrateAtDefiniteTerms(termToIntegrate, lowerValueTerm, higherValueTerm);
 }
 
-Term getCenterOfMassOfARod(        Term const& term,
+Term getCenterOfMassOfARod(
+        Term const& term,
         string const& variableName,
         Term const& lowerValueTerm,
         Term const& higherValueTerm)
@@ -153,10 +160,11 @@ Term getTotalMassOfALamina(
         Term const& higherValueTerm)
 {
     Integration integration(variableName);
-    return evaluateAndGetDifference(integration.integrate(term), variableName, lowerValueTerm, higherValueTerm);
+    return integration.integrateAtDefiniteTerms(term, lowerValueTerm, higherValueTerm);
 }
 
-TermPair getMomentOfMassOfALamina(        Term const& term,
+TermPair getMomentOfMassOfALamina(
+        Term const& term,
         string const& variableName,
         Term const& lowerValueTerm,
         Term const& higherValueTerm)
@@ -165,10 +173,11 @@ TermPair getMomentOfMassOfALamina(        Term const& term,
     Term termToIntegrateInX = Term(AlbaNumber::createFraction(1, 2)) * Term(term^2);
     Term termToIntegrateInY = Term(variableName) * Term(term);
     TermPair xyPair;
-    xyPair.first = evaluateAndGetDifference(integration.integrate(termToIntegrateInX), variableName, lowerValueTerm, higherValueTerm);
-    xyPair.second = evaluateAndGetDifference(integration.integrate(termToIntegrateInY), variableName, lowerValueTerm, higherValueTerm);
+    xyPair.first = integration.integrateAtDefiniteTerms(termToIntegrateInX, lowerValueTerm, higherValueTerm);
+    xyPair.second = integration.integrateAtDefiniteTerms(termToIntegrateInY, lowerValueTerm, higherValueTerm);
     return xyPair;
 }
+
 TermPair getCenterOfMassOfALamina(
         Term const& term,
         string const& variableName,
@@ -189,10 +198,11 @@ TermPair getCentroid(
         Term const& higherValueTerm)
 {
     Integration integration(variableName);
-    Term area(evaluateAndGetDifference(integration.integrate(term), variableName, lowerValueTerm, higherValueTerm));
+    Term area(integration.integrateAtDefiniteTerms(term, lowerValueTerm, higherValueTerm));
     TermPair xyPair(getMomentOfMassOfALamina(term, variableName, lowerValueTerm, higherValueTerm));
     xyPair.first = xyPair.first / area;
-    xyPair.second = xyPair.second / area;    return xyPair;
+    xyPair.second = xyPair.second / area;
+    return xyPair;
 }
 
 Term getWork(
@@ -202,10 +212,11 @@ Term getWork(
         Term const& higherValueTerm)
 {
     Integration integration(variableName);
-    return evaluateAndGetDifference(integration.integrate(force), variableName, lowerValueTerm, higherValueTerm);
+    return integration.integrateAtDefiniteTerms(force, lowerValueTerm, higherValueTerm);
 }
 
-Term getLiquidPressure(        Term const& massDensity,
+Term getLiquidPressure(
+        Term const& massDensity,
         Term const& accelerationDueToGravity,
         Term const& length,
         string const& depth,
@@ -214,10 +225,11 @@ Term getLiquidPressure(        Term const& massDensity,
 {
     Integration integration(depth);
     Term termToIntegrate = massDensity*accelerationDueToGravity*Term(depth)*length;
-    return evaluateAndGetDifference(integration.integrate(termToIntegrate), depth, lowerValueTerm, higherValueTerm);
+    return integration.integrateAtDefiniteTerms(termToIntegrate, lowerValueTerm, higherValueTerm);
 }
 
-Term integrateInPolarCoordinates(        Term const& radiusInTermsOfTheta,
+Term integrateInPolarCoordinates(
+        Term const& radiusInTermsOfTheta,
         string const& thetaName,
         Term const& lowerValueTerm,
         Term const& higherValueTerm)
@@ -225,9 +237,9 @@ Term integrateInPolarCoordinates(        Term const& radiusInTermsOfTheta,
     Integration integration(thetaName);
     Term radiusSquared(radiusInTermsOfTheta^2);
     radiusSquared.simplify();
-    Term integratedRadiusSquared(integration.integrate(radiusSquared));
-    return evaluateAndGetDifference(integratedRadiusSquared, thetaName, lowerValueTerm, higherValueTerm);
+    return integration.integrateAtDefiniteTerms(radiusSquared, lowerValueTerm, higherValueTerm);
 }
 
 }
+
 }

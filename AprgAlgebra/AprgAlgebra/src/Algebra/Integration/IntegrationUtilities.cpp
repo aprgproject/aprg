@@ -5,7 +5,8 @@
 #include <Algebra/Limit/Limit.hpp>
 #include <Algebra/Limit/LimitsAtInfinity/LimitsAtInfinity.hpp>
 #include <Algebra/Integration/Integration.hpp>
-#include <Algebra/Integration/IntegrationForFiniteCalculus.hpp>#include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableEqualitySolver.hpp>
+#include <Algebra/Integration/IntegrationForFiniteCalculus.hpp>
+#include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableEqualitySolver.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Summation/Summation.hpp>
@@ -14,6 +15,7 @@
 #include <Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -37,10 +39,11 @@ bool isTheSecondFundamentalTheoremOfCalculusTrue(
     Term simplifiedTerm(term);
     simplifiedTerm.simplify();
     bool isGPrimeEqualToF = gPrime == simplifiedTerm;
-    bool isDefiniteIntegralEqualToDifference = integration.integrateWithDefiniteValues(term, a, b)
-            == evaluateAndGetDifference(g, variableName, a, b);
+    bool isDefiniteIntegralEqualToDifference = integration.integrateAtDefiniteValues(term, a, b)
+            == evaluateValuesAndGetDifference(g, variableName, a, b);
     return isGPrimeEqualToF && isDefiniteIntegralEqualToDifference;
 }
+
 bool isTheIntegralDefinitionForFiniteCalculusIsTrue(
         Term const& term,
         string const& variableName,
@@ -53,7 +56,7 @@ bool isTheIntegralDefinitionForFiniteCalculusIsTrue(
     // The summation of terms from a to b-1.
     IntegrationForFiniteCalculus integration(variableName);
     Summation summation(term, variableName);
-    return integration.integrateWithDefiniteValues(term, a, b) == summation.getSum(Term(a), Term(b-1));
+    return integration.integrateAtDefiniteValues(term, a, b) == summation.getSum(Term(a), Term(b-1));
 }
 
 bool isAreaUnderTheCurveEqualToDefiniteIntegral(
@@ -63,7 +66,7 @@ bool isAreaUnderTheCurveEqualToDefiniteIntegral(
         AlbaNumber const& b)
 {
     Integration integration(variableName);
-    return integration.integrateWithDefiniteValues(term, a, b)
+    return integration.integrateAtDefiniteValues(term, a, b)
             == getAreaUnderACurveUsingReimannSums(term, variableName, a, b);
 }
 
@@ -92,11 +95,11 @@ Term getAverageValueInBetweenTwoValues(
         AlbaNumber const& higherValueInInterval)
 {
     Integration integration(variableName);
-    return integration.integrateWithDefiniteValues(term, lowerValueInInterval, higherValueInInterval)
+    return integration.integrateAtDefiniteValues(term, lowerValueInInterval, higherValueInInterval)
             / Term(higherValueInInterval-lowerValueInInterval);
 }
 
-Term evaluateAndGetDifference(
+Term evaluateValuesAndGetDifference(
         Term const& term,
         string const& variableName,
         AlbaNumber const& lowerValueInInterval,
@@ -108,7 +111,7 @@ Term evaluateAndGetDifference(
     return result;
 }
 
-Term evaluateAndGetDifference(
+Term evaluateTermsAndGetDifference(
         Term const& term,
         string const& variableName,
         Term const& lowerValueTerm,
@@ -144,7 +147,8 @@ Term evaluate(
 
 Term getAreaUnderACurveUsingReimannSums(
         Term const& term,
-        string const& variableName,        AlbaNumber const& lowerValueInInterval,
+        string const& variableName,
+        AlbaNumber const& lowerValueInInterval,
         AlbaNumber const& higherValueInInterval)
 {
     AlbaNumber deltaOfValues(higherValueInInterval-lowerValueInInterval);

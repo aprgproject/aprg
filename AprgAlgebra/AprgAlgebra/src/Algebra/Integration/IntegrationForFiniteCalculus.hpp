@@ -22,7 +22,7 @@ public:
     Term integrate(Function const& functionObject) const;
 
     Term integrateWithPlusC(Term const& term) const;
-    Term integrateWithDefiniteValues(
+    Term integrateAtDefiniteValues(
             Term const& term,
             AlbaNumber const& lowerValueInInterval,
             AlbaNumber const& higherValueInInterval) const;

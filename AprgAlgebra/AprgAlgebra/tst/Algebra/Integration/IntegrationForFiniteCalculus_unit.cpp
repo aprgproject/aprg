@@ -118,12 +118,12 @@ TEST(IntegrationForFiniteCalculusTest, IntegrateWithPlusCWorks)
     EXPECT_EQ(termToExpect, termToVerify);
 }
 
-TEST(IntegrationForFiniteCalculusTest, IntegrateWithDefiniteValuesWorks)
+TEST(IntegrationForFiniteCalculusTest, IntegrateAtDefiniteValuesWorks)
 {
     IntegrationForFiniteCalculus integrationForX("x");
     Term x("x");
 
-    EXPECT_EQ(Term(9), integrationForX.integrateWithDefiniteValues(x, 4, 6));
+    EXPECT_EQ(Term(9), integrationForX.integrateAtDefiniteValues(x, 4, 6));
 }
 
 TEST(IntegrationForFiniteCalculusTest, IntegrateTermWorks)

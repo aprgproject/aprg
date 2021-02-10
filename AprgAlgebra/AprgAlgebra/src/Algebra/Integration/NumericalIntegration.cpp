@@ -85,7 +85,7 @@ Term getActualTruncationErrorInTrapezoidalRule(
         unsigned int const numberOfSamples)
 {
     Integration integration(variableName);
-    return integration.integrateWithDefiniteValues(term, lowerValueInInterval, higherValueInInterval)
+    return integration.integrateAtDefiniteValues(term, lowerValueInInterval, higherValueInInterval)
             - getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(term, variableName, lowerValueInInterval, higherValueInInterval, numberOfSamples);
 }
 
@@ -97,7 +97,7 @@ Term getActualTruncationErrorInSimpsonRule(
         unsigned int const numberOfSamples)
 {
     Integration integration(variableName);
-    return integration.integrateWithDefiniteValues(term, lowerValueInInterval, higherValueInInterval)
+    return integration.integrateAtDefiniteValues(term, lowerValueInInterval, higherValueInInterval)
             - getAnApproximateOfDefiniteIntegralUsingSimpsonRule(term, variableName, lowerValueInInterval, higherValueInInterval, numberOfSamples);
 }
 
