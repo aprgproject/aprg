@@ -89,11 +89,10 @@ Term IntegrationForFiniteCalculus::integrateWithDefiniteValues(
         AlbaNumber const& lowerValueInInterval,
         AlbaNumber const& higherValueInInterval) const
 {
-    return substituteValuesAndGetDifference(
+    return evaluateAndGetDifference(
                 integrateTerm(term),
                 m_nameOfVariableToIntegrate,
-                lowerValueInInterval,
-                higherValueInInterval);
+                lowerValueInInterval,                higherValueInInterval);
 }
 
 Term IntegrationForFiniteCalculus::integrateTerm(Term const& term) const

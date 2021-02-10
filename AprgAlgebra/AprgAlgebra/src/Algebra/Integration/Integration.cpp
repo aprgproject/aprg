@@ -46,10 +46,18 @@ Integration::Integration(
     : m_nameOfVariableToIntegrate(nameOfVariableToIntegrate)
 {}
 
+bool Integration::isConvergent(
+        Term const& term,
+        AlbaNumber const& lowerValueInInterval,
+        AlbaNumber const& higherValueInInterval)
+{
+    Term integratedTerm(integrateWithDefiniteValues(term, lowerValueInInterval, higherValueInInterval));
+    return isAFiniteConstant(integratedTerm);
+}
+
 Term Integration::integrate(
         Term const& term) const
-{
-    IntegrationHistory::getInstance().clear();
+{    IntegrationHistory::getInstance().clear();
 
     return integrateIntenally(term);
 }
@@ -109,17 +117,27 @@ Term Integration::integrateWithDefiniteValues(
         AlbaNumber const& lowerValueInInterval,
         AlbaNumber const& higherValueInInterval) const
 {
-    return substituteValuesAndGetDifference(
+    return evaluateAndGetDifference(
                 integrateIntenally(term),
                 m_nameOfVariableToIntegrate,
-                lowerValueInInterval,
-                higherValueInInterval);
+                lowerValueInInterval,                higherValueInInterval);
+}
+
+Term Integration::integrateWithDefiniteValues(
+        Term const& term,
+        Term const& lowerValue,
+        Term const& higherValue) const
+{
+    return evaluateAndGetDifference(
+                integrateIntenally(term),
+                m_nameOfVariableToIntegrate,
+                lowerValue,
+                higherValue);
 }
 
 Monomial Integration::integrateConstant(
         Constant const& constant) const
-{
-    return Monomial(constant.getNumberConstReference(), {{m_nameOfVariableToIntegrate, 1}});
+{    return Monomial(constant.getNumberConstReference(), {{m_nameOfVariableToIntegrate, 1}});
 }
 
 Monomial Integration::integrateVariable(

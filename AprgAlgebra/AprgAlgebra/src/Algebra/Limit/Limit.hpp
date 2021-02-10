@@ -65,10 +65,14 @@ AlbaNumber getValueUsingLinearInterpolation(
         AlbaNumber const& output1,
         AlbaNumber const& output2);
 
-Term getLimitUsingLhopitalsRule(
+Term getLimit(
         Term const& term,
         std::string const& variableName,
         AlbaNumber const& value);
+
+Term getLimitUsingLhopitalsRule(
+        Term const& term,
+        std::string const& variableName,        AlbaNumber const& value);
 
 Term getTermUsingLhopitalsRule(
         Term const& term,

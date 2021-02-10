@@ -2,18 +2,18 @@
 
 #include <Algebra/Differentiation/Differentiation.hpp>
 #include <Algebra/Extrema/ExtremaUtilities.hpp>
+#include <Algebra/Limit/Limit.hpp>
 #include <Algebra/Limit/LimitsAtInfinity/LimitsAtInfinity.hpp>
 #include <Algebra/Integration/Integration.hpp>
-#include <Algebra/Integration/IntegrationForFiniteCalculus.hpp>
-#include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableEqualitySolver.hpp>
+#include <Algebra/Integration/IntegrationForFiniteCalculus.hpp>#include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableEqualitySolver.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Summation/Summation.hpp>
 #include <Algebra/Term/Operators/TermOperators.hpp>
+#include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 #include <Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 using namespace std;
-
 namespace alba
 {
 
@@ -38,10 +38,9 @@ bool isTheSecondFundamentalTheoremOfCalculusTrue(
     simplifiedTerm.simplify();
     bool isGPrimeEqualToF = gPrime == simplifiedTerm;
     bool isDefiniteIntegralEqualToDifference = integration.integrateWithDefiniteValues(term, a, b)
-            == substituteValuesAndGetDifference(g, variableName, a, b);
+            == evaluateAndGetDifference(g, variableName, a, b);
     return isGPrimeEqualToF && isDefiniteIntegralEqualToDifference;
 }
-
 bool isTheIntegralDefinitionForFiniteCalculusIsTrue(
         Term const& term,
         string const& variableName,
@@ -97,41 +96,55 @@ Term getAverageValueInBetweenTwoValues(
             / Term(higherValueInInterval-lowerValueInInterval);
 }
 
-Term substituteValuesAndGetDifference(
+Term evaluateAndGetDifference(
         Term const& term,
         string const& variableName,
         AlbaNumber const& lowerValueInInterval,
         AlbaNumber const& higherValueInInterval)
 {
-    SubstitutionOfVariablesToValues substitution({{variableName, lowerValueInInterval}});
-    Term integralWithLowerValue(substitution.performSubstitutionTo(term));
-    substitution.putVariableWithValue(variableName, higherValueInInterval);
-    Term integralWithHigherValue(substitution.performSubstitutionTo(term));
-    Term result(integralWithHigherValue-integralWithLowerValue);
+    Term result(evaluate(term, variableName, Term(higherValueInInterval))
+                - evaluate(term, variableName, Term(lowerValueInInterval)));
     result.simplify();
     return result;
 }
 
-Term substituteTermsAndGetDifference(
+Term evaluateAndGetDifference(
         Term const& term,
         string const& variableName,
         Term const& lowerValueTerm,
         Term const& higherValueTerm)
 {
-    SubstitutionOfVariablesToTerms substitution({{variableName, lowerValueTerm}});
-    Term integralWithLowerValueTerm(substitution.performSubstitutionTo(term));
-    substitution.putVariableWithTerm(variableName, higherValueTerm);
-    Term integralWithHigherValueTerm(substitution.performSubstitutionTo(term));
-    return integralWithHigherValueTerm-integralWithLowerValueTerm;
-    Term result(integralWithHigherValueTerm-integralWithLowerValueTerm);
+    Term result(evaluate(term, variableName, higherValueTerm)
+                - evaluate(term, variableName, lowerValueTerm));
     result.simplify();
+    return result;
+}
+
+Term evaluate(
+        Term const& term,
+        std::string const& variableName,
+        Term const& value)
+{
+    Term result;
+    if(isTheValue(value, AlbaNumber(AlbaNumber::Value::PositiveInfinity)))
+    {
+        result = getLimit(term, variableName, AlbaNumber(AlbaNumber::Value::PositiveInfinity));
+    }
+    else if(isTheValue(value, AlbaNumber(AlbaNumber::Value::NegativeInfinity)))
+    {
+        result = getLimit(term, variableName, AlbaNumber(AlbaNumber::Value::NegativeInfinity));
+    }
+    else
+    {
+        SubstitutionOfVariablesToTerms substitution({{variableName, value}});
+        result = substitution.performSubstitutionTo(term);
+    }
     return result;
 }
 
 Term getAreaUnderACurveUsingReimannSums(
         Term const& term,
-        string const& variableName,
-        AlbaNumber const& lowerValueInInterval,
+        string const& variableName,        AlbaNumber const& lowerValueInInterval,
         AlbaNumber const& higherValueInInterval)
 {
     AlbaNumber deltaOfValues(higherValueInInterval-lowerValueInInterval);
