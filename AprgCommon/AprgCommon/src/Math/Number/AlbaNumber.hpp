@@ -21,7 +21,8 @@ public:
         Unknown,
         PositiveInfinity,
         NegativeInfinity,
-        NotANumber,        pi,
+        NotANumber,
+        pi,
         e
     };
     enum class Type
@@ -158,6 +159,7 @@ public:
     Value getDefinedValue() const;
     FractionData getFractionData() const;
     ComplexNumberData getComplexNumberData() const;
+
     unsigned int getNumberDataSize() const;
     std::string getDisplayableString() const;
 

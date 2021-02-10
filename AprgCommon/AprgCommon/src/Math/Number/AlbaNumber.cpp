@@ -115,7 +115,8 @@ AlbaNumber::AlbaNumber(Value const value)
         break;
     case Value::PositiveInfinity:
         m_data.doubleData = POSITIVE_INFINITY_DOUBLE_VALUE;
-        break;    case Value::NegativeInfinity:
+        break;
+    case Value::NegativeInfinity:
         m_data.doubleData = NEGATIVE_INFINITY_DOUBLE_VALUE;
         break;
     case Value::NotANumber:
@@ -960,7 +961,8 @@ AlbaNumber::Value AlbaNumber::getDefinedValue() const
 
 AlbaNumber::FractionData AlbaNumber::getFractionData() const
 {
-    FractionData result{0, 0};    if(m_type==Type::Integer)
+    FractionData result{0, 0};
+    if(m_type==Type::Integer)
     {
         result.numerator = static_cast<int>(m_data.intData);
         result.denominator = 1U;
@@ -1175,6 +1177,7 @@ AlbaNumber AlbaNumber::addIntegerAndFractionAndReturnNumber(
     shouldBeConvertedToDouble = isValueBeyondLimits<int>(numerator);
     return AlbaNumber::createFraction(getIntegerAfterRoundingDoubleValue<int>(numerator), fractionData.denominator);
 }
+
 AlbaNumber AlbaNumber::addFractionAndDoubleAndReturnNumber(FractionData const& fractionData, double const doubleValue) const
 {
     return AlbaNumber(

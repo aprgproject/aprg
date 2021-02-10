@@ -3,7 +3,8 @@
 #include <Algebra/Constructs/ConstructUtilities.hpp>
 #include <Algebra/Differentiation/DerivativeVariableName.hpp>
 #include <Algebra/Differentiation/Differentiation.hpp>
-#include <Algebra/Functions/CommonFunctionLibrary.hpp>#include <Algebra/Integration/Integration.hpp>
+#include <Algebra/Functions/CommonFunctionLibrary.hpp>
+#include <Algebra/Integration/Integration.hpp>
 #include <Algebra/Isolation/IsolationOfOneVariableOnEqualityEquation.hpp>
 #include <Algebra/Limit/Limit.hpp>
 #include <Algebra/Retrieval/SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever.hpp>
@@ -174,7 +175,8 @@ Term getCartesianDerivativeOfTermInPolarCoordinates(
         string const& thetaName)
 {
     Term theta(thetaName);
-    Differentiation differentiation(thetaName);    Term drOverDTheta(differentiation.differentiate(radiusInTermsOfTheta));
+    Differentiation differentiation(thetaName);
+    Term drOverDTheta(differentiation.differentiate(radiusInTermsOfTheta));
     Term sinTheta(sin(theta));
     Term cosTheta(cos(theta));
     Term numerator(createExpressionIfPossible({sinTheta, Term("*"), drOverDTheta, Term("+"), radiusInTermsOfTheta, Term("*"), cosTheta}));
@@ -189,33 +191,15 @@ Term getSlopeOfTermInPolarCoordinates(
         string const& thetaName,
         AlbaNumber const& thetaValue)
 {
-    Term dyOverDx(getCartesianDerivativeOfTermInPolarCoordinates(radiusInTermsOfTheta, thetaName));    SubstitutionOfVariablesToValues substitution{{thetaName, thetaValue}};
+    Term dyOverDx(getCartesianDerivativeOfTermInPolarCoordinates(radiusInTermsOfTheta, thetaName));
+    SubstitutionOfVariablesToValues substitution{{thetaName, thetaValue}};
     return substitution.performSubstitutionTo(dyOverDx);
 }
 
-Term getLimitOfZeroOverZeroUsingLhopitalsRule(
-        Term const& term,
-        string const& variableName,
-        AlbaNumber const& value)
-{
-    Differentiation differentiation(variableName);
-    TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(term));
-    Term numerator(termsOverTerms.getCombinedNumerator());
-    Term denominator(termsOverTerms.getCombinedDenominator());
-    Term result(getLimit(term, variableName, value));
-    while(isNotANumber(result))
-    {
-        numerator = differentiation.differentiate(numerator);
-        denominator = differentiation.differentiate(denominator);
-        Term simplifiedNextTerm(numerator/denominator);
-        simplifiedNextTerm.simplify();
-        result = getLimit(simplifiedNextTerm, variableName, value);
-    }
-    return result;
-}
 SolutionSet getDifferentiabilityDomain(
         Term const& term,
-        string const& variableName){
+        string const& variableName)
+{
     // This code is not accurate.
     // How about piecewise function?
     // How about absolute value function?
@@ -269,6 +253,7 @@ Equation getIntegralEquationForFirstOrderDifferentialEquation(
     Term dyOverDx = termWithDerivative;
     Term p = -Term(variableNameToExpressionMap.at(yVariableName));
     Term q = retriever.getRemainingTermsExpression();
+
     dyOverDx.simplify();
     p.simplify();
     q.simplify();

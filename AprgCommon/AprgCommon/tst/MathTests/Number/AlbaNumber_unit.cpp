@@ -221,7 +221,8 @@ TEST(AlbaNumberTest, ConstructionWorksWithValue)
     EXPECT_DOUBLE_EQ(2.7182818284590452354, number6.getDouble());
 }
 
-TEST(AlbaNumberTest, ConstructionWorksWithFraction){
+TEST(AlbaNumberTest, ConstructionWorksWithFraction)
+{
     AlbaNumber number1(AlbaNumber::createFraction(-87408, -9802));
     AlbaNumber number2(AlbaNumber::createFraction(-100, 10));
     AlbaNumber number3(AlbaNumber::createFraction(-100, -10));
@@ -1583,7 +1584,8 @@ TEST(AlbaNumberTest, GetDefinedValueWorks)
 
 TEST(AlbaNumberTest, GetFractionDataWorks)
 {
-    AlbaNumber number1;    AlbaNumber number2(-81237);
+    AlbaNumber number1;
+    AlbaNumber number2(-81237);
     AlbaNumber number3(34095093U);
     AlbaNumber number4(1000000000000000000LL);
     AlbaNumber number5(4564.38794);

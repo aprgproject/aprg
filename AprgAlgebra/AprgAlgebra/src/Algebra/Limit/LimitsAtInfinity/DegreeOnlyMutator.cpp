@@ -54,7 +54,8 @@ AlbaNumber DegreeOnlyMutator::getMaxDegreeForVariable(Polynomial const& polynomi
 {
     bool isFirst(true);
     AlbaNumber maxDegreeForVariable;
-    for(Monomial const& monomial : polynomial.getMonomialsConstReference())    {
+    for(Monomial const& monomial : polynomial.getMonomialsConstReference())
+    {
         AlbaNumber currentDegreeForVariable(monomial.getExponentForVariable(m_variableName));
         if(isFirst)
         {
@@ -73,7 +74,8 @@ Monomial DegreeOnlyMutator::getMonomialWithDegree(AlbaNumber const& degree) cons
 {
     Monomial result(1, {{m_variableName, degree}});
     if(degree == 0)
-    {        result = Monomial(1, {});
+    {
+        result = Monomial(1, {});
     }
     return result;
 }

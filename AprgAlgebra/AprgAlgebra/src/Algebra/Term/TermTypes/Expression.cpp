@@ -316,7 +316,8 @@ void Expression::putExpressionWithMultiplication(Expression const& secondExpress
                     thisExpressionTerm,
                     secondExpression.getTermsWithAssociation().getTermsWithDetails());
     }
-    else    {
+    else
+    {
         putTermWithMultiplicationIfNeeded(Term(secondExpression));
     }
 }
@@ -452,7 +453,8 @@ void Expression::putTermWithMultiplication(BaseTerm const& baseTerm)
     }
     case OperatorLevel::RaiseToPower:
     {
-        clearAndPutTermInTermsWithAssociation(Term(Expression(*this)));        m_commonOperatorLevel = OperatorLevel::MultiplicationAndDivision;
+        clearAndPutTermInTermsWithAssociation(Term(Expression(*this)));
+        m_commonOperatorLevel = OperatorLevel::MultiplicationAndDivision;
         putTermForExpressionAndNonExpressions(baseTerm, TermAssociationType::Positive);
         break;
     }

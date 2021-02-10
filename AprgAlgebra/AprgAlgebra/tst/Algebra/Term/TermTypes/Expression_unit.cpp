@@ -614,7 +614,8 @@ TEST(ExpressionTest, PutTermWithMultiplicationUsingExpressionWithSameOperationLe
     {Term(695), Term("*"), Term("x"), Term("/"), Term("y"), Term("+"), Term("interest"), Term("*"), Term("x"), Term("/"), Term("y")}));
     EXPECT_EQ(expressionToExpect1, expression1);
     EXPECT_EQ(expressionToExpect2, expression2);
-    EXPECT_EQ(expressionToExpect3, expression3);    EXPECT_EQ(expressionToExpect4, expression4);
+    EXPECT_EQ(expressionToExpect3, expression3);
+    EXPECT_EQ(expressionToExpect4, expression4);
     EXPECT_EQ(expressionToExpect5, expression5);
 }
 
