@@ -13,10 +13,10 @@ namespace Simplification
 
 void simplifyTermToACommonDenominator(Term & term);
 void simplifyTermByCombiningRadicals(Term & term);
+void simplifyTermByFactoringToNonDoubleFactors(Term & term);
 
 bool simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(Expression & expression);
-bool tryToAddSubtractTermsOverTermsAndReturnIfChanged(Expression & addSubtractExpression);
-void simplifyTermsWithDetailsInExpressionToACommonDenominator(Expression & expression);
+bool tryToAddSubtractTermsOverTermsAndReturnIfChanged(Expression & addSubtractExpression);void simplifyTermsWithDetailsInExpressionToACommonDenominator(Expression & expression);
 
 void simplifyAndCopyTermsAndChangeOperatorLevelIfNeeded(
         TermsWithDetails & termsToUpdate,

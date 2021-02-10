@@ -42,10 +42,22 @@ void simplifyTermByCombiningRadicals(Term & term)
     term.simplify();
 }
 
+void simplifyTermByFactoringToNonDoubleFactors(Term & term)
+{
+    SimplificationOfExpression::ConfigurationDetails configurationDetails(
+                SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
+    configurationDetails.shouldSimplifyToFactors = true;
+    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
+
+    SimplificationOfExpression::ScopeObject scopeObject;
+    scopeObject.setInThisScopeThisConfiguration(configurationDetails);
+
+    term.simplify();
+}
+
 bool simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(
         Expression & expression)
-{
-    bool isChanged(false);
+{    bool isChanged(false);
     if(expression.getCommonOperatorLevel() == OperatorLevel::AdditionAndSubtraction)
     {
         isChanged = tryToAddSubtractTermsOverTermsAndReturnIfChanged(expression);
