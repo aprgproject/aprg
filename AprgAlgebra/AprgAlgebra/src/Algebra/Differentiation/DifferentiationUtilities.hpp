@@ -42,6 +42,7 @@ Term evaluateAtDefiniteTerm(
 Term getDerivativeDefinition(
         Term const& term,
         std::string const& variableName);
+
 Term getDerivativeAtUsingLimit(
         Term const& term,
         std::string const& variableName,
@@ -84,6 +85,7 @@ Term getApproximationUsingTaylorsRemainder(
 SolutionSet getDifferentiabilityDomain(
         Term const& term,
         std::string const& variableName);
+
 Equation getRelationshipOfDerivativeOfTheInverseAndTheDerivative(
         Term const& term,
         std::string const& variableName,

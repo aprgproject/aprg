@@ -341,7 +341,8 @@ double getLogarithm(double const base, double const inputForLogarithm)
     return log10(inputForLogarithm)/log10(base);
 }
 
-AlbaNumber getAverageForAlbaNumber(AlbaNumber const& value1, AlbaNumber const& value2){
+AlbaNumber getAverageForAlbaNumber(AlbaNumber const& value1, AlbaNumber const& value2)
+{
     return (value1+value2)/2;
 }
 

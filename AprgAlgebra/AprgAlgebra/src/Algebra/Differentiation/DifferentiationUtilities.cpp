@@ -12,7 +12,8 @@
 #include <Algebra/Simplification/SimplificationUtilities.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
-#include <Algebra/Solution/DomainAndRange/DomainAndRange.hpp>#include <Algebra/Term/Operators/TermOperators.hpp>
+#include <Algebra/Solution/DomainAndRange/DomainAndRange.hpp>
+#include <Algebra/Term/Operators/TermOperators.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/TermUtilities.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
@@ -26,7 +27,8 @@ using namespace alba::algebra::Simplification;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace{
+namespace
+{
 
 constexpr char const*const X_NAME = "x";
 constexpr char const*const DELTA_X_NAME = "deltaX";
@@ -125,7 +127,8 @@ Term evaluateAtDefiniteTerm(
 
 Term getDerivativeDefinition(
         Term const& term,
-        string const& variableName){
+        string const& variableName)
+{
     Term x(X_NAME);
     Term deltaX(DELTA_X_NAME);
     Term xPlusDeltaX(createExpressionIfPossible({x, Term("+"), deltaX}));
@@ -185,7 +188,8 @@ Term getLogarithmicDifferentiationToYieldDyOverDx(
     if(areTheIntervalsInsideTheInterval(domainOfX, allPositiveNumbers))
     {
         Differentiation differentiation(xVariableName);
-        Term logarithm(ln(yInTermsOfX));        logarithm.simplify();
+        Term logarithm(ln(yInTermsOfX));
+        logarithm.simplify();
         result = yInTermsOfX * differentiation.differentiate(logarithm);
         simplifyToNonDoubleFactors(result);
     }
@@ -206,7 +210,8 @@ Term getCartesianDerivativeOfTermInPolarCoordinates(
     Term denominator(createExpressionIfPossible({drOverDTheta, Term("*"), cosTheta, Term("-"), radiusInTermsOfTheta, Term("*"), sinTheta}));
     Term result(createExpressionIfPossible({numerator, Term("/"), denominator}));
     result.simplify();
-    return result;}
+    return result;
+}
 
 Term getSlopeOfTermInPolarCoordinates(
         Term const& radiusInTermsOfTheta,
@@ -271,7 +276,8 @@ Term getApproximationUsingTaylorsRemainder(
 
 SolutionSet getDifferentiabilityDomain(
         Term const& term,
-        string const& variableName){
+        string const& variableName)
+{
     // This code is not accurate.
     // How about piecewise function?
     // How about absolute value function?
@@ -376,6 +382,7 @@ void simplifyToNonDoubleFactors(
     //term.simplify();
     simplifyTermByFactoringToNonDoubleFactors(term);
 }
+
 
 }
 

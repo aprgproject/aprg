@@ -57,7 +57,8 @@ void simplifyTermByFactoringToNonDoubleFactors(Term & term)
 
 bool simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(
         Expression & expression)
-{    bool isChanged(false);
+{
+    bool isChanged(false);
     if(expression.getCommonOperatorLevel() == OperatorLevel::AdditionAndSubtraction)
     {
         isChanged = tryToAddSubtractTermsOverTermsAndReturnIfChanged(expression);
