@@ -1,6 +1,6 @@
 #include "Summation.hpp"
 
-#include <Algebra/Limit/LimitsAtInfinity/LimitsAtInfinity.hpp>
+#include <Algebra/Limit/Limit.hpp>
 #include <Algebra/Integration/IntegrationForFiniteCalculus.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
@@ -99,8 +99,7 @@ void Summation::calculateSumStartingFromANumber(
 
         if(end.isConstant() && end.getConstantValueConstReference().isPositiveInfinity())
         {
-            LimitsAtInfinity limits(summationModelWithConstant, m_variableToSubstitute);
-            result = limits.getValueAtInfinity(AlbaNumber::Value::PositiveInfinity);
+            result = getLimit(summationModelWithConstant, m_variableToSubstitute, AlbaNumber::Value::PositiveInfinity);
         }
         else
         {
