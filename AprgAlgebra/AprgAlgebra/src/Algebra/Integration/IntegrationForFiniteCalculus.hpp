@@ -56,11 +56,11 @@ private:
     Term integrateSimplifiedExpressionOnly(
             Expression const& expression) const;
     Term integrateTermsInAdditionOrSubtraction(
-            TermsWithDetails const& termsWithDetails) const;
+            Expression const& expression) const;
     Term integrateTermsInMultiplicationOrDivision(
-            TermsWithDetails const& termsWithDetails) const;
+            Expression const& expression) const;
     Term integrateTermsInRaiseToPower(
-            TermsWithDetails const& termsWithDetails) const;
+            Expression const& expression) const;
     Term integrateNonChangingTermRaiseToChangingTerm(
             Term const& base,
             Term const& exponent) const;
