@@ -540,51 +540,49 @@ AlbaNumber AlbaNumber::operator^(AlbaNumber const& second) const
         }
         else if(first.m_type == Type::Integer && second.m_type == Type::Double)
         {
-            result = AlbaNumber(pow(firstInDouble, secondInDouble));
+            result = AlbaNumber(raiseToPower(firstInDouble, secondInDouble));
         }
         else if(first.m_type == Type::Integer && second.m_type == Type::Fraction)
         {
-            result = AlbaNumber(pow(firstInDouble, secondInDouble));
+            result = AlbaNumber(raiseToPower(firstInDouble, secondInDouble));
         }
         else if(first.m_type == Type::Integer && second.m_type == Type::ComplexNumber)
         {
-            result = AlbaNumber(pow(firstInDouble, secondInDouble));
+            result = AlbaNumber(raiseToPower(firstInDouble, secondInDouble));
         }
         else if(first.m_type == Type::Double && second.m_type == Type::Integer)
         {
-            result = AlbaNumber(pow(firstInDouble, secondInDouble));
+            result = AlbaNumber(raiseToPower(firstInDouble, secondInDouble));
         }
         else if(first.m_type == Type::Double && second.m_type == Type::Double)
         {
-            result = AlbaNumber(pow(firstInDouble, secondInDouble));
+            result = AlbaNumber(raiseToPower(firstInDouble, secondInDouble));
         }
         else if(first.m_type == Type::Double && second.m_type == Type::Fraction)
         {
-            result = AlbaNumber(pow(firstInDouble, secondInDouble));
+            result = AlbaNumber(raiseToPower(firstInDouble, secondInDouble));
         }
         else if(first.m_type == Type::Double && second.m_type == Type::ComplexNumber)
         {
-            result = AlbaNumber(pow(firstInDouble, secondInDouble));
+            result = AlbaNumber(raiseToPower(firstInDouble, secondInDouble));
         }
         else if(first.m_type == Type::Fraction && second.m_type == Type::Integer)
-        {
-            result = raisePowerOfFractionsAndIntegerAndReturnNumber(shouldBeConvertedToDouble, first.m_data.fractionData, second.m_data.intData);
+        {            result = raisePowerOfFractionsAndIntegerAndReturnNumber(shouldBeConvertedToDouble, first.m_data.fractionData, second.m_data.intData);
         }
         else if(first.m_type == Type::Fraction && second.m_type == Type::Double)
         {
-            result = AlbaNumber(pow(firstInDouble, secondInDouble));
+            result = AlbaNumber(raiseToPower(firstInDouble, secondInDouble));
         }
         else if(first.m_type == Type::Fraction && second.m_type == Type::Fraction)
         {
-            result = AlbaNumber(pow(firstInDouble, secondInDouble));
+            result = AlbaNumber(raiseToPower(firstInDouble, secondInDouble));
         }
         else if(first.m_type == Type::Fraction && second.m_type == Type::ComplexNumber)
         {
-            result = AlbaNumber(pow(firstInDouble, secondInDouble));
+            result = AlbaNumber(raiseToPower(firstInDouble, secondInDouble));
         }
         else if(first.m_type == Type::ComplexNumber)
-        {
-            ComplexFloat resultComplex(
+        {            ComplexFloat resultComplex(
                         createComplexNumberFromData(first.m_data.complexNumberData)
                         ^ secondInDouble);
             result = createComplexNumber(resultComplex.getRealPart(), resultComplex.getImaginaryPart());
@@ -613,11 +611,10 @@ AlbaNumber AlbaNumber::operator^(AlbaNumber const& second) const
     }
     if(shouldBeConvertedToDouble)
     {
-        result = AlbaNumber(pow(firstInDouble, secondInDouble));
+        result = AlbaNumber(raiseToPower(firstInDouble, secondInDouble));
     }
     return result;
 }
-
 AlbaNumber AlbaNumber::operator+(int const integerValue) const
 {
     return operator+(AlbaNumber(integerValue));
@@ -1125,10 +1122,23 @@ double AlbaNumber::adjustFloatValue(float const value) const
     return result;
 }
 
+double AlbaNumber::raiseToPower(double const base, double const exponent) const
+{
+    double result(0);
+    if(base < 0 && exponent == INFINITY)
+    {
+        result = NAN;
+    }
+    else
+    {
+        result = pow(base, exponent);
+    }
+    return result;
+}
+
 AlbaNumber AlbaNumber::addBothIntegersAndReturnNumber(
         bool & shouldBeConvertedToDouble,
-        long long int const integerValue1,
-        long long int const integerValue2) const
+        long long int const integerValue1,        long long int const integerValue2) const
 {
     shouldBeConvertedToDouble
             = isValueBeyondLimits<long long int>(
