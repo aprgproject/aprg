@@ -11,9 +11,14 @@ namespace algebra
 class RationalizeTermOverTerm
 {
 public:
+    struct RationalizationDetails
+    {
+        bool canBeRationalized;
+        Term termToRationalize;
+        Term otherTerm;
+    };
     RationalizeTermOverTerm();
     RationalizeTermOverTerm(Term const& numerator, Term const& denominator);
-
     Term const& getNumerator() const;
     Term const& getDenominator() const;
     Term getCombinedTerm() const;
@@ -24,30 +29,49 @@ public:
 private:
     void rationalize(Term & termToRationalize, Term & otherTerm);
     void simplifyForRationalize(Term & term);
-    Term getMultiplierToRationalize(Term const& term) const;
-    Polynomial getMultiplierToRationalizeForPolynomial(Polynomial const& polynomial) const;
-    Polynomial getMultiplierToRationalizeForPolynomial(
+    void retrieveTermsForRationalization(
+            Term & rationalizedTerm,
+            Term & multiplier,
+            Term const& term) const;
+    void retrieveTermsForRationalizationForPolynomial(
+            Term & rationalizedTerm,
+            Term & multiplier,
+            Polynomial const& polynomial) const;
+    void retrieveTermsForRationalizationForPolynomial(
+            Term & rationalizedTerm,
+            Term & multiplier,
             Monomial const& firstMonomial,
             Monomial const& secondMonomial) const;
-    Polynomial getMultiplierToRationalizeForPolynomialWhenExponentIsDivisibleByTwo(
+    void retrieveTermsForRationalizationForPolynomialWhenExponentIsDivisibleByTwo(
+            Term & rationalizedTerm,
+            Term & multiplier,
             Monomial const& firstMonomial,
             Monomial const& secondMonomial) const;
-    Polynomial getMultiplierToRationalizeForPolynomialWhenExponentIsDivisibleByThree(
+    void retrieveTermsForRationalizationForPolynomialWhenExponentIsDivisibleByThree(
+            Term & rationalizedTerm,
+            Term & multiplier,
             Monomial const& firstMonomial,
             Monomial const& secondMonomial) const;
-    Expression getMultiplierToRationalizeForExpression(
+    void retrieveTermsForRationalizationForExpression(
+            Term & rationalizedTerm,
+            Term & multiplier,
             Expression const& expression) const;
-    Expression getMultiplierToRationalizeForExpression(
+    void retrieveTermsForRationalizationForExpression(
+            Term & rationalizedTerm,
+            Term & multiplier,
             TermWithDetails const& firstTermWithDetails,
             TermWithDetails const& secondTermWithDetails) const;
-    Expression getMultiplierToRationalizeForExpressionWhenExponentIsDivisibleByTwo(
+    void retrieveTermsForRationalizationForExpressionWhenExponentIsDivisibleByTwo(
+            Term & rationalizedTerm,
+            Term & multiplier,
             TermWithDetails const& firstTermWithDetails,
             TermWithDetails const& secondTermWithDetails) const;
-    Expression getMultiplierToRationalizeForExpressionWhenExponentIsDivisibleByThree(
+    void retrieveTermsForRationalizationForExpressionWhenExponentIsDivisibleByThree(
+            Term & rationalizedTerm,
+            Term & multiplier,
             TermWithDetails const& firstTermWithDetails,
             TermWithDetails const& secondTermWithDetails) const;
-    Term m_numerator;
-    Term m_denominator;
+    Term m_numerator;    Term m_denominator;
 };
 
 }

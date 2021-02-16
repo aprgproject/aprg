@@ -515,12 +515,11 @@ void Integration::integrateNonChangingAndChangingTermsInMultiplicationOrDivision
     }
     else
     {
-        Term nonChangingTermCombined(createTermWithMultiplicationAndDivision(nonChangingTerms));
-        Term changingTermCombined(createTermWithMultiplicationAndDivision(changingTerms));
+        Term nonChangingTermCombined(createTermWithMultiplicationAndDivisionTermsWithDetails(nonChangingTerms));
+        Term changingTermCombined(createTermWithMultiplicationAndDivisionTermsWithDetails(changingTerms));
         Term integratedChangingTerm(integrateInternallyWithPurpose(changingTermCombined, IntegrationPurpose::NoChange));
         if(isNotANumber(integratedChangingTerm))
-        {
-            result = Term(AlbaNumber(AlbaNumber::Value::NotANumber));
+        {            result = Term(AlbaNumber(AlbaNumber::Value::NotANumber));
         }
         else
         {
@@ -952,12 +951,11 @@ void Integration::integrateInMultiplicationOrDivisionByTryingReverseChainRule(
     {
         TermsWithDetails termsInFirstTerms(termsWithDetailsInMultiplicationOrDivision);
         termsInFirstTerms.erase(termsInFirstTerms.cbegin() + i);
-        Term firstTerm(createTermWithMultiplicationAndDivision(termsInFirstTerms));
-        Term secondTerm(createTermWithMultiplicationAndDivision({termsWithDetailsInMultiplicationOrDivision.at(i)}));
+        Term firstTerm(createTermWithMultiplicationAndDivisionTermsWithDetails(termsInFirstTerms));
+        Term secondTerm(createTermWithMultiplicationAndDivisionTermsWithDetails({termsWithDetailsInMultiplicationOrDivision.at(i)}));
         Term innerTermInFirstTerm;
         firstTerm.simplify();
-        secondTerm.simplify();
-        findInnerAndOuterTermForChainRule(innerTermInFirstTerm, firstTerm);
+        secondTerm.simplify();        findInnerAndOuterTermForChainRule(innerTermInFirstTerm, firstTerm);
         if(!innerTermInFirstTerm.isEmpty())
         {
             integrateUsingReverseChainRule(result, firstTerm, innerTermInFirstTerm, secondTerm);
@@ -1086,11 +1084,10 @@ void Integration::integrateAsPolynomialOverPolynomial(
         fractionalPartResult = integrateInternallyWithPurpose(Term(remainingNumerator/remainingDenominator), IntegrationPurpose::NoChange);
         if(isNotANumber(fractionalPartResult))
         {
-            fractionalPartResult = Term();
+            fractionalPartResult.clear();
         }
     }
-    if(!fractionalPartResult.isEmpty())
-    {
+    if(!fractionalPartResult.isEmpty())    {
         result = wholePartResult + fractionalPartResult;
     }
 }
@@ -1393,12 +1390,11 @@ void Integration::integrateUsingIntegrationByPartsByTryingTwoTerms(
             {
                 TermsWithDetails termsInFirstTerms(termsWithDetailsInMultiplicationAndDivision);
                 termsInFirstTerms.erase(termsInFirstTerms.cbegin() + i);
-                Term firstTerm(createTermWithMultiplicationAndDivision(termsInFirstTerms));
-                Term secondTerm(createTermWithMultiplicationAndDivision({termsWithDetailsInMultiplicationAndDivision.at(i)}));
+                Term firstTerm(createTermWithMultiplicationAndDivisionTermsWithDetails(termsInFirstTerms));
+                Term secondTerm(createTermWithMultiplicationAndDivisionTermsWithDetails({termsWithDetailsInMultiplicationAndDivision.at(i)}));
                 firstTerm.simplify();
                 secondTerm.simplify();
-                if(result.isEmpty())
-                {
+                if(result.isEmpty())                {
                     integrateUsingIntegrationByPartsByTryingTwoTermsWithDifferentOrder(result, term, firstTerm, secondTerm);
                 }
             }

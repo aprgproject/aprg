@@ -59,11 +59,10 @@ Term performOperation(
     Term newTerm;\
     if(term.isEmpty())\
 {\
-    newTerm = Term();\
+    newTerm.clear();\
 }\
     else if(term.isConstant())\
-{\
-    newTerm = operation(term.getConstantConstReference());\
+{\    newTerm = operation(term.getConstantConstReference());\
 }\
     else if(term.isVariable())\
 {\
@@ -93,11 +92,10 @@ Term performOperation(
 {\
     if(term2.isEmpty())\
 {\
-    newTerm = Term();\
+    newTerm.clear();\
 }\
     else if(term2.isConstant())\
-{\
-    newTerm = Constant(0) operation term2.getConstantConstReference();\
+{\    newTerm = Constant(0) operation term2.getConstantConstReference();\
 }\
     else if(term2.isVariable())\
 {\

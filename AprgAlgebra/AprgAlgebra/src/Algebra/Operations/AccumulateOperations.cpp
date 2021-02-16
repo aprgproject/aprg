@@ -88,10 +88,13 @@ void accumulateTermsForAdditionAndSubtraction(
             accumulateAndDoOperationOnTermDetails(combinedTerm, OperatorLevel::AdditionAndSubtraction, termWithDetails);
         }
     }
+    if(combinedTerm.isEmpty())
+    {
+        combinedTerm = Term(Constant(0));
+    }
 }
 
-void accumulateTermsForMultiplicationAndDivision(
-        Term & combinedTerm,
+void accumulateTermsForMultiplicationAndDivision(        Term & combinedTerm,
         TermsWithDetails const& termsToCombine)
 {
     bool isFirst(willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(combinedTerm));
@@ -131,10 +134,13 @@ void accumulateTermsForMultiplicationAndDivision(
             }
         }
     }
+    if(combinedTerm.isEmpty())
+    {
+        combinedTerm = Term(1);
+    }
 }
 
-void accumulateTermsForRaiseToPower(
-        Term & combinedTerm,
+void accumulateTermsForRaiseToPower(        Term & combinedTerm,
         TermsWithDetails const& termsToCombine)
 {
     bool isFirst(willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(combinedTerm));
@@ -155,8 +161,11 @@ void accumulateTermsForRaiseToPower(
             accumulateAndDoOperationOnTermDetails(combinedTerm, OperatorLevel::RaiseToPower, termWithDetails);
         }
     }
+    if(combinedTerm.isEmpty())
+    {
+        combinedTerm = Term(1);
+    }
 }
 
 }
-
 }

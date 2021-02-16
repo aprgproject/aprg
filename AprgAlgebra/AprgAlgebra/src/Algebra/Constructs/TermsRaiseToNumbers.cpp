@@ -13,15 +13,17 @@ namespace alba
 namespace algebra
 {
 
-unsigned int TermsRaiseToNumbers::getSize() const
-{
-    return m_baseToExponentMap.size();
-}
+TermsRaiseToNumbers::TermsRaiseToNumbers()
+{}
+
+TermsRaiseToNumbers::TermsRaiseToNumbers(
+        BaseToExponentMap const& baseToExponentMap)
+    : m_baseToExponentMap(baseToExponentMap)
+{}
 
 TermsRaiseToNumbers::BaseToExponentMap const& TermsRaiseToNumbers::getBaseToExponentMap() const
 {
-    return m_baseToExponentMap;
-}
+    return m_baseToExponentMap;}
 
 AlbaNumber TermsRaiseToNumbers::getExponentOfBase(
         Term const& base) const
@@ -75,43 +77,6 @@ void TermsRaiseToNumbers::addExponents(
     }
 }
 
-void TermsRaiseToNumbers::addTerm(
-        Term const& term,
-        TermAssociationType const association)
-{
-    int sign = (association == TermAssociationType::Positive) ? 1 : -1;
-    if(canBeConvertedToMonomial(term))
-    {
-        Monomial monomial(createMonomialIfPossible(term));
-        AlbaNumber constant(monomial.getConstantConstReference());
-        if(constant != 1)
-        {
-            m_baseToExponentMap[Term(constant)] += sign;
-        }
-        for(auto const& variableExponentPair : monomial.getVariablesToExponentsMapConstReference())
-        {
-            m_baseToExponentMap[Term(variableExponentPair.first)] += (variableExponentPair.second * sign);
-        }
-    }
-    else
-    {
-        TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromTerm(term));
-        Term baseToPut(termRaiseToANumber.getBase());
-        AlbaNumber exponentToPut(termRaiseToANumber.getExponent());
-        m_baseToExponentMap[baseToPut] += (exponentToPut * sign);
-    }
-}
-
-void TermsRaiseToNumbers::addTerms(
-        Terms const& terms,
-        TermAssociationType const association)
-{
-    for(Term const& term : terms)
-    {
-        addTerm(term, association);
-    }
-}
-
 void TermsRaiseToNumbers::subtractExponents(
         TermsRaiseToNumbers const& termsRaiseToNumbers)
 {
@@ -130,10 +95,45 @@ void TermsRaiseToNumbers::multiplyNumberToExponents(
     }
 }
 
+void TermsRaiseToNumbers::putTerm(
+        Term const& term,
+        TermAssociationType const association)
+{    int sign = (association == TermAssociationType::Positive) ? 1 : -1;
+    if(canBeConvertedToMonomial(term))
+    {
+        Monomial monomial(createMonomialIfPossible(term));
+        AlbaNumber constant(monomial.getConstantConstReference());
+        if(constant != 1)
+        {
+            m_baseToExponentMap[Term(constant)] += sign;
+        }
+        for(auto const& variableExponentPair : monomial.getVariablesToExponentsMapConstReference())
+        {
+            m_baseToExponentMap[Term(variableExponentPair.first)] += (variableExponentPair.second * sign);
+        }
+    }
+    else
+    {
+        TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromTerm(term));
+        Term base(termRaiseToANumber.getBase());
+        AlbaNumber exponent(termRaiseToANumber.getExponent());
+        m_baseToExponentMap[base] += (exponent * sign);
+    }
+}
+
+void TermsRaiseToNumbers::putTerms(
+        Terms const& terms,
+        TermAssociationType const association)
+{
+    for(Term const& term : terms)
+    {
+        putTerm(term, association);
+    }
+}
+
 void TermsRaiseToNumbers::setBaseAndExponent(
         Term const& base,
-        AlbaNumber const& exponent)
-{
+        AlbaNumber const& exponent){
     m_baseToExponentMap[base] = exponent;
 }
 

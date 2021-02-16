@@ -52,11 +52,10 @@ TermsRaiseToNumbers factorizeToTermsRaiseToNumbers(Expression const& expression)
     }
     else
     {
-        result.addTerm(convertExpressionToSimplestTerm(expression), TermAssociationType::Positive);
+        result.putTerm(convertExpressionToSimplestTerm(expression), TermAssociationType::Positive);
     }
     return result;
 }
-
 TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForAdditionAndSubtraction(
         Expression const& expression)
 {
@@ -83,11 +82,10 @@ TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForMultiplicationAndDivision(
     {
         Term const& term(getTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
         Terms factorizedTerms(factorizeTerm(term));
-        result.addTerms(factorizedTerms, termWithDetails.association);
+        result.putTerms(factorizedTerms, termWithDetails.association);
     }
     return result;
 }
-
 TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForRaiseToPower(
         Expression const& expression)
 {
@@ -116,11 +114,10 @@ TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForRaiseToPower(
     else
     {
         Terms factorizedBases(factorizeTerm(base));
-        result.addTerms(factorizedBases, TermAssociationType::Positive);
+        result.putTerms(factorizedBases, TermAssociationType::Positive);
         result.multiplyNumberToExponents(mainBaseToExponent.getExponent());
     }
-    return result;
-}
+    return result;}
 
 void retrieveConstantAndNonConstantFactors(
         vector<TermsRaiseToNumbers> & nonConstantFactorsPerAddends,
@@ -143,11 +140,10 @@ void retrieveConstantAndNonConstantFactors(
             }
             else
             {
-                nonConstantRaiseToExponent.addTerm(factor, TermAssociationType::Positive);
+                nonConstantRaiseToExponent.putTerm(factor, TermAssociationType::Positive);
             }
         }
-        constantFactors.emplace_back(constantFactor);
-        nonConstantFactorsPerAddends.emplace_back(nonConstantRaiseToExponent);
+        constantFactors.emplace_back(constantFactor);        nonConstantFactorsPerAddends.emplace_back(nonConstantRaiseToExponent);
     }
 }
 
@@ -261,10 +257,9 @@ void putRemainingInnerMultipliersAsOuterAddend(
         TermsWithDetails const& innerMultipliers,
         TermWithDetails const& originalAddend)
 {
-    Term combinedInnerTerm(createTermWithMultiplicationAndDivision(innerMultipliers));
+    Term combinedInnerTerm(createTermWithMultiplicationAndDivisionTermsWithDetails(innerMultipliers));
     outerAddends.emplace_back(combinedInnerTerm, originalAddend.association);
 }
-
 TermsRaiseToNumbers getFactorizedItemsBasedFromCollectedData(
         AlbaNumber const& constantGcf,
         TermsRaiseToNumbers const& commonNonConstantFactors,
@@ -274,17 +269,16 @@ TermsRaiseToNumbers getFactorizedItemsBasedFromCollectedData(
     result = commonNonConstantFactors;
     if(constantGcf != 1)
     {
-        result.addTerm(Term(constantGcf), TermAssociationType::Positive);
+        result.putTerm(Term(constantGcf), TermAssociationType::Positive);
     }
     if(!outerAddends.empty())
     {
-        Term nonFactoredTerm(createTermWithAdditionAndSubtraction(outerAddends));
+        Term nonFactoredTerm(createTermWithAdditionAndSubtractionTermsWithDetails(outerAddends));
         nonFactoredTerm.simplify();
-        result.addTerm(nonFactoredTerm, TermAssociationType::Positive);
+        result.putTerm(nonFactoredTerm, TermAssociationType::Positive);
     }
     return result;
 }
-
 }
 
 }

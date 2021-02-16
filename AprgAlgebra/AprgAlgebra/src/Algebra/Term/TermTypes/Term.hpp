@@ -69,9 +69,9 @@ public:
     Expression & getExpressionReference();
     Function & getFunctionReference();
 
+    void clear();
     void simplify();
     void sort();
-
 private:
     void resetBaseDataTermPointerBasedFromTerm(Term const& term);
     TermType m_type;

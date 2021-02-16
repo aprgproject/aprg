@@ -483,12 +483,11 @@ void IntegrationForFiniteCalculus::integrateNonChangingAndChangingTermsInMultipl
     }
     else
     {
-        Term nonChangingTermCombined(createTermWithMultiplicationAndDivision(nonChangingTerms));
-        Term changingTermCombined(createTermWithMultiplicationAndDivision(changingTerms));
+        Term nonChangingTermCombined(createTermWithMultiplicationAndDivisionTermsWithDetails(nonChangingTerms));
+        Term changingTermCombined(createTermWithMultiplicationAndDivisionTermsWithDetails(changingTerms));
         Term integratedChangingTerm(integrateTerm(changingTermCombined));
         if(isNotANumber(integratedChangingTerm))
-        {
-            result = Term(AlbaNumber(AlbaNumber::Value::NotANumber));
+        {            result = Term(AlbaNumber(AlbaNumber::Value::NotANumber));
         }
         else
         {

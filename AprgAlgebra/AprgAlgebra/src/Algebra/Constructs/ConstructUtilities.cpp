@@ -202,11 +202,10 @@ void createTermRaiseToANumberFromRaiseToPowerExpression(
                         return willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(exponentTerm);
                     }), raiseToPowerTerms.end());
 
-        Term newBase(createTermWithRaiseToPower(raiseToPowerTerms));
+        Term newBase(createTermWithRaiseToPowerTermsWithDetails(raiseToPowerTerms));
         newBase.simplify();
         result = TermRaiseToANumber(newBase, combinedExponentValue);
-        // how about if exponent is polynomial or expression? how do we extract constant? should we introduce factorization here?
-    }
+        // how about if exponent is polynomial or expression? how do we extract constant? should we introduce factorization here?    }
 }
 
 void createTermRaiseToANumberFromMultiplicationAndDivisionExpression(

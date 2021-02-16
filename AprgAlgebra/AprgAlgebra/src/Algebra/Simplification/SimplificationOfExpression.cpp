@@ -345,11 +345,11 @@ Term SimplificationOfExpression::getEachBasesRaisedToConstantIfPossible(
 
 bool SimplificationOfExpression::shouldDistributeExponentConstantToEachBase() const
 {
-    return !shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase() && !shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision();
+    return !shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase()
+            && !shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision();
 }
 
-bool SimplificationOfExpression::tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(
-        Expression const& expression)
+bool SimplificationOfExpression::tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(        Expression const& expression)
 {
     bool continueToTryToSubstitute = false;
     unsigned int oldNumberOfTerms = expression.getTermsWithAssociation().getTermsWithDetails().size();
