@@ -5,7 +5,6 @@
 #include <Algebra/Constructs/PolynomialOverPolynomial.hpp>
 #include <Algebra/Constructs/RationalizeTermOverTerm.hpp>
 #include <Algebra/Operations/AccumulateOperations.hpp>
-#include <Algebra/Retrieval/ExpressionAndFunctionsRetriever.hpp>
 #include <Algebra/Simplification/SimplificationUtilities.hpp>
 #include <Algebra/Substitution/SubstitutionOfTermsToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
@@ -15,8 +14,6 @@
 #include <Algebra/Term/Utilities/SegregateHelpers.hpp>
 #include <Algebra/Term/Utilities/StringHelpers.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
-
-#include <algorithm>
 
 using namespace std;
 
@@ -349,7 +346,8 @@ bool SimplificationOfExpression::shouldDistributeExponentConstantToEachBase() co
             && !shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision();
 }
 
-bool SimplificationOfExpression::tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(        Expression const& expression)
+bool SimplificationOfExpression::tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(
+        Expression const& expression)
 {
     bool continueToTryToSubstitute = false;
     unsigned int oldNumberOfTerms = expression.getTermsWithAssociation().getTermsWithDetails().size();

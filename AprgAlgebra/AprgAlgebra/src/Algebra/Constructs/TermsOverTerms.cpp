@@ -1,6 +1,5 @@
 #include "TermsOverTerms.hpp"
 
-#include <Algebra/Constructs/ConstructUtilities.hpp>
 #include <Algebra/Constructs/PolynomialOverPolynomial.hpp>
 #include <Algebra/Constructs/TermRaiseToANumber.hpp>
 #include <Algebra/Factorization/FactorizationConfiguration.hpp>
@@ -35,12 +34,14 @@ TermsOverTerms::TermsOverTerms()
     , m_shouldSimplifyToFactors(false)
     , m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(false)
 {}
+
 TermsOverTerms::TermsOverTerms(
         TermsWithDetails const& termsInMultiplicationAndDivision)
     : m_shouldSimplifyToFactors(false)
     , m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(false)
 {
-    TermsWithDetails numeratorsWithDetails;    TermsWithDetails denominatorsWithDetails;
+    TermsWithDetails numeratorsWithDetails;
+    TermsWithDetails denominatorsWithDetails;
     segregateTermsWithPositiveAndNegativeAssociations(termsInMultiplicationAndDivision, numeratorsWithDetails, denominatorsWithDetails);
     retrieveTermsFromTermsWithDetails(m_numerators, numeratorsWithDetails);
     retrieveTermsFromTermsWithDetails(m_denominators, denominatorsWithDetails);
@@ -52,6 +53,7 @@ TermsOverTerms::TermsOverTerms(Terms const& numerators, Terms const& denominator
     , m_shouldSimplifyToFactors(false)
     , m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(false)
 {}
+
 TermsOverTerms::TermsOverTerms(
         TermsWithDetails const& numeratorsWithDetails,
         TermsWithDetails const& denominatorsWithDetails)
@@ -94,7 +96,8 @@ Term TermsOverTerms::getCombinedTerm() const
         combinedTerm = createTermWithMultiplicationAndDivisionTermsWithDetails(getNumeratorAndDenominatorAsTermWithDetails());
     }
     else
-    {        accumulateTermsForMultiplicationAndDivision(
+    {
+        accumulateTermsForMultiplicationAndDivision(
                     combinedTerm,
                     getNumeratorAndDenominatorAsTermWithDetails());
     }
@@ -114,7 +117,8 @@ Term TermsOverTerms::getCombinedNumerator() const
         combinedTerm = createTermWithMultiplicationAndDivisionTermsWithDetails(numeratorsWithPositiveAssociation);
     }
     else
-    {        accumulateTermsForMultiplicationAndDivision(combinedTerm, numeratorsWithPositiveAssociation);
+    {
+        accumulateTermsForMultiplicationAndDivision(combinedTerm, numeratorsWithPositiveAssociation);
     }
     return combinedTerm;
 }
@@ -132,7 +136,8 @@ Term TermsOverTerms::getCombinedDenominator() const
         combinedTerm = createTermWithMultiplicationAndDivisionTermsWithDetails(denominatorsWithPositiveAssociation);
     }
     else
-    {        accumulateTermsForMultiplicationAndDivision(combinedTerm, denominatorsWithPositiveAssociation);
+    {
+        accumulateTermsForMultiplicationAndDivision(combinedTerm, denominatorsWithPositiveAssociation);
     }
     return combinedTerm;
 }
@@ -161,6 +166,7 @@ TermsRaiseToNumbers TermsOverTerms::getTermsRaiseToNumbers() const
     result.putTerms(factorizedDenominators, TermAssociationType::Negative);
     return result;
 }
+
 void TermsOverTerms::flip()
 {
     swap(m_numerators, m_denominators);
@@ -184,7 +190,8 @@ string TermsOverTerms::getDisplayableString() const
 
 void TermsOverTerms::setAsShouldSimplifyToFactors(
         bool const shouldSimplifyToFactors)
-{    m_shouldSimplifyToFactors = shouldSimplifyToFactors;
+{
+    m_shouldSimplifyToFactors = shouldSimplifyToFactors;
 }
 
 void TermsOverTerms::setAsShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(
@@ -200,7 +207,8 @@ void TermsOverTerms::simplify()
     Terms newDenominators = factorizeTermsAsNeeded(m_denominators);
     if(m_shouldSimplifyToFactors)
     {
-        continueToSimplifyToFactors(newNumerators, newDenominators);    }
+        continueToSimplifyToFactors(newNumerators, newDenominators);
+    }
     else
     {
         continueToSimplifyAndCombineFactors(newNumerators, newDenominators);
@@ -348,6 +356,7 @@ void TermsOverTerms::calculateBasesAndExponentsAndPutThatToNumeratorsAndDenomina
 
     numeratorTerms.clear();
     denominatorTerms.clear();
+
     putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToNumbers(numeratorTerms, denominatorTerms, basesAndExponents);
 }
 
@@ -358,7 +367,8 @@ void TermsOverTerms::putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToNumbe
 {
     for(auto const& baseExponentPair : termsRaiseToNumbers.getBaseToExponentMap())
     {
-        Term const& base(baseExponentPair.first);        AlbaNumber const& exponent(baseExponentPair.second);
+        Term const& base(baseExponentPair.first);
+        AlbaNumber const& exponent(baseExponentPair.second);
         if(!exponent.isIntegerType() || m_shouldSimplifyToFactors)
         {
             if(exponent > 0)
@@ -386,7 +396,8 @@ void TermsOverTerms::putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToNumbe
     }
 }
 
-void TermsOverTerms::populateTermsWithBase(        Terms & termsToUpdate,
+void TermsOverTerms::populateTermsWithBase(
+        Terms & termsToUpdate,
         Term const& base,
         AlbaNumber const& exponent)
 {
@@ -399,7 +410,8 @@ void TermsOverTerms::populateTermsWithBase(        Terms & termsToUpdate,
 
 void TermsOverTerms::removeTermsThatHaveNoEffect(Terms & terms) const
 {
-    terms.erase(remove_if(terms.begin(), terms.end(), [](Term const& term){                    return willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(term);
+    terms.erase(remove_if(terms.begin(), terms.end(), [](Term const& term){
+                    return willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(term);
                 }), terms.end());
 }
 
@@ -466,6 +478,7 @@ void TermsOverTerms::simplifyPolynomialNumeratorAndPolynomialDenominator(
     polynomialNumerator = numeratorAndDenominator.getNumerator();
     polynomialDenominator = numeratorAndDenominator.getDenominator();
 }
+
 
 void TermsOverTerms::simplifyMonomialsToPolynomialOverPolynomial()
 {

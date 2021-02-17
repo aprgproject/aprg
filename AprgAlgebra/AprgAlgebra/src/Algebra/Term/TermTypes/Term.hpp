@@ -72,6 +72,7 @@ public:
     void clear();
     void simplify();
     void sort();
+
 private:
     void resetBaseDataTermPointerBasedFromTerm(Term const& term);
     TermType m_type;

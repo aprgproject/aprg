@@ -200,7 +200,8 @@ TEST(DifferentiationUtilitiesTest, GetSlopeOfTermInPolarCoordinatesWorks)
     EXPECT_EQ(Term(AlbaNumber::createFraction(2, 3)), termToVerify);
 }
 
-TEST(DifferentiationUtilitiesTest, GetApproximationUsingTaylorsFormulaWorksForEToTheX){
+TEST(DifferentiationUtilitiesTest, GetApproximationUsingTaylorsFormulaWorksForEToTheX)
+{
     Term x("x");
     Term termToTest(createExpressionIfPossible({getEAsTerm(), Term("^"), x}));
 

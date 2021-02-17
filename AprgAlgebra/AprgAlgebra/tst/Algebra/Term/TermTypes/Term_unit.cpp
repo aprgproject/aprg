@@ -631,7 +631,8 @@ TEST(TermTest, ClearWorks)
 
 TEST(TermTest, SimplifyWorks)
 {
-    Term constantTerm(1475);    Term variableTerm("x");
+    Term constantTerm(1475);
+    Term variableTerm("x");
     Term monomialTerm(Monomial(1475,{}));
     Term polynomialTerm(Polynomial{Monomial(1475,{})});
     Term expressionTerm(Expression{createExpressionIfPossible({Term(1475)})});
@@ -645,7 +646,8 @@ TEST(TermTest, SimplifyWorks)
     variableTerm.simplify();
     monomialTerm.simplify();
     polynomialTerm.simplify();
-    expressionTerm.simplify();    functionTerm.simplify();
+    expressionTerm.simplify();
+    functionTerm.simplify();
 
     EXPECT_EQ(Term(1475), constantTerm);
     EXPECT_EQ(Term("x"), variableTerm);

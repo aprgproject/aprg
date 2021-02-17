@@ -1,11 +1,8 @@
 #include "TermsRaiseToNumbers.hpp"
 
 #include <Algebra/Constructs/ConstructUtilities.hpp>
-#include <Algebra/Constructs/TermRaiseToANumber.hpp>
 #include <Algebra/Term/Utilities/ConvertHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
-
-#include <algorithm>
 
 namespace alba
 {
@@ -23,7 +20,8 @@ TermsRaiseToNumbers::TermsRaiseToNumbers(
 
 TermsRaiseToNumbers::BaseToExponentMap const& TermsRaiseToNumbers::getBaseToExponentMap() const
 {
-    return m_baseToExponentMap;}
+    return m_baseToExponentMap;
+}
 
 AlbaNumber TermsRaiseToNumbers::getExponentOfBase(
         Term const& base) const
@@ -98,7 +96,8 @@ void TermsRaiseToNumbers::multiplyNumberToExponents(
 void TermsRaiseToNumbers::putTerm(
         Term const& term,
         TermAssociationType const association)
-{    int sign = (association == TermAssociationType::Positive) ? 1 : -1;
+{
+    int sign = (association == TermAssociationType::Positive) ? 1 : -1;
     if(canBeConvertedToMonomial(term))
     {
         Monomial monomial(createMonomialIfPossible(term));
@@ -133,7 +132,8 @@ void TermsRaiseToNumbers::putTerms(
 
 void TermsRaiseToNumbers::setBaseAndExponent(
         Term const& base,
-        AlbaNumber const& exponent){
+        AlbaNumber const& exponent)
+{
     m_baseToExponentMap[base] = exponent;
 }
 

@@ -55,6 +55,7 @@ TEST(RationalizeTermOverTermTest, RationalizeNumeratorWorksForPolynomialOverPoly
     Term numerator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(-2, {})});
     Term denominator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(-3, {})});
     RationalizeTermOverTerm rationalizeTermOverTerm(numerator, denominator);
+
     rationalizeTermOverTerm.rationalizeNumerator();
 
     Term expectedNumerator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-4, {})});
@@ -66,7 +67,8 @@ TEST(RationalizeTermOverTermTest, RationalizeNumeratorWorksForPolynomialOverPoly
 TEST(RationalizeTermOverTermTest, RationalizeDenominatorWorksForPolynomialOverPolynomialWithSquareRootWithMinusSecondTerm)
 {
     Term numerator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(-2, {})});
-    Term denominator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(-3, {})});    RationalizeTermOverTerm rationalizeTermOverTerm(numerator, denominator);
+    Term denominator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(-3, {})});
+    RationalizeTermOverTerm rationalizeTermOverTerm(numerator, denominator);
 
     rationalizeTermOverTerm.rationalizeDenominator();
 

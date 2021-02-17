@@ -94,7 +94,8 @@ void accumulateTermsForAdditionAndSubtraction(
     }
 }
 
-void accumulateTermsForMultiplicationAndDivision(        Term & combinedTerm,
+void accumulateTermsForMultiplicationAndDivision(
+        Term & combinedTerm,
         TermsWithDetails const& termsToCombine)
 {
     bool isFirst(willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(combinedTerm));
@@ -140,7 +141,8 @@ void accumulateTermsForMultiplicationAndDivision(        Term & combinedTerm,
     }
 }
 
-void accumulateTermsForRaiseToPower(        Term & combinedTerm,
+void accumulateTermsForRaiseToPower(
+        Term & combinedTerm,
         TermsWithDetails const& termsToCombine)
 {
     bool isFirst(willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(combinedTerm));
@@ -168,4 +170,5 @@ void accumulateTermsForRaiseToPower(        Term & combinedTerm,
 }
 
 }
+
 }

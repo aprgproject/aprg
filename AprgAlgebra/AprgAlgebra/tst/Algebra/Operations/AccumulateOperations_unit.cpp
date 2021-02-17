@@ -61,7 +61,8 @@ TEST(AccumulateOperationsTest, AccumulateTermsForAdditionAndSubtractionWorksWith
 
 TEST(AccumulateOperationsTest, AccumulateTermsForMultiplicationAndDivisionWorks)
 {
-    Term termToTest(1);    Term xToTheY(createExpressionIfPossible({Term("x"), Term("^"), Term("y")}));
+    Term termToTest(1);
+    Term xToTheY(createExpressionIfPossible({Term("x"), Term("^"), Term("y")}));
     Term term1(createExpressionIfPossible({Term(11), Term("*"), xToTheY}));
     Term term2(createExpressionIfPossible({Term(13), Term("*"), xToTheY}));
     Term term3(1);
@@ -92,7 +93,8 @@ TEST(AccumulateOperationsTest, AccumulateTermsForMultiplicationAndDivisionWorksW
 
 TEST(AccumulateOperationsTest, AccumulateTermsForRaiseToPowerWorks)
 {
-    Term termToTest(1);    Term xToTheY(createExpressionIfPossible({Term("x"), Term("^"), Term("y")}));
+    Term termToTest(1);
+    Term xToTheY(createExpressionIfPossible({Term("x"), Term("^"), Term("y")}));
     Term term1(createExpressionIfPossible({Term(11), Term("*"), xToTheY}));
     Term term2(createExpressionIfPossible({Term(13), Term("*"), xToTheY}));
     Term term3(1);

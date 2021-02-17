@@ -9,7 +9,8 @@
 #include <Algebra/Term/Utilities/TermUtilities.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
-using namespace alba::algebra::Simplification;using namespace alba::mathHelper;
+using namespace alba::algebra::Simplification;
+using namespace alba::mathHelper;
 
 namespace alba
 {
@@ -74,6 +75,7 @@ void RationalizeTermOverTerm::rationalize(
         retrieveTermsForRationalization(rationalizedTerm, multiplier, termToRationalize);
     }
 }
+
 void RationalizeTermOverTerm::simplifyForRationalize(Term & term)
 {
     SimplificationOfExpression::ConfigurationDetails rationalizeConfigurationDetails(
@@ -83,7 +85,8 @@ void RationalizeTermOverTerm::simplifyForRationalize(Term & term)
     rationalizeConfigurationDetails.shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt = true;
 
     SimplificationOfExpression::ScopeObject scopeObject;
-    scopeObject.setInThisScopeThisConfiguration(rationalizeConfigurationDetails);    term.simplify();
+    scopeObject.setInThisScopeThisConfiguration(rationalizeConfigurationDetails);
+    term.simplify();
 }
 
 void RationalizeTermOverTerm::retrieveTermsForRationalization(
@@ -123,7 +126,8 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomial(
 {
     AlbaNumber gcfOfExponents = getGreatestCommonFactorForAlbaNumber(
                 getGcfOfExponentsInMonomial(firstMonomial),
-                getGcfOfExponentsInMonomial(secondMonomial));    if(gcfOfExponents.isFractionType())
+                getGcfOfExponentsInMonomial(secondMonomial));
+    if(gcfOfExponents.isFractionType())
     {
         AlbaNumber::FractionData exponentFraction(gcfOfExponents.getFractionData());
         if(isDivisible(exponentFraction.denominator, 2))
@@ -160,7 +164,8 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomialWhenEx
         Term & multiplier,
         Monomial const& firstMonomial,
         Monomial const& secondMonomial) const
-{    Monomial newFirstMonomial(firstMonomial);
+{
+    Monomial newFirstMonomial(firstMonomial);
     Monomial newThirdMonomial(secondMonomial);
     newFirstMonomial.raiseToPowerNumber(2);
     newThirdMonomial.raiseToPowerNumber(2);
@@ -183,7 +188,8 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpression(
 {
     if(OperatorLevel::AdditionAndSubtraction == expression.getCommonOperatorLevel())
     {
-        TermsWithDetails const& termsWithDetails(                    expression.getTermsWithAssociation().getTermsWithDetails());
+        TermsWithDetails const& termsWithDetails(
+                    expression.getTermsWithAssociation().getTermsWithDetails());
         if(termsWithDetails.size() == 2)
         {
             TermWithDetails const& firstTermWithDetails(termsWithDetails.at(0));
@@ -201,7 +207,8 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpression(
 {
     Term const& firstTerm(getTermConstReferenceFromSharedPointer(firstTermWithDetails.baseTermSharedPointer));
     Term const& secondTerm(getTermConstReferenceFromSharedPointer(secondTermWithDetails.baseTermSharedPointer));
-    TermRaiseToANumber firstTermRaiseToANumber(createTermRaiseToANumberFromTerm(firstTerm));    TermRaiseToANumber secondTermRaiseToANumber(createTermRaiseToANumberFromTerm(secondTerm));
+    TermRaiseToANumber firstTermRaiseToANumber(createTermRaiseToANumberFromTerm(firstTerm));
+    TermRaiseToANumber secondTermRaiseToANumber(createTermRaiseToANumberFromTerm(secondTerm));
 
     AlbaNumber gcfOfExponents = getGreatestCommonFactorForAlbaNumber(
                 firstTermRaiseToANumber.getExponent(),
@@ -282,4 +289,5 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpressionWhenEx
 }
 
 }
+
 }

@@ -10,6 +10,7 @@ using namespace std;
 
 namespace alba
 {
+
 namespace algebra
 {
 
@@ -58,6 +59,7 @@ TEST(TermRaiseToANumberTest, GetCombinedTermWorks)
 TEST(TermRaiseToANumberTest, GetBaseWorks)
 {
     TermRaiseToANumber termRaiseToANumber(Term("x"), 5);
+
     EXPECT_EQ(Term("x"), termRaiseToANumber.getBase());
 }
 
