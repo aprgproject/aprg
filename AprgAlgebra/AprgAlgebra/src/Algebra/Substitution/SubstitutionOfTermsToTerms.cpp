@@ -123,19 +123,9 @@ Function SubstitutionOfTermsToTerms::performSubstitutionForFunction(Function con
     return newFunction;
 }
 
-void SubstitutionOfTermsToTerms::performSubstitutionForTermsWithAssociation(TermsWithAssociation & termsWithAssociation) const
-{
-    for(TermWithDetails & termWithDetails : termsWithAssociation.getTermsWithDetailsReference())
-    {
-        Term & term(getTermReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
-        term = performSubstitutionTo(term);
-    }
-}
-
 void SubstitutionOfTermsToTerms::putTermsToTermsMapping(initializer_list<TermTermPair> const& variablesWithValues)
 {
-    for(TermTermPair const& variableValuesPair : variablesWithValues)
-    {
+    for(TermTermPair const& variableValuesPair : variablesWithValues)    {
         putTermToTermMapping(variableValuesPair.first, variableValuesPair.second);
     }
 }
@@ -151,6 +141,15 @@ void SubstitutionOfTermsToTerms::putTermsToTermsMapping(TermToTermMap const& var
 void SubstitutionOfTermsToTerms::putTermToTermMapping(Term const& term1, Term const& term2)
 {
     m_termsToTermsMap[term1]=term2;
+}
+
+void SubstitutionOfTermsToTerms::performSubstitutionForTermsWithAssociation(TermsWithAssociation & termsWithAssociation) const
+{
+    for(TermWithDetails & termWithDetails : termsWithAssociation.getTermsWithDetailsReference())
+    {
+        Term & term(getTermReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
+        term = performSubstitutionTo(term);
+    }
 }
 
 }

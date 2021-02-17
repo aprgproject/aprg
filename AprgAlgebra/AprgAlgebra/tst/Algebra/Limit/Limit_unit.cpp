@@ -175,11 +175,10 @@ TEST(LimitTest, GetTermUsingLhopitalsRuleWorks)
 
     string stringToExpect1("x");
     string stringToExpect2("(-1/((e)^x))");
-    string stringToExpect3("((1[x^2] + 1)*cos(1[x^-1])/1[x^2])");
+    string stringToExpect3("((((-1[x^2] + -1)*cos(1[x^-1]))+(4[x^3]*sin(1[x^-1]))+(6[x^4]*cos(1[x^-1])))/6[x^4])");
     EXPECT_EQ(stringToExpect1, termToVerify1.getDisplayableString());
     EXPECT_EQ(stringToExpect2, termToVerify2.getDisplayableString());
-    EXPECT_EQ(stringToExpect3, termToVerify3.getDisplayableString());
-}
+    EXPECT_EQ(stringToExpect3, termToVerify3.getDisplayableString());}
 
 TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricExample)
 {
@@ -190,11 +189,10 @@ TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricEx
     Term newTerm, limitValue;
     calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", AlbaNumber(AlbaNumber::Value::PositiveInfinity));
 
-    string stringToExpect("((1[x^2] + 1)*cos(1[x^-1])/1[x^2])");
+    string stringToExpect("((((-1[x^2] + -1)*cos(1[x^-1]))+(4[x^3]*sin(1[x^-1]))+(6[x^4]*cos(1[x^-1])))/6[x^4])");
     EXPECT_EQ(Term(1), limitValue);
     EXPECT_EQ(stringToExpect, newTerm.getDisplayableString());
 }
-
 TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingLogarithmicAndExponentialExample)
 {
     Term x("x");
@@ -206,11 +204,10 @@ TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingLogarithmicAndE
     Term newTerm, limitValue;
     calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", AlbaNumber(AlbaNumber::Value::PositiveInfinity));
 
-    string stringToExpect("(ln((2+((e)^x)))/3[x])");
+    string stringToExpect("(1/3)");
     EXPECT_EQ(Term(AlbaNumber::createFraction(1, 3)), limitValue);
     EXPECT_EQ(stringToExpect, newTerm.getDisplayableString());
 }
-
 TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricExample2)
 {
     Term x("x");
@@ -222,11 +219,10 @@ TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricEx
     Term newTerm, limitValue;
     calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", 0);
 
-    string stringToExpect("(tan(x)/x/(2+(x*tan(x))))");
+    string stringToExpect("((sec(x)^2)/(2+(1[x^2]*(sec(x)^2))+(2[x]*tan(x))))");
     EXPECT_EQ(Term(AlbaNumber::createFraction(1, 2)), limitValue);
     EXPECT_EQ(stringToExpect, newTerm.getDisplayableString());
 }
-
 TEST(LimitTest, GetLimitAtAValueOrInfinityWorks)
 {
     Term termToTest1(Polynomial{Monomial(4, {{"x", 1}}), Monomial(-7, {})});

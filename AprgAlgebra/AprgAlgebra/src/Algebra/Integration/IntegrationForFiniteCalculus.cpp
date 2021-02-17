@@ -4,10 +4,10 @@
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
 #include <Algebra/Integration/IntegrationUtilities.hpp>
 #include <Algebra/Retrieval/VariableNamesRetriever.hpp>
+#include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Term/Operators/TermOperators.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
-#include <Algebra/Term/Utilities/ConvertHelpers.hpp>
-#include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
+#include <Algebra/Term/Utilities/ConvertHelpers.hpp>#include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 #include <Algebra/Utilities/KnownNames.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
@@ -171,14 +171,13 @@ Term IntegrationForFiniteCalculus::integrateMonomial(
             // in infinite calculus this ln(x), but in finite calculus its the summation of 1/x (this is called the harmonic number)
             // for the proof, consider doing the derivative of this
 
-            Monomial retainedMonomial(monomial);
-            retainedMonomial.putVariableWithExponent(m_nameOfVariableToIntegrate, 0);
+            Monomial monomialToRetain(monomial);
+            monomialToRetain.putVariableWithExponent(m_nameOfVariableToIntegrate, 0);
             result = Term(createExpressionIfPossible(
-            {Term(retainedMonomial), Term("*"), Term(harmonicNumber(Term(m_nameOfVariableToIntegrate)))}));
+            {Term(monomialToRetain), Term("*"), Term(harmonicNumber(Term(m_nameOfVariableToIntegrate)))}));
             result.simplify();
         }
-        else
-        {
+        else        {
             AlbaNumber exponentAbsoluteValue(getAbsoluteValueForAlbaNumber(exponent));
             Monomial monomialWithOneLessExponent(monomial);
             monomialWithOneLessExponent.putVariableWithExponent(m_nameOfVariableToIntegrate, exponentAbsoluteValue-1);
@@ -285,17 +284,16 @@ Polynomial IntegrationForFiniteCalculus::convertMonomialWithPositiveExponentsFro
     if(exponent >= 0)
     {
         unsigned int exponentUnsigned = static_cast<unsigned int>(exponent);
-        Monomial retainedMonomial(monomial);
-        retainedMonomial.putVariableWithExponent(m_nameOfVariableToIntegrate, 0);
+        Monomial monomialToRetain(monomial);
+        monomialToRetain.putVariableWithExponent(m_nameOfVariableToIntegrate, 0);
         for(unsigned int i=0; i<=exponentUnsigned; i++)
         {
             result.addMonomial(Monomial(getStirlingNumberOfTheSecondKind(exponentUnsigned, i), {{m_nameOfVariableToIntegrate, i}}));
         }
-        result.multiplyMonomial(retainedMonomial);
+        result.multiplyMonomial(monomialToRetain);
     }
     result.simplify();
-    return result;
-}
+    return result;}
 
 Polynomial IntegrationForFiniteCalculus::convertMonomialWithPositiveExponentsFromFallingPowerToRegularPower(
         Monomial const& monomial) const
@@ -306,18 +304,17 @@ Polynomial IntegrationForFiniteCalculus::convertMonomialWithPositiveExponentsFro
     {
         unsigned int exponentUnsigned = static_cast<unsigned int>(exponent);
         result = createPolynomialFromConstant(1);
-        Monomial retainedMonomial(monomial);
-        retainedMonomial.putVariableWithExponent(m_nameOfVariableToIntegrate, 0);
+        Monomial monomialToRetain(monomial);
+        monomialToRetain.putVariableWithExponent(m_nameOfVariableToIntegrate, 0);
         for(unsigned int i=0; i<exponentUnsigned; i++)
         {
             result.multiplyPolynomial(Polynomial
             {Monomial(1, {{m_nameOfVariableToIntegrate, 1}}), Monomial(-AlbaNumber(i), {})});
         }
-        result.multiplyMonomial(retainedMonomial);
+        result.multiplyMonomial(monomialToRetain);
     }
     result.simplify();
-    return result;
-}
+    return result;}
 
 Polynomial IntegrationForFiniteCalculus::convertPolynomialWithPositiveExponentsFromRegularPowerToFallingPower(
         Polynomial const& polynomial) const
@@ -448,13 +445,28 @@ Term IntegrationForFiniteCalculus::integrateNonChangingTermRaiseToChangingTerm(
         Term const& exponent) const
 {
     Term result(AlbaNumber(AlbaNumber::Value::NotANumber));
-    if(exponent.isVariable())
+    // Process:
+    // Dx(c^x) = c^(x+1) - c^x
+    // Dx(c^x) = (c-1) * (c^x)
+    // Using fundamental theorem of calculus:
+    // c^x = Integrate((c-1) * (c^x))
+    // c^x = (c-1) * Integrate((c^x))
+    // (c^x)/(c-1) = Integrate((c^x))
+    // Integrate((c^x)) = (c^x)/(c-1)
+
+    Term nPlusOne(Polynomial{Monomial(1, {{m_nameOfVariableToIntegrate, 1}}), Monomial(1, {})});
+    SubstitutionOfVariablesToTerms substitution{{m_nameOfVariableToIntegrate, nPlusOne}};
+    Term exponentWithNPlusOneSubstitution(substitution.performSubstitutionTo(exponent));
+    Term exponentDifference(exponentWithNPlusOneSubstitution-exponent);
+
+    if(!isChangingTerm(exponentDifference)) // if exponentDifference can be factored out
     {
-        result = Term(createExpressionIfPossible({base, Term("^"), exponent, Term("/"), Term(base-Term(1))}));
+        Term denominator(createExpressionIfPossible({base, Term("^"), exponentDifference, Term("-"), Term(1)}));
+        denominator.simplify();
+        result = Term(createExpressionIfPossible({base, Term("^"), exponent, Term("/"), denominator}));
     }
     return result;
 }
-
 Term IntegrationForFiniteCalculus::integrateChangingTermRaiseToNonChangingTerm(
         Term const& ,
         Term const& ) const
