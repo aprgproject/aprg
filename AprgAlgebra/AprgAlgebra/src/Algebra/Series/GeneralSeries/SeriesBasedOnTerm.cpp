@@ -15,6 +15,7 @@ using namespace alba::algebra::Simplification;
 
 namespace alba
 {
+
 namespace algebra
 {
 
@@ -62,7 +63,8 @@ Term SeriesBasedOnTerm::getFormulaForSeries() const
 
 Term SeriesBasedOnTerm::getValueAtIndex(int const index) const
 {
-    SubstitutionOfVariablesToValues substitution{{m_nameForVariableInFormula, index}};    return substitution.performSubstitutionTo(m_formulaForSeries);
+    SubstitutionOfVariablesToValues substitution{{m_nameForVariableInFormula, index}};
+    return substitution.performSubstitutionTo(m_formulaForSeries);
 }
 
 Term SeriesBasedOnTerm::getSum(

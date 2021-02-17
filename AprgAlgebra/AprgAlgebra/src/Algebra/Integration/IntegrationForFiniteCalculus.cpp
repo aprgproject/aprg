@@ -7,7 +7,8 @@
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Term/Operators/TermOperators.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
-#include <Algebra/Term/Utilities/ConvertHelpers.hpp>#include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
+#include <Algebra/Term/Utilities/ConvertHelpers.hpp>
+#include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 #include <Algebra/Utilities/KnownNames.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
@@ -177,7 +178,8 @@ Term IntegrationForFiniteCalculus::integrateMonomial(
             {Term(monomialToRetain), Term("*"), Term(harmonicNumber(Term(m_nameOfVariableToIntegrate)))}));
             result.simplify();
         }
-        else        {
+        else
+        {
             AlbaNumber exponentAbsoluteValue(getAbsoluteValueForAlbaNumber(exponent));
             Monomial monomialWithOneLessExponent(monomial);
             monomialWithOneLessExponent.putVariableWithExponent(m_nameOfVariableToIntegrate, exponentAbsoluteValue-1);
@@ -293,7 +295,8 @@ Polynomial IntegrationForFiniteCalculus::convertMonomialWithPositiveExponentsFro
         result.multiplyMonomial(monomialToRetain);
     }
     result.simplify();
-    return result;}
+    return result;
+}
 
 Polynomial IntegrationForFiniteCalculus::convertMonomialWithPositiveExponentsFromFallingPowerToRegularPower(
         Monomial const& monomial) const
@@ -314,7 +317,8 @@ Polynomial IntegrationForFiniteCalculus::convertMonomialWithPositiveExponentsFro
         result.multiplyMonomial(monomialToRetain);
     }
     result.simplify();
-    return result;}
+    return result;
+}
 
 Polynomial IntegrationForFiniteCalculus::convertPolynomialWithPositiveExponentsFromRegularPowerToFallingPower(
         Polynomial const& polynomial) const
@@ -467,6 +471,7 @@ Term IntegrationForFiniteCalculus::integrateNonChangingTermRaiseToChangingTerm(
     }
     return result;
 }
+
 Term IntegrationForFiniteCalculus::integrateChangingTermRaiseToNonChangingTerm(
         Term const& ,
         Term const& ) const

@@ -14,6 +14,7 @@ public:
     ArithmeticSeries(
             AlbaNumber const& firstValue,
             AlbaNumber const& commonDifference);
+
     ArithmeticSeries(
             AlbaNumber const& valueAtIndex1,
             int const index1,

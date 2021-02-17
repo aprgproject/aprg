@@ -178,7 +178,8 @@ TEST(LimitTest, GetTermUsingLhopitalsRuleWorks)
     string stringToExpect3("((((-1[x^2] + -1)*cos(1[x^-1]))+(4[x^3]*sin(1[x^-1]))+(6[x^4]*cos(1[x^-1])))/6[x^4])");
     EXPECT_EQ(stringToExpect1, termToVerify1.getDisplayableString());
     EXPECT_EQ(stringToExpect2, termToVerify2.getDisplayableString());
-    EXPECT_EQ(stringToExpect3, termToVerify3.getDisplayableString());}
+    EXPECT_EQ(stringToExpect3, termToVerify3.getDisplayableString());
+}
 
 TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricExample)
 {
@@ -193,6 +194,7 @@ TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricEx
     EXPECT_EQ(Term(1), limitValue);
     EXPECT_EQ(stringToExpect, newTerm.getDisplayableString());
 }
+
 TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingLogarithmicAndExponentialExample)
 {
     Term x("x");
@@ -208,6 +210,7 @@ TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingLogarithmicAndE
     EXPECT_EQ(Term(AlbaNumber::createFraction(1, 3)), limitValue);
     EXPECT_EQ(stringToExpect, newTerm.getDisplayableString());
 }
+
 TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricExample2)
 {
     Term x("x");
@@ -223,6 +226,7 @@ TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricEx
     EXPECT_EQ(Term(AlbaNumber::createFraction(1, 2)), limitValue);
     EXPECT_EQ(stringToExpect, newTerm.getDisplayableString());
 }
+
 TEST(LimitTest, GetLimitAtAValueOrInfinityWorks)
 {
     Term termToTest1(Polynomial{Monomial(4, {{"x", 1}}), Monomial(-7, {})});

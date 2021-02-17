@@ -7,7 +7,8 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace algebra
 {
@@ -26,6 +27,7 @@ TEST(SeriesBasedOnTermTest, IsConvergentWorksOnConvergentSeries)
 
     EXPECT_TRUE(series.isConvergent());
 }
+
 TEST(SeriesBasedOnTermTest, IsConvergentWorksOnDivergentSeries)
 {
     Term n("n");
@@ -73,6 +75,7 @@ TEST(SeriesBasedOnTermTest, IsIncreasingAndIsDecreasingAndIsMonotonicWorksOnDecr
 TEST(SeriesBasedOnTermTest, GetValueAtIndexWorks)
 {
     SeriesBasedOnTerm series(Term("n"), "n");
+
     EXPECT_EQ(Term(-5), series.getValueAtIndex(-5));
     EXPECT_EQ(Term(Constant(0)), series.getValueAtIndex(0));
     EXPECT_EQ(Term(5), series.getValueAtIndex(5));
@@ -89,6 +92,7 @@ TEST(SeriesBasedOnTermTest, GetFormulaForSeriesWorks)
 TEST(SeriesBasedOnTermTest, GetSumWorks)
 {
     SeriesBasedOnTerm series(Term("n"), "n");
+
     EXPECT_EQ(Term(55), series.getSum(0, 10));
 }
 
@@ -99,6 +103,7 @@ TEST(SeriesBasedOnTermTest, GetSumStartingAtIndexAndToInfinityWorks)
 
     EXPECT_EQ(Term(2), series.getSumStartingAtIndexAndToInfinity(0));
 }
+
 TEST(SeriesBasedOnTermTest, GetValueAtInfinityWorks)
 {
     Term n("n");

@@ -15,14 +15,16 @@ GeometricSeries::GeometricSeries(
     : SeriesBasedOnTerm(getFormula(firstValue, commonMultiplier), n)
 {}
 
-GeometricSeries::GeometricSeries(        AlbaNumber const& valueAtNthIndex1,
+GeometricSeries::GeometricSeries(
+        AlbaNumber const& valueAtNthIndex1,
         int const nthIndex1,
         AlbaNumber const& valueAtNthIndex2,
         int const nthIndex2)
     : SeriesBasedOnTerm(getFormula(valueAtNthIndex1, nthIndex1, valueAtNthIndex2, nthIndex2), n)
 {}
 
-Term GeometricSeries::getInfiniteSumStartingFrom(        int const startingNthIndex)
+Term GeometricSeries::getInfiniteSumStartingFrom(
+        int const startingNthIndex)
 {
     return getSumStartingAtIndexAndToInfinity(startingNthIndex);
 }
@@ -34,7 +36,8 @@ Term GeometricSeries::getFormula(
     return Term(firstValue) * (Term(commonMultiplier)^Term(n));
 }
 
-Term GeometricSeries::getFormula(        AlbaNumber const& valueAtNthIndex1,
+Term GeometricSeries::getFormula(
+        AlbaNumber const& valueAtNthIndex1,
         int const nthIndex1,
         AlbaNumber const& valueAtNthIndex2,
         int const nthIndex2) const
