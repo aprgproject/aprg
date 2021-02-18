@@ -76,7 +76,8 @@ void accumulateTermsForAdditionAndSubtraction(
         {
             continue;
         }
-        else if(isFirst)        {
+        else if(isFirst)
+        {
             if(termWithDetails.hasPositiveAssociation())
             {
                 combinedTerm = term;

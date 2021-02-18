@@ -205,7 +205,8 @@ void Polynomial::simplify()
     setNanIfNeeded();
     Polynomial beforeSimplify;
     Polynomial afterSimplify;
-    do    {
+    do
+    {
         beforeSimplify=*this;
         simplifyMonomialsAndReAdd();
         sortMonomialsWithInversePriority();
@@ -321,7 +322,8 @@ void Polynomial::setNanIfNeeded()
 
 void Polynomial::simplifyMonomialsAndReAdd()
 {
-    Monomials previousMonomials(m_monomials);    m_monomials.clear();
+    Monomials previousMonomials(m_monomials);
+    m_monomials.clear();
     for(Monomial & monomial : previousMonomials)
     {
         monomial.simplify();

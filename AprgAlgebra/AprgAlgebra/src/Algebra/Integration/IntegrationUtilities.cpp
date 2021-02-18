@@ -127,7 +127,8 @@ Term evaluate(
         string const& variableName,
         Term const& value)
 {
-    Term result;    if(isTheValue(value, AlbaNumber(AlbaNumber::Value::PositiveInfinity)))
+    Term result;
+    if(isTheValue(value, AlbaNumber(AlbaNumber::Value::PositiveInfinity)))
     {
         result = getLimit(term, variableName, AlbaNumber(AlbaNumber::Value::PositiveInfinity));
     }

@@ -2,6 +2,7 @@
 #include <Algebra/Series/Utilities/SeriesUtilities.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba

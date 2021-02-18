@@ -230,6 +230,7 @@ TEST(PolynomialTest, SimplifyWorks)
 
     Monomials const& monomials1(polynomial1.getMonomialsConstReference());
     ASSERT_TRUE(monomials1.empty());
+
     Monomials const& monomials2(polynomial2.getMonomialsConstReference());
     ASSERT_EQ(1U, monomials2.size());
     EXPECT_DOUBLE_EQ(6, monomials2.at(0).getConstantConstReference().getDouble());
@@ -249,7 +250,8 @@ TEST(PolynomialTest, SimplifyWorks)
     ASSERT_TRUE(monomials5.at(0).getVariablesToExponentsMapConstReference().empty());
 }
 
-TEST(PolynomialTest, SimplifyWorksAndItSortsMonomials){
+TEST(PolynomialTest, SimplifyWorksAndItSortsMonomials)
+{
     Polynomial polynomial1;
     Polynomial polynomial2{Monomial(100, {}), Monomial(5, {{"x", 2}, {"y", 3}, {"z", 4}}), Monomial(9, {{"x", 8}}), Monomial(10, {})};
     Polynomial polynomial3{Monomial(1, {{"x", 3}}), Monomial(1, {{"x", 1}, {"y", 2}}), Monomial(1, {{"x", 1}, {"y", 2}}), Monomial(5, {{"x", 3}})};

@@ -69,7 +69,8 @@ private:
     void setNanIfNeeded();
     void removeZeroExponents();
     AlbaNumber m_constant;
-    VariablesToExponentsMap m_variablesToExponentsMap;};
+    VariablesToExponentsMap m_variablesToExponentsMap;
+};
 
 using Monomials=std::vector<Monomial>;
 

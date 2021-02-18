@@ -5,6 +5,7 @@
 #include <set>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -195,6 +196,7 @@ void Monomial::simplify()
     setNanIfNeeded();
     removeZeroExponents();
 }
+
 void Monomial::multiplyNumber(AlbaNumber const& number)
 {
     m_constant = m_constant * number;
@@ -299,7 +301,8 @@ void Monomial::setNanIfNeeded()
 
 void Monomial::removeZeroExponents()
 {
-    VariablesToExponentsMap oldVariableMap(m_variablesToExponentsMap);    m_variablesToExponentsMap.clear();
+    VariablesToExponentsMap oldVariableMap(m_variablesToExponentsMap);
+    m_variablesToExponentsMap.clear();
     for(auto const& variableExponentPair : oldVariableMap)
     {
         if(variableExponentPair.second != 0)

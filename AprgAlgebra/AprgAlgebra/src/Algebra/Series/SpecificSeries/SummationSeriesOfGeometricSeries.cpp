@@ -3,7 +3,8 @@
 #include <Algebra/Series/SpecificSeries/GeometricSeries.hpp>
 #include <Algebra/Utilities/KnownNames.hpp>
 
-namespace alba{
+namespace alba
+{
 
 namespace algebra
 {

@@ -323,7 +323,8 @@ AlbaNumbers getInputValuesForCauchyMeanValueTheorem(
         string const& variableName,
         AlbaNumber const& a,
         AlbaNumber const& b)
-{    // Cauchy Mean-Value Theorem
+{
+    // Cauchy Mean-Value Theorem
 
     TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(term));
     Term numerator(termsOverTerms.getCombinedNumerator());
