@@ -1,8 +1,7 @@
-#include <Algebra/Series/SummationSeriesOfGeometricSeries.hpp>
+#include <Algebra/Series/SpecificSeries/SummationSeriesOfGeometricSeries.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
@@ -17,13 +16,12 @@ TEST(SummationSeriesOfGeometricSeriesTest, IsConvergentWorks)
     SummationSeriesOfGeometricSeries seriesWithMultiplierEqualsToOne(1, 1);
     SummationSeriesOfGeometricSeries seriesWithMultiplierMoreThanOne(1, 2);
 
-    EXPECT_TRUE(seriesWithMultiplierLessThanOne.hasAValidSummationModel());
-    EXPECT_TRUE(seriesWithMultiplierEqualsToOne.hasAValidSummationModel());
-    EXPECT_TRUE(seriesWithMultiplierMoreThanOne.hasAValidSummationModel());
+    EXPECT_TRUE(seriesWithMultiplierLessThanOne.isSummationModelValid());
+    EXPECT_TRUE(seriesWithMultiplierEqualsToOne.isSummationModelValid());
+    EXPECT_TRUE(seriesWithMultiplierMoreThanOne.isSummationModelValid());
     EXPECT_TRUE(seriesWithMultiplierLessThanOne.isConvergent());
     EXPECT_FALSE(seriesWithMultiplierEqualsToOne.isConvergent());
-    EXPECT_FALSE(seriesWithMultiplierMoreThanOne.isConvergent());
-}
+    EXPECT_FALSE(seriesWithMultiplierMoreThanOne.isConvergent());}
 
 }
 

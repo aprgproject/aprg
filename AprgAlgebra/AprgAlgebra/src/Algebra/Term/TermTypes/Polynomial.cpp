@@ -202,10 +202,10 @@ void Polynomial::clear()
 
 void Polynomial::simplify()
 {
+    setNanIfNeeded();
     Polynomial beforeSimplify;
     Polynomial afterSimplify;
-    do
-    {
+    do    {
         beforeSimplify=*this;
         simplifyMonomialsAndReAdd();
         sortMonomialsWithInversePriority();
@@ -310,10 +310,18 @@ bool Polynomial::isFurtherSimplificationNeeded(
     return beforeSimplify != afterSimplify && !hasNotANumber(afterSimplify);
 }
 
+void Polynomial::setNanIfNeeded()
+{
+    if(hasNotANumber(*this))
+    {
+        m_monomials.clear();
+        addMonomial(Monomial(AlbaNumber(AlbaNumber::Value::NotANumber), {}));
+    }
+}
+
 void Polynomial::simplifyMonomialsAndReAdd()
 {
-    Monomials previousMonomials(m_monomials);
-    m_monomials.clear();
+    Monomials previousMonomials(m_monomials);    m_monomials.clear();
     for(Monomial & monomial : previousMonomials)
     {
         monomial.simplify();

@@ -1,8 +1,7 @@
-#include <Algebra/Series/GeometricSeries.hpp>
-#include <Algebra/Series/SeriesUtilities.hpp>
+#include <Algebra/Series/SpecificSeries/GeometricSeries.hpp>
+#include <Algebra/Series/Utilities/SeriesUtilities.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba

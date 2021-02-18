@@ -124,11 +124,10 @@ Term evaluateTermsAndGetDifference(
 
 Term evaluate(
         Term const& term,
-        std::string const& variableName,
+        string const& variableName,
         Term const& value)
 {
-    Term result;
-    if(isTheValue(value, AlbaNumber(AlbaNumber::Value::PositiveInfinity)))
+    Term result;    if(isTheValue(value, AlbaNumber(AlbaNumber::Value::PositiveInfinity)))
     {
         result = getLimit(term, variableName, AlbaNumber(AlbaNumber::Value::PositiveInfinity));
     }

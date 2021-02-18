@@ -315,12 +315,14 @@ void calculateTermAndLimitUsingLhopitalsRule(
     SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
     Term numeratorValue(substitution.performSubstitutionTo(numerator));
     Term denominatorValue(substitution.performSubstitutionTo(denominator));
-    while((isTheValue(numeratorValue, 0) && isTheValue(denominatorValue, 0))
-              || (isPositiveOrNegativeInfinity(numeratorValue) && isPositiveOrNegativeInfinity(denominatorValue)))
+    constexpr unsigned int MAX_ITERATIONS = 10;
+    for(unsigned int i=0;
+          i < MAX_ITERATIONS && ((isTheValue(numeratorValue, 0) && isTheValue(denominatorValue, 0))
+              || (isPositiveOrNegativeInfinity(numeratorValue) && isPositiveOrNegativeInfinity(denominatorValue)));
+        i++)
     {
         numerator = differentiation.differentiate(numerator);
-        denominator = differentiation.differentiate(denominator);
-        newTerm = Term(numerator/denominator);
+        denominator = differentiation.differentiate(denominator);        newTerm = Term(numerator/denominator);
         simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(newTerm);
         TermsOverTerms newTermsOverTerms(createTermsOverTermsFromTerm(newTerm));
         numerator = newTermsOverTerms.getCombinedNumerator();

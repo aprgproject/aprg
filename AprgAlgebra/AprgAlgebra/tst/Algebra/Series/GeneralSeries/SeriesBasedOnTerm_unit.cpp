@@ -1,9 +1,8 @@
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
-#include <Algebra/Series/SeriesBasedOnTerm.hpp>
+#include <Algebra/Series/GeneralSeries/SeriesBasedOnTerm.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace alba::algebra::Functions;
 using namespace std;
 
@@ -115,10 +114,22 @@ TEST(SeriesBasedOnTermTest, GetValueAtInfinityWorks)
     EXPECT_EQ(Term(AlbaNumber::createFraction(1, 2)), series.getValueAtInfinity());
 }
 
-TEST(SeriesBasedOnTermTest, GetGreatestLowerBoundWorks)
+TEST(SeriesBasedOnTermTest, GetRemainderAtIndexWorks)
 {
     Term n("n");
     Term numerator(n);
+    Term denominator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
+    Term formula(createExpressionIfPossible({numerator, Term("/"), denominator}));
+    SeriesBasedOnTerm series(formula, "n");
+
+    EXPECT_EQ(Term(AlbaNumber::createFraction(1, 2)), series.getRemainderAtIndex(0));
+    EXPECT_EQ(Term(AlbaNumber::createFraction(1, 6)), series.getRemainderAtIndex(1));
+    EXPECT_EQ(Term(AlbaNumber::createFraction(1, 10)), series.getRemainderAtIndex(2));
+}
+
+TEST(SeriesBasedOnTermTest, GetGreatestLowerBoundWorks)
+{
+    Term n("n");    Term numerator(n);
     Term denominator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
     Term formula(createExpressionIfPossible({numerator, Term("/"), denominator}));
     SeriesBasedOnTerm series(formula, "n");
