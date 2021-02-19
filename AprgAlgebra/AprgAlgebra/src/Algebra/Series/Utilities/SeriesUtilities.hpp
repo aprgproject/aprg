@@ -55,10 +55,13 @@ void performRootTest(
         SeriesBasedOnSummation const& series,
         std::string const& variableName);
 
+Term getLimitForRatioTest(
+        SeriesBasedOnSummation const& series,
+        std::string const& variableName);
+
 Term getSumOfArithmeticSeriesUsingFirstAndLastTerm(
         Term const& firstTerm,
-        Term const& lastTerm,
-        Term const& count);
+        Term const& lastTerm,        Term const& count);
 
 Term getSumOfGeometricSeriesUsingFirstValueAndCommonMultiplier(
         Term const& firstValue,

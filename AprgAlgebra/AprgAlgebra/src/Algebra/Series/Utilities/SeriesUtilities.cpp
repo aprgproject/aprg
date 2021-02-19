@@ -148,16 +148,10 @@ void performRatioTest(
         SeriesBasedOnSummation const& series,
         string const& variableName)
 {
-    SubstitutionOfVariablesToTerms substitution
-    {{variableName, Term(Polynomial{Monomial(1, {{variableName, 1}}), Monomial(1, {})})}};
-    Term formulaForEachTerm(series.getFormulaForEachTermInSummation());
-    Term formulaForEachTermWithPlusOne(substitution.performSubstitutionTo(formulaForEachTerm));
-    Term termForLimit(convertPositiveTermIfNegative(formulaForEachTermWithPlusOne) / convertPositiveTermIfNegative(formulaForEachTerm));
-    Term limitTerm(getLimit(termForLimit, variableName, AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
+    Term limitTerm(getLimitForRatioTest(series, variableName));
     if(limitTerm.isConstant())
     {
-        AlbaNumber limitValue(limitTerm.getConstantValueConstReference());
-        if(limitValue < 1)
+        AlbaNumber limitValue(limitTerm.getConstantValueConstReference());        if(limitValue < 1)
         {
             isConvergent = true;
         }
@@ -193,10 +187,21 @@ void performRootTest(
     }
 }
 
+Term getLimitForRatioTest(
+        SeriesBasedOnSummation const& series,
+        string const& variableName)
+{
+    SubstitutionOfVariablesToTerms substitution
+    {{variableName, Term(Polynomial{Monomial(1, {{variableName, 1}}), Monomial(1, {})})}};
+    Term formulaForEachTerm(series.getFormulaForEachTermInSummation());
+    Term formulaForEachTermWithPlusOne(substitution.performSubstitutionTo(formulaForEachTerm));
+    Term termForLimit(convertPositiveTermIfNegative(formulaForEachTermWithPlusOne) / convertPositiveTermIfNegative(formulaForEachTerm));
+    return getLimit(termForLimit, variableName, AlbaNumber(AlbaNumber::Value::PositiveInfinity));
+}
+
 Term getSumOfArithmeticSeriesUsingFirstAndLastTerm(
         Term const& firstTerm,
-        Term const& lastTerm,
-        Term const& count)
+        Term const& lastTerm,        Term const& count)
 {
     return (firstTerm + lastTerm) * count / 2;
 }
