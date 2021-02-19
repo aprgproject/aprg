@@ -341,15 +341,11 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionAndSimplif
     Expression expressionToVerify(additionAndSubtraction.getCombinedExpression());
     expressionToVerify.simplify();
 
-    Expression subExpression1(createExpressionIfPossible({Term("x"), Term("*"), Term(exponentExpression)}));
-    Expression subExpression2(createExpressionIfPossible({Term(2), Term("*"), Term(exponentExpression)}));
-    Expression subExpression3(createExpressionIfPossible({Term(1), Term("+"), Term(subExpression1), Term("+"), Term(subExpression2)}));
-    Expression expressionToExpect(createExpressionIfPossible({Term(subExpression3), Term("/"), Term(polynomial)}));
-    EXPECT_EQ(expressionToExpect, expressionToVerify);
+    string stringToExpect("((1+(x*(2^x))+(2^(1[x] + 1)))/(1[x] + 2))");
+    EXPECT_EQ(stringToExpect, expressionToVerify.getDisplayableString());
 }
 
-TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionAndSimplifyUsingExample1Works)
-{
+TEST(AdditionAndSubtractionOfTermsOverTermsTest, GetCombinedExpressionAndSimplifyUsingExample1Works){
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
     TermsOverTerms fraction1({Term(4)}, {Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {})})});
     TermsOverTerms fraction2({Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(3, {})})}, {Term(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-4, {})})});

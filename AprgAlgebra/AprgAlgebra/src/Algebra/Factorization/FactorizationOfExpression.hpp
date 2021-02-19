@@ -23,11 +23,10 @@ TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForRaiseToPower(Expression con
 void retrieveConstantAndNonConstantFactors(
         std::vector<TermsRaiseToNumbers> & nonConstantFactorsPerAddends,
         AlbaNumbers & constantFactors,
-        Expression const& expression);
+        TermsWithDetails const& originalTermsWithDetails);
 AlbaNumber getGcfOfConstants(AlbaNumbers const& constantFactorsPerAddends);
 void retrieveCommonNonConstantFactors(
-        TermsRaiseToNumbers & commonNonConstantFactors,
-        std::vector<TermsRaiseToNumbers> const& nonConstantFactorsPerAddends);
+        TermsRaiseToNumbers & commonNonConstantFactors,        std::vector<TermsRaiseToNumbers> const& nonConstantFactorsPerAddends);
 TermsRaiseToNumbers getFactorizedItemsForAdditionAndSubtraction(
         Expression const& expression,
         AlbaNumbers const& constantFactorsPerAddends,

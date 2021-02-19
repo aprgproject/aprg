@@ -1,10 +1,10 @@
 #pragma once
 
 #include <Algebra/Constructs/TermsRaiseToNumbers.hpp>
+#include <Algebra/Constructs/TermsRaiseToTerms.hpp>
 
 #include <string>
 #include <vector>
-
 namespace alba
 {
 
@@ -32,10 +32,10 @@ public:
             Polynomial & polynomialDenominator,
             Terms & nonPolynomialDenominators) const;
     TermsRaiseToNumbers getTermsRaiseToNumbers() const;
+    TermsRaiseToTerms getTermsRaiseToTerms() const;
     std::string getDisplayableString() const;
 
     void flip();
-
     void setAsShouldSimplifyToFactors(bool const shouldSimplifyToFactors);
     void setAsShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(
             bool const shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue);
@@ -54,14 +54,9 @@ private:
     bool removeTermsIfNeededAndReturnIfSomeTermsAreRemoved(
             Terms & numerators,
             Terms & denominators);
-    void putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToNumbers(
-            Terms & numeratorTerms,
-            Terms & denominatorTerms,
-            TermsRaiseToNumbers const& termsRaiseToNumbers);
     void clearTermsThenEmplacePolynomialAndRemainingTerms(
             Polynomial const& polynomialNumerator,
-            Terms const& remainingNumerators,
-            Terms & termsToUpdate) const;
+            Terms const& remainingNumerators,            Terms & termsToUpdate) const;
     void emplacePolynomialIfNeeded(Terms & termsResult, Polynomial const& polynomialNumerator) const;
     void retrievePolynomialAndNonPolynomialsTerms(
             Terms const& termsToCheck,
@@ -70,10 +65,17 @@ private:
     void calculateBasesAndExponentsAndPutThatToNumeratorsAndDenominators(
             Terms & numeratorTerms,
             Terms & denominatorTerms);
+    void putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToTerms(
+            Terms & numeratorTerms,
+            Terms & denominatorTerms,
+            TermsRaiseToTerms const& termsRaiseToTerms);
+    void putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToNumbers(
+            Terms & numeratorTerms,
+            Terms & denominatorTerms,
+            TermsRaiseToNumbers const& termsRaiseToNumbers);
     void handleZerosInNumeratorOrDenominator(
             Terms& denominators,
-            Terms& numerators);
-    void populateTermsWithBase(
+            Terms& numerators);    void populateTermsWithBase(
             Terms & termsToUpdate,
             Term const& base,
             AlbaNumber const& exponent);

@@ -60,10 +60,24 @@ TermRaiseToTerms::TermRaiseToTerms(
     initializeExponentsInTerms(exponents);
 }
 
+TermRaiseToTerms::TermRaiseToTerms(
+        Term const& base,
+        Term const& exponent)
+    : m_base(base)
+    , m_exponents{TermWithDetails(exponent, TermAssociationType::Positive)}
+    , m_shouldSimplifyToFactors(false)
+    , m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt(false)
+    , m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase(false)
+{}
+
+bool TermRaiseToTerms::isEmpty() const
+{
+    return m_base.isEmpty();
+}
+
 bool TermRaiseToTerms::doesEvenExponentCancellationHappen() const
 {
-    bool result(false);
-    AlbaNumbers exponentValues;
+    bool result(false);    AlbaNumbers exponentValues;
     for(TermWithDetails const& exponentWithDetails : m_exponents)
     {
         Term const& exponent(getTermConstReferenceFromSharedPointer(exponentWithDetails.baseTermSharedPointer));
@@ -108,15 +122,28 @@ TermsWithDetails const& TermRaiseToTerms::getExponents() const
     return m_exponents;
 }
 
+Term & TermRaiseToTerms::getBaseReference()
+{
+    return m_base;
+}
+
 void TermRaiseToTerms::setBase(Term const& base)
 {
     m_base = base;
 }
 
+void TermRaiseToTerms::setBaseAndExponent(
+        Term const& base,
+        Term const& exponent)
+{
+    m_base = base;
+    m_exponents.clear();
+    m_exponents.emplace_back(exponent, TermAssociationType::Positive);
+}
+
 void TermRaiseToTerms::setAsShouldSimplifyToFactors(
         bool const shouldSimplifyToFactors)
-{
-    m_shouldSimplifyToFactors = shouldSimplifyToFactors;
+{    m_shouldSimplifyToFactors = shouldSimplifyToFactors;
 }
 
 void TermRaiseToTerms::setAsShouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt(
@@ -321,13 +348,15 @@ Term TermRaiseToTerms::getCombinedBaseAndExponents() const
     }
     else
     {
-        Expression raiseToPowerExpression(createOrCopyExpressionFromATerm(m_base));
-        raiseToPowerExpression.putTermWithRaiseToPowerIfNeeded(getCombinedExponents());
-        combinedTerm = Term(raiseToPowerExpression);
+        Term exponent(getCombinedExponents());
+        combinedTerm = convertExpressionToSimplestTerm(createExpressionIfPossible({m_base, Term("^"), exponent}));
+        if((m_base.isConstant() || m_base.isVariable() || m_base.isMonomial()) && exponent.isConstant())
+        {
+            combinedTerm.simplify();
+        }
     }
     return combinedTerm;
 }
-
 
 }
 

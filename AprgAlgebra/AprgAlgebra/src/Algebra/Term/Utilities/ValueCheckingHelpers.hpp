@@ -45,9 +45,9 @@ bool isANegativeConstant(Constant const& constant);
 bool isANegativeMonomial(Monomial const& monomial);
 bool isANegativePolynomial(Polynomial const& polynomial);
 bool isANegativeExpression(Expression const& expression);
+bool isIntegerConstant(Term const& term);
 bool isPositiveIntegerConstant(Term const& term);
 bool isAFiniteConstant(Term const& term);
-
 bool hasNotANumber(Term const& term);
 bool hasNotANumber(Monomial const& monomial);
 bool hasNotANumber(Polynomial const& polynomial);

@@ -505,11 +505,16 @@ Term operator+(Term const& term1, Term const& term2)
     return performAddition(term1, term2);
 }
 
+Term & operator+=(Term & term1, Term const& term2)
+{
+    term1 = term1 + term2;
+    return term1;
+}
+
 
 //Subtraction: a - b
 
-Term operator-(Constant const& constant1, Constant const& constant2)
-{
+Term operator-(Constant const& constant1, Constant const& constant2){
     return Term(constant1.getNumberConstReference() - constant2.getNumberConstReference());
 }
 
@@ -852,11 +857,16 @@ Term operator-(Term const& term1, Term const& term2)
     return performSubtraction(term1, term2);
 }
 
+Term & operator-=(Term & term1, Term const& term2)
+{
+    term1 = term1 - term2;
+    return term1;
+}
+
 
 //Multiplication: a * b
 
-Term operator*(Constant const& constant1, Constant const& constant2)
-{
+Term operator*(Constant const& constant1, Constant const& constant2){
     return Term(constant1.getNumberConstReference() * constant2.getNumberConstReference());
 }
 
@@ -1153,11 +1163,16 @@ Term operator*(Term const& term1, Term const& term2)
     return performMultiplication(term1, term2);
 }
 
+Term & operator*=(Term & term1, Term const& term2)
+{
+    term1 = term1 * term2;
+    return term1;
+}
+
 
 //Divsion: a / b
 
-Term operator/(Constant const& constant1, Constant const& constant2)
-{
+Term operator/(Constant const& constant1, Constant const& constant2){
     return Term(constant1.getNumberConstReference() / constant2.getNumberConstReference());
 }
 
@@ -1439,11 +1454,16 @@ Term operator/(Term const& term1, Term const& term2)
     return performDivision(term1, term2);
 }
 
+Term & operator/=(Term & term1, Term const& term2)
+{
+    term1 = term1 / term2;
+    return term1;
+}
+
 
 //RaiseToThePower: a ^ b
 
-Term operator^(Constant const& constant1, Constant const& constant2)
-{
+Term operator^(Constant const& constant1, Constant const& constant2){
     return Term(constant1.getNumberConstReference() ^ constant2.getNumberConstReference());
 }
 
@@ -1722,6 +1742,12 @@ Term operator^(Term const& term, Function const& functionObject)
 Term operator^(Term const& term1, Term const& term2)
 {
     return performRaiseToPower(term1, term2);
+}
+
+Term & operator^=(Term & term1, Term const& term2)
+{
+    term1 = term1 ^ term2;
+    return term1;
 }
 
 }
