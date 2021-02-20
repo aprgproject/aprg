@@ -77,7 +77,8 @@ bool TermRaiseToTerms::isEmpty() const
 
 bool TermRaiseToTerms::doesEvenExponentCancellationHappen() const
 {
-    bool result(false);    AlbaNumbers exponentValues;
+    bool result(false);
+    AlbaNumbers exponentValues;
     for(TermWithDetails const& exponentWithDetails : m_exponents)
     {
         Term const& exponent(getTermConstReferenceFromSharedPointer(exponentWithDetails.baseTermSharedPointer));
@@ -143,7 +144,8 @@ void TermRaiseToTerms::setBaseAndExponent(
 
 void TermRaiseToTerms::setAsShouldSimplifyToFactors(
         bool const shouldSimplifyToFactors)
-{    m_shouldSimplifyToFactors = shouldSimplifyToFactors;
+{
+    m_shouldSimplifyToFactors = shouldSimplifyToFactors;
 }
 
 void TermRaiseToTerms::setAsShouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt(
@@ -357,6 +359,7 @@ Term TermRaiseToTerms::getCombinedBaseAndExponents() const
     }
     return combinedTerm;
 }
+
 
 }
 

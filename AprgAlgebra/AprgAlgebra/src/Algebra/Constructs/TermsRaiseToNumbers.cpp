@@ -78,7 +78,8 @@ Term TermsRaiseToNumbers::getCombinedTerm() const
 
 void TermsRaiseToNumbers::addExponents(
         TermsRaiseToNumbers const& termsRaiseToNumbers)
-{    for(auto const& baseExponentPair : termsRaiseToNumbers.m_baseToExponentMap)
+{
+    for(auto const& baseExponentPair : termsRaiseToNumbers.m_baseToExponentMap)
     {
         m_baseToExponentMap[baseExponentPair.first] += baseExponentPair.second;
     }
@@ -96,7 +97,8 @@ void TermsRaiseToNumbers::subtractExponents(
 void TermsRaiseToNumbers::multiplyToExponents(
         AlbaNumber const& number)
 {
-    for(auto& baseExponentPair : m_baseToExponentMap)    {
+    for(auto& baseExponentPair : m_baseToExponentMap)
+    {
         baseExponentPair.second *= number;
     }
 }
@@ -112,7 +114,8 @@ void TermsRaiseToNumbers::putTerm(
         AlbaNumber const& constant(monomial.getConstantConstReference());
         if(constant != 1)
         {
-            m_baseToExponentMap[Term(constant)] += sign;        }
+            m_baseToExponentMap[Term(constant)] += sign;
+        }
         for(auto const& variableExponentPair : monomial.getVariablesToExponentsMapConstReference())
         {
             m_baseToExponentMap[Term(variableExponentPair.first)] += (variableExponentPair.second * sign);
@@ -124,6 +127,7 @@ void TermsRaiseToNumbers::putTerm(
         m_baseToExponentMap[termRaiseToANumber.getBase()] += (termRaiseToANumber.getExponent() * sign);
     }
 }
+
 void TermsRaiseToNumbers::putTerms(
         Terms const& terms,
         TermAssociationType const association)
@@ -154,7 +158,8 @@ void TermsRaiseToNumbers::clear()
 
 void TermsRaiseToNumbers::simplify()
 {
-    removeItemsWithExponentsZero();}
+    removeItemsWithExponentsZero();
+}
 
 void TermsRaiseToNumbers::removeItemsWithExponentsZero()
 {
@@ -187,6 +192,7 @@ Term TermsRaiseToNumbers::convertToTerm(
     }
     return result;
 }
+
 
 }
 

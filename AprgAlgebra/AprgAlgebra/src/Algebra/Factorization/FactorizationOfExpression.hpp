@@ -26,7 +26,8 @@ void retrieveConstantAndNonConstantFactors(
         TermsWithDetails const& originalTermsWithDetails);
 AlbaNumber getGcfOfConstants(AlbaNumbers const& constantFactorsPerAddends);
 void retrieveCommonNonConstantFactors(
-        TermsRaiseToNumbers & commonNonConstantFactors,        std::vector<TermsRaiseToNumbers> const& nonConstantFactorsPerAddends);
+        TermsRaiseToNumbers & commonNonConstantFactors,
+        std::vector<TermsRaiseToNumbers> const& nonConstantFactorsPerAddends);
 TermsRaiseToNumbers getFactorizedItemsForAdditionAndSubtraction(
         Expression const& expression,
         AlbaNumbers const& constantFactorsPerAddends,

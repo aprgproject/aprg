@@ -57,6 +57,7 @@ TEST(SimplificationUtilitiesTest, SimplifyToACommonDenominatorWorks_OnExponentPl
     EXPECT_EQ(stringToExpect, expression.getDisplayableString());
     EXPECT_TRUE(didItOccurOnTopLevelExpression);
 }
+
 TEST(SimplificationUtilitiesTest, SimplifyToACommonDenominatorWorks_OnExponentWithFractionExpressions)
 {
     Expression expression(createExpressionIfPossible(tokenizeToTerms("2^(((1)/(x+2))+((1)/(x-2)))")));

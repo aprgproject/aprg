@@ -374,7 +374,8 @@ TEST(ValueCheckingHelpersTest, IsIntegerConstantWorks)
 
 TEST(ValueCheckingHelpersTest, IsPositiveIntegerConstantWorks)
 {
-    EXPECT_FALSE(isPositiveIntegerConstant(Term("x")));    EXPECT_TRUE(isPositiveIntegerConstant(Term(1)));
+    EXPECT_FALSE(isPositiveIntegerConstant(Term("x")));
+    EXPECT_TRUE(isPositiveIntegerConstant(Term(1)));
     EXPECT_FALSE(isPositiveIntegerConstant(Term(-1)));
     EXPECT_FALSE(isPositiveIntegerConstant(Term(NAN)));
 }

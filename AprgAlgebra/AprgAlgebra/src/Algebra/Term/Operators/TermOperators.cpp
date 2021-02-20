@@ -514,7 +514,8 @@ Term & operator+=(Term & term1, Term const& term2)
 
 //Subtraction: a - b
 
-Term operator-(Constant const& constant1, Constant const& constant2){
+Term operator-(Constant const& constant1, Constant const& constant2)
+{
     return Term(constant1.getNumberConstReference() - constant2.getNumberConstReference());
 }
 
@@ -866,7 +867,8 @@ Term & operator-=(Term & term1, Term const& term2)
 
 //Multiplication: a * b
 
-Term operator*(Constant const& constant1, Constant const& constant2){
+Term operator*(Constant const& constant1, Constant const& constant2)
+{
     return Term(constant1.getNumberConstReference() * constant2.getNumberConstReference());
 }
 
@@ -1172,7 +1174,8 @@ Term & operator*=(Term & term1, Term const& term2)
 
 //Divsion: a / b
 
-Term operator/(Constant const& constant1, Constant const& constant2){
+Term operator/(Constant const& constant1, Constant const& constant2)
+{
     return Term(constant1.getNumberConstReference() / constant2.getNumberConstReference());
 }
 
@@ -1463,7 +1466,8 @@ Term & operator/=(Term & term1, Term const& term2)
 
 //RaiseToThePower: a ^ b
 
-Term operator^(Constant const& constant1, Constant const& constant2){
+Term operator^(Constant const& constant1, Constant const& constant2)
+{
     return Term(constant1.getNumberConstReference() ^ constant2.getNumberConstReference());
 }
 

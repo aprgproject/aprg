@@ -3,6 +3,7 @@
 #include <Algebra/Series/GeneralSeries/SeriesBasedOnSummation.hpp>
 #include <Algebra/Series/GeneralSeries/SeriesBasedOnFormula.hpp>
 #include <Algebra/Series/SpecificSeries/AlternatingSeries.hpp>
+#include <Algebra/Series/SpecificSeries/PowerSeries.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 
 namespace alba
@@ -61,7 +62,8 @@ Term getLimitForRatioTest(
 
 Term getSumOfArithmeticSeriesUsingFirstAndLastTerm(
         Term const& firstTerm,
-        Term const& lastTerm,        Term const& count);
+        Term const& lastTerm,
+        Term const& count);
 
 Term getSumOfGeometricSeriesUsingFirstValueAndCommonMultiplier(
         Term const& firstValue,
@@ -71,6 +73,8 @@ Term getSumOfGeometricSeriesUsingFirstValueAndCommonMultiplier(
 Term getInfiniteSumOfGeometricSeriesIfCommonMultiplierIsFractional(
         Term const& firstValue,
         Term const& commonMultiplier);
+
+PowerSeries getEToTheXPowerSeries();
 
 }
 

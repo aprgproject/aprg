@@ -119,6 +119,7 @@ TEST(TermsRaiseToNumbersTest, SubtractExponentsWorks)
     TermsRaiseToNumbers termsRaiseToNumbersToSubtract({{Term("x"), 1}, {Term("y"), -2}, {Term("z"), 3}});
 
     termsRaiseToNumbers.subtractExponents(termsRaiseToNumbersToSubtract);
+
     TermsRaiseToNumbers::BaseToExponentMap const mapToVerify(termsRaiseToNumbers.getBaseToExponentMap());
     ASSERT_EQ(3U, mapToVerify.size());
     auto itToVerify = mapToVerify.cbegin();
@@ -139,7 +140,8 @@ TEST(TermsRaiseToNumbersTest, MultiplyNumberToExponentsWorks)
     termsRaiseToNumbers.multiplyToExponents(5);
 
     TermsRaiseToNumbers::BaseToExponentMap const mapToVerify(termsRaiseToNumbers.getBaseToExponentMap());
-    ASSERT_EQ(3U, mapToVerify.size());    auto itToVerify = mapToVerify.cbegin();
+    ASSERT_EQ(3U, mapToVerify.size());
+    auto itToVerify = mapToVerify.cbegin();
     EXPECT_EQ(Term("x"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(20), itToVerify->second);
     itToVerify++;

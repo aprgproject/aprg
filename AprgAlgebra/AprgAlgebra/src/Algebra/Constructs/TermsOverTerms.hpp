@@ -5,6 +5,7 @@
 
 #include <string>
 #include <vector>
+
 namespace alba
 {
 
@@ -36,6 +37,7 @@ public:
     std::string getDisplayableString() const;
 
     void flip();
+
     void setAsShouldSimplifyToFactors(bool const shouldSimplifyToFactors);
     void setAsShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(
             bool const shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue);
@@ -56,7 +58,8 @@ private:
             Terms & denominators);
     void clearTermsThenEmplacePolynomialAndRemainingTerms(
             Polynomial const& polynomialNumerator,
-            Terms const& remainingNumerators,            Terms & termsToUpdate) const;
+            Terms const& remainingNumerators,
+            Terms & termsToUpdate) const;
     void emplacePolynomialIfNeeded(Terms & termsResult, Polynomial const& polynomialNumerator) const;
     void retrievePolynomialAndNonPolynomialsTerms(
             Terms const& termsToCheck,
@@ -75,7 +78,8 @@ private:
             TermsRaiseToNumbers const& termsRaiseToNumbers);
     void handleZerosInNumeratorOrDenominator(
             Terms& denominators,
-            Terms& numerators);    void populateTermsWithBase(
+            Terms& numerators);
+    void populateTermsWithBase(
             Terms & termsToUpdate,
             Term const& base,
             AlbaNumber const& exponent);

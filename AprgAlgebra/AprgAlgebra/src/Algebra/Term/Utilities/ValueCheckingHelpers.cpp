@@ -395,7 +395,8 @@ bool isIntegerConstant(Term const& term)
 
 bool isPositiveIntegerConstant(Term const& term)
 {
-    return term.isConstant()            && term.getConstantValueConstReference().isIntegerType()
+    return term.isConstant()
+            && term.getConstantValueConstReference().isIntegerType()
             && term.getConstantValueConstReference() >= 0;
 }
 

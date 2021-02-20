@@ -36,7 +36,8 @@ public:
 protected:
     AlbaNumbers getBoundValues() const;
     AlbaNumbers getExtremaIndexes() const;
-    Term getSignDerivativeForFiniteCalculus() const;    Term m_formulaForSeries;
+    Term getSignDerivativeForFiniteCalculus() const;
+    Term m_formulaForSeries;
     std::string m_nameForVariableInFormula;
 };
 

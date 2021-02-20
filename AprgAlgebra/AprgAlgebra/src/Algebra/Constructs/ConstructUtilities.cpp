@@ -5,7 +5,8 @@
 #include <Algebra/Term/Operators/TermOperators.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/ConvertHelpers.hpp>
-#include <Algebra/Term/Utilities/CreateHelpers.hpp>#include <Algebra/Term/Utilities/MonomialHelpers.hpp>
+#include <Algebra/Term/Utilities/CreateHelpers.hpp>
+#include <Algebra/Term/Utilities/MonomialHelpers.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
@@ -14,6 +15,7 @@
 using namespace alba::algebra::Factorization;
 using namespace alba::mathHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -102,7 +104,8 @@ TermRaiseToANumber createTermRaiseToANumberFromTerm(Term const& term)
     TermRaiseToANumber result;
     if(term.isMonomial())
     {
-        result = createTermRaiseToANumberFromMonomial(term.getMonomialConstReference());    }
+        result = createTermRaiseToANumberFromMonomial(term.getMonomialConstReference());
+    }
     else if(term.isPolynomial())
     {
         result = createTermRaiseToANumberFromPolynomial(term.getPolynomialConstReference());
