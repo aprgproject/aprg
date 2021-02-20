@@ -28,7 +28,8 @@ bool areVectorsParallel(
 
 // This is always true.
 template <typename DataType, unsigned int SIZE>
-bool isCauchySchwarzInequalitySatisfied(        AlbaMathVector<DataType, SIZE> const& vector1,
+bool isCauchySchwarzInequalitySatisfied(
+        AlbaMathVector<DataType, SIZE> const& vector1,
         AlbaMathVector<DataType, SIZE> const& vector2)
 {
     return getDotProduct(vector1, vector2) <= vector1.getMagnitude() * vector2.getMagnitude();
@@ -57,7 +58,8 @@ bool isDotProductEqualToProductOfMagnitudesWithCosineOfAngle(
 template <typename DataType, unsigned int SIZE>
 AlbaMathVector<DataType, SIZE> createZeroVector()
 {
-    return AlbaMathVector<DataType, SIZE>();}
+    return AlbaMathVector<DataType, SIZE>();
+}
 
 template <typename DataType, unsigned int SIZE>
 AlbaMathVector<DataType, SIZE> getUnitVector(
@@ -85,7 +87,8 @@ AlbaMathVector<DataType, SIZE> getVectorProjection(
 template <typename DataType, unsigned int SIZE>
 DataType getDotProduct(
         AlbaMathVector<DataType, SIZE> const& vector1,
-        AlbaMathVector<DataType, SIZE> const& vector2){
+        AlbaMathVector<DataType, SIZE> const& vector2)
+{
     DataType result(0);
     for(unsigned int i=0; i<SIZE; i++)
     {
