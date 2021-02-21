@@ -184,11 +184,10 @@ Expression AdditionAndSubtractionOfExpressions::getUniqueExpressionForAdditionOr
                 = retrieveTermsWithDetailsThatSatisfiesCondition(
                     expression.getTermsWithAssociation().getTermsWithDetails(),
                     isUniquePartOfTerm);
-        result.set(OperatorLevel::MultiplicationAndDivision, uniqueExpressions);
+        result = Expression(OperatorLevel::MultiplicationAndDivision, uniqueExpressions);
         result.simplify();
     }
-    else if(OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel())
-    {
+    else if(OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel())    {
         result = expression;
     }
     return result;

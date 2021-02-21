@@ -523,11 +523,10 @@ void TermsOverTerms::simplifyPolynomialNumeratorAndPolynomialDenominator(
         Polynomial & polynomialDenominator) const
 {
     PolynomialOverPolynomial numeratorAndDenominator(polynomialNumerator, polynomialDenominator);
-    numeratorAndDenominator.simplify();
+    numeratorAndDenominator.simplifyWithoutFactorization();
     polynomialNumerator = numeratorAndDenominator.getNumerator();
     polynomialDenominator = numeratorAndDenominator.getDenominator();
 }
-
 
 void TermsOverTerms::simplifyMonomialsToPolynomialOverPolynomial()
 {
