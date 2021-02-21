@@ -26,9 +26,9 @@ void simplifyTermToACommonDenominator(Term & term)
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
+    term.clearInternalFlags();
     term.simplify();
 }
-
 void simplifyTermByCombiningRadicals(Term & term)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -38,9 +38,9 @@ void simplifyTermByCombiningRadicals(Term & term)
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
+    term.clearInternalFlags();
     term.simplify();
 }
-
 void simplifyTermByFactoringToNonDoubleFactors(Term & term)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -51,9 +51,9 @@ void simplifyTermByFactoringToNonDoubleFactors(Term & term)
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
+    term.clearInternalFlags();
     term.simplify();
 }
-
 void simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(Term & term)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -65,9 +65,9 @@ void simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(Term & term)
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
+    term.clearInternalFlags();
     term.simplify();
 }
-
 bool simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(
         Expression & expression)
 {
