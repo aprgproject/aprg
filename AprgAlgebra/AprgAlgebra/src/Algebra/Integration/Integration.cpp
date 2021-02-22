@@ -1494,11 +1494,9 @@ void Integration::integrateUsingPreviousIntegrationByPartsTerms(
     ratio.simplify();
     if(didAccumulationUpdated && ratio.isConstant())
     {
-
         result = accumulatedUTimesV * ratio / Term(accumulatedCoefficient+1);
         result.simplify();
-    }
-}
+    }}
 
 void Integration::integrateUsingIntegrationByParts(
         Term & result,
