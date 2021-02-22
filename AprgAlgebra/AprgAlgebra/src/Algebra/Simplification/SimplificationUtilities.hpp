@@ -21,18 +21,17 @@ bool tryToAddSubtractTermsOverTermsAndReturnIfChanged(Expression & addSubtractEx
 void simplifyTermsWithDetailsInExpressionToACommonDenominator(Expression & expression);
 
 void simplifyAndCopyTermsAndChangeOperatorLevelIfNeeded(
-        TermsWithDetails & termsToUpdate,
+        TermsWithDetails & newTermsWithDetails,
         OperatorLevel & mainOperatorLevel,
-        TermsWithDetails const& termsToCheck);
+        TermsWithDetails const& oldTermsWithDetails);
 void simplifyAndCopyTermsFromAnExpressionAndChangeOperatorLevelIfNeeded(
-        TermsWithDetails & termsToUpdate,
+        TermsWithDetails & newTermsWithDetails,
         OperatorLevel & mainOperatorLevel,
-        Expression const& expression,
-        TermAssociationType const association);
+        Expression const& subExpression,
+        TermAssociationType const subExpressionAssociation);
 TermsWithAssociation getTermsWithAssociationAndReverseIfNeeded(
         Expression const& expression,
         TermAssociationType const overallAssociation);
-
 }
 
 }
