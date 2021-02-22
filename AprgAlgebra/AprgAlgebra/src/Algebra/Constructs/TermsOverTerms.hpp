@@ -49,7 +49,8 @@ private:
     Terms factorize(Terms const& terms) const;
     void continueToSimplifyToFactors(
             Terms & factorizedNumerators,
-            Terms & factorizedDenominators);    void continueToSimplifyAndCombineFactors(
+            Terms & factorizedDenominators);
+    void continueToSimplifyAndCombineFactors(
             Terms & factorizedNumerators,
             Terms & factorizedDenominators);
     Polynomial multiplyPolynomialTerms(Terms const& polynomialTerms) const;

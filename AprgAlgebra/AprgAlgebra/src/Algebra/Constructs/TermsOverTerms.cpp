@@ -164,7 +164,8 @@ TermsRaiseToNumbers TermsOverTerms::getTermsRaiseToNumbers() const
     Terms factorizedDenominators(factorizeTerms(m_denominators));
 
     result.putTerms(factorizedNumerators, TermAssociationType::Positive);
-    result.putTerms(factorizedDenominators, TermAssociationType::Negative);    return result;
+    result.putTerms(factorizedDenominators, TermAssociationType::Negative);
+    return result;
 }
 
 TermsRaiseToTerms TermsOverTerms::getTermsRaiseToTerms() const
@@ -174,7 +175,8 @@ TermsRaiseToTerms TermsOverTerms::getTermsRaiseToTerms() const
     Terms factorizedDenominators(factorizeTerms(m_denominators));
 
     result.putTerms(factorizedNumerators, TermAssociationType::Positive);
-    result.putTerms(factorizedDenominators, TermAssociationType::Negative);    return result;
+    result.putTerms(factorizedDenominators, TermAssociationType::Negative);
+    return result;
 }
 
 void TermsOverTerms::flip()
@@ -217,7 +219,8 @@ void TermsOverTerms::simplify()
     Terms newDenominators(factorize(m_denominators));
     if(m_shouldSimplifyToFactors)
     {
-        continueToSimplifyToFactors(newNumerators, newDenominators);    }
+        continueToSimplifyToFactors(newNumerators, newDenominators);
+    }
     else
     {
         continueToSimplifyAndCombineFactors(newNumerators, newDenominators);
@@ -241,7 +244,8 @@ Terms TermsOverTerms::factorize(Terms const& terms) const
 {
     ConfigurationDetails configurationDetails(
                 Factorization::Configuration::getInstance().getConfigurationDetails());
-    configurationDetails.shouldSimplifyExpressionsToFactors = m_shouldSimplifyToFactors;    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue
+    configurationDetails.shouldSimplifyExpressionsToFactors = m_shouldSimplifyToFactors;
+    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue
             = m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue;
     ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
@@ -504,7 +508,8 @@ void TermsOverTerms::putTermsToRetainAndOnTheOtherSide(
         Term transformedTermOnTheOtherSide;
         if(termToCheck.isExpression())
         {
-            Expression const& expression(termToCheck.getExpressionConstReference());            TermsWithDetails const& termsWithDetails(expression.getTermsWithAssociation().getTermsWithDetails());
+            Expression const& expression(termToCheck.getExpressionConstReference());
+            TermsWithDetails const& termsWithDetails(expression.getTermsWithAssociation().getTermsWithDetails());
             if(OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel()
                     && termsWithDetails.size() == 2)
             {

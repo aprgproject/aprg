@@ -12,6 +12,7 @@
 #include <Algebra/Term/Utilities/TermUtilities.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 #include <Math/AlbaMathHelper.hpp>
+
 using namespace alba::algebra::Simplification;
 using namespace alba::mathHelper;
 using namespace std;
@@ -310,7 +311,6 @@ void calculateTermAndLimitUsingLhopitalsRule(
     Differentiation differentiation(variableName);
     newTerm = term;
     simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(newTerm);
-    newTerm.clearAllInnerInternalFlags();
     TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(newTerm));
     Term numerator(termsOverTerms.getCombinedNumerator());
     Term denominator(termsOverTerms.getCombinedDenominator());
@@ -320,9 +320,9 @@ void calculateTermAndLimitUsingLhopitalsRule(
     while(continueToDifferentiateForLhopitalsRule(numerator, denominator, numeratorValue, denominatorValue))
     {
         numerator = differentiation.differentiate(numerator);
-        denominator = differentiation.differentiate(denominator);        newTerm = Term(numerator/denominator);
+        denominator = differentiation.differentiate(denominator);
+        newTerm = Term(numerator/denominator);
         simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(newTerm);
-        newTerm.clearAllInnerInternalFlags();
         TermsOverTerms newTermsOverTerms(createTermsOverTermsFromTerm(newTerm));
         numerator = newTermsOverTerms.getCombinedNumerator();
         denominator = newTermsOverTerms.getCombinedDenominator();
@@ -334,7 +334,8 @@ void calculateTermAndLimitUsingLhopitalsRule(
             || (isPositiveOrNegativeInfinity(numeratorValue) && isPositiveOrNegativeInfinity(denominatorValue)))
     {
         limitValue = getLimitAtAValueOrInfinity(newTerm, variableName, valueToApproach);
-    }    else
+    }
+    else
     {
         limitValue = outputValue;
     }
