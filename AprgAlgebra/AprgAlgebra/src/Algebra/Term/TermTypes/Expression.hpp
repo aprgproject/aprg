@@ -41,6 +41,7 @@ public:
 
     void clear();
     void clearAndPutTermInTermsWithAssociation(BaseTerm const& baseTerm);
+
     void putTermWithAdditionIfNeeded(BaseTerm const& baseTerm);
     void putTermWithSubtractionIfNeeded(BaseTerm const& baseTerm);
     void putTermWithMultiplicationIfNeeded(BaseTerm const& baseTerm);
@@ -66,10 +67,12 @@ public:
 
     void setAsSimplified();
     void clearInternalFlags();
+    void clearAllInnerInternalFlags();
 
 private:
 
-    //put functions    void putTermWithAddition(BaseTerm const& baseTerm);
+    //put functions
+    void putTermWithAddition(BaseTerm const& baseTerm);
     void putTermWithSubtraction(BaseTerm const& baseTerm);
     void putOnlyTermWithMultiplicationIfNeeded(BaseTerm const& baseTerm);
     void putTermWithMultiplication(BaseTerm const& baseTerm);
@@ -103,6 +106,7 @@ private:
 };
 
 using Expressions=std::vector<Expression>;
+
 std::ostream & operator<<(std::ostream & out, Expression const& expression);
 
 }

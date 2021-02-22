@@ -528,6 +528,7 @@ void TermsOverTerms::simplifyPolynomialNumeratorAndPolynomialDenominator(
     polynomialDenominator = numeratorAndDenominator.getDenominator();
 }
 
+
 void TermsOverTerms::simplifyMonomialsToPolynomialOverPolynomial()
 {
     Terms monomialsNumerators, nonMonomialNumerators, monomialDenominators, nonMonomialDenominators;

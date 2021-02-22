@@ -35,7 +35,8 @@ public:
     QuotientAndRemainder simplifyAndDivide();
     QuotientAndRemainder divide() const;
 
-private:    bool shouldPerformFactorization() const;
+private:
+    bool shouldPerformFactorization() const;
     void convertFractionCoefficientsToInteger();
     void convertNegativeExponentsToPositive();
     void removeCommonMonomialOnAllMonomialsInNumeratorAndDenominator();

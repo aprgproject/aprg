@@ -41,7 +41,8 @@ TEST(PolynomialOverPolynomialTest, IsEmptyWorks)
 
 TEST(PolynomialOverPolynomialTest, SimplifyWorksWithZeroOverDouble)
 {
-    Polynomial numerator(createPolynomialFromConstant(Constant(0)));    Polynomial denominator(createPolynomialFromConstant(Constant(1.17157287525381)));
+    Polynomial numerator(createPolynomialFromConstant(Constant(0)));
+    Polynomial denominator(createPolynomialFromConstant(Constant(1.17157287525381)));
     PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
 
     polynomialOverPolynomial.simplify();
@@ -291,7 +292,8 @@ TEST(PolynomialOverPolynomialTest, SimplifyAndDivideWorksWithRemainder)
 
 TEST(PolynomialOverPolynomialTest, DivideWithNoRemainder)
 {
-    Polynomial numerator{Monomial(3, {{"x", 3}}), Monomial(-4, {{"x", 2}, {"y", 1}}), Monomial(5, {{"x", 1}, {"y", 2}}), Monomial(6, {{"y", 3}})};    Polynomial denominator{Monomial(1, {{"x", 2}}), Monomial(-2, {{"x", 1}, {"y", 1}}), Monomial(3, {{"y", 2}})};
+    Polynomial numerator{Monomial(3, {{"x", 3}}), Monomial(-4, {{"x", 2}, {"y", 1}}), Monomial(5, {{"x", 1}, {"y", 2}}), Monomial(6, {{"y", 3}})};
+    Polynomial denominator{Monomial(1, {{"x", 2}}), Monomial(-2, {{"x", 1}, {"y", 1}}), Monomial(3, {{"y", 2}})};
     PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
 
     PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(polynomialOverPolynomial.divide());
