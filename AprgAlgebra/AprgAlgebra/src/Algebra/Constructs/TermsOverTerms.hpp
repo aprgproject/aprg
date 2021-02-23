@@ -92,7 +92,8 @@ private:
             Terms const& termsToCheck,
             Terms & termsToRetain,
             Terms & termsToPutOnTheOtherSide) const;
-    void simplifyPolynomialNumeratorAndPolynomialDenominator(            Polynomial & polynomialNumerator,
+    void simplifyPolynomialNumeratorAndPolynomialDenominator(
+            Polynomial & polynomialNumerator,
             Polynomial & polynomialDenominator) const;
     void simplifyMonomialsToPolynomialOverPolynomial();
     void simplifyPolynomialsToPolynomialOverPolynomial();

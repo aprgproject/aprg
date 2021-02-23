@@ -139,7 +139,8 @@ TEST(TermsOverTermsTest, GetTermsRaiseToNumbersWorks)
     TermsRaiseToNumbers::BaseToExponentMap const& baseToExponentMap(termsRaiseToNumbers.getBaseToExponentMap());
     ASSERT_EQ(4U, baseToExponentMap.size());
     auto itVerify=baseToExponentMap.cbegin();
-    EXPECT_EQ(Term("a"), itVerify->first);    EXPECT_EQ(AlbaNumber(1), itVerify->second);
+    EXPECT_EQ(Term("a"), itVerify->first);
+    EXPECT_EQ(AlbaNumber(1), itVerify->second);
     itVerify++;
     EXPECT_EQ(Term("b"), itVerify->first);
     EXPECT_EQ(AlbaNumber(1), itVerify->second);
@@ -187,7 +188,7 @@ TEST(TermsOverTermsTest, SimplifyWorksAndRemovesTermsThatHasNoEffect)
 
 TEST(TermsOverTermsTest, SimplifyWorksAndDoesNotCancelsZerosInNumeratorAndDenominator)
 {
-    TermsOverTerms termsOverTerms({Term(Constant(0))}, {Term(Constant(0))});
+    TermsOverTerms termsOverTerms({Term(0)}, {Term(0)});
 
     termsOverTerms.simplify();
 
@@ -202,7 +203,7 @@ TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsWithZeroInNumerato
 {
     Polynomial polynomial1{Monomial(1, {{"x", 1}}), Monomial(1, {})};
     Polynomial polynomial2{Monomial(1, {{"x", 1}}), Monomial(2, {})};
-    Terms numerators{Term(polynomial1), Term(polynomial1), Term(Constant(0))};
+    Terms numerators{Term(polynomial1), Term(polynomial1), Term(0)};
     Terms denominators{Term(polynomial2), Term(polynomial2)};
     TermsOverTerms termsOverTerms(numerators, denominators);
     termsOverTerms.setAsShouldSimplifyToFactors(true);
@@ -211,7 +212,7 @@ TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsWithZeroInNumerato
 
     Terms numeratorsToVerify(termsOverTerms.getNumerators());
     ASSERT_EQ(1U, numeratorsToVerify.size());
-    EXPECT_EQ(Term(Constant(0)), numeratorsToVerify.at(0));
+    EXPECT_EQ(Term(0), numeratorsToVerify.at(0));
     Terms denominatorsToVerify(termsOverTerms.getDenominators());
     EXPECT_TRUE(denominatorsToVerify.empty());
 }
@@ -221,7 +222,7 @@ TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsWithZeroInDenomina
     Polynomial polynomial1{Monomial(1, {{"x", 1}}), Monomial(1, {})};
     Polynomial polynomial2{Monomial(1, {{"x", 1}}), Monomial(2, {})};
     Terms numerators{Term(polynomial1), Term(polynomial1)};
-    Terms denominators{Term(polynomial2), Term(polynomial2), Term(Constant(0))};
+    Terms denominators{Term(polynomial2), Term(polynomial2), Term(0)};
     TermsOverTerms termsOverTerms(numerators, denominators);
     termsOverTerms.setAsShouldSimplifyToFactors(true);
 
@@ -233,7 +234,7 @@ TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsWithZeroInDenomina
     EXPECT_EQ(expectedNumerator, numeratorsToVerify.at(0));
     Terms denominatorsToVerify(termsOverTerms.getDenominators());
     ASSERT_EQ(1U, denominatorsToVerify.size());
-    EXPECT_EQ(Term(Constant(0)), denominatorsToVerify.at(0));
+    EXPECT_EQ(Term(0), denominatorsToVerify.at(0));
 }
 
 TEST(TermsOverTermsTest, SimplifyWorksAndRemovesOnSamePolynomialInNumeratorAndDenominator)

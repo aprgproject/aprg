@@ -48,7 +48,8 @@ bool willYieldToRelativeMinimumValue(
         AlbaNumber const& valueForEvaluation,
         AlbaNumberInterval const& openInterval);
 
-bool willYieldToRelativeMaximumValue(        Term const& term,
+bool willYieldToRelativeMaximumValue(
+        Term const& term,
         std::string const& variableName,
         AlbaNumber const& valueForEvaluation,
         AlbaNumberInterval const& openInterval);
@@ -66,7 +67,8 @@ bool isDerivativeZeroOnPossibleExtremum(
         AlbaNumber const& valueAtPossibleExtremum,
         AlbaNumberInterval const& interval);
 
-bool isDecreasingAt(        Term const& term,
+bool isDecreasingAt(
+        Term const& term,
         std::string const& variableName,
         AlbaNumber const& value);
 

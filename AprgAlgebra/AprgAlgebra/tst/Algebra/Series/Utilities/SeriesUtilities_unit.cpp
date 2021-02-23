@@ -18,6 +18,7 @@ TEST(SeriesUtilitiesTest, IsAxiomOfCompletenessTrueWorks)
     Term denominator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
     Term formula(createExpressionIfPossible({numerator, Term("/"), denominator}));
     SeriesBasedOnFormula series(formula, "n");
+
     EXPECT_TRUE(isAxiomOfCompletenessTrue(series));
 }
 
@@ -28,6 +29,7 @@ TEST(SeriesUtilitiesTest, IsBoundedMonotonicSeriesConvergentWorks)
     Term denominator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
     Term formula(createExpressionIfPossible({numerator, Term("/"), denominator}));
     SeriesBasedOnFormula series(formula, "n");
+
     EXPECT_TRUE(isBoundedMonotonicSeriesConvergent(series));
 }
 
@@ -38,6 +40,7 @@ TEST(SeriesUtilitiesTest, IsConvergentMonotonicSeriesBoundedWorks)
     Term denominator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
     Term formula(createExpressionIfPossible({numerator, Term("/"), denominator}));
     SeriesBasedOnFormula series(formula, "n");
+
     EXPECT_TRUE(isConvergentMonotonicSeriesBounded(series));
 }
 
@@ -67,6 +70,7 @@ TEST(SeriesUtilitiesTest, IsDivergentUsingComparisonTestWorks)
     Term divergentDenominator("n");
     Term divergentFormula(createExpressionIfPossible({divergentNumerator, Term("/"), divergentDenominator}));
     SeriesBasedOnSummation divergentSeries(divergentFormula, "n");
+
     EXPECT_TRUE(isDivergentUsingComparisonTest(seriesToTest, divergentSeries, 10));
 }
 
@@ -81,6 +85,7 @@ TEST(SeriesUtilitiesTest, PerformLimitComparisonTestWorks)
     Term denominator2("n");
     Term formula2(createExpressionIfPossible({numerator2, Term("/"), denominator2}));
     SeriesBasedOnSummation series2(formula2, "n");
+
     bool isConvergent(false);
     bool isDivergent(false);
     performLimitComparisonTest(isConvergent, isDivergent, series1, series2, "n");
@@ -126,6 +131,7 @@ TEST(SeriesUtilitiesTest, PerformRatioTestWorksWhenConvergent)
     Term denominator(createExpressionIfPossible({Term(2), Term("^"), n}));
     Term formula(createExpressionIfPossible({numerator, Term("/"), denominator}));
     SeriesBasedOnSummation series(formula, "n");
+
     bool isConvergent(false);
     bool isDivergent(false);
     performRatioTest(isConvergent, isDivergent, series, "n");

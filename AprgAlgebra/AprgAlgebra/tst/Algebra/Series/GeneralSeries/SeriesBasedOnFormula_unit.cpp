@@ -77,7 +77,7 @@ TEST(SeriesBasedOnFormulaTest, GetValueAtIndexWorks)
     SeriesBasedOnFormula series(Term("n"), "n");
 
     EXPECT_EQ(Term(-5), series.getValueAtIndex(-5));
-    EXPECT_EQ(Term(Constant(0)), series.getValueAtIndex(0));
+    EXPECT_EQ(Term(0), series.getValueAtIndex(0));
     EXPECT_EQ(Term(5), series.getValueAtIndex(5));
 }
 
@@ -111,6 +111,7 @@ TEST(SeriesBasedOnFormulaTest, GetValueAtInfinityWorks)
     Term denominator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
     Term formula(createExpressionIfPossible({numerator, Term("/"), denominator}));
     SeriesBasedOnFormula series(formula, "n");
+
     EXPECT_EQ(Term(AlbaNumber::createFraction(1, 2)), series.getValueAtInfinity());
 }
 
@@ -121,6 +122,7 @@ TEST(SeriesBasedOnFormulaTest, GetRemainderAtIndexWorks)
     Term denominator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
     Term formula(createExpressionIfPossible({numerator, Term("/"), denominator}));
     SeriesBasedOnFormula series(formula, "n");
+
     EXPECT_EQ(Term(AlbaNumber::createFraction(1, 2)), series.getRemainderAtIndex(0));
     EXPECT_EQ(Term(AlbaNumber::createFraction(1, 6)), series.getRemainderAtIndex(1));
     EXPECT_EQ(Term(AlbaNumber::createFraction(1, 10)), series.getRemainderAtIndex(2));
@@ -133,6 +135,7 @@ TEST(SeriesBasedOnFormulaTest, GetGreatestLowerBoundWorks)
     Term denominator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
     Term formula(createExpressionIfPossible({numerator, Term("/"), denominator}));
     SeriesBasedOnFormula series(formula, "n");
+
     AlbaNumberOptional greatestLowerBoundOptional(series.getGreatestLowerBound());
 
     ASSERT_TRUE(greatestLowerBoundOptional.hasContent());
@@ -146,6 +149,7 @@ TEST(SeriesBasedOnFormulaTest, GetLeastUpperBoundWorks)
     Term denominator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
     Term formula(createExpressionIfPossible({numerator, Term("/"), denominator}));
     SeriesBasedOnFormula series(formula, "n");
+
     AlbaNumberOptional leastUpperBoundOptional(series.getLeastUpperBound());
 
     ASSERT_TRUE(leastUpperBoundOptional.hasContent());

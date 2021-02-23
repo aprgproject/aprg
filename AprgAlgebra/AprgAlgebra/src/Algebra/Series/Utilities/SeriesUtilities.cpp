@@ -11,6 +11,7 @@
 #include <Algebra/Term/Utilities/TermUtilities.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 #include <Algebra/Utilities/KnownNames.hpp>
+
 using namespace alba::algebra::Functions;
 using namespace std;
 
@@ -57,7 +58,8 @@ bool isConvergentUsingComparisonTest(
         for(int i=0; i<static_cast<int>(numberOfIndexesToTest); i++)
         {
             Term termToCheck(seriesToCheck.getTermValueAtIndex(i));
-            Term convergentTerm(convergentSeries.getTermValueAtIndex(i));            if(termToCheck.isConstant() && convergentTerm.isConstant())
+            Term convergentTerm(convergentSeries.getTermValueAtIndex(i));
+            if(termToCheck.isConstant() && convergentTerm.isConstant())
             {
                 areAllValuesSatisfied
                         = (termToCheck.getConstantValueConstReference() <= convergentTerm.getConstantValueConstReference());
@@ -84,7 +86,8 @@ bool isDivergentUsingComparisonTest(
         for(int i=0; i<static_cast<int>(numberOfIndexesToTest); i++)
         {
             Term termToCheck(seriesToCheck.getTermValueAtIndex(i));
-            Term divergentTerm(divergentSeries.getTermValueAtIndex(i));            if(termToCheck.isConstant() &&  divergentTerm.isConstant())
+            Term divergentTerm(divergentSeries.getTermValueAtIndex(i));
+            if(termToCheck.isConstant() &&  divergentTerm.isConstant())
             {
                 areAllValuesSatisfied
                         = (termToCheck.getConstantValueConstReference() >=  divergentTerm.getConstantValueConstReference());

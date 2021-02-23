@@ -140,6 +140,7 @@ TEST(LimitTest, GetLimitWorks)
 
     EXPECT_EQ(Term(5), termToVerify1);
 }
+
 TEST(LimitTest, GetLimitUsingLhopitalsRuleWorks)
 {
     Term x("x");
@@ -148,6 +149,7 @@ TEST(LimitTest, GetLimitUsingLhopitalsRuleWorks)
     Term termToTest1("x");
     Term termToTest2(createExpressionIfPossible({x, Term("/"), oneMinusEToTheX}));
     Term termToTest3(createExpressionIfPossible({Term(sin(oneOverX)), Term("/"), Term(arctan(oneOverX))}));
+
     Term termToVerify1(getLimitUsingLhopitalsRule(termToTest1, "x", 5));
     Term termToVerify2(getLimitUsingLhopitalsRule(termToTest2, "x", 0));
     Term termToVerify3(getLimitUsingLhopitalsRule(termToTest3, "x", AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
@@ -165,6 +167,7 @@ TEST(LimitTest, GetTermUsingLhopitalsRuleWorks)
     Term termToTest1("x");
     Term termToTest2(createExpressionIfPossible({x, Term("/"), oneMinusEToTheX}));
     Term termToTest3(createExpressionIfPossible({Term(sin(oneOverX)), Term("/"), Term(arctan(oneOverX))}));
+
     Term termToVerify1(getTermUsingLhopitalsRule(termToTest1, "x", 5));
     Term termToVerify2(getTermUsingLhopitalsRule(termToTest2, "x", 0));
     Term termToVerify3(getTermUsingLhopitalsRule(termToTest3, "x", AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
@@ -229,7 +232,7 @@ TEST(LimitTest, GetLimitAtAValueOrInfinityWorks)
     Term termToTest2(createExpressionIfPossible({Term(1), Term("/"), Term("x")}));
 
     EXPECT_EQ(Term(5), getLimitAtAValueOrInfinity(termToTest1, "x", 3));
-    EXPECT_EQ(Term(Constant(0)), getLimitAtAValueOrInfinity(termToTest2, "x", AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
+    EXPECT_EQ(Term(0), getLimitAtAValueOrInfinity(termToTest2, "x", AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
 }
 
 TEST(LimitTest, GetLimitAtAValueWorksWhichDoesNotResultToConstant)
@@ -348,9 +351,9 @@ TEST(LimitTest, GetLimitAtAValueWorksForAbsoluteValueFunction)
 {
     Term absoluteValueFunction(Functions::abs(Term("x")));
 
-    EXPECT_EQ(Term(Constant(0)), getLimitAtAValue(absoluteValueFunction, "x", 0, LimitAtAValueApproachType::BothSides));
-    EXPECT_EQ(Term(Constant(0)), getLimitAtAValue(absoluteValueFunction, "x", 0, LimitAtAValueApproachType::PositiveSide));
-    EXPECT_EQ(Term(Constant(0)), getLimitAtAValue(absoluteValueFunction, "x", 0, LimitAtAValueApproachType::NegativeSide));
+    EXPECT_EQ(Term(0), getLimitAtAValue(absoluteValueFunction, "x", 0, LimitAtAValueApproachType::BothSides));
+    EXPECT_EQ(Term(0), getLimitAtAValue(absoluteValueFunction, "x", 0, LimitAtAValueApproachType::PositiveSide));
+    EXPECT_EQ(Term(0), getLimitAtAValue(absoluteValueFunction, "x", 0, LimitAtAValueApproachType::NegativeSide));
 }
 
 TEST(LimitTest, GetLimitAtAValueWorksForASpecifiedFunction)

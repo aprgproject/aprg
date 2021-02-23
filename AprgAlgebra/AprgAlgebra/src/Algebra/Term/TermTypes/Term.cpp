@@ -28,10 +28,23 @@ Term::Term(Term const& term)
 {
     resetBaseDataTermPointerBasedFromTerm(term);
 }
-Term::Term(Constant const& constant)
+
+Term::Term(int const signedValue)
     : m_type(TermType::Constant)
     , m_isSimplified(false)
-    , m_baseDataTermPointer(make_unique<Constant>(constant))
+    , m_baseDataTermPointer(make_unique<Constant>(signedValue))
+{}
+
+Term::Term(unsigned int const unsignedValue)
+    : m_type(TermType::Constant)
+    , m_isSimplified(false)
+    , m_baseDataTermPointer(make_unique<Constant>(unsignedValue))
+{}
+
+Term::Term(double const doubleValue)
+    : m_type(TermType::Constant)
+    , m_isSimplified(false)
+    , m_baseDataTermPointer(make_unique<Constant>(doubleValue))
 {}
 
 Term::Term(string const& stringTerm)
@@ -40,7 +53,8 @@ Term::Term(string const& stringTerm)
     , m_baseDataTermPointer(nullptr)
 {
     if(algebra::isOperator(stringTerm))
-    {        m_type=TermType::Operator;
+    {
+        m_type=TermType::Operator;
         m_baseDataTermPointer = make_unique<Operator>(stringTerm);
     }
     else if(algebra::isFunction(stringTerm))
@@ -55,6 +69,12 @@ Term::Term(string const& stringTerm)
     }
 }
 
+Term::Term(Constant const& constant)
+    : m_type(TermType::Constant)
+    , m_isSimplified(false)
+    , m_baseDataTermPointer(make_unique<Constant>(constant))
+{}
+
 Term::Term(Variable const& variable)
     : m_type(TermType::Variable)
     , m_isSimplified(false)
@@ -62,6 +82,7 @@ Term::Term(Variable const& variable)
 {
     m_baseDataTermPointer = make_unique<Variable>(variable);
 }
+
 Term::Term(Operator const& operatorTerm)
     : m_type(TermType::Operator)
     , m_isSimplified(false)
@@ -69,6 +90,7 @@ Term::Term(Operator const& operatorTerm)
 {
     m_baseDataTermPointer = make_unique<Operator>(operatorTerm);
 }
+
 Term::Term(Monomial const& monomial)
     : m_type(TermType::Monomial)
     , m_isSimplified(false)
@@ -100,6 +122,7 @@ Term& Term::operator=(Term const& term)
     resetBaseDataTermPointerBasedFromTerm(term);
     return *this;
 }
+
 bool Term::operator==(Term const& second) const
 {
     bool result(false);
