@@ -91,11 +91,10 @@ Term getVolumeUsingCylindricalShells(
     return integration.integrateAtDefiniteTerms(termToIntegrate, lowerValueTerm, higherValueTerm);
 }
 
-Term getLengthOfTheEdge(
+Term getLengthOfArc(
         Term const& term,
         string const& variableName,
-        Term const& lowerValueTerm,
-        Term const& higherValueTerm)
+        Term const& lowerValueTerm,        Term const& higherValueTerm)
 {
     // If the function f and its derivative fPrime are continuous on the closed interval [a, b],
     // then the length of arc of the curve y=f(x) from the point (a, f(a) to the point (b, f(b)) is given by:
@@ -110,10 +109,23 @@ Term getLengthOfTheEdge(
     return integration.integrateAtDefiniteTerms(termToIntegrate, lowerValueTerm, higherValueTerm);
 }
 
+Term getLengthOfArcInPolarCoordinates(
+        Term const& radiusInTermsOfTheta,
+        std::string const& thetaName,
+        Term const& lowerValueTermInTheta,
+        Term const& higherValueTermInTheta)
+{
+    Differentiation differentiation(thetaName);
+    Integration integration(thetaName);
+    Term drOverDTheta(differentiation.differentiate(radiusInTermsOfTheta));
+    Term termToIntegrate = ((drOverDTheta^Term(2))+(radiusInTermsOfTheta^Term(2)))^Term(AlbaNumber::createFraction(1, 2));
+    termToIntegrate.simplify();
+    return integration.integrateAtDefiniteTerms(termToIntegrate, lowerValueTermInTheta, higherValueTermInTheta);
+}
+
 Term getTotalMassOfARod(
         Term const& term,
-        string const& variableName,
-        Term const& lowerValueTerm,
+        string const& variableName,        Term const& lowerValueTerm,
         Term const& higherValueTerm)
 {
     // A rod of length L meters has its left endpoint at the origin.
@@ -229,15 +241,14 @@ Term getLiquidPressure(
 Term integrateInPolarCoordinates(
         Term const& radiusInTermsOfTheta,
         string const& thetaName,
-        Term const& lowerValueTerm,
-        Term const& higherValueTerm)
+        Term const& lowerValueTermInTheta,
+        Term const& higherValueTermInTheta)
 {
     Integration integration(thetaName);
     Term radiusSquared(radiusInTermsOfTheta^2);
     radiusSquared.simplify();
-    return integration.integrateAtDefiniteTerms(radiusSquared, lowerValueTerm, higherValueTerm);
+    return integration.integrateAtDefiniteTerms(radiusSquared, lowerValueTermInTheta, higherValueTermInTheta);
 }
 
 }
-
 }

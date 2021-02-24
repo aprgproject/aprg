@@ -43,16 +43,21 @@ Term getVolumeUsingCylindricalShells(
         Term const& lowerValueTerm,
         Term const& higherValueTerm);
 
-Term getLengthOfTheEdge(
+Term getLengthOfArc(
         Term const& term,
         std::string const& variableName,
         Term const& lowerValueTerm,
         Term const& higherValueTerm);
 
+Term getLengthOfArcInPolarCoordinates(
+        Term const& radiusInTermsOfTheta,
+        std::string const& thetaName,
+        Term const& lowerValueTermInTheta,
+        Term const& higherValueTermInTheta);
+
 Term getTotalMassOfARod(
         Term const& term,
-        std::string const& variableName,
-        Term const& lowerValueTerm,
+        std::string const& variableName,        Term const& lowerValueTerm,
         Term const& higherValueTerm);
 
 Term getMomentOfMassOfARod(
@@ -108,8 +113,8 @@ Term getLiquidPressure(
 Term integrateInPolarCoordinates(
         Term const& radiusInTermsOfTheta,
         std::string const& thetaName,
-        Term const& lowerValueTerm,
-        Term const& higherValueTerm);
+        Term const& lowerValueTermInTheta,
+        Term const& higherValueTermInTheta);
 }
 
 }
