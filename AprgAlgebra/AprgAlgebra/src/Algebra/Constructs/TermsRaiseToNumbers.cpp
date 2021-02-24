@@ -114,11 +114,25 @@ void TermsRaiseToNumbers::putTerm(
         AlbaNumber const& constant(monomial.getConstantConstReference());
         if(constant != 1)
         {
-            m_baseToExponentMap[Term(constant)] += sign;
+            if(constant.isFractionType())
+            {
+                AlbaNumber::FractionData fractionData(constant.getFractionData());
+                if(fractionData.numerator != 1)
+                {
+                    m_baseToExponentMap[Term(fractionData.numerator)] += sign;
+                }
+                if(fractionData.denominator != 1)
+                {
+                    m_baseToExponentMap[Term(fractionData.denominator)] += sign*-1;
+                }
+            }
+            else
+            {
+                m_baseToExponentMap[Term(constant)] += sign;
+            }
         }
         for(auto const& variableExponentPair : monomial.getVariablesToExponentsMapConstReference())
-        {
-            m_baseToExponentMap[Term(variableExponentPair.first)] += (variableExponentPair.second * sign);
+        {            m_baseToExponentMap[Term(variableExponentPair.first)] += (variableExponentPair.second * sign);
         }
     }
     else
