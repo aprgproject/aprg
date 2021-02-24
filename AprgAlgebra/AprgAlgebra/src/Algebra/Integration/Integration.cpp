@@ -1104,7 +1104,8 @@ void Integration::integrateUsingPartialFractionPolynomials(
         oneOverDenominator.setAsShouldSimplifyToFactors(true);
         oneOverDenominator.simplify();
 
-        if(oneOverDenominator.getDenominators().size() > 1)        {
+        if(oneOverDenominator.getDenominators().size() > 1)
+        {
             TermsRaiseToNumbers factorsWithExponents(oneOverDenominator.getTermsRaiseToNumbers());
 
             Polynomials partialNumerators;

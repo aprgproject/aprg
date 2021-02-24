@@ -5,7 +5,8 @@
 #include <Algebra/Constructs/TermRaiseToTerms.hpp>
 #include <Algebra/Factorization/FactorizationOfTerm.hpp>
 #include <Algebra/Operations/AccumulateOperations.hpp>
-#include <Algebra/Term/Operators/TermOperators.hpp>#include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
+#include <Algebra/Term/Operators/TermOperators.hpp>
+#include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/ConvertHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
@@ -40,7 +41,8 @@ TermsOverTerms::TermsOverTerms(
     , m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails())
 {
     TermsWithDetails numeratorsWithDetails;
-    TermsWithDetails denominatorsWithDetails;    segregateTermsWithPositiveAndNegativeAssociations(termsInMultiplicationAndDivision, numeratorsWithDetails, denominatorsWithDetails);
+    TermsWithDetails denominatorsWithDetails;
+    segregateTermsWithPositiveAndNegativeAssociations(termsInMultiplicationAndDivision, numeratorsWithDetails, denominatorsWithDetails);
     retrieveTermsFromTermsWithDetails(m_numerators, numeratorsWithDetails);
     retrieveTermsFromTermsWithDetails(m_denominators, denominatorsWithDetails);
 }
@@ -52,13 +54,15 @@ TermsOverTerms::TermsOverTerms(Terms const& numerators, Terms const& denominator
     , m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails())
 {}
 
-TermsOverTerms::TermsOverTerms(        TermsWithDetails const& numeratorsWithDetails,
+TermsOverTerms::TermsOverTerms(
+        TermsWithDetails const& numeratorsWithDetails,
         TermsWithDetails const& denominatorsWithDetails)
     : m_shouldSimplifyToFactors(false)
     , m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails())
 {
     retrieveTermsFromTermsWithDetails(m_numerators, numeratorsWithDetails);
-    retrieveTermsFromTermsWithDetails(m_denominators, denominatorsWithDetails);}
+    retrieveTermsFromTermsWithDetails(m_denominators, denominatorsWithDetails);
+}
 
 Terms const& TermsOverTerms::getNumerators() const
 {
@@ -207,7 +211,8 @@ void TermsOverTerms::setFactorizationConfigurationDetails(
     m_factorizationConfiguration = configurationDetails;
 }
 
-void TermsOverTerms::simplify(){
+void TermsOverTerms::simplify()
+{
     putTermsOnNumeratorAndDenominatorCorrectly(m_numerators, m_denominators);
     Terms newNumerators(factorize(m_numerators));
     Terms newDenominators(factorize(m_denominators));
@@ -241,6 +246,7 @@ Terms TermsOverTerms::factorize(Terms const& terms) const
 
     return factorizeTerms(terms);
 }
+
 void TermsOverTerms::continueToSimplifyToFactors(
         Terms & factorizedNumerators,
         Terms & factorizedDenominators)

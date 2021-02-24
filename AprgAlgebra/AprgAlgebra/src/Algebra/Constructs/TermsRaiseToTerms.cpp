@@ -134,7 +134,8 @@ void TermsRaiseToTerms::putTerm(
             }
         }
         for(auto const& variableExponentPair : monomial.getVariablesToExponentsMapConstReference())
-        {            m_baseToExponentMap[Term(variableExponentPair.first)] += Term(variableExponentPair.second * sign);
+        {
+            m_baseToExponentMap[Term(variableExponentPair.first)] += Term(variableExponentPair.second * sign);
         }
     }
     else

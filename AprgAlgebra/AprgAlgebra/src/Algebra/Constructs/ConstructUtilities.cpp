@@ -210,7 +210,8 @@ void createTermRaiseToANumberFromMultiplicationAndDivisionExpression(
     originalTot.setAsShouldSimplifyToFactors(true);
     TermsRaiseToNumbers termsRaiseToNumbers(originalTot.getTermsRaiseToNumbers());
 
-    bool isFirst(true);    AlbaNumber commonExponent(1);
+    bool isFirst(true);
+    AlbaNumber commonExponent(1);
     bool areAllExponentsNegative(true);
     for(auto const& baseExponentPair : termsRaiseToNumbers.getBaseToExponentMap())
     {
@@ -246,6 +247,7 @@ void createTermRaiseToANumberFromMultiplicationAndDivisionExpression(
     totWithoutCommonExponent.setAsShouldSimplifyToFactors(true);
     result = TermRaiseToANumber(totWithoutCommonExponent.getCombinedTerm(), commonExponent);
 }
+
 TermRaiseToTerms createTermRaiseToTermsFromTerm(Term const& term)
 {
     TermRaiseToTerms result;
@@ -310,7 +312,8 @@ void createTermRaiseToTermsFromMultiplicationAndDivisionExpression(
     originalTot.setAsShouldSimplifyToFactors(true);
     TermsRaiseToTerms originalTermsRaiseToTerms(originalTot.getTermsRaiseToTerms());
 
-    AlbaNumbers originalConstants;    TermsWithDetails originalExponentsWithDetails;
+    AlbaNumbers originalConstants;
+    TermsWithDetails originalExponentsWithDetails;
     for(auto const& baseExponentPair : originalTermsRaiseToTerms.getBaseToExponentMap())
     {
         Term const& base(baseExponentPair.first);
@@ -332,7 +335,8 @@ void createTermRaiseToTermsFromMultiplicationAndDivisionExpression(
                                        }));
     AlbaNumber constantGcf(getGcfOfConstants(constantFactorsOfExponents));
     if(areAllConstantFactorsNegative)
-    {        constantGcf = constantGcf*-1;
+    {
+        constantGcf = constantGcf*-1;
     }
     retrieveCommonNonConstantFactors(commonNonConstantFactorsOfExponents, nonConstantFactorsOfExponents);
 

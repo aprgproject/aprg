@@ -93,7 +93,8 @@ TermsRaiseToNumbers factorizeToTermsRaiseToNumbersForRaiseToPower(
     {
         result.setBaseAndExponent(base, mainBaseToExponent.getExponent());
     }
-    else    {
+    else
+    {
         Terms factorizedBases(factorizeTerm(base));
         result.putTerms(factorizedBases, TermAssociationType::Positive);
         result.multiplyToExponents(mainBaseToExponent.getExponent());
@@ -272,12 +273,6 @@ bool dontFactorizeBaseBecauseBaseIsARaiseToPowerExpression(
     }
     return result;
 }
-
-/*bool dontFactorizeBecauseItsRadical(
-        TermRaiseToANumber const& mainBaseToExponent)
-{
-    return mainBaseToExponent.isRadical() && shouldNotFactorizeRadicals();
-}*/
 
 bool dontFactorizeBecauseThereIsSquareRootOfNegativeNumber(
         Term const& base,

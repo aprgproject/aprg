@@ -6,6 +6,7 @@
 
 #include <string>
 #include <vector>
+
 namespace alba
 {
 
@@ -42,6 +43,7 @@ public:
     void setFactorizationConfigurationDetails(Factorization::ConfigurationDetails const& configurationDetails);
 
     void simplify();
+
 private:
     Terms factorizeIfNeeded(Terms const& terms) const;
     Terms factorize(Terms const& terms) const;
@@ -103,6 +105,7 @@ private:
 };
 
 using VectorOfTermsOverTerms = std::vector<TermsOverTerms>;
+
 }
 
 }

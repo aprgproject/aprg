@@ -504,6 +504,7 @@ TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsAndFactorsAreCance
     termsOverTerms.setAsShouldSimplifyToFactors(true);
 
     termsOverTerms.simplify();
+
     Terms numeratorsToVerify(termsOverTerms.getNumerators());
     EXPECT_TRUE(numeratorsToVerify.empty());
     Term expectedDenominator(createExpressionIfPossible({polynomialTerm, Term("^"), Term(6)}));
@@ -548,6 +549,7 @@ TEST(TermsOverTermsTest, SimplifyWorksWhenShouldNotFactorizeIfItWouldYieldToPoly
     termsOverTerms.setFactorizationConfigurationDetails(configurationDetails);
 
     termsOverTerms.simplify();
+
     Term expectedNumerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-5, {})});
     Terms numeratorsToVerify(termsOverTerms.getNumerators());
     ASSERT_EQ(1U, numeratorsToVerify.size());
@@ -574,6 +576,7 @@ TEST(TermsOverTermsTest, SimplifyWorksAndFactorizeTrigonometricFunctions)
     termsOverTerms.setFactorizationConfigurationDetails(configurationDetails);
 
     termsOverTerms.simplify();
+
     Term expectedNumerator(tan(x));
     Terms numeratorsToVerify(termsOverTerms.getNumerators());
     ASSERT_EQ(1U, numeratorsToVerify.size());

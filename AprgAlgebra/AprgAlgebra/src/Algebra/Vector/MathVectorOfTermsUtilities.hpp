@@ -10,9 +10,6 @@
 
 #include <algorithm>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 namespace alba
 {
 
@@ -79,7 +76,6 @@ Term getLengthOfArc(
 {
     MathVectorOfTerms<SIZE> derivative(differentiate(termVector, variableName));
     Integration integration(variableName);
-    ALBA_PRINT2(derivative, derivative.getMagnitude());
     return integration.integrate(derivative.getMagnitude());
 }
 
