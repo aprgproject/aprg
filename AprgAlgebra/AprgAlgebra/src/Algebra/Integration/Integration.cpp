@@ -1102,11 +1102,9 @@ void Integration::integrateUsingPartialFractionPolynomials(
     {
         TermsOverTerms oneOverDenominator({Term(1)},{Term(denominator)});
         oneOverDenominator.setAsShouldSimplifyToFactors(true);
-        oneOverDenominator.setAsShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(true);
         oneOverDenominator.simplify();
 
-        if(oneOverDenominator.getDenominators().size() > 1)
-        {
+        if(oneOverDenominator.getDenominators().size() > 1)        {
             TermsRaiseToNumbers factorsWithExponents(oneOverDenominator.getTermsRaiseToNumbers());
 
             Polynomials partialNumerators;

@@ -208,11 +208,9 @@ void createTermRaiseToANumberFromMultiplicationAndDivisionExpression(
 {
     TermsOverTerms originalTot(createTermsOverTermsFromTerm(Term(expression)));
     originalTot.setAsShouldSimplifyToFactors(true);
-    originalTot.setAsShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(true);
     TermsRaiseToNumbers termsRaiseToNumbers(originalTot.getTermsRaiseToNumbers());
 
-    bool isFirst(true);
-    AlbaNumber commonExponent(1);
+    bool isFirst(true);    AlbaNumber commonExponent(1);
     bool areAllExponentsNegative(true);
     for(auto const& baseExponentPair : termsRaiseToNumbers.getBaseToExponentMap())
     {
@@ -246,10 +244,8 @@ void createTermRaiseToANumberFromMultiplicationAndDivisionExpression(
 
     TermsOverTerms totWithoutCommonExponent(termsRaiseToNumbers.getTermWithDetailsInMultiplicationAndDivisionOperation());
     totWithoutCommonExponent.setAsShouldSimplifyToFactors(true);
-    totWithoutCommonExponent.setAsShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(true);
     result = TermRaiseToANumber(totWithoutCommonExponent.getCombinedTerm(), commonExponent);
 }
-
 TermRaiseToTerms createTermRaiseToTermsFromTerm(Term const& term)
 {
     TermRaiseToTerms result;
@@ -312,11 +308,9 @@ void createTermRaiseToTermsFromMultiplicationAndDivisionExpression(
 
     TermsOverTerms originalTot(createTermsOverTermsFromTerm(Term(expression)));
     originalTot.setAsShouldSimplifyToFactors(true);
-    originalTot.setAsShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(true);
     TermsRaiseToTerms originalTermsRaiseToTerms(originalTot.getTermsRaiseToTerms());
 
-    AlbaNumbers originalConstants;
-    TermsWithDetails originalExponentsWithDetails;
+    AlbaNumbers originalConstants;    TermsWithDetails originalExponentsWithDetails;
     for(auto const& baseExponentPair : originalTermsRaiseToTerms.getBaseToExponentMap())
     {
         Term const& base(baseExponentPair.first);
@@ -334,12 +328,11 @@ void createTermRaiseToTermsFromMultiplicationAndDivisionExpression(
     retrieveConstantAndNonConstantFactors(nonConstantFactorsOfExponents, constantFactorsOfExponents, originalExponentsWithDetails);
     bool areAllConstantFactorsNegative(all_of(constantFactorsOfExponents.cbegin(), constantFactorsOfExponents.cend(), [](AlbaNumber const& constantFactor)
     {
-        return constantFactor < 0;
-    }));
+                                           return constantFactor < 0;
+                                       }));
     AlbaNumber constantGcf(getGcfOfConstants(constantFactorsOfExponents));
     if(areAllConstantFactorsNegative)
-    {
-        constantGcf = constantGcf*-1;
+    {        constantGcf = constantGcf*-1;
     }
     retrieveCommonNonConstantFactors(commonNonConstantFactorsOfExponents, nonConstantFactorsOfExponents);
 

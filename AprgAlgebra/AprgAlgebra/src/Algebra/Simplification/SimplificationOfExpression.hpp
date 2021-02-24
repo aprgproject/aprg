@@ -2,9 +2,9 @@
 
 #include <Algebra/Constructs/TermRaiseToTerms.hpp>
 #include <Algebra/Constructs/TermsOverTerms.hpp>
+#include <Algebra/Factorization/FactorizationConfiguration.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 #include <Container/AlbaConfigurationHolder.hpp>
-
 namespace alba
 {
 
@@ -104,10 +104,10 @@ private:
 
     // other functions
     bool shouldDistributeExponentConstantToEachBase() const;
+    Factorization::ConfigurationDetails getFactorizationConfigurationForTermsOverTerms() const;
     bool tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(Expression const& expression);
     Expression getNewExpressionWithSubstitutedVariableForTerm(Term const& mainExpression, Term const& termToSubstitute);
-    void convertPolynomialOverPolynomialIfNeeded();
-    void convertPolynomialToPolynomialOverPolynomial(Term & term);
+    void convertPolynomialOverPolynomialIfNeeded();    void convertPolynomialToPolynomialOverPolynomial(Term & term);
     void convertPolynomialToPolynomialOverPolynomial(Expression & expression);
 
     Expression m_expression;
