@@ -231,11 +231,10 @@ void IsolationOfOneVariableOnEqualityEquation::simplifyForIsolation(
         SimplificationOfExpression::ConfigurationDetails configurationDetails(
                     SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
         configurationDetails.shouldSimplifyToFactors = false;
-        configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = false;
+        configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
         configurationDetails.shouldSimplifyToACommonDenominator = true;
 
-        SimplificationOfExpression::ScopeObject scopeObject;
-        scopeObject.setInThisScopeThisConfiguration(configurationDetails);
+        SimplificationOfExpression::ScopeObject scopeObject;        scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         expression.simplify();
     }

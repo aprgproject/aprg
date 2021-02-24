@@ -30,11 +30,10 @@ Term MultiplicationAndDivisionOfRadicals::getCombinedTerm() const
 {
     SimplificationOfExpression::ConfigurationDetails radicalSimplificationConfigurationDetails(
                 SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
-    radicalSimplificationConfigurationDetails.shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase = true;
+    radicalSimplificationConfigurationDetails.shouldNotSimplifyByDistributingConstantExponentToEachBase = true;
 
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(radicalSimplificationConfigurationDetails);
-
     Expression combinedExpression;
     combinedExpression.setCommonOperatorLevel(OperatorLevel::MultiplicationAndDivision);
     combinedExpression.putTermsWithDetails(m_termsWithDetails);
@@ -52,11 +51,10 @@ void MultiplicationAndDivisionOfRadicals::simplify()
 {
     SimplificationOfExpression::ConfigurationDetails radicalSimplificationConfigurationDetails(
                 SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
-    radicalSimplificationConfigurationDetails.shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase = true;
+    radicalSimplificationConfigurationDetails.shouldNotSimplifyByDistributingConstantExponentToEachBase = true;
 
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(radicalSimplificationConfigurationDetails);
-
     Monomial combinedMonomial(createMonomialFromConstant(1));
     RadicalDetails radicalDetails;
     TermsWithDetails remainingTerms;

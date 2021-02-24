@@ -29,10 +29,9 @@ public:
         bool shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables;
         bool shouldSimplifyToFactors;
         bool shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue;
-        bool shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase;
+        bool shouldNotSimplifyByDistributingConstantExponentToEachBase;
         bool shouldPerformDebug;
     };
-
     class Configuration
             : public AlbaConfigurationHolder<ConfigurationDetails>
     {};
@@ -52,11 +51,10 @@ public:
     static bool shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables();
     static bool shouldSimplifyToFactors();
     static bool shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue();
-    static bool shouldNotSimplifyExpressionRaiseToAConstantByDistributingConstantToEachBase();
+    static bool shouldNotSimplifyByDistributingConstantExponentToEachBase();
     static bool shouldPerformDebug();
 
     Expression getExpression() const;
-
     void setExpression(Expression const& expression);
 
     void simplify();
