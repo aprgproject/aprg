@@ -99,22 +99,20 @@ public:
         return result;
     }
 
-    AlbaMathVectorType operator*(DataType const scalarValue) const
+    AlbaMathVectorType operator*(DataType const& scalarValue) const
     {
         AlbaMathVectorType result;
-        ValuesInArray & resultValues(result.m_values);
-        std::transform(m_values.begin(), m_values.end(), resultValues.begin(), [&](DataType const value)
+        ValuesInArray & resultValues(result.m_values);        std::transform(m_values.begin(), m_values.end(), resultValues.begin(), [&](DataType const value)
         {
             return value*scalarValue;
         });
         return result;
     }
 
-    AlbaMathVectorType operator/(DataType const scalarValue) const
+    AlbaMathVectorType operator/(DataType const& scalarValue) const
     {
         AlbaMathVectorType result;
-        ValuesInArray & resultValues(result.m_values);
-        std::transform(m_values.begin(), m_values.end(), resultValues.begin(), [&](DataType const value)
+        ValuesInArray & resultValues(result.m_values);        std::transform(m_values.begin(), m_values.end(), resultValues.begin(), [&](DataType const value)
         {
             return value/scalarValue;
         });
@@ -135,10 +133,27 @@ public:
         return *this;
     }
 
+    AlbaMathVectorType& operator*=(DataType const& scalarValue)
+    {
+        std::transform(m_values.begin(), m_values.end(), m_values.begin(), [&](DataType const value)
+        {
+            return value*scalarValue;
+        });
+        return *this;
+    }
+
+    AlbaMathVectorType& operator/=(DataType const& scalarValue)
+    {
+        std::transform(m_values.begin(), m_values.end(), m_values.begin(), [&](DataType const value)
+        {
+            return value/scalarValue;
+        });
+        return *this;
+    }
+
     unsigned int getSize() const
     {
-        return SIZE;
-    }
+        return SIZE;    }
 
     DataType const& getValueAt(unsigned int const index) const
     {
