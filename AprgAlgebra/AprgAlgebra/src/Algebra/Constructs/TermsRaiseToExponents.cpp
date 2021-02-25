@@ -278,11 +278,9 @@ Term TermsRaiseToExponents<ExponentType, BaseRaiseToExponentType>::convertToTerm
     {
         result = BaseRaiseToExponentType(base, exponent).getCombinedTerm();
     }
-    result.simplify();
     return result;
 }
-template Term TermsRaiseToExponents<AlbaNumber, TermRaiseToANumber>::convertToTerm(Term const& base, AlbaNumber const& exponent) const;
-template Term TermsRaiseToExponents<Term, TermRaiseToTerms>::convertToTerm(Term const& base, Term const& exponent) const;
+template Term TermsRaiseToExponents<AlbaNumber, TermRaiseToANumber>::convertToTerm(Term const& base, AlbaNumber const& exponent) const;template Term TermsRaiseToExponents<Term, TermRaiseToTerms>::convertToTerm(Term const& base, Term const& exponent) const;
 
 
 template <typename ExponentType, typename BaseRaiseToExponentType>
