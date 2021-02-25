@@ -96,7 +96,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetLengthOfArcInPolarCoordinatesWorks)
 
 TEST(IntegrationGeometryUtilitiesTest, GetTotalMassOfARodWorks)
 {
-    Term l("l");    Term termToTest(Monomial(1, {{"x", 2}}));
+    Term l("l");
+    Term termToTest(Monomial(1, {{"x", 2}}));
 
     Term termToVerify(getTotalMassOfARod(termToTest, "x", Term(0), l));
 

@@ -17,6 +17,7 @@ namespace alba
 
 namespace algebra
 {
+
 template <unsigned int SIZE> using MathVectorOfTerms = AlbaMathVector<Term, SIZE>;
 using MathVectorOfTwoTerms = MathVectorOfTerms<2>;
 using MathVectorOfThreeTerms = MathVectorOfTerms<3>;

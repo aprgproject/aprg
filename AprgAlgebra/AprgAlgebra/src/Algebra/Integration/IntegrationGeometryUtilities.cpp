@@ -94,7 +94,8 @@ Term getVolumeUsingCylindricalShells(
 Term getLengthOfArc(
         Term const& term,
         string const& variableName,
-        Term const& lowerValueTerm,        Term const& higherValueTerm)
+        Term const& lowerValueTerm,
+        Term const& higherValueTerm)
 {
     // If the function f and its derivative fPrime are continuous on the closed interval [a, b],
     // then the length of arc of the curve y=f(x) from the point (a, f(a) to the point (b, f(b)) is given by:
@@ -125,7 +126,8 @@ Term getLengthOfArcInPolarCoordinates(
 
 Term getTotalMassOfARod(
         Term const& term,
-        string const& variableName,        Term const& lowerValueTerm,
+        string const& variableName,
+        Term const& lowerValueTerm,
         Term const& higherValueTerm)
 {
     // A rod of length L meters has its left endpoint at the origin.
@@ -251,4 +253,5 @@ Term integrateInPolarCoordinates(
 }
 
 }
+
 }

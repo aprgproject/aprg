@@ -32,6 +32,7 @@ public:
         bool shouldNotSimplifyByDistributingConstantExponentToEachBase;
         bool shouldPerformDebug;
     };
+
     class Configuration
             : public AlbaConfigurationHolder<ConfigurationDetails>
     {};
@@ -55,6 +56,7 @@ public:
     static bool shouldPerformDebug();
 
     Expression getExpression() const;
+
     void setExpression(Expression const& expression);
 
     void simplify();
