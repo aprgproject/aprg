@@ -8,9 +8,9 @@
 #include <Algebra/Limit/Limit.hpp>
 #include <Algebra/Simplification/SimplificationUtilities.hpp>
 #include <Algebra/Vector/MathVectorOfTerms.hpp>
+#include <Math/Angle/AlbaAngle.hpp>
 
 #include <algorithm>
-
 namespace alba
 {
 
@@ -23,12 +23,13 @@ namespace VectorUtilities
 void simplifyForTermInVector(Term & term);
 
 Term getDyOverDx(MathVectorOfTwoTerms const& termVector, std::string const& variableName);
-
+Term getDirectionalDerivativeInTwoDimensions(Term const& term, ArrayOfStrings<2U> const& coordinateVariables, AlbaAngle const& angleOfDirection);
+Term getDirectionalDerivativeInThreeDimensions(Term const& term, ArrayOfStrings<3U> const& coordinateVariables, MathVectorOfAngles<3U> const& coordinateAngles);
+Term getTangentPlaneOnAPoint(Term const& surface, MathVectorOfNumbers<3> const& point);
 
 template <unsigned int SIZE>
 void simplifyForTermVector(
-        MathVectorOfTerms<SIZE> & termVector)
-{
+        MathVectorOfTerms<SIZE> & termVector){
     for(Term & term : termVector.getValuesReference())
     {
         simplifyForTermInVector(term);
@@ -224,6 +225,21 @@ MathVectorOfTerms<SIZE> getCurvatureVector(
     MathVectorOfTerms<SIZE> result(differentiate(getUnitTangentVector(termVector, variableName), variableName));
     result /= derivativeOfTermVector.getMagnitude();
     simplifyForTermVector(result);
+    return result;
+}
+
+template <unsigned int SIZE>
+MathVectorOfTerms<SIZE> getGradient(
+        Term const& term,
+        ArrayOfStrings<SIZE> const& coordinateVariables)
+{
+    using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
+    MathVectorOfTerms<SIZE> result;
+    Values & values(result.getValuesReference());
+    for(unsigned int i=0; i<SIZE; i++)
+    {
+        values.at(i) = getPartialDerivative(term, coordinateVariables.at(i));
+    }
     return result;
 }
 
