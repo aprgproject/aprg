@@ -78,6 +78,7 @@ TEST(CircleTest, IsInsideWorks)
 TEST(CircleTest, GetEccentricityWorks)
 {
     Circle circle(1, 6, -2, -15);
+
     EXPECT_DOUBLE_EQ(0, circle.getEccentricity());
 }
 

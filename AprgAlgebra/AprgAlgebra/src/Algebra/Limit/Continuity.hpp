@@ -5,6 +5,7 @@
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 #include <Math/Number/AlbaNumber.hpp>
+
 #include <string>
 
 namespace alba
@@ -34,7 +35,8 @@ bool isContinuousAt(
 
 bool isContinuousAt(
         Term const& term,
-        std::string const& variableName,        AlbaNumber const& value,
+        std::string const& variableName,
+        AlbaNumber const& value,
         LimitAtAValueApproachType const limitApproachType,
         bool const isDifferentiableAtValue);
 
@@ -46,7 +48,8 @@ bool isContinuousAtWithMultipleVariablesWithDifferentApproaches(
 
 bool isIntermediateValueTheoremSatisfied(
         Term const& term,
-        std::string const& variableName,        AlbaNumber const& firstValue,
+        std::string const& variableName,
+        AlbaNumber const& firstValue,
         AlbaNumber const& secondValue,
         AlbaNumber const& valueToTest);
 

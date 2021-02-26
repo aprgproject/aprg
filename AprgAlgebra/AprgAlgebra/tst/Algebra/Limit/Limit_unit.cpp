@@ -171,7 +171,8 @@ TEST(LimitTest, GetLimitWithMultipleVariablesWithDifferentApproachesWorksOnExamp
 
 TEST(LimitTest, GetLimitUsingLhopitalsRuleWorks)
 {
-    Term x("x");    Term oneMinusEToTheX(createExpressionIfPossible({Term(1), Term("-"), Term(AlbaNumber(AlbaNumber::Value::e)), Term("^"), x}));
+    Term x("x");
+    Term oneMinusEToTheX(createExpressionIfPossible({Term(1), Term("-"), Term(AlbaNumber(AlbaNumber::Value::e)), Term("^"), x}));
     Term oneOverX(createExpressionIfPossible({Term(1), Term("/"), x}));
     Term termToTest1("x");
     Term termToTest2(createExpressionIfPossible({x, Term("/"), oneMinusEToTheX}));

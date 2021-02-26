@@ -27,7 +27,8 @@ EllipticHyperboloid::EllipticHyperboloid(Point const& center, double const aCoef
     , m_oneWithSign(isOneNegative ? -1 : 1)
 {}
 
-bool EllipticHyperboloid::operator==(EllipticHyperboloid const& ellipsoid) const{
+bool EllipticHyperboloid::operator==(EllipticHyperboloid const& ellipsoid) const
+{
     return (m_center == ellipsoid.m_center)
             && isAlmostEqual(m_aValue, ellipsoid.m_aValue)
             && isAlmostEqual(m_bValue, ellipsoid.m_bValue)

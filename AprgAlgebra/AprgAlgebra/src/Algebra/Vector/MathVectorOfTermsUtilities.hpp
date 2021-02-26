@@ -27,7 +27,8 @@ Term getDyOverDx(MathVectorOfTwoTerms const& termVector, std::string const& vari
 
 template <unsigned int SIZE>
 void simplifyForTermVector(
-        MathVectorOfTerms<SIZE> & termVector){
+        MathVectorOfTerms<SIZE> & termVector)
+{
     for(Term & term : termVector.getValuesReference())
     {
         simplifyForTermInVector(term);
@@ -87,7 +88,8 @@ bool areOriginalAndDerivativeVectorsOrthogonal(
 
 template <unsigned int SIZE>
 Term getLengthOfArcDerivative(
-        MathVectorOfTerms<SIZE> const& termVector,        std::string const& variableName)
+        MathVectorOfTerms<SIZE> const& termVector,
+        std::string const& variableName)
 {
     return differentiate(termVector, variableName).getMagnitude();
 }
@@ -178,7 +180,8 @@ MathVectorOfTerms<SIZE> differentiateMultipleTimes(
 template <unsigned int SIZE>
 MathVectorOfTerms<SIZE> integrate(
         MathVectorOfTerms<SIZE> const& termVector,
-        std::string const& variableName){
+        std::string const& variableName)
+{
     using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
     MathVectorOfTerms<SIZE> result;
     Values const& values(termVector.getValues());

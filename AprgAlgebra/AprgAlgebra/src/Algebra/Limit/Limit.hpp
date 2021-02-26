@@ -4,6 +4,7 @@
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 #include <Math/Number/AlbaNumber.hpp>
+
 #include <string>
 
 namespace alba
@@ -78,7 +79,8 @@ Term getLimitWithMultipleVariablesWithDifferentApproaches(
 
 Term getLimitUsingLhopitalsRule(
         Term const& term,
-        std::string const& variableName,        AlbaNumber const& valueToApproach);
+        std::string const& variableName,
+        AlbaNumber const& valueToApproach);
 
 Term getTermUsingLhopitalsRule(
         Term const& term,

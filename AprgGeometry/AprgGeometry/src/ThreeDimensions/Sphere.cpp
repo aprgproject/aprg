@@ -48,6 +48,7 @@ bool Sphere::operator<(Sphere const& sphere) const
     }
     return result;
 }
+
 Point Sphere::getCenter() const
 {
     return m_center;
@@ -108,5 +109,6 @@ ostream & operator<<(ostream & out, Sphere const& sphere)
     out << sphere.getDisplayableString();
     return out;
 }
+
 }
 }

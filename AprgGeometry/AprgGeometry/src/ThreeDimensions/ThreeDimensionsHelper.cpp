@@ -170,7 +170,8 @@ bool arePlanesPerpendicular(Plane const& plane1, Plane const& plane2)
 
 bool areCoefficientsRatiosParallel(CoefficientRatios const& coefficientRatios)
 {
-    vector<AlbaRatio> coefficientRatiosInVector{coefficientRatios.getX(), coefficientRatios.getY(), coefficientRatios.getZ()};    AlbaOptional<double> previousRatioOfCoefficient;
+    vector<AlbaRatio> coefficientRatiosInVector{coefficientRatios.getX(), coefficientRatios.getY(), coefficientRatios.getZ()};
+    AlbaOptional<double> previousRatioOfCoefficient;
     bool isParallel(true);
     for(AlbaRatio const coefficientRatio : coefficientRatiosInVector)
     {
@@ -202,7 +203,8 @@ bool areCoefficientsProductPerpendicular(Coefficients const& coefficients)
 
 double getDistance(Point const& point1, Point const& point2)
 {
-    Point delta(point2 - point1);    return getSquareRootOfXSquaredPlusYSquaredPlusZSquared<double>(delta.getX(), delta.getY(), delta.getZ());
+    Point delta(point2 - point1);
+    return getSquareRootOfXSquaredPlusYSquaredPlusZSquared<double>(delta.getX(), delta.getY(), delta.getZ());
 }
 
 double getDistance(Line const& line, Point const& point)
@@ -307,7 +309,8 @@ Coefficients getProductOfEachCoefficient(Coefficients const& first, Coefficients
 
 Angle getTheInnerAngleUsingThreePoints(Point const& pointA, Point const& pointB, Point const& pointC)
 {
-    Point deltaBA(pointB-pointA);    Point deltaCA(pointC-pointA);
+    Point deltaBA(pointB-pointA);
+    Point deltaCA(pointC-pointA);
     Coefficients c1(deltaBA.getX(), deltaBA.getY(), deltaBA.getZ());
     Coefficients c2(deltaCA.getX(), deltaCA.getY(), deltaCA.getZ());
     return Angle(AngleUnitType::Radians, acos(getCosineOfAngleUsing2Deltas(c1,c2)));
@@ -420,7 +423,8 @@ Line getPerpendicularLineOfPlaneWithAPoint(Plane const& plane, Point const& poin
 
 Line getProjectedLineInPlaneOfASkewedPlaneAndLine(Plane const& plane, Line const& line)
 {
-    Coefficients planeCoefficients(plane.getACoefficient(), plane.getBCoefficient(), plane.getCCoefficient());    Coefficients lineCoefficients(line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient());
+    Coefficients planeCoefficients(plane.getACoefficient(), plane.getBCoefficient(), plane.getCCoefficient());
+    Coefficients lineCoefficients(line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient());
     Coefficients perpendicularCoefficientsPlaneAndLine(getCrossProduct(planeCoefficients, lineCoefficients));
     Coefficients directionCoefficients(getCrossProduct(planeCoefficients, perpendicularCoefficientsPlaneAndLine));
     Point pointInLine(getPointOfIntersectionOfAPlaneAndALine(plane, line));
