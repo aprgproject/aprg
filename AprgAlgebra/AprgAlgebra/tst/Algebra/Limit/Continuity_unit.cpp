@@ -16,10 +16,18 @@ namespace alba
 namespace algebra
 {
 
+TEST(ContinuityTest, IsContinuousAtWorks)
+{
+    Polynomial denominator{Monomial(1, {{"x", 1}}), Monomial(-2, {})};
+    Term termToTest(createExpressionIfPossible({Term(1), Term("/"), Term(denominator)}));
+
+    EXPECT_FALSE(isContinuousAt(termToTest, "x", 2));
+    EXPECT_TRUE(isContinuousAt(termToTest, "x", 3));
+}
+
 TEST(ContinuityTest, IsContinuousAtWorksForContinuousPieceWiseFunction)
 {
-    Function functionToTest(
-                "functionToTest",
+    Function functionToTest(                "functionToTest",
                 getBaseTermConstReferenceFromTerm(Term("x")),
                 [](AlbaNumber const& number)
     {
@@ -84,10 +92,33 @@ TEST(ContinuityTest, IsContinuousAtWorksWithIsDifferentiableAtValue)
     EXPECT_TRUE(isContinuousAt(termToTest, "x", -2, LimitAtAValueApproachType::BothSides, true));
 }
 
+TEST(LimitTest, GetLimitWithMultipleVariablesWithDifferentApproachesWorksWhenItExists)
+{
+    Term numerator(Polynomial{Monomial(1, {{"x", 4}}), Monomial(-1, {{"y", 4}})});
+    Term denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})});
+    Term termToTest(createExpressionIfPossible({numerator, Term("/"), denominator}));
+    SubstitutionsOfVariablesToTerms substitutions;
+    substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", Term("x")}});
+    substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", Term(Monomial(1, {{"x", 2}}))}});
+
+    EXPECT_TRUE(isContinuousAtWithMultipleVariablesWithDifferentApproaches(termToTest, "x", 0, substitutions));
+}
+
+TEST(LimitTest, GetLimitWithMultipleVariablesWithDifferentApproachesWorksWhenDoesNotItExist)
+{
+    Term numerator(Monomial(1, {{"x", 1}, {"y", 1}}));
+    Term denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})});
+    Term termToTest(createExpressionIfPossible({numerator, Term("/"), denominator}));
+    SubstitutionsOfVariablesToTerms substitutions;
+    substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", Term("x")}});
+    substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", Term(Monomial(1, {{"x", 2}}))}});
+
+    EXPECT_FALSE(isContinuousAtWithMultipleVariablesWithDifferentApproaches(termToTest, "x", 0, substitutions));
+}
+
 TEST(ContinuityTest, IsIntermediateValueTheoremSatisfiedWorks)
 {
-    Polynomial numerator{Monomial(2, {})};
-    Polynomial denominator{Monomial(1, {{"x", 1}}), Monomial(-4, {})};
+    Polynomial numerator{Monomial(2, {})};    Polynomial denominator{Monomial(1, {{"x", 1}}), Monomial(-4, {})};
     Term termToTest(createExpressionIfPossible({Term(numerator), Term("/"), Term(denominator)}));
 
     EXPECT_FALSE(isIntermediateValueTheoremSatisfied(termToTest, "x", 2, 5, 4));

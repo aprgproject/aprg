@@ -3,9 +3,10 @@
 #include <Algebra/Equation/Equation.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 
+#include <vector>
+
 namespace alba
 {
-
 namespace algebra
 {
 
@@ -44,6 +45,8 @@ private:
     void performSubstitutionForTermsWithAssociation(TermsWithAssociation & termsWithAssociation) const;
     VariablesToTermsMap m_variableToExpressionsMap;
 };
+
+using SubstitutionsOfVariablesToTerms=std::vector<SubstitutionOfVariablesToTerms>;
 
 }
 

@@ -1,9 +1,9 @@
 #pragma once
 
 #include <Algebra/Limit/LimitAtAValueApproachType.hpp>
+#include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 #include <Math/Number/AlbaNumber.hpp>
-
 #include <string>
 
 namespace alba
@@ -70,10 +70,15 @@ Term getLimit(
         std::string const& variableName,
         AlbaNumber const& valueToApproach);
 
-Term getLimitUsingLhopitalsRule(
+Term getLimitWithMultipleVariablesWithDifferentApproaches(
         Term const& term,
         std::string const& variableName,
-        AlbaNumber const& valueToApproach);
+        AlbaNumber const& valueToApproach,
+        SubstitutionsOfVariablesToTerms const& substitutionsForApproaches);
+
+Term getLimitUsingLhopitalsRule(
+        Term const& term,
+        std::string const& variableName,        AlbaNumber const& valueToApproach);
 
 Term getTermUsingLhopitalsRule(
         Term const& term,
