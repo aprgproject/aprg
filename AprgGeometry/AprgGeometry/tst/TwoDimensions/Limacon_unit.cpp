@@ -2,11 +2,9 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba::Dimensionless;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace TwoDimensions
 {
@@ -70,11 +68,10 @@ TEST(LimaconTest, GetPointsForShapeWorks)
 {
     Limacon limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
 
-    Points points(limacon.getPointsForShape(Angle(AngleUnitType::Degrees, 90)));
+    Points points(limacon.getPointsForShape(AlbaAngle(AngleUnitType::Degrees, 90)));
     ASSERT_EQ(4U, points.size());
     EXPECT_EQ(Point(23,0), points.at(0));
-    EXPECT_EQ(Point(0,10), points.at(1));
-    EXPECT_EQ(Point(3,0), points.at(2));
+    EXPECT_EQ(Point(0,10), points.at(1));    EXPECT_EQ(Point(3,0), points.at(2));
     EXPECT_EQ(Point(0,-10), points.at(3));
 }
 
@@ -82,14 +79,13 @@ TEST(LimaconTest, CalculateRadiusFromThetaWorks)
 {
     Limacon limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
 
-    EXPECT_DOUBLE_EQ(10, limacon.calculateRadiusFromTheta(Angle(AngleUnitType::Degrees, 90)));
-    EXPECT_DOUBLE_EQ(-3, limacon.calculateRadiusFromTheta(Angle(AngleUnitType::Degrees, 180)));
-    EXPECT_DOUBLE_EQ(10, limacon.calculateRadiusFromTheta(Angle(AngleUnitType::Degrees, 270)));
-    EXPECT_DOUBLE_EQ(23, limacon.calculateRadiusFromTheta(Angle(AngleUnitType::Degrees, 360)));
+    EXPECT_DOUBLE_EQ(10, limacon.calculateRadiusFromTheta(AlbaAngle(AngleUnitType::Degrees, 90)));
+    EXPECT_DOUBLE_EQ(-3, limacon.calculateRadiusFromTheta(AlbaAngle(AngleUnitType::Degrees, 180)));
+    EXPECT_DOUBLE_EQ(10, limacon.calculateRadiusFromTheta(AlbaAngle(AngleUnitType::Degrees, 270)));
+    EXPECT_DOUBLE_EQ(23, limacon.calculateRadiusFromTheta(AlbaAngle(AngleUnitType::Degrees, 360)));
 }
 
-TEST(LimaconTest, CalculateThetaFromRadiusWorks)
-{
+TEST(LimaconTest, CalculateThetaFromRadiusWorks){
     Limacon limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
 
     EXPECT_DOUBLE_EQ(90, limacon.calculateThetaFromRadius(10).getDegrees());

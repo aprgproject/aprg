@@ -3,10 +3,8 @@
 #include <algorithm>
 
 using namespace alba::mathHelper;
-using namespace alba::Dimensionless;
 using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace std;
-
 namespace alba
 {
 
@@ -38,12 +36,11 @@ bool Polygon<numberOfVertices>::isEquilateral() const
 template<unsigned int numberOfVertices>
 bool Polygon<numberOfVertices>::isEquiangular() const
 {
-    Angles anglesAtVertices(getAnglesAtVertices());
-    return adjacent_find(anglesAtVertices.cbegin(), anglesAtVertices.cend(), [](Angle const& angle1, Angle const& angle2)
+    AlbaAngles anglesAtVertices(getAnglesAtVertices());
+    return adjacent_find(anglesAtVertices.cbegin(), anglesAtVertices.cend(), [](AlbaAngle const& angle1, AlbaAngle const& angle2)
     {
         return !isAlmostEqual(angle1.getDegrees(), angle2.getDegrees());
-    }) == anglesAtVertices.cend();
-}
+    }) == anglesAtVertices.cend();}
 
 template<unsigned int numberOfVertices>
 bool Polygon<numberOfVertices>::isRegular() const
@@ -84,13 +81,12 @@ Points Polygon<numberOfVertices>::getVertices() const
 }
 
 template<unsigned int numberOfVertices>
-Angles Polygon<numberOfVertices>::getAnglesAtVertices() const
+AlbaAngles Polygon<numberOfVertices>::getAnglesAtVertices() const
 {
-    Angles anglesAtVertices;
+    AlbaAngles anglesAtVertices;
     int sizeMinusOne = static_cast<int>(m_vertices.size())-1;
     anglesAtVertices.emplace_back(getTheInnerAngleUsingThreePoints(m_vertices[0], m_vertices[sizeMinusOne], m_vertices[1]));
-    for(int i=1; i<sizeMinusOne; i++)
-    {
+    for(int i=1; i<sizeMinusOne; i++)    {
         anglesAtVertices.emplace_back(getTheInnerAngleUsingThreePoints(m_vertices[i], m_vertices[i-1], m_vertices[i+1]));
     }
     anglesAtVertices.emplace_back(getTheInnerAngleUsingThreePoints(m_vertices[sizeMinusOne], m_vertices[sizeMinusOne-1], m_vertices[0]));
@@ -98,13 +94,12 @@ Angles Polygon<numberOfVertices>::getAnglesAtVertices() const
 }
 
 template<unsigned int numberOfVertices>
-Angle Polygon<numberOfVertices>::getSumOfAngles() const
+AlbaAngle Polygon<numberOfVertices>::getSumOfAngles() const
 {
-    return Angle(AngleUnitType::Degrees, (numberOfVertices - 2) * 180);
+    return AlbaAngle(AngleUnitType::Degrees, (numberOfVertices - 2) * 180);
 }
 
-template<unsigned int numberOfVertices>
-Points Polygon<numberOfVertices>::getPoints(double const interval) const
+template<unsigned int numberOfVertices>Points Polygon<numberOfVertices>::getPoints(double const interval) const
 {
     Points points;
     int sizeMinusOne = static_cast<int>(m_vertices.size())-1;

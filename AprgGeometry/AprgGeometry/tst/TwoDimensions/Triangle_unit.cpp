@@ -4,11 +4,9 @@
 
 #include <cmath>
 
-using namespace alba::Dimensionless;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace TwoDimensions
 {
@@ -31,11 +29,10 @@ TEST(TriangleTest, GetLengthOfSidesAreCorrect)
 TEST(TriangleTest, GetAnglesAreCorrect)
 {
     Triangle triangle(Point(0,0), Point(0,4), Point(4,0));
-    Angles angles(triangle.getAnglesAtVertices());
+    AlbaAngles angles(triangle.getAnglesAtVertices());
 
     ASSERT_EQ(3U, angles.size());
-    EXPECT_DOUBLE_EQ(90, angles.at(0).getDegrees());
-    EXPECT_DOUBLE_EQ(45, angles.at(1).getDegrees());
+    EXPECT_DOUBLE_EQ(90, angles.at(0).getDegrees());    EXPECT_DOUBLE_EQ(45, angles.at(1).getDegrees());
     EXPECT_DOUBLE_EQ(45, angles.at(2).getDegrees());
 }
 
