@@ -13,10 +13,12 @@ using namespace alba::ThreeDimensions;
 using namespace alba::ThreeDimensions::threeDimensionsHelper;
 using namespace std;
 
+namespace
+{
+
 void graphPoints(Gnuplot & gp, Points const& points, string const& nameOfGraph)
 {
-    vector<pair<pair<double, double>, double>> pts;
-    for(unsigned int i=0; i<points.size(); i++)
+    vector<pair<pair<double, double>, double>> pts;    for(unsigned int i=0; i<points.size(); i++)
     {
         pts.emplace_back(make_pair(make_pair(points[i].getX(), points[i].getY()), points[i].getZ()));
     }
@@ -32,11 +34,15 @@ void graphPoint(Gnuplot & gp, Point const& point, string const& nameOfGraph)
     gp << ", ";
 }
 
+}
+
+
+namespace alba
+{
 
 TEST(AprgGeometryThreeDimensionsTest, DISABLED_LineWithSlope)
 {
-    Gnuplot gp;
-    gp << "splot ";
+    Gnuplot gp;    gp << "splot ";
     Line line(Point(0,0,0), Point(2,3,-4));
     Points points;
     for(double x=-10; x<10; x+=0.1)
@@ -99,11 +105,10 @@ TEST(AprgGeometryThreeDimensionsTest, DISABLED_SamplePlane)
     gp << endl;
 }
 
-TEST(AprgGeometryThreeDimensionsTest, LineOfIntersectionOfTwoPlanes)
+TEST(AprgGeometryThreeDimensionsTest, DISABLED_LineOfIntersectionOfTwoPlanes)
 {
     Point point1OfPlane1(1,0,0);
-    Point point2OfPlane1(0,1,0);
-    Point point3OfPlane1(0,0,1);
+    Point point2OfPlane1(0,1,0);    Point point3OfPlane1(0,0,1);
     Point point1OfPlane2(0,0,0);
     Point point2OfPlane2(1,1,1);
     Point point3OfPlane2(0,1,1);
@@ -134,4 +139,6 @@ TEST(AprgGeometryThreeDimensionsTest, LineOfIntersectionOfTwoPlanes)
     graphPoint(gp, point2OfPlane2, "Point2OfPlane2");
     graphPoint(gp, point3OfPlane2, "Point3OfPlane2");
     gp << endl;
+}
+
 }
