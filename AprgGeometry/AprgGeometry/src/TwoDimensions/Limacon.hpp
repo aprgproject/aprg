@@ -30,11 +30,10 @@ class Limacon
 {
 public:
     Limacon();
-    Limacon(double const aCoefficient, double const bCoefficient, LimaconTrigonometricFunctionType const trigonometricFunction); // a + b*cos(theta) = r
+    Limacon(double const aCoefficient, double const bCoefficient, LimaconTrigonometricFunctionType const trigonometricFunction); // a + b*(cos or sin)(theta) = r
 
     bool operator==(Limacon const& limacon) const;
     bool operator!=(Limacon const& limacon) const;
-
     double getAValue() const;
     double getBValue() const;
     LimaconTrigonometricFunctionType getTrigonometricFunctionType() const;
