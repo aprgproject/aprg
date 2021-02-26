@@ -8,6 +8,7 @@
 
 using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -80,7 +81,8 @@ TEST(TwoDimensionsHelperTest, GetArcLengthWorks)
     EXPECT_DOUBLE_EQ(1000, getArcLength(AlbaAngle(AngleUnitType::Radians, 10), 100));
 }
 
-TEST(TwoDimensionsHelperTest, GetAreaForPolygonWorksForTriangle){
+TEST(TwoDimensionsHelperTest, GetAreaForPolygonWorksForTriangle)
+{
     Triangle triangle(Point(0,0), Point(0,4), Point(4,0));
     EXPECT_DOUBLE_EQ(8, getArea<3>(triangle));
 }
@@ -185,7 +187,8 @@ TEST(TwoDimensionsHelperTest, ConvertFromPolarCoordinatesWorks)
     EXPECT_EQ(Point(20,0), convertFromPolarCoordinates(PolarCoordinate{20, AlbaAngle(AngleUnitType::Degrees, 360)}));
 }
 
-TEST(TwoDimensionsHelperTest, ConvertToPolarCoordinateWorks){
+TEST(TwoDimensionsHelperTest, ConvertToPolarCoordinateWorks)
+{
     PolarCoordinate polarCoordinate1(convertToPolarCoordinate(Point(0,5)));
     PolarCoordinate polarCoordinate2(convertToPolarCoordinate(Point(-10,0)));
     PolarCoordinate polarCoordinate3(convertToPolarCoordinate(Point(0,-15)));
@@ -201,7 +204,8 @@ TEST(TwoDimensionsHelperTest, ConvertToPolarCoordinateWorks){
     EXPECT_EQ(AlbaAngle(AngleUnitType::Degrees, 0), polarCoordinate4.angle);
 }
 
-TEST(TwoDimensionsHelperTest, GetConicSectionBasedOnEccentricityWorks){
+TEST(TwoDimensionsHelperTest, GetConicSectionBasedOnEccentricityWorks)
+{
     Circle circle(Point(1, 1), 1);
     Parabola<ParabolaOrientation::PolynomialX> parabola(1, 1, 1);
     Ellipse ellipse(Point(1, 1), 2, 3);

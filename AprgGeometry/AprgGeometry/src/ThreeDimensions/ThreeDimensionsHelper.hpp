@@ -5,6 +5,7 @@
 #include <ThreeDimensions/Line.hpp>
 #include <ThreeDimensions/Plane.hpp>
 #include <ThreeDimensions/Point.hpp>
+
 #include <functional>
 
 namespace alba
@@ -51,7 +52,8 @@ AlbaAngle getTheSmallerDihedralAngleBetweenTwoPlanes(Plane const& plane1, Plane 
 AlbaAngle getTheLargerDihedralAngleBetweenTwoPlanes(Plane const& plane1, Plane const& plane2);
 
 Point getMidpoint(Point const& point1, Point const& point2);
-Point getPointOfIntersectionOfTwoLines(Line const& line1, Line const& line2);Point getPointOfIntersectionOfAPlaneAndALine(Plane const& plane, Line const& line);
+Point getPointOfIntersectionOfTwoLines(Line const& line1, Line const& line2);
+Point getPointOfIntersectionOfAPlaneAndALine(Plane const& plane, Line const& line);
 
 Line getLineWithSameSlope(Line const& line, Point const& point);
 Line getLineOfIntersectionOfTwoPlanes(Plane const& plane1, Plane const& plane2);

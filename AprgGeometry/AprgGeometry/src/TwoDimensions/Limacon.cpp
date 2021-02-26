@@ -9,6 +9,7 @@
 using namespace alba::mathHelper;
 using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -89,7 +90,8 @@ Points Limacon::getPointsForShape(AlbaAngle const& angleInterval) const
         for(AlbaAngle theta(AngleUnitType::Degrees, 0); theta<limit; theta+=angleInterval)
         {
             result.emplace_back(convertFromPolarCoordinates(PolarCoordinate{calculateRadiusFromTheta(theta), theta}));
-        }    }
+        }
+    }
     return result;
 }
 
@@ -102,6 +104,7 @@ AlbaAngle Limacon::calculateThetaFromRadius(double const radius) const
 {
     return performInverseTrigonometricFunction((radius-m_aValue)/m_bValue);
 }
+
 string Limacon::getDisplayableString() const
 {
     std::stringstream ss;
@@ -121,7 +124,8 @@ string Limacon::getDisplayableString() const
 double Limacon::performTrigonometricFunction(AlbaAngle const& theta) const
 {
     double result(0);
-    if(LimaconTrigonometricFunctionType::Sine == m_trigonometricFunctionType)    {
+    if(LimaconTrigonometricFunctionType::Sine == m_trigonometricFunctionType)
+    {
         result = sin(theta.getRadians());
     }
     else if(LimaconTrigonometricFunctionType::Cosine == m_trigonometricFunctionType)
@@ -144,6 +148,7 @@ AlbaAngle Limacon::performInverseTrigonometricFunction(double const ratio) const
     }
     return result;
 }
+
 ostream & operator<<(ostream & out, Limacon const& limacon)
 {
     out << limacon.getDisplayableString();

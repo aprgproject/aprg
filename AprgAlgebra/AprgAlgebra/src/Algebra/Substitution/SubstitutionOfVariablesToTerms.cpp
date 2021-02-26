@@ -42,7 +42,8 @@ unsigned int SubstitutionOfVariablesToTerms::getSize() const
     return m_variableToTermsMap.size();
 }
 
-Term SubstitutionOfVariablesToTerms::getTermForVariable(string const& variable) const{
+Term SubstitutionOfVariablesToTerms::getTermForVariable(string const& variable) const
+{
     Term result;
     if(isVariableFound(variable))
     {
@@ -58,7 +59,8 @@ VariablesToTermsMap const& SubstitutionOfVariablesToTerms::getVariablesToTermsMa
 
 Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Variable const& variable) const
 {
-    Term result;    string variableName(variable.getVariableName());
+    Term result;
+    string variableName(variable.getVariableName());
     if(isVariableFound(variableName))
     {
         result = getTermForVariable(variableName);
@@ -201,7 +203,8 @@ void SubstitutionOfVariablesToTerms::putVariableWithTerm(
     m_variableToTermsMap.at(variable).simplify();
 }
 
-void SubstitutionOfVariablesToTerms::performSubstitutionForTermsWithAssociation(TermsWithAssociation & termsWithAssociation) const{
+void SubstitutionOfVariablesToTerms::performSubstitutionForTermsWithAssociation(TermsWithAssociation & termsWithAssociation) const
+{
     for(TermWithDetails & termWithDetails : termsWithAssociation.getTermsWithDetailsReference())
     {
         Term & term(getTermReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));

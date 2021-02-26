@@ -24,7 +24,8 @@ using namespace alba::mathHelper;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace{
+namespace
+{
 
 constexpr char const*const X_NAME = "x";
 constexpr char const*const DELTA_X_NAME = "deltaX";
@@ -208,6 +209,7 @@ Term getLogarithmicDifferentiationToYieldDyOverDx(
     }
     return result;
 }
+
 Term getCartesianDerivativeOfTermInPolarCoordinates(
         Term const& radiusInTermsOfTheta,
         string const& thetaName)
@@ -325,7 +327,8 @@ Term getPartialDerivative(
 
 SolutionSet getDifferentiabilityDomain(
         Term const& term,
-        string const& variableName){
+        string const& variableName)
+{
     // This code is not accurate.
     // How about piecewise function?
     // How about absolute value function?
@@ -430,6 +433,7 @@ void simplifyForDifferentiation(Term& term)
     term.simplify();
     simplifyTermByFactoringToNonDoubleFactors(term);
 }
+
 
 }
 

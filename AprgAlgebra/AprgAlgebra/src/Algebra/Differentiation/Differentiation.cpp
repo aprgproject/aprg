@@ -243,7 +243,8 @@ Term Differentiation::differentiateTwoMultipliedTerms(
     return Term(createExpressionIfPossible({firstPart, Term("+"), secondPart}));
 }
 
-Term Differentiation::differentiateTwoDividedTerms(        Term const& numerator,
+Term Differentiation::differentiateTwoDividedTerms(
+        Term const& numerator,
         Term const& denominator) const
 {
     Term numeratorDerivative(differentiate(numerator));
@@ -255,7 +256,8 @@ Term Differentiation::differentiateTwoDividedTerms(        Term const& numerator
     return Term(createExpressionIfPossible({resultNumerator, Term("/"), resultDenominator}));
 }
 
-void Differentiation::separateNonChangingAndChangingVariables(        Monomial & nonChangingVariablesAndConstant,
+void Differentiation::separateNonChangingAndChangingVariables(
+        Monomial & nonChangingVariablesAndConstant,
         Monomial & changingVariables,
         Monomial const& monomial) const
 {
@@ -588,7 +590,8 @@ Term Differentiation::differentiateFunctionOnly(
 
 bool Differentiation::isVariableToDifferentiate(
         string const& variableName) const
-{    return variableName == m_nameOfVariableToDifferentiate;
+{
+    return variableName == m_nameOfVariableToDifferentiate;
 }
 
 bool Differentiation::isDependentVariable(

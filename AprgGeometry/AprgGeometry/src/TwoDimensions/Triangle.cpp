@@ -5,7 +5,8 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace TwoDimensions
 {
@@ -33,7 +34,8 @@ bool Triangle::isRightTriangle() const
     return any_of(anglesAtVertices.cbegin(), anglesAtVertices.cend(), [](AlbaAngle const& angleAtVertex)
     {
         return isAlmostEqual(angleAtVertex.getDegrees(), static_cast<double>(90));
-    });}
+    });
+}
 
 string Triangle::getDisplayableString() const
 {

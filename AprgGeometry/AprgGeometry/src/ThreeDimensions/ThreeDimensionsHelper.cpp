@@ -8,6 +8,7 @@
 
 using namespace alba::mathHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -322,7 +323,8 @@ AlbaAngle getTheSmallerAngleBetweenTwoLines(Line const& line1, Line const& line2
         smallerAngle = AlbaAngle(AngleUnitType::Degrees, 0);
     }
     else
-    {        //absolute value is used to ensure lower angle
+    {
+        //absolute value is used to ensure lower angle
         //from cos theta = (dotproduct of coefficients v1 and v2)/(magnitude of v1 * magnitude of v2)
         Coefficients c1(line1.getACoefficient(), line1.getBCoefficient(), line1.getCCoefficient());
         Coefficients c2(line2.getACoefficient(), line2.getBCoefficient(), line2.getCCoefficient());
@@ -359,7 +361,8 @@ AlbaAngle getTheLargerDihedralAngleBetweenTwoPlanes(Plane const& plane1, Plane c
     return AlbaAngle(AngleUnitType::Degrees, 180-smallerAngle.getDegrees());
 }
 
-Point getMidpoint(Point const& point1, Point const& point2){
+Point getMidpoint(Point const& point1, Point const& point2)
+{
     return Point((point1.getX()+point2.getX())/2, (point1.getY()+point2.getY())/2, (point1.getZ()+point2.getZ())/2);
 }
 

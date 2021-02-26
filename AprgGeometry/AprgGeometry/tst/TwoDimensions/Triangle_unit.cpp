@@ -6,7 +6,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace TwoDimensions
 {
@@ -32,7 +33,8 @@ TEST(TriangleTest, GetAnglesAreCorrect)
     AlbaAngles angles(triangle.getAnglesAtVertices());
 
     ASSERT_EQ(3U, angles.size());
-    EXPECT_DOUBLE_EQ(90, angles.at(0).getDegrees());    EXPECT_DOUBLE_EQ(45, angles.at(1).getDegrees());
+    EXPECT_DOUBLE_EQ(90, angles.at(0).getDegrees());
+    EXPECT_DOUBLE_EQ(45, angles.at(1).getDegrees());
     EXPECT_DOUBLE_EQ(45, angles.at(2).getDegrees());
 }
 
