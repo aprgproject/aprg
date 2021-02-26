@@ -240,13 +240,10 @@ Term Differentiation::differentiateTwoMultipliedTerms(
     Term term2Derivative(differentiate(term2));
     Expression firstPart(createExpressionIfPossible({term1, Term("*"), term2Derivative}));
     Expression secondPart(createExpressionIfPossible({term2, Term("*"), term1Derivative}));
-    Term result(createExpressionIfPossible({firstPart, Term("+"), secondPart}));
-    simplifyForDifferentiation(result);
-    return result;
+    return Term(createExpressionIfPossible({firstPart, Term("+"), secondPart}));
 }
 
-Term Differentiation::differentiateTwoDividedTerms(
-        Term const& numerator,
+Term Differentiation::differentiateTwoDividedTerms(        Term const& numerator,
         Term const& denominator) const
 {
     Term numeratorDerivative(differentiate(numerator));
@@ -255,13 +252,10 @@ Term Differentiation::differentiateTwoDividedTerms(
     Expression resultNumeratorPart2(createExpressionIfPossible({numerator, Term("*"), denominatorDerivative}));
     Expression resultNumerator(createExpressionIfPossible({resultNumeratorPart1, Term("-"), resultNumeratorPart2}));
     Expression resultDenominator(createExpressionIfPossible({denominator, Term("^"), Term(2)}));
-    Term result(createExpressionIfPossible({resultNumerator, Term("/"), resultDenominator}));
-    simplifyForDifferentiation(result);
-    return result;
+    return Term(createExpressionIfPossible({resultNumerator, Term("/"), resultDenominator}));
 }
 
-void Differentiation::separateNonChangingAndChangingVariables(
-        Monomial & nonChangingVariablesAndConstant,
+void Differentiation::separateNonChangingAndChangingVariables(        Monomial & nonChangingVariablesAndConstant,
         Monomial & changingVariables,
         Monomial const& monomial) const
 {
@@ -592,17 +586,9 @@ Term Differentiation::differentiateFunctionOnly(
     return derivativeOfFunction;
 }
 
-void Differentiation::simplifyForDifferentiation(
-        Term& term) const
-{
-    term.simplify();
-    simplifyTermByFactoringToNonDoubleFactors(term);
-}
-
 bool Differentiation::isVariableToDifferentiate(
         string const& variableName) const
-{
-    return variableName == m_nameOfVariableToDifferentiate;
+{    return variableName == m_nameOfVariableToDifferentiate;
 }
 
 bool Differentiation::isDependentVariable(

@@ -3,10 +3,11 @@
 #include <Algebra/Equation/Equation.hpp>
 #include <Algebra/Limit/LimitAtAValueApproachType.hpp>
 #include <Algebra/Solution/SolutionSet/SolutionSet.hpp>
+#include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
+#include <String/AlbaStringHelper.hpp>
 
 #include <string>
-
 namespace alba
 {
 
@@ -87,10 +88,22 @@ Term getApproximationUsingTaylorsRemainder(
         Term const& valueForEstimation,
         unsigned int const numberOfTimes);
 
-SolutionSet getDifferentiabilityDomain(
+Term getTotalDerivativeWithInnerTermsUsingChainRule(
+        Term const& term,
+        SubstitutionOfVariablesToTerms const& substitution,
+        std::string const& commonVariable);
+
+Term getTotalDerivative(
+        Term const& term,
+        stringHelper::strings const& variableNames);
+
+Term getPartialDerivative(
         Term const& term,
         std::string const& variableName);
 
+SolutionSet getDifferentiabilityDomain(
+        Term const& term,
+        std::string const& variableName);
 Equation getRelationshipOfDerivativeOfTheInverseAndTheDerivative(
         Term const& term,
         std::string const& variableName,
@@ -109,9 +122,7 @@ Equation getIntegralEquationForFirstOrderDifferentialEquation(
         std::string const& yVariableName);
 
 void simplifyDerivativeByDefinition(Term & term);
-
-void simplifyToNonDoubleFactors(
-        Term& term);
+void simplifyForDifferentiation(Term & term);
 
 }
 
