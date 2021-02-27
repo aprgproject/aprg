@@ -2,10 +2,10 @@
 
 #include <Algebra/Term/TermTypes/Term.hpp>
 #include <Math/Number/AlbaNumberTypes.hpp>
+#include <String/AlbaStringHelper.hpp>
 
 #include <string>
 #include <vector>
-
 namespace alba
 {
 
@@ -14,12 +14,13 @@ namespace algebra
 
 enum class ExtremumType
 {
+    Unknown,
     Maximum,
-    Minimum
+    Minimum,
+    SaddlePoint
 };
 
-struct MinimumAndMaximum
-{
+struct MinimumAndMaximum{
     std::pair<AlbaNumber, AlbaNumber> minimumInputOutputValues;
     std::pair<AlbaNumber, AlbaNumber> maximumInputOutputValues;
 };
@@ -30,11 +31,18 @@ struct Extremum
     std::pair<AlbaNumber, AlbaNumber> inputOutputValues;
 };
 
+struct ExtremumWithMultipleVariables
+{
+    ExtremumType extremumType;
+    std::map<std::string, AlbaNumber> variableNamesToValues;
+};
+
 using Extrema=std::vector<Extremum>;
+using ExtremaWithMultipleVariables=std::vector<ExtremumWithMultipleVariables>;
+using VariableNameToCriticalNumbersMap = std::map<std::string, AlbaNumbers>;
 
 bool willYieldToAbsoluteMinimumValue(
-        Term const& term,
-        std::string const& variableName,
+        Term const& term,        std::string const& variableName,
         AlbaNumber const& valueForEvaluation);
 
 bool willYieldToAbsoluteMaximumValue(
@@ -119,10 +127,13 @@ AlbaNumbers getCriticalNumbers(
         Term const& term,
         std::string const& variableName);
 
+VariableNameToCriticalNumbersMap getCriticalNumbersWithMultipleVariables(
+        Term const& term,
+        stringHelper::strings const& variableNames);
+
 AlbaNumbers getInputValuesAtPointsOfInflection(
         Term const& term,
         std::string const& variableName);
-
 MinimumAndMaximum getMinimumAndMaximumAtClosedInterval(
         Term const& term,
         std::string const& variableName,
@@ -131,6 +142,10 @@ MinimumAndMaximum getMinimumAndMaximumAtClosedInterval(
 Extrema getRelativeExtrema(
         Term const& term,
         std::string const& variableName);
+
+ExtremaWithMultipleVariables getRelativeExtremaWithMultipleVariables(
+        Term const& term,
+        stringHelper::strings const& variableNames);
 
 }
 
