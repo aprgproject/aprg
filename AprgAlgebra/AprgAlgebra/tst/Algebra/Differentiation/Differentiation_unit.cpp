@@ -186,7 +186,8 @@ TEST(DifferentiationTest, DifferentiateMultipleTimesWorksForEquation)
     Equation equationToExpect3(Term(Polynomial{Monomial(25, {{"x", 4}}), Monomial(-6, {{"x", 2}})}), "=", Term(0));
     EXPECT_EQ(equationToExpect1, equationToVerify1);
     EXPECT_EQ(equationToExpect2, equationToVerify2);
-    EXPECT_EQ(equationToExpect3, equationToVerify3);}
+    EXPECT_EQ(equationToExpect3, equationToVerify3);
+}
 
 TEST(DifferentiationTest, DifferentiateConstantWorks)
 {

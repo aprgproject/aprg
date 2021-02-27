@@ -92,7 +92,8 @@ TEST(SimplificationOfEquationTest, SimplifyWorksOnSimplifyingAnExpression)
     Term expectedTerm("x");
     EXPECT_EQ(expectedTerm, simplifiedEquation.getLeftHandTerm());
     EXPECT_EQ("=", simplifiedEquation.getEquationOperator().getOperatorString());
-    EXPECT_EQ(Term(0), simplifiedEquation.getRightHandTerm());}
+    EXPECT_EQ(Term(0), simplifiedEquation.getRightHandTerm());
+}
 
 TEST(SimplificationOfEquationTest, SimplifyWorksOnNegatingTermIfNeeded)
 {

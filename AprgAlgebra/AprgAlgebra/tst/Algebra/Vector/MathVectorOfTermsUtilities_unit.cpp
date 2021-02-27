@@ -93,7 +93,8 @@ TEST(MathVectorOfTermsUtilitiesTest, GetPerpendicularLineOnAPointOfASurfaceWorks
 
 TEST(MathVectorOfTermsUtilitiesTest, IsContinuousAtWorks)
 {
-    Term t("t");    Term x(cos(t));
+    Term t("t");
+    Term x(cos(t));
     Term y(createExpressionIfPossible({Term(2), Term("*"), getEAsTerm(), Term("^"), t}));
     MathVectorOfTwoTerms termVector{x, y};
 

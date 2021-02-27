@@ -50,7 +50,8 @@ bool isPositiveIntegerConstant(Term const& term);
 bool isARealFiniteConstant(Term const& term);
 
 bool hasDoubleValues(Term const& term);
-bool hasDoubleValues(Monomial const& monomial);bool hasDoubleValues(Polynomial const& polynomial);
+bool hasDoubleValues(Monomial const& monomial);
+bool hasDoubleValues(Polynomial const& polynomial);
 bool hasDoubleValues(Expression const& expression);
 bool hasDoubleValues(Function const& function);
 bool hasNotANumber(Term const& term);

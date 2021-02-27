@@ -86,6 +86,7 @@ TEST(ThreeDimensionsUtilitiesTest, GetPlaneEquationWithPointCoordinatesWorks)
 TEST(ThreeDimensionsUtilitiesTest, GetSphereEquationWorks)
 {
     Equation equationToVerify(getSphereEquation());
+
     string stringToExpect("(((x-x0)^2)+((y-y0)^2)+((z-z0)^2)) = (r^2)");
     EXPECT_EQ(stringToExpect, equationToVerify.getDisplayableString());
 }

@@ -31,7 +31,8 @@ Equation getTangentPlaneOnAPointOfASurface(Equation const& surface, ArrayOfThree
 Equations getPerpendicularLineOnAPointOfASurface(Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
 
 template <unsigned int SIZE>
-void simplifyForTermVector(        MathVectorOfTerms<SIZE> & termVector)
+void simplifyForTermVector(
+        MathVectorOfTerms<SIZE> & termVector)
 {
     for(Term & term : termVector.getValuesReference())
     {
@@ -159,7 +160,8 @@ MathVectorOfTerms<SIZE> differentiate(
     Values const& values(termVector.getValues());
     std::transform(values.cbegin(), values.cend(), result.getValuesReference().begin(), [&](Term const& term)
     {
-        return differentiation.differentiate(term);    });
+        return differentiation.differentiate(term);
+    });
     return result;
 }
 
@@ -175,7 +177,8 @@ MathVectorOfTerms<SIZE> differentiateMultipleTimes(
     Values const& values(termVector.getValues());
     std::transform(values.cbegin(), values.cend(), result.getValuesReference().begin(), [&](Term const& term)
     {
-        return differentiation.differentiateMultipleTimes(term, numberOfTimes);    });
+        return differentiation.differentiateMultipleTimes(term, numberOfTimes);
+    });
     return result;
 }
 
@@ -190,7 +193,8 @@ MathVectorOfTerms<SIZE> integrate(
     Values const& values(termVector.getValues());
     std::transform(values.cbegin(), values.cend(), result.getValuesReference().begin(), [&](Term const& term)
     {
-        return integration.integrate(term);    });
+        return integration.integrate(term);
+    });
     return result;
 }
 

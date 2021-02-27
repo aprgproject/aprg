@@ -403,6 +403,7 @@ bool isARealFiniteConstant(Term const& term)
     }
     return result;
 }
+
 bool hasDoubleValues(Term const& term)
 {
     return doAnyNumbersSatisfyTheCondition(term, IsDoubleCondition);

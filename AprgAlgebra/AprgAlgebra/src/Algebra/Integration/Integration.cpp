@@ -49,7 +49,8 @@ bool Integration::isConvergent(
     return isARealFiniteConstant(integratedTerm);
 }
 
-Term Integration::integrate(        Term const& term) const
+Term Integration::integrate(
+        Term const& term) const
 {
     IntegrationHistory::getInstance().clear();
 

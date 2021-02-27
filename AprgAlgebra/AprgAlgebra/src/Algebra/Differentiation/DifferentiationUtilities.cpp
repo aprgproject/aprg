@@ -268,7 +268,8 @@ Term getApproximationUsingTaylorsFormula(
 Term getApproximationOfErrorUsingTaylorsRemainder(
         Term const& term,
         string const& variableName,
-        Term const& startingValue,        Term const& valueToApproach,
+        Term const& startingValue,
+        Term const& valueToApproach,
         Term const& valueForEstimation,
         unsigned int const numberOfTimes)
 {
@@ -314,7 +315,8 @@ Term getTotalDerivative(
         result += getPartialDerivative(term, variableName)*Term(derivativeOfVariable.getNameInLeibnizNotation());
     }
     simplifyForDifferentiation(result);
-    return result;}
+    return result;
+}
 
 Term getPartialDerivative(
         Term const& term,

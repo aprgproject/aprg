@@ -7,7 +7,8 @@
 #include <Algebra/Factorization/FactorizationOfPolynomial.hpp>
 #include <Algebra/Functions/FunctionUtilities.hpp>
 #include <Algebra/Simplification/SimplificationUtilities.hpp>
-#include <Algebra/Term/Operators/TermOperators.hpp>#include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
+#include <Algebra/Term/Operators/TermOperators.hpp>
+#include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/ConvertHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
@@ -15,13 +16,11 @@
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 #include <Math/AlbaMathHelper.hpp>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 using namespace alba::algebra::Factorization;
 using namespace alba::algebra::Functions;
 using namespace alba::mathHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -55,6 +54,7 @@ void SimplificationOfEquation::simplify()
     removeCommonConstant(newLeftHandSide);
     simplifyLeftHandSide(newLeftHandSide);
     negateTermIfNeeded(newLeftHandSide, equationOperatorString);
+
     m_equation = Equation(newLeftHandSide, equationOperatorString, Term(0));
 }
 
@@ -198,7 +198,7 @@ void SimplificationOfEquation::removeCommonConstant(
         else if(leftHandSide.isExpression())
         {
             bool isLeftHandSideChanged(false);
-            Terms factors(factorizeExpressionForRemovingConstant(leftHandSide.getExpressionConstReference()));
+            Terms factors(factorizeAnExpressionWithConfigurationChanged(leftHandSide.getExpressionConstReference()));
             for(Term & factor : factors)
             {
                 if(canBeConvertedToMonomial(factor))
@@ -222,21 +222,10 @@ void SimplificationOfEquation::removeCommonConstant(
     }
 }
 
-Terms SimplificationOfEquation::factorizeExpressionForRemovingConstant(
-       Expression const& expression)
-{
-    ConfigurationDetails configurationDetails(
-                Factorization::Configuration::getInstance().getConfigurationDetails());
-    configurationDetails.shouldSimplifyExpressionsToFactors = true;
-    ScopeObject scopeObject;
-    scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
-    return factorizeAnExpression(expression);
-}
-
 void SimplificationOfEquation::simplifyLeftHandSide(
         Term & term)
-{    simplifyTermToACommonDenominator(term);
+{
+    simplifyTermToACommonDenominator(term);
 }
 
 bool SimplificationOfEquation::areTheSignsOfTwoTermsDifferent(

@@ -26,7 +26,8 @@ bool isContinuousAt(
     return substitutedResult == limitAtValue && isARealFiniteConstant(substitutedResult);
 }
 
-bool isContinuousAt(        Term const& term,
+bool isContinuousAt(
+        Term const& term,
         string const& variableName,
         AlbaNumber const& valueToApproach,
         LimitAtAValueApproachType const limitApproachType)
@@ -76,7 +77,8 @@ bool isContinuousAtWithMultipleVariablesWithDifferentApproaches(
     return substitutedResult == limitAtValue && isARealFiniteConstant(substitutedResult);
 }
 
-bool isIntermediateValueTheoremSatisfied(        Term const& term,
+bool isIntermediateValueTheoremSatisfied(
+        Term const& term,
         string const& variableName,
         AlbaNumber const& firstValue,
         AlbaNumber const& secondValue,

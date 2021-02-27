@@ -88,7 +88,8 @@ void OneEquationOneVariableNonEqualitySolver::addIntervalsToSolutionSetIfNeeded(
                     && isARealFiniteConstant(substitutedEquation.getRightHandTerm())
                     && substitutedEquation.isEquationSatisfied();
         });
-        setAsCompleteSolution();    }
+        setAsCompleteSolution();
+    }
 }
 
 }

@@ -121,7 +121,8 @@ Equation getPlaneEquationWithPointCoordinates()
 
 Equation getSphereEquation()
 {
-    Term xMinusX0(createExpressionIfPossible({Term(x), Term("-"), Term(x0)}));    Term yMinusY0(createExpressionIfPossible({Term(y), Term("-"), Term(y0)}));
+    Term xMinusX0(createExpressionIfPossible({Term(x), Term("-"), Term(x0)}));
+    Term yMinusY0(createExpressionIfPossible({Term(y), Term("-"), Term(y0)}));
     Term zMinusZ0(createExpressionIfPossible({Term(z), Term("-"), Term(z0)}));
     Term xSquared(createExpressionIfPossible({xMinusX0, Term("^"), Term(2)}));
     Term ySquared(createExpressionIfPossible({yMinusY0, Term("^"), Term(2)}));
