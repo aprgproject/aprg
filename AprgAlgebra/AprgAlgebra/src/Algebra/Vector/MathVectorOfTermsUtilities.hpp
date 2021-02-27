@@ -24,13 +24,14 @@ namespace VectorUtilities
 void simplifyForTermInVector(Term & term);
 
 Term getDyOverDx(MathVectorOfTwoTerms const& termVector, std::string const& variableName);
-Term getDirectionalDerivativeInTwoDimensions(Term const& term, ArrayOfStrings<2U> const& coordinateVariables, AlbaAngle const& angleOfDirection);
-Term getDirectionalDerivativeInThreeDimensions(Term const& term, ArrayOfStrings<3U> const& coordinateVariables, MathVectorOfAngles<3U> const& coordinateAngles);
-Term getTangentPlaneOnAPoint(Term const& surface, MathVectorOfNumbers<3> const& point);
+Term getDirectionalDerivativeInTwoDimensions(Term const& term, ArrayOfTwoStrings const& coordinateVariables, AlbaAngle const& angleOfDirection);
+Term getDirectionalDerivativeInThreeDimensions(Term const& term, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeAngles const& coordinateAngles);
+MathVectorOfThreeTerms getNormalOfASurfaceOnAPoint(Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
+Equation getTangentPlaneOnAPointOfASurface(Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
+Equations getPerpendicularLineOnAPointOfASurface(Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
 
 template <unsigned int SIZE>
-void simplifyForTermVector(
-        MathVectorOfTerms<SIZE> & termVector)
+void simplifyForTermVector(        MathVectorOfTerms<SIZE> & termVector)
 {
     for(Term & term : termVector.getValuesReference())
     {
@@ -154,12 +155,11 @@ MathVectorOfTerms<SIZE> differentiate(
 {
     using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
     MathVectorOfTerms<SIZE> result;
-    Values const& values(termVector.getValues());
     Differentiation differentiation(variableName);
+    Values const& values(termVector.getValues());
     std::transform(values.cbegin(), values.cend(), result.getValuesReference().begin(), [&](Term const& term)
     {
-        return differentiation.differentiate(term);
-    });
+        return differentiation.differentiate(term);    });
     return result;
 }
 
@@ -171,12 +171,11 @@ MathVectorOfTerms<SIZE> differentiateMultipleTimes(
 {
     using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
     MathVectorOfTerms<SIZE> result;
-    Values const& values(termVector.getValues());
     Differentiation differentiation(variableName);
+    Values const& values(termVector.getValues());
     std::transform(values.cbegin(), values.cend(), result.getValuesReference().begin(), [&](Term const& term)
     {
-        return differentiation.differentiateMultipleTimes(term, numberOfTimes);
-    });
+        return differentiation.differentiateMultipleTimes(term, numberOfTimes);    });
     return result;
 }
 
@@ -187,12 +186,11 @@ MathVectorOfTerms<SIZE> integrate(
 {
     using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
     MathVectorOfTerms<SIZE> result;
-    Values const& values(termVector.getValues());
     Integration integration(variableName);
+    Values const& values(termVector.getValues());
     std::transform(values.cbegin(), values.cend(), result.getValuesReference().begin(), [&](Term const& term)
     {
-        return integration.integrate(term);
-    });
+        return integration.integrate(term);    });
     return result;
 }
 

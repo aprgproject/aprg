@@ -27,9 +27,10 @@ private:
     void negateTermIfNeeded(Term & leftHandSide, std::string & equationOperatorString);
     void removeExponentIfNeeded( Term & leftHandSide);
     void completeExpressionWithFractionalExponentsIfNeeded(Term & leftHandSide);
+    void removeCommonConstant(Term & leftHandSide);
+    Terms factorizeExpressionForRemovingConstant(Expression const& expression);
     void simplifyLeftHandSide(Term & term);
     bool areTheSignsOfTwoTermsDifferent(TermWithDetails const& firstTerm, TermWithDetails const& secondTerm);
-
     Equation m_equation;
 };
 

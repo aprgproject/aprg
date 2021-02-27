@@ -84,12 +84,11 @@ void OneEquationOneVariableNonEqualitySolver::addIntervalsToSolutionSetIfNeeded(
         {
             substitution.putVariableWithValue(variableName, value);
             Equation substitutedEquation(substitution.performSubstitutionTo(equation));
-            return isAFiniteConstant(substitutedEquation.getLeftHandTerm())
-                    && isAFiniteConstant(substitutedEquation.getRightHandTerm())
+            return isARealFiniteConstant(substitutedEquation.getLeftHandTerm())
+                    && isARealFiniteConstant(substitutedEquation.getRightHandTerm())
                     && substitutedEquation.isEquationSatisfied();
         });
-        setAsCompleteSolution();
-    }
+        setAsCompleteSolution();    }
 }
 
 }

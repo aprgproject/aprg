@@ -81,11 +81,10 @@ Term getApproximationUsingTaylorsFormula(
         Term const& valueToApproach,
         unsigned int const numberOfTimes);
 
-Term getApproximationUsingTaylorsRemainder(
+Term getApproximationOfErrorUsingTaylorsRemainder(
         Term const& term,
         std::string const& variableName,
-        Term const& startingValue,
-        Term const& valueToApproach,
+        Term const& startingValue,        Term const& valueToApproach,
         Term const& valueForEstimation,
         unsigned int const numberOfTimes);
 

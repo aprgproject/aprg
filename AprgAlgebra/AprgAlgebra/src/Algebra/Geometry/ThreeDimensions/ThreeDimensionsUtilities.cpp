@@ -109,10 +109,19 @@ Equation getPlaneEquation()
     return Equation(leftHandSide, "=", Term(0));
 }
 
-Equation getSphereEquation()
+Equation getPlaneEquationWithPointCoordinates()
 {
     Term xMinusX0(createExpressionIfPossible({Term(x), Term("-"), Term(x0)}));
     Term yMinusY0(createExpressionIfPossible({Term(y), Term("-"), Term(y0)}));
+    Term zMinusZ0(createExpressionIfPossible({Term(z), Term("-"), Term(z0)}));
+    Term leftHandSide(createExpressionIfPossible(
+    {Term(a), Term("*"), xMinusX0, Term("+"), Term(b), Term("*"), yMinusY0, Term("+"), Term(c), Term("*"), zMinusZ0}));
+    return Equation(leftHandSide, "=", Term(0));
+}
+
+Equation getSphereEquation()
+{
+    Term xMinusX0(createExpressionIfPossible({Term(x), Term("-"), Term(x0)}));    Term yMinusY0(createExpressionIfPossible({Term(y), Term("-"), Term(y0)}));
     Term zMinusZ0(createExpressionIfPossible({Term(z), Term("-"), Term(z0)}));
     Term xSquared(createExpressionIfPossible({xMinusX0, Term("^"), Term(2)}));
     Term ySquared(createExpressionIfPossible({yMinusY0, Term("^"), Term(2)}));

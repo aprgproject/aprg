@@ -23,11 +23,10 @@ bool isContinuousAt(
     SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
     Term substitutedResult(substitution.performSubstitutionTo(term));
     Term limitAtValue(getLimit(term, variableName, valueToApproach));
-    return substitutedResult == limitAtValue && isAFiniteConstant(substitutedResult);
+    return substitutedResult == limitAtValue && isARealFiniteConstant(substitutedResult);
 }
 
-bool isContinuousAt(
-        Term const& term,
+bool isContinuousAt(        Term const& term,
         string const& variableName,
         AlbaNumber const& valueToApproach,
         LimitAtAValueApproachType const limitApproachType)
@@ -74,11 +73,10 @@ bool isContinuousAtWithMultipleVariablesWithDifferentApproaches(
                     substitutionsForApproaches.at(0).performSubstitutionTo(term));
     }
     Term limitAtValue(getLimitWithMultipleVariablesWithDifferentApproaches(term, variableName, valueToApproach, substitutionsForApproaches));
-    return substitutedResult == limitAtValue && isAFiniteConstant(substitutedResult);
+    return substitutedResult == limitAtValue && isARealFiniteConstant(substitutedResult);
 }
 
-bool isIntermediateValueTheoremSatisfied(
-        Term const& term,
+bool isIntermediateValueTheoremSatisfied(        Term const& term,
         string const& variableName,
         AlbaNumber const& firstValue,
         AlbaNumber const& secondValue,

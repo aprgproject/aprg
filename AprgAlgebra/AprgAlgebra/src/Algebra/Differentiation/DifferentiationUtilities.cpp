@@ -265,11 +265,10 @@ Term getApproximationUsingTaylorsFormula(
     return result;
 }
 
-Term getApproximationUsingTaylorsRemainder(
+Term getApproximationOfErrorUsingTaylorsRemainder(
         Term const& term,
         string const& variableName,
-        Term const& startingValue,
-        Term const& valueToApproach,
+        Term const& startingValue,        Term const& valueToApproach,
         Term const& valueForEstimation,
         unsigned int const numberOfTimes)
 {
@@ -311,11 +310,11 @@ Term getTotalDerivative(
     Term result;
     for(string const& variableName : variableNames)
     {
-        result += getPartialDerivative(term, variableName);
+        DerivativeVariableName derivativeOfVariable(1, "", variableName);
+        result += getPartialDerivative(term, variableName)*Term(derivativeOfVariable.getNameInLeibnizNotation());
     }
     simplifyForDifferentiation(result);
-    return result;
-}
+    return result;}
 
 Term getPartialDerivative(
         Term const& term,

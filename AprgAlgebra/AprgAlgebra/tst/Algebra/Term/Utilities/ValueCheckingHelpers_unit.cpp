@@ -382,13 +382,12 @@ TEST(ValueCheckingHelpersTest, IsPositiveIntegerConstantWorks)
 
 TEST(ValueCheckingHelpersTest, IsAFiniteConstantWorks)
 {
-    EXPECT_FALSE(isAFiniteConstant(Term("x")));
-    EXPECT_TRUE(isAFiniteConstant(Term(1)));
-    EXPECT_FALSE(isAFiniteConstant(Term(NAN)));
+    EXPECT_FALSE(isARealFiniteConstant(Term("x")));
+    EXPECT_TRUE(isARealFiniteConstant(Term(1)));
+    EXPECT_FALSE(isARealFiniteConstant(Term(NAN)));
 }
 
-TEST(ValueCheckingHelpersTest, HasNotANumberWorksForTerm)
-{
+TEST(ValueCheckingHelpersTest, HasNotANumberWorksForTerm){
     EXPECT_TRUE(hasNotANumber(Term(NAN)));
     EXPECT_FALSE(hasNotANumber(Term("x")));
     EXPECT_TRUE(hasNotANumber(Term(Monomial(NAN, {}))));
