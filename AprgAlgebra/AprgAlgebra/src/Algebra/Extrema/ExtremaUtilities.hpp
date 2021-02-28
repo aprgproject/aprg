@@ -6,6 +6,7 @@
 
 #include <string>
 #include <vector>
+
 namespace alba
 {
 
@@ -20,7 +21,8 @@ enum class ExtremumType
     SaddlePoint
 };
 
-struct MinimumAndMaximum{
+struct MinimumAndMaximum
+{
     std::pair<AlbaNumber, AlbaNumber> minimumInputOutputValues;
     std::pair<AlbaNumber, AlbaNumber> maximumInputOutputValues;
 };
@@ -42,7 +44,8 @@ using ExtremaWithMultipleVariables=std::vector<ExtremumWithMultipleVariables>;
 using VariableNameToCriticalNumbersMap = std::map<std::string, AlbaNumbers>;
 
 bool willYieldToAbsoluteMinimumValue(
-        Term const& term,        std::string const& variableName,
+        Term const& term,
+        std::string const& variableName,
         AlbaNumber const& valueForEvaluation);
 
 bool willYieldToAbsoluteMaximumValue(
@@ -134,6 +137,7 @@ VariableNameToCriticalNumbersMap getCriticalNumbersWithMultipleVariables(
 AlbaNumbers getInputValuesAtPointsOfInflection(
         Term const& term,
         std::string const& variableName);
+
 MinimumAndMaximum getMinimumAndMaximumAtClosedInterval(
         Term const& term,
         std::string const& variableName,

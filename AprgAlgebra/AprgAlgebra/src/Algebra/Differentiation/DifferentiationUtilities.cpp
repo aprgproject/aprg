@@ -315,7 +315,8 @@ Term getTotalDerivative(
         result += getPartialDerivative(term, variableName) * Term(derivativeOfVariable.getNameInLeibnizNotation());
     }
     simplifyForDifferentiation(result);
-    return result;}
+    return result;
+}
 
 Term getPartialDerivative(
         Term const& term,

@@ -18,7 +18,8 @@ using namespace alba::mathHelper;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace algebra
 {
@@ -34,6 +35,7 @@ void retrieveSubstitutionsFromCriticalNumbers(SubstitutionsOfVariablesToValues &
 void determineExtrema(ExtremaWithMultipleVariables & extrema, Terms const& secondDerivatives, SubstitutionsOfVariablesToValues const& substitutions);
 
 }
+
 bool willYieldToAbsoluteMaximumValue(
         Term const& term,
         string const& variableName,
@@ -440,7 +442,8 @@ VariableNameToCriticalNumbersMap getCriticalNumbersWithMultipleVariables(
 
 AlbaNumbers getInputValuesAtPointsOfInflection(
         Term const& term,
-        string const& variableName){
+        string const& variableName)
+{
     Differentiation differentiation(variableName);
     Term secondDerivative(differentiation.differentiateMultipleTimes(term, 2));
     AlbaNumbers result;
@@ -572,6 +575,7 @@ ExtremaWithMultipleVariables getRelativeExtremaWithMultipleVariables(
 
 namespace
 {
+
 void putArbitiaryValuesFromInterval(
         AlbaNumbers & arbitiaryValues,
         AlbaNumberInterval const& interval)

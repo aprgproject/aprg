@@ -70,7 +70,8 @@ TEST(AprgAlgebraTest, DISABLED_EquationCanBeShown)
         for(double y=-2; y<=2; y+=0.1)
         {
             SubstitutionOfVariablesToValues substitution{{"x", x}, {"y", y}};
-            Equation equationWithZ(substitution.performSubstitutionTo(equation));            OneEquationOneVariableEqualitySolver solver;
+            Equation equationWithZ(substitution.performSubstitutionTo(equation));
+            OneEquationOneVariableEqualitySolver solver;
             SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(equationWithZ));
             AlbaNumbers zValues(solutionSet.getAcceptedValues());
             for(AlbaNumber const& z : zValues)
@@ -95,4 +96,5 @@ TEST(AprgAlgebraTest, DISABLED_EquationCanBeShown)
 
     gp << endl;
 }
+
 }
