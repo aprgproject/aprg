@@ -5,10 +5,12 @@
 #include <Algebra/Utilities/KnownNames.hpp>
 #include <Math/Vector/AlbaMathVectorUtilities.hpp>
 
+
+#include <Debug/AlbaDebug.hpp>
+
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace algebra
 {
@@ -16,10 +18,17 @@ namespace algebra
 namespace VectorUtilities
 {
 
+bool isDivergenceOfCurlZero(
+        MathVectorOfThreeTerms const& termVector,
+        ArrayOfThreeStrings const& coordinateVariables)
+{
+    //This is always true
+    return getDivergence(getCurl(termVector, coordinateVariables), coordinateVariables) == Term(0);
+}
+
 void simplifyForTermInVector(Term & term)
 {
-    Simplification::simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(term);
-    term.clearAllInnerSimplifiedFlags();
+    Simplification::simplifyTermByFactoringToNonDoubleFactorsToACommonDenominator(term);    term.clearAllInnerSimplifiedFlags();
     term.simplify();
 }
 
@@ -122,6 +131,19 @@ Equations getPerpendicularLineOnAPointOfASurface(
         lineEquation = substitution.performSubstitutionTo(lineEquation);
     }
     return lineEquations;
+}
+
+MathVectorOfThreeTerms getCurl(
+        MathVectorOfThreeTerms const& termVector,
+        ArrayOfThreeStrings const& coordinateVariables)
+{
+    Term const& a(termVector.getValueAt(0));
+    Term const& b(termVector.getValueAt(1));
+    Term const& c(termVector.getValueAt(2));
+    Term x(getPartialDerivative(c, coordinateVariables.at(1)) - getPartialDerivative(b, coordinateVariables.at(2)));
+    Term y(getPartialDerivative(a, coordinateVariables.at(2)) - getPartialDerivative(c, coordinateVariables.at(0)));
+    Term z(getPartialDerivative(b, coordinateVariables.at(0)) - getPartialDerivative(a, coordinateVariables.at(1)));
+    return MathVectorOfThreeTerms{x, y, z};
 }
 
 }

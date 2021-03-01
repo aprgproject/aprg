@@ -8,11 +8,10 @@
 namespace alba
 {
 
-template<>
-algebra::Term raiseToPowerForMathVectorDataType(algebra::Term const& value1, algebra::Term const& value2);
+template<> bool isEqualForMathVectorDataType(algebra::Term const& value1, algebra::Term const& value2);
+template<> algebra::Term raiseToPowerForMathVectorDataType(algebra::Term const& value1, algebra::Term const& value2);
 
 }
-
 namespace alba
 {
 

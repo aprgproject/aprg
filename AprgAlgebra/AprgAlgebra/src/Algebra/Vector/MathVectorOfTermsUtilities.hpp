@@ -24,16 +24,16 @@ namespace VectorUtilities
 
 void simplifyForTermInVector(Term & term);
 
+bool isDivergenceOfCurlZero(MathVectorOfThreeTerms const& termVector, ArrayOfThreeStrings const& coordinateVariables);
 Term getDyOverDx(MathVectorOfTwoTerms const& termVector, std::string const& variableName);
 Term getDirectionalDerivativeInTwoDimensions(Term const& term, ArrayOfTwoStrings const& coordinateVariables, AlbaAngle const& angleOfDirection);
-Term getDirectionalDerivativeInThreeDimensions(Term const& term, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeAngles const& coordinateAngles);
-MathVectorOfThreeTerms getNormalOfASurfaceOnAPoint(Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
+Term getDirectionalDerivativeInThreeDimensions(Term const& term, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeAngles const& coordinateAngles);MathVectorOfThreeTerms getNormalOfASurfaceOnAPoint(Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
 Equation getTangentPlaneOnAPointOfASurface(Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
 Equations getPerpendicularLineOnAPointOfASurface(Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
+MathVectorOfThreeTerms getCurl(MathVectorOfThreeTerms const& termVector, ArrayOfThreeStrings const& coordinateVariables);
 
 template <unsigned int SIZE>
-void simplifyForTermVector(
-        MathVectorOfTerms<SIZE> & termVector)
+void simplifyForTermVector(        MathVectorOfTerms<SIZE> & termVector)
 {
     for(Term & term : termVector.getValuesReference())
     {
@@ -57,10 +57,11 @@ template <unsigned int SIZE> MathVectorOfTerms<SIZE> getUnitTangentVector(MathVe
 template <unsigned int SIZE> MathVectorOfTerms<SIZE> getUnitNormalVector(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName);
 template <unsigned int SIZE> MathVectorOfTerms<SIZE> getCurvatureVector(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName);
 template <unsigned int SIZE> MathVectorOfTerms<SIZE> getGradient( Term const& term, ArrayOfStrings<SIZE> const& coordinateVariables);
+template <unsigned int SIZE> MathVectorOfTerms<SIZE> getDel(MathVectorOfTerms<SIZE> const& termVector, ArrayOfStrings<SIZE> const& coordinateVariables);
+template <unsigned int SIZE> MathVectorOfTerms<SIZE> getDoubleDel(MathVectorOfTerms<SIZE> const& termVector, ArrayOfStrings<SIZE> const& coordinateVariables);
 
 
-template <unsigned int SIZE>
-bool isContinuousAt(
+template <unsigned int SIZE>bool isContinuousAt(
         MathVectorOfTerms<SIZE> const& termVector,
         std::string const& variableName,
         AlbaNumber const& value)
@@ -203,10 +204,40 @@ Term getTermWithGradient(
 }
 
 template <unsigned int SIZE>
+Term getPotentialFunctionForVectorFieldGradient(
+        MathVectorOfTerms<SIZE> const& gradient,
+        ArrayOfStrings<SIZE> const& coordinateVariables,
+        bool & isConservative)
+{
+    return getTermWithGradient(gradient, coordinateVariables, isConservative);
+}
+
+template <unsigned int SIZE>
+Term getDivergence(
+        MathVectorOfTerms<SIZE> const& termVector,
+        ArrayOfStrings<SIZE> const& coordinateVariables)
+{
+    using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
+    MathVectorOfTerms<SIZE> del(getDel(termVector, coordinateVariables));
+    Values const& values(del.getValues());
+    return std::accumulate(values.cbegin(), values.cend(), Term(0), std::plus<Term>());
+}
+
+template <unsigned int SIZE>
+Term getLaplaceTerm(
+        MathVectorOfTerms<SIZE> const& termVector,
+        ArrayOfStrings<SIZE> const& coordinateVariables)
+{
+    using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
+    MathVectorOfTerms<SIZE> del(getDoubleDel(termVector, coordinateVariables));
+    Values const& values(del.getValues());
+    return std::accumulate(values.cbegin(), values.cend(), Term(0), std::plus<Term>());
+}
+
+template <unsigned int SIZE>
 MathVectorOfTerms<SIZE> getLimit(
         MathVectorOfTerms<SIZE> const& termVector,
-        std::string const& variableName,
-        AlbaNumber const& valueToApproach)
+        std::string const& variableName,        AlbaNumber const& valueToApproach)
 {
     using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
     MathVectorOfTerms<SIZE> result;
@@ -308,10 +339,40 @@ MathVectorOfTerms<SIZE> getGradient(
 {
     using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
     MathVectorOfTerms<SIZE> result;
-    Values & values(result.getValuesReference());
+    Values & valuesInResult(result.getValuesReference());
     for(unsigned int i=0; i<SIZE; i++)
     {
-        values.at(i) = getPartialDerivative(term, coordinateVariables.at(i));
+        valuesInResult.at(i) = getPartialDerivative(term, coordinateVariables.at(i));
+    }
+    return result;
+}
+
+template <unsigned int SIZE>
+MathVectorOfTerms<SIZE> getDel(
+        MathVectorOfTerms<SIZE> const& termVector,
+        ArrayOfStrings<SIZE> const& coordinateVariables)
+{
+    using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
+    MathVectorOfTerms<SIZE> result(termVector);
+    Values & valuesInResult(result.getValuesReference());
+    for(unsigned int i=0; i<SIZE; i++)
+    {
+        valuesInResult.at(i) = getPartialDerivative(termVector.getValueAt(i), coordinateVariables.at(i));
+    }
+    return result;
+}
+
+template <unsigned int SIZE>
+MathVectorOfTerms<SIZE> getDoubleDel(
+        MathVectorOfTerms<SIZE> const& termVector,
+        ArrayOfStrings<SIZE> const& coordinateVariables)
+{
+    using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
+    MathVectorOfTerms<SIZE> result(termVector);
+    Values & valuesInResult(result.getValuesReference());
+    for(unsigned int i=0; i<SIZE; i++)
+    {
+        valuesInResult.at(i) = getPartialDerivative(getPartialDerivative(termVector.getValueAt(i), coordinateVariables.at(i)), coordinateVariables.at(i));
     }
     return result;
 }
