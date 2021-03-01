@@ -384,7 +384,8 @@ Equation getIntegralEquationForFirstOrderDifferentialEquation(
     Term q = retriever.getTermWithMultipleVariableNames() + retriever.getRemainingTerm();
 
     dyOverDx.simplify();
-    p.simplify();    q.simplify();
+    p.simplify();
+    q.simplify();
     if(isFirstOrderDifferentialEquation(dyOverDx, p, q, xVariableName, yVariableName))
     {
         result = getIntegralEquationForFirstOrderDifferentialEquation(p, q, xVariableName, yVariableName);

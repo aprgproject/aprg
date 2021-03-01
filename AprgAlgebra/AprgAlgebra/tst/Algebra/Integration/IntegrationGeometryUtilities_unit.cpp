@@ -6,6 +6,7 @@
 #include <Math/AlbaMathHelper.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace alba::algebra::Functions;
 using namespace alba::mathHelper;
 using namespace std;

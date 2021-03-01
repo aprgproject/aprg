@@ -10,6 +10,7 @@
 #include <Algebra/Simplification/SimplificationUtilities.hpp>
 #include <Algebra/Vector/VectorTypes.hpp>
 #include <Math/Angle/AlbaAngle.hpp>
+
 #include <algorithm>
 
 namespace alba
@@ -51,13 +52,15 @@ template <unsigned int SIZE> Term getCurvature(MathVectorOfTerms<SIZE> const& te
 template <unsigned int SIZE> Term getTermWithGradient(MathVectorOfTerms<SIZE> const& gradient, ArrayOfStrings<SIZE> const& coordinateVariables);
 template <unsigned int SIZE> MathVectorOfTerms<SIZE> getLimit(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName, AlbaNumber const& valueToApproach);
 template <unsigned int SIZE> MathVectorOfTerms<SIZE> differentiate(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName);
-template <unsigned int SIZE> MathVectorOfTerms<SIZE> integrate(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName);template <unsigned int SIZE> MathVectorOfTerms<SIZE> getUnitTangentVector(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName);
+template <unsigned int SIZE> MathVectorOfTerms<SIZE> integrate(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName);
+template <unsigned int SIZE> MathVectorOfTerms<SIZE> getUnitTangentVector(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName);
 template <unsigned int SIZE> MathVectorOfTerms<SIZE> getUnitNormalVector(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName);
 template <unsigned int SIZE> MathVectorOfTerms<SIZE> getCurvatureVector(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName);
 template <unsigned int SIZE> MathVectorOfTerms<SIZE> getGradient( Term const& term, ArrayOfStrings<SIZE> const& coordinateVariables);
 
 
-template <unsigned int SIZE>bool isContinuousAt(
+template <unsigned int SIZE>
+bool isContinuousAt(
         MathVectorOfTerms<SIZE> const& termVector,
         std::string const& variableName,
         AlbaNumber const& value)
@@ -202,7 +205,8 @@ Term getTermWithGradient(
 template <unsigned int SIZE>
 MathVectorOfTerms<SIZE> getLimit(
         MathVectorOfTerms<SIZE> const& termVector,
-        std::string const& variableName,        AlbaNumber const& valueToApproach)
+        std::string const& variableName,
+        AlbaNumber const& valueToApproach)
 {
     using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
     MathVectorOfTerms<SIZE> result;
