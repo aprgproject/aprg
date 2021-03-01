@@ -22,7 +22,8 @@ using CoordinateDetailsForIntegrals = std::vector<CoordinateDetailsForIntegral>;
 
 Term getAreaInBetweenTwoTermsInAnInterval(
         Term const& lowerTerm,
-        Term const& higherTerm,        std::string const& variableName,
+        Term const& higherTerm,
+        std::string const& variableName,
         AlbaNumber const& lowerValueInInterval,
         AlbaNumber const& higherValueInInterval);
 

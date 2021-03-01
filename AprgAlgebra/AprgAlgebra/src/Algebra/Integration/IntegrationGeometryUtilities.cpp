@@ -12,6 +12,7 @@
 
 using namespace alba::algebra::Functions;
 using namespace std;
+
 namespace alba
 {
 
@@ -265,7 +266,8 @@ Term getDoubleIntegralInCartesianCoordinates(
     return integrateWithCoordinateDetails(termWithXAndY, {xDetails, yDetails});
 }
 
-Term getTotalMassOfALamina(        Term const& areaDensityAtPointInXAndY,
+Term getTotalMassOfALamina(
+        Term const& areaDensityAtPointInXAndY,
         CoordinateDetailsForIntegral const& xDetails,
         CoordinateDetailsForIntegral const& yDetails)
 {
@@ -348,7 +350,8 @@ Term getDoubleIntegralInPolarCoordinates(
     return integrateWithCoordinateDetails(termToIntegrate, {radiusDetails, thetaDetails});
 }
 
-Term getSurfaceAreaWithZInCartesianCoordinates(        Term const& z,
+Term getSurfaceAreaWithZInCartesianCoordinates(
+        Term const& z,
         CoordinateDetailsForIntegral const& xDetails,
         CoordinateDetailsForIntegral const& yDetails)
 {
@@ -368,7 +371,8 @@ Term getTripleIntegralInCartesianCoordinates(
     return integrateWithCoordinateDetails(termWithXAndYAndZ, {xDetails, yDetails, zDetails});
 }
 
-Term getTripleIntegralInCylindricalCoordinates(        Term const& termWithRadiusAndThetaAndZ,
+Term getTripleIntegralInCylindricalCoordinates(
+        Term const& termWithRadiusAndThetaAndZ,
         CoordinateDetailsForIntegral const& radiusDetails,
         CoordinateDetailsForIntegral const& thetaDetails,
         CoordinateDetailsForIntegral const& zDetails)
@@ -377,7 +381,8 @@ Term getTripleIntegralInCylindricalCoordinates(        Term const& termWithRadiu
     return integrateWithCoordinateDetails(termToIntegrate, {radiusDetails, thetaDetails, zDetails});
 }
 
-Term getTripleIntegralInSphericalCoordinates(        Term const& termWithRawAndThetaAndPhi,
+Term getTripleIntegralInSphericalCoordinates(
+        Term const& termWithRawAndThetaAndPhi,
         CoordinateDetailsForIntegral const& rawDetails,
         CoordinateDetailsForIntegral const& thetaDetails,
         CoordinateDetailsForIntegral const& phiDetails)
