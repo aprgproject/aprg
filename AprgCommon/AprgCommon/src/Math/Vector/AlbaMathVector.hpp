@@ -13,10 +13,12 @@ namespace alba
 {
 
 template <typename DataType>
+bool isEqualForMathVectorDataType(DataType const& value1, DataType const& value2);
+
+template <typename DataType>
 DataType raiseToPowerForMathVectorDataType(DataType const& value1, DataType const& value2);
 
-template <typename DataType, unsigned int SIZE>
-class AlbaMathVector
+template <typename DataType, unsigned int SIZE>class AlbaMathVector
 {
 public:
     using AlbaMathVectorType=AlbaMathVector<DataType, SIZE>;
@@ -45,10 +47,9 @@ public:
         return std::equal(m_values.cbegin(), m_values.cend(), second.m_values.cbegin(),
                           [](DataType const first, DataType const second)
         {
-            return mathHelper::isAlmostEqual(first, second);
+            return isEqualForMathVectorDataType(first, second);
         });
     }
-
     bool operator!=(AlbaMathVectorType const& second) const
     {
         AlbaMathVectorType const& first(*this);
@@ -202,10 +203,15 @@ public:
         return ss.str();
     }
 
+    DataType & getValueReferenceAt(unsigned int const index)
+    {
+        assert(index<SIZE);
+        return m_values.at(index);
+    }
+
     ValuesInArray & getValuesReference()
     {
-        return m_values;
-    }
+        return m_values;    }
 
 private:
     ValuesInArray m_values;
