@@ -28,6 +28,36 @@ TEST(MathVectorOfTermsUtilitiesTest, IsDivergenceOfCurlZeroWorks)
     EXPECT_TRUE(isDivergenceOfCurlZero(vectorField, {"x", "y", "z"}));
 }
 
+TEST(MathVectorOfTermsUtilitiesTest, IsGaussDivergenceTheoremInAPlaneTrueWorks)
+{
+    Term t("t");
+    Term xInVectorField(Monomial(2, {{"y", 1}}));
+    Term yInVectorField(Monomial(5, {{"x", 1}}));
+    MathVectorOfTwoTerms vectorField{xInVectorField, yInVectorField};
+    MathVectorOfTwoTerms regionOfLineIntegral{Term(cos(t)), Term(sin(t))};
+    MathVectorOfTwoTerms unitOutwardNormal{Term(cos(t)), Term(sin(t))};
+    DetailsForDefiniteIntegralWithTerms lineIntegralDetails{"t", Term(0), Term(2)*getPiAsTerm()};
+    DetailsForDefiniteIntegralWithTerms xDetails{"x", Term(-1), Term(1)};
+    DetailsForDefiniteIntegralWithTerms yDetails{"y", Term(-1), Term(1)};
+
+    EXPECT_TRUE(isGaussDivergenceTheoremInAPlaneTrue(vectorField, regionOfLineIntegral, unitOutwardNormal, lineIntegralDetails, xDetails, yDetails, {"x", "y"}));
+}
+
+TEST(MathVectorOfTermsUtilitiesTest, IsStokesTheoremInAPlaneTrueWorks)
+{
+    Term t("t");
+    Term xInVectorField(Monomial(2, {{"y", 1}}));
+    Term yInVectorField(Monomial(5, {{"x", 1}}));
+    MathVectorOfTwoTerms vectorField{xInVectorField, yInVectorField};
+    MathVectorOfTwoTerms regionOfLineIntegral{Term(cos(t)), Term(sin(t))};
+    MathVectorOfTwoTerms unitTangent{Term(sin(t)) * Term(-1), Term(cos(t))};
+    DetailsForDefiniteIntegralWithTerms lineIntegralDetails{"t", Term(0), Term(2)*getPiAsTerm()};
+    DetailsForDefiniteIntegralWithTerms xDetails{"x", Term(0), Term(1)};
+    DetailsForDefiniteIntegralWithTerms yDetails{"y", Term(0), getPiAsTerm()};
+
+    EXPECT_TRUE(isStokesTheoremInAPlaneTrue(vectorField, regionOfLineIntegral, unitTangent, lineIntegralDetails, xDetails, yDetails, {"x", "y"}));
+}
+
 TEST(MathVectorOfTermsUtilitiesTest, GetDyOverDxWorks)
 {
     Term x(Polynomial{Monomial(4, {}), Monomial(-1, {{"t", 2}})});
@@ -62,6 +92,36 @@ TEST(MathVectorOfTermsUtilitiesTest, GetDirectionalDerivativeInThreeDimensionsWo
     Term termToVerify(getDirectionalDerivativeInThreeDimensions(termToTest, {"x", "y", "z"}, {alpha, beta, gamma}));
 
     string stringToExpect("(5.051657681494233[x] + -3.394986600097681[y] + 0.92303381319393[z])");
+    EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());
+}
+
+TEST(MathVectorOfTermsUtilitiesTest, GetLineIntegralOfAClosedNonIntersectingPathUsingGreensTheoremWorks)
+{
+    Term xInVectorField(Monomial(1, {{"y", 2}}));
+    Term yInVectorField(Monomial(4, {{"x", 1}, {"y", 1}}));
+    MathVectorOfTwoTerms vectorField{xInVectorField, yInVectorField};
+    DetailsForDefiniteIntegralWithTerms xDetailsForLinePath{"x", Term(0), Term(2)};
+    DetailsForDefiniteIntegralWithTerms yDetailsForLinePath{"y", Term(Monomial(2, {{"x", 1}})), Term(Monomial(1, {{"x", 2}}))};
+
+    Term termToVerify(getLineIntegralOfAClosedNonIntersectingPathUsingGreensTheorem(vectorField, {"x", "y"}, xDetailsForLinePath, yDetailsForLinePath));
+
+    string stringToExpect("(-64/15)");
+    EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());
+}
+
+TEST(MathVectorOfTermsUtilitiesTest, GetAreaOfAClosedNonIntersectingPathUsingGreensTheoremWorks)
+{
+    // Get area of ellipse
+    Term t("t");
+    Term a("a");
+    Term b("b");
+    Term xInLinePath(a*cos(t)); // ellipse parameterized in X
+    Term yInLinePath(b*sin(t)); // ellipse parameterized in Y
+    MathVectorOfTwoTerms linePath{xInLinePath, yInLinePath};
+
+    Term termToVerify(getAreaOfAClosedNonIntersectingPathUsingGreensTheorem({"x", "y"}, linePath, {"t", Term(0), getPiAsTerm()*Term(2)}));
+
+    string stringToExpect("(pi)[a][b]");
     EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());
 }
 
@@ -175,6 +235,7 @@ TEST(MathVectorOfTermsUtilitiesTest, GetLengthOfArcFromStartToEndWorks)
 
     EXPECT_EQ(Term(-11.5176789869724), termToVerify);
 }
+
 TEST(MathVectorOfTermsUtilitiesTest, GetCurvatureWorks)
 {
     Term x(Monomial(1, {{"t", 3}}));
@@ -285,7 +346,8 @@ TEST(MathVectorOfTermsUtilitiesTest, GetLineIntegralWorksOnExample1)
     Term termToVerify(getLineIntegral(vectorField, {"x", "y"}, linePath, {"t", Term(-1), Term(2)}));
 
     string stringToExpect("(363/5)");
-    EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());}
+    EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());
+}
 
 TEST(MathVectorOfTermsUtilitiesTest, GetLineIntegralWorksOnExample2)
 {
@@ -299,7 +361,8 @@ TEST(MathVectorOfTermsUtilitiesTest, GetLineIntegralWorksOnExample2)
     Term termToVerify(getLineIntegral(vectorField, {"x", "y", "z"}, linePath, {"t", Term(0), Term(2)*getPiAsTerm()}));
 
     string stringToExpect("19.73920880217872");
-    EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());}
+    EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());
+}
 
 TEST(MathVectorOfTermsUtilitiesTest, GetLineIntegralIndependentOfPathWorksOnExample1)
 {
@@ -337,11 +400,13 @@ TEST(MathVectorOfTermsUtilitiesTest, GetLineIntegralEqualsGetLineIntegralIndepen
     Term lineIntegral(getLineIntegral(vectorField, {"x", "y"}, linePath, {"t", Term(0), Term(1)}));
     Term lineIntegralIndependentOfPath(getLineIntegralIndependentOfPath(vectorField, {"x", "y"}, {0, 0}, {1, 1}));
 
-    EXPECT_EQ(lineIntegral, lineIntegralIndependentOfPath);}
+    EXPECT_EQ(lineIntegral, lineIntegralIndependentOfPath);
+}
 
 TEST(MathVectorOfTermsUtilitiesTest, GetLimitWorks)
 {
-    Term t("t");    Term x(cos(t));
+    Term t("t");
+    Term x(cos(t));
     Term y(createExpressionIfPossible({Term(2), Term("*"), getEAsTerm(), Term("^"), t}));
     MathVectorOfTwoTerms termVector{x, y};
 

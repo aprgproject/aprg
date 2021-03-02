@@ -96,7 +96,8 @@ Term IntegrationForFiniteCalculus::integrateAtDefiniteValues(
                 higherEnd);
 }
 
-Term IntegrationForFiniteCalculus::integrateTerm(Term const& term) const{
+Term IntegrationForFiniteCalculus::integrateTerm(Term const& term) const
+{
     Term result;
     if(term.isConstant())
     {

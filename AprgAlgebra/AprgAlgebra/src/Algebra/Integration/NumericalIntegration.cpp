@@ -31,7 +31,8 @@ Term getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(
         substitution.putVariableWithValue(integralDetails.variableName, currentX);
         Term currentY(substitution.performSubstitutionTo(term));
         if(i==0 || i==numberOfSamples)
-        {            sum = sum + currentY;
+        {
+            sum = sum + currentY;
         }
         else
         {
@@ -57,7 +58,8 @@ Term getAnApproximateOfDefiniteIntegralUsingSimpsonRule(
         substitution.putVariableWithValue(integralDetails.variableName, currentX);
         Term currentY(substitution.performSubstitutionTo(term));
         if(i==0 || i==numberOfSamples)
-        {            sum = sum + currentY;
+        {
+            sum = sum + currentY;
         }
         else if(isOdd(i))
         {
@@ -118,6 +120,7 @@ Term getAnApproximateOfTruncationErrorInSimpsonRuleAt(
     AlbaNumber lengthOfInterval(integralDetails.higherEnd-integralDetails.lowerEnd);
     return lengthOfInterval / -180 * (deltaX ^ 2) * termDoublePrimeValue;
 }
+
 AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(
         AlbaNumber const& input,
         unsigned int const numberOfSamples)
@@ -129,7 +132,8 @@ AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(
         Term approximateValue(getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(oneOverX, {"x", AlbaNumber(1), input}, numberOfSamples));
         if(approximateValue.isConstant())
         {
-            result = approximateValue.getConstantValueConstReference();        }
+            result = approximateValue.getConstantValueConstReference();
+        }
     }
     return result;
 }
@@ -145,7 +149,8 @@ AlbaNumber getAnApproximateOfNaturalLogarithmUsingSimpsonRule(
         Term approximateValue(getAnApproximateOfDefiniteIntegralUsingSimpsonRule(oneOverX, {"x", AlbaNumber(1), input}, numberOfSamples));
         if(approximateValue.isConstant())
         {
-            result = approximateValue.getConstantValueConstReference();        }
+            result = approximateValue.getConstantValueConstReference();
+        }
     }
     return result;
 }

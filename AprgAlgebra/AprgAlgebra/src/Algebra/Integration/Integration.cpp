@@ -48,6 +48,7 @@ bool Integration::isConvergent(
     Term integratedTerm(integrateAtDefiniteValues(term, lowerEnd, higherEnd));
     return isARealFiniteConstant(integratedTerm);
 }
+
 Term Integration::integrate(
         Term const& term) const
 {
@@ -130,7 +131,8 @@ Term Integration::integrateAtDefiniteTerms(
                 higherEnd);
 }
 
-Monomial Integration::integrateConstant(        Constant const& constant) const
+Monomial Integration::integrateConstant(
+        Constant const& constant) const
 {
     return Monomial(constant.getNumberConstReference(), {{m_nameOfVariableToIntegrate, 1}});
 }

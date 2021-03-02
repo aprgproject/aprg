@@ -25,7 +25,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetAreaInBetweenTwoTermsInAnIntervalWorks
     EXPECT_EQ(Term(AlbaNumber::createFraction(8, 3)), getAreaInBetweenTwoTermsInAnInterval(lowerTerm, higherTerm, {"x", 0, 2}));
 }
 
-TEST(IntegrationGeometryUtilitiesTest, GetVolumeBasedOnCrossSectionalAreaWorksOnPyramidWithSquareBase){
+TEST(IntegrationGeometryUtilitiesTest, GetVolumeBasedOnCrossSectionalAreaWorksOnPyramidWithSquareBase)
+{
     Term side("side");
     Term height("height");
     Term z("z");
@@ -35,7 +36,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetVolumeBasedOnCrossSectionalAreaWorksOn
     Term termToVerify(getVolumeUsingOnCrossSectionalArea(crossSectionalArea, {"z", Term(0), height}));
 
     Term termToExpect(Monomial(AlbaNumber::createFraction(1, 3), {{"height", 1}, {"side", 2}}));
-    EXPECT_EQ(termToExpect, termToVerify);}
+    EXPECT_EQ(termToExpect, termToVerify);
+}
 
 TEST(IntegrationGeometryUtilitiesTest, GetVolumeBasedOnSolidOfRevolutionWorksOnUpsideDownCone)
 {
@@ -45,7 +47,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetVolumeBasedOnSolidOfRevolutionWorksOnU
     Term termToVerify(getVolumeUsingOnSolidOfRevolution(edgeOfTheConeInY, {"y", Term(0), height}));
 
     Term termToExpect(Monomial(AlbaNumber(1.047197551196598), {{"height", 1}, {"radius", 2}}));
-    EXPECT_EQ(termToExpect, termToVerify);}
+    EXPECT_EQ(termToExpect, termToVerify);
+}
 
 TEST(IntegrationGeometryUtilitiesTest, GetVolumeBasedOnSolidOfRevolutionWorksOnUpsideDownConeWithUpsideDownConeHole)
 {
@@ -57,7 +60,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetVolumeBasedOnSolidOfRevolutionWorksOnU
     Term termToVerify(getVolumeUsingOnSolidOfRevolution(edgeOfTheCone1InY, edgeOfTheCone2InY, {"y", Term(0), height}));
 
     Term termToExpect(Monomial(getPi(), {{"edgeDistance", 2}, {"height", 1}}));
-    EXPECT_EQ(termToExpect, termToVerify);}
+    EXPECT_EQ(termToExpect, termToVerify);
+}
 
 TEST(IntegrationGeometryUtilitiesTest, GetVolumeUsingCylindricalShellsWorksOnParabolaCupHole)
 {
@@ -67,7 +71,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetVolumeUsingCylindricalShellsWorksOnPar
     Term termToVerify(getVolumeUsingCylindricalShells(edgeOfTheParabolaInX, {"x", Term(0), radius}));
 
     Term termToExpect(Monomial(1.570796326794897, {{"radius", 4}}));
-    EXPECT_EQ(termToExpect, termToVerify);}
+    EXPECT_EQ(termToExpect, termToVerify);
+}
 
 TEST(IntegrationGeometryUtilitiesTest, GetLengthOfArcWorks)
 {
@@ -76,7 +81,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetLengthOfArcWorks)
     Term termToVerify(getLengthOfArc(termToTest, {"x", Term(1), Term(8)}));
 
     Term termToExpect(7.63370541601624);
-    EXPECT_EQ(termToExpect, termToVerify);}
+    EXPECT_EQ(termToExpect, termToVerify);
+}
 
 TEST(IntegrationGeometryUtilitiesTest, GetLengthOfArcInPolarCoordinatesWorks)
 {
@@ -86,7 +92,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetLengthOfArcInPolarCoordinatesWorks)
     Term termToVerify(getLengthOfArcInPolarCoordinates(radiusOfLimacon, {thetaName, Term(0), Term(AlbaNumber(AlbaNumber::Value::pi))}));
 
     Term termToExpect(12.21983866791859);
-    EXPECT_EQ(termToExpect, termToVerify);}
+    EXPECT_EQ(termToExpect, termToVerify);
+}
 
 TEST(IntegrationGeometryUtilitiesTest, GetTotalMassOfARodWorks)
 {
@@ -96,7 +103,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetTotalMassOfARodWorks)
     Term termToVerify(getTotalMassOfARod(termToTest, {"x", Term(0), l}));
 
     Term termToExpect(Monomial(AlbaNumber::createFraction(1, 3), {{"l", 3}}));
-    EXPECT_EQ(termToExpect, termToVerify);}
+    EXPECT_EQ(termToExpect, termToVerify);
+}
 
 TEST(IntegrationGeometryUtilitiesTest, GetMomentOfMassOfARodWorks)
 {
@@ -106,7 +114,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetMomentOfMassOfARodWorks)
     Term termToVerify(getMomentOfMassOfARod(termToTest, {"x", Term(0), l}));
 
     Term termToExpect(Monomial(AlbaNumber::createFraction(1, 4), {{"l", 4}}));
-    EXPECT_EQ(termToExpect, termToVerify);}
+    EXPECT_EQ(termToExpect, termToVerify);
+}
 
 TEST(IntegrationGeometryUtilitiesTest, GetCenterOfMassOfARodWorks)
 {
@@ -116,7 +125,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetCenterOfMassOfARodWorks)
     Term termToVerify(getCenterOfMassOfARod(termToTest, {"x", Term(0), l}));
 
     Term termToExpect(Monomial(AlbaNumber::createFraction(3, 4), {{"l", 1}}));
-    EXPECT_EQ(termToExpect, termToVerify);}
+    EXPECT_EQ(termToExpect, termToVerify);
+}
 
 TEST(IntegrationGeometryUtilitiesTest, GetTotalMassOfALaminaWorks)
 {
@@ -126,7 +136,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetTotalMassOfALaminaWorks)
     Term termToVerify(getTotalMassOfALamina(termToTest, {"x", Term(0), x}));
 
     Term termToExpect(Monomial(AlbaNumber::createFraction(1, 3), {{"x", 3}}));
-    EXPECT_EQ(termToExpect, termToVerify);}
+    EXPECT_EQ(termToExpect, termToVerify);
+}
 
 TEST(IntegrationGeometryUtilitiesTest, GetMomentOfMassOfALaminaWorks)
 {
@@ -136,7 +147,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetMomentOfMassOfALaminaWorks)
     TermPair termPairToVerify(getMomentOfMassOfALamina(termToTest, {"x", Term(0), x}));
 
     Term termToExpectInX(Monomial(AlbaNumber::createFraction(1, 10), {{"x", 5}}));
-    Term termToExpectInY(Monomial(AlbaNumber::createFraction(1, 4), {{"x", 4}}));    EXPECT_EQ(termToExpectInX, termPairToVerify.first);
+    Term termToExpectInY(Monomial(AlbaNumber::createFraction(1, 4), {{"x", 4}}));
+    EXPECT_EQ(termToExpectInX, termPairToVerify.first);
     EXPECT_EQ(termToExpectInY, termPairToVerify.second);
 }
 
@@ -148,7 +160,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetCenterOfMassOfALaminaWorks)
     TermPair termPairToVerify(getCenterOfMassOfALamina(termToTest, {"x", Term(0), x}));
 
     Term termToExpectInX(Monomial(AlbaNumber::createFraction(3, 10), {{"x", 2}}));
-    Term termToExpectInY(Monomial(AlbaNumber::createFraction(3, 4), {{"x",1}}));    EXPECT_EQ(termToExpectInX, termPairToVerify.first);
+    Term termToExpectInY(Monomial(AlbaNumber::createFraction(3, 4), {{"x",1}}));
+    EXPECT_EQ(termToExpectInX, termPairToVerify.first);
     EXPECT_EQ(termToExpectInY, termPairToVerify.second);
 }
 
@@ -160,7 +173,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetCentroidWorks)
     TermPair termPairToVerify(getCentroid(termToTest, {"x", Term(0), x}));
 
     Term termToExpectInX(Monomial(AlbaNumber::createFraction(3, 10), {{"x", 2}}));
-    Term termToExpectInY(Monomial(AlbaNumber::createFraction(3, 4), {{"x", 1}}));    EXPECT_EQ(termToExpectInX, termPairToVerify.first);
+    Term termToExpectInY(Monomial(AlbaNumber::createFraction(3, 4), {{"x", 1}}));
+    EXPECT_EQ(termToExpectInX, termPairToVerify.first);
     EXPECT_EQ(termToExpectInY, termPairToVerify.second);
 }
 
@@ -172,7 +186,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetWorkWorks)
     Term termToVerify(getWork(force, {"x", Term(0), x}));
 
     Term termToExpect(Monomial(AlbaNumber::createFraction(1, 3), {{"x", 3}}));
-    EXPECT_EQ(termToExpect, termToVerify);}
+    EXPECT_EQ(termToExpect, termToVerify);
+}
 
 TEST(IntegrationGeometryUtilitiesTest, GetLiquidPressureWorks)
 {
@@ -183,7 +198,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetLiquidPressureWorks)
     Term termToVerify(getLiquidPressure(raw, g, length, {"depth", Term(0), Term(2)}));
 
     Term termToExpect(Monomial(4, {{"g", 1}, {"raw", 1}}));
-    EXPECT_EQ(termToExpect, termToVerify);}
+    EXPECT_EQ(termToExpect, termToVerify);
+}
 
 TEST(IntegrationGeometryUtilitiesTest, IntegrateInPolarCoordinatesWorks)
 {
@@ -194,7 +210,8 @@ TEST(IntegrationGeometryUtilitiesTest, IntegrateInPolarCoordinatesWorks)
     Term termToVerify(integrateInPolarCoordinates(radiusOfLimacon, {thetaName, Term(0), Term(AlbaNumber(AlbaNumber::Value::pi))}));
 
     Term termToExpect(18.84955592153876);
-    EXPECT_EQ(termToExpect, termToVerify);}
+    EXPECT_EQ(termToExpect, termToVerify);
+}
 
 TEST(IntegrationGeometryUtilitiesTest, GetDoubleIntegralInCartesianCoordinatesWorksOnExample1)
 {
@@ -206,6 +223,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetDoubleIntegralInCartesianCoordinatesWo
     DetailsForDefiniteIntegralWithTerms yDetails{"y", Term(1), Term(3)};
 
     Term termToVerify(getDoubleIntegralInCartesianCoordinates(termToTest, xDetails, yDetails));
+
     Term termToExpect(24);
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -220,6 +238,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetDoubleIntegralInCartesianCoordinatesWo
     DetailsForDefiniteIntegralWithTerms yDetails{"y", Term(0), Term(2)};
 
     Term termToVerify(getDoubleIntegralInCartesianCoordinates(termToTest, xDetails, yDetails));
+
     Term termToExpect(AlbaNumber::createFraction(43, 2));
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -231,6 +250,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetTotalMassOfALaminaWorksWithXDetailsAnd
     DetailsForDefiniteIntegralWithTerms yDetails{"y", Term(1), Term(3)};
 
     Term termToVerify(getTotalMassOfALamina(termToTest, xDetails, yDetails));
+
     Term termToExpect(24);
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -242,6 +262,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetMomentOfMassOfALaminaWithRespectToXAxi
     DetailsForDefiniteIntegralWithTerms yDetails{"y", Term(1), Term(3)};
 
     Term termToVerify(getMomentOfMassOfALaminaWithRespectToXAxis(termToTest, xDetails, yDetails));
+
     Term termToExpect(54);
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -253,6 +274,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetMomentOfMassOfALaminaWithRespectToYAxi
     DetailsForDefiniteIntegralWithTerms yDetails{"y", Term(1), Term(3)};
 
     Term termToVerify(getMomentOfMassOfALaminaWithRespectToYAxis(termToTest, xDetails, yDetails));
+
     Term termToExpect(3);
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -264,6 +286,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetCenterOfMassOfALaminaWorksWithXDetails
     DetailsForDefiniteIntegralWithTerms yDetails{"y", Term(1), Term(3)};
 
     TermPair termPairToVerify(getCenterOfMassOfALamina(termToTest, xDetails, yDetails));
+
     Term termToExpect1(AlbaNumber::createFraction(1, 8));
     Term termToExpect2(AlbaNumber::createFraction(9, 4));
     EXPECT_EQ(termToExpect1, termPairToVerify.first);
@@ -277,6 +300,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetMomentOfInertiaAboutTheXAxisWorksWithX
     DetailsForDefiniteIntegralWithTerms yDetails{"y", Term(1), Term(3)};
 
     Term termToVerify(getMomentOfInertiaAboutTheXAxis(termToTest, xDetails, yDetails));
+
     Term termToExpect(128);
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -288,6 +312,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetMomentOfInertiaAboutTheYAxisWorksWithX
     DetailsForDefiniteIntegralWithTerms yDetails{"y", Term(1), Term(3)};
 
     Term termToVerify(getMomentOfInertiaAboutTheYAxis(termToTest, xDetails, yDetails));
+
     Term termToExpect(AlbaNumber::createFraction(48, 5));
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -299,6 +324,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetMomentOfInertiaAboutTheOriginWorksWith
     DetailsForDefiniteIntegralWithTerms yDetails{"y", Term(1), Term(3)};
 
     Term termToVerify(getMomentOfInertiaAboutTheOrigin(termToTest, xDetails, yDetails));
+
     Term termToExpect(AlbaNumber::createFraction(688, 5));
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -310,6 +336,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetRadiusOfGyrationWorksWithXDetailsAndYD
     DetailsForDefiniteIntegralWithTerms yDetails{"y", Term(1), Term(3)};
     Term momentOfInertiaAboutTheYAxis(getMomentOfInertiaAboutTheYAxis(termToTest, xDetails, yDetails));
     Term totalMassOfALamina(getTotalMassOfALamina(termToTest, xDetails, yDetails));
+
     Term termToVerify(getRadiusOfGyration(momentOfInertiaAboutTheYAxis, totalMassOfALamina));
 
     Term termToExpect(0.6324555320336759);
@@ -324,6 +351,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetDoubleIntegralInPolarCoordinatesWorksO
     DetailsForDefiniteIntegralWithTerms thetaDetails{"theta", Term(0), getPiAsTerm()/2};
 
     Term termToVerify(getDoubleIntegralInPolarCoordinates(termToTest, radiusDetails, thetaDetails));
+
     Term termToExpect(6);
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -336,6 +364,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetDoubleIntegralInPolarCoordinatesWorksO
     DetailsForDefiniteIntegralWithTerms thetaDetails{"theta", Term(0), getPiAsTerm()/3};
 
     Term termToVerify(getDoubleIntegralInPolarCoordinates(termToTest, radiusDetails, thetaDetails));
+
     Term termToExpect(0.2617993877991494);
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -351,6 +380,7 @@ TEST(IntegrationGeometryUtilitiesTest, DISABLED_GetSurfaceAreaWithZInCartesianCo
     DetailsForDefiniteIntegralWithTerms yDetails{"y", Term(0), Term(3)};
 
     Term termToVerify(getSurfaceAreaWithZInCartesianCoordinates(z, xDetails, yDetails));
+
     Term termToExpect(1);
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -362,6 +392,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetSurfaceAreaWithZInCartesianCoordinates
     DetailsForDefiniteIntegralWithTerms yDetails{"y", Term(0), Term(4)};
 
     Term termToVerify(getSurfaceAreaWithZInCartesianCoordinates(z, xDetails, yDetails));
+
     Term termToExpect(12);
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -377,6 +408,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetTripleIntegralInCartesianCoordinatesWo
     DetailsForDefiniteIntegralWithTerms zDetails{"z", Term(0), Term(Polynomial{Monomial(1, {{"x", 2}}), Monomial(4, {{"y", 2}})})};
 
     Term termToVerify(getTripleIntegralInCartesianCoordinates(termToTest, xDetails, yDetails, zDetails));
+
     Term termToExpect(12.56637061435917);
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -391,6 +423,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetTripleIntegralInCylindricalCoordinates
     DetailsForDefiniteIntegralWithTerms zDetails{"z", Term(0), Term(3)};
 
     Term termToVerify(getTripleIntegralInCylindricalCoordinates(termToTest, radiusDetails, thetaDetails, zDetails));
+
     Term termToExpect(37.69911184307752);
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -405,6 +438,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetTripleIntegralInSphericalCoordinatesWo
     DetailsForDefiniteIntegralWithTerms phiDetails{"phi", Term(0), getPiAsTerm()/Term(2)};
 
     Term termToVerify(getTripleIntegralInSphericalCoordinates(termToTest, rawDetails, thetaDetails, phiDetails));
+
     Term termToExpect(33.51032163829112);
     EXPECT_EQ(termToExpect, termToVerify);
 }

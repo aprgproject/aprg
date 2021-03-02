@@ -18,7 +18,8 @@ bool isEqualForMathVectorDataType(DataType const& value1, DataType const& value2
 template <typename DataType>
 DataType raiseToPowerForMathVectorDataType(DataType const& value1, DataType const& value2);
 
-template <typename DataType, unsigned int SIZE>class AlbaMathVector
+template <typename DataType, unsigned int SIZE>
+class AlbaMathVector
 {
 public:
     using AlbaMathVectorType=AlbaMathVector<DataType, SIZE>;
@@ -50,6 +51,7 @@ public:
             return isEqualForMathVectorDataType(first, second);
         });
     }
+
     bool operator!=(AlbaMathVectorType const& second) const
     {
         AlbaMathVectorType const& first(*this);
@@ -211,7 +213,8 @@ public:
 
     ValuesInArray & getValuesReference()
     {
-        return m_values;    }
+        return m_values;
+    }
 
 private:
     ValuesInArray m_values;
