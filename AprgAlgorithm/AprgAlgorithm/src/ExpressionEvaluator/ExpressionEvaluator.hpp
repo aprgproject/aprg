@@ -171,11 +171,10 @@ private:
                 }
                 else
                 {
-                    while(!operatorStack.empty() && term.getOperatorPriority()<operatorStack.top().getOperatorPriority())
+                    while(!operatorStack.empty() && term.getOperatorPriority() < operatorStack.top().getOperatorPriority())
                     {
                         performOperationWithStacks(valueStack, operatorStack);
-                    }
-                    operatorStack.push(term);
+                    }                    operatorStack.push(term);
                 }
             }
             else if(term.isValue())
