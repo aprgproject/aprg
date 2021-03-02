@@ -42,13 +42,12 @@ Integration::Integration(
 
 bool Integration::isConvergent(
         Term const& term,
-        AlbaNumber const& lowerValueInInterval,
-        AlbaNumber const& higherValueInInterval)
+        AlbaNumber const& lowerEnd,
+        AlbaNumber const& higherEnd)
 {
-    Term integratedTerm(integrateAtDefiniteValues(term, lowerValueInInterval, higherValueInInterval));
+    Term integratedTerm(integrateAtDefiniteValues(term, lowerEnd, higherEnd));
     return isARealFiniteConstant(integratedTerm);
 }
-
 Term Integration::integrate(
         Term const& term) const
 {
@@ -109,30 +108,29 @@ Term Integration::integrateWithPlusC(
 
 Term Integration::integrateAtDefiniteValues(
         Term const& term,
-        AlbaNumber const& lowerValueInInterval,
-        AlbaNumber const& higherValueInInterval) const
+        AlbaNumber const& lowerEnd,
+        AlbaNumber const& higherEnd) const
 {
     return evaluateValuesAndGetDifference(
                 integrateIntenally(term),
                 m_nameOfVariableToIntegrate,
-                lowerValueInInterval,
-                higherValueInInterval);
+                lowerEnd,
+                higherEnd);
 }
 
 Term Integration::integrateAtDefiniteTerms(
         Term const& term,
-        Term const& lowerValueTerm,
-        Term const& higherValueTerm) const
+        Term const& lowerEnd,
+        Term const& higherEnd) const
 {
     return evaluateTermsAndGetDifference(
                 integrateIntenally(term),
                 m_nameOfVariableToIntegrate,
-                lowerValueTerm,
-                higherValueTerm);
+                lowerEnd,
+                higherEnd);
 }
 
-Monomial Integration::integrateConstant(
-        Constant const& constant) const
+Monomial Integration::integrateConstant(        Constant const& constant) const
 {
     return Monomial(constant.getNumberConstReference(), {{m_nameOfVariableToIntegrate, 1}});
 }

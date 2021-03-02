@@ -52,19 +52,18 @@ SegregateTermsByConditionInAdditionAndSubtractionRetriever getRetrieverForCompar
     return retriever;
 }
 
-void retrieveTermWithAndWithoutCoordinates(
+void retrieveWithAndWithoutOtherCoordinates(
         Term & termWithOtherCoordinates,
         Term & termWithoutOtherCoordinates,
-        Term const& coordinateGradient,
+        Term const& termToAnalyze,
         string const& coordinateVariableName,
         strings const& allCoordinates)
 {
     SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever retriever(allCoordinates);
-    retriever.retrieveFromTerm(coordinateGradient);
+    retriever.retrieveFromTerm(termToAnalyze);
     termWithoutOtherCoordinates = retriever.getRemainingTerm();
     termWithOtherCoordinates = retriever.getTermWithMultipleVariableNames();
-    for(auto const& variableNameAndTermPair : retriever.getVariableNameToTermMap())
-    {
+    for(auto const& variableNameAndTermPair : retriever.getVariableNameToTermMap())    {
         if(variableNameAndTermPair.first == coordinateVariableName)
         {
             termWithoutOtherCoordinates += variableNameAndTermPair.second;
