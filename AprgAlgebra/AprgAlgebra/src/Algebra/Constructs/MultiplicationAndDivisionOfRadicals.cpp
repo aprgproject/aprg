@@ -61,6 +61,7 @@ void MultiplicationAndDivisionOfRadicals::simplify()
     RadicalDetails radicalDetails;
     TermsWithDetails remainingTerms;
     gatherDetails(radicalDetails, combinedMonomial, remainingTerms);
+
     AlbaNumber gcfOfExponents(getGcfOfExponents(radicalDetails));
 
     if(shouldBeCombined(radicalDetails, combinedMonomial, gcfOfExponents))

@@ -58,6 +58,7 @@ TEST(PolynomialOverPolynomialTest, SimplifyWorksWithZeroOverZero)
     PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
 
     polynomialOverPolynomial.simplify();
+
     EXPECT_EQ(Polynomial(), polynomialOverPolynomial.getNumerator());
     EXPECT_EQ(Polynomial(), polynomialOverPolynomial.getDenominator());
 }
@@ -230,6 +231,7 @@ TEST(PolynomialOverPolynomialTest, SimplifyAndDivideWorksWithZeroOverDouble)
     PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
 
     PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(polynomialOverPolynomial.simplifyAndDivide());
+
     EXPECT_EQ(Polynomial(), quotientAndRemainder.quotient);
     EXPECT_EQ(Polynomial(), quotientAndRemainder.remainder);
 }
@@ -241,6 +243,7 @@ TEST(PolynomialOverPolynomialTest, SimplifyAndDivideWorksWithZeroOverZero)
     PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
 
     PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(polynomialOverPolynomial.simplifyAndDivide());
+
     EXPECT_EQ(Polynomial(), quotientAndRemainder.quotient);
     EXPECT_EQ(Polynomial(), quotientAndRemainder.remainder);
 }

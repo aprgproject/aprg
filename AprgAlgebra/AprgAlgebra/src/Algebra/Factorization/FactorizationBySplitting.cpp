@@ -238,7 +238,8 @@ Polynomial getNewPolynomialWithNewVariables(
         Polynomial newSmallerPolynomialWithVariables(createPolynomialFromNumber(1));
         Polynomials factors(factorizeAPolynomial(smallerPolynomial));
         for(Polynomial const& factor : factors)
-        {            if(isOneMonomial(factor))
+        {
+            if(isOneMonomial(factor))
             {
                 newSmallerPolynomialWithVariables.multiplyMonomial(getFirstMonomial(factor));
             }

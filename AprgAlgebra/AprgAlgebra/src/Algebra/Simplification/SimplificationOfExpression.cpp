@@ -409,7 +409,8 @@ void SimplificationOfExpression::convertPolynomialToPolynomialOverPolynomial(
         PolynomialOverPolynomial pop(term.getPolynomialConstReference(), createPolynomialFromNumber(1));
         pop.simplify();
         if(!isTheValue(pop.getDenominator(), 1))
-        {            term = Term(createExpressionIfPossible({Term(pop.getNumerator()), Term("/"), Term(pop.getDenominator())}));
+        {
+            term = Term(createExpressionIfPossible({Term(pop.getNumerator()), Term("/"), Term(pop.getDenominator())}));
         }
     }
     else if(term.isExpression())

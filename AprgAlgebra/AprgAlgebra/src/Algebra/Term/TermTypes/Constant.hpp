@@ -21,7 +21,8 @@ public:
     explicit Constant(AlbaNumber const& constantValue);
 
     bool operator==(Constant const& second) const;
-    bool operator!=(Constant const& second) const;    bool operator<(Constant const& second) const;
+    bool operator!=(Constant const& second) const;
+    bool operator<(Constant const& second) const;
 
     AlbaNumber const& getNumberConstReference() const;
     std::string getDisplayableString() const;

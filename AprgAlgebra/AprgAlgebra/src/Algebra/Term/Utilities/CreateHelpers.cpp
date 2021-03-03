@@ -20,7 +20,8 @@ Monomial createMonomialFromNumber(
     return Monomial(number, {});
 }
 
-Monomial createMonomialFromVariable(        Variable const& variable)
+Monomial createMonomialFromVariable(
+        Variable const& variable)
 {
     return Monomial(1, {{variable.getVariableName(), 1}});
 }
@@ -34,7 +35,8 @@ Monomial createMonomialIfPossible(
         result = createMonomialFromNumber(term.getConstantValueConstReference());
     }
     else if(term.isVariable())
-    {        result = createMonomialFromVariable(term.getVariableConstReference());
+    {
+        result = createMonomialFromVariable(term.getVariableConstReference());
     }
     else if(term.isMonomial())
     {
@@ -57,7 +59,8 @@ Polynomial createPolynomialFromNumber(
     return Polynomial{createMonomialFromNumber(number)};
 }
 
-Polynomial createPolynomialFromVariable(        Variable const& variable)
+Polynomial createPolynomialFromVariable(
+        Variable const& variable)
 {
     return Polynomial{createMonomialFromVariable(variable)};
 }
@@ -77,7 +80,8 @@ Polynomial createPolynomialIfPossible(
         result = createPolynomialFromNumber(term.getConstantValueConstReference());
     }
     else if(term.isVariable())
-    {        result = createPolynomialFromVariable(term.getVariableConstReference());
+    {
+        result = createPolynomialFromVariable(term.getVariableConstReference());
     }
     else if(term.isMonomial())
     {

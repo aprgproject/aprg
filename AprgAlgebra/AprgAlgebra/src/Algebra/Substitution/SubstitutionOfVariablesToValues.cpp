@@ -132,7 +132,8 @@ Monomial SubstitutionOfVariablesToValues::performSubstitutionForMonomial(Monomia
     Monomial newMonomial(createMonomialFromNumber(monomial.getConstantConstReference()));
     Monomial::VariablesToExponentsMap previousVariableExponentMap(monomial.getVariablesToExponentsMapConstReference());
     for(auto const& variableExponentPair : previousVariableExponentMap)
-    {        if(isVariableFound(variableExponentPair.first))
+    {
+        if(isVariableFound(variableExponentPair.first))
         {
             newMonomial.setConstant(
                         newMonomial.getConstantConstReference()

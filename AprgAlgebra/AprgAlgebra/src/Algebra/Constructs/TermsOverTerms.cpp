@@ -54,16 +54,6 @@ TermsOverTerms::TermsOverTerms(Terms const& numerators, Terms const& denominator
     , m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails())
 {}
 
-TermsOverTerms::TermsOverTerms(
-        TermsWithDetails const& numeratorsWithDetails,
-        TermsWithDetails const& denominatorsWithDetails)
-    : m_shouldSimplifyToFactors(false)
-    , m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails())
-{
-    retrieveTermsFromTermsWithDetails(m_numerators, numeratorsWithDetails);
-    retrieveTermsFromTermsWithDetails(m_denominators, denominatorsWithDetails);
-}
-
 Terms const& TermsOverTerms::getNumerators() const
 {
     return m_numerators;
@@ -275,7 +265,8 @@ Polynomial TermsOverTerms::multiplyPolynomialTerms(Terms const& polynomialTerms)
     Polynomial polynomialResult(createPolynomialFromNumber(1));
     for(Term const& polynomialTerm : polynomialTerms)
     {
-        if(canBeConvertedToPolynomial(polynomialTerm))        {
+        if(canBeConvertedToPolynomial(polynomialTerm))
+        {
             polynomialResult.multiplyPolynomial(createPolynomialIfPossible(polynomialTerm));
         }
     }
@@ -353,7 +344,8 @@ void TermsOverTerms::retrievePolynomialAndNonPolynomialsTerms(
     polynomial = (createPolynomialFromNumber(1));
     for(Term const& termToCheck : termsToCheck)
     {
-        if(canBeConvertedToPolynomial(termToCheck))        {
+        if(canBeConvertedToPolynomial(termToCheck))
+        {
             polynomial.multiplyPolynomial(createPolynomialIfPossible(termToCheck));
         }
         else
