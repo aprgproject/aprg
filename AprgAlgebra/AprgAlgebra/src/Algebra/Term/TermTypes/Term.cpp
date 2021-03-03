@@ -47,10 +47,15 @@ Term::Term(double const doubleValue)
     , m_baseDataTermPointer(make_unique<Constant>(doubleValue))
 {}
 
+Term::Term(AlbaNumber const& number)
+    : m_type(TermType::Constant)
+    , m_isSimplified(false)
+    , m_baseDataTermPointer(make_unique<Constant>(number))
+{}
+
 Term::Term(string const& stringTerm)
     : m_type(TermType::Empty)
-    , m_isSimplified(false)
-    , m_baseDataTermPointer(nullptr)
+    , m_isSimplified(false)    , m_baseDataTermPointer(nullptr)
 {
     if(algebra::isOperator(stringTerm))
     {

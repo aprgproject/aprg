@@ -187,11 +187,10 @@ void SimplificationOfEquation::removeCommonConstant(
             }
             if(isLeftHandSideChanged)
             {
-                Polynomial combinedPolynomial(createPolynomialFromConstant(1));
+                Polynomial combinedPolynomial(createPolynomialFromNumber(1));
                 for(Polynomial const& factor : factors)
                 {
-                    combinedPolynomial.multiplyPolynomial(factor);
-                }
+                    combinedPolynomial.multiplyPolynomial(factor);                }
                 leftHandSide = Term(combinedPolynomial);
             }
         }

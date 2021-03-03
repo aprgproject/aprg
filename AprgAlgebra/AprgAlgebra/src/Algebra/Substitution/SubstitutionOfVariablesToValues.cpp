@@ -129,11 +129,10 @@ Equation SubstitutionOfVariablesToValues::performSubstitutionTo(
 
 Monomial SubstitutionOfVariablesToValues::performSubstitutionForMonomial(Monomial const& monomial) const
 {
-    Monomial newMonomial(createMonomialFromConstant(monomial.getConstantConstReference()));
+    Monomial newMonomial(createMonomialFromNumber(monomial.getConstantConstReference()));
     Monomial::VariablesToExponentsMap previousVariableExponentMap(monomial.getVariablesToExponentsMapConstReference());
     for(auto const& variableExponentPair : previousVariableExponentMap)
-    {
-        if(isVariableFound(variableExponentPair.first))
+    {        if(isVariableFound(variableExponentPair.first))
         {
             newMonomial.setConstant(
                         newMonomial.getConstantConstReference()

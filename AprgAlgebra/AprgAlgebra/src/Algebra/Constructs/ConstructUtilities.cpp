@@ -28,20 +28,18 @@ PolynomialOverPolynomialOptional createPolynomialOverPolynomialFromTermIfPossibl
     PolynomialOverPolynomialOptional result;
     if(canBeConvertedToPolynomial(term))
     {
-        result.setConstReference(PolynomialOverPolynomial(createPolynomialIfPossible(term), createPolynomialFromConstant(1)));
+        result.setConstReference(PolynomialOverPolynomial(createPolynomialIfPossible(term), createPolynomialFromNumber(1)));
     }
     else if(term.isExpression())
-    {
-        Expression const& expression(term.getExpressionConstReference());
+    {        Expression const& expression(term.getExpressionConstReference());
         if(OperatorLevel::MultiplicationAndDivision == expression.getCommonOperatorLevel())
         {
             bool canBeConvertedToPolynomialOverPolynomial(true);
-            Polynomial numerator(createPolynomialFromConstant(1));
-            Polynomial denominator(createPolynomialFromConstant(1));
+            Polynomial numerator(createPolynomialFromNumber(1));
+            Polynomial denominator(createPolynomialFromNumber(1));
             for(TermWithDetails const& termWithDetails
                 : expression.getTermsWithAssociation().getTermsWithDetails())
-            {
-                Term const& termInExpression(getTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
+            {                Term const& termInExpression(getTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
                 if(canBeConvertedToPolynomial(termInExpression))
                 {
                     if(termWithDetails.hasPositiveAssociation())

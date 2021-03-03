@@ -79,18 +79,17 @@ void SignMutator::mutatePolynomial(Polynomial & polynomial)
     }
     if(areAllTheValuesOne)
     {
-        polynomial = createPolynomialFromConstant(1);
+        polynomial = createPolynomialFromNumber(1);
     }
     else if(areAllTheValuesNegativeOne)
     {
-        polynomial = createPolynomialFromConstant(-1);
+        polynomial = createPolynomialFromNumber(-1);
     }
     else
     {
-        polynomial = createPolynomialFromConstant(AlbaNumber(AlbaNumber::Value::NotANumber));
+        polynomial = createPolynomialFromNumber(AlbaNumber(AlbaNumber::Value::NotANumber));
     }
 }
-
 void SignMutator::mutateExpression(Expression & expression)
 {
     Term simplifiedTerm(expression);

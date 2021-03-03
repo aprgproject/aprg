@@ -41,24 +41,23 @@ TEST(PolynomialOverPolynomialTest, IsEmptyWorks)
 
 TEST(PolynomialOverPolynomialTest, SimplifyWorksWithZeroOverDouble)
 {
-    Polynomial numerator(createPolynomialFromConstant(0));
-    Polynomial denominator(createPolynomialFromConstant(Constant(1.17157287525381)));
+    Polynomial numerator(createPolynomialFromNumber(0));
+    Polynomial denominator(createPolynomialFromNumber(1.17157287525381));
     PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
 
     polynomialOverPolynomial.simplify();
 
     EXPECT_EQ(Polynomial(), polynomialOverPolynomial.getNumerator());
-    EXPECT_EQ(createPolynomialFromConstant(1.17157287525381), polynomialOverPolynomial.getDenominator());
+    EXPECT_EQ(createPolynomialFromNumber(1.17157287525381), polynomialOverPolynomial.getDenominator());
 }
 
 TEST(PolynomialOverPolynomialTest, SimplifyWorksWithZeroOverZero)
 {
-    Polynomial numerator(createPolynomialFromConstant(0));
-    Polynomial denominator(createPolynomialFromConstant(0));
+    Polynomial numerator(createPolynomialFromNumber(0));
+    Polynomial denominator(createPolynomialFromNumber(0));
     PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
 
     polynomialOverPolynomial.simplify();
-
     EXPECT_EQ(Polynomial(), polynomialOverPolynomial.getNumerator());
     EXPECT_EQ(Polynomial(), polynomialOverPolynomial.getDenominator());
 }
@@ -226,24 +225,22 @@ TEST(PolynomialOverPolynomialTest, SimplifyWorksOnCancellingFactorsExample4)
 
 TEST(PolynomialOverPolynomialTest, SimplifyAndDivideWorksWithZeroOverDouble)
 {
-    Polynomial numerator(createPolynomialFromConstant(0));
-    Polynomial denominator(createPolynomialFromConstant(Constant(1.17157287525381)));
+    Polynomial numerator(createPolynomialFromNumber(0));
+    Polynomial denominator(createPolynomialFromNumber(1.17157287525381));
     PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
 
     PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(polynomialOverPolynomial.simplifyAndDivide());
-
     EXPECT_EQ(Polynomial(), quotientAndRemainder.quotient);
     EXPECT_EQ(Polynomial(), quotientAndRemainder.remainder);
 }
 
 TEST(PolynomialOverPolynomialTest, SimplifyAndDivideWorksWithZeroOverZero)
 {
-    Polynomial numerator(createPolynomialFromConstant(0));
-    Polynomial denominator(createPolynomialFromConstant(0));
+    Polynomial numerator(createPolynomialFromNumber(0));
+    Polynomial denominator(createPolynomialFromNumber(0));
     PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
 
     PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(polynomialOverPolynomial.simplifyAndDivide());
-
     EXPECT_EQ(Polynomial(), quotientAndRemainder.quotient);
     EXPECT_EQ(Polynomial(), quotientAndRemainder.remainder);
 }

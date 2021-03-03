@@ -236,11 +236,10 @@ TEST(DifferentiationForFiniteCalculusTest, DifferentiateConstantWorks)
 TEST(DifferentiationForFiniteCalculusTest, DifferentiateVariableWorks)
 {
     DifferentiationForFiniteCalculus differentiationForX("x");
-    Polynomial zeroPolynomial(createPolynomialFromConstant(0));
+    Polynomial zeroPolynomial(createPolynomialFromNumber(0));
     Polynomial xPlusOne{Monomial(1, {{"x", 1}}), Monomial(1, {})};
 
-    EXPECT_EQ(xPlusOne, differentiationForX.differentiateVariable(Variable("x")));
-    EXPECT_EQ(zeroPolynomial, differentiationForX.differentiateVariable(Variable("y")));
+    EXPECT_EQ(xPlusOne, differentiationForX.differentiateVariable(Variable("x")));    EXPECT_EQ(zeroPolynomial, differentiationForX.differentiateVariable(Variable("y")));
 }
 
 TEST(DifferentiationForFiniteCalculusTest, DifferentiateMonomialWorks)

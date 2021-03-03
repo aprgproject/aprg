@@ -14,14 +14,13 @@ namespace alba
 namespace algebra
 {
 
-Monomial createMonomialFromConstant(
-        Constant const& constant)
+Monomial createMonomialFromNumber(
+        AlbaNumber const& number)
 {
-    return Monomial(constant.getNumberConstReference(), {});
+    return Monomial(number, {});
 }
 
-Monomial createMonomialFromVariable(
-        Variable const& variable)
+Monomial createMonomialFromVariable(        Variable const& variable)
 {
     return Monomial(1, {{variable.getVariableName(), 1}});
 }
@@ -32,11 +31,10 @@ Monomial createMonomialIfPossible(
     Monomial result;
     if(term.isConstant())
     {
-        result = createMonomialFromConstant(term.getConstantConstReference());
+        result = createMonomialFromNumber(term.getConstantValueConstReference());
     }
     else if(term.isVariable())
-    {
-        result = createMonomialFromVariable(term.getVariableConstReference());
+    {        result = createMonomialFromVariable(term.getVariableConstReference());
     }
     else if(term.isMonomial())
     {
@@ -53,14 +51,13 @@ Monomial createMonomialIfPossible(
     return result;
 }
 
-Polynomial createPolynomialFromConstant(
-        Constant const& constant)
+Polynomial createPolynomialFromNumber(
+        AlbaNumber const& number)
 {
-    return Polynomial{createMonomialFromConstant(constant)};
+    return Polynomial{createMonomialFromNumber(number)};
 }
 
-Polynomial createPolynomialFromVariable(
-        Variable const& variable)
+Polynomial createPolynomialFromVariable(        Variable const& variable)
 {
     return Polynomial{createMonomialFromVariable(variable)};
 }
@@ -77,11 +74,10 @@ Polynomial createPolynomialIfPossible(
     Polynomial result;
     if(term.isConstant())
     {
-        result = createPolynomialFromConstant(term.getConstantConstReference());
+        result = createPolynomialFromNumber(term.getConstantValueConstReference());
     }
     else if(term.isVariable())
-    {
-        result = createPolynomialFromVariable(term.getVariableConstReference());
+    {        result = createPolynomialFromVariable(term.getVariableConstReference());
     }
     else if(term.isMonomial())
     {
