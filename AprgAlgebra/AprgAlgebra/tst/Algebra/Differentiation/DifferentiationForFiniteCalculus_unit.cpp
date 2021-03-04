@@ -17,11 +17,10 @@ TEST(DifferentiationForFiniteCalculusTest, DifferentiateWorksForTerm)
 {
     DifferentiationForFiniteCalculus differentiationForX("x");
 
-    EXPECT_EQ(Term(0), differentiationForX.differentiate(Term(5)));
+    EXPECT_EQ(Term(0), differentiationForX.differentiate(5));
 }
 
-TEST(DifferentiationForFiniteCalculusTest, DifferentiateWorksForConstant)
-{
+TEST(DifferentiationForFiniteCalculusTest, DifferentiateWorksForConstant){
     DifferentiationForFiniteCalculus differentiationForX("x");
 
     EXPECT_EQ(Term(0), differentiationForX.differentiate(Constant(5)));
@@ -195,12 +194,11 @@ TEST(DifferentiationForFiniteCalculusTest, DifferentiateTermWorks)
     Term polynomialTerm(Polynomial{Monomial(-2, {{"x", 2}}), Monomial(8, {{"x", 1}}), Monomial(5, {})});
     Expression expressionTerm{createExpressionIfPossible({3, "^", x})};
 
-    Term termToVerify1(differentiationForX.differentiateTerm(Term(5)));
-    Term termToVerify2(differentiationForX.differentiateTerm(Term("x")));
-    Term termToVerify3(differentiationForX.differentiateTerm(Term(Monomial(5, {{"x", 3}}))));
+    Term termToVerify1(differentiationForX.differentiateTerm(5));
+    Term termToVerify2(differentiationForX.differentiateTerm("x"));
+    Term termToVerify3(differentiationForX.differentiateTerm(Monomial(5, {{"x", 3}})));
     Term termToVerify4(differentiationForX.differentiateTerm(polynomialTerm));
     Term termToVerify5(differentiationForX.differentiateTerm(expressionTerm));
-
     Term termToExpect1(0);
     Term termToExpect2(xPlusOne);
     Term termToExpect3(Polynomial{Monomial(15, {{"x", 2}}), Monomial(15, {{"x", 1}}), Monomial(5, {})});

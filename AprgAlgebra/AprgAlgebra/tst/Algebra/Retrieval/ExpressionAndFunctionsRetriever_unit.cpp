@@ -48,13 +48,12 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromTermWorks)
     });
     Term functionTerm1(functionObject);
 
-    retriever.retrieveFromTerm(Term(Constant(1.234)));
-    retriever.retrieveFromTerm(Term(Variable("b")));
-    retriever.retrieveFromTerm(Term(Monomial(34, {{"c", 5}, {"d", 6}})));
-    retriever.retrieveFromTerm(Term(Polynomial{Monomial(516, {{"e", 7}}), Monomial(643, {{"f", 8}})}));
+    retriever.retrieveFromTerm(Constant(1.234));
+    retriever.retrieveFromTerm(Variable("b"));
+    retriever.retrieveFromTerm(Monomial(34, {{"c", 5}, {"d", 6}}));
+    retriever.retrieveFromTerm(Polynomial{Monomial(516, {{"e", 7}}), Monomial(643, {{"f", 8}})});
     retriever.retrieveFromTerm(expesssionTerm2);
     retriever.retrieveFromTerm(functionTerm1);
-
     TermSet const& termsSet(retriever.getSavedData());
     ASSERT_EQ(3U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
