@@ -63,11 +63,10 @@ void NegationMutator::mutateExpression(Expression & expression)
     }
     else
     {
-        expression.putTermWithMultiplicationIfNeeded(getBaseTermConstReferenceFromTerm(-1));
+        expression.putTermWithMultiplicationIfNeeded(Term(-1));
     }
     expression.simplify();
 }
-
 void NegationMutator::mutateFunction(Function &)
 {}
 

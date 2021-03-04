@@ -178,11 +178,10 @@ void performRootTest(
     Term formulaForEachTerm(series.getFormulaForEachTermInSummation());
     TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(formulaForEachTerm));
     TermsRaiseToTerms termsRaiseToTerms(termsOverTerms.getTermsRaiseToTerms());
-    termsRaiseToTerms.multiplyToExponents(Term(Monomial(1, {{variableName, -1}})));
+    termsRaiseToTerms.multiplyToExponents(Monomial(1, {{variableName, -1}}));
     Term termForLimit(termsRaiseToTerms.getCombinedTerm());
     Term limitTerm(getLimit(termForLimit, variableName, AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
-    if(limitTerm.isConstant())
-    {
+    if(limitTerm.isConstant())    {
         AlbaNumber limitValue(limitTerm.getConstantValueConstReference());
         if(limitValue < 1)
         {
@@ -200,11 +199,10 @@ Term getLimitForRatioTest(
         string const& variableName)
 {
     SubstitutionOfVariablesToTerms substitution
-    {{variableName, Term(Polynomial{Monomial(1, {{variableName, 1}}), Monomial(1, {})})}};
+    {{variableName, Polynomial{Monomial(1, {{variableName, 1}}), Monomial(1, {})}}};
     Term formulaForEachTerm(series.getFormulaForEachTermInSummation());
     Term formulaForEachTermWithPlusOne(substitution.performSubstitutionTo(formulaForEachTerm));
-    Term termForLimit(convertPositiveTermIfNegative(formulaForEachTermWithPlusOne) / convertPositiveTermIfNegative(formulaForEachTerm));
-    return getLimit(termForLimit, variableName, AlbaNumber(AlbaNumber::Value::PositiveInfinity));
+    Term termForLimit(convertPositiveTermIfNegative(formulaForEachTermWithPlusOne) / convertPositiveTermIfNegative(formulaForEachTerm));    return getLimit(termForLimit, variableName, AlbaNumber(AlbaNumber::Value::PositiveInfinity));
 }
 
 Term getSumOfArithmeticSeriesUsingFirstAndLastTerm(

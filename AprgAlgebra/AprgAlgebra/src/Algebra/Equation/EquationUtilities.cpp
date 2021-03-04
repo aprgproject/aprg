@@ -38,11 +38,10 @@ bool doesNegativeVariableSubstitutionYieldsToTheSameEquation(
     SubstitutionOfVariablesToTerms substitution;
     for(string const& variableName : variableNames)
     {
-        substitution.putVariableWithTerm(variableName, Term(Monomial(-1, {{variableName, 1}})));
+        substitution.putVariableWithTerm(variableName, Monomial(-1, {{variableName, 1}}));
     }
     Equation equation2(substitution.performSubstitutionTo(equation1));
-    return equation1 == equation2;
-}
+    return equation1 == equation2;}
 
 bool isSymmetricAlongXAxis(Equation const& equation)
 {
@@ -187,11 +186,10 @@ Term getEquivalentTermByReducingItToAVariable(
         Monomial const& monomialWithVariable(termWithVariable.getMonomialConstReference());
         AlbaNumber exponent(monomialWithVariable.getExponentForVariable(variableName));
         exponent = exponent^(-1);
-        result = termWithWithoutVariable^Term(exponent);
+        result = termWithWithoutVariable ^ exponent;
     }
     return result;
 }
-
 Equation buildEquationIfPossible(string const& equationString)
 {
     EquationBuilder builder(equationString);

@@ -231,12 +231,11 @@ Term flipTermIfHasNegativeAssociation(
 Term invertTerm(Term const& term, string const& variableName)
 {
     string newVariableName(createVariableNameForSubstitution(term));
-    Equation equationToIsolate(Term(newVariableName), "=", term);
+    Equation equationToIsolate(newVariableName, "=", term);
     IsolationOfOneVariableOnEqualityEquation isolation(equationToIsolate);
-    SubstitutionOfVariablesToTerms substitution{{newVariableName, Term(variableName)}};
+    SubstitutionOfVariablesToTerms substitution{{newVariableName, variableName}};
     return substitution.performSubstitutionTo(isolation.getEquivalentTermByIsolatingAVariable(variableName));
 }
-
 Expression negateExpression(Expression const& expression)
 {
     NegationMutator negationMutator;

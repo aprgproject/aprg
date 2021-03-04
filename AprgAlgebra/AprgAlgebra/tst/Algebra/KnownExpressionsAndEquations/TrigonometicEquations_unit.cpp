@@ -267,14 +267,13 @@ TEST(TrigonometricEquationsTest, GetTangentOfSumOrDifferenceOfTwoTermsWorks)
 
     Term numeratorSum(createExpressionIfPossible({tan(x), "+", tan(y)}));
     Term denominatorSum(createExpressionIfPossible(
-    {1, "-", Term(createExpressionIfPossible({tan(x), "*", tan(y)}))}));
+    {1, "-", createExpressionIfPossible({tan(x), "*", tan(y)})}));
     Term numeratorDifference(createExpressionIfPossible({tan(x), "-", tan(y)}));
     Term denominatorDifference(createExpressionIfPossible(
-    {1, "+", Term(createExpressionIfPossible({tan(x), "*", tan(y)}))}));
+    {1, "+", createExpressionIfPossible({tan(x), "*", tan(y)})}));
     Term expectedTangentOfSumOfValues(createExpressionIfPossible({numeratorSum, "/", denominatorSum}));
     Term expectedTangentOfDifferenceOfValues(createExpressionIfPossible({numeratorDifference, "/", denominatorDifference}));
-    EXPECT_EQ(expectedTangentOfSumOfValues, actualTangentOfSumOfValues);
-    EXPECT_EQ(expectedTangentOfDifferenceOfValues, actualTangentOfDifferenceOfValues);
+    EXPECT_EQ(expectedTangentOfSumOfValues, actualTangentOfSumOfValues);    EXPECT_EQ(expectedTangentOfDifferenceOfValues, actualTangentOfDifferenceOfValues);
 
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("x", getPi()/8);

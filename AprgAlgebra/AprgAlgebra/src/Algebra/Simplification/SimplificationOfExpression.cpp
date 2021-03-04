@@ -362,11 +362,10 @@ bool SimplificationOfExpression::tryToSubstituteSubExpressionOrSubFunctionAndRet
 {
     bool continueToTryToSubstitute = false;
     unsigned int oldNumberOfTerms = expression.getTermsWithAssociation().getTermsWithDetails().size();
-    Terms expressionAndFunctionTerms(retrieveSubExpressionsAndSubFunctions(Term(expression)));
+    Terms expressionAndFunctionTerms(retrieveSubExpressionsAndSubFunctions(expression));
     for(Term const& expressionOrFunctionTerm : expressionAndFunctionTerms)
     {
-        Expression newExpression(getNewExpressionWithSubstitutedVariableForTerm(m_expression, expressionOrFunctionTerm));
-        unsigned int newNumberOfTerms = newExpression.getTermsWithAssociation().getTermsWithDetails().size();
+        Expression newExpression(getNewExpressionWithSubstitutedVariableForTerm(m_expression, expressionOrFunctionTerm));        unsigned int newNumberOfTerms = newExpression.getTermsWithAssociation().getTermsWithDetails().size();
         if(expression.getCommonOperatorLevel() != newExpression.getCommonOperatorLevel()
                 || oldNumberOfTerms != newNumberOfTerms)
         {
@@ -410,11 +409,10 @@ void SimplificationOfExpression::convertPolynomialToPolynomialOverPolynomial(
         pop.simplify();
         if(!isTheValue(pop.getDenominator(), 1))
         {
-            term = Term(createExpressionIfPossible({Term(pop.getNumerator()), Term("/"), Term(pop.getDenominator())}));
+            term = createExpressionIfPossible({pop.getNumerator(), "/", pop.getDenominator()});
         }
     }
-    else if(term.isExpression())
-    {
+    else if(term.isExpression())    {
         convertPolynomialToPolynomialOverPolynomial(term.getExpressionReference());
     }
     else if(term.isFunction())
