@@ -223,7 +223,8 @@ Term getTangentOfSumOrDifferenceOfTwoTerms(
         {1, reverseOperator, createExpressionIfPossible({tan(term1), "*", tan(term2)})}));
         result = Term(createExpressionIfPossible({numerator, "/", denominator}));
     }
-    return result;}
+    return result;
+}
 
 Term getSineOfDoubledValue(Term const& term)
 {

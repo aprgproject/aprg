@@ -148,7 +148,8 @@ bool isDerivativeZeroOnPossibleExtremum(
     Term derivative(getDerivativeAtUsingLimit(term, variableName, valueAtPossibleExtremum, LimitAtAValueApproachType::BothSides));
     bool hasRelativeExtremum =
             willYieldToRelativeMaximumValue(term, variableName, valueAtPossibleExtremum, interval)
-            || willYieldToRelativeMinimumValue(term, variableName, valueAtPossibleExtremum, interval);    return hasRelativeExtremum
+            || willYieldToRelativeMinimumValue(term, variableName, valueAtPossibleExtremum, interval);
+    return hasRelativeExtremum
             && derivative.isConstant()
             && derivative.getConstantValueConstReference() == 0;
 }
@@ -316,7 +317,8 @@ AlbaNumbers getInputValuesInIntervalWithSameAsMeanOfInterval(
         Equation derivativeEqualsMeanEquation(fPrime, "=", mean);
         OneEquationOneVariableEqualitySolver solver;
         SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(derivativeEqualsMeanEquation));
-        AlbaNumberInterval abOpenInterval(createOpenEndpoint(a), createOpenEndpoint(b));        result = getNumbersInsideTheInterval(solutionSet.getAcceptedValues(), abOpenInterval);
+        AlbaNumberInterval abOpenInterval(createOpenEndpoint(a), createOpenEndpoint(b));
+        result = getNumbersInsideTheInterval(solutionSet.getAcceptedValues(), abOpenInterval);
     }
     return result;
 }
@@ -351,7 +353,8 @@ AlbaNumbers getInputValuesForCauchyMeanValueTheorem(
         Equation cauchyEquation(cauchyExpression, "=", cauchyValue);
         OneEquationOneVariableEqualitySolver solver;
         SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(cauchyEquation));
-        AlbaNumberInterval abOpenInterval(createOpenEndpoint(a), createOpenEndpoint(b));        result = getNumbersInsideTheInterval(solutionSet.getAcceptedValues(), abOpenInterval);
+        AlbaNumberInterval abOpenInterval(createOpenEndpoint(a), createOpenEndpoint(b));
+        result = getNumbersInsideTheInterval(solutionSet.getAcceptedValues(), abOpenInterval);
     }
     return result;
 }

@@ -262,7 +262,8 @@ TermRaiseToTerms createTermRaiseToTermsFromTerm(Term const& term)
         result.setBaseAndExponent(termRaiseToANumber.getBase(), termRaiseToANumber.getExponent());
     }
     else if(term.isExpression())
-    {        result = createTermRaiseToTermsFromExpression(term.getExpressionConstReference());
+    {
+        result = createTermRaiseToTermsFromExpression(term.getExpressionConstReference());
     }
     if(result.isEmpty())
     {

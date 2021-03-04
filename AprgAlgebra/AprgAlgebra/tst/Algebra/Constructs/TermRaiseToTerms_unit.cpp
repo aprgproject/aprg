@@ -270,6 +270,7 @@ TEST(TermRaiseToTermsTest, SimplifyWorksWithReducingExponentialToLogarithmicWith
     TermRaiseToTerms termRaiseToTerms(base, {2, exponent});
 
     termRaiseToTerms.simplify();
+
     EXPECT_EQ(Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})}), termRaiseToTerms.getBase());
     TermsWithDetails expectedExponents{TermWithDetails(Term(2), TermAssociationType::Positive)};
     EXPECT_EQ(expectedExponents, termRaiseToTerms.getExponents());

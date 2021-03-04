@@ -7,7 +7,8 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace algebra
 {
@@ -131,6 +132,7 @@ TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionToWorksOnExpression
 
     Term verifyTerm1(substitution.performSubstitutionTo(expression1));
     Term verifyTerm2(substitution.performSubstitutionTo(expression2));
+
     Term expectTerm1;
     Term expectTerm2(32);
     EXPECT_EQ(expectTerm1, verifyTerm1);
@@ -145,6 +147,7 @@ TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionToWorksOnFunction)
 
     Term verifyTerm1(substitution.performSubstitutionTo(function1));
     Term verifyTerm2(substitution.performSubstitutionTo(function2));
+
     Term expectTerm1(Function{});
     Term expectTerm2(2);
     EXPECT_EQ(expectTerm1, verifyTerm1);
@@ -161,7 +164,8 @@ TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionToWorksOnTerm)
     Term term5(createExpressionIfPossible({"x", "^", "y"}));
     Term term6(10);
 
-    Term verifyTerm1(substitution.performSubstitutionTo(term1));    Term verifyTerm2(substitution.performSubstitutionTo(term2));
+    Term verifyTerm1(substitution.performSubstitutionTo(term1));
+    Term verifyTerm2(substitution.performSubstitutionTo(term2));
     Term verifyTerm3(substitution.performSubstitutionTo(term3));
     Term verifyTerm4(substitution.performSubstitutionTo(term4));
     Term verifyTerm5(substitution.performSubstitutionTo(term5));

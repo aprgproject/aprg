@@ -32,7 +32,8 @@ TEST(ContinuityTest, IsContinuousAtWorksForContinuousPieceWiseFunction)
                 Term("x"),
                 [](AlbaNumber const& number)
     {
-        AlbaNumber result;        if(number <= 10)
+        AlbaNumber result;
+        if(number <= 10)
         {
             result = number;
         }
@@ -54,7 +55,8 @@ TEST(ContinuityTest, IsContinuousAtWorksForDiscontinuousPieceWiseFunction)
                 Term("x"),
                 [](AlbaNumber const& number)
     {
-        AlbaNumber result;        if(number == 1)
+        AlbaNumber result;
+        if(number == 1)
         {
             result = 2;
         }
@@ -132,7 +134,8 @@ TEST(ContinuityTest, GetContinuityTypeAtWorksForRemovableDiscontinuityFunction)
                 Term("x"),
                 [](AlbaNumber const& number)
     {
-        AlbaNumber result;        if(number == 3)
+        AlbaNumber result;
+        if(number == 3)
         {
             result = 2;
         }
@@ -155,7 +158,8 @@ TEST(ContinuityTest, GetContinuityTypeAtWorksForEssentialDiscontinuityFunction)
                 Term("x"),
                 [](AlbaNumber const& number)
     {
-        AlbaNumber result;        if(number <= 1)
+        AlbaNumber result;
+        if(number <= 1)
         {
             result = number + 3;
         }

@@ -178,6 +178,7 @@ void TermRaiseToTerms::simplifyWithEvenExponentsCancellationAndPutAbsoluteValueA
         m_base = simplifyAndConvertFunctionToSimplestTerm(abs(createOrCopyExpressionFromATerm(m_base)));
     }
 }
+
 void TermRaiseToTerms::simplifyBaseAndExponents()
 {
     Term exponentCombinedTerm;
@@ -343,7 +344,8 @@ Term TermRaiseToTerms::getCombinedBaseAndExponents() const
         combinedTerm = convertExpressionToSimplestTerm(createExpressionIfPossible({m_base, "^", exponent}));
         if((m_base.isConstant() || m_base.isVariable() || m_base.isMonomial()) && exponent.isConstant())
         {
-            combinedTerm.simplify();        }
+            combinedTerm.simplify();
+        }
     }
     return combinedTerm;
 }

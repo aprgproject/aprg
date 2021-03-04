@@ -151,6 +151,7 @@ Expression SubstitutionOfVariablesToTerms::performSubstitutionForMonomial(Monomi
     finalExpression.putTermWithMultiplicationIfNeeded(Term(substitutedExpressions));
     return finalExpression;
 }
+
 Expression SubstitutionOfVariablesToTerms::performSubstitutionForPolynomial(Polynomial const& polynomial) const
 {
     Expression newExpression;
