@@ -25,6 +25,7 @@ TEST(PlaneMotionUtilitiesTest, GetInstantaneousVelocityWorks)
     MathVectorOfTwoTerms termVector{x, y};
 
     MathVectorOfTwoTerms vectorToVerify(getInstantaneousVelocity(termVector, "t"));
+
     string stringToExpect("{(-2/((e)^2[t])), (3*((e)^t))}");
     EXPECT_EQ(stringToExpect, vectorToVerify.getDisplayableString());
 }
@@ -37,6 +38,7 @@ TEST(PlaneMotionUtilitiesTest, GetInstantaneousAccelerationFromVelocityWorks)
     MathVectorOfTwoTerms termVector{x, y};
 
     MathVectorOfTwoTerms vectorToVerify(getInstantaneousAccelerationFromVelocity(termVector, "t"));
+
     string stringToExpect("{(-2/((e)^2[t])), (3*((e)^t))}");
     EXPECT_EQ(stringToExpect, vectorToVerify.getDisplayableString());
 }

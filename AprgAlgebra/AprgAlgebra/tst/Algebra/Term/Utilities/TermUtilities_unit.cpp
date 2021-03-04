@@ -98,7 +98,8 @@ TEST(TermUtilitiesTest, GetNumberOfTermsWorks)
     EXPECT_EQ(7U, getNumberOfTerms(createExpressionIfPossible({w, "+", x, "*", y, "^", z})));
 }
 
-TEST(TermUtilitiesTest, GetConstantFactorWorks){
+TEST(TermUtilitiesTest, GetConstantFactorWorks)
+{
     Term x("x");
     EXPECT_EQ(AlbaNumber(5), getConstantFactor(5));
     EXPECT_EQ(AlbaNumber(6), getConstantFactor(Monomial(6, {{"x", 7}})));

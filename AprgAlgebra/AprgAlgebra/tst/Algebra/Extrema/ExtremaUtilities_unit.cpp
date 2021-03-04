@@ -116,7 +116,8 @@ TEST(ExtremaUtilitiesTest, HasPointOfInflectionAtWorks)
     EXPECT_FALSE(hasPointOfInflectionAt(Monomial(1, {{"x", 3}}), "x", 3));
 }
 
-TEST(ExtremaUtilitiesTest, IsRolleTheoremSatisfiedWorks){
+TEST(ExtremaUtilitiesTest, IsRolleTheoremSatisfiedWorks)
+{
     Term termToTest(Polynomial(
     {Monomial(4, {{"x", 3}}),
      Monomial(-9, {{"x", 1}})}));
@@ -148,6 +149,7 @@ TEST(ExtremaUtilitiesTest, GetInputValuesForCauchyMeanValueTheoremWorks)
     Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
 
     AlbaNumbers values(getInputValuesForCauchyMeanValueTheorem(termToTest, "x", 1, 3));
+
     ASSERT_EQ(1U, values.size());
     EXPECT_EQ(AlbaNumber(2), values.at(0));
 }
@@ -276,6 +278,7 @@ TEST(ExtremaUtilitiesTest, GetMaximumAndMinimumAtClosedIntervalWorksOnExample2)
     AlbaNumberInterval closedInterval(createCloseEndpoint(1), createCloseEndpoint(5));
 
     MinimumAndMaximum minmax(getMinimumAndMaximumAtClosedInterval(termToTest, "x", closedInterval));
+
     EXPECT_EQ(AlbaNumber(2), minmax.minimumInputOutputValues.first);
     EXPECT_EQ(AlbaNumber(0), minmax.minimumInputOutputValues.second);
     EXPECT_EQ(AlbaNumber(5), minmax.maximumInputOutputValues.first);

@@ -24,7 +24,8 @@ TEST(NegationMutatorTest, MutateTermWorks)
     Term term6(sin("a"));
 
     mutator.mutateTerm(term1);
-    mutator.mutateTerm(term2);    mutator.mutateTerm(term3);
+    mutator.mutateTerm(term2);
+    mutator.mutateTerm(term3);
     mutator.mutateTerm(term4);
     mutator.mutateTerm(term5);
     mutator.mutateTerm(term6);
@@ -37,7 +38,8 @@ TEST(NegationMutatorTest, MutateTermWorks)
     Term termToExpect6(createExpressionIfPossible({-1, "*", sin("a")}));
     EXPECT_EQ(termToExpect1, term1);
     EXPECT_EQ(termToExpect2, term2);
-    EXPECT_EQ(termToExpect3, term3);    EXPECT_EQ(termToExpect4, term4);
+    EXPECT_EQ(termToExpect3, term3);
+    EXPECT_EQ(termToExpect4, term4);
     EXPECT_EQ(termToExpect5, term5);
     EXPECT_EQ(termToExpect6, term6);
 }
@@ -96,6 +98,7 @@ TEST(NegationMutatorTest, MutateExpressionWorks)
     Expression expressionToExpect(createExpressionIfPossible({-1, "*", "a", "^", "b"}));
     EXPECT_EQ(expressionToExpect, expression);
 }
+
 TEST(NegationMutatorTest, MutateFunctionWorks)
 {
     NegationMutator mutator;
@@ -106,6 +109,7 @@ TEST(NegationMutatorTest, MutateFunctionWorks)
     Function functionToExpect(sin("a"));
     EXPECT_EQ(functionToExpect, functionObject);
 }
+
 }
 
 }

@@ -62,6 +62,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnDifferentAdditionExpressionL
                     Polynomial{Monomial(1, {{"a", 1}}), Monomial(1, {{"b", 1}}), Monomial(1, {{"c", 1}}), Monomial(1, {{"d", 1}})}));
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
+
 TEST(SimplificationOfExpressionTest, SimplifyWorksOnDifferentMultiplicationExpressionLevels)
 {
     Term expressionTermLevel1(createExpressionIfPossible({"c", "*", "d"}));
@@ -76,6 +77,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnDifferentMultiplicationExpre
     Expression expressionToExpect(createAndWrapExpressionFromATerm(Monomial(1, {{"a", 1}, {"b", 1}, {"c", 1}, {"d", 1}})));
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
+
 TEST(SimplificationOfExpressionTest, SimplifyWorksOnDifferentRaiseToPowerExpressionLevels)
 {
     Term expressionTermLevel1(createExpressionIfPossible({"c", "^", "d"}));
@@ -131,6 +133,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnZeroForAddingAndSubtracting)
     Expression expressionToExpect(createOrCopyExpressionFromATerm(-250));
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
+
 TEST(SimplificationOfExpressionTest, SimplifyWorksOnZeroForMultiplying)
 {
     Expression expressionToTest(createExpressionIfPossible({0, "*", 200, "*", 50}));

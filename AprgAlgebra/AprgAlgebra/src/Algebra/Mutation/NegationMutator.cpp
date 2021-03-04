@@ -37,6 +37,7 @@ void NegationMutator::mutateTerm(Term & term)
     }
     term.simplify();
 }
+
 void NegationMutator::mutateConstant(Constant & constant)
 {
     constant.setNumber(constant.getNumberConstReference()*-1);
@@ -66,6 +67,7 @@ void NegationMutator::mutateExpression(Expression & expression)
     }
     expression.simplify();
 }
+
 void NegationMutator::mutateFunction(Function &)
 {}
 

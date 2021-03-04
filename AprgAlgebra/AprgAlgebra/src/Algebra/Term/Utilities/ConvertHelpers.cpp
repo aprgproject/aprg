@@ -87,6 +87,7 @@ Term convertMonomialToSimplestTerm(Monomial const& monomial)
     }
     return newTerm;
 }
+
 Term convertPolynomialToSimplestTerm(Polynomial const& polynomial)
 {
     Term newTerm(polynomial);

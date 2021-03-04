@@ -403,7 +403,8 @@ AlbaNumbers getCriticalNumbers(
     Equation derivativeEqualsZeroEquation(firstDerivative, "=", 0);
     OneEquationOneVariableEqualitySolver solver;
     SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(derivativeEqualsZeroEquation));
-    AlbaNumbers result;    AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
+    AlbaNumbers result;
+    AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
     AlbaNumbers const& rejectedValues(solutionSet.getRejectedValues());
     result.reserve(acceptedValues.size() + rejectedValues.size());
     copy(acceptedValues.cbegin(), acceptedValues.cend(), back_inserter(result));
@@ -422,7 +423,8 @@ VariableNameToCriticalNumbersMap getCriticalNumbersWithMultipleVariables(
         equationsWithPartialDerivatives.emplace_back(getPartialDerivative(term, variableName), "=", 0);
     }
     SolverUsingSubstitution solver;
-    MultipleVariableSolutionSets solutionSets(solver.calculateSolutionAndReturnSolutionSet(equationsWithPartialDerivatives));    for(MultipleVariableSolutionSet const& solutionSet : solutionSets)
+    MultipleVariableSolutionSets solutionSets(solver.calculateSolutionAndReturnSolutionSet(equationsWithPartialDerivatives));
+    for(MultipleVariableSolutionSet const& solutionSet : solutionSets)
     {
         for(auto const& variableNameAndSolutionSetPair : solutionSet.getVariableNameToSolutionSetMap())
         {
@@ -450,7 +452,8 @@ AlbaNumbers getInputValuesAtPointsOfInflection(
         Equation derivativeEqualsZeroEquation(secondDerivative, "=", 0);
         OneEquationOneVariableEqualitySolver solver;
         SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(derivativeEqualsZeroEquation));
-        AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());        AlbaNumbers const& rejectedValues(solutionSet.getRejectedValues());
+        AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
+        AlbaNumbers const& rejectedValues(solutionSet.getRejectedValues());
         result.reserve(acceptedValues.size() + rejectedValues.size());
         copy(acceptedValues.cbegin(), acceptedValues.cend(), back_inserter(result));
         copy(rejectedValues.cbegin(), rejectedValues.cend(), back_inserter(result));
@@ -528,7 +531,8 @@ Extrema getRelativeExtrema(
     Equation firstDerivativeEqualsZeroEquation(firstDerivative, "=", 0);
     OneEquationOneVariableEqualitySolver solver;
     SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(firstDerivativeEqualsZeroEquation));
-    AlbaNumbers const& valuesWhenFirstDerivativeIsZero(solutionSet.getAcceptedValues());    Extrema result;
+    AlbaNumbers const& valuesWhenFirstDerivativeIsZero(solutionSet.getAcceptedValues());
+    Extrema result;
     for(AlbaNumber const& valueWhenFirstDerivativeIsZero : valuesWhenFirstDerivativeIsZero)
     {
         SubstitutionOfVariablesToValues substitution({{variableName, valueWhenFirstDerivativeIsZero}});

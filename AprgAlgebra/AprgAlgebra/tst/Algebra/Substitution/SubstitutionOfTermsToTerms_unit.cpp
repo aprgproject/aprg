@@ -7,7 +7,8 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace algebra
 {
@@ -34,7 +35,8 @@ TEST(SubstitutionOfTermsToTermsTest, IsEmptyWorks)
     SubstitutionOfTermsToTerms substitution2({{"x", 2}, {"y", 5}});
 
     EXPECT_TRUE(substitution1.isEmpty());
-    EXPECT_FALSE(substitution2.isEmpty());}
+    EXPECT_FALSE(substitution2.isEmpty());
+}
 
 TEST(SubstitutionOfTermsToTermsTest, IsTermFoundWorks)
 {
@@ -52,7 +54,8 @@ TEST(SubstitutionOfTermsToTermsTest, GetSizeWorks)
     SubstitutionOfTermsToTerms substitution2({{"x", 2}, {"y", 5}});
 
     EXPECT_EQ(0U, substitution1.getSize());
-    EXPECT_EQ(2U, substitution2.getSize());}
+    EXPECT_EQ(2U, substitution2.getSize());
+}
 
 TEST(SubstitutionOfTermsToTermsTest, GetTermForTermWorks)
 {
@@ -72,6 +75,7 @@ TEST(SubstitutionOfTermsToTermsTest, PerformSubstitutionToWorksOnExpression)
 
     Term verifyTerm1(substitution.performSubstitutionTo(expression1));
     Term verifyTerm2(substitution.performSubstitutionTo(expression2));
+
     Term expectTerm1;
     Term expectTerm2(32);
     EXPECT_EQ(expectTerm1, verifyTerm1);
@@ -86,6 +90,7 @@ TEST(SubstitutionOfTermsToTermsTest, PerformSubstitutionToWorksOnFunction)
 
     Term verifyTerm1(substitution.performSubstitutionTo(function1));
     Term verifyTerm2(substitution.performSubstitutionTo(function2));
+
     Term expectTerm1(Function{});
     Term expectTerm2(2);
     EXPECT_EQ(expectTerm1, verifyTerm1);
@@ -102,7 +107,8 @@ TEST(SubstitutionOfTermsToTermsTest, PerformSubstitutionToWorksOnTerm)
     Term term5(createExpressionIfPossible({"x", "^", "y"}));
     Term term6(10);
 
-    Term verifyTerm1(substitution.performSubstitutionTo(term1));    Term verifyTerm2(substitution.performSubstitutionTo(term2));
+    Term verifyTerm1(substitution.performSubstitutionTo(term1));
+    Term verifyTerm2(substitution.performSubstitutionTo(term2));
     Term verifyTerm3(substitution.performSubstitutionTo(term3));
     Term verifyTerm4(substitution.performSubstitutionTo(term4));
     Term verifyTerm5(substitution.performSubstitutionTo(term5));

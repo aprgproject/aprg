@@ -35,7 +35,8 @@ TEST(DifferentiationTest, DifferentiateWorksForTerm)
     Term termToExpect5(createExpressionIfPossible({-1, "*", sin(x)}));
     Term termToExpect6(cos(x));
     EXPECT_EQ(termToExpect1, termToVerify1);
-    EXPECT_EQ(termToExpect2, termToVerify2);    EXPECT_EQ(termToExpect3, termToVerify3);
+    EXPECT_EQ(termToExpect2, termToVerify2);
+    EXPECT_EQ(termToExpect3, termToVerify3);
     EXPECT_EQ(termToExpect4, termToVerify4);
     EXPECT_EQ(termToExpect5, termToVerify5);
     EXPECT_EQ(termToExpect6, termToVerify6);
@@ -115,6 +116,7 @@ TEST(DifferentiationTest, DifferentiateWorksForExpression)
     EXPECT_EQ(termToExpect01, termToVerify1);
     EXPECT_EQ(termToExpect02, termToVerify2);
 }
+
 TEST(DifferentiationTest, DifferentiateWorksForFunction)
 {
     Differentiation differentiationForX("x");
@@ -184,7 +186,8 @@ TEST(DifferentiationTest, DifferentiateMultipleTimesWorksForEquation)
     Equation equationToExpect3(Polynomial{Monomial(25, {{"x", 4}}), Monomial(-6, {{"x", 2}})}, "=", 0);
     EXPECT_EQ(equationToExpect1, equationToVerify1);
     EXPECT_EQ(equationToExpect2, equationToVerify2);
-    EXPECT_EQ(equationToExpect3, equationToVerify3);}
+    EXPECT_EQ(equationToExpect3, equationToVerify3);
+}
 
 TEST(DifferentiationTest, DifferentiateConstantWorks)
 {
@@ -287,7 +290,8 @@ TEST(DifferentiationTest, DifferentiateExpressionWorks)
     Expression expression10{createExpressionIfPossible({sin(x), "^", cos(x)})};
 
     Term expressionToVerify01(differentiationForXWithY.differentiateExpression(expression01));
-    Term expressionToVerify02(differentiationForXWithY.differentiateExpression(expression02));    Term expressionToVerify03(differentiationForXWithY.differentiateExpression(expression03));
+    Term expressionToVerify02(differentiationForXWithY.differentiateExpression(expression02));
+    Term expressionToVerify03(differentiationForXWithY.differentiateExpression(expression03));
     Term expressionToVerify04(differentiationForXWithY.differentiateExpression(expression04));
     Term expressionToVerify05(differentiationForXWithY.differentiateExpression(expression05));
     Term expressionToVerify06(differentiationForXWithY.differentiateExpression(expression06));
@@ -311,7 +315,8 @@ TEST(DifferentiationTest, DifferentiateExpressionWorks)
     Term termToExpect09(createExpressionIfPossible({-1.09861228866811, "*", 3, "^", cos(x), "*", sin(x)}));
     EXPECT_EQ(termToExpect01, expressionToVerify01);
     EXPECT_EQ(termToExpect02, expressionToVerify02);
-    EXPECT_EQ(termToExpect03, expressionToVerify03);    EXPECT_EQ(termToExpect04, expressionToVerify04);
+    EXPECT_EQ(termToExpect03, expressionToVerify03);
+    EXPECT_EQ(termToExpect04, expressionToVerify04);
     EXPECT_EQ(termToExpect05, expressionToVerify05);
     EXPECT_EQ(termToExpect06, expressionToVerify06);
     EXPECT_EQ(termToExpect07, expressionToVerify07);
@@ -362,7 +367,8 @@ TEST(DifferentiationTest, DifferentiateFunctionWorksWithFunctionsInCommonFunctio
     Term termToExpect10(createExpressionIfPossible({-1, "*", cscSquared}));
     string stringToExpect11("(1/((-1[x^2] + 1)^(1/2)))");
     string stringToExpect12("(-1/((-1[x^2] + 1)^(1/2)))");
-    string stringToExpect13("(1/(1[x^2] + 1))");    string stringToExpect14("(-1/x/((1[x] + -1)^(1/2))/((1[x] + 1)^(1/2)))");
+    string stringToExpect13("(1/(1[x^2] + 1))");
+    string stringToExpect14("(-1/x/((1[x] + -1)^(1/2))/((1[x] + 1)^(1/2)))");
     string stringToExpect15("(1/x/((1[x] + -1)^(1/2))/((1[x] + 1)^(1/2)))");
     string stringToExpect16("(-1/(1[x^2] + 1))");
     string stringToExpect17("cosh(x)");
@@ -405,6 +411,7 @@ TEST(DifferentiationTest, DifferentiateFunctionWorksWithChainRule)
     Term termToExpect(createExpressionIfPossible({Monomial(80, {{"x", 7}}), "*", cos(Monomial(10, {{"x", 8}}))}));
     EXPECT_EQ(termToExpect, termToVerify);
 }
+
 TEST(DifferentiationTest, DifferentiateEquationWorks)
 {
     Differentiation differentiationForXWithY("x", {"y"});
@@ -439,6 +446,7 @@ TEST(DifferentiationTest, DifferentiateWorksOnOneOverPolynomial)
     Term termToExpect(createExpressionIfPossible({expectedNumerator, "/", expectedDenominator}));
     EXPECT_EQ(termToExpect, termToVerify);
 }
+
 TEST(DifferentiationTest, DifferentiateTwoMultipliedTermsWorks)
 {
     Differentiation differentiationForX("x");
@@ -474,7 +482,8 @@ TEST(DifferentiationTest, DifferentiateWorksWithTermRaiseToTerm)
     Term termToTest4(createExpressionIfPossible({x, "^", x}));
 
     Term termToVerify1(differentiationForX.differentiate(termToTest1));
-    Term termToVerify2(differentiationForX.differentiate(termToTest2));    Term termToVerify3(differentiationForX.differentiate(termToTest3));
+    Term termToVerify2(differentiationForX.differentiate(termToTest2));
+    Term termToVerify3(differentiationForX.differentiate(termToTest3));
     Term termToVerify4(differentiationForX.differentiate(termToTest4));
 
     Term termToExpect1(0);
@@ -483,7 +492,8 @@ TEST(DifferentiationTest, DifferentiateWorksWithTermRaiseToTerm)
     Term termToExpect3(createExpressionIfPossible({n, "*", x, "^", exponentForTerm3}));
     EXPECT_EQ(termToExpect1, termToVerify1);
     EXPECT_EQ(termToExpect2, termToVerify2);
-    EXPECT_EQ(termToExpect3, termToVerify3);    EXPECT_TRUE(isNotANumber(termToVerify4));
+    EXPECT_EQ(termToExpect3, termToVerify3);
+    EXPECT_TRUE(isNotANumber(termToVerify4));
 }
 
 TEST(DifferentiationTest, DifferentiateWorksWithDivisionExpressionRaiseToAConstant)
@@ -493,6 +503,7 @@ TEST(DifferentiationTest, DifferentiateWorksWithDivisionExpressionRaiseToAConsta
     Term termToTest(createExpressionIfPossible({subTerm1, "^", 5}));
 
     Term termToVerify(differentiationForX.differentiate(termToTest));
+
     string stringToExpect("(-160/((1[x] + -1)^6))");
     EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());
 }
@@ -503,6 +514,7 @@ TEST(DifferentiationTest, DifferentiateWorksWithChainRule)
     Term termToTest(createExpressionIfPossible({sec(Monomial(2, {{"x", 2}})), "^", 4}));
 
     Term termToVerify(differentiationForX.differentiate(termToTest));
+
     string stringToExpect("(16[x]*(sec(2[x^2])^4)*tan(2[x^2]))");
     EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());
 }
@@ -514,6 +526,7 @@ TEST(DifferentiationTest, DifferentiateWorksWithSquareRootOfAPolynomial)
     Term termToTest(createExpressionIfPossible({subPolynomial, "^", AlbaNumber::createFraction(1, 2)}));
 
     Term termToVerify(differentiationForX.differentiate(termToTest));
+
     string stringToExpect("((3[x^2] + -2)/((2[x^3] + -4[x] + 5)^(1/2)))");
     EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());
 }

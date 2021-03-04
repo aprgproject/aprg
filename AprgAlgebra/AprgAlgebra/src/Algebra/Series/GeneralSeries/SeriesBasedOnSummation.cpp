@@ -42,6 +42,7 @@ bool SeriesBasedOnSummation::isConvergent() const
     }
     return result;
 }
+
 Term SeriesBasedOnSummation::getValueAtIndex(int const index) const
 {
     Term result;
@@ -55,6 +56,7 @@ Term SeriesBasedOnSummation::getValueAtIndex(int const index) const
     }
     return result;
 }
+
 bool SeriesBasedOnSummation::isAbsolutelyConvergent() const
 {
     SeriesBasedOnSummation summation(

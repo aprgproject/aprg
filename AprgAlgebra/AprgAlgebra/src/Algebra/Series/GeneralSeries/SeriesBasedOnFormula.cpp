@@ -173,6 +173,7 @@ AlbaNumbers SeriesBasedOnFormula::getExtremaIndexes() const
     SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(firstDerivative, "=", 0)));
     return solutionSet.getAcceptedValues();
 }
+
 Term SeriesBasedOnFormula::getSignDerivativeForFiniteCalculus() const
 {
     DifferentiationForFiniteCalculus differentiation(m_nameForVariableInFormula);

@@ -47,6 +47,7 @@ void calculateLagrangeEquations(
         lagrangeEquations.emplace_back(getPartialDerivative(termWithLagrangeFunctions, lagrangeMultiplierName), "=", 0);
     }
 }
+
 Term getTermWithLagrangeFunctions(
         Term const& term,
         Terms const& lagrangeFunctions,

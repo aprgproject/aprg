@@ -335,7 +335,8 @@ TEST(ValueCheckingHelpersTest, IsANegativeTermWorks)
     EXPECT_FALSE(isANegativeTerm(Functions::abs(-5)));
 }
 
-TEST(ValueCheckingHelpersTest, IsANegativeConstantWorks){
+TEST(ValueCheckingHelpersTest, IsANegativeConstantWorks)
+{
     EXPECT_TRUE(isANegativeConstant(Constant(-1)));
     EXPECT_FALSE(isANegativeConstant(Constant(1)));
 }

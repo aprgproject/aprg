@@ -26,7 +26,8 @@ bool isDivergenceOfCurlZero(
     return getDivergence(getCurl(termVector, coordinateVariables), coordinateVariables) == 0;
 }
 
-bool isGaussDivergenceTheoremInAPlaneTrue(        MathVectorOfTwoTerms const& vectorField,
+bool isGaussDivergenceTheoremInAPlaneTrue(
+        MathVectorOfTwoTerms const& vectorField,
         MathVectorOfTwoTerms const& regionOfLineIntegral,
         MathVectorOfTwoTerms const& unitOutwardNormal,
         DetailsForDefiniteIntegralWithTerms const& lineIntegralDetails,
@@ -116,7 +117,8 @@ Term getDirectionalDerivativeInTwoDimensions(
     {::cos(angleOfDirection.getRadians()), ::sin(angleOfDirection.getRadians())});
     Term result(getDotProduct(gradient, unitDirection));
     simplifyForTermInVector(result);
-    return result;}
+    return result;
+}
 
 Term getDirectionalDerivativeInThreeDimensions(
         Term const& term,
@@ -130,7 +132,8 @@ Term getDirectionalDerivativeInThreeDimensions(
      ::cos(coordinateAngles.getValueAt(2).getRadians())});
     Term result(getDotProduct(gradient, unitDirection));
     simplifyForTermInVector(result);
-    return result;}
+    return result;
+}
 
 Term getLineIntegralOfAClosedNonIntersectingPathUsingGreensTheorem(
         MathVectorOfTwoTerms const& vectorField,
@@ -159,7 +162,8 @@ Term getAreaOfAClosedNonIntersectingPathUsingGreensTheorem(
     return getLineIntegral(vectorField, coordinateVariables, linePath, linePathIntegralDetails)/2;
 }
 
-MathVectorOfThreeTerms getNormalOfASurfaceOnAPoint(        Equation const& surface,
+MathVectorOfThreeTerms getNormalOfASurfaceOnAPoint(
+        Equation const& surface,
         ArrayOfThreeStrings const& coordinateVariables,
         MathVectorOfThreeNumbers const& point)
 {
@@ -196,7 +200,8 @@ Equation getTangentPlaneOnAPointOfASurface(
     substitution.putVariableWithTerm(z0, point.getValueAt(2));
 
     Equation generalPlane(ThreeDimensions::getPlaneEquationWithPointCoordinates());
-    return substitution.performSubstitutionTo(generalPlane);}
+    return substitution.performSubstitutionTo(generalPlane);
+}
 
 Equations getPerpendicularLineOnAPointOfASurface(
         Equation const& surface,
@@ -213,7 +218,8 @@ Equations getPerpendicularLineOnAPointOfASurface(
     substitution.putVariableWithTerm(z0, point.getValueAt(2));
 
     Equations lineEquations(ThreeDimensions::getLineEquations());
-    for(Equation & lineEquation : lineEquations)    {
+    for(Equation & lineEquation : lineEquations)
+    {
         lineEquation = substitution.performSubstitutionTo(lineEquation);
     }
     return lineEquations;

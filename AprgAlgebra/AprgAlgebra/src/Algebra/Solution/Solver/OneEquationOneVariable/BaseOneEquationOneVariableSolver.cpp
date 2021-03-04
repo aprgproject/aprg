@@ -96,7 +96,8 @@ void BaseOneEquationOneVariableSolver::calculateAndSubstituteAbsoluteValueFuncti
                 termToReplace = createExpressionIfPossible({-1, "*", absFunctionInputTerm});
             }
             substitution.putTermToTermMapping(absFunctionTerm, termToReplace);
-            itFunctionSet++;        }
+            itFunctionSet++;
+        }
         Term termAfterSubstitution(substitution.performSubstitutionTo(term));
         calculateForTermAndVariable(termAfterSubstitution, variableName);
     }

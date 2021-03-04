@@ -98,6 +98,7 @@ void accumulateTermsForAdditionAndSubtraction(
         combinedTerm = 0;
     }
 }
+
 void accumulateTermsForMultiplicationAndDivision(
         Term & combinedTerm,
         TermsWithDetails const& termsToCombine)
@@ -108,7 +109,8 @@ void accumulateTermsForMultiplicationAndDivision(
         combinedTerm = 0;
     }
     else
-    {        for(TermWithDetails const& termWithDetails : termsToCombine)
+    {
+        for(TermWithDetails const& termWithDetails : termsToCombine)
         {
             Term const& term(getTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
             if(isTheValue(term, 0) && termWithDetails.hasPositiveAssociation())
@@ -116,7 +118,8 @@ void accumulateTermsForMultiplicationAndDivision(
                 combinedTerm = 0;
                 break;
             }
-            if(willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(term))            {
+            if(willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(term))
+            {
                 continue;
             }
             else if(isFirst)
