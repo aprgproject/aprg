@@ -132,6 +132,7 @@ TEST(ComboTest, ImplicitDifferentiationAndIsolatingDerivativeWorks)
     Term expectedIsolatedXRightSide("d[y]/d[x]");
     EXPECT_EQ(Equation(expectedIsolatedXLeftSide, "=", expectedIsolatedXRightSide), isolation.isolateTermWithVariableOnRightSideOfEquation("d[y]/d[x]"));
 }
+
 TEST(ComboTest, ImplicitDifferentiationAndIsolatingDerivativeUsingSecondDerivativeWorks)
 {
     Differentiation differentiationForXWithY("x", {"y"});

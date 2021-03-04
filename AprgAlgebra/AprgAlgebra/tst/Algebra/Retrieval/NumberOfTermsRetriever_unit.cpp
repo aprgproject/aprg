@@ -52,6 +52,7 @@ TEST(NumberOfTermsRetrieverTest, RetrieveFromTermWorks)
 
     EXPECT_EQ(12U, retriever.getSavedData());
 }
+
 TEST(NumberOfTermsRetrieverTest, RetrieveFromConstantWorks)
 {
     NumberOfTermsRetriever retriever;

@@ -82,6 +82,7 @@ TEST(ConvertHelpersTest, SimplifyAndConvertExpressionToSimplestTermWorks)
     Expression expression2(createExpressionInAnExpression(expression1));
     Expression expression3(createExpressionInAnExpression(expression2));
     Expression expression4(createExpressionInAnExpression(expression3));
+
     Term termToVerify1(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({})));
     Term termToVerify2(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression1})));
     Term termToVerify3(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression2})));

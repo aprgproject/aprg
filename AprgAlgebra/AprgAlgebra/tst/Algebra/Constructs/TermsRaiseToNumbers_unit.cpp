@@ -19,7 +19,8 @@ TEST(TermsRaiseToNumbersTest, ConstructionWorks)
     TermsRaiseToNumbers termsRaiseToNumbers2({{"x", 1}, {"y", -2}, {"z", 3}});
 
     EXPECT_TRUE(termsRaiseToNumbers1.getBaseToExponentMap().empty());
-    TermsRaiseToNumbers::BaseToExponentMap const& mapToVerify(termsRaiseToNumbers2.getBaseToExponentMap());    ASSERT_EQ(3U, mapToVerify.size());
+    TermsRaiseToNumbers::BaseToExponentMap const& mapToVerify(termsRaiseToNumbers2.getBaseToExponentMap());
+    ASSERT_EQ(3U, mapToVerify.size());
     auto itToVerify = mapToVerify.cbegin();
     EXPECT_EQ(Term("x"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(1), itToVerify->second);
@@ -36,6 +37,7 @@ TEST(TermsRaiseToNumbersTest, GetBaseToExponentMapWorks)
     TermsRaiseToNumbers termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
 
     TermsRaiseToNumbers::BaseToExponentMap const& mapToVerify(termsRaiseToNumbers.getBaseToExponentMap());
+
     ASSERT_EQ(3U, mapToVerify.size());
     auto itToVerify = mapToVerify.cbegin();
     EXPECT_EQ(Term("x"), itToVerify->first);
@@ -63,6 +65,7 @@ TEST(TermsRaiseToNumbersTest, GetTermsInMultiplicationOperationWorks)
     TermsRaiseToNumbers termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
 
     Terms const termsToVerify(termsRaiseToNumbers.getTermsInMultiplicationOperation());
+
     Term expectedTerm1("x");
     Term expectedTerm2(Monomial(1, {{"y", -2}}));
     Term expectedTerm3(Monomial(1, {{"z", 3}}));
@@ -77,6 +80,7 @@ TEST(TermsRaiseToNumbersTest, GetTermWithDetailsInMultiplicationAndDivisionOpera
     TermsRaiseToNumbers termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
 
     TermsWithDetails const termsToVerify(termsRaiseToNumbers.getTermWithDetailsInMultiplicationAndDivisionOperation());
+
     Term expectedTerm1("x");
     TermWithDetails expectedTermWithDetails1({expectedTerm1, TermAssociationType::Positive});
     Term expectedTerm2(Monomial(1, {{"y", 2}}));
@@ -95,6 +99,7 @@ TEST(TermsRaiseToNumbersTest, AddExponentsWorks)
     TermsRaiseToNumbers termsRaiseToNumbers({{"x", 4}, {"y", -5}, {"z", 6}});
 
     termsRaiseToNumbers.addExponents(termsRaiseToNumbersToAdd);
+
     TermsRaiseToNumbers::BaseToExponentMap const mapToVerify(termsRaiseToNumbers.getBaseToExponentMap());
     ASSERT_EQ(3U, mapToVerify.size());
     auto itToVerify = mapToVerify.cbegin();
@@ -114,6 +119,7 @@ TEST(TermsRaiseToNumbersTest, SubtractExponentsWorks)
     TermsRaiseToNumbers termsRaiseToNumbersToSubtract({{"x", 1}, {"y", -2}, {"z", 3}});
 
     termsRaiseToNumbers.subtractExponents(termsRaiseToNumbersToSubtract);
+
     TermsRaiseToNumbers::BaseToExponentMap const mapToVerify(termsRaiseToNumbers.getBaseToExponentMap());
     ASSERT_EQ(3U, mapToVerify.size());
     auto itToVerify = mapToVerify.cbegin();
@@ -132,6 +138,7 @@ TEST(TermsRaiseToNumbersTest, MultiplyNumberToExponentsWorks)
     TermsRaiseToNumbers termsRaiseToNumbers({{"x", 4}, {"y", -5}, {"z", 6}});
 
     termsRaiseToNumbers.multiplyToExponents(5);
+
     TermsRaiseToNumbers::BaseToExponentMap const mapToVerify(termsRaiseToNumbers.getBaseToExponentMap());
     ASSERT_EQ(3U, mapToVerify.size());
     auto itToVerify = mapToVerify.cbegin();
@@ -151,6 +158,7 @@ TEST(TermsRaiseToNumbersTest, PutTermWorksOnMonomial)
     Term termWithPositive(Monomial(5, {{"x", 6}}));
     Term termWithNegative(Monomial(7, {{"y", 8}}));
     Term termWithHaveNoEffect(Monomial(1, {{"z", 0}}));
+
     termsRaiseToNumbers.putTerm(termWithPositive, TermAssociationType::Positive);
     termsRaiseToNumbers.putTerm(termWithNegative, TermAssociationType::Negative);
     termsRaiseToNumbers.putTerm(termWithHaveNoEffect, TermAssociationType::Positive);
@@ -183,6 +191,7 @@ TEST(TermsRaiseToNumbersTest, PutTermWorksOnOtherTermTypes)
 
     termsRaiseToNumbers.putTerm(termWithPositive, TermAssociationType::Positive);
     termsRaiseToNumbers.putTerm(termWithNegative, TermAssociationType::Negative);
+
     TermsRaiseToNumbers::BaseToExponentMap const mapToVerify(termsRaiseToNumbers.getBaseToExponentMap());
     ASSERT_EQ(3U, mapToVerify.size());
     auto itToVerify = mapToVerify.cbegin();
@@ -204,7 +213,8 @@ TEST(TermsRaiseToNumbersTest, PutTermsWorks)
     {Monomial(1, {{"x", 5}}), Monomial(1, {{"y", 6}}), Monomial(1, {{"z", 7}})}, TermAssociationType::Positive);
 
     TermsRaiseToNumbers::BaseToExponentMap const mapToVerify(termsRaiseToNumbers.getBaseToExponentMap());
-    ASSERT_EQ(3U, mapToVerify.size());    auto itToVerify = mapToVerify.cbegin();
+    ASSERT_EQ(3U, mapToVerify.size());
+    auto itToVerify = mapToVerify.cbegin();
     EXPECT_EQ(Term("x"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(6), itToVerify->second);
     itToVerify++;
@@ -222,7 +232,8 @@ TEST(TermsRaiseToNumbersTest, SetBaseAndExponentWorks)
     termsRaiseToNumbers.setBaseAndExponent("x", 9);
 
     TermsRaiseToNumbers::BaseToExponentMap const mapToVerify(termsRaiseToNumbers.getBaseToExponentMap());
-    ASSERT_EQ(1U, mapToVerify.size());    auto itToVerify = mapToVerify.cbegin();
+    ASSERT_EQ(1U, mapToVerify.size());
+    auto itToVerify = mapToVerify.cbegin();
     EXPECT_EQ(Term("x"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(9), itToVerify->second);
 }
@@ -234,7 +245,8 @@ TEST(TermsRaiseToNumbersTest, RemoveItemWithBaseWorks)
     termsRaiseToNumbers.removeItemWithBase("x");
 
     TermsRaiseToNumbers::BaseToExponentMap const mapToVerify(termsRaiseToNumbers.getBaseToExponentMap());
-    ASSERT_EQ(2U, mapToVerify.size());    auto itToVerify = mapToVerify.cbegin();
+    ASSERT_EQ(2U, mapToVerify.size());
+    auto itToVerify = mapToVerify.cbegin();
     EXPECT_EQ(Term("y"), itToVerify->first);
     EXPECT_EQ(AlbaNumber(-2), itToVerify->second);
     itToVerify++;
@@ -247,6 +259,7 @@ TEST(TermsRaiseToNumbersTest, SimplifyWorks)
     TermsRaiseToNumbers termsRaiseToNumbers({{"x", 1}, {"y", 0}, {"z", 0}});
 
     termsRaiseToNumbers.simplify();
+
     TermsRaiseToNumbers::BaseToExponentMap const mapToVerify(termsRaiseToNumbers.getBaseToExponentMap());
     ASSERT_EQ(1U, mapToVerify.size());
     auto itToVerify = mapToVerify.cbegin();

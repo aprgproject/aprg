@@ -67,7 +67,8 @@ TEST(NumbersRetrieverTest, RetrieveFromTermWorks)
     retriever.retrieveFromTerm(functionObject);
 
     AlbaNumbersSet const& numbersSet(retriever.getSavedData());
-    ASSERT_EQ(13U, numbersSet.size());    AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
+    ASSERT_EQ(13U, numbersSet.size());
+    AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
     EXPECT_EQ(AlbaNumber(1), *(it++));
     EXPECT_EQ(AlbaNumber(1.234), *(it++));
     EXPECT_EQ(AlbaNumber(2), *(it++));
