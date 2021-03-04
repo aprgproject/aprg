@@ -33,11 +33,10 @@ void NegationMutator::mutateTerm(Term & term)
     }
     else if(term.isFunction())
     {
-        term = Term(-1)*term;
+        term = -1*term;
     }
     term.simplify();
 }
-
 void NegationMutator::mutateConstant(Constant & constant)
 {
     constant.setNumber(constant.getNumberConstReference()*-1);
@@ -63,11 +62,10 @@ void NegationMutator::mutateExpression(Expression & expression)
     }
     else
     {
-        expression.putTermWithMultiplicationIfNeeded(getBaseTermConstReferenceFromTerm(Term(-1)));
+        expression.putTermWithMultiplicationIfNeeded(getBaseTermConstReferenceFromTerm(-1));
     }
     expression.simplify();
 }
-
 void NegationMutator::mutateFunction(Function &)
 {}
 

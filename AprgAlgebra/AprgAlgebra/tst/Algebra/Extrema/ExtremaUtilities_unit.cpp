@@ -78,46 +78,45 @@ TEST(ExtremaUtilitiesTest, IsDerivativeZeroOnPossibleExtremumWorks)
 
 TEST(ExtremaUtilitiesTest, IsDecreasingAtWorks)
 {
-    EXPECT_TRUE(isDecreasingAt(Term(Monomial(1, {{"x", 2}})), "x", -2));
-    EXPECT_FALSE(isDecreasingAt(Term(Monomial(1, {{"x", 2}})), "x", 2));
-    EXPECT_FALSE(isDecreasingAt(Term(Monomial(-1, {{"x", 2}})), "x", -2));
-    EXPECT_TRUE(isDecreasingAt(Term(Monomial(-1, {{"x", 2}})), "x", 2));
+    EXPECT_TRUE(isDecreasingAt(Monomial(1, {{"x", 2}}), "x", -2));
+    EXPECT_FALSE(isDecreasingAt(Monomial(1, {{"x", 2}}), "x", 2));
+    EXPECT_FALSE(isDecreasingAt(Monomial(-1, {{"x", 2}}), "x", -2));
+    EXPECT_TRUE(isDecreasingAt(Monomial(-1, {{"x", 2}}), "x", 2));
 }
 
 TEST(ExtremaUtilitiesTest, IsIncreasingAtWorks)
 {
-    EXPECT_FALSE(isIncreasingAt(Term(Monomial(1, {{"x", 2}})), "x", -2));
-    EXPECT_TRUE(isIncreasingAt(Term(Monomial(1, {{"x", 2}})), "x", 2));
-    EXPECT_TRUE(isIncreasingAt(Term(Monomial(-1, {{"x", 2}})), "x", -2));
-    EXPECT_FALSE(isIncreasingAt(Term(Monomial(-1, {{"x", 2}})), "x", 2));
+    EXPECT_FALSE(isIncreasingAt(Monomial(1, {{"x", 2}}), "x", -2));
+    EXPECT_TRUE(isIncreasingAt(Monomial(1, {{"x", 2}}), "x", 2));
+    EXPECT_TRUE(isIncreasingAt(Monomial(-1, {{"x", 2}}), "x", -2));
+    EXPECT_FALSE(isIncreasingAt(Monomial(-1, {{"x", 2}}), "x", 2));
 }
 
 TEST(ExtremaUtilitiesTest, IsConcaveDownwardAtWorks)
 {
-    EXPECT_TRUE(isConcaveDownwardAt(Term(Monomial(1, {{"x", 3}})), "x", -3));
-    EXPECT_FALSE(isConcaveDownwardAt(Term(Monomial(1, {{"x", 3}})), "x", 3));
-    EXPECT_FALSE(isConcaveDownwardAt(Term(Monomial(-1, {{"x", 3}})), "x", -3));
-    EXPECT_TRUE(isConcaveDownwardAt(Term(Monomial(-1, {{"x", 3}})), "x", 3));
+    EXPECT_TRUE(isConcaveDownwardAt(Monomial(1, {{"x", 3}}), "x", -3));
+    EXPECT_FALSE(isConcaveDownwardAt(Monomial(1, {{"x", 3}}), "x", 3));
+    EXPECT_FALSE(isConcaveDownwardAt(Monomial(-1, {{"x", 3}}), "x", -3));
+    EXPECT_TRUE(isConcaveDownwardAt(Monomial(-1, {{"x", 3}}), "x", 3));
 }
 
 TEST(ExtremaUtilitiesTest, IsConcaveUpwardAtWorks)
 {
-    EXPECT_FALSE(isConcaveUpwardAt(Term(Monomial(1, {{"x", 3}})), "x", -3));
-    EXPECT_TRUE(isConcaveUpwardAt(Term(Monomial(1, {{"x", 3}})), "x", 3));
-    EXPECT_TRUE(isConcaveUpwardAt(Term(Monomial(-1, {{"x", 3}})), "x", -3));
-    EXPECT_FALSE(isConcaveUpwardAt(Term(Monomial(-1, {{"x", 3}})), "x", 3));
+    EXPECT_FALSE(isConcaveUpwardAt(Monomial(1, {{"x", 3}}), "x", -3));
+    EXPECT_TRUE(isConcaveUpwardAt(Monomial(1, {{"x", 3}}), "x", 3));
+    EXPECT_TRUE(isConcaveUpwardAt(Monomial(-1, {{"x", 3}}), "x", -3));
+    EXPECT_FALSE(isConcaveUpwardAt(Monomial(-1, {{"x", 3}}), "x", 3));
 }
 
 TEST(ExtremaUtilitiesTest, HasPointOfInflectionAtWorks)
 {
-    EXPECT_FALSE(hasPointOfInflectionAt(Term(0), "x", 0));
-    EXPECT_FALSE(hasPointOfInflectionAt(Term(Monomial(1, {{"x", 3}})), "x", -3));
-    EXPECT_TRUE(hasPointOfInflectionAt(Term(Monomial(1, {{"x", 3}})), "x", 0));
-    EXPECT_FALSE(hasPointOfInflectionAt(Term(Monomial(1, {{"x", 3}})), "x", 3));
+    EXPECT_FALSE(hasPointOfInflectionAt(0, "x", 0));
+    EXPECT_FALSE(hasPointOfInflectionAt(Monomial(1, {{"x", 3}}), "x", -3));
+    EXPECT_TRUE(hasPointOfInflectionAt(Monomial(1, {{"x", 3}}), "x", 0));
+    EXPECT_FALSE(hasPointOfInflectionAt(Monomial(1, {{"x", 3}}), "x", 3));
 }
 
-TEST(ExtremaUtilitiesTest, IsRolleTheoremSatisfiedWorks)
-{
+TEST(ExtremaUtilitiesTest, IsRolleTheoremSatisfiedWorks){
     Term termToTest(Polynomial(
     {Monomial(4, {{"x", 3}}),
      Monomial(-9, {{"x", 1}})}));
@@ -146,10 +145,9 @@ TEST(ExtremaUtilitiesTest, GetInputValuesForCauchyMeanValueTheoremWorks)
 {
     Term numerator(Polynomial({Monomial(3, {{"x", 2}}), Monomial(3, {{"x", 1}})}));
     Term denominator(Polynomial({Monomial(1, {{"x", 3}}), Monomial(-4, {{"x", 1}})}));
-    Term termToTest(createExpressionIfPossible({numerator, Term("/"), denominator}));
+    Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
 
     AlbaNumbers values(getInputValuesForCauchyMeanValueTheorem(termToTest, "x", 1, 3));
-
     ASSERT_EQ(1U, values.size());
     EXPECT_EQ(AlbaNumber(2), values.at(0));
 }
@@ -274,11 +272,10 @@ TEST(ExtremaUtilitiesTest, GetMaximumAndMinimumAtClosedIntervalWorksOnExample1)
 TEST(ExtremaUtilitiesTest, GetMaximumAndMinimumAtClosedIntervalWorksOnExample2)
 {
     Term subPolynomial(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})});
-    Term termToTest(createExpressionIfPossible({subPolynomial, Term("^"), Term(AlbaNumber::createFraction(2, 3))}));
+    Term termToTest(createExpressionIfPossible({subPolynomial, "^", AlbaNumber::createFraction(2, 3)}));
     AlbaNumberInterval closedInterval(createCloseEndpoint(1), createCloseEndpoint(5));
 
     MinimumAndMaximum minmax(getMinimumAndMaximumAtClosedInterval(termToTest, "x", closedInterval));
-
     EXPECT_EQ(AlbaNumber(2), minmax.minimumInputOutputValues.first);
     EXPECT_EQ(AlbaNumber(0), minmax.minimumInputOutputValues.second);
     EXPECT_EQ(AlbaNumber(5), minmax.maximumInputOutputValues.first);
