@@ -2,10 +2,10 @@
 
 #include <Algebra/Constructs/ConstructUtilities.hpp>
 #include <Algebra/Differentiation/Differentiation.hpp>
+#include <Algebra/Factorization/FactorizationOfPolynomial.hpp>
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
 #include <Algebra/Functions/FunctionUtilities.hpp>
-#include <Algebra/KnownExpressionsAndEquations/TrigonometricEquations.hpp>
-#include <Algebra/Integration/IntegrationUtilities.hpp>
+#include <Algebra/KnownExpressionsAndEquations/TrigonometricEquations.hpp>#include <Algebra/Integration/IntegrationUtilities.hpp>
 #include <Algebra/Isolation/IsolationOfOneVariableOnEqualityEquation.hpp>
 #include <Algebra/Retrieval/SubTermsRetriever.hpp>
 #include <Algebra/Retrieval/VariableNamesRetriever.hpp>
@@ -23,10 +23,10 @@
 #include <Math/AlbaMathHelper.hpp>
 #include <String/AlbaStringHelper.hpp>
 
+using namespace alba::algebra::Factorization;
 using namespace alba::algebra::Functions;
 using namespace alba::algebra::Simplification;
-using namespace alba::mathHelper;
-using namespace alba::stringHelper;
+using namespace alba::mathHelper;using namespace alba::stringHelper;
 using namespace std;
 
 namespace alba
@@ -52,11 +52,8 @@ bool Integration::isConvergent(
 Term Integration::integrate(
         Term const& term) const
 {
-    IntegrationHistory::getInstance().clear();
-
     return integrateIntenally(term);
 }
-
 Term Integration::integrate(
         Constant const& constant) const
 {
@@ -740,72 +737,141 @@ void Integration::integrateTermUsingTrigonometricSubstitution(
         Term & result,
         Term const& term) const
 {
-    Term simplifiedTerm(term);
-    simplifyForIntegration(simplifiedTerm, getConfigurationWithCombiningRadicals());
-    Terms subTerms(retrieveSubTerms(simplifiedTerm));
-    for(Term const& subTerm : subTerms)
+    if(isTrigonometricSubstitutionAllowed())
     {
-        if(!subTerm.isConstant() && !subTerm.isVariable() && isChangingTerm(subTerm))
+        Term simplifiedTerm(term);
+        simplifyForIntegration(simplifiedTerm, getConfigurationWithCombiningRadicals());
+        Terms subTerms(retrieveSubTerms(simplifiedTerm));
+        for(Term const& subTerm : subTerms)
         {
-            integrateUsingTrigonometricSubstitutionByFindingTwoTerms(result, simplifiedTerm, subTerm);
-            if(!result.isEmpty())
+            if(!subTerm.isConstant() && !subTerm.isVariable() && isChangingTerm(subTerm))
             {
-                break;
+                integrateUsingTrigonometricSubstitutionByFindingTwoTerms(result, simplifiedTerm, subTerm);
+                if(!result.isEmpty())
+                {
+                    break;
+                }
             }
         }
-    }
-}
+    }}
 
 void Integration::integrateUsingTrigonometricSubstitutionByFindingTwoTerms(
         Term & result,
         Term const& mainTerm,
         Term const& termToSubstitute) const
 {
+    bool shouldProceedToTrigSub(false);
+    Term commonFactor;
+    Term firstAndSecondTerm;
+    Term firstTerm;
+    Term secondTerm;
+
     if(termToSubstitute.isExpression())
     {
-        Expression const& expression(termToSubstitute.getExpressionConstReference());
-        TermsWithDetails const& expressionTerms(expression.getTermsWithAssociation().getTermsWithDetails());
-        if(OperatorLevel::AdditionAndSubtraction == expression.getCommonOperatorLevel() && 2 == expressionTerms.size())
-        {
-            Term const& firstTerm(negateTermIfHasNegativeAssociation(expressionTerms.at(0)));
-            Term const& secondTerm(negateTermIfHasNegativeAssociation(expressionTerms.at(1)));
-            if(!isChangingTerm(firstTerm))
-            {
-                integrateUsingTrigonometricSubstitutionWithDeterminedTerms(result, mainTerm, termToSubstitute, firstTerm, secondTerm);
-            }
-            else if(!isChangingTerm(secondTerm))
-            {
-                integrateUsingTrigonometricSubstitutionWithDeterminedTerms(result, mainTerm, termToSubstitute, secondTerm, firstTerm);
-            }
-        }
+        retrieveImportantTermsForTrigonometricSubstitutionInExpression(
+                    shouldProceedToTrigSub, commonFactor, firstAndSecondTerm, firstTerm, secondTerm, termToSubstitute.getExpressionConstReference());
     }
     else if(termToSubstitute.isPolynomial())
     {
-        Polynomial const& polynomial(termToSubstitute.getPolynomialConstReference());
-        Monomials const& monomials(polynomial.getMonomialsConstReference());
-        if(2 == monomials.size())
+        retrieveImportantTermsForTrigonometricSubstitutionInPolynomial(
+                    shouldProceedToTrigSub, commonFactor, firstAndSecondTerm, firstTerm, secondTerm, termToSubstitute.getPolynomialConstReference());
+    }
+    if(shouldProceedToTrigSub)
+    {
+        shouldProceedToTrigSub = false;
+        if(!isChangingTerm(firstTerm) && isChangingTerm(secondTerm))
         {
-            Term const& firstTerm(Term(monomials.at(0)));
-            Term const& secondTerm(Term(monomials.at(1)));
-            if(!isChangingTerm(firstTerm))
-            {
-                integrateUsingTrigonometricSubstitutionWithDeterminedTerms(result, mainTerm, termToSubstitute, firstTerm, secondTerm);
-            }
-            else if(!isChangingTerm(secondTerm))
-            {
-                integrateUsingTrigonometricSubstitutionWithDeterminedTerms(result, mainTerm, termToSubstitute, secondTerm, firstTerm);
-            }
+            shouldProceedToTrigSub = true;
         }
+        else if(isChangingTerm(firstTerm) && !isChangingTerm(secondTerm))
+        {
+            swap(firstTerm, secondTerm);
+            shouldProceedToTrigSub = true;
+        }
+    }
+    if(shouldProceedToTrigSub)
+    {
+        string firstAndSecondTermVariableName(createVariableNameForSubstitution(firstAndSecondTerm));
+        Term firstAndSecondTermVariable(firstAndSecondTermVariableName);
+        Term newTermToSubstitute(createExpressionIfPossible({commonFactor, "*", firstAndSecondTermVariable}));
+        SubstitutionOfTermsToTerms substitution{{termToSubstitute, newTermToSubstitute}};
+        Term newMainTerm(substitution.performSubstitutionTo(mainTerm));
+        integrateUsingTrigonometricSubstitutionWithDeterminedTerms(result, newMainTerm, firstAndSecondTermVariableName, firstAndSecondTerm, firstTerm, secondTerm);
     }
 }
 
+void Integration::retrieveImportantTermsForTrigonometricSubstitutionInExpression(
+        bool & shouldProceedToTrigSub,
+        Term & commonFactor,
+        Term & firstAndSecondTerm,
+        Term & firstTerm,
+        Term & secondTerm,
+        Expression const& expression)  const
+{
+    TermsWithDetails const& expressionTerms(expression.getTermsWithAssociation().getTermsWithDetails());
+    if(OperatorLevel::AdditionAndSubtraction == expression.getCommonOperatorLevel() && 2 == expressionTerms.size())
+    {
+        commonFactor = 1;
+        firstAndSecondTerm = expression;
+        firstTerm = negateTermIfHasNegativeAssociation(expressionTerms.at(0));
+        secondTerm = negateTermIfHasNegativeAssociation(expressionTerms.at(1));
+        shouldProceedToTrigSub = true;
+    }
+}
+
+void Integration::retrieveImportantTermsForTrigonometricSubstitutionInPolynomial(
+        bool & shouldProceedToTrigSub,
+        Term & commonFactor,
+        Term & firstAndSecondTerm,
+        Term & firstTerm,
+        Term & secondTerm,
+        Polynomial const& polynomial)  const
+{
+    Polynomials factorizedPolynomials(factorizeCommonMonomial(polynomial));
+    if(factorizedPolynomials.size() == 1)
+    {
+        commonFactor = 1;
+        Polynomial const& onlyPolynomial(factorizedPolynomials.at(0));
+        Monomials const& onlyMonomials(factorizedPolynomials.at(0).getMonomialsConstReference());
+        if(2 == onlyMonomials.size())
+        {
+            commonFactor = 1;
+            firstAndSecondTerm = onlyPolynomial;
+            firstTerm = onlyMonomials.at(0);
+            secondTerm = onlyMonomials.at(1);
+            shouldProceedToTrigSub = true;
+        }
+    }
+    else if(factorizedPolynomials.size() == 2)
+    {
+        Polynomial const& firstPolynomial(factorizedPolynomials.at(0));
+        Polynomial const& secondPolynomial(factorizedPolynomials.at(1));
+        Monomials const& firstMonomials(firstPolynomial.getMonomialsConstReference());
+        Monomials const& secondMonomials(secondPolynomial.getMonomialsConstReference());
+        if(1 == firstMonomials.size() || 2 == secondMonomials.size())
+        {
+            commonFactor = firstMonomials.at(0);
+            firstAndSecondTerm = secondPolynomial;
+            firstTerm = secondMonomials.at(0);
+            secondTerm = secondMonomials.at(1);
+            if(isANegativeTerm(commonFactor))
+            {
+                commonFactor = negateTerm(commonFactor);
+                firstAndSecondTerm = negateTerm(firstAndSecondTerm);
+                firstTerm = negateTerm(firstTerm);
+                secondTerm = negateTerm(secondTerm);
+            }
+            shouldProceedToTrigSub = true;
+        }
+    }
+}
 void Integration::integrateUsingTrigonometricSubstitutionWithDeterminedTerms(
         Term & result,
         Term const& mainTerm,
+        string const& aSquaredAndUSquaredName,
         Term const& aSquaredAndUSquared,
         Term const& aSquaredWithSign,
-        Term const& uSquaredWithSign) const
-{
+        Term const& uSquaredWithSign) const{
     bool isANegative(isANegativeTerm(aSquaredWithSign));
     bool isUNegative(isANegativeTerm(uSquaredWithSign));
     Term const& aSquared = convertPositiveTermIfNegative(aSquaredWithSign);
@@ -818,22 +884,20 @@ void Integration::integrateUsingTrigonometricSubstitutionWithDeterminedTerms(
         Term const& u(uToANumber.getBase());
         a.simplify();
 
-        TrigonometricSubstitutionDetails details(calculateTrigonometricSubstitutionDetails(a, u, aSquaredAndUSquared, isANegative, isUNegative));
+        TrigonometricSubstitutionDetails details(calculateTrigonometricSubstitutionDetails(a, u, aSquaredAndUSquaredName, aSquaredAndUSquared, isANegative, isUNegative));
         if(details.isTrigonometricSubstitutionPossible)
         {
-            Term termToIntegrateWithTrigSub(substituteToTrigonometricFunctions(mainTerm, details));
-            if(!termToIntegrateWithTrigSub.isEmpty())
+            Term termToIntegrateWithTrigSub(substituteToTrigonometricFunctions(mainTerm, details));            if(!termToIntegrateWithTrigSub.isEmpty())
             {
                 simplifyForIntegration(termToIntegrateWithTrigSub, getConfigurationWithCommonDenominator());
                 if(!isChangingTerm(termToIntegrateWithTrigSub))
                 {
                     Integration integrationUsingTrigSub(details.thetaName);
                     Term integratedTermWithTrigSub(
-                                integrationUsingTrigSub.integrateInternallyWithPurpose(termToIntegrateWithTrigSub, IntegrationPurpose::Trigonometric));
+                                integrationUsingTrigSub.integrateInternallyWithPurpose(termToIntegrateWithTrigSub, IntegrationPurpose::TrigonometricSubstitution));
                     if(!isNotANumber(integratedTermWithTrigSub))
                     {
-                        result = substituteFromTrigonometricFunctionsBackToNormal(integratedTermWithTrigSub, details);
-                    }
+                        result = substituteFromTrigonometricFunctionsBackToNormal(integratedTermWithTrigSub, details);                    }
                 }
             }
         }
@@ -843,17 +907,17 @@ void Integration::integrateUsingTrigonometricSubstitutionWithDeterminedTerms(
 Integration::TrigonometricSubstitutionDetails Integration::calculateTrigonometricSubstitutionDetails(
         Term const& a,
         Term const& u,
+        string const& aSquaredAndUSquaredName,
         Term const& aSquaredAndUSquared,
         bool const isANegative,
-        bool const isUNegative) const
-{
+        bool const isUNegative) const{
     TrigonometricSubstitutionDetails result;
     result.a = a;
     result.u = u;
+    result.aSquaredAndUSquaredName = aSquaredAndUSquaredName;
     result.aSquaredAndUSquared = aSquaredAndUSquared;
     result.thetaName = createVariableNameForSubstitution(u);
-    result.theta=result.thetaName;
-    if(!isANegative && !isUNegative)
+    result.theta=result.thetaName;    if(!isANegative && !isUNegative)
     {
         // use tan
         result.isTrigonometricSubstitutionPossible = true;
@@ -915,11 +979,11 @@ Term Integration::substituteToTrigonometricFunctions(
         Term isolatedTermWithTheta((termWithWithoutU/monomialWithOldVariable)^(AlbaNumber(1)/exponentForOldVariable));
         isolatedTermWithTheta.simplify();
         SubstitutionOfTermsToTerms substitutionUToThetaForTermToTerm({{details.aSquaredAndUSquared, details.aSquaredAndUSquaredEquivalent}});
-        SubstitutionOfVariablesToTerms substitutionUToThetaForVariableToTerm({{m_nameOfVariableToIntegrate, isolatedTermWithTheta}});
+        SubstitutionOfVariablesToTerms substitutionUToThetaForVariableToTerm(
+        {{m_nameOfVariableToIntegrate, isolatedTermWithTheta}, {details.aSquaredAndUSquaredName, details.aSquaredAndUSquaredEquivalent}});
         result = substitutionUToThetaForVariableToTerm.performSubstitutionTo(
                     substitutionUToThetaForTermToTerm.performSubstitutionTo(mainTerm)) * duEquivalent;
-    }
-    return result;
+    }    return result;
 }
 
 Term Integration::substituteFromTrigonometricFunctionsBackToNormal(
@@ -2075,10 +2139,14 @@ void Integration::putTrigonometricFunctionsWithExponents(
     }
 }
 
+void Integration::clearIntegrationHistory() const
+{
+    IntegrationHistory::getInstance().clear();
+}
+
 void Integration::finalizeTermForIntegration(
         Term & term) const
-{
-    simplifyForIntegration(term, getConfigurationWithFactors());
+{    simplifyForIntegration(term, getConfigurationWithFactors());
 }
 
 bool Integration::isVariableToIntegrate(
@@ -2155,21 +2223,23 @@ bool Integration::areExponentsSame(
 bool Integration::isIntegrationUsingSubstitutionAllowed(
         Term const& term) const
 {
-    return IntegrationPurpose::Substitution != m_history.getLastIntegrationPurpose()
-            || hasAnyTrigonometricFunctions(term);
+    return IntegrationPurpose::Substitution != m_history.getLastIntegrationPurpose() || hasAnyTrigonometricFunctions(term);
 }
 
 bool Integration::isIntegrationByPartsAllowed(
         Term const& term) const
 {
-    return IntegrationPurpose::Substitution != m_history.getLastIntegrationPurpose()
-            || hasAnyTrigonometricFunctions(term);
+    return IntegrationPurpose::Substitution != m_history.getLastIntegrationPurpose() || hasAnyTrigonometricFunctions(term);
+}
+
+bool Integration::isTrigonometricSubstitutionAllowed() const
+{
+    return true;
 }
 
 bool Integration::isIntegrationByPartialFractionAllowed() const
 {
-    return IntegrationPurpose::PartialFraction != m_history.getLastIntegrationPurpose();
-}
+    return IntegrationPurpose::PartialFraction != m_history.getLastIntegrationPurpose();}
 
 }
 
