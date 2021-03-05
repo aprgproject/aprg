@@ -566,6 +566,7 @@ TEST(IntegrationTest, IntegrateWorksUsingTrigonometricSubstitutionUsingSinSubsti
     string stringToExpect("((-1*arcsin((1/3)[x]))-(((-1[x^2] + 9)^(1/2))/x))");
     EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());
 }
+
 TEST(IntegrationTest, IntegrateWorksUsingTrigonometricSubstitutionUsingSecSubstitution)
 {
     Integration integrationForX("x");
