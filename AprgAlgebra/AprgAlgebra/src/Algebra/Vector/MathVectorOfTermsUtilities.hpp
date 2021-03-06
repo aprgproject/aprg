@@ -219,7 +219,8 @@ Term getPotentialFunctionForVectorFieldGradient(
     return getTermThatYieldsToThisGradient<SIZE>(gradient, coordinateVariables, isConservative);
 }
 
-template <unsigned int SIZE>Term getDivergence(
+template <unsigned int SIZE>
+Term getDivergence(
         MathVectorOfTerms<SIZE> const& termVector,
         ArrayOfStrings<SIZE> const& coordinateVariables)
 {
@@ -228,6 +229,7 @@ template <unsigned int SIZE>Term getDivergence(
     Values const& values(del.getValues());
     return std::accumulate(values.cbegin(), values.cend(), Term(0), std::plus<Term>());
 }
+
 template <unsigned int SIZE>
 Term getLaplaceTerm(
         MathVectorOfTerms<SIZE> const& termVector,
@@ -238,6 +240,7 @@ Term getLaplaceTerm(
     Values const& values(del.getValues());
     return std::accumulate(values.cbegin(), values.cend(), Term(0), std::plus<Term>());
 }
+
 template <unsigned int SIZE>
 Term getLineIntegral(
         MathVectorOfTerms<SIZE> const& vectorField,
@@ -275,7 +278,8 @@ Term getLineIntegralIndependentOfPath(
     Term potential(getPotentialFunctionForVectorFieldGradient<SIZE>(vectorField, coordinateVariables, isConservative));
 
     Term result;
-    if(isConservative)    {
+    if(isConservative)
+    {
         SubstitutionOfVariablesToValues substitutionForLowerValues;
         SubstitutionOfVariablesToValues substitutionForHigherValues;
         for(unsigned int i=0; i<SIZE; i++)

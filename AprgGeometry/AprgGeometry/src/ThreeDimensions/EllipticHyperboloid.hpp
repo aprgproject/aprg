@@ -13,7 +13,8 @@ class EllipticHyperboloid
 public:
     EllipticHyperboloid();
     EllipticHyperboloid(Point const& center, double const aCoefficient, double const bCoefficient, double const cCoefficient, bool const isOneNegative);
-    // ((x-center.x)^2/aCoefficient^2) + ((y-center.y)^2/bCoefficient^2) - ((z-center.z)^2/cCoefficient^2) = 1    bool operator==(EllipticHyperboloid const& ellipsoid) const;
+    // ((x-center.x)^2/aCoefficient^2) + ((y-center.y)^2/bCoefficient^2) - ((z-center.z)^2/cCoefficient^2) = 1
+    bool operator==(EllipticHyperboloid const& ellipsoid) const;
     bool operator!=(EllipticHyperboloid const& ellipsoid) const;
     Point getCenter() const;
     double getAValue() const;

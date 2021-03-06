@@ -17,7 +17,8 @@ TEST(ReaderWriterParameterTest, EmptyFileTest)
     ifstream readTestFile(AlbaLocalPathHandler(APRG_COMMON_EMPTY_TEST_FILE).getFullPath());
     ASSERT_TRUE(readTestFile.is_open());
 
-    AlbaFileParameterReader reader(readTestFile);    ASSERT_TRUE(readTestFile.good());
+    AlbaFileParameterReader reader(readTestFile);
+    ASSERT_TRUE(readTestFile.good());
     ASSERT_FALSE(readTestFile.eof());
     EXPECT_EQ(0U, reader.readData<unsigned int>());
     EXPECT_EQ(0, reader.readData<int>());
@@ -31,7 +32,8 @@ TEST(ReaderWriterParameterTest, SingleParameterTest)
     ofstream writeTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(writeTestFile.is_open());
 
-    AlbaFileParameterWriter writer(writeTestFile);    writer.writeData(12345U);
+    AlbaFileParameterWriter writer(writeTestFile);
+    writer.writeData(12345U);
     writer.writeData(-12345);
     writer.writeData(1.2345);
     writer.writeData<string>("12345");
@@ -39,7 +41,8 @@ TEST(ReaderWriterParameterTest, SingleParameterTest)
     ifstream readTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(readTestFile.is_open());
 
-    AlbaFileParameterReader reader(readTestFile);    ASSERT_TRUE(readTestFile.good());
+    AlbaFileParameterReader reader(readTestFile);
+    ASSERT_TRUE(readTestFile.good());
     ASSERT_FALSE(readTestFile.eof());
     EXPECT_EQ(12345U, reader.readData<unsigned int>());
     EXPECT_EQ(-12345, reader.readData<int>());
@@ -53,13 +56,15 @@ TEST(ReaderWriterParameterTest, VectorTest)
     ofstream writeTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(writeTestFile.is_open());
 
-    vector<unsigned int> vectorToSave{1,2,3,4,5};    AlbaFileParameterWriter writer(writeTestFile);
+    vector<unsigned int> vectorToSave{1,2,3,4,5};
+    AlbaFileParameterWriter writer(writeTestFile);
     writer.writeVectorData(vectorToSave);
 
     ifstream readTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(readTestFile.is_open());
 
-    vector<unsigned int> retrievedVector;    AlbaFileParameterReader reader(readTestFile);
+    vector<unsigned int> retrievedVector;
+    AlbaFileParameterReader reader(readTestFile);
     ASSERT_TRUE(readTestFile.good());
     ASSERT_FALSE(readTestFile.eof());
     reader.readVectorData(retrievedVector);
@@ -77,13 +82,15 @@ TEST(ReaderWriterParameterTest, MapTest)
     ofstream writeTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(writeTestFile.is_open());
 
-    map<unsigned int, string> mapToSave{{1, "one"}, {2, "two"}, {3, "three"}};    AlbaFileParameterWriter writer(writeTestFile);
+    map<unsigned int, string> mapToSave{{1, "one"}, {2, "two"}, {3, "three"}};
+    AlbaFileParameterWriter writer(writeTestFile);
     writer.writeMapData(mapToSave);
 
     ifstream readTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(readTestFile.is_open());
 
-    map<unsigned int, string> retrievedmap;    AlbaFileParameterReader reader(readTestFile);
+    map<unsigned int, string> retrievedmap;
+    AlbaFileParameterReader reader(readTestFile);
     ASSERT_TRUE(readTestFile.good());
     ASSERT_FALSE(readTestFile.eof());
     reader.readMapData(retrievedmap);

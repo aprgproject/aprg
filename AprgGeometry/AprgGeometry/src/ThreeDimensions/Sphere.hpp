@@ -13,7 +13,8 @@ class Sphere
 public:
     Sphere();
     Sphere(Point const& center, double const radius); // (x-center.x)^2 + (y-center.y)^2 + (z-center.z)^2 = r^2
-    bool operator==(Sphere const& sphere) const;    bool operator!=(Sphere const& sphere) const;
+    bool operator==(Sphere const& sphere) const;
+    bool operator!=(Sphere const& sphere) const;
     bool operator<(Sphere const& sphere) const;
     Point getCenter() const;
     double getRadius() const;

@@ -26,7 +26,8 @@ bool isDivergenceOfCurlZero(
     return getDivergence<3U>(getCurl(termVector, coordinateVariables), coordinateVariables) == 0;
 }
 
-bool isGaussDivergenceTheoremInAPlaneTrue(        MathVectorOfTwoTerms const& vectorField,
+bool isGaussDivergenceTheoremInAPlaneTrue(
+        MathVectorOfTwoTerms const& vectorField,
         MathVectorOfTwoTerms const& regionOfLineIntegral,
         MathVectorOfTwoTerms const& unitOutwardNormal,
         DetailsForDefiniteIntegralWithTerms const& lineIntegralDetails,
@@ -58,6 +59,7 @@ bool isGaussDivergenceTheoremInAPlaneTrue(        MathVectorOfTwoTerms const& ve
     Term areaResult(getDoubleIntegralInCartesianCoordinates(divergence, areaDetailsInX, areaDetailsInY));
     return lineIntegralResult == areaResult;
 }
+
 bool isStokesTheoremInAPlaneTrue(
         MathVectorOfTwoTerms const& vectorField,
         MathVectorOfTwoTerms const& regionOfLineIntegral,
@@ -113,7 +115,8 @@ Term getDirectionalDerivativeInTwoDimensions(
     MathVectorOfTwoTerms gradient(getGradient<2U>(term, coordinateVariables));
     MathVectorOfTwoTerms unitDirection(
     {::cos(angleOfDirection.getRadians()), ::sin(angleOfDirection.getRadians())});
-    Term result(getDotProduct(gradient, unitDirection));    simplifyForTermInVector(result);
+    Term result(getDotProduct(gradient, unitDirection));
+    simplifyForTermInVector(result);
     return result;
 }
 
@@ -125,7 +128,8 @@ Term getDirectionalDerivativeInThreeDimensions(
     MathVectorOfThreeTerms gradient(getGradient<3U>(term, coordinateVariables));
     MathVectorOfThreeTerms unitDirection(
     {::cos(coordinateAngles.getValueAt(0).getRadians()),
-     ::cos(coordinateAngles.getValueAt(1).getRadians()),     ::cos(coordinateAngles.getValueAt(2).getRadians())});
+     ::cos(coordinateAngles.getValueAt(1).getRadians()),
+     ::cos(coordinateAngles.getValueAt(2).getRadians())});
     Term result(getDotProduct(gradient, unitDirection));
     simplifyForTermInVector(result);
     return result;
@@ -158,7 +162,8 @@ Term getAreaOfAClosedNonIntersectingPathUsingGreensTheorem(
     return getLineIntegral<2U>(vectorField, coordinateVariables, linePath, linePathIntegralDetails)/2;
 }
 
-MathVectorOfThreeTerms getNormalOfASurfaceOnAPoint(        Equation const& surface,
+MathVectorOfThreeTerms getNormalOfASurfaceOnAPoint(
+        Equation const& surface,
         ArrayOfThreeStrings const& coordinateVariables,
         MathVectorOfThreeNumbers const& point)
 {
@@ -168,7 +173,8 @@ MathVectorOfThreeTerms getNormalOfASurfaceOnAPoint(        Equation const& surfa
     MathVectorOfThreeTerms gradient(getGradient<3U>(simplifiedSurface.getLeftHandTerm(), coordinateVariables));
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue(coordinateVariables.at(0), point.getValueAt(0));
-    substitution.putVariableWithValue(coordinateVariables.at(1), point.getValueAt(1));    substitution.putVariableWithValue(coordinateVariables.at(2), point.getValueAt(2));
+    substitution.putVariableWithValue(coordinateVariables.at(1), point.getValueAt(1));
+    substitution.putVariableWithValue(coordinateVariables.at(2), point.getValueAt(2));
 
     MathVectorOfThreeTerms result;
     Values const& values(gradient.getValues());
