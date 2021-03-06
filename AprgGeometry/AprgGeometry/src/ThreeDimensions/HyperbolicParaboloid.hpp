@@ -11,11 +11,9 @@ namespace ThreeDimensions
 class HyperbolicParaboloid
 {
 public:
-    using TraverseOperation = std::function<void(Point const&)>;
     HyperbolicParaboloid();
     HyperbolicParaboloid(Point const& center, double const aCoefficient, double const bCoefficient, double const cCoefficient);
-    // ((y-center.y)^2/bCoefficient^2) - ((x-center.x)^2/aCoefficient^2) = (z-center.z)/c
-    bool operator==(HyperbolicParaboloid const& ellipsoid) const;
+    // ((y-center.y)^2/bCoefficient^2) - ((x-center.x)^2/aCoefficient^2) = (z-center.z)/c    bool operator==(HyperbolicParaboloid const& ellipsoid) const;
     bool operator!=(HyperbolicParaboloid const& ellipsoid) const;
     Point getCenter() const;
     double getAValue() const;
