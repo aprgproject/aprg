@@ -1,9 +1,9 @@
 #include <Container/AlbaContainerHelper.hpp>
 #include <DirectoryConstants.hpp>
 #include <File/AlbaFileReader.hpp>
+#include <PathHandlers/AlbaLocalPathHandler.hpp>
 
 #include <gtest/gtest.h>
-
 #include <array>
 #include <map>
 #include <set>
@@ -161,17 +161,17 @@ TEST(ContainerSetTest, GetLowerAndUpperIteratorsInMultiMap)
 
 TEST(ContainerTest, SaveVectorOfIntegersToFile)
 {
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     std::array<int, 6> temporaryArray{0, -23, 4, 379,- 482, 37};
-    ofstream outputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream outputTestFile(testFilePath.getFullPath());
 
     saveContentsOfContainerToFile(outputTestFile, temporaryArray);
     outputTestFile.close();
 
-    ifstream inputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ("0", fileReader.getLine());
@@ -186,19 +186,18 @@ TEST(ContainerTest, SaveVectorOfIntegersToFile)
 
 TEST(ContainerTest, RetrieveVectorOfIntegersFromFile)
 {
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     std::array<int, 4> temporaryArray{};
-    ofstream outputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream outputTestFile(testFilePath.getFullPath());
     outputTestFile<<"18723"<<endl;
     outputTestFile<<"-608"<<endl;
-    outputTestFile<<"-43735"<<endl;
-    outputTestFile<<"23234"<<endl;
+    outputTestFile<<"-43735"<<endl;    outputTestFile<<"23234"<<endl;
     outputTestFile.close();
 
-    ifstream inputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
 
     retrieveContentsOfContainerFromFile(inputTestFile, temporaryArray);
-
     ASSERT_EQ(4U, temporaryArray.size());
     auto it = temporaryArray.begin();
     EXPECT_EQ(18723, *(it++));
@@ -216,17 +215,17 @@ TEST(ContainerTest, GetStringFromContentsOfArray)
 
 TEST(ContainerTest, SaveArrayOfIntegersToFile)
 {
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     vector<int> temporaryVector{0, -23, 4, 379,- 482, 37};
-    ofstream outputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream outputTestFile(testFilePath.getFullPath());
 
     saveContentsOfContainerToFile(outputTestFile, temporaryVector);
     outputTestFile.close();
 
-    ifstream inputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ("0", fileReader.getLine());
@@ -241,19 +240,18 @@ TEST(ContainerTest, SaveArrayOfIntegersToFile)
 
 TEST(ContainerTest, RetrieveArrayOfIntegersFromFile)
 {
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     vector<int> temporaryVector;
-    ofstream outputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream outputTestFile(testFilePath.getFullPath());
     outputTestFile<<"18723"<<endl;
     outputTestFile<<"-608"<<endl;
-    outputTestFile<<"-43735"<<endl;
-    outputTestFile<<"23234"<<endl;
+    outputTestFile<<"-43735"<<endl;    outputTestFile<<"23234"<<endl;
     outputTestFile.close();
 
-    ifstream inputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
 
     retrieveContentsOfContainerFromFile(inputTestFile, temporaryVector);
-
     ASSERT_EQ(4U, temporaryVector.size());
     auto it = temporaryVector.begin();
     EXPECT_EQ(18723, *(it++));
@@ -270,17 +268,17 @@ TEST(ContainerTest, GetStringFromContentsOfVector)
 
 TEST(ContainerTest, SaveSetOfIntegersToFile)
 {
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     set<int> temporarySet{0, -23, 4, 379,- 482, 37};
-    ofstream outputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream outputTestFile(testFilePath.getFullPath());
 
     saveContentsOfContainerToFile(outputTestFile, temporarySet);
     outputTestFile.close();
 
-    ifstream inputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ("-482", fileReader.getLine());
@@ -295,19 +293,18 @@ TEST(ContainerTest, SaveSetOfIntegersToFile)
 
 TEST(ContainerTest, RetrieveSetOfIntegersFromFile)
 {
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     set<int> temporarySet;
-    ofstream outputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream outputTestFile(testFilePath.getFullPath());
     outputTestFile<<"18723"<<endl;
     outputTestFile<<"-608"<<endl;
-    outputTestFile<<"-43735"<<endl;
-    outputTestFile<<"23234"<<endl;
+    outputTestFile<<"-43735"<<endl;    outputTestFile<<"23234"<<endl;
     outputTestFile.close();
 
-    ifstream inputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
 
     retrieveContentsOfContainerFromFile(inputTestFile, temporarySet);
-
     ASSERT_EQ(4U, temporarySet.size());
     auto it = temporarySet.begin();
     EXPECT_EQ(-43735, *(it++));
@@ -324,21 +321,21 @@ TEST(ContainerTest, GetStringFromContentsOfSet)
 
 TEST(ContainerTest, SaveMapOfIntegersToFile)
 {
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     map<int,int> temporaryMap;
     temporaryMap[83] = 95;
     temporaryMap[2348] = 17;
     temporaryMap[-76] = 74;
 
-    ofstream outputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream outputTestFile(testFilePath.getFullPath());
 
     saveContentsOfContainerToFile(outputTestFile, temporaryMap);
     outputTestFile.close();
 
-    ifstream inputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ("-76", fileReader.getLine());
@@ -353,19 +350,18 @@ TEST(ContainerTest, SaveMapOfIntegersToFile)
 
 TEST(ContainerTest, RetrieveMapOfIntegersFromFile)
 {
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     map<int,int> temporaryMap;
-    ofstream outputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream outputTestFile(testFilePath.getFullPath());
     outputTestFile<<"1"<<endl;
     outputTestFile<<"2"<<endl;
-    outputTestFile<<"3"<<endl;
-    outputTestFile<<"4"<<endl;
+    outputTestFile<<"3"<<endl;    outputTestFile<<"4"<<endl;
     outputTestFile.close();
 
-    ifstream inputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
 
     retrieveContentsOfContainerFromFile(inputTestFile, temporaryMap);
-
     ASSERT_EQ(2U, temporaryMap.size());
     auto it = temporaryMap.begin();
     EXPECT_EQ(1, it->first);

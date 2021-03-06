@@ -13,34 +13,33 @@ namespace alba
 
 TEST(FileReadTest, ReadFromTestFile_ConstructorsWorks)
 {
-    ifstream inputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
+    ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader1(inputTestFile);
-    EXPECT_EQ(10000U, fileReader1.getMaxBufferSize());
+    AlbaFileReader fileReader1(inputTestFile);    EXPECT_EQ(10000U, fileReader1.getMaxBufferSize());
     AlbaFileReader fileReader2(inputTestFile, 200);
     EXPECT_EQ(200U, fileReader2.getMaxBufferSize());
 }
 
 TEST(FileReadTest, ReadFromTestFile_SetAndGetBufferSizeWorks)
 {
-    ifstream inputTestFile(APRG_COMMON_TEST_FILE_TO_READ);
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
+    ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    EXPECT_EQ(10000U, fileReader.getMaxBufferSize());
+    AlbaFileReader fileReader(inputTestFile);    EXPECT_EQ(10000U, fileReader.getMaxBufferSize());
     fileReader.setMaxBufferSize(200);
     EXPECT_EQ(200U, fileReader.getMaxBufferSize());
 }
 
 TEST(FileReadTest, ReadFromTestFile_ReadLineUsingVariousCharacters)
 {
-    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);
-    ofstream testFile(commonTestFileToRead.getFullPath());
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream testFile(testFilePath.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "1         " << endl;
-    testFile << "12        " << endl;
-    testFile << "123       " << endl;
+    testFile << "12        " << endl;    testFile << "123       " << endl;
     testFile << "1234      " << endl;
     testFile << "12345     " << endl;
     testFile << "123456    " << endl;
@@ -61,11 +60,10 @@ TEST(FileReadTest, ReadFromTestFile_ReadLineUsingVariousCharacters)
     testFile << R"(!@#$%^&*()[]{}<>:;"'/\?)" << endl;
     testFile.close();
 
-    ifstream inputTestFile(commonTestFileToRead.getFullPath());
+    ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ("1", fileReader.getLineAndIgnoreWhiteSpaces());
@@ -107,17 +105,16 @@ TEST(FileReadTest, ReadFromTestFile_ReadLineWithSizeLimit)
 
 TEST(FileReadTest, ReadFromTestFile_ReadSingleCharacterFromBinaryFile)
 {
-    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);
-    ofstream testFile(commonTestFileToRead.getFullPath());
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream testFile(testFilePath.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "123!@# \t\n";
     testFile.close();
 
-    ifstream inputTestFile(commonTestFileToRead.getFullPath(), ios::binary);
+    ifstream inputTestFile(testFilePath.getFullPath(), ios::binary);
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ('1' ,fileReader.getCharacter());
@@ -142,17 +139,16 @@ TEST(FileReadTest, ReadFromTestFile_ReadSingleCharacterFromBinaryFile)
 
 TEST(FileReadTest, ReadFromTestFile_ReadMultipleCharacters)
 {
-    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);
-    ofstream testFile(commonTestFileToRead.getFullPath());
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream testFile(testFilePath.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "123!@# \t\n";
     testFile.close();
 
-    ifstream inputTestFile(commonTestFileToRead.getFullPath(), ios::binary);
+    ifstream inputTestFile(testFilePath.getFullPath(), ios::binary);
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     unsigned int numberOfCharacters=3U;
@@ -187,17 +183,16 @@ TEST(FileReadTest, ReadFromTestFile_ReadMultipleCharacters)
 
 TEST(FileReadTest, ReadFromTestFile_RequestToReadMultipleCharactersThatIsTheBeyondBufferSize)
 {
-    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);
-    ofstream testFile(commonTestFileToRead.getFullPath());
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream testFile(testFilePath.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "12345";
     testFile.close();
 
-    ifstream inputTestFile(commonTestFileToRead.getFullPath(), ios::binary);
+    ifstream inputTestFile(testFilePath.getFullPath(), ios::binary);
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    fileReader.setMaxBufferSize(3);
+    AlbaFileReader fileReader(inputTestFile);    fileReader.setMaxBufferSize(3);
     ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
@@ -216,22 +211,20 @@ TEST(FileReadTest, ReadFromTestFile_RequestToReadMultipleCharactersThatIsTheBeyo
 
 TEST(FileReadTest, ReadFromTestFile_ReadTwoByteNumbers)
 {
-    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);
-    ofstream testFile(commonTestFileToRead.getFullPath());
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream testFile(testFilePath.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile.put(0x01);
-    testFile.put(0x23);
-    testFile.put(0x45);
+    testFile.put(0x23);    testFile.put(0x45);
     testFile.put(0x67);
     testFile.put(static_cast<char>(0xA1));
     testFile.put(static_cast<char>(0xBA));
     testFile.close();
 
-    ifstream inputTestFile(commonTestFileToRead.getFullPath(), ios::binary);
+    ifstream inputTestFile(testFilePath.getFullPath(), ios::binary);
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0x0123U, fileReader.getTwoByteData<uint16_t>());
@@ -246,22 +239,20 @@ TEST(FileReadTest, ReadFromTestFile_ReadTwoByteNumbers)
 
 TEST(FileReadTest, ReadFromTestFile_ReadFourByteNumbers)
 {
-    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);
-    ofstream testFile(commonTestFileToRead.getFullPath());
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream testFile(testFilePath.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile.put(0x01);
-    testFile.put(0x23);
-    testFile.put(0x45);
+    testFile.put(0x23);    testFile.put(0x45);
     testFile.put(0x67);
     testFile.put(static_cast<char>(0xA1));
     testFile.put(static_cast<char>(0xBA));
     testFile.close();
 
-    ifstream inputTestFile(commonTestFileToRead.getFullPath(), ios::binary);
+    ifstream inputTestFile(testFilePath.getFullPath(), ios::binary);
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0x01234567U, fileReader.getFourByteData<uint32_t>());
@@ -272,22 +263,20 @@ TEST(FileReadTest, ReadFromTestFile_ReadFourByteNumbers)
 
 TEST(FileReadTest, ReadFromTestFile_ReadEightByteNumbers)
 {
-    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);
-    ofstream testFile(commonTestFileToRead.getFullPath());
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream testFile(testFilePath.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile.put(0x01);
-    testFile.put(0x23);
-    testFile.put(0x45);
+    testFile.put(0x23);    testFile.put(0x45);
     testFile.put(0x67);
     testFile.put(static_cast<char>(0xA1));
     testFile.put(static_cast<char>(0xBA));
     testFile.close();
 
-    ifstream inputTestFile(commonTestFileToRead.getFullPath(), ios::binary);
+    ifstream inputTestFile(testFilePath.getFullPath(), ios::binary);
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0x000001234567A1BAU, fileReader.getEightByteData<uint64_t>());
@@ -296,22 +285,20 @@ TEST(FileReadTest, ReadFromTestFile_ReadEightByteNumbers)
 
 TEST(FileReadTest, ReadFromTestFile_ReadSwappedTwoByteNumbers)
 {
-    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);
-    ofstream testFile(commonTestFileToRead.getFullPath());
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream testFile(testFilePath.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile.put(0x01);
-    testFile.put(0x23);
-    testFile.put(0x45);
+    testFile.put(0x23);    testFile.put(0x45);
     testFile.put(0x67);
     testFile.put(static_cast<char>(0xA1));
     testFile.put(static_cast<char>(0xBA));
     testFile.close();
 
-    ifstream inputTestFile(commonTestFileToRead.getFullPath(), ios::binary);
+    ifstream inputTestFile(testFilePath.getFullPath(), ios::binary);
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0x2301U, fileReader.getTwoByteSwappedData<uint16_t>());
@@ -326,22 +313,20 @@ TEST(FileReadTest, ReadFromTestFile_ReadSwappedTwoByteNumbers)
 
 TEST(FileReadTest, ReadFromTestFile_ReadSwappedFourByteNumbers)
 {
-    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);
-    ofstream testFile(commonTestFileToRead.getFullPath());
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream testFile(testFilePath.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile.put(0x01);
-    testFile.put(0x23);
-    testFile.put(0x45);
+    testFile.put(0x23);    testFile.put(0x45);
     testFile.put(0x67);
     testFile.put(static_cast<char>(0xA1));
     testFile.put(static_cast<char>(0xBA));
     testFile.close();
 
-    ifstream inputTestFile(commonTestFileToRead.getFullPath(), ios::binary);
+    ifstream inputTestFile(testFilePath.getFullPath(), ios::binary);
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0x67452301U, fileReader.getFourByteSwappedData<uint32_t>());
@@ -352,22 +337,20 @@ TEST(FileReadTest, ReadFromTestFile_ReadSwappedFourByteNumbers)
 
 TEST(FileReadTest, ReadFromTestFile_ReadSwappedEightByteNumbers)
 {
-    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);
-    ofstream testFile(commonTestFileToRead.getFullPath());
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream testFile(testFilePath.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile.put(0x01);
-    testFile.put(0x23);
-    testFile.put(0x45);
+    testFile.put(0x23);    testFile.put(0x45);
     testFile.put(0x67);
     testFile.put(static_cast<char>(0xA1));
     testFile.put(static_cast<char>(0xBA));
     testFile.close();
 
-    ifstream inputTestFile(commonTestFileToRead.getFullPath(), ios::binary);
+    ifstream inputTestFile(testFilePath.getFullPath(), ios::binary);
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0xBAA1674523010000U, fileReader.getEightByteSwappedData<uint64_t>());
@@ -376,22 +359,20 @@ TEST(FileReadTest, ReadFromTestFile_ReadSwappedEightByteNumbers)
 
 TEST(FileReadTest, ReadFromTestFile_FileContentsCanBeSavedInMemoryBuffer)
 {
-    AlbaLocalPathHandler commonTestFileToRead(APRG_COMMON_TEST_FILE_TO_READ);
-    ofstream testFile(commonTestFileToRead.getFullPath());
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream testFile(testFilePath.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile.put(0x01);
-    testFile.put(0x23);
-    testFile.put(0x45);
+    testFile.put(0x23);    testFile.put(0x45);
     testFile.put(0x67);
     testFile.put(static_cast<char>(0xA1));
     testFile.put(static_cast<char>(0xBA));
     testFile.close();
 
-    ifstream inputTestFile(commonTestFileToRead.getFullPath(), ios::binary);
+    ifstream inputTestFile(testFilePath.getFullPath(), ios::binary);
     ASSERT_TRUE(inputTestFile.is_open());
 
-    AlbaFileReader fileReader(inputTestFile);
-    ASSERT_TRUE(inputTestFile.good());
+    AlbaFileReader fileReader(inputTestFile);    ASSERT_TRUE(inputTestFile.good());
     ASSERT_FALSE(inputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
 
