@@ -8,7 +8,7 @@
 namespace alba
 {
 
-class AprgModeling
+class Modeling
 {
 public:
     struct ValidationResult
@@ -20,7 +20,7 @@ public:
     };
     using VectorOfDoubles = std::vector<double>;
     using MatrixOfDoubles = AlbaMatrix<double>;
-    AprgModeling();
+    Modeling();
     unsigned int getNumberOfSamples() const;
     MatrixOfDoubles getCoefficients() const;
     void retrieveDataFromFileWithFileFormat1(std::string const& filePath);

@@ -1,4 +1,4 @@
-#include "AprgModeling.hpp"
+#include "Modeling.hpp"
 
 #include <File/AlbaFileReader.hpp>
 #include <PathHandlers/AlbaLocalPathHandler.hpp>
@@ -14,20 +14,20 @@ using namespace std;
 namespace alba
 {
 
-AprgModeling::AprgModeling()
+Modeling::Modeling()
 {}
 
-unsigned int AprgModeling::getNumberOfSamples() const
+unsigned int Modeling::getNumberOfSamples() const
 {
     return m_retrievedDataForY.getRows();
 }
 
-AprgModeling::MatrixOfDoubles AprgModeling::getCoefficients() const
+Modeling::MatrixOfDoubles Modeling::getCoefficients() const
 {
     return m_coefficients;
 }
 
-void AprgModeling::retrieveDataFromFileWithFileFormat1(string const& filePath)
+void Modeling::retrieveDataFromFileWithFileFormat1(string const& filePath)
 {
     VectorOfDoubles retrievedDataForX, retrievedDataForY;
     unsigned int columnsForX = 0, numberOfSamples = 0;
@@ -56,7 +56,7 @@ void AprgModeling::retrieveDataFromFileWithFileFormat1(string const& filePath)
     saveRetrievedDataForXAndY(columnsForX, numberOfSamples, retrievedDataForX, retrievedDataForY);
 }
 
-void AprgModeling::retrieveDataFromFileWithFileFormat2(string const& filePath)
+void Modeling::retrieveDataFromFileWithFileFormat2(string const& filePath)
 {
     VectorOfDoubles retrievedDataForX, retrievedDataForY;
     unsigned int columnsForX = 0, numberOfSamples = 0;
@@ -111,7 +111,7 @@ void AprgModeling::retrieveDataFromFileWithFileFormat2(string const& filePath)
     saveRetrievedDataForXAndY(columnsForX, numberOfSamples, retrievedDataForX, retrievedDataForY);
 }
 
-void AprgModeling::saveRetrievedDataForXAndY(
+void Modeling::saveRetrievedDataForXAndY(
         unsigned int numberOfIndicators,
         unsigned int numberOfSamples,
         VectorOfDoubles const& retrievedDataForX,
@@ -121,32 +121,32 @@ void AprgModeling::saveRetrievedDataForXAndY(
     copyVectorToMatrix(1, numberOfSamples, retrievedDataForY, m_retrievedDataForY);
 }
 
-void AprgModeling::saveRetrievedDataToModelingDataRandomly(unsigned int numberOfSamples)
+void Modeling::saveRetrievedDataToModelingDataRandomly(unsigned int numberOfSamples)
 {
     saveRetrievedDataToMatrixRandomly(m_modelingDataForX, m_modelingDataForY, numberOfSamples);
 }
 
-void AprgModeling::saveRetrievedDataToValidationDataRandomly(unsigned int numberOfSamples)
+void Modeling::saveRetrievedDataToValidationDataRandomly(unsigned int numberOfSamples)
 {
     saveRetrievedDataToMatrixRandomly(m_validationDataForX, m_validationDataForY, numberOfSamples);
 }
 
-void AprgModeling::saveRetrievedDataToModelingData(unsigned int numberOfSamples)
+void Modeling::saveRetrievedDataToModelingData(unsigned int numberOfSamples)
 {
     saveRetrievedDataToMatrix(m_modelingDataForX, m_modelingDataForY, numberOfSamples);
 }
 
-void AprgModeling::saveRetrievedDataToValidationData(unsigned int numberOfSamples)
+void Modeling::saveRetrievedDataToValidationData(unsigned int numberOfSamples)
 {
     saveRetrievedDataToMatrix(m_validationDataForX, m_validationDataForY, numberOfSamples);
 }
 
-void AprgModeling::modelUsingLeastSquares()
+void Modeling::modelUsingLeastSquares()
 {
     calculateCoefficientsUsingLeastSquares();
 }
 
-AprgModeling::ValidationResult AprgModeling::validate()
+Modeling::ValidationResult Modeling::validate()
 {
     ValidationResult result;
     vector<double> calculationDataBuffer;
@@ -191,25 +191,25 @@ AprgModeling::ValidationResult AprgModeling::validate()
     return result;
 }
 
-void AprgModeling::printRetrievedData()
+void Modeling::printRetrievedData()
 {
     cout<<"RetrievedData:"<<endl;
     printData(m_retrievedDataForX, m_retrievedDataForY);
 }
 
-void AprgModeling::printModelingData()
+void Modeling::printModelingData()
 {
     cout<<"ModelingData:"<<endl;
     printData(m_modelingDataForX, m_modelingDataForY);
 }
 
-void AprgModeling::printValidationData()
+void Modeling::printValidationData()
 {
     cout<<"ValidationData:"<<endl;
     printData(m_validationDataForX, m_validationDataForY);
 }
 
-void AprgModeling::printData(MatrixOfDoubles & matrixInX, MatrixOfDoubles & matrixInY)
+void Modeling::printData(MatrixOfDoubles & matrixInX, MatrixOfDoubles & matrixInY)
 {
     for(unsigned int j=0; j<matrixInY.getRows(); j++)
     {
@@ -222,7 +222,7 @@ void AprgModeling::printData(MatrixOfDoubles & matrixInX, MatrixOfDoubles & matr
     }
 }
 
-void AprgModeling::copyVectorToMatrix(unsigned int const numberOfColumns, unsigned int const numberOfRows, VectorOfDoubles const& retrievedDataForX, MatrixOfDoubles & matrixOfDoubles)
+void Modeling::copyVectorToMatrix(unsigned int const numberOfColumns, unsigned int const numberOfRows, VectorOfDoubles const& retrievedDataForX, MatrixOfDoubles & matrixOfDoubles)
 {
     matrixOfDoubles.clearAndResize(numberOfColumns, numberOfRows);
     unsigned int x=0, y=0;
@@ -238,7 +238,7 @@ void AprgModeling::copyVectorToMatrix(unsigned int const numberOfColumns, unsign
     }
 }
 
-void AprgModeling::saveRetrievedDataToMatrixRandomly(MatrixOfDoubles & matrixInX, MatrixOfDoubles & matrixInY, unsigned int numberOfSamples)
+void Modeling::saveRetrievedDataToMatrixRandomly(MatrixOfDoubles & matrixInX, MatrixOfDoubles & matrixInY, unsigned int numberOfSamples)
 {
     matrixInX.clearAndResize(m_retrievedDataForX.getColumns(), numberOfSamples);
     matrixInY.clearAndResize(1, numberOfSamples);
@@ -254,7 +254,7 @@ void AprgModeling::saveRetrievedDataToMatrixRandomly(MatrixOfDoubles & matrixInX
     }
 }
 
-void AprgModeling::saveRetrievedDataToMatrix(MatrixOfDoubles & matrixInX, MatrixOfDoubles & matrixInY, unsigned int numberOfSamples)
+void Modeling::saveRetrievedDataToMatrix(MatrixOfDoubles & matrixInX, MatrixOfDoubles & matrixInY, unsigned int numberOfSamples)
 {
     matrixInX.clearAndResize(m_retrievedDataForX.getColumns(), numberOfSamples);
     matrixInY.clearAndResize(1, numberOfSamples);
@@ -268,7 +268,7 @@ void AprgModeling::saveRetrievedDataToMatrix(MatrixOfDoubles & matrixInX, Matrix
     }
 }
 
-void AprgModeling::calculateCoefficientsUsingLeastSquares()
+void Modeling::calculateCoefficientsUsingLeastSquares()
 {
     unsigned int dataHeight = m_modelingDataForY.getRows();
     unsigned int dataWidth = m_modelingDataForX.getColumns();
@@ -313,7 +313,7 @@ void AprgModeling::calculateCoefficientsUsingLeastSquares()
     gsl_matrix_free(xModelingData);
 }
 
-unsigned int AprgModeling::getIndex(unsigned int const i, unsigned int const j, unsigned int const numberOfColumns) const
+unsigned int Modeling::getIndex(unsigned int const i, unsigned int const j, unsigned int const numberOfColumns) const
 {
     return (j*numberOfColumns)+i;
 }
