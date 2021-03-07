@@ -33,10 +33,10 @@ public:
         , m_blockId(blockNumber)
         , m_fileDumpPath(fileDumpPath)
         , m_numberOfObjects(0)
+        , m_lowestValue{}
     {
         switch(blockType)
-        {
-        case DataBlockType::Empty:
+        {        case DataBlockType::Empty:
             break;
         case DataBlockType::File:
             createFileHandlerIfNeeded();

@@ -1,11 +1,10 @@
 #pragma once
 
-#include <algorithm>
 #include <array>
+#include <numeric>
 
 namespace alba
 {
-
 template <unsigned int SIZE>
 class UnionFind
 {

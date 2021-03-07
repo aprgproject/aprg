@@ -2,10 +2,10 @@
 
 #include <functional>
 #include <cassert>
+#include <memory>
 
 namespace alba
 {
-
 template <typename ObjectType>
 class AlbaLinkedListBag
 {
@@ -13,10 +13,9 @@ public:
     struct Node
     {
         ObjectType object;
-        Node* next;
+        std::unique_ptr<Node> next;
     };
     using TraverseFunction = std::function<void(ObjectType const& object)>;
-
     AlbaLinkedListBag()
         : m_currentSize(0)
         , m_first(nullptr)
@@ -34,37 +33,27 @@ public:
 
     void add(ObjectType const& object)
     {
-        Node* newNext = m_first;
-        m_first = new Node{};
+        std::unique_ptr<Node> newNext(std::move(m_first));
+        m_first.reset(new Node{});
         m_first->object = object;
-        m_first->next = newNext;
+        m_first->next = std::move(newNext);
         m_currentSize++;
     }
 
     void traverse(TraverseFunction const& traverseFunction)
     {
-        Node* currentPointer = m_first;
+        Node* currentPointer = m_first.get();
         while(currentPointer != nullptr)
         {
             traverseFunction(currentPointer->object);
-            currentPointer = currentPointer->next;
+            currentPointer = currentPointer->next.get();
         }
     }
 
 private:
-    void deleteAllObjects()
-    {
-        Node* currentPointer = m_first;
-        while(currentPointer != nullptr)
-        {
-            Node* nextPointer = currentPointer->next;
-            delete currentPointer;
-            currentPointer = nextPointer;
-        }
-    }
 
     unsigned int m_currentSize;
-    Node* m_first;
+    std::unique_ptr<Node> m_first;
 };
 
 }
