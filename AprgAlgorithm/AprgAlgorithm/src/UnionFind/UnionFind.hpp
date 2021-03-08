@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 template <unsigned int SIZE>
 class UnionFind
 {

@@ -59,7 +59,8 @@ TEST(UnionFindTest, IsConnectedWorks)
 
     EXPECT_TRUE(unionFind.isConnected(8,9));
     EXPECT_FALSE(unionFind.isConnected(5,4));
-    EXPECT_TRUE(unionFind.isConnected(4,9));    EXPECT_TRUE(unionFind.isConnected(4,3));
+    EXPECT_TRUE(unionFind.isConnected(4,9));
+    EXPECT_TRUE(unionFind.isConnected(4,3));
     EXPECT_FALSE(unionFind.isConnected(4,7));
     EXPECT_FALSE(unionFind.isConnected(4,5));
     EXPECT_FALSE(unionFind.isConnected(4,1));

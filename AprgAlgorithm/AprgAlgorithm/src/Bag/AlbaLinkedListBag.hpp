@@ -6,6 +6,7 @@
 
 namespace alba
 {
+
 template <typename ObjectType>
 class AlbaLinkedListBag
 {
@@ -16,6 +17,7 @@ public:
         std::unique_ptr<Node> next;
     };
     using TraverseFunction = std::function<void(ObjectType const& object)>;
+
     AlbaLinkedListBag()
         : m_currentSize(0)
         , m_first(nullptr)

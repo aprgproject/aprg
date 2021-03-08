@@ -59,6 +59,7 @@ TEST(AlbaLinkedListBagTest, TraverseWorks)
         i++;
     });
 }
+
 TEST(AlbaLinkedListBagTest, AddWorks)
 {
     BagForTest bag;
@@ -86,4 +87,5 @@ TEST(AlbaLinkedListBagTest, AddWorks)
         i++;
     });
 }
+
 }

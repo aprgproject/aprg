@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 template <typename ObjectType>
 class AlbaLinkedListQueue
 {
@@ -15,7 +16,8 @@ public:
         std::unique_ptr<Node> next;
     };
 
-    AlbaLinkedListQueue()        : m_currentSize(0)
+    AlbaLinkedListQueue()
+        : m_currentSize(0)
         , m_first(nullptr)
     {}
 
@@ -46,6 +48,7 @@ public:
         }
         m_currentSize++;
     }
+
     ObjectType dequeue()
     {
         // Remove item from the beginning of the list
@@ -57,7 +60,8 @@ public:
             m_first = std::move(m_first->next);
             m_currentSize--;
         }
-        if(isEmpty())        {
+        if(isEmpty())
+        {
             m_last = nullptr;
         }
         return result;
@@ -69,4 +73,5 @@ private:
     std::unique_ptr<Node> m_first;
     Node* m_last;
 };
+
 }
