@@ -14,20 +14,22 @@ public:
         : m_ids()
         , m_count(SIZE)
     {
-        std::iota(m_ids.begin(), m_ids.end(), 0);
+        std::iota(m_ids.begin(), m_ids.end(), 0U);
     }
+
     unsigned int getCount() const
     {
         return m_count;
     }
+
     bool isConnected(unsigned int const id1, unsigned int const id2) const
     {
         return getIdEquivalent(id1) == getIdEquivalent(id2);
     }
+
     unsigned int getIdEquivalent(unsigned int const id) const
     {
-        return m_ids.at(id);
-    }
+        return m_ids.at(id);    }
 
     void connect(unsigned int const id1, unsigned int const id2)
     {

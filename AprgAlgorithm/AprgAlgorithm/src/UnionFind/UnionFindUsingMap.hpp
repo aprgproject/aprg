@@ -17,10 +17,10 @@ public:
     {
         return getRoot(object1) == getRoot(object2);
     }
+
     ObjectType getRoot(ObjectType const& object) const
     {
-        ObjectType currentObject(object);
-        while(isExistingInConnectionMap(currentObject))
+        ObjectType currentObject(object);        while(isExistingInConnectionMap(currentObject))
         {
             ObjectType const& tempRoot(m_connectionMap.at(currentObject));
             if(tempRoot==currentObject)
@@ -52,10 +52,10 @@ private:
             m_connectionMap[object] = object;
         }
     }
+
     bool isExistingInConnectionMap(ObjectType const& object) const
     {
-        return m_connectionMap.find(object) != m_connectionMap.end();
-    }
+        return m_connectionMap.find(object) != m_connectionMap.end();    }
     ConnectionMap m_connectionMap;
 };
 
