@@ -56,7 +56,8 @@ static std::ofstream debugStream(ALBA_PRINT_OUTPUT_STREAM_FILE_PATH);
     ALBA_PRINT_OUTPUT_STREAM << "ALBA_PRINT_CONTAINER in " << __FUNCTION__ << "(...) in line:" << __LINE__ << " || " \
     << ALBA_MACROS_GET_STRING_LITERAL(container) \
     << " (with size " << container.size() <<")" \
-    << " : {"; \    for(auto const& item : container) \
+    << " : {"; \
+    for(auto const& item : container) \
 { \
     ALBA_PRINT_OUTPUT_STREAM << "[" << item << "], "; \
 } \

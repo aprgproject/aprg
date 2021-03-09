@@ -27,7 +27,8 @@ public:
         Sample deviationOverStandardDeviation(deviation/LocalStatistics::m_sampleStandardDeviation.getConstReference());
         bool isAnOutlier(false);
         for(unsigned int i=0; i<deviationOverStandardDeviation.getSize(); i++)
-        {            if(deviationOverStandardDeviation.getValueAt(i)>acceptableDeviation)
+        {
+            if(deviationOverStandardDeviation.getValueAt(i)>acceptableDeviation)
             {
                 isAnOutlier = true;
                 break;

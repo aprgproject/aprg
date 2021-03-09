@@ -14,6 +14,7 @@ TwoDimensionsStatistics::LineModel TwoDimensionsStatistics::calculateLineModelUs
     double xMinusXmeanSquared(0); //Xi-mean(X)
     double yMinusYmeanSquared(0); //Yi-mean(Y)
     double xMinusXmeanTimesYMinusYmean(0);// (Xi-mean(X))*(Yi-mean(Y))
+
     LineModel lineModel;
     Statistics statistics(samples);
     Sample mean(statistics.getMean());
@@ -40,7 +41,8 @@ TwoDimensionsStatistics::LineModel TwoDimensionsStatistics::calculateLineModelUs
     else if(areAllDifferenceForYZero)
     {
         lineModel.aCoefficient = 0;
-        lineModel.bCoefficient = 1;    }
+        lineModel.bCoefficient = 1;
+    }
     else
     {
         double slopeInX(xMinusXmeanTimesYMinusYmean/xMinusXmeanSquared);

@@ -80,7 +80,8 @@ public:
         return m_dispersionAroundTheCentroid.getConstReference();
     }
 
-protected:    void calculateSumIfNeeded()
+protected:
+    void calculateSumIfNeeded()
     {
         if(!m_sum)
         {
@@ -97,6 +98,7 @@ protected:    void calculateSumIfNeeded()
             m_mean.setValue(m_sum.getConstReference()/sampleSize);
         }
     }
+
     void calculateSampleVarianceIfNeeded()
     {
         calculateVarianceIfNeeded(m_sampleVariance, m_samples.size()-1);
@@ -130,7 +132,8 @@ protected:    void calculateSumIfNeeded()
                     sample = sample-m_mean.getConstReference();
                     sample = sample.calculateRaiseToPower(2);
                 }
-                variance.setValue(StatisticsUtilities::calculateSum(varianceCalculationTemp)/sampleSize);            }
+                variance.setValue(StatisticsUtilities::calculateSum(varianceCalculationTemp)/sampleSize);
+            }
             else
             {
                 variance.setValue(Sample{});
@@ -146,7 +149,8 @@ protected:    void calculateSumIfNeeded()
             Sample standardDeviationTemp(variance.getConstReference());
             standardDeviationTemp = standardDeviationTemp.calculateRaiseToInversePower(2);
             standardDeviation.setValue(standardDeviationTemp);
-        }    }
+        }
+    }
 
     void calculateDispersionAroundTheCentroidIfNeeded()
     {
@@ -156,7 +160,8 @@ protected:    void calculateSumIfNeeded()
             Sample dispersionCalculationTemp(m_sampleStandardDeviation.getConstReference());
             dispersionCalculationTemp = dispersionCalculationTemp.calculateRaiseToPower(2);
             m_dispersionAroundTheCentroid.setValue(pow((double)dispersionCalculationTemp.getSum(), 0.5));
-        }    }
+        }
+    }
 
     SampleOptional m_sum;
     SampleOptional m_mean;

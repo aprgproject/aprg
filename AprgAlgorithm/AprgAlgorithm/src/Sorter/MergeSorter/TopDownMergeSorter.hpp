@@ -21,7 +21,8 @@ public:
 private:
     void sort(
             Values & valuesToSort,
-            Values & temp,            unsigned int const low,
+            Values & temp,
+            unsigned int const low,
             unsigned int const high) const
     {
         if(low < high)
