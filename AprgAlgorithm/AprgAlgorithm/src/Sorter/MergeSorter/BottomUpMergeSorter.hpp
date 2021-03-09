@@ -8,10 +8,10 @@ namespace alba
 template <typename Values>
 class BottomUpMergeSorter
 {
+
 public:
     void sort(Values & valuesToSort) const
-    {
-        Values temp(valuesToSort);
+    {        Values temp(valuesToSort);
         unsigned int const size = valuesToSort.size();
         for(unsigned int sizeToSort=1; sizeToSort<size; sizeToSort+=sizeToSort)
         {
