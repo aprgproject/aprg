@@ -2,10 +2,11 @@
 
 #include <memory>
 
-namespace alba{
+namespace alba
+{
 
 template <typename Key, typename Object>
-class SequentialSearchSymbolTable
+class LinkedListSymbolTable
 {
 public:
     struct Node
@@ -15,7 +16,7 @@ public:
         std::unique_ptr<Node> next;
     };
 
-    SequentialSearchSymbolTable()
+    LinkedListSymbolTable()
         : m_currentSize(0)
         , m_first(nullptr)
     {}
