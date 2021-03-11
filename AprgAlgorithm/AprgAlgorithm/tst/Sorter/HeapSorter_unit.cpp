@@ -16,6 +16,7 @@ TEST(HeapSorterTest, SortWorksOnExample1)
     HeapSorter<char, Values> sorter;
 
     sorter.sort(valuesToTest);
+
     Values valuesToExpect{'A', 'E', 'E', 'L', 'M', 'O', 'P', 'R', 'S', 'T', 'X'};
     EXPECT_EQ(valuesToExpect, valuesToTest);
 }
@@ -27,6 +28,7 @@ TEST(HeapSorterTest, SortWorksOnExample2)
     HeapSorter<char, Values> sorter;
 
     sorter.sort(valuesToTest);
+
     Values valuesToExpect{'A', 'A', 'E', 'E', 'E', 'H', 'L', 'M', 'O', 'P', 'P', 'R', 'S', 'T', 'X'};
     EXPECT_EQ(valuesToExpect, valuesToTest);
 }

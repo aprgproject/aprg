@@ -7,7 +7,7 @@ namespace alba
 {
 
 template <typename Object>
-class AlbaLinkedListQueue
+class LinkedListStack
 {
 public:
     struct Node
@@ -16,7 +16,7 @@ public:
         std::unique_ptr<Node> next;
     };
 
-    AlbaLinkedListQueue()
+    LinkedListStack()
         : m_currentSize(0)
         , m_first(nullptr)
     {}
@@ -31,24 +31,15 @@ public:
         return m_currentSize;
     }
 
-    void enqueue(Object const& object)
+    void push(Object const& object)
     {
-        //Add item to the end of the list
-        if(isEmpty())
-        {
-            m_first.reset(new Node{object, nullptr});
-            m_last = m_first.get();
-        }
-        else
-        {
-            m_last->next.reset(new Node{object, nullptr});
-            m_last = m_last->next.get();
-        }
+        std::unique_ptr<Node> newNext = std::move(m_first);
+        m_first.reset(new Node{object, std::move(newNext)});
         m_currentSize++;
     }
-    Object dequeue()
+
+    Object pop()
     {
-        // Remove item from the beginning of the list
         assert(m_first);
         Object result{};
         if(m_first)
@@ -57,10 +48,6 @@ public:
             m_first = std::move(m_first->next);
             m_currentSize--;
         }
-        if(isEmpty())
-        {
-            m_last = nullptr;
-        }
         return result;
     }
 
@@ -68,7 +55,6 @@ private:
 
     unsigned int m_currentSize;
     std::unique_ptr<Node> m_first;
-    Node* m_last;
 };
 
 }

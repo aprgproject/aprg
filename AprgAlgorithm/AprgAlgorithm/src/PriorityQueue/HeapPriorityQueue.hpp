@@ -4,6 +4,7 @@
 
 #include <utility>
 #include <vector>
+
 namespace alba
 {
 
@@ -18,7 +19,8 @@ public:
         , m_heapTreeAdapter(m_objects)
     {}
 
-    bool isEmpty() const    {
+    bool isEmpty() const
+    {
         return getSize() == 0;
     }
 
