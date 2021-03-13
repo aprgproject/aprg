@@ -92,6 +92,7 @@ private:
 };
 
 using Terms = std::vector<Term>;
+
 std::ostream & operator<<(std::ostream & out, Term const& term);
 
 }
