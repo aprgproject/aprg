@@ -1,7 +1,9 @@
 #include <Stack/DoublingSizeStack.hpp>
+#include <Stack/Utilities/CommonTestsWithBaseStack.hpp>
 
 #include <gtest/gtest.h>
 
+using namespace alba::CommonTestsWithBaseStack;
 using namespace std;
 
 namespace alba
@@ -9,35 +11,49 @@ namespace alba
 
 namespace
 {
-using StackForTest = DoublingSizeStack<unsigned int>;
+using StackForUnsignedInt = DoublingSizeStack<unsigned int>;
 }
 
-TEST(DoublingSizeStackTest, IsEmptyWorks)
+TEST(DoublingSizeStackTest, IsEmptyWorksWhenEmpty)
 {
-    StackForTest stack1;
-    StackForTest stack2;
-    stack2.push(10U);
-
-    EXPECT_TRUE(stack1.isEmpty());
-    EXPECT_FALSE(stack2.isEmpty());
+    StackForUnsignedInt stack;
+    performIsEmptyTestWhenEmpty(stack);
 }
 
-TEST(DoublingSizeStackTest, GetStackSizeWorks)
+TEST(DoublingSizeStackTest, IsEmptyWorksWhenNotEmpty)
 {
-    StackForTest stack1;
-    StackForTest stack2;
-    stack2.push(10U);
-    stack2.push(5U);
-    stack2.push(4U);
+    StackForUnsignedInt stack;
+    performIsEmptyTestWhenNotEmpty(stack);
+}
 
-    EXPECT_EQ(0U, stack1.getStackSize());
-    EXPECT_EQ(3U, stack2.getStackSize());
+TEST(DoublingSizeStackTest, GetSizeWorksWhenEmpty)
+{
+    StackForUnsignedInt stack;
+    performGetSizeTestWhenEmpty(stack);
+}
+
+TEST(DoublingSizeStackTest, GetSizeWorksWhenNotEmpty)
+{
+    StackForUnsignedInt stack;
+    performGetSizeTestWhenNotEmpty(stack);
+}
+
+TEST(DoublingSizeStackTest, PushWorks)
+{
+    StackForUnsignedInt stack;
+    performPushTest(stack);
+}
+
+TEST(DoublingSizeStackTest, PopWorks)
+{
+    StackForUnsignedInt stack;
+    performPopTest(stack);
 }
 
 TEST(DoublingSizeStackTest, GetContainerSizeWorks)
 {
-    StackForTest stack1;
-    StackForTest stack2;
+    StackForUnsignedInt stack1;
+    StackForUnsignedInt stack2;
     stack2.push(10U);
     stack2.push(5U);
     stack2.push(4U);
@@ -46,23 +62,9 @@ TEST(DoublingSizeStackTest, GetContainerSizeWorks)
     EXPECT_EQ(4U, stack2.getContainerSize());
 }
 
-TEST(DoublingSizeStackTest, PushWorks)
-{
-    StackForTest stack;
-
-    stack.push(1U);
-    stack.push(2U);
-    stack.push(3U);
-
-    EXPECT_EQ(3U, stack.getStackSize());
-    EXPECT_EQ(3U, stack.pop());
-    EXPECT_EQ(2U, stack.pop());
-    EXPECT_EQ(1U, stack.pop());
-}
-
 TEST(DoublingSizeStackTest, PushWorksWithDoublingContainerSize)
 {
-    StackForTest stack;
+    StackForUnsignedInt stack;
     EXPECT_EQ(1U, stack.getContainerSize());
 
     stack.push(10U);
@@ -77,22 +79,9 @@ TEST(DoublingSizeStackTest, PushWorksWithDoublingContainerSize)
     EXPECT_EQ(8U, stack.getContainerSize());
 }
 
-TEST(DoublingSizeStackTest, PopWorks)
-{
-    StackForTest stack;
-    stack.push(1U);
-    stack.push(2U);
-    stack.push(3U);
-
-    EXPECT_EQ(3U, stack.pop());
-    EXPECT_EQ(2U, stack.pop());
-    EXPECT_EQ(1U, stack.pop());
-    EXPECT_EQ(0U, stack.getStackSize());
-}
-
 TEST(DoublingSizeStackTest, PopWorksWithHalvingContainerSize)
 {
-    StackForTest stack;
+    StackForUnsignedInt stack;
 
     stack.push(10U);
     stack.push(10U);
@@ -115,9 +104,8 @@ TEST(DoublingSizeStackTest, PopWorksWithHalvingContainerSize)
 
 TEST(DoublingSizeStackTest, DISABLED_PopWorksWithAssertionWhenItsEmpty) //disabled because it takes too long
 {
-    StackForTest stack;
-
-    EXPECT_DEATH(stack.pop(), "Assertion failed!");
+    StackForUnsignedInt stack;
+    performPopAssertionTestWhenEmpty(stack);
 }
 
 }

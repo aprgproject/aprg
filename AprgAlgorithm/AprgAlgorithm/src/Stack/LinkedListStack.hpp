@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Stack/BaseStack.hpp>
+
 #include <cassert>
 #include <memory>
 
@@ -7,7 +9,7 @@ namespace alba
 {
 
 template <typename Object>
-class LinkedListStack
+class LinkedListStack : public BaseStack<Object>
 {
 public:
     struct Node;
@@ -23,24 +25,24 @@ public:
         , m_first(nullptr)
     {}
 
-    bool isEmpty() const
+    bool isEmpty() const override
     {
         return m_currentSize == 0;
     }
 
-    unsigned int getSize() const
+    unsigned int getSize() const override
     {
         return m_currentSize;
     }
 
-    void push(Object const& object)
+    void push(Object const& object) override
     {
         NodeUniquePointer newNext(std::move(m_first));
         m_first.reset(new Node{object, std::move(newNext)});
         m_currentSize++;
     }
 
-    Object pop()
+    Object pop() override
     {
         assert(m_first);
         Object result{};

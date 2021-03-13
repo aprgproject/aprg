@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Stack/BaseStack.hpp>
+
 #include <array>
 #include <cassert>
 
@@ -7,7 +9,7 @@ namespace alba
 {
 
 template <typename Object, unsigned int SIZE>
-class FixedSizeStack
+class FixedSizeStack : public BaseStack<Object>
 {
 public:
     using Objects = std::array<Object, SIZE>;
@@ -16,31 +18,31 @@ public:
         : m_currentSize(0)
     {}
 
-    bool isEmpty() const
+    bool isEmpty() const override
     {
         return m_currentSize == 0;
     }
 
-    unsigned int getSize() const
+    unsigned int getSize() const override
     {
         return m_currentSize;
     }
 
-    Objects const& getObjects() const
-    {
-        return m_objects;
-    }
-
-    void push(Object const& object)
+    void push(Object const& object) override
     {
         assert(m_currentSize < SIZE);
         m_objects[m_currentSize++] = object;
     }
 
-    Object pop()
+    Object pop() override
     {
         assert(m_currentSize > 0);
         return m_objects[--m_currentSize];
+    }
+
+    Objects const& getObjects() const
+    {
+        return m_objects;
     }
 
 private:
