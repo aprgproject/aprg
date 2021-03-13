@@ -204,7 +204,8 @@ public:
                     m_currentSize--;
                     break;
                 }
-            }            previousNodePointer = currentNodePointer;
+            }
+            previousNodePointer = currentNodePointer;
         }
     }
 
