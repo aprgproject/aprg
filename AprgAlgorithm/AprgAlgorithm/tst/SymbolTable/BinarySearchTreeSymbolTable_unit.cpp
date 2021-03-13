@@ -1,4 +1,4 @@
-#include <SymbolTable/LinkedListSymbolTable.hpp>
+#include <SymbolTable/BinarySearchTreeSymbolTable.hpp>
 #include <SymbolTable/Utilities/CommonTestsWithBaseSymbolTable.hpp>
 
 #include <gtest/gtest.h>
@@ -12,76 +12,76 @@ namespace alba
 
 namespace
 {
-using SymbolTableWithUnsignedIntToChar = LinkedListSymbolTable<unsigned int, char>;
+using SymbolTableWithUnsignedIntToChar = BinarySearchTreeSymbolTable<unsigned int, char>;
 }
 
-TEST(LinkedListSymbolTableTest, IsEmptyWorksWhenEmpty)
+TEST(BinarySearchTreeSymbolTableTest, IsEmptyWorksWhenEmpty)
 {
     SymbolTableWithUnsignedIntToChar symbolTable;
     performIsEmptyTestWhenEmpty(symbolTable);
 }
 
-TEST(LinkedListSymbolTableTest, IsEmptyWorksWhenNotEmpty)
+TEST(BinarySearchTreeSymbolTableTest, IsEmptyWorksWhenNotEmpty)
 {
     SymbolTableWithUnsignedIntToChar symbolTable;
     performIsEmptyTestWhenNotEmpty(symbolTable);
 }
 
-TEST(LinkedListSymbolTableTest, GetSizeWorksWhenEmpty)
+TEST(BinarySearchTreeSymbolTableTest, GetSizeWorksWhenEmpty)
 {
     SymbolTableWithUnsignedIntToChar symbolTable;
     performGetSizeTestWhenEmpty(symbolTable);
 }
 
-TEST(LinkedListSymbolTableTest, GetSizeWorksWhenNotEmpty)
+TEST(BinarySearchTreeSymbolTableTest, GetSizeWorksWhenNotEmpty)
 {
     SymbolTableWithUnsignedIntToChar symbolTable;
     performGetSizeTestWhenNotEmpty(symbolTable);
 }
 
-TEST(LinkedListSymbolTableTest, GetWorks)
+TEST(BinarySearchTreeSymbolTableTest, GetWorks)
 {
     SymbolTableWithUnsignedIntToChar symbolTable;
     performGetTest(symbolTable);
 }
 
-TEST(LinkedListSymbolTableTest, GetRankWorks)
+TEST(BinarySearchTreeSymbolTableTest, GetRankWorks)
 {
     SymbolTableWithUnsignedIntToChar symbolTable;
     performGetRankTest(symbolTable);
 }
 
-TEST(LinkedListSymbolTableTest, GetMinimumWorks)
+TEST(BinarySearchTreeSymbolTableTest, GetMinimumWorks)
 {
     SymbolTableWithUnsignedIntToChar symbolTable;
     performGetMinimumTest(symbolTable);
 }
 
-TEST(LinkedListSymbolTableTest, GetMaximumWorks)
+TEST(BinarySearchTreeSymbolTableTest, GetMaximumWorks)
 {
     SymbolTableWithUnsignedIntToChar symbolTable;
     performGetMaximumTest(symbolTable);
 }
 
-TEST(LinkedListSymbolTableTest, SelectAtWorks)
+TEST(BinarySearchTreeSymbolTableTest, SelectAtWorks)
 {
     SymbolTableWithUnsignedIntToChar symbolTable;
     performSelectAtTest(symbolTable);
 }
 
-TEST(LinkedListSymbolTableTest, GetFloorWorks)
+TEST(BinarySearchTreeSymbolTableTest, GetFloorWorks)
 {
     SymbolTableWithUnsignedIntToChar symbolTable;
     performGetFloorTest(symbolTable);
 }
 
-TEST(LinkedListSymbolTableTest, GetCeilingWorks)
+TEST(BinarySearchTreeSymbolTableTest, GetCeilingWorks)
 {
     SymbolTableWithUnsignedIntToChar symbolTable;
     performGetCeilingTest(symbolTable);
 }
 
-TEST(LinkedListSymbolTableTest, PutWorks)
+TEST(BinarySearchTreeSymbolTableTest, PutWorks)
 {
     SymbolTableWithUnsignedIntToChar symbolTable;
     performPutTest(symbolTable);

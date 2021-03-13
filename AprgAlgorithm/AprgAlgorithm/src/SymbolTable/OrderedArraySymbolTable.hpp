@@ -11,6 +11,7 @@ template <typename Key, typename Value>
 class OrderedArraySymbolTable : public BaseSymbolTable<Key, Value>
 {
 public:
+
     OrderedArraySymbolTable()
         : m_currentSize(0)
     {}
@@ -29,7 +30,8 @@ public:
     {
         unsigned int result(0);
         int lowIndex=0, highIndex=m_currentSize-1;
-        while(lowIndex <= highIndex)        {
+        while(lowIndex <= highIndex)
+        {
             int midIndex=(lowIndex+highIndex)/2;
             Key const& keyAtMidIndex(m_keys.at(midIndex));
             if(key < keyAtMidIndex)
@@ -82,7 +84,8 @@ public:
         Value result{};
         if(!isEmpty())
         {
-            result = m_keys.at(m_currentSize-1);        }
+            result = m_keys.at(m_currentSize-1);
+        }
         return result;
     }
 
@@ -95,7 +98,8 @@ public:
     {
         Key result{};
         unsigned int rank(getRank(key));
-        if(rank < m_currentSize && m_keys.at(rank) == key)        {
+        if(rank < m_currentSize && m_keys.at(rank) == key)
+        {
             result = key;
         }
         else if(rank-1 < m_currentSize && m_keys.at(rank-1) < key)
@@ -109,7 +113,8 @@ public:
     {
         Key result{};
         unsigned int rank(getRank(key));
-        if(rank < m_currentSize)        {
+        if(rank < m_currentSize)
+        {
             result = m_keys.at(rank);
         }
         return result;
@@ -142,7 +147,8 @@ public:
     void deleteBasedOnKey(Key const& key) override
     {
         unsigned int rank(getRank(key));
-        if(rank < m_currentSize && m_keys.at(rank) == key)        {
+        if(rank < m_currentSize && m_keys.at(rank) == key)
+        {
             if(m_currentSize >= 2)
             {
                 for(unsigned int i=rank; i<m_currentSize-1; i++)

@@ -4,6 +4,7 @@
 
 #include <cassert>
 #include <memory>
+
 namespace alba
 {
 
@@ -11,7 +12,8 @@ template <typename Object>
 class LinkedListQueue : public BaseQueue<Object>
 {
 public:
-    struct Node;    using NodeUniquePointer = std::unique_ptr<Node>;
+    struct Node;
+    using NodeUniquePointer = std::unique_ptr<Node>;
     struct Node
     {
         Object object;
@@ -37,7 +39,8 @@ public:
     {
         if(isEmpty())
         {
-            m_first.reset(new Node{object, nullptr});            m_last = m_first.get();
+            m_first.reset(new Node{object, nullptr});
+            m_last = m_first.get();
         }
         else
         {
@@ -51,7 +54,8 @@ public:
     {
         assert(m_first);
         Object result{};
-        if(m_first)        {
+        if(m_first)
+        {
             result = m_first->object;
             m_first = std::move(m_first->next);
             m_currentSize--;

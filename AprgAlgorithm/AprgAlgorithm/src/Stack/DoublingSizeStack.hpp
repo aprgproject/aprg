@@ -14,13 +14,15 @@ class DoublingSizeStack : public BaseStack<Object>
 public:
 
     DoublingSizeStack()
-        : m_stackSize(0)        , m_containerSize(0)
+        : m_stackSize(0)
+        , m_containerSize(0)
         , m_objects(nullptr)
     {
         initialize(INITIAL_SIZE);
     }
 
-    ~DoublingSizeStack()    {
+    ~DoublingSizeStack()
+    {
         deleteAllObjects();
     }
 
@@ -72,7 +74,8 @@ private:
 
     void resize(unsigned int const newSize)
     {
-        Object* newObjects = new Object[newSize]{};        if(m_objects != nullptr)
+        Object* newObjects = new Object[newSize]{};
+        if(m_objects != nullptr)
         {
             std::copy(m_objects, m_objects + std::min(m_stackSize, newSize), newObjects);
             delete[](m_objects);
@@ -92,6 +95,7 @@ private:
     static constexpr unsigned int INITIAL_SIZE = 1U;
     unsigned int m_stackSize;
     unsigned int m_containerSize;
-    Object* m_objects;};
+    Object* m_objects;
+};
 
 }
