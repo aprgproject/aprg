@@ -193,11 +193,18 @@ public:
             {
                 if(key == currentNodePointer->key)
                 {
-                    previousNodePointer->next = std::move(currentNodePointer->next);
+                    if(previousNodePointer == nullptr)
+                    {
+                        m_first = std::move(currentNodePointer->next);
+                    }
+                    else
+                    {
+                        previousNodePointer->next = std::move(currentNodePointer->next);
+                    }
+                    m_currentSize--;
                     break;
                 }
-            }
-            previousNodePointer = currentNodePointer;
+            }            previousNodePointer = currentNodePointer;
         }
     }
 
