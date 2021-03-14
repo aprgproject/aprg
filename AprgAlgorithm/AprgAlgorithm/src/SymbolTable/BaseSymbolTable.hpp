@@ -1,15 +1,17 @@
 #pragma once
 
+#include <vector>
+
 namespace alba
 {
-
 template <typename Key, typename Value>
 class BaseSymbolTable
 {
 public:
+    using Keys = std::vector<Key>;
+
     virtual ~BaseSymbolTable()
     {}
-
     virtual bool isEmpty() const = 0; // is the symbol table empty
     virtual unsigned int getSize() const = 0; // get number of key-value pairs
     virtual unsigned int getRank(Key const& key) const = 0; // get number of keys less than key
@@ -27,6 +29,8 @@ public:
     virtual void deleteMinimum() = 0; // remove smallest key (and its value) from the symbol table
     virtual void deleteMaximum() = 0; // remove largest key (and its value) from the symbol table
 
+    virtual Keys getKeys() const = 0; // get all keys in sorted order
+    virtual Keys getKeysInRangeInclusive(Key const& low, Key const& high) const = 0; // get all keys that fall in range in sorted order
 };
 
 }

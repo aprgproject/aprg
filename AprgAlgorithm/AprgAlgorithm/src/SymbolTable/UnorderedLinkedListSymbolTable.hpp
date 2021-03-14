@@ -2,9 +2,9 @@
 
 #include <SymbolTable/BaseSymbolTable.hpp>
 
+#include <algorithm>
 #include <functional>
 #include <memory>
-
 namespace alba
 {
 
@@ -20,10 +20,10 @@ public:
         Value value;
         NodeUniquePointer next;
     };
+    using Keys = std::vector<Key>;
 
     UnorderedLinkedListSymbolTable()
-        : m_currentSize(0)
-        , m_first(nullptr)
+        : m_currentSize(0)        , m_first(nullptr)
     {}
 
     bool isEmpty() const override
@@ -219,10 +219,34 @@ public:
         deleteBasedOnKey(getMaximum());
     }
 
+    Keys getKeys() const override
+    {
+        Keys result;
+        traverseWithNoChange([&](Node const& node, bool &)
+        {
+            result.emplace_back(node.key);
+        });
+        std::sort(result.begin(), result.end());
+        return result;
+    }
+
+    Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override
+    {
+        Keys result;
+        traverseWithNoChange([&](Node const& node, bool &)
+        {
+            if(node.key >= low && node.key <= high)
+            {
+                result.emplace_back(node.key);
+            }
+        });
+        std::sort(result.begin(), result.end());
+        return result;
+    }
+
 private:
 
-    using TraverseFunctionWithNoChange=std::function<void(Node const&, bool &)>;
-    using TraverseFunctionWithChange=std::function<void(Node &, bool &)>;
+    using TraverseFunctionWithNoChange=std::function<void(Node const&, bool &)>;    using TraverseFunctionWithChange=std::function<void(Node &, bool &)>;
 
     void traverseWithNoChange(TraverseFunctionWithNoChange const& traverseFunction) const
     {
