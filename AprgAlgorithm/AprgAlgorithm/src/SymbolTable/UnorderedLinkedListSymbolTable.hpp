@@ -9,7 +9,7 @@ namespace alba
 {
 
 template <typename Key, typename Value>
-class LinkedListSymbolTable : public BaseSymbolTable<Key, Value>
+class UnorderedLinkedListSymbolTable : public BaseSymbolTable<Key, Value>
 {
 public:
     struct Node;
@@ -21,7 +21,7 @@ public:
         NodeUniquePointer next;
     };
 
-    LinkedListSymbolTable()
+    UnorderedLinkedListSymbolTable()
         : m_currentSize(0)
         , m_first(nullptr)
     {}
