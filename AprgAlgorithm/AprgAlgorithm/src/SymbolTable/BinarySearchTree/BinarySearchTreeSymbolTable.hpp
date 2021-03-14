@@ -22,7 +22,8 @@ public:
         unsigned int numberOfNodesOnThisSubTree;
     };
 
-    BinarySearchTreeSymbolTable()    {}
+    BinarySearchTreeSymbolTable()
+    {}
 
     bool isEmpty() const override
     {
@@ -136,6 +137,7 @@ private:
         }
         return size;
     }
+
     unsigned int calculateSizeOfNodeBasedFromLeftAndRight(Node const& node) const
     {
         return getSizeOnThisNode(node.left.get()) + getSizeOnThisNode(node.right.get()) + 1;
@@ -272,7 +274,8 @@ private:
                 result = selectNodeWithIndexOnThisNode(nodePointer->right.get(), index-numberOfNodesOnThisSubTree-1);
             }
             else
-            {                result = nodePointer;
+            {
+                result = nodePointer;
             }
         }
         return result;
@@ -316,7 +319,8 @@ private:
                 nodePointer->numberOfNodesOnThisSubTree = calculateSizeOfNodeBasedFromLeftAndRight(*(nodePointer.get()));
             }
             else
-            {                nodePointer->value = value;
+            {
+                nodePointer->value = value;
             }
         }
         else
@@ -357,6 +361,7 @@ private:
             }
         }
     }
+
     void deleteMinimumOnThisNode(NodeUniquePointer & nodePointer)
     {
         if(nodePointer)
@@ -367,7 +372,8 @@ private:
                 nodePointer->numberOfNodesOnThisSubTree = calculateSizeOfNodeBasedFromLeftAndRight(*(nodePointer.get()));
             }
             else
-            {                nodePointer = std::move(nodePointer->right);
+            {
+                nodePointer = std::move(nodePointer->right);
             }
         }
     }
@@ -382,7 +388,8 @@ private:
                 nodePointer->numberOfNodesOnThisSubTree = calculateSizeOfNodeBasedFromLeftAndRight(*(nodePointer.get()));
             }
             else
-            {                nodePointer = std::move(nodePointer->left);
+            {
+                nodePointer = std::move(nodePointer->left);
             }
         }
     }
@@ -401,7 +408,8 @@ private:
                 keys.emplace_back(nodePointer->key);
             }
             if(high > nodePointer->key)
-            {                retrieveKeysInRangeInclusiveOnThisNode(keys, nodePointer->right.get(), low, high);
+            {
+                retrieveKeysInRangeInclusiveOnThisNode(keys, nodePointer->right.get(), low, high);
             }
         }
     }

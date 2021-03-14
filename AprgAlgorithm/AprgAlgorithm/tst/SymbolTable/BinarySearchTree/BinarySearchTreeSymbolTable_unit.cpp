@@ -1,4 +1,4 @@
-#include <SymbolTable/BinarySearchTreeSymbolTable.hpp>
+#include <SymbolTable/BinarySearchTree/BinarySearchTreeSymbolTable.hpp>
 #include <SymbolTable/Utilities/CommonTestsWithBaseSymbolTable.hpp>
 
 #include <gtest/gtest.h>
@@ -7,6 +7,7 @@
 
 using namespace alba::CommonTestsWithBaseSymbolTable;
 using namespace std;
+
 
 namespace alba
 {
@@ -122,6 +123,7 @@ TEST(BinarySearchTreeSymbolTableTest, RetrieveKeysInRangeWorks)
     vector<unsigned int> expectedKeys{5U, 7U, 8U};
     EXPECT_EQ(expectedKeys, keys);
 }
+
 
 
 }
