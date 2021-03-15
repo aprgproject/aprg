@@ -37,7 +37,8 @@ TEST(BinarySearchTreeSymbolTableTest, DoesContainWorks)
 
 TEST(BinarySearchTreeSymbolTableTest, GetSizeWorksWhenEmpty)
 {
-    SymbolTableWithUnsignedIntToChar symbolTable;    performGetSizeTestWhenEmpty(symbolTable);
+    SymbolTableWithUnsignedIntToChar symbolTable;
+    performGetSizeTestWhenEmpty(symbolTable);
 }
 
 TEST(BinarySearchTreeSymbolTableTest, GetSizeWorksWhenNotEmpty)

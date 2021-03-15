@@ -19,6 +19,7 @@ public:
 
     virtual unsigned int getSize() const = 0; // get number of key-value pairs
     virtual unsigned int getRank(Key const& key) const = 0; // get number of keys less than key
+
     virtual Value get(Key const& key) const = 0; // get value paired with key
 
     virtual Key getMinimum() const = 0; // get smallest key

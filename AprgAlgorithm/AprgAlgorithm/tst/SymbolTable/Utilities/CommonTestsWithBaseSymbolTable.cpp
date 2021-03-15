@@ -34,7 +34,8 @@ void performDoesContainTest(BaseSymbolTableForUnsignedInt & symbolTable)
 
 void performGetSizeTestWhenEmpty(BaseSymbolTableForUnsignedInt & symbolTable)
 {
-    EXPECT_EQ(0U, symbolTable.getSize());}
+    EXPECT_EQ(0U, symbolTable.getSize());
+}
 
 void performGetSizeTestWhenNotEmpty(BaseSymbolTableForUnsignedInt & symbolTable)
 {

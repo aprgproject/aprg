@@ -15,7 +15,8 @@ void performIsEmptyTestWhenNotEmpty(BaseSymbolTableForUnsignedInt & symbolTable)
 void performDoesContainTest(BaseSymbolTableForUnsignedInt & symbolTable);
 void performGetSizeTestWhenEmpty(BaseSymbolTableForUnsignedInt & symbolTable);
 void performGetSizeTestWhenNotEmpty(BaseSymbolTableForUnsignedInt & symbolTable);
-void performGetTest(BaseSymbolTableForUnsignedInt & symbolTable);void performGetRankTest(BaseSymbolTableForUnsignedInt & symbolTable);
+void performGetTest(BaseSymbolTableForUnsignedInt & symbolTable);
+void performGetRankTest(BaseSymbolTableForUnsignedInt & symbolTable);
 void performGetMinimumTest(BaseSymbolTableForUnsignedInt & symbolTable);
 void performGetMaximumTest(BaseSymbolTableForUnsignedInt & symbolTable);
 void performSelectAtTest(BaseSymbolTableForUnsignedInt & symbolTable);

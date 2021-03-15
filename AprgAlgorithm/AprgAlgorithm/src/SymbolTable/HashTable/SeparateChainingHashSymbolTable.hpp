@@ -32,7 +32,8 @@ public:
 
     unsigned int getSize() const override
     {
-        return m_size;    }
+        return m_size;
+    }
 
     unsigned int getRank(Key const& key) const override
     {

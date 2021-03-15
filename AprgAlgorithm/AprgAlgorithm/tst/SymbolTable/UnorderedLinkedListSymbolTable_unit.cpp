@@ -35,7 +35,8 @@ TEST(UnorderedLinkedListSymbolTableTest, DoesContainWorks)
 
 TEST(UnorderedLinkedListSymbolTableTest, GetSizeWorksWhenEmpty)
 {
-    SymbolTableWithUnsignedIntToChar symbolTable;    performGetSizeTestWhenEmpty(symbolTable);
+    SymbolTableWithUnsignedIntToChar symbolTable;
+    performGetSizeTestWhenEmpty(symbolTable);
 }
 
 TEST(UnorderedLinkedListSymbolTableTest, GetSizeWorksWhenNotEmpty)

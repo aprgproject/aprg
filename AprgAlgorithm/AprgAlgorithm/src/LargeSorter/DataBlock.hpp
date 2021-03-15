@@ -147,7 +147,8 @@ public:
             containerHelper::saveContentsToStream(fileDump, contents, containerHelper::StreamFormat::File);
         }
         m_memoryBlockHandler.clear();
-        m_blockType = DataBlockType::File;    }
+        m_blockType = DataBlockType::File;
+    }
     void switchToMemoryMode()
     {
         createMemoryHandlerIfNeeded();
@@ -159,7 +160,8 @@ public:
             containerHelper::retrieveContentsFromStream(inputFileStream, contents);
             assert(contents.size() == m_numberOfObjects);
         }
-        m_blockFileHandler.clear();        m_blockType = DataBlockType::Memory;
+        m_blockFileHandler.clear();
+        m_blockType = DataBlockType::Memory;
     }
     void releaseFileStream()
     {

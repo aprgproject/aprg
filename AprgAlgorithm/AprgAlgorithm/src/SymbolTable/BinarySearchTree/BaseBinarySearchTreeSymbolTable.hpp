@@ -30,7 +30,8 @@ public:
 
     unsigned int getSize() const override
     {
-        return getSizeOnThisNode(m_root);    }
+        return getSizeOnThisNode(m_root);
+    }
 
     unsigned int getRank(Key const& key) const override
     {
@@ -167,7 +168,8 @@ protected:
 
     Value getStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const
     {
-        Value result{};        if(nodePointer)
+        Value result{};
+        if(nodePointer)
         {
             Key const& currentKey(nodePointer->key);
             if(key < currentKey)

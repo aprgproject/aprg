@@ -3,7 +3,8 @@
 #include <iostream>
 #include <iterator>
 #include <map>
-#include <memory>#include <set>
+#include <memory>
+#include <set>
 #include <sstream>
 #include <string>
 
@@ -23,7 +24,8 @@ std::string getDelimeterBasedOnFormat(StreamFormat const streamFormat);
 
 template <typename ValueType>
 std::pair<ValueType,ValueType> getLowerAndUpperValuesInSet(
-        std::set<ValueType> const& container,        ValueType const& value)
+        std::set<ValueType> const& container,
+        ValueType const& value)
 {
     std::pair<ValueType,ValueType> result;
     typename std::set<ValueType>::const_iterator itUpper(container.upper_bound(value));
@@ -291,6 +293,7 @@ void retrieveContentsFromStream(std::istream & inputStream, Container<ValueType,
     std::istream_iterator<ValueType> inputIteratorEnd;
     std::copy(inputIterator, inputIteratorEnd, container.begin());
 }
+
 template <typename ValueType,
           template<typename, typename = std::allocator<ValueType>> class Container>
 void retrieveContentsFromStream(std::istream & inputStream, Container<ValueType> & container)
@@ -300,6 +303,7 @@ void retrieveContentsFromStream(std::istream & inputStream, Container<ValueType>
     std::istream_iterator<ValueType> inputIteratorEnd;
     std::copy(inputIterator, inputIteratorEnd, std::inserter(container, container.end()));
 }
+
 template <typename ValueType,
           template<typename, typename = std::less<ValueType>, typename = std::allocator<ValueType>> class Container>
 void retrieveContentsFromStream(std::istream & inputStream, Container<ValueType> & container)
@@ -309,6 +313,7 @@ void retrieveContentsFromStream(std::istream & inputStream, Container<ValueType>
     std::istream_iterator<ValueType> inputIteratorEnd;
     std::copy(inputIterator, inputIteratorEnd, std::inserter(container, container.end()));
 }
+
 template <typename KeyType, typename ValueType,
           template<typename, typename, typename = std::less<KeyType>, typename = std::allocator<std::pair<KeyType const, ValueType>>> class Container>
 void retrieveContentsFromStream(std::istream & inputStream, Container<KeyType, ValueType> & container)
@@ -372,6 +377,7 @@ std::string getStringFromContents(Container<KeyType, ValueType> const& container
     return result.str();
 }
 
+
 //GetStringOtherFormats
 template <typename ValueType,
           template<typename, typename = std::allocator<ValueType>> class Container>
@@ -381,7 +387,8 @@ std::string getStringFromContentsWithNumberFormat(Container<ValueType> const& co
     std::ostream_iterator<unsigned int> outputIterator(result, getDelimeterBasedOnFormat(StreamFormat::String).c_str());
 
     result<<"Decimal values: {"<<std::dec;
-    std::copy(container.cbegin(), container.cend(), outputIterator);    result<<"}\n";
+    std::copy(container.cbegin(), container.cend(), outputIterator);
+    result<<"}\n";
 
     result<<"Hexadecimal values: {"<<std::hex;
     std::copy(container.cbegin(), container.cend(), outputIterator);
