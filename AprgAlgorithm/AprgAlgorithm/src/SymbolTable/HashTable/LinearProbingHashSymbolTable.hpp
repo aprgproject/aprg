@@ -46,10 +46,24 @@ public:
         return m_size;
     }
 
+    bool doesContain(Key const& key) const override
+    {
+        bool result(false);
+        for(unsigned int i(getHash(key)); m_entryPointers[i]; incrementHashTableIndexWithWrapAround(i))
+        {
+            HashTableEntryUniquePointer const& entryPointer(m_entryPointers[i]);
+            if(key == entryPointer->key)
+            {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
     unsigned int getRank(Key const& key) const override
     {
-        Keys keys(getKeys());
-        return OrderedArraySymbolTable<Key, Value>::getRank(key, keys);
+        Keys keys(getKeys());        return OrderedArraySymbolTable<Key, Value>::getRank(key, keys);
     }
 
     Value get(Key const& key) const override
@@ -58,11 +72,10 @@ public:
         for(unsigned int i(getHash(key)); m_entryPointers[i]; incrementHashTableIndexWithWrapAround(i))
         {
             HashTableEntryUniquePointer const& entryPointer(m_entryPointers[i]);
-            if(entryPointer->key == key)
+            if(key == entryPointer->key)
             {
                 result = entryPointer->value;
-                break;
-            }
+                break;            }
         }
         return result;
     }
@@ -139,11 +152,10 @@ public:
         for(; m_entryPointers[i]; incrementHashTableIndexWithWrapAround(i))
         {
             HashTableEntryUniquePointer & entryPointer(m_entryPointers[i]);
-            if(entryPointer->key == key)
+            if(key == entryPointer->key)
             {
                 entryPointer->value = value;
-                isFound = true;
-                break;
+                isFound = true;                break;
             }
         }
         if(!isFound)

@@ -22,10 +22,23 @@ public:
         return m_size == 0;
     }
 
+    bool doesContain(Key const& key) const override
+    {
+        bool result(false);
+        if(!isEmpty())
+        {
+            unsigned int rank(getRank(key));
+            if(rank < m_size && m_keys.at(rank) == key)
+            {
+                result = true;
+            }
+        }
+        return result;
+    }
+
     unsigned int getSize() const override
     {
-        return m_size;
-    }
+        return m_size;    }
 
     unsigned int getRank(Key const& key) const override
     {

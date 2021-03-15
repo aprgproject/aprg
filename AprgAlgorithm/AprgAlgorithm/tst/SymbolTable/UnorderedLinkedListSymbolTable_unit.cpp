@@ -27,10 +27,15 @@ TEST(UnorderedLinkedListSymbolTableTest, IsEmptyWorksWhenNotEmpty)
     performIsEmptyTestWhenNotEmpty(symbolTable);
 }
 
-TEST(UnorderedLinkedListSymbolTableTest, GetSizeWorksWhenEmpty)
+TEST(UnorderedLinkedListSymbolTableTest, DoesContainWorks)
 {
     SymbolTableWithUnsignedIntToChar symbolTable;
-    performGetSizeTestWhenEmpty(symbolTable);
+    performDoesContainTest(symbolTable);
+}
+
+TEST(UnorderedLinkedListSymbolTableTest, GetSizeWorksWhenEmpty)
+{
+    SymbolTableWithUnsignedIntToChar symbolTable;    performGetSizeTestWhenEmpty(symbolTable);
 }
 
 TEST(UnorderedLinkedListSymbolTableTest, GetSizeWorksWhenNotEmpty)
