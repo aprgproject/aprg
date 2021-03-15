@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <functional>
 #include <memory>
+
 namespace alba
 {
 
@@ -23,17 +24,18 @@ public:
     using Keys = std::vector<Key>;
 
     UnorderedLinkedListSymbolTable()
-        : m_currentSize(0)        , m_first(nullptr)
+        : m_size(0)
+        , m_first(nullptr)
     {}
 
     bool isEmpty() const override
     {
-        return m_currentSize == 0;
+        return m_size == 0;
     }
 
     unsigned int getSize() const override
     {
-        return m_currentSize;
+        return m_size;
     }
 
     unsigned int getRank(Key const& key) const override
@@ -180,7 +182,7 @@ public:
         {
             NodeUniquePointer newNext(std::move(m_first));
             m_first.reset(new Node{key, value, std::move(newNext)});
-            m_currentSize++;
+            m_size++;
         }
     }
 
@@ -201,7 +203,7 @@ public:
                     {
                         previousNodePointer->next = std::move(currentNodePointer->next);
                     }
-                    m_currentSize--;
+                    m_size--;
                     break;
                 }
             }
@@ -246,7 +248,8 @@ public:
 
 private:
 
-    using TraverseFunctionWithNoChange=std::function<void(Node const&, bool &)>;    using TraverseFunctionWithChange=std::function<void(Node &, bool &)>;
+    using TraverseFunctionWithNoChange=std::function<void(Node const&, bool &)>;
+    using TraverseFunctionWithChange=std::function<void(Node &, bool &)>;
 
     void traverseWithNoChange(TraverseFunctionWithNoChange const& traverseFunction) const
     {
@@ -274,7 +277,7 @@ private:
         }
     }
 
-    unsigned int m_currentSize;
+    unsigned int m_size;
     NodeUniquePointer m_first;
 };
 

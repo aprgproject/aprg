@@ -4,6 +4,7 @@
 
 namespace alba
 {
+
 template <typename Key, typename Value>
 class BaseSymbolTable
 {
@@ -12,6 +13,7 @@ public:
 
     virtual ~BaseSymbolTable()
     {}
+
     virtual bool isEmpty() const = 0; // is the symbol table empty
     virtual unsigned int getSize() const = 0; // get number of key-value pairs
     virtual unsigned int getRank(Key const& key) const = 0; // get number of keys less than key
