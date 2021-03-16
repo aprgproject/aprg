@@ -4,6 +4,7 @@
 #include <Common/Math/AlbaMathConstants.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace alba::algebra::Functions;
 using namespace std;
 

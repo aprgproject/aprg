@@ -5,6 +5,7 @@
 #include <Common/Math/AlbaMathHelper.hpp>
 
 #include <gtest/gtest.h>
+
 #include <cmath>
 
 using namespace alba::algebra::Functions;

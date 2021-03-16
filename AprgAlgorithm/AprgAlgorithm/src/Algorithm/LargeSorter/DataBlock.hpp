@@ -7,7 +7,8 @@
 #include <Common/Optional/AlbaOptional.hpp>
 
 #include <algorithm>
-#include <fstream>#include <functional>
+#include <fstream>
+#include <functional>
 #include <string>
 #include <vector>
 

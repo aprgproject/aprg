@@ -8,6 +8,7 @@
 #include <Common/Math/AlbaMathHelper.hpp>
 
 #include <algorithm>
+
 using namespace alba::mathHelper;
 using namespace std;
 

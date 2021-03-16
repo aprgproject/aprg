@@ -3,6 +3,7 @@
 #include <Common/Macros/AlbaMacros.hpp>
 
 using namespace std;
+
 namespace alba
 {
 

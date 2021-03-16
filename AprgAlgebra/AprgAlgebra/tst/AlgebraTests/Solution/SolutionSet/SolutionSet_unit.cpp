@@ -2,6 +2,7 @@
 #include <Common/Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 #include <gtest/gtest.h>
+
 #include <algorithm>
 
 using namespace std;

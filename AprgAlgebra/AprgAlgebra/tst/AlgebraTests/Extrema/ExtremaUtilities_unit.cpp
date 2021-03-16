@@ -3,6 +3,7 @@
 #include <Common/Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba

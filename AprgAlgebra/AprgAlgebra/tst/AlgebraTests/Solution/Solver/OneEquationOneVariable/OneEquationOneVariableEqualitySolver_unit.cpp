@@ -5,6 +5,7 @@
 #include <Common/Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace alba::algebra::Functions;
 using namespace std;
 

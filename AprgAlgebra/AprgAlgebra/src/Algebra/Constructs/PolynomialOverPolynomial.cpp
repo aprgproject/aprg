@@ -10,7 +10,8 @@
 #include <Common/Math/AlbaMathHelper.hpp>
 
 using namespace alba::algebra::Factorization;
-using namespace alba::mathHelper;using namespace std;
+using namespace alba::mathHelper;
+using namespace std;
 
 namespace alba
 {

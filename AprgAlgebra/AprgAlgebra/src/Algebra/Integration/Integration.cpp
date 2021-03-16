@@ -25,7 +25,8 @@
 #include <Common/String/AlbaStringHelper.hpp>
 
 using namespace alba::algebra::Factorization;
-using namespace alba::algebra::Functions;using namespace alba::algebra::Simplification;
+using namespace alba::algebra::Functions;
+using namespace alba::algebra::Simplification;
 using namespace alba::mathHelper;
 using namespace alba::stringHelper;
 using namespace std;

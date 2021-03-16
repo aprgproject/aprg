@@ -3,6 +3,7 @@
 #include <Common/Math/Number/AlbaNumber.hpp>
 
 #include <functional>
+
 namespace alba
 {
 

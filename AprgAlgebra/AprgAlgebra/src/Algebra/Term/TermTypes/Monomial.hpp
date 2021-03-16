@@ -4,7 +4,8 @@
 #include <Common/Math/Number/AlbaNumber.hpp>
 
 #include <functional>
-#include <map>#include <string>
+#include <map>
+#include <string>
 #include <vector>
 
 namespace alba

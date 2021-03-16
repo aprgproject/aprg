@@ -9,7 +9,8 @@
 #include <Common/Math/AlbaMathHelper.hpp>
 
 using namespace alba::mathHelper;
-using namespace alba::algebra::Simplification;using namespace std;
+using namespace alba::algebra::Simplification;
+using namespace std;
 
 namespace alba
 {

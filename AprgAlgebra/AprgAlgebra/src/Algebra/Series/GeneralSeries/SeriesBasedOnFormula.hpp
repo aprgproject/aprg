@@ -4,6 +4,7 @@
 #include <Common/Math/Number/AlbaNumberTypes.hpp>
 
 #include <string>
+
 namespace alba
 {
 

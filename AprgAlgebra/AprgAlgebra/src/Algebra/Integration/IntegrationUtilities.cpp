@@ -14,6 +14,7 @@
 #include <Common/Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 using namespace std;
+
 namespace alba
 {
 
