@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Container/AlbaConfigurationHolder.hpp>
+#include <Common/Container/AlbaConfigurationHolder.hpp>
 
 namespace alba
 {
-
 namespace algebra
 {
 

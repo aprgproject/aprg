@@ -5,10 +5,9 @@
 #include <Algebra/Solution/SolutionSet/SolutionSet.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
-#include <String/AlbaStringHelper.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <string>
-
 namespace alba
 {
 

@@ -2,12 +2,11 @@
 
 #include <Algebra/Equation/Equation.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
-#include <Math/Number/AlbaNumber.hpp>
-#include <Math/Number/AlbaNumberTypes.hpp>
+#include <Common/Math/Number/AlbaNumber.hpp>
+#include <Common/Math/Number/AlbaNumberTypes.hpp>
 
 namespace alba
 {
-
 namespace algebra
 {
 

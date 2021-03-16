@@ -8,10 +8,9 @@
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/MonomialHelpers.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
-#include <Math/AlbaMathHelper.hpp>
+#include <Common/Math/AlbaMathHelper.hpp>
 
 #include <algorithm>
-
 using namespace alba::algebra::Factorization;
 using namespace alba::mathHelper;
 using namespace std;

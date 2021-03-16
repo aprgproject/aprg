@@ -1,11 +1,10 @@
 #pragma once
 
 #include <Algebra/Series/GeneralSeries/SeriesBasedOnSummation.hpp>
-#include <Math/Number/Interval/AlbaNumberInterval.hpp>
+#include <Common/Math/Number/Interval/AlbaNumberInterval.hpp>
 
 namespace alba
 {
-
 namespace algebra
 {
 

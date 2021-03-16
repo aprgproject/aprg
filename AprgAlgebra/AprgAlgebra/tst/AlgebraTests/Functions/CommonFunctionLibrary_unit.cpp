@@ -2,10 +2,9 @@
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/TermUtilities.hpp>
-#include <Math/AlbaMathHelper.hpp>
+#include <Common/Math/AlbaMathHelper.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace alba::mathHelper;
 using namespace std;
 

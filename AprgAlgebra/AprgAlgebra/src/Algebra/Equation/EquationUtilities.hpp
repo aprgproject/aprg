@@ -4,11 +4,10 @@
 #include <Algebra/Equation/EquationOperator.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 #include <Algebra/Term/TermTypes/TermContainerTypes.hpp>
-#include <String/AlbaStringHelper.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 namespace alba
 {
-
 namespace algebra
 {
 

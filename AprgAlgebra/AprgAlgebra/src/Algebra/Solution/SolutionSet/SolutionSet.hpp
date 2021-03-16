@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Math/Number/AlbaNumberTypes.hpp>
+#include <Common/Math/Number/AlbaNumberTypes.hpp>
 
 #include <functional>
-#include <map>
-#include <string>
+#include <map>#include <string>
 
 namespace alba
 {

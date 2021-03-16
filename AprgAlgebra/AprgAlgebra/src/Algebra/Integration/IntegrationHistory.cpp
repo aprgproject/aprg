@@ -1,9 +1,8 @@
 #include "IntegrationHistory.hpp"
 
-#include <Macros/AlbaMacros.hpp>
+#include <Common/Macros/AlbaMacros.hpp>
 
 #include <algorithm>
-
 using namespace std;
 
 namespace alba

@@ -9,11 +9,10 @@
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/StringHelpers.hpp>
-#include <Math/AlbaMathConstants.hpp>
-#include <Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
+#include <Common/Math/AlbaMathConstants.hpp>
+#include <Common/Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace alba::algebra::Simplification;
 using namespace std;
 

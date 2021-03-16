@@ -4,11 +4,10 @@
 #include <Algebra/Substitution/SubstitutionOfTermsToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
-#include <Bit/AlbaBitManipulation.hpp>
-#include <Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
+#include <Common/Bit/AlbaBitManipulation.hpp>
+#include <Common/Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 #include <algorithm>
-
 using namespace std;
 
 namespace alba

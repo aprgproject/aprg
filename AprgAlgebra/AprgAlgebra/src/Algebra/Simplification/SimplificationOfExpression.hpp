@@ -4,11 +4,10 @@
 #include <Algebra/Constructs/TermsOverTerms.hpp>
 #include <Algebra/Factorization/FactorizationConfiguration.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
-#include <Container/AlbaConfigurationHolder.hpp>
+#include <Common/Container/AlbaConfigurationHolder.hpp>
 
 namespace alba
 {
-
 namespace algebra
 {
 

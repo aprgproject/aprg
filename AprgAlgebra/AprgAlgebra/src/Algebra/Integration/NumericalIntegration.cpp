@@ -4,11 +4,10 @@
 #include <Algebra/Integration/Integration.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Term/Operators/TermOperators.hpp>
-#include <Math/AlbaMathHelper.hpp>
+#include <Common/Math/AlbaMathHelper.hpp>
 
 using namespace alba::mathHelper;
 using namespace std;
-
 namespace alba
 {
 

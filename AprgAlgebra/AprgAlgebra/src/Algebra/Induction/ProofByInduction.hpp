@@ -1,10 +1,9 @@
 #pragma once
 
 #include <Algebra/Term/TermTypes/Term.hpp>
-#include <Math/Number/AlbaNumber.hpp>
+#include <Common/Math/Number/AlbaNumber.hpp>
 
 #include <string>
-
 namespace alba
 {
 

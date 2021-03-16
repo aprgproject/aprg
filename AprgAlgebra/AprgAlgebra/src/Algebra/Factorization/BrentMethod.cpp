@@ -6,11 +6,10 @@
 
 #include "BrentMethod.hpp"
 
-#include <Math/AlbaMathHelper.hpp>
+#include <Common/Math/AlbaMathHelper.hpp>
 
 using namespace alba::mathHelper;
 using namespace std;
-
 namespace alba
 {
 

@@ -3,11 +3,10 @@
 #include <Algebra/Equation/Equation.hpp>
 #include <Algebra/Solution/SolutionSet/MultipleVariableSolutionSet.hpp>
 #include <Algebra/Solution/Solver/BaseSolver.hpp>
-#include <Math/Matrix/AlbaMatrix.hpp>
+#include <Common/Math/Matrix/AlbaMatrix.hpp>
 
 namespace alba
 {
-
 namespace algebra
 {
 
