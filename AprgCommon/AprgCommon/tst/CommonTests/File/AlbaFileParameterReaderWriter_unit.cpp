@@ -1,6 +1,6 @@
 #include <Common/File/AlbaFileParameterReader.hpp>
 #include <Common/File/AlbaFileParameterWriter.hpp>
-#include <Common/PathHandlers/AlbaLocalPathHandler.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <CommonTests/DirectoryConstants.hpp>
 
 #include <gtest/gtest.h>

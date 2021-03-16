@@ -1,18 +1,18 @@
 #pragma once
 
 #ifdef OS_WINDOWS
-#include <Common/PathHandlers/AlbaWindowsPathHandler.hpp>
+#include <Common/PathHandler/AlbaWindowsPathHandler.hpp>
 #endif
 
 #ifdef OS_LINUX
-#include <Common/PathHandlers/AlbaLinuxPathHandler.hpp>
+#include <Common/PathHandler/AlbaLinuxPathHandler.hpp>
 #endif
 
 #if !defined(OS_WINDOWS) && !defined(OS_LINUX)
 static_assert(false, "WINDOWS and LINUX are the only supported OS yet.");
 #endif
 
-#include <Common/PathHandlers/PathContantsAndTypes.hpp>
+#include <Common/PathHandler/PathContantsAndTypes.hpp>
 
 #include <functional>
 #include <set>
