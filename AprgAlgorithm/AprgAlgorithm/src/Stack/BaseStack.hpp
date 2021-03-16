@@ -3,10 +3,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Object>
 class BaseStack
-{
-public:
+{public:
     virtual ~BaseStack()
     {}
 
@@ -15,5 +17,7 @@ public:
     virtual void push(Object const& object) = 0;
     virtual Object pop() = 0;
 };
+
+}
 
 }

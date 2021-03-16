@@ -5,9 +5,11 @@
 namespace alba
 {
 
-namespace CommonTestsWithBaseSymbolTable
+namespace algorithm
 {
 
+namespace CommonTestsWithBaseSymbolTable
+{
 using BaseSymbolTableForUnsignedInt = BaseSymbolTable<unsigned int, char>;
 
 void performIsEmptyTestWhenEmpty(BaseSymbolTableForUnsignedInt & symbolTable);
@@ -28,6 +30,8 @@ void performDeleteMinimumTest(BaseSymbolTableForUnsignedInt & symbolTable);
 void performDeleteMaximumTest(BaseSymbolTableForUnsignedInt & symbolTable);
 void performGetKeysTest(BaseSymbolTableForUnsignedInt & symbolTable);
 void performGetKeysInRangeInclusiveTest(BaseSymbolTableForUnsignedInt & symbolTable);
+
+}
 
 }
 

@@ -9,10 +9,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Values>
 class HeapSorter : public BaseSorter<Values>
-{
-public:
+{public:
     void sort(Values & valuesToSort) const override
     {
         constexpr unsigned int NUMBER_OF_CHILDREN_IN_HEAP_TREE=2U;
@@ -31,5 +33,7 @@ public:
         }
     }
 };
+
+}
 
 }

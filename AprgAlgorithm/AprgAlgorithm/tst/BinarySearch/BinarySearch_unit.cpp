@@ -7,10 +7,12 @@ using namespace std;
 namespace alba
 {
 
+namespace algorithm
+{
+
 TEST(BinarySearchTest, BinarySearchCanBeCreatedUsingDefaultConstructor)
 {
-    BinarySearch<unsigned int> binarySearch;
-    EXPECT_EQ(0U, binarySearch.getHighestValue());
+    BinarySearch<unsigned int> binarySearch;    EXPECT_EQ(0U, binarySearch.getHighestValue());
     EXPECT_EQ(0U, binarySearch.getMiddleValue());
     EXPECT_EQ(0U, binarySearch.getLowestValue());
 }
@@ -127,6 +129,8 @@ TEST(BinarySearchTest, UnsuccessfulBinarySearchWithHigherIsTheNearestValueIsExec
 {
     BinarySearch<unsigned int> binarySearch{72, 84, 93, 6, 13, 14, 25, 33, 43, 51, 53, 64, 95, 96, 97};
     EXPECT_EQ(43U, binarySearch.findNearestValue(42));
+}
+
 }
 
 }

@@ -9,9 +9,11 @@ using namespace std;
 namespace alba
 {
 
-namespace CommonTestsWithBaseStack
+namespace algorithm
 {
 
+namespace CommonTestsWithBaseStack
+{
 void performIsEmptyTestWhenEmpty(BaseStackForUnsignedInt & stack)
 {
     EXPECT_TRUE(stack.isEmpty());
@@ -65,6 +67,8 @@ void performPopTest(BaseStackForUnsignedInt & stack)
 void performPopAssertionTestWhenEmpty(BaseStackForUnsignedInt & stack)
 {
     EXPECT_DEATH(stack.pop(), "Assertion failed!");
+}
+
 }
 
 }

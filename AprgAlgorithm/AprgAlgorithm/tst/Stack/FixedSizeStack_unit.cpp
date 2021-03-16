@@ -3,16 +3,18 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba::CommonTestsWithBaseStack;
+using namespace alba::algorithm::CommonTestsWithBaseStack;
 using namespace std;
 
 namespace alba
 {
 
+namespace algorithm
+{
+
 namespace
 {
-using StackForUnsignedInt = FixedSizeStack<unsigned int, 10U>;
-}
+using StackForUnsignedInt = FixedSizeStack<unsigned int, 10U>;}
 
 TEST(FixedSizeStackTest, IsEmptyWorksWhenEmpty)
 {
@@ -65,6 +67,8 @@ TEST(FixedSizeStackTest, DISABLED_PushWorksWithAssertionWhenItReachesMaximumSize
         stack.push(i);
     }
     EXPECT_DEATH(stack.push(100), "Assertion failed!");
+}
+
 }
 
 }

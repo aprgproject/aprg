@@ -3,16 +3,18 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba::CommonTestsWithBaseSymbolTable;
+using namespace alba::algorithm::CommonTestsWithBaseSymbolTable;
 using namespace std;
 
 namespace alba
 {
 
+namespace algorithm
+{
+
 namespace
 {
-using SymbolTableWithUnsignedIntToChar = LinearProbingHashSymbolTable<unsigned int, char>;
-}
+using SymbolTableWithUnsignedIntToChar = LinearProbingHashSymbolTable<unsigned int, char>;}
 
 TEST(LinearProbingHashSymbolTableTest, IsEmptyWorksWhenEmpty)
 {
@@ -166,7 +168,7 @@ TEST(LinearProbingHashSymbolTableTest, DeleteBasedOnKeyWorksWithHalvingHashTable
 
     symbolTable.deleteBasedOnKey(9U);
     EXPECT_EQ(4U, symbolTable.getHashTableSize());
-
 }
 
+}
 }

@@ -8,10 +8,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Key, typename Value>
 class BinarySearchTreeSymbolTable
-        : public BaseBinarySearchTreeSymbolTable<Key, Value, BinarySearchTreeNode::BasicTreeNode<Key, Value>>
-{
+        : public BaseBinarySearchTreeSymbolTable<Key, Value, BinarySearchTreeNode::BasicTreeNode<Key, Value>>{
 
 public:
     using Node = BinarySearchTreeNode::BasicTreeNode<Key, Value>;
@@ -49,5 +51,7 @@ protected:
         }
     }
 };
+
+}
 
 }

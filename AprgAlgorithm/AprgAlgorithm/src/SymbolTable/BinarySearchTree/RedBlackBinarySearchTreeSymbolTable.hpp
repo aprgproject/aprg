@@ -8,10 +8,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Key, typename Value>
 class RedBlackBinarySearchTreeSymbolTable
-        : public BaseBinarySearchTreeSymbolTable<Key, Value, BinarySearchTreeNode::RedBlackTreeNode<Key, Value>>
-{
+        : public BaseBinarySearchTreeSymbolTable<Key, Value, BinarySearchTreeNode::RedBlackTreeNode<Key, Value>>{
 public:
     using Node = BinarySearchTreeNode::RedBlackTreeNode<Key, Value>;
     using NodeUniquePointer = std::unique_ptr<Node>;
@@ -124,5 +126,7 @@ protected:
         }
     }
 };
+
+}
 
 }

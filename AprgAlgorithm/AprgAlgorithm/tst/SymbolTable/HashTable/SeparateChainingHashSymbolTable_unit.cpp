@@ -3,16 +3,18 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba::CommonTestsWithBaseSymbolTable;
+using namespace alba::algorithm::CommonTestsWithBaseSymbolTable;
 using namespace std;
 
 namespace alba
 {
 
+namespace algorithm
+{
+
 namespace
 {
-using SymbolTableWithUnsignedIntToChar = SeparateChainingHashSymbolTable<unsigned int, char, 2>;
-}
+using SymbolTableWithUnsignedIntToChar = SeparateChainingHashSymbolTable<unsigned int, char, 2>;}
 
 TEST(SeparateChainingHashSymbolTableTest, IsEmptyWorksWhenEmpty)
 {
@@ -120,6 +122,8 @@ TEST(SeparateChainingHashSymbolTableTest, GetKeysInRangeWorks)
 {
     SymbolTableWithUnsignedIntToChar symbolTable;
     performGetKeysInRangeInclusiveTest(symbolTable);
+}
+
 }
 
 }

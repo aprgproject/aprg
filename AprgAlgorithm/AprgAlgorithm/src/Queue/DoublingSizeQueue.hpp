@@ -8,10 +8,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Object>
 class DoublingSizeQueue : public BaseQueue<Object>
-{
-public:
+{public:
 
     DoublingSizeQueue()
         : m_queueSize(0)
@@ -110,5 +112,7 @@ private:
     unsigned int m_containerSize;
     Object* m_objects;
 };
+
+}
 
 }

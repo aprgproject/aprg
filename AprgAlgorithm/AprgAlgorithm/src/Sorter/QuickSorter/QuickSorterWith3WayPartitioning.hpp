@@ -7,10 +7,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Values>
 class QuickSorterWith3WayPartitioning : public BaseSorter<Values>
 {
-
 public:
     void sort(Values & valuesToSort) const override
     {
@@ -54,5 +56,7 @@ private:
         }
     }
 };
+
+}
 
 }

@@ -8,10 +8,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Object>
 class LinkedListStack : public BaseStack<Object>
-{
-public:
+{public:
     struct Node;
     using NodeUniquePointer = std::unique_ptr<Node>;
     struct Node
@@ -60,5 +62,7 @@ private:
     unsigned int m_size;
     NodeUniquePointer m_first;
 };
+
+}
 
 }

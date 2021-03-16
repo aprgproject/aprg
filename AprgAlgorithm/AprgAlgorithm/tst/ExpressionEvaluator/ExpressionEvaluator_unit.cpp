@@ -9,9 +9,11 @@ using namespace std;
 namespace alba
 {
 
-namespace ExpressionEvaluator
+namespace algorithm
 {
 
+namespace ExpressionEvaluator
+{
 template <>
 int performUnaryOperation<int, string>(string const& operatorString, int const& value)
 {
@@ -356,6 +358,8 @@ TEST(ExpressionEvaluatorConverterTest, PostfixInfixToConvertionWorks)
     EXPECT_EQ("+", terms[13].getOperator());
     EXPECT_EQ(1, terms[14].getValue());
     EXPECT_EQ(101, postfixEvaluator.evaluate());
+}
+
 }
 
 }

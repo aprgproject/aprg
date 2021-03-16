@@ -3,16 +3,18 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba::CommonTestsWithBaseSymbolTable;
+using namespace alba::algorithm::CommonTestsWithBaseSymbolTable;
 using namespace std;
 
 namespace alba
 {
 
+namespace algorithm
+{
+
 namespace
 {
-using SymbolTableWithUnsignedIntToChar = OrderedArraySymbolTable<unsigned int, char>;
-}
+using SymbolTableWithUnsignedIntToChar = OrderedArraySymbolTable<unsigned int, char>;}
 
 TEST(OrderedArraySymbolTableTest, IsEmptyWorksWhenEmpty)
 {
@@ -120,6 +122,8 @@ TEST(OrderedArraySymbolTableTest, GetKeysInRangeWorks)
 {
     SymbolTableWithUnsignedIntToChar symbolTable;
     performGetKeysInRangeInclusiveTest(symbolTable);
+}
+
 }
 
 }

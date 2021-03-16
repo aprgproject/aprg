@@ -9,10 +9,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename ObjectToSort>
 class DataBlockFileHandler
-{
-public:
+{public:
     ~DataBlockFileHandler()
     {
         m_fileOptional.clear();
@@ -56,5 +58,7 @@ private:
     std::string m_path;
     AlbaOptional<std::ofstream> m_fileOptional;
 };
+
+}
 
 }//namespace alba

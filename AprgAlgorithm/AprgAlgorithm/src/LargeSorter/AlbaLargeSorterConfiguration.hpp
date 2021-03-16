@@ -8,10 +8,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 struct AlbaLargeSorterConfiguration
 {
-    AlbaLargeSorterConfiguration()
-        : m_directoryForBlocks()
+    AlbaLargeSorterConfiguration()        : m_directoryForBlocks()
         , m_minimumNumberOfObjectsPerBlock(100)
         , m_maximumNumberOfObjectsPerBlock(1000)
         , m_maximumNumberOfObjectsInMemory(2000)
@@ -61,5 +63,7 @@ struct AlbaLargeSorterConfiguration
         return AlbaLocalPathHandler(path).getFullPath();
     }
 };
+
+}
 
 }

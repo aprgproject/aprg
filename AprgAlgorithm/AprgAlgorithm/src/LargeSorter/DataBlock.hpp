@@ -15,10 +15,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 enum class DataBlockType
 {
-    Empty,
-    File,
+    Empty,    File,
     Memory
 };
 
@@ -205,5 +207,7 @@ private:
     AlbaOptional<DataBlockMemoryHandler<ObjectToSort>> m_memoryBlockHandler;
     AlbaOptional<DataBlockFileHandler<ObjectToSort>> m_blockFileHandler;
 };
+
+}
 
 }//namespace alba

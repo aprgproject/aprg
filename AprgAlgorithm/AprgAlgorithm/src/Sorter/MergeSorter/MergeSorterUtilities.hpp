@@ -5,10 +5,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Values>
 void mergeTwoSortedSequences(
-        Values & valuesToSort,
-        Values & temp,
+        Values & valuesToSort,        Values & temp,
         unsigned int const low,
         unsigned int const mid,
         unsigned int const high)
@@ -63,6 +65,8 @@ Values mergeTwoSortedSequences(
         }
     }
     return result;
+}
+
 }
 
 }

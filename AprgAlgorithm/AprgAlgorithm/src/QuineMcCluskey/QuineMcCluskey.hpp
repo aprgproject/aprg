@@ -8,10 +8,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 enum class LogicalValue
 {
-    True,
-    False,
+    True,    False,
     DontCare
 };
 
@@ -81,5 +83,7 @@ private:
     FunctionsMap m_functionMap;
     ComputationalTable m_computationalTable; // https://en.wikipedia.org/wiki/Quine%E2%80%93McCluskey_algorithm
 };
+
+}
 
 }

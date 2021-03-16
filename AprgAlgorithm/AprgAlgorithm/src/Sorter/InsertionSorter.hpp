@@ -7,10 +7,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Values>
 class InsertionSorter : public BaseSorter<Values>
-{
-public:
+{public:
     void sort(Values & valuesToSort) const override
     {
         unsigned int const size = valuesToSort.size();
@@ -23,5 +25,7 @@ public:
         }
     }
 };
+
+}
 
 }

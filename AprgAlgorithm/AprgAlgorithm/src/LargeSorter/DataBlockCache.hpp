@@ -9,10 +9,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename BlockInformation>
 class DataBlockCache
-{
-public:
+{public:
     struct BlockCacheEntry
     {
         BlockCacheEntry(unsigned int blockId, BlockInformation const& blockInformation)
@@ -62,5 +64,7 @@ public:
 private:
      BlockCacheContainer m_blocksInformationCache;
 };
+
+}
 
 }

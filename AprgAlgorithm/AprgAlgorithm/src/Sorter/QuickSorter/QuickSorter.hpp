@@ -7,10 +7,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Values>
 class QuickSorter : public BaseSorter<Values>
-{
-public:
+{public:
     void sort(Values & valuesToSort) const override
     {
         // You can randomize inputs here to remove dependence on input (quick sort works best if input is not sorted)
@@ -70,5 +72,7 @@ private:
         return j;
     }
 };
+
+}
 
 }

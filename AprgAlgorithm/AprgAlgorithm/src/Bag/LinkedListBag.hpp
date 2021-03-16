@@ -7,10 +7,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Object>
 class LinkedListBag
-{
-public:
+{public:
     struct Node;
     using NodeUniquePointer = std::unique_ptr<Node>;
     using TraverseFunction = std::function<void(Object const& object)>;
@@ -57,5 +59,7 @@ private:
     unsigned int m_size;
     NodeUniquePointer m_first;
 };
+
+}
 
 }

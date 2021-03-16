@@ -9,9 +9,11 @@ using namespace std;
 namespace alba
 {
 
-namespace CommonTestsWithBaseUnionFind
+namespace algorithm
 {
 
+namespace CommonTestsWithBaseUnionFind
+{
 void performIsConnectedTest(BaseUnionFindForUnsignedInt & unionFind)
 {
     EXPECT_FALSE(unionFind.isConnected(1, 2));
@@ -62,6 +64,8 @@ void performConnectTestWithExample1(BaseUnionFindForUnsignedInt & unionFind)
     EXPECT_FALSE(unionFind.isConnected(4,1));
     EXPECT_FALSE(unionFind.isConnected(4,0));
     EXPECT_TRUE(unionFind.isConnected(5,6));
+}
+
 }
 
 }

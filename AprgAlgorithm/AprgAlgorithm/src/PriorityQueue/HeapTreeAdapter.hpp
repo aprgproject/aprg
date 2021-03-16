@@ -5,10 +5,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Objects, unsigned int NUMBER_OF_CHILDREN, template<class> class ComparisonTemplateType>
 class HeapTreeAdapter
-{
-public:
+{public:
     using Object = typename Objects::value_type;
     using ComparisonClass=ComparisonTemplateType<Object>;
 
@@ -85,5 +87,7 @@ private:
     ComparisonClass m_comparisonObject;
     Objects & m_objects;
 };
+
+}
 
 }

@@ -5,10 +5,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Key, typename Value>
 class BaseSymbolTable
-{
-public:
+{public:
     using Keys = std::vector<Key>;
 
     virtual ~BaseSymbolTable()
@@ -36,5 +38,7 @@ public:
     virtual Keys getKeys() const = 0; // get all keys in sorted order
     virtual Keys getKeysInRangeInclusive(Key const& low, Key const& high) const = 0; // get all keys that fall in range in sorted order
 };
+
+}
 
 }

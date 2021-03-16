@@ -3,10 +3,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Object>
 class BaseQueue
-{
-public:
+{public:
     virtual ~BaseQueue()
     {}
 
@@ -15,5 +17,7 @@ public:
     virtual void enqueue(Object const& object) = 0; //Add item to the end of the list
     virtual Object dequeue() = 0; // Remove item from the beginning of the list
 };
+
+}
 
 }

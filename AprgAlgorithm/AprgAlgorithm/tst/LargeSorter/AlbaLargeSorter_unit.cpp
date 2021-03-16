@@ -19,10 +19,12 @@ using namespace std;
 namespace alba
 {
 
+namespace algorithm
+{
+
 class TestObject
 {
-public:
-    TestObject()
+public:    TestObject()
         : m_valueInteger{}
         , m_valueDouble{}
         , m_valueCharacter{}
@@ -607,6 +609,8 @@ TEST(AlbaLargeSorterTest, DISABLED_FileStreamAreLimitedByMaximumFileStreams)
         EXPECT_EQ(expectedValue++, actualValue);
     });
     EXPECT_EQ(1000, expectedValue);
+}
+
 }
 
 }

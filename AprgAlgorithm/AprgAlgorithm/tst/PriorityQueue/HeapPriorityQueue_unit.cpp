@@ -7,10 +7,12 @@ using namespace std;
 namespace alba
 {
 
+namespace algorithm
+{
+
 namespace
 {
-using AdapterForTest = HeapPriorityQueue<char, std::less>;
-}
+using AdapterForTest = HeapPriorityQueue<char, std::less>;}
 
 TEST(HeapPriorityQueueTest, IsEmptyWorks)
 {
@@ -120,6 +122,8 @@ TEST(HeapPriorityQueueTest, DeleteAndGetMaxWorksOnExample2)
     AdapterForTest::Objects const objectsToExpect
     {'S', 'P', 'R', 'N', 'H', 'O', 'A', 'E', 'I', 'G'};
     EXPECT_EQ(objectsToExpect, objectsToVerify);
+}
+
 }
 
 }

@@ -3,10 +3,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Object>
 class BaseUnionFind
-{
-public:
+{public:
     virtual ~BaseUnionFind()
     {}
 
@@ -14,5 +16,7 @@ public:
     virtual Object getRoot(Object const& object) const = 0;
     virtual void connect(Object const& object1, Object const& object2) = 0;
 };
+
+}
 
 }

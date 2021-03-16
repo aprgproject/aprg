@@ -8,10 +8,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Object>
 class DoublingSizeStack : public BaseStack<Object>
-{
-public:
+{public:
 
     DoublingSizeStack()
         : m_stackSize(0)
@@ -107,5 +109,7 @@ private:
     unsigned int m_containerSize;
     Object* m_objects;
 };
+
+}
 
 }
