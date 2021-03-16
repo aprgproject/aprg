@@ -4,11 +4,10 @@
 #include <Algorithm/LargeSorter/AlbaLargeSorterTypes.hpp>
 #include <Algorithm/LargeSorter/DataBlockCache.hpp>
 #include <Algorithm/LargeSorter/DataBlocks.hpp>
-#include <PathHandlers/AlbaLocalPathHandler.hpp>
+#include <Common/PathHandlers/AlbaLocalPathHandler.hpp>
 
 #include <functional>
 #include <numeric>
-
 namespace alba
 {
 

@@ -1,9 +1,8 @@
 #include <Algorithm/LargeSorter/AlbaLargeSorter.hpp>
-#include <PathHandlers/AlbaPathHandler.hpp>
-#include <Time/AlbaLocalTimeHelper.hpp>
+#include <Common/PathHandlers/AlbaPathHandler.hpp>
+#include <Common/Time/AlbaLocalTimeHelper.hpp>
 
 #include <gtest/gtest.h>
-
 #include <algorithm>
 #include <iostream>
 #include <random>

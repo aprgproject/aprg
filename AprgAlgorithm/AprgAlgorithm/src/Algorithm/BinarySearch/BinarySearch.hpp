@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Math/AlbaMathHelper.hpp>
+#include <Common/Math/AlbaMathHelper.hpp>
 
 #include <algorithm>
 #include <vector>
-
 namespace alba
 {
 
