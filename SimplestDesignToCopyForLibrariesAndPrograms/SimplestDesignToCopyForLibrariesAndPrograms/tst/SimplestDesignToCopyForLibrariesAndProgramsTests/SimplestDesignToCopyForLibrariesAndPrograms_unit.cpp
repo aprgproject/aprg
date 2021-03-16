@@ -1,4 +1,4 @@
-#include <SimplestDesignToCopyForLibrariesAndPrograms.hpp>
+#include <SimplestDesignToCopyForLibrariesAndPrograms/SimplestDesignToCopyForLibrariesAndPrograms.hpp>
 
 #include <gtest/gtest.h>
 
