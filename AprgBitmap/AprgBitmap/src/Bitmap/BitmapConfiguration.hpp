@@ -1,11 +1,10 @@
 #pragma once
 
 #include <Bitmap/CommonTypes.hpp>
-#include <File/AlbaFileReader.hpp>
+#include <Common/File/AlbaFileReader.hpp>
 
 #include <cstdint>
 #include <string>
-
 namespace alba
 {
 
