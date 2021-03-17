@@ -1,7 +1,7 @@
-#include <Audio/AudioManipulator.hpp>
-#include <Audio/NewSamplesBuilder.hpp>
-#include <Audio/Utilities.hpp>
-#include <Math/AlbaMathHelper.hpp>
+#include <AudioManipulator/AudioManipulator.hpp>
+#include <AudioManipulator/NewSamplesBuilder.hpp>
+#include <AudioManipulator/Utilities.hpp>
+#include <Common/Math/AlbaMathHelper.hpp>
 
 #include <gtest/gtest.h>
 
@@ -16,7 +16,7 @@ namespace alba
 namespace AprgAudio
 {
 
-TEST(UtilitiesTest, DISABLED_RetrieveDeltasWorks)
+TEST(UtilitiesTest, RetrieveDeltasWorks)
 {
     AlbaLocalPathHandler audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
     AlbaLocalPathHandler audioFilePathHandler(audioDirectoryPathHandler.getDirectory()+"AChannel_AOpeningSong_001.wav");
@@ -92,7 +92,7 @@ TEST(UtilitiesTest, DISABLED_SearchAndTryToReplicateWorks)
                 true);
 }
 
-TEST(UtilitiesTest, SearchAndTryToReplicateTwoFilesWorks)
+TEST(UtilitiesTest, DISABLED_SearchAndTryToReplicateTwoFilesWorks)
 {
     AlbaLocalPathHandler audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
     AlbaLocalPathHandler audioToReplicateFilePathHandler(audioDirectoryPathHandler.getDirectory()+"John Mayer-Neon.wav");

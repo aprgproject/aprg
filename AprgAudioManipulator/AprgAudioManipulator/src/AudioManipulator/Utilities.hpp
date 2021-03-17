@@ -1,9 +1,9 @@
 #pragma once
 
 #include <Audio/Audio.hpp>
-#include <Audio/AudioManipulator.hpp>
-#include <Audio/CommonTypes.hpp>
-#include <Audio/NewSamplesBuilder.hpp>
+#include <AudioManipulator/AudioManipulator.hpp>
+#include <AudioManipulator/CommonTypes.hpp>
+#include <AudioManipulator/NewSamplesBuilder.hpp>
 
 namespace alba
 {

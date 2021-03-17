@@ -1,4 +1,4 @@
-#include <Audio/AudioManipulator.hpp>
+#include <AudioManipulator/AudioManipulator.hpp>
 
 #include <gtest/gtest.h>
 

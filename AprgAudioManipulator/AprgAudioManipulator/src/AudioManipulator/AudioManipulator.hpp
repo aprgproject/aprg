@@ -1,8 +1,8 @@
 #pragma once
 
 #include <Audio/Audio.hpp>
-#include <Audio/CommonTypes.hpp>
-#include <PathHandlers/AlbaLocalPathHandler.hpp>
+#include <AudioManipulator/CommonTypes.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 namespace alba
 {
