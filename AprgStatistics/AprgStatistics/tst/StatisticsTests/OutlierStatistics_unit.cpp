@@ -1,4 +1,4 @@
-#include <OutlierStatistics.hpp>
+#include <Statistics/OutlierStatistics.hpp>
 
 #include <gtest/gtest.h>
 

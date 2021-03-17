@@ -1,4 +1,4 @@
-#include <TwoDimensionsStatistics.hpp>
+#include <Statistics/TwoDimensionsStatistics.hpp>
 
 #include <gtest/gtest.h>
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <DataStatistics.hpp>
-#include <Math/AlbaMathHelper.hpp>
+#include <Common/Math/AlbaMathHelper.hpp>
+#include <Statistics/DataStatistics.hpp>
 
 namespace alba
 {

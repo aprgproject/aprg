@@ -1,6 +1,6 @@
 #pragma once
 
-#include <DataSample.hpp>
+#include <Statistics/DataSample.hpp>
 
 #include <numeric>
 #include <vector>

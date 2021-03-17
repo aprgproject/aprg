@@ -1,4 +1,4 @@
-#include <OneDimensionsStatistics.hpp>
+#include <Statistics/OneDimensionsStatistics.hpp>
 
 #include <gtest/gtest.h>
 

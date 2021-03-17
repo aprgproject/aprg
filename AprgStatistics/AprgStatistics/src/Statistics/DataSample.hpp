@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Container/AlbaContainerHelper.hpp>
-#include <Math/AlbaMathHelper.hpp>
+#include <Common/Container/AlbaContainerHelper.hpp>
+#include <Common/Math/AlbaMathHelper.hpp>
 
 #include <algorithm>
 #include <array>
