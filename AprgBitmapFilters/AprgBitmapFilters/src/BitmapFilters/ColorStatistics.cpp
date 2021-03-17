@@ -3,11 +3,10 @@
 #include <Bitmap/Bitmap.hpp>
 #include <Bitmap/BitmapSnippet.hpp>
 #include <BitmapFilters/ColorUtilities.hpp>
-#include <PathHandlers/AlbaLocalPathHandler.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 using namespace alba::AprgBitmap::ColorUtilities;
 using namespace std;
-
 namespace alba
 {
 

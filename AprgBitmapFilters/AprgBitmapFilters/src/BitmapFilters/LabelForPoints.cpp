@@ -1,10 +1,9 @@
 #include "LabelForPoints.hpp"
 
 #include <BitmapFilters/ColorUtilities.hpp>
-#include <Math/AlbaMathHelper.hpp>
+#include <Common/Math/AlbaMathHelper.hpp>
 
 #include <cmath>
-
 using namespace alba::AprgBitmap::ColorUtilities;
 
 namespace alba

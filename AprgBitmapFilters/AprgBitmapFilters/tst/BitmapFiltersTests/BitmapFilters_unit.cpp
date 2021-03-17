@@ -1,6 +1,6 @@
 #include <BitmapFilters/AnimizeColor.hpp>
 #include <BitmapFilters/BitmapFilters.hpp>
-#include <PathHandlers/AlbaLocalPathHandler.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <gtest/gtest.h>
 

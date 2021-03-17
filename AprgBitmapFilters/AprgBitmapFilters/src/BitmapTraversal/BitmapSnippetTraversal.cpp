@@ -1,10 +1,9 @@
 #include "BitmapSnippetTraversal.hpp"
 
 #include <BitmapFilters/Utilities.hpp>
-#include <Math/AlbaMathHelper.hpp>
+#include <Common/Math/AlbaMathHelper.hpp>
 
 using namespace alba::TwoDimensions;
-
 namespace alba
 {
 

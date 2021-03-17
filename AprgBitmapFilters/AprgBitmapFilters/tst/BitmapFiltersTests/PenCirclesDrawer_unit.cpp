@@ -1,6 +1,6 @@
 #include <BitmapFilters/BitmapFilters.hpp>
 #include <BitmapFilters/PenCirclesDrawer.hpp>
-#include <PathHandlers/AlbaLocalPathHandler.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <gtest/gtest.h>
 

@@ -1,11 +1,10 @@
 #include "ColorUtilities.hpp"
 
-#include <Bit/AlbaBitManipulation.hpp>
-#include <Math/AlbaMathHelper.hpp>
+#include <Common/Bit/AlbaBitManipulation.hpp>
+#include <Common/Math/AlbaMathHelper.hpp>
 
 #include <algorithm>
-#include <cmath>
-#include <cstdint>
+#include <cmath>#include <cstdint>
 
 using namespace alba::mathHelper;
 using namespace std;

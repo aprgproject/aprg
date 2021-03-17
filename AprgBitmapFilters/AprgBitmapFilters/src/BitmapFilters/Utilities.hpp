@@ -3,11 +3,10 @@
 #include <Bitmap/CommonTypes.hpp>
 #include <BitmapFilters/AnimizeColor.hpp>
 #include <BitmapFilters/PenCircles.hpp>
-#include <TwoDimensions/Point.hpp>
+#include <Geometry/TwoDimensions/Point.hpp>
 
 namespace alba
 {
-
 namespace AprgBitmap
 {
 

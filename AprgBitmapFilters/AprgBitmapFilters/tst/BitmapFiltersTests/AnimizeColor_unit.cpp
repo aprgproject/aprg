@@ -1,5 +1,5 @@
-#include <BitmapFilters/ColorStatistics.hpp>
-#include <PathHandlers/AlbaLocalPathHandler.hpp>
+#include <BitmapFilters/AnimizeColor.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <gtest/gtest.h>
 
@@ -13,11 +13,11 @@ namespace alba
 namespace AprgBitmap
 {
 
-TEST(ColorStatisticsTest, DISABLED_GatherAndSaveStatistics)
+TEST(AnimizeColorTest, DISABLED_GatherAndSaveStatistics)
 {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
 
-    gatherAndSaveColorStatistics(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\JohnMayerDark.bmp)");
+    gatherAndSaveDataInAnimizeColor(bitmapDirectory.getDirectory()+R"(NonAnimeBitmaps\Foals.bmp)");
 }
 
 }

@@ -1,10 +1,9 @@
 #pragma once
 
-#include <DataStatistics.hpp>
+#include <Statistics/DataStatistics.hpp>
 
 #include <set>
 #include <string>
-
 namespace alba
 {
 

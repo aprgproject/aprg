@@ -1,11 +1,10 @@
 #pragma once
 
 #include <Bitmap/CommonTypes.hpp>
-#include <Optional/AlbaOptional.hpp>
+#include <Common/Optional/AlbaOptional.hpp>
 
 namespace alba
 {
-
 namespace AprgBitmap
 {
 
