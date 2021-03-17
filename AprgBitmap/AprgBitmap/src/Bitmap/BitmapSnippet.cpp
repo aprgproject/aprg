@@ -4,6 +4,7 @@
 #include <Common/Bit/AlbaBitManipulation.hpp>
 
 using namespace std;
+
 namespace alba
 {
 

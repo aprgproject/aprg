@@ -4,6 +4,7 @@
 #include <Common/Memory/AlbaMemoryBuffer.hpp>
 
 #include <vector>
+
 namespace alba
 {
 

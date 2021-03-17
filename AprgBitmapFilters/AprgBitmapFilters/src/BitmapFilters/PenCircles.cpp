@@ -3,6 +3,7 @@
 #include <Common/Math/AlbaMathHelper.hpp>
 
 using namespace alba::mathHelper;
+
 namespace alba
 {
 

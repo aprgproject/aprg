@@ -14,6 +14,7 @@ using namespace alba::AprgBitmap::ColorUtilities;
 using namespace alba::TwoDimensions;
 using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -231,7 +232,8 @@ void PenCirclesDrawer::putCircleConnectionsAndRemoveProcessedCircles()
                 AlbaAngle angle2(referenceAngle-deltaAngle);
                 Point tangentPoint1InCircle1(circle1.getPointAtAngle(angle1.getRadians()));
                 Point tangentPoint2InCircle1(circle1.getPointAtAngle(angle2.getRadians()));
-                Point tangentPoint1InCircle2(circle2.getPointAtAngle(angle1.getRadians()));                Point tangentPoint2InCircle2(circle2.getPointAtAngle(angle2.getRadians()));
+                Point tangentPoint1InCircle2(circle2.getPointAtAngle(angle1.getRadians()));
+                Point tangentPoint2InCircle2(circle2.getPointAtAngle(angle2.getRadians()));
                 Line diameterInCircle1(tangentPoint1InCircle1, tangentPoint2InCircle1);
                 Line diameterInCircle2(tangentPoint1InCircle2, tangentPoint2InCircle2);
                 Line lineOfTwoCenters(centerPoint1, centerPoint2);

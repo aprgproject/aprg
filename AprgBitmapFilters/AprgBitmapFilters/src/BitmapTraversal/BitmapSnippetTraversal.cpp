@@ -4,6 +4,7 @@
 #include <Common/Math/AlbaMathHelper.hpp>
 
 using namespace alba::TwoDimensions;
+
 namespace alba
 {
 

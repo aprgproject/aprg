@@ -3,6 +3,7 @@
 #include <Common/Time/AlbaLocalTimeHelper.hpp>
 
 #include <gtest/gtest.h>
+
 #include <algorithm>
 #include <iostream>
 #include <random>

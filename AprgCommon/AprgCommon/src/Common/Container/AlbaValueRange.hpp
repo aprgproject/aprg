@@ -12,7 +12,8 @@ namespace alba
 enum class AlbaValueRangeType
 {
     Unknown,
-    Once,    Forward,
+    Once,
+    Forward,
     Backward
 };
 
@@ -31,7 +32,8 @@ public:
     AlbaValueRange(DataType const startValue, DataType const endValue, DataType const intervalMagnitude)
         : m_startValue(startValue)
         , m_endValue(endValue)
-        , m_intervalMagnitude(mathHelper::getAbsoluteValue(intervalMagnitude))    {}
+        , m_intervalMagnitude(mathHelper::getAbsoluteValue(intervalMagnitude))
+    {}
 
     bool isEmpty() const
     {
@@ -72,6 +74,7 @@ public:
     {
         return getRangeTypeFromStartAndEnd(m_startValue, m_endValue);
     }
+
     DataType getInterval() const
     {
         return getIntervalWithSign(m_intervalMagnitude, getRangeType());
@@ -134,7 +137,8 @@ public:
             if(AlbaValueRangeType::Once == getRangeType())
             {
                 traverseOperation(m_startValue);
-            }            else
+            }
+            else
             {
                 TerminationCondition terminationCondition(getTerminationCondition());
                 DataType interval(getInterval());
@@ -171,7 +175,8 @@ private:
         case AlbaValueRangeType::Backward:
             terminationCondition = std::greater_equal<DataType>();
             break;
-        default:            terminationCondition = [](DataType,DataType)->bool
+        default:
+            terminationCondition = [](DataType,DataType)->bool
             {
                 return false;
             };
@@ -192,7 +197,8 @@ private:
         case AlbaValueRangeType::Backward:
             intervalWithSign = intervalMagnitude*-1;
             break;
-        default:            break;
+        default:
+            break;
         }
         return intervalWithSign;
     }
@@ -214,6 +220,7 @@ private:
         }
         return rangeType;
     }
+
     DataType m_startValue;
     DataType m_endValue;
     DataType m_intervalMagnitude;

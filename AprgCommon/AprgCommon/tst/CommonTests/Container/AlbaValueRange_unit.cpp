@@ -14,7 +14,8 @@ TEST(AlbaValueRangeTest, TraverseIsNotInfiniteWhenRangeIsEmpty)
     AlbaValueRange<int> range;
     vector<int> traversedValues;
     range.traverse([&](int const traverseValue)
-    {        traversedValues.emplace_back(traverseValue);
+    {
+        traversedValues.emplace_back(traverseValue);
     });
 
     EXPECT_TRUE(range.isEmpty());
@@ -36,7 +37,8 @@ TEST(AlbaValueRangeTest, OnceTraversalWorks)
     AlbaValueRange<int> range(3, 3, -1);
     vector<int> traversedValues;
     range.traverse([&](int const traverseValue)
-    {        traversedValues.emplace_back(traverseValue);
+    {
+        traversedValues.emplace_back(traverseValue);
     });
 
     EXPECT_FALSE(range.isEmpty());
@@ -60,7 +62,8 @@ TEST(AlbaValueRangeTest, ForwardTraversalWorks)
     AlbaValueRange<int> range(1, 10, -1);
     vector<int> traversedValues;
     range.traverse([&](int const traverseValue)
-    {        traversedValues.emplace_back(traverseValue);
+    {
+        traversedValues.emplace_back(traverseValue);
     });
 
     EXPECT_FALSE(range.isEmpty());
@@ -76,7 +79,8 @@ TEST(AlbaValueRangeTest, ForwardTraversalWorks)
     EXPECT_EQ(AlbaValueRangeType::Forward, range.getRangeType());
 
     ASSERT_EQ(10U, traversedValues.size());
-    EXPECT_EQ(1, traversedValues[0]);    EXPECT_EQ(2, traversedValues[1]);
+    EXPECT_EQ(1, traversedValues[0]);
+    EXPECT_EQ(2, traversedValues[1]);
     EXPECT_EQ(3, traversedValues[2]);
     EXPECT_EQ(4, traversedValues[3]);
     EXPECT_EQ(5, traversedValues[4]);
@@ -92,7 +96,8 @@ TEST(AlbaValueRangeTest, BackwardTraversalWorks)
     AlbaValueRange<int> range(5, -5, -1);
     vector<int> traversedValues;
     range.traverse([&](int const traverseValue)
-    {        traversedValues.emplace_back(traverseValue);
+    {
+        traversedValues.emplace_back(traverseValue);
     });
 
     EXPECT_FALSE(range.isEmpty());
@@ -108,7 +113,8 @@ TEST(AlbaValueRangeTest, BackwardTraversalWorks)
     EXPECT_EQ(AlbaValueRangeType::Backward, range.getRangeType());
 
     ASSERT_EQ(11U, traversedValues.size());
-    EXPECT_EQ(5, traversedValues[0]);    EXPECT_EQ(4, traversedValues[1]);
+    EXPECT_EQ(5, traversedValues[0]);
+    EXPECT_EQ(4, traversedValues[1]);
     EXPECT_EQ(3, traversedValues[2]);
     EXPECT_EQ(2, traversedValues[3]);
     EXPECT_EQ(1, traversedValues[4]);
@@ -125,7 +131,8 @@ TEST(AlbaValueRangeTest, RangeCanBeChangedAfterCreation)
     AlbaValueRange<int> range(1, 10, -1);
     range.setStartValue(5);
     range.setEndValue(-5);
-    vector<int> traversedValues;    range.traverse([&](int const traverseValue)
+    vector<int> traversedValues;
+    range.traverse([&](int const traverseValue)
     {
         traversedValues.emplace_back(traverseValue);
     });
@@ -143,7 +150,8 @@ TEST(AlbaValueRangeTest, RangeCanBeChangedAfterCreation)
     EXPECT_EQ(AlbaValueRangeType::Backward, range.getRangeType());
 
     ASSERT_EQ(11U, traversedValues.size());
-    EXPECT_EQ(5, traversedValues[0]);    EXPECT_EQ(4, traversedValues[1]);
+    EXPECT_EQ(5, traversedValues[0]);
+    EXPECT_EQ(4, traversedValues[1]);
     EXPECT_EQ(3, traversedValues[2]);
     EXPECT_EQ(2, traversedValues[3]);
     EXPECT_EQ(1, traversedValues[4]);
@@ -167,7 +175,8 @@ TEST(AlbaValueRangeTest, ValuesCanBeSet)
     AlbaValueRange<int> range;
     range.set(1, 10, -1);
     vector<int> traversedValues;
-    range.traverse([&](int const traverseValue)    {
+    range.traverse([&](int const traverseValue)
+    {
         traversedValues.emplace_back(traverseValue);
     });
 
@@ -184,7 +193,8 @@ TEST(AlbaValueRangeTest, ValuesCanBeSet)
     EXPECT_EQ(AlbaValueRangeType::Forward, range.getRangeType());
 
     ASSERT_EQ(10U, traversedValues.size());
-    EXPECT_EQ(1, traversedValues[0]);    EXPECT_EQ(2, traversedValues[1]);
+    EXPECT_EQ(1, traversedValues[0]);
+    EXPECT_EQ(2, traversedValues[1]);
     EXPECT_EQ(3, traversedValues[2]);
     EXPECT_EQ(4, traversedValues[3]);
     EXPECT_EQ(5, traversedValues[4]);

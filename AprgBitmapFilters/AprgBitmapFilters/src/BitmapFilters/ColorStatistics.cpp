@@ -7,6 +7,7 @@
 
 using namespace alba::AprgBitmap::ColorUtilities;
 using namespace std;
+
 namespace alba
 {
 
