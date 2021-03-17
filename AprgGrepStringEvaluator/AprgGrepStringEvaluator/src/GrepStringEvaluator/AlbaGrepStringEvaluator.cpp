@@ -1,9 +1,8 @@
 #include "AlbaGrepStringEvaluator.hpp"
 
-#include <String/AlbaStringHelper.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>
-
 using namespace std;
 
 namespace alba
