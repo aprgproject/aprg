@@ -1,19 +1,19 @@
 #include <Audio/Audio.hpp>
-#include <Audio/ExpectedValues/aiff_stereo_16bit_44100.hpp>
-#include <Audio/ExpectedValues/aiff_stereo_16bit_48000.hpp>
-#include <Audio/ExpectedValues/aiff_stereo_24bit_44100.hpp>
-#include <Audio/ExpectedValues/aiff_stereo_24bit_48000.hpp>
-#include <Audio/ExpectedValues/aiff_stereo_8bit_44100.hpp>
-#include <Audio/ExpectedValues/aiff_stereo_8bit_48000.hpp>
-#include <Audio/ExpectedValues/wav_mono_16bit_44100.hpp>
-#include <Audio/ExpectedValues/wav_mono_16bit_48000.hpp>
-#include <Audio/ExpectedValues/wav_stereo_16bit_44100.hpp>
-#include <Audio/ExpectedValues/wav_stereo_16bit_48000.hpp>
-#include <Audio/ExpectedValues/wav_stereo_24bit_44100.hpp>
-#include <Audio/ExpectedValues/wav_stereo_24bit_48000.hpp>
-#include <Audio/ExpectedValues/wav_stereo_8bit_44100.hpp>
-#include <Audio/ExpectedValues/wav_stereo_8bit_48000.hpp>
-#include <Math/AlbaMathHelper.hpp>
+#include <AudioTests/ExpectedValues/aiff_stereo_16bit_44100.hpp>
+#include <AudioTests/ExpectedValues/aiff_stereo_16bit_48000.hpp>
+#include <AudioTests/ExpectedValues/aiff_stereo_24bit_44100.hpp>
+#include <AudioTests/ExpectedValues/aiff_stereo_24bit_48000.hpp>
+#include <AudioTests/ExpectedValues/aiff_stereo_8bit_44100.hpp>
+#include <AudioTests/ExpectedValues/aiff_stereo_8bit_48000.hpp>
+#include <AudioTests/ExpectedValues/wav_mono_16bit_44100.hpp>
+#include <AudioTests/ExpectedValues/wav_mono_16bit_48000.hpp>
+#include <AudioTests/ExpectedValues/wav_stereo_16bit_44100.hpp>
+#include <AudioTests/ExpectedValues/wav_stereo_16bit_48000.hpp>
+#include <AudioTests/ExpectedValues/wav_stereo_24bit_44100.hpp>
+#include <AudioTests/ExpectedValues/wav_stereo_24bit_48000.hpp>
+#include <AudioTests/ExpectedValues/wav_stereo_8bit_44100.hpp>
+#include <AudioTests/ExpectedValues/wav_stereo_8bit_48000.hpp>
+#include <Common/Math/AlbaMathHelper.hpp>
 
 #include <gtest/gtest.h>
 
@@ -31,7 +31,7 @@ namespace AprgAudio
 TEST(AiffLoadingTests, Stereo_8bit_44100)
 {
     Audio<double> audioFile;
-    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\Audio\ActualAudioFiles\aiff_stereo_8bit_44100.aif)");
+    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\AudioTests\ActualAudioFiles\aiff_stereo_8bit_44100.aif)");
 
     ASSERT_TRUE(isLoadingSuccessful);
     EXPECT_EQ(audioFile.getNumSamplesPerChannel(), aiff_stereo_8bit_44100::numSamplesPerChannel);
@@ -51,7 +51,7 @@ TEST(AiffLoadingTests, Stereo_8bit_44100)
 TEST(AiffLoadingTests, Stereo_16bit_44100)
 {
     Audio<double> audioFile;
-    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\Audio\ActualAudioFiles\aiff_stereo_16bit_44100.aif)");
+    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\AudioTests\ActualAudioFiles\aiff_stereo_16bit_44100.aif)");
 
     ASSERT_TRUE(isLoadingSuccessful);
     EXPECT_EQ(audioFile.getNumSamplesPerChannel(), aiff_stereo_16bit_44100::numSamplesPerChannel);
@@ -71,7 +71,7 @@ TEST(AiffLoadingTests, Stereo_16bit_44100)
 TEST(AiffLoadingTests, Stereo_24bit_44100)
 {
     Audio<double> audioFile;
-    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\Audio\ActualAudioFiles\aiff_stereo_24bit_44100.aif)");
+    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\AudioTests\ActualAudioFiles\aiff_stereo_24bit_44100.aif)");
 
     ASSERT_TRUE(isLoadingSuccessful);
     EXPECT_EQ(audioFile.getNumSamplesPerChannel(), aiff_stereo_24bit_44100::numSamplesPerChannel);
@@ -91,7 +91,7 @@ TEST(AiffLoadingTests, Stereo_24bit_44100)
 TEST(AiffLoadingTests, Stereo_8bit_48000)
 {
     Audio<double> audioFile;
-    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\Audio\ActualAudioFiles\aiff_stereo_8bit_48000.aif)");
+    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\AudioTests\ActualAudioFiles\aiff_stereo_8bit_48000.aif)");
 
     ASSERT_TRUE(isLoadingSuccessful);
     EXPECT_EQ(audioFile.getNumSamplesPerChannel(), aiff_stereo_8bit_48000::numSamplesPerChannel);
@@ -111,7 +111,7 @@ TEST(AiffLoadingTests, Stereo_8bit_48000)
 TEST(AiffLoadingTests, Stereo_16bit_48000)
 {
     Audio<double> audioFile;
-    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\Audio\ActualAudioFiles\aiff_stereo_16bit_48000.aif)");
+    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\AudioTests\ActualAudioFiles\aiff_stereo_16bit_48000.aif)");
 
     ASSERT_TRUE(isLoadingSuccessful);
     EXPECT_EQ(audioFile.getNumSamplesPerChannel(), aiff_stereo_16bit_48000::numSamplesPerChannel);
@@ -131,7 +131,7 @@ TEST(AiffLoadingTests, Stereo_16bit_48000)
 TEST(AiffLoadingTests, Stereo_24bit_48000)
 {
     Audio<double> audioFile;
-    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\Audio\ActualAudioFiles\aiff_stereo_24bit_48000.aif)");
+    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\AudioTests\ActualAudioFiles\aiff_stereo_24bit_48000.aif)");
 
     ASSERT_TRUE(isLoadingSuccessful);
     EXPECT_EQ(audioFile.getNumSamplesPerChannel(), aiff_stereo_24bit_48000::numSamplesPerChannel);
@@ -152,7 +152,7 @@ TEST(WritingTest, WriteFromCopiedSampleBuffer)
 {
     Audio<float> audioFile1, audioFile2;
 
-    bool isLoadingSuccessful = audioFile1.load (APRG_AUDIO_DIR R"(\tst\Audio\ActualAudioFiles\wav_stereo_16bit_44100.wav)");
+    bool isLoadingSuccessful = audioFile1.load (APRG_AUDIO_DIR R"(\tst\AudioTests\ActualAudioFiles\wav_stereo_16bit_44100.wav)");
     ASSERT_TRUE(isLoadingSuccessful);
 
     audioFile2.setAudioBuffer (audioFile1.samples);
@@ -162,7 +162,7 @@ TEST(WritingTest, WriteFromCopiedSampleBuffer)
 TEST(WavLoadingTests, Stereo_8bit_44100)
 {
     Audio<double> audioFile;
-    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\Audio\ActualAudioFiles\wav_stereo_8bit_44100.wav)");
+    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\AudioTests\ActualAudioFiles\wav_stereo_8bit_44100.wav)");
 
     ASSERT_TRUE(isLoadingSuccessful);
     EXPECT_EQ(audioFile.getNumSamplesPerChannel(), wav_stereo_8bit_44100::numSamplesPerChannel);
@@ -182,7 +182,7 @@ TEST(WavLoadingTests, Stereo_8bit_44100)
 TEST(WavLoadingTests, Stereo_16bit_44100)
 {
     Audio<double> audioFile;
-    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\Audio\ActualAudioFiles\wav_stereo_16bit_44100.wav)");
+    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\AudioTests\ActualAudioFiles\wav_stereo_16bit_44100.wav)");
 
     ASSERT_TRUE(isLoadingSuccessful);
     EXPECT_EQ(audioFile.getNumSamplesPerChannel(), wav_stereo_16bit_44100::numSamplesPerChannel);
@@ -202,7 +202,7 @@ TEST(WavLoadingTests, Stereo_16bit_44100)
 TEST(WavLoadingTests, Stereo_24bit_44100)
 {
     Audio<double> audioFile;
-    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\Audio\ActualAudioFiles\wav_stereo_24bit_44100.wav)");
+    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\AudioTests\ActualAudioFiles\wav_stereo_24bit_44100.wav)");
 
     ASSERT_TRUE(isLoadingSuccessful);
     EXPECT_EQ(audioFile.getNumSamplesPerChannel(), wav_stereo_24bit_44100::numSamplesPerChannel);
@@ -222,7 +222,7 @@ TEST(WavLoadingTests, Stereo_24bit_44100)
 TEST(WavLoadingTests, Mono_16bit_44100)
 {
     Audio<double> audioFile;
-    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\Audio\ActualAudioFiles\wav_mono_16bit_44100.wav)");
+    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\AudioTests\ActualAudioFiles\wav_mono_16bit_44100.wav)");
 
     ASSERT_TRUE(isLoadingSuccessful);
     EXPECT_EQ(audioFile.getNumSamplesPerChannel(), wav_mono_16bit_44100::numSamplesPerChannel);
@@ -242,7 +242,7 @@ TEST(WavLoadingTests, Mono_16bit_44100)
 TEST(WavLoadingTests, Stereo_8bit_48000)
 {
     Audio<double> audioFile;
-    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\Audio\ActualAudioFiles\wav_stereo_8bit_48000.wav)");
+    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\AudioTests\ActualAudioFiles\wav_stereo_8bit_48000.wav)");
 
     ASSERT_TRUE(isLoadingSuccessful);
     EXPECT_EQ(audioFile.getNumSamplesPerChannel(), wav_stereo_8bit_48000::numSamplesPerChannel);
@@ -262,7 +262,7 @@ TEST(WavLoadingTests, Stereo_8bit_48000)
 TEST(WavLoadingTests, Stereo_16bit_48000)
 {
     Audio<double> audioFile;
-    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\Audio\ActualAudioFiles\wav_stereo_16bit_48000.wav)");
+    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\AudioTests\ActualAudioFiles\wav_stereo_16bit_48000.wav)");
 
     ASSERT_TRUE(isLoadingSuccessful);
     EXPECT_EQ(audioFile.getNumSamplesPerChannel(), wav_stereo_16bit_48000::numSamplesPerChannel);
@@ -282,7 +282,7 @@ TEST(WavLoadingTests, Stereo_16bit_48000)
 TEST(WavLoadingTests, Stereo_24bit_48000)
 {
     Audio<double> audioFile;
-    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\Audio\ActualAudioFiles\wav_stereo_24bit_48000.wav)");
+    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\AudioTests\ActualAudioFiles\wav_stereo_24bit_48000.wav)");
 
     ASSERT_TRUE(isLoadingSuccessful);
     EXPECT_EQ(audioFile.getNumSamplesPerChannel(), wav_stereo_24bit_48000::numSamplesPerChannel);
@@ -302,7 +302,7 @@ TEST(WavLoadingTests, Stereo_24bit_48000)
 TEST(WavLoadingTests, Mono_16bit_48000)
 {
     Audio<double> audioFile;
-    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\Audio\ActualAudioFiles\wav_mono_16bit_48000.wav)");
+    bool isLoadingSuccessful = audioFile.load(APRG_AUDIO_DIR R"(\tst\AudioTests\ActualAudioFiles\wav_mono_16bit_48000.wav)");
 
     ASSERT_TRUE(isLoadingSuccessful);
     EXPECT_EQ(audioFile.getNumSamplesPerChannel(), wav_mono_16bit_48000::numSamplesPerChannel);
@@ -344,12 +344,12 @@ bool writeTest(int numChannels, int sampleRate, int bitDepth, AudioFormat format
 
     if (format == AudioFormat::Wave)
     {
-        return audioFile.save (APRG_AUDIO_DIR R"(\tst\Audio\WrittenAudioFiles\)" + numChannelsAsString + "_" + sampleRateAsString + "_" + bitDepthAsString + "bit" + ".wav");
+        return audioFile.save (APRG_AUDIO_DIR R"(\tst\AudioTests\WrittenAudioFiles\)" + numChannelsAsString + "_" + sampleRateAsString + "_" + bitDepthAsString + "bit" + ".wav");
     }
 
     else if (format == AudioFormat::Aiff)
     {
-        return audioFile.save (APRG_AUDIO_DIR R"(\tst\Audio\WrittenAudioFiles\)" + numChannelsAsString + "_" + sampleRateAsString + "_" + bitDepthAsString + "bit" + ".aif");
+        return audioFile.save (APRG_AUDIO_DIR R"(\tst\AudioTests\WrittenAudioFiles\)" + numChannelsAsString + "_" + sampleRateAsString + "_" + bitDepthAsString + "bit" + ".aif");
     }
 
     return false;
