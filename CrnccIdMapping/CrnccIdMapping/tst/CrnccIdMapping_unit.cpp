@@ -1,8 +1,7 @@
+#include <Common/Randomizer/AlbaRandomizer.hpp>
 #include <CrnccIdMapping.hpp>
-#include <Randomizer/AlbaRandomizer.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
