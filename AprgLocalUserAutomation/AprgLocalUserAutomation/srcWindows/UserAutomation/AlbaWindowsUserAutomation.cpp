@@ -1,7 +1,7 @@
 #include "AlbaWindowsUserAutomation.hpp"
 
-#include <String/AlbaStringHelper.hpp>
-#include <Windows/AlbaWindowsHelper.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
+#include <Common/Windows/AlbaWindowsHelper.hpp>
 
 #include <windows.h>
 

@@ -1,4 +1,4 @@
-#include <AlbaWindowsUserAutomation.hpp>
+#include <UserAutomation/AlbaWindowsUserAutomation.hpp>
 
 #include <gtest/gtest.h>
 #include <windows.h>

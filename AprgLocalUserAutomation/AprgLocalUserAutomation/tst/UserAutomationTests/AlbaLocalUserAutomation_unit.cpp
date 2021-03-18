@@ -1,4 +1,4 @@
-#include <AlbaLocalUserAutomation.hpp>
+#include <UserAutomation/AlbaLocalUserAutomation.hpp>
 
 #include <gtest/gtest.h>
 
@@ -9,7 +9,7 @@ namespace alba
 
 TEST(AlbaLocalUserAutomation, DISABLED_SampleTest1)
 {
-    AlbaLocalUserAutomation entity;
+    AlbaLocalUserAutomation();
     // its better to test non OS specific behavior here
 }
 

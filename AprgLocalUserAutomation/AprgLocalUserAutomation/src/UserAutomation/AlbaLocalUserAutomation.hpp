@@ -1,11 +1,11 @@
 #pragma once
 
 #ifdef OS_WINDOWS
-#include <AlbaWindowsUserAutomation.hpp>
+#include <UserAutomation/AlbaWindowsUserAutomation.hpp>
 #endif
 
 #ifdef OS_LINUX
-#include <AlbaLinuxUserAutomation.hpp>
+#include <UserAutomation/AlbaLinuxUserAutomation.hpp>
 #endif
 
 #if !defined(OS_WINDOWS) && !defined(OS_LINUX)
