@@ -1,10 +1,9 @@
 #include "TopLogAnalyzer.hpp"
 
-#include <File/AlbaFileReader.hpp>
-#include <PathHandlers/AlbaLocalPathHandler.hpp>
+#include <Common/File/AlbaFileReader.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <algorithm>
-
 using namespace std;
 
 namespace alba

@@ -1,12 +1,11 @@
 #pragma once
 
-#include <DataCollection.hpp>
-#include <String/AlbaStringHelper.hpp>
-#include <Time/AlbaDateTime.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
+#include <Common/Time/AlbaDateTime.hpp>
+#include <Statistics/DataCollection.hpp>
 
 #include <map>
-#include <string>
-#include <vector>
+#include <string>#include <vector>
 
 namespace alba
 {

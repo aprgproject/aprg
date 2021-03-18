@@ -1,9 +1,8 @@
 #pragma once
 
-#include <Optional/AlbaOptional.hpp>
+#include <Common/Optional/AlbaOptional.hpp>
 
 #include <string>
-
 namespace alba
 {
 
