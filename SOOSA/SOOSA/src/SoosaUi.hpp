@@ -1,10 +1,9 @@
 #pragma once
 
+#include <Common/User/AlbaUserInterface.hpp>
 #include <SoosaConfiguration.hpp>
-#include <User/AlbaUserInterface.hpp>
 
 #include <string>
-
 namespace alba
 {
 
