@@ -1,7 +1,8 @@
 #include <Common/String/AlbaStringHelper.hpp>
 #include <WebCrawler/WebCrawler.hpp>
 
-using namespace alba::stringHelper;using namespace std;
+using namespace alba::stringHelper;
+using namespace std;
 
 namespace aprgWebCrawler
 {

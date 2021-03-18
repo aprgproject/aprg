@@ -3,6 +3,7 @@
 #include <UserAutomation/AlbaWindowsUserAutomation.hpp>
 
 #include <string>
+
 namespace aprgWebCrawler
 {
 

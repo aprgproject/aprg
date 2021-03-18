@@ -6,6 +6,7 @@
 
 namespace DesignDocumentCreator
 {
+
 template<MessageName messageName, typename DynamicPartSackType>
 class SpecificDynamicPolymorphicMessage : public Message
 {

@@ -5,6 +5,7 @@
 #include <Common/Messages/MessageWrapper.hpp>
 
 #include <vector>
+
 namespace DesignDocumentCreator
 {
 

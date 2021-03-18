@@ -3,6 +3,7 @@
 #include <Common/Bit/AlbaBitManipulation.hpp>
 
 using BitManipulator = alba::AlbaBitManipulation<alba::u32>;
+
 namespace alba
 {
 /*

@@ -2,7 +2,8 @@
 #include <Common/String/AlbaStringHelper.hpp>
 #include <WebCrawler/WebCrawler.hpp>
 
-#include <deque>#include <fstream>
+#include <deque>
+#include <fstream>
 #include <iostream>
 #include <unordered_set>
 
@@ -15,6 +16,7 @@ using alba::stringHelper::isStringFoundInsideTheOtherStringCaseSensitive;
 /*
 namespace aprgWebCrawler
 {
+
 void WebCrawler::saveImageListFromGoogleImages()
 {
     AlbaLocalPathHandler downloadPathHandler(m_downloadDirectoryPathHandler.getDirectory() + R"(\temp.html)");

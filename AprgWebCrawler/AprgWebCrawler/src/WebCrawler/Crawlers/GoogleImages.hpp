@@ -5,6 +5,7 @@
 #include <WebCrawler/CrawlConfiguration/CrawlConfiguration.hpp>
 #include <WebCrawler/CrawlHelpers/AutomatedFirefoxBrowser.hpp>
 #include <WebCrawler/WebCrawler.hpp>
+
 #include <string>
 
 namespace aprgWebCrawler

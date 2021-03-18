@@ -4,6 +4,7 @@
 #include <ProgressCounters.hpp>
 
 #include <QApplication>
+
 #include <iostream>
 
 using namespace std;

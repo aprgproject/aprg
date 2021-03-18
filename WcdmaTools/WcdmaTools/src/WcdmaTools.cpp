@@ -5,7 +5,8 @@
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <QFileDialog>
-#include <QMessageBox>#include <QPixmap>
+#include <QMessageBox>
+#include <QPixmap>
 
 using namespace alba;
 using namespace std;

@@ -4,6 +4,7 @@
 
 namespace alba
 {
+
 class FileDestructor
 {
 public:
