@@ -1,11 +1,10 @@
 #pragma once
 
-#include <PathHandlers/AlbaLocalPathHandler.hpp>
-#include <PathHandlers/AlbaWebPathHandler.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+#include <Common/PathHandler/AlbaWebPathHandler.hpp>
 #include <WebCrawler/CrawlMode.hpp>
 
-namespace aprgWebCrawler
-{
+namespace aprgWebCrawler{
 
 namespace Downloaders
 {

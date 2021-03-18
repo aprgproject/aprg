@@ -1,9 +1,8 @@
 #pragma once
 
-#include <User/AlbaWindowsUserAutomation.hpp>
+#include <UserAutomation/AlbaWindowsUserAutomation.hpp>
 
 #include <string>
-
 namespace aprgWebCrawler
 {
 

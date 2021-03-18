@@ -1,8 +1,7 @@
-#include <File/AlbaFileReader.hpp>
-#include <String/AlbaStringHelper.hpp>
+#include <Common/File/AlbaFileReader.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 #include <WebCrawler/CrawlConfiguration/CrawlConfiguration.hpp>
 #include <WebCrawler/WebCrawler.hpp>
-
 #include <fstream>
 #include <iostream>
 
@@ -10,9 +9,9 @@ using namespace alba;
 using namespace alba::stringHelper;
 using namespace std;
 
+/*
 namespace aprgWebCrawler
 {
-
 void WebCrawler::crawlForYoutube()
 {
     AlbaLocalPathHandler convertedYoutubeLinksPathHandler(m_downloadDirectoryPathHandler.getDirectory() + R"(\ConvertedYoutubeLinks.txt)");

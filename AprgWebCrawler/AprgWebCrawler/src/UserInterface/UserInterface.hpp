@@ -1,9 +1,8 @@
 #pragma once
 
-#include <User/AlbaUserInterface.hpp>
+#include <Common/User/AlbaUserInterface.hpp>
 #include <WebCrawler/CrawlMode.hpp>
 #include <WebCrawler/CrawlState.hpp>
-
 #include <string>
 #include <vector>
 

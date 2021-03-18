@@ -1,10 +1,9 @@
 #pragma once
 
-#include <PathHandlers/AlbaLocalPathHandler.hpp>
-#include <PathHandlers/AlbaWebPathHandler.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+#include <Common/PathHandler/AlbaWebPathHandler.hpp>
 #include <WebCrawler/CrawlMode.hpp>
 #include <WebCrawler/CrawlState.hpp>
-
 #include <deque>
 #include <fstream>
 #include <string>

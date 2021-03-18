@@ -1,8 +1,7 @@
-#include <File/AlbaFileReader.hpp>
-#include <String/AlbaStringHelper.hpp>
+#include <Common/File/AlbaFileReader.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 #include <WebCrawler/CrawlHelpers/Downloaders.hpp>
 #include <WebCrawler/Crawlers/Y8Crawler.hpp>
-
 #include <iostream>
 
 using namespace alba;
