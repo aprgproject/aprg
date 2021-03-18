@@ -2,6 +2,7 @@
 #include <SnapshotStatistics.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba

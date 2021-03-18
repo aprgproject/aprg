@@ -7,6 +7,7 @@
 #include <SackFileReader/SackFileReaderStateMachine.hpp>
 
 #include <fstream>
+
 using namespace alba::CommentStateMachineNamespace;
 using namespace alba::SackFileReaderStateMachineNamespace;
 using namespace alba::stringHelper;

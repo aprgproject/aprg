@@ -4,6 +4,7 @@
 #include <Common/File/AlbaFileParameterWriter.hpp>
 
 #include <algorithm>
+
 using namespace std;
 
 namespace alba
@@ -23,7 +24,8 @@ void Database::saveDatabaseToFile(string const& path)
     writer.writeSetData(messagesToGenerate);
 }
 
-void Database::loadDatabaseFromFile(string const& path){
+void Database::loadDatabaseFromFile(string const& path)
+{
     ifstream fileStream(path);
     AlbaFileParameterReader reader(fileStream);
     reader.readMapData(fileToPathMap);
@@ -36,7 +38,8 @@ void Database::loadDatabaseFromFile(string const& path){
     reader.readSetData(messagesToGenerate);
 }
 
-string Database::getFileFullPath(string const& fileName) const{
+string Database::getFileFullPath(string const& fileName) const
+{
     string result;
     if(fileToPathMap.find(fileName)!=fileToPathMap.cend())
     {

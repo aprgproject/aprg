@@ -10,7 +10,8 @@ namespace alba
 TEST(SackFileReaderTest, DISABLED_Constants)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\DOpenIUBCommonDefs.h)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\DOpenIUBCommonDefs.h)");
 
     ConstantDetails details(database.getConstantDetails("MAX_NR_OF_CODES"));
     EXPECT_EQ("3GPP 10 Nokia 2.", details.description);
@@ -24,7 +25,8 @@ TEST(SackFileReaderTest, DISABLED_Constants)
 TEST(SackFileReaderTest, DISABLED_DTechLogDef)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\DTechLogDef.h)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\DTechLogDef.h)");
 
     ConstantDetails details(database.getConstantDetails("MAX_FILENAME_SIZE"));
     EXPECT_EQ("", details.description);
@@ -38,7 +40,8 @@ TEST(SackFileReaderTest, DISABLED_DTechLogDef)
 TEST(SackFileReaderTest, DISABLED_IfAaSysComGw_Defs)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\IfAaSysComGw_Defs.h)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\IfAaSysComGw_Defs.h)");
 
     ConstantDetails details(database.getConstantDetails("AASYSCOM_GW_IP_ADDRESS_MAX_STR_LEN"));
     EXPECT_EQ("", details.description);
@@ -48,7 +51,8 @@ TEST(SackFileReaderTest, DISABLED_IfAaSysComGw_Defs)
 TEST(SackFileReaderTest, DISABLED_CommentInStructure)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\Oam_Tcom_TestModelService.h)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\Oam_Tcom_TestModelService.h)");
 
     ParameterDetails details(database.getStructureParameterDetails("STestModelSetupReqMsg", "numberOfHsPdsch"));
     EXPECT_EQ("numberOfHsPdsch", details.name);
@@ -66,7 +70,8 @@ TEST(SackFileReaderTest, DISABLED_CommentInStructure)
 TEST(SackFileReaderTest, DISABLED_MessageOamAtmSigFile)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\MessageId_OamAtm.sig)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\MessageId_OamAtm.sig)");
 
     EXPECT_EQ("SAtmHwConfigurationMsg", database.getMessageStructure("OAM_ATM_HW_CONFIGURATION_MSG"));
     EXPECT_EQ("STupcAalmanInternalConfigurationResp", database.getMessageStructure("OAM_ATM_TUPC_AALMAN_INTERNAL_CONFIGURATION_RESP_MSG"));
@@ -75,7 +80,8 @@ TEST(SackFileReaderTest, DISABLED_MessageOamAtmSigFile)
 TEST(SackFileReaderTest, DISABLED_MessageOamTcomFile)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\MessageId_OamTcom.sig)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\MessageId_OamTcom.sig)");
 
     EXPECT_EQ("SHwConfigurationMsg", database.getMessageStructure("TC_HW_CONFIGURATION_MSG"));
     EXPECT_EQ("SetCellParamResp", database.getMessageStructure("TC_SET_CELL_PARAM_RESP_MSG"));
@@ -84,7 +90,8 @@ TEST(SackFileReaderTest, DISABLED_MessageOamTcomFile)
 TEST(SackFileReaderTest, DISABLED_OamTupcStructures)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\Oam_Atm.h)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\Oam_Atm.h)");
 
     ParameterDetails details(database.getStructureParameterDetails("SAtmHwConfigurationMsg", "typeOfConfiguration"));
     EXPECT_EQ("typeOfConfiguration", details.name);
@@ -109,7 +116,8 @@ TEST(SackFileReaderTest, DISABLED_OamTupcStructures)
 TEST(SackFileReaderTest, DISABLED_OamTcomStructures)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\oam_tcom.h)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\oam_tcom.h)");
 
     ParameterDetails details(database.getStructureParameterDetails("SHwConfigurationMsg", "btsomTelecomServiceAddr"));
     EXPECT_EQ("btsomTelecomServiceAddr", details.name);
@@ -134,7 +142,8 @@ TEST(SackFileReaderTest, DISABLED_OamTcomStructures)
 TEST(SackFileReaderTest, DISABLED_SWamUnit)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\SWamUnit.h)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\SWamUnit.h)");
 
     ParameterDetails details(database.getStructureParameterDetails("SWamUnit", "logUnitAddr"));
     EXPECT_EQ("logUnitAddr", details.name);
@@ -152,7 +161,8 @@ TEST(SackFileReaderTest, DISABLED_SWamUnit)
 TEST(SackFileReaderTest, DISABLED_EHspaMapping)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\EHspaMapping.h)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\EHspaMapping.h)");
 
     EnumParameterDetails details(database.getEnumParameterDetails("EHspaMapping", "EHspaMapping_EmptyValue"));
     EXPECT_EQ("EHspaMapping_EmptyValue", details.name);
@@ -168,7 +178,8 @@ TEST(SackFileReaderTest, DISABLED_EHspaMapping)
 TEST(SackFileReaderTest, DISABLED_EControlUnitType)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\EControlUnitType.h)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\EControlUnitType.h)");
 
     EnumParameterDetails details(database.getEnumParameterDetails("EControlUnitType", "EControlUnitType_Fcm"));
     EXPECT_EQ("EControlUnitType_Fcm", details.name);
@@ -184,7 +195,8 @@ TEST(SackFileReaderTest, DISABLED_EControlUnitType)
 TEST(SackFileReaderTest, DISABLED_UConfigInfoElement)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\UConfigInfoElement.h)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\UConfigInfoElement.h)");
 
     ParameterDetails details(database.getUnionParameterDetails("UConfigInfoElement", "wamUnit"));
     EXPECT_EQ("wamUnit", details.name);
@@ -208,7 +220,8 @@ TEST(SackFileReaderTest, DISABLED_UConfigInfoElement)
 TEST(SackFileReaderTest, DISABLED_UIpMacAddress)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\UIpMacAddress.h)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\UIpMacAddress.h)");
 
     ParameterDetails details(database.getUnionParameterDetails("UIpMacAddress", "ipMacv4"));
     EXPECT_EQ("ipMacv4", details.name);
@@ -226,7 +239,8 @@ TEST(SackFileReaderTest, DISABLED_UIpMacAddress)
 TEST(SackFileReaderTest, DISABLED_URxAntennaBusParameters)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\URxAntennaBusParameters.h)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\URxAntennaBusParameters.h)");
 
     ParameterDetails details(database.getUnionParameterDetails("URxAntennaBusParameters", "paramsForRfBus"));
     EXPECT_EQ("paramsForRfBus", details.name);
@@ -244,7 +258,8 @@ TEST(SackFileReaderTest, DISABLED_URxAntennaBusParameters)
 TEST(SackFileReaderTest, DISABLED_TAichPower)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\TAichPower.h)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\TAichPower.h)");
 
     TypedefDetails details(database.getTypedefDetails("TAichPower"));
     EXPECT_EQ("TAichPower", details.name);
@@ -255,7 +270,8 @@ TEST(SackFileReaderTest, DISABLED_TAichPower)
 TEST(SackFileReaderTest, DISABLED_TSubrackNbr)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\TSubrackNbr.h)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\TSubrackNbr.h)");
 
     TypedefDetails details(database.getTypedefDetails("TSubrackNbr"));
     EXPECT_EQ("TSubrackNbr", details.name);
@@ -266,7 +282,8 @@ TEST(SackFileReaderTest, DISABLED_TSubrackNbr)
 TEST(SackFileReaderTest, DISABLED_TSubunits)
 {
     Database database;
-    SackFileReader sackFileReader(database);    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\TSubunits.h)");
+    SackFileReader sackFileReader(database);
+    sackFileReader.readFile(R"(C:\APRG\SackReader\SackReader\SampleFiles\TSubunits.h)");
 
     TypedefDetails details(database.getTypedefDetails("TSubunits"));
     EXPECT_EQ("TSubunits", details.name);

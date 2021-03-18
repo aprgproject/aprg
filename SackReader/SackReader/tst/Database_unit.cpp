@@ -21,7 +21,8 @@ TEST(DatabaseTest, InitialContentsAreEmpty)
 TEST(DatabaseTest, DISABLED_SaveAndLoadFile)
 {
     Database databaseToBeSaved;
-    databaseToBeSaved.fileToPathMap["ThisIsAFile"] = "ThisIsAMap";    databaseToBeSaved.constantNameToConstantDetailsMap["ConstantName"].name = "ConstantName";
+    databaseToBeSaved.fileToPathMap["ThisIsAFile"] = "ThisIsAMap";
+    databaseToBeSaved.constantNameToConstantDetailsMap["ConstantName"].name = "ConstantName";
     databaseToBeSaved.constantNameToConstantDetailsMap["ConstantName"].value = "ConstantValue";
     databaseToBeSaved.constantNameToConstantDetailsMap["ConstantName"].description = "ConstantDescription";
     databaseToBeSaved.constantNameToConstantDetailsMap["ConstantName"].descriptionFromUser = "ConstantDescriptionFromUser";

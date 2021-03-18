@@ -1,6 +1,7 @@
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <SOOSA.hpp>
 #include <SoosaConfiguration.hpp>
+
 #include <gtest/gtest.h>
 
 using namespace std;
