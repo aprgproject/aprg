@@ -1,10 +1,9 @@
 #pragma once
 
-#include <State/AlbaBaseStateMachine.hpp>
+#include <Common/State/AlbaBaseStateMachine.hpp>
 
 namespace alba
 {
-
 namespace CommentStateMachineNamespace
 {
 
