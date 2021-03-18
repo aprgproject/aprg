@@ -1,7 +1,7 @@
 #pragma once
 
-#include <BtsLogTime.hpp>
-#include <Optional/AlbaOptional.hpp>
+#include <Common/Optional/AlbaOptional.hpp>
+#include <WcdmaToolsBackend/BtsLogTime.hpp>
 
 #include <fstream>
 #include <map>
