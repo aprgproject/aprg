@@ -1,4 +1,4 @@
-#include <BitmapTraversal/OutwardSnakeLikeTraversal.hpp>
+#include <BitmapFilters/Traversal/OutwardSnakeLikeTraversal.hpp>
 
 #include <gtest/gtest.h>
 
