@@ -1,18 +1,14 @@
 #include "RagnarokOnline.hpp"
 
-#include <File/AlbaFileParameterReader.hpp>
-#include <File/AlbaFileParameterWriter.hpp>
-#include <File/AlbaFileReader.hpp>
-#include <PathHandlers/AlbaLocalPathHandler.hpp>
+#include <Common/File/AlbaFileParameterReader.hpp>
+#include <Common/File/AlbaFileParameterWriter.hpp>
+#include <Common/File/AlbaFileReader.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <sstream>
 
-
-#include <Debug/AlbaDebug.hpp>
-
 using namespace alba::stringHelper;
 using namespace std;
-
 namespace alba
 {
 
