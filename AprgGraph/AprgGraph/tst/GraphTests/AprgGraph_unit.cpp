@@ -1,7 +1,7 @@
 #include <Algebra/Equation/EquationUtilities.hpp>
 #include <Algebra/Term/Utilities/StringHelpers.hpp>
-#include <AprgGraph.hpp>
-#include <PathHandlers/AlbaLocalPathHandler.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+#include <Graph/AprgGraph.hpp>
 
 #include <gtest/gtest.h>
 
