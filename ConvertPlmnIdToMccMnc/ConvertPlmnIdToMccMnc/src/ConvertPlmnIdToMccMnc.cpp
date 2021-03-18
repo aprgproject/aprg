@@ -1,9 +1,8 @@
 #include "ConvertPlmnIdToMccMnc.hpp"
 
-#include <Bit/AlbaBitManipulation.hpp>
+#include <Common/Bit/AlbaBitManipulation.hpp>
 
 using BitManipulator = alba::AlbaBitManipulation<alba::u32>;
-
 namespace alba
 {
 /*
