@@ -22,11 +22,10 @@ endif()
 
 find_package(Subversion)
 if(SUBVERSION_FOUND)
-    Subversion_WC_INFO(${PROJECT_SOURCE_DIR} SvnProject)
+    Subversion_WC_INFO(${PROJECT_SOURCE_DIR} SvnProject IGNORE_SVN_FAILURE)
     message("Code revision is ${SvnProject_WC_REVISION}")
     set(COMMON_DEFINITIONS ${COMMON_DEFINITIONS} -DAPRG_CODE_REVISION="${SvnProject_WC_REVISION}")
 endif()
-
 if (TEST_MODE)
     set(COMMON_DEFINITIONS ${COMMON_DEFINITIONS} -DAPRG_TEST_MODE_ON)
 else()
