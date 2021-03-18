@@ -1,9 +1,8 @@
 #include "FileDestructor.hpp"
 
-#include <String/AlbaStringHelper.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <iostream>
-
 using namespace std;
 
 namespace alba
