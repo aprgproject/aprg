@@ -1,11 +1,10 @@
 #pragma once
 
-#include <BtsLogSorterConfiguration.hpp>
-#include <LargeSorter/AlbaLargeSorterConfiguration.hpp>
+#include <Algorithm/LargeSorter/AlbaLargeSorterConfiguration.hpp>
+#include <WcdmaToolsBackend/BtsLogSorterConfiguration.hpp>
 
 #include <string>
 #include <unordered_map>
-
 namespace wcdmaToolsGui
 {
 

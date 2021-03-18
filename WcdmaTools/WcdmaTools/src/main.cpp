@@ -1,10 +1,9 @@
 #include "WcdmaTools.h"
 
+#include <Common/String/AlbaStringHelper.hpp>
 #include <ProgressCounters.hpp>
-#include <String/AlbaStringHelper.hpp>
 
 #include <QApplication>
-
 #include <iostream>
 
 using namespace std;

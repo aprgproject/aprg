@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Optional/AlbaOptional.hpp>
+#include <Common/Optional/AlbaOptional.hpp>
 #include <WcdmaToolsConfiguration.hpp>
 
-#include <QMutex>
-#include <QThread>
+#include <QMutex>#include <QThread>
 #include <QWaitCondition>
 
 namespace wcdmaToolsGui
