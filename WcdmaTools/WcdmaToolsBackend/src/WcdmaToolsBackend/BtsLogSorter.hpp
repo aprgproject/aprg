@@ -1,10 +1,10 @@
 #pragma once
 
-#include <BtsLogPrint.hpp>
-#include <BtsLogSorterConfiguration.hpp>
-#include <BtsPrintReaderWithRollback.hpp>
+#include <Algorithm/LargeSorter/AlbaLargeSorter.hpp>
 #include <GrepStringEvaluator/AlbaGrepStringEvaluator.hpp>
-#include <LargeSorter/AlbaLargeSorter.hpp>
+#include <WcdmaToolsBackend/BtsLogPrint.hpp>
+#include <WcdmaToolsBackend/BtsLogSorterConfiguration.hpp>
+#include <WcdmaToolsBackend/BtsPrintReaderWithRollback.hpp>
 
 #include <fstream>
 #include <set>
@@ -49,8 +49,8 @@ private:
     alba::AlbaGrepStringEvaluator m_filterGrepEvaluator;
     std::string m_pathOfAllTempFiles;
     std::string m_pathOfCurrentTempFiles;
-    alba::AlbaLargeSorter<BtsLogPrint> m_sorterWithPcTime;
-    alba::AlbaLargeSorter<BtsLogPrint> m_sorterWithoutPcTime;
+    alba::algorithm::AlbaLargeSorter<BtsLogPrint> m_sorterWithPcTime;
+    alba::algorithm::AlbaLargeSorter<BtsLogPrint> m_sorterWithoutPcTime;
     std::string m_directoryOfLogsWithoutPcTime;
     std::string m_pathOfStartupLog;
     alba::AlbaOptional<std::ofstream> m_startupLogStreamOptional;

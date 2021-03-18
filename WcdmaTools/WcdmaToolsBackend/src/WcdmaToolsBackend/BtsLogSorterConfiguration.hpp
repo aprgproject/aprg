@@ -1,6 +1,6 @@
 #pragma once
 
-#include <LargeSorter/AlbaLargeSorterConfiguration.hpp>
+#include <Algorithm/LargeSorter/AlbaLargeSorterConfiguration.hpp>
 
 #include <string>
 
@@ -13,8 +13,8 @@ struct BtsLogSorterConfiguration
     std::string m_acceptedFilesGrepCondition;
     std::string m_filterGrepCondition;
     std::string m_pathOfTempFiles;
-    alba::AlbaLargeSorterConfiguration m_configurationWithPcTime;
-    alba::AlbaLargeSorterConfiguration m_configurationWithoutPcTime;
+    alba::algorithm::AlbaLargeSorterConfiguration m_configurationWithPcTime;
+    alba::algorithm::AlbaLargeSorterConfiguration m_configurationWithoutPcTime;
 };
 
 }
