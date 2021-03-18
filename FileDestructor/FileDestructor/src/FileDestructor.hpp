@@ -1,10 +1,9 @@
 #pragma once
 
-#include <PathHandlers/AlbaLocalPathHandler.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 namespace alba
 {
-
 class FileDestructor
 {
 public:
