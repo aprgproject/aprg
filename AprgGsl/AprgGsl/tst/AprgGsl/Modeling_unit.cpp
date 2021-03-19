@@ -1,8 +1,7 @@
 #include <AprgGsl/Modeling.hpp>
-#include <PathHandlers/AlbaLocalPathHandler.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 #define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_FILE1 APRG_DIR R"(AprgGsl\AprgGsl\tst\DataSets\DataSet1.csv)"
