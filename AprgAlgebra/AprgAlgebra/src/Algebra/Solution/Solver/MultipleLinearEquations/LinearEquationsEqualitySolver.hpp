@@ -14,11 +14,10 @@ namespace algebra
 class LinearEquationsEqualitySolver : public BaseSolver
 {
 public:
-    using NumberMatrix=AlbaMatrix<AlbaNumber>;
+    using NumberMatrix=matrix::AlbaMatrix<AlbaNumber>;
     LinearEquationsEqualitySolver();
 
-    MultipleVariableSolutionSet calculateSolutionAndReturnSolutionSet(Equations const& equations);
-    MultipleVariableSolutionSet calculateSolutionAndReturnSolutionSet(Polynomials const& polynomials);
+    MultipleVariableSolutionSet calculateSolutionAndReturnSolutionSet(Equations const& equations);    MultipleVariableSolutionSet calculateSolutionAndReturnSolutionSet(Polynomials const& polynomials);
 
 private:
     void calculateSolution(MultipleVariableSolutionSet & solutionSet, Equations const& equations);

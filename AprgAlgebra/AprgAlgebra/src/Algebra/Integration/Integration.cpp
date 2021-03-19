@@ -28,9 +28,9 @@ using namespace alba::algebra::Factorization;
 using namespace alba::algebra::Functions;
 using namespace alba::algebra::Simplification;
 using namespace alba::mathHelper;
+using namespace alba::matrix;
 using namespace alba::stringHelper;
 using namespace std;
-
 namespace alba
 {
 namespace algebra
@@ -1198,13 +1198,12 @@ void Integration::integrateUsingPartialFractionPolynomials(
                 AlbaMatrix<AlbaNumber> matrixForPartialFractions(newVariableNames.size()+1, exponents.size());
                 fillInMatrixForPartialFractions(matrixForPartialFractions, originalVariableName, newVariableNames, exponents, numerator, numeratorWithNewVariables);
 
-                matrixForPartialFractions.transformToReducedEchelonFormUsingGaussJordanReduction();
+                transformToReducedEchelonFormUsingGaussJordanReduction(matrixForPartialFractions);
 
-                if(matrixForPartialFractions.isReducedRowEchelonForm())
+                if(isReducedRowEchelonForm(matrixForPartialFractions))
                 {
                     integratePartialFractionsBasedOnSolvedMatrix(result, matrixForPartialFractions, newVariableNames, partialNumerators, partialDenominators);
-                }
-            }
+                }            }
         }
     }
 }
@@ -1372,11 +1371,10 @@ void Integration::integratePartialFractionsBasedOnSolvedMatrix(
 {
     SubstitutionOfVariablesToTerms substitution;
     VariableNamesSet::const_iterator it = newVariableNames.cbegin();
-    for(unsigned int i=0; i<solvedMatrix.getRows() && it!=newVariableNames.cend(); i++)
+    for(unsigned int i=0; i<solvedMatrix.getNumberOfRows() && it!=newVariableNames.cend(); i++)
     {
         substitution.putVariableWithTerm(*it, solvedMatrix.getEntry(newVariableNames.size(), i));
-        it++;
-    }
+        it++;    }
     Term partialResult;
     for(unsigned int i=0; i<partialNumerators.size(); i++)
     {
