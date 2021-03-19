@@ -10,6 +10,7 @@
 #include <BitmapFilters/Traversal/BitmapSnippetTraversal.hpp>
 #include <Geometry/TwoDimensions/Circle.hpp>
 #include <Geometry/TwoDimensions/Point.hpp>
+
 #include <deque>
 #include <functional>
 
