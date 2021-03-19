@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Common/Math/Matrix/AlbaMatrixUtilitiesHeader.hpp>
+#include <Common/Math/Matrix/AlbaMatrixUtilitiesHeaders.hpp>
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 
-#include <algorithm>
-#include <cassert>
+#include <algorithm>#include <cassert>
 
 namespace alba
 {
