@@ -37,11 +37,10 @@ public:
             unsigned int const numberOfRows)
         : m_numberOfColumns(numberOfColumns)
         , m_numberOfRows(numberOfRows)
-        , m_matrixData(numberOfColumns*numberOfRows, 0)
+        , m_matrixData(numberOfColumns*numberOfRows, DataType{})
     {}
 
-    AlbaMatrix(
-            unsigned int const numberOfColumns,
+    AlbaMatrix(            unsigned int const numberOfColumns,
             unsigned int const numberOfRows,
             MatrixData const& matrixData)
         : m_numberOfColumns(numberOfColumns)
@@ -109,11 +108,10 @@ public:
             unsigned int x=0;
             for(MatrixData const& columnOfSecondMatrix : columnsOfSecondMatrix)
             {
-                result.setEntry(x,y,multiplyEachItemAndGetSum(rowOfFirstMatrix, columnOfSecondMatrix));
+                result.setEntry(x, y, multiplyEachItemAndGetSum(rowOfFirstMatrix, columnOfSecondMatrix));
                 x++;
             }
-            y++;
-        }
+            y++;        }
         return result;
     }
 
@@ -145,19 +143,18 @@ public:
 
     std::string getString() const
     {
-        stringHelper::NumberToStringConverter converter;
         DisplayTable table;
         table.setBorders("-","|");
-        for(unsigned int y=0; y<m_numberOfRows; y++)
-        {
+        for(unsigned int y=0; y<m_numberOfRows; y++)        {
             table.addRow();
             for(unsigned int x=0; x<m_numberOfColumns; x++)
             {
-                table.getLastRow().addCell(converter.convert(getEntry(x, y)));
+                std::stringstream ss;
+                ss << getEntry(x, y);
+                table.getLastRow().addCell(ss.str());
             }
         }
-        std::string firstLine("Matrix output:\n");
-        return firstLine + table.drawOutput();
+        std::string firstLine("Matrix output:\n");        return firstLine + table.drawOutput();
     }
 
     void retrieveColumn(MatrixData & column, unsigned int const x) const
@@ -237,11 +234,10 @@ public:
         m_numberOfColumns = numberOfColumns;
         m_numberOfRows = numberOfRows;
         m_matrixData.clear();
-        m_matrixData.resize(numberOfColumns*numberOfRows, 0);
+        m_matrixData.resize(numberOfColumns*numberOfRows, DataType{});
     }
 
-    void negate()
-    {
+    void negate()    {
         for(DataType & value : m_matrixData)
         {
             value *= -1;
@@ -331,11 +327,10 @@ private:
 
     DataType multiplyEachItemAndGetSum(MatrixData const& first, MatrixData const& second) const
     {
-        DataType result(0);
+        DataType result{};
         unsigned int minSize = std::min(first.size(), second.size());
         for(unsigned int i=0; i<minSize; i++)
-        {
-            result+=first.at(i)*second.at(i);
+        {            result+=first.at(i)*second.at(i);
         }
         return result;
     }
@@ -349,10 +344,9 @@ private:
         {
             unsigned int originalSize = m_matrixData.size();
             m_matrixData.resize(targetSize);
-            std::fill(m_matrixData.begin()+originalSize, m_matrixData.end(), 0);
+            std::fill(m_matrixData.begin()+originalSize, m_matrixData.end(), DataType{});
         }
     }
-
     unsigned int m_numberOfColumns;
     unsigned int m_numberOfRows;
     MatrixData m_matrixData;

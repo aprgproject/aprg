@@ -22,18 +22,16 @@ enum class StreamFormat
 
 std::string getDelimeterBasedOnFormat(StreamFormat const streamFormat);
 
-template <typename ValueType>
-std::pair<ValueType,ValueType> getLowerAndUpperValuesInSet(
-        std::set<ValueType> const& container,
-        ValueType const& value)
+template <typename ValueType, typename ConstIterator, typename Container>
+void adjustUpperAndLowerIteratorsInSet(
+        Container const& container,
+        ValueType const& value,
+        ConstIterator & itLower,
+        ConstIterator & itUpper)
 {
-    std::pair<ValueType,ValueType> result;
-    typename std::set<ValueType>::const_iterator itUpper(container.upper_bound(value));
-    typename std::set<ValueType>::const_iterator itLower(container.lower_bound(value));
     if(!container.empty())
     {
-        if(itLower!=container.cbegin())
-        {
+        if(itLower!=container.cbegin())        {
             if(itLower==container.cend())
             {
                 itLower--;
@@ -59,9 +57,55 @@ std::pair<ValueType,ValueType> getLowerAndUpperValuesInSet(
             }
         }
     }
+}
+
+template <typename ValueType>
+std::pair<ValueType,ValueType> getLowerAndUpperValuesInSet(
+        std::set<ValueType> const& container,
+        ValueType const& value)
+{
+    std::pair<ValueType,ValueType> result;
+    typename std::set<ValueType>::const_iterator itUpper(container.upper_bound(value));
+    typename std::set<ValueType>::const_iterator itLower(container.lower_bound(value));
+    adjustUpperAndLowerIteratorsInSet(container, value, itLower, itUpper);
     result.first = *itLower;
     result.second = *itUpper;
     return result;
+}
+
+template <typename KeyType, typename ConstIterator, typename Container>
+void adjustUpperAndLowerIteratorsInMap(
+        Container const& container,
+        KeyType const& keyValue,
+        ConstIterator & itLower,
+        ConstIterator & itUpper)
+{
+    if(!container.empty())
+    {
+        if(itLower!=container.cbegin())        {
+            if(itLower==container.cend())
+            {
+                itLower--;
+            }
+            else if(itLower->first != keyValue)
+            {
+                itLower--;
+            }        }
+        if(itUpper!=container.cbegin())
+        {
+            if(itUpper==container.cend())
+            {
+                itUpper--;
+            }
+            else if(itUpper->first != keyValue)
+            {
+                itUpper--;
+                if(itUpper->first != keyValue)
+                {
+                    itUpper++;
+                }            }
+        }
+    }
 }
 
 template <typename KeyType, typename ValueType>
@@ -71,39 +115,10 @@ getLowerAndUpperConstIteratorsInMap(std::map<KeyType, ValueType> const& containe
     std::pair<typename std::map<KeyType, ValueType>::const_iterator, typename std::map<KeyType, ValueType>::const_iterator> result;
     typename std::map<KeyType, ValueType>::const_iterator itUpper(container.upper_bound(keyValue));
     typename std::map<KeyType, ValueType>::const_iterator itLower(container.lower_bound(keyValue));
-    if(!container.empty())
-    {
-        if(itLower!=container.cbegin())
-        {
-            if(itLower==container.cend())
-            {
-                itLower--;
-            }
-            else if(itLower->first!=keyValue)
-            {
-                itLower--;
-            }
-        }
-        if(itUpper!=container.cbegin())
-        {
-            if(itUpper==container.cend())
-            {
-                itUpper--;
-            }
-            else if(itUpper->first!=keyValue)
-            {
-                itUpper--;
-                if(itUpper->first!=keyValue)
-                {
-                    itUpper++;
-                }
-            }
-        }
-    }
+    adjustUpperAndLowerIteratorsInMap(container, keyValue, itLower, itUpper);
     result.first = itLower;
     result.second = itUpper;
-    return result;
-}
+    return result;}
 
 template <typename KeyType, typename ValueType>
 std::pair<typename std::map<KeyType, ValueType>::iterator, typename std::map<KeyType, ValueType>::iterator>
@@ -112,39 +127,10 @@ getLowerAndUpperIteratorsInMap(std::map<KeyType, ValueType> & container, KeyType
     std::pair<typename std::map<KeyType, ValueType>::iterator, typename std::map<KeyType, ValueType>::iterator> result;
     typename std::map<KeyType, ValueType>::iterator itUpper(container.upper_bound(keyValue));
     typename std::map<KeyType, ValueType>::iterator itLower(container.lower_bound(keyValue));
-    if(!container.empty())
-    {
-        if(itLower!=container.begin())
-        {
-            if(itLower==container.end())
-            {
-                itLower--;
-            }
-            else if(itLower->first!=keyValue)
-            {
-                itLower--;
-            }
-        }
-        if(itUpper!=container.begin())
-        {
-            if(itUpper==container.end())
-            {
-                itUpper--;
-            }
-            else if(itUpper->first!=keyValue)
-            {
-                itUpper--;
-                if(itUpper->first!=keyValue)
-                {
-                    itUpper++;
-                }
-            }
-        }
-    }
+    adjustUpperAndLowerIteratorsInMap(container, keyValue, itLower, itUpper);
     result.first = itLower;
     result.second = itUpper;
-    return result;
-}
+    return result;}
 
 template <typename KeyType, typename ValueType>
 std::pair<typename std::multimap<KeyType, ValueType>::const_iterator, typename std::multimap<KeyType, ValueType>::const_iterator>
@@ -153,39 +139,10 @@ getLowerAndUpperConstIteratorsInMultiMap(std::multimap<KeyType, ValueType> const
     std::pair<typename std::multimap<KeyType, ValueType>::const_iterator, typename std::multimap<KeyType, ValueType>::const_iterator> result;
     typename std::multimap<KeyType, ValueType>::const_iterator itUpper(container.upper_bound(keyValue));
     typename std::multimap<KeyType, ValueType>::const_iterator itLower(container.lower_bound(keyValue));
-    if(!container.empty())
-    {
-        if(itLower!=container.cbegin())
-        {
-            if(itLower==container.cend())
-            {
-                itLower--;
-            }
-            else if(itLower->first!=keyValue)
-            {
-                itLower--;
-            }
-        }
-        if(itUpper!=container.cbegin())
-        {
-            if(itUpper==container.cend())
-            {
-                itUpper--;
-            }
-            else if(itUpper->first!=keyValue)
-            {
-                itUpper--;
-                if(itUpper->first!=keyValue)
-                {
-                    itUpper++;
-                }
-            }
-        }
-    }
+    adjustUpperAndLowerIteratorsInMap(container, keyValue, itLower, itUpper);
     result.first = itLower;
     result.second = itUpper;
-    return result;
-}
+    return result;}
 
 template <typename KeyType, typename ValueType>
 std::pair<typename std::multimap<KeyType, ValueType>::iterator, typename std::multimap<KeyType, ValueType>::iterator>
@@ -194,39 +151,10 @@ getLowerAndUpperIteratorsInMultiMap(std::multimap<KeyType, ValueType> & containe
     std::pair<typename std::multimap<KeyType, ValueType>::iterator, typename std::multimap<KeyType, ValueType>::iterator> result;
     typename std::multimap<KeyType, ValueType>::iterator itUpper(container.upper_bound(keyValue));
     typename std::multimap<KeyType, ValueType>::iterator itLower(container.lower_bound(keyValue));
-    if(!container.empty())
-    {
-        if(itLower!=container.begin())
-        {
-            if(itLower==container.end())
-            {
-                itLower--;
-            }
-            else if(itLower->first!=keyValue)
-            {
-                itLower--;
-            }
-        }
-        if(itUpper!=container.begin())
-        {
-            if(itUpper==container.end())
-            {
-                itUpper--;
-            }
-            else if(itUpper->first!=keyValue)
-            {
-                itUpper--;
-                if(itUpper->first!=keyValue)
-                {
-                    itUpper++;
-                }
-            }
-        }
-    }
+    adjustUpperAndLowerIteratorsInMap(container, keyValue, itLower, itUpper);
     result.first = itLower;
     result.second = itUpper;
-    return result;
-}
+    return result;}
 
 //SaveContentsToStream
 template <typename ValueType, std::size_t SIZE,
