@@ -31,19 +31,17 @@ void putGraphToUnionFind(BaseUnionFind<Vertex> & unionFind, BaseUndirectedGraph 
 }
 
 
-bool isSimplePath(Path const& path)
+bool isASimplePath(Path const& path)
 {
     // A simple path is one with no repeated vertices;
-    set<Vertex> uniqueVertices;
-    copy(path.cbegin(), path.cend(), inserter(uniqueVertices, uniqueVertices.cbegin()));
+    set<Vertex> uniqueVertices;    copy(path.cbegin(), path.cend(), inserter(uniqueVertices, uniqueVertices.cbegin()));
     return uniqueVertices.size() == path.size();
 }
 
-bool isCycle(Path const& path)
+bool isACycle(Path const& path)
 {
     // A cycle is a path with at least one edge whose first and last vertices are the same.
-    bool result(false);
-    if(!path.empty())
+    bool result(false);    if(!path.empty())
     {
         Vertex first(path.front());
         Vertex last(path.back());
@@ -52,14 +50,19 @@ bool isCycle(Path const& path)
     return result;
 }
 
-bool isSimpleCycle(Path const& path)
+bool isASimpleCycle(Path const& path)
 {
     // A simple cycle is a cycle with no repeated edges or vertices (except the requisite repetition of the first and last vertices).
-    return isCycle(path) && isSimplePath(path);
+    bool result(false);
+    if(!path.empty() && isACycle(path))
+    {
+        Path pathWithOutEnd(path.cbegin(), path.cbegin()+path.size()-1);
+        result = isASimplePath(pathWithOutEnd);
+    }
+    return result;
 }
 
-bool isATree(BaseUndirectedGraph const& graph)
-{
+bool isATree(BaseUndirectedGraph const& graph){
     // A tree is an acyclic connected graph.
     return !hasAnyCyclesOnGraph(graph) && isGraphConnected(graph);
 }
@@ -72,11 +75,10 @@ bool hasAnyCyclesOnGraph(BaseUndirectedGraph const& graph)
     {
         Edge removedEdge(edges.at(i));
         Edges edgesWithoutOneEdge(edges);
-        edgesWithoutOneEdge.erase(edges.cbegin()+i);
+        edgesWithoutOneEdge.erase(edgesWithoutOneEdge.cbegin()+i);
         UnionFindUsingMap<Vertex> unionFind;
         putEdgesToUnionFind(unionFind, edgesWithoutOneEdge);
-        if(unionFind.isConnected(removedEdge.first, removedEdge.second))
-        {
+        if(unionFind.isConnected(removedEdge.first, removedEdge.second))        {
             result = true;
             break;
         }
@@ -100,11 +102,10 @@ bool isGraphConnected(BaseUndirectedGraph const& graph)
             commonRoot = unionFind.getRoot(vertex);
             isFirst = false;
         }
-        else if(commonRoot == unionFind.getRoot(vertex))
+        else if(commonRoot != unionFind.getRoot(vertex))
         {
             result = false;
-            break;
-        }
+            break;        }
     }
     return result;
 }
@@ -157,11 +158,13 @@ ListOfEdges getEdgesOfMaximalConnectedSubgraphs(BaseUndirectedGraph const& graph
         Vertices adjacentVertices(graph.getAdjacentVerticesAt(vertex));
         for(Vertex const adjacentVertex : adjacentVertices)
         {
-            rootToEdgeMap[root].emplace_back(vertex, adjacentVertex);
+            if(vertex <= adjacentVertex)
+            {
+                rootToEdgeMap[root].emplace_back(vertex, adjacentVertex);
+            }
         }
     }
-    ListOfEdges result;
-    for(auto const& rootAndEdgesPair : rootToEdgeMap)
+    ListOfEdges result;    for(auto const& rootAndEdgesPair : rootToEdgeMap)
     {
         result.emplace_back(rootAndEdgesPair.second);
     }
