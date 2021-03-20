@@ -10,11 +10,9 @@
 #include <fstream>
 #include <functional>
 #include <string>
-#include <vector>
 
 namespace alba
 {
-
 namespace algorithm
 {
 
