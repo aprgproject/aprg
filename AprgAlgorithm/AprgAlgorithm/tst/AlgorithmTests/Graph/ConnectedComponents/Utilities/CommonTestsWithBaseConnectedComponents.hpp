@@ -4,6 +4,7 @@
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 
 #include <gtest/gtest.h>
+
 namespace alba
 {
 
@@ -21,7 +22,8 @@ void performIsConnectedTestWhenEmpty()
     ConnectedComponentType connectedComponents(baseGraph);
     BaseConnectedComponents const& baseConnectedComponents(connectedComponents);
 
-    EXPECT_FALSE(baseConnectedComponents.isConnected(0U, 1U));    EXPECT_FALSE(baseConnectedComponents.isConnected(0U, 2U));
+    EXPECT_FALSE(baseConnectedComponents.isConnected(0U, 1U));
+    EXPECT_FALSE(baseConnectedComponents.isConnected(0U, 2U));
     EXPECT_FALSE(baseConnectedComponents.isConnected(0U, 3U));
     EXPECT_FALSE(baseConnectedComponents.isConnected(0U, 4U));
     EXPECT_FALSE(baseConnectedComponents.isConnected(0U, 5U));
@@ -55,7 +57,8 @@ void performIsConnectedTestWhenNotEmpty()
     ConnectedComponentType connectedComponents(baseGraph);
     BaseConnectedComponents const& baseConnectedComponents(connectedComponents);
 
-    EXPECT_FALSE(baseConnectedComponents.isConnected(0U, 7U));    EXPECT_FALSE(baseConnectedComponents.isConnected(0U, 9U));
+    EXPECT_FALSE(baseConnectedComponents.isConnected(0U, 7U));
+    EXPECT_FALSE(baseConnectedComponents.isConnected(0U, 9U));
     EXPECT_FALSE(baseConnectedComponents.isConnected(7U, 9U));
     EXPECT_TRUE(baseConnectedComponents.isConnected(0U, 1U));
     EXPECT_TRUE(baseConnectedComponents.isConnected(0U, 2U));
