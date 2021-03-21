@@ -39,11 +39,10 @@ void BreadthFirstSearch::reinitializeStartingFrom(Vertex const startVertex)
         {
             if(!m_isProcessed.at(adjacentVertex))
             {
-                m_vertexToNextVertexMap[adjacentVertex] = vertex;
+                m_vertexToPreviousVertexMap[adjacentVertex] = vertex;
                 m_isProcessed[adjacentVertex] = true;
                 queueOfVerticesToProcess.emplace_front(adjacentVertex);
-            }
-        }
+            }        }
 
     }
 }

@@ -36,11 +36,10 @@ void DepthFirstSearch::continueTraversal(Vertex const vertex)
     {
         if(!m_isProcessed.at(adjacentVertex))
         {
-            m_vertexToNextVertexMap[adjacentVertex] = vertex;
+            m_vertexToPreviousVertexMap[adjacentVertex] = vertex;
             continueTraversal(adjacentVertex);
         }
-    }
-}
+    }}
 
 }
 
