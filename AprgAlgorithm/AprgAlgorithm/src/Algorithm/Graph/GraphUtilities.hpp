@@ -1,9 +1,7 @@
 #pragma once
 
-#include <Algorithm/Graph/GraphTypes.hpp>
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 #include <Algorithm/UnionFind/BaseUnionFind.hpp>
-
 namespace alba
 {
 namespace algorithm
