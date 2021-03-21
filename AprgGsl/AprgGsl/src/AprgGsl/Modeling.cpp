@@ -12,7 +12,8 @@
 using namespace alba::matrix;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 Modeling::Modeling()
 {}
@@ -22,7 +23,8 @@ unsigned int Modeling::getNumberOfSamples() const
     return m_retrievedDataForY.getNumberOfRows();
 }
 
-Modeling::MatrixOfDoubles Modeling::getCoefficients() const{
+Modeling::MatrixOfDoubles Modeling::getCoefficients() const
+{
     return m_coefficients;
 }
 
@@ -154,7 +156,8 @@ Modeling::ValidationResult Modeling::validate()
     unsigned int dataWidthForX = m_validationDataForX.getNumberOfColumns();
     unsigned int index=0;
     for(unsigned int j=0; j<dataHeight; j++)
-    {        double yPredicted=0;
+    {
+        double yPredicted=0;
         for (unsigned int i=0; i < dataWidthForX; i++)
         {
             yPredicted += m_validationDataForX.getEntry(i, j)*m_coefficients.getEntry(i, 0);
@@ -215,7 +218,8 @@ void Modeling::printData(MatrixOfDoubles & matrixInX, MatrixOfDoubles & matrixIn
         for(unsigned int i=0; i<matrixInX.getNumberOfColumns(); i++)
         {
             cout<<matrixInX.getEntry(i, j)<<", ";
-        }        cout<<endl;
+        }
+        cout<<endl;
     }
 }
 
@@ -247,7 +251,8 @@ void Modeling::saveRetrievedDataToMatrixRandomly(MatrixOfDoubles & matrixInX, Ma
         for(unsigned int i=0; i<m_retrievedDataForX.getNumberOfColumns(); i++)
         {
             matrixInX.setEntry(i, j, m_retrievedDataForX.getEntry(i, randomRow));
-        }    }
+        }
+    }
 }
 
 void Modeling::saveRetrievedDataToMatrix(MatrixOfDoubles & matrixInX, MatrixOfDoubles & matrixInY, unsigned int numberOfSamples)
@@ -260,7 +265,8 @@ void Modeling::saveRetrievedDataToMatrix(MatrixOfDoubles & matrixInX, MatrixOfDo
         for(unsigned int i=0; i<m_retrievedDataForX.getNumberOfColumns(); i++)
         {
             matrixInX.setEntry(i, j, m_retrievedDataForX.getEntry(i,j));
-        }    }
+        }
+    }
 }
 
 void Modeling::calculateCoefficientsUsingLeastSquares()
@@ -269,7 +275,8 @@ void Modeling::calculateCoefficientsUsingLeastSquares()
     unsigned int dataWidth = m_modelingDataForX.getNumberOfColumns();
     double chisq;
 
-    gsl_matrix *xModelingData, *calculatedCovariance;    gsl_vector *yModelingData, *calculatedCoefficients;
+    gsl_matrix *xModelingData, *calculatedCovariance;
+    gsl_vector *yModelingData, *calculatedCoefficients;
 
     xModelingData = gsl_matrix_alloc(dataHeight, dataWidth);
     yModelingData = gsl_vector_alloc(dataHeight);
@@ -288,7 +295,8 @@ void Modeling::calculateCoefficientsUsingLeastSquares()
         for(unsigned int y=0; y<m_modelingDataForX.getNumberOfRows(); y++)
         {
             gsl_matrix_set(xModelingData, y, x, m_modelingDataForX.getEntry(x, y));
-        }    }
+        }
+    }
 
     gsl_multifit_linear_workspace *work = gsl_multifit_linear_alloc(dataHeight, dataWidth);
     gsl_multifit_linear(xModelingData, yModelingData, calculatedCoefficients, calculatedCovariance, &chisq, work);

@@ -498,7 +498,8 @@ TEST(AlbaMathHelperTest, IsPrimeWorks)
 
 TEST(AlbaMathHelperTest, GetGreatestCommonFactorWorksForUnsignedInteger)
 {
-    EXPECT_EQ(0U, getGreatestCommonFactor(0, 0));    EXPECT_EQ(8U, getGreatestCommonFactor(0, 8));
+    EXPECT_EQ(0U, getGreatestCommonFactor(0, 0));
+    EXPECT_EQ(8U, getGreatestCommonFactor(0, 8));
     EXPECT_EQ(8U, getGreatestCommonFactor(8, 0));
     EXPECT_EQ(1U, getGreatestCommonFactor(1, 8));
     EXPECT_EQ(1U, getGreatestCommonFactor(8, 1));

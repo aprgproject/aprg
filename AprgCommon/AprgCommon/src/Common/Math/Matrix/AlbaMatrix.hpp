@@ -17,7 +17,8 @@ namespace alba
 namespace matrix
 {
 
-template <typename DataType>class AlbaMatrix
+template <typename DataType>
+class AlbaMatrix
 {
 public:
     using MatrixData = AlbaMatrixData<DataType>;
@@ -40,7 +41,8 @@ public:
         , m_matrixData(numberOfColumns*numberOfRows, DataType{})
     {}
 
-    AlbaMatrix(            unsigned int const numberOfColumns,
+    AlbaMatrix(
+            unsigned int const numberOfColumns,
             unsigned int const numberOfRows,
             MatrixData const& matrixData)
         : m_numberOfColumns(numberOfColumns)
@@ -111,7 +113,8 @@ public:
                 result.setEntry(x, y, multiplyEachItemAndGetSum(rowOfFirstMatrix, columnOfSecondMatrix));
                 x++;
             }
-            y++;        }
+            y++;
+        }
         return result;
     }
 
@@ -145,7 +148,8 @@ public:
     {
         DisplayTable table;
         table.setBorders("-","|");
-        for(unsigned int y=0; y<m_numberOfRows; y++)        {
+        for(unsigned int y=0; y<m_numberOfRows; y++)
+        {
             table.addRow();
             for(unsigned int x=0; x<m_numberOfColumns; x++)
             {
@@ -154,7 +158,8 @@ public:
                 table.getLastRow().addCell(ss.str());
             }
         }
-        std::string firstLine("Matrix output:\n");        return firstLine + table.drawOutput();
+        std::string firstLine("Matrix output:\n");
+        return firstLine + table.drawOutput();
     }
 
     void retrieveColumn(MatrixData & column, unsigned int const x) const
@@ -237,7 +242,8 @@ public:
         m_matrixData.resize(numberOfColumns*numberOfRows, DataType{});
     }
 
-    void negate()    {
+    void negate()
+    {
         for(DataType & value : m_matrixData)
         {
             value *= -1;
@@ -330,7 +336,8 @@ private:
         DataType result{};
         unsigned int minSize = std::min(first.size(), second.size());
         for(unsigned int i=0; i<minSize; i++)
-        {            result+=first.at(i)*second.at(i);
+        {
+            result+=first.at(i)*second.at(i);
         }
         return result;
     }
@@ -347,6 +354,7 @@ private:
             std::fill(m_matrixData.begin()+originalSize, m_matrixData.end(), DataType{});
         }
     }
+
     unsigned int m_numberOfColumns;
     unsigned int m_numberOfRows;
     MatrixData m_matrixData;

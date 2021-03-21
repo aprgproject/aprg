@@ -17,7 +17,8 @@ namespace
 using UnionFindForUnsignedInt = WeightedUnionFind<unsigned int, 13>;
 }
 
-TEST(WeightedUnionFindTest, IsConnectedWorks){
+TEST(WeightedUnionFindTest, IsConnectedWorks)
+{
     UnionFindForUnsignedInt unionFind;
     performIsConnectedTest(unionFind);
 }
@@ -42,7 +43,8 @@ TEST(WeightedUnionFindTest, ConnectWorksWithExample2)
 
 TEST(WeightedUnionFindTest, GetRootWorks)
 {
-    UnionFindForUnsignedInt unionFind;    unionFind.connect(4, 3);
+    UnionFindForUnsignedInt unionFind;
+    unionFind.connect(4, 3);
     unionFind.connect(3, 8);
     unionFind.connect(6, 5);
     unionFind.connect(9, 4);
@@ -66,11 +68,13 @@ TEST(WeightedUnionFindTest, GetNumberOfUnconnectedWorks)
     EXPECT_EQ(13U, unionFind.getNumberOfUnconnected());
 
     unionFind.connect(4, 3);
-    unionFind.connect(3, 8);    unionFind.connect(6, 5);
+    unionFind.connect(3, 8);
+    unionFind.connect(6, 5);
     unionFind.connect(9, 4);
     unionFind.connect(2, 1);
     EXPECT_EQ(8U, unionFind.getNumberOfUnconnected());
 }
 
 }
+
 }

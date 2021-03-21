@@ -4,6 +4,7 @@ using namespace std;
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -78,12 +79,14 @@ void DepthFirstSearch::continueTraversal(Vertex const vertex)
     }
 }
 
+
 void DepthFirstSearch::clear()
 {
     m_vertexToNextVertex.clear();
     Vertices vertices(m_graph.getVertices());
     for(Vertex const vertex : vertices)
-    {        m_isProcessed[vertex] = false;
+    {
+        m_isProcessed[vertex] = false;
     }
 }
 

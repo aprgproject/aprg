@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 # Setting up project
 project(CurlCpp)
+
 set(OUTFILE ${PROJECT_NAME})
 
 #Assign APRG Directory

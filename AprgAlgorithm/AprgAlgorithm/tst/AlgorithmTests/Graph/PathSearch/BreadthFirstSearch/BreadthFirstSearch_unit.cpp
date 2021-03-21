@@ -1,4 +1,4 @@
-#include <Algorithm/Graph/BreadthFirstSearch/BreadthFirstSearch.hpp>
+#include <Algorithm/Graph/PathSearch/BreadthFirstSearch/BreadthFirstSearch.hpp>
 #include <Algorithm/Graph/UndirectedGraph/UndirectedGraphWithListOfEdges.hpp>
 
 #include <gtest/gtest.h>

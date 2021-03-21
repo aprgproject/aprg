@@ -2,8 +2,10 @@
 
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 #include <Algorithm/UnionFind/BaseUnionFind.hpp>
+
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -13,6 +15,7 @@ bool isASimpleCycle(Path const& path);
 bool isATree(BaseUndirectedGraph const& graph);
 bool hasAnyCyclesOnGraph(BaseUndirectedGraph const& graph);
 bool isGraphConnected(BaseUndirectedGraph const& graph);
+
 unsigned int getDegreeAt(BaseUndirectedGraph const& graph, Vertex const vertex);
 unsigned int getMaxDegree(BaseUndirectedGraph const& graph);
 double getAverageDegree(BaseUndirectedGraph const& graph);

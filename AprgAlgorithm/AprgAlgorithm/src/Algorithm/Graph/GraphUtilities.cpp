@@ -9,6 +9,7 @@ using namespace std;
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -34,14 +35,16 @@ void putGraphToUnionFind(BaseUnionFind<Vertex> & unionFind, BaseUndirectedGraph 
 bool isASimplePath(Path const& path)
 {
     // A simple path is one with no repeated vertices;
-    set<Vertex> uniqueVertices;    copy(path.cbegin(), path.cend(), inserter(uniqueVertices, uniqueVertices.cbegin()));
+    set<Vertex> uniqueVertices;
+    copy(path.cbegin(), path.cend(), inserter(uniqueVertices, uniqueVertices.cbegin()));
     return uniqueVertices.size() == path.size();
 }
 
 bool isACycle(Path const& path)
 {
     // A cycle is a path with at least one edge whose first and last vertices are the same.
-    bool result(false);    if(!path.empty())
+    bool result(false);
+    if(!path.empty())
     {
         Vertex first(path.front());
         Vertex last(path.back());
@@ -62,7 +65,8 @@ bool isASimpleCycle(Path const& path)
     return result;
 }
 
-bool isATree(BaseUndirectedGraph const& graph){
+bool isATree(BaseUndirectedGraph const& graph)
+{
     // A tree is an acyclic connected graph.
     return !hasAnyCyclesOnGraph(graph) && isGraphConnected(graph);
 }
@@ -78,7 +82,8 @@ bool hasAnyCyclesOnGraph(BaseUndirectedGraph const& graph)
         edgesWithoutOneEdge.erase(edgesWithoutOneEdge.cbegin()+i);
         UnionFindUsingMap<Vertex> unionFind;
         putEdgesToUnionFind(unionFind, edgesWithoutOneEdge);
-        if(unionFind.isConnected(removedEdge.first, removedEdge.second))        {
+        if(unionFind.isConnected(removedEdge.first, removedEdge.second))
+        {
             result = true;
             break;
         }
@@ -105,14 +110,16 @@ bool isGraphConnected(BaseUndirectedGraph const& graph)
         else if(commonRoot != unionFind.getRoot(vertex))
         {
             result = false;
-            break;        }
+            break;
+        }
     }
     return result;
 }
 
 unsigned int getDegreeAt(
         BaseUndirectedGraph const& graph,
-        Vertex const vertex){
+        Vertex const vertex)
+{
     return graph.getAdjacentVerticesAt(vertex).size();
 }
 
@@ -123,7 +130,8 @@ unsigned int getMaxDegree(
     for(Vertex const vertex : graph.getVertices())
     {
         result = std::max(result, getDegreeAt(graph, vertex));
-    }    return result;
+    }
+    return result;
 }
 
 double getAverageDegree(
@@ -132,7 +140,8 @@ double getAverageDegree(
     return static_cast<double>(graph.getNumberOfEdges()) / graph.getNumberOfVertices() * 2;
 }
 
-unsigned int getNumberOfSelfLoops(        BaseUndirectedGraph const& graph)
+unsigned int getNumberOfSelfLoops(
+        BaseUndirectedGraph const& graph)
 {
     unsigned int count(0);
     for(Edge const& edge : graph.getEdges())
@@ -164,7 +173,8 @@ ListOfEdges getEdgesOfMaximalConnectedSubgraphs(BaseUndirectedGraph const& graph
             }
         }
     }
-    ListOfEdges result;    for(auto const& rootAndEdgesPair : rootToEdgeMap)
+    ListOfEdges result;
+    for(auto const& rootAndEdgesPair : rootToEdgeMap)
     {
         result.emplace_back(rootAndEdgesPair.second);
     }
@@ -172,4 +182,5 @@ ListOfEdges getEdgesOfMaximalConnectedSubgraphs(BaseUndirectedGraph const& graph
 }
 
 }
+
 }

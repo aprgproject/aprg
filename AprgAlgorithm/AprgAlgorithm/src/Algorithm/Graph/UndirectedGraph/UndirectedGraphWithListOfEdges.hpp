@@ -3,6 +3,7 @@
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 
 #include <set>
+
 namespace alba
 {
 

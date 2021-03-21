@@ -53,7 +53,8 @@ private:
         m_connectionMap.emplace(object, object);
     }
 
-    bool isExistingInConnectionMap(Object const& object) const    {
+    bool isExistingInConnectionMap(Object const& object) const
+    {
         return m_connectionMap.find(object) != m_connectionMap.end();
     }
     ConnectionMap m_connectionMap;

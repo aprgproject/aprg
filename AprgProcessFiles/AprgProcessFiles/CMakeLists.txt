@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(AprgProcessFiles C CXX)
 
 set(OUTFILE ${PROJECT_NAME})
+
 #Assign APRG Directory
 set(APRG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../)
 set(APRG_PROCESS_FILES_DIR ${CMAKE_CURRENT_SOURCE_DIR})

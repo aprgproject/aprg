@@ -3,7 +3,8 @@
 cmake_minimum_required(VERSION 3.16)
 project(gtest)
 
-set(GTEST_DIR ${APRG_DIR}/gtest/gtest/)set(GOOGLE_MOCK_DIR ${GTEST_DIR}/googlemock)
+set(GTEST_DIR ${APRG_DIR}/gtest/gtest/)
+set(GOOGLE_MOCK_DIR ${GTEST_DIR}/googlemock)
 set(GOOGLE_TEST_DIR ${GTEST_DIR}/googletest)
 
 include_directories(

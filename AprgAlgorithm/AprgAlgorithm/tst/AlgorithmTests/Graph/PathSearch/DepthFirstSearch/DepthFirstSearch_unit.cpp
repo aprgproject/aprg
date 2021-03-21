@@ -1,4 +1,4 @@
-#include <Algorithm/Graph/DepthFirstSearch/DepthFirstSearch.hpp>
+#include <Algorithm/Graph/PathSearch/DepthFirstSearch/DepthFirstSearch.hpp>
 #include <Algorithm/Graph/UndirectedGraph/UndirectedGraphWithListOfEdges.hpp>
 
 #include <gtest/gtest.h>
@@ -17,7 +17,8 @@ using SampleGraphForTest = UndirectedGraphWithListOfEdges;
 TEST(DepthFirstSearchTest, HasPathToWorks)
 {
     SampleGraphForTest graph;
-    graph.connect(0U, 1U);    graph.connect(0U, 2U);
+    graph.connect(0U, 1U);
+    graph.connect(0U, 2U);
     graph.connect(0U, 5U);
     graph.connect(1U, 2U);
     graph.connect(2U, 3U);
@@ -38,7 +39,8 @@ TEST(DepthFirstSearchTest, HasPathToWorks)
 TEST(DepthFirstSearchTest, GetOrderedPathToWorks)
 {
     SampleGraphForTest graph;
-    graph.connect(0U, 1U);    graph.connect(0U, 2U);
+    graph.connect(0U, 1U);
+    graph.connect(0U, 2U);
     graph.connect(0U, 5U);
     graph.connect(1U, 2U);
     graph.connect(2U, 3U);
@@ -66,7 +68,8 @@ TEST(DepthFirstSearchTest, GetOrderedPathToWorks)
 TEST(DepthFirstSearchTest, ReinitializeStartingFromWorks)
 {
     SampleGraphForTest graph;
-    graph.connect(0U, 1U);    graph.connect(0U, 2U);
+    graph.connect(0U, 1U);
+    graph.connect(0U, 2U);
     graph.connect(0U, 5U);
     graph.connect(1U, 2U);
     graph.connect(2U, 3U);
@@ -94,4 +97,5 @@ TEST(DepthFirstSearchTest, ReinitializeStartingFromWorks)
 }
 
 }
+
 }

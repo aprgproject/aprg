@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(QuickestWayToProgram C CXX)
 
 set(OUTFILE ${PROJECT_NAME})
+
 #Comment out TEST_MODE to build static executable
 set(TEST_MODE "ON")
 
