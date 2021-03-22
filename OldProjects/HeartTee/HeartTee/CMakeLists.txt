@@ -1,22 +1,28 @@
 cmake_minimum_required(VERSION 3.16)
 project(HeartTee C CXX)
 
-set(OUTFILE ${PROJECT_NAME})
-
 #Comment out TEST_MODE to build static executable
 set(TEST_MODE "ON")
 
-#Assign APRG Directory
-set(APRG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../)
+#set project details
+set(OUTFILE ${PROJECT_NAME})
 set(HEART_TEE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-#Assign Flags
-include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
+#Locate APRG Directory first because its used on other cmakes
+set(APRG_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+get_filename_component(ABSOLUTE_CURRENT_DIR "${CMAKE_CURRENT_LIST_DIR}" ABSOLUTE)
+get_filename_component(CURRENT_DIR_NAME "$${ABSOLUTE_CURRENT_DIR}" NAME)
+while(NOT ${CURRENT_DIR_NAME} MATCHES "APRG")
+    get_filename_component(ABSOLUTE_CURRENT_DIR "${ABSOLUTE_CURRENT_DIR}/.." ABSOLUTE)
+    get_filename_component(CURRENT_DIR_NAME "$${ABSOLUTE_CURRENT_DIR}" NAME)
+endwhile()
+set(APRG_DIR ${ABSOLUTE_CURRENT_DIR})
 
-#Assign Definitions
+#Assign common flags, definitions and macros
+include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
 include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
 
-#Include gtest, this needs APRG Directory
+#Include other projects
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 
 #Add files and directories
@@ -29,6 +35,7 @@ set(SPECIAL_INCLUDE_DIRECTORIES
     src/Fourier
 )
 
+#Do final steps
 if (TEST_MODE)
     add_executable(${OUTFILE} ${HEART_TEE_SOURCES_AND_TESTS})
     include_directories(${HEART_TEE_INCLUDE_DIRECTORIES} ${HEART_TEE_TEST_INCLUDE_DIRECTORIES} ${SPECIAL_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
