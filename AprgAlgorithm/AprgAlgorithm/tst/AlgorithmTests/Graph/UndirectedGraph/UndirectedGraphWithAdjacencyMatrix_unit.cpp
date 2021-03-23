@@ -128,6 +128,7 @@ TEST(UndirectedGraphWithAdjacencyMatrixTest, GraphWorksAfterClear)
 TEST(UndirectedGraphWithAdjacencyMatrixTest, GetDisplayableStringWorks)
 {
     UndirectedGraphWithAdjacencyMatrix<unsigned int, 3> graph;
+
     graph.connect(0U, 1U);
     graph.connect(0U, 2U);
 

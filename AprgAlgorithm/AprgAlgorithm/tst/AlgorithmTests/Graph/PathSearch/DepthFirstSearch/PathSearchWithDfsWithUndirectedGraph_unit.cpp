@@ -1,4 +1,4 @@
-#include <Algorithm/Graph/PathSearch/DepthFirstSearch/DepthFirstSearch.hpp>
+#include <Algorithm/Graph/PathSearch/DepthFirstSearch/PathSearchUsingDfs.hpp>
 #include <Algorithm/Graph/UndirectedGraph/UndirectedGraphWithListOfEdges.hpp>
 
 #include <gtest/gtest.h>
@@ -15,7 +15,7 @@ using VertexForTest = unsigned int;
 using VertexToBoolMapForTest = GraphTypes<VertexForTest>::VertexToBoolMap;
 using PathForTest = GraphTypes<VertexForTest>::Path;
 using GraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
-using DfsForTest = DepthFirstSearch<VertexForTest>;
+using DfsForTest = PathSearchUsingDfs<VertexForTest>;
 
 void putConnectionsForTest(GraphForTest & graph)
 {
@@ -30,7 +30,7 @@ void putConnectionsForTest(GraphForTest & graph)
 }
 }
 
-TEST(DepthFirstSearchTest, HasPathToWorksWithUndirectedGraph)
+TEST(PathSearchUsingDfsTest, HasPathToWorksWithUndirectedGraph)
 {
     GraphForTest graph;
     putConnectionsForTest(graph);
@@ -45,7 +45,7 @@ TEST(DepthFirstSearchTest, HasPathToWorksWithUndirectedGraph)
     EXPECT_FALSE(dfs.hasPathTo(6U));
 }
 
-TEST(DepthFirstSearchTest, GetOrderedPathToWorksWithUndirectedGraph)
+TEST(PathSearchUsingDfsTest, GetOrderedPathToWorksWithUndirectedGraph)
 {
     GraphForTest graph;
     putConnectionsForTest(graph);
@@ -67,7 +67,7 @@ TEST(DepthFirstSearchTest, GetOrderedPathToWorksWithUndirectedGraph)
     EXPECT_EQ(pathWith6, dfs.getOrderedPathTo(6U));
 }
 
-TEST(DepthFirstSearchTest, GetIsProcessedMapWorksWithUndirectedGraph)
+TEST(PathSearchUsingDfsTest, GetIsProcessedMapWorksWithUndirectedGraph)
 {
     GraphForTest graph;
     putConnectionsForTest(graph);
@@ -79,7 +79,7 @@ TEST(DepthFirstSearchTest, GetIsProcessedMapWorksWithUndirectedGraph)
     EXPECT_EQ(mapToExpect, mapToVerify);
 }
 
-TEST(DepthFirstSearchTest, ReinitializeStartingFromWorksWithUndirectedGraph)
+TEST(PathSearchUsingDfsTest, ReinitializeStartingFromWorksWithUndirectedGraph)
 {
     GraphForTest graph;
     putConnectionsForTest(graph);

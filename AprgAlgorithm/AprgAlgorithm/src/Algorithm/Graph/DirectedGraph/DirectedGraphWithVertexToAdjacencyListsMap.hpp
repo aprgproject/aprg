@@ -129,7 +129,8 @@ public:
 
 private:
     SetOfVertices getUniqueVertices() const
-    {        SetOfVertices uniqueVertices;
+    {
+        SetOfVertices uniqueVertices;
         for(auto const& vertexAndAdjacencyListPair : m_adjacencyLists)
         {
             Vertex const& sourceVertex(vertexAndAdjacencyListPair.first);

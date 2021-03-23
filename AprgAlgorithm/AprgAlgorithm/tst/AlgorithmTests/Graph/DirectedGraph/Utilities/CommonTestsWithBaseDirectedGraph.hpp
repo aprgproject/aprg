@@ -221,7 +221,8 @@ void testReverseDirectionsWithVertexAsUnsignedInt()
 template<typename Graph>
 void testWithComplicatedExampleWithVertexAsUnsignedInt()
 {
-    using Edges = typename Graph::Edges;    Graph graph;
+    using Edges = typename Graph::Edges;
+    Graph graph;
     graph.connect(0U, 1U);
     graph.connect(0U, 5U);
     graph.connect(2U, 0U);

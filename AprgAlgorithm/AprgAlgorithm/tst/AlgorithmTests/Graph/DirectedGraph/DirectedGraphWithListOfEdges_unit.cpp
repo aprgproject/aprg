@@ -98,7 +98,8 @@ TEST(DirectedGraphWithListOfEdgesTest, ReverseDirectionsWorks)
 
 TEST(DirectedGraphWithListOfEdgesTest, ComplicatedTestWorks)
 {
-    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();}
+    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();
+}
 
 TEST(DirectedGraphWithListOfEdgesTest, GetDisplayableStringWorks)
 {

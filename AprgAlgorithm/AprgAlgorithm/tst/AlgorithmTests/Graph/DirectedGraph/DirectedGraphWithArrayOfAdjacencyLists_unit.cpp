@@ -98,7 +98,8 @@ TEST(DirectedGraphWithArrayOfAdjacencyListsTest, ReverseDirectionsWorks)
 
 TEST(DirectedGraphWithArrayOfAdjacencyListsTest, ComplicatedTestWorks)
 {
-    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();}
+    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();
+}
 
 TEST(DirectedGraphWithArrayOfAdjacencyListsTest, GetDisplayableStringWorks)
 {

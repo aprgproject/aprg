@@ -103,7 +103,8 @@ TEST(UndirectedGraphWithListOfEdgesTest, ClearWorks)
 
 TEST(UndirectedGraphWithListOfEdgesTest, ComplicatedTestWorks)
 {
-    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();}
+    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();
+}
 
 TEST(UndirectedGraphWithListOfEdgesTest, GetDisplayableStringWorks)
 {
