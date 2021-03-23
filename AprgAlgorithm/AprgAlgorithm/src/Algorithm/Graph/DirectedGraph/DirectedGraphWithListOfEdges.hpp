@@ -35,11 +35,13 @@ public:
         return m_edges.find(EdgeInSet(sourceVertex, destinationVertex)) != m_edges.cend();
     }
 
-    unsigned int getNumberOfVertices() const override    {
+    unsigned int getNumberOfVertices() const override
+    {
         return getUniqueVertices().size();
     }
 
-    unsigned int getNumberOfEdges() const override    {
+    unsigned int getNumberOfEdges() const override
+    {
         return m_numberOfEdges;
     }
 
@@ -71,6 +73,7 @@ public:
         });
         return result;
     }
+
     std::string getDisplayableString() const override
     {
         std::stringstream ss;
@@ -105,7 +108,8 @@ private:
     SetOfVertices getUniqueVertices() const
     {
         SetOfVertices uniqueVertices;
-        for(auto const& edge : m_edges)        {
+        for(auto const& edge : m_edges)
+        {
             uniqueVertices.emplace(edge.first);
             uniqueVertices.emplace(edge.second);
         }
@@ -114,6 +118,7 @@ private:
     unsigned int m_numberOfEdges;
     SetOfEdges m_edges;
 };
+
 }
 
 }

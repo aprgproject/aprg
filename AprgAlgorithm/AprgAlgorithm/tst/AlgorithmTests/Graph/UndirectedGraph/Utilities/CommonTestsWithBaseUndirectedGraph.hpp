@@ -87,7 +87,8 @@ void testGetNumberOfEdgesWhenEmptyWithVertexAsUnsignedInt()
     EXPECT_EQ(0U, graph.getNumberOfEdges());
 }
 
-template<typename Graph>void testGetNumberOfEdgesWhenNotEmptyWithVertexAsUnsignedInt()
+template<typename Graph>
+void testGetNumberOfEdgesWhenNotEmptyWithVertexAsUnsignedInt()
 {
     Graph graph;
     graph.connect(0U, 1U);

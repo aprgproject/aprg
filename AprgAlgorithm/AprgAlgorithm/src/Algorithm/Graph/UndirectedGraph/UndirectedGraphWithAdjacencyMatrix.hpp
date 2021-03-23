@@ -40,7 +40,8 @@ public:
         return result;
     }
 
-    bool isConnected(Vertex const& vertex1, Vertex const& vertex2) const override    {
+    bool isConnected(Vertex const& vertex1, Vertex const& vertex2) const override
+    {
         return m_adjacencyMatrix.getEntry(vertex1, vertex2);
     }
 
@@ -58,7 +59,8 @@ public:
         return result;
     }
 
-    unsigned int getNumberOfEdges() const override    {
+    unsigned int getNumberOfEdges() const override
+    {
         return m_numberOfEdges;
     }
 
@@ -102,7 +104,8 @@ public:
                 if(isConnected(vertex1, vertex2))
                 {
                     result.emplace_back(vertex1, vertex2);
-                }            }
+                }
+            }
         }
         return result;
     }
@@ -124,13 +127,15 @@ public:
         });
         return firstPartOfString + matrixToDisplay.getString();
     }
+
     void connect(Vertex const& vertex1, Vertex const& vertex2) override
     {
         if(!isConnected(vertex1, vertex2))
         {
             m_numberOfEdges++;
             m_adjacencyMatrix.setEntry(vertex1, vertex2, true);
-            m_adjacencyMatrix.setEntry(vertex2, vertex1, true);        }
+            m_adjacencyMatrix.setEntry(vertex2, vertex1, true);
+        }
     }
 
     void disconnect(Vertex const& vertex1, Vertex const& vertex2) override
@@ -147,6 +152,7 @@ private:
     unsigned int m_numberOfEdges;
     AdjacencyMatrix m_adjacencyMatrix;
 };
+
 }
 
 }

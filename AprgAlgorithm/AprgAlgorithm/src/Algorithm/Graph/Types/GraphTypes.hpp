@@ -4,7 +4,8 @@
 #include <set>
 #include <vector>
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {
@@ -49,4 +50,5 @@ struct GraphTypes
 };
 
 }
+
 }

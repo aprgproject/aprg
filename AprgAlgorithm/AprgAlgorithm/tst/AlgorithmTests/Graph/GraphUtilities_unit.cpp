@@ -2,6 +2,7 @@
 #include <Algorithm/Graph/Utilities/GraphUtilities.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba

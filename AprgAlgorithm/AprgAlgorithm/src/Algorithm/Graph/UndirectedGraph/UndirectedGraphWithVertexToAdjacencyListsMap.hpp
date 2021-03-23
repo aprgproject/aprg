@@ -27,6 +27,7 @@ public:
         : m_numberOfEdges(0U)
         , m_adjacencyLists{}
     {}
+
     bool hasAnyConnection(Vertex const& vertex) const override
     {
         bool result(false);
@@ -65,7 +66,8 @@ public:
         return result;
     }
 
-    unsigned int getNumberOfEdges() const override    {
+    unsigned int getNumberOfEdges() const override
+    {
         return m_numberOfEdges;
     }
 
@@ -81,6 +83,7 @@ public:
         }
         return result;
     }
+
     Vertices getVertices() const override
     {
         Vertices result;
@@ -138,7 +141,8 @@ public:
         {
             m_numberOfEdges++;
             m_adjacencyLists[vertex1].emplace(vertex2);
-            m_adjacencyLists[vertex2].emplace(vertex1);        }
+            m_adjacencyLists[vertex2].emplace(vertex1);
+        }
     }
 
     void disconnect(Vertex const& vertex1, Vertex const& vertex2) override
@@ -155,6 +159,7 @@ private:
     unsigned int m_numberOfEdges;
     AdjacencyLists m_adjacencyLists;
 };
+
 }
 
 }
