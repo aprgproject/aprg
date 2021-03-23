@@ -91,15 +91,19 @@ TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, ConnectWorks)
     testConnectWithVertexAsUnsignedInt<GraphForTest>();
 }
 
-TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, DisonnectWorks)
+TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, DisconnectWorks)
 {
     testDisconnectWithVertexAsUnsignedInt<GraphForTest>();
 }
 
+TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, ClearWorks)
+{
+    testClearWithVertexAsUnsignedInt<GraphForTest>();
+}
+
 TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, ComplicatedTestWorks)
 {
-    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();
-}
+    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();}
 
 TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, GetDisplayableStringWorks)
 {

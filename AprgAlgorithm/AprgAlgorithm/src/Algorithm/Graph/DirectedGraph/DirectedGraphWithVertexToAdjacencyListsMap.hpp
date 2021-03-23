@@ -121,10 +121,15 @@ public:
         }
     }
 
+    void clear()
+    {
+        m_numberOfEdges = 0;
+        m_adjacencyLists.clear();
+    }
+
 private:
     SetOfVertices getUniqueVertices() const
-    {
-        SetOfVertices uniqueVertices;
+    {        SetOfVertices uniqueVertices;
         for(auto const& vertexAndAdjacencyListPair : m_adjacencyLists)
         {
             Vertex const& sourceVertex(vertexAndAdjacencyListPair.first);

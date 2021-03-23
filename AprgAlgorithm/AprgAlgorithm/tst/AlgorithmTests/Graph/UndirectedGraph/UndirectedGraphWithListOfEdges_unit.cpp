@@ -91,15 +91,19 @@ TEST(UndirectedGraphWithListOfEdgesTest, ConnectWorks)
     testConnectWithVertexAsUnsignedInt<GraphForTest>();
 }
 
-TEST(UndirectedGraphWithListOfEdgesTest, DisonnectWorks)
+TEST(UndirectedGraphWithListOfEdgesTest, DisconnectWorks)
 {
     testDisconnectWithVertexAsUnsignedInt<GraphForTest>();
 }
 
+TEST(UndirectedGraphWithListOfEdgesTest, ClearWorks)
+{
+    testClearWithVertexAsUnsignedInt<GraphForTest>();
+}
+
 TEST(UndirectedGraphWithListOfEdgesTest, ComplicatedTestWorks)
 {
-    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();
-}
+    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();}
 
 TEST(UndirectedGraphWithListOfEdgesTest, GetDisplayableStringWorks)
 {

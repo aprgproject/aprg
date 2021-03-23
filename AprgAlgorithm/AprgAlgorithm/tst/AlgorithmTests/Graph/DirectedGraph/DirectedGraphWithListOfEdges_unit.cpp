@@ -81,15 +81,24 @@ TEST(DirectedGraphWithListOfEdgesTest, ConnectWorks)
     testConnectWithVertexAsUnsignedInt<GraphForTest>();
 }
 
-TEST(DirectedGraphWithListOfEdgesTest, DisonnectWorks)
+TEST(DirectedGraphWithListOfEdgesTest, DisconnectWorks)
 {
     testDisconnectWithVertexAsUnsignedInt<GraphForTest>();
 }
 
+TEST(DirectedGraphWithListOfEdgesTest, ClearWorks)
+{
+    testClearWithVertexAsUnsignedInt<GraphForTest>();
+}
+
+TEST(DirectedGraphWithListOfEdgesTest, ReverseDirectionsWorks)
+{
+    testReverseDirectionsWithVertexAsUnsignedInt<GraphForTest>();
+}
+
 TEST(DirectedGraphWithListOfEdgesTest, ComplicatedTestWorks)
 {
-    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();
-}
+    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();}
 
 TEST(DirectedGraphWithListOfEdgesTest, GetDisplayableStringWorks)
 {

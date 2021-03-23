@@ -211,10 +211,23 @@ void testDisconnectWithVertexAsUnsignedInt()
 }
 
 template<typename Graph>
+void testClearWithVertexAsUnsignedInt()
+{
+    Graph graph;
+    graph.connect(0U, 1U);
+    graph.connect(0U, 2U);
+
+    graph.clear();
+
+    EXPECT_EQ(0U, graph.getNumberOfVertices());
+    EXPECT_EQ(0U, graph.getNumberOfEdges());
+    EXPECT_TRUE(graph.getEdges().empty());
+}
+
+template<typename Graph>
 void testWithComplicatedExampleWithVertexAsUnsignedInt()
 {
-    using Edges = typename Graph::Edges;
-    Graph graph;
+    using Edges = typename Graph::Edges;    Graph graph;
     graph.connect(0U, 5U);
     graph.connect(4U, 3U);
     graph.connect(0U, 1U);
