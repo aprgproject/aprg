@@ -24,11 +24,9 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
 
     UndirectedGraphWithVertexToAdjacencyListsMap()
-        : m_numberOfVertices(0U)
-        , m_numberOfEdges(0U)
+        : m_numberOfEdges(0U)
         , m_adjacencyLists{}
     {}
-
     bool hasAnyConnection(Vertex const& vertex) const override
     {
         bool result(false);
@@ -55,11 +53,19 @@ public:
 
     unsigned int getNumberOfVertices() const override
     {
-        return m_numberOfVertices;
+        unsigned int result(0);
+        for(auto const& vertexAndAdjacencyListPair : m_adjacencyLists)
+        {
+            AdjacencyList const& adjacencyList(vertexAndAdjacencyListPair.second);
+            if(!adjacencyList.empty())
+            {
+                result++;
+            }
+        }
+        return result;
     }
 
-    unsigned int getNumberOfEdges() const override
-    {
+    unsigned int getNumberOfEdges() const override    {
         return m_numberOfEdges;
     }
 
@@ -71,11 +77,10 @@ public:
         {
             AdjacencyList const& adjacencyList(it->second);
             result.reserve(adjacencyList.size());
-            copy(adjacencyList.cbegin(), adjacencyList.cend(), back_inserter(result));
+            std::copy(adjacencyList.cbegin(), adjacencyList.cend(), std::back_inserter(result));
         }
         return result;
     }
-
     Vertices getVertices() const override
     {
         Vertices result;
@@ -131,18 +136,9 @@ public:
     {
         if(!isConnected(vertex1, vertex2))
         {
-            if(!hasAnyConnection(vertex1))
-            {
-                m_numberOfVertices++;
-            }
-            if(!hasAnyConnection(vertex2))
-            {
-                m_numberOfVertices++;
-            }
             m_numberOfEdges++;
             m_adjacencyLists[vertex1].emplace(vertex2);
-            m_adjacencyLists[vertex2].emplace(vertex1);
-        }
+            m_adjacencyLists[vertex2].emplace(vertex1);        }
     }
 
     void disconnect(Vertex const& vertex1, Vertex const& vertex2) override
@@ -152,23 +148,13 @@ public:
             m_numberOfEdges--;
             m_adjacencyLists[vertex1].erase(vertex2);
             m_adjacencyLists[vertex2].erase(vertex1);
-            if(!hasAnyConnection(vertex1))
-            {
-                m_numberOfVertices--;
-            }
-            if(!hasAnyConnection(vertex2))
-            {
-                m_numberOfVertices--;
-            }
         }
     }
 
 private:
-    unsigned int m_numberOfVertices;
     unsigned int m_numberOfEdges;
     AdjacencyLists m_adjacencyLists;
 };
-
 }
 
 }
