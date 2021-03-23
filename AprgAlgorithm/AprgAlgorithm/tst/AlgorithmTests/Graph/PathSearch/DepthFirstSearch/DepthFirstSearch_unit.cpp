@@ -20,7 +20,8 @@ using DfsForTest = DepthFirstSearch<VertexForTest>;
 void putConnectionsForTest(GraphForTest & graph)
 {
     graph.connect(0U, 1U);
-    graph.connect(0U, 2U);    graph.connect(0U, 5U);
+    graph.connect(0U, 2U);
+    graph.connect(0U, 5U);
     graph.connect(1U, 2U);
     graph.connect(2U, 3U);
     graph.connect(2U, 4U);
@@ -36,7 +37,8 @@ TEST(DepthFirstSearchTest, HasPathToWorks)
     DfsForTest dfs(graph, 0U);
 
     EXPECT_TRUE(dfs.hasPathTo(0U));
-    EXPECT_TRUE(dfs.hasPathTo(1U));    EXPECT_TRUE(dfs.hasPathTo(2U));
+    EXPECT_TRUE(dfs.hasPathTo(1U));
+    EXPECT_TRUE(dfs.hasPathTo(2U));
     EXPECT_TRUE(dfs.hasPathTo(3U));
     EXPECT_TRUE(dfs.hasPathTo(4U));
     EXPECT_TRUE(dfs.hasPathTo(5U));
@@ -58,7 +60,8 @@ TEST(DepthFirstSearchTest, GetOrderedPathToWorks)
     PathForTest pathWith6;
     EXPECT_EQ(pathWith0, dfs.getOrderedPathTo(0U));
     EXPECT_EQ(pathWith1, dfs.getOrderedPathTo(1U));
-    EXPECT_EQ(pathWith2, dfs.getOrderedPathTo(2U));    EXPECT_EQ(pathWith3, dfs.getOrderedPathTo(3U));
+    EXPECT_EQ(pathWith2, dfs.getOrderedPathTo(2U));
+    EXPECT_EQ(pathWith3, dfs.getOrderedPathTo(3U));
     EXPECT_EQ(pathWith4, dfs.getOrderedPathTo(4U));
     EXPECT_EQ(pathWith5, dfs.getOrderedPathTo(5U));
     EXPECT_EQ(pathWith6, dfs.getOrderedPathTo(6U));
@@ -93,7 +96,8 @@ TEST(DepthFirstSearchTest, ReinitializeStartingFromWorks)
     PathForTest pathWith6;
     EXPECT_EQ(pathWith0, dfs.getOrderedPathTo(0U));
     EXPECT_EQ(pathWith1, dfs.getOrderedPathTo(1U));
-    EXPECT_EQ(pathWith2, dfs.getOrderedPathTo(2U));    EXPECT_EQ(pathWith3, dfs.getOrderedPathTo(3U));
+    EXPECT_EQ(pathWith2, dfs.getOrderedPathTo(2U));
+    EXPECT_EQ(pathWith3, dfs.getOrderedPathTo(3U));
     EXPECT_EQ(pathWith4, dfs.getOrderedPathTo(4U));
     EXPECT_EQ(pathWith5, dfs.getOrderedPathTo(5U));
     EXPECT_EQ(pathWith6, dfs.getOrderedPathTo(6U));
