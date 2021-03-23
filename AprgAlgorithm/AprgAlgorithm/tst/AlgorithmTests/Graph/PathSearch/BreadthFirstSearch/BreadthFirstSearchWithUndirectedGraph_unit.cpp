@@ -30,26 +30,26 @@ void putConnectionsForTest(GraphForTest & graph)
 }
 }
 
-TEST(BreadthFirstSearchTest, HasPathToWorks)
+TEST(BreadthFirstSearchTest, HasPathToWorksWithUndirectedGraph)
 {
     GraphForTest graph;
     putConnectionsForTest(graph);
-    BfsForTest dfs(graph, 0U);
+    BfsForTest bfs(graph, 0U);
 
-    EXPECT_TRUE(dfs.hasPathTo(0U));
-    EXPECT_TRUE(dfs.hasPathTo(1U));
-    EXPECT_TRUE(dfs.hasPathTo(2U));
-    EXPECT_TRUE(dfs.hasPathTo(3U));
-    EXPECT_TRUE(dfs.hasPathTo(4U));
-    EXPECT_TRUE(dfs.hasPathTo(5U));
-    EXPECT_FALSE(dfs.hasPathTo(6U));
+    EXPECT_TRUE(bfs.hasPathTo(0U));
+    EXPECT_TRUE(bfs.hasPathTo(1U));
+    EXPECT_TRUE(bfs.hasPathTo(2U));
+    EXPECT_TRUE(bfs.hasPathTo(3U));
+    EXPECT_TRUE(bfs.hasPathTo(4U));
+    EXPECT_TRUE(bfs.hasPathTo(5U));
+    EXPECT_FALSE(bfs.hasPathTo(6U));
 }
 
-TEST(BreadthFirstSearchTest, GetOrderedPathToWorks)
+TEST(BreadthFirstSearchTest, GetOrderedPathToWorksWithUndirectedGraph)
 {
     GraphForTest graph;
     putConnectionsForTest(graph);
-    BfsForTest dfs(graph, 0U);
+    BfsForTest bfs(graph, 0U);
 
     PathForTest pathWith0{0U};
     PathForTest pathWith1{0U, 1U};
@@ -58,34 +58,34 @@ TEST(BreadthFirstSearchTest, GetOrderedPathToWorks)
     PathForTest pathWith4{0U, 2U, 4U};
     PathForTest pathWith5{0U, 5U};
     PathForTest pathWith6;
-    EXPECT_EQ(pathWith0, dfs.getShortestPathTo(0U));
-    EXPECT_EQ(pathWith1, dfs.getShortestPathTo(1U));
-    EXPECT_EQ(pathWith2, dfs.getShortestPathTo(2U));
-    EXPECT_EQ(pathWith3, dfs.getShortestPathTo(3U));
-    EXPECT_EQ(pathWith4, dfs.getShortestPathTo(4U));
-    EXPECT_EQ(pathWith5, dfs.getShortestPathTo(5U));
-    EXPECT_EQ(pathWith6, dfs.getShortestPathTo(6U));
+    EXPECT_EQ(pathWith0, bfs.getShortestPathTo(0U));
+    EXPECT_EQ(pathWith1, bfs.getShortestPathTo(1U));
+    EXPECT_EQ(pathWith2, bfs.getShortestPathTo(2U));
+    EXPECT_EQ(pathWith3, bfs.getShortestPathTo(3U));
+    EXPECT_EQ(pathWith4, bfs.getShortestPathTo(4U));
+    EXPECT_EQ(pathWith5, bfs.getShortestPathTo(5U));
+    EXPECT_EQ(pathWith6, bfs.getShortestPathTo(6U));
 }
 
-TEST(BreadthFirstSearchTest, GetIsProcessedMapWorks)
+TEST(BreadthFirstSearchTest, GetIsProcessedMapWorksWithUndirectedGraph)
 {
     GraphForTest graph;
     putConnectionsForTest(graph);
-    BfsForTest dfs(graph, 0U);
+    BfsForTest bfs(graph, 0U);
 
-    VertexToBoolMapForTest const& mapToVerify(dfs.getIsProcessedMap());
+    VertexToBoolMapForTest const& mapToVerify(bfs.getIsProcessedMap());
 
     VertexToBoolMapForTest mapToExpect{{0U, true}, {1U, true}, {2U, true}, {3U, true}, {4U, true}, {5U, true}};
     EXPECT_EQ(mapToExpect, mapToVerify);
 }
 
-TEST(BreadthFirstSearchTest, ReinitializeStartingFromWorks)
+TEST(BreadthFirstSearchTest, ReinitializeStartingFromWorksWithUndirectedGraph)
 {
     GraphForTest graph;
     putConnectionsForTest(graph);
-    BfsForTest dfs(graph, 0U);
+    BfsForTest bfs(graph, 0U);
 
-    dfs.reinitializeStartingFrom(3U);
+    bfs.reinitializeStartingFrom(3U);
 
     PathForTest pathWith0{3U, 2U, 0U};
     PathForTest pathWith1{3U, 2U, 1U};
@@ -93,14 +93,13 @@ TEST(BreadthFirstSearchTest, ReinitializeStartingFromWorks)
     PathForTest pathWith3{3U};
     PathForTest pathWith4{3U, 4U};
     PathForTest pathWith5{3U, 5U};
-    PathForTest pathWith6;
-    EXPECT_EQ(pathWith0, dfs.getShortestPathTo(0U));
-    EXPECT_EQ(pathWith1, dfs.getShortestPathTo(1U));
-    EXPECT_EQ(pathWith2, dfs.getShortestPathTo(2U));
-    EXPECT_EQ(pathWith3, dfs.getShortestPathTo(3U));
-    EXPECT_EQ(pathWith4, dfs.getShortestPathTo(4U));
-    EXPECT_EQ(pathWith5, dfs.getShortestPathTo(5U));
-    EXPECT_EQ(pathWith6, dfs.getShortestPathTo(6U));
+    EXPECT_EQ(pathWith0, bfs.getShortestPathTo(0U));
+    EXPECT_EQ(pathWith1, bfs.getShortestPathTo(1U));
+    EXPECT_EQ(pathWith2, bfs.getShortestPathTo(2U));
+    EXPECT_EQ(pathWith3, bfs.getShortestPathTo(3U));
+    EXPECT_EQ(pathWith4, bfs.getShortestPathTo(4U));
+    EXPECT_EQ(pathWith5, bfs.getShortestPathTo(5U));
+    EXPECT_TRUE(bfs.getShortestPathTo(6U).empty());
 }
 
 }

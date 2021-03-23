@@ -30,7 +30,7 @@ void putConnectionsForTest(GraphForTest & graph)
 }
 }
 
-TEST(DepthFirstSearchTest, HasPathToWorks)
+TEST(DepthFirstSearchTest, HasPathToWorksWithUndirectedGraph)
 {
     GraphForTest graph;
     putConnectionsForTest(graph);
@@ -45,7 +45,7 @@ TEST(DepthFirstSearchTest, HasPathToWorks)
     EXPECT_FALSE(dfs.hasPathTo(6U));
 }
 
-TEST(DepthFirstSearchTest, GetOrderedPathToWorks)
+TEST(DepthFirstSearchTest, GetOrderedPathToWorksWithUndirectedGraph)
 {
     GraphForTest graph;
     putConnectionsForTest(graph);
@@ -67,7 +67,7 @@ TEST(DepthFirstSearchTest, GetOrderedPathToWorks)
     EXPECT_EQ(pathWith6, dfs.getOrderedPathTo(6U));
 }
 
-TEST(DepthFirstSearchTest, GetIsProcessedMapWorks)
+TEST(DepthFirstSearchTest, GetIsProcessedMapWorksWithUndirectedGraph)
 {
     GraphForTest graph;
     putConnectionsForTest(graph);
@@ -79,7 +79,7 @@ TEST(DepthFirstSearchTest, GetIsProcessedMapWorks)
     EXPECT_EQ(mapToExpect, mapToVerify);
 }
 
-TEST(DepthFirstSearchTest, ReinitializeStartingFromWorks)
+TEST(DepthFirstSearchTest, ReinitializeStartingFromWorksWithUndirectedGraph)
 {
     GraphForTest graph;
     putConnectionsForTest(graph);
@@ -93,14 +93,13 @@ TEST(DepthFirstSearchTest, ReinitializeStartingFromWorks)
     PathForTest pathWith3{3U};
     PathForTest pathWith4{3U, 2U, 4U};
     PathForTest pathWith5{3U, 2U, 0U, 5U};
-    PathForTest pathWith6;
     EXPECT_EQ(pathWith0, dfs.getOrderedPathTo(0U));
     EXPECT_EQ(pathWith1, dfs.getOrderedPathTo(1U));
     EXPECT_EQ(pathWith2, dfs.getOrderedPathTo(2U));
     EXPECT_EQ(pathWith3, dfs.getOrderedPathTo(3U));
     EXPECT_EQ(pathWith4, dfs.getOrderedPathTo(4U));
     EXPECT_EQ(pathWith5, dfs.getOrderedPathTo(5U));
-    EXPECT_EQ(pathWith6, dfs.getOrderedPathTo(6U));
+    EXPECT_TRUE(dfs.getOrderedPathTo(6U).empty());
 }
 
 }
