@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Algorithm/Graph/GraphTypes.hpp>
+#include <Algorithm/Graph/Types/GraphTypes.hpp>
 
 #include <map>
 #include <vector>
-
 namespace alba
 {
 
