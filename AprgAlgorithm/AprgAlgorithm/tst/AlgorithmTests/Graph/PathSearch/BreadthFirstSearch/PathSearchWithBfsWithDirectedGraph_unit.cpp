@@ -2,6 +2,7 @@
 #include <Algorithm/Graph/PathSearch/BreadthFirstSearch/PathSearchUsingBfs.hpp>
 
 #include <gtest/gtest.h>
+
 namespace alba
 {
 
@@ -17,7 +18,8 @@ using GraphForTest = DirectedGraphWithListOfEdges<VertexForTest>;
 using PathSearchForTest = PathSearchUsingBfs<VertexForTest>;
 
 void putConnectionsForTest(GraphForTest & graph)
-{    graph.connect(0U, 1U);
+{
+    graph.connect(0U, 1U);
     graph.connect(0U, 2U);
     graph.connect(0U, 5U);
     graph.connect(2U, 1U);
@@ -43,13 +45,15 @@ TEST(PathSearchUsingBfsTest, HasPathToWorksWithDirectedGraph)
     EXPECT_FALSE(pathSearchWithBfs.hasPathTo(6U));
 }
 
-TEST(PathSearchUsingBfsTest, GetOrderedPathToWorksWithDirectedGraph){
+TEST(PathSearchUsingBfsTest, GetOrderedPathToWorksWithDirectedGraph)
+{
     GraphForTest graph;
     putConnectionsForTest(graph);
     PathSearchForTest pathSearchWithBfs(graph, 0U);
 
     PathForTest pathWith0{0U};
-    PathForTest pathWith1{0U, 1U};    PathForTest pathWith2{0U, 2U};
+    PathForTest pathWith1{0U, 1U};
+    PathForTest pathWith2{0U, 2U};
     PathForTest pathWith3{0U, 2U, 3U};
     PathForTest pathWith4{0U, 2U, 4U};
     PathForTest pathWith5{0U, 5U};
@@ -63,7 +67,8 @@ TEST(PathSearchUsingBfsTest, GetOrderedPathToWorksWithDirectedGraph){
     EXPECT_EQ(pathWith6, pathSearchWithBfs.getShortestPathTo(6U));
 }
 
-TEST(PathSearchUsingBfsTest, GetIsProcessedMapWorksWithDirectedGraph){
+TEST(PathSearchUsingBfsTest, GetIsProcessedMapWorksWithDirectedGraph)
+{
     GraphForTest graph;
     putConnectionsForTest(graph);
     PathSearchForTest pathSearchWithBfs(graph, 0U);
@@ -71,7 +76,8 @@ TEST(PathSearchUsingBfsTest, GetIsProcessedMapWorksWithDirectedGraph){
     VertexToBoolMapForTest const& mapToVerify(pathSearchWithBfs.getIsProcessedMap());
 
     VertexToBoolMapForTest mapToExpect{{0U, true}, {1U, true}, {2U, true}, {3U, true}, {4U, true}, {5U, true}};
-    EXPECT_EQ(mapToExpect, mapToVerify);}
+    EXPECT_EQ(mapToExpect, mapToVerify);
+}
 
 TEST(PathSearchUsingBfsTest, ReinitializeStartingFromWorksWithDirectedGraph)
 {
@@ -82,7 +88,8 @@ TEST(PathSearchUsingBfsTest, ReinitializeStartingFromWorksWithDirectedGraph)
     pathSearchWithBfs.reinitializeStartingFrom(2U);
 
     PathForTest pathWith1{2U, 1U};
-    PathForTest pathWith2{2U};    PathForTest pathWith3{2U, 3U};
+    PathForTest pathWith2{2U};
+    PathForTest pathWith3{2U, 3U};
     PathForTest pathWith4{2U, 4U};
     PathForTest pathWith5{2U, 3U, 5U};
     EXPECT_TRUE(pathSearchWithBfs.getShortestPathTo(0U).empty());
@@ -95,4 +102,5 @@ TEST(PathSearchUsingBfsTest, ReinitializeStartingFromWorksWithDirectedGraph)
 }
 
 }
+
 }

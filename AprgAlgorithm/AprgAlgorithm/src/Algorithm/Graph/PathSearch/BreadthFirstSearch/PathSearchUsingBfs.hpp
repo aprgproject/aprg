@@ -21,7 +21,8 @@ public:
     using VertexToBoolMap = typename GraphTypes<Vertex>::VertexToBoolMap;
 
     PathSearchUsingBfs(BaseGraphWithVertex const& graph, Vertex const& startVertex)
-        : BaseClass(graph, startVertex)    {
+        : BaseClass(graph, startVertex)
+    {
         reinitializeStartingFrom(startVertex);
     }
 
@@ -39,10 +40,10 @@ public:
         isProcessedMap[startVertex] = true;
 
         while(!queueOfVerticesToProcess.empty())
-        {            Vertex vertex(queueOfVerticesToProcess.back());
+        {
+            Vertex vertex(queueOfVerticesToProcess.back());
             queueOfVerticesToProcess.pop_back();
-            Vertices adjacentVertices(this->m_graph.getAdjacentVerticesAt(vertex));
-            for(Vertex const& adjacentVertex : adjacentVertices)
+            for(Vertex const& adjacentVertex : this->m_graph.getAdjacentVerticesAt(vertex))
             {
                 if(this->isNotProcessed(adjacentVertex))
                 {
@@ -51,6 +52,7 @@ public:
                     queueOfVerticesToProcess.emplace_front(adjacentVertex);
                 }
             }
+
         }
     }
 };

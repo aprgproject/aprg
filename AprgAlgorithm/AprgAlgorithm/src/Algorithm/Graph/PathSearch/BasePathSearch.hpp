@@ -34,7 +34,8 @@ public:
         if(it != m_isProcessedMap.cend())
         {
             result = it->second;
-        }        return result;
+        }
+        return result;
     }
 
     Path getPathTo(Vertex const& endVertex) const
@@ -94,4 +95,5 @@ protected:
 };
 
 }
+
 }

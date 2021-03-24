@@ -25,6 +25,7 @@ template<typename Graph>
 void testHasAnyConnectionWhenEmptyWithVertexAsUnsignedInt()
 {
     Graph graph;
+
     EXPECT_FALSE(graph.hasAnyConnection(0U));
     EXPECT_FALSE(graph.hasAnyConnection(1U));
     EXPECT_FALSE(graph.hasAnyConnection(2U));

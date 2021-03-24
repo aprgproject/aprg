@@ -4,6 +4,7 @@
 #include <Algorithm/Graph/CycleDetection/CycleDetectionUsingDfs.hpp>
 #include <Algorithm/UnionFind/BaseUnionFind.hpp>
 #include <Algorithm/UnionFind/UnionFindUsingMap.hpp>
+
 #include <algorithm>
 #include <set>
 
@@ -78,7 +79,8 @@ struct GraphUtilities
         return cycleDetection.hasCycle();
     }
 
-    static bool isGraphConnected(BaseGraphWithVertex const& graph)    {
+    static bool isGraphConnected(BaseGraphWithVertex const& graph)
+    {
         // A graph is connected if there is a path from every vertex to every other vertex in the graph.
 
         bool result(true);
@@ -174,8 +176,7 @@ struct GraphUtilities
         for(Vertex const& vertex : graph.getVertices())
         {
             Vertex root(unionFind.getRoot(vertex));
-            Vertices adjacentVertices(graph.getAdjacentVerticesAt(vertex));
-            for(Vertex const& adjacentVertex : adjacentVertices)
+            for(Vertex const& adjacentVertex : graph.getAdjacentVerticesAt(vertex))
             {
                 if(vertex <= adjacentVertex)
                 {
@@ -213,8 +214,7 @@ private:
             bool & isTwoColorable)
     {
         isProcessedMap[vertex] = true;
-        Vertices adjacentVertices(graph.getAdjacentVerticesAt(vertex));
-        for(Vertex const& adjacentVertex : adjacentVertices)
+        for(Vertex const& adjacentVertex : graph.getAdjacentVerticesAt(vertex))
         {
             if(!isProcessedMap.at(adjacentVertex))
             {

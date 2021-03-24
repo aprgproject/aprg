@@ -1,6 +1,7 @@
 #include <Algorithm/Graph/DirectedGraph/DirectedGraphWithListOfEdges.hpp>
 #include <Algorithm/Graph/UndirectedGraph/UndirectedGraphWithListOfEdges.hpp>
 #include <Algorithm/Graph/Utilities/GraphUtilities.hpp>
+
 #include <gtest/gtest.h>
 
 using namespace std;
@@ -18,7 +19,8 @@ using UndirectedGraphForTest = UndirectedGraphWithListOfEdges<unsigned int>;
 using DirectedGraphForTest = DirectedGraphWithListOfEdges<unsigned int>;
 }
 
-TEST(GraphUtilitiesTest, IsASimplePathWorks){
+TEST(GraphUtilitiesTest, IsASimplePathWorks)
+{
     GraphUtilitiesForTest::Path simplePath{1U, 2U, 3U};
     GraphUtilitiesForTest::Path nonSimplePath{1U, 2U, 3U, 2U, 4U};
 
@@ -58,6 +60,7 @@ TEST(GraphUtilitiesTest, IsATreeWorks)
     nonTreeGraphAndItsNotConnected.connect(0U, 1U);
     nonTreeGraphAndItsNotConnected.connect(0U, 2U);
     nonTreeGraphAndItsNotConnected.connect(3U, 4U);
+
     EXPECT_TRUE(GraphUtilitiesForTest::isATree(treeGraph));
     EXPECT_FALSE(GraphUtilitiesForTest::isATree(nonTreeGraphWithCycle));
     EXPECT_FALSE(GraphUtilitiesForTest::isATree(nonTreeGraphAndItsNotConnected));
@@ -93,6 +96,7 @@ TEST(GraphUtilitiesTest, HasAnyCyclesOnGraphWorks)
     graphWithCycle.connect(0U, 1U);
     graphWithCycle.connect(1U, 2U);
     graphWithCycle.connect(2U, 0U);
+
     EXPECT_FALSE(GraphUtilitiesForTest::hasAnyCyclesOnGraph(graphWithoutCycle));
     EXPECT_TRUE(GraphUtilitiesForTest::hasAnyCyclesOnGraph(graphWithCycle));
 }
@@ -107,6 +111,7 @@ TEST(GraphUtilitiesTest, IsGraphConnectedWorks)
     nonConnectedGraph.connect(0U, 1U);
     nonConnectedGraph.connect(0U, 2U);
     nonConnectedGraph.connect(3U, 4U);
+
     EXPECT_TRUE(GraphUtilitiesForTest::isGraphConnected(connectedGraph));
     EXPECT_FALSE(GraphUtilitiesForTest::isGraphConnected(nonConnectedGraph));
 }
@@ -117,7 +122,8 @@ TEST(GraphUtilitiesTest, IsBipartiteWorks)
     UndirectedGraphForTest bipartiteWorks;
     bipartiteWorks.connect(0U, 1U);
     bipartiteWorks.connect(0U, 2U);
-    bipartiteWorks.connect(0U, 3U);    bipartiteWorks.connect(3U, 4U);
+    bipartiteWorks.connect(0U, 3U);
+    bipartiteWorks.connect(3U, 4U);
     bipartiteWorks.connect(3U, 5U);
     bipartiteWorks.connect(4U, 5U);
 
@@ -130,6 +136,7 @@ TEST(GraphUtilitiesTest, GetDegreeAtWorks)
 
     graph.connect(0U, 1U);
     graph.connect(0U, 2U);
+
     EXPECT_EQ(2U, GraphUtilitiesForTest::getDegreeAt(graph, 0U));
     EXPECT_EQ(1U, GraphUtilitiesForTest::getDegreeAt(graph, 1U));
     EXPECT_EQ(1U, GraphUtilitiesForTest::getDegreeAt(graph, 2U));
@@ -141,6 +148,7 @@ TEST(GraphUtilitiesTest, GetMaxDegreeAtWorks)
 
     graph.connect(0U, 1U);
     graph.connect(0U, 2U);
+
     EXPECT_EQ(2U, GraphUtilitiesForTest::getMaxDegree(graph));
 }
 
@@ -149,7 +157,8 @@ TEST(GraphUtilitiesTest, GetAverageDegreeWorks)
     UndirectedGraphForTest graph;
 
     graph.connect(0U, 1U);
-    graph.connect(0U, 2U);    graph.connect(0U, 3U);
+    graph.connect(0U, 2U);
+    graph.connect(0U, 3U);
 
     EXPECT_EQ(1.5, GraphUtilitiesForTest::getAverageDegree(graph));
 }
@@ -159,7 +168,8 @@ TEST(GraphUtilitiesTest, GetNumberOfSelfLoopsWorks)
     UndirectedGraphForTest graph;
 
     graph.connect(0U, 1U);
-    graph.connect(0U, 2U);    graph.connect(0U, 3U);
+    graph.connect(0U, 2U);
+    graph.connect(0U, 3U);
     graph.connect(1U, 1U);
     graph.connect(2U, 2U);
 
@@ -171,7 +181,8 @@ TEST(GraphUtilitiesTest, GetEdgesOfMaximalConnectedSubgraphsWorks)
     UndirectedGraphForTest graph;
     graph.connect(0U, 5U);
     graph.connect(4U, 3U);
-    graph.connect(0U, 1U);    graph.connect(9U, 12U);
+    graph.connect(0U, 1U);
+    graph.connect(9U, 12U);
     graph.connect(6U, 4U);
     graph.connect(5U, 4U);
     graph.connect(0U, 2U);

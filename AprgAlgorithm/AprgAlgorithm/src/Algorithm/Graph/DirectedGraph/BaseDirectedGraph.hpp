@@ -23,7 +23,8 @@ public:
 
     void reverseDirections()
     {
-        Edges originalEdges(this->getEdges());        this->clear();
+        Edges originalEdges(this->getEdges());
+        this->clear();
         for(auto const& originalEdge : originalEdges)
         {
             this->connect(originalEdge.second, originalEdge.first);

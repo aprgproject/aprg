@@ -23,7 +23,8 @@ TEST(DirectedGraphWithVertexToAdjacencyListsMapTest, GetGraphDirectionTypeWorks)
 
 TEST(DirectedGraphWithVertexToAdjacencyListsMapTest, IsConnectedWorksWhenEmpty)
 {
-    testIsConnectedWhenEmptyWithVertexAsUnsignedInt<GraphForTest>();}
+    testIsConnectedWhenEmptyWithVertexAsUnsignedInt<GraphForTest>();
+}
 
 TEST(DirectedGraphWithVertexToAdjacencyListsMapTest, IsConnectedWorksWhenNotEmpty)
 {

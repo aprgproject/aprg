@@ -23,7 +23,8 @@ TEST(DirectedGraphWithListOfEdgesTest, GetGraphDirectionTypeWorks)
 
 TEST(DirectedGraphWithListOfEdgesTest, IsConnectedWorksWhenEmpty)
 {
-    testIsConnectedWhenEmptyWithVertexAsUnsignedInt<GraphForTest>();}
+    testIsConnectedWhenEmptyWithVertexAsUnsignedInt<GraphForTest>();
+}
 
 TEST(DirectedGraphWithListOfEdgesTest, IsConnectedWorksWhenNotEmpty)
 {
