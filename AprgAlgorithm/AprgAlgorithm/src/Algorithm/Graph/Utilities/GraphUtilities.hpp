@@ -2,9 +2,9 @@
 
 #include <Algorithm/Graph/BaseGraph.hpp>
 #include <Algorithm/Graph/CycleDetection/CycleDetectionUsingDfs.hpp>
+#include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 #include <Algorithm/UnionFind/BaseUnionFind.hpp>
 #include <Algorithm/UnionFind/UnionFindUsingMap.hpp>
-
 #include <algorithm>
 #include <set>
 
@@ -18,10 +18,10 @@ template<typename Vertex>
 struct GraphUtilities
 {
     using BaseGraphWithVertex = BaseGraph<Vertex>;
+    using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
     using BaseUnionFindWithVertex = BaseUnionFind<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
-    using Path = typename GraphTypes<Vertex>::Path;
-    using Edge = typename GraphTypes<Vertex>::Edge;
+    using Path = typename GraphTypes<Vertex>::Path;    using Edge = typename GraphTypes<Vertex>::Edge;
     using Edges = typename GraphTypes<Vertex>::Edges;
     using ListOfEdges = typename GraphTypes<Vertex>::ListOfEdges;
     using VertexToBoolMap = typename GraphTypes<Vertex>::VertexToBoolMap;
@@ -59,16 +59,9 @@ struct GraphUtilities
         return result;
     }
 
-    static bool isATree(BaseGraphWithVertex const& graph)
-    {
-        // A tree is an acyclic connected graph.
-        return !hasAnyCyclesOnGraph(graph) && isGraphConnected(graph);
-    }
-
     static bool isDirectedAcyclicGraph(BaseGraphWithVertex const& graph)
     {
-        // A directed acyclic graph (DAG) is a digraph with no directed cycles
-        return GraphDirectionType::Directed == graph.getGraphDirectionType()
+        // A directed acyclic graph (DAG) is a digraph with no directed cycles        return GraphDirectionType::Directed == graph.getGraphDirectionType()
                  && hasAnyCyclesOnGraph(graph);
     }
 
@@ -79,12 +72,17 @@ struct GraphUtilities
         return cycleDetection.hasCycle();
     }
 
-    static bool isGraphConnected(BaseGraphWithVertex const& graph)
+    static bool isATree(BaseUndirectedGraphWithVertex const& graph)
+    {
+        // A tree is an acyclic connected graph.
+        return !hasAnyCyclesOnGraph(graph) && isGraphConnected(graph);
+    }
+
+    static bool isGraphConnected(BaseUndirectedGraphWithVertex const& graph)
     {
         // A graph is connected if there is a path from every vertex to every other vertex in the graph.
 
-        bool result(true);
-        UnionFindUsingMap<Vertex> unionFind;
+        bool result(true);        UnionFindUsingMap<Vertex> unionFind;
         putGraphToUnionFind(unionFind, graph);
         bool isFirst(true);
         Vertex commonRoot;
@@ -104,11 +102,10 @@ struct GraphUtilities
         return result;
     }
 
-    static bool isBipartite(BaseGraphWithVertex const& graph)
+    static bool isBipartite(BaseUndirectedGraphWithVertex const& graph)
     {
         // A bipartite is a graph whose vertices we can divide into two sets
-        // such that all edges connect a vertex in one set with a vertex in the other set.
-        // So there is only one edge connecting both sets, and if that edge is removed the graph is no longer connected
+        // such that all edges connect a vertex in one set with a vertex in the other set.        // So there is only one edge connecting both sets, and if that edge is removed the graph is no longer connected
 
         VertexToBoolMap isProcessedMap;
         VertexToBoolMap colorMap;
@@ -166,10 +163,9 @@ struct GraphUtilities
         return count;
     }
 
-    static ListOfEdges getEdgesOfMaximalConnectedSubgraphs(BaseGraphWithVertex const& graph)
+    static ListOfEdges getEdgesOfMaximalConnectedSubgraphs(BaseUndirectedGraphWithVertex const& graph)
     {
         // A graph that is not connected (see isGraphConnected) consists of a set of connected components which are maximal connected subgraphs.
-
         UnionFindUsingMap<Vertex> unionFind;
         putGraphToUnionFind(unionFind, graph);
         std::map<Vertex, Edges> rootToEdgeMap;

@@ -1,11 +1,10 @@
 #pragma once
 
-#include <Algorithm/Graph/BaseGraph.hpp>
 #include <Algorithm/Graph/ConnectedComponents/BaseConnectedComponents.hpp>
 #include <Algorithm/Graph/PathSearch/DepthFirstSearch/PathSearchUsingDfs.hpp>
+#include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 
 #include <map>
-
 namespace alba
 {
 
@@ -16,16 +15,15 @@ template<typename Vertex>
 class ConnectedComponentsUsingDfs : public BaseConnectedComponents<Vertex>
 {
 public:
-    using BaseGraphWithVertex = BaseGraph<Vertex>;
+    using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using VertexToUnsignedIntMap = typename GraphTypes<Vertex>::VertexToUnsignedIntMap;
     using VertexToBoolMap = typename GraphTypes<Vertex>::VertexToBoolMap;
 
-    ConnectedComponentsUsingDfs(BaseGraphWithVertex const& graph)
+    ConnectedComponentsUsingDfs(BaseUndirectedGraphWithVertex const& graph)
         : m_graph(graph)
         , m_isProcessedMap()
-        , m_vertexToComponentIdMap()
-    {
+        , m_vertexToComponentIdMap()    {
         initialize();
     }
 
@@ -69,11 +67,10 @@ private:
             }
         }
     }
-    BaseGraphWithVertex const& m_graph;
+    BaseUndirectedGraphWithVertex const& m_graph;
     VertexToBoolMap m_isProcessedMap;
     VertexToUnsignedIntMap m_vertexToComponentIdMap;
 };
-
 }
 
 }
