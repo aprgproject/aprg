@@ -48,7 +48,8 @@ TEST(GraphUtilitiesTest, IsASimpleCycleWorks)
 
 TEST(GraphUtilitiesTest, IsDirectedAcyclicGraphWorks)
 {
-    UndirectedGraphForTest undirectedGraph;    undirectedGraph.connect(0U, 1U);
+    UndirectedGraphForTest undirectedGraph;
+    undirectedGraph.connect(0U, 1U);
     undirectedGraph.connect(1U, 2U);
     undirectedGraph.connect(2U, 0U);
     DirectedGraphForTest graphWithoutCycle;
@@ -102,7 +103,8 @@ TEST(GraphUtilitiesTest, IsATreeWorks)
 
 TEST(GraphUtilitiesTest, IsGraphConnectedWorks)
 {
-    UndirectedGraphForTest connectedGraph;    connectedGraph.connect(0U, 1U);
+    UndirectedGraphForTest connectedGraph;
+    connectedGraph.connect(0U, 1U);
     connectedGraph.connect(0U, 2U);
     connectedGraph.connect(0U, 3U);
     UndirectedGraphForTest nonConnectedGraph;
@@ -112,6 +114,22 @@ TEST(GraphUtilitiesTest, IsGraphConnectedWorks)
 
     EXPECT_TRUE(GraphUtilitiesForTest::isGraphConnected(connectedGraph));
     EXPECT_FALSE(GraphUtilitiesForTest::isGraphConnected(nonConnectedGraph));
+}
+
+TEST(GraphUtilitiesTest, IsGraphStronglyConnectedWorks)
+{
+    DirectedGraphForTest stronglyConnectedGraph;
+    stronglyConnectedGraph.connect(0U, 1U);
+    stronglyConnectedGraph.connect(1U, 2U);
+    stronglyConnectedGraph.connect(2U, 3U);
+    stronglyConnectedGraph.connect(3U, 0U);
+    DirectedGraphForTest nonStronglyConnectedGraph;
+    stronglyConnectedGraph.connect(0U, 1U);
+    stronglyConnectedGraph.connect(0U, 2U);
+    stronglyConnectedGraph.connect(0U, 3U);
+
+    EXPECT_TRUE(GraphUtilitiesForTest::isGraphStronglyConnected(stronglyConnectedGraph));
+    EXPECT_FALSE(GraphUtilitiesForTest::isGraphStronglyConnected(nonStronglyConnectedGraph));
 }
 
 TEST(GraphUtilitiesTest, IsBipartiteWorks)
