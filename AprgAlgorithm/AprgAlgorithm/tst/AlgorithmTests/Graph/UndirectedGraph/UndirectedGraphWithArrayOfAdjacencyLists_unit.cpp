@@ -16,10 +16,14 @@ namespace
 using GraphForTest = UndirectedGraphWithArrayOfAdjacencyLists<unsigned int, 13>;
 }
 
+TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, GetGraphDirectionTypeWorks)
+{
+    testGetGraphDirectionTypeWithVertexAsUnsignedInt<GraphForTest>();
+}
+
 TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, HasAnyConnectionWorksWhenEmpty)
 {
-    testHasAnyConnectionWhenEmptyWithVertexAsUnsignedInt<GraphForTest>();
-}
+    testHasAnyConnectionWhenEmptyWithVertexAsUnsignedInt<GraphForTest>();}
 
 TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, HasAnyConnectionWorksWhenNotEmpty)
 {

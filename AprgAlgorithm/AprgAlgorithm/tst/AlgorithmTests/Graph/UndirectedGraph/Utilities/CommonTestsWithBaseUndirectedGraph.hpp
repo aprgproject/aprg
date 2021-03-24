@@ -14,10 +14,17 @@ namespace CommonTestsWithBaseUndirectedGraph
 {
 
 template<typename Graph>
-void testHasAnyConnectionWhenEmptyWithVertexAsUnsignedInt()
+void testGetGraphDirectionTypeWithVertexAsUnsignedInt()
 {
     Graph graph;
 
+    EXPECT_EQ(GraphDirectionType::Undirected, graph.getGraphDirectionType());
+}
+
+template<typename Graph>
+void testHasAnyConnectionWhenEmptyWithVertexAsUnsignedInt()
+{
+    Graph graph;
     EXPECT_FALSE(graph.hasAnyConnection(0U));
     EXPECT_FALSE(graph.hasAnyConnection(1U));
     EXPECT_FALSE(graph.hasAnyConnection(2U));

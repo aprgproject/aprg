@@ -10,10 +10,15 @@ namespace alba
 namespace algorithm
 {
 
+enum class GraphDirectionType
+{
+    Undirected,
+    Directed
+};
+
 template<typename Vertex>
 struct GraphTypes
-{
-    using Vertices = std::vector<Vertex>;
+{    using Vertices = std::vector<Vertex>;
     using Path = std::vector<Vertex>;
     using Paths = std::vector<Path>;
 

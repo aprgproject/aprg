@@ -16,10 +16,14 @@ namespace
 using GraphForTest = UndirectedGraphWithListOfEdges<unsigned int>;
 }
 
+TEST(UndirectedGraphWithListOfEdgesTest, GetGraphDirectionTypeWorks)
+{
+    testGetGraphDirectionTypeWithVertexAsUnsignedInt<GraphForTest>();
+}
+
 TEST(UndirectedGraphWithListOfEdgesTest, HasAnyConnectionWorksWhenEmpty)
 {
-    testHasAnyConnectionWhenEmptyWithVertexAsUnsignedInt<GraphForTest>();
-}
+    testHasAnyConnectionWhenEmptyWithVertexAsUnsignedInt<GraphForTest>();}
 
 TEST(UndirectedGraphWithListOfEdgesTest, HasAnyConnectionWorksWhenNotEmpty)
 {
