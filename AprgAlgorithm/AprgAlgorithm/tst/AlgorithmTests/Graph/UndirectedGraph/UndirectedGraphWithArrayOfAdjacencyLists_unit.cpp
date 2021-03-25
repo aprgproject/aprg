@@ -1,13 +1,12 @@
 #include <Algorithm/Graph/UndirectedGraph/UndirectedGraphWithArrayOfAdjacencyLists.hpp>
-#include <AlgorithmTests/Graph/UndirectedGraph/Utilities/CommonTestsWithBaseUndirectedGraph.hpp>
+#include <AlgorithmTests/Graph/UndirectedGraph/Utilities/CommonTestsWithUndirectedGraph.hpp>
 
 #include <gtest/gtest.h>
 
-using namespace alba::algorithm::CommonTestsWithBaseUndirectedGraph;
+using namespace alba::algorithm::CommonTestsWithUndirectedGraph;
 
 namespace alba
 {
-
 namespace algorithm
 {
 
