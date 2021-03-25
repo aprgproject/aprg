@@ -15,6 +15,7 @@ using VertexForTest = unsigned int;
 using PathForTest = GraphTypes<VertexForTest>::Path;
 using GraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
 using PathSearchForTest = PathSearchUsingBfs<VertexForTest>;
+
 void putConnectionsForTest(GraphForTest & graph)
 {
     graph.connect(0U, 1U);
@@ -67,7 +68,8 @@ TEST(PathSearchUsingBfsTest, GetOrderedPathToWorksWithUndirectedGraph)
 
 TEST(PathSearchUsingBfsTest, ReinitializeStartingFromWorksWithUndirectedGraph)
 {
-    GraphForTest graph;    putConnectionsForTest(graph);
+    GraphForTest graph;
+    putConnectionsForTest(graph);
     PathSearchForTest pathSearchWithBfs(graph, 0U);
 
     pathSearchWithBfs.reinitializeStartingFrom(3U);

@@ -8,6 +8,7 @@ using namespace alba::algorithm::CommonTestsWithConnectedComponents;
 
 namespace alba
 {
+
 namespace algorithm
 {
 

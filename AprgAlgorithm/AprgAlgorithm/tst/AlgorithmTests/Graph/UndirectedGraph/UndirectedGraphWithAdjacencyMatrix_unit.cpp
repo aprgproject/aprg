@@ -7,6 +7,7 @@ using namespace alba::algorithm::CommonTestsWithUndirectedGraph;
 
 namespace alba
 {
+
 namespace algorithm
 {
 

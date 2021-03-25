@@ -16,12 +16,12 @@ class PathSearchUsingBfs : public BasePathSearch<Vertex>
 public:
     using BaseGraphWithVertex = BaseGraph<Vertex>;
     using BaseClass = BasePathSearch<Vertex>;
-    using Vertices = typename GraphTypes<Vertex>::Vertices;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using Path = typename GraphTypes<Vertex>::Path;
 
     PathSearchUsingBfs(BaseGraphWithVertex const& graph, Vertex const& startVertex)
-        : BaseClass(graph, startVertex)    {
+        : BaseClass(graph, startVertex)
+    {
         reinitializeStartingFrom(startVertex);
     }
 
@@ -40,7 +40,8 @@ public:
         std::deque<Vertex> queueOfVerticesToProcess{startVertex};
         while(!queueOfVerticesToProcess.empty())
         {
-            Vertex vertex(queueOfVerticesToProcess.back());            queueOfVerticesToProcess.pop_back();
+            Vertex vertex(queueOfVerticesToProcess.back());
+            queueOfVerticesToProcess.pop_back();
             for(Vertex const& adjacentVertex : this->m_graph.getAdjacentVerticesAt(vertex))
             {
                 if(this->isNotProcessed(adjacentVertex))
@@ -53,6 +54,7 @@ public:
         }
     }
 };
+
 }
 
 }

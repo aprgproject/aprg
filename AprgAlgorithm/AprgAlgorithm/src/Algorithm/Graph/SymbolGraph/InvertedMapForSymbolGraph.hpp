@@ -19,7 +19,8 @@ public:
     using ObjectToVertexMap = std::map<Object, Vertex>;
 
     ObjectToVertexMap const& getObjectToVertexMap() const
-    {        return m_invertedMap;
+    {
+        return m_invertedMap;
     }
 
     Vertices const& getUnusedVertices() const

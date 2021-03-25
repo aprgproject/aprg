@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Algorithm/Graph/BaseGraph.hpp>
+#include <Algorithm/Graph/DirectedGraph/BaseDirectedGraph.hpp>
 
 namespace alba
 {
@@ -12,10 +12,10 @@ template<typename Vertex, unsigned int MAX_VERTEX_VALUE>
 class ReachabilityInDigraphWithArrayUsingDfs
 {
 public:
-    using BaseGraphWithVertex = BaseGraph<Vertex>;
+    using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
     using ArrayOfBool = std::array<bool, MAX_VERTEX_VALUE>;
 
-    ReachabilityInDigraphWithArrayUsingDfs(BaseGraphWithVertex const& graph, Vertex const& sourceVertex)
+    ReachabilityInDigraphWithArrayUsingDfs(BaseDirectedGraphWithVertex const& graph, Vertex const& sourceVertex)
         : m_graph(graph)
         , m_sourceVertex(sourceVertex)
         , m_isReachableArray{}
@@ -53,7 +53,7 @@ private:
         }
     }
 
-    BaseGraphWithVertex const& m_graph;
+    BaseDirectedGraphWithVertex const& m_graph;
     Vertex m_sourceVertex;
     ArrayOfBool m_isReachableArray; // array for constant time query
 };

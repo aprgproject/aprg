@@ -33,7 +33,8 @@ struct GraphUtilities
     using Path = typename GraphTypes<Vertex>::Path;
 
     static bool isASimplePath(Path const& path)
-    {        // A simple path is one with no repeated vertices;
+    {
+        // A simple path is one with no repeated vertices;
 
         std::set<Vertex> uniqueVertices;
         copy(path.cbegin(), path.cend(), inserter(uniqueVertices, uniqueVertices.cbegin()));
@@ -119,7 +120,8 @@ struct GraphUtilities
         {
             colorMap[vertex] = false;
         }
-        bool isTwoColorable(true);        for(Vertex const& vertex : vertices)
+        bool isTwoColorable(true);
+        for(Vertex const& vertex : vertices)
         {
             if(!isProcessedMap.at(vertex))
             {
@@ -133,7 +135,8 @@ struct GraphUtilities
         return false;
     }
 
-    static unsigned int getDegreeAt(BaseGraphWithVertex const& graph, Vertex const& vertex)    {
+    static unsigned int getDegreeAt(BaseGraphWithVertex const& graph, Vertex const& vertex)
+    {
         return graph.getAdjacentVerticesAt(vertex).size();
     }
 
@@ -207,4 +210,5 @@ private:
 };
 
 }
+
 }

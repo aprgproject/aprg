@@ -27,7 +27,8 @@ public:
         : m_numberOfEdges(0U)
     {}
 
-    bool hasAnyConnection(Vertex const& vertex) const override    {
+    bool hasAnyConnection(Vertex const& vertex) const override
+    {
         bool result(false);
         auto it = m_adjacencyLists.find(vertex);
         if(it != m_adjacencyLists.cend())
@@ -109,7 +110,8 @@ public:
                 std::for_each(adjacencyList.lower_bound(vertex1), adjacencyList.cend(), [&](Vertex const& vertex2)
                 {
                     result.emplace_back(vertex1, vertex2);
-                });            }
+                });
+            }
         }
         return result;
     }

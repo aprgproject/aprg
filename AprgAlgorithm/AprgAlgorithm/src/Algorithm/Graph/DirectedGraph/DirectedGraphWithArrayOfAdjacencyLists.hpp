@@ -23,7 +23,8 @@ public:
     using AdjacencyLists = std::array<AdjacencyList, MAX_VERTEX_VALUE>;
 
     DirectedGraphWithArrayOfAdjacencyLists()
-        : m_numberOfEdges(0U)        , m_adjacencyLists{}
+        : m_numberOfEdges(0U)
+        , m_adjacencyLists{}
     {}
 
     bool isConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override
@@ -125,7 +126,8 @@ private:
                 std::copy(adjacencyList.cbegin(), adjacencyList.cend(), std::inserter(uniqueVertices, uniqueVertices.cbegin()));
             }
         }
-        return uniqueVertices;    }
+        return uniqueVertices;
+    }
 
     unsigned int m_numberOfEdges;
     AdjacencyLists m_adjacencyLists;

@@ -15,6 +15,7 @@ using VertexForTest = unsigned int;
 using PathForTest = GraphTypes<VertexForTest>::Path;
 using GraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
 using PathSearchForTest = PathSearchUsingDfs<VertexForTest>;
+
 void putConnectionsForTest(GraphForTest & graph)
 {
     graph.connect(0U, 1U);
@@ -67,7 +68,8 @@ TEST(PathSearchUsingDfsTest, GetOrderedPathToWorksWithUndirectedGraph)
 
 TEST(PathSearchUsingDfsTest, ReinitializeStartingFromWorksWithUndirectedGraph)
 {
-    GraphForTest graph;    putConnectionsForTest(graph);
+    GraphForTest graph;
+    putConnectionsForTest(graph);
     PathSearchForTest pathSearchWithDfs(graph, 0U);
 
     pathSearchWithDfs.reinitializeStartingFrom(3U);

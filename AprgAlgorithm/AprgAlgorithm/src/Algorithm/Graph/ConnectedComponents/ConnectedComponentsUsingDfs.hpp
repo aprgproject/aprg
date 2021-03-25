@@ -16,7 +16,6 @@ class ConnectedComponentsUsingDfs : public BaseConnectedComponents<Vertex>
 {
 public:
     using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
-    using Vertices = typename GraphTypes<Vertex>::Vertices;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using VertexToUnsignedIntMap = typename GraphTypes<Vertex>::VertexToUnsignedIntMap;
 
@@ -26,6 +25,7 @@ public:
     {
         initialize();
     }
+
     bool isConnected(Vertex const& vertex1, Vertex const& vertex2) const override
     {
         auto it1 = m_vertexToComponentIdMap.find(vertex1);
@@ -51,7 +51,8 @@ private:
         return m_processedVertices.find(vertex)== m_processedVertices.cend();
     }
 
-    void initialize()    {
+    void initialize()
+    {
         m_numberOfComponentIds = 0U;
         for(Vertex const& vertex : m_graph.getVertices())
         {
@@ -68,7 +69,8 @@ private:
         m_processedVertices.emplace(vertex);
         m_vertexToComponentIdMap[vertex] = m_numberOfComponentIds;
         for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex))
-        {            if(isNotProcessed(adjacentVertex))
+        {
+            if(isNotProcessed(adjacentVertex))
             {
                 traverseUsingDfs(adjacentVertex);
             }
@@ -80,6 +82,7 @@ private:
     SetOfVertices m_processedVertices;
     VertexToUnsignedIntMap m_vertexToComponentIdMap;
 };
+
 }
 
 }

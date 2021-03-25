@@ -25,7 +25,8 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
 
     DirectedGraphWithVertexToAdjacencyListsMap()
-        : m_numberOfEdges(0U)        , m_adjacencyLists{}
+        : m_numberOfEdges(0U)
+        , m_adjacencyLists{}
     {}
 
     bool isConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override
@@ -138,7 +139,8 @@ private:
             std::copy(adjacencyList.cbegin(), adjacencyList.cend(), std::inserter(uniqueVertices, uniqueVertices.cbegin()));
         }
         return uniqueVertices;
-    }    unsigned int m_numberOfEdges;
+    }
+    unsigned int m_numberOfEdges;
     AdjacencyLists m_adjacencyLists;
 };
 

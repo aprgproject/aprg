@@ -15,12 +15,12 @@ class VertexOrderingUsingDfs
 {
 public:
     using BaseGraphWithVertex = BaseGraph<Vertex>;
-    using Vertices = typename GraphTypes<Vertex>::Vertices;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using Path = typename GraphTypes<Vertex>::Path;
 
     enum class TraverseOrder
-    {        PreOrder,
+    {
+        PreOrder,
         PostOrder,
         ReversePostOrder,
     };
@@ -29,7 +29,8 @@ public:
         : m_graph(graph)
     {}
 
-    Path traverseAndGetPath(TraverseOrder const traverseOrder)    {
+    Path traverseAndGetPath(TraverseOrder const traverseOrder)
+    {
         Path traversedPath;
         traverseStartingFromAllVertices(traversedPath, traverseOrder);
         reversePathIfNeeded(traversedPath, traverseOrder);
@@ -54,7 +55,8 @@ private:
         m_processedVertices.clear();
     }
 
-    void reversePathIfNeeded(Path & traversedPath, TraverseOrder const traverseOrder) const    {
+    void reversePathIfNeeded(Path & traversedPath, TraverseOrder const traverseOrder) const
+    {
         if(TraverseOrder::ReversePostOrder == traverseOrder)
         {
             Path reversedPath(traversedPath.crbegin(), traversedPath.crend());
@@ -103,7 +105,8 @@ private:
         m_processedVertices.emplace(startVertex);
         for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(startVertex))
         {
-            if(isNotProcessed(adjacentVertex))            {
+            if(isNotProcessed(adjacentVertex))
+            {
                 traversePreOrderAt(traversedPath, adjacentVertex);
             }
         }
@@ -114,7 +117,8 @@ private:
         m_processedVertices.emplace(startVertex);
         for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(startVertex))
         {
-            if(isNotProcessed(adjacentVertex))            {
+            if(isNotProcessed(adjacentVertex))
+            {
                 traversePostOrderAt(traversedPath, adjacentVertex);
             }
         }
@@ -127,7 +131,8 @@ private:
         m_processedVertices.emplace(startVertex);
 
         // Traversing adjacents in order results in higher vertices to be first in the list after reversal
-        // Reverse the traversal of adjacents is not fine either        // Vertices adjacentVertices(m_graph.getAdjacentVerticesAt(startVertex));
+        // Reverse the traversal of adjacents is not fine either
+        // Vertices adjacentVertices(m_graph.getAdjacentVerticesAt(startVertex));
         // std::for_each(adjacentVertices.crbegin(), adjacentVertices.crend(), [&](Vertex const& adjacentVertex)
 
         for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(startVertex))
@@ -146,4 +151,5 @@ private:
 };
 
 }
+
 }

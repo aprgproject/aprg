@@ -13,7 +13,6 @@ class CycleDetectionUsingDfs
 {
 public:
     using BaseGraphWithVertex = BaseGraph<Vertex>;
-    using Vertices = typename GraphTypes<Vertex>::Vertices;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using Path = typename GraphTypes<Vertex>::Path;
     using VertexToVertexMap = typename GraphTypes<Vertex>::VertexToVertexMap;
@@ -22,7 +21,8 @@ public:
         : m_graph(graph)
     {}
 
-    bool hasCycle() const    {
+    bool hasCycle() const
+    {
         return !m_pathWithCycle.empty();
     }
 
@@ -54,7 +54,8 @@ private:
         return m_verticesInCycle.find(vertex) != m_verticesInCycle.cend();
     }
 
-    Path getPathWithCycle(Vertex const& secondToTheLastVertex, Vertex const& lastVertex) const    {
+    Path getPathWithCycle(Vertex const& secondToTheLastVertex, Vertex const& lastVertex) const
+    {
         bool isSuccessful(true);
         Path reversedPath{lastVertex};
         Vertex currentVertex = secondToTheLastVertex;
@@ -105,7 +106,8 @@ private:
         m_processedVertices.emplace(startVertex);
         for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(startVertex))
         {
-            if(hasCycle())            {
+            if(hasCycle())
+            {
                 break;
             }
             else if(isNotProcessed(adjacentVertex))
@@ -127,7 +129,8 @@ private:
         m_processedVertices.emplace(startVertex);
         for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(startVertex))
         {
-            if(hasCycle())            {
+            if(hasCycle())
+            {
                 break;
             }
             else if(isNotProcessed(adjacentVertex))
@@ -149,6 +152,7 @@ private:
     SetOfVertices m_verticesInCycle;
     Path m_pathWithCycle;
 };
+
 }
 
 }

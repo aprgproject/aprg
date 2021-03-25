@@ -2,6 +2,7 @@
 #include <Algorithm/Graph/VertexOrdering/VertexOrderingUsingDfs.hpp>
 
 #include <gtest/gtest.h>
+
 namespace alba
 {
 

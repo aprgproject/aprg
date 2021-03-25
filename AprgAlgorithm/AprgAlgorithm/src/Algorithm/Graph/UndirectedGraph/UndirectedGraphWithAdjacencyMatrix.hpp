@@ -21,7 +21,8 @@ public:
     using AdjacencyMatrix = matrix::AlbaMatrix<bool>;
 
     UndirectedGraphWithAdjacencyMatrix()
-        : m_numberOfEdges(0U)        , m_adjacencyMatrix(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE)
+        : m_numberOfEdges(0U)
+        , m_adjacencyMatrix(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE)
     {}
 
     bool hasAnyConnection(Vertex const& vertex) const override

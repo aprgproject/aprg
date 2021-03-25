@@ -23,7 +23,8 @@ public:
     using AdjacencyLists = std::array<AdjacencyList, MAX_VERTEX_VALUE>;
 
     UndirectedGraphWithArrayOfAdjacencyLists()
-        : m_numberOfVertices(0U)        , m_numberOfEdges(0U)
+        : m_numberOfVertices(0U)
+        , m_numberOfEdges(0U)
         , m_adjacencyLists{}
     {}
 

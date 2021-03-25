@@ -15,7 +15,6 @@ class ConnectedComponentsUsingUnionFind : public BaseConnectedComponents<Vertex>
 {
 public:
     using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
-    using Vertices = typename GraphTypes<Vertex>::Vertices;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using Edge = typename GraphTypes<Vertex>::Edge;
 
@@ -24,6 +23,7 @@ public:
     {
         initialize();
     }
+
     bool isConnected(Vertex const& vertex1, Vertex const& vertex2) const override
     {
         return m_unionFind.isConnected(vertex1, vertex2);
