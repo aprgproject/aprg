@@ -20,11 +20,10 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Edge = typename GraphTypes<Vertex>::Edge;
     using Edges = typename GraphTypes<Vertex>::Edges;
-    using EdgeInSet = typename GraphTypes<Vertex>::EdgeInSet;
+    using EdgeInSet = typename GraphTypes<Vertex>::EdgeWithCompare;
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
 
-    UndirectedGraphWithListOfEdges()
-        : m_numberOfEdges(0U)
+    UndirectedGraphWithListOfEdges()        : m_numberOfEdges(0U)
         , m_edges{}
     {}
 
@@ -135,11 +134,10 @@ public:
         m_edges.clear();
     }
 
-private:
+protected:
 
     unsigned int m_numberOfEdges;
-    SetOfEdges m_edges;
-};
+    SetOfEdges m_edges;};
 
 }
 

@@ -21,9 +21,8 @@ public:
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using Edge = typename GraphTypes<Vertex>::Edge;
     using Edges = typename GraphTypes<Vertex>::Edges;
-    using EdgeInSet = typename GraphTypes<Vertex>::EdgeInSet;
+    using EdgeInSet = typename GraphTypes<Vertex>::EdgeWithCompare;
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
-
 
     DirectedGraphWithListOfEdges()
         : m_numberOfEdges(0U)
@@ -109,11 +108,10 @@ public:
         m_edges.clear();
     }
 
-private:
+protected:
     SetOfVertices getUniqueVertices() const
     {
-        SetOfVertices uniqueVertices;
-        for(auto const& edge : m_edges)
+        SetOfVertices uniqueVertices;        for(auto const& edge : m_edges)
         {
             uniqueVertices.emplace(edge.first);
             uniqueVertices.emplace(edge.second);

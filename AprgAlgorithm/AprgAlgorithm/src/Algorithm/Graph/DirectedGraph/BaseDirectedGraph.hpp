@@ -16,11 +16,10 @@ public:
 
     GraphDirectionType getGraphDirectionType() const
     {
-        return GraphDirectionType::Directed;
+        return DIRECTION_TYPE;
     }
 
-    void reverseDirections()
-    {
+    void reverseDirections()    {
         Edges originalEdges(this->getEdges());
         this->clear();
         for(auto const& originalEdge : originalEdges)
@@ -28,8 +27,9 @@ public:
             this->connect(originalEdge.second, originalEdge.first);
         }
     }
+
+    static constexpr GraphDirectionType DIRECTION_TYPE = GraphDirectionType::Directed;
 };
 
 }
-
 }
