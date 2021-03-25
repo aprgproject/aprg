@@ -5,10 +5,10 @@
 #include <Algorithm/Graph/ConnectedComponents/ConnectedComponentsUsingDfs.hpp>
 #include <Algorithm/Graph/ConnectedComponents/StronglyConnectedComponentsUsingKosarajuSharir.hpp>
 #include <Algorithm/Graph/DirectedGraph/BaseDirectedGraph.hpp>
+#include <Algorithm/Graph/EdgeWeightedGraph/EdgeWeightedGraph.hpp>
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 #include <Algorithm/Graph/Utilities/BipartiteCheckerUsingDfs.hpp>
-#include <Algorithm/UnionFind/BaseUnionFind.hpp>
-#include <Algorithm/UnionFind/UnionFindUsingMap.hpp>
+#include <Algorithm/UnionFind/BaseUnionFind.hpp>#include <Algorithm/UnionFind/UnionFindUsingMap.hpp>
 
 #include <algorithm>
 #include <set>
