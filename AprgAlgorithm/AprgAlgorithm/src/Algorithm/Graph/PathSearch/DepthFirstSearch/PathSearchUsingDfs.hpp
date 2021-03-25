@@ -15,12 +15,11 @@ public:
     using BaseGraphWithVertex = BaseGraph<Vertex>;
     using BaseClass = BasePathSearch<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
+    using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using Path = typename GraphTypes<Vertex>::Path;
-    using VertexToBoolMap = typename GraphTypes<Vertex>::VertexToBoolMap;
 
     PathSearchUsingDfs(BaseGraphWithVertex const& graph, Vertex const& startVertex)
-        : BaseClass(graph, startVertex)
-    {
+        : BaseClass(graph, startVertex)    {
         reinitializeStartingFrom(startVertex);
     }
 
@@ -33,24 +32,23 @@ public:
     {
         this->clear();
         this->m_startVertex = startVertex;
-        continueTraversal(startVertex);
+        traverseUsingDfs(startVertex);
     }
 
 private:
-    void continueTraversal(Vertex const& vertex)
+    void traverseUsingDfs(Vertex const& vertex)
     {
-        VertexToBoolMap & isProcessedMap(this->m_isProcessedMap);
-        isProcessedMap[vertex] = true;
+        SetOfVertices & processedVertices(this->m_processedVertices);
+        processedVertices.emplace(vertex);
         for(Vertex const& adjacentVertex : this->m_graph.getAdjacentVerticesAt(vertex))
         {
             if(this->isNotProcessed(adjacentVertex))
             {
                 this->m_vertexToPreviousVertexMap[adjacentVertex] = vertex;
-                continueTraversal(adjacentVertex);
+                traverseUsingDfs(adjacentVertex);
             }
         }
-    }
-};
+    }};
 
 }
 

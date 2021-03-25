@@ -16,15 +16,14 @@ template <typename Vertex, unsigned int MAX_VERTEX_VALUE>
 class DirectedGraphWithArrayOfAdjacencyLists : public BaseDirectedGraph<Vertex>
 {
 public:
-    using AdjacencyList = std::set<Vertex>;
-    using AdjacencyLists = std::array<AdjacencyList, MAX_VERTEX_VALUE>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
-    using Edges = typename GraphTypes<Vertex>::Edges;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
+    using Edges = typename GraphTypes<Vertex>::Edges;
+    using AdjacencyList = SetOfVertices;
+    using AdjacencyLists = std::array<AdjacencyList, MAX_VERTEX_VALUE>;
 
     DirectedGraphWithArrayOfAdjacencyLists()
-        : m_numberOfEdges(0U)
-        , m_adjacencyLists{}
+        : m_numberOfEdges(0U)        , m_adjacencyLists{}
     {}
 
     bool isConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override
@@ -123,14 +122,10 @@ private:
             if(!adjacencyList.empty())
             {
                 uniqueVertices.emplace(sourceVertex);
-                for(Vertex const& destinationVertex : adjacencyList)
-                {
-                    uniqueVertices.emplace(destinationVertex);
-                }
+                std::copy(adjacencyList.cbegin(), adjacencyList.cend(), std::inserter(uniqueVertices, uniqueVertices.cbegin()));
             }
         }
-        return uniqueVertices;
-    }
+        return uniqueVertices;    }
 
     unsigned int m_numberOfEdges;
     AdjacencyLists m_adjacencyLists;

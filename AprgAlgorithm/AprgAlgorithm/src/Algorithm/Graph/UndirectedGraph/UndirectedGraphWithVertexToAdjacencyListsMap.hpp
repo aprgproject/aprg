@@ -18,18 +18,16 @@ template<typename Vertex>
 class UndirectedGraphWithVertexToAdjacencyListsMap : public BaseUndirectedGraph<Vertex>
 {
 public:
-    using AdjacencyList = std::set<Vertex>;
-    using AdjacencyLists = std::map<Vertex, AdjacencyList>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Edges = typename GraphTypes<Vertex>::Edges;
+    using AdjacencyList = typename GraphTypes<Vertex>::SetOfVertices;
+    using AdjacencyLists = std::map<Vertex, AdjacencyList>;
 
     UndirectedGraphWithVertexToAdjacencyListsMap()
         : m_numberOfEdges(0U)
-        , m_adjacencyLists{}
     {}
 
-    bool hasAnyConnection(Vertex const& vertex) const override
-    {
+    bool hasAnyConnection(Vertex const& vertex) const override    {
         bool result(false);
         auto it = m_adjacencyLists.find(vertex);
         if(it != m_adjacencyLists.cend())
@@ -108,11 +106,10 @@ public:
             AdjacencyList const& adjacencyList(vertexAndAdjacencyListPair.second);
             if(!adjacencyList.empty())
             {
-                for_each(adjacencyList.lower_bound(vertex1), adjacencyList.cend(), [&](Vertex const& vertex2)
+                std::for_each(adjacencyList.lower_bound(vertex1), adjacencyList.cend(), [&](Vertex const& vertex2)
                 {
                     result.emplace_back(vertex1, vertex2);
-                });
-            }
+                });            }
         }
         return result;
     }

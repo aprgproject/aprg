@@ -17,18 +17,15 @@ class ConnectedComponentsUsingDfs : public BaseConnectedComponents<Vertex>
 public:
     using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
-    using VertexToBoolMap = typename GraphTypes<Vertex>::VertexToBoolMap;
+    using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using VertexToUnsignedIntMap = typename GraphTypes<Vertex>::VertexToUnsignedIntMap;
 
     ConnectedComponentsUsingDfs(BaseUndirectedGraphWithVertex const& graph)
         : m_graph(graph)
         , m_numberOfComponentIds(0U)
-        , m_isProcessedMap()
-        , m_vertexToComponentIdMap()
     {
         initialize();
     }
-
     bool isConnected(Vertex const& vertex1, Vertex const& vertex2) const override
     {
         auto it1 = m_vertexToComponentIdMap.find(vertex1);
@@ -51,12 +48,10 @@ private:
 
     bool isNotProcessed(Vertex const& vertex) const
     {
-        auto it = m_isProcessedMap.find(vertex);
-        return it == m_isProcessedMap.cend() || !it->second;
+        return m_processedVertices.find(vertex)== m_processedVertices.cend();
     }
 
-    void initialize()
-    {
+    void initialize()    {
         m_numberOfComponentIds = 0U;
         for(Vertex const& vertex : m_graph.getVertices())
         {
@@ -70,11 +65,10 @@ private:
 
     void traverseUsingDfs(Vertex const& vertex)
     {
-        m_isProcessedMap[vertex] = true;
+        m_processedVertices.emplace(vertex);
         m_vertexToComponentIdMap[vertex] = m_numberOfComponentIds;
         for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex))
-        {
-            if(isNotProcessed(adjacentVertex))
+        {            if(isNotProcessed(adjacentVertex))
             {
                 traverseUsingDfs(adjacentVertex);
             }
@@ -83,10 +77,9 @@ private:
 
     BaseUndirectedGraphWithVertex const& m_graph;
     unsigned int m_numberOfComponentIds;
-    VertexToBoolMap m_isProcessedMap;
+    SetOfVertices m_processedVertices;
     VertexToUnsignedIntMap m_vertexToComponentIdMap;
 };
-
 }
 
 }

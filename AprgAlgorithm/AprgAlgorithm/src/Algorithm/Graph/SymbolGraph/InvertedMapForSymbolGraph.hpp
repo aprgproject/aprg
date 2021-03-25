@@ -15,12 +15,11 @@ template <typename Vertex, typename Object>
 class InvertedMapForSymbolGraph
 {
 public:
-    using ObjectToVertexMap = std::map<Object, Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
+    using ObjectToVertexMap = std::map<Object, Vertex>;
 
     ObjectToVertexMap const& getObjectToVertexMap() const
-    {
-        return m_invertedMap;
+    {        return m_invertedMap;
     }
 
     Vertices const& getUnusedVertices() const

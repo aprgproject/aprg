@@ -17,14 +17,13 @@ template <typename Vertex, unsigned int MAX_VERTEX_VALUE>
 class UndirectedGraphWithArrayOfAdjacencyLists : public BaseUndirectedGraph<Vertex>
 {
 public:
-    using AdjacencyList = std::set<Vertex>;
-    using AdjacencyLists = std::array<AdjacencyList, MAX_VERTEX_VALUE>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Edges = typename GraphTypes<Vertex>::Edges;
+    using AdjacencyList = typename GraphTypes<Vertex>::SetOfVertices;
+    using AdjacencyLists = std::array<AdjacencyList, MAX_VERTEX_VALUE>;
 
     UndirectedGraphWithArrayOfAdjacencyLists()
-        : m_numberOfVertices(0U)
-        , m_numberOfEdges(0U)
+        : m_numberOfVertices(0U)        , m_numberOfEdges(0U)
         , m_adjacencyLists{}
     {}
 

@@ -20,20 +20,17 @@ public:
     using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
     using DirectedGraphWithListOfEdgesWithVertex = DirectedGraphWithListOfEdges<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
+    using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using Edge = typename GraphTypes<Vertex>::Edge;
     using Edges = typename GraphTypes<Vertex>::Edges;
-    using VertexToBoolMap = typename GraphTypes<Vertex>::VertexToBoolMap;
     using VertexToUnsignedIntMap = typename GraphTypes<Vertex>::VertexToUnsignedIntMap;
 
     StronglyConnectedComponentsUsingKosarajuSharir(BaseDirectedGraphWithVertex const& graph)
         : m_graph(graph)
         , m_numberOfComponentIds(0U)
-        , m_isProcessedMap()
-        , m_vertexToComponentIdMap()
     {
         initialize();
     }
-
     bool isConnected(Vertex const& vertex1, Vertex const& vertex2) const override
     {
         // Two vertices v and w are strongly connected if they are mutually reachable (so there is a v to w and w to v)
@@ -57,12 +54,10 @@ private:
 
     bool isNotProcessed(Vertex const& vertex) const
     {
-        auto it = m_isProcessedMap.find(vertex);
-        return it == m_isProcessedMap.cend() || !it->second;
+        return m_processedVertices.find(vertex) == m_processedVertices.cend();
     }
 
-    DirectedGraphWithListOfEdgesWithVertex getReversedGraph(BaseDirectedGraphWithVertex const& graph) const
-    {
+    DirectedGraphWithListOfEdgesWithVertex getReversedGraph(BaseDirectedGraphWithVertex const& graph) const    {
         DirectedGraphWithListOfEdgesWithVertex result;
         Edges edges(graph.getEdges());
         for(Edge const& edge : edges)
@@ -92,11 +87,10 @@ private:
 
     void traverseUsingDfs(Vertex const& vertex)
     {
-        m_isProcessedMap[vertex] = true;
+        m_processedVertices.emplace(vertex);
         m_vertexToComponentIdMap[vertex] = m_numberOfComponentIds;
         for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex))
-        {
-            if(isNotProcessed(adjacentVertex))
+        {            if(isNotProcessed(adjacentVertex))
             {
                 traverseUsingDfs(adjacentVertex);
             }
@@ -105,10 +99,9 @@ private:
 
     BaseDirectedGraphWithVertex const& m_graph;
     unsigned int m_numberOfComponentIds;
-    VertexToBoolMap m_isProcessedMap;
+    SetOfVertices m_processedVertices;
     VertexToUnsignedIntMap m_vertexToComponentIdMap;
 };
-
 }
 
 }

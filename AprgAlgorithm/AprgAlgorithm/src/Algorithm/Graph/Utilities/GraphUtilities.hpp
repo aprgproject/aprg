@@ -26,15 +26,14 @@ struct GraphUtilities
     using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
     using BaseUnionFindWithVertex = BaseUnionFind<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
-    using Path = typename GraphTypes<Vertex>::Path;
+    using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using Edge = typename GraphTypes<Vertex>::Edge;
     using Edges = typename GraphTypes<Vertex>::Edges;
     using ListOfEdges = typename GraphTypes<Vertex>::ListOfEdges;
-    using VertexToBoolMap = typename GraphTypes<Vertex>::VertexToBoolMap;
+    using Path = typename GraphTypes<Vertex>::Path;
 
     static bool isASimplePath(Path const& path)
-    {
-        // A simple path is one with no repeated vertices;
+    {        // A simple path is one with no repeated vertices;
 
         std::set<Vertex> uniqueVertices;
         copy(path.cbegin(), path.cend(), inserter(uniqueVertices, uniqueVertices.cbegin()));
@@ -114,16 +113,13 @@ struct GraphUtilities
         // such that all edges connect a vertex in one set with a vertex in the other set.
         // So there is only one edge connecting both sets, and if that edge is removed the graph is no longer connected
 
-        VertexToBoolMap isProcessedMap;
-        VertexToBoolMap colorMap;
+        /*SetOfVertices processedVertices;
         Vertices vertices(graph.getVertices());
         for(Vertex const& vertex : vertices)
         {
-            isProcessedMap[vertex] = false;
             colorMap[vertex] = false;
         }
-        bool isTwoColorable(true);
-        for(Vertex const& vertex : vertices)
+        bool isTwoColorable(true);        for(Vertex const& vertex : vertices)
         {
             if(!isProcessedMap.at(vertex))
             {
@@ -133,12 +129,11 @@ struct GraphUtilities
             {
                 break;
             }
-        }
-        return isTwoColorable;
+        }*/
+        return false;
     }
 
-    static unsigned int getDegreeAt(BaseGraphWithVertex const& graph, Vertex const& vertex)
-    {
+    static unsigned int getDegreeAt(BaseGraphWithVertex const& graph, Vertex const& vertex)    {
         return graph.getAdjacentVerticesAt(vertex).size();
     }
 
@@ -209,34 +204,7 @@ private:
     {
         putEdgesToUnionFind(unionFind, graph.getEdges());
     }
-
-    static void checkIsBipartiteUsingDfs(
-            BaseGraphWithVertex const& graph,
-            Vertex const& vertex,
-            VertexToBoolMap & isProcessedMap,
-            VertexToBoolMap & colorMap,
-            bool & isTwoColorable)
-    {
-        isProcessedMap[vertex] = true;
-        for(Vertex const& adjacentVertex : graph.getAdjacentVerticesAt(vertex))
-        {
-            if(!isProcessedMap.at(adjacentVertex))
-            {
-                colorMap[adjacentVertex] = !colorMap.at(vertex);
-                checkIsBipartiteUsingDfs(graph, adjacentVertex, isProcessedMap, colorMap, isTwoColorable);
-            }
-            else if(colorMap.at(adjacentVertex) == colorMap.at(vertex))
-            {
-                isTwoColorable = false;
-            }
-            if(!isTwoColorable)
-            {
-                break;
-            }
-        }
-    }
 };
 
 }
-
 }

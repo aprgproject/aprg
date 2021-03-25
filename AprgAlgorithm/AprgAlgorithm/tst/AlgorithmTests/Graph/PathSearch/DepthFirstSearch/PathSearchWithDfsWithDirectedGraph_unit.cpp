@@ -12,11 +12,9 @@ namespace algorithm
 namespace
 {
 using VertexForTest = unsigned int;
-using VertexToBoolMapForTest = GraphTypes<VertexForTest>::VertexToBoolMap;
 using PathForTest = GraphTypes<VertexForTest>::Path;
 using GraphForTest = DirectedGraphWithListOfEdges<VertexForTest>;
 using PathSearchForTest = PathSearchUsingDfs<VertexForTest>;
-
 void putConnectionsForTest(GraphForTest & graph)
 {
     graph.connect(0U, 1U);
@@ -67,22 +65,9 @@ TEST(PathSearchUsingDfsTest, GetOrderedPathToWorksWithDirectedGraph)
     EXPECT_EQ(pathWith6, pathSearchWithDfs.getOrderedPathTo(6U));
 }
 
-TEST(PathSearchUsingDfsTest, GetIsProcessedMapWorksWithDirectedGraph)
-{
-    GraphForTest graph;
-    putConnectionsForTest(graph);
-    PathSearchForTest pathSearchWithDfs(graph, 0U);
-
-    VertexToBoolMapForTest const& mapToVerify(pathSearchWithDfs.getIsProcessedMap());
-
-    VertexToBoolMapForTest mapToExpect{{0U, true}, {1U, true}, {2U, true}, {3U, true}, {4U, true}, {5U, true}};
-    EXPECT_EQ(mapToExpect, mapToVerify);
-}
-
 TEST(PathSearchUsingDfsTest, ReinitializeStartingFromWorksWithDirectedGraph)
 {
-    GraphForTest graph;
-    putConnectionsForTest(graph);
+    GraphForTest graph;    putConnectionsForTest(graph);
     PathSearchForTest pathSearchWithDfs(graph, 0U);
 
     pathSearchWithDfs.reinitializeStartingFrom(2U);

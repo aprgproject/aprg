@@ -21,12 +21,11 @@ public:
     using AdjacencyList = std::set<Vertex>;
     using AdjacencyLists = std::map<Vertex, AdjacencyList>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
-    using Edges = typename GraphTypes<Vertex>::Edges;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
+    using Edges = typename GraphTypes<Vertex>::Edges;
 
     DirectedGraphWithVertexToAdjacencyListsMap()
-        : m_numberOfEdges(0U)
-        , m_adjacencyLists{}
+        : m_numberOfEdges(0U)        , m_adjacencyLists{}
     {}
 
     bool isConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override
@@ -136,14 +135,10 @@ private:
             Vertex const& sourceVertex(vertexAndAdjacencyListPair.first);
             AdjacencyList const& adjacencyList(vertexAndAdjacencyListPair.second);
             uniqueVertices.emplace(sourceVertex);
-            for(Vertex const& destinationVertex : adjacencyList)
-            {
-                uniqueVertices.emplace(destinationVertex);
-            }
+            std::copy(adjacencyList.cbegin(), adjacencyList.cend(), std::inserter(uniqueVertices, uniqueVertices.cbegin()));
         }
         return uniqueVertices;
-    }
-    unsigned int m_numberOfEdges;
+    }    unsigned int m_numberOfEdges;
     AdjacencyLists m_adjacencyLists;
 };
 
