@@ -73,10 +73,9 @@ private:
             auto nearestVertexIt(m_verticesAdjacentToTree.cbegin());
             auto nearestVertex(*nearestVertexIt);
             m_verticesAdjacentToTree.erase(nearestVertexIt);
-            searchTheAdjacentVerticesAt(nearestVertex.vertex);
+            searchTheAdjacentVerticesAt(nearestVertex.vertex); //search nearest vertex on tree
         }
     }
-
     void searchTheAdjacentVerticesAt(Vertex const& vertex)
     {
         m_processedVertices.emplace(vertex);
@@ -88,10 +87,10 @@ private:
                 if(hasNoWeightSaved(adjacentVertex)
                         || weightForAdjacentVertex < m_vertexToEdgeWithMinimumWeight.at(adjacentVertex).weight)
                 {
+                    // save edge with lower weight and add it to vertices to check
                     m_vertexToEdgeWithMinimumWeight[adjacentVertex] = createSortedEdgeWithWeight(vertex, adjacentVertex, weightForAdjacentVertex);
                     m_verticesAdjacentToTree.emplace(adjacentVertex, weightForAdjacentVertex);
-                }
-            }
+                }            }
         }
 
     }
