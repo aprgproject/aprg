@@ -25,6 +25,7 @@ public:
     {
         return m_objects.at(getContainerIndex(treeIndex));
     }
+
     Object & getObjectReferenceOnTree(
             unsigned int const treeIndex)
     {
@@ -68,6 +69,7 @@ public:
             treeIndex=multipliedIndex;
         }
     }
+
 private:
 
     unsigned int getContainerIndex(
@@ -75,12 +77,14 @@ private:
     {
         return treeIndex-1;
     }
+
     bool isComparisonSatisfied(
             Object const& object1,
             Object const& object2) const
     {
         return m_comparisonObject(object1, object2);
     }
+
     ComparisonClass m_comparisonObject;
     Objects & m_objects;
 };
