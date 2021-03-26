@@ -54,9 +54,33 @@ struct GraphTypes
     //Complicated types
     using VertexToUnsignedIntMap = std::map<Vertex, unsigned int>;
     using VertexToVertexMap = std::map<Vertex, Vertex>;
+};
 
+template<typename Vertex, typename Weight>
+struct GraphTypesWithWeights
+{
+    struct EdgeWithWeight : public GraphTypes<Vertex>::Edge
+    {
+        using Edge = typename GraphTypes<Vertex>::Edge;
+        EdgeWithWeight(Vertex const& vertex1, Vertex const& vertex2, Weight const& weightParameter)
+            : Edge{vertex1, vertex2}
+            , weight(weightParameter)
+        {}
+
+        bool operator<(EdgeWithWeight const& otherEdge) const
+        {
+            return weight < otherEdge.weight;
+        }
+
+        bool operator>(EdgeWithWeight const& otherEdge) const
+        {
+            return weight > otherEdge.weight;
+        }
+
+        Weight weight;
+    };
+    using EdgesWithWeight = std::vector<EdgeWithWeight>;
 };
 
 }
-
 }
