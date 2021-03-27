@@ -2,9 +2,9 @@
 
 #include <Algorithm/Graph/Types/GraphTypes.hpp>
 #include <Algorithm/Graph/Utilities/ProcessedVertices.hpp>
+#include <Algorithm/Graph/Utilities/SortedEdge.hpp>
 
 #include <queue>
-
 namespace alba
 {
 
@@ -38,22 +38,9 @@ public:
 
 private:
 
-    Edge createSortedEdge(Vertex const& vertex1, Vertex const& vertex2) const
-    {
-        if(vertex1 <= vertex2)
-        {
-            return Edge(vertex1, vertex2);
-        }
-        else
-        {
-            return Edge(vertex2, vertex1);
-        }
-    }
-
     void searchForMinimumSpanningTree()
     {
-        searchTheAdjacentVerticesAt(m_startVertex);
-        while(!m_adjacentEdgesInOrder.empty())
+        searchTheAdjacentVerticesAt(m_startVertex);        while(!m_adjacentEdgesInOrder.empty())
         {
             EdgeWithWeight edgeWithWeight(m_adjacentEdgesInOrder.top());
             m_adjacentEdgesInOrder.pop();
@@ -63,11 +50,10 @@ private:
             bool isVertex2NotProcessed(m_processedVertices.isNotProcessed(vertex2));
             if(isVertex1NotProcessed || isVertex2NotProcessed)
             {
-                m_minimumSpanningTreeEdges.emplace_back(createSortedEdge(vertex1, vertex2));
+                m_minimumSpanningTreeEdges.emplace_back(createSortedEdge<Vertex, Edge>(vertex1, vertex2));
                 if(isVertex1NotProcessed)
                 {
-                    searchTheAdjacentVerticesAt(vertex1);
-                }
+                    searchTheAdjacentVerticesAt(vertex1);                }
                 if(isVertex2NotProcessed)
                 {
                     searchTheAdjacentVerticesAt(vertex2);

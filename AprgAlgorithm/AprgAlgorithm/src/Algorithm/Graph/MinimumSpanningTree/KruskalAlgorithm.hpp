@@ -1,10 +1,10 @@
 #pragma once
 
 #include <Algorithm/Graph/Types/GraphTypes.hpp>
+#include <Algorithm/Graph/Utilities/SortedEdge.hpp>
 #include <Algorithm/UnionFind/UnionFindUsingMap.hpp>
 
 #include <queue>
-
 namespace alba
 {
 
@@ -37,22 +37,9 @@ public:
 
 private:
 
-    Edge createSortedEdge(Vertex const& vertex1, Vertex const& vertex2) const
-    {
-        if(vertex1 <= vertex2)
-        {
-            return Edge(vertex1, vertex2);
-        }
-        else
-        {
-            return Edge(vertex2, vertex1);
-        }
-    }
-
     void searchForMinimumSpanningTree()
     {
-        putAllEdgesToPriorityQueue();
-        unsigned int maxNumberOfEdgesInSpanningTree(m_graph.getNumberOfVertices()-1);
+        putAllEdgesToPriorityQueue();        unsigned int maxNumberOfEdgesInSpanningTree(m_graph.getNumberOfVertices()-1);
         UnionFindUsingMap<Vertex> unionFind;
         while(!m_edgesInOrder.empty() && m_minimumSpanningTreeEdges.size() < maxNumberOfEdgesInSpanningTree)
         {
@@ -63,11 +50,10 @@ private:
             if(!unionFind.isConnected(vertex1, vertex2))
             {
                 unionFind.connect(vertex1, vertex2);
-                m_minimumSpanningTreeEdges.emplace_back(createSortedEdge(vertex1, vertex2));
+                m_minimumSpanningTreeEdges.emplace_back(createSortedEdge<Vertex, Edge>(vertex1, vertex2));
             }
         }
     }
-
     void putAllEdgesToPriorityQueue()
     {
         for(Edge const& edge : m_graph.getEdges())
