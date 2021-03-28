@@ -9,6 +9,7 @@
 #include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
 #include <Algorithm/UnionFind/BaseUnionFind.hpp>
 #include <Algorithm/UnionFind/UnionFindUsingMap.hpp>
+
 #include <algorithm>
 #include <set>
 
@@ -222,7 +223,8 @@ typename GraphTypes<Vertex>::Path getCriticalPath(
         // Use greater comparison for longest path
         PathSearchForDirectedAcyclicGraph<Vertex, Weight, EdgeWeightedGraphType, std::greater> pathSearch(graph, sourceVertex);
         result = pathSearch.getPathTo(destinationVertex);
-    }    return result;
+    }
+    return result;
 }
 
 template <typename Vertex>
@@ -258,4 +260,5 @@ typename GraphTypes<Vertex>::ListOfEdges getEdgesOfMaximalConnectedSubgraphs(Bas
 }
 
 }
+
 }

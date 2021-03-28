@@ -52,7 +52,8 @@ TEST(GraphUtilitiesTest, IsASimpleCycleWorks)
     EXPECT_FALSE(isASimpleCycle<VertexForTest>(nonCycleSimplePath));
 }
 
-TEST(GraphUtilitiesTest, IsDirectedAcyclicGraphWorks){
+TEST(GraphUtilitiesTest, IsDirectedAcyclicGraphWorks)
+{
     UndirectedGraphForTest undirectedGraph;
     undirectedGraph.connect(0U, 1U);
     undirectedGraph.connect(1U, 2U);
@@ -71,7 +72,8 @@ TEST(GraphUtilitiesTest, IsDirectedAcyclicGraphWorks){
     EXPECT_TRUE(isDirectedAcyclicGraph(graphWithoutCycle));
 }
 
-TEST(GraphUtilitiesTest, HasAnyCyclesOnGraphWorks){
+TEST(GraphUtilitiesTest, HasAnyCyclesOnGraphWorks)
+{
     UndirectedGraphForTest graphWithoutCycle;
     graphWithoutCycle.connect(0U, 1U);
     graphWithoutCycle.connect(0U, 2U);
@@ -85,7 +87,8 @@ TEST(GraphUtilitiesTest, HasAnyCyclesOnGraphWorks){
     EXPECT_TRUE(hasAnyCyclesOnGraph(graphWithCycle));
 }
 
-TEST(GraphUtilitiesTest, IsATreeWorks){
+TEST(GraphUtilitiesTest, IsATreeWorks)
+{
     UndirectedGraphForTest treeGraph;
     treeGraph.connect(0U, 1U);
     treeGraph.connect(0U, 2U);
@@ -104,7 +107,8 @@ TEST(GraphUtilitiesTest, IsATreeWorks){
     EXPECT_FALSE(isATree(nonTreeGraphAndItsNotConnected));
 }
 
-TEST(GraphUtilitiesTest, IsAForestWorks){
+TEST(GraphUtilitiesTest, IsAForestWorks)
+{
     UndirectedGraphForTest forestGraph;
     forestGraph.connect(0U, 1U);
     forestGraph.connect(0U, 2U);
@@ -123,7 +127,8 @@ TEST(GraphUtilitiesTest, IsAForestWorks){
     EXPECT_FALSE(isAForest(nonForestGraphGraphWithCycle));
 }
 
-TEST(GraphUtilitiesTest, IsASpanningTreeWorks){
+TEST(GraphUtilitiesTest, IsASpanningTreeWorks)
+{
     UndirectedGraphForTest mainGraph;
     mainGraph.connect(0U, 1U);
     mainGraph.connect(0U, 3U);
@@ -142,7 +147,8 @@ TEST(GraphUtilitiesTest, IsASpanningTreeWorks){
     EXPECT_FALSE(isASpanningTree(mainGraph, nonSpanningTree));
 }
 
-TEST(GraphUtilitiesTest, IsASpanningForestWorks){
+TEST(GraphUtilitiesTest, IsASpanningForestWorks)
+{
     UndirectedGraphForTest mainGraph;
     mainGraph.connect(0U, 1U);
     mainGraph.connect(0U, 3U);
@@ -159,7 +165,8 @@ TEST(GraphUtilitiesTest, IsASpanningForestWorks){
     EXPECT_FALSE(isASpanningForest(mainGraph, nonSpanningForest));
 }
 
-TEST(GraphUtilitiesTest, IsGraphConnectedWorks){
+TEST(GraphUtilitiesTest, IsGraphConnectedWorks)
+{
     UndirectedGraphForTest connectedGraph;
     connectedGraph.connect(0U, 1U);
     connectedGraph.connect(0U, 2U);
@@ -173,7 +180,8 @@ TEST(GraphUtilitiesTest, IsGraphConnectedWorks){
     EXPECT_FALSE(isGraphConnected(nonConnectedGraph));
 }
 
-TEST(GraphUtilitiesTest, IsGraphStronglyConnectedWorks){
+TEST(GraphUtilitiesTest, IsGraphStronglyConnectedWorks)
+{
     DirectedGraphForTest stronglyConnectedGraph;
     stronglyConnectedGraph.connect(0U, 1U);
     stronglyConnectedGraph.connect(1U, 2U);
@@ -188,7 +196,8 @@ TEST(GraphUtilitiesTest, IsGraphStronglyConnectedWorks){
     EXPECT_FALSE(isGraphStronglyConnected(nonStronglyConnectedGraph));
 }
 
-TEST(GraphUtilitiesTest, IsBipartiteWorks){
+TEST(GraphUtilitiesTest, IsBipartiteWorks)
+{
     UndirectedGraphForTest bipartiteGraph;
     bipartiteGraph.connect(0U, 1U);
     bipartiteGraph.connect(0U, 2U);
@@ -209,7 +218,8 @@ TEST(GraphUtilitiesTest, IsBipartiteWorks){
     EXPECT_FALSE(isBipartite(nonBipartiteGraph));
 }
 
-TEST(GraphUtilitiesTest, GetDegreeAtWorks){
+TEST(GraphUtilitiesTest, GetDegreeAtWorks)
+{
     UndirectedGraphForTest graph;
 
     graph.connect(0U, 1U);
@@ -220,7 +230,8 @@ TEST(GraphUtilitiesTest, GetDegreeAtWorks){
     EXPECT_EQ(1U, getDegreeAt(graph, 2U));
 }
 
-TEST(GraphUtilitiesTest, GetMaxDegreeAtWorks){
+TEST(GraphUtilitiesTest, GetMaxDegreeAtWorks)
+{
     UndirectedGraphForTest graph;
 
     graph.connect(0U, 1U);
@@ -229,7 +240,8 @@ TEST(GraphUtilitiesTest, GetMaxDegreeAtWorks){
     EXPECT_EQ(2U, getMaxDegree(graph));
 }
 
-TEST(GraphUtilitiesTest, GetAverageDegreeWorks){
+TEST(GraphUtilitiesTest, GetAverageDegreeWorks)
+{
     UndirectedGraphForTest graph;
 
     graph.connect(0U, 1U);
@@ -239,7 +251,8 @@ TEST(GraphUtilitiesTest, GetAverageDegreeWorks){
     EXPECT_EQ(1.5, getAverageDegree(graph));
 }
 
-TEST(GraphUtilitiesTest, GetNumberOfSelfLoopsWorks){
+TEST(GraphUtilitiesTest, GetNumberOfSelfLoopsWorks)
+{
     UndirectedGraphForTest graph;
 
     graph.connect(0U, 1U);
@@ -251,7 +264,8 @@ TEST(GraphUtilitiesTest, GetNumberOfSelfLoopsWorks){
     EXPECT_EQ(2U, getNumberOfSelfLoops(graph));
 }
 
-TEST(GraphUtilitiesTest, GetEdgesOfMaximalConnectedSubgraphsWorks){
+TEST(GraphUtilitiesTest, GetEdgesOfMaximalConnectedSubgraphsWorks)
+{
     UndirectedGraphForTest graph;
     graph.connect(0U, 5U);
     graph.connect(4U, 3U);
@@ -279,4 +293,5 @@ TEST(GraphUtilitiesTest, GetEdgesOfMaximalConnectedSubgraphsWorks){
 }
 
 }
+
 }
