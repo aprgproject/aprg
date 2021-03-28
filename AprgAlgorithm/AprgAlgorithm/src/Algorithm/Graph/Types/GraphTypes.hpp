@@ -1,9 +1,10 @@
 #pragma once
 
+#include <Common/Print/AlbaPrintFunctions.hpp>
+
 #include <map>
 #include <set>
 #include <vector>
-
 namespace alba
 {
 
