@@ -74,7 +74,8 @@ private:
         for(Vertex const& vertex : vertexOrdering.getVerticesInTopologicalOrder())
         {
             if(m_processedVertices.isNotProcessed(vertex))
-            {                traverseUsingDfs(vertex);
+            {
+                traverseUsingDfs(vertex);
                 m_numberOfComponentIds++;
             }
         }

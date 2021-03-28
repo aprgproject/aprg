@@ -16,6 +16,7 @@ using VerticesForTest = GraphTypes<VertexForTest>::Vertices;
 using GraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
 using VertexOrderingForTest = VertexOrderingUsingDfs<VertexForTest>;
 }
+
 TEST(VertexOrderingUsingDfsTest, VertexOrderingWorksWhenGraphIsEmptyWithUndirectedGraph)
 {
     GraphForTest graph;
@@ -30,7 +31,8 @@ TEST(VertexOrderingUsingDfsTest, VertexOrderingWorksWhenGraphIsEmptyWithUndirect
     EXPECT_TRUE(reversePostOrderVerticesToVerify.empty());
 }
 
-TEST(VertexOrderingUsingDfsTest, VertexOrderingWorksUsingExample1WithUndirectedGraph){
+TEST(VertexOrderingUsingDfsTest, VertexOrderingWorksUsingExample1WithUndirectedGraph)
+{
     GraphForTest graph;
     graph.connect(2U, 0U);
     graph.connect(2U, 1U);
@@ -50,7 +52,8 @@ TEST(VertexOrderingUsingDfsTest, VertexOrderingWorksUsingExample1WithUndirectedG
     EXPECT_EQ(expectedReversePostOrderVertices, reversePostOrderVerticesToVerify);
 }
 
-TEST(VertexOrderingUsingDfsTest, VertexOrderingWorksUsingExample2WithUndirectedGraph){
+TEST(VertexOrderingUsingDfsTest, VertexOrderingWorksUsingExample2WithUndirectedGraph)
+{
     GraphForTest graph;
     graph.connect(0U, 5U);
     graph.connect(4U, 3U);
@@ -82,7 +85,8 @@ TEST(VertexOrderingUsingDfsTest, VertexOrderingWorksUsingExample2WithUndirectedG
 TEST(VertexOrderingUsingDfsTest, GetVerticesInTopologicalOrderWorksAsInReversePostOrderWithUndirectedGraph)
 {
     GraphForTest graph;
-    graph.connect(0U, 5U);    graph.connect(4U, 3U);
+    graph.connect(0U, 5U);
+    graph.connect(4U, 3U);
     graph.connect(0U, 1U);
     graph.connect(9U, 12U);
     graph.connect(6U, 4U);
@@ -103,4 +107,5 @@ TEST(VertexOrderingUsingDfsTest, GetVerticesInTopologicalOrderWorksAsInReversePo
 }
 
 }
+
 }
