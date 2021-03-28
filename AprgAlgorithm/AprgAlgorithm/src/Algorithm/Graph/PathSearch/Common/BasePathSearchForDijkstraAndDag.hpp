@@ -33,11 +33,10 @@ public:
 
     Path getPathTo(Vertex const& endVertex) const
     {
-        bool shouldReverse(endVertex != m_startVertex);
+        bool shouldAddStartVertexAndReverse(endVertex != m_startVertex);
         Vertex currentVertex = endVertex;
         Path reversedPath;
-        while(currentVertex != m_startVertex)
-        {
+        while(currentVertex != m_startVertex)        {
             reversedPath.emplace_back(currentVertex);
             auto it = m_vertexToEdgeWithUpdatedWeight.find(currentVertex);
             if(it != m_vertexToEdgeWithUpdatedWeight.cend())
@@ -46,16 +45,15 @@ public:
             }
             else
             {
-                shouldReverse = false;
+                shouldAddStartVertexAndReverse = false;
                 break;
             }
         }
         Path result;
-        if(shouldReverse)
+        if(shouldAddStartVertexAndReverse)
         {
             reversedPath.emplace_back(m_startVertex);
-            result.reserve(reversedPath.size());
-            std::copy(reversedPath.crbegin(), reversedPath.crend(), std::back_inserter(result));
+            result.reserve(reversedPath.size());            std::copy(reversedPath.crbegin(), reversedPath.crend(), std::back_inserter(result));
         }
         return result;
     }
