@@ -2,11 +2,10 @@
 
 #include <Algorithm/Graph/PathSearch/Common/BasePathSearchForDijkstraAndDag.hpp>
 #include <Algorithm/Graph/Types/GraphTypes.hpp>
-#include <Algorithm/Graph/Utilities/GraphUtilities.hpp>
+#include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
 
 namespace alba
 {
-
 namespace algorithm
 {
 
@@ -16,11 +15,9 @@ class PathSearchUsingDijkstraAlgorithm : public BasePathSearchForDijkstraAndDag<
 public:
     using BaseClass = BasePathSearchForDijkstraAndDag<Vertex, Weight, EdgeWeightedGraph, ComparisonTemplateType>;
     using SetOfVerticesWithWeight = typename GraphTypesWithWeights<Vertex, Weight>::SetOfVerticesWithWeight;
-    using GraphUtilitiesWithVertex = GraphUtilities<Vertex>;
 
     PathSearchUsingDijkstraAlgorithm(EdgeWeightedGraph const& graph, Vertex const& startVertex)
-        : BaseClass(graph, startVertex)
-    {
+        : BaseClass(graph, startVertex)    {
         searchForPathIfPossible();
     }
 
@@ -35,11 +32,10 @@ private:
     void searchForPathIfPossible()
     {
         if(isComparisonLessThan()
-                || GraphUtilitiesWithVertex::isDirectedAcyclicGraph(this->m_graph))
+                || GraphUtilities::isDirectedAcyclicGraph(this->m_graph))
         {
             searchForPath();
-        }
-    }
+        }    }
 
     void searchForPath()
     {
