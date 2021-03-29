@@ -8,6 +8,7 @@
 
 namespace alba
 {
+
 template <typename DataTypeToManipulate>
 class AlbaBitManipulation
 {
@@ -152,6 +153,7 @@ public:
         static_assert(size != size, "This size or type is not supported. Please add a specialization if needed.");
         return 0;
     }
+
     static constexpr DataTypeToManipulate swap(DataTypeToManipulate const value)
     {
         return swapWithBytes<sizeof(DataTypeToManipulate)>(value);
@@ -206,7 +208,8 @@ public:
 
 private:
     template <typename ArgumentType>
-    static constexpr DataTypeToManipulate concatenateBytes(ArgumentType arg)    {
+    static constexpr DataTypeToManipulate concatenateBytes(ArgumentType arg)
+    {
         static_assert(sizeof(ArgumentType) == 1, "concatenateBytes: ArgumentType size is greater than a byte");
         return arg;
     }
