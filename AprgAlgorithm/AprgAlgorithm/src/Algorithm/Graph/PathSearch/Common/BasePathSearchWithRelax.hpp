@@ -27,10 +27,12 @@ public:
         , m_startVertex(startVertex)
     {}
 
+    virtual ~BasePathSearchWithRelax()
+    {}
+
     bool hasPathTo(Vertex const& endVertex) const
     {
-        return m_vertexToEdgeWithUpdatedWeightMap.find(endVertex) != m_vertexToEdgeWithUpdatedWeightMap.cend();
-    }
+        return m_vertexToEdgeWithUpdatedWeightMap.find(endVertex) != m_vertexToEdgeWithUpdatedWeightMap.cend();    }
 
     Path getPathTo(Vertex const& endVertex) const
     {
