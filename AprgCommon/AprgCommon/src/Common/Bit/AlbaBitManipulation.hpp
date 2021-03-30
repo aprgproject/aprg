@@ -1,10 +1,6 @@
 #pragma once
 
 #include <Common/Bit/AlbaBitConstants.hpp>
-#include <Common/Math/AlbaMathHelper.hpp>
-
-#include <cmath>
-#include <cstdint>#include <limits>
 
 namespace alba
 {
@@ -12,7 +8,6 @@ namespace alba
 template <typename DataTypeToManipulate>
 class AlbaBitManipulation
 {
-
 public:
 
     AlbaBitManipulation() = delete;
@@ -174,37 +169,6 @@ public:
         return swapWithBytes<8>(value);
     }
 
-    static constexpr DataTypeToManipulate generateOnesWithNumberOfBits(unsigned int const numberOfOnes)
-    {
-        return static_cast<DataTypeToManipulate>(round(pow(2, numberOfOnes))-1);
-    }
-
-    static constexpr DataTypeToManipulate getAllBitsAsserted()    {
-        static_assert(sizeof(DataTypeToManipulate) != sizeof(DataTypeToManipulate),
-                      "This size or type is not supported. Please add a specialization if needed.");
-        return 0;
-    }
-
-    static constexpr unsigned int getNumberOfBits()
-    {
-        return static_cast<unsigned int>(std::numeric_limits<DataTypeToManipulate>::digits);
-    }
-
-    static unsigned int getNumberOfBitsAsserted(DataTypeToManipulate const value)
-    {
-        // logarithm implementation
-        unsigned int result(0U);
-        DataTypeToManipulate valueToReduce(value);
-        while(valueToReduce != 0)
-        {
-            DataTypeToManipulate bitIndexWithOne(
-                        static_cast<DataTypeToManipulate>(floor(mathHelper::getLogarithm(2, valueToReduce))));
-            DataTypeToManipulate mask = ~(1 << bitIndexWithOne);
-            valueToReduce &= mask;
-            result++;
-        }
-        return result;
-    }
 private:
     template <typename ArgumentType>
     static constexpr DataTypeToManipulate concatenateBytes(ArgumentType arg)
@@ -245,29 +209,6 @@ constexpr uint64_t AlbaBitManipulation<uint64_t>::swapWithBytes<8>(uint64_t cons
                             getByteAt<2>(value), getByteAt<3>(value),
                             getByteAt<4>(value), getByteAt<5>(value),
                             getByteAt<6>(value), getByteAt<7>(value));
-}
-
-template <>
-constexpr uint8_t AlbaBitManipulation<uint8_t>::getAllBitsAsserted()
-{
-    return 0xFFU;
-}
-
-template <>
-constexpr uint16_t AlbaBitManipulation<uint16_t>::getAllBitsAsserted()
-{
-    return 0xFFFFU;}
-
-template <>
-constexpr uint32_t AlbaBitManipulation<uint32_t>::getAllBitsAsserted()
-{
-    return 0xFFFFFFFFU;
-}
-
-template <>
-constexpr uint64_t AlbaBitManipulation<uint64_t>::getAllBitsAsserted()
-{
-    return 0xFFFFFFFFFFFFFFFFU;
 }
 
 }

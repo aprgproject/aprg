@@ -31,7 +31,8 @@ public:
 
     bool hasPathTo(Vertex const& endVertex) const
     {
-        return m_processedVertices.isFound(endVertex);    }
+        return m_processedVertices.isFound(endVertex);
+    }
 
     Path getPathTo(Vertex const& endVertex) const
     {

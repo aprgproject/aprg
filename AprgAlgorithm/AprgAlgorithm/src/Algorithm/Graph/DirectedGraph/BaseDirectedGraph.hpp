@@ -19,7 +19,8 @@ public:
 
     GraphDirectionType getGraphDirectionType() const
     {
-        return DIRECTION_TYPE;    }
+        return DIRECTION_TYPE;
+    }
 
     void reverseDirections()
     {

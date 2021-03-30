@@ -4,6 +4,7 @@
 #include <Common/Bit/AlbaBitValueUtilities.hpp>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -242,7 +243,8 @@ void BitmapSnippet::setPixelAtForPixelInAByte(uint8_t * writer, unsigned int con
         uint32_t retainMask = (m_configuration.getBitMaskForValue() << shiftValue) ^ AlbaBitValueUtilities<uint32_t>::getAllBitsAsserted();
         uint32_t retainPart = (retainMask & oldValue);
         *(writer+index) = replacePart | retainPart;
-    }}
+    }
+}
 
 void BitmapSnippet::setPixelAtForMultipleBytePixels(uint8_t* writer, unsigned int const index, uint32_t const value)
 {

@@ -8,6 +8,7 @@
 #include <Common/Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 #include <algorithm>
+
 using namespace std;
 
 namespace alba
@@ -77,7 +78,8 @@ void BaseOneEquationOneVariableSolver::calculateAndSubstituteAbsoluteValueFuncti
     unsigned int finalValue = AlbaBitValueUtilities<unsigned int>::generateOnesWithNumberOfBits(absFunctions.size());
     for(unsigned int permutationValue=0; permutationValue<=finalValue; permutationValue++)
     {
-        SubstitutionOfTermsToTerms substitution;        auto itFunctionSet = absFunctions.cbegin();
+        SubstitutionOfTermsToTerms substitution;
+        auto itFunctionSet = absFunctions.cbegin();
         for(unsigned int i=0; i<absFunctions.size(); i++)
         {
             bool isBitAsserted(((permutationValue >> i) & 1) != 0);

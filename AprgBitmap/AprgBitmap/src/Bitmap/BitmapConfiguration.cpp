@@ -4,6 +4,7 @@
 #include <Common/Bit/AlbaBitValueUtilities.hpp>
 #include <Common/Math/AlbaMathHelper.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+
 #include <cmath>
 
 using namespace alba::mathHelper;
@@ -327,7 +328,8 @@ void BitmapConfiguration::calculateOtherValuesAfterReading()
     m_bitMaskForValue = AlbaBitValueUtilities<uint32_t>::generateOnesWithNumberOfBits(m_numberOfBitsPerPixel);
 }
 
-CompressedMethodType BitmapConfiguration::determineCompressedMethodType(uint32_t compressedMethodValue) const{
+CompressedMethodType BitmapConfiguration::determineCompressedMethodType(uint32_t compressedMethodValue) const
+{
     CompressedMethodType compressedMethodType;
     switch(compressedMethodValue)
     {
