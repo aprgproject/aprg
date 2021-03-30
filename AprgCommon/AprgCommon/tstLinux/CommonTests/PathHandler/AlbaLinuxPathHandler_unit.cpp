@@ -18,7 +18,8 @@ TEST_F(AlbaLinuxPathHandlerTest, FullPathWithOnlyDirectoryGiven_WindowsStyleInpu
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests\)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
-    EXPECT_TRUE(pathHandler.getExtension().empty());    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
+    EXPECT_TRUE(pathHandler.getExtension().empty());
+    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
 }
 
 TEST_F(AlbaLinuxPathHandlerTest, FullPathWithOnlyDirectoryGiven_JumbledSlashes)
@@ -27,7 +28,8 @@ TEST_F(AlbaLinuxPathHandlerTest, FullPathWithOnlyDirectoryGiven_JumbledSlashes)
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests\)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
-    EXPECT_TRUE(pathHandler.getExtension().empty());    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
+    EXPECT_TRUE(pathHandler.getExtension().empty());
+    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
 }
 
 TEST_F(AlbaLinuxPathHandlerTest, FullPathWithOnlyDirectoryGiven_JumbledSlashesWithDirectoryDoesNotExists)
@@ -127,28 +129,32 @@ TEST_F(AlbaLinuxPathHandlerTest, FullPathWithDirectoryAndFile_ActualLocalDirecto
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
     EXPECT_EQ("File1.log", pathHandler.getFile());
     EXPECT_EQ("File1", pathHandler.getFilenameOnly());
-    EXPECT_EQ("log", pathHandler.getExtension());    EXPECT_EQ(PathType::File, pathHandler.getPathType());
+    EXPECT_EQ("log", pathHandler.getExtension());
+    EXPECT_EQ(PathType::File, pathHandler.getPathType());
     EXPECT_TRUE(pathHandler.isFoundInLocalSystem());
 
     pathHandler.input(APRG_DIR R"(\AprgCommon/FilesForTests/thisFileDoesNotExist.txt)");
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests/)"), pathHandler.getDirectory());
     EXPECT_EQ("thisFileDoesNotExist.txt", pathHandler.getFile());
     EXPECT_EQ("thisFileDoesNotExist", pathHandler.getFilenameOnly());
-    EXPECT_EQ("txt", pathHandler.getExtension());    EXPECT_EQ(PathType::File, pathHandler.getPathType());
+    EXPECT_EQ("txt", pathHandler.getExtension());
+    EXPECT_EQ(PathType::File, pathHandler.getPathType());
     EXPECT_FALSE(pathHandler.isFoundInLocalSystem());
 
     pathHandler.input(APRG_DIR R"(\AprgCommon/FilesForTests)");
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests/)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
-    EXPECT_TRUE(pathHandler.getExtension().empty());    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
+    EXPECT_TRUE(pathHandler.getExtension().empty());
+    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
     EXPECT_TRUE(pathHandler.isFoundInLocalSystem());
 
     pathHandler.input(APRG_DIR R"(\AprgCommon/FilesForTests/)");
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests/)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
-    EXPECT_TRUE(pathHandler.getExtension().empty());    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
+    EXPECT_TRUE(pathHandler.getExtension().empty());
+    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
     EXPECT_TRUE(pathHandler.isFoundInLocalSystem());
 }
 
@@ -160,7 +166,9 @@ TEST_F(AlbaLinuxPathHandlerTest, ReInputFileThatIsToBeDeleted_ActualLocalDirecto
     pathHandler.reInput();
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
     EXPECT_EQ("FileToBeDeleted.log", pathHandler.getFile());
-    EXPECT_EQ("FileToBeDeleted", pathHandler.getFilenameOnly());    EXPECT_EQ("log", pathHandler.getExtension());    EXPECT_EQ(PathType::File, pathHandler.getPathType());
+    EXPECT_EQ("FileToBeDeleted", pathHandler.getFilenameOnly());
+    EXPECT_EQ("log", pathHandler.getExtension());
+    EXPECT_EQ(PathType::File, pathHandler.getPathType());
     EXPECT_TRUE(pathHandler.isFoundInLocalSystem());
 
     EXPECT_TRUE(pathHandler.deleteFile());
@@ -168,7 +176,8 @@ TEST_F(AlbaLinuxPathHandlerTest, ReInputFileThatIsToBeDeleted_ActualLocalDirecto
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
     EXPECT_EQ("FileToBeDeleted.log", pathHandler.getFile());
     EXPECT_EQ("FileToBeDeleted", pathHandler.getFilenameOnly());
-    EXPECT_EQ("log", pathHandler.getExtension());    EXPECT_EQ(PathType::File, pathHandler.getPathType());
+    EXPECT_EQ("log", pathHandler.getExtension());
+    EXPECT_EQ(PathType::File, pathHandler.getPathType());
     EXPECT_FALSE(pathHandler.isFoundInLocalSystem());
 }
 
@@ -180,7 +189,9 @@ TEST_F(AlbaLinuxPathHandlerTest, ReInputFileThatIsToBeRenamed_ActualLocalDirecto
     pathHandler.reInput();
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
     EXPECT_EQ("FileToBeRenamed.log", pathHandler.getFile());
-    EXPECT_EQ("FileToBeRenamed", pathHandler.getFilenameOnly());    EXPECT_EQ("log", pathHandler.getExtension());    EXPECT_EQ(PathType::File, pathHandler.getPathType());
+    EXPECT_EQ("FileToBeRenamed", pathHandler.getFilenameOnly());
+    EXPECT_EQ("log", pathHandler.getExtension());
+    EXPECT_EQ(PathType::File, pathHandler.getPathType());
     EXPECT_TRUE(pathHandler.isFoundInLocalSystem());
 
     EXPECT_TRUE(pathHandler.renameFile("RenamedFile.txt"));
@@ -188,7 +199,8 @@ TEST_F(AlbaLinuxPathHandlerTest, ReInputFileThatIsToBeRenamed_ActualLocalDirecto
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
     EXPECT_EQ("RenamedFile.txt", pathHandler.getFile());
     EXPECT_EQ("RenamedFile", pathHandler.getFilenameOnly());
-    EXPECT_EQ("txt", pathHandler.getExtension());    EXPECT_EQ(PathType::File, pathHandler.getPathType());
+    EXPECT_EQ("txt", pathHandler.getExtension());
+    EXPECT_EQ(PathType::File, pathHandler.getPathType());
     EXPECT_TRUE(pathHandler.isFoundInLocalSystem());
 
     EXPECT_TRUE(pathHandler.deleteFile());
@@ -203,7 +215,9 @@ TEST_F(AlbaLinuxPathHandlerTest, FileIsCopiedToNewFile_ActualLocalDirectory)
     pathHandler.reInput();
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
     EXPECT_EQ("FileToBeCopied.log", pathHandler.getFile());
-    EXPECT_EQ("FileToBeCopied", pathHandler.getFilenameOnly());    EXPECT_EQ("log", pathHandler.getExtension());    EXPECT_EQ(PathType::File, pathHandler.getPathType());
+    EXPECT_EQ("FileToBeCopied", pathHandler.getFilenameOnly());
+    EXPECT_EQ("log", pathHandler.getExtension());
+    EXPECT_EQ(PathType::File, pathHandler.getPathType());
     EXPECT_TRUE(pathHandler.isFoundInLocalSystem());
 
     EXPECT_TRUE(pathHandler.copyToNewFile(pathHandler.getDirectory()+pathOfCopiedFile));
@@ -212,7 +226,8 @@ TEST_F(AlbaLinuxPathHandlerTest, FileIsCopiedToNewFile_ActualLocalDirectory)
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandlerOfCopiedFile.getDirectory());
     EXPECT_EQ("CopiedFile.log", pathHandlerOfCopiedFile.getFile());
     EXPECT_EQ("CopiedFile", pathHandlerOfCopiedFile.getFilenameOnly());
-    EXPECT_EQ("log", pathHandlerOfCopiedFile.getExtension());    EXPECT_EQ(PathType::File, pathHandlerOfCopiedFile.getPathType());
+    EXPECT_EQ("log", pathHandlerOfCopiedFile.getExtension());
+    EXPECT_EQ(PathType::File, pathHandlerOfCopiedFile.getPathType());
     EXPECT_TRUE(pathHandlerOfCopiedFile.isFoundInLocalSystem());
 
     EXPECT_TRUE(pathHandler.deleteFile());
@@ -227,7 +242,8 @@ TEST_F(AlbaLinuxPathHandlerTest, ReInputDirectoryThatIsToBeRenamed_ActualLocalDi
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR1/)"),  pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
-    EXPECT_TRUE(pathHandler.getExtension().empty());    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
+    EXPECT_TRUE(pathHandler.getExtension().empty());
+    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
     EXPECT_TRUE(pathHandler.isFoundInLocalSystem());
 
     EXPECT_TRUE(pathHandler.renameImmediateDirectory("RenamedDirectory"));
@@ -235,7 +251,8 @@ TEST_F(AlbaLinuxPathHandlerTest, ReInputDirectoryThatIsToBeRenamed_ActualLocalDi
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/RenamedDirectory/)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
-    EXPECT_TRUE(pathHandler.getExtension().empty());    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
+    EXPECT_TRUE(pathHandler.getExtension().empty());
+    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
     EXPECT_TRUE(pathHandler.isFoundInLocalSystem());
 
     EXPECT_TRUE(pathHandler.renameImmediateDirectory("DIR1"));
@@ -243,7 +260,8 @@ TEST_F(AlbaLinuxPathHandlerTest, ReInputDirectoryThatIsToBeRenamed_ActualLocalDi
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR1/)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
-    EXPECT_TRUE(pathHandler.getExtension().empty());    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
+    EXPECT_TRUE(pathHandler.getExtension().empty());
+    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
     EXPECT_TRUE(pathHandler.isFoundInLocalSystem());
 }
 
@@ -252,6 +270,7 @@ TEST_F(AlbaLinuxPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryOneDe
     AlbaLinuxPathHandler pathHandler(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)");
     EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
     ASSERT_TRUE(pathHandler.isFoundInLocalSystem());
+
     set<string> listOfFiles;
     set<string> listOfDirectory;
     pathHandler.findFilesAndDirectoriesOneDepth("*.*", listOfFiles, listOfDirectory);
@@ -277,6 +296,7 @@ TEST_F(AlbaLinuxPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryMulti
     AlbaLinuxPathHandler pathHandler(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)");
     EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
     ASSERT_TRUE(pathHandler.isFoundInLocalSystem());
+
     set<string> listOfFiles;
     set<string> listOfDirectory;
     pathHandler.findFilesAndDirectoriesMultipleDepth("*.*", listOfFiles, listOfDirectory, 2);
@@ -308,6 +328,7 @@ TEST_F(AlbaLinuxPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryUnlim
     AlbaLinuxPathHandler pathHandler(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)");
     EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
     ASSERT_TRUE(pathHandler.isFoundInLocalSystem());
+
     set<string> listOfFiles;
     set<string> listOfDirectory;
     pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectory);
@@ -340,6 +361,7 @@ TEST_F(AlbaLinuxPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryUnlim
     AlbaLinuxPathHandler pathHandler(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)");
     EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
     ASSERT_TRUE(pathHandler.isFoundInLocalSystem());
+
     set<string> listOfFiles;
     set<string> listOfDirectory;
     pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.log", listOfFiles, listOfDirectory);
@@ -348,6 +370,7 @@ TEST_F(AlbaLinuxPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryUnlim
     EXPECT_EQ(convertToSimplestPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/File1.log)"), *(itFiles++));
     ASSERT_EQ(0U, listOfDirectory.size());
 }
+
 TEST_F(AlbaLinuxPathHandlerTest, FileSizeTest_FileIsNotExisting)
 {
     AlbaLinuxPathHandler pathHandler("This path does not exist");

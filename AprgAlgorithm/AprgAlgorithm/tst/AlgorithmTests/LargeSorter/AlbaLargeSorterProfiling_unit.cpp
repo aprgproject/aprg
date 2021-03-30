@@ -16,6 +16,7 @@ using namespace std;
 
 namespace alba
 {
+
 namespace algorithm
 {
 
