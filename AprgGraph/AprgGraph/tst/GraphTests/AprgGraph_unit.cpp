@@ -17,6 +17,7 @@ using namespace std;
 
 namespace alba
 {
+
 TEST(AprgGraphTest, DISABLED_BitmapGraph24Bits)
 {
     AlbaLocalPathHandler defaultFile(APRG_GRAPH_24_BIT_DEFAULT_FILE);

@@ -11,6 +11,7 @@ using namespace std;
 
 namespace alba
 {
+
 TEST(SampleTest, TestForDataSet)
 {
     AlbaLocalPathHandler testFilePath(ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_FILE1);

@@ -15,6 +15,7 @@ TEST(SoosaTest, SampleTest1)
     AlbaLocalPathHandler fileForSoosa(APRG_DIR R"(\SOOSA\FilesForTests\TestSoosa.bmp)");
     fileForSoosa.deleteFile();
     fileToTest.copyToNewFile(fileForSoosa.getFullPath());
+
     SoosaConfiguration configuration;
     configuration.setPath(fileForSoosa.getFullPath());
     configuration.setMainParameters("area", "period", 12.345);

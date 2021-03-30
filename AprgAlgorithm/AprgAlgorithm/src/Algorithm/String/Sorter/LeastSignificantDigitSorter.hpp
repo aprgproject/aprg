@@ -48,6 +48,7 @@ private:
             frequencyOfEachCharacter[getCharacterAtIfPossible(stringsToSort.at(i), digitIndex)+1]++;
         }
     }
+
     void convertFrequenciesToIndexes(
             ArrayOfFrequencies & newIndexes) const
     {
@@ -70,6 +71,7 @@ private:
             stringsToSort[newIndexes[getCharacterAtIfPossible(copiedStrings.at(i), digitIndex)]++] = copiedStrings.at(i);
         }
     }
+
     unsigned char getCharacterAtIfPossible(
             std::string const& currentString,
             unsigned int const digitIndex) const
