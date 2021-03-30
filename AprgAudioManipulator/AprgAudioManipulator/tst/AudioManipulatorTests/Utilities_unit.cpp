@@ -8,11 +8,10 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-#define SAMPLE_AUDIO_FILES_DIRECTORY APRG_DIR R"(\FilesForTests\SampleAudioFiles\)"
+#define SAMPLE_AUDIO_FILES_DIRECTORY APRG_DIR R"(\AprgAudioManipulator\FilesForTests\SampleAudioFiles\)"
 
 namespace alba
 {
-
 namespace AprgAudio
 {
 
