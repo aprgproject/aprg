@@ -1,11 +1,13 @@
 #include "AlbaWindowsUserAutomation.hpp"
 
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Common/Windows/AlbaWindowsHelper.hpp>
 
 #include <windows.h>
 
 #include <cctype>
+#include <fstream>
 #include <iostream>
 
 using namespace std;
@@ -25,33 +27,6 @@ and whether the key is currently up or down. I
 f the most significant bit is set, the key is down, and if the least significant bit is set, the key was pressed after the previous call to GetAsyncKeyState.
 However, you should not rely on this last behavior; for more information, see the Remarks.
 */
-}
-
-void AlbaWindowsUserAutomation::setStringToClipboard(std::string const& clipBoardText) const
-{
-    HANDLE hData;
-    char *pointerData = NULL;//pointer to allow char copying
-
-    hData = GlobalAlloc(GMEM_MOVEABLE | GMEM_DDESHARE,clipBoardText.length() + 1);//get handle to memory to hold phrase
-    pointerData = (char*)GlobalLock(hData);//get pointer from handle
-    memcpy(pointerData,clipBoardText.c_str(),clipBoardText.length() + 1);//copy over the phrase
-    GlobalUnlock(hData);//free the handle
-    OpenClipboard(NULL);//allow you to work with clipboard
-    EmptyClipboard();//clear previous contents
-    SetClipboardData(CF_TEXT,hData);//set our data
-    CloseClipboard();//finished!!
-}
-
-string AlbaWindowsUserAutomation::getStringFromClipboard() const
-{
-    string stringInClipboard;
-    if(OpenClipboard(NULL))
-    {
-        HANDLE clipboardData = GetClipboardData(CF_TEXT);
-        stringInClipboard = (char*)clipboardData;
-        CloseClipboard();
-    }
-    return stringInClipboard;
 }
 
 MousePosition AlbaWindowsUserAutomation::getMousePosition() const
@@ -272,6 +247,79 @@ void AlbaWindowsUserAutomation::sleepWithRealisticDelay() const
 void AlbaWindowsUserAutomation::sleep(unsigned int const milliseconds) const
 {
     Sleep(milliseconds);
+}
+
+string AlbaWindowsUserAutomation::getStringFromClipboard() const
+{
+    string stringInClipboard;
+    if(OpenClipboard(NULL))
+    {
+        HANDLE clipboardData = GetClipboardData(CF_TEXT);
+        stringInClipboard = (char*)clipboardData;
+        CloseClipboard();
+    }
+    return stringInClipboard;
+}
+
+void AlbaWindowsUserAutomation::setStringToClipboard(std::string const& clipBoardText) const
+{
+    HANDLE hData;
+    char *pointerData = NULL;//pointer to allow char copying
+    hData = GlobalAlloc(GMEM_MOVEABLE | GMEM_DDESHARE,clipBoardText.length() + 1);//get handle to memory to hold phrase
+    pointerData = (char*)GlobalLock(hData);//get pointer from handle
+    memcpy(pointerData,clipBoardText.c_str(),clipBoardText.length() + 1);//copy over the phrase
+    GlobalUnlock(hData);//free the handle
+    OpenClipboard(NULL);//allow you to work with clipboard
+    EmptyClipboard();//clear previous contents
+    SetClipboardData(CF_TEXT, hData);//set our data
+    CloseClipboard();
+}
+
+void AlbaWindowsUserAutomation::saveBitmapFromClipboard(std::string const& filePath) const
+{
+    if(IsClipboardFormatAvailable(CF_DIB))
+    {
+        if(OpenClipboard(NULL))
+        {
+            HANDLE hClipboard = GetClipboardData(CF_DIB);
+            if (hClipboard != NULL && hClipboard != INVALID_HANDLE_VALUE)
+            {
+                void* dib = GlobalLock(hClipboard);
+                if(dib != nullptr)
+                {
+                    BITMAPINFOHEADER* info = reinterpret_cast<BITMAPINFOHEADER*>(dib);
+                    if(info != nullptr)
+                    {
+                        BITMAPFILEHEADER fileHeader{};
+                        fileHeader.bfType = 0x4D42;
+                        fileHeader.bfOffBits = 54;
+                        fileHeader.bfSize = (((info->biWidth * info->biBitCount + 31) & ~31) / 8
+                                             * info->biHeight) + fileHeader.bfOffBits;
+
+                        info->biCompression = 0;
+
+                        AlbaLocalPathHandler pathHandler(filePath);
+                        std::ofstream file(pathHandler.getFullPath(), std::ios::out | std::ios::binary);
+                        if (file)
+                        {
+                            file.write(reinterpret_cast<char*>(&fileHeader), sizeof(BITMAPFILEHEADER));
+                            file.write(reinterpret_cast<char*>(info), sizeof(BITMAPINFOHEADER));
+                            file.write(reinterpret_cast<char*>(++info), info->biSizeImage);
+                        }
+                    }
+                    GlobalUnlock(dib);
+                }
+            }
+
+            CloseClipboard();
+        }
+    }
+}
+
+void AlbaWindowsUserAutomation::saveBitmapOnScreen(std::string const& filePath) const
+{
+    typeKey(VK_SNAPSHOT);
+    saveBitmapFromClipboard(filePath);
 }
 
 unsigned int AlbaWindowsUserAutomation::convertToVirtualKey(char const character) const

@@ -18,8 +18,6 @@ class AlbaWindowsUserAutomation
 public:
     typedef std::function<void(INPUT&)> InputFunction;
     bool isLetterPressed(char const letter) const;
-    std::string getStringFromClipboard() const;
-    void setStringToClipboard(std::string const& clipBoardText) const;
     MousePosition getMousePosition() const;
     void setMousePosition(MousePosition const& position) const;
     void doLeftClick() const;
@@ -39,6 +37,13 @@ public:
     void setForegroundWindowWithWindowName(std::string const& windowName) const;
     void sleepWithRealisticDelay() const;
     void sleep(unsigned int const milliseconds) const;
+
+    std::string getStringFromClipboard() const;
+    void setStringToClipboard(std::string const& clipBoardText) const;
+    void saveBitmapFromClipboard(std::string const& filePath) const;
+
+    void saveBitmapOnScreen(std::string const& filePath) const;
+
 private:
     unsigned int convertToVirtualKey(char const character) const;
     void setForegroundWindowWithWindowHandle(HWND const windowHandle) const;
