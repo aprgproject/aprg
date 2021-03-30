@@ -274,10 +274,10 @@ TEST(AlbaBitManipulationTest, GenerationOfOnesWorks)
 
 TEST(AlbaBitManipulationTest, GetAllBitsAssertedWorks)
 {
+    EXPECT_EQ(0xFFU, AlbaBitManipulation<uint8_t>::getAllBitsAsserted());
     EXPECT_EQ(0xFFFFU, AlbaBitManipulation<uint16_t>::getAllBitsAsserted());
     EXPECT_EQ(0xFFFFFFFFU, AlbaBitManipulation<uint32_t>::getAllBitsAsserted());
-    EXPECT_EQ(0xFFFFFFFFFFFFFFFFU, AlbaBitManipulation<uint64_t>::getAllBitsAsserted());
-}
+    EXPECT_EQ(0xFFFFFFFFFFFFFFFFU, AlbaBitManipulation<uint64_t>::getAllBitsAsserted());}
 
 TEST(AlbaBitManipulationTest, GetNumberOfBitsWorks)
 {
