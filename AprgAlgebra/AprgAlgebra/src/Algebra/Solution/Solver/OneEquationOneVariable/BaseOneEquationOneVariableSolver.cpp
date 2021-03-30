@@ -4,11 +4,10 @@
 #include <Algebra/Substitution/SubstitutionOfTermsToTerms.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
-#include <Common/Bit/AlbaBitManipulation.hpp>
+#include <Common/Bit/AlbaBitValueUtilities.hpp>
 #include <Common/Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 #include <algorithm>
-
 using namespace std;
 
 namespace alba
@@ -75,12 +74,10 @@ void BaseOneEquationOneVariableSolver::calculateAndSubstituteAbsoluteValueFuncti
         Term const& term,
         string const& variableName)
 {
-    using BitManipulation = AlbaBitManipulation<unsigned int>;
-    unsigned int finalValue = BitManipulation::generateOnesWithNumberOfBits(absFunctions.size());
+    unsigned int finalValue = AlbaBitValueUtilities<unsigned int>::generateOnesWithNumberOfBits(absFunctions.size());
     for(unsigned int permutationValue=0; permutationValue<=finalValue; permutationValue++)
     {
-        SubstitutionOfTermsToTerms substitution;
-        auto itFunctionSet = absFunctions.cbegin();
+        SubstitutionOfTermsToTerms substitution;        auto itFunctionSet = absFunctions.cbegin();
         for(unsigned int i=0; i<absFunctions.size(); i++)
         {
             bool isBitAsserted(((permutationValue >> i) & 1) != 0);
