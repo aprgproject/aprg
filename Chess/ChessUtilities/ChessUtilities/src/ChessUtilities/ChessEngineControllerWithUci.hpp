@@ -3,9 +3,13 @@
 #include <ChessUtilities/ChessEngineHandler.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
-#include <deque>#include <string>
+#include <deque>
+#include <string>
 
 namespace alba
+{
+
+namespace chess
 {
 
 class ChessEngineControllerWithUci
@@ -29,7 +33,8 @@ public:
 
     struct CalculationDetails
     {
-        unsigned int depth;        unsigned int selectiveDepth;
+        unsigned int depth;
+        unsigned int selectiveDepth;
         unsigned int time;
         unsigned int nodes;
         unsigned int nodesPerSecond;
@@ -49,7 +54,8 @@ public:
 
     ChessEngineControllerWithUci(ChessEngineHandler & engineHandler);
 
-    void setupStartPosition();    void setupMoves(std::string const& moves);
+    void setupStartPosition();
+    void setupMoves(std::string const& moves);
     void setupFenString(std::string const& fenString);
     void go();
     void goWithPonder();
@@ -78,5 +84,7 @@ private:
     CalculationDetails m_currentCalculationDetails;
     std::deque<Command> m_pendingCommands;
 };
+
+}
 
 }
