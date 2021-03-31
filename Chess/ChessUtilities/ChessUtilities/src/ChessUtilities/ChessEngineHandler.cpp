@@ -11,6 +11,7 @@ using namespace std;
 
 namespace alba
 {
+
 namespace
 {
 
@@ -65,7 +66,8 @@ ChessEngineHandler::ChessEngineHandler(
         log(LogType::HandlerStatus, "Cannot Create Pipe");
     }
     GetStartupInfo(&startupInfo); //set startupinfo for the spawned process
-    startupInfo.dwFlags = STARTF_USESTDHANDLES|STARTF_USESHOWWINDOW;    startupInfo.wShowWindow = SW_SHOWDEFAULT;//SW_HIDE;
+    startupInfo.dwFlags = STARTF_USESTDHANDLES|STARTF_USESHOWWINDOW;
+    startupInfo.wShowWindow = SW_SHOWDEFAULT;//SW_HIDE;
     startupInfo.hStdOutput  = m_outputStreamOnEngineThread;
     startupInfo.hStdError   = m_outputStreamOnEngineThread;
     startupInfo.hStdInput   = m_inputStreamOnEngineThread;
@@ -76,7 +78,8 @@ ChessEngineHandler::ChessEngineHandler(
         log(LogType::HandlerStatus, "Cannot Create Process");
     }
     PointerToCallBackData pData = new CallBackData();
-    pData->epointer = this;    m_engineThread = CreateThread(NULL, 0, engineToGuiCallbackFunction, pData, 0, &(m_threadId));
+    pData->epointer = this;
+    m_engineThread = CreateThread(NULL, 0, engineToGuiCallbackFunction, pData, 0, &(m_threadId));
 }
 
 ChessEngineHandler::~ChessEngineHandler()
@@ -84,7 +87,8 @@ ChessEngineHandler::~ChessEngineHandler()
     sendStringToEngine("quit\n");
     CloseHandle(m_engineThread);
     CloseHandle(m_inputStreamOnEngineThread);
-    CloseHandle(m_outputStreamOnEngineThread);    CloseHandle(m_inputStreamOnHandler);
+    CloseHandle(m_outputStreamOnEngineThread);
+    CloseHandle(m_inputStreamOnHandler);
     CloseHandle(m_outputStreamOnHandler);
     m_logFileStream.getReference().close();
 }
@@ -118,7 +122,8 @@ void ChessEngineHandler::processStringFromEngine(std::string const& stringFromEn
     log(LogType::FromEngine, stringFromEngine);
 }
 
-void ChessEngineHandler::startMonitoringEngineOutput(){
+void ChessEngineHandler::startMonitoringEngineOutput()
+{
     unsigned long bytesRead; //bytes read
     unsigned long bytesAvailable; //bytes available
     char buffer[MAX_BUFFER_SIZE];
@@ -165,6 +170,7 @@ void ChessEngineHandler::startMonitoringEngineOutput(){
         Sleep(1);
     }
 }
+
 void ChessEngineHandler::setLogFile(std::string const& logFilePath)
 {
     m_logFileStream.createObjectUsingDefaultConstructor();
