@@ -1,7 +1,6 @@
-#include <BitmapFilters/Utilities.hpp>
+#include <BitmapManipulator/Utilities.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace alba::AprgBitmap;
 using namespace alba::TwoDimensions;
 using namespace std;

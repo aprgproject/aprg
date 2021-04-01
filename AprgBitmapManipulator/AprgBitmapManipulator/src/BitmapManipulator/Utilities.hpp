@@ -1,12 +1,11 @@
 #pragma once
 
 #include <Bitmap/CommonTypes.hpp>
-#include <BitmapFilters/AnimizeColor.hpp>
-#include <BitmapFilters/PenCircles.hpp>
+#include <BitmapManipulator/AnimizeColor.hpp>
+#include <BitmapManipulator/PenCircles.hpp>
 #include <Geometry/TwoDimensions/Point.hpp>
 
-namespace alba
-{
+namespace alba{
 
 namespace AprgBitmap
 {

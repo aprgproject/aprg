@@ -1,10 +1,9 @@
 #pragma once
 
-#include <BitmapFilters/BitmapFilters.hpp>
+#include <BitmapManipulator/BitmapFilters.hpp>
 #include <Common/Time/AlbaLocalTimer.hpp>
 
 #include <string>
-
 namespace alba
 {
 

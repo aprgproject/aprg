@@ -1,10 +1,9 @@
 #include "AnimeFilter.hpp"
 
-#include <BitmapFilters/AnimizeColor.hpp>
-#include <BitmapFilters/Utilities.hpp>
+#include <BitmapManipulator/AnimizeColor.hpp>
+#include <BitmapManipulator/Utilities.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
-
 #include <iostream>
 #include <sstream>
 

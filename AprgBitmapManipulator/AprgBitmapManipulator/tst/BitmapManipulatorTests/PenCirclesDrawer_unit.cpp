@@ -1,9 +1,8 @@
-#include <BitmapFilters/BitmapFilters.hpp>
-#include <BitmapFilters/PenCirclesDrawer.hpp>
+#include <BitmapManipulator/BitmapFilters.hpp>
+#include <BitmapManipulator/PenCirclesDrawer.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace alba::AprgBitmap;
 using namespace std;
 

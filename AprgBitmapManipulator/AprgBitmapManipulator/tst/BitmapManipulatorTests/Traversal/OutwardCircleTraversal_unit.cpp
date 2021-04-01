@@ -1,7 +1,6 @@
-#include <BitmapFilters/Traversal/OutwardCircleTraversal.hpp>
+#include <BitmapManipulator/Traversal/OutwardCircleTraversal.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba

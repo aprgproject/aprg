@@ -1,7 +1,6 @@
-#include <BitmapFilters/ColorUtilities.hpp>
+#include <BitmapManipulator/ColorUtilities.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace alba::AprgBitmap::ColorUtilities;
 using namespace std;
 

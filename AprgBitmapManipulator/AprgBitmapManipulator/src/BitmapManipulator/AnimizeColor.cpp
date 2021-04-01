@@ -2,10 +2,9 @@
 
 #include <Bitmap/Bitmap.hpp>
 #include <Bitmap/BitmapSnippet.hpp>
-#include <BitmapFilters/ColorUtilities.hpp>
+#include <BitmapManipulator/ColorUtilities.hpp>
 #include <Common/Container/AlbaContainerHelper.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
-
 using namespace alba::AprgBitmap;
 using namespace alba::AprgBitmap::ColorUtilities;
 using namespace std;
