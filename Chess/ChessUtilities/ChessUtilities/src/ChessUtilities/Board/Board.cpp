@@ -3,9 +3,9 @@
 #include <ChessUtilities/Board/Piece.hpp>
 
 #include <algorithm>
+#include <sstream>
 
 using namespace std;
-
 namespace alba
 {
 
@@ -63,17 +63,57 @@ Board::PieceValue Board::getPieceValue(Coordinate const& coordinate) const
     return result;
 }
 
+char Board::getPieceCharacter(Coordinate const& coordinate) const
+{
+    return Piece::convertToCharacter(getPieceValue(coordinate));
+}
+
 Moves Board::getPossibleMoves(Coordinate const& coordinate) const
 {
-    Moves result;
-    retrievePossibleMovesBaseFromPieceType(result, coordinate);
+    Moves result;    retrievePossibleMovesBaseFromPieceType(result, coordinate);
+    return result;
+}
+
+std::string Board::getFenString() const
+{
+    string result;
+    for(CoordinateDataType rank=0; rank<8; rank++)
+    {
+        int emptyCellsInRank = 0;
+        stringstream ssFenInRank;
+        for(CoordinateDataType file=0; file<8; file++)
+        {
+            Coordinate coordinate(file, rank);
+            if(isEmpty(coordinate))
+            {
+                emptyCellsInRank++;
+            }
+            else
+            {
+                if(emptyCellsInRank != 0)
+                {
+                    ssFenInRank << emptyCellsInRank;
+                }
+                ssFenInRank << getPieceCharacter(coordinate);
+                emptyCellsInRank = 0;
+            }
+        }
+        if (emptyCellsInRank != 0)
+        {
+            ssFenInRank << emptyCellsInRank;
+        }
+        result += ssFenInRank.str();
+        if(rank != 7U)
+        {
+            result += "/";
+        }
+    }
     return result;
 }
 
 void Board::retrievePossibleMovesBaseFromPieceType(
         Moves & result,
-        Coordinate const& coordinate) const
-{
+        Coordinate const& coordinate) const{
     uint16_t pieceValue(getPieceValue(coordinate));
     PieceType pieceType = Piece::extractType(pieceValue);
     switch(pieceType)

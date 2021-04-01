@@ -4,10 +4,10 @@
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 
 #include <cstdint>
+#include <string>
 
 namespace alba
 {
-
 namespace chess
 {
 
@@ -33,11 +33,12 @@ public:
 
     PieceValueMatrix const& getPieceValueMatrix() const;
     PieceValue getPieceValue(Coordinate const& coordinate) const;
+    char getPieceCharacter(Coordinate const& coordinate) const;
     Moves getPossibleMoves(Coordinate const& coordinate) const;
+    std::string getFenString() const;
 
 private:
-    void retrievePossibleMovesBaseFromPieceType(Moves & result, Coordinate const& coordinate) const;
-    void retrievePossiblePawnMoves(Moves & result, Coordinate const& coordinate) const;
+    void retrievePossibleMovesBaseFromPieceType(Moves & result, Coordinate const& coordinate) const;    void retrievePossiblePawnMoves(Moves & result, Coordinate const& coordinate) const;
     void retrievePossibleKnightMoves(Moves & result, Coordinate const& coordinate) const;
     void retrievePossibleBishopMoves(Moves & result, Coordinate const& coordinate) const;
     void retrievePossibleRookMoves(Moves & result, Coordinate const& coordinate) const;
