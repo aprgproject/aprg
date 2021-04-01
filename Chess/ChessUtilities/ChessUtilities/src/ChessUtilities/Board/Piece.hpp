@@ -4,10 +4,10 @@
 #include <ChessUtilities/Board/PieceType.hpp>
 
 #include <cstdint>
+#include <vector>
 
 namespace alba
 {
-
 namespace chess
 {
 
@@ -24,6 +24,8 @@ public:
 private:
     uint16_t m_underlyingValue;
 };
+
+using Pieces = std::vector<Piece>;
 
 }
 
