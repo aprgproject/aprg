@@ -304,11 +304,11 @@ void AlbaWindowsUserAutomation::saveBitmapFromClipboard(std::string const& fileP
                         {
                             file.write(reinterpret_cast<char*>(&fileHeader), sizeof(BITMAPFILEHEADER));
                             file.write(reinterpret_cast<char*>(info), sizeof(BITMAPINFOHEADER));
-                            file.write(reinterpret_cast<char*>(++info), info->biSizeImage);
+                            auto sizeImage(info->biSizeImage);
+                            file.write(reinterpret_cast<char*>(++info), sizeImage);
                         }
                     }
-                    GlobalUnlock(dib);
-                }
+                    GlobalUnlock(dib);                }
             }
 
             CloseClipboard();
