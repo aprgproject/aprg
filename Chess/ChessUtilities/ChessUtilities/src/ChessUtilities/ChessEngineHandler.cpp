@@ -41,11 +41,10 @@ DWORD WINAPI engineToGuiCallbackFunction(LPVOID lpParam)
 }
 
 ChessEngineHandler::ChessEngineHandler(
-        std::string const& enginePath)
+        string const& enginePath)
 {
     SECURITY_DESCRIPTOR sd; //security information for pipes
-    static SECURITY_ATTRIBUTES securityAttributes;
-    static STARTUPINFO startupInfo;
+    static SECURITY_ATTRIBUTES securityAttributes;    static STARTUPINFO startupInfo;
     static PROCESS_INFORMATION processInfo;
 
     if (IsWinNT())
@@ -93,14 +92,13 @@ ChessEngineHandler::~ChessEngineHandler()
     CloseHandle(m_outputStreamOnEngineThread);
     CloseHandle(m_inputStreamOnHandler);
     CloseHandle(m_outputStreamOnHandler);
-    m_logFileStream.getReference().close();
+    m_logFileStreamOptional.getReference().close();
 }
 
-void ChessEngineHandler::sendStringToEngine(std::string const& stringToEngine)
+void ChessEngineHandler::sendStringToEngine(string const& stringToEngine)
 {
     unsigned long bytesWritten(0U);
-    string stringToWrite(stringToEngine);
-    stringToWrite += "\n";
+    string stringToWrite(stringToEngine);    stringToWrite += "\n";
     long remainingLength=stringToWrite.length();
     do
     {
@@ -116,17 +114,16 @@ void ChessEngineHandler::sendStringToEngine(std::string const& stringToEngine)
     log(LogType::ToEngine, stringToEngine);
 }
 
-void ChessEngineHandler::processStringFromEngine(std::string const& stringFromEngine)
+void ChessEngineHandler::processStringFromEngine(string const& stringFromEngine)
 {
+    log(LogType::FromEngine, stringFromEngine);
     if(m_additionalStepsInProcessingAStringFromEngine)
     {
         m_additionalStepsInProcessingAStringFromEngine.getConstReference()(stringFromEngine);
     }
-    log(LogType::FromEngine, stringFromEngine);
 }
 
-void ChessEngineHandler::startMonitoringEngineOutput()
-{
+void ChessEngineHandler::startMonitoringEngineOutput(){
     unsigned long bytesRead; //bytes read
     unsigned long bytesAvailable; //bytes available
     char buffer[MAX_BUFFER_SIZE];
@@ -174,16 +171,15 @@ void ChessEngineHandler::startMonitoringEngineOutput()
     }
 }
 
-void ChessEngineHandler::setLogFile(std::string const& logFilePath)
+void ChessEngineHandler::setLogFile(string const& logFilePath)
 {
-    m_logFileStream.createObjectUsingDefaultConstructor();
-    m_logFileStream.getReference().open(logFilePath);
+    m_logFileStreamOptional.createObjectUsingDefaultConstructor();
+    m_logFileStreamOptional.getReference().open(logFilePath);
 
-    if(!m_logFileStream.getReference().is_open())
+    if(!m_logFileStreamOptional.getReference().is_open())
     {
         log(LogType::HandlerStatus, string("Cannot open log file") + logFilePath);
-    }
-}
+    }}
 
 void ChessEngineHandler::setAdditionalStepsInProcessingAStringFromEngine(
         ProcessAStringFunction const& additionalSteps)
@@ -191,15 +187,14 @@ void ChessEngineHandler::setAdditionalStepsInProcessingAStringFromEngine(
     m_additionalStepsInProcessingAStringFromEngine.setConstReference(additionalSteps);
 }
 
-void ChessEngineHandler::log(LogType const logtype, std::string const& logString)
+void ChessEngineHandler::log(LogType const logtype, string const& logString)
 {
-    if(m_logFileStream)
+    if(m_logFileStreamOptional)
     {
-        m_logFileStream.getReference() << getLogHeader(logtype) << logString << endl;
+        m_logFileStreamOptional.getReference() << getLogHeader(logtype) << logString << endl;
     }
 #ifdef APRG_TEST_MODE_ON
-    cout << getLogHeader(logtype) << logString << endl;
-#else
+    cout << getLogHeader(logtype) << logString << endl;#else
     if(LogType::FromEngine == logtype)
     {
         cout << logString << endl;

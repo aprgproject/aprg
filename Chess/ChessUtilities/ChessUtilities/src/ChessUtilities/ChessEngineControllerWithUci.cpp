@@ -224,11 +224,10 @@ void ChessEngineControllerWithUci::processInCalculating(
     bool hasBestMove(false);
     TokenState state;
     string headerToken;
-    string bestLine;
+    strings movesInBestLine;
     string currentMove;
     string currentMoveNumber;
-    for(string const& token : tokens)
-    {
+    for(string const& token : tokens)    {
         if(TokenState::OneValueHeaderFound == state)
         {
             if("depth" == headerToken)
@@ -295,15 +294,10 @@ void ChessEngineControllerWithUci::processInCalculating(
         }
         else if(TokenState::PvLineFound == state)
         {
-            if(!bestLine.empty())
-            {
-                bestLine += " ";
-            }
-            bestLine += token;
+            movesInBestLine.emplace_back(token);
         }
         else if("depth" == token || "selectiveDepth" == token || "time" == token || "nodes" == token
-                || "nps" == token || "cp" == token || "mate" == token || "currmove" == token || "currmovenumber" == token
-                || "bestmove" == token || "ponder" == token)
+                || "nps" == token || "cp" == token || "mate" == token || "currmove" == token || "currmovenumber" == token                || "bestmove" == token || "ponder" == token)
         {
             state = TokenState::OneValueHeaderFound;
             headerToken = token;
@@ -313,13 +307,12 @@ void ChessEngineControllerWithUci::processInCalculating(
             state = TokenState::PvLineFound;
         }
     }
-    if(!bestLine.empty())
+    if(!movesInBestLine.empty())
     {
-        m_currentCalculationDetails.bestLinePv = bestLine;
+        m_currentCalculationDetails.pvMovesInBestLine = movesInBestLine;
     }
     if(hasBestMove)
-    {
-        proceedToIdleAndProcessPendingCommands();
+    {        proceedToIdleAndProcessPendingCommands();
     }
 }
 
