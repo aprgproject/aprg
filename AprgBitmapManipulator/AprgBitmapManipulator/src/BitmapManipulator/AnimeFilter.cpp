@@ -4,6 +4,7 @@
 #include <BitmapManipulator/Utilities.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
+
 #include <iostream>
 #include <sstream>
 

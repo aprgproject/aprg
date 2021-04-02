@@ -4,7 +4,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace chess
 {
@@ -33,7 +34,8 @@ string constructFenString(
 
 Moves getSequenceOfMoves(
         Board const& board1,
-        Board const& board2){
+        Board const& board2)
+{
     // this is difficult
     Coordinates coordinatesWithPiecesInDifference1;
     Coordinates coordinatesWithPiecesInDifference2;

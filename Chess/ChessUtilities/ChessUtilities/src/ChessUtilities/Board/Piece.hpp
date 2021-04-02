@@ -8,6 +8,7 @@
 
 namespace alba
 {
+
 namespace chess
 {
 
@@ -24,7 +25,8 @@ public:
     char getCharacter() const;
 
 private:
-    uint16_t m_underlyingValue;};
+    uint16_t m_underlyingValue;
+};
 
 using Pieces = std::vector<Piece>;
 

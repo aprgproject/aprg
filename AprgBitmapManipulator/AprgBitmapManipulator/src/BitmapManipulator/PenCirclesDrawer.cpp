@@ -4,7 +4,8 @@
 #include <BitmapManipulator/Utilities.hpp>
 #include <Common/Math/Angle/AlbaAngle.hpp>
 #include <Geometry/TwoDimensions/Circle.hpp>
-#include <Geometry/TwoDimensions/Line.hpp>#include <Geometry/TwoDimensions/TwoDimensionsHelper.hpp>
+#include <Geometry/TwoDimensions/Line.hpp>
+#include <Geometry/TwoDimensions/TwoDimensionsHelper.hpp>
 
 #include <cmath>
 #include <set>

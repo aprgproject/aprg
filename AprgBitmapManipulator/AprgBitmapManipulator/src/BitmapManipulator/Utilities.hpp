@@ -5,7 +5,8 @@
 #include <BitmapManipulator/PenCircles.hpp>
 #include <Geometry/TwoDimensions/Point.hpp>
 
-namespace alba{
+namespace alba
+{
 
 namespace AprgBitmap
 {

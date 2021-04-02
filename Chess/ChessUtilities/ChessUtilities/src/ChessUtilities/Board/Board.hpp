@@ -8,6 +8,7 @@
 
 namespace alba
 {
+
 namespace chess
 {
 
@@ -38,7 +39,8 @@ public:
     std::string getFenString() const;
 
 private:
-    void retrievePossibleMovesBaseFromPieceType(Moves & result, Coordinate const& coordinate) const;    void retrievePossiblePawnMoves(Moves & result, Coordinate const& coordinate) const;
+    void retrievePossibleMovesBaseFromPieceType(Moves & result, Coordinate const& coordinate) const;
+    void retrievePossiblePawnMoves(Moves & result, Coordinate const& coordinate) const;
     void retrievePossibleKnightMoves(Moves & result, Coordinate const& coordinate) const;
     void retrievePossibleBishopMoves(Moves & result, Coordinate const& coordinate) const;
     void retrievePossibleRookMoves(Moves & result, Coordinate const& coordinate) const;

@@ -1,6 +1,7 @@
 #include <BitmapManipulator/LabelForPoints.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace alba::AprgBitmap;
 using namespace std;
 

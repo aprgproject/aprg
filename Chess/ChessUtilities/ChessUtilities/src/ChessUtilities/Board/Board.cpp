@@ -6,6 +6,7 @@
 #include <sstream>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -70,7 +71,8 @@ char Board::getPieceCharacter(Coordinate const& coordinate) const
 
 Moves Board::getPossibleMoves(Coordinate const& coordinate) const
 {
-    Moves result;    retrievePossibleMovesBaseFromPieceType(result, coordinate);
+    Moves result;
+    retrievePossibleMovesBaseFromPieceType(result, coordinate);
     return result;
 }
 
@@ -113,7 +115,8 @@ std::string Board::getFenString() const
 
 void Board::retrievePossibleMovesBaseFromPieceType(
         Moves & result,
-        Coordinate const& coordinate) const{
+        Coordinate const& coordinate) const
+{
     uint16_t pieceValue(getPieceValue(coordinate));
     PieceType pieceType = Piece::extractType(pieceValue);
     switch(pieceType)

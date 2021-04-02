@@ -5,6 +5,7 @@
 #include <BitmapManipulator/ColorUtilities.hpp>
 #include <Common/Container/AlbaContainerHelper.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+
 using namespace alba::AprgBitmap;
 using namespace alba::AprgBitmap::ColorUtilities;
 using namespace std;

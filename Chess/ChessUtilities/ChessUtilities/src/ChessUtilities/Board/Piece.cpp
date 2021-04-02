@@ -6,6 +6,7 @@
 
 namespace alba
 {
+
 namespace chess
 {
 
@@ -67,6 +68,7 @@ char Piece::convertToCharacter(uint16_t const value)
 Piece::Piece(uint16_t const underlyingValue)
     : m_underlyingValue(underlyingValue)
 {}
+
 PieceColor Piece::getColor() const
 {
     return extractColor(m_underlyingValue);
