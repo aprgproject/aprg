@@ -7,14 +7,8 @@
 #include <algorithm>
 #include <sstream>
 
-
-
-
-#include <Common/Debug/AlbaDebug.hpp>
-
 using namespace alba::stringHelper;
 using namespace std;
-
 namespace alba
 {
 
@@ -111,11 +105,10 @@ Coordinate Board::getCoordinateFromLetterNumberNotation(std::string const& lette
 Move Board::getMoveFromTwoLetterNumberNotation(std::string const& twoLetterNumber) const
 {
     Move result{};
-    if(twoLetterNumber.size() == 4)
+    if(twoLetterNumber.size() == 4 || twoLetterNumber.size() == 5) // 5 is for promotion
     {
         result = {getCoordinateFromLetterNumberNotation(twoLetterNumber.substr(0, 2)), getCoordinateFromLetterNumberNotation(twoLetterNumber.substr(2, 2))};
-    }
-    return result;
+    }    return result;
 }
 
 Moves Board::getPossibleMoves(Coordinate const& coordinate) const

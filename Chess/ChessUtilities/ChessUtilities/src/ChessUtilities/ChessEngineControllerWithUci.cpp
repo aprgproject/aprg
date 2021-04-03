@@ -1,16 +1,12 @@
 #include "ChessEngineControllerWithUci.hpp"
 
 #include <Common/String/AlbaStringHelper.hpp>
+#include <Common/Time/AlbaLocalTimer.hpp>
 
 #include <sstream>
 
-
-
-#include <Common/Debug/AlbaDebug.hpp>
-
 using namespace alba::stringHelper;
 using namespace std;
-
 namespace alba
 {
 
@@ -21,10 +17,10 @@ ChessEngineControllerWithUci::ChessEngineControllerWithUci(
         ChessEngineHandler & engineHandler)
     : m_engineHandler(engineHandler)
     , m_state(ControllerState::Initializing)
+    , m_waitingForReadyOkay(false)
 {
     initialize();
 }
-
 void ChessEngineControllerWithUci::resetToNewGame()
 {
     sendStopIfCalculating();
@@ -79,10 +75,34 @@ void ChessEngineControllerWithUci::goInfinite()
     send(CommandType::Go, "go infinite");
 }
 
+void ChessEngineControllerWithUci::sendIsReadyAndWaitOrResetIfNeeded()
+{
+    forceSend("isready");
+    m_waitingForReadyOkay = true;
+
+    bool shouldReset(false);
+    AlbaLocalTimer timer;
+    unsigned int count(0U);
+    while(m_waitingForReadyOkay)
+    {
+        if(count > 10) // 1 second elapsed so engine is stuck, lets reset
+        {
+            shouldReset = true;
+            break;
+        }
+        count++;
+        timer.sleep(100);
+    }
+
+    if(shouldReset)
+    {
+        resetEngine();
+    }
+}
+
 void ChessEngineControllerWithUci::stop()
 {
-    sendStop();
-}
+    sendStop();}
 
 void ChessEngineControllerWithUci::setAdditionalStepsInCalculationMonitoring(
         StepsInCalculationMonitoring const& additionalSteps)
@@ -99,10 +119,17 @@ void ChessEngineControllerWithUci::initialize()
     sendUci();
 }
 
+void ChessEngineControllerWithUci::resetEngine()
+{
+    m_engineHandler.reset();
+    m_waitingForReadyOkay = false;
+    m_state = ControllerState::Initializing;
+    sendUci();
+}
+
 void ChessEngineControllerWithUci::proceedToIdleAndProcessPendingCommands()
 {
-    m_state = ControllerState::Idle;
-    bool hasGoOnPendingCommand(false);
+    m_state = ControllerState::Idle;    bool hasGoOnPendingCommand(false);
     while(!m_pendingCommands.empty() && !hasGoOnPendingCommand)
     {
         Command pendingCommand(m_pendingCommands.front());
@@ -117,10 +144,15 @@ void ChessEngineControllerWithUci::clearCalculationDetails()
     m_currentCalculationDetails = CalculationDetails{};
 }
 
+void ChessEngineControllerWithUci::forceSend(
+        string const& commandString)
+{
+    m_engineHandler.sendStringToEngine(commandString);
+}
+
 void ChessEngineControllerWithUci::sendStopIfCalculating()
 {
-    if(ControllerState::Calculating == m_state)
-    {
+    if(ControllerState::Calculating == m_state)    {
         sendStop();
     }
 }
@@ -146,11 +178,9 @@ void ChessEngineControllerWithUci::send(
         Command const& command)
 {
     // all the logic are here lol
-    ALBA_PRINT2((int)m_state, command.commandString);
     switch(m_state)
     {
-    case ControllerState::Initializing:
-    {
+    case ControllerState::Initializing:    {
         if(CommandType::Uci == command.commandType)
         {
             m_engineHandler.sendStringToEngine(command.commandString);
@@ -196,28 +226,44 @@ void ChessEngineControllerWithUci::send(
 void ChessEngineControllerWithUci::processAStringFromEngine(
         string const& stringFromEngine)
 {
-    switch(m_state)
+    if(m_waitingForReadyOkay)
     {
-    case ControllerState::WaitingForUciOkay:
-    {
-        processInWaitingForUciOkay(stringFromEngine);
-        break;
+        processInWaitingForReadyOkay(stringFromEngine);
     }
-    case ControllerState::Calculating:
+    else
     {
-        processInCalculating(stringFromEngine);
-        break;
-    }
-    default:
-    {
-        // started and idle are ignored
-        break;
-    }
+        switch(m_state)
+        {
+        case ControllerState::WaitingForUciOkay:
+        {
+            processInWaitingForUciOkay(stringFromEngine);
+            break;
+        }
+        case ControllerState::Calculating:
+        {
+            processInCalculating(stringFromEngine);
+            break;
+        }
+        default:
+        {
+            // started and idle are ignored
+            break;
+        }
+        }
     }
 }
 
-void ChessEngineControllerWithUci::processInWaitingForUciOkay(
+void ChessEngineControllerWithUci::processInWaitingForReadyOkay(
         string const& stringFromEngine)
+{
+    string stringToProcess(getStringWithoutStartingAndTrailingWhiteSpace(stringFromEngine));
+    if("readyok" == stringToProcess)
+    {
+        m_waitingForReadyOkay = false;
+    }
+}
+
+void ChessEngineControllerWithUci::processInWaitingForUciOkay(        string const& stringFromEngine)
 {
     string stringToProcess(getStringWithoutStartingAndTrailingWhiteSpace(stringFromEngine));
     if("uciok" == stringToProcess)
@@ -287,16 +333,15 @@ void ChessEngineControllerWithUci::processInCalculating(
             }
             else if("bestmove" == headerToken)
             {
-                m_currentCalculationDetails.bestMove = convertStringToNumber<unsigned int>(token);
+                m_currentCalculationDetails.bestMove = token;
                 hasBestMove = true;
             }
             else if("ponder" == headerToken)
             {
-                m_currentCalculationDetails.ponderMove = convertStringToNumber<unsigned int>(token);
+                m_currentCalculationDetails.ponderMove = token;
             }
             if(!currentMove.empty() && !currentMoveNumber.empty())
-            {
-                unsigned int index = convertStringToNumber<unsigned int>(currentMoveNumber) - 1;
+            {                unsigned int index = convertStringToNumber<unsigned int>(currentMoveNumber) - 1;
                 if(index < 100)
                 {
                     if(index >= m_currentCalculationDetails.currentlySearchingMoves.size())
