@@ -308,7 +308,8 @@ void AlbaWindowsUserAutomation::saveBitmapFromClipboard(std::string const& fileP
                             file.write(reinterpret_cast<char*>(++info), sizeImage);
                         }
                     }
-                    GlobalUnlock(dib);                }
+                    GlobalUnlock(dib);
+                }
             }
 
             CloseClipboard();

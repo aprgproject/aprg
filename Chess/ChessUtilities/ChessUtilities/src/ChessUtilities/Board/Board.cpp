@@ -1,10 +1,18 @@
 #include "Board.hpp"
 
 #include <ChessUtilities/Board/Piece.hpp>
+#include <Common/Container/AlbaValueRange.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>
 #include <sstream>
 
+
+
+
+#include <Common/Debug/AlbaDebug.hpp>
+
+using namespace alba::stringHelper;
 using namespace std;
 
 namespace alba
@@ -36,7 +44,8 @@ Board::Board(Orientation const& orientation, InitializerList const& initializerL
     , m_pieceMatrix(8U, 8U, initializerList)
 {}
 
-bool Board::isCoordinateOnBoard(Coordinate const& coordinate) const{
+bool Board::isCoordinateOnBoard(Coordinate const& coordinate) const
+{
     auto x(coordinate.getX());
     auto y(coordinate.getY());
     return (x>=0 && x<=7) && (y>=0 && y<=7);
@@ -47,7 +56,8 @@ bool Board::isEmpty(Coordinate const& coordinate) const
     return PieceType::Empty == getPieceAt(coordinate).getType();
 }
 
-bool Board::isMovePossible(Move const& move) const{
+bool Board::isMovePossible(Move const& move) const
+{
     Moves moves(getPossibleMoves(move.first));
     auto it = find(moves.cbegin(), moves.cend(), move);
     return it != moves.cend();
@@ -74,12 +84,42 @@ Piece Board::getPieceAt(Coordinate const& coordinate) const
     }
     return result;
 }
-char Board::getPieceCharacter(Coordinate const& coordinate) const
+
+Coordinate Board::getCoordinateFromLetterNumberNotation(std::string const& letterNumber) const
 {
-    return getPieceAt(coordinate).getCharacter();
+    Coordinate result{};
+    if(letterNumber.size() == 2)
+    {
+        char letter = tolower(letterNumber.at(0));
+        char number = letterNumber.at(1);
+        if(isLetter(letter) && isNumber(number) && 'a' <= letter && letter <= 'h' && '1' <= number && number <= '8')
+        {
+            unsigned int numberValue = number-'0';
+            if(Orientation::BlackUpWhiteDown == m_orientation)
+            {
+                result = Coordinate(letter-'a', 8U-numberValue);
+            }
+            else if(Orientation::WhiteUpBlackDown == m_orientation)
+            {
+                result = Coordinate(7-(letter-'a'), numberValue-1);
+            }
+        }
+    }
+    return result;
 }
 
-Moves Board::getPossibleMoves(Coordinate const& coordinate) const{
+Move Board::getMoveFromTwoLetterNumberNotation(std::string const& twoLetterNumber) const
+{
+    Move result{};
+    if(twoLetterNumber.size() == 4)
+    {
+        result = {getCoordinateFromLetterNumberNotation(twoLetterNumber.substr(0, 2)), getCoordinateFromLetterNumberNotation(twoLetterNumber.substr(2, 2))};
+    }
+    return result;
+}
+
+Moves Board::getPossibleMoves(Coordinate const& coordinate) const
+{
     Moves result;
     retrievePossibleMovesBaseFromPieceType(result, coordinate);
     return result;
@@ -88,11 +128,19 @@ Moves Board::getPossibleMoves(Coordinate const& coordinate) const{
 std::string Board::getFenString() const
 {
     string result;
-    for(CoordinateDataType rank=0; rank<8; rank++)
+    CoordinateDataType start=0, end=7;
+    if(Orientation::WhiteUpBlackDown == m_orientation)
+    {
+        start=7;
+        end=0;
+    }
+    AlbaValueRange<CoordinateDataType> rankRange(start, end, 1);
+    rankRange.traverse([&](CoordinateDataType const rank)
     {
         int emptyCellsInRank = 0;
         stringstream ssFenInRank;
-        for(CoordinateDataType file=0; file<8; file++)
+        AlbaValueRange<CoordinateDataType> fileRange(start, end, 1);
+        fileRange.traverse([&](CoordinateDataType const file)
         {
             Coordinate coordinate(file, rank);
             if(isEmpty(coordinate))
@@ -105,20 +153,21 @@ std::string Board::getFenString() const
                 {
                     ssFenInRank << emptyCellsInRank;
                 }
-                ssFenInRank << getPieceCharacter(coordinate);
+                ssFenInRank << getPieceAt(coordinate).getCharacter();
                 emptyCellsInRank = 0;
             }
-        }
+        });
         if (emptyCellsInRank != 0)
         {
             ssFenInRank << emptyCellsInRank;
         }
         result += ssFenInRank.str();
-        if(rank != 7U)
+        if(rank != end)
         {
             result += "/";
         }
-    }
+
+    });
     return result;
 }
 
@@ -145,7 +194,8 @@ void Board::retrievePossibleMovesBaseFromPieceType(
     PieceType pieceType = piece.getType();
     switch(pieceType)
     {
-    case PieceType::Pawn:    {
+    case PieceType::Pawn:
+    {
         retrievePossiblePawnMoves(result, coordinate);
         break;
     }
@@ -189,7 +239,8 @@ void Board::retrievePossiblePawnMoves(
     if(PieceColor::White == piece.getColor())
     {
         if(Orientation::BlackUpWhiteDown == m_orientation)
-        {            addMove(result, coordinate, coordinate + Coordinate(0, -1));
+        {
+            addMove(result, coordinate, coordinate + Coordinate(0, -1));
             if(6 == coordinate.getY())
             {
                 addMove(result, coordinate, coordinate + Coordinate(0, -2));
@@ -207,7 +258,8 @@ void Board::retrievePossiblePawnMoves(
     else if(PieceColor::Black == piece.getColor())
     {
         if(Orientation::BlackUpWhiteDown == m_orientation)
-        {            addMove(result, coordinate, coordinate + Coordinate(0, 1));
+        {
+            addMove(result, coordinate, coordinate + Coordinate(0, 1));
             if(1 == coordinate.getY())
             {
                 addMove(result, coordinate, coordinate + Coordinate(0, 2));
@@ -316,7 +368,8 @@ bool Board::haveDifferentColors(
     return getPieceAt(sourceCoordinate).getColor() != getPieceAt(destinationCoordinate).getColor();
 }
 
-void Board::addMove(Moves & moves,                    Coordinate const& sourceCoordinate,
+void Board::addMove(Moves & moves,
+                    Coordinate const& sourceCoordinate,
                     Coordinate const& destinationCoordinate) const
 {
     if(isCoordinateOnBoard(sourceCoordinate)
@@ -336,7 +389,8 @@ Board::PieceMatrix::MatrixData Board::getInitialValues(
     PieceMatrix::MatrixData result;
     if(Orientation::BlackUpWhiteDown == inputType)
     {
-        result =        {12,10,11,14,13,11,10,12,
+        result =
+        {12,10,11,14,13,11,10,12,
          9,9,9,9,9,9,9,9,
          0,0,0,0,0,0,0,0,
          0,0,0,0,0,0,0,0,
