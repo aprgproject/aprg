@@ -5,15 +5,12 @@
 #include <Common/User/DisplayTable.hpp>
 
 #include <algorithm>
+#include <iostream>
 
-
-
-#include <Common/Debug/AlbaDebug.hpp>
-
+#define CHESS_ENGINE_PATH APRG_DIR R"(\Chess\ChessPeek\Files\stockfish13.exe)"
 #define SCREEN_SHOT_PATH APRG_DIR R"(\Chess\ChessPeek\Files\ScreenShot.bmp)"
 #define CHESS_BOARD_TOP_LEFT_CORNER 2195, 140
-#define CHESS_BOARD_BOTTOM_RIGHT_CORNER 3026, 971
-#define TOP_BOTTOM_INDENTION 0.05
+#define CHESS_BOARD_BOTTOM_RIGHT_CORNER 3026, 971#define TOP_BOTTOM_INDENTION 0.05
 #define LEFT_RIGHT_INDENTION 0.03
 #define WHITE_COLOR_LIMIT 0.91
 #define BLACK_COLOR_LIMIT 0.40
@@ -28,11 +25,10 @@ namespace chess
 {
 
 ChessPeek::ChessPeek()
-    : m_chessEngineHandler(APRG_DIR R"(\Chess\ChessPeek\Files\stockfish13.exe)")
+    : m_chessEngineHandler(CHESS_ENGINE_PATH)
     , m_chessEngineController(m_chessEngineHandler)
     , m_chessPieceConverter()
-    , m_userAutomation()
-    , m_chessCellBitValueMatrix(8U, 8U)
+    , m_userAutomation()    , m_chessCellBitValueMatrix(8U, 8U)
     , m_chessBoard(Board::Orientation::BlackUpWhiteDown)
     , m_playerSideColor(PieceColor::White)
     , m_currentMoveOnDisplay()
@@ -56,44 +52,33 @@ void ChessPeek::runForever()
 
 void ChessPeek::runOneIteration()
 {
-    ALBA_PRINT1("runOneIteration");
     Board::PieceMatrix previousPieceMatrix(m_chessBoard.getPieceMatrix());
     checkScreenAndSaveDetails();
-    if(previousPieceMatrix != m_chessBoard.getPieceMatrix())
-    {
+    if(previousPieceMatrix != m_chessBoard.getPieceMatrix())    {
         startNewAnalysisUsingEngine();
     }
 }
 
 void ChessPeek::checkScreenAndSaveDetails()
 {
-    ALBA_PRINT1("checkScreenAndSaveDetails");
     m_userAutomation.saveBitmapOnScreen(SCREEN_SHOT_PATH);//
     Bitmap bitmap(SCREEN_SHOT_PATH);
-    BitmapSnippet snippet(bitmap.getSnippetReadFromFile(BitmapXY(CHESS_BOARD_TOP_LEFT_CORNER), BitmapXY(CHESS_BOARD_BOTTOM_RIGHT_CORNER)));
-    checkSnippetAndSaveDetails(snippet);
+    BitmapSnippet snippet(bitmap.getSnippetReadFromFile(BitmapXY(CHESS_BOARD_TOP_LEFT_CORNER), BitmapXY(CHESS_BOARD_BOTTOM_RIGHT_CORNER)));    checkSnippetAndSaveDetails(snippet);
     //bitmap.setSnippetWriteToFile(snippet);//
 }
 
 void ChessPeek::startNewAnalysisUsingEngine()
 {
-    ALBA_PRINT1("startNewAnalysisUsingEngine");
-    ALBA_PRINT1("stop");
+    m_chessEngineController.sendIsReadyAndWaitOrResetIfNeeded();
     m_chessEngineController.stop();
-    ALBA_PRINT1("start constructFenString");
+    m_chessEngineController.sendIsReadyAndWaitOrResetIfNeeded();
     string fenString(constructFenString(m_chessBoard, m_playerSideColor, "KQkq", "-", 0, 1));
-    ALBA_PRINT1(fenString);
-    ALBA_PRINT1("resetToNewGame");
-    m_chessEngineController.resetToNewGame();
-    ALBA_PRINT1("setupFenString");
     m_chessEngineController.setupFenString(fenString);
-    ALBA_PRINT1("goWithPonder");
+    m_chessEngineController.sendIsReadyAndWaitOrResetIfNeeded();
     m_chessEngineController.goWithPonder();
-    ALBA_PRINT1("done");
 }
 
-void ChessPeek::checkCalculationDetails(ChessEngineControllerWithUci::CalculationDetails const& calculationDetails)
-{
+void ChessPeek::checkCalculationDetails(ChessEngineControllerWithUci::CalculationDetails const& calculationDetails){
     string moveToDisplay(getMoveToDisplay(calculationDetails));
 
     printCalculationDetails(calculationDetails, moveToDisplay);
@@ -246,16 +231,21 @@ DisplayTable ChessPeek::getDisplayTable(Move const& actualMove) const
         {
             Coordinate coordinate(i, j);
             string cell;
-            if(actualMove.first == coordinate || actualMove.second == coordinate)
+            if(actualMove.first == coordinate)
             {
-                cell += "[";
+                cell += "1";
                 cell += m_chessBoard.getPieceAt(actualMove.first).getCharacter();
-                cell += "]";
+                cell += "1";
+            }
+            else if(actualMove.second == coordinate)
+            {
+                cell += "2";
+                cell += m_chessBoard.getPieceAt(actualMove.first).getCharacter();
+                cell += "2";
             }
             else
             {
-                cell += " ";
-                cell += m_chessBoard.getPieceAt(coordinate).getCharacter();
+                cell += " ";                cell += m_chessBoard.getPieceAt(coordinate).getCharacter();
                 cell += " ";
             }
             displayTable.getLastRow().addCell(cell);
@@ -292,13 +282,28 @@ void ChessPeek::setBitsBasedFromColor(
         BitmapSnippet const& snippet,
         BitmapXY const& bitmapCoordinate) const
 {
+    static BitmapXYs xys
+    {BitmapXY(0, -1), BitmapXY(0, 1), BitmapXY(-1, 0), BitmapXY(1, 0)};
     double currentIntensity(calculateColorIntensityDecimal(snippet.getColorAt(bitmapCoordinate)));
-    whiteValue[index] = (currentIntensity > WHITE_COLOR_LIMIT) ? 1 : 0;
-    blackValue[index] = (currentIntensity < BLACK_COLOR_LIMIT) ? 1 : 0;
+    double minimum(currentIntensity);
+    double maximum(currentIntensity);
+    for(BitmapXY const& xy : xys)
+    {
+        currentIntensity = calculateColorIntensityDecimal(snippet.getColorAt(bitmapCoordinate + xy));
+        if(minimum > currentIntensity)
+        {
+            minimum = currentIntensity;
+        }
+        if(maximum < currentIntensity)
+        {
+            maximum = currentIntensity;
+        }
+    }
+    whiteValue[index] = (maximum > WHITE_COLOR_LIMIT) ? 1 : 0;
+    blackValue[index] = (minimum < BLACK_COLOR_LIMIT) ? 1 : 0;
 }
 
-double ChessPeek::calculateColorIntensityDecimal(uint32_t const color) const
-{
+double ChessPeek::calculateColorIntensityDecimal(uint32_t const color) const{
     return (((double)extractRed(color)+extractGreen(color)+extractBlue(color))/0xFF)/3;
 }
 
