@@ -8,11 +8,10 @@ namespace alba
 namespace algorithm
 {
 
-template<typename Vertex>
+template <typename Vertex>
 class BaseDirectedGraph : public BaseGraph<Vertex>
 {
-public:
-    using Edges = typename GraphTypes<Vertex>::Edges;
+public:    using Edges = typename GraphTypes<Vertex>::Edges;
 
     virtual ~BaseDirectedGraph()
     {}

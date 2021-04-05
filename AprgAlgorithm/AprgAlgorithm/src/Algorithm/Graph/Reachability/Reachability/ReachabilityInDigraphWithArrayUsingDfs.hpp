@@ -9,11 +9,10 @@ namespace alba
 namespace algorithm
 {
 
-template<typename Vertex, unsigned int MAX_VERTEX_VALUE>
+template <typename Vertex, unsigned int MAX_VERTEX_VALUE>
 class ReachabilityInDigraphWithArrayUsingDfs : public BaseReachabilityInDigraph<Vertex>
 {
-public:
-    using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
+public:    using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
     using ArrayOfBool = std::array<bool, MAX_VERTEX_VALUE>;
 
     ReachabilityInDigraphWithArrayUsingDfs(BaseDirectedGraphWithVertex const& graph, Vertex const& sourceVertex)

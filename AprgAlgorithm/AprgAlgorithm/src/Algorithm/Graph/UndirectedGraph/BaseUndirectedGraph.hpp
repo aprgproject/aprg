@@ -8,11 +8,10 @@ namespace alba
 namespace algorithm
 {
 
-template<typename Vertex>
+template <typename Vertex>
 class BaseUndirectedGraph : public BaseGraph<Vertex>
 {
 public:
-
     virtual ~BaseUndirectedGraph()
     {}
 

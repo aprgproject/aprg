@@ -8,11 +8,10 @@ namespace alba
 namespace algorithm
 {
 
-template<typename Vertex>
+template <typename Vertex>
 class CheckableVertices
 {
-public:
-    using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
+public:    using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
 
     CheckableVertices()
     {}

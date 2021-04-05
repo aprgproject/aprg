@@ -8,11 +8,10 @@ namespace alba
 namespace algorithm
 {
 
-template<typename Vertex>
+template <typename Vertex>
 class BaseReachabilityInDigraph
 {
 public:
-
     virtual ~BaseReachabilityInDigraph()
     {}
 

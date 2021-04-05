@@ -6,11 +6,10 @@ namespace alba
 namespace algorithm
 {
 
-template<typename Vertex>
+template <typename Vertex>
 class BaseTransitiveClosure
 {
 public:
-
     virtual ~BaseTransitiveClosure()
     {}
 

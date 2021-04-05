@@ -11,11 +11,10 @@ namespace alba
 namespace algorithm
 {
 
-template<typename Vertex>
+template <typename Vertex>
 class VertexOrderingUsingDfs
 {
-public:
-    using BaseGraphWithVertex = BaseGraph<Vertex>;
+public:    using BaseGraphWithVertex = BaseGraph<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;

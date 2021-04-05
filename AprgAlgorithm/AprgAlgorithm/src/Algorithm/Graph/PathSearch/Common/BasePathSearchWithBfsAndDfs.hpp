@@ -11,11 +11,10 @@ namespace alba
 namespace algorithm
 {
 
-template<typename Vertex>
+template <typename Vertex>
 class BasePathSearchWithBfsAndDfs
 {
-public:
-    using BaseGraphWithVertex = BaseGraph<Vertex>;
+public:    using BaseGraphWithVertex = BaseGraph<Vertex>;
     using Path = typename GraphTypes<Vertex>::Path;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using VertexToVertexMap = typename GraphTypes<Vertex>::VertexToVertexMap;

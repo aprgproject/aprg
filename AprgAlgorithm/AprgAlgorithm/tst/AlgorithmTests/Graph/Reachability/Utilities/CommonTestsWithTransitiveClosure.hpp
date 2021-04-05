@@ -11,11 +11,10 @@ namespace algorithm
 namespace CommonTestsWithTransitiveClosure
 {
 
-template<typename TransitiveClosureType, typename GraphType>
+template <typename TransitiveClosureType, typename GraphType>
 void testIsReachableWhenEmptyWithVertexAsUnsignedInt()
 {
-    GraphType graph;
-    TransitiveClosureType transitiveClosure(graph);
+    GraphType graph;    TransitiveClosureType transitiveClosure(graph);
 
     //Reachability in 0
     EXPECT_FALSE(transitiveClosure.isReachable(0U, 1U));
@@ -32,11 +31,10 @@ void testIsReachableWhenEmptyWithVertexAsUnsignedInt()
     EXPECT_FALSE(transitiveClosure.isReachable(0U, 12U));
 }
 
-template<typename TransitiveClosureType, typename GraphType>
+template <typename TransitiveClosureType, typename GraphType>
 void testIsReachableWhenNotEmptyWithVertexAsUnsignedInt()
 {
-    GraphType graph;
-    graph.connect(0U, 1U);
+    GraphType graph;    graph.connect(0U, 1U);
     graph.connect(0U, 5U);
     graph.connect(2U, 0U);
     graph.connect(2U, 3U);
