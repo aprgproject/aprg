@@ -9,6 +9,7 @@
 
 using namespace alba::stringHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -108,7 +109,8 @@ Move Board::getMoveFromTwoLetterNumberNotation(std::string const& twoLetterNumbe
     if(twoLetterNumber.size() == 4 || twoLetterNumber.size() == 5) // 5 is for promotion
     {
         result = {getCoordinateFromLetterNumberNotation(twoLetterNumber.substr(0, 2)), getCoordinateFromLetterNumberNotation(twoLetterNumber.substr(2, 2))};
-    }    return result;
+    }
+    return result;
 }
 
 Moves Board::getPossibleMoves(Coordinate const& coordinate) const

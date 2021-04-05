@@ -11,7 +11,8 @@ namespace algorithm
 template <typename Vertex>
 class PathSearchUsingDfs : public BasePathSearchWithBfsAndDfs<Vertex>
 {
-public:    using BaseGraphWithVertex = BaseGraph<Vertex>;
+public:
+    using BaseGraphWithVertex = BaseGraph<Vertex>;
     using BaseClass = BasePathSearchWithBfsAndDfs<Vertex>;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using Path = typename GraphTypes<Vertex>::Path;

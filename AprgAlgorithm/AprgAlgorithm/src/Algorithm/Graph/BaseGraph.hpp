@@ -13,7 +13,8 @@ namespace algorithm
 template <typename Vertex>
 class BaseGraph
 {
-public:    using Vertices = typename GraphTypes<Vertex>::Vertices;
+public:
+    using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Edges = typename GraphTypes<Vertex>::Edges;
 
     virtual bool isConnected(Vertex const& vertex1, Vertex const& vertex2) const = 0;

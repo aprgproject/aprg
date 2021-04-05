@@ -10,6 +10,7 @@ template <typename Vertex>
 class BaseTransitiveClosure
 {
 public:
+
     virtual ~BaseTransitiveClosure()
     {}
 

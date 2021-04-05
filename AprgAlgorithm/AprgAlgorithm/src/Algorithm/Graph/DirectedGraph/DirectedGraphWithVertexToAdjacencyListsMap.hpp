@@ -17,7 +17,8 @@ namespace algorithm
 template <typename Vertex>
 class DirectedGraphWithVertexToAdjacencyListsMap : public BaseDirectedGraph<Vertex>
 {
-public:    using AdjacencyList = std::set<Vertex>;
+public:
+    using AdjacencyList = std::set<Vertex>;
     using AdjacencyLists = std::map<Vertex, AdjacencyList>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;

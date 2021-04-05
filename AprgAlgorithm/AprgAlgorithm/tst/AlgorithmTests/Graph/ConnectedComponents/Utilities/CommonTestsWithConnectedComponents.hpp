@@ -43,7 +43,8 @@ void testIsConnectedWhenEmptyWithVertexAsUnsignedIntWithUndirectedGraph()
     ConnectedComponent connectedComponents(graph);
 
     EXPECT_FALSE(connectedComponents.isConnected(0U, 1U));
-    EXPECT_FALSE(connectedComponents.isConnected(0U, 2U));    EXPECT_FALSE(connectedComponents.isConnected(0U, 3U));
+    EXPECT_FALSE(connectedComponents.isConnected(0U, 2U));
+    EXPECT_FALSE(connectedComponents.isConnected(0U, 3U));
     EXPECT_FALSE(connectedComponents.isConnected(0U, 4U));
     EXPECT_FALSE(connectedComponents.isConnected(0U, 5U));
     EXPECT_FALSE(connectedComponents.isConnected(0U, 6U));
@@ -61,7 +62,8 @@ void testIsConnectedWhenNotEmptyWithVertexAsUnsignedIntWithUndirectedGraph()
     Graph graph;
     graph.connect(0U, 1U);
     graph.connect(0U, 2U);
-    graph.connect(0U, 5U);    graph.connect(0U, 6U);
+    graph.connect(0U, 5U);
+    graph.connect(0U, 6U);
     graph.connect(3U, 5U);
     graph.connect(3U, 4U);
     graph.connect(4U, 5U);
@@ -74,7 +76,8 @@ void testIsConnectedWhenNotEmptyWithVertexAsUnsignedIntWithUndirectedGraph()
     ConnectedComponent connectedComponents(graph);
 
     EXPECT_FALSE(connectedComponents.isConnected(0U, 7U));
-    EXPECT_FALSE(connectedComponents.isConnected(0U, 9U));    EXPECT_FALSE(connectedComponents.isConnected(7U, 9U));
+    EXPECT_FALSE(connectedComponents.isConnected(0U, 9U));
+    EXPECT_FALSE(connectedComponents.isConnected(7U, 9U));
     EXPECT_TRUE(connectedComponents.isConnected(0U, 1U));
     EXPECT_TRUE(connectedComponents.isConnected(0U, 2U));
     EXPECT_TRUE(connectedComponents.isConnected(0U, 3U));
@@ -105,7 +108,8 @@ void testGetNumberOfComponentIdsWhenNotEmptyWithVertexAsUnsignedIntWithDirectedG
     Graph graph;
     graph.connect(0U, 1U);
     graph.connect(1U, 2U);
-    graph.connect(2U, 3U);    graph.connect(3U, 0U);
+    graph.connect(2U, 3U);
+    graph.connect(3U, 0U);
     graph.connect(4U, 5U);
     graph.connect(5U, 4U);
     graph.connect(6U, 7U);
@@ -122,7 +126,8 @@ void testIsConnectedWhenEmptyWithVertexAsUnsignedIntWithDirectedGraph()
     ConnectedComponent connectedComponents(graph);
 
     EXPECT_FALSE(connectedComponents.isConnected(0U, 1U));
-    EXPECT_FALSE(connectedComponents.isConnected(0U, 2U));    EXPECT_FALSE(connectedComponents.isConnected(0U, 3U));
+    EXPECT_FALSE(connectedComponents.isConnected(0U, 2U));
+    EXPECT_FALSE(connectedComponents.isConnected(0U, 3U));
     EXPECT_FALSE(connectedComponents.isConnected(0U, 4U));
     EXPECT_FALSE(connectedComponents.isConnected(0U, 5U));
     EXPECT_FALSE(connectedComponents.isConnected(0U, 6U));
@@ -140,7 +145,8 @@ void testIsConnectedWhenNotEmptyWithVertexAsUnsignedIntWithDirectedGraph()
     Graph graph;
     graph.connect(0U, 1U);
     graph.connect(0U, 5U);
-    graph.connect(2U, 0U);    graph.connect(2U, 3U);
+    graph.connect(2U, 0U);
+    graph.connect(2U, 3U);
     graph.connect(3U, 2U);
     graph.connect(3U, 5U);
     graph.connect(4U, 2U);
@@ -162,7 +168,8 @@ void testIsConnectedWhenNotEmptyWithVertexAsUnsignedIntWithDirectedGraph()
     ConnectedComponent connectedComponents(graph);
 
     EXPECT_FALSE(connectedComponents.isConnected(0U, 1U));
-    EXPECT_FALSE(connectedComponents.isConnected(0U, 6U));    EXPECT_FALSE(connectedComponents.isConnected(0U, 7U));
+    EXPECT_FALSE(connectedComponents.isConnected(0U, 6U));
+    EXPECT_FALSE(connectedComponents.isConnected(0U, 7U));
     EXPECT_FALSE(connectedComponents.isConnected(0U, 9U));
     EXPECT_TRUE(connectedComponents.isConnected(0U, 2U));
     EXPECT_TRUE(connectedComponents.isConnected(0U, 3U));

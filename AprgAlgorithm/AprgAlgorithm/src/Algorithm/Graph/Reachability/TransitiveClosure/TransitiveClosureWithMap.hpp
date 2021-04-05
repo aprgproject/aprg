@@ -15,7 +15,8 @@ namespace algorithm
 template <typename Vertex>
 class TransitiveClosureWithMap : public BaseTransitiveClosure<Vertex>
 {
-public:    using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
+public:
+    using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
     using VertexToReachabilityMap = typename std::map<Vertex, ReachabilityInDigraphWithSetUsingDfs<Vertex>>;
 
     TransitiveClosureWithMap(BaseDirectedGraphWithVertex const& graph)

@@ -12,7 +12,8 @@ namespace algorithm
 template <typename Vertex>
 class BipartiteCheckerUsingDfs
 {
-public:    using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
+public:
+    using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using Path = typename GraphTypes<Vertex>::Path;

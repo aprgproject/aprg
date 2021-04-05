@@ -13,7 +13,8 @@ namespace algorithm
 template <typename Vertex>
 class ReachabilityInDigraphWithSetUsingDfs : public BaseReachabilityInDigraph<Vertex>
 {
-public:    using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
+public:
+    using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 

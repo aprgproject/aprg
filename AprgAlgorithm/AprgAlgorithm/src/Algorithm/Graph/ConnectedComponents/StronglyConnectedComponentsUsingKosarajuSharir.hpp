@@ -17,7 +17,8 @@ namespace algorithm
 template <typename Vertex>
 class StronglyConnectedComponentsUsingKosarajuSharir : public BaseConnectedComponents<Vertex>
 {
-public:    using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
+public:
+    using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
     using DirectedGraphWithListOfEdgesWithVertex = DirectedGraphWithListOfEdges<Vertex>;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using Edge = typename GraphTypes<Vertex>::Edge;

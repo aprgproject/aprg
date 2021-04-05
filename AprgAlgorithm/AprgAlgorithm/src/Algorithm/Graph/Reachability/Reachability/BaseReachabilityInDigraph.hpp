@@ -12,6 +12,7 @@ template <typename Vertex>
 class BaseReachabilityInDigraph
 {
 public:
+
     virtual ~BaseReachabilityInDigraph()
     {}
 

@@ -6,6 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithSymbolTable;
 using namespace std;
 
+
 namespace alba
 {
 
@@ -108,4 +109,5 @@ TEST(RedBlackBinarySearchTreeSymbolTableTest, GetKeysInRangeWorks)
 }
 
 }
+
 }

@@ -10,11 +10,11 @@ namespace alba
 namespace algorithm
 {
 
-namespace CommonTestsWithBaseUnionFind
+namespace CommonTestsWithUnionFind
 {
 
 template <typename UnionFind>
-void performIsConnectedTest()
+void testIsConnectedWithUnsignedInt()
 {
     UnionFind unionFind;
     EXPECT_FALSE(unionFind.isConnected(1, 2));
@@ -29,7 +29,7 @@ void performIsConnectedTest()
 }
 
 template <typename UnionFind>
-void performConnectTest()
+void testConnectWithUnsignedInt()
 {
     UnionFind unionFind;
     EXPECT_FALSE(unionFind.isConnected(3, 4));
@@ -51,7 +51,7 @@ void performConnectTest()
 }
 
 template <typename UnionFind>
-void performConnectTestWithExample1()
+void testConnectUsingExample1WithUnsignedInt()
 {
     UnionFind unionFind;
     unionFind.connect(4, 3);
@@ -72,7 +72,7 @@ void performConnectTestWithExample1()
 }
 
 template <typename UnionFind>
-void performConnectTestWithExample2()
+void testConnectUsingExample2WithUnsignedInt()
 {
     UnionFind unionFind;
     unionFind.connect(0, 1);

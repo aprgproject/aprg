@@ -7,6 +7,7 @@
 
 using namespace alba::stringHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -21,6 +22,7 @@ ChessEngineControllerWithUci::ChessEngineControllerWithUci(
 {
     initialize();
 }
+
 void ChessEngineControllerWithUci::resetToNewGame()
 {
     sendStopIfCalculating();
@@ -102,7 +104,8 @@ void ChessEngineControllerWithUci::sendIsReadyAndWaitOrResetIfNeeded()
 
 void ChessEngineControllerWithUci::stop()
 {
-    sendStop();}
+    sendStop();
+}
 
 void ChessEngineControllerWithUci::setAdditionalStepsInCalculationMonitoring(
         StepsInCalculationMonitoring const& additionalSteps)
@@ -129,7 +132,8 @@ void ChessEngineControllerWithUci::resetEngine()
 
 void ChessEngineControllerWithUci::proceedToIdleAndProcessPendingCommands()
 {
-    m_state = ControllerState::Idle;    bool hasGoOnPendingCommand(false);
+    m_state = ControllerState::Idle;
+    bool hasGoOnPendingCommand(false);
     while(!m_pendingCommands.empty() && !hasGoOnPendingCommand)
     {
         Command pendingCommand(m_pendingCommands.front());
@@ -152,7 +156,8 @@ void ChessEngineControllerWithUci::forceSend(
 
 void ChessEngineControllerWithUci::sendStopIfCalculating()
 {
-    if(ControllerState::Calculating == m_state)    {
+    if(ControllerState::Calculating == m_state)
+    {
         sendStop();
     }
 }
@@ -180,7 +185,8 @@ void ChessEngineControllerWithUci::send(
     // all the logic are here lol
     switch(m_state)
     {
-    case ControllerState::Initializing:    {
+    case ControllerState::Initializing:
+    {
         if(CommandType::Uci == command.commandType)
         {
             m_engineHandler.sendStringToEngine(command.commandString);
@@ -263,7 +269,8 @@ void ChessEngineControllerWithUci::processInWaitingForReadyOkay(
     }
 }
 
-void ChessEngineControllerWithUci::processInWaitingForUciOkay(        string const& stringFromEngine)
+void ChessEngineControllerWithUci::processInWaitingForUciOkay(
+        string const& stringFromEngine)
 {
     string stringToProcess(getStringWithoutStartingAndTrailingWhiteSpace(stringFromEngine));
     if("uciok" == stringToProcess)
@@ -341,7 +348,8 @@ void ChessEngineControllerWithUci::processInCalculating(
                 m_currentCalculationDetails.ponderMove = token;
             }
             if(!currentMove.empty() && !currentMoveNumber.empty())
-            {                unsigned int index = convertStringToNumber<unsigned int>(currentMoveNumber) - 1;
+            {
+                unsigned int index = convertStringToNumber<unsigned int>(currentMoveNumber) - 1;
                 if(index < 100)
                 {
                     if(index >= m_currentCalculationDetails.currentlySearchingMoves.size())

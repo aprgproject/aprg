@@ -2,7 +2,8 @@
 #include <AlgorithmTests/UnionFind/Utilities/CommonTestsWithUnionFind.hpp>
 
 #include <gtest/gtest.h>
-using namespace alba::algorithm::CommonTestsWithBaseUnionFind;
+
+using namespace alba::algorithm::CommonTestsWithUnionFind;
 using namespace std;
 
 namespace alba
@@ -18,22 +19,22 @@ using UnionFindForTest = UnionFind<unsigned int, 13>;
 
 TEST(UnionFindTest, IsConnectedWorks)
 {
-    performIsConnectedTest<UnionFindForTest>();
+    testIsConnectedWithUnsignedInt<UnionFindForTest>();
 }
 
 TEST(UnionFindTest, ConnectWorks)
 {
-    performConnectTest<UnionFindForTest>();
+    testConnectWithUnsignedInt<UnionFindForTest>();
 }
 
 TEST(UnionFindTest, ConnectWorksWithExample1)
 {
-    performConnectTestWithExample1<UnionFindForTest>();
+    testConnectUsingExample1WithUnsignedInt<UnionFindForTest>();
 }
 
 TEST(UnionFindTest, ConnectWorksWithExample2)
 {
-    performConnectTestWithExample2<UnionFindForTest>();
+    testConnectUsingExample2WithUnsignedInt<UnionFindForTest>();
 }
 
 TEST(UnionFindTest, GetRootWorks)
@@ -41,7 +42,8 @@ TEST(UnionFindTest, GetRootWorks)
     UnionFindForTest unionFind;
     unionFind.connect(4, 3);
     unionFind.connect(3, 8);
-    unionFind.connect(6, 5);    unionFind.connect(9, 4);
+    unionFind.connect(6, 5);
+    unionFind.connect(9, 4);
     unionFind.connect(2, 1);
 
     EXPECT_EQ(0U, unionFind.getRoot(0));
@@ -61,7 +63,8 @@ TEST(UnionFindTest, GetNumberOfUnconnectedWorks)
     UnionFindForTest unionFind;
     EXPECT_EQ(13U, unionFind.getNumberOfUnconnected());
 
-    unionFind.connect(4, 3);    unionFind.connect(3, 8);
+    unionFind.connect(4, 3);
+    unionFind.connect(3, 8);
     unionFind.connect(6, 5);
     unionFind.connect(9, 4);
     unionFind.connect(2, 1);

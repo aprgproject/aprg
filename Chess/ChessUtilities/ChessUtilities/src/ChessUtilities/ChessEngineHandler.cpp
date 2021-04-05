@@ -7,6 +7,7 @@
 
 using namespace alba::stringHelper;
 using namespace std;
+
 #define MAX_BUFFER_SIZE 2000
 
 namespace alba
@@ -34,7 +35,8 @@ int IsWinNT()
 DWORD WINAPI engineMonitoringCallbackFunction(LPVOID lpParam)
 {
     PointerToCallBackData pointerToCallBackData = (PointerToCallBackData)lpParam;
-    ChessEngineHandler* chessEngineHandlerPointer = reinterpret_cast<ChessEngineHandler*>(pointerToCallBackData->epointer);    chessEngineHandlerPointer->startMonitoringEngineOutput();
+    ChessEngineHandler* chessEngineHandlerPointer = reinterpret_cast<ChessEngineHandler*>(pointerToCallBackData->epointer);
+    chessEngineHandlerPointer->startMonitoringEngineOutput();
     return 0;
 }
 }
@@ -84,6 +86,7 @@ void ChessEngineHandler::sendStringToEngine(string const& stringToEngine)
     while(isSuccessful && remainingLength>0);
     log(LogType::ToEngine, stringToEngine);
 }
+
 void ChessEngineHandler::processStringFromEngine(string const& stringFromEngine)
 {
     log(LogType::FromEngine, stringFromEngine);
@@ -215,7 +218,8 @@ void ChessEngineHandler::shutdownEngine()
 
 void ChessEngineHandler::log(LogType const logtype, string const& logString)
 {
-    if(m_logFileStreamOptional)    {
+    if(m_logFileStreamOptional)
+    {
         m_logFileStreamOptional.getReference() << getLogHeader(logtype) << logString << endl;
     }
 #ifdef APRG_TEST_MODE_ON

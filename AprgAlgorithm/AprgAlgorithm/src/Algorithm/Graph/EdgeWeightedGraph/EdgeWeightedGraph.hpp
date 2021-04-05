@@ -15,7 +15,8 @@ namespace algorithm
 template <typename Vertex, typename Weight, typename Graph>
 class EdgeWeightedGraph : public Graph
 {
-public:    using BaseClass = Graph;
+public:
+    using BaseClass = Graph;
     using EdgeWithVertexComparison = typename GraphTypes<Vertex>::EdgeWithVertexComparison;
     using EdgeToWeightMap = std::map<EdgeWithVertexComparison, Weight>;
     using EdgeWithWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgeWithWeight;
