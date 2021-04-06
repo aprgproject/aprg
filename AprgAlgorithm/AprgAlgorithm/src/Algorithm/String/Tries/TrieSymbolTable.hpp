@@ -118,11 +118,10 @@ private:
 
     Node const* get(
             NodeUniquePointer const& currentNodePointer,
-            std::string const& key,
+            Key const& key,
             unsigned int const index) const
     {
-        Node const* result(nullptr);
-        if(currentNodePointer)
+        Node const* result(nullptr);        if(currentNodePointer)
         {
             if(index == key.length())
             {
@@ -213,11 +212,10 @@ private:
 
     void put(
             NodeUniquePointer & currentNodePointer,
-            std::string const& key,
+            Key const& key,
             Value const& value,
             unsigned int const index)
-    {
-        if(!currentNodePointer)
+    {        if(!currentNodePointer)
         {
             currentNodePointer = std::make_unique<Node>();
         }
@@ -233,11 +231,10 @@ private:
 
     NodeUniquePointer deleteBasedOnKey(
             NodeUniquePointer & currentNodePointer,
-            std::string const& key,
+            Key const& key,
             unsigned int const index)
     {
-        NodeUniquePointer result;
-        if(currentNodePointer)
+        NodeUniquePointer result;        if(currentNodePointer)
         {
             ValueUniquePointer & valueUniquePointer(currentNodePointer->valueUniquePointer);
             if(index == key.length())
