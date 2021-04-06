@@ -1,4 +1,4 @@
-#include <Algorithm/String/Tries/TrieSymbolTable.hpp>
+#include <Algorithm/String/Tries/TernarySearchTrie.hpp>
 #include <AlgorithmTests/String/Tries/Utilities/CommonTestsWithTries.hpp>
 
 #include <gtest/gtest.h>
@@ -14,87 +14,84 @@ namespace algorithm
 
 namespace
 {
-using TrieForTest = TrieSymbolTable<unsigned int>;
+using TrieForTest = TernarySearchTrie<unsigned int>;
 }
 
-TEST(TrieSymbolTableTest, IsEmptyWorksWhenEmpty)
+TEST(TernarySearchTrieTest, IsEmptyWorksWhenEmpty)
 {
     testIsEmptyWhenEmptyWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TrieSymbolTableTest, IsEmptyWorksWhenNotEmpty)
+TEST(TernarySearchTrieTest, IsEmptyWorksWhenNotEmpty)
 {
     testIsEmptyWhenNotEmptyWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TrieSymbolTableTest, DoesContainWorks)
+TEST(TernarySearchTrieTest, DoesContainWorks)
 {
     testDoesContainWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TrieSymbolTableTest, GetSizeWorksWhenEmpty)
+TEST(TernarySearchTrieTest, GetSizeWorksWhenEmpty)
 {
     testGetSizeWhenEmptyWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TrieSymbolTableTest, GetSizeWorksWhenNotEmpty)
+TEST(TernarySearchTrieTest, GetSizeWorksWhenNotEmpty)
 {
     testGetSizeWhenNotEmptyWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TrieSymbolTableTest, GetWorks)
+TEST(TernarySearchTrieTest, GetWorks)
 {
     testGetWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TrieSymbolTableTest, GetWhenEmptyStringWorks)
+TEST(TernarySearchTrieTest, GetLongestPrefixWorks)
 {
     TrieForTest trie;
 
     EXPECT_EQ(0U, trie.get(""));
 
     trie.put("", 17U);
-    EXPECT_EQ(17U, trie.get(""));
+    EXPECT_EQ(0U, trie.get(""));
 }
 
-TEST(TrieSymbolTableTest, GetLongestPrefixWorks)
-{
-    testGetLongestPrefixOfWithUnsignedInt<TrieForTest>();}
-
-TEST(TrieSymbolTableTest, PutWorks)
+TEST(TernarySearchTrieTest, PutWorks)
 {
     testPutWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TrieSymbolTableTest, PutWhenEmptyStringWorks)
+TEST(TernarySearchTrieTest, PutWhenEmptyStringWorks)
 {
     TrieForTest trie;
     trie.put("", 17U);
 
-    ASSERT_EQ(1U, trie.getSize());
-    EXPECT_EQ(17U, trie.get(""));
+    EXPECT_EQ(0U, trie.getSize());
+    EXPECT_EQ(0U, trie.get(""));
 }
 
-TEST(TrieSymbolTableTest, DeleteBasedOnKeyWorks)
+TEST(TernarySearchTrieTest, DeleteBasedOnKeyWorks)
 {
     testDeleteBasedOnKeyWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TrieSymbolTableTest, DeleteBasedOnKeyWhenEmptyStringWorks)
+TEST(TernarySearchTrieTest, DeleteBasedOnKeyWhenEmptyStringWorks)
 {
     testDeleteBasedOnKeyWhenEmptyStringWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TrieSymbolTableTest, GetKeysWorks)
+TEST(TernarySearchTrieTest, GetKeysWorks)
 {
-    testGetKeysWithUnsignedInt<TrieForTest>();}
+    testGetKeysWithUnsignedInt<TrieForTest>();
+}
 
-TEST(TrieSymbolTableTest, GetAllKeysWithPrefixWorks)
+TEST(TernarySearchTrieTest, GetAllKeysWithPrefixWorks)
 {
     testGetAllKeysWithPrefixWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TrieSymbolTableTest, GetAllKeysThatMatchWorks)
+TEST(TernarySearchTrieTest, GetAllKeysThatMatchWorks)
 {
     testGetAllKeysThatMatchWithUnsignedInt<TrieForTest>();
 }
