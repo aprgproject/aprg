@@ -18,10 +18,12 @@ namespace matrix
 {
 
 template <typename DataType>
+bool isEqualForMathMatrixDataType(DataType const& value1, DataType const& value2);
+
+template <typename DataType>
 class AlbaMatrix
 {
-public:
-    using MatrixData = AlbaMatrixData<DataType>;
+public:    using MatrixData = AlbaMatrixData<DataType>;
     using ListOfMatrixData = ListOfAlbaMatrixData<DataType>;
     using LoopFunction = std::function<void(unsigned int const x, unsigned int const y)>;
     using LoopWithValueFunction = std::function<void(unsigned int const x, unsigned int const y, DataType const& value)>;
@@ -73,15 +75,19 @@ public:
                         secondMatrix.m_matrixData.cbegin(),
                         secondMatrix.m_matrixData.cend(),
                         [](DataType const& first, DataType const& second)
-            {return mathHelper::isAlmostEqual(first, second);});
+            {return isEqualForMathMatrixDataType(first, second);});
         }
         return isEqual;
     }
 
+    bool operator!=(AlbaMatrix const& secondMatrix) const
+    {
+        return !operator==(secondMatrix);
+    }
+
     AlbaMatrix operator+(AlbaMatrix const& secondMatrix) const
     {
-        assert((m_numberOfColumns == secondMatrix.m_numberOfColumns) && (m_numberOfRows == secondMatrix.m_numberOfRows));
-        return doBinaryOperationWithSameDimensions(*this, secondMatrix, BinaryFunction<DataType>(std::plus<DataType>()));
+        assert((m_numberOfColumns == secondMatrix.m_numberOfColumns) && (m_numberOfRows == secondMatrix.m_numberOfRows));        return doBinaryOperationWithSameDimensions(*this, secondMatrix, BinaryFunction<DataType>(std::plus<DataType>()));
     }
 
     AlbaMatrix operator-(AlbaMatrix const& secondMatrix) const
