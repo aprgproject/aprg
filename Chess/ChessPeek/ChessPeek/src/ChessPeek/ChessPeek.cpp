@@ -34,10 +34,10 @@ ChessPeek::ChessPeek()
     , m_chessBoard(Board::Orientation::BlackUpWhiteDown)
     , m_playerSideColor(PieceColor::White)
     , m_currentMoveOnDisplay()
+    , m_isPreviousAnalysisNotSuccessful(false)
 {
     initialize();
 }
-
 ChessPeek::ChessCellBitValueMatrix const& ChessPeek::getChessCellBitValueMatrix() const
 {
     return m_chessCellBitValueMatrix;
@@ -56,11 +56,10 @@ void ChessPeek::runOneIteration()
 {
     Board::PieceMatrix previousPieceMatrix(m_chessBoard.getPieceMatrix());
     checkScreenAndSaveDetails();
-    if(previousPieceMatrix != m_chessBoard.getPieceMatrix())
+    if(m_isPreviousAnalysisNotSuccessful || previousPieceMatrix != m_chessBoard.getPieceMatrix())
     {
         startNewAnalysisUsingEngine();
-    }
-}
+    }}
 
 void ChessPeek::checkScreenAndSaveDetails()
 {
@@ -73,17 +72,24 @@ void ChessPeek::checkScreenAndSaveDetails()
 
 void ChessPeek::startNewAnalysisUsingEngine()
 {
-    m_chessEngineController.sendIsReadyAndWaitOrResetIfNeeded();
-    m_chessEngineController.stop();
-    m_chessEngineController.sendIsReadyAndWaitOrResetIfNeeded();
-    string fenString(constructFenString(m_chessBoard, m_playerSideColor, "KQkq", "-", 0, 1));
-    m_chessEngineController.setupFenString(fenString);
-    m_chessEngineController.sendIsReadyAndWaitOrResetIfNeeded();
-    m_chessEngineController.goWithPonder();
+    m_isPreviousAnalysisNotSuccessful = true;
+    if(!m_chessEngineController.waitTillReadyAndReturnIfResetWasPerformed())
+    {
+        m_chessEngineController.stop();
+        if(!m_chessEngineController.waitTillReadyAndReturnIfResetWasPerformed())
+        {
+            string fenString(constructFenString(m_chessBoard, m_playerSideColor, "KQkq", "-", 0, 1));
+            m_chessEngineController.setupFenString(fenString);
+            if(!m_chessEngineController.waitTillReadyAndReturnIfResetWasPerformed())
+            {
+                m_isPreviousAnalysisNotSuccessful=false;
+                m_chessEngineController.goWithPonder();
+            }
+        }
+    }
 }
 
-void ChessPeek::checkCalculationDetails(ChessEngineControllerWithUci::CalculationDetails const& calculationDetails)
-{
+void ChessPeek::checkCalculationDetails(ChessEngineControllerWithUci::CalculationDetails const& calculationDetails){
     string moveToDisplay(getMoveToDisplay(calculationDetails));
 
     printCalculationDetails(calculationDetails, moveToDisplay);
@@ -184,11 +190,9 @@ void ChessPeek::printCalculationDetails(
     cout << "Move to display: [" << moveToDisplay << "]" << endl;
     Move actualMove(m_chessBoard.getMoveFromTwoLetterNumberNotation(moveToDisplay));
     DisplayTable displayTable(getDisplayTable(actualMove));
-    displayTable.setBorders("-","|");
     cout << "Board:" << endl;
     cout << displayTable.drawOutput();
-    cout << endl;
-}
+    cout << endl;}
 
 string ChessPeek::getMoveToDisplay(
         ChessEngineControllerWithUci::CalculationDetails const& calculationDetails) const
@@ -257,9 +261,9 @@ DisplayTable ChessPeek::getDisplayTable(Move const& actualMove) const
             displayTable.getLastRow().addCell(cell);
         }
     }
+    displayTable.setBorders("-","|");
     return displayTable;
 }
-
 void ChessPeek::retrieveChessCellBitValueAt(
         BitSet64 & whiteValue,
         BitSet64 & blackValue,
@@ -331,11 +335,11 @@ uint8_t ChessPeek::extractBlue(uint32_t const color) const
 
 void ChessPeek::initialize()
 {
-    m_chessEngineHandler.setLogFile(APRG_DIR R"(\Chess\ChessPeek\Files\Engine.log)");
+    m_chessEngineHandler.setLogFile(APRG_DIR R"(\Chess\ChessPeek\Files\EngineHandler.log)");
+    m_chessEngineController.setLogFile(APRG_DIR R"(\Chess\ChessPeek\Files\EngineController.log)");
     m_chessEngineController.setAdditionalStepsInCalculationMonitoring([&](ChessEngineControllerWithUci::CalculationDetails const& calculationDetails)
     {
-        checkCalculationDetails(calculationDetails);
-    });
+        checkCalculationDetails(calculationDetails);    });
 }
 
 }
