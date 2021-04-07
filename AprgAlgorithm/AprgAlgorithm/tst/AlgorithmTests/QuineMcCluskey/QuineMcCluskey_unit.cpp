@@ -15,28 +15,33 @@ namespace alba
 namespace algorithm
 {
 
+namespace
+{
+using ImplicantForTest = Implicant<unsigned int>;
+using ImplicantsForTest = Implicants<unsigned int>;
+using QuineMcCluskeyForTest = QuineMcCluskey<unsigned int>;
+}
+
 TEST(QuineMcCluskeyTest, ImplicantEquivalentStringTest)
 {
-    Implicant implicant;
+    ImplicantForTest implicant;
     implicant.addMinterm(8);
     implicant.addMinterm(10);
-    implicant.addMinterm(12);
-    implicant.addMinterm(14);
+    implicant.addMinterm(12);    implicant.addMinterm(14);
     EXPECT_EQ("00001--0", implicant.getEquivalentString(8));
 }
 
 TEST(QuineMcCluskeyTest, ImplicantCompatibilityTest)
 {
-    Implicant implicant1;
+    ImplicantForTest implicant1;
     implicant1.addMinterm(4);
     implicant1.addMinterm(12);
-    Implicant implicant2;
+    ImplicantForTest implicant2;
     implicant2.addMinterm(8);
     implicant2.addMinterm(9);
-    Implicant implicant3;
+    ImplicantForTest implicant3;
     implicant3.addMinterm(10);
     implicant3.addMinterm(11);
-
     EXPECT_FALSE(implicant1.isCompatible(implicant2));
     EXPECT_FALSE(implicant1.isCompatible(implicant3));
     EXPECT_FALSE(implicant2.isCompatible(implicant1));
@@ -47,17 +52,16 @@ TEST(QuineMcCluskeyTest, ImplicantCompatibilityTest)
 
 TEST(QuineMcCluskeyTest, ImplicantSubsetTest)
 {
-    Implicant implicant1;
+    ImplicantForTest implicant1;
     implicant1.addMinterm(4);
     implicant1.addMinterm(12);
-    Implicant implicant2;
+    ImplicantForTest implicant2;
     implicant2.addMinterm(8);
     implicant2.addMinterm(9);
-    Implicant implicant3;
+    ImplicantForTest implicant3;
     implicant3.addMinterm(8);
     implicant3.addMinterm(9);
-    implicant3.addMinterm(10);
-    implicant3.addMinterm(11);
+    implicant3.addMinterm(10);    implicant3.addMinterm(11);
 
     EXPECT_FALSE(implicant1.isSubset(implicant2));
     EXPECT_FALSE(implicant1.isSubset(implicant3));
@@ -69,31 +73,28 @@ TEST(QuineMcCluskeyTest, ImplicantSubsetTest)
 
 TEST(QuineMcCluskeyTest, UnintializedOutputTest)
 {
-    QuineMcCluskey quineMcCluskey;
+    QuineMcCluskeyForTest quineMcCluskey;
     EXPECT_EQ(LogicalValue::False, quineMcCluskey.getOutput(0xA));
     EXPECT_EQ(LogicalValue::False, quineMcCluskey.getOutput(0x1));
-    EXPECT_EQ(LogicalValue::False, quineMcCluskey.getOutput(0xB));
-    EXPECT_EQ(LogicalValue::False, quineMcCluskey.getOutput(0xA));
+    EXPECT_EQ(LogicalValue::False, quineMcCluskey.getOutput(0xB));    EXPECT_EQ(LogicalValue::False, quineMcCluskey.getOutput(0xA));
 }
 
 TEST(QuineMcCluskeyTest, InputOutputTest)
 {
-    QuineMcCluskey quineMcCluskey;
+    QuineMcCluskeyForTest quineMcCluskey;
     quineMcCluskey.setInputOutput(0x4, LogicalValue::False);
     quineMcCluskey.setInputOutput(0x5, LogicalValue::True);
-    quineMcCluskey.setInputOutput(0x6, LogicalValue::DontCare);
-    EXPECT_EQ(LogicalValue::False, quineMcCluskey.getOutput(0x4));
+    quineMcCluskey.setInputOutput(0x6, LogicalValue::DontCare);    EXPECT_EQ(LogicalValue::False, quineMcCluskey.getOutput(0x4));
     EXPECT_EQ(LogicalValue::True, quineMcCluskey.getOutput(0x5));
     EXPECT_EQ(LogicalValue::DontCare, quineMcCluskey.getOutput(0x6));
 }
 
 TEST(QuineMcCluskeyTest, GetImplicantsForCubeZero)
 {
-    QuineMcCluskey quineMcCluskey;
+    QuineMcCluskeyForTest quineMcCluskey;
     quineMcCluskey.setInputOutput(4, LogicalValue::True);
     quineMcCluskey.setInputOutput(8, LogicalValue::True);
-    quineMcCluskey.setInputOutput(9, LogicalValue::DontCare);
-    quineMcCluskey.setInputOutput(10, LogicalValue::True);
+    quineMcCluskey.setInputOutput(9, LogicalValue::DontCare);    quineMcCluskey.setInputOutput(10, LogicalValue::True);
     quineMcCluskey.setInputOutput(11, LogicalValue::True);
     quineMcCluskey.setInputOutput(12, LogicalValue::True);
     quineMcCluskey.setInputOutput(14, LogicalValue::DontCare);
@@ -101,15 +102,14 @@ TEST(QuineMcCluskeyTest, GetImplicantsForCubeZero)
 
     quineMcCluskey.fillComputationalTableWithMintermsForZeroCube();
 
-    Implicants mintermsWithZero(quineMcCluskey.getImplicants(0,0));
-    Implicants mintermsWithOne(quineMcCluskey.getImplicants(1,0));
-    Implicants mintermsWithTwo(quineMcCluskey.getImplicants(2,0));
-    Implicants mintermsWithThree(quineMcCluskey.getImplicants(3,0));
-    Implicants mintermsWithFour(quineMcCluskey.getImplicants(4,0));
+    ImplicantsForTest mintermsWithZero(quineMcCluskey.getImplicants(0,0));
+    ImplicantsForTest mintermsWithOne(quineMcCluskey.getImplicants(1,0));
+    ImplicantsForTest mintermsWithTwo(quineMcCluskey.getImplicants(2,0));
+    ImplicantsForTest mintermsWithThree(quineMcCluskey.getImplicants(3,0));
+    ImplicantsForTest mintermsWithFour(quineMcCluskey.getImplicants(4,0));
 
     ASSERT_EQ(0U, mintermsWithZero.getSize());
-    ASSERT_EQ(2U, mintermsWithOne.getSize());
-    ASSERT_EQ(3U, mintermsWithTwo.getSize());
+    ASSERT_EQ(2U, mintermsWithOne.getSize());    ASSERT_EQ(3U, mintermsWithTwo.getSize());
     ASSERT_EQ(2U, mintermsWithThree.getSize());
     ASSERT_EQ(1U, mintermsWithFour.getSize());
 
@@ -122,11 +122,10 @@ TEST(QuineMcCluskeyTest, GetImplicantsForCubeZero)
 
 TEST(QuineMcCluskeyTest, GetImplicantsCubeOne)
 {
-    QuineMcCluskey quineMcCluskey;
+    QuineMcCluskeyForTest quineMcCluskey;
     quineMcCluskey.setInputOutput(4, LogicalValue::True);
     quineMcCluskey.setInputOutput(8, LogicalValue::True);
-    quineMcCluskey.setInputOutput(9, LogicalValue::DontCare);
-    quineMcCluskey.setInputOutput(10, LogicalValue::True);
+    quineMcCluskey.setInputOutput(9, LogicalValue::DontCare);    quineMcCluskey.setInputOutput(10, LogicalValue::True);
     quineMcCluskey.setInputOutput(11, LogicalValue::True);
     quineMcCluskey.setInputOutput(12, LogicalValue::True);
     quineMcCluskey.setInputOutput(14, LogicalValue::DontCare);
@@ -139,15 +138,14 @@ TEST(QuineMcCluskeyTest, GetImplicantsCubeOne)
     quineMcCluskey.findCombinationOfImplicants(3,0);
     quineMcCluskey.findCombinationOfImplicants(4,0);
 
-    Implicants mintermsWithZero(quineMcCluskey.getImplicants(0,1));
-    Implicants mintermsWithOne(quineMcCluskey.getImplicants(1,1));
-    Implicants mintermsWithTwo(quineMcCluskey.getImplicants(2,1));
-    Implicants mintermsWithThree(quineMcCluskey.getImplicants(3,1));
-    Implicants mintermsWithFour(quineMcCluskey.getImplicants(4,1));
+    ImplicantsForTest mintermsWithZero(quineMcCluskey.getImplicants(0,1));
+    ImplicantsForTest mintermsWithOne(quineMcCluskey.getImplicants(1,1));
+    ImplicantsForTest mintermsWithTwo(quineMcCluskey.getImplicants(2,1));
+    ImplicantsForTest mintermsWithThree(quineMcCluskey.getImplicants(3,1));
+    ImplicantsForTest mintermsWithFour(quineMcCluskey.getImplicants(4,1));
 
     ASSERT_EQ(0U, mintermsWithZero.getSize());
-    ASSERT_EQ(4U, mintermsWithOne.getSize());
-    ASSERT_EQ(4U, mintermsWithTwo.getSize());
+    ASSERT_EQ(4U, mintermsWithOne.getSize());    ASSERT_EQ(4U, mintermsWithTwo.getSize());
     ASSERT_EQ(2U, mintermsWithThree.getSize());
     ASSERT_EQ(0U, mintermsWithFour.getSize());
 
@@ -160,11 +158,10 @@ TEST(QuineMcCluskeyTest, GetImplicantsCubeOne)
 
 TEST(QuineMcCluskeyTest, GetImplicantsCubeTwo)
 {
-    QuineMcCluskey quineMcCluskey;
+    QuineMcCluskeyForTest quineMcCluskey;
     quineMcCluskey.setInputOutput(4, LogicalValue::True);
     quineMcCluskey.setInputOutput(8, LogicalValue::True);
-    quineMcCluskey.setInputOutput(9, LogicalValue::DontCare);
-    quineMcCluskey.setInputOutput(10, LogicalValue::True);
+    quineMcCluskey.setInputOutput(9, LogicalValue::DontCare);    quineMcCluskey.setInputOutput(10, LogicalValue::True);
     quineMcCluskey.setInputOutput(11, LogicalValue::True);
     quineMcCluskey.setInputOutput(12, LogicalValue::True);
     quineMcCluskey.setInputOutput(14, LogicalValue::DontCare);
@@ -173,15 +170,14 @@ TEST(QuineMcCluskeyTest, GetImplicantsCubeTwo)
     quineMcCluskey.fillComputationalTableWithMintermsForZeroCube();
     quineMcCluskey.findAllCombinations();
 
-    Implicants mintermsWithZero(quineMcCluskey.getImplicants(0,2));
-    Implicants mintermsWithOne(quineMcCluskey.getImplicants(1,2));
-    Implicants mintermsWithTwo(quineMcCluskey.getImplicants(2,2));
-    Implicants mintermsWithThree(quineMcCluskey.getImplicants(3,2));
-    Implicants mintermsWithFour(quineMcCluskey.getImplicants(4,2));
+    ImplicantsForTest mintermsWithZero(quineMcCluskey.getImplicants(0,2));
+    ImplicantsForTest mintermsWithOne(quineMcCluskey.getImplicants(1,2));
+    ImplicantsForTest mintermsWithTwo(quineMcCluskey.getImplicants(2,2));
+    ImplicantsForTest mintermsWithThree(quineMcCluskey.getImplicants(3,2));
+    ImplicantsForTest mintermsWithFour(quineMcCluskey.getImplicants(4,2));
 
     ASSERT_EQ(0U, mintermsWithZero.getSize());
-    ASSERT_EQ(2U, mintermsWithOne.getSize());
-    ASSERT_EQ(1U, mintermsWithTwo.getSize());
+    ASSERT_EQ(2U, mintermsWithOne.getSize());    ASSERT_EQ(1U, mintermsWithTwo.getSize());
     ASSERT_EQ(0U, mintermsWithThree.getSize());
     ASSERT_EQ(0U, mintermsWithFour.getSize());
 
@@ -194,11 +190,10 @@ TEST(QuineMcCluskeyTest, GetImplicantsCubeTwo)
 
 TEST(QuineMcCluskeyTest, GetFinalImplicants)
 {
-    QuineMcCluskey quineMcCluskey;
+    QuineMcCluskeyForTest quineMcCluskey;
     quineMcCluskey.setInputOutput(4, LogicalValue::True);
     quineMcCluskey.setInputOutput(8, LogicalValue::True);
-    quineMcCluskey.setInputOutput(9, LogicalValue::DontCare);
-    quineMcCluskey.setInputOutput(10, LogicalValue::True);
+    quineMcCluskey.setInputOutput(9, LogicalValue::DontCare);    quineMcCluskey.setInputOutput(10, LogicalValue::True);
     quineMcCluskey.setInputOutput(11, LogicalValue::True);
     quineMcCluskey.setInputOutput(12, LogicalValue::True);
     quineMcCluskey.setInputOutput(14, LogicalValue::DontCare);
@@ -207,21 +202,19 @@ TEST(QuineMcCluskeyTest, GetFinalImplicants)
     quineMcCluskey.fillComputationalTableWithMintermsForZeroCube();
     quineMcCluskey.findAllCombinations();
 
-    Implicants finalImplicants(quineMcCluskey.getAllFinalImplicants());
+    ImplicantsForTest finalImplicants(quineMcCluskey.getAllFinalImplicants());
 
     ASSERT_EQ(4U, finalImplicants.getSize());
-    EXPECT_EQ("[0 : 4|12|], [1 : 8|9|10|11|], [2 : 8|10|12|14|], [3 : 10|11|14|15|], ", finalImplicants.getImplicantsString());
-    cout<<quineMcCluskey.getOutputTable(finalImplicants);
+    EXPECT_EQ("[0 : 4|12|], [1 : 8|9|10|11|], [2 : 8|10|12|14|], [3 : 10|11|14|15|], ", finalImplicants.getImplicantsString());    cout<<quineMcCluskey.getOutputTable(finalImplicants);
 }
 
 TEST(QuineMcCluskeyTest, DISABLED_ExperimentalTest)
 {
 
-    QuineMcCluskey quineMcCluskey;
+    QuineMcCluskeyForTest quineMcCluskey;
     /*quineMcCluskey.setInputOutput(0, LogicalValue::True);
     quineMcCluskey.setInputOutput(1, LogicalValue::True);
-    quineMcCluskey.setInputOutput(3, LogicalValue::DontCare);
-    quineMcCluskey.setInputOutput(4, LogicalValue::True);
+    quineMcCluskey.setInputOutput(3, LogicalValue::DontCare);    quineMcCluskey.setInputOutput(4, LogicalValue::True);
     quineMcCluskey.setInputOutput(5, LogicalValue::DontCare);
     quineMcCluskey.setInputOutput(6, LogicalValue::DontCare);
     quineMcCluskey.setInputOutput(7, LogicalValue::True);
@@ -248,18 +241,16 @@ TEST(QuineMcCluskeyTest, DISABLED_ExperimentalTest)
     quineMcCluskey.fillComputationalTableWithMintermsForZeroCube();
     quineMcCluskey.findAllCombinations();
 
-    Implicants finalImplicants(quineMcCluskey.getAllFinalImplicants());
+    ImplicantsForTest finalImplicants(quineMcCluskey.getAllFinalImplicants());
 
     cout<<quineMcCluskey.getOutputTable(finalImplicants);
 }
-
 TEST(QuineMcCluskeyTest, DISABLED_AnalyzeResultsFromFile)
 {
-    QuineMcCluskey quineMcCluskey;
+    QuineMcCluskeyForTest quineMcCluskey;
     AlbaLocalPathHandler pathOfNewAlgorithm(R"(C:\APRG\DateAlgorithmStudy.csv)");
 
-    ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getFullPath());
-    AlbaFileReader algorithmResultsReader(algorithmResultsFileStream);
+    ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getFullPath());    AlbaFileReader algorithmResultsReader(algorithmResultsFileStream);
 
     while(algorithmResultsReader.isNotFinished())
     {
@@ -278,10 +269,9 @@ TEST(QuineMcCluskeyTest, DISABLED_AnalyzeResultsFromFile)
     cout<<"quineMcCluskey.findAllCombinations();"<<endl;
     quineMcCluskey.findAllCombinations();
     cout<<"quineMcCluskey.getAllFinalImplicants();"<<endl;
-    Implicants finalImplicants(quineMcCluskey.getAllFinalImplicants());
+    ImplicantsForTest finalImplicants(quineMcCluskey.getAllFinalImplicants());
     cout<<quineMcCluskey.getOutputTable(finalImplicants);
 }
-
 }
 
 }
