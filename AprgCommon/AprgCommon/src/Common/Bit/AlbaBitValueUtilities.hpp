@@ -34,7 +34,8 @@ public:
         // std::bitset can be used here but it would no longer be constexpr
         static_assert(sizeof(DataTypeToManipulate) != sizeof(DataTypeToManipulate),
                       "This size or type is not supported. Please add a specialization if needed.");
-        return 0;    }
+        return 0;
+    }
 };
 
 constexpr unsigned int getNumberOfBitsAssertedForOneByte(uint8_t const value)

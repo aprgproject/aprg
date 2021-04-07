@@ -23,7 +23,8 @@ bool isEqualForMathMatrixDataType(DataType const& value1, DataType const& value2
 template <typename DataType>
 class AlbaMatrix
 {
-public:    using MatrixData = AlbaMatrixData<DataType>;
+public:
+    using MatrixData = AlbaMatrixData<DataType>;
     using ListOfMatrixData = ListOfAlbaMatrixData<DataType>;
     using LoopFunction = std::function<void(unsigned int const x, unsigned int const y)>;
     using LoopWithValueFunction = std::function<void(unsigned int const x, unsigned int const y, DataType const& value)>;
@@ -87,7 +88,8 @@ public:    using MatrixData = AlbaMatrixData<DataType>;
 
     AlbaMatrix operator+(AlbaMatrix const& secondMatrix) const
     {
-        assert((m_numberOfColumns == secondMatrix.m_numberOfColumns) && (m_numberOfRows == secondMatrix.m_numberOfRows));        return doBinaryOperationWithSameDimensions(*this, secondMatrix, BinaryFunction<DataType>(std::plus<DataType>()));
+        assert((m_numberOfColumns == secondMatrix.m_numberOfColumns) && (m_numberOfRows == secondMatrix.m_numberOfRows));
+        return doBinaryOperationWithSameDimensions(*this, secondMatrix, BinaryFunction<DataType>(std::plus<DataType>()));
     }
 
     AlbaMatrix operator-(AlbaMatrix const& secondMatrix) const

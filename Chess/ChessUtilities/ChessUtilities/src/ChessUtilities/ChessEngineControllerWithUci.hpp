@@ -7,7 +7,8 @@
 #include <fstream>
 #include <string>
 
-namespace alba{
+namespace alba
+{
 
 namespace chess
 {
@@ -75,7 +76,8 @@ private:
     void clearData();
     void initialize();
     void resetEngine();
-    void proceedToIdleAndProcessPendingCommands();    void clearCalculationDetails();
+    void proceedToIdleAndProcessPendingCommands();
+    void clearCalculationDetails();
 
     void forceSend(std::string const& commandString);
     void sendStopIfCalculating();

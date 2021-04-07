@@ -10,6 +10,7 @@
 
 namespace alba
 {
+
 namespace chess
 {
 
@@ -45,7 +46,8 @@ private:
     std::mutex m_readMutex;
     STARTUPINFO m_startupInfo;
     PROCESS_INFORMATION m_processInfo;
-    HANDLE m_engineMonitoringThread;    DWORD m_threadId;
+    HANDLE m_engineMonitoringThread;
+    DWORD m_threadId;
     HANDLE m_inputStreamOnEngineThread, m_outputStreamOnEngineThread;
     HANDLE m_inputStreamOnHandler, m_outputStreamOnHandler;
     AlbaOptional<std::ofstream> m_logFileStreamOptional;

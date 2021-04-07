@@ -59,7 +59,8 @@ TEST(TrieSymbolTableTest, GetWhenEmptyStringWorks)
 
 TEST(TrieSymbolTableTest, GetLongestPrefixWorks)
 {
-    testGetLongestPrefixOfWithUnsignedInt<TrieForTest>();}
+    testGetLongestPrefixOfWithUnsignedInt<TrieForTest>();
+}
 
 TEST(TrieSymbolTableTest, PutWorks)
 {
@@ -87,7 +88,8 @@ TEST(TrieSymbolTableTest, DeleteBasedOnKeyWhenEmptyStringWorks)
 
 TEST(TrieSymbolTableTest, GetKeysWorks)
 {
-    testGetKeysWithUnsignedInt<TrieForTest>();}
+    testGetKeysWithUnsignedInt<TrieForTest>();
+}
 
 TEST(TrieSymbolTableTest, GetAllKeysWithPrefixWorks)
 {

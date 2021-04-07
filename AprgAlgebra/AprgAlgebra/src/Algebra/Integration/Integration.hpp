@@ -9,6 +9,7 @@
 #include <Algebra/Utilities/NumberMatrix.hpp>
 #include <Common/Math/Number/AlbaNumberTypes.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
+
 #include <vector>
 
 namespace alba
@@ -154,6 +155,7 @@ private:
     void integratePartialFractionsBasedOnSolvedMatrix(Term & result, NumberMatrix const& solvedMatrix, VariableNamesSet const& newVariableNames, Polynomials const& partialNumerators, Polynomials const& partialDenominators);
     Polynomial getPartialNumeratorForPartialFractions(unsigned int const degree, std::string const& variableName) const;
     std::string getNewVariableNameForPartialFractions() const;
+
     // Integration by parts
     void integrateByTryingIntegrationByParts(Term & result, Term const& term);
     void integrateUsingIntegrationByPartsByOneTermAndOne(Term & result, Term const& term);

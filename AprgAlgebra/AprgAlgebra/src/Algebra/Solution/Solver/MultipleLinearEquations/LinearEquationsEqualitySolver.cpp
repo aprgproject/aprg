@@ -94,7 +94,8 @@ void LinearEquationsEqualitySolver::setMatrixCoefficients(
         NumberMatrix & coefficientsMatrix,
         VariableNamesSet const& variableNames,
         Polynomials const& polynomials)
-{    unsigned int rowIndex=0;
+{
+    unsigned int rowIndex=0;
     for(Polynomial const& polynomial : polynomials)
     {
         unsigned int columnIndex=0;

@@ -18,7 +18,8 @@ bool isEqualForMathMatrixDataType(DataType const& value1, DataType const& value2
 template <typename DataType>
 bool areRowsWithAllZerosInTheBottom(
         AlbaMatrix<DataType> const& matrix)
-{    unsigned int numberOfRows(matrix.getNumberOfRows());
+{
+    unsigned int numberOfRows(matrix.getNumberOfRows());
     unsigned int numberOfColumns(matrix.getNumberOfColumns());
     bool isRowWithNonZeroEncountered(false);
     for(unsigned int yPlusOne=numberOfRows; yPlusOne>0; yPlusOne--)
@@ -30,7 +31,8 @@ bool areRowsWithAllZerosInTheBottom(
             if(isRowWithAllZero && !isEqualForMathMatrixDataType(matrix.getEntry(x, y), DataType(0)))
             {
                 isRowWithAllZero = false;
-                break;            }
+                break;
+            }
         }
         if(!isRowWithNonZeroEncountered)
         {
@@ -66,7 +68,8 @@ bool areLeadingEntriesInReducedRowEchelonForm(
                         if(yZeroCheck!=y && !isEqualForMathMatrixDataType(matrix.getEntry(x, yZeroCheck), DataType(0)))
                         {
                             //4. If a column contains a leading entry of some row, then all other entries in that column are zero
-                            return false;                        }
+                            return false;
+                        }
                     }
                 }
                 else
@@ -102,6 +105,7 @@ bool isZeroMatrix(AlbaMatrix<DataType> const& matrix)
         return isEqualForMathMatrixDataType(data, DataType(0));
     });
 }
+
 template <typename DataType>
 bool isIdentityMatrix(AlbaMatrix<DataType> const& matrix)
 {
@@ -154,7 +158,8 @@ unsigned int getBestIndexForCoFactorExpansion(
         {return isEqualForMathMatrixDataType(value, DataType(0));});
         if(highestNumberOfZeros < numberOfZeros)
         {
-            highestNumberOfZeros = numberOfZeros;            bestIndex = i;
+            highestNumberOfZeros = numberOfZeros;
+            bestIndex = i;
         }
         i++;
     }
@@ -210,7 +215,8 @@ DataType getValueFromCoFactorExpansion(
     if(!isEqualForMathMatrixDataType(entry, 0))
     {
         int sign = mathHelper::isEven(x+y) ? 1 : -1;
-        DataType subDeterminant = getDeterminant(getMatrixWithOneColumnAndOneRowRemoved(matrix, x, y));        value = entry * subDeterminant * sign;
+        DataType subDeterminant = getDeterminant(getMatrixWithOneColumnAndOneRowRemoved(matrix, x, y));
+        value = entry * subDeterminant * sign;
     }
     return value;
 }
@@ -312,7 +318,8 @@ void transformToReducedEchelonFormUsingGaussJordanReduction(
             if(!isEqualForMathMatrixDataType(matrix.getEntry(x, y), DataType(0)))
             {
                 interchangeRows(matrix, y, yWithLeadingEntry);
-                multiplyValueInRowAndPutProductInAnotherRow(                            matrix,
+                multiplyValueInRowAndPutProductInAnotherRow(
+                            matrix,
                             static_cast<DataType>(1)/matrix.getEntry(x, yWithLeadingEntry),
                             yWithLeadingEntry,
                             yWithLeadingEntry);
@@ -322,7 +329,8 @@ void transformToReducedEchelonFormUsingGaussJordanReduction(
                             && !isEqualForMathMatrixDataType(matrix.getEntry(x, yToZero), DataType(0)))
                     {
                         subtractRowsWithMultiplierPutDifferenceInAnotherRow(
-                                    matrix,                                    matrix.getEntry(x, yToZero) / matrix.getEntry(x, yWithLeadingEntry),
+                                    matrix,
+                                    matrix.getEntry(x, yToZero) / matrix.getEntry(x, yWithLeadingEntry),
                                     yToZero,
                                     yWithLeadingEntry,
                                     yToZero);

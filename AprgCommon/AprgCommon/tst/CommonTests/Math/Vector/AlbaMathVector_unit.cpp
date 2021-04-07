@@ -2,12 +2,14 @@
 #include <CommonTests/Math/Vector/AlbaMathVectorInternalFunctions.hpp>
 
 #include <gtest/gtest.h>
+
 namespace alba
 {
 
 namespace
 {
-using VectorTwoElements = AlbaMathVector<double, 2>;}
+using VectorTwoElements = AlbaMathVector<double, 2>;
+}
 
 TEST(AlbaMathVectorTest, ConstructionWorks)
 {
