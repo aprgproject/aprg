@@ -1196,11 +1196,10 @@ void Integration::integrateUsingPartialFractionPolynomials(
             AlbaNumbersSet exponents(getExponentsForPartialFraction(originalVariableName, numeratorWithNewVariables));
             if(newVariableNames.size() == exponents.size())
             {
-                AlbaMatrix<AlbaNumber> matrixForPartialFractions(newVariableNames.size()+1, exponents.size());
+                NumberMatrix matrixForPartialFractions(newVariableNames.size()+1, exponents.size());
                 fillInMatrixForPartialFractions(matrixForPartialFractions, originalVariableName, newVariableNames, exponents, numerator, numeratorWithNewVariables);
 
                 transformToReducedEchelonFormUsingGaussJordanReduction(matrixForPartialFractions);
-
                 if(isReducedRowEchelonForm(matrixForPartialFractions))
                 {
                     integratePartialFractionsBasedOnSolvedMatrix(result, matrixForPartialFractions, newVariableNames, partialNumerators, partialDenominators);
@@ -1285,11 +1284,10 @@ AlbaNumbersSet Integration::getExponentsForPartialFraction(
 }
 
 void Integration::fillInMatrixForPartialFractions(
-        AlbaMatrix<AlbaNumber> & matrixWithNewVariables,
+        NumberMatrix & matrixWithNewVariables,
         string const& originalVariableName,
         VariableNamesSet const& newVariableNames,
-        AlbaNumbersSet const& exponents,
-        Polynomial const& originalNumerator,
+        AlbaNumbersSet const& exponents,        Polynomial const& originalNumerator,
         Polynomial const& numeratorWithNewVariables) const
 {
     fillInMatrixForPartialFractionsWithVariableValues(matrixWithNewVariables, originalVariableName, newVariableNames, exponents, numeratorWithNewVariables);
@@ -1297,11 +1295,10 @@ void Integration::fillInMatrixForPartialFractions(
 }
 
 void Integration::fillInMatrixForPartialFractionsWithVariableValues(
-        AlbaMatrix<AlbaNumber> & matrixWithNewVariables,
+        NumberMatrix & matrixWithNewVariables,
         string const& originalVariableName,
         VariableNamesSet const& newVariableNames,
-        AlbaNumbersSet const& exponents,
-        Polynomial const& numeratorWithNewVariables) const
+        AlbaNumbersSet const& exponents,        Polynomial const& numeratorWithNewVariables) const
 {
     for(Monomial const& monomialWithNewVariable : numeratorWithNewVariables.getMonomialsConstReference())
     {
@@ -1338,11 +1335,10 @@ void Integration::fillInMatrixForPartialFractionsWithVariableValues(
 }
 
 void Integration::fillInMatrixForPartialFractionsWithOutputValues(
-        AlbaMatrix<AlbaNumber> & matrixWithNewVariables,
+        NumberMatrix & matrixWithNewVariables,
         string const& originalVariableName,
         VariableNamesSet const& newVariableNames,
-        AlbaNumbersSet const& exponents,
-        Polynomial const& originalNumerator) const
+        AlbaNumbersSet const& exponents,        Polynomial const& originalNumerator) const
 {
     for(Monomial const& numeratorMonomial : originalNumerator.getMonomialsConstReference())
     {
@@ -1366,11 +1362,10 @@ void Integration::fillInMatrixForPartialFractionsWithOutputValues(
 
 void Integration::integratePartialFractionsBasedOnSolvedMatrix(
         Term & result,
-        AlbaMatrix<AlbaNumber> const& solvedMatrix,
+        NumberMatrix const& solvedMatrix,
         VariableNamesSet const& newVariableNames,
         Polynomials const& partialNumerators,
-        Polynomials const& partialDenominators)
-{
+        Polynomials const& partialDenominators){
     SubstitutionOfVariablesToTerms substitution;
     VariableNamesSet::const_iterator it = newVariableNames.cbegin();
     for(unsigned int i=0; i<solvedMatrix.getNumberOfRows() && it!=newVariableNames.cend(); i++)

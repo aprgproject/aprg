@@ -2,23 +2,14 @@
 
 #include <Algebra/Term/Operators/TermOperators.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
+#include <Algebra/Utilities/AlbaMathVectorInternalFunctions.hpp>
 #include <Common/Math/Angle/AlbaAngle.hpp>
 #include <Common/Math/Vector/AlbaMathVector.hpp>
-
-namespace alba
-{
-
-template<> bool isEqualForMathVectorDataType(algebra::Term const& value1, algebra::Term const& value2);
-template<> algebra::Term raiseToPowerForMathVectorDataType(algebra::Term const& value1, algebra::Term const& value2);
-
-}
-
 namespace alba
 {
 
 namespace algebra
 {
-
 template <unsigned int SIZE> using MathVectorOfNumbers = AlbaMathVector<AlbaNumber, SIZE>;
 using MathVectorOfTwoNumbers = MathVectorOfNumbers<2>;
 using MathVectorOfThreeNumbers = MathVectorOfNumbers<3>;
