@@ -13,6 +13,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
