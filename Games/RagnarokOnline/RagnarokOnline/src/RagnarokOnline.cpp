@@ -1,10 +1,9 @@
 #include "RagnarokOnline.hpp"
 
-#include <Common/File/AlbaFileParameterReader.hpp>
-#include <Common/File/AlbaFileParameterWriter.hpp>
+#include <Common/Stream/AlbaStreamParameterReader.hpp>
+#include <Common/Stream/AlbaStreamParameterWriter.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
-
 #include <sstream>
 
 using namespace alba::stringHelper;
@@ -731,42 +730,37 @@ void RagnarokOnline::readItemIdToItemMapFromFile(
         string const& inputFilePath)
 {
     ifstream inputStream(inputFilePath);
-    AlbaFileParameterReader reader(inputStream);
+    AlbaStreamParameterReader reader(inputStream);
     reader.readMapData<unsigned int, Item>(m_itemIdToItemMap);
 }
-
 void RagnarokOnline::readMonsterIdToMonsterMapFromFile(
         string const& inputFilePath)
 {
     ifstream inputStream(inputFilePath);
-    AlbaFileParameterReader reader(inputStream);
+    AlbaStreamParameterReader reader(inputStream);
     reader.readMapData<unsigned int, Monster>(m_monsterIdToMonsterMap);
 }
-
 void RagnarokOnline::readMapNameToRoMapFromFile(
         string const& inputFilePath)
 {
     ifstream inputStream(inputFilePath);
-    AlbaFileParameterReader reader(inputStream);
+    AlbaStreamParameterReader reader(inputStream);
     reader.readMapData<string, RoMap>(m_mapNameToRoMap);
 }
-
 void RagnarokOnline::readBuyingShopItems(
         string const& inputFilePath)
 {
     ifstream inputStream(inputFilePath);
-    AlbaFileParameterReader reader(inputStream);
+    AlbaStreamParameterReader reader(inputStream);
     reader.readMapData<string, ShopItemDetail>(m_buyingShopItems);
 }
-
 void RagnarokOnline::readSellingShopItems(
         string const& inputFilePath)
 {
     ifstream inputStream(inputFilePath);
-    AlbaFileParameterReader reader(inputStream);
+    AlbaStreamParameterReader reader(inputStream);
     reader.readMapData<string, ShopItemDetail>(m_sellingShopItems);
 }
-
 
 void RagnarokOnline::buildItemNameToItemId()
 {
@@ -915,42 +909,37 @@ void RagnarokOnline::saveItemIdToItemMapToFile(
         string const& outputFilePath) const
 {
     ofstream outputStream(outputFilePath);
-    AlbaFileParameterWriter writer(outputStream);
+    AlbaStreamParameterWriter writer(outputStream);
     writer.writeMapData<unsigned int, Item>(m_itemIdToItemMap);
 }
-
 void RagnarokOnline::saveMonsterIdToMonsterMapToFile(
         string const& outputFilePath) const
 {
     ofstream outputStream(outputFilePath);
-    AlbaFileParameterWriter writer(outputStream);
+    AlbaStreamParameterWriter writer(outputStream);
     writer.writeMapData<unsigned int, Monster>(m_monsterIdToMonsterMap);
 }
-
 void RagnarokOnline::saveMapNameToRoMapToFile(
         string const& outputFilePath) const
 {
     ofstream outputStream(outputFilePath);
-    AlbaFileParameterWriter writer(outputStream);
+    AlbaStreamParameterWriter writer(outputStream);
     writer.writeMapData<string, RoMap>(m_mapNameToRoMap);
 }
-
 void RagnarokOnline::saveBuyingShopItems(
         string const& outputFilePath) const
 {
     ofstream outputStream(outputFilePath);
-    AlbaFileParameterWriter writer(outputStream);
+    AlbaStreamParameterWriter writer(outputStream);
     writer.writeMapData<string, ShopItemDetail>(m_buyingShopItems);
 }
-
 void RagnarokOnline::saveSellingShopItems(
         string const& outputFilePath) const
 {
     ofstream outputStream(outputFilePath);
-    AlbaFileParameterWriter writer(outputStream);
+    AlbaStreamParameterWriter writer(outputStream);
     writer.writeMapData<string, ShopItemDetail>(m_sellingShopItems);
 }
-
 void RagnarokOnline::printItemIdToItemMap() const
 {
     for(auto const& itemIdItemPair : m_itemIdToItemMap)
@@ -1123,28 +1112,25 @@ string RagnarokOnline::fixText(
 ostream & operator<<(ostream & out, NameAndRate const& nameAndRate)
 {
     out.precision(20);
-    AlbaFileParameterWriter writer(out);
+    AlbaStreamParameterWriter writer(out);
     writer.writeData<string>(nameAndRate.name);
     writer.writeData<double>(nameAndRate.rate);
-    return out;
-}
+    return out;}
 
 ostream & operator<<(ostream & out, MonsterDetailsOnRoMap const& monsterDetailsOnRoMap)
 {
-    AlbaFileParameterWriter writer(out);
+    AlbaStreamParameterWriter writer(out);
     writer.writeData<string>(monsterDetailsOnRoMap.monsterName);
     writer.writeData<unsigned int>(monsterDetailsOnRoMap.spawnCount);
-    writer.writeData<string>(monsterDetailsOnRoMap.spawnRate);
-    return out;
+    writer.writeData<string>(monsterDetailsOnRoMap.spawnRate);    return out;
 }
 
 ostream & operator<<(ostream & out, Item const& item)
 {
-    AlbaFileParameterWriter writer(out);
+    AlbaStreamParameterWriter writer(out);
     writer.writeData<unsigned int>(item.itemId);
     writer.writeData<string>(item.name);
-    writer.writeData<string>(item.type);
-    writer.writeData<string>(item.itemClass);
+    writer.writeData<string>(item.type);    writer.writeData<string>(item.itemClass);
     writer.writeData<unsigned int>(item.buyingPrice);
     writer.writeData<unsigned int>(item.sellingPrice);
     writer.writeData<unsigned int>(item.weight);
@@ -1165,11 +1151,10 @@ ostream & operator<<(ostream & out, Item const& item)
 
 ostream & operator<<(ostream & out, Monster const& monster)
 {
-    AlbaFileParameterWriter writer(out);
+    AlbaStreamParameterWriter writer(out);
     writer.writeData<unsigned int>(monster.monsterId);
     writer.writeData<string>(monster.name);
-    writer.writeData<unsigned int>(monster.hp);
-    writer.writeData<unsigned int>(monster.level);
+    writer.writeData<unsigned int>(monster.hp);    writer.writeData<unsigned int>(monster.level);
     writer.writeData<string>(monster.race);
     writer.writeData<string>(monster.property);
     writer.writeData<string>(monster.size);
@@ -1215,75 +1200,66 @@ ostream & operator<<(ostream & out, Monster const& monster)
 ostream & operator<<(ostream & out, ShopItemDetail const& shopItemDetail)
 {
     out.precision(20);
-    AlbaFileParameterWriter writer(out);
+    AlbaStreamParameterWriter writer(out);
     writer.writeData<string>(shopItemDetail.itemName);
     writer.writeData<double>(shopItemDetail.averagePrice);
-    writer.writeData<unsigned int>(shopItemDetail.totalNumber);
-    return out;
+    writer.writeData<unsigned int>(shopItemDetail.totalNumber);    return out;
 }
 
 ostream & operator<<(ostream & out, RoMap const& roMap)
 {
-    AlbaFileParameterWriter writer(out);
+    AlbaStreamParameterWriter writer(out);
     writer.writeData<string>(roMap.name);
     writer.writeData<string>(roMap.fullName);
-    writer.writeVectorData<MonsterDetailsOnRoMap>(roMap.monstersDetailsOnMap);
-    return out;
+    writer.writeVectorData<MonsterDetailsOnRoMap>(roMap.monstersDetailsOnMap);    return out;
 }
 
 ostream & operator<<(ostream & out, ItemIdToItemMap const& itemIdToItemMap)
 {
-    AlbaFileParameterWriter writer(out);
+    AlbaStreamParameterWriter writer(out);
     writer.writeMapData<unsigned int, Item>(itemIdToItemMap);
     return out;
 }
-
 ostream & operator<<(ostream & out, MonsterIdToMonsterMap const& monsterIdToMonsterMap)
 {
-    AlbaFileParameterWriter writer(out);
+    AlbaStreamParameterWriter writer(out);
     writer.writeMapData<unsigned int, Monster>(monsterIdToMonsterMap);
     return out;
 }
-
 ostream & operator<<(ostream & out, MapNameToRoMap const& mapNameToRoMap)
 {
-    AlbaFileParameterWriter writer(out);
+    AlbaStreamParameterWriter writer(out);
     writer.writeMapData<string, RoMap>(mapNameToRoMap);
     return out;
 }
-
 ostream & operator<<(ostream & out, ItemNameToShopItemDetailMap const& itemNameToShopItemDetailMap)
 {
-    AlbaFileParameterWriter writer(out);
+    AlbaStreamParameterWriter writer(out);
     writer.writeMapData<string, ShopItemDetail>(itemNameToShopItemDetailMap);
     return out;
 }
-
 istream & operator>>(istream & in, NameAndRate & nameAndRate)
 {
     in.precision(20);
-    AlbaFileParameterReader reader(in);
+    AlbaStreamParameterReader reader(in);
     nameAndRate.name = reader.readData<string>();
     nameAndRate.rate = reader.readData<double>();
-    return in;
-}
+    return in;}
 
 istream & operator>>(istream & in, MonsterDetailsOnRoMap & monsterDetailsOnRoMap)
 {
-    AlbaFileParameterReader reader(in);
+    AlbaStreamParameterReader reader(in);
     monsterDetailsOnRoMap.monsterName = reader.readData<string>();
     monsterDetailsOnRoMap.spawnCount = reader.readData<unsigned int>();
-    monsterDetailsOnRoMap.spawnRate = reader.readData<string>();
-    return in;
+    monsterDetailsOnRoMap.spawnRate = reader.readData<string>();    return in;
 }
 
 istream & operator>>(istream & in, Item & item)
 {
-    AlbaFileParameterReader reader(in);
+    AlbaStreamParameterReader reader(in);
     item.itemId = reader.readData<unsigned int>();
     item.name = reader.readData<string>();
-    item.type = reader.readData<string>();
-    item.itemClass = reader.readData<string>();
+    item.type = reader.readData<string>();    item.itemClass = reader.readData<string>();
     item.buyingPrice = reader.readData<unsigned int>();
     item.sellingPrice = reader.readData<unsigned int>();
     item.weight = reader.readData<unsigned int>();
@@ -1304,11 +1280,10 @@ istream & operator>>(istream & in, Item & item)
 
 istream & operator>>(istream & in, Monster & monster)
 {
-    AlbaFileParameterReader reader(in);
+    AlbaStreamParameterReader reader(in);
     monster.monsterId = reader.readData<unsigned int>();
     monster.name = reader.readData<string>();
-    monster.hp = reader.readData<unsigned int>();
-    monster.level = reader.readData<unsigned int>();
+    monster.hp = reader.readData<unsigned int>();    monster.level = reader.readData<unsigned int>();
     monster.race = reader.readData<string>();
     monster.property = reader.readData<string>();
     monster.size = reader.readData<string>();
@@ -1354,48 +1329,42 @@ istream & operator>>(istream & in, Monster & monster)
 istream & operator>>(istream & in, ShopItemDetail & shopItemDetail)
 {
     in.precision(20);
-    AlbaFileParameterReader reader(in);
+    AlbaStreamParameterReader reader(in);
     shopItemDetail.itemName = reader.readData<string>();
     shopItemDetail.averagePrice = reader.readData<double>();
-    shopItemDetail.totalNumber = reader.readData<unsigned int>();
-    return in;
+    shopItemDetail.totalNumber = reader.readData<unsigned int>();    return in;
 }
 
 istream & operator>>(istream & in, RoMap & roMap)
 {
-    AlbaFileParameterReader reader(in);
+    AlbaStreamParameterReader reader(in);
     roMap.name = reader.readData<string>();
     roMap.fullName = reader.readData<string>();
-    reader.readVectorData<MonsterDetailsOnRoMap>(roMap.monstersDetailsOnMap);
-    return in;
+    reader.readVectorData<MonsterDetailsOnRoMap>(roMap.monstersDetailsOnMap);    return in;
 }
 
 istream & operator>>(istream & in, ItemIdToItemMap & itemIdToItemMap)
 {
-    AlbaFileParameterReader reader(in);
+    AlbaStreamParameterReader reader(in);
     reader.readMapData<unsigned int, Item>(itemIdToItemMap);
     return in;
 }
-
 istream & operator>>(istream & in, MonsterIdToMonsterMap & monsterIdToMonsterMap)
 {
-    AlbaFileParameterReader reader(in);
+    AlbaStreamParameterReader reader(in);
     reader.readMapData<unsigned int, Monster>(monsterIdToMonsterMap);
     return in;
 }
-
 istream & operator>>(istream & in, MapNameToRoMap & mapNameToRoMap)
 {
-    AlbaFileParameterReader reader(in);
+    AlbaStreamParameterReader reader(in);
     reader.readMapData<string, RoMap>(mapNameToRoMap);
     return in;
 }
-
 istream & operator>>(istream & in, ItemNameToShopItemDetailMap & itemNameToShopItemDetailMap)
 {
-    AlbaFileParameterReader reader(in);
+    AlbaStreamParameterReader reader(in);
     reader.readMapData<string, ShopItemDetail>(itemNameToShopItemDetailMap);
     return in;
 }
-
 }
