@@ -1,23 +1,22 @@
 #include "Database.hpp"
 
-#include <Common/File/AlbaFileParameterReader.hpp>
-#include <Common/File/AlbaFileParameterWriter.hpp>
+#include <Common/Stream/AlbaStreamParameterReader.hpp>
+#include <Common/Stream/AlbaStreamParameterWriter.hpp>
 
 #include <algorithm>
+#include <fstream>
 
 using namespace std;
-
 namespace alba
 {
 
 void Database::saveDatabaseToFile(string const& path)
 {
     ofstream fileStream(path);
-    AlbaFileParameterWriter writer(fileStream);
+    AlbaStreamParameterWriter writer(fileStream);
     writer.writeMapData(fileToPathMap);
     writer.writeMapData(constantNameToConstantDetailsMap);
-    writer.writeMapData(messageNameToMessageDetailsMap);
-    writer.writeMapData(structureNameToStructureDetailsMap);
+    writer.writeMapData(messageNameToMessageDetailsMap);    writer.writeMapData(structureNameToStructureDetailsMap);
     writer.writeMapData(unionNameToUnionDetailsMap);
     writer.writeMapData(enumNameToEnumDetailsMap);
     writer.writeMapData(typedefNameToTypedefDetailsMap);
@@ -27,11 +26,10 @@ void Database::saveDatabaseToFile(string const& path)
 void Database::loadDatabaseFromFile(string const& path)
 {
     ifstream fileStream(path);
-    AlbaFileParameterReader reader(fileStream);
+    AlbaStreamParameterReader reader(fileStream);
     reader.readMapData(fileToPathMap);
     reader.readMapData(constantNameToConstantDetailsMap);
-    reader.readMapData(messageNameToMessageDetailsMap);
-    reader.readMapData(structureNameToStructureDetailsMap);
+    reader.readMapData(messageNameToMessageDetailsMap);    reader.readMapData(structureNameToStructureDetailsMap);
     reader.readMapData(unionNameToUnionDetailsMap);
     reader.readMapData(enumNameToEnumDetailsMap);
     reader.readMapData(typedefNameToTypedefDetailsMap);
