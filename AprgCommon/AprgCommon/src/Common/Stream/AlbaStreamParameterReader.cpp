@@ -10,7 +10,8 @@ AlbaStreamParameterReader::AlbaStreamParameterReader(istream& stream)
 {}
 
 template <>
-string AlbaStreamParameterReader::readData<string>() const{
+string AlbaStreamParameterReader::readData<string>() const
+{
     string data;
     bool isExisting(false);
     m_stream >> isExisting;

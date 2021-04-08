@@ -743,7 +743,8 @@ TEST(AlbaMathHelperTest, AreNumberOfDigitsOnTheIntegerLimitWorks)
     EXPECT_TRUE(areNumberOfDigitsOnTheIntegerLimit<int>(11));
 }
 
-TEST(AlbaMathHelperTest, CreateComplexNumberFromDataWorks){
+TEST(AlbaMathHelperTest, CreateComplexNumberFromDataWorks)
+{
     AlbaNumber::ComplexNumberData complexData{3.5, 4.5};
 
     AlbaComplexNumber<float> expectedComplexNumber(3.5, 4.5);

@@ -254,7 +254,8 @@ TEST(FileReadTest, ReadFromTestFile_ReadOneByteNumbers)
 
 TEST(FileReadTest, ReadFromTestFile_ReadTwoByteNumbers)
 {
-    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);    ofstream testFile(testFilePath.getFullPath());
+    AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
+    ofstream testFile(testFilePath.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile.put(0x01);
     testFile.put(0x23);

@@ -5,7 +5,8 @@
 #include <cstdint>
 #include <string>
 
-using namespace alba::stringHelper;using namespace std;
+using namespace alba::stringHelper;
+using namespace std;
 
 namespace alba
 {
@@ -52,7 +53,8 @@ char* AlbaFileReader::getCharacters(unsigned int& numberOfCharacters)
 
 void AlbaFileReader::saveDataToMemoryBuffer(AlbaMemoryBuffer& buffer, unsigned int numberOfBytesToRead)
 {
-    char* writer = static_cast<char*>(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(numberOfBytesToRead));    m_stream.read(writer, static_cast<streamsize>(numberOfBytesToRead));
+    char* writer = static_cast<char*>(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(numberOfBytesToRead));
+    m_stream.read(writer, static_cast<streamsize>(numberOfBytesToRead));
 }
 
 string AlbaFileReader::getLineAndIgnoreWhiteSpaces()
