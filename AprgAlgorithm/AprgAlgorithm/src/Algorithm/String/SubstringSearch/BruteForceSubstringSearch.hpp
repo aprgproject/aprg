@@ -17,13 +17,12 @@ public :
         : m_substringToSearch(substringToSearch)
     {}
 
-    unsigned int search(std::string const& mainString)
+    unsigned int search(std::string const& stringToCheck)
     {
-        return searchWithLoops(mainString, m_substringToSearch);
+        return searchWithLoops(stringToCheck, m_substringToSearch);
     }
 
 private:
-
     unsigned int searchWithLoops(std::string const& , std::string const&)
     {
         static_assert(sizeof(BruteForceSubstringSearch) != sizeof(BruteForceSubstringSearch),
@@ -32,20 +31,19 @@ private:
     }
 
     unsigned int searchUsingOneLoop(
-            std::string const& mainString,
+            std::string const& stringToCheck,
             std::string const& substringToSearch)
     {
         unsigned int result(static_cast<unsigned int>(std::string::npos));
-        unsigned int mainLength(mainString.length());
+        unsigned int mainLength(stringToCheck.length());
         unsigned int substringLength(substringToSearch.length());
         unsigned int i=0, j=0;
         for(; i<mainLength && j<substringLength; i++)
         {
-            if(mainString.at(i) == substringToSearch.at(j))
+            if(stringToCheck.at(i) == substringToSearch.at(j))
             {
                 j++;
-            }
-            else
+            }            else
             {
                 i-=j;
                 j=0;
@@ -59,22 +57,20 @@ private:
     }
 
     unsigned int searchUsingTwoLoops(
-            std::string const& mainString,
+            std::string const& stringToCheck,
             std::string const& substringToSearch)
     {
         unsigned int result(static_cast<unsigned int>(std::string::npos));
-        unsigned int mainLength(mainString.length());
+        unsigned int mainLength(stringToCheck.length());
         unsigned int substringLength(substringToSearch.length());
         for(unsigned int i=0; i <= mainLength-substringLength; i++)
-        {
-            unsigned int j=0;
+        {            unsigned int j=0;
             for(; j < substringLength; j++)
             {
-                if(mainString.at(i+j) != substringToSearch.at(j))
+                if(stringToCheck.at(i+j) != substringToSearch.at(j))
                 {
                     break;
-                }
-            }
+                }            }
             if(j == substringLength)
             {
                 result = i;
@@ -87,17 +83,16 @@ private:
 };
 
 template <>
-unsigned int BruteForceSubstringSearch<1U>::searchWithLoops(std::string const& mainString, std::string const& substringToSearch)
+unsigned int BruteForceSubstringSearch<1U>::searchWithLoops(std::string const& stringToCheck, std::string const& substringToSearch)
 {
-    return searchUsingOneLoop(mainString, substringToSearch);
+    return searchUsingOneLoop(stringToCheck, substringToSearch);
 }
 
 template <>
-unsigned int BruteForceSubstringSearch<2U>::searchWithLoops(std::string const& mainString, std::string const& substringToSearch)
+unsigned int BruteForceSubstringSearch<2U>::searchWithLoops(std::string const& stringToCheck, std::string const& substringToSearch)
 {
-    return searchUsingTwoLoops(mainString, substringToSearch);
+    return searchUsingTwoLoops(stringToCheck, substringToSearch);
 }
-
 
 }
 
