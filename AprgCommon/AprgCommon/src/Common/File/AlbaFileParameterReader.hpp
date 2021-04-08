@@ -1,10 +1,9 @@
 #pragma once
 
-#include <fstream>
+#include <istream>
 #include <map>
 #include <set>
-#include <string>
-#include <vector>
+#include <string>#include <vector>
 
 namespace alba
 {
