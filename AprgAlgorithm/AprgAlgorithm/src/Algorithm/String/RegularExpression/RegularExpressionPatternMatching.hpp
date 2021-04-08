@@ -37,7 +37,8 @@ public:
             for(Index const index : indexesToProcess)
             {
                 if(index < regularExpressionLength)
-                {                    char charInRegularExpression(m_regularExpression.at(index));
+                {
+                    char charInRegularExpression(m_regularExpression.at(index));
                     if(charInRegularExpression == stringToCheck.at(i) || charInRegularExpression == '.')
                     {
                         match.emplace_back(index+1);
@@ -52,7 +53,8 @@ public:
         for(Index const index : indexesToProcess)
         {
             if(index == regularExpressionLength)
-            {                result = true;
+            {
+                result = true;
                 break;
             }
         }
@@ -77,7 +79,8 @@ private:
 
     void initialize()
     {
-        std::stack<Index> operatorIndexes;        Index regularExpressionLength(m_regularExpression.length());
+        std::stack<Index> operatorIndexes;
+        Index regularExpressionLength(m_regularExpression.length());
         for(Index i=0; i<regularExpressionLength; i++)
         {
             Index lp = i;

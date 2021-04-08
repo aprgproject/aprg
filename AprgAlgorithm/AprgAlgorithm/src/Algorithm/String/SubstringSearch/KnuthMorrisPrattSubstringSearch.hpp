@@ -36,7 +36,8 @@ public:
             j = m_dfaMatrix.getEntry(stringToCheck.at(i), j);
         }
         if(j == substringLength)
-        {            result = i-substringLength;
+        {
+            result = i-substringLength;
         }
         return result;
     }

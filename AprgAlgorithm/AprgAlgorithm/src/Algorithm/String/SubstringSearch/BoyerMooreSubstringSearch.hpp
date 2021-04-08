@@ -41,7 +41,8 @@ public:
                     skip = reversedJ - m_right.at(stringToCheck.at(i+reversedJ));
                     skip = (skip < 1) ? 1 : skip;
                     break;
-                }            }
+                }
+            }
             if(skip == 0)
             {
                 result = i;
