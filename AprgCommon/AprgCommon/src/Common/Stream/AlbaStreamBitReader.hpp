@@ -22,6 +22,7 @@ public:
     bool readBoolData();
     char readCharData();
     template <typename TypeToWrite> TypeToWrite readNumberData(AlbaStreamBitEndianType const endianType);
+    template <unsigned int BITSET_SIZE> std::bitset<BITSET_SIZE> readBitsetData(unsigned int const numberOfBits);
 
 private:
     template <typename TypeToWrite> TypeToWrite readBigEndianNumberDataInBuffer();
@@ -45,6 +46,20 @@ TypeToWrite AlbaStreamBitReader::readNumberData(AlbaStreamBitEndianType const en
     {
         result = readLittleEndianNumberDataInBuffer<TypeToWrite>();
     }
+    return result;
+}
+
+template <unsigned int BITSET_SIZE>
+std::bitset<BITSET_SIZE> AlbaStreamBitReader::readBitsetData(unsigned int const numberOfBits)
+{
+    std::bitset<BITSET_SIZE> result;
+    unsigned int const numberOfBitsToRead = std::min(numberOfBits, BITSET_SIZE);
+    readIfNeeded(numberOfBitsToRead);
+    for(unsigned int i=0; i<numberOfBitsToRead; i++)
+    {
+        result.set(i, m_bitBuffer.at(i));
+    }
+    eraseBitsInBitBuffer(numberOfBitsToRead);
     return result;
 }
 

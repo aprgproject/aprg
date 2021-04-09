@@ -2,6 +2,7 @@
 
 #include <Common/Bit/AlbaBitConstants.hpp>
 #include <Common/Bit/AlbaBitValueUtilities.hpp>
+#include <Common/Container/AlbaValueRange.hpp>
 #include <Common/Stream/AlbaStreamBitEndianType.hpp>
 
 #include <bitset>
@@ -22,6 +23,7 @@ public:
     void writeCharData(char const data);
     void writeStringData(std::string const& data);
     template <typename TypeToWrite> void writeNumberData(AlbaStreamBitEndianType const endianType, TypeToWrite const& data);
+    template <unsigned int BITSET_SIZE> void writeBitsetData(std::bitset<BITSET_SIZE> const& data, unsigned int const start, unsigned int const end);
 
     void flush();
 
@@ -46,6 +48,17 @@ void AlbaStreamBitWriter::writeNumberData(AlbaStreamBitEndianType const endianTy
     {
         putLittleEndianNumberDataInBuffer<TypeToWrite>(data);
     }
+    writeBytesAsMuchAsPossibleToStream();
+}
+
+template <unsigned int BITSET_SIZE>
+void AlbaStreamBitWriter::writeBitsetData(std::bitset<BITSET_SIZE> const& data, unsigned int const start, unsigned int const end)
+{
+    AlbaValueRange<int> range(static_cast<int>(start), static_cast<int>(end), 1U);
+    range.traverse([&](int const i)
+    {
+        m_bitBuffer.emplace_back(data[i]);
+    });
     writeBytesAsMuchAsPossibleToStream();
 }
 
