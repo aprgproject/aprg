@@ -9,18 +9,16 @@
 namespace alba
 {
 
+namespace stringHelper
+{
+using strings=std::vector<std::string>;
+
 std::string const WHITESPACE_STRING = " \t\n\r";
 std::string const ALPHA_NUMERIC_CHAR_MAP = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-namespace stringHelper
-{
-
-using strings=std::vector<std::string>;
-
 inline bool isWhiteSpace(char const c)
 {
-    return (' '==c || '\t'==c || '\n'==c || '\r'==c);
-}
+    return (' '==c || '\t'==c || '\n'==c || '\r'==c);}
 
 inline bool isNewline(char const c)
 {
@@ -148,10 +146,11 @@ std::string getStringWithoutCharAtTheStartAndEnd(std::string const& mainString, 
 std::string getStringWithoutCharAtTheStart(std::string const& mainString, char const char1);
 std::string getStringWithoutCharAtTheEnd(std::string const& mainString, char const char1);
 std::string getStringWithoutOpeningClosingOperators(std::string const& mainString, char const openingOperator, char const closingOperator);
+
+std::string getLongestCommonPrefix(std::string const& first, std::string const& second);
 void copyBeforeStringAndAfterString(std::string const& mainString, std::string const& stringToSearch, std::string & beforeString, std::string & afterString, unsigned int const indexToStartTheSearch = 0);
 std::string getStringBeforeThisString(std::string const& mainString, std::string const& stringToSearch, unsigned int const indexToStart=0);
-std::string getStringAfterThisString(std::string const& mainString, std::string const& stringToSearch, unsigned int const indexToStart=0);
-std::string getStringInBetweenTwoStrings(std::string const& mainString, std::string const& firstString, std::string const& secondString, unsigned int const indexToStart=0);
+std::string getStringAfterThisString(std::string const& mainString, std::string const& stringToSearch, unsigned int const indexToStart=0);std::string getStringInBetweenTwoStrings(std::string const& mainString, std::string const& firstString, std::string const& secondString, unsigned int const indexToStart=0);
 std::string getStringBeforeThisCharacters(std::string const& mainString, std::string const& characters, unsigned int const indexToStart=0);
 std::string getStringAndReplaceNonAlphanumericCharactersToUnderScore(std::string const& path);
 std::string getStringByRepeatingUntilDesiredLength(std::string const& stringToRepeat, unsigned int desiredLength);
@@ -176,11 +175,33 @@ template <char slashCharacterString> std::string getStringBeforeDoublePeriod(std
 template <char slashCharacterString> std::string getImmediateDirectoryName(std::string const& path);
 
 bool convertStringToBool(std::string const& stringToConvert);
+template <typename NumberType> NumberType convertStringToNumber(std::string const& stringToConvert);
+template <typename NumberType> NumberType convertHexCharacterToNumber(char const character);
+template <typename NumberType> NumberType convertHexStringToNumber(std::string const& stringToConvert);
+AlbaNumber convertStringToAlbaNumber(std::string const& stringToConvert);
+
+class NumberToStringConverter
+{
+public:
+    template <typename NumberType> std::string convert(NumberType const number);
+    std::string convert(AlbaNumber const& number);
+    void setPrecision(int const precision);
+    void setFieldWidth(int const fieldWidth);
+    void setFillCharacter(char const fillCharacter);
+    void setMaximumLength(unsigned int const maximumLength);
+private:
+    alba::AlbaOptional<int> m_precisionOptional;
+    alba::AlbaOptional<int> m_fieldWidthOptional;
+    alba::AlbaOptional<char> m_fillCharacterOptional;
+    alba::AlbaOptional<unsigned int> m_maximumLengthOptional;
+};
+
+//template implementation
+
 
 template <typename NumberType>
 NumberType convertStringToNumber(std::string const& stringToConvert)
-{
-    bool isNumberNotYetEncountered(true);
+{    bool isNumberNotYetEncountered(true);
     bool isPeriodNotYetEncountered(true);
     int negative(1);
     int decimalPlacesInPowersOfTen(10);
@@ -249,24 +270,6 @@ NumberType convertHexStringToNumber(std::string const& stringToConvert)
     }
     return value;
 }
-
-AlbaNumber convertStringToAlbaNumber(std::string const& stringToConvert);
-
-class NumberToStringConverter
-{
-public:
-    template <typename NumberType> std::string convert(NumberType const number);
-    std::string convert(AlbaNumber const& number);
-    void setPrecision(int const precision);
-    void setFieldWidth(int const fieldWidth);
-    void setFillCharacter(char const fillCharacter);
-    void setMaximumLength(unsigned int const maximumLength);
-private:
-    alba::AlbaOptional<int> m_precisionOptional;
-    alba::AlbaOptional<int> m_fieldWidthOptional;
-    alba::AlbaOptional<char> m_fillCharacterOptional;
-    alba::AlbaOptional<unsigned int> m_maximumLengthOptional;
-};
 
 } //namespace stringHelper
 
