@@ -105,7 +105,8 @@ public:
             return *(m_contentPointer);
         }
         else
-        {            return ContentType();
+        {
+            return ContentType();
         }
     }
 
@@ -127,12 +128,14 @@ public:
         if(optional.hasContent())
         {
             out << " value: " << optional.getConstReference();
-        }        return out;
+        }
+        return out;
     }
 
 private:
     std::unique_ptr<ContentType> m_contentPointer;
 };
+
 template <typename ContentType> class AlbaOptional<ContentType &>
 {
 public:

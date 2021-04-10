@@ -15,6 +15,7 @@ template <unsigned int RADIX>
 class RunLengthEncodingCompression
 {
 public :
+
     RunLengthEncodingCompression()
     {}
 
@@ -57,7 +58,8 @@ public :
                 else if(count == RADIX-1)
                 {
                     writer.writeCharData(count);
-                    count = 0;                    writer.writeCharData(count);
+                    count = 0;
+                    writer.writeCharData(count);
                 }
                 count++;
             }
