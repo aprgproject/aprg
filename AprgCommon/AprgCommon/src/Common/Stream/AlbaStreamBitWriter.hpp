@@ -23,8 +23,9 @@ public:
     void writeCharData(char const data);
     void writeStringData(std::string const& data);
     template <typename TypeToWrite> void writeNumberData(AlbaStreamBitEndianType const endianType, TypeToWrite const& data);
-    template <unsigned int BITSET_SIZE> void writeBitsetData(std::bitset<BITSET_SIZE> const& data, unsigned int const start, unsigned int const end);
+    template <unsigned int BITSET_SIZE> void writeBitsetData(std::bitset<BITSET_SIZE> const& data, unsigned int const startBitsetIndex, unsigned int const endBitsetIndex);
 
+    std::ostream& getOutputStream();
     void flush();
 
 private:
@@ -52,12 +53,12 @@ void AlbaStreamBitWriter::writeNumberData(AlbaStreamBitEndianType const endianTy
 }
 
 template <unsigned int BITSET_SIZE>
-void AlbaStreamBitWriter::writeBitsetData(std::bitset<BITSET_SIZE> const& data, unsigned int const start, unsigned int const end)
+void AlbaStreamBitWriter::writeBitsetData(std::bitset<BITSET_SIZE> const& data, unsigned int const startBitsetIndex, unsigned int const endBitsetIndex)
 {
-    AlbaValueRange<int> range(static_cast<int>(start), static_cast<int>(end), 1U);
-    range.traverse([&](int const i)
+    AlbaValueRange<int> bitsetRange(static_cast<int>(startBitsetIndex), static_cast<int>(endBitsetIndex), 1U);
+    bitsetRange.traverse([&](int const bitsetIndex)
     {
-        m_bitBuffer.emplace_back(data[i]);
+        m_bitBuffer.emplace_back(data[bitsetIndex]);
     });
     writeBytesAsMuchAsPossibleToStream();
 }
