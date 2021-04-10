@@ -62,11 +62,10 @@ LimaconType Limacon::getLimaconType() const
     {
         result = LimaconType::Convex;
     }
-    else if(isAlmostEqual(ratio, 1))
+    else if(isAlmostEqual(ratio, 1.0))
     {
         result = LimaconType::Cardioid;
-    }
-    else if(ratio > 1)
+    }    else if(ratio > 1)
     {
         result = LimaconType::WithADent;
     }
@@ -84,11 +83,10 @@ LimaconType Limacon::getLimaconType() const
 Points Limacon::getPointsForShape(AlbaAngle const& angleInterval) const
 {
     Points result;
-    if(!isAlmostEqual(m_aValue, 0) && !isAlmostEqual(m_bValue, 0))
+    if(!isAlmostEqual(m_aValue, 0.0) && !isAlmostEqual(m_bValue, 0.0))
     {
         AlbaAngle limit(AngleUnitType::Degrees, 360);
-        for(AlbaAngle theta(AngleUnitType::Degrees, 0); theta<limit; theta+=angleInterval)
-        {
+        for(AlbaAngle theta(AngleUnitType::Degrees, 0); theta<limit; theta+=angleInterval)        {
             result.emplace_back(convertFromPolarCoordinates(PolarCoordinate{calculateRadiusFromTheta(theta), theta}));
         }
     }
