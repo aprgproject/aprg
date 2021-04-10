@@ -1,8 +1,6 @@
 #include <Algorithm/String/Alphabet/Alphabet.hpp>
-#include <Common/Bit/AlbaBitField.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
