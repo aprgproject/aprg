@@ -68,6 +68,7 @@ public:
         unsigned int longestPrefixLength(getLengthOfLongestPrefix(m_root, keyToCheck, 0U, 0U));
         return keyToCheck.substr(0, longestPrefixLength);
     }
+
     void put(Key const& key, Value const& value) override
     {
         if(!key.empty())
@@ -246,7 +247,8 @@ private:
                 currentLongestLength = getLengthOfLongestPrefix(currentNodePointer->mid, keyToCheck, index+1, currentLongestLength);
             }
         }
-        return currentLongestLength;    }
+        return currentLongestLength;
+    }
 
     void put(
             NodeUniquePointer & currentNodePointer,

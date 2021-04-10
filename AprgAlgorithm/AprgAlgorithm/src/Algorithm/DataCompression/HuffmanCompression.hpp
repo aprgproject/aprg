@@ -20,14 +20,15 @@ template <unsigned int RADIX, typename DataType>
 class HuffmanCompression
 {
 public :
-
+    using Characters = std::vector<char>;
     using FrequencyOfEachCharacter = std::array<DataType, RADIX>;
     struct CharacterFrequency
     {
         CharacterFrequency(char const characterAsParameter, DataType const frequencyAsParameter, bool const isProritizedAsParameter)
             : character(characterAsParameter)
             , frequency(frequencyAsParameter)
-            , isProritized(isProritizedAsParameter)        {}
+            , isProritized(isProritizedAsParameter)
+        {}
 
         bool operator>(CharacterFrequency const& second) const
         {
@@ -54,7 +55,8 @@ public :
         DataType frequency;
         bool isProritized;
     };
-    struct TrieNode;    using TrieNodeUniquePointer = std::unique_ptr<TrieNode>;
+    struct TrieNode;
+    using TrieNodeUniquePointer = std::unique_ptr<TrieNode>;
     struct TrieNode
     {
         TrieNode(char const characterAsParameter, TrieNodeUniquePointer leftAsParameter, TrieNodeUniquePointer rightAsParameter)
@@ -91,30 +93,66 @@ public :
         // refactor extract till you drop
         AlbaStreamBitReader reader(input);
         AlbaStreamBitWriter writer(output);
-        std::vector<char> charactersInput;        while(!input.eof())
+
+        Characters allInputCharacters(readAllCharacters(reader));
+        FrequencyOfEachCharacter frequency(getFrequencyOfEachCharacter(allInputCharacters));
+
+        TrieNodeUniquePointer root(buildTrie(frequency));
+        stringHelper::strings huffmanCodeTable(buildHuffmanCodeTableFromTrie(root));
+
+        writeTrie(writer, root);
+        writer.writeNumberData<DataType>(AlbaStreamBitEndianType::BigEndian, allInputCharacters.size());
+        writeHuffmanCodes(writer, allInputCharacters, huffmanCodeTable);
+    }
+
+    void expand(std::istream & input, std::ostream & output)
+    {
+        // refactor extract till you drop
+        AlbaStreamBitReader reader(input);
+        AlbaStreamBitWriter writer(output);
+
+        TrieNodeUniquePointer root(readTrie(reader));
+        DataType lengthOfString(reader.readNumberData<DataType>(AlbaStreamBitEndianType::BigEndian));
+        expandAllCharacters(reader, writer, root, lengthOfString);
+    }
+
+private:
+
+    Characters readAllCharacters(AlbaStreamBitReader & reader)
+    {
+        Characters result;
+        while(true)
         {
             char c(reader.readCharData());
-            if(!input.eof())
+            if(!reader.getInputStream().eof())
             {
-                charactersInput.emplace_back(c);
+                result.emplace_back(c);
+            }
+            else
+            {
+                break;
             }
         }
+        return result;
+    }
 
+    FrequencyOfEachCharacter getFrequencyOfEachCharacter(Characters const& charactersInput)
+    {
         FrequencyOfEachCharacter frequency{};
         for(DataType i=0; i< charactersInput.size(); i++)
         {
             frequency[charactersInput.at(i)]++;
         }
-        TrieNodeUniquePointer root(buildTrie(frequency));
-        stringHelper::strings huffmanCodeTable(buildHuffmanCodeTableFromTrie(root));
+        return frequency;
+    }
 
-        writeTrie(writer, root);
-        writer.writeNumberData<DataType>(AlbaStreamBitEndianType::BigEndian, charactersInput.size());
-
-        for(DataType i=0; i< charactersInput.size(); i++)
+    void writeHuffmanCodes(AlbaStreamBitWriter & writer, Characters const& wholeInput, stringHelper::strings const& huffmanCodeTable)
+    {
+        for(DataType i=0; i< wholeInput.size(); i++)
         {
-            std::string const& huffmanCode(huffmanCodeTable.at(charactersInput.at(i)));
-            for(char const c : huffmanCode)            {
+            std::string const& huffmanCode(huffmanCodeTable.at(wholeInput.at(i)));
+            for(char const c : huffmanCode)
+            {
                 if(c == '1' || c == '0')
                 {
                     writer.writeBoolData(c == '1');
@@ -123,38 +161,41 @@ public :
         }
     }
 
-    void expand(std::istream & input, std::ostream & output)
+    void expandAllCharacters(AlbaStreamBitReader & reader, AlbaStreamBitWriter & writer, TrieNodeUniquePointer const& root, DataType const lengthOfString)
     {
-        // refactor extract till you drop
-        AlbaStreamBitReader reader(input);
-        AlbaStreamBitWriter writer(output);
-        TrieNodeUniquePointer root(readTrie(reader));
-        DataType lengthOfString(reader.readNumberData<DataType>(AlbaStreamBitEndianType::BigEndian));
         for(DataType i=0; i<lengthOfString; i++)
         {
-            TrieNode const* currentNodePointer(root.get());
-            while(!currentNodePointer->isLeaf() && !input.eof())
-            {
-                bool bit(reader.readBoolData());
-                if(!input.eof())
-                {
-                    if(bit)
-                    {
-                        currentNodePointer = currentNodePointer->right.get();
-                    }
-                    else
-                    {
-                        currentNodePointer = currentNodePointer->left.get();
-                    }
-                }
-            }
-            writer.writeCharData(currentNodePointer->character);
+            expandOneCharacterBasedFromTrieAndCode(reader, writer, root);
         }
     }
 
-private:
+    void expandOneCharacterBasedFromTrieAndCode(AlbaStreamBitReader & reader, AlbaStreamBitWriter & writer, TrieNodeUniquePointer const& root)
+    {
+        TrieNode const* currentNodePointer(root.get());
+        while(!currentNodePointer->isLeaf())
+        {
+            bool bit(reader.readBoolData());
+            if(!reader.getInputStream().eof())
+            {
+                if(bit)
+                {
+                    currentNodePointer = currentNodePointer->right.get();
+                }
+                else
+                {
+                    currentNodePointer = currentNodePointer->left.get();
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+        writer.writeCharData(currentNodePointer->character);
+    }
 
-    void writeTrie(AlbaStreamBitWriter & writer, TrieNodeUniquePointer const& nodePointer)    {
+    void writeTrie(AlbaStreamBitWriter & writer, TrieNodeUniquePointer const& nodePointer)
+    {
         if(nodePointer)
         {
             if(nodePointer->isLeaf())
@@ -199,7 +240,8 @@ private:
         for(DataType c=0; c < RADIX; c++)
         {
             if(frequency.at(c) > 0)
-            {                characterFrequencies.emplace(static_cast<char>(c), frequency.at(c), false);
+            {
+                characterFrequencies.emplace(static_cast<char>(c), frequency.at(c), false);
                 nodePerCharacter[c].node = std::make_unique<TrieNode>(static_cast<char>(c), nullptr, nullptr);
             }
         }
@@ -229,7 +271,8 @@ private:
     // refactor huffmanCode is not a string
     void buildHuffmanCodeTableFromTrie(stringHelper::strings & lookupTable, TrieNodeUniquePointer const& nodePointer, std::string const& s)
     {
-        if(nodePointer)        {
+        if(nodePointer)
+        {
             if(nodePointer->isLeaf())
             {
                 lookupTable[nodePointer->character] = s;
