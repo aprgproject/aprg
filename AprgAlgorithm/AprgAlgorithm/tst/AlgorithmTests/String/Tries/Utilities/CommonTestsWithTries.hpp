@@ -87,9 +87,10 @@ void testGetLongestPrefixOfWithUnsignedInt()
     trie.put("shore", 7U);
 
     EXPECT_EQ("shells", trie.getLongestPrefixOf("shellscore"));
+    EXPECT_EQ("shells", trie.getLongestPrefixOf("shells"));
+    EXPECT_EQ("", trie.getLongestPrefixOf("shhhh"));
     EXPECT_EQ("", trie.getLongestPrefixOf("string does not exist"));
 }
-
 template <typename Trie>
 void testPutWithUnsignedInt()
 {

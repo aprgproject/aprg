@@ -19,29 +19,9 @@ public :
     RunLengthEncodingCompression()
     {}
 
-    void expand(std::istream & input, std::ostream & output)
-    {
-        AlbaStreamBitReader reader(input);
-        AlbaStreamBitWriter writer(output);
-        bool b(false);
-        while(!input.eof())
-        {
-            char count(reader.readCharData());
-            if(!input.eof())
-            {
-                for(char i=0; i<count; i++)
-                {
-                    writer.writeBoolData(b);
-                }
-                b = !b;
-            }
-        }
-    }
-
     void compress(std::istream & input, std::ostream & output)
     {
-        AlbaStreamBitReader reader(input);
-        AlbaStreamBitWriter writer(output);
+        AlbaStreamBitReader reader(input);        AlbaStreamBitWriter writer(output);
         char count{};
         bool b(false), old(false);
         while(!input.eof())
@@ -67,8 +47,26 @@ public :
         writer.writeCharData(count);
     }
 
-};
+    void expand(std::istream & input, std::ostream & output)
+    {
+        AlbaStreamBitReader reader(input);
+        AlbaStreamBitWriter writer(output);
+        bool b(false);
+        while(!input.eof())
+        {
+            char count(reader.readCharData());
+            if(!input.eof())
+            {
+                for(char i=0; i<count; i++)
+                {
+                    writer.writeBoolData(b);
+                }
+                b = !b;
+            }
+        }
+    }
 
+};
 
 }
 

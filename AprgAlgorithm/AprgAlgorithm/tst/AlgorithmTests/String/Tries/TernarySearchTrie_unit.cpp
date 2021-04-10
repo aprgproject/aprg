@@ -49,16 +49,10 @@ TEST(TernarySearchTrieTest, GetWorks)
 
 TEST(TernarySearchTrieTest, GetLongestPrefixWorks)
 {
-    TrieForTest trie;
-
-    EXPECT_EQ(0U, trie.get(""));
-
-    trie.put("", 17U);
-    EXPECT_EQ(0U, trie.get(""));
+    testGetLongestPrefixOfWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TernarySearchTrieTest, PutWorks)
-{
+TEST(TernarySearchTrieTest, PutWorks){
     testPutWithUnsignedInt<TrieForTest>();
 }
 
