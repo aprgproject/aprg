@@ -335,7 +335,8 @@ TEST(GetPartialStringFromStringTest, CopyBeforeStringAndAfterStringWhenStringIsN
 
 TEST(GetPartialStringFromStringTest, GetStringBeforeThisStringWithCharactersAfterQuestionMarkIsRemoved)
 {
-    string testString("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522");    string withCharactersAfterQuestionMarkRemoved("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg");
+    string testString("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522");
+    string withCharactersAfterQuestionMarkRemoved("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg");
     string questionMarkString("?");
 
     EXPECT_EQ(withCharactersAfterQuestionMarkRemoved, getStringBeforeThisString(testString, questionMarkString));
@@ -375,14 +376,16 @@ TEST(GetPartialStringFromStringTest, GetStringBeforeThisCharacters)
 
 TEST(GetNewStringFromStringTest, GetStringReplacingSpecialCharactersWithUnderscore)
 {
-    string testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");    string withoutSpecialCharacters("_1234567890_AbCDEFghIjKlMnopQRstUvWxYz_");
+    string testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
+    string withoutSpecialCharacters("_1234567890_AbCDEFghIjKlMnopQRstUvWxYz_");
 
     EXPECT_EQ(withoutSpecialCharacters, getStringAndReplaceNonAlphanumericCharactersToUnderScore(testString));
 }
 
 TEST(GetNewStringFromStringTest, GetStringByRepeatingUntilDesiredLength)
 {
-    EXPECT_TRUE(getStringByRepeatingUntilDesiredLength(string(),50).empty());    EXPECT_TRUE(getStringByRepeatingUntilDesiredLength("MARK",0).empty());
+    EXPECT_TRUE(getStringByRepeatingUntilDesiredLength(string(),50).empty());
+    EXPECT_TRUE(getStringByRepeatingUntilDesiredLength("MARK",0).empty());
     EXPECT_EQ("MARKMARK", getStringByRepeatingUntilDesiredLength("MARK",8));
     EXPECT_EQ("MARKMARKMA", getStringByRepeatingUntilDesiredLength("MARK",10));
 }
@@ -397,7 +400,8 @@ TEST(GetNewStringFromStringTest, GetStringReplacingSpacesWithUnderscore)
 
 TEST(GetStringNumberFromStringTest, GetStringNumberAfterThisString)
 {
-    EXPECT_EQ("1234", getNumberAfterThisString("INF/TCOM/R, nbccId: 1234, ", "nbccId: "));    EXPECT_EQ("5678", getNumberAfterThisString("INF/TCOM/R, nbccId: 5678 ", "nbccId: "));
+    EXPECT_EQ("1234", getNumberAfterThisString("INF/TCOM/R, nbccId: 1234, ", "nbccId: "));
+    EXPECT_EQ("5678", getNumberAfterThisString("INF/TCOM/R, nbccId: 5678 ", "nbccId: "));
     EXPECT_EQ("7890", getNumberAfterThisString("INF/TCOM/R, nbccId: 7890", "nbccId: "));
 }
 

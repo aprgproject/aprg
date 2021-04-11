@@ -25,6 +25,7 @@ public :
 
     LzwCompression()
     {}
+
     void compress(std::istream & input, std::ostream & output)
     {
         AlbaStreamBitReader reader(input);
@@ -50,7 +51,8 @@ public :
         writeCode(writer, radix);
     }
 
-    void expand(std::istream & input, std::ostream & output)    {
+    void expand(std::istream & input, std::ostream & output)
+    {
         AlbaStreamBitReader reader(input);
         AlbaStreamBitWriter writer(output);
 
@@ -58,6 +60,7 @@ public :
 
         DataType codeword = readOneCodeword(reader);
         std::string value(lookupTable.at(codeword));
+
         DataType lastIndex = RADIX+2;
         while(true)
         {
@@ -116,7 +119,8 @@ private:
     stringHelper::strings buildLookupTableFromAllCharacters()
     {
         stringHelper::strings lookupTable;
-        for(DataType c=0; c < RADIX; c++)        {
+        for(DataType c=0; c < RADIX; c++)
+        {
             lookupTable.emplace_back(std::string()+static_cast<char>(c));
         }
         lookupTable.emplace_back(" "); // assign one for end of stream
@@ -140,6 +144,7 @@ private:
         return static_cast<DataType>(bitsetCodeword.to_ullong());
     }
 };
+
 
 }
 

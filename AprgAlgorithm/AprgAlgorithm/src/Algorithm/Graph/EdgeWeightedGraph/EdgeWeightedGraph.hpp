@@ -24,14 +24,16 @@ public:
     using Weights = std::vector<Weight>;
 
     EdgeWeightedGraph()
-        : Graph()    {}
+        : BaseClass()
+    {}
 
     bool hasAUniqueMinimumSpanningTree() const
     {
         return hasNoDuplicateWeights(getSortedWeights());
     }
 
-    Weight getWeight(Vertex const& vertex1, Vertex const& vertex2) const    {
+    Weight getWeight(Vertex const& vertex1, Vertex const& vertex2) const
+    {
         Weight result{};
         auto it = m_edgeToWeightMap.find(createEdgeInMap(vertex1, vertex2));
         if(it != m_edgeToWeightMap.cend())
@@ -50,7 +52,8 @@ public:
 
     EdgeToWeightMap const& getEdgeToWeightMap() const
     {
-        return m_edgeToWeightMap;    }
+        return m_edgeToWeightMap;
+    }
 
     EdgesWithWeight getEdgesWithWeight() const
     {
@@ -101,7 +104,8 @@ private:
 
     Weights getAllWeights() const
     {
-        Weights result;        std::transform(m_edgeToWeightMap.cbegin(), m_edgeToWeightMap.cend(), std::back_inserter(result), [&](auto const& edgeAndWeightPair)
+        Weights result;
+        std::transform(m_edgeToWeightMap.cbegin(), m_edgeToWeightMap.cend(), std::back_inserter(result), [&](auto const& edgeAndWeightPair)
         {
             return edgeAndWeightPair.second;
         });

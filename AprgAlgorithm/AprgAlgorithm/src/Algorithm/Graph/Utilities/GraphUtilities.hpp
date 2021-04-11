@@ -5,7 +5,8 @@
 #include <Algorithm/Graph/ConnectedComponents/StronglyConnectedComponentsUsingKosarajuSharir.hpp>
 #include <Algorithm/Graph/PathSearch/ForDirectedAcyclicGraph/PathSearchForDirectedAcyclicGraph.hpp>
 #include <Algorithm/Graph/Utilities/BipartiteCheckerUsingDfs.hpp>
-#include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>#include <Algorithm/UnionFind/BaseUnionFind.hpp>
+#include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
+#include <Algorithm/UnionFind/BaseUnionFind.hpp>
 #include <Algorithm/UnionFind/UnionFindUsingMap.hpp>
 
 #include <algorithm>
@@ -154,7 +155,8 @@ bool isGraphStronglyConnected(BaseDirectedGraph<Vertex> const& graph)
     // Two vertices v and w are strongly connected if they are mutually reachable (so there is a edge from v to w and from w to v)
     // A directed graph is strongly connected if all its vertices are strongly connected to one another
 
-    StronglyConnectedComponentsUsingKosarajuSharir<Vertex> connectedComponents(graph);    return 1U == connectedComponents.getNumberOfComponentIds();
+    StronglyConnectedComponentsUsingKosarajuSharir<Vertex> connectedComponents(graph);
+    return 1U == connectedComponents.getNumberOfComponentIds();
 }
 
 template <typename Vertex>
@@ -184,9 +186,42 @@ bool isFlowNetwork(EdgeWeightedGraphType const& graph)
     return result;
 }
 
+template <typename SinkSourceFlowNetworkType>
+bool isSinkSourceFlowNetworkFeasible(SinkSourceFlowNetworkType const& flowNetwork)
+{
+    bool result(true);
+    for(auto const& vertex: flowNetwork.getVertices())
+    {
+        for(auto const& adjacentVertex: flowNetwork.getAdjacentVerticesAt(vertex))
+        {
+            auto edgeDetails(flowNetwork.getFlowEdgeDetails(vertex, adjacentVertex));
+            if(edgeDetails.flow < 0 || edgeDetails.flow > edgeDetails.capacity) // out of range
+            {
+                result = false;
+                break;
+            }
+        }
+    }
+    if(result)
+    {
+        for(auto const& vertex: flowNetwork.getVertices())
+        {
+            if(flowNetwork.getSourceVertex() != vertex
+                    && flowNetwork.getSinkVertex() != vertex
+                    && !flowNetwork.hasLocalEquilibrium(vertex)) // should have local equilibrium at non source and sink vertices
+            {
+                result = false;
+                break;
+            }
+        }
+    }
+    return result;
+}
+
 template <typename Vertex>
 unsigned int getDegreeAt(BaseGraph<Vertex> const& graph, Vertex const& vertex)
-{    return graph.getAdjacentVerticesAt(vertex).size();
+{
+    return graph.getAdjacentVerticesAt(vertex).size();
 }
 
 template <typename Vertex>

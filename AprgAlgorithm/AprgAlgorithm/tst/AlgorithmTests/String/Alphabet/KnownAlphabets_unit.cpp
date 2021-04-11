@@ -1,6 +1,7 @@
 #include <Algorithm/String/Alphabet/Alphabet.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba
@@ -51,6 +52,7 @@ Alphabet<unsigned char> getUpperCaseAlphabet()
     return Alphabet<unsigned char>("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 }
 }
+
 TEST(KnownAlphabetsTest, GetBinaryAlphabetWorks)
 {
     auto alphabet(getBinaryAlphabet());

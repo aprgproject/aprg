@@ -18,7 +18,8 @@ public:
     using DigitValues = std::vector<DigitValue>;
 
     Alphabet(std::string const& characters)
-        : m_characters(characters)    {}
+        : m_characters(characters)
+    {}
 
     bool contains(char const c)
     {
@@ -45,6 +46,7 @@ public:
         }
         return result;
     }
+
     unsigned int getRadix()
     {
         return m_characters.size();
@@ -76,6 +78,7 @@ public:
         });
         return result;
     }
+
     std::string const& getCharacters()
     {
         return m_characters;

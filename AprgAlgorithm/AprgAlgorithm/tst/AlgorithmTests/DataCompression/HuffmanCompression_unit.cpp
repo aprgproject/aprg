@@ -20,7 +20,8 @@ namespace
 using CompressionForTest = HuffmanCompression<unsigned int>;
 }
 
-TEST(HuffmanCompressionTest, CompressWorksUsingExample1){
+TEST(HuffmanCompressionTest, CompressWorksUsingExample1)
+{
     stringstream inputSs;
     inputSs << "ABRACADABRA!";
     stringstream outputSs;

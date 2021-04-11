@@ -20,7 +20,8 @@ namespace
 using CompressionForTest = LzwCompression<unsigned int>;
 }
 
-TEST(LzwCompressionTest, CompressWorksUsingExample1){
+TEST(LzwCompressionTest, CompressWorksUsingExample1)
+{
     stringstream inputSs;
     inputSs << "ABRACADABRA!";
     stringstream outputSs;
