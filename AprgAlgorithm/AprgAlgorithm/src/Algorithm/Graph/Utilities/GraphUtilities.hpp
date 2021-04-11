@@ -3,11 +3,9 @@
 #include <Algorithm/Graph/CycleDetection/CycleDetectionUsingDfs.hpp>
 #include <Algorithm/Graph/ConnectedComponents/ConnectedComponentsUsingDfs.hpp>
 #include <Algorithm/Graph/ConnectedComponents/StronglyConnectedComponentsUsingKosarajuSharir.hpp>
-#include <Algorithm/Graph/EdgeWeightedGraph/EdgeWeightedGraph.hpp>
 #include <Algorithm/Graph/PathSearch/ForDirectedAcyclicGraph/PathSearchForDirectedAcyclicGraph.hpp>
 #include <Algorithm/Graph/Utilities/BipartiteCheckerUsingDfs.hpp>
-#include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
-#include <Algorithm/UnionFind/BaseUnionFind.hpp>
+#include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>#include <Algorithm/UnionFind/BaseUnionFind.hpp>
 #include <Algorithm/UnionFind/UnionFindUsingMap.hpp>
 
 #include <algorithm>
@@ -153,11 +151,10 @@ bool isGraphConnected(BaseUndirectedGraph<Vertex> const& graph)
 template <typename Vertex>
 bool isGraphStronglyConnected(BaseDirectedGraph<Vertex> const& graph)
 {
-    // Two vertices v and w are strongly connected if they are mutually reachable (so there is a v to w and w to v)
+    // Two vertices v and w are strongly connected if they are mutually reachable (so there is a edge from v to w and from w to v)
     // A directed graph is strongly connected if all its vertices are strongly connected to one another
 
-    StronglyConnectedComponentsUsingKosarajuSharir<Vertex> connectedComponents(graph);
-    return 1U == connectedComponents.getNumberOfComponentIds();
+    StronglyConnectedComponentsUsingKosarajuSharir<Vertex> connectedComponents(graph);    return 1U == connectedComponents.getNumberOfComponentIds();
 }
 
 template <typename Vertex>
@@ -170,10 +167,26 @@ bool isBipartite(BaseUndirectedGraph<Vertex> const& graph)
     return BipartiteCheckerUsingDfs<Vertex>(graph).isBipartite();
 }
 
+template <typename EdgeWeightedGraphType>
+bool isFlowNetwork(EdgeWeightedGraphType const& graph)
+{
+    // A flow network is an edge-weighted digraph with positive edge weights (which we refer to as capacities).
+
+    bool result(false);
+    if(GraphDirectionType::Directed == graph.getGraphDirectionType())
+    {
+        auto weights(graph.getSortedWeights());
+        result = std::all_of(weights.cbegin(), weights.cend(), [](auto const& weight)
+        {
+            return weight > 0;
+        });
+    }
+    return result;
+}
+
 template <typename Vertex>
 unsigned int getDegreeAt(BaseGraph<Vertex> const& graph, Vertex const& vertex)
-{
-    return graph.getAdjacentVerticesAt(vertex).size();
+{    return graph.getAdjacentVerticesAt(vertex).size();
 }
 
 template <typename Vertex>
