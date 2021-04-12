@@ -108,9 +108,10 @@ template <typename NumberType> NumberType getSquareRootOfXSquaredPlusYSquaredPlu
     return static_cast<NumberType>(pow(pow(x, 2)+pow(y, 2)+pow(z, 2), 0.5));
 }
 double getLogarithm(double const base, double const inputForLogarithm);
+unsigned int getIterativeLogarithm(double const base, double const inputForLogarithm);
+int getSuperLogarithm(double const base, double const inputForLogarithm);
 AlbaNumber getAverageForAlbaNumber(AlbaNumber const& value1, AlbaNumber const& value2);
 AlbaNumbers getQuadraticRoots(RootType const rootType, AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c);
-
 
 //Combinatorics functions
 unsigned int getFactorial(unsigned int const number);
