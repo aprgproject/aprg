@@ -1,4 +1,4 @@
-#include <Algorithm/UnionFind/UnionFind.hpp>
+#include <Algorithm/UnionFind/QuickFind.hpp>
 #include <AlgorithmTests/UnionFind/Utilities/CommonTestsWithUnionFind.hpp>
 
 #include <gtest/gtest.h>
@@ -14,32 +14,32 @@ namespace algorithm
 
 namespace
 {
-using UnionFindForTest = UnionFind<unsigned int, 13>;
+using QuickFindForTest = QuickFind<unsigned int, 13>;
 }
 
-TEST(UnionFindTest, IsConnectedWorks)
+TEST(QuickFindTest, IsConnectedWorks)
 {
-    testIsConnectedWithUnsignedInt<UnionFindForTest>();
+    testIsConnectedWithUnsignedInt<QuickFindForTest>();
 }
 
-TEST(UnionFindTest, ConnectWorks)
+TEST(QuickFindTest, ConnectWorks)
 {
-    testConnectWithUnsignedInt<UnionFindForTest>();
+    testConnectWithUnsignedInt<QuickFindForTest>();
 }
 
-TEST(UnionFindTest, ConnectWorksWithExample1)
+TEST(QuickFindTest, ConnectWorksWithExample1)
 {
-    testConnectUsingExample1WithUnsignedInt<UnionFindForTest>();
+    testConnectUsingExample1WithUnsignedInt<QuickFindForTest>();
 }
 
-TEST(UnionFindTest, ConnectWorksWithExample2)
+TEST(QuickFindTest, ConnectWorksWithExample2)
 {
-    testConnectUsingExample2WithUnsignedInt<UnionFindForTest>();
+    testConnectUsingExample2WithUnsignedInt<QuickFindForTest>();
 }
 
-TEST(UnionFindTest, GetRootWorks)
+TEST(QuickFindTest, GetRootWorks)
 {
-    UnionFindForTest unionFind;
+    QuickFindForTest unionFind;
     unionFind.connect(4, 3);
     unionFind.connect(3, 8);
     unionFind.connect(6, 5);
@@ -58,9 +58,9 @@ TEST(UnionFindTest, GetRootWorks)
     EXPECT_EQ(9U, unionFind.getRoot(9));
 }
 
-TEST(UnionFindTest, GetNumberOfUnconnectedWorks)
+TEST(QuickFindTest, GetNumberOfUnconnectedWorks)
 {
-    UnionFindForTest unionFind;
+    QuickFindForTest unionFind;
     EXPECT_EQ(13U, unionFind.getNumberOfUnconnected());
 
     unionFind.connect(4, 3);

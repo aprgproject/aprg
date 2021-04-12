@@ -26,18 +26,19 @@ public:
     Object getRoot(Object const& object) const override
     {
         Object currentObject(object);
-        while(isExistingInConnectionMap(currentObject))
+        auto tempRootIt = m_connectionMap.find(currentObject);
+        while(tempRootIt != m_connectionMap.end())
         {
-            Object const& tempRoot(m_connectionMap.at(currentObject));
+            Object const& tempRoot(tempRootIt->second);
             if(tempRoot==currentObject)
             {
                 break;
             }
             currentObject = tempRoot;
+            tempRootIt = m_connectionMap.find(currentObject);
         }
         return currentObject;
     }
-
     void connect(Object const& object1, Object const& object2) override
     {
         initializeToConnectionMapIfNeeded(object1);
@@ -52,14 +53,8 @@ private:
     {
         m_connectionMap.emplace(object, object);
     }
-
-    bool isExistingInConnectionMap(Object const& object) const
-    {
-        return m_connectionMap.find(object) != m_connectionMap.end();
-    }
     ConnectionMap m_connectionMap;
 };
-
 }
 
 }
