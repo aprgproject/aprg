@@ -26,15 +26,15 @@ public:
     LinkedListQueue()
         : m_size(0)
         , m_first(nullptr)
+        , m_last(nullptr)
     {}
 
     bool isEmpty() const override
     {
-        return m_size == 0;
+        return m_first == nullptr;
     }
 
-    unsigned int getSize() const override
-    {
+    unsigned int getSize() const override    {
         return m_size;
     }
 
