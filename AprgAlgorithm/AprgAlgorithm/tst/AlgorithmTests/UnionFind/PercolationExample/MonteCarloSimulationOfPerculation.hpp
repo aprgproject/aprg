@@ -118,11 +118,10 @@ private:
     void connectNeighboringSitesAt(
             unsigned int const index)
     {
-        unsigned int x(0U), y(0U);
+        unsigned int x, y;
         retrieveCoordinates(index, x, y);
         if(x > 0)
-        {
-            connectNeighborSites(index, getIndex(x-1, y));
+        {            connectNeighborSites(index, getIndex(x-1, y));
         }
         if(y > 0)
         {
@@ -151,11 +150,10 @@ private:
     void connectToVirtualTopOrBottomIfNeeded(
             unsigned int const indexToCheck)
     {
-        unsigned int x(0U), y(0U);
+        unsigned int x, y;
         retrieveCoordinates(indexToCheck, x, y);
         if(y == 0)
-        {
-            m_unionFindOfIndexes.connect(getVirtualTopIndex(), indexToCheck);
+        {            m_unionFindOfIndexes.connect(getVirtualTopIndex(), indexToCheck);
         }
         else if(y == DIMENSION-1)
         {
