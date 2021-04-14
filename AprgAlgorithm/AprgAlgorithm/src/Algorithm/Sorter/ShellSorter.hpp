@@ -29,21 +29,20 @@ private:
 
     void sortWithSkipping(Values& valuesToSort, unsigned int const skipValue) const
     {
-        // This is h-sorting.
+        // This is h-sorting. An h-sorted array is h interleaved sorted subsequences.
         // This is insertion sort but with skipping
         for(unsigned int i=skipValue; i<valuesToSort.size(); i++)
         {
-            swapDownIfStillOutOfOrderWithSkipping(valuesToSort, i, skipValue);
+            continuouslySwapDownIfStillOutOfOrderWithSkipping(valuesToSort, i, skipValue);
         }
     }
 
-    void swapDownIfStillOutOfOrderWithSkipping(Values& valuesToSort, unsigned int const startingIndex, unsigned int const skipValue) const
+    void continuouslySwapDownIfStillOutOfOrderWithSkipping(Values& valuesToSort, unsigned int const startingIndex, unsigned int const skipValue) const
     {
-        // Works similar to insertion sort
+        // Works similar to insertion sort (but with skipping)
         for(unsigned int i=startingIndex; i>=skipValue && valuesToSort.at(i-skipValue) > valuesToSort.at(i); i-=skipValue)
         {
-            std::swap(valuesToSort[i], valuesToSort[i-skipValue]);
-        }
+            std::swap(valuesToSort[i], valuesToSort[i-skipValue]);        }
     }
 
     unsigned int getSkipValue(unsigned int const size) const
