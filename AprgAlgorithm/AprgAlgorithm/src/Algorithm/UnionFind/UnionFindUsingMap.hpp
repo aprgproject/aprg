@@ -39,6 +39,7 @@ public:
         }
         return currentObject;
     }
+
     void connect(Object const& object1, Object const& object2) override
     {
         initializeToConnectionMapIfNeeded(object1);
@@ -55,6 +56,7 @@ private:
     }
     ConnectionMap m_connectionMap;
 };
+
 }
 
 }

@@ -5,7 +5,8 @@
 #include <algorithm>
 #include <utility>
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {
@@ -37,4 +38,5 @@ public:
 };
 
 }
+
 }

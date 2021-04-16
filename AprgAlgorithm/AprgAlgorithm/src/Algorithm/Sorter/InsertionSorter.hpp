@@ -28,7 +28,8 @@ private:
     void continuouslySwapDownIfStillOutOfOrder(Values& valuesToSort, unsigned int const startingIndex) const
     {
         for(unsigned int i=startingIndex; i>0 && valuesToSort.at(i-1) > valuesToSort.at(i); i--)
-        {            std::swap(valuesToSort[i], valuesToSort[i-1]);
+        {
+            std::swap(valuesToSort[i], valuesToSort[i-1]);
         }
     }
     // Proposition: To sort a randomly ordered array with distinct keys, insertion sort uses ~(1/4)N^2 compares and ~(1/4)N^2 exchanges on average.
@@ -46,4 +47,5 @@ private:
 };
 
 }
+
 }

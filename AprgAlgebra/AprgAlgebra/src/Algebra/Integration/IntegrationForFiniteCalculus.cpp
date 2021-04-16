@@ -183,7 +183,8 @@ Term IntegrationForFiniteCalculus::integrateMonomial(
             AlbaNumber exponentAbsoluteValue(getAbsoluteValue(exponent));
             Monomial monomialWithOneLessExponent(monomial);
             monomialWithOneLessExponent.putVariableWithExponent(m_nameOfVariableToIntegrate, exponentAbsoluteValue-1);
-            Polynomial denominatorInFallingPower(                        convertMonomialWithPositiveExponentsFromRegularPowerToFallingPower(monomialWithOneLessExponent));
+            Polynomial denominatorInFallingPower(
+                        convertMonomialWithPositiveExponentsFromRegularPowerToFallingPower(monomialWithOneLessExponent));
             Term termToIntegrate(createExpressionIfPossible({1, "/", denominatorInFallingPower}));
             Term integratedTermInFallingPower(integrateTerm(termToIntegrate));
             if(!isNotANumber(integratedTermInFallingPower)

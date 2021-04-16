@@ -127,7 +127,8 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomial(
     AlbaNumber gcfOfExponents = getGreatestCommonFactor(
                 getGcfOfExponentsInMonomial(firstMonomial),
                 getGcfOfExponentsInMonomial(secondMonomial));
-    if(gcfOfExponents.isFractionType())    {
+    if(gcfOfExponents.isFractionType())
+    {
         AlbaNumber::FractionData exponentFraction(gcfOfExponents.getFractionData());
         if(isDivisible(exponentFraction.denominator, 2))
         {
@@ -212,7 +213,8 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpression(
     AlbaNumber gcfOfExponents = getGreatestCommonFactor(
                 firstTermRaiseToANumber.getExponent(),
                 secondTermRaiseToANumber.getExponent());
-    if(gcfOfExponents.isFractionType())    {
+    if(gcfOfExponents.isFractionType())
+    {
         AlbaNumber::FractionData exponentFraction(gcfOfExponents.getFractionData());
         if(isDivisible(exponentFraction.denominator, 2))
         {

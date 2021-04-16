@@ -158,7 +158,8 @@ AlbaNumber getGcfOfConstants(AlbaNumbers const& constantFactorsPerAddends)
             constantGcf = getGreatestCommonFactor(constantGcf, constantFactor);
         }
     }
-    return constantGcf;}
+    return constantGcf;
+}
 
 void retrieveCommonNonConstantFactors(
         TermsRaiseToNumbers & commonNonConstantFactors,

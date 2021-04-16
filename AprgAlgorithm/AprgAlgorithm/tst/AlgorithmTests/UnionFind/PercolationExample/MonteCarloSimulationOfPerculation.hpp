@@ -121,7 +121,8 @@ private:
         unsigned int x, y;
         retrieveCoordinates(index, x, y);
         if(x > 0)
-        {            connectNeighborSites(index, getIndex(x-1, y));
+        {
+            connectNeighborSites(index, getIndex(x-1, y));
         }
         if(y > 0)
         {
@@ -153,7 +154,8 @@ private:
         unsigned int x, y;
         retrieveCoordinates(indexToCheck, x, y);
         if(y == 0)
-        {            m_unionFindOfIndexes.connect(getVirtualTopIndex(), indexToCheck);
+        {
+            m_unionFindOfIndexes.connect(getVirtualTopIndex(), indexToCheck);
         }
         else if(y == DIMENSION-1)
         {

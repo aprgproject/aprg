@@ -22,7 +22,8 @@ public:
         , m_lastEntryIndex(-1)
         , m_objects(nullptr)
     {
-        initialize(INITIAL_CONTAINER_SIZE);    }
+        initialize(INITIAL_CONTAINER_SIZE);
+    }
 
     ~DoublingSizeQueue()
     {
@@ -52,6 +53,7 @@ public:
         resizeOnDequeueIfNeeded();
         return result;
     }
+
     unsigned int getContainerSize() const
     {
         return m_containerSize;
@@ -89,6 +91,7 @@ private:
         m_objects = newObjects;
         m_containerSize = newSize;
     }
+
     void resizeOnEnqueueIfNeeded()
     {
         if(m_lastEntryIndex+1 == static_cast<int>(m_containerSize))
@@ -111,6 +114,7 @@ private:
     int m_lastEntryIndex;
     Object* m_objects;
 };
+
 }
 
 }

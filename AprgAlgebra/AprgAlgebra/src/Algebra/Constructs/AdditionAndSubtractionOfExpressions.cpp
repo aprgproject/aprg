@@ -136,7 +136,8 @@ void AdditionAndSubtractionOfExpressions::mergeExpressionsByCheckingTwoTermsAtAT
                 Term mergedTerm(mergeTerms(mergeParts.at(i), mergeParts.at(j), m_associations.at(i), m_associations.at(j)));
                 Term const& commonPart(commonParts.at(i));
                 mergeParts[i] = mergedTerm;
-                m_expressions[i] = createOrCopyExpressionFromATerm(mergedTerm*commonPart);                m_associations[i] = TermAssociationType::Positive;
+                m_expressions[i] = createOrCopyExpressionFromATerm(mergedTerm*commonPart);
+                m_associations[i] = TermAssociationType::Positive;
 
                 mergeParts.erase(mergeParts.begin()+j);
                 commonParts.erase(commonParts.begin()+j);
@@ -164,7 +165,8 @@ Term AdditionAndSubtractionOfExpressions::mergeTerms(
     return result;
 }
 
-void AdditionAndSubtractionOfExpressions::prepareCommonParts(        Terms & commonParts)
+void AdditionAndSubtractionOfExpressions::prepareCommonParts(
+        Terms & commonParts)
 {
     for(Term & commonPart : commonParts)
     {

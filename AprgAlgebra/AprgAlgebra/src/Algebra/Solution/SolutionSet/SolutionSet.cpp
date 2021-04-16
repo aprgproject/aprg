@@ -172,13 +172,15 @@ void SolutionSet::checkValuesAndPutIntervals(
             AlbaNumber intervalValueToCheck(getAverage(previousValueToCheck, valueToCheck));
             addInterval(previousValueToCheck, intervalValueToCheck, valueToCheck, isValueAcceptedFunction);
         }
-        previousValueToCheck = valueToCheck;    }
+        previousValueToCheck = valueToCheck;
+    }
     if(!valuesToCheck.empty())
     {
         AlbaNumber intervalValueToCheck(previousValueToCheck + getAbsoluteValue(previousValueToCheck));
         addInterval(previousValueToCheck, intervalValueToCheck, AlbaNumber::Value::PositiveInfinity, isValueAcceptedFunction);
     }
 }
+
 void SolutionSet::addInterval(
         AlbaNumber const& lowerEndpointValue,
         AlbaNumber const& intervalValueToCheck,

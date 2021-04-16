@@ -90,7 +90,8 @@ private:
     // also nth element is not stable
     /*
     void splitToSmallestBlocks(BlockIterator const & blockIterator, DataBlockType const blockTypeForNewBlocks)
-    {        BlockIterator iteratorAfterBlockToSplit(blockIterator);
+    {
+        BlockIterator iteratorAfterBlockToSplit(blockIterator);
         iteratorAfterBlockToSplit++;
         unsigned int index=0, indexOfIndexes=0;
         BlockIterator newBlockIterator(iteratorAfterBlockToSplit);
@@ -117,7 +118,8 @@ private:
     //sort implementation: sort theoretically less more time
     void splitToSmallestBlocks(BlockIterator const & blockIterator, DataBlockType const blockTypeForNewBlocks)
     {
-        BlockIterator iteratorAfterBlockToSplit(blockIterator);        iteratorAfterBlockToSplit++;
+        BlockIterator iteratorAfterBlockToSplit(blockIterator);
+        iteratorAfterBlockToSplit++;
         int numberOfObjectsInCurrentBlock=0;
         BlockIterator newBlockIterator(iteratorAfterBlockToSplit);
         blockIterator->sortThenDoFunctionThenRelease([&](ObjectToSort const& objectToSort)

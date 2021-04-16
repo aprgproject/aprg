@@ -52,7 +52,8 @@ void SignMutator::mutateConstant(Constant & constant)
     constant.setNumber(getSign(constant.getNumberConstReference()));
 }
 
-void SignMutator::mutateVariable(Variable &){}
+void SignMutator::mutateVariable(Variable &)
+{}
 
 void SignMutator::mutateMonomial(Monomial & monomial)
 {
@@ -61,7 +62,8 @@ void SignMutator::mutateMonomial(Monomial & monomial)
     monomial.setConstant(getSign(monomial.getConstantConstReference()));
 }
 
-void SignMutator::mutatePolynomial(Polynomial & polynomial){
+void SignMutator::mutatePolynomial(Polynomial & polynomial)
+{
     bool areAllTheValuesOne(true);
     bool areAllTheValuesNegativeOne(true);
     Monomials mutatedMonomials(polynomial.getMonomialsConstReference());

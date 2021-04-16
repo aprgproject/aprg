@@ -209,6 +209,7 @@ AlbaNumber getMaxAbsoluteValueForRootFinding(AlbaNumbers const& coefficients)
     }
     return result;
 }
+
 AlbaNumbers getDerivativeCoefficients(AlbaNumbers const& coefficients)
 {
     AlbaNumbers derivativeCoefficients(coefficients);

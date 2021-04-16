@@ -40,6 +40,7 @@ void mergeTheTwoSortedParts(
         }
     }
 }
+
 template <typename Values>
 Values mergeTwoSortedSequences(
         Values const& sortedValues1,
@@ -68,7 +69,8 @@ Values mergeTwoSortedSequences(
             result.emplace_back(sortedValues1.at(i++)); // copy and move first index
         }
     }
-    return result;}
+    return result;
+}
 
 }
 

@@ -32,7 +32,8 @@ public:
                     && mathHelper::isAlmostEqual(flow, second.flow);
         }
     };
-    struct FlowEdge    {
+    struct FlowEdge
+    {
         Vertex source;
         Vertex destination;
         FlowDataType capacity;
@@ -78,6 +79,7 @@ public:
     };
     using FlowEdges = std::vector<FlowEdge>;
     using EdgeToFlowEdgeDetailsMap = std::map<EdgeWithVertexComparison, FlowEdgeDetails>;
+
     FlowNetwork()
         : BaseClass()
     {
@@ -115,7 +117,8 @@ public:
 
     FlowDataType getDeltaFlowAt(Vertex const& vertex) const
     {
-        FlowDataType result{};        for(auto const& edgeAndDetailsPair : m_edgeToFlowEdgeDetailsMap)
+        FlowDataType result{};
+        for(auto const& edgeAndDetailsPair : m_edgeToFlowEdgeDetailsMap)
         {
             if(edgeAndDetailsPair.first.first == vertex)
             {
@@ -179,14 +182,16 @@ public:
 
     std::string getDisplayableString() const override
     {
-        std::string firstPart(BaseClass::getDisplayableString());        std::stringstream ss;
+        std::string firstPart(BaseClass::getDisplayableString());
+        std::stringstream ss;
         ss << "Flow edges: {";
         for(auto const& edgeAndDetailsPair : m_edgeToFlowEdgeDetailsMap)
         {
             ss << edgeAndDetailsPair.first.first << "->"
                << edgeAndDetailsPair.first.second
                << "(capacity: " << edgeAndDetailsPair.second.capacity
-               << " flow: "<< edgeAndDetailsPair.second.flow << "), ";        }
+               << " flow: "<< edgeAndDetailsPair.second.flow << "), ";
+        }
         ss << "}";
         return firstPart + ss.str();
     }
@@ -212,7 +217,8 @@ public:
 
 private:
 
-    void connect(Vertex const& vertex1, Vertex const& vertex2) override    {
+    void connect(Vertex const& vertex1, Vertex const& vertex2) override
+    {
         BaseClass::connect(vertex1, vertex2);
     }
 

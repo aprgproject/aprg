@@ -264,6 +264,7 @@ TEST(GraphUtilitiesTest, IsSinkSourceFlowNetworkFeasibleWorks)
     EXPECT_FALSE(isSinkSourceFlowNetworkFeasible(flowNetworkWithNoEquilbrium));
     EXPECT_TRUE(isSinkSourceFlowNetworkFeasible(flowNetworkWithEquilbrium));
 }
+
 TEST(GraphUtilitiesTest, GetDegreeAtWorks)
 {
     UndirectedGraphForTest graph;

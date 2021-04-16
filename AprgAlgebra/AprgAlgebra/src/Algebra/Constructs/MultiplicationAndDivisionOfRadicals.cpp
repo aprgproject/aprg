@@ -149,7 +149,8 @@ AlbaNumber MultiplicationAndDivisionOfRadicals::getGcfOfExponents(
             gcfOfExponents = getGreatestCommonFactor(gcfOfExponents, radical.getExponent());
         }
     }
-    return gcfOfExponents;}
+    return gcfOfExponents;
+}
 
 void MultiplicationAndDivisionOfRadicals::combineMonomialAndRadicalsAndSave(
         RadicalDetails const& radicalDetails,

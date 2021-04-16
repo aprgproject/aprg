@@ -94,7 +94,8 @@ double getCosineOfAngleUsing1Delta(double const deltaX1, double const deltaY1)
     return adjacent/hypotenuse;
 }
 
-double getCosineOfAngleUsing2Deltas(        double const deltaX1,
+double getCosineOfAngleUsing2Deltas(
+        double const deltaX1,
         double const deltaY1,
         double const deltaX2,
         double const deltaY2)
@@ -288,7 +289,8 @@ AlbaAngle getAngleBasedOnAPointAndOrigin(Point const& point)
             angle = AlbaAngle(AngleUnitType::Degrees, 180) - angle;
         }
     }
-    return angle;}
+    return angle;
+}
 
 AlbaAngle getTheInnerAngleUsingThreePoints(
         Point const& commonPoint,
@@ -325,6 +327,7 @@ AlbaAngle getTheSmallerAngleBetweenTwoLines(Line const& line1, Line const& line2
     }
     return angle;
 }
+
 AlbaAngle getTheLargerAngleBetweenTwoLines(Line const& line1, Line const& line2)
 {
     AlbaAngle smallerAngle(getTheSmallerAngleBetweenTwoLines(line1, line2));
@@ -644,7 +647,8 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points)
 
     Points results;
     while(!convertHullPoints.empty())
-    {        results.emplace_back(convertHullPoints.top());
+    {
+        results.emplace_back(convertHullPoints.top());
         convertHullPoints.pop();
     }
     return results;

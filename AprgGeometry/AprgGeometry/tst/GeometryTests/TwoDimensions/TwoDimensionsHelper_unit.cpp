@@ -74,6 +74,7 @@ TEST(TwoDimensionsHelperTest, GetCosineOfAngleUsing2DeltasWorks)
 {
     EXPECT_DOUBLE_EQ(1, getCosineOfAngleUsing2Deltas(2,4,8,16));
 }
+
 TEST(TwoDimensionsHelperTest, GetArcLengthWorks)
 {
     EXPECT_DOUBLE_EQ(314.15926535897933, getArcLength(AlbaAngle(AngleUnitType::Degrees, 180), 100));
@@ -246,7 +247,8 @@ TEST(TwoDimensionsHelperTest, GetAngleBasedOnAPointAndOriginWorks)
     EXPECT_DOUBLE_EQ(0, getAngleBasedOnAPointAndOrigin(Point(0,0)).getDegrees());
     EXPECT_DOUBLE_EQ(45, getAngleBasedOnAPointAndOrigin(Point(1,1)).getDegrees());
     EXPECT_DOUBLE_EQ(135, getAngleBasedOnAPointAndOrigin(Point(-1,1)).getDegrees());
-    EXPECT_DOUBLE_EQ(225, getAngleBasedOnAPointAndOrigin(Point(-1,-1)).getDegrees());    EXPECT_DOUBLE_EQ(315, getAngleBasedOnAPointAndOrigin(Point(1,-1)).getDegrees());
+    EXPECT_DOUBLE_EQ(225, getAngleBasedOnAPointAndOrigin(Point(-1,-1)).getDegrees());
+    EXPECT_DOUBLE_EQ(315, getAngleBasedOnAPointAndOrigin(Point(1,-1)).getDegrees());
     EXPECT_DOUBLE_EQ(90, getAngleBasedOnAPointAndOrigin(Point(0,1)).getDegrees());
     EXPECT_DOUBLE_EQ(270, getAngleBasedOnAPointAndOrigin(Point(0,-1)).getDegrees());
     EXPECT_DOUBLE_EQ(0, getAngleBasedOnAPointAndOrigin(Point(1,0)).getDegrees());
@@ -257,7 +259,8 @@ TEST(TwoDimensionsHelperTest, GetAngleBasedOnAPointAndOriginWorks)
     EXPECT_DOUBLE_EQ(233.13010235415598, getAngleBasedOnAPointAndOrigin(Point(-3,-4)).getDegrees());
 }
 
-TEST(TwoDimensionsHelperTest, getTheInnerAngleUsingThreePointsWorks){
+TEST(TwoDimensionsHelperTest, getTheInnerAngleUsingThreePointsWorks)
+{
     EXPECT_EQ(0, getTheInnerAngleUsingThreePoints(Point(0,0), Point(0,1), Point(0,1)).getDegrees());
     EXPECT_EQ(90, getTheInnerAngleUsingThreePoints(Point(0,0), Point(0,1), Point(1,0)).getDegrees());
     EXPECT_DOUBLE_EQ(45, getTheInnerAngleUsingThreePoints(Point(0,0), Point(0,1), Point(1,1)).getDegrees());
@@ -307,7 +310,8 @@ TEST(TwoDimensionsHelperTest, GetConvexHullPointsUsingGrahamScanWorks)
     ASSERT_EQ(expectedPoints, actualPoints);
 }
 
-TEST(TwoDimensionsHelperTest, GetLineWithSameSlopeAndPoint){
+TEST(TwoDimensionsHelperTest, GetLineWithSameSlopeAndPoint)
+{
     Line lineInput(Point(0,0), Point(-1,1));
     Line expectedLine(getLineWithSameSlope(lineInput, Point(2,2)));
 

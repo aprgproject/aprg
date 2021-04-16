@@ -144,7 +144,8 @@ TEST(ContinuityTest, GetContinuityTypeAtWorksForRemovableDiscontinuityFunction)
             result = getAbsoluteValue(number - 3);
         }
         return result;
-    });    Term functionTermToTest(functionToTest);
+    });
+    Term functionTermToTest(functionToTest);
 
     EXPECT_EQ(ContinuityType::DiscontinuousWithRemovableDiscontinuity,
               getContinuityTypeAt(functionTermToTest, "x", 3));

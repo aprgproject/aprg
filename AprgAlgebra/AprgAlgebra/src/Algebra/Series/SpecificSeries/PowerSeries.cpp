@@ -49,7 +49,8 @@ AlbaNumber PowerSeries::getRadiusOfConvergence() const
         return partialSum + getAbsoluteValue(nextInterval.getHigherEndpoint().getValue() - nextInterval.getLowerEndpoint().getValue());
     });
     result = result/static_cast<long long int>(intervals.size())/2;
-    return result;}
+    return result;
+}
 
 void PowerSeries::differentiate()
 {

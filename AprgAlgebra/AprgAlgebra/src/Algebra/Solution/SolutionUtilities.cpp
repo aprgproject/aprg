@@ -47,7 +47,8 @@ void retrieveInitialValuesForIteratingMethods(
         AlbaNumber positiveNumber(getAbsoluteValue(number));
         AlbaNumber positiveLogarithm(log(positiveNumber.getDouble()));
         allValues.emplace(positiveNumber*-1);
-        allValues.emplace(positiveLogarithm*-1);        allValues.emplace(positiveLogarithm);
+        allValues.emplace(positiveLogarithm*-1);
+        allValues.emplace(positiveLogarithm);
         allValues.emplace(positiveNumber);
     }
 }
