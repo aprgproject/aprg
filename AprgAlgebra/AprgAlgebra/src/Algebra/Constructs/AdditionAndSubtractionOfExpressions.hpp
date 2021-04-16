@@ -30,12 +30,10 @@ public:
 
 private:
     void mergeExpressionsByCheckingTwoTermsAtATime(Terms & mergeParts, Terms & commonParts);
-    void mergeTerms(
-            Term & mergedTerm,
+    Term mergeTerms(
             Term const& mergePart1,
             Term const& mergePart2,
-            TermAssociationType const association1,
-            TermAssociationType const association2);
+            TermAssociationType const association1,            TermAssociationType const association2);
     void prepareCommonParts(Terms & commonParts);
     void retrieveMergeParts(Terms & mergeParts);
     void retrieveCommonParts(Terms & commonParts);

@@ -20,10 +20,9 @@ Function abs(Term const& term)
 {
     return Function("abs", term, [](AlbaNumber const&  number) -> AlbaNumber
     {
-        return getAbsoluteValueForAlbaNumber(number);
+        return getAbsoluteValue(number);
     });
 }
-
 Function greatestIntegerFunction(Term const& term)
 {
     return Function("greatestIntegerFunction", term, [](AlbaNumber const&  number) -> AlbaNumber

@@ -146,11 +146,10 @@ void SimplificationOfEquation::completeExpressionWithFractionalExponentsIfNeeded
                 Term const& secondTerm(getTermConstReferenceFromSharedPointer(termsWithDetails.at(1).baseTermSharedPointer));
                 TermRaiseToANumber termRaiseToANumber1(createTermRaiseToANumberFromTerm(firstTerm));
                 TermRaiseToANumber termRaiseToANumber2(createTermRaiseToANumberFromTerm(secondTerm));
-                AlbaNumber gcfOfExponents = getGreatestCommonFactorForAlbaNumber(termRaiseToANumber1.getExponent(), termRaiseToANumber2.getExponent());
+                AlbaNumber gcfOfExponents = getGreatestCommonFactor(termRaiseToANumber1.getExponent(), termRaiseToANumber2.getExponent());
                 if(gcfOfExponents.isFractionType())
                 {
-                    AlbaNumber::FractionData exponentFraction(gcfOfExponents.getFractionData());
-                    termRaiseToANumber1.setExponent(termRaiseToANumber1.getExponent() * exponentFraction.denominator);
+                    AlbaNumber::FractionData exponentFraction(gcfOfExponents.getFractionData());                    termRaiseToANumber1.setExponent(termRaiseToANumber1.getExponent() * exponentFraction.denominator);
                     termRaiseToANumber2.setExponent(termRaiseToANumber2.getExponent() * exponentFraction.denominator);
                     leftHandSide = termRaiseToANumber1.getCombinedTerm() - termRaiseToANumber2.getCombinedTerm();
                     leftHandSide.simplify();
@@ -168,11 +167,10 @@ void SimplificationOfEquation::removeCommonConstant(
         if(canBeConvertedToMonomial(leftHandSide))
         {
             Monomial monomial(createMonomialIfPossible(leftHandSide));
-            monomial.setConstant(getSignForAlbaNumber(monomial.getConstantConstReference()));
+            monomial.setConstant(getSign(monomial.getConstantConstReference()));
             leftHandSide = simplifyAndConvertMonomialToSimplestTerm(monomial);
         }
-        else if(leftHandSide.isPolynomial())
-        {
+        else if(leftHandSide.isPolynomial())        {
             bool isLeftHandSideChanged(false);
             Polynomials factors(factorizeCommonMonomial(leftHandSide.getPolynomialConstReference()));
             for(Polynomial & factor : factors)
@@ -181,11 +179,10 @@ void SimplificationOfEquation::removeCommonConstant(
                 if(monomials.size() == 1)
                 {
                     Monomial & onlyMonomial(monomials.at(0));
-                    onlyMonomial.setConstant(getSignForAlbaNumber(onlyMonomial.getConstantConstReference()));
+                    onlyMonomial.setConstant(getSign(onlyMonomial.getConstantConstReference()));
                     isLeftHandSideChanged=true;
                 }
-            }
-            if(isLeftHandSideChanged)
+            }            if(isLeftHandSideChanged)
             {
                 Polynomial combinedPolynomial(createPolynomialFromNumber(1));
                 for(Polynomial const& factor : factors)
@@ -204,11 +201,10 @@ void SimplificationOfEquation::removeCommonConstant(
                 if(canBeConvertedToMonomial(factor))
                 {
                     Monomial monomialFactor(createMonomialIfPossible(factor));
-                    monomialFactor.setConstant(getSignForAlbaNumber(monomialFactor.getConstantConstReference()));
+                    monomialFactor.setConstant(getSign(monomialFactor.getConstantConstReference()));
                     factor = simplifyAndConvertMonomialToSimplestTerm(monomialFactor);
                     isLeftHandSideChanged=true;
-                }
-            }
+                }            }
             if(isLeftHandSideChanged)
             {
                 Term combinedTerm(1);

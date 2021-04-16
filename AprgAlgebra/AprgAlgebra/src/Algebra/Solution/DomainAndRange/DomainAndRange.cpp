@@ -219,11 +219,10 @@ AlbaNumber getTransitionValue(
     while(previousInputValue != newInputValue)
     {
         previousInputValue = newInputValue;
-        newInputValue = getAverageForAlbaNumber(currentValueToRealFiniteValue, currentValueToNonRealFiniteValue);
+        newInputValue = getAverage(currentValueToRealFiniteValue, currentValueToNonRealFiniteValue);
         AlbaNumber newOutputValue(functionToCheck(newInputValue));
         if(newOutputValue.isARealFiniteValue())
-        {
-            currentValueToRealFiniteValue = newInputValue;
+        {            currentValueToRealFiniteValue = newInputValue;
         }
         else
         {

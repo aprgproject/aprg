@@ -230,11 +230,10 @@ void createTermRaiseToANumberFromMultiplicationAndDivisionExpression(
             }
             else
             {
-                commonExponent = getGreatestCommonFactorForAlbaNumber(commonExponent, exponent);
+                commonExponent = getGreatestCommonFactor(commonExponent, exponent);
             }
         }
-    }
-    if(areAllExponentsNegative && commonExponent > 0)
+    }    if(areAllExponentsNegative && commonExponent > 0)
     {
         commonExponent *= -1;
     }

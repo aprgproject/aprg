@@ -205,11 +205,10 @@ AlbaNumber getMaxAbsoluteValueForRootFinding(AlbaNumbers const& coefficients)
     AlbaNumber result(0);
     if(!coefficients.empty())
     {
-        result = max(getAbsoluteValueForAlbaNumber(coefficients.front()), getAbsoluteValueForAlbaNumber(coefficients.back()));
+        result = max(getAbsoluteValue(coefficients.front()), getAbsoluteValue(coefficients.back()));
     }
     return result;
 }
-
 AlbaNumbers getDerivativeCoefficients(AlbaNumbers const& coefficients)
 {
     AlbaNumbers derivativeCoefficients(coefficients);

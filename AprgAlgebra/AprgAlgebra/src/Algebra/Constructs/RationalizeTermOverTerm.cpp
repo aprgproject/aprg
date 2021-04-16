@@ -124,11 +124,10 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomial(
         Monomial const& firstMonomial,
         Monomial const& secondMonomial) const
 {
-    AlbaNumber gcfOfExponents = getGreatestCommonFactorForAlbaNumber(
+    AlbaNumber gcfOfExponents = getGreatestCommonFactor(
                 getGcfOfExponentsInMonomial(firstMonomial),
                 getGcfOfExponentsInMonomial(secondMonomial));
-    if(gcfOfExponents.isFractionType())
-    {
+    if(gcfOfExponents.isFractionType())    {
         AlbaNumber::FractionData exponentFraction(gcfOfExponents.getFractionData());
         if(isDivisible(exponentFraction.denominator, 2))
         {
@@ -210,11 +209,10 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpression(
     TermRaiseToANumber firstTermRaiseToANumber(createTermRaiseToANumberFromTerm(firstTerm));
     TermRaiseToANumber secondTermRaiseToANumber(createTermRaiseToANumberFromTerm(secondTerm));
 
-    AlbaNumber gcfOfExponents = getGreatestCommonFactorForAlbaNumber(
+    AlbaNumber gcfOfExponents = getGreatestCommonFactor(
                 firstTermRaiseToANumber.getExponent(),
                 secondTermRaiseToANumber.getExponent());
-    if(gcfOfExponents.isFractionType())
-    {
+    if(gcfOfExponents.isFractionType())    {
         AlbaNumber::FractionData exponentFraction(gcfOfExponents.getFractionData());
         if(isDivisible(exponentFraction.denominator, 2))
         {

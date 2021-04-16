@@ -75,11 +75,10 @@ bool canBeMergedInAMonomialByAdditionOrSubtraction(Variable const& variable1, Va
 
 bool doesCoefficientsHaveSameSign(Monomial const& monomial1, Monomial const& monomial2)
 {
-    return getSignForAlbaNumber(monomial1.getConstantConstReference()) == getSignForAlbaNumber(monomial2.getConstantConstReference());
+    return getSign(monomial1.getConstantConstReference()) == getSign(monomial2.getConstantConstReference());
 }
 
-bool hasNegativeExponents(Monomial const& monomial)
-{
+bool hasNegativeExponents(Monomial const& monomial){
     bool result(false);
     for(auto const& variableExponentsPair
         : monomial.getVariablesToExponentsMapConstReference())
@@ -173,11 +172,10 @@ AlbaNumber getGcfOfExponentsInMonomial(Monomial const& monomial)
             }
             else
             {
-                commonExponent = getGreatestCommonFactorForAlbaNumber(commonExponent, exponent);
+                commonExponent = getGreatestCommonFactor(commonExponent, exponent);
             }
         }
-    }
-    return commonExponent;
+    }    return commonExponent;
 }
 
 AlbaNumber getGcfOfCoefficientsInMonomials(Monomials const& monomials)
@@ -196,11 +194,10 @@ AlbaNumber getGcfOfCoefficientsInMonomials(Monomials const& monomials)
             }
             else
             {
-                commonCoefficient = getGreatestCommonFactorForAlbaNumber(commonCoefficient, coefficient);
+                commonCoefficient = getGreatestCommonFactor(commonCoefficient, coefficient);
             }
         }
-    }
-    return commonCoefficient;
+    }    return commonCoefficient;
 }
 
 AlbaNumber getLcmOfCoefficientsInMonomials(Monomials const& monomials)
@@ -219,11 +216,10 @@ AlbaNumber getLcmOfCoefficientsInMonomials(Monomials const& monomials)
             }
             else
             {
-                commonCoefficient = getLeastCommonMultipleForAlbaNumber(commonCoefficient, coefficient);
+                commonCoefficient = getLeastCommonMultiple(commonCoefficient, coefficient);
             }
         }
-    }
-    return commonCoefficient;
+    }    return commonCoefficient;
 }
 
 AlbaNumber getCommonSignInMonomials(Monomials const& monomials)
