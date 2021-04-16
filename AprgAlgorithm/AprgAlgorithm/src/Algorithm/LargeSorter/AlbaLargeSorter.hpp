@@ -85,13 +85,10 @@ private:
         }
     }
 
-    // nth element implementation
-    // nth element approach takes more time than sort because it does multiple nth elements which scale logically with input size (so its results to quadratic time)
-    // also nth element is not stable
+    // nth element is not stable
     /*
     void splitToSmallestBlocks(BlockIterator const & blockIterator, DataBlockType const blockTypeForNewBlocks)
-    {
-        BlockIterator iteratorAfterBlockToSplit(blockIterator);
+    {        BlockIterator iteratorAfterBlockToSplit(blockIterator);
         iteratorAfterBlockToSplit++;
         unsigned int index=0, indexOfIndexes=0;
         BlockIterator newBlockIterator(iteratorAfterBlockToSplit);
@@ -115,11 +112,10 @@ private:
     }
     */
 
-    //sort implementation: sort theoretically less more time
+    //sort implementation
     void splitToSmallestBlocks(BlockIterator const & blockIterator, DataBlockType const blockTypeForNewBlocks)
     {
-        BlockIterator iteratorAfterBlockToSplit(blockIterator);
-        iteratorAfterBlockToSplit++;
+        BlockIterator iteratorAfterBlockToSplit(blockIterator);        iteratorAfterBlockToSplit++;
         int numberOfObjectsInCurrentBlock=0;
         BlockIterator newBlockIterator(iteratorAfterBlockToSplit);
         blockIterator->sortThenDoFunctionThenRelease([&](ObjectToSort const& objectToSort)

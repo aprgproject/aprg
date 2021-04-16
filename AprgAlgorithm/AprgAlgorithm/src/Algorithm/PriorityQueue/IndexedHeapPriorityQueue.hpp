@@ -1,10 +1,7 @@
 #pragma once
 
-#include <Algorithm/PriorityQueue/HeapTreeAdapter.hpp>
-
 #include <utility>
 #include <vector>
-
 namespace alba
 {
 
