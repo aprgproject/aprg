@@ -2,19 +2,18 @@
 
 #include <Common/Container/AlbaContainerHelper.hpp>
 
-#include <iostream>
+#include <ostream>
 #include <string>
 
 using namespace alba::containerHelper;
-
 namespace alba
 {
 
 // Print parameter functions
+
 template <typename ParameterPointerType>
 void printParameter(std::ostream & outputStream, std::string const& parameterName, ParameterPointerType * parameterPointer)
-{
-    if(parameterPointer == nullptr)
+{    if(parameterPointer == nullptr)
     {
         outputStream << parameterName << " : [nullptr]";
     }
