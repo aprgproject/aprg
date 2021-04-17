@@ -1,6 +1,6 @@
+#include <Algorithm/HashFunctions/ValueBasedHashFunction.hpp>
 #include <Algorithm/SymbolTable/HashTable/LinearProbingHashSymbolTable.hpp>
 #include <AlgorithmTests/SymbolTable/Utilities/CommonTestsWithSymbolTable.hpp>
-
 #include <gtest/gtest.h>
 
 using namespace alba::algorithm::CommonTestsWithSymbolTable;
@@ -14,11 +14,11 @@ namespace algorithm
 
 namespace
 {
-using SymbolTableForTest = LinearProbingHashSymbolTable<unsigned int, char>;
+using HashFunctionForTest = ValueBasedHashFunction<unsigned int, unsigned int>;
+using SymbolTableForTest = LinearProbingHashSymbolTable<unsigned int, char, HashFunctionForTest>;
 }
 
-TEST(LinearProbingHashSymbolTableTest, IsEmptyWorksWhenEmpty)
-{
+TEST(LinearProbingHashSymbolTableTest, IsEmptyWorksWhenEmpty){
     testIsEmptyWhenEmptyWithUnsignedIntAndChar<SymbolTableForTest>();
 }
 
