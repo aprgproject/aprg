@@ -45,14 +45,13 @@ Term LimitsAtInfinity::getValueAtInfinity(
 void LimitsAtInfinity::simplify()
 {
     simplifyAsATerm();
-    if(!isNotANumber(m_simplifiedTermAtInfinity))
+    if(!isNan(m_simplifiedTermAtInfinity))
     {
         simplifyAsTermsOverTermsIfPossible();
-        if(!isNotANumber(m_simplifiedTermAtInfinity))
+        if(!isNan(m_simplifiedTermAtInfinity))
         {
             simplifyPolynomialToMaxDegreeMonomialOnly();
-        }
-    }
+        }    }
 }
 
 void LimitsAtInfinity::simplifyAsATerm()

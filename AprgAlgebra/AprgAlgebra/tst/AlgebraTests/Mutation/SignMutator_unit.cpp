@@ -38,11 +38,10 @@ TEST(SignMutatorTest, MutateTermWorks)
     EXPECT_EQ(Term(1), term3);
     EXPECT_EQ(Term(1), term4);
     EXPECT_EQ(Term(1), term5);
-    EXPECT_TRUE(isNotANumber(term6));
+    EXPECT_TRUE(isNan(term6));
 }
 
-TEST(SignMutatorTest, MutateTermWorksOnVariable)
-{
+TEST(SignMutatorTest, MutateTermWorksOnVariable){
     SignMutator mutator;
     mutator.putVariableWithSign("a", TermAssociationType::Positive);
     mutator.putVariableWithSign("b", TermAssociationType::Negative);
@@ -56,11 +55,10 @@ TEST(SignMutatorTest, MutateTermWorksOnVariable)
 
     EXPECT_EQ(Term(1), variableTerm1);
     EXPECT_EQ(Term(-1), variableTerm2);
-    EXPECT_TRUE(isNotANumber(variableTerm3));
+    EXPECT_TRUE(isNan(variableTerm3));
 }
 
-TEST(SignMutatorTest, MutateTermWorksOnFunction)
-{
+TEST(SignMutatorTest, MutateTermWorksOnFunction){
     SignMutator mutator;
     Term functionTerm1(abs("a"));
     Term functionTerm2(sin("a"));
@@ -69,11 +67,10 @@ TEST(SignMutatorTest, MutateTermWorksOnFunction)
     mutator.mutateTerm(functionTerm2);
 
     EXPECT_EQ(Term(1), functionTerm1);
-    EXPECT_TRUE(isNotANumber(functionTerm2));
+    EXPECT_TRUE(isNan(functionTerm2));
 }
 
-TEST(SignMutatorTest, MutateConstantWorks)
-{
+TEST(SignMutatorTest, MutateConstantWorks){
     SignMutator mutator;
     Constant constant(5);
 
@@ -122,14 +119,13 @@ TEST(SignMutatorTest, MutatePolynomialWorks)
 
     Polynomial polynomiaToExpect2{Monomial(-1, {})};
     Polynomial polynomiaToExpect3{Monomial(1, {})};
-    EXPECT_TRUE(isNotANumber(polynomial1));
+    EXPECT_TRUE(isNan(polynomial1));
     EXPECT_EQ(polynomiaToExpect2, polynomial2);
     EXPECT_EQ(polynomiaToExpect3, polynomial3);
-    EXPECT_TRUE(isNotANumber(polynomial4));
+    EXPECT_TRUE(isNan(polynomial4));
 }
 
-TEST(SignMutatorTest, MutateExpressionWorksOnAdditionAndSubtraction)
-{
+TEST(SignMutatorTest, MutateExpressionWorksOnAdditionAndSubtraction){
     SignMutator mutator;
     mutator.putVariableWithSign("a", TermAssociationType::Positive);
     mutator.putVariableWithSign("b", TermAssociationType::Negative);
@@ -148,10 +144,9 @@ TEST(SignMutatorTest, MutateExpressionWorksOnAdditionAndSubtraction)
     Expression expressionToExpect4(createOrCopyExpressionFromATerm(1));
     EXPECT_EQ(expressionToExpect1, expression1);
     EXPECT_EQ(expressionToExpect2, expression2);
-    EXPECT_TRUE(isNotANumber(expression3));
+    EXPECT_TRUE(isNan(expression3));
     EXPECT_EQ(expressionToExpect4, expression4);
 }
-
 TEST(SignMutatorTest, MutateExpressionWorksOnMultiplicationAndDivision)
 {
     SignMutator mutator;

@@ -72,11 +72,10 @@ void Summation::calculateSumFromANumberToANumber(
             && endNumber.isIntegerType()
             && startNumber <= endNumber)
     {
-        if(isNotANumber(m_summationModel))
+        if(isNan(m_summationModel))
         {
             calculateSumUsingEachTerm(result, startNumber, endNumber);
-        }
-        else
+        }        else
         {
             calculateSumUsingModel(result, startNumber, endNumber);
         }

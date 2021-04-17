@@ -272,11 +272,10 @@ bool Monomial::isLessThanByComparingVariableNameMaps(
 
 void Monomial::setNanIfNeeded()
 {
-    if(hasNotANumber(*this))
+    if(hasNan(*this))
     {
         m_variablesToExponentsMap.clear();
-        setConstant(AlbaNumber(AlbaNumber::Value::NotANumber));
-    }
+        setConstant(AlbaNumber(AlbaNumber::Value::NotANumber));    }
 }
 
 void Monomial::removeZeroExponents()

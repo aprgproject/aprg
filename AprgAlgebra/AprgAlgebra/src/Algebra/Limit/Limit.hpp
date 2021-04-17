@@ -58,11 +58,10 @@ AlbaNumber getLimitAtAValueUsingTrendOfValues(
         std::string const& variableName,
         AlbaNumber const& valueToApproach,
         AlbaNumber const& previousAcceptedInput,
-        AlbaNumber const& previousPreviousAcceptedInput);
+        AlbaNumber const& previousOfPreviousAcceptedInput);
 AlbaNumber getValueUsingLinearInterpolation(
         AlbaNumber const& input1,
-        AlbaNumber const& input2,
-        AlbaNumber const& inputValue,
+        AlbaNumber const& input2,        AlbaNumber const& inputValue,
         AlbaNumber const& output1,
         AlbaNumber const& output2);
 

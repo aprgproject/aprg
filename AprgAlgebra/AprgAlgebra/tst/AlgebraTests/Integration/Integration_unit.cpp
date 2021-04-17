@@ -287,11 +287,10 @@ TEST(IntegrationTest, IntegrateExpressionWorks)
     EXPECT_EQ(termToExpect5, termToVerify5);
     EXPECT_EQ(termToExpect6, termToVerify6);
     EXPECT_EQ(termToExpect7, termToVerify7);
-    EXPECT_TRUE(isNotANumber(termToVerify8));
+    EXPECT_TRUE(isNan(termToVerify8));
 }
 
-TEST(IntegrationTest, IntegrateFunctionWorksWithDifferentFunctions)
-{
+TEST(IntegrationTest, IntegrateFunctionWorksWithDifferentFunctions){
     Integration integrationForX("x");
 
     Term termToVerify1(integrationForX.integrateFunction(abs(x)));
@@ -308,11 +307,10 @@ TEST(IntegrationTest, IntegrateFunctionWorksWithDifferentFunctions)
     Term termToExpect4(ln(abs(csc("x")-cot("x"))));
     Term termToExpect5(ln(abs(sec("x")+tan("x"))));
     Term termToExpect7(ln(abs(sin("x"))));
-    EXPECT_TRUE(isNotANumber(termToVerify1));
+    EXPECT_TRUE(isNan(termToVerify1));
     EXPECT_EQ(termToExpect1, termToVerify2);
     EXPECT_EQ(termToExpect2, termToVerify3);
-    EXPECT_EQ(termToExpect3, termToVerify4);
-    EXPECT_EQ(termToExpect4, termToVerify5);
+    EXPECT_EQ(termToExpect3, termToVerify4);    EXPECT_EQ(termToExpect4, termToVerify5);
     EXPECT_EQ(termToExpect5, termToVerify6);
     EXPECT_EQ(termToExpect7, termToVerify7);
 }
