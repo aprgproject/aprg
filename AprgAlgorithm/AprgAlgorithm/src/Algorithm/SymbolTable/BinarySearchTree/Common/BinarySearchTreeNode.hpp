@@ -35,7 +35,7 @@ struct RedBlackTreeNode
     std::unique_ptr<RedBlackTreeNode> left;
     std::unique_ptr<RedBlackTreeNode> right;
     unsigned int numberOfNodesOnThisSubTree;
-    Color color;
+    Color parentLinkColor; // parent link color
 };
 
 }
