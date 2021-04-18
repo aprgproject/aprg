@@ -4,11 +4,9 @@
 #include <Common/Math/AlbaMathHelper.hpp>
 #include <Common/Math/Matrix/AlbaMatrixDataTypes.hpp>
 #include <Common/Math/Matrix/AlbaMatrixUtilities.hpp>
-#include <Common/String/AlbaStringHelper.hpp>
 #include <Common/User/DisplayTable.hpp>
 
-#include <cassert>
-#include <functional>
+#include <cassert>#include <functional>
 #include <sstream>
 
 namespace alba
@@ -55,10 +53,10 @@ public:
               matrixData.cbegin() + std::min(static_cast<unsigned int>(matrixData.size()), numberOfColumns*numberOfRows))
     {
         fillRemainingEntriesToZeroIfNeeded(numberOfColumns, numberOfRows);
+        m_matrixData.shrink_to_fit();
     }
 
-    bool operator==(AlbaMatrix const& secondMatrix) const
-    {
+    bool operator==(AlbaMatrix const& secondMatrix) const    {
         bool isEqual(true);
         if(m_numberOfColumns != secondMatrix.m_numberOfColumns)
         {
@@ -248,10 +246,10 @@ public:
         m_numberOfRows = numberOfRows;
         m_matrixData.clear();
         m_matrixData.resize(numberOfColumns*numberOfRows, DataType{});
+        m_matrixData.shrink_to_fit();
     }
 
-    void negate()
-    {
+    void negate()    {
         for(DataType & value : m_matrixData)
         {
             value *= -1;
