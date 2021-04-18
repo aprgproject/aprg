@@ -15,22 +15,16 @@ template <typename Key, typename Value>
 class BinarySearchTreeSymbolTable
         : public BaseBinarySearchTreeSymbolTable<Key, Value, BinarySearchTreeNode::BasicTreeNode<Key, Value>>
 {
-
 public:
+    using BaseClass = BaseBinarySearchTreeSymbolTable<Key, Value, BinarySearchTreeNode::BasicTreeNode<Key, Value>>;
     using Node = BinarySearchTreeNode::BasicTreeNode<Key, Value>;
-    using NodeUniquePointer = std::unique_ptr<Node>;
-
-    void put(Key const& key, Value const& value) override
-    {
-        putStartingOnThisNode(this->m_root, key, value);
-    }
+    using NodeUniquePointer = typename BaseClass::NodeUniquePointer;
 
 protected:
-    void putStartingOnThisNode(NodeUniquePointer & nodePointer, Key const& key, Value const& value)
+    void putStartingOnThisNode(NodeUniquePointer & nodePointer, Key const& key, Value const& value) override
     {
         if(nodePointer)
-        {
-            Key const& currentKey(nodePointer->key);
+        {            Key const& currentKey(nodePointer->key);
             if(key < currentKey)
             {
                 putStartingOnThisNode(nodePointer->left, key, value);

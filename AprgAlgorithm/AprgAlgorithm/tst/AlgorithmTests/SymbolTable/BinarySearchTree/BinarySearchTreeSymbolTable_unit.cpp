@@ -16,10 +16,10 @@ namespace algorithm
 namespace
 {
 using SymbolTableForTest = BinarySearchTreeSymbolTable<unsigned int, char>;
+using NodeForTest = BinarySearchTreeNode::BasicTreeNode<unsigned int, char>;
 }
 
-TEST(BinarySearchTreeSymbolTableTest, IsEmptyWorksWhenEmpty)
-{
+TEST(BinarySearchTreeSymbolTableTest, IsEmptyWorksWhenEmpty){
     testIsEmptyWhenEmptyWithUnsignedIntAndChar<SymbolTableForTest>();
 }
 
@@ -106,6 +106,22 @@ TEST(BinarySearchTreeSymbolTableTest, GetKeys)
 TEST(BinarySearchTreeSymbolTableTest, GetKeysInRangeWorks)
 {
     testGetKeysInRangeInclusiveWithUnsignedIntAndChar<SymbolTableForTest>();
+}
+
+TEST(BinarySearchTreeSymbolTableTest, GetRootWorks)
+{
+    SymbolTableForTest symbolTable;
+    symbolTable.put(8U, 'H');
+
+    auto const& expectedRoot(symbolTable.getRoot());
+
+    NodeForTest node{8U, 'H', nullptr, nullptr, 1U};
+    ASSERT_TRUE(expectedRoot);
+    EXPECT_EQ(node.key, expectedRoot->key);
+    EXPECT_EQ(node.value, expectedRoot->value);
+    EXPECT_EQ(node.left, expectedRoot->left);
+    EXPECT_EQ(node.right, expectedRoot->right);
+    EXPECT_EQ(node.numberOfNodesOnThisSubTree, expectedRoot->numberOfNodesOnThisSubTree);
 }
 
 }
