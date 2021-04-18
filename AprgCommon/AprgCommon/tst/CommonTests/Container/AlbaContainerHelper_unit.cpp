@@ -41,7 +41,8 @@ TEST(ContainerTest, GetLowerAndUpperValuesInSetWorks)
 
     EXPECT_EQ((pair<int,int>(-10, -10)), getLowerAndUpperValuesInSet(sampleSet, -100));
     EXPECT_EQ((pair<int,int>(-10, -10)), getLowerAndUpperValuesInSet(sampleSet, -10));
-    EXPECT_EQ((pair<int,int>(50, 50)), getLowerAndUpperValuesInSet(sampleSet, 50));    EXPECT_EQ((pair<int,int>(50, 50)), getLowerAndUpperValuesInSet(sampleSet, 10000));
+    EXPECT_EQ((pair<int,int>(50, 50)), getLowerAndUpperValuesInSet(sampleSet, 50));
+    EXPECT_EQ((pair<int,int>(50, 50)), getLowerAndUpperValuesInSet(sampleSet, 10000));
     EXPECT_EQ((pair<int,int>(23, 23)), getLowerAndUpperValuesInSet(sampleSet, 23));
     EXPECT_EQ((pair<int,int>(5, 23)), getLowerAndUpperValuesInSet(sampleSet, 7));
 }
@@ -72,6 +73,7 @@ TEST(ContainerTest, GetLowerAndUpperConstIteratorsInMapWorks)
     map<unsigned int, unsigned int> sampleMap{{1, 10}, {3, 30}, {5, 50}};
     using MapIterator=map<unsigned int, unsigned int>::const_iterator;
     using PairOfIterators=pair<MapIterator, MapIterator>;
+
     MapIterator firstIterator=sampleMap.find(1);
     MapIterator secondIterator=sampleMap.find(3);
     MapIterator thirdIterator=sampleMap.find(5);
@@ -98,7 +100,8 @@ TEST(ContainerTest, GetLowerAndUpperConstIteratorsInMapWorks)
 TEST(ContainerTest, GetLowerAndUpperIteratorsInMapWorks)
 {
     map<unsigned int, unsigned int> sampleMap{{1, 10}, {3, 30}, {5, 50}};
-    using MapIterator=map<unsigned int, unsigned int>::iterator;    using PairOfIterators=pair<MapIterator, MapIterator>;
+    using MapIterator=map<unsigned int, unsigned int>::iterator;
+    using PairOfIterators=pair<MapIterator, MapIterator>;
 
     MapIterator firstIterator=sampleMap.find(1);
     MapIterator secondIterator=sampleMap.find(3);
@@ -126,7 +129,8 @@ TEST(ContainerTest, GetLowerAndUpperIteratorsInMapWorks)
 TEST(ContainerTest, GetLowerAndUpperConstIteratorsInMultiMapWorks)
 {
     multimap<unsigned int, unsigned int> sampleMap{{1, 11}, {1, 12}, {3, 31}, {3, 32}, {5, 51}, {5, 52}};
-    using MultimapIterator=multimap<unsigned int, unsigned int>::const_iterator;    using PairOfIterators=pair<MultimapIterator, MultimapIterator>;
+    using MultimapIterator=multimap<unsigned int, unsigned int>::const_iterator;
+    using PairOfIterators=pair<MultimapIterator, MultimapIterator>;
 
     MultimapIterator firstIterator=sampleMap.begin();
     MultimapIterator secondIterator=firstIterator;
@@ -162,7 +166,8 @@ TEST(ContainerTest, GetLowerAndUpperConstIteratorsInMultiMapWorks)
 TEST(ContainerTest, GetLowerAndUpperIteratorsInMultiMapWorks)
 {
     multimap<unsigned int, unsigned int> sampleMap{{1, 11}, {1, 12}, {3, 31}, {3, 32}, {5, 51}, {5, 52}};
-    using MultimapIterator=multimap<unsigned int, unsigned int>::iterator;    using PairOfIterators=pair<MultimapIterator, MultimapIterator>;
+    using MultimapIterator=multimap<unsigned int, unsigned int>::iterator;
+    using PairOfIterators=pair<MultimapIterator, MultimapIterator>;
 
     MultimapIterator firstIterator=sampleMap.begin();
     MultimapIterator secondIterator=firstIterator;
@@ -198,7 +203,8 @@ TEST(ContainerTest, GetLowerAndUpperIteratorsInMultiMapWorks)
 TEST(ContainerTest, SaveVectorOfIntegersToFileWorks)
 {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
-    std::array<int, 6> temporaryArray{0, -23, 4, 379,- 482, 37};    ofstream outputTestFile(testFilePath.getFullPath());
+    std::array<int, 6> temporaryArray{0, -23, 4, 379,- 482, 37};
+    ofstream outputTestFile(testFilePath.getFullPath());
 
     saveContentsToStream(outputTestFile, temporaryArray, StreamFormat::File);
     outputTestFile.close();
@@ -223,7 +229,8 @@ TEST(ContainerTest, SaveVectorOfIntegersToFileWorks)
 TEST(ContainerTest, SaveArrayOfIntegersToFileWorks)
 {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
-    vector<int> temporaryVector{0, -23, 4, 379,- 482, 37};    ofstream outputTestFile(testFilePath.getFullPath());
+    vector<int> temporaryVector{0, -23, 4, 379,- 482, 37};
+    ofstream outputTestFile(testFilePath.getFullPath());
 
     saveContentsToStream(outputTestFile, temporaryVector, StreamFormat::File);
     outputTestFile.close();
@@ -248,7 +255,8 @@ TEST(ContainerTest, SaveArrayOfIntegersToFileWorks)
 TEST(ContainerTest, SaveSetOfIntegersToFileWorks)
 {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
-    set<int> temporarySet{0, -23, 4, 379,- 482, 37};    ofstream outputTestFile(testFilePath.getFullPath());
+    set<int> temporarySet{0, -23, 4, 379,- 482, 37};
+    ofstream outputTestFile(testFilePath.getFullPath());
 
     saveContentsToStream(outputTestFile, temporarySet, StreamFormat::File);
     outputTestFile.close();
@@ -273,7 +281,8 @@ TEST(ContainerTest, SaveSetOfIntegersToFileWorks)
 TEST(ContainerTest, SaveMapOfIntegersToFileWorks)
 {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
-    map<int,int> temporaryMap;    temporaryMap[83] = 95;
+    map<int,int> temporaryMap;
+    temporaryMap[83] = 95;
     temporaryMap[2348] = 17;
     temporaryMap[-76] = 74;
 
@@ -302,7 +311,8 @@ TEST(ContainerTest, SaveMapOfIntegersToFileWorks)
 TEST(ContainerTest, RetrieveVectorOfIntegersFromFileWorks)
 {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
-    std::array<int, 4> temporaryArray{};    ofstream outputTestFile(testFilePath.getFullPath());
+    std::array<int, 4> temporaryArray{};
+    ofstream outputTestFile(testFilePath.getFullPath());
     outputTestFile<<"18723"<<endl;
     outputTestFile<<"-608"<<endl;
     outputTestFile<<"-43735"<<endl;
@@ -325,7 +335,8 @@ TEST(ContainerTest, RetrieveVectorOfIntegersFromFileWorks)
 TEST(ContainerTest, RetrieveArrayOfIntegersFromFileWorks)
 {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
-    vector<int> temporaryVector;    ofstream outputTestFile(testFilePath.getFullPath());
+    vector<int> temporaryVector;
+    ofstream outputTestFile(testFilePath.getFullPath());
     outputTestFile<<"18723"<<endl;
     outputTestFile<<"-608"<<endl;
     outputTestFile<<"-43735"<<endl;
@@ -348,7 +359,8 @@ TEST(ContainerTest, RetrieveArrayOfIntegersFromFileWorks)
 TEST(ContainerTest, RetrieveSetOfIntegersFromFileWorks)
 {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
-    set<int> temporarySet;    ofstream outputTestFile(testFilePath.getFullPath());
+    set<int> temporarySet;
+    ofstream outputTestFile(testFilePath.getFullPath());
     outputTestFile<<"18723"<<endl;
     outputTestFile<<"-608"<<endl;
     outputTestFile<<"-43735"<<endl;
@@ -371,7 +383,8 @@ TEST(ContainerTest, RetrieveSetOfIntegersFromFileWorks)
 TEST(ContainerTest, RetrieveMapOfIntegersFromFileWorks)
 {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
-    map<int,int> temporaryMap;    ofstream outputTestFile(testFilePath.getFullPath());
+    map<int,int> temporaryMap;
+    ofstream outputTestFile(testFilePath.getFullPath());
     outputTestFile<<"1"<<endl;
     outputTestFile<<"2"<<endl;
     outputTestFile<<"3"<<endl;
@@ -413,7 +426,8 @@ TEST(ContainerTest, GetStringFromContentsOfSetWorks)
 TEST(ContainerTest, GetStringFromContentsOfMapWorks)
 {
     map<int,int> temporaryMap;
-    temporaryMap[83] = 95;    temporaryMap[2348] = 17;
+    temporaryMap[83] = 95;
+    temporaryMap[2348] = 17;
     temporaryMap[-76] = 74;
     EXPECT_EQ("{-76:74}, {83:95}, {2348:17}, ", getStringFromContents(temporaryMap));
 }

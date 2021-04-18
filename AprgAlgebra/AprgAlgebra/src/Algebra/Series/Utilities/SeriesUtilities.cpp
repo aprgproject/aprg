@@ -145,7 +145,8 @@ void performIntegralTest(
     else if(!isNan(integratedTerm))
     {
         isConvergent = true;
-    }}
+    }
+}
 
 void performRatioTest(
         bool & isConvergent,

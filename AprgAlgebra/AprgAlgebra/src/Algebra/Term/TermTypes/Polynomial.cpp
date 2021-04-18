@@ -136,7 +136,8 @@ void Polynomial::simplify()
         if(hasNan(*this))
         {
             setNan();
-        }        else
+        }
+        else
         {
             simplifyContinuouslyIfChanged();
         }
@@ -259,7 +260,8 @@ bool Polynomial::isFurtherSimplificationNeeded(
     return beforeSimplify != afterSimplify && !hasNan(afterSimplify);
 }
 
-void Polynomial::setNan(){
+void Polynomial::setNan()
+{
     m_monomials.clear();
     addMonomial(Monomial(AlbaNumber(AlbaNumber::Value::NotANumber), {}));
 }

@@ -75,7 +75,8 @@ void Summation::calculateSumFromANumberToANumber(
         if(isNan(m_summationModel))
         {
             calculateSumUsingEachTerm(result, startNumber, endNumber);
-        }        else
+        }
+        else
         {
             calculateSumUsingModel(result, startNumber, endNumber);
         }

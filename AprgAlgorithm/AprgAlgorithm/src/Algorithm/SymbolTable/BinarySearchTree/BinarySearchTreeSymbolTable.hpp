@@ -4,6 +4,7 @@
 #include <Algorithm/SymbolTable/BinarySearchTree/Common/BinarySearchTreeNode.hpp>
 
 #include <memory>
+
 namespace alba
 {
 

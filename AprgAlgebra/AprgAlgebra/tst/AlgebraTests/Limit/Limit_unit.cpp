@@ -168,7 +168,8 @@ TEST(LimitTest, GetLimitWithMultipleVariablesWithDifferentApproachesWorksOnExamp
     EXPECT_TRUE(isNan(termToVerify));
 }
 
-TEST(LimitTest, GetLimitUsingLhopitalsRuleWorks){
+TEST(LimitTest, GetLimitUsingLhopitalsRuleWorks)
+{
     Term oneMinusEToTheX(createExpressionIfPossible({1, "-", getEAsTerm(), "^", "x"}));
     Term oneOverX(createExpressionIfPossible({1, "/", "x"}));
     Term termToTest1("x");
@@ -285,6 +286,7 @@ TEST(LimitTest, GetLimitAtAValueWorksForConstantOverPolynomial)
     EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::PositiveInfinity)), getLimitAtAValue(constantOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::PositiveSide));
     EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::NegativeInfinity)), getLimitAtAValue(constantOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::NegativeSide));
 }
+
 TEST(LimitTest, GetLimitAtAValueWorksForConstantOverPolynomialSquared)
 {
     Term numerator(3);
@@ -322,6 +324,7 @@ TEST(LimitTest, GetLimitAtAValueWorksForPolynomialOverPolynomialWithDiscontinuit
     EXPECT_EQ(Term(-3.88235294117647056211239942058), getLimitAtAValue(polynomialOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::NegativeSide));
 }
 
+
 TEST(LimitTest, GetLimitAtAValueWorksForPolynomialOverPolynomialWithEqualDegreeButNoCommonFactors                                                                                                                                                                                                                                               )
 {
     Term numerator(Polynomial{Monomial(2, {{"x", 2}}), Monomial(5, {})});
@@ -331,7 +334,8 @@ TEST(LimitTest, GetLimitAtAValueWorksForPolynomialOverPolynomialWithEqualDegreeB
     EXPECT_TRUE(isNan(getLimitAtAValue(polynomialOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::BothSides)));
     EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::PositiveInfinity)),
               getLimitAtAValue(polynomialOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::PositiveSide));
-    EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::NegativeInfinity)),              getLimitAtAValue(polynomialOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::NegativeSide));
+    EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::NegativeInfinity)),
+              getLimitAtAValue(polynomialOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::NegativeSide));
 }
 
 TEST(LimitTest, SimplifyAndGetLimitAtAValueWorksForPolynomialOverPolynomialWithDiscontinuityAtOneTwoThree_ThisCancelsProblematicFactors)
@@ -364,6 +368,7 @@ TEST(LimitTest, GetLimitAtAValueWorksForSignumFunction)
     EXPECT_EQ(Term(1), getLimitAtAValue(signumFunctionTerm, "x", 0, LimitAtAValueApproachType::PositiveSide));
     EXPECT_EQ(Term(-1), getLimitAtAValue(signumFunctionTerm, "x", 0, LimitAtAValueApproachType::NegativeSide));
 }
+
 TEST(LimitTest, GetLimitAtAValueWorksForAbsoluteValueFunction)
 {
     Term absoluteValueFunction(Functions::abs("x"));

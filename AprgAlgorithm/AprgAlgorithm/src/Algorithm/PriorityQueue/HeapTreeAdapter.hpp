@@ -3,7 +3,8 @@
 #include <algorithm>
 #include <utility>
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {
@@ -47,6 +48,7 @@ public:
             treeIndex = parentTreeIndex; // move to the next parent
         }
     }
+
     void sink(unsigned int const startTreeIndex)
     {
         sink(startTreeIndex, m_objects.size());
@@ -131,7 +133,8 @@ private:
 
     bool isComparisonSatisfied(
             Object const& object1,
-            Object const& object2) const    {
+            Object const& object2) const
+    {
         return m_comparisonObject(object1, object2);
     }
 

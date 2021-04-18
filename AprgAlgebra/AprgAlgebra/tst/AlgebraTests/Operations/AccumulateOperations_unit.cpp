@@ -76,7 +76,8 @@ TEST(AccumulateOperationsTest, AccumulateTermsForAdditionAndSubtractionWorksWith
     EXPECT_TRUE(isNan(termToTest));
 }
 
-TEST(AccumulateOperationsTest, AccumulateTermsForMultiplicationAndDivisionWorks){
+TEST(AccumulateOperationsTest, AccumulateTermsForMultiplicationAndDivisionWorks)
+{
     Term termToTest(1);
     Term xToTheY(createExpressionIfPossible({"x", "^", "y"}));
     Term term1(createExpressionIfPossible({11, "*", xToTheY}));

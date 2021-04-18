@@ -51,7 +51,8 @@ void LimitsAtInfinity::simplify()
         if(!isNan(m_simplifiedTermAtInfinity))
         {
             simplifyPolynomialToMaxDegreeMonomialOnly();
-        }    }
+        }
+    }
 }
 
 void LimitsAtInfinity::simplifyAsATerm()

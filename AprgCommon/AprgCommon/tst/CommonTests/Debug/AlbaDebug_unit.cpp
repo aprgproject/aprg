@@ -15,7 +15,8 @@ namespace alba
 TEST(AlbaDebugTest, PrintTest)
 {
     unsigned int singleParameter1=75, singleParameter2=75, singleParameter3=75;
-    unique_ptr<unsigned int> uniquePointer(make_unique<unsigned int>(695));    unsigned int const* nullPointer = nullptr;
+    unique_ptr<unsigned int> uniquePointer(make_unique<unsigned int>(695));
+    unsigned int const* nullPointer = nullptr;
     unsigned int const* rawPointer = uniquePointer.get();
     vector<unsigned int> container1{454, 6, 512, 315};
     map<unsigned int, char> container2{{1U, 'A'}, {5U, 'E'}, {7U, 'G'}, {8U, 'H'}};

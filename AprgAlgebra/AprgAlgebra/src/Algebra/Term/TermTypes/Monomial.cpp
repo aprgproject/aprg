@@ -275,7 +275,8 @@ void Monomial::setNanIfNeeded()
     if(hasNan(*this))
     {
         m_variablesToExponentsMap.clear();
-        setConstant(AlbaNumber(AlbaNumber::Value::NotANumber));    }
+        setConstant(AlbaNumber(AlbaNumber::Value::NotANumber));
+    }
 }
 
 void Monomial::removeZeroExponents()

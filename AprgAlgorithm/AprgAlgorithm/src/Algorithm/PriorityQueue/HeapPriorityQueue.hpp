@@ -58,6 +58,7 @@ public:
     }
 
 private:
+
     unsigned int getIndexOfLastItemOfTheTree() const
     {
         return getSize();

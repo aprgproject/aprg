@@ -324,7 +324,8 @@ TEST(DifferentiationTest, DifferentiateExpressionWorks)
     EXPECT_TRUE(isNan(expressionToVerify10));
 }
 
-TEST(DifferentiationTest, DifferentiateFunctionWorksWithFunctionsInCommonFunctionLibrary){
+TEST(DifferentiationTest, DifferentiateFunctionWorksWithFunctionsInCommonFunctionLibrary)
+{
     Differentiation differentiationForXWithY("x", {"y"});
 
     Term termToVerify01(differentiationForXWithY.differentiateFunction(abs("x")));
@@ -490,7 +491,8 @@ TEST(DifferentiationTest, DifferentiateWorksWithTermRaiseToTerm)
     EXPECT_TRUE(isNan(termToVerify4));
 }
 
-TEST(DifferentiationTest, DifferentiateWorksWithDivisionExpressionRaiseToAConstant){
+TEST(DifferentiationTest, DifferentiateWorksWithDivisionExpressionRaiseToAConstant)
+{
     Differentiation differentiationForX("x");
     Term subTerm1(createExpressionIfPossible({2, "/", Polynomial{Monomial(1, {{"x", 1}}), Monomial(-1, {})}}));
     Term termToTest(createExpressionIfPossible({subTerm1, "^", 5}));

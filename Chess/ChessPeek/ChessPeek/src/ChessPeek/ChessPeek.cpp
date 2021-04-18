@@ -268,6 +268,7 @@ DisplayTable ChessPeek::getDisplayTable(Move const& actualMove) const
     displayTable.setBorders("-", "|");
     return displayTable;
 }
+
 void ChessPeek::retrieveChessCellBitValueAt(
         BitSet64 & whiteValue,
         BitSet64 & blackValue,

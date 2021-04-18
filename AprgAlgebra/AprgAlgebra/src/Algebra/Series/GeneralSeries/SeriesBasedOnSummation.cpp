@@ -24,7 +24,8 @@ SeriesBasedOnSummation::SeriesBasedOnSummation(
     , m_isSummationModelValid(!isNan(getFormulaForSeries()))
 {}
 
-bool SeriesBasedOnSummation::isSummationModelValid() const{
+bool SeriesBasedOnSummation::isSummationModelValid() const
+{
     return m_isSummationModelValid;
 }
 

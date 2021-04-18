@@ -86,7 +86,8 @@ PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::divide(
     while(!isTheValue(currentRemainder, 0) && !isNan(currentRemainder))
     {
         Monomial const& dividendMonomial(getFirstMonomial(currentRemainder));
-        Monomial const& divisorMonomial(getFirstMonomial(m_denominator));        Monomial currentQuotientMonomial(dividendMonomial);
+        Monomial const& divisorMonomial(getFirstMonomial(m_denominator));
+        Monomial currentQuotientMonomial(dividendMonomial);
         currentQuotientMonomial.divideMonomial(divisorMonomial);
         if(!hasNegativeExponents(currentQuotientMonomial))
         {
