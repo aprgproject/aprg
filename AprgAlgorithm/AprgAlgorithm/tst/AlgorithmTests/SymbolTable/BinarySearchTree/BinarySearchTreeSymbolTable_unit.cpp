@@ -19,7 +19,8 @@ using SymbolTableForTest = BinarySearchTreeSymbolTable<unsigned int, char>;
 using NodeForTest = BinarySearchTreeNode::BasicTreeNode<unsigned int, char>;
 }
 
-TEST(BinarySearchTreeSymbolTableTest, IsEmptyWorksWhenEmpty){
+TEST(BinarySearchTreeSymbolTableTest, IsEmptyWorksWhenEmpty)
+{
     testIsEmptyWhenEmptyWithUnsignedIntAndChar<SymbolTableForTest>();
 }
 

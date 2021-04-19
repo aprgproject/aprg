@@ -18,7 +18,8 @@ using SearchForTest = NearestPointSearch<double>;
 TEST(NearestPointSearchTest, GetNearestPointWorksWhenPointIsAtTheLeft)
 {
     SearchForTest search;
-    search.addPoint({0, 0});    search.addPoint({-5, 0});
+    search.addPoint({0, 0});
+    search.addPoint({-5, 0});
     search.addPoint({5, 0});
 
     auto pointToVerify(search.getNearestPoint({-3, 0}));
@@ -30,7 +31,8 @@ TEST(NearestPointSearchTest, GetNearestPointWorksWhenPointIsAtTheLeft)
 TEST(NearestPointSearchTest, GetNearestPointWorksWhenPointIsAtTheRight)
 {
     SearchForTest search;
-    search.addPoint({0, 0});    search.addPoint({-5, 0});
+    search.addPoint({0, 0});
+    search.addPoint({-5, 0});
     search.addPoint({5, 0});
 
     auto pointToVerify(search.getNearestPoint({3, 0}));
@@ -42,7 +44,8 @@ TEST(NearestPointSearchTest, GetNearestPointWorksWhenPointIsAtTheRight)
 TEST(NearestPointSearchTest, GetNearestPointWorksOnComplicatedExample)
 {
     SearchForTest search;
-    search.addPoint({0, 0});    search.addPoint({3, -2});
+    search.addPoint({0, 0});
+    search.addPoint({3, -2});
     search.addPoint({-2, 2});
     search.addPoint({-3, -4});
     search.addPoint({-4, 0});

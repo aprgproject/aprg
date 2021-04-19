@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -51,6 +52,7 @@ public:
     using Point = std::pair<Unit, Unit>;
     using TwoDTree = KdTree<Point, unsigned int>;
     using NodeUniquePointer = typename TwoDTree::NodeUniquePointer;
+
     enum class SearchAction
     {
         Nothing,
@@ -58,6 +60,7 @@ public:
         GoToRightChild,
         GoToBoth
     };
+
     struct SearchDetails
     {
         Point pointToCheck;
@@ -110,6 +113,7 @@ private:
         }
         depth--;
     }
+
     SearchAction getSearchAction(NodeUniquePointer const& nodePointer, Point const& pointToCheck, unsigned int const depth) const
     {
         SearchAction result(SearchAction::Nothing);
@@ -127,7 +131,8 @@ private:
                             result = SearchAction::GoToLeftChild;
                         }
                         else // point to check is to the right of left child  (arrangement L <- * <- N)
-                        {                            result = SearchAction::GoToBoth;
+                        {
+                            result = SearchAction::GoToBoth;
                         }
                     }
                     else if(nodePointer->right)
@@ -135,7 +140,8 @@ private:
                         result = SearchAction::GoToRightChild;
                     }
                 }
-                else // point to check is to the right (arrangement N -> *)                {
+                else // point to check is to the right (arrangement N -> *)
+                {
                     if(nodePointer->right)
                     {
                         if(nodePointer->right->key.first < pointToCheck.first) // point to check is to the right of right child  (arrangement N -> R -> *)
@@ -143,7 +149,8 @@ private:
                             result = SearchAction::GoToRightChild;
                         }
                         else // point to check is to the left of right child  (arrangement N -> * -> R)
-                        {                            result = SearchAction::GoToBoth;
+                        {
+                            result = SearchAction::GoToBoth;
                         }
                     }
                     else if(nodePointer->left)
@@ -151,7 +158,8 @@ private:
                         result = SearchAction::GoToLeftChild;
                     }
                 }
-            }            else
+            }
+            else
             {
                 // same logic but top and bottom
                 if(pointToCheck.second < currentPoint.second) // point to check is to the left (arrangement * <- N)
@@ -163,7 +171,8 @@ private:
                             result = SearchAction::GoToLeftChild;
                         }
                         else // point to check is to the right of left child  (arrangement L <- * <- N)
-                        {                            result = SearchAction::GoToBoth;
+                        {
+                            result = SearchAction::GoToBoth;
                         }
                     }
                     else if(nodePointer->right)
@@ -171,7 +180,8 @@ private:
                         result = SearchAction::GoToRightChild;
                     }
                 }
-                else // point to check is to the right (arrangement N -> *)                {
+                else // point to check is to the right (arrangement N -> *)
+                {
                     if(nodePointer->right)
                     {
                         if(nodePointer->right->key.second < pointToCheck.second) // point to check is to the right of right child  (arrangement N -> R -> *)
@@ -179,7 +189,8 @@ private:
                             result = SearchAction::GoToRightChild;
                         }
                         else // point to check is to the left of right child  (arrangement N -> * -> R)
-                        {                            result = SearchAction::GoToBoth;
+                        {
+                            result = SearchAction::GoToBoth;
                         }
                     }
                     else if(nodePointer->left)
@@ -187,7 +198,8 @@ private:
                         result = SearchAction::GoToLeftChild;
                     }
                 }
-            }        }
+            }
+        }
         return result;
     }
 

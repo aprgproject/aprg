@@ -6,7 +6,8 @@
 #include <Common/Math/Matrix/AlbaMatrixUtilities.hpp>
 #include <Common/User/DisplayTable.hpp>
 
-#include <cassert>#include <functional>
+#include <cassert>
+#include <functional>
 #include <sstream>
 
 namespace alba
@@ -56,7 +57,8 @@ public:
         m_matrixData.shrink_to_fit();
     }
 
-    bool operator==(AlbaMatrix const& secondMatrix) const    {
+    bool operator==(AlbaMatrix const& secondMatrix) const
+    {
         bool isEqual(true);
         if(m_numberOfColumns != secondMatrix.m_numberOfColumns)
         {
@@ -249,7 +251,8 @@ public:
         m_matrixData.shrink_to_fit();
     }
 
-    void negate()    {
+    void negate()
+    {
         for(DataType & value : m_matrixData)
         {
             value *= -1;
