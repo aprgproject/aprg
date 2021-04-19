@@ -238,9 +238,9 @@ unsigned int getMaxDegree(BaseGraph<Vertex> const& graph)
 template <typename Vertex>
 double getAverageDegree(BaseGraph<Vertex> const& graph)
 {
+    // Times two because edges are only counted once and degree is per vertex
     return static_cast<double>(graph.getNumberOfEdges()) / graph.getNumberOfVertices() * 2;
 }
-
 template <typename Vertex>
 unsigned int getNumberOfSelfLoops(BaseGraph<Vertex> const& graph)
 {
