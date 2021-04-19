@@ -157,11 +157,10 @@ protected:
         return getSizeOnThisNode(node.left) + getSizeOnThisNode(node.right) + 1;
     }
 
-    void updateNodeDetails(Node & node) const
+    virtual void updateNodeDetails(Node & node) const
     {
         node.numberOfNodesOnThisSubTree = calculateSizeOfNodeBasedFromLeftAndRight(node);
     }
-
     virtual bool doesContainStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const
     {
         bool result(false);

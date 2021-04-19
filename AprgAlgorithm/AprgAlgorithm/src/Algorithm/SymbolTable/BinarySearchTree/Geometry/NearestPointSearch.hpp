@@ -72,15 +72,11 @@ public:
     {
         Point result{};
         NodeUniquePointer const& root(m_twoDTree.getRoot());
-        if(root)
-        {
-            SearchDetails searchDetails{pointToCheck, root->key, getDistance(root->key, pointToCheck)};
-            searchNearestPoint(root, searchDetails);
-            result = searchDetails.nearestPoint;
-        }
+        SearchDetails searchDetails{pointToCheck, root->key, getDistance(root->key, pointToCheck)};
+        searchNearestPoint(root, searchDetails);
+        result = searchDetails.nearestPoint;
         return result;
     }
-
     void addPoint(Point const& point)
     {
         m_twoDTree.put(point, {});
