@@ -174,11 +174,10 @@ TEST(GraphUtilitiesTest, IsASpanningForestWorks)
     EXPECT_FALSE(isASpanningForest(mainGraph, nonSpanningForest));
 }
 
-TEST(GraphUtilitiesTest, IsGraphConnectedWorks)
+TEST(GraphUtilitiesTest, IsGraphConnectedWorksForUndirectedGraphs)
 {
     UndirectedGraphForTest connectedGraph;
-    connectedGraph.connect(0U, 1U);
-    connectedGraph.connect(0U, 2U);
+    connectedGraph.connect(0U, 1U);    connectedGraph.connect(0U, 2U);
     connectedGraph.connect(0U, 3U);
     UndirectedGraphForTest nonConnectedGraph;
     nonConnectedGraph.connect(0U, 1U);
@@ -189,10 +188,25 @@ TEST(GraphUtilitiesTest, IsGraphConnectedWorks)
     EXPECT_FALSE(isGraphConnected(nonConnectedGraph));
 }
 
-TEST(GraphUtilitiesTest, IsGraphStronglyConnectedWorks)
+TEST(GraphUtilitiesTest, IsGraphConnectedWorksForDirectedGraphs)
 {
     DirectedGraphForTest stronglyConnectedGraph;
     stronglyConnectedGraph.connect(0U, 1U);
+    stronglyConnectedGraph.connect(1U, 2U);
+    stronglyConnectedGraph.connect(2U, 3U);
+    stronglyConnectedGraph.connect(3U, 0U);
+    DirectedGraphForTest nonStronglyConnectedGraph;
+    stronglyConnectedGraph.connect(0U, 1U);
+    stronglyConnectedGraph.connect(0U, 2U);
+    stronglyConnectedGraph.connect(0U, 3U);
+
+    EXPECT_TRUE(isGraphConnected(stronglyConnectedGraph));
+    EXPECT_FALSE(isGraphConnected(nonStronglyConnectedGraph));
+}
+
+TEST(GraphUtilitiesTest, IsGraphStronglyConnectedWorks)
+{
+    DirectedGraphForTest stronglyConnectedGraph;    stronglyConnectedGraph.connect(0U, 1U);
     stronglyConnectedGraph.connect(1U, 2U);
     stronglyConnectedGraph.connect(2U, 3U);
     stronglyConnectedGraph.connect(3U, 0U);
