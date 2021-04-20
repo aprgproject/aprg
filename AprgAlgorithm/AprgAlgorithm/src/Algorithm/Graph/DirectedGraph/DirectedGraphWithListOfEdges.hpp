@@ -21,9 +21,7 @@ public:
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using Edge = typename GraphTypes<Vertex>::Edge;
     using Edges = typename GraphTypes<Vertex>::Edges;
-    using EdgeInSet = typename GraphTypes<Vertex>::EdgeWithVertexComparison;
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
-
 
     DirectedGraphWithListOfEdges()
         : m_numberOfEdges(0U)
@@ -31,11 +29,10 @@ public:
 
     bool isDirectlyConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override
     {
-        return m_edges.find(EdgeInSet(sourceVertex, destinationVertex)) != m_edges.cend();
+        return m_edges.find({sourceVertex, destinationVertex}) != m_edges.cend();
     }
 
-    unsigned int getNumberOfVertices() const override
-    {
+    unsigned int getNumberOfVertices() const override    {
         return getUniqueVertices().size();
     }
 
@@ -47,15 +44,14 @@ public:
     Vertices getAdjacentVerticesAt(Vertex const& vertex) const override
     {
         Vertices result;
-        auto itLower = m_edges.lower_bound(EdgeInSet(vertex, 0));
-        auto itUpper = m_edges.lower_bound(EdgeInSet(vertex+1, 0));
-        std::for_each(itLower, itUpper, [&](EdgeInSet const& edgeInSet)
+        auto itLower = m_edges.lower_bound({vertex, 0});
+        auto itUpper = m_edges.lower_bound({vertex+1, 0});
+        std::for_each(itLower, itUpper, [&](Edge const& edge)
         {
-            result.emplace_back(edgeInSet.second);
+            result.emplace_back(edge.second);
         });
         return result;
     }
-
     Vertices getVertices() const override
     {
         SetOfVertices uniqueVertices(getUniqueVertices());
@@ -66,13 +62,12 @@ public:
     {
         Edges result;
         result.reserve(m_edges.size());
-        std::transform(m_edges.cbegin(), m_edges.cend(), std::back_inserter(result), [](EdgeInSet const& edgeInSet)
+        std::transform(m_edges.cbegin(), m_edges.cend(), std::back_inserter(result), [](Edge const& edge)
         {
-            return static_cast<Edge>(edgeInSet);
+            return edge;
         });
         return result;
     }
-
     std::string getDisplayableString() const override
     {
         std::stringstream ss;
