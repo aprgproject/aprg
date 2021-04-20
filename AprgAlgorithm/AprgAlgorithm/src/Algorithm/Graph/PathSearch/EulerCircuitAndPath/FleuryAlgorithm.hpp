@@ -167,11 +167,10 @@ private:
             auto nextEdgeToDeleteIt = std::find_if(currentEdges.cbegin(), currentEdges.cend(), [&](Edge const& currentEdge)
             {
                 return  edgeToDelete.second == currentEdge.first
-                    && isGraphStillConnectedWithoutOneEdge(graphToManipulate, edgeToDelete);
+                    && isGraphStillConnectedWithoutOneEdge(graphToManipulate, edgeToDelete);  // THIS IS COSTLY!
             });
             if(nextEdgeToDeleteIt != currentEdges.cend())
-            {
-                edgeToDelete = *nextEdgeToDeleteIt;
+            {                edgeToDelete = *nextEdgeToDeleteIt;
                 edgesInEulerCircuit.emplace_back(edgeToDelete);
                 currentEdges.erase(EdgeWithVertexComparison(edgeToDelete.first, edgeToDelete.second));
                 currentEdges.erase(EdgeWithVertexComparison(edgeToDelete.second, edgeToDelete.first));
