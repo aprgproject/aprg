@@ -129,7 +129,8 @@ TEST(ContainerTest, GetLowerAndUpperIteratorsInMapWorks)
 TEST(ContainerTest, GetLowerAndUpperConstIteratorsInMapWorksOnMultiMap)
 {
     multimap<unsigned int, unsigned int> sampleMap{{1, 11}, {1, 12}, {3, 31}, {3, 32}, {5, 51}, {5, 52}};
-    using MultimapIterator=multimap<unsigned int, unsigned int>::const_iterator;    using PairOfIterators=pair<MultimapIterator, MultimapIterator>;
+    using MultimapIterator=multimap<unsigned int, unsigned int>::const_iterator;
+    using PairOfIterators=pair<MultimapIterator, MultimapIterator>;
 
     MultimapIterator firstIterator=sampleMap.begin();
     MultimapIterator secondIterator=firstIterator;
@@ -165,7 +166,8 @@ TEST(ContainerTest, GetLowerAndUpperConstIteratorsInMapWorksOnMultiMap)
 TEST(ContainerTest, GetLowerAndUpperIteratorsInMapWorksOnMultiMap)
 {
     multimap<unsigned int, unsigned int> sampleMap{{1, 11}, {1, 12}, {3, 31}, {3, 32}, {5, 51}, {5, 52}};
-    using MultimapIterator=multimap<unsigned int, unsigned int>::iterator;    using PairOfIterators=pair<MultimapIterator, MultimapIterator>;
+    using MultimapIterator=multimap<unsigned int, unsigned int>::iterator;
+    using PairOfIterators=pair<MultimapIterator, MultimapIterator>;
 
     MultimapIterator firstIterator=sampleMap.begin();
     MultimapIterator secondIterator=firstIterator;
@@ -197,6 +199,7 @@ TEST(ContainerTest, GetLowerAndUpperIteratorsInMapWorksOnMultiMap)
     EXPECT_EQ(thirdIterator, iteratorsToVerify6.first);
     EXPECT_EQ(fourthIterator, iteratorsToVerify6.second);
 }
+
 TEST(ContainerTest, SaveVectorOfIntegersToFileWorks)
 {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);

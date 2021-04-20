@@ -22,7 +22,8 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWorksWithItemsThatCanPrint)
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWorksWithPointer)
 {
-    stringstream ssToVerify;    unsigned int integerToTest=500U;
+    stringstream ssToVerify;
+    unsigned int integerToTest=500U;
 
     printParameter(ssToVerify, "name", &integerToTest);
 
@@ -79,7 +80,8 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWorksWithPair)
     EXPECT_EQ("name : [(300, A)]", ssToVerify.str());
 }
 
-TEST(AlbaPrintFunctionsTest, PrintParameterWorksWithArray){
+TEST(AlbaPrintFunctionsTest, PrintParameterWorksWithArray)
+{
     stringstream ssToVerify;
     array<unsigned int, 5> vectorToTest{500U, 501U, 502U, 503U, 504U};
 

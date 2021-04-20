@@ -59,14 +59,16 @@ void RationalizeTermOverTerm::rationalize(
 {
     Term rationalizedTerm, multiplier;
     retrieveTermsForRationalization(rationalizedTerm, multiplier, termToRationalize);
-    while(!multiplier.isEmpty())    {
+    while(!multiplier.isEmpty())
+    {
         termToRationalize = rationalizedTerm;
         otherTerm = otherTerm * multiplier;
         simplifyForRationalize(termToRationalize);
         simplifyForRationalize(otherTerm);
         rationalizedTerm.clear();
         multiplier.clear();
-        retrieveTermsForRationalization(rationalizedTerm, multiplier, termToRationalize);    }
+        retrieveTermsForRationalization(rationalizedTerm, multiplier, termToRationalize);
+    }
 }
 
 void RationalizeTermOverTerm::simplifyForRationalize(Term & term)

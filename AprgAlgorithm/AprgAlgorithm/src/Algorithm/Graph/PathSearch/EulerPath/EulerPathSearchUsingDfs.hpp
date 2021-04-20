@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Algorithm/Graph/PathSearch/EulerCircuitAndPath/BaseEulerPathSearch.hpp>
+#include <Algorithm/Graph/PathSearch/EulerPath/BaseEulerPathSearch.hpp>
 
 #include <algorithm>
 #include <queue>
@@ -29,13 +29,13 @@ public:
         : BaseClass(graph)
     {}
 
-    Path getEulerCircuit() const override
+    Path getEulerCycle() const override
     {
         Path result;
-        if(this->hasEulerCircuit())
+        if(this->hasEulerCycle())
         {
             StackOfVertices eulerPathInStack;
-            searchForEulerPathUsingDfs(eulerPathInStack, this->getStartingVertexForEulerCircuit());
+            searchForEulerPathUsingDfs(eulerPathInStack, this->getStartingVertexForEulerCycle());
             if(eulerPathInStack.size() == this->m_graph.getNumberOfVertices()+1)
             {
                 putStackOfVerticesOnPath(result, eulerPathInStack);
