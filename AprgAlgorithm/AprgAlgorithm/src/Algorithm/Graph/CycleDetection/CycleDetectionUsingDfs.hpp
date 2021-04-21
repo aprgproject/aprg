@@ -46,11 +46,10 @@ public:
 
 private:
 
-    bool isAVertexOnPossibleCycle(Vertex const& vertex) const
+    bool isThisVertexOnThePossibleCycle(Vertex const& vertex) const
     {
         return m_verticesInPossibleCycle.find(vertex) != m_verticesInPossibleCycle.cend();
     }
-
     Path getPathWithCycle(Vertex const& secondToTheLastVertex, Vertex const& lastVertex) const
     {
         bool isSuccessful(true);
@@ -112,11 +111,10 @@ private:
                 m_vertexToPreviousVertexMap[adjacentVertex] = startVertex;
                 checkForCyclesUsingDfsWithDirectedGraph(adjacentVertex);
             }
-            else if(isAVertexOnPossibleCycle(adjacentVertex)) // check processed vertices if part of a cycle
+            else if(isThisVertexOnThePossibleCycle(adjacentVertex)) // check processed vertices if part of a cycle
             {
                 m_pathWithCycle = getPathWithCycle(startVertex, adjacentVertex);
-            }
-        }
+            }        }
         m_verticesInPossibleCycle.erase(startVertex);
     }
 
@@ -135,11 +133,10 @@ private:
                 m_vertexToPreviousVertexMap[adjacentVertex] = startVertex;
                 checkForCyclesUsingDfsWithUndirectedGraph(adjacentVertex, startVertex);
             }
-            else if(previousVertex != adjacentVertex && isAVertexOnPossibleCycle(adjacentVertex)) // check processed vertices if part of a cycle
+            else if(previousVertex != adjacentVertex && isThisVertexOnThePossibleCycle(adjacentVertex)) // check processed vertices if part of a cycle
             {
                 // if previous and adjacent are equal then its the same edge (and not technically a cycle)
-                m_pathWithCycle = getPathWithCycle(startVertex, adjacentVertex);
-            }
+                m_pathWithCycle = getPathWithCycle(startVertex, adjacentVertex);            }
         }
         m_verticesInPossibleCycle.erase(startVertex);
     }
