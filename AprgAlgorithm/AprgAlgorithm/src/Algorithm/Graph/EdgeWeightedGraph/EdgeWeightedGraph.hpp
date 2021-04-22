@@ -22,6 +22,7 @@ public:
     using EdgeWithWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgeWithWeight;
     using EdgesWithWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgesWithWeight;
     using Weights = std::vector<Weight>;
+
     EdgeWeightedGraph()
         : BaseClass()
     {}
@@ -60,7 +61,8 @@ public:
         result.reserve(m_edgeToWeightMap.size());
         std::transform(m_edgeToWeightMap.cbegin(), m_edgeToWeightMap.cend(), std::back_inserter(result), [](auto const& edgeAndWeightPair)
         {
-            return EdgeWithWeight(edgeAndWeightPair.first.first, edgeAndWeightPair.first.second, edgeAndWeightPair.second);        });
+            return EdgeWithWeight(edgeAndWeightPair.first.first, edgeAndWeightPair.first.second, edgeAndWeightPair.second);
+        });
         return result;
     }
 
@@ -82,6 +84,7 @@ public:
         BaseClass::connect(vertex1, vertex2);
         m_edgeToWeightMap[createEdgeInMap(vertex1, vertex2)] = weight;
     }
+
     void disconnect(Vertex const& vertex1, Vertex const& vertex2) override
     {
         BaseClass::disconnect(vertex1, vertex2);
@@ -92,7 +95,8 @@ private:
 
     bool hasNoDuplicateWeights(Weights const& sortedWeights) const
     {
-        return std::adjacent_find(sortedWeights.cbegin(), sortedWeights.cend()) == sortedWeights.cend();    }
+        return std::adjacent_find(sortedWeights.cbegin(), sortedWeights.cend()) == sortedWeights.cend();
+    }
 
     Weights getAllWeights() const
     {
@@ -100,7 +104,8 @@ private:
         result.reserve(m_edgeToWeightMap.size());
         std::transform(m_edgeToWeightMap.cbegin(), m_edgeToWeightMap.cend(), std::back_inserter(result), [&](auto const& edgeAndWeightPair)
         {
-            return edgeAndWeightPair.second;        });
+            return edgeAndWeightPair.second;
+        });
         return result;
     }
 
@@ -115,6 +120,7 @@ private:
             return Edge(vertex1, vertex2);
         }
     }
+
     EdgeToWeightMap m_edgeToWeightMap;
 };
 

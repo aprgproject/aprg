@@ -23,6 +23,7 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
 
+
     DirectedGraphWithListOfEdges()
         : m_numberOfEdges(0U)
     {}
@@ -32,7 +33,8 @@ public:
         return m_edges.find({sourceVertex, destinationVertex}) != m_edges.cend();
     }
 
-    unsigned int getNumberOfVertices() const override    {
+    unsigned int getNumberOfVertices() const override
+    {
         return getUniqueVertices().size();
     }
 
@@ -52,6 +54,7 @@ public:
         });
         return result;
     }
+
     Vertices getVertices() const override
     {
         SetOfVertices uniqueVertices(getUniqueVertices());
@@ -68,6 +71,7 @@ public:
         });
         return result;
     }
+
     std::string getDisplayableString() const override
     {
         std::stringstream ss;

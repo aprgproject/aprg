@@ -50,6 +50,7 @@ private:
     {
         return m_verticesInPossibleCycle.find(vertex) != m_verticesInPossibleCycle.cend();
     }
+
     Path getPathWithCycle(Vertex const& secondToTheLastVertex, Vertex const& lastVertex) const
     {
         bool isSuccessful(true);
@@ -114,7 +115,8 @@ private:
             else if(isThisVertexOnThePossibleCycle(adjacentVertex)) // check processed vertices if part of a cycle
             {
                 m_pathWithCycle = getPathWithCycle(startVertex, adjacentVertex);
-            }        }
+            }
+        }
         m_verticesInPossibleCycle.erase(startVertex);
     }
 
@@ -136,7 +138,8 @@ private:
             else if(previousVertex != adjacentVertex && isThisVertexOnThePossibleCycle(adjacentVertex)) // check processed vertices if part of a cycle
             {
                 // if previous and adjacent are equal then its the same edge (and not technically a cycle)
-                m_pathWithCycle = getPathWithCycle(startVertex, adjacentVertex);            }
+                m_pathWithCycle = getPathWithCycle(startVertex, adjacentVertex);
+            }
         }
         m_verticesInPossibleCycle.erase(startVertex);
     }

@@ -21,7 +21,8 @@ public:
     using Edge = typename GraphTypes<Vertex>::Edge;
     using FlowDataTypes = std::vector<FlowDataType>;
 
-    struct FlowEdgeDetails    {
+    struct FlowEdgeDetails
+    {
         FlowDataType capacity;
         FlowDataType flow;
         bool operator==(FlowEdgeDetails const& second) const
@@ -79,7 +80,8 @@ public:
     using EdgeToFlowEdgeDetailsMap = std::map<Edge, FlowEdgeDetails>;
 
     FlowNetwork()
-        : BaseClass()    {
+        : BaseClass()
+    {
         static_assert(
                     GraphDirectionType::Directed == DirectedGraph::DIRECTION_TYPE,
                     "Flow network's underlying graph should be a directed graph");
@@ -101,7 +103,8 @@ public:
         auto it = m_edgeToFlowEdgeDetailsMap.find({vertex1, vertex2});
         if(it != m_edgeToFlowEdgeDetailsMap.cend())
         {
-            result = it->second;        }
+            result = it->second;
+        }
         return result;
     }
 
@@ -158,7 +161,8 @@ public:
         result.reserve(m_edgeToFlowEdgeDetailsMap.size());
         std::transform(m_edgeToFlowEdgeDetailsMap.cbegin(), m_edgeToFlowEdgeDetailsMap.cend(), std::back_inserter(result),
                        [](auto const& edgeAndDetailsPair)
-        {            return FlowEdge{edgeAndDetailsPair.first.first, edgeAndDetailsPair.first.second, edgeAndDetailsPair.second.capacity, edgeAndDetailsPair.second.flow};
+        {
+            return FlowEdge{edgeAndDetailsPair.first.first, edgeAndDetailsPair.first.second, edgeAndDetailsPair.second.capacity, edgeAndDetailsPair.second.flow};
         });
         return result;
     }
@@ -210,6 +214,7 @@ public:
         detailsToUpdate.capacity = flowEdge.capacity;
         detailsToUpdate.flow = flowEdge.flow;
     }
+
 private:
 
     void connect(Vertex const& vertex1, Vertex const& vertex2) override
@@ -228,7 +233,8 @@ private:
         result.reserve(m_edgeToFlowEdgeDetailsMap.size());
         std::transform(m_edgeToFlowEdgeDetailsMap.cbegin(), m_edgeToFlowEdgeDetailsMap.cend(), std::back_inserter(result),
                        [&](auto const& edgeAndDetailsPair)
-        {            return edgeAndDetailsPair.second.capacity;
+        {
+            return edgeAndDetailsPair.second.capacity;
         });
         return result;
     }
@@ -239,13 +245,15 @@ private:
         result.reserve(m_edgeToFlowEdgeDetailsMap.size());
         std::transform(m_edgeToFlowEdgeDetailsMap.cbegin(), m_edgeToFlowEdgeDetailsMap.cend(), std::back_inserter(result),
                        [&](auto const& edgeAndDetailsPair)
-        {            return edgeAndDetailsPair.second.flow;
+        {
+            return edgeAndDetailsPair.second.flow;
         });
         return result;
     }
 
     EdgeToFlowEdgeDetailsMap m_edgeToFlowEdgeDetailsMap;
 };
+
 }
 
 }

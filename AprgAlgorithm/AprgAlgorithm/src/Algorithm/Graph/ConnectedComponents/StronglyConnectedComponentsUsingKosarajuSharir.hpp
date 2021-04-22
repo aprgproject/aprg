@@ -56,7 +56,8 @@ private:
     DirectedGraphWithListOfEdgesWithVertex getGraphWithReversedDirections(BaseDirectedGraphWithVertex const& graph) const
     {
         DirectedGraphWithListOfEdgesWithVertex result;
-        for(Edge const& edge : graph.getEdges())        {
+        for(Edge const& edge : graph.getEdges())
+        {
             result.connect(edge.second, edge.first);
         }
         return result;
@@ -78,7 +79,8 @@ private:
         VertexOrderingUsingDfs<Vertex> vertexOrdering(graphWithReversedDirections);
         for(Vertex const& vertex : vertexOrdering.getVerticesInTopologicalOrder())
         {
-            if(m_processedVertices.isNotFound(vertex))            {
+            if(m_processedVertices.isNotFound(vertex))
+            {
                 traverseUsingDfs(vertex);
                 m_numberOfComponentIds++;
             }

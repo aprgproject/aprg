@@ -24,6 +24,7 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
     using GraphToManipulate = UndirectedGraphWithListOfEdges<Vertex>;
+
     FleuryAlgorithm(BaseUndirectedGraphWithVertex const& graph)
         : BaseClass(graph)
     {}
@@ -110,7 +111,8 @@ private:
                 currentEdges.erase({edgeToDelete.second, edgeToDelete.first});
             }
             else
-            {                isComplete = false;
+            {
+                isComplete = false;
                 break;
             }
         }

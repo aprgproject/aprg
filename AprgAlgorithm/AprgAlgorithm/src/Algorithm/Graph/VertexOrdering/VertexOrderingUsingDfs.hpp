@@ -27,7 +27,8 @@ public:
         ReversePostOrder, // order: dependent vertices are last in the list (topological sort)
     };
 
-    VertexOrderingUsingDfs(BaseGraphWithVertex const& graph)        : m_graph(graph)
+    VertexOrderingUsingDfs(BaseGraphWithVertex const& graph)
+        : m_graph(graph)
     {}
 
     Vertices traverseAndGetVertices(TraverseOrder const traverseOrder)
@@ -43,6 +44,7 @@ public:
         //Useful on determining path that checks prerequisites and precedence scheduling
         return traverseAndGetVertices(TraverseOrder::ReversePostOrder);
     }
+
 private:
 
     void clear()
@@ -57,6 +59,7 @@ private:
             std::reverse(traversedVertices.begin(), traversedVertices.end());
         }
     }
+
     void traverseStartingFromAllVertices(Vertices & traversedVertices, TraverseOrder const traverseOrder)
     {
         clear();
@@ -88,14 +91,16 @@ private:
             traversePostOrderAt(traversedVertices, startVertex);
             break;
         }
-        }    }
+        }
+    }
 
     void traversePreOrderAt(Vertices & traversedVertices, Vertex const& startVertex)
     {
         traversedVertices.emplace_back(startVertex); // add vertex before DFS
 
         m_processedVertices.putVertex(startVertex);
-        for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(startVertex))        {
+        for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(startVertex))
+        {
             if(m_processedVertices.isNotFound(adjacentVertex))
             {
                 traversePreOrderAt(traversedVertices, adjacentVertex);
