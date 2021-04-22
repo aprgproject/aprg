@@ -57,10 +57,10 @@ public:
     EdgesWithWeight getEdgesWithWeight() const
     {
         EdgesWithWeight result;
+        result.reserve(m_edgeToWeightMap.size());
         std::transform(m_edgeToWeightMap.cbegin(), m_edgeToWeightMap.cend(), std::back_inserter(result), [](auto const& edgeAndWeightPair)
         {
-            return EdgeWithWeight(edgeAndWeightPair.first.first, edgeAndWeightPair.first.second, edgeAndWeightPair.second);
-        });
+            return EdgeWithWeight(edgeAndWeightPair.first.first, edgeAndWeightPair.first.second, edgeAndWeightPair.second);        });
         return result;
     }
 
@@ -79,10 +79,9 @@ public:
 
     void connect(Vertex const& vertex1, Vertex const& vertex2, Weight const& weight)
     {
-        connect(vertex1, vertex2);
+        BaseClass::connect(vertex1, vertex2);
         m_edgeToWeightMap[createEdgeInMap(vertex1, vertex2)] = weight;
     }
-
     void disconnect(Vertex const& vertex1, Vertex const& vertex2) override
     {
         BaseClass::disconnect(vertex1, vertex2);
@@ -91,23 +90,17 @@ public:
 
 private:
 
-    void connect(Vertex const& vertex1, Vertex const& vertex2) override
-    {
-        BaseClass::connect(vertex1, vertex2);
-    }
-
     bool hasNoDuplicateWeights(Weights const& sortedWeights) const
     {
-        return std::adjacent_find(sortedWeights.cbegin(), sortedWeights.cend()) == sortedWeights.cend();
-    }
+        return std::adjacent_find(sortedWeights.cbegin(), sortedWeights.cend()) == sortedWeights.cend();    }
 
     Weights getAllWeights() const
     {
         Weights result;
+        result.reserve(m_edgeToWeightMap.size());
         std::transform(m_edgeToWeightMap.cbegin(), m_edgeToWeightMap.cend(), std::back_inserter(result), [&](auto const& edgeAndWeightPair)
         {
-            return edgeAndWeightPair.second;
-        });
+            return edgeAndWeightPair.second;        });
         return result;
     }
 
