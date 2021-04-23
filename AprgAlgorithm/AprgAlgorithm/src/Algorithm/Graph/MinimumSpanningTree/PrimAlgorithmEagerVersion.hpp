@@ -67,11 +67,9 @@ private:
     void checkAdjacentVerticesWithLowestWeightOfVertex(
             Vertex const& vertex)
     {
-        // DFS traversal
         m_processedVertices.putVertex(vertex);
         for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex))
-        {
-            if(m_processedVertices.isNotFound(adjacentVertex)) // only add vertices and edges from vertices not yet processed
+        {            if(m_processedVertices.isNotFound(adjacentVertex)) // only add vertices and edges from vertices not yet processed
             {
                 Weight weightForAdjacentVertex(m_graph.getWeight(vertex, adjacentVertex));
                 // check for vertex is not yet included or edge weight is smaller
