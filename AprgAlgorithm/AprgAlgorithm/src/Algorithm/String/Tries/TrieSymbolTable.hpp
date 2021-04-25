@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <array>
 #include <memory>
+
 namespace alba
 {
 
@@ -27,7 +28,8 @@ public:
         std::array<NodeUniquePointer, RADIX> next; // costly
     };
 
-    TrieSymbolTable()        : m_root(nullptr)
+    TrieSymbolTable()
+        : m_root(nullptr)
     {}
 
     bool isEmpty() const override
@@ -48,13 +50,13 @@ public:
 
     unsigned int getNumberOfNodes() const
     {
-        unsigned int nodes(getNumberOfNodes(m_root));
-        return (nodes > 1) ? nodes-1 : nodes; // dont count the root pointer
+        return getNumberOfNodes(m_root);
     }
 
     Value get(Key const& key) const override
     {
-        Value result{};        Node const*const nodePointer(get(m_root, key, 0));
+        Value result{};
+        Node const*const nodePointer(get(m_root, key, 0));
         if(nodePointer != nullptr)
         {
             ValueUniquePointer const& valueUniquePointer(nodePointer->valueUniquePointer);
@@ -82,7 +84,8 @@ public:
         deleteBasedOnKeyAndReturnIfDeleted(m_root, key, 0);
     }
 
-    Keys getKeys() const override    {
+    Keys getKeys() const override
+    {
         return getAllKeysWithPrefix(std::string());
     }
 
@@ -113,7 +116,8 @@ private:
 
     unsigned int getSize(NodeUniquePointer const& currentNodePointer) const
     {
-        unsigned int result(0);        if(currentNodePointer)
+        unsigned int result(0);
+        if(currentNodePointer)
         {
             ValueUniquePointer const& valueUniquePointer(currentNodePointer->valueUniquePointer);
             if(valueUniquePointer)
@@ -144,7 +148,8 @@ private:
 
     Node const* get(
             NodeUniquePointer const& currentNodePointer,
-            Key const& key,            unsigned int const index) const
+            Key const& key,
+            unsigned int const index) const
     {
         Node const* result(nullptr);
         if(currentNodePointer)
@@ -264,7 +269,8 @@ private:
         bool isDeleted(false);
         if(currentNodePointer)
         {
-            ValueUniquePointer & valueUniquePointer(currentNodePointer->valueUniquePointer);            if(index == key.length())
+            ValueUniquePointer & valueUniquePointer(currentNodePointer->valueUniquePointer);
+            if(index == key.length())
             {
                 valueUniquePointer.reset();
                 if(isEmptyNode(currentNodePointer))

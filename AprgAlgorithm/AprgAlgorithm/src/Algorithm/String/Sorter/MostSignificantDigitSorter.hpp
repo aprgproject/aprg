@@ -40,7 +40,8 @@ public:
             computeCumulatesToGetNewIndexes(newIndexes);
             copyBackUsingNewIndexes(stringsToSort, newIndexes, lowStringIndex, highStringIndex, digitIndex);
             sortForEachCharacterValue(stringsToSort, newIndexes, lowStringIndex, digitIndex);
-        }    }
+        }
+    }
 
 private:
     void saveFrequencyForEachCharacterAt(
@@ -70,7 +71,8 @@ private:
         // By getting the partial sum of each character index, we will know the new string index to put each string with this character
         unsigned int newIndexesSize = newIndexes.size();
         for(unsigned int i=0; i<newIndexesSize; i++)
-        {            newIndexes[i+1] += newIndexes.at(i);
+        {
+            newIndexes[i+1] += newIndexes.at(i);
         }
     }
 
@@ -88,7 +90,8 @@ private:
             // replace index uses the character index before it
             unsigned int replaceIndex = lowStringIndex + newIndexes[getCharacterAtIfPossible(copiedStrings.at(i), digitIndex)+1]++;
             stringsToSort[replaceIndex] = copiedStrings.at(i);
-        }    }
+        }
+    }
 
     void sortForEachCharacterValue(
             stringHelper::strings& stringsToSort,
@@ -107,7 +110,8 @@ private:
             // sort the sub arrays
             if(newLowStringIndex<newHighStringIndex)
             {
-                sortByMostSignificantDigit(                            stringsToSort,
+                sortByMostSignificantDigit(
+                            stringsToSort,
                             newLowStringIndex,
                             newHighStringIndex,
                             digitIndex+1);

@@ -57,6 +57,7 @@ public:
             sort(stringsToSort, indexForGreaterThan+1, highStringIndex, digitIndex);
         }
     }
+
 private:
     char getCharacterAtIfPossible(
             std::string const& currentString,

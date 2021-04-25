@@ -48,6 +48,11 @@ public:
         return getSize(m_root);
     }
 
+    unsigned int getNumberOfNodes() const
+    {
+        return getNumberOfNodes(m_root); // dont count the root pointer
+    }
+
     Value get(Key const& key) const override
     {
         Value result{};
@@ -82,7 +87,8 @@ public:
         deleteBasedOnKey(m_root, key, 0);
     }
 
-    Keys getKeys() const override    {
+    Keys getKeys() const override
+    {
         Keys result;
         collectAllKeysAtNode(m_root.get(), std::string(), result);
         return result;
@@ -125,6 +131,19 @@ private:
         return result;
     }
 
+    unsigned int getNumberOfNodes(NodeUniquePointer const& currentNodePointer) const
+    {
+        unsigned int result(0);
+        if(currentNodePointer)
+        {
+            result++;
+            result += getNumberOfNodes(currentNodePointer->left);
+            result += getNumberOfNodes(currentNodePointer->right);
+            result += getNumberOfNodes(currentNodePointer->mid);
+        }
+        return result;
+    }
+
     Node const* get(
             NodeUniquePointer const& currentNodePointer,
             Key const& key,
@@ -147,7 +166,8 @@ private:
                 result = get(currentNodePointer->mid, key, index+1); // only advance index when character is a match
             }
             else
-            {                result = currentNodePointer.get();
+            {
+                result = currentNodePointer.get();
             }
         }
         return result;
@@ -284,7 +304,8 @@ private:
     {
         if(currentNodePointer)
         {
-            unsigned int lastIndex = key.length() - 1;            ValueUniquePointer & valueUniquePointer(currentNodePointer->valueUniquePointer);
+            unsigned int lastIndex = key.length() - 1;
+            ValueUniquePointer & valueUniquePointer(currentNodePointer->valueUniquePointer);
             if(index < lastIndex)
             {
                 char charAtKey(key.at(index));
@@ -301,7 +322,8 @@ private:
                     deleteBasedOnKey(currentNodePointer->mid, key, index+1);
                 }
             }
-            else if(index == lastIndex)            {
+            else if(index == lastIndex)
+            {
                 valueUniquePointer.reset();
             }
             if(!currentNodePointer->valueUniquePointer && !currentNodePointer->mid)

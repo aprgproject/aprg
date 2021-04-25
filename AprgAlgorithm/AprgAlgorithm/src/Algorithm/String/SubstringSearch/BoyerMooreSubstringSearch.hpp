@@ -57,7 +57,8 @@ public:
                 result = searchIndex;
                 break;
             }
-        }        return result;
+        }
+        return result;
     }
 
 private:
