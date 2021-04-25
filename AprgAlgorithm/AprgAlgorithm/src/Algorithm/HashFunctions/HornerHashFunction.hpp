@@ -9,11 +9,10 @@ namespace algorithm
 {
 
 template <typename HashValue>
-class HornerHashFunction // horners rule
+class HornerHashFunction // horners rule: continuously mod to keep the value
 {
 public:
-    HornerHashFunction(HashValue const radix, HashValue const largeRandomPrime)
-        : m_radix(radix)
+    HornerHashFunction(HashValue const radix, HashValue const largeRandomPrime)        : m_radix(radix)
         , m_largeRandomPrime(largeRandomPrime)
     {}
 
@@ -28,13 +27,12 @@ public:
             unsigned int const endIndex)
     {
         HashValue result(0);
-        for(unsigned int i=startIndex; i<=endIndex; i++)
+        for(unsigned int i=startIndex; i<=endIndex; i++) // linear time
         {
-            result = (m_radix * result + input.at(i)) % m_largeRandomPrime;
+            result = (m_radix * result + input.at(i)) % m_largeRandomPrime; // continuously mod
         }
         return result;
     }
-
     HashValue getStartValue(unsigned int const length)
     {
         HashValue result(1);
