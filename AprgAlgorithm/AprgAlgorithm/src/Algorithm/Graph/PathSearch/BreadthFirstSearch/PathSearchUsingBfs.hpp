@@ -16,14 +16,21 @@ class PathSearchUsingBfs : public BasePathSearchWithBfsAndDfs<Vertex>
 public:
     using BaseGraphWithVertex = BaseGraph<Vertex>;
     using BaseClass = BasePathSearchWithBfsAndDfs<Vertex>;
+    using Vertices = typename GraphTypes<Vertex>::Vertices;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using Path = typename GraphTypes<Vertex>::Path;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
     PathSearchUsingBfs(BaseGraphWithVertex const& graph, Vertex const& startVertex)
-        : BaseClass(graph, startVertex)
+        : BaseClass(graph)
     {
-        reinitializeStartingFrom(startVertex);
+        reinitializeStartingFrom({startVertex});
+    }
+
+    PathSearchUsingBfs(BaseGraphWithVertex const& graph, Vertices const& startVertices)
+        : BaseClass(graph)
+    {
+        reinitializeStartingFrom(startVertices);
     }
 
     Path getShortestPathTo(Vertex const& endVertex) const
@@ -31,29 +38,34 @@ public:
         return this->getPathTo(endVertex);
     }
 
-    void reinitializeStartingFrom(Vertex const& startVertex) override
+    void reinitializeStartingFrom(Vertices const& startVertices) override
     {
         this->clear();
-        this->m_startVertex = startVertex;
-        CheckableVerticesWithVertex & processedVertices(this->m_processedVertices);
-        processedVertices.putVertex(startVertex);
+        this->addStartVertices(startVertices);
+        traverseUsingBfs(startVertices);
+    }
 
-        std::deque<Vertex> queueOfVerticesToProcess{startVertex}; // for multiple-source shortest path just add new vertices here
-        while(!queueOfVerticesToProcess.empty())
+private:
+    void traverseUsingBfs(Vertices const& startVertices)
+    {
+        CheckableVerticesWithVertex & processedVertices(this->m_processedVertices);
+        processedVertices.putVertices(startVertices);
+
+        std::deque<Vertex> nearestVertices;
+        std::copy(startVertices.cbegin(), startVertices.cend(), std::back_inserter(nearestVertices)); // for multiple-source shortest path so multiple vertices here
+        while(!nearestVertices.empty())
         {
-            Vertex vertex(queueOfVerticesToProcess.back());
-            queueOfVerticesToProcess.pop_back();
+            Vertex vertex(nearestVertices.back());
+            nearestVertices.pop_back();
             for(Vertex const& adjacentVertex : this->m_graph.getAdjacentVerticesAt(vertex))
             {
-                if(processedVertices.isNotFound(adjacentVertex))
-                {
+                if(processedVertices.isNotFound(adjacentVertex))                {
                     processedVertices.putVertex(adjacentVertex);
                     this->m_vertexToPreviousVertexMap[adjacentVertex] = vertex;
-                    queueOfVerticesToProcess.emplace_front(adjacentVertex);
+                    nearestVertices.emplace_front(adjacentVertex);
                 }
             }
-        }
-    }
+        }    }
 };
 
 // Proposition: BFS computes shortest paths (fewest number of edges) from s to all other vertices ina graph in time proportional to E+V
