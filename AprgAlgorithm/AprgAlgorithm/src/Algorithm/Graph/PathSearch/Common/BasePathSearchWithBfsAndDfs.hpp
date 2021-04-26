@@ -26,7 +26,8 @@ public:
         : m_graph(graph)
     {}
 
-    virtual ~BasePathSearchWithBfsAndDfs()    {}
+    virtual ~BasePathSearchWithBfsAndDfs()
+    {}
 
     bool hasPathTo(Vertex const& endVertex) const
     {
@@ -87,6 +88,7 @@ protected:
     CheckableVerticesWithVertex m_processedVertices;
     VertexToVertexMap m_vertexToPreviousVertexMap;
 };
+
 }
 
 }

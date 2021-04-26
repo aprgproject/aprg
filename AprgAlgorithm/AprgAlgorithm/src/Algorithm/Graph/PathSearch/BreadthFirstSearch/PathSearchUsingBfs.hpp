@@ -59,13 +59,15 @@ private:
             nearestVertices.pop_back();
             for(Vertex const& adjacentVertex : this->m_graph.getAdjacentVerticesAt(vertex))
             {
-                if(processedVertices.isNotFound(adjacentVertex))                {
+                if(processedVertices.isNotFound(adjacentVertex))
+                {
                     processedVertices.putVertex(adjacentVertex);
                     this->m_vertexToPreviousVertexMap[adjacentVertex] = vertex;
                     nearestVertices.emplace_front(adjacentVertex);
                 }
             }
-        }    }
+        }
+    }
 };
 
 // Proposition: BFS computes shortest paths (fewest number of edges) from s to all other vertices ina graph in time proportional to E+V

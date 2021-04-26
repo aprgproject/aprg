@@ -6,6 +6,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -16,7 +17,8 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
 
-    CheckableVertices()    {}
+    CheckableVertices()
+    {}
 
     bool isFound(Vertex const& vertex) const
     {
@@ -45,7 +47,8 @@ public:
 
     void removeVertex(Vertex const& vertex)
     {
-        m_vertices.erase(vertex);    }
+        m_vertices.erase(vertex);
+    }
 
     void clear()
     {

@@ -46,7 +46,8 @@ public:
         }
     }
 
-private:    void traverseUsingDfs(Vertex const& vertex)
+private:
+    void traverseUsingDfs(Vertex const& vertex)
     {
         CheckableVerticesWithVertex & processedVertices(this->m_processedVertices);
         processedVertices.putVertex(vertex);

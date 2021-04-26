@@ -93,7 +93,8 @@ TEST(PathSearchForDirectedAcyclicGraphTest, GetPathToWorksWithEdgeWeightedDirect
     EXPECT_EQ(PathForTest(), pathSearch.getPathTo(8U));
 }
 
-TEST(PathSearchForDirectedAcyclicGraphTest, HasPathToWorksWithEdgeWeightedDirectedGraphAndGreaterComparison){
+TEST(PathSearchForDirectedAcyclicGraphTest, HasPathToWorksWithEdgeWeightedDirectedGraphAndGreaterComparison)
+{
     EdgeWeightedDirectedGraphForTest graph;
     putConnectionsWithNoCyclesForTest(graph);
     LongestPathSearchForTest pathSearch(graph, 0U);
@@ -127,4 +128,5 @@ TEST(PathSearchForDirectedAcyclicGraphTest, GetPathToWorksWithEdgeWeightedDirect
 }
 
 }
+
 }

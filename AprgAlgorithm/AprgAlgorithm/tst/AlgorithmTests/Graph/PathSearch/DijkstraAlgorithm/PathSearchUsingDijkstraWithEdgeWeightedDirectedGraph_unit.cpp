@@ -61,7 +61,8 @@ TEST(PathSearchUsingDijkstraTest, StillProcessWhenThereAreCyclesInLesserComparis
     EXPECT_EQ(PathForTest(), pathSearch.getPathTo(4U));
 }
 
-TEST(PathSearchUsingDijkstraTest, DoesNotProcessWhenThereAreCyclesInGreaterComparison){
+TEST(PathSearchUsingDijkstraTest, DoesNotProcessWhenThereAreCyclesInGreaterComparison)
+{
     EdgeWeightedDirectedGraphForTest graph;
     putConnectionsWithCyclesForTest(graph);
     LongestPathSearchForTest pathSearch(graph, 0U);
@@ -112,7 +113,8 @@ TEST(PathSearchUsingDijkstraTest, GetPathToWorksWithEdgeWeightedDirectedGraphAnd
     EXPECT_EQ(PathForTest(), pathSearch.getPathTo(8U));
 }
 
-TEST(PathSearchUsingDijkstraTest, HasPathToWorksWithEdgeWeightedDirectedGraphAndGreaterComparison){
+TEST(PathSearchUsingDijkstraTest, HasPathToWorksWithEdgeWeightedDirectedGraphAndGreaterComparison)
+{
     EdgeWeightedDirectedGraphForTest graph;
     putConnectionsWithNoCyclesForTest(graph);
     LongestPathSearchForTest pathSearch(graph, 0U);
@@ -146,4 +148,5 @@ TEST(PathSearchUsingDijkstraTest, GetPathToWorksWithEdgeWeightedDirectedGraphAnd
 }
 
 }
+
 }
