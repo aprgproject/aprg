@@ -1,9 +1,9 @@
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
 #include <Algebra/Term/Operators/TermOperators.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
+#include <Algebra/Term/Utilities/TermUtilities.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace alba::algebra::Functions;
 using namespace std;
 
@@ -1568,11 +1568,10 @@ TEST(TermOperatorsTest, BinaryDivideOperator_ConstantAddEmptyOperationWorks)
 {
     Term term(Constant(6) / Term());
 
-    EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::PositiveInfinity)), term);
+    EXPECT_EQ(getPositiveInfinityAsATerm(), term);
 }
 
-TEST(TermOperatorsTest, BinaryDivideOperator_ConstantDivideConstantOperationWorks)
-{
+TEST(TermOperatorsTest, BinaryDivideOperator_ConstantDivideConstantOperationWorks){
     Term term(Constant(6) / Constant(2));
 
     EXPECT_EQ(Term(3), term);

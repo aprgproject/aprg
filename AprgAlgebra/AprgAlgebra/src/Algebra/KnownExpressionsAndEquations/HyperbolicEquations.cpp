@@ -18,19 +18,17 @@ Term getEToTheX(
 {
     // e^x
 
-    return Term(createExpressionIfPossible({getEAsTerm(), "^", term}));
+    return Term(createExpressionIfPossible({getEAsATerm(), "^", term}));
 }
 
-Term getEToTheNegativeX(
-        Term const& term)
+Term getEToTheNegativeX(        Term const& term)
 {
     // e^(-x)
 
-    return Term(createExpressionIfPossible({getEAsTerm(), "^", negateTerm(term)}));
+    return Term(createExpressionIfPossible({getEAsATerm(), "^", negateTerm(term)}));
 }
 
-Term getEToTheXPlusEToTheNegativeX(
-        Term const& term)
+Term getEToTheXPlusEToTheNegativeX(        Term const& term)
 {
     // e^x + e^(-x)
 

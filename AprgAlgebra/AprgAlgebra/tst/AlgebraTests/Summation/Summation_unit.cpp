@@ -1,8 +1,8 @@
 #include <Algebra/Summation/Summation.hpp>
+#include <Algebra/Term/Utilities/TermUtilities.hpp>
 #include <Algebra/Utilities/KnownNames.hpp>
 
 #include <gtest/gtest.h>
-
 namespace alba
 {
 
@@ -18,11 +18,10 @@ TEST(SummationTest, SummationWorksForConstant)
     Term expectSummationModelWithUnknownConstant(Polynomial{Monomial(1, {{C, 1}}), Monomial(5, {{"x", 1}}), Monomial(5, {})});
     EXPECT_EQ(expectSummationModelWithUnknownConstant, summation.getSummationModelWithUnknownConstant());
     EXPECT_EQ(Term(55), summation.getSum(10, 20));
-    EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::PositiveInfinity)), summation.getSum(10, AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
+    EXPECT_EQ(getPositiveInfinityAsATerm(), summation.getSum(10, AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
     Term expectSumWhenEndingIsAVariable(Polynomial{Monomial(5, {{"variable", 1}}), Monomial(-45, {})});
     EXPECT_EQ(expectSumWhenEndingIsAVariable, summation.getSum(10, "variable"));
 }
-
 TEST(SummationTest, SummationWorksForVariable)
 {
     Summation summation("x", "x");
@@ -38,11 +37,10 @@ TEST(SummationTest, SummationWorksForVariable)
      Monomial(AlbaNumber::createFraction(1, 2), {{"x", 1}})});
     EXPECT_EQ(expectSummationModelWithUnknownConstant, summation.getSummationModelWithUnknownConstant());
     EXPECT_EQ(Term(165), summation.getSum(10, 20));
-    EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::PositiveInfinity)), summation.getSum(10, AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
+    EXPECT_EQ(getPositiveInfinityAsATerm(), summation.getSum(10, AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
     Term expectSumWhenEndingIsAVariable(Polynomial
     {Monomial(AlbaNumber::createFraction(1, 2), {{"variable", 2}}),
-     Monomial(AlbaNumber::createFraction(1, 2), {{"variable", 1}}),
-     Monomial(-45, {})});
+     Monomial(AlbaNumber::createFraction(1, 2), {{"variable", 1}}),     Monomial(-45, {})});
     EXPECT_EQ(expectSumWhenEndingIsAVariable, summation.getSum(10, "variable"));
 }
 
@@ -63,11 +61,10 @@ TEST(SummationTest, SummationWorksForVariableSquared)
      Monomial(AlbaNumber::createFraction(1, 6), {{"x", 1}})});
     EXPECT_EQ(expectSummationModelWithUnknownConstant, summation.getSummationModelWithUnknownConstant());
     EXPECT_EQ(Term(2585), summation.getSum(10, 20));
-    EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::PositiveInfinity)), summation.getSum(10, AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
+    EXPECT_EQ(getPositiveInfinityAsATerm(), summation.getSum(10, AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
     Term expectSumWhenEndingIsAVariable(Polynomial
     {Monomial(AlbaNumber::createFraction(1, 3), {{"variable", 3}}),
-     Monomial(AlbaNumber::createFraction(1, 2), {{"variable", 2}}),
-     Monomial(AlbaNumber::createFraction(1, 6), {{"variable", 1}}),
+     Monomial(AlbaNumber::createFraction(1, 2), {{"variable", 2}}),     Monomial(AlbaNumber::createFraction(1, 6), {{"variable", 1}}),
      Monomial(-285, {})});
     EXPECT_EQ(expectSumWhenEndingIsAVariable, summation.getSum(10, "variable"));
 }
@@ -89,11 +86,10 @@ TEST(SummationTest, SummationWorksForVariableCube)
      Monomial(1, {{C, 1}})});
     EXPECT_EQ(expectSummationModelWithUnknownConstant, summation.getSummationModelWithUnknownConstant());
     EXPECT_EQ(Term(42075), summation.getSum(10, 20));
-    EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::PositiveInfinity)), summation.getSum(10, AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
+    EXPECT_EQ(getPositiveInfinityAsATerm(), summation.getSum(10, AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
     Term expectSumWhenEndingIsAVariable(Polynomial
     {Monomial(AlbaNumber::createFraction(1, 4), {{"variable", 4}}),
-     Monomial(AlbaNumber::createFraction(1, 2), {{"variable", 3}}),
-     Monomial(AlbaNumber::createFraction(1, 4), {{"variable", 2}}),
+     Monomial(AlbaNumber::createFraction(1, 2), {{"variable", 3}}),     Monomial(AlbaNumber::createFraction(1, 4), {{"variable", 2}}),
      Monomial(-2025, {})});
     EXPECT_EQ(expectSumWhenEndingIsAVariable, summation.getSum(10, "variable"));
 }
@@ -116,11 +112,10 @@ TEST(SummationTest, SummationWorksForPolynomial)
      Monomial(AlbaNumber::createFraction(-1, 2), {{"x", 1}})});
     EXPECT_EQ(expectSummationModelWithUnknownConstant, summation.getSummationModelWithUnknownConstant());
     EXPECT_EQ(Term(7425), summation.getSum(10, 20));
-    EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::PositiveInfinity)), summation.getSum(10, AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
+    EXPECT_EQ(getPositiveInfinityAsATerm(), summation.getSum(10, AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
     Term expectSumWhenEndingIsAVariable(Polynomial
     {Monomial(1, {{"variable", 3}}),
-     Monomial(AlbaNumber::createFraction(1, 2), {{"variable", 2}}),
-     Monomial(AlbaNumber::createFraction(-1, 2), {{"variable", 1}}),
+     Monomial(AlbaNumber::createFraction(1, 2), {{"variable", 2}}),     Monomial(AlbaNumber::createFraction(-1, 2), {{"variable", 1}}),
      Monomial(-765, {})});
     EXPECT_EQ(expectSumWhenEndingIsAVariable, summation.getSum(10, "variable"));
 }

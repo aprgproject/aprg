@@ -1,10 +1,10 @@
 #include <Algebra/Functions/CommonFunctionLibrary.hpp>
 #include <Algebra/Limit/LimitsAtInfinity/LimitsAtInfinity.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
+#include <Algebra/Term/Utilities/TermUtilities.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace alba::algebra::Functions;
 using namespace std;
 
@@ -19,12 +19,11 @@ TEST(LimitsAtInfinityTest, XWorksAndSimplifiesToZero)
     LimitsAtInfinity limits("x", "x");
 
     EXPECT_EQ(Term("x"), limits.getSimplifiedTermAtInfinity());
-    EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::NegativeInfinity)), limits.getValueAtInfinity(AlbaNumber::Value::NegativeInfinity));
-    EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::PositiveInfinity)), limits.getValueAtInfinity(AlbaNumber::Value::PositiveInfinity));
+    EXPECT_EQ(getNegativeInfinityAsATerm(), limits.getValueAtInfinity(AlbaNumber::Value::NegativeInfinity));
+    EXPECT_EQ(getPositiveInfinityAsATerm(), limits.getValueAtInfinity(AlbaNumber::Value::PositiveInfinity));
 }
 
-TEST(LimitsAtInfinityTest, OneOverXWorksAndSimplifiesToZero)
-{
+TEST(LimitsAtInfinityTest, OneOverXWorksAndSimplifiesToZero){
     Term term(createExpressionIfPossible({1, "/", "x"}));
 
     LimitsAtInfinity limits(term, "x");
@@ -60,12 +59,11 @@ TEST(LimitsAtInfinityTest, PolynomialOverPolynomialWithNumeratorDegreeIsGreaterA
     LimitsAtInfinity limits(term, "x");
 
     EXPECT_EQ(Term("x"), limits.getSimplifiedTermAtInfinity());
-    EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::NegativeInfinity)), limits.getValueAtInfinity(AlbaNumber::Value::NegativeInfinity));
-    EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::PositiveInfinity)), limits.getValueAtInfinity(AlbaNumber::Value::PositiveInfinity));
+    EXPECT_EQ(getNegativeInfinityAsATerm(), limits.getValueAtInfinity(AlbaNumber::Value::NegativeInfinity));
+    EXPECT_EQ(getPositiveInfinityAsATerm(), limits.getValueAtInfinity(AlbaNumber::Value::PositiveInfinity));
 }
 
-TEST(LimitsAtInfinityTest, PolynomialOverPolynomialWithNumeratorDegreeIsGreaterAndNegativeWorks)
-{
+TEST(LimitsAtInfinityTest, PolynomialOverPolynomialWithNumeratorDegreeIsGreaterAndNegativeWorks){
     Term numerator(Polynomial{Monomial(-6, {{"x", 2}}), Monomial(2, {{"x", 1}})});
     Term denominator(Polynomial{Monomial(3, {{"x", 1}}), Monomial(5, {})});
     Term term(createExpressionIfPossible({numerator, "/", denominator}));
@@ -73,12 +71,11 @@ TEST(LimitsAtInfinityTest, PolynomialOverPolynomialWithNumeratorDegreeIsGreaterA
     LimitsAtInfinity limits(term, "x");
 
     EXPECT_EQ(Term(Monomial(-2, {{"x", 1}})), limits.getSimplifiedTermAtInfinity());
-    EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::PositiveInfinity)), limits.getValueAtInfinity(AlbaNumber::Value::NegativeInfinity));
-    EXPECT_EQ(Term(AlbaNumber(AlbaNumber::Value::NegativeInfinity)), limits.getValueAtInfinity(AlbaNumber::Value::PositiveInfinity));
+    EXPECT_EQ(getPositiveInfinityAsATerm(), limits.getValueAtInfinity(AlbaNumber::Value::NegativeInfinity));
+    EXPECT_EQ(getNegativeInfinityAsATerm(), limits.getValueAtInfinity(AlbaNumber::Value::PositiveInfinity));
 }
 
-TEST(LimitsAtInfinityTest, PolynomialOverPolynomialWithDenominatorDegreeIsGreaterWorks)
-{
+TEST(LimitsAtInfinityTest, PolynomialOverPolynomialWithDenominatorDegreeIsGreaterWorks){
     Term numerator(Polynomial{Monomial(2, {{"x", 2}}), Monomial(-1, {{"x", 1}}), Monomial(5, {})});
     Term denominator(Polynomial{Monomial(4, {{"x", 3}}), Monomial(-1, {})});
     Term term(createExpressionIfPossible({numerator, "/", denominator}));

@@ -171,11 +171,10 @@ TEST(IntegrationTest, IntegrateAtDefiniteValuesWorksInfiniteValues)
 TEST(IntegrationTest, IntegrateAtDefiniteValuesWorksInfiniteValuesWithIBP)
 {
     Integration integrationForX("x");
-    Term eToTheNegativeX(createExpressionIfPossible({getEAsTerm(), "^", negateTerm("x")}));
+    Term eToTheNegativeX(createExpressionIfPossible({getEAsATerm(), "^", negateTerm("x")}));
     Term termToTest(createExpressionIfPossible({"x", "*", eToTheNegativeX}));
 
-    EXPECT_EQ(Term(1), integrationForX.integrateAtDefiniteValues(termToTest, 0, AlbaNumber(AlbaNumber::Value::PositiveInfinity)));
-}
+    EXPECT_EQ(Term(1), integrationForX.integrateAtDefiniteValues(termToTest, 0, AlbaNumber(AlbaNumber::Value::PositiveInfinity)));}
 
 TEST(IntegrationTest, IntegrateConstantWorks)
 {
@@ -598,11 +597,10 @@ TEST(IntegrationTest, IntegrateWorksUsingIntegrationByPartsUsingExamples2)
 {
     Integration integrationForX("x");
     Term xSquared(Monomial(1, {{"x", 2}}));
-    Term eToTheX(createExpressionIfPossible({getEAsTerm(), "^", x}));
+    Term eToTheX(createExpressionIfPossible({getEAsATerm(), "^", x}));
     Term termToTest(createExpressionIfPossible({xSquared, "*", eToTheX}));
 
     Term termToVerify(integrationForX.integrate(termToTest));
-
     string stringToExpect("((1[x^2]*((e)^x))-(2[x]*((e)^x))+(2*((e)^x)))");
     EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());
 }
@@ -621,11 +619,10 @@ TEST(IntegrationTest, IntegrateWorksUsingIntegrationByPartsUsingExamples3)
 TEST(IntegrationTest, IntegrateWorksUsingIntegrationByPartsUsingExamples4)
 {
     Integration integrationForX("x");
-    Term eToTheX(createExpressionIfPossible({getEAsTerm(), "^", "x"}));
+    Term eToTheX(createExpressionIfPossible({getEAsATerm(), "^", "x"}));
     Term termToTest(createExpressionIfPossible({eToTheX, "*", sin("x")}));
 
     Term termToVerify(integrationForX.integrate(termToTest));
-
     EXPECT_EQ("((((e)^x)*sin(x))-(((e)^x)*cos(x))+(((e)^x)*(cos(x)-sin(x))/2))", termToVerify.getDisplayableString());
     simplifyTermToACommonDenominator(termToVerify);
     EXPECT_EQ("(((((e)^x)*sin(x))-(((e)^x)*cos(x)))/2)", termToVerify.getDisplayableString());

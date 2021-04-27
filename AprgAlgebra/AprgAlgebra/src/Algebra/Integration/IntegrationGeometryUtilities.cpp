@@ -49,10 +49,9 @@ Term getVolumeUsingOnSolidOfRevolution(
     // This method uses disks.
 
     Integration integration(integralDetails.variableName);
-    Term termToIntegrate = getPiAsTerm()*(term^2);
+    Term termToIntegrate = getPiAsATerm()*(term^2);
     return integration.integrateAtDefiniteTerms(termToIntegrate, integralDetails.lowerEnd, integralDetails.higherEnd);
 }
-
 Term getVolumeUsingOnSolidOfRevolution(
         Term const& lowerFunctionTerm,
         Term const& higherFunctionTerm,
@@ -66,10 +65,9 @@ Term getVolumeUsingOnSolidOfRevolution(
     // This method uses washers(disks with holes).
 
     Integration integration(integralDetails.variableName);
-    Term termToIntegrate = getPiAsTerm()*((higherFunctionTerm-lowerFunctionTerm)^2);
+    Term termToIntegrate = getPiAsATerm()*((higherFunctionTerm-lowerFunctionTerm)^2);
     return integration.integrateAtDefiniteTerms(termToIntegrate, integralDetails.lowerEnd, integralDetails.higherEnd);
 }
-
 Term getVolumeUsingCylindricalShells(
         Term const& term,
         DetailsForDefiniteIntegralWithTerms const& integralDetails)
@@ -83,10 +81,9 @@ Term getVolumeUsingCylindricalShells(
     // This method uses cylindrical shells (like a can without the top and bottom)
 
     Integration integration(integralDetails.variableName);
-    Term termToIntegrate = 2 * getPiAsTerm() * integralDetails.variableName * term;
+    Term termToIntegrate = 2 * getPiAsATerm() * integralDetails.variableName * term;
     return integration.integrateAtDefiniteTerms(termToIntegrate, integralDetails.lowerEnd, integralDetails.higherEnd);
 }
-
 Term getLengthOfArc(
         Term const& term,
         DetailsForDefiniteIntegralWithTerms const& integralDetails)
