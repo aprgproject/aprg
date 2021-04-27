@@ -20,11 +20,10 @@ namespace alba
 namespace algorithm
 {
 
-TEST(AlbaLargeSorterPriofileTest, DISABLED_FirstTest)
+TEST(AlbaLargeSorterProfileTest, DISABLED_FirstTest)
 {
     unsigned int stringSize(200);
-    AlbaLargeSorterConfiguration sorterConfiguration;
-    sorterConfiguration.m_directoryForBlocks = AlbaLocalPathHandler(ALBA_LARGE_SORTER_BLOCK_DIR).getFullPath();
+    AlbaLargeSorterConfiguration sorterConfiguration;    sorterConfiguration.m_directoryForBlocks = AlbaLocalPathHandler(ALBA_LARGE_SORTER_BLOCK_DIR).getFullPath();
     sorterConfiguration.m_minimumNumberOfObjectsPerBlock = 1000;
     sorterConfiguration.m_maximumNumberOfObjectsPerBlock = 10000;
     sorterConfiguration.m_maximumNumberOfObjectsInMemory = 100000;
@@ -37,11 +36,10 @@ TEST(AlbaLargeSorterPriofileTest, DISABLED_FirstTest)
 
         vector<string> samples;
         samples.resize(sampleSize);
-        std::generate_n(samples.begin(), sampleSize, [&]()
+        generate_n(samples.begin(), sampleSize, [&]()
         {
             return stringHelper::getRandomAlphaNumericString(stringSize);
         });
-
         AlbaLocalTimer timer;
         timer.resetTimer();
         AlbaLargeSorter<string> largeSorter(sorterConfiguration);

@@ -4,9 +4,10 @@
 
 #include <gtest/gtest.h>
 
+using namespace std;
+
 namespace alba
 {
-
 namespace algorithm
 {
 
@@ -17,12 +18,11 @@ using WeightForTest = double;
 using PathForTest = GraphTypes<VertexForTest>::Path;
 using DirectedGraphForTest = DirectedGraphWithListOfEdges<VertexForTest>;
 using EdgeWeightedDirectedGraphForTest = EdgeWeightedGraph<VertexForTest, WeightForTest, DirectedGraphForTest>;
-using ShortestPathSearchForTest = PathSearchUsingBellmanFord<VertexForTest, WeightForTest, EdgeWeightedDirectedGraphForTest, std::less>;
-using LongestPathSearchForTest = PathSearchUsingBellmanFord<VertexForTest, WeightForTest, EdgeWeightedDirectedGraphForTest, std::greater>;
+using ShortestPathSearchForTest = PathSearchUsingBellmanFord<VertexForTest, WeightForTest, EdgeWeightedDirectedGraphForTest, less>;
+using LongestPathSearchForTest = PathSearchUsingBellmanFord<VertexForTest, WeightForTest, EdgeWeightedDirectedGraphForTest, greater>;
 }
 
-TEST(PathSearchUsingBellmanFordTest, ShortestPathSearchEndsWhenThereArePositiveCycles)
-{
+TEST(PathSearchUsingBellmanFordTest, ShortestPathSearchEndsWhenThereArePositiveCycles){
     EdgeWeightedDirectedGraphForTest graph;
     graph.connect(0U, 1U, 0.26);
     graph.connect(1U, 2U, 0.38);

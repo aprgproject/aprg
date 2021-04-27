@@ -3,9 +3,10 @@
 
 #include <gtest/gtest.h>
 
+using namespace std;
+
 namespace alba
 {
-
 namespace algorithm
 {
 
@@ -13,11 +14,10 @@ namespace
 {
 using VertexForTest = unsigned int;
 using WeightForTest = double;
-using WeightsForTest = std::vector<double>;
+using WeightsForTest = vector<double>;
 using UndirectedGraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
 using EdgeWeightedUndirectedGraphForTest = EdgeWeightedGraph<VertexForTest, WeightForTest, UndirectedGraphForTest>;
-using Edges = GraphTypes<VertexForTest>::Edges;
-using EdgeToWeightMap = EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap;
+using Edges = GraphTypes<VertexForTest>::Edges;using EdgeToWeightMap = EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap;
 }
 
 TEST(EdgeWeightedGraphTest, HasAUniqueMinimumSpanningTreeWorksOnUndirectedGraph)

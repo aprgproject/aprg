@@ -12,10 +12,9 @@ namespace algorithm
 
 namespace
 {
-using ValuesForTest = std::vector<char>;
+using ValuesForTest = vector<char>;
 using SelectForTest = QuickSelect<ValuesForTest>;
 }
-
 TEST(QuickSelectTest, DoNthElementWorksOnCharactersUsingExample1)
 {
     SelectForTest select;

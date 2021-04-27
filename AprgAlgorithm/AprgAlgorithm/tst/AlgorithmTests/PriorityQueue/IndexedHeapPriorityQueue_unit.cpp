@@ -13,11 +13,10 @@ namespace algorithm
 
 namespace
 {
-using IndexedMaxPriorityQueueForTest = IndexedHeapPriorityQueue<char, std::less, 2U>; //std::less leads to Max Priority Queue same as in c++ standard
+using IndexedMaxPriorityQueueForTest = IndexedHeapPriorityQueue<char, less, 2U>; //less leads to Max Priority Queue same as in c++ standard
 }
 
-TEST(IndexedHeapPriorityQueueTest, IsEmptyWorks)
-{
+TEST(IndexedHeapPriorityQueueTest, IsEmptyWorks){
     IndexedMaxPriorityQueueForTest indexedPQ1;
     IndexedMaxPriorityQueueForTest indexedPQ2;
     indexedPQ2.insert(0U, 'A');

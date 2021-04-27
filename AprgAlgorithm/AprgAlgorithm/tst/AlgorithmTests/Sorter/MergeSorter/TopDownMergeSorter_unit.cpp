@@ -14,10 +14,9 @@ namespace algorithm
 
 namespace
 {
-using ValuesForTest = std::vector<char>;
+using ValuesForTest = vector<char>;
 using SorterForTest = TopDownMergeSorter<ValuesForTest>;
 }
-
 TEST(TopDownMergeSorterTest, SortWorksOnCharactersUsingExample1)
 {
     testSortUsingExample1WithCharacters<SorterForTest, ValuesForTest>();

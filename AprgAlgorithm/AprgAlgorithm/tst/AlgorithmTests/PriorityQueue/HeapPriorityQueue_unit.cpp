@@ -12,11 +12,10 @@ namespace algorithm
 
 namespace
 {
-using MaxPriorityQueueForTest = HeapPriorityQueue<char, std::less>; //std::less leads to Max Priority Queue same as in c++ standard
+using MaxPriorityQueueForTest = HeapPriorityQueue<char, less>; //less leads to Max Priority Queue same as in c++ standard
 }
 
-TEST(HeapPriorityQueueTest, IsEmptyWorks)
-{
+TEST(HeapPriorityQueueTest, IsEmptyWorks){
     MaxPriorityQueueForTest queue1;
     MaxPriorityQueueForTest queue2;
     queue2.insert('A');
