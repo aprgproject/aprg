@@ -177,11 +177,10 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectoryAndFile_ActualLocalDirec
 TEST_F(AlbaWindowsPathHandlerTest, ReInputFileThatIsToBeDeleted_ActualLocalDirectory)
 {
     string const pathOfFileToBeDeleted(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\FileToBeDeleted.log)");
-    std::ofstream fileToBeDeleted(pathOfFileToBeDeleted);
+    ofstream fileToBeDeleted(pathOfFileToBeDeleted);
     fileToBeDeleted.close();
 
-    AlbaWindowsPathHandler pathHandler(pathOfFileToBeDeleted);
-    EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
+    AlbaWindowsPathHandler pathHandler(pathOfFileToBeDeleted);    EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
     EXPECT_EQ(convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\)"), pathHandler.getDirectory());
     EXPECT_EQ("FileToBeDeleted.log", pathHandler.getFile());
     EXPECT_EQ("FileToBeDeleted", pathHandler.getFilenameOnly());
@@ -203,11 +202,10 @@ TEST_F(AlbaWindowsPathHandlerTest, ReInputFileThatIsToBeDeleted_ActualLocalDirec
 TEST_F(AlbaWindowsPathHandlerTest, ReInputFileThatIsToBeRenamed_ActualLocalDirectory)
 {
     string const pathOfFileToBeRenamed(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\FileToBeRenamed.log)");
-    std::ofstream fileToBeDeleted(pathOfFileToBeRenamed);
+    ofstream fileToBeDeleted(pathOfFileToBeRenamed);
     fileToBeDeleted.close();
 
-    AlbaWindowsPathHandler pathHandler(pathOfFileToBeRenamed);
-    EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
+    AlbaWindowsPathHandler pathHandler(pathOfFileToBeRenamed);    EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
     EXPECT_EQ(convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\)"), pathHandler.getDirectory());
     EXPECT_EQ("FileToBeRenamed.log", pathHandler.getFile());
     EXPECT_EQ("FileToBeRenamed", pathHandler.getFilenameOnly());
@@ -232,11 +230,10 @@ TEST_F(AlbaWindowsPathHandlerTest, FileIsCopiedToNewFile_ActualLocalDirectory)
 {
     string const pathOfFileToBeCopied(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\FileToBeCopied.log)");
     string const pathOfCopiedFile("CopiedFile.log");
-    std::ofstream fileToBeCopied(pathOfFileToBeCopied);
+    ofstream fileToBeCopied(pathOfFileToBeCopied);
     fileToBeCopied.close();
 
-    AlbaWindowsPathHandler pathHandler(pathOfFileToBeCopied);
-    EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
+    AlbaWindowsPathHandler pathHandler(pathOfFileToBeCopied);    EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
     EXPECT_EQ(convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\)"), pathHandler.getDirectory());
     EXPECT_EQ("FileToBeCopied.log", pathHandler.getFile());
     EXPECT_EQ("FileToBeCopied", pathHandler.getFilenameOnly());

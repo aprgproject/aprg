@@ -71,12 +71,11 @@ NumberType AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(string
     cout << "Input your answer: ";
     return convertStringToNumber<NumberType>(getUserInput());
 }
-template int AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(std::string const& question, Choices<int> const& choices);
-template unsigned int AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(std::string const& question, Choices<unsigned int> const& choices);
+template int AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(string const& question, Choices<int> const& choices);
+template unsigned int AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(string const& question, Choices<unsigned int> const& choices);
 
 
-string AlbaUserInterface::displayQuestionAndChoicesAndGetStringAnswerInAllCapitals(string const& question, Choices<string> const& choices)
-{
+string AlbaUserInterface::displayQuestionAndChoicesAndGetStringAnswerInAllCapitals(string const& question, Choices<string> const& choices){
     cout<<question<<endl;
 
     DisplayTable table;

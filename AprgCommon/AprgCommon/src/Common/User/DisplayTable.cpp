@@ -166,11 +166,10 @@ void DisplayTable::setBorders(string const& horizontalBorder, string const& vert
     m_verticalBorder = verticalBorder;
 }
 
-std::string DisplayTable::getCellText(DisplayTableCell const& cell, unsigned int length) const
+string DisplayTable::getCellText(DisplayTableCell const& cell, unsigned int length) const
 {
     DisplayTableCellMode mode = cell.getHorizontalMode();
-    string result;
-    switch(mode)
+    string result;    switch(mode)
     {
     case DisplayTableCellMode::justify:
         result = getStringWithJustifyAlignment(cell.getText(), length);
@@ -203,11 +202,10 @@ void DisplayTable::calculateLengthPerColumn()
         {
             if(row.isAlign())
             {
-                m_calculatedLengthPerColumn[column] = std::max(m_calculatedLengthPerColumn[column], static_cast<unsigned int>(cell.getText().size()));
+                m_calculatedLengthPerColumn[column] = max(m_calculatedLengthPerColumn[column], static_cast<unsigned int>(cell.getText().size()));
             }
             column++;
-        }
-    }
+        }    }
 }
 
 unsigned int DisplayTable::getTotalColumnLength() const
