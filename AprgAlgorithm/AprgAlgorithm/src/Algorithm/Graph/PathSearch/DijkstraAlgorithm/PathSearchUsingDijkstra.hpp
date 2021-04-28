@@ -61,13 +61,12 @@ private:
             // this essentially prims algorithm but here weight is accumulated from the start vertex (Prim just take the closest)
             VertexWithWeight vertexWithBestWeight(foundVerticesOrderedByWeight.top());
             foundVerticesOrderedByWeight.pop();
-            this->relaxAt(vertexWithBestWeight.vertex, [&](Vertex const&, Vertex const& destinationVertex, Weight const& newLowestWeight)
+            this->relaxAt(vertexWithBestWeight.vertex, [&](Vertex const&, Vertex const& destinationVertex, Weight const& newWeight)
             {
-                foundVerticesOrderedByWeight.emplace(destinationVertex, newLowestWeight); // this step is after relaxation on every adjacent vertex (only if weight is changed)
+                foundVerticesOrderedByWeight.emplace(destinationVertex, newWeight); // this step is after relaxation on every adjacent vertex (only if weight is changed)
             });
         }
     }
-
 };
 
 // Dijkstra algorithm computes a shortest path tree in any edge-weighted digraph with non negative weights,
