@@ -3,10 +3,12 @@
 #include <Common/Container/AlbaValueRange.hpp>
 #include <Common/Math/AlbaMathHelper.hpp>
 #include <Common/Math/Matrix/AlbaMatrixDataTypes.hpp>
-#include <Common/Math/Matrix/Utilities/AlbaMatrixUtilitiesHeaders.hpp>
+#include <Common/Math/Matrix/Utilities/AlbaMatrixUtilities.hpp>
+#include <Common/Math/Matrix/Utilities/GaussJordanReduction.hpp>
 #include <Common/User/DisplayTable.hpp>
 
-#include <cassert>#include <functional>
+#include <cassert>
+#include <functional>
 #include <sstream>
 
 namespace alba

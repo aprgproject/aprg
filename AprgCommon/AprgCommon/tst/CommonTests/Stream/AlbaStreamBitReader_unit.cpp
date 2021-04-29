@@ -60,7 +60,8 @@ TEST(AlbaStreamBitReaderTest, ReadWholeStreamAsStringDataWorks)
 
 TEST(AlbaStreamBitReaderTest, ReadNumberDataWorks)
 {
-    stringstream ss;    ss.put(0x01);
+    stringstream ss;
+    ss.put(0x01);
     ss.put(0x02);
     ss.put(0x03);
     ss.put(0x04);
@@ -103,7 +104,8 @@ TEST(AlbaStreamBitReaderTest, ReadLittleEndianNumberDataWorks)
 
 TEST(AlbaStreamBitReaderTest, ReadBitsetDataWorks)
 {
-    stringstream ss;    ss.put(0x12);
+    stringstream ss;
+    ss.put(0x12);
     ss.put(0x34);
     AlbaStreamBitReader reader(ss);
 

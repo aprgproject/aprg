@@ -12,6 +12,7 @@
 
 namespace alba
 {
+
 class AlbaStreamBitReader
 {
 public:
@@ -34,7 +35,8 @@ public:
 private:
     void readIfNeeded(unsigned int const numberOfBitsRequired);
     void eraseBitsInBitBuffer(unsigned int const numberOfBitsToErase);
-    AlbaStreamBitEndianType m_endianType;    std::istream& m_stream;
+    AlbaStreamBitEndianType m_endianType;
+    std::istream& m_stream;
     std::deque<bool> m_bitBuffer;
 };
 
@@ -57,7 +59,8 @@ template <typename TypeToWrite>
 TypeToWrite AlbaStreamBitReader::readBigEndianNumberData()
 {
     constexpr unsigned int numberOfBits(AlbaBitValueUtilities<TypeToWrite>::getNumberOfBits());
-    readIfNeeded(numberOfBits);    std::bitset<numberOfBits> dataBitset;
+    readIfNeeded(numberOfBits);
+    std::bitset<numberOfBits> dataBitset;
     for(unsigned int i=0; i<numberOfBits; i++)
     {
         dataBitset.set(numberOfBits-1-i, m_bitBuffer.at(i));
@@ -70,7 +73,8 @@ template <typename TypeToWrite>
 TypeToWrite AlbaStreamBitReader::readLittleEndianNumberData()
 {
     constexpr unsigned int numberOfBits(AlbaBitValueUtilities<TypeToWrite>::getNumberOfBits());
-    readIfNeeded(numberOfBits);    std::bitset<numberOfBits> dataBitset;
+    readIfNeeded(numberOfBits);
+    std::bitset<numberOfBits> dataBitset;
     unsigned int byteSize = round(numberOfBits/AlbaBitConstants::BYTE_SIZE_IN_BITS);
     unsigned int bitBufferIndex=0;
     for(unsigned int byteIndex=1; byteIndex<=byteSize; byteIndex++)

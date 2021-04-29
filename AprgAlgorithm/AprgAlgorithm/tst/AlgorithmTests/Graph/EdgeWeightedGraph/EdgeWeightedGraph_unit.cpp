@@ -7,6 +7,7 @@ using namespace std;
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -17,7 +18,8 @@ using WeightForTest = double;
 using WeightsForTest = vector<double>;
 using UndirectedGraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
 using EdgeWeightedUndirectedGraphForTest = EdgeWeightedGraph<VertexForTest, WeightForTest, UndirectedGraphForTest>;
-using Edges = GraphTypes<VertexForTest>::Edges;using EdgeToWeightMap = EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap;
+using Edges = GraphTypes<VertexForTest>::Edges;
+using EdgeToWeightMap = EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap;
 }
 
 TEST(EdgeWeightedGraphTest, HasAUniqueMinimumSpanningTreeWorksOnUndirectedGraph)

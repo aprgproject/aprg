@@ -146,7 +146,8 @@ TEST(TermUtilitiesTest, GetNegativeInfinityAsATermWorks)
 
 TEST(TermUtilitiesTest, ConvertPositiveTermIfNegativeWorks)
 {
-    EXPECT_EQ(Term(5), convertPositiveTermIfNegative(-5));    EXPECT_EQ(Term(5), convertPositiveTermIfNegative(5));
+    EXPECT_EQ(Term(5), convertPositiveTermIfNegative(-5));
+    EXPECT_EQ(Term(5), convertPositiveTermIfNegative(5));
 }
 
 TEST(TermUtilitiesTest, NegateTermWorks)

@@ -24,6 +24,7 @@ TEST(MathVectorOfTermsUtilitiesTest, IsDivergenceOfCurlZeroWorks)
     Term y(Monomial(3, {{"x", 2}, {"y", 1}, {"z", 1}}));
     Term z(Polynomial{Monomial(2, {{"y", 2}, {"z", 1}}), Monomial(1, {{"x", 1}})});
     MathVectorOfThreeTerms vectorField{x, y, z};
+
     EXPECT_TRUE(isDivergenceOfCurlZero(vectorField, {"x", "y", "z"}));
 }
 
@@ -37,6 +38,7 @@ TEST(MathVectorOfTermsUtilitiesTest, IsGaussDivergenceTheoremInAPlaneTrueWorks)
     DetailsForDefiniteIntegralWithTerms lineIntegralDetails{"t", 0, 2*getPiAsATerm()};
     DetailsForDefiniteIntegralWithTerms xDetails{"x", -1, 1};
     DetailsForDefiniteIntegralWithTerms yDetails{"y", -1, 1};
+
     EXPECT_TRUE(isGaussDivergenceTheoremInAPlaneTrue(vectorField, regionOfLineIntegral, unitOutwardNormal, lineIntegralDetails, xDetails, yDetails, {"x", "y"}));
 }
 
@@ -53,6 +55,7 @@ TEST(MathVectorOfTermsUtilitiesTest, IsStokesTheoremInAPlaneTrueWorks)
 
     EXPECT_TRUE(isStokesTheoremInAPlaneTrue(vectorField, regionOfLineIntegral, unitTangent, lineIntegralDetails, xDetails, yDetails, {"x", "y"}));
 }
+
 TEST(MathVectorOfTermsUtilitiesTest, GetDyOverDxWorks)
 {
     Term x(Polynomial{Monomial(4, {}), Monomial(-1, {{"t", 2}})});
@@ -114,7 +117,8 @@ TEST(MathVectorOfTermsUtilitiesTest, GetAreaOfAClosedNonIntersectingPathUsingGre
     Term termToVerify(getAreaOfAClosedNonIntersectingPathUsingGreensTheorem({"x", "y"}, linePath, {"t", 0, 2*getPiAsATerm()}));
 
     string stringToExpect("(pi)[a][b]");
-    EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());}
+    EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());
+}
 
 TEST(MathVectorOfTermsUtilitiesTest, GetNormalOfASurfaceOnAPointWorks)
 {
@@ -158,6 +162,7 @@ TEST(MathVectorOfTermsUtilitiesTest, GetCurlWorks)
     Term y(Monomial(3, {{"x", 2}, {"y", 1}, {"z", 1}}));
     Term z(Polynomial{Monomial(2, {{"y", 2}, {"z", 1}}), Monomial(1, {{"x", 1}})});
     MathVectorOfThreeTerms vectorField{x, y, z};
+
     MathVectorOfThreeTerms vectorToVerify(getCurl(vectorField, {"x", "y", "z"}));
 
     string stringToExpect("{(-3[x^2][y] + 4[y][z]), -1, 6[x][y][z]}");
@@ -170,7 +175,8 @@ TEST(MathVectorOfTermsUtilitiesTest, IsContinuousAtWorks)
     Term y(createExpressionIfPossible({2, "*", getEAsATerm(), "^", "t"}));
     MathVectorOfTwoTerms termVector{x, y};
 
-    EXPECT_TRUE(isContinuousAt(termVector, "t", 0));}
+    EXPECT_TRUE(isContinuousAt(termVector, "t", 0));
+}
 
 TEST(MathVectorOfTermsUtilitiesTest, IsDifferentiableAtWorks)
 {
@@ -268,7 +274,8 @@ TEST(MathVectorOfTermsUtilitiesTest, GetTermThatYieldsToThisGradientWorksWithExa
     Term eToTheX(createExpressionIfPossible({getEAsATerm(), "^", "x"}));
     Term x(createExpressionIfPossible({eToTheX, "*", sin("z"), "+", Monomial(2, {{"y", 1}, {"z", 1}})}));
     Term y(Polynomial{Monomial(2, {{"x", 1}, {"z", 1}}), Monomial(2, {{"y", 1}})});
-    Term z(createExpressionIfPossible(    {eToTheX, "*", cos("z"), "+", Polynomial{Monomial(2, {{"x", 1}, {"y", 1}}), Monomial(3, {{"z", 2}})}}));
+    Term z(createExpressionIfPossible(
+    {eToTheX, "*", cos("z"), "+", Polynomial{Monomial(2, {{"x", 1}, {"y", 1}}), Monomial(3, {{"z", 2}})}}));
     MathVectorOfThreeTerms gradient{x, y, z};
 
     bool isExactDifferential(false);
@@ -299,6 +306,7 @@ TEST(MathVectorOfTermsUtilitiesTest, GetDivergenceWorks)
     Term y(Monomial(3, {{"x", 2}, {"y", 1}, {"z", 1}}));
     Term z(Polynomial{Monomial(2, {{"y", 2}, {"z", 1}}), Monomial(1, {{"x", 1}})});
     MathVectorOfThreeTerms vectorField{x, y, z};
+
     Term termToVerify(getDivergence(vectorField, {"x", "y", "z"}));
 
     string stringToExpect("((2*((e)^2[x]))+3[x^2][z]+2[y^2])");
@@ -311,6 +319,7 @@ TEST(MathVectorOfTermsUtilitiesTest, GetLaplaceTermWorks)
     Term y(Monomial(3, {{"x", 2}, {"y", 2}, {"z", 1}}));
     Term z(Polynomial{Monomial(2, {{"y", 2}, {"z", 2}}), Monomial(1, {{"x", 1}})});
     MathVectorOfThreeTerms vectorField{x, y, z};
+
     Term termToVerify(getLaplaceTerm(vectorField, {"x", "y", "z"}));
 
     string stringToExpect("((4*((e)^2[x]))+6[x^2][z]+4[y^2])");
@@ -344,7 +353,8 @@ TEST(MathVectorOfTermsUtilitiesTest, GetLineIntegralWorksOnExample2)
     Term termToVerify(getLineIntegral(vectorField, {"x", "y", "z"}, linePath, {"t", 0, 2*getPiAsATerm()}));
 
     string stringToExpect("19.73920880217872");
-    EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());}
+    EXPECT_EQ(stringToExpect, termToVerify.getDisplayableString());
+}
 
 TEST(MathVectorOfTermsUtilitiesTest, GetLineIntegralIndependentOfPathWorksOnExample1)
 {
@@ -391,6 +401,7 @@ TEST(MathVectorOfTermsUtilitiesTest, GetLimitWorks)
     MathVectorOfTwoTerms termVector{x, y};
 
     MathVectorOfTwoTerms vectorToVerify(getLimit(termVector, "t", 0));
+
     string stringToExpect("{1, 2}");
     EXPECT_EQ(stringToExpect, vectorToVerify.getDisplayableString());
 }

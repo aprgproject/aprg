@@ -8,6 +8,7 @@ using namespace std;
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -22,7 +23,8 @@ using ShortestPathSearchForTest = PathSearchUsingBellmanFord<VertexForTest, Weig
 using LongestPathSearchForTest = PathSearchUsingBellmanFord<VertexForTest, WeightForTest, EdgeWeightedDirectedGraphForTest, greater>;
 }
 
-TEST(PathSearchUsingBellmanFordTest, ShortestPathSearchEndsWhenThereArePositiveCycles){
+TEST(PathSearchUsingBellmanFordTest, ShortestPathSearchEndsWhenThereArePositiveCycles)
+{
     EdgeWeightedDirectedGraphForTest graph;
     graph.connect(0U, 1U, 0.26);
     graph.connect(1U, 2U, 0.38);

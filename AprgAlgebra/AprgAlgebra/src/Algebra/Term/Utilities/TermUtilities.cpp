@@ -191,7 +191,8 @@ Term getNegativeInfinityAsATerm()
 
 Term convertPositiveTermIfNegative(Term const& term)
 {
-    Term result;    if(isANegativeTerm(term))
+    Term result;
+    if(isANegativeTerm(term))
     {
         result = negateTerm(term);
     }

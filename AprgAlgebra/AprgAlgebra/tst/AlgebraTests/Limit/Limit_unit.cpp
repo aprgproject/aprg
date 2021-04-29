@@ -173,7 +173,8 @@ TEST(LimitTest, GetLimitUsingLhopitalsRuleWorks)
     Term oneMinusEToTheX(createExpressionIfPossible({1, "-", getEAsATerm(), "^", "x"}));
     Term oneOverX(createExpressionIfPossible({1, "/", "x"}));
     Term termToTest1("x");
-    Term termToTest2(createExpressionIfPossible({"x", "/", oneMinusEToTheX}));    Term termToTest3(createExpressionIfPossible({sin(oneOverX), "/", arctan(oneOverX)}));
+    Term termToTest2(createExpressionIfPossible({"x", "/", oneMinusEToTheX}));
+    Term termToTest3(createExpressionIfPossible({sin(oneOverX), "/", arctan(oneOverX)}));
 
     Term termToVerify1(getLimitUsingLhopitalsRule(termToTest1, "x", 5));
     Term termToVerify2(getLimitUsingLhopitalsRule(termToTest2, "x", 0));
@@ -189,7 +190,8 @@ TEST(LimitTest, GetTermUsingLhopitalsRuleWorks)
     Term oneMinusEToTheX(createExpressionIfPossible({1, "-", getEAsATerm(), "^", "x"}));
     Term oneOverX(createExpressionIfPossible({1, "/", "x"}));
     Term termToTest1("x");
-    Term termToTest2(createExpressionIfPossible({"x", "/", oneMinusEToTheX}));    Term termToTest3(createExpressionIfPossible({sin(oneOverX), "/", arctan(oneOverX)}));
+    Term termToTest2(createExpressionIfPossible({"x", "/", oneMinusEToTheX}));
+    Term termToTest3(createExpressionIfPossible({sin(oneOverX), "/", arctan(oneOverX)}));
 
     Term termToVerify1(getTermUsingLhopitalsRule(termToTest1, "x", 5));
     Term termToVerify2(getTermUsingLhopitalsRule(termToTest2, "x", 0));
@@ -222,6 +224,7 @@ TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingLogarithmicAndE
     Term numerator(ln(insideLogarithm));
     Term denominator(Monomial(3, {{"x", 1}}));
     Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
+
     Term newTerm, limitValue;
     calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", AlbaNumber(AlbaNumber::Value::PositiveInfinity));
 
@@ -284,7 +287,8 @@ TEST(LimitTest, GetLimitAtAValueWorksForConstantOverPolynomial)
     EXPECT_EQ(getNegativeInfinityAsATerm(), getLimitAtAValue(constantOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::NegativeSide));
 }
 
-TEST(LimitTest, GetLimitAtAValueWorksForConstantOverPolynomialSquared){
+TEST(LimitTest, GetLimitAtAValueWorksForConstantOverPolynomialSquared)
+{
     Term numerator(3);
     Term polynomialTerm(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})});
     Term denominator(createExpressionIfPossible({polynomialTerm, "^", 2}));
@@ -297,6 +301,7 @@ TEST(LimitTest, GetLimitAtAValueWorksForConstantOverPolynomialSquared){
     EXPECT_EQ(getPositiveInfinityAsATerm(),
               getLimitAtAValue(constantOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::NegativeSide));
 }
+
 TEST(LimitTest, GetLimitAtAValueWorksForPolynomialOverPolynomial)
 {
     Term numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-25, {})});
@@ -332,6 +337,7 @@ TEST(LimitTest, GetLimitAtAValueWorksForPolynomialOverPolynomialWithEqualDegreeB
     EXPECT_EQ(getNegativeInfinityAsATerm(),
               getLimitAtAValue(polynomialOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::NegativeSide));
 }
+
 TEST(LimitTest, SimplifyAndGetLimitAtAValueWorksForPolynomialOverPolynomialWithDiscontinuityAtOneTwoThree_ThisCancelsProblematicFactors)
 {
     Term numerator(Polynomial{Monomial(1, {{"x", 3}}), Monomial(-2, {{"x", 2}})});
@@ -408,7 +414,8 @@ TEST(LimitTest, GetLimitAtInfinityWorks)
     EXPECT_EQ(getPositiveInfinityAsATerm(), getLimitAtInfinity("x", "x", AlbaNumber::Value::PositiveInfinity));
 }
 
-TEST(LimitTest, GetObliqueAsymptoteWorksAsResultIsEmptyWhenItsALine){
+TEST(LimitTest, GetObliqueAsymptoteWorksAsResultIsEmptyWhenItsALine)
+{
     Term termToTest(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
 
     EXPECT_EQ(Term(), getObliqueAsymptote(termToTest));

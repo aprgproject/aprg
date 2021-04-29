@@ -81,7 +81,8 @@ void SimplificationOfEquation::raiseLeftHandSideAndRightHandSideToPowerIfLogarit
             leftHandSide = Term(createExpressionIfPossible({getEAsATerm(), "^", leftHandSide}));
         }
         rightHandSide = getTermConstReferenceFromBaseTerm(functionObject.getInputTermConstReference());
-    }}
+    }
+}
 
 Term SimplificationOfEquation::getNewCombinedTerm(
         Term const& leftHandSide,

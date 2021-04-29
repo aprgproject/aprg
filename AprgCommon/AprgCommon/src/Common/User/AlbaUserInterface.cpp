@@ -75,7 +75,8 @@ template int AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(stri
 template unsigned int AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(string const& question, Choices<unsigned int> const& choices);
 
 
-string AlbaUserInterface::displayQuestionAndChoicesAndGetStringAnswerInAllCapitals(string const& question, Choices<string> const& choices){
+string AlbaUserInterface::displayQuestionAndChoicesAndGetStringAnswerInAllCapitals(string const& question, Choices<string> const& choices)
+{
     cout<<question<<endl;
 
     DisplayTable table;

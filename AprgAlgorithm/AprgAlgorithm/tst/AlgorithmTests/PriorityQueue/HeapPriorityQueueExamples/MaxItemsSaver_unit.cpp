@@ -22,7 +22,8 @@ public:
     using Objects = vector<Object>;
 
     MaxItemsSaver(unsigned int const numberOfItemsToSave)
-        : m_numberOfItemsToSave(numberOfItemsToSave)    {}
+        : m_numberOfItemsToSave(numberOfItemsToSave)
+    {}
 
     void save(Object const& object)
     {

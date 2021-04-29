@@ -253,6 +253,7 @@ TEST(TermRaiseToTermsTest, SimplifyWorksWithReducingExponentialToLogarithmic)
     Term base(getEAsATerm());
     Term exponent(ln(polynomialTerm));
     TermRaiseToTerms termRaiseToTerms(base, exponent);
+
     termRaiseToTerms.simplify();
 
     EXPECT_EQ(Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})}), termRaiseToTerms.getBase());
@@ -267,6 +268,7 @@ TEST(TermRaiseToTermsTest, SimplifyWorksWithReducingExponentialToLogarithmicWith
     Term base(getEAsATerm());
     Term exponent(ln(polynomialTerm));
     TermRaiseToTerms termRaiseToTerms(base, {2, exponent});
+
     termRaiseToTerms.simplify();
 
     EXPECT_EQ(Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})}), termRaiseToTerms.getBase());

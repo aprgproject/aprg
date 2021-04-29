@@ -63,7 +63,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetVolumeBasedOnSolidOfRevolutionWorksOnG
 
 TEST(IntegrationGeometryUtilitiesTest, GetVolumeBasedOnSolidOfRevolutionWorksOnUpsideDownConeWithUpsideDownConeHole)
 {
-    Term edgeOfTheCone1InY(Monomial(1, {{"radius", 1}, {"height", -1}, {"y", 1}}));    Term edgeOfTheCone2InY(Polynomial
+    Term edgeOfTheCone1InY(Monomial(1, {{"radius", 1}, {"height", -1}, {"y", 1}}));
+    Term edgeOfTheCone2InY(Polynomial
     {Monomial(1, {{"radius", 1}, {"height", -1}, {"y", 1}}), Monomial(1, {{"edgeDistance", 1}})});
 
     Term termToVerify(getVolumeUsingOnSolidOfRevolution(edgeOfTheCone1InY, edgeOfTheCone2InY, {"y", 0, "height"}));
@@ -99,7 +100,8 @@ TEST(IntegrationGeometryUtilitiesTest, GetLengthOfArcInPolarCoordinatesWorks)
     Term termToVerify(getLengthOfArcInPolarCoordinates(radiusOfLimacon, {"theta", 0, getPiAsATerm()}));
 
     Term termToExpect(12.21983866791859);
-    EXPECT_EQ(termToExpect, termToVerify);}
+    EXPECT_EQ(termToExpect, termToVerify);
+}
 
 TEST(IntegrationGeometryUtilitiesTest, GetTotalMassOfARodWorks)
 {
@@ -204,7 +206,8 @@ TEST(IntegrationGeometryUtilitiesTest, IntegrateInPolarCoordinatesWorks)
     Term termToVerify(integrateInPolarCoordinates(radiusOfLimacon, {"theta", 0, getPiAsATerm()}));
 
     Term termToExpect(18.84955592153876);
-    EXPECT_EQ(termToExpect, termToVerify);}
+    EXPECT_EQ(termToExpect, termToVerify);
+}
 
 TEST(IntegrationGeometryUtilitiesTest, GetDoubleIntegralInCartesianCoordinatesWorksOnExample1)
 {
@@ -344,6 +347,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetDoubleIntegralInPolarCoordinatesWorksO
     DetailsForDefiniteIntegralWithTerms thetaDetails{"theta", 0, getPiAsATerm()/2};
 
     Term termToVerify(getDoubleIntegralInPolarCoordinates(termToTest, radiusDetails, thetaDetails));
+
     Term termToExpect(6);
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -356,6 +360,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetDoubleIntegralInPolarCoordinatesWorksO
     DetailsForDefiniteIntegralWithTerms thetaDetails{"theta", 0, getPiAsATerm()/3};
 
     Term termToVerify(getDoubleIntegralInPolarCoordinates(termToTest, radiusDetails, thetaDetails));
+
     Term termToExpect(0.2617993877991494);
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -413,6 +418,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetTripleIntegralInCylindricalCoordinates
     DetailsForDefiniteIntegralWithTerms zDetails{"z", 0, 3};
 
     Term termToVerify(getTripleIntegralInCylindricalCoordinates(termToTest, radiusDetails, thetaDetails, zDetails));
+
     Term termToExpect(37.69911184307752);
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -427,6 +433,7 @@ TEST(IntegrationGeometryUtilitiesTest, GetTripleIntegralInSphericalCoordinatesWo
     DetailsForDefiniteIntegralWithTerms phiDetails{"phi", 0, getPiAsATerm()/2};
 
     Term termToVerify(getTripleIntegralInSphericalCoordinates(termToTest, rawDetails, thetaDetails, phiDetails));
+
     Term termToExpect(33.51032163829112);
     EXPECT_EQ(termToExpect, termToVerify);
 }

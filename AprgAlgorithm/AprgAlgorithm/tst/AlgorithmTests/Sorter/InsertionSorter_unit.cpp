@@ -17,6 +17,7 @@ namespace
 using ValuesForTest = vector<char>;
 using SorterForTest = InsertionSorter<ValuesForTest>;
 }
+
 TEST(InsertionSorterTest, SortWorksOnCharactersUsingExample1)
 {
     testSortUsingExample1WithCharacters<SorterForTest, ValuesForTest>();

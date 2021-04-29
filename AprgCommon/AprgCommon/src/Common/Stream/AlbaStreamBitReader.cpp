@@ -72,6 +72,7 @@ istream& AlbaStreamBitReader::getInputStream()
 {
     return m_stream;
 }
+
 void AlbaStreamBitReader::readIfNeeded(unsigned int const numberOfBitsRequired)
 {
     if(m_bitBuffer.size() < numberOfBitsRequired)
@@ -81,7 +82,8 @@ void AlbaStreamBitReader::readIfNeeded(unsigned int const numberOfBitsRequired)
         vector<char> characterBuffer(numberOfBytesToRead, {});
         m_stream.read(&(characterBuffer.front()), numberOfBytesToRead);
         for(char const c : characterBuffer)
-        {            bitset<8> charByte(c);
+        {
+            bitset<8> charByte(c);
             m_bitBuffer.emplace_back(charByte[7]);
             m_bitBuffer.emplace_back(charByte[6]);
             m_bitBuffer.emplace_back(charByte[5]);

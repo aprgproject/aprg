@@ -52,6 +52,7 @@ Term getVolumeUsingOnSolidOfRevolution(
     Term termToIntegrate = getPiAsATerm()*(term^2);
     return integration.integrateAtDefiniteTerms(termToIntegrate, integralDetails.lowerEnd, integralDetails.higherEnd);
 }
+
 Term getVolumeUsingOnSolidOfRevolution(
         Term const& lowerFunctionTerm,
         Term const& higherFunctionTerm,
@@ -68,6 +69,7 @@ Term getVolumeUsingOnSolidOfRevolution(
     Term termToIntegrate = getPiAsATerm()*((higherFunctionTerm-lowerFunctionTerm)^2);
     return integration.integrateAtDefiniteTerms(termToIntegrate, integralDetails.lowerEnd, integralDetails.higherEnd);
 }
+
 Term getVolumeUsingCylindricalShells(
         Term const& term,
         DetailsForDefiniteIntegralWithTerms const& integralDetails)
@@ -84,6 +86,7 @@ Term getVolumeUsingCylindricalShells(
     Term termToIntegrate = 2 * getPiAsATerm() * integralDetails.variableName * term;
     return integration.integrateAtDefiniteTerms(termToIntegrate, integralDetails.lowerEnd, integralDetails.higherEnd);
 }
+
 Term getLengthOfArc(
         Term const& term,
         DetailsForDefiniteIntegralWithTerms const& integralDetails)

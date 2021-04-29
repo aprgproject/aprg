@@ -93,7 +93,8 @@ TEST(AlbaStreamBitWriterTest, WriteLittleEndianNumberDataWorks)
 
 TEST(AlbaStreamBitWriterTest, WriteBitsetDataWorks)
 {
-    stringstream ss;    AlbaStreamBitWriter writer(ss);
+    stringstream ss;
+    AlbaStreamBitWriter writer(ss);
     bitset<32> bitsetToWrite(0x12345678);
 
     writer.writeBitsetData(bitsetToWrite, 15, 22);
