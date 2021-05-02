@@ -1,10 +1,10 @@
 #include "PolynomialHelpers.hpp"
 
 #include <Algebra/Factorization/FactorizationOfPolynomial.hpp>
+#include <Algebra/Retrieval/ExponentsRetriever.hpp>
 #include <Algebra/Retrieval/NumbersRetriever.hpp>
 #include <Algebra/Retrieval/VariableNamesRetriever.hpp>
-#include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
-#include <Algebra/Term/Utilities/MonomialHelpers.hpp>
+#include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>#include <Algebra/Term/Utilities/MonomialHelpers.hpp>
 #include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
 #include <Common/Math/AlbaMathHelper.hpp>
 
@@ -111,10 +111,20 @@ bool isVariableExponentInMonomialFound(
     return result;
 }
 
+bool isPolynomialLinear(Polynomial const& polynomial)
+{
+    ExponentsRetriever exponentsRetriever;
+    exponentsRetriever.retrieveFromPolynomial(polynomial);
+    AlbaNumbersSet const& exponents(exponentsRetriever.getSavedData());
+    return all_of(exponents.cbegin(), exponents.cend(), [](AlbaNumber const& exponent)
+    {
+        return exponent==0 || exponent==1;
+    });
+}
+
 Monomial getFirstMonomial(
         Polynomial const& polynomial)
-{
-    Monomial result;
+{    Monomial result;
     Monomials const& monomials(polynomial.getMonomialsConstReference());
     if(!monomials.empty())
     {
@@ -143,10 +153,31 @@ AlbaNumber getMaxDegree(
     return maxDegree;
 }
 
+std::pair<AlbaNumber, AlbaNumber> getMinmaxDegree(
+        Polynomial const& polynomial)
+{
+    bool isFirst(true);
+    std::pair<AlbaNumber, AlbaNumber> result;
+    for(Monomial const& monomial : polynomial.getMonomialsConstReference())
+    {
+        if(isFirst)
+        {
+            result.first = getDegree(monomial);
+            result.second = result.first;
+            isFirst=false;
+        }
+        else
+        {
+            result.first = min(result.first, getDegree(monomial));
+            result.second = max(result.second, getDegree(monomial));
+        }
+    }
+    return result;
+}
+
 AlbaNumber getDegreeForVariable(
         Polynomial const& polynomial,
-        string const& variableName)
-{
+        string const& variableName){
     bool isFirst(true);
     AlbaNumber maxDegree(0);
     for(Monomial const& monomial : polynomial.getMonomialsConstReference())
