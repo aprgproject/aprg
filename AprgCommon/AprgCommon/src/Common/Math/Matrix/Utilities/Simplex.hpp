@@ -58,10 +58,10 @@ void solveSimplexTable(AlbaMatrix<DataType> & simplexTable)
             if(pivotingRow < simplexTable.getNumberOfRows()) // if no pivoting row then its unbounded
             {
                 pivotAt(simplexTable, pivotingColumn, pivotingRow);
+                // Pivoting makes the column of the objective function (last row) result to zero
                 didPivot=true;
             }
-        }
-    }
+        }    }
 }
 
 template <typename DataType>
@@ -140,10 +140,10 @@ void pivotAt(AlbaMatrix<DataType> & simplexTable, unsigned int const pivotingCol
     });
 
     // zero out pivoting column
+    // -> this also sets the objective function coefficient to zero (guaranteeing forward progress)
     for(unsigned int y=0; y<simplexTable.getNumberOfRows(); y++)
     {
-        if(y != pivotingRow)
-        {
+        if(y != pivotingRow)        {
             simplexTable.setEntry(pivotingColumn, y, 0);
         }
     }
