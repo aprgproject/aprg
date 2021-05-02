@@ -4,7 +4,8 @@
 #include <Common/Math/Matrix/Utilities/AlbaMatrixUtilities.hpp>
 #include <Common/Math/Matrix/Utilities/GaussJordanReductionHeaders.hpp>
 
-namespace alba{
+namespace alba
+{
 
 namespace matrix
 {

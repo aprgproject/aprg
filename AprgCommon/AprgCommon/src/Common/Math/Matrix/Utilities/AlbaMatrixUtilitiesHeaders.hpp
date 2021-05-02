@@ -30,7 +30,8 @@ AlbaMatrix<DataType> doBinaryOperationWithSameDimensions(
 template <typename DataType>
 void interchangeRows(
         AlbaMatrix<DataType> & matrix,
-        unsigned int const y1,        unsigned int const y2);
+        unsigned int const y1,
+        unsigned int const y2);
 
 template <typename DataType>
 void addTwoRowsAndPutSumInAnotherRow(

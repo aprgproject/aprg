@@ -95,7 +95,8 @@ AlbaMatrix<DataType> doBinaryOperationWithSameDimensions(
 template <typename DataType>
 void interchangeRows(
         AlbaMatrix<DataType> & matrix,
-        unsigned int const y1,        unsigned int const y2)
+        unsigned int const y1,
+        unsigned int const y2)
 {
     unsigned int numberOfRows(matrix.getNumberOfRows());
     unsigned int numberOfColumns(matrix.getNumberOfColumns());

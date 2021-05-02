@@ -4,7 +4,8 @@
 #include <Algebra/Retrieval/ExponentsRetriever.hpp>
 #include <Algebra/Retrieval/NumbersRetriever.hpp>
 #include <Algebra/Retrieval/VariableNamesRetriever.hpp>
-#include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>#include <Algebra/Term/Utilities/MonomialHelpers.hpp>
+#include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
+#include <Algebra/Term/Utilities/MonomialHelpers.hpp>
 #include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
 #include <Common/Math/AlbaMathHelper.hpp>
 
@@ -124,7 +125,8 @@ bool isPolynomialLinear(Polynomial const& polynomial)
 
 Monomial getFirstMonomial(
         Polynomial const& polynomial)
-{    Monomial result;
+{
+    Monomial result;
     Monomials const& monomials(polynomial.getMonomialsConstReference());
     if(!monomials.empty())
     {
@@ -177,7 +179,8 @@ std::pair<AlbaNumber, AlbaNumber> getMinmaxDegree(
 
 AlbaNumber getDegreeForVariable(
         Polynomial const& polynomial,
-        string const& variableName){
+        string const& variableName)
+{
     bool isFirst(true);
     AlbaNumber maxDegree(0);
     for(Monomial const& monomial : polynomial.getMonomialsConstReference())

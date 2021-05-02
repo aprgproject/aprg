@@ -11,6 +11,7 @@ namespace matrix
 template <typename DataType> unsigned int getBestIndexForCoFactorExpansion(ListOfAlbaMatrixData<DataType> const& rowsAndColumns);
 
 template <typename DataType> DataType getDeterminant(AlbaMatrix<DataType> const& matrix);
+
 template <typename DataType>
 DataType getValueUsingCramerRule(
         AlbaMatrix<DataType> const& matrix,

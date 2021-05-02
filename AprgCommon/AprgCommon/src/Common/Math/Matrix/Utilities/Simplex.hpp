@@ -13,7 +13,8 @@ template <typename DataType>
 AlbaMatrix<DataType> constructSimplexTableWithLessThanConstraints(
         AlbaMatrix<DataType> const& constraintsCoefficients,
         AlbaMatrixData<DataType> const& constraintsValues,
-        AlbaMatrixData<DataType> const& objectiveFunctionCoefficients){
+        AlbaMatrixData<DataType> const& objectiveFunctionCoefficients)
+{
     // Table should look like this:
     // A is constraintsCoefficients
     // b is constraintsValues
@@ -61,7 +62,8 @@ void solveSimplexTable(AlbaMatrix<DataType> & simplexTable)
                 // Pivoting makes the column of the objective function (last row) result to zero
                 didPivot=true;
             }
-        }    }
+        }
+    }
 }
 
 template <typename DataType>
@@ -108,7 +110,8 @@ unsigned int getPivotingRowUsingMinRatioRule(AlbaMatrix<DataType> const& simplex
         if(simplexTable.getEntry(pivotingColumn, y) > 0) // consider only positive coefficient and positive value
         {
             // If there are no positive entries in the pivot column then the objective function is unbounded and there is no optimal solution.
-            DataType currentRatio = simplexTable.getEntry(lastX, y)/simplexTable.getEntry(pivotingColumn, y);            if(isFirst)
+            DataType currentRatio = simplexTable.getEntry(lastX, y)/simplexTable.getEntry(pivotingColumn, y);
+            if(isFirst)
             {
                 pivotingRow = y;
                 pivotingRatio = currentRatio;
@@ -127,12 +130,18 @@ unsigned int getPivotingRowUsingMinRatioRule(AlbaMatrix<DataType> const& simplex
     }
     return pivotingRow;
 }
+
 template <typename DataType>
 void pivotAt(AlbaMatrix<DataType> & simplexTable, unsigned int const pivotingColumn, unsigned int const pivotingRow)
 {
+    // In the high level, pivoting works by
+    // 1) subtracting the pivoting row to each row in the matrix and using the pivoting column as the basis on scaling the pivoting row
+    // 1) scaling the pivoting row such that the entry in the pivoting column is 1
+
     // scale all entries but pivoting row and pivoting column
     simplexTable.iterateAllThroughYAndThenX([&](unsigned int const x, unsigned int const y)
-    {        if(x != pivotingColumn && y != pivotingRow)
+    {
+        if(x != pivotingColumn && y != pivotingRow)
         {
             DataType valueToSubtract(simplexTable.getEntry(x, pivotingRow) * simplexTable.getEntry(pivotingColumn, y) / simplexTable.getEntry(pivotingColumn, pivotingRow));
             simplexTable.setEntry(x, y, simplexTable.getEntry(x, y)-valueToSubtract);
@@ -143,7 +152,8 @@ void pivotAt(AlbaMatrix<DataType> & simplexTable, unsigned int const pivotingCol
     // -> this also sets the objective function coefficient to zero (guaranteeing forward progress)
     for(unsigned int y=0; y<simplexTable.getNumberOfRows(); y++)
     {
-        if(y != pivotingRow)        {
+        if(y != pivotingRow)
+        {
             simplexTable.setEntry(pivotingColumn, y, 0);
         }
     }
