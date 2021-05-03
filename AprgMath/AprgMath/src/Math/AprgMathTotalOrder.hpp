@@ -1,7 +1,7 @@
 #pragma once
+
 namespace alba
 {
-
 template <typename DataType>
 bool hasTotalOrder(DataType const& /*value1*/, DataType const& /*value2*/)
 {
