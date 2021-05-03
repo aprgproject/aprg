@@ -32,7 +32,8 @@ Term getSurfaceAreaUsingOnSolidOfRevolution(
 
 Term getVolumeUsingOnSolidOfRevolution(
         Term const& lowerFunctionTerm,
-        Term const& higherFunctionTerm,        DetailsForDefiniteIntegralWithTerms const& integralDetails);
+        Term const& higherFunctionTerm,
+        DetailsForDefiniteIntegralWithTerms const& integralDetails);
 
 Term getVolumeUsingCylindricalShells(
         Term const& term,

@@ -169,6 +169,7 @@ unsigned int getFibonacci(unsigned int const number);
 unsigned int getValueAtPascalTriangle(unsigned int const rowIndex, unsigned int const columnIndex);
 int getStirlingNumberOfTheSecondKind(unsigned int const n, unsigned int const k);
 
+
 //Statistics functions
 double getCumulativeStandardDistributionApproximation(double const z);
 double getInverseCumulativeStandardDistributionApproximation(double const p, unsigned int const numberOfIterations);
@@ -235,7 +236,8 @@ template <typename NumberType> unsigned int getNumberOfIntegerDigits(NumberType 
 
 template <typename NumberType> inline bool areNumberOfDigitsOnTheIntegerLimit(unsigned int const digits)
 {
-    return digits >= std::numeric_limits<NumberType>::digits10;}
+    return digits >= std::numeric_limits<NumberType>::digits10;
+}
 
 
 //Complex number related functions

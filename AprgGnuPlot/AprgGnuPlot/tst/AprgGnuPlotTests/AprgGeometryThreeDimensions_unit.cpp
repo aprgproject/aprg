@@ -12,6 +12,7 @@ using namespace std;
 
 namespace alba
 {
+
 TEST(AprgGeometryThreeDimensionsTest, DISABLED_LineWithSlope)
 {
     Line line(Point(0,0,0), Point(2,3,-4));

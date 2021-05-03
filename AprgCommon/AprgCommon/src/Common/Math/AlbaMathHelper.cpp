@@ -273,7 +273,8 @@ unsigned int getFibonacci(unsigned int const number)
 
 unsigned int getValueAtPascalTriangle(unsigned int const rowIndex, unsigned int const columnIndex)
 {
-    return getNumberOfCombinations(rowIndex, columnIndex);}
+    return getNumberOfCombinations(rowIndex, columnIndex);
+}
 
 int getStirlingNumberOfTheSecondKind(unsigned int const n, unsigned int const k)
 {

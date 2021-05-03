@@ -23,6 +23,7 @@ public:
     {
         matrix::solveSimplexTable(m_simplexTable);
     }
+
     bool isOptimized() const
     {
         return matrix::isOptimal(m_simplexTable);
