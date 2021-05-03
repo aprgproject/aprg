@@ -165,9 +165,9 @@ AlbaNumbers getQuadraticRoots(RootType const rootType, AlbaNumber const& a, Alba
 unsigned int getFactorial(unsigned int const number);
 unsigned int getNumberOfPermutations(unsigned int const n, unsigned int const r);
 unsigned int getNumberOfCombinations(unsigned int const n, unsigned int const r);
+unsigned int getFibonacci(unsigned int const number);
 unsigned int getValueAtPascalTriangle(unsigned int const rowIndex, unsigned int const columnIndex);
 int getStirlingNumberOfTheSecondKind(unsigned int const n, unsigned int const k);
-
 
 //Statistics functions
 double getCumulativeStandardDistributionApproximation(double const z);
@@ -217,21 +217,25 @@ int getRaiseToPowerForIntegers(int const base, unsigned int exponent);
 
 
 //Digit related functions
-template <typename NumberType> unsigned int getNumberOfIntegerDigits(NumberType const value)
+template <typename NumberType> unsigned int getNumberOfDigitsOnBase(NumberType const base, NumberType const value)
 {
     unsigned int result(0);
     NumberType absoluteValue(getAbsoluteValue(value));
     if(absoluteValue >= 1)
     {
-        result = static_cast<unsigned int>(log10(static_cast<double>(absoluteValue)))+1;
+        result = static_cast<NumberType>(getLogarithm(base, absoluteValue)) + 1;
     }
     return result;
 }
 
+template <typename NumberType> unsigned int getNumberOfIntegerDigits(NumberType const value)
+{
+    return getNumberOfDigitsOnBase<NumberType>(10, value);
+}
+
 template <typename NumberType> inline bool areNumberOfDigitsOnTheIntegerLimit(unsigned int const digits)
 {
-    return digits >= std::numeric_limits<NumberType>::digits10;
-}
+    return digits >= std::numeric_limits<NumberType>::digits10;}
 
 
 //Complex number related functions
