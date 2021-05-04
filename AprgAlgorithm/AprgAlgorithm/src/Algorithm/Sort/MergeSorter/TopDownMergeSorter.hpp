@@ -48,6 +48,7 @@ private:
 // Merge sort has a divide and conquer approach
 // When billions items to sort, merge sort is faster than insertion sort even if insertion sort is running on super computer
 // Lesson 1: Good algorithms are better than super computers.
+
 // Proposition: Mergesort uses at most N*log2(N) compares and 6N*log2(N) array accesses to sort any array of size N.
 // Proof: Let the number of compares C(N) and array accesses A(N) to mergesort an array of size N satisfy the recurrences.
 // C(N) <= C(N/2) [first half] + C(N/2) [second half] + N [merge] for N>1 with C(1) = 0

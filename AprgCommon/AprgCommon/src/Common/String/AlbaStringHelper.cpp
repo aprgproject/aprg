@@ -8,6 +8,7 @@
 #include <numeric>
 #include <set>
 #include <sstream>
+
 using namespace std;
 
 namespace alba
@@ -925,7 +926,8 @@ string convertBoolToString(bool const value)
     return temporaryStream.str();
 }
 
-string NumberToStringConverter::convert(AlbaNumber const& number){
+string NumberToStringConverter::convert(AlbaNumber const& number)
+{
     return convert(number.getDouble());
 }
 
