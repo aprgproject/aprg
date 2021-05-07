@@ -167,7 +167,8 @@ TEST(UniqueIdTest, CheckLevenshteinDistance)
 
 TEST(ConvertCaseFromStringTest, ConvertToCapitalLettersUsingAllLetters)
 {
-    string testString("AbCDEFghIjKlMnopQRstUvWxYz");    string capitalLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    string testString("AbCDEFghIjKlMnopQRstUvWxYz");
+    string capitalLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
     EXPECT_EQ(capitalLetters, getStringWithCapitalLetters(testString));
 }

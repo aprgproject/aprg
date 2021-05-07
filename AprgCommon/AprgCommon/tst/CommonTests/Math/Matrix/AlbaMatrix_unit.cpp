@@ -253,6 +253,7 @@ TEST(AlbaMatrixTest, IsInsideTheMatrixWorks)
 TEST(AlbaMatrixTest, GetColumnsWorks)
 {
     AlbaMatrix<unsigned int> matrix(14, 6);
+
     EXPECT_EQ(14U, matrix.getNumberOfColumns());
 }
 

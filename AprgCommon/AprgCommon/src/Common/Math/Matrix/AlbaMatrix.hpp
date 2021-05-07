@@ -134,7 +134,8 @@ public:
 
     unsigned int getNumberOfColumns() const
     {
-        return m_numberOfColumns;    }
+        return m_numberOfColumns;
+    }
 
     unsigned int getNumberOfRows() const
     {
@@ -151,6 +152,7 @@ public:
         assert(isInside(x, y));
         return m_matrixData.at(getMatrixIndex(x, y));
     }
+
     MatrixData const& getMatrixData() const
     {
         return m_matrixData;
@@ -221,6 +223,7 @@ public:
         assert(isInside(x, y));
         m_matrixData[getMatrixIndex(x, y)] = value;
     }
+
     void setEntries(MatrixData const& dataSampleValues)
     {
         unsigned int limit = std::min(m_matrixData.size(), dataSampleValues.size());

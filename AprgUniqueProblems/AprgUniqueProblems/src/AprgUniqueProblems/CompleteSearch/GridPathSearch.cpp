@@ -64,6 +64,7 @@ bool GridPathSearch::shouldStop(unsigned int const x, unsigned int const y, Move
     }
     return false;
 }
+
 void GridPathSearch::search()
 {
     // Optimization 1: In any solution, we first move one step down or right.
@@ -114,4 +115,5 @@ void GridPathSearch::searchNextCoordinate(unsigned int const x, unsigned int con
         m_numberTraversedCells--;
     }
 }
+
 }
