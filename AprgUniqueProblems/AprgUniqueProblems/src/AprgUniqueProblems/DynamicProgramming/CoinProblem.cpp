@@ -2,10 +2,10 @@
 
 #include <Common/Math/AlbaMathHelper.hpp>
 
+#include <algorithm>
 #include <limits>
 
-using namespace alba::mathHelper;
-using namespace std;
+using namespace alba::mathHelper;using namespace std;
 
 namespace alba
 {
@@ -87,11 +87,10 @@ unsigned int CoinProblem::getNumberOfCoinPermutations(Coin const total)
     if(total>=m_countPerValue.size())
     {
         Coin initialValue=m_countPerValue.size();
-        unsigned int newSize = max(total+1, *(minmax(m_availableCoins.cbegin(), m_availableCoins.cend()).second));
+        unsigned int newSize = max(total+1, *(minmax_element(m_availableCoins.cbegin(), m_availableCoins.cend()).second));
         m_countPerValue.resize(newSize, 0U);
         for(Coin const availableCoin : m_availableCoins)
-        {
-            m_countPerValue[availableCoin] = 1;
+        {            m_countPerValue[availableCoin] = 1;
         }
         for(Coin partialValue=initialValue; partialValue<newSize; partialValue++)
         {
@@ -113,11 +112,10 @@ CoinProblem::CoinPermutations CoinProblem::getCoinPermutationsUsingLoops(Coin co
     if(total>=m_coinPermutations.size())
     {
         Coin initialValue=m_coinPermutations.size();
-        unsigned int newSize = max(total+1, *(minmax(m_availableCoins.cbegin(), m_availableCoins.cend()).second));
+        unsigned int newSize = max(total+1, *(minmax_element(m_availableCoins.cbegin(), m_availableCoins.cend()).second));
         m_coinPermutations.resize(newSize);
 
-        for(Coin const availableCoin : m_availableCoins)
-        {
+        for(Coin const availableCoin : m_availableCoins)        {
             if(m_coinPermutations.at(availableCoin).empty())
             {
                 m_coinPermutations[availableCoin].emplace(CoinPermutation{availableCoin});
@@ -153,11 +151,10 @@ unsigned int CoinProblem::getNumberOfCoinCombinations(Coin const total)
         if(total>=m_countPerValuePerCoin.size())
         {
             Coin initialValue=m_countPerValuePerCoin.size();
-            unsigned int newSize = max(total+1, *(minmax(m_availableCoins.cbegin(), m_availableCoins.cend()).second));
+            unsigned int newSize = max(total+1, *(minmax_element(m_availableCoins.cbegin(), m_availableCoins.cend()).second));
             CountPerValue countPerValue(m_availableCoins.size(), 0U);
             countPerValue.shrink_to_fit();
             m_countPerValuePerCoin.resize(newSize, countPerValue);
-
             for(Coin coinIndex=0; coinIndex<m_availableCoins.size(); coinIndex++)
             {
                 for(Coin partialValue=initialValue; partialValue<newSize; partialValue++)
@@ -195,11 +192,10 @@ CoinProblem::CoinCombinations CoinProblem::getCoinCombinationsUsingRecursion(Coi
     // this recursion method is exponential
     if(total >= m_coinCombinations.size())
     {
-        unsigned int newSize = max(total+1, *(minmax(m_availableCoins.cbegin(), m_availableCoins.cend()).second));
+        unsigned int newSize = max(total+1, *(minmax_element(m_availableCoins.cbegin(), m_availableCoins.cend()).second));
         m_coinCombinations.resize(newSize);
     }
-    if(m_coinCombinations.at(total).empty())
-    {
+    if(m_coinCombinations.at(total).empty())    {
         for(Coin const availableCoin : m_availableCoins)
         {
             if(total > availableCoin)
@@ -227,11 +223,10 @@ CoinProblem::CoinCombinations CoinProblem::getCoinCombinationsUsingLoops(Coin co
     if(total>=m_coinCombinations.size())
     {
         Coin initialValue=m_coinCombinations.size();
-        unsigned int newSize = max(total+1, *(minmax(m_availableCoins.cbegin(), m_availableCoins.cend()).second));
+        unsigned int newSize = max(total+1, *(minmax_element(m_availableCoins.cbegin(), m_availableCoins.cend()).second));
         m_coinCombinations.resize(newSize);
 
-        for(Coin const availableCoin : m_availableCoins)
-        {
+        for(Coin const availableCoin : m_availableCoins)        {
             if(m_coinCombinations.at(availableCoin).empty())
             {
                 m_coinCombinations[availableCoin].emplace(CoinCombination{availableCoin});
