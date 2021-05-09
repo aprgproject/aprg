@@ -177,7 +177,8 @@ Term IntegrationForFiniteCalculus::integrateMonomial(
             result = createExpressionIfPossible({monomialToRetain, "*", harmonicNumber(m_nameOfVariableToIntegrate)});
             result.simplify();
         }
-        else        {
+        else
+        {
             AlbaNumber exponentAbsoluteValue(getAbsoluteValue(exponent));
             Monomial monomialWithOneLessExponent(monomial);
             monomialWithOneLessExponent.putVariableWithExponent(m_nameOfVariableToIntegrate, exponentAbsoluteValue-1);

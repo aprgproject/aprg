@@ -21,7 +21,8 @@ public:
     // is logarithm simplification needed?
     struct ConfigurationDetails
     {
-        bool shouldSimplifyToACommonDenominator;        bool shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase;
+        bool shouldSimplifyToACommonDenominator;
+        bool shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase;
         bool shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision;
         bool shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt;
         bool shouldSimplifyByRationalizingNumerator;

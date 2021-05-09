@@ -2,7 +2,8 @@
 #include <Algebra/Term/Operators/TermOperators.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
-#include <Algebra/Term/Utilities/TermUtilities.hpp>#include <Common/Math/AlbaMathHelper.hpp>
+#include <Algebra/Term/Utilities/TermUtilities.hpp>
+#include <Common/Math/AlbaMathHelper.hpp>
 
 #include <gtest/gtest.h>
 
@@ -97,6 +98,7 @@ TEST(CommonFunctionLibraryTest, LogarithmsCanSimplifiedToLoweringOperatorValue)
 TEST(CommonFunctionLibraryTest, LogarithmBase10FunctionWorks)
 {
     Function logarithmBase10FunctionObject(log(5));
+
     EXPECT_EQ("log", logarithmBase10FunctionObject.getFunctionName());
     EXPECT_EQ(Term(5), getTermConstReferenceFromBaseTerm(logarithmBase10FunctionObject.getInputTermConstReference()));
     EXPECT_EQ(AlbaNumber(0.6989700043360189), logarithmBase10FunctionObject.performFunctionAndReturnResultIfPossible());
@@ -125,6 +127,7 @@ TEST(CommonFunctionLibraryTest, HarmonicNumberFunctionHasAnUpperBoundOfLog2NPlus
 TEST(CommonFunctionLibraryTest, SineFunctionWorks)
 {
     Function sineFunction(sin(getPiAsATerm()));
+
     EXPECT_EQ("sin", sineFunction.getFunctionName());
     EXPECT_EQ(getPiAsATerm(), getTermConstReferenceFromBaseTerm(sineFunction.getInputTermConstReference()));
     EXPECT_EQ(AlbaNumber(0), sineFunction.performFunctionAndReturnResultIfPossible());

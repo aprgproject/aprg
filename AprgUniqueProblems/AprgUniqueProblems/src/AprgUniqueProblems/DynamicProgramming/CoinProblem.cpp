@@ -190,6 +190,7 @@ unsigned int CoinProblem::getNumberOfCoinCombinations(Coin const total)
     }
     return result;
 }
+
 CoinProblem::CoinCombinations CoinProblem::getCoinCombinationsUsingRecursion(Coin const total)
 {
     // this recursion method is exponential

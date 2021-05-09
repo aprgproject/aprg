@@ -21,7 +21,8 @@ Function log(Term const& term);
 
 Function harmonicNumber(Term const& term);
 
-Function sin(Term const& term);Function cos(Term const& term);
+Function sin(Term const& term);
+Function cos(Term const& term);
 Function tan(Term const& term);
 Function csc(Term const& term);
 Function sec(Term const& term);
