@@ -70,12 +70,11 @@ FractionDetails getFractionFromPartialNumerators(
     }
     return FractionDetails{
         1,
-        getIntegerAfterRoundingDoubleValue<unsigned int>(numerator),
-                getIntegerAfterRoundingDoubleValue<unsigned int>(denominator)};
+        getIntegerAfterRoundingADoubleValue<unsigned int>(numerator),
+                getIntegerAfterRoundingADoubleValue<unsigned int>(denominator)};
 }
 
-//end of internal functions
-}
+//end of internal functions}
 
 
 //isAlmostEqual
@@ -268,11 +267,10 @@ unsigned int getFibonacci(unsigned int const number)
     // Binets formula:
     double sqrtOf5 = sqrt(5);
     double fibonacciInDouble = (pow(1+sqrtOf5, number)-pow(1-sqrtOf5, number)) / (pow(2, number)*sqrtOf5);
-    return getIntegerAfterRoundingDoubleValue<unsigned int>(fibonacciInDouble);
+    return getIntegerAfterRoundingADoubleValue<unsigned int>(fibonacciInDouble);
 }
 
-unsigned int getValueAtPascalTriangle(unsigned int const rowIndex, unsigned int const columnIndex)
-{
+unsigned int getValueAtPascalTriangle(unsigned int const rowIndex, unsigned int const columnIndex){
     return getNumberOfCombinations(rowIndex, columnIndex);
 }
 
