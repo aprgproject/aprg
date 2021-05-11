@@ -22,12 +22,11 @@ unsigned int CountingSubGrids::countSubGridsWithAllBlackCorners() const
         {
             for (unsigned int i=0; i<m_bitValueGrid.getNumberOfColumns(); i++)
             {
-                unsigned int commonColumns = BitValueUtilities::getNumberOfOnes(m_bitValueGrid.getEntry(i, row1) & m_bitValueGrid.getEntry(i, row2));
-                result += commonColumns/2;
+                unsigned int commonBlackColumns = BitValueUtilities::getNumberOfOnes(m_bitValueGrid.getEntry(i, row1) & m_bitValueGrid.getEntry(i, row2));
+                result += commonBlackColumns*(commonBlackColumns-1)/2;
             }
         }
-    }
-    return result;
+    }    return result;
 }
 
 void CountingSubGrids::initialize(BitGrid const& bitGrid)
