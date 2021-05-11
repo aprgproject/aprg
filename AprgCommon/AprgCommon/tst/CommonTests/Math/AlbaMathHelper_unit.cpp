@@ -201,7 +201,8 @@ TEST(AlbaMathHelperTest, GetIntegerAfterCeilingOfDoubleValueWorks)
 
 TEST(AlbaMathHelperTest, IntegerPartInDoubleWorks)
 {
-    EXPECT_EQ(0, getIntegerPartInDouble(0));    EXPECT_EQ(1, getIntegerPartInDouble(1));
+    EXPECT_EQ(0, getIntegerPartInDouble(0));
+    EXPECT_EQ(1, getIntegerPartInDouble(1));
     EXPECT_EQ(1, getIntegerPartInDouble(1.5));
     EXPECT_EQ(-1, getIntegerPartInDouble(-1.5));
     EXPECT_EQ(652, getIntegerPartInDouble(652.426542));
@@ -611,7 +612,8 @@ TEST(AlbaMathHelperTest, GetGreatestCommonPowerOf2FactorWorks)
 
 TEST(AlbaMathHelperTest, GetLeastCommonMultipleInDoubleWorks)
 {
-    EXPECT_DOUBLE_EQ(262144, getLeastCommonMultipleInDouble(65536, 262144));}
+    EXPECT_DOUBLE_EQ(262144, getLeastCommonMultipleInDouble(65536, 262144));
+}
 
 TEST(AlbaMathHelperTest, GetDifferenceFromGreaterMultipleWorks)
 {
@@ -751,7 +753,8 @@ TEST(AlbaMathHelperTest, IsPerfectNthPowerForUnsignedIntWorks)
 
 TEST(AlbaMathHelperTest, IsPerfectCubeForAlbaNumberWorks)
 {
-    EXPECT_TRUE(isPerfectCube(AlbaNumber(0)));    EXPECT_TRUE(isPerfectCube(AlbaNumber(1)));
+    EXPECT_TRUE(isPerfectCube(AlbaNumber(0)));
+    EXPECT_TRUE(isPerfectCube(AlbaNumber(1)));
     EXPECT_TRUE(isPerfectCube(AlbaNumber(8)));
     EXPECT_FALSE(isPerfectCube(AlbaNumber(9)));
     EXPECT_TRUE(isPerfectCube(AlbaNumber(1000)));
@@ -762,7 +765,8 @@ TEST(AlbaMathHelperTest, IsPerfectCubeForAlbaNumberWorks)
 
 TEST(AlbaMathHelperTest, IsPerfectSquareForAlbaNumberWorks)
 {
-    EXPECT_TRUE(isPerfectSquare(AlbaNumber(0)));    EXPECT_TRUE(isPerfectSquare(AlbaNumber(1)));
+    EXPECT_TRUE(isPerfectSquare(AlbaNumber(0)));
+    EXPECT_TRUE(isPerfectSquare(AlbaNumber(1)));
     EXPECT_FALSE(isPerfectSquare(AlbaNumber(3)));
     EXPECT_TRUE(isPerfectSquare(AlbaNumber(4)));
     EXPECT_TRUE(isPerfectSquare(AlbaNumber(100)));
@@ -773,7 +777,8 @@ TEST(AlbaMathHelperTest, IsPerfectSquareForAlbaNumberWorks)
 
 TEST(AlbaMathHelperTest, IsPerfectNthPowerForAlbaNumberWorks)
 {
-    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(0U), 0U));    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(1), 1U));
+    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(0U), 0U));
+    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(1), 1U));
     EXPECT_FALSE(isPerfectNthPower(AlbaNumber(100), 0U));
     EXPECT_TRUE(isPerfectNthPower(AlbaNumber(100), 1U));
     EXPECT_TRUE(isPerfectNthPower(AlbaNumber(100), 2U));
