@@ -1,11 +1,8 @@
 #include "PathSumInGrid.hpp"
 
-#include <algorithm>
-
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 PathSumInGrid::PathSumInGrid(Grid const& gridToCheck)
     : m_gridToCheck(gridToCheck)

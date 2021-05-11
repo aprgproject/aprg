@@ -1,11 +1,8 @@
 #include "LevenshteinDistance.hpp"
 
-#include <algorithm>
-
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 LevenshteinDistance::LevenshteinDistance(string const& string1, string const& string2)
     : m_string1(string1)

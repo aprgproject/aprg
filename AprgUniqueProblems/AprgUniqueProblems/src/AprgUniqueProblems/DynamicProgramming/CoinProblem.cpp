@@ -2,12 +2,8 @@
 
 #include <Common/Math/AlbaMathHelper.hpp>
 
-#include <algorithm>
-#include <limits>
-
 using namespace alba::mathHelper;
 using namespace std;
-
 namespace alba
 {
 
