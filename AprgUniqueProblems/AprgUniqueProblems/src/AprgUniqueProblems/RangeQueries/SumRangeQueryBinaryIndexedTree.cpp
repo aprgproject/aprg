@@ -4,6 +4,7 @@
 
 using namespace alba::mathHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -47,7 +48,8 @@ SumRangeQueryBinaryIndexedTree::Value SumRangeQueryBinaryIndexedTree::getSumFrom
             indexPlusOne -= getGreatestPowerOf2Factor(indexPlusOne);
         }
     }
-    return result;}
+    return result;
+}
 
 void SumRangeQueryBinaryIndexedTree::changeValueAtIndex(
         Index const index,
@@ -66,6 +68,7 @@ void SumRangeQueryBinaryIndexedTree::changeValueAtIndex(
         }
     }
 }
+
 void SumRangeQueryBinaryIndexedTree::initializePartialSums(Values const& valuesToCheck)
 {
     m_partialTreeSums.reserve(valuesToCheck.size());
@@ -75,7 +78,8 @@ void SumRangeQueryBinaryIndexedTree::initializePartialSums(Values const& valuesT
         Index powerOf2Factor(getGreatestPowerOf2Factor(indexPlusOne));
         Value partialTreeSum = accumulate(valuesToCheck.cbegin()+indexPlusOne-powerOf2Factor, valuesToCheck.cbegin()+indexPlusOne, Value{});
         m_partialTreeSums.emplace_back(partialTreeSum);
-    }    m_partialTreeSums.shrink_to_fit();
+    }
+    m_partialTreeSums.shrink_to_fit();
 }
 
 }

@@ -26,7 +26,8 @@ unsigned int CountingSubGrids::countSubGridsWithAllBlackCorners() const
                 result += commonBlackColumns*(commonBlackColumns-1)/2;
             }
         }
-    }    return result;
+    }
+    return result;
 }
 
 void CountingSubGrids::initialize(BitGrid const& bitGrid)

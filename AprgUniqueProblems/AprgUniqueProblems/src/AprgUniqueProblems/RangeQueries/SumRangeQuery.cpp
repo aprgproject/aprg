@@ -2,7 +2,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 SumRangeQuery::SumRangeQuery(Values const& valuesToCheck)
     : m_partialSums()

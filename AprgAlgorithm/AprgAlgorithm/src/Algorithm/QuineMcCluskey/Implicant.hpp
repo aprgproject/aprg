@@ -205,7 +205,8 @@ private:
         constexpr Minterm INITIAL_VALUE(AlbaBitValueUtilities<Minterm>::getAllOnes());
         return std::accumulate(m_minterms.cbegin(), m_minterms.cend(), INITIAL_VALUE, [](Minterm const& minterm1, Minterm const& minterm2)
         {
-            return minterm1 & minterm2;        });
+            return minterm1 & minterm2;
+        });
     }
 
     Minterm performOrOperationOfAllMinterms() const

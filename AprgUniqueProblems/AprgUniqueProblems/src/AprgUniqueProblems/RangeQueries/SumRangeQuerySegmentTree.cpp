@@ -4,6 +4,7 @@
 
 using namespace alba::mathHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -38,7 +39,8 @@ SumRangeQuerySegmentTree::Value SumRangeQuerySegmentTree::getSumFromStartToEnd(I
         if(first == last) // add value if it ends on the same place
         {
             result += m_treeValues.at(first);
-        }    }
+        }
+    }
     return result;
 }
 

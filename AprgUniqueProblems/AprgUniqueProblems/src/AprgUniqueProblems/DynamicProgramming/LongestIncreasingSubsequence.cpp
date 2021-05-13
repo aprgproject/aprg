@@ -2,7 +2,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 LongestIncreasingSubsequence::LongestIncreasingSubsequence(Sequence const& sequenceToCheck)
     : m_sequenceToCheck(sequenceToCheck)

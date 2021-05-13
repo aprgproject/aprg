@@ -50,7 +50,8 @@ bool isASimplePath(typename GraphTypes<Vertex>::Path const& path)
     // Other definition: A path is simple if each node appears at most once in the path.
 
     std::set<Vertex> uniqueVertices;
-    copy(path.cbegin(), path.cend(), inserter(uniqueVertices, uniqueVertices.cbegin()));    return uniqueVertices.size() == path.size();
+    copy(path.cbegin(), path.cend(), inserter(uniqueVertices, uniqueVertices.cbegin()));
+    return uniqueVertices.size() == path.size();
 }
 
 template <typename Vertex>
@@ -101,7 +102,7 @@ bool hasAnyCyclesOnGraph(BaseGraph<Vertex> const& graph)
 }
 
 template <typename Vertex>
-bool isRegular(BaseGraph<Vertex> const& graph)
+bool isARegularGraph(BaseGraph<Vertex> const& graph)
 {
     // A graph is regular if the degree of every node is a constant d.
 
@@ -125,7 +126,7 @@ bool isRegular(BaseGraph<Vertex> const& graph)
 }
 
 template <typename Vertex>
-bool isComplete(BaseGraph<Vertex> const& graph)
+bool isACompleteGraph(BaseGraph<Vertex> const& graph)
 {
     // A graph is complete if the degree of every node is n-1, i.e., the graph contains all possible edges between the nodes.
 
@@ -143,6 +144,16 @@ bool isComplete(BaseGraph<Vertex> const& graph)
 }
 
 template <typename Vertex>
+bool isASimpleGraph(BaseGraph<Vertex> const& graph)
+{
+    // A graph is simple if no edge starts and ends at the same node, and there are no multiple edges between two nodes.
+    // Often we assume that graphs are simple.
+
+    return getNumberOfSelfLoops(graph) == 0; // "no edge starts and ends at the same node"
+    // How to check "multiple edges between two nodes"?
+}
+
+template <typename Vertex>
 bool isATree(BaseUndirectedGraph<Vertex> const& graph)
 {
     // A tree is an acyclic connected graph.
@@ -150,6 +161,7 @@ bool isATree(BaseUndirectedGraph<Vertex> const& graph)
 
     return !hasAnyCyclesOnGraph(graph) && isGraphConnected(graph);
 }
+
 template <typename Vertex>
 bool isAForest(BaseUndirectedGraph<Vertex> const& graph)
 {
@@ -201,6 +213,7 @@ bool isGraphConnected(BaseDirectedGraph<Vertex> const& graph)
 
     return isGraphStronglyConnected(graph);
 }
+
 template <typename Vertex>
 bool isGraphStronglyConnected(BaseDirectedGraph<Vertex> const& graph)
 {
@@ -217,6 +230,11 @@ bool isBipartite(BaseUndirectedGraph<Vertex> const& graph)
     // A bipartite is a graph whose vertices we can divide into two sets
     // such that all edges connect a vertex in one set with a vertex in the other set.
     // In short, you can split the vertices in two groups and all edges should bridge the two groups
+
+    // Other definition:
+    // In a coloring of a graph, each node is assigned a color so that no adjacent nodes have the same color.
+    // A graph is bipartite if it is possible to color it using two colors.
+    // It turns out that a graph is bipartite exactly when it does not contain a cycle with an odd number of edges.
 
     return BipartiteCheckerUsingDfs<Vertex>(graph).isBipartite();
 }
@@ -290,6 +308,7 @@ unsigned int getDegreeAt(BaseGraph<Vertex> const& graph, Vertex const& vertex)
 
     return graph.getAdjacentVerticesAt(vertex).size();
 }
+
 template <typename Vertex>
 unsigned int getMaxDegree(BaseGraph<Vertex> const& graph)
 {
@@ -304,8 +323,10 @@ unsigned int getMaxDegree(BaseGraph<Vertex> const& graph)
 template <typename Vertex>
 unsigned int getSumOfDegrees(BaseGraph<Vertex> const& graph)
 {
+    // Other definition:
     // The sum of degrees in a graph is always 2m, where m is the number of edges, because each edge increases the degree of exactly two nodes by one.
     // For this reason, the sum of degrees is always even.
+    // -> Is this only for undirected graphs?
 
     return graph.getNumberOfEdges()*2;
 }
@@ -313,7 +334,8 @@ unsigned int getSumOfDegrees(BaseGraph<Vertex> const& graph)
 template <typename Vertex>
 double getAverageDegree(BaseGraph<Vertex> const& graph)
 {
-    // Times two because edges are only counted once and degree is per vertex    return static_cast<double>(graph.getNumberOfEdges()) / graph.getNumberOfVertices() * 2;
+    // Times two because edges are only counted once and degree is per vertex
+    return static_cast<double>(graph.getNumberOfEdges()) / graph.getNumberOfVertices() * 2;
 }
 
 template <typename Vertex>
@@ -329,6 +351,29 @@ unsigned int getNumberOfSelfLoops(BaseGraph<Vertex> const& graph)
         }
     }
     return count;
+}
+
+template <typename Vertex>
+std::pair<unsigned int, unsigned int> getInDegreeAndOutDegree(BaseDirectedGraph<Vertex> const& graph, Vertex const& vertex)
+{
+    // In a directed graph, the indegree of a node is the number of edges that end at the node,
+    // and the outdegree of a node is the number of edges that start at the node.
+
+    using Edge = typename GraphTypes<Vertex>::Edge;
+
+    std::pair<unsigned int, unsigned int> result{};
+    for(Edge const& edge : graph.getEdges())
+    {
+        if(edge.first == vertex)
+        {
+            result.first++;
+        }
+        if(edge.second == vertex)
+        {
+            result.second++;
+        }
+    }
+    return result;
 }
 
 template <typename Vertex, typename Weight, typename EdgeWeightedGraphType>

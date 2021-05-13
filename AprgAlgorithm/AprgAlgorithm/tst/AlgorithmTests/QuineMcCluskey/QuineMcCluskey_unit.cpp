@@ -234,7 +234,8 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_HasZeroInDigitForByte)
 {
     QuineMcCluskeyForTest quineMcCluskey;
     AlbaLocalPathHandler pathOfNewAlgorithm(APRG_DIR R"(\AprgAlgorithm\FilesForTests\QuineMcKluskeyTest\HasZeroInDigitForByte.txt)");
-    ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getFullPath());    AlbaFileReader algorithmResultsReader(algorithmResultsFileStream);
+    ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getFullPath());
+    AlbaFileReader algorithmResultsReader(algorithmResultsFileStream);
     while(algorithmResultsReader.isNotFinished())
     {
         string lineInFile(algorithmResultsReader.getLineAndIgnoreWhiteSpaces());
@@ -247,7 +248,8 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_HasZeroInDigitForByte)
         }
     }
 
-    quineMcCluskey.fillComputationalTableWithMintermsWithZeroCommonalityCount();    cout << "Initial computation table: " << endl << quineMcCluskey.getComputationTableString() << endl;
+    quineMcCluskey.fillComputationalTableWithMintermsWithZeroCommonalityCount();
+    cout << "Initial computation table: " << endl << quineMcCluskey.getComputationTableString() << endl;
     quineMcCluskey.findAllCombinations();
 
     ImplicantsForTest finalImplicants(quineMcCluskey.getAllFinalImplicants());
