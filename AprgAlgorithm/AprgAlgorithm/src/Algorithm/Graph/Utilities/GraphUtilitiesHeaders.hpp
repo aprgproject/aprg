@@ -18,10 +18,11 @@ template <typename Vertex> bool isACycle(typename GraphTypes<Vertex>::Path const
 template <typename Vertex> bool isASimpleCycle(typename GraphTypes<Vertex>::Path const& path);
 template <typename Vertex> bool isDirectedAcyclicGraph(BaseGraph<Vertex> const& graph);
 template <typename Vertex> bool hasAnyCyclesOnGraph(BaseGraph<Vertex> const& graph);
+template <typename Vertex> bool isRegular(BaseGraph<Vertex> const& graph);
+template <typename Vertex> bool isComplete(BaseGraph<Vertex> const& graph);
 template <typename Vertex> bool isATree(BaseUndirectedGraph<Vertex> const& graph);
 template <typename Vertex> bool isAForest(BaseUndirectedGraph<Vertex> const& graph);
-template <typename Vertex> bool isASpanningTree(
-        BaseUndirectedGraph<Vertex> const& mainGraph,
+template <typename Vertex> bool isASpanningTree(        BaseUndirectedGraph<Vertex> const& mainGraph,
         BaseUndirectedGraph<Vertex> const& subGraphToCheck);
 template <typename Vertex> bool isASpanningForest(
         BaseUndirectedGraph<Vertex> const& mainGraph,
@@ -31,11 +32,13 @@ template <typename Vertex> bool isGraphStronglyConnected(BaseDirectedGraph<Verte
 template <typename Vertex> bool isBipartite(BaseUndirectedGraph<Vertex> const& graph);
 template <typename EdgeWeightedGraphType> bool isFlowNetwork(EdgeWeightedGraphType const& graph);
 template <typename SinkSourceFlowNetworkType> bool isSinkSourceFlowNetworkFeasible(SinkSourceFlowNetworkType const& flowNetwork);
+
+template <typename Vertex> unsigned int getLengthOfPath(typename GraphTypes<Vertex>::Path const& path);
 template <typename Vertex> unsigned int getDegreeAt(BaseGraph<Vertex> const& graph, Vertex const& vertex);
 template <typename Vertex> unsigned int getMaxDegree(BaseGraph<Vertex> const& graph);
+template <typename Vertex> unsigned int getSumOfDegrees(BaseGraph<Vertex> const& graph);
 template <typename Vertex> double getAverageDegree(BaseGraph<Vertex> const& graph);
 template <typename Vertex> unsigned int getNumberOfSelfLoops(BaseGraph<Vertex> const& graph);
-
 template <typename Vertex, typename Weight, typename EdgeWeightedGraphType>
 typename GraphTypes<Vertex>::Path getCriticalPath(
         EdgeWeightedGraphType const& graph,

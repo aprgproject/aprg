@@ -209,33 +209,45 @@ TEST(QuineMcCluskeyTest, DISABLED_ExperimentalTest)
     cout<<quineMcCluskey.getOutputTable(finalImplicants);
 }
 
-TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile)
+namespace
+{
+
+void setInputOutput(QuineMcCluskeyForTest & quineMcCluskey, MintermForTest const input, string const& output)
+{
+    if(output == "1")
+    {
+        quineMcCluskey.setInputOutput(input, LogicalValue::True);
+    }
+    else if(output == "0")
+    {
+        quineMcCluskey.setInputOutput(input, LogicalValue::False);
+    }
+    else if(output == "X")
+    {
+        quineMcCluskey.setInputOutput(input, LogicalValue::DontCare);
+    }
+}
+
+}
+
+TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_HasZeroInDigitForByte)
 {
     QuineMcCluskeyForTest quineMcCluskey;
     AlbaLocalPathHandler pathOfNewAlgorithm(APRG_DIR R"(\AprgAlgorithm\FilesForTests\QuineMcKluskeyTest\HasZeroInDigitForByte.txt)");
-    ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getFullPath());
-    AlbaFileReader algorithmResultsReader(algorithmResultsFileStream);
+    ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getFullPath());    AlbaFileReader algorithmResultsReader(algorithmResultsFileStream);
     while(algorithmResultsReader.isNotFinished())
     {
         string lineInFile(algorithmResultsReader.getLineAndIgnoreWhiteSpaces());
-        MintermForTest input = convertStringToNumber<MintermForTest>(getStringBeforeThisString(lineInFile, "->"));
-        string output = getStringWithCapitalLetters(getStringWithoutStartingAndTrailingWhiteSpace(getStringAfterThisString(lineInFile, "->")));
-        if(output == "1")
+        strings entries;
+        splitToStrings<SplitStringType::WithoutDelimeters>(entries, lineInFile, " ");
+        if(entries.size()>=2)
         {
-            quineMcCluskey.setInputOutput(input, LogicalValue::True);
-        }
-        else if(output == "0")
-        {
-            quineMcCluskey.setInputOutput(input, LogicalValue::False);
-        }
-        else if(output == "X")
-        {
-            quineMcCluskey.setInputOutput(input, LogicalValue::DontCare);
+            MintermForTest input = convertStringToNumber<MintermForTest>(entries.at(0));
+            setInputOutput(quineMcCluskey, input, getStringWithCapitalLetters(entries.at(1)));
         }
     }
 
-    quineMcCluskey.fillComputationalTableWithMintermsWithZeroCommonalityCount();
-    cout << "Initial computation table: " << endl << quineMcCluskey.getComputationTableString() << endl;
+    quineMcCluskey.fillComputationalTableWithMintermsWithZeroCommonalityCount();    cout << "Initial computation table: " << endl << quineMcCluskey.getComputationTableString() << endl;
     quineMcCluskey.findAllCombinations();
 
     ImplicantsForTest finalImplicants(quineMcCluskey.getAllFinalImplicants());
@@ -247,6 +259,46 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile)
               " '11-10000 (208, 240, )', '11111010 (250)', }]",
               finalImplicants.getDisplayableString());
     cout << quineMcCluskey.getOutputTable(finalImplicants);
+}
+
+TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_LogarithmBase2ForByte)
+{
+    QuineMcCluskeyForTest qm0;
+    QuineMcCluskeyForTest qm1;
+    QuineMcCluskeyForTest qm2;
+    AlbaLocalPathHandler pathOfNewAlgorithm(APRG_DIR R"(\AprgAlgorithm\FilesForTests\QuineMcKluskeyTest\LogarithmBase2ForByte.txt)");
+    ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getFullPath());
+    AlbaFileReader algorithmResultsReader(algorithmResultsFileStream);
+    while(algorithmResultsReader.isNotFinished())
+    {
+        string lineInFile(algorithmResultsReader.getLineAndIgnoreWhiteSpaces());
+        strings entries;
+        splitToStrings<SplitStringType::WithoutDelimeters>(entries, lineInFile, " ");
+        if(entries.size()>=4)
+        {
+            MintermForTest input = convertStringToNumber<MintermForTest>(entries.at(0));
+            setInputOutput(qm0, input, getStringWithCapitalLetters(entries.at(1)));
+            setInputOutput(qm1, input, getStringWithCapitalLetters(entries.at(2)));
+            setInputOutput(qm2, input, getStringWithCapitalLetters(entries.at(3)));
+        }
+    }
+
+    qm0.fillComputationalTableWithMintermsWithZeroCommonalityCount();
+    qm1.fillComputationalTableWithMintermsWithZeroCommonalityCount();
+    qm2.fillComputationalTableWithMintermsWithZeroCommonalityCount();
+    cout << "Initial computation table: " << endl << qm0.getComputationTableString() << endl;
+    cout << "Initial computation table: " << endl << qm1.getComputationTableString() << endl;
+    cout << "Initial computation table: " << endl << qm2.getComputationTableString() << endl;
+    qm0.findAllCombinations();
+    qm1.findAllCombinations();
+    qm2.findAllCombinations();
+
+    ImplicantsForTest finalImplicants0(qm0.getAllFinalImplicants());
+    ImplicantsForTest finalImplicants1(qm1.getAllFinalImplicants());
+    ImplicantsForTest finalImplicants2(qm2.getAllFinalImplicants());
+    cout << qm0.getOutputTable(finalImplicants0);
+    cout << qm1.getOutputTable(finalImplicants1);
+    cout << qm2.getOutputTable(finalImplicants2);
 }
 
 }
