@@ -58,11 +58,10 @@ private:
         }
     }
 
-    void searchForPathUsingAutomaticCycleDetection() // implicit know that there are positive or negative cycle
+    void searchForPathUsingAutomaticCycleDetection()
     {
         unsigned int numberOfVertices(this->m_graph.getNumberOfVertices());
-        unsigned int numberOfVerticesProcessed(0U);
-        enqueue(this->m_startVertex);
+        unsigned int numberOfVerticesProcessed(0U);        enqueue(this->m_startVertex);
         while(!m_queueOfVertices.empty() && !m_hasPositiveOrNegativeCycle)
         {
             // Repeat V times: Relax each edge
@@ -79,11 +78,10 @@ private:
             [&]()
             {
                 // As soon as processed number vertices reached the total number of vertices check for a postive/negative cycle.
-                if(numberOfVerticesProcessed++!=0 && numberOfVerticesProcessed >= numberOfVertices) // new weight still found at this point
+                if(numberOfVerticesProcessed++!=0 && numberOfVerticesProcessed >= numberOfVertices)
                 {
                     // there is a positive or negative cycle if new weight is found when number total number of vertices is reached
-                    m_hasPositiveOrNegativeCycle = isNewWeightFound;
-                }
+                    m_hasPositiveOrNegativeCycle = isNewWeightFound;                }
             });
         }
     }
