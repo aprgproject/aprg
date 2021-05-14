@@ -41,10 +41,9 @@ public:
     void reinitializeStartingFrom(Vertices const& startVertices) override
     {
         this->clear();
-        this->addStartVertices(startVertices);
+        this->initializeWithStartVertices(startVertices);
         traverseUsingBfs(startVertices);
     }
-
 private:
     void traverseUsingBfs(Vertices const& startVertices)
     {
@@ -63,10 +62,10 @@ private:
                 {
                     processedVertices.putVertex(adjacentVertex);
                     this->m_vertexToPreviousVertexMap[adjacentVertex] = vertex;
+                    this->m_vertexToDistanceToStartMap[adjacentVertex] = this->m_vertexToDistanceToStartMap.at(vertex)+1;
                     nearestVertices.emplace_front(adjacentVertex);
                 }
-            }
-        }
+            }        }
     }
 };
 

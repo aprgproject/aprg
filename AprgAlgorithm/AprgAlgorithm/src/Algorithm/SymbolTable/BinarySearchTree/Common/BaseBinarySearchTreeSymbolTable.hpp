@@ -2,9 +2,9 @@
 
 #include <Algorithm/SymbolTable/BaseSymbolTable.hpp>
 
+#include <functional>
 #include <memory>
 #include <vector>
-
 namespace alba
 {
 
@@ -17,10 +17,10 @@ class BaseBinarySearchTreeSymbolTable : public BaseSymbolTable<Key, Value>
 public:
     using NodeUniquePointer = std::unique_ptr<Node>;
     using Keys = std::vector<Key>;
+    using TraverseFunction = std::function<void(Node const&)>;
 
     BaseBinarySearchTreeSymbolTable()
     {}
-
     bool isEmpty() const override
     {
         return getSize() == 0;
@@ -140,10 +140,24 @@ public:
         return result;
     }
 
+    void traverseByPreOrder(TraverseFunction const& traverseFunction)
+    {
+        traverseByPreOrder(m_root, traverseFunction);
+    }
+
+    void traverseByInOrder(TraverseFunction const& traverseFunction)
+    {
+        traverseByInOrder(m_root, traverseFunction);
+    }
+
+    void traverseByPostOrder(TraverseFunction const& traverseFunction)
+    {
+        traverseByPostOrder(m_root, traverseFunction);
+    }
+
 protected:
 
-    unsigned int getSizeOnThisNode(NodeUniquePointer const& nodePointer) const
-    {
+    unsigned int getSizeOnThisNode(NodeUniquePointer const& nodePointer) const    {
         unsigned int size(0);
         if(nodePointer)
         {
@@ -441,10 +455,10 @@ protected:
 
     void retrieveKeysStartingOnThisNode(Keys & keys, NodeUniquePointer const& nodePointer) const
     {
+        // Similar with traverseByInOrder
         if(nodePointer)
         {
-            retrieveKeysStartingOnThisNode(keys, nodePointer->left);
-            keys.emplace_back(nodePointer->key);
+            retrieveKeysStartingOnThisNode(keys, nodePointer->left);            keys.emplace_back(nodePointer->key);
             retrieveKeysStartingOnThisNode(keys, nodePointer->right);
         }
     }
@@ -468,9 +482,38 @@ protected:
         }
     }
 
+    void traverseByPreOrder(NodeUniquePointer const& nodePointer, TraverseFunction const& traverseFunction)
+    {
+        if(nodePointer)
+        {
+            traverseFunction(*nodePointer);
+            traverseByPreOrder(nodePointer->left, traverseFunction);
+            traverseByPreOrder(nodePointer->right, traverseFunction);
+        }
+    }
+
+    void traverseByInOrder(NodeUniquePointer const& nodePointer, TraverseFunction const& traverseFunction)
+    {
+        if(nodePointer)
+        {
+            traverseByInOrder(nodePointer->left, traverseFunction);
+            traverseFunction(*nodePointer);
+            traverseByInOrder(nodePointer->right, traverseFunction);
+        }
+    }
+
+    void traverseByPostOrder(NodeUniquePointer const& nodePointer, TraverseFunction const& traverseFunction)
+    {
+        if(nodePointer)
+        {
+            traverseByPostOrder(nodePointer->left, traverseFunction);
+            traverseByPostOrder(nodePointer->right, traverseFunction);
+            traverseFunction(*nodePointer);
+        }
+    }
+
     NodeUniquePointer m_root;
 };
-
 // BST maintains symmetric order. It means that each node has a key and every node's key is:
 // -> Larger than all keys in its left subtree
 // -> Smaller than all keys in its right subtree

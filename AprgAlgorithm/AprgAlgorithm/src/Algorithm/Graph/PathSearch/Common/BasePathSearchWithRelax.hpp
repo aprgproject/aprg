@@ -37,13 +37,12 @@ public:
 
     Path getPathTo(Vertex const& endVertex) const
     {
+        Path reversedPath;
         bool shouldAddStartVertexAndReverse(endVertex != m_startVertex);
         Vertex currentVertex = endVertex;
-        Path reversedPath;
         while(currentVertex != m_startVertex)
         {
-            reversedPath.emplace_back(currentVertex);
-            auto it = m_vertexToEdgeWithBestWeightMap.find(currentVertex);
+            reversedPath.emplace_back(currentVertex);            auto it = m_vertexToEdgeWithBestWeightMap.find(currentVertex);
             if(it != m_vertexToEdgeWithBestWeightMap.cend())
             {
                 currentVertex = it->second.first;

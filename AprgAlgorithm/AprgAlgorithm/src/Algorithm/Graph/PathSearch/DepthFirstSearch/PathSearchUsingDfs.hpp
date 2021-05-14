@@ -39,12 +39,11 @@ public:
     void reinitializeStartingFrom(Vertices const& startVertices) override
     {
         this->clear();
-        this->addStartVertices(startVertices);
-        for(Vertex const& startVertex : this->m_startVertices.getVertices())  // to maintain order, get the vertices in start vertices
+        this->initializeWithStartVertices(startVertices);
+        for(Vertex const& startVertex : this->m_startVertices.getVertices())  // to maintain order, get the vertices in start vertices (because its sorted)
         {
             traverseUsingDfs(startVertex);
-        }
-    }
+        }    }
 
 private:
     void traverseUsingDfs(Vertex const& vertex)
@@ -56,10 +55,10 @@ private:
             if(processedVertices.isNotFound(adjacentVertex))
             {
                 this->m_vertexToPreviousVertexMap[adjacentVertex] = vertex;
+                this->m_vertexToDistanceToStartMap[adjacentVertex] = this->m_vertexToDistanceToStartMap.at(vertex)+1;
                 traverseUsingDfs(adjacentVertex);
             }
-        }
-    }
+        }    }
 };
 
 // Proposition: DFS marks all vertices connected to s in time proportional to the sum of their degrees
