@@ -20,7 +20,8 @@ public:
     };
     struct PathDetails
     {
-        bool hasAPath;        Vertex bestAdjacentVertex;
+        bool hasAPath;
+        Vertex bestAdjacentVertex;
         Weight bestWeight;
     };
     using Graph = EdgeWeightedGraph;
@@ -34,7 +35,8 @@ public:
 
     PathSearchUsingFloydWarshall(EdgeWeightedGraph const& graph)
         : m_graph(graph)
-        , m_pathDetailsMatrix(graph.getNumberOfVertices(), graph.getNumberOfVertices())    {
+        , m_pathDetailsMatrix(graph.getNumberOfVertices(), graph.getNumberOfVertices())
+    {
         searchForBestPaths();
     }
 
@@ -134,7 +136,8 @@ private:
 
     void searchForBestPaths()
     {
-        initializePathDetailsWithEdgeWeights();        initializePathDetailsInTheDiagonal();
+        initializePathDetailsWithEdgeWeights();
+        initializePathDetailsInTheDiagonal();
         checkAllIntermediateVertices();
     }
 
@@ -174,7 +177,8 @@ private:
                             PathDetails & intermediateToEndDetails(m_pathDetailsMatrix.getEntryReference(intermediateVertex, endVertex));
                             if(startToIntermediateDetails.hasAPath && intermediateToEndDetails.hasAPath)
                             {
-                                Weight possibleNewWeight = startToIntermediateDetails.bestWeight + intermediateToEndDetails.bestWeight;                                if(!startToEndDetails.hasAPath)
+                                Weight possibleNewWeight = startToIntermediateDetails.bestWeight + intermediateToEndDetails.bestWeight;
+                                if(!startToEndDetails.hasAPath)
                                 {
                                     startToEndDetails = {true, intermediateVertex, possibleNewWeight};
                                 }

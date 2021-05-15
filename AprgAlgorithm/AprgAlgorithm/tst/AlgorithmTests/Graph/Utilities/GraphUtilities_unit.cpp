@@ -399,7 +399,8 @@ TEST(GraphUtilitiesTest, GetDiameterOfATreeWorks)
 
 TEST(GraphUtilitiesTest, GetInDegreeAndOutDegreeWorks)
 {
-    DirectedGraphForTest graph;    graph.connect(0U, 1U);
+    DirectedGraphForTest graph;
+    graph.connect(0U, 1U);
     graph.connect(0U, 2U);
     graph.connect(0U, 3U);
     graph.connect(4U, 0U);

@@ -45,7 +45,8 @@ public:
         , m_matrixData(numberOfColumns*numberOfRows, initialValue)
     {}
 
-    AlbaMatrix(            unsigned int const numberOfColumns,
+    AlbaMatrix(
+            unsigned int const numberOfColumns,
             unsigned int const numberOfRows,
             MatrixData const& matrixData)
         : m_numberOfColumns(numberOfColumns)
@@ -166,7 +167,8 @@ public:
 
     MatrixData const& getMatrixData() const
     {
-        return m_matrixData;    }
+        return m_matrixData;
+    }
 
     std::string getString() const
     {
@@ -272,6 +274,7 @@ public:
         m_matrixData.resize(numberOfColumns*numberOfRows, initialValue);
         m_matrixData.shrink_to_fit();
     }
+
     void negate()
     {
         for(DataType & value : m_matrixData)

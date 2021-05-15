@@ -20,7 +20,8 @@ using NodeForTest = BinarySearchTreeNode::RedBlackTreeNode<unsigned int, char>;
 using KeysForTest = typename SymbolTableForTest::Keys;
 }
 
-TEST(RedBlackBinarySearchTreeSymbolTableTest, IsEmptyWorksWhenEmpty){
+TEST(RedBlackBinarySearchTreeSymbolTableTest, IsEmptyWorksWhenEmpty)
+{
     testIsEmptyWhenEmptyWithUnsignedIntAndChar<SymbolTableForTest>();
 }
 

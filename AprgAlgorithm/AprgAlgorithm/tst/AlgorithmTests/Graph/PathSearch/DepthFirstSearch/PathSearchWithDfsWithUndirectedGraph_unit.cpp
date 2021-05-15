@@ -91,7 +91,8 @@ TEST(PathSearchUsingDfsTest, GetDistanceToWorksWithUndirectedGraph)
 
 TEST(PathSearchUsingDfsTest, ReinitializeStartingFromWorksWithUndirectedGraph)
 {
-    GraphForTest graph;    putConnectionsForTest(graph);
+    GraphForTest graph;
+    putConnectionsForTest(graph);
     PathSearchForTest pathSearch(graph, 0U);
 
     pathSearch.reinitializeStartingFrom({3U});

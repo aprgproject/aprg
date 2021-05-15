@@ -44,6 +44,7 @@ public:
         this->initializeWithStartVertices(startVertices);
         traverseUsingBfs(startVertices);
     }
+
 private:
     void traverseUsingBfs(Vertices const& startVertices)
     {
@@ -65,7 +66,8 @@ private:
                     this->m_vertexToDistanceToStartMap[adjacentVertex] = this->m_vertexToDistanceToStartMap.at(vertex)+1;
                     nearestVertices.emplace_front(adjacentVertex);
                 }
-            }        }
+            }
+        }
     }
 };
 

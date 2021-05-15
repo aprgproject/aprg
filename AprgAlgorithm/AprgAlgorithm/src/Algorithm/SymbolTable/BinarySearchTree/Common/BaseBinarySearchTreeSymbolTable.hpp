@@ -5,6 +5,7 @@
 #include <functional>
 #include <memory>
 #include <vector>
+
 namespace alba
 {
 
@@ -21,6 +22,7 @@ public:
 
     BaseBinarySearchTreeSymbolTable()
     {}
+
     bool isEmpty() const override
     {
         return getSize() == 0;
@@ -157,7 +159,8 @@ public:
 
 protected:
 
-    unsigned int getSizeOnThisNode(NodeUniquePointer const& nodePointer) const    {
+    unsigned int getSizeOnThisNode(NodeUniquePointer const& nodePointer) const
+    {
         unsigned int size(0);
         if(nodePointer)
         {
@@ -458,7 +461,8 @@ protected:
         // Similar with traverseByInOrder
         if(nodePointer)
         {
-            retrieveKeysStartingOnThisNode(keys, nodePointer->left);            keys.emplace_back(nodePointer->key);
+            retrieveKeysStartingOnThisNode(keys, nodePointer->left);
+            keys.emplace_back(nodePointer->key);
             retrieveKeysStartingOnThisNode(keys, nodePointer->right);
         }
     }
@@ -514,6 +518,7 @@ protected:
 
     NodeUniquePointer m_root;
 };
+
 // BST maintains symmetric order. It means that each node has a key and every node's key is:
 // -> Larger than all keys in its left subtree
 // -> Smaller than all keys in its right subtree

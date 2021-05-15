@@ -44,6 +44,7 @@ template <typename Vertex> unsigned int getDiameterOfATree(BaseUndirectedGraph<V
 
 template <typename Vertex>
 std::pair<unsigned int, unsigned int> getInDegreeAndOutDegree(BaseDirectedGraph<Vertex> const& graph, Vertex const& vertex);
+
 template <typename Vertex, typename Weight, typename EdgeWeightedGraphType>
 typename GraphTypes<Vertex>::Path getCriticalPath(
         EdgeWeightedGraphType const& graph,

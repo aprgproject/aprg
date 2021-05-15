@@ -159,7 +159,8 @@ TEST(RandomStringTest, RandomString100Characters)
 TEST(UniqueIdTest, GetLevenshteinDistanceWorks)
 {
     EXPECT_EQ(2U, getLevenshteinDistance("MOVIE", "LOVE"));
-    EXPECT_EQ(1U, getLevenshteinDistance("This is a statement", "This is  statement"));    EXPECT_EQ(1U, getLevenshteinDistance("This is a statement", "This is  statement"));
+    EXPECT_EQ(1U, getLevenshteinDistance("This is a statement", "This is  statement"));
+    EXPECT_EQ(1U, getLevenshteinDistance("This is a statement", "This is  statement"));
     EXPECT_EQ(4U, getLevenshteinDistance("This is a statement", "This is not a statement"));
     EXPECT_EQ(1U, getLevenshteinDistance("This is a statement", "This is b statement"));
 }
@@ -175,7 +176,8 @@ TEST(UniqueIdTest, GetHammingDistanceWorks)
 
 TEST(ConvertCaseFromStringTest, ConvertToCapitalLettersUsingAllLetters)
 {
-    string testString("AbCDEFghIjKlMnopQRstUvWxYz");    string capitalLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    string testString("AbCDEFghIjKlMnopQRstUvWxYz");
+    string capitalLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
     EXPECT_EQ(capitalLetters, getStringWithCapitalLetters(testString));
 }

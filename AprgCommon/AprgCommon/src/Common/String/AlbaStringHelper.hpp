@@ -111,6 +111,7 @@ unsigned int getHammingDistance(std::string const& string1, std::string const& s
 unsigned int generateUniqueId(std::string const& mainString);
 std::string constructFileLocator(std::string const& file, int const lineNumber);
 std::string getRandomAlphaNumericString(unsigned int const length);
+
 bool isStringFoundInsideTheOtherStringCaseSensitive(std::string const& mainString, std::string const& string2);
 bool isStringFoundInsideTheOtherStringNotCaseSensitive(std::string const& mainString, std::string const& string2);
 bool isEqualNotCaseSensitive(std::string const& mainString, std::string const& string2);
