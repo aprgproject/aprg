@@ -1,10 +1,8 @@
 #pragma once
 
-#include <Common/Bit/AlbaBitValueUtilities.hpp>
 #include <Common/Math/AlbaMathConstants.hpp>
 #include <Common/Math/Number/AlbaNumber.hpp>
 #include <Common/Math/Number/AlbaNumberTypes.hpp>
-
 #include <algorithm>
 #include <vector>
 
@@ -219,14 +217,10 @@ FractionDetails getBestFractionDetailsForDoubleValue(double const doubleValue);
 
 //Power related functions
 template <typename NumberType> bool isPerfectNthPower(NumberType const value, NumberType const nthPower); // declare this first
-template <typename NumberType> bool isPowerOfTwo(NumberType const value)
-{
-    return AlbaBitValueUtilities<NumberType>::isPowerOfTwo(value);
-}
+template <typename NumberType> bool isPowerOfTwo(NumberType const value); // keep this template manually instantiated to remove dependency to bit utilities
 template <typename NumberType> bool isPerfectSquare(NumberType const value)
 {
-    return isPerfectNthPower(value, static_cast<NumberType>(2));
-}
+    return isPerfectNthPower(value, static_cast<NumberType>(2));}
 template <typename NumberType> bool isPerfectCube(NumberType const value)
 {
     return isPerfectNthPower(value, static_cast<NumberType>(3));

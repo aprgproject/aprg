@@ -38,14 +38,14 @@ public:
 
     AlbaMatrix(
             unsigned int const numberOfColumns,
-            unsigned int const numberOfRows)
+            unsigned int const numberOfRows,
+            DataType const initialValue={})
         : m_numberOfColumns(numberOfColumns)
         , m_numberOfRows(numberOfRows)
-        , m_matrixData(numberOfColumns*numberOfRows, DataType{})
+        , m_matrixData(numberOfColumns*numberOfRows, initialValue)
     {}
 
-    AlbaMatrix(
-            unsigned int const numberOfColumns,
+    AlbaMatrix(            unsigned int const numberOfColumns,
             unsigned int const numberOfRows,
             MatrixData const& matrixData)
         : m_numberOfColumns(numberOfColumns)
@@ -158,10 +158,15 @@ public:
         return m_matrixData.at(getMatrixIndex(x, y));
     }
 
+    DataType const& getEntryConstReference(unsigned int const x, unsigned int const y) const
+    {
+        assert(isInside(x, y));
+        return m_matrixData.at(getMatrixIndex(x, y));
+    }
+
     MatrixData const& getMatrixData() const
     {
-        return m_matrixData;
-    }
+        return m_matrixData;    }
 
     std::string getString() const
     {
@@ -259,15 +264,14 @@ public:
         }
     }
 
-    void clearAndResize(unsigned int const numberOfColumns, unsigned int const numberOfRows)
+    void clearAndResize(unsigned int const numberOfColumns, unsigned int const numberOfRows, DataType const initialValue={})
     {
         m_numberOfColumns = numberOfColumns;
         m_numberOfRows = numberOfRows;
         m_matrixData.clear();
-        m_matrixData.resize(numberOfColumns*numberOfRows, DataType{});
+        m_matrixData.resize(numberOfColumns*numberOfRows, initialValue);
         m_matrixData.shrink_to_fit();
     }
-
     void negate()
     {
         for(DataType & value : m_matrixData)
