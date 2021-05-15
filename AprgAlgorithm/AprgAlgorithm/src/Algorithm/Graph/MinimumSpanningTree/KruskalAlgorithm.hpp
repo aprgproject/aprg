@@ -44,11 +44,10 @@ private:
         UnionFindUsingMap<Vertex> unionFind;
         while(!m_edgesInOrder.empty() && m_minimumSpanningTreeEdges.size() < maxNumberOfEdgesInSpanningTree)
         {
-            // traverse all edges (shortest edges first) and add it to MST if vertices are not already connected in the MST (does not produce a cycle)
+            // traverse all edges (shortest edges first) and add it to MST if vertices are not already connected in the MST (if it does not produce a cycle)
             EdgeWithWeight shortestEdge(m_edgesInOrder.top());
             m_edgesInOrder.pop();
-            addEdgeToMstIfVerticesAreNotConnected(unionFind, shortestEdge);
-        }
+            addEdgeToMstIfVerticesAreNotConnected(unionFind, shortestEdge);        }
     }
 
     void putAllEdgesToPriorityQueue()
@@ -63,11 +62,10 @@ private:
     {
         Vertex const& vertex1(edge.first);
         Vertex const& vertex2(edge.second);
-        if(!unionFind.isConnected(vertex1, vertex2))
+        if(!unionFind.isConnected(vertex1, vertex2)) // if its not connected yet, then it does not create a cycle
         {
             unionFind.connect(vertex1, vertex2);
-            m_minimumSpanningTreeEdges.emplace_back(createSortedEdge<Vertex, Edge>(vertex1, vertex2));
-        }
+            m_minimumSpanningTreeEdges.emplace_back(createSortedEdge<Vertex, Edge>(vertex1, vertex2));        }
     }
 
     Graph const& m_graph;
@@ -91,6 +89,12 @@ private:
 // ---> Deleting the minimum in PQ = E(frequency) * log E(time per operation) -> main part of the running time
 // ---> UnionFind connect = V(frequency) * log* V(time per operation)
 // ---> UnionFind isConnected = E(frequency) * log* V(time per operation)
+
+
+// Other discussion:
+// -> Why does this work? Why does the greedy strategy guarantee that we will find a minimum spanning tree?
+// ---> Is it possible that a non minimum weight edge of the graph is not included in the spanning tree?
+// ---> No, because minimum weight edges are processed first. If there is some connection to vertex V to the MST, it is processed first.
 
 }
 
