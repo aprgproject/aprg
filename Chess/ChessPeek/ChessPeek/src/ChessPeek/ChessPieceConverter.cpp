@@ -91,18 +91,17 @@ ChessPieceConverter::PieceTypeToCountPerByteMap ChessPieceConverter::getDifferen
     {
         uint64_t difference(pieceTypeAndDifferencePair.second);
         CountPerByte & differencePerByte(differenceOfEachByteMap[pieceTypeAndDifferencePair.first]);
-        differencePerByte[0] = static_cast<Count>(BitValueUtilities::getNumberOfBitsAsserted(BitManipulator::getByteAt<0>(difference)));
-        differencePerByte[1] = static_cast<Count>(BitValueUtilities::getNumberOfBitsAsserted(BitManipulator::getByteAt<1>(difference)));
-        differencePerByte[2] = static_cast<Count>(BitValueUtilities::getNumberOfBitsAsserted(BitManipulator::getByteAt<2>(difference)));
-        differencePerByte[3] = static_cast<Count>(BitValueUtilities::getNumberOfBitsAsserted(BitManipulator::getByteAt<3>(difference)));
-        differencePerByte[4] = static_cast<Count>(BitValueUtilities::getNumberOfBitsAsserted(BitManipulator::getByteAt<4>(difference)));
-        differencePerByte[5] = static_cast<Count>(BitValueUtilities::getNumberOfBitsAsserted(BitManipulator::getByteAt<5>(difference)));
-        differencePerByte[6] = static_cast<Count>(BitValueUtilities::getNumberOfBitsAsserted(BitManipulator::getByteAt<6>(difference)));
-        differencePerByte[7] = static_cast<Count>(BitValueUtilities::getNumberOfBitsAsserted(BitManipulator::getByteAt<7>(difference)));
+        differencePerByte[0] = static_cast<Count>(BitValueUtilities::getNumberOfOnes(BitManipulator::getByteAt<0>(difference)));
+        differencePerByte[1] = static_cast<Count>(BitValueUtilities::getNumberOfOnes(BitManipulator::getByteAt<1>(difference)));
+        differencePerByte[2] = static_cast<Count>(BitValueUtilities::getNumberOfOnes(BitManipulator::getByteAt<2>(difference)));
+        differencePerByte[3] = static_cast<Count>(BitValueUtilities::getNumberOfOnes(BitManipulator::getByteAt<3>(difference)));
+        differencePerByte[4] = static_cast<Count>(BitValueUtilities::getNumberOfOnes(BitManipulator::getByteAt<4>(difference)));
+        differencePerByte[5] = static_cast<Count>(BitValueUtilities::getNumberOfOnes(BitManipulator::getByteAt<5>(difference)));
+        differencePerByte[6] = static_cast<Count>(BitValueUtilities::getNumberOfOnes(BitManipulator::getByteAt<6>(difference)));
+        differencePerByte[7] = static_cast<Count>(BitValueUtilities::getNumberOfOnes(BitManipulator::getByteAt<7>(difference)));
     }
     return differenceOfEachByteMap;
 }
-
 ChessPieceConverter::PieceTypeToCountMap ChessPieceConverter::getPieceTypeToScoreMap(
         PieceTypeToCountPerByteMap const& pieceTypeToDifferenceOfEachByteMap) const
 {
