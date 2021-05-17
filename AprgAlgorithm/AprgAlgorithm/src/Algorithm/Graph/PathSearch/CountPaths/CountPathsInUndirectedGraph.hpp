@@ -2,11 +2,9 @@
 
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 #include <Algorithm/Graph/Utilities/CheckableVertices.hpp>
-#include <Algorithm/Graph/VertexOrdering/VertexOrderingUsingDfs.hpp>
 
 namespace alba
 {
-
 namespace algorithm
 {
 
@@ -16,16 +14,12 @@ class CountPathsInUndirectedGraph
 public:
 
     using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
-    using Edge = typename GraphTypes<Vertex>::Edge;
-    using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
-    using VertexToSetOfVerticesMap = std::map<Vertex, SetOfVertices>;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
     using VertexPair = std::pair<Vertex, Vertex>;
-    using VertexPairToCountMap = std::map<std::pair<Vertex, Vertex>, unsigned int>;
+    using VertexPairToCountMap = std::map<VertexPair, unsigned int>;
 
     CountPathsInUndirectedGraph(BaseUndirectedGraphWithVertex const& graph)
-        : m_graph(graph)
-    {}
+        : m_graph(graph)    {}
 
     unsigned int getCount(Vertex const& start, Vertex const& end)
     {

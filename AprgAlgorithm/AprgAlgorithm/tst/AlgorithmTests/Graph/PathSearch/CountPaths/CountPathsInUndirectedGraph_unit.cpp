@@ -12,11 +12,9 @@ namespace algorithm
 namespace
 {
 using VertexForTest = unsigned int;
-using PathForTest = GraphTypes<VertexForTest>::Path;
 using GraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
 using CountPathsForTest = CountPathsInUndirectedGraph<VertexForTest>;
 }
-
 TEST(CountPathsInUndirectedGraphTest, GetCountWorksOnExample1)
 {
     GraphForTest graph;
