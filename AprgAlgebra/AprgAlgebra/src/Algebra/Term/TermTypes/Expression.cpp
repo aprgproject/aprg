@@ -189,11 +189,10 @@ void Expression::putTermWithAdditionIfNeeded(BaseTerm const& baseTerm)
     Term const& term(getTermConstReferenceFromBaseTerm(baseTerm));
     if(willHaveNoEffectOnAdditionOrSubtraction(term))
     {
-        if(this->isEmpty())
+        if(isEmpty())
         {
             setTerm(Term(0));
-        }
-    }
+        }    }
     else
     {
         if(isEmpty()
@@ -215,11 +214,10 @@ void Expression::putTermWithSubtractionIfNeeded(BaseTerm const& baseTerm)
     Term const& term(getTermConstReferenceFromBaseTerm(baseTerm));
     if(willHaveNoEffectOnAdditionOrSubtraction(term))
     {
-        if(this->isEmpty())
+        if(isEmpty())
         {
             setTerm(Term(0));
-        }
-    }
+        }    }
     else
     {
         if(isEmpty()
@@ -257,11 +255,10 @@ void Expression::putTermWithDivisionIfNeeded(BaseTerm const& baseTerm)
     Term const& term(getTermConstReferenceFromBaseTerm(baseTerm));
     if(willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(term))
     {
-        if(this->isEmpty())
+        if(isEmpty())
         {
             setTerm(Term(1));
-        }
-    }
+        }    }
     else
     {
         if(isEmpty()
@@ -517,11 +514,10 @@ void Expression::putOnlyTermWithMultiplicationIfNeeded(BaseTerm const& baseTerm)
     Term const& term(getTermConstReferenceFromBaseTerm(baseTerm));
     if(willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(term))
     {
-        if(this->isEmpty())
+        if(isEmpty())
         {
             setTerm(Term(1));
-        }
-    }
+        }    }
     else
     {
         if(isEmpty()
