@@ -25,7 +25,8 @@ public:
 
     using Weight = unsigned int;
     using Person = unsigned int;
-    using PeopleBits = unsigned int;    using People = std::vector<Person>;
+    using PeopleBits = unsigned int;
+    using People = std::vector<Person>;
     using ListOfPeople = std::vector<People>;
     using Weights = std::vector<Weight>;
     using NumberOfRidesAndWeight = std::pair<unsigned int, Weight>;

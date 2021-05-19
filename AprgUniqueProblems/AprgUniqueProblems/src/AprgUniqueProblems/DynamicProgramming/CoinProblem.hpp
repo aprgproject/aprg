@@ -29,7 +29,8 @@ public:
 
     using Coin = unsigned int;
     using Coins = std::vector<Coin>;
-    using CoinSet = std::set<Coin>;    using CoinPermutation = std::vector<Coin>;
+    using CoinSet = std::set<Coin>;
+    using CoinPermutation = std::vector<Coin>;
     using CoinPermutations = std::set<CoinPermutation>;
     using CoinCombination = std::multiset<Coin>;
     using CoinCombinations = std::set<CoinCombination>;

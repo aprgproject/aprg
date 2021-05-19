@@ -21,7 +21,8 @@ public:
 
     using Count = unsigned int;
     using Grid = matrix::AlbaMatrix<char>;
-    struct NextIterationDetail    {
+    struct NextIterationDetail
+    {
         std::string currentFilledRow;
         std::string nextNonFilledRow;
     };

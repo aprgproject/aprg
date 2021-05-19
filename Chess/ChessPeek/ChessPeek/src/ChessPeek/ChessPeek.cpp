@@ -11,7 +11,8 @@
 //#define CHESS_ENGINE_PATH APRG_DIR R"(\Chess\ChessPeek\Files\zappa.exe)"
 #define SCREEN_SHOT_PATH APRG_DIR R"(\Chess\ChessPeek\Files\ScreenShot.bmp)"
 #define CHESS_BOARD_TOP_LEFT_CORNER 2195, 140
-#define CHESS_BOARD_BOTTOM_RIGHT_CORNER 3026, 971#define TOP_BOTTOM_INDENTION 0.05
+#define CHESS_BOARD_BOTTOM_RIGHT_CORNER 3026, 971
+#define TOP_BOTTOM_INDENTION 0.05
 #define LEFT_RIGHT_INDENTION 0.03
 #define WHITE_COLOR_LIMIT 0.91
 #define BLACK_COLOR_LIMIT 0.40
@@ -20,7 +21,8 @@ using namespace alba::AprgBitmap;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace chess
 {
@@ -36,7 +38,8 @@ ChessPeek::ChessPeek()
     , m_currentBestMoveOnDisplay()
     , m_isPreviousAnalysisNotSuccessful(false)
 {
-    initialize();}
+    initialize();
+}
 
 ChessPeek::ChessCellBitValueMatrix const& ChessPeek::getChessCellBitValueMatrix() const
 {
@@ -82,7 +85,8 @@ void ChessPeek::startNewAnalysisUsingEngine()
             string fenString(constructFenString(m_chessBoard, m_playerSideColor, m_chessBoard.getCastlingFenString(), "-", 0, 1));
             m_chessEngineController.setupFenString(fenString);
             if(!m_chessEngineController.waitTillReadyAndReturnIfResetWasPerformed())
-            {                m_isPreviousAnalysisNotSuccessful=false;
+            {
+                m_isPreviousAnalysisNotSuccessful=false;
                 m_chessEngineController.goWithPonder();
             }
         }
@@ -102,6 +106,7 @@ void ChessPeek::checkCalculationDetails(CalculationDetails const& calculationDet
         m_currentBestMoveOnDisplay = bestMoveToDisplayString;
     }
 }
+
 void ChessPeek::checkSnippetAndSaveDetails(BitmapSnippet & snippet)
 {
     double startX = snippet.getTopLeftCorner().getX();
@@ -175,7 +180,8 @@ void ChessPeek::printCalculationDetails(
         CalculationDetails const& calculationDetails) const
 {
     string firstCurrentlySearchingMove;
-    if(!calculationDetails.currentlySearchingMoves.empty())    {
+    if(!calculationDetails.currentlySearchingMoves.empty())
+    {
         firstCurrentlySearchingMove = calculationDetails.currentlySearchingMoves.front();
     }
     cout << "Player side color: " << m_playerSideColor << endl;
@@ -252,7 +258,8 @@ string ChessPeek::getBestMoveToDisplayString(
             result = firstMove;
         }
     }
-    if(!calculationDetails.currentlySearchingMoves.empty())    {
+    if(!calculationDetails.currentlySearchingMoves.empty())
+    {
         string firstMove(calculationDetails.currentlySearchingMoves.front());
         if(!firstMove.empty())
         {
@@ -306,7 +313,8 @@ string ChessPeek::getCellInDisplayTable(Coordinate const& coordinate, Move const
 
 void ChessPeek::retrieveChessCellBitValueAt(
         BitSet64 & whiteValue,
-        BitSet64 & blackValue,        BitmapSnippet & snippet,
+        BitSet64 & blackValue,
+        BitmapSnippet & snippet,
         CoordinateSquare const& square) const
 {
     double deltaX = static_cast<double>(square.right-square.left)/9;
@@ -379,7 +387,8 @@ void ChessPeek::initialize()
     m_chessEngineController.setAdditionalStepsInCalculationMonitoring([&](CalculationDetails const& calculationDetails)
     {
         checkCalculationDetails(calculationDetails);
-    });}
+    });
+}
 
 }
 

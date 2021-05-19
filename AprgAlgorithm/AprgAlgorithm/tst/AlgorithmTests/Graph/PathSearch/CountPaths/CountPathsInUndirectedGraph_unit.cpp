@@ -15,6 +15,7 @@ using VertexForTest = unsigned int;
 using GraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
 using CountPathsForTest = CountPathsInUndirectedGraph<VertexForTest>;
 }
+
 TEST(CountPathsInUndirectedGraphTest, GetCountWorksOnExample1)
 {
     GraphForTest graph;

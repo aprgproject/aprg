@@ -19,7 +19,8 @@ public:
     using Graph = EdgeWeightedGraph;
     using Edge = typename GraphTypes<Vertex>::Edge;
     using Edges = typename GraphTypes<Vertex>::Edges;
-    using EdgeWithWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgeWithWeight;    using EdgeWithWeightsPriorityQueue = std::priority_queue<EdgeWithWeight, std::deque<EdgeWithWeight>, std::greater<EdgeWithWeight>>;
+    using EdgeWithWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgeWithWeight;
+    using EdgeWithWeightsPriorityQueue = std::priority_queue<EdgeWithWeight, std::deque<EdgeWithWeight>, std::greater<EdgeWithWeight>>;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
     PrimAlgorithmLazyVersion(EdgeWeightedGraph const& graph, Vertex const& startVertex)

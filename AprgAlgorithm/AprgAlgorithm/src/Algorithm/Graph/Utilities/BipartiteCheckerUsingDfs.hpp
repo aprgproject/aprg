@@ -18,6 +18,7 @@ public:
     using Path = typename GraphTypes<Vertex>::Path;
     using VertexToColorMap = std::map<Vertex, bool>;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
+
     BipartiteCheckerUsingDfs(BaseUndirectedGraphWithVertex const& graph)
         : m_graph(graph)
         , m_isBipartite(true)

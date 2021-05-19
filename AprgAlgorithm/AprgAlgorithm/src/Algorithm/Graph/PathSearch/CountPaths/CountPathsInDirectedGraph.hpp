@@ -24,7 +24,8 @@ public:
     using VertexPairToCountMap = std::map<VertexPair, unsigned int>;
 
     CountPathsInDirectedGraph(BaseDirectedGraphWithVertex const& graph)
-        : m_graph(graph)    {
+        : m_graph(graph)
+    {
         initialize();
     }
 
@@ -48,6 +49,7 @@ private:
             m_vertexToDependentVertices[edge.second].emplace(edge.first);
         }
     }
+
     unsigned int getCountInternal(Vertex const& start, Vertex const& end)
     {
         unsigned int result(1U); // if start and end are equal, then return one count
@@ -76,7 +78,8 @@ private:
                 && itEnd!=m_vertexToTopologicalIndex.cend())
         {
             unsigned int startIndex = itStart->second;
-            unsigned int endIndex = itEnd->second;            int distanceInTopologicalOrder = static_cast<int>(endIndex) - static_cast<int>(startIndex);
+            unsigned int endIndex = itEnd->second;
+            int distanceInTopologicalOrder = static_cast<int>(endIndex) - static_cast<int>(startIndex);
             // if distanceInTopologicalOrder is positive: sum counts of dependent vertices at the end
             // if distanceInTopologicalOrder is zero: count is 1
             // if distanceInTopologicalOrder is negative: count is 0
@@ -85,7 +88,8 @@ private:
                 for(Vertex const& dependentVertexAtEnd : m_vertexToDependentVertices.at(end))
                 {
                     result += getCountInternal(start, dependentVertexAtEnd);
-                }            }
+                }
+            }
             else if(distanceInTopologicalOrder == 0)
             {
                 result = 1U;
@@ -99,6 +103,7 @@ private:
     VertexToIndexMap m_vertexToTopologicalIndex;
     VertexPairToCountMap m_pathCounts; // dynamic programming
 };
+
 }
 
 }

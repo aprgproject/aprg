@@ -4,6 +4,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -13,7 +14,8 @@ class CycleDetectionUsingDfs
 public:
 
     enum class SearchType
-    {        Unknown,
+    {
+        Unknown,
         AllCycles,
         OneCycle
     };
@@ -33,21 +35,24 @@ public:
 
     CycleDetectionUsingDfs(BaseGraphWithVertex const& graph)
         : m_graph(graph)
-        , m_searchType(SearchType::Unknown)    {}
+        , m_searchType(SearchType::Unknown)
+    {}
 
     Paths getAllCycles()
     {
         initialize();
         m_searchType = SearchType::AllCycles;
         search();
-        return m_pathsWithCycle;    }
+        return m_pathsWithCycle;
+    }
 
     Path getOneCycle()
     {
         initialize();
         m_searchType = SearchType::OneCycle;
         search();
-        Path result;        if(!m_pathsWithCycle.empty())
+        Path result;
+        if(!m_pathsWithCycle.empty())
         {
             result = m_pathsWithCycle.front();
         }
@@ -63,7 +68,8 @@ private:
 
     Path getPathWithCycle(Vertex const& secondToTheLastVertex, Vertex const& lastVertex) const
     {
-        bool isSuccessful(true);        Path reversedPath{lastVertex};
+        bool isSuccessful(true);
+        Path reversedPath{lastVertex};
         Vertex currentVertex = secondToTheLastVertex;
         while(currentVertex != lastVertex)
         {
@@ -112,7 +118,8 @@ private:
             if(VertexState::NotProcessed == m_vertexStatesMap.at(vertex))
             {
                 searchUsingDfs(vertex);
-            }        }
+            }
+        }
     }
 
     void searchUsingDfs(Vertex const& startVertex)
@@ -200,7 +207,8 @@ private:
 
 // Other analysis:
 // Another way to find out whether a graph contains a cycle is to simply calculate the number of nodes and edges in every component.
-// If a component contains c nodes and no cycle, it must contain exactly c-1 edges (so it has to be a tree).// If there are c or more edges, the component surely contains a cycle.
+// If a component contains c nodes and no cycle, it must contain exactly c-1 edges (so it has to be a tree).
+// If there are c or more edges, the component surely contains a cycle.
 // This is only for undirected graph?
 
 

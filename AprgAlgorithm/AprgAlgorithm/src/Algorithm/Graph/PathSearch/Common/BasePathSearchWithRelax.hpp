@@ -5,7 +5,8 @@
 #include <algorithm>
 #include <functional>
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {
@@ -22,6 +23,7 @@ public:
     using VertexToEdgeWithWeightMap = typename GraphTypesWithWeights<Vertex, Weight>::VertexToEdgeWithWeightMap;
     using AdditionalRelaxationStepsWithNewWeight = std::function<void(Vertex const&, Vertex const&, Weight const&)>;
     using AdditionalRelaxationSteps = std::function<void(void)>;
+
     BasePathSearchWithRelax(EdgeWeightedGraph const& graph, Vertex const& startVertex)
         : m_graph(graph)
         , m_startVertex(startVertex)
@@ -76,7 +78,8 @@ public:
 
 protected:
 
-    bool hasNoWeightSaved(Vertex const& vertex) const    {
+    bool hasNoWeightSaved(Vertex const& vertex) const
+    {
         return m_vertexToEdgeWithBestWeightMap.find(vertex) == m_vertexToEdgeWithBestWeightMap.cend();
     }
 

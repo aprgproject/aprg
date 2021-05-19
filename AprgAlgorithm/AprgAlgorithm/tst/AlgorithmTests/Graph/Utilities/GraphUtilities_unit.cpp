@@ -103,7 +103,8 @@ TEST(GraphUtilitiesTest, IsDirectedSuccessorGraphWorks)
 
 TEST(GraphUtilitiesTest, HasAnyCyclesOnGraphWorks)
 {
-    UndirectedGraphForTest graphWithoutCycle;    graphWithoutCycle.connect(0U, 1U);
+    UndirectedGraphForTest graphWithoutCycle;
+    graphWithoutCycle.connect(0U, 1U);
     graphWithoutCycle.connect(0U, 2U);
     graphWithoutCycle.connect(0U, 3U);
     UndirectedGraphForTest graphWithCycle;
@@ -214,7 +215,8 @@ TEST(GraphUtilitiesTest, AreAllDegreesWorks)
 
 TEST(GraphUtilitiesTest, IsASpanningTreeWorks)
 {
-    UndirectedGraphForTest mainGraph;    mainGraph.connect(0U, 1U);
+    UndirectedGraphForTest mainGraph;
+    mainGraph.connect(0U, 1U);
     mainGraph.connect(0U, 3U);
     mainGraph.connect(1U, 2U);
     mainGraph.connect(2U, 3U);
@@ -431,7 +433,8 @@ TEST(GraphUtilitiesTest, GetDiameterOfATreeWorks)
 
 TEST(GraphUtilitiesTest, GetInDegreeAndOutDegreeWorks)
 {
-    DirectedGraphForTest graph;    graph.connect(0U, 1U);
+    DirectedGraphForTest graph;
+    graph.connect(0U, 1U);
     graph.connect(0U, 2U);
     graph.connect(0U, 3U);
     graph.connect(4U, 0U);

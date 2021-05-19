@@ -23,6 +23,7 @@ public:
     using Edge = typename GraphTypes<Vertex>::Edge;
     using VertexToUnsignedIntMap = typename GraphTypes<Vertex>::VertexToUnsignedIntMap;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
+
     StronglyConnectedComponentsUsingKosarajuSharir(BaseDirectedGraphWithVertex const& graph)
         : m_graph(graph)
         , m_numberOfComponentIds(0U)

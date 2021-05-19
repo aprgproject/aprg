@@ -15,7 +15,8 @@ public:
     // A binary indexed tree or a Fenwick tree can be seen as a dynamic variant of a prefix sum array.
     // It supports two O(logn) time operations on an array: processing a range sum query and updating a value.
 
-    using Index = unsigned int;    using Value = unsigned int;
+    using Index = unsigned int;
+    using Value = unsigned int;
     using Values = std::vector<Value>;
 
     SumRangeQueryBinaryIndexedTree(Values const& valuesToCheck);

@@ -72,7 +72,8 @@ Board::Orientation Board::getOrientation() const
 
 Board::PieceMatrix const& Board::getPieceMatrix() const
 {
-    return m_pieceMatrix;}
+    return m_pieceMatrix;
+}
 
 Piece Board::getPieceAt(Coordinate const& coordinate) const
 {
@@ -240,7 +241,8 @@ string Board::getCastlingFenString() const
 
 void Board::setOrientation(Orientation const orientation)
 {
-    m_orientation = orientation;}
+    m_orientation = orientation;
+}
 
 void Board::setPieceAt(
         Coordinate const& coordinate,

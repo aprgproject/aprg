@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -19,7 +20,8 @@ public:
     using VertexPairToCountMap = std::map<VertexPair, unsigned int>;
 
     CountPathsInUndirectedGraph(BaseUndirectedGraphWithVertex const& graph)
-        : m_graph(graph)    {}
+        : m_graph(graph)
+    {}
 
     unsigned int getCount(Vertex const& start, Vertex const& end)
     {
@@ -45,19 +47,22 @@ private:
                 traverseUsingDfs(start, start, processingVertices);
                 result = m_pathCounts.at({start, end});
             }
-        }        return result;
+        }
+        return result;
     }
 
     void traverseUsingDfs(Vertex const& start, Vertex const& current, CheckableVerticesWithVertex & processingVertices)
     {
         processingVertices.putVertex(current);
-        for(Vertex const& adjacentToCurrent : m_graph.getAdjacentVerticesAt(current))        {
+        for(Vertex const& adjacentToCurrent : m_graph.getAdjacentVerticesAt(current))
+        {
             if(processingVertices.isNotFound(adjacentToCurrent))
             {
                 traverseUsingDfs(start, adjacentToCurrent, processingVertices);
                 VertexPair endPointPair{start, adjacentToCurrent};
                 m_pathCounts.emplace(endPointPair, 0U);
-                m_pathCounts[endPointPair]++;            }
+                m_pathCounts[endPointPair]++;
+            }
         }
         processingVertices.removeVertex(current);
     }

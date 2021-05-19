@@ -102,6 +102,7 @@ ChessPieceConverter::PieceTypeToCountPerByteMap ChessPieceConverter::getDifferen
     }
     return differenceOfEachByteMap;
 }
+
 ChessPieceConverter::PieceTypeToCountMap ChessPieceConverter::getPieceTypeToScoreMap(
         PieceTypeToCountPerByteMap const& pieceTypeToDifferenceOfEachByteMap) const
 {

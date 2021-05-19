@@ -21,6 +21,7 @@ public:
     using VertexToVertexMap = typename GraphTypes<Vertex>::VertexToVertexMap;
     using VertexToUnsignedIntMap = typename GraphTypes<Vertex>::VertexToUnsignedIntMap;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
+
     BasePathSearchWithBfsAndDfs(BaseGraphWithVertex const& graph)
         : m_graph(graph)
     {}

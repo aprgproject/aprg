@@ -107,7 +107,8 @@ bool isDirectedSuccessorGraph(BaseGraph<Vertex> const& graph)
 template <typename Vertex>
 bool hasAnyCyclesOnGraph(BaseGraph<Vertex> const& graph)
 {
-    CycleDetectionUsingDfs<Vertex> cycleDetection(graph);    return !cycleDetection.getOneCycle().empty();
+    CycleDetectionUsingDfs<Vertex> cycleDetection(graph);
+    return !cycleDetection.getOneCycle().empty();
 }
 
 template <typename Vertex>
@@ -116,7 +117,8 @@ bool isARegularGraph(BaseGraph<Vertex> const& graph)
     // A graph is regular if the degree of every node is the same (a constant).
 
     bool result(true);
-    bool isFirst(true);    unsigned int degreeThatShouldMatch(0);
+    bool isFirst(true);
+    unsigned int degreeThatShouldMatch(0);
     for(Vertex const& vertex : graph.getVertices())
     {
         if(isFirst)
@@ -141,7 +143,8 @@ bool isACompleteGraph(BaseGraph<Vertex> const& graph)
     return areAllDegrees(graph, graph.getNumberOfVertices()-1);;
 }
 
-template <typename Vertex>bool isASimpleGraph(BaseGraph<Vertex> const& graph)
+template <typename Vertex>
+bool isASimpleGraph(BaseGraph<Vertex> const& graph)
 {
     // A graph is simple if no edge starts and ends at the same node, and there are no multiple edges between two nodes.
     // Often we assume that graphs are simple.
@@ -186,7 +189,8 @@ bool areAllDegrees(BaseGraph<Vertex> const& graph, unsigned int const degreeThat
 template <typename Vertex>
 bool isASpanningTree(
         BaseUndirectedGraph<Vertex> const& mainGraph,
-        BaseUndirectedGraph<Vertex> const& subGraphToCheck){
+        BaseUndirectedGraph<Vertex> const& subGraphToCheck)
+{
     // A spanning tree of a connected graph is a subgraph that contains all fo the graphs' vertices and is a single tree
     // Note: It should be a subgraph.
 

@@ -21,6 +21,7 @@ public:
     using Value = unsigned int;
     using Grid = matrix::AlbaMatrix<Value>;
     using Path = std::vector<Value>;
+
     PathSumInGrid(Grid const& gridToCheck);
 
     Value getMaxSumInRightOrDownTraversal() const;
