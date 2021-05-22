@@ -29,13 +29,13 @@ TEST(VariableTermTest, EqualityOperatorWorks)
     VariableTerm variableTerm1;
     VariableTerm variableTerm2("x");
     VariableTerm variable3("power");
-    VariableTerm variable4("x");
+    VariableTerm variable4("x", true);
 
     EXPECT_TRUE(variableTerm1==variableTerm1);
     EXPECT_FALSE(variableTerm1==variableTerm2);
     EXPECT_TRUE(variableTerm2==variableTerm2);
     EXPECT_FALSE(variableTerm2==variable3);
-    EXPECT_TRUE(variableTerm2==variable4);
+    EXPECT_FALSE(variableTerm2==variable4);
 }
 
 TEST(VariableTermTest, InequalityOperatorWorks)
@@ -43,13 +43,13 @@ TEST(VariableTermTest, InequalityOperatorWorks)
     VariableTerm variableTerm1;
     VariableTerm variableTerm2("x");
     VariableTerm variable3("power");
-    VariableTerm variable4("x");
+    VariableTerm variable4("x", true);
 
     EXPECT_FALSE(variableTerm1!=variableTerm1);
     EXPECT_TRUE(variableTerm1!=variableTerm2);
     EXPECT_FALSE(variableTerm2!=variableTerm2);
     EXPECT_TRUE(variableTerm2!=variable3);
-    EXPECT_FALSE(variableTerm2!=variable4);
+    EXPECT_TRUE(variableTerm2!=variable4);
 }
 
 TEST(VariableTermTest, LessThanOperatorWorks)
@@ -58,6 +58,9 @@ TEST(VariableTermTest, LessThanOperatorWorks)
     EXPECT_FALSE(VariableTerm("x") < VariableTerm("x"));
     EXPECT_FALSE(VariableTerm("x") < VariableTerm("w"));
     EXPECT_TRUE(VariableTerm("x") < VariableTerm("y"));
+    EXPECT_FALSE(VariableTerm("x", false) < VariableTerm("x", false));
+    EXPECT_FALSE(VariableTerm("x", true) < VariableTerm("x", false));
+    EXPECT_TRUE(VariableTerm("x", false) < VariableTerm("x", true));
 }
 
 TEST(VariableTermTest, GetDisplayableStringWorks)
