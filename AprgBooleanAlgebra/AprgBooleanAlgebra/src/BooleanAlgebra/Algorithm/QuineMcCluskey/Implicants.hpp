@@ -22,6 +22,7 @@ public:
 
     Implicants()
     {}
+
     Implicants(ImplicantsInitializerList const& implicants)
         : m_implicantsData(implicants)
     {}
@@ -49,13 +50,15 @@ public:
 
     std::string getDisplayableString() const
     {
-        std::stringstream ss;        printParameterWithName(ss, "Implicants", m_implicantsData);
+        std::stringstream ss;
+        printParameterWithName(ss, "Implicants", m_implicantsData);
         return ss.str();
     }
 
     void addImplicant(Implicant const& implicant)
     {
-        m_implicantsData.emplace(implicant);    }
+        m_implicantsData.emplace(implicant);
+    }
 
     void addFinalImplicant(Implicant const& implicant)
     {
@@ -78,7 +81,8 @@ private:
     ImplicantData m_implicantsData;
 };
 
-template <typename Minterm>std::ostream & operator<<(std::ostream & out, Implicants<Minterm> const& implicants)
+template <typename Minterm>
+std::ostream & operator<<(std::ostream & out, Implicants<Minterm> const& implicants)
 {
     out << implicants.getDisplayableString();
     return out;

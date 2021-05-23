@@ -11,6 +11,7 @@
 #include <queue>
 #include <sstream>
 #include <vector>
+
 namespace alba
 {
 
@@ -25,7 +26,8 @@ public:
     using SetOfMinterms = std::set<Minterm>;
     using Implicant = Implicant<Minterm>;
     using Implicants = Implicants<Minterm>;
-    using ImplicantsMap = std::map<Minterm, Implicants>;    using InputToOutputMap = std::map<Minterm, LogicalValue>;
+    using ImplicantsMap = std::map<Minterm, Implicants>;
+    using InputToOutputMap = std::map<Minterm, LogicalValue>;
     using ComputationalTable = std::map<Minterm, ImplicantsMap>;
 
     QuineMcCluskey()
@@ -65,7 +67,8 @@ public:
                 }
             }
         }
-        return result;    }
+        return result;
+    }
 
     Implicants getAllFinalImplicants() const
     {
@@ -82,7 +85,8 @@ public:
                 }
             }
         }
-        return result;    }
+        return result;
+    }
 
     bool doImplicantsExistAt(unsigned int numberOfOnes, unsigned int commonalityCount) const
     {
@@ -148,6 +152,7 @@ public:
             }
         }
     }
+
     std::string getComputationTableString() const
     {
         std::stringstream ss;
@@ -226,7 +231,8 @@ public:
         Minterms inputsWithTrue(getInputMintermsWithTrue());
         DisplayTable displayTable;
         displayTable.setBorders("", "|");
-        displayTable.addRow();        displayTable.getLastRow().addCell(" ");
+        displayTable.addRow();
+        displayTable.getLastRow().addCell(" ");
         for(auto const& input : inputsWithTrue)
         {
             std::stringstream ss;
@@ -276,7 +282,8 @@ private:
 
     void addMintermForZeroCommonalityCount(Minterm const& minterm)
     {
-        unsigned int numberOfOnes(getNumberOfOnes(minterm));        Implicant implicant;
+        unsigned int numberOfOnes(getNumberOfOnes(minterm));
+        Implicant implicant;
         implicant.addMinterm(minterm);
         m_computationalTable[numberOfOnes][0].addImplicant(implicant);
     }

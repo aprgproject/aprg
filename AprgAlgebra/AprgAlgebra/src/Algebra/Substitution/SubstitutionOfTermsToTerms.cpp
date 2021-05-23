@@ -115,6 +115,7 @@ Expression SubstitutionOfTermsToTerms::performSubstitutionForExpression(Expressi
     newExpression.simplify();
     return newExpression;
 }
+
 Function SubstitutionOfTermsToTerms::performSubstitutionForFunction(Function const& functionObject) const
 {
     Function newFunction(functionObject);
@@ -123,6 +124,7 @@ Function SubstitutionOfTermsToTerms::performSubstitutionForFunction(Function con
     newFunction.simplify();
     return newFunction;
 }
+
 void SubstitutionOfTermsToTerms::putTermsToTermsMapping(initializer_list<TermTermPair> const& variablesWithValues)
 {
     for(TermTermPair const& variableValuesPair : variablesWithValues)

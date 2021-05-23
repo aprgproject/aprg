@@ -41,11 +41,12 @@ public:
     void clear();
     void clearAndPutTermInWrappedTerms(BaseTerm const& baseTerm);
 
+    void putTerm(BaseTerm const& baseTerm);
     void putTerm(BaseTerm const& baseTerm, OperatorLevel const operatorLevel);
     void putTermWithAndOperationIfNeeded(BaseTerm const& baseTerm);
     void putTermWithOrOperationIfNeeded(BaseTerm const& baseTerm);
-    void putWrappedTerm(WrappedTerm const& termToSave);    void putWrappedTerms(WrappedTerms const& termsToSave);
-    void putTerm(BaseTerm const& baseTerm);
+    void putWrappedTerm(WrappedTerm const& termToSave);
+    void putWrappedTerms(WrappedTerms const& termsToSave);
 
     void set(OperatorLevel const operatorLevel, WrappedTerms const& wrappedTerms);
     void setTerm(BaseTerm const& baseTerm);

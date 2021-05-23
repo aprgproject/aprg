@@ -99,7 +99,8 @@ Expression SimplificationOfExpression::getExpression() const
 
 void SimplificationOfExpression::simplify()
 {
-    simplifyExpressionUntilNoChangeInitiallyIfNeeded();    simplifyBySubstitutingExpressionAndFunctionsToVariablesIfNeeded();
+    simplifyExpressionUntilNoChangeInitiallyIfNeeded();
+    simplifyBySubstitutingExpressionAndFunctionsToVariablesIfNeeded();
     simplifyToACommonDenominatorIfNeeded();
     simplifyExpressionUntilNoChange();
 }

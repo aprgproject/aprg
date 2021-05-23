@@ -60,7 +60,8 @@ public:
 
     void simplify();
 
-private:    bool isChangeDetected(
+private:
+    bool isChangeDetected(
             Expression const& expression1,
             Expression const& expression2) const;
 

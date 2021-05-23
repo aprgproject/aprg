@@ -22,6 +22,7 @@ public:
         bool shouldSimplifyWithOuterAndAndInnerOr;
         bool shouldSimplifyByQuineMcKluskey;
     };
+
     class Configuration
             : public AlbaConfigurationHolder<ConfigurationDetails>
     {};
@@ -37,7 +38,6 @@ public:
     static bool shouldSimplifyByQuineMcKluskey();
 
     Expression getExpression() const;
-    void setExpression(Expression const& expression);
 
     void simplify();
 
