@@ -149,9 +149,9 @@ Expression SubstitutionOfVariablesToTerms::performSubstitutionForMonomial(Monomi
     }
     Expression finalExpression(getBaseTermConstReferenceFromTerm(remainingMonomial));
     finalExpression.putTermWithMultiplicationIfNeeded(Term(substitutedExpressions));
+    finalExpression.simplify();
     return finalExpression;
 }
-
 Expression SubstitutionOfVariablesToTerms::performSubstitutionForPolynomial(Polynomial const& polynomial) const
 {
     Expression newExpression;
@@ -159,24 +159,24 @@ Expression SubstitutionOfVariablesToTerms::performSubstitutionForPolynomial(Poly
     {
         newExpression.putTermWithAdditionIfNeeded(Term(performSubstitutionForMonomial(monomial)));
     }
+    newExpression.simplify();
     return newExpression;
 }
-
 Expression SubstitutionOfVariablesToTerms::performSubstitutionForExpression(Expression const& expression) const
 {
     Expression newExpression(expression);
     performSubstitutionForTermsWithAssociation(newExpression.getTermsWithAssociationReference());
+    newExpression.simplify();
     return newExpression;
 }
-
 Function SubstitutionOfVariablesToTerms::performSubstitutionForFunction(Function const& functionObject) const
 {
     Function newFunction(functionObject);
     getTermReferenceFromBaseTerm(newFunction.getInputTermReference())
             = performSubstitutionTo(functionObject.getInputTermConstReference());
+    newFunction.simplify();
     return newFunction;
 }
-
 void SubstitutionOfVariablesToTerms::putVariablesWithTerms(
         initializer_list<VariableTermPair> const& variablesWithTerms)
 {

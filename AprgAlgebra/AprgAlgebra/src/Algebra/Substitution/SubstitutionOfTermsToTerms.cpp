@@ -112,17 +112,17 @@ Expression SubstitutionOfTermsToTerms::performSubstitutionForExpression(Expressi
 {
     Expression newExpression(expression);
     performSubstitutionForTermsWithAssociation(newExpression.getTermsWithAssociationReference());
+    newExpression.simplify();
     return newExpression;
 }
-
 Function SubstitutionOfTermsToTerms::performSubstitutionForFunction(Function const& functionObject) const
 {
     Function newFunction(functionObject);
     getTermReferenceFromBaseTerm(newFunction.getInputTermReference())
             = performSubstitutionTo(functionObject.getInputTermConstReference());
+    newFunction.simplify();
     return newFunction;
 }
-
 void SubstitutionOfTermsToTerms::putTermsToTermsMapping(initializer_list<TermTermPair> const& variablesWithValues)
 {
     for(TermTermPair const& variableValuesPair : variablesWithValues)

@@ -144,9 +144,9 @@ Monomial SubstitutionOfVariablesToValues::performSubstitutionForMonomial(Monomia
             newMonomial.putVariableWithExponent(variableExponentPair.first, variableExponentPair.second);
         }
     }
+    newMonomial.simplify();
     return newMonomial;
 }
-
 Polynomial SubstitutionOfVariablesToValues::performSubstitutionForPolynomial(Polynomial const& polynomial) const
 {
     Polynomial newPolynomial;
@@ -154,24 +154,24 @@ Polynomial SubstitutionOfVariablesToValues::performSubstitutionForPolynomial(Pol
     {
         newPolynomial.addMonomial(performSubstitutionForMonomial(monomial));
     }
+    newPolynomial.simplify();
     return newPolynomial;
 }
-
 Expression SubstitutionOfVariablesToValues::performSubstitutionForExpression(Expression const& expression) const
 {
     Expression newExpression(expression);
     performSubstitutionForTermsWithAssociation(newExpression.getTermsWithAssociationReference());
+    newExpression.simplify();
     return newExpression;
 }
-
 Function SubstitutionOfVariablesToValues::performSubstitutionForFunction(Function const& functionObject) const
 {
     Function newFunction(functionObject);
     getTermReferenceFromBaseTerm(newFunction.getInputTermReference())
             = performSubstitutionTo(functionObject.getInputTermConstReference());
+    newFunction.simplify();
     return newFunction;
 }
-
 void SubstitutionOfVariablesToValues::putVariablesWithValues(initializer_list<VariableValuePair> const& variablesWithValues)
 {
     for(VariableValuePair const& variableValuesPair : variablesWithValues)
