@@ -24,18 +24,17 @@ SimplificationOfExpression::SimplificationOfExpression(
     : m_expression(expression)
 {}
 
-bool SimplificationOfExpression::shouldSimplifyByDistributingAndOperandsToOrOperands()
+bool SimplificationOfExpression::shouldSimplifyWithOuterOrAndInnerAnd()
 {
-    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyByDistributingAndOperandsToOrOperands;
+    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyWithOuterOrAndInnerAnd;
 }
 
-bool SimplificationOfExpression::shouldSimplifyByDistributingOrOperandsToAndOperands()
+bool SimplificationOfExpression::shouldSimplifyWithOuterAndAndInnerOr()
 {
-    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyByDistributingOrOperandsToAndOperands;
+    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyWithOuterAndAndInnerOr;
 }
 
-bool SimplificationOfExpression::shouldSimplifyByQuineMcKluskey()
-{
+bool SimplificationOfExpression::shouldSimplifyByQuineMcKluskey(){
     return Configuration::getInstance().getConfigurationDetails().shouldSimplifyByQuineMcKluskey;
 }
 
@@ -173,7 +172,7 @@ booleanAlgebra::Simplification::SimplificationOfExpression::ConfigurationDetails
 getDefaultConfigurationDetails<alba::booleanAlgebra::Simplification::SimplificationOfExpression::ConfigurationDetails>()
 {
     return booleanAlgebra::Simplification::SimplificationOfExpression::ConfigurationDetails
-    {false, false, false};
+    {false, false, true};
 }
 
 }
