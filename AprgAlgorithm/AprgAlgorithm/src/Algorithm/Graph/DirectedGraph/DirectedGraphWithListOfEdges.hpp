@@ -46,15 +46,12 @@ public:
     Vertices getAdjacentVerticesAt(Vertex const& vertex) const override
     {
         Vertices result;
-        auto itLower = m_edges.lower_bound({vertex, 0});
-        auto itUpper = m_edges.lower_bound({vertex+1, 0});
-        std::for_each(itLower, itUpper, [&](Edge const& edge)
+        for(auto it = m_edges.lower_bound({vertex, Vertex{}}); it!=m_edges.cend() && it->first==vertex; it++)
         {
-            result.emplace_back(edge.second);
-        });
+            result.emplace_back(it->second);
+        };
         return result;
     }
-
     Vertices getVertices() const override
     {
         SetOfVertices uniqueVertices(getUniqueVertices());
