@@ -26,10 +26,12 @@ public:
     bool operator==(Expression const& second) const;
     bool operator!=(Expression const& second) const;
     bool operator<(Expression const& second) const;
+
+    Expression operator~() const;
+
     bool isEmpty() const;
     bool isSimplified() const;
     bool containsOnlyOneTerm() const;
-
     OperatorLevel getCommonOperatorLevel() const;
     BaseTerm const& getFirstTermConstReference() const;
     WrappedTerms const& getWrappedTerms() const;

@@ -60,11 +60,9 @@ void SimplificationOfExpression::simplify()
         m_expression.setTerm(quineTerm);
 
         simplifyExpressionUntilNoChange();
-
     }
     else
-    {
-        simplifyExpressionUntilNoChange();
+    {        simplifyExpressionUntilNoChange();
     }
 }
 

@@ -180,11 +180,10 @@ void simplifyByQuineMcKluskey(Term & term)
         if(OperatorLevel::And == targetOuter && OperatorLevel::Or == targetInner)
         {
             DualOperationMutator mutator;
-            mutator.mutateTerm(term);
+            mutator.mutateTerm(term); // get dual if target is "outer and" "inner or"
         }
         Implicants bestImplicants(getBestImplicantsUsingQuineMcCluskey(term, variableNames));
-        if(bestImplicants.getSize() > 0)
-        {
+        if(bestImplicants.getSize() > 0)        {
             Expression newExpression;
             for(Implicant const& bestImplicant : bestImplicants.getImplicantsData())
             {
@@ -194,14 +193,13 @@ void simplifyByQuineMcKluskey(Term & term)
                 for(string const& variableName : variableNames)
                 {
                     char primeBit(bitString.at(i));
-                    implicantExpression.putTerm(getTermFromVariableAndPrimeBit(variableName, primeBit), targetInner);
+                    implicantExpression.putTerm(getTermFromVariableAndPrimeBit(variableName, primeBit), targetInner); // if "outer and" "inner or", its the saved as dual
                     i--;
                 }
-                newExpression.putTerm(Term(implicantExpression), targetOuter);
+                newExpression.putTerm(Term(implicantExpression), targetOuter); // if "outer and" "inner or", its the saved as dual
             }
             term = Term(newExpression);
-        }
-    }
+        }    }
 }
 
 void simplifyAndCopyTermsAndChangeOperatorLevelIfNeeded(

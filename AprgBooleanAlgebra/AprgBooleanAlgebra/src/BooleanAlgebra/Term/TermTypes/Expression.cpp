@@ -83,10 +83,16 @@ bool Expression::operator<(Expression const& second) const
     return result;
 }
 
+Expression Expression::operator~() const
+{
+    Expression result(*this);
+    result.negate();
+    return result;
+}
+
 bool Expression::isEmpty() const
 {
-    return m_wrappedTerms.empty();
-}
+    return m_wrappedTerms.empty();}
 
 bool Expression::isSimplified() const
 {

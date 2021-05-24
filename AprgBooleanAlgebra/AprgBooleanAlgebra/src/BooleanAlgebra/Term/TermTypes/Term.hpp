@@ -35,10 +35,12 @@ public:
     bool operator==(Term const& second) const;
     bool operator!=(Term const& second) const;
     bool operator<(Term const& second) const;
+
+    Term operator~() const;
+
     bool isEmpty() const;
     bool isConstant() const;
-    bool isVariableTerm() const;
-    bool isOperator() const;
+    bool isVariableTerm() const;    bool isOperator() const;
     bool isExpression() const;
     bool isSimplified() const;
 
