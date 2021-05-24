@@ -65,7 +65,8 @@ TEST(ConstantTest, NotOperationWorks)
 
 TEST(ConstantTest, GetDisplayableStringWorks)
 {
-    Constant constant1;    Constant constant2(true);
+    Constant constant1;
+    Constant constant2(true);
     Constant constant3(false);
 
     EXPECT_EQ("[false]", constant1.getDisplayableString());

@@ -25,6 +25,7 @@ include(${APRG_DIR}/AprgAlgorithm/AprgCmakeInclude/AprgAlgorithm.cmake)
 
 #Add files and directories
 include(${APRG_BOOLEAN_ALGEBRA_DIR}/cmake/FilesAndDirectories.cmake)
+
 #Do final steps
 add_executable(${OUTFILE} ${APRG_BOOLEAN_ALGEBRA_SOURCES_AND_TESTS})
 include_directories(${APRG_BOOLEAN_ALGEBRA_INCLUDE_DIRECTORIES} ${APRG_BOOLEAN_ALGEBRA_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})

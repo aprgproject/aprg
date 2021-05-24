@@ -52,6 +52,7 @@ public:
         };
         return result;
     }
+
     Vertices getVertices() const override
     {
         SetOfVertices uniqueVertices(getUniqueVertices());

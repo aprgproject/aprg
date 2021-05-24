@@ -12,7 +12,8 @@ namespace booleanAlgebra
 
 Term operator&(Term const& term1, Term const& term2)
 {
-    return performAnd(term1, term2);}
+    return performAnd(term1, term2);
+}
 
 Term & operator&=(Term & term1, Term const& term2)
 {

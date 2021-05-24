@@ -3,7 +3,8 @@
 #include <Algorithm/Graph/ConnectedComponents/Common/BaseConnectedComponentsWithVertexToComponentIdMap.hpp>
 #include <Algorithm/Graph/DirectedGraph/BaseDirectedGraph.hpp>
 #include <Algorithm/Graph/DirectedGraph/DirectedGraphWithListOfEdges.hpp>
-#include <Algorithm/Graph/Utilities/CheckableVertices.hpp>#include <Algorithm/Graph/VertexOrdering/VertexOrderingUsingDfs.hpp>
+#include <Algorithm/Graph/Utilities/CheckableVertices.hpp>
+#include <Algorithm/Graph/VertexOrdering/VertexOrderingUsingDfs.hpp>
 
 #include <map>
 
@@ -26,9 +27,9 @@ public:
 
     StronglyConnectedComponentsUsingKosarajuSharir(BaseDirectedGraphWithVertex const& graph)
         : BaseClass(graph)
-        , m_graph(BaseClass::m_graph)
-        , m_numberOfComponentIds(BaseClass::m_numberOfComponentIds)
-        , m_vertexToComponentIdMap(BaseClass::m_vertexToComponentIdMap)
+        , b_graph(BaseClass::m_graph)
+        , b_numberOfComponentIds(BaseClass::m_numberOfComponentIds)
+        , b_vertexToComponentIdMap(BaseClass::m_vertexToComponentIdMap)
     {
         initialize();
     }
@@ -37,7 +38,8 @@ private:
 
     void initialize()
     {
-        // Kosaraju Sharir algorithm works on reversing directions and iterating vertices in topological order        // and iterating that vertices using DFS on the original graph with orginial directions
+        // Kosaraju Sharir algorithm works on reversing directions and iterating vertices in topological order
+        // and iterating that vertices using DFS on the original graph with orginial directions
 
         // This works because:
         // -> reversing the edges -> reverses the dependency of the vertices in the graph
@@ -45,15 +47,15 @@ private:
         // -> this means contracting each strong component into a single vertex
         // and we can increment the id when one vertex finishes DFS (in the original graph)
 
-        m_numberOfComponentIds = 0U;
-        DirectedGraphWithListOfEdgesWithVertex graphWithReversedDirections(getGraphWithReversedDirections(m_graph));
+        b_numberOfComponentIds = 0U;
+        DirectedGraphWithListOfEdgesWithVertex graphWithReversedDirections(getGraphWithReversedDirections(b_graph));
         VertexOrderingUsingDfs<Vertex> vertexOrdering(graphWithReversedDirections);
         for(Vertex const& vertex : vertexOrdering.getVerticesInTopologicalOrder())
         {
             if(m_processedVertices.isNotFound(vertex))
             {
                 traverseUsingDfs(vertex);
-                m_numberOfComponentIds++;
+                b_numberOfComponentIds++;
             }
         }
     }
@@ -61,10 +63,11 @@ private:
     void traverseUsingDfs(Vertex const& vertex)
     {
         m_processedVertices.putVertex(vertex);
-        m_vertexToComponentIdMap[vertex] = m_numberOfComponentIds+1;
-        for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex))
+        b_vertexToComponentIdMap[vertex] = b_numberOfComponentIds+1;
+        for(Vertex const& adjacentVertex : b_graph.getAdjacentVerticesAt(vertex))
         {
-            if(m_processedVertices.isNotFound(adjacentVertex))            {
+            if(m_processedVertices.isNotFound(adjacentVertex))
+            {
                 traverseUsingDfs(adjacentVertex);
             }
         }
@@ -80,13 +83,14 @@ private:
         return result;
     }
 
-    BaseDirectedGraphWithVertex const& m_graph;
-    unsigned int & m_numberOfComponentIds;
-    VertexToUnsignedIntMap & m_vertexToComponentIdMap;
+    BaseDirectedGraphWithVertex const& b_graph;
+    unsigned int & b_numberOfComponentIds;
+    VertexToUnsignedIntMap & b_vertexToComponentIdMap;
     CheckableVerticesWithVertex m_processedVertices;
 };
 
 // Linear time because DFS.
+
 // Strong components in a graph is the same with the graph with reversed directions
 // Contract each strong component into a single vertex
 

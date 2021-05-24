@@ -92,7 +92,8 @@ Expression Expression::operator~() const
 
 bool Expression::isEmpty() const
 {
-    return m_wrappedTerms.empty();}
+    return m_wrappedTerms.empty();
+}
 
 bool Expression::isSimplified() const
 {

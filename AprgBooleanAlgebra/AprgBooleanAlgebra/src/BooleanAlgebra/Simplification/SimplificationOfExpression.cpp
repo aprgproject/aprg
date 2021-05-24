@@ -62,7 +62,8 @@ void SimplificationOfExpression::simplify()
         simplifyExpressionUntilNoChange();
     }
     else
-    {        simplifyExpressionUntilNoChange();
+    {
+        simplifyExpressionUntilNoChange();
     }
 }
 

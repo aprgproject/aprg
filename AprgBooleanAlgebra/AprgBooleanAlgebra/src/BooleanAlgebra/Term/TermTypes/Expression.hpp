@@ -32,6 +32,7 @@ public:
     bool isEmpty() const;
     bool isSimplified() const;
     bool containsOnlyOneTerm() const;
+
     OperatorLevel getCommonOperatorLevel() const;
     BaseTerm const& getFirstTermConstReference() const;
     WrappedTerms const& getWrappedTerms() const;

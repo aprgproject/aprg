@@ -183,7 +183,8 @@ void simplifyByQuineMcKluskey(Term & term)
             mutator.mutateTerm(term); // get dual if target is "outer and" "inner or"
         }
         Implicants bestImplicants(getBestImplicantsUsingQuineMcCluskey(term, variableNames));
-        if(bestImplicants.getSize() > 0)        {
+        if(bestImplicants.getSize() > 0)
+        {
             Expression newExpression;
             for(Implicant const& bestImplicant : bestImplicants.getImplicantsData())
             {
@@ -199,7 +200,8 @@ void simplifyByQuineMcKluskey(Term & term)
                 newExpression.putTerm(Term(implicantExpression), targetOuter); // if "outer and" "inner or", its the saved as dual
             }
             term = Term(newExpression);
-        }    }
+        }
+    }
 }
 
 void simplifyAndCopyTermsAndChangeOperatorLevelIfNeeded(

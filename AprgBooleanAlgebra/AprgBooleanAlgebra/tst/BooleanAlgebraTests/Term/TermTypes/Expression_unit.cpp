@@ -143,7 +143,8 @@ TEST(ExpressionTest, NotOperationWorks)
 
 TEST(ExpressionTest, IsEmptyWorks)
 {
-    Expression expression1;    Expression expression2(createOrCopyExpressionFromATerm(false));
+    Expression expression1;
+    Expression expression2(createOrCopyExpressionFromATerm(false));
     Expression expression3(createExpressionIfPossible({true, "&", "x"}));
 
     EXPECT_TRUE(expression1.isEmpty());
