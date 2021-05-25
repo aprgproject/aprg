@@ -3,7 +3,8 @@
 #include <Algorithm/Graph/ConnectedComponents/Common/BaseConnectedComponents.hpp>
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {
@@ -42,7 +43,8 @@ public:
         unsigned int result(0);
         auto it = m_vertexToComponentIdMap.find(vertex);
         if(it != m_vertexToComponentIdMap.cend())
-        {            result = it->second;
+        {
+            result = it->second;
         }
         return result;
     }

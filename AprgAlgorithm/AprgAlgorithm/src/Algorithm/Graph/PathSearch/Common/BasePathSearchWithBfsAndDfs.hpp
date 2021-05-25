@@ -88,6 +88,7 @@ public:
     virtual void reinitializeStartingFrom(Vertices const& startVertices) = 0;
 
 protected:
+
     void clear()
     {
         m_processedVertices.clear();
