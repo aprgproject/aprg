@@ -1,10 +1,10 @@
-#include <Algorithm/Graph/PathSearch/EulerPath/FleuryAlgorithm.hpp>
+#include <Algorithm/Graph/PathSearch/EulerPath/UndirectedGraph/FleuryAlgorithm.hpp>
 #include <Algorithm/Graph/UndirectedGraph/UndirectedGraphWithListOfEdges.hpp>
-#include <AlgorithmTests/Graph/PathSearch/EulerPath/Utilities/CommonTestsWithEulerPath.hpp>
+#include <AlgorithmTests/Graph/PathSearch/EulerPath/UndirectedGraph/Utilities/CommonTestsWithEulerPathForUndirectedGraph.hpp>
 
 #include <gtest/gtest.h>
 
-using namespace alba::algorithm::CommonTestsWithEulerPath;
+using namespace alba::algorithm::CommonTestsWithEulerPathForUndirectedGraph;
 
 namespace alba
 {
@@ -36,7 +36,8 @@ TEST(FleuryAlgorithmTest, HasEulerPathWorksOnGraphWithOneOddDegreeVertices)
 
 TEST(FleuryAlgorithmTest, HasEulerPathWorksOnGraphWithTwoOddDegreesVertices)
 {
-    testHasEulerPathWorksOnGraphWithTwoOddDegreesVertices<PathSearchForTest, GraphForTest>();}
+    testHasEulerPathWorksOnGraphWithTwoOddDegreesVertices<PathSearchForTest, GraphForTest>();
+}
 
 TEST(FleuryAlgorithmTest, HasEulerPathWorksOnGraphWithThreeOddDegreesVertices)
 {

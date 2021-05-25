@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -54,7 +55,8 @@ public:
 protected:
 
     void initializeIfNeeded()
-    {        if(GraphUtilities::isATree(m_graph))
+    {
+        if(GraphUtilities::isATree(m_graph))
         {
             initialize();
         }
@@ -75,7 +77,8 @@ protected:
             traverseUsingDfs(treeSize, startVertex);
 
             m_subTreeSize.resize(m_verticesInDfsPreOrder.size());
-            m_verticesInDfsPreOrder.shrink_to_fit();            m_subTreeSize.shrink_to_fit();
+            m_verticesInDfsPreOrder.shrink_to_fit();
+            m_subTreeSize.shrink_to_fit();
         }
     }
 
