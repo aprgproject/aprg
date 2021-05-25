@@ -3,12 +3,9 @@
 #include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
 #include <Algorithm/Graph/Utilities/CheckableVertices.hpp>
 
-
-
-#include <Common/Debug/AlbaDebug.hpp>
-
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -23,7 +20,8 @@ public:
     using VertexToIndexMap = std::map<Vertex, unsigned int>;
 
     SubTreeQuery(BaseUndirectedGraphWithVertex const& graph, Vertex const& rootOfTree)
-        : m_graph(graph)        , m_rootOfTree(rootOfTree)
+        : m_graph(graph)
+        , m_rootOfTree(rootOfTree)
     {
         initializeIfNeeded();
     }
@@ -56,7 +54,8 @@ public:
 
 private:
 
-    void initializeIfNeeded()    {
+    void initializeIfNeeded()
+    {
         if(GraphUtilities::isATree(m_graph))
         {
             initialize();
@@ -90,7 +89,8 @@ private:
         unsigned int beforeTreeSize = treeSize++;
         for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex))
         {
-            if(m_processedVertices.isNotFound(adjacentVertex))            {
+            if(m_processedVertices.isNotFound(adjacentVertex))
+            {
                 traverseUsingDfs(treeSize, adjacentVertex);
             }
         }
@@ -107,4 +107,5 @@ private:
 };
 
 }
+
 }
