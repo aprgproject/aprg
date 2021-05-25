@@ -29,10 +29,14 @@ TEST(EulerPathSearchUsingDfsTest, HasEulerCycleWorksOnGraphWithNotAllEvenDegrees
     testHasEulerCycleWorksOnGraphWithNotAllEvenDegreesVertices<PathSearchForTest, GraphForTest>();
 }
 
+TEST(EulerPathSearchUsingDfsTest, HasEulerPathWorksOnGraphWithOneOddDegreeVertices)
+{
+    testHasEulerPathWorksOnGraphWithOneOddDegreeVertices<PathSearchForTest, GraphForTest>();
+}
+
 TEST(EulerPathSearchUsingDfsTest, HasEulerPathWorksOnGraphWithTwoOddDegreesVertices)
 {
-    testHasEulerPathWorksOnGraphWithTwoOddDegreesVertices<PathSearchForTest, GraphForTest>();
-}
+    testHasEulerPathWorksOnGraphWithTwoOddDegreesVertices<PathSearchForTest, GraphForTest>();}
 
 TEST(EulerPathSearchUsingDfsTest, HasEulerPathWorksOnGraphWithThreeOddDegreesVertices)
 {
