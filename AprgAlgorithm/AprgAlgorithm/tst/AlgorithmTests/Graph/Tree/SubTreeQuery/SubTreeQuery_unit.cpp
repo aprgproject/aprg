@@ -18,11 +18,10 @@ using VerticesForTest = SubTreeQueryForTest::Vertices;
 using CountsForTest = SubTreeQueryForTest::Counts;
 }
 
-TEST(SubTreeQueryTest, GetVerticesInDfsPreOrderAndGetSubTreeSizeWorks)
+TEST(SubTreeQueryTest, Example1Works)
 {
     GraphForTest graph;
-    graph.connect(1U, 2U);
-    graph.connect(1U, 3U);
+    graph.connect(1U, 2U);    graph.connect(1U, 3U);
     graph.connect(1U, 4U);
     graph.connect(1U, 5U);
     graph.connect(2U, 6U);
