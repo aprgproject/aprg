@@ -115,35 +115,32 @@ private:
         }
     }
 
-    void traversePreOrderAt(Vertices & traversedVertices, Vertex const& startVertex)
+    void traversePreOrderAt(Vertices & traversedVertices, Vertex const& vertex)
     {
-        traversedVertices.emplace_back(startVertex); // add vertex before DFS
+        traversedVertices.emplace_back(vertex); // add vertex before DFS
 
-        m_processedVertices.putVertex(startVertex);
-        for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(startVertex))
+        m_processedVertices.putVertex(vertex);
+        for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex))
         {
             if(m_processedVertices.isNotFound(adjacentVertex))
-            {
-                traversePreOrderAt(traversedVertices, adjacentVertex);
+            {                traversePreOrderAt(traversedVertices, adjacentVertex);
             }
         }
     }
 
-    void traversePostOrderAt(Vertices & traversedVertices, Vertex const& startVertex)
+    void traversePostOrderAt(Vertices & traversedVertices, Vertex const& vertex)
     {
-        m_processedVertices.putVertex(startVertex);
-        for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(startVertex))
+        m_processedVertices.putVertex(vertex);
+        for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex))
         {
             if(m_processedVertices.isNotFound(adjacentVertex))
-            {
-                traversePostOrderAt(traversedVertices, adjacentVertex);
+            {                traversePostOrderAt(traversedVertices, adjacentVertex);
             }
         }
-        traversedVertices.emplace_back(startVertex); // add vertex after DFS is done for the vertex
+        traversedVertices.emplace_back(vertex); // add vertex after DFS is done for the vertex
     }
 
-    BaseGraphWithVertex const& m_graph;
-    CheckableVerticesWithVertex m_processedVertices;
+    BaseGraphWithVertex const& m_graph;    CheckableVerticesWithVertex m_processedVertices;
 };
 
 // Proposition: Reverse DFS postorder of a DAG is a topological order.
