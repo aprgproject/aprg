@@ -52,11 +52,10 @@ public:
         return result;
     }
 
-private:
+protected:
 
     void initializeIfNeeded()
-    {
-        if(GraphUtilities::isATree(m_graph))
+    {        if(GraphUtilities::isATree(m_graph))
         {
             initialize();
         }
