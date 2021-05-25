@@ -7,7 +7,7 @@ namespace alba
 {
 
 template <typename Value>
-class RangeQueryWithPartialResults
+class RangeQueryWithAccumulator
 {
 public:
     // Example for "range query accumulator" is sum queries
@@ -19,7 +19,7 @@ public:
     using Values = std::vector<Value>;
     using AccumulatorFunction = std::function<Value(Value const&, Value const&)>;
 
-    RangeQueryWithPartialResults(
+    RangeQueryWithAccumulator(
             Values const& valuesToCheck,
             AccumulatorFunction const& accumulator,
             AccumulatorFunction const& inverseAccumulator)
