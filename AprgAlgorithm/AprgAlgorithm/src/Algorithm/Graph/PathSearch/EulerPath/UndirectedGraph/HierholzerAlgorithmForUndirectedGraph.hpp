@@ -3,10 +3,10 @@
 #include <Algorithm/Graph/PathSearch/EulerPath/Common/BaseHierholzerAlgorithm.hpp>
 #include <Algorithm/Graph/PathSearch/EulerPath/UndirectedGraph/BaseEulerPathSearchForUndirectedGraph.hpp>
 
+#include <algorithm>
 #include <stack>
 
-namespace alba
-{
+namespace alba{
 
 namespace algorithm
 {
