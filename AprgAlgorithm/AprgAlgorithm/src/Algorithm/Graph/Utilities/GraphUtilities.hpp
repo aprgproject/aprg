@@ -139,11 +139,10 @@ bool isACompleteGraph(BaseGraph<Vertex> const& graph)
 {
     // A graph is complete if the degree of every node is n-1, i.e., the graph contains all possible edges between the nodes.
 
-    return areAllDegrees(graph, graph.getNumberOfVertices()-1);;
+    return areAllDegrees(graph, graph.getNumberOfVertices()-1);
 }
 
-template <typename Vertex>
-bool isASimpleGraph(BaseGraph<Vertex> const& graph)
+template <typename Vertex>bool isASimpleGraph(BaseGraph<Vertex> const& graph)
 {
     // A graph is simple if no edge starts and ends at the same node, and there are no multiple edges between two nodes.
     // Often we assume that graphs are simple.
@@ -173,20 +172,14 @@ bool isAForest(BaseUndirectedGraph<Vertex> const& graph)
 template <typename Vertex>
 bool areAllDegrees(BaseGraph<Vertex> const& graph, unsigned int const degreeThatShouldMatch)
 {
-    bool result(true);
-    for(Vertex const& vertex : graph.getVertices())
+    auto const& vertices(graph.getVertices());
+    return std::all_of(vertices.cbegin(), vertices.cend(), [&](Vertex const& vertex)
     {
-        if(degreeThatShouldMatch != getDegreeAt(graph, vertex))
-        {
-            result=false;
-            break;
-        }
-    }
-    return result;
+        return degreeThatShouldMatch == getDegreeAt(graph, vertex);
+    });
 }
 
-template <typename Vertex>
-bool isASpanningTree(
+template <typename Vertex>bool isASpanningTree(
         BaseUndirectedGraph<Vertex> const& mainGraph,
         BaseUndirectedGraph<Vertex> const& subGraphToCheck)
 {
@@ -336,10 +329,29 @@ unsigned int getMaxDegree(BaseGraph<Vertex> const& graph)
 }
 
 template <typename Vertex>
+unsigned int getMinDegree(BaseGraph<Vertex> const& graph)
+{
+    unsigned int result(0);
+    bool isFirst(true);
+    for(Vertex const& vertex : graph.getVertices())
+    {
+        if(isFirst)
+        {
+            result = getDegreeAt(graph, vertex);
+            isFirst = false;
+        }
+        else
+        {
+            result = std::min(result, getDegreeAt(graph, vertex));
+        }
+    }
+    return result;
+}
+
+template <typename Vertex>
 unsigned int getSumOfDegrees(BaseGraph<Vertex> const& graph)
 {
-    // Other definition:
-    // The sum of degrees in a graph is always 2m, where m is the number of edges, because each edge increases the degree of exactly two nodes by one.
+    // Other definition:    // The sum of degrees in a graph is always 2m, where m is the number of edges, because each edge increases the degree of exactly two nodes by one.
     // For this reason, the sum of degrees is always even.
     // -> Is this only for undirected graphs?
 
