@@ -294,23 +294,20 @@ Term getLimitWithMultipleVariablesWithDifferentApproaches(
         limitValues.emplace_back(getLimit(limitTermUsingApproach, variableName, valueToApproach));
     }
     Term result;
-    bool isFirst(true);
-    for(Term const& limitValue : limitValues)
+    if(!limitValues.empty())
     {
-        if(isFirst)
+        result = limitValues.front();
+        for(unsigned int i=1; i<limitValues.size(); i++)
         {
-            result = limitValue;
-            isFirst = false;
-        }
-        else if(result != limitValue)
-        {
-            result = AlbaNumber(AlbaNumber::Value::NotANumber);
-            break;
+            if(result != limitValues.at(i))
+            {
+                result = AlbaNumber(AlbaNumber::Value::NotANumber);
+                break;
+            }
         }
     }
     return result;
 }
-
 
 Term getLimitUsingLhopitalsRule(
         Term const& term,
