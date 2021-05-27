@@ -4,9 +4,9 @@
 
 #include <deque>
 #include <sstream>
+#include <stack>
 
 using namespace std;
-
 namespace alba
 {
 
@@ -128,6 +128,16 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithMap)
     printParameterWithName(ssToVerify, "name", vectorToTest);
 
     EXPECT_EQ("name : [{size: 5 | (500, A), (501, B), (502, C), (503, D), (504, E), }]", ssToVerify.str());
+}
+
+TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithStack)
+{
+    stringstream ssToVerify;
+    std::stack<unsigned int> adapter({1U, 2U, 3U});
+
+    printParameterWithName(ssToVerify, "name", adapter);
+
+    EXPECT_EQ("name : [{adapter: {size: 3 | 1, 2, 3, }}]", ssToVerify.str());
 }
 
 }

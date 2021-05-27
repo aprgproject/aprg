@@ -184,11 +184,10 @@ getLowerAndUpperIteratorsInMap(ContainerType & container, KeyType const& keyValu
 }
 
 template <typename Adapter>
-typename Adapter::container_type const& getUnderlyingContainer (Adapter const& adapter)
+typename Adapter::container_type const& getUnderlyingContainer(Adapter const& adapter)
 {
     struct AdapterParent : Adapter
-    {
-        static typename Adapter::container_type const& get(Adapter const& adapterAsParameter)
+    {        static typename Adapter::container_type const& get(Adapter const& adapterAsParameter)
         {
             return adapterAsParameter.*&AdapterParent::c;
         }
@@ -197,11 +196,10 @@ typename Adapter::container_type const& getUnderlyingContainer (Adapter const& a
 }
 
 template <typename Adapter>
-typename Adapter::container_type & getUnderlyingContainerReference (Adapter & adapter)
+typename Adapter::container_type & getUnderlyingContainerReference(Adapter & adapter)
 {
     struct AdapterParent : Adapter
-    {
-        static typename Adapter::container_type & get(Adapter & adapterAsParameter)
+    {        static typename Adapter::container_type & get(Adapter & adapterAsParameter)
         {
             return adapterAsParameter.*&AdapterParent::c;
         }

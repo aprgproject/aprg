@@ -204,13 +204,9 @@ TEST(ContainerTest, GetLowerAndUpperIteratorsInMapWorksOnMultiMap)
 TEST(ContainerTest, GetUnderlyingContainerWorksOnStack)
 {
     using Adapter=std::stack<unsigned int>;
-    Adapter adapter;
-    adapter.push(1U);
-    adapter.push(2U);
-    adapter.push(3U);
+    Adapter adapter({1U, 2U, 3U});
 
     Adapter::container_type containerToVerify(getUnderlyingContainer(adapter));
-
     Adapter::container_type containerToExpect{1U, 2U, 3U};
     EXPECT_EQ(containerToExpect, containerToVerify);
 }
@@ -218,14 +214,10 @@ TEST(ContainerTest, GetUnderlyingContainerWorksOnStack)
 TEST(ContainerTest, GetUnderlyingContainerReferenceWorksOnStack)
 {
     using Adapter=std::stack<unsigned int>;
-    Adapter adapter;
-    adapter.push(1U);
-    adapter.push(2U);
-    adapter.push(3U);
+    Adapter adapter({1U, 2U, 3U});
 
     Adapter::container_type& containerToVerify(getUnderlyingContainerReference(adapter));
-    containerToVerify[0] = 4U;
-    containerToVerify[1] = 5U;
+    containerToVerify[0] = 4U;    containerToVerify[1] = 5U;
     containerToVerify[2] = 6U;
 
     ASSERT_EQ(3U, adapter.size());
