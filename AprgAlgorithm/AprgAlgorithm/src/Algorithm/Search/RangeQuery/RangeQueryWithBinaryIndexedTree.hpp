@@ -70,7 +70,8 @@ public:
                 result = m_accumulator(result, m_partialTreeSums.at(indexPlusOne-1));
                 indexPlusOne -= getGreatestPowerOf2Factor(indexPlusOne);
             }
-        }        return result;
+        }
+        return result;
     }
 
     void changeValueAtIndex(Index const index, Value const newValue)
@@ -113,7 +114,8 @@ private:
             {
                 result = m_accumulator(result, m_valuesToCheck.at(i));
             }
-        }        return result;
+        }
+        return result;
     }
 
     Index getGreatestPowerOf2Factor(Index const index) const

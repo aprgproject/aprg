@@ -1,7 +1,8 @@
 #pragma once
 
 #include <Algorithm/Graph/CycleDetection/CycleDetectionUsingDfs.hpp>
-#include <Algorithm/Graph/ConnectedComponents/ConnectedComponentsUsingDfs.hpp>#include <Algorithm/Graph/ConnectedComponents/StronglyConnectedComponentsUsingKosarajuSharir.hpp>
+#include <Algorithm/Graph/ConnectedComponents/ConnectedComponentsUsingDfs.hpp>
+#include <Algorithm/Graph/ConnectedComponents/StronglyConnectedComponentsUsingKosarajuSharir.hpp>
 #include <Algorithm/Graph/PathSearch/DirectedAcyclicGraph/PathSearchForDirectedAcyclicGraph.hpp>
 #include <Algorithm/Graph/Tree/LongestPathsInTree.hpp>
 #include <Algorithm/Graph/Utilities/BipartiteCheckerUsingDfs.hpp>
@@ -131,6 +132,7 @@ bool isARegularGraph(BaseGraph<Vertex> const& graph)
     }
     return result;
 }
+
 template <typename Vertex>
 bool isACompleteGraph(BaseGraph<Vertex> const& graph)
 {
@@ -342,6 +344,7 @@ unsigned int getMinDegree(BaseGraph<Vertex> const& graph)
     }
     return result;
 }
+
 template <typename Vertex>
 unsigned int getSumOfDegrees(BaseGraph<Vertex> const& graph)
 {
