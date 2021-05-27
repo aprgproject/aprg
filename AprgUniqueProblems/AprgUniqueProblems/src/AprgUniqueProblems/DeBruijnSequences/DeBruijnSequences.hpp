@@ -16,10 +16,10 @@ public:
     DeBruijnSequences(unsigned int const substringSize, std::string const& alphabet);
 
     std::string getDeBruijnString() const;
+
 private:
     void initialize();
-    void addAllSubstringsAsVertex();
-    void addSubstringAsVertex(unsigned int const depth, std::string const& substring);
+    void addAllSubstringsAsVertex();    void addSubstringAsVertex(unsigned int const depth, std::string const& substring);
     unsigned int const m_substringSize;
     std::string const m_alphabet;
     algorithm::DirectedGraphWithListOfEdges<std::string> m_graph;
