@@ -105,7 +105,8 @@ TEST(RedBlackBinarySearchTreeSymbolTableTest, GetKeys)
     testGetKeysWithUnsignedIntAndChar<SymbolTableForTest>();
 }
 
-TEST(RedBlackBinarySearchTreeSymbolTableTest, GetKeysInRangeWorks){
+TEST(RedBlackBinarySearchTreeSymbolTableTest, GetKeysInRangeWorks)
+{
     testGetKeysInRangeInclusiveWithUnsignedIntAndChar<SymbolTableForTest>();
 }
 
