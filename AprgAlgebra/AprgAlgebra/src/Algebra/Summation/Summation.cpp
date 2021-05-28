@@ -133,6 +133,7 @@ void Summation::calculateSumUsingEachTerm(
     }
     result = sum;
 }
+
 void Summation::calculateSumUsingModel(
         Term & result,
         AlbaNumber const& startNumber,

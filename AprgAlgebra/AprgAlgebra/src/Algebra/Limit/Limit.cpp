@@ -309,6 +309,7 @@ Term getLimitWithMultipleVariablesWithDifferentApproaches(
     return result;
 }
 
+
 Term getLimitUsingLhopitalsRule(
         Term const& term,
         string const& variableName,

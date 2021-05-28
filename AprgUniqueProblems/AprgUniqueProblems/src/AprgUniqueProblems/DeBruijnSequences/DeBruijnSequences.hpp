@@ -19,7 +19,8 @@ public:
 
 private:
     void initialize();
-    void addAllSubstringsAsVertex();    void addSubstringAsVertex(unsigned int const depth, std::string const& substring);
+    void addAllSubstringsAsVertex();
+    void addSubstringAsVertex(unsigned int const depth, std::string const& substring);
     unsigned int const m_substringSize;
     std::string const m_alphabet;
     algorithm::DirectedGraphWithListOfEdges<std::string> m_graph;

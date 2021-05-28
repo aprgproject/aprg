@@ -193,7 +193,8 @@ public:
             ss << ", " << m_values.at(i);
         }
         ss << "}";
-        return ss.str();    }
+        return ss.str();
+    }
 
     DataType & getValueReferenceAt(unsigned int const index)
     {

@@ -145,6 +145,7 @@ AlbaNumber MultiplicationAndDivisionOfRadicals::getGcfOfExponents(
     }
     return gcfOfExponents;
 }
+
 void MultiplicationAndDivisionOfRadicals::combineMonomialAndRadicalsAndSave(
         RadicalDetails const& radicalDetails,
         Monomial const& combinedMonomial,

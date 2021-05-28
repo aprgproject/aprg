@@ -130,6 +130,7 @@ string getString(TermsWithDetails const& termsWithDetails)
     }
     return result;
 }
+
 string getString(TermWithDetails const& termWithDetails)
 {
     return string("{")+termWithDetails.baseTermSharedPointer->getDisplayableString()

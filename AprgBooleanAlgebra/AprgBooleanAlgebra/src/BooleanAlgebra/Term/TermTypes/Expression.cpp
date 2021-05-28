@@ -135,7 +135,8 @@ string Expression::getDisplayableString() const
         }
     }
     result << ")";
-    return result.str();}
+    return result.str();
+}
 
 string Expression::getDebugString() const
 {

@@ -154,6 +154,7 @@ AlbaNumber getMaxExponent(Monomial const& monomial)
     }
     return maxExponent;
 }
+
 AlbaNumber getGcfOfExponentsInMonomial(Monomial const& monomial)
 {
     AlbaNumber commonExponent(1);
@@ -228,7 +229,8 @@ AlbaNumber getCommonSignInMonomials(Monomials const& monomials)
     bool isFirstMonomial(true);
     bool isFirstMonomialNegative(false);
     unsigned int negativeSignCount(0);
-    for(Monomial const& monomial : monomials)    {
+    for(Monomial const& monomial : monomials)
+    {
         if(monomial.getConstantConstReference() < AlbaNumber(0))
         {
             negativeSignCount++;
@@ -241,6 +243,7 @@ AlbaNumber getCommonSignInMonomials(Monomials const& monomials)
     }
     return (isFirstMonomialNegative||(negativeSignCount>0 && negativeSignCount == monomials.size())) ? -1 : 1;
 }
+
 Monomial getGcfMonomialInMonomials(Monomials const& monomials)
 {
     AlbaNumber commonCoefficient(getGcfOfCoefficientsInMonomials(monomials));
@@ -308,6 +311,7 @@ Monomial getMonomialWithMinimumExponentsInMonomials(Monomials const& monomials)
     }
     return monomialWithMinimumExponents;
 }
+
 Monomial getMonomialWithMaximumExponentsInMonomials(Monomials const& monomials)
 {
     Monomial monomialWithMaximumExponents(1, {});
@@ -323,6 +327,7 @@ Monomial getMonomialWithMaximumExponentsInMonomials(Monomials const& monomials)
     }
     return monomialWithMaximumExponents;
 }
+
 
 }
 

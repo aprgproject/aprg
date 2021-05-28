@@ -14,7 +14,8 @@
 #include <bitset>
 #include <cstdio>
 #include <iostream>
-#include <iterator>#include <map>
+#include <iterator>
+#include <map>
 #include <string>
 
 using namespace std;
@@ -49,7 +50,8 @@ TEST(SampleTest, KBitAndNegativeK)
 
 TEST(SampleTest, RenameFiles)
 {
-    AlbaLocalPathHandler::ListOfPaths files;    AlbaLocalPathHandler::ListOfPaths directories;
+    AlbaLocalPathHandler::ListOfPaths files;
+    AlbaLocalPathHandler::ListOfPaths directories;
     AlbaLocalPathHandler pathHandler(R"(N:\MUSIC\111_DoAutomationHere)");
     pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
 
@@ -63,7 +65,8 @@ TEST(SampleTest, RenameFiles)
 
 TEST(SampleTest, FindSourceFilesToAdjust_FileList)
 {
-    AlbaLocalPathHandler::ListOfPaths files;    AlbaLocalPathHandler::ListOfPaths directories;
+    AlbaLocalPathHandler::ListOfPaths files;
+    AlbaLocalPathHandler::ListOfPaths directories;
     AlbaLocalPathHandler pathHandler(R"(C:\Branches\CP\trunk\SBTS\tcom\C_Application\SC_TCOM)");
     pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
 

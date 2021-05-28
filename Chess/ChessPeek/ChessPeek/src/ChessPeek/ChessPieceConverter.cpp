@@ -164,6 +164,7 @@ PieceTypes ChessPieceConverter::getBestFitTypes(
     }
     return bestFitTypes;
 }
+
 void ChessPieceConverter::initialize()
 {
     initializeToChessDotCom();

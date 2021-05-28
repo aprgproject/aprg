@@ -38,7 +38,8 @@ public:
         auto itLower = m_edges.lower_bound({vertex, Vertex{}});
         if(itLower != m_edges.cend())
         {
-            result = itLower->first == vertex;        }
+            result = itLower->first == vertex;
+        }
         return result;
     }
 
@@ -66,6 +67,7 @@ public:
         };
         return result;
     }
+
     Vertices getVertices() const override
     {
         Vertices result;

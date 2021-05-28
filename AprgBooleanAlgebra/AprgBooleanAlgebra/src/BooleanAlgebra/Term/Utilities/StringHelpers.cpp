@@ -97,6 +97,7 @@ string getString(WrappedTerms const& wrappedTerms)
     }
     return result;
 }
+
 string getString(WrappedTerm const& wrappedTerm)
 {
     return string("{")+wrappedTerm.baseTermSharedPointer->getDisplayableString()+"}";

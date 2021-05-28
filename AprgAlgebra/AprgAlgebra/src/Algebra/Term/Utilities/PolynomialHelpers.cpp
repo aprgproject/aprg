@@ -150,6 +150,7 @@ AlbaNumber getMaxDegree(
     }
     return maxDegree;
 }
+
 std::pair<AlbaNumber, AlbaNumber> getMinmaxDegree(
         Polynomial const& polynomial)
 {
@@ -167,6 +168,7 @@ std::pair<AlbaNumber, AlbaNumber> getMinmaxDegree(
     }
     return result;
 }
+
 AlbaNumber getDegreeForVariable(
         Polynomial const& polynomial,
         string const& variableName)
@@ -183,6 +185,7 @@ AlbaNumber getDegreeForVariable(
     }
     return maxDegree;
 }
+
 AlbaNumber getCoefficientOfVariableExponent(
         Polynomial const& polynomial,
         Monomial const& monomial)

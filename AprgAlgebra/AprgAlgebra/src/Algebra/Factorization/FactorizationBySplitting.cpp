@@ -83,6 +83,7 @@ void splitPolynomialsByPolynomialDegree(Polynomials & result, Polynomial const& 
     }
     simplifyThenEmplaceBackIfPolynomialIsNotEmpty(result, partialPolynomial);
 }
+
 void splitPolynomialsByDivisibilityOfExponents(Polynomials & result, Polynomial const& polynomial)
 {
     Polynomials collectedPolynomials;
@@ -216,7 +217,8 @@ void getCommonFactorsInThesePolynomials(Polynomials & commonFactors, Polynomials
             Polynomials commonFactorsOfAPolynomial(factorizeAPolynomial(smallerPolynomials.at(i)));
             updateToGetSubsetOfFactors(commonFactors, commonFactorsOfAPolynomial);
         }
-    }}
+    }
+}
 
 Polynomial getNewPolynomialWithNewVariables(
         SubstitutionOfVariablesToTerms & variableSubstitution,

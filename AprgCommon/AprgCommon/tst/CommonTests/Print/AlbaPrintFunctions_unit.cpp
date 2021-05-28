@@ -7,6 +7,7 @@
 #include <stack>
 
 using namespace std;
+
 namespace alba
 {
 

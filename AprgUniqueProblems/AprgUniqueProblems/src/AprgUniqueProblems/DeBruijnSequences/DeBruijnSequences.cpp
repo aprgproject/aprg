@@ -2,12 +2,9 @@
 
 #include <Algorithm/Graph/PathSearch/EulerPath/DirectedGraph/HierholzerAlgorithmForDirectedGraph.hpp>
 
-
-
-#include <Common/Debug/AlbaDebug.hpp>
-
 using namespace alba::algorithm;
 using namespace std;
+
 namespace alba
 {
 
@@ -17,24 +14,24 @@ DeBruijnSequences::DeBruijnSequences(
     : m_substringSize(substringSize)
     , m_alphabet(alphabet)
 {
-    ALBA_PRINT2(m_substringSize, m_alphabet);
     initialize();
 }
+
 string DeBruijnSequences::getDeBruijnString() const
 {
     string result;
-    ALBA_PRINT1(m_graph.getDisplayableString());
     if(m_substringSize==1)
     {
-        result = m_alphabet;    }
+        result = m_alphabet;
+    }
     else
     {
         HierholzerAlgorithmForDirectedGraph<string> eulerPathSearch(m_graph);
         auto eulerPath(eulerPathSearch.getEulerPath());
-        ALBA_PRINT1(eulerPath);
         if(!eulerPath.empty())
         {
-            result = eulerPath.at(0);            for(unsigned int i=1; i<eulerPath.size(); i++)
+            result = eulerPath.at(0);
+            for(unsigned int i=1; i<eulerPath.size(); i++)
             {
                 result += eulerPath.at(i).back();
             }
@@ -45,10 +42,10 @@ string DeBruijnSequences::getDeBruijnString() const
 
 void DeBruijnSequences::initialize()
 {
-    ALBA_PRINT2(m_substringSize, m_alphabet);
     if(m_substringSize>1 && !m_alphabet.empty())
     {
-        addAllSubstringsAsVertex();    }
+        addAllSubstringsAsVertex();
+    }
 }
 
 void DeBruijnSequences::addAllSubstringsAsVertex()

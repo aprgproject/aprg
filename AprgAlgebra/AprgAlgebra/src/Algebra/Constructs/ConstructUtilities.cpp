@@ -179,7 +179,8 @@ void createTermRaiseToANumberFromRaiseToPowerExpression(
                 exponentTerm.getMonomialReference().setConstant(1);
             }
         }
-        raiseToPowerTerms.erase(                    remove_if(
+        raiseToPowerTerms.erase(
+                    remove_if(
                         raiseToPowerTerms.begin()+1, raiseToPowerTerms.end(),
                         [&](TermWithDetails const& raiseToPowerTerm){
                         Term const& exponentTerm(getTermConstReferenceFromSharedPointer(raiseToPowerTerm.baseTermSharedPointer));

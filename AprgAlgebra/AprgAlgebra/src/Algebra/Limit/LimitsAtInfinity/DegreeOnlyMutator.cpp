@@ -68,6 +68,7 @@ AlbaNumber DegreeOnlyMutator::getMaxDegreeForVariable(Polynomial const& polynomi
     }
     return maxDegreeForVariable;
 }
+
 Monomial DegreeOnlyMutator::getMonomialWithDegree(AlbaNumber const& degree) const
 {
     Monomial result(1, {{m_variableName, degree}});

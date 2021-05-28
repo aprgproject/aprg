@@ -98,6 +98,7 @@ unsigned int PolynomialRaiseToAnUnsignedInt::getGcfOfExponents(
     }
     return result;
 }
+
 Polynomial PolynomialRaiseToAnUnsignedInt::getRemainingBase(
         PolynomialToNumberMap const& factorsToExponent,
         Monomial const& commonMonomialInBase,

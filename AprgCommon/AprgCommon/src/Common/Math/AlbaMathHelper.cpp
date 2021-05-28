@@ -63,7 +63,8 @@ FractionDetails getFractionFromPartialNumerators(
         }
     }
     return FractionDetails{
-        1,        getIntegerAfterRoundingADoubleValue<unsigned int>(numerator),
+        1,
+        getIntegerAfterRoundingADoubleValue<unsigned int>(numerator),
                 getIntegerAfterRoundingADoubleValue<unsigned int>(denominator)};
 }
 

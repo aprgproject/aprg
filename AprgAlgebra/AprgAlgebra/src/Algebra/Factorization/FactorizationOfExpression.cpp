@@ -30,7 +30,8 @@ Terms factorizeAnExpressionWithConfigurationChanged(
         Expression const& expression)
 {
     ConfigurationDetails configurationDetails(
-                Factorization::Configuration::getInstance().getConfigurationDetails());    configurationDetails.shouldSimplifyExpressionsToFactors = true;
+                Factorization::Configuration::getInstance().getConfigurationDetails());
+    configurationDetails.shouldSimplifyExpressionsToFactors = true;
     ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
@@ -154,6 +155,7 @@ AlbaNumber getGcfOfConstants(AlbaNumbers const& constantFactorsPerAddends)
     }
     return constantGcf;
 }
+
 void retrieveCommonNonConstantFactors(
         TermsRaiseToNumbers & commonNonConstantFactors,
         vector<TermsRaiseToNumbers> const& nonConstantFactorsPerAddends)
@@ -170,7 +172,8 @@ void retrieveCommonNonConstantFactors(
                 AlbaNumber exponentAtAddend(nonConstantFactorsPerAddends.at(i).getExponentOfBase(base));
                 if(exponentAtAddend > 0)
                 {
-                    commonNonConstantFactors.setBaseAndExponent(base, min(exponentAtCommonFactor, exponentAtAddend));                }
+                    commonNonConstantFactors.setBaseAndExponent(base, min(exponentAtCommonFactor, exponentAtAddend));
+                }
                 else if(exponentAtAddend < 0)
                 {
                     commonNonConstantFactors.setBaseAndExponent(base, max(exponentAtCommonFactor, exponentAtAddend));

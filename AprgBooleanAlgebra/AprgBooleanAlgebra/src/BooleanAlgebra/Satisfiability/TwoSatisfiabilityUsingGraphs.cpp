@@ -35,7 +35,8 @@ Term TwoSatisfiabilityUsingGraphs::getSolution() const
     auto const& variableTermsInOrder(vertexOrdering.getVerticesInThisOrder(VertexTraversalOrder::PostOrder));
     VariableNamesSet processedNames;
     Expression result;
-    for(VariableTerm const& variableTerm : variableTermsInOrder)    {
+    for(VariableTerm const& variableTerm : variableTermsInOrder)
+    {
         string variableName(variableTerm.getVariableTermName());
         if(processedNames.find(variableName) == processedNames.cend())
         {
