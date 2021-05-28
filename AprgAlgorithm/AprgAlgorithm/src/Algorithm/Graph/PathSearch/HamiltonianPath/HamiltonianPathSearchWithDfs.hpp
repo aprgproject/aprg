@@ -12,7 +12,7 @@ namespace algorithm
 {
 
 template <typename Vertex>
-class HamiltonianPathSearchForUndirectedGraphWithDfs // The Traveling Salesman Problem. // This is an intractable problem (classical NP-complete problem)
+class HamiltonianPathSearchWithDfs // The Traveling Salesman Problem. // This is an intractable problem (classical NP-complete problem)
 {
 public:
     using BaseGraphWithVertex = BaseGraph<Vertex>;
@@ -29,7 +29,7 @@ public:
         OneHamiltonianCycle,
     };
 
-    HamiltonianPathSearchForUndirectedGraphWithDfs(BaseGraphWithVertex const& graph)
+    HamiltonianPathSearchWithDfs(BaseGraphWithVertex const& graph)
         : m_graph(graph)
         , m_numberOfVertices(m_graph.getNumberOfVertices())
         , m_searchType(SearchType::Unknown)
