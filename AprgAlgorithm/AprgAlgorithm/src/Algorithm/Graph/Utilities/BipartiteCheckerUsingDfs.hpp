@@ -44,7 +44,8 @@ public:
 
 private:
 
-    bool areColorsEqualOnVertices(Vertex const& vertex1, Vertex const& vertex2) const    {
+    bool areColorsEqualOnVertices(Vertex const& vertex1, Vertex const& vertex2) const
+    {
         bool result(false);
         auto it1 = m_vertexToColorMap.find(vertex1);
         auto it2 = m_vertexToColorMap.find(vertex2);

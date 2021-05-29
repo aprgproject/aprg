@@ -26,15 +26,12 @@ public:
     using VertexToFlowEdgeMap = std::map<Vertex, FlowEdge>;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
     using TraverseFunction = std::function<void(Vertex)>;
+
     FordFulkersonUsingBfs(SinkSourceFlowNetworkType const& flowNetwork)
         : m_flowNetwork(flowNetwork)
         , m_maxFlowValue{}
     {
         initialize();
-    }
-
-    bool isInMaxFlowMinCut(Vertex const& vertex) const    {
-        return m_processedVertices.isFound(vertex);
     }
 
     FlowDataType getMaxFlowValue() const
@@ -68,7 +65,8 @@ private:
     {
         while(findAnAugmentingPathAndReturnIfFound())
         {
-            FlowDataType bottleNeckFlow(getBottleNeckFlow());            traverseAugmentingPathInReverse([&](Vertex const& vertex)
+            FlowDataType bottleNeckFlow(getBottleNeckFlow());
+            traverseAugmentingPathInReverse([&](Vertex const& vertex)
             {
                 auto flowEdge(m_vertexToAugmentingPathEdgeMap[vertex]);
                 flowEdge.addResidualCapacityTo(vertex, bottleNeckFlow); // add the bottleNeckFlow in the augmenting path
@@ -80,7 +78,8 @@ private:
 
     bool findAnAugmentingPathAndReturnIfFound()
     {
-        m_vertexToAugmentingPathEdgeMap.clear();        m_processedVertices.clear();
+        m_vertexToAugmentingPathEdgeMap.clear();
+        m_processedVertices.clear();
         m_processedVertices.putVertex(m_flowNetwork.getSourceVertex());
         std::deque<Vertex> queueOfVerticesToProcess{m_flowNetwork.getSourceVertex()};
 
@@ -205,12 +204,12 @@ private:
 // The Ford–Fulkerson algorithm does not specify how we should choose the paths that increase the flow.
 // In any case, the algorithm will terminate sooner or later and correctly find the maximum flow.
 // However, the efficiency of the algorithm depends on the way the paths are chosen.
-// A simple way to find paths is to use depth-first search (IMPLEMENTED ABOVE).
+// A simple way to find paths is to use depth-first search (BFS IS IMPLEMENTED ABOVE).
 // Usually, this works well, but in the worst case, each path only increases the flow by 1 and the algorithm is slow.
 // Fortunately, we can avoid this situation by using one of the following techniques:
 // 1) Edmonds–Karp algorithm
 // -> The Edmonds–Karp algorithm chooses each path so that the number of edges on the path is as small as possible.
-// -> This can be done by using breadthfirst search instead of depth-first search for finding paths.
+// -> This can be done by using breadthfirst search instead of depth-first search for finding paths. THIS IS IMPLELENTED ABOVE.
 // -> It can be proven that this guarantees that the flow increases quickly, and the time complexity of the algorithm is O(m2n).
 // 2) Scaling algorithm
 // -> The scaling algorithm uses depth-first search to find paths where each edge weight is at least a threshold value.

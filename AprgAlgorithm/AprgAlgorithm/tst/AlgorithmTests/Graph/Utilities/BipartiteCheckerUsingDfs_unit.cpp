@@ -36,7 +36,8 @@ TEST(BipartiteCheckerUsingDfsTest, IsBipartiteWorksforNonBarpartiteGraph)
     EXPECT_TRUE(bipartiteChecker.getColor(5U));
 }
 
-TEST(BipartiteCheckerUsingDfsTest, IsBipartiteWorksforBarpartiteGraph){
+TEST(BipartiteCheckerUsingDfsTest, IsBipartiteWorksforBarpartiteGraph)
+{
     GraphForTest bipartiteGraph;
     bipartiteGraph.connect(0U, 1U);
     bipartiteGraph.connect(0U, 2U);
@@ -58,4 +59,5 @@ TEST(BipartiteCheckerUsingDfsTest, IsBipartiteWorksforBarpartiteGraph){
 }
 
 }
+
 }
