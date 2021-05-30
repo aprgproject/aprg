@@ -61,7 +61,7 @@ private:
         Vertices vertices(m_graph.getVertices());
         for(Vertex const& vertex : vertices)
         {
-            m_vertexToColorMap[vertex] = false; // set all colors to one color
+            m_vertexToColorMap[vertex] = false; // set all colors to one color (note that "false" is the first color)
         }
         for(Vertex const& vertex : vertices)
         {
