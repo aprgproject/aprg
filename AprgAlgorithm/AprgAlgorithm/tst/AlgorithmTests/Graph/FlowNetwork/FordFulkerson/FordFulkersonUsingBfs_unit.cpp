@@ -18,7 +18,8 @@ using EdgesForTest = typename GraphTypes<VertexForTest>::Edges;
 using PathsForTest = typename GraphTypes<VertexForTest>::Paths;
 using DirectedGraphForTest = DirectedGraphWithListOfEdges<VertexForTest>;
 using FlowNetworkForTest = SinkSourceFlowNetwork<VertexForTest, FlowDataTypeForTest, DirectedGraphForTest>;
-using MaxFlowForTest = FordFulkersonUsingBfs<FlowNetworkForTest>;}
+using MaxFlowForTest = FordFulkersonUsingBfs<FlowNetworkForTest>;
+}
 
 TEST(FordFulkersonUsingBfsTest, GetMaxFlowValueAndIsInMaxFlowMinCutWorksOnExample1)
 {
@@ -40,6 +41,7 @@ TEST(FordFulkersonUsingBfsTest, GetMaxFlowValueAndIsInMaxFlowMinCutWorksOnExampl
     EXPECT_EQ(expectedAugmentingPaths, maxFlow.getAugmentingPaths());
     EXPECT_EQ(expectedMinCutEdges, maxFlow.getMinCutEdges());
 }
+
 TEST(FordFulkersonUsingBfsTest, GetMaxFlowValueAndIsInMaxFlowMinCutWorksOnExample2)
 {
     FlowNetworkForTest flowNetwork(1, 6);
@@ -60,6 +62,7 @@ TEST(FordFulkersonUsingBfsTest, GetMaxFlowValueAndIsInMaxFlowMinCutWorksOnExampl
     EXPECT_EQ(expectedAugmentingPaths, maxFlow.getAugmentingPaths());
     EXPECT_EQ(expectedMinCutEdges, maxFlow.getMinCutEdges());
 }
+
 }
 
 }

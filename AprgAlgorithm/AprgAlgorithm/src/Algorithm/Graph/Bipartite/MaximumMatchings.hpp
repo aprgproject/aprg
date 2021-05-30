@@ -14,7 +14,8 @@ namespace algorithm
 
 template <typename Vertex>
 class MaximumMatchings
-{public:
+{
+public:
 
     // The maximum matching problem asks to find a maximum-size set of node pairs
     // in an undirected graph such that each pair is connected with an edge and each node belongs to at most one pair.
@@ -91,7 +92,8 @@ class MaximumMatchings
 
 private:
 
-    Edges getMaximumMatchings(            FordFulkerson const& fordFulkerson,
+    Edges getMaximumMatchings(
+            FordFulkerson const& fordFulkerson,
             Vertex const& newSourceVertex,
             Vertex const& newSinkVertex) const
     {
@@ -123,7 +125,8 @@ private:
             if(m_bipartiteChecker.hasFirstColor(vertex))
             {
                 flowNetwork.connect(newSourceVertex, vertex, 1, 0);
-            }            else
+            }
+            else
             {
                 flowNetwork.connect(vertex, newSinkVertex, 1, 0);
             }
@@ -139,7 +142,8 @@ private:
             else if(!firstVertexColor && secondVertexColor)
             {
                 flowNetwork.connect(edge.second, edge.first, 1, 0);
-            }        }
+            }
+        }
         return flowNetwork;
     }
 
@@ -147,7 +151,8 @@ private:
     BipartiteChecker m_bipartiteChecker;
 };
 
-// There are polynomial algorithms for finding maximum matchings in general graphs, but such algorithms are complex and rarely seen in programming contests.// However, in bipartite graphs, the maximum matching problem is much easier to solve, because we can reduce it to the maximum flow problem.
+// There are polynomial algorithms for finding maximum matchings in general graphs, but such algorithms are complex and rarely seen in programming contests.
+// However, in bipartite graphs, the maximum matching problem is much easier to solve, because we can reduce it to the maximum flow problem.
 
 }
 

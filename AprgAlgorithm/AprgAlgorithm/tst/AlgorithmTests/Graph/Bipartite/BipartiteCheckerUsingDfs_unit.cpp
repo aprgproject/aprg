@@ -16,6 +16,7 @@ using Vertices = typename GraphTypes<VertexForTest>::Vertices;
 using GraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
 using BipartiteCheckerForTest = BipartiteCheckerUsingDfs<VertexForTest>;
 }
+
 TEST(BipartiteCheckerUsingDfsTest, IsBipartiteWorksforNonBarpartiteGraph)
 {
     GraphForTest nonBipartiteGraph;
@@ -44,7 +45,8 @@ TEST(BipartiteCheckerUsingDfsTest, IsBipartiteWorksforNonBarpartiteGraph)
     EXPECT_EQ(expectedWithSecondColor, verticesWithSecondColor);
 }
 
-TEST(BipartiteCheckerUsingDfsTest, IsBipartiteWorksforBarpartiteGraph){
+TEST(BipartiteCheckerUsingDfsTest, IsBipartiteWorksforBarpartiteGraph)
+{
     GraphForTest bipartiteGraph;
     bipartiteGraph.connect(0U, 1U);
     bipartiteGraph.connect(0U, 2U);
@@ -74,4 +76,5 @@ TEST(BipartiteCheckerUsingDfsTest, IsBipartiteWorksforBarpartiteGraph){
 }
 
 }
+
 }

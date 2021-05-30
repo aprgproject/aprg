@@ -25,7 +25,8 @@ public:
     using Paths = typename GraphTypes<Vertex>::Paths;
     using Edges = typename GraphTypes<Vertex>::Edges;
     using VertexToFlowEdgeMap = std::map<Vertex, FlowEdge>;
-    using CheckableVerticesWithVertex = CheckableVertices<Vertex>;    using TraverseFunction = std::function<void(Vertex)>;
+    using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
+    using TraverseFunction = std::function<void(Vertex)>;
 
     FordFulkersonUsingBfs(SinkSourceFlowNetworkType const& flowNetwork)
         : m_flowNetwork(flowNetwork)
@@ -46,7 +47,8 @@ public:
 
     Edges getMinCutEdges() const
     {
-        Edges result;        // Let A be the set of nodes that can be reached from the source using positive-weight edges.
+        Edges result;
+        // Let A be the set of nodes that can be reached from the source using positive-weight edges.
         // The processed vertices have positive-weight edges from source of last iteration.
 
         // Now the minimum cut consists of the edges of the original graph that start at some node in A, end at some node outside A.
@@ -87,6 +89,7 @@ private:
             m_augmentingPaths.emplace_back(augmentingPath);
         }
     }
+
     bool findAnAugmentingPathAndReturnIfFound()
     {
         m_vertexToAugmentingPathEdgeMap.clear();
@@ -120,7 +123,8 @@ private:
             vertex = m_vertexToAugmentingPathEdgeMap.at(vertex).getTheOtherVertex(vertex))
         {
             function(vertex);
-        }    }
+        }
+    }
 
     FlowDataType getBottleNeckFlow()
     {
@@ -144,6 +148,7 @@ private:
     CheckableVerticesWithVertex m_processedVertices;
     VertexToFlowEdgeMap m_vertexToAugmentingPathEdgeMap;
 };
+
 // Ford fulkerson algorithm
 // -> Initialization: start with 0 flow
 // -> Find an undirected path from s to t such that (this is called the augmenting path):

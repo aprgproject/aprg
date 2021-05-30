@@ -20,7 +20,8 @@ using PathSearchForTest = EdgeDisjointPaths<VertexForTest>;
 TEST(EdgeDisjointPathsTest, Example1Works)
 {
     GraphForTest graph;
-    graph.connect(1U, 2U);    graph.connect(1U, 4U);
+    graph.connect(1U, 2U);
+    graph.connect(1U, 4U);
     graph.connect(2U, 4U);
     graph.connect(3U, 2U);
     graph.connect(3U, 5U);
@@ -37,4 +38,5 @@ TEST(EdgeDisjointPathsTest, Example1Works)
 }
 
 }
+
 }
