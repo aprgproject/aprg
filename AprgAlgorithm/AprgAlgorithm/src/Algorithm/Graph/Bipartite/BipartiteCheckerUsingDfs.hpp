@@ -31,21 +31,37 @@ public:
         return m_isBipartite;
     }
 
-    bool getColor(Vertex const& vertex) const
+    bool hasFirstColor(Vertex const& vertex) const
     {
         bool result(false);
         auto it = m_vertexToColorMap.find(vertex);
         if(it != m_vertexToColorMap.cend())
         {
-            result = it->second;
+            result = !it->second;
         }
         return result;
     }
 
+    void retrieveVerticesWithColor(
+            Vertices & verticesWithFirstColor,
+            Vertices & verticesWithSecondColor) const
+    {
+        for(auto const& vertexColorPair : m_vertexToColorMap)
+        {
+            if(!vertexColorPair.second)
+            {
+                verticesWithFirstColor.emplace_back(vertexColorPair.first);
+            }
+            else
+            {
+                verticesWithSecondColor.emplace_back(vertexColorPair.first);
+            }
+        }
+    }
+
 private:
 
-    bool areColorsEqualOnVertices(Vertex const& vertex1, Vertex const& vertex2) const
-    {
+    bool areColorsEqualOnVertices(Vertex const& vertex1, Vertex const& vertex2) const    {
         bool result(false);
         auto it1 = m_vertexToColorMap.find(vertex1);
         auto it2 = m_vertexToColorMap.find(vertex2);
