@@ -28,12 +28,12 @@ struct GraphTypes
     //Edge
     using Edge = std::pair<Vertex, Vertex>;
     using Edges = std::vector<Edge>;
-    using ListOfEdges = std::vector<Edges>;
+    using DequeOfEdges = std::deque<Edge>;
     using SetOfEdges = std::set<Edge>;
+    using ListOfEdges = std::vector<Edges>;
 
     //Path
-    using Path = std::vector<Vertex>;
-    using Paths = std::vector<Path>;
+    using Path = std::vector<Vertex>;    using Paths = std::vector<Path>;
 
     //Complicated types
     using VertexToUnsignedIntMap = std::map<Vertex, unsigned int>;
