@@ -8,10 +8,12 @@
 namespace alba
 {
 
+namespace algorithm
+{
+
 template <typename Value>
 class RangeQueryWithSegmentTree
-{
-public:
+{public:
     // This is "range query selector" and "range query accumulator" type
     // A segment tree is a data structure that supports two operations: processing a range query and updating an array value.
     // Segment trees can support sum queries, minimum and maximum queries and many other queries so that both operations work in O(logn) time.
@@ -154,5 +156,7 @@ private:
     Values m_treeValues;
     Function m_function;
 };
+
+}
 
 }

@@ -7,10 +7,12 @@ using namespace std;
 namespace alba
 {
 
+namespace algorithm
+{
+
 namespace
 {
-using ValueForTest = double;
-using RangeQueryForTest = RangeQueryWithSegmentTree<ValueForTest>;
+using ValueForTest = double;using RangeQueryForTest = RangeQueryWithSegmentTree<ValueForTest>;
 using ValuesForTest = RangeQueryForTest::Values;
 
 RangeQueryForTest::Function multipliesAccumulator = [](ValueForTest const& value1, ValueForTest const& value2)
@@ -59,6 +61,8 @@ TEST(RangeQueryWithSegmentTreeTest, ChangeValueAtIndexWithGeometricSumWorksOnExa
     EXPECT_DOUBLE_EQ(72, geometricSumRangeQuery.getValueOnInterval(2, 5));
     EXPECT_DOUBLE_EQ(18, geometricSumRangeQuery.getValueOnInterval(3, 4));
     EXPECT_DOUBLE_EQ(6, geometricSumRangeQuery.getValueOnInterval(4, 4));
+}
+
 }
 
 }
