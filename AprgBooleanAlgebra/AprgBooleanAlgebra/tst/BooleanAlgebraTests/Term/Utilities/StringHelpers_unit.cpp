@@ -71,6 +71,7 @@ TEST(StringHelpersTest, CreateVariableTermNameForSubstitutionWorks)
 TEST(StringHelpersTest, BuildTermIfPossibleWorks)
 {
     Term termToVerify(buildTermIfPossible("x&y"));
+
     Term termToExpect(createExpressionIfPossible({"x", "&", "y"}));
     EXPECT_EQ(termToExpect, termToVerify);
 }
@@ -82,6 +83,7 @@ TEST(StringHelpersTest, TokenizeToTermsWorks)
     Terms termsToExpect{"5yyy", "&", "x1", "&", "y1", "|", "~", true};
     EXPECT_EQ(termsToExpect, termsToVerify);
 }
+
 TEST(StringHelpersTest, AddValueTermIfNotEmptyWorks)
 {
     Terms termsToVerify1;

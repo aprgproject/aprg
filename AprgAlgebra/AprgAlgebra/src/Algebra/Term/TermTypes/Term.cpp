@@ -11,7 +11,8 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace algebra
 {
@@ -569,7 +570,8 @@ void Term::initializeBasedOnString(string const& stringAsParameter)
     {
         m_type=TermType::Operator;
         m_baseTermDataPointer = make_unique<Operator>(stringAsParameter);
-    }    else if(algebra::isFunction(stringAsParameter))
+    }
+    else if(algebra::isFunction(stringAsParameter))
     {
         m_type=TermType::Function;
         m_baseTermDataPointer = make_unique<Function>(createFunctionWithEmptyInputExpression(stringAsParameter));

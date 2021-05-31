@@ -13,7 +13,8 @@ namespace algorithm
 
 template <typename Value>
 class RangeQueryWithBinaryIndexedTree
-{public:
+{
+public:
     // This is "range query accumulator" type
     // Example for "range query accumulator" is sum queries
     // We can easily process sum queries on a static array by constructing a prefix sum array.

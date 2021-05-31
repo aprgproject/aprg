@@ -11,7 +11,8 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace booleanAlgebra
 {
@@ -418,7 +419,8 @@ void Term::initializeBasedOnString(string const& stringAsParameter)
     {
         m_type=TermType::Operator;
         m_baseTermDataPointer = make_unique<Operator>(stringAsParameter);
-    }    else
+    }
+    else
     {
         m_type=TermType::VariableTerm;
         m_baseTermDataPointer = make_unique<VariableTerm>(stringAsParameter, false);

@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <limits>
+
 using namespace std;
 
 namespace alba
@@ -19,7 +20,8 @@ using UnsignedIntegers=vector<unsigned int>;
 
 unsigned int getPartialNumerator(
         double const doubleValue,
-        double & fractionalPart,        double & doubleValueForNextIteration)
+        double & fractionalPart,
+        double & doubleValueForNextIteration)
 {
     double absoluteValueOfDouble = getAbsoluteValue(doubleValue);
     fractionalPart = getFractionalPartInDouble(absoluteValueOfDouble);
@@ -205,14 +207,16 @@ AlbaNumbers getQuadraticRoots(
 
 int getStirlingNumberOfTheSecondKind(unsigned int const n, unsigned int const k)
 {
-    //In mathematics, particularly in combinatorics, a Stirling number of the second kind (or Stirling partition number) is the number of ways to partition a set of n objects into k non-empty subsets    // Stirling numbers of the second kind occur in the field of mathematics called combinatorics and the study of partitions.
+    //In mathematics, particularly in combinatorics, a Stirling number of the second kind (or Stirling partition number) is the number of ways to partition a set of n objects into k non-empty subsets
+    // Stirling numbers of the second kind occur in the field of mathematics called combinatorics and the study of partitions.
     AlbaNumber sum(0);
     for(unsigned int i=0; i<=k; i++)
     {
         int sign = isDivisible(i, 2U) ? 1 : -1;
         sum += AlbaNumber(sign) * getNumberOfCombinations(k, i) * pow(k-i, n);
     }
-    sum /= getFactorial(k);    return static_cast<int>(sum.getInteger());
+    sum /= getFactorial(k);
+    return static_cast<int>(sum.getInteger());
 }
 
 double getCumulativeStandardDistributionApproximation(double const z)
@@ -260,7 +264,8 @@ double getInverseCumulativeStandardDistributionApproximation(double const probab
 
 AlbaNumber getGreatestCommonFactor(AlbaNumber const& firstNumber, AlbaNumber const& secondNumber)
 {
-    AlbaNumber result(0);    if(firstNumber.isDoubleType() || secondNumber.isDoubleType())
+    AlbaNumber result(0);
+    if(firstNumber.isDoubleType() || secondNumber.isDoubleType())
     {
         result=1;
     }
@@ -279,7 +284,8 @@ AlbaNumber getGreatestCommonFactor(AlbaNumber const& firstNumber, AlbaNumber con
 
 AlbaNumber getLeastCommonMultiple(AlbaNumber const& firstNumber, AlbaNumber const& secondNumber)
 {
-    AlbaNumber result(0);    if(firstNumber.isDoubleType() || secondNumber.isDoubleType())
+    AlbaNumber result(0);
+    if(firstNumber.isDoubleType() || secondNumber.isDoubleType())
     {
         result=1;
     }
@@ -299,7 +305,8 @@ AlbaNumber getLeastCommonMultiple(AlbaNumber const& firstNumber, AlbaNumber cons
 
 //getFractionDetailsInLowestForm
 template <typename NumberType1, typename NumberType2>
-FractionDetails getFractionDetailsInLowestForm(NumberType1 const numerator, NumberType2 const denominator){
+FractionDetails getFractionDetailsInLowestForm(NumberType1 const numerator, NumberType2 const denominator)
+{
     FractionDetails result{0, 0, 0};
     unsigned int unsignedNumerator = mathHelper::getAbsoluteValue(numerator);
     unsigned int unsignedDenominator = mathHelper::getAbsoluteValue(denominator);

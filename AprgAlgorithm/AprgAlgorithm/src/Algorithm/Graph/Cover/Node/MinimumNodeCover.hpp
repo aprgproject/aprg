@@ -16,6 +16,7 @@ public:
     // Node cover are set of nodes that covers edges..
 
     // A minimum node cover of a graph is a minimum set of nodes such that each edge of the graph has at least one endpoint in the set.
+
     using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
     using MaximumMatchingsWithVertex = MaximumMatchings<Vertex>;
 
@@ -36,6 +37,7 @@ public:
 
         return m_maximumMatchings.getMaximumMatchings(newSourceVertex, newSinkVertex).size();
     }
+
     unsigned int getMaximumIndependentSetSize(
             Vertex const& newSourceVertex,
             Vertex const& newSinkVertex) const

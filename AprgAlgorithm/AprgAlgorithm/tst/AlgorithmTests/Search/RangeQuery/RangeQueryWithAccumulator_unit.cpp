@@ -12,7 +12,8 @@ namespace algorithm
 
 namespace
 {
-using ValueForTest = unsigned int;using RangeQueryForTest = RangeQueryWithAccumulator<ValueForTest>;
+using ValueForTest = unsigned int;
+using RangeQueryForTest = RangeQueryWithAccumulator<ValueForTest>;
 using ValuesForTest = RangeQueryForTest::Values;
 
 RangeQueryForTest::AccumulatorFunction plusAccumulator = [](ValueForTest const& value1, ValueForTest const& value2)

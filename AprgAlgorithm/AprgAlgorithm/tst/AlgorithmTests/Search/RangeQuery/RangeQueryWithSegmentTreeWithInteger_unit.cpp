@@ -12,7 +12,8 @@ namespace algorithm
 
 namespace
 {
-using ValueForTest = unsigned int;using RangeQueryForTest = RangeQueryWithSegmentTree<ValueForTest>;
+using ValueForTest = unsigned int;
+using RangeQueryForTest = RangeQueryWithSegmentTree<ValueForTest>;
 using ValuesForTest = RangeQueryForTest::Values;
 
 RangeQueryForTest::Function minimumSelector = [](ValueForTest const& value1, ValueForTest const& value2)
