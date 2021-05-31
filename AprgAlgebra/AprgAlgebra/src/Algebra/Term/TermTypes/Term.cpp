@@ -4,13 +4,14 @@
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/EnumHelpers.hpp>
 #include <Algebra/Term/Utilities/StringHelpers.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <cassert>
 
+using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace algebra
 {
@@ -555,12 +556,20 @@ void Term::resetBaseDataTermPointerBasedFromTerm(Term const& term)
 
 void Term::initializeBasedOnString(string const& stringAsParameter)
 {
-    if(algebra::isOperator(stringAsParameter))
+    if(stringAsParameter.empty())
+    {
+        // do nothing
+    }
+    else if(isNumber(stringAsParameter.front()))
+    {
+        m_type=TermType::Constant;
+        m_baseTermDataPointer = make_unique<Constant>(convertStringToAlbaNumber(stringAsParameter));
+    }
+    else if(algebra::isOperator(stringAsParameter))
     {
         m_type=TermType::Operator;
         m_baseTermDataPointer = make_unique<Operator>(stringAsParameter);
-    }
-    else if(algebra::isFunction(stringAsParameter))
+    }    else if(algebra::isFunction(stringAsParameter))
     {
         m_type=TermType::Function;
         m_baseTermDataPointer = make_unique<Function>(createFunctionWithEmptyInputExpression(stringAsParameter));
