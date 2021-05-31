@@ -1,5 +1,5 @@
 #include <Common/Container/AlbaContainerHelper.hpp>
-#include <Math/AprgMathSet.hpp>
+#include <Math/Set/MathSet.hpp>
 
 #include <gtest/gtest.h>
 
@@ -10,9 +10,9 @@ namespace alba
 
 namespace
 {
-using CharSet = AprgMathSet<char>;
-using IntegerSet = AprgMathSet<unsigned int>;
-using IntegerSets = IntegerSet::AprgMathSets;
+using CharSet = MathSet<char>;
+using IntegerSet = MathSet<unsigned int>;
+using IntegerSets = IntegerSet::MathSets;
 IntegerSet::GenerateFunction generateNumbersFromZeroToTen = [](
         IntegerSet::VoidElementFunction const& elementFunction)
 {
@@ -32,7 +32,7 @@ CharSet::GenerateFunction generateCharactersFromSmallAToSmallZ = [](
 };
 }
 
-TEST(AprgMathSetTest, NullSetWorks)
+TEST(MathSetTest, NullSetWorks)
 {
     IntegerSet nullSet;
 
@@ -42,7 +42,7 @@ TEST(AprgMathSetTest, NullSetWorks)
     EXPECT_EQ("{...  ...}", nullSet.getGeneratedRosterString(generateNumbersFromZeroToTen));
 }
 
-TEST(AprgMathSetTest, MathSetCreatedWithRosterListWorks)
+TEST(MathSetTest, MathSetCreatedWithRosterListWorks)
 {
     IntegerSet::RosterList rosterList{1,2,3,4,5};
     IntegerSet mathSet(rosterList);
@@ -55,7 +55,7 @@ TEST(AprgMathSetTest, MathSetCreatedWithRosterListWorks)
     EXPECT_EQ("{... 1, 2, 3, 4, 5 ...}", mathSet.getGeneratedRosterString(generateNumbersFromZeroToTen));
 }
 
-TEST(AprgMathSetTest, MathSetCreatedWithInitializerListWorks)
+TEST(MathSetTest, MathSetCreatedWithInitializerListWorks)
 {
     IntegerSet mathSet({2,4,6,8,9});
 
@@ -67,7 +67,7 @@ TEST(AprgMathSetTest, MathSetCreatedWithInitializerListWorks)
     EXPECT_EQ("{... 2, 4, 6, 8, 9 ...}", mathSet.getGeneratedRosterString(generateNumbersFromZeroToTen));
 }
 
-TEST(AprgMathSetTest, MathSetCreatedWithASetRuleWorks)
+TEST(MathSetTest, MathSetCreatedWithASetRuleWorks)
 {
     IntegerSet mathSet("set of even numbers", [](unsigned int const& elementToCheck)
     {
@@ -82,7 +82,7 @@ TEST(AprgMathSetTest, MathSetCreatedWithASetRuleWorks)
     EXPECT_EQ("{... 0, 2, 4, 6, 8, 10 ...}", mathSet.getGeneratedRosterString(generateNumbersFromZeroToTen));
 }
 
-TEST(AprgMathSetTest, IsASubsetOfWorks)
+TEST(MathSetTest, IsASubsetOfWorks)
 {
     IntegerSet mathSet1({2,4});
     IntegerSet mathSet2("set of even numbers", [](unsigned int const& elementToCheck)
@@ -94,7 +94,7 @@ TEST(AprgMathSetTest, IsASubsetOfWorks)
     EXPECT_FALSE(mathSet2.isASubsetOf(mathSet1, generateNumbersFromZeroToTen));
 }
 
-TEST(AprgMathSetTest, IsASupersetOfWorks)
+TEST(MathSetTest, IsASupersetOfWorks)
 {
     IntegerSet mathSet1({3,5});
     IntegerSet mathSet2("set of odd numbers", [](unsigned int const& elementToCheck)
@@ -106,7 +106,7 @@ TEST(AprgMathSetTest, IsASupersetOfWorks)
     EXPECT_FALSE(mathSet1.isASupersetOf(mathSet2, generateNumbersFromZeroToTen));
 }
 
-TEST(AprgMathSetTest, IsDisjointWithWorks)
+TEST(MathSetTest, IsDisjointWithWorks)
 {
     IntegerSet mathSet1("set of even numbers", [](unsigned int const& elementToCheck)
     {
@@ -124,7 +124,7 @@ TEST(AprgMathSetTest, IsDisjointWithWorks)
     EXPECT_FALSE(mathSet3.isDisjointWith(mathSet1, generateNumbersFromZeroToTen));
 }
 
-TEST(AprgMathSetTest, GetComplementWorks)
+TEST(MathSetTest, GetComplementWorks)
 {
     IntegerSet mathSet("set of even numbers", [](unsigned int const& elementToCheck)
     {
@@ -141,7 +141,7 @@ TEST(AprgMathSetTest, GetComplementWorks)
     EXPECT_EQ("{... 1, 3, 5, 7, 9 ...}", complementSet.getGeneratedRosterString(generateNumbersFromZeroToTen));
 }
 
-TEST(AprgMathSetTest, GetUnionWithWorks)
+TEST(MathSetTest, GetUnionWithWorks)
 {
     IntegerSet mathSet1({1,2,3});
     IntegerSet mathSet2("set of even numbers", [](unsigned int const& elementToCheck)
@@ -159,7 +159,7 @@ TEST(AprgMathSetTest, GetUnionWithWorks)
     EXPECT_EQ("{... 0, 1, 2, 3, 4, 6, 8, 10 ...}", unionSet.getGeneratedRosterString(generateNumbersFromZeroToTen));
 }
 
-TEST(AprgMathSetTest, GetIntersectionWithWorks)
+TEST(MathSetTest, GetIntersectionWithWorks)
 {
     IntegerSet mathSet1({1,2,3});
     IntegerSet mathSet2("set of even numbers", [](unsigned int const& elementToCheck)
@@ -177,7 +177,7 @@ TEST(AprgMathSetTest, GetIntersectionWithWorks)
     EXPECT_EQ("{... 2 ...}", intersectionSet.getGeneratedRosterString(generateNumbersFromZeroToTen));
 }
 
-TEST(AprgMathSetTest, GetDifferenceWithWorks)
+TEST(MathSetTest, GetDifferenceWithWorks)
 {
     IntegerSet mathSet1({1,2,3});
     IntegerSet mathSet2("set of even numbers", [](unsigned int const& elementToCheck)
@@ -195,7 +195,7 @@ TEST(AprgMathSetTest, GetDifferenceWithWorks)
     EXPECT_EQ("{... 1, 3 ...}", differenceSet.getGeneratedRosterString(generateNumbersFromZeroToTen));
 }
 
-TEST(AprgMathSetTest, GetSubsetsWithWorks)
+TEST(MathSetTest, GetSubsetsWithWorks)
 {
     IntegerSet mathSet({1,2,3});
 
@@ -205,7 +205,7 @@ TEST(AprgMathSetTest, GetSubsetsWithWorks)
     EXPECT_EQ("{}, {1}, {1, 2}, {1, 2, 3}, {1, 3}, {2}, {2, 3}, {3}, ", actualSubsetsString);
 }
 
-TEST(AprgMathSetTest, GetUnionWorks)
+TEST(MathSetTest, GetUnionWorks)
 {
     IntegerSet mathSet1({3,4,5});
     IntegerSet mathSet2("set of odd numbers", [](unsigned int const& elementToCheck)
@@ -223,7 +223,7 @@ TEST(AprgMathSetTest, GetUnionWorks)
     EXPECT_EQ("{... 1, 3, 4, 5, 7, 9 ...}", unionSet.getGeneratedRosterString(generateNumbersFromZeroToTen));
 }
 
-TEST(AprgMathSetTest, GetIntersectionWorks)
+TEST(MathSetTest, GetIntersectionWorks)
 {
     IntegerSet mathSet1({3,4,5});
     IntegerSet mathSet2("set of odd numbers", [](unsigned int const& elementToCheck)
@@ -241,7 +241,7 @@ TEST(AprgMathSetTest, GetIntersectionWorks)
     EXPECT_EQ("{... 3, 5 ...}", intersectionSet.getGeneratedRosterString(generateNumbersFromZeroToTen));
 }
 
-TEST(AprgMathSetTest, GetDifferenceWorks)
+TEST(MathSetTest, GetDifferenceWorks)
 {
     IntegerSet mathSet1({1,2,3});
     IntegerSet mathSet2("set of even numbers", [](unsigned int const& elementToCheck)
@@ -259,12 +259,12 @@ TEST(AprgMathSetTest, GetDifferenceWorks)
     EXPECT_EQ("{... 1, 3 ...}", differenceSet.getGeneratedRosterString(generateNumbersFromZeroToTen));
 }
 
-TEST(AprgMathSetTest, GetCartesianProductWorks)
+TEST(MathSetTest, GetCartesianProductWorks)
 {
     IntegerSet mathSet1({1,2});
     CharSet mathSet2({'x','y'});
 
-    AprgMathSet<pair<unsigned int, char>> cartesianProduct(getCartersianProduct(mathSet1, mathSet2, generateNumbersFromZeroToTen, generateCharactersFromSmallAToSmallZ));
+    MathSet<pair<unsigned int, char>> cartesianProduct(getCartersianProduct(mathSet1, mathSet2, generateNumbersFromZeroToTen, generateCharactersFromSmallAToSmallZ));
 
     EXPECT_TRUE(cartesianProduct.contains(pair<unsigned int, char>(1,'y')));
     EXPECT_FALSE(cartesianProduct.contains(pair<unsigned int, char>(3,'y')));
