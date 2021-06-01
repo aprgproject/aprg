@@ -27,11 +27,10 @@ bool areExponentsDivisible(Monomial const& monomial, unsigned int const divisor)
     for(auto const& variableExponentPair : monomial.getVariablesToExponentsMapConstReference())
     {
         if(!variableExponentPair.second.isIntegerType()
-                || !isDivisible(getAbsoluteValue(variableExponentPair.second.getInteger()), divisor))
+                || !isDivisible<long long int>(getAbsoluteValue(variableExponentPair.second.getInteger()), divisor))
         {
             result=false;
-            break;
-        }
+            break;        }
     }
     return result;
 }
