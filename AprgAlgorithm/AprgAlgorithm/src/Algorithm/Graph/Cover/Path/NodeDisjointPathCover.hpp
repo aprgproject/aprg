@@ -31,12 +31,11 @@ public:
     using DequeOfVertices = typename GraphTypes<Vertex>::DequeOfVertices;
     using DequeOfEdges = typename GraphTypes<Vertex>::DequeOfEdges;
     using VectorOfDequeOfVertices = std::vector<DequeOfVertices>;
-    using VertexWithEndpoint = VertexWithBool<Vertex>;
-    using FlowNetwork = SinkSourceFlowNetwork<VertexWithEndpoint, int, DirectedGraphWithListOfEdges<VertexWithEndpoint>>;
+    using VertexWithLeftRight = VertexWithBool<Vertex>;
+    using FlowNetwork = SinkSourceFlowNetwork<VertexWithLeftRight, int, DirectedGraphWithListOfEdges<VertexWithLeftRight>>;
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
 
-    NodeDisjointPathCover(BaseDirectedGraphWithVertex const& graph)
-        : m_graph(graph)
+    NodeDisjointPathCover(BaseDirectedGraphWithVertex const& graph)        : m_graph(graph)
     {}
 
     Paths getNodeDisjointPathCover(
@@ -57,12 +56,10 @@ public:
         Edges result;
         if(GraphUtilities::isDirectedAcyclicGraph(m_graph))
         {
-            FordFulkerson fordFulkerson(getFlowNetwork(m_graph, newSourceVertex, newSinkVertex));
-            result = getEdgesOfNodeDisjointPathCover(fordFulkerson);
+            result = getEdgesOfNodeDisjointPathCoverUsingFordFulkerson(newSourceVertex, newSinkVertex);
         }
         return result;
     }
-
 private:
 
     Paths getNodeDisjointPathCover(
@@ -118,22 +115,23 @@ private:
         return result;
     }
 
-    Edges getEdgesOfNodeDisjointPathCover(
-            FordFulkerson const& fordFulkerson) const
+    Edges getEdgesOfNodeDisjointPathCoverUsingFordFulkerson(
+            Vertex const& newSourceVertex,
+            Vertex const& newSinkVertex) const
     {
         Edges result;
-        for(auto const& path : fordFulkerson.getAugmentingPaths())
+        FordFulkerson fordFulkerson(getFlowNetwork(m_graph, newSourceVertex, newSinkVertex));
+        auto const& flowNetwork(fordFulkerson.getFlowNetwork());
+        VertexWithLeftRight source(flowNetwork.getSourceVertex());
+        VertexWithLeftRight sink(flowNetwork.getSinkVertex());
+        for(auto const& flowEdge : flowNetwork.getFlowEdges())
         {
-            if(path.size()>=2)
+            if(1==flowEdge.flow && source != flowEdge.source && sink != flowEdge.destination)
             {
-                for(unsigned int i=1; i<=path.size()-2; i+=2)
-                {
-                    result.emplace_back(path.at(i).first, path.at(i+1).first);
-                }
+                result.emplace_back(flowEdge.source.first, flowEdge.destination.first);
             }
         }
-        return result;
-    }
+        return result;    }
 
     FlowNetwork getFlowNetwork(
             BaseDirectedGraphWithVertex const& graph,
@@ -145,12 +143,11 @@ private:
         // There is an edge from a left node to a right node if there is such an edge in the original graph.
         // In addition, the matching graph contains a source and a sink, and there are edges from the source to all left nodes and from all right nodes to the sink.
 
-        VertexWithEndpoint sourceVertexWithLeft{newSourceVertex, false};
-        VertexWithEndpoint sinkVertexWithRight{newSinkVertex, true};
+        VertexWithLeftRight sourceVertexWithLeft{newSourceVertex, false};
+        VertexWithLeftRight sinkVertexWithRight{newSinkVertex, true};
         FlowNetwork flowNetwork(sourceVertexWithLeft, sinkVertexWithRight);
         for(Vertex const& vertex : graph.getVertices())
-        {
-            flowNetwork.connect(sourceVertexWithLeft, {vertex, false}, 1, 0);
+        {            flowNetwork.connect(sourceVertexWithLeft, {vertex, false}, 1, 0);
             flowNetwork.connect({vertex, true}, sinkVertexWithRight, 1, 0);
         }
         for(Edge const& edge : graph.getEdges())
