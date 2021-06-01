@@ -35,7 +35,8 @@ public:
     using FlowNetwork = SinkSourceFlowNetwork<VertexWithLeftRight, int, DirectedGraphWithListOfEdges<VertexWithLeftRight>>;
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
 
-    NodeDisjointPathCover(BaseDirectedGraphWithVertex const& graph)        : m_graph(graph)
+    NodeDisjointPathCover(BaseDirectedGraphWithVertex const& graph)
+        : m_graph(graph)
     {}
 
     Paths getNodeDisjointPathCover(
@@ -60,6 +61,7 @@ public:
         }
         return result;
     }
+
 private:
 
     Paths getNodeDisjointPathCover(
@@ -131,7 +133,8 @@ private:
                 result.emplace_back(flowEdge.source.first, flowEdge.destination.first);
             }
         }
-        return result;    }
+        return result;
+    }
 
     FlowNetwork getFlowNetwork(
             BaseDirectedGraphWithVertex const& graph,
@@ -147,7 +150,8 @@ private:
         VertexWithLeftRight sinkVertexWithRight{newSinkVertex, true};
         FlowNetwork flowNetwork(sourceVertexWithLeft, sinkVertexWithRight);
         for(Vertex const& vertex : graph.getVertices())
-        {            flowNetwork.connect(sourceVertexWithLeft, {vertex, false}, 1, 0);
+        {
+            flowNetwork.connect(sourceVertexWithLeft, {vertex, false}, 1, 0);
             flowNetwork.connect({vertex, true}, sinkVertexWithRight, 1, 0);
         }
         for(Edge const& edge : graph.getEdges())

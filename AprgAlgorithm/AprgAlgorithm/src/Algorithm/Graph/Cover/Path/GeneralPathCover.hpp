@@ -31,7 +31,8 @@ public:
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using DequeOfVertices = typename GraphTypes<Vertex>::DequeOfVertices;
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
-    using DequeOfEdges = typename GraphTypes<Vertex>::DequeOfEdges;    using Paths = typename GraphTypes<Vertex>::Paths;
+    using DequeOfEdges = typename GraphTypes<Vertex>::DequeOfEdges;
+    using Paths = typename GraphTypes<Vertex>::Paths;
     using VectorOfDequeOfVertices = std::vector<DequeOfVertices>;
     using VertexPair = std::pair<Vertex, Vertex>; // same definition with edge but edge is not correct in name
     using VertexPairs = std::vector<VertexPair>;
@@ -39,6 +40,7 @@ public:
     using FlowNetwork = SinkSourceFlowNetwork<VertexWithLeftRight, int, DirectedGraphWithListOfEdges<VertexWithLeftRight>>;
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
     using TransitiveClosure = TransitiveClosureWithMap<Vertex>;
+
     GeneralPathCover(BaseDirectedGraphWithVertex const& graph)
         : m_graph(graph)
     {}
@@ -62,6 +64,7 @@ public:
         }
         return result;
     }
+
     unsigned int getSizeOfMaximumAntichain(
             Vertex const& newSourceVertex,
             Vertex const& newSinkVertex) const
@@ -155,7 +158,8 @@ private:
         }
         for(DequeOfVertices const& pathInDeque : paths) // convert pathsInDeque to paths
         {
-            result.emplace_back(pathInDeque.begin(), pathInDeque.cend());        }
+            result.emplace_back(pathInDeque.begin(), pathInDeque.cend());
+        }
         return result;
     }
 
@@ -175,7 +179,8 @@ private:
                 result.emplace_back(flowEdge.source.first, flowEdge.destination.first);
             }
         }
-        return result;    }
+        return result;
+    }
 
     FlowNetwork getFlowNetwork(
             BaseDirectedGraphWithVertex const& graph,
@@ -190,7 +195,8 @@ private:
         VertexWithLeftRight sinkVertexWithRight{newSinkVertex, true};
         FlowNetwork flowNetwork(sourceVertexWithLeft, sinkVertexWithRight);
         Vertices vertices(graph.getVertices());
-        for(Vertex const& vertex : vertices)        {
+        for(Vertex const& vertex : vertices)
+        {
             flowNetwork.connect(sourceVertexWithLeft, {vertex, false}, 1, 0);
             flowNetwork.connect({vertex, true}, sinkVertexWithRight, 1, 0);
         }

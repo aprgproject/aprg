@@ -99,7 +99,8 @@ private:
         bool vertexColor(m_vertexToColorMap.at(vertex));
         for(Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex))
         {
-            if(m_processedVertices.isNotFound(adjacentVertex))            {
+            if(m_processedVertices.isNotFound(adjacentVertex))
+            {
                 m_vertexToColorMap[adjacentVertex] = getTheOtherColor(vertexColor); // assign the other color for unprocessed adjacent vertices
                 checkUsingDfs(adjacentVertex);
             }

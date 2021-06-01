@@ -39,7 +39,8 @@ public:
         , m_bipartiteChecker(graph)
     {}
 
-    Edges getMaximumMatchings(            Vertex const& newSourceVertex,
+    Edges getMaximumMatchings(
+            Vertex const& newSourceVertex,
             Vertex const& newSinkVertex) const
     {
         Edges result;
@@ -105,7 +106,8 @@ private:
                 result.emplace_back(flowEdge.source, flowEdge.destination);
             }
         }
-        return result;    }
+        return result;
+    }
 
     FlowNetwork getFlowNetwork(
             BaseUndirectedGraphWithVertex const& graph,

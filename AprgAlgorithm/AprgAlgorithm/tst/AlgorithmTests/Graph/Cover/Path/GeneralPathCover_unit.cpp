@@ -40,7 +40,8 @@ TEST(GeneralPathCoverTest, GetGeneralPathCoverWorksOnExample1)
 
 TEST(GeneralPathCoverTest, GetSizeOfMaximumAntichainOnExample1)
 {
-    GraphForTest graph;    graph.connect(1U, 5U);
+    GraphForTest graph;
+    graph.connect(1U, 5U);
     graph.connect(2U, 6U);
     graph.connect(3U, 4U);
     graph.connect(5U, 6U);
