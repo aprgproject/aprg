@@ -8,10 +8,12 @@ using namespace std;
 namespace alba
 {
 
+namespace math
+{
+
 namespace
 {
-using CharSet = MathSet<char>;
-using IntegerSet = MathSet<unsigned int>;
+using CharSet = MathSet<char>;using IntegerSet = MathSet<unsigned int>;
 using IntegerSets = IntegerSet::MathSets;
 IntegerSet::GenerateFunction generateNumbersFromZeroToTen = [](
         IntegerSet::VoidElementFunction const& elementFunction)
@@ -271,6 +273,8 @@ TEST(MathSetTest, GetCartesianProductWorks)
     EXPECT_TRUE(cartesianProduct.doesNotContain(pair<unsigned int, char>(2,'z')));
     EXPECT_FALSE(cartesianProduct.doesNotContain(pair<unsigned int, char>(2,'x')));
     EXPECT_EQ("{(1,x), (1,y), (2,x), (2,y)}", cartesianProduct.getDescription());
+}
+
 }
 
 }
