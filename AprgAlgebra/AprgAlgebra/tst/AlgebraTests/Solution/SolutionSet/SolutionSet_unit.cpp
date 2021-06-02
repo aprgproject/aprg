@@ -39,54 +39,40 @@ TEST(SolutionSetTest, AddAcceptedValueWorks)
 
     solutionSet.addAcceptedValue(5863);
 
-    AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
-    ASSERT_EQ(1U, acceptedValues.size());
-    EXPECT_EQ(AlbaNumber(5863), acceptedValues.at(0));
+    EXPECT_EQ(AlbaNumbers{5863}, solutionSet.getAcceptedValues());
     EXPECT_TRUE(solutionSet.getRejectedValues().empty());
     EXPECT_TRUE(solutionSet.getAcceptedIntervals().empty());
 }
-
 TEST(SolutionSetTest, AddRejectedValueWorks)
 {
     SolutionSet solutionSet;
 
     solutionSet.addRejectedValue(5863);
 
-    AlbaNumbers const& rejectedValues(solutionSet.getRejectedValues());
-    ASSERT_EQ(1U, rejectedValues.size());
-    EXPECT_EQ(AlbaNumber(5863), rejectedValues.at(0));
+    EXPECT_EQ(AlbaNumbers{5863}, solutionSet.getRejectedValues());
     EXPECT_TRUE(solutionSet.getAcceptedValues().empty());
     EXPECT_TRUE(solutionSet.getAcceptedIntervals().empty());
 }
-
 TEST(SolutionSetTest, AddAcceptedValuesWorks)
 {
     SolutionSet solutionSet;
 
     solutionSet.addAcceptedValues(AlbaNumbers{5863, 8546});
 
-    AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
-    ASSERT_EQ(2U, acceptedValues.size());
-    EXPECT_EQ(AlbaNumber(5863), acceptedValues.at(0));
-    EXPECT_EQ(AlbaNumber(8546), acceptedValues.at(1));
+    EXPECT_EQ((AlbaNumbers{5863, 8546}), solutionSet.getAcceptedValues());
     EXPECT_TRUE(solutionSet.getRejectedValues().empty());
     EXPECT_TRUE(solutionSet.getAcceptedIntervals().empty());
 }
-
 TEST(SolutionSetTest, AddRejectedValuesWorks)
 {
     SolutionSet solutionSet;
 
     solutionSet.addRejectedValues(AlbaNumbers{5863, 8546});
 
-    AlbaNumbers const& rejectedValues(solutionSet.getRejectedValues());
-    ASSERT_EQ(2U, rejectedValues.size());
-    EXPECT_EQ(AlbaNumber(5863), rejectedValues.at(0).getInteger());
-    EXPECT_EQ(AlbaNumber(8546), rejectedValues.at(1).getInteger());
+    EXPECT_EQ((AlbaNumbers{5863, 8546}), solutionSet.getRejectedValues());
     EXPECT_TRUE(solutionSet.getAcceptedValues().empty());
     EXPECT_TRUE(solutionSet.getAcceptedIntervals().empty());
 }
-
 TEST(SolutionSetTest, AddAcceptedIntervalWorks)
 {
     SolutionSet solutionSet;
@@ -104,26 +90,20 @@ TEST(SolutionSetTest, AddValueForAcceptedValueWorks)
 
     solutionSet.addValue(5863, [](AlbaNumber const&){return true;});
 
-    AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
-    ASSERT_EQ(1U, acceptedValues.size());
-    EXPECT_EQ(AlbaNumber(5863), acceptedValues.at(0).getInteger());
+    EXPECT_EQ(AlbaNumbers{5863}, solutionSet.getAcceptedValues());
     EXPECT_TRUE(solutionSet.getRejectedValues().empty());
     EXPECT_TRUE(solutionSet.getAcceptedIntervals().empty());
 }
-
 TEST(SolutionSetTest, AddValueForRejectedValueWorks)
 {
     SolutionSet solutionSet;
 
     solutionSet.addValue(5863, [](AlbaNumber const&){return false;});
 
-    AlbaNumbers const& rejectedValues(solutionSet.getRejectedValues());
-    ASSERT_EQ(1U, rejectedValues.size());
-    EXPECT_EQ(AlbaNumber(5863), rejectedValues.at(0).getInteger());
+    EXPECT_EQ(AlbaNumbers{5863}, solutionSet.getRejectedValues());
     EXPECT_TRUE(solutionSet.getAcceptedValues().empty());
     EXPECT_TRUE(solutionSet.getAcceptedIntervals().empty());
 }
-
 TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithOnePoint)
 {
     SolutionSet solutionSet;
