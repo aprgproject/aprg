@@ -17,11 +17,10 @@ public:
     using BaseClass = SubTreeQuery<Vertex>;
     using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
-    using RangeQuery = RangeQueryWithAccumulator<Vertex>;
+    using RangeQuery = RangeQueryWithAccumulator<Vertices>;
     using AccumulatorFunction = typename RangeQuery::AccumulatorFunction;
     using Counts = std::vector<unsigned int>;
     using VertexToIndexMap = std::map<Vertex, unsigned int>;
-
     SubTreeQueryWithAccumulator(
             BaseUndirectedGraphWithVertex const& graph,
             Vertex const& rootOfTree,

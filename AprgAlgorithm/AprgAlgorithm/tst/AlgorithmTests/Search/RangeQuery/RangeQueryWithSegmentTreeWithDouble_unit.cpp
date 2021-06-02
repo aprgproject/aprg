@@ -12,13 +12,12 @@ namespace algorithm
 
 namespace
 {
-using ValueForTest = double;
-using RangeQueryForTest = RangeQueryWithSegmentTree<ValueForTest>;
-using ValuesForTest = RangeQueryForTest::Values;
+using ValuesForTest = vector<double>;
+using RangeQueryForTest = RangeQueryWithSegmentTree<ValuesForTest>;
+using ValueForTest = RangeQueryForTest::Value;
 
 RangeQueryForTest::Function multipliesAccumulator = [](ValueForTest const& value1, ValueForTest const& value2)
-{
-    return multiplies<ValueForTest>()(value1, value2);
+{    return multiplies<ValueForTest>()(value1, value2);
 };
 }
 
