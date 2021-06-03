@@ -4,6 +4,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -83,7 +84,8 @@ public:
          else if(value < middleValue)
          {
              m_indexOfHighest = middleIndex-1;
-         }         else
+         }
+         else
          {
              m_indexOfLowest = middleIndex;
              m_indexOfHighest = middleIndex;
@@ -113,4 +115,5 @@ private:
 };
 
 }
+
 }

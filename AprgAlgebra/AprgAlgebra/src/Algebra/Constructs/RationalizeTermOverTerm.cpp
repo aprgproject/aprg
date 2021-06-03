@@ -132,7 +132,8 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomial(
         else if(isDivisible(exponentFraction.denominator, 3U))
         {
             retrieveTermsForRationalizationForPolynomialWhenExponentIsDivisibleByThree(rationalizedTerm, multiplier, firstMonomial, secondMonomial);
-        }    }
+        }
+    }
 }
 
 void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomialWhenExponentIsDivisibleByTwo(
@@ -213,14 +214,16 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpression(
         if(isDivisible(exponentFraction.denominator, 2U))
         {
             retrieveTermsForRationalizationForExpressionWhenExponentIsDivisibleByTwo(
-                        rationalizedTerm,                        multiplier,
+                        rationalizedTerm,
+                        multiplier,
                         firstTermWithDetails,
                         secondTermWithDetails);
         }
         else if(isDivisible(exponentFraction.denominator, 3U))
         {
             retrieveTermsForRationalizationForExpressionWhenExponentIsDivisibleByThree(
-                        rationalizedTerm,                        multiplier,
+                        rationalizedTerm,
+                        multiplier,
                         firstTermWithDetails,
                         secondTermWithDetails);
         }

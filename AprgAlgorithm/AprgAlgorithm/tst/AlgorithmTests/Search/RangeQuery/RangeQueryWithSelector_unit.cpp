@@ -17,7 +17,8 @@ using RangeQueryForTest = RangeQueryWithSelector<ValuesForTest>;
 using ValueForTest = RangeQueryForTest::Value;
 
 RangeQueryForTest::SelectorFunction minimumSelector = [](ValueForTest const& value1, ValueForTest const& value2)
-{    return min(value1, value2);
+{
+    return min(value1, value2);
 };
 
 RangeQueryForTest::SelectorFunction maximumSelector = [](ValueForTest const& value1, ValueForTest const& value2)

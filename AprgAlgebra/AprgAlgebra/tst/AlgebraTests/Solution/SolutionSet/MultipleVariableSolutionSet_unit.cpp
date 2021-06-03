@@ -84,7 +84,8 @@ TEST(MultipleVariableSolutionSetTest, GetSolutionSetForVariableWorks)
     EXPECT_EQ(AlbaNumbers{58}, solutionSetToVerify.getAcceptedValues());
 }
 
-TEST(MultipleVariableSolutionSetTest, AddSolutionSetForVariableWorks){
+TEST(MultipleVariableSolutionSetTest, AddSolutionSetForVariableWorks)
+{
     MultipleVariableSolutionSet solutionSet;
     SolutionSet solutionSetForA;
     solutionSetForA.addAcceptedValue(AlbaNumber(58));
@@ -99,4 +100,5 @@ TEST(MultipleVariableSolutionSetTest, AddSolutionSetForVariableWorks){
 }
 
 }
+
 }

@@ -6,12 +6,14 @@
 
 namespace alba
 {
+
 namespace math
 {
 
 using FactorsToCountMap = std::map<Number, Number>;
 
-bool isCoPrime(Number const number1, Number const number2);bool isNumberOfPrimesInfinite();
+bool isCoPrime(Number const number1, Number const number2);
+bool isNumberOfPrimesInfinite();
 bool isGoldbachConjectureTrue(Number const evenNumber);
 bool isTwinPrimeConjectureTrue(Number const number);
 bool isLegendreConjectureTrue(Number const number);

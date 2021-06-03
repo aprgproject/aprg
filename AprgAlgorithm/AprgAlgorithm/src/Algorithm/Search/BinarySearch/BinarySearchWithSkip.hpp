@@ -43,7 +43,8 @@ private:
         Value result;
         if(lowestDistance==distanceFromFirstValue)
         {
-            result = firstValue;        }
+            result = firstValue;
+        }
         else if(lowestDistance==distanceFromSecondValue)
         {
             result = secondValue;
@@ -61,6 +62,7 @@ private:
         return value;
     }
 };
+
 }
 
 }

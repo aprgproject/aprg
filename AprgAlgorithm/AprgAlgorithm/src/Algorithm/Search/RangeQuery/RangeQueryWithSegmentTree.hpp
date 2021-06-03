@@ -6,13 +6,15 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
 template <typename Values>
 class RangeQueryWithSegmentTree
 {
-public:    // This is "range query selector" and "range query accumulator" type
+public:
+    // This is "range query selector" and "range query accumulator" type
     // A segment tree is a data structure that supports two operations: processing a range query and updating an array value.
     // Segment trees can support sum queries, minimum and maximum queries and many other queries so that both operations work in O(logn) time.
     // Compared to a binary indexed tree, the advantage of a segment tree is that it is a more general data structure.
@@ -29,6 +31,7 @@ public:    // This is "range query selector" and "range query accumulator" type
     using Function = std::function<Value(Value const&, Value const&)>;
 
     static constexpr unsigned int NUMBER_OF_CHILDREN=2U; // only 2 children are supported for now
+
     RangeQueryWithSegmentTree(
             Values const& valuesToCheck,
             Function const& functionObject)

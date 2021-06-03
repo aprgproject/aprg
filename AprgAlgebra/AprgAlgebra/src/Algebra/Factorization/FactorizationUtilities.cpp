@@ -30,7 +30,8 @@ bool areExponentsDivisible(Monomial const& monomial, unsigned int const divisor)
                 || !isDivisible<long long int>(getAbsoluteValue(variableExponentPair.second.getInteger()), divisor))
         {
             result=false;
-            break;        }
+            break;
+        }
     }
     return result;
 }
