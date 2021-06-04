@@ -41,7 +41,8 @@ private:
         Value secondValue(getValueAt(index+1));
         Value distanceFromFirstValue(mathHelper::getPositiveDelta(value, firstValue));
         Value distanceFromSecondValue(mathHelper::getPositiveDelta(value, secondValue));
-        Value lowestDistance(std::min(distanceFromFirstValue, distanceFromSecondValue));        Value result;
+        Value lowestDistance(std::min(distanceFromFirstValue, distanceFromSecondValue));
+        Value result;
         if(lowestDistance==distanceFromFirstValue)
         {
             result = firstValue;
@@ -68,4 +69,5 @@ private:
 };
 
 }
+
 }

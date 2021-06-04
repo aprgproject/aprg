@@ -36,6 +36,7 @@ public:
     using Index = unsigned int;
     using Value = typename Values::value_type;
     using ThreeValues = std::tuple<Value, Value, Value>;
+
     ThreeSum(Values const& sortedValues)
         : m_sortedValues(sortedValues)
     {}
@@ -63,7 +64,8 @@ public:
     ThreeValues getPossibleDuplicatedThreeValuesWithSum(Value const targetSum) const
     {
         ThreeValues result{};
-        if(!m_sortedValues.empty())        {
+        if(!m_sortedValues.empty())
+        {
             TwoSum<Values> twoSum(m_sortedValues);
             for(Index firstIndex=0; firstIndex<m_sortedValues.size(); firstIndex++)
             {
@@ -71,7 +73,8 @@ public:
                 auto twoSumValues(twoSum.getPossibleDuplicatedTwoValuesWithSum(targetSum-firstValue, firstIndex, m_sortedValues.size()-1));
                 if(firstValue + twoSumValues.first + twoSumValues.second == targetSum)
                 {
-                    result = ThreeValues{firstValue, twoSumValues.first, twoSumValues.second};                    break;
+                    result = ThreeValues{firstValue, twoSumValues.first, twoSumValues.second};
+                    break;
                 }
             }
         }
@@ -81,6 +84,7 @@ public:
 private:
     Values const& m_sortedValues;
 };
+
 }
 
 }

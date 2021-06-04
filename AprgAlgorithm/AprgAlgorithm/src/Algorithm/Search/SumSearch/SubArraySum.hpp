@@ -30,7 +30,8 @@ public:
             Value currentSum=m_valuesToCheck.at(0);
             while(start<size && end<size)
             {
-                if(currentSum==targetSum)                {
+                if(currentSum==targetSum)
+                {
                     isFound = true;
                     break;
                 }
@@ -41,13 +42,15 @@ public:
                         currentSum-=m_valuesToCheck.at(start);
                         start++;
                     }
-                    else if(end+1<size)                    {
+                    else if(end+1<size)
+                    {
                         start++;
                         end++;
                         currentSum=m_valuesToCheck.at(end);
                     }
                     else
-                    {                        break;
+                    {
+                        break;
                     }
                 }
                 else if(currentSum<targetSum)
@@ -58,7 +61,8 @@ public:
                         currentSum+=m_valuesToCheck.at(end);
                     }
                     else
-                    {                        break;
+                    {
+                        break;
                     }
                 }
             }
@@ -75,4 +79,5 @@ private:
 };
 
 }
+
 }
