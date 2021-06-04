@@ -446,20 +446,9 @@ TEST(AlbaMathHelperTest, GetNumberOfCombinationsWorks)
     EXPECT_EQ(120U, getNumberOfCombinations(6U, 5U) * getNumberOfCombinations(6U, 3U));
 }
 
-TEST(AlbaMathHelperTest, GetFibonacciWorks)
-{
-    EXPECT_EQ(0U, getFibonacci(0U));
-    EXPECT_EQ(1U, getFibonacci(1U));
-    EXPECT_EQ(1U, getFibonacci(2U));
-    EXPECT_EQ(2U, getFibonacci(3U));
-    EXPECT_EQ(21U, getFibonacci(8U));
-    EXPECT_EQ(34U, getFibonacci(9U));
-}
-
 TEST(AlbaMathHelperTest, GetValueAtPascalTriangleWorks)
 {
-    EXPECT_EQ(1U, getValueAtPascalTriangle(0U, 0U));
-    EXPECT_EQ(1U, getValueAtPascalTriangle(4U, 4U));
+    EXPECT_EQ(1U, getValueAtPascalTriangle(0U, 0U));    EXPECT_EQ(1U, getValueAtPascalTriangle(4U, 4U));
     EXPECT_EQ(1U, getValueAtPascalTriangle(4U, 0U));
     EXPECT_EQ(4U, getValueAtPascalTriangle(4U, 1U));
     EXPECT_EQ(6U, getValueAtPascalTriangle(4U, 2U));
@@ -570,10 +559,25 @@ TEST(AlbaMathHelperTest, GetGreatestCommonFactorWorksForUnsignedInteger)
     EXPECT_EQ(1U, getGreatestCommonFactor(3U, 1234567891U));
 }
 
+TEST(AlbaMathHelperTest, GetGreatestCommonFactorWorksForSignedInteger)
+{
+    EXPECT_EQ(0, getGreatestCommonFactor<int>(0, 0));
+    EXPECT_EQ(8, getGreatestCommonFactor(0, -8));
+    EXPECT_EQ(8, getGreatestCommonFactor(-8, 0));
+    EXPECT_EQ(1, getGreatestCommonFactor(1, -8));
+    EXPECT_EQ(1, getGreatestCommonFactor(-8, 1));
+    EXPECT_EQ(1, getGreatestCommonFactor<int>(1, 1));
+    EXPECT_EQ(16, getGreatestCommonFactor(16, -32));
+    EXPECT_EQ(16, getGreatestCommonFactor(-16, 32));
+    EXPECT_EQ(14, getGreatestCommonFactor(98, -56));
+    EXPECT_EQ(14, getGreatestCommonFactor(-98, 56));
+    EXPECT_EQ(1, getGreatestCommonFactor(-1234567891, 3));
+    EXPECT_EQ(1, getGreatestCommonFactor(3, -1234567891));
+}
+
 TEST(AlbaMathHelperTest, GetGreatestCommonFactorForAlbaNumberWorks)
 {
-    EXPECT_EQ(AlbaNumber(0), getGreatestCommonFactor(AlbaNumber(0), AlbaNumber(0)));
-    EXPECT_EQ(AlbaNumber(1), getGreatestCommonFactor(AlbaNumber(1), AlbaNumber(1)));
+    EXPECT_EQ(AlbaNumber(0), getGreatestCommonFactor(AlbaNumber(0), AlbaNumber(0)));    EXPECT_EQ(AlbaNumber(1), getGreatestCommonFactor(AlbaNumber(1), AlbaNumber(1)));
     EXPECT_EQ(AlbaNumber::createFraction(1, 12),
               getGreatestCommonFactor(AlbaNumber::createFraction(1, 6), AlbaNumber::createFraction(1, 4)));
     EXPECT_EQ(AlbaNumber(1), getGreatestCommonFactor(AlbaNumber(0.33), AlbaNumber::createFraction(1, 4)));
