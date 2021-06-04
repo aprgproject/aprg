@@ -4,6 +4,7 @@
 
 namespace alba
 {
+
 namespace math
 {
 
@@ -29,4 +30,5 @@ private:
 };
 
 }
+
 }

@@ -214,7 +214,8 @@ int getStirlingNumberOfTheSecondKind(unsigned int const n, unsigned int const k)
 
     AlbaNumber sum(0);
     for(unsigned int i=0; i<=k; i++)
-    {        int sign = isDivisible(i, 2U) ? 1 : -1;
+    {
+        int sign = isDivisible(i, 2U) ? 1 : -1;
         sum += AlbaNumber(sign) * getNumberOfCombinations(k, i) * pow(k-i, n);
     }
     sum /= getFactorial(k);

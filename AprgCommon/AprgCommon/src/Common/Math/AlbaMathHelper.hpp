@@ -216,7 +216,12 @@ template <typename NumberType> NumberType getNumberOfCombinations(NumberType con
 
 template <typename NumberType> NumberType getValueAtPascalTriangle(NumberType const rowIndex, NumberType const columnIndex)
 {
-    return getNumberOfCombinations(rowIndex, columnIndex);}
+    // This is also called the binomial coefficient.
+    // The binomial coefficient equals the number of ways we can choose a subset of k elements from a set of n elements.
+    // The binomial coefficient = number of combinations
+
+    return getNumberOfCombinations(rowIndex, columnIndex);
+}
 
 int getStirlingNumberOfTheSecondKind(unsigned int const n, unsigned int const k);
 
@@ -254,6 +259,7 @@ template <typename NumberType> bool isOdd(NumberType const number)
 {
     return !isDivisible(number, static_cast<NumberType>(2));
 }
+
 
 
 //Factor and multiple related functions
@@ -298,7 +304,8 @@ template <typename NumberType> NumberType getGreatestCommonFactor(NumberType con
     NumberType temporarySecond(getAbsoluteValue(secondNumber)); // only consider positive GCF
     while(true)
     {
-        if(temporarySecond==0)        {
+        if(temporarySecond==0)
+        {
             result = temporaryFirst;
             break;
         }

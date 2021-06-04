@@ -3,7 +3,8 @@
 #include <Algorithm/Combinatorics/Subsets/SubsetGenerationUsingRecursion.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
-#include <functional>#include <ostream>
+#include <functional>
+#include <ostream>
 #include <set>
 #include <sstream>
 #include <vector>

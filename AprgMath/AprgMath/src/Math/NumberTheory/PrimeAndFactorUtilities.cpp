@@ -19,7 +19,8 @@ bool isCoPrime(UnsignedInteger const number1, UnsignedInteger const number2)
     return getGreatestCommonFactor(number1, number2) == static_cast<UnsignedInteger>(1);
 }
 
-bool isNumberOfPrimesInfinite(){
+bool isNumberOfPrimesInfinite()
+{
     // It is easy to show that there is an infinite number of primes.
     // If the number of primes would be finite, we could construct a set P = {p1, p2,..., pn} that would contain all the primes.
     // However, using P, we could form a new prime == p1p2...pn + 1 that is larger than all elements in P.
@@ -33,6 +34,7 @@ bool isNumberOfPrimesInfinite(){
 bool isGoldbachConjectureTrue(UnsignedInteger const evenNumber)
 {
     // Goldbach’s conjecture: Each even integer n > 2 can be represented as a sum n = a+b so that both a and b are primes.
+
     bool result(false); // set as false when input is wrong
     if(evenNumber > 2 && evenNumber%2 == 0)
     {
@@ -40,7 +42,8 @@ bool isGoldbachConjectureTrue(UnsignedInteger const evenNumber)
         TwoSum<UnsignedIntegers> twoSum(numbers);
         auto primePair(twoSum.getNonDuplicateTwoValuesWithSum(evenNumber));
         result = primePair.first != 0 && primePair.second != 0;
-    }    return result;
+    }
+    return result;
 }
 
 bool isTwinPrimeConjectureTrue(UnsignedInteger const number)
@@ -52,7 +55,8 @@ bool isTwinPrimeConjectureTrue(UnsignedInteger const number)
     for(UnsignedInteger i=0; i<numbers.size()-1; i++)
     {
         if(numbers.at(i+1) - numbers.at(i) == 2)
-        {            twinPrimeCount++;
+        {
+            twinPrimeCount++;
         }
     }
     return twinPrimeCount>0; // actually we should check if this is infinite (continuously increasing)
@@ -68,7 +72,8 @@ bool isLegendreConjectureTrue(UnsignedInteger const number)
     for(UnsignedInteger numberToCheck=start+1; numberToCheck<end; numberToCheck++)
     {
         if(isPrime(numberToCheck))
-        {            result = true;
+        {
+            result = true;
             break;
         }
     }
@@ -78,6 +83,7 @@ bool isLegendreConjectureTrue(UnsignedInteger const number)
 bool isWilsonTheoremTrue(UnsignedInteger const number)
 {
     // Wilson’s theorem states that a number n is prime exactly when (n-1)! mod n = n-1.
+
     // For example, the number 11 is prime, because 10! mod 11 = 10
     // and the number 12 is not prime, because 11! mod 12 = 0 (not equal to 11).
 
@@ -147,7 +153,8 @@ UnsignedInteger getNumberOfCoPrimesBelowThisNumber(UnsignedInteger const number)
 UnsignedIntegers getPrimesBelowThisNumber(UnsignedInteger const number)
 {
     // The inner loop of the algorithm is executed n/x times for each value of x.
-    // Thus, an upper bound for the running time of the algorithm is the harmonic sum    // -> Summation of n/x = n/2 + n/3 + n/4 + ... + n/n = O(n*log(n))
+    // Thus, an upper bound for the running time of the algorithm is the harmonic sum
+    // -> Summation of n/x = n/2 + n/3 + n/4 + ... + n/n = O(n*log(n))
     // In fact, the algorithm is more efficient, because the inner loop will be executed only if the number x is prime.
     // It can be shown that the running time of the  algorithm is only O(n*log(log(n))), a complexity very near to O(n).
 
@@ -163,7 +170,8 @@ UnsignedIntegers getPrimesBelowThisNumber(UnsignedInteger const number)
     for(UnsignedInteger prime=2; prime<number; prime++)
     {
         if(sieveOfEratosthenes.at(prime))
-        {            result.emplace_back(prime);
+        {
+            result.emplace_back(prime);
         }
     }
     return result;
@@ -176,7 +184,8 @@ UnsignedIntegers getPrimeFactorsOfNumber(UnsignedInteger const number)
     for(UnsignedInteger factor=2; factor*factor<=remainingFactor; factor++)
     {
         while(remainingFactor % factor == 0)
-        {            result.emplace_back(factor);
+        {
+            result.emplace_back(factor);
             remainingFactor /= factor;
         }
     }
@@ -198,7 +207,8 @@ FactorsToCountMap getPrimeFactorsToCountMap(UnsignedInteger const number)
             UnsignedInteger count=0;
             for(; remainingFactor % factor == 0; count++)
             {
-                remainingFactor /= factor;            }
+                remainingFactor /= factor;
+            }
             result.emplace(factor, count);
         }
     }
