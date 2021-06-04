@@ -150,7 +150,8 @@ IntegerCoefficient getMultinomialCoefficient(
 
 Monomial getFirstMonomial(
         Polynomial const& polynomial)
-{    Monomial result;
+{
+    Monomial result;
     Monomials const& monomials(polynomial.getMonomialsConstReference());
     if(!monomials.empty())
     {
@@ -321,7 +322,8 @@ Polynomial raiseBinomialToAPowerUsingBinomialExpansion(
             firstPart.multiplyNumber(AlbaNumber(getBinomialCoefficient(power, i)));
             firstPart.simplify();
             result.addMonomial(firstPart);
-        }    }
+        }
+    }
     result.simplify();
     return result;
 }
