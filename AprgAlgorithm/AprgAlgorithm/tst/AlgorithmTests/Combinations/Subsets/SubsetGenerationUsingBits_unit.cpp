@@ -1,4 +1,4 @@
-#include <Algorithm/Combinatorics/SubsetGeneration/SubsetGenerationUsingBits.hpp>
+#include <Algorithm/Combinatorics/Subsets/SubsetGenerationUsingBits.hpp>
 
 #include <gtest/gtest.h>
 

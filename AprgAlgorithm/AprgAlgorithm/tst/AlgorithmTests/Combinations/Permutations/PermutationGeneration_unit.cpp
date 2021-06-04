@@ -1,4 +1,4 @@
-#include <Algorithm/Combinatorics/PermutationGeneration/PermutationGeneration.hpp>
+#include <Algorithm/Combinatorics/Permutations/PermutationGeneration.hpp>
 
 #include <gtest/gtest.h>
 
