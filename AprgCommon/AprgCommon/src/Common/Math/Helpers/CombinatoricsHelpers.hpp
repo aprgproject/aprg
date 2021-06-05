@@ -3,9 +3,9 @@
 #include <Common/Bit/AlbaBitValueUtilities.hpp>
 #include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
 #include <Common/Math/Helpers/PowerHelpers.hpp>
+#include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
 #include <type_traits>
-
 namespace alba
 {
 
@@ -61,11 +61,9 @@ template <typename NumberType> NumberType getNumberOfCombinations(NumberType con
 
     // Formula 2 is the one implemented below:
 
-    constexpr NumberType THRESHOLD_FOR_CHECKING_GCF = NumberType(1) << (AlbaBitValueUtilities<NumberType>::getNumberOfBits()/2);
     NumberType result(0);
     if(n >= r)
-    {
-        result = 1;
+    {        result = 1;
         NumberType numerator=n;
         NumberType denominator=r;
         NumberType accumulatedNumerator=1;
@@ -84,11 +82,10 @@ template <typename NumberType> NumberType getNumberOfCombinations(NumberType con
                 accumulatedDenominator *= denominator--;
                 shouldContinue = true;
             }
-            if(shouldContinue && accumulatedNumerator > THRESHOLD_FOR_CHECKING_GCF)
+            if(shouldContinue && accumulatedDenominator>1 && isValueBeyondLimits<NumberType>(static_cast<double>(accumulatedNumerator)*numerator))
             {
                 NumberType gcf = getGreatestCommonFactor(accumulatedNumerator, accumulatedDenominator);
-                accumulatedNumerator /= gcf;
-                accumulatedDenominator /= gcf;
+                accumulatedNumerator /= gcf;                accumulatedDenominator /= gcf;
             }
         }
         result = accumulatedNumerator/accumulatedDenominator;

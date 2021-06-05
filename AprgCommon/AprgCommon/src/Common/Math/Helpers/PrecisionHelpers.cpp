@@ -1,11 +1,8 @@
 #include "PrecisionHelpers.hpp"
 
-#include <limits>
-
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace mathHelper
 {
@@ -20,26 +17,9 @@ namespace mathHelper
 //    return difference <= absoluteMaxValue*absoluteScaledDifferenceTolerance;
 //}
 
-
-//isValueBeyondLimits
-template <typename NumberType>
-bool isValueBeyondLimits(double const value)
-{
-    return value < numeric_limits<NumberType>::min()
-            || value > numeric_limits<NumberType>::max();
-}
-template bool isValueBeyondLimits<int>(double const value);
-template bool isValueBeyondLimits<unsigned int>(double const value);
-template bool isValueBeyondLimits<short int>(double const value);
-template bool isValueBeyondLimits<long int>(double const value);
-template bool isValueBeyondLimits<unsigned long int>(double const value);
-template bool isValueBeyondLimits<long long int>(double const value);
-template bool isValueBeyondLimits<unsigned long long int>(double const value);
-
 AlbaNumber convertIfInfinityToNearestFiniteValue(AlbaNumber const& value)
 {
-    AlbaNumber result(value);
-    if(value.isPositiveInfinity())
+    AlbaNumber result(value);    if(value.isPositiveInfinity())
     {
         result = AlbaNumber(numeric_limits<double>::max());
     }
