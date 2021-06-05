@@ -14,7 +14,8 @@ namespace mathHelper
 TEST(FractionHelpersTest, GetFractionDetailsInLowestFormWorks)
 {
     FractionDetails fractionDetails1(getFractionDetailsInLowestForm(0, 0));
-    EXPECT_EQ(1, fractionDetails1.sign);    EXPECT_EQ(0U, fractionDetails1.numerator);
+    EXPECT_EQ(1, fractionDetails1.sign);
+    EXPECT_EQ(0U, fractionDetails1.numerator);
     EXPECT_EQ(0U, fractionDetails1.denominator);
 
     FractionDetails fractionDetails2(getFractionDetailsInLowestForm(1, 1));
@@ -46,7 +47,8 @@ TEST(FractionHelpersTest, GetFractionDetailsInLowestFormWorks)
 TEST(FractionHelpersTest, GetBestFractionDetailsForDoubleValueWorks)
 {
     FractionDetails fractionDetails1(getBestFractionDetailsForDoubleValue(0));
-    EXPECT_EQ(1, fractionDetails1.sign);    EXPECT_EQ(0U, fractionDetails1.numerator);
+    EXPECT_EQ(1, fractionDetails1.sign);
+    EXPECT_EQ(0U, fractionDetails1.numerator);
     EXPECT_EQ(1U, fractionDetails1.denominator);
 
     FractionDetails fractionDetails2(getBestFractionDetailsForDoubleValue(1));

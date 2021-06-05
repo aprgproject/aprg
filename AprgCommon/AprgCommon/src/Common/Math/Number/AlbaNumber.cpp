@@ -7,6 +7,7 @@
 #include <Common/Math/Helpers/PowerHelpers.hpp>
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/Math/Number/AlbaComplexNumber.hpp>
+
 #include <cmath>
 
 using namespace alba::mathHelper;
@@ -1320,6 +1321,7 @@ AlbaNumber AlbaNumber::raisePowerOfBothIntegersAndReturnNumber(
     }
     return result;
 }
+
 AlbaNumber AlbaNumber::raisePowerOfFractionsAndIntegerAndReturnNumber(
         bool & shouldBeConvertedToDouble,
         AlbaNumber::FractionData const& baseFractionData,
