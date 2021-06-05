@@ -4,9 +4,9 @@
 #include <Common/Math/Helpers/DivisibilityHelpers.hpp>
 #include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
 #include <Common/Math/Helpers/FractionHelpers.hpp>
+#include <Common/Math/Helpers/PowerHelpers.hpp>
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/Math/Number/AlbaComplexNumber.hpp>
-
 #include <cmath>
 
 using namespace alba::mathHelper;
@@ -1316,11 +1316,10 @@ AlbaNumber AlbaNumber::raisePowerOfBothIntegersAndReturnNumber(
     else
     {
         shouldBeConvertedToDouble = isValueBeyondLimits<long long int>(baseRaiseToExponent);
-        result = AlbaNumber(getIntegerAfterRoundingADoubleValue<long long int>(baseRaiseToExponent));
+        result = AlbaNumber(getRaiseToPowerForIntegers(base, exponent));
     }
     return result;
 }
-
 AlbaNumber AlbaNumber::raisePowerOfFractionsAndIntegerAndReturnNumber(
         bool & shouldBeConvertedToDouble,
         AlbaNumber::FractionData const& baseFractionData,
