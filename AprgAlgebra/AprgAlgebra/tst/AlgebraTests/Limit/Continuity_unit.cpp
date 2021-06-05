@@ -2,11 +2,10 @@
 #include <Algebra/Limit/Continuity.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
-#include <Common/Math/AlbaMathHelper.hpp>
+#include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 #include <Common/Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace alba::mathHelper;
 using namespace std;
 

@@ -1,9 +1,8 @@
 #include "LinearDiophantineEquationCoefficientSolver.hpp"
 
-#include <Common/Math/AlbaMathHelper.hpp>
+#include <Common/Math/Helpers/DivisibilityHelpers.hpp>
 
 using namespace alba::mathHelper;
-
 namespace alba
 {
 
