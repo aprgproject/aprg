@@ -2,7 +2,8 @@
 
 #include <Geometry/TwoDimensions/Line.hpp>
 #include <Geometry/TwoDimensions/Point.hpp>
-#include <Geometry/TwoDimensions/PolynomialInXEqualsY.hpp>#include <Geometry/TwoDimensions/PolynomialInYEqualsX.hpp>
+#include <Geometry/TwoDimensions/PolynomialInXEqualsY.hpp>
+#include <Geometry/TwoDimensions/PolynomialInYEqualsX.hpp>
 
 namespace alba
 {

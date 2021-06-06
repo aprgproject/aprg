@@ -7,6 +7,7 @@
 
 namespace alba
 {
+
 namespace mathHelper
 {
 
@@ -32,7 +33,8 @@ template <typename FloatingType, typename IntegerType> inline bool isAlmostAnInt
     static_assert(std::is_floating_point<FloatingType>::value, "FloatingType must be an floating type");
     static_assert(std::is_integral<IntegerType>::value, "IntegerType must be an integer");
 
-    return isAlmostEqual(                value,
+    return isAlmostEqual(
+                value,
                 static_cast<FloatingType>(static_cast<IntegerType>(round(value))));
 }
 
@@ -47,6 +49,7 @@ template <typename NumberType> inline bool isValueWithinLimits(double const valu
 template <typename NumberType> inline bool isValueBeyondLimits(double const value)
 {
     static_assert(std::is_integral<NumberType>::value, "IntegerType must be an integer");
+
     return value < std::numeric_limits<NumberType>::min()
             || value > std::numeric_limits<NumberType>::max();
 }
@@ -54,24 +57,28 @@ template <typename NumberType> inline bool isValueBeyondLimits(double const valu
 template <typename NumberType> inline NumberType getIntegerAfterRoundingADoubleValue(double const doubleValue)
 {
     static_assert(std::is_integral<NumberType>::value, "Number type must be an integer");
+
     return static_cast<NumberType>(round(doubleValue));
 }
 
 template <typename NumberType> inline NumberType getIntegerAfterFloorOfDoubleValue(double const doubleValue)
 {
     static_assert(std::is_integral<NumberType>::value, "Number type must be an integer");
+
     return static_cast<NumberType>(floor(doubleValue));
 }
 
 template <typename NumberType> inline NumberType getIntegerAfterCeilingOfDoubleValue(double const doubleValue)
 {
     static_assert(std::is_integral<NumberType>::value, "Number type must be an integer");
+
     return static_cast<NumberType>(ceil(doubleValue));
 }
 
 template <typename NumberType> inline NumberType getIntegerPartOfDoubleValue(double const doubleValue)
 {
     static_assert(std::is_integral<NumberType>::value, "Number type must be an integer");
+
     return static_cast<NumberType>(doubleValue);
 }
 

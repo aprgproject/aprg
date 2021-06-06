@@ -6,6 +6,7 @@
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
 #include <type_traits>
+
 namespace alba
 {
 
@@ -63,7 +64,8 @@ template <typename NumberType> NumberType getNumberOfCombinations(NumberType con
 
     NumberType result(0);
     if(n >= r)
-    {        result = 1;
+    {
+        result = 1;
         NumberType numerator=n;
         NumberType denominator=r;
         NumberType accumulatedNumerator=1;
@@ -85,7 +87,8 @@ template <typename NumberType> NumberType getNumberOfCombinations(NumberType con
             if(shouldContinue && accumulatedDenominator>1 && isValueBeyondLimits<NumberType>(static_cast<double>(accumulatedNumerator)*numerator))
             {
                 NumberType gcf = getGreatestCommonFactor(accumulatedNumerator, accumulatedDenominator);
-                accumulatedNumerator /= gcf;                accumulatedDenominator /= gcf;
+                accumulatedNumerator /= gcf;
+                accumulatedDenominator /= gcf;
             }
         }
         result = accumulatedNumerator/accumulatedDenominator;

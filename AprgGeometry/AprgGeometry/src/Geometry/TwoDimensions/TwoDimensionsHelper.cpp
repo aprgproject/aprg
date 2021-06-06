@@ -3,7 +3,8 @@
 #include <Common/Math/Helpers/ComputationHelpers.hpp>
 #include <Geometry/TwoDimensions/Rectangle.hpp>
 
-#include <algorithm>#include <cmath>
+#include <algorithm>
+#include <cmath>
 #include <stack>
 
 using namespace alba::mathHelper;

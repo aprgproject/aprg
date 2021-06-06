@@ -2,7 +2,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace mathHelper
 {
@@ -19,7 +20,8 @@ namespace mathHelper
 
 AlbaNumber convertIfInfinityToNearestFiniteValue(AlbaNumber const& value)
 {
-    AlbaNumber result(value);    if(value.isPositiveInfinity())
+    AlbaNumber result(value);
+    if(value.isPositiveInfinity())
     {
         result = AlbaNumber(numeric_limits<double>::max());
     }

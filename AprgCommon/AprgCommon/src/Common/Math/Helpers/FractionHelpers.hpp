@@ -7,6 +7,7 @@
 
 namespace alba
 {
+
 namespace mathHelper
 {
 
@@ -53,4 +54,5 @@ void changeFractionToSimplestFormForSigned(NumberType & numerator, NumberType & 
 FractionDetails getBestFractionDetailsForDoubleValue(double const doubleValue);
 
 }//namespace mathHelper
+
 }//namespace alba

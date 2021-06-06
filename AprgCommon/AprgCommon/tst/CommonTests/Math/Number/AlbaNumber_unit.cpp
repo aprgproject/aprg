@@ -743,7 +743,8 @@ TEST(AlbaNumberTest, SubtractionWorksOnTypesStartingFromFraction)
     EXPECT_DOUBLE_EQ(1.6200000094932001e-009, number8.getDouble());
     EXPECT_EQ(AlbaNumber::Type::Fraction, number9.getType());
     AlbaNumber::FractionData fractionData9(number9.getFractionData());
-    EXPECT_EQ(675, fractionData9.numerator);    EXPECT_EQ(262144U, fractionData9.denominator);
+    EXPECT_EQ(675, fractionData9.numerator);
+    EXPECT_EQ(262144U, fractionData9.denominator);
     EXPECT_EQ(AlbaNumber::Type::ComplexNumber, number10.getType());
     AlbaNumber::ComplexNumberData complexNumberData(number10.getComplexNumberData());
     EXPECT_FLOAT_EQ(10.25, complexNumberData.realPart);
@@ -972,7 +973,8 @@ TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromFraction)
     AlbaNumber number10 = AlbaNumber::createFraction(23, 4) / AlbaNumber::createComplexNumber(-4.5, -3.5);
 
     EXPECT_EQ(AlbaNumber::Type::Integer, number1.getType());
-    EXPECT_EQ(0, number1.getInteger());    EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
+    EXPECT_EQ(0, number1.getInteger());
+    EXPECT_EQ(AlbaNumber::Type::Fraction, number2.getType());
     AlbaNumber::FractionData fractionData2(number2.getFractionData());
     EXPECT_EQ(10, fractionData2.numerator);
     EXPECT_EQ(3U, fractionData2.denominator);
@@ -1001,6 +1003,7 @@ TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromFraction)
     EXPECT_FLOAT_EQ(-0.79615384, complexNumberData.realPart);
     EXPECT_FLOAT_EQ(0.61923075, complexNumberData.imaginaryPart);
 }
+
 TEST(AlbaNumberTest, DivideWorksOnTypesStartingFromComplexNumber)
 {
     AlbaNumber number1 = AlbaNumber::createComplexNumber(8.5, 9.5) / 5;

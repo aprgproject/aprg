@@ -18,7 +18,8 @@
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 
 using namespace alba::algebra::Factorization;
-using namespace alba::algebra::Functions;using namespace alba::mathHelper;
+using namespace alba::algebra::Functions;
+using namespace alba::mathHelper;
 using namespace std;
 
 namespace alba

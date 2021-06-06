@@ -4,7 +4,8 @@
 #include <Common/Math/Helpers/ComputationHelpers.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/User/AlbaUserInterface.hpp>
-#include <Geometry/TwoDimensions/Circle.hpp>#include <Geometry/TwoDimensions/TwoDimensionsHelper.hpp>
+#include <Geometry/TwoDimensions/Circle.hpp>
+#include <Geometry/TwoDimensions/TwoDimensionsHelper.hpp>
 #include <Statistics/DataStatistics.hpp>
 #include <Statistics/FrequencyStatistics.hpp>
 
@@ -23,12 +24,12 @@
 #define MINIMUM_NUMBER_OF_BAR_WIDTHS_TO_BE_A_BAR 20
 #define BAR_HEIGHT_TO_DIAMETER_RATIO 0.5
 #define MINIMUM_PERCENTAGE_OF_BLACK_POINTS_FOR_FILLED_CIRCLE 0.7
-#define FILE_PATH_BASIS_HTML APRG_DIR R"(\SOOSA\SOOSA\basis\basis.html)"
 
 using namespace alba::AprgBitmap;
 using namespace alba::mathHelper;
 using namespace alba::TwoDimensions;
 using namespace std;
+
 namespace alba
 {
 
@@ -81,16 +82,16 @@ double SOOSA::PointAndWidth::getWidth() const
     return m_width;
 }
 
-SOOSA::StatusStatus::StatusStatus()
+SOOSA::Status::Status()
 {}
 
-SOOSA::StatusStatus SOOSA::StatusStatus::getInstance()
+SOOSA::Status SOOSA::Status::getInstance()
 {
-    static StatusStatus instance;
+    static Status instance;
     return instance;
 }
 
-string SOOSA::StatusStatus::getSoosaStatus() const
+string SOOSA::Status::getStatusString() const
 {
     string result;
     if(!m_errors.empty())
@@ -104,23 +105,23 @@ string SOOSA::StatusStatus::getSoosaStatus() const
     return result;
 }
 
-void SOOSA::StatusStatus::setError(string const& error)
+void SOOSA::Status::setError(string const& error)
 {
     m_errors.emplace_back(error);
 }
 
-void SOOSA::StatusStatus::clearErrors()
+void SOOSA::Status::clearErrors()
 {
     m_errors.clear();
 }
 
-bool SOOSA::StatusStatus::isStatusNoError() const
+bool SOOSA::Status::isStatusNoError() const
 {
     return m_errors.empty();
 }
 
 
-SOOSA::SOOSA(SoosaConfiguration const& configuration)
+SOOSA::SOOSA(InputConfiguration const& configuration)
     : m_configuration(configuration)
     , m_frequencyDatabase(m_configuration.getNumberOfQuestions())
 {
@@ -148,6 +149,7 @@ void SOOSA::process()
     cout << "NumberOColumns: " << m_configuration.getNumberOfColumns() << endl;
 
     AlbaLocalPathHandler pathHandler(m_configuration.getPath());
+
     saveHeadersToCsvFile();
     if(pathHandler.isDirectory())
     {
@@ -166,7 +168,8 @@ void SOOSA::processDirectory(string const& directoryPath)
     cout << "processDirectory: [" << directoryPath << "]" << endl;
     AlbaLocalPathHandler directoryPathToBeProcessed(directoryPath);
     set<string> listOfFiles;
-    set<string> listOfDirectories;    directoryPathToBeProcessed.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
+    set<string> listOfDirectories;
+    directoryPathToBeProcessed.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
 
     for(string const& filePath : listOfFiles)
     {
@@ -209,7 +212,7 @@ void SOOSA::setAnswerToQuestionInColumn(unsigned int const columnNumber, unsigne
 void SOOSA::saveDataToCsvFile(string const& processedFilePath)  const
 {
     ofstream outputCsvReportStream(getCsvFileName(m_configuration.getPath()), ofstream::app);
-    if(StatusStatus::getInstance().isStatusNoError())
+    if(Status::getInstance().isStatusNoError())
     {
         outputCsvReportStream<<processedFilePath<<",OK";
         for(unsigned int i=0;i<m_configuration.getNumberOfQuestions();i++)
@@ -220,7 +223,7 @@ void SOOSA::saveDataToCsvFile(string const& processedFilePath)  const
     }
     else
     {
-        outputCsvReportStream<<processedFilePath<<","<<StatusStatus::getInstance().getSoosaStatus()<<endl;
+        outputCsvReportStream<<processedFilePath<<","<<Status::getInstance().getStatusString()<<endl;
     }
 }
 
@@ -239,7 +242,7 @@ void SOOSA::saveOutputHtmlFile(string const& processedFilePath) const
 {
     cout << "saveOutputHtmlFile -> saving data to output html file" << endl;
     AlbaLocalPathHandler basisHtmlPath(PathInitialValueSource::DetectedLocalPath);
-    basisHtmlPath.input(basisHtmlPath.getDirectory() + "basis.html"); // FILE_PATH_BASIS_HTML
+    basisHtmlPath.input(basisHtmlPath.getDirectory() + "basis.html");
     ifstream htmlBasisFileStream(basisHtmlPath.getFullPath());
     if(htmlBasisFileStream.is_open())
     {
@@ -315,9 +318,10 @@ void SOOSA::saveTableToOutputHtmlFile(ofstream & reportHtmlFileStream) const
         reportHtmlFileStream<<"</tr>"<<endl;
     }
 }
+
 void SOOSA::saveFrequencyDatabaseIfNoError()
 {
-    if(StatusStatus::getInstance().isStatusNoError())
+    if(Status::getInstance().isStatusNoError())
     {
         m_numberOfRespondents++;
         for(unsigned int i=0;i<m_configuration.getNumberOfQuestions();i++)
@@ -331,9 +335,10 @@ void SOOSA::processFile(string const& filePath)
 {
     cout << endl;
     cout << "processFile: [" << filePath << "]" << endl;
-    StatusStatus::getInstance().clearErrors();
+    Status::getInstance().clearErrors();
 
-    Bitmap bitmap(filePath);    BitmapSnippet globalSnippet(bitmap.getSnippetReadFromFileWholeBitmap());
+    Bitmap bitmap(filePath);
+    BitmapSnippet globalSnippet(bitmap.getSnippetReadFromFileWholeBitmap());
 
     Line leftLine, rightLine, topLine, bottomLine, centerLeftLine, centerRightLine;
     leftLine = findLeftLine(globalSnippet);
@@ -343,7 +348,8 @@ void SOOSA::processFile(string const& filePath)
     cout << endl;
 
     Point edgePoints[2][3];
-    edgePoints[0][0] = twoDimensionsHelper::getIntersectionOfTwoLines(leftLine, topLine);    edgePoints[0][2] = twoDimensionsHelper::getIntersectionOfTwoLines(rightLine, topLine);
+    edgePoints[0][0] = twoDimensionsHelper::getIntersectionOfTwoLines(leftLine, topLine);
+    edgePoints[0][2] = twoDimensionsHelper::getIntersectionOfTwoLines(rightLine, topLine);
     edgePoints[1][0] = twoDimensionsHelper::getIntersectionOfTwoLines(leftLine, bottomLine);
     edgePoints[1][2] = twoDimensionsHelper::getIntersectionOfTwoLines(rightLine, bottomLine);
     edgePoints[0][1] = twoDimensionsHelper::getMidpoint(edgePoints[0][0], edgePoints[0][2]);
@@ -378,9 +384,10 @@ void SOOSA::processFile(string const& filePath)
         stringstream ss;
         ss << "Number of questions does not match the number of answers. Number of questions: " << m_configuration.getNumberOfQuestions()
            << " Number of answers: "<<m_questionToAnswersMap.size()<<".";
-        StatusStatus::getInstance().setError(ss.str());
+        Status::getInstance().setError(ss.str());
     }
-    saveFrequencyDatabaseIfNoError();}
+    saveFrequencyDatabaseIfNoError();
+}
 
 Line SOOSA::findLeftLine(BitmapSnippet const& snippet) const
 {
@@ -388,24 +395,28 @@ Line SOOSA::findLeftLine(BitmapSnippet const& snippet) const
     RangeOfInts rangeForX(snippet.getTopLeftCorner().getX(), snippet.getBottomRightCorner().getX(), 1);
     return findVerticalLine(snippet, rangeForX);
 }
+
 Line SOOSA::findRightLine(BitmapSnippet const& snippet) const
 {
     cout << "findRightLine:" << endl;
     RangeOfInts rangeForX(snippet.getBottomRightCorner().getX(), snippet.getTopLeftCorner().getX(), -1);
     return findVerticalLine(snippet, rangeForX);
 }
+
 Line SOOSA::findTopLine(BitmapSnippet const& snippet) const
 {
     cout << "findTopLine:" << endl;
     RangeOfInts rangeForY(snippet.getTopLeftCorner().getY(), snippet.getBottomRightCorner().getY(), 1);
     return findHorizontalLine(snippet, rangeForY);
 }
+
 Line SOOSA::findBottomLine(BitmapSnippet const& snippet) const
 {
     cout << "findBottomLine:" << endl;
     RangeOfInts rangeForY(snippet.getBottomRightCorner().getY(), snippet.getTopLeftCorner().getY(), -1);
     return findHorizontalLine(snippet, rangeForY);
 }
+
 Line SOOSA::findVerticalLine(BitmapSnippet const& snippet, RangeOfInts const& rangeForX) const
 {
     RangeOfInts::TerminationCondition conditionForX(rangeForX.getTerminationCondition());
@@ -510,7 +521,8 @@ Line SOOSA::getLineModel(TwoDimensionsStatistics::Samples const & samples) const
     while(maxSquareErrorInSamples>=nonAllowableSquareErrorLimit && samplesForLineModeling.size() > MINIMUM_NUMBER_OF_LINE_SAMPLES)
     {
         lineModel = TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samplesForLineModeling);
-        TwoDimensionsStatistics::ValueToSampleMultimap squareErrorToSampleMultimap(getSquareErrorToSampleMultimap(samplesForLineModeling, lineModel));        VectorOfDoubles acceptableSquareErrors(getAcceptableSquareErrorsUsingRetainRatio(squareErrorToSampleMultimap));
+        TwoDimensionsStatistics::ValueToSampleMultimap squareErrorToSampleMultimap(getSquareErrorToSampleMultimap(samplesForLineModeling, lineModel));
+        VectorOfDoubles acceptableSquareErrors(getAcceptableSquareErrorsUsingRetainRatio(squareErrorToSampleMultimap));
         if(acceptableSquareErrors.size() > MINIMUM_NUMBER_OF_LINE_SAMPLES)
         {
             TwoDimensionsStatistics::ValueToSampleMultimap::iterator itForErase = squareErrorToSampleMultimap.find(acceptableSquareErrors.back());
@@ -526,9 +538,10 @@ Line SOOSA::getLineModel(TwoDimensionsStatistics::Samples const & samples) const
         //cout << "getLineModel -> samples: " << samplesForLineModeling.size() << endl;
     }
     if(samplesForLineModeling.size() < MINIMUM_NUMBER_OF_LINE_SAMPLES)
-    {        stringstream ss;
+    {
+        stringstream ss;
         ss<<"Line not found because not enough samples. Samples found for line modeling: "<<samplesForLineModeling.size()<<" Minimum number of samples: "<<MINIMUM_NUMBER_OF_LINE_SAMPLES<<".";
-        StatusStatus::getInstance().setError(ss.str());
+        Status::getInstance().setError(ss.str());
         cout << "getLineModel -> Not enough samples: " << samplesForLineModeling.size() << endl;
     }
     else
@@ -538,6 +551,7 @@ Line SOOSA::getLineModel(TwoDimensionsStatistics::Samples const & samples) const
     }
     return Line(lineModel.aCoefficient, lineModel.bCoefficient, lineModel.cCoefficient);
 }
+
 SOOSA::VectorOfDoubles SOOSA::getAcceptableSquareErrorsUsingKMeans(TwoDimensionsStatistics::ValueToSampleMultimap const& squareErrorToSampleMultimap) const
 {
     // not active anymore
@@ -588,14 +602,15 @@ void SOOSA::processColumn(BitmapSnippet const& snippet, Line const& leftLine, Li
     cout << "Processing right line of column:" << endl;
     QuestionBarCoordinates questionBarCoordinatesForRightLine(getQuestionBarCoordinatesFromLine(snippet, rightLine, numberQuestionsInColumn));
     if(questionBarCoordinatesForLeftLine.size() == numberQuestionsInColumn && questionBarCoordinatesForRightLine.size() == numberQuestionsInColumn)
-    {        for(unsigned int questionIndex=0; questionIndex<numberQuestionsInColumn; questionIndex++)
+    {
+        for(unsigned int questionIndex=0; questionIndex<numberQuestionsInColumn; questionIndex++)
         {
             unsigned int answer(getAnswerToQuestion(snippet, questionBarCoordinatesForLeftLine[questionIndex], questionBarCoordinatesForRightLine[questionIndex]));
             if(answer==0)
             {
                 stringstream ss;
                 ss << "Problem locating choices in a question. Question number: " << questionIndex+1 << ".";
-                StatusStatus::getInstance().setError(ss.str());
+                Status::getInstance().setError(ss.str());
                 cout << "processColumn -> Problem locating choice in question number: " << questionIndex+1 << ", column number: " << columnNumber << endl;
             }
             else
@@ -604,16 +619,18 @@ void SOOSA::processColumn(BitmapSnippet const& snippet, Line const& leftLine, Li
             }
             setAnswerToQuestionInColumn(columnNumber, questionIndex, answer);
         }
-    }    else
+    }
+    else
     {
         stringstream ss;
         ss<<"Number of question coordinates does not match between columns. Question bars at left line: "<<questionBarCoordinatesForLeftLine.size()<<"Question bars at right line: "<<questionBarCoordinatesForRightLine.size()<<".";
-        StatusStatus::getInstance().setError(ss.str());
+        Status::getInstance().setError(ss.str());
         cout << "processColumn -> Questions coordinates does not match. Left line: " << questionBarCoordinatesForLeftLine.size()
              << " Right Line: " <<questionBarCoordinatesForRightLine.size()
              << " Number of questions in the column: " << numberQuestionsInColumn << endl;
     }
 }
+
 unsigned int SOOSA::getAnswerToQuestion(BitmapSnippet const& snippet, QuestionBarCoordinate const& leftCoordinate, QuestionBarCoordinate const& rightCoordinate) const
 {
     Point leftPoint(twoDimensionsHelper::getMidpoint(leftCoordinate.first, leftCoordinate.second));
@@ -682,7 +699,8 @@ bool SOOSA::isWithinBarDeviation(double const barWidthAverage, double const curr
     return getAbsoluteValue(barWidthAverage-currentWidth) <= ALLOWABLE_HALF_BAR_WIDTH_DEVIATION;
 }
 
-SOOSA::VectorOfPointAndWidth SOOSA::getPointsAndWidths(BitmapSnippet const& snippet, Line const& line) const{
+SOOSA::VectorOfPointAndWidth SOOSA::getPointsAndWidths(BitmapSnippet const& snippet, Line const& line) const
+{
     Points nearestBlackPointsFromLine(getNearestBlackPointsFromLine(snippet, line));
     VectorOfPointAndWidth pointsAndWidths;
     for(Point const& point : nearestBlackPointsFromLine)
@@ -704,7 +722,8 @@ SOOSA::LineAndBarWidths SOOSA::getAverageLineAndBarWidthUsingKMeans(VectorOfPoin
         //cout<<"getAverageLineAndBarWidthUsingKMeans -> samples: "<<kMeansForWidths.getSamples().size()<<endl;
         OneDimensionKMeans::GroupOfSamples twoGroupsOfSamples(kMeansForWidths.getGroupOfSamplesUsingKMeans(2));
         RangeOfDoubles minMaxFromFirstGroup(getMinMaxRangeFromKMeansSamples(twoGroupsOfSamples[0]));
-        RangeOfDoubles minMaxFromSecondGroup(getMinMaxRangeFromKMeansSamples(twoGroupsOfSamples[1]));        if(minMaxFromFirstGroup.getDelta() <= ALLOWABLE_LINE_WIDTH_DEVIATION && minMaxFromSecondGroup.getDelta() <= ALLOWABLE_BAR_WIDTH_DEVIATION)
+        RangeOfDoubles minMaxFromSecondGroup(getMinMaxRangeFromKMeansSamples(twoGroupsOfSamples[1]));
+        if(minMaxFromFirstGroup.getDelta() <= ALLOWABLE_LINE_WIDTH_DEVIATION && minMaxFromSecondGroup.getDelta() <= ALLOWABLE_BAR_WIDTH_DEVIATION)
         {
             widthAverages.lineWidth = minMaxFromFirstGroup.getMidpointValue();
             widthAverages.barWidth = minMaxFromSecondGroup.getMidpointValue();
@@ -718,6 +737,7 @@ SOOSA::LineAndBarWidths SOOSA::getAverageLineAndBarWidthUsingKMeans(VectorOfPoin
     cout<<"getAverageLineAndBarWidthUsingKMeans -> line width: "<<widthAverages.lineWidth<<" bar width: "<<widthAverages.barWidth<<endl;
     return widthAverages;
 }
+
 TwoDimensionsStatistics::ValueToSampleMultimap SOOSA::getWidthToSampleMultimap(VectorOfPointAndWidth const& pointsAndWidths) const
 {
     TwoDimensionsStatistics::ValueToSampleMultimap widthToSampleMultimap;
@@ -955,7 +975,8 @@ void SOOSA::adjustHeightUntilTargetHeight(DequeOfPoints & dequeWithHighestHeight
         if(getAbsoluteValue(heightWithoutTop-heightWithoutBottom) < ALLOWABLE_BAR_HEIGHT_DEVIATION)
         {
             dequeWithHighestHeight.pop_front();
-            dequeWithHighestHeight.pop_back();        }
+            dequeWithHighestHeight.pop_back();
+        }
         if(heightWithoutTop < heightWithoutBottom)
         {
             dequeWithHighestHeight.pop_front();
@@ -1005,7 +1026,8 @@ BitmapXY SOOSA::convertToBitmapXY(TwoDimensionsStatistics::Sample const& sample)
     return BitmapXY((unsigned int)round(clampLowerBound(sample.getValueAt(0), (double)0)), (unsigned int)round(clampLowerBound(sample.getValueAt(1), (double)0)));
 }
 
-Point SOOSA::convertToPoint(BitmapXY const& bitmapXY) const{
+Point SOOSA::convertToPoint(BitmapXY const& bitmapXY) const
+{
     return Point((double)bitmapXY.getX(), (double)bitmapXY.getY());
 }
 

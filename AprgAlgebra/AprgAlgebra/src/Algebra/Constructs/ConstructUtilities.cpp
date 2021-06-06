@@ -11,6 +11,7 @@
 #include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
 
 #include <algorithm>
+
 using namespace alba::algebra::Factorization;
 using namespace alba::mathHelper;
 using namespace std;

@@ -8,6 +8,7 @@
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 
 #include <numeric>
+
 using namespace alba::algebra::Functions;
 using namespace alba::mathHelper;
 using namespace std;

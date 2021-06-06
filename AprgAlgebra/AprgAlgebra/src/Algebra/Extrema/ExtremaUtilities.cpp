@@ -12,6 +12,7 @@
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/Math/Number/Interval/AlbaNumberInterval.hpp>
 #include <Common/Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
+
 using namespace alba::algebra::DomainAndRange;
 using namespace alba::mathHelper;
 using namespace alba::stringHelper;

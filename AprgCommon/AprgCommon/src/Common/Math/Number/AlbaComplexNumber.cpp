@@ -234,7 +234,8 @@ double AlbaComplexNumber<DataType>::getBestAngleInRaiseToPowerInRadians(DataType
         double possibleAngleWithoutPi = (angleWithoutPi + 2*rootIndex) * exponent;
         double deltaFromNearestInteger = getPositiveDelta(possibleAngleWithoutPi, round(possibleAngleWithoutPi));
         if(isFirst || deltaFromNearestInteger < minDeltaFromNearestInteger)
-        {            minDeltaFromNearestInteger = deltaFromNearestInteger;
+        {
+            minDeltaFromNearestInteger = deltaFromNearestInteger;
             bestAngleWithoutPi = possibleAngleWithoutPi;
             isFirst = false;
         }
@@ -279,7 +280,8 @@ template AlbaComplexNumber<double> AlbaComplexNumber<double>::getNthRoot(
         unsigned int const rootDegree) const;
 
 
-template <typename DataType>string AlbaComplexNumber<DataType>::getDisplayableString() const
+template <typename DataType>
+string AlbaComplexNumber<DataType>::getDisplayableString() const
 {
     stringstream ss;
     ss << "(" << m_realPart << " + " << m_imaginaryPart << "i)";
