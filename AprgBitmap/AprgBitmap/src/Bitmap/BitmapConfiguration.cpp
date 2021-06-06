@@ -2,11 +2,10 @@
 
 #include <Common/Bit/AlbaBitConstants.hpp>
 #include <Common/Bit/AlbaBitValueUtilities.hpp>
-#include <Common/Math/AlbaMathHelper.hpp>
+#include <Common/Math/Helpers/ComputationHelpers.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <cmath>
-
 using namespace alba::mathHelper;
 using namespace std;
 
