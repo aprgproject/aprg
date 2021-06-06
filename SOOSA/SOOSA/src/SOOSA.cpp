@@ -38,7 +38,8 @@ namespace soosa
 
 SOOSA::FrequencyDatabase::FrequencyDatabase(unsigned int numberOfQuestions)
     : m_numberOfQuestions(numberOfQuestions)
-{    clear();
+{
+    clear();
 }
 
 void SOOSA::FrequencyDatabase::clear()
@@ -130,7 +131,8 @@ SOOSA::SOOSA(InputConfiguration const& configuration)
 {}
 
 unsigned int SOOSA::getNumberOfAnswers() const
-{    return m_questionToAnswersMap.size();
+{
+    return m_questionToAnswersMap.size();
 }
 
 unsigned int SOOSA::getAnswerToQuestion(unsigned int const questionNumber) const
@@ -140,8 +142,8 @@ unsigned int SOOSA::getAnswerToQuestion(unsigned int const questionNumber) const
 
 void SOOSA::process()
 {
-    cout << "SOOSA2014 - Survey Output Optical Scan Analyzer\n\n" << endl;
-    cout << "Path: " << m_inputConfiguration.getPath() << endl;
+    cout << "SOOSA2014 - Survey Output Optical Scan Analyzer\n" << endl;
+    cout << "Input path: " << m_inputConfiguration.getPath() << endl;
     cout << "Area: " << m_inputConfiguration.getArea() << endl;
     cout << "Period: " << m_inputConfiguration.getPeriod() << endl;
     cout << "Discharge: " << m_inputConfiguration.getDischarge() << endl;
@@ -152,7 +154,8 @@ void SOOSA::process()
     AlbaLocalPathHandler pathHandler(m_inputConfiguration.getPath());
 
     saveHeadersToCsvFile();
-    if(pathHandler.isDirectory())    {
+    if(pathHandler.isDirectory())
+    {
         processDirectory(pathHandler.getFullPath());
     }
     else
@@ -188,7 +191,8 @@ string SOOSA::getReportHtmlFileName(string const& path) const
     return AlbaLocalPathHandler(path).getDirectory()+"PSS_Report_"+m_inputConfiguration.getArea()+"_"+m_inputConfiguration.getPeriod()+".html";
 }
 
-string SOOSA::getPrintableStringForPercentage(double const numerator, double const denominator) const{
+string SOOSA::getPrintableStringForPercentage(double const numerator, double const denominator) const
+{
     stringstream ss;
     ss.precision(5);
     if(denominator==0)
@@ -217,7 +221,8 @@ void SOOSA::saveDataToCsvFile(string const& processedFilePath)  const
         for(unsigned int i=0;i<m_inputConfiguration.getNumberOfQuestions();i++)
         {
             outputCsvReportStream<<","<<getAnswerToQuestion(i);
-        }        outputCsvReportStream<<endl;
+        }
+        outputCsvReportStream<<endl;
     }
     else
     {
@@ -232,7 +237,8 @@ void SOOSA::saveHeadersToCsvFile() const
     for(unsigned int i=0; i<m_inputConfiguration.getNumberOfQuestions(); i++)
     {
         outputCsvReportStream << ",Question_" << i+1;
-    }    outputCsvReportStream << endl;
+    }
+    outputCsvReportStream << endl;
 }
 
 void SOOSA::saveOutputHtmlFile(string const& processedFilePath) const
@@ -249,27 +255,35 @@ void SOOSA::saveOutputHtmlFile(string const& processedFilePath) const
         while(htmlBasisFileReader.isNotFinished())
         {
             string line(htmlBasisFileReader.getLineAndIgnoreWhiteSpaces());
-            if(line == "@AREA@")
+            if(line == "@TITLE@")
             {
-                reportHtmlFileStream<<m_inputConfiguration.getArea();
+                reportHtmlFileStream<<m_inputConfiguration.getFormDetailsTitle()<<endl;
+            }
+            else if(line == "@AREA@")
+            {
+                reportHtmlFileStream<<m_inputConfiguration.getArea()<<endl;
             }
             else if(line == "@PERIOD@")
             {
-                reportHtmlFileStream<<m_inputConfiguration.getPeriod();
+                reportHtmlFileStream<<m_inputConfiguration.getPeriod()<<endl;
             }
             else if(line == "@SUMMARY@")
             {
-                reportHtmlFileStream<<"<h2>Number of Respondents: "<<m_numberOfRespondents<<"</h2>"<<endl;
-                reportHtmlFileStream<<"<h2>Average Discharges per Month: "<<m_inputConfiguration.getDischarge()<<"</h2>"<<endl;
+                reportHtmlFileStream << "<h2>Number of Respondents: " << m_numberOfRespondents<<"</h2>" << endl;
+                reportHtmlFileStream << "<h2>Average Discharges per Month: " << m_inputConfiguration.getDischarge() << "</h2>" << endl;
                 double dischargeValue(m_inputConfiguration.getDischarge());
-                reportHtmlFileStream<<"<h2>Percentage of respondents to discharges: "<<getPrintableStringForPercentage(m_numberOfRespondents, dischargeValue)<<"</h2>"<<endl;
+                reportHtmlFileStream
+                        << "<h2>Percentage of respondents to discharges: "
+                        << getPrintableStringForPercentage(m_numberOfRespondents, dischargeValue)
+                        << "</h2>" << endl;
             }
-            else if(line == "@TABLE@")            {
+            else if(line == "@TABLE@")
+            {
                 saveTableToOutputHtmlFile(reportHtmlFileStream);
             }
             else
             {
-                reportHtmlFileStream<<line<<endl;
+                reportHtmlFileStream << line << endl;
             }
         }
         cout << "saveOutputHtmlFile -> successful!" << endl;
@@ -287,7 +301,8 @@ void SOOSA::saveTableToOutputHtmlFile(ofstream & reportHtmlFileStream) const
     for(unsigned int questionIndex=0; questionIndex<m_inputConfiguration.getNumberOfQuestions(); questionIndex++)
     {
         reportHtmlFileStream<<"<tr>"<<endl;
-        FrequencyStatistics::FrequencySamples samples;        for(unsigned int answerIndex=0; answerIndex<NUMBER_OF_CHOICES; answerIndex++)
+        FrequencyStatistics::FrequencySamples samples;
+        for(unsigned int answerIndex=0; answerIndex<NUMBER_OF_CHOICES; answerIndex++)
         {
             samples[answerIndex+1] = m_frequencyDatabase.getFrequencyOfAnswer(questionIndex, answerIndex);
         }
@@ -320,6 +335,7 @@ void SOOSA::saveTableToOutputHtmlFile(ofstream & reportHtmlFileStream) const
         reportHtmlFileStream<<"</tr>"<<endl;
     }
 }
+
 void SOOSA::saveFrequencyDatabaseIfNoError()
 {
     if(Status::getInstance().isStatusNoError())
@@ -328,7 +344,8 @@ void SOOSA::saveFrequencyDatabaseIfNoError()
         for(unsigned int i=0;i<m_inputConfiguration.getNumberOfQuestions();i++)
         {
             m_frequencyDatabase.addAnswer(i, getAnswerToQuestion(i)-1);
-        }    }
+        }
+    }
 }
 
 void SOOSA::processFile(string const& filePath)
@@ -358,7 +375,8 @@ void SOOSA::processFile(string const& filePath)
     if(m_inputConfiguration.getNumberOfColumns()==2)
     {
         cout << "Number of columns from template = 2" << endl;
-        Line centerLine(edgePoints[0][1], edgePoints[1][1]);        cout << "find center left line:" << endl;
+        Line centerLine(edgePoints[0][1], edgePoints[1][1]);
+        cout << "find center left line:" << endl;
         centerLeftLine = findRightLineUsingStartingLine(globalSnippet, centerLine);
         cout << "find center right line:" << endl;
         centerRightLine = findLeftLineUsingStartingLine(globalSnippet, centerLine);
@@ -384,7 +402,8 @@ void SOOSA::processFile(string const& filePath)
         ss << "Number of questions does not match the number of answers. Number of questions: " << m_inputConfiguration.getNumberOfQuestions()
            << " Number of answers: "<<m_questionToAnswersMap.size()<<".";
         Status::getInstance().setError(ss.str());
-    }    saveFrequencyDatabaseIfNoError();
+    }
+    saveFrequencyDatabaseIfNoError();
 }
 
 Line SOOSA::findLeftLine(BitmapSnippet const& snippet) const
@@ -546,6 +565,9 @@ Line SOOSA::getLineModel(TwoDimensionsStatistics::Samples const & samples) const
     {
         cout << "getLineModel -> Successful! Number of successful samples: " << samplesForLineModeling.size()
            << ", number of minimum samples: " << MINIMUM_NUMBER_OF_LINE_SAMPLES << endl;
+        cout << "getLineModel -> Line model coordinates: a=" << lineModel.aCoefficient
+             << " b=" << lineModel.bCoefficient
+             << " c=" << lineModel.cCoefficient << endl;
     }
     return Line(lineModel.aCoefficient, lineModel.bCoefficient, lineModel.cCoefficient);
 }
@@ -597,7 +619,8 @@ void SOOSA::processColumn(BitmapSnippet const& snippet, Line const& leftLine, Li
     unsigned int numberQuestionsInColumn = m_inputConfiguration.getNumberOfQuestionsAtColumn(columnNumber);
     cout << "Processing left line of column:" << endl;
     QuestionBarCoordinates questionBarCoordinatesForLeftLine(getQuestionBarCoordinatesFromLine(snippet, leftLine, numberQuestionsInColumn));
-    cout << "Processing right line of column:" << endl;    QuestionBarCoordinates questionBarCoordinatesForRightLine(getQuestionBarCoordinatesFromLine(snippet, rightLine, numberQuestionsInColumn));
+    cout << "Processing right line of column:" << endl;
+    QuestionBarCoordinates questionBarCoordinatesForRightLine(getQuestionBarCoordinatesFromLine(snippet, rightLine, numberQuestionsInColumn));
     if(questionBarCoordinatesForLeftLine.size() == numberQuestionsInColumn && questionBarCoordinatesForRightLine.size() == numberQuestionsInColumn)
     {
         for(unsigned int questionIndex=0; questionIndex<numberQuestionsInColumn; questionIndex++)
@@ -605,14 +628,14 @@ void SOOSA::processColumn(BitmapSnippet const& snippet, Line const& leftLine, Li
             unsigned int answer(getAnswerToQuestion(snippet, questionBarCoordinatesForLeftLine[questionIndex], questionBarCoordinatesForRightLine[questionIndex]));
             if(answer==0)
             {
+                cout << "processColumn -> Problem locating choice in question number: " << questionIndex+1 << ", column number: " << columnNumber << endl;
                 stringstream ss;
                 ss << "Problem locating choices in a question. Question number: " << questionIndex+1 << ".";
                 Status::getInstance().setError(ss.str());
-                cout << "processColumn -> Problem locating choice in question number: " << questionIndex+1 << ", column number: " << columnNumber << endl;
             }
             else
             {
-                cout << "Question number: " << questionIndex+1 << " Answer: " << answer << endl;
+                cout << "processColumn -> Question number: " << questionIndex+1 << " Answer: " << answer << endl;
             }
             setAnswerToQuestionInColumn(columnNumber, questionIndex, answer);
         }

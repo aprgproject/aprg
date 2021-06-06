@@ -28,7 +28,8 @@ namespace soosa
 
 class SOOSA
 {
-public:    class FrequencyDatabase
+public:
+    class FrequencyDatabase
     {
     public:
         FrequencyDatabase(unsigned int numberOfQuestions);
@@ -146,7 +147,8 @@ private:
     InputConfiguration m_inputConfiguration;
     unsigned int m_numberOfRespondents;
     std::map<unsigned int, unsigned int> m_questionToAnswersMap;
-    FrequencyDatabase m_frequencyDatabase;};
+    FrequencyDatabase m_frequencyDatabase;
+};
 
 }
 
