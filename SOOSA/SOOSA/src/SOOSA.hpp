@@ -3,10 +3,10 @@
 #include <Bitmap/Bitmap.hpp>
 #include <Bitmap/BitmapSnippet.hpp>
 #include <Common/Container/AlbaValueRange.hpp>
+#include <Common/Math/Matrix/AlbaMatrix.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Geometry/TwoDimensions/Line.hpp>
-#include <Geometry/TwoDimensions/Point.hpp>
-#include <InputConfiguration.hpp>
+#include <Geometry/TwoDimensions/Point.hpp>#include <InputConfiguration.hpp>
 #include <Statistics/DataCollection.hpp>
 #include <Statistics/KMeansClustering.hpp>
 #include <Statistics/TwoDimensionsStatistics.hpp>
@@ -18,11 +18,8 @@
 #include <string>
 #include <vector>
 
-#define NUMBER_OF_CHOICES 5
-
 namespace alba
 {
-
 namespace soosa
 {
 
@@ -33,16 +30,15 @@ public:
     {
     public:
         FrequencyDatabase(unsigned int numberOfQuestions);
-        void clear();
+        void initialize();
         void addAnswer(unsigned int const questionNumber, unsigned int const answer);
         unsigned int getFrequencyOfAnswer(unsigned int const questionNumber, unsigned int const answer) const;
     private:
         unsigned int m_numberOfQuestions;
-        std::map<unsigned int, std::array<unsigned int, NUMBER_OF_CHOICES>> m_questionToAnswerFrequencyMap;
+        matrix::AlbaMatrix<unsigned int> m_frequenciesOnQuestionByAnswer;
     };
 
-    class PointAndWidth
-    {
+    class PointAndWidth    {
     public:
         PointAndWidth(TwoDimensions::Point const& point, double const width);
         TwoDimensions::Point getPoint() const;
