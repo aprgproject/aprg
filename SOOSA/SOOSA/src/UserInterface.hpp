@@ -8,10 +8,12 @@
 namespace alba
 {
 
+namespace soosa
+{
+
 class UserInterface
 {
-public:
-    InputConfiguration getSavedConfiguration() const;
+public:    InputConfiguration getSavedConfiguration() const;
     void askUserForMainDetails();
     void askUserForFormDetails();
 private:
@@ -20,5 +22,7 @@ private:
     InputConfiguration m_savedConfiguration;
     AlbaUserInterface m_userInterface;
 };
+
+}
 
 }

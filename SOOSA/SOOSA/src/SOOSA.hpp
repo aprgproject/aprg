@@ -23,10 +23,12 @@
 namespace alba
 {
 
+namespace soosa
+{
+
 class SOOSA
 {
-public:
-    class FrequencyDatabase
+public:    class FrequencyDatabase
     {
     public:
         FrequencyDatabase(unsigned int numberOfQuestions);
@@ -141,10 +143,11 @@ private:
     TwoDimensions::Point convertToPoint(TwoDimensionsStatistics::Sample const& sample) const;
     TwoDimensionsStatistics::Sample convertToTwoDimensionSample(TwoDimensions::Point const& point) const;
 
-    InputConfiguration m_configuration;
+    InputConfiguration m_inputConfiguration;
     unsigned int m_numberOfRespondents;
     std::map<unsigned int, unsigned int> m_questionToAnswersMap;
-    FrequencyDatabase m_frequencyDatabase;
-};
+    FrequencyDatabase m_frequencyDatabase;};
+
+}
 
 }
