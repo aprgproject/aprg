@@ -6,7 +6,9 @@
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Geometry/TwoDimensions/Line.hpp>
-#include <Geometry/TwoDimensions/Point.hpp>#include <InputConfiguration.hpp>
+#include <Geometry/TwoDimensions/Point.hpp>
+#include <InputConfiguration.hpp>
+#include <SoosaConfiguration.hpp>
 #include <Statistics/DataCollection.hpp>
 #include <Statistics/KMeansClustering.hpp>
 #include <Statistics/TwoDimensionsStatistics.hpp>
@@ -20,6 +22,7 @@
 
 namespace alba
 {
+
 namespace soosa
 {
 
@@ -29,16 +32,18 @@ public:
     class FrequencyDatabase
     {
     public:
-        FrequencyDatabase(unsigned int numberOfQuestions);
+        FrequencyDatabase(unsigned int const numberOfQuestions, unsigned int const numberOfChoices);
         void initialize();
         void addAnswer(unsigned int const questionNumber, unsigned int const answer);
         unsigned int getFrequencyOfAnswer(unsigned int const questionNumber, unsigned int const answer) const;
     private:
         unsigned int m_numberOfQuestions;
+        unsigned int m_numberOfChoices;
         matrix::AlbaMatrix<unsigned int> m_frequenciesOnQuestionByAnswer;
     };
 
-    class PointAndWidth    {
+    class PointAndWidth
+    {
     public:
         PointAndWidth(TwoDimensions::Point const& point, double const width);
         TwoDimensions::Point getPoint() const;
@@ -78,7 +83,7 @@ public:
     using OneDimensionStatistics = DataStatistics<1>;
     using DequeOfPoints = std::deque<TwoDimensions::Point>;
 
-    SOOSA(InputConfiguration const& configuration);
+    SOOSA(SoosaConfiguration const& soosaConfiguration, InputConfiguration const& inputConfiguration);
     unsigned int getNumberOfAnswers() const;
     unsigned int getAnswerToQuestion(unsigned int const questionNumber) const;
     void process();
@@ -140,6 +145,7 @@ private:
     TwoDimensions::Point convertToPoint(TwoDimensionsStatistics::Sample const& sample) const;
     TwoDimensionsStatistics::Sample convertToTwoDimensionSample(TwoDimensions::Point const& point) const;
 
+    SoosaConfiguration m_soosaConfiguration;
     InputConfiguration m_inputConfiguration;
     unsigned int m_numberOfRespondents;
     std::map<unsigned int, unsigned int> m_questionToAnswersMap;
