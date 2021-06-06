@@ -1,9 +1,7 @@
 #include "Limacon.hpp"
 
-#include <Common/Math/AlbaMathHelper.hpp>
 #include <Geometry/TwoDimensions/PolarCoordinate.hpp>
 #include <Geometry/TwoDimensions/TwoDimensionsHelper.hpp>
-
 #include <cmath>
 
 using namespace alba::mathHelper;

@@ -1,10 +1,8 @@
 #include "Sphere.hpp"
 
-#include <Common/Math/AlbaMathHelper.hpp>
 #include <Geometry/ThreeDimensions/ThreeDimensionsHelper.hpp>
 
-using namespace alba::mathHelper;
-using namespace alba::ThreeDimensions::threeDimensionsHelper;
+using namespace alba::mathHelper;using namespace alba::ThreeDimensions::threeDimensionsHelper;
 using namespace std;
 
 namespace alba

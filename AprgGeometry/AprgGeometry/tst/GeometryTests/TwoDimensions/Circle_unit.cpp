@@ -1,7 +1,7 @@
+#include <Common/Math/Helpers/ConstantHelpers.hpp>
 #include <Geometry/TwoDimensions/Circle.hpp>
 
 #include <gtest/gtest.h>
-
 #include <cmath>
 
 using namespace alba::mathHelper;
