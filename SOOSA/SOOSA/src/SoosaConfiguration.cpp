@@ -42,7 +42,8 @@ unsigned int SoosaConfiguration::getAcceptableBarHeightDeviationInPixels() const
 
 unsigned int SoosaConfiguration::getMaximumBarWidth() const
 {
-    return m_maximumBarWidth;}
+    return m_maximumBarWidth;
+}
 
 unsigned int SoosaConfiguration::getMinimumNumberOfBarWidthsForABar() const
 {
@@ -89,7 +90,8 @@ void SoosaConfiguration::update()
     UPDATE_PARAMETER(m_acceptableBarHeightDeviationInPixels, unsigned int);
     UPDATE_PARAMETER(m_maximumBarWidth, unsigned int);
     UPDATE_PARAMETER(m_minimumNumberOfBarWidthsForABar, unsigned int);
-    UPDATE_PARAMETER(m_ratioOfBarHeightToDiameter, double);    UPDATE_PARAMETER(m_minimumPercentageOfBlackPixelsForAFilledCircle, double);
+    UPDATE_PARAMETER(m_ratioOfBarHeightToDiameter, double);
+    UPDATE_PARAMETER(m_minimumPercentageOfBlackPixelsForAFilledCircle, double);
 
 #undef UPDATE_PARAMETER
 }
