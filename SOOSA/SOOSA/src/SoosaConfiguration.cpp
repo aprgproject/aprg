@@ -25,29 +25,9 @@ unsigned int SoosaConfiguration::getAcceptableLineDeviationForLineModelInPixels(
     return m_acceptableLineDeviationForLineModelInPixels;
 }
 
-unsigned int SoosaConfiguration::getAcceptableLineWidthDeviationInPixels() const
+double SoosaConfiguration::getRetainRatioForSquareErrorsInLineModel() const
 {
-    return m_acceptableLineWidthDeviationInPixels;
-}
-
-unsigned int SoosaConfiguration::getAcceptableBarWidthDeviationInPixels() const
-{
-    return m_acceptableBarWidthDeviationInPixels;
-}
-
-unsigned int SoosaConfiguration::getAcceptableHalfLineWidthDeviationInPixels() const
-{
-    return m_acceptableLineWidthDeviationInPixels/2;
-}
-
-unsigned int SoosaConfiguration::getAcceptableHalfBarWidthDeviationInPixels() const
-{
-    return m_acceptableBarWidthDeviationInPixels/2;
-}
-
-unsigned int SoosaConfiguration::getAcceptableBarHeightDeviationInPixels() const
-{
-    return m_acceptableBarHeightDeviationInPixels;
+    return m_retainRatioForSquareErrorsInLineModel;
 }
 
 unsigned int SoosaConfiguration::getMinimumLineSamples() const
@@ -55,15 +35,14 @@ unsigned int SoosaConfiguration::getMinimumLineSamples() const
     return m_minimumLineSamples;
 }
 
-double SoosaConfiguration::getRetainRatioForSquareErrorsInLineModel() const
+unsigned int SoosaConfiguration::getAcceptableBarHeightDeviationInPixels() const
 {
-    return m_retainRatioForSquareErrorsInLineModel;
+    return m_acceptableBarHeightDeviationInPixels;
 }
 
 unsigned int SoosaConfiguration::getMaximumBarWidth() const
 {
-    return m_maximumBarWidth;
-}
+    return m_maximumBarWidth;}
 
 unsigned int SoosaConfiguration::getMinimumNumberOfBarWidthsForABar() const
 {
@@ -105,15 +84,12 @@ void SoosaConfiguration::update()
 
     UPDATE_PARAMETER(m_numberOfChoices, unsigned int);
     UPDATE_PARAMETER(m_acceptableLineDeviationForLineModelInPixels, unsigned int);
-    UPDATE_PARAMETER(m_acceptableLineWidthDeviationInPixels, unsigned int);
-    UPDATE_PARAMETER(m_acceptableBarWidthDeviationInPixels, unsigned int);
-    UPDATE_PARAMETER(m_acceptableBarHeightDeviationInPixels, unsigned int);
-    UPDATE_PARAMETER(m_minimumLineSamples, unsigned int);
     UPDATE_PARAMETER(m_retainRatioForSquareErrorsInLineModel, double);
+    UPDATE_PARAMETER(m_minimumLineSamples, unsigned int);
+    UPDATE_PARAMETER(m_acceptableBarHeightDeviationInPixels, unsigned int);
     UPDATE_PARAMETER(m_maximumBarWidth, unsigned int);
     UPDATE_PARAMETER(m_minimumNumberOfBarWidthsForABar, unsigned int);
-    UPDATE_PARAMETER(m_ratioOfBarHeightToDiameter, double);
-    UPDATE_PARAMETER(m_minimumPercentageOfBlackPixelsForAFilledCircle, double);
+    UPDATE_PARAMETER(m_ratioOfBarHeightToDiameter, double);    UPDATE_PARAMETER(m_minimumPercentageOfBlackPixelsForAFilledCircle, double);
 
 #undef UPDATE_PARAMETER
 }
