@@ -229,16 +229,13 @@ void Line::getPointsForHorizontalLine(Points & points, Point const& first, Point
 
 void Line::getPointsForLineWithSlope(Points & points, Point const& first, Point const& second, double const interval) const
 {
-    Point minimumXAndY;
-    Point maximumXAndY;
+    Point minimumXAndY(first);
+    Point maximumXAndY(first);
     Points pointsAtBorder;
-    minimumXAndY.saveMinimumXAndY(first);
     minimumXAndY.saveMinimumXAndY(second);
-    maximumXAndY.saveMaximumXAndY(first);
     maximumXAndY.saveMaximumXAndY(second);
     addPointIfInsideTwoPoints(pointsAtBorder, Point(first.getX(), calculateYFromX(first.getX())), minimumXAndY, maximumXAndY);
-    addPointIfInsideTwoPoints(pointsAtBorder, Point(calculateXFromY(first.getY()), first.getY()), minimumXAndY, maximumXAndY);
-    addPointIfInsideTwoPoints(pointsAtBorder, Point(second.getX(), calculateYFromX(second.getX())), minimumXAndY, maximumXAndY);
+    addPointIfInsideTwoPoints(pointsAtBorder, Point(calculateXFromY(first.getY()), first.getY()), minimumXAndY, maximumXAndY);    addPointIfInsideTwoPoints(pointsAtBorder, Point(second.getX(), calculateYFromX(second.getX())), minimumXAndY, maximumXAndY);
     addPointIfInsideTwoPoints(pointsAtBorder, Point(calculateXFromY(second.getY()), second.getY()), minimumXAndY, maximumXAndY);
     if(pointsAtBorder.size()>=2)
     {
