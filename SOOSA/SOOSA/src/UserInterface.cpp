@@ -19,10 +19,14 @@ InputConfiguration UserInterface::getSavedConfiguration() const
     return m_savedConfiguration;
 }
 
+void UserInterface::setPath(string const& path)
+{
+    m_savedConfiguration.setPath(path);
+}
+
 void UserInterface::askUserForMainDetails()
 {
-    cout <<"Enter area:" << endl;
-    string area(m_userInterface.getUserInput());
+    cout <<"Enter area:" << endl;    string area(m_userInterface.getUserInput());
 
     cout <<"Enter period:" <<  endl;
     string period(m_userInterface.getUserInput());

@@ -14,14 +14,9 @@
 #include <iostream>
 #include <sstream>
 
-
-
-#include <Common/Debug/AlbaDebug.hpp>
-
 using namespace alba::AprgBitmap;
 using namespace alba::mathHelper;
-using namespace alba::TwoDimensions;
-using namespace alba::TwoDimensions::twoDimensionsHelper;
+using namespace alba::TwoDimensions;using namespace alba::TwoDimensions::twoDimensionsHelper;
 using namespace alba::FrequencyStatistics;
 using namespace alba::TwoDimensionsStatistics;
 using namespace std;
@@ -166,11 +161,9 @@ unsigned int SOOSA::getAnswerToQuestion(unsigned int const questionNumber) const
 
 void SOOSA::process()
 {
-    cout << "Survey Output Optical Scan Analyzer\n" << endl;
     cout << "Input path: " << m_inputConfiguration.getPath() << endl;
     cout << "Area: " << m_inputConfiguration.getArea() << endl;
-    cout << "Period: " << m_inputConfiguration.getPeriod() << endl;
-    cout << "Discharge: " << m_inputConfiguration.getDischarge() << endl;
+    cout << "Period: " << m_inputConfiguration.getPeriod() << endl;    cout << "Discharge: " << m_inputConfiguration.getDischarge() << endl;
     cout << "Minimum satisfactory score (inclusive): " << m_inputConfiguration.getMinimumSatisfactoryScore() << endl;
     cout << "NumberOfQuestions: " << m_inputConfiguration.getNumberOfQuestions() << endl;
     cout << "NumberOColumns: " << m_inputConfiguration.getNumberOfColumns() << endl;
@@ -196,11 +189,10 @@ void SOOSA::processDirectory(string const& directoryPath)
     AlbaLocalPathHandler directoryPathToBeProcessed(directoryPath);
     set<string> listOfFiles;
     set<string> listOfDirectories;
-    directoryPathToBeProcessed.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
+    directoryPathToBeProcessed.findFilesAndDirectoriesUnlimitedDepth("*.bmp", listOfFiles, listOfDirectories);
 
     for(string const& filePath : listOfFiles)
-    {
-        processFile(filePath);
+    {        processFile(filePath);
         saveDataToCsvFile(filePath);
     }
 }
@@ -215,34 +207,36 @@ void SOOSA::processFile(string const& filePath)
 
     //enableDebugSnippet(bitmap); // debug
 
+    Line emptyLine;
     Line leftLine, rightLine, topLine, bottomLine;
     leftLine = findLeftLine(globalSnippet);
-    rightLine = findRightLine(globalSnippet);
-    topLine = findTopLine(globalSnippet);
+    rightLine = findRightLine(globalSnippet);    topLine = findTopLine(globalSnippet);
     bottomLine = findBottomLine(globalSnippet);
     cout << endl;
 
-    if(m_inputConfiguration.getNumberOfColumns()==2)
+    if(emptyLine != leftLine && emptyLine != rightLine && emptyLine != topLine && emptyLine != bottomLine)
     {
-        processTwoColumns(globalSnippet, leftLine, rightLine, topLine, bottomLine);
-    }
-    else
-    {
-        processOneColumn(globalSnippet, leftLine, rightLine, topLine, bottomLine);
-    }
+        if(m_inputConfiguration.getNumberOfColumns()==2)
+        {
+            processTwoColumns(globalSnippet, leftLine, rightLine, topLine, bottomLine);
+        }
+        else
+        {
+            processOneColumn(globalSnippet, leftLine, rightLine, topLine, bottomLine);
+        }
 
-    if(m_inputConfiguration.getNumberOfQuestions() != m_questionToAnswersMap.size())
-    {
-        performStepsWhenNumberOfAnswersNotEqualToNumberOfQuestions();
-    }
-    else
-    {
-        saveFrequencyDatabaseIfNoError();
+        if(m_inputConfiguration.getNumberOfQuestions() != m_questionToAnswersMap.size())
+        {
+            performStepsWhenNumberOfAnswersNotEqualToNumberOfQuestions();
+        }
+        else
+        {
+            saveFrequencyDatabaseIfNoError();
+        }
     }
 
     //saveDebugSnippet(bitmap); // debug
 }
-
 void SOOSA::performStepsWhenNumberOfAnswersNotEqualToNumberOfQuestions() const
 {
     cout << "Number of questions does not match the number of answers. Number of questions: " << m_inputConfiguration.getNumberOfQuestions()
@@ -622,18 +616,13 @@ SOOSA::QuestionBarCoordinates SOOSA::getQuestionBarCoordinatesFromLine(
     if(!pointAndWidthPairs.empty())
     {
         RangeOfDoubles minMaxCriteriaForBar(getMinMaxCriteriaForBar(pointAndWidthPairs));
-        ALBA_PRINT2(minMaxCriteriaForBar.getMinimum(), minMaxCriteriaForBar.getMaximum());
         TwoDimensionKMeans barPointKMeans;
         retrieveBarPointsThatFitAndSaveToKMeans(barPointKMeans, pointAndWidthPairs, minMaxCriteriaForBar);
-        ALBA_PRINT1(barPointKMeans.getSamples().size());
         removeIncorrectBarPointsBasedFromHeight(barPointKMeans, numberQuestionsInColumn);
-        ALBA_PRINT1(barPointKMeans.getSamples().size());
         saveQuestionBarCoordinatesFromKMeansWithBarPoints(questionBarCoordinates, barPointKMeans, numberQuestionsInColumn);
-        ALBA_PRINT1(questionBarCoordinates.size());
     }
     cout << "getQuestionBarCoordinatesFromLine -> Number of question bar coordinates: " << questionBarCoordinates.size() << endl;
-    return questionBarCoordinates;
-}
+    return questionBarCoordinates;}
 
 void SOOSA::retrieveBarPointsThatFitAndSaveToKMeans(
         TwoDimensionKMeans & barPointKMeans,
