@@ -124,7 +124,8 @@ private:
     bool isBlackAt(AprgBitmap::BitmapSnippet const& snippet, AprgBitmap::BitmapXY const bitmapXy) const;
     AprgBitmap::BitmapXY convertToBitmapXY(TwoDimensions::Point const& point) const;
     AprgBitmap::BitmapXY convertToBitmapXY(TwoDimensionsStatistics::Sample const& sample) const;
-    TwoDimensions::Point convertToPoint(AprgBitmap::BitmapXY const& bitmapXY) const;    TwoDimensions::Point convertToPoint(TwoDimensionsStatistics::Sample const& sample) const;
+    TwoDimensions::Point convertToPoint(AprgBitmap::BitmapXY const& bitmapXY) const;
+    TwoDimensions::Point convertToPoint(TwoDimensionsStatistics::Sample const& sample) const;
     TwoDimensionsStatistics::Sample convertToTwoDimensionSample(TwoDimensions::Point const& point) const;
 
     SoosaConfiguration m_soosaConfiguration;
