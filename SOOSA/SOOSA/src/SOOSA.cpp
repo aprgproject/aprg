@@ -34,7 +34,7 @@ namespace soosa
 
 /*namespace // for debug
 {
-AlbaOptional<AprgBitmap::BitmapSnippet> s_debugSnippetOptional;
+AlbaOptional<BitmapSnippet> s_debugSnippetOptional;
 
 void enableDebugSnippet(Bitmap & bitmap)
 {
@@ -254,7 +254,8 @@ void SOOSA::performStepsWhenNumberOfAnswersNotEqualToNumberOfQuestions() const
     Status::getInstance().setError(ss.str());
 }
 
-void SOOSA::saveFrequencyDatabaseIfNoError(){
+void SOOSA::saveFrequencyDatabaseIfNoError()
+{
     if(Status::getInstance().isStatusNoError())
     {
         m_numberOfRespondents++;
@@ -267,7 +268,8 @@ void SOOSA::saveFrequencyDatabaseIfNoError(){
 
 Line SOOSA::findLeftLine(BitmapSnippet const& snippet) const
 {
-    cout << "findLeftLine:" << endl;    RangeOfInts rangeForX(snippet.getTopLeftCorner().getX(), snippet.getBottomRightCorner().getX(), 1);
+    cout << "findLeftLine:" << endl;
+    RangeOfInts rangeForX(snippet.getTopLeftCorner().getX(), snippet.getBottomRightCorner().getX(), 1);
     return findVerticalLine(snippet, rangeForX);
 }
 
@@ -392,7 +394,8 @@ Line SOOSA::getLineModel(Samples const & samples) const
             * m_soosaConfiguration.getAcceptableLineDeviationForLineModelInPixels();
 
     LineModel lineModel;
-    double maxSquareErrorInSamples(nonAllowableSquareErrorLimit);    Samples samplesForLineModeling(samples);
+    double maxSquareErrorInSamples(nonAllowableSquareErrorLimit);
+    Samples samplesForLineModeling(samples);
     while(maxSquareErrorInSamples>=nonAllowableSquareErrorLimit && samplesForLineModeling.size() > m_soosaConfiguration.getMinimumLineSamples())
     {
         lineModel = calculateLineModelUsingLeastSquares(samplesForLineModeling);
@@ -437,7 +440,8 @@ SOOSA::VectorOfDoubles SOOSA::getAcceptableSquareErrorsUsingRetainRatio(
     unsigned int retainSize = m_soosaConfiguration.getRetainRatioForSquareErrorsInLineModel() * squareErrorToSampleMultimap.size();
     unsigned int count(0);
     for(auto const& squareErrorToSamplePair : squareErrorToSampleMultimap)
-    {        squareErrors.emplace_back(squareErrorToSamplePair.first);
+    {
+        squareErrors.emplace_back(squareErrorToSamplePair.first);
         if(count++ >= retainSize)
         {
             break;
@@ -505,7 +509,8 @@ void SOOSA::processOneColumn(
 
 void SOOSA::processColumn(
         BitmapSnippet const& snippet,
-        Line const& leftLine,        Line const& rightLine,
+        Line const& leftLine,
+        Line const& rightLine,
         Line const& topLine,
         Line const& bottomLine,
         unsigned int const columnNumber)
@@ -527,7 +532,8 @@ void SOOSA::processColumn(
         processQuestions(snippet, questionBarsOnTheLeft, questionsBarsOnTheRight, columnNumber, numberQuestionsInColumn);
     }
     else
-    {        stringstream ss;
+    {
+        stringstream ss;
         ss<< "Number of question coordinates does not match between columns. "
           << "Question bars at left line: " << questionBarsOnTheLeft.size()
           << "Question bars at right line: " << questionsBarsOnTheRight.size() << ".";
@@ -573,7 +579,8 @@ SOOSA::Answers SOOSA::getAnswersAtQuestion(
         BitmapSnippet const& snippet,
         QuestionBarCoordinate const& leftCoordinate,
         QuestionBarCoordinate const& rightCoordinate) const
-{    Answers result;
+{
+    Answers result;
     Point leftPoint = getMidpoint(leftCoordinate.first, leftCoordinate.second);
     Point rightPoint = getMidpoint(rightCoordinate.first, rightCoordinate.second);
     double leftBarHeight = getDistance(leftCoordinate.first, leftCoordinate.second);
@@ -726,7 +733,8 @@ SOOSA::OneDimensionKMeans SOOSA::getKMeansForWidths(
     return result;
 }
 
-SOOSA::PointAndWidthPairs SOOSA::getAcceptablePointAndWidthPairs(        BitmapSnippet const& snippet,
+SOOSA::PointAndWidthPairs SOOSA::getAcceptablePointAndWidthPairs(
+        BitmapSnippet const& snippet,
         Line const& line,
         Point const& startPoint,
         Point const& endPoint) const
@@ -742,7 +750,8 @@ SOOSA::PointAndWidthPairs SOOSA::getAcceptablePointAndWidthPairs(        BitmapS
 
 void SOOSA::addPointAndWidthPairIfAcceptable(
         PointAndWidthPairs & pointAndWidthPairs,
-        BitmapSnippet const& snippet,        Line const& line,
+        BitmapSnippet const& snippet,
+        Line const& line,
         Point const& pointInLine) const
 {
     Point nearestBlackPoint(getNearestBlackPointFromLine(snippet, line, pointInLine));
@@ -820,7 +829,8 @@ void SOOSA::addAndRetainWidthsIfPossible(
         for(OneDimensionKMeans::Sample const& widthSample : widthSamples)
         {
             double width(widthSample.getValueAt(0));
-            deviationToWidthMultimap.emplace(getAbsoluteValue(width - widthMean), width);        }
+            deviationToWidthMultimap.emplace(getAbsoluteValue(width - widthMean), width);
+        }
 
         unsigned int retainSize = m_soosaConfiguration.getRetainRatioForLineAndBar() * deviationToWidthMultimap.size();
         unsigned int count(0);
@@ -838,7 +848,9 @@ void SOOSA::addAndRetainWidthsIfPossible(
         kMeansForWidths.addSamples(widthSamples);
     }
 }
-void SOOSA::removeIncorrectBarPointsBasedFromHeight(        TwoDimensionKMeans & barPointKMeans,
+
+void SOOSA::removeIncorrectBarPointsBasedFromHeight(
+        TwoDimensionKMeans & barPointKMeans,
         unsigned int const numberQuestionsInColumn) const
 {
     bool continueRemoval(true);
@@ -864,7 +876,8 @@ void SOOSA::removeIncorrectBarPointsBasedFromHeight(        TwoDimensionKMeans &
                     double signedDeviation = getHeight(barPoints) - mean; // no absolute value because only positive deviation should be removed
                     if(largestDeviation == 0 || largestDeviation < signedDeviation)
                     {
-                        isFound = true;                        largestDeviation = signedDeviation;
+                        isFound = true;
+                        largestDeviation = signedDeviation;
                         indexToRemove = groupIndex;
                     }
                 }
@@ -925,6 +938,7 @@ void SOOSA::addAndRetainBarPointsIfPossible(
         }
     }
 }
+
 SOOSA::OneDimensionStatistics::Samples SOOSA::getBarHeights(
         TwoDimensionKMeans::GroupOfSamples const & groupOfGroupOfBarPoints) const
 {
@@ -946,7 +960,8 @@ double SOOSA::getHeight(TwoDimensionKMeans::Samples const& barPoints) const
 
 string SOOSA::getCsvFileName(string const& path) const
 {
-    return AlbaLocalPathHandler(path).getDirectory()+"PSS_Report_"+m_inputConfiguration.getArea()+"_"+m_inputConfiguration.getPeriod()+".csv";}
+    return AlbaLocalPathHandler(path).getDirectory()+"PSS_Report_"+m_inputConfiguration.getArea()+"_"+m_inputConfiguration.getPeriod()+".csv";
+}
 
 string SOOSA::getReportHtmlFileName(string const& path) const
 {
@@ -1104,7 +1119,8 @@ void SOOSA::saveTableToOutputHtmlFile(ofstream & reportHtmlFileStream) const
 
 bool SOOSA::isBlackAt(BitmapSnippet const& snippet, BitmapXY const bitmapXy) const
 {
-    using BitColorManip = AlbaBitManipulation<uint32_t>;    uint32_t color = snippet.getColorAt(bitmapXy);
+    using BitColorManip = AlbaBitManipulation<uint32_t>;
+    uint32_t color = snippet.getColorAt(bitmapXy);
     uint32_t minColorIntensity = min(BitColorManip::getByteAt<0>(color), min(BitColorManip::getByteAt<1>(color), BitColorManip::getByteAt<2>(color)));
 
     return minColorIntensity < m_soosaConfiguration.getColorIntensityForWhite();
