@@ -44,7 +44,8 @@ public:
 
     class Status
     {
-        Status();    public:
+        Status();
+    public:
         static Status getInstance();
         std::string getStatusString() const;
         void setError(std::string const& error);
@@ -64,7 +65,9 @@ public:
     using PointAndWidthPairs = std::vector<PointAndWidthPair>;
     using OneDimensionKMeans = KMeansClustering<1>;
     using TwoDimensionKMeans = KMeansClustering<2>;
-    using OneDimensionStatistics = DataStatistics<1>;    using DequeOfPoints = std::deque<TwoDimensions::Point>;
+    using OneDimensionStatistics = DataStatistics<1>;
+    using TwoDimensionStatistics = DataStatistics<2>;
+    using DequeOfPoints = std::deque<TwoDimensions::Point>;
 
     SOOSA(SoosaConfiguration const& soosaConfiguration, InputConfiguration const& inputConfiguration);
     unsigned int getNumberOfAnswers() const;
@@ -88,7 +91,8 @@ private:
     // find line
     TwoDimensions::Line findLeftLine(AprgBitmap::BitmapSnippet const& snippet) const;
     TwoDimensions::Line findRightLine(AprgBitmap::BitmapSnippet const& snippet) const;
-    TwoDimensions::Line findTopLine(AprgBitmap::BitmapSnippet const& snippet) const;    TwoDimensions::Line findBottomLine(AprgBitmap::BitmapSnippet const& snippet) const;
+    TwoDimensions::Line findTopLine(AprgBitmap::BitmapSnippet const& snippet) const;
+    TwoDimensions::Line findBottomLine(AprgBitmap::BitmapSnippet const& snippet) const;
     TwoDimensions::Line findVerticalLine(AprgBitmap::BitmapSnippet const& snippet, RangeOfInts const& range) const;
     TwoDimensions::Line findHorizontalLine(AprgBitmap::BitmapSnippet const& snippet, RangeOfInts const& range) const;
     TwoDimensions::Line findLeftLineUsingStartingLine(AprgBitmap::BitmapSnippet const& snippet, TwoDimensions::Line const& startingLine) const;
@@ -100,6 +104,7 @@ private:
     VectorOfDoubles getAcceptableSquareErrorsUsingRetainRatio(TwoDimensionsStatistics::ValueToSampleMultimap const& squareErrorToSampleMultimap) const;
     void updateSamplesForLineModelingFromSquareErrorToSampleMultimap(TwoDimensionsStatistics::Samples & samplesLineModeling, TwoDimensionsStatistics::ValueToSampleMultimap const& squareErrorToSampleMultimap) const;
 
+    // Column functions
     void processColumn(AprgBitmap::BitmapSnippet const& snippet, TwoDimensions::Line const& leftLine, TwoDimensions::Line const& rightLine, TwoDimensions::Line const& topLine, TwoDimensions::Line const& bottomLine, unsigned int const columnNumber);
     Answers getAnswers(AprgBitmap::BitmapSnippet const& snippet, QuestionBarCoordinate const& leftCoordinate, QuestionBarCoordinate const& rightCoordinate) const;
     bool isChoiceShaded(AprgBitmap::BitmapSnippet const& snippet, TwoDimensions::Point const& leftPoint, TwoDimensions::Point const& rightPoint, unsigned int const choiceIndex, unsigned int const radius) const;
@@ -111,8 +116,9 @@ private:
     void addPointAndWidthPairIfAcceptable(PointAndWidthPairs & pointAndWidthPairs, AprgBitmap::BitmapSnippet const& snippet, TwoDimensions::Line const& line, TwoDimensions::Point const& blackPoint) const;
     void retrieveBarPointsThatFitAndSaveToKMeans(TwoDimensionKMeans & barPointKMeans, PointAndWidthPairs const& pointsAndWidths, RangeOfDoubles const& minMaxForBar) const;
     void removeIncorrectBarPointsBasedFromHeight(TwoDimensionKMeans & barPointKMeans, unsigned int const numberQuestionsInColumn) const;
-    void saveHeightDetailsFromBarPoints(TwoDimensionKMeans::GroupOfSamples const& groupOfGroupOfBarPoints, OneDimensionStatistics::Samples & barHeights, DataCollection<double> & heightCollection) const;
+    OneDimensionStatistics::Samples getBarHeights(TwoDimensionKMeans::GroupOfSamples const& groupOfGroupOfBarPoints) const;
     void saveQuestionBarCoordinatesFromKMeansWithBarPoints(TwoDimensionKMeans const& barPointKMeans, QuestionBarCoordinates & questionBarCoordinates, unsigned int const numberQuestionsInColumn) const;
+
     // debug
 
     AprgBitmap::BitmapXY convertToBitmapXY(TwoDimensions::Point const& point) const;
