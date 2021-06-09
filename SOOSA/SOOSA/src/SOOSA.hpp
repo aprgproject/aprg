@@ -74,6 +74,7 @@ public:
     using TwoDimensionKMeans = KMeansClustering<2>;
     using OneDimensionStatistics = DataStatistics<1>;
     using TwoDimensionStatistics = DataStatistics<2>;
+    using DoubleCollection = DataCollection<double>;
     using QuestionBarCoordinate = std::pair<Point, Point>;
     using QuestionBarCoordinates = std::vector<QuestionBarCoordinate>;
     using PointAndWidthPair = std::pair<Point, double>;
@@ -82,7 +83,8 @@ public:
 
     SOOSA(SoosaConfiguration const& soosaConfiguration, InputConfiguration const& inputConfiguration);
     unsigned int getNumberOfAnswers() const;
-    unsigned int getAnswerToQuestion(unsigned int const questionNumber) const;    void process();
+    unsigned int getAnswerToQuestion(unsigned int const questionNumber) const;
+    void process();
 
 private:
 
@@ -104,11 +106,12 @@ private:
 
     // Line modeling functions
     Line getLineModel(TwoDimensionSamples const& samples) const;
-    VectorOfDoubles getAcceptableSquareErrorsUsingRetainRatio(ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap) const;
-    void updateSamplesForLineModelingFromSquareErrorToSampleMultimap(TwoDimensionSamples & samplesLineModeling, ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap) const;
+    DoubleCollection getAcceptableSquareErrorCollectionUsingRemovalRatio(ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap) const;
+    void updateSamplesForLineModeling(TwoDimensionSamples & samplesLineModeling, ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap, double const maxAcceptableSquareError) const;
 
     // Column functions
-    void processTwoColumns(BitmapSnippet const& globalSnippet, Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine);    void processOneColumn(BitmapSnippet const& globalSnippet, Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine);
+    void processTwoColumns(BitmapSnippet const& globalSnippet, Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine);
+    void processOneColumn(BitmapSnippet const& globalSnippet, Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine);
     void processColumn(BitmapSnippet const& snippet, Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine, unsigned int const columnNumber);
     void processQuestions(BitmapSnippet const& snippet, QuestionBarCoordinates const& questionBarsOnTheLeft, QuestionBarCoordinates const& questionsBarsOnTheRight, unsigned int const columnNumber, unsigned int const numberQuestionsInColumn);
     Answers getAnswersAtQuestion(BitmapSnippet const& snippet, QuestionBarCoordinate const& leftCoordinate, QuestionBarCoordinate const& rightCoordinate) const;
@@ -133,7 +136,8 @@ private:
     double getHeight(TwoDimensionSamples const& barPoints) const;
 
     // output related functions
-    std::string getCsvFileName(std::string const& path) const;    std::string getReportHtmlFileName(std::string const& path) const;
+    std::string getCsvFileName(std::string const& path) const;
+    std::string getReportHtmlFileName(std::string const& path) const;
     std::string getPrintableStringForPercentage(double const numerator, double const denominator) const;
     void setAnswerToQuestionInColumn(unsigned int const columnNumber, unsigned int const questionOffsetInColumn, unsigned int const answer);
     void saveDataToCsvFile(std::string const& processedFilePath) const;
@@ -143,6 +147,7 @@ private:
 
     // utilities
     bool isBlackAt(BitmapSnippet const& snippet, BitmapXY const bitmapXy) const;
+    unsigned int getMaximumLineAndBarWidth(BitmapSnippet const& snippet) const;
     BitmapXY convertToBitmapXY(Point const& point) const;
     BitmapXY convertToBitmapXY(TwoDimensionSample const& sample) const;
     Point convertToPoint(BitmapXY const& bitmapXY) const;
@@ -151,7 +156,8 @@ private:
     RangeOfDoubles getMinMaxRangeOfKMeansSamples(OneDimensionSamples const& samples) const;
 
     SoosaConfiguration m_soosaConfiguration;
-    InputConfiguration m_inputConfiguration;    unsigned int m_numberOfRespondents;
+    InputConfiguration m_inputConfiguration;
+    unsigned int m_numberOfRespondents;
     std::map<unsigned int, unsigned int> m_questionToAnswersMap;
     FrequencyDatabase m_frequencyDatabase;
 };

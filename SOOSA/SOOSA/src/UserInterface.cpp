@@ -26,7 +26,8 @@ void UserInterface::setPath(string const& path)
 
 void UserInterface::askUserForMainDetails()
 {
-    cout <<"Enter area:" << endl;    string area(m_userInterface.getUserInput());
+    cout <<"Enter area:" << endl;
+    string area(m_userInterface.getUserInput());
 
     cout <<"Enter period:" <<  endl;
     string period(m_userInterface.getUserInput());
