@@ -252,14 +252,15 @@ void BitmapConfiguration::readBitmap(string const& path)
     if(inputStream.is_open())
     {
         AlbaFileReader fileReader(inputStream);
-
         readBitmapFileHeader(fileReader);
-        readDibHeader(fileReader);
-        readColors(fileReader);
-        calculateOtherValuesAfterReading();
+        if(isSignatureValid()) // dont check further if its invalid
+        {
+            readDibHeader(fileReader);
+            readColors(fileReader);
+            calculateOtherValuesAfterReading();
+        }
     }
 }
-
 void BitmapConfiguration::readBitmapFileHeader(AlbaFileReader& fileReader)
 {
     fileReader.moveLocation(0);
@@ -314,11 +315,10 @@ void BitmapConfiguration::readDibHeader(AlbaFileReader& fileReader) // only supp
 void BitmapConfiguration::readColors(AlbaFileReader& fileReader)
 {
     fileReader.moveLocation(54);
-    while(fileReader.getCurrentLocation()<m_pixelArrayAddress)
+    while(fileReader.getCurrentLocation() > 0 && fileReader.getCurrentLocation() < m_pixelArrayAddress)
     {
         m_colors.push_back(fileReader.getFourByteSwappedData<uint32_t>());
-    }
-}
+    }}
 
 void BitmapConfiguration::calculateOtherValuesAfterReading()
 {
