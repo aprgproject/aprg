@@ -121,7 +121,8 @@ private:
     void saveQuestionBarCoordinatesFromKMeansWithBarPoints(QuestionBarCoordinates & questionBarCoordinates, TwoDimensionKMeans const& kMeansForBarPoints, unsigned int const numberQuestionsInColumn) const;
 
     // Widths functions
-    RangeOfDoubles getMinMaxCriteriaForBar(PointAndWidthPairs const& pointAndWidthPairs) const;    RangeOfDoubles getMinMaxCriteriaForBar(OneDimensionStatistics & firstGroupStatistics, OneDimensionStatistics & secondGroupStatistics) const;
+    RangeOfDoubles getMinMaxCriteriaForBar(PointAndWidthPairs const& pointAndWidthPairs) const;
+    RangeOfDoubles getMinMaxCriteriaForBar(OneDimensionStatistics & firstGroupStatistics, OneDimensionStatistics & secondGroupStatistics) const;
     OneDimensionKMeans getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs) const;
     PointAndWidthPairs getAcceptablePointAndWidthPairs(BitmapSnippet const& snippet, Line const& line, Point const& startPoint, Point const& endPoint) const;
     Point getNearestBlackPointFromLine(BitmapSnippet const& snippet, Line const& line, Point const& pointInLine) const;
@@ -133,6 +134,7 @@ private:
     void addAndRetainBarPointsIfPossible(TwoDimensionKMeans & kMeansForBarPoints, GroupOfTwoDimensionSamples const& listOfGroupOfBarPoints, unsigned int const indexToRemove) const;
     OneDimensionSamples getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints) const;
     double getHeight(TwoDimensionSamples const& barPoints) const;
+
     // output related functions
     std::string getCsvFileName(std::string const& path) const;
     std::string getReportHtmlFileName(std::string const& path) const;
