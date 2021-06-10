@@ -1,10 +1,9 @@
 #include "PythagoreanTripleUtilities.hpp"
 
-#include <Common/Math/AlbaMathHelper.hpp>
+#include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
 #include <Math/NumberTheory/PrimeAndFactorUtilities.hpp>
 
-using namespace alba::mathHelper;
-using namespace std;
+using namespace alba::mathHelper;using namespace std;
 
 namespace alba
 {
