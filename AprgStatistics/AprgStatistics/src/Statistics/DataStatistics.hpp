@@ -10,16 +10,15 @@
 namespace alba
 {
 
-template <unsigned int dimensions>
+template <unsigned int DIMENSIONS>
 class DataStatistics
 {
 public:
-    using Sample = DataSample<dimensions>;
+    using Sample = DataSample<DIMENSIONS>;
     using Samples = std::vector<Sample>;
-    using StatisticsUtilities = DataStatisticsUtilities<dimensions>;
+    using StatisticsUtilities = DataStatisticsUtilities<DIMENSIONS>;
     using SampleOptional = alba::AlbaOptional<Sample>;
     using DoubleOptional = alba::AlbaOptional<double>;
-
     DataStatistics()
     {}
 
@@ -38,10 +37,14 @@ public:
         m_dispersionAroundTheCentroid.clear();
     }
 
+    Samples const& getSamples() const
+    {
+        return m_samples;
+    }
+
     Sample getSum()
     {
-        calculateSumIfNeeded();
-        return m_sum.getConstReference();
+        calculateSumIfNeeded();        return m_sum.getConstReference();
     }
 
     Sample getMean()
