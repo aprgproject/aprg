@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 namespace mathHelper
 {
 
@@ -58,6 +59,7 @@ template <typename NumberType> NumberType getLogarithmForIntegers(NumberType con
 
 unsigned int getIterativeLogarithm(double const base, double const inputForLogarithm);
 int getSuperLogarithm(double const base, double const inputForLogarithm);
+
 }//namespace mathHelper
 
 }//namespace alba

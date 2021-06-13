@@ -14,7 +14,8 @@ class AlbaXYZ
 public:
 
     AlbaXYZ()
-        : x{}        , y{}
+        : x{}
+        , y{}
         , z{}
     {}
 
@@ -27,7 +28,8 @@ public:
     bool operator==(AlbaXYZ const& xyz) const
     {
         return mathHelper::isAlmostEqual(x, xyz.x)
-                && mathHelper::isAlmostEqual(y, xyz.y)                && mathHelper::isAlmostEqual(z, xyz.z);
+                && mathHelper::isAlmostEqual(y, xyz.y)
+                && mathHelper::isAlmostEqual(z, xyz.z);
     }
 
     bool operator!=(AlbaXYZ const& secondXyz) const
@@ -39,7 +41,8 @@ public:
     bool operator<(AlbaXYZ const& xyz) const // this is added so it can be used in map
     {
         bool result(false);
-        if(x < xyz.x)        {
+        if(x < xyz.x)
+        {
             result = true;
         }
         else if(x == xyz.x)
@@ -103,7 +106,8 @@ public:
     AlbaXYZ& operator-=(AlbaXYZ const& secondXyz)
     {
         x-=secondXyz.x; y-=secondXyz.y; z-=secondXyz.z;
-        return *this;    }
+        return *this;
+    }
 
     bool isEmpty() const
     {

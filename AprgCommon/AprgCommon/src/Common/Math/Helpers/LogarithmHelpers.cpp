@@ -17,7 +17,8 @@ unsigned int getIterativeLogarithm(double const base, double const inputForLogar
 
     unsigned int count(0);
     double currentLogarithm = getLogarithm(base, inputForLogarithm);
-    while(currentLogarithm >= 0 && !isAlmostEqual(currentLogarithm, 1.0) )    {
+    while(currentLogarithm >= 0 && !isAlmostEqual(currentLogarithm, 1.0) )
+    {
         count++;
         currentLogarithm = getLogarithm(base, currentLogarithm);
     }
@@ -32,7 +33,8 @@ int getSuperLogarithm(double const base, double const inputForLogarithm)
 
     int result(0);
     if(inputForLogarithm >= 0)
-    {        result = static_cast<int>(getIterativeLogarithm(base, inputForLogarithm));
+    {
+        result = static_cast<int>(getIterativeLogarithm(base, inputForLogarithm));
     }
     else
     {

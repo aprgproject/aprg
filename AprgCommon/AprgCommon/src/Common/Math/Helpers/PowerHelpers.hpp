@@ -52,7 +52,8 @@ template <typename NumberType> NumberType getRaiseToPowerForIntegers(NumberType 
     // This is always correct and faster than pow (check performance test for comparison)
 
     NumberType result(1), newBase(base), newExponent(exponent);
-    while(newExponent > 0)    {
+    while(newExponent > 0)
+    {
         if(isEven(newExponent))
         {
             newBase *= newBase;

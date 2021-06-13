@@ -24,6 +24,7 @@ template <typename NumberType> unsigned int getNumberOfDigitsOnBase(NumberType c
     }
     return result;
 }
+
 template <typename NumberType> unsigned int getNumberOfBase10Digits(NumberType const value)
 {
     static_assert(std::is_integral<NumberType>::value, "Number type must be an integer");

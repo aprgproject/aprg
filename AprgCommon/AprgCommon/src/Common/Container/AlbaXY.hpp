@@ -14,7 +14,8 @@ class AlbaXY
 public:
 
     AlbaXY()
-        : x{}        , y{}
+        : x{}
+        , y{}
     {}
 
     AlbaXY(CoordinateType const& xValue, CoordinateType const& yValue)
@@ -36,7 +37,8 @@ public:
     bool operator<(AlbaXY const& xy) const // this is added so it can be used in map
     {
         bool result(false);
-        if(x < xy.x)        {
+        if(x < xy.x)
+        {
             result = true;
         }
         else if(x == xy.x)
@@ -85,7 +87,8 @@ public:
     AlbaXY& operator-=(AlbaXY const& secondXy)
     {
         x-=secondXy.x; y-=secondXy.y;
-        return *this;    }
+        return *this;
+    }
 
     bool isEmpty() const
     {

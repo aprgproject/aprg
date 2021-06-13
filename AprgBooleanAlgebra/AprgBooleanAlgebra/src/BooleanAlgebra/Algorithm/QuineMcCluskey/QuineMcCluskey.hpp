@@ -170,7 +170,8 @@ public:
     Implicants getBestFinalImplicants(Implicants const& finalImplicants) const
     {
         // Specialized selection
-        Implicants result;        SetOfMinterms inputMintermsWithTrue(getSetOfInputMintermsWithTrue());
+        Implicants result;
+        SetOfMinterms inputMintermsWithTrue(getSetOfInputMintermsWithTrue());
 
         while(!inputMintermsWithTrue.empty())
         {
@@ -222,7 +223,8 @@ public:
                 result.addImplicant(bestFinalImplicant);
             }
         }
-        return result;    }
+        return result;
+    }
 
     std::string getOutputTable(Implicants const& finalImplicants) const
     {

@@ -2,6 +2,7 @@
 #include <Common/Randomizer/AlbaRandomizer.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba
@@ -73,7 +74,8 @@ TEST(PowerHelpersTest, GetRaiseToPowerForIntegersUsingPowWorks)
 
 TEST(PowerHelpersTest, IsPerfectSquareForAlbaNumberWorks)
 {
-    EXPECT_TRUE(isPerfectSquare(AlbaNumber(0)));    EXPECT_TRUE(isPerfectSquare(AlbaNumber(1)));
+    EXPECT_TRUE(isPerfectSquare(AlbaNumber(0)));
+    EXPECT_TRUE(isPerfectSquare(AlbaNumber(1)));
     EXPECT_FALSE(isPerfectSquare(AlbaNumber(3)));
     EXPECT_TRUE(isPerfectSquare(AlbaNumber(4)));
     EXPECT_TRUE(isPerfectSquare(AlbaNumber(100)));

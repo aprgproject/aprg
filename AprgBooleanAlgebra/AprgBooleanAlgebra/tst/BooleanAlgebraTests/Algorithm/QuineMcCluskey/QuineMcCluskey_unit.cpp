@@ -167,7 +167,8 @@ TEST(QuineMcCluskeyTest, GetImplicantsWithTwoCommonalityCounts)
 TEST(QuineMcCluskeyTest, GetAllFinalImplicantsAndGetBestFinalImplicantsWorks)
 {
     QuineMcCluskeyForTest quineMcCluskey;
-    quineMcCluskey.setInputOutput(4, LogicalValue::True);    quineMcCluskey.setInputOutput(8, LogicalValue::True);
+    quineMcCluskey.setInputOutput(4, LogicalValue::True);
+    quineMcCluskey.setInputOutput(8, LogicalValue::True);
     quineMcCluskey.setInputOutput(9, LogicalValue::DontCare);
     quineMcCluskey.setInputOutput(10, LogicalValue::True);
     quineMcCluskey.setInputOutput(11, LogicalValue::True);
@@ -189,7 +190,8 @@ TEST(QuineMcCluskeyTest, GetAllFinalImplicantsAndGetBestFinalImplicantsWorks)
     cout<<quineMcCluskey.getOutputTable(bestFinalImplicants);
 }
 
-TEST(QuineMcCluskeyTest, DISABLED_ExperimentalTest) //{
+TEST(QuineMcCluskeyTest, DISABLED_ExperimentalTest) //
+{
     QuineMcCluskeyForTest quineMcCluskey;
     quineMcCluskey.setInputOutput(2, LogicalValue::True);
     quineMcCluskey.setInputOutput(3, LogicalValue::DontCare);
@@ -219,7 +221,8 @@ TEST(QuineMcCluskeyTest, DISABLED_ExperimentalTest) //{
     cout<<quineMcCluskey.getOutputTable(bestFinalImplicants);
 }
 
-namespace{
+namespace
+{
 
 void setInputOutput(QuineMcCluskeyForTest & quineMcCluskey, MintermForTest const input, string const& output)
 {
@@ -281,7 +284,8 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFileWorks_HasZeroInDigitForBy
     cout<<quineMcCluskey.getOutputTable(bestFinalImplicants);
 }
 
-TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_LogarithmBase2ForByte){
+TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_LogarithmBase2ForByte)
+{
     QuineMcCluskeyForTest qm0;
     QuineMcCluskeyForTest qm1;
     QuineMcCluskeyForTest qm2;

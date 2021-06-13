@@ -27,7 +27,8 @@ public:
     double getLineBarWidthSearchAcceptedRunningBlackRatio() const;
     double getAcceptableDistanceOverWidthRatioFromWidthMidpoint() const;
     unsigned int getAcceptableMinimumDistanceFromWidthMidpoint() const;
-    double getAcceptableSdOverMeanDeviationForLine() const;    double getAcceptableSdOverMeanDeviationForBar() const;
+    double getAcceptableSdOverMeanDeviationForLine() const;
+    double getAcceptableSdOverMeanDeviationForBar() const;
     double getRemovalRatioForLineAndBar() const;
     double getAcceptableSdOverMeanDeviationForBarHeight() const;
     double getRemovalRatioForBarHeight() const;
@@ -56,7 +57,8 @@ private:
     double m_lineBarWidthSearchAcceptedRunningBlackRatio;
     double m_acceptableDistanceOverWidthRatioFromWidthMidpoint;
     unsigned int m_acceptableMinimumDistanceFromWidthMidpoint;
-    double m_acceptableSdOverMeanDeviationForLine;    double m_acceptableSdOverMeanDeviationForBar;
+    double m_acceptableSdOverMeanDeviationForLine;
+    double m_acceptableSdOverMeanDeviationForBar;
     double m_removalRatioForLineAndBar;
     double m_acceptableSdOverMeanDeviationForBarHeight;
     double m_removalRatioForBarHeight;

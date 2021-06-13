@@ -34,7 +34,8 @@ public:
     std::string getQuestionAt(unsigned int const questionIndex) const;
     std::string getFormDetailsTitle() const;
     std::string getPath() const;
-    std::string getArea() const;    std::string getPeriod() const;
+    std::string getArea() const;
+    std::string getPeriod() const;
     double getDischarge() const;
     void setPath(std::string const& path);
     void setMainParameters(std::string const& area, std::string const& period, double const discharge, unsigned int const minimumSatisfactoryScore);

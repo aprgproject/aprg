@@ -66,7 +66,8 @@ unsigned int InputConfiguration::getQuestionIndexInColumn(unsigned int const col
     return questionIndex;
 }
 
-unsigned int InputConfiguration::getMinimumSatisfactoryScore() const{
+unsigned int InputConfiguration::getMinimumSatisfactoryScore() const
+{
     return m_minimumSatisfactoryScore;
 }
 
@@ -79,6 +80,7 @@ string InputConfiguration::getQuestionAt(unsigned int const questionIndex) const
     }
     return question;
 }
+
 string InputConfiguration::getFormDetailsTitle() const
 {
     return m_formDetails.title;

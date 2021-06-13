@@ -34,7 +34,8 @@ namespace
 Implicants getBestFinalImplicantsUsingQuineMcCluskey(
         Term const& term,
         VariableNamesSet const& variableNames)
-{    unsigned int numberOfBits = variableNames.size();
+{
+    unsigned int numberOfBits = variableNames.size();
     QuineMcCluskey qmc;
     SubstitutionOfVariablesToValues substitution;
     for(Minterm minterm=0; minterm<static_cast<Minterm>(1<<numberOfBits); minterm++)
@@ -58,7 +59,8 @@ Implicants getBestFinalImplicantsUsingQuineMcCluskey(
     return bestFinalImplicants;
 }
 
-void simplifyAndCopyTermsFromAnExpressionAndChangeOperatorLevelIfNeeded(        WrappedTerms & newWrappedTerms,
+void simplifyAndCopyTermsFromAnExpressionAndChangeOperatorLevelIfNeeded(
+        WrappedTerms & newWrappedTerms,
         OperatorLevel & mainOperatorLevel,
         Expression const& subExpression)
 {
@@ -190,7 +192,8 @@ void simplifyByQuineMcKluskey(Term & term)
                 string bitString(bestFinalImplicant.getEquivalentString(variableNames.size()));
                 unsigned int i = variableNames.size()-1;
                 for(string const& variableName : variableNames)
-                {                    char primeBit(bitString.at(i));
+                {
+                    char primeBit(bitString.at(i));
                     implicantExpression.putTerm(getTermFromVariableAndPrimeBit(variableName, primeBit), targetInner); // if "outer and" "inner or", its the saved as dual
                     i--;
                 }
