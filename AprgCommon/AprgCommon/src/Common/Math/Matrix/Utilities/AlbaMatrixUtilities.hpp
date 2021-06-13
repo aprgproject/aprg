@@ -143,11 +143,10 @@ AlbaMatrix<DataType> multiplyMatrices(
 
     assert(first.getNumberOfColumns() == second.getNumberOfRows());
 
-    AlbaMatrix<DataType> result(first.getNumberOfRows(), second.getNumberOfColumns());
+    AlbaMatrix<DataType> result(second.getNumberOfColumns(), first.getNumberOfRows());
     ListOfAlbaMatrixData<DataType> rowsOfFirstMatrix, columnsOfSecondMatrix;
     first.retrieveRows(rowsOfFirstMatrix);
-    second.retrieveColumns(columnsOfSecondMatrix);
-    unsigned int y=0;
+    second.retrieveColumns(columnsOfSecondMatrix);    unsigned int y=0;
     for(AlbaMatrixData<DataType> const& rowOfFirstMatrix : rowsOfFirstMatrix)
     {
         unsigned int x=0;

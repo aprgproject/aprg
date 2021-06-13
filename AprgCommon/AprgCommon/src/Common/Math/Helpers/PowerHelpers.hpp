@@ -45,10 +45,16 @@ template <typename NumberType> inline bool isPerfectNthPower(NumberType const va
     return isAlmostAnInteger<double, NumberType>(pow(value, static_cast<double>(1)/nthPower));
 }
 
-template <typename NumberType> NumberType getRaiseToPowerForIntegers(NumberType const base, NumberType const exponent)
+template <typename NumberType> inline NumberType get2ToThePowerOf(NumberType const exponent)
 {
     static_assert(std::is_integral<NumberType>::value, "Number type must be an integer");
 
+    return AlbaBitValueUtilities<NumberType>::get2ToThePowerOf(exponent);
+}
+
+template <typename NumberType> NumberType getRaiseToPowerForIntegers(NumberType const base, NumberType const exponent)
+{
+    static_assert(std::is_integral<NumberType>::value, "Number type must be an integer");
     // This is always correct and faster than pow (check performance test for comparison)
 
     NumberType result(1), newBase(base), newExponent(exponent);
@@ -68,10 +74,9 @@ template <typename NumberType> NumberType getRaiseToPowerForIntegers(NumberType 
     return result;
 }
 
-template <typename NumberType> NumberType getRaiseToPowerForIntegersUsingPow(NumberType const base, NumberType const exponent)
+template <typename NumberType> inline NumberType getRaiseToPowerForIntegersUsingPow(NumberType const base, NumberType const exponent)
 {
     static_assert(std::is_integral<NumberType>::value, "Number type must be an integer");
-
     // this is slower (by not too much, check performance test)
 
     return static_cast<int>(ceil(pow(base, exponent)));

@@ -206,11 +206,10 @@ TEST(AlbaMatrixTest, OperatorMinusWorks)
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
 
-TEST(AlbaMatrixTest, OperatorMultiplyWorks_MatrixCanBeMultipliedWithConstantValue)
+TEST(AlbaMatrixTest, OperatorMultiplyWorks_WithMatrixAndConstant)
 {
     AlbaMatrix<unsigned int> matrix(2, 3,
-    {1, 2,
-     3, 4,
+    {1, 2,     3, 4,
      5, 6});
 
     AlbaMatrix<unsigned int> matrixToVerify(matrix*2);
@@ -222,41 +221,23 @@ TEST(AlbaMatrixTest, OperatorMultiplyWorks_MatrixCanBeMultipliedWithConstantValu
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
 
-TEST(AlbaMatrixTest, OperatorMultiplyWorks_MatrixCanBeMultipliedWithAnotherMatrix)
+TEST(AlbaMatrixTest, OperatorMultiplyWorks_WithMatrixAndMatrix)
 {
-    AlbaMatrix<int> matrix1(3, 2,
-    {1, 2, -1,
-     3, 1,  4});
-    AlbaMatrix<int> matrix2(2, 3,
-    {-2, 5,
-      4,-3,
-      2, 1});
-
-    AlbaMatrix<int> matrixToVerify(matrix1*matrix2);
-
-    AlbaMatrix<int> expectedMatrix(2, 2,
-    { 4, -2,
-      6, 16});
-    EXPECT_EQ(expectedMatrix, matrixToVerify);
-}
-
-TEST(AlbaMatrixTest, OperatorMultiplyWorksWithExample1)
-{
-    AlbaMatrix<unsigned int> matrix1(2, 2,
-    {2, 3,
-     4, 5});
-    AlbaMatrix<unsigned int> matrix2(2, 2,
-    {1, 2,
-     7, 0});
+    AlbaMatrix<unsigned int> matrix1(3, 2,
+    {1, 2, 3,
+     4, 5, 6});
+    AlbaMatrix<unsigned int> matrix2(4, 3,
+    {1, 2, 3, 4,
+     5, 6, 7, 8,
+     9, 10, 11, 12});
 
     AlbaMatrix<unsigned int> matrixToVerify(matrix1*matrix2);
 
-    AlbaMatrix<unsigned int> expectedMatrix(2, 2,
-    {23,  4,
-     39,  8});
+    AlbaMatrix<unsigned int> expectedMatrix(4, 2,
+    {38, 44, 50, 56,
+     83, 98, 113, 128});
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
-
 TEST(AlbaMatrixTest, OperatorPlusAssignmentWorks)
 {
     AlbaMatrix<unsigned int> matrix(2, 3,
@@ -293,11 +274,10 @@ TEST(AlbaMatrixTest, OperatorMinusAssignmentWorks)
     EXPECT_EQ(expectedMatrix, matrix1);
 }
 
-TEST(AlbaMatrixTest, OperatorMultiplyAssignmentWorks_MatrixCanBeMultipliedWithConstantValue)
+TEST(AlbaMatrixTest, OperatorMultiplyAssignmentWorks_WithMatrixAndConstant)
 {
     AlbaMatrix<unsigned int> matrix(2, 3,
-    {1, 2,
-     3, 4,
+    {1, 2,     3, 4,
      5, 6});
 
     matrix *= 2;
@@ -309,24 +289,23 @@ TEST(AlbaMatrixTest, OperatorMultiplyAssignmentWorks_MatrixCanBeMultipliedWithCo
     EXPECT_EQ(expectedMatrix, matrix);
 }
 
-TEST(AlbaMatrixTest, OperatorMultiplyAssignmentWorks_MatrixCanBeMultipliedWithAnotherMatrix)
+TEST(AlbaMatrixTest, OperatorMultiplyAssignmentWorks_WithMatrixAndMatrix)
 {
-    AlbaMatrix<int> matrix1(3, 2,
-    {1, 2, -1,
-     3, 1,  4});
-    AlbaMatrix<int> matrix2(2, 3,
-    {-2, 5,
-      4,-3,
-      2, 1});
+    AlbaMatrix<unsigned int> matrix1(3, 2,
+    {1, 2, 3,
+     4, 5, 6});
+    AlbaMatrix<unsigned int> matrix2(4, 3,
+    {1, 2, 3, 4,
+     5, 6, 7, 8,
+     9, 10, 11, 12});
 
     matrix1 *= matrix2;
 
-    AlbaMatrix<int> expectedMatrix(2, 2,
-    { 4, -2,
-      6, 16});
+    AlbaMatrix<unsigned int> expectedMatrix(4, 2,
+    {38, 44, 50, 56,
+     83, 98, 113, 128});
     EXPECT_EQ(expectedMatrix, matrix1);
 }
-
 TEST(AlbaMatrixTest, IsInsideTheMatrixWorks)
 {
     AlbaMatrix<unsigned int> matrix(14, 6);

@@ -1,8 +1,9 @@
 #pragma once
 
+#include <Common/Bit/AlbaBitValueUtilities.hpp>
+
 #include <cmath>
 #include <type_traits>
-
 namespace alba
 {
 
@@ -22,10 +23,16 @@ inline double getLogarithm(double const base, double const inputForLogarithm)
     return log10(inputForLogarithm)/log10(base);
 }
 
-template <typename NumberType> NumberType getLogarithmForIntegers(NumberType const base, NumberType const inputForLogarithm)
+template <typename NumberType> inline NumberType getLogarithmWithBase2Of(NumberType const value)
 {
     static_assert(std::is_integral<NumberType>::value, "Number type must be an integer");
 
+    return AlbaBitValueUtilities<NumberType>::getLogarithmWithBase2Of(value);
+}
+
+template <typename NumberType> NumberType getLogarithmForIntegers(NumberType const base, NumberType const inputForLogarithm)
+{
+    static_assert(std::is_integral<NumberType>::value, "Number type must be an integer");
     // This is always correct and faster than pow (check performance test for comparison)
 
     NumberType result(0);
