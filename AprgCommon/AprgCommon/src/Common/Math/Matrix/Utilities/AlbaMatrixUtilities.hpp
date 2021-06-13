@@ -64,10 +64,20 @@ bool isSingular(AlbaMatrix<DataType> const& matrix) // means the its non inverti
 }
 
 template <typename DataType>
+AlbaMatrix<DataType> getIdentityMatrix(unsigned int const sideSize)
+{
+    AlbaMatrix<DataType> resultMatrix(sideSize, sideSize);
+    for(unsigned int i=0; i<sideSize; i++)
+    {
+        resultMatrix.setEntry(i, i, 1);
+    }
+    return resultMatrix;
+}
+
+template <typename DataType>
 AlbaMatrix<DataType> doUnaryOperation(
         AlbaMatrix<DataType> const& inputMatrix,
-        UnaryFunction<DataType> const& unaryFunction)
-{
+        UnaryFunction<DataType> const& unaryFunction){
     AlbaMatrix<DataType> resultMatrix(inputMatrix.getNumberOfColumns(), inputMatrix.getNumberOfRows());
     inputMatrix.iterateAllThroughYAndThenX([&](unsigned int const x, unsigned int const y)
     {
@@ -93,10 +103,34 @@ AlbaMatrix<DataType> doBinaryOperationWithSameDimensions(
 }
 
 template <typename DataType>
+void doUnaryAssignmentOperation(
+        AlbaMatrix<DataType> & inputOutputMatrix,
+        UnaryFunction<DataType> const& unaryFunction)
+{
+    inputOutputMatrix.iterateAllThroughYAndThenX([&](unsigned int const x, unsigned int const y)
+    {
+        inputOutputMatrix.setEntry(x, y, unaryFunction(inputOutputMatrix.getEntry(x, y)));
+    });
+}
+
+template <typename DataType>
+void doBinaryAssignmentOperationWithSameDimensions(
+        AlbaMatrix<DataType> & firstMatrix,
+        AlbaMatrix<DataType> const& secondMatrix,
+        BinaryFunction<DataType> const& binaryFunction)
+{
+    assert((firstMatrix.getNumberOfColumns() == secondMatrix.getNumberOfColumns()) &&
+           (firstMatrix.getNumberOfRows() == secondMatrix.getNumberOfRows()));
+    firstMatrix.iterateAllThroughYAndThenX([&](unsigned int const x, unsigned int const y)
+    {
+        firstMatrix.setEntry(x, y, binaryFunction(firstMatrix.getEntry(x, y), secondMatrix.getEntry(x, y)));
+    });
+}
+
+template <typename DataType>
 void interchangeRows(
         AlbaMatrix<DataType> & matrix,
-        unsigned int const y1,
-        unsigned int const y2)
+        unsigned int const y1,        unsigned int const y2)
 {
     unsigned int numberOfRows(matrix.getNumberOfRows());
     unsigned int numberOfColumns(matrix.getNumberOfColumns());

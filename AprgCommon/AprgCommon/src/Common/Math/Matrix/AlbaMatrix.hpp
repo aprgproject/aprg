@@ -1,10 +1,10 @@
 #pragma once
 
 #include <Common/Container/AlbaValueRange.hpp>
+#include <Common/Math/Helpers/DivisibilityHelpers.hpp>
 #include <Common/Math/Matrix/AlbaMatrixDataTypes.hpp>
 #include <Common/Math/Matrix/Utilities/AlbaMatrixUtilities.hpp>
-#include <Common/Math/Matrix/Utilities/GaussJordanReduction.hpp>
-#include <Common/User/DisplayTable.hpp>
+#include <Common/Math/Matrix/Utilities/GaussJordanReduction.hpp>#include <Common/User/DisplayTable.hpp>
 
 #include <cassert>
 #include <functional>
@@ -16,12 +16,11 @@ namespace alba
 namespace matrix
 {
 
-template <typename DataType>
-bool isEqualForMathMatrixDataType(DataType const& value1, DataType const& value2);
+template <typename DataType> bool isEqualForMathMatrixDataType(DataType const& value1, DataType const& value2);
+template <typename DataType> AlbaMatrix<DataType> getIdentityMatrix(unsigned int const sideSize);
 
 template <typename DataType>
-class AlbaMatrix
-{
+class AlbaMatrix{
 public:
     using MatrixData = AlbaMatrixData<DataType>;
     using ListOfMatrixData = ListOfAlbaMatrixData<DataType>;
@@ -107,10 +106,13 @@ public:
 
     AlbaMatrix operator*(AlbaMatrix const& secondMatrix) const //matrix multiplication
     {
+        // Using a straightforward algorithm, we can calculate the product of two nxn matrices in O(n^3) time.
+        // There are also more efficient algorithms for matrix multiplication,
+        // but they are mostly of theoretical interest and such algorithms are not practical.
+
         assert(m_numberOfColumns == secondMatrix.m_numberOfRows);
         AlbaMatrix result(m_numberOfRows, secondMatrix.m_numberOfColumns);
-        ListOfMatrixData rowsOfFirstMatrix;
-        ListOfMatrixData columnsOfSecondMatrix;
+        ListOfMatrixData rowsOfFirstMatrix;        ListOfMatrixData columnsOfSecondMatrix;
         retrieveRows(rowsOfFirstMatrix);
         secondMatrix.retrieveColumns(columnsOfSecondMatrix);
         unsigned int y=0;
@@ -127,10 +129,35 @@ public:
         return result;
     }
 
+    AlbaMatrix& operator+=(AlbaMatrix const& secondMatrix)
+    {
+        doBinaryAssignmentOperationWithSameDimensions(*this, secondMatrix, BinaryFunction<DataType>(std::plus<DataType>()));
+        return *this;
+    }
+
+    AlbaMatrix& operator-=(AlbaMatrix const& secondMatrix)
+    {
+        doBinaryAssignmentOperationWithSameDimensions(*this, secondMatrix, BinaryFunction<DataType>(std::minus<DataType>()));
+        return *this;
+    }
+
+    AlbaMatrix& operator*=(DataType const& scalarMultiplier)
+    {
+        std::function<DataType(DataType const&)> scalarMultiplication = std::bind(std::multiplies<DataType>(), std::placeholders::_1, scalarMultiplier);
+        doUnaryAssignmentOperation(*this, scalarMultiplication);
+        return *this;
+    }
+
+    AlbaMatrix& operator*=(AlbaMatrix const& secondMatrix)
+    {
+        AlbaMatrix & self(*this);
+        self = self * secondMatrix;
+        return self;
+    }
+
     bool isInside(unsigned int const x, unsigned int const y) const
     {
-        return (x < m_numberOfColumns) && (y < m_numberOfRows);
-    }
+        return (x < m_numberOfColumns) && (y < m_numberOfRows);    }
 
     unsigned int getNumberOfColumns() const
     {
@@ -317,10 +344,32 @@ public:
         });
     }
 
+    void raiseToScalarPower(unsigned int const exponent)
+    {
+        assert((m_numberOfColumns == m_numberOfRows));
+
+        AlbaMatrix result(getIdentityMatrix<DataType>(m_numberOfColumns));
+        AlbaMatrix newBase(*this);
+        unsigned int newExponent(exponent);
+        while(newExponent > 0)
+        {
+            if(mathHelper::isEven(newExponent))
+            {
+                newBase *= newBase;
+                newExponent /= 2;
+            }
+            else
+            {
+                result *= newBase;
+                newExponent--;
+            }
+        }
+        return result;
+    }
+
     void iterateAllThroughYAndThenX(LoopFunction const& loopFunction) const
     {
-        for(unsigned int y=0; y<m_numberOfRows; y++)
-        {
+        for(unsigned int y=0; y<m_numberOfRows; y++)        {
             for(unsigned int x=0; x<m_numberOfColumns; x++)
             {
                 loopFunction(x, y);
