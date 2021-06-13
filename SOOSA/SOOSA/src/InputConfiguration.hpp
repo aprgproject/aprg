@@ -28,14 +28,13 @@ public:
     unsigned int getNumberOfColumns() const;
     unsigned int getNumberOfQuestions() const;
     unsigned int getNumberOfQuestionsAtColumn(unsigned int const column) const;
-    unsigned int getQuestionNumberInColumn(unsigned int const columnNumber, unsigned int const questionOffsetInColumn) const;
+    unsigned int getQuestionIndexInColumn(unsigned int const columnNumber, unsigned int const questionOffsetInColumn) const;
     unsigned int getMinimumSatisfactoryScore() const;
 
-    std::string getQuestionAt(unsigned int const questionNumber) const;
+    std::string getQuestionAt(unsigned int const questionIndex) const;
     std::string getFormDetailsTitle() const;
     std::string getPath() const;
-    std::string getArea() const;
-    std::string getPeriod() const;
+    std::string getArea() const;    std::string getPeriod() const;
     double getDischarge() const;
     void setPath(std::string const& path);
     void setMainParameters(std::string const& area, std::string const& period, double const discharge, unsigned int const minimumSatisfactoryScore);
