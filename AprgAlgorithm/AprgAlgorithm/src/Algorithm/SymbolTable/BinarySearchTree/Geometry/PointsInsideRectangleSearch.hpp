@@ -1,11 +1,10 @@
 #pragma once
 
 #include <Algorithm/SymbolTable/BinarySearchTree/Geometry/KdTree.hpp>
-#include <Common/Math/AlbaMathHelper.hpp>
+#include <Common/Math/Helpers/DivisibilityHelpers.hpp>
 
 
-namespace alba
-{
+namespace alba{
 
 namespace algorithm
 {
