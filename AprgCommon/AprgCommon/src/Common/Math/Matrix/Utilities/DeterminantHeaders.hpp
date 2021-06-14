@@ -8,14 +8,18 @@ namespace alba
 namespace matrix
 {
 
-template <typename DataType> unsigned int getBestIndexForCoFactorExpansion(ListOfAlbaMatrixData<DataType> const& rowsAndColumns);
+template <typename DataType> unsigned int getIndexWithHighestNumberOfZeros(
+        ListOfAlbaMatrixData<DataType> const& rowsAndColumns);
 
-template <typename DataType> DataType getDeterminant(AlbaMatrix<DataType> const& matrix);
+template <typename DataType> unsigned int getIndexWithHighestNumberOfNonZeros(
+        ListOfAlbaMatrixData<DataType> const& rowsAndColumns);
+
+template <typename DataType> DataType getDeterminant(
+        AlbaMatrix<DataType> const& matrix);
 
 template <typename DataType>
 DataType getValueUsingCramerRule(
-        AlbaMatrix<DataType> const& matrix,
-        unsigned int const columnIndex,
+        AlbaMatrix<DataType> const& matrix,        unsigned int const columnIndex,
         AlbaMatrixData<DataType> const& newColumnValues);
 
 template <typename DataType>
