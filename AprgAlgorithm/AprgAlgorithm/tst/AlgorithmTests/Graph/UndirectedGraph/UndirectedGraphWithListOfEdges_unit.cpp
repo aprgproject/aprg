@@ -111,10 +111,14 @@ TEST(UndirectedGraphWithListOfEdgesTest, ClearWorks)
     testClearWithVertexAsUnsignedInt<GraphForTest>();
 }
 
+TEST(UndirectedGraphWithListOfEdgesTest, GraphWorksAfterClear)
+{
+    testGraphWorksAfterClearWithVertexAsUnsignedInt<GraphForTest>();
+}
+
 TEST(UndirectedGraphWithListOfEdgesTest, ComplicatedTestWorks)
 {
-    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();
-}
+    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();}
 
 TEST(UndirectedGraphWithListOfEdgesTest, GetDisplayableStringWorks)
 {

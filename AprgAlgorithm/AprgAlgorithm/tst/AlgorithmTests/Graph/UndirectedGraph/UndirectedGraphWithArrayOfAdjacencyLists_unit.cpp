@@ -111,10 +111,14 @@ TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, ClearWorks)
     testClearWithVertexAsUnsignedInt<GraphForTest>();
 }
 
+TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, GraphWorksAfterClear)
+{
+    testGraphWorksAfterClearWithVertexAsUnsignedInt<GraphForTest>();
+}
+
 TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, ComplicatedTestWorks)
 {
-    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();
-}
+    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();}
 
 TEST(UndirectedGraphWithArrayOfAdjacencyListsTest, GetDisplayableStringWorks)
 {
