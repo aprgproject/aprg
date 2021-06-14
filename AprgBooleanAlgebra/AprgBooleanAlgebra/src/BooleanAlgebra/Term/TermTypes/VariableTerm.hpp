@@ -14,14 +14,15 @@ namespace booleanAlgebra
 class VariableTerm : public BaseTermData
 {
 public:
+
     VariableTerm();
     VariableTerm(std::string const& variableName);
-    VariableTerm(std::string const& variableName, bool const isNegated);
+
+    static VariableTerm createNegatedVariableTerm(std::string const& variableName);
 
     bool operator==(VariableTerm const& second) const;
     bool operator!=(VariableTerm const& second) const;
     bool operator<(VariableTerm const& second) const;
-
     VariableTerm operator~() const;
 
     bool isNegated() const;
@@ -33,10 +34,10 @@ public:
     void negate();
 
 private:
+    void initialize();
     std::string m_variableName;
     bool m_isNegated;
 };
-
 using VariableTerms = std::vector<VariableTerm>;
 
 std::ostream & operator<<(std::ostream & out, VariableTerm const& variableTerm);

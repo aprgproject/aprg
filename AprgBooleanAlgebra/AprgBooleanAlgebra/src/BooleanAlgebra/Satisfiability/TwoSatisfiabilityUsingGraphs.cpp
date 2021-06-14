@@ -23,11 +23,10 @@ bool TwoSatisfiabilityUsingGraphs::hasSolution() const
 {
     bool isAVariableAndItsNegationConnected = any_of(m_variableNames.cbegin(), m_variableNames.cend(), [&](string const& variableName)
     {
-            return m_connectedComponents.isConnected(VariableTerm(variableName), VariableTerm(variableName, true));
+            return m_connectedComponents.isConnected(VariableTerm(variableName), VariableTerm::createNegatedVariableTerm(variableName));
 });
     return !isAVariableAndItsNegationConnected;
 }
-
 Term TwoSatisfiabilityUsingGraphs::getSolution() const
 {
     using VertexOrdering = VertexOrderingUsingDfs<VariableTerm>;

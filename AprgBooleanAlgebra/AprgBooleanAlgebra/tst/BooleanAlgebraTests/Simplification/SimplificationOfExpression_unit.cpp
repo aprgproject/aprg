@@ -252,11 +252,10 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksBySortingTermsInOrOperationInD
 
 TEST(SimplificationOfExpressionTest, SimplifyWorksByComplimentaryTermsInAndOperation)
 {
-    Expression expressionToTest(createExpressionIfPossible({"x", "&", VariableTerm("x", true)}));
+    Expression expressionToTest(createExpressionIfPossible({"x", "&", "x'"}));
     SimplificationOfExpression simplification(expressionToTest);
 
     simplification.simplify();
-
     Expression expressionToVerify(simplification.getExpression());
     Expression expressionToExpect(createAndWrapExpressionFromATerm(false));
     EXPECT_EQ(expressionToExpect, expressionToVerify);
@@ -264,11 +263,10 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByComplimentaryTermsInAndOpera
 
 TEST(SimplificationOfExpressionTest, SimplifyWorksByComplimentaryTermsInOrOperation)
 {
-    Expression expressionToTest(createExpressionIfPossible({"x", "|", VariableTerm("x", true)}));
+    Expression expressionToTest(createExpressionIfPossible({"x", "|", "x'"}));
     SimplificationOfExpression simplification(expressionToTest);
 
     simplification.simplify();
-
     Expression expressionToVerify(simplification.getExpression());
     Expression expressionToExpect(createAndWrapExpressionFromATerm(true));
     EXPECT_EQ(expressionToExpect, expressionToVerify);
@@ -283,10 +281,9 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByWithOuterOrAndInnerAnd)
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
     Expression subExpression1(createExpressionIfPossible({"x", "|", "y"}));
-    Expression subExpression2(createExpressionIfPossible({VariableTerm("x", true), "|", "z"}));
+    Expression subExpression2(createExpressionIfPossible({"x'", "|", "z"}));
     Expression expressionToTest(createExpressionIfPossible({subExpression1, "&", subExpression2}));
     SimplificationOfExpression simplification(expressionToTest);
-
     simplification.simplify();
 
     string stringToVerify(simplification.getExpression().getDisplayableString());
@@ -302,11 +299,10 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksWithOuterAndAndInnerOr)
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
-    Expression subExpression1(createExpressionIfPossible({VariableTerm("x", true), "|", "y"}));
+    Expression subExpression1(createExpressionIfPossible({"x'", "|", "y"}));
     Expression subExpression2(createExpressionIfPossible({"x", "|", "z"}));
     Expression expressionToTest(createExpressionIfPossible({subExpression1, "&", subExpression2}));
     SimplificationOfExpression simplification(expressionToTest);
-
     simplification.simplify();
 
     string stringToVerify(simplification.getExpression().getDisplayableString());
@@ -382,10 +378,9 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByRemovingNeededTerms_WithOute
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
-    Expression subExpression1(createExpressionIfPossible({"x", "|", VariableTerm("y", true)}));
+    Expression subExpression1(createExpressionIfPossible({"x", "|", "y'"}));
     Expression expressionToTest(createExpressionIfPossible({subExpression1, "&", "y"}));
     SimplificationOfExpression simplification(expressionToTest);
-
     simplification.simplify();
 
     Expression expressionToVerify(simplification.getExpression());
@@ -401,10 +396,9 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByRemovingNeededTerms_WithOute
     SimplificationOfExpression::ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
-    Expression subExpression1(createExpressionIfPossible({"x", "&", VariableTerm("y", true)}));
+    Expression subExpression1(createExpressionIfPossible({"x", "&", "y'"}));
     Expression expressionToTest(createExpressionIfPossible({subExpression1, "|", "y"}));
     SimplificationOfExpression simplification(expressionToTest);
-
     simplification.simplify();
 
     Expression expressionToVerify(simplification.getExpression());
@@ -415,10 +409,9 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByRemovingNeededTerms_WithOute
 TEST(SimplificationOfExpressionTest, SimplifyWorksWithCombininingTermsByCheckingTheCommonFactor_Pattern1)
 {
     Expression subExpression1(createExpressionIfPossible({"x", "&", "y"}));
-    Expression subExpression2(createExpressionIfPossible({"x", "&", VariableTerm("y", true)}));
+    Expression subExpression2(createExpressionIfPossible({"x", "&", "y'"}));
     Expression expressionToTest(createExpressionIfPossible({subExpression1, "|", subExpression2}));
     SimplificationOfExpression simplification(expressionToTest);
-
     simplification.simplify();
 
     Expression expressionToVerify(simplification.getExpression());
@@ -429,10 +422,9 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksWithCombininingTermsByChecking
 TEST(SimplificationOfExpressionTest, SimplifyWorksWithCombininingTermsByCheckingTheCommonFactor_Pattern2)
 {
     Expression subExpression1(createExpressionIfPossible({"x", "|", "y"}));
-    Expression subExpression2(createExpressionIfPossible({"x", "|", VariableTerm("y", true)}));
+    Expression subExpression2(createExpressionIfPossible({"x", "|", "y'"}));
     Expression expressionToTest(createExpressionIfPossible({subExpression1, "&", subExpression2}));
     SimplificationOfExpression simplification(expressionToTest);
-
     simplification.simplify();
 
     Expression expressionToVerify(simplification.getExpression());
@@ -476,10 +468,9 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnConsensusTheoremPattern1)
 
     Expression subExpression1(createExpressionIfPossible({"x", "&", "y"}));
     Expression subExpression2(createExpressionIfPossible({"y", "&", "z"}));
-    Expression subExpression3(createExpressionIfPossible({VariableTerm("x", true), "&", "z"}));
+    Expression subExpression3(createExpressionIfPossible({"x'", "&", "z"}));
     Expression expressionToTest(createExpressionIfPossible({subExpression1, "|", subExpression2, "|", subExpression3}));
     SimplificationOfExpression simplification(expressionToTest);
-
     simplification.simplify();
 
     string stringToVerify(simplification.getExpression().getDisplayableString());
@@ -497,10 +488,9 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnConsensusTheoremPattern2)
 
     Expression subExpression1(createExpressionIfPossible({"x", "|", "y"}));
     Expression subExpression2(createExpressionIfPossible({"y", "|", "z"}));
-    Expression subExpression3(createExpressionIfPossible({VariableTerm("x", true), "|", "z"}));
+    Expression subExpression3(createExpressionIfPossible({"x'", "|", "z"}));
     Expression expressionToTest(createExpressionIfPossible({subExpression1, "&", subExpression2, "&", subExpression3}));
     SimplificationOfExpression simplification(expressionToTest);
-
     simplification.simplify();
 
     string stringToVerify(simplification.getExpression().getDisplayableString());
