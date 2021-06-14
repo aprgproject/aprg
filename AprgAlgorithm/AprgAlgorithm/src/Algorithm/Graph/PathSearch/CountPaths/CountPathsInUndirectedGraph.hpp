@@ -44,11 +44,10 @@ private:
             {
                 CheckableVerticesWithVertex processingVertices;
                 processingVertices.putVertex(start);
-                traverseUsingDfs(start, start, processingVertices);
+                traverseUsingDfs(start, start, processingVertices); // complete DFS search, to count all paths starting from this vertex
                 result = m_pathCounts.at({start, end});
             }
-        }
-        return result;
+        }        return result;
     }
 
     void traverseUsingDfs(Vertex const& start, Vertex const& current, CheckableVerticesWithVertex & processingVertices)
