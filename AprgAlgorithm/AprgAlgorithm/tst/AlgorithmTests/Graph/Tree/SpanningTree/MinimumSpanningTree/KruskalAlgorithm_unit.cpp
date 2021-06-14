@@ -1,5 +1,5 @@
 #include <Algorithm/Graph/EdgeWeightedGraph/EdgeWeightedGraph.hpp>
-#include <Algorithm/Graph/MinimumSpanningTree/KruskalAlgorithm.hpp>
+#include <Algorithm/Graph/Tree/SpanningTree/MinimumSpanningTree/KruskalAlgorithm.hpp>
 #include <Algorithm/Graph/UndirectedGraph/UndirectedGraphWithListOfEdges.hpp>
 
 #include <gtest/gtest.h>
