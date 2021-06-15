@@ -1,4 +1,4 @@
-#include <Algorithm/Graph/Tree/SpanningTree/CountSpanningTrees.hpp>
+#include <Algorithm/Graph/Tree/SpanningTree/CountSpanningTreesUsingKirchhoffTheorem.hpp>
 #include <Algorithm/Graph/UndirectedGraph/UndirectedGraphWithListOfEdges.hpp>
 
 #include <gtest/gtest.h>
@@ -13,10 +13,10 @@ namespace
 {
 using VertexForTest = unsigned int;
 using UndirectedGraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
-using CountTrees = CountSpanningTrees<VertexForTest>;
+using CountTrees = CountSpanningTreesUsingKirchhoffTheorem<VertexForTest>;
 }
 
-TEST(CountSpanningTreesTest, GetCountWorks)
+TEST(CountSpanningTreesUsingKirchhoffTheoremTest, GetCountWorks)
 {
     UndirectedGraphForTest graph;
     graph.connect(1U, 2U);

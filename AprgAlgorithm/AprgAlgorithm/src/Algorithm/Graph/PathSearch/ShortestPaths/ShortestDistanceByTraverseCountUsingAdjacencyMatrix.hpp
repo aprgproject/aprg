@@ -14,10 +14,14 @@ template <typename Vertex, typename Weight, typename EdgeWeightedGraph>
 class ShortestDistanceByTraverseCountUsingAdjacencyMatrix
 {
 public:
+    // Using a similar idea in a weighted graph, we can calculate for each pair of nodes the minimum length of a path
+    // between them that contains exactly n edges.
+    // To calculate this, we have to define matrix multiplication in a new way,
+    // so that we do not calculate the numbers of paths but minimize the lengths of paths.
+
     using AdjacencyMatrix = matrix::AlbaMatrix<bool>;
     using DistanceEntry = AlbaNumber;
     using DistancetMatrix = matrix::AlbaMatrix<DistanceEntry>;
-
     ShortestDistanceByTraverseCountUsingAdjacencyMatrix(
             EdgeWeightedGraph const& graph,
             unsigned int const traverseCount)
@@ -39,10 +43,10 @@ private:
         DistancetMatrix initialDistanceMatrix(adjacencyMatrix.getNumberOfColumns(), adjacencyMatrix.getNumberOfRows());
         adjacencyMatrix.iterateAllThroughYAndThenX([&](unsigned int const x, unsigned int const y)
         {
+            // Let us construct an adjacency matrix where INFINITY means that an edge does not exist, and other values correspond to edge weights.
             AlbaNumber entryValue = adjacencyMatrix.getEntry(x, y) ?
                         AlbaNumber(graph.getWeight(x, y)) : AlbaNumber(AlbaNumber::Value::PositiveInfinity);
-            initialDistanceMatrix.setEntry(x, y, entryValue);
-        });
+            initialDistanceMatrix.setEntry(x, y, entryValue);        });
         return transformMultipleTimes(initialDistanceMatrix, traverseCount);
     }
 
@@ -80,10 +84,12 @@ private:
     {
         assert(first.getNumberOfColumns() == second.getNumberOfRows());
 
+        // For matrix multiplication, so we calculate a minimum instead of a sum, and a sum of elements instead of a product.
+        // After this modification, matrix powers correspond to shortest paths in the graph.
+
         DistancetMatrix result(second.getNumberOfColumns(), first.getNumberOfRows());
         DistancetMatrix::ListOfMatrixData rowsOfFirstMatrix, columnsOfSecondMatrix;
-        first.retrieveRows(rowsOfFirstMatrix);
-        second.retrieveColumns(columnsOfSecondMatrix);
+        first.retrieveRows(rowsOfFirstMatrix);        second.retrieveColumns(columnsOfSecondMatrix);
         unsigned int y=0;
         for(DistancetMatrix::MatrixData const& rowOfFirstMatrix : rowsOfFirstMatrix)
         {

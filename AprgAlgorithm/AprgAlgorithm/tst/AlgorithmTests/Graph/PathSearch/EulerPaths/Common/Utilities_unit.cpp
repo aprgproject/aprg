@@ -1,5 +1,5 @@
 #include <Algorithm/Graph/DirectedGraph/DirectedGraphWithListOfEdges.hpp>
-#include <Algorithm/Graph/PathSearch/EulerPath/Common/Utilities.hpp>
+#include <Algorithm/Graph/PathSearch/EulerPaths/Common/Utilities.hpp>
 #include <Algorithm/Graph/UndirectedGraph/UndirectedGraphWithListOfEdges.hpp>
 
 #include <gtest/gtest.h>

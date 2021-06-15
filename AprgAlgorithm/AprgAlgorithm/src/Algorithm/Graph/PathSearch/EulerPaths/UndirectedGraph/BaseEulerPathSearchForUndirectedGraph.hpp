@@ -1,8 +1,8 @@
 #pragma once
 
 #include <Algorithm/Graph/Types/GraphTypes.hpp>
-#include <Algorithm/Graph/DirectedGraph/BaseDirectedGraph.hpp>
-#include <Algorithm/Graph/PathSearch/EulerPath/Common/Utilities.hpp>
+#include <Algorithm/Graph/PathSearch/EulerPaths/Common/Utilities.hpp>
+#include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 #include <Algorithm/Graph/Utilities/GraphUtilities.hpp>
 
 #include <string>
@@ -14,28 +14,28 @@ namespace algorithm
 {
 
 template <typename Vertex>
-class BaseEulerPathSearchForDirectedGraph
+class BaseEulerPathSearchForUndirectedGraph
 {
 public:
-    using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
+    using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Path = typename GraphTypes<Vertex>::Path;
 
-    BaseEulerPathSearchForDirectedGraph(BaseDirectedGraphWithVertex const& graph)
+    BaseEulerPathSearchForUndirectedGraph(BaseUndirectedGraphWithVertex const& graph)
         : m_graph(graph)
     {}
 
-    virtual ~BaseEulerPathSearchForDirectedGraph()
+    virtual ~BaseEulerPathSearchForUndirectedGraph()
     {}
 
     bool hasEulerCycle() const
     {
-        return hasEulerCycleForDirectedGraph(m_graph);
+        return hasEulerCycleForUndirectedGraph(m_graph);
     }
 
     bool hasEulerPath() const
     {
-        return hasEulerPathForDirectedGraph(m_graph);
+        return hasEulerPathForUndirectedGraph(m_graph);
     }
 
     // An Euler circuit is a circuit that uses every edge in a graph with no repeats. Being a circuit, it must start and end at the same vertex.
@@ -76,7 +76,7 @@ protected:
         return result;
     }
 
-    BaseDirectedGraphWithVertex const& m_graph;
+    BaseUndirectedGraphWithVertex const& m_graph;
 };
 
 }

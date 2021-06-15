@@ -1,6 +1,6 @@
-#include <Algorithm/Graph/PathSearch/EulerPath/UndirectedGraph/EulerPathSearchForUndirectedGraphUsingDfs.hpp>
+#include <Algorithm/Graph/PathSearch/EulerPaths/UndirectedGraph/EulerPathSearchForUndirectedGraphUsingDfs.hpp>
 #include <Algorithm/Graph/UndirectedGraph/UndirectedGraphWithListOfEdges.hpp>
-#include <AlgorithmTests/Graph/PathSearch/EulerPath/UndirectedGraph/Utilities/CommonTestsWithEulerPathForUndirectedGraph.hpp>
+#include <AlgorithmTests/Graph/PathSearch/EulerPaths/UndirectedGraph/Utilities/CommonTestsWithEulerPathForUndirectedGraph.hpp>
 
 #include <gtest/gtest.h>
 
