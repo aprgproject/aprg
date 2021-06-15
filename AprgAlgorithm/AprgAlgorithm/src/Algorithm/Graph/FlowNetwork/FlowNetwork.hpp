@@ -3,6 +3,7 @@
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Algorithm/Graph/Types/GraphTypes.hpp>
 #include <Algorithm/Graph/Utilities/SortedEdge.hpp>
+
 #include <algorithm>
 #include <sstream>
 

@@ -100,7 +100,8 @@ TEST(SimplificationUtilitiesTest, CombineComplementaryTermsWorks)
     Terms termsToTest4{"a", "b'", "x", "c", "d'", "x'", "e", "f'"};
 
     combineComplementaryTerms(termsToTest1, OperatorLevel::And);
-    combineComplementaryTerms(termsToTest2, OperatorLevel::Or);    combineComplementaryTerms(termsToTest3, OperatorLevel::And);
+    combineComplementaryTerms(termsToTest2, OperatorLevel::Or);
+    combineComplementaryTerms(termsToTest3, OperatorLevel::And);
     combineComplementaryTerms(termsToTest4, OperatorLevel::Or);
 
     EXPECT_EQ((Terms{false}), termsToTest1);
@@ -109,7 +110,8 @@ TEST(SimplificationUtilitiesTest, CombineComplementaryTermsWorks)
     EXPECT_EQ((Terms{"a", "b'", true, "c", "d'", "e", "f'"}), termsToTest4);
 }
 
-TEST(SimplificationUtilitiesTest, CombineTermsByCheckingCommonFactorWorks){
+TEST(SimplificationUtilitiesTest, CombineTermsByCheckingCommonFactorWorks)
+{
     Term xAndY(createExpressionIfPossible({"x", "&", "y"}));
     Term xOrY(createExpressionIfPossible({"x", "|", "y"}));
     Terms termsToTest1{"x", xAndY};
@@ -122,7 +124,8 @@ TEST(SimplificationUtilitiesTest, CombineTermsByCheckingCommonFactorWorks){
     Terms termsToTest8{"a", "b'", "x", "c", "d'", xOrY, "e", "f'"};
 
     combineTermsByCheckingCommonFactor(termsToTest1, OperatorLevel::And);
-    combineTermsByCheckingCommonFactor(termsToTest2, OperatorLevel::Or);    combineTermsByCheckingCommonFactor(termsToTest3, OperatorLevel::And);
+    combineTermsByCheckingCommonFactor(termsToTest2, OperatorLevel::Or);
+    combineTermsByCheckingCommonFactor(termsToTest3, OperatorLevel::And);
     combineTermsByCheckingCommonFactor(termsToTest4, OperatorLevel::Or);
     combineTermsByCheckingCommonFactor(termsToTest5, OperatorLevel::And);
     combineTermsByCheckingCommonFactor(termsToTest6, OperatorLevel::Or);
@@ -139,7 +142,8 @@ TEST(SimplificationUtilitiesTest, CombineTermsByCheckingCommonFactorWorks){
     EXPECT_EQ((Terms{"a", "b'", xOrY, "c", "d'", "e", "f'"}), termsToTest8);
 }
 
-TEST(SimplificationUtilitiesTest, CombineTwoTermsByCheckingCommonFactorIfPossibleWorks){
+TEST(SimplificationUtilitiesTest, CombineTwoTermsByCheckingCommonFactorIfPossibleWorks)
+{
     Term xAndY(createExpressionIfPossible({"x", "&", "y"}));
     Term xOrY(createExpressionIfPossible({"x", "|", "y"}));
 

@@ -1,10 +1,10 @@
 #pragma once
 
 #include <Common/Math/Helpers/LogarithmHelpers.hpp>
-#include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/Math/Helpers/PowerHelpers.hpp>
 
 #include <functional>
+
 namespace alba
 {
 
@@ -26,6 +26,7 @@ public:
     // Calculate the answer separately for both parts and then efficiently combine the answers.
 
     // Examples of such queries are minimum and maximum, greatest common divisor, and bit operations and, or and xor.
+
     using Index = unsigned int;
     using Value = typename Values::value_type;
     using Function = std::function<Value(Value const&, Value const&)>;
@@ -100,7 +101,7 @@ private:
     {
         if(!valuesToCheck.empty())
         {
-            Index parentSize = getChildrenRaiseToPower(getCielOfLogarithmOfChildren(valuesToCheck.size()))-1;
+            Index parentSize = getChildrenRaiseToPower(getCeilOfLogarithmOfChildren(valuesToCheck.size()))-1;
             Index totalSize = parentSize + valuesToCheck.size();
 
             m_treeValues.resize(totalSize);
@@ -137,13 +138,14 @@ private:
         return mathHelper::isEven(treeIndex);
     }
 
-    Index getParent(Index const treeIndex) const    {
+    Index getParent(Index const treeIndex) const
+    {
         return ((treeIndex+1)/NUMBER_OF_CHILDREN)-1;
     }
 
-    Index getCielOfLogarithmOfChildren(Index const index) const
+    Index getCeilOfLogarithmOfChildren(Index const index) const
     {
-        return mathHelper::getIntegerAfterCeilingOfDoubleValue<Index>(mathHelper::getLogarithm(NUMBER_OF_CHILDREN, index));
+        return mathHelper::getCeilOfLogarithmForIntegers(NUMBER_OF_CHILDREN, index);
     }
 
     Index getChildrenRaiseToPower(Index const index) const
@@ -151,7 +153,8 @@ private:
         return mathHelper::getRaiseToPowerForIntegers(NUMBER_OF_CHILDREN, index);
     }
 
-    Index m_startOfChildren;    Values m_treeValues;
+    Index m_startOfChildren;
+    Values m_treeValues;
     Function m_function;
 };
 

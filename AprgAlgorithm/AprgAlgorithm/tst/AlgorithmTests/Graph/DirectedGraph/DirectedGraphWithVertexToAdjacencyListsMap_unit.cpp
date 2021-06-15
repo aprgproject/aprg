@@ -108,7 +108,8 @@ TEST(DirectedGraphWithVertexToAdjacencyListsMapTest, GraphWorksAfterClear)
 
 TEST(DirectedGraphWithVertexToAdjacencyListsMapTest, ReverseDirectionsWorks)
 {
-    testReverseDirectionsWithVertexAsUnsignedInt<GraphForTest>();}
+    testReverseDirectionsWithVertexAsUnsignedInt<GraphForTest>();
+}
 
 TEST(DirectedGraphWithVertexToAdjacencyListsMapTest, ComplicatedTestWorks)
 {

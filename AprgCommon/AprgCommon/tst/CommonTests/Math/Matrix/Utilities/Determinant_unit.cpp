@@ -29,7 +29,8 @@ TEST(DeterminantTest, GetIndexWithHighestNumberOfNonZerosWorks)
 
 TEST(DeterminantTest, GetDeterminantWorks)
 {
-    AlbaMatrix<int> matrix1(1, 1, {5});    AlbaMatrix<int> matrix2(2, 2,
+    AlbaMatrix<int> matrix1(1, 1, {5});
+    AlbaMatrix<int> matrix2(2, 2,
     {2, -1,
      3,  2});
     AlbaMatrix<int> matrix3(3, 3,

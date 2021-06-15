@@ -4,7 +4,8 @@
 #include <Common/Math/Helpers/DivisibilityHelpers.hpp>
 
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {

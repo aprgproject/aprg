@@ -118,7 +118,8 @@ TEST(UndirectedGraphWithVertexToAdjacencyListsMapTest, GraphWorksAfterClear)
 
 TEST(UndirectedGraphWithVertexToAdjacencyListsMapTest, ComplicatedTestWorks)
 {
-    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();}
+    testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();
+}
 
 TEST(UndirectedGraphWithVertexToAdjacencyListsMapTest, GetDisplayableStringWorks)
 {

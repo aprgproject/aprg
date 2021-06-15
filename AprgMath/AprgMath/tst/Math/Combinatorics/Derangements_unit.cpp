@@ -34,6 +34,7 @@ TEST(DerangementsTest, GetNumberOfDerangementsApproximationWorks)
     EXPECT_EQ(1334961U, getNumberOfDerangementsApproximation(10U));
     EXPECT_EQ(481066515734U, getNumberOfDerangementsApproximation(15U)); // still accurate even at 15
 }
+
 TEST(DerangementsTest, GetDerangementsProbabilityWorks)
 {
     EXPECT_DOUBLE_EQ(0, getDerangementsProbability(0U));

@@ -55,6 +55,7 @@ template <typename NumberType> inline NumberType get2ToThePowerOf(NumberType con
 template <typename NumberType> NumberType getRaiseToPowerForIntegers(NumberType const base, NumberType const exponent)
 {
     static_assert(std::is_integral<NumberType>::value, "Number type must be an integer");
+
     // This is always correct and faster than pow (check performance test for comparison)
 
     NumberType result(1), newBase(base), newExponent(exponent);
@@ -77,6 +78,7 @@ template <typename NumberType> NumberType getRaiseToPowerForIntegers(NumberType 
 template <typename NumberType> inline NumberType getRaiseToPowerForIntegersUsingPow(NumberType const base, NumberType const exponent)
 {
     static_assert(std::is_integral<NumberType>::value, "Number type must be an integer");
+
     // this is slower (by not too much, check performance test)
 
     return static_cast<int>(ceil(pow(base, exponent)));

@@ -20,6 +20,7 @@ TEST(ValueCheckingHelpersTest, WillHaveNoEffectOnAndOperationWorksWithTerm)
     EXPECT_FALSE(willHaveNoEffectOnAndOperation(Term("x'")));
     EXPECT_TRUE(willHaveNoEffectOnAndOperation(Term(Expression())));
 }
+
 TEST(ValueCheckingHelpersTest, WillHaveNoEffectOnAndOperationWorksWithExpression)
 {
     EXPECT_TRUE(willHaveNoEffectOnAndOperation(Expression()));
@@ -37,6 +38,7 @@ TEST(ValueCheckingHelpersTest, WillHaveNoEffectOnOrOperationWorksWithTerm)
     EXPECT_FALSE(willHaveNoEffectOnOrOperation(Term("x'")));
     EXPECT_TRUE(willHaveNoEffectOnOrOperation(Term(Expression())));
 }
+
 TEST(ValueCheckingHelpersTest, WillHaveNoEffectOnOrOperationWorksWithExpression)
 {
     EXPECT_TRUE(willHaveNoEffectOnOrOperation(Expression()));

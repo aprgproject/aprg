@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include <type_traits>
+
 namespace alba
 {
 
@@ -33,6 +34,7 @@ template <typename NumberType> inline NumberType getLogarithmWithBase2Of(NumberT
 template <typename NumberType> NumberType getLogarithmForIntegers(NumberType const base, NumberType const inputForLogarithm)
 {
     static_assert(std::is_integral<NumberType>::value, "Number type must be an integer");
+
     // This is always correct and faster than pow (check performance test for comparison)
 
     NumberType result(0);

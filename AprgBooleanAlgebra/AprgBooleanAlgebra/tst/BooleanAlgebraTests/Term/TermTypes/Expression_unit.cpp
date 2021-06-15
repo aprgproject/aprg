@@ -140,6 +140,7 @@ TEST(ExpressionTest, NotOperationWorks)
 
     EXPECT_EQ(expressionToExpect, ~expressionToTest);
 }
+
 TEST(ExpressionTest, IsEmptyWorks)
 {
     Expression expression1;
@@ -706,6 +707,7 @@ TEST(ExpressionTest, SortWorks)
     {"x", "&", "x'", "&", "y", "&", "z"}));
     EXPECT_EQ(expressionToExpect, expression);
 }
+
 TEST(ExpressionTest, NegateWorks)
 {
     Expression expression(createExpressionIfPossible(
@@ -717,6 +719,7 @@ TEST(ExpressionTest, NegateWorks)
     {"x'", "|", "x", "|", "y'", "|", "z'"}));
     EXPECT_EQ(expressionToExpect, expression);
 }
+
 TEST(ExpressionTest, SetAsSimplifiedWorks)
 {
     Expression expression;

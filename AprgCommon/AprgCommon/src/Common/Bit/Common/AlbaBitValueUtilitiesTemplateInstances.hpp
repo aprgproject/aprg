@@ -57,7 +57,8 @@ constexpr inline unsigned int getNumberOfConsecutiveZerosFromMsbFromHalfSize(Bit
 
     using BitHalfTypeUtilities = AlbaBitValueUtilities<BitHalfType>;
 
-    constexpr unsigned int halfSize = BitHalfTypeUtilities::getNumberOfBits();    unsigned int result = BitHalfTypeUtilities::getNumberOfConsecutiveZerosFromMsb(static_cast<BitHalfType>(value >> halfSize));
+    constexpr unsigned int halfSize = BitHalfTypeUtilities::getNumberOfBits();
+    unsigned int result = BitHalfTypeUtilities::getNumberOfConsecutiveZerosFromMsb(static_cast<BitHalfType>(value >> halfSize));
     if(result == halfSize)
     {
         result += BitHalfTypeUtilities::getNumberOfConsecutiveZerosFromMsb(static_cast<BitHalfType>(value));
@@ -73,7 +74,8 @@ constexpr inline unsigned int getNumberOfConsecutiveZerosFromLsbFromHalfSize(Bit
 
     using BitHalfTypeUtilities = AlbaBitValueUtilities<BitHalfType>;
 
-    constexpr unsigned int halfSize = BitHalfTypeUtilities::getNumberOfBits();    unsigned int result = BitHalfTypeUtilities::getNumberOfConsecutiveZerosFromLsb(static_cast<BitHalfType>(value));
+    constexpr unsigned int halfSize = BitHalfTypeUtilities::getNumberOfBits();
+    unsigned int result = BitHalfTypeUtilities::getNumberOfConsecutiveZerosFromLsb(static_cast<BitHalfType>(value));
     if(result == halfSize)
     {
         result += BitHalfTypeUtilities::getNumberOfConsecutiveZerosFromLsb(static_cast<BitHalfType>(value >> halfSize));

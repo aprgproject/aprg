@@ -104,6 +104,7 @@ public:
         result  = result > 0 ? result-1 : 0;
         return result;
     }
+
     static constexpr inline DataTypeToManipulate getOnesComplement(DataTypeToManipulate const value)
     {
         static_assert(std::is_integral<DataTypeToManipulate>::value, "DataTypeToManipulate must be an integer");

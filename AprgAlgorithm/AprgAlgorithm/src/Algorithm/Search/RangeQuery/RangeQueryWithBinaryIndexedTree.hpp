@@ -3,6 +3,7 @@
 #include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
 
 #include <functional>
+
 namespace alba
 {
 
@@ -124,7 +125,8 @@ private:
         return mathHelper::getGreatestPowerOf2Factor(index);
     }
 
-    Values m_valuesToCheck;    Values m_partialTreeSums;
+    Values m_valuesToCheck;
+    Values m_partialTreeSums;
     AccumulatorFunction m_accumulator;
     AccumulatorFunction m_inverseAccumulator;
 };

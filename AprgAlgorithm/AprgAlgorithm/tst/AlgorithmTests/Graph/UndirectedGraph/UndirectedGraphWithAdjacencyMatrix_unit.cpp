@@ -121,7 +121,8 @@ TEST(UndirectedGraphWithAdjacencyMatrixTest, ComplicatedTestWorks)
     testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();
 }
 
-TEST(UndirectedGraphWithAdjacencyMatrixTest, GetDisplayableStringWorks){
+TEST(UndirectedGraphWithAdjacencyMatrixTest, GetDisplayableStringWorks)
+{
     UndirectedGraphWithAdjacencyMatrix<unsigned int, 3> graph;
 
     graph.connect(0U, 1U);

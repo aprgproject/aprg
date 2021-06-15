@@ -25,7 +25,8 @@ TEST(TermTypesOperatorsTest, UnaryNotOperator_NotVariableTermOperationWorks)
     EXPECT_EQ(Term("x'"), term);
 }
 
-TEST(TermTypesOperatorsTest, UnaryNotOperator_NotExpressionOperationWorks){
+TEST(TermTypesOperatorsTest, UnaryNotOperator_NotExpressionOperationWorks)
+{
     Term term(~createExpressionIfPossible({false}));
 
     EXPECT_EQ(Term(createExpressionIfPossible({true})), term);
