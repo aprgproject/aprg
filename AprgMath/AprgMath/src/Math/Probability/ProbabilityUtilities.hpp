@@ -11,9 +11,11 @@ namespace alba
 namespace math
 {
 
+using ValueAndProbabilityPair = std::pair<AlbaNumber, AlbaNumber>;
+using ValueAndProbabilityPairs = std::vector<ValueAndProbabilityPair>;
+
 AlbaNumber getCorrectProbability(AlbaNumber const& probability);
 AlbaNumber getProbability(UnsignedInteger const numberOfDesiredOutcome, UnsignedInteger const totalNumberOfOutcomes);
-
 AlbaNumber getComplementOfProbability(AlbaNumber const& probability);
 
 AlbaNumber getUnionOfProbabilitiesOfDisjointEvents(
@@ -37,6 +39,20 @@ AlbaNumber getIntersectionOfProbabilities(
 AlbaNumber getConditionalProbabilityOfEventAGivenThatEventBHappened(
         AlbaNumber const& probabilityOfEventB,
         AlbaNumber const& probabilityOfEventAAndEventB);
+
+AlbaNumber getExpectedValue(
+        ValueAndProbabilityPairs const& allValueAndProbabilityPairsOfX);
+
+AlbaNumber getExpectedValueInUniformDistribution(
+        AlbaNumber const& firstValue,
+        AlbaNumber const& secondValue);
+
+AlbaNumber getExpectedValueInBinomialDistribution(
+        AlbaNumber const& probability,
+        UnsignedInteger const n);
+
+AlbaNumber getExpectedValueInGeometricDistribution(
+        AlbaNumber const& probability);
 
 }
 
