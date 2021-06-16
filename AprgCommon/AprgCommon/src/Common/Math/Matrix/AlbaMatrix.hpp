@@ -27,11 +27,11 @@ public:
     using LoopWithValueFunction = std::function<void(unsigned int const x, unsigned int const y, DataType const& value)>;
     using MatrixIndexRange = AlbaValueRange<unsigned int>;
 
-    // Do we have to make rows and columns as template parameter? No, its better to have this on runtime because matrix can have different dimensions on applications.
+    // Do we have to make rows and columns as template parameter?
+    // No, its better to have this on runtime because matrix can have different dimensions on applications.
     AlbaMatrix()
         : m_numberOfColumns(0)
-        , m_numberOfRows(0)
-    {}
+        , m_numberOfRows(0)    {}
 
     AlbaMatrix(
             unsigned int const numberOfColumns,

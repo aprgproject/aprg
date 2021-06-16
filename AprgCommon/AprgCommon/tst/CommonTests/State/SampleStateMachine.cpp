@@ -1,11 +1,7 @@
 #include "SampleStateMachine.hpp"
 
-using namespace std;
-using namespace std::placeholders;
-
 namespace alba
 {
-
 namespace FakeStateMachine
 {
 
