@@ -17,7 +17,8 @@ class HierholzerAlgorithmForUndirectedGraph
         : public BaseHierholzerAlgorithm<Vertex, BaseUndirectedGraph<Vertex>, BaseEulerPathSearchForUndirectedGraph<Vertex>>
 {
 public:
-    using BaseClass = BaseHierholzerAlgorithm<Vertex, BaseUndirectedGraph<Vertex>, BaseEulerPathSearchForUndirectedGraph<Vertex>>;    using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
+    using BaseClass = BaseHierholzerAlgorithm<Vertex, BaseUndirectedGraph<Vertex>, BaseEulerPathSearchForUndirectedGraph<Vertex>>;
+    using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Path = typename GraphTypes<Vertex>::Path;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;

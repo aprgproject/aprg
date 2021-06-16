@@ -31,7 +31,8 @@ public:
     // No, its better to have this on runtime because matrix can have different dimensions on applications.
     AlbaMatrix()
         : m_numberOfColumns(0)
-        , m_numberOfRows(0)    {}
+        , m_numberOfRows(0)
+    {}
 
     AlbaMatrix(
             unsigned int const numberOfColumns,
