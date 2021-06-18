@@ -9,6 +9,7 @@
 
 namespace alba
 {
+
 namespace math
 {
 
@@ -20,6 +21,7 @@ using SetOfUnsignedIntegers = std::set<UnsignedInteger>;
 using UnsignedIntegerUnaryFunction = std::function<UnsignedInteger(UnsignedInteger const)>;
 using UnsignedIntegerBinaryFunction = std::function<UnsignedInteger(UnsignedInteger const, UnsignedInteger const)>;
 using UnsignedIntegerMatrix = alba::matrix::AlbaMatrix<UnsignedInteger>;
+
 using SignedInteger = long long;
 using SignedIntegers = std::vector<SignedInteger>;
 
