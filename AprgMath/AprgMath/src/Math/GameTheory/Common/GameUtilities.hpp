@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Math/GameTheory/GameState.hpp>
+#include <Math/GameTheory/Common/GameState.hpp>
 
 namespace alba
 {

@@ -1,5 +1,5 @@
 #include <Algorithm/Graph/DirectedGraph/DirectedGraphWithAdjacencyMatrix.hpp>
-#include <Math/GameTheory/GameWithGraph.hpp>
+#include <Math/GameTheory/SpecificGames/GameWithGraph.hpp>
 
 #include <gtest/gtest.h>
 

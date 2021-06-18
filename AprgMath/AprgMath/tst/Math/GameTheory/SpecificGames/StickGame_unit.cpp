@@ -1,4 +1,4 @@
-#include <Math/GameTheory/StickGame.hpp>
+#include <Math/GameTheory/SpecificGames/StickGame.hpp>
 
 #include <gtest/gtest.h>
 

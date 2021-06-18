@@ -46,6 +46,7 @@ void GameWithGraph::initialize()
     GraphToManipulate graphWithReverseDirections(createGraphWithReverseDirections(m_stateMachine));
     algorithm::VertexOrderingUsingDfs<State> vertexOrdering(graphWithReverseDirections);
     States statesInTopologicalOrder(vertexOrdering.getVerticesInTopologicalOrder());
+    // topological sort only works when this one final losing state
 
     if(!statesInTopologicalOrder.empty())
     {
