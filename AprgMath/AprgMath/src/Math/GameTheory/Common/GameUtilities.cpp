@@ -1,7 +1,5 @@
 #include "GameUtilities.hpp"
 
-#include <Common/Debug/AlbaDebug.hpp>
-
 using namespace std;
 
 namespace alba
