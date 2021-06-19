@@ -16,10 +16,18 @@ GameWithMaze::GameWithMaze(BooleanMatrix const& isBlockedMatrix)
     : m_isBlockedMatrix(isBlockedMatrix)
 {}
 
+bool GameWithMaze::hasNoMoves(Coordinate const& coordinate) const
+{
+    Coordinate oneLeft(coordinate.first-1, coordinate.second);
+    Coordinate oneUp(coordinate.first, coordinate.second-1);
+    bool isLeftNotAllowed = !m_isBlockedMatrix.isInside(oneLeft.first, oneLeft.second) || m_isBlockedMatrix.getEntry(oneLeft.first, oneLeft.second);
+    bool isUpAllowed = !m_isBlockedMatrix.isInside(oneUp.first, oneUp.second) || m_isBlockedMatrix.getEntry(oneUp.first, oneUp.second);
+    return isLeftNotAllowed && isUpAllowed;
+}
+
 UnsignedInteger GameWithMaze::getGrundyNumberAt(
         Coordinate const& coordinate)
-{
-    UnsignedInteger result{};
+{    UnsignedInteger result{};
     if(!m_isBlockedMatrix.getEntry(coordinate.first, coordinate.second))
     {
         auto it = m_coordinateToGrundyNumberMap.find(coordinate);
@@ -42,11 +50,10 @@ GameState GameWithMaze::getGameStateAt(
     return getGameStateFromGrundyNumber(getGrundyNumberAt(coordinate));
 }
 
-GameWithMaze::Coordinate GameWithMaze::getOptimalNextVertexAt(
+GameWithMaze::Coordinate GameWithMaze::getOptimalNextCoordinateAt(
         Coordinate const& coordinate)
 {
-    Coordinate result{};
-    GameState gameState = getGameStateFromGrundyNumber(getGrundyNumberAt(coordinate));
+    Coordinate result{};    GameState gameState = getGameStateFromGrundyNumber(getGrundyNumberAt(coordinate));
     if(GameState::Losing == gameState)
     {
         Coordinate oneLeft(coordinate.first-1, coordinate.second);
@@ -76,10 +83,25 @@ GameWithMaze::Coordinate GameWithMaze::getOptimalNextVertexAt(
     return result;
 }
 
+GameWithMaze::Coordinate GameWithMaze::getNextCoordinateWithGrundyNumber(
+        Coordinate const& coordinate,
+        UnsignedInteger const& targetGrundyNumber)
+{
+    Coordinate result{};
+    for(Coordinate const& nextCoordinate : getNextCoordinates(coordinate))
+    {
+        if(targetGrundyNumber == getGrundyNumberAt(nextCoordinate))
+        {
+            result = nextCoordinate;
+            break;
+        }
+    }
+    return result;
+}
+
 string GameWithMaze::getString()
 {
-    DisplayTable table;
-    table.setBorders("-","|");
+    DisplayTable table;    table.setBorders("-","|");
     for(unsigned int y=0; y<m_isBlockedMatrix.getNumberOfRows(); y++)
     {
         table.addRow();
