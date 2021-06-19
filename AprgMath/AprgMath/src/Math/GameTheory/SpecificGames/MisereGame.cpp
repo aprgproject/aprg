@@ -66,7 +66,8 @@ NimState MisereGame::getOptimalNextState(NimState const& inputNimState)
         UnsignedInteger nonEmptyHeapsInInput = countNonEmptyHeaps(inputNimState);
         if(getMaxHeapSize(result) == 1 && isEven(nonEmptyHeapsInResult) && nonEmptyHeapsInResult == nonEmptyHeapsInInput)
         {
-            result[i] = 0;        }
+            result[i] = 0;
+        }
     }
     return result;
 }
