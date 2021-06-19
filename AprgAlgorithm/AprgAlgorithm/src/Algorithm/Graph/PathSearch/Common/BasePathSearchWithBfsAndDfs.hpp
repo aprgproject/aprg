@@ -64,10 +64,20 @@ public:
         return result;
     }
 
+    Vertex getPreviousVertex(Vertex const& vertex) const
+    {
+        Vertex result{};
+        auto it = m_vertexToPreviousVertexMap.find(vertex);
+        if(it != m_vertexToPreviousVertexMap.cend())
+        {
+            result = it->second;
+        }
+        return result;
+    }
+
     unsigned int getDistanceTo(Vertex const& endVertex) const
     {
-        unsigned int result(0);
-        auto it = m_vertexToDistanceToStartMap.find(endVertex);
+        unsigned int result(0);        auto it = m_vertexToDistanceToStartMap.find(endVertex);
         if(it != m_vertexToDistanceToStartMap.cend())
         {
             result = it->second;
