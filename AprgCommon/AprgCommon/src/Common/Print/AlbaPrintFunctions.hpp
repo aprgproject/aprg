@@ -8,6 +8,7 @@
 #include <tuple>
 
 using namespace alba::containerHelper;
+
 namespace alba
 {
 
@@ -32,7 +33,8 @@ void printParameter(std::ostream & outputStream, Adapter<ValueType, std::deque<V
 
 // printParameterWithName declaration
 
-template <typename ParameterType>void printParameterWithName(std::ostream & outputStream, std::string const& parameterName, ParameterType const& parameter);
+template <typename ParameterType>
+void printParameterWithName(std::ostream & outputStream, std::string const& parameterName, ParameterType const& parameter);
 template <typename ParameterPointerType>
 void printParameterWithName(std::ostream & outputStream, std::string const& parameterName, ParameterPointerType * parameterPointer);
 template <>
@@ -79,7 +81,8 @@ printParametersRecusively(std::ostream & outputStream, std::tuple<ValueTypes...>
 
 // printParameter
 
-template <typename ParameterType>void printParameter(std::ostream & outputStream, ParameterType const& parameter)
+template <typename ParameterType>
+void printParameter(std::ostream & outputStream, ParameterType const& parameter)
 {
     outputStream << parameter;
 }
@@ -104,7 +107,8 @@ void printParameter(std::ostream & outputStream, std::tuple<ValueTypes...> const
 
 template <typename ValueType, size_t SIZE,
           template <typename, size_t> class Container>
-void printParameter(std::ostream & outputStream, Container<ValueType, SIZE> const& container){
+void printParameter(std::ostream & outputStream, Container<ValueType, SIZE> const& container)
+{
     outputStream << "{size: " << container.size() << " | ";
     for(auto const& content : container)
     {
@@ -227,7 +231,8 @@ void printParameterWithName(std::ostream & outputStream, std::string const& para
 
 template <typename ValueType, size_t SIZE,
           template <typename, size_t> class Container>
-void printParameterWithName(std::ostream & outputStream, std::string const& parameterName, Container<ValueType, SIZE> const& container){
+void printParameterWithName(std::ostream & outputStream, std::string const& parameterName, Container<ValueType, SIZE> const& container)
+{
     outputStream << parameterName << " : [";
     printParameter(outputStream, container);
     outputStream<< "]";
