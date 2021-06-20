@@ -125,7 +125,8 @@ TEST(CommonFunctionLibraryTest, HarmonicNumberFunctionHasAnUpperBoundOfLog2NPlus
     EXPECT_LT(actualHarmonicNumber, upperBoundValue);
 }
 
-TEST(CommonFunctionLibraryTest, SineFunctionWorks){
+TEST(CommonFunctionLibraryTest, SineFunctionWorks)
+{
     Function sineFunction(sin(getPiAsATerm()));
 
     EXPECT_EQ("sin", sineFunction.getFunctionName());

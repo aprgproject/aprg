@@ -1,6 +1,7 @@
 #include <Algorithm/HashFunctions/ForPrimitiveTypes/UnsignedIntegerBasedHashFunction.hpp>
 #include <Algorithm/SymbolTable/HashTable/LinearProbingHashSymbolTable.hpp>
 #include <AlgorithmTests/SymbolTable/Utilities/CommonTestsWithSymbolTable.hpp>
+
 #include <gtest/gtest.h>
 
 using namespace alba::algorithm::CommonTestsWithSymbolTable;

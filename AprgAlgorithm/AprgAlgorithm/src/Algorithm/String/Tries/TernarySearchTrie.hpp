@@ -107,7 +107,8 @@ public:
             }
             collectAllKeysAtNode(firstNode->mid.get(), prefix, result);
         }
-        return result;    }
+        return result;
+    }
 
     Keys getAllKeysThatMatch(Key const& patternToMatch) const override
     {
@@ -115,6 +116,7 @@ public:
         collectKeysThatMatchAtNode(m_root.get(), std::string(), patternToMatch, result);
         return result;
     }
+
 private:
 
     unsigned int getSize(NodeUniquePointer const& currentNodePointer) const
@@ -208,7 +210,8 @@ private:
 
     void collectAllKeysAtNode(
             Node const*const currentNodePointer,
-            Key const& previousPrefix,            Keys & collectedKeys) const
+            Key const& previousPrefix,
+            Keys & collectedKeys) const
     {
         if(currentNodePointer != nullptr)
         {
@@ -221,7 +224,8 @@ private:
             }
             collectAllKeysAtNode(currentNodePointer->mid.get(), currentPrefix, collectedKeys);
             collectAllKeysAtNode(currentNodePointer->right.get(), previousPrefix, collectedKeys);
-        }    }
+        }
+    }
 
     void collectKeysThatMatchAtNode(
             Node const*const currentNodePointer,
@@ -243,7 +247,8 @@ private:
             else if(charToMatch == currentChar)
             {
                 if(previousPrefixLength < lastIndexToMatch)
-                {                    collectKeysThatMatchAtNode(currentNodePointer->mid.get(), currentPrefix, patternToMatch, collectedKeys);
+                {
+                    collectKeysThatMatchAtNode(currentNodePointer->mid.get(), currentPrefix, patternToMatch, collectedKeys);
                 }
                 else if(previousPrefixLength == lastIndexToMatch && currentNodePointer->valueUniquePointer)
                 {
@@ -257,7 +262,8 @@ private:
             if(charToMatch == '.')
             {
                 if(previousPrefixLength < lastIndexToMatch)
-                {                    collectKeysThatMatchAtNode(currentNodePointer->mid.get(), currentPrefix, patternToMatch, collectedKeys);
+                {
+                    collectKeysThatMatchAtNode(currentNodePointer->mid.get(), currentPrefix, patternToMatch, collectedKeys);
                 }
                 else if(previousPrefixLength == lastIndexToMatch && currentNodePointer->valueUniquePointer)
                 {
@@ -269,7 +275,8 @@ private:
 
     void put(
             NodeUniquePointer & currentNodePointer,
-            Key const& key,            Value const& value,
+            Key const& key,
+            Value const& value,
             unsigned int const index)
     {
         char charAtKey(key.at(index));

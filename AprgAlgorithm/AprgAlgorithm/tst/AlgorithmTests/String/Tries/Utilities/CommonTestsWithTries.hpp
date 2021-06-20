@@ -93,7 +93,8 @@ void testGetLongestPrefixOfWithUnsignedInt()
     EXPECT_EQ("", trie.getLongestPrefixOf("this string does not exist"));
 }
 
-template <typename Trie>void testPutWithUnsignedInt()
+template <typename Trie>
+void testPutWithUnsignedInt()
 {
     Trie trie;
     trie.put("she", 0U);
@@ -147,6 +148,7 @@ void testGetKeysWithUnsignedInt()
     Keys expectedKeys{"by", "s", "sea", "sells", "she", "shells", "shore", "the"};
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
+
 template <typename Trie>
 void testGetAllKeysWithPrefixWithUnsignedInt()
 {
@@ -167,6 +169,7 @@ void testGetAllKeysWithPrefixWithUnsignedInt()
     Keys expectedKeys{"s", "sea", "sells", "she", "shells", "shore"};
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
+
 template <typename Trie>
 void testGetAllKeysThatMatchWithUnsignedInt()
 {
@@ -183,6 +186,7 @@ void testGetAllKeysThatMatchWithUnsignedInt()
     trie.put("s", 8U);
 
     Keys keysToVerify(trie.getAllKeysThatMatch("s.."));
+
     Keys expectedKeys{"sea", "she"};
     EXPECT_EQ(expectedKeys, keysToVerify);
 }

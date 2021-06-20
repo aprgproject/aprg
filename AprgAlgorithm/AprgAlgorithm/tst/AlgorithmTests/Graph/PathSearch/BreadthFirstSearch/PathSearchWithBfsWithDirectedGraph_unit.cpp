@@ -91,7 +91,8 @@ TEST(PathSearchUsingBfsTest, GetPreviousVertexWorksWithDirectedGraph)
 
 TEST(PathSearchUsingBfsTest, GetDistanceToWorksWithDirectedGraph)
 {
-    GraphForTest graph;    putConnectionsForTest(graph);
+    GraphForTest graph;
+    putConnectionsForTest(graph);
     PathSearchForTest pathSearch(graph, 0U);
 
     EXPECT_EQ(0U, pathSearch.getDistanceTo(0U));

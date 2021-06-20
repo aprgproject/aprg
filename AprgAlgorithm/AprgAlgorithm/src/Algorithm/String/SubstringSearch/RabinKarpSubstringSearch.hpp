@@ -3,6 +3,7 @@
 #include <Algorithm/HashFunctions/ForString/HornerHashFunction.hpp>
 
 #include <string>
+
 namespace alba
 {
 

@@ -47,7 +47,8 @@ TEST(PathSearchUsingBfsTest, HasPathToWorksWithUndirectedGraph)
 TEST(PathSearchUsingBfsTest, GetShortestPathToWorksWithUndirectedGraph)
 {
     GraphForTest graph;
-    putConnectionsForTest(graph);    PathSearchForTest pathSearch(graph, 0U);
+    putConnectionsForTest(graph);
+    PathSearchForTest pathSearch(graph, 0U);
 
     EXPECT_EQ(PathForTest(), pathSearch.getShortestPathTo(0U));
     EXPECT_EQ(PathForTest({0U, 1U}), pathSearch.getShortestPathTo(1U));
@@ -61,7 +62,8 @@ TEST(PathSearchUsingBfsTest, GetShortestPathToWorksWithUndirectedGraph)
 TEST(PathSearchUsingBfsTest, GetShortestPathToWorksWithUndirectedGraphWithMultipleStartingPoints)
 {
     GraphForTest graph;
-    putConnectionsForTest(graph);    PathSearchForTest pathSearch(graph, {0U, 3U});
+    putConnectionsForTest(graph);
+    PathSearchForTest pathSearch(graph, {0U, 3U});
 
     EXPECT_EQ(PathForTest(), pathSearch.getShortestPathTo(0U));
     EXPECT_EQ(PathForTest({0U, 1U}), pathSearch.getShortestPathTo(1U));
@@ -89,7 +91,8 @@ TEST(PathSearchUsingBfsTest, GetPreviousVertexWorksWithUndirectedGraph)
 
 TEST(PathSearchUsingBfsTest, GetDistanceToWorksWithUndirectedGraph)
 {
-    GraphForTest graph;    putConnectionsForTest(graph);
+    GraphForTest graph;
+    putConnectionsForTest(graph);
     PathSearchForTest pathSearch(graph, 0U);
 
     EXPECT_EQ(0U, pathSearch.getDistanceTo(0U));
