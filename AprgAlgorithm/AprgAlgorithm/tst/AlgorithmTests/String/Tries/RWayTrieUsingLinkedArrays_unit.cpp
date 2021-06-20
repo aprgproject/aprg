@@ -1,4 +1,4 @@
-#include <Algorithm/String/Tries/TernarySearchTrie.hpp>
+#include <Algorithm/String/Tries/RWayTrieUsingLinkedArrays.hpp>
 #include <AlgorithmTests/String/Tries/Utilities/CommonTestsWithTries.hpp>
 
 #include <gtest/gtest.h>
@@ -14,87 +14,107 @@ namespace algorithm
 
 namespace
 {
-using TrieForTest = TernarySearchTrie<unsigned int>;
+using TrieForTest = RWayTrieUsingLinkedArrays<unsigned int>;
 }
 
-TEST(TernarySearchTrieTest, IsEmptyWorksWhenEmpty)
+TEST(RWayTrieUsingLinkedArraysTest, IsEmptyWorksWhenEmpty)
 {
     testIsEmptyWhenEmptyWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TernarySearchTrieTest, IsEmptyWorksWhenNotEmpty)
+TEST(RWayTrieUsingLinkedArraysTest, IsEmptyWorksWhenNotEmpty)
 {
     testIsEmptyWhenNotEmptyWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TernarySearchTrieTest, DoesContainWorks)
+TEST(RWayTrieUsingLinkedArraysTest, DoesContainWorks)
 {
     testDoesContainWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TernarySearchTrieTest, GetSizeWorksWhenEmpty)
+TEST(RWayTrieUsingLinkedArraysTest, GetSizeWorksWhenEmpty)
 {
     testGetSizeWhenEmptyWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TernarySearchTrieTest, GetSizeWorksWhenNotEmpty)
+TEST(RWayTrieUsingLinkedArraysTest, GetSizeWorksWhenNotEmpty)
 {
     testGetSizeWhenNotEmptyWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TernarySearchTrieTest, GetWorks)
+TEST(RWayTrieUsingLinkedArraysTest, GetWorks)
 {
     testGetWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TernarySearchTrieTest, GetLongestPrefixWorks)
+TEST(RWayTrieUsingLinkedArraysTest, GetLongestPrefixWorks)
 {
     testGetLongestPrefixOfWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TernarySearchTrieTest, PutWorks)
+TEST(RWayTrieUsingLinkedArraysTest, PutWorks)
 {
     testPutWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TernarySearchTrieTest, DeleteBasedOnKeyWorks)
+TEST(RWayTrieUsingLinkedArraysTest, DeleteBasedOnKeyWorks)
 {
     testDeleteBasedOnKeyWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TernarySearchTrieTest, GetKeysWorks)
+TEST(RWayTrieUsingLinkedArraysTest, GetKeysWorks)
 {
     testGetKeysWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TernarySearchTrieTest, GetAllKeysWithPrefixWorks)
+TEST(RWayTrieUsingLinkedArraysTest, GetAllKeysWithPrefixWorks)
 {
     testGetAllKeysWithPrefixWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TernarySearchTrieTest, GetAllKeysThatMatchWorks)
+TEST(RWayTrieUsingLinkedArraysTest, GetAllKeysThatMatchWorks)
 {
     testGetAllKeysThatMatchWithUnsignedInt<TrieForTest>();
 }
 
-TEST(TernarySearchTrieTest, GetNumberOfNodesWorksWhenEmpty)
+TEST(RWayTrieUsingLinkedArraysTest, GetWhenEmptyStringWorks)
+{
+    TrieForTest trie;
+
+    EXPECT_EQ(0U, trie.get(""));
+
+    trie.put("", 17U);
+    EXPECT_EQ(17U, trie.get(""));
+}
+
+TEST(RWayTrieUsingLinkedArraysTest, GetNumberOfNodesWorksWhenEmpty)
 {
     TrieForTest trie;
 
     EXPECT_EQ(0U, trie.getNumberOfNodes());
 }
 
-TEST(TernarySearchTrieTest, GetNumberOfNodesWorksWhenNotEmpty)
+TEST(RWayTrieUsingLinkedArraysTest, GetNumberOfNodesWorksWhenNotEmpty)
 {
     TrieForTest trie;
     trie.put("she", 0U);
     trie.put("sells", 1U);
     trie.put("sea", 2U);
 
-    EXPECT_EQ(8U, trie.getNumberOfNodes());
+    // 9 nodes:
+    // 1) s
+    // 2) eh (child of s)
+    // 3) e (child of h)
+    // 4) al (child of first e)
+    // 5) l (child of first l)
+    // 6) s (child of second l)
+    // 7) 0-value (child of "she" path)
+    // 8) 1-value (child of "sells" path)
+    // 9) 2-value (child of "sea" path)
+    EXPECT_EQ(9U, trie.getNumberOfNodes());
 }
 
-TEST(TernarySearchTrieTest, PutWorksWithNumberOfNodes)
+TEST(RWayTrieUsingLinkedArraysTest, PutWorksWithNumberOfNodes)
 {
     TrieForTest trie;
 
@@ -103,24 +123,24 @@ TEST(TernarySearchTrieTest, PutWorksWithNumberOfNodes)
     trie.put("sea", 2U);
 
     EXPECT_EQ(3U, trie.getSize());
-    EXPECT_EQ(8U, trie.getNumberOfNodes());
+    EXPECT_EQ(9U, trie.getNumberOfNodes());
     EXPECT_EQ(0U, trie.get("she"));
     EXPECT_EQ(1U, trie.get("sells"));
     EXPECT_EQ(2U, trie.get("sea"));
 }
 
-TEST(TernarySearchTrieTest, PutWhenEmptyStringHasNoEffect)
+TEST(RWayTrieUsingLinkedArraysTest, PutWhenEmptyStringWorks)
 {
     TrieForTest trie;
 
     trie.put("", 17U);
 
-    EXPECT_EQ(0U, trie.getSize());
-    EXPECT_EQ(0U, trie.getNumberOfNodes());
-    EXPECT_EQ(0U, trie.get(""));
+    EXPECT_EQ(1U, trie.getSize());
+    EXPECT_EQ(1U, trie.getNumberOfNodes());
+    EXPECT_EQ(17U, trie.get(""));
 }
 
-TEST(TernarySearchTrieTest, DeleteBasedOnKeyWorksWithNumberOfNodes)
+TEST(RWayTrieUsingLinkedArraysTest, DeleteBasedOnKeyWorksWithNumberOfNodes)
 {
     TrieForTest trie;
     trie.put("she", 0U);
@@ -129,13 +149,13 @@ TEST(TernarySearchTrieTest, DeleteBasedOnKeyWorksWithNumberOfNodes)
 
     trie.deleteBasedOnKey("she");
     EXPECT_EQ(2U, trie.getSize());
-    EXPECT_EQ(6U, trie.getNumberOfNodes());
+    EXPECT_EQ(7U, trie.getNumberOfNodes());
     EXPECT_EQ(1U, trie.get("sells"));
     EXPECT_EQ(2U, trie.get("sea"));
 
     trie.deleteBasedOnKey("sells");
     EXPECT_EQ(1U, trie.getSize());
-    EXPECT_EQ(3U, trie.getNumberOfNodes());
+    EXPECT_EQ(4U, trie.getNumberOfNodes());
     EXPECT_EQ(2U, trie.get("sea"));
 
     trie.deleteBasedOnKey("sea");
@@ -143,13 +163,14 @@ TEST(TernarySearchTrieTest, DeleteBasedOnKeyWorksWithNumberOfNodes)
     EXPECT_EQ(0U, trie.getNumberOfNodes());
 }
 
-TEST(TernarySearchTrieTest, DeleteBasedOnKeyWhenEmptyStringHasNoEffect)
+TEST(RWayTrieUsingLinkedArraysTest, DeleteBasedOnKeyWhenEmptyStringWorks)
 {
     TrieForTest trie;
     trie.put("", 17U);
 
     trie.deleteBasedOnKey("");
-    EXPECT_TRUE(trie.isEmpty());    EXPECT_EQ(0U, trie.getNumberOfNodes());
+    EXPECT_TRUE(trie.isEmpty());
+    EXPECT_EQ(0U, trie.getNumberOfNodes());
 
     trie.deleteBasedOnKey("");
     EXPECT_TRUE(trie.isEmpty());

@@ -13,7 +13,7 @@ namespace algorithm
 {
 
 template <typename Value>
-class TrieSymbolTable : public BaseStringSymbolTable<Value>
+class RWayTrieUsingLinkedArrays : public BaseStringSymbolTable<Value>
 {
 public:
     static constexpr unsigned int RADIX=256U;
@@ -28,7 +28,7 @@ public:
         std::array<NodeUniquePointer, RADIX> next; // costly
     };
 
-    TrieSymbolTable()
+    RWayTrieUsingLinkedArrays()
         : m_root(nullptr)
     {}
 
@@ -99,7 +99,7 @@ public:
     Keys getAllKeysThatMatch(Key const& patternToMatch) const override
     {
         Keys result;
-        collectKeysThatMatchAtNode(m_root.get(), "", patternToMatch, result);
+        collectKeysThatMatchAtNode(m_root.get(), std::string(), patternToMatch, result);
         return result;
     }
 
@@ -166,6 +166,28 @@ private:
         return result;
     }
 
+    unsigned int getLengthOfLongestPrefix(
+            Node const*const currentNodePointer,
+            Key const& keyToCheck,
+            unsigned int const index,
+            unsigned int const length) const
+    {
+        unsigned int currentLongestLength(length);
+        if(currentNodePointer != nullptr)
+        {
+            if(currentNodePointer->valueUniquePointer)
+            {
+                currentLongestLength = index;
+            }
+            if(index < keyToCheck.length())
+            {
+                char c = keyToCheck.at(index);
+                currentLongestLength = getLengthOfLongestPrefix(currentNodePointer->next.at(c).get(), keyToCheck, index+1, currentLongestLength);
+            }
+        }
+        return currentLongestLength;
+    }
+
     void collectAllKeysAtNode(
             Node const*const currentNodePointer,
             Key const& previousPrefix,
@@ -203,10 +225,10 @@ private:
             }
             else if(prefixLength < patternToMatch.length())
             {
-                char nextChar = patternToMatch.at(prefixLength);
+                char charToMatch = patternToMatch.at(prefixLength);
                 for(unsigned int c=0; c<RADIX; c++)
                 {
-                    if('.' == nextChar || nextChar == static_cast<char>(c))
+                    if('.' == charToMatch || charToMatch == static_cast<char>(c))
                     {
                         collectKeysThatMatchAtNode(
                                     currentNodePointer->next.at(c).get(),
@@ -217,28 +239,6 @@ private:
                 }
             }
         }
-    }
-
-    unsigned int getLengthOfLongestPrefix(
-            Node const*const currentNodePointer,
-            Key const& keyToCheck,
-            unsigned int const index,
-            unsigned int const length) const
-    {
-        unsigned int currentLongestLength(length);
-        if(currentNodePointer != nullptr)
-        {
-            if(currentNodePointer->valueUniquePointer)
-            {
-                currentLongestLength = index;
-            }
-            if(index < keyToCheck.length())
-            {
-                char c = keyToCheck.at(index);
-                currentLongestLength = getLengthOfLongestPrefix(currentNodePointer->next.at(c).get(), keyToCheck, index+1, currentLongestLength);
-            }
-        }
-        return currentLongestLength;
     }
 
     void put(
