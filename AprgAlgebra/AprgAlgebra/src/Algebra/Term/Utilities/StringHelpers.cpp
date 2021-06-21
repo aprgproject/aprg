@@ -128,7 +128,8 @@ string getString(TermsWithDetails const& termsWithDetails)
             result += getString(*it);
         }
     }
-    return result;}
+    return result;
+}
 
 string getString(TermWithDetails const& termWithDetails)
 {

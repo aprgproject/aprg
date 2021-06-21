@@ -170,7 +170,8 @@ void createTermRaiseToANumberFromRaiseToPowerExpression(
             Term & exponentTerm(getTermReferenceFromSharedPointer(it->baseTermSharedPointer));
             if(exponentTerm.isConstant())
             {
-                combinedExponentValue = combinedExponentValue * exponentTerm.getConstantValueConstReference();                exponentTerm.getConstantReference().setNumber(1);
+                combinedExponentValue = combinedExponentValue * exponentTerm.getConstantValueConstReference();
+                exponentTerm.getConstantReference().setNumber(1);
             }
             else if(exponentTerm.isMonomial())
             {

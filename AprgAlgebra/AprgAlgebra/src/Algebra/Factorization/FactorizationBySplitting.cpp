@@ -217,7 +217,8 @@ void getCommonFactorsInThesePolynomials(Polynomials & commonFactors, Polynomials
             Polynomials commonFactorsOfAPolynomial(factorizeAPolynomial(*it));
             updateToGetSubsetOfFactors(commonFactors, commonFactorsOfAPolynomial);
         }
-    }}
+    }
+}
 
 Polynomial getNewPolynomialWithNewVariables(
         SubstitutionOfVariablesToTerms & variableSubstitution,

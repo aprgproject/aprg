@@ -24,7 +24,8 @@ TEST(IntegerStringTest, GenerateUniqueIdWorks)
 {
     string string1("Mark is the no#1 guy in the world. Mark is also the nicest guy.");
     string string2("MARK is the no#1 programmer in the world. MARK is also the nicest programmer.");
-    unsigned int uniqueId1 = generateUniqueId(string1);    unsigned int uniqueId2 = generateUniqueId(string2);
+    unsigned int uniqueId1 = generateUniqueId(string1);
+    unsigned int uniqueId2 = generateUniqueId(string2);
     EXPECT_EQ(552749853U, uniqueId1);
     EXPECT_EQ(1436619827U, uniqueId2);
 }
@@ -717,6 +718,7 @@ TEST(IntegerStringTest, IsBorderWorks)
     EXPECT_FALSE(isBorder("ABACABA", "ABCDE"));
     EXPECT_FALSE(isBorder("ABCD", "AAAA"));
 }
+
 TEST(BooleanStringTest, StringCompareNotCaseSensitive)
 {
     string testString("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");

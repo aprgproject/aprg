@@ -113,7 +113,8 @@ string getString(WrappedTerms const& wrappedTerms)
             result += getString(*it);
         }
     }
-    return result;}
+    return result;
+}
 
 string getString(WrappedTerm const& wrappedTerm)
 {

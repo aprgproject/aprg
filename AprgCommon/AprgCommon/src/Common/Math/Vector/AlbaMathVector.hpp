@@ -177,6 +177,7 @@ public:
     });
         return static_cast<DataType>(raiseToPowerForMathVectorDataType(sumOfSquaredTerms, DataType(1)/DataType(2)));
     }
+
     ValuesInArray const& getValues() const
     {
         return m_values;
@@ -196,6 +197,7 @@ public:
         }
         return ss.str();
     }
+
     DataType & getValueReferenceAt(unsigned int const index)
     {
         assert(index<SIZE);

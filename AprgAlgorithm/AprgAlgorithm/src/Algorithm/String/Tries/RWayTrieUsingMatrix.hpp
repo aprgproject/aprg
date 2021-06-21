@@ -8,6 +8,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -23,7 +24,8 @@ public:
     using SetOfNodeIds = std::set<NodeId>;
     using ValueUniquePointer = std::unique_ptr<Value>;
     struct Node
-    {        NodeId nextNodeId;
+    {
+        NodeId nextNodeId;
         ValueUniquePointer valueUniquePointer;
     };
     using NodePointer = std::unique_ptr<Node>;
@@ -39,7 +41,8 @@ public:
         , m_nodePointerMatrix(RADIX, MAX_NUMBER_NODES)
     {}
 
-    bool isEmpty() const override    {
+    bool isEmpty() const override
+    {
         return m_size == 0U;
     }
 
@@ -129,7 +132,8 @@ public:
             if(stringHelper::isDisplayableCharacter(c))
             {
                 table.getLastRow().addCell(converter.convert<char>(static_cast<char>(c)));
-            }            else
+            }
+            else
             {
                 table.getLastRow().addCell(" ");
             }
@@ -190,14 +194,16 @@ private:
         return result;
     }
 
-    Coordinate getCoordinate(            NodeId const nodeId,
+    Coordinate getCoordinate(
+            NodeId const nodeId,
             Key const& key,
             unsigned int const startingIndex) const
     {
         Coordinate result{INVALID_NODE_ID, 0U};
         NodeId currentNodeId(nodeId);
         for(unsigned int keyIndex=startingIndex; keyIndex<key.length(); keyIndex++)
-        {            char c(key.at(keyIndex));
+        {
+            char c(key.at(keyIndex));
             bool isNextNodeFound(false);
             if(isValidNodeId(currentNodeId))
             {
@@ -210,7 +216,8 @@ private:
                         result = {c, currentNodeId};
                     }
                     currentNodeId = nodePointer->nextNodeId;
-                }            }
+                }
+            }
             if(!isNextNodeFound)
             {
                 break;
@@ -235,7 +242,8 @@ private:
                 NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, currentNodeId).getObject());
                 if(nodePointer)
                 {
-                    isNextNodeFound = true;                    currentNodeId = nodePointer->nextNodeId;
+                    isNextNodeFound = true;
+                    currentNodeId = nodePointer->nextNodeId;
                     ValueUniquePointer const& valueUniquePointer(nodePointer->valueUniquePointer);
                     if(keyIndex+1 == key.length() && valueUniquePointer)
                     {
@@ -267,7 +275,8 @@ private:
                 NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, currentNodeId).getObject());
                 if(nodePointer)
                 {
-                    isNextNodeFound = true;                    currentNodeId = nodePointer->nextNodeId;
+                    isNextNodeFound = true;
+                    currentNodeId = nodePointer->nextNodeId;
                     ValueUniquePointer const& valueUniquePointer(nodePointer->valueUniquePointer);
                     if(valueUniquePointer)
                     {
@@ -295,7 +304,8 @@ private:
                 NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, nodeId).getObject());
                 if(nodePointer)
                 {
-                    Key newPrefix = previousPrefix + static_cast<char>(c);                    ValueUniquePointer const& valueUniquePointer(nodePointer->valueUniquePointer);
+                    Key newPrefix = previousPrefix + static_cast<char>(c);
+                    ValueUniquePointer const& valueUniquePointer(nodePointer->valueUniquePointer);
                     if(valueUniquePointer)
                     {
                         collectedKeys.emplace_back(newPrefix);
@@ -325,7 +335,8 @@ private:
                         NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, nodeId).getObject());
                         if(nodePointer)
                         {
-                            Key newPrefix = previousPrefix + static_cast<char>(c);                            if(newPrefix.length() == patternToMatch.length())
+                            Key newPrefix = previousPrefix + static_cast<char>(c);
+                            if(newPrefix.length() == patternToMatch.length())
                             {
                                 ValueUniquePointer const& valueUniquePointer(nodePointer->valueUniquePointer);
                                 if(valueUniquePointer)
@@ -362,7 +373,8 @@ private:
             }
             if(keyIndex+1 == key.length())
             {
-                ValueUniquePointer & valueUniquePointer(nodePointer->valueUniquePointer);                if(valueUniquePointer)
+                ValueUniquePointer & valueUniquePointer(nodePointer->valueUniquePointer);
+                if(valueUniquePointer)
                 {
                     *valueUniquePointer = value;
                 }
@@ -379,6 +391,7 @@ private:
             currentNodeId = nodePointer->nextNodeId;
         }
     }
+
     bool deleteBasedOnKeyAndReturnIfDeleted(
             NodeId const nodeId,
             Key const& key,
@@ -390,14 +403,16 @@ private:
         Coordinates traversedCoordinates;
         for(unsigned int keyIndex=startingIndex; keyIndex<key.length(); keyIndex++)
         {
-            char c(key.at(keyIndex));            bool isNextNodeFound(false);
+            char c(key.at(keyIndex));
+            bool isNextNodeFound(false);
             if(isValidNodeId(currentNodeId))
             {
                 NodePointer & nodePointer(m_nodePointerMatrix.getEntryReference(c, currentNodeId).getObjectReference());
                 traversedCoordinates.emplace_back(Coordinate{c, currentNodeId});
                 if(nodePointer)
                 {
-                    isNextNodeFound = true;                    currentNodeId = nodePointer->nextNodeId;
+                    isNextNodeFound = true;
+                    currentNodeId = nodePointer->nextNodeId;
                     ValueUniquePointer & valueUniquePointer(nodePointer->valueUniquePointer);
                     if(keyIndex+1 == key.length() && valueUniquePointer)
                     {
@@ -410,7 +425,8 @@ private:
                         }
                     }
                 }
-            }            if(!isNextNodeFound)
+            }
+            if(!isNextNodeFound)
             {
                 break;
             }
@@ -456,6 +472,7 @@ private:
     SetOfNodeIds m_unusedNodeIds;
     NodePointerMatrix m_nodePointerMatrix;
 };
+
 // A trie is a rooted tree that maintains a set of strings.
 // Each string in the set is stored as a chain of characters that starts at the root.
 // If two strings have a common prefix, they also have a common chain in the tree.
@@ -472,4 +489,5 @@ private:
 // Note in the implementation above coordinates are reversed.
 
 }
+
 }

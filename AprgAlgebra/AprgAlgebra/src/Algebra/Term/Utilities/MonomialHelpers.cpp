@@ -309,7 +309,8 @@ Monomial getMonomialWithMinimumExponentsInMonomials(Monomials const& monomials)
                     = compareMonomialsAndSaveMinimumExponentsForEachVariable(monomialWithMinimumExponents, *it);
         }
         monomialWithMinimumExponents.simplify();
-    }    return monomialWithMinimumExponents;
+    }
+    return monomialWithMinimumExponents;
 }
 
 Monomial getMonomialWithMaximumExponentsInMonomials(Monomials const& monomials)
@@ -324,7 +325,8 @@ Monomial getMonomialWithMaximumExponentsInMonomials(Monomials const& monomials)
                     = compareMonomialsAndSaveMaximumExponentsForEachVariable(monomialWithMaximumExponents, *it);
         }
         monomialWithMaximumExponents.simplify();
-    }    return monomialWithMaximumExponents;
+    }
+    return monomialWithMaximumExponents;
 }
 
 

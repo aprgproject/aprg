@@ -426,7 +426,8 @@ Term Differentiation::differentiateTermsInMultiplicationOrDivisionTermByTerm(
             TermWithDetails const& termWithDetails(*it);
             Term const& currentTerm(getTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer));
             if(termWithDetails.hasPositiveAssociation())
-            {                accumulatedTerm = differentiateTwoMultipliedTerms(accumulatedTerm, currentTerm);
+            {
+                accumulatedTerm = differentiateTwoMultipliedTerms(accumulatedTerm, currentTerm);
             }
             else
             {

@@ -65,7 +65,8 @@ void LogStatisticsAnalyzer::saveLogDetailsToCsv(ofstream & outputCsvFileStream)
                 string logStringInCsv(string("[") + *it + "]");
                 stringInCsv += " && ";
                 stringInCsv += logStringInCsv;
-            }        }
+            }
+        }
         dataToDisplay.emplace(stringInCsv, logDetails.count);
     }
     for (pair<string, unsigned int> const& data : dataToDisplay)

@@ -69,7 +69,8 @@ Quadrilateral::GroupOfPoints Quadrilateral::getGroupOfPointsBasedOnYValue() cons
             Point const& currentPoint(*it);
             if(isAlmostEqual(currentPoint.getY(), previousPoint.getY()))
             {
-                result[groupOfPointsIndex].emplace_back(currentPoint);            }
+                result[groupOfPointsIndex].emplace_back(currentPoint);
+            }
             else
             {
                 result.emplace_back();

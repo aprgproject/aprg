@@ -85,6 +85,7 @@ TEST(RWayTrieUsingMatrixTest, Example1Works)
 TEST(RWayTrieUsingMatrixTest, PutWhenEmptyStringHasNoEffect)
 {
     TrieForTest trie;
+
     trie.put("", 17U);
 
     EXPECT_EQ(0U, trie.getSize());

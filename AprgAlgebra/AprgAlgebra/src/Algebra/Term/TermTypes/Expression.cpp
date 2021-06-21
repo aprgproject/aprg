@@ -131,7 +131,8 @@ string Expression::getDisplayableString() const
             TermWithDetails const& termWithDetails(*it);
             result << getOperatingString(m_commonOperatorLevel, termWithDetails.association);
             result << termWithDetails.baseTermSharedPointer->getDisplayableString();
-        }    }
+        }
+    }
     result << ")";
     return result.str();
 }
@@ -151,7 +152,8 @@ string Expression::getDebugString() const
             TermWithDetails const& termWithDetails(*it);
             result << getOperatingString(m_commonOperatorLevel, termWithDetails.association);
             result << termWithDetails.baseTermSharedPointer->getDebugString() << getEnumShortString(termWithDetails.association);
-        }    }
+        }
+    }
     result << " )";
     return result.str();
 }

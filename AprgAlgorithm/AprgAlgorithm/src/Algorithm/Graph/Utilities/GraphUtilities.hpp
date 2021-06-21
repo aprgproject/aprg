@@ -127,7 +127,8 @@ bool isARegularGraph(BaseGraph<Vertex> const& graph)
             if(degreeThatShouldMatch != getDegreeAt(graph, *it))
             {
                 result=false;
-                break;            }
+                break;
+            }
         }
     }
     return result;
@@ -342,7 +343,8 @@ unsigned int getMinDegree(BaseGraph<Vertex> const& graph)
             result = std::min(result, getDegreeAt(graph, *it));
         }
     }
-    return result;}
+    return result;
+}
 
 template <typename Vertex>
 unsigned int getSumOfDegrees(BaseGraph<Vertex> const& graph)

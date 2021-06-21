@@ -49,7 +49,8 @@ string SolutionSet::getDisplayableString() const
             ss << ", " << *it;
         }
         ss << "} ";
-    }    if(!m_rejectedValues.empty())
+    }
+    if(!m_rejectedValues.empty())
     {
         ss << "RejectedValues:{" << m_rejectedValues.front();
         for(auto it=m_rejectedValues.cbegin()+1; it!=m_rejectedValues.cend(); it++)
@@ -57,7 +58,8 @@ string SolutionSet::getDisplayableString() const
             ss << ", " << *it;
         }
         ss << "} ";
-    }    if(!m_acceptedIntervals.empty())
+    }
+    if(!m_acceptedIntervals.empty())
     {
         ss << "AcceptedInterval:{" << m_acceptedIntervals.front();
         for(auto it=m_acceptedIntervals.cbegin()+1; it!=m_acceptedIntervals.cend(); it++)
@@ -65,7 +67,8 @@ string SolutionSet::getDisplayableString() const
             ss << ", " << *it;
         }
         ss << "}";
-    }    return ss.str();
+    }
+    return ss.str();
 }
 
 void SolutionSet::addAcceptedValue(AlbaNumber const& value)
@@ -150,7 +153,8 @@ void SolutionSet::checkValuesAndPutIntervals(
             AlbaNumber const& valueToCheck(*it);
             intervalValueToCheck = getAverage(previousValueToCheck, valueToCheck);
             addInterval(previousValueToCheck, intervalValueToCheck, valueToCheck, isValueAcceptedFunction);
-            previousValueToCheck = valueToCheck;        }
+            previousValueToCheck = valueToCheck;
+        }
         intervalValueToCheck = previousValueToCheck + getAbsoluteValue(previousValueToCheck);
         addInterval(previousValueToCheck, intervalValueToCheck, AlbaNumber::Value::PositiveInfinity, isValueAcceptedFunction);
     }

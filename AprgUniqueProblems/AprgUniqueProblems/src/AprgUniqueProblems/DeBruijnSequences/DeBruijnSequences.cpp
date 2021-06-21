@@ -4,6 +4,7 @@
 
 using namespace alba::algorithm;
 using namespace std;
+
 namespace alba
 {
 
@@ -35,7 +36,8 @@ string DeBruijnSequences::getDeBruijnString() const
                 result += it->back();
             }
         }
-    }    return result;
+    }
+    return result;
 }
 
 void DeBruijnSequences::initialize()

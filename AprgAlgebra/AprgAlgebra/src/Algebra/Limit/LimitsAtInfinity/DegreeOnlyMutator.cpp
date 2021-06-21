@@ -62,7 +62,8 @@ AlbaNumber DegreeOnlyMutator::getMaxDegreeForVariable(Polynomial const& polynomi
             AlbaNumber currentDegreeForVariable(it->getExponentForVariable(m_variableName));
             if(maxDegreeForVariable < currentDegreeForVariable)
             {
-                maxDegreeForVariable = currentDegreeForVariable;            }
+                maxDegreeForVariable = currentDegreeForVariable;
+            }
         }
     }
     return maxDegreeForVariable;

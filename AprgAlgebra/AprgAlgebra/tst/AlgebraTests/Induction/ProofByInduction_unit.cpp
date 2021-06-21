@@ -21,7 +21,8 @@ TEST(ProofByInductionTest, ProveTheSumOfOddIntegers)
         AlbaNumber lastValue = (n*2)-1;
         for(AlbaNumber i=1; i<=lastValue; i+=2)
         {
-            result+=i;        }
+            result+=i;
+        }
         return result;
     });
 
@@ -48,7 +49,8 @@ TEST(ProofByInductionTest, ProveTheSumOfSquareOfOddIntegers)
         AlbaNumber lastValue = (n*2)-1;
         for(AlbaNumber i=1; i<=lastValue; i+=2)
         {
-            result+=i^2;        }
+            result+=i^2;
+        }
         return result;
     });
 

@@ -88,7 +88,8 @@ inline bool isDisplayableCharacter(char const c)
     return (' '<=c && '~'>=c);
 }
 
-inline bool isNotEmptyLine(std::string const& mainString){
+inline bool isNotEmptyLine(std::string const& mainString)
+{
     return isNotNpos(static_cast<int>(mainString.find_first_not_of(WHITESPACE_STRING)));
 }
 

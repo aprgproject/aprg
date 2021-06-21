@@ -132,7 +132,8 @@ string Expression::getDisplayableString() const
             Term const& term(getTermConstReferenceFromSharedPointer(it->baseTermSharedPointer));
             result << getString(m_commonOperatorLevel);
             result << term.getDisplayableString();
-        }    }
+        }
+    }
     result << ")";
     return result.str();
 }
