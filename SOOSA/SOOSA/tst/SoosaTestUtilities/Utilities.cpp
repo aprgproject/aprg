@@ -19,11 +19,10 @@ SoosaConfiguration getSoosaConfiguration()
 
     // Line and bar parameters
     soosaConfiguration.bufferNameAndValueString("m_bitmapWidthToBarWidthMultiplier", "0.05");
-    soosaConfiguration.bufferNameAndValueString("m_lineBarWidthSearchInitialBlackPointsValue", "5");
+    soosaConfiguration.bufferNameAndValueString("m_lineBarWidthSearchInitialBlackPointsValue", "20");
     soosaConfiguration.bufferNameAndValueString("m_lineBarWidthSearchAcceptedRunningBlackRatio", "0.80");
     soosaConfiguration.bufferNameAndValueString("m_acceptableDistanceOverWidthRatioFromWidthMidpoint", "0.40");
-    soosaConfiguration.bufferNameAndValueString("m_acceptableMinimumDistanceFromWidthMidpoint", "4");
-    soosaConfiguration.bufferNameAndValueString("m_acceptableSdOverMeanDeviationForLine", "0.50");
+    soosaConfiguration.bufferNameAndValueString("m_acceptableMinimumDistanceFromWidthMidpoint", "4");    soosaConfiguration.bufferNameAndValueString("m_acceptableSdOverMeanDeviationForLine", "0.50");
     soosaConfiguration.bufferNameAndValueString("m_acceptableSdOverMeanDeviationForBar", "0.10");
     soosaConfiguration.bufferNameAndValueString("m_removalRatioForLineAndBar", "0.05");
     soosaConfiguration.bufferNameAndValueString("m_acceptableSdOverMeanDeviationForBarHeight", "0.10");
@@ -33,11 +32,10 @@ SoosaConfiguration getSoosaConfiguration()
     soosaConfiguration.bufferNameAndValueString("m_numberOfChoices", "5");
     soosaConfiguration.bufferNameAndValueString("m_colorIntensityForWhite", "170");
     soosaConfiguration.bufferNameAndValueString("m_barHeightToDiameterMultiplier", "0.75");
-    soosaConfiguration.bufferNameAndValueString("m_minimumPercentageOfBlackPixelsForAFilledCircle", "0.50");
+    soosaConfiguration.bufferNameAndValueString("m_minimumPercentageOfBlackPixelsForAFilledCircle", "0.40");
 
     soosaConfiguration.update();
-    return soosaConfiguration;
-}
+    return soosaConfiguration;}
 
 InputConfiguration getInputConfigurationForCharityPayWards(string const& inputPath)
 {
