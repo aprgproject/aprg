@@ -60,13 +60,12 @@ void LogStatisticsAnalyzer::saveLogDetailsToCsv(ofstream & outputCsvFileStream)
         {
             string firstLogStringInCsv(string("[") + logStrings.front() + "]");
             stringInCsv += firstLogStringInCsv;
-            for(unsigned int i=1; i<logStrings.size(); i++)
+            for(auto it=logStrings.cbegin()+1; it!=logStrings.cend(); it++)
             {
-                string logStringInCsv(string("[") + logStrings.at(i) + "]");
+                string logStringInCsv(string("[") + *it + "]");
                 stringInCsv += " && ";
                 stringInCsv += logStringInCsv;
-            }
-        }
+            }        }
         dataToDisplay.emplace(stringInCsv, logDetails.count);
     }
     for (pair<string, unsigned int> const& data : dataToDisplay)
