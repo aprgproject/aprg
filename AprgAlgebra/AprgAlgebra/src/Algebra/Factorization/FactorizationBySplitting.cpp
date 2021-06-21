@@ -212,13 +212,12 @@ void getCommonFactorsInThesePolynomials(Polynomials & commonFactors, Polynomials
     if(!smallerPolynomials.empty())
     {
         commonFactors = factorizeAPolynomial(smallerPolynomials.front());
-        for(unsigned int i=1; i<smallerPolynomials.size(); i++)
+        for(auto it=smallerPolynomials.cbegin()+1; it!=smallerPolynomials.cend(); it++)
         {
-            Polynomials commonFactorsOfAPolynomial(factorizeAPolynomial(smallerPolynomials.at(i)));
+            Polynomials commonFactorsOfAPolynomial(factorizeAPolynomial(*it));
             updateToGetSubsetOfFactors(commonFactors, commonFactorsOfAPolynomial);
         }
-    }
-}
+    }}
 
 Polynomial getNewPolynomialWithNewVariables(
         SubstitutionOfVariablesToTerms & variableSubstitution,

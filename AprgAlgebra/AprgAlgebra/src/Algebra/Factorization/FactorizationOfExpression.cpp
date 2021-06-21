@@ -148,13 +148,12 @@ AlbaNumber getGcfOfConstants(AlbaNumbers const& constantFactorsPerAddends)
     if(!constantFactorsPerAddends.empty())
     {
         constantGcf = constantFactorsPerAddends.front();
-        for(unsigned int i=1; i<constantFactorsPerAddends.size(); i++)
+        for(auto it=constantFactorsPerAddends.cbegin()+1; it!=constantFactorsPerAddends.cend(); it++)
         {
-            constantGcf = getGreatestCommonFactor(constantGcf, constantFactorsPerAddends.at(i));
+            constantGcf = getGreatestCommonFactor(constantGcf, *it);
         }
     }
-    return constantGcf;
-}
+    return constantGcf;}
 
 void retrieveCommonNonConstantFactors(
         TermsRaiseToNumbers & commonNonConstantFactors,
@@ -163,17 +162,16 @@ void retrieveCommonNonConstantFactors(
     if(!nonConstantFactorsPerAddends.empty())
     {
         commonNonConstantFactors = nonConstantFactorsPerAddends.front();
-        for(unsigned int i=1; i<nonConstantFactorsPerAddends.size(); i++)
+        for(auto it=nonConstantFactorsPerAddends.cbegin()+1; it!=nonConstantFactorsPerAddends.cend(); it++)
         {
             for(auto const& commonFactorBaseExponentPair : commonNonConstantFactors.getBaseToExponentMap())
             {
                 Term const& base(commonFactorBaseExponentPair.first);
                 AlbaNumber const& exponentAtCommonFactor(commonFactorBaseExponentPair.second);
-                AlbaNumber exponentAtAddend(nonConstantFactorsPerAddends.at(i).getExponentOfBase(base));
+                AlbaNumber exponentAtAddend(it->getExponentOfBase(base));
                 if(exponentAtAddend > 0)
                 {
-                    commonNonConstantFactors.setBaseAndExponent(base, min(exponentAtCommonFactor, exponentAtAddend));
-                }
+                    commonNonConstantFactors.setBaseAndExponent(base, min(exponentAtCommonFactor, exponentAtAddend));                }
                 else if(exponentAtAddend < 0)
                 {
                     commonNonConstantFactors.setBaseAndExponent(base, max(exponentAtCommonFactor, exponentAtAddend));

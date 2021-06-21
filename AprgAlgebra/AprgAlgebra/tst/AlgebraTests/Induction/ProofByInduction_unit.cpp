@@ -18,11 +18,10 @@ TEST(ProofByInductionTest, ProveTheSumOfOddIntegers)
     ProofByInduction proof("n", Monomial(1, {{"n", 2}}), [](AlbaNumber const& n)
     {
         AlbaNumber result(0);
-        AlbaNumber lastValue = n*2-1;
+        AlbaNumber lastValue = (n*2)-1;
         for(AlbaNumber i=1; i<=lastValue; i+=2)
         {
-            result+=i;
-        }
+            result+=i;        }
         return result;
     });
 
@@ -46,11 +45,10 @@ TEST(ProofByInductionTest, ProveTheSumOfSquareOfOddIntegers)
                 [](AlbaNumber const& n)
     {
         AlbaNumber result(0);
-        AlbaNumber lastValue = n*2-1;
+        AlbaNumber lastValue = (n*2)-1;
         for(AlbaNumber i=1; i<=lastValue; i+=2)
         {
-            result+=i^2;
-        }
+            result+=i^2;        }
         return result;
     });
 
