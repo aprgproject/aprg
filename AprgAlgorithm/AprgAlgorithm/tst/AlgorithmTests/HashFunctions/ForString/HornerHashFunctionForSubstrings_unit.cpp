@@ -14,12 +14,11 @@ namespace
 {
 using HashValue = unsigned long long;
 using HashFunctionForTest = HornerHashFunctionForSubstrings<HashValue>;
-static constexpr HashValue RADIX=256U;
-static constexpr HashValue A_LARGE_PRIME=1229952067U;
+constexpr HashValue RADIX=256U;
+constexpr HashValue A_LARGE_PRIME=1229952067U;
 }
 
-TEST(HornerHashFunctionForSubstringsTest, Example1Works)
-{
+TEST(HornerHashFunctionForSubstringsTest, Example1Works){
     HashFunctionForTest hashFunction(RADIX, A_LARGE_PRIME, "ALLEY");
 
     EXPECT_EQ(23869869ULL, hashFunction.getHashCodeOfWholeString());

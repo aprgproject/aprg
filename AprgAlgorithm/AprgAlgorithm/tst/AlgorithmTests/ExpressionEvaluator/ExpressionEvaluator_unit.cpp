@@ -237,12 +237,10 @@ TEST(ExpressionEvaluatorConverterTest, InfixToPostfixConvertionWorksForUnaryOper
     infixEvaluator.addTerm(InfixEvaluatorForTest::Term(0U));
     EXPECT_EQ(-1, infixEvaluator.evaluate());
 
-    EvaluatorConverterForTest evaluatorConverter;
-    PostfixEvaluatorForTest postfixEvaluator(evaluatorConverter.convertInfixToPostfix(infixEvaluator));
+    PostfixEvaluatorForTest postfixEvaluator(EvaluatorConverterForTest::convertInfixToPostfix(infixEvaluator));
     PostfixEvaluatorForTest::Terms terms(postfixEvaluator.getTerms());
     ASSERT_EQ(2U, terms.size());
-    EXPECT_EQ(0, terms[0].getValue());
-    EXPECT_EQ("~", terms[1].getOperator());
+    EXPECT_EQ(0, terms[0].getValue());    EXPECT_EQ("~", terms[1].getOperator());
     EXPECT_EQ(-1, postfixEvaluator.evaluate());
 }
 
@@ -254,12 +252,10 @@ TEST(ExpressionEvaluatorConverterTest, InfixToPostfixConvertionWorksForBinaryOpe
     infixEvaluator.addTerm(InfixEvaluatorForTest::Term(654U));
     EXPECT_EQ(777, infixEvaluator.evaluate());
 
-    EvaluatorConverterForTest evaluatorConverter;
-    PostfixEvaluatorForTest postfixEvaluator(evaluatorConverter.convertInfixToPostfix(infixEvaluator));
+    PostfixEvaluatorForTest postfixEvaluator(EvaluatorConverterForTest::convertInfixToPostfix(infixEvaluator));
     PostfixEvaluatorForTest::Terms terms(postfixEvaluator.getTerms());
     ASSERT_EQ(3U, terms.size());
-    EXPECT_EQ(123, terms[0].getValue());
-    EXPECT_EQ(654, terms[1].getValue());
+    EXPECT_EQ(123, terms[0].getValue());    EXPECT_EQ(654, terms[1].getValue());
     EXPECT_EQ("+", terms[2].getOperator());
     EXPECT_EQ(777, postfixEvaluator.evaluate());
 }
@@ -274,12 +270,10 @@ TEST(ExpressionEvaluatorConverterTest, InfixToPostfixConvertionWorksForBinaryOpe
     infixEvaluator.addTerm(InfixEvaluatorForTest::Term(100U));
     EXPECT_EQ(1100, infixEvaluator.evaluate());
 
-    EvaluatorConverterForTest evaluatorConverter;
-    PostfixEvaluatorForTest postfixEvaluator(evaluatorConverter.convertInfixToPostfix(infixEvaluator));
+    PostfixEvaluatorForTest postfixEvaluator(EvaluatorConverterForTest::convertInfixToPostfix(infixEvaluator));
     PostfixEvaluatorForTest::Terms terms(postfixEvaluator.getTerms());
     ASSERT_EQ(5U, terms.size());
-    EXPECT_EQ(100, terms[0].getValue());
-    EXPECT_EQ(10, terms[1].getValue());
+    EXPECT_EQ(100, terms[0].getValue());    EXPECT_EQ(10, terms[1].getValue());
     EXPECT_EQ("*", terms[2].getOperator());
     EXPECT_EQ(100, terms[3].getValue());
     EXPECT_EQ("+", terms[4].getOperator());
@@ -308,12 +302,10 @@ TEST(ExpressionEvaluatorConverterTest, InfixToPostfixConvertionWorksForComplicat
     infixEvaluator.addTerm(InfixEvaluatorForTest::Term(")", InfixEvaluatorForTest::Term::OperatorSyntaxType::EndGroup));
     EXPECT_EQ(101, infixEvaluator.evaluate());
 
-    EvaluatorConverterForTest evaluatorConverter;
-    PostfixEvaluatorForTest postfixEvaluator(evaluatorConverter.convertInfixToPostfix(infixEvaluator));
+    PostfixEvaluatorForTest postfixEvaluator(EvaluatorConverterForTest::convertInfixToPostfix(infixEvaluator));
     PostfixEvaluatorForTest::Terms terms(postfixEvaluator.getTerms());
     ASSERT_EQ(9U, terms.size());
-    EXPECT_EQ(1, terms[0].getValue());
-    EXPECT_EQ(2, terms[1].getValue());
+    EXPECT_EQ(1, terms[0].getValue());    EXPECT_EQ(2, terms[1].getValue());
     EXPECT_EQ(3, terms[2].getValue());
     EXPECT_EQ("+", terms[3].getOperator());
     EXPECT_EQ(4, terms[4].getValue());
@@ -337,12 +329,10 @@ TEST(ExpressionEvaluatorConverterTest, PostfixInfixToConvertionWorks)
     postfixEvaluator.addTerm(InfixEvaluatorForTest::Term("*", InfixEvaluatorForTest::Term::OperatorSyntaxType::Binary));
     postfixEvaluator.addTerm(InfixEvaluatorForTest::Term("+", InfixEvaluatorForTest::Term::OperatorSyntaxType::Binary));
 
-    EvaluatorConverterForTest evaluatorConverter;
-    InfixEvaluatorForTest infixEvaluator(evaluatorConverter.convertPostfixToInfix(postfixEvaluator));
+    InfixEvaluatorForTest infixEvaluator(EvaluatorConverterForTest::convertPostfixToInfix(postfixEvaluator));
     InfixEvaluatorForTest::Terms terms(infixEvaluator.getTerms());
 
-    //((5*4)*(3+2))+1
-    ASSERT_EQ(15U, terms.size());
+    //((5*4)*(3+2))+1    ASSERT_EQ(15U, terms.size());
     EXPECT_TRUE(terms[0].isStartGroupOperator());
     EXPECT_TRUE(terms[1].isStartGroupOperator());
     EXPECT_EQ(5, terms[2].getValue());
