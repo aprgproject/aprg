@@ -77,10 +77,14 @@ TEST(RWayTrieUsingLinkedArraysTest, GetAllKeysThatMatchWorks)
     testGetAllKeysThatMatchWithUnsignedInt<TrieForTest>();
 }
 
+TEST(RWayTrieUsingLinkedArraysTest, Example1Works)
+{
+    testExample1WithUnsignedInt<TrieForTest>();
+}
+
 TEST(RWayTrieUsingLinkedArraysTest, GetWhenEmptyStringWorks)
 {
     TrieForTest trie;
-
     EXPECT_EQ(0U, trie.get(""));
 
     trie.put("", 17U);

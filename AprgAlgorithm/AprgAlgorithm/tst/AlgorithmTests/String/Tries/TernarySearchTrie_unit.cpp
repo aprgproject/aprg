@@ -77,10 +77,14 @@ TEST(TernarySearchTrieTest, GetAllKeysThatMatchWorks)
     testGetAllKeysThatMatchWithUnsignedInt<TrieForTest>();
 }
 
+TEST(TernarySearchTrieTest, Example1Works)
+{
+    testExample1WithUnsignedInt<TrieForTest>();
+}
+
 TEST(TernarySearchTrieTest, GetNumberOfNodesWorksWhenEmpty)
 {
     TrieForTest trie;
-
     EXPECT_EQ(0U, trie.getNumberOfNodes());
 }
 
