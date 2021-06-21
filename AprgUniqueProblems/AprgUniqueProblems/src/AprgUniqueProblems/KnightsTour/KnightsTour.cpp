@@ -1,10 +1,9 @@
 #include "KnightsTour.hpp"
 
-#include <Algorithm/Graph/PathSearch/HamiltonianPath/HamiltonianPathSearchWithDfs.hpp>
+#include <Algorithm/Graph/PathSearch/HamiltonianPaths/HamiltonianPathSearchWithDfs.hpp>
 
 using namespace alba::algorithm;
 using namespace std;
-
 namespace alba
 {
 

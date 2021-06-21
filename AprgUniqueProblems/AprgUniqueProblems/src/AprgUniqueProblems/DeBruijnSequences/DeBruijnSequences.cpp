@@ -1,10 +1,9 @@
 #include "DeBruijnSequences.hpp"
 
-#include <Algorithm/Graph/PathSearch/EulerPath/DirectedGraph/HierholzerAlgorithmForDirectedGraph.hpp>
+#include <Algorithm/Graph/PathSearch/EulerPaths/DirectedGraph/HierholzerAlgorithmForDirectedGraph.hpp>
 
 using namespace alba::algorithm;
 using namespace std;
-
 namespace alba
 {
 
@@ -30,14 +29,13 @@ string DeBruijnSequences::getDeBruijnString() const
         auto eulerPath(eulerPathSearch.getEulerPath());
         if(!eulerPath.empty())
         {
-            result = eulerPath.at(0);
-            for(unsigned int i=1; i<eulerPath.size(); i++)
+            result = eulerPath.front();
+            for(auto it=eulerPath.cbegin()+1; it!=eulerPath.cend(); it++)
             {
-                result += eulerPath.at(i).back();
+                result += it->back();
             }
         }
-    }
-    return result;
+    }    return result;
 }
 
 void DeBruijnSequences::initialize()
