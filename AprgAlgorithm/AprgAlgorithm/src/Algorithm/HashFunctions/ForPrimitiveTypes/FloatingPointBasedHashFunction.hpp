@@ -14,12 +14,14 @@ class FloatingPointBasedHashFunction
 public:
 
     FloatingPointBasedHashFunction() = delete;
+    ~FloatingPointBasedHashFunction() = delete;
     FloatingPointBasedHashFunction(FloatingPointBasedHashFunction const&) = delete;
     FloatingPointBasedHashFunction & operator= (FloatingPointBasedHashFunction const&) = delete;
+    FloatingPointBasedHashFunction(FloatingPointBasedHashFunction &&) = delete;
+    FloatingPointBasedHashFunction & operator= (FloatingPointBasedHashFunction &&) = delete;
 
     static HashValue getHashCode(Input const& input)
-    {
-        union SharedValue        {
+    {        union SharedValue        {
             uint64_t integerValue;
             Input floatingPointValue;
         };

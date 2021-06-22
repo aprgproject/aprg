@@ -17,13 +17,16 @@ public:
 
     using RowAndColumnPair = std::pair<unsigned int, unsigned int>;
 
+    // rule of five or six
     CountSpanningTreesUsingKirchhoffTheorem() = delete;
+    ~CountSpanningTreesUsingKirchhoffTheorem() = delete;
     CountSpanningTreesUsingKirchhoffTheorem(CountSpanningTreesUsingKirchhoffTheorem const&) = delete;
     CountSpanningTreesUsingKirchhoffTheorem & operator= (CountSpanningTreesUsingKirchhoffTheorem const&) = delete;
+    CountSpanningTreesUsingKirchhoffTheorem(CountSpanningTreesUsingKirchhoffTheorem &&) = delete;
+    CountSpanningTreesUsingKirchhoffTheorem & operator= (CountSpanningTreesUsingKirchhoffTheorem &&) = delete;
 
     template<unsigned int MAX_VERTEX_VALUE>
-    static unsigned int getCount(BaseGraph<Vertex> const& graph)
-    {        // L is the Laplacean matrix.
+    static unsigned int getCount(BaseGraph<Vertex> const& graph)    {        // L is the Laplacean matrix.
         // It can be shown that the number of spanning trees equals the determinant of a matrix that is obtained
         // when we remove any row and any column from L.
 
