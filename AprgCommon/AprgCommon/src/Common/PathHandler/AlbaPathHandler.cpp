@@ -22,13 +22,9 @@ AlbaPathHandler::AlbaPathHandler(string const& path, string const& slashCharacte
     save(path);
 }
 
-AlbaPathHandler::~AlbaPathHandler()
-{}
-
 void AlbaPathHandler::clear()
 {
-    m_pathType = PathType::Empty;
-    m_directory.clear();
+    m_pathType = PathType::Empty;    m_directory.clear();
     m_file.clear();
     m_extension.clear();
 }

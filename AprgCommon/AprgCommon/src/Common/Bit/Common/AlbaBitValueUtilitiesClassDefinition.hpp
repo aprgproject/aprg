@@ -12,13 +12,16 @@ class AlbaBitValueUtilities
 {
 public:
 
+    // rule of five or six
     AlbaBitValueUtilities() = delete;
+    ~AlbaBitValueUtilities() = delete; // disallow allocation on stack, only on heap(but no constructor so not possible as well)
     AlbaBitValueUtilities(AlbaBitValueUtilities const&) = delete;
     AlbaBitValueUtilities & operator= (AlbaBitValueUtilities const&) = delete;
+    AlbaBitValueUtilities(AlbaBitValueUtilities &&) = delete;
+    AlbaBitValueUtilities & operator= (AlbaBitValueUtilities &&) = delete;
 
     static constexpr inline bool isPowerOfTwo(DataTypeToManipulate const value)
-    {
-        static_assert(std::is_integral<DataTypeToManipulate>::value, "DataTypeToManipulate must be an integer");
+    {        static_assert(std::is_integral<DataTypeToManipulate>::value, "DataTypeToManipulate must be an integer");
         return (value & (value-1))==0;
     }
 

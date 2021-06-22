@@ -83,23 +83,22 @@ TEST(UniqueVariantTest, PolymorphismIsSupportedByUniqueVariant)
         explicit Base(int value)
             : m_value(value)
         {}
+        virtual ~Base() = default;
+
         virtual int getValue() const
         {
             return m_value;
         }
-        virtual ~Base()
-        {}
     };
 
-    class Derived : public Base
-    {
+    class Derived : public Base    {
     public:
         Derived()
-            : Base(0) { }
+            : Base(0)
+        {}
         virtual int getValue() const override
         {
-            return valueFromTest;
-        }
+            return valueFromTest;        }
     };
 
     // When

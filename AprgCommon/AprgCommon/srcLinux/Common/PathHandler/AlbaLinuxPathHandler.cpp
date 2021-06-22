@@ -41,13 +41,9 @@ AlbaLinuxPathHandler::AlbaLinuxPathHandler(string const& path)
     save(path);
 }
 
-AlbaLinuxPathHandler::~AlbaLinuxPathHandler()
-{}
-
 void AlbaLinuxPathHandler::clear()
 {
-    AlbaPathHandler::clear();
-    m_foundInLocalSystem = false;
+    AlbaPathHandler::clear();    m_foundInLocalSystem = false;
     m_relativePath = false;
 }
 
