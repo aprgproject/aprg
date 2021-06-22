@@ -17,15 +17,9 @@ namespace alba
 namespace algebra
 {
 
-BaseOneEquationOneVariableSolver::BaseOneEquationOneVariableSolver()
-    : BaseSolver()
-    , m_calculatedValues()
-{}
-
 SolutionSet BaseOneEquationOneVariableSolver::calculateSolutionAndReturnSolutionSet(
         Equation const& equation)
-{
-    SolutionSet solutionSet;
+{    SolutionSet solutionSet;
     calculateSolution(solutionSet, equation);
     return solutionSet;
 }

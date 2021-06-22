@@ -9,11 +9,10 @@ namespace algebra
 class BaseTermData
 {
 public:
-    BaseTermData();
-    virtual ~BaseTermData();
+    BaseTermData() = default;
+    virtual ~BaseTermData() = default;
 
 private:
-
 };
 
 }
