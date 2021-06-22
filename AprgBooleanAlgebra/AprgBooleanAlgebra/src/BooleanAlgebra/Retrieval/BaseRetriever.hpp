@@ -13,10 +13,11 @@ template <typename DataType>
 class BaseRetriever
 {
 public:
+    virtual ~BaseRetriever() = default;
+
     DataType const& getSavedData() const
     {
-        return m_savedData;
-    }
+        return m_savedData;    }
 
     DataType & getSavedDataReference()
     {

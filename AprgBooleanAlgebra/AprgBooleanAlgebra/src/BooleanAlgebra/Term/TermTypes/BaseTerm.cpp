@@ -8,16 +8,9 @@ namespace alba
 namespace booleanAlgebra
 {
 
-BaseTerm::BaseTerm()
-{}
-
-BaseTerm::~BaseTerm()
-{}
-
 string BaseTerm::getDisplayableString() const
 {
-    return "[BaseTermDisplayableString]";
-}
+    return "[BaseTermDisplayableString]";}
 
 string BaseTerm::getDebugString() const
 {

@@ -11,12 +11,11 @@ namespace booleanAlgebra
 class BaseTerm
 {
 public:
-    BaseTerm();
-    virtual ~BaseTerm();
+    BaseTerm() = default;
+    virtual ~BaseTerm() = default;
 
     virtual std::string getDisplayableString() const;
     virtual std::string getDebugString() const;
-
 private:
 };
 
