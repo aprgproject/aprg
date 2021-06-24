@@ -24,7 +24,8 @@ AlbaPathHandler::AlbaPathHandler(string const& path, string const& slashCharacte
 
 void AlbaPathHandler::clear()
 {
-    m_pathType = PathType::Empty;    m_directory.clear();
+    m_pathType = PathType::Empty;
+    m_directory.clear();
     m_file.clear();
     m_extension.clear();
 }

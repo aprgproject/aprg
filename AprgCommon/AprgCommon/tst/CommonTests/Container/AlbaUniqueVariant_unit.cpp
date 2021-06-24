@@ -91,14 +91,16 @@ TEST(UniqueVariantTest, PolymorphismIsSupportedByUniqueVariant)
         }
     };
 
-    class Derived : public Base    {
+    class Derived : public Base
+    {
     public:
         Derived()
             : Base(0)
         {}
         virtual int getValue() const override
         {
-            return valueFromTest;        }
+            return valueFromTest;
+        }
     };
 
     // When

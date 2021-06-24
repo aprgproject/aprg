@@ -15,7 +15,8 @@ public:
     virtual ~AlbaPathHandler() = default;
 
     virtual void clear();
-    virtual std::string getFullPath() const;    virtual std::string getDirectory() const;
+    virtual std::string getFullPath() const;
+    virtual std::string getDirectory() const;
     void input(std::string const& path);
     void reInput();
     void goUp();

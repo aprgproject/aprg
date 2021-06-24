@@ -48,7 +48,8 @@ TEST(SoosaConfigurationTest, LoadConfigurationFromFileWorks)
     EXPECT_EQ(20U, soosaConfiguration.getLineBarWidthSearchInitialBlackPointsValue());
     EXPECT_DOUBLE_EQ(0.80, soosaConfiguration.getLineBarWidthSearchAcceptedRunningBlackRatio());
     EXPECT_DOUBLE_EQ(0.40, soosaConfiguration.getAcceptableDistanceOverWidthRatioFromWidthMidpoint());
-    EXPECT_EQ(4U, soosaConfiguration.getAcceptableMinimumDistanceFromWidthMidpoint());    EXPECT_DOUBLE_EQ(0.50, soosaConfiguration.getAcceptableSdOverMeanDeviationForLine());
+    EXPECT_EQ(4U, soosaConfiguration.getAcceptableMinimumDistanceFromWidthMidpoint());
+    EXPECT_DOUBLE_EQ(0.50, soosaConfiguration.getAcceptableSdOverMeanDeviationForLine());
     EXPECT_DOUBLE_EQ(0.10, soosaConfiguration.getAcceptableSdOverMeanDeviationForBar());
     EXPECT_DOUBLE_EQ(0.05, soosaConfiguration.getRemovalRatioForLineAndBar());
     EXPECT_DOUBLE_EQ(0.10, soosaConfiguration.getAcceptableSdOverMeanDeviationForBarHeight());
@@ -61,4 +62,5 @@ TEST(SoosaConfigurationTest, LoadConfigurationFromFileWorks)
 }
 
 }
+
 }

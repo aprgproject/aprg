@@ -148,7 +148,8 @@ template <typename NumberType> inline NumberType getDifferenceFromGreaterMultipl
     {
         result = greaterMultiple - number;
     }
-    return result;}
+    return result;
+}
 
 AlbaNumber getGreatestCommonFactor(AlbaNumber const& firstNumber, AlbaNumber const& secondNumber); // different implementation
 AlbaNumber getLeastCommonMultiple(AlbaNumber const& firstNumber, AlbaNumber const& secondNumber); // different implementation

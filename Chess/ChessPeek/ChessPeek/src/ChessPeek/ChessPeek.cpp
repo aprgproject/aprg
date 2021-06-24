@@ -31,6 +31,7 @@
 using namespace alba::AprgBitmap;
 using namespace alba::stringHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -65,6 +66,7 @@ void ChessPeek::runForever()
         //break; //
     }
 }
+
 void ChessPeek::runOneIteration()
 {
     Board::PieceMatrix previousPieceMatrix(m_chessBoard.getPieceMatrix());
@@ -84,7 +86,8 @@ void ChessPeek::checkScreenAndSaveDetails()
     bitmap.setSnippetWriteToFile(snippet);//
 }
 
-void ChessPeek::startNewAnalysisUsingEngine(){
+void ChessPeek::startNewAnalysisUsingEngine()
+{
     m_isPreviousAnalysisNotSuccessful = true;
     if(!m_chessEngineController.waitTillReadyAndReturnIfResetWasPerformed())
     {
@@ -128,7 +131,8 @@ void ChessPeek::checkSnippetAndSaveDetails(BitmapSnippet & snippet)
     snippet.setPixelAt(snippet.getBottomRightCorner(), 0xA1BA00);//
     unsigned int pieceCount = 0U;
     for(unsigned int j=0; j<8; j++)
-    {        for(unsigned int i=0; i<8; i++)
+    {
+        for(unsigned int i=0; i<8; i++)
         {
             CoordinateSquare square{};
             square.left = round(startX + deltaX*i + deltaX*LEFT_RIGHT_INDENTION);
@@ -339,7 +343,8 @@ void ChessPeek::retrieveChessCellBitValueAt(
             snippet.setPixelAt(bitmapCoordinate, 0xBB0000);//
             count++;
         }
-    }}
+    }
+}
 
 void ChessPeek::setBitsBasedFromColor(
         BitSet64 & whiteValue,

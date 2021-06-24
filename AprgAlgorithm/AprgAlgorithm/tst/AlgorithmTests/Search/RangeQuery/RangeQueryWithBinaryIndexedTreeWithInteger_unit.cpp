@@ -37,7 +37,8 @@ TEST(RangeQueryWithBinaryIndexedTreeTest, GetAccumulatedValueOnIntervalWithSumWo
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, GetAccumulatedValueOnIntervalWithSumWorksOnExample1)
 {
-    ValuesForTest values{1U, 3U, 4U, 8U, 6U, 1U, 4U, 2U, 9U};    RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
+    ValuesForTest values{1U, 3U, 4U, 8U, 6U, 1U, 4U, 2U, 9U};
+    RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
 
     EXPECT_EQ(1U, sumRangeQuery.getAccumulatedValueOnInterval(0U, 0U));
     EXPECT_EQ(4U, sumRangeQuery.getAccumulatedValueOnInterval(0U, 1U));
@@ -65,7 +66,8 @@ TEST(RangeQueryWithBinaryIndexedTreeTest, GetSumFrom0ToIndexWithSumWorksWithEmpt
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, GetSumFrom0ToIndexWithSumWorksOnExample1)
 {
-    ValuesForTest values{1U, 3U, 4U, 8U, 6U, 1U, 4U, 2U, 9U};    RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
+    ValuesForTest values{1U, 3U, 4U, 8U, 6U, 1U, 4U, 2U, 9U};
+    RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
 
     EXPECT_EQ(1U, sumRangeQuery.getAccumulatedValueFrom0ToIndex(0U));
     EXPECT_EQ(4U, sumRangeQuery.getAccumulatedValueFrom0ToIndex(1U));
@@ -91,7 +93,8 @@ TEST(RangeQueryWithBinaryIndexedTreeTest, ChangeValueAtIndexWithSumWorksWithEmpt
 
 TEST(RangeQueryWithBinaryIndexedTreeTest, ChangeValueAtIndexWithSumWorksOnExample1)
 {
-    ValuesForTest values{1U, 3U, 4U, 8U, 6U, 1U, 4U, 2U, 9U};    RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
+    ValuesForTest values{1U, 3U, 4U, 8U, 6U, 1U, 4U, 2U, 9U};
+    RangeQueryForTest sumRangeQuery(values, plusAccumulator, minusAccumulator);
 
     sumRangeQuery.changeValueAtIndex(3U, 3U);
 

@@ -16,7 +16,8 @@ public:
 
     virtual void mutateEquation(Equation & equation);
     virtual void mutateTerm(Term & term);
-    virtual void mutateConstant(Constant &);    virtual void mutateVariable(Variable &);
+    virtual void mutateConstant(Constant &);
+    virtual void mutateVariable(Variable &);
     virtual void mutateMonomial(Monomial &);
     virtual void mutatePolynomial(Polynomial & polynomial);
     virtual void mutateExpression(Expression & expression);

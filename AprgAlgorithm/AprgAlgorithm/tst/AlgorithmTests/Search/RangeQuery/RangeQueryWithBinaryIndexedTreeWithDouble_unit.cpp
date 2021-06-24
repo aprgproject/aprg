@@ -115,4 +115,5 @@ TEST(RangeQueryWithBinaryIndexedTreeTest, ChangeValueAtIndexWithGeometricSumWork
 }
 
 }
+
 }

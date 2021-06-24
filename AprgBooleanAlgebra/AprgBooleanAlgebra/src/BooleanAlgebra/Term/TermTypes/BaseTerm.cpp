@@ -10,7 +10,8 @@ namespace booleanAlgebra
 
 string BaseTerm::getDisplayableString() const
 {
-    return "[BaseTermDisplayableString]";}
+    return "[BaseTermDisplayableString]";
+}
 
 string BaseTerm::getDebugString() const
 {

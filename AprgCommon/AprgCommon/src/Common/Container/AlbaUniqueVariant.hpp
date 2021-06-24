@@ -91,7 +91,8 @@ public:
 
 };
 
-// Purpose: A compile-time checking unique variant classtemplate <class... Types>
+// Purpose: A compile-time checking unique variant class
+template <class... Types>
 class UniqueVariant
 {
 

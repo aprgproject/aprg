@@ -86,7 +86,8 @@ private:
                     m_selectedValueMatrix.setEntry(index, exponentOf2+1, selectedValue);
                 }
             }
-        }    }
+        }
+    }
     ValueMatrix m_selectedValueMatrix; // index by exponent matrix
     SelectorFunction m_selector;
 };

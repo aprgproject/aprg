@@ -19,7 +19,8 @@ public:
     // The range query can be done in O(1)/constant time.
 
     using Index = unsigned int;
-    using Value = typename Values::value_type;    using AccumulatorFunction = std::function<Value(Value const&, Value const&)>;
+    using Value = typename Values::value_type;
+    using AccumulatorFunction = std::function<Value(Value const&, Value const&)>;
 
     RangeQueryWithAccumulator(
             Values const& valuesToCheck,

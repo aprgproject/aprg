@@ -18,6 +18,7 @@ public:
     virtual ~BaseOneEquationOneVariableSolver() = default;
 
     SolutionSet calculateSolutionAndReturnSolutionSet(Equation const& equation);
+
 protected:
     virtual void calculateSolution(SolutionSet & solutionSet, Equation const& equation) = 0;
     void processWhenEquationIsAlwaysSatisfied(SolutionSet & solutionSet);

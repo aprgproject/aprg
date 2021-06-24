@@ -21,7 +21,9 @@ public:
     AlbaBitValueUtilities & operator= (AlbaBitValueUtilities &&) = delete;
 
     static constexpr inline bool isPowerOfTwo(DataTypeToManipulate const value)
-    {        static_assert(std::is_integral<DataTypeToManipulate>::value, "DataTypeToManipulate must be an integer");
+    {
+        static_assert(std::is_integral<DataTypeToManipulate>::value, "DataTypeToManipulate must be an integer");
+
         return (value & (value-1))==0;
     }
 
