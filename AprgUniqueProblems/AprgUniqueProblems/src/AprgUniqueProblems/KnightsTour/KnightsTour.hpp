@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Algorithm/Graph/UndirectedGraph/UndirectedGraphWithListOfEdges.hpp>
+#include <AprgUniqueProblems/Utilities/PrintUtilities.hpp>
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 
 namespace alba
@@ -11,7 +12,7 @@ using VertexOfKnightsTour = std::pair<unsigned int, unsigned int>; // Count and 
 class KnightsTour
 {
 public:
-    // A knight’s tour is a sequence of moves of a knight on an n £ n chessboard following the rules of chess such that the knight visits each square exactly once.
+    // A knight’s tour is a sequence of moves of a knight on an n x n chessboard following the rules of chess such that the knight visits each square exactly once.
     // A knight’s tour is called a closed tour if the knight finally returns to the starting square and otherwise it is called an open tour.
 
     using ChessBoardIndexes=std::vector<unsigned int>;
@@ -39,7 +40,5 @@ private:
     algorithm::UndirectedGraphWithListOfEdges<VertexOfKnightsTour> m_graph;
     matrix::AlbaMatrix<unsigned int> m_neighborMatrix;
 };
-
-std::ostream & operator<<(std::ostream & out, VertexOfKnightsTour const& vertex);
 
 }
