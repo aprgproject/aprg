@@ -28,12 +28,11 @@ public:
     using BlockValue = typename BaseClass::BlockValue;
     using Range = std::pair<Index, Index>;
     using Ranges = std::vector<Range>;
-    using RequestAndOutputPair = std::pair<Range, Output>;
-    using RequestAndOutputPairs = std::vector<RequestAndOutputPair>;
+    using InputAndOutputPair = std::pair<Range, Output>;
+    using InputAndOutputPairs = std::vector<InputAndOutputPair>;
     using ValuesFunction = typename BaseClass::ValuesFunction;
     using BlockValuesFunction = typename BaseClass::BlockValuesFunction;
     using TwoBlocksFunction = std::function<BlockValue(BlockValue const&, BlockValue const&)>;
-
     RangeQueryWithBlocksWithMultipleRequests(
             Values const& valuesToCheck,
             ValuesFunction const& valuesFunction,
@@ -46,12 +45,11 @@ public:
         , m_inverseAccumulateFunction(inverseAccumulateFunction)
     {}
 
-    RequestAndOutputPairs getRequestAndOutputPairsUsingMoAlgorithm(
-            Ranges const& requests) const
+    InputAndOutputPairs getInputAndOutputPairsUsingMoAlgorithm(
+            Ranges const& inputRanges) const
     {
         // Mo’s algorithm maintains an active range of the array, and the answer to a query concerning the active range is known at each moment.
-        // The algorithm processes the queries one by one, and always moves the endpoints of the active range by inserting and removing elements.
-        // The time complexity of the algorithm is O(n*sqrt(n)*f(n)) where the array contains n elements,
+        // The algorithm processes the queries one by one, and always moves the endpoints of the active range by inserting and removing elements.        // The time complexity of the algorithm is O(n*sqrt(n)*f(n)) where the array contains n elements,
         // there are n queries and each insertion and removal of an element takes O(f(n)) time.
 
         // Thus, all queries whose left endpoints are in a certain block are processed one after another sorted according to their right endpoints.
@@ -59,12 +57,11 @@ public:
         // because the left endpoint moves O(n) times O(sqrt(n)) steps, and the right endpoint moves O(sqrt(n)) times O(n) steps.
         // Thus, both endpoints move a total of O(n*sqrt(n))) steps during the algorithm.
 
-        RequestAndOutputPairs result;
-        Ranges validRanges(getValidSortedRanges(requests));
+        InputAndOutputPairs result;
+        Ranges validRanges(getValidRangesAndSortForMoAlgorithm(inputRanges));
         if(!validRanges.empty())
         {
-            Range previousRange = validRanges.front();
-            Output savedOutput = this->getResultOnInterval(previousRange.first, previousRange.second);
+            Range previousRange = validRanges.front();            Output savedOutput = this->getResultOnInterval(previousRange.first, previousRange.second);
             result.emplace_back(previousRange, savedOutput);
             for(auto it=validRanges.cbegin()+1; it!=validRanges.cend(); it++)
             {
@@ -99,11 +96,10 @@ private:
         return static_cast<Index>(sqrt(numberOfValues));
     }
 
-    Ranges getValidSortedRanges(Ranges const& ranges) const
+    Ranges getValidRangesAndSortForMoAlgorithm(Ranges const& ranges) const
     {
         Ranges result;
-        result.reserve(ranges.size());
-        for(Range const& range : ranges)
+        result.reserve(ranges.size());        for(Range const& range : ranges)
         {
             if(range.first < b_values.size() && range.second < b_values.size()) // index must be inside the give values
             {
