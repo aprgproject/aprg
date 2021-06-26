@@ -38,7 +38,8 @@ public:
     static Permutations generatePermutationsUsingCppFunctions(Objects const& objects)
     {
         Permutations result;
-        Permutation currentPermutation(objects);        do
+        Permutation currentPermutation(objects);
+        do
         {
             result.emplace_back(currentPermutation);
         }
@@ -49,14 +50,16 @@ public:
     static Permutations generatePermutationsUsingRecursion(Objects const& objects)
     {
         Permutations result;
-        RecursionData recursionData(createRecursionData(result, objects, objects.size()));        collectPermutationsUsingRecursion(recursionData);
+        RecursionData recursionData(createRecursionData(result, objects, objects.size()));
+        collectPermutationsUsingRecursion(recursionData);
         return result;
     }
 
     static Permutations generatePermutationsWithLength(Objects const& objects, unsigned int const targetPermutationLength)
     {
         Permutations result;
-        RecursionData recursionData(createRecursionData(result, objects, std::min(targetPermutationLength, objects.size())));        collectPermutationsUsingRecursion(recursionData);
+        RecursionData recursionData(createRecursionData(result, objects, std::min(targetPermutationLength, objects.size())));
+        collectPermutationsUsingRecursion(recursionData);
         return result;
     }
 
@@ -73,7 +76,8 @@ private:
     static void collectPermutationsUsingRecursion(RecursionData & recursionData)
     {
         if(recursionData.currentPermutation.size() == recursionData.targetPermutationLength)
-        {            recursionData.permutations.emplace_back(recursionData.currentPermutation);
+        {
+            recursionData.permutations.emplace_back(recursionData.currentPermutation);
         }
         else
         {

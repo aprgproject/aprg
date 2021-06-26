@@ -30,7 +30,8 @@ public:
     static Subsets generateSubsetsUsingBits(Objects const& objects)
     {
         Subsets result;
-        BitDataType finalValue = 1 << objects.size();        for(BitDataType iteration=0; iteration<finalValue; iteration++)
+        BitDataType finalValue = 1 << objects.size();
+        for(BitDataType iteration=0; iteration<finalValue; iteration++)
         {
             Subset currentSubset;
             std::bitset<AlbaBitValueUtilities<BitDataType>::getNumberOfBits()> iterationBits(iteration);
