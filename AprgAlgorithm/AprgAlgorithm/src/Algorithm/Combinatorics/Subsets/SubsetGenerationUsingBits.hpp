@@ -19,11 +19,18 @@ public:
     using Subset = Objects;
     using Subsets = std::vector<Objects>;
 
-    Subsets generateSubsetsUsingBits(Objects const& objects) const
+    // rule of five or six
+    SubsetGenerationUsingBits() = delete;
+    ~SubsetGenerationUsingBits() = delete;
+    SubsetGenerationUsingBits(SubsetGenerationUsingBits const&) = delete;
+    SubsetGenerationUsingBits & operator= (SubsetGenerationUsingBits const&) = delete;
+    SubsetGenerationUsingBits(SubsetGenerationUsingBits &&) = delete;
+    SubsetGenerationUsingBits & operator= (SubsetGenerationUsingBits &&) = delete;
+
+    static Subsets generateSubsetsUsingBits(Objects const& objects)
     {
         Subsets result;
-        BitDataType finalValue = 1 << objects.size();
-        for(BitDataType iteration=0; iteration<finalValue; iteration++)
+        BitDataType finalValue = 1 << objects.size();        for(BitDataType iteration=0; iteration<finalValue; iteration++)
         {
             Subset currentSubset;
             std::bitset<AlbaBitValueUtilities<BitDataType>::getNumberOfBits()> iterationBits(iteration);

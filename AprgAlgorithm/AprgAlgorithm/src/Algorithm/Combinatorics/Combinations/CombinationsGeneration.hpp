@@ -27,31 +27,37 @@ public:
         unsigned int const targetCombinationLength;
     };
 
-    Combinations generateCombinationsWithLength(Objects const& objects, unsigned int const targetCombinationLength) const
+    // rule of five or six
+    CombinationsGeneration() = delete;
+    ~CombinationsGeneration() = delete;
+    CombinationsGeneration(CombinationsGeneration const&) = delete;
+    CombinationsGeneration & operator= (CombinationsGeneration const&) = delete;
+    CombinationsGeneration(CombinationsGeneration &&) = delete;
+    CombinationsGeneration & operator= (CombinationsGeneration &&) = delete;
+
+    static Combinations generateCombinationsWithLength(Objects const& objects, unsigned int const targetCombinationLength)
     {
         Combinations result;
-        Combination currentCombination;
-        RecursionData recursionData(createRecursionData(result, currentCombination, objects, std::min(targetCombinationLength, objects.size())));
+        Combination currentCombination;        RecursionData recursionData(createRecursionData(result, currentCombination, objects, std::min(targetCombinationLength, objects.size())));
         collectCombinationsUsingRecursion(recursionData);
         return result;
     }
 
 private:
 
-    RecursionData createRecursionData(
+    static RecursionData createRecursionData(
             Combinations & combinations,
             Combination & currentCombination,
             Objects const& objects,
-            unsigned int const length) const
+            unsigned int const length)
     {
         return RecursionData{combinations, currentCombination, 0U, objects, length};
     }
 
-    void collectCombinationsUsingRecursion(RecursionData & recursionData) const
+    static void collectCombinationsUsingRecursion(RecursionData & recursionData)
     {
         if(recursionData.currentCombination.size() == recursionData.targetCombinationLength)
-        {
-            recursionData.combinations.emplace_back(recursionData.currentCombination);
+        {            recursionData.combinations.emplace_back(recursionData.currentCombination);
         }
         else
         {
