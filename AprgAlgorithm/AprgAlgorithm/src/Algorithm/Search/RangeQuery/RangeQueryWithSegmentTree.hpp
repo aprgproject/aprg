@@ -59,11 +59,10 @@ public:
         Index last(m_startOfChildren+end);
         if(first<=last && first<m_treeValues.size() && last<m_treeValues.size())
         {
-            result = getValueOnIntervalFromTopToBottom(start, end, ROOT_PARENT, 0, m_startOfChildren);
+            result = getValueOnIntervalFromTopToBottom(start, end, ROOT_PARENT, 0, m_startOfChildren); // startOfChildren is size of base too
         }
         return result;
     }
-
     void changeValueAtIndex(Index const index, Value const newValue)
     {
         // This has logN running time
@@ -110,11 +109,18 @@ private:
     {
         // This has logN running time
 
-        Value result{};if((startInterval==baseLeft && endInterval==baseRight) || baseLeft==baseRight)
+        // The parameter k indicates the current position in tree.
+        // Initially k equals 1, because we begin at the root of the tree.
+        // The range [x, y] corresponds to k and is initially [0,n-1].
+        // When calculating the sum, if [x, y] is outside [a,b], the sum is 0, and if [x, y] is completely inside [a,b], the sum can be found in tree.
+        // If [x, y] is partially inside [a,b], the search continues recursively to the left and right half of [x, y].
+        // The left half is [x,d] and the right half is [d+1, y] where d = floor((x+y)/2).
+
+        Value result{};
+        if((startInterval==baseLeft && endInterval==baseRight) || baseLeft==baseRight)
         {
             result = m_treeValues.at(currentChild);
-        }
-        else
+        }        else
         {
             Index baseMidPoint = (baseLeft+baseRight)/2;
             bool isLeftPartOutside = endInterval<baseLeft || startInterval>baseMidPoint;
