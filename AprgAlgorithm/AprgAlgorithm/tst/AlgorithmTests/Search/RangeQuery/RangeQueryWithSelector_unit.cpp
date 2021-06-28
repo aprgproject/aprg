@@ -39,6 +39,7 @@ TEST(RangeQueryWithSelectorTest, GetSelectedValueOnIntervalWithMinimumWorksOnExa
 {
     ValuesForTest values{5U, 9U, 4U, 8U, 6U, 1U, 4U, 2U, 0U};
     RangeQueryForTest minimumRangeQuery(values, minimumSelector);
+
     EXPECT_EQ(5U, minimumRangeQuery.getSelectedValueOnInterval(0U, 0U));
     EXPECT_EQ(5U, minimumRangeQuery.getSelectedValueOnInterval(0U, 1U));
     EXPECT_EQ(4U, minimumRangeQuery.getSelectedValueOnInterval(0U, 2U));
@@ -57,6 +58,7 @@ TEST(RangeQueryWithSelectorTest, GetSelectedValueOnIntervalWithMaximumWorksOnExa
 {
     ValuesForTest values{5U, 9U, 4U, 8U, 6U, 1U, 4U, 2U, 10U};
     RangeQueryForTest maximumRangeQuery(values, maximumSelector);
+
     EXPECT_EQ(5U, maximumRangeQuery.getSelectedValueOnInterval(0U, 0U));
     EXPECT_EQ(9U, maximumRangeQuery.getSelectedValueOnInterval(0U, 1U));
     EXPECT_EQ(9U, maximumRangeQuery.getSelectedValueOnInterval(0U, 2U));

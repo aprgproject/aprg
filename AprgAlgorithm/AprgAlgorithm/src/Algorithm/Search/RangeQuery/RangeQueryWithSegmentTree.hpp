@@ -38,11 +38,11 @@ public:
     RangeQueryWithSegmentTree(
             Values const& valuesToCheck,
             Function const& functionObject)
-        : m_smallestPowerOfTwoThatFitsChildren(0U)
-        , m_startOfChildren(0U)
+        : m_startOfChildren(0U)
         , m_treeValues()
         , m_function(functionObject)
-    {        initialize(valuesToCheck);
+    {
+        initialize(valuesToCheck);
     }
 
     Value getValueOnInterval(Index const start, Index const end) const // bottom to top approach
@@ -63,13 +63,14 @@ public:
         }
         return result;
     }
+
     void changeValueAtIndex(Index const index, Value const newValue)
     {
         // This has logN running time
         changeValueAtIndexFromBottomToTop(index, newValue);
     }
 
-private:
+protected:
 
     Value getValueOnIntervalFromBottomToTop(Index const start, Index const end) const
     {
@@ -81,7 +82,8 @@ private:
         {
             result = m_treeValues.at(first++);
             while(first < last)
-            {                if(isRightChild(first))
+            {
+                if(isRightChild(first))
                 {
                     result = m_function(result, m_treeValues.at(first++)); // move to next value (right) because current value is added
                 }
@@ -120,7 +122,8 @@ private:
         if((startInterval==baseLeft && endInterval==baseRight) || baseLeft==baseRight)
         {
             result = m_treeValues.at(currentChild);
-        }        else
+        }
+        else
         {
             Index baseMidPoint = (baseLeft+baseRight)/2;
             bool isLeftPartOutside = endInterval<baseLeft || startInterval>baseMidPoint;
@@ -147,15 +150,15 @@ private:
     {
         if(!valuesToCheck.empty())
         {
-            m_smallestPowerOfTwoThatFitsChildren = getChildrenRaiseToPower(getCeilOfLogarithmOfChildren(valuesToCheck.size()));
-            m_startOfChildren = m_smallestPowerOfTwoThatFitsChildren-1;
+            m_startOfChildren = getChildrenRaiseToPower(getCeilOfLogarithmOfChildren(valuesToCheck.size()))-1;
             Index totalSize = m_startOfChildren + valuesToCheck.size();
 
             m_treeValues.resize(totalSize);
             m_treeValues.shrink_to_fit();
             std::copy(valuesToCheck.cbegin(), valuesToCheck.cend(), m_treeValues.begin()+m_startOfChildren); // copy children
 
-            Index treeBaseLeft(m_startOfChildren);            Index treeBaseRight(totalSize-1);
+            Index treeBaseLeft(m_startOfChildren);
+            Index treeBaseRight(totalSize-1);
             while(treeBaseLeft<treeBaseRight) // fill up parent values
             {
                 if(isLeftChild(treeBaseRight)) // incomplete pair
@@ -206,7 +209,8 @@ private:
 
     bool isLeftChild(Index const treeIndex) const
     {
-        return mathHelper::isOdd(treeIndex);    }
+        return mathHelper::isOdd(treeIndex);
+    }
 
     bool isRightChild(Index const treeIndex) const
     {
@@ -230,17 +234,18 @@ private:
 
     Index getCeilOfLogarithmOfChildren(Index const index) const
     {
-        return mathHelper::getCeilOfLogarithmForIntegers(NUMBER_OF_CHILDREN, index);    }
+        return mathHelper::getCeilOfLogarithmForIntegers(NUMBER_OF_CHILDREN, index);
+    }
 
     Index getChildrenRaiseToPower(Index const index) const
     {
         return mathHelper::getRaiseToPowerForIntegers(NUMBER_OF_CHILDREN, index);
     }
 
-    Index m_smallestPowerOfTwoThatFitsChildren;
     Index m_startOfChildren;
     Values m_treeValues;
-    Function m_function;};
+    Function m_function;
+};
 
 }
 

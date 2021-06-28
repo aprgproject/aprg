@@ -4,6 +4,7 @@
 #include <map>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -30,7 +31,8 @@ KnapsackProblem::Values KnapsackProblem::getAllPossiblePartialSums() const
     for(unsigned int partialSumIndex=0; partialSumIndex<=sum; partialSumIndex++)
     {
         if(isAPossiblePartialSum.at(partialSumIndex))
-        {            result.emplace_back(partialSumIndex);
+        {
+            result.emplace_back(partialSumIndex);
         }
     }
     return result;
