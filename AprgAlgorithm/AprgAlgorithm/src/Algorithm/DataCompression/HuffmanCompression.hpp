@@ -81,7 +81,8 @@ public :
     HuffmanCompression() = default;
 
     void compress(std::istream & input, std::ostream & output)
-    {        AlbaStreamBitReader reader(input);
+    {
+        AlbaStreamBitReader reader(input);
         AlbaStreamBitWriter writer(output);
 
         Characters allInputCharacters(readAllCharacters(reader));
