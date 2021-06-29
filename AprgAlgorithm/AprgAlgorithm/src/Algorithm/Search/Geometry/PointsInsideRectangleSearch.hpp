@@ -52,11 +52,10 @@ class PointsInsideRectangleSearch
 public:
     using Point = std::pair<Unit, Unit>;
     using Points = std::vector<Point>;
-    using TwoDTree = KdTree<Point, unsigned int>;
+    using TwoDTree = KdTree<Point>;
     using NodeUniquePointer = typename TwoDTree::NodeUniquePointer;
 
-    PointsInsideRectangleSearch(Point const& bottomLeft, Point const& topRight)
-        : m_twoDTree()
+    PointsInsideRectangleSearch(Point const& bottomLeft, Point const& topRight)        : m_twoDTree()
         , m_rectangleBottomLeft(bottomLeft)
         , m_rectangleTopRight(topRight)
     {}
@@ -74,11 +73,10 @@ public:
 
     void addPoint(Point const& point)
     {
-        m_twoDTree.put(point, {});
+        m_twoDTree.put(point);
     }
 
 private:
-
     void searchForPoints(NodeUniquePointer const& nodePointer, Points & pointsInsideRectangle) const
     {
         static unsigned int depth=0;

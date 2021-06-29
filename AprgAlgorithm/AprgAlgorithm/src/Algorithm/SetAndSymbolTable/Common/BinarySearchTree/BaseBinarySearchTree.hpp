@@ -281,11 +281,10 @@ protected:
         return result;
     }
 
-    Node const* getNodeWithCeilingStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const
+    virtual Node const* getNodeWithCeilingStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const
     {
         Node const* result(nullptr);
-        if(nodePointer)
-        {
+        if(nodePointer)        {
             Key const& currentKey(nodePointer->key);
             if(key == currentKey)
             {
