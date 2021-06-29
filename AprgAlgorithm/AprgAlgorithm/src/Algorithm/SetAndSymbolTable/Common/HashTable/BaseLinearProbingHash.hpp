@@ -31,11 +31,10 @@ public:
         initialize(INITIAL_HASH_TABLE_SIZE);
     }
 
-    ~BaseLinearProbingHash()
+    virtual ~BaseLinearProbingHash()
     {
         deleteAllEntries();
     }
-
     bool isEmpty() const override
     {
         return m_size == 0;
