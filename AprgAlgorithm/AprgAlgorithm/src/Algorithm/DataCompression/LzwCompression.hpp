@@ -23,12 +23,10 @@ public :
 
     using SymbolTableUsingTrie = TernarySearchTrie<Code>;
 
-    LzwCompression()
-    {}
+    LzwCompression() = default;
 
     void compress(std::istream & input, std::ostream & output)
-    {
-        AlbaStreamBitReader reader(input);
+    {        AlbaStreamBitReader reader(input);
         AlbaStreamBitWriter writer(output);
 
         std::string wholeInputString(reader.readWholeStreamAsStringData());// read whole input as string

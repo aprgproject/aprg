@@ -18,12 +18,10 @@ class BurrowsWheelerTransform
 {
 public :
 
-    BurrowsWheelerTransform()
-    {}
+    BurrowsWheelerTransform() = default;
 
     void encode(std::istream & input, std::ostream & output)
-    {
-        AlbaStreamBitReader reader(input);
+    {        AlbaStreamBitReader reader(input);
         AlbaStreamBitWriter writer(output);
 
         std::string wholeInputString(reader.readWholeStreamAsStringData());

@@ -1,39 +1,38 @@
 #pragma once
 
 #include <Algorithm/SetAndSymbolTable/Common/BinarySearchTree/BinarySearchTreeNode.hpp>
-#include <Algorithm/SymbolTable/BinarySearchTree/Common/BaseRedBlackBinarySearchTreeSymbolTable.hpp>
+#include <Algorithm/SetAndSymbolTable/Set/BinarySearchTree/Common/BaseRedBlackBinarySearchTreeSet.hpp>
 
 namespace alba
 {
+
 namespace algorithm
 {
 
-template <typename Key, typename Value>
-class RedBlackBinarySearchTreeSymbolTable
-        : public BaseRedBlackBinarySearchTreeSymbolTable<Key, Value, RedBlackTreeNodeWithValue<Key, Value>>
+template <typename Key>
+class RedBlackBinarySearchTreeSet
+        : public BaseRedBlackBinarySearchTreeSet<Key, RedBlackTreeNode<Key>>
 {
 public:
-    using BaseClass = BaseRedBlackBinarySearchTreeSymbolTable<Key, Value, RedBlackTreeNodeWithValue<Key, Value>>;
+    using BaseClass = BaseRedBlackBinarySearchTreeSet<Key, RedBlackTreeNode<Key>>;
     using Node = typename BaseClass::Node;
     using NodeUniquePointer = typename BaseClass::NodeUniquePointer;
 
-protected:    void putStartingOnThisNode(NodeUniquePointer & nodePointer, Key const& key, Value const& value) override
+protected:
+    void putStartingOnThisNode(NodeUniquePointer & nodePointer, Key const& key) override
     {
         if(nodePointer)
         {
             Key const& currentKey(nodePointer->key);
             if(key < currentKey) // same as BST
             {
-                putStartingOnThisNode(nodePointer->left, key, value);
+                putStartingOnThisNode(nodePointer->left, key);
                 this->updateTreeNodeDetails(*nodePointer);
             }
             else if(key > currentKey) // same as BST
             {
-                putStartingOnThisNode(nodePointer->right, key, value);
+                putStartingOnThisNode(nodePointer->right, key);
                 this->updateTreeNodeDetails(*nodePointer);
-            }
-            else // equal to key
-            {                nodePointer->value = value;
             }
             if(this->hasARightLeaningRedLinkOnOneChild(nodePointer)) // rotate a right leaning red link to the left
             {
@@ -58,10 +57,11 @@ protected:    void putStartingOnThisNode(NodeUniquePointer & nodePointer, Key co
         else
         {
             // every new node created has a red link -> this corresponds in 2-3 trees a change on node number (1 becomes 2, 2 become 3, 3 becomes 4)
-            nodePointer.reset(new Node{key, value, nullptr, nullptr, 1U, RedBlackColor::Red});
+            nodePointer.reset(new Node{key, nullptr, nullptr, 1U, RedBlackColor::Red});
         }
     }
 };
+
 }
 
 }

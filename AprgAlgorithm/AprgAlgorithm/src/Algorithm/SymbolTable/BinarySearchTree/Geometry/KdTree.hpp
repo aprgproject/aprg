@@ -1,10 +1,8 @@
 #pragma once
 
 #include <Algorithm/SymbolTable/BinarySearchTree/Common/BaseBinarySearchTreeSymbolTable.hpp>
-#include <Algorithm/SymbolTable/BinarySearchTree/Common/BinarySearchTreeNode.hpp>
 
 #include <memory>
-
 namespace alba
 {
 
@@ -17,20 +15,17 @@ template <typename Key> bool isGreaterThanWithDepth(Key const& key1, Key const& 
 
 template <typename Key, typename Value>
 class KdTree
-        : public BaseBinarySearchTreeSymbolTable<Key, Value, BinarySearchTreeNode::BasicTreeNode<Key, Value>>
+        : public BaseBinarySearchTreeSymbolTable<Key, Value>
 {
 public:
-    using BaseClass = BaseBinarySearchTreeSymbolTable<Key, Value, BinarySearchTreeNode::BasicTreeNode<Key, Value>>;
-    using Node = BinarySearchTreeNode::BasicTreeNode<Key, Value>;
+    using BaseClass = BaseBinarySearchTreeSymbolTable<Key, Value>;
+    using Node = typename BaseClass::Node;
     using NodeUniquePointer = typename BaseClass::NodeUniquePointer;
     using Keys = typename BaseClass::Keys;
 
-    KdTree()
-        : BaseClass()
-    {}
+    KdTree() = default;
 
 protected:
-
     bool doesContainStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const
     {
         static unsigned int depth=0;
@@ -187,16 +182,15 @@ protected:
             if(isLessThanWithDepth(key, currentKey, depth))
             {
                 putStartingOnThisNode(nodePointer->left, key, value);
-                this->updateNodeDetails(*nodePointer);
+                this->updateTreeNodeDetails(*nodePointer);
             }
             else if(isGreaterThanWithDepth(key, currentKey, depth))
             {
                 putStartingOnThisNode(nodePointer->right, key, value);
-                this->updateNodeDetails(*nodePointer);
+                this->updateTreeNodeDetails(*nodePointer);
             }
             else
-            {
-                nodePointer->value = value;
+            {                nodePointer->value = value;
             }
         }
         else
@@ -240,11 +234,10 @@ protected:
             }
             if(nodePointer)
             {
-                this->updateNodeDetails(*nodePointer);
+                this->updateTreeNodeDetails(*nodePointer);
             }
         }
-        depth--;
-    }
+        depth--;    }
 
     void retrieveKeysInRangeInclusiveStartingOnThisNode(Keys & keys, NodeUniquePointer const& nodePointer, Key const& low, Key const& high) const
     {
