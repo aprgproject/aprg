@@ -17,10 +17,9 @@ class AlbaStreamBitReader
 {
 public:
     explicit AlbaStreamBitReader(std::istream& stream);
-    ~AlbaStreamBitReader();
+    ~AlbaStreamBitReader() = default;
 
     bool noRemainingBitsInBuffer() const;
-
     bool readBoolData();
     char readCharData();
     std::string readStringData(unsigned int const numberOfCharacters);

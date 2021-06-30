@@ -11,12 +11,13 @@ namespace alba
 class AlbaMemoryBuffer
 {
 public:
-    AlbaMemoryBuffer();
+
+    AlbaMemoryBuffer() = default;
     AlbaMemoryBuffer(void const* sourcePointer, unsigned int const size);
+
     operator bool() const;
     bool hasContent() const;
-    unsigned int getSize() const;
-    void* getBufferPointer();
+    unsigned int getSize() const;    void* getBufferPointer();
     void const* getConstantBufferPointer() const;
     void clear();
     void clearAndSetNewData(void* sourcePointer, unsigned int const size);

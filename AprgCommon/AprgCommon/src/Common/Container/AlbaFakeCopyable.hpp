@@ -9,13 +9,10 @@ template <class ObjectType>
 class AlbaFakeCopyable
 {
 public:
-    AlbaFakeCopyable()
-        : m_object()
-    {}
+    AlbaFakeCopyable() = default;
 
     AlbaFakeCopyable(ObjectType const& object)
-        : m_object(object)
-    {}
+        : m_object(object)    {}
 
     AlbaFakeCopyable(AlbaFakeCopyable const&) // copy constructor does nothing
         : m_object()
