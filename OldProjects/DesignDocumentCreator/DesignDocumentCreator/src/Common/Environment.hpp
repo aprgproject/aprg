@@ -1,11 +1,10 @@
 #pragma once
 
 #include <Common/Components/Components.hpp>
-#include <Common/Optional/AlbaOptional.hpp>
+#include <Common/Container/AlbaOptional.hpp>
 #include <Common/Uml/UmlLogger.hpp>
 
-namespace DesignDocumentCreator
-{
+namespace DesignDocumentCreator{
 
 class Environment
 {
