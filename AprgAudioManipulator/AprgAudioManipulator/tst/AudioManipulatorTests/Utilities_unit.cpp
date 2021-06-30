@@ -1,10 +1,9 @@
 #include <AudioManipulator/AudioManipulator.hpp>
 #include <AudioManipulator/NewSamplesBuilder.hpp>
 #include <AudioManipulator/Utilities.hpp>
-#include <Common/Math/AlbaMathHelper.hpp>
+#include <Common/Math/Helpers/ComputationHelpers.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace alba::mathHelper;
 using namespace std;
 
