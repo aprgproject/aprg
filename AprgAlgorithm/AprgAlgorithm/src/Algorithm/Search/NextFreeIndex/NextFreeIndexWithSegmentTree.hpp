@@ -25,11 +25,10 @@ public:
 
     Index getNextFreeIndexAt(Index const index) const
     {
-        // This has logN running time
+        // This has log(N) running time
 
         Index result{};
-        if(m_startOfChildren+index<m_treeSums.size())
-        {
+        if(m_startOfChildren+index<m_treeSums.size())        {
             result = getNextFreeIndexAt(index, Utilities::ROOT_PARENT, 0, m_startOfChildren); // startOfChildren is size of base too
         }
         return result;
@@ -53,11 +52,10 @@ private:
             Index const baseLeft,
             Index const baseRight) const
     {
-        // This has logN running time
+        // This has log(N) running time
 
         Index result{};
-        if(index+1 == m_treeSums.at(currentChild)
-                && m_startOfChildren+baseRight < m_treeSums.size()
+        if(index+1 == m_treeSums.at(currentChild)                && m_startOfChildren+baseRight < m_treeSums.size()
                 && m_treeSums.at(m_startOfChildren+baseRight) != 0)
         {
             result = baseRight;
