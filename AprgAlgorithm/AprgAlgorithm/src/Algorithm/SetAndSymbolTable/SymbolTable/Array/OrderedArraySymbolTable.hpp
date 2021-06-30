@@ -101,7 +101,8 @@ public:
 
 private:
     unsigned int & b_size;
-    Keys & b_keys;    Values m_values;
+    Keys & b_keys;
+    Values m_values;
 };
 
 }

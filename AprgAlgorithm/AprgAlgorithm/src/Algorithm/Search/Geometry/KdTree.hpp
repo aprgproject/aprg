@@ -3,6 +3,7 @@
 #include <Algorithm/SetAndSymbolTable/Set/BinarySearchTree/Common/BaseBinarySearchTreeSet.hpp>
 
 #include <memory>
+
 namespace alba
 {
 
@@ -22,6 +23,7 @@ public:
     using Node = typename BaseClass::Node;
     using NodeUniquePointer = typename BaseClass::NodeUniquePointer;
     using Keys = typename BaseClass::Keys;
+
     KdTree() = default;
 
 protected:
@@ -29,7 +31,8 @@ protected:
     bool doesContainStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const override
     {
         static unsigned int depth=0;
-        depth++;        bool result(false);
+        depth++;
+        bool result(false);
         if(nodePointer)
         {
             Key const& currentKey(nodePointer->key);
@@ -56,7 +59,8 @@ protected:
         depth++;
         Node const* result(nullptr);
         if(nodePointer)
-        {            Key const& currentKey(nodePointer->key);
+        {
+            Key const& currentKey(nodePointer->key);
             if(isEqualThanWithDepth(key, currentKey, depth))
             {
                 result = nodePointer.get();
@@ -80,7 +84,8 @@ protected:
                     // if no nodes found then this node is the left most node that is less than the key
                     result = nodePointer.get();
                 }
-            }        }
+            }
+        }
         depth--;
         return result;
     }
@@ -88,7 +93,8 @@ protected:
     Node const* getNodeWithCeilingStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const override
     {
         static unsigned int depth=0;
-        depth++;        Node const* result(nullptr);
+        depth++;
+        Node const* result(nullptr);
         if(nodePointer)
         {
             Key const& currentKey(nodePointer->key);
@@ -120,7 +126,8 @@ protected:
     unsigned int getRankStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const override
     {
         static unsigned int depth=0;
-        depth++;        unsigned int result(0);
+        depth++;
+        unsigned int result(0);
         if(nodePointer)
         {
             Key const& currentKey(nodePointer->key);
@@ -145,7 +152,8 @@ protected:
     void putStartingOnThisNode(NodeUniquePointer & nodePointer, Key const& key) override
     {
         static unsigned int depth=0;
-        depth++;        if(nodePointer)
+        depth++;
+        if(nodePointer)
         {
             Key const& currentKey(nodePointer->key);
             if(isLessThanWithDepth(key, currentKey, depth))
@@ -169,7 +177,8 @@ protected:
     void deleteBasedOnKeyStartingOnThisNode(NodeUniquePointer & nodePointer, Key const& key) override
     {
         static unsigned int depth=0;
-        depth++;        //this is called hibbard deletion
+        depth++;
+        //this is called hibbard deletion
         if(nodePointer)
         {
             if(isLessThanWithDepth(key, nodePointer->key, depth)) // search for the node in the left in less than
@@ -186,7 +195,8 @@ protected:
                 // place the keys of the minimum on this node and then delete it
                 // why are we using deletion of minimum on the right instead of deletion of maximum in the left? No real reason.
                 NodeUniquePointer & minimumOnTheRight(this->getMinimumNodePointerReferenceStartingOnThisNode(nodePointer->right));
-                if(!minimumOnTheRight)                {
+                if(!minimumOnTheRight)
+                {
                     nodePointer.reset(nullptr);
                 }
                 else
@@ -194,7 +204,8 @@ protected:
                     this->copyContents(*nodePointer, *minimumOnTheRight);
                     this->deleteMinimumStartingOnThisNode(minimumOnTheRight); // starting from the minimum so less checks
                 }
-            }            if(nodePointer)
+            }
+            if(nodePointer)
             {
                 this->updateTreeNodeDetails(*nodePointer);
             }
@@ -205,7 +216,8 @@ protected:
     void retrieveKeysInRangeInclusiveStartingOnThisNode(Keys & keys, NodeUniquePointer const& nodePointer, Key const& low, Key const& high) const override
     {
         static unsigned int depth=0;
-        depth++;        if(nodePointer)
+        depth++;
+        if(nodePointer)
         {
             if(isLessThanWithDepth(low, nodePointer->key, depth))
             {

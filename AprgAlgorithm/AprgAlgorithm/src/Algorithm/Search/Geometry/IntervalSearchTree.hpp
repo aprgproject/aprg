@@ -5,6 +5,7 @@
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 
 #include <vector>
+
 namespace alba
 {
 
@@ -105,7 +106,8 @@ protected:
 
     bool areIntersectingIntervals(Key const& interval1, Key const& interval2) const
     {
-        auto delta1(mathHelper::getPositiveDelta(interval1.start, interval1.end));        auto delta2(mathHelper::getPositiveDelta(interval2.start, interval2.end));
+        auto delta1(mathHelper::getPositiveDelta(interval1.start, interval1.end));
+        auto delta2(mathHelper::getPositiveDelta(interval2.start, interval2.end));
         auto sumOfDeltas(delta1+delta2);
         auto maxDeltaEndpoints(std::max(mathHelper::getPositiveDelta(interval1.start, interval2.end), mathHelper::getPositiveDelta(interval2.start, interval1.end)));
         return maxDeltaEndpoints <= sumOfDeltas;
@@ -130,7 +132,8 @@ protected:
             else // else go left (and go right as well because all intervals should be collected)
             {
                 searchForIntersectingIntervals(intersectingIntervals, nodePointer->left, intervalToCheck);
-                searchForIntersectingIntervals(intersectingIntervals, nodePointer->right, intervalToCheck);            }
+                searchForIntersectingIntervals(intersectingIntervals, nodePointer->right, intervalToCheck);
+            }
         }
     }
 
@@ -153,4 +156,5 @@ private:
 };
 
 }
+
 }

@@ -36,14 +36,16 @@ struct RedBlackTreeNode
 template <typename Key, typename KeyDataTypeValue>
 struct IntervalSearchTreeNode
 {
-    Key key;    std::unique_ptr<IntervalSearchTreeNode> left;
+    Key key;
+    std::unique_ptr<IntervalSearchTreeNode> left;
     std::unique_ptr<IntervalSearchTreeNode> right;
     unsigned int numberOfNodesOnThisSubTree;
     RedBlackColor parentLinkColor;
     KeyDataTypeValue maxIntervalValueInSubtree;
 };
 
-template <typename Key, typename Value>struct BasicTreeNodeWithValue
+template <typename Key, typename Value>
+struct BasicTreeNodeWithValue
 {
     Key key;
     Value value;
@@ -76,4 +78,5 @@ struct IntervalSearchTreeNodeWithValue
 };
 
 }
+
 }

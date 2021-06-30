@@ -31,7 +31,8 @@ public:
 
     bool isEmpty() const override
     {
-        return m_size == 0U;    }
+        return m_size == 0U;
+    }
 
     bool doesContain(Key const& key) const override
     {
@@ -164,6 +165,7 @@ protected:
 };
 
 // Approach: use an array of M<N linked lists. H. P. Luhn IBM 1953.
+
 // Proposition. Under uniform hashing assumption, probability that the number of keys in a list is within a constant factor of N/M is extremely close to 1
 // Note: N is the number of items, M is the hash table size
 // Proof sketch: Distribution of list size obeys a binomial distribution.

@@ -54,7 +54,8 @@ public:
     using TwoDTree = KdTree<Point>;
     using NodeUniquePointer = typename TwoDTree::NodeUniquePointer;
 
-    enum class SearchAction    {
+    enum class SearchAction
+    {
         Nothing,
         GoToLeftChild,
         GoToRightChild,
@@ -84,6 +85,7 @@ public:
     }
 
 private:
+
     void searchNearestPoint(NodeUniquePointer const& nodePointer, SearchDetails & searchDetails) const
     {
         static unsigned int depth=0;

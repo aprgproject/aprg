@@ -31,7 +31,8 @@ public:
 
     bool isEmpty() const override
     {
-        return m_size == 0;    }
+        return m_size == 0;
+    }
 
     bool doesContain(Key const& key) const override
     {

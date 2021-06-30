@@ -33,6 +33,7 @@ public:
     }
 
 protected:
+
     void copyContents(Node & destinationNode, Node const& sourceNode) const override
     {
         destinationNode.key = sourceNode.key;
@@ -68,4 +69,5 @@ private:
 };
 
 }
+
 }

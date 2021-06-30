@@ -55,7 +55,8 @@ public:
     using TwoDTree = KdTree<Point>;
     using NodeUniquePointer = typename TwoDTree::NodeUniquePointer;
 
-    PointsInsideRectangleSearch(Point const& bottomLeft, Point const& topRight)        : m_twoDTree()
+    PointsInsideRectangleSearch(Point const& bottomLeft, Point const& topRight)
+        : m_twoDTree()
         , m_rectangleBottomLeft(bottomLeft)
         , m_rectangleTopRight(topRight)
     {}
@@ -77,6 +78,7 @@ public:
     }
 
 private:
+
     void searchForPoints(NodeUniquePointer const& nodePointer, Points & pointsInsideRectangle) const
     {
         static unsigned int depth=0;

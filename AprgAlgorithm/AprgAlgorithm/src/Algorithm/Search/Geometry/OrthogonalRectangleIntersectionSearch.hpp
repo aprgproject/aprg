@@ -55,7 +55,8 @@ public:
         IntervalSearchTree<Unit> intervalSearchTree;
         for(Event const& event : m_events)
         {
-            if(EventType::StartOfRectangle == event.eventType)            {
+            if(EventType::StartOfRectangle == event.eventType)
+            {
                 auto intervals(intervalSearchTree.getIntersectingIntervalsOf(event.yInterval));
                 if(!intervals.empty())
                 {
@@ -73,7 +74,8 @@ public:
                 intervalSearchTree.put(event.yInterval);
                 intervalToRectangleMap.emplace(PairOfUnits{event.yInterval.start, event.yInterval.end}, event.rectangle);
             }
-            else if(EventType::EndOfRectangle == event.eventType)            {
+            else if(EventType::EndOfRectangle == event.eventType)
+            {
                 intervalSearchTree.deleteBasedOnKey(event.yInterval);
                 intervalToRectangleMap.erase({event.yInterval.start, event.yInterval.end});
             }

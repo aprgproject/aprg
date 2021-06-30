@@ -51,6 +51,7 @@ TEST(IntervalSearchTreeTest, GetSupersetIntervalsOfWorksOnExample1)
     search.put({16, 22});
 
     auto const& intervalsToVerify(search.getIntersectingIntervalsOf({12, 14}));
+
     EXPECT_TRUE(intervalsToVerify.empty());
 }
 
@@ -66,6 +67,7 @@ TEST(IntervalSearchTreeTest, GetSupersetIntervalsOfWorksOnExample2)
     search.put({16, 22});
 
     auto const& intervalsToVerify(search.getIntersectingIntervalsOf({23, 25}));
+
     SearchTreeForTest::Keys const& intervalsToExpect{{21, 24}};
     EXPECT_EQ(intervalsToExpect, intervalsToVerify);
 }
@@ -82,6 +84,7 @@ TEST(IntervalSearchTreeTest, GetSupersetIntervalsOfWorksOnExample3)
     search.put({16, 22});
 
     auto const& intervalsToVerify(search.getIntersectingIntervalsOf({4, 25}));
+
     SearchTreeForTest::Keys const& intervalsToExpect{{15, 18}, {5, 8}, {4, 8}, {7, 10}, {17, 19}, {16, 22}, {21, 24}};
     EXPECT_EQ(intervalsToExpect, intervalsToVerify);
 }

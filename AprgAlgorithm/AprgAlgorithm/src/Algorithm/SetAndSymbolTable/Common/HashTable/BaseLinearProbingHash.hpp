@@ -35,6 +35,7 @@ public:
     {
         deleteAllEntries();
     }
+
     bool isEmpty() const override
     {
         return m_size == 0;

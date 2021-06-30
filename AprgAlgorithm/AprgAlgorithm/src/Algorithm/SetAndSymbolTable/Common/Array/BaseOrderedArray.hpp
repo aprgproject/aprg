@@ -21,6 +21,7 @@ public:
     BaseOrderedArray()
         : m_size(0U)
     {}
+
     bool isEmpty() const override
     {
         return m_size == 0U;

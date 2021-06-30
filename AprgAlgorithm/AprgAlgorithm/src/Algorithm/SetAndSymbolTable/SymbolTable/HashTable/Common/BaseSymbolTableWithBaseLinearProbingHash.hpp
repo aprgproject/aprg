@@ -30,7 +30,8 @@ public:
             EntryUniquePointer const& entryPointer(b_entryPointers[i]);
             if(key == entryPointer->key)
             {
-                result = entryPointer->value;                break;
+                result = entryPointer->value;
+                break;
             }
         }
         return result;
@@ -46,7 +47,8 @@ public:
             EntryUniquePointer & entryPointer(b_entryPointers[i]);
             if(key == entryPointer->key)
             {
-                entryPointer->value = value;                isFound = true;
+                entryPointer->value = value;
+                isFound = true;
                 break;
             }
         }
@@ -58,6 +60,7 @@ public:
     }
 
 protected:
+
     void putEntry(Entry const& entry) override // overrides in BaseLinearProbingHash
     {
         put(entry.key, entry.value);
@@ -69,4 +72,5 @@ private:
 };
 
 }
+
 }
