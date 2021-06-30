@@ -5,11 +5,10 @@
 #include "Findings/FindingsToAdd.hpp"
 #include "Loopers/Looper.hpp"
 
-#include <Optional/AlbaOptional.hpp>
+#include <Common/Container/AlbaOptional.hpp>
 
 #include <string>
 #include <unordered_map>
-
 using std::string;
 
 #define T(...) Term(__VA_ARGS__)
