@@ -4,11 +4,10 @@
 #include <ChessUtilities/Board/Piece.hpp>
 #include <Common/Bit/AlbaBitManipulation.hpp>
 #include <Common/Bit/AlbaBitValueUtilities.hpp>
-#include <Common/Optional/AlbaOptional.hpp>
+#include <Common/Container/AlbaOptional.hpp>
 
 #include <array>
-#include <cstdint>
-#include <fstream>
+#include <cstdint>#include <fstream>
 #include <map>
 
 namespace alba
