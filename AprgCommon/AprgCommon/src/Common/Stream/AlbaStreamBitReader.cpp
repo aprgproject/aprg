@@ -13,7 +13,8 @@ AlbaStreamBitReader::AlbaStreamBitReader(istream& stream)
 
 bool AlbaStreamBitReader::noRemainingBitsInBuffer() const
 {
-    return m_bitBuffer.empty();}
+    return m_bitBuffer.empty();
+}
 
 bool AlbaStreamBitReader::readBoolData()
 {

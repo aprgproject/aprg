@@ -20,6 +20,7 @@ public:
     ~AlbaStreamBitReader() = default;
 
     bool noRemainingBitsInBuffer() const;
+
     bool readBoolData();
     char readCharData();
     std::string readStringData(unsigned int const numberOfCharacters);

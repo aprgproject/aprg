@@ -109,7 +109,8 @@ void DisplayTableRow::addCell(string const & text, DisplayTableCellMode const ho
 
 unsigned int DisplayTable::getTotalRows() const
 {
-    return m_rows.size();}
+    return m_rows.size();
+}
 
 unsigned int DisplayTable::getTotalColumns() const
 {

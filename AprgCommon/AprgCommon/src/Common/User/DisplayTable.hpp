@@ -68,7 +68,8 @@ public:
     DisplayTable() = default;
     unsigned int getTotalRows() const;
     unsigned int getTotalColumns() const;
-    unsigned int getMaxCharactersInOneRow() const;    std::string getCellText(DisplayTableCell const& cell, unsigned int length) const;
+    unsigned int getMaxCharactersInOneRow() const;
+    std::string getCellText(DisplayTableCell const& cell, unsigned int length) const;
 
     DisplayTableRow& getLastRow();
     DisplayTableRow& getRowReference(unsigned int rowIndex);
