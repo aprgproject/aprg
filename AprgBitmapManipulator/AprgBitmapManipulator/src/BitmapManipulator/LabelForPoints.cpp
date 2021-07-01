@@ -10,6 +10,7 @@ using namespace alba::mathHelper;
 
 namespace alba
 {
+
 namespace AprgBitmap
 {
 
@@ -34,6 +35,7 @@ uint32_t getLabelColor(unsigned int const label)
     double newValue = (static_cast<double>(1)/label) * pow(10, digits+8);
     return getColorValueOnly(static_cast<uint32_t>(newValue) % 0xFFFFFF);
 }
+
 unsigned int LabelForPoints::getLabel(BitmapXY const& point) const
 {
     unsigned int label(INITIAL_LABEL_VALUE);

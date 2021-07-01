@@ -9,6 +9,7 @@
 
 #include <string>
 #include <unordered_map>
+
 using std::string;
 
 #define T(...) Term(__VA_ARGS__)

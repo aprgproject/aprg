@@ -29,6 +29,7 @@ RangeQueryForTest::IncrementFunction incrementFunction = [](IndexForTest const i
     return incrementValue;
 };
 }
+
 TEST(RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdateTest, GetValueOnIntervalWithMinimumWorksWithEmptySetOfValues)
 {
     ValuesForTest values;

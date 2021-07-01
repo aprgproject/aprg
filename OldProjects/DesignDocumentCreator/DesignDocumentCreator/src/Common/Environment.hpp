@@ -4,7 +4,8 @@
 #include <Common/Container/AlbaOptional.hpp>
 #include <Common/Uml/UmlLogger.hpp>
 
-namespace DesignDocumentCreator{
+namespace DesignDocumentCreator
+{
 
 class Environment
 {

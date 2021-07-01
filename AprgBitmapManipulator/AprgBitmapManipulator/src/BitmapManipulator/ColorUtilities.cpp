@@ -4,7 +4,8 @@
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 
 #include <algorithm>
-#include <cmath>#include <cstdint>
+#include <cmath>
+#include <cstdint>
 
 using namespace alba::mathHelper;
 using namespace std;

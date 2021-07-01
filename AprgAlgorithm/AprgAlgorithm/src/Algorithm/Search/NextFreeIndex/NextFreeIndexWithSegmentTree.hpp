@@ -14,10 +14,11 @@ class NextFreeIndexWithSegmentTree
 public:
 
     using Index = typename Indexes::value_type;
-    using Utilities = StaticSegmentTreeUtilities<Index>;
+    using Utilities = SegmentTreeUtilities<Index>;
     using SegmentTree = RangeQueryWithSegmentTree<Indexes>;
 
-    NextFreeIndexWithSegmentTree(Index const numberOfIndexes)        : m_segmentTree(Indexes(numberOfIndexes, 1), std::plus<Index>())
+    NextFreeIndexWithSegmentTree(Index const numberOfIndexes)
+        : m_segmentTree(Indexes(numberOfIndexes, 1), std::plus<Index>())
         , m_startOfChildren(m_segmentTree.getStartOfChildren())
         , m_treeSums(m_segmentTree.getTreeValues())
     {}
@@ -27,7 +28,8 @@ public:
         // This has log(N) running time
 
         Index result{};
-        if(m_startOfChildren+index<m_treeSums.size())        {
+        if(m_startOfChildren+index<m_treeSums.size())
+        {
             result = getNextFreeIndexAt(index, Utilities::ROOT_PARENT, 0, m_startOfChildren); // startOfChildren is size of base too
         }
         return result;
@@ -54,7 +56,8 @@ private:
         // This has log(N) running time
 
         Index result{};
-        if(index+1 == m_treeSums.at(currentChild)                && m_startOfChildren+baseRight < m_treeSums.size()
+        if(index+1 == m_treeSums.at(currentChild)
+                && m_startOfChildren+baseRight < m_treeSums.size()
                 && m_treeSums.at(m_startOfChildren+baseRight) != 0)
         {
             result = baseRight;
@@ -67,18 +70,18 @@ private:
         }
         else
         {
-            Index baseMidPoint = (baseLeft+baseRight)/2;
-            Index firstChild = Utilities::getFirstChild(currentChild);
-            if(firstChild < m_treeSums.size())
+            Index leftChild = Utilities::getLeftChild(currentChild);
+            if(leftChild < m_treeSums.size())
             {
-                Index firstChildSum = m_treeSums.at(firstChild);
-                if(index+1 <= firstChildSum)
+                Index leftChildSum = m_treeSums.at(leftChild);
+                Index baseMidPoint = (baseLeft+baseRight)/2;
+                if(index+1 <= leftChildSum)
                 {
-                    result = getNextFreeIndexAt(index, firstChild, baseLeft, baseMidPoint);
+                    result = getNextFreeIndexAt(index, leftChild, baseLeft, baseMidPoint);
                 }
                 else
                 {
-                    result = getNextFreeIndexAt(index-firstChildSum, Utilities::getSecondChild(currentChild), baseMidPoint+1, baseRight);
+                    result = getNextFreeIndexAt(index-leftChildSum, Utilities::getRightChild(currentChild), baseMidPoint+1, baseRight);
                 }
             }
         }

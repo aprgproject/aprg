@@ -7,7 +7,8 @@
 #include <Common/Container/AlbaOptional.hpp>
 
 #include <algorithm>
-#include <fstream>#include <functional>
+#include <fstream>
+#include <functional>
 #include <string>
 
 namespace alba

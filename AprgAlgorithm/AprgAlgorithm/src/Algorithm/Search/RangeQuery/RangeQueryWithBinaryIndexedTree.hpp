@@ -43,7 +43,8 @@ public:
         // This has log(N) running time
         Value result{};
         if(start<=end && start<m_partialTreeSums.size() && end<m_partialTreeSums.size())
-        {            // No possibility to find a partial sum because binary index tree does not guarantee a common index when traversing from different two indexes.
+        {
+            // No possibility to find a partial sum because binary index tree does not guarantee a common index when traversing from different two indexes.
             if(0<start)
             {
                 result = m_inverseAccumulator(getAccumulatedValueFrom0ToIndex(end), getAccumulatedValueFrom0ToIndex(start-1));
@@ -61,7 +62,8 @@ public:
         // This has log(N) running time
         Value result{};
         if(index < m_partialTreeSums.size())
-        {            // Indexes here have plus one (for easier end loop conditions)
+        {
+            // Indexes here have plus one (for easier end loop conditions)
             Index indexPlusOne(index+1);
             result = m_partialTreeSums.at(indexPlusOne-1);
             indexPlusOne -= getGreatestPowerOf2Factor(indexPlusOne);
@@ -79,7 +81,8 @@ public:
         // This has log(N) running time
         if(index < m_values.size())
         {
-            // Indexes here have plus one (for easier end loop conditions)            Value delta = m_inverseAccumulator(newValue, m_values.at(index));
+            // Indexes here have plus one (for easier end loop conditions)
+            Value delta = m_inverseAccumulator(newValue, m_values.at(index));
             Index indexPlusOne(index+1);
             while(indexPlusOne<=m_partialTreeSums.size()) // update partial sums
             {

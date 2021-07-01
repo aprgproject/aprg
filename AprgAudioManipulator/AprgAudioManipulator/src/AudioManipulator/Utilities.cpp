@@ -7,6 +7,7 @@
 
 #include <algorithm>
 #include <numeric>
+
 using namespace alba::mathHelper;
 using namespace std;
 
