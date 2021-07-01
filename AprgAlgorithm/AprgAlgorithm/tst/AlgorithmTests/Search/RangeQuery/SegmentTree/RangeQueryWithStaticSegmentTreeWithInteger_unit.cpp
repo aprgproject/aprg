@@ -1,4 +1,4 @@
-#include <Algorithm/Search/RangeQuery/SegmentTree/RangeQueryWithSegmentTree.hpp>
+#include <Algorithm/Search/RangeQuery/SegmentTree/RangeQueryWithStaticSegmentTree.hpp>
 
 #include <gtest/gtest.h>
 
@@ -13,7 +13,7 @@ namespace algorithm
 namespace
 {
 using ValuesForTest = vector<unsigned int>;
-using RangeQueryForTest = RangeQueryWithSegmentTree<ValuesForTest>;
+using RangeQueryForTest = RangeQueryWithStaticSegmentTree<ValuesForTest>;
 using ValueForTest = RangeQueryForTest::Value;
 
 RangeQueryForTest::Function minimumFunction = [](ValueForTest const& value1, ValueForTest const& value2)
@@ -29,7 +29,7 @@ RangeQueryForTest::Function maximumFunction = [](ValueForTest const& value1, Val
 RangeQueryForTest::Function plusFunction = plus<ValueForTest>();
 }
 
-TEST(RangeQueryWithSegmentTreeTest, GetStartOfChildrenWithMinimumWorksOnExample1)
+TEST(RangeQueryWithStaticSegmentTreeTest, GetStartOfChildrenWithMinimumWorksOnExample1)
 {
     ValuesForTest values{5U, 9U, 4U, 8U, 6U, 1U, 4U, 2U, 0U};
     RangeQueryForTest minimumRangeQuery(values, minimumFunction);
@@ -37,7 +37,7 @@ TEST(RangeQueryWithSegmentTreeTest, GetStartOfChildrenWithMinimumWorksOnExample1
     EXPECT_EQ(15U, minimumRangeQuery.getStartOfChildren());
 }
 
-TEST(RangeQueryWithSegmentTreeTest, GetTreeValuesWithMinimumWorksOnExample1)
+TEST(RangeQueryWithStaticSegmentTreeTest, GetTreeValuesWithMinimumWorksOnExample1)
 {
     ValuesForTest values{5U, 9U, 4U, 8U, 6U, 1U, 4U, 2U, 0U};
     RangeQueryForTest minimumRangeQuery(values, minimumFunction);
@@ -46,7 +46,7 @@ TEST(RangeQueryWithSegmentTreeTest, GetTreeValuesWithMinimumWorksOnExample1)
     EXPECT_EQ(expectedTreeValues, minimumRangeQuery.getTreeValues());
 }
 
-TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalWithMinimumWorksWithEmptySetOfValues)
+TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalWithMinimumWorksWithEmptySetOfValues)
 {
     ValuesForTest values;
     RangeQueryForTest minimumRangeQuery(values, minimumFunction);
@@ -54,7 +54,7 @@ TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalWithMinimumWorksWithEmptyS
     EXPECT_EQ(0U, minimumRangeQuery.getValueOnInterval(0U, 0U));
 }
 
-TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalWithMinimumWorksOnExample1)
+TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalWithMinimumWorksOnExample1)
 {
     ValuesForTest values{5U, 9U, 4U, 8U, 6U, 1U, 4U, 2U, 0U};
     RangeQueryForTest minimumRangeQuery(values, minimumFunction);
@@ -73,7 +73,7 @@ TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalWithMinimumWorksOnExample1
     EXPECT_EQ(4U, minimumRangeQuery.getValueOnInterval(2U, 4U));
 }
 
-TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalWithMaximumWorksOnExample1)
+TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalWithMaximumWorksOnExample1)
 {
     ValuesForTest values{5U, 9U, 4U, 8U, 6U, 1U, 4U, 2U, 10U};
     RangeQueryForTest maximumRangeQuery(values, maximumFunction);
@@ -92,7 +92,7 @@ TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalWithMaximumWorksOnExample1
     EXPECT_EQ(8U, maximumRangeQuery.getValueOnInterval(2U, 4U));
 }
 
-TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalWithSumWorksOnExample1)
+TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalWithSumWorksOnExample1)
 {
     ValuesForTest values{1U, 3U, 4U, 8U, 6U, 1U, 4U, 2U, 9U};
     RangeQueryForTest sumRangeQuery(values, plusFunction);
@@ -113,7 +113,7 @@ TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalWithSumWorksOnExample1)
     EXPECT_EQ(6U, sumRangeQuery.getValueOnInterval(4U, 4U));
 }
 
-TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalFromTopToBottomWithMinimumWorksOnExample1)
+TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalFromTopToBottomWithMinimumWorksOnExample1)
 {
     ValuesForTest values{5U, 9U, 4U, 8U, 6U, 1U, 4U, 2U, 0U};
     RangeQueryForTest minimumRangeQuery(values, minimumFunction);
@@ -132,7 +132,7 @@ TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalFromTopToBottomWithMinimum
     EXPECT_EQ(4U, minimumRangeQuery.getValueOnIntervalFromTopToBottom(2U, 4U));
 }
 
-TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalFromTopToBottomWithMaximumWorksOnExample1)
+TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalFromTopToBottomWithMaximumWorksOnExample1)
 {
     ValuesForTest values{5U, 9U, 4U, 8U, 6U, 1U, 4U, 2U, 10U};
     RangeQueryForTest maximumRangeQuery(values, maximumFunction);
@@ -151,7 +151,7 @@ TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalFromTopToBottomWithMaximum
     EXPECT_EQ(8U, maximumRangeQuery.getValueOnIntervalFromTopToBottom(2U, 4U));
 }
 
-TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalFromTopToBottomWithSumWorksOnExample1)
+TEST(RangeQueryWithStaticSegmentTreeTest, GetValueOnIntervalFromTopToBottomWithSumWorksOnExample1)
 {
     ValuesForTest values{1U, 3U, 4U, 8U, 6U, 1U, 4U, 2U, 9U};
     RangeQueryForTest sumRangeQuery(values, plusFunction);
@@ -172,7 +172,7 @@ TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalFromTopToBottomWithSumWork
     EXPECT_EQ(6U, sumRangeQuery.getValueOnIntervalFromTopToBottom(4U, 4U));
 }
 
-TEST(RangeQueryWithSegmentTreeTest, ChangeValueAtIndexWithSumWorksWithEmptySetOfValues)
+TEST(RangeQueryWithStaticSegmentTreeTest, ChangeValueAtIndexWithSumWorksWithEmptySetOfValues)
 {
     ValuesForTest values;
     RangeQueryForTest sumRangeQuery(values, plusFunction);
@@ -182,7 +182,7 @@ TEST(RangeQueryWithSegmentTreeTest, ChangeValueAtIndexWithSumWorksWithEmptySetOf
     EXPECT_EQ(0U, sumRangeQuery.getValueOnInterval(0U, 0U));
 }
 
-TEST(RangeQueryWithSegmentTreeTest, ChangeValueAtIndexWithSumWorksWithOneValue)
+TEST(RangeQueryWithStaticSegmentTreeTest, ChangeValueAtIndexWithSumWorksWithOneValue)
 {
     ValuesForTest values{5};
     RangeQueryForTest sumRangeQuery(values, plusFunction);
@@ -192,7 +192,7 @@ TEST(RangeQueryWithSegmentTreeTest, ChangeValueAtIndexWithSumWorksWithOneValue)
     EXPECT_EQ(3U, sumRangeQuery.getValueOnInterval(0U, 0U));
 }
 
-TEST(RangeQueryWithSegmentTreeTest, ChangeValueAtIndexWithSumWorksOnExample1)
+TEST(RangeQueryWithStaticSegmentTreeTest, ChangeValueAtIndexWithSumWorksOnExample1)
 {
     ValuesForTest values{1U, 3U, 4U, 8U, 6U, 1U, 4U, 2U, 9U};
     RangeQueryForTest sumRangeQuery(values, plusFunction);
