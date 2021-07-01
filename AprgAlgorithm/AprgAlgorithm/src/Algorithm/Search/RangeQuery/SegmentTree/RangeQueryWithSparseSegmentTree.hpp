@@ -4,6 +4,7 @@
 #include <Algorithm/Search/Common/SegmentTreeUtilities.hpp>
 
 #include <functional>
+
 namespace alba
 {
 
@@ -20,6 +21,7 @@ public:
     // the range [0,n-1] of allowed indices is large, but most array values are zeros.
     // While an ordinary segment tree uses O(n) memory, a dynamic segment tree only uses O(klogn) memory,
     // where k is the number of operations performed.
+
     // A sparse segment tree initially has only one node [0,n-1] whose value is zero, which means that every array value is zero.
     // After updates, new nodes are dynamically added to the tree.
 
@@ -33,7 +35,7 @@ public:
     using Index = unsigned int;
     using Function = std::function<Value(Value const&, Value const&)>;
     using Utilities = SegmentTreeUtilities<Index>;
-    using Node = DynamicSegmentTreeNode<Index, Value>;
+    using Node = DynamicSegmentTreeNode<Value>;
     using NodePointer = std::unique_ptr<Node>;
 
     RangeQueryWithSparseSegmentTree(
@@ -44,7 +46,8 @@ public:
         , m_numberOfValues(numberOfValues)
         , m_defaultValue(defaultValue)
         , m_function(functionObject)
-    {        initialize();
+    {
+        initialize();
     }
 
     Value getValueOnInterval(Index const start, Index const end)
@@ -86,9 +89,11 @@ protected:
         }
         return result;
     }
+
     void initialize()
     {
-        m_maxChildrenIndex = Utilities::getMinimumNumberOfParents(m_numberOfValues);    }
+        m_maxChildrenIndex = Utilities::getMinimumNumberOfParents(m_numberOfValues);
+    }
 
     Value getValueOnIntervalFromTopToBottom(
             Index const startInterval,
@@ -96,7 +101,8 @@ protected:
             NodePointer & nodePointer,
             Index const baseLeft,
             Index const baseRight)
-    {        // This has log(N) running time
+    {
+        // This has log(N) running time
 
         Value result{};
         if(!nodePointer)
@@ -127,7 +133,8 @@ protected:
                 result = getValueOnIntervalFromTopToBottom(startInterval, endInterval, nodePointer->rightChildPointer, baseMidPoint+1, baseRight);
             }
         }
-        return result;    }
+        return result;
+    }
 
     void setValueOnIndexFromTopToBottom(
             Index const index,
@@ -149,13 +156,11 @@ protected:
         else
         {
             Index baseMidPoint = (baseLeft+baseRight)/2;
-            bool doesLeftPartIntersect = !(index<baseLeft || index>baseMidPoint);
-            bool doesRightPartIntersect = !(index<baseMidPoint+1 || index>baseRight);
-            if(doesLeftPartIntersect)
+            if(index <= baseMidPoint)
             {
                 setValueOnIndexFromTopToBottom(index, valueToSet, nodePointer->leftChildPointer, baseLeft, baseMidPoint);
             }
-            if(doesRightPartIntersect)
+            else
             {
                 setValueOnIndexFromTopToBottom(index, valueToSet, nodePointer->rightChildPointer, baseMidPoint+1, baseRight);
             }
@@ -167,7 +172,8 @@ protected:
     Index const m_numberOfValues;
     Value const m_defaultValue;
     Function m_function;
-    NodePointer m_root;};
+    NodePointer m_root;
+};
 
 }
 
