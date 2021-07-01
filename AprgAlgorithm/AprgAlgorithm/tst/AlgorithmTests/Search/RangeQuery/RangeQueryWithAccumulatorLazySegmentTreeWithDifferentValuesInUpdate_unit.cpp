@@ -21,15 +21,14 @@ RangeQueryForTest::IncrementFunction incrementFunction = [](IndexForTest const i
 {
     // Increase the first value in range [a,b] by 1, the second value by 2, the third value by 3, and so on.
 
-    ValueForTest result=0;
+    ValueForTest incrementValue=0;
     for(IndexForTest index=intervalStart; index<=intervalEnd; index++)
     {
-        result += index+1;
+        incrementValue += index+1;
     }
-    return result;
+    return incrementValue;
 };
 }
-
 TEST(RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdateTest, GetValueOnIntervalWithMinimumWorksWithEmptySetOfValues)
 {
     ValuesForTest values;

@@ -1,9 +1,8 @@
 #pragma once
 
-#include <Algorithm/Search/Common/SegmentTreeUtilities.hpp>
+#include <Algorithm/Search/Common/StaticSegmentTreeUtilities.hpp>
 
 #include <functional>
-
 namespace alba
 {
 
@@ -30,11 +29,10 @@ public:
     using Index = unsigned int;
     using Value = typename Values::value_type;
     using Function = std::function<Value(Value const&, Value const&)>;
-    using Utilities = SegmentTreeUtilities<Index>;
+    using Utilities = StaticSegmentTreeUtilities<Index>;
 
     RangeQueryWithSegmentTree(
-            Values const& valuesToCheck,
-            Function const& functionObject)
+            Values const& valuesToCheck,            Function const& functionObject)
         : m_startOfChildren(0U)
         , m_treeValues()
         , m_function(functionObject)
