@@ -34,7 +34,8 @@ public:
 
     using Index = unsigned int;
     using Function = std::function<Value(Value const&, Value const&)>;
-    using Utilities = SegmentTreeUtilities<Index>;    using Node = DynamicSegmentTreeNode<Index, Value>;
+    using Utilities = SegmentTreeUtilities<Index>;
+    using Node = DynamicSegmentTreeNode<Index, Value>;
     using NodePointer = std::unique_ptr<Node>;
 
     RangeQueryWithSparseSegmentTree(
@@ -51,7 +52,8 @@ public:
 
     Value getValueOnInterval(Index const start, Index const end)
     {
-        // This has log(N) running time        Value result{};
+        // This has log(N) running time
+        Value result{};
         if(start<=end && start<m_numberOfValues && end<m_numberOfValues)
         {
             result = getValueOnIntervalFromTopToBottom(start, end, m_root, 0, m_maxChildrenIndex);

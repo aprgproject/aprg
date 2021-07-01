@@ -25,7 +25,8 @@ public:
     static constexpr Index ROOT_PARENT_INDEX=0U; // the first parent
     static constexpr Index NUMBER_OF_CHILDREN=2U; // only 2 children
 
-    static inline bool isALeftChild(Index const treeIndex)    {
+    static inline bool isALeftChild(Index const treeIndex)
+    {
         return mathHelper::isOdd(treeIndex);
     }
 

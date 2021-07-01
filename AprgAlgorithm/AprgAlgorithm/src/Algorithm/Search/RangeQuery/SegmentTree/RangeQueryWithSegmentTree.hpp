@@ -68,6 +68,7 @@ public:
         }
         return result;
     }
+
     void changeValueAtIndex(Index const index, Value const newValue)
     {
         // This has log(N) running time
