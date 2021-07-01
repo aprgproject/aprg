@@ -49,11 +49,10 @@ TEST(RangeQueryWithSegmentTreeTest, GetTreeValuesWithMinimumWorksOnExample1)
 TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalWithMinimumWorksWithEmptySetOfValues)
 {
     ValuesForTest values;
-    RangeQueryForTest minimumRangeQuery(values, plusFunction);
+    RangeQueryForTest minimumRangeQuery(values, minimumFunction);
 
     EXPECT_EQ(0U, minimumRangeQuery.getValueOnInterval(0U, 0U));
 }
-
 TEST(RangeQueryWithSegmentTreeTest, GetValueOnIntervalWithMinimumWorksOnExample1)
 {
     ValuesForTest values{5U, 9U, 4U, 8U, 6U, 1U, 4U, 2U, 0U};
