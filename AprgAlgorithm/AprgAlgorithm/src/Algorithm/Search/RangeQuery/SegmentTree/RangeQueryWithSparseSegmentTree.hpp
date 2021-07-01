@@ -78,15 +78,14 @@ protected:
         }
         else if(nodePointer->leftChildPointer)
         {
-            result = nodePointer->leftChildPointer->value;
+            result = m_function(m_defaultValue, nodePointer->leftChildPointer->value);
         }
         else if(nodePointer->rightChildPointer)
         {
-            result = nodePointer->rightChildPointer->value;
+            result = m_function(m_defaultValue, nodePointer->rightChildPointer->value);
         }
         return result;
     }
-
     void initialize()
     {
         m_maxChildrenIndex = Utilities::getMinimumNumberOfParents(m_numberOfValues);    }
