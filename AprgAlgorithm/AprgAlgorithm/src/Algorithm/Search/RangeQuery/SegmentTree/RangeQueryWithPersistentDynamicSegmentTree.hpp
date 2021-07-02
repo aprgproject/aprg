@@ -75,11 +75,10 @@ public:
         return result;
     }
 
-    virtual void changeValueAtIndex(Index const index, Value const newValue)
+    virtual void changeValueAtIndex(Index const index, Value const& newValue)
     {
         // This has log(N) running time
-        if(index<m_numberOfValues)
-        {
+        if(index<m_numberOfValues)        {
             NodeRoot & previousTreeRoot(m_roots.back());
             m_roots.emplace_back();
             changeValueOnIndexFromTopToBottom(
@@ -184,11 +183,10 @@ protected:
 
     void changeValueOnIndexFromTopToBottom(
             Index const index,
-            Value const newValue,
+            Value const& newValue,
             NodePointer const& previousTreeNode,
             NodePointer & newTreeNode,
-            Index const baseLeft,
-            Index const baseRight)
+            Index const baseLeft,            Index const baseRight)
     {
         // This has log(N) running time
 

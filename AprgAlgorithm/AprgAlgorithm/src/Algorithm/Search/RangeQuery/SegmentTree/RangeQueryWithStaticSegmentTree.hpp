@@ -71,11 +71,10 @@ public:
         return result;
     }
 
-    void changeValueAtIndex(Index const index, Value const newValue)
+    void changeValueAtIndex(Index const index, Value const& newValue)
     {
         // This has log(N) running time
-        changeValueAtIndexFromBottomToTop(index, newValue);
-    }
+        changeValueAtIndexFromBottomToTop(index, newValue);    }
 
 protected:
 
@@ -184,11 +183,10 @@ protected:
         return result;
     }
 
-    void changeValueAtIndexFromBottomToTop(Index const index, Value const newValue)
+    void changeValueAtIndexFromBottomToTop(Index const index, Value const& newValue)
     {
         // This has log(N) running time
-        Index treeIndex(m_startOfChildren+index);
-        if(treeIndex < m_treeValues.size())
+        Index treeIndex(m_startOfChildren+index);        if(treeIndex < m_treeValues.size())
         {
             m_treeValues[treeIndex] = newValue;
             if(m_treeValues.size() > 2U)

@@ -20,11 +20,10 @@ public:
         : m_valuesToCheck(valuesToCheck)
     {}
 
-    Values getSubArrayWithSum(Value const targetSum) const
+    Values getSubArrayWithSum(Value const& targetSum) const
     {
         Values result;
-        if(!m_valuesToCheck.empty())
-        {
+        if(!m_valuesToCheck.empty())        {
             bool isFound(false);
             Index start=0, end=0, size=m_valuesToCheck.size();
             Value currentSum=m_valuesToCheck.at(0);

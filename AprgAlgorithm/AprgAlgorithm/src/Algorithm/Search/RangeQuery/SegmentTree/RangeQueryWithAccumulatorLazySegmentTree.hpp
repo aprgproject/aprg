@@ -45,11 +45,10 @@ public:
             Values const& valuesToCheck,
             Function const& functionObject,
             Function const& inverseFunction,
-            Value const identityValue)
+            Value const& identityValue)
         : BaseClass(valuesToCheck, functionObject)
         , b_startOfChildren(BaseClass::m_startOfChildren)
-        , b_treeValues(BaseClass::m_treeValues)
-        , b_function(BaseClass::m_function)
+        , b_treeValues(BaseClass::m_treeValues)        , b_function(BaseClass::m_function)
         , m_inverseFunction(inverseFunction)
         , m_identityValue(identityValue)
         , m_pendingUpdates(b_startOfChildren, m_identityValue) // only parent have pending updates
@@ -66,19 +65,17 @@ public:
         return result;
     }
 
-    void increaseAtRange(Index const start, Index const end, Value const incrementValue)
+    void increaseAtRange(Index const start, Index const end, Value const& incrementValue)
     {
         if(start<=end && (b_startOfChildren+start)<b_treeValues.size() && (b_startOfChildren+end)<b_treeValues.size())
-        {
-            increaseAtRangeFromTopToBottom(start, end, Utilities::ROOT_PARENT_INDEX, 0, b_startOfChildren, incrementValue); // startOfChildren is size of base too
+        {            increaseAtRangeFromTopToBottom(start, end, Utilities::ROOT_PARENT_INDEX, 0, b_startOfChildren, incrementValue); // startOfChildren is size of base too
         }
     }
 
-    void changeValueAtIndex(Index const index, Value const newValue)
+    void changeValueAtIndex(Index const index, Value const& newValue)
     {
         // This has log(N) running time
-        Index childIndex = b_startOfChildren+index;
-        if(childIndex<b_treeValues.size())
+        Index childIndex = b_startOfChildren+index;        if(childIndex<b_treeValues.size())
         {
             increaseAtRange(index, index, m_inverseFunction(newValue, b_treeValues.at(childIndex))); // startOfChildren is size of base too
         }
@@ -134,10 +131,9 @@ private:
             Index const currentChild,
             Index const baseLeft,
             Index const baseRight,
-            Value const incrementValue)
+            Value const& incrementValue)
     {
         // This has log(N) running time
-
         // When the elements in [a,b] are increased by u, we walk from the root towards the leaves
         // and modify the nodes of the tree as follows:
         // If the range [x, y] of a node is completely inside [a,b], we increase the z value of the node by u and stop.
@@ -207,11 +203,10 @@ private:
         }
     }
 
-    inline void incrementAtIndex(Index const index, Value const incrementValue)
+    inline void incrementAtIndex(Index const index, Value const& incrementValue)
     {
         if(isAParent(index))
-        {
-            increment(m_pendingUpdates[index], incrementValue);
+        {            increment(m_pendingUpdates[index], incrementValue);
         }
         else
         {
@@ -219,16 +214,15 @@ private:
         }
     }
 
-    inline void increment(Value & valueToChange, Value const incrementValue) const
+    inline void increment(Value & valueToChange, Value const& incrementValue) const
     {
         valueToChange = b_function(valueToChange, incrementValue);
     }
 
-    void incrementMultipleTimes(Value & valueToChange, Value const incrementValue, Index const numberOfTimes) const
+    void incrementMultipleTimes(Value & valueToChange, Value const& incrementValue, Index const numberOfTimes) const
     {
         Value doublingValue(incrementValue);
-        Index remainingNumberOfTimes(numberOfTimes);
-        while(remainingNumberOfTimes > 0)
+        Index remainingNumberOfTimes(numberOfTimes);        while(remainingNumberOfTimes > 0)
         {
             if(mathHelper::isEven(remainingNumberOfTimes))
             {
