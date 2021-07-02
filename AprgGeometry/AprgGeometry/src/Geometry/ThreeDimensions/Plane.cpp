@@ -28,14 +28,13 @@ Plane::Plane(Point const& first, Point const& second, Point const& third)
     , m_cCoefficient(0)
     , m_dCoefficient(0)
 {
-    Coefficients perpendicularCoefficients(
+    Coordinate perpendicularCoefficients(
                 getCrossProduct(
-                    Coefficients(first.getX()-second.getX(), first.getY()-second.getY(), first.getZ()-second.getZ()),
-                    Coefficients(first.getX()-third.getX(), first.getY()-third.getY(), first.getZ()-third.getZ())));
+                    Coordinate(first.getX()-second.getX(), first.getY()-second.getY(), first.getZ()-second.getZ()),
+                    Coordinate(first.getX()-third.getX(), first.getY()-third.getY(), first.getZ()-third.getZ())));
     m_aCoefficient = perpendicularCoefficients.getX();
     m_bCoefficient = perpendicularCoefficients.getY();
-    m_cCoefficient = perpendicularCoefficients.getZ();
-    calculateDCoefficientUsingCoefficientsABCAndAPoint(first);
+    m_cCoefficient = perpendicularCoefficients.getZ();    calculateDCoefficientUsingCoefficientsABCAndAPoint(first);
 }
 
 Plane::Plane(
