@@ -34,10 +34,11 @@ public:
     using Function = std::function<Value(Value const&, Value const&)>;
     using Utilities = SegmentTreeUtilities<Index>;
 
+    RangeQueryWithStaticSegmentTree() = default;
+
     RangeQueryWithStaticSegmentTree(
             Values const& valuesToCheck,
-            Function const& functionObject)
-        : m_startOfChildren(0U)
+            Function const& functionObject)        : m_startOfChildren(0U)
         , m_treeValues()
         , m_function(functionObject)
     {

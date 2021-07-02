@@ -16,7 +16,7 @@ using ValuesForTest = vector<unsigned int>;
 using RangeQueryForTest = RangeQueryForCount<ValuesForTest>;
 }
 
-TEST(RangeQueryForCountTest, GetCountOfDistinctValuesOnIntervalWorksOnExample1)
+TEST(RangeQueryForCountTest, GetCountOfThisValueOnIntervalWorksOnExample1)
 {
     ValuesForTest values{4U, 2U, 4U, 4U, 2U, 4U, 3U, 3U, 4U};
     RangeQueryForTest countRangeQuery(values);
