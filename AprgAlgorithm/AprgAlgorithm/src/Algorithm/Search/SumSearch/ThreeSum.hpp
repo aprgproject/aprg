@@ -44,7 +44,8 @@ public:
     ThreeValues getNonDuplicateThreeValuesWithSum(Value const& targetSum) const
     {
         ThreeValues result{};
-        if(!m_sortedValues.empty())        {
+        if(!m_sortedValues.empty())
+        {
             TwoSum<Values> twoSum(m_sortedValues);
             for(Index firstIndex=0; firstIndex<m_sortedValues.size(); firstIndex++)
             {
@@ -63,7 +64,8 @@ public:
     ThreeValues getPossibleDuplicatedThreeValuesWithSum(Value const& targetSum) const
     {
         ThreeValues result{};
-        if(!m_sortedValues.empty())        {
+        if(!m_sortedValues.empty())
+        {
             TwoSum<Values> twoSum(m_sortedValues);
             for(Index firstIndex=0; firstIndex<m_sortedValues.size(); firstIndex++)
             {

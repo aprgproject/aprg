@@ -38,7 +38,8 @@ public:
 
     RangeQueryWithStaticSegmentTree(
             Values const& valuesToCheck,
-            Function const& functionObject)        : m_startOfChildren(0U)
+            Function const& functionObject)
+        : m_startOfChildren(0U)
         , m_treeValues()
         , m_function(functionObject)
     {
@@ -75,7 +76,8 @@ public:
     void changeValueAtIndex(Index const index, Value const& newValue)
     {
         // This has log(N) running time
-        changeValueAtIndexFromBottomToTop(index, newValue);    }
+        changeValueAtIndexFromBottomToTop(index, newValue);
+    }
 
 protected:
 
@@ -187,7 +189,8 @@ protected:
     void changeValueAtIndexFromBottomToTop(Index const index, Value const& newValue)
     {
         // This has log(N) running time
-        Index treeIndex(m_startOfChildren+index);        if(treeIndex < m_treeValues.size())
+        Index treeIndex(m_startOfChildren+index);
+        if(treeIndex < m_treeValues.size())
         {
             m_treeValues[treeIndex] = newValue;
             if(m_treeValues.size() > 2U)

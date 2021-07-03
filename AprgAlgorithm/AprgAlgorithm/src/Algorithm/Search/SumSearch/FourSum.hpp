@@ -33,7 +33,8 @@ public:
     FourValues getPossibleDuplicatedFourValuesWithSum(Value const& targetSum) const
     {
         FourValues result{};
-        if(!m_sortedValues.empty())        {
+        if(!m_sortedValues.empty())
+        {
             SumsOfPairOfValues sumsOfPairOfValues(getSumsOfPairOfValuesWithPossibleDuplicates());
             std::sort(sumsOfPairOfValues.begin(), sumsOfPairOfValues.end());
             PairOfSumOfPairOfValues twoSumValues(getTwoValuesWithSum(targetSum, sumsOfPairOfValues, std::less_equal<Index>()));
@@ -71,7 +72,8 @@ private:
             Value const& targetSum,
             SumsOfPairOfValues const& sumOfPairOfValues,
             Comparator const& shouldContinue) const
-    {        PairOfSumOfPairOfValues result{};
+    {
+        PairOfSumOfPairOfValues result{};
         if(!sumOfPairOfValues.empty())
         {
             bool isFound(false);

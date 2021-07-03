@@ -103,7 +103,8 @@ public:
     void changeValueAtIndex(Index const index, Value const& newValue)
     {
         // This has O(n/k) time.
-        if(index < m_values.size())        {
+        if(index < m_values.size())
+        {
             m_values[index] = newValue;
 
             Index start = mathHelper::getMultipleThatIsLesserOrEqual(m_blockSize, index);

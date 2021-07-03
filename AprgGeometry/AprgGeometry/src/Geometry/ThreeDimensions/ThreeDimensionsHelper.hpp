@@ -28,6 +28,7 @@ Coordinate getCrossProduct(Coordinate const coordinate1, Coordinate const coordi
 bool isPointInLine(Point const& point, Line const& line);
 bool isPointInPlane(Point const& point, Plane const& plane);
 bool isLineInPlane(Line const& line, Plane const& plane);
+
 double getDistance(Point const& point1, Point const& point2);
 double getDistance(Line const& line, Point const& point);
 double getDistance(Line const& line1, Line const& line2);
@@ -43,7 +44,8 @@ bool areCoefficientsPerpendicular(Coordinate const& coefficients1, Coordinate co
 
 AlbaAngle getTheInnerAngleUsingThreePoints(Point const& pointA, Point const& pointB, Point const& pointC);
 AlbaAngle getTheSmallerAngleBetweenTwoLines(Line const& line1, Line const& line2);
-AlbaAngle getTheLargerAngleBetweenTwoLines(Line const& line1, Line const& line2);AlbaAngle getTheSmallerDihedralAngleBetweenTwoPlanes(Plane const& plane1, Plane const& plane2);
+AlbaAngle getTheLargerAngleBetweenTwoLines(Line const& line1, Line const& line2);
+AlbaAngle getTheSmallerDihedralAngleBetweenTwoPlanes(Plane const& plane1, Plane const& plane2);
 AlbaAngle getTheLargerDihedralAngleBetweenTwoPlanes(Plane const& plane1, Plane const& plane2);
 
 Point getMidpoint(Point const& point1, Point const& point2);
