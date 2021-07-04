@@ -40,17 +40,9 @@ Board::Board(Orientation const& orientation, InitializerList const& initializerL
     , m_pieceMatrix(8U, 8U, initializerList)
 {}
 
-bool Board::isCoordinateOnBoard(Coordinate const& coordinate) const
-{
-    auto x(coordinate.getX());
-    auto y(coordinate.getY());
-    return (x>=0 && x<=7) && (y>=0 && y<=7);
-}
-
 bool Board::isEmptyAt(Coordinate const& coordinate) const
 {
-    return getPieceAt(coordinate).isEmpty();
-}
+    return getPieceAt(coordinate).isEmpty();}
 
 bool Board::canBeCaptured(Coordinate const& coordinate) const
 {

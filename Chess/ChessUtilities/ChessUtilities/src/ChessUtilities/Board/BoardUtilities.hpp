@@ -10,10 +10,12 @@ namespace alba
 namespace chess
 {
 
+bool isCoordinateOnBoard(Coordinate const& coordinate);
+bool isValidMove(Move const& move);
+
 PieceColor getOppositeColor(PieceColor const pieceColor);
 
-std::string getEnumString(PieceColor const pieceColor);
-std::string getEnumString(PieceType const pieceType);
+std::string getEnumString(PieceColor const pieceColor);std::string getEnumString(PieceType const pieceType);
 
 std::string constructFenString(
         Board const& board,

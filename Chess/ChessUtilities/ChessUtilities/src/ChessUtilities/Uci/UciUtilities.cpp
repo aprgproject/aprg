@@ -69,11 +69,10 @@ void processToken(
         }
         else if("cp" == data.headerToken)
         {
-            calculationDetails.scoreInCentipawns = convertStringToNumber<unsigned int>(token);
+            calculationDetails.scoreInCentipawns = convertStringToNumber<int>(token);
         }
         else if("mate" == data.headerToken)
-        {
-            calculationDetails.mateInNumberOfMoves = convertStringToNumber<unsigned int>(token);
+        {            calculationDetails.mateInNumberOfMoves = convertStringToNumber<unsigned int>(token);
         }
         else if("currmove" == data.headerToken)
         {
