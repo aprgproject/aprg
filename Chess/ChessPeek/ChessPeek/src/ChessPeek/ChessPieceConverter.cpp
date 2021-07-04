@@ -22,7 +22,8 @@ Piece ChessPieceConverter::convertBitValueToPiece(
     PieceType pieceType{};
     if(PieceColor::White == pieceColor)
     {
-        pieceType = getPieceTypeFromBitValue(m_whitePiecesToBitValuesMap, bitValue);    }
+        pieceType = getPieceTypeFromBitValue(m_whitePiecesToBitValuesMap, bitValue);
+    }
     else
     {
         pieceType = getPieceTypeFromBitValue(m_blackPiecesToBitValuesMap, bitValue);
@@ -53,7 +54,8 @@ PieceType ChessPieceConverter::getPieceTypeFromBitValue(
     PieceType result{};
     if(bestFitTypes.size() == 1)
     {
-        result = bestFitTypes.back();    }
+        result = bestFitTypes.back();
+    }
     else if(m_logFileStreamOptional)
     {
         auto & logStream(m_logFileStreamOptional.getReference());

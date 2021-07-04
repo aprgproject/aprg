@@ -6,7 +6,8 @@
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/Print/AlbaPrintFunctions.hpp>
-#include <Common/User/AlbaUserInterface.hpp>#include <Geometry/TwoDimensions/Circle.hpp>
+#include <Common/User/AlbaUserInterface.hpp>
+#include <Geometry/TwoDimensions/Circle.hpp>
 #include <Geometry/TwoDimensions/TwoDimensionsHelper.hpp>
 #include <Statistics/DataStatistics.hpp>
 #include <Statistics/FrequencyStatistics.hpp>
@@ -222,6 +223,7 @@ void SOOSA::processFile(string const& filePath)
         cout << "The form is not detected. The file is an invalid bitmap so its ignored." << endl;
     }
 }
+
 void SOOSA::processBitmapFile(Bitmap const& bitmap)
 {
     //enableDebugSnippet(bitmap); // debug
@@ -257,7 +259,8 @@ void SOOSA::processBitmapFile(Bitmap const& bitmap)
         cout << "The form is not detected. The lines are invalid." << endl;
     }
 
-    //saveDebugSnippet(bitmap); // debug}
+    //saveDebugSnippet(bitmap); // debug
+}
 
 void SOOSA::saveToFrequencyDatabase()
 {
@@ -419,6 +422,7 @@ Line SOOSA::getLineModel(TwoDimensionSamples const & samples) const
     }
     return Line(lineModel.aCoefficient, lineModel.bCoefficient, lineModel.cCoefficient);
 }
+
 SOOSA::DoubleCollection SOOSA::getAcceptableSquareErrorCollectionUsingRemovalRatio(
         ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap) const
 {
@@ -528,6 +532,7 @@ void SOOSA::processColumn(
         cout << "The form is not detected. The questions bars on a column does not match." << endl;
     }
 }
+
 void SOOSA::processQuestions(
         unsigned int & questionNumber,
         BitmapSnippet const& snippet,
@@ -559,7 +564,8 @@ void SOOSA::processQuestions(
             }
             stringstream ss;
             ss << "There is problem locating only one answer in column number: " << columnNumber << ", column question number: " << questionInColumnIndex+1
-               << ". Answers: ";            printParameter(ss, answers);
+               << ". Answers: ";
+            printParameter(ss, answers);
             ss << ".";
             Status::getInstance().setError(ss.str());
         }
@@ -961,7 +967,8 @@ void SOOSA::removeIncorrectBarPointsBasedFromHeight(
             cout << "Figuring out the correct heights. Please wait." << endl;
         }
         countForPrint++;
-    }}
+    }
+}
 
 void SOOSA::addAndRetainBarPointsIfPossible(
         TwoDimensionKMeans & kMeansForBarPoints,
@@ -1044,7 +1051,8 @@ string SOOSA::getPrintableStringForPercentage(double const numerator, double con
     stringstream ss;
     if(denominator==0)
     {
-        ss << " - ";    }
+        ss << " - ";
+    }
     else
     {
         int numbers = getIntegerAfterRoundingADoubleValue<int>(numerator/denominator*1000);
@@ -1057,6 +1065,7 @@ string SOOSA::getPrintableStringForPercentage(double const numerator, double con
     }
     return ss.str();
 }
+
 void SOOSA::setAnswerToQuestionInColumn(unsigned int const columnNumber, unsigned int const questionOffsetInColumn, unsigned int const answer)
 {
     m_questionToAnswersMap[m_inputConfiguration.getQuestionIndexInColumn(columnNumber, questionOffsetInColumn)] = answer;

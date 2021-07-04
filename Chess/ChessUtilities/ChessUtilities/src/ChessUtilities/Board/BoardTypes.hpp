@@ -16,7 +16,8 @@ using PieceTypes = std::vector<PieceType>;
 using CoordinateDataType = int8_t;
 using Coordinate = AlbaXY<CoordinateDataType>;
 using Coordinates = std::vector<Coordinate>;
-using Move = std::pair<Coordinate, Coordinate>;using Moves = std::vector<Move>;
+using Move = std::pair<Coordinate, Coordinate>;
+using Moves = std::vector<Move>;
 
 }
 

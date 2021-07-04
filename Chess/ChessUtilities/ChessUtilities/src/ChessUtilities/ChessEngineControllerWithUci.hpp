@@ -4,7 +4,8 @@
 #include <ChessUtilities/Engine/CalculationDetails.hpp>
 
 #include <deque>
-#include <fstream>#include <string>
+#include <fstream>
+#include <string>
 
 namespace alba
 {
@@ -33,7 +34,8 @@ public:
 
     struct Command
     {
-        CommandType commandType;        std::string commandString;
+        CommandType commandType;
+        std::string commandString;
     };
 
     using StepsInCalculationMonitoring = std::function<void(CalculationDetails const&)> ;
