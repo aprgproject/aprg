@@ -3,10 +3,10 @@
 #include <Common/Bit/AlbaBitManipulation.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/Math/Helpers/ComputationHelpers.hpp>
+#include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/Print/AlbaPrintFunctions.hpp>
-#include <Common/User/AlbaUserInterface.hpp>
-#include <Geometry/TwoDimensions/Circle.hpp>
+#include <Common/User/AlbaUserInterface.hpp>#include <Geometry/TwoDimensions/Circle.hpp>
 #include <Geometry/TwoDimensions/TwoDimensionsHelper.hpp>
 #include <Statistics/DataStatistics.hpp>
 #include <Statistics/FrequencyStatistics.hpp>
@@ -219,10 +219,9 @@ void SOOSA::processFile(string const& filePath)
         stringstream ss;
         ss << "File is an invalid bitmap.";
         Status::getInstance().setError(ss.str());
-        cout << "File is an invalid bitmap so its ignored. File path: [" << bitmap.getConfiguration().getPath() << "]" << endl;
+        cout << "The form is not detected. The file is an invalid bitmap so its ignored." << endl;
     }
 }
-
 void SOOSA::processBitmapFile(Bitmap const& bitmap)
 {
     //enableDebugSnippet(bitmap); // debug
@@ -255,11 +254,10 @@ void SOOSA::processBitmapFile(Bitmap const& bitmap)
     }
     else
     {
-        cout << "Lines are invalid. " << endl;
+        cout << "The form is not detected. The lines are invalid." << endl;
     }
 
-    //saveDebugSnippet(bitmap); // debug
-}
+    //saveDebugSnippet(bitmap); // debug}
 
 void SOOSA::saveToFrequencyDatabase()
 {
@@ -418,11 +416,9 @@ Line SOOSA::getLineModel(TwoDimensionSamples const & samples) const
         ss << "Line not found because not enough samples. Samples found for line modeling: " <<samplesForLineModeling.size()
            << " Minimum number of samples: " << m_soosaConfiguration.getMinimumLineSamples() << ".";
         Status::getInstance().setError(ss.str());
-        cout << "Line not found because not enough samples. Samples found: " << samplesForLineModeling.size() << endl;
     }
     return Line(lineModel.aCoefficient, lineModel.bCoefficient, lineModel.cCoefficient);
 }
-
 SOOSA::DoubleCollection SOOSA::getAcceptableSquareErrorCollectionUsingRemovalRatio(
         ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap) const
 {
@@ -529,13 +525,9 @@ void SOOSA::processColumn(
 
 
         Status::getInstance().setError(ss.str());
-        cout << "Questions bars does not match. "
-             << " Questions bars on left line: " << questionBarsOnTheLeft.size()
-             << " Questions bars on right Line: " <<questionsBarsOnTheRight.size()
-             << " Number of questions from template: " << numberQuestionsInColumn << endl;
+        cout << "The form is not detected. The questions bars on a column does not match." << endl;
     }
 }
-
 void SOOSA::processQuestions(
         unsigned int & questionNumber,
         BitmapSnippet const& snippet,
@@ -549,23 +541,25 @@ void SOOSA::processQuestions(
         Answers answers = getAnswersAtQuestion(snippet, questionBarsOnTheLeft[questionInColumnIndex], questionsBarsOnTheRight[questionInColumnIndex]);
         if(answers.size() == 1)
         {
-            //cout << "In question number " << questionNumber
-            //     << ", the question is [" << m_inputConfiguration.getQuestionAt(questionNumber-1)
-            //     << "] the answer is " << answers.front() << "." << endl;
             setAnswerToQuestionInColumn(columnNumber, questionInColumnIndex, answers.front());
         }
         else
         {
-            cout << "In question number " << questionNumber
-                 << ", the question is [" << m_inputConfiguration.getQuestionAt(questionNumber-1)
-                 << "]" <<  endl;
-            cout << "There is problem locating only one answer. The list of answers: ";
-            printParameter(cout, answers);
-            cout << "." << endl;
+            cout << "Question number " << questionNumber;
+            if(answers.empty())
+            {
+                cout << ": No answer." << endl;
+            }
+            else
+            {
+                cout << ": Multiple answers.";
+                cout << " Answers: ";
+                printParameter(cout, answers);
+                cout << "." << endl;
+            }
             stringstream ss;
             ss << "There is problem locating only one answer in column number: " << columnNumber << ", column question number: " << questionInColumnIndex+1
-               << ". Answers: ";
-            printParameter(ss, answers);
+               << ". Answers: ";            printParameter(ss, answers);
             ss << ".";
             Status::getInstance().setError(ss.str());
         }
@@ -964,12 +958,10 @@ void SOOSA::removeIncorrectBarPointsBasedFromHeight(
         }
         if(countForPrint == 20)
         {
-            cout << "SOOSA is having a hard time figuring out the heights of each questions bar (form might be invalid)."
-                 << " This may take a lot of time but it will finish." << endl;
+            cout << "Figuring out the correct heights. Please wait." << endl;
         }
         countForPrint++;
-    }
-}
+    }}
 
 void SOOSA::addAndRetainBarPointsIfPossible(
         TwoDimensionKMeans & kMeansForBarPoints,
@@ -1050,18 +1042,21 @@ string SOOSA::getReportHtmlFilePath(string const& path) const
 string SOOSA::getPrintableStringForPercentage(double const numerator, double const denominator) const
 {
     stringstream ss;
-    ss.precision(5);
     if(denominator==0)
     {
-        ss << " - ";
-    }
+        ss << " - ";    }
     else
     {
-        ss << (numerator/denominator*100) << "%";
+        int numbers = getIntegerAfterRoundingADoubleValue<int>(numerator/denominator*1000);
+        ss << numbers/10;
+        if(numbers%10 > 0)
+        {
+            ss << "." << numbers%10;
+        }
+        ss << "%";
     }
     return ss.str();
 }
-
 void SOOSA::setAnswerToQuestionInColumn(unsigned int const columnNumber, unsigned int const questionOffsetInColumn, unsigned int const answer)
 {
     m_questionToAnswersMap[m_inputConfiguration.getQuestionIndexInColumn(columnNumber, questionOffsetInColumn)] = answer;
