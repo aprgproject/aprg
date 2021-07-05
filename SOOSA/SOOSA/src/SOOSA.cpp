@@ -67,12 +67,9 @@ void saveDebugSnippet(Bitmap const& bitmap)
 }*/
 
 
-
-
 SOOSA::FrequencyDatabase::FrequencyDatabase(unsigned int const numberOfQuestions, unsigned int const numberOfChoices)
     : m_numberOfQuestions(numberOfQuestions)
-    , m_numberOfChoices(numberOfChoices)
-{
+    , m_numberOfChoices(numberOfChoices){
     initialize();
 }
 
@@ -220,10 +217,9 @@ void SOOSA::processFile(string const& filePath)
         stringstream ss;
         ss << "File is an invalid bitmap.";
         Status::getInstance().setError(ss.str());
-        cout << "The form is not detected. The file is an invalid bitmap so its ignored." << endl;
+        cout << "NOT DETECTED: The file is an invalid bitmap so its ignored." << endl;
     }
 }
-
 void SOOSA::processBitmapFile(Bitmap const& bitmap)
 {
     //enableDebugSnippet(bitmap); // debug
@@ -256,11 +252,10 @@ void SOOSA::processBitmapFile(Bitmap const& bitmap)
     }
     else
     {
-        cout << "The form is not detected. The lines are invalid." << endl;
+        cout << "NOT DETECTED: The lines are invalid." << endl;
     }
 
-    //saveDebugSnippet(bitmap); // debug
-}
+    //saveDebugSnippet(bitmap); // debug}
 
 void SOOSA::saveToFrequencyDatabase()
 {
@@ -529,10 +524,9 @@ void SOOSA::processColumn(
 
 
         Status::getInstance().setError(ss.str());
-        cout << "The form is not detected. The questions bars on a column does not match." << endl;
+        cout << "NOT DETECTED: The questions bars on a column does not match." << endl;
     }
 }
-
 void SOOSA::processQuestions(
         unsigned int & questionNumber,
         BitmapSnippet const& snippet,
@@ -628,11 +622,10 @@ double SOOSA::getShadePercentage(
     {
         //if(!isBlackAt(snippet, convertToBitmapXY(pointInCircle)))
         //{
-        //    writePointInDebug(convertToBitmapXY(pointInCircle), 0xA1BA00);
+            //writePointInDebug(convertToBitmapXY(pointInCircle), 0xA1BA00);
         //}
         numberOfBlackPoints += (isBlackAt(snippet, convertToBitmapXY(pointInCircle))) ? 1 : 0;
-        totalPoints++;
-    });
+        totalPoints++;    });
     return static_cast<double>(numberOfBlackPoints)/totalPoints;
 }
 
@@ -695,10 +688,10 @@ SOOSA::QuestionBarCoordinates SOOSA::getQuestionBarCoordinatesFromLine(
         RangeOfDoubles minMaxCriteriaForBar(getMinMaxCriteriaForBar(pointAndWidthPairs));
         TwoDimensionKMeans kMeansForBarPoints;
         retrieveBarPointsThatFitAndSaveToKMeans(kMeansForBarPoints, pointAndWidthPairs, minMaxCriteriaForBar);
+        retainOnlyContinuousBarPointsBasedOnHeightDistances(kMeansForBarPoints, numberQuestionsInColumn);
         removeIncorrectBarPointsBasedFromHeight(kMeansForBarPoints, numberQuestionsInColumn);
         saveQuestionBarCoordinatesFromKMeansWithBarPoints(questionBarCoordinates, kMeansForBarPoints, numberQuestionsInColumn);
-    }
-    return questionBarCoordinates;
+    }    return questionBarCoordinates;
 }
 
 void SOOSA::retrieveBarPointsThatFitAndSaveToKMeans(
@@ -920,10 +913,68 @@ void SOOSA::addAndRetainWidthsIfPossible(
     }
 }
 
-void SOOSA::removeIncorrectBarPointsBasedFromHeight(
+void SOOSA::retainOnlyContinuousBarPointsBasedOnHeightDistances(
         TwoDimensionKMeans & kMeansForBarPoints,
         unsigned int const numberQuestionsInColumn) const
 {
+    using Range=pair<unsigned int, unsigned int>;
+    using CountToRangeMultiMap=multimap<unsigned int, Range>;
+
+    TwoDimensionSamples barPointsSamples(kMeansForBarPoints.getSamples());
+    kMeansForBarPoints.clear();
+
+    CountToRangeMultiMap countToRangeMultiMap;
+    unsigned int heightPointsCount(2U);
+    double previousHeight(0);
+    for(unsigned int start=0U, end=1U; end<barPointsSamples.size(); end++)
+    {
+        double currentHeight = getDistance(convertToPoint(barPointsSamples.at(start)), convertToPoint(barPointsSamples.at(end)));
+
+        if(currentHeight>previousHeight && currentHeight-previousHeight < 10+previousHeight*0.2)
+        {
+            previousHeight = currentHeight;
+            heightPointsCount++;
+            if(end+1==barPointsSamples.size())
+            {
+                countToRangeMultiMap.emplace(heightPointsCount, Range{start, end-1});
+            }
+        }
+        else
+        {
+            countToRangeMultiMap.emplace(heightPointsCount, Range{start, end-1});
+            previousHeight = 0;
+            heightPointsCount = 1U;
+            start = end;
+        }
+    }
+    if(!countToRangeMultiMap.empty())
+    {
+        unsigned int count=0;
+        for(auto itMap=countToRangeMultiMap.crbegin(); itMap!=countToRangeMultiMap.crend(); itMap++)
+        {
+            Range const& range(itMap->second);
+            for(auto itForRange=barPointsSamples.begin()+range.first; itForRange!=barPointsSamples.begin()+range.second+1U; itForRange++)
+            {
+                kMeansForBarPoints.addSample(*itForRange);
+            }
+            count++;
+            if(count>=numberQuestionsInColumn)
+            {
+                break;
+            }
+        }
+    }
+
+    TwoDimensionSamples & unsortedSamples(kMeansForBarPoints.getSamplesReference());
+    sort(unsortedSamples.begin(), unsortedSamples.end(), [](Sample const& sample1, Sample const& sample2)
+    {
+        return sample1.getValueAt(1) < sample2.getValueAt(1);
+    });
+}
+
+void SOOSA::removeIncorrectBarPointsBasedFromHeight(
+        TwoDimensionKMeans & kMeansForBarPoints,
+        unsigned int const numberQuestionsInColumn) const{
     unsigned int countForPrint(0);
     bool continueRemoval(true);
     while(continueRemoval)
