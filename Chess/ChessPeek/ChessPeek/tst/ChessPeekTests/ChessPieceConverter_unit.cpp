@@ -10,9 +10,9 @@ namespace alba
 namespace chess
 {
 
-TEST(ChessPieceConverterTest, ConvertBitValueToPieceWorks)
+TEST(ChessPieceConverterTest, ConvertBitValueToPieceWorksForChessDotComUserVsUserType)
 {
-    ChessPieceConverter chessPeek;
+    ChessPieceConverter chessPeek(ChessPeekConfigurationType::ChessDotComUserVsUser);
 
     Piece actualPiece1(chessPeek.convertBitValueToPiece(PieceColor::Black, 0B0000000000000000000110000001100000011000000110000011110000111100));
     Piece actualPiece2(chessPeek.convertBitValueToPiece(PieceColor::Black, 0B0000000000010000000110000001100000111000000110000011110001111100));
