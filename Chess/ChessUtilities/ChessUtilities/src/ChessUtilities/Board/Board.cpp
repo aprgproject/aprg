@@ -42,7 +42,8 @@ Board::Board(Orientation const& orientation, InitializerList const& initializerL
 
 bool Board::isEmptyAt(Coordinate const& coordinate) const
 {
-    return getPieceAt(coordinate).isEmpty();}
+    return getPieceAt(coordinate).isEmpty();
+}
 
 bool Board::canBeCaptured(Coordinate const& coordinate) const
 {

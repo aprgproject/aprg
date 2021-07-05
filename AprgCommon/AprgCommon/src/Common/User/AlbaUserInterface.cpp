@@ -67,6 +67,7 @@ NumberType AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(string
         table.getLastRow().addCell(choice.second, DisplayTableCellMode::left);
     }
     cout<<table.drawOutput()<<endl;
+
     cout << "Input your answer: ";
     return convertStringToNumber<NumberType>(getUserInput());
 }
@@ -91,6 +92,7 @@ string AlbaUserInterface::displayQuestionAndChoicesAndGetStringAnswerInAllCapita
         table.getLastRow().addCell(choice.second, DisplayTableCellMode::left);
     }
     cout<<table.drawOutput()<<endl;
+
     cout << "Input your answer: ";
     return getStringWithCapitalLetters(getUserInput());
 }

@@ -72,7 +72,8 @@ void processToken(
             calculationDetails.scoreInCentipawns = convertStringToNumber<int>(token);
         }
         else if("mate" == data.headerToken)
-        {            calculationDetails.mateInNumberOfMoves = convertStringToNumber<unsigned int>(token);
+        {
+            calculationDetails.mateInNumberOfMoves = convertStringToNumber<unsigned int>(token);
         }
         else if("currmove" == data.headerToken)
         {
