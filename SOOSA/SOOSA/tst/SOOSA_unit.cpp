@@ -348,9 +348,24 @@ TEST(SoosaTest, Example_PS2Q21_SPE_CVS_2_Works)
     checkAnswersForSpecialUnitsPattern2(soosa);
 }
 
+TEST(SoosaTest, Example_PS2Q21_SPE_CVS_3_Works)
+{
+    AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\CVS_Special Unit_A5 Size\PS2Q21_SPE_CVS(3).bmp)");
+    AlbaLocalPathHandler tempFileToTest(APRG_DIR R"(\SOOSA\FilesForTests\Temp.bmp)");
+    inputFile.copyToNewFile(tempFileToTest.getFullPath());
+    SoosaConfiguration soosaConfiguration(getSoosaConfiguration());
+    InputConfiguration inputConfiguration(getInputConfigurationForSpecialUnits(tempFileToTest.getFullPath()));
+    SOOSA soosa(soosaConfiguration, inputConfiguration);
+
+    soosa.process();
+
+    checkAnswersForSpecialUnitsPattern3(soosa);
+}
+
 TEST(SoosaTest, DISABLED_LotsOfDirtAndCannotBeProcessedWorks)
 {
-    AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\LotsOfDirtAndCannotBeProcessed.bmp)");    AlbaLocalPathHandler tempFileToTest(APRG_DIR R"(\SOOSA\FilesForTests\Temp.bmp)");
+    AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\LotsOfDirtAndCannotBeProcessed.bmp)");
+    AlbaLocalPathHandler tempFileToTest(APRG_DIR R"(\SOOSA\FilesForTests\Temp.bmp)");
     inputFile.copyToNewFile(tempFileToTest.getFullPath());
     SoosaConfiguration soosaConfiguration(getSoosaConfiguration());
     InputConfiguration inputConfiguration(getInputConfigurationForCharityPayWards(tempFileToTest.getFullPath()));
@@ -391,7 +406,7 @@ TEST(SoosaTest, DISABLED_DistortedWorks)
 
 TEST(SoosaTest, DISABLED_Noise100PercentWorks)
 {
-    AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\Noise100Percent.bmp)");
+    AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\Noise100Percent24Bit.bmp)");
     AlbaLocalPathHandler tempFileToTest(APRG_DIR R"(\SOOSA\FilesForTests\Temp.bmp)");
     inputFile.copyToNewFile(tempFileToTest.getFullPath());
     SoosaConfiguration soosaConfiguration(getSoosaConfiguration());
@@ -406,7 +421,8 @@ TEST(SoosaTest, DISABLED_Noise100PercentWorks)
 TEST(SoosaTest, DISABLED_ProcessWorksWithADirectory)
 {
     AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\DEM)");
-    SoosaConfiguration soosaConfiguration(getSoosaConfiguration());    InputConfiguration inputConfiguration(getInputConfigurationForDemObas(inputFile.getFullPath()));
+    SoosaConfiguration soosaConfiguration(getSoosaConfiguration());
+    InputConfiguration inputConfiguration(getInputConfigurationForDemObas(inputFile.getFullPath()));
     SOOSA soosa(soosaConfiguration, inputConfiguration);
 
     soosa.process();
