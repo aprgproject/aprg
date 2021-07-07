@@ -104,7 +104,8 @@ public:
 
     bool isEmpty() const
     {
-        return CoordinateType{}==x && CoordinateType{}==y;    }
+        return CoordinateType{}==x && CoordinateType{}==y;
+    }
 
     CoordinateType getX() const
     {

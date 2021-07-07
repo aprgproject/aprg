@@ -170,7 +170,8 @@ ConicSectionType getConicSectionBasedOnGeneralForm(
     ConicSectionType result(ConicSectionType::Unknown);
 
     if(isAlmostEqual(b, 0.0))
-    {        if(isAlmostEqual(a, 0.0) && isAlmostEqual(c, 0.0))
+    {
+        if(isAlmostEqual(a, 0.0) && isAlmostEqual(c, 0.0))
         {
             if(isAlmostEqual(d, 0.0) || isAlmostEqual(e, 0.0))
             {
@@ -588,7 +589,8 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points)
     assert(points.size() >= 3);
 
     auto minmaxResult = minmax_element(points.cbegin(), points.cend(), [](Point const& point1, Point const& point2)
-    {return point1.getY() < point2.getY();});    Point pointWithMinimumY(*(minmaxResult.first)); // find the bottom point
+    {return point1.getY() < point2.getY();});
+    Point pointWithMinimumY(*(minmaxResult.first)); // find the bottom point
 
     struct CompareData
     {

@@ -19,7 +19,8 @@ ChessPeekConfiguration::ChessPeekConfiguration(
     , m_bottomIndentionMultiplier{}
     , m_whiteColorLimit{}
     , m_blackColorLimit{}
-{    initialize();
+{
+    initialize();
 }
 
 ChessPeekConfigurationType ChessPeekConfiguration::getType() const
@@ -59,7 +60,8 @@ double ChessPeekConfiguration::getBottomIndentionMultiplier() const
 
 double ChessPeekConfiguration::getWhiteColorLimit() const
 {
-    return m_whiteColorLimit;}
+    return m_whiteColorLimit;
+}
 
 double ChessPeekConfiguration::getBlackColorLimit() const
 {
@@ -82,7 +84,8 @@ void ChessPeekConfiguration::initialize()
     }
 }
 
-void ChessPeekConfiguration::initializeChessDotComUserVsUser(){
+void ChessPeekConfiguration::initializeChessDotComUserVsUser()
+{
     m_topLeftCorner = BitmapXY(2200, 151);
     m_bottomRightCorner = BitmapXY(3023, 974);
     m_leftIndentionMultiplier = 0.05;
@@ -92,6 +95,7 @@ void ChessPeekConfiguration::initializeChessDotComUserVsUser(){
     m_whiteColorLimit = 0.91;
     m_blackColorLimit = 0.40;
 }
+
 void ChessPeekConfiguration::initializeChessDotComUserVsComputer()
 {
     m_topLeftCorner = BitmapXY(2215, 151);

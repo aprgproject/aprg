@@ -15,7 +15,8 @@
 
 using namespace alba::AprgBitmap;
 using namespace alba::mathHelper;
-using namespace alba::stringHelper;using namespace std;
+using namespace alba::stringHelper;
+using namespace std;
 
 namespace alba
 {
@@ -47,6 +48,7 @@ void ChessPeek::runForever()
         //break; //
     }
 }
+
 void ChessPeek::runOneIteration()
 {
     Board::PieceMatrix previousPieceMatrix(m_chessBoard.getPieceMatrix());
@@ -74,7 +76,8 @@ void ChessPeek::startEngineAnalysisOfNewPosition()
     if(!m_chessEngineController.waitTillReadyAndReturnIfResetWasPerformed())
     {
         m_chessEngineController.goWithPonder();
-        m_isEngineNewlyReseted=false;    }
+        m_isEngineNewlyReseted=false;
+    }
     else
     {
         m_isEngineNewlyReseted=true;
@@ -127,7 +130,8 @@ void ChessPeek::checkSnippetAndSaveDetails(BitmapSnippet & snippet)
     //snippet.setPixelAt(snippet.getBottomRightCorner(), 0x00A1BA);//
 
     m_numberOfDetectedKings = 0U;
-    unsigned int pieceCount = 0U;    for(unsigned int j=0; j<8; j++)
+    unsigned int pieceCount = 0U;
+    for(unsigned int j=0; j<8; j++)
     {
         for(unsigned int i=0; i<8; i++)
         {
@@ -140,7 +144,8 @@ void ChessPeek::checkSnippetAndSaveDetails(BitmapSnippet & snippet)
 
             m_chessBoard.setPieceAt(chessCoordinate, chessPiece);
             if(!chessPiece.isEmpty())
-            {                setKingDetailsIfPossible(chessCoordinate, chessPiece);
+            {
+                setKingDetailsIfPossible(chessCoordinate, chessPiece);
                 pieceCount++;
             }
         }
@@ -162,6 +167,7 @@ ChessPeek::ChessCellCoordinates ChessPeek::getChessCellCoordinates(
                 static_cast<unsigned int>(round(startY + deltaY*(j+1) - deltaX*m_configuration.getBottomIndentionMultiplier())),
     };
 }
+
 Piece ChessPeek::getChessPieceIfPossible(BitSet64 const& blackValue, BitSet64 const& whiteValue)
 {
     Piece chessPiece;
@@ -290,6 +296,7 @@ Moves ChessPeek::getCurrentMoves(
     }
     return result;
 }
+
 Moves ChessPeek::getFutureMoves() const
 {
     constexpr unsigned int maxNumberOfFuturePlayerMoves = 5U;
@@ -566,7 +573,8 @@ void ChessPeek::initialize()
     m_chessPieceConverter.setLogFile(APRG_DIR R"(\Chess\ChessPeek\Files\PieceConverter.log)");
     m_chessEngineHandler.setLogFile(APRG_DIR R"(\Chess\ChessPeek\Files\EngineHandler.log)");
     m_chessEngineController.setLogFile(APRG_DIR R"(\Chess\ChessPeek\Files\EngineController.log)");
-    m_chessEngineController.setAdditionalStepsInCalculationMonitoring([&](EngineCalculationDetails const& engineCalculationDetails)    {
+    m_chessEngineController.setAdditionalStepsInCalculationMonitoring([&](EngineCalculationDetails const& engineCalculationDetails)
+    {
         calculationMonitoringCallBackForEngine(engineCalculationDetails);
     });
 }

@@ -34,6 +34,7 @@ public:
     double getMultiplierForMaximumDistanceBetweenBarHeights() const;
     double getAcceptableSdOverMeanDeviationForBarHeight() const;
     double getRemovalRatioForBarHeight() const;
+
     // Choices related parameters
     unsigned int getNumberOfChoices() const;
     unsigned int getColorIntensityForWhite() const;
@@ -65,6 +66,7 @@ private:
     double m_multiplierForMaximumDistanceBetweenBarHeights;
     double m_acceptableSdOverMeanDeviationForBarHeight;
     double m_removalRatioForBarHeight;
+
     // Choices related parameters
     unsigned int m_numberOfChoices;
     unsigned int m_colorIntensityForWhite;

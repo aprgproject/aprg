@@ -946,7 +946,8 @@ SOOSA::CountToEndPointIndexesMultiMap SOOSA::getHeightPointsCountToEndPointIndex
                 && currentHeight-previousHeight < getMaximumDistanceForBetweenBarHeights(previousHeight))
         {
             previousHeight = currentHeight;
-            heightPointsCount++;        }
+            heightPointsCount++;
+        }
         else
         {
             result.emplace(heightPointsCount, EndPointIndexes{startIndex, endIndex-1});
@@ -970,7 +971,8 @@ double SOOSA::getMaximumDistanceForBetweenBarHeights(double const previousHeight
 
 void SOOSA::removeBarPointsWithFewHeightPointsCount(
         TwoDimensionKMeans & kMeansForBarPoints,
-        unsigned int const numberQuestionsInColumn,        CountToEndPointIndexesMultiMap const& countToEndPointsIndexesMultiMap) const
+        unsigned int const numberQuestionsInColumn,
+        CountToEndPointIndexesMultiMap const& countToEndPointsIndexesMultiMap) const
 {
     TwoDimensionSamples barPointsSamplesCopy(kMeansForBarPoints.getSamples());
     kMeansForBarPoints.clear();
@@ -1040,7 +1042,8 @@ void SOOSA::removeBarPointsToGetConsistentHeight(
         if(countForPrint == 5)
         {
             cout << "Figuring out the correct heights. Please wait." << endl;
-        }        countForPrint++;
+        }
+        countForPrint++;
     }
 }
 

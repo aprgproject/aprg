@@ -42,7 +42,8 @@ string& DisplayTableCell::getTextReference()
 
 void DisplayTableCell::setText(string const& text)
 {
-    m_displayText = text;}
+    m_displayText = text;
+}
 
 void DisplayTableCell::setHorizontalMode(DisplayTableCellMode const mode)
 {

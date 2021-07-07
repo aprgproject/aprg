@@ -6,6 +6,7 @@
 #include <iostream>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -58,7 +59,8 @@ void ChessPieceConverter::initialize(ChessPeekConfigurationType const type)
     }
 }
 
-void ChessPieceConverter::initializeConverterToChessDotCom(){
+void ChessPieceConverter::initializeConverterToChessDotCom()
+{
     m_whitePiecesToBitValuesMap[PieceType::Empty]  = 0;
     m_whitePiecesToBitValuesMap[PieceType::Pawn]   = 0B0000000000011000000110000001000000111100000100000011110001111110;
     m_whitePiecesToBitValuesMap[PieceType::Knight] = 0B0001000000111100001111100111111001101100001110100011111001111110;
@@ -97,7 +99,8 @@ void ChessPieceConverter::initializeConverterToLichessDotOrg()
 
 PieceType ChessPieceConverter::getPieceTypeFromBitValue(
         PieceTypeToBitValueMap const& pieceTypeToBitValueMap,
-        uint64_t const bitValue){
+        uint64_t const bitValue)
+{
     PieceTypeToBitValueMap differenceMap(getDifferenceMap(pieceTypeToBitValueMap, bitValue));
     PieceTypeToCountPerByteMap pieceTypeToDifferenceOfEachByteMap(getDifferenceOfEachByteMap(differenceMap));
     PieceTypeToCountMap pieceTypeToScoreMap(getPieceTypeToScoreMap(pieceTypeToDifferenceOfEachByteMap));
@@ -120,6 +123,7 @@ PieceType ChessPieceConverter::getPieceTypeFromBitValue(
         }
         logStream << "}" << endl;
     }
+
     return result;
 }
 
