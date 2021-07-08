@@ -4,7 +4,8 @@
 #include <ChessUtilities/Board/PieceColorAndType.hpp>
 #include <ChessUtilities/Board/PieceType.hpp>
 
-#include <cstdint>#include <ostream>
+#include <cstdint>
+#include <ostream>
 #include <vector>
 
 namespace alba
@@ -29,7 +30,8 @@ public:
     Piece(PieceColorAndType const colorAndType);
     Piece(PieceColor const color, PieceType const type);
 
-    bool operator==(Piece const& piece) const;    bool operator!=(Piece const& piece) const;
+    bool operator==(Piece const& piece) const;
+    bool operator!=(Piece const& piece) const;
     bool isEmpty() const;
 
     PieceColor getColor() const;
@@ -43,6 +45,7 @@ private:
 };
 
 using Pieces = std::vector<Piece>;
+
 
 std::ostream & operator<<(std::ostream & out, Piece const& piece);
 

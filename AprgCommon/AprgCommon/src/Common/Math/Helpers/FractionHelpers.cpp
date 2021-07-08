@@ -5,7 +5,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace mathHelper
 {
@@ -43,7 +44,8 @@ FractionDetails getFractionFromPartialNumerators(
             numerator = (*itPartialNumerator * numerator) + denominator;
             denominator = previousNumerator;
             isBeyondUnsignedIntegerLimits =
-                    isValueBeyondLimits<unsigned int>(numerator) || isValueBeyondLimits<unsigned int>(denominator);            if(isBeyondUnsignedIntegerLimits) { break; }
+                    isValueBeyondLimits<unsigned int>(numerator) || isValueBeyondLimits<unsigned int>(denominator);
+            if(isBeyondUnsignedIntegerLimits) { break; }
         }
     }
     return FractionDetails{

@@ -30,6 +30,7 @@ template <typename ValueType, template <typename ContainerValueType, typename Co
 void printParameter(std::ostream & outputStream, Adapter<ValueType, std::deque<ValueType>> const& adapter);
 
 
+
 // printParameterWithName declaration
 
 template <typename ParameterType>
@@ -56,6 +57,7 @@ template <typename KeyType, typename ValueType, template <typename, typename, ty
 void printParameterWithName(std::ostream & outputStream, std::string const& parameterName, Container<KeyType, ValueType> const& container);
 template <typename ValueType, template <typename ContainerValueType, typename Container> class Adapter>
 void printParameterWithName(std::ostream & outputStream, std::string const& parameterName, Adapter<ValueType, std::deque<ValueType>> const& adapter);
+
 
 
 // Utilities
@@ -158,7 +160,8 @@ void printParameter(std::ostream & outputStream, Container<KeyType, ValueType> c
 template <typename ValueType, template <typename ContainerValueType, typename Container> class Adapter>
 void printParameter(std::ostream & outputStream, Adapter<ValueType, std::deque<ValueType>> const& adapter)
 {
-    outputStream << "{adapter: ";    printParameter(outputStream, getUnderlyingContainer(adapter));
+    outputStream << "{adapter: ";
+    printParameter(outputStream, getUnderlyingContainer(adapter));
     outputStream << "}";
 }
 
@@ -265,7 +268,8 @@ void printParameterWithName(std::ostream & outputStream, std::string const& para
 template <typename ValueType, template <typename ContainerValueType, typename Container> class Adapter>
 void printParameterWithName(std::ostream & outputStream, std::string const& parameterName, Adapter<ValueType, std::deque<ValueType>> const& adapter)
 {
-    outputStream << parameterName << " : [";    printParameter(outputStream, adapter);
+    outputStream << parameterName << " : [";
+    printParameter(outputStream, adapter);
     outputStream<< "]";
 }
 

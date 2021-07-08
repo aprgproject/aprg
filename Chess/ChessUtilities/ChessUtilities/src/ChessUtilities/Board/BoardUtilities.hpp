@@ -7,6 +7,7 @@
 
 namespace alba
 {
+
 namespace chess
 {
 
@@ -20,7 +21,8 @@ std::string getEnumString(PieceType const pieceType);
 std::string getEnumString(PieceColorAndType const pieceColorAndType);
 
 std::string constructFenString(
-        Board const& board,        PieceColor const colorToMove,
+        Board const& board,
+        PieceColor const colorToMove,
         std::string const& castlingAvailability,
         std::string const& enPassantTarget,
         unsigned int const halfMoveClock,

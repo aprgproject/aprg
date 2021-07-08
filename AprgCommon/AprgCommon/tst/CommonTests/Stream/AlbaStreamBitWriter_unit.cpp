@@ -101,6 +101,7 @@ TEST(AlbaStreamBitWriterTest, WriteBitsetDataWorks)
 
     EXPECT_EQ(R"(16)", getHexEquivalentOfCharacters(ss.str()));
 }
+
 TEST(AlbaStreamBitWriterTest, FlushWorks)
 {
     stringstream ss;

@@ -5,13 +5,15 @@
 #include <ChessPeek/ChessPieceRetriever.hpp>
 #include <ChessUtilities/Board/Board.hpp>
 #include <ChessUtilities/ChessEngineControllerWithUci.hpp>
-#include <ChessUtilities/ChessEngineHandler.hpp>#include <Common/Math/Matrix/AlbaMatrix.hpp>
+#include <ChessUtilities/ChessEngineHandler.hpp>
+#include <Common/Math/Matrix/AlbaMatrix.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 #include <UserAutomation/AlbaLocalUserAutomation.hpp>
 
 #include <cstdint>
 
-namespace alba{
+namespace alba
+{
 
 namespace chess
 {
@@ -26,7 +28,8 @@ public:
 
     struct PeekCalculationDetails
     {
-        unsigned int depth;        int scoreInCentipawns;
+        unsigned int depth;
+        int scoreInCentipawns;
         unsigned int mateInNumberOfMoves;
         std::string bestMove;
         stringHelper::strings currentlySearchingMoves;
@@ -42,6 +45,7 @@ public:
     void checkScreenAndSaveDetails();
     void startEngineAnalysisOfNewPosition();
     void calculationMonitoringCallBackForEngine(EngineCalculationDetails const& engineCalculationDetails);
+
 private:
     bool didBoardChange(Board::PieceMatrix const& previousPieceMatrix) const;
     bool canAnalyzeBoard() const;
@@ -53,6 +57,7 @@ private:
     void updatePlayerSideAndOrientation(unsigned int const pieceCount);
     void setOrientationDependingOnPlayerColor(PieceColor const newColor);
     void setKingDetailsIfPossible(Coordinate const& chessCoordinate, Piece const& chessPiece);
+
     void saveCalculationDetails(EngineCalculationDetails const& engineCalculationDetails);
     void checkCalculationDetailsFromEngine();
 
@@ -74,7 +79,8 @@ private:
     ChessPieceRetriever m_pieceRetriever;
     ChessEngineHandler m_chessEngineHandler;
     ChessEngineControllerWithUci m_chessEngineController;
-    AlbaLocalUserAutomation m_userAutomation;    PeekCalculationDetails m_savedCalculationDetails;
+    AlbaLocalUserAutomation m_userAutomation;
+    PeekCalculationDetails m_savedCalculationDetails;
     Board m_chessBoard;
     PieceColor m_playerColor;
     Coordinate m_playerKingCoordinate;

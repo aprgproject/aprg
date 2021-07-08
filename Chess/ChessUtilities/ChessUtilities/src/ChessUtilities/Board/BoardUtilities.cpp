@@ -89,7 +89,8 @@ std::string getEnumString(PieceColorAndType const pieceColorAndType)
 }
 
 string constructFenString(
-        Board const& board,        PieceColor const colorToMove,
+        Board const& board,
+        PieceColor const colorToMove,
         string const& castlingAvailability,
         string const& enPassantTarget,
         unsigned int const halfMoveClock,

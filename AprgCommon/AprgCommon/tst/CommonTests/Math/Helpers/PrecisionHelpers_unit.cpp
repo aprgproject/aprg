@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 
 using namespace std;
+
 namespace alba
 {
 
@@ -32,6 +33,7 @@ TEST(PrecisionHelpersTest, DoubleTypesCanBeConsideredEqual)
     EXPECT_TRUE(isAlmostEqual(INFINITY, INFINITY));
     EXPECT_FALSE(isAlmostEqual(INFINITY, -INFINITY));
 }
+
 TEST(PrecisionHelpersTest, IsAlmostAnIntegerWorks)
 {
     EXPECT_TRUE((isAlmostAnInteger<float, int>(0)));

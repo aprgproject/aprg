@@ -178,7 +178,8 @@ void ChessPieceRetriever::initializeConverterToLichessDotOrg()
     m_piecesToChessCellValuesMap[PieceColorAndType::BlackKing]   = 0B0000000000000001000000001000000000001100100111011111000110000000;
 }
 
-bool ChessPieceRetriever::isBitValueAsserted(        BitmapSnippet const& chessBoardSnippet,
+bool ChessPieceRetriever::isBitValueAsserted(
+        BitmapSnippet const& chessBoardSnippet,
         CheckDetail const& checkDetail,
         BitmapXY const& chessCellTopLeft,
         BitmapXY const& chessCellBottomRight) const

@@ -182,7 +182,8 @@ public:
         unsigned int limit = std::min<unsigned int>(dataSampleValues.size(), m_numberOfColumns*m_numberOfRows);
         for(unsigned int i=0; i<limit; i++)
         {
-            if(!isEqualForMathMatrixDataType(dataSampleValues.at(i), static_cast<DataType>(0)))            {
+            if(!isEqualForMathMatrixDataType(dataSampleValues.at(i), static_cast<DataType>(0)))
+            {
                 m_matrixData[i] = dataSampleValues.at(i);
             }
         }
