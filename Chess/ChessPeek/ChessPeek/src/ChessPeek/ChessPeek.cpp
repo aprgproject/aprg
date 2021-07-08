@@ -25,11 +25,10 @@ namespace chess
 {
 
 ChessPeek::ChessPeek()
-    : m_configuration(ChessPeekConfigurationType::ChessDotComUserVsUser)
+    : m_configuration(ChessPeekConfigurationType::LichessDotOrg)
     , m_pieceRetriever(m_configuration)
     , m_chessEngineHandler(CHESS_ENGINE_PATH)
-    , m_chessEngineController(m_chessEngineHandler)
-    , m_userAutomation()    , m_chessBoard(Board::Orientation::BlackUpWhiteDown, {})
+    , m_chessEngineController(m_chessEngineHandler)    , m_userAutomation()    , m_chessBoard(Board::Orientation::BlackUpWhiteDown, {})
     , m_playerColor(PieceColor::White)
     , m_playerKingCoordinate{}
     , m_opponentKingCoordinate{}
@@ -232,10 +231,9 @@ void ChessPeek::checkCalculationDetailsFromEngine()
 Moves ChessPeek::getCurrentMoves(
         string const& bestMoveToDisplay) const
 {
-    constexpr unsigned int maxNumberOfCurrentMoves = 5U;
+    constexpr unsigned int maxNumberOfCurrentMoves = 3U;
     Moves result;
     result.reserve(maxNumberOfCurrentMoves);
-
     strings const& searchingMovesStrings(m_savedCalculationDetails.currentlySearchingMoves);
     for(string const& searchingMoveString : searchingMovesStrings)
     {
@@ -260,10 +258,9 @@ Moves ChessPeek::getCurrentMoves(
 
 Moves ChessPeek::getFutureMoves() const
 {
-    constexpr unsigned int maxNumberOfFuturePlayerMoves = 5U;
+    constexpr unsigned int maxNumberOfFuturePlayerMoves = 3U;
     Moves result;
     result.reserve(maxNumberOfFuturePlayerMoves);
-
     strings const& pvMovesStrings(m_savedCalculationDetails.pvMovesInBestLine);
     unsigned int maxNumberOfFutureMoves = maxNumberOfFuturePlayerMoves<=0 ? 0 : (maxNumberOfFuturePlayerMoves*2U)-1U;
     for(string const& pvMoveString : pvMovesStrings)
@@ -308,11 +305,10 @@ string ChessPeek::getBestMoveToDisplayString() const
 
 void ChessPeek::printCalculationDetails() const
 {
-    constexpr unsigned int maxNumberOfMovesToDisplay = 20U;
+    constexpr unsigned int maxNumberOfMovesToDisplay = 10U;
     cout << "Depth: " << m_savedCalculationDetails.depth
          << " Score: " << static_cast<double>(m_savedCalculationDetails.scoreInCentipawns) / 100
-         << " Mate: " << m_savedCalculationDetails.mateInNumberOfMoves << endl;
-    cout << "Best move: [" << m_savedCalculationDetails.bestMove << "]" << endl;
+         << " Mate: " << m_savedCalculationDetails.mateInNumberOfMoves << endl;    cout << "Best move: [" << m_savedCalculationDetails.bestMove << "]" << endl;
 
     cout << "Searching moves: ";
     ostream_iterator<string> outputIterator(cout, ", ");
