@@ -1,9 +1,10 @@
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
+#include <climits>
+
 #include <gtest/gtest.h>
 
 using namespace std;
-
 namespace alba
 {
 
@@ -27,11 +28,10 @@ TEST(PrecisionHelpersTest, DoubleTypesCanBeConsideredEqual)
     EXPECT_TRUE(isAlmostEqual(static_cast<double>(0), 1E-24));
     EXPECT_TRUE(isAlmostEqual(1E-12, 1E-24));
     EXPECT_TRUE(isAlmostEqual(1E-24, 1E-24));
-    EXPECT_FALSE(isAlmostEqual(2.0, INFINITY));
+    EXPECT_FALSE(isAlmostEqual<double>(2.0, INFINITY));
     EXPECT_TRUE(isAlmostEqual(INFINITY, INFINITY));
     EXPECT_FALSE(isAlmostEqual(INFINITY, -INFINITY));
 }
-
 TEST(PrecisionHelpersTest, IsAlmostAnIntegerWorks)
 {
     EXPECT_TRUE((isAlmostAnInteger<float, int>(0)));

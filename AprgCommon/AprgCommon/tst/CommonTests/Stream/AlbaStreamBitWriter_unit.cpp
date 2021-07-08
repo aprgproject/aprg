@@ -95,13 +95,12 @@ TEST(AlbaStreamBitWriterTest, WriteBitsetDataWorks)
 {
     stringstream ss;
     AlbaStreamBitWriter writer(ss);
-    bitset<32> bitsetToWrite(0x12345678);
+    bitset<32U> bitsetToWrite(0x12345678);
 
-    writer.writeBitsetData(bitsetToWrite, 15, 22);
+    writer.writeBitsetData<32U>(bitsetToWrite, 15U, 22U);
 
     EXPECT_EQ(R"(16)", getHexEquivalentOfCharacters(ss.str()));
 }
-
 TEST(AlbaStreamBitWriterTest, FlushWorks)
 {
     stringstream ss;
