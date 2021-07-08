@@ -174,11 +174,10 @@ TEST(ThreeDimensionsUtilitiesTest, DistanceBetween2PlanesCanBeCalculated)
 
 TEST(ThreeDimensionsUtilitiesTest, GetConsineOfAngleUsing2DeltasWorks)
 {
-    Coordinate coordinate1(2, 4, 8);
-    Coordinate coordinate2(16, 32, 64);
+    Vector coordinate1{2, 4, 8};
+    Vector coordinate2{16, 32, 64};
     EXPECT_EQ(1, getCosineOfAngleUsing2Deltas(coordinate1, coordinate2));
 }
-
 TEST(ThreeDimensionsUtilitiesTest, MidpointBetweenTwoPointsCanBeCalculated)
 {
     EXPECT_EQ(Point(0,0,0), getMidpoint(Point(0,0,0), Point(0,0,0)));
@@ -240,21 +239,9 @@ TEST(TwoDimensionsUtilitiesTest, GetTheLargerDihedralAngleBetweenTwoPlanesWorks)
     EXPECT_DOUBLE_EQ(135, getTheLargerDihedralAngleBetweenTwoPlanes(Plane(Point(0,0,0), Point(1,0,0), Point(1,1,0)), Plane(Point(0,0,0), Point(0,1,1), Point(1,1,1))).getDegrees());
 }
 
-TEST(ThreeDimensionsUtilitiesTest, GetCrossProductWorks)
-{
-    Coordinate input1(1,2,3);
-    Coordinate input2(4,5,6);
-    Coordinate expectedCoefficients(getCrossProduct(input1, input2));
-
-    EXPECT_EQ(-3, expectedCoefficients.getX());
-    EXPECT_EQ(6, expectedCoefficients.getY());
-    EXPECT_EQ(-3, expectedCoefficients.getZ());
-}
-
 TEST(ThreeDimensionsUtilitiesTest, GetLineWithSameSlopeAndPoint)
 {
-    Line lineInput(Point(0,0,0), Point(-1,1,1));
-    Line expectedLine(getLineWithSameSlope(lineInput, Point(2,2,2)));
+    Line lineInput(Point(0,0,0), Point(-1,1,1));    Line expectedLine(getLineWithSameSlope(lineInput, Point(2,2,2)));
 
     EXPECT_EQ(-1, expectedLine.getACoefficient());
     EXPECT_EQ(1, expectedLine.getBCoefficient());
