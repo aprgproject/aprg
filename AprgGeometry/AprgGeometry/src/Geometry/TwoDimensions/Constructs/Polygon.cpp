@@ -64,6 +64,19 @@ Lines Polygon<numberOfVertices>::getLines() const
 }
 
 template<unsigned int numberOfVertices>
+LineSegments Polygon<numberOfVertices>::getLineSegments() const
+{
+    LineSegments lineSegments;
+    int sizeMinusOne = static_cast<int>(m_vertices.size())-1;
+    for(int i=0; i<sizeMinusOne; i++)
+    {
+        lineSegments.emplace_back(m_vertices[i], m_vertices[i+1]);
+    }
+    lineSegments.emplace_back(m_vertices[sizeMinusOne], m_vertices[0]);
+    return lineSegments; //RVO
+}
+
+template<unsigned int numberOfVertices>
 typename Polygon<numberOfVertices>::Distances Polygon<numberOfVertices>::getLengthOfSides() const
 {
     Distances lengthOfSides;

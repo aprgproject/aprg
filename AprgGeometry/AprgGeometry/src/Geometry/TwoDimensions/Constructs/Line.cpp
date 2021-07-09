@@ -85,7 +85,8 @@ double Line::getYIntercept() const
     return -m_cCoefficient/m_bCoefficient;
 }
 
-double Line::getSlope() const{
+double Line::getSlope() const
+{
     return -m_aCoefficient/m_bCoefficient;
 }
 
@@ -141,7 +142,8 @@ Point Line::getAPoint() const
 
 Points Line::getPoints(Point const& first, Point const& second, double const interval) const
 {
-    Points points;    if(m_type == LineType::Vertical)
+    Points points;
+    if(m_type == LineType::Vertical)
     {
         getPointsForVerticalLine(points, first, second, interval);
     }

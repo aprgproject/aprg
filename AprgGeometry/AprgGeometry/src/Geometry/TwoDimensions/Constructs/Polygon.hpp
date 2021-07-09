@@ -2,6 +2,7 @@
 
 #include <Common/Math/Angle/AlbaAngle.hpp>
 #include <Geometry/TwoDimensions/Constructs/Line.hpp>
+#include <Geometry/TwoDimensions/Constructs/LineSegment.hpp>
 #include <Geometry/TwoDimensions/Constructs/Point.hpp>
 
 #include <array>
@@ -26,6 +27,7 @@ public:
     bool isRegular() const;
 
     Lines getLines() const;
+    LineSegments getLineSegments() const;
     Points getVertices() const;
     Distances getLengthOfSides() const;
     AlbaAngles getAnglesAtVertices() const;
