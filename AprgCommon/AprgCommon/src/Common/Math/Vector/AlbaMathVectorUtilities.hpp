@@ -102,15 +102,22 @@ DataType getDotProduct(
 }
 
 template <typename DataType>
-AlbaMathVector<DataType, 3> getCrossProduct(
-        AlbaMathVector<DataType, 3> const& vector1,
-        AlbaMathVector<DataType, 3> const& vector2)
+DataType getCrossProduct(
+        AlbaMathVector<DataType, 2U> const& vector1,
+        AlbaMathVector<DataType, 2U> const& vector2)
 {
-    return AlbaMathVector<DataType, 3>{
+    return vector1.getValueAt(0)*vector2.getValueAt(1) - vector1.getValueAt(1)*vector2.getValueAt(0);
+}
+
+template <typename DataType>
+AlbaMathVector<DataType, 3U> getCrossProduct(
+        AlbaMathVector<DataType, 3U> const& vector1,
+        AlbaMathVector<DataType, 3U> const& vector2)
+{
+    return AlbaMathVector<DataType, 3U>{
                 vector1.getValueAt(1)*vector2.getValueAt(2) - vector1.getValueAt(2)*vector2.getValueAt(1),
                 vector1.getValueAt(2)*vector2.getValueAt(0) - vector1.getValueAt(0)*vector2.getValueAt(2),
-                vector1.getValueAt(0)*vector2.getValueAt(1) - vector1.getValueAt(1)*vector2.getValueAt(0)};
-}
+                vector1.getValueAt(0)*vector2.getValueAt(1) - vector1.getValueAt(1)*vector2.getValueAt(0)};}
 
 template <typename DataType, unsigned int SIZE>
 DataType getAngleBetweenTwoVectors(
