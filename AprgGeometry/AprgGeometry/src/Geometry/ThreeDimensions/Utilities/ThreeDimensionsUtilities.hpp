@@ -35,10 +35,13 @@ bool arePlanesParallel(Plane const& plane1, Plane const& plane2);
 bool areLinesPerpendicular(Line const& line1, Line const& line2);
 bool arePlanesPerpendicular(Plane const& plane1, Plane const& plane2);
 
+Vector constructVector(AlbaXYZ<double> const& xyz);
+Vector constructDeltaVector(Line const& line);
+Vector constructNormalVector(Plane const& plane);
+
 AlbaAngle getTheInnerAngleUsingThreePoints(Point const& pointA, Point const& pointB, Point const& pointC);
 AlbaAngle getTheSmallerAngleBetweenTwoLines(Line const& line1, Line const& line2);
-AlbaAngle getTheLargerAngleBetweenTwoLines(Line const& line1, Line const& line2);
-AlbaAngle getTheSmallerDihedralAngleBetweenTwoPlanes(Plane const& plane1, Plane const& plane2);
+AlbaAngle getTheLargerAngleBetweenTwoLines(Line const& line1, Line const& line2);AlbaAngle getTheSmallerDihedralAngleBetweenTwoPlanes(Plane const& plane1, Plane const& plane2);
 AlbaAngle getTheLargerDihedralAngleBetweenTwoPlanes(Plane const& plane1, Plane const& plane2);
 
 Point getMidpoint(Point const& point1, Point const& point2);
