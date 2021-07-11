@@ -1,12 +1,13 @@
 #pragma once
 
 #include <Algorithm/Search/Geometry/KdTree.hpp>
-#include <Common/Math/Helpers/DivisibilityHelpers.hpp>
 #include <Common/Math/Helpers/ComputationHelpers.hpp>
+#include <Common/Math/Helpers/DivisibilityHelpers.hpp>
+
+#include <limits>
 
 namespace alba
 {
-
 namespace algorithm
 {
 
@@ -51,9 +52,9 @@ class NearestPointSearch
 {
 public:
     using Point = std::pair<Unit, Unit>;
+    using PointPair = std::pair<Point, Point>;
     using TwoDTree = KdTree<Point>;
     using NodeUniquePointer = typename TwoDTree::NodeUniquePointer;
-
     enum class SearchAction
     {
         Nothing,
@@ -73,16 +74,34 @@ public:
     {
         Point result{};
         NodeUniquePointer const& root(m_twoDTree.getRoot());
-        SearchDetails searchDetails{pointToCheck, root->key, getDistance(root->key, pointToCheck)};
+        SearchDetails searchDetails{pointToCheck, root->key, getInitialMaxDistance()};
         searchNearestPoint(root, searchDetails);
         result = searchDetails.nearestPoint;
         return result;
     }
 
+    PointPair getNearestPointPair() const
+    {
+        // This is O(n*log(n))
+        PointPair result{};
+        Unit nearestDistance(getInitialMaxDistance());
+        for(Point const& pointToCheck : m_twoDTree.getKeys())
+        {
+            NodeUniquePointer const& root(m_twoDTree.getRoot());
+            SearchDetails searchDetails{pointToCheck, root->key, nearestDistance};
+            searchNearestPoint(root, searchDetails);
+            if(nearestDistance > searchDetails.nearestDistance)
+            {
+                nearestDistance = searchDetails.nearestDistance;
+                result = {pointToCheck, searchDetails.nearestPoint};
+            }
+        }
+        return result;
+    }
+
     void addPoint(Point const& point)
     {
-        m_twoDTree.put(point);
-    }
+        m_twoDTree.put(point);    }
 
 private:
 
@@ -93,25 +112,27 @@ private:
         if(nodePointer)
         {
             Point const& currentPoint(nodePointer->key);
-            Unit currentDistance(getDistance(currentPoint, searchDetails.pointToCheck));
-            if(currentDistance < searchDetails.nearestDistance)
+            if(currentPoint != searchDetails.pointToCheck) // only consider other points
             {
-                searchDetails.nearestPoint = currentPoint;
-                searchDetails.nearestDistance = currentDistance;
-            }
-            SearchAction searchAction(getSearchAction(nodePointer, searchDetails.pointToCheck, depth));
-            if(SearchAction::GoToLeftChild == searchAction || SearchAction::GoToBoth == searchAction)
-            {
-                searchNearestPoint(nodePointer->left, searchDetails);
-            }
-            if(SearchAction::GoToRightChild == searchAction || SearchAction::GoToBoth == searchAction)
-            {
-                searchNearestPoint(nodePointer->right, searchDetails);
+                Unit currentDistance(getDistance(currentPoint, searchDetails.pointToCheck));
+                if(currentDistance < searchDetails.nearestDistance)
+                {
+                    searchDetails.nearestPoint = currentPoint;
+                    searchDetails.nearestDistance = currentDistance;
+                }
+                SearchAction searchAction(getSearchAction(nodePointer, searchDetails.pointToCheck, depth));
+                if(SearchAction::GoToLeftChild == searchAction || SearchAction::GoToBoth == searchAction)
+                {
+                    searchNearestPoint(nodePointer->left, searchDetails);
+                }
+                if(SearchAction::GoToRightChild == searchAction || SearchAction::GoToBoth == searchAction)
+                {
+                    searchNearestPoint(nodePointer->right, searchDetails);
+                }
             }
         }
         depth--;
     }
-
     SearchAction getSearchAction(NodeUniquePointer const& nodePointer, Point const& pointToCheck, unsigned int const depth) const
     {
         SearchAction result(SearchAction::Nothing);
@@ -201,15 +222,18 @@ private:
         return result;
     }
 
-
     inline Unit getDistance(Point const& point1, Point const& point2) const
     {
         return mathHelper::getSquareRootOfXSquaredPlusYSquared(point1.first-point2.first, point1.second-point2.second);
     }
 
+    inline Unit getInitialMaxDistance() const
+    {
+        return std::numeric_limits<Unit>::max();
+    }
+
     TwoDTree m_twoDTree;
 };
-
 }
 
 }
