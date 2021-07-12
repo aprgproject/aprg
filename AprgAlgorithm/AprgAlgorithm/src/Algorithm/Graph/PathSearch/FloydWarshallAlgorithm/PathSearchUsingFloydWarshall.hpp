@@ -28,10 +28,9 @@ public:
     using Path = typename GraphTypes<Vertex>::Path;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using DequeOfVertices = typename GraphTypes<Vertex>::DequeOfVertices;
-    using EdgeWithWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgeWithWeight;
+    using EdgeOrderedByWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgeOrderedByWeight;
     using PathDetailsMatrix = matrix::AlbaMatrix<PathDetails>;
     using Comparator=ComparatorTemplateType<Weight>;
-
 
     PathSearchUsingFloydWarshall(EdgeWeightedGraph const& graph)
         : m_graph(graph)
@@ -143,12 +142,11 @@ private:
 
     void initializePathDetailsWithEdgeWeights()
     {
-        for(EdgeWithWeight const& edgeWithWeight : m_graph.getEdgesWithWeight())
+        for(EdgeOrderedByWeight const& EdgeOrderedByWeight : m_graph.getEdgesWithWeight())
         {
-            m_pathDetailsMatrix.setEntry(edgeWithWeight.first, edgeWithWeight.second, {true, edgeWithWeight.first, edgeWithWeight.weight});
+            m_pathDetailsMatrix.setEntry(EdgeOrderedByWeight.first, EdgeOrderedByWeight.second, {true, EdgeOrderedByWeight.first, EdgeOrderedByWeight.weight});
         }
     }
-
     void initializePathDetailsInTheDiagonal()
     {
         for(Vertex const& vertex : m_graph.getVertices())
