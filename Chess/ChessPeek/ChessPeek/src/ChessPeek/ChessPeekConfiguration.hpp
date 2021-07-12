@@ -6,6 +6,7 @@
 
 namespace alba
 {
+
 namespace chess
 {
 
@@ -44,4 +45,5 @@ private:
 };
 
 }
+
 }

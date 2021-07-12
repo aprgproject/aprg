@@ -26,7 +26,8 @@ public:
                 unsigned int highest = std::min(lowest+(sizeToSort*2U)-1, size-1);
                 mergeTheTwoSortedParts(valuesToSort, auxiliary, lowest, middle, highest);
             }
-        }    }
+        }
+    }
 };
 
 // No recursion approach

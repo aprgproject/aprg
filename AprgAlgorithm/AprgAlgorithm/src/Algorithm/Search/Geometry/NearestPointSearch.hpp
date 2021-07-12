@@ -8,6 +8,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -55,6 +56,7 @@ public:
     using PointPair = std::pair<Point, Point>;
     using TwoDTree = KdTree<Point>;
     using NodeUniquePointer = typename TwoDTree::NodeUniquePointer;
+
     enum class SearchAction
     {
         Nothing,
@@ -101,7 +103,8 @@ public:
 
     void addPoint(Point const& point)
     {
-        m_twoDTree.put(point);    }
+        m_twoDTree.put(point);
+    }
 
 private:
 
@@ -133,6 +136,7 @@ private:
         }
         depth--;
     }
+
     SearchAction getSearchAction(NodeUniquePointer const& nodePointer, Point const& pointToCheck, unsigned int const depth) const
     {
         SearchAction result(SearchAction::Nothing);
@@ -234,6 +238,7 @@ private:
 
     TwoDTree m_twoDTree;
 };
+
 }
 
 }

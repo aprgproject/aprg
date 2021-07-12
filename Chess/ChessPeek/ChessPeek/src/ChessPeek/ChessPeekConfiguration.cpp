@@ -5,6 +5,7 @@ using namespace std;
 
 namespace alba
 {
+
 namespace chess
 {
 
@@ -18,7 +19,8 @@ ChessPeekConfiguration::ChessPeekConfiguration(
     , m_bottomRightCorner{}
     , m_whiteColorLimit{}
     , m_blackColorLimit{}
-{    initialize();
+{
+    initialize();
 }
 
 ChessPeekConfigurationType ChessPeekConfiguration::getType() const
@@ -48,7 +50,8 @@ AprgBitmap::BitmapXY ChessPeekConfiguration::getBottomRightCorner() const
 
 double ChessPeekConfiguration::getWhiteColorLimit() const
 {
-    return m_whiteColorLimit;}
+    return m_whiteColorLimit;
+}
 
 double ChessPeekConfiguration::getBlackColorLimit() const
 {
@@ -65,7 +68,8 @@ void ChessPeekConfiguration::initialize()
     initializeCommonParameters();
     if(ChessPeekConfigurationType::ChessDotComUserVsUser == m_type)
     {
-        initializeChessDotComUserVsUser();    }
+        initializeChessDotComUserVsUser();
+    }
     else if(ChessPeekConfigurationType::ChessDotComUserVsComputer == m_type)
     {
         initializeChessDotComUserVsComputer();
@@ -93,6 +97,7 @@ void ChessPeekConfiguration::initializeChessDotComUserVsUser()
     m_whiteColorLimit = 0.91;
     m_blackColorLimit = 0.40;
 }
+
 void ChessPeekConfiguration::initializeChessDotComUserVsComputer()
 {
     m_topLeftCorner = BitmapXY(2215, 151);
@@ -100,6 +105,7 @@ void ChessPeekConfiguration::initializeChessDotComUserVsComputer()
     m_whiteColorLimit = 0.91;
     m_blackColorLimit = 0.40;
 }
+
 void ChessPeekConfiguration::initializeLichessDotOrg()
 {
     m_topLeftCorner = BitmapXY(2491, 145);
@@ -107,6 +113,7 @@ void ChessPeekConfiguration::initializeLichessDotOrg()
     m_whiteColorLimit = 0.91;
     m_blackColorLimit = 0.30;
 }
+
 }
 
 }

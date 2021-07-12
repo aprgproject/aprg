@@ -9,6 +9,7 @@
 using namespace alba::AprgBitmap;
 using namespace alba::mathHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -30,7 +31,8 @@ Piece ChessPieceRetriever::getChessCellPiece(
     return Piece(getBestPieceFromChessCellBitValue(getChessCellBitValue(chessBoardSnippet, xIndex, yIndex).to_ullong()));
 }
 
-ChessPieceRetriever::BitSet64 ChessPieceRetriever::getChessCellBitValue(        BitmapSnippet const& chessBoardSnippet,
+ChessPieceRetriever::BitSet64 ChessPieceRetriever::getChessCellBitValue(
+        BitmapSnippet const& chessBoardSnippet,
         unsigned int const xIndex,
         unsigned int const yIndex) const
 {
@@ -137,7 +139,8 @@ void ChessPieceRetriever::initializeConverterToChessDotCom()
     m_piecesToChessCellBitValuesMap[PieceColorAndType::BlackKing]   = 0B0000000000000000000000000000000011110111110111111111100010101110;
 }
 
-void ChessPieceRetriever::initializeConverterToLichessDotOrg(){
+void ChessPieceRetriever::initializeConverterToLichessDotOrg()
+{
     m_checkMaxPoint = BitmapXY(93, 93);
     m_checkDetails = CheckDetails
     {{{12, 25}, WhiteOrBlack::White}, {{16, 44}, WhiteOrBlack::White}, {{17, 59}, WhiteOrBlack::White}, {{22, 49}, WhiteOrBlack::White},
@@ -171,7 +174,8 @@ void ChessPieceRetriever::initializeConverterToLichessDotOrg(){
     m_piecesToChessCellBitValuesMap[PieceColorAndType::BlackKing]   = 0B0000000000000001000000001000000000001100100111011111000110000000;
 }
 
-bool ChessPieceRetriever::isBitValueAsserted(        BitmapSnippet const& chessBoardSnippet,
+bool ChessPieceRetriever::isBitValueAsserted(
+        BitmapSnippet const& chessBoardSnippet,
         CheckDetail const& checkDetail,
         BitmapXY const& chessCellTopLeft,
         BitmapXY const& chessCellBottomRight) const
@@ -221,7 +225,8 @@ PieceColorAndType ChessPieceRetriever::getBestPieceFromChessCellBitValue(
     PieceColorAndTypes bestFitPieces(getBestFitPiecesFromChessCellBitValue(chessCellBitValue));
 
     PieceColorAndType result{};
-    if(bestFitPieces.size() == 1)    {
+    if(bestFitPieces.size() == 1)
+    {
         result = bestFitPieces.back();
     }
     /*else if(m_logFileStreamOptional)
@@ -265,7 +270,8 @@ ChessPieceRetriever::PieceColorAndTypes ChessPieceRetriever::getBestFitPiecesFro
 
 void ChessPieceRetriever::retrieveChessCellTopLeftAndBottomRight(
         BitmapXY & chessCellTopLeft,
-        BitmapXY & chessCellBottomRight,        BitmapSnippet const& chessBoardSnippet,
+        BitmapXY & chessCellBottomRight,
+        BitmapSnippet const& chessBoardSnippet,
         unsigned int const xIndex,
         unsigned int const yIndex) const
 {
