@@ -21,7 +21,8 @@ public:
     using VertexOrderedByWeight = typename GraphTypesWithWeights<Vertex, Weight>::VertexOrderedByWeight;
     template<typename ValueType>
     struct ReverseComparator
-    {        bool operator()(ValueType const& first, ValueType const& second) const
+    {
+        bool operator()(ValueType const& first, ValueType const& second) const
         {
             return ComparatorTemplateType<ValueType>()(second, first);
         }
@@ -29,7 +30,8 @@ public:
     using VertexOrderedByWeightPriorityQueue = std::priority_queue<VertexOrderedByWeight, std::deque<VertexOrderedByWeight>, ReverseComparator<VertexOrderedByWeight>>;
 
     PathSearchUsingDijkstra(EdgeWeightedGraph const& graph, Vertex const& startVertex)
-        : BaseClass(graph, startVertex)        , b_graph(BaseClass::m_graph)
+        : BaseClass(graph, startVertex)
+        , b_graph(BaseClass::m_graph)
         , b_startVertex(BaseClass::m_startVertex)
     {
         searchForPathIfPossible();
@@ -71,6 +73,7 @@ private:
             });
         }
     }
+
     Graph const& b_graph;
     Vertex const& b_startVertex;
 };

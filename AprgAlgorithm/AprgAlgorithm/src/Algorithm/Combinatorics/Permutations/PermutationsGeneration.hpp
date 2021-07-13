@@ -43,7 +43,8 @@ public:
 
         Permutations result;
         Permutation currentPermutation(objects);
-        do        {
+        do
+        {
             result.emplace_back(currentPermutation);
         }
         while(std::next_permutation(currentPermutation.begin(), currentPermutation.end()));
@@ -63,7 +64,8 @@ public:
 
         Permutations result;
         RecursionData recursionData(createRecursionData(result, objects, objects.size()));
-        collectPermutationsUsingRecursion(recursionData);        return result;
+        collectPermutationsUsingRecursion(recursionData);
+        return result;
     }
 
     static Permutations generatePermutationsWithLength(Objects const& objects, unsigned int const targetPermutationLength)

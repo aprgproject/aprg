@@ -32,6 +32,7 @@ public:
     using PathDetailsMatrix = matrix::AlbaMatrix<PathDetails>;
     using Comparator=ComparatorTemplateType<Weight>;
 
+
     PathSearchUsingFloydWarshall(EdgeWeightedGraph const& graph)
         : m_graph(graph)
         , m_pathDetailsMatrix(graph.getNumberOfVertices(), graph.getNumberOfVertices())
@@ -147,6 +148,7 @@ private:
             m_pathDetailsMatrix.setEntry(EdgeOrderedByWeight.first, EdgeOrderedByWeight.second, {true, EdgeOrderedByWeight.first, EdgeOrderedByWeight.weight});
         }
     }
+
     void initializePathDetailsInTheDiagonal()
     {
         for(Vertex const& vertex : m_graph.getVertices())

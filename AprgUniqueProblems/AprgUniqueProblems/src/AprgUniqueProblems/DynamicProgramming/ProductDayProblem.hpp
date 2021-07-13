@@ -32,7 +32,8 @@ public:
     ProductDayProblem(PriceMatrix const& pricesInDayByProduct);
 
     Price getProductAndDayPairsForMinimumPrice();
-private:    bool isProductIncluded(ProductBits const productBits, Product const product) const;
+private:
+    bool isProductIncluded(ProductBits const productBits, Product const product) const;
     Product getNumberOfProducts() const;
     Day getNumberOfDays() const;
     ProductBits getNumberOfProductsSubsets() const;

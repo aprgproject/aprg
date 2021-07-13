@@ -26,7 +26,8 @@ public:
     using VertexToEdgeOrderedByWeightMap = typename GraphTypesWithWeights<Vertex, Weight>::VertexToEdgeOrderedByWeightMap;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
-    PrimAlgorithmEagerVersion(EdgeWeightedGraph const& graph, Vertex const& startVertex)        : m_graph(graph)
+    PrimAlgorithmEagerVersion(EdgeWeightedGraph const& graph, Vertex const& startVertex)
+        : m_graph(graph)
         , m_startVertex(startVertex)
     {
         searchForMinimumSpanningTree();
@@ -43,6 +44,7 @@ public:
         });
         return result;
     }
+
 private:
 
     bool hasNoWeightSaved(Vertex const& vertex) const
@@ -61,7 +63,8 @@ private:
             VertexOrderedByWeight nearestVertex(m_nearestVerticesToTree.top());
             m_nearestVerticesToTree.pop();
             checkAdjacentVerticesWithLowestWeightOfVertex(nearestVertex.vertex);
-        }    }
+        }
+    }
 
     void checkAdjacentVerticesWithLowestWeightOfVertex(
             Vertex const& vertex)
@@ -91,6 +94,7 @@ private:
                 = createSortedEdgeOrderedByWeight<Vertex, Weight, EdgeOrderedByWeight>(vertex, adjacentVertex, lowestWeight);
         m_nearestVerticesToTree.emplace(adjacentVertex, lowestWeight);
     }
+
     Graph const& m_graph;
     Vertex m_startVertex;
     CheckableVerticesWithVertex m_processedVertices;
@@ -98,6 +102,7 @@ private:
     VertexOrderedByWeightMinimumPriorityQueue m_nearestVerticesToTree; // makes this eager algorithm (nearest vertices is kept to find nearest edges easier)
 
 };
+
 // Running time:
 // depends on Indexed-PQ implementation: Total = V inserts + V deletemins + E decrease-keys
 // array: insert(1), delete-min(V), decrease-key(1) -> total = V^2

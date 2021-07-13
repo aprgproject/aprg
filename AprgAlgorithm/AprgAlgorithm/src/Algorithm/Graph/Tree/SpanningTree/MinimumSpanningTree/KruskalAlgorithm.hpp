@@ -23,7 +23,8 @@ public:
     using EdgeOrderedByWeightsPriorityQueue = std::priority_queue<EdgeOrderedByWeight, std::deque<EdgeOrderedByWeight>, std::greater<EdgeOrderedByWeight>>;
 
     KruskalAlgorithm(EdgeWeightedGraph const& graph, Vertex const& startVertex)
-        : m_graph(graph)        , m_startVertex(startVertex)
+        : m_graph(graph)
+        , m_startVertex(startVertex)
     {
         searchForMinimumSpanningTree();
     }
@@ -46,7 +47,8 @@ private:
             EdgeOrderedByWeight shortestEdge(m_edgesInOrder.top());
             m_edgesInOrder.pop();
             addEdgeToMstIfVerticesAreNotConnected(unionFind, shortestEdge);
-        }    }
+        }
+    }
 
     void putAllEdgesToPriorityQueue()
     {
@@ -59,7 +61,8 @@ private:
     void addEdgeToMstIfVerticesAreNotConnected(UnionFindUsingMap<Vertex> & unionFind, EdgeOrderedByWeight const& edge)
     {
         Vertex const& vertex1(edge.first);
-        Vertex const& vertex2(edge.second);        if(!unionFind.isConnected(vertex1, vertex2)) // if its not connected yet, then it does not create a cycle
+        Vertex const& vertex2(edge.second);
+        if(!unionFind.isConnected(vertex1, vertex2)) // if its not connected yet, then it does not create a cycle
         {
             unionFind.connect(vertex1, vertex2);
             m_minimumSpanningTreeEdges.emplace_back(createSortedEdge<Vertex, Edge>(vertex1, vertex2));
@@ -72,7 +75,8 @@ private:
     EdgeOrderedByWeightsPriorityQueue m_edgesInOrder;
 };
 
-// Proposition: Kruskal's algorithm computes MST.// Proof:
+// Proposition: Kruskal's algorithm computes MST.
+// Proof:
 // -> Kruskal algorithm is a special case of the greedy MST algorithm.
 // -> Suppose Kruskal algorithm colors the edge e = v-w black.
 // -> Cut = set of vertices connected to v in tree T

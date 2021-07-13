@@ -5,7 +5,8 @@
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <deque>
-#include <fstream>#include <string>
+#include <fstream>
+#include <string>
 
 namespace alba
 {
@@ -30,7 +31,8 @@ public:
         UciOption,
         Position,
         Go,
-        Stop,    };
+        Stop,
+    };
 
     struct Command
     {
@@ -45,7 +47,8 @@ public:
             stringHelper::StringPairs const& uciOptionNamesAndValuePairs = {});
 
     void resetToNewGame();
-    void setupStartPosition();    void setupMoves(std::string const& moves);
+    void setupStartPosition();
+    void setupMoves(std::string const& moves);
     void setupFenString(std::string const& fenString);
     void go();
     void goWithPonder();
@@ -101,7 +104,8 @@ private:
     std::deque<Command> m_pendingCommands;
 };
 
-std::string getEnumString(ChessEngineControllerWithUci::ControllerState const state);std::ostream & operator<<(std::ostream & out, ChessEngineControllerWithUci::ControllerState const state);
+std::string getEnumString(ChessEngineControllerWithUci::ControllerState const state);
+std::ostream & operator<<(std::ostream & out, ChessEngineControllerWithUci::ControllerState const state);
 
 
 }

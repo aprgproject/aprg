@@ -60,7 +60,8 @@ public:
                 auto yLocationHits(containerHelper::getItemsInBetweenForSet(yCheckInterval, event.yLocation1, event.yLocation2));
                 for(auto const& yLocationHit : yLocationHits)
                 {
-                    result.emplace_back(Point{event.xLocation, yLocationHit});                }
+                    result.emplace_back(Point{event.xLocation, yLocationHit});
+                }
             }
             else if(EventType::EndOfHorizontalLineSegment == event.eventType)
             {

@@ -302,6 +302,7 @@ void BitmapConfiguration::readDibHeader(AlbaFileReader& fileReader) // only supp
 
     fileReader.moveLocation(38);
     m_horizontalResolutionPixelInAMeter = fileReader.getFourByteSwappedData<uint32_t>();
+
     fileReader.moveLocation(42);
     m_verticalResolutionPixelInAMeter = fileReader.getFourByteSwappedData<uint32_t>();
 

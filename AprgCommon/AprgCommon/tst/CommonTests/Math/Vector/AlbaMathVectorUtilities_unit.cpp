@@ -120,7 +120,8 @@ TEST(AlbaMathVectorUtilitiesTest, GetAngleBetweenTwoVectorsWorks)
     EXPECT_EQ(expectedAngle, getAngleBetweenTwoVectors(mathVector1, mathVector2));
 }
 
-TEST(AlbaMathVectorUtilitiesTest, GetScalarProjectionWorks){
+TEST(AlbaMathVectorUtilitiesTest, GetScalarProjectionWorks)
+{
     VectorTwoElements vectorToProjectTo{0, 5};
     VectorTwoElements vectorToProjectFrom{10, 10};
 

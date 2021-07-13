@@ -38,7 +38,8 @@ public:
         initializePartialSums();
     }
 
-    Value getAccumulatedValueOnInterval(Index const start, Index const end) const    {
+    Value getAccumulatedValueOnInterval(Index const start, Index const end) const
+    {
         // This has log(N) running time
         Value result{};
         if(start<=end && start<m_partialTreeSums.size() && end<m_partialTreeSums.size())
@@ -121,6 +122,7 @@ private:
         }
         return result;
     }
+
     Index getGreatestPowerOf2Factor(Index const index) const
     {
         return mathHelper::getGreatestPowerOf2Factor(index);

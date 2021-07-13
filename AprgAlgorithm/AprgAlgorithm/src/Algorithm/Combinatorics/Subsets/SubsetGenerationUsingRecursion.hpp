@@ -49,7 +49,8 @@ public:
 
         Subsets result;
         Subset currentSubset;
-        collectSubsetsUsingOnlyRecursion(result, currentSubset, objects, 0);        return result;
+        collectSubsetsUsingOnlyRecursion(result, currentSubset, objects, 0);
+        return result;
     }
 private:
 

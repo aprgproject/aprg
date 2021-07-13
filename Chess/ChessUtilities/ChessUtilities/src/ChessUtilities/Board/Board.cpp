@@ -12,6 +12,7 @@
 using namespace alba::mathHelper;
 using namespace alba::stringHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -110,7 +111,8 @@ bool Board::isCastlingMove(Move const& move) const
     return kingAndRookCastlingMovePair.first == move;
 }
 
-Board::Orientation Board::getOrientation() const{
+Board::Orientation Board::getOrientation() const
+{
     return m_orientation;
 }
 
@@ -168,6 +170,7 @@ Moves Board::getPossibleMoves(Coordinate const& start) const
     retrievePossibleMovesBasedFromPieceType(result, start);
     return result;
 }
+
 std::string Board::getFenString() const
 {
     string result;
@@ -241,7 +244,8 @@ string Board::getCastlingFenString() const
         if(PieceColorAndType::BlackKing == pieceAtBlackKing.getColorAndType() && PieceColorAndType::BlackRook == pieceAtBlackRookOnQueenSide.getColorAndType())
         {
             result += "q";
-        }    }
+        }
+    }
     else if(Board::Orientation::WhiteUpBlackDown == m_orientation)
     {
         Piece pieceAtWhiteKing(getPieceAt(Coordinate(3, 0)));
@@ -265,7 +269,8 @@ string Board::getCastlingFenString() const
         if(PieceColorAndType::BlackKing == pieceAtBlackKing.getColorAndType() && PieceColorAndType::BlackRook == pieceAtBlackRookOnQueenSide.getColorAndType())
         {
             result += "q";
-        }    }
+        }
+    }
     if(result.empty())
     {
         result = "-";
@@ -299,7 +304,8 @@ void Board::move(Move const& move)
             changePieceMatrixWithMove(kingAndRookCastlingMovePair.second);
         }
         else
-        {            changePieceMatrixWithMove(move);
+        {
+            changePieceMatrixWithMove(move);
         }
     }
 }
@@ -419,7 +425,8 @@ bool Board::isAPawnMove(Move const& move) const
             result = true;
             break;
         }
-    }    return result;
+    }
+    return result;
 }
 
 bool Board::isAPawnCapture(Move const& move) const
@@ -432,7 +439,8 @@ bool Board::isAPawnCapture(Move const& move) const
         if(delta == pawnDelta)
         {
             result = true;
-            break;        }
+            break;
+        }
     }
     return result;
 }
@@ -474,7 +482,8 @@ bool Board::isAOneStepMove(Move const& move) const
         if(delta == oneStepDelta)
         {
             result = true;
-            break;        }
+            break;
+        }
     }
     return result;
 }
@@ -660,7 +669,8 @@ CoordinateDataType Board::getOneIncrementData(CoordinateDataType const coordinat
 
 Coordinates Board::getLDeltaCoordinates() const
 {
-    return Coordinates{{-2, -1}, {-2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}};}
+    return Coordinates{{-2, -1}, {-2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}};
+}
 
 Coordinates Board::getDiagonalIncrementDeltaCoordinates() const
 {
@@ -1064,7 +1074,8 @@ void Board::retrievePossibleMovesByIncrements(
             addMoveToListOfMoves(result, Move(start, end));
             break;
         }
-        else        {
+        else
+        {
             break;
         }
         end = end + increment;
@@ -1082,6 +1093,7 @@ void Board::addMoveToListOfMoves(
             moves.emplace_back(move);
         }
     }
+
 }
 
 Board::PieceMatrix::MatrixData Board::getInitialValues(

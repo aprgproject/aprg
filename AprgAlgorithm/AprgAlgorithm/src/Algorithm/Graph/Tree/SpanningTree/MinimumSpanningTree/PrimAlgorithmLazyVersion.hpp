@@ -23,7 +23,8 @@ public:
     using EdgeOrderedByWeightsPriorityQueue = std::priority_queue<EdgeOrderedByWeight, std::deque<EdgeOrderedByWeight>, std::greater<EdgeOrderedByWeight>>;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
-    PrimAlgorithmLazyVersion(EdgeWeightedGraph const& graph, Vertex const& startVertex)        : m_graph(graph)
+    PrimAlgorithmLazyVersion(EdgeWeightedGraph const& graph, Vertex const& startVertex)
+        : m_graph(graph)
         , m_startVertex(startVertex)
     {
         searchForMinimumSpanningTree();
@@ -55,7 +56,8 @@ private:
         Vertex const& vertex2(EdgeOrderedByWeight.second);
         bool isVertex1NotProcessed(m_processedVertices.isNotFound(vertex1));
         bool isVertex2NotProcessed(m_processedVertices.isNotFound(vertex2));
-        if(isVertex1NotProcessed || isVertex2NotProcessed)        {
+        if(isVertex1NotProcessed || isVertex2NotProcessed)
+        {
             m_minimumSpanningTreeEdges.emplace_back(createSortedEdge<Vertex, Edge>(vertex1, vertex2));
             if(isVertex1NotProcessed)
             {
@@ -87,7 +89,8 @@ private:
     EdgeOrderedByWeightsPriorityQueue m_adjacentEdgesInOrder; // makes this lazy algorithm (only find the nearest edge when needed)
 };
 
-// Prim's algorithm: proof of correctness// Proposition: Prim's algorithm computes the MST.(Jarnik 1930, Dijkstra 1957, Prim 1959)
+// Prim's algorithm: proof of correctness
+// Proposition: Prim's algorithm computes the MST.(Jarnik 1930, Dijkstra 1957, Prim 1959)
 // Proof: Prims algorithm is a special case of the greedy MST algorithm
 // -> Suppose edge e = minimum weight edge connecting a vertex on the tree to a vertex not on the tree.
 // -> Cut = set of vertices connected on tree

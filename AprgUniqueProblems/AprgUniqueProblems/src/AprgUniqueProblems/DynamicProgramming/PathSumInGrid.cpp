@@ -23,7 +23,8 @@ PathSumInGrid::Path PathSumInGrid::getMaxPathInRightOrDownTraversal() const
     Path path{m_gridToCheck.getEntry(x, y)};
     bool isNextXInside(true), isNextYInside(true);
     while(true)
-    {        isNextXInside = m_partialSumGrid.isInside(x-1, y);
+    {
+        isNextXInside = m_partialSumGrid.isInside(x-1, y);
         isNextYInside = m_partialSumGrid.isInside(x, y-1);
         if(!isNextXInside && !isNextYInside)
         {
@@ -39,7 +40,8 @@ PathSumInGrid::Path PathSumInGrid::getMaxPathInRightOrDownTraversal() const
             path.emplace_back(m_gridToCheck.getEntry(x-1, y));
             x--;
         }
-        else        {
+        else
+        {
             if(m_partialSumGrid.getEntry(x-1, y) >= m_partialSumGrid.getEntry(x, y-1))
             {
                 path.emplace_back(m_gridToCheck.getEntry(x-1, y));
@@ -56,7 +58,8 @@ PathSumInGrid::Path PathSumInGrid::getMaxPathInRightOrDownTraversal() const
     return path;
 }
 
-void PathSumInGrid::calculatePartialSums(){
+void PathSumInGrid::calculatePartialSums()
+{
     m_partialSumGrid.iterateAllThroughYAndThenX([&](unsigned int x, unsigned int y)
     {
         Value maxNeighbor=0;

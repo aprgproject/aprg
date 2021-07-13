@@ -168,7 +168,8 @@ public:
         // In 2D, in c++ complex number class this is same with abs(v).
         DataType sumOfSquaredTerms = std::accumulate(
                     m_values.cbegin(), m_values.cend(), DataType(0), [](
-                    DataType const partialResult,                    DataType const currentValue)
+                    DataType const partialResult,
+                    DataType const currentValue)
         {
                 return partialResult + static_cast<DataType>(raiseToPowerForMathVectorDataType(currentValue, DataType(2)));
     });

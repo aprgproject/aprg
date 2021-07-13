@@ -23,6 +23,7 @@ public:
     using VertexToEdgeOrderedByWeightMap = typename GraphTypesWithWeights<Vertex, Weight>::VertexToEdgeOrderedByWeightMap;
     using AdditionalRelaxationStepsWithNewWeight = std::function<void(Vertex const&, Vertex const&, Weight const&)>;
     using AdditionalRelaxationSteps = std::function<void(void)>;
+
     BasePathSearchWithRelax(EdgeWeightedGraph const& graph, Vertex const& startVertex)
         : m_graph(graph)
         , m_startVertex(startVertex)
@@ -73,6 +74,7 @@ public:
     {
         return m_vertexToEdgeWithBestWeightMap;
     }
+
 protected:
 
     bool hasNoWeightSaved(Vertex const& vertex) const
@@ -96,7 +98,8 @@ protected:
         m_vertexToEdgeWithBestWeightMap[m_startVertex] = EdgeOrderedByWeight(m_startVertex, m_startVertex, Weight{});
     }
 
-    void relaxAt(            Vertex const& vertex,
+    void relaxAt(
+            Vertex const& vertex,
             AdditionalRelaxationStepsWithNewWeight const& additionalRelaxationStepsWithNewWeight = getNoStepsWithNewWeight(),
             AdditionalRelaxationSteps const& additionalRelaxationSteps = getNoSteps())
     {
@@ -114,7 +117,8 @@ protected:
                 m_vertexToEdgeWithBestWeightMap[adjacentVertex] = EdgeOrderedByWeight(vertex, adjacentVertex, newWeight);
                 additionalRelaxationStepsWithNewWeight(vertex, adjacentVertex, newWeight);
             }
-        }        additionalRelaxationSteps();
+        }
+        additionalRelaxationSteps();
     }
 
     static AdditionalRelaxationStepsWithNewWeight getNoStepsWithNewWeight()
@@ -137,4 +141,5 @@ protected:
 };
 
 }
+
 }

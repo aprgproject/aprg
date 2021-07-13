@@ -3,7 +3,8 @@
 #include <algorithm>
 #include <iostream>
 #include <iterator>
-#include <map>#include <memory>
+#include <map>
+#include <memory>
 #include <set>
 #include <sstream>
 #include <string>
@@ -26,7 +27,8 @@ template <typename ValueType, typename Container, typename Iterator>
 void adjustLowerAndUpperIterators(
         Container const& container,
         ValueType const& value,
-        Iterator & itLower,        Iterator & itUpper)
+        Iterator & itLower,
+        Iterator & itUpper)
 {
     if(!container.empty())
     {
@@ -168,7 +170,8 @@ template <typename KeyType, typename Container, typename Iterator>
 void adjustLowerAndUpperIteratorsInMap(
         Container const& container,
         KeyType const& keyValue,
-        Iterator & itLower,        Iterator & itUpper)
+        Iterator & itLower,
+        Iterator & itUpper)
 {
     if(!container.empty())
     {
@@ -212,7 +215,8 @@ getLowerAndUpperConstIteratorsInMap(ContainerType const& container, KeyType cons
     adjustLowerAndUpperIteratorsInMap(container, keyValue, itLower, itUpper);
     result.first = itLower;
     result.second = itUpper;
-    return result;}
+    return result;
+}
 
 template <typename KeyType, typename ContainerType>
 std::pair<typename ContainerType::iterator, typename ContainerType::iterator>
@@ -225,7 +229,8 @@ getLowerAndUpperIteratorsInMap(ContainerType & container, KeyType const& keyValu
     adjustLowerAndUpperIteratorsInMap(container, keyValue, itLower, itUpper);
     result.first = itLower;
     result.second = itUpper;
-    return result;}
+    return result;
+}
 
 template <typename Adapter>
 typename Adapter::container_type const& getUnderlyingContainer(Adapter const& adapter)
