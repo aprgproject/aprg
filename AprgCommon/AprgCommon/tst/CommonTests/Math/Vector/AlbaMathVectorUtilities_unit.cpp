@@ -116,11 +116,11 @@ TEST(AlbaMathVectorUtilitiesTest, GetAngleBetweenTwoVectorsWorks)
     VectorTwoElements mathVector1{0, 4};
     VectorTwoElements mathVector2{10, 0};
 
-    EXPECT_DOUBLE_EQ(getPi()/2, getAngleBetweenTwoVectors(mathVector1, mathVector2));
+    AlbaAngle expectedAngle(AngleUnitType::Radians, getPi()/2);
+    EXPECT_EQ(expectedAngle, getAngleBetweenTwoVectors(mathVector1, mathVector2));
 }
 
-TEST(AlbaMathVectorUtilitiesTest, GetScalarProjectionWorks)
-{
+TEST(AlbaMathVectorUtilitiesTest, GetScalarProjectionWorks){
     VectorTwoElements vectorToProjectTo{0, 5};
     VectorTwoElements vectorToProjectFrom{10, 10};
 
@@ -133,6 +133,14 @@ TEST(AlbaMathVectorUtilitiesTest, GetScalarProjectionWorksForThreeDimensions)
     VectorThreeElements vectorToProjectFrom{2, 1, -3};
 
     EXPECT_DOUBLE_EQ(0.42857142857142855, getScalarProjection(vectorToProjectTo, vectorToProjectFrom));
+}
+
+TEST(AlbaMathVectorUtilitiesTest, RotateVectorCounterClockwiseWorks)
+{
+    VectorTwoElements mathVector{3, 4};
+
+    VectorTwoElements expectedMathVector{-4, 3};
+    EXPECT_EQ(expectedMathVector, rotateVectorCounterClockwise(mathVector, AlbaAngle(AngleUnitType::Degrees, 90)));
 }
 
 }

@@ -17,14 +17,9 @@ AlbaAngle::AlbaAngle()
     : m_angleValueInDegrees(0)
 {}
 
-AlbaAngle::AlbaAngle(double const angleValue)
-    : m_angleValueInDegrees(angleValue)
-{}
-
 AlbaAngle::AlbaAngle(AngleUnitType const angleUnitType, double const angleValue)
     : m_angleValueInDegrees(calculateAngleValueInDegrees(angleUnitType, angleValue))
 {}
-
 bool AlbaAngle::operator==(AlbaAngle const& angle) const
 {
     return isAlmostEqual(m_angleValueInDegrees, angle.m_angleValueInDegrees);
