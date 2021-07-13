@@ -295,14 +295,13 @@ void BitmapConfiguration::readDibHeader(AlbaFileReader& fileReader) // only supp
     m_bitmapSize = static_cast<uint64_t>(m_bitmapWidth) * static_cast<uint64_t>(m_bitmapHeight);
 
     fileReader.moveLocation(30);
-    m_compressionMethodType = determineCompressedMethodType(fileReader.getFourByteData<uint32_t>());
+    m_compressionMethodType = determineCompressedMethodType(fileReader.getFourByteSwappedData<uint32_t>());
 
     fileReader.moveLocation(34);
-    m_imageSize = fileReader.getFourByteData<uint32_t>();
+    m_imageSize = fileReader.getFourByteSwappedData<uint32_t>();
 
     fileReader.moveLocation(38);
     m_horizontalResolutionPixelInAMeter = fileReader.getFourByteSwappedData<uint32_t>();
-
     fileReader.moveLocation(42);
     m_verticalResolutionPixelInAMeter = fileReader.getFourByteSwappedData<uint32_t>();
 
