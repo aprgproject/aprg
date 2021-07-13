@@ -69,13 +69,12 @@ public:
         std::string firstPart(BaseClass::getDisplayableString());
         std::stringstream ss;
         ss << "Edges with weight: {";
-        for(auto const& EdgeOrderedByWeight : m_edgeToWeightMap)
+        for(auto const& edgeOrderedByWeight : m_edgeToWeightMap)
         {
-            ss << EdgeOrderedByWeight.first.first << "<->" << EdgeOrderedByWeight.first.second << "("<< EdgeOrderedByWeight.second << "), ";
+            ss << edgeOrderedByWeight.first.first << "<->" << edgeOrderedByWeight.first.second << "("<< edgeOrderedByWeight.second << "), ";
         }
         ss << "}";
-        return firstPart + ss.str();
-    }
+        return firstPart + ss.str();    }
 
     void connect(Vertex const& vertex1, Vertex const& vertex2, Weight const& weight)
     {

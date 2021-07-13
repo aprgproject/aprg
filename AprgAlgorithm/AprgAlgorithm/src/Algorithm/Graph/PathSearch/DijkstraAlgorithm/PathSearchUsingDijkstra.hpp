@@ -78,10 +78,12 @@ private:
     Vertex const& b_startVertex;
 };
 
+// Algorithm in short terms: Relax the current shortest/longest node.
+
+
 // Dijkstra algorithm computes a shortest path tree in any edge-weighted digraph with non negative weights,
 // Proof:
-// -> Each edge e=v->w is relaxed exactly once (when v is relaxed), leaving distTo[w] <= distTo[v] + e.weight()
-// -> Inequality holds until algorithm terminates because:
+// -> Each edge e=v->w is relaxed exactly once (when v is relaxed), leaving distTo[w] <= distTo[v] + e.weight()// -> Inequality holds until algorithm terminates because:
 // ---> distTo[w] cannot decrease (relax prevents this)
 // ---> distTo[v] will not change at all
 // ---> Thus, upon termination shortest path optimality conditions hold.
