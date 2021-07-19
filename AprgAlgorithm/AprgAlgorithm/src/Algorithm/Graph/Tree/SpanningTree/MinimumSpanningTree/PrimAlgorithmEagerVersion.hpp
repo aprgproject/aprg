@@ -110,7 +110,8 @@ private:
 
 // Running time:
 // depends on Indexed-PQ implementation: Total = V inserts + V deletemins + E decrease-keys
-// array: insert(1), delete-min(V), decrease-key(1) -> total = V^2// binary heap: insert(log V), delete-min(log V), decrease-key(log V) -> total = E log V
+// array: insert(1), delete-min(V), decrease-key(1) -> total = V^2
+// binary heap: insert(log V), delete-min(log V), decrease-key(log V) -> total = E log V
 // d-way heap: insert(d logd V)), delete-min(d logd V), decrease-key(d logd V) -> total = E log(E/V) V
 // Fibonacci heap: insert(1*), delete-min(log V*), decrease-key(1*) -> total = E + V log V
 // * means amortized

@@ -145,7 +145,8 @@ UnsignedInteger getNumberOfDerangements(UnsignedInteger const n)
 
     UnsignedInteger result{};
     if(n<=1)
-    {        result = 0;
+    {
+        result = 0;
     }
     else if(n==2)
     {

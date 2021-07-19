@@ -48,7 +48,8 @@ TEST(TaylorSeriesTest, GetValueAtIndexWorks)
     EXPECT_EQ(stringToExpect5, series.getValueAtIndex(4, 0).getDisplayableString());
 }
 
-TEST(TaylorSeriesTest, GetValueForMaclaurinSeriesAtIndexWorks){
+TEST(TaylorSeriesTest, GetValueForMaclaurinSeriesAtIndexWorks)
+{
     Term formula(createExpressionIfPossible({getEAsATerm(), "^", "x"}));
     TaylorSeries series(formula, "x");
 
@@ -65,4 +66,5 @@ TEST(TaylorSeriesTest, GetValueForMaclaurinSeriesAtIndexWorks){
 }
 
 }
+
 }

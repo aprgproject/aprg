@@ -138,6 +138,7 @@ protected:
 // -> Termination: All paths s to t are blocked by either a:
 // ---> full forward edge
 // ---> empty backward edge
+
 // Process:
 // -> Start with 0 flow
 // -> While there exists an augmenting path:
@@ -210,7 +211,8 @@ protected:
 // -> It can be proven that this guarantees that the flow increases quickly, and the time complexity of the algorithm is O(m^2 * n).
 // 2) Scaling algorithm
 // -> The scaling algorithm uses depth-first search to find paths where each edge weight is at least a threshold value.
-// -> Initially, the threshold value is some large number, for example the sum of all edge weights of the graph.// -> Always when a path cannot be found, the threshold value is divided by 2.
+// -> Initially, the threshold value is some large number, for example the sum of all edge weights of the graph.
+// -> Always when a path cannot be found, the threshold value is divided by 2.
 // -> The time complexity of the algorithm is O(m^2 * logc), where c is the initial threshold value.
 
 // Minimum cuts

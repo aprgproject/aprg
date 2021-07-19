@@ -75,6 +75,7 @@ public:
 
         return getGeneralPathCover(newSourceVertex, newSinkVertex).size();
     }
+
 private:
 
     Paths getGeneralPathCover(

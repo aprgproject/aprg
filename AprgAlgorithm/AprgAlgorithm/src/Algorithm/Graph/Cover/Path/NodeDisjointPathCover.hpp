@@ -57,7 +57,8 @@ public:
 
         Edges result;
         if(GraphUtilities::isDirectedAcyclicGraph(m_graph))
-        {            result = getEdgesOfNodeDisjointPathCoverUsingFordFulkerson(newSourceVertex, newSinkVertex);
+        {
+            result = getEdgesOfNodeDisjointPathCoverUsingFordFulkerson(newSourceVertex, newSinkVertex);
         }
         return result;
     }

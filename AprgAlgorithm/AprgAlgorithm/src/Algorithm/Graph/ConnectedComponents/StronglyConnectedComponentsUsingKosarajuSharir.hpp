@@ -98,7 +98,8 @@ private:
 
 // Linear time because DFS.
 
-// Strong components in a graph is the same with the graph with reversed directions// Contract each strong component into a single vertex
+// Strong components in a graph is the same with the graph with reversed directions
+// Contract each strong component into a single vertex
 
 // Simple algorithm for computing strong components.
 // -> Phase 1: run DFS on GR(graph with reversed directions) to compute reverse postorder.
@@ -121,6 +122,7 @@ private:
 // Other analysis:
 // The time complexity of the algorithm is O(n + m), because the algorithm performs two depth-first searches.
 // Note: n is the number of nodes and m is the number of edges.
+
 }
 
 }

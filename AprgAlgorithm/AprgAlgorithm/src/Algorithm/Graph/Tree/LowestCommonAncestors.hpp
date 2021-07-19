@@ -30,6 +30,7 @@ public:
     {
         return m_verticesInTreeOrder;
     }
+
     Depths const& getDepths() const
     {
         return m_depths;
@@ -49,6 +50,7 @@ public:
         }
         return result;
     }
+
     unsigned int getDistanceBetweenVertices(Vertex const& vertex1, Vertex const& vertex2) const
     {
         unsigned int result{};
@@ -71,7 +73,8 @@ private:
         unsigned int result = vertexIndex1;
         unsigned int minimumDepth(m_depths.at(vertexIndex1));
         for(unsigned int i=vertexIndex1+1; i<=vertexIndex2; i++)
-        {            unsigned int currentDepth(m_depths.at(i));
+        {
+            unsigned int currentDepth(m_depths.at(i));
             if(minimumDepth > currentDepth)
             {
                 minimumDepth = currentDepth;
@@ -81,7 +84,8 @@ private:
         return result;
     }
 
-    void initializeIfNeeded()    {
+    void initializeIfNeeded()
+    {
         if(GraphUtilities::isATree(m_graph))
         {
             initialize();
@@ -102,7 +106,8 @@ private:
 
             traverseUsingDfs(index, depth, startVertex);
 
-            m_verticesInTreeOrder.shrink_to_fit();            m_depths.shrink_to_fit();
+            m_verticesInTreeOrder.shrink_to_fit();
+            m_depths.shrink_to_fit();
         }
     }
 
@@ -125,7 +130,8 @@ private:
                 addVertex(index, depth, vertex); // add vertex for tree traversal
             }
         }
-        depth--;    }
+        depth--;
+    }
 
     void addVertex(unsigned int & index, unsigned int const depth, Vertex const& vertex)
     {
@@ -143,4 +149,5 @@ private:
 };
 
 }
+
 }

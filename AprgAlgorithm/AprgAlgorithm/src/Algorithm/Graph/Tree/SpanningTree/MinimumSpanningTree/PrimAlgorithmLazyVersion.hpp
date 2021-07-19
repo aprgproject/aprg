@@ -56,7 +56,8 @@ private:
         Vertex const& vertex2(edgeOrderedByWeight.second);
         bool isVertex1NotProcessed(m_processedVertices.isNotFound(vertex1));
         bool isVertex2NotProcessed(m_processedVertices.isNotFound(vertex2));
-        if(isVertex1NotProcessed || isVertex2NotProcessed)        {
+        if(isVertex1NotProcessed || isVertex2NotProcessed)
+        {
             m_minimumSpanningTreeEdges.emplace_back(createSortedEdge<Vertex, Edge>(vertex1, vertex2));
             if(isVertex1NotProcessed)
             {
@@ -95,7 +96,8 @@ private:
 
 // Prim's algorithm: proof of correctness
 // Proposition: Prim's algorithm computes the MST.(Jarnik 1930, Dijkstra 1957, Prim 1959)
-// Proof: Prims algorithm is a special case of the greedy MST algorithm// -> Suppose edge e = minimum weight edge connecting a vertex on the tree to a vertex not on the tree.
+// Proof: Prims algorithm is a special case of the greedy MST algorithm
+// -> Suppose edge e = minimum weight edge connecting a vertex on the tree to a vertex not on the tree.
 // -> Cut = set of vertices connected on tree
 // -> No crossing edge is black
 // -> No crossing edge has lower weight

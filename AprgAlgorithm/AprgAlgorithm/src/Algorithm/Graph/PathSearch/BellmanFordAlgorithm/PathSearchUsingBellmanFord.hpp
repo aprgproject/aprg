@@ -144,7 +144,8 @@ private:
 // Algorithm in short terms: Relax all nodes.
 
 
-// Negative weights failed attempts:// -> Dijkstra does not work on negative edge weights
+// Negative weights failed attempts:
+// -> Dijkstra does not work on negative edge weights
 // -> Reweighting (adding a constant to make all weights positive) does not work either.
 
 // Proposition: A SPT (shortest path tree) exists iff no negative cycles.

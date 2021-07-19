@@ -74,7 +74,8 @@ public:
             ss << edgeOrderedByWeight.first.first << "<->" << edgeOrderedByWeight.first.second << "("<< edgeOrderedByWeight.second << "), ";
         }
         ss << "}";
-        return firstPart + ss.str();    }
+        return firstPart + ss.str();
+    }
 
     void connect(Vertex const& vertex1, Vertex const& vertex2, Weight const& weight)
     {

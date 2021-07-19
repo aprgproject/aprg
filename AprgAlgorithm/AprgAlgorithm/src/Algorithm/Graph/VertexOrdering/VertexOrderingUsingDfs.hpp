@@ -58,6 +58,7 @@ public:
 
         return getVerticesInThisOrder(startVertex, VertexTraversalOrder::ReversePostOrder);
     }
+
 private:
 
     void reverseVerticesIfNeeded(Vertices & traversedVertices, VertexTraversalOrder const traversalOrder) const

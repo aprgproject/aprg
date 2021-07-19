@@ -40,6 +40,7 @@ TEST(LowestCommonAncestorsTest, Example1Works)
     EXPECT_EQ(4U, lowestCommonAncestors.getDistanceBetweenVertices(6U, 8U));
     EXPECT_EQ(2U, lowestCommonAncestors.getDistanceBetweenVertices(8U, 9U));
 }
+
 TEST(LowestCommonAncestorsTest, Example2Works)
 {
     GraphForTest graph;
@@ -61,6 +62,7 @@ TEST(LowestCommonAncestorsTest, Example2Works)
     EXPECT_EQ(4U, lowestCommonAncestors.getDistanceBetweenVertices(5U, 7U));
     EXPECT_EQ(3U, lowestCommonAncestors.getDistanceBetweenVertices(5U, 8U));
 }
+
 }
 
 }

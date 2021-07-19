@@ -51,6 +51,7 @@ public:
         }
         return result;
     }
+
 protected:
 
     void initializeIfNeeded()
@@ -97,7 +98,8 @@ protected:
         m_subTreeSize[beforeTreeSize] = treeSize-beforeTreeSize; // Sub tree size = "total tree size" - "before tree size"
     }
 
-    BaseUndirectedGraphWithVertex const& m_graph;    Vertex m_rootOfTree;
+    BaseUndirectedGraphWithVertex const& m_graph;
+    Vertex m_rootOfTree;
     CheckableVerticesWithVertex m_processedVertices;
     Vertices m_verticesInDfsPreOrder;
     Counts m_subTreeSize;

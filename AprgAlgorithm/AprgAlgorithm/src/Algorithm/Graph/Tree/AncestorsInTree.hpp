@@ -6,6 +6,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -22,7 +23,8 @@ public:
     using BitValueUtilities = AlbaBitValueUtilities<unsigned int>;
 
     AncestorsInTree(BaseUndirectedGraphWithVertex const& graph, Vertex const& rootOfTree)
-        : m_graph(graph)        , m_rootOfTree(rootOfTree)
+        : m_graph(graph)
+        , m_rootOfTree(rootOfTree)
         , m_dfs(m_graph, m_rootOfTree)
     {
         initializeIfNeeded();
@@ -43,7 +45,8 @@ private:
             if(BitValueUtilities::isPowerOfTwo(distance)) // is power of two
             {
                 auto it = m_startAndDistancePairToDestinationMap.find({vertex, distance});
-                if(it != m_startAndDistancePairToDestinationMap.cend())                {
+                if(it != m_startAndDistancePairToDestinationMap.cend())
+                {
                     result = it->second;
                 }
             }
@@ -59,6 +62,7 @@ private:
         }
         return result;
     }
+
     void initializeIfNeeded()
     {
         if(GraphUtilities::isATree(m_graph))
@@ -79,7 +83,8 @@ private:
                 updateDestinationMapIfNeeded(child, distanceFromChild, currentParent);
                 auto it = vertexToPreviousVertexMap.find(currentParent);
                 if(it != vertexToPreviousVertexMap.cend())
-                {                    currentParent = it->second;
+                {
+                    currentParent = it->second;
                     distanceFromChild++;
                 }
                 else
@@ -99,7 +104,8 @@ private:
         if(distanceFromChild>0 && BitValueUtilities::isPowerOfTwo(distanceFromChild)) // is power of two but not zero
         {
             m_startAndDistancePairToDestinationMap[VertexAndCountPair(child, distanceFromChild)] = parent;
-        }    }
+        }
+    }
 
     BaseUndirectedGraphWithVertex const& m_graph;
     Vertex m_rootOfTree;
