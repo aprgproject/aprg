@@ -51,12 +51,11 @@ double getCosineOfAngleUsing1Delta(double const deltaX1, double const deltaY1);
 double getCosineOfAngleUsing2Deltas(Vector const& deltaVector1, Vector const& deltaVector2);
 double getArcLength(AlbaAngle const& angle, double const radius);
 double getSignedCounterClockwiseTriangleAreaOfOriginAnd2Points(Point const& point1, Point const& point2);
-double getSignedCounterClockwiseTriangleSquaredAreaOf3Points(Point const& a, Point const& b, Point const& c);
 double getSignedCounterClockwiseTriangleAreaOf3Points(Point const& a, Point const& b, Point const& c);
+double getAreaOfTriangleUsingThreePoints(Triangle const& triangle);
 double getAreaOfTriangleUsingHeronsFormula(Triangle const& triangle);
 double getAreaOfQuadrilateral(Quadrilateral const& quadrilateral);
 double getAreaUsingPicksTheorem(unsigned int const numberOfPointsInside, unsigned int const numberOfPointsOnTheBoundary);
-
 Vector constructVector(AlbaXY<double> const& xy);
 Vector constructDeltaVector(Line const& line);
 
