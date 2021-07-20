@@ -18,7 +18,8 @@ using ValuesForTest = vector<unsigned int>;
 using SearchForTest = BinarySearchWithTwoIndices<ValuesForTest>;
 }
 
-TEST(BinarySearchWithTwoIndicesTest, GetNearestValueWorksAndDoesNotCrashWhenEmpty){
+TEST(BinarySearchWithTwoIndicesTest, GetNearestValueWorksAndDoesNotCrashWhenEmpty)
+{
     testGetNearestValueDoesNotCrashWithEmptyUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
@@ -97,7 +98,7 @@ TEST(BinarySearchWithTwoIndicesTest, GetLowerValueAndGetHigherValueWorksAfterGet
 {
     ValuesForTest sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
     SearchForTest search(sortedValues);
-    EXPECT_EQ(33U, search.getNearestValue(33));
+    EXPECT_EQ(33U, search.getNearestValue(34));
 
     EXPECT_EQ(33U, search.getLowerValue());
     EXPECT_EQ(43U, search.getHigherValue());
@@ -116,7 +117,7 @@ TEST(BinarySearchWithTwoIndicesTest, GetLowerIndexAndGetHigherIndexWorksAfterGet
 {
     ValuesForTest sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
     SearchForTest search(sortedValues);
-    EXPECT_EQ(33U, search.getNearestValue(33));
+    EXPECT_EQ(33U, search.getNearestValue(34));
 
     EXPECT_EQ(4U, search.getLowerIndex());
     EXPECT_EQ(5U, search.getHigherIndex());
@@ -146,5 +147,18 @@ TEST(BinarySearchWithTwoIndicesTest, SearchWorksWithInitialIndexesWhenDistanceFr
     EXPECT_EQ(33U, search.getHigherValue());
 }
 
+TEST(BinarySearchWithTwoIndicesTest, SearchWorksWithInitialIndexesWhenDistanceFromLowerToHigherIsOdd)
+{
+    ValuesForTest sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
+    SearchForTest search(1U, 8U, sortedValues);
+
+    EXPECT_EQ(13U, search.getLowerValue());
+    EXPECT_EQ(64U, search.getHigherValue());
+    EXPECT_EQ(33U, search.getNearestValue(33));
+    EXPECT_EQ(33U, search.getLowerValue());
+    EXPECT_EQ(33U, search.getHigherValue());
 }
+
+}
+
 }
