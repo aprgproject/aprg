@@ -86,7 +86,8 @@ private:
                 result = getIndexOfNearestValueWithoutCheck(lowerIndex, middleIndex-1, value);
             }
         }
-        return result;    }
+        return result;
+    }
 
     Index getIndexOfNearestValueInBetweenTwoIndices(Index const lowerIndex, Index const higherIndex, Value const& value) const
     {
