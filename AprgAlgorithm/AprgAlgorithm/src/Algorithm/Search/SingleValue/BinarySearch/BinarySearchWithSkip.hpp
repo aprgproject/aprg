@@ -17,7 +17,8 @@ public:
     static constexpr Index INVALID_INDEX = std::numeric_limits<Index>::max();
 
     BinarySearchWithSkip(Values const& sortedValues)
-        : m_sortedValues(sortedValues)    {}
+        : m_sortedValues(sortedValues)
+    {}
 
     Value getNearestValue(Value const& value) const
     {
@@ -35,7 +36,8 @@ public:
         Index result(INVALID_INDEX);
         if(!m_sortedValues.empty())
         {
-            Index lowerIndex(getNearestLowerBoundIndex(value));            result = getIndexOfNearestValueFromLowerIndex(value, lowerIndex);
+            Index lowerIndex(getNearestLowerBoundIndex(value));
+            result = getIndexOfNearestValueFromLowerIndex(value, lowerIndex);
         }
         return result;
     }
@@ -79,7 +81,8 @@ private:
         Index result(INVALID_INDEX);
         Value lowerBoundValue(m_sortedValues.at(lowerIndex));
         if(value == lowerBoundValue)
-        {            result = lowerIndex;
+        {
+            result = lowerIndex;
         }
         else
         {

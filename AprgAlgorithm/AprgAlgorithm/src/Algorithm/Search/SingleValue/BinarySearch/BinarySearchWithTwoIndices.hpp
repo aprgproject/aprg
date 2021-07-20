@@ -65,7 +65,8 @@ public:
 
     inline Index getLowerIndex() const
     {
-        return m_lowerIndex;    }
+        return m_lowerIndex;
+    }
 
     inline Index getHigherIndex() const
     {
@@ -115,7 +116,8 @@ public:
         Index result(INVALID_INDEX);
         Index middleIndex(getMiddleIndex());
         if(value == m_sortedValues.at(middleIndex))
-        {            result = middleIndex;
+        {
+            result = middleIndex;
         }
         else
         {
@@ -166,14 +168,16 @@ private:
             m_higherIndex = std::min(higherIndex, maxIndex);
             if(m_lowerIndex > m_higherIndex)
             {
-                std::swap(m_lowerIndex, m_higherIndex);            }
+                std::swap(m_lowerIndex, m_higherIndex);
+            }
         }
     }
 
     void moveIndexesCloserUntilDistanceIsLessThanOrEqualToTwo(Value const& value)
     {
         while(m_higherIndex-m_lowerIndex > 2)
-        {            Index middleIndex(getMiddleIndex());
+        {
+            Index middleIndex(getMiddleIndex());
             Value middleValue(m_sortedValues.at(middleIndex));
             if(value > middleValue)
             {
@@ -194,7 +198,8 @@ private:
     void moveIndexesCloserWhenDistanceIsLessThanOrEqualToTwo(Value const& value)
     {
         Index middleIndex(getMiddleIndex());
-        Value middleValue(m_sortedValues.at(middleIndex));        if(middleValue == value)
+        Value middleValue(m_sortedValues.at(middleIndex));
+        if(middleValue == value)
         {
             m_lowerIndex=middleIndex;
             m_higherIndex=middleIndex;

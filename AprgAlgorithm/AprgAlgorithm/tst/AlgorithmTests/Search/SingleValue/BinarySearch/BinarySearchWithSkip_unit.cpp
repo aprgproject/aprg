@@ -1,12 +1,13 @@
-#include <Algorithm/Search/BinarySearch/BinarySearchWithSkip.hpp>
-#include <AlgorithmTests/Search/Utilities/CommonTestsWithSearch.hpp>
+#include <Algorithm/Search/SingleValue/BinarySearch/BinarySearchWithSkip.hpp>
+#include <AlgorithmTests/Search/SingleValue/Utilities/CommonTestsWithSearch.hpp>
 
 #include <gtest/gtest.h>
 
 using namespace alba::algorithm::CommonTestsWithSearch;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {
@@ -58,4 +59,5 @@ TEST(BinarySearchWithSkipTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigh
 }
 
 }
+
 }

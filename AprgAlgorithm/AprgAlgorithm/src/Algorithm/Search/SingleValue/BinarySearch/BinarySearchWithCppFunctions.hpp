@@ -22,6 +22,7 @@ public:
     BinarySearchWithCppFunctions(Values const& sortedValues)
         : m_sortedValues(sortedValues)
     {}
+
     Value getNearestValue(Value const& value) const
     {
         Value result{};
@@ -37,7 +38,8 @@ public:
         Index result(INVALID_INDEX);
         if(!m_sortedValues.empty())
         {
-            result = getIndexOfNearestValueUsingEqualRange(value);        }
+            result = getIndexOfNearestValueUsingEqualRange(value);
+        }
         return result;
     }
 
@@ -90,7 +92,8 @@ private:
         Index result(INVALID_INDEX);
         Index lowerBoundIndex = std::distance(m_sortedValues.cbegin(), lowerAndUpperBoundItPair.first);
         Value lowerBoundValue(*(lowerAndUpperBoundItPair.first));
-        if(value == lowerBoundValue)        {
+        if(value == lowerBoundValue)
+        {
             result = lowerBoundIndex;
         }
         else
