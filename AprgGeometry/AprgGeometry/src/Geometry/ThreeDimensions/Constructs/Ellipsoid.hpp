@@ -25,9 +25,9 @@ public:
     double calculateYFromXAndZ(double const x, double const z, double const signOfRoot) const;
     double calculateZFromXAndY(double const x, double const y, double const signOfRoot) const;
 
-    std::string getDisplayableString() const;
-
 private:
+    friend std::ostream & operator<<(std::ostream & out, Ellipsoid const& ellipsoid);
+
     Point m_center;
     double m_aValue;
     double m_bValue;
@@ -35,8 +35,6 @@ private:
 };
 
 using Ellipsoids = std::vector<Ellipsoid>;
-
-std::ostream & operator<<(std::ostream & out, Ellipsoid const& ellipsoid);
 
 }
 }

@@ -158,13 +158,6 @@ AlbaOptional<double> Line::calculateZFromY(double const y) const
     return calculateOtherCoordinate(m_zInitialValue, m_cCoefficient, m_yInitialValue, m_bCoefficient, y);
 }
 
-string Line::getDisplayableString() const
-{
-    std::stringstream ss;
-    ss << "(x-" << m_xInitialValue << ")/" << m_aCoefficient << " = (y-" << m_yInitialValue << ")/" << m_bCoefficient << " = (z-" << m_zInitialValue << ")/" << m_cCoefficient;
-    return ss.str();
-}
-
 void Line::calculateAndSaveInitialValuesIfPossible(Point const& first)
 {
     if(!isInvalid())
@@ -222,7 +215,9 @@ bool Line::areAllCoefficientsZero() const
 
 ostream & operator<<(ostream & out, Line const& line)
 {
-    out << line.getDisplayableString();
+    out << "(x-" << line.m_xInitialValue << ")/" << line.m_aCoefficient
+        << " = (y-" << line.m_yInitialValue << ")/" << line.m_bCoefficient
+        << " = (z-" << line.m_zInitialValue << ")/" << line.m_cCoefficient;
     return out;
 }
 

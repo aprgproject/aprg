@@ -156,13 +156,6 @@ AlbaOptional<double> Plane::calculateZFromXAndY(double const x, double const y) 
     return result;
 }
 
-string Plane::getDisplayableString() const
-{
-    std::stringstream ss;
-    ss << m_aCoefficient << "*x + " << m_bCoefficient << "*y + " << m_cCoefficient << "*z + " << m_dCoefficient << " = 0";
-    return ss.str();
-}
-
 void Plane::calculateDCoefficientUsingCoefficientsABCAndAPoint(Point const& first)
 {
     m_dCoefficient = -(m_aCoefficient*first.getX())-(m_bCoefficient*first.getY())-(m_cCoefficient*first.getZ());
@@ -170,7 +163,11 @@ void Plane::calculateDCoefficientUsingCoefficientsABCAndAPoint(Point const& firs
 
 ostream & operator<<(ostream & out, Plane const& plane)
 {
-    out << plane.getDisplayableString();
+    out << plane.m_aCoefficient << "*x + "
+       << plane.m_bCoefficient << "*y + "
+       << plane.m_cCoefficient << "*z + "
+       << plane.m_dCoefficient
+       << " = 0";
     return out;
 }
 

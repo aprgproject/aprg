@@ -14,8 +14,8 @@ public:
     HyperbolicParaboloid();
     HyperbolicParaboloid(Point const& center, double const aCoefficient, double const bCoefficient, double const cCoefficient);
     // ((y-center.y)^2/bCoefficient^2) - ((x-center.x)^2/aCoefficient^2) = (z-center.z)/c
-    bool operator==(HyperbolicParaboloid const& ellipsoid) const;
-    bool operator!=(HyperbolicParaboloid const& ellipsoid) const;
+    bool operator==(HyperbolicParaboloid const& hyperbolicParaboloid) const;
+    bool operator!=(HyperbolicParaboloid const& hyperbolicParaboloid) const;
     Point getCenter() const;
     double getAValue() const;
     double getBValue() const;
@@ -24,9 +24,9 @@ public:
     double calculateYFromXAndZ(double const x, double const z, double const signOfRoot) const;
     double calculateZFromXAndY(double const x, double const y) const;
 
-    std::string getDisplayableString() const;
-
 private:
+    friend std::ostream & operator<<(std::ostream & out, HyperbolicParaboloid const& hyperbolicParaboloid);
+
     Point m_center;
     double m_aValue;
     double m_bValue;
@@ -34,8 +34,6 @@ private:
 };
 
 using HyperbolicParaboloids = std::vector<HyperbolicParaboloid>;
-
-std::ostream & operator<<(std::ostream & out, HyperbolicParaboloid const& ellipsoid);
 
 }
 }

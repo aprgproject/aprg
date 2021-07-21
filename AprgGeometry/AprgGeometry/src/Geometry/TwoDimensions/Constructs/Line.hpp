@@ -45,8 +45,6 @@ public:
     double calculateYFromX(double const x) const;
     double calculateXFromY(double const y) const;
 
-    std::string getDisplayableString() const;
-
 private:
     void setLineParametersBasedOnDeltas(double const deltaX, double const deltaY, Point const& point);
     void setLineParametersBasedOnCoefficients(double const aCoefficient, double const bCoefficient, double const cCoefficient);
@@ -57,6 +55,9 @@ private:
     void mergePointsFromPointsFromXAndY(Points & points, Points const& pointsFromXCoordinate, Points const& pointsFromYCoordinate, bool const isDirectionAscendingForX) const;
     LineType determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX) const;
     LineType determineLineTypeUsingCoefficients(double const aCoefficient, double const bCoefficient) const;
+
+    friend std::ostream & operator<<(std::ostream & out, Line const& line);
+
     LineType m_type;
     double m_aCoefficient; //form: a*x + b*y + c = 0
     double m_bCoefficient; //form: a*x + b*y + c = 0
@@ -64,8 +65,6 @@ private:
 };
 
 using Lines = std::vector<Line>;
-
-std::ostream & operator<<(std::ostream & out, Line const& line);
 
 }
 }

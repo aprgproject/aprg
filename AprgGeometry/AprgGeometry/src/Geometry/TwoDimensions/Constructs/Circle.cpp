@@ -201,13 +201,6 @@ Point Circle::getNearestPointInCircumference(Point const& point) const
     return Point(m_center.getX()+nearestDeltaPointX, m_center.getY()+nearestDeltaPointY);
 }
 
-string Circle::getDisplayableString() const
-{
-    std::stringstream ss;
-    ss << "(center: " << m_center.getDisplayableString() << " radius: " << m_radius << ")";
-    return ss.str();
-}
-
 void Circle::determineAndSaveCenterAndRadiusFromCoefficients(
         double const a,
         double const d,
@@ -277,7 +270,7 @@ Points Circle::getPointsInTraversingX(double const signOfX, double const signOfY
 
 ostream & operator<<(ostream & out, Circle const& circle)
 {
-    out << circle.getDisplayableString();
+    out << "(center: " << circle.m_center << " radius: " << circle.m_radius << ")";
     return out;
 }
 

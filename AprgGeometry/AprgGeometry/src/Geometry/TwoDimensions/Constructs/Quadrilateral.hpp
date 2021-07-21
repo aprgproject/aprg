@@ -36,8 +36,6 @@ public:
             double const interval,
             TraverseOperation const& traverseOperation) const;
 
-    std::string getDisplayableString() const;
-
 private:
     GroupOfPoints getGroupOfPointsBasedOnYValue() const;
     ListOfStartEndOfXAndY getStartEndForXs(
@@ -60,9 +58,9 @@ private:
             Points const& points3,
             Points const& points4,
             double const interval) const;
-};
 
-std::ostream & operator<<(std::ostream & out, Quadrilateral const& quadrilateral);
+    friend std::ostream & operator<<(std::ostream & out, Quadrilateral const& quadrilateral);
+};
 
 }
 }

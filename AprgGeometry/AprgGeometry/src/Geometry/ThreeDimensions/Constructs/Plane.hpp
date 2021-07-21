@@ -39,9 +39,9 @@ public:
     AlbaOptional<double> calculateYFromXAndZ(double const x, double const z) const;
     AlbaOptional<double> calculateZFromXAndY(double const x, double const y) const;
 
-    std::string getDisplayableString() const;
-
 private:
+    friend std::ostream & operator<<(std::ostream & out, Plane const& plane);
+
     void calculateDCoefficientUsingCoefficientsABCAndAPoint(Point const& first);
     double m_aCoefficient; //form: a*x + b*y + c*z + d = 0
     double m_bCoefficient; //form: a*x + b*y + c*z + d = 0
@@ -50,8 +50,6 @@ private:
 };
 
 using Planes = std::vector<Plane>;
-
-std::ostream & operator<<(std::ostream & out, Plane const& plane);
 
 }
 }
