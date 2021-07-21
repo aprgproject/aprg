@@ -176,10 +176,10 @@ AlbaNumber getMaxDegree(
     return maxDegree;
 }
 
-std::pair<AlbaNumber, AlbaNumber> getMinmaxDegree(
+pair<AlbaNumber, AlbaNumber> getMinmaxDegree(
         Polynomial const& polynomial)
 {
-    std::pair<AlbaNumber, AlbaNumber> result;
+    pair<AlbaNumber, AlbaNumber> result;
     Monomials const& monomials(polynomial.getMonomialsConstReference());
     if(!monomials.empty())
     {

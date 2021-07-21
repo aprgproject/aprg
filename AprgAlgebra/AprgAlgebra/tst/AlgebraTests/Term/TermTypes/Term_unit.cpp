@@ -675,7 +675,7 @@ TEST(TermTest, GetDebugStringWorks)
     });
     Term term8(function1);
 
-    EXPECT_EQ("{Empty}", term1.getDebugString());
+    EXPECT_EQ("{EmptyTerm}{Empty}", term1.getDebugString());
     EXPECT_EQ("0{Constant}", term2.getDebugString());
     EXPECT_EQ("length{Variable}", term3.getDebugString());
     EXPECT_EQ("+{Operator}", term4.getDebugString());

@@ -71,7 +71,7 @@ bool canBeMergedInAMonomialByAdditionOrSubtraction(Monomial const& monomial, Var
 
 bool canBeMergedInAMonomialByAdditionOrSubtraction(Variable const& variable1, Variable const& variable2)
 {
-    return variable1.getVariableName() == variable2.getDisplayableString();
+    return variable1 == variable2;
 }
 
 bool doesCoefficientsHaveSameSign(Monomial const& monomial1, Monomial const& monomial2)

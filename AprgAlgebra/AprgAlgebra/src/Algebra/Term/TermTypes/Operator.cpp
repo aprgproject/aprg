@@ -109,11 +109,6 @@ string Operator::getOperatorString() const
     return m_operatingString;
 }
 
-string Operator::getDisplayableString() const
-{
-    return m_operatingString;
-}
-
 void Operator::setOperatorString(string const& operatingString)
 {
     m_operatingString = operatingString;
@@ -139,9 +134,9 @@ void Operator::reverseOperation()
     }
 }
 
-ostream & operator<<(ostream & out, Operator const& operatorTerm)
+ostream & operator<<(ostream & out, Operator const& operatorObject)
 {
-    out << operatorTerm.getDisplayableString();
+    out << operatorObject.m_operatingString;
     return out;
 }
 

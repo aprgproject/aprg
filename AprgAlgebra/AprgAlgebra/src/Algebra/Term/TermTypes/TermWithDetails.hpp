@@ -22,7 +22,6 @@ struct TermWithDetails
     bool hasPositiveAssociation() const;
     bool hasNegativeAssociation() const;
     unsigned int getAssociationPriority() const;
-    std::string getDisplayableString() const;
     void clear();
     void reverseAssociation();
     BaseTermSharedPointer baseTermSharedPointer;
@@ -30,8 +29,6 @@ struct TermWithDetails
 };
 
 using TermsWithDetails=std::vector<TermWithDetails>;
-
-std::ostream & operator<<(std::ostream & out, TermWithDetails const& termWithDetails);
 
 }
 

@@ -82,11 +82,6 @@ string Function::getFunctionName() const
     return m_functionName;
 }
 
-string Function::getDisplayableString() const
-{
-    return m_functionName + "(" + getTermConstReferenceFromBaseTerm(getInputTermConstReference()).getDisplayableString() + ")";
-}
-
 string Function::getDebugString() const
 {
     return m_functionName + "(" + getTermConstReferenceFromBaseTerm(getInputTermConstReference()).getDebugString() + ")";
@@ -149,7 +144,8 @@ void Function::clearAllInnerSimplifiedFlags()
 
 ostream & operator<<(ostream & out, Function const& functionObject)
 {
-    out << functionObject.getDisplayableString();
+    out << functionObject.m_functionName
+        << "(" << getTermConstReferenceFromUniquePointer(functionObject.m_inputTermPointer) << ")";
     return out;
 }
 

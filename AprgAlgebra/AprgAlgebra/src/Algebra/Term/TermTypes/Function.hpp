@@ -34,7 +34,6 @@ public:
     bool isSimplified() const;
 
     std::string getFunctionName() const;
-    std::string getDisplayableString() const;
     std::string getDebugString() const;
     AlbaNumber performFunctionAndReturnResultIfPossible() const;
     BaseTerm const& getInputTermConstReference() const;
@@ -48,13 +47,13 @@ public:
     void clearAllInnerSimplifiedFlags();
 
 private:
+    friend std::ostream & operator<<(std::ostream & out, Function const& functionObject);
+
     std::string m_functionName;
     BaseTermUniquePointer m_inputTermPointer;
     EvaluationFunction m_evaluationFunction;
     bool m_isSimplified;
 };
-
-std::ostream & operator<<(std::ostream & out, Function const& functionObject);
 
 }
 

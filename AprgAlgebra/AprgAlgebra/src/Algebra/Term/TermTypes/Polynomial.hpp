@@ -24,12 +24,9 @@ public:
     bool operator<(Polynomial const& second) const;
     bool isEmpty() const;
     bool isSimplified() const;
-
     Monomials const& getMonomialsConstReference() const;
-    std::string getDisplayableString() const;
 
     Monomials & getMonomialsReference();
-
     void clear();
     void simplify();
     void sortMonomialsWithInversePriority();
@@ -41,7 +38,6 @@ public:
     void multiplyPolynomial(Polynomial const& polynomial);
     void divideMonomial(Monomial const& monomial);
     void raiseToUnsignedInteger(unsigned int const exponent);
-
     void setAsSimplified();
     void clearSimplifiedFlag();
 
@@ -50,13 +46,15 @@ private:
     void setNan();
     void simplifyContinuouslyIfChanged();
     void simplifyMonomialsAndReAdd();
+
+    friend std::ostream & operator<<(std::ostream & out, Polynomial const& polynomial);
+
     Monomials m_monomials;
     bool m_isSimplified;
 };
 
 using Polynomials=std::vector<Polynomial>;
 
-std::ostream & operator<<(std::ostream & out, Polynomial const& polynomial);
 
 }
 

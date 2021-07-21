@@ -108,17 +108,6 @@ TEST(PolynomialTest, GetMonomialsConstReferenceWorks)
     EXPECT_DOUBLE_EQ(4, variableMap2.at("z").getDouble());
 }
 
-TEST(PolynomialTest, GetDisplayableStringWorks)
-{
-    Polynomial polynomial1;
-    Polynomial polynomial2{Monomial(6, {})};
-    Polynomial polynomial3{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
-
-    EXPECT_EQ("(EmptyPolynomial)", polynomial1.getDisplayableString());
-    EXPECT_EQ("(6)", polynomial2.getDisplayableString());
-    EXPECT_EQ("(6 + -7[x^2][y^3][z^4])", polynomial3.getDisplayableString());
-}
-
 TEST(PolynomialTest, GetMonomialsReferenceWorks)
 {
     Polynomial polynomial{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
@@ -424,6 +413,18 @@ TEST(PolynomialTest, ClearSimplifiedFlagWorks)
     polynomial.clearSimplifiedFlag();
 
     EXPECT_FALSE(polynomial.isSimplified());
+}
+
+TEST(PolynomialTest, OutputStreamOperatorWorks)
+{
+    stringstream ss;
+    Polynomial polynomial1;
+    Polynomial polynomial2{Monomial(6, {})};
+    Polynomial polynomial3{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
+
+    ss << polynomial1 << "," << polynomial2 << "," << polynomial3;
+
+    EXPECT_EQ("(EmptyPolynomial),(6),(6 + -7[x^2][y^3][z^4])", ss.str());
 }
 
 }
