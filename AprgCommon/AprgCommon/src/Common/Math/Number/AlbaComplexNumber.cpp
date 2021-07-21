@@ -7,7 +7,6 @@
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 
 #include <cmath>
-#include <sstream>
 
 using namespace alba::mathHelper;
 using namespace std;
@@ -281,17 +280,6 @@ template AlbaComplexNumber<double> AlbaComplexNumber<double>::getNthRoot(
 
 
 template <typename DataType>
-string AlbaComplexNumber<DataType>::getDisplayableString() const
-{
-    stringstream ss;
-    ss << "(" << m_realPart << " + " << m_imaginaryPart << "i)";
-    return ss.str();
-}
-template string AlbaComplexNumber<float>::getDisplayableString() const;
-template string AlbaComplexNumber<double>::getDisplayableString() const;
-
-
-template <typename DataType>
 DataType AlbaComplexNumber<DataType>::getRealPartInMultiplication(
         DataType const firstRealPart,
         DataType const firstImaginaryPart,
@@ -373,15 +361,5 @@ template double AlbaComplexNumber<double>::getImaginaryPartInDivision(
         double const firstImaginaryPart,
         double const secondRealPart,
         double const secondImaginaryPart) const;
-
-
-template <typename DataType>
-ostream & operator<<(ostream & out, AlbaComplexNumber<DataType> const& complexNumber)
-{
-    out << complexNumber.getDisplayableString();
-    return out;
-}
-template ostream & operator<< <float>(ostream & out, AlbaComplexNumber<float> const& complexNumber);
-template ostream & operator<< <double>(ostream & out, AlbaComplexNumber<double> const& complexNumber);
 
 }

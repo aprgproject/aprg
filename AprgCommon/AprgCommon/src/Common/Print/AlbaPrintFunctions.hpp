@@ -3,9 +3,9 @@
 #include <Common/Container/AlbaContainerHelper.hpp>
 
 #include <deque>
-#include <ostream>
 #include <string>
 #include <tuple>
+#include <ostream>
 
 using namespace alba::containerHelper;
 

@@ -121,6 +121,8 @@ public:
         return *(m_contentPointer);
     }
 
+private:
+
     friend std::ostream & operator<<(std::ostream & out, AlbaOptional<ContentType> const& optional)
     {
         out << "hasContent: " << optional.hasContent();
@@ -131,7 +133,6 @@ public:
         return out;
     }
 
-private:
     std::unique_ptr<ContentType> m_contentPointer;
 };
 
@@ -140,6 +141,7 @@ template <typename ContentType> class AlbaOptional<ContentType &>
 public:
 
 //#warning Please make sure that object still exists in the life time of an optional reference object
+
 
     AlbaOptional()
         : m_hasContent(false)
@@ -210,16 +212,6 @@ public:
         return m_empty;
     }
 
-    friend std::ostream & operator<<(std::ostream & out, AlbaOptional<ContentType&> const& optional)
-    {
-        out << "hasContent: " << optional.m_hasContent;
-        if(optional.m_hasContent)
-        {
-            out << " value: " << optional.get();
-        }
-        return out;
-    }
-
 private:
     inline bool isContentPointerValid() const
     {
@@ -229,6 +221,17 @@ private:
     bool m_hasContent;
     ContentType* m_contentPointer;
     static ContentType m_empty; //think of how to remove this
+
+
+    friend std::ostream & operator<<(std::ostream & out, AlbaOptional<ContentType&> const& optional)
+    {
+        out << "hasContent: " << optional.m_hasContent;
+        if(optional.m_hasContent)
+        {
+            out << " value: " << optional.get();
+        }
+        return out;
+    }
 };
 
 template <typename ContentType> ContentType AlbaOptional<ContentType&>::m_empty;

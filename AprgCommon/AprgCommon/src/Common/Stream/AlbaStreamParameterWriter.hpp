@@ -1,9 +1,9 @@
 #pragma once
 
 #include <map>
-#include <ostream>
 #include <set>
 #include <string>
+#include <ostream>
 #include <vector>
 
 namespace alba

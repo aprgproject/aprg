@@ -1,7 +1,5 @@
 #include "AlbaNumberInterval.hpp"
 
-#include <sstream>
-
 using namespace std;
 
 namespace alba
@@ -84,15 +82,6 @@ AlbaNumberIntervalEndpoint const& AlbaNumberInterval::getHigherEndpoint() const
     return m_higherEndpoint;
 }
 
-string AlbaNumberInterval::getDisplayableString() const
-{
-    stringstream result;
-    string startPrefix = m_lowerEndpoint.isOpen() ? "(" : "[";
-    string endPostfix = m_higherEndpoint.isOpen() ? ")" : "]";
-    result << startPrefix << m_lowerEndpoint.getValue() << ", " << m_higherEndpoint.getValue() << endPostfix;
-    return result.str();
-}
-
 void AlbaNumberInterval::setNewEndpoint(AlbaNumberIntervalEndpoint const& endpoint)
 {
     if(endpoint.getValue() < m_lowerEndpoint.getValue())
@@ -117,7 +106,9 @@ void AlbaNumberInterval::setNewEndpoint(AlbaNumberIntervalEndpoint const& endpoi
 
 ostream & operator<<(ostream & out, AlbaNumberInterval const& interval)
 {
-    out << interval.getDisplayableString();
+    char startPrefix = interval.m_lowerEndpoint.isOpen() ? '(' : '[';
+    char endPostfix = interval.m_higherEndpoint.isOpen() ? ')' : ']';
+    out << startPrefix << interval.m_lowerEndpoint.getValue() << ", " << interval.m_higherEndpoint.getValue() << endPostfix;
     return out;
 }
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sstream>
+#include <ostream>
 
 namespace alba
 {
@@ -9,6 +9,7 @@ template <class ObjectType>
 class AlbaFakeCopyable
 {
 public:
+
     AlbaFakeCopyable() = default;
 
     AlbaFakeCopyable(ObjectType const& object)
@@ -30,14 +31,14 @@ public:
     }
 
 private:
+
+    friend std::ostream & operator<<(std::ostream & out, AlbaFakeCopyable<ObjectType> const& object)
+    {
+        out << object.m_object;
+        return out;
+    }
+
     ObjectType m_object;
 };
-
-template <typename ObjectType>
-std::ostream & operator<<(std::ostream & out, AlbaFakeCopyable<ObjectType> const& object)
-{
-    out << object.getObject();
-    return out;
-}
 
 } // namespace alba

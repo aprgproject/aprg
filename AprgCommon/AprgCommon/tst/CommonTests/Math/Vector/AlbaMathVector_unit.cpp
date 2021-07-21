@@ -3,6 +3,8 @@
 
 #include <gtest/gtest.h>
 
+using namespace std;
+
 namespace alba
 {
 
@@ -203,11 +205,14 @@ TEST(AlbaMathVectorTest, GetValuesWorks)
     EXPECT_DOUBLE_EQ(4.5, values.at(1));
 }
 
-TEST(AlbaMathVectorTest, GetDisplayableStringWorks)
+TEST(AlbaMathVectorTest, OutputStreamOperatorWorks)
 {
+    stringstream ss;
     VectorTwoElements mathVector{3.5, 4.5};
 
-    EXPECT_EQ("{3.5, 4.5}", mathVector.getDisplayableString());
+    ss << mathVector;
+
+    EXPECT_EQ("{3.5, 4.5}", ss.str());
 }
 
 }

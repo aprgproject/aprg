@@ -147,13 +147,6 @@ TEST(AlbaXYZTest, GetXTimesYTimesZWorks)
     EXPECT_EQ(-250, xyz.getXTimesYTimesZ());
 }
 
-TEST(AlbaXYZTest, GetDisplayableStringWorks)
-{
-    IntXYZ xyz(-5,5,10);
-
-    EXPECT_EQ("(-5,5,10)", xyz.getDisplayableString());
-}
-
 TEST(AlbaXYZTest, SetXWorks)
 {
     IntXYZ xyz(-5,5,10);
@@ -212,6 +205,15 @@ TEST(AlbaXYZTest, SaveMaximumXAndYAndZWorks)
     xyz.saveMaximumXAndYAndZ(IntXYZ(5,5,10));
 
     EXPECT_EQ(IntXYZ(5,5,10), xyz);
+}
+
+TEST(AlbaXYZTest, OutputStreamOperatorWorks)
+{
+    IntXYZ xyz(-5,5,10);
+    stringstream ss;
+    ss<<xyz;
+
+    EXPECT_EQ("(-5,5,10)", ss.str());
 }
 
 }
