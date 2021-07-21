@@ -27,11 +27,10 @@ public:
 private:
     void continuouslySwapDownIfStillOutOfOrder(Values& valuesToSort, unsigned int const startingIndex) const
     {
-        for(unsigned int i=startingIndex; i>0 && valuesToSort.at(i-1) > valuesToSort.at(i); i--)
+        for(unsigned int i=startingIndex; i>0 && valuesToSort.at(i) < valuesToSort.at(i-1); i--)
         {
             std::swap(valuesToSort[i], valuesToSort[i-1]);
-        }
-    }
+        }    }
 };
 
 }
