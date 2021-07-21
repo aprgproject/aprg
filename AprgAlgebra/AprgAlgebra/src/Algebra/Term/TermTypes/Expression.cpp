@@ -757,20 +757,20 @@ void Expression::distributeAndMultiply(
 ostream & operator<<(ostream & out, Expression const& expression)
 {
     TermsWithDetails const& termsWithDetails(expression.m_termsWithAssociation.getTermsWithDetails());
+    OperatorLevel operatorLevel(expression.m_commonOperatorLevel);
     out << "(";
     if(!termsWithDetails.empty())
     {
         TermWithDetails const& firstTermWithDetails(termsWithDetails.front());
-        out << getFirstStringIfNegativeAssociation(expression.m_commonOperatorLevel, firstTermWithDetails.association)
+        out << getFirstStringIfNegativeAssociation(operatorLevel, firstTermWithDetails.association)
             << getTermConstReferenceFromSharedPointer(firstTermWithDetails.baseTermSharedPointer);
         for(auto it=termsWithDetails.cbegin()+1; it!=termsWithDetails.cend(); it++)
         {
             TermWithDetails const& termWithDetails(*it);
-            out << getOperatingString(expression.m_commonOperatorLevel, termWithDetails.association)
+            out << getOperatingString(operatorLevel, termWithDetails.association)
                 << getTermConstReferenceFromSharedPointer(termWithDetails.baseTermSharedPointer);
         }
-    }
-    out << ")";
+    }    out << ")";
     return out;
 }
 
