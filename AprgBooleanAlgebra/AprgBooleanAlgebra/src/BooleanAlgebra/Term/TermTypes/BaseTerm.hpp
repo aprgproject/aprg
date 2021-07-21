@@ -14,9 +14,6 @@ public:
     BaseTerm() = default;
     virtual ~BaseTerm() = default;
 
-    virtual std::string getDisplayableString() const;
-    virtual std::string getDebugString() const;
-
 private:
 };
 

@@ -59,15 +59,6 @@ TEST(WrappedTermTest, LessThanOperatorWorks)
     EXPECT_TRUE(wrappedTerm3 < wrappedTerm1);
 }
 
-TEST(WrappedTermTest, GetDisplayableStringWorks)
-{
-    WrappedTerm wrappedTerm1(Term(true));
-    WrappedTerm wrappedTerm2(Term(false));
-
-    EXPECT_EQ("{[true]}", wrappedTerm1.getDisplayableString());
-    EXPECT_EQ("{[false]}", wrappedTerm2.getDisplayableString());
-}
-
 TEST(WrappedTermTest, ClearWorks)
 {
     WrappedTerm wrappedTerm(Term(10));
@@ -75,6 +66,17 @@ TEST(WrappedTermTest, ClearWorks)
     wrappedTerm.clear();
 
     EXPECT_EQ(nullptr, wrappedTerm.baseTermSharedPointer.get());
+}
+
+TEST(WrappedTermTest, OutputStreamOperatorWorks)
+{
+    stringstream ss;
+    WrappedTerm wrappedTerm1(Term(true));
+    WrappedTerm wrappedTerm2(Term(false));
+
+    ss << wrappedTerm1 << "," << wrappedTerm2;
+
+    EXPECT_EQ("[true],[false]", ss.str());
 }
 
 }

@@ -51,8 +51,8 @@ public:
     Operator const& getOperatorConstReference() const;
     Expression const& getExpressionConstReference() const;
     bool getBooleanValue() const;
-    std::string getDisplayableString() const override;
-    std::string getDebugString() const override;
+    std::string getDisplayableString() const;
+    std::string getDebugString() const;
 
     Constant & getConstantReference();
     VariableTerm & getVariableTermReference();
@@ -71,14 +71,15 @@ public:
 private:
     void resetBaseDataTermPointerBasedFromTerm(Term const& term);
     void initializeBasedOnString(std::string const& stringAsParameter);
+
+    friend std::ostream & operator<<(std::ostream & out, Term const& term);
+
     TermType m_type;
     bool m_isSimplified;
     std::unique_ptr<BaseTermData> m_baseTermDataPointer;
 };
 
 using Terms = std::vector<Term>;
-
-std::ostream & operator<<(std::ostream & out, Term const& term);
 
 }
 

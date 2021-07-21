@@ -2,7 +2,7 @@
 
 #include <BooleanAlgebra/Term/TermTypes/BaseTermData.hpp>
 
-#include <string>
+#include <ostream>
 
 namespace alba
 {
@@ -19,20 +19,17 @@ public:
     bool operator==(Constant const& second) const;
     bool operator!=(Constant const& second) const;
     bool operator<(Constant const& second) const;
-
     Constant operator~() const;
-
     bool getBooleanValue() const;
-    std::string getDisplayableString() const;
 
     void setValue(bool const boolValue);
     void negate();
 
 private:
+    friend std::ostream & operator<<(std::ostream & out, Constant const& constant);
+
     bool m_booleanValue;
 };
-
-std::ostream & operator<<(std::ostream & out, Constant const& constant);
 
 }
 

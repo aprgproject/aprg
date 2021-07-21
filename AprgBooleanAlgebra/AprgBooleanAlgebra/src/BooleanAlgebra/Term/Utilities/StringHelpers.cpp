@@ -1,6 +1,7 @@
 #include "StringHelpers.hpp"
 
 #include <BooleanAlgebra/Constructs/TermsAggregator.hpp>
+#include <BooleanAlgebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <BooleanAlgebra/Term/Utilities/EnumHelpers.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
@@ -103,28 +104,23 @@ string getString(
 
 string getString(WrappedTerms const& wrappedTerms)
 {
-    string result;
+    stringstream ss;
     if(!wrappedTerms.empty())
     {
-        result += getString(wrappedTerms.front());
+        ss << wrappedTerms.front();
         for(auto it=wrappedTerms.cbegin()+1; it!=wrappedTerms.cend(); it++)
         {
-            result += ", ";
-            result += getString(*it);
+            ss << ", " << *it;
         }
     }
-    return result;
-}
-
-string getString(WrappedTerm const& wrappedTerm)
-{
-    return string("{")+wrappedTerm.baseTermSharedPointer->getDisplayableString()+"}";
+    return ss.str();
 }
 
 string createVariableTermNameForSubstitution(Term const& term)
 {
-    string variableName = string("{") + term.getDisplayableString() + "}";
-    return variableName;
+    stringstream ss;
+    ss << "{" << term << "}";
+    return ss.str();
 }
 
 Term buildTermIfPossible(string const& termString)

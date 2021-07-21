@@ -70,16 +70,6 @@ bool VariableTerm::isNegated() const
     return m_isNegated;
 }
 
-string VariableTerm::getDisplayableString() const
-{
-    string result(m_variableName);
-    if(m_isNegated)
-    {
-        result += "'";
-    }
-    return result;
-}
-
 string VariableTerm::getVariableTermName() const
 {
     return m_variableName;
@@ -112,7 +102,11 @@ void VariableTerm::initialize()
 
 ostream & operator<<(ostream & out, VariableTerm const& variableTerm)
 {
-    out << variableTerm.getDisplayableString();
+    out << variableTerm.m_variableName;
+    if(variableTerm.m_isNegated)
+    {
+        out << "'";
+    }
     return out;
 }
 

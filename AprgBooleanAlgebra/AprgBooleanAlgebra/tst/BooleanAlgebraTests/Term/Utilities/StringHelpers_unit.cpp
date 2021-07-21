@@ -45,20 +45,13 @@ TEST(StringHelpersTest, GetStringWorksForOperatorLevel)
     EXPECT_EQ("|", getString(OperatorLevel::Or));
 }
 
-TEST(StringHelpersTest, GetStringForWrappedTermWorks)
-{
-    WrappedTerm wrappedTerm(Term(true));
-
-    EXPECT_EQ("{[true]}", getString(wrappedTerm));
-}
-
 TEST(StringHelpersTest, GetStringForWrappedTermsWorks)
 {
     WrappedTerms wrappedTerms;
     wrappedTerms.emplace_back(Term(true));
     wrappedTerms.emplace_back(Term(true));
 
-    EXPECT_EQ("{[true]}, {[true]}", getString(wrappedTerms));
+    EXPECT_EQ("[true], [true]", getString(wrappedTerms));
 }
 
 TEST(StringHelpersTest, CreateVariableTermNameForSubstitutionWorks)

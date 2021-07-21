@@ -41,14 +41,6 @@ bool WrappedTerm::operator<(WrappedTerm const& second) const
     return term1 < term2;
 }
 
-string WrappedTerm::getDisplayableString() const
-{
-    stringstream ss;
-    Term const& term(getTermConstReferenceFromSharedPointer(baseTermSharedPointer));
-    ss << "{" << term.getDisplayableString() << "}";
-    return ss.str();
-}
-
 void WrappedTerm::clear()
 {
     baseTermSharedPointer.reset();
@@ -56,7 +48,7 @@ void WrappedTerm::clear()
 
 ostream & operator<<(ostream & out, WrappedTerm const& wrappedTerm)
 {
-    out << wrappedTerm.getDisplayableString();
+    out << getTermConstReferenceFromSharedPointer(wrappedTerm.baseTermSharedPointer);
     return out;
 }
 
