@@ -17,12 +17,13 @@ namespace
 {
 using Characters = vector<char>;
 using Integers = vector<int>;
+using Strings = vector<string>;
 using StabilityCheckObjects = vector<StabilityCheckObject>;
 using CharacterSorter = TopDownMergeSorter<Characters>;
 using IntegerSorter = TopDownMergeSorter<Integers>;
+using StringSorter = TopDownMergeSorter<Strings>;
 using StabilityCheckSorter = TopDownMergeSorter<StabilityCheckObjects>;
 }
-
 TEST(TopDownMergeSorterTest, SortWorksOnCharactersUsingExample1)
 {
     CharacterSorter sorter;
@@ -41,10 +42,15 @@ TEST(TopDownMergeSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegerSorter, Integers>(sorter);
 }
 
+TEST(TopDownMergeSorterTest, SortWorksOnStringsUsingExample1)
+{
+    StringSorter sorter;
+    testSortUsingExample1WithStrings<StringSorter, Strings>(sorter);
+}
+
 TEST(TopDownMergeSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1)
 {
-    StabilityCheckSorter sorter;
-    testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckSorter, StabilityCheckObjects>(sorter);
+    StabilityCheckSorter sorter;    testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckSorter, StabilityCheckObjects>(sorter);
 }
 
 }

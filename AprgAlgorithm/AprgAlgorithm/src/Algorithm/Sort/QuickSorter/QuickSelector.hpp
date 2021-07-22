@@ -11,12 +11,12 @@ namespace algorithm
 {
 
 template <typename Values>
-class QuickSelect
+class QuickSelector
 {
 public:
     using Value = typename Values::value_type;
 
-    QuickSelect() = default;
+    QuickSelector() = default;
 
     Value getNthSelect(Values & valuesToSort, unsigned int const selectionIndex) const
     {
