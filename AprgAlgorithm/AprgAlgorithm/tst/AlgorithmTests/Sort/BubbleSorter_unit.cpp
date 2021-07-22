@@ -24,6 +24,7 @@ using IntegerSorter = BubbleSorter<Integers>;
 using StringSorter = BubbleSorter<Strings>;
 using StabilityCheckSorter = BubbleSorter<StabilityCheckObjects>;
 }
+
 TEST(BubbleSorterTest, SortWorksOnCharactersUsingExample1)
 {
     CharacterSorter sorter;
@@ -50,7 +51,8 @@ TEST(BubbleSorterTest, SortWorksOnStringsUsingExample1)
 
 TEST(BubbleSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1)
 {
-    StabilityCheckSorter sorter;    testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckSorter, StabilityCheckObjects>(sorter);
+    StabilityCheckSorter sorter;
+    testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckSorter, StabilityCheckObjects>(sorter);
 }
 
 }

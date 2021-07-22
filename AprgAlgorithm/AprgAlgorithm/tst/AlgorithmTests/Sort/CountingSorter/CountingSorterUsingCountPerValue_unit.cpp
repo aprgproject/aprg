@@ -25,7 +25,8 @@ using SmallIntegerSorter = CountingSorterUsingCountPerValue<Integers, MAX_NUMBER
 using StabilityCheckSorter = CountingSorterUsingCountPerValue<StabilityCheckObjects, MAX_NUMBER_OF_CHARACTERS>;
 
 CharacterSorter::ValueToIndexableValueFunction characterToIndexableValueFunction = [](char const& value) -> unsigned int
-{    return value & 0xFFU; // already converts to unsigned integer
+{
+    return value & 0xFFU; // already converts to unsigned integer
 };
 CharacterSorter::IndexableValueToValueFunction indexableValueToCharacterFunction = [](unsigned int const indexableValue) -> char
 {

@@ -24,6 +24,7 @@ using IntegerSorter = BottomUpMergeSorter<Integers>;
 using StringSorter = BottomUpMergeSorter<Strings>;
 using StabilityCheckSorter = BottomUpMergeSorter<StabilityCheckObjects>;
 }
+
 TEST(BottomUpMergeSorterTest, SortWorksOnCharactersUsingExample1)
 {
     CharacterSorter sorter;
@@ -50,7 +51,8 @@ TEST(BottomUpMergeSorterTest, SortWorksOnStringsUsingExample1)
 
 TEST(BottomUpMergeSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1)
 {
-    StabilityCheckSorter sorter;    testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckSorter, StabilityCheckObjects>(sorter);
+    StabilityCheckSorter sorter;
+    testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckSorter, StabilityCheckObjects>(sorter);
 }
 
 }

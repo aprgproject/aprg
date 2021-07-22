@@ -26,6 +26,7 @@ using IntegerSorter = HeapSorter<Integers>;
 using StringSorter = HeapSorter<Strings>;
 using StabilityCheckSorter = HeapSorter<StabilityCheckObjects>;
 }
+
 TEST(HeapSorterTest, SortWorksOnCharactersUsingExample1)
 {
     CharacterSorter sorter;
@@ -52,7 +53,8 @@ TEST(HeapSorterTest, SortWorksOnStringsUsingExample1)
 
 TEST(HeapSorterTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1)
 {
-    StabilityCheckSorter sorter;    testSortAsNotStableUsingExample1WithStabilityCheckObjects<StabilityCheckSorter, StabilityCheckObjects>(sorter);
+    StabilityCheckSorter sorter;
+    testSortAsNotStableUsingExample1WithStabilityCheckObjects<StabilityCheckSorter, StabilityCheckObjects>(sorter);
 }
 
 }

@@ -24,6 +24,7 @@ using IntegerSorter = ShellSorter<Integers>;
 using StringSorter = ShellSorter<Strings>;
 using StabilityCheckSorter = ShellSorter<StabilityCheckObjects>;
 }
+
 TEST(ShellSorterTest, SortWorksOnCharactersUsingExample1)
 {
     CharacterSorter sorter;
@@ -50,7 +51,8 @@ TEST(ShellSorterTest, SortWorksOnStringsUsingExample1)
 
 TEST(ShellSorterTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1)
 {
-    StabilityCheckSorter sorter;    testSortAsNotStableUsingExample1WithStabilityCheckObjects<StabilityCheckSorter, StabilityCheckObjects>(sorter);
+    StabilityCheckSorter sorter;
+    testSortAsNotStableUsingExample1WithStabilityCheckObjects<StabilityCheckSorter, StabilityCheckObjects>(sorter);
 }
 
 }

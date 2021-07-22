@@ -66,7 +66,8 @@ private:
         }
     }
 
-    void sortForSmallerSizes(            Values & valuesToSort,
+    void sortForSmallerSizes(
+            Values & valuesToSort,
             unsigned int const lowContainerIndex,
             unsigned int const highContainerIndex) const
     {
