@@ -2,11 +2,9 @@
 
 #include <Algorithm/Sort/BaseSorter.hpp>
 
-#include <algorithm>
 #include <utility>
 
-namespace alba
-{
+namespace alba{
 
 namespace algorithm
 {
