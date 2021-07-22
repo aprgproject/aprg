@@ -117,7 +117,8 @@ public:
     {
         matrix::AlbaMatrix<std::string> matrixToDisplay(MAX_VERTEX_VALUE+1, MAX_VERTEX_VALUE+1);
         stringHelper::NumberToStringConverter converter;
-        matrixToDisplay.setEntry(0, 0, "X");        for(unsigned int i=0; i<MAX_VERTEX_VALUE; i++)
+        matrixToDisplay.setEntry(0, 0, "X");
+        for(unsigned int i=0; i<MAX_VERTEX_VALUE; i++)
         {
             matrixToDisplay.setEntry(i+1, 0, std::string("[")+converter.convert(i)+std::string("]"));
             matrixToDisplay.setEntry(0, i+1, std::string("[")+converter.convert(i)+std::string("]"));
@@ -129,7 +130,8 @@ public:
         return std::string("Adjacency ") + matrixToDisplay.getString();
     }
 
-    AdjacencyMatrix const& getAdjacencyMatrix() const    {
+    AdjacencyMatrix const& getAdjacencyMatrix() const
+    {
         return m_adjacencyMatrix;
     }
 
