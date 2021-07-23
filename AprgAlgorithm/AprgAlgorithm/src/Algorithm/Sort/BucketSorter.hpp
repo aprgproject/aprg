@@ -50,6 +50,7 @@ public:
             itCopy = std::copy(bucket.cbegin(), bucket.cend(), itCopy); // copy back to original container
         }
     }
+
     Value m_minValue;
     Value m_maxValue;
 };
