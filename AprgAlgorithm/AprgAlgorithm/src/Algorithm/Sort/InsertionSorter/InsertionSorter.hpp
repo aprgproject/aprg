@@ -2,10 +2,10 @@
 
 #include <Algorithm/Sort/BaseSorter.hpp>
 
+#include <iterator>
 #include <utility>
 
-namespace alba
-{
+namespace alba{
 
 namespace algorithm
 {
@@ -19,23 +19,26 @@ public:
 
     void sort(Values & valuesToSort) const override
     {
-        unsigned int const size = valuesToSort.size();
-        for(unsigned int insertedIndex=1; insertedIndex<size; insertedIndex++)
+        auto insertedIt=valuesToSort.begin();
+        insertedIt++;
+        for(; insertedIt!=valuesToSort.end(); insertedIt++)
         {
-            continuouslySwapDownIfStillOutOfOrder(valuesToSort, insertedIndex);
+            continuouslySwapDownIfStillOutOfOrder(valuesToSort, insertedIt);
         }
     }
 
 private:
-    void continuouslySwapDownIfStillOutOfOrder(Values& valuesToSort, unsigned int const startingIndex) const
+    void continuouslySwapDownIfStillOutOfOrder(Values& valuesToSort, typename Values::iterator const insertedIt) const
     {
-        for(unsigned int i=startingIndex; i>0 && valuesToSort.at(i) < valuesToSort.at(i-1); i--)
+        auto itHigh = std::make_reverse_iterator(insertedIt); // make reverse iterator advances it by one (so there is decrement after)
+        auto itLow = itHigh;
+        itHigh--;
+        for(; itLow!=valuesToSort.rend() && *itLow > *itHigh; itLow++, itHigh++)
         {
-            std::swap(valuesToSort[i], valuesToSort[i-1]);
+            std::swap(*itLow, *itHigh);
         }
     }
 };
-
 }
 
 }

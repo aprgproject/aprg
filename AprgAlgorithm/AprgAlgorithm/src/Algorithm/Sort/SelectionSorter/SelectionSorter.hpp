@@ -15,23 +15,19 @@ template <typename Values>
 class SelectionSorter : public BaseSorter<Values>
 {
 public:
-
     SelectionSorter() = default;
 
     void sort(Values & valuesToSort) const override
     {
-        unsigned int const size = valuesToSort.size();
-        for(unsigned int indexToSwap=0; indexToSwap<size-1; indexToSwap++)
+        auto itEndMinus1 = valuesToSort.end();
+        itEndMinus1--;
+        for(auto itToSwap=valuesToSort.begin(); itToSwap!=itEndMinus1; itToSwap++)
         {
-            auto currentMinimumIt = std::min_element(valuesToSort.begin()+indexToSwap, valuesToSort.end());
-            if(currentMinimumIt != valuesToSort.cend())
-            {
-                std::swap(valuesToSort[indexToSwap], *currentMinimumIt);
-            }
+            auto currentMinimumIt = std::min_element(itToSwap, valuesToSort.end());
+            std::swap(*itToSwap, *currentMinimumIt);
         }
     }
 };
-
 }
 
 }
