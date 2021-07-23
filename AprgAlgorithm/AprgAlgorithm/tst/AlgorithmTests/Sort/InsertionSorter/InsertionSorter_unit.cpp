@@ -1,4 +1,4 @@
-#include <Algorithm/Sort/PigeonholeSorter.hpp>
+#include <Algorithm/Sort/InsertionSorter/InsertionSorter.hpp>
 #include <AlgorithmTests/Sort/Utilities/CommonTestsWithSorter.hpp>
 #include <AlgorithmTests/Sort/Utilities/StabilityCheckObject.hpp>
 
@@ -20,36 +20,44 @@ using Integers = vector<int>;
 using Doubles = vector<double>;
 using Strings = vector<string>;
 using StabilityCheckObjects = vector<StabilityCheckObject>;
-using CharacterSorter = PigeonholeSorter<Characters>;
-using IntegerSorter = PigeonholeSorter<Integers>;
-using DoubleSorter = PigeonholeSorter<Doubles>;
-using StringSorter = PigeonholeSorter<Strings>;
-using StabilityCheckSorter = PigeonholeSorter<StabilityCheckObjects>;
+using CharacterSorter = InsertionSorter<Characters>;
+using IntegerSorter = InsertionSorter<Integers>;
+using DoubleSorter = InsertionSorter<Doubles>;
+using StringSorter = InsertionSorter<Strings>;
+using StabilityCheckSorter = InsertionSorter<StabilityCheckObjects>;
 }
 
-TEST(PigeonholeSorterTest, SortWorksOnCharactersUsingExample1)
+TEST(InsertionSorterTest, SortWorksOnCharactersUsingExample1)
 {
     CharacterSorter sorter;
     testSortUsingExample1WithCharacters<CharacterSorter, Characters>(sorter);
 }
 
-TEST(PigeonholeSorterTest, SortWorksOnCharactersUsingExample2)
+TEST(InsertionSorterTest, SortWorksOnCharactersUsingExample2)
 {
     CharacterSorter sorter;
     testSortUsingExample2WithCharacters<CharacterSorter, Characters>(sorter);
 }
 
-TEST(PigeonholeSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1)
+TEST(InsertionSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1)
 {
     IntegerSorter sorter;
     testSortUsingExample1WithPositiveAndNegativeIntegers<IntegerSorter, Integers>(sorter);
 }
 
-// CANNOT SORT DOUBLE VALUES
+TEST(InsertionSorterTest, SortWorksOnDoublesUsingExample1)
+{
+    DoubleSorter sorter;
+    testSortUsingExample1WithDoubleValues<DoubleSorter, Doubles>(sorter);
+}
 
-// CANNOT SORT STRINGS
+TEST(InsertionSorterTest, SortWorksOnStringsUsingExample1)
+{
+    StringSorter sorter;
+    testSortUsingExample1WithStrings<StringSorter, Strings>(sorter);
+}
 
-TEST(PigeonholeSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) // STABLE
+TEST(InsertionSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) // STABLE
 {
     StabilityCheckSorter sorter;
     testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckSorter, StabilityCheckObjects>(sorter);

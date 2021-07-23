@@ -27,7 +27,8 @@ bool StabilityCheckObject::operator==(
     return m_visiblePart == object.m_visiblePart;
 }
 
-bool StabilityCheckObject::operator!=(        StabilityCheckObject const& object) const
+bool StabilityCheckObject::operator!=(
+        StabilityCheckObject const& object) const
 {
     return !operator==(object);
 }
@@ -92,7 +93,8 @@ bool areObjectsEqualOnVisibleAndNotVisiblePart(
 
 ostream & operator<<(ostream & out, StabilityCheckObject const& object)
 {
-    out << "(" << object.m_visiblePart << object.m_notVisiblePart << ")";    return out;
+    out << "(" << object.m_visiblePart << object.m_notVisiblePart << ")";
+    return out;
 }
 
 }
