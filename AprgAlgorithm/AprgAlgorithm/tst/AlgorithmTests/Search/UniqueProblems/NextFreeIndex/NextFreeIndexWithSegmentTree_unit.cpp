@@ -1,4 +1,4 @@
-#include <Algorithm/Search/NextFreeIndex/NextFreeIndexWithSegmentTree.hpp>
+#include <Algorithm/Search/UniqueProblems/NextFreeIndex/NextFreeIndexWithSegmentTree.hpp>
 
 #include <gtest/gtest.h>
 
