@@ -33,10 +33,15 @@ TEST(TopDownMergeSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExamp
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
-TEST(TopDownMergeSorterTest, SortWorksOnCharactersUsingExample1)
+TEST(TopDownMergeSorterTest, SortWorksOnCharactersUsingOneValueExample)
 {
     CharactersSorter sorter;
-    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
+}
+
+TEST(TopDownMergeSorterTest, SortWorksOnCharactersUsingExample1)
+{
+    CharactersSorter sorter;    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(TopDownMergeSorterTest, SortWorksOnCharactersUsingExample2)

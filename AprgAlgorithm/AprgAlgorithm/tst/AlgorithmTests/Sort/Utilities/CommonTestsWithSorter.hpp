@@ -28,10 +28,20 @@ void testSortUsingEmptyExampleWithCharacters(Sorter const& sorter)
 }
 
 template <typename Sorter, typename Values>
-void testSortUsingExample1WithCharacters(Sorter const& sorter)
+void testSortUsingOneValueExampleWithCharacters(Sorter const& sorter)
 {
     Values valuesToTest{'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M', 'P', 'L', 'E'};
 
+    sorter.sort(valuesToTest);
+
+    Values valuesToExpect{'A', 'E', 'E', 'L', 'M', 'O', 'P', 'R', 'S', 'T', 'X'};
+    EXPECT_EQ(valuesToExpect, valuesToTest);
+}
+
+template <typename Sorter, typename Values>
+void testSortUsingExample1WithCharacters(Sorter const& sorter)
+{
+    Values valuesToTest{'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M', 'P', 'L', 'E'};
     sorter.sort(valuesToTest);
 
     Values valuesToExpect{'A', 'E', 'E', 'L', 'M', 'O', 'P', 'R', 'S', 'T', 'X'};

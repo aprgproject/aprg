@@ -33,10 +33,15 @@ TEST(CombSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample)
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
-TEST(CombSorterTest, SortWorksOnCharactersUsingExample1)
+TEST(CombSorterTest, SortWorksOnCharactersUsingOneValueExample)
 {
     CharactersSorter sorter;
-    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
+}
+
+TEST(CombSorterTest, SortWorksOnCharactersUsingExample1)
+{
+    CharactersSorter sorter;    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(CombSorterTest, SortWorksOnCharactersUsingExample2)

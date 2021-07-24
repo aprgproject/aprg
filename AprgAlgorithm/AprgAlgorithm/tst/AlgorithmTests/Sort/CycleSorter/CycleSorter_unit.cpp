@@ -33,10 +33,15 @@ TEST(CycleSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample)
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
-TEST(CycleSorterTest, SortWorksOnCharactersUsingExample1)
+TEST(CycleSorterTest, SortWorksOnCharactersUsingOneValueExample)
 {
     CharactersSorter sorter;
-    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
+}
+
+TEST(CycleSorterTest, SortWorksOnCharactersUsingExample1)
+{
+    CharactersSorter sorter;    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(CycleSorterTest, SortWorksOnCharactersUsingExample2)

@@ -47,10 +47,15 @@ TEST(CountingSorterUsingNewPositionsTest, SortWorksOnCharactersAndDoesNotCrashUs
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
-TEST(CountingSorterUsingNewPositionsTest, SortWorksOnCharactersUsingExample1)
+TEST(CountingSorterUsingNewPositionsTest, SortWorksOnCharactersUsingOneValueExample)
 {
     CharactersSorter sorter(characterToIndexableValueFunction);
-    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
+}
+
+TEST(CountingSorterUsingNewPositionsTest, SortWorksOnCharactersUsingExample1)
+{
+    CharactersSorter sorter(characterToIndexableValueFunction);    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(CountingSorterUsingNewPositionsTest, SortWorksOnCharactersUsingExample2)

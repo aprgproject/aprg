@@ -35,10 +35,15 @@ TEST(HeapSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample)
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
-TEST(HeapSorterTest, SortWorksOnCharactersUsingExample1)
+TEST(HeapSorterTest, SortWorksOnCharactersUsingOneValueExample)
 {
     CharactersSorter sorter;
-    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
+}
+
+TEST(HeapSorterTest, SortWorksOnCharactersUsingExample1)
+{
+    CharactersSorter sorter;    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(HeapSorterTest, SortWorksOnCharactersUsingExample2)

@@ -84,10 +84,15 @@ TEST(RadixSorterUsingCountingSorterTest, SortWorksOnCharactersAndDoesNotCrashUsi
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
-TEST(RadixSorterUsingCountingSorterTest, SortWorksOnCharactersUsingExample1)
+TEST(RadixSorterUsingCountingSorterTest, SortWorksOnCharactersUsingOneValueExample)
 {
     CharactersSorter sorter(getNumberOfNibblesForCharacter, getNibbleAtForCharacter);
-    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
+}
+
+TEST(RadixSorterUsingCountingSorterTest, SortWorksOnCharactersUsingExample1)
+{
+    CharactersSorter sorter(getNumberOfNibblesForCharacter, getNibbleAtForCharacter);    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(RadixSorterUsingCountingSorterTest, SortWorksOnCharactersUsingExample2)

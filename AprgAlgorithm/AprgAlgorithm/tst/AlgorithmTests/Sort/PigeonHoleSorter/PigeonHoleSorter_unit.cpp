@@ -37,10 +37,15 @@ TEST(PigeonHoleSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
-TEST(PigeonHoleSorterTest, SortWorksOnCharactersUsingExample1)
+TEST(PigeonHoleSorterTest, SortWorksOnCharactersUsingOneValueExample)
 {
     CharactersSorter sorter;
-    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
+}
+
+TEST(PigeonHoleSorterTest, SortWorksOnCharactersUsingExample1)
+{
+    CharactersSorter sorter;    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(PigeonHoleSorterTest, SortWorksOnCharactersUsingExample2)
@@ -71,11 +76,10 @@ TEST(PigeonHoleSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1
     testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(sorter);
 }
 
-TEST(PigeonHoleSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingOneCharacterExample)
+TEST(PigeonHoleSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingOneValueExample)
 {
     CharactersSorter sorter;
     Characters oneCharacter{'J'};
-
     sorter.sort(oneCharacter);
 
     Characters expectedOneCharacter{'J'};

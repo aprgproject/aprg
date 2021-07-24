@@ -59,10 +59,15 @@ TEST(LeastSignificantDigitSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingE
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
-TEST(LeastSignificantDigitSorterTest, SortWorksOnCharactersUsingExample1)
+TEST(LeastSignificantDigitSorterTest, SortWorksOnCharactersUsingOneValueExample)
 {
     CharactersSorter sorter(getNibbleAtForCharacter);
-    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    testSortUsingOneValueExampleWithCharacters<CharactersSorter, Characters>(sorter);
+}
+
+TEST(LeastSignificantDigitSorterTest, SortWorksOnCharactersUsingExample1)
+{
+    CharactersSorter sorter(getNibbleAtForCharacter);    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(LeastSignificantDigitSorterTest, SortWorksOnCharactersUsingExample2)
