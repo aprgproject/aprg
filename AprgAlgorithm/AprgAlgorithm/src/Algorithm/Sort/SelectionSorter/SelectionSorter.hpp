@@ -19,15 +19,19 @@ public:
 
     void sort(Values & valuesToSort) const override
     {
-        auto itEndMinus1 = valuesToSort.end();
-        itEndMinus1--;
-        for(auto itToSwap=valuesToSort.begin(); itToSwap!=itEndMinus1; itToSwap++)
+        if(!valuesToSort.empty())
         {
-            auto currentMinimumIt = std::min_element(itToSwap, valuesToSort.end());
-            std::swap(*itToSwap, *currentMinimumIt);
+            auto itEndMinus1 = valuesToSort.end();
+            itEndMinus1--;
+            for(auto itToSwap=valuesToSort.begin(); itToSwap!=itEndMinus1; itToSwap++)
+            {
+                auto currentMinimumIt = std::min_element(itToSwap, valuesToSort.end());
+                std::swap(*itToSwap, *currentMinimumIt);
+            }
         }
     }
 };
+
 }
 
 }

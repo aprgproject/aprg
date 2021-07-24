@@ -5,7 +5,8 @@
 #include <iterator>
 #include <utility>
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {
@@ -19,11 +20,14 @@ public:
 
     void sort(Values & valuesToSort) const override
     {
-        auto insertedIt=valuesToSort.begin();
-        insertedIt++;
-        for(; insertedIt!=valuesToSort.end(); insertedIt++)
+        if(!valuesToSort.empty())
         {
-            continuouslySwapDownIfStillOutOfOrder(valuesToSort, insertedIt);
+            auto insertedIt=valuesToSort.begin();
+            insertedIt++;
+            for(; insertedIt!=valuesToSort.end(); insertedIt++)
+            {
+                continuouslySwapDownIfStillOutOfOrder(valuesToSort, insertedIt);
+            }
         }
     }
 
@@ -39,6 +43,7 @@ private:
         }
     }
 };
+
 }
 
 }

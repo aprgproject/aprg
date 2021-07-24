@@ -45,6 +45,7 @@ public:
             }
         }
     }
+
 private:
     ValueToIndexableValueFunction m_valueToIndexableValueFunction;
     IndexableValueToValueFunction m_indexableValueToValueFunction;

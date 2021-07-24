@@ -8,6 +8,7 @@
 
 using namespace alba::algorithm::CommonTestsWithSorter;
 using namespace std;
+
 namespace alba
 {
 
@@ -28,6 +29,12 @@ using IntegersSorter = BubbleSorter<Integers>;
 using DoublesSorter = BubbleSorter<Doubles>;
 using StringsSorter = BubbleSorter<Strings>;
 using StabilityCheckObjectsSorter = BubbleSorter<StabilityCheckObjects>;
+}
+
+TEST(BubbleSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample)
+{
+    CharactersSorter sorter;
+    testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(BubbleSorterTest, SortWorksOnCharactersUsingExample1)
@@ -73,4 +80,5 @@ TEST(BubbleSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) //
 }
 
 }
+
 }
