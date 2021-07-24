@@ -45,7 +45,8 @@ TEST(BubbleSorterTest, SortWorksOnCharactersUsingOneValueExample)
 
 TEST(BubbleSorterTest, SortWorksOnCharactersUsingExample1)
 {
-    CharactersSorter sorter;    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    CharactersSorter sorter;
+    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(BubbleSorterTest, SortWorksOnCharactersUsingExample2)

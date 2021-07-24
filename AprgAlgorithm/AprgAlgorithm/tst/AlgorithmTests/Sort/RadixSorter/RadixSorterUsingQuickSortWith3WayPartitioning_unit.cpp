@@ -82,7 +82,8 @@ TEST(RadixSorterUsingQuickSortWith3WayPartitioningTest, SortWorksOnCharactersUsi
 
 TEST(RadixSorterUsingQuickSortWith3WayPartitioningTest, SortWorksOnCharactersUsingExample1)
 {
-    CharactersSorter sorter(getNibbleAtForCharacter, isNibbleDigitValidForCharacter);    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    CharactersSorter sorter(getNibbleAtForCharacter, isNibbleDigitValidForCharacter);
+    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(RadixSorterUsingQuickSortWith3WayPartitioningTest, SortWorksOnCharactersUsingExample2)

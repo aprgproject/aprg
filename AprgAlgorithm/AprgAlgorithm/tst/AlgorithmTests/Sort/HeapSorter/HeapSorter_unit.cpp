@@ -43,7 +43,8 @@ TEST(HeapSorterTest, SortWorksOnCharactersUsingOneValueExample)
 
 TEST(HeapSorterTest, SortWorksOnCharactersUsingExample1)
 {
-    CharactersSorter sorter;    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    CharactersSorter sorter;
+    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(HeapSorterTest, SortWorksOnCharactersUsingExample2)

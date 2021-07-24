@@ -73,7 +73,8 @@ TEST(CountingSorterUsingCountPerValueTest, SortWorksOnCharactersUsingOneValueExa
 
 TEST(CountingSorterUsingCountPerValueTest, SortWorksOnCharactersUsingExample1)
 {
-    CharactersSorter sorter(characterToIndexableValueFunction, indexableValueToCharacterFunction);    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    CharactersSorter sorter(characterToIndexableValueFunction, indexableValueToCharacterFunction);
+    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(CountingSorterUsingCountPerValueTest, SortWorksOnCharactersUsingExample2)

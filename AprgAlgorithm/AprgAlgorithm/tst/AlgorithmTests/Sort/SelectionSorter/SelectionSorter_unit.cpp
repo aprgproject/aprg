@@ -45,7 +45,8 @@ TEST(SelectionSorterTest, SortWorksOnCharactersUsingOneValueExample)
 
 TEST(SelectionSorterTest, SortWorksOnCharactersUsingExample1)
 {
-    CharactersSorter sorter;    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    CharactersSorter sorter;
+    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(SelectionSorterTest, SortWorksOnCharactersUsingExample2)

@@ -41,7 +41,8 @@ TEST(TopDownMergeSorterTest, SortWorksOnCharactersUsingOneValueExample)
 
 TEST(TopDownMergeSorterTest, SortWorksOnCharactersUsingExample1)
 {
-    CharactersSorter sorter;    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    CharactersSorter sorter;
+    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(TopDownMergeSorterTest, SortWorksOnCharactersUsingExample2)

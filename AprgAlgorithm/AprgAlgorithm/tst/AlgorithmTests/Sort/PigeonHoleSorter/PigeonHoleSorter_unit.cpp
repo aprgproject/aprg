@@ -45,7 +45,8 @@ TEST(PigeonHoleSorterTest, SortWorksOnCharactersUsingOneValueExample)
 
 TEST(PigeonHoleSorterTest, SortWorksOnCharactersUsingExample1)
 {
-    CharactersSorter sorter;    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    CharactersSorter sorter;
+    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(PigeonHoleSorterTest, SortWorksOnCharactersUsingExample2)
@@ -80,6 +81,7 @@ TEST(PigeonHoleSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingOneValueExam
 {
     CharactersSorter sorter;
     Characters oneCharacter{'J'};
+
     sorter.sort(oneCharacter);
 
     Characters expectedOneCharacter{'J'};

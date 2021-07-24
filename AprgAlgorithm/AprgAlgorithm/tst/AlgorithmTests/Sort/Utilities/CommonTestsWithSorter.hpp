@@ -20,21 +20,21 @@ namespace CommonTestsWithSorter
 template <typename Sorter, typename Values>
 void testSortUsingEmptyExampleWithCharacters(Sorter const& sorter)
 {
-    Values empty;
+    Values emptyContainer;
 
-    sorter.sort(empty);
+    sorter.sort(emptyContainer);
 
-    EXPECT_TRUE(empty.empty());
+    EXPECT_TRUE(emptyContainer.empty());
 }
 
 template <typename Sorter, typename Values>
 void testSortUsingOneValueExampleWithCharacters(Sorter const& sorter)
 {
-    Values valuesToTest{'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M', 'P', 'L', 'E'};
+    Values valuesToTest{'E'};
 
     sorter.sort(valuesToTest);
 
-    Values valuesToExpect{'A', 'E', 'E', 'L', 'M', 'O', 'P', 'R', 'S', 'T', 'X'};
+    Values valuesToExpect{'E'};
     EXPECT_EQ(valuesToExpect, valuesToTest);
 }
 
@@ -42,6 +42,7 @@ template <typename Sorter, typename Values>
 void testSortUsingExample1WithCharacters(Sorter const& sorter)
 {
     Values valuesToTest{'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M', 'P', 'L', 'E'};
+
     sorter.sort(valuesToTest);
 
     Values valuesToExpect{'A', 'E', 'E', 'L', 'M', 'O', 'P', 'R', 'S', 'T', 'X'};

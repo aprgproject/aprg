@@ -41,7 +41,8 @@ TEST(ShellSorterTest, SortWorksOnCharactersUsingOneValueExample)
 
 TEST(ShellSorterTest, SortWorksOnCharactersUsingExample1)
 {
-    CharactersSorter sorter;    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
+    CharactersSorter sorter;
+    testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
 TEST(ShellSorterTest, SortWorksOnCharactersUsingExample2)
