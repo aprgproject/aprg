@@ -187,7 +187,8 @@ private:
                 m_higherIndex += (m_higherIndex+1U<m_sortedValues.size()) ? 1U : 0U;
                 break;
             }
-        }    }
+        }
+    }
 
     void moveIndexesCloserWhenValueIsBeyondTheIndices(Value const& value)
     {

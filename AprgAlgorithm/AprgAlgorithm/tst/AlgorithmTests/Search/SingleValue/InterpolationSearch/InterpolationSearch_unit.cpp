@@ -40,7 +40,8 @@ TEST(InterpolationSearchTest, GetNearestValueWorksWhenThereAreMultipleValues)
 
 TEST(InterpolationSearchTest, GetNearestValueWorksWhenNearestValueIsLower)
 {
-    testGetNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();}
+    testGetNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
 
 TEST(InterpolationSearchTest, GetNearestValueWorksWhenNearestValueIsHigher)
 {
@@ -72,7 +73,8 @@ TEST(InterpolationSearchTest, GetIndexOfNearestValueWorksWhenThereAreMultipleVal
 
 TEST(InterpolationSearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsLower)
 {
-    testGetIndexOfNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();}
+    testGetIndexOfNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
 
 TEST(InterpolationSearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher)
 {

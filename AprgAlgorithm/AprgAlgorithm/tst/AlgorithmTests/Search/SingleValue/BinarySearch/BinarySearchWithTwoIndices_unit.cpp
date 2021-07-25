@@ -40,7 +40,8 @@ TEST(BinarySearchWithTwoIndicesTest, GetNearestValueWorksWhenThereAreMultipleVal
 
 TEST(BinarySearchWithTwoIndicesTest, GetNearestValueWorksWhenNearestValueIsLower)
 {
-    testGetNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();}
+    testGetNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
 
 TEST(BinarySearchWithTwoIndicesTest, GetNearestValueWorksWhenNearestValueIsHigher)
 {
@@ -72,7 +73,8 @@ TEST(BinarySearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhenThereAreMult
 
 TEST(BinarySearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhenNearestValueIsLower)
 {
-    testGetIndexOfNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();}
+    testGetIndexOfNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
 
 TEST(BinarySearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher)
 {

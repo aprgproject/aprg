@@ -40,7 +40,8 @@ TEST(LinearSearchWithOneIndexTest, GetNearestValueWorksWhenThereAreMultipleValue
 
 TEST(LinearSearchWithOneIndexTest, GetNearestValueWorksWhenNearestValueIsLower)
 {
-    testGetNearestValueWhenNearestValueIsLowerWithUnsortedUnsignedInts<SearchForTest, ValuesForTest>();}
+    testGetNearestValueWhenNearestValueIsLowerWithUnsortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
 
 TEST(LinearSearchWithOneIndexTest, GetNearestValueWorksWhenNearestValueIsHigher)
 {
@@ -72,7 +73,8 @@ TEST(LinearSearchWithOneIndexTest, GetIndexOfNearestValueWorksWhenThereAreMultip
 
 TEST(LinearSearchWithOneIndexTest, GetIndexOfNearestValueWorksWhenNearestValueIsLower)
 {
-    testGetIndexOfNearestValueWhenNearestValueIsLowerWithUnsortedUnsignedInts<SearchForTest, ValuesForTest>();}
+    testGetIndexOfNearestValueWhenNearestValueIsLowerWithUnsortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
 
 TEST(LinearSearchWithOneIndexTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher)
 {

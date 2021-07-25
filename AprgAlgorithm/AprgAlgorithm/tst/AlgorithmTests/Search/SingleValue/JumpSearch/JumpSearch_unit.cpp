@@ -40,7 +40,8 @@ TEST(JumpSearchTest, GetNearestValueWorksWhenThereAreMultipleValues)
 
 TEST(JumpSearchTest, GetNearestValueWorksWhenNearestValueIsLower)
 {
-    testGetNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();}
+    testGetNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
 
 TEST(JumpSearchTest, GetNearestValueWorksWhenNearestValueIsHigher)
 {
@@ -72,7 +73,8 @@ TEST(JumpSearchTest, GetIndexOfNearestValueWorksWhenThereAreMultipleValues)
 
 TEST(JumpSearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsLower)
 {
-    testGetIndexOfNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();}
+    testGetIndexOfNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
 
 TEST(JumpSearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher)
 {

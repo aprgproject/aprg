@@ -40,7 +40,8 @@ TEST(ExponentialSearchTest, GetNearestValueWorksWhenThereAreMultipleValues)
 
 TEST(ExponentialSearchTest, GetNearestValueWorksWhenNearestValueIsLower)
 {
-    testGetNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();}
+    testGetNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
 
 TEST(ExponentialSearchTest, GetNearestValueWorksWhenNearestValueIsHigher)
 {
@@ -72,7 +73,8 @@ TEST(ExponentialSearchTest, GetIndexOfNearestValueWorksWhenThereAreMultipleValue
 
 TEST(ExponentialSearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsLower)
 {
-    testGetIndexOfNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();}
+    testGetIndexOfNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
 
 TEST(ExponentialSearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher)
 {

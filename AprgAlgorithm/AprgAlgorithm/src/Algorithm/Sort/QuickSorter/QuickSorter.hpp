@@ -44,7 +44,8 @@ private:
                 sort(valuesToSort, partitionIndex+1, highestIndex); // recursively sort/partition the high part without the partition index
             }
         }
-    }};
+    }
+};
 
 }
 

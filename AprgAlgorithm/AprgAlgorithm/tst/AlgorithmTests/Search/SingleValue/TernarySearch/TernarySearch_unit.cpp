@@ -40,7 +40,8 @@ TEST(TernarySearchTest, GetNearestValueWorksWhenThereAreMultipleValues)
 
 TEST(TernarySearchTest, GetNearestValueWorksWhenNearestValueIsLower)
 {
-    testGetNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();}
+    testGetNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
 
 TEST(TernarySearchTest, GetNearestValueWorksWhenNearestValueIsHigher)
 {
@@ -72,7 +73,8 @@ TEST(TernarySearchTest, GetIndexOfNearestValueWorksWhenThereAreMultipleValues)
 
 TEST(TernarySearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsLower)
 {
-    testGetIndexOfNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();}
+    testGetIndexOfNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
 
 TEST(TernarySearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher)
 {

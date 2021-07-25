@@ -47,6 +47,7 @@ void testGetNearestValueWithMultipleUnsortedUnsignedInts()
 {
     Values unsortedValues{43, 96, 53, 25, 95, 72, 6, 84, 14, 64, 33, 97, 51, 93, 13};
     Search search(unsortedValues);
+
     EXPECT_EQ(33U, search.getNearestValue(33));
 }
 
@@ -73,6 +74,7 @@ void testGetNearestValueWithMultipleSortedUnsignedInts()
 {
     Values sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
     Search search(sortedValues);
+
     EXPECT_EQ(33U, search.getNearestValue(33));
 }
 
@@ -122,6 +124,7 @@ void testGetIndexOfNearestValueWithMultipleUnsortedUnsignedInts()
 {
     Values unsortedValues{43, 96, 53, 25, 95, 72, 6, 84, 14, 64, 33, 97, 51, 93, 13};
     Search search(unsortedValues);
+
     EXPECT_EQ(10U, search.getIndexOfNearestValue(33));
 }
 
@@ -148,6 +151,7 @@ void testGetIndexOfNearestValueWithMultipleSortedUnsignedInts()
 {
     Values sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
     Search search(sortedValues);
+
     EXPECT_EQ(4U, search.getIndexOfNearestValue(33));
 }
 

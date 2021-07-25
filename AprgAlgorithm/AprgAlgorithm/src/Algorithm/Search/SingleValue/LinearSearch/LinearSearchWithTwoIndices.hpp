@@ -55,7 +55,8 @@ public:
                 itLower<=itHigher;
                 itLower++, itHigher--)
             {
-                Value valueAtLower = *itLower;                Value valueAtHigher = *itHigher;
+                Value valueAtLower = *itLower;
+                Value valueAtHigher = *itHigher;
                 if(valueAtLower == valueToCheck)
                 {
                     result = std::distance(m_values.cbegin(), itLower);
@@ -73,7 +74,8 @@ public:
                     if(deviationAtLower <= deviationAtHigher && minimumDeviation > deviationAtLower)
                     {
                         minimumDeviation = deviationAtLower;
-                        result = std::distance(m_values.cbegin(), itLower);                    }
+                        result = std::distance(m_values.cbegin(), itLower);
+                    }
                     else if(deviationAtLower > deviationAtHigher && minimumDeviation > deviationAtHigher)
                     {
                         minimumDeviation = deviationAtHigher;
