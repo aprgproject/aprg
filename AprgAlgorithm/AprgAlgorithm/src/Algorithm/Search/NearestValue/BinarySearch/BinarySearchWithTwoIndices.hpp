@@ -178,6 +178,7 @@ private:
             }
         }
     }
+
     void moveIndexesCloserWhenValueIsBeyondTheIndices(Value const& value)
     {
         if(m_sortedValues.at(m_lowerIndex) > value)

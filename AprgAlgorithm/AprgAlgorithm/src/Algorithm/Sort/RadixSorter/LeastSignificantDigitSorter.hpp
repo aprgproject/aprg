@@ -36,7 +36,8 @@ public:
             digitIndex--) // highest index so least signficant first
         {
             sortAtLeastSignificantDigit(valuesToSort, static_cast<unsigned int>(digitIndex));
-        }    }
+        }
+    }
 
     void sortAtLeastSignificantDigit(
             Values & valuesToSort,
@@ -92,6 +93,7 @@ private:
     GetNumberOfDigitsFunction m_getNumberOfDigitsFunction;
     GetDigitAtFunction m_getDigitAtFunction;
 };
+
 // Proposition: Key indexed counting uses ~11N+4R array accesses to sort N items whose keys are integers between 0 and R-1
 // Proposition: Key indexed counting uses extra space proportional to N+R.
 // This is stable
