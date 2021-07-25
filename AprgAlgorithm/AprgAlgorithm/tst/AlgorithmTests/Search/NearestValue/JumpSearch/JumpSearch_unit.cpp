@@ -15,11 +15,10 @@ namespace algorithm
 namespace
 {
 using ValuesForTest = vector<unsigned int>;
-using SearchForTest = JumpSearch<ValuesForTest>;
+using SearchForTest = JumpNearestValueSearch<ValuesForTest>;
 }
 
-TEST(JumpSearchTest, GetNearestValueWorksAndDoesNotCrashWhenEmpty)
-{
+TEST(JumpSearchTest, GetNearestValueWorksAndDoesNotCrashWhenEmpty){
     testGetNearestValueDoesNotCrashWithEmptyUnsignedInts<SearchForTest, ValuesForTest>();
 }
 

@@ -15,11 +15,10 @@ namespace algorithm
 namespace
 {
 using ValuesForTest = vector<unsigned int>;
-using SearchForTest = ExponentialSearch<ValuesForTest>;
+using SearchForTest = ExponentialNearestValueSearch<ValuesForTest>;
 }
 
-TEST(ExponentialSearchTest, GetNearestValueWorksAndDoesNotCrashWhenEmpty)
-{
+TEST(ExponentialSearchTest, GetNearestValueWorksAndDoesNotCrashWhenEmpty){
     testGetNearestValueDoesNotCrashWithEmptyUnsignedInts<SearchForTest, ValuesForTest>();
 }
 

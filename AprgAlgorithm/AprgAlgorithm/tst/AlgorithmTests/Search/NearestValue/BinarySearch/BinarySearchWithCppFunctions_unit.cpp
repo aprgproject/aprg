@@ -15,11 +15,10 @@ namespace algorithm
 namespace
 {
 using ValuesForTest = vector<unsigned int>;
-using SearchForTest = BinarySearchWithCppFunctions<ValuesForTest>;
+using SearchForTest = BinaryNearestValueSearchWithCppFunctions<ValuesForTest>;
 }
 
-TEST(BinarySearchWithCppFunctionsTest, GetNearestValueWorksAndDoesNotCrashWhenEmpty)
-{
+TEST(BinarySearchWithCppFunctionsTest, GetNearestValueWorksAndDoesNotCrashWhenEmpty){
     testGetNearestValueDoesNotCrashWithEmptyUnsignedInts<SearchForTest, ValuesForTest>();
 }
 

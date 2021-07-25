@@ -15,11 +15,10 @@ namespace algorithm
 namespace
 {
 using ValuesForTest = vector<unsigned int>;
-using SearchForTest = BinarySearchWithRecursion<ValuesForTest>;
+using SearchForTest = BinaryNearestValueSearchWithRecursion<ValuesForTest>;
 }
 
-TEST(BinarySearchWithRecursionTest, GetNearestValueWorksAndDoesNotCrashWhenEmpty)
-{
+TEST(BinarySearchWithRecursionTest, GetNearestValueWorksAndDoesNotCrashWhenEmpty){
     testGetNearestValueDoesNotCrashWithEmptyUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
