@@ -63,11 +63,10 @@ TEST(BinarySearchWithRecursionTest, GetIndexOfNearestValueWorksWhenThereAreDupli
     ValuesForTest duplicateValues{0, 0, 0, 0, 0};
     SearchForTest search(duplicateValues);
 
-    EXPECT_EQ(4U, search.getIndexOfNearestValue(33));
+    EXPECT_EQ(3U, search.getIndexOfNearestValue(33));
 }
 
-TEST(BinarySearchWithRecursionTest, GetIndexOfNearestValueWorksWhenThereAreMultipleValues)
-{
+TEST(BinarySearchWithRecursionTest, GetIndexOfNearestValueWorksWhenThereAreMultipleValues){
     testGetIndexOfNearestValueWithMultipleSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
@@ -86,11 +85,10 @@ TEST(BinarySearchWithRecursionTest, GetIndexOfNearestValueWorksWithIndexesWhenDi
     ValuesForTest sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
     SearchForTest search(sortedValues);
 
-    EXPECT_EQ(4U, search.getIndexOfNearestValue(5U, 6U, 33U));
+    EXPECT_EQ(5U, search.getIndexOfNearestValue(5U, 6U, 33U));
 }
 
-TEST(BinarySearchWithRecursionTest, GetIndexOfNearestValueWorksWithIndexesWhenDistanceFromLowerToHigherIsTwo)
-{
+TEST(BinarySearchWithRecursionTest, GetIndexOfNearestValueWorksWithIndexesWhenDistanceFromLowerToHigherIsTwo){
     ValuesForTest sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
     SearchForTest search(sortedValues);
 
