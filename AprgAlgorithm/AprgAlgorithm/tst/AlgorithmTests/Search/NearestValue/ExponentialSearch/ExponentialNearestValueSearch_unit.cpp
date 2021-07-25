@@ -1,4 +1,4 @@
-#include <Algorithm/Search/NearestValue/JumpSearch/JumpSearch.hpp>
+#include <Algorithm/Search/NearestValue/ExponentialSearch/ExponentialNearestValueSearch.hpp>
 #include <AlgorithmTests/Search/NearestValue/Utilities/CommonTestsWithNearestValueSearch.hpp>
 
 #include <gtest/gtest.h>
@@ -15,49 +15,50 @@ namespace algorithm
 namespace
 {
 using ValuesForTest = vector<unsigned int>;
-using SearchForTest = JumpNearestValueSearch<ValuesForTest>;
+using SearchForTest = ExponentialNearestValueSearch<ValuesForTest>;
 }
 
-TEST(JumpSearchTest, GetNearestValueWorksAndDoesNotCrashWhenEmpty){
+TEST(ExponentialNearestValueSearchTest, GetNearestValueWorksAndDoesNotCrashWhenEmpty)
+{
     testGetNearestValueDoesNotCrashWithEmptyUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-TEST(JumpSearchTest, GetNearestValueWorksWhenThereIsOneValue)
+TEST(ExponentialNearestValueSearchTest, GetNearestValueWorksWhenThereIsOneValue)
 {
     testGetNearestValueWithOneUnsignedInt<SearchForTest, ValuesForTest>();
 }
 
-TEST(JumpSearchTest, GetNearestValueWorksWhenThereAreDuplicateValues)
+TEST(ExponentialNearestValueSearchTest, GetNearestValueWorksWhenThereAreDuplicateValues)
 {
     testGetNearestValueWithDuplicateUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-TEST(JumpSearchTest, GetNearestValueWorksWhenThereAreMultipleValues)
+TEST(ExponentialNearestValueSearchTest, GetNearestValueWorksWhenThereAreMultipleValues)
 {
     testGetNearestValueWithMultipleSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-TEST(JumpSearchTest, GetNearestValueWorksWhenNearestValueIsLower)
+TEST(ExponentialNearestValueSearchTest, GetNearestValueWorksWhenNearestValueIsLower)
 {
     testGetNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-TEST(JumpSearchTest, GetNearestValueWorksWhenNearestValueIsHigher)
+TEST(ExponentialNearestValueSearchTest, GetNearestValueWorksWhenNearestValueIsHigher)
 {
     testGetNearestValueWhenNearestValueIsHigherWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-TEST(JumpSearchTest, GetIndexOfNearestValueWorksAndDoesNotCrashWhenEmpty)
+TEST(ExponentialNearestValueSearchTest, GetIndexOfNearestValueWorksAndDoesNotCrashWhenEmpty)
 {
     testGetIndexOfNearestValueDoesNotCrashWithEmptyUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-TEST(JumpSearchTest, GetIndexOfNearestValueWorksWhenThereIsOneValue)
+TEST(ExponentialNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereIsOneValue)
 {
     testGetIndexOfNearestValueWithOneUnsignedInt<SearchForTest, ValuesForTest>();
 }
 
-TEST(JumpSearchTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues)
+TEST(ExponentialNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues)
 {
     ValuesForTest duplicateValues{0, 0, 0, 0, 0};
     SearchForTest search(duplicateValues);
@@ -65,17 +66,17 @@ TEST(JumpSearchTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues)
     EXPECT_EQ(4U, search.getIndexOfNearestValue(33));
 }
 
-TEST(JumpSearchTest, GetIndexOfNearestValueWorksWhenThereAreMultipleValues)
+TEST(ExponentialNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereAreMultipleValues)
 {
     testGetIndexOfNearestValueWithMultipleSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-TEST(JumpSearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsLower)
+TEST(ExponentialNearestValueSearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsLower)
 {
     testGetIndexOfNearestValueWhenNearestValueIsLowerWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-TEST(JumpSearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher)
+TEST(ExponentialNearestValueSearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher)
 {
     testGetIndexOfNearestValueWhenNearestValueIsHigherWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
