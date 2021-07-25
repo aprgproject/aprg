@@ -26,10 +26,18 @@ TEST(MaximumUnsortedRangeTest, GetMaximumUnsortedRangeWorksOnEmpty)
     EXPECT_EQ(expectedIndexPair, query.getMaximumUnsortedRange(valuesForTest));
 }
 
+TEST(MaximumUnsortedRangeTest, GetMaximumUnsortedRangeWorksOnOneValue)
+{
+    ValuesForTest valuesForTest{10U};
+    QueryForTest query;
+
+    QueryForTest::IndexPair expectedIndexPair{QueryForTest::INVALID_INDEX, QueryForTest::INVALID_INDEX};
+    EXPECT_EQ(expectedIndexPair, query.getMaximumUnsortedRange(valuesForTest));
+}
+
 TEST(MaximumUnsortedRangeTest, GetMaximumUnsortedRangeWorksOnExample1)
 {
-    ValuesForTest valuesForTest{10U, 12U, 20U, 30U, 25U, 40U, 32U, 31U, 35U, 50U, 60U};
-    QueryForTest query;
+    ValuesForTest valuesForTest{10U, 12U, 20U, 30U, 25U, 40U, 32U, 31U, 35U, 50U, 60U};    QueryForTest query;
 
     QueryForTest::IndexPair expectedIndexPair{3U, 8U};
     EXPECT_EQ(expectedIndexPair, query.getMaximumUnsortedRange(valuesForTest));

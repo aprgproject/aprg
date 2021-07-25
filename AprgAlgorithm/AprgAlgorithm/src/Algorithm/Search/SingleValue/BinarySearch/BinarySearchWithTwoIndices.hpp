@@ -177,16 +177,17 @@ private:
 
             if(value < m_sortedValues.at(m_lowerIndex))
             {
-                m_higherIndex = m_lowerIndex--;
+                m_higherIndex = m_lowerIndex;
+                m_lowerIndex -= (m_lowerIndex>0U) ? 1U : 0U;
                 break;
             }
             else if(m_sortedValues.at(m_higherIndex) < value)
             {
-                m_lowerIndex = m_higherIndex++;
+                m_lowerIndex = m_higherIndex;
+                m_higherIndex += (m_higherIndex+1U<m_sortedValues.size()) ? 1U : 0U;
                 break;
             }
-        }
-    }
+        }    }
 
     void moveIndexesCloserWhenValueIsBeyondTheIndices(Value const& value)
     {

@@ -23,15 +23,24 @@ TEST(LinearSearchWithTwoIndicesTest, GetNearestValueWorksAndDoesNotCrashWhenEmpt
     testGetNearestValueDoesNotCrashWithEmptyUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-TEST(LinearSearchWithTwoIndicesTest, GetNearestValueWorks)
+TEST(LinearSearchWithTwoIndicesTest, GetNearestValueWorksWhenThereIsOneValue)
 {
-    testGetNearestValueWithUnsortedUnsignedInts<SearchForTest, ValuesForTest>();
+    testGetNearestValueWithOneUnsignedInt<SearchForTest, ValuesForTest>();
+}
+
+TEST(LinearSearchWithTwoIndicesTest, GetNearestValueWorksWhenThereAreDuplicateValues)
+{
+    testGetNearestValueWithDuplicateUnsignedInts<SearchForTest, ValuesForTest>();
+}
+
+TEST(LinearSearchWithTwoIndicesTest, GetNearestValueWorksWhenThereAreMultipleValues)
+{
+    testGetNearestValueWithMultipleUnsortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
 TEST(LinearSearchWithTwoIndicesTest, GetNearestValueWorksWhenNearestValueIsLower)
 {
-    testGetNearestValueWhenNearestValueIsLowerWithUnsortedUnsignedInts<SearchForTest, ValuesForTest>();
-}
+    testGetNearestValueWhenNearestValueIsLowerWithUnsortedUnsignedInts<SearchForTest, ValuesForTest>();}
 
 TEST(LinearSearchWithTwoIndicesTest, GetNearestValueWorksWhenNearestValueIsHigher)
 {
@@ -43,15 +52,27 @@ TEST(LinearSearchWithTwoIndicesTest, GetIndexOfNearestValueWorksAndDoesNotCrashW
     testGetIndexOfNearestValueDoesNotCrashWithEmptyUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-TEST(LinearSearchWithTwoIndicesTest, GetIndexOfNearestValueWorks)
+TEST(LinearSearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhenThereIsOneValue)
 {
-    testGetIndexOfNearestValueWithUnsortedUnsignedInts<SearchForTest, ValuesForTest>();
+    testGetIndexOfNearestValueWithOneUnsignedInt<SearchForTest, ValuesForTest>();
+}
+
+TEST(LinearSearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues)
+{
+    ValuesForTest duplicateValues{0, 0, 0, 0, 0};
+    SearchForTest search(duplicateValues);
+
+    EXPECT_EQ(0U, search.getIndexOfNearestValue(33));
+}
+
+TEST(LinearSearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhenThereAreMultipleValues)
+{
+    testGetIndexOfNearestValueWithMultipleUnsortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
 TEST(LinearSearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhenNearestValueIsLower)
 {
-    testGetIndexOfNearestValueWhenNearestValueIsLowerWithUnsortedUnsignedInts<SearchForTest, ValuesForTest>();
-}
+    testGetIndexOfNearestValueWhenNearestValueIsLowerWithUnsortedUnsignedInts<SearchForTest, ValuesForTest>();}
 
 TEST(LinearSearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher)
 {
