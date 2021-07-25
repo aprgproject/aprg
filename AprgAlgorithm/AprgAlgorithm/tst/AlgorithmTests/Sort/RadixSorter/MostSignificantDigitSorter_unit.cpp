@@ -30,20 +30,18 @@ CharactersSorter::GetDigitAtFunction getNibbleAtForCharacter = [](char const& va
 {
     return (value >> ((1U-mostSignificantDigitIndex)*4U)) & 0xFU;
 };
-CharactersSorter::IsDigitFunction isNibbleDigitInvalidForCharacter = [](char const&, unsigned int const digitIndex) -> unsigned int
+CharactersSorter::IsDigitFunction isNibbleDigitInvalidForCharacter = [](char const&, unsigned int const digitIndex) -> bool
 {
     return digitIndex >= 2U;
 };
-
 SmallIntegerSorter::GetDigitAtFunction getNibbleAtForSmallInteger = [](int const& value, unsigned int const mostSignificantDigitIndex) -> unsigned int
 {
     return ((value+10) >> ((7U-mostSignificantDigitIndex)*4U)) & 0xFU;
 };
-SmallIntegerSorter::IsDigitFunction isNibbleDigitInvalidForSmallInteger = [](int const&, unsigned int const digitIndex) -> unsigned int
+SmallIntegerSorter::IsDigitFunction isNibbleDigitInvalidForSmallInteger = [](int const&, unsigned int const digitIndex) -> bool
 {
     return digitIndex >= 8U;
 };
-
 StringsSorter::GetDigitAtFunction getCharacterAtForString = [](string const& value, unsigned int const mostSignificantDigitIndex) -> unsigned int
 {
     unsigned int digitValue{};
@@ -53,22 +51,20 @@ StringsSorter::GetDigitAtFunction getCharacterAtForString = [](string const& val
     }
     return digitValue;
 };
-StringsSorter::IsDigitFunction isDigitInvalidForString = [](string const& value, unsigned int const digitIndex) -> unsigned int
+StringsSorter::IsDigitFunction isDigitInvalidForString = [](string const& value, unsigned int const digitIndex) -> bool
 {
     return digitIndex >= value.length();
 };
-
 StabilityCheckObjectsSorter::GetDigitAtFunction getNibbleAtForStabilityCheckObject
 = [](StabilityCheckObject const& value, unsigned int const mostSignificantDigitIndex) -> unsigned int
 {
     return (value.getVisiblePart() >> ((1U-mostSignificantDigitIndex)*4U)) & 0xFU;
 };
 StabilityCheckObjectsSorter::IsDigitFunction isNibbleDigitInvalidForStabilityCheckObject
-= [](StabilityCheckObject const&, unsigned int const digitIndex) -> unsigned int
+= [](StabilityCheckObject const&, unsigned int const digitIndex) -> bool
 {
     return digitIndex >= 2U;
-};
-}
+};}
 
 TEST(MostSignificantDigitSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample)
 {

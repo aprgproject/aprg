@@ -12,17 +12,16 @@ namespace alba
 namespace algorithm
 {
 
-template <typename Values, unsigned int MAX_NUMBER_OF_VALUES>
+template <typename Values, unsigned int MAX_NUMBER_OF_DIGIT_VALUES>
 class MostSignificantDigitSorter : public BaseSorter<Values>
 {
 public:
     using Value = typename Values::value_type;
     using DigitValue = unsigned int; // this needs to be indexable
-    using ArrayOfCountPerDigitValue = std::array<unsigned int, MAX_NUMBER_OF_VALUES+2U>; // offset of two for cumulate and copying back
+    using ArrayOfCountPerDigitValue = std::array<unsigned int, MAX_NUMBER_OF_DIGIT_VALUES+2U>; // offset of two for cumulate and copying back
     using GetDigitAtFunction = std::function<DigitValue(Value const&, unsigned int const)>;
     using IsDigitFunction = std::function<bool(Value const&, unsigned int const)>;
     static constexpr unsigned int CUTOFF_TO_SMALLER_SORT=0; // switch to different sort when size is small
-
     MostSignificantDigitSorter() = delete;
     MostSignificantDigitSorter(
             GetDigitAtFunction const& getDigitAtFunction,
@@ -151,11 +150,10 @@ private:
             unsigned int const lowContainerIndex,
             unsigned int const digitIndex) const
     {
-        for(unsigned int i=0; i<MAX_NUMBER_OF_VALUES; i++)
+        for(unsigned int i=0; i<MAX_NUMBER_OF_DIGIT_VALUES; i++)
         {
             unsigned int newLowContainerIndex(lowContainerIndex+newIndexes.at(i));
-            unsigned int newHighContainerIndex(lowContainerIndex+newIndexes.at(i+1)-1U);
-            if(newLowContainerIndex < newHighContainerIndex)
+            unsigned int newHighContainerIndex(lowContainerIndex+newIndexes.at(i+1)-1U);            if(newLowContainerIndex < newHighContainerIndex)
             {
                 sortStartingAtMostSignificantDigitInternal(valuesToSort, newLowContainerIndex, newHighContainerIndex, digitIndex+1);
             }
