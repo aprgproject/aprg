@@ -3,7 +3,8 @@
 #include <Algorithm/Utilities/InvalidIndex.hpp>
 #include <Algorithm/Search/NearestValue/BinarySearch/BinaryNearestValueSearchWithTwoIndices.hpp>
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {
@@ -18,7 +19,8 @@ public:
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     FindKClosestElements(Values const& values) // values can be unsorted
-        : m_values(values)    {}
+        : m_values(values)
+    {}
 
     IndexPair getIndexPairClosestElements(
             unsigned int const numberOfClosestElements,

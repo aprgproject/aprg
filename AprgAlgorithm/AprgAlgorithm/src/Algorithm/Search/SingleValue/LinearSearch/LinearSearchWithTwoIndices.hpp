@@ -6,6 +6,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -18,7 +19,8 @@ public:
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     LinearSearchWithTwoIndices(Values const& values) // values can be unsorted
-        : m_values(values)    {}
+        : m_values(values)
+    {}
 
     Index getIndexOfValue(Value const& value) const
     {

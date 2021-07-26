@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -17,7 +18,8 @@ public:
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     LinearNearestValueSearchWithTwoIndices(Values const& values) // values can be unsorted
-        : m_startIndex(INVALID_INDEX)        , m_endIndex(INVALID_INDEX)
+        : m_startIndex(INVALID_INDEX)
+        , m_endIndex(INVALID_INDEX)
         , m_values(values)
     {
         setInitialIndexes();

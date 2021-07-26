@@ -3,7 +3,8 @@
 #include <Algorithm/Utilities/InvalidIndex.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {
@@ -17,7 +18,8 @@ public:
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     BinaryNearestValueSearchWithTwoIndices(Values const& sortedValues)
-        : m_lowerIndex(INVALID_INDEX)        , m_higherIndex(INVALID_INDEX)
+        : m_lowerIndex(INVALID_INDEX)
+        , m_higherIndex(INVALID_INDEX)
         , m_sortedValues(sortedValues)
     {
         setInitialIndexes();

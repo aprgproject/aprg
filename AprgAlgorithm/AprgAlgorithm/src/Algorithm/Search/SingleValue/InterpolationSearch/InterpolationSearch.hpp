@@ -3,7 +3,8 @@
 #include <Algorithm/Utilities/InvalidIndex.hpp>
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {
@@ -17,7 +18,8 @@ public:
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     InterpolationSearch(Values const& sortedValues)
-        : m_sortedValues(sortedValues)    {}
+        : m_sortedValues(sortedValues)
+    {}
 
     Index getIndexOfValue(Value const& value) const
     {

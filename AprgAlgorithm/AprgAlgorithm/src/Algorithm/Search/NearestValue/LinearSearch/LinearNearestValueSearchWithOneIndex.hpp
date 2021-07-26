@@ -4,6 +4,7 @@
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 
 #include <limits>
+
 namespace alba
 {
 
@@ -19,7 +20,8 @@ public:
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     LinearNearestValueSearchWithOneIndex(Values const& values) // values can be unsorted
-        : m_startIndex(INVALID_INDEX)        , m_endIndex(INVALID_INDEX)
+        : m_startIndex(INVALID_INDEX)
+        , m_endIndex(INVALID_INDEX)
         , m_values(values)
     {
         setInitialIndexes();

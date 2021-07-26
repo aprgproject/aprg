@@ -4,6 +4,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -16,7 +17,8 @@ public:
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     BinarySearchWithRecursion(Values const& sortedValues)
-        : m_sortedValues(sortedValues)    {}
+        : m_sortedValues(sortedValues)
+    {}
 
     Index getIndexOfValue(Value const& value) const
     {
