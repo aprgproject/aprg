@@ -1,9 +1,9 @@
 #pragma once
 
+#include <Algorithm/Utilities/InvalidIndex.hpp>
 #include <Common/Container/AlbaContainerHelper.hpp>
 
 #include <algorithm>
-
 namespace alba
 {
 
@@ -16,11 +16,10 @@ class BinarySearchWithCppFunctions
 public:
     using Index = unsigned int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = std::numeric_limits<Index>::max();
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     BinarySearchWithCppFunctions(Values const& sortedValues)
-        : m_sortedValues(sortedValues)
-    {}
+        : m_sortedValues(sortedValues)    {}
 
     Index getIndexOfValue(Value const& value) const
     {

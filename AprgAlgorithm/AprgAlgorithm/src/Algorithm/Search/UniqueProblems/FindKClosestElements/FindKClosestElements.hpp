@@ -1,9 +1,9 @@
 #pragma once
 
+#include <Algorithm/Utilities/InvalidIndex.hpp>
 #include <Algorithm/Search/NearestValue/BinarySearch/BinaryNearestValueSearchWithTwoIndices.hpp>
 
-namespace alba
-{
+namespace alba{
 
 namespace algorithm
 {
@@ -15,11 +15,10 @@ public:
     using Index = unsigned int;
     using Value = typename Values::value_type;
     using IndexPair = std::pair<Index, Index>;
-    static constexpr Index INVALID_INDEX = std::numeric_limits<Index>::max();
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     FindKClosestElements(Values const& values) // values can be unsorted
-        : m_values(values)
-    {}
+        : m_values(values)    {}
 
     IndexPair getIndexPairClosestElements(
             unsigned int const numberOfClosestElements,

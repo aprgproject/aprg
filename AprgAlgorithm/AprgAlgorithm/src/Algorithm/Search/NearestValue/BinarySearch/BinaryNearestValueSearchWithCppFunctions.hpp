@@ -1,8 +1,8 @@
 #pragma once
 
+#include <Algorithm/Utilities/InvalidIndex.hpp>
 #include <Common/Container/AlbaContainerHelper.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
-
 #include <algorithm>
 
 namespace alba
@@ -17,11 +17,10 @@ class BinaryNearestValueSearchWithCppFunctions
 public:
     using Index = unsigned int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = std::numeric_limits<Index>::max();
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     BinaryNearestValueSearchWithCppFunctions(Values const& sortedValues)
-        : m_sortedValues(sortedValues)
-    {}
+        : m_sortedValues(sortedValues)    {}
 
     Value getNearestValue(Value const& value) const
     {

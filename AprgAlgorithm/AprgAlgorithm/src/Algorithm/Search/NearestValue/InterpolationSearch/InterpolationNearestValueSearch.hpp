@@ -1,8 +1,8 @@
 #pragma once
 
+#include <Algorithm/Utilities/InvalidIndex.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
-
 namespace alba
 {
 
@@ -15,11 +15,10 @@ class InterpolationNearestValueSearch
 public:
     using Index = unsigned int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = std::numeric_limits<Index>::max();
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     InterpolationNearestValueSearch(Values const& sortedValues)
-        : m_lowerIndex(INVALID_INDEX)
-        , m_higherIndex(INVALID_INDEX)
+        : m_lowerIndex(INVALID_INDEX)        , m_higherIndex(INVALID_INDEX)
         , m_sortedValues(sortedValues)
     {
         setInitialIndexes();

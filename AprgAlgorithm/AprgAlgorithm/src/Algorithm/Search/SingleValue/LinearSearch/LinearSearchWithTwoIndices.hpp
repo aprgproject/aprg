@@ -1,11 +1,11 @@
 #pragma once
 
+#include <Algorithm/Utilities/InvalidIndex.hpp>
+
 #include <iterator>
-#include <limits>
 
 namespace alba
 {
-
 namespace algorithm
 {
 
@@ -15,11 +15,10 @@ class LinearSearchWithTwoIndices
 public:
     using Index = unsigned int;
     using Value = typename Values::value_type;
-    static constexpr Index INVALID_INDEX = std::numeric_limits<Index>::max();
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     LinearSearchWithTwoIndices(Values const& values) // values can be unsorted
-        : m_values(values)
-    {}
+        : m_values(values)    {}
 
     Index getIndexOfValue(Value const& value) const
     {
