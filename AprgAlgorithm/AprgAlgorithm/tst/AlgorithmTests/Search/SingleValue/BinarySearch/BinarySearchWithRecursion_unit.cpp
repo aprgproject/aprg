@@ -48,10 +48,19 @@ TEST(BinarySearchWithRecursionTest, GetIndexOfValueWorksWhenValueIsNotFoundAndWh
     testGetIndexOfValueWhenValueIsNotFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
+TEST(BinarySearchWithRecursionTest, GetIndexOfValueWorksWhenValueIsLessThanTheLowestValueAndWhenThereAreMultipleValues)
+{
+    testGetIndexOfValueWhenValueIsLessThanTheLowestValueWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
+
+TEST(BinarySearchWithRecursionTest, GetIndexOfValueWorksWhenValueIsLessThanTheHighestValueAndWhenThereAreMultipleValues)
+{
+    testGetIndexOfValueWhenValueIsGreaterThanTheHighestValueWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
+
 TEST(BinarySearchWithRecursionTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereAreMultipleValues)
 {
-    testGetIndexOfValueWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
-}
+    testGetIndexOfValueWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();}
 
 TEST(BinarySearchWithRecursionTest, GetIndexOfValueWithIndicesWorksWhenValueIsNotFoundAndWhenThereAreMultipleValues)
 {
