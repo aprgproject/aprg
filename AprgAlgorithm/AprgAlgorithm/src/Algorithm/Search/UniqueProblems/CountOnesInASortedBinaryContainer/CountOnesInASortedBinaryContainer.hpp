@@ -10,18 +10,18 @@ template <typename Values>
 class CountOnesInASortedBinaryContainer
 {
 public:
+    using Count = unsigned int;
     using Index = unsigned int;
     using Value = typename Values::value_type;
 
     CountOnesInASortedBinaryContainer() = default;
 
-    Index getNumberOfOnesInASortedBinaryContainer(Values const& sortedBinaryValues)
+    Count getNumberOfOnesInASortedBinaryContainer(Values const& sortedBinaryValues)
     {
-        Index result(0U);
+        Count result(0U);
         if(!sortedBinaryValues.empty())
         {
-            Index lowerIndex(0U), higherIndex(sortedBinaryValues.size()-1);
-            while(lowerIndex<higherIndex)
+            Index lowerIndex(0U), higherIndex(sortedBinaryValues.size()-1);            while(lowerIndex<higherIndex)
             {
                 Index middleIndex = (lowerIndex+higherIndex)/2;
                 if(sortedBinaryValues.at(middleIndex))
