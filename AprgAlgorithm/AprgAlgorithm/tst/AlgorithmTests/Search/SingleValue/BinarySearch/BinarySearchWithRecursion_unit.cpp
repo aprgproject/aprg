@@ -60,7 +60,8 @@ TEST(BinarySearchWithRecursionTest, GetIndexOfValueWorksWhenValueIsLessThanTheHi
 
 TEST(BinarySearchWithRecursionTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereAreMultipleValues)
 {
-    testGetIndexOfValueWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();}
+    testGetIndexOfValueWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
 
 TEST(BinarySearchWithRecursionTest, GetIndexOfValueWithIndicesWorksWhenValueIsNotFoundAndWhenThereAreMultipleValues)
 {

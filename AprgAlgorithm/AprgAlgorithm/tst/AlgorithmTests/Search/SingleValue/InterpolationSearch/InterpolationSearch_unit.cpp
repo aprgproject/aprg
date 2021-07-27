@@ -60,7 +60,8 @@ TEST(InterpolationSearchTest, GetIndexOfValueWorksWhenValueIsLessThanTheHighestV
 
 TEST(InterpolationSearchTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereAreMultipleValues)
 {
-    testGetIndexOfValueWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();}
+    testGetIndexOfValueWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
 
 TEST(InterpolationSearchTest, GetIndexOfValueWithIndicesWorksWhenValueIsNotFoundAndWhenThereAreMultipleValues)
 {

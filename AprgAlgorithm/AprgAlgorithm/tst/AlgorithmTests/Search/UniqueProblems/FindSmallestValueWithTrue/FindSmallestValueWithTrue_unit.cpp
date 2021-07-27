@@ -28,7 +28,8 @@ TEST(FindSmallestValueWithTrueTest, GetNearestValueWorksWhenItsAlwaysFalse)
 
 TEST(FindSmallestValueWithTrueTest, GetNearestValueWorksWhenThereAreMultipleValues)
 {
-    SearchForTest binarySearch([](ValueForTest const value)    {
+    SearchForTest binarySearch([](ValueForTest const value)
+    {
         return value>=111U;
     });
 

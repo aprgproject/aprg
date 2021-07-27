@@ -78,13 +78,15 @@ private:
         {
             Index lowerIndex=0, higherIndex=sumOfPairOfValues.size()-1;
             while(shouldContinue(lowerIndex, higherIndex))
-            {                Value currentSum(std::get<0>(sumOfPairOfValues.at(lowerIndex)) + std::get<0>(sumOfPairOfValues.at(higherIndex)));
+            {
+                Value currentSum(std::get<0>(sumOfPairOfValues.at(lowerIndex)) + std::get<0>(sumOfPairOfValues.at(higherIndex)));
                 if(currentSum==targetSum)
                 {
                     result = {sumOfPairOfValues.at(lowerIndex), sumOfPairOfValues.at(higherIndex)};
                     break;
                 }
-                else if(currentSum>targetSum)                {
+                else if(currentSum>targetSum)
+                {
                     higherIndex--;
                 }
                 else if(currentSum<targetSum)
@@ -95,6 +97,7 @@ private:
         }
         return result;
     }
+
     Values const& m_sortedValues;
 };
 

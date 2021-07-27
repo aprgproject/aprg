@@ -37,7 +37,8 @@ public:
         if(startIndex < m_sortedValues.size() && endIndex < m_sortedValues.size() && startIndex <= endIndex)
         {
             result = getIndexOfValueWithoutCheck(startIndex, endIndex, value);
-        }        return result;
+        }
+        return result;
     }
 
 private:
@@ -71,7 +72,8 @@ private:
                 else // valueAtInterpolatedIndex < targetValue
                 {
                     lowerIndex = interpolatedIndex+1;
-                }            }
+                }
+            }
         }
         return result;
     }

@@ -62,6 +62,7 @@ public:
         }
         return result;
     }
+
 private:
 
     BoolFunction const& m_boolFunction;

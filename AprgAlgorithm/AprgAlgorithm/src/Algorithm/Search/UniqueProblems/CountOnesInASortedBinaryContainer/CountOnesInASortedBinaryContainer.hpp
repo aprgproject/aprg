@@ -2,6 +2,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -15,7 +16,8 @@ public:
     CountOnesInASortedBinaryContainer() = default;
 
     Index getNumberOfOnesInASortedBinaryContainer(Values const& sortedBinaryValues)
-    {        Index result(0U);
+    {
+        Index result(0U);
         if(!sortedBinaryValues.empty())
         {
             Index lowerIndex(0U), higherIndex(sortedBinaryValues.size()-1);
@@ -62,6 +64,7 @@ public:
 };
 
 }
+
 }
 
 // Given a binary array sorted in non-increasing order, count the number of 1’s in it.
