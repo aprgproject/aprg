@@ -14,10 +14,8 @@ namespace
 {
 using ValuesForTest = vector<unsigned int>;
 using QueryForTest = FindAPairInAContainerWithSumClosestToAValue<ValuesForTest>;
-using ValueForTest = QueryForTest::Value;
 using ValuePairForTest = QueryForTest::ValuePair;
 }
-
 TEST(FindAPairInAContainerWithSumClosestToAValueTest, GetValuePairWithSumClosestToAValueWorksOnEmpty)
 {
     ValuesForTest valuesForTest;
