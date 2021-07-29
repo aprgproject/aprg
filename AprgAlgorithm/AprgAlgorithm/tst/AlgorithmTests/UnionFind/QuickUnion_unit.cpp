@@ -14,36 +14,39 @@ namespace algorithm
 
 namespace
 {
-using QuickUnionForTest = QuickUnion<unsigned int, 13>;
+using UnionFindForTest = QuickUnion<unsigned int, 13>;
 }
 
 TEST(QuickUnionTest, IsConnectedWorks)
 {
-    testIsConnectedWithUnsignedInt<QuickUnionForTest>();
+    UnionFindForTest unionFind;
+    testIsConnectedWithUnsignedInt<UnionFindForTest>(unionFind);
 }
 
 TEST(QuickUnionTest, ConnectWorks)
 {
-    testConnectWithUnsignedInt<QuickUnionForTest>();
+    UnionFindForTest unionFind;
+    testConnectWithUnsignedInt<UnionFindForTest>(unionFind);
 }
 
 TEST(QuickUnionTest, ConnectWorksWithExample1)
 {
-    testConnectUsingExample1WithUnsignedInt<QuickUnionForTest>();
+    UnionFindForTest unionFind;
+    testConnectUsingExample1WithUnsignedInt<UnionFindForTest>(unionFind);
 }
 
 TEST(QuickUnionTest, ConnectWorksWithExample2)
 {
-    testConnectUsingExample2WithUnsignedInt<QuickUnionForTest>();
+    UnionFindForTest unionFind;
+    testConnectUsingExample2WithUnsignedInt<UnionFindForTest>(unionFind);
 }
 
 TEST(QuickUnionTest, GetRootWorks)
 {
-    QuickUnionForTest unionFind;
+    UnionFindForTest unionFind;
     unionFind.connect(4, 3);
     unionFind.connect(3, 8);
-    unionFind.connect(6, 5);
-    unionFind.connect(9, 4);
+    unionFind.connect(6, 5);    unionFind.connect(9, 4);
     unionFind.connect(2, 1);
 
     EXPECT_EQ(0U, unionFind.getRoot(0));
@@ -58,19 +61,22 @@ TEST(QuickUnionTest, GetRootWorks)
     EXPECT_EQ(8U, unionFind.getRoot(9));
 }
 
-TEST(QuickUnionTest, GetNumberOfUnconnectedWorks)
+TEST(QuickUnionTest, GetRelativeRootArrayWorks)
 {
-    QuickUnionForTest unionFind;
-    EXPECT_EQ(13U, unionFind.getNumberOfUnconnected());
+    UnionFindForTest unionFind;
+
+    UnionFindForTest::RootArray expectedInitialRelativeRootArray{0U, 1U, 2U, 3U, 4U, 5U, 6U, 7U, 8U, 9U, 10U, 11U, 12U};
+    EXPECT_EQ(expectedInitialRelativeRootArray, unionFind.getRelativeRootArray());
 
     unionFind.connect(4, 3);
     unionFind.connect(3, 8);
     unionFind.connect(6, 5);
     unionFind.connect(9, 4);
     unionFind.connect(2, 1);
-    EXPECT_EQ(8U, unionFind.getNumberOfUnconnected());
+
+    UnionFindForTest::RootArray expectedRelativeRootArray{0U, 1U, 1U, 8U, 3U, 5U, 5U, 7U, 8U, 8U, 10U, 11U, 12U};
+    EXPECT_EQ(expectedRelativeRootArray, unionFind.getRelativeRootArray());
 }
 
 }
-
 }

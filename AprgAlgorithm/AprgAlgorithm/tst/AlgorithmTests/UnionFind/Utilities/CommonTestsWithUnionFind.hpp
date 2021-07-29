@@ -14,12 +14,10 @@ namespace CommonTestsWithUnionFind
 {
 
 template <typename UnionFind>
-void testIsConnectedWithUnsignedInt()
+void testIsConnectedWithUnsignedInt(UnionFind & unionFind)
 {
-    UnionFind unionFind;
     EXPECT_FALSE(unionFind.isConnected(1, 2));
     EXPECT_FALSE(unionFind.isConnected(3, 4));
-
     unionFind.connect(3, 4);
 
     EXPECT_FALSE(unionFind.isConnected(1, 2));
@@ -29,13 +27,11 @@ void testIsConnectedWithUnsignedInt()
 }
 
 template <typename UnionFind>
-void testConnectWithUnsignedInt()
+void testConnectWithUnsignedInt(UnionFind & unionFind)
 {
-    UnionFind unionFind;
     EXPECT_FALSE(unionFind.isConnected(3, 4));
     EXPECT_FALSE(unionFind.isConnected(4, 3));
-    EXPECT_FALSE(unionFind.isConnected(3, 5));
-    EXPECT_FALSE(unionFind.isConnected(5, 3));
+    EXPECT_FALSE(unionFind.isConnected(3, 5));    EXPECT_FALSE(unionFind.isConnected(5, 3));
     EXPECT_FALSE(unionFind.isConnected(4, 5));
     EXPECT_FALSE(unionFind.isConnected(5, 4));
 
@@ -51,13 +47,11 @@ void testConnectWithUnsignedInt()
 }
 
 template <typename UnionFind>
-void testConnectUsingExample1WithUnsignedInt()
+void testConnectUsingExample1WithUnsignedInt(UnionFind & unionFind)
 {
-    UnionFind unionFind;
     unionFind.connect(4, 3);
     unionFind.connect(3, 8);
-    unionFind.connect(6, 5);
-    unionFind.connect(9, 4);
+    unionFind.connect(6, 5);    unionFind.connect(9, 4);
     unionFind.connect(2, 1);
 
     EXPECT_TRUE(unionFind.isConnected(8,9));
@@ -72,13 +66,11 @@ void testConnectUsingExample1WithUnsignedInt()
 }
 
 template <typename UnionFind>
-void testConnectUsingExample2WithUnsignedInt()
+void testConnectUsingExample2WithUnsignedInt(UnionFind & unionFind)
 {
-    UnionFind unionFind;
     unionFind.connect(0, 1);
     unionFind.connect(0, 2);
-    unionFind.connect(0, 5);
-    unionFind.connect(0, 6);
+    unionFind.connect(0, 5);    unionFind.connect(0, 6);
     unionFind.connect(3, 4);
     unionFind.connect(3, 5);
     unionFind.connect(4, 5);

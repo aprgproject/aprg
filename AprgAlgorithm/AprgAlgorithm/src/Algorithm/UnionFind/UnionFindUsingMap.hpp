@@ -13,14 +13,12 @@ namespace algorithm
 template <typename Object>
 class UnionFindUsingMap : public BaseUnionFind<Object>
 {
-    using ConnectionMap = std::map<Object, Object>; // you are using map, so log N but this should to be near constant (boo!)
-
 public:
+    using ConnectionMap = std::map<Object, Object>; // you are using map, so log N but this should to be near constant (boo!)
 
     UnionFindUsingMap() = default;
 
-    bool isConnected(Object const& object1, Object const& object2) const override
-    {
+    bool isConnected(Object const& object1, Object const& object2) const override    {
         return getRoot(object1) == getRoot(object2);
     }
 
@@ -52,10 +50,14 @@ public:
         m_connectionMap[object2] = root;
     }
 
+    ConnectionMap const& getConnectionMap() const
+    {
+        return m_connectionMap;
+    }
+
 private:
     void initializeToConnectionMapIfNeeded(Object const& object)
-    {
-        m_connectionMap.emplace(object, object);
+    {        m_connectionMap.emplace(object, object);
     }
     ConnectionMap m_connectionMap;
 };
