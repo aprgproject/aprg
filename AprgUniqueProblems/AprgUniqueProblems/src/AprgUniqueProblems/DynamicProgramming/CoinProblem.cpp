@@ -70,10 +70,10 @@ CoinProblem::Coins CoinProblem::getFewestCoinsUsingLoops(Coin const total)
                 {
                     fewestCoinsForValue = m_fewestCoins.at(partialValue-availableCoin);
                     fewestCoinsForValue.emplace_back(availableCoin);
+                    // if only count is required, we can use a counter here here instead of list of coins(fewestCoinsForValue)
                 }
             }
-        }
-    }
+        }    }
     return m_fewestCoins.at(total);
 }
 
