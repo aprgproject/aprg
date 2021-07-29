@@ -158,7 +158,8 @@ NearestEqualCells::Coordinate NearestEqualCells::getCoordinateUsingBfs(
                 result = coordinate;
             }
         }
-    }    return result;
+    }
+    return result;
 }
 
 unsigned int NearestEqualCells::getDistance(Coordinate const& coordinate1, Coordinate const& coordinate2) const

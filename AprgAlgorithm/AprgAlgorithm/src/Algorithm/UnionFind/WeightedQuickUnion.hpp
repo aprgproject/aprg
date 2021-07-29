@@ -46,7 +46,8 @@ public:
     Object getRootWithPathCompressionOnePass(Object const& object) // no longer const
     {
         Object result(object);
-        while(result != m_relativeRoots.at(object))        {
+        while(result != m_relativeRoots.at(object))
+        {
             m_relativeRoots[object] = m_relativeRoots.at(m_relativeRoots.at(object)); // make every relative root point to its grandparent
             result = m_relativeRoots.at(object);
         }
@@ -56,7 +57,8 @@ public:
     Object getRootWithPathCompressionTwoPass(Object const& object) // no longer const
     {
         std::vector<Object> relativeRoots;
-        Object mainRoot(object);        Object currentRoot(m_relativeRoots.at(object));
+        Object mainRoot(object);
+        Object currentRoot(m_relativeRoots.at(object));
         while(mainRoot != currentRoot)
         {
             mainRoot = currentRoot;

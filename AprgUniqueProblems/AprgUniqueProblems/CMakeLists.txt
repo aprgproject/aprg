@@ -31,6 +31,7 @@ include_directories(${APRG_ALGORITHM_TEST_INCLUDE_DIRECTORIES})
 
 #Add files and directories
 include(${APRG_UNIQUE_PROBLEMS_DIR}/cmake/FilesAndDirectories.cmake)
+
 #Do final steps
 if (TEST_MODE)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")

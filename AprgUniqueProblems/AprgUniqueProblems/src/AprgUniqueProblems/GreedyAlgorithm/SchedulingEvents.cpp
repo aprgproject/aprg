@@ -46,6 +46,7 @@ SchedulingEvents::EventNames SchedulingEvents::getAsMuchEventsAsPossible() const
     }
     return result;
 }
+
 void SchedulingEvents::addEvent(string const& eventName, unsigned int const startTime, unsigned int const endTime)
 {
     m_events.emplace_back(Event{eventName, startTime, endTime});

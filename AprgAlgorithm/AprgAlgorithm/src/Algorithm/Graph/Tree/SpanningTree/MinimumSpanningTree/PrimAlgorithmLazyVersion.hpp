@@ -89,6 +89,7 @@ private:
     EdgeOrderedByWeightsPriorityQueue m_adjacentEdgesInOrder; // makes this lazy algorithm (find the nearest edge when needed)
 };
 
+
 // Algorithm in short terms: Add adjacent edges with current minimum weight in the tree.
 // Since its lazy, adjacent edges are added regardless of weight and are just checked when identifying the one with the minimum weight.
 
