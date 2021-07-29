@@ -86,9 +86,8 @@ private:
     Vertex m_startVertex;
     CheckableVerticesWithVertex m_processedVertices;
     Edges m_minimumSpanningTreeEdges;
-    EdgeOrderedByWeightsPriorityQueue m_adjacentEdgesInOrder; // makes this lazy algorithm (only find the nearest edge when needed)
+    EdgeOrderedByWeightsPriorityQueue m_adjacentEdgesInOrder; // makes this lazy algorithm (find the nearest edge when needed)
 };
-
 
 // Algorithm in short terms: Add adjacent edges with current minimum weight in the tree.
 // Since its lazy, adjacent edges are added regardless of weight and are just checked when identifying the one with the minimum weight.
@@ -109,9 +108,10 @@ private:
 // ---> Deleting the minimum in PQ = E(frequency) * log E(time per operation)
 // ---> Inserting in PQ = E(frequency) * log E(time per operation)
 
-// Other discussion:
+// Other discussions:
 // Difference between eager and lazy?
 // -> Lazy adds (edge) to search regardless of weight
+
 
 }
 
