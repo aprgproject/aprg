@@ -21,10 +21,9 @@ public:
         , b_unionFind(BaseClass::m_unionFind)
     {}
 
-    Index getPreviousFreeIndexAt(Index const index) const
+    Index getPreviousFreeIndexAt(Index const index)
     {
         // This has log(N) running time
-
         return BaseClass::getFreeIndexAt(index);
     }
 
