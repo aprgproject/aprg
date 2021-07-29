@@ -93,10 +93,19 @@ public:
         return m_sizesOfRoots;
     }
 
+    RootVector & getRelativeRootVectorReference()
+    {
+        return m_relativeRoots;
+    }
+
+    SizeVector & getSizesOfRootsVectorReference()
+    {
+        return m_sizesOfRoots;
+    }
+
 private:
 
-    void initialize(unsigned int const maximumSize) // runs in linear time
-    {
+    void initialize(unsigned int const maximumSize) // runs in linear time    {
         m_relativeRoots.reserve(maximumSize);
         for(unsigned int i=0; i<maximumSize; i++)
         {
