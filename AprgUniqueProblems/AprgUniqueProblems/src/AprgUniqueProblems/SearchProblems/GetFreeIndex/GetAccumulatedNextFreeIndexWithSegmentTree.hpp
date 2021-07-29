@@ -9,7 +9,7 @@ namespace algorithm
 {
 
 template <typename Indexes>
-class NextFreeIndexWithSegmentTree
+class GetAccumulatedNextFreeIndexWithSegmentTree
 {
 public:
 
@@ -17,7 +17,7 @@ public:
     using Utilities = SegmentTreeUtilities<Index>;
     using SegmentTree = RangeQueryWithStaticSegmentTree<Indexes>;
 
-    NextFreeIndexWithSegmentTree(Index const numberOfIndexes)
+    GetAccumulatedNextFreeIndexWithSegmentTree(Index const numberOfIndexes)
         : m_segmentTree(Indexes(numberOfIndexes, 1), std::plus<Index>())
         , m_startOfChildren(m_segmentTree.getStartOfChildren())
         , m_treeSums(m_segmentTree.getTreeValues())

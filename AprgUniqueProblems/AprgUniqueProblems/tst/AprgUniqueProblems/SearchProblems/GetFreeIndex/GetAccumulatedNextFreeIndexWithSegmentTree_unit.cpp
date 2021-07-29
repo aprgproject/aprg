@@ -1,4 +1,4 @@
-#include <AprgUniqueProblems/SearchProblems/NextFreeIndex/NextFreeIndexWithSegmentTree.hpp>
+#include <AprgUniqueProblems/SearchProblems/GetFreeIndex/GetAccumulatedNextFreeIndexWithSegmentTree.hpp>
 
 #include <gtest/gtest.h>
 
@@ -14,10 +14,10 @@ namespace
 {
 using IndexForTest = unsigned int;
 using IndexesForTest = vector<IndexForTest>;
-using QueryForTest = NextFreeIndexWithSegmentTree<IndexesForTest>;
+using QueryForTest = GetAccumulatedNextFreeIndexWithSegmentTree<IndexesForTest>;
 }
 
-TEST(NextFreeIndexWithSegmentTreeTest, GetNextFreeIndexAtWorksWithZeroSize)
+TEST(GetAccumulatedNextFreeIndexWithSegmentTreeTest, GetNextFreeIndexAtWorksWithZeroSize)
 {
     QueryForTest query(0U);
 
@@ -26,7 +26,7 @@ TEST(NextFreeIndexWithSegmentTreeTest, GetNextFreeIndexAtWorksWithZeroSize)
     EXPECT_EQ(0U, query.getNextFreeIndexAt(2U));
 }
 
-TEST(NextFreeIndexWithSegmentTreeTest, GetNextFreeIndexAtWorks)
+TEST(GetAccumulatedNextFreeIndexWithSegmentTreeTest, GetNextFreeIndexAtWorks)
 {
     QueryForTest query(28U);
 
@@ -41,7 +41,7 @@ TEST(NextFreeIndexWithSegmentTreeTest, GetNextFreeIndexAtWorks)
     EXPECT_EQ(0U, query.getNextFreeIndexAt(28U));
 }
 
-TEST(NextFreeIndexWithSegmentTreeTest, SetAsNotFreeWorks)
+TEST(GetAccumulatedNextFreeIndexWithSegmentTreeTest, SetAsNotFreeWorks)
 {
     QueryForTest query(28U);
 
@@ -58,7 +58,7 @@ TEST(NextFreeIndexWithSegmentTreeTest, SetAsNotFreeWorks)
     EXPECT_EQ(0U, query.getNextFreeIndexAt(28U));
 }
 
-TEST(NextFreeIndexWithSegmentTreeTest, SetAsFreeWorks)
+TEST(GetAccumulatedNextFreeIndexWithSegmentTreeTest, SetAsFreeWorks)
 {
     QueryForTest query(28U);
     query.setAsNotFree(15U);
