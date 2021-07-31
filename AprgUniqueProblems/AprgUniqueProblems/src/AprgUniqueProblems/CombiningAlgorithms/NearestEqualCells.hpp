@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Algorithm/Graph/PathSearch/BreadthFirstSearch/PathSearchUsingBfs.hpp>
+#include <Algorithm/Graph/PathSearch/BreadthFirstSearch/PathSearchUsingBfsWithDistanceCount.hpp>
 #include <Algorithm/Graph/UndirectedGraph/UndirectedGraphWithListOfEdges.hpp>
 #include <AprgUniqueProblems/Utilities/PrintUtilities.hpp>
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
-
 namespace alba
 {
 
@@ -23,10 +22,9 @@ public:
     using CoordinatePair = std::pair<Coordinate, Coordinate>;
     using Coordinates = std::vector<Coordinate>;
     using Graph = algorithm::UndirectedGraphWithListOfEdges<Coordinate>;
-    using Bfs = algorithm::PathSearchUsingBfs<Coordinate>;
+    using Bfs = algorithm::PathSearchUsingBfsWithDistanceCount<Coordinate>;
 
     NearestEqualCells(ValueMatrix const& valueMatrix);
-
     CoordinatePair getNearestEqualPair(Value const value) const;
     CoordinatePair getNearestEqualPairByCheckingAllPairs(Value const value) const;
     CoordinatePair getNearestEqualPairUsingBfs(Value const value) const;
