@@ -130,6 +130,7 @@ NearestEqualCells::Coordinate NearestEqualCells::getSecondCoordinateUsingBfs(
     Bfs bfs(m_coordinateGraph, {firstCoordinate});
     return getCoordinateUsingBfs(value, firstCoordinate, bfs);
 }
+
 NearestEqualCells::Coordinate NearestEqualCells::getCoordinateUsingBfs(
         Value const value,
         Coordinate const& firstCoordinate,
@@ -141,7 +142,8 @@ NearestEqualCells::Coordinate NearestEqualCells::getCoordinateUsingBfs(
     for(auto const& vertexDistancePair : bfs.getEndVertexToDistanceCountMap())
     {
         Coordinate const& coordinate(vertexDistancePair.first);
-        unsigned int distance(vertexDistancePair.second);        if(value == m_valueMatrix.getEntryConstReference(coordinate.first, coordinate.second)
+        unsigned int distance(vertexDistancePair.second);
+        if(value == m_valueMatrix.getEntryConstReference(coordinate.first, coordinate.second)
                 && firstCoordinate != coordinate)
         {
             if(isFirst)
