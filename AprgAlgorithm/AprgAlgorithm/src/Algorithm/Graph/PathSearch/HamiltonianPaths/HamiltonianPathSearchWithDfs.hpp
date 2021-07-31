@@ -3,11 +3,8 @@
 #include <Algorithm/Graph/BaseGraph.hpp>
 #include <Algorithm/Graph/Utilities/CheckableVertices.hpp>
 
-#include <map>
-
 namespace alba
 {
-
 namespace algorithm
 {
 

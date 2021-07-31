@@ -89,25 +89,9 @@ TEST(PathSearchUsingDfsTest, GetPreviousVertexWorksWithUndirectedGraph)
     EXPECT_EQ(0U, pathSearch.getPreviousVertex(6U));
 }
 
-TEST(PathSearchUsingDfsTest, GetDistanceToWorksWithUndirectedGraph)
-{
-    GraphForTest graph;
-    putConnectionsForTest(graph);
-    PathSearchForTest pathSearch(graph, 0U);
-
-    EXPECT_EQ(0U, pathSearch.getDistanceTo(0U));
-    EXPECT_EQ(1U, pathSearch.getDistanceTo(1U));
-    EXPECT_EQ(2U, pathSearch.getDistanceTo(2U));
-    EXPECT_EQ(3U, pathSearch.getDistanceTo(3U));
-    EXPECT_EQ(4U, pathSearch.getDistanceTo(4U));
-    EXPECT_EQ(4U, pathSearch.getDistanceTo(5U));
-    EXPECT_EQ(0U, pathSearch.getDistanceTo(6U));
-}
-
 TEST(PathSearchUsingDfsTest, ReinitializeStartingFromWorksWithUndirectedGraph)
 {
-    GraphForTest graph;
-    putConnectionsForTest(graph);
+    GraphForTest graph;    putConnectionsForTest(graph);
     PathSearchForTest pathSearch(graph, 0U);
 
     pathSearch.reinitializeStartingFrom({3U});
