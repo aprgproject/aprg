@@ -30,6 +30,7 @@ private:
     unsigned int getMaximumDeadline() const;
     Jobs m_jobs;
 };
+
 }
 
 // Given a set of n jobs where each job i has a deadline di >=1 and profit pi>=0.
@@ -81,3 +82,4 @@ private:
 // When we assign a time slot ‘t’ to a job, we do union of ‘t’ with ‘t-1’ in a way that ‘t-1’ becomes parent of ‘t’.
 // To do this we call union(t-1, t).
 // This means that all future queries for time slot t would now return the latest time slot available for set represented by t-1.
+
