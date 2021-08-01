@@ -2,9 +2,9 @@
 
 #include <Algorithm/Search/Common/DynamicSegmentTreeNode.hpp>
 #include <Algorithm/Search/Common/SegmentTreeUtilities.hpp>
+#include <Algorithm/Utilities/MidpointOfIndexes.hpp>
 
 #include <functional>
-
 namespace alba
 {
 
@@ -115,11 +115,10 @@ protected:
         }
         else
         {
-            Index baseMidPoint = (baseLeft+baseRight)/2;
+            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
             bool doesLeftPartIntersect = !(endInterval<baseLeft || baseMidPoint<startInterval);
             bool doesRightPartIntersect = !(endInterval<baseMidPoint+1 || baseRight<startInterval);
-            if(doesLeftPartIntersect && doesRightPartIntersect)
-            {
+            if(doesLeftPartIntersect && doesRightPartIntersect)            {
                 result = m_function(
                             getValueOnIntervalFromTopToBottom(startInterval, endInterval, nodePointer->leftChildPointer, baseLeft, baseMidPoint),
                             getValueOnIntervalFromTopToBottom(startInterval, endInterval, nodePointer->rightChildPointer, baseMidPoint+1, baseRight));
@@ -155,11 +154,10 @@ protected:
         }
         else
         {
-            Index baseMidPoint = (baseLeft+baseRight)/2;
+            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
             if(index <= baseMidPoint)
             {
-                setValueOnIndexFromTopToBottom(index, valueToSet, nodePointer->leftChildPointer, baseLeft, baseMidPoint);
-            }
+                setValueOnIndexFromTopToBottom(index, valueToSet, nodePointer->leftChildPointer, baseLeft, baseMidPoint);            }
             else
             {
                 setValueOnIndexFromTopToBottom(index, valueToSet, nodePointer->rightChildPointer, baseMidPoint+1, baseRight);

@@ -1,11 +1,12 @@
 #pragma once
 
-#include <Common/Container/AlbaOptional.hpp>
 #include <Algorithm/Search/RangeQuery/SegmentTree/RangeQueryWithStaticSegmentTree.hpp>
+#include <Algorithm/Utilities/MidpointOfIndexes.hpp>
+#include <Common/Container/AlbaOptional.hpp>
+#include <Common/Math/Helpers/ComputationHelpers.hpp>
 
 namespace alba
 {
-
 namespace algorithm
 {
 
@@ -76,11 +77,10 @@ private:
         }
         else
         {
-            Index baseMidPoint = (baseLeft+baseRight)/2;
+            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
             bool doesLeftPartIntersect = !(endInterval<baseLeft || baseMidPoint<startInterval);
             bool doesRightPartIntersect = !(endInterval<baseMidPoint+1 || baseRight<startInterval);
-            if(doesLeftPartIntersect && doesRightPartIntersect)
-            {
+            if(doesLeftPartIntersect && doesRightPartIntersect)            {
                 result = b_function(
                             getValueOnIntervalFromTopToBottom(startInterval, endInterval, Utilities::getLeftChild(currentChild), baseLeft, baseMidPoint),
                             getValueOnIntervalFromTopToBottom(startInterval, endInterval, Utilities::getRightChild(currentChild), baseMidPoint+1, baseRight));
@@ -121,11 +121,10 @@ private:
             Index intersectionRight = std::min(endInterval, baseRight);
             increment(b_treeValues[currentChild], startInterval, intersectionLeft, intersectionRight);
 
-            Index baseMidPoint = (baseLeft+baseRight)/2;
+            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
             bool doesLeftPartIntersect = !(endInterval<baseLeft || startInterval>baseMidPoint);
             bool doesRightPartIntersect = !(endInterval<baseMidPoint+1 || startInterval>baseRight);
-            if(doesLeftPartIntersect && doesRightPartIntersect)
-            {
+            if(doesLeftPartIntersect && doesRightPartIntersect)            {
                 increaseAtRangeFromTopToBottom(startInterval, endInterval, Utilities::getLeftChild(currentChild), baseLeft, baseMidPoint);
                 increaseAtRangeFromTopToBottom(startInterval, endInterval, Utilities::getRightChild(currentChild), baseMidPoint+1, baseRight);
             }
@@ -151,11 +150,10 @@ private:
             if(startIndexForPendingUpdate.hasContent())
             {
                 increment(b_treeValues[index], startIndexForPendingUpdate.get(), baseLeft, baseRight);
-                Index baseMidPoint = (baseLeft+baseRight)/2;
+                Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
                 incrementOrUpdateAtIndex(Utilities::getLeftChild(index), baseLeft, baseMidPoint, startIndexForPendingUpdate);
                 incrementOrUpdateAtIndex(Utilities::getRightChild(index), baseMidPoint+1, baseRight, startIndexForPendingUpdate);
-                startIndexForPendingUpdate.clear();
-            }
+                startIndexForPendingUpdate.clear();            }
         }
     }
 

@@ -1,10 +1,10 @@
 #pragma once
 
 #include <Algorithm/Sort/BaseSorter.hpp>
+#include <Algorithm/Utilities/MidpointOfIndexes.hpp>
 #include <Algorithm/Utilities/InvalidIndex.hpp>
 
 #include <utility>
-
 namespace alba
 {
 
@@ -52,11 +52,10 @@ private:
         unsigned int lowerIndex(lowestIndex), higherIndex(highestIndex);
         while(lowerIndex<=higherIndex)
         {
-            unsigned int middleIndex = (lowerIndex+higherIndex)/2;
+            unsigned int middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
             Value middleValue(valuesToSort.at(middleIndex));
             if(value < middleValue)
-            {
-                result = middleIndex;
+            {                result = middleIndex;
                 if(middleIndex > 0U)
                 {
                     higherIndex = middleIndex-1;

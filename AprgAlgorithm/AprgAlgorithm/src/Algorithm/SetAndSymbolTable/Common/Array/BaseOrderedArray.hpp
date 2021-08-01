@@ -1,9 +1,9 @@
 #pragma once
 
 #include <Algorithm/SetAndSymbolTable/SymbolTable/BaseSymbolTable.hpp>
+#include <Algorithm/Utilities/MidpointOfIndexes.hpp>
 
 #include <vector>
-
 namespace alba
 {
 
@@ -108,32 +108,31 @@ public:
     {
         // this is binary search
         unsigned int result(0);
-        int lowIndex=0, highIndex=keys.size()-1;
-        while(lowIndex <= highIndex)
+        int lowerIndex=0, higherIndex=keys.size()-1;
+        while(lowerIndex <= higherIndex)
         {
-            int midIndex=(lowIndex+highIndex)/2;
-            Key const& keyAtMidIndex(keys.at(midIndex));
-            if(key < keyAtMidIndex)
+            int middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
+            Key const& keyAtMiddleIndex(keys.at(middleIndex));
+            if(key < keyAtMiddleIndex)
             {
-                highIndex = midIndex-1;
+                higherIndex = middleIndex-1;
             }
-            else if(key > keyAtMidIndex)
+            else if(key > keyAtMiddleIndex)
             {
-                lowIndex = midIndex+1;
+                lowerIndex = middleIndex+1;
             }
             else
             {
-                result = static_cast<unsigned int>(midIndex);
+                result = static_cast<unsigned int>(middleIndex);
                 break;
             }
         }
         if(result == 0)
         {
-            result = static_cast<unsigned int>(lowIndex);
+            result = static_cast<unsigned int>(lowerIndex);
         }
         return result;
     }
-
     static Key selectAt(unsigned int const index, Keys const& keys)
     {
         Key result{};

@@ -1,9 +1,9 @@
 #pragma once
 
 #include <Algorithm/Search/Common/SegmentTreeUtilities.hpp>
+#include <Algorithm/Utilities/MidpointOfIndexes.hpp>
 
 #include <functional>
-
 namespace alba
 {
 
@@ -165,11 +165,10 @@ protected:
         }
         else
         {
-            Index baseMidPoint = (baseLeft+baseRight)/2;
+            Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
             bool doesLeftPartIntersect = !(endInterval<baseLeft || baseMidPoint<startInterval);
             bool doesRightPartIntersect = !(endInterval<baseMidPoint+1 || baseRight<startInterval);
-            if(doesLeftPartIntersect && doesRightPartIntersect)
-            {
+            if(doesLeftPartIntersect && doesRightPartIntersect)            {
                 result = m_function(
                             getValueOnIntervalFromTopToBottom(startInterval, endInterval, Utilities::getLeftChild(currentChild), baseLeft, baseMidPoint),
                             getValueOnIntervalFromTopToBottom(startInterval, endInterval, Utilities::getRightChild(currentChild), baseMidPoint+1, baseRight));

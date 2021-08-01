@@ -1,9 +1,9 @@
 #pragma once
 
+#include <Algorithm/Utilities/MidpointOfIndexes.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>
-
 namespace alba
 {
 
@@ -34,11 +34,10 @@ public:
         DataType low=0, high=getSize()-1;
         while(low <= high)
         {
-            DataType mid((low+high)/2);
+            DataType mid = getMidpointOfIndexes(low, high);
             if(key < m_suffixes.at(mid))
             {
-                high = mid-1;
-            }
+                high = mid-1;            }
             else if(key > m_suffixes.at(mid))
             {
                 low = mid+1;

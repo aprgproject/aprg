@@ -1,10 +1,10 @@
 #pragma once
 
 #include <Algorithm/Search/RangeQuery/SegmentTree/RangeQueryWithStaticSegmentTree.hpp>
+#include <Algorithm/Utilities/MidpointOfIndexes.hpp>
 
 namespace alba
 {
-
 namespace algorithm
 {
 
@@ -74,11 +74,10 @@ private:
             if(leftChild < m_treeSums.size())
             {
                 Index leftChildSum = m_treeSums.at(leftChild);
-                Index baseMidPoint = (baseLeft+baseRight)/2;
+                Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
                 if(index+1 <= leftChildSum)
                 {
-                    result = getNextFreeIndexAt(index, leftChild, baseLeft, baseMidPoint);
-                }
+                    result = getNextFreeIndexAt(index, leftChild, baseLeft, baseMidPoint);                }
                 else
                 {
                     result = getNextFreeIndexAt(index-leftChildSum, Utilities::getRightChild(currentChild), baseMidPoint+1, baseRight);
