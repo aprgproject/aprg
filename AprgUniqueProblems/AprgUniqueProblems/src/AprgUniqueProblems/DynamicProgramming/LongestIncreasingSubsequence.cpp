@@ -40,6 +40,7 @@ LongestIncreasingSubsequence::Length LongestIncreasingSubsequence::getLongestInc
 
 LongestIncreasingSubsequence::Sequence LongestIncreasingSubsequence::getLongestIncreasingSubsequence()
 {
+    // Quadratic time because of double loop
     Sequences savedSequences;
     LengthToIndexMap lengthToIndexMap;
     for (Length index=0; index<m_sequenceToCheck.size(); index++)
@@ -54,7 +55,7 @@ LongestIncreasingSubsequence::Sequence LongestIncreasingSubsequence::getLongestI
                 savedSequences.emplace_back(longestPartial);
                 lengthToIndexMap.emplace(it->first + 1U, index);
                 isLongestPartialFound = true;
-                break;
+                break; // even though there is break here, it does not guarantee this is only run once
             }
         }
         if(!isLongestPartialFound)
