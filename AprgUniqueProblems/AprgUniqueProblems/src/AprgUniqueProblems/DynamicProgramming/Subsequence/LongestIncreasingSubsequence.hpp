@@ -3,7 +3,8 @@
 #include <limits>
 #include <vector>
 
-namespace alba{
+namespace alba
+{
 
 class LongestIncreasingSubsequence
 {
@@ -16,6 +17,7 @@ public:
     static constexpr Value UNUSED_VALUE=std::numeric_limits<Value>::max();
 
     LongestIncreasingSubsequence(Sequence const& sequenceToCheck);
+
     Index getLongestIncreasingSubsequenceLength();
     Sequence getLongestIncreasingSubsequence();
 private:
