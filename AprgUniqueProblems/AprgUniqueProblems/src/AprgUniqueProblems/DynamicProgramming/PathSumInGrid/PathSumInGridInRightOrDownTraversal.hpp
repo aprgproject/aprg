@@ -2,10 +2,10 @@
 
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 
+#include <functional>
 #include <vector>
 
-namespace alba
-{
+namespace alba{
 
 class PathSumInGridInRightOrDownTraversal
 {
@@ -18,29 +18,41 @@ public:
     // -> Thus sum(n,n) tells us the maximum sum from the upper-left corner to the lower-right corner.
     // -> sum(y, x) = max(sum(y, x-1),sum(y-1, x)) + value[y][x]
 
+    enum class Type
+    {
+        MinimumSum,
+        MaximumSum
+    };
     using Index = unsigned int;
     using Value = unsigned int;
     using Grid = matrix::AlbaMatrix<Value>;
     using Path = std::vector<Value>;
+    using CompareFunction = std::function<bool(Value const&, Value const&)>;
+    using MinMaxFunction = std::function<Value(Value const&, Value const&)>;
+    static constexpr Value MIN_VALUE = std::numeric_limits<Value>::min();
+    static constexpr Value MAX_VALUE = std::numeric_limits<Value>::max();
     static constexpr Index UNUSED_INDEX = std::numeric_limits<Index>::max();
 
-    PathSumInGridInRightOrDownTraversal(Grid const& gridToCheck);
+    PathSumInGridInRightOrDownTraversal(Type const type, Grid const& gridToCheck);
 
-    Value getMaxPathSumUsingRecursion() const;
-    Value getMaxPathSumUsingTabularDP() const;
-    Value getMaxPathSumUsingMemoizationDP() const;
-    Path getMaxPathUsingTabularDP() const;
+    Value getBestPathSumUsingRecursion() const;
+    Value getBestPathSumUsingTabularDP() const;
+    Value getBestPathSumUsingMemoizationDP() const;
+    Path getBestPathUsingTabularDP() const;
 
 private:
-    Value getMaxPathSumUsingRecursion(Index const x, Index const y) const;
-    Value getMaxPathSumUsingRecursion(Grid & partialSumGrid, Index const x, Index const y) const;
+    Value getBestPathSumUsingRecursion(Index const x, Index const y) const;
+    Value getBestPathSumUsingRecursion(Grid & partialSumGrid, Index const x, Index const y) const;
     Grid getPartialSumGridUsingTabularDP() const;
-    Value getMaxPathSumUsingMemoizationDP(Grid & partialSumGrid, Index const x, Index const y) const;
+    Value getBestPathSumUsingMemoizationDP(Grid & partialSumGrid, Index const x, Index const y) const;
+    void initialize(Type const type);
     Grid m_gridToCheck;
+    CompareFunction m_compareFunction;
+    MinMaxFunction m_minMaxFunction;
+    Value m_defaultValue;
 };
 
 }
-
 // SIMILAR PROBLEM MIN COST WITH DIAGONAL:
 // Given a cost matrix cost[][] and a position (m, n) in cost[][],
 // write a function that returns cost of minimum cost path to reach (m, n) from (0, 0).
