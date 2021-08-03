@@ -1,10 +1,9 @@
 #pragma once
 
-#include <map>
+#include <limits>
 #include <vector>
 
-namespace alba
-{
+namespace alba{
 
 class LongestIncreasingSubsequence
 {
@@ -12,11 +11,11 @@ public:
     using Index = unsigned int;
     using Value = unsigned int;
     using Sequence = std::vector<Value>;
-    using IndexToIndexMap = std::multimap<Index, Index>;
+    using IndexToIndex = std::vector<Index>;
     using Sequences = std::vector<Sequence>;
+    static constexpr Value UNUSED_VALUE=std::numeric_limits<Value>::max();
 
     LongestIncreasingSubsequence(Sequence const& sequenceToCheck);
-
     Index getLongestIncreasingSubsequenceLength();
     Sequence getLongestIncreasingSubsequence();
 private:
