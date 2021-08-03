@@ -106,10 +106,10 @@ LevenshteinDistance::Index LevenshteinDistance::getLevenshteinDistanceUsingEffic
     return previous.at(basisString.length());
 }
 
-LevenshteinDistance::Index LevenshteinDistance::getLevenshteinDistanceUsingMemoization() const
+LevenshteinDistance::Index LevenshteinDistance::getLevenshteinDistanceUsingMemoizationDP() const
 {
     IndexGrid indexGrid(m_string1.length()+1, m_string2.length()+1, UNUSED_INDEX);
-    return getLevenshteinDistanceUsingMemoization(indexGrid, m_string1.length(), m_string2.length());
+    return getLevenshteinDistanceUsingMemoizationDP(indexGrid, m_string1.length(), m_string2.length());
 }
 
 LevenshteinDistance::Index LevenshteinDistance::getLevenshteinDistanceUsingRecursion(
@@ -137,7 +137,7 @@ LevenshteinDistance::Index LevenshteinDistance::getLevenshteinDistanceUsingRecur
     }
 }
 
-LevenshteinDistance::Index LevenshteinDistance::getLevenshteinDistanceUsingMemoization(
+LevenshteinDistance::Index LevenshteinDistance::getLevenshteinDistanceUsingMemoizationDP(
         IndexGrid & indexGrid,
         Index const index1,
         Index const index2) const

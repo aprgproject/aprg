@@ -7,7 +7,7 @@ using namespace std;
 namespace alba
 {
 
-TEST(FibonacciExampleTest, GetFibonacciUsingRecursionWorks)
+TEST(FibonacciExampleTest, DISABLED_GetFibonacciUsingRecursionWorks) // takes too long
 {
     FibonacciExample fibonacciExample;
 
