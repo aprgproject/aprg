@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -110,7 +111,8 @@ private:
             Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
             bool doesLeftPartIntersect = !(endInterval<baseLeft || baseMidPoint<startInterval);
             bool doesRightPartIntersect = !(endInterval<baseMidPoint+1 || baseRight<startInterval);
-            if(doesLeftPartIntersect && doesRightPartIntersect)            {
+            if(doesLeftPartIntersect && doesRightPartIntersect)
+            {
                 result = b_function(
                             getValueOnIntervalFromTopToBottom(startInterval, endInterval, Utilities::getLeftChild(currentChild), baseLeft, baseMidPoint),
                             getValueOnIntervalFromTopToBottom(startInterval, endInterval, Utilities::getRightChild(currentChild), baseMidPoint+1, baseRight));
@@ -167,7 +169,8 @@ private:
             Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
             bool doesLeftPartIntersect = !(endInterval<baseLeft || startInterval>baseMidPoint);
             bool doesRightPartIntersect = !(endInterval<baseMidPoint+1 || startInterval>baseRight);
-            if(doesLeftPartIntersect && doesRightPartIntersect)            {
+            if(doesLeftPartIntersect && doesRightPartIntersect)
+            {
                 increaseAtRangeFromTopToBottom(startInterval, endInterval, Utilities::getLeftChild(currentChild), baseLeft, baseMidPoint, incrementValue);
                 increaseAtRangeFromTopToBottom(startInterval, endInterval, Utilities::getRightChild(currentChild), baseMidPoint+1, baseRight, incrementValue);
             }

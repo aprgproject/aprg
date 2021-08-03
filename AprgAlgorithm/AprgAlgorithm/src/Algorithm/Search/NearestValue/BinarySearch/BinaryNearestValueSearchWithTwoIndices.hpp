@@ -3,6 +3,7 @@
 #include <Algorithm/Utilities/MidpointOfIndexes.hpp>
 #include <Algorithm/Utilities/InvalidIndex.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
+
 namespace alba
 {
 
@@ -43,6 +44,7 @@ public:
         }
         return result;
     }
+
     Index getIndexOfNearestValue(Value const& value)
     {
         Index result(INVALID_INDEX);
@@ -88,7 +90,8 @@ private:
 
     Index getIndexOfNearestValueInBetweenTwoIndices(Value const& value) const
     {
-        Value deviationFromLower(mathHelper::getPositiveDelta(value, m_sortedValues.at(m_lowerIndex)));        Value deviationFromHigher(mathHelper::getPositiveDelta(value, m_sortedValues.at(m_higherIndex)));
+        Value deviationFromLower(mathHelper::getPositiveDelta(value, m_sortedValues.at(m_lowerIndex)));
+        Value deviationFromHigher(mathHelper::getPositiveDelta(value, m_sortedValues.at(m_higherIndex)));
         return (deviationFromLower <= deviationFromHigher) ? m_lowerIndex : m_higherIndex;
     }
 
@@ -140,7 +143,8 @@ private:
             {
                 m_lowerIndex = middleIndex;
             }
-        }    }
+        }
+    }
 
     void moveIndexesCloserWhenValueIsBeyondTheIndices(Value const& value)
     {
@@ -151,7 +155,8 @@ private:
         else if(m_sortedValues.at(m_higherIndex) <= value)
         {
             m_lowerIndex=m_higherIndex;
-        }    }
+        }
+    }
 
     Index m_lowerIndex;
     Index m_higherIndex;

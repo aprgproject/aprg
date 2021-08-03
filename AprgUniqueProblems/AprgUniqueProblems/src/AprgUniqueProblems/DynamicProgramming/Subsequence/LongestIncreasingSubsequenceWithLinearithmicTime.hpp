@@ -3,7 +3,8 @@
 #include <limits>
 #include <vector>
 
-namespace alba{
+namespace alba
+{
 
 class LongestIncreasingSubsequenceWithLinearithmicTime
 {
@@ -21,6 +22,7 @@ public:
     Sequence getLongestIncreasingSubsequence() const;
 private:
     Sequence m_sequenceToCheck;
+
 };
 
 }

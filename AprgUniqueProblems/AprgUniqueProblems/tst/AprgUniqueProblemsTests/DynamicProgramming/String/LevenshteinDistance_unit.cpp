@@ -1,4 +1,4 @@
-#include <AprgUniqueProblems/DynamicProgramming/LevenshteinDistance.hpp>
+#include <AprgUniqueProblems/DynamicProgramming/String/LevenshteinDistance.hpp>
 
 #include <gtest/gtest.h>
 

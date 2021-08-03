@@ -4,6 +4,7 @@
 #include <Algorithm/Utilities/MidpointOfIndexes.hpp>
 
 #include <vector>
+
 namespace alba
 {
 
@@ -133,6 +134,7 @@ public:
         }
         return result;
     }
+
     static Key selectAt(unsigned int const index, Keys const& keys)
     {
         Key result{};

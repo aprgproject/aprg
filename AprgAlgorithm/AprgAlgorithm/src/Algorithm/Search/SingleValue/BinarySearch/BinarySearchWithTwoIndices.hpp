@@ -3,7 +3,8 @@
 #include <Algorithm/Utilities/MidpointOfIndexes.hpp>
 #include <Algorithm/Utilities/InvalidIndex.hpp>
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {
@@ -23,7 +24,8 @@ public:
     Index getIndexOfValue(Value const& value) const
     {
         Index result(INVALID_INDEX);
-        if(!m_sortedValues.empty())        {
+        if(!m_sortedValues.empty())
+        {
             result = getIndexOfValueWithoutCheck(0U, m_sortedValues.size()-1, value);
         }
         return result;
@@ -50,7 +52,8 @@ private:
             Index middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
             Value middleValue(m_sortedValues.at(middleIndex));
             if(value == middleValue)
-            {                result = middleIndex;
+            {
+                result = middleIndex;
                 break;
             }
             else if(value < middleValue)

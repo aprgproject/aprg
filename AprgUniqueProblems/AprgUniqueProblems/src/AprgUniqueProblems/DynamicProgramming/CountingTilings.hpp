@@ -30,6 +30,7 @@ public:
     using StringToNextIterationDetailsMap=std::map<std::string, NextIterationDetails>; // This also can be represented by vector using bitstrings
 
     CountingTilings(Count const numberOfColumns, Count const numberOfRows);
+
     Count getNumberOfSolutionsUsingDynamicProgramming();
     Count getNumberOfSolutionsUsingCompleteSearch();
 

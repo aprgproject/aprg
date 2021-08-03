@@ -1,4 +1,4 @@
-#include <AprgUniqueProblems/DynamicProgramming/StringConstruction.hpp>
+#include <AprgUniqueProblems/DynamicProgramming/String/StringConstruction.hpp>
 
 #include <gtest/gtest.h>
 

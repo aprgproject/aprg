@@ -15,7 +15,8 @@ LongestIncreasingSubsequence::Index LongestIncreasingSubsequence::getLongestIncr
     for (Index index=0; index<m_sequenceToCheck.size(); index++)
     {
         bool isLongestPartialFound(false);
-        for(auto itWithMaxLength = lengthToIndexMap.crbegin(); itWithMaxLength!=lengthToIndexMap.crend(); itWithMaxLength++)        {
+        for(auto itWithMaxLength = lengthToIndexMap.crbegin(); itWithMaxLength!=lengthToIndexMap.crend(); itWithMaxLength++)
+        {
             if(m_sequenceToCheck.at(itWithMaxLength->second) < m_sequenceToCheck.at(index))
             {
                 lengthToIndexMap.emplace(itWithMaxLength->first + 1U, index);
@@ -31,7 +32,8 @@ LongestIncreasingSubsequence::Index LongestIncreasingSubsequence::getLongestIncr
     Index result{};
     if(!lengthToIndexMap.empty())
     {
-        auto it = lengthToIndexMap.crbegin();        result = it->first;
+        auto it = lengthToIndexMap.crbegin();
+        result = it->first;
     }
     return result;
 }
@@ -44,7 +46,8 @@ LongestIncreasingSubsequence::Sequence LongestIncreasingSubsequence::getLongestI
     for (Index index=0; index<m_sequenceToCheck.size(); index++)
     {
         bool isLongestPartialFound(false);
-        for(auto it = lengthToIndexMap.crbegin(); it!=lengthToIndexMap.crend(); it++)        {
+        for(auto it = lengthToIndexMap.crbegin(); it!=lengthToIndexMap.crend(); it++)
+        {
             if(m_sequenceToCheck.at(it->second) < m_sequenceToCheck.at(index))
             {
                 Sequence longestPartial(savedSequences.at(it->second));

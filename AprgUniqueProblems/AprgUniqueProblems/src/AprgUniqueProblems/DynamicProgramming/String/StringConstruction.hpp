@@ -7,6 +7,7 @@
 
 namespace alba
 {
+
 class StringConstruction
 {
 public:
@@ -26,7 +27,8 @@ public:
     static constexpr HashValue UNUSED_VALUE=std::numeric_limits<unsigned int>::max();
 
     StringConstruction(
-            std::string const& stringToConstruct,            stringHelper::strings const& subStrings);
+            std::string const& stringToConstruct,
+            stringHelper::strings const& subStrings);
 
     unsigned int getCount();
     unsigned int getCountSquareRootAlgorithm();

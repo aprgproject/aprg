@@ -20,6 +20,7 @@ StringConstruction::StringConstruction(
 {
     initialize();
 }
+
 unsigned int StringConstruction::getCount()
 {
     unsigned int result(0);
@@ -96,7 +97,8 @@ unsigned int StringConstruction::count(unsigned int const prefixLength)
     // Let count(k) denote the number of ways to construct the prefix s[0...k] using the strings in D.
     // Now count(n-1) gives the answer to the problem, and we can solve the problem in O(n2) time using a trie structure.
 
-    unsigned int result(0U);    for(string const& subString : m_subStrings)
+    unsigned int result(0U);
+    for(string const& subString : m_subStrings)
     {
         unsigned int subStringLength = subString.length();
         if(subStringLength < prefixLength

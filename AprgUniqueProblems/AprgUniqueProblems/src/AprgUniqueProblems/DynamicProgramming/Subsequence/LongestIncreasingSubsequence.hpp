@@ -21,6 +21,7 @@ public:
     Sequence getLongestIncreasingSubsequence();
 private:
     Sequence m_sequenceToCheck;
+
 };
 
 }
