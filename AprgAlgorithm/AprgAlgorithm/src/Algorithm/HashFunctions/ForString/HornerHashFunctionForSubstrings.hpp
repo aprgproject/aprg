@@ -66,7 +66,8 @@ public:
                            - ((m_hParts.at(startIndex-1)*m_pParts.at(endIndex-startIndex+1)) % m_largeRandomPrime))
                         % m_largeRandomPrime;
             }
-            else            {
+            else
+            {
                 result = m_hParts.at(endIndex);
             }
         }
@@ -201,4 +202,5 @@ private:
 // that always generate collisions when constants of the form 2^x are used.
 
 }
+
 }

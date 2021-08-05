@@ -40,13 +40,15 @@ private:
         Iterator partitionItPlusOne = std::next(partitionIt, 1U);
         if(lowestIt!=partitionIt && lowestIt!=partitionItPlusOne) // size must be at least two
         {
-            sort(valuesToSort, lowestIt, partitionIt); // recursively sort/partition the low part without the partitionIt        }
+            sort(valuesToSort, lowestIt, partitionIt); // recursively sort/partition the low part without the partitionIt
+        }
         if(partitionIt!=highestItPlusOne && partitionItPlusOne!=highestItPlusOne) // size must be at least two
         {
             sort(valuesToSort, partitionItPlusOne, highestItPlusOne); // recursively sort/partition the high part without the partitionIt
         }
     }
 };
+
 }
 
 }
