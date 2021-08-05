@@ -5,7 +5,8 @@
 #include <functional>
 #include <vector>
 
-namespace alba{
+namespace alba
+{
 
 class PathSumInGridInRightOrDownTraversal
 {
@@ -29,9 +30,7 @@ public:
     using Path = std::vector<Value>;
     using CompareFunction = std::function<bool(Value const&, Value const&)>;
     using MinMaxFunction = std::function<Value(Value const&, Value const&)>;
-    static constexpr Value MIN_VALUE = std::numeric_limits<Value>::min();
-    static constexpr Value MAX_VALUE = std::numeric_limits<Value>::max();
-    static constexpr Index UNUSED_INDEX = std::numeric_limits<Index>::max();
+    static constexpr Index UNUSED_VALUE = std::numeric_limits<Index>::max();
 
     PathSumInGridInRightOrDownTraversal(Type const type, Grid const& gridToCheck);
 
@@ -49,10 +48,10 @@ private:
     Grid m_gridToCheck;
     CompareFunction m_compareFunction;
     MinMaxFunction m_minMaxFunction;
-    Value m_defaultValue;
 };
 
 }
+
 // SIMILAR PROBLEM MIN COST WITH DIAGONAL:
 // Given a cost matrix cost[][] and a position (m, n) in cost[][],
 // write a function that returns cost of minimum cost path to reach (m, n) from (0, 0).
