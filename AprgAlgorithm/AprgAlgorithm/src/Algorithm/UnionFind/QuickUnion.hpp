@@ -2,10 +2,8 @@
 
 #include <Algorithm/UnionFind/BaseUnionFind.hpp>
 
-#include <algorithm>
 #include <array>
 #include <numeric>
-
 namespace alba
 {
 
@@ -34,18 +32,17 @@ public:
         // worst case (tall tree) runs in linear time (too expensive it should take constant/logarithmic time)
         // this is a lazy approach (every getRoot() -> check relative roots until main root is found)
         // Continuously find relative root until main root is found (it needs to be equal to the previous root)
-        Object result(object);
-        Object currentRoot(m_relativeRoots.at(object));
-        while(result != currentRoot)
+        Object currentRoot(object);
+        Object nextRoot(m_relativeRoots.at(object));
+        while(currentRoot != nextRoot)
         {
-            result = currentRoot;
-            currentRoot = m_relativeRoots.at(result);
+            currentRoot = nextRoot;
+            nextRoot = m_relativeRoots.at(currentRoot);
         }
-        return result;
+        return currentRoot;
     }
 
-    void connect(Object const& object1, Object const& object2) override
-    {
+    void connect(Object const& object1, Object const& object2) override    {
         Object root1(getRoot(object1));
         Object root2(getRoot(object2));
         if(root1 != root2)

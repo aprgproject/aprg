@@ -4,21 +4,20 @@
 
 #include <vector>
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {
 
 template <typename Object>
-class WeightedQuickUnionWithVector : public BaseUnionFind<Object>
+class QuickUnionWithPathCompressionWithVector : public BaseUnionFind<Object>
 {
 public:
     using RootVector = std::vector<Object>;
-    using SizeVector = std::vector<unsigned int>;
 
-    WeightedQuickUnionWithVector(unsigned int const maximumSize)
+    QuickUnionWithPathCompressionWithVector(unsigned int const maximumSize)
         : m_relativeRoots()
-        , m_sizesOfRoots()
     {
         initialize(maximumSize);
     }
@@ -28,9 +27,11 @@ public:
         return getRoot(object1) == getRoot(object2);
     }
 
-    Object getRoot(Object const& object) const override // worst case runs in logarithmic time (base 2 log) -> acceptable
+    Object getRoot(Object const& object) const override
     {
-        // Continuously find relative root until its equal to the previous root
+        // worst case (tall tree) runs in linear time (too expensive it should take constant/logarithmic time)
+        // this is a lazy approach (every getRoot() -> check relative roots until main root is found)
+        // Continuously find relative root until main root is found (it needs to be equal to the previous root)
         Object currentRoot(object);
         Object nextRoot(m_relativeRoots.at(object));
         while(currentRoot != nextRoot)
@@ -39,16 +40,6 @@ public:
             nextRoot = m_relativeRoots.at(currentRoot);
         }
         return currentRoot;
-    }
-
-    Object getRootWithPathCompressionOnePass(Object const& object) // no longer const    {
-        Object result(object);
-        while(result != m_relativeRoots.at(object))
-        {
-            m_relativeRoots[object] = m_relativeRoots.at(m_relativeRoots.at(object)); // make every relative root point to its grandparent
-            result = m_relativeRoots.at(object);
-        }
-        return result;
     }
 
     Object getRootWithPathCompressionTwoPass(Object const& object) // no longer const
@@ -70,12 +61,13 @@ public:
         return currentRoot;
     }
 
-    void connect(Object const& object1, Object const& object2) override // worst case runs in logarithmic time because of getRoot() -> acceptable    {
-        Object root1(getRoot(object1));
-        Object root2(getRoot(object2));
+    void connect(Object const& object1, Object const& object2) override
+    {
+        Object root1(getRootWithPathCompressionTwoPass(object1));
+        Object root2(getRootWithPathCompressionTwoPass(object2));
         if(root1 != root2)
         {
-            connectRootsBasedOnSize(root2, root1);
+            m_relativeRoots[root1] = root2; // the relative root tree might take too tall (check weighted union find for implementation that consider sizes)
         }
     }
 
@@ -84,19 +76,9 @@ public:
         return m_relativeRoots;
     }
 
-    SizeVector const& getSizesOfRootsVector() const
-    {
-        return m_sizesOfRoots;
-    }
-
     RootVector & getRelativeRootVectorReference()
     {
         return m_relativeRoots;
-    }
-
-    SizeVector & getSizesOfRootsVectorReference()
-    {
-        return m_sizesOfRoots;
     }
 
 private:
@@ -109,27 +91,9 @@ private:
             m_relativeRoots.emplace_back(i);
         }
         m_relativeRoots.shrink_to_fit();
-
-        m_sizesOfRoots.resize(maximumSize, Object{1U});
-        m_sizesOfRoots.shrink_to_fit();
-    }
-
-    void connectRootsBasedOnSize(Object const root2, Object const root1)    {
-        // assign the root of the smaller root to the larger root (to make it flatter)
-        if(m_sizesOfRoots.at(root1) < m_sizesOfRoots.at(root2))
-        {
-            m_relativeRoots[root1] = root2;
-            m_sizesOfRoots[root2] += m_sizesOfRoots.at(root1);
-        }
-        else
-        {
-            m_relativeRoots[root2] = root1;
-            m_sizesOfRoots[root1] += m_sizesOfRoots.at(root2);
-        }
     }
 
     RootVector m_relativeRoots;
-    SizeVector m_sizesOfRoots;
 };
 
 }
