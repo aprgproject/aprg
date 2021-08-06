@@ -25,7 +25,8 @@ private:
     Index getLevenshteinDistanceUsingNaiveRecursion(Index const index1, Index const index2) const;
     Index getLevenshteinDistanceUsingMemoizationDP(IndexGrid & indexGrid, Index const index1, Index const index2) const;
     std::string m_string1;
-    std::string m_string2;};
+    std::string m_string2;
+};
 
 }
 // Note this ia dynamic programming solution

@@ -22,6 +22,7 @@ PathSumInGridInRightOrDownWithDiagonalTraversal::Value PathSumInGridInRightOrDow
     }
     return pathSum;
 }
+
 PathSumInGridInRightOrDownWithDiagonalTraversal::Value PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathSumUsingTabularDP() const
 {
     // Time Complexity of the DP implementation is O(mn) which is much better than Naive Recursive implementation.
@@ -95,7 +96,8 @@ PathSumInGridInRightOrDownWithDiagonalTraversal::Path PathSumInGridInRightOrDown
 PathSumInGridInRightOrDownWithDiagonalTraversal::Value PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathSumUsingNaiveRecursion(
         Index const x,
         Index const y) const
-{    // Naive recursion approach
+{
+    // Naive recursion approach
 
 
     Value result(m_gridToCheck.getEntry(x, y));
@@ -117,7 +119,8 @@ PathSumInGridInRightOrDownWithDiagonalTraversal::Value PathSumInGridInRightOrDow
                         getBestPathSumUsingNaiveRecursion(x-1, y-1));
         }
     }
-    return result;}
+    return result;
+}
 
 PathSumInGridInRightOrDownWithDiagonalTraversal::Grid PathSumInGridInRightOrDownWithDiagonalTraversal::getPartialSumGridUsingTabularDP() const
 {

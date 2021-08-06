@@ -33,7 +33,8 @@ unsigned int MinimumNumberOfPlatformsRequiredForARailwayStation::getMinimumNumbe
             minimumNumberOfPlatforms = std::max(minimumNumberOfPlatforms, numberOfWaitingTrains);
         }
         else if(EventType::DepartureFromThePlatform == event.eventType)
-        {            numberOfWaitingTrains--;
+        {
+            numberOfWaitingTrains--;
         }
     }
     return minimumNumberOfPlatforms;

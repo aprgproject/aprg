@@ -14,7 +14,8 @@ TEST(FibonacciExampleTest, DISABLED_GetFibonacciUsingNaiveRecursionWorks) // tak
     EXPECT_EQ(102334155U, fibonacciExample.getFibonacciUsingNaiveRecursion(40U));
 }
 
-TEST(FibonacciExampleTest, GetFibonacciUsingMemoizationWorks){
+TEST(FibonacciExampleTest, GetFibonacciUsingMemoizationWorks)
+{
     FibonacciExample fibonacciExample;
 
     EXPECT_EQ(102334155U, fibonacciExample.getFibonacciUsingMemoization(40U));
