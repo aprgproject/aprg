@@ -13,10 +13,9 @@ public:
 
     FibonacciExample();
 
-    Number getFibonacciUsingRecursion(Number const number) const;
+    Number getFibonacciUsingNaiveRecursion(Number const number) const;
     Number getFibonacciUsingMemoization(Number const number);
     Number getFibonacciUsingTabulation(Number const number);
-
 private:
     void initialize();
     void initializeForTabulation();

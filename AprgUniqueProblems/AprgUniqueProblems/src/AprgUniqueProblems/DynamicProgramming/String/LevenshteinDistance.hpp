@@ -17,16 +17,15 @@ public:
 
     LevenshteinDistance(std::string const& string1, std::string const& string2);
 
-    Index getLevenshteinDistanceUsingRecursion() const;
+    Index getLevenshteinDistanceUsingNaiveRecursion() const;
     Index getLevenshteinDistanceUsingTabularDP() const;
     Index getLevenshteinDistanceUsingEfficientSpaceDP() const;
     Index getLevenshteinDistanceUsingMemoizationDP() const;
 private:
-    Index getLevenshteinDistanceUsingRecursion(Index const index1, Index const index2) const;
+    Index getLevenshteinDistanceUsingNaiveRecursion(Index const index1, Index const index2) const;
     Index getLevenshteinDistanceUsingMemoizationDP(IndexGrid & indexGrid, Index const index1, Index const index2) const;
     std::string m_string1;
-    std::string m_string2;
-};
+    std::string m_string2;};
 
 }
 // Note this ia dynamic programming solution

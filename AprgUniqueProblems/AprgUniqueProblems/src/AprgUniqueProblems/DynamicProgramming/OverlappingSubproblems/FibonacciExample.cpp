@@ -13,18 +13,16 @@ FibonacciExample::FibonacciExample()
     initialize();
 }
 
-FibonacciExample::Number FibonacciExample::getFibonacciUsingRecursion(Number const number) const
+FibonacciExample::Number FibonacciExample::getFibonacciUsingNaiveRecursion(Number const number) const
 {
     if (number<=1)
-    {
-        return number;
+    {        return number;
     }
     else
     {
-        return getFibonacciUsingRecursion(number-1) + getFibonacciUsingRecursion(number-2);
+        return getFibonacciUsingNaiveRecursion(number-1) + getFibonacciUsingNaiveRecursion(number-2);
     }
 }
-
 FibonacciExample::Number FibonacciExample::getFibonacciUsingMemoization(Number const number)
 {
     // a) Memoization (Top Down):

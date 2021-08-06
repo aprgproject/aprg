@@ -13,18 +13,15 @@ PathSumInGridInRightOrDownTraversal::PathSumInGridInRightOrDownTraversal(
     initialize(type);
 }
 
-PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::getBestPathSumUsingRecursion() const
+PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::getBestPathSumUsingNaiveRecursion() const
 {
-    // Naive recursion approach
-
     Value pathSum(0);
     if(!m_gridToCheck.isEmpty())
     {
-        pathSum = getBestPathSumUsingRecursion(m_gridToCheck.getNumberOfColumns()-1, m_gridToCheck.getNumberOfRows()-1);
+        pathSum = getBestPathSumUsingNaiveRecursion(m_gridToCheck.getNumberOfColumns()-1, m_gridToCheck.getNumberOfRows()-1);
     }
     return pathSum;
 }
-
 PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::getBestPathSumUsingTabularDP() const
 {
     // Time Complexity of the DP implementation is O(mn) which is much better than Naive Recursive implementation.
@@ -85,11 +82,10 @@ PathSumInGridInRightOrDownTraversal::Path PathSumInGridInRightOrDownTraversal::g
     return path;
 }
 
-PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::getBestPathSumUsingRecursion(
+PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::getBestPathSumUsingNaiveRecursion(
         Index const x,
         Index const y) const
-{
-    // Naive recursion approach
+{    // Naive recursion approach
 
 
     Value result(m_gridToCheck.getEntry(x, y));
@@ -97,19 +93,18 @@ PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::
     {
         if(x==0)
         {
-            result += getBestPathSumUsingRecursion(x, y-1);
+            result += getBestPathSumUsingNaiveRecursion(x, y-1);
         }
         else if(y==0)
         {
-            result += getBestPathSumUsingRecursion(x-1, y);
+            result += getBestPathSumUsingNaiveRecursion(x-1, y);
         }
         else
         {
-            result += m_minMaxFunction(getBestPathSumUsingRecursion(x-1, y), getBestPathSumUsingRecursion(x, y-1));
+            result += m_minMaxFunction(getBestPathSumUsingNaiveRecursion(x-1, y), getBestPathSumUsingNaiveRecursion(x, y-1));
         }
     }
-    return result;
-}
+    return result;}
 
 PathSumInGridInRightOrDownTraversal::Grid PathSumInGridInRightOrDownTraversal::getPartialSumGridUsingTabularDP() const
 {
