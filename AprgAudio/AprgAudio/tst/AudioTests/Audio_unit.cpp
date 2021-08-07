@@ -13,10 +13,10 @@
 #include <AudioTests/ExpectedValues/wav_stereo_24bit_48000.hpp>
 #include <AudioTests/ExpectedValues/wav_stereo_8bit_44100.hpp>
 #include <AudioTests/ExpectedValues/wav_stereo_8bit_48000.hpp>
-#include <Common/Math/AlbaMathHelper.hpp>
+#include <Common/Math/Helpers/ConstantHelpers.hpp>
+#include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
 #include <gtest/gtest.h>
-
 #include <cmath>
 
 using namespace alba::mathHelper;
