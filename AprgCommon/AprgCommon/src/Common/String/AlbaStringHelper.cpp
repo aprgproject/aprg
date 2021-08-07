@@ -59,7 +59,8 @@ unsigned int getLevenshteinDistance(string const& otherString, string const& bas
     return previous.at(basisString.size());
 }
 
-unsigned int getHammingDistance(string const& string1, string const& string2){
+unsigned int getHammingDistance(string const& string1, string const& string2)
+{
     // The Hamming distance hamming(a,b) between two strings a and b of equal length is the number of positions where the strings differ.
     unsigned int result(0);
     unsigned int commonLength = min(string1.length(), string2.length());
@@ -211,7 +212,8 @@ bool isSuffix(string const& mainString, string const& suffix)
     for(int i = static_cast<int>(mainString.length()) - 1; i>=0 && j>=0; i--, j--)
     {
         if(mainString.at(i) != suffix.at(j))
-        {            break;
+        {
+            break;
         }
     }
     return j == -1;
