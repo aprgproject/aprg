@@ -6,20 +6,19 @@
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
-#include <Geometry/TwoDimensions/TwoDimensionsHelper.hpp>
+#include <Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.hpp>
 
 #include <algorithm>
 #include <cmath>
-
 using namespace std;
 
 using namespace alba::algebra;
 using namespace alba::AprgBitmap;
 using namespace alba::TwoDimensions;
+using namespace alba::TwoDimensions::twoDimensionsUtilities;
 
 namespace alba
 {
-
 AprgGraph::AprgGraph(string const& bitmapPath, BitmapXY const& originInBitmap, BitmapDoubleXY const& magnification)
     : m_bitmap(bitmapPath)
     , m_bitmapSnippet(m_bitmap.getSnippetReadFromFileWholeBitmap())
@@ -320,11 +319,10 @@ void AprgGraph::drawConnectedBitmapPointsIfPossible(
         Points const& bitmapPoints,
         unsigned int const color)
 {
-    Points connectedBitmapPoints(twoDimensionsHelper::getConnectedPointsUsingALine(bitmapPoints, 1));
+    Points connectedBitmapPoints(getConnectedPointsUsingALine(bitmapPoints, 1));
     for(Point const& connectedBitmapPoint : connectedBitmapPoints)
     {
-        drawBitmapPointIfPossible(connectedBitmapPoint, color);
-    }
+        drawBitmapPointIfPossible(connectedBitmapPoint, color);    }
 }
 
 
