@@ -5,12 +5,11 @@
 #include <Common/Container/AlbaValueRange.hpp>
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
-#include <Geometry/TwoDimensions/Line.hpp>
-#include <Geometry/TwoDimensions/Point.hpp>
+#include <Geometry/TwoDimensions/Constructs/Line.hpp>
+#include <Geometry/TwoDimensions/Constructs/Point.hpp>
 #include <InputConfiguration.hpp>
 #include <SoosaConfiguration.hpp>
-#include <Statistics/DataCollection.hpp>
-#include <Statistics/KMeansClustering.hpp>
+#include <Statistics/DataCollection.hpp>#include <Statistics/KMeansClustering.hpp>
 #include <Statistics/TwoDimensionsStatistics.hpp>
 
 #include <array>
