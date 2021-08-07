@@ -140,10 +140,14 @@ public:
         return self;
     }
 
+    bool isEmpty() const
+    {
+        return m_matrixData.empty();
+    }
+
     bool isInside(unsigned int const x, unsigned int const y) const
     {
-        return (x < m_numberOfColumns) && (y < m_numberOfRows);
-    }
+        return (x < m_numberOfColumns) && (y < m_numberOfRows);    }
 
     unsigned int getNumberOfColumns() const
     {
