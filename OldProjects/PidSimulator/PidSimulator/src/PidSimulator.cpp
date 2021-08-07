@@ -1,10 +1,9 @@
 #include "PidSimulator.hpp"
 
 #include <Bitmap/Bitmap.hpp>
-#include <Common/Math/AlbaMathHelper.hpp>
+#include <Common/Math/Helpers/ConstantHelpers.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Graph/AprgGraph.hpp>
-
 #include <algorithm>
 #include <cmath>
 #include <iostream>

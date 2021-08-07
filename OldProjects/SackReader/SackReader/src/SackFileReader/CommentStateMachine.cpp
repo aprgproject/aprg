@@ -1,11 +1,9 @@
 #include "CommentStateMachine.hpp"
 
 using namespace std;
-using namespace std::placeholders;
 
 namespace alba
 {
-
 namespace CommentStateMachineNamespace
 {
 
