@@ -12,7 +12,8 @@ Constant::Constant()
     : m_booleanValue{}
 {}
 
-Constant::Constant(bool const boolValue)    : m_booleanValue(boolValue)
+Constant::Constant(bool const boolValue)
+    : m_booleanValue(boolValue)
 {}
 
 bool Constant::operator==(Constant const& second) const

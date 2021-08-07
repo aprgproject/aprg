@@ -24,7 +24,8 @@ public:
     Term(Term const& term);
     Term(bool const boolValue);
     Term(char const* const characterString);
-    Term(std::string const& stringAsParameter);    Term(Constant const& constant);
+    Term(std::string const& stringAsParameter);
+    Term(Constant const& constant);
     Term(VariableTerm const& variableTerm);
     Term(Operator const& operatorTerm);
     Term(Expression const& expression);
@@ -32,7 +33,8 @@ public:
     Term & operator=(Term const& term);
 
     bool operator==(Term const& second) const;
-    bool operator!=(Term const& second) const;    bool operator<(Term const& second) const;
+    bool operator!=(Term const& second) const;
+    bool operator<(Term const& second) const;
 
     Term operator~() const;
 
@@ -59,7 +61,8 @@ public:
 
     void clear();
     void simplify();
-    void sort();    void negate();
+    void sort();
+    void negate();
 
     void setAsSimplified();
     void clearSimplifiedFlag();
@@ -70,12 +73,14 @@ private:
     void initializeBasedOnString(std::string const& stringAsParameter);
 
     friend std::ostream & operator<<(std::ostream & out, Term const& term);
+
     TermType m_type;
     bool m_isSimplified;
     std::unique_ptr<BaseTermData> m_baseTermDataPointer;
 };
 
 using Terms = std::vector<Term>;
+
 }
 
 }

@@ -97,7 +97,8 @@ void distributeTermsWithRecursion(
             innerTermsCombinations.emplace_back(getTermConstReferenceFromSharedPointer(subExpressionTerm.baseTermSharedPointer));
             distributeTermsWithRecursion(outputTerm, innerTermsCombinations, innerExpressions, outerFactor, outerOperation, innerOperation, index+1);
             innerTermsCombinations.pop_back();
-        }    }
+        }
+    }
     else
     {
         Term partialTerm(outerFactor);
@@ -116,7 +117,8 @@ Terms getTermOrSubTerms(Term const& term)
             terms.emplace_back(getTermConstReferenceFromSharedPointer(subTerm.baseTermSharedPointer));
         }
     }
-    else    {
+    else
+    {
         terms.emplace_back(term);
     }
     return terms;
@@ -212,7 +214,8 @@ void simplifyAndCopyTermsAndChangeOperatorLevelIfNeeded(
         Term const& term(getTermConstReferenceFromSharedPointer(oldWrappedTerm.baseTermSharedPointer));
         if(term.isExpression())
         {
-            Expression subExpression(term.getExpressionConstReference());            subExpression.simplify();
+            Expression subExpression(term.getExpressionConstReference());
+            subExpression.simplify();
             simplifyAndCopyTermsFromAnExpressionAndChangeOperatorLevelIfNeeded(
                         newWrappedTerms, mainOperatorLevel, subExpression);
         }
@@ -235,7 +238,8 @@ Terms createUniqueTerms(
         return getTermConstReferenceFromSharedPointer(wrappedTerm.baseTermSharedPointer);
     });
     sort(result.begin(), result.end());
-    result.erase(unique(result.begin(), result.end()), result.end());    return result;
+    result.erase(unique(result.begin(), result.end()), result.end());
+    return result;
 }
 
 void combineComplementaryTerms(
@@ -368,7 +372,8 @@ void distributeTermsIfNeeded(
                             outerFactors.emplace_back(getTermConstReferenceFromSharedPointer(subExpressionTerm.baseTermSharedPointer));
                         }
                     }
-                }                else
+                }
+                else
                 {
                     outerFactors.emplace_back(inputTerm);
                 }

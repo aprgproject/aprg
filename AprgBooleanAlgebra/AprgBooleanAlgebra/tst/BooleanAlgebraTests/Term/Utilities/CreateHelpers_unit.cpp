@@ -59,7 +59,8 @@ TEST(CreateHelpersTest, CreateExpressionIfPossibleWorks)
     EXPECT_EQ(Term("y"), getTermConstReferenceFromSharedPointer(termsToVerify.at(1).baseTermSharedPointer));
 }
 
-TEST(CreateHelpersTest, CreateExpressionIfPossibleDoesNotSimplifyExpressionInAExpression){
+TEST(CreateHelpersTest, CreateExpressionIfPossibleDoesNotSimplifyExpressionInAExpression)
+{
     Expression expression1(createExpressionIfPossible({true}));
     Expression expression2(createExpressionInAnExpression(expression1));
     Expression expression3(createExpressionInAnExpression(expression2));
@@ -85,6 +86,7 @@ TEST(CreateHelpersTest, CreateExpressionIfPossibleDoesNotSimplifyExpressionInAEx
     ASSERT_TRUE(termToVerify3.isConstant());
     EXPECT_EQ(Constant(true), termToVerify3.getConstantConstReference());
 }
+
 TEST(CreateHelpersTest, CreateExpressionIfPossibleDoesNotSimplify)
 {
     Expression expressionToTest(createExpressionIfPossible({"x", "&", "x"}));
@@ -96,7 +98,8 @@ TEST(CreateHelpersTest, CreateExpressionIfPossibleDoesNotSimplify)
     EXPECT_EQ(Term("x"), getTermConstReferenceFromSharedPointer(termsToVerify.at(1).baseTermSharedPointer));
 }
 
-TEST(CreateHelpersTest, CreateExpressionIfPossibleReturnsEmptyIfListOfTermsAreWrong){
+TEST(CreateHelpersTest, CreateExpressionIfPossibleReturnsEmptyIfListOfTermsAreWrong)
+{
     Expression expressionToTest(createExpressionIfPossible({"x", "&", "|", "y"}));
 
     EXPECT_EQ(OperatorLevel::Unknown, expressionToTest.getCommonOperatorLevel());
@@ -114,7 +117,8 @@ TEST(CreateHelpersTest, CreateSimplifiedExpressionIfPossibleWorks)
     EXPECT_EQ(Term(false), getTermConstReferenceFromSharedPointer(termsToVerify.at(0).baseTermSharedPointer));
 }
 
-TEST(CreateHelpersTest, CreateSimplifiedExpressionIfPossibleReturnsEmptyIfListOfTermsAreWrong){
+TEST(CreateHelpersTest, CreateSimplifiedExpressionIfPossibleReturnsEmptyIfListOfTermsAreWrong)
+{
     Expression expressionToTest(createSimplifiedExpressionIfPossible({"&", "&", "&"}));
 
     EXPECT_EQ(OperatorLevel::Unknown, expressionToTest.getCommonOperatorLevel());

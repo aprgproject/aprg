@@ -85,7 +85,8 @@ TEST(TermTest, TermsAsExpressionsWorks)
     EXPECT_EQ(Term("x"), getTermConstReferenceFromSharedPointer(termsToVerify2.at(0).baseTermSharedPointer));
 }
 
-TEST(TermTest, TermsAsConstructedAsStringWorks){
+TEST(TermTest, TermsAsConstructedAsStringWorks)
+{
     Term term1("");
     Term term2("true");
     Term term3("&");

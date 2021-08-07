@@ -28,6 +28,7 @@ bool WrappedTerm::operator==(WrappedTerm const& second) const
     Term const& term2(getTermConstReferenceFromSharedPointer(second.baseTermSharedPointer));
     return term1 == term2;
 }
+
 bool WrappedTerm::operator!=(WrappedTerm const& second) const
 {
     return !(operator==(second));
@@ -50,6 +51,7 @@ ostream & operator<<(ostream & out, WrappedTerm const& wrappedTerm)
     out << getTermConstReferenceFromSharedPointer(wrappedTerm.baseTermSharedPointer);
     return out;
 }
+
 }
 
 }

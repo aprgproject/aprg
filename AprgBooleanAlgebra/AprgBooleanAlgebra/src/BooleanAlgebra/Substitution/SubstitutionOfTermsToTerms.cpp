@@ -16,7 +16,8 @@ SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms()
 
 SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms(initializer_list<TermTermPair> const& variablesWithValues)
 {
-    putTermsToTermsMapping(variablesWithValues);}
+    putTermsToTermsMapping(variablesWithValues);
+}
 
 SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms(TermToTermMap const& variablesWithValues)
 {
@@ -114,6 +115,7 @@ void SubstitutionOfTermsToTerms::performSubstitutionForWrappedTerms(WrappedTerms
         term = performSubstitutionTo(term);
     }
 }
+
 }
 
 }

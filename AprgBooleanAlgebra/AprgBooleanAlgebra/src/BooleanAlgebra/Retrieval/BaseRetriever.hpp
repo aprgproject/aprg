@@ -54,6 +54,7 @@ public:
             retrieveFromTerm(getTermConstReferenceFromSharedPointer(wrappedTerm.baseTermSharedPointer));
         }
     }
+
 protected:
 
     DataType m_savedData;

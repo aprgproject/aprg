@@ -26,6 +26,7 @@ public:
     bool operator==(Expression const& second) const;
     bool operator!=(Expression const& second) const;
     bool operator<(Expression const& second) const;
+
     Expression operator~() const;
 
     bool isEmpty() const;

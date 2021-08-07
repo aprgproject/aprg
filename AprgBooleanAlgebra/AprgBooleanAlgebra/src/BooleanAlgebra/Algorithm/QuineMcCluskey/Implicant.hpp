@@ -8,6 +8,7 @@
 #include <set>
 #include <sstream>
 #include <string>
+
 namespace alba
 {
 
@@ -25,7 +26,8 @@ public:
     {}
 
     Implicant(MintermsInitializerList const& minterms)
-        : m_minterms(minterms)    {}
+        : m_minterms(minterms)
+    {}
 
     bool operator==(Implicant const& second) const
     {

@@ -32,7 +32,8 @@ Term::Term(Term const& term)
 }
 
 Term::Term(bool const boolValue)
-    : m_type(TermType::Constant)    , m_isSimplified(false)
+    : m_type(TermType::Constant)
+    , m_isSimplified(false)
     , m_baseTermDataPointer(make_unique<Constant>(boolValue))
 {}
 
@@ -75,7 +76,8 @@ Term::Term(Operator const& operatorTerm)
 }
 
 Term::Term(Expression const& expression)
-    : m_type(TermType::Expression)    , m_isSimplified(false)
+    : m_type(TermType::Expression)
+    , m_isSimplified(false)
     , m_baseTermDataPointer(make_unique<Expression>(expression))
 {}
 
@@ -86,6 +88,7 @@ Term& Term::operator=(Term const& term)
     resetBaseDataTermPointerBasedFromTerm(term);
     return *this;
 }
+
 bool Term::operator==(Term const& second) const
 {
     bool result(false);
@@ -297,7 +300,8 @@ Expression & Term::getExpressionReference()
 
 void Term::clear()
 {
-    m_type=TermType::Empty;    m_baseTermDataPointer.reset();
+    m_type=TermType::Empty;
+    m_baseTermDataPointer.reset();
     clearSimplifiedFlag();
 }
 
@@ -383,7 +387,8 @@ void Term::resetBaseDataTermPointerBasedFromTerm(Term const& term)
     }
 }
 
-void Term::initializeBasedOnString(string const& stringAsParameter){
+void Term::initializeBasedOnString(string const& stringAsParameter)
+{
     if(stringAsParameter.empty())
     {
         // do nothing
