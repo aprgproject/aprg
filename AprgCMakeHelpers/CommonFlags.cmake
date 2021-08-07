@@ -1,29 +1,27 @@
-#APRG default flags
-set(CMAKE_C_FLAGS "-Wall -Wextra -pedantic -std=c17")
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic -std=c++17")
-if(WIN32)
-    #add -mwindows for windows GUI, do not add for console build
-    #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mwindows")
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mwindows")
-endif()
-
-message("Initial CMAKE_C_FLAGS are: [${CMAKE_C_FLAGS}]")
-message("Initial CMAKE_CXX_FLAGS are: [${CMAKE_CXX_FLAGS}]")
-
 #APRG unique flags
+set(APRG_COMPILER_COMMON_FLAGS "-Wall -Wextra -pedantic")
+set(APRG_COMPILER_COMMON_C_FLAGS "-std=c17")
+set(APRG_COMPILER_COMMON_CPP_FLAGS "-std=c++17")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG "-g --coverage")
+set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_NO_STACK_PROTECTOR "-g --coverage -fno-stack-protector") #let the stack smash (for debugging)
+set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_FAST_COMPILATION "-g --coverage -O0") #-O0 is actually the default so this is useless
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_MORE_SPEED "-g --coverage -Ofast")
 set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED "-O3 -DNDEBUG")
 set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_MIN_SIZE "-Os -DNDEBUG")
 set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_DEBUG "-O2 -g -DNDEBUG")
 set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_MORE_SPEED "-Ofast -DNDEBUG")
+set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_STACK_PROTECTOR "-fstack-protector -DNDEBUG")
+set(APRG_COMPILER_FLAGS_WINDOWS_NON_CONSOLE "-mwindows")
 set(APRG_LINKER_FLAGS_FOR_RELEASE "-static") # "-static" is needed to make the program work in other deployments (GCC/QT libraries are missing in other deployments)
 set(APRG_LINKER_FLAGS_FOR_RELEASE_WITH_STRIP "-static -s")
+set(APRG_LINKER_FLAGS_FOR_PTHREAD "-pthread")
 
+#APRG Common flags
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COMPILER_COMMON_C_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COMPILER_COMMON_CPP_FLAGS}")
 
 # Some notes
-# Sources:
-# --> https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html
+# Sources:# --> https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html
 # --> https://caiorss.github.io/C-Cpp-Notes/compiler-flags-options.html
 
 # Search Path and Library Linking Flags
@@ -173,10 +171,18 @@ set(APRG_LINKER_FLAGS_FOR_RELEASE_WITH_STRIP "-static -s")
 # --> Optmizing for debugging.
 # -->  Enables all optimization that does not conflicts with debugging. It can be used with the (-g) flag for enabling debugging symbols.
 
+# Flag: "-fstack-protector"
+# --> Emit extra code to check for buffer overflows, such as stack smashing attacks.
+# --> This is done by adding a guard variable to functions with vulnerable objects.
+# --> This includes functions that call allocation, and functions with buffers larger than or equal to 8 bytes.
+# --> The guards are initialized when a function is entered and then checked when the function exits.
+# --> If a guard check fails, an error message is printed and the program exits.
+# --> Only variables that are actually allocated on the stack are considered, optimized away variables or variables allocated in registers don’t count.
+
+
 
 
 #  Linker Flags
-
 # Flag: "-Xlinker option"
 # --> Pass option as an option to the linker. You can use this to supply system-specific linker options that GCC does not recognize.
 # --> If you want to pass an option that takes a separate argument, you must use -Xlinker twice, once for the option and once for the argument.
