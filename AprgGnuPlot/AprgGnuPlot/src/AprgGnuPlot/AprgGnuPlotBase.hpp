@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Geometry/ThreeDimensions/Point.hpp>
+#include <Geometry/ThreeDimensions/Constructs/Point.hpp>
 #include <gnuplot-iostream.h>
 
 #include <functional>
-
 namespace alba
 {
 

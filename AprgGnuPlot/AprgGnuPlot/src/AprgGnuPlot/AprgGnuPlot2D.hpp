@@ -1,11 +1,10 @@
 #pragma once
 
 #include <AprgGnuPlot/AprgGnuPlotBase.hpp>
-#include <Geometry/TwoDimensions/Point.hpp>
+#include <Geometry/TwoDimensions/Constructs/Point.hpp>
 
 namespace alba
 {
-
 class AprgGnuPlot2D : public AprgGnuPlotBase
 {
 public:
