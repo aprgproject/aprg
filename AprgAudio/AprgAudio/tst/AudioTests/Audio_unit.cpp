@@ -17,6 +17,7 @@
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
 #include <gtest/gtest.h>
+
 #include <cmath>
 
 using namespace alba::mathHelper;

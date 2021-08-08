@@ -21,7 +21,8 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COMPILE
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COMPILER_COMMON_CPP_FLAGS}")
 
 # Some notes
-# Sources:# --> https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html
+# Sources:
+# --> https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html
 # --> https://caiorss.github.io/C-Cpp-Notes/compiler-flags-options.html
 
 # Search Path and Library Linking Flags
@@ -183,6 +184,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 
 
 #  Linker Flags
+
 # Flag: "-Xlinker option"
 # --> Pass option as an option to the linker. You can use this to supply system-specific linker options that GCC does not recognize.
 # --> If you want to pass an option that takes a separate argument, you must use -Xlinker twice, once for the option and once for the argument.

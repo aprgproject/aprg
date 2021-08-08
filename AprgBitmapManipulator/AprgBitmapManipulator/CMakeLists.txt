@@ -9,7 +9,8 @@ set(APRG_BITMAP_MANIPULATOR_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 include(${APRG_BITMAP_MANIPULATOR_DIR}/cmake/LocateAprgDirectory.cmake)
 
 #Assign common flags, definitions and macros
-include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
 include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
 
 #Include other projects

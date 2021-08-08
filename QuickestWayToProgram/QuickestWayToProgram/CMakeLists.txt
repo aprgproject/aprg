@@ -9,7 +9,8 @@ set(QUICKEST_WAY_TO_PROGRAM_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 include(${QUICKEST_WAY_TO_PROGRAM_DIR}/cmake/LocateAprgDirectory.cmake)
 
 #Assign common flags, definitions and macros
-include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
 
 #Add specific definitions
 if(WIN32)

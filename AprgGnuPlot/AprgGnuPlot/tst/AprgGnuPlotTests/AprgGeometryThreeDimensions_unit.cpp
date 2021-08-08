@@ -10,7 +10,8 @@ using namespace alba::ThreeDimensions;
 using namespace alba::ThreeDimensions::threeDimensionsUtilities;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 TEST(AprgGeometryThreeDimensionsTest, DISABLED_LineWithSlope)
 {

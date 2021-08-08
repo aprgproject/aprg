@@ -29,7 +29,8 @@ TEST(UciUtilitiesTest, RetrieveCalculationDetailsOnStringFromEngineWorksOnInfoEx
     EXPECT_EQ(0, actualDetails.scoreInCentipawns);
     EXPECT_EQ(1U, actualDetails.mateInNumberOfMoves);
     EXPECT_TRUE(actualDetails.currentlySearchingMoves.empty());
-    EXPECT_TRUE(actualDetails.bestMove.empty());    EXPECT_TRUE(actualDetails.ponderMove.empty());
+    EXPECT_TRUE(actualDetails.bestMove.empty());
+    EXPECT_TRUE(actualDetails.ponderMove.empty());
 }
 
 TEST(UciUtilitiesTest, RetrieveCalculationDetailsOnStringFromEngineWorksOnInfoExample2)

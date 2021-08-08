@@ -12,7 +12,8 @@ set(TEST_MODE "ON")
 include(${DMEAS_TIMER_STACK_DIR}/cmake/LocateAprgDirectory.cmake)
 
 #Assign common flags, definitions and macros
-include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
 include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
 
 #Include other projects

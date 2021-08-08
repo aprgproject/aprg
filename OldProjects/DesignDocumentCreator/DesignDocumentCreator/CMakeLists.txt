@@ -9,7 +9,8 @@ set(DD_CREATOR_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 include(${DD_CREATOR_DIR}/cmake/LocateAprgDirectory.cmake)
 
 #Assign common flags, definitions and macros
-include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
 include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
 
 #Assign specific definitions
@@ -32,6 +33,7 @@ add_definitions(-DLOG_LOCATION="${DD_CREATOR_DIR}/../DesignDocumentCreatorLogs")
 
 #Assign Sack Directory
 set(SackDirectory "N:/Branches/ControlPlane/sbts1/tcom")
+
 set(SACKS_DIR_TO_INCLUDE
     ${SackDirectory}/I_Interface/Private/SC_TCOM/Temp
     ${SackDirectory}/I_Interface/Global_Env/Definitions
@@ -84,7 +86,8 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
 add_executable(${OUTFILE} ${DD_CREATOR_COMMON_SOURCES_AND_TESTS} ${FEATURE_SOURCES_AND_TESTS} ${TCOM_PRIVATE_SACKS} ${BTS_SACKS})
 include_directories(
-    ${FEATURE_INCLUDE_DIRECTORIES}    ${DD_CREATOR_INCLUDE_DIRECTORIES}
+    ${FEATURE_INCLUDE_DIRECTORIES}
+    ${DD_CREATOR_INCLUDE_DIRECTORIES}
     ${SACKS_DIR_TO_INCLUDE}
     ${GTEST_INCLUDE_DIRS}
 )

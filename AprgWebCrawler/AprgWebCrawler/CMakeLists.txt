@@ -9,7 +9,8 @@ set(APRG_WEB_CRAWLER_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 include(${APRG_WEB_CRAWLER_DIR}/cmake/LocateAprgDirectory.cmake)
 
 #Assign common flags, definitions and macros
-include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
 
 #Assign specific definitions
 add_definitions(-DAPRG_WEB_CRAWLER_CONFIGURATION_FILE="${APRG_DIR}AprgWebCrawler/Configuration/configuration.txt")

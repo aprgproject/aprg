@@ -12,7 +12,8 @@ set(TEST_MODE "ON")
 include(${APRG_AUDIO_DIR}/cmake/LocateAprgDirectory.cmake)
 
 #Assign common flags, definitions and macros
-include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
 
 #Add Audio Directory as definition
 add_definitions(-DAPRG_AUDIO_DIR="${APRG_AUDIO_DIR}")

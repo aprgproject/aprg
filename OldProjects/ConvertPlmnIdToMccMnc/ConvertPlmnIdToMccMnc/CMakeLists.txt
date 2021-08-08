@@ -12,7 +12,8 @@ set(TEST_MODE "ON")
 include(${CONVERT_PLMNID_TO_MCC_MNC_DIR}/cmake/LocateAprgDirectory.cmake)
 
 #Assign common flags, definitions and macros
-include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
 
 #Include other projects
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)

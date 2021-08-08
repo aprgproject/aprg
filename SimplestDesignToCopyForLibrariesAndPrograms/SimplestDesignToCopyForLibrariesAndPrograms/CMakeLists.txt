@@ -12,7 +12,8 @@ set(TEST_MODE "ON")
 include(${SIMPLEST_DESIGN_TO_COPY_FOR_LIBRARIES_AND_PROGRAMS_DIR}/cmake/LocateAprgDirectory.cmake)
 
 #Assign common flags, definitions and macros
-include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
+include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
 
 #Include other projects
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)

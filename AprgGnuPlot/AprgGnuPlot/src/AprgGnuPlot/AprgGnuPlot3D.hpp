@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 class AprgGnuPlot3D : public AprgGnuPlotBase
 {
 public:

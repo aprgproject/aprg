@@ -9,7 +9,8 @@
 #include <Geometry/TwoDimensions/Constructs/Point.hpp>
 #include <InputConfiguration.hpp>
 #include <SoosaConfiguration.hpp>
-#include <Statistics/DataCollection.hpp>#include <Statistics/KMeansClustering.hpp>
+#include <Statistics/DataCollection.hpp>
+#include <Statistics/KMeansClustering.hpp>
 #include <Statistics/TwoDimensionsStatistics.hpp>
 
 #include <array>

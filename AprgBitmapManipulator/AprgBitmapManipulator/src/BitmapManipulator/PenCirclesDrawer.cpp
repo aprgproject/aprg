@@ -15,7 +15,8 @@ using namespace alba::TwoDimensions;
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace AprgBitmap
 {
@@ -223,7 +224,8 @@ void PenCirclesDrawer::putCircleConnectionsAndRemoveProcessedCircles()
             AlbaAngle referenceAngle(getAngleOfPointWithRespectToOrigin(referenceDelta));
             double radiusDifference = circle1.getRadius() - circle2.getRadius();
             double distanceOfCenters = getDistance(centerPoint1, centerPoint2);
-            double ratioForArcCos = radiusDifference/distanceOfCenters;            if(ratioForArcCos <= 1)
+            double ratioForArcCos = radiusDifference/distanceOfCenters;
+            if(ratioForArcCos <= 1)
             {
                 AlbaAngle deltaAngle(AngleUnitType::Radians, acos(ratioForArcCos));
                 AlbaAngle angle1(referenceAngle+deltaAngle);

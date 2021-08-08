@@ -481,7 +481,8 @@ void LyxGenerator::saveDisplayTable(DisplayTable const& displayTable, ofstream &
                                     displayTableStream << displayTable.getCellAt(row, column).getText()<<endl;
                                 }
                                 else
-                                {                                    displayTableStream << tableCellTemplateLine << endl;
+                                {
+                                    displayTableStream << tableCellTemplateLine << endl;
                                 }
                             }
                         }

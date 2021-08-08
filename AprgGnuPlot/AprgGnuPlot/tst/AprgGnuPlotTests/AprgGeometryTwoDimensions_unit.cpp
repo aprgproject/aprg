@@ -10,7 +10,8 @@ using namespace alba::TwoDimensions;
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 TEST(AprgGeometryTwoDimensionsTest, DISABLED_CircleAtOriginWithRadius)
 {

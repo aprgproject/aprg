@@ -5,7 +5,8 @@
 #include <numeric>
 #include <type_traits>
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {

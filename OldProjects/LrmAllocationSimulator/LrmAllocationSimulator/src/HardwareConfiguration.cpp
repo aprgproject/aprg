@@ -291,7 +291,8 @@ void HardwareConfiguration::printDspAllocations(unsigned int const printFlags)
         table.getLastRow().addCell(streamTemp.str(), DisplayTableCellMode::center);
     }
     for(auto const& addressToFspPair : m_fspAddressToFspMap)
-    {        table.addRow();
+    {
+        table.addRow();
         stringstream firstCellStream;
         firstCellStream<<"0x"<<hex<<addressToFspPair.first<<dec;
         table.getLastRow().addCell(firstCellStream.str());
@@ -303,7 +304,8 @@ void HardwareConfiguration::printDspAllocations(unsigned int const printFlags)
             table.getLastRow().addCell(streamTemp.str(), DisplayTableCellMode::center);
         }
         if((printFlags & 1) > 0) //users
-        {            table.addRow();
+        {
+            table.addRow();
             table.getLastRow().addCell("");
             for(unsigned int const dspAddress : addressToFspPair.second.getDspAddresses())
             {
@@ -313,7 +315,8 @@ void HardwareConfiguration::printDspAllocations(unsigned int const printFlags)
                 table.getLastRow().addCell(streamTemp.str(), DisplayTableCellMode::center);
             }
         }
-        if((printFlags & 2) > 0) //DLI        {
+        if((printFlags & 2) > 0) //DLI
+        {
             table.addRow();
             table.getLastRow().addCell("");
             for(unsigned int const dspAddress : addressToFspPair.second.getDspAddresses())
@@ -324,7 +327,8 @@ void HardwareConfiguration::printDspAllocations(unsigned int const printFlags)
                 table.getLastRow().addCell(streamTemp.str(), DisplayTableCellMode::center);
             }
         }
-    }    cout<<table.drawOutput();
+    }
+    cout<<table.drawOutput();
 }
 
 void HardwareConfiguration::addFsp(unsigned int const fspAddress)

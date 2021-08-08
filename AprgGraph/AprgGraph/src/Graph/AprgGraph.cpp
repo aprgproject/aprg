@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <cmath>
+
 using namespace std;
 
 using namespace alba::algebra;
@@ -19,6 +20,7 @@ using namespace alba::TwoDimensions::twoDimensionsUtilities;
 
 namespace alba
 {
+
 AprgGraph::AprgGraph(string const& bitmapPath, BitmapXY const& originInBitmap, BitmapDoubleXY const& magnification)
     : m_bitmap(bitmapPath)
     , m_bitmapSnippet(m_bitmap.getSnippetReadFromFileWholeBitmap())
@@ -322,7 +324,8 @@ void AprgGraph::drawConnectedBitmapPointsIfPossible(
     Points connectedBitmapPoints(getConnectedPointsUsingALine(bitmapPoints, 1));
     for(Point const& connectedBitmapPoint : connectedBitmapPoints)
     {
-        drawBitmapPointIfPossible(connectedBitmapPoint, color);    }
+        drawBitmapPointIfPossible(connectedBitmapPoint, color);
+    }
 }
 
 

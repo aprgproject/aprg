@@ -6,6 +6,7 @@
 #include <Geometry/TwoDimensions/Constructs/Quadrilateral.hpp>
 
 #include <functional>
+
 namespace alba
 {
 

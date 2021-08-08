@@ -7,7 +7,8 @@ namespace alba
 
 FibonacciExample::FibonacciExample()
 {
-    initialize();}
+    initialize();
+}
 
 FibonacciExample::Number FibonacciExample::getFibonacciUsingNaiveRecursion(Number const number) const
 {
@@ -36,7 +37,8 @@ FibonacciExample::Number FibonacciExample::getFibonacciUsingMemoization(Number c
         m_memoizationData.resize(number+1, static_cast<unsigned int>(UNUSED_VALUE));
     }
 
-    Number & resultForNumber(m_memoizationData[number]);    if (resultForNumber == UNUSED_VALUE)
+    Number & resultForNumber(m_memoizationData[number]);
+    if (resultForNumber == UNUSED_VALUE)
     {
         if (number<=1)
         {
@@ -63,7 +65,8 @@ FibonacciExample::Number FibonacciExample::getFibonacciUsingTabulation(Number co
         m_tabulationData.resize(number+1, static_cast<unsigned int>(UNUSED_VALUE));
     }
 
-    for (Number i=newStart; i<=number; i++)    {
+    for (Number i=newStart; i<=number; i++)
+    {
         m_tabulationData[i] = m_tabulationData.at(i-1)+m_tabulationData.at(i-2);
     }
     return m_tabulationData.at(number);
