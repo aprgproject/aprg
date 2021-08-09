@@ -22,10 +22,23 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
     return result;
 }
 
+MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOperationsUsingMemoizationDP() const
+{
+    // Time Complexity: O(n^3) (should be same as Tabular DP)
+    // Auxiliary Space: O(n^2)
+
+    Count result(0);
+    if(!m_dimensions.empty())
+    {
+        CountMatrix countMatrix(m_dimensions.size(), m_dimensions.size(), MAX_COUNT);
+        result = getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, 0, m_dimensions.size()-1);
+    }
+    return result;
+}
+
 MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOperationsUsingTabularDP() const
 {
-    // Time Complexity: O(n^3)
-    // Auxiliary Space: O(n^2)
+    // Time Complexity: O(n^3)    // Auxiliary Space: O(n^2)
 
     Count result(0);
     if(!m_dimensions.empty())
@@ -53,24 +66,9 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
     return result;
 }
 
-MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOperationsUsingMemoizationDP() const
-{
-    // Time Complexity: O(n^3) (should be same as Tabular DP)
-    // Auxiliary Space: O(n^2)
-
-    Count result(0);
-    if(!m_dimensions.empty())
-    {
-        CountMatrix countMatrix(m_dimensions.size(), m_dimensions.size(), MAX_COUNT);
-        result = getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, 0, m_dimensions.size()-1);
-    }
-    return result;
-}
-
 MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOperationsUsingNaiveRecursion(
         Index const leftParenthesis,
-        Index const rightParenthesis) const
-{
+        Index const rightParenthesis) const{
     Count result(0);
     if(leftParenthesis+2 <= rightParenthesis) // distance should be two for at least three elements
     {
