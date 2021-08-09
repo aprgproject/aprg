@@ -201,7 +201,8 @@ unsigned int CoinProblem::getNumberOfCoinCombinationsUsingTabularDPAndSpaceEffic
     return countPerValue.back();
 }
 
-CoinProblem::CoinCombinations CoinProblem::getCoinCombinationsUsingMemoizationDP(Value const total) const{
+CoinProblem::CoinCombinations CoinProblem::getCoinCombinationsUsingMemoizationDP(Value const total) const
+{
     CoinCombinationsPerValue coinCombinationsPerValue(getMaxOfTotalAndMaxCoinPlusOne(total));
     return getCoinCombinationsUsingMemoizationDPInternal(coinCombinationsPerValue, total);
 }
