@@ -17,10 +17,10 @@ class WeightedQuickUnionWithArray : public BaseUnionFind<Object>
 {
 public:
     using RootArray = std::array<Object, SIZE>;
+    using RootVector = std::vector<Object>;
     using SizeArray = std::array<unsigned int, SIZE>;
 
-    WeightedQuickUnionWithArray()
-        : m_relativeRoots()
+    WeightedQuickUnionWithArray()        : m_relativeRoots()
         , m_sizesOfRoots()
     {
         initialize();
@@ -57,11 +57,10 @@ public:
 
     Object getRootWithPathCompressionTwoPass(Object const& object) // no longer const
     {
-        std::vector<Object> relativeRoots;
+        RootVector relativeRoots;
         Object currentRoot(object);
         Object nextRoot(m_relativeRoots.at(object));
-        while(currentRoot != nextRoot)
-        {
+        while(currentRoot != nextRoot)        {
             currentRoot = nextRoot;
             relativeRoots.emplace_back(nextRoot);
             nextRoot = m_relativeRoots.at(currentRoot);

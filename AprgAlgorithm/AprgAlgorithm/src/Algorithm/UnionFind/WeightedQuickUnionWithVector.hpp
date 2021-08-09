@@ -55,10 +55,9 @@ public:
 
     Object getRootWithPathCompressionTwoPass(Object const& object) // no longer const
     {
-        std::vector<Object> relativeRoots;
+        RootVector relativeRoots;
         Object currentRoot(object);
         Object nextRoot(m_relativeRoots.at(object));
-
         while(currentRoot != nextRoot)
         {
             currentRoot = nextRoot;
