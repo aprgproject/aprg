@@ -1,7 +1,6 @@
-#include <AprgUniqueProblems/DynamicProgramming/ElevatorWeightProblem.hpp>
+#include <AprgUniqueProblems/DynamicProgramming/Other/ElevatorWeightProblem.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
