@@ -2,7 +2,8 @@
 
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 LongestCommonSubsequence::LongestCommonSubsequence(Sequence const& sequence1, Sequence const& sequence2)
     : m_sequence1(sequence1)
@@ -91,7 +92,8 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestCommonSubseq
 LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestCommonSubsequenceLengthUsingNaiveRecursion(
         Index const index1,
         Index const index2) const
-{    if (index1==0 || index2==0)
+{
+    if (index1==0 || index2==0)
     {
         return 0;
     }

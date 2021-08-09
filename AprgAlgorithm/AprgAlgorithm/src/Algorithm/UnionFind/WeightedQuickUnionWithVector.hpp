@@ -58,6 +58,7 @@ public:
         RootVector relativeRoots;
         Object currentRoot(object);
         Object nextRoot(m_relativeRoots.at(object));
+
         while(currentRoot != nextRoot)
         {
             currentRoot = nextRoot;

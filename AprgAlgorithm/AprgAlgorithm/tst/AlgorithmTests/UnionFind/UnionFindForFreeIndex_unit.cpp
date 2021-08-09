@@ -2,6 +2,7 @@
 #include <AlgorithmTests/UnionFind/Utilities/CommonTestsWithUnionFind.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace alba::algorithm::CommonTestsWithUnionFind;
 using namespace std;
 
@@ -43,7 +44,8 @@ TEST(UnionFindForFreeIndexTest, ConnectWorksWithExample2)
 TEST(UnionFindForFreeIndexTest, GetRootWorks)
 {
     UnionFindForTest unionFind(13U);
-    unionFind.connect(4, 3);    unionFind.connect(3, 8);
+    unionFind.connect(4, 3);
+    unionFind.connect(3, 8);
     unionFind.connect(6, 5);
     unionFind.connect(9, 4);
     unionFind.connect(2, 1);
@@ -64,7 +66,8 @@ TEST(UnionFindForFreeIndexTest, GetRootWithPathCompressionWorks)
 {
     UnionFindForTest unionFind(13U);
     unionFind.connect(4, 3);
-    unionFind.connect(3, 8);    unionFind.connect(6, 5);
+    unionFind.connect(3, 8);
+    unionFind.connect(6, 5);
     unionFind.connect(9, 4);
     unionFind.connect(2, 1);
 
@@ -83,6 +86,7 @@ TEST(UnionFindForFreeIndexTest, GetRootWithPathCompressionWorks)
 TEST(UnionFindForFreeIndexTest, GetRelativeRootVectorWorks)
 {
     UnionFindForTest unionFind(13U);
+
     UnionFindForTest::RootVector expectedInitialRelativeRootVector{0U, 1U, 2U, 3U, 4U, 5U, 6U, 7U, 8U, 9U, 10U, 11U, 12U};
     EXPECT_EQ(expectedInitialRelativeRootVector, unionFind.getRelativeRootVector());
 
@@ -95,6 +99,7 @@ TEST(UnionFindForFreeIndexTest, GetRelativeRootVectorWorks)
     UnionFindForTest::RootVector expectedRelativeRootVector{0U, 1U, 1U, 8U, 8U, 5U, 5U, 7U, 8U, 8U, 10U, 11U, 12U};
     EXPECT_EQ(expectedRelativeRootVector, unionFind.getRelativeRootVector());
 }
+
 }
 
 }

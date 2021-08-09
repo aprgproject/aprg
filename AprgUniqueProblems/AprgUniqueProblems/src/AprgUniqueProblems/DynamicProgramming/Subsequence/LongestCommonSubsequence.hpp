@@ -5,7 +5,8 @@
 #include <limits>
 #include <vector>
 
-namespace alba{
+namespace alba
+{
 
 class LongestCommonSubsequence
 {
@@ -31,6 +32,7 @@ private:
     Count getLongestCommonSubsequenceLengthUsingMemoizationDP(CountMatrix & lengthMatrix, Index const index1, Index const index2) const;
     Sequence m_sequence1;
     Sequence m_sequence2;
+
 };
 
 }

@@ -20,7 +20,8 @@ public:
     using RootVector = std::vector<Object>;
     using SizeArray = std::array<unsigned int, SIZE>;
 
-    WeightedQuickUnionWithArray()        : m_relativeRoots()
+    WeightedQuickUnionWithArray()
+        : m_relativeRoots()
         , m_sizesOfRoots()
     {
         initialize();
@@ -60,7 +61,8 @@ public:
         RootVector relativeRoots;
         Object currentRoot(object);
         Object nextRoot(m_relativeRoots.at(object));
-        while(currentRoot != nextRoot)        {
+        while(currentRoot != nextRoot)
+        {
             currentRoot = nextRoot;
             relativeRoots.emplace_back(nextRoot);
             nextRoot = m_relativeRoots.at(currentRoot);
