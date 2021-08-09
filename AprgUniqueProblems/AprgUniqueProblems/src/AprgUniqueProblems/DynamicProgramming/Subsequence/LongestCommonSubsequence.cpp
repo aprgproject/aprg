@@ -71,11 +71,10 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestCommonSubseq
     }
 
     Counts const& lastPrevious(previousAndCurrentCounts.at(m_sequence1.size()%2));
-    return lastPrevious.at(m_sequence2.size());
+    return lastPrevious.back();
 }
 
-LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestCommonSubsequenceLengthUsingMemoizationDP() const
-{
+LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestCommonSubsequenceLengthUsingMemoizationDP() const{
     CountMatrix lengthMatrix(m_sequence1.size()+1U, m_sequence2.size()+1U, static_cast<Count>(UNUSED_COUNT));
     for(Index index1=1; index1<lengthMatrix.getNumberOfColumns(); index1++)
     {

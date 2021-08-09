@@ -198,11 +198,10 @@ unsigned int CoinProblem::getNumberOfCoinCombinationsUsingTabularDPAndSpaceEffic
             countPerValue[partialValue] += countPerValue.at(partialValue-availableCoin);
         }
     }
-    return countPerValue.at(total);
+    return countPerValue.back();
 }
 
-CoinProblem::CoinCombinations CoinProblem::getCoinCombinationsUsingMemoizationDP(Value const total) const
-{
+CoinProblem::CoinCombinations CoinProblem::getCoinCombinationsUsingMemoizationDP(Value const total) const{
     CoinCombinationsPerValue coinCombinationsPerValue(getMaxOfTotalAndMaxCoinPlusOne(total));
     return getCoinCombinationsUsingMemoizationDPInternal(coinCombinationsPerValue, total);
 }
