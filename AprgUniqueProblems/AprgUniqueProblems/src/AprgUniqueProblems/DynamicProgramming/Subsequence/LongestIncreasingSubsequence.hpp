@@ -22,6 +22,7 @@ private:
     Values m_sequence;
 
 };
+
 }
 
 // A subsequence is a sequence of (not necessarily consecutive) characters in a string in their original order.

@@ -24,6 +24,7 @@ private:
     Values m_sequence;
 
 };
+
 }
 
 // Given an array of random numbers.

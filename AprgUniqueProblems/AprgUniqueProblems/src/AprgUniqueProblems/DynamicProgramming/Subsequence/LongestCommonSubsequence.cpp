@@ -9,6 +9,7 @@ LongestCommonSubsequence::LongestCommonSubsequence(Values const& sequence1, Valu
     : m_sequence1(sequence1)
     , m_sequence2(sequence2)
 {}
+
 LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingNaiveRecursion() const
 {
     return getLongestLengthUsingNaiveRecursion(m_sequence1.size(), m_sequence2.size());

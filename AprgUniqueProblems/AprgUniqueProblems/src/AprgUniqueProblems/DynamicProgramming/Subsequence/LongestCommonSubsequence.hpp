@@ -22,7 +22,8 @@ public:
     LongestCommonSubsequence(Values const& sequence1, Values const& sequence2);
 
     Count getLongestLengthUsingNaiveRecursion() const;
-    Count getLongestLengthUsingMemoizationDP() const;    Count getLongestLengthUsingTabularDP() const;
+    Count getLongestLengthUsingMemoizationDP() const;
+    Count getLongestLengthUsingTabularDP() const;
     Count getLongestLengthUsingTabularDPAndSpaceEfficient() const;
 
 private:
@@ -33,6 +34,7 @@ private:
     Values m_sequence2;
 
 };
+
 }
 
 // LCS Problem Statement:
@@ -60,7 +62,8 @@ private:
 // LCS for input Valuess “AGGTAB” and “GXTXAYB” is “GTAB” of length 4.
 
 // The naive solution for this problem is to generate all subsequences of both given sequences and find the longest matching subsequence.
-// This solution is exponential in term of time complexity.// Let us see how this problem possesses both important properties of a Dynamic Programming (DP) Problem.
+// This solution is exponential in term of time complexity.
+// Let us see how this problem possesses both important properties of a Dynamic Programming (DP) Problem.
 
 // 1) Optimal Substructure:
 // Let the input sequences be X[0..m-1] and Y[0..n-1] of lengths m and n respectively.
