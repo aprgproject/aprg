@@ -22,6 +22,7 @@ public:
     Sequence getLongestSubsequence();
 private:
     Sequence m_sequenceToCheck;
+
 };
 
 }

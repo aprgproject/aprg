@@ -38,7 +38,8 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
 
 MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOperationsUsingTabularDP() const
 {
-    // Time Complexity: O(n^3)    // Auxiliary Space: O(n^2)
+    // Time Complexity: O(n^3)
+    // Auxiliary Space: O(n^2)
 
     Count result(0);
     if(!m_dimensions.empty())
@@ -68,7 +69,8 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
 
 MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOperationsUsingNaiveRecursion(
         Index const leftParenthesis,
-        Index const rightParenthesis) const{
+        Index const rightParenthesis) const
+{
     Count result(0);
     if(leftParenthesis+2 <= rightParenthesis) // distance should be two for at least three elements
     {

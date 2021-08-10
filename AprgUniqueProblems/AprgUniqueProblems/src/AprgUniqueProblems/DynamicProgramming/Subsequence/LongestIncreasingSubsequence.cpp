@@ -14,7 +14,8 @@ LongestIncreasingSubsequence::LongestIncreasingSubsequence(Sequence const& seque
 LongestIncreasingSubsequence::Index LongestIncreasingSubsequence::getLongestLength()
 {
     Index result(0U);
-    if(!m_sequenceToCheck.empty())    {
+    if(!m_sequenceToCheck.empty())
+    {
         IndexToIndex indexToLength(m_sequenceToCheck.size(), 0U);
         indexToLength[0U]=1U;
 
@@ -39,7 +40,8 @@ LongestIncreasingSubsequence::Index LongestIncreasingSubsequence::getLongestLeng
 LongestIncreasingSubsequence::Sequence LongestIncreasingSubsequence::getLongestSubsequence()
 {
     Sequence longestSequence;
-    if(!m_sequenceToCheck.empty())    {
+    if(!m_sequenceToCheck.empty())
+    {
         Value unusedValue(UNUSED_VALUE);
         IndexToIndex indexToPreviousIndex(m_sequenceToCheck.size(), unusedValue);
         IndexToIndex indexToLength(m_sequenceToCheck.size(), 0U);

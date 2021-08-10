@@ -39,7 +39,8 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingMemoi
 
 BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingTabularDP() const
 {
-    // Time Complexity: O(n*k)    // Auxiliary Space: O(n*k)
+    // Time Complexity: O(n*k)
+    // Auxiliary Space: O(n*k)
 
     Value result(0);
     if(m_n>=m_k)
@@ -156,6 +157,7 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingGcf()
     }
     return result;
 }
+
 BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingNaiveRecursion(
         Value const n,
         Value const k) const

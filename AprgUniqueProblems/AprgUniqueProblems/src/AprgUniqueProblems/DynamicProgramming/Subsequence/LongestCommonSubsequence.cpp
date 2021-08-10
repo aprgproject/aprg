@@ -18,7 +18,8 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingN
 LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingMemoizationDP() const
 {
     CountMatrix lengthMatrix(m_sequence1.size()+1U, m_sequence2.size()+1U, static_cast<Count>(UNUSED_COUNT));
-    for(Index index1=1; index1<lengthMatrix.getNumberOfColumns(); index1++)    {
+    for(Index index1=1; index1<lengthMatrix.getNumberOfColumns(); index1++)
+    {
         lengthMatrix.setEntry(index1, 0, 0);
     }
     for(Index index2=1; index2<lengthMatrix.getNumberOfColumns(); index2++)
@@ -31,7 +32,11 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingM
 
 LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingTabularDP() const
 {
+    // Time Complexity: O(m x n)
+    // Auxiliary Space: O(m x n)
+
     CountMatrix lengthMatrix(m_sequence1.size()+1U, m_sequence2.size()+1U, 0U);
+
     for(Index index1=1; index1<lengthMatrix.getNumberOfColumns(); index1++)
     {
         for(Index index2=1; index2<lengthMatrix.getNumberOfRows(); index2++)
@@ -56,6 +61,7 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingT
 LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingTabularDPAndSpaceEfficient() const
 {
     // Note this is same implementation in AlbaStringHelper
+
     // Time Complexity: O(m x n)
     // Auxiliary Space: O(m)
 
@@ -128,7 +134,8 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingM
             }
         }
         lengthMatrix.setEntry(index1, index2, result);
-    }    return result;
+    }
+    return result;
 }
 
 }

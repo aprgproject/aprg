@@ -22,6 +22,7 @@ public:
     Sequence getLongestSubsequence() const;
 private:
     Sequence m_sequenceToCheck;
+
 };
 
 }

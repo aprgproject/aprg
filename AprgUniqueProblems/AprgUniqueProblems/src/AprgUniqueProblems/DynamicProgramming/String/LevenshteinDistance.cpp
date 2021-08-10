@@ -75,7 +75,8 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingTabul
         indexGrid.setEntry(x, y, entryResult);
     });
 
-    return indexGrid.getEntry(indexGrid.getNumberOfColumns()-1, indexGrid.getNumberOfRows()-1);}
+    return indexGrid.getEntry(indexGrid.getNumberOfColumns()-1, indexGrid.getNumberOfRows()-1);
+}
 
 LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingTabularDPAndSpaceEfficient() const
 {
@@ -134,7 +135,8 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingNaive
     else if(m_string1.at(index1-1) == m_string2.at(index2-1))
     {
         return getLevenshteinDistanceUsingNaiveRecursion(index1-1, index2-1);
-    }    else
+    }
+    else
     {
         Index replaceDistance = getLevenshteinDistanceUsingNaiveRecursion(index1-1, index2-1);
         Index deleteDistance = getLevenshteinDistanceUsingNaiveRecursion(index1-1, index2);
@@ -173,7 +175,8 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingMemoi
             Index insertDistance = getLevenshteinDistanceUsingMemoizationDP(indexGrid, index1, index2-1);
             result = min(min(replaceDistance, deleteDistance), insertDistance)+1;
         }
-        indexGrid.setEntry(index1, index2, result);    }
+        indexGrid.setEntry(index1, index2, result);
+    }
     return result;
 }
 

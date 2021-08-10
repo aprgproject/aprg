@@ -15,7 +15,8 @@ LongestIncreasingSubsequenceWithLinearithmicTime::Index LongestIncreasingSubsequ
     if(!m_sequenceToCheck.empty())
     {
         IndexToValue lengthToEndValue(m_sequenceToCheck.size(), 0U); // dynamic programming
-        lengthToEndValue[0] = m_sequenceToCheck.front();        longestLength = 1U;
+        lengthToEndValue[0] = m_sequenceToCheck.front();
+        longestLength = 1U;
         for (auto itValue=m_sequenceToCheck.cbegin()+1; itValue!=m_sequenceToCheck.cend(); itValue++)
         {
             auto beginIt = lengthToEndValue.begin(), endIt = lengthToEndValue.begin() + longestLength;
@@ -24,7 +25,8 @@ LongestIncreasingSubsequenceWithLinearithmicTime::Index LongestIncreasingSubsequ
             if(lowerBoundItForEndValue == endIt) // if current value is the highest
             {
                 lengthToEndValue[longestLength++] = *itValue; // extend
-            }            else
+            }
+            else
             {
                 *lowerBoundItForEndValue = *itValue; // replace
             }
@@ -39,7 +41,8 @@ LongestIncreasingSubsequenceWithLinearithmicTime::Sequence LongestIncreasingSubs
     if(!m_sequenceToCheck.empty())
     {
         Index longestLength(1U);
-        Value unusedValue(UNUSED_VALUE);        IndexToValue lengthToEndValue(m_sequenceToCheck.size(), 0U); // dynamic programming
+        Value unusedValue(UNUSED_VALUE);
+        IndexToValue lengthToEndValue(m_sequenceToCheck.size(), 0U); // dynamic programming
         IndexToIndex lengthToEndIndex(m_sequenceToCheck.size(), unusedValue);
         IndexToIndex indexToPreviousIndex(m_sequenceToCheck.size(), unusedValue);
         lengthToEndValue[0] = m_sequenceToCheck.front();
@@ -52,7 +55,8 @@ LongestIncreasingSubsequenceWithLinearithmicTime::Sequence LongestIncreasingSubs
             if(lowerBoundItForEndValue == endIt) // if current value is the highest
             {
                 indexToPreviousIndex[i] = lengthToEndIndex.at(longestLength-1);
-                lengthToEndIndex[longestLength] = i;                lengthToEndValue[longestLength++] = value; // extend
+                lengthToEndIndex[longestLength] = i;
+                lengthToEndValue[longestLength++] = value; // extend
             }
             else
             {
