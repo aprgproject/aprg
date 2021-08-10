@@ -11,20 +11,17 @@ class LongestIncreasingSubsequence
 public:
     using Index = unsigned int;
     using Value = unsigned int;
-    using Sequence = std::vector<Value>;
+    using Values = std::vector<Value>;
     using IndexToIndex = std::vector<Index>;
-    using Sequences = std::vector<Sequence>;
-    static constexpr Value UNUSED_VALUE=std::numeric_limits<Value>::max();
 
-    LongestIncreasingSubsequence(Sequence const& sequenceToCheck);
+    LongestIncreasingSubsequence(Values const& sequence);
 
     Index getLongestLength();
-    Sequence getLongestSubsequence();
+    Values getLongestSubsequence();
 private:
-    Sequence m_sequenceToCheck;
+    Values m_sequence;
 
 };
-
 }
 
 // A subsequence is a sequence of (not necessarily consecutive) characters in a string in their original order.
