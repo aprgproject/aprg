@@ -96,13 +96,12 @@ int dp[MAXN]
 // return fact x!
 int solve(int x)
 {
-    if (x==0)
+    if(x==0)
         return 1;
-    if (dp[x]!=-1)
+    if(dp[x]!=-1)
         return dp[x];
     return (dp[x] = x * solve(x-1));
 }
-
 As we can see we are storing the most recent cache up to a limit so that if next time we got a call from the same state we simply return it from the memory. 
 So, this is why we call it memoization as we are storing the most recent state values. 
 

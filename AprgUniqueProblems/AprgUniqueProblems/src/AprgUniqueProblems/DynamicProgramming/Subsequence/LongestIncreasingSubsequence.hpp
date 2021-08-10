@@ -18,11 +18,10 @@ public:
 
     LongestIncreasingSubsequence(Sequence const& sequenceToCheck);
 
-    Index getLongestIncreasingSubsequenceLength();
-    Sequence getLongestIncreasingSubsequence();
+    Index getLongestLength();
+    Sequence getLongestSubsequence();
 private:
     Sequence m_sequenceToCheck;
-
 };
 
 }

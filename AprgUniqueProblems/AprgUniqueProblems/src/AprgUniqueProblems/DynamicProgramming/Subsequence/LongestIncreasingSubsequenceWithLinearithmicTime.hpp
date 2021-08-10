@@ -18,11 +18,10 @@ public:
 
     LongestIncreasingSubsequenceWithLinearithmicTime(Sequence const& sequenceToCheck);
 
-    Index getLongestIncreasingSubsequenceLength() const;
-    Sequence getLongestIncreasingSubsequence() const;
+    Index getLongestLength() const;
+    Sequence getLongestSubsequence() const;
 private:
     Sequence m_sequenceToCheck;
-
 };
 
 }
