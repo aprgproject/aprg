@@ -20,6 +20,7 @@ public:
     Values getLongestSubsequence() const;
 private:
     Values m_sequence;
+
 };
 
 }

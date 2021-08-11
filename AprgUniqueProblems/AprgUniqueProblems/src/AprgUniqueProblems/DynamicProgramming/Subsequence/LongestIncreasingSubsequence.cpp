@@ -29,7 +29,8 @@ LongestIncreasingSubsequence::Index LongestIncreasingSubsequence::getLongestLeng
                     subLength = max(subLength, subLengths.at(lowerIndex)+1);
                 }
             }
-        }        result = *max_element(subLengths.cbegin(), subLengths.cend());
+        }
+        result = *max_element(subLengths.cbegin(), subLengths.cend());
     }
     return result;
 }
@@ -57,7 +58,8 @@ LongestIncreasingSubsequence::Values LongestIncreasingSubsequence::getLongestSub
                     subLength = subLengths.at(lowerIndex)+1;
                     previousIndex = lowerIndex;
                 }
-            }        }
+            }
+        }
 
         // construct longest sequence
         auto itMax = max_element(subLengths.cbegin(), subLengths.cend());

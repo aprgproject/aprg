@@ -23,7 +23,8 @@ MaximumSumIncreasingSubsequence::Value MaximumSumIncreasingSubsequence::getMaxim
             for (Index lowerIndex=0; lowerIndex<index; lowerIndex++)
             {
                 if(m_sequence.at(lowerIndex) < m_sequence.at(index))
-                {                    partialSum = max(partialSum, partialSums.at(lowerIndex));
+                {
+                    partialSum = max(partialSum, partialSums.at(lowerIndex));
                 }
             }
             partialSum += m_sequence.at(index);
@@ -57,7 +58,8 @@ MaximumSumIncreasingSubsequence::Values MaximumSumIncreasingSubsequence::getSubs
                     previousIndex = lowerIndex;
                 }
             }
-            partialSum += m_sequence.at(index);        }
+            partialSum += m_sequence.at(index);
+        }
 
         // construct longest sequence
         auto itMax = max_element(partialSums.cbegin(), partialSums.cend());

@@ -20,7 +20,8 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingM
     CountMatrix lengthMatrix(m_sequence1.size()+1, m_sequence2.size()+1, static_cast<Count>(UNUSED_COUNT));
     for(Index index1=1; index1<lengthMatrix.getNumberOfColumns(); index1++)
     {
-        lengthMatrix.setEntry(index1, 0, 0);    }
+        lengthMatrix.setEntry(index1, 0, 0);
+    }
     for(Index index2=1; index2<lengthMatrix.getNumberOfColumns(); index2++)
     {
         lengthMatrix.setEntry(0, index2, 0);
@@ -37,7 +38,8 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingT
     CountMatrix lengthMatrix(m_sequence1.size()+1, m_sequence2.size()+1, 0);
 
     for(Index index1=1; index1<lengthMatrix.getNumberOfColumns(); index1++)
-    {        for(Index index2=1; index2<lengthMatrix.getNumberOfRows(); index2++)
+    {
+        for(Index index2=1; index2<lengthMatrix.getNumberOfRows(); index2++)
         {
             Count entryResult(0);
             if(m_sequence1.at(index1-1) == m_sequence2.at(index2-1))
@@ -71,7 +73,8 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingT
     vector<Counts> previousAndCurrentCounts(2, Counts(m_sequence1.size()+1, 0)); // set first row to zero
     for(Index index2=1; index2<=m_sequence2.size(); index2++)
     {
-        Counts & previousCounts(previousAndCurrentCounts[index2%2]);        Counts & currentCounts(previousAndCurrentCounts[(index2+1)%2]);
+        Counts & previousCounts(previousAndCurrentCounts[index2%2]);
+        Counts & currentCounts(previousAndCurrentCounts[(index2+1)%2]);
 
         for (Index index1=1; index1<=m_sequence1.size(); index1++)
         {

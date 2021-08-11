@@ -42,7 +42,8 @@ LongestPalindromicSubsequence::Count LongestPalindromicSubsequence::getLongestLe
         CountMatrix lengthMatrix(stringLength, stringLength, 0);
 
         for(Index index2=0; index2<stringLength; index2++)
-        {            lengthMatrix.setEntry(index2, index2, 1);
+        {
+            lengthMatrix.setEntry(index2, index2, 1);
             for(int index1=static_cast<int>(index2)-1; index1>=0; index1--) // reverse traversal to get previous values
             {
                 Count entryResult(0);
@@ -80,7 +81,8 @@ LongestPalindromicSubsequence::Count LongestPalindromicSubsequence::getLongestLe
     vector<Counts> previousAndCurrentCounts(2, Counts(stringLength, 0)); // set first row to zero
     for(Index index2=0; index2<stringLength; index2++)
     {
-        Counts & previousCounts(previousAndCurrentCounts[index2%2]);        Counts & currentCounts(previousAndCurrentCounts[(index2+1)%2]);
+        Counts & previousCounts(previousAndCurrentCounts[index2%2]);
+        Counts & currentCounts(previousAndCurrentCounts[(index2+1)%2]);
 
         currentCounts[index2]=1;
         for(int index1=static_cast<int>(index2)-1; index1>=0; index1--) // reverse traversal to get previous values
