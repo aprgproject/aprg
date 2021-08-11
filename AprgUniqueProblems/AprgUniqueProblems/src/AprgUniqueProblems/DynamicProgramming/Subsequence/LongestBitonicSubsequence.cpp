@@ -14,11 +14,11 @@ LongestBitonicSubsequence::LongestBitonicSubsequence(Values const& sequence)
 
 LongestBitonicSubsequence::Index LongestBitonicSubsequence::getLongestLength() const
 {
-    // Quadratic time because of double loop
+    // Time Complexity: O(n^2)
+    // Auxiliary Space: O(n)
 
     Index result(0);
-    if(!m_sequence.empty())
-    {
+    if(!m_sequence.empty())    {
         IndexToIndex subIncreasingLengths(m_sequence.size(), 1);
         IndexToIndex subDecreasingLengths(m_sequence.size(), 1);
         for (Index index(0); index<m_sequence.size(); index++)
@@ -54,11 +54,11 @@ LongestBitonicSubsequence::Index LongestBitonicSubsequence::getLongestLength() c
 
 LongestBitonicSubsequence::Values LongestBitonicSubsequence::getLongestSubsequence() const
 {
-    // Quadratic time because of double loop
+    // Time Complexity: O(n^2)
+    // Auxiliary Space: O(n)
 
     Values result;
-    if(!m_sequence.empty())
-    {
+    if(!m_sequence.empty())    {
         IndexToIndex subIncreasingLengths(m_sequence.size(), 1);
         IndexToIndex subDecreasingLengths(m_sequence.size(), 1);
         IndexToIndex indexToIncreasingPreviousIndex(m_sequence.size());
