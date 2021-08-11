@@ -1,7 +1,6 @@
-#include <AprgUniqueProblems/DynamicProgramming/Subsequence/LongestPalindromicSubsequence.hpp>
+#include <AprgUniqueProblems/DynamicProgramming/Palindrome/LongestPalindromicSubsequence.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
