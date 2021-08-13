@@ -78,7 +78,8 @@ PalindromePartitioning::Count PalindromePartitioning::getLongestLengthUsingTabul
     // Auxiliary Space: O(n^2) (partialCounts is linear, but isSubstrAPalindrome is quadratic)
 
     Count result(0);
-    if(!m_string.empty())    {
+    if(!m_string.empty())
+    {
         Index const stringLength = m_string.length();
         Counts partialCounts(stringLength, 0);
         BoolMatrix isSubstrAPalindrome(stringLength, stringLength, false);

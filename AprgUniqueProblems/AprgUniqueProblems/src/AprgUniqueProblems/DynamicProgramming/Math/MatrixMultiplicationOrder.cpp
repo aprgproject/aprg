@@ -14,7 +14,8 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
     // Time Complexity: Exponential
     // Auxiliary Space: Constant
 
-    Count result(0);    if(!m_dimensions.empty())
+    Count result(0);
+    if(!m_dimensions.empty())
     {
         result = getMinimumNumberOfOperationsUsingNaiveRecursion(0, m_dimensions.size()-1);
     }

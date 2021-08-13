@@ -55,7 +55,8 @@ MaximizeProfitInKnapsack::Profit MaximizeProfitInKnapsack::getBestProfitUsingTab
             for(Weight weight(smallestItemWeight); weight<profitMatrix.getNumberOfColumns(); weight++)
             {
                 if(weight >= itemWeight)
-                {                    Profit profit = max(profitMatrix.getEntry(weight, itemIndex+1),
+                {
+                    Profit profit = max(profitMatrix.getEntry(weight, itemIndex+1),
                                         itemProfit + profitMatrix.getEntry(weight-itemWeight, itemIndex+1));
                     profitMatrix.setEntry(weight, itemIndex, profit);
                 }
