@@ -2,9 +2,10 @@
 
 #include <Common/Bit/AlbaBitValueUtilities.hpp>
 
+#include <array>
+
 namespace alba
 {
-
 // Non class functions
 
 constexpr unsigned int getNumberOfOnesForOneByte(uint8_t const value)
