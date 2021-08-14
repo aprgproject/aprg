@@ -9,7 +9,8 @@ using namespace alba::mathHelper;
 using namespace alba::matrix;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace math
 {
@@ -209,6 +210,7 @@ UnsignedIntegers getFibonacciNumbersBelowThisNumber(UnsignedInteger const number
     }
     return result;
 }
+
 }
 
 }

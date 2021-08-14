@@ -7,7 +7,8 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace math
 {
@@ -78,7 +79,8 @@ TEST(MathSetTest, MathSetCreatedWithASetRuleWorks)
         return isEven(elementToCheck);
     });
 
-    EXPECT_TRUE(mathSet.contains(2));    EXPECT_FALSE(mathSet.contains(1));
+    EXPECT_TRUE(mathSet.contains(2));
+    EXPECT_FALSE(mathSet.contains(1));
     EXPECT_TRUE(mathSet.doesNotContain(3));
     EXPECT_FALSE(mathSet.doesNotContain(4));
     EXPECT_EQ("{set of even numbers}", mathSet.getDescription());
@@ -93,7 +95,8 @@ TEST(MathSetTest, IsASubsetOfWorks)
         return isEven(elementToCheck);
     });
 
-    EXPECT_TRUE(mathSet1.isASubsetOf(mathSet2, generateNumbersFromZeroToTen));    EXPECT_FALSE(mathSet2.isASubsetOf(mathSet1, generateNumbersFromZeroToTen));
+    EXPECT_TRUE(mathSet1.isASubsetOf(mathSet2, generateNumbersFromZeroToTen));
+    EXPECT_FALSE(mathSet2.isASubsetOf(mathSet1, generateNumbersFromZeroToTen));
 }
 
 TEST(MathSetTest, IsASupersetOfWorks)
@@ -104,7 +107,8 @@ TEST(MathSetTest, IsASupersetOfWorks)
         return isOdd(elementToCheck);
     });
 
-    EXPECT_TRUE(mathSet2.isASupersetOf(mathSet1, generateNumbersFromZeroToTen));    EXPECT_FALSE(mathSet1.isASupersetOf(mathSet2, generateNumbersFromZeroToTen));
+    EXPECT_TRUE(mathSet2.isASupersetOf(mathSet1, generateNumbersFromZeroToTen));
+    EXPECT_FALSE(mathSet1.isASupersetOf(mathSet2, generateNumbersFromZeroToTen));
 }
 
 TEST(MathSetTest, IsDisjointWithWorks)
@@ -118,6 +122,7 @@ TEST(MathSetTest, IsDisjointWithWorks)
         return isOdd(elementToCheck);
     });
     IntegerSet mathSet3({2,4});
+
     EXPECT_TRUE(mathSet1.isDisjointWith(mathSet2, generateNumbersFromZeroToTen));
     EXPECT_TRUE(mathSet2.isDisjointWith(mathSet1, generateNumbersFromZeroToTen));
     EXPECT_FALSE(mathSet1.isDisjointWith(mathSet3, generateNumbersFromZeroToTen));
@@ -132,6 +137,7 @@ TEST(MathSetTest, GetComplementWorks)
     });
 
     IntegerSet complementSet(mathSet.getComplement());
+
     EXPECT_FALSE(complementSet.contains(2));
     EXPECT_TRUE(complementSet.contains(5));
     EXPECT_TRUE(complementSet.doesNotContain(4));
@@ -149,6 +155,7 @@ TEST(MathSetTest, GetUnionWithWorks)
     });
 
     IntegerSet unionSet(mathSet1.getUnionWith(mathSet2));
+
     EXPECT_TRUE(unionSet.contains(2));
     EXPECT_FALSE(unionSet.contains(5));
     EXPECT_TRUE(unionSet.doesNotContain(7));
@@ -166,6 +173,7 @@ TEST(MathSetTest, GetIntersectionWithWorks)
     });
 
     IntegerSet intersectionSet(mathSet1.getIntersectionWith(mathSet2));
+
     EXPECT_TRUE(intersectionSet.contains(2));
     EXPECT_FALSE(intersectionSet.contains(5));
     EXPECT_TRUE(intersectionSet.doesNotContain(7));
@@ -183,6 +191,7 @@ TEST(MathSetTest, GetDifferenceWithWorks)
     });
 
     IntegerSet differenceSet(mathSet1.getDifferenceWith(mathSet2));
+
     EXPECT_TRUE(differenceSet.contains(1));
     EXPECT_FALSE(differenceSet.contains(2));
     EXPECT_TRUE(differenceSet.doesNotContain(2));
@@ -210,6 +219,7 @@ TEST(MathSetTest, GetUnionWorks)
     });
 
     IntegerSet unionSet(getUnion(mathSet1, mathSet2));
+
     EXPECT_TRUE(unionSet.contains(3));
     EXPECT_FALSE(unionSet.contains(6));
     EXPECT_TRUE(unionSet.doesNotContain(8));
@@ -227,6 +237,7 @@ TEST(MathSetTest, GetIntersectionWorks)
     });
 
     IntegerSet intersectionSet(getIntersection(mathSet1, mathSet2));
+
     EXPECT_TRUE(intersectionSet.contains(3));
     EXPECT_FALSE(intersectionSet.contains(6));
     EXPECT_TRUE(intersectionSet.doesNotContain(4));
@@ -244,6 +255,7 @@ TEST(MathSetTest, GetDifferenceWorks)
     });
 
     IntegerSet differenceSet(getDifference(mathSet1, mathSet2));
+
     EXPECT_TRUE(differenceSet.contains(1));
     EXPECT_FALSE(differenceSet.contains(2));
     EXPECT_TRUE(differenceSet.doesNotContain(2));

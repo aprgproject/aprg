@@ -8,6 +8,7 @@
 
 namespace alba
 {
+
 template <typename DataTypeToManipulate>
 class AlbaBitValueUtilities
 {
@@ -48,7 +49,8 @@ public:
         return sizeof(DataTypeToManipulate) * AlbaBitConstants::BYTE_SIZE_IN_BITS;
     }
 
-    static constexpr inline unsigned int getNumberOfOnes(DataTypeToManipulate const)    {
+    static constexpr inline unsigned int getNumberOfOnes(DataTypeToManipulate const)
+    {
         // This is similar with __builtin_popcount(x)
         // std::bitset can be used here but it would no longer be constexpr
 

@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -63,7 +64,8 @@ private:
                 if(mathHelper::isPowerOfTwo(distance)) // save distance if power of 2
                 {
                     m_startAndDistancePairToDestinationMap.emplace(VertexAndCountPair{vertex, distance}, result);
-                }            }
+                }
+            }
         }
         return result;
     }

@@ -6,6 +6,7 @@
 
 namespace alba
 {
+
 // Non class functions
 
 constexpr unsigned int getNumberOfOnesForOneByte(uint8_t const value)

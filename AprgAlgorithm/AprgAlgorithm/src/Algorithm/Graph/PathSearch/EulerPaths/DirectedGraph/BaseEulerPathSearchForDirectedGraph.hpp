@@ -68,7 +68,8 @@ protected:
                 if(mathHelper::isOdd(GraphUtilities::getDegreeAt(m_graph, vertex)))
                 {
                     result = vertex;
-                    break;                }
+                    break;
+                }
             }
         }
         return result;

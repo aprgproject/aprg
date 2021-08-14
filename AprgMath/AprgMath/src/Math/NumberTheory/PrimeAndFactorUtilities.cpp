@@ -5,6 +5,7 @@
 #include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
 #include <Common/Math/Helpers/PowerHelpers.hpp>
 #include <Math/NumberTheory/ModularArithmetic.hpp>
+
 using namespace alba::algorithm;
 using namespace alba::mathHelper;
 using namespace std;
@@ -40,7 +41,8 @@ bool isGoldbachConjectureTrue(UnsignedInteger const evenNumber)
     if(evenNumber > 2 && isEven(evenNumber))
     {
         UnsignedIntegers numbers(getPrimesBelowThisNumber(evenNumber));
-        TwoSum<UnsignedIntegers> twoSum(numbers);        auto primePair(twoSum.getNonDuplicateTwoValuesWithSum(evenNumber));
+        TwoSum<UnsignedIntegers> twoSum(numbers);
+        auto primePair(twoSum.getNonDuplicateTwoValuesWithSum(evenNumber));
         result = primePair.first != 0 && primePair.second != 0;
     }
     return result;
