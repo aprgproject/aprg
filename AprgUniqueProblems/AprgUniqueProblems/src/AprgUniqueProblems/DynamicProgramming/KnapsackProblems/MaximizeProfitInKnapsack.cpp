@@ -15,11 +15,10 @@ MaximizeProfitInKnapsack::MaximizeProfitInKnapsack(
 MaximizeProfitInKnapsack::Profit MaximizeProfitInKnapsack::getBestProfitUsingNaiveRecursion() const
 {
     // Time Complexity: O(2^n)
-    // Auxiliary Space :O(1)
+    // Auxiliary Space: O(1)
 
     return getBestProfitUsingNaiveRecursion(m_maximumWeight, 0);
 }
-
 MaximizeProfitInKnapsack::Profit MaximizeProfitInKnapsack::getBestProfitUsingMemoizationDP() const
 {
     // Time Complexity: O(N*W).
