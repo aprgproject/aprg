@@ -1,7 +1,6 @@
-#include <AprgUniqueProblems/DynamicProgramming/NumberTheory/UglyNumbers.hpp>
+#include <AprgUniqueProblems/DynamicProgramming/Math/NumberTheory/UglyNumbers.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
