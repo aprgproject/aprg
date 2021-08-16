@@ -21,7 +21,8 @@ bool IsPartialSumPossibleInKnapsack::isPartialSumPossibleUsingNaiveRecursion() c
     // Auxiliary Space: O(1)
 
     bool result(false);
-    if(!m_inputValues.empty())    {
+    if(!m_inputValues.empty())
+    {
         result = isPartialSumPossibleUsingNaiveRecursion(m_targetSum, 0);
     }
     return result;

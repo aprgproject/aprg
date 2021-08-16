@@ -76,6 +76,7 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
 {
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(n^2) (partialCounts is linear, but isSubstrAPalindrome is quadratic)
+
     Count result(0);
     if(!m_string.empty())
     {
@@ -102,6 +103,7 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
                 }
             }
         }
+
         for(Index right=0; right<stringLength; right++)
         {
             if(!isSubstrAPalindrome.getEntry(0, right))
