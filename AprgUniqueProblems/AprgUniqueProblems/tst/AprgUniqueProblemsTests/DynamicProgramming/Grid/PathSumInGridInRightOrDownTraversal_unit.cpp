@@ -1,7 +1,6 @@
-#include <AprgUniqueProblems/DynamicProgramming/PathSumInGrid/PathSumInGridInRightOrDownTraversal.hpp>
+#include <AprgUniqueProblems/DynamicProgramming/Grid/PathSumInGridInRightOrDownTraversal.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
