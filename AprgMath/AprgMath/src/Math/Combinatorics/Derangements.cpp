@@ -4,9 +4,9 @@
 #include <Common/Math/Helpers/CombinatoricsHelpers.hpp>
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
+using namespace alba::AlbaMathConstants;
 using namespace alba::mathHelper;
 using namespace std;
-
 namespace alba
 {
 
