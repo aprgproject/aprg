@@ -3,10 +3,10 @@
 
 #include <gtest/gtest.h>
 
+using namespace alba::AlbaMathConstants;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace mathHelper
 {
