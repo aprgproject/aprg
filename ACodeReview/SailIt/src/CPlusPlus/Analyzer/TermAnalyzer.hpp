@@ -5,11 +5,10 @@
 #include "Findings/FindingsToAdd.hpp"
 #include "Loopers/Looper.hpp"
 
-#include <Common/Container/AlbaOptional.hpp>
+#include <optional>
 
 #include <string>
 #include <unordered_map>
-
 using std::string;
 
 #define T(...) Term(__VA_ARGS__)
@@ -213,11 +212,10 @@ private:
     CPlusPlusDatabase& m_database;
     Findings& m_findings;
     FindingsBuffer m_findingsBuffer;
-    alba::AlbaOptional <SailIt&> m_optionalSailIt;
+    std::optional <SailIt&> m_optionalSailIt;
     bool m_isTermsModified;
     ModifyDetails m_modifyDetails;
-    MoveBackType m_moveBackType;
-    string m_baseDirectory;
+    MoveBackType m_moveBackType;    string m_baseDirectory;
     string m_fileName;
     unsigned int m_uniqueFileId;
 };

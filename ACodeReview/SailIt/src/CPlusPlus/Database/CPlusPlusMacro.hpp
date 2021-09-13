@@ -2,11 +2,10 @@
 
 #include "../Utilities.hpp"
 
-#include <Common/Container/AlbaOptional.hpp>
+#include <optional>
 
 #include <map>
 #include <string>
-
 using std::string;
 using std::map;
 using std::pair;
@@ -29,10 +28,9 @@ public:
     void setVariadicParameterIndex(int const parameterIndex);
 
 private:
-    alba::AlbaOptional<int> m_variadicParameterIndexOptional;
+    std::optional<int> m_variadicParameterIndexOptional;
     VectorOfTerms m_macroEquivalent;
     VectorOfStrings m_macroParameters;
-    MapOfPositionToParameter m_positionToParameter;
-};
+    MapOfPositionToParameter m_positionToParameter;};
 
 }
