@@ -118,11 +118,10 @@ DoubleOptional compareDeltasAndGetDifference(
     }
     if(!hasLimitExceeded)
     {
-        result.setValue(totalDifference/numberOfSamples);
+        result = totalDifference/numberOfSamples;
     }
     return result;
 }
-
 void searchForBestSampleIndexes(
         SearchResultsDetails & replicateAndSearchIndexes,
         unsigned int const sampleIntervalForReplication,
@@ -160,19 +159,18 @@ void searchForBestSampleIndexes(
                             multiplierForSearch,
                             replicationIndex, searchIndex,
                             numberOfSamplesToCompare);
-                if(differenceOptional.hasContent())
+                if(differenceOptional)
                 {
-                    if(isFirst || searchResult.minDifference > differenceOptional.get())
+                    if(isFirst || searchResult.minDifference > differenceOptional.value())
                     {
                         searchResult.isSampleFound=true;
                         searchResult.searchIndex=searchIndex;
                         searchResult.numberOfSamples=numberOfSamplesToCompare;
                         searchResult.multiplierForSearch=multiplierForSearch;
-                        searchResult.minDifference=differenceOptional.get();
+                        searchResult.minDifference=differenceOptional.value();
                         isFirst=false;
                     }
-                }
-            }
+                }            }
         }
         replicateAndSearchIndexes.emplace_back(searchResult);
     }
