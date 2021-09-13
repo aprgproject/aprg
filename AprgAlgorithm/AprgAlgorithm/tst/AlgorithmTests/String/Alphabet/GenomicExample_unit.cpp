@@ -6,10 +6,8 @@
 #include <gtest/gtest.h>
 
 #include <bitset>
-#include <sstream>
 
 using namespace std;
-
 namespace alba
 {
 

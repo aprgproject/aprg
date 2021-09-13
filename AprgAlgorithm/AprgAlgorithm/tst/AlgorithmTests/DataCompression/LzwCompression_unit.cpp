@@ -4,11 +4,8 @@
 
 #include <gtest/gtest.h>
 
-#include <sstream>
-
 using namespace alba::stringHelper;
 using namespace std;
-
 namespace alba
 {
 

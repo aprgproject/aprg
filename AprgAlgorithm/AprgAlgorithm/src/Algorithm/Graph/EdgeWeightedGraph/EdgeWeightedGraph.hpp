@@ -4,11 +4,10 @@
 #include <Algorithm/Graph/Utilities/SortedEdge.hpp>
 
 #include <algorithm>
-#include <sstream>
+#include <ostream>
 
 namespace alba
 {
-
 namespace algorithm
 {
 
@@ -64,22 +63,9 @@ public:
         return result;
     }
 
-    std::string getDisplayableString() const override
-    {
-        std::stringstream ss;
-        ss << BaseClass::getDisplayableString() << "Edges with weight: {";
-        for(auto const& edgeOrderedByWeight : m_edgeToWeightMap)
-        {
-            ss << edgeOrderedByWeight.first.first << "<->" << edgeOrderedByWeight.first.second << "("<< edgeOrderedByWeight.second << "), ";
-        }
-        ss << "}";
-        return ss.str();
-    }
-
     void connect(Vertex const& vertex1, Vertex const& vertex2, Weight const& weight)
     {
-        BaseClass::connect(vertex1, vertex2);
-        m_edgeToWeightMap[createEdgeInMap(vertex1, vertex2)] = weight;
+        BaseClass::connect(vertex1, vertex2);        m_edgeToWeightMap[createEdgeInMap(vertex1, vertex2)] = weight;
     }
 
     void disconnect(Vertex const& vertex1, Vertex const& vertex2) override
@@ -118,9 +104,19 @@ private:
         }
     }
 
+    friend std::ostream & operator<<(std::ostream & out, EdgeWeightedGraph const& graph)
+    {
+        out << dynamic_cast<BaseClass const&>(graph) << "Edges with weight: {";
+        for(auto const& edgeOrderedByWeight : graph.m_edgeToWeightMap)
+        {
+            out << edgeOrderedByWeight.first.first << "<->" << edgeOrderedByWeight.first.second << "("<< edgeOrderedByWeight.second << "), ";
+        }
+        out << "}";
+        return out;
+    }
+
     EdgeToWeightMap m_edgeToWeightMap;
 };
-
 }
 
 }

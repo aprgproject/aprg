@@ -1,13 +1,14 @@
 #include <Algorithm/Graph/DirectedGraph/DirectedGraphWithAdjacencyMatrix.hpp>
 #include <AlgorithmTests/Graph/DirectedGraph/Utilities/CommonTestsWithDirectedGraph.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <gtest/gtest.h>
 
 using namespace alba::algorithm::CommonTestsWithDirectedGraph;
+using namespace alba::stringHelper;
 
 namespace alba
 {
-
 namespace algorithm
 {
 
@@ -116,10 +117,9 @@ TEST(DirectedGraphWithAdjacencyMatrixTest, ComplicatedTestWorks)
     testWithComplicatedExampleWithVertexAsUnsignedInt<GraphForTest>();
 }
 
-TEST(DirectedGraphWithAdjacencyMatrixTest, GetDisplayableStringWorks)
+TEST(DirectedGraphWithAdjacencyMatrixTest, OutputStreamOperatorWorks)
 {
     GraphForTest graph;
-
     graph.connect(0U, 1U);
     graph.connect(2U, 0U);
 
@@ -152,9 +152,8 @@ TEST(DirectedGraphWithAdjacencyMatrixTest, GetDisplayableStringWorks)
               "-------------------------------------------------------------\n"
               "|[12]| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0  | 0  | 0  |\n"
               "-------------------------------------------------------------\n"
-              , graph.getDisplayableString());
+              , convertToString(graph));
 }
 
 }
-
 }

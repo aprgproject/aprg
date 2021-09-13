@@ -2,11 +2,9 @@
 
 #include <Algorithm/Search/RangeQuery/SegmentTree/RangeQueryWithStaticSegmentTree.hpp>
 #include <Algorithm/Utilities/MidpointOfIndexes.hpp>
-#include <Common/Container/AlbaOptional.hpp>
 #include <Common/Math/Helpers/ComputationHelpers.hpp>
 
-namespace alba
-{
+namespace alba{
 
 namespace algorithm
 {
@@ -25,11 +23,10 @@ public:
     using Utilities = typename BaseClass::Utilities;
     using IncrementFunction = std::function<Value(Index const, Index const)>;
     using UpdateDetail = Index;
-    using PendingUpdateDetail = AlbaOptional<UpdateDetail>;
+    using PendingUpdateDetail = std::optional<UpdateDetail>;
     using PendingUpdateDetails = std::vector<PendingUpdateDetail>;
 
-    RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdate(
-            Values const& valuesToCheck,
+    RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdate(            Values const& valuesToCheck,
             Function const& functionObject,
             IncrementFunction const& incrementFunction)
         : BaseClass(valuesToCheck, functionObject)
@@ -115,11 +112,10 @@ private:
         }
         else if(startInterval<=baseLeft && baseRight<=endInterval)
         {
-            m_startIndexesForPendingUpdates[currentChild].setValue(startInterval);
+            m_startIndexesForPendingUpdates[currentChild] = startInterval;
         }
         else
-        {
-            Index intersectionLeft = std::max(startInterval, baseLeft);
+        {            Index intersectionLeft = std::max(startInterval, baseLeft);
             Index intersectionRight = std::min(endInterval, baseRight);
             increment(b_treeValues[currentChild], startInterval, intersectionLeft, intersectionRight);
 
@@ -150,17 +146,16 @@ private:
         if(index < m_startIndexesForPendingUpdates.size())
         {
             PendingUpdateDetail & startIndexForPendingUpdate = m_startIndexesForPendingUpdates[index];
-            if(startIndexForPendingUpdate.hasContent())
+            if(startIndexForPendingUpdate)
             {
-                increment(b_treeValues[index], startIndexForPendingUpdate.get(), baseLeft, baseRight);
+                increment(b_treeValues[index], startIndexForPendingUpdate.value(), baseLeft, baseRight);
                 Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
                 incrementOrUpdateAtIndex(Utilities::getLeftChild(index), baseLeft, baseMidPoint, startIndexForPendingUpdate);
                 incrementOrUpdateAtIndex(Utilities::getRightChild(index), baseMidPoint+1, baseRight, startIndexForPendingUpdate);
-                startIndexForPendingUpdate.clear();
+                startIndexForPendingUpdate.reset();
             }
         }
     }
-
     inline void incrementOrUpdateAtIndex(
             Index const index,
             Index const baseLeft,
@@ -174,10 +169,9 @@ private:
         }
         else
         {
-            increment(b_treeValues[index], startIndexForPendingUpdate.get(), baseLeft, baseRight);
+            increment(b_treeValues[index], startIndexForPendingUpdate.value(), baseLeft, baseRight);
         }
     }
-
     inline void increment(Value & valueToChange, Index const startIndex, Index const left, Index const right) const
     {
         Index numberOfChildren = b_treeValues.size() - b_startOfChildren;

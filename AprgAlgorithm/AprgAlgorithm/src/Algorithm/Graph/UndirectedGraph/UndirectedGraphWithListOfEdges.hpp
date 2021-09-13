@@ -3,11 +3,10 @@
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 
 #include <algorithm>
-#include <sstream>
+#include <ostream>
 
 namespace alba
 {
-
 namespace algorithm
 {
 
@@ -97,22 +96,9 @@ public:
         return result;
     }
 
-    std::string getDisplayableString() const override
-    {
-        std::stringstream ss;
-        ss << "Edges: {";
-        for(auto const& edge : m_edges)
-        {
-            ss << edge.first << "<->" << edge.second << ", ";
-        }
-        ss << "}";
-        return ss.str();
-    }
-
     void connect(Vertex const& vertex1, Vertex const& vertex2) override
     {
-        if(!isDirectlyConnected(vertex1, vertex2))
-        {
+        if(!isDirectlyConnected(vertex1, vertex2))        {
             m_numberOfEdges++;
             m_edges.emplace(vertex1, vertex2);
             m_edges.emplace(vertex2, vertex1);
@@ -142,10 +128,20 @@ public:
 
 protected:
 
+    friend std::ostream & operator<<(std::ostream & out, UndirectedGraphWithListOfEdges const& graph)
+    {
+        out << "Edges: {";
+        for(auto const& edge : graph.m_edges)
+        {
+            out << edge.first << "<->" << edge.second << ", ";
+        }
+        out << "}";
+        return out;
+    }
+
     unsigned int m_numberOfEdges;
     SetOfEdges m_edges;
 };
-
 }
 
 }

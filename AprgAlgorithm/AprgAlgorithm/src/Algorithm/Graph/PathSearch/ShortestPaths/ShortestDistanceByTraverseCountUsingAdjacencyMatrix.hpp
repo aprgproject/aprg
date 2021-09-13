@@ -1,9 +1,9 @@
 #pragma once
 
 #include <Common/Math/Number/AlbaNumber.hpp>
+#include <Common/Math/Number/AlbaNumberConstants.hpp>
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 #include <Common/Math/Matrix/Utilities/AlbaMatrixUtilities.hpp>
-
 namespace alba
 {
 
@@ -46,11 +46,10 @@ private:
         {
             // Let us construct an adjacency matrix where INFINITY means that an edge does not exist, and other values correspond to edge weights.
             AlbaNumber entryValue = adjacencyMatrix.getEntry(x, y) ?
-                        AlbaNumber(graph.getWeight(x, y)) : AlbaNumber(AlbaNumber::Value::PositiveInfinity);
+                        AlbaNumber(graph.getWeight(x, y)) : AlbaNumberConstants::ALBA_NUMBER_POSITIVE_INFINITY;
             initialDistanceMatrix.setEntry(x, y, entryValue);
         });
-        return transformMultipleTimes(initialDistanceMatrix, traverseCount);
-    }
+        return transformMultipleTimes(initialDistanceMatrix, traverseCount);    }
 
     DistancetMatrix transformMultipleTimes(
             DistancetMatrix const& base,
@@ -111,11 +110,10 @@ private:
             DistancetMatrix::MatrixData const& first,
             DistancetMatrix::MatrixData const& second)
     {
-        DistanceEntry result(AlbaNumber::Value::PositiveInfinity);
+        DistanceEntry result(AlbaNumberConstants::ALBA_NUMBER_POSITIVE_INFINITY);
         unsigned int minSize = std::min(first.size(), second.size());
         for(unsigned int i=0; i<minSize; i++)
-        {
-            AlbaNumber currentValue = first.at(i) + second.at(i);
+        {            AlbaNumber currentValue = first.at(i) + second.at(i);
             if(currentValue < result)
             {
                 result = currentValue;
