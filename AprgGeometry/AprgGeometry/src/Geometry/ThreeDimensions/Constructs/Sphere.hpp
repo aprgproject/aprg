@@ -6,6 +6,7 @@
 
 namespace alba
 {
+
 namespace ThreeDimensions
 {
 
@@ -26,6 +27,7 @@ public:
 
 private:
     friend std::ostream & operator<<(std::ostream & out, Sphere const& sphere);
+
     Point m_center;
     double m_radius;
     double m_radiusSquared;

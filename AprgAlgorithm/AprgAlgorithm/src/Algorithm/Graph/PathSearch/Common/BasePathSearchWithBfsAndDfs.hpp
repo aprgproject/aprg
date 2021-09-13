@@ -78,6 +78,7 @@ public:
     }
 
 protected:
+
     void clear()
     {
         m_processedVertices.clear();

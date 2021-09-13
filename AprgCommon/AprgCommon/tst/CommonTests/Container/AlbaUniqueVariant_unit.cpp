@@ -12,7 +12,8 @@ TEST(UniqueVariantTest, AcquiringVariantTypeInvokesDefaultConstructor)
     {
         ExampleStructure1()
             : unsignedField(0)
-            , floatField(0.F)        {}
+            , floatField(0.F)
+        {}
 
         unsigned unsignedField;
         float floatField;
@@ -22,7 +23,8 @@ TEST(UniqueVariantTest, AcquiringVariantTypeInvokesDefaultConstructor)
     {
         ExampleStructure2()
             : doubleField(0.0)
-            , charField('\0')        {}
+            , charField('\0')
+        {}
 
         double doubleField;
         char charField;
@@ -41,6 +43,7 @@ TEST(UniqueVariantTest, AcquiringVariantTypeInvokesDefaultConstructor)
     ASSERT_EQ('\0', exampleStructure2.charField);
 }
 
+
 class DestructorClass : public VariantDataType
 {
 public:
@@ -48,7 +51,8 @@ public:
     ~DestructorClass()
     {
         s_destructorInvoked = true;
-    }};
+    }
+};
 bool DestructorClass::s_destructorInvoked = false;
 
 TEST(UniqueVariantTest, AcquiringVariantTypeDifferentThanAlreadyInVariantInvokesDestructor)
@@ -94,7 +98,8 @@ TEST(UniqueVariantTest, PolymorphismIsSupportedByUniqueVariant)
         int getValue() const override
         {
             return valueFromTest;
-        }    };
+        }
+    };
 
     // When
     UniqueVariant<Derived> variant;

@@ -122,6 +122,7 @@ DoubleOptional compareDeltasAndGetDifference(
     }
     return result;
 }
+
 void searchForBestSampleIndexes(
         SearchResultsDetails & replicateAndSearchIndexes,
         unsigned int const sampleIntervalForReplication,
@@ -170,7 +171,8 @@ void searchForBestSampleIndexes(
                         searchResult.minDifference=differenceOptional.value();
                         isFirst=false;
                     }
-                }            }
+                }
+            }
         }
         replicateAndSearchIndexes.emplace_back(searchResult);
     }

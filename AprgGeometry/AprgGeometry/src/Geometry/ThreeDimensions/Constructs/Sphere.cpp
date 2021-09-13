@@ -95,6 +95,7 @@ optional<double> Sphere::calculateZFromXAndY(double const x, double const y, dou
     }
     return result;
 }
+
 ostream & operator<<(ostream & out, Sphere const& sphere)
 {
     out << "(center: " << sphere.m_center << " radius: " << sphere.m_radius << ")";

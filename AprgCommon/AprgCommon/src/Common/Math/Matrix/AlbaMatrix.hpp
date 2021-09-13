@@ -8,7 +8,8 @@
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Common/User/DisplayTable.hpp>
 
-#include <cassert>#include <functional>
+#include <cassert>
+#include <functional>
 #include <sstream>
 
 namespace alba
@@ -189,7 +190,8 @@ public:
 
     void retrieveColumn(MatrixData & column, unsigned int const x) const
     {
-        column.reserve(m_numberOfRows);        for(unsigned int y=0; y<m_numberOfRows; y++)
+        column.reserve(m_numberOfRows);
+        for(unsigned int y=0; y<m_numberOfRows; y++)
         {
             column.emplace_back(getEntry(x, y));
         }
@@ -395,6 +397,7 @@ private:
         out << "Matrix output:\n" << table;
         return out;
     }
+
     unsigned int m_numberOfColumns;
     unsigned int m_numberOfRows;
     MatrixData m_matrixData;

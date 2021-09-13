@@ -2,6 +2,7 @@
 #include <Common/Time/AlbaWindowsTimer.hpp>
 
 #include <gtest/gtest.h>
+
 namespace alba
 {
 

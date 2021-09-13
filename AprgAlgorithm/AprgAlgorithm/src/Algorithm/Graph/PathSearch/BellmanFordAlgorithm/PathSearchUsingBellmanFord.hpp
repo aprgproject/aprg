@@ -106,7 +106,8 @@ private:
         Vertex result{};
         if(!m_queueOfVertices.empty())
         {
-            result = m_queueOfVertices.front();            m_queueOfVertices.pop_front();
+            result = m_queueOfVertices.front();
+            m_queueOfVertices.pop_front();
             m_verticesInQueue.removeVertex(result);
         }
         return result;

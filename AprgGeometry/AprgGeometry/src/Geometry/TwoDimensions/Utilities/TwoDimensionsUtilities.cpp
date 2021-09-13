@@ -957,7 +957,8 @@ void traverseCircleAreaBetweenTwoRadius(
                 }
             }
         }
-    }}
+    }
+}
 
 }
 }

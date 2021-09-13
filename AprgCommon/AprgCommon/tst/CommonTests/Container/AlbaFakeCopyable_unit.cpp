@@ -9,7 +9,8 @@ struct FakeCopyableExample
 {
     FakeCopyableExample()
         : value(0U)
-    {        ++numberOfConstructorExecutions;
+    {
+        ++numberOfConstructorExecutions;
     }
 
     FakeCopyableExample(unsigned int const valueAsParameter)

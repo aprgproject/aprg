@@ -8,6 +8,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -182,7 +183,8 @@ public:
 
     void connect(Vertex const& vertex1, Vertex const& vertex2, FlowDataType const& capacity, FlowDataType const& flow)
     {
-        connect(vertex1, vertex2);        m_edgeToFlowEdgeDetailsMap[Edge{vertex1, vertex2}] = {capacity, flow};
+        connect(vertex1, vertex2);
+        m_edgeToFlowEdgeDetailsMap[Edge{vertex1, vertex2}] = {capacity, flow};
     }
 
     void disconnect(Vertex const& vertex1, Vertex const& vertex2) override
@@ -250,6 +252,7 @@ private:
 
     EdgeToFlowEdgeDetailsMap m_edgeToFlowEdgeDetailsMap;
 };
+
 }
 
 }

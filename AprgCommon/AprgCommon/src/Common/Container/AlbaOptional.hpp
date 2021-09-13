@@ -2,7 +2,8 @@
 
 #pragma once
 
-#include <cassert>#include <memory>
+#include <cassert>
+#include <memory>
 #include <ostream>
 
 namespace alba

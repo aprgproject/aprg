@@ -9,6 +9,7 @@
 
 namespace alba
 {
+
 template <unsigned int DIMENSIONS>
 class DataStatistics
 {
@@ -21,6 +22,7 @@ public:
 
     DataStatistics()
     {}
+
     DataStatistics(Samples const& samples)
         : m_samples(samples)
     {}
@@ -36,7 +38,8 @@ public:
         m_dispersionAroundTheCentroid.reset();
     }
 
-    Samples const& getSamples() const    {
+    Samples const& getSamples() const
+    {
         return m_samples;
     }
 
@@ -82,13 +85,15 @@ public:
         return m_dispersionAroundTheCentroid.value();
     }
 
-protected:    void calculateSumIfNeeded()
+protected:
+    void calculateSumIfNeeded()
     {
         if(!m_sum)
         {
             m_sum = StatisticsUtilities::calculateSum(m_samples);
         }
     }
+
     void calculateMeanIfNeeded()
     {
         if(!m_mean)
@@ -98,6 +103,7 @@ protected:    void calculateSumIfNeeded()
             m_mean = m_sum.value()/sampleSize;
         }
     }
+
     void calculateSampleVarianceIfNeeded()
     {
         calculateVarianceIfNeeded(m_sampleVariance, m_samples.size()-1);
@@ -139,6 +145,7 @@ protected:    void calculateSumIfNeeded()
             }
         }
     }
+
     void calculateStandardDeviationIfNeeded(SampleOptional & standardDeviation, SampleOptional & variance, unsigned int sampleSize)
     {
         if(!standardDeviation)
@@ -149,6 +156,7 @@ protected:    void calculateSumIfNeeded()
             standardDeviation = standardDeviationTemp;
         }
     }
+
     void calculateDispersionAroundTheCentroidIfNeeded()
     {
         if(!m_dispersionAroundTheCentroid)
@@ -159,6 +167,7 @@ protected:    void calculateSumIfNeeded()
             m_dispersionAroundTheCentroid = pow((double)dispersionCalculationTemp.getSum(), 0.5);
         }
     }
+
     SampleOptional m_sum;
     SampleOptional m_mean;
     SampleOptional m_sampleVariance;

@@ -2,6 +2,7 @@
 #include "AlbaLinuxTimeHelper.hpp"
 
 #include <Common/Time/AlbaDateTimeConstants.hpp>
+
 #include <unistd.h>
 
 namespace alba
@@ -9,7 +10,8 @@ namespace alba
 
 AlbaDateTime convertSystemTimeToAlbaDateTime(struct timespec const& timeSpec)
 {
-    struct tm * timeInformation;    timeInformation = localtime(&(timeSpec.tv_sec));
+    struct tm * timeInformation;
+    timeInformation = localtime(&(timeSpec.tv_sec));
     return AlbaDateTime(
                 static_cast<unsigned short>(timeInformation->tm_year),
                 static_cast<unsigned char>(timeInformation->tm_mon+1),

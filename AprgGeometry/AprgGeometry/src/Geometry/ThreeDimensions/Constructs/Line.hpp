@@ -5,7 +5,8 @@
 #include <optional>
 #include <vector>
 
-namespace alba{
+namespace alba
+{
 
 namespace ThreeDimensions
 {
@@ -47,6 +48,7 @@ private:
     bool areAllCoefficientsZero() const;
 
     friend std::ostream & operator<<(std::ostream & out, Line const& line);
+
     double m_aCoefficient; //form: (x-x0)/a = (y-y0)/b = (z-z0)/c
     double m_bCoefficient; //form: (x-x0)/a = (y-y0)/b = (z-z0)/c
     double m_cCoefficient; //form: (x-x0)/a = (y-y0)/b = (z-z0)/c

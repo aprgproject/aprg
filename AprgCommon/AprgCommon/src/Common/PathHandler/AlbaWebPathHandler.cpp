@@ -18,7 +18,8 @@ AlbaWebPathHandler::AlbaWebPathHandler(string const& path)
     setPath(path);
 }
 
-void AlbaWebPathHandler::clear(){
+void AlbaWebPathHandler::clear()
+{
     AlbaPathHandler::clear();
     m_protocolWithSymbols.clear();
     m_urlParameters.clear();
@@ -82,7 +83,8 @@ void AlbaWebPathHandler::save(string const& path)
 void AlbaWebPathHandler::setPath(string const& path)
 {
     string protocolWithSymbols;
-    string pathAfterProtocol;    splitPathToBeforeAndAfterProtocol(path, protocolWithSymbols, pathAfterProtocol);
+    string pathAfterProtocol;
+    splitPathToBeforeAndAfterProtocol(path, protocolWithSymbols, pathAfterProtocol);
     string correctPathAfterProtocol(getCorrectPathWithReplacedSlashCharacters(pathAfterProtocol, m_slashCharacterString));
     string correctPathAfterProtocolWithoutUrlParameters(getCorrectPathWithoutUrlParameters(correctPathAfterProtocol));
     setProtocolWithSymbols(protocolWithSymbols);

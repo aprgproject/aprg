@@ -83,7 +83,8 @@ private:
     using BaseClass::initializeWithStartVertices;
 
     void traverseUsingBfs(Vertices const& startVertices)
-    {        b_processedVertices.putVertices(startVertices);
+    {
+        b_processedVertices.putVertices(startVertices);
 
         std::deque<Vertex> nearestVertices;
         std::copy(startVertices.cbegin(), startVertices.cend(), std::back_inserter(nearestVertices));

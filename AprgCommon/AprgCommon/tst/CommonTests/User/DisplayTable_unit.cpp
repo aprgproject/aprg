@@ -6,7 +6,8 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 TEST(DisplayTableTest, TableCanOutputProvideText)
 {
@@ -18,7 +19,8 @@ TEST(DisplayTableTest, TableCanOutputProvideText)
     EXPECT_EQ("Test\n", convertToString(table));
 }
 
-TEST(DisplayTableTest, TableCanOutputTextWithBorders){
+TEST(DisplayTableTest, TableCanOutputTextWithBorders)
+{
     DisplayTable table;
 
     table.setBorders("X","X");
@@ -28,7 +30,8 @@ TEST(DisplayTableTest, TableCanOutputTextWithBorders){
     EXPECT_EQ("XXXXXX\nXTestX\nXXXXXX\n", convertToString(table));
 }
 
-TEST(DisplayTableTest, TableCanOutputTextFor3by3Table){
+TEST(DisplayTableTest, TableCanOutputTextFor3by3Table)
+{
     DisplayTable table;
 
     table.setBorders("-","|");
@@ -49,7 +52,8 @@ TEST(DisplayTableTest, TableCanOutputTextFor3by3Table){
               convertToString(table));
 }
 
-TEST(DisplayTableTest, CellWithAlignmentCanBeAdded){
+TEST(DisplayTableTest, CellWithAlignmentCanBeAdded)
+{
     DisplayTable table;
 
     table.addRow();
@@ -66,7 +70,8 @@ TEST(DisplayTableTest, CellWithAlignmentCanBeAdded){
     EXPECT_EQ("12345\n  C  \nL    \n    R\n  J  \n", convertToString(table));
 }
 
-TEST(DisplayTableTest, CanBeConstructedWithNumberOfColumnsAndRows){
+TEST(DisplayTableTest, CanBeConstructedWithNumberOfColumnsAndRows)
+{
     DisplayTable table(2U, 3U);
 
     table.setBorders("-","|");

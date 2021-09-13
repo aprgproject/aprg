@@ -19,7 +19,8 @@ public:
 
     enum class Type
     {
-        Integer,        Double,
+        Integer,
+        Double,
         Fraction,
         ComplexNumber
     };
@@ -48,7 +49,8 @@ public:
     };
     class Configuration
             : public AlbaConfigurationHolder<ConfigurationDetails>
-    {    public:
+    {
+    public:
         using BaseConfigurationHolder=AlbaConfigurationHolder<ConfigurationDetails>;
         static ConfigurationDetails getConfigurationDetailsWithZeroTolerance();
 
@@ -114,7 +116,8 @@ public:
     // This should be constexpr as well but a lot of coding is needed
     bool operator==(AlbaNumber const& second) const;
     bool operator!=(AlbaNumber const& second) const;
-    bool operator<=(AlbaNumber const& second) const;    bool operator>=(AlbaNumber const& second) const;
+    bool operator<=(AlbaNumber const& second) const;
+    bool operator>=(AlbaNumber const& second) const;
     bool operator<(AlbaNumber const& second) const;
     bool operator>(AlbaNumber const& second) const;
     AlbaNumber operator+() const;
@@ -183,6 +186,7 @@ public:
     double getDouble() const;
     FractionData getFractionData() const;
     ComplexNumberData getComplexNumberData() const;
+
     unsigned int getNumberDataSize() const;
 
     void convertToInteger();
@@ -202,7 +206,8 @@ private:
     void constructBasedFromComplexNumberDetails(NumberType1 const realPart, NumberType2 const imaginaryPart);
 
     AlbaNumber addBothIntegersAndReturnNumber(
-            long long int const integerValue1,            long long int const integerValue2) const;
+            long long int const integerValue1,
+            long long int const integerValue2) const;
     AlbaNumber addBothDoubleAndReturnNumber(double const doubleValue1, double const doubleValue2) const;
     AlbaNumber addBothFractionsAndReturnNumber(
             FractionData const& fractionData1,
@@ -253,4 +258,5 @@ private:
 };
 
 template <> AlbaNumber::ConfigurationDetails getDefaultConfigurationDetails<AlbaNumber::ConfigurationDetails>();
+
 }

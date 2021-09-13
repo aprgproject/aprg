@@ -3,6 +3,7 @@
 #pragma once
 
 #include <Common/Types/AlbaTypeId.hpp>
+
 #include <type_traits>
 
 namespace alba

@@ -9,6 +9,7 @@ using namespace alba::stringHelper;
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -128,4 +129,5 @@ TEST(DirectedGraphWithArrayOfAdjacencyListsTest, OutputStreamOperatorWorks)
 }
 
 }
+
 }

@@ -52,7 +52,8 @@ private:
     void setPath(std::string const& path);
     void setDriveOrRoot();
     void findFilesAndDirectoriesWithDepth(
-            std::string const& currentDirectory,            std::string const& wildCardSearch,
+            std::string const& currentDirectory,
+            std::string const& wildCardSearch,
             ListOfPaths& listOfFiles,
             ListOfPaths& listOfDirectories,
             int depth) const;

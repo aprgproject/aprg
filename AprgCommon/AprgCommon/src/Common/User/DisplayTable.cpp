@@ -7,6 +7,7 @@
 
 using namespace alba::stringHelper;
 using namespace std;
+
 namespace alba
 {
 
@@ -69,7 +70,8 @@ unsigned int DisplayTableRow::getCharacters() const
     });
 }
 
-Cells const& DisplayTableRow::getCells() const{
+Cells const& DisplayTableRow::getCells() const
+{
     return m_cells;
 }
 
@@ -162,7 +164,8 @@ void DisplayTable::setBorders(string const& horizontalBorder, string const& vert
 
 string DisplayTable::getCellTextWithDesiredLength(DisplayTableCell const& cell, unsigned int const desiredLength) const
 {
-    DisplayTableCellMode mode = cell.getHorizontalMode();    string result;
+    DisplayTableCellMode mode = cell.getHorizontalMode();
+    string result;
     switch(mode)
     {
     case DisplayTableCellMode::justify:
@@ -190,6 +193,7 @@ string DisplayTable::getHorizontalBorderLine(unsigned int const totalColumnLengt
     }
     return result;
 }
+
 string DisplayTable::getVerticalBorderPoint() const
 {
     return m_verticalBorder;

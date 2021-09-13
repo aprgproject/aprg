@@ -8,6 +8,7 @@
 #include <bitset>
 
 using namespace std;
+
 namespace alba
 {
 

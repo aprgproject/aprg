@@ -155,6 +155,7 @@ optional<double> Plane::calculateZFromXAndY(double const x, double const y) cons
     }
     return result;
 }
+
 void Plane::calculateDCoefficientUsingCoefficientsABCAndAPoint(Point const& first)
 {
     m_dCoefficient = -(m_aCoefficient*first.getX())-(m_bCoefficient*first.getY())-(m_cCoefficient*first.getZ());

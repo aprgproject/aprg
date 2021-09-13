@@ -8,7 +8,8 @@
 
 using namespace alba::algorithm;
 using namespace alba::mathHelper;
-using namespace alba::matrix;using namespace std;
+using namespace alba::matrix;
+using namespace std;
 
 namespace alba
 {

@@ -17,6 +17,7 @@
 
 namespace alba
 {
+
 namespace AprgBitmap
 {
 
@@ -44,7 +45,8 @@ public:
     std::optional<TwoDimensions::Circle> getPossiblePenCircle(
             BitmapSnippet const& inputSnippet,
             BitmapXY const& centerPoint,
-            uint32_t const similarityColorLimit,            double const acceptablePenPercentage);
+            uint32_t const similarityColorLimit,
+            double const acceptablePenPercentage);
 
     //determine functions
     void determinePenPoints(

@@ -68,6 +68,7 @@ TEST(ThreeDimensionsLineTest, HorizontalLine)
     ASSERT_TRUE(line.calculateZFromX(1)); EXPECT_EQ(-2, line.calculateZFromX(1).value());
     EXPECT_FALSE(line.calculateZFromY(1));
 }
+
 TEST(ThreeDimensionsLineTest, VerticalLine)
 {
     Line line(Point(2,-3, 6), Point(2,3, -6));
@@ -87,7 +88,8 @@ TEST(ThreeDimensionsLineTest, VerticalLine)
     ASSERT_TRUE(line.calculateZFromY(1)); EXPECT_EQ(-2, line.calculateZFromY(1).value());
 }
 
-TEST(ThreeDimensionsLineTest, ParallelWithZAxis){
+TEST(ThreeDimensionsLineTest, ParallelWithZAxis)
+{
     Line line(Point(-2,4,6), Point(2,-4,6));
 
     EXPECT_FALSE(line.isInvalid());
@@ -105,7 +107,8 @@ TEST(ThreeDimensionsLineTest, ParallelWithZAxis){
     ASSERT_TRUE(line.calculateZFromY(1)); EXPECT_EQ(6, line.calculateZFromY(1).value());
 }
 
-TEST(ThreeDimensionsLineTest, LineNotParallelWithXYZAxis){
+TEST(ThreeDimensionsLineTest, LineNotParallelWithXYZAxis)
+{
     Line line(Point(2,4,5), Point(3,3,3));
 
     EXPECT_FALSE(line.isInvalid());
@@ -123,7 +126,8 @@ TEST(ThreeDimensionsLineTest, LineNotParallelWithXYZAxis){
     ASSERT_TRUE(line.calculateZFromY(1)); EXPECT_EQ(-1, line.calculateZFromY(1).value());
 }
 
-TEST(ThreeDimensionsLineTest, LineWithSlopeSet){
+TEST(ThreeDimensionsLineTest, LineWithSlopeSet)
+{
     Line line(3, 2, 1, Point(1,2,3));
 
     EXPECT_FALSE(line.isInvalid());
@@ -141,7 +145,8 @@ TEST(ThreeDimensionsLineTest, LineWithSlopeSet){
     ASSERT_TRUE(line.calculateZFromY(1)); EXPECT_EQ(2.5, line.calculateZFromY(1).value());
 }
 
-TEST(ThreeDimensionsLineTest, LineWithSumOfCoefficientsEqualToZero){
+TEST(ThreeDimensionsLineTest, LineWithSumOfCoefficientsEqualToZero)
+{
     Line line(-2, 1, 1, Point(1,0,0));
 
     EXPECT_FALSE(line.isInvalid());
@@ -159,7 +164,8 @@ TEST(ThreeDimensionsLineTest, LineWithSumOfCoefficientsEqualToZero){
     ASSERT_TRUE(line.calculateZFromY(1)); EXPECT_EQ(1, line.calculateZFromY(1).value());
 }
 
-TEST(ThreeDimensionsLineTest, LineWithSomeZeroCoefficientWorks){
+TEST(ThreeDimensionsLineTest, LineWithSomeZeroCoefficientWorks)
+{
     Line line(Point(0,40,0), Point(40,0,0));
 
     EXPECT_FALSE(line.isInvalid());

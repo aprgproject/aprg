@@ -7,6 +7,7 @@
 
 namespace alba
 {
+
 namespace TwoDimensions
 {
 
@@ -34,6 +35,7 @@ public:
     std::optional<double> calculateXFromYWithoutCenter(double const y, double const signOfRoot) const;
     Point getPointAtAngle(double const angleInRadians);
     Point getNearestPointInCircumference(Point const& pointNotCircumference) const;
+
 private:
     void determineAndSaveCenterAndRadiusFromCoefficients(double const a, double const d, double const e, double const f);
     Points getPointsInTraversingXAndY(double const signOfX, double const signOfY, double const interval) const;

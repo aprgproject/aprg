@@ -5,7 +5,8 @@ namespace alba
 
 AlbaDateTime convertSystemTimeToAlbaDateTime(SYSTEMTIME const& systemTime)
 {
-    return AlbaDateTime(systemTime.wYear,                        systemTime.wMonth,
+    return AlbaDateTime(systemTime.wYear,
+                        systemTime.wMonth,
                         systemTime.wDay,
                         systemTime.wHour,
                         systemTime.wMinute,
@@ -14,3 +15,4 @@ AlbaDateTime convertSystemTimeToAlbaDateTime(SYSTEMTIME const& systemTime)
 }
 
 }//namespace alba
+

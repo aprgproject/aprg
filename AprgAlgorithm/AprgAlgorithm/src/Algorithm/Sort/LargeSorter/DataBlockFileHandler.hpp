@@ -7,7 +7,8 @@
 #include <optional>
 #include <string>
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {
@@ -35,6 +36,7 @@ public:
         }
         return false;
     }
+
     void openFileIfNeeded(std::string const& path)
     {
         if(!m_fileOptional)
@@ -46,7 +48,8 @@ public:
             std::ofstream & fileStream (m_fileOptional.value());
             fileStream.open(m_path, std::ios::ate|std::ios::app);
             assert(!fileStream.fail());
-        }    }
+        }
+    }
 
     void add(ObjectToSort const& objectToSort)
     {
@@ -65,4 +68,5 @@ private:
 };
 
 }
+
 }//namespace alba

@@ -8,7 +8,8 @@
 using namespace alba::AlbaNumberConstants;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace mathHelper
 {
@@ -111,6 +112,7 @@ TEST(PrecisionHelpersTest, IsValueWithinUnsignedLongLongIntegerLimitsWorks)
     EXPECT_TRUE(isValueWithinLimits<unsigned long long int>(static_cast<double>(ULLONG_MAX)));
     EXPECT_FALSE(isValueWithinLimits<unsigned long long int>(static_cast<double>(ULLONG_MAX)*2));
 }
+
 TEST(PrecisionHelpersTest, IsValueBeyondLimitsWorksForInteger)
 {
     EXPECT_TRUE(isValueBeyondLimits<int>(static_cast<double>(INT_MIN)-1));
@@ -173,6 +175,7 @@ TEST(PrecisionHelpersTest, IsValueBeyondUnsignedLongLongIntegerLimitsWorks)
     EXPECT_FALSE(isValueBeyondLimits<unsigned long long int>(static_cast<double>(ULLONG_MAX)));
     EXPECT_TRUE(isValueBeyondLimits<unsigned long long int>(static_cast<double>(ULLONG_MAX)*2));
 }
+
 TEST(PrecisionHelpersTest, GetIntegerAfterRoundingADoubleValueWorks)
 {
     EXPECT_EQ(0, getIntegerAfterRoundingADoubleValue<int>(0));
@@ -267,4 +270,5 @@ TEST(PrecisionHelpersTest, ConvertIfInfinityToNearestFiniteValueWorks)
 }
 
 }
+
 }

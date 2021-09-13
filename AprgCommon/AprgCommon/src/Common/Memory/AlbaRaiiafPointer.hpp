@@ -18,7 +18,8 @@ public:
         , m_voidPointer(nullptr)
     {}
 
-    ~AlbaRaiiafPointer()    {
+    ~AlbaRaiiafPointer()
+    {
         assert(!m_hasContent);
     }
 

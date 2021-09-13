@@ -108,7 +108,8 @@ void BtsLogSorter::processLineInFile(string const& filename, string const& lineI
         m_startupLogStreamOptional.value() << logPrint <<endl;
     }
     else
-    {        m_sorterWithPcTime.add(logPrint);
+    {
+        m_sorterWithPcTime.add(logPrint);
     }
 }
 
@@ -201,7 +202,8 @@ void BtsLogSorter::addStartupLogsOnSorterWithPcTime()
     m_startupLogStreamOptional.reset();
     BtsPrintReaderWithRollback printReader;
     printReader.openIfNeeded(m_pathOfStartupLog);
-    double fileSize(AlbaLocalPathHandler(m_pathOfStartupLog).getFileSizeEstimate());    while(printReader.isGood())
+    double fileSize(AlbaLocalPathHandler(m_pathOfStartupLog).getFileSizeEstimate());
+    while(printReader.isGood())
     {
         BtsLogPrint startupLogPrint(printReader.getPrint());
         if(!startupLogPrint.isEmpty())

@@ -7,6 +7,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -73,7 +74,8 @@ public:
 
     void connect(Vertex const& sourceVertex, Vertex const& destinationVertex) override
     {
-        if(!isDirectlyConnected(sourceVertex, destinationVertex))        {
+        if(!isDirectlyConnected(sourceVertex, destinationVertex))
+        {
             m_numberOfEdges++;
             m_edges.emplace(sourceVertex, destinationVertex);
         }
@@ -109,7 +111,8 @@ protected:
 
     SetOfVertices getUniqueVertices() const
     {
-        SetOfVertices uniqueVertices;        for(auto const& edge : m_edges)
+        SetOfVertices uniqueVertices;
+        for(auto const& edge : m_edges)
         {
             uniqueVertices.emplace(edge.first);
             uniqueVertices.emplace(edge.second);

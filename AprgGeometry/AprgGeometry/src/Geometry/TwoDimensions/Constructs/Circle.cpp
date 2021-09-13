@@ -187,6 +187,7 @@ optional<double> Circle::calculateXFromYWithoutCenter(double const y, double con
     }
     return result;
 }
+
 Point Circle::getPointAtAngle(double const angleInRadians)
 {
     double deltaX = cos(angleInRadians) * m_radius;
@@ -252,7 +253,8 @@ Points Circle::getPointsInTraversingY(double const signOfX, double const signOfY
             result.emplace_back(xCoordinate.value(), yValue);
         }
     });
-    return result;}
+    return result;
+}
 
 Points Circle::getPointsInTraversingX(double const signOfX, double const signOfY, double const interval) const
 {
@@ -266,7 +268,8 @@ Points Circle::getPointsInTraversingX(double const signOfX, double const signOfY
             result.emplace_back(xValue, yCoordinate.value());
         }
     });
-    return result;}
+    return result;
+}
 
 ostream & operator<<(ostream & out, Circle const& circle)
 {

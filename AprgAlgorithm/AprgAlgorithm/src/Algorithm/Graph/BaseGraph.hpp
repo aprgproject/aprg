@@ -29,7 +29,8 @@ public:
     virtual Edges getEdges() const = 0;
 
     virtual void connect(Vertex const& sourceVertex, Vertex const& destinationVertex) = 0;
-    virtual void disconnect(Vertex const& sourceVertex, Vertex const& destinationVertex) = 0;    virtual void clear() = 0;
+    virtual void disconnect(Vertex const& sourceVertex, Vertex const& destinationVertex) = 0;
+    virtual void clear() = 0;
 };
 
 }

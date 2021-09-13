@@ -4,7 +4,8 @@
 #include <Algorithm/Utilities/MidpointOfIndexes.hpp>
 #include <Common/Math/Helpers/ComputationHelpers.hpp>
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {
@@ -26,7 +27,8 @@ public:
     using PendingUpdateDetail = std::optional<UpdateDetail>;
     using PendingUpdateDetails = std::vector<PendingUpdateDetail>;
 
-    RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdate(            Values const& valuesToCheck,
+    RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdate(
+            Values const& valuesToCheck,
             Function const& functionObject,
             IncrementFunction const& incrementFunction)
         : BaseClass(valuesToCheck, functionObject)
@@ -115,7 +117,8 @@ private:
             m_startIndexesForPendingUpdates[currentChild] = startInterval;
         }
         else
-        {            Index intersectionLeft = std::max(startInterval, baseLeft);
+        {
+            Index intersectionLeft = std::max(startInterval, baseLeft);
             Index intersectionRight = std::min(endInterval, baseRight);
             increment(b_treeValues[currentChild], startInterval, intersectionLeft, intersectionRight);
 
@@ -156,6 +159,7 @@ private:
             }
         }
     }
+
     inline void incrementOrUpdateAtIndex(
             Index const index,
             Index const baseLeft,
@@ -172,6 +176,7 @@ private:
             increment(b_treeValues[index], startIndexForPendingUpdate.value(), baseLeft, baseRight);
         }
     }
+
     inline void increment(Value & valueToChange, Index const startIndex, Index const left, Index const right) const
     {
         Index numberOfChildren = b_treeValues.size() - b_startOfChildren;

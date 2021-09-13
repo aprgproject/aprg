@@ -8,6 +8,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -89,7 +90,8 @@ public:
 
     void connect(Vertex const& sourceVertex, Vertex const& destinationVertex) override
     {
-        if(!isDirectlyConnected(sourceVertex, destinationVertex))        {
+        if(!isDirectlyConnected(sourceVertex, destinationVertex))
+        {
             m_numberOfEdges++;
             m_adjacencyLists[sourceVertex].emplace(destinationVertex);
         }
@@ -114,7 +116,8 @@ protected:
 
     SetOfVertices getUniqueVertices() const
     {
-        SetOfVertices uniqueVertices;        for(auto const& vertexAndAdjacencyListPair : m_adjacencyLists)
+        SetOfVertices uniqueVertices;
+        for(auto const& vertexAndAdjacencyListPair : m_adjacencyLists)
         {
             Vertex const& sourceVertex(vertexAndAdjacencyListPair.first);
             AdjacencyList const& adjacencyList(vertexAndAdjacencyListPair.second);
@@ -144,6 +147,7 @@ protected:
     unsigned int m_numberOfEdges;
     AdjacencyLists m_adjacencyLists;
 };
+
 }
 
 }

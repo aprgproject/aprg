@@ -7,6 +7,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -98,7 +99,8 @@ public:
 
     void connect(Vertex const& vertex1, Vertex const& vertex2) override
     {
-        if(!isDirectlyConnected(vertex1, vertex2))        {
+        if(!isDirectlyConnected(vertex1, vertex2))
+        {
             m_numberOfEdges++;
             m_edges.emplace(vertex1, vertex2);
             m_edges.emplace(vertex2, vertex1);
@@ -142,6 +144,7 @@ protected:
     unsigned int m_numberOfEdges;
     SetOfEdges m_edges;
 };
+
 }
 
 }

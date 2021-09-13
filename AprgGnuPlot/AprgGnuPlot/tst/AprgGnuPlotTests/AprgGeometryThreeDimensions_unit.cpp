@@ -26,7 +26,8 @@ TEST(AprgGeometryThreeDimensionsTest, DISABLED_LineWithSlope)
         }
     }
 
-    AprgGnuPlot3D gnuPlot3D;    gnuPlot3D.setTitle("Graph of line with slope", R"("font ",22")");
+    AprgGnuPlot3D gnuPlot3D;
+    gnuPlot3D.setTitle("Graph of line with slope", R"("font ",22")");
     gnuPlot3D.setXAxis("X", R"("font ",15")");
     gnuPlot3D.setYAxis("Y", R"("font ",15")");
     gnuPlot3D.setZAxis("Z", R"("font ",15")");
@@ -63,7 +64,8 @@ TEST(AprgGeometryThreeDimensionsTest, DISABLED_MultipleLinesAndPoints)
         }
     }
 
-    AprgGnuPlot3D gnuPlot3D;    gnuPlot3D.setTitle("Graph with multiple lines and points", R"("font ",22")");
+    AprgGnuPlot3D gnuPlot3D;
+    gnuPlot3D.setTitle("Graph with multiple lines and points", R"("font ",22")");
     gnuPlot3D.setXAxis("X", R"("font ",15")");
     gnuPlot3D.setYAxis("Y", R"("font ",15")");
     gnuPlot3D.setZAxis("Z", R"("font ",15")");
@@ -96,6 +98,7 @@ TEST(AprgGeometryThreeDimensionsTest, DISABLED_PlaneConstructedWithThreePoints)
             }
         }
     }
+
     AprgGnuPlot3D gnuPlot3D;
     gnuPlot3D.setTitle("Graph with plane", R"("font ",22")");
     gnuPlot3D.setXAxis("X", R"("font ",15")");
@@ -140,7 +143,8 @@ TEST(AprgGeometryThreeDimensionsTest, DISABLED_LineOfIntersectionOfTwoPlanes)
                     AprgGnuPlot3D::getPoint(x,lineOfIntersection.calculateYFromX(x).value(), lineOfIntersection.calculateZFromX(x).value()));
     }
 
-    AprgGnuPlot3D gnuPlot3D;    gnuPlot3D.setTitle("Line of intersection between two planes", R"("font ",22")");
+    AprgGnuPlot3D gnuPlot3D;
+    gnuPlot3D.setTitle("Line of intersection between two planes", R"("font ",22")");
     gnuPlot3D.setXAxis("X", R"("font ",15")");
     gnuPlot3D.setYAxis("Y", R"("font ",15")");
     gnuPlot3D.setZAxis("Z", R"("font ",15")");
@@ -181,7 +185,8 @@ TEST(AprgGeometryThreeDimensionsTest, DISABLED_BrewersProblemForSimplexTest)
                 }
             }
         }
-    }    for(double x=0; x<200; x+=5)
+    }
+    for(double x=0; x<200; x+=5)
     {
         for(double z=0; z<1000; z+=20)
         {
@@ -202,6 +207,7 @@ TEST(AprgGeometryThreeDimensionsTest, DISABLED_BrewersProblemForSimplexTest)
             }
         }
     }
+
     AprgGnuPlot3D gnuPlot3D;
     gnuPlot3D.setTitle("Graph of line with slope", R"("font ",22")");
     gnuPlot3D.setXAxis("X", R"("font ",15")");

@@ -9,6 +9,7 @@ using namespace alba::stringHelper;
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -125,6 +126,7 @@ TEST(UndirectedGraphWithAdjacencyMatrixTest, ComplicatedTestWorks)
 TEST(UndirectedGraphWithAdjacencyMatrixTest, OutputStreamOperatorWorks)
 {
     UndirectedGraphWithAdjacencyMatrix<unsigned int, 3> graph;
+
     graph.connect(0U, 1U);
     graph.connect(0U, 2U);
 
@@ -134,4 +136,5 @@ TEST(UndirectedGraphWithAdjacencyMatrixTest, OutputStreamOperatorWorks)
 }
 
 }
+
 }

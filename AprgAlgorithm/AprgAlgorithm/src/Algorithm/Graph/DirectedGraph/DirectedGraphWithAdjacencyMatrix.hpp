@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -104,7 +105,8 @@ public:
 
     AdjacencyMatrix const& getAdjacencyMatrix() const
     {
-        return m_adjacencyMatrix;    }
+        return m_adjacencyMatrix;
+    }
 
     void connect(Vertex const& vertex1, Vertex const& vertex2) override
     {
@@ -153,6 +155,7 @@ protected:
     unsigned int m_numberOfEdges;
     AdjacencyMatrix m_adjacencyMatrix; // vertex by adjacent matrix
 };
+
 }
 
 }

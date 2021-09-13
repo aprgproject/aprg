@@ -7,7 +7,8 @@
 using namespace alba::AlbaNumberConstants;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 bool isValueInsideTheIntervals(AlbaNumber const innerValue, AlbaNumberIntervals const& outerIntervals)
 {
@@ -65,7 +66,8 @@ AlbaNumberIntervalEndpoint createNegativeInfinityOpenEndpoint()
     return createOpenEndpoint(ALBA_NUMBER_NEGATIVE_INFINITY);
 }
 
-AlbaNumberInterval createAllRealValuesInterval(){
+AlbaNumberInterval createAllRealValuesInterval()
+{
     return AlbaNumberInterval(
                 createNegativeInfinityOpenEndpoint(),
                 createPositiveInfinityOpenEndpoint());

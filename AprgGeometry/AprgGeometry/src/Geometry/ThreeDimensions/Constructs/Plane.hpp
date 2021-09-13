@@ -5,7 +5,8 @@
 #include <optional>
 #include <vector>
 
-namespace alba{
+namespace alba
+{
 
 namespace ThreeDimensions
 {
@@ -40,6 +41,7 @@ public:
 
 private:
     friend std::ostream & operator<<(std::ostream & out, Plane const& plane);
+
     void calculateDCoefficientUsingCoefficientsABCAndAPoint(Point const& first);
     double m_aCoefficient; //form: a*x + b*y + c*z + d = 0
     double m_bCoefficient; //form: a*x + b*y + c*z + d = 0

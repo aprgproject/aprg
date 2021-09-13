@@ -252,7 +252,8 @@ TEST(ContainerTest, GetUnderlyingContainerWorksOnStack)
     Adapter::container_type const& containerToVerify(getUnderlyingContainer(adapter));
 
     Adapter::container_type containerToExpect{1U, 2U, 3U};
-    EXPECT_EQ(containerToExpect, containerToVerify);}
+    EXPECT_EQ(containerToExpect, containerToVerify);
+}
 
 TEST(ContainerTest, GetUnderlyingContainerReferenceWorksOnStack)
 {

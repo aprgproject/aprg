@@ -113,7 +113,8 @@ void AlbaHourMinuteSecond::setTime(uint8_t const hours, uint8_t const minutes, u
 void AlbaDateTime::setTime(uint16_t const years, uint8_t const months, uint8_t const days, uint8_t const hours, uint8_t const minutes, uint8_t const seconds, uint32_t const microseconds)
 {
     m_sign = 1;
-    m_yearMonthDay.setTime(years, convertMonthToCorrectMonthIndex(months), days);    m_hourMinuteSecond.setTime(hours, minutes, seconds);
+    m_yearMonthDay.setTime(years, convertMonthToCorrectMonthIndex(months), days);
+    m_hourMinuteSecond.setTime(hours, minutes, seconds);
     m_microseconds = microseconds;
 }
 
@@ -136,7 +137,8 @@ AlbaDateTime AlbaDateTime::createFromTotalDaysAndSecondsAndMicroSeconds(
     return AlbaDateTime(AlbaYearMonthDay::createFromTotalDays(totalDays), AlbaHourMinuteSecond::createFromTotalSeconds(totalSeconds), totalMicroseconds);
 }
 
-bool AlbaDateTime::isEmpty() const{
+bool AlbaDateTime::isEmpty() const
+{
     return (m_yearMonthDay.getYearMonthDay()|m_hourMinuteSecond.getHourMinuteSecond()|m_microseconds)==0;
 }
 
@@ -174,6 +176,7 @@ uint32_t AlbaDateTime::getMicroSeconds() const
 {
     return m_microseconds;
 }
+
 void AlbaDateTime::clearMicroSeconds()
 {
     m_microseconds=0;
@@ -191,6 +194,7 @@ uint32_t AlbaDateTime::getTotalSecondsInHourMinutesSeconds() const
 {
     return dateTimeHelper::getTotalSeconds(getHours(), getMinutes(), getSeconds());
 }
+
 string AlbaDateTime::getPrintableStringFormat1() const
 {
     stringstream ss;
@@ -270,7 +274,8 @@ void AlbaDateTime::clear()
 
 void AlbaDateTime::negate()
 {
-    m_sign*=-1;}
+    m_sign*=-1;
+}
 
 AlbaDateTime AlbaDateTime::operator+(AlbaDateTime const& secondDateTime) const
 {
@@ -349,7 +354,8 @@ AlbaDateTime AlbaDateTime::addDateTimeMagnitude(AlbaDateTime const& firstDateTim
     uint32_t totalMicroSeconds(firstDateTime.getMicroSeconds() + secondDateTime.getMicroSeconds());
     dateTimeHelper::reorganizeOverflowValues(totalDays, totalSeconds, totalMicroSeconds);
     result.m_yearMonthDay.setTime(totalDays);
-    result.m_hourMinuteSecond.setTime(totalSeconds);    result.m_microseconds = totalMicroSeconds;
+    result.m_hourMinuteSecond.setTime(totalSeconds);
+    result.m_microseconds = totalMicroSeconds;
     return result;
 }
 
@@ -366,4 +372,5 @@ AlbaDateTime AlbaDateTime::subtractDateTimeMagnitude(AlbaDateTime const& firstDa
     result.m_microseconds = static_cast<uint32_t>(totalMicroSeconds);
     return result;
 }
+
 }//namespace alba

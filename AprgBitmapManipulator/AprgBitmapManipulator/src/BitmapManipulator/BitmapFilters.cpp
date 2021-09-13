@@ -9,6 +9,7 @@
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.hpp>
+
 using namespace alba::AprgBitmap::ColorUtilities;
 using namespace alba::mathHelper;
 using namespace alba::TwoDimensions;
@@ -67,7 +68,8 @@ optional<Circle> BitmapFilters::getPossiblePenCircle(
     optional<Circle> result;
     uint32_t const centerColor(inputSnippet.getColorAt(centerPoint));
     unsigned int similarPixelsCount(0);
-    unsigned int totalPixelCount(0);    BitmapSnippetTraversal snippetTraversal(inputSnippet);
+    unsigned int totalPixelCount(0);
+    BitmapSnippetTraversal snippetTraversal(inputSnippet);
     OutwardCircleTraversal outwardTraversal(MAX_PEN_CIRCLE_RADIUS_COORDINATE);
     OutwardCircleTraversal::RadiusToCoordinates const& radiusToCoordinates(
                 outwardTraversal.getRadiusToCoordinates());
@@ -106,6 +108,7 @@ optional<Circle> BitmapFilters::getPossiblePenCircle(
     }
     return result;
 }
+
 void BitmapFilters::determinePenPoints(
         PenPoints & penPoints,
         BitmapSnippet const& inputSnippet,
@@ -597,7 +600,8 @@ void BitmapFilters::determinePenPointsToPenCircles(
             Circle const& possiblePenCircle(penCircleOptional.value());
             BitmapSnippetTraversal snippetTraversal(inputSnippet);
             snippetTraversal.traverseCircleArea(possiblePenCircle, [&](BitmapXY const& pointInPossibleCircle)
-            {                bool isPointInCircleAPenPoint(penPoints.isPenPoint(pointInPossibleCircle));
+            {
+                bool isPointInCircleAPenPoint(penPoints.isPenPoint(pointInPossibleCircle));
                 if(isPointInCircleAPenPoint
                         && isThisPenCircleBetter(pointInPossibleCircle, possiblePenCircle, penPointsToPenCircles[pointInPossibleCircle]))
                 {

@@ -12,6 +12,7 @@ using namespace alba::stringHelper;
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -53,7 +54,8 @@ public:
         return convertToString(displayTable);
     }
 
-    void addOpenSitesUntilItPercolates()    {
+    void addOpenSitesUntilItPercolates()
+    {
         while(!isPercolated())
         {
             addOpenSite();

@@ -6,6 +6,7 @@
 
 namespace alba
 {
+
 namespace AprgBitmap
 {
 
@@ -52,7 +53,8 @@ private:
     std::optional<Direction> m_previousMovementDirection;
     unsigned int m_lowestLeft;
     unsigned int m_highestRight;
-    unsigned int m_lowestTop;    unsigned int m_highestBottom;
+    unsigned int m_lowestTop;
+    unsigned int m_highestBottom;
     unsigned int m_lastMostLeft;
     unsigned int m_lastMostRight;
     unsigned int m_lastMostTop;

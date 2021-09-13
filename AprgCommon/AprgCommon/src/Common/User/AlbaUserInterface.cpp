@@ -54,7 +54,8 @@ NumberType AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(string
     StringConverterWithFormatting converter(5, ' ');
 
     DisplayTable table;
-    table.addRow();    table.getLastRow().addCell("Choice", DisplayTableCellMode::right);
+    table.addRow();
+    table.getLastRow().addCell("Choice", DisplayTableCellMode::right);
     table.getLastRow().addCell("  :  ");
     table.getLastRow().addCell("Description", DisplayTableCellMode::left);
     for(auto const& choice: choices)
@@ -67,7 +68,8 @@ NumberType AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(string
     cout<<table<<endl;
 
     cout << "Input your answer: ";
-    return convertStringToNumber<NumberType>(getUserInput());}
+    return convertStringToNumber<NumberType>(getUserInput());
+}
 template int AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(string const& question, Choices<int> const& choices);
 template unsigned int AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(string const& question, Choices<unsigned int> const& choices);
 
@@ -91,6 +93,7 @@ string AlbaUserInterface::displayQuestionAndChoicesAndGetStringAnswerInAllCapita
     cout<<table<<endl;
 
     cout << "Input your answer: ";
-    return getStringWithCapitalLetters(getUserInput());}
+    return getStringWithCapitalLetters(getUserInput());
+}
 
 }//namespace alba

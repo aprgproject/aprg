@@ -36,7 +36,8 @@ src/WcdmaToolsConfiguration.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Memory/AlbaMemoryBuffer.cpp\
 ../../AprgCommon/AprgCommon/src/Common/PathHandler/AlbaPathHandler.cpp\
 ../../AprgCommon/AprgCommon/src/Common/PathHandler/AlbaLocalPathHandler.cpp\
-../../AprgCommon/AprgCommon/src/Common/Randomizer/AlbaRandomizer.cpp\../../AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterReader.cpp\
+../../AprgCommon/AprgCommon/src/Common/Randomizer/AlbaRandomizer.cpp\
+../../AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterReader.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterWriter.cpp\
 ../../AprgCommon/AprgCommon/src/Common/String/AlbaStringHelper.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Time/AlbaDateTime.cpp\
@@ -74,7 +75,8 @@ src/WcdmaToolsConfiguration.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Memory/AlbaMemoryBuffer.hpp\
 ../../AprgCommon/AprgCommon/src/Common/PathHandler/AlbaPathHandler.hpp\
 ../../AprgCommon/AprgCommon/src/Common/PathHandler/AlbaLocalPathHandler.hpp\
-../../AprgCommon/AprgCommon/src/Common/Randomizer/AlbaRandomizer.hpp\../../AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterReader.hpp\
+../../AprgCommon/AprgCommon/src/Common/Randomizer/AlbaRandomizer.hpp\
+../../AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterReader.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterWriter.hpp\
 ../../AprgCommon/AprgCommon/src/Common/String/AlbaStringHelper.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Time/AlbaDateTime.hpp\

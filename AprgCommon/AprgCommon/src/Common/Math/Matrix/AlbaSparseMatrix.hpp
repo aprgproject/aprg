@@ -3,7 +3,8 @@
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Common/User/DisplayTable.hpp>
 
-#include <cassert>#include <functional>
+#include <cassert>
+#include <functional>
 #include <set>
 #include <sstream>
 #include <unordered_map>
@@ -149,7 +150,8 @@ public:
 
     DataType & getEntryReference(unsigned int const x, unsigned int const y)
     {
-        assert((x < m_numberOfColumns) && (y < m_numberOfRows));        return m_matrixData.at(getMatrixIndex(x, y));
+        assert((x < m_numberOfColumns) && (y < m_numberOfRows));
+        return m_matrixData.at(getMatrixIndex(x, y));
     }
 
     void setEntry(unsigned int const x, unsigned int const y, DataType const& value)
@@ -277,6 +279,7 @@ private:
         out << "Matrix output:\n" << table;
         return out;
     }
+
     unsigned int m_numberOfColumns;
     unsigned int m_numberOfRows;
     MatrixData m_matrixData;
