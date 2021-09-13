@@ -1,9 +1,10 @@
 #include "GameUtilities.hpp"
 
+#include <numeric>
+
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace math
 {

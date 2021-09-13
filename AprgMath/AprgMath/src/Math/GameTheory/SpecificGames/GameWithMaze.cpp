@@ -123,12 +123,12 @@ string GameWithMaze::getString()
             table.getLastRow().addCell(ss.str());
         }
     }
-    string firstLine("Matrix output:\n");
-    return firstLine + table.drawOutput();
+    stringstream ss;
+    ss << "Matrix output:\n" << table;
+    return ss.str();
 }
 
-SetOfUnsignedIntegers GameWithMaze::getNextGrundyNumbers(
-        Coordinate const& coordinate)
+SetOfUnsignedIntegers GameWithMaze::getNextGrundyNumbers(        Coordinate const& coordinate)
 {
     SetOfUnsignedIntegers result;
     Coordinates nextCoorindates(getNextCoordinates(coordinate));
