@@ -3,10 +3,10 @@
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>
+#include <numeric>
 
 using namespace alba;
 using namespace std;
-
 namespace DesignDocumentCreator
 {
 

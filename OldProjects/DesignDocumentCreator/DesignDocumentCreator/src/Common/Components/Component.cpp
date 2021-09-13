@@ -6,10 +6,10 @@
 
 #include <algorithm>
 #include <iostream>
+#include <numeric>
 #include <string>
 
-using namespace std;
-using namespace DesignDocumentCreator::StringHelpers;
+using namespace std;using namespace DesignDocumentCreator::StringHelpers;
 
 namespace DesignDocumentCreator
 {
