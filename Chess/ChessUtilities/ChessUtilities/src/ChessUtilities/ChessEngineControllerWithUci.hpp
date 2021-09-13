@@ -96,12 +96,11 @@ private:
 
     ChessEngineHandler & m_engineHandler;
     stringHelper::StringPairs m_uciOptionNamesAndValuePairs;
-    AlbaOptional<StepsInCalculationMonitoring> m_additionalStepsInCalculationMonitoring;
-    AlbaOptional<std::ofstream> m_logFileStreamOptional;
+    std::optional<StepsInCalculationMonitoring> m_additionalStepsInCalculationMonitoring;
+    std::optional<std::ofstream> m_logFileStreamOptional;
     ControllerState m_state;
     bool m_waitingForReadyOkay;
-    CalculationDetails m_currentCalculationDetails;
-    std::deque<Command> m_pendingCommands;
+    CalculationDetails m_currentCalculationDetails;    std::deque<Command> m_pendingCommands;
 };
 
 std::string getEnumString(ChessEngineControllerWithUci::ControllerState const state);

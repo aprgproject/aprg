@@ -50,11 +50,10 @@ ChessEngineHandler::ChessEngineHandler(string const& enginePath)
 ChessEngineHandler::~ChessEngineHandler()
 {
     shutdownEngine();
-    m_logFileStreamOptional.getReference().close();
+    m_logFileStreamOptional->close();
 }
 
-void ChessEngineHandler::reset()
-{
+void ChessEngineHandler::reset(){
     log(LogType::HandlerStatus, "Resetting engine");
     shutdownEngine();
     initializeEngine();
@@ -92,10 +91,9 @@ void ChessEngineHandler::processStringFromEngine(string const& stringFromEngine)
     log(LogType::FromEngine, stringFromEngine);
     if(m_additionalStepsInProcessingAStringFromEngine)
     {
-        m_additionalStepsInProcessingAStringFromEngine.getConstReference()(stringFromEngine);
+        m_additionalStepsInProcessingAStringFromEngine.value()(stringFromEngine);
     }
 }
-
 void ChessEngineHandler::startMonitoringEngineOutput()
 {
     std::lock_guard<std::mutex> const lockGuard(m_readMutex);
@@ -148,23 +146,21 @@ void ChessEngineHandler::startMonitoringEngineOutput()
 
 void ChessEngineHandler::setLogFile(string const& logFilePath)
 {
-    m_logFileStreamOptional.createObjectUsingDefaultConstructor();
-    m_logFileStreamOptional.getReference().open(logFilePath);
+    m_logFileStreamOptional.emplace();
+    m_logFileStreamOptional->open(logFilePath);
 
-    if(!m_logFileStreamOptional.getReference().is_open())
+    if(!m_logFileStreamOptional->is_open())
     {
         log(LogType::HandlerStatus, string("Cannot open log file") + logFilePath);
-    }
-}
+    }}
 
 void ChessEngineHandler::setAdditionalStepsInProcessingAStringFromEngine(
         ProcessAStringFunction const& additionalSteps)
 {
-    m_additionalStepsInProcessingAStringFromEngine.setConstReference(additionalSteps);
+    m_additionalStepsInProcessingAStringFromEngine = additionalSteps;
 }
 
-void ChessEngineHandler::initializeEngine()
-{
+void ChessEngineHandler::initializeEngine(){
     SECURITY_DESCRIPTOR securityDescriptor; //security information for pipes
     SECURITY_ATTRIBUTES securityAttributes;
 
@@ -221,11 +217,10 @@ void ChessEngineHandler::log(LogType const logtype, string const& logString)
 {
     if(m_logFileStreamOptional)
     {
-        m_logFileStreamOptional.getReference() << getLogHeader(logtype) << logString << endl;
+        m_logFileStreamOptional.value() << getLogHeader(logtype) << logString << endl;
     }
 #ifdef APRG_TEST_MODE_ON
-    //cout << getLogHeader(logtype) << logString << endl;
-#else
+    //cout << getLogHeader(logtype) << logString << endl;#else
     if(LogType::FromEngine == logtype)
     {
         cout << logString << endl;
