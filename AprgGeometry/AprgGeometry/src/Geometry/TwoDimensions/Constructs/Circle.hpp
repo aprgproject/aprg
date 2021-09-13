@@ -1,13 +1,12 @@
 #pragma once
 
-#include <Common/Container/AlbaOptional.hpp>
 #include <Geometry/TwoDimensions/Constructs/Point.hpp>
 
 #include <functional>
+#include <optional>
 
 namespace alba
 {
-
 namespace TwoDimensions
 {
 
@@ -29,13 +28,12 @@ public:
     bool isInside(Point const& point) const;
     Points getLocus(double const interval) const;
     void traverseArea(double const interval, TraverseOperation const& traverseOperation) const;
-    AlbaOptional<double> calculateYFromX(double const x, double const signOfRoot) const;
-    AlbaOptional<double> calculateXFromY(double const y, double const signOfRoot) const;
-    AlbaOptional<double> calculateYFromXWithoutCenter(double const x, double const signOfRoot) const;
-    AlbaOptional<double> calculateXFromYWithoutCenter(double const y, double const signOfRoot) const;
+    std::optional<double> calculateYFromX(double const x, double const signOfRoot) const;
+    std::optional<double> calculateXFromY(double const y, double const signOfRoot) const;
+    std::optional<double> calculateYFromXWithoutCenter(double const x, double const signOfRoot) const;
+    std::optional<double> calculateXFromYWithoutCenter(double const y, double const signOfRoot) const;
     Point getPointAtAngle(double const angleInRadians);
     Point getNearestPointInCircumference(Point const& pointNotCircumference) const;
-
 private:
     void determineAndSaveCenterAndRadiusFromCoefficients(double const a, double const d, double const e, double const f);
     Points getPointsInTraversingXAndY(double const signOfX, double const signOfY, double const interval) const;
