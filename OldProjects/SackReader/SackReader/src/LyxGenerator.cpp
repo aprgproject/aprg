@@ -81,11 +81,10 @@ void LyxGenerator::saveMessageDefinitions(ofstream & lyxOutputFileStream)
 void LyxGenerator::saveStructureDefinitions(ofstream & lyxOutputFileStream)
 {
     saveSubsection("Structure Definitions", lyxOutputFileStream);
-    for(StructureNameToStructureDetailsPair const& pair : m_database.structureNameToStructureDetailsMap)
+    for(auto const& pair : m_database.structureNameToStructureDetailsMap)
     {
         if(!pair.second.isMessage && pair.second.isUsedInIfs)
-        {
-            saveStructureDefinitionSubsubsection(pair.first, lyxOutputFileStream);
+        {            saveStructureDefinitionSubsubsection(pair.first, lyxOutputFileStream);
         }
     }
 }
@@ -93,11 +92,10 @@ void LyxGenerator::saveStructureDefinitions(ofstream & lyxOutputFileStream)
 void LyxGenerator::saveEnumDefinitions(ofstream & lyxOutputFileStream)
 {
     saveSubsection("Enum Definitions", lyxOutputFileStream);
-    for(EnumNameToEnumDetailsPair const& pair : m_database.enumNameToEnumDetailsMap)
+    for(auto const& pair : m_database.enumNameToEnumDetailsMap)
     {
         if(pair.second.isUsedInIfs)
-        {
-            saveEnumDefinitionSubsubsection(pair.first, lyxOutputFileStream);
+        {            saveEnumDefinitionSubsubsection(pair.first, lyxOutputFileStream);
         }
     }
 }
@@ -105,11 +103,10 @@ void LyxGenerator::saveEnumDefinitions(ofstream & lyxOutputFileStream)
 void LyxGenerator::saveUnionDefinitions(ofstream & lyxOutputFileStream)
 {
     saveSubsection("Union Definitions", lyxOutputFileStream);
-    for(UnionNameToUnionDetailsPair const& pair : m_database.unionNameToUnionDetailsMap)
+    for(auto const& pair : m_database.unionNameToUnionDetailsMap)
     {
         if(pair.second.isUsedInIfs)
-        {
-            saveUnionDefinitionSubsubsection(pair.first, lyxOutputFileStream);
+        {            saveUnionDefinitionSubsubsection(pair.first, lyxOutputFileStream);
         }
     }
 }
@@ -117,11 +114,10 @@ void LyxGenerator::saveUnionDefinitions(ofstream & lyxOutputFileStream)
 void LyxGenerator::saveConstantDefinitions(ofstream & lyxOutputFileStream)
 {
     saveSubsection("Constant Definitions", lyxOutputFileStream);
-    for(ConstantNameToConstantDetailsPair const& pair : m_database.constantNameToConstantDetailsMap)
+    for(auto const& pair : m_database.constantNameToConstantDetailsMap)
     {
         if(pair.second.isUsedInIfs)
-        {
-            saveConstantDefinitionSubsubsection(pair.first, lyxOutputFileStream);
+        {            saveConstantDefinitionSubsubsection(pair.first, lyxOutputFileStream);
         }
     }
 }
@@ -296,11 +292,10 @@ void LyxGenerator::saveConstantDefinitionSubsubsection(string const& constantNam
 
 void LyxGenerator::saveTypedefDefinitionSubsubsectionFromDatabase(ofstream& lyxOutputFileStream)
 {
-    for(TypedefNameToTypedefDetailsPair const& pair : m_database.typedefNameToTypedefDetailsMap)
+    for(auto const& pair : m_database.typedefNameToTypedefDetailsMap)
     {
         if(pair.second.isUsedInIfs)
-        {
-            saveTypedefDefinitionSubsubsectionUsingTypedefName(pair.first, lyxOutputFileStream);
+        {            saveTypedefDefinitionSubsubsectionUsingTypedefName(pair.first, lyxOutputFileStream);
         }
     }
 }
@@ -497,13 +492,11 @@ void LyxGenerator::saveDisplayTable(DisplayTable const& displayTable, ofstream &
         else if(isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_NUM_ROW_REPLACE")
                 || isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_NUM_COLUMN_REPLACE"))
         {
-            NumberToStringConverter converter;
-            transformReplaceStringIfFound(tableTemplateLine, "LYX_TABLE_NUM_ROW_REPLACE", converter.convert(displayTable.getTotalRows()));
-            transformReplaceStringIfFound(tableTemplateLine, "LYX_TABLE_NUM_COLUMN_REPLACE", converter.convert(displayTable.getTotalColumns()));
+            transformReplaceStringIfFound(tableTemplateLine, "LYX_TABLE_NUM_ROW_REPLACE", convertToString(displayTable.getTotalRows()));
+            transformReplaceStringIfFound(tableTemplateLine, "LYX_TABLE_NUM_COLUMN_REPLACE", convertToString(displayTable.getTotalColumns()));
             displayTableStream << tableTemplateLine << endl;
         }
-        else if(isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_COLUMN_REPLACE"))
-        {
+        else if(isStringFoundInsideTheOtherStringCaseSensitive(tableTemplateLine,"LYX_TABLE_COLUMN_REPLACE"))        {
             for(unsigned int i=0; i<displayTable.getTotalColumns()-1; i++) //until description
             {
                 displayTableStream << tableTemplateLine << endl;
@@ -556,11 +549,10 @@ void LyxGenerator::generateEnumForDisplayTablesIfNeeded(string const& enumName, 
         EnumDetails enumDetails(m_database.getEnumDetails(enumName));
 
         vector<string> sortedEnumParameterNamesByValue;
-        for(EnumDetails::ParameterPair const& parameterPair : enumDetails.parameters)
+        for(auto const& parameterPair : enumDetails.parameters)
         {
             sortedEnumParameterNamesByValue.emplace_back(parameterPair.first);
-        }
-        sort(sortedEnumParameterNamesByValue.begin(), sortedEnumParameterNamesByValue.end(), [&](string const& parameterName1, string const& parameterName2)
+        }        sort(sortedEnumParameterNamesByValue.begin(), sortedEnumParameterNamesByValue.end(), [&](string const& parameterName1, string const& parameterName2)
         {
             EnumParameterDetails parameterDetails1 = m_database.getEnumParameterDetails(enumName, parameterName1);
             EnumParameterDetails parameterDetails2 = m_database.getEnumParameterDetails(enumName, parameterName2);
