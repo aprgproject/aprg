@@ -1,12 +1,11 @@
 #pragma once
 
-#include <Common/Container/AlbaOptional.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <fstream>
+#include <optional>
 #include <string>
 #include <vector>
-
 namespace alba
 {
 
@@ -29,10 +28,9 @@ public:
 
 private:
     std::vector<RttDetails> m_allRttDetails;
-    alba::AlbaOptional<unsigned int> m_cx8IndexOptional;
-    alba::AlbaOptional<unsigned int> m_pnPosIndexOptional;
+    std::optional<unsigned int> m_cx8IndexOptional;
+    std::optional<unsigned int> m_pnPosIndexOptional;
     unsigned int m_posNumber;
 
 };
-
 }
