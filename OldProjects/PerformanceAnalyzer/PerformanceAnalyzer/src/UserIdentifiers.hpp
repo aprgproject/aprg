@@ -1,11 +1,9 @@
 #pragma once
 
-#include <Common/Container/AlbaOptional.hpp>
-
+#include <optional>
 #include <string>
 
-namespace alba
-{
+namespace alba{
 
 struct UserIdentifiers
 {
@@ -20,9 +18,9 @@ private:
     void saveNbccId(std::string const& lineInLogs);
     void saveCrnccId(std::string const& lineInLogs);
     void saveTransactionId(std::string const& lineInLogs);
-    AlbaOptional<unsigned int> m_nbccIdOptional;
-    AlbaOptional<unsigned int> m_crnccIdOptional;
-    AlbaOptional<unsigned int> m_transactionIdOptional;
+    std::optional<unsigned int> m_nbccIdOptional;
+    std::optional<unsigned int> m_crnccIdOptional;
+    std::optional<unsigned int> m_transactionIdOptional;
 };
 
 }
