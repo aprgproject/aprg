@@ -13,6 +13,7 @@ using std::optional;
 
 namespace codeReview
 {
+
 enum class TermType
 {
     Class,
@@ -85,4 +86,5 @@ private:
     std::Optional<CPlusPlusType> m_ValueTypeOptional;
 
 };
+
 }

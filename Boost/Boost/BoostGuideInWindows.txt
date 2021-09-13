@@ -29,7 +29,8 @@ Installing boost libraries for GCC (MinGW) on Windows APRG
 NOTE: Remember to replace the xxxxx!!!
 
 -> boost building
-1) Open Command Prompt and navigate to "APRG\Boost\Boost\boost".2) Run:
+1) Open Command Prompt and navigate to "APRG\Boost\Boost\boost".
+2) Run:
 ---> b2 --build-dir="xxxxx\APRG\Boost\Boost\boost\build" --prefix="xxxxx\APRG\Boost\Boost\boost" toolset=gcc install
 2.1) The option “--build-type=complete” causes Boost.Build to build all supported variants of the libraries. 
 2.2) In particular, to limit the amount of time spent building, you may be interested in:
@@ -37,6 +38,7 @@ NOTE: Remember to replace the xxxxx!!!
 ----> limiting which libraries get built with the --with-library-name or --without-library-name options
 ----> choosing a specific build variant by adding release or debug to the command line.
 NOTE: Remember to replace the xxxxx!!!
+
 
 
 -> create boost libraries
@@ -55,6 +57,7 @@ NOTE: Remember to replace the xxxxx!!!
 5) Add library on boost cmake
 ---> Open "APRG\Boost\Boost\cmake\IncludeBoost.cmake" and add library during searching for boost.
 -----> Edit this line: "find_package(Boost COMPONENTS system locale filesystem iostreams)"
+
 -> Project setup
 1) Add include folder, i.e. C:\Program Files\boost\include\boost-1_59.
 ---> "APRG\Boost\Boost\cmake\IncludeBoost.cmake" should contain:

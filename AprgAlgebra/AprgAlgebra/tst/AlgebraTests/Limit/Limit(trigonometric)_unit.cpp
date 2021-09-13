@@ -2,8 +2,11 @@
 #include <Algebra/Limit/Limit.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Term/Utilities/TermUtilities.hpp>
+#include <Common/Math/Number/AlbaNumberConstants.hpp>
 
 #include <gtest/gtest.h>
+
+using namespace alba::AlbaNumberConstants;
 using namespace alba::algebra::Functions;
 using namespace std;
 
@@ -68,9 +71,10 @@ TEST(LimitTest, GetLimitAtAValueWorksForTangentExpression)
 
 TEST(LimitTest, GetLimitAtAValueWorksForComplicatedSinOverX)
 {
-    Term numerator(sin(Monomial(AlbaNumber(AlbaNumber::Value::pi), {{"x", 1}})));
+    Term numerator(sin(Monomial(ALBA_NUMBER_PI, {{"x", 1}})));
     Term denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-1, {{"x", 1}})});
     Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
+
     EXPECT_EQ(Term(-3.141592653589794), getLimitAtAValue(termToTest, "x", 0, LimitAtAValueApproachType::BothSides));
     EXPECT_EQ(Term(-3.141592653589794), getLimitAtAValue(termToTest, "x", 0, LimitAtAValueApproachType::PositiveSide));
     EXPECT_EQ(Term(-3.141592653589794), getLimitAtAValue(termToTest, "x", 0, LimitAtAValueApproachType::NegativeSide));

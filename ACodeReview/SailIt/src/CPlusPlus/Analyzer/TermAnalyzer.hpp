@@ -9,6 +9,7 @@
 
 #include <string>
 #include <unordered_map>
+
 using std::string;
 
 #define T(...) Term(__VA_ARGS__)
@@ -215,7 +216,8 @@ private:
     std::optional <SailIt&> m_optionalSailIt;
     bool m_isTermsModified;
     ModifyDetails m_modifyDetails;
-    MoveBackType m_moveBackType;    string m_baseDirectory;
+    MoveBackType m_moveBackType;
+    string m_baseDirectory;
     string m_fileName;
     unsigned int m_uniqueFileId;
 };

@@ -97,6 +97,7 @@ void ChessPeekConfiguration::initializeChessDotComUserVsUser()
     m_whiteColorLimit = 0.91;
     m_blackColorLimit = 0.40;
 }
+
 void ChessPeekConfiguration::initializeChessDotComUserVsComputer()
 {
     m_topLeftCorner = BitmapXY(2215, 151);

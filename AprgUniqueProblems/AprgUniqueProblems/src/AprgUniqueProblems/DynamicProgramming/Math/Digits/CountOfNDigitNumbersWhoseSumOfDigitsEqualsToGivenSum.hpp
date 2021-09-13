@@ -19,7 +19,8 @@ public:
     CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum(Count const numberOfDigits, Value const sumOfDigits);
 
     Count getCountUsingNaiveRecursion() const;
-    Count getCountUsingMemoizationDP() const;    Count getCountUsingTabularDP() const;
+    Count getCountUsingMemoizationDP() const;
+    Count getCountUsingTabularDP() const;
     Count getCountUsingTabularDPAndSpaceEfficient() const;
     Count getCountBySearchingValuesWith1And9Increment() const;
 
@@ -28,7 +29,8 @@ private:
     Count getCountUsingMemoizationDP(CountMatrix & countMatrix, Value const partialSum, Count const digitIndex) const;
 
     Count const m_numberOfDigits;
-    Value const m_sumOfDigits;};
+    Value const m_sumOfDigits;
+};
 
 }
 

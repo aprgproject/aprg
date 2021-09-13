@@ -25,7 +25,8 @@ public:
     Count getCountUsingSummationFormula() const;
 
 private:
-    Count getCountUsingNaiveRecursion(Value const digitValue, Count const digitIndex) const;    Count getCountUsingMemoizationDP(CountMatrix & countMatrix, Value const digitValue, Count const digitIndex) const;
+    Count getCountUsingNaiveRecursion(Value const digitValue, Count const digitIndex) const;
+    Count getCountUsingMemoizationDP(CountMatrix & countMatrix, Value const digitValue, Count const digitIndex) const;
 
     Count const m_numberOfDigits;
 };

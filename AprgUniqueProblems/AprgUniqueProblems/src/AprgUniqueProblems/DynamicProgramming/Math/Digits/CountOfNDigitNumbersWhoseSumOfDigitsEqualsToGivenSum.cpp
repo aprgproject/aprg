@@ -15,7 +15,8 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::CountOfNDigitNumbersWhoseS
     , m_sumOfDigits(sumOfDigits)
 {}
 
-CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingNaiveRecursion() const{
+CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingNaiveRecursion() const
+{
     // Time Complexity: Exponential -> Since there are two calls per iteration:  O(2^n)
     // Auxiliary Space: Constant
 
@@ -26,6 +27,7 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count CountOfNDigitNumbers
     }
     return result;
 }
+
 CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingMemoizationDP() const
 {
     // Time Complexity: O(numberOfDigits * sumOfDigits * 9) (same as tabular)
@@ -39,6 +41,7 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count CountOfNDigitNumbers
     }
     return result;
 }
+
 CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingTabularDP() const
 {
     // Time Complexity: O(numberOfDigits * sumOfDigits * 9)
@@ -63,7 +66,8 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count CountOfNDigitNumbers
                     countMatrix.getEntryReference(partialSum, digitIndex) += countMatrix.getEntry(partialSum-digitValue, digitIndex-1);
                 }
             }
-        }        result = countMatrix.getEntry(countMatrix.getNumberOfColumns()-1, countMatrix.getNumberOfRows()-1);
+        }
+        result = countMatrix.getEntry(countMatrix.getNumberOfColumns()-1, countMatrix.getNumberOfRows()-1);
     }
     return result;
 }
@@ -130,7 +134,8 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count CountOfNDigitNumbers
         Count const digitIndex) const
 {
     Count result(0);
-    if(digitIndex>0)    {
+    if(digitIndex>0)
+    {
         if(partialSum>0)
         {
             Value lastDigitValue = min(partialSum-1, 9U);
@@ -139,7 +144,8 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count CountOfNDigitNumbers
                 result += getCountUsingNaiveRecursion(partialSum-digitValue, digitIndex-1);
             }
         }
-        else        {
+        else
+        {
             result = 1;
         }
     }
@@ -158,7 +164,8 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count CountOfNDigitNumbers
     Count result(countMatrix.getEntry(partialSum, digitIndex));
     if(UNUSED_COUNT == result)
     {
-        result = 0;        if(digitIndex>0)
+        result = 0;
+        if(digitIndex>0)
         {
             if(partialSum>0)
             {
@@ -168,7 +175,8 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count CountOfNDigitNumbers
                     result += getCountUsingMemoizationDP(countMatrix, partialSum-digitValue, digitIndex-1);
                 }
             }
-            else            {
+            else
+            {
                 result = 1;
             }
         }
@@ -180,4 +188,5 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::Count CountOfNDigitNumbers
     }
     return result;
 }
+
 }

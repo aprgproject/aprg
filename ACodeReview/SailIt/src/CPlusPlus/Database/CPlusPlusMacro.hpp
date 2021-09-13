@@ -6,6 +6,7 @@
 
 #include <map>
 #include <string>
+
 using std::string;
 using std::map;
 using std::pair;
@@ -31,6 +32,7 @@ private:
     std::optional<int> m_variadicParameterIndexOptional;
     VectorOfTerms m_macroEquivalent;
     VectorOfStrings m_macroParameters;
-    MapOfPositionToParameter m_positionToParameter;};
+    MapOfPositionToParameter m_positionToParameter;
+};
 
 }

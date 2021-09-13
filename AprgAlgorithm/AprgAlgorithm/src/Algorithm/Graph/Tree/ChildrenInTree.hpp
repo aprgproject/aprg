@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -36,6 +37,7 @@ public:
     }
 
 private:
+
     void initializeIfNeeded()
     {
         if(GraphUtilities::isATree(m_graph))

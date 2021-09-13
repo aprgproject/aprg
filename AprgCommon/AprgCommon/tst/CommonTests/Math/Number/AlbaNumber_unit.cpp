@@ -8,7 +8,8 @@
 using namespace alba::AlbaMathConstants;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 TEST(AlbaNumberTest, SizeValueIsExpected)
 {

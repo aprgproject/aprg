@@ -35,7 +35,8 @@ public:
     PathSumInGridInRightOrDownWithDiagonalTraversal(Type const type, Grid const& inputGrid);
 
     Value getBestPathSumUsingNaiveRecursion() const;
-    Value getBestPathSumUsingMemoizationDP() const;    Value getBestPathSumUsingTabularDP() const;
+    Value getBestPathSumUsingMemoizationDP() const;
+    Value getBestPathSumUsingTabularDP() const;
     Path getBestPathUsingTabularDP() const;
 
 private:
@@ -48,6 +49,7 @@ private:
     CompareFunction m_compareFunction;
     MinMaxFunction m_minMaxFunction;
 };
+
 }
 
 // MIN COST WITH DIAGONAL:

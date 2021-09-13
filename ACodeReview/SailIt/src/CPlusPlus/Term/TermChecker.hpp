@@ -14,6 +14,7 @@ using std::optional;
 
 namespace codeReview
 {
+
 enum class TermCheckerType
 {
     ConcreteTerm,

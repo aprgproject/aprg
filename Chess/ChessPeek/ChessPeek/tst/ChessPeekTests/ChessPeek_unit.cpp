@@ -45,6 +45,7 @@ TEST(ChessPeekTest, DISABLED_RunOneIterationWorks)
 TEST(ChessPeekTest, RunForeverWorks)
 {
     ChessPeek chessPeek;
+
     chessPeek.runForever();
 }
 

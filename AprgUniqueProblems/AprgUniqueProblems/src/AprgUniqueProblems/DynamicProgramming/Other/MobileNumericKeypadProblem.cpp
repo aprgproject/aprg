@@ -30,6 +30,7 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingMemoi
 {
     // Time Complexity: Exponential -> Since there are two calls per iteration:  O(5^n) (5 is maximum recursion calls in one function call)
     // Auxiliary Space: Constant
+
     Count result(0);
     CountMatrix countMatrix(m_length+1, 10, UNUSED_VALUE);
     for(NumpadValue numpadValue=0; numpadValue<=9; numpadValue++)
@@ -38,6 +39,7 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingMemoi
     }
     return result;
 }
+
 MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingTabularDP() const
 {
     // Time Complexity: O(n*d)
@@ -188,7 +190,8 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountForValueUs
 MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountForValueUsingMemoizationDP(
         CountMatrix & countMatrix,
         Count const length,
-        NumpadValue const numpadValue) const{
+        NumpadValue const numpadValue) const
+{
     Count result(countMatrix.getEntry(length, numpadValue));
     if(UNUSED_VALUE == result)
     {
@@ -255,7 +258,8 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountForValueUs
                         + getCountForValueUsingMemoizationDP(countMatrix, lengthMinus1, 8);
                 break;
             default:
-                break;            }
+                break;
+            }
         }
         else if(length == 1)
         {

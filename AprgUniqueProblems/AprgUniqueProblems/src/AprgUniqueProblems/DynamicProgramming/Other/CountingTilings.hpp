@@ -14,7 +14,8 @@ class CountingTilings
 public:
 
     using Count = unsigned int;
-    using Grid = matrix::AlbaMatrix<char>;    struct NextIterationDetail
+    using Grid = matrix::AlbaMatrix<char>;
+    struct NextIterationDetail
     {
         std::string currentFilledRow;
         std::string nextNonFilledRow;

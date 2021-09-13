@@ -11,6 +11,7 @@ namespace AlbaMathConstants
 constexpr double POSITIVE_INFINITY_DOUBLE_VALUE = static_cast<double>(INFINITY);
 constexpr double NEGATIVE_INFINITY_DOUBLE_VALUE = static_cast<double>(-INFINITY);
 constexpr double NAN_DOUBLE_VALUE = static_cast<double>(NAN);
+
 constexpr double PRECISION_OF_FLOAT = 1E-8;
 constexpr double PRECISION_OF_DOUBLE = 1E-15;
 constexpr double COMPARISON_TOLERANCE_FOR_FLOAT = 1E-5;
