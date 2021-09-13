@@ -19,11 +19,10 @@ AlbaPathHandler::AlbaPathHandler(string const& path, string const& slashCharacte
     : m_pathType(PathType::Empty)
     , m_slashCharacterString(slashCharacterString)
 {
-    save(path);
+    setPath(path);
 }
 
-void AlbaPathHandler::clear()
-{
+void AlbaPathHandler::clear(){
     m_pathType = PathType::Empty;
     m_directory.clear();
     m_file.clear();
@@ -110,9 +109,13 @@ bool AlbaPathHandler::isEmpty() const
 
 void AlbaPathHandler::save(string const& path)
 {
+    setPath(path);
+}
+
+void AlbaPathHandler::setPath(string const& path)
+{
     string correctPath(getCorrectPathWithReplacedSlashCharacters(path, m_slashCharacterString));
-    setExtensionFromPath(correctPath);
-    setDirectoryAndFileFromPath(correctPath);
+    setExtensionFromPath(correctPath);    setDirectoryAndFileFromPath(correctPath);
     setFileType();
 }
 

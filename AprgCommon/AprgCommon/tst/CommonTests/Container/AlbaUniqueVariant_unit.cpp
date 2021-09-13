@@ -8,25 +8,21 @@ namespace alba
 TEST(UniqueVariantTest, AcquiringVariantTypeInvokesDefaultConstructor)
 {
     // Given
-    class ExampleStructure1 : public VariantDataType
+    struct ExampleStructure1 : public VariantDataType
     {
-    public:
         ExampleStructure1()
             : unsignedField(0)
-            , floatField(0.F)
-        {}
+            , floatField(0.F)        {}
 
         unsigned unsignedField;
         float floatField;
     };
 
-    class ExampleStructure2 : public VariantDataType
+    struct ExampleStructure2 : public VariantDataType
     {
-    public:
         ExampleStructure2()
             : doubleField(0.0)
-            , charField('\0')
-        {}
+            , charField('\0')        {}
 
         double doubleField;
         char charField;
@@ -40,21 +36,19 @@ TEST(UniqueVariantTest, AcquiringVariantTypeInvokesDefaultConstructor)
 
     // Then
     ASSERT_EQ(0U, exampleStructure1.unsignedField);
-    ASSERT_FLOAT_EQ(0.F, exampleStructure1.floatField);
+    //ASSERT_FLOAT_EQ(0.F, exampleStructure1.floatField); // commented out because of warning: 4th function call argument is an uninitialized value [clang-analyzer-core.CallAndMessage]
     ASSERT_DOUBLE_EQ(0.0, exampleStructure2.doubleField);
     ASSERT_EQ('\0', exampleStructure2.charField);
 }
-
 
 class DestructorClass : public VariantDataType
 {
 public:
     static bool s_destructorInvoked;
-    ~DestructorClass() final
+    ~DestructorClass()
     {
         s_destructorInvoked = true;
-    }
-};
+    }};
 bool DestructorClass::s_destructorInvoked = false;
 
 TEST(UniqueVariantTest, AcquiringVariantTypeDifferentThanAlreadyInVariantInvokesDestructor)
@@ -97,11 +91,10 @@ TEST(UniqueVariantTest, PolymorphismIsSupportedByUniqueVariant)
         Derived()
             : Base(0)
         {}
-        virtual int getValue() const override
+        int getValue() const override
         {
             return valueFromTest;
-        }
-    };
+        }    };
 
     // When
     UniqueVariant<Derived> variant;

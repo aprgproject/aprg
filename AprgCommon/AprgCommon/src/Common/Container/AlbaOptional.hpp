@@ -1,7 +1,8 @@
+// NOTE: Use std::optional instead! (needs c++17)
+
 #pragma once
 
-#include <cassert>
-#include <memory>
+#include <cassert>#include <memory>
 #include <ostream>
 
 namespace alba

@@ -182,17 +182,9 @@ public:
         return m_values;
     }
 
-    std::string getDisplayableString() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
-
     DataType & getValueReferenceAt(unsigned int const index)
     {
-        assert(index<SIZE);
-        return m_values.at(index);
+        assert(index<SIZE);        return m_values.at(index);
     }
 
     ValuesInArray & getValuesReference()

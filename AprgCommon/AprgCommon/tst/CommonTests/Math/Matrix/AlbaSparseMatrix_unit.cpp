@@ -1,11 +1,12 @@
 #include <Common/Math/Matrix/AlbaSparseMatrix.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <gtest/gtest.h>
 
+using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace matrix
 {
@@ -309,11 +310,10 @@ TEST(AlbaSparseMatrixTest, GetStringWorks)
      3, 4,
      5, 6});
 
-    EXPECT_EQ("Matrix output:\n-----\n|1|2|\n-----\n|3|4|\n-----\n|5|6|\n-----\n", matrix.getString());
+    EXPECT_EQ("Matrix output:\n-----\n|1|2|\n-----\n|3|4|\n-----\n|5|6|\n-----\n", convertToString(matrix));
 }
 
-TEST(AlbaSparseMatrixTest, SetEntryWorks_ValueCanSavedInTheMatrix)
-{
+TEST(AlbaSparseMatrixTest, SetEntryWorks_ValueCanSavedInTheMatrix){
     AlbaSparseMatrix<unsigned int> matrix(2, 3);
 
     matrix.setEntry(0, 0, 1);

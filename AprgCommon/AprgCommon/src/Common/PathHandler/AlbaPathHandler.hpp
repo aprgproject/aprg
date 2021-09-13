@@ -31,10 +31,10 @@ public:
 
 protected:
     virtual void save(std::string const& path);
+    void setPath(std::string const& path); // non virtual because used by constructor
     void setExtensionFromPath(std::string const& path);
     void setDirectoryAndFileFromPath(std::string const& path);
-    void setFileType();
-    PathType m_pathType;
+    void setFileType();    PathType m_pathType;
     std::string m_slashCharacterString;
     std::string m_directory;
     std::string m_file;

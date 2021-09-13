@@ -1,8 +1,8 @@
 #pragma once
 
+#include <Common/Math/AlbaMathConstants.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 #include <Common/Math/Number/AlbaNumber.hpp>
-
 #include <limits>
 
 namespace alba

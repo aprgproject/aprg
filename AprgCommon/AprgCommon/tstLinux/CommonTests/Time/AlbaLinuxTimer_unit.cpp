@@ -1,7 +1,7 @@
+/*
 #include <Common/Time/AlbaLinuxTimer.hpp>
 
-#include <gtest/gtest.h>
-#include <unistd.h>
+#include <gtest/gtest.h>#include <unistd.h>
 
 namespace alba
 {
@@ -27,3 +27,4 @@ TEST(AlbaLinuxTimer, DISABLED_TimerCanBeRestarted)
 }
 
 }
+*/
