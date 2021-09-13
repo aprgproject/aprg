@@ -105,11 +105,10 @@ void BtsLogSorter::processLineInFile(string const& filename, string const& lineI
     }
     else if(logPrint.getBtsTime().isStartup())
     {
-        m_startupLogStreamOptional.getReference() << logPrint <<endl;
+        m_startupLogStreamOptional.value() << logPrint <<endl;
     }
     else
-    {
-        m_sorterWithPcTime.add(logPrint);
+    {        m_sorterWithPcTime.add(logPrint);
     }
 }
 
@@ -191,19 +190,18 @@ void BtsLogSorter::openStartupLogsIfNeeded()
 {
     if(!m_startupLogStreamOptional)
     {
-        m_startupLogStreamOptional.createObjectUsingDefaultConstructor();
-        m_startupLogStreamOptional.getReference().open(m_pathOfStartupLog, std::ios::ate|std::ios::app);
+        m_startupLogStreamOptional.emplace();
+        m_startupLogStreamOptional->open(m_pathOfStartupLog, std::ios::ate|std::ios::app);
     }
 }
 
 void BtsLogSorter::addStartupLogsOnSorterWithPcTime()
 {
     cout << "Add startup logs on sorter with PC time." << endl;
-    m_startupLogStreamOptional.clear();
+    m_startupLogStreamOptional.reset();
     BtsPrintReaderWithRollback printReader;
     printReader.openIfNeeded(m_pathOfStartupLog);
-    double fileSize(AlbaLocalPathHandler(m_pathOfStartupLog).getFileSizeEstimate());
-    while(printReader.isGood())
+    double fileSize(AlbaLocalPathHandler(m_pathOfStartupLog).getFileSizeEstimate());    while(printReader.isGood())
     {
         BtsLogPrint startupLogPrint(printReader.getPrint());
         if(!startupLogPrint.isEmpty())
