@@ -1,13 +1,12 @@
 #pragma once
 
-#include <Common/Container/AlbaOptional.hpp>
 #include <GrepStringEvaluator/AlbaGrepStringEvaluator.hpp>
 
 #include <functional>
+#include <optional>
 #include <string>
 
-namespace alba
-{
+namespace alba{
 
 class AlbaCropFile
 {
@@ -32,7 +31,7 @@ private:
     bool m_isOutputFileWritten;
     double m_cropSize;
     AlbaGrepStringEvaluator m_prioritizedLineEvaluator;
-    AlbaOptional<UpdateFunctionWithPercentage const&> m_updateFunctionAfterOneIterationOptional;
+    std::optional<UpdateFunctionWithPercentage> m_updateFunctionAfterOneIterationOptional;
 };
 
 }

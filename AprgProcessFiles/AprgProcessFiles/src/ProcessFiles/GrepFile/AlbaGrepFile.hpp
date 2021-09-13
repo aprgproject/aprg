@@ -1,13 +1,12 @@
 #pragma once
 
-#include <Common/Container/AlbaOptional.hpp>
 #include <GrepStringEvaluator/AlbaGrepStringEvaluator.hpp>
 
 #include <functional>
+#include <optional>
 #include <string>
 
-namespace alba
-{
+namespace alba{
 
 class AlbaGrepFile
 {
@@ -23,7 +22,7 @@ private:
     void updateAfterOneIteration(double const percentage);
     bool m_isOutputFileWritten;
     AlbaGrepStringEvaluator m_lineGrepEvaluator;
-    AlbaOptional<UpdateFunctionWithPercentage const&> m_updateFunctionAfterOneIterationOptional;
+    std::optional<UpdateFunctionWithPercentage> m_updateFunctionAfterOneIterationOptional;
 };
 
 }
