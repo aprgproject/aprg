@@ -35,11 +35,9 @@ public:
 private:
     void readIfNeeded(unsigned int const numberOfBitsRequired);
     void eraseBitsInBitBuffer(unsigned int const numberOfBitsToErase);
-    AlbaStreamBitEndianType m_endianType;
     std::istream& m_stream;
     std::deque<bool> m_bitBuffer;
 };
-
 template <typename TypeToWrite>
 TypeToWrite AlbaStreamBitReader::readNumberData(AlbaStreamBitEndianType const endianType)
 {

@@ -1,10 +1,10 @@
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
+#include <memory>
 
 namespace alba
 {
-
 typedef uintptr_t TypeId;
 
 namespace detail
@@ -17,10 +17,9 @@ class TypeIdGenerator
 public:
     static TypeId GetTypeId()
     {
-        return reinterpret_cast<TypeId>(&GetTypeId);
+        return reinterpret_cast<TypeId>(std::addressof(GetTypeId));
     }
 };
-
 } // namespace details
 
 template <class T>

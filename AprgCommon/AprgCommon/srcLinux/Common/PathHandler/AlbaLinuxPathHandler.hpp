@@ -15,11 +15,9 @@ namespace alba
 class AlbaLinuxPathHandler: public AlbaPathHandler
 {
 public:
-    typedef std::set<std::string> ListOfPaths;
     AlbaLinuxPathHandler(PathInitialValueSource const initialValueSource);
     AlbaLinuxPathHandler(std::string const& path);
     virtual ~AlbaLinuxPathHandler() = default;
-
     void clear() override;
     double getFileSizeEstimate();
     AlbaDateTime getFileCreationTime();

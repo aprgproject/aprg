@@ -1,14 +1,10 @@
-// NOTE: Use std::variant or std::any instead! (needs c++17)
-
 #pragma once
 
 #include <Common/Types/AlbaTypeId.hpp>
-
-#include <type_traits>
+#include <Common/Types/AlbaTypeHelper.hpp>
 
 namespace alba
 {
-
 namespace detail
 {
 
@@ -19,65 +15,61 @@ struct MaxSizeTypeImpl;
 template <class MaxType, class Type, class... Types>
 struct MaxSizeTypeImpl<MaxType, Type, Types...>
 {
-    typedef typename std::conditional<
-        (sizeof(MaxType) > sizeof(Type)),
-        typename MaxSizeTypeImpl<MaxType, Types...>::type,
-        typename MaxSizeTypeImpl<Type, Types...>::type
-    >::type type;
+    using type
+    = typeHelper::ConditionalType<
+    (sizeof(MaxType) > sizeof(Type)),
+    typename MaxSizeTypeImpl<MaxType, Types...>::type,
+    typename MaxSizeTypeImpl<Type, Types...>::type>;
 };
 
 template <class MaxType>
 struct MaxSizeTypeImpl<MaxType>
 {
-    typedef MaxType type;
+    using type = MaxType;
 };
 
 template <class... Types>
 struct MaxSizeType
 {
-    typedef typename MaxSizeTypeImpl<char, Types...>::type type;
+    using type = typename MaxSizeTypeImpl<char, Types...>::type;
 };
 
-// Purpose: Checks if all types derive from base type
-template <class Base, class... Types>
+// Purpose: Checks if all types derive from base typetemplate <class Base, class... Types>
 struct CheckIfDerive;
 
 template <class Base, class Derived, class... Types>
 struct CheckIfDerive<Base, Derived, Types...>
 {
-    static_assert(std::is_base_of<Base, Derived>::value,
-                  "Class in UniqueVariant does not derive from VariantDataType");
-    typedef CheckIfDerive<Base, Types...> next;
+    static_assert(typeHelper::isBaseOf<Base, Derived>(),
+    "Class in UniqueVariant does not derive from VariantDataType");
+    using next = CheckIfDerive<Base, Types...>;
 };
 
 template <class Base>
 struct CheckIfDerive<Base>
 {
-    typedef void next;
+    using next = void;
 };
 
-// Purpose: Checks if type is in types list
-template <class Type, class... Types>
+// Purpose: Checks if type is in types listtemplate <class Type, class... Types>
 struct CheckIfInList;
 
 template <class Type, class Head, class... Types>
 struct CheckIfInList<Type, Head, Types...>
 {
-    typedef typename std::conditional<
-        std::is_same<Type, Head>::value,
-        std::integral_constant<bool, true>,
-        typename CheckIfInList<Type, Types...>::type
-    >::type type;
+    using type = typeHelper::ConditionalType<
+    typeHelper::areSameTypes<Type, Head>(),
+    std::integral_constant<bool, true>,
+    typename CheckIfInList<Type, Types...>::type>;
 };
 
 template <class Type>
 struct CheckIfInList<Type>
 {
-    typedef std::integral_constant<bool, false> type;
+    using type = std::integral_constant<bool, false>;
 };
 
 } // namespace detail
-
 // Purpose: Variant type base class
 class VariantDataType
 {
@@ -95,15 +87,15 @@ public:
 
 // Purpose: A compile-time checking unique variant class
 template <class... Types>
+// class [[deprecated("Use std::variant instead! (needs c++17)")]] UniqueVariant // lets remove [[deprecated]] to avoid unnecessary warnings
 class UniqueVariant
 {
 
-typedef typename detail::CheckIfDerive<VariantDataType, Types...>::next CheckIfAllClassesDerive;
-typedef typename detail::MaxSizeType<Types...>::type MaxSizeClass;
+    using CheckIfAllClassesDerive = typename detail::CheckIfDerive<VariantDataType, Types...>::next;
+    using MaxSizeClass = typename detail::MaxSizeType<Types...>::type;
 
 public:
-    UniqueVariant<Types...>()
-        : m_ptr(nullptr)
+    UniqueVariant<Types...>()        : m_ptr(nullptr)
         , m_typeId(0)
     {
         allocate();
@@ -113,11 +105,10 @@ public:
     T & acquire()
     {
         static_assert(detail::CheckIfInList<T, Types...>::type::value,
-                      "Aquiring type from unique variant that doesn't exists");
+                "Aquiring type from unique variant that doesn't exists");
         constructIfNeeded<T>();
         return getValue<T>();
     }
-
     void clear()
     {
         if (m_typeId)

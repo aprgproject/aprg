@@ -3,11 +3,9 @@
 #include <Common/Math/Number/AlbaNumber.hpp>
 
 #include <algorithm>
-#include <type_traits>
 
 namespace alba
 {
-
 namespace mathHelper
 {
 

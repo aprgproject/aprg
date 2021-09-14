@@ -9,10 +9,10 @@ namespace alba
 {
 
 #pragma warning("The class AlbaDebug is used. Please remove after your done debugging.")
+//#warning("The class AlbaDebug is used. Please remove after your done debugging.")
 
 #ifdef ALBA_PRINT_OUTPUT_STREAM_FILE_PATH
-static ofstream debugStream(ALBA_PRINT_OUTPUT_STREAM_FILE_PATH);
-#define ALBA_PRINT_OUTPUT_STREAM debugStream
+static ofstream debugStream(ALBA_PRINT_OUTPUT_STREAM_FILE_PATH);#define ALBA_PRINT_OUTPUT_STREAM debugStream
 #else
 #define ALBA_PRINT_OUTPUT_STREAM std::cout
 #endif

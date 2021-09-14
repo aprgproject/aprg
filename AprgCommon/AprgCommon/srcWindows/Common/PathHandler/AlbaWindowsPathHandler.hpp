@@ -13,11 +13,9 @@ namespace alba
 class AlbaWindowsPathHandler: public AlbaPathHandler
 {
 public:
-    typedef std::set<std::string> ListOfPaths;
     AlbaWindowsPathHandler(PathInitialValueSource const initialValueSource);
     AlbaWindowsPathHandler(std::string const& path);
     virtual ~AlbaWindowsPathHandler() = default;
-
     void clear() override;
     std::string getDriveOrRoot() const;
     double getFileSizeEstimate();

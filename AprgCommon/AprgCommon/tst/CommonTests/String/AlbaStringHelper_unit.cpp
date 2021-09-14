@@ -405,11 +405,10 @@ TEST(SplitStringTest, SplitBySpacesWithDelimeters)
     }
 }
 
-TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWithLargeTargetLength)
+TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksWithLargeTargetLength)
 {
     string string1("   Mark is the no#1      guy in the  world.   ThisIsALongString");
-    strings expectedStrings {"   Mark is", " the no#1 ", "     guy ", "in the  ", "world.   ", "ThisIsALongString"};
-    strings actualStrings;
+    strings expectedStrings {"   Mark is", " the no#1 ", "     guy ", "in the  ", "world.   ", "ThisIsALongString"};    strings actualStrings;
     const int targetLength = 10;
 
     splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
@@ -422,11 +421,10 @@ TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWithLargeTargetLength)
     }
 }
 
-TEST(SplitStringTest, SplitLinesToAchieveTargetLength_LastLineIsIncluded)
+TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorks_LastLineIsIncluded)
 {
     string string1("TupcIlm starts when its deployed on board 0x1011 (same with legacy Aalman)");
-    strings expectedStrings {"TupcIlm starts when its deployed", " on board 0x1011 (same with ", "legacy Aalman)"};
-    strings actualStrings;
+    strings expectedStrings {"TupcIlm starts when its deployed", " on board 0x1011 (same with ", "legacy Aalman)"};    strings actualStrings;
     const int targetLength = 30;
 
     splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
@@ -456,11 +454,10 @@ TEST(SplitStringTest, SplitLinesToAchieveTargetLengthCanBeSplitPerCharacter)
     }
 }
 
-TEST(SplitStringTest, SplitBySeriesOfDelimeters)
+TEST(SplitStringTest, SplitToStringsUsingASeriesOfDelimetersWorks)
 {
     string string1(R"(TLH_DEBUG_PRINT("Creating new licence entry in DB for featureCode: %d.", featureCode);)");
-    strings delimeters{R"((")", R"(",)", ");"};
-    strings expectedStrings{"TLH_DEBUG_PRINT", R"(Creating new licence entry in DB for featureCode: %d.)", " featureCode"};
+    strings delimeters{R"((")", R"(",)", ");"};    strings expectedStrings{"TLH_DEBUG_PRINT", R"(Creating new licence entry in DB for featureCode: %d.)", " featureCode"};
     strings actualStrings;
     splitToStringsUsingASeriesOfDelimeters(actualStrings, string1, delimeters);
 
@@ -472,10 +469,30 @@ TEST(SplitStringTest, SplitBySeriesOfDelimeters)
     }
 }
 
+TEST(BasicStringVariantTest, IsBasicStringVariantWorks)
+{
+    EXPECT_TRUE(isBasicStringVariant<string>());
+    EXPECT_TRUE(isBasicStringVariant<wstring>());
+    EXPECT_TRUE(isBasicStringVariant<u16string>());
+    EXPECT_TRUE(isBasicStringVariant<u32string>());
+    EXPECT_FALSE(isBasicStringVariant<int>());
+}
+
+TEST(BasicStringVariantTest, ConvertToAnotherBasicStringVariantWorks)
+{
+    EXPECT_EQ(L"ThisABasicStringVariant"s, (convertToAnotherBasicStringVariant<string, wstring>("ThisABasicStringVariant"s)));
+    EXPECT_EQ(u"ThisABasicStringVariant"s, (convertToAnotherBasicStringVariant<string, u16string>("ThisABasicStringVariant"s)));
+    EXPECT_EQ(U"ThisABasicStringVariant"s, (convertToAnotherBasicStringVariant<string, u32string>("ThisABasicStringVariant"s)));
+    EXPECT_EQ("ThisABasicStringVariant"s, (convertToAnotherBasicStringVariant<wstring, string>(L"ThisABasicStringVariant"s)));
+    EXPECT_EQ("ThisABasicStringVariant"s, (convertToAnotherBasicStringVariant<u16string, string>(u"ThisABasicStringVariant"s)));
+    EXPECT_EQ("ThisABasicStringVariant"s, (convertToAnotherBasicStringVariant<u32string, string>(U"ThisABasicStringVariant"s)));
+    EXPECT_EQ("ThisABasicStringVariant"s, (convertToAnotherBasicStringVariant<string, string>(u8"ThisABasicStringVariant"s))); // UTF-8 encoded (UTF-8 is backwards compatible with ASCII)
+    EXPECT_EQ(u8"ThisABasicStringVariant"s, (convertToAnotherBasicStringVariant<string, string>("ThisABasicStringVariant"s))); // UTF-8 encoded (UTF-8 is backwards compatible with ASCII)
+}
+
 TEST(CombineStringTest, CombinedStringsWithComma)
 {
-    strings stringsToCombine {"Mark", "is", "the", "no#1", "guy", "in", "the", "world.", "Mark", "is", "also", "the", "nicest", "guy."};
-    string expectedString("Mark,is,the,no#1,guy,in,the,world.,Mark,is,also,the,nicest,guy.");
+    strings stringsToCombine {"Mark", "is", "the", "no#1", "guy", "in", "the", "world.", "Mark", "is", "also", "the", "nicest", "guy."};    string expectedString("Mark,is,the,no#1,guy,in,the,world.,Mark,is,also,the,nicest,guy.");
     string actualString(combineStrings(stringsToCombine, ","));
 
     EXPECT_EQ(expectedString, actualString);
