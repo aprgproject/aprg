@@ -38,6 +38,7 @@ private:
     std::istream& m_stream;
     std::deque<bool> m_bitBuffer;
 };
+
 template <typename TypeToWrite>
 TypeToWrite AlbaStreamBitReader::readNumberData(AlbaStreamBitEndianType const endianType)
 {

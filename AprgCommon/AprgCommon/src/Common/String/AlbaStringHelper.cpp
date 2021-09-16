@@ -440,7 +440,8 @@ string getStringWithoutRedundantWhiteSpace(string const& mainString)
         result += (!result.empty()) ? " "s : string();
         result += mainString.substr(indexNotWhiteSpace, index-indexNotWhiteSpace);
     }
-    return result;}
+    return result;
+}
 
 string getStringWithoutQuotations(string const& mainString)
 {
@@ -590,7 +591,8 @@ string getStringAndReplaceNonAlphanumericCharactersToUnderScore(string const& pa
             partialResult += "_"s;
 }
 }
-            else    {
+            else
+    {
             partialResult += currentCharacter;
 }
             isPreviousCharacterNonAlphanumeric = !isLetterOrNumber(currentCharacter);
@@ -847,7 +849,8 @@ string getStringWithJustifyAlignment(string const& mainString, unsigned int cons
         unsigned int gapLength = (targetLength-noWhiteSpace.length())/(noRedundantWhiteSpaceLength+1);
         string gap(gapLength, ' ');
         result += gap;
-        for(unsigned int i=0; i<noRedundantWhiteSpaceLength; i++)        {
+        for(unsigned int i=0; i<noRedundantWhiteSpaceLength; i++)
+        {
             result += noRedundantWhiteSpace[i];
             result += gap;
         }
@@ -861,7 +864,8 @@ string getStringWithJustifyAlignment(string const& mainString, unsigned int cons
         unsigned int gapLength = (targetLength-noWhiteSpace.length())/(numberOfStrings-1);
         string gap(gapLength, ' ');
         for(unsigned int i=0; i<numberOfStrings; i++)
-        {            result += actualStrings[i];
+        {
+            result += actualStrings[i];
             if(i<numberOfStrings-1)
             {
                 result += gap;
@@ -935,7 +939,8 @@ string getStringWithLeftAlignment(string const& mainString, unsigned int const t
         unsigned int gapLength = (targetLength-noRedundantWhiteSpace.length());
         result += noRedundantWhiteSpace;
         result += string(gapLength, ' ');
-    }    return result;
+    }
+    return result;
 }
 
 string getCorrectPathWithoutUrlParameters(string const& path)
@@ -993,7 +998,8 @@ string getCorrectPathWithoutDoublePeriod(string const& mainString, string const&
         stringToFind += ".."s;
         stringToFind += slashCharacterString;
         unsigned int indexOfDoublePeriod = correctPath.find(stringToFind);
-        if(isNotNpos(static_cast<int>(indexOfDoublePeriod)))        {
+        if(isNotNpos(static_cast<int>(indexOfDoublePeriod)))
+        {
             unsigned int indexOfNearestSlash = correctPath.find_last_of(slashCharacterString, indexOfDoublePeriod-1);
             if(isNotNpos(static_cast<int>(indexOfNearestSlash)))
             {
@@ -1010,7 +1016,8 @@ string getStringBeforeDoublePeriod(string const& mainString, string const& slash
     unsigned int indexOfLastDoublePeriod = mainString.rfind(".."s + slashCharacterString);
     if(isNotNpos(static_cast<int>(indexOfLastDoublePeriod)))
     {
-        return mainString.substr(indexOfLastDoublePeriod+3);    }
+        return mainString.substr(indexOfLastDoublePeriod+3);
+    }
     return mainString;
 }
 
@@ -1038,6 +1045,7 @@ string getCorrectPathWithReplacedSlashCharacters(string const& path)
 }
 template string getCorrectPathWithReplacedSlashCharacters<'\\'>(string const& path);
 template string getCorrectPathWithReplacedSlashCharacters<'/'>(string const& path);
+
 template <char slashCharacter>
 string getCorrectPathWithoutDoublePeriod(string const& path)
 {
@@ -1045,6 +1053,7 @@ string getCorrectPathWithoutDoublePeriod(string const& path)
 }
 template string getCorrectPathWithoutDoublePeriod<'\\'>(string const& path);
 template string getCorrectPathWithoutDoublePeriod<'/'>(string const& path);
+
 template <char slashCharacter>
 string getStringBeforeDoublePeriod(string const& path)
 {
@@ -1052,6 +1061,7 @@ string getStringBeforeDoublePeriod(string const& path)
 }
 template string getStringBeforeDoublePeriod<'\\'>(string const& path);
 template string getStringBeforeDoublePeriod<'/'>(string const& path);
+
 template <char slashCharacter>
 string getImmediateDirectoryName(string const& path)
 {
@@ -1059,6 +1069,7 @@ string getImmediateDirectoryName(string const& path)
 }
 template string getImmediateDirectoryName<'\\'>(string const& path);
 template string getImmediateDirectoryName<'/'>(string const& path);
+
 bool convertStringToBool(string const& stringToConvert)
 {
     string allCapital(getStringWithCapitalLetters(stringToConvert));

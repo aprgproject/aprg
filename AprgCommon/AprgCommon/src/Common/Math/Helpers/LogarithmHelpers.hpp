@@ -6,6 +6,7 @@
 
 namespace alba
 {
+
 namespace mathHelper
 {
 
@@ -28,6 +29,7 @@ template <typename NumberType> inline NumberType getLogarithmWithBase2Of(NumberT
 
     return AlbaBitValueUtilities<NumberType>::getLogarithmWithBase2Of(value);
 }
+
 template <typename NumberType> NumberType getLogarithmForIntegers(NumberType const base, NumberType const inputForLogarithm)
 {
     // This is always correct and faster than pow (check performance test for comparison)
@@ -35,7 +37,8 @@ template <typename NumberType> NumberType getLogarithmForIntegers(NumberType con
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     NumberType result(0);
-    if(base > 1 && inputForLogarithm > 0) // base must be at least 2 and input should be positive    {
+    if(base > 1 && inputForLogarithm > 0) // base must be at least 2 and input should be positive
+    {
         NumberType currentCount(1), currentBase(base), remainingValue(inputForLogarithm);
         while(remainingValue > 0)
         {

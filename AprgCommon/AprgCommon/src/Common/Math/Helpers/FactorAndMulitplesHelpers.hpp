@@ -7,6 +7,7 @@
 
 namespace alba
 {
+
 namespace mathHelper
 {
 
@@ -15,7 +16,8 @@ template <typename NumberType> bool isPrime(NumberType const number)
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     // Non prime would have: a * b = nonPrimeNumber, where a and b are integers
-    // To have less iterations:    // When a = b, then we can test if divisible until nonPrimeNumber^0.5
+    // To have less iterations:
+    // When a = b, then we can test if divisible until nonPrimeNumber^0.5
     // When a > b, then we can test if divisible until b. Since b < nonPrimeNumber^0.5, then we can test until nonPrimeNumber^0.5.
     // When a < b, then we can test if divisible until a. Since a < nonPrimeNumber^0.5, then we can test until nonPrimeNumber^0.5.
 
@@ -51,6 +53,7 @@ template <typename NumberType> NumberType getGreatestCommonFactor(NumberType con
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     // Using Euclid’s algorithm
+
     // Euclid’s algorithm provides an efficient way to find the greatest common divisor of two numbers.
     // The algorithm is based on the following formula:
     // gcd(a, b) =
@@ -83,6 +86,7 @@ template <typename NumberType> NumberType getLeastCommonMultiple(NumberType cons
 
     // Using Euclid’s algorithm
     // lcm(a,b) = ab/gcd(a,b)
+
     NumberType result(0);
     if(firstNumber!=0 && secondNumber!=0)
     {
@@ -96,7 +100,8 @@ template <typename NumberType> double getLeastCommonMultipleInDouble(NumberType 
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     double result(0);
-    if(firstNumber!=0 && secondNumber!=0)    {
+    if(firstNumber!=0 && secondNumber!=0)
+    {
         result = static_cast<double>(firstNumber)/getGreatestCommonFactor(firstNumber, secondNumber)*secondNumber;
     }
     return result;
@@ -107,7 +112,8 @@ template <typename NumberType> NumberType getNumberOfMultiplesInclusive(NumberTy
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     NumberType result(0);
-    if(multiple>0 && number>=multiple)    {
+    if(multiple>0 && number>=multiple)
+    {
         result = number/multiple;
     }
     return result;
@@ -118,7 +124,8 @@ template <typename NumberType> inline NumberType getMultipleThatIsLesserOrEqual(
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     NumberType result(0);
-    if(multiple>0)    {
+    if(multiple>0)
+    {
         result = number/multiple*multiple;
     }
     return result;
@@ -129,7 +136,8 @@ template <typename NumberType> inline NumberType getMultipleThatIsGreaterOrEqual
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     NumberType result(0);
-    if(multiple>0 && number>0)    {
+    if(multiple>0 && number>0)
+    {
         result = ((number-1)/multiple + 1)*multiple;
     }
     return  result;
@@ -140,7 +148,8 @@ template <typename NumberType> inline NumberType getDifferenceFromGreaterMultipl
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     NumberType result(0);
-    NumberType greaterMultiple(getMultipleThatIsGreaterOrEqual(multiple, number));    if(number <= greaterMultiple)
+    NumberType greaterMultiple(getMultipleThatIsGreaterOrEqual(multiple, number));
+    if(number <= greaterMultiple)
     {
         result = greaterMultiple - number;
     }

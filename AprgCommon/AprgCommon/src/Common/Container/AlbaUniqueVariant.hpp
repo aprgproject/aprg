@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 namespace detail
 {
 
@@ -34,7 +35,8 @@ struct MaxSizeType
     using type = typename MaxSizeTypeImpl<char, Types...>::type;
 };
 
-// Purpose: Checks if all types derive from base typetemplate <class Base, class... Types>
+// Purpose: Checks if all types derive from base type
+template <class Base, class... Types>
 struct CheckIfDerive;
 
 template <class Base, class Derived, class... Types>
@@ -51,7 +53,8 @@ struct CheckIfDerive<Base>
     using next = void;
 };
 
-// Purpose: Checks if type is in types listtemplate <class Type, class... Types>
+// Purpose: Checks if type is in types list
+template <class Type, class... Types>
 struct CheckIfInList;
 
 template <class Type, class Head, class... Types>
@@ -70,6 +73,7 @@ struct CheckIfInList<Type>
 };
 
 } // namespace detail
+
 // Purpose: Variant type base class
 class VariantDataType
 {
@@ -95,7 +99,8 @@ class UniqueVariant
     using MaxSizeClass = typename detail::MaxSizeType<Types...>::type;
 
 public:
-    UniqueVariant<Types...>()        : m_ptr(nullptr)
+    UniqueVariant<Types...>()
+        : m_ptr(nullptr)
         , m_typeId(0)
     {
         allocate();
@@ -109,6 +114,7 @@ public:
         constructIfNeeded<T>();
         return getValue<T>();
     }
+
     void clear()
     {
         if (m_typeId)

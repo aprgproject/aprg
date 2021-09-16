@@ -1,5 +1,6 @@
 
 #pragma once
+
 #include <cassert>
 #include <memory>
 #include <ostream>
@@ -13,6 +14,7 @@ class AlbaOptional
 {
     // This requires copy constructor and default constructor on ContentType
 public:
+
     AlbaOptional() = default;
 
     AlbaOptional(ContentType content)
@@ -35,17 +37,19 @@ public:
         : m_contentPointer(std::move(optional.m_contentPointer))
     {}
 
-    void operator=(AlbaOptional<ContentType> const& optional)
+    AlbaOptional<ContentType>& operator=(AlbaOptional<ContentType> const& optional)
     {
         if(optional.m_contentPointer)
         {
             m_contentPointer = std::make_unique<ContentType>(*(optional.m_contentPointer));
         }
+        return *this;
     }
 
-    void operator=(AlbaOptional<ContentType>&& optional)
+    AlbaOptional<ContentType>& operator=(AlbaOptional<ContentType>&& optional)
     {
         m_contentPointer = std::move(optional.m_contentPointer);
+        return *this;
     }
 
     operator bool() const
@@ -99,7 +103,7 @@ public:
 
     ContentType get() const
     {
-        assert(m_contentPointer); //we will not allow mistakes
+        assert(m_contentPointer); // not allowing any mistakes
         if(m_contentPointer)
         {
             return *(m_contentPointer);
@@ -112,13 +116,13 @@ public:
 
     ContentType& getReference()
     {
-        assert(m_contentPointer); //we will not allow mistakes
+        assert(m_contentPointer); // not allowing any mistakes
         return *(m_contentPointer);
     }
 
     ContentType const& getConstReference() const
     {
-        assert(m_contentPointer); //we will not allow mistakes
+        assert(m_contentPointer); // not allowing any mistakes
         return *(m_contentPointer);
     }
 
@@ -147,21 +151,24 @@ public:
 
     AlbaOptional()
         : m_hasContent(false)
-        , m_contentPointer(nullptr)    {}
+        , m_contentPointer(nullptr)
+    {}
 
     AlbaOptional(ContentType & content)
         : m_hasContent(true)
         , m_contentPointer(std::addressof(content)) // std::addressof should be used because & might be overloaded
     {}
 
-    AlbaOptional(AlbaOptional<ContentType&> const& optional)        : m_hasContent(optional.m_hasContent)
+    AlbaOptional(AlbaOptional<ContentType&> const& optional)
+        : m_hasContent(optional.m_hasContent)
         , m_contentPointer(optional.m_contentPointer)
     {}
 
-    void operator=(AlbaOptional<ContentType&> const& optional)
+    AlbaOptional& operator=(AlbaOptional<ContentType&> const& optional)
     {
         m_hasContent = optional.m_hasContent;
         m_contentPointer = optional.m_contentPointer;
+        return *this;
     }
 
     void setValue(ContentType content)
@@ -178,7 +185,8 @@ public:
         m_contentPointer = std::addressof(content);
     }
 
-    void clear()    {
+    void clear()
+    {
         m_hasContent = false;
         m_contentPointer = nullptr;
     }

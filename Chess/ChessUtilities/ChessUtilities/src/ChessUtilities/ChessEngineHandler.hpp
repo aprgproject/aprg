@@ -8,7 +8,8 @@
 #include <optional>
 #include <string>
 
-namespace alba{
+namespace alba
+{
 
 namespace chess
 {
@@ -54,4 +55,5 @@ private:
 };
 
 }
+
 }

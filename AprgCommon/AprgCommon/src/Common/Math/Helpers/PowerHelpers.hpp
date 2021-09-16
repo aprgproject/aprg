@@ -8,6 +8,7 @@
 
 namespace alba
 {
+
 namespace mathHelper
 {
 
@@ -49,6 +50,7 @@ template <typename NumberType> inline NumberType get2ToThePowerOf(NumberType con
 
     return AlbaBitValueUtilities<NumberType>::get2ToThePowerOf(exponent);
 }
+
 template <typename NumberType> NumberType getRaiseToPowerForIntegers(NumberType const base, NumberType const exponent)
 {
     // This is always correct and faster than pow (check performance test for comparison)
@@ -56,7 +58,8 @@ template <typename NumberType> NumberType getRaiseToPowerForIntegers(NumberType 
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     NumberType result(1), newBase(base), newExponent(exponent);
-    while(newExponent > 0)    {
+    while(newExponent > 0)
+    {
         if(isEven(newExponent))
         {
             newBase *= newBase;
@@ -76,6 +79,7 @@ template <typename NumberType> inline NumberType getRaiseToPowerForIntegersUsing
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     // this is slower (by not too much, check performance test)
+
     return static_cast<int>(ceil(pow(base, exponent)));
 }
 

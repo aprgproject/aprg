@@ -41,7 +41,8 @@ private:
 
 // Minimum Initial Points to Reach Destination
 
-// Given a grid with each cell consisting of positive, negative or no points i.e, zero points.// We can move across a cell only if we have positive points ( > 0 ).
+// Given a grid with each cell consisting of positive, negative or no points i.e, zero points.
+// We can move across a cell only if we have positive points ( > 0 ).
 // Whenever we pass through a cell, points in that cell are added to our overall points.
 // We need to find minimum initial points to reach cell (m-1, n-1) from (0, 0).
 

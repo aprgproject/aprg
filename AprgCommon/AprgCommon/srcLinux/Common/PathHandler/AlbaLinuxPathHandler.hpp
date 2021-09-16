@@ -18,6 +18,7 @@ public:
     AlbaLinuxPathHandler(PathInitialValueSource const initialValueSource);
     AlbaLinuxPathHandler(std::string const& path);
     virtual ~AlbaLinuxPathHandler() = default;
+
     void clear() override;
     double getFileSizeEstimate();
     AlbaDateTime getFileCreationTime();

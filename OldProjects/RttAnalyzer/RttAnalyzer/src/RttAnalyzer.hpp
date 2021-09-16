@@ -6,6 +6,7 @@
 #include <optional>
 #include <string>
 #include <vector>
+
 namespace alba
 {
 
@@ -33,4 +34,5 @@ private:
     unsigned int m_posNumber;
 
 };
+
 }

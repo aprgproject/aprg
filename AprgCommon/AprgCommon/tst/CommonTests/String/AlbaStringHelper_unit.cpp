@@ -408,7 +408,8 @@ TEST(SplitStringTest, SplitBySpacesWithDelimeters)
 TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksWithLargeTargetLength)
 {
     string string1("   Mark is the no#1      guy in the  world.   ThisIsALongString");
-    strings expectedStrings {"   Mark is", " the no#1 ", "     guy ", "in the  ", "world.   ", "ThisIsALongString"};    strings actualStrings;
+    strings expectedStrings {"   Mark is", " the no#1 ", "     guy ", "in the  ", "world.   ", "ThisIsALongString"};
+    strings actualStrings;
     const int targetLength = 10;
 
     splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
@@ -424,7 +425,8 @@ TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksWithLargeTargetLength)
 TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorks_LastLineIsIncluded)
 {
     string string1("TupcIlm starts when its deployed on board 0x1011 (same with legacy Aalman)");
-    strings expectedStrings {"TupcIlm starts when its deployed", " on board 0x1011 (same with ", "legacy Aalman)"};    strings actualStrings;
+    strings expectedStrings {"TupcIlm starts when its deployed", " on board 0x1011 (same with ", "legacy Aalman)"};
+    strings actualStrings;
     const int targetLength = 30;
 
     splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
@@ -457,7 +459,8 @@ TEST(SplitStringTest, SplitLinesToAchieveTargetLengthCanBeSplitPerCharacter)
 TEST(SplitStringTest, SplitToStringsUsingASeriesOfDelimetersWorks)
 {
     string string1(R"(TLH_DEBUG_PRINT("Creating new licence entry in DB for featureCode: %d.", featureCode);)");
-    strings delimeters{R"((")", R"(",)", ");"};    strings expectedStrings{"TLH_DEBUG_PRINT", R"(Creating new licence entry in DB for featureCode: %d.)", " featureCode"};
+    strings delimeters{R"((")", R"(",)", ");"};
+    strings expectedStrings{"TLH_DEBUG_PRINT", R"(Creating new licence entry in DB for featureCode: %d.)", " featureCode"};
     strings actualStrings;
     splitToStringsUsingASeriesOfDelimeters(actualStrings, string1, delimeters);
 
@@ -492,7 +495,8 @@ TEST(BasicStringVariantTest, ConvertToAnotherBasicStringVariantWorks)
 
 TEST(CombineStringTest, CombinedStringsWithComma)
 {
-    strings stringsToCombine {"Mark", "is", "the", "no#1", "guy", "in", "the", "world.", "Mark", "is", "also", "the", "nicest", "guy."};    string expectedString("Mark,is,the,no#1,guy,in,the,world.,Mark,is,also,the,nicest,guy.");
+    strings stringsToCombine {"Mark", "is", "the", "no#1", "guy", "in", "the", "world.", "Mark", "is", "also", "the", "nicest", "guy."};
+    string expectedString("Mark,is,the,no#1,guy,in,the,world.,Mark,is,also,the,nicest,guy.");
     string actualString(combineStrings(stringsToCombine, ","));
 
     EXPECT_EQ(expectedString, actualString);

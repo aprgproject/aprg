@@ -6,7 +6,8 @@
 #include <optional>
 #include <string>
 
-namespace alba{
+namespace alba
+{
 
 class PerformanceAnalyzer
 {
@@ -32,7 +33,8 @@ private:
         std::optional<wcdmaToolsBackend::BtsLogTime> endTimeOptional;
     };
 
-public:    PerformanceAnalyzer();
+public:
+    PerformanceAnalyzer();
     void setFileForRawDataDump(std::string const& rawDataPath);
     void logLineInRawDataFile(std::string const& line);
     void logStringInRawDataFile(std::string const& line);

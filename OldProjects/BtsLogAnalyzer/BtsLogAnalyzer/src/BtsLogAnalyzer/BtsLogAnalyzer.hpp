@@ -9,7 +9,8 @@
 
 using wcdmaToolsBackend::BtsLogTime;
 
-namespace alba{
+namespace alba
+{
 
 struct BtsLogDelay
 {
@@ -17,7 +18,8 @@ struct BtsLogDelay
     std::optional<BtsLogTime> endTimeOptional;
 };
 
-struct UniqueId{
+struct UniqueId
+{
     UniqueId()
         : crnccId(0)
         , nbccId(0)
@@ -46,7 +48,8 @@ struct WireSharkDelay
     std::optional<double> endTimeOptional;
 };
 
-class BtsLogAnalyzer{
+class BtsLogAnalyzer
+{
 public:
     BtsLogAnalyzer();
     BtsLogAnalyzer(std::string const& pathOfOutputFile);

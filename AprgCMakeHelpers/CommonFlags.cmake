@@ -70,7 +70,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 # --> -OFast: Enables higher level of optmization than (-O3). It enables lots of flags as can be seen src (-ffloat-store, -ffast-math, -ffinite-math-only, -O3 …)
 # --> -finline-functions
 # --> -m64
-# --> -funroll-loops# --> -fvectorize
+# --> -funroll-loops
+# --> -fvectorize
 # --> -fprofile-generate
 
 # Misc
@@ -168,6 +169,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 # Flag: "-Os"
 # --> Optimize for size. -Os enables all -O2 optimizations except those that often increase code size: "
 # -falign-functions, -falign-jumps, -falign-labels  -falign-loops, -fprefetch-loop-arrays  -freorder-blocks-algorithm=st
+
 # Flag: "-DNDEBUG"
 # --> disable assertions
 

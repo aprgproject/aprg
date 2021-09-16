@@ -16,6 +16,7 @@
 #include <optional>
 #include <iostream>
 #include <sstream>
+
 using namespace alba::AprgBitmap;
 using namespace alba::mathHelper;
 using namespace alba::TwoDimensions;
@@ -51,6 +52,7 @@ void writeLineInDebug(Line const& line, unsigned int const color)
     BitmapSnippet & debugSnippet(s_debugSnippetOptional.value());
     BitmapXY topLeft(0,0);
     BitmapXY bottomRight(debugSnippet.getConfiguration().getBitmapWidth()-1, debugSnippet.getConfiguration().getBitmapHeight()-1);
+
     Points points(line.getPoints(Point(topLeft.getX(), topLeft.getY()), Point(bottomRight.getX(), bottomRight.getY()), 1));
     for (Point point: points)
     {
@@ -65,6 +67,7 @@ void saveDebugSnippet(Bitmap const& bitmap)
     bitmapCopy.setSnippetWriteToFile(debugSnippet);
 }
 }*/
+
 
 SOOSA::FrequencyDatabase::FrequencyDatabase(unsigned int const numberOfQuestions, unsigned int const numberOfChoices)
     : m_numberOfQuestions(numberOfQuestions)

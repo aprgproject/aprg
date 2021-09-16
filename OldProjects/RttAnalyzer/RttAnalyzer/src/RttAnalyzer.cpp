@@ -60,6 +60,7 @@ void RttAnalyzer::processLine(std::string const& line)
         m_pnPosIndexOptional.reset();
     }
 }
+
 /*
 void RttAnalyzer::processLine(std::string const& line)
 {
@@ -102,7 +103,8 @@ void RttAnalyzer::processTitles(strings const& titles)
             m_cx8IndexOptional = index;
             break;
         }
-        index++;    }
+        index++;
+    }
 }
 
 /*
@@ -118,7 +120,8 @@ void RttAnalyzer::processTitles(strings const& titles)
         else if(isStringFoundInsideTheOtherStringNotCaseSensitive(title, "PN Pos") && !m_pnPosIndexOptional)
         {
             m_pnPosIndexOptional.setValue(index);
-        }        index++;
+        }
+        index++;
     }
 }
 */
@@ -133,7 +136,8 @@ void RttAnalyzer::processValues(string const& dateTime, strings const& values)
             unsigned int value = convertStringToNumber<unsigned int>(values[m_cx8IndexOptional.value()]);
             if(value!=0)
             {
-                rttDetails.multiplePos[0] = value;                rttDetails.dateTime = dateTime;
+                rttDetails.multiplePos[0] = value;
+                rttDetails.dateTime = dateTime;
                 m_allRttDetails.emplace_back(rttDetails);
             }
         }
@@ -147,7 +151,8 @@ void RttAnalyzer::processValues(string const& dateTime, strings const& values)
     if(m_cx8IndexOptional && m_pnPosIndexOptional)
     {
         if(m_cx8IndexOptional.getReference()<values.size() && m_pnPosIndexOptional.getReference()<values.size() && m_posNumber<6)
-        {            rttDetails.multiplePos[m_posNumber] = convertStringToNumber<unsigned int>(values[m_cx8IndexOptional.getReference()]);
+        {
+            rttDetails.multiplePos[m_posNumber] = convertStringToNumber<unsigned int>(values[m_cx8IndexOptional.getReference()]);
             if(m_posNumber==0)
             {
                 rttDetails.pnPos = convertStringToNumber<unsigned int>(values[m_pnPosIndexOptional.getReference()]);

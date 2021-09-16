@@ -88,7 +88,8 @@ void ChessPieceRetriever::setLogFile(string const& logFilePath)
     if(!m_logFileStreamOptional->is_open())
     {
         cout << string("Cannot open log file") << logFilePath;
-    }}
+    }
+}
 
 void ChessPieceRetriever::initialize(ChessPeekConfigurationType const type)
 {

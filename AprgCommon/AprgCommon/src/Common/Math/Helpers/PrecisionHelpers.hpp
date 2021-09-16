@@ -7,6 +7,7 @@
 
 namespace alba
 {
+
 namespace mathHelper
 {
 
@@ -16,6 +17,7 @@ template <typename NumberType> inline bool isAlmostEqual(NumberType const value1
 
     return value1==value2;
 }
+
 template <> inline bool isAlmostEqual<float>(float const value1, float const value2)
 {
     return value1 == value2 || getAbsoluteValue(value1-value2) < AlbaMathConstants::COMPARISON_TOLERANCE_FOR_FLOAT;
@@ -32,7 +34,8 @@ template <typename FloatingType, typename IntegerType> inline bool isAlmostAnInt
     static_assert(typeHelper::isIntegralType<IntegerType>(), "IntegerType must be an integer");
 
     return isAlmostEqual(
-                value,                static_cast<FloatingType>(static_cast<IntegerType>(round(value))));
+                value,
+                static_cast<FloatingType>(static_cast<IntegerType>(round(value))));
 }
 
 template <typename NumberType> inline bool isValueWithinLimits(double const value)
@@ -47,8 +50,9 @@ template <typename NumberType> inline bool isValueBeyondLimits(double const valu
 {
     static_assert(typeHelper::isIntegralType<NumberType>(), "IntegerType must be an integer");
 
-    return value < std::numeric_limits<NumberType>::min()
-            || value > std::numeric_limits<NumberType>::max();}
+    return value < static_cast<double>(std::numeric_limits<NumberType>::min())
+            || value > static_cast<double>(std::numeric_limits<NumberType>::max());
+}
 
 template <typename NumberType> inline NumberType getIntegerAfterRoundingADoubleValue(double const doubleValue)
 {
@@ -77,6 +81,7 @@ template <typename NumberType> inline NumberType getIntegerPartOfDoubleValue(dou
 
     return static_cast<NumberType>(doubleValue);
 }
+
 inline bool isAlmostEqual(double const value1, double const value2, double const differenceTolerance)
 {
     return value1 == value2 || getAbsoluteValue(value1-value2) <= differenceTolerance;

@@ -84,6 +84,7 @@ private:
 
 // Subset Sum Problem
 // Given a set of non-negative integers, and a value sum, determine if there is a subset of the given set with sum equal to given sum.
+
 // Example:
 // -> Input: set[] = {3, 34, 4, 12, 5, 2}, sum = 9
 // ---> Output: True
@@ -129,6 +130,7 @@ private:
 // we use another 2-D matrix in  we first initialize with -1 or any negative value.
 // -> In this method, we avoid the few of the recursively call which is repeated itself that’s why we use 2-D matrix.
 // In this matrix we store the value of the previous call value.
+
 
 // Method 4 (Tabular method with less space):
 // To further reduce space complexity, we create a boolean 1D array subset[sum+1].

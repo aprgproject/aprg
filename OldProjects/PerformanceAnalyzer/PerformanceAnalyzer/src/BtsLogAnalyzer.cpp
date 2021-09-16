@@ -69,7 +69,8 @@ void BtsLogAnalyzer::initializeMessageQueueingTimeFileStream()
     ofstream& messageQueueingTimeFileStream(messageQueueingTimeFileStreamOptional.value());
     messageQueueingTimeFileStream.open(messageQueueingTimeFilePathHandler.getFullPath());
     messageQueueingTimeFileStream.precision(20);
-    messageQueueingTimeFileStream<<"QueueingTime,LogPrint"<<endl;}
+    messageQueueingTimeFileStream<<"QueueingTime,LogPrint"<<endl;
+}
 
 void BtsLogAnalyzer::initializeRlSetupTimeFileStream()
 {
@@ -78,7 +79,8 @@ void BtsLogAnalyzer::initializeRlSetupTimeFileStream()
     ofstream& rlSetupTimeFileStream(rlSetupTimeFileStreamOptional.value());
     rlSetupTimeFileStream.open(rlSetupTimeFilePathHandler.getFullPath());
     rlSetupTimeFileStream.precision(20);
-    rlSetupTimeFileStream<<"CrnccId,NbccId,TransactionId,Latency(microseconds),BB_2_RL_SETUP_REQ_MSG,BB_2_RL_SETUP_ACK_MSG,TC_TRANSPORT_BEARER_REGISTER_MSG,TC_TRANSPORT_BEARER_REGISTER_RESP_MSG"<<endl;}
+    rlSetupTimeFileStream<<"CrnccId,NbccId,TransactionId,Latency(microseconds),BB_2_RL_SETUP_REQ_MSG,BB_2_RL_SETUP_ACK_MSG,TC_TRANSPORT_BEARER_REGISTER_MSG,TC_TRANSPORT_BEARER_REGISTER_RESP_MSG"<<endl;
+}
 
 void BtsLogAnalyzer::initializeRlDeletionTimeFileStream()
 {
@@ -87,7 +89,8 @@ void BtsLogAnalyzer::initializeRlDeletionTimeFileStream()
     ofstream& rlDeletionTimeFileStream(rlDeletionTimeFileStreamOptional.value());
     rlDeletionTimeFileStream.open(rlDeletionTimeFilePathHandler.getFullPath());
     rlDeletionTimeFileStream.precision(20);
-    rlDeletionTimeFileStream<<"CrnccId,NbccId,TransactionId,Latency(microseconds),BB_2_RL_SETUP_REQ_MSG,BB_2_RL_SETUP_ACK_MSG,TC_TRANSPORT_BEARER_REGISTER_MSG,TC_TRANSPORT_BEARER_REGISTER_RESP_MSG"<<endl;}
+    rlDeletionTimeFileStream<<"CrnccId,NbccId,TransactionId,Latency(microseconds),BB_2_RL_SETUP_REQ_MSG,BB_2_RL_SETUP_ACK_MSG,TC_TRANSPORT_BEARER_REGISTER_MSG,TC_TRANSPORT_BEARER_REGISTER_RESP_MSG"<<endl;
+}
 
 void BtsLogAnalyzer::initializeRlSetupPerSecondFileStream()
 {
@@ -96,7 +99,8 @@ void BtsLogAnalyzer::initializeRlSetupPerSecondFileStream()
     ofstream& rlSetupPerSecondFileStream(rlSetupPerSecondFileStreamOptional.value());
     rlSetupPerSecondFileStream.open(rlSetupPerSecondFilePathHandler.getFullPath());
     rlSetupPerSecondFileStream.precision(20);
-    rlSetupPerSecondFileStream<<"Time,Number Of RL setup in a second"<<endl;}
+    rlSetupPerSecondFileStream<<"Time,Number Of RL setup in a second"<<endl;
+}
 
 void BtsLogAnalyzer::saveDspCapacityInformationInGrm(string const& lineInLogs)
 {
@@ -493,7 +497,8 @@ void BtsLogAnalyzer::saveRlSetupPerSecond(string const& lineInLogs)
                 ofstream& rlSetupPerSecondFileStream(rlSetupPerSecondFileStreamOptional.value());
                 rlSetupPerSecondFileStream<<savedSecond.getEquivalentStringBtsTimeFormat()<<","<<numberOfUsersInSecond<<endl;
             }
-            savedSecond=currentLogTime;            numberOfUsersInSecond=0;
+            savedSecond=currentLogTime;
+            numberOfUsersInSecond=0;
         }
     }
 }
@@ -579,7 +584,8 @@ void BtsLogAnalyzer::computeRlSetupLatencyAndUpdateIfLogTimePairIsValid(UserIden
             ofstream& rlSetupTimeFileStream(rlSetupTimeFileStreamOptional.value());
             saveUserIndentifierAndLatencyToCsvFile(userIdentifiers, latencyInMicroseconds, rlSetupTimeFileStream);
             savePrintsAvailableToCsvFile(userIdentifiers, rlSetupTimeFileStream);
-            rlSetupTimeFileStream<<endl;        }
+            rlSetupTimeFileStream<<endl;
+        }
     }
     logTimePairs.erase(userIdentifiers);
 }
@@ -596,7 +602,8 @@ void BtsLogAnalyzer::computeRLDeletionLatencyAndUpdateIfLogTimePairIsValid(UserI
             ofstream& rlDeletionTimeFileStream(rlDeletionTimeFileStreamOptional.value());
             saveUserIndentifierAndLatencyToCsvFile(userIdentifiers, latencyInMicroseconds, rlDeletionTimeFileStream);
             rlDeletionTimeFileStream<<endl;
-        }    }
+        }
+    }
     logTimePairs.erase(userIdentifiers);
 }
 
@@ -608,6 +615,7 @@ void BtsLogAnalyzer::saveMessageQueueingTimeToCsvFile(string const& lineInLogs, 
         messageQueueingTimeFileStream<<messageQueueingTime<<","<<lineInLogs<<endl;
     }
 }
+
 void BtsLogAnalyzer::saveUserIndentifierAndLatencyToCsvFile(UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, ofstream& csvFileStream) const
 {
     csvFileStream<<userIdentifiers.getCrnccId()<<","<<userIdentifiers.getNbccId()<<","<<userIdentifiers.getTransactionId()<<","<<latencyInMicroseconds<<",";
@@ -633,6 +641,7 @@ double BtsLogAnalyzer::getTotalMicroseconds(LogTimePair const& logTimePairOfTheU
     BtsLogTime latency = logTimePairOfTheUser.second.value()-logTimePairOfTheUser.first.value();
     return getTotalMicroseconds(latency);
 }
+
 double BtsLogAnalyzer::getTotalMicroseconds(BtsLogTime const& btsLogTime) const
 {
     double result((double)btsLogTime.getMinutes()*1000000*60 + (double)btsLogTime.getSeconds()*1000000 + (double)btsLogTime.getMicroSeconds());

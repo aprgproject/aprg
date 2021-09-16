@@ -142,7 +142,8 @@ void ChessEngineControllerWithUci::setLogFile(string const& logFilePath)
     if(!m_logFileStreamOptional->is_open())
     {
         cout << "Cannot open log file" << logFilePath;
-    }}
+    }
+}
 
 void ChessEngineControllerWithUci::initialize()
 {
@@ -182,7 +183,8 @@ void ChessEngineControllerWithUci::changeState(
         m_logFileStreamOptional.value()
                 << "Changing state from " << getEnumString(m_state)
                 << " to " << getEnumString(state) << endl;
-    }    m_state = state;
+    }
+    m_state = state;
 }
 
 void ChessEngineControllerWithUci::proceedToIdleStateAndProcessPendingCommands()
@@ -205,6 +207,7 @@ void ChessEngineControllerWithUci::log(string const& logString)
         m_logFileStreamOptional.value() << logString << endl;
     }
 }
+
 void ChessEngineControllerWithUci::forceSend(
         string const& commandString)
 {
@@ -367,6 +370,7 @@ void ChessEngineControllerWithUci::processInCalculating(
         m_additionalStepsInCalculationMonitoring.value()(m_currentCalculationDetails);
     }
 }
+
 string ChessEngineControllerWithUci::constructUciOptionCommand(
         string const& name,
         string const& value)

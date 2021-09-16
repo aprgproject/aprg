@@ -4,7 +4,8 @@
 #include <Common/Types/AlbaTypeHelper.hpp>
 
 #include <iomanip>
-#include <optional>#include <string>
+#include <optional>
+#include <string>
 #include <vector>
 
 namespace alba
@@ -215,12 +216,14 @@ std::wstring convertStringToWideString(std::string const& stringInput);
 std::string convertWideStringToString(std::wstring const& wstringInput);
 
 
+
 // Alignments
 
 std::string getStringWithJustifyAlignment(std::string const& mainString, unsigned int const targetLength);
 std::string getStringWithCenterAlignment(std::string const& mainString, unsigned int const targetLength);
 std::string getStringWithRightAlignment(std::string const& mainString, unsigned int const targetLength);
 std::string getStringWithLeftAlignment(std::string const& mainString, unsigned int const targetLength);
+
 
 
 // PathHelpers

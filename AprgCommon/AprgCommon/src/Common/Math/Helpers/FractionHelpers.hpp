@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 namespace mathHelper
 {
 
@@ -25,7 +26,8 @@ void changeFractionToSimplestFormForUnsigned(NumberType & numerator, NumberType 
     static_assert(typeHelper::isUnsignedType<NumberType>(), "Number type must be unsigned");
 
     NumberType gcf = getGreatestCommonFactor(numerator, denominator);
-    if(gcf!=0)    {
+    if(gcf!=0)
+    {
         numerator /= gcf;
         denominator /= gcf;
     }
@@ -38,7 +40,8 @@ void changeFractionToSimplestFormForSigned(NumberType & numerator, NumberType & 
     static_assert(std::is_signed<NumberType>(), "Number type must be signed");
 
     NumberType gcf = getGreatestCommonFactor(numerator, denominator);
-    if(gcf!=0)    {
+    if(gcf!=0)
+    {
         numerator /= gcf;
         denominator /= gcf;
         numerator = getAbsoluteValue(numerator) * getSign(numerator) * getSign(denominator);
