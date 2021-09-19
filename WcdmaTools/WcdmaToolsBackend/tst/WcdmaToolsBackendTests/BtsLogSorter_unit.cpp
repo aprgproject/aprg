@@ -83,10 +83,9 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotTest_PrintsAreOrderedBasedOnBtsTime)
     AlbaFileReader fileReader(inputLogFileStream);
     while(fileReader.isNotFinished())
     {
-        cout<<fileReader.getLineAndIgnoreWhiteSpaces()<<endl;
+        cout<<fileReader.getLineAndIgnoreWhiteSpaces()<<"\n";
         lines++;
     }
-
     EXPECT_EQ(5, lines);
 }
 
@@ -105,10 +104,9 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotTest_PrintsAreFiltered)
     AlbaFileReader fileReader(inputLogFileStream);
     while(fileReader.isNotFinished())
     {
-        cout<<fileReader.getLineAndIgnoreWhiteSpaces()<<endl;
+        cout<<fileReader.getLineAndIgnoreWhiteSpaces()<<"\n";
         lines++;
     }
-
     EXPECT_EQ(4, lines);
 }
 

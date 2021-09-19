@@ -9,10 +9,10 @@
 #include <vector>
 
 using namespace alba;
+using namespace alba::stringHelper;
 using namespace std;
 
-namespace wcdmaToolsBackend
-{
+namespace wcdmaToolsBackend{
 
 BtsLogTime::BtsLogTime()
     : m_dateTime()
@@ -43,23 +43,22 @@ void BtsLogTime::setTimeByTimeStamp(BtsLogTimeType logTimeType, string const& ti
 
     for(char character: timeStampString)
     {
-        if(stringHelper::isNumber(character))
+        if(isNumber(character))
         {
             timeValueString += character;
         }
         else if(!timeValueString.empty())
         {
-            timeValues.push_back(stringHelper::convertStringToNumber<unsigned int>(timeValueString));
+            timeValues.push_back(convertStringToNumber<unsigned int>(timeValueString));
             timeValueString.clear();
         }
     }
     if(!timeValueString.empty())
     {
-        timeValues.push_back(stringHelper::convertStringToNumber<unsigned int>(timeValueString));
+        timeValues.push_back(convertStringToNumber<unsigned int>(timeValueString));
     }
 
-    if(BtsLogTimeType::PcTimeStamp == logTimeType)
-    {
+    if(BtsLogTimeType::PcTimeStamp == logTimeType)    {
         if(6 == timeValues.size())
         {
             months = timeValues[1];
@@ -140,27 +139,24 @@ unsigned int BtsLogTime::getSeconds() const
 
 unsigned int BtsLogTime::getTotalSeconds() const
 {
-    return m_dateTime.getTotalSecondsInHourMinutesSeconds();
+    return m_dateTime.getHourMinutesSecond().getTotalSeconds();
 }
 
-unsigned int BtsLogTime::getMicroSeconds() const
-{
+unsigned int BtsLogTime::getMicroSeconds() const{
     return m_dateTime.getMicroSeconds();
 }
 
 void BtsLogTime::clearMicroSeconds()
 {
-    m_dateTime.clearMicroSeconds();
+    m_dateTime.getMicroSecondsReference() = 0;
 }
-
 
 string BtsLogTime::getPrintableString() const
 {
-    return m_dateTime.getPrintableStringFormat1();
+    return convertToString(m_dateTime.getPrintObject<AlbaDateTime::PrintFormat::Type1>());
 }
 
-string BtsLogTime::getEquivalentStringPcTimeFormat() const
-{
+string BtsLogTime::getEquivalentStringPcTimeFormat() const{
     stringstream ss;
     ss << setw(2) << setfill('0') << getDays() << ".";
     ss << setw(2) << setfill('0') << getMonths() << " ";

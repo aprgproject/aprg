@@ -59,11 +59,10 @@ double BtsLogSorter::getTotalSizeToBeRead(set<string> const& listOfFiles)
 
 void BtsLogSorter::processDirectory(string const& directoryPath)
 {
-    cout<<"processDirectory: "<<directoryPath<<endl;
+    cout<<"processDirectory: "<<directoryPath<<"\n";
     set<string> listOfFiles;
     set<string> listOfDirectories;
-    AlbaLocalPathHandler(directoryPath).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    ProgressCounters::totalSizeToBeReadForCombine = getTotalSizeToBeRead(listOfFiles);
+    AlbaLocalPathHandler(directoryPath).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);    ProgressCounters::totalSizeToBeReadForCombine = getTotalSizeToBeRead(listOfFiles);
     for(string const& filePath : listOfFiles)
     {
         AlbaLocalPathHandler filePathHandler(filePath);
@@ -78,11 +77,10 @@ void BtsLogSorter::processFile(string const& filePath)
 {
     openStartupLogsIfNeeded();
     AlbaLocalPathHandler filePathHandler(filePath);
-    cout<<"processFile: "<<filePathHandler.getFile()<<endl;
+    cout<<"processFile: "<<filePathHandler.getFile()<<"\n";
 
     double previousTotalSize(ProgressCounters::totalSizeReadForCombine);
-    ifstream inputLogFileStream(filePath);
-    AlbaFileReader fileReader(inputLogFileStream);
+    ifstream inputLogFileStream(filePath);    AlbaFileReader fileReader(inputLogFileStream);
     while(fileReader.isNotFinished())
     {
         string lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
@@ -105,11 +103,10 @@ void BtsLogSorter::processLineInFile(string const& filename, string const& lineI
     }
     else if(logPrint.getBtsTime().isStartup())
     {
-        m_startupLogStreamOptional.value() << logPrint <<endl;
+        m_startupLogStreamOptional.value() << logPrint <<"\n";
     }
     else
-    {
-        m_sorterWithPcTime.add(logPrint);
+    {        m_sorterWithPcTime.add(logPrint);
     }
 }
 
@@ -134,11 +131,10 @@ void BtsLogSorter::deleteTempFilesAndDirectoriesOfOneDayOld() const
         AlbaDateTime difference = currentTime-fileCreationTime;
         if(difference > oneDay)
         {
-            cout<<"Difference: ["<<difference.getPrintableStringFormat1()<<"] deleted temporaryPath:"<<directoryPath<<endl;
+            cout<<"Difference: ["<<difference<<"] deleted temporaryPath:"<<directoryPath<<"\n";
             temporaryDirectoryPathHandler.deleteDirectoryWithFilesAndDirectories();
         }
-    }
-}
+    }}
 
 void BtsLogSorter::deleteStartupLog() const
 {
@@ -166,18 +162,17 @@ void BtsLogSorter::saveLogsToOutputFile(string const& outputPath)
 
 void BtsLogSorter::saveLogToOutputFileIfAllHavePcTime(string const& outputPath)
 {
-    cout << "Save log to output file if all have pc time." << endl;
+    cout << "Save log to output file if all have pc time.\n";
     ofstream outputLogFileStream(outputPath);
     writeLogsWithoutPcTimeToOutputFile(outputLogFileStream);
 }
 
 void BtsLogSorter::saveLogToOutputFileIfNotAllHavePcTime(string const& outputPath)
 {
-    cout << "Save log to output file if not all have pc time." << endl;
+    cout << "Save log to output file if not all have pc time.\n";
     ofstream outputLogFileStream(outputPath);
     separateLogsWithoutPcTimeIntoDifferentAddresses();
-    writeLogsWithPcTimeToOutputFile(outputLogFileStream);
-    writeLogsWithoutPcTimeToOutputFile(outputLogFileStream);
+    writeLogsWithPcTimeToOutputFile(outputLogFileStream);    writeLogsWithoutPcTimeToOutputFile(outputLogFileStream);
     deleteLogsWithoutPcTime();
 }
 
@@ -198,11 +193,10 @@ void BtsLogSorter::openStartupLogsIfNeeded()
 
 void BtsLogSorter::addStartupLogsOnSorterWithPcTime()
 {
-    cout << "Add startup logs on sorter with PC time." << endl;
+    cout << "Add startup logs on sorter with PC time.\n";
     m_startupLogStreamOptional.reset();
     BtsPrintReaderWithRollback printReader;
-    printReader.openIfNeeded(m_pathOfStartupLog);
-    double fileSize(AlbaLocalPathHandler(m_pathOfStartupLog).getFileSizeEstimate());
+    printReader.openIfNeeded(m_pathOfStartupLog);    double fileSize(AlbaLocalPathHandler(m_pathOfStartupLog).getFileSizeEstimate());
     while(printReader.isGood())
     {
         BtsLogPrint startupLogPrint(printReader.getPrint());
@@ -216,11 +210,10 @@ void BtsLogSorter::addStartupLogsOnSorterWithPcTime()
 
 void BtsLogSorter::writeLogsWithoutPcTimeToOutputFile(ofstream & outputLogFileStream)
 {
-    cout << "Save sorted logs without PC time." << endl;
+    cout << "Save sorted logs without PC time.\n";
     unsigned long long printCount(0);
     unsigned long long size(m_sorterWithoutPcTime.getSize());
-    m_sorterWithoutPcTime.sortThenDoFunctionThenReleaseAllObjects([&](BtsLogPrint const& logPrint)
-    {
+    m_sorterWithoutPcTime.sortThenDoFunctionThenReleaseAllObjects([&](BtsLogPrint const& logPrint)    {
         updateOrWriteCurrentPrint(logPrint, outputLogFileStream);
         ProgressCounters::writeProgressForCombine = static_cast<int>(75 + (printCount++ * 25/size));
     });
@@ -229,30 +222,27 @@ void BtsLogSorter::writeLogsWithoutPcTimeToOutputFile(ofstream & outputLogFileSt
 
 void BtsLogSorter::separateLogsWithoutPcTimeIntoDifferentAddresses()
 {
-    cout << "Save sorted logs without PC time into different addresses." << endl;
+    cout << "Save sorted logs without PC time into different addresses.\n";
     map<string, ofstream> hardwareAddressToOutputSteamMap;
 
-    for(string const& hardwareAddress: m_foundHardwareAddresses)
-    {
+    for(string const& hardwareAddress: m_foundHardwareAddresses)    {
         hardwareAddressToOutputSteamMap[hardwareAddress].open(getPathOfLogWithoutPcTimeBasedFromHardwareAddress(m_directoryOfLogsWithoutPcTime, hardwareAddress));
     }
     unsigned long long printCount(0);
     unsigned long long size(m_sorterWithoutPcTime.getSize());
     m_sorterWithoutPcTime.sortThenDoFunctionThenReleaseAllObjects([&](BtsLogPrint const& logPrint)
     {
-        hardwareAddressToOutputSteamMap[logPrint.getHardwareAddress()] << logPrint << endl;
+        hardwareAddressToOutputSteamMap[logPrint.getHardwareAddress()] << logPrint << "\n";
 
         ProgressCounters::writeProgressForCombine = static_cast<int>(25 + (printCount++ * 25/size));
-    });
-}
+    });}
 
 void BtsLogSorter::writeLogsWithPcTimeToOutputFile(ofstream & outputLogFileStream)
 {
-    cout << "Merge logs with and without PC time and save to output file." << endl;
+    cout << "Merge logs with and without PC time and save to output file.\n";
     map<string, BtsPrintReaderWithRollback> hardwareAddressToReaderMap;
     for(string const& hardwareAddress: m_foundHardwareAddresses)
-    {
-        hardwareAddressToReaderMap[hardwareAddress].openIfNeeded(getPathOfLogWithoutPcTimeBasedFromHardwareAddress(m_directoryOfLogsWithoutPcTime, hardwareAddress));
+    {        hardwareAddressToReaderMap[hardwareAddress].openIfNeeded(getPathOfLogWithoutPcTimeBasedFromHardwareAddress(m_directoryOfLogsWithoutPcTime, hardwareAddress));
     }
     unsigned long long printCount(0);
     unsigned long long size(m_sorterWithPcTime.getSize());
@@ -310,18 +300,16 @@ void BtsLogSorter::updateOrWriteCurrentPrint(BtsLogPrint const& logPrint, ofstre
     {
         if(!m_currentPrintToWrite.getPrint().empty())
         {
-            outputLogFileStream << m_currentPrintToWrite.getPrintWithAllDetails() << endl;
+            outputLogFileStream << m_currentPrintToWrite.getPrintWithAllDetails() << "\n";
         }
         m_currentPrintToWrite = logPrint;
-    }
-}
+    }}
 
 void BtsLogSorter::writeLastPrint(ofstream & outputLogFileStream)
 {
-    outputLogFileStream << m_currentPrintToWrite.getPrintWithAllDetails() << endl;
+    outputLogFileStream << m_currentPrintToWrite.getPrintWithAllDetails() << "\n";
     m_currentPrintToWrite = BtsLogPrint{};
 }
-
 void BtsLogSorter::deleteFilesInDirectory(string const& directoryOfLogs) const
 {
     AlbaLocalPathHandler(directoryOfLogs).deleteFilesInDirectory();
