@@ -91,11 +91,10 @@ public:
   
   void operation()
   {
-    std::cout << "Leaf "<< id <<" operation" << std::endl;
+    std::cout << "Leaf "<< id <<" operation\n";
   }
 
-private:
-  int id;
+private:  int id;
 };
 
 

@@ -34,11 +34,10 @@ class Adaptee
 public:
   void specificRequest()
   {
-    std::cout << "specific request" << std::endl;
+    std::cout << "specific request\n";
   }
   // ...
 };
-
 /*
  * Adapter
  * implements the Target interface and when it gets a method call it

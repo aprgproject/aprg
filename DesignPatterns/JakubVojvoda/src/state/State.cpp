@@ -35,11 +35,10 @@ public:
   
   void handle()
   {
-    std::cout << "State A handled." << std::endl;
+    std::cout << "State A handled.\n";
   }
   // ...
 };
-
 class ConcreteStateB : public State
 {
 public:
@@ -47,11 +46,10 @@ public:
   
   void handle()
   {
-    std::cout << "State B handled." << std::endl;
+    std::cout << "State B handled.\n";
   }
   // ...
 };
-
 /*
  * Context
  * defines the interface of interest to clients

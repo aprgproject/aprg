@@ -38,11 +38,10 @@ public:
   
   void operation()
   {
-    std::cout << "Unshared Flyweight with state " << state << std::endl;
+    std::cout << "Unshared Flyweight with state " << state << "\n";
   }
   // ...
-  
-private:
+  private:
   int state;
   // ...
 };
@@ -62,11 +61,10 @@ public:
   
   void operation()
   {
-    std::cout << "Concrete Flyweight with state " << state << std::endl;
+    std::cout << "Concrete Flyweight with state " << state << "\n";
   }
   // ...
-  
-private:
+  private:
   int state;
   // ...
 };
