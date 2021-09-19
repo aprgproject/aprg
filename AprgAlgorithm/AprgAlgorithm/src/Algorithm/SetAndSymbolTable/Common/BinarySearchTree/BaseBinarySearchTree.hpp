@@ -20,11 +20,10 @@ public:
     using Keys = std::vector<Key>;
     using TraverseFunction = std::function<void(Node const&)>;
 
-    virtual ~BaseBinarySearchTree() = default;
+    virtual ~BaseBinarySearchTree() = default; // virtual destructor because of virtual functions (vtable exists)
 
     bool isEmpty() const override
-    {
-        return getSize() == 0;
+    {        return getSize() == 0;
     }
 
     bool doesContain(Key const& key) const override

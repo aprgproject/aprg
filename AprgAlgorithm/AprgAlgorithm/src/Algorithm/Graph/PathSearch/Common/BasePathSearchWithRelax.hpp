@@ -29,12 +29,9 @@ public:
         , m_startVertex(startVertex)
     {}
 
-    virtual ~BasePathSearchWithRelax() = default;
-
     bool hasPathTo(Vertex const& endVertex) const
     {
-        return m_vertexToEdgeWithBestWeightMap.find(endVertex) != m_vertexToEdgeWithBestWeightMap.cend();
-    }
+        return m_vertexToEdgeWithBestWeightMap.find(endVertex) != m_vertexToEdgeWithBestWeightMap.cend();    }
 
     Path getPathTo(Vertex const& endVertex) const
     {
@@ -76,10 +73,13 @@ public:
     }
 
 protected:
+    // No need for virtual destructor because this class is not destroyed polymorphically.
+    // Guideline #4: A base class destructor should be either public and virtual, or protected and nonvirtual.
+    // Source: http://www.gotw.ca/publications/mill18.htm
+    ~BasePathSearchWithRelax() = default;
 
     bool hasNoWeightSaved(Vertex const& vertex) const
-    {
-        return m_vertexToEdgeWithBestWeightMap.find(vertex) == m_vertexToEdgeWithBestWeightMap.cend();
+    {        return m_vertexToEdgeWithBestWeightMap.find(vertex) == m_vertexToEdgeWithBestWeightMap.cend();
     }
 
     Weight getSavedWeightAt(Vertex const& vertex) const

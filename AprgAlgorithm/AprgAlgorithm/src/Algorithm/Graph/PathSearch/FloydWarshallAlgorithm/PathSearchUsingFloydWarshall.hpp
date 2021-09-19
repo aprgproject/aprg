@@ -186,10 +186,9 @@ private:
                 displayTable.getLastRow().addCell(stringHelper::convertToString(pathSearch.m_pathDetailsMatrix.getEntryConstReference(x,y).bestWeight));
             }
         }
-        out << std::endl << displayTable;
+        out << "\n" << displayTable;
         return out;
     }
-
     Graph const& m_graph;
     Comparator m_comparator;
     PathDetailsMatrix m_pathDetailsMatrix;
