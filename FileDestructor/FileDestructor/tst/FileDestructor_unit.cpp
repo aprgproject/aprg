@@ -16,11 +16,10 @@ namespace
 void createAFileInDirectory(string const& directory)
 {
     ofstream outputStream(directory + "SomeFile.txt");
-    outputStream << "some string" << endl;
+    outputStream << "some string\n";
 }
 
-void retrieveNumberOfFilesAndDirectoriesFromPath(
-        AlbaLocalPathHandler & pathHandler,
+void retrieveNumberOfFilesAndDirectoriesFromPath(        AlbaLocalPathHandler & pathHandler,
         unsigned int & numberOfFiles,
         unsigned int & numberOfDirectories)
 {
