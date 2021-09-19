@@ -383,14 +383,13 @@ TEST(ContainerTest, FetrieveContentsFromStreamWorksForAVectorOfIntegersFromFile)
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     array<int, 4> temporaryArray{};
     ofstream outputTestFile(testFilePath.getFullPath());
-    outputTestFile<<"18723"<<endl;
-    outputTestFile<<"-608"<<endl;
-    outputTestFile<<"-43735"<<endl;
-    outputTestFile<<"23234"<<endl;
+    outputTestFile<<"18723\n";
+    outputTestFile<<"-608\n";
+    outputTestFile<<"-43735\n";
+    outputTestFile<<"23234\n";
     outputTestFile.close();
     ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
-
     retrieveContentsFromStream(inputTestFile, temporaryArray);
 
     ASSERT_EQ(4U, temporaryArray.size());
@@ -406,14 +405,13 @@ TEST(ContainerTest, FetrieveContentsFromStreamWorksForAnArrayOfIntegersFromFile)
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     vector<int> temporaryVector;
     ofstream outputTestFile(testFilePath.getFullPath());
-    outputTestFile<<"18723"<<endl;
-    outputTestFile<<"-608"<<endl;
-    outputTestFile<<"-43735"<<endl;
-    outputTestFile<<"23234"<<endl;
+    outputTestFile<<"18723\n";
+    outputTestFile<<"-608\n";
+    outputTestFile<<"-43735\n";
+    outputTestFile<<"23234\n";
     outputTestFile.close();
     ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
-
     retrieveContentsFromStream(inputTestFile, temporaryVector);
 
     ASSERT_EQ(4U, temporaryVector.size());
@@ -429,14 +427,13 @@ TEST(ContainerTest, FetrieveContentsFromStreamWorksForASetOfIntegersFromFile)
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     set<int> temporarySet;
     ofstream outputTestFile(testFilePath.getFullPath());
-    outputTestFile<<"18723"<<endl;
-    outputTestFile<<"-608"<<endl;
-    outputTestFile<<"-43735"<<endl;
-    outputTestFile<<"23234"<<endl;
+    outputTestFile<<"18723\n";
+    outputTestFile<<"-608\n";
+    outputTestFile<<"-43735\n";
+    outputTestFile<<"23234\n";
     outputTestFile.close();
     ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
-
     retrieveContentsFromStream(inputTestFile, temporarySet);
 
     ASSERT_EQ(4U, temporarySet.size());
@@ -452,14 +449,13 @@ TEST(ContainerTest, FetrieveContentsFromStreamWorksForAMapOfIntegersFromFile)
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     map<int,int> temporaryMap;
     ofstream outputTestFile(testFilePath.getFullPath());
-    outputTestFile<<"1"<<endl;
-    outputTestFile<<"2"<<endl;
-    outputTestFile<<"3"<<endl;
-    outputTestFile<<"4"<<endl;
+    outputTestFile<<"1\n";
+    outputTestFile<<"2\n";
+    outputTestFile<<"3\n";
+    outputTestFile<<"4\n";
     outputTestFile.close();
     ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
-
     retrieveContentsFromStream(inputTestFile, temporaryMap);
 
     ASSERT_EQ(2U, temporaryMap.size());

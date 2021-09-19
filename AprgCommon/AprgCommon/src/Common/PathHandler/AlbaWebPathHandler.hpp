@@ -11,11 +11,10 @@ class AlbaWebPathHandler: public AlbaPathHandler
 {
 public:
     AlbaWebPathHandler(std::string const& path);
-    virtual ~AlbaWebPathHandler() = default;
+    // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
 
     void clear() override;
-    std::string getFullPath() const override;
-    std::string getDirectory() const override;
+    std::string getFullPath() const override;    std::string getDirectory() const override;
     bool hasProtocol() const;
     std::string getProtocol() const;
     void gotoLink(std::string const& newPath);

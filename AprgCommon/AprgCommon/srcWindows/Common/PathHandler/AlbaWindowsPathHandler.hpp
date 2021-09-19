@@ -15,11 +15,10 @@ class AlbaWindowsPathHandler: public AlbaPathHandler
 public:
     AlbaWindowsPathHandler(PathInitialValueSource const initialValueSource);
     AlbaWindowsPathHandler(std::string const& path);
-    virtual ~AlbaWindowsPathHandler() = default;
+    // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
 
     void clear() override;
-    std::string getDriveOrRoot() const;
-    double getFileSizeEstimate();
+    std::string getDriveOrRoot() const;    double getFileSizeEstimate();
     AlbaDateTime getFileCreationTime();
     bool isFoundInLocalSystem() const;
     bool isRelativePath() const;

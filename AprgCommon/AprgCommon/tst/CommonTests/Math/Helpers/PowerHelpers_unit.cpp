@@ -1,8 +1,7 @@
 #include <Common/Math/Helpers/PowerHelpers.hpp>
-#include <Common/Randomizer/AlbaRandomizer.hpp>
+#include <Common/Randomizer/AlbaSimpleRandomizer.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
@@ -158,11 +157,10 @@ TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformance
     // Results: ~3.1s
 
     unsigned long long result(0);
-    AlbaRandomizer randomizer;
+    AlbaSimpleRandomizer randomizer;
     int minValue(1), maxValue(2000);
     for(unsigned long long iterations=1; iterations<10000000ULL; iterations++)
-    {
-        unsigned long long base = static_cast<unsigned long long>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
+    {        unsigned long long base = static_cast<unsigned long long>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
         unsigned long long exponent = static_cast<unsigned long long>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
         result = max(result, getRaiseToPowerForIntegers(base, exponent));
     }
@@ -174,11 +172,10 @@ TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPer
     // Results: ~3.1s
 
     unsigned long long result(0);
-    AlbaRandomizer randomizer;
+    AlbaSimpleRandomizer randomizer;
     int minValue(1), maxValue(2000);
     for(unsigned long long iterations=1; iterations<10000000ULL; iterations++)
-    {
-        unsigned long long base = static_cast<unsigned long long>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
+    {        unsigned long long base = static_cast<unsigned long long>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
         unsigned long long exponent = static_cast<unsigned long long>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
         result = max(result, getRaiseToPowerForIntegers(base, exponent));
     }

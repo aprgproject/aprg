@@ -48,11 +48,10 @@ class DestructorClass : public VariantDataType
 {
 public:
     static bool s_destructorInvoked;
-    ~DestructorClass()
+    ~DestructorClass() override
     {
         s_destructorInvoked = true;
-    }
-};
+    }};
 bool DestructorClass::s_destructorInvoked = false;
 
 TEST(AlbaUniqueVariantTest, AcquiringVariantTypeDifferentThanAlreadyInVariantInvokesDestructor)
@@ -81,11 +80,10 @@ TEST(AlbaUniqueVariantTest, PolymorphismIsSupportedByUniqueVariant)
         explicit Base(int value)
             : m_value(value)
         {}
-        virtual ~Base() = default;
+        ~Base() override = default;  // no need for virtual destructor because base destructor is already virtual
 
         virtual int getValue() const
-        {
-            return m_value;
+        {            return m_value;
         }
     };
 

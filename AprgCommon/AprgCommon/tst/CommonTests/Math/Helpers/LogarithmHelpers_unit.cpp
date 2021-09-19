@@ -1,8 +1,7 @@
 #include <Common/Math/Helpers/LogarithmHelpers.hpp>
-#include <Common/Randomizer/AlbaRandomizer.hpp>
+#include <Common/Randomizer/AlbaSimpleRandomizer.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
@@ -104,11 +103,10 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTest_WithR
     // Results: ~850ms
 
     unsigned int result(0);
-    AlbaRandomizer randomizer;
+    AlbaSimpleRandomizer randomizer;
     int minValue(2), maxValue(2000);
     for(unsigned int iterations=1; iterations<10000000ULL; iterations++)
-    {
-        unsigned int base = static_cast<unsigned int>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
+    {        unsigned int base = static_cast<unsigned int>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
         unsigned int exponent = static_cast<unsigned int>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
         result = max(result, getLogarithmForIntegers(base, exponent));
     }
@@ -120,11 +118,10 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanc
     // Results: ~790ms
 
     unsigned int result(0);
-    AlbaRandomizer randomizer;
+    AlbaSimpleRandomizer randomizer;
     int minValue(2), maxValue(2000);
     for(unsigned int iterations=1; iterations<10000000ULL; iterations++)
-    {
-        unsigned int base = static_cast<unsigned int>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
+    {        unsigned int base = static_cast<unsigned int>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
         unsigned int exponent = static_cast<unsigned int>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
         result = max(result, getLogarithmForIntegers(base, exponent));
     }

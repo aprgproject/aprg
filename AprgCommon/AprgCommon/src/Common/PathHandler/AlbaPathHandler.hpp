@@ -12,11 +12,10 @@ class AlbaPathHandler
 public:
     explicit AlbaPathHandler(std::string const& slashCharacterString);
     explicit AlbaPathHandler(std::string const& path, std::string const& slashCharacterString);
-    virtual ~AlbaPathHandler() = default;
+    virtual ~AlbaPathHandler() = default; // virtual destructor because of virtual functions (vtable exists)
 
     virtual void clear();
-    virtual std::string getFullPath() const;
-    virtual std::string getDirectory() const;
+    virtual std::string getFullPath() const;    virtual std::string getDirectory() const;
     void input(std::string const& path);
     void reInput();
     void goUp();
