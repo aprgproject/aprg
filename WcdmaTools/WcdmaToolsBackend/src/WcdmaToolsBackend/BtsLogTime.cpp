@@ -223,9 +223,9 @@ ostream& operator<<(ostream & out, BtsLogTime const& btsLogTime)
     writer.writeData<unsigned int>(btsLogTime.getMinutes());
     writer.writeData<unsigned int>(btsLogTime.getSeconds());
     writer.writeData<unsigned int>(btsLogTime.getMicroSeconds());
+    writer.flush();
     return out;
 }
-
 istream& operator>>(istream & in, BtsLogTime& btsLogTime)
 {
     AlbaStreamParameterReader reader(in);
