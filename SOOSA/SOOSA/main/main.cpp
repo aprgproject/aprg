@@ -11,11 +11,10 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    cout << "Survey Output Optical Scan Analyzer developed by the IRPDS" << endl << endl;
-    cout << "code version: " << APRG_CODE_REVISION << endl;
+    cout << "Survey Output Optical Scan Analyzer developed by the IRPDS\n\n";
+    cout << "code version: " << APRG_CODE_REVISION << "\n";
 
     strings argumentsInMain(getArgumentsToStringInMain(argc, argv));
-
     if(argumentsInMain.size()==2)
     {
         AlbaLocalPathHandler detectedPath(PathInitialValueSource::DetectedLocalPath);
@@ -34,8 +33,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        cout << "Exiting program because the number of input arguments is wrong." << endl;
+        cout << "Exiting program because the number of input arguments is wrong.\n";
     }
 
-    system("pause");
-}
+    system("pause");}
