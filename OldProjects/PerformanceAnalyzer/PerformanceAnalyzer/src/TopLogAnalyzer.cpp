@@ -144,11 +144,10 @@ void TopLogAnalyzer::putHeadersInCpuReport(stringHelper::strings const& processN
     {
         cpuReportFileStream << processName << ",";
     }
-    cpuReportFileStream<<endl;
+    cpuReportFileStream<<"\n";
 }
 
-void TopLogAnalyzer::putEntriesInCpuReport(stringHelper::strings const& processNamesInReport, ofstream& cpuReportFileStream) const
-{
+void TopLogAnalyzer::putEntriesInCpuReport(stringHelper::strings const& processNamesInReport, ofstream& cpuReportFileStream) const{
     cpuReportFileStream.precision(3);
     for(DataEntry const& entry : m_dataEntries)
     {
@@ -156,11 +155,10 @@ void TopLogAnalyzer::putEntriesInCpuReport(stringHelper::strings const& processN
         {
             return partialSum + processToCpuMemPair.second.cpuLoad;
         });
-        cpuReportFileStream << entry.timeInTop.getPrintableStringFormat2() << ",";
+        cpuReportFileStream << entry.timeInTop.getPrintObject<AlbaDateTime::PrintFormat::Type2>() << ",";
         cpuReportFileStream << entry.totalCpuFromTop << ",";
         cpuReportFileStream << totalCalculatedCpu << ",";
-        DataEntry::ProcessToCpuMemMap const& currentProcessToCpuMemMap(entry.processToCpuMemMap);
-        for(string const& processName : processNamesInReport)
+        DataEntry::ProcessToCpuMemMap const& currentProcessToCpuMemMap(entry.processToCpuMemMap);        for(string const& processName : processNamesInReport)
         {
             DataEntry::ProcessToCpuMemMap::const_iterator processToCpuMemIterator = currentProcessToCpuMemMap.find(processName);
             if(processToCpuMemIterator != currentProcessToCpuMemMap.cend())
@@ -172,10 +170,9 @@ void TopLogAnalyzer::putEntriesInCpuReport(stringHelper::strings const& processN
                 cpuReportFileStream << "0,";
             }
         }
-        cpuReportFileStream<<endl;
+        cpuReportFileStream<<"\n";
     }
 }
-
 void TopLogAnalyzer::generateMemReport(std::string const& pathOfTopLog)
 {
     AlbaLocalPathHandler topLogPathHandler(pathOfTopLog);
@@ -233,19 +230,17 @@ void TopLogAnalyzer::putHeadersInMemReport(stringHelper::strings const& processN
     {
         memReportFileStream << processName << ",";
     }
-    memReportFileStream<<endl;
+    memReportFileStream<<"\n";
 }
 
-void TopLogAnalyzer::putEntriesInMemReport(stringHelper::strings const& processNamesInReport, ofstream& memReportFileStream) const
-{
+void TopLogAnalyzer::putEntriesInMemReport(stringHelper::strings const& processNamesInReport, ofstream& memReportFileStream) const{
     memReportFileStream.precision(3);
     for(DataEntry const& entry : m_dataEntries)
     {
-        memReportFileStream << entry.timeInTop.getPrintableStringFormat2() << ",";
+        memReportFileStream << entry.timeInTop.getPrintObject<AlbaDateTime::PrintFormat::Type2>() << ",";
         DataEntry::ProcessToCpuMemMap const& currentProcessToCpuMemMap(entry.processToCpuMemMap);
         for(string const& processName : processNamesInReport)
-        {
-            DataEntry::ProcessToCpuMemMap::const_iterator processToCpuMemIterator = currentProcessToCpuMemMap.find(processName);
+        {            DataEntry::ProcessToCpuMemMap::const_iterator processToCpuMemIterator = currentProcessToCpuMemMap.find(processName);
             if(processToCpuMemIterator != currentProcessToCpuMemMap.cend())
             {
                 memReportFileStream << currentProcessToCpuMemMap.at(processName).memLoad << ",";
@@ -255,10 +250,9 @@ void TopLogAnalyzer::putEntriesInMemReport(stringHelper::strings const& processN
                 memReportFileStream << "0,";
             }
         }
-        memReportFileStream<<endl;
+        memReportFileStream<<"\n";
     }
 }
-
 bool TopLogAnalyzer::isTopCommandFirstLine(string const& lineInLogs) const
 {
     return stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(lineInLogs, "top - ");
