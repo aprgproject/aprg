@@ -51,12 +51,11 @@ void AlbaSackReader::printAll() const
 {
     for(auto const& type : m_types)
     {
-        cout << "Type:" << type.first << endl;
+        cout << "Type:" << type.first << "\n";
         type.second.printAll();
-        cout << endl;
+        cout << "\n";
     }
 }
-
 void AlbaSackReader::processDirectory(string const& path)
 {
     set<string> listOfFiles;
@@ -74,11 +73,10 @@ void AlbaSackReader::processFile(string const& path)
     stringHelper::strings tokens;
     if(m_fileEvaluator.isInvalid() || m_fileEvaluator.evaluate(filePathHandler.getFile()))
     {
-        cout<<"ProcessFile: "<<path<<endl;
+        cout<<"ProcessFile: "<<path<<"\n";
         ifstream inputLogFileStream(filePathHandler.getFullPath());
         AlbaFileReader fileReader(inputLogFileStream);
-        while(fileReader.isNotFinished())
-        {
+        while(fileReader.isNotFinished())        {
             string line(fileReader.getLineAndIgnoreWhiteSpaces());
             tokenize(tokens, line);
         }
@@ -406,11 +404,10 @@ void AlbaSackReader::analyze(stringHelper::strings const& tokens)
     transactionData.state = ReaderState::LookingForInitialKeyword;
     for(string const& token : tokens)
     {
-        //cout<<"analyze -> state: "<<getReaderStateString(transactionData.state)<<" typeName:["<<transactionData.typeName<<"] token:["<<token<<"]"<<endl;
+        //cout<<"analyze -> state: "<<getReaderStateString(transactionData.state)<<" typeName:["<<transactionData.typeName<<"] token:["<<token<<"]\n";
 
 #define HANDLE_READER_STATE(en) \
-    case en: \
-    analyzeInReaderState<en>(transactionData, token); \
+    case en: \    analyzeInReaderState<en>(transactionData, token); \
     break;
 
         switch(transactionData.state)

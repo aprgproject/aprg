@@ -31,10 +31,9 @@ TEST(AlbaCropFileTest, CropUpdatesWorks)
     ASSERT_TRUE(testFile.is_open());
     for(unsigned int i = 0; i<100; i++)
     {
-        testFile << i << endl;
+        testFile << i << "\n";
     }
     testFile.close();
-
     double capturedPercentage=0;
     AlbaCropFile cropFile("[50]", 50, [&](double percentage)->void
     {
@@ -54,10 +53,9 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocument)
     ASSERT_TRUE(testFile.is_open());
     for(unsigned int i = 0; i<10; i++)
     {
-        testFile << i << endl;
+        testFile << i << "\n";
     }
     testFile.close();
-
     ifstream testFileToRead(file1ToReadPathHandler.getFullPath());
     AlbaFileReader testFileReader(testFileToRead);
 
@@ -99,10 +97,9 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsTwiceOfTheWholeDocument)
     ASSERT_TRUE(testFile.is_open());
     for(unsigned int i = 0; i<10; i++)
     {
-        testFile << i << endl;
+        testFile << i << "\n";
     }
     testFile.close();
-
     ifstream testFileToRead(file1ToReadPathHandler.getFullPath());
     AlbaFileReader testFileReader(testFileToRead);
 
@@ -140,10 +137,9 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocumentAtTheStart)
     ASSERT_TRUE(testFile.is_open());
     for(unsigned int i = 0; i<10; i++)
     {
-        testFile << i << endl;
+        testFile << i << "\n";
     }
     testFile.close();
-
     ifstream testFileToRead(file1ToReadPathHandler.getFullPath());
     AlbaFileReader testFileReader(testFileToRead);
 
@@ -184,10 +180,9 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocumentAtTheEnd)
     ASSERT_TRUE(testFile.is_open());
     for(unsigned int i = 0; i<10; i++)
     {
-        testFile << i << endl;
+        testFile << i << "\n";
     }
     testFile.close();
-
     ifstream testFileToRead(file1ToReadPathHandler.getFullPath());
     AlbaFileReader testFileReader(testFileToRead);
 
