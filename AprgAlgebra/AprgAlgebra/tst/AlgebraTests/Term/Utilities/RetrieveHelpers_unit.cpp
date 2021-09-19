@@ -100,7 +100,8 @@ TEST(RetrieveHelpersTest, RetrieveSubExpressionsAndSubFunctionsWorks)
                 [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });    Term functionTerm(functionObject);
+    });
+    Term functionTerm(functionObject);
 
     Terms terms(retrieveSubExpressionsAndSubFunctions(functionTerm));
 
@@ -117,7 +118,8 @@ TEST(RetrieveHelpersTest, RetrieveSubTermsWorks)
                 [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });    Term functionTerm(functionObject);
+    });
+    Term functionTerm(functionObject);
 
     Terms terms(retrieveSubTerms(functionTerm));
 

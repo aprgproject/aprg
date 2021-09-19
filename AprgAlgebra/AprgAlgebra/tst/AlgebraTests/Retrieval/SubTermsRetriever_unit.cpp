@@ -53,7 +53,8 @@ TEST(SubTermsRetrieverTest, RetrieveFromTermWorks)
                 [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });    Term functionTerm1(functionObject);
+    });
+    Term functionTerm1(functionObject);
 
     retriever.retrieveFromTerm(Constant(1.234));
     retriever.retrieveFromTerm(Variable("b"));
@@ -152,6 +153,7 @@ TEST(SubTermsRetrieverTest, RetrieveFromFunctionWorks)
     {
         return number;
     });
+
     retriever.retrieveFromFunction(functionObject);
 
     TermSet const& termsSet(retriever.getSavedData());

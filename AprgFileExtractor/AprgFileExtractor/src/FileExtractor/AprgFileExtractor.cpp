@@ -54,7 +54,8 @@ void AprgFileExtractor::extractAllRelevantFiles(string const& pathOfFileOrDirect
         cout << "extractAllRelevantFiles: File or directory not found in local system.\n";
     }
     if(fileOrDirectoryPathHandler.isDirectory())
-    {        extractAllRelevantFilesInThisDirectory(fileOrDirectoryPathHandler.getFullPath());
+    {
+        extractAllRelevantFilesInThisDirectory(fileOrDirectoryPathHandler.getFullPath());
     }
     else
     {
@@ -101,6 +102,7 @@ string AprgFileExtractor::extractOnceForAllFiles(string const& filePathOfCompres
     cout<<"extractAll: "<<outputPathHandler.getImmediateDirectoryName()<<R"(\)"<<"\n";
     return outputPathHandler.getFullPath();
 }
+
 string AprgFileExtractor::extractOneFile(string const& filePathOfCompressedFile, string const& relativePathOfFile) const
 {
     AlbaLocalPathHandler compressedFilePathHandler(filePathOfCompressedFile);
@@ -113,6 +115,7 @@ string AprgFileExtractor::extractOneFile(string const& filePathOfCompressedFile,
     cout<<"extractOneFile: "<<outputPathHandler.getFile()<<"\n";
     return outputPathHandler.getFullPath();
 }
+
 bool AprgFileExtractor::isRecognizedCompressedFile(string const& extension) const
 {
     return stringHelper::isEqualNotCaseSensitive("zip", extension) ||

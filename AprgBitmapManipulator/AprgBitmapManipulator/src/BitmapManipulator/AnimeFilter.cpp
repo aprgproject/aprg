@@ -93,6 +93,7 @@ void doStuffsAfterSteps(
     cout << localTimer.getDifferenceAsAlbaDateTime()  << ": " << description << "\n";
     localTimer.resetTimer();
 }
+
 void doStuffsAfterSteps(
         AlbaLocalTimer & localTimer,
         BitmapFilters & bitmapFilters,
@@ -106,6 +107,7 @@ void doStuffsAfterSteps(
     cout << localTimer.getDifferenceAsAlbaDateTime()  << ": " << description << "\n";
     localTimer.resetTimer();
 }
+
 string getNewFilePath(
         string const& inputFilePath,
         unsigned int const step,

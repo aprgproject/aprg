@@ -65,7 +65,8 @@ void CPlusPlusDatabase::print(ostream& outputStream)
     outputStream<<"\n";
 }
 
-bool CPlusPlusDatabase::isDatabaseModified() const{
+bool CPlusPlusDatabase::isDatabaseModified() const
+{
     return m_isModified;
 }
 

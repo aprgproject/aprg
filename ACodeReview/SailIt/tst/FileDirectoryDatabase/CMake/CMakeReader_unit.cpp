@@ -29,6 +29,7 @@ TEST (CMakeFileReadTest, DISABLED_ActualTest)
     cout<<"XXXFindHeaderFile: "<<string3<<"\n";
     */
 }
+
 TEST(CMakeReaderTest, CMakeFileRead_ProjectCommandSyntaxTest)
 {
     ofstream testFile(MT_FILE_READER_TEST_FILE);
@@ -41,7 +42,8 @@ TEST(CMakeReaderTest, CMakeFileRead_ProjectCommandSyntaxTest)
     testFile << "    )   )  )       \n";
     testFile.close();
 
-    CMakeDatabase fileDirectoryDatabase;    fileDirectoryDatabase.allowNonExistentDirectories();
+    CMakeDatabase fileDirectoryDatabase;
+    fileDirectoryDatabase.allowNonExistentDirectories();
     CMakeReader reader(MT_FILE_READER_TEST_FILE, fileDirectoryDatabase);
     reader.readFile();
     VariableMapType& variableMap = reader.getVariableMapReference();
@@ -69,7 +71,8 @@ TEST(CMakeReaderTest, CMakeFileRead_SetCommandWithOnlyOneValueForOneVariableSynt
     testFile << "    )    )      )       \n";
     testFile.close();
 
-    CMakeDatabase fileDirectoryDatabase;    fileDirectoryDatabase.allowNonExistentDirectories();
+    CMakeDatabase fileDirectoryDatabase;
+    fileDirectoryDatabase.allowNonExistentDirectories();
     CMakeReader reader(MT_FILE_READER_TEST_FILE, fileDirectoryDatabase);
     reader.readFile();
     VariableMapType& variableMap = reader.getVariableMapReference();
@@ -137,7 +140,8 @@ TEST(CMakeReaderTest, CMakeFileRead_SetCommandWithMultipleValuesForOneVariable)
     testFile << "SET(VAR1 VALUE_DIR)\n";
     testFile.close();
 
-    CMakeDatabase fileDirectoryDatabase;    fileDirectoryDatabase.allowNonExistentDirectories();
+    CMakeDatabase fileDirectoryDatabase;
+    fileDirectoryDatabase.allowNonExistentDirectories();
     CMakeReader reader(MT_FILE_READER_TEST_FILE, fileDirectoryDatabase);
     reader.readFile();
     VariableMapType& variableMap = reader.getVariableMapReference();
@@ -169,7 +173,8 @@ TEST(CMakeReaderTest, CMakeFileRead_SetCommandRealValuesAreUpdated)
     testFile << "SET(VAR3 ${VAR2}//VALUE_3a)\n";
     testFile.close();
 
-    CMakeDatabase fileDirectoryDatabase;    fileDirectoryDatabase.allowNonExistentDirectories();
+    CMakeDatabase fileDirectoryDatabase;
+    fileDirectoryDatabase.allowNonExistentDirectories();
     CMakeReader reader(MT_FILE_READER_TEST_FILE, fileDirectoryDatabase);
     reader.readFile();
     VariableMapType& variableMap = reader.getVariableMapReference();
@@ -220,7 +225,8 @@ TEST(CMakeReaderTest, CMakeFileRead_IncludeDirectoriesCommandSyntaxTest)
     testFile << "incLude_direcTories(Directories/Are//Simplified/../..//\\Double/Periods/Are/\\../Removed)\n";
     testFile.close();
 
-    CMakeDatabase fileDirectoryDatabase;    fileDirectoryDatabase.allowNonExistentDirectories();
+    CMakeDatabase fileDirectoryDatabase;
+    fileDirectoryDatabase.allowNonExistentDirectories();
     CMakeReader reader(MT_FILE_READER_TEST_FILE, fileDirectoryDatabase);
     reader.readFile();
     SetOfFiles& setOfFiles = fileDirectoryDatabase.getSetOfFilesReference();
@@ -252,7 +258,8 @@ TEST(CMakeReaderTest, CMakeFileRead_IncludeDirectoriesCommandRealValuesAreUpdate
     testFile << "INCLUDE_DIRECTORIES(${VAR2}\\//${FILENAME}${EXTENSION})\n";
     testFile.close();
 
-    CMakeDatabase fileDirectoryDatabase;    fileDirectoryDatabase.allowNonExistentDirectories();
+    CMakeDatabase fileDirectoryDatabase;
+    fileDirectoryDatabase.allowNonExistentDirectories();
     CMakeReader reader(MT_FILE_READER_TEST_FILE, fileDirectoryDatabase);
     reader.readFile();
     SetOfFiles& setOfFiles = fileDirectoryDatabase.getSetOfFilesReference();
@@ -280,7 +287,8 @@ TEST(CMakeReaderTest, CMakeFileRead_IncludeDirectoriesCommandAbsolutePathGiven)
     testFile << "INCLUDE_DIRECTORIES(C:\\/DIR1/DIR2///DIR3\\\\/\\/DIR4/)\n";
     testFile.close();
 
-    CMakeDatabase fileDirectoryDatabase;    fileDirectoryDatabase.allowNonExistentDirectories();
+    CMakeDatabase fileDirectoryDatabase;
+    fileDirectoryDatabase.allowNonExistentDirectories();
     CMakeReader reader(MT_FILE_READER_TEST_FILE, fileDirectoryDatabase);
     reader.readFile();
     SetOfDirectories& setOfDirectories = fileDirectoryDatabase.getSetOfDirectoriesReference();
@@ -311,6 +319,7 @@ TEST(CMakeReaderTest, CMakeFileRead_IncludeCommandSyntaxTest_WithSetTestForInclu
     includeFileStream1.close();
     includeFileStream2.close();
     includeFileStream3.close();
+
     string includeDirectoryName(MT_FILE_READER_TEST_INCLUDE_DIRECTORY_NAME);
     ofstream testFile(MT_FILE_READER_TEST_FILE);
     ASSERT_TRUE(testFile.is_open());
@@ -322,7 +331,8 @@ TEST(CMakeReaderTest, CMakeFileRead_IncludeCommandSyntaxTest_WithSetTestForInclu
     testFile << "    )       \n";
     testFile.close();
 
-    CMakeDatabase fileDirectoryDatabase;    fileDirectoryDatabase.allowNonExistentDirectories();
+    CMakeDatabase fileDirectoryDatabase;
+    fileDirectoryDatabase.allowNonExistentDirectories();
     CMakeReader reader(MT_FILE_READER_TEST_FILE, fileDirectoryDatabase);
     reader.readFile();
     VariableMapType& variableMap = reader.getVariableMapReference();
@@ -368,7 +378,8 @@ TEST(CMakeReaderTest, CMakeFileRead_IncludeCommandTest_WithIncludeDirectoriesRea
     testFile << "INCLUDE(" << includeDirectoryFullPath << "include3.txt)\n";
     testFile.close();
 
-    CMakeDatabase fileDirectoryDatabase;    fileDirectoryDatabase.allowNonExistentDirectories();
+    CMakeDatabase fileDirectoryDatabase;
+    fileDirectoryDatabase.allowNonExistentDirectories();
     CMakeReader reader(MT_FILE_READER_TEST_FILE, fileDirectoryDatabase);
     reader.readFile();
     SetOfFiles& setOfFiles = fileDirectoryDatabase.getSetOfFilesReference();
@@ -407,7 +418,8 @@ TEST(CMakeReaderTest, CMakeFileRead_AddSubDirectoryCommandSyntaxTest_WithInclude
     testFile << "    )      )    )       \n";
     testFile.close();
 
-    ofstream sourceFileStream1(subDirectoryFullPath + "\\DIR1\\CMakeLists.txt");    ofstream sourceFileStream2(subDirectoryFullPath + "\\DIR2\\CMakeLists.txt");
+    ofstream sourceFileStream1(subDirectoryFullPath + "\\DIR1\\CMakeLists.txt");
+    ofstream sourceFileStream2(subDirectoryFullPath + "\\DIR2\\CMakeLists.txt");
     ofstream sourceFileStream3(subDirectoryFullPath + "\\DIR3\\CMakeLists.txt");
     ASSERT_TRUE(sourceFileStream1.is_open());
     ASSERT_TRUE(sourceFileStream2.is_open());
@@ -437,7 +449,8 @@ TEST(CMakeReaderTest, CMakeFileRead_AddSubDirectoryCommandSyntaxTest_WithInclude
     sourceFileStream3 << "INCLUDE_DIRECTORIES(${VAR2}\\//${FILENAME}${EXTENSION})\n";
     sourceFileStream3.close();
 
-    CMakeDatabase fileDirectoryDatabase;    fileDirectoryDatabase.allowNonExistentDirectories();
+    CMakeDatabase fileDirectoryDatabase;
+    fileDirectoryDatabase.allowNonExistentDirectories();
     CMakeReader reader(MT_FILE_READER_TEST_FILE, fileDirectoryDatabase);
     reader.readFile();
     SubCMakeDatabases& listOfSubFileDirectoryDatabases
@@ -519,7 +532,8 @@ TEST(CMakeReaderTest, CMakeFileRead_AddLibraryCommandSyntaxTest)
     testFile << "    )    )     )       \n";
     testFile.close();
 
-    CMakeDatabase fileDirectoryDatabase;    fileDirectoryDatabase.allowNonExistentDirectories();
+    CMakeDatabase fileDirectoryDatabase;
+    fileDirectoryDatabase.allowNonExistentDirectories();
     CMakeReader reader(MT_FILE_READER_TEST_FILE, fileDirectoryDatabase);
     string currentDirectory(MT_FILE_READER_TEST_SUBDIRECTORY);
     reader.readFile();
@@ -560,7 +574,8 @@ TEST(CMakeReaderTest, CMakeFileRead_AddExecutableCommandSyntaxTest)
     testFile << "    )    )     )       \n";
     testFile.close();
 
-    CMakeDatabase fileDirectoryDatabase;    fileDirectoryDatabase.allowNonExistentDirectories();
+    CMakeDatabase fileDirectoryDatabase;
+    fileDirectoryDatabase.allowNonExistentDirectories();
     CMakeReader reader(MT_FILE_READER_TEST_FILE, fileDirectoryDatabase);
     string currentDirectory(MT_FILE_READER_TEST_SUBDIRECTORY);
     reader.readFile();

@@ -9,7 +9,8 @@
 #include <cstdint>
 #include <ostream>
 
-namespace alba{
+namespace alba
+{
 
 class AlbaNumber // This is value type.
 {
@@ -31,7 +32,8 @@ public:
         uint32_t denominator;
     };
     struct ComplexNumberData
-    {        float realPart;
+    {
+        float realPart;
         float imaginaryPart;
     };
     union NumberUnionData
@@ -42,7 +44,8 @@ public:
         constexpr NumberUnionData(int64_t const integer)
             : intData(integer)
         {}
-        constexpr NumberUnionData(double const doubleValue)            : doubleData(doubleValue)
+        constexpr NumberUnionData(double const doubleValue)
+            : doubleData(doubleValue)
         {}
         constexpr NumberUnionData(FractionData const& fractionData)
             : fractionData(fractionData)
@@ -53,7 +56,8 @@ public:
         int64_t intData;
         double doubleData;
         FractionData fractionData;
-        ComplexNumberData complexNumberData;    };
+        ComplexNumberData complexNumberData;
+    };
 
     struct ConfigurationDetails
     {
@@ -118,7 +122,8 @@ public:
     }
 
     constexpr AlbaNumber(FractionData const& fractionData)
-        : m_type(Type::Fraction)        , m_data(fractionData)
+        : m_type(Type::Fraction)
+        , m_data(fractionData)
     {}
 
     constexpr AlbaNumber(ComplexNumberData const& complexNumberData)
@@ -129,7 +134,8 @@ public:
     AlbaNumber(char const character) = delete; // remove character to integer conversion (delete any functions is a C++11 feature)
 
     // This should be constexpr as well but a lot of coding is needed
-    bool operator==(AlbaNumber const& second) const;    bool operator!=(AlbaNumber const& second) const;
+    bool operator==(AlbaNumber const& second) const;
+    bool operator!=(AlbaNumber const& second) const;
     bool operator<=(AlbaNumber const& second) const;
     bool operator>=(AlbaNumber const& second) const;
     bool operator<(AlbaNumber const& second) const;
@@ -147,7 +153,8 @@ public:
     AlbaNumber& operator/=(AlbaNumber const& second);
 
     bool isIntegerType() const;
-    bool isDoubleType() const;    bool isFractionType() const;
+    bool isDoubleType() const;
+    bool isFractionType() const;
     bool isComplexNumberType() const;
     bool isIntegerOrFractionType() const;
     bool isPositiveInfinity() const;
@@ -165,6 +172,7 @@ public:
 
     void convertToInteger();
     void convertToFraction();
+
 private:
 
     // static functions
@@ -248,4 +256,5 @@ constexpr AlbaNumber operator "" _AS_ALBA_NUMBER(long double const value)
 // AlbaNumber operator "" _AS_ALBA_NUMBER(char const value) = delete; // not needed to delete because there is no implicit conversion
 
 template <> AlbaNumber::ConfigurationDetails getDefaultConfigurationDetails<AlbaNumber::ConfigurationDetails>();
+
 }

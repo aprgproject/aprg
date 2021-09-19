@@ -51,6 +51,7 @@ TermTranslator::TermTranslator(string const& fileName, Findings& findings, Deque
         cout<<"TermTranslator::constructor| File does not exist!\n";
     }
 }
+
 bool TermTranslator::isFileValid()
 {
     return m_isFileValid;

@@ -57,6 +57,7 @@ constexpr bool orOperateValuesInTypes()
 
 
 // Type checks:
+
 template <typename Type>
 constexpr bool isVoidType()
 {
@@ -248,6 +249,7 @@ constexpr bool isNoThrowDefaultConstructible()
 
 
 // Get Types
+
 template<typename Type>
 using GetPlainType = typename std::decay<Type>::type;
 

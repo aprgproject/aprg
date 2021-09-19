@@ -4,6 +4,7 @@
 #include <Common/Randomizer/AlbaSimpleRandomizer.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Common/User/DisplayTable.hpp>
+
 #include <string>
 #include <vector>
 
@@ -172,4 +173,5 @@ private:
 };
 
 }
+
 }

@@ -17,7 +17,8 @@ TEST_F(ModuleTest, MultiLineFunctionDefinitionTest)
     testFile << "}\n";
     testFile.close();
 
-    processFile();    CPlusPlusFunction& myFunction(m_database.getFunctionReference("main"));
+    processFile();
+    CPlusPlusFunction& myFunction(m_database.getFunctionReference("main"));
     auto & signatures = myFunction.getFunctionSignaturesReference();
     ASSERT_EQ(signatures.size(), 1);
     auto & parameters = signatures[0].getFunctionParametersReference();
@@ -49,7 +50,8 @@ TEST_F(ModuleTest, FunctionSignaturesAreCheckedTest)
     testFile << "myFunction(*myDoublePointer, &myDouble);\n";
     testFile.close();
 
-    processFile();    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
+    processFile();
+    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
     auto & signatures = myFunction.getFunctionSignaturesReference();
     ASSERT_EQ(signatures.size(), 1);
     auto & parameters = signatures[0].getFunctionParametersReference();
@@ -82,7 +84,8 @@ TEST_F(ModuleTest, ReturnValuesAreUsed)
     testFile << "int x = myFunction();\n";
     testFile.close();
 
-    processFile();    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
+    processFile();
+    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
     auto & signatures = myFunction.getFunctionSignaturesReference();
     ASSERT_EQ(signatures.size(), 1);
     auto & parameters = signatures[0].getFunctionParametersReference();
@@ -106,7 +109,8 @@ TEST_F(ModuleTest, ComplicatedFunctionTest)
     testFile << "int x = myFunction(myInteger, myInteger, &myInteger, &(&myInteger));\n";
     testFile.close();
 
-    processFile();    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
+    processFile();
+    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
     auto & signatures = myFunction.getFunctionSignaturesReference();
     ASSERT_EQ(signatures.size(), 1);
     auto & parameters = signatures[0].getFunctionParametersReference();
@@ -139,7 +143,8 @@ TEST_F(ModuleTest, FunctionsCanBeOverloadedTest)
     testFile << "int x = myFunction(5);\n";
     testFile.close();
 
-    processFile();    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
+    processFile();
+    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
     auto & signatures = myFunction.getFunctionSignaturesReference();
     ASSERT_EQ(signatures.size(), 2);
     EXPECT_EQ(signatures[0].getFunctionParametersReference().size(), 1);
@@ -174,7 +179,8 @@ TEST_F(ModuleTest, NamesCheckedForFunctionDeclarationAndDefinitionTest)
     testFile << "int z = myFunction3(5);\n";
     testFile.close();
 
-    processFile();    CPlusPlusFunction& myFunction1(m_database.getFunctionReference("myFunction1"));
+    processFile();
+    CPlusPlusFunction& myFunction1(m_database.getFunctionReference("myFunction1"));
     ASSERT_EQ(myFunction1.getFunctionSignaturesReference().size(), 1);
     CPlusPlusFunction& myFunction2(m_database.getFunctionReference("myFunction2"));
     ASSERT_EQ(myFunction2.getFunctionSignaturesReference().size(), 1);

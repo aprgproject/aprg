@@ -18,7 +18,8 @@ TEST_F(ModuleTest, MultiLineClassTest)
     testFile << "};\n";
     testFile.close();
 
-    processFile();    EXPECT_TRUE(m_database.isClass("myClass"));
+    processFile();
+    EXPECT_TRUE(m_database.isClass("myClass"));
     EXPECT_FALSE(m_database.isNamespace("myClass"));
     EXPECT_TRUE(m_database.isFunction("myClass::classFunction"));
     EXPECT_TRUE(m_database.isVariable("myClass::classVariable"));
@@ -48,7 +49,8 @@ TEST_F(ModuleTest, MultiLineStructTest)
     testFile << "};\n";
     testFile.close();
 
-    processFile();    EXPECT_TRUE(m_database.isClass("myStruct"));
+    processFile();
+    EXPECT_TRUE(m_database.isClass("myStruct"));
     EXPECT_FALSE(m_database.isNamespace("myStruct"));
     EXPECT_TRUE(m_database.isFunction("myStruct::structFunction"));
     EXPECT_TRUE(m_database.isVariable("myStruct::structVariable"));
@@ -75,7 +77,8 @@ TEST_F(ModuleTest, ForwardDeclarationTest)
     testFile << "struct myStruct;\n";
     testFile.close();
 
-    processFile();    EXPECT_TRUE(m_database.isClass("myClass"));
+    processFile();
+    EXPECT_TRUE(m_database.isClass("myClass"));
     EXPECT_TRUE(m_database.isClass("myStruct"));
 
     ASSERT_EQ(m_terms.size(), 2);

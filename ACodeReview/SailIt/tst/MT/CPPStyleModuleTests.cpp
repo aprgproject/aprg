@@ -21,7 +21,8 @@ TEST_F(ModuleTest, CheckScopeOperatorForCPlusPlus)
     testFile << "int myStruct::variable1;\n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 6);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 6);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "namespace myNamespace\n{\n}\n", 1);
     CHECK_TERM(it, TermType::ProcessedTerm, "class myClass;\n", 4);

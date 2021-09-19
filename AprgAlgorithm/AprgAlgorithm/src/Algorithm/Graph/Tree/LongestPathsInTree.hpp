@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 namespace algorithm
 {
 
@@ -20,7 +21,8 @@ public:
     using VertexToDfs = std::map<Vertex, Dfs>;
 
     LongestPathsInTree(BaseUndirectedGraphWithVertex const& graph)
-        : m_graph(graph)    {
+        : m_graph(graph)
+    {
         initializeIfNeeded();
     }
 
@@ -136,6 +138,7 @@ private:
             return m_vertexToDfs.at(vertex);
         }
     }
+
     BaseUndirectedGraphWithVertex const& m_graph;
     Vertices m_allVertices;
     Vertices m_startVerticesOfLongestPath;
@@ -144,4 +147,5 @@ private:
 };
 
 }
+
 }

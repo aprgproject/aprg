@@ -31,7 +31,8 @@ TEST(AlbaSackReaderTest, ClassesAreRecognized)
     testFile << "};\n";
     testFile.close();
 
-    AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());    sackReader.process();
+    AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
+    sackReader.process();
     AlbaSackReaderType myClass = sackReader.getType("myClass");
     AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
     ASSERT_EQ(2U, myClassParameters.size());
@@ -49,7 +50,8 @@ TEST(AlbaSackReaderTest, ClassesAreRecognizedInForwardDeclaration)
     testFile << "class myClass;\n";
     testFile.close();
 
-    AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());    sackReader.process();
+    AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
+    sackReader.process();
     AlbaSackReaderType myClass = sackReader.getType("myClass");
     AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
     ASSERT_EQ(0U, myClassParameters.size());
@@ -63,7 +65,8 @@ TEST(AlbaSackReaderTest, TypedefAreRecognized)
     testFile << "typedef type1 type2;\n";
     testFile.close();
 
-    AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());    sackReader.process();
+    AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
+    sackReader.process();
     AlbaSackReaderType type1 = sackReader.getType("type1");
     AlbaSackReaderType::Parameters type1Parameters = type1.getParameters();
     AlbaSackReaderType::TypeNames type1OtherTypes = type1.getOtherTypes();
@@ -86,7 +89,8 @@ TEST(AlbaSackReaderTest, TypedefArrayAreRecognized)
     testFile << "typedef type1 type2 [ 5 ] ;\n";
     testFile.close();
 
-    AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());    sackReader.process();
+    AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
+    sackReader.process();
     AlbaSackReaderType type1 = sackReader.getType("type1");
     AlbaSackReaderType::Parameters type1Parameters = type1.getParameters();
     AlbaSackReaderType::TypeNames type1OtherTypes = type1.getOtherTypes();
@@ -109,7 +113,8 @@ TEST(AlbaSackReaderTest, TypedefWithStructAreRecognized)
     testFile << "typedef struct type1 type2;\n";
     testFile.close();
 
-    AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());    sackReader.process();
+    AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
+    sackReader.process();
     AlbaSackReaderType type2 = sackReader.getType("type2");
     AlbaSackReaderType::Parameters type2Parameters = type2.getParameters();
     AlbaSackReaderType::TypeNames type2OtherTypes = type2.getOtherTypes();
@@ -128,6 +133,7 @@ TEST(AlbaSackReaderTest, TypedefWithStructWithParametersAreRecognized)
     testFile << "double doubleParameter;\n";
     testFile << "} myStruct2;\n";
     testFile.close();
+
 
     AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
     sackReader.process();
@@ -154,6 +160,7 @@ TEST(AlbaSackReaderTest, TypedefWithSingleStructWithParametersAreRecognized)
     testFile << "} myStruct1;\n";
     testFile.close();
 
+
     AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
     sackReader.process();
     AlbaSackReaderType myClass = sackReader.getType("myStruct1");
@@ -179,6 +186,7 @@ TEST(AlbaSackReaderTest, TypedefWithUnionWithParametersAreRecognized)
     testFile << "double doubleParameter;\n";
     testFile << "} myUnion2;\n";
     testFile.close();
+
 
     AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
     sackReader.process();
@@ -207,7 +215,8 @@ TEST(AlbaSackReaderTest, TypedefWithEnumAreRecognized)
     testFile << "\n";
     testFile.close();
 
-    AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());    sackReader.process();
+    AlbaSackReader sackReader(file1ToReadPathHandler.getFullPath());
+    sackReader.process();
     AlbaSackReaderType myClass = sackReader.getType("MyEnum");
     AlbaSackReaderType::Parameters myClassParameters = myClass.getParameters();
     ASSERT_EQ(0U, myClassParameters.size());

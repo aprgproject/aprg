@@ -22,7 +22,8 @@ public:
     ~BaseSymbolTableWithBaseSeparateChainingHash() override = default; // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
 
     Value get(Key const& key) const override
-    {        return b_smallerSymbolTables.at(this->getHash(key)).get(key);
+    {
+        return b_smallerSymbolTables.at(this->getHash(key)).get(key);
     }
 
     void put(Key const& key, Value const& value) override

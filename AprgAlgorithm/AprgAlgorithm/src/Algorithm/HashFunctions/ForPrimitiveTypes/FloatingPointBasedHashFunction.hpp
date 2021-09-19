@@ -4,7 +4,8 @@
 
 #include <cstdint>
 
-namespace alba{
+namespace alba
+{
 
 namespace algorithm
 {
@@ -26,6 +27,7 @@ public:
         uint64_t integerValue = getFloatingPointMemoryRepresentation<uint64_t>(input);
         return static_cast<HashValue>((sharedValue.integerValue >> 32) ^ sharedValue.integerValue);
     }
+
     static HashValue getHash(Input const& input, HashValue const hashSize)
     {
         return getHashCode(input) % hashSize;

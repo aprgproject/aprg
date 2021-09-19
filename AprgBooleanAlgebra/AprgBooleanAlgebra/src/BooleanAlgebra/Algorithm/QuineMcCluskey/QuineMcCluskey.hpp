@@ -8,7 +8,8 @@
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Common/User/DisplayTable.hpp>
 
-#include <map>#include <queue>
+#include <map>
+#include <queue>
 #include <sstream>
 #include <vector>
 
@@ -29,6 +30,7 @@ public:
     using ImplicantsMap = std::map<Minterm, ImplicantsWithMinterm>;
     using InputToOutputMap = std::map<Minterm, LogicalValue>;
     using ComputationalTable = std::map<Minterm, ImplicantsMap>;
+
     QuineMcCluskey()
         : m_maxCommonalityCount(0)
     {}
@@ -54,7 +56,8 @@ public:
         ImplicantsWithMinterm result;
         auto numberOfOnesIt = m_computationalTable.find(numberOfOnes);
         if (numberOfOnesIt != m_computationalTable.end())
-        {            ImplicantsMap const& implicantsMap(numberOfOnesIt->second);
+        {
+            ImplicantsMap const& implicantsMap(numberOfOnesIt->second);
             auto commonalityCountIt = implicantsMap.find(commonalityCount);
             if (commonalityCountIt != implicantsMap.end())
             {
@@ -62,7 +65,8 @@ public:
                 for(ImplicantWithMinterm const& implicant : implicants.getImplicantsData())
                 {
                     result.addImplicant(implicant);
-                }            }
+                }
+            }
         }
         return result;
     }
@@ -79,7 +83,8 @@ public:
                 for(ImplicantWithMinterm const& implicant : currentImplicants.getImplicantsData())
                 {
                     result.addFinalImplicant(implicant);
-                }            }
+                }
+            }
         }
         return result;
     }
@@ -141,7 +146,8 @@ public:
                 for(ImplicantWithMinterm const& implicant2 : implicants2.getImplicantsData())
                 {
                     if(implicant1.isCompatible(implicant2))
-                    {                        m_computationalTable[numberOfOnes][commonalityCount+1].addImplicant(implicant1+implicant2);
+                    {
+                        m_computationalTable[numberOfOnes][commonalityCount+1].addImplicant(implicant1+implicant2);
                     }
                 }
             }
@@ -176,7 +182,8 @@ public:
             for(ImplicantWithMinterm const& implicant : finalImplicants.getImplicantsData())
             {
                 unsigned int implicantCount(0U);
-                for(auto const& inputMinterm : inputMintermsWithTrue)                {
+                for(auto const& inputMinterm : inputMintermsWithTrue)
+                {
                     if(implicant.isSuperset(inputMinterm))
                     {
                         inputMintermToCountMap[inputMinterm]++;
@@ -199,7 +206,8 @@ public:
             ImplicantWithMinterm bestFinalImplicant;
             if(minCount == 1U)
             {
-                bestFinalImplicant = inputMintermToImplicantMap.at(mintermWithMinCount);            }
+                bestFinalImplicant = inputMintermToImplicantMap.at(mintermWithMinCount);
+            }
             else
             {
                 auto it = countToImplicantMap.cend();
@@ -222,7 +230,8 @@ public:
     std::string getOutputTable(ImplicantsWithMinterm const& finalImplicants) const
     {
         Minterms inputsWithTrue(getInputMintermsWithTrue());
-        DisplayTable displayTable;        displayTable.setBorders("", "|");
+        DisplayTable displayTable;
+        displayTable.setBorders("", "|");
         displayTable.addRow();
         displayTable.getLastRow().addCell(" ");
         for(auto const& input : inputsWithTrue)
@@ -234,7 +243,8 @@ public:
         for(ImplicantWithMinterm const& implicant : finalImplicants.getImplicantsData())
         {
             displayTable.addRow();
-            displayTable.getLastRow().addCell(implicant.getEquivalentString(8));            for(auto const& input : inputsWithTrue)
+            displayTable.getLastRow().addCell(implicant.getEquivalentString(8));
+            for(auto const& input : inputsWithTrue)
             {
                 std::string cell = implicant.isSuperset(input) ? "X" : " ";
                 displayTable.getLastRow().addCell(cell);
@@ -244,6 +254,7 @@ public:
     }
 
 private:
+
     Minterms getInputMintermsWithTrue() const
     {
         Minterms result;
@@ -277,6 +288,7 @@ private:
         implicant.addMinterm(minterm);
         m_computationalTable[numberOfOnes][0].addImplicant(implicant);
     }
+
     unsigned int m_maxCommonalityCount;
     InputToOutputMap m_inputToOutputMap;
     ComputationalTable m_computationalTable; // https://en.wikipedia.org/wiki/Quine%E2%80%93McCluskey_algorithm

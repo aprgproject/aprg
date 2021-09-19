@@ -22,6 +22,7 @@ LinearDiophantineEquationCoefficientSolver::LinearDiophantineEquationCoefficient
 {
     solve(a, b, c);
 }
+
 bool LinearDiophantineEquationCoefficientSolver::isSolved() const
 {
     return SolutionStatus::Solved == m_solutionStatus;

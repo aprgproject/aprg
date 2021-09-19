@@ -36,7 +36,8 @@ TEST(NumericalIntegrationUtilitiesTest, GetAnApproximateOfDefiniteIntegralUsingS
     EXPECT_EQ(Term(19375.000000260424713), getAnApproximateOfDefiniteIntegralUsingSimpsonRule(termToTest4, integralDetails, 200));
 }
 
-TEST(NumericalIntegrationUtilitiesTest, GetActualTruncationErrorInTrapezoidalRuleWorks){
+TEST(NumericalIntegrationUtilitiesTest, GetActualTruncationErrorInTrapezoidalRuleWorks)
+{
     Term termToTest1(Monomial(1, {{"x", 1}}));
     Term termToTest2(Monomial(1, {{"x", 2}}));
     Term termToTest3(Monomial(1, {{"x", 3}}));
@@ -61,7 +62,8 @@ TEST(NumericalIntegrationUtilitiesTest, GetActualTruncationErrorInSimpsonRuleWor
     EXPECT_EQ(Term(-2.6042471290566027164e-07), getActualTruncationErrorInSimpsonRule(termToTest4, integralDetails, 200));
 }
 
-TEST(NumericalIntegrationUtilitiesTest, GetAnApproximateOfTruncationErrorInTrapezoidalRuleAtWorks){
+TEST(NumericalIntegrationUtilitiesTest, GetAnApproximateOfTruncationErrorInTrapezoidalRuleAtWorks)
+{
     Term termToTest1(Monomial(1, {{"x", 1}}));
     Term termToTest2(Monomial(1, {{"x", 2}}));
     Term termToTest3(Monomial(1, {{"x", 3}}));

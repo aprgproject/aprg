@@ -14,7 +14,8 @@ public:
     virtual ~AlbaBaseStateMachine() = default;  // virtual destructor because of virtual functions (vtable exists)
 
     virtual void processInput(Input const&)
-    {        // This should not be accessed
+    {
+        // This should not be accessed
         assert(false);
     }
 

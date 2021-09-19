@@ -26,6 +26,7 @@ public:
     Implicants(ImplicantWithMintermInitializerList const& implicants)
         : m_implicantsData(implicants)
     {}
+
     bool operator==(Implicants const& second) const
     {
         return m_implicantsData == second.m_implicantsData;
@@ -46,6 +47,7 @@ public:
     {
         return m_implicantsData;
     }
+
     std::string getDisplayableString() const
     {
         std::stringstream ss;
@@ -64,7 +66,8 @@ public:
         for(ImplicantWithMinterm const& iteratorImplicant : m_implicantsData)
         {
             if(implicant.isSubset(iteratorImplicant))
-            {                isAlreadyRepresented = true;
+            {
+                isAlreadyRepresented = true;
                 break;
             }
         }
@@ -86,4 +89,5 @@ private:
 };
 
 }
+
 }

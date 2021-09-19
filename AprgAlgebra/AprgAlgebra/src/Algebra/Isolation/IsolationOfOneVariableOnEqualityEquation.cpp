@@ -34,6 +34,7 @@ bool IsolationOfOneVariableOnEqualityEquation::canBeIsolated(
     }
     return result;
 }
+
 AlbaNumber IsolationOfOneVariableOnEqualityEquation::getIdenticalExponentForVariableIfPossible(
         string const& variableName) const
 {
@@ -111,7 +112,8 @@ void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
     if(canBeIsolatedBasedOnExponent(identicalExponentForVariable))
     {
         Monomials monomialsWithVariable;
-        Monomials monomialsWithoutVariable;        segregateMonomialsWithAndWithoutVariable(
+        Monomials monomialsWithoutVariable;
+        segregateMonomialsWithAndWithoutVariable(
                     polynomial.getMonomialsConstReference(),
                     variableName,
                     monomialsWithVariable,
@@ -165,7 +167,8 @@ void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
 bool IsolationOfOneVariableOnEqualityEquation::canBeIsolatedBasedOnExponent(
         AlbaNumber const& identicalExponentForVariable) const
 {
-    return identicalExponentForVariable != 0;}
+    return identicalExponentForVariable != 0;
+}
 
 AlbaNumber IsolationOfOneVariableOnEqualityEquation::getIdenticalExponentForVariableIfPossible(
         string const& variableName,

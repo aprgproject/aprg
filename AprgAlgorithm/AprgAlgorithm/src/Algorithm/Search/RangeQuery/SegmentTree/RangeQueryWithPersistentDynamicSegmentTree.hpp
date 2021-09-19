@@ -6,6 +6,7 @@
 
 #include <functional>
 #include <list>
+
 namespace alba
 {
 
@@ -38,6 +39,7 @@ public:
     using NodeRoot = NodePointer;
     using NodeRoots = std::list<NodeRoot>;
     using StepCount = unsigned int;
+
     RangeQueryWithPersistentDynamicSegmentTree(
             Values const& valuesToCheck,
             Function const& functionObject)
@@ -58,6 +60,7 @@ public:
         }
         return result;
     }
+
     Value getValueOnIntervalOnPreviousTree(Index const start, Index const end, StepCount const numberOfPreviousSteps) const
     {
         // This has log(N) running time
@@ -70,6 +73,7 @@ public:
         }
         return result;
     }
+
     virtual void changeValueAtIndex(Index const index, Value const& newValue)
     {
         // This has log(N) running time
@@ -81,6 +85,7 @@ public:
                         index, newValue, previousTreeRoot, m_roots.back(), 0, m_maxChildrenIndex);
         }
     }
+
 protected:
 
     Value getValueOnIntervalFromTopToBottom(
@@ -147,6 +152,7 @@ protected:
             setValuesFromTopToBottom(valuesToCheck, m_roots.back(), 0, m_maxChildrenIndex);
         }
     }
+
     void setValuesFromTopToBottom(
             Values const& values,
             NodePointer & nodePointer,

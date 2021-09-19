@@ -23,6 +23,7 @@ unsigned int getSatisfiabilityLevel(
     }
     return result;
 }
+
 SatisfiabilityTerms getSatisfiabilityTerms(
         Term const& term)
 {

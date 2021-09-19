@@ -30,7 +30,8 @@ public:
     ~BaseUnorderedLinkedList() override = default; // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
 
     bool isEmpty() const override
-    {        return m_size == 0;
+    {
+        return m_size == 0;
     }
 
     bool doesContain(Key const& key) const override

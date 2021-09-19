@@ -46,6 +46,7 @@ CMakeReader::CMakeReader(string const& fileName, CMakeDatabase& fileDirectoryDat
         cout<<"CMakeReader::constructor| File does not exist!\n";
     }
 }
+
 bool CMakeReader::isFileValid()
 {
     return m_isFileValid;
@@ -72,7 +73,8 @@ void CMakeReader::printVariables()
     cout << "\n";
 }
 
-void CMakeReader::addVariable(string const& variableName, string const& contents){
+void CMakeReader::addVariable(string const& variableName, string const& contents)
+{
     m_variableMap[variableName].emplace(
                 getStringWithoutRedundantWhiteSpace(
                     getCorrectPathWithoutDoublePeriod<'\\'>(
@@ -180,7 +182,8 @@ void CMakeReader::processIncludeDirectoriesCommand(string& lineString, int& inde
     //cout << "CMakeReader::processIncludeDirectoriesCommand File:"<<m_fullPathOfFile<<" lineString:["<<lineString<<"]\n";
     replaceVariableWithRealValuesInStringAndDoOperation(m_variableMap.begin(), contents, [&](string stringWithRealValues)
     {
-        addToFilesAndDirectoriesDatabase(stringWithRealValues);    });
+        addToFilesAndDirectoriesDatabase(stringWithRealValues);
+    });
 }
 
 void CMakeReader::processIncludeCommand(string& lineString, int& index)
@@ -262,7 +265,8 @@ void CMakeReader::includeSecondArgumentToFilesAndDirectories(string& lineString,
     //cout << "CMakeReader::includeSecondArgumentToFilesAndDirectories: File:"<<m_fullPathOfFile<<" lineString:["<<lineString<<"]\n";
     replaceVariableWithRealValuesInStringAndDoOperation(m_variableMap.begin(), contents, [&](string stringWithRealValues)
     {
-        addToFilesAndDirectoriesDatabase(stringWithRealValues);    });
+        addToFilesAndDirectoriesDatabase(stringWithRealValues);
+    });
 }
 
 

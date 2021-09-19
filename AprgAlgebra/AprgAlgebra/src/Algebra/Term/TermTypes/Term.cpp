@@ -33,7 +33,8 @@ Term::Term(Term const& term)
 
 Term::Term(AlbaNumber const& number)
     : m_type(TermType::Constant)
-    , m_isSimplified(false)    , m_baseTermDataPointer(make_unique<Constant>(number))
+    , m_isSimplified(false)
+    , m_baseTermDataPointer(make_unique<Constant>(number))
 {}
 
 Term::Term(char const* const characterString)
@@ -302,7 +303,8 @@ Function const& Term::getFunctionConstReference() const
     return *static_cast<Function const *>(m_baseTermDataPointer.get());
 }
 
-AlbaNumber const& Term::getConstantValueConstReference() const{
+AlbaNumber const& Term::getConstantValueConstReference() const
+{
     return getConstantConstReference().getNumberConstReference();
 }
 
@@ -392,7 +394,8 @@ Function & Term::getFunctionReference()
     return *static_cast<Function*>(m_baseTermDataPointer.get());
 }
 
-void Term::clear(){
+void Term::clear()
+{
     m_type=TermType::Empty;
     m_baseTermDataPointer.reset();
     clearSimplifiedFlag();

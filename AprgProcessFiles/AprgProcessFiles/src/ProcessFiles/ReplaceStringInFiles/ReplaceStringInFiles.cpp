@@ -19,6 +19,7 @@ void ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnDirectories(string con
     AlbaLocalPathHandler inputPathHandler(inputDirectory);
     AlbaLocalPathHandler outputPathHandler(outputDirectory);
     inputPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
+
     for(string const& file: files)
     {
         AlbaLocalPathHandler inputFilePathHandler(file);
@@ -69,7 +70,8 @@ void ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnFile(string const& inp
                     outputFile << gethCPlusPlusStylePrintFromC(getStringWithoutStartingAndTrailingWhiteSpace(print)) << "\n";
                     print.clear();
                     isOnPrint=false;
-                }                else
+                }
+                else
                 {
                     print+=" ";
                     print+=lineInInputFile;
@@ -83,7 +85,8 @@ void ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnFile(string const& inp
                     outputFile << gethCPlusPlusStylePrintFromC(getStringWithoutStartingAndTrailingWhiteSpace(print)) << "\n";
                     print.clear();
                 }
-                else if(hasPrintInLineInInputFile)                {
+                else if(hasPrintInLineInInputFile)
+                {
                     print+=lineInInputFile;
                     isOnPrint=true;
                 }
@@ -92,7 +95,8 @@ void ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnFile(string const& inp
                     outputFile << lineInInputFile <<"\n";
                 }
             }
-        }    }
+        }
+    }
 }
 
 string ReplaceStringInFiles::gethCPlusPlusStylePrintFromC(string const& inputString) const

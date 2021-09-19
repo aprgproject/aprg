@@ -19,7 +19,8 @@ public:
 
     unsigned int getDistanceTo(Vertex const& endVertex) const
     {
-        unsigned int result(0);        auto it = m_endVertexToDistanceCountMap.find(endVertex);
+        unsigned int result(0);
+        auto it = m_endVertexToDistanceCountMap.find(endVertex);
         if(it != m_endVertexToDistanceCountMap.cend())
         {
             result = it->second;
@@ -59,7 +60,8 @@ protected:
 
 private:
 
-    VertexToUnsignedIntMap m_endVertexToDistanceCountMap;};
+    VertexToUnsignedIntMap m_endVertexToDistanceCountMap;
+};
 
 }
 

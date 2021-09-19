@@ -16,6 +16,7 @@ Constant::Constant()
 Constant::Constant(AlbaNumber const& constantValue)
     : m_constantValue(constantValue)
 {}
+
 bool Constant::operator==(Constant const& second) const
 {
    return  m_constantValue == second.m_constantValue;

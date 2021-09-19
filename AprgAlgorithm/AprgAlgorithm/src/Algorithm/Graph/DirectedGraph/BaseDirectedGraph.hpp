@@ -17,7 +17,8 @@ public:
     ~BaseDirectedGraph() override = default; // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
 
     GraphDirectionType getGraphDirectionType() const
-    {        return DIRECTION_TYPE;
+    {
+        return DIRECTION_TYPE;
     }
 
     void reverseDirections()

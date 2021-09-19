@@ -114,6 +114,7 @@ private:
 
     T sixteenBitIntToSample (int16_t sample);
     int16_t sampleToSixteenBitInt (T sample);
+
     unsigned char sampleToSingleByte (T sample);
     T singleByteToSample (unsigned char sample);
 

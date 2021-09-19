@@ -189,6 +189,7 @@ private:
         out << "\n" << displayTable;
         return out;
     }
+
     Graph const& m_graph;
     Comparator m_comparator;
     PathDetailsMatrix m_pathDetailsMatrix;

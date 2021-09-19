@@ -29,7 +29,8 @@ public:
 
     PathSearchUsingBfs(BaseGraphWithVertex const& graph, Vertex const& startVertex)
         : BaseClass(graph)
-        , b_graph(BaseClass::m_graph)        , b_processedVertices(BaseClass::m_processedVertices)
+        , b_graph(BaseClass::m_graph)
+        , b_processedVertices(BaseClass::m_processedVertices)
         , b_vertexToPreviousVertexMap(BaseClass::m_vertexToPreviousVertexMap)
         , m_initializeDataFunction(getEmptyInitializeDataFunction())
         , m_updateDataFunction(getEmptyUpdateDataFunction())
@@ -65,7 +66,8 @@ public:
 
     Path getShortestPathTo(Vertex const& endVertex) const
     {
-        return this->getPathTo(endVertex);    }
+        return this->getPathTo(endVertex);
+    }
 
     void reinitializeStartingFrom(Vertices const& startVertices)
     {
@@ -79,6 +81,7 @@ public:
 private:
     using BaseClass::clear;
     using BaseClass::initializeWithStartVertices;
+
     void traverseUsingBfs(Vertices const& startVertices)
     {
         b_processedVertices.putVertices(startVertices);

@@ -45,7 +45,8 @@ TEST_F(TermTranslatorTest, CheckWhiteSpace)
     testFile << "1   2\t\t\t3 \t \t  \t\t4\n";
     testFile.close();
 
-    unsigned lineNumber(1);    processFile();
+    unsigned lineNumber(1);
+    processFile();
     ASSERT_EQ(m_terms.size(), 42);
     auto it = m_terms.begin();
     CHECK_TERM_THEN_WHITE_SPACE(it, TermType::Identifier, "ABC", lineNumber);
@@ -86,7 +87,8 @@ TEST_F(TermTranslatorTest, CheckIncludeFiles)
     testFile << " #include < main11.cpp > \n";
     testFile.close();
 
-    unsigned lineNumber(1);    processFile();
+    unsigned lineNumber(1);
+    processFile();
     ASSERT_EQ(m_terms.size(), 23);
     auto it = m_terms.begin();
 
@@ -122,7 +124,8 @@ TEST_F(TermTranslatorTest, CheckIdentifiersAndConstants)
     testFile << "aBcdwXyZ def1 2ghi jkl_3 4_mnop true false\n";
     testFile.close();
 
-    unsigned lineNumber(1);    processFile();
+    unsigned lineNumber(1);
+    processFile();
     ASSERT_EQ(m_terms.size(), 14);
     auto it = m_terms.begin();
     CHECK_TERM_THEN_WHITE_SPACE(it, TermType::Identifier, "aBcdwXyZ", lineNumber);
@@ -144,7 +147,8 @@ TEST_F(TermTranslatorTest, CheckMacros)
     testFile << "#define # undef #  ifdef #   ifndef #\tif #\tendif #   else #  elif # line # \t error #\t \tinclude #\t\t\tpragma\n";
     testFile.close();
 
-    unsigned lineNumber(1);    processFile();
+    unsigned lineNumber(1);
+    processFile();
     ASSERT_EQ(m_terms.size(), 24);
     auto it = m_terms.begin();
     CHECK_TERM_THEN_WHITE_SPACE(it, TermType::Macro, "#define", lineNumber);
@@ -171,7 +175,8 @@ TEST_F(TermTranslatorTest, CheckOperatorWords)
     testFile << "typeid const_cast static_cast reinterpret_cast static_cast sizeof new delete throw\n";
     testFile.close();
 
-    unsigned lineNumber(1);    processFile();
+    unsigned lineNumber(1);
+    processFile();
     ASSERT_EQ(m_terms.size(), 18);
     auto it = m_terms.begin();
     CHECK_TERM_THEN_WHITE_SPACE(it, TermType::Operator, "typeid", lineNumber);
@@ -179,7 +184,8 @@ TEST_F(TermTranslatorTest, CheckOperatorWords)
     CHECK_TERM_THEN_WHITE_SPACE(it, TermType::Operator, "static_cast", lineNumber);
     CHECK_TERM_THEN_WHITE_SPACE(it, TermType::Operator, "reinterpret_cast", lineNumber);
     CHECK_TERM_THEN_WHITE_SPACE(it, TermType::Operator, "static_cast", lineNumber);
-    CHECK_TERM_THEN_WHITE_SPACE(it, TermType::Operator, "sizeof", lineNumber);    CHECK_TERM_THEN_WHITE_SPACE(it, TermType::Operator, "new", lineNumber);
+    CHECK_TERM_THEN_WHITE_SPACE(it, TermType::Operator, "sizeof", lineNumber);
+    CHECK_TERM_THEN_WHITE_SPACE(it, TermType::Operator, "new", lineNumber);
     CHECK_TERM_THEN_WHITE_SPACE(it, TermType::Operator, "delete", lineNumber);
     CHECK_TERM(it, TermType::Operator, "throw", lineNumber);
     CHECK_TERM_IF_NEWLINE(it, lineNumber++);
@@ -194,7 +200,8 @@ TEST_F(TermTranslatorTest, CheckTypeWords)
     testFile << "bool char char16_t char32_t double float int long short signed unsigned void wchar_t\n";
     testFile.close();
 
-    unsigned lineNumber(1);    processFile();
+    unsigned lineNumber(1);
+    processFile();
     ASSERT_EQ(m_terms.size(), 26);
     auto it = m_terms.begin();
     CHECK_TERM_THEN_WHITE_SPACE(it, TermType::Type, "bool", lineNumber);
@@ -222,7 +229,8 @@ TEST_F(TermTranslatorTest, CheckMultipleCharacterOperators)
     testFile << "->* <<= >>=\n";
     testFile.close();
 
-    unsigned lineNumber(1);    processFile();
+    unsigned lineNumber(1);
+    processFile();
     ASSERT_EQ(m_terms.size(), 6);
     auto it = m_terms.begin();
     CHECK_TERM_THEN_WHITE_SPACE(it, TermType::Operator, "->*", lineNumber);
@@ -240,7 +248,8 @@ TEST_F(TermTranslatorTest, CheckPeriod)
     testFile << ". .. ...\n";
     testFile.close();
 
-    unsigned lineNumber(1);    processFile();
+    unsigned lineNumber(1);
+    processFile();
     ASSERT_EQ(m_terms.size(), 9);
     auto it = m_terms.begin();
     CHECK_TERM_THEN_WHITE_SPACE(it, TermType::Operator, ".", lineNumber);
@@ -261,6 +270,7 @@ TEST_F(TermTranslatorTest, CheckSingleLineComment)
     testFile << "aBcdwXyZ //This is @ 1 line comment\n";
     testFile << "         \t\t    //This is @ 1 line comment with spaces and tabs before";
     testFile.close();
+
     processFile();
     ASSERT_EQ(m_terms.size(), 6);
     auto it = m_terms.begin();
@@ -282,7 +292,8 @@ TEST_F(TermTranslatorTest, CheckMultiLineComment)
     testFile << "  Comment*/ deFsTUv\n";
     testFile.close();
 
-    unsigned lineNumber(1);    processFile();
+    unsigned lineNumber(1);
+    processFile();
 
     ASSERT_EQ(m_terms.size(), 6);
     auto it = m_terms.begin();
@@ -304,7 +315,8 @@ TEST_F(TermTranslatorTest, CheckString)
     testFile << "\'Q\' \'\"\' \'\\\'\' \'This is @character\'\n";
     testFile.close();
 
-    unsigned lineNumber(1);    processFile();
+    unsigned lineNumber(1);
+    processFile();
 
     ASSERT_EQ(m_terms.size(), 20);
     auto it = m_terms.begin();
@@ -334,7 +346,8 @@ TEST_F(TermTranslatorTest, CheckStringWithSlashes)
     testFile << "aBcdwXyZ5 \"\\\\\\\"\\\"\\\\\" deFsTUv6\n";
     testFile.close();
 
-    unsigned lineNumber(1);    processFile();
+    unsigned lineNumber(1);
+    processFile();
 
     ASSERT_EQ(m_terms.size(), 18);
     auto it = m_terms.begin();
@@ -362,7 +375,8 @@ TEST_F(TermTranslatorTest, CheckKeyword)
     testFile << "for while if\n";
     testFile.close();
 
-    unsigned lineNumber(1);    processFile();
+    unsigned lineNumber(1);
+    processFile();
 
     ASSERT_EQ(m_terms.size(), 6);
     auto it = m_terms.begin();

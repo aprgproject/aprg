@@ -231,7 +231,8 @@ Expression const& Term::getExpressionConstReference() const
     return *static_cast<Expression const * const>(m_baseTermDataPointer.get());
 }
 
-bool Term::getBooleanValue() const{
+bool Term::getBooleanValue() const
+{
     return getConstantConstReference().getBooleanValue();
 }
 
@@ -297,7 +298,8 @@ Expression & Term::getExpressionReference()
     return *static_cast<Expression*>(m_baseTermDataPointer.get());
 }
 
-void Term::clear(){
+void Term::clear()
+{
     m_type=TermType::Empty;
     m_baseTermDataPointer.reset();
     clearSimplifiedFlag();

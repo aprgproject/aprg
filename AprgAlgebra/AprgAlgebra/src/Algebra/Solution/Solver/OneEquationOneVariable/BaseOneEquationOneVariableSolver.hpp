@@ -18,6 +18,7 @@ public:
     virtual ~BaseOneEquationOneVariableSolver() = default; // virtual destructor because of virtual functions (vtable exists)
 
     SolutionSet calculateSolutionAndReturnSolutionSet(Equation const& equation);
+
 protected:
     virtual void calculateSolution(SolutionSet & solutionSet, Equation const& equation) = 0;
     void processWhenEquationIsAlwaysSatisfied(SolutionSet & solutionSet);

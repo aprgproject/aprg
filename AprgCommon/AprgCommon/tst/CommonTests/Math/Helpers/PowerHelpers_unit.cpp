@@ -2,6 +2,7 @@
 #include <Common/Randomizer/AlbaSimpleRandomizer.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba
@@ -160,7 +161,8 @@ TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformance
     AlbaSimpleRandomizer randomizer;
     int minValue(1), maxValue(2000);
     for(unsigned long long iterations=1; iterations<10000000ULL; iterations++)
-    {        unsigned long long base = static_cast<unsigned long long>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
+    {
+        unsigned long long base = static_cast<unsigned long long>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
         unsigned long long exponent = static_cast<unsigned long long>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
         result = max(result, getRaiseToPowerForIntegers(base, exponent));
     }
@@ -175,7 +177,8 @@ TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPer
     AlbaSimpleRandomizer randomizer;
     int minValue(1), maxValue(2000);
     for(unsigned long long iterations=1; iterations<10000000ULL; iterations++)
-    {        unsigned long long base = static_cast<unsigned long long>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
+    {
+        unsigned long long base = static_cast<unsigned long long>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
         unsigned long long exponent = static_cast<unsigned long long>(randomizer.getRandomValueInUniformDistribution(minValue, maxValue));
         result = max(result, getRaiseToPowerForIntegers(base, exponent));
     }

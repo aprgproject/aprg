@@ -19,7 +19,8 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_ShowMousePosition)
         cout<<"X: "<<position.getX()<<" Y: "<<position.getY()<<"\n";
         if(0==position.getX() && 0==position.getY())
         {
-            break;        }
+            break;
+        }
         Sleep(100);
     }
 }
@@ -103,7 +104,8 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_IsLetterPressedTest)
         cout << "letter: " << letter << " isPressed: " << isPressed << "\n";
         if(isPressed)
         {
-            break;        }
+            break;
+        }
         Sleep(100);
     }
 }
@@ -114,7 +116,8 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_GetClassNameOfForegroundWindow)
     cout << userAutomation.getClassNameOfForegroundWindow() << "\n";
 }
 
-TEST(AlbaWindowsUserAutomationTest, DISABLED_SetActiveWindowBasedClassName){
+TEST(AlbaWindowsUserAutomationTest, DISABLED_SetActiveWindowBasedClassName)
+{
     AlbaWindowsUserAutomation userAutomation;
     userAutomation.setForegroundWindowWithClassName("Notepad");
 }
@@ -138,7 +141,8 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_GetStringFromClipboard)
     cout <<  userAutomation.getStringFromClipboard() << "\n";
 }
 
-TEST(AlbaWindowsUserAutomationTest, DISABLED_SetStringFromClipboard){
+TEST(AlbaWindowsUserAutomationTest, DISABLED_SetStringFromClipboard)
+{
     AlbaWindowsUserAutomation userAutomation;
     userAutomation.setStringToClipboard("TestString");
 }

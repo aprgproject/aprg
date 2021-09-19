@@ -64,7 +64,8 @@ TEST(FileReadTest, ReadFromTestFile_ReadLineUsingVariousCharacters)
     testFile << "\n";
     testFile.close();
 
-    ifstream inputTestFile(testFilePath.getFullPath());    ASSERT_TRUE(inputTestFile.is_open());
+    ifstream inputTestFile(testFilePath.getFullPath());
+    ASSERT_TRUE(inputTestFile.is_open());
 
     AlbaFileReader fileReader(inputTestFile);
     ASSERT_TRUE(inputTestFile.good());

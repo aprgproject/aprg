@@ -3,6 +3,7 @@
 #include <Common/Randomizer/AlbaSimpleRandomizer.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba
@@ -22,7 +23,8 @@ TEST(MonteCarloTest, VerifyingMatrixExample)
     AlbaSimpleRandomizer randomizer;
     MatrixForTest a(3, 2,
     {1, 2, 3,
-     4, 5, 6});    MatrixForTest b(4, 3,
+     4, 5, 6});
+    MatrixForTest b(4, 3,
     {1, 2, 3, 4,
      5, 6, 7, 8,
      9, 10, 11, 12});

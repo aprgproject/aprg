@@ -19,7 +19,8 @@ TEST_F(ModuleTest, MacroDefinitionsDefineTest)
     testFile << "MACRO2(variable1, variable2);\n";
     testFile.close();
 
-    processFile();    ASSERT_TRUE(m_database.isMacro("MACRO0"));
+    processFile();
+    ASSERT_TRUE(m_database.isMacro("MACRO0"));
     ASSERT_TRUE(m_database.isMacro("MACRO1"));
     ASSERT_TRUE(m_database.isMacro("MACRO2"));
     ASSERT_EQ(m_terms.size(), 6);
@@ -44,7 +45,8 @@ TEST_F(ModuleTest, MacroDefinitionsDefineWithParameterMismatchTest)
     testFile << "MACRO0(variable1, variable2, variable3);\n";
     testFile.close();
 
-    processFile();    ASSERT_TRUE(m_database.isMacro("MACRO0"));
+    processFile();
+    ASSERT_TRUE(m_database.isMacro("MACRO0"));
     ASSERT_EQ(m_terms.size(), 5);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "#define MACRO0(a, b) a = a + b\n", 1);
@@ -69,7 +71,8 @@ TEST_F(ModuleTest, MacroDefinitionsDefineWithVariadicParametersTest)
     testFile << "MACRO2(variable1, variable2, variable3);\n";
     testFile.close();
 
-    processFile();    ASSERT_TRUE(m_database.isMacro("MACRO0"));
+    processFile();
+    ASSERT_TRUE(m_database.isMacro("MACRO0"));
     ASSERT_TRUE(m_database.isMacro("MACRO1"));
     ASSERT_TRUE(m_database.isMacro("MACRO2"));
     ASSERT_EQ(m_terms.size(), 8);
@@ -93,7 +96,8 @@ TEST_F(ModuleTest, MacroDefinitionsDefineWithVariadicWithContentsParametersTest)
     testFile << "MACRO0(variable1, 100, 200 * 300);\n";
     testFile.close();
 
-    processFile();    ASSERT_TRUE(m_database.isMacro("MACRO0"));
+    processFile();
+    ASSERT_TRUE(m_database.isMacro("MACRO0"));
     ASSERT_EQ(m_terms.size(), 2);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "#define MACRO0(a, b, ...) int a = b + __VA_ARGS__\n", 1);
@@ -113,7 +117,8 @@ TEST_F(ModuleTest, MacroDefinitionsDefineMultiLineTest)
     testFile << "MACROEND\n";
     testFile.close();
 
-    processFile();    ASSERT_TRUE(m_database.isMacro("MACROSTART"));
+    processFile();
+    ASSERT_TRUE(m_database.isMacro("MACROSTART"));
     ASSERT_TRUE(m_database.isMacro("MACROEND"));
     ASSERT_EQ(m_terms.size(), 3);
     auto it = m_terms.begin();
@@ -133,7 +138,8 @@ TEST_F(ModuleTest, MacroDefinitionsUndefTest)
     testFile << "int MACRO1 = 5;\n";
     testFile.close();
 
-    processFile();    ASSERT_FALSE(m_database.isMacro("MACRO1"));
+    processFile();
+    ASSERT_FALSE(m_database.isMacro("MACRO1"));
     ASSERT_EQ(m_terms.size(), 4);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "#define MACRO1 variable1\n", 1);
@@ -155,7 +161,8 @@ TEST_F(ModuleTest, MacroDefinitionsDefineWithCyclicEquivalentCannotBeAddedTest)
     testFile << "int MACRO3 = 3;\n";
     testFile.close();
 
-    processFile();    ASSERT_FALSE(m_database.isMacro("MACRO1"));
+    processFile();
+    ASSERT_FALSE(m_database.isMacro("MACRO1"));
     ASSERT_FALSE(m_database.isMacro("MACRO2"));
     ASSERT_FALSE(m_database.isMacro("MACRO3"));
     ASSERT_EQ(m_terms.size(), 6);
@@ -179,7 +186,8 @@ TEST_F(ModuleTest, MacroDefinitionsDefineWithCyclicEquivalentCannotBeAddedTest2)
     testFile << "int MACRO1 = 1;\n";
     testFile.close();
 
-    processFile();    ASSERT_TRUE(m_database.isMacro("MACRO1"));
+    processFile();
+    ASSERT_TRUE(m_database.isMacro("MACRO1"));
     ASSERT_TRUE(m_database.isMacro("MACRO2"));
     ASSERT_FALSE(m_database.isMacro("MACRO3"));
     ASSERT_EQ(m_terms.size(), 4);
@@ -201,7 +209,8 @@ TEST_F(ModuleTest, MacroExtraMacroTest)
     testFile << "#pragma because the WHOLE line is combined\n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 4);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 4);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "#ifdef I dont care what is the next part\n", 1);
     CHECK_TERM(it, TermType::ProcessedTerm, "#line I don2t cAre 234567\n", 2);
@@ -219,7 +228,8 @@ TEST_F(ModuleTest, MacroWithParenthesisTest)
     testFile << "int x = _TRUNCATE;\n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 3);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 3);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "#define _TRUNCATE ((size_t) - 1)\n", 1);
     CHECK_TERM(it, TermType::ProcessedTerm, "int size_t;\n", 2);
@@ -240,7 +250,8 @@ TEST_F(ModuleTest, MacroWithStringsTest)
     testFile << "#endif\n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 7);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 7);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "#ifdef _POSIX_\n", 1);
     CHECK_TERM(it, TermType::ProcessedTerm, "#define _P_tmpdir \"/\"\n", 2);

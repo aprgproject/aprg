@@ -28,6 +28,7 @@ Equation getCircleEquation()
     Term const& rightHandSide(rSquared);
     return Equation(leftHandSide, "=", rightHandSide);
 }
+
 Equation getEllipseEquation()
 {
     Term xMinusX0(createExpressionIfPossible({x, "-", x0}));

@@ -52,6 +52,7 @@ TEST(ExponentsRetrieverTest, RetrieveFromTermWorks)
     {
         return number;
     });
+
     retriever.retrieveFromTerm(Constant(1.234));
     retriever.retrieveFromTerm(Variable("x"));
     retriever.retrieveFromTerm(Monomial(34, {{"x", 5}, {"y", 6}}));
@@ -138,6 +139,7 @@ TEST(ExponentsRetrieverTest, RetrieveFromFunctionWorks)
     {
         return number;
     });
+
     retriever.retrieveFromFunction(functionObject);
 
     AlbaNumbersSet const& numbersSet(retriever.getSavedData());

@@ -41,6 +41,7 @@ TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateTermWorks)
     {
         return number;
     }));
+
     mutator.mutateTerm(constantTerm);
     mutator.mutateTerm(variableTerm);
     mutator.mutateTerm(monomialTerm);
@@ -123,6 +124,7 @@ TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateFunctionWorks)
     {
         return number;
     });
+
     mutator.mutateFunction(functionObject);
 
     Function expectedFunction(
@@ -131,7 +133,8 @@ TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateFunctionWorks)
                 [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });    EXPECT_EQ(expectedFunction, functionObject);
+    });
+    EXPECT_EQ(expectedFunction, functionObject);
 }
 
 }

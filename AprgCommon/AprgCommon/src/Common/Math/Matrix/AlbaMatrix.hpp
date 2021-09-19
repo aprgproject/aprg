@@ -10,7 +10,8 @@
 #include <Common/Types/AlbaTypeHelper.hpp>
 
 #include <cassert>
-#include <functional>#include <sstream>
+#include <functional>
+#include <sstream>
 
 namespace alba
 {
@@ -36,7 +37,8 @@ getDefaultMatrix(unsigned int const numberOfColumns, unsigned int const numberOf
 
 template <typename DataType>
 class AlbaMatrix
-{public:
+{
+public:
     using MatrixData = AlbaMatrixData<DataType>;
     using ListOfMatrixData = ListOfAlbaMatrixData<DataType>;
     using LoopFunction = std::function<void(unsigned int const x, unsigned int const y)>;
@@ -65,7 +67,8 @@ class AlbaMatrix
             DataType const& initialValue)
         : m_numberOfColumns(numberOfColumns)
         , m_numberOfRows(numberOfRows)
-        , m_matrixData(numberOfColumns*numberOfRows, initialValue)    {}
+        , m_matrixData(numberOfColumns*numberOfRows, initialValue)
+    {}
 
     AlbaMatrix(
             unsigned int const numberOfColumns,
@@ -420,6 +423,7 @@ private:
         out << "Matrix output:\n" << table;
         return out;
     }
+
     unsigned int m_numberOfColumns;
     unsigned int m_numberOfRows;
     MatrixData m_matrixData;

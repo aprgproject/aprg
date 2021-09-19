@@ -13,7 +13,8 @@
 #include <Common/Types/AlbaTypeHelper.hpp>
 
 #include <memory>
-#include <string>#include <vector>
+#include <string>
+#include <vector>
 
 namespace alba
 {
@@ -28,7 +29,8 @@ public:
     Term(Term const& term);
     Term(AlbaNumber const& number);
     Term(char const* const characterString);
-    Term(std::string const& stringAsParameter);    Term(Constant const& constant);
+    Term(std::string const& stringAsParameter);
+    Term(Constant const& constant);
     Term(Variable const& variable);
     Term(Operator const& operatorTerm);
     Term(Monomial const& monomial);
@@ -43,7 +45,8 @@ public:
 
     Term & operator=(Term const& term);
 
-    bool operator==(Term const& second) const;    bool operator!=(Term const& second) const;
+    bool operator==(Term const& second) const;
+    bool operator!=(Term const& second) const;
     bool operator<(Term const& second) const;
     bool isEmpty() const;
     bool isConstant() const;

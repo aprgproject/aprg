@@ -72,6 +72,7 @@ Equation getEllipticParaboloidEquation()
     Term const& rightHandSide(zOverC);
     return Equation(leftHandSide, "=", rightHandSide);
 }
+
 Equation getHyperbolicParaboloidEquation()
 {
     Term xMinusX0(createExpressionIfPossible({x, "-", x0}));
@@ -86,6 +87,7 @@ Equation getHyperbolicParaboloidEquation()
     Term const& rightHandSide(zOverC);
     return Equation(leftHandSide, "=", rightHandSide);
 }
+
 Equations getLineEquations()
 {
     Equations result;
@@ -130,6 +132,7 @@ Equation getSphereEquation()
     Term const& rightHandSide(rSquared);
     return Equation(leftHandSide, "=", rightHandSide);
 }
+
 }
 
 }

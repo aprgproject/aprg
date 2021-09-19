@@ -55,6 +55,7 @@ TEST(VariableNamesRetrieverTest, RetrieveFromTermWorks)
     {
         return number;
     });
+
     retriever.retrieveFromTerm(Constant(1.234));
     retriever.retrieveFromTerm(Variable("b"));
     retriever.retrieveFromTerm(Monomial(34, {{"c", 5}, {"d", 6}}));
@@ -144,6 +145,7 @@ TEST(VariableNamesRetrieverTest, RetrieveFromFunctionWorks)
     {
         return number;
     });
+
     retriever.retrieveFromFunction(functionObject);
 
     VariableNamesSet const& variableNamesSet(retriever.getSavedData());

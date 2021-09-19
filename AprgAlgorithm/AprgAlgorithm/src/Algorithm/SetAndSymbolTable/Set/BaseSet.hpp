@@ -18,6 +18,7 @@ public:
 
     virtual bool isEmpty() const = 0; // is the set empty
     virtual bool doesContain(Key const& key) const = 0; // is key exists on set
+
     virtual unsigned int getSize() const = 0; // get number of keys
     virtual unsigned int getRank(Key const& key) const = 0; // get number of keys less than key
 

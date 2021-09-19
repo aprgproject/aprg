@@ -25,7 +25,8 @@ public:
 
     bool isEmpty() const override
     {
-        return m_size == 0U;    }
+        return m_size == 0U;
+    }
 
     bool doesContain(Key const& key) const override
     {

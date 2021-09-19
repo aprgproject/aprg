@@ -27,7 +27,8 @@ Term convertExpressionToSimplestTerm(Expression const& expression)
         Term const& term = static_cast<Term const&>(expression.getFirstTermConstReference());
         newTerm = term;
         newTerm.simplify();
-    }    return newTerm;
+    }
+    return newTerm;
 }
 
 }

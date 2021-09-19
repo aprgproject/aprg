@@ -74,7 +74,8 @@ private:
         out << "hasContent: " << any.hasContent() << "\n";
         if(any.hasContent())
         {
-            out << " savedMemory: " << any.m_savedMemory;        }
+            out << " savedMemory: " << any.m_savedMemory;
+        }
         return out;
     }
 

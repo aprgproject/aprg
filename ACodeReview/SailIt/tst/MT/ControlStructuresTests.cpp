@@ -18,7 +18,8 @@ TEST_F(ModuleTest, MultiLineIfStatementTest)
     testFile << "if(2 == 2);\n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 2);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 2);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::MultiLine_IfElseIfStartChain_Ignorable, "if(1 == 1)\n{\nint x = 5;\n}\n", 1);
     CHECK_TERM(it, TermType::MultiLine_IfElseIfStartChain_Ignorable, "if(2 == 2);\n", 5);
@@ -36,7 +37,8 @@ TEST_F(ModuleTest, MultiLineIfStatementWithConstantBoolTest)
     testFile << "if(false);\n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 2);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 2);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::MultiLine_IfElseIfStartChain_Ignorable, "if(true)\n{\nint x = 5;\n}\n", 1);
     CHECK_TERM(it, TermType::MultiLine_IfElseIfStartChain_Ignorable, "if(false);\n", 5);
@@ -53,7 +55,8 @@ TEST_F(ModuleTest, MultiLineIfStatementIncorrectFormatTest)
     testFile << "if(2 ==2) \n; \n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 4);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 4);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "int x;\n", 1);
     CHECK_TERM(it, TermType::MultiLine_IfElseIfStartChain_Ignorable, "if(hello){int y=5;}\n", 2);
@@ -73,7 +76,8 @@ TEST_F(ModuleTest, MultiLineElseIfStatementTest)
     testFile << "else if(3 == 3);\n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 2);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 2);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::MultiLine_ElseIfClause, "else if(2 == 2)\n{\nint x = 5;\n}\n", 1);
     CHECK_TERM(it, TermType::MultiLine_ElseIfClause, "else if(3 == 3);\n", 5);
@@ -90,7 +94,8 @@ TEST_F(ModuleTest, MultiLineElseStatementTest)
     testFile << "}\n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 1);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 1);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::MultiLine_ElseClause, "else\n{\nint x = 5;\n}\n", 1);
     EXPECT_EQ(m_findings.getMultiMapOfFindingsReference().size(), 1);
@@ -116,7 +121,8 @@ TEST_F(ModuleTest, MultiLineIfElseIfElseStatementTest)
     testFile << "}\n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 2);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 2);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "int a = 5;\n", 1);
     CHECK_TERM(it, TermType::ProcessedTerm, "if(1 == 1)\n{\nint x = 5;\n}\nelse if(2 == 2);\nelse if(3 == 3)\n{\nint x = 5;\n}\nelse\n{\nint x = 5;\n}\n", 2);
@@ -142,7 +148,8 @@ TEST_F(ModuleTest, MultiLineCascadingIfClauses)
     testFile << "}\n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 2);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 2);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "int a = 1;\n", 1);
     CHECK_TERM(it, TermType::MultiLine_IfElseIfStartChain_Ignorable, "if(1 == 1)\n{\nint a = 2;\nif(2 == 2)\n{\nint a = 3;\nif(3 == 3)\n{\nint a = 4;\n}\n}\n}\n", 2);
@@ -167,7 +174,8 @@ TEST_F(ModuleTest, MultiLineIncorrectIfElseIfElseStatementTest)
     testFile << "}\n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 1);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 1);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "if(1 == 1)\n\n{\n\nint x = 5;\n\n}\n\nelse if(2 == 2)\n\n{\n\nint x = 5;\n\n}\n\nelse\n\n{\n\nint x = 5;\n\n}\n", 1);
     EXPECT_EQ(m_findings.getMultiMapOfFindingsReference().size(), 11);
@@ -184,7 +192,8 @@ TEST_F(ModuleTest, MultiLineWhileLoopTest)
     testFile << "while(2 == 2);\n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 2);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 2);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "while(1 == 1)\n{\nint x = 5;\n}\n", 1);
     CHECK_TERM(it, TermType::ProcessedTerm, "while(2 == 2);\n", 5);

@@ -3,6 +3,7 @@
 #include <Common/Memory/AlbaCast.hpp>
 
 #include <gtest/gtest.h>
+
 #include <cstdint>
 
 namespace alba
@@ -17,7 +18,8 @@ uint64_t getUniqueVertexIdentifier<uint64_t, double>(double const& object)
     return getFloatingPointMemoryRepresentation<double, uint64_t>(object);
 }
 
-template <>void removeUniqueVertexIdentifierIfNeeded<uint64_t, double>(double const&)
+template <>
+void removeUniqueVertexIdentifierIfNeeded<uint64_t, double>(double const&)
 {
     // do nothing
 }

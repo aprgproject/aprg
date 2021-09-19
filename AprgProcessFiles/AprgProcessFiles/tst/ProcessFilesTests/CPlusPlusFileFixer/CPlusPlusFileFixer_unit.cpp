@@ -43,6 +43,7 @@ TEST(CPlusPlusFileFixerTest, CPlusPlusFileHeadersAreCorrected)
     testFile.close();
 
     fixer.processFile(file1ToReadPathHandler.getFullPath());
+
     ifstream inputTestFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
     AlbaFileReader fileReader(inputTestFile);
@@ -82,6 +83,7 @@ TEST(CPlusPlusFileFixerTest, CPlusPlusFileMainHeaderIsConvertedToQuotationHeader
     testFile.close();
 
     fixer.processFile(file1ToReadPathHandler.getFullPath());
+
     ifstream inputTestFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
     AlbaFileReader fileReader(inputTestFile);
@@ -108,6 +110,7 @@ TEST(CPlusPlusFileFixerTest, TrailingEmptyLineAreRemoved)
     testFile.close();
 
     fixer.processFile(file1ToReadPathHandler.getFullPath());
+
     ifstream inputTestFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
     AlbaFileReader fileReader(inputTestFile);
@@ -131,6 +134,7 @@ TEST(CPlusPlusFileFixerTest, NamespaceFormattingIsCorrected)
     testFile.close();
 
     fixer.processFile(file1ToReadPathHandler.getFullPath());
+
     ifstream inputTestFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
     AlbaFileReader fileReader(inputTestFile);
@@ -166,6 +170,7 @@ TEST(CPlusPlusFileFixerTest, SmallUInNumberIsConvertedToCapitalU)
     testFile.close();
 
     fixer.processFile(file1ToReadPathHandler.getFullPath());
+
     ifstream inputTestFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
     AlbaFileReader fileReader(inputTestFile);
@@ -203,6 +208,7 @@ TEST(CPlusPlusFileFixerTest, DISABLED_TwoCascadingLoopsDetection)
     testFile << R"(})" << "\n";
     testFile.close();
 
-    fixer.processFile(file1ToReadPathHandler.getFullPath());}
+    fixer.processFile(file1ToReadPathHandler.getFullPath());
+}
 
 }

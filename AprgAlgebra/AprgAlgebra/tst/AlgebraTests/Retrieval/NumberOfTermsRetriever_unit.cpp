@@ -42,6 +42,7 @@ TEST(NumberOfTermsRetrieverTest, RetrieveFromTermWorks)
     {
         return number;
     });
+
     retriever.retrieveFromTerm(Constant(1.234));
     retriever.retrieveFromTerm(Variable("b"));
     retriever.retrieveFromTerm(Monomial(34, {{"c", 5}, {"d", 6}}));
@@ -107,6 +108,7 @@ TEST(NumberOfTermsRetrieverTest, RetrieveFromFunctionWorks)
     {
         return number;
     });
+
     retriever.retrieveFromFunction(functionObject);
 
     EXPECT_EQ(4U, retriever.getSavedData());

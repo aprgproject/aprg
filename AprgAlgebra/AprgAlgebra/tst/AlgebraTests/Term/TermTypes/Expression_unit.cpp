@@ -62,7 +62,8 @@ TEST(ExpressionTest, ExpressionThatIsCopyConstructedHasIsSimplifiedFlagCopied)
     Expression const& expression1(expressionWithSimplifiedNotSet);
     Expression expression2(expressionWithSimplifiedSet);
 
-    EXPECT_FALSE(expression1.isSimplified());    EXPECT_TRUE(expression2.isSimplified());
+    EXPECT_FALSE(expression1.isSimplified());
+    EXPECT_TRUE(expression2.isSimplified());
 }
 
 TEST(ExpressionTest, ExpressionThatIsConstructedWithTermHasIsSimplifiedFlagCopied)
@@ -1183,7 +1184,8 @@ TEST(ExpressionTest, PutExpressionWithMultiplicationWorksOnMultiplicationAndDivi
     Expression const& expressionToApply2(subExpression3);
 
     expression1.putExpressionWithMultiplication(expressionToApply1);
-    expression2.putExpressionWithMultiplication(expressionToApply1);    expression3.putExpressionWithMultiplication(expressionToApply1);
+    expression2.putExpressionWithMultiplication(expressionToApply1);
+    expression3.putExpressionWithMultiplication(expressionToApply1);
     expression4.putExpressionWithMultiplication(expressionToApply1);
     expression5.putExpressionWithMultiplication(expressionToApply2);
 
@@ -1214,7 +1216,8 @@ TEST(ExpressionTest, PutExpressionWithMultiplicationWorksOnRaiseToPowerExpressio
     Expression const& expressionToApply2(subExpression3);
 
     expression1.putExpressionWithMultiplication(expressionToApply1);
-    expression2.putExpressionWithMultiplication(expressionToApply1);    expression3.putExpressionWithMultiplication(expressionToApply1);
+    expression2.putExpressionWithMultiplication(expressionToApply1);
+    expression3.putExpressionWithMultiplication(expressionToApply1);
     expression4.putExpressionWithMultiplication(expressionToApply1);
     expression5.putExpressionWithMultiplication(expressionToApply2);
 

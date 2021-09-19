@@ -18,7 +18,8 @@ TEST_F(ModuleTest, MultiLineNamespaceTest)
     testFile << "}\n";
     testFile.close();
 
-    processFile();    EXPECT_TRUE(m_database.isNamespace("myNamespace"));
+    processFile();
+    EXPECT_TRUE(m_database.isNamespace("myNamespace"));
     EXPECT_FALSE(m_database.isClass("myNamespace"));
     EXPECT_TRUE(m_database.isFunction("myNamespace::namespaceFunction"));
     EXPECT_TRUE(m_database.isVariable("myNamespace::namespaceVariable"));
@@ -49,7 +50,8 @@ TEST_F(ModuleTest, UsingNamespaceKeywordTest)
     testFile << " int x = namespaceVariable;\n";
     testFile.close();
 
-    processFile();    EXPECT_TRUE(m_database.isNamespace("myNamespace"));
+    processFile();
+    EXPECT_TRUE(m_database.isNamespace("myNamespace"));
     EXPECT_TRUE(m_database.isVariable("x"));
     EXPECT_TRUE(m_database.isVariable("myNamespace::namespaceVariable"));
 
@@ -71,7 +73,8 @@ TEST_F(ModuleTest, ExternBlockTest)
     testFile << "}\n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 2);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 2);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "extern \"C\"\n{\n}\n", 1);
     CHECK_TERM(it, TermType::ProcessedTerm, "extern \"C++\"\n{\n}\n", 4);
@@ -88,7 +91,8 @@ TEST_F(ModuleTest, ExternBlockInvalidSpacesTest)
     testFile << "}\n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 2);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 2);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "extern \"C\" {\n}\n", 1);
     CHECK_TERM(it, TermType::ProcessedTerm, "extern \"C++\" {\n}\n", 3);

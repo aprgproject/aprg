@@ -14,7 +14,8 @@ TEST_F(ModuleTest, ReturnTypeTest)
     testFile << "const char *__mingw_get_crt_info(void);\n";
     testFile.close();
 
-    processFile();    ASSERT_EQ(m_terms.size(), 1);
+    processFile();
+    ASSERT_EQ(m_terms.size(), 1);
     EXPECT_TRUE(m_database.isFunction("__mingw_get_crt_info"));
     CPlusPlusFunction& myFunction(m_database.getFunctionReference("__mingw_get_crt_info"));
     auto & signatures = myFunction.getFunctionSignaturesReference();
@@ -40,7 +41,8 @@ TEST_F(ModuleTest, TypeDefTest)
     testFile << "MyInteger2 myInteger2 = 5;\n";
     testFile.close();
 
-    processFile();    CHECK_TYPE_IN_DATABASE(m_database, "MyInteger", CPlusPlusType("unsigned int", CPlusPlusTypeType::Primitive));
+    processFile();
+    CHECK_TYPE_IN_DATABASE(m_database, "MyInteger", CPlusPlusType("unsigned int", CPlusPlusTypeType::Primitive));
     CHECK_TYPE_IN_DATABASE(m_database, "MyInteger2", CPlusPlusType("int", CPlusPlusTypeType::Primitive));
 
     ASSERT_EQ(m_terms.size(), 5);
@@ -60,7 +62,8 @@ TEST_F(ModuleTest, TypeDefWithParenthesisTest)
     testFile << "typedef int __int128 __attribute__ ((__mode__ (TI)));\n";
     testFile.close();
 
-    processFile();    CHECK_TYPE_IN_DATABASE(m_database, "__int128", CPlusPlusType("int", CPlusPlusTypeType::Primitive));
+    processFile();
+    CHECK_TYPE_IN_DATABASE(m_database, "__int128", CPlusPlusType("int", CPlusPlusTypeType::Primitive));
     CHECK_TYPE_IN_DATABASE(m_database, "__attribute__", CPlusPlusType("int", CPlusPlusTypeType::Primitive));
 
     ASSERT_EQ(m_terms.size(), 1);
@@ -87,7 +90,8 @@ TEST_F(ModuleTest, TypeDefWithMultipleTypedefNamesTest)
     testFile << "typedef __time32_t time_t;\n";
     testFile.close();
 
-    processFile();    CHECK_TYPE_IN_DATABASE(m_database, "__int64", CPlusPlusType("unsigned", CPlusPlusTypeType::Primitive));
+    processFile();
+    CHECK_TYPE_IN_DATABASE(m_database, "__int64", CPlusPlusType("unsigned", CPlusPlusTypeType::Primitive));
     CHECK_TYPE_IN_DATABASE(m_database, "size_t", CPlusPlusType("unsigned", CPlusPlusTypeType::Primitive));
     CHECK_TYPE_IN_DATABASE(m_database, "ssize_t", CPlusPlusType("unsigned", CPlusPlusTypeType::Primitive));
     CHECK_TYPE_IN_DATABASE(m_database, "intptr_t", CPlusPlusType("unsigned", CPlusPlusTypeType::Primitive));
@@ -129,7 +133,8 @@ TEST_F(ModuleTest, TypeDefWithMultipleTypesTest)
     testFile << "typedef unsigned long long size_t;\n";
     testFile.close();
 
-    processFile();    CHECK_TYPE_IN_DATABASE(m_database, "_off_t", CPlusPlusType("long", CPlusPlusTypeType::Primitive));
+    processFile();
+    CHECK_TYPE_IN_DATABASE(m_database, "_off_t", CPlusPlusType("long", CPlusPlusTypeType::Primitive));
     CHECK_TYPE_IN_DATABASE(m_database, "off32_t", CPlusPlusType("long", CPlusPlusTypeType::Primitive));
     CHECK_TYPE_IN_DATABASE(m_database, "_off64_t", CPlusPlusType("long long", CPlusPlusTypeType::Primitive));
     CHECK_TYPE_IN_DATABASE(m_database, "off64_t", CPlusPlusType("long long", CPlusPlusTypeType::Primitive));
@@ -156,7 +161,8 @@ TEST_F(ModuleTest, TypeDefTypePointersAreUsed)
     testFile << "MyIntType* myInt;\n";
     testFile.close();
 
-    processFile();    CHECK_TYPE_IN_DATABASE(m_database, "MyIntType", CPlusPlusType("int", CPlusPlusTypeType::Primitive));
+    processFile();
+    CHECK_TYPE_IN_DATABASE(m_database, "MyIntType", CPlusPlusType("int", CPlusPlusTypeType::Primitive));
 
     ASSERT_TRUE(m_database.isType("MyIntType"));
     ASSERT_EQ(m_terms.size(), 2);
@@ -174,7 +180,8 @@ TEST_F(ModuleTest, ClassTypePointerIsUsed)
     testFile << "myType* classPointer;\n";
     testFile.close();
 
-    processFile();    EXPECT_TRUE(m_database.isClass("myType"));
+    processFile();
+    EXPECT_TRUE(m_database.isClass("myType"));
 
     ASSERT_EQ(m_terms.size(), 2);
     auto it = m_terms.begin();
@@ -194,6 +201,7 @@ TEST_F(ModuleTest, ConstPointerIsUsedForNewType)
     testFile.close();
 
     processFile();
+
     ASSERT_EQ(m_terms.size(), 3);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "const int* intPointer1;\n", 1);
@@ -212,6 +220,7 @@ TEST_F(ModuleTest, ConstReferenceIsUsedForNewType)
     testFile.close();
 
     processFile();
+
     ASSERT_EQ(m_terms.size(), 3);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "const int& intReference1;\n", 1);
@@ -234,7 +243,8 @@ TEST_F(ModuleTest, CStyleStructTypedefs)
     testFile << "threadlocinfo;\n";
     testFile.close();
 
-    processFile();    EXPECT_TRUE(m_database.isClass("struct threadlocaleinfostruct"));
+    processFile();
+    EXPECT_TRUE(m_database.isClass("struct threadlocaleinfostruct"));
     EXPECT_TRUE(m_database.isClass("struct threadmbcinfostruct"));
     CPlusPlusType type1("struct threadlocaleinfostruct", CPlusPlusTypeType::Class);
     type1.incrementPointerCount();
@@ -268,7 +278,8 @@ TEST_F(ModuleTest, CStyleStructWithBracesTypedefs)
     testFile << "LC_ID,*LPLC_ID;\n";
     testFile.close();
 
-    processFile();    EXPECT_TRUE(m_database.isClass("struct tagLC_ID"));
+    processFile();
+    EXPECT_TRUE(m_database.isClass("struct tagLC_ID"));
     EXPECT_TRUE(m_database.isVariable("struct tagLC_ID::wLanguage"));
     EXPECT_TRUE(m_database.isVariable("struct tagLC_ID::wCountry"));
     EXPECT_TRUE(m_database.isVariable("struct tagLC_ID::wCodePage"));
@@ -294,7 +305,8 @@ TEST_F(ModuleTest, TypesAreRecognizedAfterMacro)
     testFile << "size_t _fread_nolock_s(void* _DstBuf, size_t _DstSize, size_t _ElementSize, size_t _Count);\n";
     testFile.close();
 
-    processFile();    CHECK_TYPE_IN_DATABASE(m_database, "size_t", CPlusPlusType("unsigned int", CPlusPlusTypeType::Primitive));
+    processFile();
+    CHECK_TYPE_IN_DATABASE(m_database, "size_t", CPlusPlusType("unsigned int", CPlusPlusTypeType::Primitive));
 
     ASSERT_EQ(m_terms.size(), 4);
     auto it = m_terms.begin();

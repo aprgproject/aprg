@@ -121,7 +121,8 @@ void Audio<T>::printSummary() const
     cout << "|======================================|\n";
 }
 
-template <class T>bool Audio<T>::setAudioBuffer (AudioBuffer& newBuffer)
+template <class T>
+bool Audio<T>::setAudioBuffer (AudioBuffer& newBuffer)
 {
     int numChannels = (int)newBuffer.size();
 
@@ -217,6 +218,7 @@ bool Audio<T>::load (string const& filePath)
         cout << filePath << "\n";
         return false;
     }
+
     file.unsetf (ios::skipws);
     istream_iterator<unsigned char> begin (file), end;
     vector<unsigned char> fileDataBytes (begin, end);
@@ -238,6 +240,7 @@ bool Audio<T>::load (string const& filePath)
         return false;
     }
 }
+
 template <class T>
 bool Audio<T>::decodeWaveFile (vector<unsigned char>& fileDataBytes)
 {
@@ -259,6 +262,7 @@ bool Audio<T>::decodeWaveFile (vector<unsigned char>& fileDataBytes)
         cout << "ERROR: this doesn't seem to be a valid .WAV file\n";
         return false;
     }
+
     // -----------------------------------------------------------
     // FORMAT CHUNK
     int f = indexOfFormatChunk;
@@ -286,6 +290,7 @@ bool Audio<T>::decodeWaveFile (vector<unsigned char>& fileDataBytes)
         cout << "ERROR: this WAV file seems to be neither mono nor stereo (perhaps multi-track, or corrupted?)\n";
         return false;
     }
+
     // check header data is consistent
     if ((numBytesPerSecond != numChannels * sampleRate * bitDepth) / 8
             || (numBytesPerBlock != (numChannels * numBytesPerSample)))
@@ -300,6 +305,7 @@ bool Audio<T>::decodeWaveFile (vector<unsigned char>& fileDataBytes)
         cout << "ERROR: this file has a bit depth that is not 8, 16 or 24 bits\n";
         return false;
     }
+
     // -----------------------------------------------------------
     // DATA CHUNK
     int d = indexOfDataChunk;
@@ -371,6 +377,7 @@ bool Audio<T>::decodeAiffFile (vector<unsigned char>& fileDataBytes)
         cout << "ERROR: this doesn't seem to be a valid AIFF file\n";
         return false;
     }
+
     // -----------------------------------------------------------
     // COMM CHUNK
     int p = indexOfCommChunk;
@@ -401,6 +408,7 @@ bool Audio<T>::decodeAiffFile (vector<unsigned char>& fileDataBytes)
         cout << "ERROR: this file has a bit depth that is not 8, 16 or 24 bits\n";
         return false;
     }
+
     // -----------------------------------------------------------
     // SSND CHUNK
     int s = indexOfSoundDataChunk;
@@ -421,6 +429,7 @@ bool Audio<T>::decodeAiffFile (vector<unsigned char>& fileDataBytes)
         cout << "ERROR: the metadatafor this file doesn't seem right\n";
         return false;
     }
+
     clearAudioBuffer();
     samples.resize(numChannels);
 
@@ -594,6 +603,7 @@ bool Audio<T>::saveToWaveFile (string const& filePath)
         cout << "ERROR: couldn't save file to " << filePath << "\n";
         return false;
     }
+
     // try to write the file
     return writeDataToFile (fileDataBytes, filePath);
 }
@@ -677,6 +687,7 @@ bool Audio<T>::saveToAiffFile (string const& filePath)
         cout << "ERROR: couldn't save file to " << filePath << "\n";
         return false;
     }
+
     // try to write the file
     return writeDataToFile (fileDataBytes, filePath);
 }
@@ -706,7 +717,8 @@ void Audio<T>::addStringToFileData (vector<unsigned char>& fileDataBytes, string
     copy(s.cbegin(), s.cend(), back_inserter(fileDataBytes));
 }
 
-template <class T>void Audio<T>::addInt32ToFileData (vector<unsigned char>& fileDataBytes, int32_t i, Endianness endianness)
+template <class T>
+void Audio<T>::addInt32ToFileData (vector<unsigned char>& fileDataBytes, int32_t i, Endianness endianness)
 {
     unsigned char bytes[4];
 
@@ -729,7 +741,8 @@ template <class T>void Audio<T>::addInt32ToFileData (vector<unsigned char>& file
     copy(cbegin(bytes), cend(bytes), back_inserter(fileDataBytes));
 }
 
-template <class T>void Audio<T>::addInt16ToFileData (vector<unsigned char>& fileDataBytes, int16_t i, Endianness endianness)
+template <class T>
+void Audio<T>::addInt16ToFileData (vector<unsigned char>& fileDataBytes, int16_t i, Endianness endianness)
 {
     unsigned char bytes[2];
 
@@ -776,6 +789,7 @@ template <class T>
 int32_t Audio<T>::fourBytesToInt (vector<unsigned char> const& source, int startIndex, Endianness endianness)
 {
     int32_t result;
+
     if (endianness == Endianness::LittleEndian)
         result = (source[startIndex + 3] << 24) | (source[startIndex + 2] << 16) | (source[startIndex + 1] << 8) | source[startIndex];
     else
@@ -788,6 +802,7 @@ template <class T>
 int16_t Audio<T>::twoBytesToInt (vector<unsigned char> const& source, int startIndex, Endianness endianness)
 {
     int16_t result;
+
     if (endianness == Endianness::LittleEndian)
         result = (source[startIndex + 1] << 8) | source[startIndex];
     else
@@ -807,7 +822,8 @@ int Audio<T>::getIndexOfString (vector<unsigned char> const& source, string cons
         string section (source.cbegin() + i, source.cbegin() + i + stringLength);
 
         if (section == stringToSearchFor)
-        {            index = i;
+        {
+            index = i;
             break;
         }
     }

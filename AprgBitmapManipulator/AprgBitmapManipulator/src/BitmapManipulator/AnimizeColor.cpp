@@ -86,6 +86,7 @@ void AnimizeColor::saveColorData(string const& path)
         }*/
     }
 }
+
 bool AnimizeColor::isValueIncluded(double const value) const
 {
     return value >= m_lowestIncludedValue && value <= m_highestIncludedValue;

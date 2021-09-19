@@ -56,6 +56,7 @@ void AlbaSackReader::printAll() const
         cout << "\n";
     }
 }
+
 void AlbaSackReader::processDirectory(string const& path)
 {
     set<string> listOfFiles;
@@ -76,7 +77,8 @@ void AlbaSackReader::processFile(string const& path)
         cout<<"ProcessFile: "<<path<<"\n";
         ifstream inputLogFileStream(filePathHandler.getFullPath());
         AlbaFileReader fileReader(inputLogFileStream);
-        while(fileReader.isNotFinished())        {
+        while(fileReader.isNotFinished())
+        {
             string line(fileReader.getLineAndIgnoreWhiteSpaces());
             tokenize(tokens, line);
         }
@@ -407,7 +409,8 @@ void AlbaSackReader::analyze(stringHelper::strings const& tokens)
         //cout<<"analyze -> state: "<<getReaderStateString(transactionData.state)<<" typeName:["<<transactionData.typeName<<"] token:["<<token<<"]\n";
 
 #define HANDLE_READER_STATE(en) \
-    case en: \    analyzeInReaderState<en>(transactionData, token); \
+    case en: \
+    analyzeInReaderState<en>(transactionData, token); \
     break;
 
         switch(transactionData.state)

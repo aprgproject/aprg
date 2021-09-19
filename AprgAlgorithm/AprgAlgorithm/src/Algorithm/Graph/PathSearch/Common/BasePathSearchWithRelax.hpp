@@ -31,7 +31,8 @@ public:
 
     bool hasPathTo(Vertex const& endVertex) const
     {
-        return m_vertexToEdgeWithBestWeightMap.find(endVertex) != m_vertexToEdgeWithBestWeightMap.cend();    }
+        return m_vertexToEdgeWithBestWeightMap.find(endVertex) != m_vertexToEdgeWithBestWeightMap.cend();
+    }
 
     Path getPathTo(Vertex const& endVertex) const
     {
@@ -79,7 +80,8 @@ protected:
     ~BasePathSearchWithRelax() = default;
 
     bool hasNoWeightSaved(Vertex const& vertex) const
-    {        return m_vertexToEdgeWithBestWeightMap.find(vertex) == m_vertexToEdgeWithBestWeightMap.cend();
+    {
+        return m_vertexToEdgeWithBestWeightMap.find(vertex) == m_vertexToEdgeWithBestWeightMap.cend();
     }
 
     Weight getSavedWeightAt(Vertex const& vertex) const

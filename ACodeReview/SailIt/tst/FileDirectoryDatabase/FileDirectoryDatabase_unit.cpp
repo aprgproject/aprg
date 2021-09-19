@@ -16,6 +16,7 @@ TEST(FileDirectoryDatabaseTest, DISABLED_ActualTest)
     cout<<"FullPath of iostream: "<<fileDirectoryDatabase.getFullPathOfFile("", "iostream")<<"\n";
     //fileDirectoryDatabase.printFilesAndDirectories(cout);
 }
+
 TEST(FileDirectoryDatabaseTest, FilesAndDirectoriesAreRecognizedWhenAdded)
 {
     string directory(MT_FILE_READER_TEST_DIRECTORY);

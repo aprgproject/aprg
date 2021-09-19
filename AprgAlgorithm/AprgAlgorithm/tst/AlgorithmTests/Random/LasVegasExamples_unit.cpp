@@ -3,6 +3,7 @@
 #include <Common/Randomizer/AlbaSimpleRandomizer.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba
@@ -25,7 +26,8 @@ TEST(LasVegasTest, GraphColoringExample)
     AlbaSimpleRandomizer randomizer;
     Graph graph;
     graph.connect(1U, 2U);
-    graph.connect(1U, 3U);    graph.connect(1U, 4U);
+    graph.connect(1U, 3U);
+    graph.connect(1U, 4U);
     graph.connect(2U, 4U);
     graph.connect(2U, 5U);
     graph.connect(3U, 4U);

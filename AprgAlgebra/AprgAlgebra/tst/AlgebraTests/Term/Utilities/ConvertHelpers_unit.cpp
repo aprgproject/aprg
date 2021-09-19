@@ -111,6 +111,7 @@ TEST(ConvertHelpersTest, SimplifyAndConvertFunctionToSimplestTermWorks)
     {
         return number;
     });
+
     Term termToVerify1(simplifyAndConvertFunctionToSimplestTerm(function1));
     Term termToVerify2(simplifyAndConvertFunctionToSimplestTerm(function2));
     Term termToVerify3(simplifyAndConvertFunctionToSimplestTerm(function3));
@@ -178,7 +179,8 @@ TEST(ConvertHelpersTest, ConvertFunctionToSimplestTermWorks)
     Function function3("functionName", Term("x"), [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });    Term multiplicationAndDivisionExpression(createExpressionIfPossible({"x", "*", "y", "/", "z"}));
+    });
+    Term multiplicationAndDivisionExpression(createExpressionIfPossible({"x", "*", "y", "/", "z"}));
 
     Term termToVerify1(convertFunctionToSimplestTerm(function1));
     Term termToVerify2(convertFunctionToSimplestTerm(function2));

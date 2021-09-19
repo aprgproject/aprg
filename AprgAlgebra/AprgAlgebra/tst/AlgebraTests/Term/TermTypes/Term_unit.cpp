@@ -175,7 +175,8 @@ TEST(TermTest, TermsAsFunctionsWorks)
     Function function2("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });    Term functionTerm1(function1);
+    });
+    Term functionTerm1(function1);
     Term functionTerm2(function2);
     Term functionTerm3("abs");
 
@@ -238,7 +239,8 @@ TEST(TermTest, TermThatIsCopyConstructedHasIsSimplifiedFlagCopied)
     EXPECT_TRUE(termWithSimplifiedSet.isSimplified());
 }
 
-TEST(TermTest, TermThatIsConstructedWithTermTypeHasIsSimplifiedFlagNotSet){
+TEST(TermTest, TermThatIsConstructedWithTermTypeHasIsSimplifiedFlagNotSet)
+{
     Term constantTerm(4353);
     Term variableTerm("");
     Term operatorTerm("+");
@@ -644,7 +646,8 @@ TEST(TermTest, GetDebugStringWorks)
     Function function1("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });    Term term8(function1);
+    });
+    Term term8(function1);
 
     EXPECT_EQ("{EmptyTerm}{Empty}", term1.getDebugString());
     EXPECT_EQ("0{Constant}", term2.getDebugString());
@@ -666,7 +669,8 @@ TEST(TermTest, ClearWorks)
     Function functionObject("functionName", Term(1475), [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });    Term functionTerm(functionObject);
+    });
+    Term functionTerm(functionObject);
 
     constantTerm.clear();
     variableTerm.clear();
@@ -693,7 +697,8 @@ TEST(TermTest, SimplifyWorks)
     Function functionObject("functionName", Term(1475), [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });    Term functionTerm(functionObject);
+    });
+    Term functionTerm(functionObject);
 
     constantTerm.simplify();
     variableTerm.simplify();
@@ -802,7 +807,8 @@ TEST(TermTest, OutputStreamOperatorWorks)
     Function function1("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });    Term term8(function1);
+    });
+    Term term8(function1);
 
     ss << term1 << "," << term2 << "," << term3 << "," << term4 << ","
        << term5 << "," << term6 << "," << term7 << "," << term8;

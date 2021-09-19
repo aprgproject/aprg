@@ -390,6 +390,7 @@ TEST(ContainerTest, FetrieveContentsFromStreamWorksForAVectorOfIntegersFromFile)
     outputTestFile.close();
     ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
+
     retrieveContentsFromStream(inputTestFile, temporaryArray);
 
     ASSERT_EQ(4U, temporaryArray.size());
@@ -412,6 +413,7 @@ TEST(ContainerTest, FetrieveContentsFromStreamWorksForAnArrayOfIntegersFromFile)
     outputTestFile.close();
     ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
+
     retrieveContentsFromStream(inputTestFile, temporaryVector);
 
     ASSERT_EQ(4U, temporaryVector.size());
@@ -434,6 +436,7 @@ TEST(ContainerTest, FetrieveContentsFromStreamWorksForASetOfIntegersFromFile)
     outputTestFile.close();
     ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
+
     retrieveContentsFromStream(inputTestFile, temporarySet);
 
     ASSERT_EQ(4U, temporarySet.size());
@@ -456,6 +459,7 @@ TEST(ContainerTest, FetrieveContentsFromStreamWorksForAMapOfIntegersFromFile)
     outputTestFile.close();
     ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
+
     retrieveContentsFromStream(inputTestFile, temporaryMap);
 
     ASSERT_EQ(2U, temporaryMap.size());

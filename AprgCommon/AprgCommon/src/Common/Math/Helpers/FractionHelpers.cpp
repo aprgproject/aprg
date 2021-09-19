@@ -77,7 +77,8 @@ void changeFractionToSimplestForm(NumberType1 & numerator, NumberType2 & denomin
 template void changeFractionToSimplestForm<int32_t, uint32_t, int64_t>(int32_t & numerator, uint32_t & denominator);
 
 FractionDetails getBestFractionDetailsForDoubleValue(
-        double const doubleValue){
+        double const doubleValue)
+{
     constexpr double tolerance(1E-12);
     FractionDetails result{1, 0, 1};
 

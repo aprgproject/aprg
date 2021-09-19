@@ -42,7 +42,8 @@ Term getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(
     return sum * lengthOfInterval / 2 / numberOfSamples;
 }
 
-Term getAnApproximateOfDefiniteIntegralUsingSimpsonRule(        Term const& term,
+Term getAnApproximateOfDefiniteIntegralUsingSimpsonRule(
+        Term const& term,
         DetailsForDefiniteIntegralWithValues const& integralDetails,
         unsigned int const numberOfSamples)
 {
@@ -72,7 +73,8 @@ Term getAnApproximateOfDefiniteIntegralUsingSimpsonRule(        Term const& term
     return sum * lengthOfInterval / 3 / numberOfSamples;
 }
 
-Term getActualTruncationErrorInTrapezoidalRule(        Term const& term,
+Term getActualTruncationErrorInTrapezoidalRule(
+        Term const& term,
         DetailsForDefiniteIntegralWithValues const& integralDetails,
         unsigned int const numberOfSamples)
 {
@@ -105,7 +107,8 @@ Term getAnApproximateOfTruncationErrorInTrapezoidalRuleAt(
     return termDoublePrimeValue * lengthOfInterval / -12 * (deltaX ^ 2);
 }
 
-Term getAnApproximateOfTruncationErrorInSimpsonRuleAt(        Term const& term,
+Term getAnApproximateOfTruncationErrorInSimpsonRuleAt(
+        Term const& term,
         DetailsForDefiniteIntegralWithValues const& integralDetails,
         AlbaNumber const& valueToCheckAt,
         AlbaNumber const& deltaX)
@@ -118,7 +121,8 @@ Term getAnApproximateOfTruncationErrorInSimpsonRuleAt(        Term const& term,
     return termDoublePrimeValue * lengthOfInterval / -180 * (deltaX ^ 2);
 }
 
-AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(        AlbaNumber const& input,
+AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(
+        AlbaNumber const& input,
         unsigned int const numberOfSamples)
 {
     AlbaNumber result;
