@@ -280,11 +280,10 @@ void HardwareConfiguration::printDspAllocations(unsigned int const printFlags)
 {
     if(m_sharedLcgId!=0)
     {
-        cout<<"SharedLcg: "<<m_sharedLcgId<<endl;
+        cout<<"SharedLcg: "<<m_sharedLcgId<<"\n";
     }
     DisplayTable table;
-    table.setBorders("-"," | ");
-    table.addRow();
+    table.setBorders("-"," | ");    table.addRow();
     table.getLastRow().addCell(" ");
     for(unsigned int cpu=30; cpu<=80 ;cpu+=10)
     {
@@ -330,11 +329,10 @@ void HardwareConfiguration::printDspAllocations(unsigned int const printFlags)
             }
         }
     }
-    cout<<table.drawOutput();
+    cout<<table;
 }
 
-void HardwareConfiguration::addFsp(unsigned int const fspAddress)
-{
+void HardwareConfiguration::addFsp(unsigned int const fspAddress){
     unsigned int correctFspAddress = fspAddress & 0xFF00;
     FspDetails fspDetails;
     fspDetails.smType = getSmTypeBasedOnAddress(correctFspAddress);
