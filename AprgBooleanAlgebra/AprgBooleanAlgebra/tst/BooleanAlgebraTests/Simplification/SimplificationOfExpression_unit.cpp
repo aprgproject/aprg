@@ -1,12 +1,13 @@
 #include <BooleanAlgebra/Simplification/SimplificationOfExpression.hpp>
 #include <BooleanAlgebra/Term/Utilities/CreateHelpers.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <gtest/gtest.h>
 
+using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace booleanAlgebra
 {
@@ -289,11 +290,10 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByWithOuterOrAndInnerAnd)
 
     simplification.simplify();
 
-    string stringToVerify(simplification.getExpression().getDisplayableString());
+    string stringToVerify(convertToString(simplification.getExpression()));
     string stringToExpect("((x&z)|(x'&y))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
-
 TEST(SimplificationOfExpressionTest, SimplifyWorksWithOuterAndAndInnerOr)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -309,11 +309,10 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksWithOuterAndAndInnerOr)
 
     simplification.simplify();
 
-    string stringToVerify(simplification.getExpression().getDisplayableString());
+    string stringToVerify(convertToString(simplification.getExpression()));
     string stringToExpect("((x|z)&(x'|y))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
-
 TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOrOperation_WithDefaultConfiguration)
 {
     Expression subExpression1(createExpressionIfPossible({"a", "&", "b"}));
@@ -325,11 +324,10 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOr
 
     simplification.simplify();
 
-    string stringToVerify(simplification.getExpression().getDisplayableString());
+    string stringToVerify(convertToString(simplification.getExpression()));
     string stringToExpect("((a&b&d&f)|(c&d&f)|(e&f))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
-
 TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOrOperation_WithOuterOrAndInnerAnd)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -347,11 +345,10 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOr
 
     simplification.simplify();
 
-    string stringToVerify(simplification.getExpression().getDisplayableString());
+    string stringToVerify(convertToString(simplification.getExpression()));
     string stringToExpect("((a&b&d&f)|(c&d&f)|(e&f))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
-
 TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOrOperation_WithOuterAndAndInnerOr)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -369,11 +366,10 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOr
 
     simplification.simplify();
 
-    string stringToVerify(simplification.getExpression().getDisplayableString());
+    string stringToVerify(convertToString(simplification.getExpression()));
     string stringToExpect("(f&(a|c|e)&(b|c|e)&(d|e))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
-
 TEST(SimplificationOfExpressionTest, SimplifyWorksByRemovingNeededTerms_WithOuterOrAndInnerAnd)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -482,11 +478,10 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnConsensusTheoremPattern1)
 
     simplification.simplify();
 
-    string stringToVerify(simplification.getExpression().getDisplayableString());
+    string stringToVerify(convertToString(simplification.getExpression()));
     string stringToExpect("((x&y)|(x'&z))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
-
 TEST(SimplificationOfExpressionTest, SimplifyWorksOnConsensusTheoremPattern2)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -503,11 +498,10 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnConsensusTheoremPattern2)
 
     simplification.simplify();
 
-    string stringToVerify(simplification.getExpression().getDisplayableString());
+    string stringToVerify(convertToString(simplification.getExpression()));
     string stringToExpect("((x|y)&(x'|z))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
-
 }
 
 }

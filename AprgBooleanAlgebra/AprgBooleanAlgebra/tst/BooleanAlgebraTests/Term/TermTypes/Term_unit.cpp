@@ -1,13 +1,14 @@
 #include <BooleanAlgebra/Term/TermTypes/Term.hpp>
 #include <BooleanAlgebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <BooleanAlgebra/Term/Utilities/CreateHelpers.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <gtest/gtest.h>
 
+using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba
-{
+namespace alba{
 
 namespace booleanAlgebra
 {
@@ -375,25 +376,9 @@ TEST(TermTest, GetTermTypeWorks)
     EXPECT_EQ(TermType::Expression, term5.getTermType());
 }
 
-TEST(TermTest, GetDisplayableStringWorks)
-{
-    Term term1;
-    Term term2(false);
-    Term term3(VariableTerm("x"));
-    Term term4(Operator("&"));
-    Term term5(createExpressionIfPossible({true, "&", "x"}));
-
-    EXPECT_EQ("{EmptyTerm}", term1.getDisplayableString());
-    EXPECT_EQ("[false]", term2.getDisplayableString());
-    EXPECT_EQ("x", term3.getDisplayableString());
-    EXPECT_EQ("&", term4.getDisplayableString());
-    EXPECT_EQ("(x)", term5.getDisplayableString());
-}
-
 TEST(TermTest, GetDebugStringWorks)
 {
-    Term term1;
-    Term term2(false);
+    Term term1;    Term term2(false);
     Term term3(VariableTerm("x"));
     Term term4(Operator("&"));
     Term term5(createExpressionIfPossible({true, "&", "x"}));

@@ -119,17 +119,9 @@ public:
         return m_minterms;
     }
 
-    std::string getDisplayableString() const
-    {
-        std::stringstream ss;
-        ss << *this;
-        return ss.str();
-    }
-
     std::string getEquivalentString() const
     {
-        return getEquivalentString(getMaxLengthOfEquivalentString());
-    }
+        return getEquivalentString(getMaxLengthOfEquivalentString());    }
 
     std::string getEquivalentString(unsigned int const length) const
     {

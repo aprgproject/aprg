@@ -120,17 +120,9 @@ WrappedTerms const& Expression::getWrappedTerms() const
     return m_wrappedTerms;
 }
 
-string Expression::getDisplayableString() const
-{
-    stringstream ss;
-    ss << *this;
-    return ss.str();
-}
-
 string Expression::getDebugString() const
 {
-    stringstream result;
-    result << "( " << getEnumShortString(m_commonOperatorLevel) << "||";
+    stringstream result;    result << "( " << getEnumShortString(m_commonOperatorLevel) << "||";
     for(WrappedTerm const& wrappedTerm : m_wrappedTerms)
     {
         Term const& term(getTermConstReferenceFromSharedPointer(wrappedTerm.baseTermSharedPointer));
