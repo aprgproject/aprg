@@ -225,13 +225,12 @@ void AlbaWindowsUserAutomation::setForegroundWindowWithClassName(string const& c
     int const LENGTH = 1000;
     char classNameTemp[LENGTH];
     GetClassName (GetForegroundWindow(), classNameTemp, LENGTH);
-    cout<<"ClassName:["<<classNameTemp<<"]"<<endl;
+    cout<<"ClassName:["<<classNameTemp<<"]\n";
 
     HWND windowHandle = FindWindowEx(nullptr, nullptr, className.c_str(), nullptr);
-    cout<<AlbaWindowsHelper::getLastFormattedErrorMessage()<<endl;
+    cout<<AlbaWindowsHelper::getLastFormattedErrorMessage()<<"\n";
     setForegroundWindowWithWindowHandle(windowHandle);
 }
-
 void AlbaWindowsUserAutomation::setForegroundWindowWithWindowName(string const& windowName) const
 {
     HWND windowHandle = FindWindowEx(nullptr, nullptr, nullptr, windowName.c_str());
@@ -353,11 +352,10 @@ void AlbaWindowsUserAutomation::setForegroundWindowWithWindowHandle(HWND const w
     }
     if(!isSuccessful)
     {
-        cout<<"Error in AlbaWindowsUserAutomation::setActiveWindow()"<<endl;
-        cout<<AlbaWindowsHelper::getLastFormattedErrorMessage()<<endl;
+        cout<<"Error in AlbaWindowsUserAutomation::setActiveWindow()\n";
+        cout<<AlbaWindowsHelper::getLastFormattedErrorMessage()<<"\n";
     }
 }
-
 void AlbaWindowsUserAutomation::doOperation(AlbaWindowsUserAutomation::InputFunction const& inputFunction) const
 {
     INPUT input;
