@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Common/Randomizer/AlbaRandomizer.hpp>
+#include <Common/Randomizer/AlbaSimpleRandomizer.hpp>
 #include <PidSimulatorConfiguration.hpp>
 
 #include <vector>
-
 namespace alba
 {
 
@@ -54,7 +53,7 @@ private:
     double m_xGridInterval;
     double m_yGridInterval;
     std::vector<double> m_inputSample;
-    AlbaRandomizer m_randomizer;
+    AlbaSimpleRandomizer m_randomizer;
 };
 
 }
