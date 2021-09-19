@@ -11,14 +11,13 @@ TEST_F(ModuleTest, MultiLineFunctionDefinitionTest)
 {
     ofstream testFile(MT_FILE_READER_TEST_FILE);
     ASSERT_TRUE(testFile.is_open());
-    testFile << "int main(int args, void** argv)" << endl;
-    testFile << "{" << endl;
-    testFile << "int x = 5;" << endl;
-    testFile << "}" << endl;
+    testFile << "int main(int args, void** argv)\n";
+    testFile << "{\n";
+    testFile << "int x = 5;\n";
+    testFile << "}\n";
     testFile.close();
 
-    processFile();
-    CPlusPlusFunction& myFunction(m_database.getFunctionReference("main"));
+    processFile();    CPlusPlusFunction& myFunction(m_database.getFunctionReference("main"));
     auto & signatures = myFunction.getFunctionSignaturesReference();
     ASSERT_EQ(signatures.size(), 1);
     auto & parameters = signatures[0].getFunctionParametersReference();
@@ -36,22 +35,21 @@ TEST_F(ModuleTest, FunctionSignaturesAreCheckedTest)
 {
     ofstream testFile(MT_FILE_READER_TEST_FILE);
     ASSERT_TRUE(testFile.is_open());
-    testFile << "int myFunction(double parameter1, double* parameter2)" << endl;
-    testFile << "{" << endl;
-    testFile << "}" << endl;
-    testFile << "int myInteger;" << endl;
-    testFile << "double myDouble;" << endl;
-    testFile << "double* myDoublePointer;" << endl;
-    testFile << "myFunction(myInteger, myInteger);" << endl;
-    testFile << "myFunction(1, myInteger);" << endl;
-    testFile << "myFunction(myInteger, &myDouble);" << endl;
-    testFile << "myFunction(myDouble, &myDouble);" << endl;
-    testFile << "myFunction(1, &myDouble);" << endl;
-    testFile << "myFunction(*myDoublePointer, &myDouble);" << endl;
+    testFile << "int myFunction(double parameter1, double* parameter2)\n";
+    testFile << "{\n";
+    testFile << "}\n";
+    testFile << "int myInteger;\n";
+    testFile << "double myDouble;\n";
+    testFile << "double* myDoublePointer;\n";
+    testFile << "myFunction(myInteger, myInteger);\n";
+    testFile << "myFunction(1, myInteger);\n";
+    testFile << "myFunction(myInteger, &myDouble);\n";
+    testFile << "myFunction(myDouble, &myDouble);\n";
+    testFile << "myFunction(1, &myDouble);\n";
+    testFile << "myFunction(*myDoublePointer, &myDouble);\n";
     testFile.close();
 
-    processFile();
-    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
+    processFile();    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
     auto & signatures = myFunction.getFunctionSignaturesReference();
     ASSERT_EQ(signatures.size(), 1);
     auto & parameters = signatures[0].getFunctionParametersReference();
@@ -78,14 +76,13 @@ TEST_F(ModuleTest, ReturnValuesAreUsed)
 {
     ofstream testFile(MT_FILE_READER_TEST_FILE);
     ASSERT_TRUE(testFile.is_open());
-    testFile << "int myFunction()" << endl;
-    testFile << "{" << endl;
-    testFile << "}" << endl;
-    testFile << "int x = myFunction();" << endl;
+    testFile << "int myFunction()\n";
+    testFile << "{\n";
+    testFile << "}\n";
+    testFile << "int x = myFunction();\n";
     testFile.close();
 
-    processFile();
-    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
+    processFile();    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
     auto & signatures = myFunction.getFunctionSignaturesReference();
     ASSERT_EQ(signatures.size(), 1);
     auto & parameters = signatures[0].getFunctionParametersReference();
@@ -102,15 +99,14 @@ TEST_F(ModuleTest, ComplicatedFunctionTest)
 {
     ofstream testFile(MT_FILE_READER_TEST_FILE);
     ASSERT_TRUE(testFile.is_open());
-    testFile << "int myFunction(int parameter1, int& parameter2, int* parameter3, int** parameter4)" << endl;
-    testFile << "{" << endl;
-    testFile << "}" << endl;
-    testFile << "int myInteger;" << endl;
-    testFile << "int x = myFunction(myInteger, myInteger, &myInteger, &(&myInteger));" << endl;
+    testFile << "int myFunction(int parameter1, int& parameter2, int* parameter3, int** parameter4)\n";
+    testFile << "{\n";
+    testFile << "}\n";
+    testFile << "int myInteger;\n";
+    testFile << "int x = myFunction(myInteger, myInteger, &myInteger, &(&myInteger));\n";
     testFile.close();
 
-    processFile();
-    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
+    processFile();    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
     auto & signatures = myFunction.getFunctionSignaturesReference();
     ASSERT_EQ(signatures.size(), 1);
     auto & parameters = signatures[0].getFunctionParametersReference();
@@ -134,17 +130,16 @@ TEST_F(ModuleTest, FunctionsCanBeOverloadedTest)
 {
     ofstream testFile(MT_FILE_READER_TEST_FILE);
     ASSERT_TRUE(testFile.is_open());
-    testFile << "int myFunction(int parameter1)" << endl;
-    testFile << "{" << endl;
-    testFile << "}" << endl;
-    testFile << "int myFunction(int parameter1, int parameter2)" << endl;
-    testFile << "{" << endl;
-    testFile << "}" << endl;
-    testFile << "int x = myFunction(5);" << endl;
+    testFile << "int myFunction(int parameter1)\n";
+    testFile << "{\n";
+    testFile << "}\n";
+    testFile << "int myFunction(int parameter1, int parameter2)\n";
+    testFile << "{\n";
+    testFile << "}\n";
+    testFile << "int x = myFunction(5);\n";
     testFile.close();
 
-    processFile();
-    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
+    processFile();    CPlusPlusFunction& myFunction(m_database.getFunctionReference("myFunction"));
     auto & signatures = myFunction.getFunctionSignaturesReference();
     ASSERT_EQ(signatures.size(), 2);
     EXPECT_EQ(signatures[0].getFunctionParametersReference().size(), 1);
@@ -162,25 +157,24 @@ TEST_F(ModuleTest, NamesCheckedForFunctionDeclarationAndDefinitionTest)
 {
     ofstream testFile(MT_FILE_READER_TEST_FILE);
     ASSERT_TRUE(testFile.is_open());
-    testFile << "int myFunction1(int thisIsADifferentName);" << endl;
-    testFile << "int myFunction1(int parameter1)" << endl;
-    testFile << "{" << endl;
-    testFile << "}" << endl;
-    testFile << "int myFunction2(int);" << endl;
-    testFile << "int myFunction2(int parameter1)" << endl;
-    testFile << "{" << endl;
-    testFile << "}" << endl;
-    testFile << "int myFunction3(int thisIsADifferentName);" << endl;
-    testFile << "int myFunction3(int)" << endl;
-    testFile << "{" << endl;
-    testFile << "}" << endl;
-    testFile << "int x = myFunction1(5);" << endl;
-    testFile << "int y = myFunction2(5);" << endl;
-    testFile << "int z = myFunction3(5);" << endl;
+    testFile << "int myFunction1(int thisIsADifferentName);\n";
+    testFile << "int myFunction1(int parameter1)\n";
+    testFile << "{\n";
+    testFile << "}\n";
+    testFile << "int myFunction2(int);\n";
+    testFile << "int myFunction2(int parameter1)\n";
+    testFile << "{\n";
+    testFile << "}\n";
+    testFile << "int myFunction3(int thisIsADifferentName);\n";
+    testFile << "int myFunction3(int)\n";
+    testFile << "{\n";
+    testFile << "}\n";
+    testFile << "int x = myFunction1(5);\n";
+    testFile << "int y = myFunction2(5);\n";
+    testFile << "int z = myFunction3(5);\n";
     testFile.close();
 
-    processFile();
-    CPlusPlusFunction& myFunction1(m_database.getFunctionReference("myFunction1"));
+    processFile();    CPlusPlusFunction& myFunction1(m_database.getFunctionReference("myFunction1"));
     ASSERT_EQ(myFunction1.getFunctionSignaturesReference().size(), 1);
     CPlusPlusFunction& myFunction2(m_database.getFunctionReference("myFunction2"));
     ASSERT_EQ(myFunction2.getFunctionSignaturesReference().size(), 1);
