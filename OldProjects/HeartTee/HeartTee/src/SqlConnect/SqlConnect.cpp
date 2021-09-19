@@ -33,11 +33,10 @@ bool SqlConnect::open()
                                                                     DB.c_str(),
                                                                     0,0,0); 
 	if (connection == NULL) {
-		cout << mysql_error(&mysql) << endl;
+		cout << mysql_error(&mysql) << "\n";
  		status = false;
  	}
-	return status;
-}
+	return status;}
 
 bool SqlConnect::write(time_t const time,
 			   int millisecond,

@@ -102,11 +102,10 @@ void SerialPort::readSerial(unsigned char* buf, unsigned size)
     {
         cout<<"["<<std::hex<<(int)buf[i]<<"]";
     }
-    cout<<endl;*/
+    cout<<"\n";*/
 }
 
-int SerialPort::getFd()
-{
+int SerialPort::getFd(){
     return m_fd;
 }
 
