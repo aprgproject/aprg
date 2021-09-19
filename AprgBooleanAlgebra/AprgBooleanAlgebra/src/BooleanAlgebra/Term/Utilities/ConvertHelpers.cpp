@@ -24,11 +24,10 @@ Term convertExpressionToSimplestTerm(Expression const& expression)
     }
     else if(expression.containsOnlyOneTerm())
     {
-        Term const& term = dynamic_cast<Term const&>(expression.getFirstTermConstReference());
+        Term const& term = static_cast<Term const&>(expression.getFirstTermConstReference());
         newTerm = term;
         newTerm.simplify();
-    }
-    return newTerm;
+    }    return newTerm;
 }
 
 }

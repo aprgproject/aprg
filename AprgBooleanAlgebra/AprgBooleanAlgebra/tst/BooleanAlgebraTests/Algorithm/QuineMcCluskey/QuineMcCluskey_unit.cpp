@@ -261,11 +261,10 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFileWorks_HasZeroInDigitForBy
     }
 
     quineMcCluskey.fillComputationalTableWithMintermsWithZeroCommonalityCount();
-    cout << "Initial computation table: " << endl << quineMcCluskey.getComputationTableString() << endl;
+    cout << "Initial computation table: \n" << quineMcCluskey.getComputationTableString() << "\n";
     quineMcCluskey.findAllCombinations();
 
-    ImplicantsForTest finalImplicants(quineMcCluskey.getAllFinalImplicants());
-    EXPECT_EQ("Implicants : [{size: 30 | ' (0)', '1010 (10)', '10100 (20)', '11110 (30)', '-101000 (40, 104, )', '111100 (60)', '1-00110 (70, 102, )',"
+    ImplicantsForTest finalImplicants(quineMcCluskey.getAllFinalImplicants());    EXPECT_EQ("Implicants : [{size: 30 | ' (0)', '1010 (10)', '10100 (20)', '11110 (30)', '-101000 (40, 104, )', '111100 (60)', '1-00110 (70, 102, )',"
               " '-1010000 (80, 208, )', '1011010 (90)', '11001-- (100, 101, 102, 103, )', '110-10- (100, 101, 108, 109, )', '110-1-0 (100, 102, 108, 110, )',"
               " '-1100110 (102, 230, )', '11010-- (104, 105, 106, 107, )', '1101-0- (104, 105, 108, 109, )', '1101--0 (104, 106, 108, 110, )', '11-1000 (104, 120, )',"
               " '10000010 (130)', '1-001100 (140, 204, )', '10010110 (150)', '10100000 (160)', '10101010 (170)', '10110100 (180)', '10111110 (190)',"
@@ -309,13 +308,12 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_LogarithmBase2ForByte)
     qm0.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     qm1.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     qm2.fillComputationalTableWithMintermsWithZeroCommonalityCount();
-    cout << "Initial computation table: " << endl << qm0.getComputationTableString() << endl;
-    cout << "Initial computation table: " << endl << qm1.getComputationTableString() << endl;
-    cout << "Initial computation table: " << endl << qm2.getComputationTableString() << endl;
+    cout << "Initial computation table: \n" << qm0.getComputationTableString() << "\n";
+    cout << "Initial computation table: \n" << qm1.getComputationTableString() << "\n";
+    cout << "Initial computation table: \n" << qm2.getComputationTableString() << "\n";
     qm0.findAllCombinations();
     qm1.findAllCombinations();
     qm2.findAllCombinations();
-
     ImplicantsForTest finalImplicants0(qm0.getAllFinalImplicants());
     ImplicantsForTest finalImplicants1(qm1.getAllFinalImplicants());
     ImplicantsForTest finalImplicants2(qm2.getAllFinalImplicants());
@@ -352,14 +350,13 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_ZeroesStartingFromMsb)
     qm1.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     qm2.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     qm3.fillComputationalTableWithMintermsWithZeroCommonalityCount();
-    cout << "Initial computation table: " << endl << qm0.getComputationTableString() << endl;
-    cout << "Initial computation table: " << endl << qm1.getComputationTableString() << endl;
-    cout << "Initial computation table: " << endl << qm2.getComputationTableString() << endl;
-    cout << "Initial computation table: " << endl << qm3.getComputationTableString() << endl;
+    cout << "Initial computation table: \n" << qm0.getComputationTableString() << "\n";
+    cout << "Initial computation table: \n" << qm1.getComputationTableString() << "\n";
+    cout << "Initial computation table: \n" << qm2.getComputationTableString() << "\n";
+    cout << "Initial computation table: \n" << qm3.getComputationTableString() << "\n";
     qm0.findAllCombinations();
     qm1.findAllCombinations();
-    qm2.findAllCombinations();
-    qm3.findAllCombinations();
+    qm2.findAllCombinations();    qm3.findAllCombinations();
 
     ImplicantsForTest finalImplicants0(qm0.getAllFinalImplicants());
     ImplicantsForTest finalImplicants1(qm1.getAllFinalImplicants());
