@@ -4,11 +4,10 @@
 
 #include <cstdint>
 #include <cstring>
-#include <string>
+#include <ostream>
 #include <vector>
 
-namespace alba
-{
+namespace alba{
 
 class AlbaMemoryBuffer
 {
@@ -29,11 +28,9 @@ public:
     void resize(unsigned int const size, unsigned char const initialValue);
     void* resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(unsigned int const size);
     void addData(void const* sourcePointer, unsigned int const size);
-    std::string getDisplayableString() const;
 
     template <typename ObjectType> void saveObject(ObjectType const& object)
-    {
-        // lets not check if its POD because it works on other cases
+    {        // lets not check if its POD because it works on other cases
         unsigned int objectSize = sizeof(object);
         resize(objectSize);
         void const* sourcePointer = static_cast<void const*>(&object);

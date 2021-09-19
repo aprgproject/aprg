@@ -38,10 +38,10 @@ TEST(ReaderWriterParameterTest, SingleParameterTest)
     writer.writeData(-12345);
     writer.writeData(1.2345);
     writer.writeData<string>("12345");
+    writer.flush();
 
     ifstream readTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(readTestFile.is_open());
-
     AlbaStreamParameterReader reader(readTestFile);
     ASSERT_TRUE(readTestFile.good());
     ASSERT_FALSE(readTestFile.eof());
@@ -60,10 +60,10 @@ TEST(ReaderWriterParameterTest, VectorTest)
     vector<unsigned int> sampleVector{1,2,3,4,5};
     AlbaStreamParameterWriter writer(writeTestFile);
     writer.writeVectorData(sampleVector);
+    writer.flush();
 
     ifstream readTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(readTestFile.is_open());
-
     vector<unsigned int> retrievedVector;
     AlbaStreamParameterReader reader(readTestFile);
     ASSERT_TRUE(readTestFile.good());
@@ -81,10 +81,10 @@ TEST(ReaderWriterParameterTest, MapTest)
     map<unsigned int, string> sampleMap{{1, "one"}, {2, "two"}, {3, "three"}};
     AlbaStreamParameterWriter writer(writeTestFile);
     writer.writeMapData(sampleMap);
+    writer.flush();
 
     ifstream readTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(readTestFile.is_open());
-
     map<unsigned int, string> retrievedmap;
     AlbaStreamParameterReader reader(readTestFile);
     ASSERT_TRUE(readTestFile.good());
