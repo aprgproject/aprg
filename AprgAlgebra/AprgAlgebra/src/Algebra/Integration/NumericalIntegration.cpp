@@ -39,11 +39,10 @@ Term getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(
             sum = sum + (currentY * 2);
         }
     }
-    return lengthOfInterval / 2 / numberOfSamples * sum;
+    return sum * lengthOfInterval / 2 / numberOfSamples;
 }
 
-Term getAnApproximateOfDefiniteIntegralUsingSimpsonRule(
-        Term const& term,
+Term getAnApproximateOfDefiniteIntegralUsingSimpsonRule(        Term const& term,
         DetailsForDefiniteIntegralWithValues const& integralDetails,
         unsigned int const numberOfSamples)
 {
@@ -70,11 +69,10 @@ Term getAnApproximateOfDefiniteIntegralUsingSimpsonRule(
             sum = sum + (currentY * 2);
         }
     }
-    return lengthOfInterval / 3 / numberOfSamples * sum;
+    return sum * lengthOfInterval / 3 / numberOfSamples;
 }
 
-Term getActualTruncationErrorInTrapezoidalRule(
-        Term const& term,
+Term getActualTruncationErrorInTrapezoidalRule(        Term const& term,
         DetailsForDefiniteIntegralWithValues const& integralDetails,
         unsigned int const numberOfSamples)
 {
@@ -104,11 +102,10 @@ Term getAnApproximateOfTruncationErrorInTrapezoidalRuleAt(
     SubstitutionOfVariablesToValues substitution{{integralDetails.variableName, valueToCheckAt}};
     Term termDoublePrimeValue(substitution.performSubstitutionTo(termDoublePrime));
     AlbaNumber lengthOfInterval(integralDetails.higherEnd-integralDetails.lowerEnd);
-    return lengthOfInterval / -12 * (deltaX ^ 2) * termDoublePrimeValue;
+    return termDoublePrimeValue * lengthOfInterval / -12 * (deltaX ^ 2);
 }
 
-Term getAnApproximateOfTruncationErrorInSimpsonRuleAt(
-        Term const& term,
+Term getAnApproximateOfTruncationErrorInSimpsonRuleAt(        Term const& term,
         DetailsForDefiniteIntegralWithValues const& integralDetails,
         AlbaNumber const& valueToCheckAt,
         AlbaNumber const& deltaX)
@@ -118,11 +115,10 @@ Term getAnApproximateOfTruncationErrorInSimpsonRuleAt(
     SubstitutionOfVariablesToValues substitution{{integralDetails.variableName, valueToCheckAt}};
     Term termDoublePrimeValue(substitution.performSubstitutionTo(termDoublePrime));
     AlbaNumber lengthOfInterval(integralDetails.higherEnd-integralDetails.lowerEnd);
-    return lengthOfInterval / -180 * (deltaX ^ 2) * termDoublePrimeValue;
+    return termDoublePrimeValue * lengthOfInterval / -180 * (deltaX ^ 2);
 }
 
-AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(
-        AlbaNumber const& input,
+AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(        AlbaNumber const& input,
         unsigned int const numberOfSamples)
 {
     AlbaNumber result;

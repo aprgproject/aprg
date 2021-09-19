@@ -69,10 +69,9 @@ Equation getEllipticParaboloidEquation()
     Term bSquared(createExpressionIfPossible({b, "^", 2}));
     Term zOverC(createExpressionIfPossible({zMinusZ0, "/", c}));
     Term leftHandSide(createExpressionIfPossible({xSquared, "/", aSquared, "+", ySquared, "/", bSquared}));
-    Term rightHandSide(zOverC);
+    Term const& rightHandSide(zOverC);
     return Equation(leftHandSide, "=", rightHandSide);
 }
-
 Equation getHyperbolicParaboloidEquation()
 {
     Term xMinusX0(createExpressionIfPossible({x, "-", x0}));
@@ -84,10 +83,9 @@ Equation getHyperbolicParaboloidEquation()
     Term bSquared(createExpressionIfPossible({b, "^", 2}));
     Term zOverC(createExpressionIfPossible({zMinusZ0, "/", c}));
     Term leftHandSide(createExpressionIfPossible({ySquared, "/", bSquared, "-", xSquared, "/", aSquared}));
-    Term rightHandSide(zOverC);
+    Term const& rightHandSide(zOverC);
     return Equation(leftHandSide, "=", rightHandSide);
 }
-
 Equations getLineEquations()
 {
     Equations result;
@@ -129,10 +127,9 @@ Equation getSphereEquation()
     Term zSquared(createExpressionIfPossible({zMinusZ0, "^", 2}));
     Term rSquared(createExpressionIfPossible({r, "^", 2}));
     Term leftHandSide(createExpressionIfPossible({xSquared, "+", ySquared, "+", zSquared}));
-    Term rightHandSide(rSquared);
+    Term const& rightHandSide(rSquared);
     return Equation(leftHandSide, "=", rightHandSide);
 }
-
 }
 
 }

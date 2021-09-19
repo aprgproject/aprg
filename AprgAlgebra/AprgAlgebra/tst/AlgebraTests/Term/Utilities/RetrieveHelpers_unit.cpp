@@ -97,11 +97,10 @@ TEST(RetrieveHelpersTest, RetrieveSubExpressionsAndSubFunctionsWorks)
     Function functionObject(
                 "functionName",
                 expesssionTerm,
-                [](AlbaNumber const&  number) -> AlbaNumber
+                [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });
-    Term functionTerm(functionObject);
+    });    Term functionTerm(functionObject);
 
     Terms terms(retrieveSubExpressionsAndSubFunctions(functionTerm));
 
@@ -115,11 +114,10 @@ TEST(RetrieveHelpersTest, RetrieveSubTermsWorks)
     Function functionObject(
                 "functionName",
                 expesssionTerm,
-                [](AlbaNumber const&  number) -> AlbaNumber
+                [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });
-    Term functionTerm(functionObject);
+    });    Term functionTerm(functionObject);
 
     Terms terms(retrieveSubTerms(functionTerm));
 

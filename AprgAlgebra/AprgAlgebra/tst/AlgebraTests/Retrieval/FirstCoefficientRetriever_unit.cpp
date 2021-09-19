@@ -38,11 +38,10 @@ TEST(FirstCoefficientRetrieverTest, RetrieveFromTermWorks)
     Function functionObject(
                 "functionName",
                 Term(createExpressionIfPossible({"x", "^", 2})),
-                [](AlbaNumber const&  number) -> AlbaNumber
+                [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
     });
-
     retriever.retrieveFromTerm(Constant(1.234));
     retriever.retrieveFromTerm(Variable("x"));
     retriever.retrieveFromTerm(Monomial(34, {{"x", 5}, {"y", 6}}));
@@ -104,11 +103,10 @@ TEST(FirstCoefficientRetrieverTest, RetrieveFromFunctionWorks)
     Function functionObject(
                 "functionName",
                 Term(createExpressionIfPossible({4516, "+", Monomial(7895, {{"x", 10}})})),
-                [](AlbaNumber const&  number) -> AlbaNumber
+                [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
     });
-
     retriever.retrieveFromFunction(functionObject);
 
     EXPECT_EQ(AlbaNumber(4516), retriever.getSavedData());

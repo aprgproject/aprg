@@ -42,11 +42,10 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromTermWorks)
     Function functionObject(
                 "functionName",
                 expesssionTerm1,
-                [](AlbaNumber const&  number) -> AlbaNumber
+                [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });
-    Term functionTerm1(functionObject);
+    });    Term functionTerm1(functionObject);
 
     retriever.retrieveFromTerm(Constant(1.234));
     retriever.retrieveFromTerm(Variable("b"));
@@ -123,11 +122,10 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromFunctionWorks)
     Function functionObject(
                 "functionName",
                 Term(expression),
-                [](AlbaNumber const&  number) -> AlbaNumber
+                [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
     });
-
     retriever.retrieveFromFunction(functionObject);
 
     TermSet const& termsSet(retriever.getSavedData());

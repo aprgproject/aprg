@@ -98,11 +98,10 @@ void SimplexSolver::processConstraints(
             inputVariablesRetriever.retrieveFromPolynomial(constraint);
             if(isPolynomialLinear(constraint))
             {
-                EquationOperator equationOperator(simplifiedEquation.getEquationOperator());
+                EquationOperator const& equationOperator(simplifiedEquation.getEquationOperator());
                 bool shouldIncludeConstraint(false);
                 if(equationOperator.isEqual())
-                {
-                    shouldIncludeConstraint=true;
+                {                    shouldIncludeConstraint=true;
                 }
                 else if(equationOperator.isALessThanVariant())
                 {

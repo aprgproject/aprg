@@ -39,11 +39,10 @@ TEST(FunctionsRetrieverTest, RetrieveFromEquationWorks)
     Function functionObject(
                 "functionName",
                 Term(createExpressionIfPossible({"x", "^", "y"})),
-                [](AlbaNumber const&  number) -> AlbaNumber
+                [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });
-    Term leftHandTerm(functionObject);
+    });    Term leftHandTerm(functionObject);
     Term rightHandTerm(1);
     Equation equation(leftHandTerm, "=", rightHandTerm);
 
@@ -76,11 +75,10 @@ TEST(FunctionsRetrieverTest, RetrieveFromTermWorks)
     Function functionObject(
                 "functionName",
                 Term(createExpressionIfPossible({"x", "^", "y"})),
-                [](AlbaNumber const&  number) -> AlbaNumber
+                [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });
-    Expression expression(createExpressionIfPossible({1, "+", functionObject}));
+    });    Expression expression(createExpressionIfPossible({1, "+", functionObject}));
     Term constantTerm(4756);
     Term expressionTerm(expression);
     Term functionTerm(functionObject);
@@ -175,11 +173,10 @@ TEST(FunctionsRetrieverTest, RetrieveFromExpressionWorks)
     Function functionObject(
                 "functionName",
                 Term(createExpressionIfPossible({"x", "^", "y"})),
-                [](AlbaNumber const&  number) -> AlbaNumber
+                [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
-    });
-    Expression expression(createExpressionIfPossible({1, "+", functionObject}));
+    });    Expression expression(createExpressionIfPossible({1, "+", functionObject}));
 
     retriever1.retrieveFromExpression(expression);
     retriever2.retrieveFromExpression(expression);
@@ -206,11 +203,10 @@ TEST(FunctionsRetrieverTest, RetrieveFromFunctionWorks)
     Function functionObject(
                 "functionName",
                 Term(createExpressionIfPossible({"x", "^", "y"})),
-                [](AlbaNumber const&  number) -> AlbaNumber
+                [](AlbaNumber const& number) -> AlbaNumber
     {
         return number;
     });
-
     retriever1.retrieveFromFunction(functionObject);
     retriever2.retrieveFromFunction(functionObject);
 
