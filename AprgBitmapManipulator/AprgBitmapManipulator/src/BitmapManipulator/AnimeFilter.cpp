@@ -90,10 +90,9 @@ void doStuffsAfterSteps(
         string const& description)
 {
     localTimer.stopTimer();
-    cout << localTimer.getElapsedTimeDisplayableString()  << ": " << description<< endl;
+    cout << localTimer.getDifferenceAsAlbaDateTime()  << ": " << description << "\n";
     localTimer.resetTimer();
 }
-
 void doStuffsAfterSteps(
         AlbaLocalTimer & localTimer,
         BitmapFilters & bitmapFilters,
@@ -104,10 +103,9 @@ void doStuffsAfterSteps(
     static unsigned int step=1;
     localTimer.stopTimer();
     bitmapFilters.saveSnippetIntoFileWithFullFilePath(snippet, getNewFilePath(inputFilePath, step++, description));
-    cout << localTimer.getElapsedTimeDisplayableString()  << ": " << description<< endl;
+    cout << localTimer.getDifferenceAsAlbaDateTime()  << ": " << description << "\n";
     localTimer.resetTimer();
 }
-
 string getNewFilePath(
         string const& inputFilePath,
         unsigned int const step,
