@@ -37,6 +37,7 @@ public:
   }
   // ...
 };
+
 /*
  * Proxy
  * maintains a reference that lets the proxy access the real subject

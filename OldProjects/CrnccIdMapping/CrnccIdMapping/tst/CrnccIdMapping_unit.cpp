@@ -2,6 +2,7 @@
 #include <CrnccIdMapping.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba
@@ -22,12 +23,14 @@ TEST(SampleTest, DISABLED_PerformanceAccessTestWithRandomValues)
         setCrnccIdMapping(crnccId, nbccId);
     }
 
+
     for(unsigned int iteration=0; iteration<accessIterations; iteration++)
     {
         TCRNCCommunicationContextId crnccIdAccess = crnccIds[randomizer.getRandomIntegerInUniformDistribution(0, crnccIds.size()-1)];
         TNbccId nbccIdAccess = getNbccIdFromCrnccId(crnccIdAccess);
     }
 }
+
 TEST(SampleTest, DISABLED_PerformanceAddTestWithRandomValues)
 {
     constexpr unsigned int initialSize=1000000;
@@ -40,6 +43,7 @@ TEST(SampleTest, DISABLED_PerformanceAddTestWithRandomValues)
         TNbccId nbccId = randomizer.getRandomIntegerInUniformDistribution(1,2500);
         crnccIds.emplace_back(crnccId);
         setCrnccIdMapping(crnccId, nbccId);
-    }}
+    }
+}
 
 }

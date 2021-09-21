@@ -14,7 +14,8 @@ TEST(SnapshotStatisticsTest, DISABLED_SnapshotFilesRel2)
     cout<<PATH_OF_7Z_TEMP_FILE<<"\n";
 
     SnapshotStatistics statistics;
-    statistics.fetchFileSizesForSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 1\Snapshot1_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1810.zip)");    statistics.fetchFileSizesForSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 2\Snapshot2_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1841.zip)");
+    statistics.fetchFileSizesForSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 1\Snapshot1_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1810.zip)");
+    statistics.fetchFileSizesForSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 2\Snapshot2_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1841.zip)");
     statistics.fetchFileSizesForSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 3\Snapshot3_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1911.zip)");
     statistics.fetchFileSizesForSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 4\Snapshot4_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-1941.zip)");
     statistics.fetchFileSizesForSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_2_RESULTS\SNAPSHOT 5\Snapshot5_WBTS-399_WBTS00_0000_3212_00_WBTS399_20181107-2011.zip)");
@@ -100,7 +101,8 @@ TEST(SnapshotStatisticsTest, DISABLED_SnapshotFilesRel3)
     cout<<PATH_OF_7Z_TEMP_FILE<<"\n";
 
     SnapshotStatistics statistics;
-    statistics.processSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot1_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");    statistics.processSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot2_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
+    statistics.processSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot1_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
+    statistics.processSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot2_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
     statistics.processSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot3_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
     statistics.processSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot4_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
     statistics.processSnapshot(R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot5_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");

@@ -136,7 +136,8 @@ void printChessBitValuesWithBlackUpWhiteDown(
     cout << "Black king:   [" << retriever.getChessCellBitValue(inputSnippet, 4U, 0U).to_string() << "]\n";
 }
 
-unsigned int getLabelBasedOnSetOfPieces(SetOfPieces const& setOfPieces){
+unsigned int getLabelBasedOnSetOfPieces(SetOfPieces const& setOfPieces)
+{
     unsigned int result(0U);
     for(PieceColorAndType const piece : setOfPieces)
     {

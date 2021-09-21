@@ -50,7 +50,8 @@ public:
 
     void addImplicant(ImplicantWithMinterm const& implicant)
     {
-        m_implicantsData.emplace(implicant);    }
+        m_implicantsData.emplace(implicant);
+    }
 
     void addFinalImplicant(ImplicantWithMinterm const& implicant)
     {

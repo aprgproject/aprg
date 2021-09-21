@@ -53,7 +53,8 @@ void LogStatisticsAnalyzer::saveLogDetailsToCsv(ofstream & outputCsvFileStream)
     outputCsvFileStream << "Log,Count,Percentage" <<"\n";
     map<string, unsigned int> dataToDisplay;
     for (LogDetails const& logDetails : m_logDetailsToCheck)
-    {        string stringInCsv;
+    {
+        string stringInCsv;
         stringHelper::strings const& logStrings(logDetails.logStrings);
         if(!logStrings.empty())
         {
@@ -76,7 +77,8 @@ void LogStatisticsAnalyzer::saveLogDetailsToCsv(ofstream & outputCsvFileStream)
     outputCsvFileStream << "Total Lines," << m_totalLines << "," << ((double)m_totalLines)/m_totalLines*100 <<"\n";
 }
 
-void LogStatisticsAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSortedLog){
+void LogStatisticsAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSortedLog)
+{
     m_btsLogPathHandler.input(pathOfBtsSortedLog);
     ifstream inputLogFileStream(m_btsLogPathHandler.getFullPath());
 
@@ -95,7 +97,8 @@ void LogStatisticsAnalyzer::analyzeLog(std::string const& lineInLogs)
         cout << "m_totalLines: [" << m_totalLines << "]" <<"\n";
     }
     m_totalLines++;
-    bool areLogStringFoundInTheLine=false;    for (LogDetails & logDetails : m_logDetailsToCheck)
+    bool areLogStringFoundInTheLine=false;
+    for (LogDetails & logDetails : m_logDetailsToCheck)
     {
         bool areLogStringFound=false;
         bool areLogStringFoundInAllLogDetails=true;
@@ -120,7 +123,8 @@ void LogStatisticsAnalyzer::analyzeLog(std::string const& lineInLogs)
         cout << "line not processed: [" << lineInLogs << "]" <<"\n";
     }
     else
-    {        m_totalLinesFound++;
+    {
+        m_totalLinesFound++;
     }
 }
 

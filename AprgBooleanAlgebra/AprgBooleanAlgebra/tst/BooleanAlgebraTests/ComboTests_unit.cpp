@@ -8,7 +8,8 @@ using namespace alba::booleanAlgebra::Simplification;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace booleanAlgebra
 {
@@ -23,6 +24,7 @@ TEST(ComboTest, Example1)
     string stringToExpect("(x1'&x2'&x3&x4)");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
+
 TEST(ComboTest, Example2)
 {
     Term termToTest(buildTermIfPossible("(x1|x2)&(~x1|~x2)"));
@@ -33,6 +35,7 @@ TEST(ComboTest, Example2)
     string stringToExpect("((x1&x2')|(x1'&x2))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
+
 }
 
 }

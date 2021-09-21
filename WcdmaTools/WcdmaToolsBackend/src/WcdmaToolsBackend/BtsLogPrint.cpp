@@ -403,6 +403,7 @@ ostream& operator<<(ostream & out, BtsLogPrint const& btsLogPrint)
     writer.flush();
     return out;
 }
+
 istream& operator>>(istream & in, BtsLogPrint& btsLogPrint)
 {
     AlbaStreamParameterReader reader(in);

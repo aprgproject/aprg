@@ -243,6 +243,7 @@ PieceColorAndType ChessPieceRetriever::getBestPieceFromChessCellBitValue(
     }*/
     return result;
 }
+
 ChessPieceRetriever::PieceColorAndTypes ChessPieceRetriever::getBestFitPiecesFromChessCellBitValue(
         uint64_t const chessCellBitValue) const
 {

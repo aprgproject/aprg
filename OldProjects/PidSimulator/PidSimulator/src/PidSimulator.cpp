@@ -155,6 +155,7 @@ void PidSimulator::generateRandomForInput()
         }
     }
 }
+
 double PidSimulator::computeFromMachsModel(double const inputDemandSample, double const psuedoMaxTxPower, double & adjustedDemand)
 {
     double result(0);
@@ -226,7 +227,8 @@ void PidSimulator::calculateAndGenerateOutputImage()
         cout << "offset:[" << m_xOffsetToGraph << ", " << m_yOffsetToGraph << "] magnification:[" << m_xMagnificationToGraph << ", " << m_yMagnificationToGraph << "]\n";
 
         AprgGraph graph(graphOutputFile.getFullPath(), BitmapXY(m_xOffsetToGraph, m_yOffsetToGraph), BitmapDoubleXY(m_xMagnificationToGraph, m_yMagnificationToGraph));
-        graph.drawGrid(BitmapDoubleXY(m_xGridInterval, m_yGridInterval));        graph.drawContinuousPoints(targetSeries, 0x00444444);
+        graph.drawGrid(BitmapDoubleXY(m_xGridInterval, m_yGridInterval));
+        graph.drawContinuousPoints(targetSeries, 0x00444444);
         graph.drawContinuousPoints(inputDemandSeries, 0x000000FF);
         graph.drawContinuousPoints(pseudoMaxTxPowerSeries, 0x0000FF00);
         graph.drawContinuousPoints(tcomReceivedPowerFromMachsSeries, 0x00FF0000);
@@ -239,6 +241,7 @@ void PidSimulator::calculateAndGenerateOutputImage()
         cout << "The default bitmap file was not found. The default file location:  [" << defaultFile.getFullPath() << "]\n";
     }
 }
+
 void PidSimulator::updateAllMaxWithBuffer(int& xLeftMax, int& xRightMax, int& yBottomMax, int& yTopMax)
 {
     updateMaxWithBuffer(xLeftMax, xRightMax);

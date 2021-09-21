@@ -90,7 +90,8 @@ void TupcLom::handleTimerEvent(Timer const& timer)
     cout<<"Handle Timer, timerType: "<<convertToString(timer.getType())<<" timerId:"<<(int)timer.getId()<<"\n";
 }
 
-void TupcLom::handleOtherEvent(OtherEvent const& otherEvent){
+void TupcLom::handleOtherEvent(OtherEvent const& otherEvent)
+{
    switch(otherEvent.getType())
    {
    case OtherEventType::MainProcessStartup:
@@ -101,6 +102,7 @@ void TupcLom::handleOtherEvent(OtherEvent const& otherEvent){
        break;
    }
 }
+
 
 /*
     //TUP_TbmConfigurationCmd //new message for TBM?

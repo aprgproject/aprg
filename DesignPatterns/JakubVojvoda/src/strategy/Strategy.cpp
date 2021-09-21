@@ -37,6 +37,7 @@ public:
   }
   // ...
 };
+
 class ConcreteStrategyB : public Strategy
 {
 public:
@@ -48,6 +49,7 @@ public:
   }
   // ...
 };
+
 class ConcreteStrategyC : public Strategy
 {
 public:
@@ -59,6 +61,7 @@ public:
   }
   // ...
 };
+
 /*
  * Context
  * maintains a reference to a Strategy object

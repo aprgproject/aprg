@@ -63,7 +63,8 @@ public:
       std::cout << "Cannot be handled by Handler 1\n";
       Handler::handleRequest();
     }
-    // ...  }
+    // ...
+  }
   // ...
 };
 
@@ -89,7 +90,8 @@ public:
       std::cout << "Cannot be handled by Handler 2\n";
       Handler::handleRequest();
     }
-    // ...  }
+    // ...
+  }
   
   // ...
 };

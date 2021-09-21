@@ -39,6 +39,7 @@ public:
   }
   // ...
 };
+
 /*
  * Adapter
  * implements the Target interface and lets the Adaptee respond

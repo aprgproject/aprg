@@ -24,6 +24,7 @@ public:
   }
   // ...
 };
+
 /*
  * Command
  * declares an interface for all commands

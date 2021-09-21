@@ -54,6 +54,7 @@ public:
     std::cout << "Message '" << msg << "' received by Colleague " << id << "\n";
   }
 };
+
 /*
  * Mediator
  * defines an interface for communicating with Colleague objects
@@ -112,6 +113,7 @@ void ConcreteColleague::send( std::string msg )
   std::cout << "Message '"<< msg << "' sent by Colleague " << id << "\n";
   mediator->distribute( this, msg );
 }
+
 
 int main()
 {

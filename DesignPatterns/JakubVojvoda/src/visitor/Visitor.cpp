@@ -51,6 +51,7 @@ public:
   }
   // ...
 };
+
 class ConcreteVisitor2 : public Visitor
 {
 public:
@@ -67,6 +68,7 @@ public:
   }
   // ...
 };
+
 /*
  * Element
  * defines an accept operation that takes a visitor as an argument

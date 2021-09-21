@@ -121,7 +121,8 @@ public:
 
     std::string getEquivalentString() const
     {
-        return getEquivalentString(getMaxLengthOfEquivalentString());    }
+        return getEquivalentString(getMaxLengthOfEquivalentString());
+    }
 
     std::string getEquivalentString(unsigned int const length) const
     {

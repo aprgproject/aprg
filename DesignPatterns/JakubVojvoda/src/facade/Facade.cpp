@@ -23,7 +23,8 @@ public:
     std::cout << "Subsystem A method\n";
     // ...
   }
-  // ...};
+  // ...
+};
 
 class SubsystemB
 {
@@ -33,7 +34,8 @@ public:
     std::cout << "Subsystem B method\n";
     // ...
   }
-  // ...};
+  // ...
+};
 
 class SubsystemC
 {
@@ -43,7 +45,8 @@ public:
     std::cout << "Subsystem C method\n";
     // ...
   }
-  // ...};
+  // ...
+};
 
 /*
  * Facade

@@ -8,6 +8,7 @@ using namespace alba::stringHelper;
 
 namespace alba
 {
+
 namespace booleanAlgebra
 {
 
@@ -21,7 +22,8 @@ TEST(TwoSatisfiabilityUsingGraphsTest, ExampleWithCompleteSolution)
     EXPECT_EQ("(x1'&x2'&x3&x4)", convertToString(twoSat.getSolution()));
 }
 
-TEST(TwoSatisfiabilityUsingGraphsTest, ExampleWithIncompleteSolution){
+TEST(TwoSatisfiabilityUsingGraphsTest, ExampleWithIncompleteSolution)
+{
     Term termToTest(buildTermIfPossible("(x1|x2)&(~x1|~x2)"));
     SatisfiabilityTerms satTermsToTest(getSatisfiabilityTerms(termToTest));
     TwoSatisfiabilityUsingGraphs twoSat(satTermsToTest);
@@ -30,7 +32,8 @@ TEST(TwoSatisfiabilityUsingGraphsTest, ExampleWithIncompleteSolution){
     EXPECT_EQ("(x1&x2')", convertToString(twoSat.getSolution()));
 }
 
-TEST(TwoSatisfiabilityUsingGraphsTest, ExampleWithNoSolution){
+TEST(TwoSatisfiabilityUsingGraphsTest, ExampleWithNoSolution)
+{
     Term termToTest(buildTermIfPossible("(x1|x2)^(x1|~x2)^(~x1|x3)^(~x1|~x3)"));
     SatisfiabilityTerms satTermsToTest(getSatisfiabilityTerms(termToTest));
     TwoSatisfiabilityUsingGraphs twoSat(satTermsToTest);

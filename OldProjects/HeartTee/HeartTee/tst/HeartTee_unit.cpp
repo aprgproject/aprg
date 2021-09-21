@@ -28,7 +28,8 @@ TEST(SampleTest, DISABLED_SampleTest1)
         cout<<"\n";
         usleep(1000);
     }
-}*/
+}
+*/
 TEST(SampleTest, ProcessTest)
 {
     HeartTee heartTee;

@@ -40,6 +40,7 @@ public:
   }
   // ...
 };
+
 /*
  * Decorator
  * maintains a reference to a Component object and defines an interface
@@ -79,6 +80,7 @@ public:
   }
   // ...
 };
+
 class ConcreteDecoratorB : public Decorator
 {
 public:
@@ -91,6 +93,7 @@ public:
   }
   // ...
 };
+
 
 int main()
 {

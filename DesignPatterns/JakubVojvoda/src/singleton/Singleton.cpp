@@ -41,6 +41,7 @@ public:
     // ...
   }
   // ...
+
 private:
   Singleton() {}
   static Singleton *instance;

@@ -39,6 +39,7 @@ public:
   }
   // ...
 };
+
 class ConcreteStateB : public State
 {
 public:
@@ -50,6 +51,7 @@ public:
   }
   // ...
 };
+
 /*
  * Context
  * defines the interface of interest to clients

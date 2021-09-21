@@ -8,7 +8,8 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace booleanAlgebra
 {
@@ -378,7 +379,8 @@ TEST(TermTest, GetTermTypeWorks)
 
 TEST(TermTest, GetDebugStringWorks)
 {
-    Term term1;    Term term2(false);
+    Term term1;
+    Term term2(false);
     Term term3(VariableTerm("x"));
     Term term4(Operator("&"));
     Term term5(createExpressionIfPossible({true, "&", "x"}));

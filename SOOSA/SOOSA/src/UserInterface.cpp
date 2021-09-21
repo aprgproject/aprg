@@ -38,7 +38,8 @@ void UserInterface::askUserForMainDetails()
     cout <<"Enter minimum satisfactory score (inclusive):\n";
     unsigned int minimumSatisfactoryScore(m_userInterface.getNumberFromInput<unsigned int>());
 
-    m_savedConfiguration.setMainParameters(area, period, discharge, minimumSatisfactoryScore);}
+    m_savedConfiguration.setMainParameters(area, period, discharge, minimumSatisfactoryScore);
+}
 
 void UserInterface::askUserForFormDetails()
 {
@@ -68,6 +69,7 @@ string UserInterface::askUserForPathOfFormDetailToRead(string const& formDetails
 
     return choices[chosenChoice];
 }
+
 void UserInterface::saveFormDetailsFromFormDetailPath(string const& formDetailsFilePath)
 {
     ifstream formDetailsStream(formDetailsFilePath);

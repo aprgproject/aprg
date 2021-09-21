@@ -194,6 +194,7 @@ void MapAnalyzer::printResult() const
              << "]\n";
     }
 }
+
 double MapAnalyzer::getPotentialZenyFromMonster(
         Monster const& monster) const
 {
@@ -219,14 +220,16 @@ void MapAnalyzer::printPotentialZenyFromMonster(
     Monster monster(m_ragnarokOnline.getMonster(monsterName));
     for(NameAndRate const& dropWithRate : monster.dropsWithRates)
     {
-        if(isDropRateAcceptable(dropWithRate.rate))        {
+        if(isDropRateAcceptable(dropWithRate.rate))
+        {
             Item item(m_ragnarokOnline.getItem(dropWithRate.name));
             string fixedItemName(m_ragnarokOnline.getFixedItemName(item));
             double bestPrice(getBestPrice(item));
             double itemPotentialZeny = bestPrice * getTalonRoDropRate(dropWithRate.rate) / 100;
             cout << "Item name: [" << fixedItemName
                  << "] Item potential zeny: [" << itemPotentialZeny
-                 << "] Talon RO drop rate: [" << getTalonRoDropRate(dropWithRate.rate)                 << "] Best price: [" << bestPrice
+                 << "] Talon RO drop rate: [" << getTalonRoDropRate(dropWithRate.rate)
+                 << "] Best price: [" << bestPrice
                  << "] NPC price: [" << item.sellingPrice
                  << "] TalonRo buying price: [" << m_ragnarokOnline.getTalonRoBuyingPrice(fixedItemName)
                  << "] TalonRo selling price: [" << m_ragnarokOnline.getTalonRoSellingPrice(fixedItemName)
@@ -236,7 +239,8 @@ void MapAnalyzer::printPotentialZenyFromMonster(
     cout << "\n";
 }
 
-double MapAnalyzer::getMultiplierForExperience(        string const& mapName)
+double MapAnalyzer::getMultiplierForExperience(
+        string const& mapName)
 {
     double multiplier(1);
     if(isStringFoundInsideTheOtherStringCaseSensitive(mapName, "xmas_")

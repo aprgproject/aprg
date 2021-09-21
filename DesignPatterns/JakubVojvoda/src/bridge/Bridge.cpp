@@ -38,6 +38,7 @@ public:
   }
   // ...
 };
+
 class ConcreteImplementorB : public Implementor
 {
 public:
@@ -49,6 +50,7 @@ public:
   }
   // ...
 };
+
 /*
  * Abstraction
  * defines the abstraction's interface

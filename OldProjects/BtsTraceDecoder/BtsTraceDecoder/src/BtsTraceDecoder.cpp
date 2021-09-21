@@ -44,7 +44,8 @@ void BtsTraceDecoder::processInputTraceFile(std::string const& inputTraceFilePat
                      << "]\n";
             }
         }
-    }}
+    }
+}
 
 std::string BtsTraceDecoder::getNearestLowerSymbol(int const address, int const offset)
 {
@@ -54,7 +55,8 @@ std::string BtsTraceDecoder::getNearestLowerSymbol(int const address, int const 
         int addressWithOffset(address+offset);
         BtsTraceDecoder::SymbolMapType::iterator symbolIterator = m_symbolMap.lower_bound(addressWithOffset);
         if(static_cast<int>(symbolIterator->first) <= addressWithOffset)
-        {            symbol = symbolIterator->second;
+        {
+            symbol = symbolIterator->second;
         }
         else
         {
@@ -63,7 +65,8 @@ std::string BtsTraceDecoder::getNearestLowerSymbol(int const address, int const 
                 --symbolIterator;
                 symbol = symbolIterator->second;
             }
-        }    }
+        }
+    }
     return symbol;
 }
 
@@ -75,7 +78,8 @@ void BtsTraceDecoder::saveSymbolTable(std::string const& symbolTableFilePath, Sy
         cout<<"Symbol table file is opened\n";
         AlbaFileReader symbolTableFileReader(symbolTableFileStream);
         while(symbolTableFileReader.isNotFinished())
-        {            string lineInFile(symbolTableFileReader.getLineAndIgnoreWhiteSpaces());
+        {
+            string lineInFile(symbolTableFileReader.getLineAndIgnoreWhiteSpaces());
             saveLineInSymbolMapIfValid(getAddressFromLineInFile(lineInFile, filetype), lineInFile);
         }
     }
@@ -84,6 +88,7 @@ void BtsTraceDecoder::saveSymbolTable(std::string const& symbolTableFilePath, Sy
         cout<<"Symbol table file is not opened\n";
     }
 }
+
 int BtsTraceDecoder::getAddressFromLineInFile(string const& lineInFile, SymbolTableFileType const filetype) const
 {
     int address = 0;

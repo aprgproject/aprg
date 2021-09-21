@@ -94,7 +94,8 @@ public:
     std::cout << "Leaf "<< id <<" operation\n";
   }
 
-private:  int id;
+private:
+  int id;
 };
 
 

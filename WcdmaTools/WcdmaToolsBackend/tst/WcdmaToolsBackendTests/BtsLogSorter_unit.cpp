@@ -86,6 +86,7 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotTest_PrintsAreOrderedBasedOnBtsTime)
         cout<<fileReader.getLineAndIgnoreWhiteSpaces()<<"\n";
         lines++;
     }
+
     EXPECT_EQ(5, lines);
 }
 
@@ -107,6 +108,7 @@ TEST_F(BtsLogSorterTest, SyslogsAndSnapshotTest_PrintsAreFiltered)
         cout<<fileReader.getLineAndIgnoreWhiteSpaces()<<"\n";
         lines++;
     }
+
     EXPECT_EQ(4, lines);
 }
 

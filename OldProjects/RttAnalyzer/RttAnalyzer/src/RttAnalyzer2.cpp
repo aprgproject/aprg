@@ -50,7 +50,8 @@ void RttAnalyzer2::saveTitle2()
     m_outputLogStream  << "fileName,dateTime,maxPos,refPos,difference\n";
 }
 
-void RttAnalyzer2::processFile2(string const& file){
+void RttAnalyzer2::processFile2(string const& file)
+{
     AlbaLocalPathHandler pathHandler(file);
     ifstream logStream(pathHandler.getFullPath());
 
@@ -81,6 +82,7 @@ void RttAnalyzer2::processLine2(string const& fileName, string const& line)
         m_outputLogStream << fileName <<"," << dateTime << ","<< maxPos << "," << refPos << "," << difference << "\n";
     }
 }
+
 void RttAnalyzer2::processFile3(string const& file)
 {
     AlbaLocalPathHandler pathHandler(file);
@@ -92,7 +94,8 @@ void RttAnalyzer2::processFile3(string const& file)
     outputLogStream  << "peak_pos_cx8\n";
 
     if(logStream.is_open())
-    {        AlbaFileReader logFileReader(logStream);
+    {
+        AlbaFileReader logFileReader(logStream);
 
         while(logFileReader.isNotFinished())
         {

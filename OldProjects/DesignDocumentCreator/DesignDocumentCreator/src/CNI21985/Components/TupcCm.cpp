@@ -157,7 +157,8 @@ void TupcCm::handleTimerEvent(Timer const& timer)
     cout<<"Handle Timer, timerType: "<<convertToString(timer.getType())<<" timerId:"<<(int)timer.getId()<<"\n";
 }
 
-void TupcCm::handleOtherEvent(OtherEvent const& otherEvent){
+void TupcCm::handleOtherEvent(OtherEvent const& otherEvent)
+{
    switch(otherEvent.getType())
    {
    case OtherEventType::MainProcessStartup:
@@ -171,4 +172,5 @@ void TupcCm::handleOtherEvent(OtherEvent const& otherEvent){
        break;
    }
 }
+
 }

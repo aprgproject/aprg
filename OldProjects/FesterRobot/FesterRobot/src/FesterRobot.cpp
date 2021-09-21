@@ -41,7 +41,8 @@ void FesterRobot::run()
                 m_outputStream<<"FREQUENCIES BIT: ["<<std::hex<<filterBitInteger<<std::dec<<"]\n";
                 runFesterFunctionInMatlab();
                 if(!m_retryCurrentFrequencies)
-                {                    filterBitInteger--;
+                {
+                    filterBitInteger--;
                 }
             }
             break;
@@ -139,6 +140,7 @@ bool FesterRobot::isRunningFinishedInClipboardData(string const& clipboardData) 
     cout<<"frequenciesStringForExcel: ["<<frequenciesStringForExcel<<"]\n";
     return freqBandStringInLog == frequenciesStringForExcel;
 }
+
 string FesterRobot::getClipboardFormattedData() const
 {
     string clipboardData(m_userAutomation.getStringFromClipboard());
@@ -152,7 +154,8 @@ void FesterRobot::saveDataToOutputFile(string const& clipboardData)
     m_outputStream<<clipboardData<<"\n";
 }
 
-string FesterRobot::getFrequenciesStringForExcel() const{
+string FesterRobot::getFrequenciesStringForExcel() const
+{
     stringstream frequencyStream;
     for(int frequency : m_frequencies)
     {

@@ -20,6 +20,7 @@ ostream& operator<<(ostream & out, ConstantDetails const& constantDetails)
     writer.flush();
     return out;
 }
+
 istream& operator>>(istream & in, ConstantDetails& constantDetails)
 {
     AlbaStreamParameterReader reader(in);
@@ -42,6 +43,7 @@ ostream& operator<<(ostream & out, MessageDetails const& messageDetails)
     writer.flush();
     return out;
 }
+
 istream& operator>>(istream & in, MessageDetails& messageDetails)
 {
     AlbaStreamParameterReader reader(in);
@@ -62,6 +64,7 @@ ostream& operator<<(ostream & out, EnumParameterDetails const& enumParameterDeta
     writer.flush();
     return out;
 }
+
 istream& operator>>(istream & in, EnumParameterDetails& enumParameterDetails)
 {
     AlbaStreamParameterReader reader(in);
@@ -82,6 +85,7 @@ ostream& operator<<(ostream & out, EnumDetails const& enumDetails)
     writer.flush();
     return out;
 }
+
 istream& operator>>(istream & in, EnumDetails& enumDetails)
 {
     AlbaStreamParameterReader reader(in);
@@ -104,6 +108,7 @@ ostream& operator<<(ostream & out, ParameterDetails const& parameterDetails)
     writer.flush();
     return out;
 }
+
 istream& operator>>(istream & in, ParameterDetails& parameterDetails)
 {
     AlbaStreamParameterReader reader(in);
@@ -128,6 +133,7 @@ ostream& operator<<(ostream & out, StructureDetails const& structureDetails)
     writer.flush();
     return out;
 }
+
 istream& operator>>(istream & in, StructureDetails& structureDetails)
 {
     AlbaStreamParameterReader reader(in);
@@ -151,6 +157,7 @@ ostream& operator<<(ostream & out, UnionDetails const& unionDetails)
     writer.flush();
     return out;
 }
+
 istream& operator>>(istream & in, UnionDetails& unionDetails)
 {
     AlbaStreamParameterReader reader(in);
@@ -174,6 +181,7 @@ ostream& operator<<(ostream & out, TypedefDetails const& typedefDetails)
     writer.flush();
     return out;
 }
+
 istream& operator>>(istream & in, TypedefDetails& typedefDetails)
 {
     AlbaStreamParameterReader reader(in);

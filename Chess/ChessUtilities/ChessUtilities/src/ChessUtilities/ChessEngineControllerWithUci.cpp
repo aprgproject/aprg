@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <sstream>
+
 using namespace alba::stringHelper;
 using namespace std;
 
@@ -102,7 +103,8 @@ bool ChessEngineControllerWithUci::waitTillReadyAndReturnIfResetWasPerformed()
     bool shouldReset(false);
     unsigned int count(0U);
     while(m_waitingForReadyOkay)
-    {        if(count > 10) // 1 second elapsed so engine is stuck, lets reset
+    {
+        if(count > 10) // 1 second elapsed so engine is stuck, lets reset
         {
             shouldReset = true;
             break;
@@ -111,7 +113,8 @@ bool ChessEngineControllerWithUci::waitTillReadyAndReturnIfResetWasPerformed()
         sleepFor(100);
     }
 
-    if(shouldReset)    {
+    if(shouldReset)
+    {
         log("Engine is stuck, resetting engine");
         resetEngine();
     }
@@ -182,6 +185,7 @@ void ChessEngineControllerWithUci::changeState(
     }
     m_state = state;
 }
+
 void ChessEngineControllerWithUci::proceedToIdleStateAndProcessPendingCommands()
 {
     changeState(ControllerState::Idle);
@@ -202,6 +206,7 @@ void ChessEngineControllerWithUci::log(string const& logString)
         m_logFileStreamOptional.value() << logString << "\n";
     }
 }
+
 void ChessEngineControllerWithUci::forceSend(
         string const& commandString)
 {

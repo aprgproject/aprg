@@ -20,7 +20,8 @@ void Component1::handleMessage1(GenericMessage const& genericMessage)
     cout<<"handleMessage1()\n";
     Environment & environment(Environment::getInstance());
 
-    SpecificStaticMessage<MessageName::MESSAGE_1> message(convertGenericToSpecificStatic<MessageName::MESSAGE_1>(genericMessage));    Message1Structure& payload(message.getStaticPayloadReference());
+    SpecificStaticMessage<MessageName::MESSAGE_1> message(convertGenericToSpecificStatic<MessageName::MESSAGE_1>(genericMessage));
+    Message1Structure& payload(message.getStaticPayloadReference());
     logNoteOnPreviousMessage("Message 1 description.");
     logNoteOnComponent("Component1 will do something.");
 }
@@ -38,6 +39,7 @@ void Component1::handleMessageEvent(GenericMessage const& genericMessage)
         break;
     }
 }
+
 void Component1::handleTimerEvent(Timer const& timer)
 {
     switch(timer.getType())
@@ -50,6 +52,7 @@ void Component1::handleTimerEvent(Timer const& timer)
         break;
     }
 }
+
 void Component1::handleOtherEvent(OtherEvent const& otherEvent)
 {
     switch(otherEvent.getType())
@@ -62,4 +65,5 @@ void Component1::handleOtherEvent(OtherEvent const& otherEvent)
         break;
     }
 }
+
 }

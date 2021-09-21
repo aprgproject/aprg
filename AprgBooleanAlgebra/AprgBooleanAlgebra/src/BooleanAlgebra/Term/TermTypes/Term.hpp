@@ -53,7 +53,8 @@ public:
     bool getBooleanValue() const;
     std::string getDebugString() const;
 
-    Constant & getConstantReference();    VariableTerm & getVariableTermReference();
+    Constant & getConstantReference();
+    VariableTerm & getVariableTermReference();
     Operator & getOperatorReference();
     Expression & getExpressionReference();
 

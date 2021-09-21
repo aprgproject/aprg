@@ -7,7 +7,8 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace booleanAlgebra
 {
@@ -294,6 +295,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByWithOuterOrAndInnerAnd)
     string stringToExpect("((x&z)|(x'&y))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
+
 TEST(SimplificationOfExpressionTest, SimplifyWorksWithOuterAndAndInnerOr)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -313,6 +315,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksWithOuterAndAndInnerOr)
     string stringToExpect("((x|z)&(x'|y))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
+
 TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOrOperation_WithDefaultConfiguration)
 {
     Expression subExpression1(createExpressionIfPossible({"a", "&", "b"}));
@@ -328,6 +331,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOr
     string stringToExpect("((a&b&d&f)|(c&d&f)|(e&f))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
+
 TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOrOperation_WithOuterOrAndInnerAnd)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -349,6 +353,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOr
     string stringToExpect("((a&b&d&f)|(c&d&f)|(e&f))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
+
 TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOrOperation_WithOuterAndAndInnerOr)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -370,6 +375,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksByAlternatingAndOperationAndOr
     string stringToExpect("(f&(a|c|e)&(b|c|e)&(d|e))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
+
 TEST(SimplificationOfExpressionTest, SimplifyWorksByRemovingNeededTerms_WithOuterOrAndInnerAnd)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -482,6 +488,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnConsensusTheoremPattern1)
     string stringToExpect("((x&y)|(x'&z))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
+
 TEST(SimplificationOfExpressionTest, SimplifyWorksOnConsensusTheoremPattern2)
 {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -502,6 +509,7 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnConsensusTheoremPattern2)
     string stringToExpect("((x|y)&(x'|z))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
+
 }
 
 }

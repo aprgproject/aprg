@@ -241,7 +241,8 @@ private:
         out << static_cast<BaseClass const&>(graph) << "Flow edges: {";
         for(auto const& edgeAndDetailsPair : graph.m_edgeToFlowEdgeDetailsMap)
         {
-            out << edgeAndDetailsPair.first.first << "->"               << edgeAndDetailsPair.first.second
+            out << edgeAndDetailsPair.first.first << "->"
+               << edgeAndDetailsPair.first.second
                << "(capacity: " << edgeAndDetailsPair.second.capacity
                << " flow: "<< edgeAndDetailsPair.second.flow << "), ";
         }

@@ -41,7 +41,8 @@ public:
     std::cout << "Unshared Flyweight with state " << state << "\n";
   }
   // ...
-  private:
+  
+private:
   int state;
   // ...
 };
@@ -64,7 +65,8 @@ public:
     std::cout << "Concrete Flyweight with state " << state << "\n";
   }
   // ...
-  private:
+  
+private:
   int state;
   // ...
 };

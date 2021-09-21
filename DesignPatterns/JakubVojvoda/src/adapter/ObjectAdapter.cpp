@@ -38,6 +38,7 @@ public:
   }
   // ...
 };
+
 /*
  * Adapter
  * implements the Target interface and when it gets a method call it

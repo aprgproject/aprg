@@ -659,6 +659,7 @@ string getRandomAlphaNumericString(unsigned int const length)
     });
     return result;
 }
+
 strings getArgumentsToStringInMain(int const argc, char const * const argv[])
 {
     strings result;

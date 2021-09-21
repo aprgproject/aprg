@@ -8,7 +8,8 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba{
+namespace alba
+{
 
 namespace booleanAlgebra
 {
@@ -30,7 +31,8 @@ TEST(SimplificationUtilitiesTest, SimplifyTermWithOuterOrAndInnerAndWorks)
     EXPECT_EQ(stringToExpect, convertToString(termToTest));
 }
 
-TEST(SimplificationUtilitiesTest, SimplifyTermWithOuterAndAndInnerOrWorks){
+TEST(SimplificationUtilitiesTest, SimplifyTermWithOuterAndAndInnerOrWorks)
+{
     Term subTerm1(createExpressionIfPossible({"a", "&", "b"}));
     Term subTerm2(createExpressionIfPossible({subTerm1, "|", "c"}));
     Term subTerm3(createExpressionIfPossible({subTerm2, "&", "d"}));
@@ -43,7 +45,8 @@ TEST(SimplificationUtilitiesTest, SimplifyTermWithOuterAndAndInnerOrWorks){
     EXPECT_EQ(stringToExpect, convertToString(termToTest));
 }
 
-TEST(SimplificationUtilitiesTest, SimplifyByQuineMcKluskeyWorks){
+TEST(SimplificationUtilitiesTest, SimplifyByQuineMcKluskeyWorks)
+{
     Term subTerm1(createExpressionIfPossible({"a", "&", "b"}));
     Term subTerm2(createExpressionIfPossible({subTerm1, "|", "c"}));
     Term subTerm3(createExpressionIfPossible({subTerm2, "&", "d"}));
@@ -56,7 +59,8 @@ TEST(SimplificationUtilitiesTest, SimplifyByQuineMcKluskeyWorks){
     EXPECT_EQ(stringToExpect, convertToString(termToTest));
 }
 
-TEST(SimplificationUtilitiesTest, SimplifyAndCopyTermsAndChangeOperatorLevelIfNeededWorksForOneTerm){
+TEST(SimplificationUtilitiesTest, SimplifyAndCopyTermsAndChangeOperatorLevelIfNeededWorksForOneTerm)
+{
     WrappedTerms inputWrappedTerms{Term("x")};
     OperatorLevel operatorLevel(OperatorLevel::Unknown);
     WrappedTerms outputWrappedTerms;
@@ -164,7 +168,8 @@ TEST(SimplificationUtilitiesTest, CombineTwoTermsByCheckingCommonFactorIfPossibl
     EXPECT_EQ("(x|y)", convertToString(termToVerify8));
 }
 
-TEST(SimplificationUtilitiesTest, DistributeTermsIfNeededWorks){
+TEST(SimplificationUtilitiesTest, DistributeTermsIfNeededWorks)
+{
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
                 SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
     SimplificationOfExpression::ScopeObject scopeObject;
@@ -202,7 +207,8 @@ TEST(SimplificationUtilitiesTest, DistributeTermsIfNeededWorks){
     EXPECT_EQ("(d&(x|x|y|x)&(x|x|y|y))", convertToString(termToTest4));
 }
 
-TEST(SimplificationUtilitiesTest, RetrieveTargetOperationsWorks){
+TEST(SimplificationUtilitiesTest, RetrieveTargetOperationsWorks)
+{
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
                 SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
     SimplificationOfExpression::ScopeObject scopeObject;

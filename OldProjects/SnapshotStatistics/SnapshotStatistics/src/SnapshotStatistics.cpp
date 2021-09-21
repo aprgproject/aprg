@@ -42,7 +42,8 @@ void SnapshotStatistics::extractFilesInSnapshot(string const& snapshotPath)
     cout<<"processFileOrDirectory snapshotPath: "<<snapshotPath<<"\n";
     AlbaLocalPathHandler snapshotPathHandler(snapshotPath);
     m_fileExtractor.extractOnceForAllFiles(snapshotPathHandler.getFullPath());
-    snapshotPathHandler.input(getSnapshotDirectory(snapshotPathHandler.getFullPath()) + R"(\BTSLogFiles.zip)");    m_fileExtractor.extractOnceForAllFiles(snapshotPathHandler.getFullPath());
+    snapshotPathHandler.input(getSnapshotDirectory(snapshotPathHandler.getFullPath()) + R"(\BTSLogFiles.zip)");
+    m_fileExtractor.extractOnceForAllFiles(snapshotPathHandler.getFullPath());
 }
 
 void SnapshotStatistics::fetchFileSizesForSnapshot(string const& snapshotPath)
@@ -50,7 +51,8 @@ void SnapshotStatistics::fetchFileSizesForSnapshot(string const& snapshotPath)
     //cout<<"fetchStatistics snapshotPath: "<<snapshotPath<<"\n";
     AlbaLocalPathHandler snapshotDirectoryPathHandler(getSnapshotDirectory(snapshotPath));
     ListOfPaths listOfFiles;
-    ListOfPaths listOfDirectories;    snapshotDirectoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
+    ListOfPaths listOfDirectories;
+    snapshotDirectoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
     for(string const& filePath : listOfFiles)
     {
         AlbaLocalPathHandler filePathHandler(filePath);
@@ -70,7 +72,8 @@ void SnapshotStatistics::saveFileListForSnapshot(string const& outputPath)
     outputStream<<"\n";
     for(FileNameToSnapshotNameToFileSizePair const& firstPair : m_fileNameToSnapshotNameToFileSize)
     {
-        outputStream<<firstPair.first;        for(string const& snapshotName : m_snapshotNames)
+        outputStream<<firstPair.first;
+        for(string const& snapshotName : m_snapshotNames)
         {
             SnapshotNameToFileSizeMap const& snapshotNameToFileSize(firstPair.second);
             if(snapshotNameToFileSize.find(snapshotName) != snapshotNameToFileSize.end())
@@ -85,6 +88,7 @@ void SnapshotStatistics::saveFileListForSnapshot(string const& outputPath)
         outputStream<<"\n";
     }
 }
+
 void SnapshotStatistics::fetchStatisticsForSnapshot()
 {
     for(FileNameToSnapshotNameToFileSizePair const& firstPair : m_fileNameToSnapshotNameToFileSize)
@@ -124,13 +128,15 @@ void SnapshotStatistics::saveStatisticsToFile(string const& outputPath)
     outputStream<<",Samples of sizes (in bytes)\n";
     for(WildcardNameToSampleSizesPair const& firstPair : m_wildcardNameToSampleSizesMap)
     {
-        outputStream<<firstPair.first;        for(double const& size : firstPair.second)
+        outputStream<<firstPair.first;
+        for(double const& size : firstPair.second)
         {
             outputStream<<","<<size;
         }
         outputStream<<"\n";
     }
 }
+
 string SnapshotStatistics::getWildcardNameIfFileGroupsIsFound(string const& fileName) const
 {
     for(FileGroup const& fileGroup : m_fileGroups)
@@ -212,7 +218,8 @@ void SnapshotStatistics::saveSizesForMemory(string const& outputPath)
     outputStream<<"\n";
     for(FileNameToSnapshotNameToFileSizePair const& firstPair : m_fileNameToSnapshotNameToMemorySize)
     {
-        outputStream<<firstPair.first;        for(string const& snapshotName : m_snapshotNames)
+        outputStream<<firstPair.first;
+        for(string const& snapshotName : m_snapshotNames)
         {
             SnapshotNameToFileSizeMap const& snapshotNameToFileSize(firstPair.second);
             if(snapshotNameToFileSize.find(snapshotName) != snapshotNameToFileSize.end())
@@ -227,6 +234,7 @@ void SnapshotStatistics::saveSizesForMemory(string const& outputPath)
         outputStream<<"\n";
     }
 }
+
 void SnapshotStatistics::initializeFileGroups()
 {
     m_fileGroups.emplace_back("CommissioningBefore_*.xml", [](string const& fileName)->bool

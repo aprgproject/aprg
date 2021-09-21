@@ -20,7 +20,8 @@ public:
     void flush();
 
 private:
-    std::ostream& m_stream;};
+    std::ostream& m_stream;
+};
 
 template <typename TypeToWrite>
 void AlbaStreamParameterWriter::writeData(TypeToWrite const& data) const
