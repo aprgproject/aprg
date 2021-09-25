@@ -19,10 +19,11 @@ public:
     explicit AlbaStreamBitWriter(std::ostream& stream);
     ~AlbaStreamBitWriter();
 
+    // rule of zero
+
     void writeBoolData(bool const data);
     void writeCharData(char const data);
-    void writeStringData(std::string const& data);
-    void writeHexDigitData(std::string const& hexDigitsData);
+    void writeStringData(std::string const& data);    void writeHexDigitData(std::string const& hexDigitsData);
     template <typename TypeToWrite> void writeNumberData(AlbaStreamBitEndianType const endianType, TypeToWrite const& data);
     template <typename TypeToWrite> void writeBigEndianNumberData(TypeToWrite const& data);
     template <typename TypeToWrite> void writeLittleEndianNumberData(TypeToWrite const& data);

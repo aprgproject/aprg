@@ -20,10 +20,11 @@ public:
         : m_yearMonthDay(convertToYearMonthDayFormat(years, month, days))
     {}
 
+    // rule of zero
+
     static AlbaYearMonthDay createFromTotalDays(uint32_t const totalDays);
 
-    bool operator<(AlbaYearMonthDay const& second) const;
-    bool operator>(AlbaYearMonthDay const& second) const;
+    bool operator<(AlbaYearMonthDay const& second) const;    bool operator>(AlbaYearMonthDay const& second) const;
     bool operator==(AlbaYearMonthDay const& second) const;
     bool operator!=(AlbaYearMonthDay const& second) const;
 
@@ -56,10 +57,11 @@ public:
         : m_hourMinuteSecond(convertToHourMinuteSecondFormat(hours, minutes, seconds))
     {}
 
+    // rule of zero
+
     static AlbaHourMinuteSecond createFromTotalSeconds(uint32_t const totalSeconds);
 
-    bool operator<(AlbaHourMinuteSecond const& second) const;
-    bool operator>(AlbaHourMinuteSecond const& second) const;
+    bool operator<(AlbaHourMinuteSecond const& second) const;    bool operator>(AlbaHourMinuteSecond const& second) const;
     bool operator==(AlbaHourMinuteSecond const& second) const;
     bool operator!=(AlbaHourMinuteSecond const& second) const;
 
@@ -131,10 +133,11 @@ public:
         , m_microseconds(microseconds)
     {}
 
+    // rule of zero
+
     static AlbaDateTime createFromTotalDaysAndSecondsAndMicroSeconds(
             uint32_t const totalDays,
-            uint32_t const totalSeconds,
-            uint32_t const totalMicroseconds);
+            uint32_t const totalSeconds,            uint32_t const totalMicroseconds);
 
     bool operator<(AlbaDateTime const& secondDateTime) const;
     bool operator>(AlbaDateTime const& secondDateTime) const;

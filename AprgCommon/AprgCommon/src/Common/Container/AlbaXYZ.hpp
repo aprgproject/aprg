@@ -24,10 +24,11 @@ public:
         , m_z(zValue)
     {}
 
+    // rule of zero
+
     bool operator==(AlbaXYZ const& xyz) const
     {
-        return mathHelper::isAlmostEqual(m_x, xyz.m_x)
-                && mathHelper::isAlmostEqual(m_y, xyz.m_y)
+        return mathHelper::isAlmostEqual(m_x, xyz.m_x)                && mathHelper::isAlmostEqual(m_y, xyz.m_y)
                 && mathHelper::isAlmostEqual(m_z, xyz.m_z);
     }
 
