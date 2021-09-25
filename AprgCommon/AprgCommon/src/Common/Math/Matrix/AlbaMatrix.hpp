@@ -88,7 +88,8 @@ public:
 
     bool operator==(AlbaMatrix const& secondMatrix) const
     {
-        bool isEqual(true);        if(m_numberOfColumns != secondMatrix.m_numberOfColumns)
+        bool isEqual(true);
+        if(m_numberOfColumns != secondMatrix.m_numberOfColumns)
         {
             isEqual=false;
         }
@@ -159,7 +160,8 @@ public:
         std::function<DataType(DataType const&)> scalarMultiplication
             = std::bind(std::multiplies<DataType>(), std::placeholders::_1, scalarMultiplier);
         doUnaryAssignmentOperation(*this, scalarMultiplication);
-        return *this;    }
+        return *this;
+    }
 
     AlbaMatrix& operator*=(AlbaMatrix const& secondMatrix)
     {

@@ -32,7 +32,8 @@ public:
 
     static VariablesToExponentsMap combineVariableExponentMapByMultiplication(
             VariablesToExponentsMap const& variablesMap1,
-            VariablesToExponentsMap const& variablesMap2);    static VariablesToExponentsMap combineVariableExponentMapByDivision(
+            VariablesToExponentsMap const& variablesMap2);
+    static VariablesToExponentsMap combineVariableExponentMapByDivision(
             VariablesToExponentsMap const& variablesMap1,
             VariablesToExponentsMap const& variablesMap2);
 

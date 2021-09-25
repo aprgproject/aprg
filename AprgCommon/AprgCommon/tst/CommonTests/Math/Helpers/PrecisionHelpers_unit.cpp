@@ -192,7 +192,8 @@ TEST(PrecisionHelpersTest, GetIntegerAfterRoundingADoubleValueWorks)
     //EXPECT_EQ(4294966948U, getIntegerAfterRoundingADoubleValue<unsigned int>(-347.51514)); // unstable
 }
 
-TEST(PrecisionHelpersTest, GetIntegerAfterFloorOfDoubleValueWorks){
+TEST(PrecisionHelpersTest, GetIntegerAfterFloorOfDoubleValueWorks)
+{
     EXPECT_EQ(0, getIntegerAfterFloorOfDoubleValue<int>(0));
     EXPECT_EQ(1, getIntegerAfterFloorOfDoubleValue<int>(1));
     EXPECT_EQ(1, getIntegerAfterFloorOfDoubleValue<int>(1.5));
@@ -207,7 +208,8 @@ TEST(PrecisionHelpersTest, GetIntegerAfterFloorOfDoubleValueWorks){
     //EXPECT_EQ(4294966948U, getIntegerAfterFloorOfDoubleValue<unsigned int>(-347.51514)); // unstable
 }
 
-TEST(PrecisionHelpersTest, GetIntegerAfterCeilingOfDoubleValueWorks){
+TEST(PrecisionHelpersTest, GetIntegerAfterCeilingOfDoubleValueWorks)
+{
     EXPECT_EQ(0, getIntegerAfterCeilingOfDoubleValue<int>(0));
     EXPECT_EQ(1, getIntegerAfterCeilingOfDoubleValue<int>(1));
     EXPECT_EQ(2, getIntegerAfterCeilingOfDoubleValue<int>(1.5));
@@ -222,7 +224,8 @@ TEST(PrecisionHelpersTest, GetIntegerAfterCeilingOfDoubleValueWorks){
     //EXPECT_EQ(4294966949U, getIntegerAfterCeilingOfDoubleValue<unsigned int>(-347.51514)); // unstable
 }
 
-TEST(PrecisionHelpersTest, GetIntegerPartOfDoubleValueWorks){
+TEST(PrecisionHelpersTest, GetIntegerPartOfDoubleValueWorks)
+{
     EXPECT_EQ(0, getIntegerPartOfDoubleValue<int>(0));
     EXPECT_EQ(1, getIntegerPartOfDoubleValue<int>(1));
     EXPECT_EQ(1, getIntegerPartOfDoubleValue<int>(1.5));

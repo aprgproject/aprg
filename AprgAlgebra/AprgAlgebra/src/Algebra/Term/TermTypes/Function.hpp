@@ -33,7 +33,8 @@ public:
     Function & operator=(Function && functionObject) = default;
 
     bool operator==(Function const& second) const;
-    bool operator!=(Function const& second) const;    bool operator<(Function const& second) const;
+    bool operator!=(Function const& second) const;
+    bool operator<(Function const& second) const;
     bool isSimplified() const;
 
     std::string getFunctionName() const;

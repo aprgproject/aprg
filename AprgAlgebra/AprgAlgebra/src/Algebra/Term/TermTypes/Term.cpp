@@ -25,7 +25,8 @@ Term::Term()
 
 Term::Term(AlbaNumber const& number)
     : m_type(TermType::Constant)
-    , m_isSimplified(false)    , m_baseTermDataPointer(make_unique<Constant>(number))
+    , m_isSimplified(false)
+    , m_baseTermDataPointer(make_unique<Constant>(number))
 {}
 
 Term::Term(char const* const characterString)
@@ -63,7 +64,8 @@ Term::Term(Operator const& operatorTerm)
 {}
 
 Term::Term(Monomial const& monomial)
-    : m_type(TermType::Monomial)    , m_isSimplified(false)
+    : m_type(TermType::Monomial)
+    , m_isSimplified(false)
     , m_baseTermDataPointer(make_unique<Monomial>(monomial))
 {}
 
@@ -98,6 +100,7 @@ Term& Term::operator=(Term const& term)
     m_baseTermDataPointer = createANewPointerFrom(term);
     return *this;
 }
+
 bool Term::operator==(Term const& second) const
 {
     bool result(false);
@@ -492,7 +495,8 @@ Term::BaseTermDataPointer Term::createANewPointerFrom(Term const& term)
     return result;
 }
 
-void Term::initializeBasedOnString(string const& stringAsParameter){
+void Term::initializeBasedOnString(string const& stringAsParameter)
+{
     if(stringAsParameter.empty())
     {
         // do nothing

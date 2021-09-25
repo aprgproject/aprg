@@ -32,6 +32,7 @@ public:
 
     std::string getText() const;
     DisplayTableCellMode getHorizontalMode() const;
+
     std::string& getTextReference();
     void setText(std::string const& text);
     void setHorizontalMode(DisplayTableCellMode const mode);
@@ -52,7 +53,8 @@ public:
 
     unsigned int getNumberOfColumns() const;
     unsigned int getCharacters() const;
-    Cells const& getCells() const;    DisplayTableCell const& getCellAt(unsigned int const columnIndex) const;
+    Cells const& getCells() const;
+    DisplayTableCell const& getCellAt(unsigned int const columnIndex) const;
 
     Cells& getCellsReference();
     DisplayTableCell& getCellReferenceAt(unsigned int const columnIndex);
@@ -73,7 +75,8 @@ public:
 
     unsigned int getTotalRows() const;
     unsigned int getTotalColumns() const;
-    unsigned int getMaxCharactersInOneRow() const;    DisplayTableCell const& getCellAt(unsigned int const columnIndex, unsigned int const rowIndex) const;
+    unsigned int getMaxCharactersInOneRow() const;
+    DisplayTableCell const& getCellAt(unsigned int const columnIndex, unsigned int const rowIndex) const;
 
     DisplayTableRow& getLastRow();
     DisplayTableRow& getRowReferenceAt(unsigned int const rowIndex);

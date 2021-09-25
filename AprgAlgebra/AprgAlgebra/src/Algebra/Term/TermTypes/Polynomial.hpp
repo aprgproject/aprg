@@ -23,7 +23,8 @@ public:
 
     bool operator==(Polynomial const& second) const;
     bool operator!=(Polynomial const& second) const;
-    bool operator<(Polynomial const& second) const;    bool isEmpty() const;
+    bool operator<(Polynomial const& second) const;
+    bool isEmpty() const;
     bool isSimplified() const;
     Monomials const& getMonomialsConstReference() const;
 

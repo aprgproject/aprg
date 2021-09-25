@@ -84,7 +84,8 @@ public:
 
     // static functions
 
-    static AlbaNumber createNumberFromDoubleAndRoundIfNeeded(double const doubleValue);    static AlbaNumber createFraction(int32_t const numerator, int32_t const denominator);
+    static AlbaNumber createNumberFromDoubleAndRoundIfNeeded(double const doubleValue);
+    static AlbaNumber createFraction(int32_t const numerator, int32_t const denominator);
     static AlbaNumber createFraction(int32_t const numerator, uint32_t const denominator);
     template <typename NumberType> static AlbaNumber createComplexNumber(NumberType const realPart, NumberType const imaginaryPart);
     static AlbaNumber createComplexNumber(ComplexFloat const& complexNumber);
@@ -135,7 +136,8 @@ public:
 
     AlbaNumber(char const character) = delete; // remove character to integer conversion (delete any functions is a C++11 feature)
 
-    // This should be constexpr as well but a lot of coding is needed    bool operator==(AlbaNumber const& second) const;
+    // This should be constexpr as well but a lot of coding is needed
+    bool operator==(AlbaNumber const& second) const;
     bool operator!=(AlbaNumber const& second) const;
     bool operator<=(AlbaNumber const& second) const;
     bool operator>=(AlbaNumber const& second) const;

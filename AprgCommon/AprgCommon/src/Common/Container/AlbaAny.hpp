@@ -30,7 +30,8 @@ public:
     // rule of zero
 
     operator bool() const // not explicit
-    {        return hasContent();
+    {
+        return hasContent();
     }
 
     bool hasContent() const

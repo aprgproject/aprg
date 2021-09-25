@@ -89,7 +89,8 @@ TermAssociationType getReversedAssociationType(TermAssociationType const associa
     else // if(TermAssociationType::Negative == associationType)
     {
         reversedAssociationType = TermAssociationType::Positive;
-    }    return reversedAssociationType;
+    }
+    return reversedAssociationType;
 }
 
 string getEnumShortString(TermType const termType)

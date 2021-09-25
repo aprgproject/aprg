@@ -25,7 +25,8 @@ public:
     // rule of zero
 
     bool operator==(Expression const& second) const;
-    bool operator!=(Expression const& second) const;    bool operator<(Expression const& second) const;
+    bool operator!=(Expression const& second) const;
+    bool operator<(Expression const& second) const;
     bool isEmpty() const;
     bool containsOnlyOnePositivelyAssociatedTerm() const;
     bool isSimplified() const;

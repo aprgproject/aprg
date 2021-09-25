@@ -21,7 +21,8 @@ Function::Function()
 
 Function::Function(
         string const& functionName,
-        BaseTerm const& baseTerm,        EvaluationFunction const& evaluationFunction)
+        BaseTerm const& baseTerm,
+        EvaluationFunction const& evaluationFunction)
     : m_functionName(functionName)
     , m_inputTermPointer(make_unique<Term>(getTermConstReferenceFromBaseTerm(baseTerm)))
     , m_evaluationFunction(evaluationFunction)
@@ -43,6 +44,7 @@ Function& Function::operator=(Function const& functionObject)
     m_isSimplified = functionObject.m_isSimplified;
     return *this;
 }
+
 bool Function::operator==(Function const& second) const
 {
     return m_functionName == second.m_functionName

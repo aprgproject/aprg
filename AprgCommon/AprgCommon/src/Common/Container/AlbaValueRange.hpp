@@ -26,7 +26,8 @@ public:
 
     AlbaValueRange()
         : m_startValue(0)
-        , m_endValue(0)        , m_intervalMagnitude(0)
+        , m_endValue(0)
+        , m_intervalMagnitude(0)
     {}
 
     AlbaValueRange(DataType const startValue, DataType const endValue, DataType const intervalMagnitude)
@@ -39,7 +40,8 @@ public:
 
     bool isEmpty() const
     {
-        return m_startValue==0 && m_endValue==0 && m_intervalMagnitude==0;    }
+        return m_startValue==0 && m_endValue==0 && m_intervalMagnitude==0;
+    }
 
     bool isValueInsideInclusive(DataType const value) const
     {

@@ -44,7 +44,8 @@ public:
 
     bool operator==(AlbaMathVectorType const& second) const
     {
-        return std::equal(m_values.cbegin(), m_values.cend(), second.m_values.cbegin(),                          [](DataType const first, DataType const second)
+        return std::equal(m_values.cbegin(), m_values.cend(), second.m_values.cbegin(),
+                          [](DataType const first, DataType const second)
         {
             return isEqualForMathVectorDataType(first, second);
         });

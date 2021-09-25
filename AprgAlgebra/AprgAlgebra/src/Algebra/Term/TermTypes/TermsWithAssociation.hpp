@@ -20,7 +20,8 @@ public:
     // rule of zero
 
     bool operator==(TermsWithAssociation const& second) const;
-    bool operator!=(TermsWithAssociation const& second) const;    bool operator<(TermsWithAssociation const& second) const;
+    bool operator!=(TermsWithAssociation const& second) const;
+    bool operator<(TermsWithAssociation const& second) const;
     bool isEmpty() const;
 
     unsigned int getSize() const;
