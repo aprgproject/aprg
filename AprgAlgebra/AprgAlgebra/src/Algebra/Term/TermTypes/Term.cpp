@@ -23,18 +23,9 @@ Term::Term()
     , m_baseTermDataPointer(nullptr)
 {}
 
-Term::Term(Term const& term)
-    : m_type(term.getTermType())
-    , m_isSimplified(term.m_isSimplified)
-    , m_baseTermDataPointer(nullptr)
-{
-    resetBaseDataTermPointerBasedFromTerm(term);
-}
-
 Term::Term(AlbaNumber const& number)
     : m_type(TermType::Constant)
-    , m_isSimplified(false)
-    , m_baseTermDataPointer(make_unique<Constant>(number))
+    , m_isSimplified(false)    , m_baseTermDataPointer(make_unique<Constant>(number))
 {}
 
 Term::Term(char const* const characterString)
@@ -62,22 +53,17 @@ Term::Term(Constant const& constant)
 Term::Term(Variable const& variable)
     : m_type(TermType::Variable)
     , m_isSimplified(false)
-    , m_baseTermDataPointer(nullptr)
-{
-    m_baseTermDataPointer = make_unique<Variable>(variable);
-}
+    , m_baseTermDataPointer(make_unique<Variable>(variable))
+{}
 
 Term::Term(Operator const& operatorTerm)
     : m_type(TermType::Operator)
     , m_isSimplified(false)
-    , m_baseTermDataPointer(nullptr)
-{
-    m_baseTermDataPointer = make_unique<Operator>(operatorTerm);
-}
+    , m_baseTermDataPointer(make_unique<Operator>(operatorTerm))
+{}
 
 Term::Term(Monomial const& monomial)
-    : m_type(TermType::Monomial)
-    , m_isSimplified(false)
+    : m_type(TermType::Monomial)    , m_isSimplified(false)
     , m_baseTermDataPointer(make_unique<Monomial>(monomial))
 {}
 
@@ -99,14 +85,19 @@ Term::Term(Function const& function)
     , m_baseTermDataPointer(make_unique<Function>(function))
 {}
 
+Term::Term(Term const& term)
+    : m_type(term.m_type)
+    , m_isSimplified(term.m_isSimplified)
+    , m_baseTermDataPointer(createANewPointerFrom(term))
+{}
+
 Term& Term::operator=(Term const& term)
 {
     m_type = term.m_type;
     m_isSimplified = term.m_isSimplified;
-    resetBaseDataTermPointerBasedFromTerm(term);
+    m_baseTermDataPointer = createANewPointerFrom(term);
     return *this;
 }
-
 bool Term::operator==(Term const& second) const
 {
     bool result(false);
@@ -469,38 +460,39 @@ void Term::clearAllInnerSimplifiedFlags()
     clearSimplifiedFlag();
 }
 
-void Term::resetBaseDataTermPointerBasedFromTerm(Term const& term)
+Term::BaseTermDataPointer Term::createANewPointerFrom(Term const& term)
 {
+    BaseTermDataPointer result;
     switch(term.getTermType())
     {
     case TermType::Empty:
         break;
     case TermType::Constant:
-        m_baseTermDataPointer = make_unique<Constant>(term.getConstantConstReference());
+        result = make_unique<Constant>(term.getConstantConstReference());
         break;
     case TermType::Variable:
-        m_baseTermDataPointer = make_unique<Variable>(term.getVariableConstReference());
+        result = make_unique<Variable>(term.getVariableConstReference());
         break;
     case TermType::Operator:
-        m_baseTermDataPointer = make_unique<Operator>(term.getOperatorConstReference());
+        result = make_unique<Operator>(term.getOperatorConstReference());
         break;
     case TermType::Monomial:
-        m_baseTermDataPointer = make_unique<Monomial>(term.getMonomialConstReference());
+        result = make_unique<Monomial>(term.getMonomialConstReference());
         break;
     case TermType::Polynomial:
-        m_baseTermDataPointer = make_unique<Polynomial>(term.getPolynomialConstReference());
+        result = make_unique<Polynomial>(term.getPolynomialConstReference());
         break;
     case TermType::Expression:
-        m_baseTermDataPointer = make_unique<Expression>(term.getExpressionConstReference());
+        result = make_unique<Expression>(term.getExpressionConstReference());
         break;
     case TermType::Function:
-        m_baseTermDataPointer = make_unique<Function>(term.getFunctionConstReference());
+        result = make_unique<Function>(term.getFunctionConstReference());
         break;
     }
+    return result;
 }
 
-void Term::initializeBasedOnString(string const& stringAsParameter)
-{
+void Term::initializeBasedOnString(string const& stringAsParameter){
     if(stringAsParameter.empty())
     {
         // do nothing

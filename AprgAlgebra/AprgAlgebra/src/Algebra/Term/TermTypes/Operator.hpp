@@ -15,13 +15,14 @@ namespace algebra
 class Operator : public BaseTermData
 {
 public:
-    Operator();
+    Operator() = default;
     Operator(std::string const& operatingString);
+
+    // rule of zero
 
     bool operator==(Operator const& second) const;
     bool operator!=(Operator const& second) const;
     bool operator<(Operator const& second) const;
-
     bool isAddition() const;
     bool isSubtraction() const;
     bool isMultiplication() const;

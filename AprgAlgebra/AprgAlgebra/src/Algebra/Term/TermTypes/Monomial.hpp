@@ -28,10 +28,11 @@ public:
     Monomial(AlbaNumber const& constant, std::initializer_list<VariableExponentPair> const& variablesWithExponents);
     Monomial(AlbaNumber const& constant, VariablesToExponentsMap const& variablesWithExponents);
 
+    // rule of zero
+
     static VariablesToExponentsMap combineVariableExponentMapByMultiplication(
             VariablesToExponentsMap const& variablesMap1,
-            VariablesToExponentsMap const& variablesMap2);
-    static VariablesToExponentsMap combineVariableExponentMapByDivision(
+            VariablesToExponentsMap const& variablesMap2);    static VariablesToExponentsMap combineVariableExponentMapByDivision(
             VariablesToExponentsMap const& variablesMap1,
             VariablesToExponentsMap const& variablesMap2);
 
