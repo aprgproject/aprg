@@ -5,6 +5,7 @@
 
 namespace alba
 {
+
 template <typename ConfigurationDetails>
 ConfigurationDetails getDefaultConfigurationDetails()
 {
@@ -57,7 +58,8 @@ public:
 
     void setInThisScopeThisConfiguration(
             ConfigurationDetails const& configurationDetails) const
-    {        AlbaConfigurationHolder<ConfigurationDetails>::getInstance().setConfigurationDetails(configurationDetails);
+    {
+        AlbaConfigurationHolder<ConfigurationDetails>::getInstance().setConfigurationDetails(configurationDetails);
     }
 
 private:

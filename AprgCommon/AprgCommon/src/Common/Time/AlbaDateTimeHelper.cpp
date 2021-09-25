@@ -6,7 +6,8 @@
 #include <array>
 #include <cmath>
 
-using namespace alba::AlbaDateTimeConstants;using namespace alba::mathHelper;
+using namespace alba::AlbaDateTimeConstants;
+using namespace alba::mathHelper;
 using namespace std;
 
 namespace alba
@@ -102,7 +103,8 @@ uint32_t dateTimeHelper::getMonthFromNumberOfDaysInALeapYear(uint32_t const numb
     return static_cast<uint32_t>(January) + distance(accumulatedDaysForEachMonth.cbegin(), itMonth);
 }
 
-uint32_t dateTimeHelper::getMonthFromNumberOfDays(uint32_t const numberOfDays, uint32_t const year){
+uint32_t dateTimeHelper::getMonthFromNumberOfDays(uint32_t const numberOfDays, uint32_t const year)
+{
     uint32_t result(0);
     if(numberOfDays>0)
     {

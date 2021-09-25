@@ -6,6 +6,7 @@ if(WIN32)
     set(GSL_INCLUDE_DIRECTORIES ${GSL_DIR}/include/gsl2.7/)
 
     include_directories(${GSL_INCLUDE_DIRECTORIES})
+
     # add libraries
     add_library(GSL SHARED IMPORTED)
     set_property(TARGET GSL PROPERTY IMPORTED_IMPLIB ${GSL_DIR}/lib/gsl2.7/libgsl.a)

@@ -72,7 +72,8 @@ TEST(AlbaAnyTest, HasContentWorks)
     EXPECT_TRUE(nonEmptyAny.hasContent());
 }
 
-TEST(AlbaAnyTest, GetContentAsWorks){
+TEST(AlbaAnyTest, GetContentAsWorks)
+{
     AlbaAny any(1234U);
 
     EXPECT_EQ(1234U, any.getContentAs<unsigned int>());

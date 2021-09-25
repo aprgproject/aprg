@@ -19,7 +19,8 @@ TEST(AlbaMacrosTest, StandardPredefinedMacrosWorks)
 TEST(AlbaMacrosTest, CompilerSpecificPredefinedMacrosWorks)
 {
     EXPECT_EQ("TestBody", string(ALBA_MACROS_GET_FUNCTION));
-    EXPECT_EQ(0, ALBA_MACROS_GET_UNIQUE_COUNTER_VALUE);    EXPECT_EQ(1, ALBA_MACROS_GET_UNIQUE_COUNTER_VALUE);
+    EXPECT_EQ(0, ALBA_MACROS_GET_UNIQUE_COUNTER_VALUE);
+    EXPECT_EQ(1, ALBA_MACROS_GET_UNIQUE_COUNTER_VALUE);
     EXPECT_EQ(2, ALBA_MACROS_GET_UNIQUE_COUNTER_VALUE);
     EXPECT_EQ(3, ALBA_MACROS_GET_UNIQUE_COUNTER_VALUE);
 }
@@ -34,7 +35,8 @@ TEST(AlbaMacrosTest, DisplayMessageTest)
 TEST(AlbaMacrosTest, GetStringLiteralWorks)
 {
     enum class SampleEnumClass
-    {        Type1,
+    {
+        Type1,
         Type2
     };
 
@@ -46,7 +48,8 @@ TEST(AlbaMacrosTest, GetStringLiteralWorks)
 TEST(AlbaMacrosTest, CaseEnumStringWorks)
 {
     enum class SampleEnumClass
-    {        Type1,
+    {
+        Type1,
         Type2
     };
     struct SampleClass
@@ -73,7 +76,8 @@ TEST(AlbaMacrosTest, CaseEnumStringWorks)
 TEST(AlbaMacrosTest, CaseEnumShortStringWorks)
 {
     enum class SampleEnumClass
-    {        Type1,
+    {
+        Type1,
         Type2
     };
     struct SampleClass

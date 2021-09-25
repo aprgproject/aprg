@@ -26,6 +26,7 @@ public:
     bool hasContent() const;
     unsigned int getSize() const;
     void const* getConstantBufferPointer() const;
+
     void* getBufferPointer();
     void clear();
     void clearAndSetNewData(void* sourcePointer, unsigned int const size);

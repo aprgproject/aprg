@@ -197,7 +197,8 @@ void interchangeRows(
     for(unsigned int x=0; x<matrix.getNumberOfColumns(); x++)
     {
         std::swap(matrix.getEntryReference(x, y1), matrix.getEntryReference(x, y2));
-    }}
+    }
+}
 
 template <typename DataType>
 void addTwoRowsAndPutSumInAnotherRow(
@@ -258,7 +259,8 @@ void traverseWithUnaryOperationForDifferentRows(
     for(unsigned int x=0; x<matrix.getNumberOfColumns(); x++)
     {
         matrix.setEntry(x, yOutput, unaryFunction(matrix.getEntry(x, yInput)));
-    }}
+    }
+}
 
 template <typename DataType>
 void traverseWithBinaryOperationForDifferentRows(
@@ -272,7 +274,8 @@ void traverseWithBinaryOperationForDifferentRows(
     for(unsigned int x=0; x<matrix.getNumberOfColumns(); x++)
     {
         matrix.setEntry(x, yOutput, binaryFunction(matrix.getEntry(x, yInput1), matrix.getEntry(x, yInput2)));
-    }}
+    }
+}
 
 }
 

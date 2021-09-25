@@ -36,6 +36,7 @@ public:
     {
         return hasContent();
     }
+
     bool hasContent() const
     {
         return m_savedMemory.hasContent();

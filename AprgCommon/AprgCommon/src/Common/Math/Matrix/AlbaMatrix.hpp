@@ -160,6 +160,7 @@ public:
         doUnaryAssignmentOperation(*this, scalarMultiplication);
         return *this;
     }
+
     AlbaMatrix& operator*=(AlbaMatrix const& secondMatrix)
     {
         AlbaMatrix & self(*this);
