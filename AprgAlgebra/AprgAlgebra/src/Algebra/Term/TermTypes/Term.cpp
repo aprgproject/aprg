@@ -23,10 +23,15 @@ Term::Term()
     , m_baseTermDataPointer(nullptr)
 {}
 
+Term::Term(TermType const type, bool const isSimplified, BaseTermDataPointer && baseTermDataPointer) // for move
+    : m_type(type)
+    , m_isSimplified(isSimplified)
+    , m_baseTermDataPointer(move(baseTermDataPointer))
+{}
+
 Term::Term(AlbaNumber const& number)
     : m_type(TermType::Constant)
-    , m_isSimplified(false)
-    , m_baseTermDataPointer(make_unique<Constant>(number))
+    , m_isSimplified(false)    , m_baseTermDataPointer(make_unique<Constant>(number))
 {}
 
 Term::Term(char const* const characterString)
@@ -90,17 +95,16 @@ Term::Term(Function const& function)
 Term::Term(Term const& term)
     : m_type(term.m_type)
     , m_isSimplified(term.m_isSimplified)
-    , m_baseTermDataPointer(createANewPointerFrom(term))
+    , m_baseTermDataPointer(createANewDataPointerFrom(term))
 {}
 
 Term& Term::operator=(Term const& term)
 {
     m_type = term.m_type;
     m_isSimplified = term.m_isSimplified;
-    m_baseTermDataPointer = createANewPointerFrom(term);
+    m_baseTermDataPointer = createANewDataPointerFrom(term);
     return *this;
 }
-
 bool Term::operator==(Term const& second) const
 {
     bool result(false);
@@ -388,10 +392,19 @@ Function & Term::getFunctionReference()
     return *static_cast<Function*>(m_baseTermDataPointer.get());
 }
 
+BaseTermUniquePointer Term::createBasePointerByCopy() const
+{
+    return static_cast<BaseTermUniquePointer>(make_unique<Term>(*this));
+}
+
+BaseTermUniquePointer Term::createBasePointerByMove()
+{
+    return static_cast<BaseTermUniquePointer>(make_unique<Term>(m_type, m_isSimplified, move(m_baseTermDataPointer)));
+}
+
 void Term::clear()
 {
-    m_type=TermType::Empty;
-    m_baseTermDataPointer.reset();
+    m_type=TermType::Empty;    m_baseTermDataPointer.reset();
     clearSimplifiedFlag();
 }
 
@@ -463,11 +476,10 @@ void Term::clearAllInnerSimplifiedFlags()
     clearSimplifiedFlag();
 }
 
-Term::BaseTermDataPointer Term::createANewPointerFrom(Term const& term)
+Term::BaseTermDataPointer Term::createANewDataPointerFrom(Term const& term)
 {
     BaseTermDataPointer result;
-    switch(term.getTermType())
-    {
+    switch(term.getTermType())    {
     case TermType::Empty:
         break;
     case TermType::Constant:

@@ -15,16 +15,17 @@ namespace algebra
 class Equation
 {
 public:
-    Equation();
+    Equation() = default;
     Equation(
             Term const& leftHandTerm,
             std::string const& equationOperator,
             Term const& rightHandTerm);
 
+    // rule of zero
+
     bool operator==(Equation const& second) const;
     bool operator!=(Equation const& second) const;
     bool operator<(Equation const& second) const;
-
     bool isEmpty() const;
     bool isEquationSatisfied() const;
 

@@ -20,10 +20,11 @@ public:
 
     Expression();
     Expression(BaseTerm const& baseTerm);
+    Expression(BaseTerm && baseTerm);
     Expression(OperatorLevel const operatorLevel, TermsWithDetails const& termsWithDetails);
+    Expression(OperatorLevel const operatorLevel, TermsWithDetails && termsWithDetails);
 
     // rule of zero
-
     bool operator==(Expression const& second) const;
     bool operator!=(Expression const& second) const;
     bool operator<(Expression const& second) const;
