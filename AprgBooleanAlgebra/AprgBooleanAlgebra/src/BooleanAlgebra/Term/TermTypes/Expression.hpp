@@ -18,14 +18,15 @@ class Expression : public BaseTermData
 public:
 
     Expression();
-    Expression(Expression const& expression);
     Expression(BaseTerm const& baseTerm);
+    Expression(BaseTerm && baseTerm);
     Expression(OperatorLevel const operatorLevel, WrappedTerms const& wrappedTerms);
-    ~Expression();
+    Expression(OperatorLevel const operatorLevel, WrappedTerms && wrappedTerms);
+
+    // rule of zero
 
     bool operator==(Expression const& second) const;
-    bool operator!=(Expression const& second) const;
-    bool operator<(Expression const& second) const;
+    bool operator!=(Expression const& second) const;    bool operator<(Expression const& second) const;
 
     Expression operator~() const;
 

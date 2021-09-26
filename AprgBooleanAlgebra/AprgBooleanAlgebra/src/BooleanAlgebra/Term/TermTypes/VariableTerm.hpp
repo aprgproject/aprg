@@ -18,10 +18,11 @@ public:
     VariableTerm();
     VariableTerm(std::string const& variableName);
 
+    // rule of zero
+
     static VariableTerm createNegatedVariableTerm(std::string const& variableName);
 
-    bool operator==(VariableTerm const& second) const;
-    bool operator!=(VariableTerm const& second) const;
+    bool operator==(VariableTerm const& second) const;    bool operator!=(VariableTerm const& second) const;
     bool operator<(VariableTerm const& second) const;
 
     VariableTerm operator~() const;
@@ -34,10 +35,9 @@ public:
     void negate();
 
 private:
-    void initialize();
+    void initializeIfNotEmpty();
 
     friend std::ostream & operator<<(std::ostream & out, VariableTerm const& variableTerm);
-
     std::string m_variableName;
     bool m_isNegated;
 };
