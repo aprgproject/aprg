@@ -47,7 +47,8 @@ TEST(FunctionTest, FunctionThatIsCopyConstructedHasIsSimplifiedFlagCopied)
 
 TEST(FunctionTest, IsSimplifiedWorks)
 {
-    Function function1;    Function function2;
+    Function function1;
+    Function function2;
     function2.setAsSimplified();
 
     EXPECT_FALSE(function1.isSimplified());

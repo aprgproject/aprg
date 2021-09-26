@@ -20,6 +20,7 @@ public:
     bool operator==(EquationOperator const& second) const;
     bool operator!=(EquationOperator const& second) const;
     bool operator<(EquationOperator const& second) const;
+
     bool isEqual() const;
     bool isNotEqual() const;
     bool isLessThan() const;

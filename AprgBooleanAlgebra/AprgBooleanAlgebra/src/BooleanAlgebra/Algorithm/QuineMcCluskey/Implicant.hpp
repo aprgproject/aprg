@@ -26,7 +26,8 @@ public:
     Implicant()=default;
 
     Implicant(MintermsInitializerList const& minterms)
-        : m_minterms(minterms)    {}
+        : m_minterms(minterms)
+    {}
 
     bool operator==(Implicant const& second) const
     {

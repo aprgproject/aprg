@@ -11,6 +11,7 @@ namespace algebra
 EquationOperator::EquationOperator(string const& operatingString)
     : m_operatingString(operatingString)
 {}
+
 bool EquationOperator::operator==(EquationOperator const& second) const
 {
     return m_operatingString == second.m_operatingString;

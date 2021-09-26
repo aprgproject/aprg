@@ -54,7 +54,8 @@ Expression::Expression(
     , m_isSimplified(false)
 {}
 
-bool Expression::operator==(Expression const& second) const{
+bool Expression::operator==(Expression const& second) const
+{
     return m_commonOperatorLevel == second.m_commonOperatorLevel
             && m_wrappedTerms==second.m_wrappedTerms;
 }
@@ -111,7 +112,8 @@ BaseTerm const& Expression::getFirstTermConstReference() const
     return getBaseTermReferenceFromUniquePointer(m_wrappedTerms.front().baseTermPointer);
 }
 
-WrappedTerms const& Expression::getWrappedTerms() const{
+WrappedTerms const& Expression::getWrappedTerms() const
+{
     return m_wrappedTerms;
 }
 
@@ -124,7 +126,8 @@ string Expression::getDebugString() const
         Term const& term(getTermConstReferenceFromUniquePointer(wrappedTerm.baseTermPointer));
         result << getString(m_commonOperatorLevel) << term.getDebugString();
     }
-    result << " )";    return result.str();
+    result << " )";
+    return result.str();
 }
 
 WrappedTerms & Expression::getWrappedTermsReference()
@@ -146,6 +149,7 @@ void Expression::clearAndPutTermInWrappedTerms(BaseTerm const& baseTerm)
     m_wrappedTerms = {baseTerm};
     clearSimplifiedFlag();
 }
+
 void Expression::putTerm(BaseTerm const& baseTerm)
 {
     m_wrappedTerms.emplace_back(baseTerm);
@@ -308,7 +312,8 @@ void Expression::negate()
         Term & term(getTermReferenceFromUniquePointer(wrappedTerm.baseTermPointer));
         term.negate();
     }
-    m_commonOperatorLevel = getDualOperatorLevel(m_commonOperatorLevel);    clearSimplifiedFlag();
+    m_commonOperatorLevel = getDualOperatorLevel(m_commonOperatorLevel);
+    clearSimplifiedFlag();
 }
 
 void Expression::setAsSimplified()
@@ -328,7 +333,8 @@ void Expression::clearAllInnerSimplifiedFlags()
         Term & term(getTermReferenceFromUniquePointer(wrappedTerm.baseTermPointer));
         term.clearAllInnerSimplifiedFlags();
     }
-    clearSimplifiedFlag();}
+    clearSimplifiedFlag();
+}
 
 void Expression::putTermWithAndOperation(BaseTerm const& baseTerm)
 {
@@ -411,7 +417,8 @@ ostream & operator<<(ostream & out, Expression const& expression)
             Term const& term(getTermConstReferenceFromUniquePointer(it->baseTermPointer));
             out << operatorString << term;
         }
-    }    out << ")";
+    }
+    out << ")";
     return out;
 }
 

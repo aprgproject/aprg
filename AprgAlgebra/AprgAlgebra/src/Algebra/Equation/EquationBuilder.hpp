@@ -20,7 +20,8 @@ public:
 
     Equation getEquation() const;
     stringHelper::strings const& getTermStrings() const;
-    stringHelper::strings const& getEquationOperatorStrings() const;private:
+    stringHelper::strings const& getEquationOperatorStrings() const;
+private:
     void splitAndSaveOperatorAndTermStrings(std::string const& equationInString);
     stringHelper::strings m_termStrings;
     stringHelper::strings m_equationOperatorStrings;

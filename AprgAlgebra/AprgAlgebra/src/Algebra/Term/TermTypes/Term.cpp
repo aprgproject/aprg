@@ -31,7 +31,8 @@ Term::Term(TermType const type, bool const isSimplified, BaseTermDataPointer && 
 
 Term::Term(AlbaNumber const& number)
     : m_type(TermType::Constant)
-    , m_isSimplified(false)    , m_baseTermDataPointer(make_unique<Constant>(number))
+    , m_isSimplified(false)
+    , m_baseTermDataPointer(make_unique<Constant>(number))
 {}
 
 Term::Term(char const* const characterString)
@@ -105,6 +106,7 @@ Term& Term::operator=(Term const& term)
     m_baseTermDataPointer = createANewDataPointerFrom(term);
     return *this;
 }
+
 bool Term::operator==(Term const& second) const
 {
     bool result(false);
@@ -392,11 +394,6 @@ Function & Term::getFunctionReference()
     return *static_cast<Function*>(m_baseTermDataPointer.get());
 }
 
-BaseTermUniquePointer Term::createBasePointerByCopy() const
-{
-    return static_cast<BaseTermUniquePointer>(make_unique<Term>(*this));
-}
-
 BaseTermUniquePointer Term::createBasePointerByMove()
 {
     return static_cast<BaseTermUniquePointer>(make_unique<Term>(m_type, m_isSimplified, move(m_baseTermDataPointer)));
@@ -404,7 +401,8 @@ BaseTermUniquePointer Term::createBasePointerByMove()
 
 void Term::clear()
 {
-    m_type=TermType::Empty;    m_baseTermDataPointer.reset();
+    m_type=TermType::Empty;
+    m_baseTermDataPointer.reset();
     clearSimplifiedFlag();
 }
 
@@ -479,7 +477,8 @@ void Term::clearAllInnerSimplifiedFlags()
 Term::BaseTermDataPointer Term::createANewDataPointerFrom(Term const& term)
 {
     BaseTermDataPointer result;
-    switch(term.getTermType())    {
+    switch(term.getTermType())
+    {
     case TermType::Empty:
         break;
     case TermType::Constant:

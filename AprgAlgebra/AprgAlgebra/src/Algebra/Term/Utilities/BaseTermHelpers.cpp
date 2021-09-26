@@ -8,12 +8,23 @@ namespace alba
 namespace algebra
 {
 
-BaseTermUniquePointer duplicateUniquePointer(BaseTermUniquePointer const& uniquePointer)
+BaseTermUniquePointer createBasePointer(BaseTerm const& baseTerm)
 {
-    return make_unique<Term>(getTermConstReferenceFromUniquePointer(uniquePointer));
+    return static_cast<BaseTermUniquePointer>(make_unique<Term>(getTermConstReferenceFromBaseTerm(baseTerm)));
 }
 
-Term const& getTermConstReferenceFromBaseTerm(BaseTerm const& baseTerm){
+BaseTermUniquePointer createBasePointer(BaseTerm && baseTerm)
+{
+    return getTermRValueReferenceFromBaseTerm(move(baseTerm)).createBasePointerByMove();
+}
+
+BaseTermUniquePointer duplicateUniquePointer(BaseTermUniquePointer const& uniquePointer)
+{
+    return static_cast<BaseTermUniquePointer>(make_unique<Term>(getTermConstReferenceFromUniquePointer(uniquePointer)));
+}
+
+Term const& getTermConstReferenceFromBaseTerm(BaseTerm const& baseTerm)
+{
     return static_cast<Term const&>(baseTerm);
 }
 
@@ -27,7 +38,8 @@ Term && getTermRValueReferenceFromBaseTerm(BaseTerm && baseTerm)
     return static_cast<Term &&>(baseTerm);
 }
 
-Term & getTermReferenceFromBaseTerm(BaseTerm & baseTerm){
+Term & getTermReferenceFromBaseTerm(BaseTerm & baseTerm)
+{
     return static_cast<Term &>(baseTerm);
 }
 
@@ -38,7 +50,8 @@ Term & getTermReferenceFromUniquePointer(BaseTermUniquePointer & uniquePointer)
 
 BaseTerm const& getBaseTermConstReferenceFromTerm(Term const& term)
 {
-    return static_cast<BaseTerm const&>(term);}
+    return static_cast<BaseTerm const&>(term);
+}
 
 BaseTerm const& getBaseTermConstReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer)
 {
@@ -47,7 +60,8 @@ BaseTerm const& getBaseTermConstReferenceFromUniquePointer(BaseTermUniquePointer
 
 BaseTerm & getBaseTermReferenceFromTerm(Term & term)
 {
-    return static_cast<BaseTerm &>(term);}
+    return static_cast<BaseTerm &>(term);
+}
 
 BaseTerm & getBaseTermReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer)
 {

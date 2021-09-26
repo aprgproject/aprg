@@ -28,7 +28,8 @@ Term const& getTermConstReferenceFromBaseTerm(BaseTerm const& baseTerm)
     return static_cast<Term const&>(baseTerm);
 }
 
-Term const& getTermConstReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer){
+Term const& getTermConstReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer)
+{
     return static_cast<Term const&>(*uniquePointer.get());
 }
 
@@ -42,7 +43,8 @@ Term & getTermReferenceFromBaseTerm(BaseTerm & baseTerm)
     return static_cast<Term &>(baseTerm);
 }
 
-Term & getTermReferenceFromUniquePointer(BaseTermUniquePointer & uniquePointer){
+Term & getTermReferenceFromUniquePointer(BaseTermUniquePointer & uniquePointer)
+{
     return *static_cast<Term*>(uniquePointer.get());
 }
 
@@ -53,7 +55,8 @@ BaseTerm const& getBaseTermConstReferenceFromTerm(Term const& term)
 
 BaseTerm const& getBaseTermConstReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer)
 {
-    return static_cast<BaseTerm const&>(*uniquePointer.get());}
+    return static_cast<BaseTerm const&>(*uniquePointer.get());
+}
 
 BaseTerm & getBaseTermReferenceFromTerm(Term & term)
 {
@@ -62,7 +65,8 @@ BaseTerm & getBaseTermReferenceFromTerm(Term & term)
 
 BaseTerm & getBaseTermReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer)
 {
-    return static_cast<BaseTerm &>(*uniquePointer.get());}
+    return static_cast<BaseTerm &>(*uniquePointer.get());
+}
 
 }
 

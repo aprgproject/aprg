@@ -26,6 +26,7 @@ public:
     bool operator==(Equation const& second) const;
     bool operator!=(Equation const& second) const;
     bool operator<(Equation const& second) const;
+
     bool isEmpty() const;
     bool isEquationSatisfied() const;
 

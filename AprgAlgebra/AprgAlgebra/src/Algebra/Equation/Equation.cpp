@@ -14,7 +14,8 @@ namespace algebra
 
 Equation::Equation(
         Term const& leftHandTerm,
-        string const& equationOperator,        Term const& rightHandTerm)
+        string const& equationOperator,
+        Term const& rightHandTerm)
      : m_equationOperator(equationOperator)
      , m_leftHandTerm(leftHandTerm)
      , m_rightHandTerm(rightHandTerm)
