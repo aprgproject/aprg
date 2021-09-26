@@ -65,7 +65,8 @@ bool isTheValue(Expression const& expression, bool const value)
                     getTermConstReferenceFromUniquePointer(wrappedTerms.front().baseTermPointer),
                     value);
     }
-    return result;}
+    return result;
+}
 
 }
 

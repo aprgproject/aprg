@@ -23,7 +23,8 @@ public:
     Implicants() = default;
 
     Implicants(ImplicantsInitializerList const& implicants)
-        : m_implicantsData(implicants)    {}
+        : m_implicantsData(implicants)
+    {}
 
     bool operator==(Implicants const& second) const
     {

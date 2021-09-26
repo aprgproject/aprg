@@ -54,6 +54,7 @@ public:
             retrieveFromTerm(getTermConstReferenceFromUniquePointer(wrappedTerm.baseTermPointer));
         }
     }
+
 protected:
 
     DataType m_savedData;

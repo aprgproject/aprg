@@ -18,7 +18,8 @@ public:
     Operator() = default;
     Operator(std::string const& operatingString);
 
-    bool operator==(Operator const& second) const;    bool operator!=(Operator const& second) const;
+    bool operator==(Operator const& second) const;
+    bool operator!=(Operator const& second) const;
     bool operator<(Operator const& second) const;
 
     bool isNot() const;

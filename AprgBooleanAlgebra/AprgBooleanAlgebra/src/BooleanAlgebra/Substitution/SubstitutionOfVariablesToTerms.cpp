@@ -14,7 +14,8 @@ namespace booleanAlgebra
 
 SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms(
         initializer_list<VariableTermPair> const& variablesWithTerms)
-{    putVariablesWithTerms(variablesWithTerms);
+{
+    putVariablesWithTerms(variablesWithTerms);
 }
 
 SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms(
@@ -133,6 +134,7 @@ void SubstitutionOfVariablesToTerms::performSubstitutionForWrappedTerms(WrappedT
         term = performSubstitutionTo(term);
     }
 }
+
 }
 
 }

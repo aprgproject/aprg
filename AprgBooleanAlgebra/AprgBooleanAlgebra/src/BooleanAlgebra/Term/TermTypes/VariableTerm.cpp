@@ -26,7 +26,8 @@ VariableTerm::VariableTerm(string const& variableName)
     initializeIfNotEmpty();
 }
 
-VariableTerm VariableTerm::createNegatedVariableTerm(        string const& variableName)
+VariableTerm VariableTerm::createNegatedVariableTerm(
+        string const& variableName)
 {
     VariableTerm result(variableName);
     result.negate();
@@ -87,7 +88,8 @@ void VariableTerm::negate()
 void VariableTerm::initializeIfNotEmpty()
 {
     int lastIndex = m_variableName.length()-1;
-    int index=lastIndex;    for(; index>=0; index--)
+    int index=lastIndex;
+    for(; index>=0; index--)
     {
         if(!isPrime(m_variableName.at(index)))
         {

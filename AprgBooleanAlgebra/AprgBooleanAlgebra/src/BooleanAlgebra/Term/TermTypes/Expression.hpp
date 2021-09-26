@@ -19,13 +19,16 @@ public:
 
     Expression();
     Expression(BaseTerm const& baseTerm);
+    Expression(BaseTerm && baseTerm);
     Expression(OperatorLevel const operatorLevel, WrappedTerms const& wrappedTerms);
+    Expression(OperatorLevel const operatorLevel, WrappedTerms && wrappedTerms);
 
     // rule of zero
 
     bool operator==(Expression const& second) const;
     bool operator!=(Expression const& second) const;
     bool operator<(Expression const& second) const;
+
     Expression operator~() const;
 
     bool isEmpty() const;
