@@ -20,12 +20,10 @@ public:
     using ImplicantsInitializerList = std::initializer_list<Implicant>;
     using ImplicantData = std::set<Implicant>;
 
-    Implicants()
-    {}
+    Implicants() = default;
 
     Implicants(ImplicantsInitializerList const& implicants)
-        : m_implicantsData(implicants)
-    {}
+        : m_implicantsData(implicants)    {}
 
     bool operator==(Implicants const& second) const
     {

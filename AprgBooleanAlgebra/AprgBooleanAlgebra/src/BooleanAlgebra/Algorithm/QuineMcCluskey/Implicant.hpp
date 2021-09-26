@@ -5,10 +5,10 @@
 
 #include <algorithm>
 #include <bitset>
+#include <numeric>
 #include <set>
 #include <sstream>
 #include <string>
-
 namespace alba
 {
 
@@ -22,12 +22,10 @@ public:
     using MintermsInitializerList = std::initializer_list<Minterm>;
     using Minterms = std::set<Minterm>;
 
-    Implicant()
-    {}
+    Implicant() = default;
 
     Implicant(MintermsInitializerList const& minterms)
-        : m_minterms(minterms)
-    {}
+        : m_minterms(minterms)    {}
 
     bool operator==(Implicant const& second) const
     {
