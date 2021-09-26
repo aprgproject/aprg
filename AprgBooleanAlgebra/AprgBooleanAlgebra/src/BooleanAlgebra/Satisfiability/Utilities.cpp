@@ -19,11 +19,10 @@ unsigned int getSatisfiabilityLevel(
     unsigned int result(0);
     for(SatisfiabilityTerm const& satTerm : satTerms)
     {
-        result = max(result, static_cast<unsigned int>(satTerm.size()));
+        result = max(result, satTerm.size());
     }
     return result;
 }
-
 SatisfiabilityTerms getSatisfiabilityTerms(
         Term const& term)
 {
@@ -52,21 +51,19 @@ SatisfiabilityTerms getSatisfiabilityTerms(
         for(WrappedTerm const& subWrappedTerm : expression.getWrappedTerms())
         {
             bool isInvalid(false);
-            Term const& termInAnd(getTermConstReferenceFromUniquePointer(subWrappedTerm.baseTermPointer));
+            Term const& termInAnd(getTermConstReferenceFromSharedPointer(subWrappedTerm.baseTermSharedPointer));
             if(termInAnd.isVariableTerm())
             {
-                result.emplace_back(SatisfiabilityTerm{termInAnd.getVariableTermConstReference()});
-            }
+                result.emplace_back(SatisfiabilityTerm{termInAnd.getVariableTermConstReference()});            }
             else if(termInAnd.isExpression() && OperatorLevel::Or == termInAnd.getExpressionConstReference().getCommonOperatorLevel())
             {
                 SatisfiabilityTerm satisfiabilityTerm;
                 for(WrappedTerm const& subSubWrappedTerm : termInAnd.getExpressionConstReference().getWrappedTerms())
                 {
-                    Term const& termInOr(getTermConstReferenceFromUniquePointer(subSubWrappedTerm.baseTermPointer));
+                    Term const& termInOr(getTermConstReferenceFromSharedPointer(subSubWrappedTerm.baseTermSharedPointer));
                     if(termInOr.isVariableTerm())
                     {
-                        satisfiabilityTerm.emplace_back(termInOr.getVariableTermConstReference());
-                    }
+                        satisfiabilityTerm.emplace_back(termInOr.getVariableTermConstReference());                    }
                     else
                     {
                         isInvalid = true;

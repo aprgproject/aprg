@@ -12,10 +12,12 @@ namespace alba
 namespace booleanAlgebra
 {
 
+SubstitutionOfVariablesToValues::SubstitutionOfVariablesToValues()
+{}
+
 SubstitutionOfVariablesToValues::SubstitutionOfVariablesToValues(initializer_list<VariableValuePair> const& variablesWithValues)
 {
-    putVariablesWithValues(variablesWithValues);
-}
+    putVariablesWithValues(variablesWithValues);}
 
 SubstitutionOfVariablesToValues::SubstitutionOfVariablesToValues(VariablesToValuesMap const& variablesWithValues)
 {
@@ -123,11 +125,10 @@ void SubstitutionOfVariablesToValues::performSubstitutionForWrappedTerms(Wrapped
 {
     for(WrappedTerm & wrappedTerm : wrappedTerms)
     {
-        Term & term(getTermReferenceFromUniquePointer(wrappedTerm.baseTermPointer));
+        Term & term(getTermReferenceFromSharedPointer(wrappedTerm.baseTermSharedPointer));
         term = performSubstitutionTo(term);
     }
 }
-
 }
 
 }

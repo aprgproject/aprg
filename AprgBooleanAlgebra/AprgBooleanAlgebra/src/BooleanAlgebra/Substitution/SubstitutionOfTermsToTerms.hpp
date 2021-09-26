@@ -16,10 +16,9 @@ using TermTermPair = std::pair<Term, Term>;
 class SubstitutionOfTermsToTerms
 {
 public:
-    SubstitutionOfTermsToTerms() = default;
+    SubstitutionOfTermsToTerms();
     SubstitutionOfTermsToTerms(std::initializer_list<TermTermPair> const& variablesWithValues);
     SubstitutionOfTermsToTerms(TermToTermMap const& variablesWithValues);
-
     bool isEmpty() const;
     bool isTermFound(Term const& term) const;
     unsigned int getSize() const;

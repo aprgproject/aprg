@@ -16,10 +16,9 @@ using VariableValuePair = std::pair<std::string, bool>;
 class SubstitutionOfVariablesToValues
 {
 public:
-    SubstitutionOfVariablesToValues() = default;
+    SubstitutionOfVariablesToValues();
     SubstitutionOfVariablesToValues(std::initializer_list<VariableValuePair> const& variablesWithValues);
     SubstitutionOfVariablesToValues(VariablesToValuesMap const& variablesWithValues);
-
     bool isEmpty() const;
     bool isVariableFound(std::string const& variable) const;
     unsigned int getSize() const;

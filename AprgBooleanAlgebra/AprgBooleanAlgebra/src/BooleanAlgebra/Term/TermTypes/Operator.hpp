@@ -15,11 +15,10 @@ namespace booleanAlgebra
 class Operator : public BaseTermData
 {
 public:
-    Operator() = default;
+    Operator();
     Operator(std::string const& operatingString);
 
-    bool operator==(Operator const& second) const;
-    bool operator!=(Operator const& second) const;
+    bool operator==(Operator const& second) const;    bool operator!=(Operator const& second) const;
     bool operator<(Operator const& second) const;
 
     bool isNot() const;
