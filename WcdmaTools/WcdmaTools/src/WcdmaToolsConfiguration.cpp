@@ -253,7 +253,8 @@ void WcdmaToolsConfiguration::determineVariousLocationsBasedOnCurrentLocation()
     AlbaLocalPathHandler currentLocalPathHandler(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
     currentLocalPathHandler.goUp();
 
-    AlbaLocalPathHandler sevenZipPathHandler(currentLocalPathHandler.getDirectory()+R"(\7z32\7z.exe)");    locationOf7zExecutable = sevenZipPathHandler.getFullPath();
+    AlbaLocalPathHandler sevenZipPathHandler(currentLocalPathHandler.getDirectory()+R"(\7z32\7z.exe)");
+    locationOf7zExecutable = sevenZipPathHandler.getFullPath();
 
     AlbaLocalPathHandler configurationFilePathHandler(currentLocalPathHandler.getDirectory()+R"(\configuration\configuration.txt)");
     configurationFilePathHandler.createDirectoriesForNonExisitingDirectories();

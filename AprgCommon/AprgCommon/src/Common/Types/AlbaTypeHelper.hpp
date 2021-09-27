@@ -375,6 +375,7 @@ constexpr bool isNoThrowMoveAssignable()
 
 
 // Get Types
+
 template<typename Type>
 using GetPlainType = typename std::decay<Type>::type;
 

@@ -214,6 +214,7 @@ OutputStringType convertToAnotherBasicStringVariant(InputStringType const& input
 
 
 // Alignments
+
 std::string getStringWithJustifyAlignment(std::string const& mainString, unsigned int const targetLength);
 std::string getStringWithCenterAlignment(std::string const& mainString, unsigned int const targetLength);
 std::string getStringWithRightAlignment(std::string const& mainString, unsigned int const targetLength);

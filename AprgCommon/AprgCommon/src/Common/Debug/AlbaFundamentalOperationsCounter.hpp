@@ -5,6 +5,7 @@
 
 #include <sstream>
 #include <utility>
+
 namespace alba
 {
 
@@ -96,6 +97,7 @@ public:
         ++COUNTS.moveAssignmentCount;
         return *this;
     }
+
 #undef COUNTS
 };
 

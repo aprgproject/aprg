@@ -28,7 +28,8 @@
 // -> Source: https://en.cppreference.com/w/cpp/language/attributes/maybe_unused
 // C++ attribute: maybe_unused (since C++17)
 // -> Suppresses warnings on unused entities.
-// Syntax// -> [[maybe_unused]]
+// Syntax
+// -> [[maybe_unused]]
 // Explanation
 // -> This attribute can appear in the declaration of the following entities:
 // ---> class/struct/union: struct [[maybe_unused]] S;,
@@ -45,7 +46,8 @@
 // -> Source: https://en.cppreference.com/w/cpp/language/attributes/nodiscard
 // C++ attribute: nodiscard (since C++17)
 // -> If a function declared nodiscard or a function returning an enumeration or class declared nodiscard
-// -> by value is called from a discarded-value expression other than a cast to void, the compiler is encouraged to issue a warning.// Syntax
+// -> by value is called from a discarded-value expression other than a cast to void, the compiler is encouraged to issue a warning.
+// Syntax
 // -> [[nodiscard]] 	(1)
 // -> [[nodiscard( string-literal )]] 	(2) 	(since C++20)
 // -> string-literal 	- 	text that could be used to explain the rationale for why the result should not be discarded
@@ -63,7 +65,8 @@
 // -> Source: https://en.cppreference.com/w/cpp/language/attributes/noreturn
 // C++ attribute: noreturn (since C++11)
 // -> Indicates that the function does not return.
-// Syntax// -> [[noreturn]]
+// Syntax
+// -> [[noreturn]]
 // Explanation
 // -> Indicates that the function does not return.
 // -> This attribute applies to the name of the function being declared in function declarations only.
@@ -78,7 +81,8 @@
 // -> Source: https://en.cppreference.com/w/cpp/language/attributes/fallthrough
 // C++ attribute: fallthrough (since C++11)
 // -> Indicates that the fall through from the previous case label is intentional and should not be diagnosed by a compiler that warns on fallthrough.
-// Syntax// -> [[fallthrough]]
+// Syntax
+// -> [[fallthrough]]
 // Explanation
 // -> May only be applied to a null statement to create a fallthrough statement ([[fallthrough]];).
 // -> A fallthrough statement may only be used in a switch statement,
@@ -91,7 +95,8 @@
 // -> Source: https://en.cppreference.com/w/cpp/language/attributes/carries_dependency
 // C++ attribute: carries_dependency (since C++11)
 // -> Indicates that dependency chain in release-consume std::memory_order propagates in and out of the function,
-// -> which allows the compiler to skip unnecessary memory fence instructions.// Syntax
+// -> which allows the compiler to skip unnecessary memory fence instructions.
+// Syntax
 // -> [[carries_dependency]]
 // Explanation
 // -> Indicates that dependency chain in release-consume std::memory_order propagates in and out of the function,
@@ -114,7 +119,8 @@
 // -> Source: https://en.unlikely.com/w/cpp/language/attributes/likely
 // C++ attribute: likely, unlikely (since C++20)
 // -> Allow the compiler to optimize for the case where paths of execution including that statement
-// -> are more or less likely than any alternative path of execution that does not include such a statement// Syntax
+// -> are more or less likely than any alternative path of execution that does not include such a statement
+// Syntax
 // -> [[likely]] 	(1)
 // -> [[unlikely]] 	(2)
 // -> Explanation

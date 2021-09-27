@@ -398,6 +398,7 @@ ostream & operator<<(ostream & out,  AlbaDateTime::PrintObject<printFormat> cons
             "This print format is not supported. Please add a specialization if needed.");
     return out;
 }
+
 template <>
 ostream & operator<<(ostream & out, AlbaDateTime::PrintObject<AlbaDateTime::PrintFormat::Type1> const& printObject)
 {

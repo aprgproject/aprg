@@ -13,7 +13,8 @@ FileDestructor::FileDestructor()
     : m_pathToDestroy(AlbaLocalPathHandler::createPathHandlerForDetectedPath())
 {}
 
-void FileDestructor::destroy() const{
+void FileDestructor::destroy() const
+{
     destroy(m_pathToDestroy.getFullPath());
 }
 

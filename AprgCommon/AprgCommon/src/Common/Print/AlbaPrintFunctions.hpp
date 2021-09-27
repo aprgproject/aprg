@@ -68,7 +68,8 @@ printParametersRecusively(std::ostream &, std::tuple<ValueTypes...> const&)
 {}
 
 template<unsigned int index, typename... ValueTypes>
-typename std::enable_if<index != sizeof...(ValueTypes), void>::typeprintParametersRecusively(std::ostream & outputStream, std::tuple<ValueTypes...> const& parameter)
+typename std::enable_if<index != sizeof...(ValueTypes), void>::type
+printParametersRecusively(std::ostream & outputStream, std::tuple<ValueTypes...> const& parameter)
 {
     printParameter(outputStream, std::get<index>(parameter));
     outputStream << ", ";

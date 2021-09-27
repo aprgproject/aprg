@@ -1185,7 +1185,8 @@ void SOOSA::saveOutputHtmlFile(string const& processedFilePath) const
     AlbaLocalPathHandler basisHtmlPath(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
     basisHtmlPath.input(basisHtmlPath.getDirectory() + "basis.html");
     ifstream htmlBasisFileStream(basisHtmlPath.getFullPath());
-    if(htmlBasisFileStream.is_open())    {
+    if(htmlBasisFileStream.is_open())
+    {
         AlbaFileReader htmlBasisFileReader(htmlBasisFileStream);
         string outputHtmlFilePath = getReportHtmlFilePath(processedFilePath);
         ofstream reportHtmlFileStream(outputHtmlFilePath);
