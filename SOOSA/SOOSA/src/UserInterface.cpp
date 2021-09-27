@@ -43,11 +43,10 @@ void UserInterface::askUserForMainDetails()
 
 void UserInterface::askUserForFormDetails()
 {
-    AlbaLocalPathHandler formDetailsDirectoryPath(PathInitialValueSource::DetectedLocalPath);
+    AlbaLocalPathHandler formDetailsDirectoryPath(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
     formDetailsDirectoryPath.input(formDetailsDirectoryPath.getDirectory() + "FormDetails/");
     saveFormDetailsFromFormDetailPath(askUserForPathOfFormDetailToRead(formDetailsDirectoryPath.getFullPath()));
 }
-
 string UserInterface::askUserForPathOfFormDetailToRead(string const& formDetailsDirectoryPath)
 {
     AlbaLocalPathHandler formDetailsPathHandler(formDetailsDirectoryPath);
