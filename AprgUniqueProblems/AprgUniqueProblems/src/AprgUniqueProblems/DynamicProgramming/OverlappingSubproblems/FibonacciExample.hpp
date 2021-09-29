@@ -28,7 +28,8 @@ public:
     Number getNthFibonacciUsingLogarithmicIterativeDP(Number const number);
 
 private:
-    Number getNthFibonacciUsingMemoizationDP(Numbers & memoizationData, Number const number);    Number getNthFibonacciUsingLogarithmicMemoizationDP(Numbers & memoizationData, Number const number);
+    Number getNthFibonacciUsingMemoizationDP(Numbers & memoizationData, Number const number);
+    Number getNthFibonacciUsingLogarithmicMemoizationDP(Numbers & memoizationData, Number const number);
 };
 
 }

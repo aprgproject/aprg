@@ -17,7 +17,8 @@ TEST(LongestPalindromicSubsequenceTest, GetLongestLengthWorksOnExample1)
     EXPECT_EQ(5U, queryForTest.getLongestLengthUsingIterativeDPAndSpaceEfficient());
 }
 
-TEST(LongestPalindromicSubsequenceTest, GetLongestLengthWorksOnExample2){
+TEST(LongestPalindromicSubsequenceTest, GetLongestLengthWorksOnExample2)
+{
     LongestPalindromicSubsequence queryForTest("BBABCBCAB");
 
     EXPECT_EQ(7U, queryForTest.getLongestLengthUsingNaiveRecursion());

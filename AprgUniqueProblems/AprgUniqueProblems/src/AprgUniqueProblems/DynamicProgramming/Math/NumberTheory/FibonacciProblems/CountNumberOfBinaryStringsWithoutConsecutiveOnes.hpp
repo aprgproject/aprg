@@ -23,7 +23,8 @@ public:
     Count getCountUsingIterativeDPAndSpaceEfficient() const;
     Count getCountUsingFibonacci() const;
 private:
-    Count getCountUsingNaiveRecursion(bool const previousValue, Count const length) const;    // no memoization because there is no recomputation
+    Count getCountUsingNaiveRecursion(bool const previousValue, Count const length) const;
+    // no memoization because there is no recomputation
     Count const m_length;
 };
 
@@ -36,7 +37,8 @@ private:
 
 // Given a positive integer N, count all possible distinct binary strings of length N such that there are no consecutive 1’s.
 
-// Examples:// -> Input:  N = 2
+// Examples:
+// -> Input:  N = 2
 // ---> Output: 3
 // ---> The 3 strings are 00, 01, 10
 // -> Input: N = 3

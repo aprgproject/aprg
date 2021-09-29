@@ -26,7 +26,8 @@ public:
     Count getCountUsingIterativeDPAndSpaceEfficient() const;
 
 private:
-    Count getCountForValueUsingNaiveRecursion(Count const length, NumpadValue const numpadValue) const;    Count getCountForValueUsingMemoizationDP(CountMatrix & countMatrix, Count const length, NumpadValue const numpadValue) const;
+    Count getCountForValueUsingNaiveRecursion(Count const length, NumpadValue const numpadValue) const;
+    Count getCountForValueUsingMemoizationDP(CountMatrix & countMatrix, Count const length, NumpadValue const numpadValue) const;
     // no memoization because there is no recomputation
     Count const m_length;
 };

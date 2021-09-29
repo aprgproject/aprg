@@ -22,7 +22,8 @@ public:
     Unit getMaximumSquareAreaUsingIterativeDPAndTimeEfficient() const;
 
 private:
-    Unit getMaximumSideUsingMemoizationDP(UnitMatrix & sideMatrix, Index const x, Index const y) const;    Unit getUnitAt(Index const x, Index const y) const;
+    Unit getMaximumSideUsingMemoizationDP(UnitMatrix & sideMatrix, Index const x, Index const y) const;
+    Unit getUnitAt(Index const x, Index const y) const;
     BooleanMatrix const m_booleanMatrix;
 };
 

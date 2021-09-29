@@ -34,7 +34,8 @@ bool IsPartialSumPossibleInKnapsack::isPartialSumPossibleUsingMemoizationDP() co
     // Time Complexity: O(sum*n) (same as iterative)
     // Auxiliary Space: O(sum*n)
 
-    bool result(false);    if(!m_inputValues.empty())
+    bool result(false);
+    if(!m_inputValues.empty())
     {
         StateMatrix stateMatrix(m_targetSum+1, m_inputValues.size()+1, State::Unused);
         for(Index valueIndex=0; valueIndex<stateMatrix.getNumberOfRows(); valueIndex++)
@@ -50,6 +51,7 @@ bool IsPartialSumPossibleInKnapsack::isPartialSumPossibleUsingIterativeDP() cons
 {
     // Time Complexity: O(sum*n)
     // Auxiliary Space: O(sum*n)
+
     bool result(false);
     if(!m_inputValues.empty())
     {
@@ -80,6 +82,7 @@ bool IsPartialSumPossibleInKnapsack::isPartialSumPossibleUsingIterativeDPAndSpac
 {
     // Time Complexity: O(sum * n)
     // Auxiliary Space: O(sum)
+
     bool result(false);
     if(!m_inputValues.empty())
     {

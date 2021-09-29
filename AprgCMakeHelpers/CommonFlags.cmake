@@ -4,7 +4,8 @@
 # 2) No need to put -fno-exceptions. We allow exceptions, we just dont catch them.
 set(APRG_COMPILER_COMMON_FLAGS "-Wall -Wextra -pedantic")
 set(APRG_COMPILER_COMMON_C_FLAGS "-std=c17")
-set(APRG_COMPILER_COMMON_CPP_FLAGS "-std=c++17")set(APRG_COMPILER_FLAGS_FOR_DEBUG "-g --coverage -fno-rtti")
+set(APRG_COMPILER_COMMON_CPP_FLAGS "-std=c++17")
+set(APRG_COMPILER_FLAGS_FOR_DEBUG "-g --coverage -fno-rtti")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_RTTI "-g --coverage")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_FAST_COMPILATION "-g --coverage -O0") #-O0 is actually the default so this is useless
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_SPEED "-g --coverage -O3")
@@ -92,6 +93,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 # When all symbols are exported by default, it may increase the likelyhood of undefined behavior if there a multiple definitions of same symbol during linking.
 
 
+
 # Compiler Flags:
 
 # Flag: "std - Specify the C++ version or ISO standard version"
@@ -135,7 +137,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 # -> -O turns on the following optimization flags:
 # -fauto-inc-dec, -fbranch-count-reg, -fcombine-stack-adjustments, -fcompare-elim, -fcprop-registers, -fdce, -fdefer-pop, -fdelayed-branch, -fdse, -fforward-propagate,
 # -fguess-branch-probability, -fif-conversion, -fif-conversion2, -finline-functions-called-once, -fipa-modref, -fipa-profile, -fipa-pure-const, -fipa-reference,
-# -fipa-reference-addressable, -fmerge-constants, -fmove-loop-invariants, -fmove-loop-stores, -fomit-frame-pointer, -freorder-blocks, -fshrink-wrap, -fshrink-wrap-separate,# -fsplit-wide-types, -fssa-backprop, -fssa-phiopt, -ftree-bit-ccp, -ftree-ccp, -ftree-ch, -ftree-coalesce-vars, -ftree-copy-pro, -ftree-dc, -ftree-dominator-opts,
+# -fipa-reference-addressable, -fmerge-constants, -fmove-loop-invariants, -fmove-loop-stores, -fomit-frame-pointer, -freorder-blocks, -fshrink-wrap, -fshrink-wrap-separate,
+# -fsplit-wide-types, -fssa-backprop, -fssa-phiopt, -ftree-bit-ccp, -ftree-ccp, -ftree-ch, -ftree-coalesce-vars, -ftree-copy-pro, -ftree-dc, -ftree-dominator-opts,
 # -ftree-dse, -ftree-forwprop, -ftree-fre, -ftree-phiprop, -ftree-pta, -ftree-scev-cprop, -ftree-sink, -ftree-slsr, -ftree-sra, -ftree-ter, -funit-at-a-time
 
 # Flag: "-O2"
@@ -220,7 +223,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 # ---> Enabled at levels -O, -O2, -O3, -Os. 
 
 # Compiler code generations flags:
-# Flag: "-fpic (for position independent code)# -> Generate position-independent code (PIC) suitable for use in a shared library, if supported for the target machine.
+# Flag: "-fpic (for position independent code)
+# -> Generate position-independent code (PIC) suitable for use in a shared library, if supported for the target machine.
 # -> Such code accesses all constant addresses through a global offset table (GOT).
 # -> The dynamic loader resolves the GOT entries when the program starts (the dynamic loader is not part of GCC; it is part of the operating system).
 # -> If the GOT size for the linked executable exceeds a machine-specific maximum size,
@@ -296,7 +300,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 # ---> Which one do you use to reduce the size of executable and speed up its running
 # ------> The symbols table is a non-allocable section of the binary.
 # ------> This means that it never gets loaded in RAM memory.
-# ------> It stores information that can be useful for debugging purporses, for instance, to print out a stacktrace when a crash happens.# ------> A case where it could make sense to remove the symbols table would be a scenario where you have serious constraints of storage capacity
+# ------> It stores information that can be useful for debugging purporses, for instance, to print out a stacktrace when a crash happens.
+# ------> A case where it could make sense to remove the symbols table would be a scenario where you have serious constraints of storage capacity
 # ------> (in that regard, gcc -Os -s or make CXXFLAGS="-Os -s" ... is useful as it will result in a smaller slower binary that is also stripped to reduce size further).
 # ------> I don't think removing the symbols table would result into a speed gain for the reasons commented.
 
@@ -403,6 +408,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 # -> *.dylib -> Extension used on MacOSX.
 # Static Library
 # -> *.a - extension
+
 
 
 #Sanitizers (from https://github.com/google/sanitizers)

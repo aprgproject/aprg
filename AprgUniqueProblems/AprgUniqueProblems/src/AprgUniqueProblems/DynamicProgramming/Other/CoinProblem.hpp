@@ -66,7 +66,8 @@ public:
     CoinCombinations getCoinCombinationsUsingIterativeDP(Value const total) const;
 
 private:
-    Value getMaxAvailableCoin() const;    Value getMaxOfTotalAndMaxCoinPlusOne(Value const total) const;
+    Value getMaxAvailableCoin() const;
+    Value getMaxOfTotalAndMaxCoinPlusOne(Value const total) const;
 
     // fewest coins
     unsigned int getNumberOfFewestCoinsUsingMemoizationDPInternal(CountPerValue & countPerValue, Value const total) const;

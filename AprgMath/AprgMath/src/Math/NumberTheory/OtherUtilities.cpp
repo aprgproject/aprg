@@ -171,7 +171,8 @@ UnsignedInteger getNthFibonacciUsingLogarithmicTabularDP(UnsignedInteger const n
             logarithmicSteps.emplace(initialValue-1);
         }
 
-        for(UnsignedInteger const step : logarithmicSteps)        {
+        for(UnsignedInteger const step : logarithmicSteps)
+        {
             UnsignedInteger & resultForStep(tabularData[step]);
             if(mathHelper::isOdd(step))
             {
@@ -187,7 +188,8 @@ UnsignedInteger getNthFibonacciUsingLogarithmicTabularDP(UnsignedInteger const n
                 UnsignedInteger fibonacciAtKMinus1 = tabularData.at(n-1);
                 resultForStep = (2*fibonacciAtKMinus1 + fibonacciAtK)*fibonacciAtK;
             }
-        }        result = tabularData.at(number);
+        }
+        result = tabularData.at(number);
     }
     return result;
 }

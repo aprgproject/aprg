@@ -17,6 +17,7 @@ TEST(BinomialCoefficientTest, GetMinimumNumberOfOperationsWorksOnExample1)
     EXPECT_EQ(1U, queryForTest.getBinomialCoefficientUsingIterativeDPAndSpaceEfficient());
     EXPECT_EQ(1U, queryForTest.getBinomialCoefficientUsingGcf());
 }
+
 TEST(BinomialCoefficientTest, GetMinimumNumberOfOperationsWorksOnExample2)
 {
     BinomialCoefficient queryForTest(5U, 2U);
@@ -27,6 +28,7 @@ TEST(BinomialCoefficientTest, GetMinimumNumberOfOperationsWorksOnExample2)
     EXPECT_EQ(10U, queryForTest.getBinomialCoefficientUsingIterativeDPAndSpaceEfficient());
     EXPECT_EQ(10U, queryForTest.getBinomialCoefficientUsingGcf());
 }
+
 TEST(BinomialCoefficientTest, GetMinimumNumberOfOperationsWorksOnExample3)
 {
     BinomialCoefficient queryForTest(34U, 17U);
@@ -37,4 +39,5 @@ TEST(BinomialCoefficientTest, GetMinimumNumberOfOperationsWorksOnExample3)
     EXPECT_EQ(2333606220U, queryForTest.getBinomialCoefficientUsingIterativeDPAndSpaceEfficient());
     EXPECT_EQ(2333606220U, queryForTest.getBinomialCoefficientUsingGcf());
 }
+
 }

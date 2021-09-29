@@ -17,6 +17,7 @@ TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample1)
     EXPECT_EQ(0U, queryForTest.getCountUsingIterativeDPAndSpaceEfficient());
     EXPECT_EQ(0U, queryForTest.getCountUsingSummationFormula());
 }
+
 TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample2)
 {
     TotalNumberOfNonDecreasingNumbersWithNDigits queryForTest(1U);
@@ -27,6 +28,7 @@ TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample2)
     EXPECT_EQ(10U, queryForTest.getCountUsingIterativeDPAndSpaceEfficient());
     EXPECT_EQ(10U, queryForTest.getCountUsingSummationFormula());
 }
+
 TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample3)
 {
     TotalNumberOfNonDecreasingNumbersWithNDigits queryForTest(2U);
@@ -37,6 +39,7 @@ TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample3)
     EXPECT_EQ(55U, queryForTest.getCountUsingIterativeDPAndSpaceEfficient());
     EXPECT_EQ(55U, queryForTest.getCountUsingSummationFormula());
 }
+
 TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample4)
 {
     TotalNumberOfNonDecreasingNumbersWithNDigits queryForTest(3U);
@@ -47,6 +50,7 @@ TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample4)
     EXPECT_EQ(220U, queryForTest.getCountUsingIterativeDPAndSpaceEfficient());
     EXPECT_EQ(220U, queryForTest.getCountUsingSummationFormula());
 }
+
 TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample5)
 {
     TotalNumberOfNonDecreasingNumbersWithNDigits queryForTest(10U);
@@ -57,4 +61,5 @@ TEST(TotalNumberOfNonDecreasingNumbersWithNDigitsTest, GetCountWorksOnExample5)
     EXPECT_EQ(92378U, queryForTest.getCountUsingIterativeDPAndSpaceEfficient());
     EXPECT_EQ(92378U, queryForTest.getCountUsingSummationFormula());
 }
+
 }

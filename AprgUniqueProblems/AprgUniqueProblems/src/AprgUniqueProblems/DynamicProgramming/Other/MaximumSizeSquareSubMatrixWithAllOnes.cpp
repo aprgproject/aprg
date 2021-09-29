@@ -15,7 +15,8 @@ MaximumSizeSquareSubMatrixWithAllOnes::Unit MaximumSizeSquareSubMatrixWithAllOne
     // Time Complexity: O(m*n*max(m,n)) (same as iterative DP)
     // Auxiliary Space: O(m*n)
 
-    Unit result(0);    if(!m_booleanMatrix.isEmpty())
+    Unit result(0);
+    if(!m_booleanMatrix.isEmpty())
     {
         UnitMatrix sideMatrix(m_booleanMatrix.getNumberOfColumns(), m_booleanMatrix.getNumberOfRows(), UNUSED_UNIT);
         for(int x=static_cast<int>(sideMatrix.getNumberOfColumns()-1); x>=0; x--)
@@ -44,6 +45,7 @@ MaximumSizeSquareSubMatrixWithAllOnes::Unit MaximumSizeSquareSubMatrixWithAllOne
 {
     // Time Complexity: O(m*n*max(m,n))
     // Auxiliary Space: O(m*n)
+
     Unit result(0);
     if(!m_booleanMatrix.isEmpty())
     {
@@ -94,6 +96,7 @@ MaximumSizeSquareSubMatrixWithAllOnes::Unit MaximumSizeSquareSubMatrixWithAllOne
 {
     // Time Complexity: O(m*n)
     // Auxiliary Space: O(m*n)
+
     Unit result(0);
     if(!m_booleanMatrix.isEmpty())
     {

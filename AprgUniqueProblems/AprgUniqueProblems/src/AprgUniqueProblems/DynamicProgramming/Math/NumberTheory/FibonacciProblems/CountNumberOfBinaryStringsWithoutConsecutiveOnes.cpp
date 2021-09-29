@@ -25,6 +25,7 @@ CountNumberOfBinaryStringsWithoutConsecutiveOnes::Count CountNumberOfBinaryStrin
 {
     // Time Complexity: O(n)
     // Auxiliary Space: O(n)
+
     Count result(0);
     if(m_length>0)
     {
@@ -47,6 +48,7 @@ CountNumberOfBinaryStringsWithoutConsecutiveOnes::Count CountNumberOfBinaryStrin
 {
     // Time Complexity: O(n)
     // Auxiliary Space: O(1)
+
     Count result(0);
     if(m_length>0)
     {

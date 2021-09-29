@@ -29,6 +29,7 @@ public:
 
 private:
     Price getMinimumPriceUsingMemoizationDP(PriceMatrix & minimumPrices, Day const day, ProductBits const productBits) const;
+
     bool isProductIncluded(ProductBits const productBits, Product const product) const;
     Product getNumberOfProducts() const;
     Day getNumberOfDays() const;

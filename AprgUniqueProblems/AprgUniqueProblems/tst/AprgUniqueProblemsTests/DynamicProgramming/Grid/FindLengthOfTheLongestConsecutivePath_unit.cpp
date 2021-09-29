@@ -12,10 +12,11 @@ namespace
 using Grid=FindLengthOfTheLongestConsecutivePath::ValueGrid;
 }
 
-TEST(FindLengthOfTheLongestConsecutivePathTest, GetMinimalInitialPointsUsingIterativeDPWorksOnExample1)
+TEST(FindLengthOfTheLongestConsecutivePathTest, GetLongestLengthWorksOnExample1)
 {
     Grid inputGrid(3U, 3U,
-    {'a', 'c', 'd',     'h', 'b', 'e',
+    {'a', 'c', 'd',
+     'h', 'b', 'e',
      'i', 'g', 'f'});
     FindLengthOfTheLongestConsecutivePath queryForTest(inputGrid);
 
@@ -25,10 +26,11 @@ TEST(FindLengthOfTheLongestConsecutivePathTest, GetMinimalInitialPointsUsingIter
     EXPECT_EQ(5U, queryForTest.getLongestLengthStartingAtUsingMemoizationDP(2U, 1U));
 }
 
-TEST(FindLengthOfTheLongestConsecutivePathTest, GetMinimalInitialPointsUsingIterativeDPWorksOnExample2)
+TEST(FindLengthOfTheLongestConsecutivePathTest, GetLongestLengthWorksOnExample2)
 {
     Grid inputGrid(3U, 3U,
-    {'b', 'e', 'f',     'h', 'd', 'a',
+    {'b', 'e', 'f',
+     'h', 'd', 'a',
      'i', 'c', 'a'});
     FindLengthOfTheLongestConsecutivePath queryForTest(inputGrid);
 

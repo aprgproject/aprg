@@ -38,7 +38,8 @@ private:
     Grid getPartialSumGridUsingIterativeDP() const;
     Value getBestPathSumUsingMemoizationDP(Grid & partialSumGrid, Index const x, Index const y) const;
     void initialize(Type const type);
-    Grid m_inputGrid;    CompareFunction m_compareFunction;
+    Grid m_inputGrid;
+    CompareFunction m_compareFunction;
     MinMaxFunction m_minMaxFunction;
 };
 
@@ -55,7 +56,8 @@ private:
 // 2) Dynamic Programming by Iterative method:
 // -> Each "cell" has a "partial sum".
 // -> Forward traversal (from top-left to bottom-right)
-// -> Traversal uses previous values to compute for a new value// -> The computation of the "partial sum" of each cell is:
+// -> Traversal uses previous values to compute for a new value
+// -> The computation of the "partial sum" of each cell is:
 // ---> Get the partial sums of the left neighbor, the top neighbor, and the top-left neighbor
 // ---> Return the min/max of partial sums of the neighbors plus the value of this cell
 

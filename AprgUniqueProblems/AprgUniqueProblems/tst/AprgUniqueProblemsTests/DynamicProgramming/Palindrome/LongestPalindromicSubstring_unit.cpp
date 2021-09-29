@@ -18,7 +18,8 @@ TEST(LongestPalindromicSubstringTest, GetLongestLengthWorksOnExample1)
     EXPECT_EQ("geeksskeeg", queryForTest.getLongestStringUsingIterativeDPAndSpaceEfficient());
 }
 
-TEST(LongestPalindromicSubstringTest, GetLongestLengthWorksOnExample2){
+TEST(LongestPalindromicSubstringTest, GetLongestLengthWorksOnExample2)
+{
     LongestPalindromicSubstring queryForTest("Geeks");
 
     EXPECT_EQ(2U, queryForTest.getLongestLengthUsingNaiveRecursion());

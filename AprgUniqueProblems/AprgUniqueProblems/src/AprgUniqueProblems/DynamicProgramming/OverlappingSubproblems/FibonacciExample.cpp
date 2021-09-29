@@ -33,7 +33,8 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMemoizationDP(Num
     // Time Complexity: O(n) // same as iterative DP
     // Extra Space: O(n)
 
-    // a) Memoization (Top Down):    // The memoized program for a problem is similar to the recursive version
+    // a) Memoization (Top Down):
+    // The memoized program for a problem is similar to the recursive version
     // with a small modification that it looks into a lookup table before computing solutions.
     // We initialize a lookup array with all initial values as UNUSED_VALUE.
     // Whenever we need the solution to a subproblem, we first look into the lookup table.
@@ -51,6 +52,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDP(Numbe
 {
     // Time Complexity: O(n)
     // Extra Space: O(n)
+
     // b) Tabulation (Bottom Up):
     // The tabulated program for a given problem builds a table in bottom up fashion and returns the last entry from table.
     // For example, for the same Fibonacci number, we first calculate fib(0) then fib(1) then fib(2) then fib(3) and so on.
@@ -70,6 +72,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDP(Numbe
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDPAndSpaceEfficient(Number const number)
 {
     // NOTE: Same implementation in AprgMath
+
     // Time Complexity: O(n)
     // Extra Space: O(1)
     // -> We can optimize the space used in method 2 by storing the previous two numbers only
@@ -179,6 +182,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicMemoiz
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicIterativeDP(Number const number)
 {
     // Derived using matrix power (check notes at header file)
+
     Number result(number);
     if(result > 1)
     {
@@ -188,7 +192,8 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicIterat
         iterativeData[1] = 1;
 
         NumberSet logarithmicSteps{number};
-        Number k(number);        while(k >= 3)
+        Number k(number);
+        while(k >= 3)
         {
             k = mathHelper::isOdd(k) ? (k+1)/2 : k/2;
             logarithmicSteps.emplace(k);
@@ -217,6 +222,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicIterat
     }
     return result;
 }
+
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMemoizationDP(
         Numbers & memoizationData,
         Number const number)

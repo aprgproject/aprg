@@ -27,7 +27,8 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
     // Time Complexity: O(n^3) (should be same as Iterative DP)
     // Auxiliary Space: O(n^2)
 
-    Count result(0);    if(!m_string.empty())
+    Count result(0);
+    if(!m_string.empty())
     {
         CountMatrix countMatrix(m_string.length(), m_string.length(), static_cast<Count>(MAX_COUNT));
         result =  getMinimumNumberOfCutsUsingMemoizationDP(countMatrix, 0, m_string.length()-1);
@@ -39,6 +40,7 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
 {
     // Time Complexity: O(n^3)
     // Auxiliary Space: O(n^2)
+
     Count result(0);
     if(!m_string.empty())
     {
@@ -74,6 +76,7 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
 {
     // Time Complexity: O(n^2)
     // Auxiliary Space: O(n^2) (partialCounts is linear, but isSubstrAPalindrome is quadratic)
+
     Count result(0);
     if(!m_string.empty())
     {

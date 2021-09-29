@@ -28,7 +28,8 @@ public:
     Count getNumberOfWaysForTrueUsingIterativeDP() const;
 
 private:
-    Count getNumberOfWaysUsingNaiveRecursion(bool const expectedOutput, Index const left, Index const right) const;    Count getNumberOfWaysUsingMemoizationDP(CountMatrices & countMatrices, bool const expectedOutput, Index const left, Index const right) const;
+    Count getNumberOfWaysUsingNaiveRecursion(bool const expectedOutput, Index const left, Index const right) const;
+    Count getNumberOfWaysUsingMemoizationDP(CountMatrices & countMatrices, bool const expectedOutput, Index const left, Index const right) const;
 
     Count convertBoolToCount(bool const booleanValue) const;
     bool areSizesCorrect() const;
@@ -44,7 +45,8 @@ private:
 
 // Given a boolean expression with following symbols.
 
-// Symbols// -> 'T' ---> true
+// Symbols
+// -> 'T' ---> true
 // -> 'F' ---> false
 
 // And following operators filled between symbols
@@ -72,3 +74,4 @@ private:
 // -> Output: 4
 // -> The given expression is "T | T & F ^ T", it evaluates true in 4 ways:
 // --->((T|T)&(F^T)), (T|(T&(F^T))), (((T|T)&F)^T)  and (T|((T&F)^T)).
+

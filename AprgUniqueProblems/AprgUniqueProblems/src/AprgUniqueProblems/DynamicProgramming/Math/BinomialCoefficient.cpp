@@ -28,7 +28,8 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingMemoi
     // Time Complexity: O(n*k) (should be same as Iterative DP)
     // Auxiliary Space: O(n*k)
 
-    Value result(0);    if(m_n>=m_k)
+    Value result(0);
+    if(m_n>=m_k)
     {
         ValueMatrix valueMatrix(m_n+1, m_k+1, static_cast<Value>(UNUSED_VALUE));
         result = getBinomialCoefficientUsingMemoizationDP(valueMatrix, m_n, m_k);
@@ -40,6 +41,7 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingItera
 {
     // Time Complexity: O(n*k)
     // Auxiliary Space: O(n*k)
+
     Value result(0);
     if(m_n>=m_k)
     {
@@ -72,6 +74,7 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingItera
 {
     // Time Complexity: O(n*k)
     // Auxiliary Space: O(k)
+
     // Space efficiency analysis:
     // Since accessing the previous partial values requires only one row above,
     // we only really need 1 row (not a matrix) to keep track partial values.
@@ -126,7 +129,8 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingGcf()
     {
         Value numerator=m_n;
         Value denominator=m_k;
-        Value accumulatedNumerator=1;        Value accumulatedDenominator=1;
+        Value accumulatedNumerator=1;
+        Value accumulatedDenominator=1;
         bool shouldContinue=true;
         while(shouldContinue)
         {
