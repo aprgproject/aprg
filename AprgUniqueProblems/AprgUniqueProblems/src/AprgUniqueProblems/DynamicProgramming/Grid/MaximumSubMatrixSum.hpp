@@ -39,10 +39,10 @@ private:
 // Maximum sum rectangle in a 2D matrix
 
 // Given a 2D array, find the maximum sum subarray in it.
+
 // For example, in the following 2D array, the maximum sum subarray is highlighted with # rectangle and sum of this subarray is 29.
 // -----------------
-// | 1 | 2|-1|-4|-20|
-// ----##########----
+// | 1 | 2|-1|-4|-20|// ----##########----
 // |-8 #-3| 4| 2#  1|
 // ----#--------#----
 // | 3 # 8|10| 1#  3|

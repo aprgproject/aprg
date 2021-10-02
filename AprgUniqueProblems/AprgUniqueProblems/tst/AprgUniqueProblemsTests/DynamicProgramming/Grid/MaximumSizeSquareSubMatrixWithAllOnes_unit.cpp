@@ -1,7 +1,6 @@
-#include <AprgUniqueProblems/DynamicProgramming/Other/MaximumSizeSquareSubMatrixWithAllOnes.hpp>
+#include <AprgUniqueProblems/DynamicProgramming/Grid/MaximumSizeSquareSubMatrixWithAllOnes.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba

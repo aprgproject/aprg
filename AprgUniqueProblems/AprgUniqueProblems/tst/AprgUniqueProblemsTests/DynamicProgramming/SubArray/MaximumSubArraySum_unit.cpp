@@ -1,7 +1,6 @@
-#include <AprgUniqueProblems/DynamicProgramming/Other/MaximumSubArraySum.hpp>
+#include <AprgUniqueProblems/DynamicProgramming/SubArray/MaximumSubArraySum.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba
