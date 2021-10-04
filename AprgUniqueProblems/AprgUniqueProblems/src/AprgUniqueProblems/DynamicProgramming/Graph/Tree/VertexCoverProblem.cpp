@@ -8,12 +8,11 @@ using namespace std;
 namespace alba
 {
 
-VertexCoverProblem::VertexCoverProblem(Graph const& binaryTreeGraph, Vertex const rootOfTree)
-    : m_nAryTreeGraph(binaryTreeGraph)
+VertexCoverProblem::VertexCoverProblem(Graph const& nAryTreeGraph, Vertex const rootOfTree)
+    : m_nAryTreeGraph(nAryTreeGraph)
     , m_rootOfTree(rootOfTree)
     , m_childrenInTree(m_nAryTreeGraph, m_rootOfTree)
 {}
-
 VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingNaiveRecursion() const
 {
     // Time Complexity: Exponential
@@ -85,15 +84,14 @@ VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingMemoizationDP(
         Count countIfVertexIsNotIncluded(0);
         for(Vertex const child : m_childrenInTree.getChildren(vertex))
         {
-            Count childrenCount = getMinimumCountUsingNaiveRecursion(child);
+            Count childrenCount = getMinimumCountUsingMemoizationDP(vertexToCountMap, child);
             Count grandChildrenCount = 1;
             for(Vertex const grandChild : m_childrenInTree.getChildren(child))
             {
-                grandChildrenCount += getMinimumCountUsingNaiveRecursion(grandChild);
+                grandChildrenCount += getMinimumCountUsingMemoizationDP(vertexToCountMap, grandChild);
             }
             countIfVertexIsIncluded += childrenCount;
-            countIfVertexIsNotIncluded += grandChildrenCount;
-        }
+            countIfVertexIsNotIncluded += grandChildrenCount;        }
         Count result = min(countIfVertexIsIncluded, countIfVertexIsNotIncluded);
         vertexToCountMap.emplace(vertex, result);
         return result;

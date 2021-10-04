@@ -20,11 +20,10 @@ public:
     using VertexToSetOfVerticesMap = std::map<Vertex, SetOfVertices>;
     static constexpr unsigned int UNUSED_COUNT=std::numeric_limits<unsigned int>::max();
 
-    VertexCoverProblem(Graph const& binaryTreeGraph, Vertex const rootOfTree);
+    VertexCoverProblem(Graph const& nAryTreeGraph, Vertex const rootOfTree);
 
     Count getMinimumCountUsingNaiveRecursion() const;
-    Count getMinimumCountUsingMemoizationDP() const;
-    SetOfVertices getMinimumSetUsingMemoizationDP() const;
+    Count getMinimumCountUsingMemoizationDP() const;    SetOfVertices getMinimumSetUsingMemoizationDP() const;
 
 private:
     Count getMinimumCountUsingNaiveRecursion(Vertex const vertex) const;
