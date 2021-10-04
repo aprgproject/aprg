@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Common/Bit/AlbaBitManipulation.hpp>
+#include <Common/Bit/Common/AlbaBitManipulationClassDefinition.hpp>
 
 namespace alba
 {
-
 template <>
 template <>
 constexpr inline uint16_t AlbaBitManipulation<uint16_t>::swapWithBytes<2>(uint16_t const value)
