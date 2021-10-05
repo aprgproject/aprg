@@ -1,13 +1,15 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 //#define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
-#include "P1_SampleProblem.hpp"
+#include "P2_MaximumCoins.hpp"
 #include <Common/FakeNames.hpp>
 //#include <Common/Debug/AlbaDebug.hpp>
 #endif
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
-#include <cstdint>#include <iostream>
+#include <cstdint>
+#include <iostream>
+#include <map>
 
 using namespace std;
 
@@ -15,7 +17,7 @@ using namespace std;
 #ifndef FOR_SUBMISSION
 using namespace alba;
 #endif
-namespace P1_SampleProblem
+namespace P2_MaximumCoins
 {
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
@@ -26,7 +28,21 @@ namespace P1_SampleProblem
 
 void runTestCase(unsigned int const testCaseNumber)
 {
-    //my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
+    int n;
+    my_cin >> n;
+    map<int, long long> mapka;
+    for(int row = 0; row < n; ++row) {
+        for(int col = 0; col < n; ++col) {
+            int x;
+            my_cin >> x;
+            mapka[row-col] += x;
+        }
+    }
+    long long answer = 0;
+    for(auto pp : mapka) {
+        answer = max(answer, pp.second);
+    }
+    my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
 }
 
 void runAllTestCases()
@@ -45,6 +61,7 @@ int main()
     my_cin.tie(nullptr);
 
     runAllTestCases();
+
     return 0;
 }
 
@@ -52,4 +69,5 @@ int main()
 }
 #undef FOR_SUBMISSION
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+
 

@@ -1,9 +1,10 @@
 #pragma once
 
-namespace P2_BoringNumbers
+namespace P3_CombinationLock
 {
 
 int main(); // this is main
 
 }
+
 

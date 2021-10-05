@@ -1,13 +1,15 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 //#define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
-#include "P1_SampleProblem.hpp"
+#include "P4_MergeCards.hpp"
 #include <Common/FakeNames.hpp>
 //#include <Common/Debug/AlbaDebug.hpp>
 #endif
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
-#include <cstdint>#include <iostream>
+#include <cstdint>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -15,7 +17,7 @@ using namespace std;
 #ifndef FOR_SUBMISSION
 using namespace alba;
 #endif
-namespace P1_SampleProblem
+namespace P4_MergeCards
 {
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
@@ -26,7 +28,23 @@ namespace P1_SampleProblem
 
 void runTestCase(unsigned int const testCaseNumber)
 {
-    //my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
+    int n;
+    my_cin >> n;
+    vector<int> a(n);
+    for(int i = 0; i < n; ++i) {
+        my_cin >> a[i];
+    }
+    double answer = 0;
+    for(int x = 0; x < n - 1; ++x) {
+        for(int i = x; i >= 0; --i) {
+            answer += a[i] / (double) (x - i + 1);
+        }
+        for(int i = x + 1; i < n; ++i) {
+            answer += a[i] / (double) (i - x);
+        }
+    }
+    my_cout.precision(10);
+    my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
 }
 
 void runAllTestCases()
@@ -45,6 +63,7 @@ int main()
     my_cin.tie(nullptr);
 
     runAllTestCases();
+
     return 0;
 }
 
@@ -52,4 +71,5 @@ int main()
 }
 #undef FOR_SUBMISSION
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+
 

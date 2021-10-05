@@ -1,13 +1,16 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 //#define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
-#include "P1_SampleProblem.hpp"
+#include "P2_MetalHarvest.hpp"
 #include <Common/FakeNames.hpp>
 //#include <Common/Debug/AlbaDebug.hpp>
 #endif
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
-#include <cstdint>#include <iostream>
+#include <algorithm>
+#include <cstdint>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -15,7 +18,7 @@ using namespace std;
 #ifndef FOR_SUBMISSION
 using namespace alba;
 #endif
-namespace P1_SampleProblem
+namespace P2_MetalHarvest
 {
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
@@ -26,7 +29,26 @@ namespace P1_SampleProblem
 
 void runTestCase(unsigned int const testCaseNumber)
 {
-    //my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
+    int n, k;
+    my_cin >> n >> k;
+    vector <pair <int, int> > e;
+    for (int i = 0; i < n; i++) {
+      int l, r;
+      my_cin >> l >> r;
+      e.push_back({l, r});
+    }
+    sort(e.begin(), e.end());
+    int last = 0;
+    int ans = 0;
+    for (int i = 0; i < n; i++) {
+      e[i].first = max(e[i].first, last);
+      if (e[i].first < e[i].second) {
+        int ret = (e[i].second - e[i].first + k - 1) / k;
+        ans += ret;
+        last = e[i].first + ret * k;
+      }
+    }
+    my_cout << "Case #" << testCaseNumber << ": " << ans << '\n';
 }
 
 void runAllTestCases()
@@ -45,6 +67,7 @@ int main()
     my_cin.tie(nullptr);
 
     runAllTestCases();
+
     return 0;
 }
 
@@ -52,4 +75,5 @@ int main()
 }
 #undef FOR_SUBMISSION
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+
 

@@ -1,13 +1,16 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 //#define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
-#include "P1_SampleProblem.hpp"
+#include "P1_KickStart.hpp"
 #include <Common/FakeNames.hpp>
 //#include <Common/Debug/AlbaDebug.hpp>
 #endif
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
-#include <cstdint>#include <iostream>
+#include <cstdint>
+#include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -15,7 +18,7 @@ using namespace std;
 #ifndef FOR_SUBMISSION
 using namespace alba;
 #endif
-namespace P1_SampleProblem
+namespace P1_KickStart
 {
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
@@ -26,7 +29,26 @@ namespace P1_SampleProblem
 
 void runTestCase(unsigned int const testCaseNumber)
 {
-    //my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
+    string s;
+    my_cin >> s;
+    int n = s.length();
+    vector<int> pref(n);
+    for(int i = 0; i + 3 < n; ++i) {
+        if(i > 0) {
+            pref[i] += pref[i-1];
+        }
+        if(string(s.cbegin()+i, s.cbegin()+i+4) == "KICK") {
+            pref[i]++;
+            // debug() << imie(i);
+        }
+    }
+    long long answer = 0;
+    for(int i = 0; i + 4 < n; ++i) {
+        if(string(s.cbegin()+i, s.cbegin()+i+5) == "START") {
+            answer += pref[i];
+        }
+    }
+    my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
 }
 
 void runAllTestCases()
@@ -45,6 +67,7 @@ int main()
     my_cin.tie(nullptr);
 
     runAllTestCases();
+
     return 0;
 }
 
@@ -52,4 +75,5 @@ int main()
 }
 #undef FOR_SUBMISSION
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+
 

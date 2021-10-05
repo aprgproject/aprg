@@ -1,9 +1,10 @@
 #pragma once
 
-namespace P2_BoringNumbers
+namespace P4_Yeetzhee
 {
 
 int main(); // this is main
 
 }
+
 
