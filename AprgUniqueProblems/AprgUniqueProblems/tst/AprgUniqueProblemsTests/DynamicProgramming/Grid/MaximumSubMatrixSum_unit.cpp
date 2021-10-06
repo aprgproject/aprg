@@ -1,6 +1,7 @@
 #include <AprgUniqueProblems/DynamicProgramming/Grid/MaximumSubMatrixSum.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba
@@ -21,7 +22,8 @@ TEST(MaximumSubMatrixSumTest, GetMaximumSubMatrixSumWorksOnExample1)
       -4,  -1,   1,   7,  -6});
     MaximumSubMatrixSum queryForTest(pricesInDayByProduct);
 
-    EXPECT_EQ(29, queryForTest.getMaximumSubMatrixSum());}
+    EXPECT_EQ(29, queryForTest.getMaximumSubMatrixSum());
+}
 
 TEST(MaximumSubMatrixSumTest, GetMaximumSubMatrixSumWithDetailsWorksOnExample1)
 {
@@ -33,6 +35,7 @@ TEST(MaximumSubMatrixSumTest, GetMaximumSubMatrixSumWithDetailsWorksOnExample1)
     MaximumSubMatrixSum queryForTest(pricesInDayByProduct);
 
     SubArrayDetails subArrayDetailsToVerify(queryForTest.getMaximumSubMatrixSumWithDetails());
+
     EXPECT_EQ(1U, subArrayDetailsToVerify.left);
     EXPECT_EQ(4U, subArrayDetailsToVerify.right);
     EXPECT_EQ(1U, subArrayDetailsToVerify.up);

@@ -4,6 +4,7 @@
 
 namespace alba
 {
+
 template <>
 template <>
 constexpr inline uint16_t AlbaBitManipulation<uint16_t>::swapWithBytes<2>(uint16_t const value)

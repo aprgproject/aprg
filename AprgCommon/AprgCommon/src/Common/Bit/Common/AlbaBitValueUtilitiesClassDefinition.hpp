@@ -5,6 +5,7 @@
 #include <Common/Types/AlbaTypeHelper.hpp>
 
 #include <cmath>
+
 namespace alba
 {
 
@@ -15,7 +16,8 @@ public:
     static_assert(typeHelper::isIntegralType<DataType>(), "DataType must be an integer");
 
     // rule of five or six
-    AlbaBitValueUtilities() = delete;    ~AlbaBitValueUtilities() = delete; // disallow allocation on stack, only on heap(but no constructor so not possible as well)
+    AlbaBitValueUtilities() = delete;
+    ~AlbaBitValueUtilities() = delete; // disallow allocation on stack, only on heap(but no constructor so not possible as well)
     AlbaBitValueUtilities(AlbaBitValueUtilities const&) = delete;
     AlbaBitValueUtilities & operator= (AlbaBitValueUtilities const&) = delete;
     AlbaBitValueUtilities(AlbaBitValueUtilities &&) = delete;
@@ -110,4 +112,5 @@ public:
         return value & (-value);
     }
 };
+
 }

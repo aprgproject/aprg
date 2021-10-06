@@ -23,7 +23,8 @@ public:
     LargestIndependentSetProblem(Graph const& nAryTreeGraph, Vertex const rootOfTree);
 
     Count getMaximumCountUsingNaiveRecursion() const;
-    Count getMaximumCountUsingMemoizationDP() const;    SetOfVertices getMaximumSetUsingMemoizationDP() const;
+    Count getMaximumCountUsingMemoizationDP() const;
+    SetOfVertices getMaximumSetUsingMemoizationDP() const;
 
 private:
     Count getMaximumCountUsingNaiveRecursion(Vertex const vertex) const;
@@ -34,6 +35,7 @@ private:
     Vertex m_rootOfTree;
     ChildrenInTree m_childrenInTree;
 };
+
 }
 
 
@@ -50,6 +52,7 @@ private:
 
 // Given a Binary Tree, find size of the Largest Independent Set(LIS) in it.
 // A subset of all tree nodes is an independent set if there is no edge between any two nodes of the subset.
+
 // For example, consider the following binary tree. The largest independent set(LIS) is {10, 40, 60, 70, 80} and size of the LIS is 5.
 //       10
 //      |  |
@@ -92,7 +95,8 @@ private:
 // 1) Extend the above solution for n-ary tree. (DONE!)
 // 2) The above solution modifies the given tree structure by adding an additional field ‘liss’ to tree nodes.
 // -> Extend the solution so that it doesn’t modify the tree structure.
-// 3) The above solution only returns size of LIS, it doesn’t print elements of LIS.// -> Extend the solution to print all nodes that are part of LIS.
+// 3) The above solution only returns size of LIS, it doesn’t print elements of LIS.
+// -> Extend the solution to print all nodes that are part of LIS.
 
 
 

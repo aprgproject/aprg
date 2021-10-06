@@ -1,7 +1,8 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #include "P3_Rugby.hpp"
-#include <Common/FakeNames.hpp>
-//#include <Common/Debug/AlbaDebug.hpp>// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <Fake/FakeNames.hpp>
+//#include <Common/Debug/AlbaDebug.hpp>
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
 #include <algorithm>
 #include <cstdint>
@@ -30,7 +31,8 @@ void runTestCase(unsigned int const testCaseNumber)
         my_cin >> X[i] >> Y[i];
     }
     sort(X.begin(), X.end());
-    for (int i = 0; i < N; i++) X[i] -= i;    sort(X.begin(), X.end());
+    for (int i = 0; i < N; i++) X[i] -= i;
+    sort(X.begin(), X.end());
     sort(Y.begin(), Y.end());
     int64_t mx = X[N/2];
     int64_t my = Y[N/2];
@@ -57,6 +59,7 @@ int main()
     my_cin.tie(nullptr);
 
     runAllTestCases();
+
     return 0;
 }
 

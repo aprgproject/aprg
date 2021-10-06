@@ -1,7 +1,8 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #include "P4_Friends.hpp"
-#include <Common/FakeNames.hpp>
-//#include <Common/Debug/AlbaDebug.hpp>// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <Fake/FakeNames.hpp>
+//#include <Common/Debug/AlbaDebug.hpp>
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
 #include <algorithm>
 #include <cstdint>
@@ -28,13 +29,15 @@ void runTestCase(unsigned int const testCaseNumber)
     const int INF = 1e9;
     vector<vector<int>> dist(26, vector<int>(26, INF));
     for (int i = 0; i < 26; i++) dist[i][i] = 0;
+
     vector<int> msks(N);
     for (int z = 0; z < N; z++) {
         string S;
         my_cin >> S;
         int msk = 0;
         for (char c : S) {
-            msk |= (1 << (c - 'A'));        }
+            msk |= (1 << (c - 'A'));
+        }
         msks[z] = msk;
         for (int i = 0; i < 26; i++) {
             if (!(msk & (1 << i))) continue;
@@ -58,7 +61,8 @@ void runTestCase(unsigned int const testCaseNumber)
         int u, v; my_cin >> u >> v; u--, v--;
         int ans = INF;
         for (int m1 = msks[u]; m1; m1 &= m1-1) {
-            int i = __builtin_ctz(m1);            for (int m2 = msks[v]; m2; m2 &= m2-1) {
+            int i = __builtin_ctz(m1);
+            for (int m2 = msks[v]; m2; m2 &= m2-1) {
                 int j = __builtin_ctz(m2);
                 ans = min(ans, 2 + dist[i][j]);
             }
@@ -85,6 +89,7 @@ int main()
     my_cin.tie(nullptr);
 
     runAllTestCases();
+
     return 0;
 }
 

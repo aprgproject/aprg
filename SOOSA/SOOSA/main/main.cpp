@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     cout << "Code version: " << APRG_CODE_REVISION << "\n\n";
 
     strings argumentsInMain(getArgumentsToStringInMain(argc, argv));
+
     if(argumentsInMain.size()==2)
     {
         AlbaLocalPathHandler detectedPath(AlbaLocalPathHandler::createPathHandlerForDetectedPath());

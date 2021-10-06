@@ -13,7 +13,9 @@ LargestIndependentSetProblem::LargestIndependentSetProblem(Graph const& nAryTree
     , m_rootOfTree(rootOfTree)
     , m_childrenInTree(m_nAryTreeGraph, m_rootOfTree)
 {}
-LargestIndependentSetProblem::Count LargestIndependentSetProblem::getMaximumCountUsingNaiveRecursion() const{
+
+LargestIndependentSetProblem::Count LargestIndependentSetProblem::getMaximumCountUsingNaiveRecursion() const
+{
     // Time Complexity: Exponential
     // Auxiliary Space: Constant
 
@@ -21,7 +23,8 @@ LargestIndependentSetProblem::Count LargestIndependentSetProblem::getMaximumCoun
     if(!m_nAryTreeGraph.isEmpty())
     {
         result = getMaximumCountUsingNaiveRecursion(m_rootOfTree);
-    }    return result;
+    }
+    return result;
 }
 
 LargestIndependentSetProblem::Count LargestIndependentSetProblem::getMaximumCountUsingMemoizationDP() const
@@ -33,7 +36,8 @@ LargestIndependentSetProblem::Count LargestIndependentSetProblem::getMaximumCoun
     if(!m_nAryTreeGraph.isEmpty())
     {
         VertexToCountMap vertexToCountMap;
-        result = getMaximumCountUsingMemoizationDP(vertexToCountMap, m_rootOfTree);    }
+        result = getMaximumCountUsingMemoizationDP(vertexToCountMap, m_rootOfTree);
+    }
     return result;
 }
 
@@ -46,7 +50,8 @@ LargestIndependentSetProblem::SetOfVertices LargestIndependentSetProblem::getMax
     if(!m_nAryTreeGraph.isEmpty())
     {
         VertexToSetOfVerticesMap vertexToMaximumSetMap;
-        result = getMaximumSetUsingMemoizationDP(vertexToMaximumSetMap, m_rootOfTree);    }
+        result = getMaximumSetUsingMemoizationDP(vertexToMaximumSetMap, m_rootOfTree);
+    }
     return result;
 }
 
@@ -112,7 +117,8 @@ LargestIndependentSetProblem::SetOfVertices LargestIndependentSetProblem::getMax
                 copy(grandChildSet.cbegin(), grandChildSet.cend(), inserter(setIfVertexIsIncluded, setIfVertexIsIncluded.begin()));
             }
         }
-        if(setIfVertexIsIncluded.size() >= setIfVertexIsNotIncluded.size())        {
+        if(setIfVertexIsIncluded.size() >= setIfVertexIsNotIncluded.size())
+        {
             vertexToMaximumSetMap.emplace(vertex, setIfVertexIsIncluded);
             return setIfVertexIsIncluded;
         }

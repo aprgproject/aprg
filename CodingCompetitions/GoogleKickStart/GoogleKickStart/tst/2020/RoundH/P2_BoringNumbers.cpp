@@ -1,7 +1,8 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #include "P2_BoringNumbers.hpp"
-#include <Common/FakeNames.hpp>
-//#include <Common/Debug/AlbaDebug.hpp>// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <Fake/FakeNames.hpp>
+//#include <Common/Debug/AlbaDebug.hpp>
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
 #include <cstdint>
 #include <iostream>
@@ -25,7 +26,8 @@ void runTestCase(unsigned int const testCaseNumber)
     my_cin >> L >> R;
     ++R;
     bool parity = 0;
-    int64_t coeff = 1;    int64_t ans = 0;
+    int64_t coeff = 1;
+    int64_t ans = 0;
     while (L < R)
     {
         auto is_good = [&](int64_t v)
@@ -80,6 +82,7 @@ int main()
     my_cin.tie(nullptr);
 
     runAllTestCases();
+
     return 0;
 }
 

@@ -35,7 +35,8 @@ private:
 
 // Write an efficient program to find the sum of contiguous subarray within a one-dimensional array of numbers that has the largest sum.
 
-// Kadane’s Algorithm:// -> Initialize:
+// Kadane’s Algorithm:
+// -> Initialize:
 // ->     max_so_far = INT_MIN
 // ->     max_ending_here = 0
 // -> Loop for each element of the array

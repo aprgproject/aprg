@@ -1,6 +1,6 @@
 #include "P1_Retype.hpp"
 
-#include <Common/FakeObjects.hpp>
+#include <Fake/FakeObjects.hpp>
 
 #include <gtest/gtest.h>
 
@@ -25,7 +25,8 @@ TEST(P1_RetypeTest, Test1)
     main();
 
     EXPECT_EQ(
-                "Case #1: 15" "\n"                "Case #2: 12" "\n"
+                "Case #1: 15" "\n"
+                "Case #2: 12" "\n"
                 , outputStringStream.str());
 }
 

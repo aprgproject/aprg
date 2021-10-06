@@ -7,7 +7,8 @@ namespace alba
 
 template <>
 constexpr inline uint8_t AlbaBitValueUtilities<uint8_t>::getAllOnes()
-{    return 0xFFU;
+{
+    return 0xFFU;
 }
 
 template <>

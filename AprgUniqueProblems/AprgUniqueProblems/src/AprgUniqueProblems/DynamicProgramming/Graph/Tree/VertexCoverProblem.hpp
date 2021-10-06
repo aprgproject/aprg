@@ -23,7 +23,8 @@ public:
     VertexCoverProblem(Graph const& nAryTreeGraph, Vertex const rootOfTree);
 
     Count getMinimumCountUsingNaiveRecursion() const;
-    Count getMinimumCountUsingMemoizationDP() const;    SetOfVertices getMinimumSetUsingMemoizationDP() const;
+    Count getMinimumCountUsingMemoizationDP() const;
+    SetOfVertices getMinimumSetUsingMemoizationDP() const;
 
 private:
     Count getMinimumCountUsingNaiveRecursion(Vertex const vertex) const;

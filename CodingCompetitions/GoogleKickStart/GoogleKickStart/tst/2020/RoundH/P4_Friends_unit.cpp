@@ -1,6 +1,6 @@
 #include "P4_Friends.hpp"
 
-#include <Common/FakeObjects.hpp>
+#include <Fake/FakeObjects.hpp>
 
 #include <gtest/gtest.h>
 
@@ -31,7 +31,8 @@ TEST(P4_FriendsTest, Test1)
     main();
 
     EXPECT_EQ(
-                "Case #1: 2 3" "\n"                "Case #2: -1 -1" "\n"
+                "Case #1: 2 3" "\n"
+                "Case #2: -1 -1" "\n"
                 , outputStringStream.str());
 }
 

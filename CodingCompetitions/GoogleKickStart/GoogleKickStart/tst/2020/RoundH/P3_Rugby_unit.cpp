@@ -1,6 +1,6 @@
 #include "P3_Rugby.hpp"
 
-#include <Common/FakeObjects.hpp>
+#include <Fake/FakeObjects.hpp>
 
 #include <gtest/gtest.h>
 
@@ -30,7 +30,8 @@ TEST(P3_RugbyTest, Test1)
     main();
 
     EXPECT_EQ(
-                "Case #1: 5" "\n"                "Case #2: 4" "\n"
+                "Case #1: 5" "\n"
+                "Case #2: 4" "\n"
                 , outputStringStream.str());
 }
 

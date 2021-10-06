@@ -13,7 +13,8 @@ namespace original // make an original namespace to avoid collision
 {
 class SampleClass
 {
-public:    SampleClass()
+public:
+    SampleClass()
         : m_dataPointer()
     {}
     SampleClass(int const data)

@@ -13,6 +13,7 @@ VertexCoverProblem::VertexCoverProblem(Graph const& nAryTreeGraph, Vertex const 
     , m_rootOfTree(rootOfTree)
     , m_childrenInTree(m_nAryTreeGraph, m_rootOfTree)
 {}
+
 VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingNaiveRecursion() const
 {
     // Time Complexity: Exponential
@@ -91,7 +92,8 @@ VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingMemoizationDP(
                 grandChildrenCount += getMinimumCountUsingMemoizationDP(vertexToCountMap, grandChild);
             }
             countIfVertexIsIncluded += childrenCount;
-            countIfVertexIsNotIncluded += grandChildrenCount;        }
+            countIfVertexIsNotIncluded += grandChildrenCount;
+        }
         Count result = min(countIfVertexIsIncluded, countIfVertexIsNotIncluded);
         vertexToCountMap.emplace(vertex, result);
         return result;
