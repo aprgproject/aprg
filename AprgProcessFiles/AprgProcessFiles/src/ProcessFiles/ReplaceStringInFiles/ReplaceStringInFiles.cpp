@@ -9,12 +9,56 @@ using namespace std;
 namespace alba
 {
 
-ReplaceStringInFiles::ReplaceStringInFiles()
-{}
-
-void ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnDirectories(string const& inputDirectory, string const& outputDirectory)
+void ReplaceStringInFiles::replaceStringWithStringOnDirectories(
+        string const& inputDirectory,
+        string const& outputDirectory,
+        StringPairs const& replacePairs)
 {
     ListOfPaths files;
+    ListOfPaths directories;
+    AlbaLocalPathHandler inputPathHandler(inputDirectory);
+    AlbaLocalPathHandler outputPathHandler(outputDirectory);
+    inputPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
+
+    for(string const& file: files)
+    {
+        AlbaLocalPathHandler inputFilePathHandler(file);
+        if(isCOrCPlusPlusFile(inputFilePathHandler.getExtension()))
+        {
+            string outputFilePath(inputFilePathHandler.getFullPath());
+            transformReplaceStringIfFound(outputFilePath, inputPathHandler.getFullPath(), outputPathHandler.getFullPath());
+            AlbaLocalPathHandler outputFilePathHandler(outputFilePath);
+            replaceStringWithStringOnFile(inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath(), replacePairs);
+        }
+    }
+}
+
+void ReplaceStringInFiles::replaceStringWithStringOnFile(
+        string const& inputFilePath,
+        string const& outputFilePath,
+        StringPairs const& replacePairs)
+{
+    AlbaLocalPathHandler outputFilePathHandler(outputFilePath);
+    outputFilePathHandler.createDirectoriesForNonExisitingDirectories();
+    ifstream inputFile(inputFilePath);
+    ofstream outputFile(outputFilePath);
+    if(inputFile.is_open())
+    {
+        AlbaFileReader inputFileReader(inputFile);
+        while(inputFileReader.isNotFinished())
+        {
+            string line(inputFileReader.getLine());
+            for(auto const& replacePair : replacePairs)
+            {
+                transformReplaceStringIfFound(line, replacePair.first, replacePair.second);
+            }
+            outputFile << getStringWithoutStartingAndTrailingWhiteSpace(line) << "\n";
+        }
+    }
+}
+
+void ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnDirectories(string const& inputDirectory, string const& outputDirectory)
+{    ListOfPaths files;
     ListOfPaths directories;
     AlbaLocalPathHandler inputPathHandler(inputDirectory);
     AlbaLocalPathHandler outputPathHandler(outputDirectory);
@@ -53,25 +97,24 @@ void ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnFile(string const& inp
             {
                 if(hasPrintInLineInInputFile && hasSemiColonInLineInInputFile)
                 {
-                    outputFile << gethCPlusPlusStylePrintFromC(getStringWithoutStartingAndTrailingWhiteSpace(print)) << "\n";
+                    outputFile << getCPlusPlusStylePrintFromC(getStringWithoutStartingAndTrailingWhiteSpace(print)) << "\n";
                     print=lineInInputFile;
                     print.clear();
                     isOnPrint=false;
                 }
                 else if(hasPrintInLineInInputFile)
                 {
-                    outputFile << gethCPlusPlusStylePrintFromC(getStringWithoutStartingAndTrailingWhiteSpace(print)) << "\n";
+                    outputFile << getCPlusPlusStylePrintFromC(getStringWithoutStartingAndTrailingWhiteSpace(print)) << "\n";
                     print=lineInInputFile;
                 }
                 else if(hasSemiColonInLineInInputFile)
                 {
                     print+=" ";
                     print+=lineInInputFile;
-                    outputFile << gethCPlusPlusStylePrintFromC(getStringWithoutStartingAndTrailingWhiteSpace(print)) << "\n";
+                    outputFile << getCPlusPlusStylePrintFromC(getStringWithoutStartingAndTrailingWhiteSpace(print)) << "\n";
                     print.clear();
                     isOnPrint=false;
-                }
-                else
+                }                else
                 {
                     print+=" ";
                     print+=lineInInputFile;
@@ -82,11 +125,10 @@ void ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnFile(string const& inp
                 if(hasPrintInLineInInputFile && hasSemiColonInLineInInputFile)
                 {
                     print+=lineInInputFile;
-                    outputFile << gethCPlusPlusStylePrintFromC(getStringWithoutStartingAndTrailingWhiteSpace(print)) << "\n";
+                    outputFile << getCPlusPlusStylePrintFromC(getStringWithoutStartingAndTrailingWhiteSpace(print)) << "\n";
                     print.clear();
                 }
-                else if(hasPrintInLineInInputFile)
-                {
+                else if(hasPrintInLineInInputFile)                {
                     print+=lineInInputFile;
                     isOnPrint=true;
                 }
@@ -99,11 +141,10 @@ void ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnFile(string const& inp
     }
 }
 
-string ReplaceStringInFiles::gethCPlusPlusStylePrintFromC(string const& inputString) const
+string ReplaceStringInFiles::getCPlusPlusStylePrintFromC(string const& inputString) const
 {
     string result;
-    strings splittedStrings;
-    strings delimeters{R"((")", R"(",)", ");"};
+    strings splittedStrings;    strings delimeters{R"((")", R"(",)", ");"};
     splitToStringsUsingASeriesOfDelimeters(splittedStrings, inputString, delimeters);
 
     if(splittedStrings.size()==2)
