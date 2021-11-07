@@ -49,7 +49,8 @@ void ChineseRemainderTheorem::solve(
             UnsignedInteger modularInverseOfFk = getModularInverseByEulersTheorem(formulaForK, modulo);
             m_solutionValue += number * formulaForK * modularInverseOfFk;
         }
-    }}
+    }
+}
 
 }
 

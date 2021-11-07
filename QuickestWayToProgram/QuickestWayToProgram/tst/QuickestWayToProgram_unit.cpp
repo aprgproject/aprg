@@ -58,7 +58,8 @@ TEST(SampleTest, CountFromMsbValue)
 /*TEST(SampleTest, CountFromMsbValue)
 {
     cout << "{";
-    for(unsigned int value=0; value<256; value++)    {
+    for(unsigned int value=0; value<256; value++)
+    {
         unsigned int countFromMsb=0;
         unsigned int valueForMsbBitCount(value);
         for(unsigned int bitIndex=0; bitIndex<8; bitIndex++)
@@ -81,7 +82,8 @@ TEST(SampleTest, CountFromMsbValue)
 
 TEST(SampleTest, NumeratorAndDenominator)
 {
-    long long int numerator = static_cast<long long int>(-946400) * -5547;    long long int denominator = static_cast<long long int>(-2146689) * -3566000;
+    long long int numerator = static_cast<long long int>(-946400) * -5547;
+    long long int denominator = static_cast<long long int>(-2146689) * -3566000;
     ALBA_PRINT_PRECISION(30);
     ALBA_PRINT3(numerator, denominator, static_cast<double>(numerator)/denominator);
 }

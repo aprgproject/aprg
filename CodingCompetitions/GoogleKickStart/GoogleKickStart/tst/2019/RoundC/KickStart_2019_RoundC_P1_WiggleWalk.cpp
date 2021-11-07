@@ -15,6 +15,7 @@
 #include <vector>
 
 using namespace std;
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
 using namespace alba;
@@ -207,7 +208,8 @@ void runTestCase(unsigned int const testCaseNumber)
     my_cout << "Case #" << testCaseNumber << ": " << source.second+1 << " " << source.first+1<< '\n';
 }
 
-void runAllTestCases(){
+void runAllTestCases()
+{
     unsigned int numberOfTestCases;
     my_cin >> numberOfTestCases;
     for (unsigned int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++)

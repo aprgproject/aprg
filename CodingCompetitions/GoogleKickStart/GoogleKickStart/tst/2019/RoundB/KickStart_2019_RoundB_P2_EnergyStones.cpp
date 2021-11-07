@@ -14,6 +14,7 @@
 #include <vector>
 
 using namespace std;
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
 using namespace alba;
@@ -110,7 +111,8 @@ void runTestCase(unsigned int const testCaseNumber)
 // Solution recommended by kickstart
 int getIndex(int const index, int const time)
 {
-    return index*maxTime+time;}
+    return index*maxTime+time;
+}
 
 int getMaxEnergy(
         int const index,
@@ -158,7 +160,8 @@ void runTestCase(unsigned int const testCaseNumber)
 
     sort(stones.begin(), stones.end(), [](Stone const& stone1, Stone const& stone2)
     {
-        return stone2.timeToConsume*stone1.rateOfLoss > stone1.timeToConsume*stone2.rateOfLoss;    });
+        return stone2.timeToConsume*stone1.rateOfLoss > stone1.timeToConsume*stone2.rateOfLoss;
+    });
 
     savedEnergies.assign(numberOfStones*maxTime, INT_MAX);
 
@@ -167,7 +170,8 @@ void runTestCase(unsigned int const testCaseNumber)
     my_cout << "Case #" << testCaseNumber << ": " << maxEnergy << '\n';
 }
 
-void runAllTestCases(){
+void runAllTestCases()
+{
     unsigned int numberOfTestCases;
     my_cin >> numberOfTestCases;
     for (unsigned int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++)

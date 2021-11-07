@@ -49,6 +49,7 @@ void runTestCase(unsigned int const)
         }
     }
 }
+
 void runAllTestCases()
 {
     unsigned int numberOfTestCases;

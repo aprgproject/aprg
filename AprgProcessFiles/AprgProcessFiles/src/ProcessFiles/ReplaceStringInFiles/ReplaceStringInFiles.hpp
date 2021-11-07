@@ -29,7 +29,8 @@ public:
     std::string getCPlusPlusStylePrintFromC(std::string const& inputString) const;
 
 
-private:    std::string getNewPrintStreamBasedFromOldPrintFunction(std::string const& printFunction) const;
+private:
+    std::string getNewPrintStreamBasedFromOldPrintFunction(std::string const& printFunction) const;
     void removeStartingAndTrailingWhiteSpaceInPrintParameters(stringHelper::strings & printParameters) const;
     std::string constructCPlusPlusPrint(std::string const& newPrintStream, std::string const& endPrintStream, std::string const& printString, stringHelper::strings const& printParameters) const;
     void appendCharacterToResult(std::string & result, bool & isOnStringLiteral, char const c) const;

@@ -98,7 +98,8 @@ AlbaNumber AlbaNumber::createComplexNumber(NumberType const realPart, NumberType
     double adjustedImaginaryPart = adjustFloatValue(static_cast<float>(imaginaryPart));
     if(isinf(adjustedRealPart)
             || isnan(adjustedRealPart)
-            || isAlmostEqual(adjustedImaginaryPart, 0.0, getComparisonTolerance()))    {
+            || isAlmostEqual(adjustedImaginaryPart, 0.0, getComparisonTolerance()))
+    {
         return createNumberFromDoubleAndRoundIfNeeded(static_cast<double>(adjustedRealPart));
     }
     else

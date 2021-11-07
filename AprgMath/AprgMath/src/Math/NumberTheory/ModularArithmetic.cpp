@@ -4,6 +4,7 @@
 #include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
 #include <Common/Math/Helpers/PowerHelpers.hpp>
 #include <Math/NumberTheory/PrimeAndFactorUtilities.hpp>
+
 using namespace alba::mathHelper;
 using namespace std;
 
@@ -195,6 +196,7 @@ UnsignedInteger getModularInverseByEulersTheorem(
     // The inverse can be calculated exactly when x and m are coprime using Euler's theorem.
 
     // Formula:  inverse = x^(phi(m)-1)
+
     UnsignedInteger result{};
     if(isCoPrime(number, modulo))
     {
@@ -235,7 +237,8 @@ UnsignedInteger getModularInverseByFermatsLittleTheorem(
 
 UnsignedInteger getModularFactorial(
         UnsignedInteger const number,
-        UnsignedInteger const modulo){
+        UnsignedInteger const modulo)
+{
     // n! mod m = ((n mod m) * (n-1 mod m) * (n-2 mod m) ... (1 mod m)) mod m
 
     UnsignedInteger result=1;

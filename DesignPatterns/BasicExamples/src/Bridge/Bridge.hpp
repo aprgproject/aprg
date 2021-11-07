@@ -87,7 +87,8 @@ private:
 // NOTE: This is related to "Dependency Inversion Principle".
 
 // When to use (applicability):
-// -> you want to avoid a permanent binding between an abstraction and its implementation// -> both the abstractions and their implementations should be extensible by subclassing
+// -> you want to avoid a permanent binding between an abstraction and its implementation
+// -> both the abstractions and their implementations should be extensible by subclassing
 // -> changes in the implementation of an abstraction should have no impact on clients
 // -> you want to hide the implementation of an abstraction completely from clients
 // -> you have a proliferation of classes (class explosion), and responsibilities needs to extracted

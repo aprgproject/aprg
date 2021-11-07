@@ -38,7 +38,8 @@ public:
 private:
     void solve(AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c);
     SolutionStatus m_solutionStatus;
-    Integer m_x;    Integer m_y;
+    Integer m_x;
+    Integer m_y;
     Integer m_a;
     Integer m_b;
     Integer m_c;

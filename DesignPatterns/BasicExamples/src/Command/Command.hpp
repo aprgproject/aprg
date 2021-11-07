@@ -156,3 +156,4 @@ private:
 // -> A [Memento] can keep the state the command requires to undo its effect.
 // -> A command that must be copied before being place on the history list acts as a [Prototype].
 
+

@@ -11,6 +11,7 @@ The design principles discussed on this page are applicable both to code archite
 The goal of discussing these design principles is to make the system more understandable, maintainable (reduce dependencies and catch mistakes) and easily introduce features into a system.
 
 
+
 2.1 Single responsibility principle (SRP)
 
     In simple terms: Each entity should have one defined responsibility.
@@ -85,7 +86,8 @@ The good examples:
 
 2.3 KISS ("keep it stupid simple") / Simplicity favor regularity
 
-    In simple terms: Keep it simple    Big projects/systems tend to have many people and teams
+    In simple terms: Keep it simple
+    Big projects/systems tend to have many people and teams
         Simple systems are easier to explain to multiple people
         Less misunderstandings and more people can contribute
     Simple solutions/systems can be easier to maintain (even without complete documentation)
@@ -249,6 +251,7 @@ The good examples:
     Let it be known what should be checked in the component and prevent defensive programming across different subsystems
 
 Things that can be improved by this concept:
+
     RAN2861 Design
         Since no clear feature activation parameter, there is a lot of logic to know if the feature is activated or not.
             The complicated logic caused a lot of explanations to developers and testers throughout this feature.
@@ -258,6 +261,7 @@ The good examples:
     RAN3463 Design
         There is a lot scenarios to be considered for feature activation such as: BTS commissioning parameter changes, license activation changes, link state changes, etc.
         The handling of these features are simplified because of clear validation of the input first before performing the procedure.
+
 
 
 2.11 Minimize duplication and bloat
