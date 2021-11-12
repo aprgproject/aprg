@@ -62,11 +62,10 @@ class ConcreteClass : public AbstractClass
 // Template Method discussion:
 
 // ONE LINE NOTE:
-// -> Provide a "template method" with KNOWN STEPS and allow polymophism and subclassing to support DIFFERENT VERSION of the STEPS.
+// -> Provide a "template method" with KNOWN STEPS and allow polymorphism and subclassing to support DIFFERENT VERSION of the STEPS.
 
 // Intent:
-// Template method defines the skeleton of an algorithm in an operation, deferring some steps to subclasses.
-// It lets subclasses redefine certain steps of an algorithm  without changing the algorithm's structure.
+// Template method defines the skeleton of an algorithm in an operation, deferring some steps to subclasses.// It lets subclasses redefine certain steps of an algorithm  without changing the algorithm's structure.
 // The pattern has behavioral purpose and applies to the classes.
 
 // When to use (applicability):
@@ -108,4 +107,4 @@ class ConcreteClass : public AbstractClass
 // Related Patterns
 // -> [FactoryMethods] are often called by template methods.
 // -> [Strategies] uses delegation to vary the entire algorithm.
-// ---> In contrast, [TemplateMethods] uses inhertance to vary part of an algorithm.
+// ---> In contrast, [TemplateMethods] uses inheritance to vary part of an algorithm.

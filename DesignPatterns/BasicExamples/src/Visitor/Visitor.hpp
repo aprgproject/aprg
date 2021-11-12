@@ -100,11 +100,10 @@ public:
 // Visitor discussion:
 
 // ONE LINE NOTE:
-// -> Provide an ABSTRACT "visitor" that can be PASSED to an ABSTRACT ELEMENT so that it can perform "visit operations" without relying on concretions.
+// -> Provide an ABSTRACT VISITOR that can be PASSED to an ABSTRACT ELEMENT so that it can perform "visit operations" without relying on concretions.
 
 // Intent:
-// Visitor represents an operation to be performed on the elements of an object structure.
-// It lets you define a new operation without changing the classes of the elements on which it operates.
+// Visitor represents an operation to be performed on the elements of an object structure.// It lets you define a new operation without changing the classes of the elements on which it operates.
 // The pattern has behavioral purpose and applies to the objects.
 
 // When to use (applicability):
