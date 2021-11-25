@@ -385,6 +385,7 @@ using GetCommonType = typename std::common_type<Types...>::type;
 
 template<typename Type>
 using GetTypeWithLValueReference = typename std::add_lvalue_reference<Type>::type;
+
 template<typename Type>
 using GetTypeWithRValueReference = typename std::add_rvalue_reference<Type>::type;
 

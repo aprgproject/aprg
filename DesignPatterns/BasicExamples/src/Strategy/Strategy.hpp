@@ -80,7 +80,8 @@ private:
 // -> Implement a common ABSTRACT STRATEGY INTERFACE and implement different strategies or FAMILIES OF ALGORITHMS by subclassing so that it can be changed in runtime.
 
 // Intent:
-// Strategy defines a family of algorithms, encapsulates each one, and makes them interchangeable.// It lets the algorithm vary independently from clients that use it.
+// Strategy defines a family of algorithms, encapsulates each one, and makes them interchangeable.
+// It lets the algorithm vary independently from clients that use it.
 // The pattern has behavioral purpose and applies to the objects.
 // NOTE: This is related to "Dependency Inversion Principle".
 

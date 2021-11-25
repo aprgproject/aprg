@@ -9,6 +9,7 @@
 
 namespace alba
 {
+
 namespace mathHelper
 {
 
@@ -63,7 +64,8 @@ template <typename NumberType> NumberType getGreatestCommonFactorUsingEuclidAlgo
 
     // Using Euclid’s algorithm
 
-    // Euclid’s algorithm provides an efficient way to find the greatest common divisor of two numbers.    // The algorithm is based on the following formula:
+    // Euclid’s algorithm provides an efficient way to find the greatest common divisor of two numbers.
+    // The algorithm is based on the following formula:
     // gcd(a, b) =
     // -> if b=0: a
     // -> if b!=0: gcd(b, a%b)
@@ -127,6 +129,7 @@ template <typename NumberType> NumberType getLeastCommonMultipleUsingEuclidAlgor
 
     // Using Euclid’s algorithm
     // lcm(a,b) = ab/gcd(a,b)
+
     NumberType result(0);
     if(firstNumber!=0 && secondNumber!=0)
     {

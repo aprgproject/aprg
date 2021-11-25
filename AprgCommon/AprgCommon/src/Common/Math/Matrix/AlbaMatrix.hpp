@@ -34,7 +34,8 @@ constexpr AlbaMatrixData<DataType> getDefaultMatrix(unsigned int const numberOfC
     }
 }
 
-template <typename DataType>class AlbaMatrix
+template <typename DataType>
+class AlbaMatrix
 {
 public:
     using MatrixData = AlbaMatrixData<DataType>;
@@ -133,6 +134,7 @@ public:
         };
         return doUnaryOperation(*this, scalarMultiplication);
     }
+
     AlbaMatrix operator*(AlbaMatrix const& secondMatrix) const //matrix multiplication
     {
         return multiplyMatrices(*this, secondMatrix);
@@ -164,6 +166,7 @@ public:
         doUnaryAssignmentOperation(*this, scalarMultiplication);
         return *this;
     }
+
     AlbaMatrix& operator*=(AlbaMatrix const& secondMatrix)
     {
         AlbaMatrix & self(*this);

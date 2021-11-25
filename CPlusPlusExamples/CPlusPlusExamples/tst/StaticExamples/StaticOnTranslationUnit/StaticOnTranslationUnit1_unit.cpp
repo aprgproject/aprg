@@ -18,7 +18,8 @@ int externInteger = 400;  // definition (complete type)
 const int externConstInteger = 500;  // definition (complete type)
 
 int freeFunction()
-{    return 1;
+{
+    return 1;
 }
 
 int staticFreeFunction()
@@ -36,7 +37,8 @@ TranslationUnitValues getValuesInTranslationUnit1()
 TEST(StaticOnTranslationUnit1Test, DISABLED_VariableValuesAreCorrect) // Flaky test
 {
     EXPECT_EQ(100, constInteger);
-    EXPECT_EQ(200, staticInteger);    EXPECT_EQ(300, integer);
+    EXPECT_EQ(200, staticInteger);
+    EXPECT_EQ(300, integer);
     EXPECT_EQ(400, externInteger);
     EXPECT_EQ(500, externConstInteger);
 }
@@ -44,7 +46,8 @@ TEST(StaticOnTranslationUnit1Test, DISABLED_VariableValuesAreCorrect) // Flaky t
 TEST(StaticOnTranslationUnit1Test, VariableValuesCanBeChanged)
 {
     //constInteger = 101; // Const cannot change
-    staticInteger = 201;    integer = 301;
+    staticInteger = 201;
+    integer = 301;
     externInteger = 401;
     //externConstInteger = 501; // Const cannot change
 
@@ -58,7 +61,8 @@ TEST(StaticOnTranslationUnit1Test, VariableValuesCanBeChanged)
 TEST(StaticOnTranslationUnit1Test, VariableValuesAreChangedAndReflectedOnOtherTranslationUnit)
 {
     //constInteger = 102; // Const cannot change
-    staticInteger = 202;    integer = 302;
+    staticInteger = 202;
+    integer = 302;
     externInteger = 402;
     //externConstInteger = 502; // Const cannot change
 

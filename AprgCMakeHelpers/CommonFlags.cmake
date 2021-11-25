@@ -221,7 +221,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 
 # Flag: "-fstack-protector"
 # -> Emit extra code to check for buffer overflows, such as stack smashing attacks.
-# -> This is done by adding a guard variable to functions with vulnerable objects.# -> This includes functions that call allocation, and functions with buffers larger than or equal to 8 bytes.
+# -> This is done by adding a guard variable to functions with vulnerable objects.
+# -> This includes functions that call allocation, and functions with buffers larger than or equal to 8 bytes.
 # -> The guards are initialized when a function is entered and then checked when the function exits.
 # -> If a guard check fails, an error message is printed and the program exits.
 # -> Only variables that are actually allocated on the stack are considered, optimized away variables or variables allocated in registers don’t count.

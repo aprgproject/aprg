@@ -31,6 +31,7 @@ public:
     template <auto BITSET_SIZE> std::bitset<BITSET_SIZE> readBitsetData(unsigned int const startBitsetIndex, unsigned int const endBitsetIndex);
 
     std::istream& getInputStream();
+
 private:
     void readIfNeeded(unsigned int const numberOfBitsRequired);
     void eraseBitsInBitBuffer(unsigned int const numberOfBitsToErase);
@@ -93,7 +94,8 @@ std::bitset<BITSET_SIZE> AlbaStreamBitReader::readBitsetData(unsigned int const 
     unsigned int const numberOfBitsToRead = std::min(endBitsetIndex-startBitsetIndex+1, static_cast<unsigned int>(BITSET_SIZE));
     readIfNeeded(numberOfBitsToRead);
     AlbaValueRange<int> bitsetRange(static_cast<int>(startBitsetIndex), static_cast<int>(endBitsetIndex), 1U);
-    unsigned int bitBufferIndex=0;    bitsetRange.traverse([&](int const bitsetIndex)
+    unsigned int bitBufferIndex=0;
+    bitsetRange.traverse([&](int const bitsetIndex)
     {
         result.set(bitsetIndex, m_bitBuffer.at(bitBufferIndex++));
     });

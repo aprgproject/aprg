@@ -18,7 +18,8 @@ TEST(SampleClassWithStaticTest, InitialValuesAreCorrect)
     EXPECT_EQ("500", SampleClassWithStatic::staticInlinedString);
 }
 
-TEST(SampleClassWithStaticTest, StaticDataCanBeReferedInSeveralWays){
+TEST(SampleClassWithStaticTest, StaticDataCanBeReferedInSeveralWays)
+{
     SampleClassWithStatic object;
 
     EXPECT_EQ(200, SampleClassWithStatic::staticData);
@@ -34,7 +35,8 @@ TEST(SampleClassWithStaticTest, StaticDataCanBeReferedInSeveralWays){
     // Pointer dereference "->" works too for pointers
 }
 
-TEST(SampleClassWithStaticTest, ValuesCanBeChanged){
+TEST(SampleClassWithStaticTest, ValuesCanBeChanged)
+{
     SampleClassWithStatic object1;
     SampleClassWithStatic object2;
 
@@ -52,7 +54,8 @@ TEST(SampleClassWithStaticTest, ValuesCanBeChanged){
     EXPECT_EQ("501", SampleClassWithStatic::staticInlinedString);
 }
 
-TEST(SampleClassWithStaticTest, ClassDeclaredFunctionsCanCalledWithChangedValues){
+TEST(SampleClassWithStaticTest, ClassDeclaredFunctionsCanCalledWithChangedValues)
+{
     SampleClassWithStatic object1;
     SampleClassWithStatic object2;
 

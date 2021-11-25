@@ -88,7 +88,8 @@ public:
 // -> Provide a "factory method" for creating objects and let polymorphism and subclassing support DIFFERENT VERSIONS of the "factory method".
 
 // Intent:
-// Define an interface for creating an object, but let subclasses decide which class to instantiate.// Factory Method lets a class defer instantiation to subclasses.
+// Define an interface for creating an object, but let subclasses decide which class to instantiate.
+// Factory Method lets a class defer instantiation to subclasses.
 // The pattern has creational purpose and applies to classes where it deals with relationships through inheritance
 // (ie. they are static-fixed at compile time).
 // In contrast to Abstract Factory, the Factory Method contains a method to produce only one type of product.

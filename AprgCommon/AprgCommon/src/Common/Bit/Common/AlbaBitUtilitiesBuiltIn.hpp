@@ -135,6 +135,7 @@ INLINE_WITH_BUILT_IN namespace BitUtilitiesWithBuiltIn
     }
 #endif
 }
+
 }
 
 #undef INLINE_WITH_BUILT_IN

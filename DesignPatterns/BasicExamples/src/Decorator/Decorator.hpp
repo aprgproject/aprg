@@ -111,7 +111,8 @@ public:
 // -> More flexibility than static inheritance.
 // ---> With decorators, responsibilities can be added and removed at runtime simply by attaching and detaching them.
 // ---> Providing different Decorator classes for a specific Component class lets you mix and match responsibilities.
-// ---> Decorators also make it easy to add a property twice.// -> Avoids feature-laden classes high up in the hierarchy.
+// ---> Decorators also make it easy to add a property twice.
+// -> Avoids feature-laden classes high up in the hierarchy.
 // ---> Decorator offers a pay-as-you-go approach to adding responsibilities.
 // ---> Instead of trying to support all foreseeable features in a complex customizable class,
 // ---> you can define a simple class and add functionality incrementally with Decorator objects.

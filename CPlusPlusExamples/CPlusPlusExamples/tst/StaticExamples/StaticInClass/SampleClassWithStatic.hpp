@@ -4,6 +4,7 @@
 
 namespace alba
 {
+
 struct SampleClassWithStatic
 {
     int nonStaticData = 100;
@@ -16,6 +17,7 @@ struct SampleClassWithStatic
     // mutable static int staticMutableData; // Static data members cannot be mutable.
 
     int nonStaticFunctionWithClassDeclaration();
+
     static int staticFunctionWithClassDeclaration();
 
     int nonStaticFunctionWithClassDefinition()
@@ -41,6 +43,7 @@ struct SampleClassWithStatic
 // inline const int myRandomInt = generateRandomInt(); // Calculating a random number at runtime works too!
 
 }
+
 // Notes:
 
 // -> static members
