@@ -1,8 +1,7 @@
-#include <benchmark/benchmark.h>
+/*#include <benchmark/benchmark.h>
 
 #include <Common/Bit/Common/AlbaBitUtilitiesBuiltIn.hpp>
 #include <Common/Randomizer/AlbaUniformIntegerRandomizer.hpp>
-
 using namespace std;
 
 namespace alba
@@ -109,4 +108,4 @@ BENCHMARK_FUNCTION(uint64_t, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFro
 // Run the benchmark
 BENCHMARK_MAIN();
 
-}
+}*/
