@@ -110,7 +110,8 @@ C: Classes and class hierarchies
 -----> Note: Invariants are condition that must be true before and after interacting with an object
     C.3: Represent the distinction between an interface and an implementation using a class
     C.4: Make a function a member only if it needs direct access to the representation of a class
-    C.5: Place helper functions in the same namespace as the class they support    C.7: Don’t define a class or enum and declare a variable of its type in the same statement
+    C.5: Place helper functions in the same namespace as the class they support
+    C.7: Don’t define a class or enum and declare a variable of its type in the same statement
     C.8: Use class rather than struct if any member is non-public
     C.9: Minimize exposure of members
 ---> C.concrete: Concrete types

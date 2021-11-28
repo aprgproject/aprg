@@ -215,7 +215,8 @@ getLowerAndUpperConstIteratorsInMap(ContainerType const& container, KeyType cons
     return std::pair<ConstIterator, ConstIterator> (itLower, itUpper);
 }
 
-template <typename KeyType, typename ContainerType>std::pair<typename ContainerType::iterator, typename ContainerType::iterator>
+template <typename KeyType, typename ContainerType>
+std::pair<typename ContainerType::iterator, typename ContainerType::iterator>
 getLowerAndUpperIteratorsInMap(ContainerType & container, KeyType const& keyValue)
 {
     using Iterator = typename ContainerType::iterator;
@@ -225,7 +226,8 @@ getLowerAndUpperIteratorsInMap(ContainerType & container, KeyType const& keyValu
     return std::pair<Iterator, Iterator>(itLower, itUpper);
 }
 
-template <typename Adapter>typename Adapter::container_type const& getUnderlyingContainer(Adapter const& adapter)
+template <typename Adapter>
+typename Adapter::container_type const& getUnderlyingContainer(Adapter const& adapter)
 {
     struct AdapterParent : Adapter
     {
@@ -307,6 +309,7 @@ void saveContentsToStream(std::ostream & outputStream, Container<KeyType, ValueT
         }
     }
 }
+
 template <typename ValueType,
           template <typename, typename = std::allocator<ValueType>> class Container>
 void saveContentsInDecimalAndHexadecimalFormat(std::ostream & outputStream, Container<ValueType> const& container)

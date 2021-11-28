@@ -43,6 +43,7 @@ TEST(AlbaSimpleRandomizerTest, GetRandomIntegerInUniformDistributionWorks_AsUnif
     int deviation(*maxIterator - *minIterator);
     EXPECT_LE(deviation, allowedDeviation);
 }
+
 TEST(AlbaSimpleRandomizerTest, GetRandomValueInUniformDistributionWorks_WithinMinimumAndMaximumValues)
 {
     AlbaSimpleRandomizer randomizer;

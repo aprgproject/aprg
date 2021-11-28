@@ -76,7 +76,8 @@ TEST(ComputationHelpersTest, ClampWithinWorks)
 
 TEST(ComputationHelpersTest, GetAverageOfTwoNumbersForAlbaNumberWorks)
 {
-    EXPECT_EQ(AlbaNumber(0),              getAverage(AlbaNumber::createFraction(1, 3), AlbaNumber::createFraction(-1, 3)));
+    EXPECT_EQ(AlbaNumber(0),
+              getAverage(AlbaNumber::createFraction(1, 3), AlbaNumber::createFraction(-1, 3)));
     EXPECT_EQ(AlbaNumber::createFraction(1, 3),
               getAverage(AlbaNumber::createFraction(1, 3), AlbaNumber::createFraction(1, 3)));
 }

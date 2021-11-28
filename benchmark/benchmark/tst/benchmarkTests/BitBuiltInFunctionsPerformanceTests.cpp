@@ -2,6 +2,7 @@
 
 #include <Common/Bit/Common/AlbaBitUtilitiesBuiltIn.hpp>
 #include <Common/Randomizer/AlbaUniformIntegerRandomizer.hpp>
+
 using namespace std;
 
 namespace alba

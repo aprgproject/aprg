@@ -170,6 +170,7 @@ constexpr bool isATrivialType()
     // The behavior of a program that adds specializations for is_trivial or is_trivial_v (since C++17) is undefined.
     return std::is_trivial<Type>::value;
 }
+
 template <typename Type>
 constexpr bool hasStandardLayout()
 {
@@ -210,7 +211,8 @@ constexpr bool hasPaddingBits()
 
 template <typename Type>
 constexpr bool isEmpty()
-{    return std::is_empty<Type>::value;
+{
+    return std::is_empty<Type>::value;
 }
 
 template <typename Type>
@@ -397,6 +399,7 @@ using GetFunctorResultType = typename std::invoke_result<FunctorType, ArgumentTy
 
 template<typename Type>
 using GetTypeWithLValueReference = typename std::add_lvalue_reference<Type>::type;
+
 template<typename Type>
 using GetTypeWithRValueReference = typename std::add_rvalue_reference<Type>::type;
 
@@ -411,6 +414,7 @@ using GetTypeWithConst = typename std::add_const<Type>::type; // you can also us
 
 template<typename Type>
 using GetTypeWithVolatile = typename std::add_volatile<Type>::type;
+
 
 template<typename Type>
 using GetTypeWithoutReference = typename std::remove_reference<Type>::type;

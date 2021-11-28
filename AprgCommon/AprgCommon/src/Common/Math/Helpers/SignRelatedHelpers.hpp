@@ -36,7 +36,8 @@ template <typename NumberType> inline NumberType getPositiveDelta(NumberType con
     return maximum-minimum;
 }
 
-template <typename NumberType>inline
+template <typename NumberType>
+inline
 typename std::make_signed<NumberType>::type
 convertToSignedThenSubtract(NumberType const number1, NumberType const number2)
 {
@@ -62,4 +63,5 @@ inline AlbaNumber getPositiveDelta(AlbaNumber const& value1, AlbaNumber const& v
 }
 
 }//namespace mathHelper
+
 }//namespace alba

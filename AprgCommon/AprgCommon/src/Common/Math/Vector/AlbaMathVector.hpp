@@ -67,6 +67,7 @@ public:
         }
         return result;
     }
+
     AlbaMathVectorType operator+(AlbaMathVectorType const& second) const
     {
         AlbaMathVectorType result;

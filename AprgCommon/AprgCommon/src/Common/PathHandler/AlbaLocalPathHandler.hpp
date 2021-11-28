@@ -3,6 +3,7 @@
 #ifdef OS_WINDOWS // you could also use __has_include as well
 #include <Common/PathHandler/AlbaWindowsPathHandler.hpp>
 #endif
+
 #ifdef OS_LINUX
 #include <Common/PathHandler/AlbaLinuxPathHandler.hpp>
 #endif
