@@ -22,11 +22,13 @@ template <typename ValueType, size_t SIZE, template <typename, size_t> class Tem
 std::enable_if_t<typeHelper::hasBeginAndEnd<TemplateType<ValueType, SIZE>>(), void> printParameter(
     std::ostream& outputStream, TemplateType<ValueType, SIZE> const& parameter);
 template <typename... UnderlyingTypes, template <typename...> class TemplateType>
-std::enable_if_t<typeHelper::hasBeginAndEnd<TemplateType<UnderlyingTypes...>>(), void> printParameter(
+std::enable_if_t<typeHelper::hasBeginAndEndAndSize<TemplateType<UnderlyingTypes...>>(), void> printParameter(
     std::ostream& outputStream, TemplateType<UnderlyingTypes...> const& parameter);
 template <typename... UnderlyingTypes, template <typename...> class TemplateType>
-std::enable_if_t<typeHelper::hasContainerType<TemplateType<UnderlyingTypes...>>(), void> printParameter(
+std::enable_if_t<typeHelper::hasBeginAndEndAndWithoutSize<TemplateType<UnderlyingTypes...>>(), void> printParameter(
     std::ostream& outputStream, TemplateType<UnderlyingTypes...> const& parameter);
+template <typename... UnderlyingTypes, template <typename...> class TemplateType>
+std::enable_if_t<typeHelper::hasContainerType<TemplateType<UnderlyingTypes...>>(), void> printParameter(    std::ostream& outputStream, TemplateType<UnderlyingTypes...> const& parameter);
 
 // printParameterWithName declaration
 
@@ -64,10 +66,17 @@ void printTupleParameters(std::ostream& outputStream, std::tuple<ValueTypes...> 
             parameter);
 }
 
+template <typename ContainerType>
+void printParametersByForEachTraversal(std::ostream& outputStream, ContainerType const& container) {
+    for (auto const& parameter : container) {
+        printParameter(outputStream, parameter);
+        outputStream << ", ";
+    }
+}
+
 template <typename Adapter>
 typename Adapter::container_type const& getUnderlyingContainerForPrinting(
-    Adapter const& adapter)  // copied from parameter to lessen dependencies
-{
+    Adapter const& adapter)  // copied from parameter to lessen dependencies{
     struct AdapterParent : Adapter {
         static typename Adapter::container_type const& get(Adapter const& adapterAsParameter) {
             return adapterAsParameter.*&AdapterParent::c;
@@ -103,24 +112,25 @@ template <typename ValueType, size_t SIZE, template <typename, size_t> class Tem
 std::enable_if_t<typeHelper::hasBeginAndEnd<TemplateType<ValueType, SIZE>>(), void> printParameter(
     std::ostream& outputStream, TemplateType<ValueType, SIZE> const& parameter) {
     outputStream << "{Constant size: " << SIZE << " | ";
-    for (auto const& content : parameter) {
-        printParameter(outputStream, content);
-        outputStream << ", ";
-    }
+    printParametersByForEachTraversal(outputStream, parameter);
     outputStream << "}";
 }
 
 template <typename... UnderlyingTypes, template <typename...> class TemplateType>
-std::enable_if_t<typeHelper::hasBeginAndEnd<TemplateType<UnderlyingTypes...>>(), void> printParameter(
+std::enable_if_t<typeHelper::hasBeginAndEndAndSize<TemplateType<UnderlyingTypes...>>(), void> printParameter(
     std::ostream& outputStream, TemplateType<UnderlyingTypes...> const& parameter) {
     outputStream << "{size: " << parameter.size() << " | ";
-    for (auto const& content : parameter) {
-        printParameter(outputStream, content);
-        outputStream << ", ";
-    }
+    printParametersByForEachTraversal(outputStream, parameter);
     outputStream << "}";
 }
 
+template <typename... UnderlyingTypes, template <typename...> class TemplateType>
+std::enable_if_t<typeHelper::hasBeginAndEndAndWithoutSize<TemplateType<UnderlyingTypes...>>(), void> printParameter(
+    std::ostream& outputStream, TemplateType<UnderlyingTypes...> const& parameter) {
+    outputStream << "{";
+    printParametersByForEachTraversal(outputStream, parameter);
+    outputStream << "}";
+}
 template <typename... UnderlyingTypes, template <typename...> class TemplateType>
 std::enable_if_t<typeHelper::hasContainerType<TemplateType<UnderlyingTypes...>>(), void> printParameter(
     std::ostream& outputStream, TemplateType<UnderlyingTypes...> const& parameter) {
