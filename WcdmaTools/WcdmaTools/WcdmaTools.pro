@@ -39,7 +39,8 @@ src/WcdmaToolsConfiguration.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Randomizer/EntropySources/AlbaEntropySourceBasedOnTime.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterReader.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterWriter.cpp\
-../../AprgCommon/AprgCommon/src/Common/String/AlbaStringHelper.cpp\../../AprgCommon/AprgCommon/src/Common/Time/AlbaDateTime.cpp\
+../../AprgCommon/AprgCommon/src/Common/String/AlbaStringHelper.cpp\
+../../AprgCommon/AprgCommon/src/Common/Time/AlbaDateTime.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Time/AlbaDateTimeHelper.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp\
 ../../AprgCommon/AprgCommon/srcWindows/Common/PathHandler/AlbaWindowsPathHandler.cpp\
@@ -79,7 +80,8 @@ src/WcdmaToolsConfiguration.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Randomizer/EntropySources/AlbaEntropySourceBasedOnTime.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterReader.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterWriter.hpp\
-../../AprgCommon/AprgCommon/src/Common/String/AlbaStringHelper.hpp\../../AprgCommon/AprgCommon/src/Common/Time/AlbaDateTime.hpp\
+../../AprgCommon/AprgCommon/src/Common/String/AlbaStringHelper.hpp\
+../../AprgCommon/AprgCommon/src/Common/Time/AlbaDateTime.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Time/AlbaDateTimeHelper.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Time/AlbaDateTimeConstants.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.hpp\
@@ -122,6 +124,7 @@ DEFINES += STATIC
 DEFINES += APRG_CODE_VERSION="\\\"$(shell git -C \""$$_PRO_FILE_PWD_"\" describe)\\\""
 
 CONFIG += c++11 console
+
 RESOURCES += \
     resources.qrc
 

@@ -29,6 +29,7 @@ PidSimulator::PidSimulator(stringHelper::strings const& argumentsInMain)
 
 double PidSimulator::calculatePid(double const input, double const target) {
     // https://en.wikipedia.org/wiki/PID_controller
+
     static double integral = 0;
     static double derivative = 0;
     static double lastError = 0;
@@ -121,6 +122,7 @@ void PidSimulator::generateRandomForInput() {
         }
     }
 }
+
 double PidSimulator::computeFromMachsModel(
     double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) {
     double result(0);

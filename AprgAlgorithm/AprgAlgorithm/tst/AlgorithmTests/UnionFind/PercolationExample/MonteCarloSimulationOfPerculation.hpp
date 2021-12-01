@@ -4,6 +4,7 @@
 #include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Common/User/DisplayTable.hpp>
+
 #include <string>
 #include <vector>
 
@@ -20,7 +21,8 @@ public:
         : m_sites{}, m_unionFindOfIndexes(), m_numberOfOpenSites(0U), m_randomizer(0, getDimensionsSquared() - 1) {}
 
     bool isPercolated() const {
-        return m_unionFindOfIndexes.isConnected(getVirtualTopIndex(), getVirtualBottomIndex());    }
+        return m_unionFindOfIndexes.isConnected(getVirtualTopIndex(), getVirtualBottomIndex());
+    }
 
     double getPercolationProbability() const {
         return static_cast<double>(m_numberOfOpenSites) / getDimensionsSquared();
@@ -50,7 +52,8 @@ public:
             unsigned int newOpenSiteIndex(m_randomizer.getRandomValue());
             if (!isSiteOpen(newOpenSiteIndex)) {
                 m_sites[newOpenSiteIndex] = true;
-                connectNeighboringSitesAt(newOpenSiteIndex);                connectToVirtualTopOrBottomIfNeeded(newOpenSiteIndex);
+                connectNeighboringSitesAt(newOpenSiteIndex);
+                connectToVirtualTopOrBottomIfNeeded(newOpenSiteIndex);
                 m_numberOfOpenSites++;
                 break;
             }
@@ -117,4 +120,5 @@ private:
 };
 
 }  // namespace algorithm
+
 }  // namespace alba
