@@ -33,6 +33,7 @@ TEST(AlbaDebugTest, PrintingSingleParametersWorks) {
         "\n",
         s_debugStringStream.str());
 }
+
 TEST(AlbaDebugTest, PrintinPointersWorks) {
     s_debugStringStream.str(string());
     s_debugStringStream.clear();
@@ -47,6 +48,7 @@ TEST(AlbaDebugTest, PrintinPointersWorks) {
         "\n",
         s_debugStringStream.str());
 }
+
 TEST(AlbaDebugTest, PrintinContainersWorks) {
     s_debugStringStream.str(string());
     s_debugStringStream.clear();
@@ -60,6 +62,7 @@ TEST(AlbaDebugTest, PrintinContainersWorks) {
         "\n",
         s_debugStringStream.str());
 }
+
 TEST(AlbaDebugTest, ManipulateOutputStreamsWorks) {
     s_debugStringStream.str(string());
     s_debugStringStream.clear();
@@ -75,6 +78,7 @@ TEST(AlbaDebugTest, ManipulateOutputStreamsWorks) {
         "\n",
         s_debugStringStream.str());
 }
+
 namespace {
 class SampleClass {
 public:
@@ -107,4 +111,5 @@ TEST(AlbaDebugTest, DebugClassOutputOperatorsWorks) {
         "\n",
         s_debugStringStream.str());
 }
+
 }  // namespace alba

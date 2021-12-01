@@ -254,7 +254,8 @@ bool AlbaDateTime::isEqualInMagnitude(AlbaDateTime const& firstDateTime, AlbaDat
            tie(secondDateTime.m_yearMonthDay, secondDateTime.m_hourMinuteSecond, secondDateTime.m_microseconds);
 }
 
-AlbaDateTime AlbaDateTime::addDateTimeMagnitude(    AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const {
+AlbaDateTime AlbaDateTime::addDateTimeMagnitude(
+    AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const {
     AlbaDateTime result;
     uint32_t totalDays(
         firstDateTime.getYearMonthDay().getTotalDays() + secondDateTime.getYearMonthDay().getTotalDays());

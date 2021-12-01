@@ -30,6 +30,7 @@ public:
     }
 
     AlbaXY operator+() const { return *this; }
+
     AlbaXY operator-() const { return AlbaXY(-m_x, -m_y); }
 
     AlbaXY operator+(AlbaXY const& secondXy) const { return AlbaXY(m_x + secondXy.m_x, m_y + secondXy.m_y); }

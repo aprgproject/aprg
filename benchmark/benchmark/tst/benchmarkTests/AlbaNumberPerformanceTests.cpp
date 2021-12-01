@@ -3,6 +3,7 @@
 #include <benchmark/benchmark.h>
 
 using namespace std;
+
 namespace alba {
 
 // Format for asm: "assembly instructions : inputs : outputs : clobbers"
@@ -29,6 +30,7 @@ static void BM_BaseRunForInteger(benchmark::State& state) {
         escape(&randomValue);
     }
 }
+
 static void BM_BaseRunForDouble(benchmark::State& state) {
     // Perform setup here
 
@@ -41,6 +43,7 @@ static void BM_BaseRunForDouble(benchmark::State& state) {
         escape(&randomValue);
     }
 }
+
 static void BM_BaseRunForTwoIntegers(benchmark::State& state) {
     // Perform setup here
 
@@ -53,7 +56,8 @@ static void BM_BaseRunForTwoIntegers(benchmark::State& state) {
         auto randomValue2 = randomizer.getRandomValue();
         escape(&randomValue1);
         escape(&randomValue2);
-    }}
+    }
+}
 
 static void BM_BaseRunForTwoFloats(benchmark::State& state) {
     // Perform setup here
@@ -66,7 +70,8 @@ static void BM_BaseRunForTwoFloats(benchmark::State& state) {
         auto randomValue2(randomizer.getRandomValue());
         escape(&randomValue1);
         escape(&randomValue2);
-    }}
+    }
+}
 
 static void BM_AlbaNumberIntegerCreation(benchmark::State& state) {
     // Perform setup here
@@ -80,6 +85,7 @@ static void BM_AlbaNumberIntegerCreation(benchmark::State& state) {
         escape(&randomNumber);
     }
 }
+
 static void BM_AlbaNumberDoubleCreation(benchmark::State& state) {
     // Perform setup here
 
@@ -92,6 +98,7 @@ static void BM_AlbaNumberDoubleCreation(benchmark::State& state) {
         escape(&randomNumber);
     }
 }
+
 static void BM_AlbaNumberFractionCreation(benchmark::State& state) {
     // Perform setup here
 
@@ -105,6 +112,7 @@ static void BM_AlbaNumberFractionCreation(benchmark::State& state) {
         escape(&randomNumber);
     }
 }
+
 static void BM_AlbaNumberComplexNumberCreation(benchmark::State& state) {
     // Perform setup here
 
@@ -117,6 +125,7 @@ static void BM_AlbaNumberComplexNumberCreation(benchmark::State& state) {
         escape(&randomNumber);
     }
 }
+
 // Register the function as a benchmark
 BENCHMARK(BM_BaseRunForInteger);
 BENCHMARK(BM_BaseRunForDouble);
