@@ -1,9 +1,8 @@
 /*#include <benchmark/benchmark.h>
 
-#include <Common/Randomizer/AlbaUniformIntegerRandomizer.hpp>
+#include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
 
 using namespace std;
-
 namespace alba
 {
 
@@ -64,62 +63,58 @@ static void BM_BaseRun(benchmark::State & state)
 {
     // Perform setup here
 
-    AlbaUniformIntegerRandomizer<unsigned int> randomizer(0, numeric_limits<unsigned int>::max());
+    AlbaUniformNonDeterministicRandomizer<unsigned int> randomizer(0, numeric_limits<unsigned int>::max());
     unsigned int count{};
     while(state.KeepRunning())
     {
         // This code gets timed
 
-        count = randomizer.getRandomInteger();
+        count = randomizer.getRandomValue();
         escape(&count);
     }
 }
-
 static void BM_ArrayBasedImplementation(benchmark::State & state)
 {
     // Perform setup here
 
-    AlbaUniformIntegerRandomizer<uint64_t> randomizer(0, numeric_limits<uint64_t>::max());
+    AlbaUniformNonDeterministicRandomizer<uint64_t> randomizer(0, numeric_limits<uint64_t>::max());
     unsigned int count{};
     while(state.KeepRunning())
     {
         // This code gets timed
 
-        count = arrayBasedImplementation(randomizer.getRandomInteger());
+        count = arrayBasedImplementation(randomizer.getRandomValue());
         escape(&count);
     }
 }
-
 static void BM_LoopBasedImplementation(benchmark::State & state)
 {
     // Perform setup here
 
-    AlbaUniformIntegerRandomizer<uint64_t> randomizer(0, numeric_limits<uint64_t>::max());
+    AlbaUniformNonDeterministicRandomizer<uint64_t> randomizer(0, numeric_limits<uint64_t>::max());
     unsigned int count{};
     while(state.KeepRunning())
     {
         // This code gets timed
 
-        count = loopBasedImplementation(randomizer.getRandomInteger());
+        count = loopBasedImplementation(randomizer.getRandomValue());
         escape(&count);
     }
 }
-
 static void BM_BuiltinBasedImplementation(benchmark::State & state)
 {
     // Perform setup here
 
-    AlbaUniformIntegerRandomizer<uint64_t> randomizer(0, numeric_limits<uint64_t>::max());
+    AlbaUniformNonDeterministicRandomizer<uint64_t> randomizer(0, numeric_limits<uint64_t>::max());
     unsigned int count{};
     while(state.KeepRunning())
     {
         // This code gets timed
 
-        count = __builtin_popcount(randomizer.getRandomInteger());
+        count = __builtin_popcount(randomizer.getRandomValue());
         escape(&count);
     }
 }
-
 // Register the function as a benchmark
 BENCHMARK(BM_BaseRun);
 BENCHMARK(BM_ArrayBasedImplementation);

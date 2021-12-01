@@ -1,10 +1,9 @@
 /*#include <benchmark/benchmark.h>
 
 #include <Common/Bit/Common/AlbaBitUtilitiesBuiltIn.hpp>
-#include <Common/Randomizer/AlbaUniformIntegerRandomizer.hpp>
+#include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
 
 using namespace std;
-
 namespace alba
 {
 
@@ -23,15 +22,14 @@ static void clobber() // to avoid optimizers deleting code
 #define BENCHMARK_BASE_RUN(DataType) \
 static void BM_BaseRun_##DataType(benchmark::State & state) \
 { \
-    AlbaUniformIntegerRandomizer<DataType> randomizer(0, numeric_limits<DataType>::max()); \
+    AlbaUniformNonDeterministicRandomizer<DataType> randomizer(0, numeric_limits<DataType>::max()); \
     DataType count{};  \
     while(state.KeepRunning())  \
     { \
-        count = randomizer.getRandomInteger(); \
+        count = randomizer.getRandomValue(); \
         escape(&count); \
     } \
-} \
-BENCHMARK(BM_BaseRun_##DataType)
+} \BENCHMARK(BM_BaseRun_##DataType)
 
 BENCHMARK_BASE_RUN(uint8_t);
 BENCHMARK_BASE_RUN(uint16_t);
@@ -42,15 +40,14 @@ BENCHMARK_BASE_RUN(uint64_t);
 #define BENCHMARK_FUNCTION(DataType, function, name) \
 static void BM_##name(benchmark::State & state) \
 { \
-    AlbaUniformIntegerRandomizer<DataType> randomizer(0, numeric_limits<DataType>::max()); \
+    AlbaUniformNonDeterministicRandomizer<DataType> randomizer(0, numeric_limits<DataType>::max()); \
     unsigned int count{}; \
     while(state.KeepRunning()) \
     { \
-        count = function(randomizer.getRandomInteger()); \
+        count = function(randomizer.getRandomValue()); \
         escape(&count); \
     } \
-} \
-BENCHMARK(BM_##name)
+} \BENCHMARK(BM_##name)
 
 BENCHMARK_FUNCTION(uint8_t, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::isEvenParity,
 U8_WithoutBuiltin_isEvenParity); BENCHMARK_FUNCTION(uint16_t,
