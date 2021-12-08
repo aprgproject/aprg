@@ -14,7 +14,8 @@ static inline int staticInlineInteger = 700;   // static overrides inline so it 
 inline std::string inlineString{"800"};        // explicitly inline(external linkage)
 
 // same goes for functions (but there are no free const functions)
-constexpr int freeFunction()  // implicity inline (external linkage){
+constexpr int freeFunction()  // implicity inline (external linkage)
+{
     return 1;
 }
 inline int inlineFreeFunction();  // explicitly inline (external linkage)
@@ -30,6 +31,7 @@ struct SampleClassWithInline {
 
     static constexpr int constIntegerInClass = 1000;  // implicity inline (external linkage)
 };
+
 // Utilities for tests
 
 struct TranslationUnitValues {
@@ -42,6 +44,7 @@ struct TranslationUnitValues {
     int staticInlineInteger;
     std::string inlineString;
 };
+
 TranslationUnitValues getValuesInTranslationUnit1();
 TranslationUnitValues getValuesInTranslationUnit2();
 
@@ -88,7 +91,8 @@ TranslationUnitValues getValuesInTranslationUnit2();
 // -----> It must be declared inline in every translation unit. (It will be ILL FORMED other wise)
 // -----> It has the same address in every translation unit.
 
-// -> In an inline function,// ---> Function-local static objects in all function definitions are shared across all translation units
+// -> In an inline function,
+// ---> Function-local static objects in all function definitions are shared across all translation units
 // -----> (they all refer to the same object defined in one translation unit)
 // ---> Types defined in all function definitions are also the same in all translation units.
 
