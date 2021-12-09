@@ -153,11 +153,10 @@ bool AlbaLinuxPathHandler::copyToNewFile(string_view newFilePath) {
 
     readFileDescriptor = open(getFullPath().c_str(), O_RDONLY);
     if (0 == stat(getFullPath().c_str(), &statBuffer)) {
-        writeFileDescriptor = open(newFilePath.c_str(), O_WRONLY | O_CREAT, statBuffer.st_mode);
+        writeFileDescriptor = open(newFilePath.data(), O_WRONLY | O_CREAT, statBuffer.st_mode);
         if (isFile()) {
             int errorReturnValue = static_cast<int>(sendfile(
-                writeFileDescriptor, readFileDescriptor, &offset, static_cast<size_t>(statBuffer.st_size)));
-            isSuccessful = errorReturnValue != -1;
+                writeFileDescriptor, readFileDescriptor, &offset, static_cast<size_t>(statBuffer.st_size)));            isSuccessful = errorReturnValue != -1;
             if (!isSuccessful) {
                 cout << "Error in AlbaLinuxPathHandler::copyToNewFile() path:[" << getFullPath() << "] newFilePath:["
                      << newFilePath << "] 'sendfile' error value:[" << errorReturnValue << "]\n";
@@ -177,11 +176,10 @@ bool AlbaLinuxPathHandler::copyToNewFile(string_view newFilePath) {
 bool AlbaLinuxPathHandler::renameFile(string_view newFileName) {
     bool isSuccessful(false);
     if (isFile()) {
-        string newPath(m_directory + newFileName);
+        string newPath(m_directory + string(newFileName));
         int errorReturnValue = rename(getFullPath().c_str(), newPath.c_str());
         isSuccessful = errorReturnValue == 0;
-        if (!isSuccessful) {
-            cout << "Error in AlbaLinuxPathHandler::renameFile() path:[" << getFullPath() << "] newFileName:["
+        if (!isSuccessful) {            cout << "Error in AlbaLinuxPathHandler::renameFile() path:[" << getFullPath() << "] newFileName:["
                  << newFileName << "] 'rename' error value:[" << errorReturnValue << "]\n";
         } else {
             input(newPath);
@@ -195,11 +193,10 @@ bool AlbaLinuxPathHandler::renameImmediateDirectory(string_view newDirectoryName
     if (isDirectory()) {
         AlbaLinuxPathHandler newPathHandler(getFullPath());
         newPathHandler.goUp();
-        newPathHandler.input(newPathHandler.getDirectory() + m_slashCharacterString + newDirectoryName);
+        newPathHandler.input(newPathHandler.getDirectory() + m_slashCharacterString + string(newDirectoryName));
         int errorReturnValue = rename(getFullPath().c_str(), newPathHandler.getFullPath().c_str());
         isSuccessful = errorReturnValue == 0;
-        if (!isSuccessful) {
-            cout << "Error in AlbaLinuxPathHandler::renameImmediateDirectory() path:[" << getFullPath()
+        if (!isSuccessful) {            cout << "Error in AlbaLinuxPathHandler::renameImmediateDirectory() path:[" << getFullPath()
                  << "] newDirectoryName:[" << newDirectoryName << "] 'rename' error value:[" << errorReturnValue
                  << "]\n";
         } else {
@@ -265,11 +262,10 @@ void AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth(
 
     DIR* directoryStream;
 
-    directoryStream = opendir(currentDirectory.c_str());
+    directoryStream = opendir(currentDirectory.data());
     if (directoryStream != nullptr) {
         loopAllFilesAndDirectoriesInDirectoryStream(
-            directoryStream, currentDirectory, wildCardSearch, listOfFiles, listOfDirectories, depth);
-    } else {
+            directoryStream, currentDirectory, wildCardSearch, listOfFiles, listOfDirectories, depth);    } else {
         cout << "Error in AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth() currentDirectory:["
              << currentDirectory << "] 'opendir' errno value:[" << errno << "] error message:["
              << getErrorMessage(errno) << "]\n";
@@ -290,11 +286,10 @@ void AlbaLinuxPathHandler::loopAllFilesAndDirectoriesInDirectoryStream(
             bool isTheNameNotComposedOfPeriods =
                 "." != immediateFileOrDirectoryName && ".." != immediateFileOrDirectoryName;
             if (isTheNameNotComposedOfPeriods && canProceedBasedOnWildcard) {
-                string fullFileOrDirectoryName(currentDirectory + immediateFileOrDirectoryName);
+                string fullFileOrDirectoryName(string(currentDirectory) + immediateFileOrDirectoryName);
                 if (isPathADirectory(fullFileOrDirectoryName)) {
                     string fullFileOrDirectoryNameWithSlash(fullFileOrDirectoryName + "/");
-                    listOfDirectories.emplace(fullFileOrDirectoryNameWithSlash);
-                    findFilesAndDirectoriesWithDepth(
+                    listOfDirectories.emplace(fullFileOrDirectoryNameWithSlash);                    findFilesAndDirectoriesWithDepth(
                         fullFileOrDirectoryNameWithSlash, wildCardSearch, listOfFiles, listOfDirectories, depth);
                 } else {
                     listOfFiles.emplace(fullFileOrDirectoryName);
@@ -312,11 +307,10 @@ bool AlbaLinuxPathHandler::isPathADirectory(string_view fileOrDirectoryName) con
     bool result(false);
     if (canBeLocated(fileOrDirectoryName)) {
         struct stat statBuffer {};
-        if (0 == stat(fileOrDirectoryName.c_str(), &statBuffer)) {
+        if (0 == stat(fileOrDirectoryName.data(), &statBuffer)) {
             result = S_ISDIR(statBuffer.st_mode);
         } else {
-            cout << "Error in AlbaLinuxPathHandler::isPathADirectory() path:[" << getFullPath()
-                 << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
+            cout << "Error in AlbaLinuxPathHandler::isPathADirectory() path:[" << getFullPath()                 << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
         }
     }
     return result;
@@ -324,11 +318,10 @@ bool AlbaLinuxPathHandler::isPathADirectory(string_view fileOrDirectoryName) con
 
 bool AlbaLinuxPathHandler::canBeLocated(string_view fullPath) const {
     struct stat statBuffer {};
-    return stat(fullPath.c_str(), &statBuffer) == 0;
+    return stat(fullPath.data(), &statBuffer) == 0;
 }
 
-bool AlbaLinuxPathHandler::isSlashNeededAtTheEnd(string_view correctedPath, string_view originalPath) const {
-    bool result = false;
+bool AlbaLinuxPathHandler::isSlashNeededAtTheEnd(string_view correctedPath, string_view originalPath) const {    bool result = false;
     bool isCorrectPathLastCharacterNotASlash(correctedPath[correctedPath.length() - 1] != m_slashCharacterString[0]);
     if (isCorrectPathLastCharacterNotASlash) {
         if (canBeLocated(correctedPath)) {

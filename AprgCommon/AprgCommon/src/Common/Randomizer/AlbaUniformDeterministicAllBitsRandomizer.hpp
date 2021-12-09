@@ -6,10 +6,10 @@
 
 namespace alba {
 
+// This is the fastest on all my randomizers
 template <typename ValueType>
 class AlbaUniformDeterministicAllBitsRandomizer {
-public:
-    static_assert(typeHelper::isArithmeticType<ValueType>(), "Value should be an arithmetic type");
+public:    static_assert(typeHelper::isArithmeticType<ValueType>(), "Value should be an arithmetic type");
     static_assert(sizeof(ValueType) != 0, "C++ standard does not allow char-types.");
 
     // Assumption: Lets use the size of ValueType as basis for a better engine (not proven)
@@ -23,10 +23,11 @@ public:
 
     ValueType getRandomValue() { return m_randomEngine(); }
 
+    void setRandomSeed(ValueType const customSeed) { m_randomEngine.seed(customSeed); }
+
 private:
     RandomEngine m_randomEngine;
 };
-
 }  // namespace alba
 
 // Notes:
