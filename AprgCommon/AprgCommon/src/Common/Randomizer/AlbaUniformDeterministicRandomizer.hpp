@@ -28,7 +28,8 @@ public:
 
 private:
     RandomEngine m_randomEngine;
-    Distribution m_randomNumberDistribution;};
+    Distribution m_randomNumberDistribution;
+};
 
 }  // namespace alba
 

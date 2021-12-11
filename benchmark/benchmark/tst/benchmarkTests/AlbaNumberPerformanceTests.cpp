@@ -1,12 +1,14 @@
 /*#include <Common/Math/Number/AlbaNumber.hpp>
 #include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
 #include <benchmark/benchmark.h>
+
 using namespace std;
 
 namespace alba {
 
 static void BM_BaseRunForInteger(benchmark::State& state) {
     // Perform setup here
+
     AlbaUniformNonDeterministicRandomizer<int64_t> randomizer(
         numeric_limits<int64_t>::min(), numeric_limits<int64_t>::max());
     while (state.KeepRunning()) {
@@ -16,6 +18,7 @@ static void BM_BaseRunForInteger(benchmark::State& state) {
         benchmark::ClobberMemory();  // is it not needed?
     }
 }
+
 static void BM_BaseRunForDouble(benchmark::State& state) {
     // Perform setup here
 
@@ -28,6 +31,7 @@ static void BM_BaseRunForDouble(benchmark::State& state) {
         benchmark::ClobberMemory();  // is it not needed?
     }
 }
+
 static void BM_BaseRunForTwoIntegers(benchmark::State& state) {
     // Perform setup here
 
@@ -41,6 +45,7 @@ static void BM_BaseRunForTwoIntegers(benchmark::State& state) {
         benchmark::ClobberMemory();  // is it not needed?
     }
 }
+
 static void BM_BaseRunForTwoFloats(benchmark::State& state) {
     // Perform setup here
 
@@ -53,6 +58,7 @@ static void BM_BaseRunForTwoFloats(benchmark::State& state) {
         benchmark::ClobberMemory();  // is it not needed?
     }
 }
+
 static void BM_AlbaNumberIntegerCreation(benchmark::State& state) {
     // Perform setup here
 
@@ -66,6 +72,7 @@ static void BM_AlbaNumberIntegerCreation(benchmark::State& state) {
         benchmark::ClobberMemory();  // is it not needed?
     }
 }
+
 static void BM_AlbaNumberDoubleCreation(benchmark::State& state) {
     // Perform setup here
 
@@ -79,6 +86,7 @@ static void BM_AlbaNumberDoubleCreation(benchmark::State& state) {
         benchmark::ClobberMemory();  // is it not needed?
     }
 }
+
 static void BM_AlbaNumberFractionCreation(benchmark::State& state) {
     // Perform setup here
 
@@ -93,6 +101,7 @@ static void BM_AlbaNumberFractionCreation(benchmark::State& state) {
         benchmark::ClobberMemory();  // is it not needed?
     }
 }
+
 static void BM_AlbaNumberComplexNumberCreation(benchmark::State& state) {
     // Perform setup here
 
@@ -106,6 +115,7 @@ static void BM_AlbaNumberComplexNumberCreation(benchmark::State& state) {
         benchmark::ClobberMemory();  // is it not needed?
     }
 }
+
 // Register the function as a benchmark
 BENCHMARK(BM_BaseRunForInteger);
 BENCHMARK(BM_BaseRunForDouble);
