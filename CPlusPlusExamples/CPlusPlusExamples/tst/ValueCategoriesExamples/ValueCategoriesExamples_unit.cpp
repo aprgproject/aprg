@@ -1,7 +1,8 @@
+#include <Common/Macros/AlbaMacros.hpp>
+
 #include <gtest/gtest.h>
 
 #include <iostream>
-
 using namespace std;
 
 // Taken from Ben Saks's lecture ("Back to Basics- Understanding Value Categories")
@@ -16,10 +17,28 @@ TEST(ValueCategoriesExamplesTest, RValueAssignmentCannotWork) {
 }
 }  // namespace RValueAssignmentCannotWork
 
+namespace LValuesAndRValuesBindToDifferentFunctions {
+void foo(string const &) {
+    // takes lvalues
+    cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+}
+void foo(string &&) {
+    // takes rvalues
+    // Here we can steal the guts of the parameter because its a temporary.
+    cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+}
+TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
+    string s = "hello";
+    foo(s);             // calls foo (with lvalue)
+    foo(s + " world");  // calls foo (with rvalue)
+    foo("hi");          // calls foo (with rvalue)
+    foo(move(s));       // calls foo (with rvalue)
+}
+}  // namespace LValuesAndRValuesBindToDifferentFunctions
+
 }  // namespace alba
 
 // Notes:
-
 // -> Value Categories
 // ---> Value categories aren't really language features.
 // ---> Rather, they're semantic properties of expression.
