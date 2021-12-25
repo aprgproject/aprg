@@ -14,18 +14,19 @@ namespace alba {
 MapAnalyzer::MapAnalyzer() {}
 
 void MapAnalyzer::initialize() {
-    m_ragnarokOnline.readItemIdToItemMapFromFile(R"(C:\Users\detectivemark7\Desktop\RO\ItemIdToItemMap.txt)");
+    m_ragnarokOnline.readItemIdToItemMapFromFile(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\ItemIdToItemMap.txt)");
     m_ragnarokOnline.readMonsterIdToMonsterMapFromFile(
-        R"(C:\Users\detectivemark7\Desktop\RO\MonsterIdToMonsterMap.txt)");
-    m_ragnarokOnline.readMapNameToRoMapFromFile(R"(C:\Users\detectivemark7\Desktop\RO\MapNameToRoMap.txt)");
-    // m_ragnarokOnline.readBuyingShopItems(R"(C:\Users\detectivemark7\Desktop\RO\BuyingShopItemsCurrentData.txt)");
-    // m_ragnarokOnline.readSellingShopItems(R"(C:\Users\detectivemark7\Desktop\RO\SellingShopItemsCurrentData.txt)");
-    m_ragnarokOnline.readBuyingShopItems(R"(C:\Users\detectivemark7\Desktop\RO\BuyingShopItemsCumulativeData.txt)");
-    m_ragnarokOnline.readSellingShopItems(R"(C:\Users\detectivemark7\Desktop\RO\SellingShopItemsCumulativeData.txt)");
+        R"(C:\Users\detec\OneDrive\Desktop\Games\RO\MonsterIdToMonsterMap.txt)");
+    m_ragnarokOnline.readMapNameToRoMapFromFile(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\MapNameToRoMap.txt)");
+    // m_ragnarokOnline.readBuyingShopItems(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\BuyingShopItemsCurrentData.txt)");
+    // m_ragnarokOnline.readSellingShopItems(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\SellingShopItemsCurrentData.txt)");
+    m_ragnarokOnline.readBuyingShopItems(
+        R"(C:\Users\detec\OneDrive\Desktop\Games\RO\BuyingShopItemsCumulativeData.txt)");
+    m_ragnarokOnline.readSellingShopItems(
+        R"(C:\Users\detec\OneDrive\Desktop\Games\RO\SellingShopItemsCumulativeData.txt)");
     m_ragnarokOnline.buildItemNameToItemId();
     m_ragnarokOnline.buildMonsterNameToMonsterId();
 }
-
 void MapAnalyzer::analyze() {
     for (auto const& mapNameToRoMap : m_ragnarokOnline.getMapNameToRoMap()) {
         MapAnalyzerData mapAnalyzerData{};
@@ -116,12 +117,11 @@ void MapAnalyzer::analyze() {
     // printPotentialZenyFromMonster("Demon Pungus");
     // printPotentialZenyFromMonster("Sleeper");
 
-    printPotentialZenyFromMonster("Incubus");
-    printPotentialZenyFromMonster("Succubus");
+    // printPotentialZenyFromMonster("Incubus");
+    // printPotentialZenyFromMonster("Succubus");
     // printPotentialZenyFromMonster("Violy");
 
-    // printPotentialZenyFromMonster("Anolian");
-    // printPotentialZenyFromMonster("Drainliar");
+    // printPotentialZenyFromMonster("Anolian");    // printPotentialZenyFromMonster("Drainliar");
     // printPotentialZenyFromMonster("Gargoyle");
 
     // printPotentialZenyFromMonster("Kraben");
@@ -138,10 +138,12 @@ void MapAnalyzer::analyze() {
     // printPotentialZenyFromMonster("Hell Poodle");
     // printPotentialZenyFromMonster("Banshee");
     // printPotentialZenyFromMonster("Flame Skull");
+
+    printPotentialZenyFromMonster("Zombie Prisoner");
+    printPotentialZenyFromMonster("Injustice");
 }
 
-void MapAnalyzer::sortData() {
-    sort(
+void MapAnalyzer::sortData() {    sort(
         m_mapsAnalyzerData.begin(), m_mapsAnalyzerData.end(),
         [](MapAnalyzerData const& first, MapAnalyzerData const& second) {
             if (first.zenyPotential == second.zenyPotential) {
