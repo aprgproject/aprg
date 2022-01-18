@@ -5,9 +5,9 @@
 
 #include <iomanip>
 #include <optional>
+#include <sstream>
 #include <string>
 #include <vector>
-
 namespace alba::stringHelper {
 
 using strings = std::vector<std::string>;

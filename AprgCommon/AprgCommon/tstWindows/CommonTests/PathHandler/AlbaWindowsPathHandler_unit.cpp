@@ -314,11 +314,10 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryOne
     set<string> listOfDirectory;
     pathHandler.findFilesAndDirectoriesOneDepth("*.*", listOfFiles, listOfDirectory);
     ASSERT_EQ(5U, listOfFiles.size());
-    auto itFiles = listOfFiles.begin();
+    auto itFiles = begin(listOfFiles);
     EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\File1.log)"),
-        *(itFiles++));
-    EXPECT_EQ(
+        *(itFiles++));    EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\File2.txt)"),
         *(itFiles++));
     EXPECT_EQ(
@@ -330,11 +329,10 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryOne
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\File5.avi)"),
         *(itFiles++));
     ASSERT_EQ(6U, listOfDirectory.size());
-    auto itDirectories = listOfDirectory.begin();
+    auto itDirectories = begin(listOfDirectory);
     EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR1\)"),
-        *(itDirectories++));
-    EXPECT_EQ(
+        *(itDirectories++));    EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR2\)"),
         *(itDirectories++));
     EXPECT_EQ(
@@ -360,11 +358,10 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryMul
     set<string> listOfDirectory;
     pathHandler.findFilesAndDirectoriesMultipleDepth("*.*", listOfFiles, listOfDirectory, 2);
     ASSERT_EQ(10U, listOfFiles.size());
-    auto itFiles = listOfFiles.begin();
+    auto itFiles = begin(listOfFiles);
     EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR1\File1.log)"),
-        *(itFiles++));
-    EXPECT_EQ(
+        *(itFiles++));    EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR2\File2.txt)"),
         *(itFiles++));
     EXPECT_EQ(
@@ -391,11 +388,10 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryMul
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\File5.avi)"),
         *(itFiles++));
     ASSERT_EQ(7U, listOfDirectory.size());
-    auto itDirectories = listOfDirectory.begin();
+    auto itDirectories = begin(listOfDirectory);
     EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR1\)"),
-        *(itDirectories++));
-    EXPECT_EQ(
+        *(itDirectories++));    EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR2\)"),
         *(itDirectories++));
     EXPECT_EQ(
@@ -424,11 +420,10 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryUnl
     set<string> listOfDirectory;
     pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectory);
     ASSERT_EQ(11U, listOfFiles.size());
-    auto itFiles = listOfFiles.begin();
+    auto itFiles = begin(listOfFiles);
     EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR1\File1.log)"),
-        *(itFiles++));
-    EXPECT_EQ(
+        *(itFiles++));    EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR2\File2.txt)"),
         *(itFiles++));
     EXPECT_EQ(
@@ -458,11 +453,10 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryUnl
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\File5.avi)"),
         *(itFiles++));
     ASSERT_EQ(7U, listOfDirectory.size());
-    auto itDirectories = listOfDirectory.begin();
+    auto itDirectories = begin(listOfDirectory);
     EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR1\)"),
-        *(itDirectories++));
-    EXPECT_EQ(
+        *(itDirectories++));    EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR2\)"),
         *(itDirectories++));
     EXPECT_EQ(
@@ -491,11 +485,10 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryUnl
     set<string> listOfDirectory;
     pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.log", listOfFiles, listOfDirectory);
     ASSERT_EQ(1U, listOfFiles.size());
-    auto itFiles = listOfFiles.begin();
+    auto itFiles = begin(listOfFiles);
     EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\File1.log)"),
-        *(itFiles++));
-    ASSERT_EQ(0U, listOfDirectory.size());
+        *(itFiles++));    ASSERT_EQ(0U, listOfDirectory.size());
 }
 
 TEST_F(AlbaWindowsPathHandlerTest, FileSizeTest_FileIsNotExisting) {

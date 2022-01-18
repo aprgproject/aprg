@@ -1,10 +1,10 @@
 #pragma once
 
 #include <climits>
+#include <cstddef>
 #include <cstdint>
 
 namespace alba::AlbaBitConstants {
-
 // defined in climits
 constexpr std::size_t BYTE_SIZE_IN_BITS = CHAR_BIT;  // 8
 constexpr std::size_t BYTE_MASK = UCHAR_MAX;         // 0xFF or 255
