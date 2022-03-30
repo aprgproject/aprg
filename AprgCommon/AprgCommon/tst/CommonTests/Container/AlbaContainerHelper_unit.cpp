@@ -163,7 +163,8 @@ TEST(ContainerTest, GetLowerAndUpperConstIteratorsInMapWorksOnMultiMap) {
     MultimapIterator firstIterator = begin(sampleMap);
     MultimapIterator secondIterator = firstIterator;
     secondIterator++;
-    MultimapIterator thirdIterator = secondIterator;    thirdIterator++;
+    MultimapIterator thirdIterator = secondIterator;
+    thirdIterator++;
     MultimapIterator fourthIterator = thirdIterator;
     fourthIterator++;
     MultimapIterator fifthIterator = fourthIterator;
@@ -198,7 +199,8 @@ TEST(ContainerTest, GetLowerAndUpperIteratorsInMapWorksOnMultiMap) {
     MultimapIterator firstIterator = begin(sampleMap);
     MultimapIterator secondIterator = firstIterator;
     secondIterator++;
-    MultimapIterator thirdIterator = secondIterator;    thirdIterator++;
+    MultimapIterator thirdIterator = secondIterator;
+    thirdIterator++;
     MultimapIterator fourthIterator = thirdIterator;
     fourthIterator++;
     MultimapIterator fifthIterator = fourthIterator;
@@ -371,7 +373,8 @@ TEST(ContainerTest, FetrieveContentsFromStreamWorksForAVectorOfIntegersFromFile)
     auto it = begin(temporaryArray);
     EXPECT_EQ(18723, *(it++));
     EXPECT_EQ(-608, *(it++));
-    EXPECT_EQ(-43735, *(it++));    EXPECT_EQ(23234, *(it++));
+    EXPECT_EQ(-43735, *(it++));
+    EXPECT_EQ(23234, *(it++));
 }
 
 TEST(ContainerTest, FetrieveContentsFromStreamWorksForAnArrayOfIntegersFromFile) {
@@ -392,7 +395,8 @@ TEST(ContainerTest, FetrieveContentsFromStreamWorksForAnArrayOfIntegersFromFile)
     auto it = begin(temporaryVector);
     EXPECT_EQ(18723, *(it++));
     EXPECT_EQ(-608, *(it++));
-    EXPECT_EQ(-43735, *(it++));    EXPECT_EQ(23234, *(it++));
+    EXPECT_EQ(-43735, *(it++));
+    EXPECT_EQ(23234, *(it++));
 }
 
 TEST(ContainerTest, FetrieveContentsFromStreamWorksForASetOfIntegersFromFile) {
@@ -413,7 +417,8 @@ TEST(ContainerTest, FetrieveContentsFromStreamWorksForASetOfIntegersFromFile) {
     auto it = begin(temporarySet);
     EXPECT_EQ(-43735, *(it++));
     EXPECT_EQ(-608, *(it++));
-    EXPECT_EQ(18723, *(it++));    EXPECT_EQ(23234, *(it++));
+    EXPECT_EQ(18723, *(it++));
+    EXPECT_EQ(23234, *(it++));
 }
 
 TEST(ContainerTest, FetrieveContentsFromStreamWorksForAMapOfIntegersFromFile) {
@@ -434,7 +439,8 @@ TEST(ContainerTest, FetrieveContentsFromStreamWorksForAMapOfIntegersFromFile) {
     auto it = begin(temporaryMap);
     EXPECT_EQ(1, it->first);
     EXPECT_EQ(2, it->second);
-    it++;    EXPECT_EQ(3, it->first);
+    it++;
+    EXPECT_EQ(3, it->first);
     EXPECT_EQ(4, it->second);
 }
 

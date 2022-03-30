@@ -37,7 +37,8 @@ void* AlbaMemoryBuffer::resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(s
     return begin(m_buffer).base() + oldSize;
 }
 
-void AlbaMemoryBuffer::addData(void const* sourcePointer, size_t const additionalSize) {    void* destinationVoidPointer = resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(additionalSize);
+void AlbaMemoryBuffer::addData(void const* sourcePointer, size_t const additionalSize) {
+    void* destinationVoidPointer = resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(additionalSize);
     memcpy(destinationVoidPointer, sourcePointer, additionalSize);
 }
 

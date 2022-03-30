@@ -6,7 +6,8 @@
 #include <Common/Print/AlbaPrintFunctions.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
-#include <algorithm>#include <fstream>
+#include <algorithm>
+#include <fstream>
 #include <iostream>
 
 using namespace alba::mathHelper;
@@ -17,6 +18,7 @@ namespace {
 constexpr int NUMBER_OF_WINNERS_TO_SHOW = 15;
 constexpr int NUMBER_OF_WINNERS_PER_LINE = 5;
 constexpr auto INDENTION = " | ";
+
 enum class RacePlaceType { Unknown, SingleRace, DualRaceFirstPlace, DualRaceSecondPlace };
 
 }  // namespace
@@ -50,6 +52,7 @@ void MonsterRaceAnalyzer::showNextPossibleWinners(RaceConfiguration const& curre
     showWinners(dualRaceSecondWinners);
     cout << "\n";
 }
+
 void MonsterRaceAnalyzer::readPreviousRaceDatabase() {
     AlbaLocalPathHandler filePathHandler(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\MonsterRacingDatabase.txt)");
     ifstream fileStream(filePathHandler.getFullPath());
@@ -111,6 +114,7 @@ void MonsterRaceAnalyzer::retrieveBestWinners(
         }
     }
 }
+
 void MonsterRaceAnalyzer::showWinners(BestWinners& queueOfWinners) const {
     vector<PossibleWinner> winnersToDisplay;
     winnersToDisplay.reserve(NUMBER_OF_WINNERS_TO_SHOW);
@@ -173,4 +177,5 @@ int MonsterRaceAnalyzer::getDiscrepancy(RaceConfiguration const& r1, RaceConfigu
     }
     return result;
 }
+
 }  // namespace alba

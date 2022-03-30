@@ -22,6 +22,7 @@ TEST(MonsterRaceAnalyzerTest, AnalyzeWorks) {
 
     analyzer.showNextPossibleWinners(currentConfiguration);
 }
+
 TEST(MonsterRaceAnalyzerTest, DISABLED_Duplicated_AnalyzeWorks) {
     // For faster typing
     //

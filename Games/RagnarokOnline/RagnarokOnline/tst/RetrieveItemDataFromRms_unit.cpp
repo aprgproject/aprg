@@ -22,6 +22,7 @@ TEST(RagnarokOnlineItemTest, ReadItemIdToItemMapFromFileWorks) {
 
     EXPECT_EQ(6225U, ragnarokOnline.getItemIdToItemMap().size());
 }
+
 TEST(RagnarokOnlineItemTest, RetrieveItemDataFromRmsWebPagesWorks) {
     RagnarokOnline ragnarokOnline;
 
@@ -30,6 +31,7 @@ TEST(RagnarokOnlineItemTest, RetrieveItemDataFromRmsWebPagesWorks) {
 
     EXPECT_EQ(6225U, ragnarokOnline.getItemIdToItemMap().size());
 }
+
 TEST(RagnarokOnlineItemTest, RetrieveItemDataFromRmsWebPageWorksWithExample1) {
     RagnarokOnline ragnarokOnline;
 
@@ -38,6 +40,7 @@ TEST(RagnarokOnlineItemTest, RetrieveItemDataFromRmsWebPageWorksWithExample1) {
 
     ItemIdToItemMap const& itemIdToItemMap(ragnarokOnline.getItemIdToItemMap());
     ASSERT_EQ(12U, itemIdToItemMap.size());
+
     Item const& item1(itemIdToItemMap.at(4140U));
     EXPECT_EQ(4140U, item1.itemId);
     EXPECT_EQ("Abysmal Knight Card", item1.name);
@@ -329,6 +332,7 @@ TEST(RagnarokOnlineItemTest, RetrieveItemDataFromRmsWebPageWorksWithExample2) {
 
     ItemIdToItemMap const& itemIdToItemMap(ragnarokOnline.getItemIdToItemMap());
     ASSERT_EQ(12U, itemIdToItemMap.size());
+
     Item const& item1(itemIdToItemMap.at(912U));
     EXPECT_EQ(912U, item1.itemId);
     EXPECT_EQ("Zargon", item1.name);

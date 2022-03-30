@@ -317,7 +317,8 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryOne
     auto itFiles = begin(listOfFiles);
     EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\File1.log)"),
-        *(itFiles++));    EXPECT_EQ(
+        *(itFiles++));
+    EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\File2.txt)"),
         *(itFiles++));
     EXPECT_EQ(
@@ -332,7 +333,8 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryOne
     auto itDirectories = begin(listOfDirectory);
     EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR1\)"),
-        *(itDirectories++));    EXPECT_EQ(
+        *(itDirectories++));
+    EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR2\)"),
         *(itDirectories++));
     EXPECT_EQ(
@@ -361,7 +363,8 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryMul
     auto itFiles = begin(listOfFiles);
     EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR1\File1.log)"),
-        *(itFiles++));    EXPECT_EQ(
+        *(itFiles++));
+    EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR2\File2.txt)"),
         *(itFiles++));
     EXPECT_EQ(
@@ -391,7 +394,8 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryMul
     auto itDirectories = begin(listOfDirectory);
     EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR1\)"),
-        *(itDirectories++));    EXPECT_EQ(
+        *(itDirectories++));
+    EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR2\)"),
         *(itDirectories++));
     EXPECT_EQ(
@@ -423,7 +427,8 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryUnl
     auto itFiles = begin(listOfFiles);
     EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR1\File1.log)"),
-        *(itFiles++));    EXPECT_EQ(
+        *(itFiles++));
+    EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR2\File2.txt)"),
         *(itFiles++));
     EXPECT_EQ(
@@ -456,7 +461,8 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryUnl
     auto itDirectories = begin(listOfDirectory);
     EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR1\)"),
-        *(itDirectories++));    EXPECT_EQ(
+        *(itDirectories++));
+    EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\DIR2\)"),
         *(itDirectories++));
     EXPECT_EQ(
@@ -488,7 +494,8 @@ TEST_F(AlbaWindowsPathHandlerTest, FullPathWithDirectory_FindFileAndDirectoryUnl
     auto itFiles = begin(listOfFiles);
     EXPECT_EQ(
         convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\File1.log)"),
-        *(itFiles++));    ASSERT_EQ(0U, listOfDirectory.size());
+        *(itFiles++));
+    ASSERT_EQ(0U, listOfDirectory.size());
 }
 
 TEST_F(AlbaWindowsPathHandlerTest, FileSizeTest_FileIsNotExisting) {

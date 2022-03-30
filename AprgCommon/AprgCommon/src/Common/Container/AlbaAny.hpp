@@ -13,7 +13,8 @@ namespace alba {
 // lets remove [[deprecated]] to avoid unnecessary warnings
 class AlbaAny {
     // This requires copy constructor and default constructor on ContentType
-public:    AlbaAny() : m_savedMemory(), m_typeId(EMPTY_TYPE_ID) {}
+public:
+    AlbaAny() : m_savedMemory(), m_typeId(EMPTY_TYPE_ID) {}
 
     template <typename ContentType>
     AlbaAny(ContentType const& content)  // copy constructor for other ContentType

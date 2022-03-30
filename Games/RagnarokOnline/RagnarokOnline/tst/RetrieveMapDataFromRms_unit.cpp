@@ -22,6 +22,7 @@ TEST(RagnarokOnlineMapTest, ReadMapNameToRoMapFromFileWorks) {
 
     EXPECT_EQ(316U, ragnarokOnline.getMapNameToRoMap().size());
 }
+
 TEST(RagnarokOnlineMapTest, RetrieveMapDataFromRmsWebPagesWorks) {
     RagnarokOnline ragnarokOnline;
 
@@ -30,6 +31,7 @@ TEST(RagnarokOnlineMapTest, RetrieveMapDataFromRmsWebPagesWorks) {
 
     EXPECT_EQ(316U, ragnarokOnline.getMapNameToRoMap().size());
 }
+
 TEST(RagnarokOnlineMapTest, RetrieveMapDataFromRmsWebPageWorksWithExample1) {
     RagnarokOnline ragnarokOnline;
 
@@ -38,6 +40,7 @@ TEST(RagnarokOnlineMapTest, RetrieveMapDataFromRmsWebPageWorksWithExample1) {
 
     MapNameToRoMap const& mapNameToRoMap(ragnarokOnline.getMapNameToRoMap());
     ASSERT_EQ(4U, mapNameToRoMap.size());
+
     RoMap const& roMap1(mapNameToRoMap.at("abyss_01"));
     EXPECT_EQ("abyss_01", roMap1.name);
     EXPECT_EQ("Area: Abyss Lake Dungeon - Abyss Lakes Underground Cave F1", roMap1.fullName);
@@ -85,6 +88,7 @@ TEST(RagnarokOnlineMapTest, RetrieveMapDataFromRmsWebPageWorksWithExample2) {
 
     MapNameToRoMap const& mapNameToRoMap(ragnarokOnline.getMapNameToRoMap());
     ASSERT_EQ(9U, mapNameToRoMap.size());
+
     RoMap const& roMap1(mapNameToRoMap.at("cmd_fild01"));
     EXPECT_EQ("cmd_fild01", roMap1.name);
     EXPECT_EQ("Area: Comodo Field - Papuchicha Forest", roMap1.fullName);

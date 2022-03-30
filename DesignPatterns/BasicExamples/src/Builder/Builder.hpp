@@ -86,7 +86,8 @@ private:
 // Builder discussion:
 
 // ONE LINE NOTE:
-// -> Create objects using an ABSTRACT/CHANGING BUILDER, building it STEP BY STEP, and DIRECTING it with CONSISTENT// build steps
+// -> Create objects using an ABSTRACT/CHANGING BUILDER, building it STEP BY STEP, and DIRECTING it with CONSISTENT
+// build steps
 
 // Intent:
 // Builder pattern has creational purpose and separates the construction of a complex object

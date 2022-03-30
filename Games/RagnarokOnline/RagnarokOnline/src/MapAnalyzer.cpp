@@ -27,6 +27,7 @@ void MapAnalyzer::initialize() {
     m_ragnarokOnline.buildItemNameToItemId();
     m_ragnarokOnline.buildMonsterNameToMonsterId();
 }
+
 void MapAnalyzer::analyze() {
     for (auto const& mapNameToRoMap : m_ragnarokOnline.getMapNameToRoMap()) {
         MapAnalyzerData mapAnalyzerData{};
@@ -121,7 +122,8 @@ void MapAnalyzer::analyze() {
     // printPotentialZenyFromMonster("Succubus");
     // printPotentialZenyFromMonster("Violy");
 
-    // printPotentialZenyFromMonster("Anolian");    // printPotentialZenyFromMonster("Drainliar");
+    // printPotentialZenyFromMonster("Anolian");
+    // printPotentialZenyFromMonster("Drainliar");
     // printPotentialZenyFromMonster("Gargoyle");
 
     // printPotentialZenyFromMonster("Kraben");
@@ -143,7 +145,8 @@ void MapAnalyzer::analyze() {
     printPotentialZenyFromMonster("Injustice");
 }
 
-void MapAnalyzer::sortData() {    sort(
+void MapAnalyzer::sortData() {
+    sort(
         m_mapsAnalyzerData.begin(), m_mapsAnalyzerData.end(),
         [](MapAnalyzerData const& first, MapAnalyzerData const& second) {
             if (first.zenyPotential == second.zenyPotential) {

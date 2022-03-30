@@ -65,6 +65,7 @@ void AlbaStreamBitWriter::transferBytesAsMuchAsPossibleToStream() {
         m_bitBuffer.erase(begin(m_bitBuffer), begin(m_bitBuffer) + i);
     }
 }
+
 void AlbaStreamBitWriter::transferAllToStream() {
     bitset<8> byte;
     size_t i = 0;

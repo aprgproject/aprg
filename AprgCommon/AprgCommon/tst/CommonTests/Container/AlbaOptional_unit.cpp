@@ -9,6 +9,7 @@ namespace alba {
 TEST(AlbaOptionalTest, OptionalCanBeContructedByConstructorWithContentType) {
     // Given
     AlbaOptional<int> integerOptional1(1111);
+
     // When
     // Then
     EXPECT_TRUE(static_cast<bool>(integerOptional1));
@@ -20,6 +21,7 @@ TEST(AlbaOptionalTest, OptionalSetValueWorks) {
     // Given
     AlbaOptional<int> integerOptional1;
     EXPECT_FALSE(static_cast<bool>(integerOptional1));
+
     // When
     integerOptional1.setValue(2222);
 
@@ -41,6 +43,7 @@ TEST(AlbaOptionalTest, OptionalSetConstReferenceWorks) {
     // Given
     AlbaOptional<int> integerOptional1;
     EXPECT_FALSE(static_cast<bool>(integerOptional1));
+
     // When
     int newValue1(2222);
     integerOptional1.setConstReference(newValue1);
@@ -63,6 +66,7 @@ TEST(AlbaOptionalTest, OptionalSetConstReferenceWorks) {
 TEST(AlbaOptionalTest, OptionalGetReferenceWorks) {
     // Given
     AlbaOptional<int> integerOptional1(1111);
+
     // When
     // Then
     int& integerReference1 = integerOptional1.getReference();
@@ -80,6 +84,7 @@ TEST(AlbaOptionalTest, OptionalReferenceCanBeContructedByContructorWithContentTy
     // Given
     AlbaOptional<int> integerOptional1(3333);
     AlbaOptional<int&> integerOptional2(integerOptional1.getReference());
+
     // When
     // Then
     EXPECT_TRUE(static_cast<bool>(integerOptional2));
@@ -97,7 +102,8 @@ TEST(AlbaOptionalTest, OptionalReferenceCanBeContructedByContructorWithContentTy
 TEST(AlbaOptionalTest, OptionalReferenceSetReferenceWorks) {
     // Given
     AlbaOptional<int> integerOptional1(4444);
-    AlbaOptional<int&> integerOptional2;    EXPECT_FALSE(static_cast<bool>(integerOptional2));
+    AlbaOptional<int&> integerOptional2;
+    EXPECT_FALSE(static_cast<bool>(integerOptional2));
 
     // When
     integerOptional2.setReference(integerOptional1.getReference());
@@ -119,6 +125,7 @@ TEST(AlbaOptionalTest, OptionalCanBeConstructedByDefault) {
     // Given
     AlbaOptional<int> integerOptional;
     EXPECT_FALSE(static_cast<bool>(integerOptional));
+
     // When
     integerOptional.createObjectUsingDefaultConstructor();
 
@@ -130,6 +137,7 @@ TEST(AlbaOptionalTest, OptionalCanBeCopied) {
     // Given
     AlbaOptional<int> integerOptional1(1111);
     AlbaOptional<int> const& integerOptional2(integerOptional1);
+
     // When
     // Then
     EXPECT_EQ(1111, static_cast<int>(integerOptional1));
@@ -141,7 +149,8 @@ TEST(AlbaOptionalTest, OptionalCanBeCopied) {
 TEST(AlbaOptionalTest, OptionalReferenceCanBeCopied) {
     // Given
     AlbaOptional<int> integerOptional1(1111);
-    AlbaOptional<int&> integerOptional2(integerOptional1.getReference());    AlbaOptional<int&> integerOptional3(integerOptional2);
+    AlbaOptional<int&> integerOptional2(integerOptional1.getReference());
+    AlbaOptional<int&> integerOptional3(integerOptional2);
 
     // When
     integerOptional3.setValue(2222);
@@ -159,6 +168,7 @@ TEST(AlbaOptionalTest, OptionalCanBeAssigned) {
     // Given
     AlbaOptional<int> integerOptional1(1111);
     AlbaOptional<int> integerOptional2;
+
     // When
     integerOptional2 = integerOptional1;
 
@@ -184,7 +194,8 @@ TEST(AlbaOptionalTest, OptionalCanBeSelfAssigned) {
 TEST(AlbaOptionalTest, OptionalReferenceCanBeAssigned) {
     // Given
     AlbaOptional<int> integerOptional1(1111);
-    AlbaOptional<int&> integerOptional2(integerOptional1.getReference());    AlbaOptional<int&> integerOptional3;
+    AlbaOptional<int&> integerOptional2(integerOptional1.getReference());
+    AlbaOptional<int&> integerOptional3;
 
     // When
     integerOptional3 = integerOptional2;
@@ -202,7 +213,8 @@ TEST(AlbaOptionalTest, OptionalReferenceCanBeAssigned) {
 TEST(AlbaOptionalTest, OptionalCanBeCleared) {
     // Given
     AlbaOptional<int> integerOptional1(1111);
-    AlbaOptional<int&> integerOptional2(integerOptional1.getReference());    EXPECT_TRUE(static_cast<bool>(integerOptional1));
+    AlbaOptional<int&> integerOptional2(integerOptional1.getReference());
+    EXPECT_TRUE(static_cast<bool>(integerOptional1));
     EXPECT_TRUE(static_cast<bool>(integerOptional2));
 
     // When
@@ -217,7 +229,8 @@ TEST(AlbaOptionalTest, OptionalCanBeCleared) {
 TEST(AlbaOptionalTest, OptionalCanBeMovedByMoveAssignmentOperator) {
     // Given
     AlbaOptional<int> integerOptional1(1111);
-    AlbaOptional<int> integerOptional2;    EXPECT_TRUE(static_cast<bool>(integerOptional1));
+    AlbaOptional<int> integerOptional2;
+    EXPECT_TRUE(static_cast<bool>(integerOptional1));
     EXPECT_FALSE(static_cast<bool>(integerOptional2));
 
     // When
@@ -233,6 +246,7 @@ TEST(AlbaOptionalTest, OptionalCanBeMovedByMoveContructor) {
     // Given
     AlbaOptional<int> integerOptional1(1111);
     EXPECT_TRUE(static_cast<bool>(integerOptional1));
+
     // When
     AlbaOptional<int> integerOptional2(move(integerOptional1));
 

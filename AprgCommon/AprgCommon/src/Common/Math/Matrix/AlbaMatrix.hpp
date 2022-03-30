@@ -212,7 +212,8 @@ public:
         std::copy(begin(dataSampleValues), begin(dataSampleValues) + limit, begin(m_matrixData));
     }
 
-    void setColumn(size_t const columnIndex, MatrixData const& dataSampleValues) {        size_t limit = std::min(m_numberOfRows, static_cast<size_t>(dataSampleValues.size()));
+    void setColumn(size_t const columnIndex, MatrixData const& dataSampleValues) {
+        size_t limit = std::min(m_numberOfRows, static_cast<size_t>(dataSampleValues.size()));
         for (size_t y = 0; y < limit; y++) {
             setEntry(columnIndex, y, dataSampleValues.at(y));
         }
@@ -306,6 +307,7 @@ private:
             std::fill(begin(m_matrixData) + originalSize, end(m_matrixData), DataType{});
         }
     }
+
     friend std::ostream& operator<<(std::ostream& out, AlbaMatrix<DataType> const& matrix) {
         DisplayTable table;
         table.setBorders("-", "|");
