@@ -69,14 +69,18 @@ void ChessPieceRetriever::setLogFile(string const& logFilePath) {
 }
 
 void ChessPieceRetriever::initialize(ChessPeekConfigurationType const type) {
-    if (ChessPeekConfigurationType::ChessDotComUserVsUser == type ||
-        ChessPeekConfigurationType::ChessDotComUserVsComputer == type) {
-        initializeConverterToChessDotCom();
-    } else if (ChessPeekConfigurationType::LichessDotOrg == type) {
-        initializeConverterToLichessDotOrg();
+    switch (type) {
+        case ChessPeekConfigurationType::ChessDotComUserVsUser: {
+            initializeConverterToChessDotCom();
+        }
+        case ChessPeekConfigurationType::ChessDotComUserVsComputer: {
+            initializeConverterToChessDotCom();
+        }
+        case ChessPeekConfigurationType::LichessDotOrg: {
+            initializeConverterToLichessDotOrg();
+        }
     }
 }
-
 void ChessPieceRetriever::initializeConverterToChessDotCom() {
     m_checkMaxPoint = BitmapXY(102, 102);
     m_checkDetails =
