@@ -83,7 +83,8 @@ Shell and scripting
 -> CTRL+L - lets you clear your screen
 
 -> Shell provides you more than commands
----> You can invoke any program in your computer---> Command line tools exist for pretty much anything you may want.
+---> You can invoke any program in your computer
+---> Command line tools exist for pretty much anything you may want.
 ---> More efficient than their GUI counterparts.
 
 -> Shell provides an interactive programming language (often referred to as scripting)
@@ -191,7 +192,8 @@ Shell and scripting
 -----> "echo **/*.txt" will display all txt files in all paths in the current directory
 
 -> Globbing examples with loop statement
----> for f in a*; do if [ -d "$f" ]; then echo dir $f; fi; done-----> This loops for any files/directories that starts with "a"
+---> for f in a*; do if [ -d "$f" ]; then echo dir $f; fi; done
+-----> This loops for any files/directories that starts with "a"
 ---> for f in foo/*.txt; do if [ -d "$f" ]; then echo dir $f; fi; done
 -----> This loops for any ".txt" file that starts with inside the directory "foo"
 ---> for f in foo/*.txt; do if [ -d "$f" ]; then echo dir $f; fi; done
@@ -228,7 +230,8 @@ Shell and scripting
 ---> This command just prints its input.
 ---> This command just reads from stdin and writes to stdout
 
--> ">" means to write the output stream into a file---> cat > file.txt
+-> ">" means to write the output stream into a file
+---> cat > file.txt
 -----> This writes to file with the output of cat. 
 
 -> "<" means to read a file and put to stdin
@@ -287,7 +290,8 @@ Shell and scripting
 -------> Puts the most recent process to the foreground
 -----> For example: "fg %1"
 -------> Puts the process with job number 1 to the foreground
----> The command "bg" can run it in the background.-----> For example: "bg %1"
+---> The command "bg" can run it in the background.
+-----> For example: "bg %1"
 -------> Puts the process with job number 1 to the background
 ---> CTRL+Z stops the current process and put in the background
 -----> You need to run bg to start it again.
@@ -307,7 +311,8 @@ Shell and scripting
 
 -> Processes commands
 ---> ps 
------> lists the running process from the current user of the machine---> ps -A
+-----> lists the running process from the current user of the machine
+---> ps -A
 -----> lists the running process from all users on the machine
 ---> pgrep -af server
 -----> list all the running process with word "server" on it 
@@ -315,7 +320,8 @@ Shell and scripting
 -----> lists the running process in a tree
 ---> kill
 -----> sends a signal to a process
----> pkill -----> sends a signal to process the matches the pgrep
+---> pkill 
+-----> sends a signal to process the matches the pgrep
 -----> These are similar: 
 -------> pkill server
 -------> kill &(pgrep server)
@@ -368,5 +374,6 @@ Command line environment
 -----> You can add it to .bashrc or .bash_profile.
 -----> It might be a good idea to use source:
 -------> source ~/.aliases
+
 
 
