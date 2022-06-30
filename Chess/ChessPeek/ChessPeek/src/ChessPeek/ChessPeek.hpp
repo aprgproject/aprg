@@ -1,17 +1,14 @@
 #pragma once
 
-#include <Bitmap/Bitmap.hpp>
 #include <ChessPeek/ChessPeekCalculationDetails.hpp>
 #include <ChessPeek/ChessPeekConfiguration.hpp>
-#include <ChessPeek/ChessPieceRetriever.hpp>
-#include <ChessUtilities/Board/Board.hpp>
+#include <ChessPeek/ChessPieceRetriever.hpp>#include <ChessUtilities/Board/Board.hpp>
 #include <ChessUtilities/ChessEngineControllerWithUci.hpp>
 #include <ChessUtilities/ChessEngineHandler.hpp>
 #include <Common/Time/AlbaLocalTimer.hpp>
-#include <UserAutomation/AlbaLocalUserAutomation.hpp>
+#include <ScreenMonitoring/AlbaLocalScreenMonitoring.hpp>
 
 namespace alba {
-
 namespace chess {
 
 class ChessPeek {
@@ -32,21 +29,18 @@ public:
     void runForever();
     void runOneIteration();
 
-    void saveBitmapOnScreen() const;
     void checkScreenAndSaveDetails();
     void startEngineAnalysisOfNewPosition();
     void calculationMonitoringCallBackForEngine(EngineCalculationDetails const& engineCalculationDetails);
-
 private:
     void initialize();
 
-    void checkSnippetAndSaveDetails(AprgBitmap::BitmapSnippet const& snippet);
-    void saveChessBoardAndItsDetails(AprgBitmap::BitmapSnippet const& snippet);
+    void saveChessBoardAndItsDetails();
     void updatePlayerColorAndOrientation();
+    void updatePlayerColorIfChessDotComPuzzle();
     void updatePlayerColorIfLichessStream();
     void updatePlayerColorAndOrientationBasedOnPositionsOfTheKings();
-    void setPlayerColorAndResetEngineIfNeeded(PieceColor const newColor);
-    void setOrientationDependingOnBelowColor(PieceColor const belowColor);
+    void setPlayerColorAndResetEngineIfNeeded(PieceColor const newColor);    void setOrientationDependingOnBelowColor(PieceColor const belowColor);
     void setKingDetailsIfPossible(Coordinate const& chessCoordinate, Piece const& chessPiece);
     void saveCalculationDetails(EngineCalculationDetails const& engineCalculationDetails);
 
@@ -64,15 +58,13 @@ private:
     Coordinate getOpponentsKingCoordinate() const;
 
     ChessPeekConfiguration m_configuration;
+    AlbaLocalScreenMonitoring m_screenMonitoring;
     ChessPieceRetriever m_pieceRetriever;
     ChessEngineHandler m_chessEngineHandler;
     ChessEngineControllerWithUci m_chessEngineController;
-    AlbaLocalUserAutomation m_userAutomation;
-    AprgBitmap::Bitmap m_bitmap;
     AlbaLocalTimer m_displayTimer;
     ChessPeekCalculationDetails m_calculationDetails;
-    Board m_chessBoard;
-    ChessBoardDetails m_chessBoardDetails;
+    Board m_chessBoard;    ChessBoardDetails m_chessBoardDetails;
     PieceColor m_playerColor;
     bool m_isEngineNewlyReseted;
     bool m_hasPendingPrintAction;

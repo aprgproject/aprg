@@ -23,15 +23,8 @@ TEST(ChessPeekTest, DISABLED_RunOneIterationWorks) {
     Sleep(10000);
 }
 
-TEST(ChessPeekTest, DISABLED_SaveBitmapOnScreenWorks) {
-    ChessPeek chessPeek;
-
-    chessPeek.saveBitmapOnScreen();
-}
-
 TEST(ChessPeekTest, DISABLED_CheckScreenAndSaveDetailsWorks) {
     ChessPeek chessPeek;
-
     chessPeek.checkScreenAndSaveDetails();
 }
 

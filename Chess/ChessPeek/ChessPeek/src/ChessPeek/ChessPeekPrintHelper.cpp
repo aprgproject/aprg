@@ -39,12 +39,9 @@ void ChessPeekPrintHelper::printCalculationDetails(
     constexpr unsigned int movesToDisplay = 10;
     cout << "Player: " << m_playerColor << ", Depth: " << m_calculationDetails.depthInPlies
          << ", Mate: " << m_calculationDetails.numberOfMovesTillMate << "\n";
-    cout << "Best move: [" << m_calculationDetails.bestMove << "]\n";
-
     unsigned int moveCount = 1;
     cout << "Searching moves: ";
-    for (MoveAndScorePair const& moveAndScorePair : moveAndScorePairs) {
-        cout << m_chessBoard.getReadableStringForMove(moveAndScorePair.first) << " ["
+    for (MoveAndScorePair const& moveAndScorePair : moveAndScorePairs) {        cout << m_chessBoard.getReadableStringForMove(moveAndScorePair.first) << " ["
              << static_cast<double>(moveAndScorePair.second) / 100 << "], ";
         if (moveCount++ >= movesToDisplay) {
             break;
@@ -62,11 +59,11 @@ void ChessPeekPrintHelper::printCalculationDetails(
             break;
         }
     }
-    cout << "\n\n";
+    cout << "\n";
+    cout << "Best move: [" << m_calculationDetails.bestMove << "]\n\n";
 }
 
-void ChessPeekPrintHelper::printMoveTables(MoveAndScorePairs const& moveAndScorePairs, Moves const& futureMoves) const {
-    if (!moveAndScorePairs.empty()) {
+void ChessPeekPrintHelper::printMoveTables(MoveAndScorePairs const& moveAndScorePairs, Moves const& futureMoves) const {    if (!moveAndScorePairs.empty()) {
         putCurrentMoves(moveAndScorePairs);
     }
     if (!futureMoves.empty()) {
