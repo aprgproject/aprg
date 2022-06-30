@@ -98,6 +98,7 @@ bool ChessEngineControllerWithUci::waitTillReadyAndReturnIfResetWasPerformed() {
         countWith100ms++;
         sleepFor(100);
     }
+
     if (shouldReset) {
         log("Engine is stuck, resetting engine");
         resetEngine();
@@ -162,6 +163,7 @@ void ChessEngineControllerWithUci::proceedToIdleStateAndProcessPendingCommands()
         send(pendingCommand);
     }
 }
+
 void ChessEngineControllerWithUci::log(string const& logString) {
     if (m_logFileStreamOptional) {
         m_logFileStreamOptional.value() << logString << "\n";

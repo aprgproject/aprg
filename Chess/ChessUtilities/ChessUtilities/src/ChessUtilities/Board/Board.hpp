@@ -45,6 +45,7 @@ public:
     std::string getReadableStringForMove(Move const& move) const;
     std::string getFenString() const;
     std::string getCastlingFenString() const;
+
     void setOrientation(Orientation const orientation);
     void setPieceAt(Coordinate const& coordinate, Piece const& piece);
     void move(Move const& move);

@@ -68,6 +68,7 @@ bool Board::hasOnlyOneMovePossibleToThisDestination(Coordinate const& destinatio
     }
     return numberOfMoves == 1U;
 }
+
 bool Board::canBeCaptured(Coordinate const& destination) const {
     Piece piece(getPieceAt(destination));
     bool result(false);
@@ -124,7 +125,8 @@ Move Board::getMoveFromTwoLetterNumberNotation(string const& twoLetterNumber) co
 Coordinate Board::getCoordinateFromLetterNumberNotation(string const& letterNumber) const {
     Coordinate result{};
     if (letterNumber.size() == 2) {
-        char letter = tolower(letterNumber.at(0));        char number = letterNumber.at(1);
+        char letter = tolower(letterNumber.at(0));
+        char number = letterNumber.at(1);
         if (isLetter(letter) && isNumber(number) && 'a' <= letter && letter <= 'h' && '1' <= number && number <= '8') {
             unsigned int numberValue = number - '0';
             if (Orientation::BlackUpWhiteDown == m_orientation) {
@@ -189,7 +191,8 @@ string Board::getFenString() const {
     return resultStream.str();
 }
 
-string Board::getCastlingFenString() const {    string result;
+string Board::getCastlingFenString() const {
+    string result;
     if (Board::Orientation::BlackUpWhiteDown == m_orientation) {
         Piece pieceAtWhiteKing(getPieceAt(Coordinate(4, 7)));
         Piece pieceAtWhiteRookOnKingSide(getPieceAt(Coordinate(7, 7)));
@@ -390,7 +393,8 @@ bool Board::doesMoveHasNoBlockingPieceInBetween(Move const& move) const {
     Coordinate oneIncrementDelta(getOneIncrementData(moveDelta.getX()), getOneIncrementData(moveDelta.getY()));
     Coordinate inBetween = move.first + oneIncrementDelta;
     while (isCoordinateOnBoard(inBetween) && move.second != inBetween && getPieceAt(inBetween).isEmpty()) {
-        inBetween += oneIncrementDelta;    }
+        inBetween += oneIncrementDelta;
+    }
     return inBetween == move.second;
 }
 
@@ -708,6 +712,7 @@ MovePair Board::getMatchingCastlingKingAndRookMovePair(Move const& kingMoveThatS
     }
     return result;
 }
+
 void Board::retrievePossibleMovesBasedFromPieceType(Moves& result, Coordinate const& start) const {
     Piece piece(getPieceAt(start));
     switch (piece.getType()) {
