@@ -37,11 +37,10 @@ public:
     // ...
 
 private:
-    std::unique_ptr<RealSubject> m_subject;
+    std::unique_ptr<Subject> m_subject;
 };
 
 }  // namespace Proxy
-
 // Proxy discussion:
 
 // ONE LINE NOTE:
