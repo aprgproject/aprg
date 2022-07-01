@@ -40,11 +40,10 @@ ChessEngineHandler::ChessEngineHandler(string const& enginePath) : m_enginePath(
 
 ChessEngineHandler::~ChessEngineHandler() {
     shutdownEngine();
-    m_logFileStreamOptional->close();
+    shutdownLogging();
 }
 
-void ChessEngineHandler::reset() {
-    log(LogType::HandlerStatus, "Resetting engine");
+void ChessEngineHandler::reset() {    log(LogType::HandlerStatus, "Resetting engine");
     shutdownEngine();
     initializeEngine();
 }
@@ -169,21 +168,24 @@ void ChessEngineHandler::initializeEngine() {
 }
 
 void ChessEngineHandler::shutdownEngine() {
-    m_logFileStreamOptional.value().flush();
     sendStringToEngine("quit\n");
     WaitForSingleObject(m_engineMonitoringThread, 1);
-    CloseHandle(m_engineMonitoringThread);
-    TerminateProcess(m_processInfo.hProcess, 0);
+    CloseHandle(m_engineMonitoringThread);    TerminateProcess(m_processInfo.hProcess, 0);
     CloseHandle(m_inputStreamOnEngineThread);
     CloseHandle(m_outputStreamOnEngineThread);
     CloseHandle(m_inputStreamOnHandler);
     CloseHandle(m_outputStreamOnHandler);
 }
 
+void ChessEngineHandler::shutdownLogging() {
+    if (m_logFileStreamOptional) {
+        m_logFileStreamOptional->close();
+    }
+}
+
 void ChessEngineHandler::log(LogType const logtype, string const& logString) {
     if (m_logFileStreamOptional) {
-        m_logFileStreamOptional.value() << getLogHeader(logtype) << logString << "\n";
-        m_logFileStreamOptional.value().flush();
+        m_logFileStreamOptional.value() << getLogHeader(logtype) << logString << "\n";        m_logFileStreamOptional.value().flush();
     }
 #ifdef APRG_TEST_MODE_ON
     // cout << getLogHeader(logtype) << logString << "\n";
