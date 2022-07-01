@@ -106,7 +106,8 @@ void MapAnalyzer::analyze() {
                 }
                 totalPotentialBaseExperience += monsterData.potentialBaseExperience;
                 totalPotentialJobExperience += monsterData.potentialJobExperience;
-            }            mapAnalyzerData.zenyPotential = totalPotentialZeny;
+            }
+            mapAnalyzerData.zenyPotential = totalPotentialZeny;
             mapAnalyzerData.baseExperiencePotential = totalPotentialBaseExperience;
             mapAnalyzerData.jobExperiencePotential = totalPotentialJobExperience;
             double averagePotentialZeny = totalPotentialZeny / monstersNameToDataMap.size();
@@ -122,7 +123,8 @@ void MapAnalyzer::analyze() {
                 if (monster.walkSpeed != "Immovable") {  // moving mobs
                     mapAnalyzerData.mobCount += monsterData.spawnCount;
                 }
-            }            m_mapsAnalyzerData.emplace_back(mapAnalyzerData);
+            }
+            m_mapsAnalyzerData.emplace_back(mapAnalyzerData);
         }
     }
 
@@ -168,7 +170,8 @@ void MapAnalyzer::sortData() {
             if (first.zenyPotential == second.zenyPotential) {  // the first one is always tweaked depending on goal
                 if (first.zenyPotential == second.zenyPotential) {
                     if (first.annoyanceHp == second.annoyanceHp) {
-                        return first.mobCount > second.mobCount;                    } else {
+                        return first.mobCount > second.mobCount;
+                    } else {
                         return first.annoyanceHp < second.annoyanceHp;
                     }
                 } else {

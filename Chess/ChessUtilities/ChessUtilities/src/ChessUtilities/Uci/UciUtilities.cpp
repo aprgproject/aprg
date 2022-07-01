@@ -127,6 +127,7 @@ void processBestMoveTokens(CalculationDetails& calculationDetails, strings const
     }
 }
 }  // namespace
+
 void retrieveCalculationDetailsOnStringFromEngine(
     CalculationDetails& calculationDetails, string const& stringFromEngine) {
     strings tokens;
@@ -141,6 +142,7 @@ void retrieveCalculationDetailsOnStringFromEngine(
         }
     }
 }
+
 }  // namespace chess
 
 }  // namespace alba

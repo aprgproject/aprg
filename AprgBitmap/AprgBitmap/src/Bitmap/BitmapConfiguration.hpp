@@ -23,6 +23,7 @@ enum class CompressedMethodType {
     CMYKRLE4,
     Unknown
 };
+
 class BitmapConfiguration {
 public:
     BitmapConfiguration();

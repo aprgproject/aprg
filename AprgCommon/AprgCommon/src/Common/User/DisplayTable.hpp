@@ -73,7 +73,8 @@ public:
     void setVerticalBorder(std::string_view verticalBorder);
 
 private:
-    std::string getCellTextWithDesiredLength(DisplayTableCell const& cell, size_t const desiredLength) const;    std::string getHorizontalBorderLine(size_t const length) const;
+    std::string getCellTextWithDesiredLength(DisplayTableCell const& cell, size_t const desiredLength) const;
+    std::string getHorizontalBorderLine(size_t const length) const;
     std::string getVerticalBorderPoint() const;
     size_t getVerticalBorderLength() const;
     size_t getHorizontalBorderLength(size_t const totalColumnLength) const;

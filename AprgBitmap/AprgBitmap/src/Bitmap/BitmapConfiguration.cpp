@@ -56,7 +56,8 @@ bool BitmapConfiguration::isCompressedMethodSupported() const {
     return (m_compressionMethodType == CompressedMethodType::RGB);
 }
 
-bool BitmapConfiguration::isPositionWithinTheBitmap(BitmapXY const position) const {    return position.getX() < m_bitmapWidth && position.getY() < m_bitmapHeight;
+bool BitmapConfiguration::isPositionWithinTheBitmap(BitmapXY const position) const {
+    return position.getX() < m_bitmapWidth && position.getY() < m_bitmapHeight;
 }
 
 bool BitmapConfiguration::isPositionWithinTheBitmap(int x, int y) const {
@@ -291,7 +292,8 @@ CompressedMethodType BitmapConfiguration::determineCompressedMethodType(uint32_t
             compressedMethodType = CompressedMethodType::CMYKRLE4;
             break;
         default:
-            compressedMethodType = CompressedMethodType::Unknown;            break;
+            compressedMethodType = CompressedMethodType::Unknown;
+            break;
     }
     return compressedMethodType;
 }

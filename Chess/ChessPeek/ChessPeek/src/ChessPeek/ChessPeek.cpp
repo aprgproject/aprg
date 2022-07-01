@@ -1,35 +1,59 @@
 #include "ChessPeek.hpp"
 
 #include <ChessPeek/ChessPeekPrintHelper.hpp>
-#include <ChessPeek/ColorUtilities.hpp>
+#include <ChessPeek/Utilities.hpp>
 #include <ChessUtilities/Board/BoardUtilities.hpp>
+#include <UserAutomation/AlbaLocalUserAutomation.hpp>
 
 #include <atomic>
 #include <optional>
+#include <thread>
 
 using namespace std;
 
+namespace {
+bool haltPrinting = false;
+}
+
 namespace alba {
+
 namespace chess {
 
+void trackKeyPress() {
+    constexpr char keyToTrack = ' ';
+    AlbaLocalUserAutomation userAutomation;
+    bool isPreviouslyPressed = false;
+    while (true) {
+        bool isPressed = userAutomation.isLetterPressed(keyToTrack);
+        if (isPreviouslyPressed == false && isPressed == true) {
+            haltPrinting = !haltPrinting;
+        }
+        isPreviouslyPressed = isPressed;
+        Sleep(100);
+    }
+}
+
 ChessPeek::ChessPeek()
-    : m_configuration(ChessPeekConfigurationType::ChessDotComPuzzle),
+    : m_configuration(ChessPeekConfigurationType::ChessDotComVersus),
       m_screenMonitoring(),
       m_pieceRetriever(m_configuration, m_screenMonitoring),
       m_chessEngineHandler(m_configuration.getChessEnginePath()),
       m_chessEngineController(m_chessEngineHandler, m_configuration.getUciOptionNamesAndValuePairs()),
       m_chessBoard(Board::Orientation::BlackUpWhiteDown, {}),
       m_chessBoardDetails{},
-      m_playerColor(PieceColor::White),      m_isEngineNewlyReseted(true),
+      m_playerColor(PieceColor::White),
+      m_isEngineNewlyReseted(true),
       m_hasPendingPrintAction(false) {
     initialize();
 }
 
 void ChessPeek::runForever() {
+    thread trackKeyPressThread(trackKeyPress);
     while (true) {
         runOneIteration();
         // Sleep(1);
     }
+    trackKeyPressThread.join();
 }
 
 void ChessPeek::runOneIteration() {
@@ -48,7 +72,8 @@ void ChessPeek::checkScreenAndSaveDetails() {
     updatePlayerColorAndOrientation();
 }
 
-void ChessPeek::startEngineAnalysisOfNewPosition() {    string fenString(constructFenString(m_chessBoard, m_playerColor, m_chessBoard.getCastlingFenString(), "-", 0, 1));
+void ChessPeek::startEngineAnalysisOfNewPosition() {
+    string fenString(constructFenString(m_chessBoard, m_playerColor, m_chessBoard.getCastlingFenString(), "-", 0, 1));
     m_chessEngineController.setupFenString(fenString);
     if (!m_chessEngineController.waitTillReadyAndReturnIfResetWasPerformed()) {
         m_chessEngineController.goWithPonder();
@@ -67,9 +92,10 @@ void ChessPeek::calculationMonitoringCallBackForEngine(EngineCalculationDetails 
 }
 
 void ChessPeek::initialize() {
-    m_chessEngineHandler.setLogFile(APRG_DIR R"(\Chess\ChessPeek\Files\EngineHandler.log)");
-    m_chessEngineController.setLogFile(APRG_DIR R"(\Chess\ChessPeek\Files\EngineController.log)");
-    m_chessEngineController.setAdditionalStepsInCalculationMonitoring(        [&](EngineCalculationDetails const& engineCalculationDetails) {
+    // m_chessEngineHandler.setLogFile(APRG_DIR R"(\Chess\ChessPeek\Files\EngineHandler.log)");        // for debugging
+    // m_chessEngineController.setLogFile(APRG_DIR R"(\Chess\ChessPeek\Files\EngineController.log)");  // for debugging
+    m_chessEngineController.setAdditionalStepsInCalculationMonitoring(
+        [&](EngineCalculationDetails const& engineCalculationDetails) {
             calculationMonitoringCallBackForEngine(engineCalculationDetails);
         });
     m_chessEngineController.initializeController();
@@ -82,7 +108,8 @@ void ChessPeek::saveChessBoardAndItsDetails() {
             Piece chessPiece(m_pieceRetriever.getChessCellPiece(i, j));
             Coordinate chessCoordinate(i, j);
             m_chessBoard.setPieceAt(chessCoordinate, chessPiece);
-            if (!chessPiece.isEmpty()) {                setKingDetailsIfPossible(chessCoordinate, chessPiece);
+            if (!chessPiece.isEmpty()) {
+                setKingDetailsIfPossible(chessCoordinate, chessPiece);
                 m_chessBoardDetails.m_pieceCount++;
             }
         }
@@ -118,7 +145,8 @@ void ChessPeek::updatePlayerColorIfLichessStream() {
         auto pixelColorInBlackSection = m_screenMonitoring.getColorAt(xForBlackSection, yCoordinate) & rgbMask;
         if (lastMovePixelColor == pixelColorInWhiteSection) {
             setPlayerColorAndResetEngineIfNeeded(PieceColor::Black);
-            break;        } else if (lastMovePixelColor == pixelColorInBlackSection) {
+            break;
+        } else if (lastMovePixelColor == pixelColorInBlackSection) {
             setPlayerColorAndResetEngineIfNeeded(PieceColor::White);
             break;
         }
@@ -140,7 +168,8 @@ void ChessPeek::updatePlayerColorAndOrientationBasedOnPositionsOfTheKings() {
 
         if (kingColorAtTheBottomOptional) {
             setOrientationDependingOnBelowColor(kingColorAtTheBottomOptional.value());
-            setPlayerColorAndResetEngineIfNeeded(kingColorAtTheBottomOptional.value());        }
+            setPlayerColorAndResetEngineIfNeeded(kingColorAtTheBottomOptional.value());
+        }
     }
 }
 
@@ -174,15 +203,16 @@ void ChessPeek::setKingDetailsIfPossible(Coordinate const& chessCoordinate, Piec
 
 void ChessPeek::saveCalculationDetails(EngineCalculationDetails const& engineCalculationDetails) {
     m_calculationDetails.depthInPlies = engineCalculationDetails.depthInPlies;
-    m_calculationDetails.numberOfMovesTillMate = engineCalculationDetails.numberOfMovesTillMate;
+    m_calculationDetails.mateScore = engineCalculationDetails.mateScore;
     if (!engineCalculationDetails.bestMove.empty()) {
         m_calculationDetails.bestMove = engineCalculationDetails.bestMove;
     }
     if (!engineCalculationDetails.searchingMoveAndScorePairs.empty()) {
         m_calculationDetails.searchingMoveAndScorePairs = engineCalculationDetails.searchingMoveAndScorePairs;
     }
-    if (!engineCalculationDetails.pvMovesInBestLine.empty()) {
-        m_calculationDetails.pvMovesInBestLine = engineCalculationDetails.pvMovesInBestLine;
+    m_calculationDetails.scoreInPvLine = engineCalculationDetails.scoreInPvLine;
+    if (!engineCalculationDetails.pvHalfMovesInMonitoredLine.empty()) {
+        m_calculationDetails.pvHalfMovesInMonitoredLine = engineCalculationDetails.pvHalfMovesInMonitoredLine;
     }
 }
 
@@ -206,7 +236,7 @@ void ChessPeek::displayCalculationDetailsIfNotDisplayedYet() {
 
 void ChessPeek::printCalculationDetails() {
     static std::atomic_bool currentlyPrinting = false;
-    if (!currentlyPrinting) {
+    if (!currentlyPrinting && !haltPrinting) {
         m_hasPendingPrintAction = false;
         currentlyPrinting = true;
         ChessPeekPrintHelper(m_playerColor, m_calculationDetails, m_chessBoard).print();
@@ -249,7 +279,8 @@ bool ChessPeek::isPlayerToMoveInLichessVersus() const {
         auto colorOfMoveInBlackSection = m_screenMonitoring.getColorAt(xForBlackSection, yCoordinate) & rgbMask;
         if (lastMoveColor == colorOfMoveInWhiteSection) {
             if (m_playerColor == PieceColor::White) {
-                result = false;            }
+                result = false;
+            }
             break;
         } else if (lastMoveColor == colorOfMoveInBlackSection) {
             if (m_playerColor == PieceColor::Black) {

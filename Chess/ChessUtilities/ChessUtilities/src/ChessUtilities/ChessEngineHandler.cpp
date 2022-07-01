@@ -172,7 +172,8 @@ void ChessEngineHandler::shutdownEngine() {
     m_logFileStreamOptional.value().flush();
     sendStringToEngine("quit\n");
     WaitForSingleObject(m_engineMonitoringThread, 1);
-    CloseHandle(m_engineMonitoringThread);    TerminateProcess(m_processInfo.hProcess, 0);
+    CloseHandle(m_engineMonitoringThread);
+    TerminateProcess(m_processInfo.hProcess, 0);
     CloseHandle(m_inputStreamOnEngineThread);
     CloseHandle(m_outputStreamOnEngineThread);
     CloseHandle(m_inputStreamOnHandler);
@@ -185,7 +186,8 @@ void ChessEngineHandler::log(LogType const logtype, string const& logString) {
         m_logFileStreamOptional.value().flush();
     }
 #ifdef APRG_TEST_MODE_ON
-    // cout << getLogHeader(logtype) << logString << "\n";#else
+    // cout << getLogHeader(logtype) << logString << "\n";
+#else
     if (LogType::FromEngine == logtype) {
         cout << logString << "\n";
     }

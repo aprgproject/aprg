@@ -26,6 +26,7 @@ TEST(MonsterRaceAnalyzerTest, AnalyzeWorks) {
 
     analyzer.showNextPossibleWinners(currentConfiguration);
 }
+
 TEST(MonsterRaceAnalyzerTest, DISABLED_Duplicated_AnalyzeWorks) {
     // For faster typing
     //
@@ -39,4 +40,5 @@ TEST(MonsterRaceAnalyzerTest, DISABLED_Duplicated_AnalyzeWorks) {
 
     analyzer.showNextPossibleWinners(currentConfiguration);
 }
+
 }  // namespace alba

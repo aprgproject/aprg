@@ -50,6 +50,7 @@ private:
     int m_unsharedIntrinsicState;
     // ...
 };
+
 // FlyweightFactory
 // creates and manages flyweight objects and ensures
 // that flyweights are shared properly
@@ -74,6 +75,7 @@ private:
     std::map<int, int> m_keyToSharedValueMap;
     // ...
 };
+
 }  // namespace Flyweight
 
 // Flyweight discussion:
@@ -90,7 +92,8 @@ private:
 // Instead of storing the whole data on the object, separate intrinsic and extrinsic data to lessen memory usage.
 
 // When to use (applicability):
-// -> when one instance of a class can be used to provide many "virtual instances"// -> when all of the following are true
+// -> when one instance of a class can be used to provide many "virtual instances"
+// -> when all of the following are true
 // --> an application uses a large number of objects
 // --> storage costs are high because of the sheer quantity of objects
 // --> most object state can be made extrinsic

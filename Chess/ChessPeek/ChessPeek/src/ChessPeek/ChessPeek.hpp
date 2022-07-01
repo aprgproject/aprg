@@ -2,13 +2,15 @@
 
 #include <ChessPeek/ChessPeekCalculationDetails.hpp>
 #include <ChessPeek/ChessPeekConfiguration.hpp>
-#include <ChessPeek/ChessPieceRetriever.hpp>#include <ChessUtilities/Board/Board.hpp>
+#include <ChessPeek/ChessPieceRetriever.hpp>
+#include <ChessUtilities/Board/Board.hpp>
 #include <ChessUtilities/ChessEngineControllerWithUci.hpp>
 #include <ChessUtilities/ChessEngineHandler.hpp>
 #include <Common/Time/AlbaLocalTimer.hpp>
 #include <ScreenMonitoring/AlbaLocalScreenMonitoring.hpp>
 
 namespace alba {
+
 namespace chess {
 
 class ChessPeek {
@@ -32,6 +34,7 @@ public:
     void checkScreenAndSaveDetails();
     void startEngineAnalysisOfNewPosition();
     void calculationMonitoringCallBackForEngine(EngineCalculationDetails const& engineCalculationDetails);
+
 private:
     void initialize();
 
@@ -40,7 +43,8 @@ private:
     void updatePlayerColorIfChessDotComPuzzle();
     void updatePlayerColorIfLichessStream();
     void updatePlayerColorAndOrientationBasedOnPositionsOfTheKings();
-    void setPlayerColorAndResetEngineIfNeeded(PieceColor const newColor);    void setOrientationDependingOnBelowColor(PieceColor const belowColor);
+    void setPlayerColorAndResetEngineIfNeeded(PieceColor const newColor);
+    void setOrientationDependingOnBelowColor(PieceColor const belowColor);
     void setKingDetailsIfPossible(Coordinate const& chessCoordinate, Piece const& chessPiece);
     void saveCalculationDetails(EngineCalculationDetails const& engineCalculationDetails);
 
@@ -64,7 +68,8 @@ private:
     ChessEngineControllerWithUci m_chessEngineController;
     AlbaLocalTimer m_displayTimer;
     ChessPeekCalculationDetails m_calculationDetails;
-    Board m_chessBoard;    ChessBoardDetails m_chessBoardDetails;
+    Board m_chessBoard;
+    ChessBoardDetails m_chessBoardDetails;
     PieceColor m_playerColor;
     bool m_isEngineNewlyReseted;
     bool m_hasPendingPrintAction;

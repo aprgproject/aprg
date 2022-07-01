@@ -603,6 +603,7 @@ Item RagnarokOnline::getItem(string const& fixedItemName) const {
     }
     return result;
 }
+
 Monster RagnarokOnline::getMonster(string const& monsterName) const {
     Monster result{};
     auto it1 = m_monsterNameToMonsterIdMap.find(monsterName);

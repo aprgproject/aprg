@@ -28,7 +28,8 @@ TEST(BitmapReadTest, TestForMonochromeBitmap) {
     ASSERT_EQ(CompressedMethodType::RGB, bitmap.getConfiguration().getCompressedMethodType());
     ASSERT_TRUE(bitmap.getConfiguration().isCompressedMethodSupported());
 
-    Colors colors(bitmap.getConfiguration().getColorTable());    ASSERT_EQ(2U, colors.size());
+    Colors colors(bitmap.getConfiguration().getColorTable());
+    ASSERT_EQ(2U, colors.size());
     EXPECT_EQ(0x00000000U, colors[0]);
     EXPECT_EQ(0x00FFFFFFU, colors[1]);
     EXPECT_EQ(0x00000000U, bitmap.getConfiguration().getColorUsingPixelValue(0));
@@ -94,7 +95,8 @@ TEST(BitmapReadTest, TestFor16ColorBitmap) {
     ASSERT_EQ(CompressedMethodType::RGB, bitmap.getConfiguration().getCompressedMethodType());
     ASSERT_TRUE(bitmap.getConfiguration().isCompressedMethodSupported());
 
-    Colors colors(bitmap.getConfiguration().getColorTable());    ASSERT_EQ(16U, colors.size());
+    Colors colors(bitmap.getConfiguration().getColorTable());
+    ASSERT_EQ(16U, colors.size());
     EXPECT_EQ(0x00000000U, colors[0]);
     EXPECT_EQ(0x00808080U, colors[7]);
     EXPECT_EQ(0x00C0C0C0U, colors[8]);
@@ -165,7 +167,8 @@ TEST(BitmapReadTest, TestFor256ColorBitmap) {
     ASSERT_EQ(CompressedMethodType::RGB, bitmap.getConfiguration().getCompressedMethodType());
     ASSERT_TRUE(bitmap.getConfiguration().isCompressedMethodSupported());
 
-    Colors colors(bitmap.getConfiguration().getColorTable());    ASSERT_EQ(256U, colors.size());
+    Colors colors(bitmap.getConfiguration().getColorTable());
+    ASSERT_EQ(256U, colors.size());
     EXPECT_EQ(0x00000000U, colors[0x00]);
     EXPECT_EQ(0x00604040U, colors[0x53]);
     EXPECT_EQ(0x00A0C0C0U, colors[0xF5]);
@@ -239,7 +242,8 @@ TEST(BitmapReadTest, TestFor24BitBitmap) {
     ASSERT_EQ(CompressedMethodType::RGB, bitmap.getConfiguration().getCompressedMethodType());
     ASSERT_TRUE(bitmap.getConfiguration().isCompressedMethodSupported());
 
-    Colors colors(bitmap.getConfiguration().getColorTable());    ASSERT_EQ(0U, colors.size());
+    Colors colors(bitmap.getConfiguration().getColorTable());
+    ASSERT_EQ(0U, colors.size());
     EXPECT_EQ(0xA1BA0000U, bitmap.getConfiguration().getColorUsingPixelValue(0xA1BA0000));
     EXPECT_EQ(0xFFFFFFFFU, bitmap.getConfiguration().getColorUsingPixelValue(0xFFFFFFFF));
 
@@ -327,7 +331,8 @@ TEST(BitmapReadTest, TestFor32BitBitmap) {
     ASSERT_EQ(CompressedMethodType::RGB, bitmap.getConfiguration().getCompressedMethodType());
     ASSERT_TRUE(bitmap.getConfiguration().isCompressedMethodSupported());
 
-    Colors colors(bitmap.getConfiguration().getColorTable());    ASSERT_EQ(0U, colors.size());
+    Colors colors(bitmap.getConfiguration().getColorTable());
+    ASSERT_EQ(0U, colors.size());
     EXPECT_EQ(0xA1BA0000U, bitmap.getConfiguration().getColorUsingPixelValue(0xA1BA0000));
     EXPECT_EQ(0xFFFFFFFFU, bitmap.getConfiguration().getColorUsingPixelValue(0xFFFFFFFF));
 
@@ -347,7 +352,8 @@ TEST(BitmapReadTest, TestForMonochromeBitmapWithOutOfRangeValues) {
     ASSERT_EQ(CompressedMethodType::RGB, bitmap.getConfiguration().getCompressedMethodType());
     ASSERT_TRUE(bitmap.getConfiguration().isCompressedMethodSupported());
 
-    Colors colors(bitmap.getConfiguration().getColorTable());    ASSERT_EQ(2U, colors.size());
+    Colors colors(bitmap.getConfiguration().getColorTable());
+    ASSERT_EQ(2U, colors.size());
     EXPECT_EQ(0x00000000U, colors[0]);
     EXPECT_EQ(0x00FFFFFFU, colors[1]);
     EXPECT_EQ(0x00000000U, bitmap.getConfiguration().getColorUsingPixelValue(0));
