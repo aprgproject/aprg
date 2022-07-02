@@ -55,7 +55,8 @@ private:
     int getScoreLevel(int const scoreInCentipawns) const;
 
     PieceColor const& m_playerColor;
-    ChessPeekCalculationDetails const& m_calculationDetails;    Board const& m_chessBoard;
+    ChessPeekCalculationDetails const& m_calculationDetails;
+    Board const& m_chessBoard;
 };
 
 }  // namespace chess

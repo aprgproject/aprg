@@ -24,7 +24,8 @@ TEST(UciUtilitiesTest, RetrieveCalculationDetailsOnStringFromEngineWorksOnInfoEx
     EXPECT_EQ(expectedPv, actualDetails.pvHalfMovesInBestLine);
     EXPECT_EQ(expectedMoveAndScorePairs, actualDetails.searchingMoveAndScorePairs);
     EXPECT_TRUE(actualDetails.bestMove.empty());
-    EXPECT_TRUE(actualDetails.possibleResponseMove.empty());}
+    EXPECT_TRUE(actualDetails.possibleResponseMove.empty());
+}
 
 TEST(UciUtilitiesTest, RetrieveCalculationDetailsOnStringFromEngineWorksOnInfoExample2) {
     CalculationDetails actualDetails{};
@@ -41,7 +42,8 @@ TEST(UciUtilitiesTest, RetrieveCalculationDetailsOnStringFromEngineWorksOnInfoEx
     EXPECT_EQ(expectedPv, actualDetails.pvHalfMovesInBestLine);
     EXPECT_EQ(expectedMoveAndScorePairs, actualDetails.searchingMoveAndScorePairs);
     EXPECT_TRUE(actualDetails.bestMove.empty());
-    EXPECT_TRUE(actualDetails.possibleResponseMove.empty());}
+    EXPECT_TRUE(actualDetails.possibleResponseMove.empty());
+}
 
 TEST(UciUtilitiesTest, RetrieveCalculationDetailsOnStringFromEngineWorksOnInfoExample3) {
     CalculationDetails actualDetails{};
@@ -59,7 +61,8 @@ TEST(UciUtilitiesTest, RetrieveCalculationDetailsOnStringFromEngineWorksOnInfoEx
     EXPECT_EQ(expectedPv, actualDetails.pvHalfMovesInBestLine);
     EXPECT_EQ(expectedMoveAndScorePairs, actualDetails.searchingMoveAndScorePairs);
     EXPECT_TRUE(actualDetails.bestMove.empty());
-    EXPECT_TRUE(actualDetails.possibleResponseMove.empty());}
+    EXPECT_TRUE(actualDetails.possibleResponseMove.empty());
+}
 
 TEST(UciUtilitiesTest, RetrieveCalculationDetailsOnStringFromEngineWorksOnInfoExample4) {
     CalculationDetails actualDetails{};
@@ -74,7 +77,8 @@ TEST(UciUtilitiesTest, RetrieveCalculationDetailsOnStringFromEngineWorksOnInfoEx
     EXPECT_TRUE(actualDetails.pvHalfMovesInBestLine.empty());
     EXPECT_TRUE(actualDetails.searchingMoveAndScorePairs.empty());
     EXPECT_TRUE(actualDetails.bestMove.empty());
-    EXPECT_TRUE(actualDetails.possibleResponseMove.empty());}
+    EXPECT_TRUE(actualDetails.possibleResponseMove.empty());
+}
 
 TEST(UciUtilitiesTest, RetrieveCalculationDetailsOnStringFromEngineWorksOnBestMoveExample1) {
     CalculationDetails actualDetails{};
@@ -87,7 +91,8 @@ TEST(UciUtilitiesTest, RetrieveCalculationDetailsOnStringFromEngineWorksOnBestMo
     EXPECT_TRUE(actualDetails.pvHalfMovesInBestLine.empty());
     EXPECT_TRUE(actualDetails.searchingMoveAndScorePairs.empty());
     EXPECT_EQ("b4c2", actualDetails.bestMove);
-    EXPECT_EQ("e1d1", actualDetails.possibleResponseMove);}
+    EXPECT_EQ("e1d1", actualDetails.possibleResponseMove);
+}
 
 TEST(UciUtilitiesTest, RetrieveCalculationDetailsOnStringFromEngineWorksWithIgnoringStringsWithInvalidStart) {
     CalculationDetails actualDetails{};
@@ -107,7 +112,8 @@ TEST(UciUtilitiesTest, RetrieveCalculationDetailsOnStringFromEngineWorksWithIgno
     EXPECT_TRUE(actualDetails.pvHalfMovesInBestLine.empty());
     EXPECT_TRUE(actualDetails.searchingMoveAndScorePairs.empty());
     EXPECT_TRUE(actualDetails.bestMove.empty());
-    EXPECT_TRUE(actualDetails.possibleResponseMove.empty());}
+    EXPECT_TRUE(actualDetails.possibleResponseMove.empty());
+}
 
 }  // namespace chess
 

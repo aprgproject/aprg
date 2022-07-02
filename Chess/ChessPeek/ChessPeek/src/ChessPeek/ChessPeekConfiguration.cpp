@@ -47,6 +47,7 @@ void ChessPeekConfiguration::initializeCommonParameters() {
     m_uciOptionNamesAndValuePairs = {{"MultiPV", "15"}};  // 10 moves
     m_screenShotPath = APRG_DIR R"(\Chess\ChessPeek\Files\ScreenShot.bmp)";
 }
+
 void ChessPeekConfiguration::initializeSpecificParameters() {
     switch (m_type) {
         case ChessPeekConfigurationType::ChessDotComVersus: {

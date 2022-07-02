@@ -18,7 +18,8 @@ constexpr unsigned int MIN_NUMBER_OF_MOVES_IN_TEXT = 5U;
 constexpr unsigned int MAX_NUMBER_OF_MOVES_IN_TEXT = 15U;
 constexpr unsigned int MAX_NUMBER_OF_MOVES_IN_TABLE = 5U;
 constexpr unsigned int NEXT_OFFSET_OF_DISPLAY_TABLE = 9U;
-constexpr char SEPARATOR[] = "     ";}  // namespace
+constexpr char SEPARATOR[] = "     ";
+}  // namespace
 
 namespace alba {
 
@@ -44,14 +45,16 @@ void ChessPeekPrintHelper::printCalculationDetails(
     cout << "Current moves: ";
     for (MoveAndScorePair const& moveAndScorePair : moveAndScorePairs) {
         cout << m_chessBoard.getReadableStringForMove(moveAndScorePair.first) << " ["
-             << static_cast<double>(moveAndScorePair.second) / 100 << "], ";    }
+             << static_cast<double>(moveAndScorePair.second) / 100 << "], ";
+    }
     cout << "\n";
 
     Board updatedBoard(m_chessBoard);
     cout << "Monitored PV: ";
     for (Move const& futureHalfMove : futureHalfMoves) {
         Piece piece = updatedBoard.getPieceAt(futureHalfMove.first);
-        cout << updatedBoard.getReadableStringForMove(futureHalfMove);        if (!piece.isEmpty()) {
+        cout << updatedBoard.getReadableStringForMove(futureHalfMove);
+        if (!piece.isEmpty()) {
             cout << " [by " << piece.getColor() << "]";
         }
         cout << ", ";
@@ -68,6 +71,7 @@ void ChessPeekPrintHelper::printCalculationDetails(
 
     cout << "\n";
 }
+
 void ChessPeekPrintHelper::printMoveTables(
     MoveAndScorePairs const& moveAndScorePairs, Moves const& futureHalfMoves) const {
     if (!moveAndScorePairs.empty()) {
@@ -88,7 +92,8 @@ void ChessPeekPrintHelper::putCurrentMoves(MoveAndScorePairs const& moveAndScore
     putCurrentMovesTable(moveAndScorePairs, 10);
 }
 
-void ChessPeekPrintHelper::putCurrentMovesTable(    MoveAndScorePairs const& moveAndScorePairs, unsigned int const startIndex) const {
+void ChessPeekPrintHelper::putCurrentMovesTable(
+    MoveAndScorePairs const& moveAndScorePairs, unsigned int const startIndex) const {
     constexpr unsigned int numberOfBoardDisplayRows = 8U;
     if (startIndex < moveAndScorePairs.size()) {
         unsigned int numberOfMovesToDisplay =
@@ -181,7 +186,8 @@ void ChessPeekPrintHelper::printScoresHeader(
             cout << "            |";
         }
         cout << "\n";
-        printHorizontalBorderLine();    }
+        printHorizontalBorderLine();
+    }
 }
 
 void ChessPeekPrintHelper::printScoreAndMoveNumbersHeader() const {
@@ -265,6 +271,7 @@ MoveAndScorePairs ChessPeekPrintHelper::getCurrentMoveAndScorePairs() const {
     sortNonBestMovesWithMoreHumanlyMovesFirst(result);
     return result;
 }
+
 Moves ChessPeekPrintHelper::getFutureHalfMoves() const {
     Moves result;
     strings const& pvHalfMovesStrings(m_calculationDetails.pvHalfMovesInMonitoredLine);
@@ -276,7 +283,8 @@ Moves ChessPeekPrintHelper::getFutureHalfMoves() const {
         if (isMoveWithinTheBoard(move) && updatedBoard.isAPossibleMove(move)) {
             Piece piece = updatedBoard.getPieceAt(move.first);
             if (piece.isEmpty()) {
-                break;  // piece needs to be valid            } else {
+                break;  // piece needs to be valid
+            } else {
                 if (!isFirst && previousColor == piece.getColor()) {
                     break;  // colors needs to be alternating
                 }
@@ -306,14 +314,14 @@ void ChessPeekPrintHelper::sortNonBestMovesWithMoreHumanlyMovesFirst(MoveAndScor
                 int scoreLevel1 = getScoreLevel(pair1.second);
                 int scoreLevel2 = getScoreLevel(pair2.second);
                 if (scoreLevel1 == scoreLevel2) {
-                    int yMoveForwardCount1 = pair1.first.first.getY() - pair1.first.second.getY();
-                    int yMoveForwardCount2 = pair2.first.first.getY() - pair2.first.second.getY();
-                    if (yMoveForwardCount1 == yMoveForwardCount2) {
-                        int pieceTypeScore1 = getScoreOfPieceType(m_chessBoard.getPieceAt(pair1.first.first).getType());
-                        int pieceTypeScore2 = getScoreOfPieceType(m_chessBoard.getPieceAt(pair1.first.first).getType());
-                        return pieceTypeScore1 > pieceTypeScore2;  // higher pieces are prioritized
+                    int pieceTypeValue1 = getValueOfPieceType(m_chessBoard.getPieceAt(pair1.first.first).getType());
+                    int pieceTypeValue2 = getValueOfPieceType(m_chessBoard.getPieceAt(pair1.first.first).getType());
+                    if (pieceTypeValue1 == pieceTypeValue2) {
+                        int yMoveForwardCount1 = pair1.first.first.getY() - pair1.first.second.getY();
+                        int yMoveForwardCount2 = pair2.first.first.getY() - pair2.first.second.getY();
+                        return yMoveForwardCount1 > yMoveForwardCount2;  // offensive moves are prioritized
                     }
-                    return yMoveForwardCount1 > yMoveForwardCount2;  // offensive moves are prioritized
+                    return pieceTypeValue1 > pieceTypeValue2;  // higher pieces are prioritized
                 }
                 return scoreLevel1 > scoreLevel2;  // score level matter
             });
@@ -323,6 +331,7 @@ void ChessPeekPrintHelper::sortNonBestMovesWithMoreHumanlyMovesFirst(MoveAndScor
 unsigned int ChessPeekPrintHelper::getNumberOfColumnsOfScoreDisplayTable(unsigned int const numberOfChessBoards) const {
     return numberOfChessBoards == 0 ? 0U : numberOfChessBoards * 2 - 1;
 }
+
 unsigned int ChessPeekPrintHelper::getNumberOfColumnsOfBoardDisplayTable(unsigned int const numberOfChessBoards) const {
     return numberOfChessBoards == 0 ? 0U : numberOfChessBoards * 8U + numberOfChessBoards - 1;
 }
@@ -333,8 +342,8 @@ int ChessPeekPrintHelper::getScoreLevel(int const scoreInCentipawns) const {
         result = 3;  // clearly winning
     } else if (scoreInCentipawns > 0) {
         result = 2;  // has advantage
-    } else if (scoreInCentipawns > 200) {
-        result = 1;  // has opponent advantage
+    } else if (scoreInCentipawns > -100) {
+        result = 1;  // opponent has advantage
     } else {
         result = 0;  // clearly losing
     }

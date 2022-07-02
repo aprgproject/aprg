@@ -38,7 +38,8 @@ public:
     bool hasOnlyOneLegalMoveToAvoidCheck();
 
     Orientation getOrientation() const;
-    PieceMatrix const& getPieceMatrix() const;    Piece getPieceAt(Coordinate const& coordinate) const;
+    PieceMatrix const& getPieceMatrix() const;
+    Piece getPieceAt(Coordinate const& coordinate) const;
     Moves getPossibleMoves(Coordinate const& start) const;
     Move getMoveFromTwoLetterNumberNotation(std::string const& twoLetterNumber) const;
     Coordinate getCoordinateFromLetterNumberNotation(std::string const& letterNumber) const;
@@ -83,7 +84,8 @@ private:
         Coordinate const& destination, PieceColor const color, int const maximumCount) const;
     CoordinateDataType getOneIncrementData(CoordinateDataType const coordinateDataType) const;
     Coordinates getLDeltaCoordinates() const;
-    Coordinates getDiagonalIncrementDeltaCoordinates() const;    Coordinates getStraightIncrementDeltaCoordinates() const;
+    Coordinates getDiagonalIncrementDeltaCoordinates() const;
+    Coordinates getStraightIncrementDeltaCoordinates() const;
     Coordinates getOneStepDeltaCoordinates() const;
     Coordinates getPossiblePawnMovesDeltaCoordinates(Coordinate const& start, PieceColor const color) const;
     Coordinates getPossiblePawnReverseMovesDeltaCoordinates(Coordinate const& end, PieceColor const color) const;

@@ -26,7 +26,8 @@ public:
         unsigned int blackCountInLowerHalf;
         unsigned int numberOfWhiteKings;
         unsigned int numberOfBlackKings;
-        Coordinate whiteKingCoordinate;        Coordinate blackKingCoordinate;
+        Coordinate whiteKingCoordinate;
+        Coordinate blackKingCoordinate;
     };
 
     ChessPeek();
@@ -52,7 +53,8 @@ private:
     void setOrientationDependingOnLowerHalfColor(PieceColor const lowerHalfColor);
     void saveCalculationDetails(EngineCalculationDetails const& engineCalculationDetails);
 
-    void displayCalculationDetailsBasedFromTimer();    void displayCalculationDetailsIfNotDisplayedYet();
+    void displayCalculationDetailsBasedFromTimer();
+    void displayCalculationDetailsIfNotDisplayedYet();
     void printCalculationDetails();
 
     bool shouldAnalyzeBoard(Board::PieceMatrix const& previousPieceMatrix) const;
@@ -62,7 +64,8 @@ private:
     bool isOpponentsKingOnCheck() const;
     Coordinate getOpponentsKingCoordinate() const;
 
-    ChessPeekConfiguration m_configuration;    AlbaLocalScreenMonitoring m_screenMonitoring;
+    ChessPeekConfiguration m_configuration;
+    AlbaLocalScreenMonitoring m_screenMonitoring;
     ChessPieceRetriever m_pieceRetriever;
     ChessEngineHandler m_chessEngineHandler;
     ChessEngineControllerWithUci m_chessEngineController;
