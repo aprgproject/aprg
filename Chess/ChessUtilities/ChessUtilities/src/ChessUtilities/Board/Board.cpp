@@ -96,7 +96,8 @@ Piece Board::getPieceAt(Coordinate const& coordinate) const {
     if ((isCoordinateWithinTheBoard(coordinate))) {
         result = m_pieceMatrix.getEntry(coordinate.getX(), coordinate.getY());
     }
-    return result;}
+    return result;
+}
 
 Moves Board::getPossibleMoves(Coordinate const& start) const {
     Moves result;
@@ -246,6 +247,7 @@ void Board::setPieceAt(Coordinate const& coordinate, Piece const& piece) {
         m_pieceMatrix.setEntry(coordinate.getX(), coordinate.getY(), piece);
     }
 }
+
 void Board::move(Move const& move) {
     if (isAPossibleMove(move)) {
         MovePair kingAndRookCastlingMovePair(getMatchingCastlingKingAndRookMovePair(move));
@@ -387,7 +389,8 @@ bool Board::doesMoveHasNoBlockingPieceInBetween(Move const& move) const {
     while (isCoordinateWithinTheBoard(inBetween) && move.second != inBetween && getPieceAt(inBetween).isEmpty()) {
         inBetween += oneIncrementDelta;
     }
-    return inBetween == move.second;}
+    return inBetween == move.second;
+}
 
 unsigned int Board::getDiagonalMovesPossibleToThisDestination(
     Coordinate const& destination, PieceColor const color, int const maximumCount) const {
@@ -398,7 +401,8 @@ unsigned int Board::getDiagonalMovesPossibleToThisDestination(
             while (isCoordinateWithinTheBoard(runningCoordinate)) {
                 Piece piece(getPieceAt(runningCoordinate));
                 if (!piece.isEmpty()) {
-                    if (color == piece.getColor() &&                        (PieceType::Bishop == piece.getType() || PieceType::Queen == piece.getType())) {
+                    if (color == piece.getColor() &&
+                        (PieceType::Bishop == piece.getType() || PieceType::Queen == piece.getType())) {
                         numberOfMoves++;
                     }
                     break;
@@ -422,7 +426,8 @@ unsigned int Board::getStraightMovesPossibleToThisDestination(
             while (isCoordinateWithinTheBoard(runningCoordinate)) {
                 Piece piece(getPieceAt(runningCoordinate));
                 if (!piece.isEmpty()) {
-                    if (color == piece.getColor() &&                        (PieceType::Rook == piece.getType() || PieceType::Queen == piece.getType())) {
+                    if (color == piece.getColor() &&
+                        (PieceType::Rook == piece.getType() || PieceType::Queen == piece.getType())) {
                         numberOfMoves++;
                     }
                     break;
@@ -797,7 +802,8 @@ void Board::retrievePossibleMovesByIncrements(
         if (!isCoordinateWithinTheBoard(end)) {
             break;
         } else if (pieceAtEnd.isEmpty()) {
-            addMoveToListOfMoves(result, Move(start, end));        } else if (pieceAtStart.getColor() != pieceAtEnd.getColor()) {
+            addMoveToListOfMoves(result, Move(start, end));
+        } else if (pieceAtStart.getColor() != pieceAtEnd.getColor()) {
             addMoveToListOfMoves(result, Move(start, end));
             break;
         } else {
@@ -811,7 +817,8 @@ void Board::addMoveToListOfMoves(Moves& moves, Move const& move) const {
     if (isMoveWithinTheBoard(move)) {
         if (isEndEmptyOrHaveDifferentColors(move)) {
             moves.emplace_back(move);
-        }    }
+        }
+    }
 }
 
 Board::PieceMatrix::MatrixData Board::getInitialValues(Orientation const& inputType) const {

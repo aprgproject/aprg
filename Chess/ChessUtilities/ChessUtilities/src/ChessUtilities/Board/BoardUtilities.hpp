@@ -17,7 +17,8 @@ bool isMoveWithinTheBoard(Move const& move);
 int getValueOfPieceType(PieceType const pieceType);
 PieceColor getOppositeColor(PieceColor const pieceColor);
 
-std::string getEnumString(PieceColor const pieceColor);std::string getEnumString(PieceType const pieceType);
+std::string getEnumString(PieceColor const pieceColor);
+std::string getEnumString(PieceType const pieceType);
 std::string getEnumString(PieceColorAndType const pieceColorAndType);
 
 std::string constructFenString(

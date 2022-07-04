@@ -59,7 +59,8 @@ int getValueOfPieceType(PieceType const pieceType) {
     return result;
 }
 
-PieceColor getOppositeColor(PieceColor const pieceColor) {    PieceColor result{};
+PieceColor getOppositeColor(PieceColor const pieceColor) {
+    PieceColor result{};
     if (PieceColor::White == pieceColor) {
         result = PieceColor::Black;
     } else if (PieceColor::Black == pieceColor) {
