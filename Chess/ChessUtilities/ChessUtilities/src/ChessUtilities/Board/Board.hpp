@@ -27,10 +27,12 @@ public:
     Board(Orientation const& orientation);
     Board(Orientation const& orientation, InitializerList const& initializerList);
 
+    bool operator==(Board const& other) const;
+    bool operator!=(Board const& other) const;
+
     bool isEmptyAt(Coordinate const& coordinate) const;
     bool isACaptureMove(Move const& move) const;
-    bool isAPromotionMove(Move const& move) const;
-    bool isACastlingMove(Move const& move) const;
+    bool isAPromotionMove(Move const& move) const;    bool isACastlingMove(Move const& move) const;
     bool isAPossibleMove(Move const& move) const;
     bool canBeCaptured(Coordinate const& destination) const;
     bool areAnyMovesPossibleToThisDestination(Coordinate const& destination, PieceColor const& color) const;
@@ -45,12 +47,11 @@ public:
     Coordinate getCoordinateFromLetterNumberNotation(std::string const& letterNumber) const;
     std::string getLetterNumberNotationStringFromCoordinate(Coordinate const& coordinate) const;
     std::string getReadableStringForMove(Move const& move) const;
-    std::string getFenString() const;
-    std::string getCastlingFenString() const;
+    std::string getNotationPartOfFenString() const;
+    std::string getCastlingPartOfFenString() const;
 
     void setOrientation(Orientation const orientation);
-    void setPieceAt(Coordinate const& coordinate, Piece const& piece);
-    void move(Move const& move);
+    void setPieceAt(Coordinate const& coordinate, Piece const& piece);    void move(Move const& move);
 
 private:
     bool isEndEmptyOrHaveDifferentColors(Move const& move) const;
