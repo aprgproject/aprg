@@ -157,7 +157,8 @@ void ResultPrinter::putFutureHalfMovesAndBoardsOnDisplayTable(
         if (analyzer.getPieceFromMove().getColor() == m_detailsOnTheEngine.getPlayerColor()) {
             bool canPreMove = analyzer.canPreMove();
 
-            putChessBoardOnDisplayTable(boardsDisplayTable, analyzer.getCurrentBoard(), xOffset);            putMoveOnChessBoardCellsInDisplayTable(
+            putChessBoardOnDisplayTable(boardsDisplayTable, analyzer.getCurrentBoard(), xOffset);
+            putMoveOnChessBoardCellsInDisplayTable(
                 boardsDisplayTable, analyzer.getCurrentBoard(), futureHalfMove, xOffset, movesDisplayed + 1,
                 canPreMove);
 

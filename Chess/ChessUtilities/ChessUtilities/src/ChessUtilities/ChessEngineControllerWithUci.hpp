@@ -17,7 +17,8 @@ public:
     enum class ControllerState { Initializing, WaitingForUciOkay, Calculating, Idle, Quitted };
 
     enum class CommandType {
-        Uci,        UciOption,
+        Uci,
+        UciOption,
         Position,
         Go,
         Stop,
@@ -39,7 +40,8 @@ public:
 
     void resetToNewGame();
     void setupStartPosition();
-    void setupMoves(std::string const& moves);    void setupFenString(std::string const& fenString);
+    void setupMoves(std::string const& moves);
+    void setupFenString(std::string const& fenString);
     void go();
     void goWithPonder();
     void goWithDepth(unsigned int const depth);
@@ -55,7 +57,8 @@ private:
     void resetData();
     void clearCalculationDetails();
 
-    // state functions    void changeState(ControllerState const state);
+    // state functions
+    void changeState(ControllerState const state);
     void proceedToIdleStateAndProcessPendingCommands();
     void processPendingCommands();
 
@@ -74,7 +77,8 @@ private:
     void forceSend(std::string const& commandString);
 
     // process functions
-    void processAStringFromEngine(std::string const& stringFromEngine);    void processInWaitingForUciOkay(std::string const& stringToProcess);
+    void processAStringFromEngine(std::string const& stringFromEngine);
+    void processInWaitingForUciOkay(std::string const& stringToProcess);
     void processInCalculating(std::string const& stringToProcess);
 
     std::string constructUciOptionCommand(std::string const& name, std::string const& value);

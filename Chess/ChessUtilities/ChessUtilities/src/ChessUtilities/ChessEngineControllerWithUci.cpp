@@ -40,7 +40,8 @@ void ChessEngineControllerWithUci::resetEngine() {
 }
 
 void ChessEngineControllerWithUci::resetToNewGame() {
-    log("Resetting to a new game");    sendStopIfCalculating();
+    log("Resetting to a new game");
+    sendStopIfCalculating();
     send(CommandType::Position, "ucinewgame");
 }
 
@@ -136,7 +137,8 @@ void ChessEngineControllerWithUci::setLogFile(string const& logFilePath) {
 void ChessEngineControllerWithUci::resetData() {
     changeState(ControllerState::Initializing);
     m_waitingForReadyOkay = false;
-    m_currentCalculationDetails = {};    m_pendingCommands.clear();
+    m_currentCalculationDetails = {};
+    m_pendingCommands.clear();
 }
 
 void ChessEngineControllerWithUci::clearCalculationDetails() { m_currentCalculationDetails = CalculationDetails{}; }
@@ -200,6 +202,7 @@ void ChessEngineControllerWithUci::sendStopIfCalculating() {
 void ChessEngineControllerWithUci::send(CommandType const& commandType, string const& commandString) {
     send(Command{commandType, commandString});
 }
+
 void ChessEngineControllerWithUci::send(Command const& command) {
     log(string("Sending command: ") + command.commandString);
 
@@ -251,7 +254,8 @@ void ChessEngineControllerWithUci::forceSend(string const& commandString) {
 
 void ChessEngineControllerWithUci::processAStringFromEngine(string const& stringFromEngine) {
     string stringToProcess(getStringWithoutStartingAndTrailingWhiteSpace(stringFromEngine));
-    if (m_waitingForReadyOkay && "readyok" == stringToProcess) {        log("Ready okay received");
+    if (m_waitingForReadyOkay && "readyok" == stringToProcess) {
+        log("Ready okay received");
         m_waitingForReadyOkay = false;
     } else {
         switch (m_state) {

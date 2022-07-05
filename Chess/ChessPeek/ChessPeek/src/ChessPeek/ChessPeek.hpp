@@ -36,6 +36,7 @@ private:
 
     void initialize();
     void saveCalculationDetails(EngineCalculationDetails const& engineCalculationDetails);
+
     void printCalculationDetailsWithFiltering();
     void printCalculationDetailsIfPending();
     void printCalculationDetails();
@@ -51,6 +52,7 @@ private:
     bool m_engineWasJustReset;
     bool m_hasPendingPrintAction;
 };
+
 }  // namespace ChessPeek
 
 }  // namespace chess
