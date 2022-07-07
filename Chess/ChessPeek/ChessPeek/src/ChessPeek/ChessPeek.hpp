@@ -32,6 +32,7 @@ public:
 private:
     void initialize();
     void saveCalculationDetails(EngineCalculationDetails const& engineCalculationDetails);
+
     void printCalculationDetailsWithFiltering();
     void printCalculationDetailsIfPending();
     void printCalculationDetails();
@@ -42,7 +43,8 @@ private:
 
     Configuration m_configuration;
     AlbaLocalScreenMonitoring m_screenMonitoring;
-    ChessEngineHandler m_engineHandler;    ChessEngineControllerWithUci m_engineController;
+    ChessEngineHandler m_engineHandler;
+    ChessEngineControllerWithUci m_engineController;
     AlbaLocalTimer m_printFilteringTimer;
     DetailsFromTheScreen m_detailsFromTheScreen;
     DetailsOnTheEngine m_detailsOnTheEngine;

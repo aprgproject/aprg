@@ -74,7 +74,8 @@ void ChessPeek::startEngineAnalysis() {
     m_engineController.setupFenString(m_detailsOnTheEngine.getBoardWithContext().getFenString());
     if (!m_engineController.waitTillReadyAndReturnIfResetWasPerformed()) {
         m_engineController.goWithPonder();
-        m_engineWasJustReset = false;    } else {
+        m_engineWasJustReset = false;
+    } else {
         m_engineWasJustReset = true;
     }
 }
@@ -90,6 +91,7 @@ void ChessPeek::calculationMonitoringCallBackForEngine(EngineCalculationDetails 
 void ChessPeek::initialize() {
     // m_engineHandler.setLogFile(APRG_DIR R"(\Chess\ChessPeek\Files\EngineHandler.log)");  // for debugging
     // m_engineController.setLogFile(APRG_DIR R"(\Chess\ChessPeek\Files\EngineController.log)");  // for debugging
+
     m_engineController.setAdditionalStepsInCalculationMonitoring(
         [&](EngineCalculationDetails const& engineCalculationDetails) {
             calculationMonitoringCallBackForEngine(engineCalculationDetails);
@@ -103,12 +105,15 @@ void ChessPeek::saveCalculationDetails(EngineCalculationDetails const& engineCal
     if (!engineCalculationDetails.bestMove.empty()) {
         m_calculationDetails.bestMove = engineCalculationDetails.bestMove;
     }
-    if (!engineCalculationDetails.searchingMoveAndScorePairs.empty()) {
-        m_calculationDetails.searchingMoveAndScorePairs = engineCalculationDetails.searchingMoveAndScorePairs;
+    if (!engineCalculationDetails.currentMovesAndScores.empty()) {
+        m_calculationDetails.currentMovesAndScores = engineCalculationDetails.currentMovesAndScores;
     }
-    m_calculationDetails.scoreInPvLine = engineCalculationDetails.scoreInPvLine;
-    if (!engineCalculationDetails.pvHalfMovesInMonitoredLine.empty()) {
-        m_calculationDetails.pvHalfMovesInMonitoredLine = engineCalculationDetails.pvHalfMovesInMonitoredLine;
+    m_calculationDetails.scoreInMonitoredVariation = engineCalculationDetails.scoreInMonitoredVariation;
+    if (!engineCalculationDetails.monitoredVariation.empty()) {
+        m_calculationDetails.monitoredVariation = engineCalculationDetails.monitoredVariation;
+    }
+    if (!engineCalculationDetails.commonMovesAndCountsOfEachStep.empty()) {
+        m_calculationDetails.commonMovesAndCountsOfEachStep = engineCalculationDetails.commonMovesAndCountsOfEachStep;
     }
 }
 
@@ -158,4 +163,5 @@ bool ChessPeek::didBoardChange() const {
 }  // namespace ChessPeek
 
 }  // namespace chess
+
 }  // namespace alba

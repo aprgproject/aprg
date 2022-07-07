@@ -4,6 +4,7 @@
 #include <ChessPeek/BoardWithContext.hpp>
 
 namespace alba {
+
 namespace chess {
 
 namespace ChessPeek {
@@ -15,7 +16,8 @@ public:
     struct CountOfPieces {
         unsigned int pieceCount;
         unsigned int whiteCountInUpperHalf;
-        unsigned int blackCountInUpperHalf;        unsigned int whiteCountInLowerHalf;
+        unsigned int blackCountInUpperHalf;
+        unsigned int whiteCountInLowerHalf;
         unsigned int blackCountInLowerHalf;
         unsigned int numberOfWhiteKings;
         unsigned int numberOfBlackKings;
@@ -54,6 +56,7 @@ private:
 };
 
 }  // namespace ChessPeek
+
 }  // namespace chess
 
 }  // namespace alba

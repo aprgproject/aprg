@@ -3,6 +3,7 @@
 #include <ChessPeek/BoardWithContext.hpp>
 
 namespace alba {
+
 namespace chess {
 
 namespace ChessPeek {
@@ -20,6 +21,7 @@ private:
 };
 
 }  // namespace ChessPeek
+
 }  // namespace chess
 
 }  // namespace alba

@@ -89,6 +89,7 @@ void DetailsFromTheScreen::saveBoardUpperHalfLowerHalfDetails(Coordinate const& 
         }
     }
 }
+
 void DetailsFromTheScreen::savePlayerColorAndOrientation() {
     if (m_configuration.getType() == Configuration::Type::ChessDotComPuzzle) {
         savePlayerColorIfChessDotComPuzzle();
@@ -109,6 +110,7 @@ void DetailsFromTheScreen::savePlayerColorIfChessDotComPuzzle() {
         savePlayerColor(PieceColor::White);
     }
 }
+
 void DetailsFromTheScreen::savePlayerColorIfLichessStream() {
     constexpr auto xForWhiteSection = 3387, xForBlackSection = 3553;
     constexpr auto lastMovePixelColor = 0x2A4053U, rgbMask = 0xFFFFFFU;
@@ -160,6 +162,7 @@ void DetailsFromTheScreen::savePlayerColor(PieceColor const playerColor) { m_sav
 void DetailsFromTheScreen::saveOrientation(Board::Orientation const orientation) { m_savedOrientation = orientation; }
 
 }  // namespace ChessPeek
+
 }  // namespace chess
 
 }  // namespace alba
