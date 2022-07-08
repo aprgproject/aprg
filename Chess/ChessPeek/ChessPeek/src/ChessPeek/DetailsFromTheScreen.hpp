@@ -36,11 +36,10 @@ private:
     Board getBoardAndSaveDetails();
     void saveBoardDetails(Coordinate const& coordinate, Piece const& piece);
     void saveBoardKingDetails(Coordinate const& coordinate, Piece const& piece);
-    void saveBoardUpperHalfLowerHalfDetails(Coordinate const& coordinate, Piece const& piece);
+    void saveBoardUpperHalfAndLowerHalfDetails(Coordinate const& coordinate, Piece const& piece);
     void savePlayerColorAndOrientation();
     void savePlayerColorIfChessDotComPuzzle();
-    void savePlayerColorIfLichessStream();
-    void savePlayerColorAndOrientationFromBoardDetails();
+    void savePlayerColorIfLichessStream();    void savePlayerColorAndOrientationFromBoardDetails();
     void saveOrientationOnLowerHalfColor(PieceColor const lowerHalfColor);
 
     void savePlayerColor(PieceColor const newColor);
