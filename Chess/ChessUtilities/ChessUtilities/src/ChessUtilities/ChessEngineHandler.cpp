@@ -188,7 +188,8 @@ void ChessEngineHandler::shutdownEngine() {
     CloseHandle(m_inputStreamOnHandler);
 }
 
-void ChessEngineHandler::log(LogType const logtype, string const& logString) {    if (m_logFileStreamOptional) {
+void ChessEngineHandler::log(LogType const logtype, string const& logString) {
+    if (m_logFileStreamOptional) {
         m_logFileStreamOptional.value() << getLogHeader(logtype) << logString << "\n";
         m_logFileStreamOptional.value().flush();
     }

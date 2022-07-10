@@ -17,6 +17,7 @@ PieceColor Piece::extractColor(uint8_t const value) {
 }
 
 PieceType Piece::extractType(uint8_t const value) { return static_cast<PieceType>(value & 0B111); }
+
 PieceColorAndType Piece::extractColorAndType(uint8_t const value) {
     return static_cast<PieceColorAndType>(value & 0B1111);
 }

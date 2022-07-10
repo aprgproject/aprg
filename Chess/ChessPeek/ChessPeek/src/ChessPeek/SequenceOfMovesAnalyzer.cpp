@@ -18,7 +18,8 @@ void SequenceOfMovesAnalyzer::analyzeMove(Move const& halfMove) {
     if (areCoordinatesValid(halfMove)) {
         m_previous.move = m_current.move;
         m_current.move = halfMove;
-        PieceColor moveColor = m_current.boardWithContext.getBoard().getPieceAt(m_current.move.first).getColor();        m_current.boardWithContext.setPlayerColor(moveColor);
+        PieceColor moveColor = m_current.boardWithContext.getBoard().getPieceAt(m_current.move.first).getColor();
+        m_current.boardWithContext.setPlayerColor(moveColor);
         m_state = State::AnalyzingMove;
     }
 }

@@ -20,7 +20,8 @@ constexpr unsigned int MIN_NUMBER_OF_MOVES_IN_TEXT_REPORT = 5U;
 constexpr unsigned int MAX_NUMBER_OF_MOVES_IN_TEXT_REPORT = 10U;
 constexpr unsigned int MAX_NUMBER_OF_MOVES_IN_GRID = 5U;
 constexpr unsigned int NEXT_OFFSET_OF_GRID = 9U;
-constexpr char SEPARATOR[] = "     ";}  // namespace
+constexpr char SEPARATOR[] = "     ";
+}  // namespace
 
 namespace alba {
 
@@ -93,7 +94,8 @@ void ResultPrinter::printCurrentMovesGrid(CurrentMoveDetails const& currentMoveD
     printARowOfCurrentMoves(currentMoveDetails, 5);
 }
 
-void ResultPrinter::printARowOfCurrentMoves(    CurrentMoveDetails const& currentMoveDetails, unsigned int const startIndex) const {
+void ResultPrinter::printARowOfCurrentMoves(
+    CurrentMoveDetails const& currentMoveDetails, unsigned int const startIndex) const {
     constexpr unsigned int numberOfBoardDisplayRows = 8U;
     if (startIndex < currentMoveDetails.size()) {
         unsigned int rowSize =
@@ -150,7 +152,8 @@ void ResultPrinter::setFutureMovesOnGrid(
     int preMoveThreshold = 5;
     bool isUnSurePreMove = false;
 
-    for (FutureMoveDetail const& futureMoveDetail : futureMoveDetails) {        analyzer.analyzeMove(futureMoveDetail.halfMove);
+    for (FutureMoveDetail const& futureMoveDetail : futureMoveDetails) {
+        analyzer.analyzeMove(futureMoveDetail.halfMove);
         if (analyzer.getCurrentMoveColor() == m_engineBoardWithContext.getPlayerColor()) {
             bool isSurePreMove = analyzer.canPreMove();
             optional<char> firstChar = getFirstCharOfCell(isSurePreMove, isUnSurePreMove);
@@ -168,7 +171,8 @@ void ResultPrinter::setFutureMovesOnGrid(
             isUnSurePreMove = preMoveThreshold <= futureMoveDetail.commonalityCount;
         }
         analyzer.commitMove();
-    }}
+    }
+}
 
 void ResultPrinter::printScoresHeader(
     CurrentMoveDetails const& currentMoveDetails, unsigned int const startIndex) const {
@@ -256,6 +260,7 @@ ResultPrinter::CurrentMoveDetails ResultPrinter::getCurrentMoveDetails() const {
     }
     return result;
 }
+
 ResultPrinter::FutureMoveDetails ResultPrinter::getFutureMoveDetails() const {
     FutureMoveDetails result;
     strings const& pvHalfMovesStrings(m_calculationDetails.monitoredVariation);
@@ -267,7 +272,8 @@ ResultPrinter::FutureMoveDetails ResultPrinter::getFutureMoveDetails() const {
         if (updatedBoard.isAPossibleMove(move)) {
             Piece piece = updatedBoard.getPieceAt(move.first);
             if (index == 0 || areOpposingColors(previousColor, piece.getColor())) {
-                result.emplace_back(FutureMoveDetail{move, getCommonalityCount(move, updatedBoard, index)});                if (result.size() >= MAX_NUMBER_OF_MOVES_IN_TEXT_REPORT) {
+                result.emplace_back(FutureMoveDetail{move, getCommonalityCount(move, updatedBoard, index)});
+                if (result.size() >= MAX_NUMBER_OF_MOVES_IN_TEXT_REPORT) {
                     break;
                 }
                 updatedBoard.move(move);
@@ -276,7 +282,8 @@ ResultPrinter::FutureMoveDetails ResultPrinter::getFutureMoveDetails() const {
                 break;  // colors need to alternating
             }
         } else {
-            break;  // retain only line with valid moves        }
+            break;  // retain only line with valid moves
+        }
         index++;
     }
     return result;
@@ -345,7 +352,8 @@ int ResultPrinter::getScoreLevel(int const scoreInCentipawns) const {
         return -1 * positiveDeltaFromBestMove / LEVEL_DISTANCE;
 
         // The formula works like this, for example we have this scores: 300 201 200 199 100 0 -100
-        // The best one is 300.        // The value for each score respectively:
+        // The best one is 300.
+        // The value for each score respectively:
         // -> For  300: -1*(300-300)/100 =   -1/100 =  0
         // -> For  201: -1*(300-201)/100 =  -99/100 =  0
         // -> For  200: -1*(300-200)/100 = -100/100 = -1
@@ -378,7 +386,8 @@ int ResultPrinter::getCommonalityCount(Move const& move, Board const& engineBoar
         if (move == engineBoard.getMoveFromTwoLetterNumberNotation(commonMoveAndCount.first)) {
             count = commonMoveAndCount.second;
         }
-    }    return count;
+    }
+    return count;
 }
 
 string ResultPrinter::getCellForDisplay(

@@ -39,7 +39,8 @@ private:
     void saveBoardUpperHalfAndLowerHalfDetails(Coordinate const& coordinate, Piece const& piece);
     void savePlayerColorAndOrientation();
     void savePlayerColorIfChessDotComPuzzle();
-    void savePlayerColorIfLichessStream();    void savePlayerColorAndOrientationFromBoardDetails();
+    void savePlayerColorIfLichessStream();
+    void savePlayerColorAndOrientationFromBoardDetails();
     void saveOrientationOnLowerHalfColor(PieceColor const lowerHalfColor);
 
     void savePlayerColor(PieceColor const newColor);

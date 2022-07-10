@@ -47,7 +47,8 @@ Board DetailsFromTheScreen::getBoardAndSaveDetails() {
         for (int i = 0; i < 8; i++) {
             Coordinate coordinate(i, j);
             Piece piece(m_boardObserver.getPieceFromCell(i, j));
-            board.setPieceAt(coordinate, piece);            if (!piece.isEmpty()) {
+            board.setPieceAt(coordinate, piece);
+            if (!piece.isEmpty()) {
                 saveBoardDetails(coordinate, piece);
             }
         }
@@ -61,7 +62,8 @@ void DetailsFromTheScreen::saveBoardDetails(Coordinate const& coordinate, Piece 
     saveBoardUpperHalfAndLowerHalfDetails(coordinate, piece);
 }
 
-void DetailsFromTheScreen::saveBoardKingDetails(Coordinate const& coordinate, Piece const& piece) {    if (PieceType::King == piece.getType()) {
+void DetailsFromTheScreen::saveBoardKingDetails(Coordinate const& coordinate, Piece const& piece) {
+    if (PieceType::King == piece.getType()) {
         if (PieceColor::White == piece.getColor()) {
             m_countOfPieces.numberOfWhiteKings++;
             m_countOfPieces.whiteKingCoordinate = coordinate;
@@ -75,7 +77,8 @@ void DetailsFromTheScreen::saveBoardKingDetails(Coordinate const& coordinate, Pi
 void DetailsFromTheScreen::saveBoardUpperHalfAndLowerHalfDetails(Coordinate const& coordinate, Piece const& piece) {
     if (coordinate.getY() <= 3) {
         if (PieceColor::White == piece.getColor()) {
-            m_countOfPieces.whiteCountInUpperHalf++;        } else if (PieceColor::Black == piece.getColor()) {
+            m_countOfPieces.whiteCountInUpperHalf++;
+        } else if (PieceColor::Black == piece.getColor()) {
             m_countOfPieces.blackCountInUpperHalf++;
         }
     } else {

@@ -4,6 +4,7 @@
 #include <Common/Macros/AlbaMacros.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Common/Time/AlbaLocalTimeHelper.hpp>
+
 #include <iostream>
 #include <sstream>
 
@@ -27,6 +28,7 @@ ChessEngineControllerWithUci::ChessEngineControllerWithUci(
       m_pendingCommands() {
     putStringProcessingFunctionAsCallBack();
 }
+
 void ChessEngineControllerWithUci::initialize() { sendUciAndUciOptions(); }
 
 void ChessEngineControllerWithUci::quit() { sendQuit(); }
@@ -140,13 +142,11 @@ void ChessEngineControllerWithUci::resetData() {
     m_pendingCommands.clear();
 }
 
-void ChessEngineControllerWithUci::clearCalculationDetails() {
-    m_calculationDetails = {};
-    m_uciInterpreter.clear();
-}
+void ChessEngineControllerWithUci::clearCalculationDetails() { m_calculationDetails = {}; }
 
 void ChessEngineControllerWithUci::changeState(ControllerState const state) {
-    if (m_logFileStreamOptional) {        m_logFileStreamOptional.value() << "Changing state from " << getEnumString(m_state) << " to "
+    if (m_logFileStreamOptional) {
+        m_logFileStreamOptional.value() << "Changing state from " << getEnumString(m_state) << " to "
                                         << getEnumString(state) << "\n";
     }
     m_state = state;
@@ -293,6 +293,7 @@ void ChessEngineControllerWithUci::processInCalculating(string const& stringToPr
         m_additionalStepsInCalculationMonitoring.value()(m_calculationDetails);
     }
 }
+
 string ChessEngineControllerWithUci::constructUciOptionCommand(string const& name, string const& value) {
     return "setoption name " + name + " value " + value;
 }

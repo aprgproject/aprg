@@ -9,6 +9,7 @@
 #include <string>
 
 namespace alba {
+
 namespace matrix {
 template <>
 bool isEqualForMathMatrixDataType(chess::Piece const& value1, chess::Piece const& value2);
@@ -32,7 +33,8 @@ public:
     static constexpr int MAX_NUMBER_OF_MOVES = std::numeric_limits<int>::max();
 
     Board();
-    Board(Orientation const& orientation);    Board(Orientation const& orientation, InitializerList const& initializerList);
+    Board(Orientation const& orientation);
+    Board(Orientation const& orientation, InitializerList const& initializerList);
 
     bool operator==(Board const& other) const;
     bool operator!=(Board const& other) const;
@@ -47,7 +49,8 @@ public:
         Coordinate const& endpoint, PieceColor const& moveColor, int const maxSize = MAX_NUMBER_OF_MOVES) const;
 
     Move getMoveFromTwoLetterNumberNotation(std::string const& twoLetterNumber) const;
-    Piece getPieceAt(Coordinate const& coordinate) const;    Coordinate getCoordinateFromLetterNumberNotation(std::string const& letterNumber) const;
+    Piece getPieceAt(Coordinate const& coordinate) const;
+    Coordinate getCoordinateFromLetterNumberNotation(std::string const& letterNumber) const;
 
     std::string getLetterNumberNotationStringFromCoordinate(Coordinate const& coordinate) const;
     std::string getReadableStringForMove(Move const& move) const;
@@ -66,7 +69,8 @@ public:
     int getNumberOfWaysToBlockAttacks(Moves const& attacks, int const maxSize = MAX_NUMBER_OF_MOVES) const;
 
     void setOrientation(Orientation const orientation);
-    void setPieceAt(Coordinate const& coordinate, Piece const& piece);    void move(Move const& move);
+    void setPieceAt(Coordinate const& coordinate, Piece const& piece);
+    void move(Move const& move);
 
 private:
     PieceMatrix::MatrixData getInitialValues(Orientation const& inputType) const;
@@ -123,7 +127,8 @@ private:
         int const maxSize) const;
 
     bool isPossibleMoveBasedFromPieceType(Move const& move) const;
-    bool isPossiblePawnMove(Move const& move) const;    bool isPossibleKnightMove(Move const& move) const;
+    bool isPossiblePawnMove(Move const& move) const;
+    bool isPossibleKnightMove(Move const& move) const;
     bool isPossibleBishopMove(Move const& move) const;
     bool isPossibleRookMove(Move const& move) const;
     bool isPossibleQueenMove(Move const& move) const;
@@ -144,6 +149,7 @@ private:
         Coordinate const& startpoint, Coordinate const& endpoint, CoordinateCondition const& condition) const;
 
     void changePieceMatrixWithMove(Move const& move);
+
     Orientation m_orientation;
     PieceMatrix m_pieceMatrix;
 };

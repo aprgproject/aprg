@@ -5,7 +5,8 @@
 #include <ChessUtilities/Uci/UciInterpreter.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
-#include <deque>#include <fstream>
+#include <deque>
+#include <fstream>
 #include <string>
 
 namespace alba {
@@ -94,6 +95,7 @@ private:
     UciInterpreter m_uciInterpreter;
     std::deque<Command> m_pendingCommands;
 };
+
 std::string getEnumString(ChessEngineControllerWithUci::ControllerState const state);
 std::ostream& operator<<(std::ostream& out, ChessEngineControllerWithUci::ControllerState const state);
 

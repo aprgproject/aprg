@@ -14,6 +14,7 @@ TEST(PieceTest, ExtractColorWorks) {
     EXPECT_EQ(PieceColor::Unknown, Piece::extractColor(8U));
     EXPECT_EQ(PieceColor::Black, Piece::extractColor(9U));
 }
+
 TEST(PieceTest, ExtractTypeWorks) {
     EXPECT_EQ(PieceType::Empty, Piece::extractType(0U));
     EXPECT_EQ(PieceType::Pawn, Piece::extractType(1U));
@@ -57,7 +58,8 @@ TEST(PieceTest, GetColorWorks) {
     EXPECT_EQ(PieceColor::Black, piece3.getColor());
 }
 
-TEST(PieceTest, GetTypeWorks) {    Piece piece1(0U);
+TEST(PieceTest, GetTypeWorks) {
+    Piece piece1(0U);
     Piece piece2(13U);
 
     EXPECT_EQ(PieceType::Empty, piece1.getType());
