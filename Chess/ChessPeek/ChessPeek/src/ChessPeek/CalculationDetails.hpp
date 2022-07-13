@@ -15,7 +15,8 @@ struct CalculationDetails {
     std::string responseMoveToPonder;
 
     bool operator==(CalculationDetails const& other) const;
-    bool operator!=(CalculationDetails const& other) const;};
+    bool operator!=(CalculationDetails const& other) const;
+};
 
 }  // namespace ChessPeek
 

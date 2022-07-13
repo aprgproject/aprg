@@ -13,7 +13,8 @@ bool isAToH(char const c);
 bool is1To8(char const c);
 bool isCoordinateWithinTheBoard(Coordinate const& coordinate);
 bool isInUpperHalf(Coordinate const& coordinate);
-bool isInLowerHalf(Coordinate const& coordinate);bool areCoordinatesValid(Move const& move);
+bool isInLowerHalf(Coordinate const& coordinate);
+bool areCoordinatesValid(Move const& move);
 
 bool areOpposingColors(PieceColor const pieceColor1, PieceColor const pieceColor2);
 PieceColor getOppositeColor(PieceColor const pieceColor);
