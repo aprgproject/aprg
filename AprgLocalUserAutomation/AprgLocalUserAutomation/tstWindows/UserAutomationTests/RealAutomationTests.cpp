@@ -180,17 +180,16 @@ TEST(RealAutomationTest, DISABLED_NormalizeAudioForMp3Files) {
                     userAutomation.sleep(10000);
 
                     // export
-                    userAutomation.pressDownKey(VK_CONTROL);
-                    userAutomation.pressDownKey(VK_SHIFT);
-                    userAutomation.pressDownKey('E');
+                    userAutomation.pressKey(VK_CONTROL);
+                    userAutomation.pressKey(VK_SHIFT);
+                    userAutomation.pressKey('E');
                     userAutomation.sleepWithRealisticDelay();
-                    userAutomation.pressUpKey('E');
-                    userAutomation.pressUpKey(VK_SHIFT);
-                    userAutomation.pressUpKey(VK_CONTROL);
+                    userAutomation.releaseKey('E');
+                    userAutomation.releaseKey(VK_SHIFT);
+                    userAutomation.releaseKey(VK_CONTROL);
                     userAutomation.sleep(2000);
 
-                    // type enter key multiple times
-                    userAutomation.sleep(1000);
+                    // type enter key multiple times                    userAutomation.sleep(1000);
                     userAutomation.typeKey(VK_RETURN);  // save
                     userAutomation.sleep(1000);
                     userAutomation.typeKey('Y');  // yes to replace
