@@ -5,11 +5,9 @@
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Common/Time/AlbaLocalTimeHelper.hpp>
 
-#include <iostream>
 #include <sstream>
 
-using namespace alba::stringHelper;
-using namespace std;
+using namespace alba::stringHelper;using namespace std;
 
 namespace alba {
 
@@ -129,14 +127,9 @@ void ChessEngineControllerWithUci::setAdditionalStepsInCalculationMonitoring(
 void ChessEngineControllerWithUci::setLogFile(string const& logFilePath) {
     m_logFileStreamOptional.emplace();
     m_logFileStreamOptional->open(logFilePath);
-
-    if (!m_logFileStreamOptional->is_open()) {
-        cout << "Cannot open log file" << logFilePath;
-    }
 }
 
-void ChessEngineControllerWithUci::resetData() {
-    changeState(ControllerState::Initializing);
+void ChessEngineControllerWithUci::resetData() {    changeState(ControllerState::Initializing);
     m_waitingForReadyOkay = false;
     clearCalculationDetails();
     m_pendingCommands.clear();
@@ -298,16 +291,10 @@ string ChessEngineControllerWithUci::constructUciOptionCommand(string const& nam
     return "setoption name " + name + " value " + value;
 }
 
-void ChessEngineControllerWithUci::putStringProcessingFunctionAsCallBack() {
-    m_engineHandler.setAdditionalStepsInProcessingAStringFromEngine(
-        [&](string const& stringFromEngine) { processAStringFromEngine(stringFromEngine); });
-}
-
-string getEnumString(ChessEngineControllerWithUci::ControllerState const state) {
+string ChessEngineControllerWithUci::getEnumString(ControllerState const state) {
     switch (state) {
         ALBA_MACROS_CASE_ENUM_SHORT_STRING(ChessEngineControllerWithUci::ControllerState::Initializing, "Initializing")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(
-            ChessEngineControllerWithUci::ControllerState::WaitingForUciOkay, "WaitingForUciOkay")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(            ChessEngineControllerWithUci::ControllerState::WaitingForUciOkay, "WaitingForUciOkay")
         ALBA_MACROS_CASE_ENUM_SHORT_STRING(ChessEngineControllerWithUci::ControllerState::Idle, "Idle")
         ALBA_MACROS_CASE_ENUM_SHORT_STRING(ChessEngineControllerWithUci::ControllerState::Calculating, "Calculating")
         default:
@@ -315,11 +302,10 @@ string getEnumString(ChessEngineControllerWithUci::ControllerState const state) 
     }
 }
 
-ostream& operator<<(ostream& out, ChessEngineControllerWithUci::ControllerState const state) {
-    out << getEnumString(state);
-    return out;
+void ChessEngineControllerWithUci::putStringProcessingFunctionAsCallBack() {
+    m_engineHandler.setAdditionalStepsInProcessingAStringFromEngine(
+        [&](string const& stringFromEngine) { processAStringFromEngine(stringFromEngine); });
 }
 
 }  // namespace chess
-
 }  // namespace alba

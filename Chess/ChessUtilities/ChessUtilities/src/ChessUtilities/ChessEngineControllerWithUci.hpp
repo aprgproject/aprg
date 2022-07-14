@@ -83,10 +83,10 @@ private:
     void processInCalculating(std::string const& stringToProcess);
 
     std::string constructUciOptionCommand(std::string const& name, std::string const& value);
+    std::string getEnumString(ControllerState const state);
     void putStringProcessingFunctionAsCallBack();
 
-    ChessEngineHandler& m_engineHandler;
-    stringHelper::StringPairs m_uciOptionNamesAndValuePairs;
+    ChessEngineHandler& m_engineHandler;    stringHelper::StringPairs m_uciOptionNamesAndValuePairs;
     std::optional<StepsInCalculationMonitoring> m_additionalStepsInCalculationMonitoring;
     std::optional<std::ofstream> m_logFileStreamOptional;
     ControllerState m_state;
@@ -95,9 +95,6 @@ private:
     UciInterpreter m_uciInterpreter;
     std::deque<Command> m_pendingCommands;
 };
-
-std::string getEnumString(ChessEngineControllerWithUci::ControllerState const state);
-std::ostream& operator<<(std::ostream& out, ChessEngineControllerWithUci::ControllerState const state);
 
 }  // namespace chess
 
