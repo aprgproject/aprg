@@ -34,12 +34,13 @@ public:
     template <typename NumberType, size_t numberOfBytesToRead>
     NumberType getData();
     void saveDataToMemoryBuffer(AlbaMemoryBuffer& buffer, size_t numberOfBytesToRead);
-    std::string getLineAndIgnoreWhiteSpaces();
+    void skipLine();
     std::string getLine();
+    std::string getLineAndIgnoreWhiteSpaces();
+
     size_t getCurrentLocation() const;
     size_t getFileSize() const;
-    void moveToTheBeginning() const;
-    void moveLocation(size_t const location) const;
+    void moveToTheBeginning() const;    void moveLocation(size_t const location) const;
     void setMaxBufferSize(size_t const bufferSize);
     size_t getMaxBufferSize() const;
 
