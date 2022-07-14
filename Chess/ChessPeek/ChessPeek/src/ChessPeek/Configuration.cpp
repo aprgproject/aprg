@@ -95,10 +95,13 @@ void Configuration::initializeSpecificParameters() {
             initializeChessDotComPuzzle();
             break;
         }
-        case Type::LichessVersus: {
-            initializeLichessVersus();
+        case Type::ChessDotComExplorer: {
+            initializeChessDotComExplorer();
             break;
         }
+        case Type::LichessVersus: {
+            initializeLichessVersus();
+            break;        }
         case Type::LichessStream: {
             initializeLichessStream();
             break;
@@ -120,10 +123,16 @@ void Configuration::initializeChessDotComPuzzle() {
     m_blackColorLimit = 0.40;
 }
 
+void Configuration::initializeChessDotComExplorer() {
+    m_boardTopLeft = XY(2225, 101);
+    m_boardBottomRight = XY(3144, 1020);
+    m_whiteColorLimit = 0.91;
+    m_blackColorLimit = 0.40;
+}
+
 void Configuration::initializeLichessVersus() {
     m_boardTopLeft = XY(2488, 145);
-    m_boardBottomRight = XY(3239, 896);
-    m_whiteColorLimit = 0.91;
+    m_boardBottomRight = XY(3239, 896);    m_whiteColorLimit = 0.91;
     m_blackColorLimit = 0.30;
 }
 

@@ -11,14 +11,12 @@ namespace chess {
 
 namespace ChessPeek {
 
-DetailsFromTheScreen::DetailsFromTheScreen(
-    Configuration const& configuration, AlbaLocalScreenMonitoring const& screenMonitoring)
+DetailsFromTheScreen::DetailsFromTheScreen(Configuration const& configuration)
     : m_configuration(configuration),
-      m_screenMonitoring(screenMonitoring),
+      m_screenMonitoring(),
       m_boardObserver(m_configuration, m_screenMonitoring),
       m_boardWithContext(),
-      m_savedPlayerColor{},
-      m_savedOrientation{},
+      m_savedPlayerColor{},      m_savedOrientation{},
       m_countOfPieces{} {}
 
 bool DetailsFromTheScreen::canAnalyzeBoard() const {
@@ -28,10 +26,10 @@ bool DetailsFromTheScreen::canAnalyzeBoard() const {
 BoardWithContext const& DetailsFromTheScreen::getBoardWithContext() const { return m_boardWithContext; }
 
 void DetailsFromTheScreen::saveDetailsFromTheScreen() {
+    m_screenMonitoring.capturePixelsFromScreen();
     Board temporaryBoard(getBoardAndSaveDetails());
 
-    savePlayerColorAndOrientation();
-    temporaryBoard.setOrientation(m_savedOrientation);
+    savePlayerColorAndOrientation();    temporaryBoard.setOrientation(m_savedOrientation);
 
     m_boardWithContext.save(m_savedPlayerColor, temporaryBoard);
 }
@@ -43,12 +41,11 @@ bool DetailsFromTheScreen::areKingsValid() const {
 Board DetailsFromTheScreen::getBoardAndSaveDetails() {
     Board board;
     m_countOfPieces = {};
-    for (int j = 0; j < 8; j++) {
-        for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < Board::CHESS_SIDE_SIZE; j++) {
+        for (int i = 0; i < Board::CHESS_SIDE_SIZE; i++) {
             Coordinate coordinate(i, j);
             Piece piece(m_boardObserver.getPieceFromCell(i, j));
-            board.setPieceAt(coordinate, piece);
-            if (!piece.isEmpty()) {
+            board.setPieceAt(coordinate, piece);            if (!piece.isEmpty()) {
                 saveBoardDetails(coordinate, piece);
             }
         }
@@ -91,11 +88,14 @@ void DetailsFromTheScreen::saveBoardUpperHalfAndLowerHalfDetails(Coordinate cons
 }
 
 void DetailsFromTheScreen::savePlayerColorAndOrientation() {
-    if (m_configuration.getType() == Configuration::Type::ChessDotComPuzzle) {
+    if (m_configuration.getType() == Configuration::Type::ChessDotComExplorer) {
+        // its always from white POV
+        savePlayerColor(PieceColor::White);
+        saveOrientationOnLowerHalfColor(PieceColor::White);
+    } else if (m_configuration.getType() == Configuration::Type::ChessDotComPuzzle) {
         savePlayerColorIfChessDotComPuzzle();
     } else if (m_configuration.getType() == Configuration::Type::LichessStream) {
-        savePlayerColorIfLichessStream();
-    } else {
+        savePlayerColorIfLichessStream();    } else {
         savePlayerColorAndOrientationFromBoardDetails();
     }
 }

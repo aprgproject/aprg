@@ -11,11 +11,10 @@ namespace ChessPeek {
 
 class Configuration {
 public:
-    enum class Type { ChessDotComVersus, ChessDotComPuzzle, LichessVersus, LichessStream };
+    enum class Type { ChessDotComVersus, ChessDotComPuzzle, ChessDotComExplorer, LichessVersus, LichessStream };
 
     Configuration() = delete;
     Configuration(Type const type);
-
     Type getType() const;
     std::string const& getChessEnginePath() const;
     std::string const& getScreenShotPath() const;
@@ -31,9 +30,9 @@ private:
     void initializeSpecificParameters();
     void initializeChessDotComVersus();
     void initializeChessDotComPuzzle();
+    void initializeChessDotComExplorer();
     void initializeLichessVersus();
     void initializeLichessStream();
-
     Type m_type;
     std::string m_chessEnginePath;
     stringHelper::StringPairs m_uciOptionNamesAndValuePairs;
