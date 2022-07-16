@@ -28,7 +28,8 @@ bool AlbaWindowsUserAutomation::isLetterPressed(char const letter) const { retur
 
 MousePosition AlbaWindowsUserAutomation::getMousePosition() const {
     MousePosition position;
-    POINT mouse;    GetCursorPos(&mouse);
+    POINT mouse;
+    GetCursorPos(&mouse);
     return MousePosition(mouse.x, mouse.y);
 }
 
@@ -62,7 +63,8 @@ void AlbaWindowsUserAutomation::releaseLeftButtonOnMouse() const {
 
 void AlbaWindowsUserAutomation::doLeftClick() const {
     doOperationWithRealisticDelay([](INPUT& input) {
-        input.type = INPUT_MOUSE;        input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
+        input.type = INPUT_MOUSE;
+        input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
     });
     doOperationWithRealisticDelay([](INPUT& input) {
         input.type = INPUT_MOUSE;
@@ -114,7 +116,8 @@ void AlbaWindowsUserAutomation::releaseRightButtonOnMouse() const {
     });
 }
 
-void AlbaWindowsUserAutomation::doRightClick() const {    doOperationWithRealisticDelay([](INPUT& input) {
+void AlbaWindowsUserAutomation::doRightClick() const {
+    doOperationWithRealisticDelay([](INPUT& input) {
         input.type = INPUT_MOUSE;
         input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
     });
@@ -132,7 +135,8 @@ void AlbaWindowsUserAutomation::doRightClickAt(MousePosition const& position) co
 void AlbaWindowsUserAutomation::pressKey(unsigned int const key) const {
     doOperation([&](INPUT& input) {
         input.type = INPUT_KEYBOARD;
-        input.ki.wScan = 0;        input.ki.time = 0;
+        input.ki.wScan = 0;
+        input.ki.time = 0;
         input.ki.dwExtraInfo = 0;
         input.ki.wVk = (WORD)key;
         input.ki.dwFlags = 0;
@@ -142,7 +146,8 @@ void AlbaWindowsUserAutomation::pressKey(unsigned int const key) const {
 void AlbaWindowsUserAutomation::releaseKey(unsigned int const key) const {
     doOperation([&](INPUT& input) {
         input.type = INPUT_KEYBOARD;
-        input.ki.wScan = 0;        input.ki.time = 0;
+        input.ki.wScan = 0;
+        input.ki.time = 0;
         input.ki.dwExtraInfo = 0;
         input.ki.wVk = (WORD)key;
         input.ki.dwFlags = KEYEVENTF_KEYUP;
@@ -201,7 +206,8 @@ void AlbaWindowsUserAutomation::typeControlAndLetterSimultaneously(unsigned int 
     releaseKey(VK_CONTROL);
 }
 
-string AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() const {    int const LENGTH = 1000;
+string AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() const {
+    int const LENGTH = 1000;
     char className[LENGTH];
     GetClassName(GetForegroundWindow(), className, LENGTH);
     return string(className);

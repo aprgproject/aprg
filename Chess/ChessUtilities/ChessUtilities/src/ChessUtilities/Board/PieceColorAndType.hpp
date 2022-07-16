@@ -3,6 +3,7 @@
 namespace alba {
 
 namespace chess {
+
 enum class PieceColorAndType {
     Empty = 0,         // 0b0000
     WhitePawn = 1,     // 0b0001

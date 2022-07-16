@@ -101,7 +101,8 @@ void Configuration::initializeSpecificParameters() {
         }
         case Type::LichessVersus: {
             initializeLichessVersus();
-            break;        }
+            break;
+        }
         case Type::LichessStream: {
             initializeLichessStream();
             break;
@@ -132,7 +133,8 @@ void Configuration::initializeChessDotComExplorer() {
 
 void Configuration::initializeLichessVersus() {
     m_boardTopLeft = XY(2488, 145);
-    m_boardBottomRight = XY(3239, 896);    m_whiteColorLimit = 0.91;
+    m_boardBottomRight = XY(3239, 896);
+    m_whiteColorLimit = 0.91;
     m_blackColorLimit = 0.30;
 }
 

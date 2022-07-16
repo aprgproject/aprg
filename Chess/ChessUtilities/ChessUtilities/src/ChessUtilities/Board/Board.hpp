@@ -20,6 +20,7 @@ public:
     using CoordinateCondition = std::function<bool(Coordinate const&)>;
 
     enum class CastleType { NotACastle, KingSideCastle, QueenSideCastle };
+
     struct DeltaRange {
         CoordinateDataType interval;
         CoordinateDataType invalidDelta;
@@ -41,7 +42,8 @@ public:
     PieceGrid const& getPieceGrid() const;
 
     Moves getMovesFromThis(Coordinate const& startpoint, int const maxSize = MAX_NUMBER_OF_MOVES) const;
-    Moves getMovesToThis(        Coordinate const& endpoint, PieceColor const& moveColor, int const maxSize = MAX_NUMBER_OF_MOVES) const;
+    Moves getMovesToThis(
+        Coordinate const& endpoint, PieceColor const& moveColor, int const maxSize = MAX_NUMBER_OF_MOVES) const;
     Moves getAttacksToThis(
         Coordinate const& endpoint, PieceColor const& moveColor, int const maxSize = MAX_NUMBER_OF_MOVES) const;
 
@@ -74,7 +76,8 @@ private:
     PieceGrid getInitialValues(BoardOrientation const& inputType) const;
 
     void retrieveMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
-    void retrievePawnMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;    void retrieveKnightMovesThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
+    void retrievePawnMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
+    void retrieveKnightMovesThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
     void retrieveBishopMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
     void retrieveRookMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
     void retrieveQueenMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
@@ -98,7 +101,8 @@ private:
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
     void retrievePawnReverseNonCapturesToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
-    void retrievePawnReverseCapturesToThis(        Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
+    void retrievePawnReverseCapturesToThis(
+        Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
     void retrieveAllNonPawnMovesToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
     void retrieveKnightMovesToThis(
@@ -143,7 +147,8 @@ private:
     bool isPieceNonEmptyAndHasOpposingColors(Piece const& piece, PieceColor const color) const;
     bool isPossibleMoveBasedFromPieceType(Move const& move) const;
     bool isPossiblePawnMove(Move const& move) const;
-    bool isPossibleKnightMove(Move const& move) const;    bool isPossibleBishopMove(Move const& move) const;
+    bool isPossibleKnightMove(Move const& move) const;
+    bool isPossibleBishopMove(Move const& move) const;
     bool isPossibleRookMove(Move const& move) const;
     bool isPossibleQueenMove(Move const& move) const;
     bool isPossibleKingMove(Move const& move) const;
@@ -169,4 +174,5 @@ private:
 };
 
 }  // namespace chess
+
 }  // namespace alba

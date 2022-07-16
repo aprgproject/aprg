@@ -3,12 +3,14 @@
 #include <ChessPeek/Book.hpp>
 #include <ChessPeek/CalculationDetails.hpp>
 #include <ChessPeek/Configuration.hpp>
-#include <ChessPeek/DetailsFromTheScreen.hpp>#include <ChessPeek/DetailsOnTheEngine.hpp>
+#include <ChessPeek/DetailsFromTheScreen.hpp>
+#include <ChessPeek/DetailsOnTheEngine.hpp>
 #include <ChessUtilities/ChessEngineControllerWithUci.hpp>
 #include <ChessUtilities/ChessEngineHandler.hpp>
 #include <Common/Time/AlbaLocalTimer.hpp>
 
 namespace alba {
+
 namespace chess {
 
 namespace ChessPeek {
@@ -18,6 +20,7 @@ public:
     using EngineCalculationDetails = chess::CalculationDetails;
 
     ChessPeek();
+
     void runForever();
     void runOneIteration();
 
@@ -47,8 +50,10 @@ private:
     DetailsOnTheEngine m_detailsOnTheEngine;
     Book m_book;
     CalculationDetails m_calculationDetails;
+    CalculationDetails m_printCalculationDetails;
     bool m_engineWasJustReset;
-    bool m_hasPendingPrintAction;};
+    bool m_hasPendingPrintAction;
+};
 
 }  // namespace ChessPeek
 

@@ -16,7 +16,8 @@ DetailsFromTheScreen::DetailsFromTheScreen(Configuration const& configuration)
       m_screenMonitoring(),
       m_boardObserver(m_configuration, m_screenMonitoring),
       m_boardWithContext(),
-      m_savedPlayerColor{},      m_savedOrientation{},
+      m_savedPlayerColor{},
+      m_savedOrientation{},
       m_countOfPieces{} {}
 
 bool DetailsFromTheScreen::canAnalyzeBoard() const {
@@ -29,7 +30,8 @@ void DetailsFromTheScreen::saveDetailsFromTheScreen() {
     m_screenMonitoring.capturePixelsFromScreen();
     Board temporaryBoard(getBoardAndSaveDetails());
 
-    savePlayerColorAndOrientation();    temporaryBoard.setOrientation(m_savedOrientation);
+    savePlayerColorAndOrientation();
+    temporaryBoard.setOrientation(m_savedOrientation);
 
     m_boardWithContext.save(m_savedPlayerColor, temporaryBoard);
 }
@@ -45,7 +47,8 @@ Board DetailsFromTheScreen::getBoardAndSaveDetails() {
         for (int i = 0; i < Board::CHESS_SIDE_SIZE; i++) {
             Coordinate coordinate(i, j);
             Piece piece(m_boardObserver.getPieceFromCell(i, j));
-            board.setPieceAt(coordinate, piece);            if (!piece.isEmpty()) {
+            board.setPieceAt(coordinate, piece);
+            if (!piece.isEmpty()) {
                 saveBoardDetails(coordinate, piece);
             }
         }
@@ -95,7 +98,8 @@ void DetailsFromTheScreen::savePlayerColorAndOrientation() {
     } else if (m_configuration.getType() == Configuration::Type::ChessDotComPuzzle) {
         savePlayerColorIfChessDotComPuzzle();
     } else if (m_configuration.getType() == Configuration::Type::LichessStream) {
-        savePlayerColorIfLichessStream();    } else {
+        savePlayerColorIfLichessStream();
+    } else {
         savePlayerColorAndOrientationFromBoardDetails();
     }
 }

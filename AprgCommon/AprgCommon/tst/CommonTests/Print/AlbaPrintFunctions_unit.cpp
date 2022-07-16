@@ -7,7 +7,8 @@
 #include <optional>
 #include <queue>
 #include <sstream>
-#include <stack>#include <unordered_map>
+#include <stack>
+#include <unordered_map>
 #include <unordered_set>
 
 using namespace std;
@@ -19,6 +20,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithItemsThatCanPrint) {
     int integerToTest = 500;
 
     printParameterWithName(ssToVerify, "name", integerToTest);
+
     EXPECT_EQ("name : [500]", ssToVerify.str());
 }
 
@@ -27,6 +29,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithPointer) {
     int integerToTest = 500;
 
     printParameterWithName(ssToVerify, "name", &integerToTest);
+
     EXPECT_EQ("*name : [500]", ssToVerify.str());
 }
 
@@ -43,6 +46,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithUniquePointer) {
     unique_ptr<int> pointerToTest(make_unique<int>(500));
 
     printParameterWithName(ssToVerify, "name", pointerToTest);
+
     EXPECT_EQ("*name : [500]", ssToVerify.str());
 }
 
@@ -51,6 +55,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithSharedPointer) {
     shared_ptr<int> pointerToTest(make_shared<int>(500));
 
     printParameterWithName(ssToVerify, "name", pointerToTest);
+
     EXPECT_EQ("*name : [500]", ssToVerify.str());
 }
 
@@ -81,6 +86,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithPair) {
     pair<int, char> pairToTest{300, 'A'};
 
     printParameterWithName(ssToVerify, "name", pairToTest);
+
     EXPECT_EQ("name : [(300, A)]", ssToVerify.str());
 }
 
@@ -89,6 +95,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithTuple) {
     tuple<int, string, char> pairToTest{300, "hello", 'A'};
 
     printParameterWithName(ssToVerify, "name", pairToTest);
+
     EXPECT_EQ("name : [(300, hello, A)]", ssToVerify.str());
 }
 
@@ -97,6 +104,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithArray) {
     array<int, 5> vectorToTest{500, 501, 502, 503, 504};
 
     printParameterWithName(ssToVerify, "name", vectorToTest);
+
     EXPECT_EQ("name : [{Constant size: 5 | 500, 501, 502, 503, 504, }]", ssToVerify.str());
 }
 
@@ -105,6 +113,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithVector) {
     vector<int> vectorToTest{500, 501, 502, 503, 504};
 
     printParameterWithName(ssToVerify, "name", vectorToTest);
+
     EXPECT_EQ("name : [{size: 5 | 500, 501, 502, 503, 504, }]", ssToVerify.str());
 }
 
@@ -113,6 +122,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithDeque) {
     deque<int> vectorToTest{500, 501, 502, 503, 504};
 
     printParameterWithName(ssToVerify, "name", vectorToTest);
+
     EXPECT_EQ("name : [{size: 5 | 500, 501, 502, 503, 504, }]", ssToVerify.str());
 }
 
@@ -121,6 +131,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithSet) {
     set<int> vectorToTest{500, 501, 502, 503, 504};
 
     printParameterWithName(ssToVerify, "name", vectorToTest);
+
     EXPECT_EQ("name : [{size: 5 | 500, 501, 502, 503, 504, }]", ssToVerify.str());
 }
 
@@ -129,6 +140,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithMap) {
     map<int, char> vectorToTest{{500, 'A'}, {501, 'B'}, {502, 'C'}, {503, 'D'}, {504, 'E'}};
 
     printParameterWithName(ssToVerify, "name", vectorToTest);
+
     EXPECT_EQ("name : [{size: 5 | (500, A), (501, B), (502, C), (503, D), (504, E), }]", ssToVerify.str());
 }
 
@@ -137,6 +149,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithUnorderedSet) {
     unordered_set<int> vectorToTest{500, 501, 502, 503, 504};
 
     printParameterWithName(ssToVerify, "name", vectorToTest);
+
     EXPECT_EQ("name : [{size: 5 | 504, 503, 502, 501, 500, }]", ssToVerify.str());
 }
 
@@ -145,6 +158,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithUnorderedMap) {
     unordered_map<int, char> vectorToTest{{500, 'A'}, {501, 'B'}, {502, 'C'}, {503, 'D'}, {504, 'E'}};
 
     printParameterWithName(ssToVerify, "name", vectorToTest);
+
     EXPECT_EQ("name : [{size: 5 | (504, E), (503, D), (502, C), (501, B), (500, A), }]", ssToVerify.str());
 }
 
@@ -153,6 +167,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithStack) {
     stack<int> adapter({1, 2, 3});
 
     printParameterWithName(ssToVerify, "name", adapter);
+
     EXPECT_EQ("name : [{adapter: {size: 3 | 1, 2, 3, }}]", ssToVerify.str());
 }
 
@@ -161,6 +176,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithQueue) {
     queue<int> adapter({1, 2, 3});
 
     printParameterWithName(ssToVerify, "name", adapter);
+
     EXPECT_EQ("name : [{adapter: {size: 3 | 1, 2, 3, }}]", ssToVerify.str());
 }
 
@@ -170,6 +186,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithPriorityQueue) {
     adapter.push(1U);
     adapter.push(2U);
     adapter.push(3U);
+
     printParameterWithName(ssToVerify, "name", adapter);
 
     EXPECT_EQ("name : [{adapter: {size: 3 | 3, 1, 2, }}]", ssToVerify.str());
@@ -180,6 +197,7 @@ TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithForwardList) {
     forward_list<int> vectorToTest{500, 501, 502, 503, 504};
 
     printParameterWithName(ssToVerify, "name", vectorToTest);
+
     EXPECT_EQ("name : [{500, 501, 502, 503, 504, }]", ssToVerify.str());
 }
 

@@ -26,7 +26,8 @@ TEST(SequenceOfMovesAnalyzerTest, CheckMoveAndCommitMoveWorks) {
     EXPECT_EQ(expectedMatrix, analyzer.getCurrentBoard().getPieceGrid());
 }
 
-TEST(SequenceOfMovesAnalyzerTest, CanPreMoveWorksOnRecapture) {    BoardWithContext boardWithContext(PieceColor::White, BoardOrientation::BlackUpWhiteDown);
+TEST(SequenceOfMovesAnalyzerTest, CanPreMoveWorksOnRecapture) {
+    BoardWithContext boardWithContext(PieceColor::White, BoardOrientation::BlackUpWhiteDown);
     SequenceOfMovesAnalyzer analyzer(boardWithContext);
     analyzer.analyzeMove({{4, 6}, {4, 4}});
     analyzer.commitMove();

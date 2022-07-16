@@ -5,6 +5,7 @@
 #include <ScreenMonitoring/AlbaLocalScreenMonitoring.hpp>
 
 namespace alba {
+
 namespace chess {
 
 namespace ChessPeek {
@@ -14,7 +15,8 @@ public:
     DetailsFromTheScreen(Configuration const& configuration);
 
     struct CountOfPieces {
-        unsigned int pieceCount;        unsigned int whiteCountInUpperHalf;
+        unsigned int pieceCount;
+        unsigned int whiteCountInUpperHalf;
         unsigned int blackCountInUpperHalf;
         unsigned int whiteCountInLowerHalf;
         unsigned int blackCountInLowerHalf;
@@ -49,7 +51,8 @@ private:
     AlbaLocalScreenMonitoring m_screenMonitoring;
     BoardObserver m_boardObserver;
     BoardWithContext m_boardWithContext;
-    PieceColor m_savedPlayerColor;    BoardOrientation m_savedOrientation;
+    PieceColor m_savedPlayerColor;
+    BoardOrientation m_savedOrientation;
     CountOfPieces m_countOfPieces;
 };
 

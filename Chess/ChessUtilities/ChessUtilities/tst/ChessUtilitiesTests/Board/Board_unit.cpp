@@ -25,6 +25,7 @@ static alba::chess::Board::PieceGrid gridFullOfWhitePawns{
 }  // namespace
 
 namespace alba {
+
 namespace chess {
 
 TEST(BoardTest, ConstructionWorks) {
@@ -44,7 +45,8 @@ TEST(BoardTest, ConstructionWorks) {
     EXPECT_EQ(gridFullOfWhitePawns, boardConstructedWithOrientationAndPieceGrid.getPieceGrid());
 }
 
-TEST(BoardTest, EqualOperatorWorks) {    Board boardWithBW(BoardOrientation::BlackUpWhiteDown);
+TEST(BoardTest, EqualOperatorWorks) {
+    Board boardWithBW(BoardOrientation::BlackUpWhiteDown);
     Board boardWithWB(BoardOrientation::WhiteUpBlackDown);
     Board boardWithWrongOrientation(boardWithBW);
     boardWithWrongOrientation.setOrientation(BoardOrientation::WhiteUpBlackDown);
@@ -87,7 +89,8 @@ TEST(BoardTest, GetPieceGridWorks) {
     EXPECT_EQ(gridWithWB, boardWithWB.getPieceGrid());
 }
 
-TEST(BoardTest, GetMovesFromThisWorksOnOneStepPawnNonCapture) {    Board boardWithBW(
+TEST(BoardTest, GetMovesFromThisWorksOnOneStepPawnNonCapture) {
+    Board boardWithBW(
         BoardOrientation::BlackUpWhiteDown,
         {0x9, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
          0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
@@ -625,7 +628,9 @@ TEST(BoardTest, GetMoveUsingAlgebraicNotationWorksAndItsWorkingWithCheck) {
 
 TEST(BoardTest, GetPieceAtWorks) {
     Board boardWithBW(BoardOrientation::BlackUpWhiteDown);
-    Board boardWithWB(BoardOrientation::WhiteUpBlackDown);    EXPECT_EQ(Piece(PieceColorAndType::BlackRook), boardWithBW.getPieceAt({0, 0}));
+    Board boardWithWB(BoardOrientation::WhiteUpBlackDown);
+
+    EXPECT_EQ(Piece(PieceColorAndType::BlackRook), boardWithBW.getPieceAt({0, 0}));
     EXPECT_EQ(Piece(PieceColorAndType::WhiteRook), boardWithBW.getPieceAt({7, 7}));
     EXPECT_EQ(Piece(PieceColorAndType::Empty), boardWithBW.getPieceAt({3, 3}));
     EXPECT_EQ(Piece(PieceColorAndType::Empty), boardWithBW.getPieceAt({4, 4}));
@@ -1078,7 +1083,8 @@ TEST(BoardTest, SetPieceAtWorks) {
     EXPECT_EQ(emptyGridWithOneWhitePawn, boardWithBW.getPieceGrid());
 }
 
-TEST(BoardTest, MoveWorksForWhitePawnMovingTwoSpaces) {    Board boardWithBW(BoardOrientation::BlackUpWhiteDown);
+TEST(BoardTest, MoveWorksForWhitePawnMovingTwoSpaces) {
+    Board boardWithBW(BoardOrientation::BlackUpWhiteDown);
 
     boardWithBW.move({{2, 6}, {2, 4}});
 
@@ -1089,7 +1095,8 @@ TEST(BoardTest, MoveWorksForWhitePawnMovingTwoSpaces) {    Board boardWithBW(Boa
     EXPECT_EQ(expectedGrid, boardWithBW.getPieceGrid());
 }
 
-TEST(BoardTest, MoveWorksForWhiteRookCapturingABlackPawn) {    Board board(
+TEST(BoardTest, MoveWorksForWhiteRookCapturingABlackPawn) {
+    Board board(
         BoardOrientation::BlackUpWhiteDown,
         {0xC, 0xA, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x9, 0xB, 0x0, 0x0, 0x0, 0x9, 0x9, 0x0, 0x0, 0x9, 0x0, 0x0, 0x0, 0x0,
          0x0, 0x0, 0x0, 0x0, 0x9, 0x0, 0x3, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0xC,
@@ -1104,7 +1111,8 @@ TEST(BoardTest, MoveWorksForWhiteRookCapturingABlackPawn) {    Board board(
     EXPECT_EQ(expectedGrid, board.getPieceGrid());
 }
 
-TEST(BoardTest, MoveWorksForWhitePawnCapturingABlackBishop) {    Board board(
+TEST(BoardTest, MoveWorksForWhitePawnCapturingABlackBishop) {
+    Board board(
         BoardOrientation::BlackUpWhiteDown,
         {0xC, 0x0, 0x0, 0x0, 0x0, 0x0, 0xE, 0x0, 0x9, 0x9, 0x0, 0xB, 0x0, 0x9, 0x9, 0x9, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
          0x0, 0x0, 0x0, 0x9, 0x0, 0x1, 0x0, 0x0, 0x0, 0x5, 0x0, 0x0, 0xD, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0,
@@ -1119,7 +1127,8 @@ TEST(BoardTest, MoveWorksForWhitePawnCapturingABlackBishop) {    Board board(
     EXPECT_EQ(expectedGrid, board.getPieceGrid());
 }
 
-TEST(BoardTest, MoveWorksWithCastling) {    Board board(
+TEST(BoardTest, MoveWorksWithCastling) {
+    Board board(
         BoardOrientation::BlackUpWhiteDown,
         {0xC, 0xA, 0xB, 0xD, 0xE, 0xB, 0xA, 0xC, 0x9, 0x9, 0x9, 0x9, 0x9, 0x9, 0x9, 0x9, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
          0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
@@ -1135,4 +1144,5 @@ TEST(BoardTest, MoveWorksWithCastling) {    Board board(
 }
 
 }  // namespace chess
+
 }  // namespace alba

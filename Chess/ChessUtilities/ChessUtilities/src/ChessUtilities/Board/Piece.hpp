@@ -8,6 +8,7 @@
 #include <vector>
 
 namespace alba {
+
 namespace chess {
 
 class Piece {
@@ -19,7 +20,8 @@ public:
     static uint8_t getValueFromColorAndType(PieceColor const color, PieceType const type);
 
     Piece();
-    Piece(Piece const&) = default;    Piece(uint8_t const underlyingValue);
+    Piece(Piece const&) = default;
+    Piece(uint8_t const underlyingValue);
     Piece(PieceColorAndType const colorAndType);
     Piece(PieceColor const color, PieceType const type);
 
@@ -34,7 +36,8 @@ public:
     char getFenCharacter() const;
 
 private:
-    uint8_t m_underlyingValue;};
+    uint8_t m_underlyingValue;
+};
 
 using Pieces = std::vector<Piece>;
 

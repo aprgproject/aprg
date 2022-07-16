@@ -17,7 +17,8 @@ namespace alba {
 
 namespace chess {
 
-#define CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED \    if (static_cast<int>(result.size()) >= maxSize) {             \
+#define CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED \
+    if (static_cast<int>(result.size()) >= maxSize) {             \
         return;                                                   \
     }
 
@@ -45,7 +46,8 @@ BoardOrientation Board::getOrientation() const { return m_orientation; }
 Board::PieceGrid const& Board::getPieceGrid() const { return m_pieceGrid; }
 
 Moves Board::getMovesFromThis(Coordinate const& startpoint, int const maxSize) const {
-    Moves result;    retrieveMovesFromThis(result, startpoint, maxSize);
+    Moves result;
+    retrieveMovesFromThis(result, startpoint, maxSize);
     return result;
 }
 
@@ -85,6 +87,7 @@ Move Board::getMoveUsingAlgebraicNotation(string const& text, PieceColor const m
     }
     return result;
 }
+
 Coordinate Board::getCoordinateFromAlgebraicNotation(string const& text) const {
     Coordinate result{};
     if (text.size() == 2) {
@@ -104,6 +107,7 @@ Piece Board::getPieceAt(Coordinate const& coordinate) const {
     }
     return result;
 }
+
 string Board::getAlgebraicNotationOfCoordinate(Coordinate const& coordinate) const {
     string result;
     if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
@@ -125,7 +129,8 @@ string Board::getNotationPartOfFenString() const {
     stringstream ss;
     CoordinateDataType startpoint = (BoardOrientation::BlackUpWhiteDown == m_orientation)   ? 0
                                     : (BoardOrientation::WhiteUpBlackDown == m_orientation) ? 7
-                                                                                            : 0;    CoordinateDataType end = (BoardOrientation::WhiteUpBlackDown == m_orientation)   ? 0
+                                                                                            : 0;
+    CoordinateDataType end = (BoardOrientation::WhiteUpBlackDown == m_orientation)   ? 0
                              : (BoardOrientation::BlackUpWhiteDown == m_orientation) ? 7
                                                                                      : 0;
 
@@ -163,7 +168,8 @@ string Board::getNotationPartOfFenString() const {
     return ss.str();
 }
 
-string Board::getCastlingPartOfFenString() const {    string result;
+string Board::getCastlingPartOfFenString() const {
+    string result;
     if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
         Piece pieceAtWhiteKing(getPieceAt(Coordinate(4, 7)));
         Piece pieceAtWhiteRookOnKingSide(getPieceAt(Coordinate(7, 7)));
@@ -276,6 +282,7 @@ void Board::setPieceAt(Coordinate const& coordinate, Piece const& piece) {
         m_pieceGrid[getGridIndex(coordinate.getX(), coordinate.getY())] = piece;
     }
 }
+
 void Board::move(Move const& move) {
     // if (isAPossibleMove(move)) // dont check if its valid to be quicker
     MovePair kingAndRookCastlingMovePair(getMatchingCastlingKingAndRookMovePair(move));
@@ -299,7 +306,8 @@ Board::PieceGrid Board::getInitialValues(BoardOrientation const& inputType) cons
     }
 }
 
-void Board::retrieveMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const {    CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
+void Board::retrieveMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const {
+    CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
     Piece pieceAtStart(getPieceAt(startpoint));
     switch (pieceAtStart.getType()) {
         case PieceType::Pawn: {
@@ -520,7 +528,8 @@ Moves Board::getCandidatesMoves(
             }
             break;
         }
-        default: {            break;
+        default: {
+            break;
         }
     }
     return result;
@@ -538,7 +547,8 @@ void Board::retrieveMovesToThis(
     if (isPieceEmptyOrHasOpposingColors(pieceAtEnd, moveColor)) {  // non capture and capture
         retrieveAllNonPawnMovesToThis(result, endpoint, moveColor, maxSize);
     }
-    // How about castling? It doesnt really make any sense though.}
+    // How about castling? It doesnt really make any sense though.
+}
 
 void Board::retrieveAttacksToThis(
     Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const {
@@ -547,7 +557,8 @@ void Board::retrieveAttacksToThis(
     if (isPieceNonEmptyAndHasOpposingColors(pieceAtEnd, moveColor)) {  // capture only
         retrievePawnReverseCapturesToThis(result, endpoint, moveColor, maxSize);
     }
-    retrieveAllNonPawnMovesToThis(result, endpoint, moveColor, maxSize);}
+    retrieveAllNonPawnMovesToThis(result, endpoint, moveColor, maxSize);
+}
 
 void Board::retrieveAttacksToThisWithNoKingMoves(
     Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const {
@@ -565,7 +576,8 @@ void Board::retrieveAttacksToThisWithNoKingMoves(
 
 void Board::retrievePawnReverseNonCapturesToThis(
     Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const {
-    CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED    DeltaRange range = getPawnReverseNonCaptureDeltaRange(endpoint, moveColor);
+    CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
+    DeltaRange range = getPawnReverseNonCaptureDeltaRange(endpoint, moveColor);
     for (CoordinateDataType deltaY = range.interval; deltaY != range.invalidDelta; deltaY += range.interval) {
         Coordinate startpoint(endpoint.getX(), endpoint.getY() + deltaY);
         Piece pieceAtStart(getPieceAt(startpoint));
@@ -683,7 +695,8 @@ Board::NotationDetailsOfMove Board::determineNotationDetailsOfMove(string const&
                 it++;
                 break;
             }
-            case State::LastX: {                if (isAToH(c)) {
+            case State::LastX: {
+                if (isAToH(c)) {
                     result.lastX = getXInCorrectOrientation(c - 'a');
                     it++;
                 }
@@ -715,7 +728,8 @@ Board::NotationDetailsOfMove Board::determineNotationDetailsOfMove(string const&
             }
             case State::PiecePart: {
                 switch (c) {
-                    case 'N':                        result.pieceType = PieceType::Knight;
+                    case 'N':
+                        result.pieceType = PieceType::Knight;
                         break;
                     case 'B':
                         result.pieceType = PieceType::Bishop;
@@ -747,6 +761,7 @@ Board::NotationDetailsOfMove Board::determineNotationDetailsOfMove(string const&
     }
     return result;
 }
+
 MovePairs Board::getCastlingKingAndRookMovePairs(PieceColor const moveColor) const {
     MovePairs result;
     if (BoardOrientation::BlackUpWhiteDown == m_orientation) {
@@ -854,6 +869,7 @@ Move Board::getNonCastleMoveUsingAlgebraicNotation(string const& text, PieceColo
     }
     return result;
 }
+
 Move Board::getFirstMoveThatFits(
     Moves const& possibleMoves, PieceType const pieceType, optional<CoordinateDataType> const& xLimitation,
     optional<CoordinateDataType> const& yLimitation) const {
@@ -1052,7 +1068,8 @@ int Board::getGridIndex(int x, int y) const { return (y * CHESS_SIDE_SIZE) + x; 
 
 int Board::getNumberOfWaysToBlockPath(
     Coordinate const& startpoint, Coordinate const& endpoint, PieceColor const blockingPieceColor,
-    int const maxSize) const {    int result{};
+    int const maxSize) const {
+    int result{};
     Coordinate moveDelta = endpoint - startpoint;
     Coordinate oneIncrementDelta(getOneIncrement(moveDelta.getX()), getOneIncrement(moveDelta.getY()));
     Coordinate cellInBetween = startpoint + oneIncrementDelta;
@@ -1073,7 +1090,8 @@ bool Board::isPieceNonEmptyAndHasOpposingColors(Piece const& piece, PieceColor c
 
 bool Board::isPossibleMoveBasedFromPieceType(Move const& move) const {
     bool result(false);
-    Piece piece(getPieceAt(move.first));    switch (piece.getType()) {
+    Piece piece(getPieceAt(move.first));
+    switch (piece.getType()) {
         case PieceType::Pawn: {
             result = isPossiblePawnMove(move);
             break;
@@ -1232,7 +1250,8 @@ void Board::changePieceGridWithMove(Move const& move) {
     setPieceAt(move.first, {});
 }
 
-#undef CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED#undef CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
+#undef CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED
+#undef CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
 
 }  // namespace chess
 

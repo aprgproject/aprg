@@ -39,6 +39,7 @@ TEST(AlbaFileReaderTest, ConstructorsWorks) {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
+
     AlbaFileReader fileReader1(inputTestFile);
     EXPECT_EQ(10000U, fileReader1.getMaxBufferSize());
     AlbaFileReader fileReader2(inputTestFile, 200);
@@ -49,6 +50,7 @@ TEST(AlbaFileReaderTest, SetAndGetBufferSizeWorks) {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     ifstream inputTestFile(testFilePath.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
+
     AlbaFileReader fileReader(inputTestFile);
     EXPECT_EQ(10000U, fileReader.getMaxBufferSize());
     fileReader.setMaxBufferSize(200);
@@ -125,7 +127,8 @@ TEST(AlbaFileReaderTest, GetLineAndIgnoreWhiteSpacesWorksUsingVariousCharacters)
     writeTextWithSpaces(testFile);
     testFile.close();
 
-    ifstream inputTestFile(testFilePath.getFullPath());    ASSERT_TRUE(inputTestFile.is_open());
+    ifstream inputTestFile(testFilePath.getFullPath());
+    ASSERT_TRUE(inputTestFile.is_open());
 
     AlbaFileReader fileReader(inputTestFile);
     ASSERT_TRUE(inputTestFile.good());
@@ -153,6 +156,7 @@ TEST(AlbaFileReaderTest, ReadLineWithSizeLimit) {
     AlbaLocalPathHandler commonSizeTestFileToRead(ALBA_COMMON_SIZE_TEST_FILE);
     ifstream inputTestFile(commonSizeTestFileToRead.getFullPath());
     ASSERT_TRUE(inputTestFile.is_open());
+
     AlbaFileReader fileReader(inputTestFile);
     fileReader.setMaxBufferSize(2000);
     EXPECT_EQ(5000U, fileReader.getFileSize());
@@ -169,7 +173,8 @@ TEST(AlbaFileReaderTest, ReadLineWithSizeLimit) {
 TEST(AlbaFileReaderTest, ReadSingleCharacterFromBinaryFile) {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     ofstream testFile(testFilePath.getFullPath());
-    ASSERT_TRUE(testFile.is_open());    testFile << "123!@# \t\n";
+    ASSERT_TRUE(testFile.is_open());
+    testFile << "123!@# \t\n";
     testFile.close();
 
     ifstream inputTestFile(testFilePath.getFullPath(), ios::binary);
@@ -202,7 +207,8 @@ TEST(AlbaFileReaderTest, ReadSingleCharacterFromBinaryFile) {
 TEST(AlbaFileReaderTest, ReadMultipleCharacters) {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     ofstream testFile(testFilePath.getFullPath());
-    ASSERT_TRUE(testFile.is_open());    testFile << "123!@# \t\n";
+    ASSERT_TRUE(testFile.is_open());
+    testFile << "123!@# \t\n";
     testFile.close();
 
     ifstream inputTestFile(testFilePath.getFullPath(), ios::binary);
@@ -245,7 +251,8 @@ TEST(AlbaFileReaderTest, ReadMultipleCharacters) {
 TEST(AlbaFileReaderTest, RequestToReadMultipleCharactersThatIsTheBeyondBufferSize) {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     ofstream testFile(testFilePath.getFullPath());
-    ASSERT_TRUE(testFile.is_open());    testFile << "12345";
+    ASSERT_TRUE(testFile.is_open());
+    testFile << "12345";
     testFile.close();
 
     ifstream inputTestFile(testFilePath.getFullPath(), ios::binary);
@@ -272,7 +279,8 @@ TEST(AlbaFileReaderTest, RequestToReadMultipleCharactersThatIsTheBeyondBufferSiz
 TEST(AlbaFileReaderTest, ReadOneByteNumbers) {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     ofstream testFile(testFilePath.getFullPath());
-    ASSERT_TRUE(testFile.is_open());    testFile.put(0x01);
+    ASSERT_TRUE(testFile.is_open());
+    testFile.put(0x01);
     testFile.put(0x23);
     testFile.put(0x45);
     testFile.put(0x67);
@@ -306,7 +314,8 @@ TEST(AlbaFileReaderTest, ReadOneByteNumbers) {
 TEST(AlbaFileReaderTest, ReadTwoByteNumbers) {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     ofstream testFile(testFilePath.getFullPath());
-    ASSERT_TRUE(testFile.is_open());    testFile.put(0x01);
+    ASSERT_TRUE(testFile.is_open());
+    testFile.put(0x01);
     testFile.put(0x23);
     testFile.put(0x45);
     testFile.put(0x67);
@@ -334,7 +343,8 @@ TEST(AlbaFileReaderTest, ReadTwoByteNumbers) {
 TEST(AlbaFileReaderTest, ReadFourByteNumbers) {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     ofstream testFile(testFilePath.getFullPath());
-    ASSERT_TRUE(testFile.is_open());    testFile.put(0x01);
+    ASSERT_TRUE(testFile.is_open());
+    testFile.put(0x01);
     testFile.put(0x23);
     testFile.put(0x45);
     testFile.put(0x67);
@@ -358,7 +368,8 @@ TEST(AlbaFileReaderTest, ReadFourByteNumbers) {
 TEST(AlbaFileReaderTest, ReadEightByteNumbers) {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     ofstream testFile(testFilePath.getFullPath());
-    ASSERT_TRUE(testFile.is_open());    testFile.put(0x01);
+    ASSERT_TRUE(testFile.is_open());
+    testFile.put(0x01);
     testFile.put(0x23);
     testFile.put(0x45);
     testFile.put(0x67);
@@ -380,7 +391,8 @@ TEST(AlbaFileReaderTest, ReadEightByteNumbers) {
 TEST(AlbaFileReaderTest, ReadSwappedTwoByteNumbers) {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     ofstream testFile(testFilePath.getFullPath());
-    ASSERT_TRUE(testFile.is_open());    testFile.put(0x01);
+    ASSERT_TRUE(testFile.is_open());
+    testFile.put(0x01);
     testFile.put(0x23);
     testFile.put(0x45);
     testFile.put(0x67);
@@ -408,7 +420,8 @@ TEST(AlbaFileReaderTest, ReadSwappedTwoByteNumbers) {
 TEST(AlbaFileReaderTest, ReadSwappedFourByteNumbers) {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     ofstream testFile(testFilePath.getFullPath());
-    ASSERT_TRUE(testFile.is_open());    testFile.put(0x01);
+    ASSERT_TRUE(testFile.is_open());
+    testFile.put(0x01);
     testFile.put(0x23);
     testFile.put(0x45);
     testFile.put(0x67);
@@ -432,7 +445,8 @@ TEST(AlbaFileReaderTest, ReadSwappedFourByteNumbers) {
 TEST(AlbaFileReaderTest, ReadSwappedEightByteNumbers) {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     ofstream testFile(testFilePath.getFullPath());
-    ASSERT_TRUE(testFile.is_open());    testFile.put(0x01);
+    ASSERT_TRUE(testFile.is_open());
+    testFile.put(0x01);
     testFile.put(0x23);
     testFile.put(0x45);
     testFile.put(0x67);
@@ -454,7 +468,8 @@ TEST(AlbaFileReaderTest, ReadSwappedEightByteNumbers) {
 TEST(AlbaFileReaderTest, FileContentsCanBeSavedInMemoryBuffer) {
     AlbaLocalPathHandler testFilePath(APRG_COMMON_TEST_FILE_TO_READ);
     ofstream testFile(testFilePath.getFullPath());
-    ASSERT_TRUE(testFile.is_open());    testFile.put(0x01);
+    ASSERT_TRUE(testFile.is_open());
+    testFile.put(0x01);
     testFile.put(0x23);
     testFile.put(0x45);
     testFile.put(0x67);

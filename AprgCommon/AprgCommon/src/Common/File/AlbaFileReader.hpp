@@ -40,7 +40,8 @@ public:
 
     size_t getCurrentLocation() const;
     size_t getFileSize() const;
-    void moveToTheBeginning() const;    void moveLocation(size_t const location) const;
+    void moveToTheBeginning() const;
+    void moveLocation(size_t const location) const;
     void setMaxBufferSize(size_t const bufferSize);
     size_t getMaxBufferSize() const;
 

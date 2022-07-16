@@ -26,7 +26,8 @@ public:
     bool isZero() const;
     Data const& getData() const;
 
-private:    Coordinate getCorrectCoordinate(Board const& board, CoordinateDataType const x, CoordinateDataType const y);
+private:
+    Coordinate getCorrectCoordinate(Board const& board, CoordinateDataType const x, CoordinateDataType const y);
     void saveBoardToData(Board const& board);
     Data m_data;
 };
@@ -35,4 +36,5 @@ bool operator<(BoardValue const& bv1, BoardValue const& bv2);
 bool operator==(BoardValue const& bv1, BoardValue const& bv2);
 
 }  // namespace chess
+
 }  // namespace alba

@@ -4,6 +4,7 @@
 #include <Common/String/AlbaStringHelper.hpp>
 
 using namespace std;
+
 namespace alba {
 
 namespace chess {
@@ -33,6 +34,7 @@ uint8_t Piece::getValueFromColorAndType(PieceColor const color, PieceType const 
 Piece::Piece() : m_underlyingValue(0U) {}
 
 Piece::Piece(uint8_t const underlyingValue) : m_underlyingValue(underlyingValue) {}
+
 Piece::Piece(PieceColorAndType const colorAndType) : m_underlyingValue(getValueFromColorAndType(colorAndType)) {}
 
 Piece::Piece(PieceColor const color, PieceType const type) : m_underlyingValue(getValueFromColorAndType(color, type)) {}
@@ -56,4 +58,5 @@ char Piece::getFenCharacter() const {
 }
 
 }  // namespace chess
+
 }  // namespace alba

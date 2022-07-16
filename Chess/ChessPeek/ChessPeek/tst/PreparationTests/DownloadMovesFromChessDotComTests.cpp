@@ -11,6 +11,7 @@
 #include <UserAutomation/AlbaLocalUserAutomation.hpp>
 
 #include <gtest/gtest.h>
+
 #include <algorithm>
 #include <ostream>
 #include <thread>
@@ -32,7 +33,8 @@ namespace ChessPeek {
 void trackKeyPressForDownloadMovesFromChessDotCom() {
     AlbaLocalUserAutomation userAutomation;
     while (shouldStillRun) {
-        shouldStillRun = !userAutomation.isKeyPressed(VK_NUMLOCK);        Sleep(100);
+        shouldStillRun = !userAutomation.isKeyPressed(VK_NUMLOCK);
+        userAutomation.sleep(100);
     }
 }
 
@@ -102,7 +104,7 @@ void gotoWebPage(string const& url) {
     userAutomation.sleepWithRealisticDelay();
 
     userAutomation.typeKey(VK_RETURN);
-    userAutomation.sleep(1000);
+    userAutomation.sleep(500);
 }
 
 bool performMovesAndReturnIfValid(strings const& line) {
@@ -123,16 +125,17 @@ bool performMovesAndReturnIfValid(strings const& line) {
         Move move = updatedBoard.getMoveUsingAlgebraicNotation(moveString, currentColor);
         if (areCoordinatesValid(move)) {
             int startX = round(topLeft.getX() + (move.first.getX() + 0.5) * deltaX);
-            int startY = round(topLeft.getY() + (move.first.getY() + 0.5) * deltaY);            int endX = round(topLeft.getX() + (move.second.getX() + 0.5) * deltaX);
+            int startY = round(topLeft.getY() + (move.first.getY() + 0.5) * deltaY);
+            int endX = round(topLeft.getX() + (move.second.getX() + 0.5) * deltaX);
             int endY = round(topLeft.getY() + (move.second.getY() + 0.5) * deltaY);
 
             userAutomation.setMousePosition(MousePosition(startX, startY));
             userAutomation.pressLeftButtonOnMouse();
-            userAutomation.sleep(500);
+            userAutomation.sleep(200);
             userAutomation.setMousePosition(MousePosition(endX, endY));
-            userAutomation.sleep(500);
+            userAutomation.sleep(200);
             userAutomation.releaseLeftButtonOnMouse();
-            userAutomation.sleep(1000);
+            userAutomation.sleep(600);
 
             updatedBoard.move(move);
             currentColor = getOppositeColor(currentColor);
@@ -166,7 +169,8 @@ void deleteWebPageUntilItsDeleted(string const& htmlFile) {
         }
         htmlFileHandler.deleteFile();
         Sleep(100);
-        htmlFileHandler.reInput();        if (htmlFileHandler.isFoundInLocalSystem()) {
+        htmlFileHandler.reInput();
+        if (htmlFileHandler.isFoundInLocalSystem()) {
             cout << "File still not deleted. Deleting again. File: [" << htmlFile << "]" << endl;
         }
     }
@@ -183,7 +187,7 @@ void saveWebPage(string const& htmlFile) {
     userAutomation.sleepWithRealisticDelay();
 
     userAutomation.setStringToClipboard(htmlFile);
-    userAutomation.sleep(1000);
+    userAutomation.sleep(500);
 
     userAutomation.pressKey(VK_CONTROL);
     userAutomation.pressKey('V');
@@ -209,7 +213,8 @@ void saveWebPageUntilItsDeleted(string const& htmlFile) {
         }
         saveWebPage(htmlFile);
         clickWindow();
-        typeEnter();        Sleep(1000);
+        typeEnter();
+        Sleep(500);
         htmlFileHandler.reInput();
         if (!htmlFileHandler.isFoundInLocalSystem()) {
             cout << "File still doesnt exist. Saving web page again. File: [" << htmlFile << "]" << endl;
@@ -252,7 +257,8 @@ string removeHtmlTags(string const& mainString) {
         }
         int lastIndexOfFirstString = firstIndexOfFirstString + 1;
         int firstIndexOfSecondString = withTags.find(">", lastIndexOfFirstString);
-        if (isNotNpos(firstIndexOfSecondString)) {            int lastIndexOfSecondString = firstIndexOfSecondString + 1;
+        if (isNotNpos(firstIndexOfSecondString)) {
+            int lastIndexOfSecondString = firstIndexOfSecondString + 1;
             withoutTags += withTags.substr(0, firstIndexOfFirstString);
             withTags = withTags.substr(lastIndexOfSecondString);
             firstIndexOfFirstString = withTags.find("<", 0);
@@ -275,7 +281,8 @@ bool readHtmlFileIfValid(WebPageInfo& pageInfo, string const& htmlFile) {
         }
         string line(fileReader.getLineAndIgnoreWhiteSpaces());
         int index = line.find(R"("eco-classifier-component sidebar-game-opening")");
-        if (isNotNpos(index)) {            result = true;
+        if (isNotNpos(index)) {
+            result = true;
             int previousIndex{};
             pageInfo.nameOfLine =
                 getStringInBetween(line, R"(<span class="eco-classifier-label"><!----> <span>)", R"(</span>)", index);
@@ -285,7 +292,8 @@ bool readHtmlFileIfValid(WebPageInfo& pageInfo, string const& htmlFile) {
                 }
                 previousIndex = index;
                 MoveInfo moveInfo{};
-                moveInfo.nextMove = getStringInBetween(line, R"(<span class="move-san-san">)", R"(</span>)", index);                if (moveInfo.nextMove.empty()) {
+                moveInfo.nextMove = getStringInBetween(line, R"(<span class="move-san-san">)", R"(</span>)", index);
+                if (moveInfo.nextMove.empty()) {
                     string prefix =
                         getStringInBetween(line, R"(<span class="move-san-figurine icon-font-chess )", R"(-)", index);
                     string suffix =
@@ -340,7 +348,8 @@ bool readHtmlFileIfValid(WebPageInfo& pageInfo, string const& htmlFile) {
 void savePageInfoToDataFile(strings const& currentLine, WebPageInfo const& pageInfo, string const& dataFile) {
     ofstream outStream(dataFile, ofstream::app);
     outStream << "Line: [";
-    for (string const& move : currentLine) {        outStream << move << ",";
+    for (string const& move : currentLine) {
+        outStream << move << ",";
     }
     outStream << "]\n";
     outStream << "NameOfLine: [" << pageInfo.nameOfLine << "]\n";
@@ -378,7 +387,8 @@ strings getLineOfMoves(string const& lineFile, int const lineNumber) {
         }
         if (i < lineNumber) {
             fileReader.skipLine();
-            i++;        } else if (i == lineNumber) {
+            i++;
+        } else if (i == lineNumber) {
             string lineString = fileReader.getLineAndIgnoreWhiteSpaces();
             splitToStrings<SplitStringType::WithoutDelimeters>(result, lineString, ",");
             break;
@@ -392,7 +402,8 @@ strings getLineOfMoves(string const& lineFile, int const lineNumber) {
 void saveNewLinesOfMoves(strings const& currentLine, WebPageInfo const& pageInfo, string const& lineFile) {
     ofstream outStream(lineFile, ofstream::app);
     strings lineOfMoves(currentLine);
-    for (MoveInfo const& moveInfo : pageInfo.moveInfos) {        lineOfMoves.emplace_back(moveInfo.nextMove);
+    for (MoveInfo const& moveInfo : pageInfo.moveInfos) {
+        lineOfMoves.emplace_back(moveInfo.nextMove);
 
         ostream_iterator<string> outputIterator(outStream, ",");
         copy(lineOfMoves.cbegin(), lineOfMoves.cend(), outputIterator);
@@ -417,7 +428,8 @@ void doOnePage(strings const& currentLine, Paths const& paths) {
             cout << "Problem in performing moves. Trying to do all the process again." << endl;
             continue;
         }
-        deleteWebPageUntilItsDeleted(paths.htmlFile);        saveWebPageUntilItsDeleted(paths.htmlFile);
+        deleteWebPageUntilItsDeleted(paths.htmlFile);
+        saveWebPageUntilItsDeleted(paths.htmlFile);
 
         isProcessed = readHtmlFileIfValid(pageInfo, paths.htmlFile);
         if (!isProcessed) {
@@ -434,6 +446,7 @@ void doAllPagesRecursively(Paths const& paths) {
 
     clickWindow();
     gotoWebPage(paths.url);
+
     int lineNumber = getLineNumber(paths.lineNumberFile);
     strings currentLine = getLineOfMoves(paths.linesFile, lineNumber);
     bool isFirst(true);
@@ -452,7 +465,8 @@ void doAllPagesRecursively(Paths const& paths) {
     trackKeyPressForDownloadMovesFromChessDotComThread.join();
 }
 
-TEST(DownloadMovesFromChessDotComTest, DISABLED_DoAllPagesRecursivelyWorks) {    // To reinitialize:
+TEST(DownloadMovesFromChessDotComTest, DoAllPagesRecursivelyWorks) {
+    // To reinitialize:
     // ChessDotComMoves should be deleted or empty
     // ChessDotComLines should be deleted or empty
     // ChessDotComLineNumber has to contain 0
@@ -473,4 +487,5 @@ TEST(DownloadMovesFromChessDotComTest, DISABLED_DoAllPagesRecursivelyWorks) {   
 }  // namespace ChessPeek
 
 }  // namespace chess
+
 }  // namespace alba
