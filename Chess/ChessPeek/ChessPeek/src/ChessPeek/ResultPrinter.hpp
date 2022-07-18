@@ -81,11 +81,10 @@ private:
     void printARowOfMovesSequence(MovesSequence const& movesSequence) const;
     void setMovesSequenceOnGrid(DisplayTable& grid, MovesSequence const& movesSequence, int const rowSize) const;
 
-    void printHeadersForMostHumanMoves(NextMoves const& nextMoves, int const startIndex) const;
+    void printHeadersFor2ndTo6thMostHumanMoves(NextMoves const& nextMoves, int const startIndex) const;
     void printHeadersFor4thTo8thBestMoves(NextMoves const& nextMoves, int const startIndex) const;
     void printHeadersForBookMoves(BookMoves const& bookMoves) const;
-    void printHeadersForBestLine(MovesSequence const& movesSequence) const;
-    void printHeadersForMostHumanLine(MovesSequence const& movesSequence) const;
+    void printHeadersForBestLine(MovesSequence const& movesSequence) const;    void printHeadersForMostHumanLine(MovesSequence const& movesSequence) const;
     void printHeaders(stringHelper::strings const& prefixes, stringHelper::strings const& suffixes) const;
     void printHorizontalBorderLine() const;
 

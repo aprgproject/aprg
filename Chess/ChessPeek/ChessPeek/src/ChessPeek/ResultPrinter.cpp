@@ -55,10 +55,12 @@ void ResultPrinter::print() {
 
     if (!movesToPrint.mostHumanMoves.empty()) {
         movesToPrint.mostHumanLine = getMovesSequenceFromNextMove(movesToPrint.mostHumanMoves.front());
+        // remove most human move
+        movesToPrint.mostHumanMoves =
+            NextMoves(movesToPrint.mostHumanMoves.cbegin() + 1, movesToPrint.mostHumanMoves.cend());
     }
 
-    printCalculationDetails(movesToPrint);
-    printMovesGrids(movesToPrint);
+    printCalculationDetails(movesToPrint);    printMovesGrids(movesToPrint);
     cout << "\n\n";
     cout.flush();
 }
@@ -273,11 +275,10 @@ void ResultPrinter::printMovesGrids(MovesToPrint const& movesToPrint) const {
 
     if (!movesToPrint.mostHumanMoves.empty()) {
         printHorizontalBorderLine();
-        printHeadersForMostHumanMoves(movesToPrint.mostHumanMoves, 0);
+        printHeadersFor2ndTo6thMostHumanMoves(movesToPrint.mostHumanMoves, 0);
         printHorizontalBorderLine();
         printARowOfNextMoves(movesToPrint.mostHumanMoves, 0);
-        isSomethingPrinted = true;
-    }
+        isSomethingPrinted = true;    }
 
     if (!movesToPrint.bookMoves.empty()) {
         printHorizontalBorderLine();
@@ -293,21 +294,21 @@ void ResultPrinter::printMovesGrids(MovesToPrint const& movesToPrint) const {
         isSomethingPrinted = true;
     }
 
-    if (isSomethingPrinted) {
-        printHorizontalBorderLine();
-    }
-
     /*if (movesToPrint.calculatedMoves.size() > 3) {
         printHorizontalBorderLine();
         printHeadersFor4thTo8thBestMoves(movesToPrint.calculatedMoves, 3);
         printHorizontalBorderLine();
         printARowOfNextMoves(movesToPrint.calculatedMoves, 3);
         printHorizontalBorderLine();
+        isSomethingPrinted = true;
     }*/
+
+    if (isSomethingPrinted) {
+        printHorizontalBorderLine();
+    }
 }
 
-template <typename GenericMoves>
-void ResultPrinter::printARowOfNextMoves(GenericMoves const& genericMoves, int const startIndex) const {
+template <typename GenericMoves>void ResultPrinter::printARowOfNextMoves(GenericMoves const& genericMoves, int const startIndex) const {
     if (startIndex < static_cast<int>(genericMoves.size())) {
         int rowSize = getRowSizeForFullMoves(static_cast<int>(genericMoves.size()) - startIndex);
         int numberOfBoardDisplayColumns = getNumberOfColumnsOfGrid(rowSize);
@@ -376,16 +377,15 @@ void ResultPrinter::setMovesSequenceOnGrid(
     }
 }
 
-void ResultPrinter::printHeadersForMostHumanMoves(NextMoves const& nextMoves, int const startIndex) const {
+void ResultPrinter::printHeadersFor2ndTo6thMostHumanMoves(NextMoves const& nextMoves, int const startIndex) const {
     int rowSize = getRowSizeForFullMoves(static_cast<int>(nextMoves.size()) - startIndex);
     strings prefixes = getNextMovesString(nextMoves, startIndex);
     strings suffixes{
-        " -> 1st most human move", " -> 2nd most human move", " -> 3rd most human move", " -> 4th most human move",
-        " -> 5th most human move"};
+        " -> 2nd most human move", " -> 3rd most human move", " -> 4th most human move", " -> 5th most human move",
+        " -> 6th most human move"};
     prefixes.resize(min(static_cast<int>(prefixes.size()), rowSize));
     suffixes.resize(min(static_cast<int>(suffixes.size()), rowSize));
-    printHeaders(prefixes, suffixes);
-}
+    printHeaders(prefixes, suffixes);}
 
 void ResultPrinter::printHeadersFor4thTo8thBestMoves(NextMoves const& nextMoves, int const startIndex) const {
     int rowSize = getRowSizeForFullMoves(static_cast<int>(nextMoves.size()) - startIndex);
