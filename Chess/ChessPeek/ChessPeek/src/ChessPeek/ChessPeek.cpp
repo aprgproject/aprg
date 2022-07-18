@@ -3,6 +3,7 @@
 #include <ChessPeek/DatabaseDefinitions.hpp>
 #include <ChessPeek/ResultPrinter.hpp>
 #include <UserAutomation/AlbaLocalUserAutomation.hpp>
+
 #include <atomic>
 #include <thread>
 
@@ -17,6 +18,7 @@ bool shouldStillRun = true;  // USE ESCAPE KEY TO CLEANLY SHUTDOWN
 }  // namespace
 
 namespace alba {
+
 namespace chess {
 
 namespace ChessPeek {
@@ -33,7 +35,8 @@ ChessPeek::ChessPeek()
     : m_configuration(Configuration::Type::ChessDotComVersus),
       m_engineHandler(m_configuration.getChessEnginePath()),
       m_engineController(m_engineHandler, m_configuration.getUciOptionNamesAndValuePairs()),
-      m_detailsFromTheScreen(m_configuration),      m_detailsOnTheEngine(),
+      m_detailsFromTheScreen(m_configuration),
+      m_detailsOnTheEngine(),
       m_book(),
       m_calculationDetails{},
       m_engineWasJustReset(true),
@@ -92,7 +95,8 @@ void ChessPeek::initialize() {
     m_book.loadDatabaseFrom(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     m_engineController.setAdditionalStepsInCalculationMonitoring(
         [&](EngineCalculationDetails const& engineCalculationDetails) {
-            calculationMonitoringCallBackForEngine(engineCalculationDetails);        });
+            calculationMonitoringCallBackForEngine(engineCalculationDetails);
+        });
     m_engineController.initialize();
 }
 

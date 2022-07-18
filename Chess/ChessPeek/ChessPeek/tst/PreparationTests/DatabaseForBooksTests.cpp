@@ -2,7 +2,8 @@
 #include <ChessPeek/DatabaseDefinitions.hpp>
 #include <ChessUtilities/Board/BoardUtilities.hpp>
 #include <ChessUtilities/Board/StreamOperators.hpp>
-#include <Common/File/AlbaFileReader.hpp>#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+#include <Common/File/AlbaFileReader.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <gtest/gtest.h>
@@ -18,7 +19,8 @@ namespace ChessPeek {
 
 TEST(DatabaseForBooksTest, DISABLED_SavingChessDotComDatabaseWorks) {
     constexpr int MIN_NUMBER_OF_GAMES = 0;  // put a restriction if the database gets too large
-    AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);    AlbaLocalPathHandler chessDotComDataFromSite(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_DATA_FROM_SITE);
+    AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
+    AlbaLocalPathHandler chessDotComDataFromSite(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_DATA_FROM_SITE);
     ifstream inStream(chessDotComDataFromSite.getFullPath());
     AlbaFileReader fileReader(inStream);
 
@@ -32,6 +34,7 @@ TEST(DatabaseForBooksTest, DISABLED_SavingChessDotComDatabaseWorks) {
         transformReplaceStringIfFound(nameOfLine, "é", "e");  // for Reti
         int numberOfNextMoves = convertStringToNumber<int>(
             getStringInBetweenTwoStrings(fileReader.getLineAndIgnoreWhiteSpaces(), "NumberOfNextMoves: [", "]"));
+
         Board board(BoardOrientation::BlackUpWhiteDown);
         PieceColor playerColor(PieceColor::White);
         for (string const& initialMoveString : initialMoveStrings) {
@@ -82,6 +85,7 @@ TEST(DatabaseForBooksTest, LoadingDatabaseWorksWithStartingPosition) {
     book.loadDatabaseFrom(chessDotComBookDatabase.getFullPath());
     Board boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
     Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);
+
     book.loadDatabaseFrom(chessDotComBookDatabase.getFullPath());
     auto resultWithBUWD(book.getLine(boardWithBUWD));
     auto resultWithWUBD(book.getLine(boardWithWUBD));
@@ -103,7 +107,8 @@ TEST(DatabaseForBooksTest, LoadingDatabaseWorksWithE4) {
     AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
     Board boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
-    Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);    boardWithBUWD.move(boardWithBUWD.getMoveUsingAlgebraicNotation("e4", PieceColor::White));
+    Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);
+    boardWithBUWD.move(boardWithBUWD.getMoveUsingAlgebraicNotation("e4", PieceColor::White));
     boardWithWUBD.move(boardWithWUBD.getMoveUsingAlgebraicNotation("e4", PieceColor::White));
 
     book.loadDatabaseFrom(chessDotComBookDatabase.getFullPath());
@@ -127,7 +132,8 @@ TEST(DatabaseForBooksTest, LoadingDatabaseWorksWithD4) {
     AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
     Board boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
-    Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);    boardWithBUWD.move(boardWithBUWD.getMoveUsingAlgebraicNotation("d4", PieceColor::White));
+    Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);
+    boardWithBUWD.move(boardWithBUWD.getMoveUsingAlgebraicNotation("d4", PieceColor::White));
     boardWithWUBD.move(boardWithWUBD.getMoveUsingAlgebraicNotation("d4", PieceColor::White));
 
     book.loadDatabaseFrom(chessDotComBookDatabase.getFullPath());
@@ -151,7 +157,8 @@ TEST(DatabaseForBooksTest, LoadingDatabaseWorksWithC4) {
     AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
     Board boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
-    Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);    boardWithBUWD.move(boardWithBUWD.getMoveUsingAlgebraicNotation("c4", PieceColor::White));
+    Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);
+    boardWithBUWD.move(boardWithBUWD.getMoveUsingAlgebraicNotation("c4", PieceColor::White));
     boardWithWUBD.move(boardWithWUBD.getMoveUsingAlgebraicNotation("c4", PieceColor::White));
 
     book.loadDatabaseFrom(chessDotComBookDatabase.getFullPath());
@@ -175,7 +182,8 @@ TEST(DatabaseForBooksTest, LoadingDatabaseWorksWithSicilianDefense) {
     AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
     Board boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
-    Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);    boardWithBUWD.move(boardWithBUWD.getMoveUsingAlgebraicNotation("e4", PieceColor::White));
+    Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);
+    boardWithBUWD.move(boardWithBUWD.getMoveUsingAlgebraicNotation("e4", PieceColor::White));
     boardWithBUWD.move(boardWithBUWD.getMoveUsingAlgebraicNotation("c5", PieceColor::Black));
     boardWithWUBD.move(boardWithWUBD.getMoveUsingAlgebraicNotation("e4", PieceColor::White));
     boardWithWUBD.move(boardWithWUBD.getMoveUsingAlgebraicNotation("c5", PieceColor::Black));

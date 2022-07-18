@@ -3,6 +3,7 @@
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {
@@ -28,7 +29,8 @@ TEST(ResultPrinterTest, PrintWorks) {
     calculationDetails.bestMove = "e2e4";
     ResultPrinter printHelper(calculationDetails, boardWithContext, book);
 
-    printHelper.print();}
+    printHelper.print();
+}
 
 }  // namespace ChessPeek
 

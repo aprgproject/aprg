@@ -127,7 +127,8 @@ int HumanScoreGenerator::getScoreLevelDistance() const {
     } else if (m_bestScore > -200) {
         return SCORE_LEVEL_DISTANCE_WHEN_SLIGHTLY_WORSE;
     } else {
-        return SCORE_LEVEL_DISTANCE_WHEN_LOSING;    }
+        return SCORE_LEVEL_DISTANCE_WHEN_LOSING;
+    }
 }
 
 bool HumanScoreGenerator::isACaptureMove(Piece const pieceAtStart, Piece const pieceAtEnd) const {

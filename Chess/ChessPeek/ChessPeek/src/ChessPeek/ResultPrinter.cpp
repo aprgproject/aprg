@@ -7,7 +7,8 @@
 #include <iomanip>
 #include <iostream>
 
-using namespace alba::mathHelper;using namespace alba::stringHelper;
+using namespace alba::mathHelper;
+using namespace alba::stringHelper;
 using namespace std;
 
 namespace {
@@ -19,6 +20,7 @@ constexpr int DESIRED_HEADER_LENGTH = 31;
 constexpr char SEPARATOR[] = "     ";
 
 static string s_nameOfLine;
+
 void saveNameOfLine(string const& nameOfLine) {
     if (!nameOfLine.empty()) {
         s_nameOfLine = nameOfLine;
@@ -60,6 +62,7 @@ void ResultPrinter::print() {
     cout << "\n\n";
     cout.flush();
 }
+
 void ResultPrinter::initialize() { saveBestAndWorstScores(); }
 
 void ResultPrinter::saveBestAndWorstScores() {
@@ -121,6 +124,7 @@ ResultPrinter::NextMoves ResultPrinter::getNextMovesFromCalculation() const {
     includeNextMovesFromCalculation(result);
     return result;
 }
+
 void ResultPrinter::includeNextMovesFromCalculation(NextMoves& nextMoves) const {
     HumanScoreGenerator scorer(m_engineBoardWithContext, m_bestScore, m_worstScore);
     Board const& engineBoard(m_engineBoardWithContext.getBoard());
@@ -132,7 +136,8 @@ void ResultPrinter::includeNextMovesFromCalculation(NextMoves& nextMoves) const 
                 if (nextMoves.size() > MAX_NUMBER_OF_MOVES_FOR_PRINTING) {
                     break;
                 }
-            }        }
+            }
+        }
     }
 }
 
@@ -143,7 +148,8 @@ void ResultPrinter::humanizeMoves(NextMoves& nextMoves) const {
 
 void ResultPrinter::sortForMoreHumanMoves(NextMoves& nextMoves) const {
     if (!nextMoves.empty()) {
-        stable_sort(nextMoves.begin(), nextMoves.end(), [&](NextMove const& detail1, NextMove const& detail2) {            return detail1.humanScore > detail2.humanScore;
+        stable_sort(nextMoves.begin(), nextMoves.end(), [&](NextMove const& detail1, NextMove const& detail2) {
+            return detail1.humanScore > detail2.humanScore;
         });
     }
 }
@@ -237,7 +243,8 @@ void ResultPrinter::printCalculationDetails(MovesToPrint const& movesToPrint) co
     for (Move const& halfMove : movesToPrint.bestLine.halfMoves) {
         Piece piece = updatedBoard.getPieceAt(halfMove.first);
         cout << updatedBoard.getReadableStringOfMove(halfMove);
-        cout << " by " << piece.getColor() << ", ";        updatedBoard.move(halfMove);
+        cout << " by " << piece.getColor() << ", ";
+        updatedBoard.move(halfMove);
     }
     cout << "\n";
 
@@ -311,7 +318,8 @@ void ResultPrinter::printARowOfNextMoves(GenericMoves const& genericMoves, int c
         for (int xOffset = 0; xOffset < numberOfBoardDisplayColumns; xOffset += NEXT_OFFSET_OF_GRID) {
             setBoardOnGrid(grid, engineBoard, xOffset);
         }
-        setNextMovesOnGrid(grid, genericMoves, startIndex, rowSize);        cout << grid;
+        setNextMovesOnGrid(grid, genericMoves, startIndex, rowSize);
+        cout << grid;
     }
 }
 
@@ -439,7 +447,8 @@ void ResultPrinter::printHeaders(strings const& prefixes, strings const& suffixe
     }
 }
 
-void ResultPrinter::printHorizontalBorderLine() const {    cout << "----------------------------------------------------------------------------------------------------------"
+void ResultPrinter::printHorizontalBorderLine() const {
+    cout << "----------------------------------------------------------------------------------------------------------"
             "-------------------------------------------------------------------------------\n";
 }
 
@@ -527,7 +536,8 @@ string ResultPrinter::getDisplayableStringForABoardCell(
     Piece const& piece, int const moveNumber, optional<char> const& firstChar) const {
     string result(3, ' ');
     if (moveNumber != 0) {
-        char moveNumberCharacter = '0' + static_cast<char>(moveNumber);        if (firstChar) {
+        char moveNumberCharacter = '0' + static_cast<char>(moveNumber);
+        if (firstChar) {
             result[0] = firstChar.value();
         } else {
             result[0] = moveNumberCharacter;
@@ -541,7 +551,8 @@ string ResultPrinter::getDisplayableStringForABoardCell(
 optional<char> ResultPrinter::getFirstCharOfABoardCell(bool const isSurePreMove, bool isUnsurePreMove) const {
     optional<char> result;
     if (isSurePreMove) {
-        result = '*';    } else if (isUnsurePreMove) {
+        result = '*';
+    } else if (isUnsurePreMove) {
         result = '~';
     }
     return result;
@@ -560,6 +571,7 @@ int ResultPrinter::getRowSizeForFullMoves(int const numberOfFullMoves) const {
 }
 
 }  // namespace ChessPeek
+
 }  // namespace chess
 
 }  // namespace alba
