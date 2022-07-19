@@ -2,7 +2,8 @@
 #include <ChessPeek/DatabaseDefinitions.hpp>
 #include <ChessPeek/DetailsFromTheScreen.hpp>
 #include <ChessUtilities/Board/Board.hpp>
-#include <ChessUtilities/Board/BoardUtilities.hpp>#include <ChessUtilities/Board/StreamOperators.hpp>
+#include <ChessUtilities/Board/BoardUtilities.hpp>
+#include <ChessUtilities/Board/StreamOperators.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/PathHandler/AlbaWebPathHandler.hpp>
@@ -349,7 +350,8 @@ bool readHtmlFileIfValid(WebPageInfo& pageInfo, string const& htmlFile) {
 void savePageInfoToDataFile(strings const& currentLine, string const& dataFile, WebPageInfo const& pageInfo) {
     ofstream outStream(dataFile, ofstream::app);
     outStream << "Line: [";
-    for (string const& move : currentLine) {        outStream << move << ",";
+    for (string const& move : currentLine) {
+        outStream << move << ",";
     }
     outStream << "]\n";
     outStream << "NameOfLine: [" << pageInfo.nameOfLine << "]\n";
@@ -461,7 +463,8 @@ bool shouldIncludeLine(strings const& currentLine, Book const& book) {
     return true;
 }
 
-void doOnePage(strings const& currentLine, Paths const& paths) {    WebPageInfo pageInfo;
+void doOnePage(strings const& currentLine, Paths const& paths) {
+    WebPageInfo pageInfo;
 
     bool isProcessed(false);
     while (!isProcessed) {
@@ -512,7 +515,8 @@ void doAllPagesRecursively(Paths const& paths) {
         }
         lineNumber++;
         setLineNumber(paths.lineNumberFile, lineNumber);
-        currentLine = getLineOfMoves(paths.linesFile, lineNumber);    }
+        currentLine = getLineOfMoves(paths.linesFile, lineNumber);
+    }
 
     trackKeyPressForDownloadMovesFromChessDotComThread.join();
 }
@@ -520,7 +524,8 @@ void doAllPagesRecursively(Paths const& paths) {
 TEST(DownloadMovesFromChessDotComTest, DISABLED_DoAllPagesRecursivelyWorks) {
     // To reinitialize:
     // ChessDotComMoves should be deleted or empty
-    // ChessDotComLines should be deleted or empty    // ChessDotComLineNumber has to contain 0
+    // ChessDotComLines should be deleted or empty
+    // ChessDotComLineNumber has to contain 0
 
     AlbaWebPathHandler explorerUrl(R"(https://www.chess.com/explorer)");
     AlbaLocalPathHandler tempHtmlFile(APRG_DIR R"(\Chess\ChessPeek\Files\ChessDotComAutomation\temp.html)");
