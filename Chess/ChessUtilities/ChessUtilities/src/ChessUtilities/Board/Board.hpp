@@ -1,10 +1,10 @@
 #pragma once
 
 #include <ChessUtilities/Board/BoardTypes.hpp>
+#include <ChessUtilities/Board/Exchange.hpp>
 #include <ChessUtilities/Board/Piece.hpp>
 
-#include <array>
-#include <cstdint>
+#include <array>#include <cstdint>
 #include <functional>
 #include <optional>
 #include <vector>
@@ -58,12 +58,10 @@ public:
     Move getMoveUsingAlgebraicNotation(std::string const& text, PieceColor const moveColor) const;
     Coordinate getCoordinateFromAlgebraicNotation(std::string const& text) const;
     Piece getPieceAt(Coordinate const& coordinate) const;
-    int getExchangeValueAt(Coordinate const& coordinate) const;
-    int getTotalHangingPieceValue(PieceColor const pieceColor) const;
+    Exchange getExchangeAt(Coordinate const& coordinate) const;
 
     std::string getAlgebraicNotationOfCoordinate(Coordinate const& coordinate) const;
-    std::string getReadableStringOfMove(Move const& move) const;
-    std::string getNotationPartOfFenString() const;
+    std::string getReadableStringOfMove(Move const& move) const;    std::string getNotationPartOfFenString() const;
     std::string getCastlingPartOfFenString() const;
 
     bool isEmptyAt(Coordinate const& coordinate) const;
