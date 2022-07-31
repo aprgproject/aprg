@@ -95,7 +95,8 @@ Shell and scripting
 -----> chmod +x hello.sh
 ---> echo - prints the arguments that you give it
 ---> pwd - prints "present working directory"
------> Arguments are separated by white space, you can use quotations to group them together with whitespace---> find - find strings in your directory
+-----> Arguments are separated by white space, you can use quotations to group them together with whitespace
+---> find - find strings in your directory
 -----> find . -name src - type d (searches directory with name src) 
 -----> find . -path '**/test/*.py' - type f (searches python scripts in next sub directory test)
 -----> find . -mtime -1 (searches files that has been modified in the last day)
@@ -621,7 +622,8 @@ Command line environment
 
 -> Aliases
 ---> Create an alias for a command.
----> You can do this:-----> alias l2="ls -l"
+---> You can do this:
+-----> alias l2="ls -l"
 -----> l2
 ---> You can shorten git status:
 -----> alias gs="git status"
@@ -697,7 +699,8 @@ Command line environment
 ---------> A soft link isn't a separate file, it points to the name of the original file, rather than to a spot on the hard drive.
 -----> ll ~/.bashrc // list and show the links on the current directory
 -----> // You can also create an install script (filename: install):
------> // touch install-----> // chmod +x install
+-----> // touch install
+-----> // chmod +x install
 --> Bash install script (filename: install):
 ---> #!/usr/bin/env bash
 ---> BASEDIR=$(dirname $0)
