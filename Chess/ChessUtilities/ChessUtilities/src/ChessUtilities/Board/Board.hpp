@@ -112,10 +112,11 @@ private:
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
     void retrievePawnReverseCapturesToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
+    void retrievePawnEnPassantReverseToThis(
+        Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
     void retrieveAllNonPawnMovesToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
-    void retrieveKnightMovesToThis(
-        Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
+    void retrieveKnightMovesToThis(        Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
     void retrieveDiagonalMovesToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
     void retrieveStraightMovesToThis(
@@ -172,10 +173,10 @@ private:
     bool isPossibleKingCastlingMove(Move const& kingMove) const;
     bool isAPawnNonCaptureMove(Move const& move) const;
     bool isAPawnCapture(Move const& move) const;
+    bool isAPawnEnPassantMove(Move const& move) const;
     bool isADiagonalMove(Move const& move) const;
     bool isAStraightMove(Move const& move) const;
-    bool isAnLMove(Move const& move) const;
-    bool isAOneStepMove(Move const& move) const;
+    bool isAnLMove(Move const& move) const;    bool isAOneStepMove(Move const& move) const;
     bool isCastlingPossible(Move const& kingMove, Move const& rookMove) const;
     bool isEndpointEmptyOrHaveDifferentColors(Move const& move) const;
     bool isThereNoPieceInBetween(Move const& move) const;
