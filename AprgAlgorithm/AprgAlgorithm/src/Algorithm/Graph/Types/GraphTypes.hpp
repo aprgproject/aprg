@@ -1,10 +1,10 @@
 #pragma once
 
 #include <deque>
+#include <list>
 #include <map>
 #include <set>
 #include <vector>
-
 namespace alba {
 
 namespace algorithm {
@@ -16,10 +16,10 @@ struct GraphTypes {
     // Vertex
     using Vertices = std::vector<Vertex>;
     using DequeOfVertices = std::deque<Vertex>;
+    using ListOfVertices = std::list<Vertex>;
     using SetOfVertices = std::set<Vertex>;
 
-    // Edge
-    using Edge = std::pair<Vertex, Vertex>;
+    // Edge    using Edge = std::pair<Vertex, Vertex>;
     using Edges = std::vector<Edge>;
     using DequeOfEdges = std::deque<Edge>;
     using SetOfEdges = std::set<Edge>;

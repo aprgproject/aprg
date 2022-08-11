@@ -19,11 +19,10 @@ public:
 
     UndirectedGraphWithListOfEdges() : m_numberOfEdges(0U), m_edges{} {}
 
-    bool isEmpty() const { return m_edges.empty(); }
+    bool isEmpty() const override { return m_edges.empty(); }
 
     bool hasAnyConnection(Vertex const& vertex) const override {
-        bool result(false);
-        auto itLower = m_edges.lower_bound({vertex, Vertex{}});
+        bool result(false);        auto itLower = m_edges.lower_bound({vertex, Vertex{}});
         if (itLower != m_edges.cend()) {
             result = itLower->first == vertex;
         }
