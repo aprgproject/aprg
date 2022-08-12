@@ -51,15 +51,14 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorks_AsUniforml
     int numberOfRandomValues(maximumValue - minimumValue + 1);
     int const iterations(1000);
     int const allowedDeviationCount(iterations / 10);
-    vector<int> hitsForEachValue(static_cast<unsigned long long>(numberOfRandomValues), 0);
+    vector<int> hitsForEachValue(numberOfRandomValues, 0);
 
     for (int i = 0; i < iterations; i++) {
         auto randomValue(randomizer.getRandomValue());
-        hitsForEachValue[static_cast<unsigned long long>(randomValue)]++;
+        hitsForEachValue[randomValue]++;
     }
 
-    ASSERT_FALSE(hitsForEachValue.empty());
-    auto&& [minIterator, maxIterator] = std::minmax_element(hitsForEachValue.cbegin(), hitsForEachValue.cend());
+    ASSERT_FALSE(hitsForEachValue.empty());    auto&& [minIterator, maxIterator] = std::minmax_element(hitsForEachValue.cbegin(), hitsForEachValue.cend());
     int deviationCount(*maxIterator - *minIterator);
     EXPECT_LT(deviationCount, allowedDeviationCount);
 }
@@ -104,11 +103,10 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomFloatingValueWorks_AsUn
 
     for (int i = 0; i < iterations; i++) {
         auto randomValue(randomizer.getRandomValue());
-        hitsForEachValue[static_cast<unsigned long long>(randomValue)]++;
+        hitsForEachValue[randomValue]++;
     }
 
-    ASSERT_FALSE(hitsForEachValue.empty());
-    auto&& [minIterator, maxIterator] = std::minmax_element(hitsForEachValue.cbegin(), hitsForEachValue.cend());
+    ASSERT_FALSE(hitsForEachValue.empty());    auto&& [minIterator, maxIterator] = std::minmax_element(hitsForEachValue.cbegin(), hitsForEachValue.cend());
     int deviationCount(*maxIterator - *minIterator);
     EXPECT_LT(deviationCount, allowedDeviationCount);
 }
