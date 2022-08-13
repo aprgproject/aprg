@@ -36,10 +36,9 @@ TEST(LabelForPointsTest, GetLabelWorks) {
     LabelForPoints labelForPixels;
     labelForPixels.setLabel(BitmapXY(12, 34), 0x123456U);
 
-    EXPECT_EQ(0x123456U, labelForPixels.getLabel(BitmapXY(12, 34)));
+    EXPECT_EQ(0x123456, labelForPixels.getLabel(BitmapXY(12, 34)));
     EXPECT_EQ(INITIAL_LABEL_VALUE, labelForPixels.getLabel(BitmapXY(56, 78)));
 }
-
 TEST(LabelForPointsTest, GetPixelsToLabelsWorks) {
     LabelForPoints labelForPixels;
     labelForPixels.setLabel(BitmapXY(12, 34), 0x123456U);
@@ -49,11 +48,10 @@ TEST(LabelForPointsTest, GetPixelsToLabelsWorks) {
     ASSERT_EQ(1U, pixelsToLabels.size());
     LabelForPoints::PixelAndLabelPair const& pairToVerify(*pixelsToLabels.cbegin());
     EXPECT_EQ(BitmapXY(12, 34), pairToVerify.first);
-    EXPECT_EQ(0x123456U, pairToVerify.second);
+    EXPECT_EQ(0x123456, pairToVerify.second);
 }
 
-TEST(LabelForPointsTest, SetLabelWorks) {
-    LabelForPoints labelForPixels;
+TEST(LabelForPointsTest, SetLabelWorks) {    LabelForPoints labelForPixels;
 
     labelForPixels.setLabel(BitmapXY(12, 34), 0x123456U);
 
@@ -61,9 +59,8 @@ TEST(LabelForPointsTest, SetLabelWorks) {
     ASSERT_EQ(1U, pixelsToLabels.size());
     LabelForPoints::PixelAndLabelPair const& pairToVerify(*pixelsToLabels.cbegin());
     EXPECT_EQ(BitmapXY(12, 34), pairToVerify.first);
-    EXPECT_EQ(0x123456U, pairToVerify.second);
+    EXPECT_EQ(0x123456, pairToVerify.second);
 }
 
 }  // namespace AprgBitmap
-
 }  // namespace alba
