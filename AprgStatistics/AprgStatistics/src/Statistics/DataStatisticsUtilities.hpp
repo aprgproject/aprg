@@ -7,11 +7,10 @@
 
 namespace alba {
 
-template <unsigned int DIMENSIONS>
+template <int DIMENSIONS>
 class DataStatisticsUtilities {
 public:
-    using Sample = DataSample<DIMENSIONS>;
-    using Samples = std::vector<Sample>;
+    using Sample = DataSample<DIMENSIONS>;    using Samples = std::vector<Sample>;
 
     static Sample calculateSum(Samples const& samples) {
         return (Sample)std::accumulate(samples.begin(), samples.end(), Sample(), std::plus<Sample>());
