@@ -11,11 +11,10 @@ class UciInterpreter {
 public:
     struct InfoDetails {
         stringHelper::StringPairs commonParameterNameAndValue;
-        unsigned int multipv;
+        int multipv;
         stringHelper::strings pvHalfMoves;
         int scoreInCentipawns;
-        int mateValue;  // number of mate moves, can be negative if player is about to be mated
-    };
+        int mateValue;  // number of mate moves, can be negative if player is about to be mated    };
 
     UciInterpreter(CalculationDetails& calculationDetails);
 

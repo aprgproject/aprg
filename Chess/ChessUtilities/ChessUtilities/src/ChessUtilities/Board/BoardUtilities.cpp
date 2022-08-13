@@ -164,11 +164,10 @@ char convertToFenCharacter(PieceType const pieceType, PieceColor const pieceColo
 
 string constructFenString(
     Board const& board, PieceColor const colorToMove, string const& castlingAvailability, string const& enPassantTarget,
-    unsigned int const halfMoveClock, unsigned int const fullMoveNumber) {
+    int const halfMoveClock, int const fullMoveNumber) {
     // Source: https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
     stringstream ss;
-    ss << board.getNotationPartOfFenString() << " ";
-    if (PieceColor::White == colorToMove) {
+    ss << board.getNotationPartOfFenString() << " ";    if (PieceColor::White == colorToMove) {
         ss << "w ";
     } else if (PieceColor::Black == colorToMove) {
         ss << "b ";
