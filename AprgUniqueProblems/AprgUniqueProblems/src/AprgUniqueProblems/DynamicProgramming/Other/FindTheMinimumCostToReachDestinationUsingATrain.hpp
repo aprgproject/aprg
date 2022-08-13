@@ -9,12 +9,11 @@ namespace alba {
 
 class FindTheMinimumCostToReachDestinationUsingATrain {
 public:
-    using Index = unsigned int;
-    using Value = unsigned int;
+    using Index = int;
+    using Value = int;
     using Values = std::vector<Value>;
     using ValueMatrix = matrix::AlbaMatrix<Value>;
-    static constexpr Value UNUSED_VALUE = std::numeric_limits<Value>::max();
-    static constexpr Value MAX_VALUE = UNUSED_VALUE - 1;
+    static constexpr Value UNUSED_VALUE = std::numeric_limits<Value>::max();    static constexpr Value MAX_VALUE = UNUSED_VALUE - 1;
 
     FindTheMinimumCostToReachDestinationUsingATrain(ValueMatrix const& prices);
 

@@ -9,12 +9,11 @@ namespace alba {
 
 class CountPossibleWaysToConstructBuildings {
 public:
-    using Count = unsigned int;
-    using Index = unsigned int;
+    using Count = int;
+    using Index = int;
     static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
 
     CountPossibleWaysToConstructBuildings(Count const numberOfSections);
-
     Count getNumberOfWaysUsingCountOfBuildingAndSpaces() const;
     Count getNumberOfWaysUsingFibonacciNumber() const;
     Count getNumberOfWaysUsingCombinations() const;

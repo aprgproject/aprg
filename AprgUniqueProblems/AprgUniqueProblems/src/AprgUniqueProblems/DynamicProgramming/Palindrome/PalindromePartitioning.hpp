@@ -9,12 +9,11 @@ namespace alba {
 
 class PalindromePartitioning {
 public:
-    using Index = unsigned int;
-    using Count = unsigned int;
+    using Index = int;
+    using Count = int;
     using Counts = std::vector<Count>;
     using CountMatrix = matrix::AlbaMatrix<Count>;
-    using BoolMatrix = matrix::AlbaMatrix<bool>;
-    static constexpr Count MAX_COUNT = std::numeric_limits<Count>::max();
+    using BoolMatrix = matrix::AlbaMatrix<bool>;    static constexpr Count MAX_COUNT = std::numeric_limits<Count>::max();
 
     PalindromePartitioning(std::string const& stringParameter);
 

@@ -8,11 +8,10 @@ namespace alba {
 
 class MaximumSubMatrixSum {
 public:
-    using Index = unsigned int;
+    using Index = int;
     using Value = int;
     struct SubArrayDetails {
-        Index left;
-        Index right;
+        Index left;        Index right;
         Index up;
         Index down;
         Value sum;

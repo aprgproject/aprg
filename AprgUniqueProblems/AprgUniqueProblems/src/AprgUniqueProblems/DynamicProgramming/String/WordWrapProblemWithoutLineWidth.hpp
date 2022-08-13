@@ -9,12 +9,11 @@ namespace alba {
 
 class WordWrapProblemWithoutLineWidth {
 public:
-    using Index = unsigned int;
-    using Cost = unsigned int;
+    using Index = int;
+    using Cost = int;
     using Indices = std::vector<Index>;
     using Costs = std::vector<Cost>;
-    struct RecursionDetails {
-        Index maxLength;
+    struct RecursionDetails {        Index maxLength;
         Indices lengths;
     };
     static constexpr Cost MAX_COST = std::numeric_limits<Cost>::max();

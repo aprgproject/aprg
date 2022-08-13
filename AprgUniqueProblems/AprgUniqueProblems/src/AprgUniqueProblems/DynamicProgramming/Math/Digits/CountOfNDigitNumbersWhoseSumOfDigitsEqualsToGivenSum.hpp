@@ -8,12 +8,11 @@ namespace alba {
 
 class CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum {
 public:
-    using Count = unsigned int;
-    using Value = unsigned int;
+    using Count = int;
+    using Value = int;
     using Counts = std::vector<Count>;
     using CountMatrix = matrix::AlbaMatrix<Count>;
     static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
-
     CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum(Count const numberOfDigits, Value const sumOfDigits);
 
     Count getCountUsingNaiveRecursion() const;

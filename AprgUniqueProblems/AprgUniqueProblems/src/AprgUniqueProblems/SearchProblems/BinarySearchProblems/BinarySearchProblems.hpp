@@ -10,12 +10,11 @@ namespace algorithm {
 template <typename Values>
 class BinarySearchProblems {
 public:
-    using Count = unsigned int;
-    using Index = unsigned int;
+    using Count = int;
+    using Index = int;
     using Value = typename Values::value_type;
 
     BinarySearchProblems() = default;
-
     Value getNearestFloor(Values const& sortedValues, Value const& valueToCheck) {
         // Problem Statement:
         // Given an array of N distinct integers, find floor value of input ‘key’.
@@ -79,11 +78,10 @@ public:
         // At every iteration we check for search space size, if it is 1, we are done.
 
         Index result(getInvalidIndex<Index>());
-        Index lowerIndex(0U), higherIndex(sortedValues.size() - 1);
+        Index lowerIndex(0), higherIndex(sortedValues.size() - 1);
         if (sortedValues.at(lowerIndex) <= sortedValues.at(higherIndex)) {
             result = lowerIndex;
-        } else {
-            while (lowerIndex <= higherIndex) {
+        } else {            while (lowerIndex <= higherIndex) {
                 if (lowerIndex == higherIndex) {
                     result = lowerIndex;
                     break;
@@ -102,12 +100,11 @@ public:
 private:
     Index getNearestFloorIndex(Values const& sortedValues, Value const& value) const {
         // Similar to nearest value binary search
-        Index lowerIndex(0U), higherIndex(sortedValues.size() - 1);
-        while (lowerIndex + 1U < higherIndex) {
+        Index lowerIndex(0), higherIndex(sortedValues.size() - 1);
+        while (lowerIndex + 1 < higherIndex) {
             Index middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
             Value middleValue(sortedValues.at(middleIndex));
-            if (middleValue <= value) {
-                lowerIndex = middleIndex;
+            if (middleValue <= value) {                lowerIndex = middleIndex;
             } else {
                 higherIndex = middleIndex;
             }
@@ -117,12 +114,11 @@ private:
 
     Index getNearestCielIndex(Values const& sortedValues, Value const& value) const {
         // Similar to nearest value binary search
-        Index lowerIndex(0U), higherIndex(sortedValues.size() - 1);
-        while (lowerIndex + 1U < higherIndex) {
+        Index lowerIndex(0), higherIndex(sortedValues.size() - 1);
+        while (lowerIndex + 1 < higherIndex) {
             Index middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
             Value middleValue(sortedValues.at(middleIndex));
-            if (value <= middleValue) {
-                higherIndex = middleIndex;
+            if (value <= middleValue) {                higherIndex = middleIndex;
             } else {
                 lowerIndex = middleIndex;
             }

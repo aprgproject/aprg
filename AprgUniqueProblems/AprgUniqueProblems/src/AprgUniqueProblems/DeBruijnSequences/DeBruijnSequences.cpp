@@ -7,11 +7,10 @@ using namespace std;
 
 namespace alba {
 
-DeBruijnSequences::DeBruijnSequences(unsigned int const substringSize, string const& alphabet)
+DeBruijnSequences::DeBruijnSequences(int const substringSize, string const& alphabet)
     : m_substringSize(substringSize), m_alphabet(alphabet) {
     initialize();
 }
-
 string DeBruijnSequences::getDeBruijnString() const {
     string result;
     if (m_substringSize == 1) {
@@ -37,14 +36,13 @@ void DeBruijnSequences::initialize() {
 
 void DeBruijnSequences::addAllSubstringsAsVertex() {
     string substring(m_substringSize - 1, m_alphabet.front());
-    addSubstringAsVertex(0U, substring);
+    addSubstringAsVertex(0, substring);
 }
 
-void DeBruijnSequences::addSubstringAsVertex(unsigned int const depth, string const& substring) {
+void DeBruijnSequences::addSubstringAsVertex(int const depth, string const& substring) {
     if (depth < m_substringSize) {
         for (char const c : m_alphabet) {
-            string newSubstring = substring.substr(1, substring.length()) + c;
-            addSubstringAsVertex(depth + 1, newSubstring);
+            string newSubstring = substring.substr(1, substring.length()) + c;            addSubstringAsVertex(depth + 1, newSubstring);
             m_graph.connect(substring, newSubstring);
         }
     }

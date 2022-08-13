@@ -8,12 +8,11 @@ namespace alba {
 
 class LevenshteinDistance {
 public:
-    using Index = unsigned int;
-    using Count = unsigned int;
+    using Index = int;
+    using Count = int;
     using Counts = std::vector<Count>;
     using CountGrid = matrix::AlbaMatrix<Count>;
     static constexpr Index UNUSED_INDEX = std::numeric_limits<Index>::max();
-
     LevenshteinDistance(std::string const& string1, std::string const& string2);
 
     Count getLevenshteinDistanceUsingNaiveRecursion() const;

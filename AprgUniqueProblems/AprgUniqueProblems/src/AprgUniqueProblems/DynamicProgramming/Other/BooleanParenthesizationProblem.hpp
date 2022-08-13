@@ -9,12 +9,11 @@ namespace alba {
 
 class BooleanParenthesizationProblem {
 public:
-    using Count = unsigned int;
-    using Index = unsigned int;
+    using Count = int;
+    using Index = int;
     using Operator = char;
     using Booleans = std::vector<bool>;
-    using Operators = std::vector<char>;
-    using CountMatrix = matrix::AlbaMatrix<Count>;
+    using Operators = std::vector<char>;    using CountMatrix = matrix::AlbaMatrix<Count>;
     using CountMatrices = std::vector<CountMatrix>;
     static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
 

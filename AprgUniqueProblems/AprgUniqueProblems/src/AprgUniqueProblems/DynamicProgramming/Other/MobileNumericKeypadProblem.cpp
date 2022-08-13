@@ -99,11 +99,10 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingItera
 
     Count result(0);
     if (m_length > 0) {
-        vector<Counts> previousAndCurrentCounts(2, NumpadValues(10U, 1U));
+        vector<Counts> previousAndCurrentCounts(2, NumpadValues(10, 1));
         for (Count lengthMinus1 = 1; lengthMinus1 < m_length; lengthMinus1++) {
             Counts& previousCounts(previousAndCurrentCounts[(lengthMinus1 - 1) % 2]);
             Counts& currentCounts(previousAndCurrentCounts[lengthMinus1 % 2]);
-
             currentCounts[0] = previousCounts.at(0) + previousCounts.at(8);
             currentCounts[1] = previousCounts.at(1) + previousCounts.at(2) + previousCounts.at(4);
             currentCounts[2] =

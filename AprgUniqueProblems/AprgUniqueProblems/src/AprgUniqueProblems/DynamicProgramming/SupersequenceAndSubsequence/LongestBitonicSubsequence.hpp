@@ -7,11 +7,10 @@ namespace alba {
 
 class LongestBitonicSubsequence {
 public:
-    using Index = unsigned int;
-    using Value = unsigned int;
+    using Index = int;
+    using Value = int;
     using Values = std::vector<Value>;
     using IndexToIndex = std::vector<Index>;
-
     LongestBitonicSubsequence(Values const& sequence);
 
     Index getLongestLength() const;
