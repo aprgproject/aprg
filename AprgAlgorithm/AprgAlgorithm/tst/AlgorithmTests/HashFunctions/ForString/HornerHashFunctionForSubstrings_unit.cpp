@@ -9,11 +9,10 @@ namespace alba {
 namespace algorithm {
 
 namespace {
-using HashValue = unsigned long long;
+using HashValue = uint64_t;
 using HashFunctionForTest = HornerHashFunctionForSubstrings<HashValue>;
 constexpr HashValue RADIX = 256;
-constexpr HashValue A_LARGE_PRIME = 1229952067;
-}  // namespace
+constexpr HashValue A_LARGE_PRIME = 1229952067;}  // namespace
 
 TEST(HornerHashFunctionForSubstringsTest, Example1Works) {
     HashFunctionForTest hashFunction(RADIX, A_LARGE_PRIME, "ALLEY");

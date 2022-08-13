@@ -12,10 +12,9 @@ namespace algorithm {
 
 namespace {
 using Index = int;
-using HashValue = unsigned long long;
+using HashValue = uint64_t;
 using SubstringSearchForTest = RabinKarpSubstringSearchWithRunningHash<Index, HashValue>;
 }  // namespace
-
 TEST(RabinKarpSubstringSearchWithRunningHashTest, SearchWorksUsingEmptyStringsAndDoesNotCrash) {
     testSearchUsingEmptyStringsAndDoesNotCrash<SubstringSearchForTest, Index>();
 }
