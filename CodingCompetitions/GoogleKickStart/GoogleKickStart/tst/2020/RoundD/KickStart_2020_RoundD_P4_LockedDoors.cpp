@@ -49,11 +49,10 @@ struct UnionFind {
     long long count() const { return num; }
 };
 
-void runTestCase(unsigned int const testCaseNumber) {
+void runTestCase(int const testCaseNumber) {
     long long n, q;
     my_cin >> n >> q;
-    vector<long long> ds(n - 1);
-    for (long long i = 0; i < n - 1; i++) my_cin >> ds[i];
+    vector<long long> ds(n - 1);    for (long long i = 0; i < n - 1; i++) my_cin >> ds[i];
 
     vector<long long> ss(q), ks(q);
     for (long long i = 0; i < q; i++) my_cin >> ss[i] >> ks[i], ss[i]--;
@@ -131,13 +130,12 @@ void runTestCase(unsigned int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    unsigned int numberOfTestCases;
+    int numberOfTestCases;
     my_cin >> numberOfTestCases;
-    for (unsigned int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);
     }
 }
-
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

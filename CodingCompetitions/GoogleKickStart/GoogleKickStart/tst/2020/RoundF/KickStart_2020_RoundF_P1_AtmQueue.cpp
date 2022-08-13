@@ -27,11 +27,10 @@ namespace KickStart_2020_RoundF_P1_AtmQueue {
 #define my_cin cin
 #endif
 
-void runTestCase(unsigned int const testCaseNumber) {
+void runTestCase(int const testCaseNumber) {
     int n, x;
     my_cin >> n >> x;
-    vector<int> a(n);
-    for (int i = 0; i < n; i++) my_cin >> a[i];
+    vector<int> a(n);    for (int i = 0; i < n; i++) my_cin >> a[i];
     vector<pair<int, int> > q;
     for (int i = 0; i < n; i++) {
         q.push_back({(a[i] + x - 1) / x, i});
@@ -45,13 +44,12 @@ void runTestCase(unsigned int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    unsigned int numberOfTestCases;
+    int numberOfTestCases;
     my_cin >> numberOfTestCases;
-    for (unsigned int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);
     }
 }
-
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

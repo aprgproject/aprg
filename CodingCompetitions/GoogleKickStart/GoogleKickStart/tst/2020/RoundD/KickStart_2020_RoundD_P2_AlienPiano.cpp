@@ -31,11 +31,10 @@ namespace KickStart_2020_RoundD_P2_AlienPiano {
 int signum(int a) { return (a > 0) - (a < 0); }
 int compare(int a, int b) { return signum(a - b); }
 
-void runTestCase(unsigned int const testCaseNumber) {
+void runTestCase(int const testCaseNumber) {
     int N;
     my_cin >> N;
-    vector<int> A(N);
-    for (int i = 0; i < N; i++) my_cin >> A[i];
+    vector<int> A(N);    for (int i = 0; i < N; i++) my_cin >> A[i];
     array<int, 4> dp{0, 0, 0, 0};
     for (int i = 1; i < N; i++) {
         array<int, 4> ndp{N + 1, N + 1, N + 1, N + 1};
@@ -53,13 +52,12 @@ void runTestCase(unsigned int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    unsigned int numberOfTestCases;
+    int numberOfTestCases;
     my_cin >> numberOfTestCases;
-    for (unsigned int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);
     }
 }
-
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

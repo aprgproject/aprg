@@ -30,11 +30,10 @@ namespace KickStart_2020_RoundB_P4_WanderingRobot {
 
 vector<long double> logFact(int(3.1e5));
 
-void runTestCase(unsigned int const testCaseNumber) {
+void runTestCase(int const testCaseNumber) {
     int X, Y;
     my_cin >> X >> Y;
-    int Xlo, Xhi, Ylo, Yhi;
-    my_cin >> Xlo >> Ylo >> Xhi >> Yhi;
+    int Xlo, Xhi, Ylo, Yhi;    my_cin >> Xlo >> Ylo >> Xhi >> Yhi;
 
     auto probPath = [&](int r, int c) -> long double {
         return exp(logFact[r + c] - logFact[r] - logFact[c] - (r + c) * log(2.L));
@@ -75,13 +74,12 @@ void runAllTestCases() {
         logFact[i] = logFact[i - 1] + log((long double)(i));
     }
 
-    unsigned int numberOfTestCases;
+    int numberOfTestCases;
     my_cin >> numberOfTestCases;
-    for (unsigned int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);
     }
 }
-
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

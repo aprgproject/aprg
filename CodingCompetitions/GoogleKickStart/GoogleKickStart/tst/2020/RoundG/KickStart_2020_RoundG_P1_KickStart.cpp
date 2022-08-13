@@ -27,11 +27,10 @@ namespace KickStart_2020_RoundG_P1_KickStart {
 #define my_cin cin
 #endif
 
-void runTestCase(unsigned int const testCaseNumber) {
+void runTestCase(int const testCaseNumber) {
     string s;
     my_cin >> s;
-    int n = s.length();
-    vector<int> pref(n);
+    int n = s.length();    vector<int> pref(n);
     for (int i = 0; i + 3 < n; ++i) {
         if (i > 0) {
             pref[i] += pref[i - 1];
@@ -51,13 +50,12 @@ void runTestCase(unsigned int const testCaseNumber) {
 }
 
 void runAllTestCases() {
-    unsigned int numberOfTestCases;
+    int numberOfTestCases;
     my_cin >> numberOfTestCases;
-    for (unsigned int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);
     }
 }
-
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

@@ -27,11 +27,10 @@ namespace KickStart_2019_PracticeRound_P2_Mural {
 #define my_cin cin
 #endif
 
-void runTestCase(unsigned int const testCaseNumber) {
+void runTestCase(int const testCaseNumber) {
     int numberOfSections;
     my_cin >> numberOfSections;
-    string scoresString;
-    my_cin >> scoresString;
+    string scoresString;    my_cin >> scoresString;
 
     vector<int> scores(numberOfSections, 0);
     for (int i = 0; i < min(numberOfSections, static_cast<int>(scoresString.length())); i++) {
@@ -56,11 +55,10 @@ void runTestCase(unsigned int const testCaseNumber) {
 
 /*
 Implementation of top scorer:
-void runTestCase(unsigned int const testCaseNumber)
+void runTestCase(int const testCaseNumber)
 {
     int N;
-    my_cin >> N;
-    string s;
+    my_cin >> N;    string s;
     my_cin >> s;
     vector<int> b(N+1, 0);
     for(int i = 0; i < N; ++i) b[i+1] = b[i] + s[i] - '0';
@@ -72,13 +70,12 @@ void runTestCase(unsigned int const testCaseNumber)
 }*/
 
 void runAllTestCases() {
-    unsigned int numberOfTestCases;
+    int numberOfTestCases;
     my_cin >> numberOfTestCases;
-    for (unsigned int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
         runTestCase(testCaseNumber);
     }
 }
-
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);
