@@ -14,11 +14,10 @@ namespace AprgAudio {
 
 // Pre-defined 10-byte representations of common sample rates
 
-unordered_map<unsigned int, vector<unsigned char>> aiffSampleRateTable = {
+unordered_map<int, vector<uint8_t>> aiffSampleRateTable = {
     {8000, {64, 11, 250, 0, 0, 0, 0, 0, 0, 0}},    {11025, {64, 12, 172, 68, 0, 0, 0, 0, 0, 0}},
     {16000, {64, 12, 250, 0, 0, 0, 0, 0, 0, 0}},   {22050, {64, 13, 172, 68, 0, 0, 0, 0, 0, 0}},
-    {32000, {64, 13, 250, 0, 0, 0, 0, 0, 0, 0}},   {37800, {64, 14, 147, 168, 0, 0, 0, 0, 0, 0}},
-    {44056, {64, 14, 172, 24, 0, 0, 0, 0, 0, 0}},  {44100, {64, 14, 172, 68, 0, 0, 0, 0, 0, 0}},
+    {32000, {64, 13, 250, 0, 0, 0, 0, 0, 0, 0}},   {37800, {64, 14, 147, 168, 0, 0, 0, 0, 0, 0}},    {44056, {64, 14, 172, 24, 0, 0, 0, 0, 0, 0}},  {44100, {64, 14, 172, 68, 0, 0, 0, 0, 0, 0}},
     {47250, {64, 14, 184, 146, 0, 0, 0, 0, 0, 0}}, {48000, {64, 14, 187, 128, 0, 0, 0, 0, 0, 0}},
     {50000, {64, 14, 195, 80, 0, 0, 0, 0, 0, 0}},  {50400, {64, 14, 196, 224, 0, 0, 0, 0, 0, 0}},
     {88200, {64, 15, 172, 68, 0, 0, 0, 0, 0, 0}},  {96000, {64, 15, 187, 128, 0, 0, 0, 0, 0, 0}},
@@ -36,15 +35,14 @@ Audio<T>::Audio() {
 }
 
 template <class T>
-unsigned int Audio<T>::getSampleRate() const {
+int Audio<T>::getSampleRate() const {
     return sampleRate;
 }
 
 template <class T>
-unsigned int Audio<T>::getNumChannels() const {
+int Audio<T>::getNumChannels() const {
     return samples.size();
 }
-
 template <class T>
 bool Audio<T>::isMono() const {
     return getNumChannels() == 1;
@@ -61,24 +59,22 @@ int Audio<T>::getBitDepth() const {
 }
 
 template <class T>
-unsigned int Audio<T>::getNumSamplesPerChannel() const {
+int Audio<T>::getNumSamplesPerChannel() const {
     if (!samples.empty()) {
         return samples[0].size();
-    } else {
-        return 0;
+    } else {        return 0;
     }
 }
 
 template <class T>
-std::vector<T> const& Audio<T>::getSamplesAtChannel(unsigned int const channelIndex) const {
+std::vector<T> const& Audio<T>::getSamplesAtChannel(int const channelIndex) const {
     return samples[channelIndex];
 }
 
 template <class T>
-std::vector<T>& Audio<T>::getSamplesReferenceAtChannel(unsigned int const channelIndex) {
+std::vector<T>& Audio<T>::getSamplesReferenceAtChannel(int const channelIndex) {
     return samples[channelIndex];
 }
-
 template <class T>
 double Audio<T>::getLengthInSeconds() const {
     return (double)getNumSamplesPerChannel() / (double)sampleRate;
@@ -104,39 +100,37 @@ bool Audio<T>::setAudioBuffer(AudioBuffer& newBuffer) {
         return false;
     }
 
-    unsigned int numSamples = newBuffer[0].size();
+    int numSamples = newBuffer[0].size();
 
     // set the number of channels
     samples.resize(newBuffer.size());
 
-    for (unsigned int k = 0; k < getNumChannels(); k++) {
-        assert(newBuffer[k].size() == numSamples);
+    for (int k = 0; k < getNumChannels(); k++) {
+        assert(static_cast<int>(newBuffer[k].size()) == numSamples);
 
         samples[k].resize(numSamples);
 
-        for (unsigned int i = 0; i < numSamples; i++) {
+        for (int i = 0; i < numSamples; i++) {
             samples[k][i] = newBuffer[k][i];
         }
     }
-
     return true;
 }
 
 template <class T>
-void Audio<T>::setAudioBufferSize(unsigned int numChannels, unsigned int numSamples) {
+void Audio<T>::setAudioBufferSize(int numChannels, int numSamples) {
     samples.resize(numChannels);
     setNumSamplesPerChannel(numSamples);
 }
 
 template <class T>
-void Audio<T>::setNumSamplesPerChannel(unsigned int numSamples) {
-    unsigned int originalSize = getNumSamplesPerChannel();
+void Audio<T>::setNumSamplesPerChannel(int numSamples) {
+    int originalSize = getNumSamplesPerChannel();
 
-    for (unsigned int i = 0; i < getNumChannels(); i++) {
+    for (int i = 0; i < getNumChannels(); i++) {
         samples[i].resize(numSamples);
 
-        // set any new samples to zero
-        if (numSamples > originalSize) fill(samples[i].begin() + originalSize, samples[i].end(), (T)0);
+        // set any new samples to zero        if (numSamples > originalSize) fill(samples[i].begin() + originalSize, samples[i].end(), (T)0);
     }
 }
 
@@ -163,10 +157,9 @@ void Audio<T>::setBitDepth(int numBitsPerSample) {
 }
 
 template <class T>
-void Audio<T>::setSampleRate(unsigned int newSampleRate) {
+void Audio<T>::setSampleRate(int newSampleRate) {
     sampleRate = newSampleRate;
 }
-
 template <class T>
 bool Audio<T>::load(string const& filePath) {
     ifstream file(AlbaLocalPathHandler(filePath).getFullPath(), ios::binary);
@@ -179,12 +172,11 @@ bool Audio<T>::load(string const& filePath) {
     }
 
     file.unsetf(ios::skipws);
-    istream_iterator<unsigned char> begin(file), end;
-    vector<unsigned char> fileDataBytes(begin, end);
+    istream_iterator<uint8_t> begin(file), end;
+    vector<uint8_t> fileDataBytes(begin, end);
 
     // get audio file format
     audioFileFormat = determineAudioFormat(fileDataBytes);
-
     if (audioFileFormat == AudioFormat::Wave) {
         return decodeWaveFile(fileDataBytes);
     } else if (audioFileFormat == AudioFormat::Aiff) {
@@ -196,11 +188,10 @@ bool Audio<T>::load(string const& filePath) {
 }
 
 template <class T>
-bool Audio<T>::decodeWaveFile(vector<unsigned char>& fileDataBytes) {
+bool Audio<T>::decodeWaveFile(vector<uint8_t>& fileDataBytes) {
     // -----------------------------------------------------------
     // HEADER CHUNK
-    string headerChunkID(fileDataBytes.begin(), fileDataBytes.begin() + 4);
-    // int32_t fileSizeInBytes = fourBytesToInt (fileDataBytes, 4) + 8;
+    string headerChunkID(fileDataBytes.begin(), fileDataBytes.begin() + 4);    // int32_t fileSizeInBytes = fourBytesToInt (fileDataBytes, 4) + 8;
     string format(fileDataBytes.begin() + 8, fileDataBytes.begin() + 12);
 
     // -----------------------------------------------------------
@@ -222,11 +213,10 @@ bool Audio<T>::decodeWaveFile(vector<unsigned char>& fileDataBytes) {
     // int32_t formatChunkSize = fourBytesToInt (fileDataBytes, f + 4);
     int16_t audioFormat = twoBytesToInt(fileDataBytes, f + 8);
     int16_t numChannels = twoBytesToInt(fileDataBytes, f + 10);
-    sampleRate = (unsigned int)fourBytesToInt(fileDataBytes, f + 12);
+    sampleRate = (int)fourBytesToInt(fileDataBytes, f + 12);
     int32_t numBytesPerSecond = fourBytesToInt(fileDataBytes, f + 16);
     int16_t numBytesPerBlock = twoBytesToInt(fileDataBytes, f + 20);
     bitDepth = (int)twoBytesToInt(fileDataBytes, f + 22);
-
     int numBytesPerSample = bitDepth / 8;
 
     // check that the audio format is PCM
@@ -297,11 +287,10 @@ bool Audio<T>::decodeWaveFile(vector<unsigned char>& fileDataBytes) {
 }
 
 template <class T>
-bool Audio<T>::decodeAiffFile(vector<unsigned char>& fileDataBytes) {
+bool Audio<T>::decodeAiffFile(vector<uint8_t>& fileDataBytes) {
     // -----------------------------------------------------------
     // HEADER CHUNK
-    string headerChunkID(fileDataBytes.begin(), fileDataBytes.begin() + 4);
-    // int32_t fileSizeInBytes = fourBytesToInt (fileDataBytes, 4, Endianness::BigEndian) + 8;
+    string headerChunkID(fileDataBytes.begin(), fileDataBytes.begin() + 4);    // int32_t fileSizeInBytes = fourBytesToInt (fileDataBytes, 4, Endianness::BigEndian) + 8;
     string format(fileDataBytes.begin() + 8, fileDataBytes.begin() + 12);
 
     // -----------------------------------------------------------
@@ -399,29 +388,26 @@ bool Audio<T>::decodeAiffFile(vector<unsigned char>& fileDataBytes) {
 }
 
 template <class T>
-unsigned int Audio<T>::getAiffSampleRate(vector<unsigned char>& fileDataBytes, int sampleRateStartIndex) {
+int Audio<T>::getAiffSampleRate(vector<uint8_t>& fileDataBytes, int sampleRateStartIndex) {
     for (auto it : aiffSampleRateTable) {
         if (tenByteMatch(fileDataBytes, sampleRateStartIndex, it.second, 0)) return it.first;
     }
-
     return -1;
 }
 
 template <class T>
-bool Audio<T>::tenByteMatch(vector<unsigned char>& v1, int startIndex1, vector<unsigned char>& v2, int startIndex2) {
+bool Audio<T>::tenByteMatch(vector<uint8_t>& v1, int startIndex1, vector<uint8_t>& v2, int startIndex2) {
     for (int i = 0; i < 10; i++) {
         if (v1[startIndex1 + i] != v2[startIndex2 + i]) return false;
     }
-
     return true;
 }
 
 template <class T>
-void Audio<T>::addSampleRateToAiffData(vector<unsigned char>& fileDataBytes, unsigned int sampleRate) {
+void Audio<T>::addSampleRateToAiffData(vector<uint8_t>& fileDataBytes, int sampleRate) {
     if (aiffSampleRateTable.count(sampleRate) > 0) {
         for (int i = 0; i < 10; i++) fileDataBytes.push_back(aiffSampleRateTable[sampleRate][i]);
-    }
-}
+    }}
 
 template <class T>
 bool Audio<T>::save(string const& filePath, AudioFormat format) {
@@ -437,10 +423,9 @@ bool Audio<T>::save(string const& filePath, AudioFormat format) {
 
 template <class T>
 bool Audio<T>::saveToWaveFile(string const& filePath) {
-    vector<unsigned char> fileDataBytes;
+    vector<uint8_t> fileDataBytes;
 
     int32_t dataChunkSize = static_cast<int32_t>(getNumSamplesPerChannel() * (getNumChannels() * bitDepth / 8));
-
     // -----------------------------------------------------------
     // HEADER CHUNK
     addStringToFileData(fileDataBytes, "RIFF");
@@ -473,25 +458,23 @@ bool Audio<T>::saveToWaveFile(string const& filePath) {
     addStringToFileData(fileDataBytes, "data");
     addInt32ToFileData(fileDataBytes, dataChunkSize);
 
-    for (unsigned int i = 0; i < getNumSamplesPerChannel(); i++) {
-        for (unsigned int channel = 0; channel < getNumChannels(); channel++) {
+    for (int i = 0; i < getNumSamplesPerChannel(); i++) {
+        for (int channel = 0; channel < getNumChannels(); channel++) {
             if (bitDepth == 8) {
-                unsigned char byte = sampleToSingleByte(samples[channel][i]);
+                uint8_t byte = sampleToSingleByte(samples[channel][i]);
                 fileDataBytes.push_back(byte);
             } else if (bitDepth == 16) {
-                int16_t sampleAsInt = sampleToSixteenBitInt(samples[channel][i]);
-                addInt16ToFileData(fileDataBytes, sampleAsInt);
+                int16_t sampleAsInt = sampleToSixteenBitInt(samples[channel][i]);                addInt16ToFileData(fileDataBytes, sampleAsInt);
             } else if (bitDepth == 24) {
                 int32_t sampleAsIntAgain = (int32_t)(samples[channel][i] * (T)8388608.);
 
-                unsigned char bytes[3];
-                bytes[2] = (unsigned char)(sampleAsIntAgain >> 16) & 0xFF;
-                bytes[1] = (unsigned char)(sampleAsIntAgain >> 8) & 0xFF;
-                bytes[0] = (unsigned char)sampleAsIntAgain & 0xFF;
+                uint8_t bytes[3];
+                bytes[2] = (uint8_t)(sampleAsIntAgain >> 16) & 0xFF;
+                bytes[1] = (uint8_t)(sampleAsIntAgain >> 8) & 0xFF;
+                bytes[0] = (uint8_t)sampleAsIntAgain & 0xFF;
 
                 fileDataBytes.push_back(bytes[0]);
-                fileDataBytes.push_back(bytes[1]);
-                fileDataBytes.push_back(bytes[2]);
+                fileDataBytes.push_back(bytes[1]);                fileDataBytes.push_back(bytes[2]);
             } else {
                 assert(false && "Trying to write a file with unsupported bit depth");
                 return false;
@@ -512,11 +495,10 @@ bool Audio<T>::saveToWaveFile(string const& filePath) {
 
 template <class T>
 bool Audio<T>::saveToAiffFile(string const& filePath) {
-    vector<unsigned char> fileDataBytes;
+    vector<uint8_t> fileDataBytes;
 
     int32_t numBytesPerSample = bitDepth / 8;
-    int32_t numBytesPerFrame = static_cast<int32_t>(numBytesPerSample * getNumChannels());
-    int32_t totalNumAudioSampleBytes = static_cast<int32_t>(getNumSamplesPerChannel() * numBytesPerFrame);
+    int32_t numBytesPerFrame = static_cast<int32_t>(numBytesPerSample * getNumChannels());    int32_t totalNumAudioSampleBytes = static_cast<int32_t>(getNumSamplesPerChannel() * numBytesPerFrame);
     int32_t soundDataChunkSize = totalNumAudioSampleBytes + 8;
 
     // -----------------------------------------------------------
@@ -548,25 +530,23 @@ bool Audio<T>::saveToAiffFile(string const& filePath) {
     addInt32ToFileData(fileDataBytes, 0, Endianness::BigEndian);  // offset
     addInt32ToFileData(fileDataBytes, 0, Endianness::BigEndian);  // block size
 
-    for (unsigned int i = 0; i < getNumSamplesPerChannel(); i++) {
-        for (unsigned int channel = 0; channel < getNumChannels(); channel++) {
+    for (int i = 0; i < getNumSamplesPerChannel(); i++) {
+        for (int channel = 0; channel < getNumChannels(); channel++) {
             if (bitDepth == 8) {
-                unsigned char byte = sampleToSingleByte(samples[channel][i]);
+                uint8_t byte = sampleToSingleByte(samples[channel][i]);
                 fileDataBytes.push_back(byte);
             } else if (bitDepth == 16) {
-                int16_t sampleAsInt = sampleToSixteenBitInt(samples[channel][i]);
-                addInt16ToFileData(fileDataBytes, sampleAsInt, Endianness::BigEndian);
+                int16_t sampleAsInt = sampleToSixteenBitInt(samples[channel][i]);                addInt16ToFileData(fileDataBytes, sampleAsInt, Endianness::BigEndian);
             } else if (bitDepth == 24) {
                 int32_t sampleAsIntAgain = (int32_t)(samples[channel][i] * (T)8388608.);
 
-                unsigned char bytes[3];
-                bytes[0] = (unsigned char)(sampleAsIntAgain >> 16) & 0xFF;
-                bytes[1] = (unsigned char)(sampleAsIntAgain >> 8) & 0xFF;
-                bytes[2] = (unsigned char)sampleAsIntAgain & 0xFF;
+                uint8_t bytes[3];
+                bytes[0] = (uint8_t)(sampleAsIntAgain >> 16) & 0xFF;
+                bytes[1] = (uint8_t)(sampleAsIntAgain >> 8) & 0xFF;
+                bytes[2] = (uint8_t)sampleAsIntAgain & 0xFF;
 
                 fileDataBytes.push_back(bytes[0]);
-                fileDataBytes.push_back(bytes[1]);
-                fileDataBytes.push_back(bytes[2]);
+                fileDataBytes.push_back(bytes[1]);                fileDataBytes.push_back(bytes[2]);
             } else {
                 assert(false && "Trying to write a file with unsupported bit depth");
                 return false;
@@ -586,33 +566,31 @@ bool Audio<T>::saveToAiffFile(string const& filePath) {
 }
 
 template <class T>
-bool Audio<T>::writeDataToFile(vector<unsigned char>& fileDataBytes, string const& filePath) {
+bool Audio<T>::writeDataToFile(vector<uint8_t>& fileDataBytes, string const& filePath) {
     ofstream outputFile(filePath, ios::binary);
 
     if (outputFile.is_open()) {
-        for (unsigned char const fileDataBytesByte : fileDataBytes) {
+        for (uint8_t const fileDataBytesByte : fileDataBytes) {
             char value = static_cast<char>(fileDataBytesByte);
             outputFile.write(&value, sizeof(char));
-        }
-        outputFile.close();
+        }        outputFile.close();
         return true;
     }
     return false;
 }
 
 template <class T>
-void Audio<T>::addStringToFileData(vector<unsigned char>& fileDataBytes, string const& s) {
+void Audio<T>::addStringToFileData(vector<uint8_t>& fileDataBytes, string const& s) {
     fileDataBytes.reserve(fileDataBytes.size() + s.size());
     copy(s.cbegin(), s.cend(), back_inserter(fileDataBytes));
 }
 
 template <class T>
-void Audio<T>::addInt32ToFileData(vector<unsigned char>& fileDataBytes, int32_t i, Endianness endianness) {
-    unsigned char bytes[4];
+void Audio<T>::addInt32ToFileData(vector<uint8_t>& fileDataBytes, int32_t i, Endianness endianness) {
+    uint8_t bytes[4];
 
     if (endianness == Endianness::LittleEndian) {
-        bytes[3] = (i >> 24) & 0xFF;
-        bytes[2] = (i >> 16) & 0xFF;
+        bytes[3] = (i >> 24) & 0xFF;        bytes[2] = (i >> 16) & 0xFF;
         bytes[1] = (i >> 8) & 0xFF;
         bytes[0] = i & 0xFF;
     } else {
@@ -627,12 +605,11 @@ void Audio<T>::addInt32ToFileData(vector<unsigned char>& fileDataBytes, int32_t 
 }
 
 template <class T>
-void Audio<T>::addInt16ToFileData(vector<unsigned char>& fileDataBytes, int16_t i, Endianness endianness) {
-    unsigned char bytes[2];
+void Audio<T>::addInt16ToFileData(vector<uint8_t>& fileDataBytes, int16_t i, Endianness endianness) {
+    uint8_t bytes[2];
 
     if (endianness == Endianness::LittleEndian) {
-        bytes[1] = (i >> 8) & 0xFF;
-        bytes[0] = i & 0xFF;
+        bytes[1] = (i >> 8) & 0xFF;        bytes[0] = i & 0xFF;
     } else {
         bytes[0] = (i >> 8) & 0xFF;
         bytes[1] = i & 0xFF;
@@ -652,11 +629,10 @@ void Audio<T>::clearAudioBuffer() {
 }
 
 template <class T>
-AudioFormat Audio<T>::determineAudioFormat(vector<unsigned char>& fileDataBytes) {
+AudioFormat Audio<T>::determineAudioFormat(vector<uint8_t>& fileDataBytes) {
     string header(fileDataBytes.begin(), fileDataBytes.begin() + 4);
 
-    if (header == "RIFF")
-        return AudioFormat::Wave;
+    if (header == "RIFF")        return AudioFormat::Wave;
     else if (header == "FORM")
         return AudioFormat::Aiff;
     else
@@ -664,11 +640,10 @@ AudioFormat Audio<T>::determineAudioFormat(vector<unsigned char>& fileDataBytes)
 }
 
 template <class T>
-int32_t Audio<T>::fourBytesToInt(vector<unsigned char> const& source, int startIndex, Endianness endianness) {
+int32_t Audio<T>::fourBytesToInt(vector<uint8_t> const& source, int startIndex, Endianness endianness) {
     int32_t result;
 
-    if (endianness == Endianness::LittleEndian)
-        result = (source[startIndex + 3] << 24) | (source[startIndex + 2] << 16) | (source[startIndex + 1] << 8) |
+    if (endianness == Endianness::LittleEndian)        result = (source[startIndex + 3] << 24) | (source[startIndex + 2] << 16) | (source[startIndex + 1] << 8) |
                  source[startIndex];
     else
         result = (source[startIndex] << 24) | (source[startIndex + 1] << 16) | (source[startIndex + 2] << 8) |
@@ -678,11 +653,10 @@ int32_t Audio<T>::fourBytesToInt(vector<unsigned char> const& source, int startI
 }
 
 template <class T>
-int16_t Audio<T>::twoBytesToInt(vector<unsigned char> const& source, int startIndex, Endianness endianness) {
+int16_t Audio<T>::twoBytesToInt(vector<uint8_t> const& source, int startIndex, Endianness endianness) {
     int16_t result;
 
-    if (endianness == Endianness::LittleEndian)
-        result = (source[startIndex + 1] << 8) | source[startIndex];
+    if (endianness == Endianness::LittleEndian)        result = (source[startIndex + 1] << 8) | source[startIndex];
     else
         result = (source[startIndex] << 8) | source[startIndex + 1];
 
@@ -690,10 +664,9 @@ int16_t Audio<T>::twoBytesToInt(vector<unsigned char> const& source, int startIn
 }
 
 template <class T>
-int Audio<T>::getIndexOfString(vector<unsigned char> const& source, string const& stringToSearchFor) {
+int Audio<T>::getIndexOfString(vector<uint8_t> const& source, string const& stringToSearchFor) {
     int index = -1;
     int stringLength = (int)stringToSearchFor.length();
-
     for (int i = 0; i < static_cast<int>(source.size() - stringLength); i++) {
         string section(source.cbegin() + i, source.cbegin() + i + stringLength);
 
@@ -718,17 +691,16 @@ int16_t Audio<T>::sampleToSixteenBitInt(T sample) {
 }
 
 template <class T>
-unsigned char Audio<T>::sampleToSingleByte(T sample) {
+uint8_t Audio<T>::sampleToSingleByte(T sample) {
     sample = clamp(sample, -1., 1.);
     sample = (sample + 1.) / 2.;
-    return static_cast<unsigned char>(sample * 255.);
+    return static_cast<uint8_t>(sample * 255.);
 }
 
 template <class T>
-T Audio<T>::singleByteToSample(unsigned char sample) {
+T Audio<T>::singleByteToSample(uint8_t sample) {
     return static_cast<T>(sample - 128) / static_cast<T>(128.);
 }
-
 template <class T>
 T Audio<T>::clamp(T value, T minValue, T maxValue) {
     value = min(value, maxValue);
