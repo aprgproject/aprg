@@ -28,11 +28,10 @@ public:
         WhiteOrBlack condition;
     };
     using BitSet64 = std::bitset<64>;
-    using Count = unsigned int;
+    using Count = int;
     using PieceToChessCellBitValueMap = std::map<PieceColorAndType, uint64_t>;
     using BitValueUtilities = AlbaBitValueUtilities<uint64_t>;
-    using PieceColorAndTypes = std::vector<PieceColorAndType>;
-    using CheckDetails = std::vector<CheckDetail>;
+    using PieceColorAndTypes = std::vector<PieceColorAndType>;    using CheckDetails = std::vector<CheckDetail>;
     using BoolFunction = std::function<bool(double const)>;
 
     BoardObserver() = delete;
