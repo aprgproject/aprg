@@ -143,11 +143,10 @@ TEST(TwoDimensionsUtilitiesTest, GetAreaUsingPicksTheoremWorks) {
     // |X|1|2|3|4|5|6|7|
     // Legend: 'O' is for outside, 'I' is for inside
 
-    EXPECT_DOUBLE_EQ(8.5, getAreaUsingPicksTheorem(6U, 7U));
+    EXPECT_DOUBLE_EQ(8.5, getAreaUsingPicksTheorem(6, 7));
 }
 
-TEST(TwoDimensionsUtilitiesTest, GetAreaForPolygonWorksForTriangle) {
-    Triangle triangle(Point(0, 0), Point(0, 4), Point(4, 0));
+TEST(TwoDimensionsUtilitiesTest, GetAreaForPolygonWorksForTriangle) {    Triangle triangle(Point(0, 0), Point(0, 4), Point(4, 0));
     EXPECT_DOUBLE_EQ(8, getArea(triangle));
 }
 

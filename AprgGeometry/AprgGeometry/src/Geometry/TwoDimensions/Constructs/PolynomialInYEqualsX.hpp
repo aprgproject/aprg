@@ -6,11 +6,10 @@ namespace alba {
 
 namespace TwoDimensions {
 
-template <unsigned int numberOfCoefficients>
+template <int numberOfCoefficients>
 class PolynomialInYEqualsX : public Polynomial<numberOfCoefficients> {
 public:
-    using PolynomialInYEqualsXParent = Polynomial<numberOfCoefficients>;
-    PolynomialInYEqualsX() : PolynomialInYEqualsXParent() {}
+    using PolynomialInYEqualsXParent = Polynomial<numberOfCoefficients>;    PolynomialInYEqualsX() : PolynomialInYEqualsXParent() {}
 
     PolynomialInYEqualsX(std::initializer_list<double> const& coefficients)
         : PolynomialInYEqualsXParent(coefficients) {}
