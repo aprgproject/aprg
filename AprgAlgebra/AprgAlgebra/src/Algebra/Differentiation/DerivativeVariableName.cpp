@@ -9,28 +9,26 @@ namespace alba {
 namespace algebra {
 
 DerivativeVariableName::DerivativeVariableName(
-    unsigned int const differentiationLevel, string const& baseVariable, string const& dependentVariable)
+    int const differentiationLevel, string const& baseVariable, string const& dependentVariable)
     : m_isValid(true),
       m_differentiationLevel(differentiationLevel),
       m_baseVariable(baseVariable),
       m_dependentVariable(dependentVariable) {}
 
 DerivativeVariableName::DerivativeVariableName(string const& derivativeVariableInLeibnizNotation)
-    : m_isValid(false), m_differentiationLevel(0U) {
+    : m_isValid(false), m_differentiationLevel(0) {
     string numerator = getStringBeforeThisString(derivativeVariableInLeibnizNotation, "/");
     string denominator = getStringAfterThisString(derivativeVariableInLeibnizNotation, "/");
-    processNumerator(numerator);
-    if (isValid()) {
+    processNumerator(numerator);    if (isValid()) {
         processDenominator(denominator);
     }
 }
 
 bool DerivativeVariableName::isValid() const { return m_isValid; }
 
-unsigned int DerivativeVariableName::getDifferentiationLevel() const { return m_differentiationLevel; }
+int DerivativeVariableName::getDifferentiationLevel() const { return m_differentiationLevel; }
 
 string const& DerivativeVariableName::getBaseVariable() const { return m_baseVariable; }
-
 string const& DerivativeVariableName::getDependentVariable() const { return m_dependentVariable; }
 
 string DerivativeVariableName::getNameInLeibnizNotation() const {
@@ -95,11 +93,10 @@ void DerivativeVariableName::processNumerator(string const& numerator) {
     if (ProcessingState::LastState == state) {
         m_isValid = true;
         m_dependentVariable = dependentVariable;
-        m_differentiationLevel = convertStringToNumber<unsigned int>(differentiationLevelString);
+        m_differentiationLevel = convertStringToNumber<int>(differentiationLevelString);
     } else {
         m_isValid = false;
-    }
-}
+    }}
 
 void DerivativeVariableName::processDenominator(string const& denominator) {
     enum class ProcessingState { Initial, AfterD, Number, VariableWithBrackets, VariableOnly, LastState, Invalid };
@@ -137,12 +134,11 @@ void DerivativeVariableName::processDenominator(string const& denominator) {
         if (differentiationLevelString.empty()) {
             differentiationLevelString = "1";
         }
-        unsigned int differentiationLevelInDenominator =
-            convertStringToNumber<unsigned int>(differentiationLevelString);
+        int differentiationLevelInDenominator =
+            convertStringToNumber<int>(differentiationLevelString);
         if (differentiationLevelInDenominator == m_differentiationLevel) {
             m_isValid = true;
-            m_baseVariable = baseVariable;
-        } else {
+            m_baseVariable = baseVariable;        } else {
             m_isValid = false;
         }
     } else {

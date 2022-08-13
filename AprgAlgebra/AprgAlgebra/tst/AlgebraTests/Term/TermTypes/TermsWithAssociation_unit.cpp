@@ -71,13 +71,12 @@ TEST(TermsWithAssociationTest, GetSizeWorks) {
     TermsWithAssociation terms2{termWithDetails};
     TermsWithAssociation terms3{termWithDetails, termWithDetails};
 
-    EXPECT_EQ(0U, terms1.getSize());
-    EXPECT_EQ(1U, terms2.getSize());
-    EXPECT_EQ(2U, terms3.getSize());
+    EXPECT_EQ(0, terms1.getSize());
+    EXPECT_EQ(1, terms2.getSize());
+    EXPECT_EQ(2, terms3.getSize());
 }
 
-TEST(TermsWithAssociationTest, GetFirstTermConstReferenceWorks) {
-    TermWithDetails termWithDetails1(Term(10), TermAssociationType::Negative);
+TEST(TermsWithAssociationTest, GetFirstTermConstReferenceWorks) {    TermWithDetails termWithDetails1(Term(10), TermAssociationType::Negative);
     TermWithDetails termWithDetails2(Term(20), TermAssociationType::Positive);
     TermsWithAssociation terms1{termWithDetails1};
     TermsWithAssociation terms2{termWithDetails2};

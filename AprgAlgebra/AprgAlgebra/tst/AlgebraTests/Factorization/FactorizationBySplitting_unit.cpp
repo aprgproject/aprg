@@ -380,11 +380,10 @@ TEST(FactorizationBySplittingTest, GetNewPolynomialWithVariablesWorks) {
 
     Polynomial polynomia1ToVerify(getNewPolynomialWithNewVariables(variableSubstitution, polynomialsToTest));
 
-    ASSERT_EQ(1U, variableSubstitution.getSize());
+    ASSERT_EQ(1, variableSubstitution.getSize());
     Term termToExpect(Polynomial{Monomial(5, {{"x", 1}}), Monomial(3, {{"y", 1}})});
     EXPECT_EQ(termToExpect, variableSubstitution.getTermForVariable("{(5[x] + 3[y])}"));
-    Polynomial polynomialToExpect{
-        Monomial(1, {{"{(5[x] + 3[y])}", 2}}), Monomial(3, {{"{(5[x] + 3[y])}", 1}}), Monomial(2, {})};
+    Polynomial polynomialToExpect{        Monomial(1, {{"{(5[x] + 3[y])}", 2}}), Monomial(3, {{"{(5[x] + 3[y])}", 1}}), Monomial(2, {})};
     EXPECT_EQ(polynomialToExpect, polynomia1ToVerify);
 }
 

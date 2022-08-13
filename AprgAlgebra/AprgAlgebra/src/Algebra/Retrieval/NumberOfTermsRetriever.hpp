@@ -6,11 +6,10 @@ namespace alba {
 
 namespace algebra {
 
-using BaseNumberOfTermsRetriever = BaseRetriever<unsigned int>;
+using BaseNumberOfTermsRetriever = BaseRetriever<int>;
 
 class NumberOfTermsRetriever final : public BaseNumberOfTermsRetriever {
-public:
-    NumberOfTermsRetriever();
+public:    NumberOfTermsRetriever();
     void retrieveFromConstant(Constant const& constant) override;
     void retrieveFromVariable(Variable const& variable) override;
     void retrieveFromMonomial(Monomial const& monomial) override;

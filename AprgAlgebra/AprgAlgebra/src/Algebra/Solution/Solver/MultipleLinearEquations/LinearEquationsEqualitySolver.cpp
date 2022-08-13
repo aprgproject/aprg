@@ -73,13 +73,12 @@ bool LinearEquationsEqualitySolver::areExponentsEqualToOneAndZero(AlbaNumbersSet
 
 void LinearEquationsEqualitySolver::setMatrixCoefficients(
     NumberMatrix& coefficientsMatrix, VariableNamesSet const& variableNames, Polynomials const& polynomials) {
-    unsigned int rowIndex = 0;
+    int rowIndex = 0;
     for (Polynomial const& polynomial : polynomials) {
-        unsigned int columnIndex = 0;
+        int columnIndex = 0;
         VariableToValueMap variableToValueMap(getCoefficientsForVariablesOnly(polynomial));
         for (string const& variableName : variableNames) {
-            VariableToValueMap::const_iterator it = variableToValueMap.find(variableName);
-            if (it != variableToValueMap.cend()) {
+            VariableToValueMap::const_iterator it = variableToValueMap.find(variableName);            if (it != variableToValueMap.cend()) {
                 coefficientsMatrix.setEntry(columnIndex++, rowIndex, it->second);
             }
         }
@@ -90,12 +89,11 @@ void LinearEquationsEqualitySolver::setMatrixCoefficients(
 void LinearEquationsEqualitySolver::saveSolutionSetsFromTheCoefficientMatrix(
     MultipleVariableSolutionSet& solutionSet, NumberMatrix const& coefficientsMatrix,
     VariableNamesSet const& variables) {
-    unsigned int index = 0;
-    unsigned int columnEndIndex = variables.size();
+    int index = 0;
+    int columnEndIndex = variables.size();
     for (string const& variableName : variables) {
         AlbaNumber identityDiagonalEntry(coefficientsMatrix.getEntry(index, index));
-        if (identityDiagonalEntry == 1) {
-            SolutionSet solutionSetForVariable;
+        if (identityDiagonalEntry == 1) {            SolutionSet solutionSetForVariable;
             solutionSetForVariable.addAcceptedValue(-coefficientsMatrix.getEntry(columnEndIndex, index));
             solutionSet.addSolutionSetForVariable(variableName, solutionSetForVariable);
         }

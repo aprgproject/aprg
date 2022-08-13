@@ -25,10 +25,9 @@ class IntegrationHistory {
 public:
     IntegrationHistory();
     bool didThisIntegrationPurposeAlreadyHappened(IntegrationPurpose const purpose) const;
-    unsigned int getDepth() const;
+    int getDepth() const;
     IntegrationPurpose getLastIntegrationPurpose() const;
     std::string getEnumShortString(IntegrationPurpose const purpose) const;
-
     void performStepsBeforeIntegration(Term const& input, IntegrationPurpose const purpose);
     void performStepsAfterIntegration(Term const& input, IntegrationPurpose const purpose, Term const& output);
     void clear();

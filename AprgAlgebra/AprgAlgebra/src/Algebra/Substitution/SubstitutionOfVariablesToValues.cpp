@@ -27,11 +27,10 @@ bool SubstitutionOfVariablesToValues::isVariableFound(string const& variable) co
     return m_variableToValuesMap.find(variable) != m_variableToValuesMap.cend();
 }
 
-unsigned int SubstitutionOfVariablesToValues::getSize() const { return m_variableToValuesMap.size(); }
+int SubstitutionOfVariablesToValues::getSize() const { return m_variableToValuesMap.size(); }
 
 AlbaNumber SubstitutionOfVariablesToValues::getValueForVariable(string const& variable) const {
-    AlbaNumber result;
-    if (isVariableFound(variable)) {
+    AlbaNumber result;    if (isVariableFound(variable)) {
         result = m_variableToValuesMap.at(variable);
     }
     return result;

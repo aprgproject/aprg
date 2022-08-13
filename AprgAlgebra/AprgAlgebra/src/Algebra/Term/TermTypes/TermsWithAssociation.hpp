@@ -21,11 +21,10 @@ public:
     bool operator<(TermsWithAssociation const& second) const;
     bool isEmpty() const;
 
-    unsigned int getSize() const;
+    int getSize() const;
     BaseTerm const& getFirstTermConstReference() const;
     TermAssociationType getFirstAssociationType() const;
-    TermsWithDetails const& getTermsWithDetails() const;
-    TermsWithDetails& getTermsWithDetailsReference();
+    TermsWithDetails const& getTermsWithDetails() const;    TermsWithDetails& getTermsWithDetailsReference();
 
     void clear();
     void sort(bool const dontSortFirstItem);

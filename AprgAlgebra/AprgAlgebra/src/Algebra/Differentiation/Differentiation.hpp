@@ -26,12 +26,11 @@ public:
 
     Term differentiateWithDefiniteValue(Term const& term, AlbaNumber const& value) const;
 
-    Term differentiateMultipleTimes(Term const& term, unsigned int const numberOfTimes) const;
-    Equation differentiateMultipleTimes(Equation const& equation, unsigned int const numberOfTimes) const;
+    Term differentiateMultipleTimes(Term const& term, int const numberOfTimes) const;
+    Equation differentiateMultipleTimes(Equation const& equation, int const numberOfTimes) const;
 
     AlbaNumber differentiateConstant(Constant const&) const;
-    Monomial differentiateVariable(Variable const& variable) const;
-    Polynomial differentiateMonomial(Monomial const& monomial) const;
+    Monomial differentiateVariable(Variable const& variable) const;    Polynomial differentiateMonomial(Monomial const& monomial) const;
     Polynomial differentiatePolynomial(Polynomial const& polynomial) const;
     Term differentiateExpression(Expression const& expression) const;
     Term differentiateFunction(Function const& functionObject) const;

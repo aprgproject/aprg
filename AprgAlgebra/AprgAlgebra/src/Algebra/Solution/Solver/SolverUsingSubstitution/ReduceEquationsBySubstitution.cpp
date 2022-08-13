@@ -19,11 +19,10 @@ void reduceEquationsBySubstitution(Equations& substitutedEquations, VariableName
     while (areVariableAndEquationSelected && unknownsRetriever.getSavedData().size() > 1) {
         areVariableAndEquationSelected = false;
         string selectedVariableName;
-        unsigned int selectedEquationIndex(0U);
+        int selectedEquationIndex(0);
         selectVariableNameAndEquationNumber(
             areVariableAndEquationSelected, selectedVariableName, selectedEquationIndex, substitutedEquations,
-            variableNamesToIgnore);
-        substituteEquationForSelectedEquationIndex(
+            variableNamesToIgnore);        substituteEquationForSelectedEquationIndex(
             substitutedEquations, areVariableAndEquationSelected, selectedVariableName, selectedEquationIndex);
         removeEquationsWithoutUnknowns(substitutedEquations);
         unknownsRetriever.getSavedDataReference().clear();
@@ -32,17 +31,16 @@ void reduceEquationsBySubstitution(Equations& substitutedEquations, VariableName
 }
 
 void selectVariableNameAndEquationNumber(
-    bool& areVariableAndEquationSelected, string& selectedVariableName, unsigned int& selectedEquationIndex,
+    bool& areVariableAndEquationSelected, string& selectedVariableName, int& selectedEquationIndex,
     Equations const& equations, VariableNamesSet const& variableNamesToIgnore) {
     areVariableAndEquationSelected = false;
     selectedVariableName.clear();
-    selectedEquationIndex = 0U;
+    selectedEquationIndex = 0;
     VariableNamesSet variableNamesToCheck(getVariablesNamesToCheck(equations, variableNamesToIgnore));
-    unsigned int equationIndex = 0;
+    int equationIndex = 0;
     for (Equation const& equation : equations) {
         IsolationOfOneVariableOnEqualityEquation isolation(equation);
-        for (string const& variableName : variableNamesToCheck) {
-            if (isolation.canBeIsolated(variableName) &&
+        for (string const& variableName : variableNamesToCheck) {            if (isolation.canBeIsolated(variableName) &&
                 isolation.getIdenticalExponentForVariableIfPossible(variableName) == 1) {
                 areVariableAndEquationSelected = true;
                 selectedVariableName = variableName;
@@ -56,11 +54,10 @@ void selectVariableNameAndEquationNumber(
 
 void substituteEquationForSelectedEquationIndex(
     Equations& substitutedEquations, bool const areVariableAndEquationSelected, string const& selectedVariableName,
-    unsigned int const selectedEquationIndex) {
+    int const selectedEquationIndex) {
     if (areVariableAndEquationSelected) {
         IsolationOfOneVariableOnEqualityEquation isolation(substitutedEquations.at(selectedEquationIndex));
-        substitutedEquations.erase(substitutedEquations.begin() + selectedEquationIndex);
-        SubstitutionOfVariablesToTerms substitution;
+        substitutedEquations.erase(substitutedEquations.begin() + selectedEquationIndex);        SubstitutionOfVariablesToTerms substitution;
         substitution.putVariableWithTerm(
             selectedVariableName, isolation.getEquivalentTermByIsolatingAVariable(selectedVariableName));
         for (Equation& substitutedEquation : substitutedEquations) {

@@ -79,21 +79,20 @@ Term Differentiation::differentiateWithDefiniteValue(Term const& term, AlbaNumbe
     return evaluateAtDefiniteValue(differentiate(term), m_nameOfVariableToDifferentiate, value);
 }
 
-Term Differentiation::differentiateMultipleTimes(Term const& term, unsigned int const numberOfTimes) const {
+Term Differentiation::differentiateMultipleTimes(Term const& term, int const numberOfTimes) const {
     Term currentResult(term);
-    for (unsigned int i = 0; i < numberOfTimes; i++) {
+    for (int i = 0; i < numberOfTimes; i++) {
         currentResult = differentiate(currentResult);
     }
     return currentResult;
 }
 
-Equation Differentiation::differentiateMultipleTimes(Equation const& equation, unsigned int const numberOfTimes) const {
+Equation Differentiation::differentiateMultipleTimes(Equation const& equation, int const numberOfTimes) const {
     Equation currentResult(equation);
-    for (unsigned int i = 0; i < numberOfTimes; i++) {
+    for (int i = 0; i < numberOfTimes; i++) {
         currentResult = differentiate(currentResult);
     }
-    return currentResult;
-}
+    return currentResult;}
 
 AlbaNumber Differentiation::differentiateConstant(Constant const&) const { return 0; }
 
@@ -104,11 +103,10 @@ Monomial Differentiation::differentiateVariable(Variable const& variable) const 
     if (isVariableToDifferentiate(nameOfVariable)) {
         result = Monomial(1, {});
     } else if (isDependentVariable(nameOfVariable)) {
-        DerivativeVariableName derivativeOfDependentVariableName(1U, m_nameOfVariableToDifferentiate, nameOfVariable);
+        DerivativeVariableName derivativeOfDependentVariableName(1, m_nameOfVariableToDifferentiate, nameOfVariable);
         result = Monomial(1, {{derivativeOfDependentVariableName.getNameInLeibnizNotation(), 1}});
     } else if (isDerivativeVariableNameAndAffectedByThisDifferentiation(derivativeVariableName)) {
-        derivativeVariableName.differentiate();
-        result = Monomial(1, {{derivativeVariableName.getNameInLeibnizNotation(), 1}});
+        derivativeVariableName.differentiate();        result = Monomial(1, {{derivativeVariableName.getNameInLeibnizNotation(), 1}});
     } else {
         result = Monomial(0, {});
     }
@@ -207,11 +205,10 @@ Polynomial Differentiation::differentiateMonomialWithChangingVariables(Monomial 
         } else if (isDependentVariable(variableName)) {
             monomialToAdd.putVariableWithExponent(variableName, exponent - 1);
             monomialToAdd.multiplyNumber(exponent);
-            DerivativeVariableName derivativeOfDependentVariableName(1U, m_nameOfVariableToDifferentiate, variableName);
+            DerivativeVariableName derivativeOfDependentVariableName(1, m_nameOfVariableToDifferentiate, variableName);
             monomialToAdd.putVariableWithExponent(derivativeOfDependentVariableName.getNameInLeibnizNotation(), 1);
         } else if (isDerivativeVariableNameAndAffectedByThisDifferentiation(derivativeVariableName)) {
-            monomialToAdd.putVariableWithExponent(variableName, exponent - 1);
-            monomialToAdd.multiplyNumber(exponent);
+            monomialToAdd.putVariableWithExponent(variableName, exponent - 1);            monomialToAdd.multiplyNumber(exponent);
             derivativeVariableName.differentiate();
             monomialToAdd.putVariableWithExponent(derivativeVariableName.getNameInLeibnizNotation(), 1);
         }

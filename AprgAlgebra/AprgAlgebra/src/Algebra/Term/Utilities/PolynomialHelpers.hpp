@@ -7,11 +7,10 @@ namespace alba {
 
 namespace algebra {
 
-using IntegerCoefficient = unsigned int;
+using IntegerCoefficient = int;
 using IntegerCoefficients = std::vector<IntegerCoefficient>;
 
-enum class RootType {
-    RealRootsOnly,
+enum class RootType {    RealRootsOnly,
     RealAndImaginaryRoots,
 };
 
@@ -37,10 +36,9 @@ AlbaNumber getRemainderForOneVariablePolynomialDividedByVariableMinusConstantVal
     Polynomial const& polynomial, AlbaNumber const& value);
 
 AlbaNumbers getRoots(RootType const rootType, Polynomial const& polynomial);
-Polynomial raiseBinomialToAPowerUsingBinomialExpansion(Polynomial const& binomial, unsigned int const power);
+Polynomial raiseBinomialToAPowerUsingBinomialExpansion(Polynomial const& binomial, int const power);
 
 void removeEmptyPolynomials(Polynomials& polynomials);
-
 }  // namespace algebra
 
 }  // namespace alba
