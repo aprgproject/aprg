@@ -372,6 +372,7 @@ void Board::move(Move const& move) {
         changePieceGridWithMove(move);
     }
 }
+
 Board::PieceGrid Board::getInitialValues(BoardOrientation const& inputType) const {
     if (BoardOrientation::BlackUpWhiteDown == inputType) {
         return {12, 10, 11, 13, 14, 11, 10, 12, 9, 9, 9, 9, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -573,7 +574,8 @@ Moves Board::getCandidatesMoves(
                 retrievePawnEnPassantReverseToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
             } else if (areOpposingColors(moveColor, pieceAtEnd.getColor())) {  // capture only
                 retrievePawnReverseCapturesToThis(result, endpoint, moveColor, MAX_NUMBER_OF_MOVES);
-            }            break;
+            }
+            break;
         }
         case PieceType::Knight: {
             if (isPieceEmptyOrHasOpposingColors(pieceAtEnd, moveColor)) {  // non capture and capture
@@ -622,7 +624,8 @@ void Board::retrieveMovesToThis(
         retrievePawnEnPassantReverseToThis(result, endpoint, moveColor, maxSize);
     } else if (areOpposingColors(moveColor, pieceAtEnd.getColor())) {  // capture only
         retrievePawnReverseCapturesToThis(result, endpoint, moveColor, maxSize);
-    }    if (isPieceEmptyOrHasOpposingColors(pieceAtEnd, moveColor)) {  // non capture and capture
+    }
+    if (isPieceEmptyOrHasOpposingColors(pieceAtEnd, moveColor)) {  // non capture and capture
         retrieveAllNonPawnMovesToThis(result, endpoint, moveColor, maxSize);
     }
     // How about castling? It doesnt really make any sense though.
@@ -743,7 +746,8 @@ void Board::retrievePawnEnPassantReverseToThis(
 
 void Board::retrieveAllNonPawnMovesToThis(
     Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const {
-    retrieveKnightMovesToThis(result, endpoint, moveColor, maxSize);    retrieveDiagonalMovesToThis(result, endpoint, moveColor, maxSize);
+    retrieveKnightMovesToThis(result, endpoint, moveColor, maxSize);
+    retrieveDiagonalMovesToThis(result, endpoint, moveColor, maxSize);
     retrieveStraightMovesToThis(result, endpoint, moveColor, maxSize);
     retrieveKingOneStepMovesToThis(result, endpoint, moveColor, maxSize);
 }
@@ -1364,7 +1368,8 @@ bool Board::isPossiblePawnMove(Move const& move) const {
     return isAPawnNonCaptureMove(move) || isAPawnCapture(move) || isAPawnEnPassantMove(move);
 }
 
-bool Board::isPossibleKnightMove(Move const& move) const {    return isEndpointEmptyOrHaveDifferentColors(move) && isAnLMove(move);
+bool Board::isPossibleKnightMove(Move const& move) const {
+    return isEndpointEmptyOrHaveDifferentColors(move) && isAnLMove(move);
 }
 
 bool Board::isPossibleBishopMove(Move const& move) const {
@@ -1410,7 +1415,8 @@ bool Board::isAPawnNonCaptureMove(Move const& move) const {
                 }
             }
         }
-    }    return result;
+    }
+    return result;
 }
 
 bool Board::isAPawnCapture(Move const& move) const {
@@ -1461,7 +1467,8 @@ bool Board::isAPawnEnPassantMove(Move const& move) const {
     return result;
 }
 
-bool Board::isADiagonalMove(Move const& move) const {    Coordinate moveDelta = move.second - move.first;
+bool Board::isADiagonalMove(Move const& move) const {
+    Coordinate moveDelta = move.second - move.first;
     return getAbsoluteValue(moveDelta.getX()) == getAbsoluteValue(moveDelta.getY());
 }
 

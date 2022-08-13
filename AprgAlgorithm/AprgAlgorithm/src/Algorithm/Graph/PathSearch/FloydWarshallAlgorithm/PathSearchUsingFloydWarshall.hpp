@@ -23,6 +23,7 @@ public:
     using EdgeOrderedByWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgeOrderedByWeight;
     using PathDetailsMatrix = matrix::AlbaMatrix<PathDetails>;
     using Comparator = ComparatorTemplateType<Weight>;
+
     PathSearchUsingFloydWarshall(EdgeWeightedGraph const& graph)
         : m_graph(graph), m_pathDetailsMatrix(graph.getNumberOfVertices(), graph.getNumberOfVertices()) {
         searchForBestPaths();
@@ -68,7 +69,8 @@ private:
                         addToPath(pathInList, inbetweenIt, endIt);
                     }
                 }
-            }        }
+            }
+        }
     }
 
     void searchForBestPaths() {
@@ -92,6 +94,7 @@ private:
             diagonalPathDetails.bestInBetweenVertex = vertex;
         }
     }
+
     void checkAllIntermediateVertices() {
         Vertices vertices(m_graph.getVertices());
         for (Vertex const& inbetweenVertex : vertices) {
@@ -114,7 +117,8 @@ private:
                                     startToEndDetails.bestInBetweenVertex = inbetweenVertex;
                                     startToEndDetails.bestWeight = possibleNewWeight;
                                 }
-                            }                        }
+                            }
+                        }
                     }
                 }
             }
@@ -136,7 +140,8 @@ private:
                     pathSearch.m_pathDetailsMatrix.getEntryConstReference(x, y).bestInBetweenVertex));
             }
             displayTable.getLastRow().addCell("   ");
-            for (unsigned int x = 0; x < pathSearch.m_pathDetailsMatrix.getNumberOfRows(); x++) {                displayTable.getLastRow().addCell(stringHelper::convertToString(
+            for (unsigned int x = 0; x < pathSearch.m_pathDetailsMatrix.getNumberOfRows(); x++) {
+                displayTable.getLastRow().addCell(stringHelper::convertToString(
                     pathSearch.m_pathDetailsMatrix.getEntryConstReference(x, y).bestWeight));
             }
         }
@@ -157,6 +162,7 @@ std::ostream& operator<<(
     out << pathDetails.hasAPath << "," << pathDetails.bestInBetweenVertex << "," << pathDetails.bestWeight;
     return out;
 }
+
 }  // namespace algorithm
 
 }  // namespace alba

@@ -17,6 +17,7 @@ constexpr int MAX_NUMBER_OF_BOARDS_IN_A_ROW = 5;  // make it 2 if bullet (for le
 constexpr int NEXT_OFFSET_OF_GRID = 9;
 constexpr int DESIRED_HEADER_LENGTH = 31;
 constexpr char SEPARATOR[] = "     ";
+
 static string s_nameOfLine;
 
 }  // namespace
@@ -111,7 +112,8 @@ void ResultPrinter::printMovesGrids(MovesToPrint const& movesToPrint) const {
         printARowOfNextMoves(movesToPrint.calculatedMoves, 3);
     }
 
-    if (!movesToPrint.bookMoves.empty()) {        printHeadersForBookMoves(movesToPrint.bookMoves);
+    if (!movesToPrint.bookMoves.empty()) {
+        printHeadersForBookMoves(movesToPrint.bookMoves);
         printARowOfNextMoves(movesToPrint.bookMoves, 0);
         printHorizontalBorder();
     } else if (!movesToPrint.bestLine.halfMoves.empty()) {
@@ -120,7 +122,8 @@ void ResultPrinter::printMovesGrids(MovesToPrint const& movesToPrint) const {
         printHeadersForBestLine(movesToPrint.bestLine, suffixHeaders);
         printARowOfMovesSequence(movesToPrint.bestLine);
         printHorizontalBorder();
-    }}
+    }
+}
 
 template <typename GenericMoves>
 void ResultPrinter::printARowOfNextMoves(GenericMoves const& genericMoves, int const startIndex) const {
@@ -224,7 +227,8 @@ void ResultPrinter::printHeaders(strings const& prefixHeaders, strings const& su
     if (!prefixHeaders.empty() || !suffixHeaders.empty()) {
         bool isFirst = true;
         for (int i = 0; i < rowSize; i++) {
-            if (isFirst) {                isFirst = false;
+            if (isFirst) {
+                isFirst = false;
             } else {
                 cout << SEPARATOR;
             }
@@ -236,7 +240,8 @@ void ResultPrinter::printHeaders(strings const& prefixHeaders, strings const& su
                 headerString += suffixHeaders.at(i);
             }
             cout << "|" << formatToHeaderString(headerString) << "|";
-        }        cout << "\n";
+        }
+        cout << "\n";
     }
 }
 
@@ -287,7 +292,8 @@ void ResultPrinter::fillMovesFromBook(BookMoves& bookMoves) const {
             bookMoves.reserve(MAX_NUMBER_OF_BOARDS_IN_A_ROW);
             for (Book::MoveDetail const& bookMoveDetail : lineDetail.nextMoves) {
                 Move move(engineBoard.getMoveUsingAlgebraicNotation(
-                    bookMoveDetail.move, m_engineBoardWithContext.getPlayerColor()));                bookMoves.emplace_back(createBookMove(move, lineDetail, bookMoveDetail));
+                    bookMoveDetail.move, m_engineBoardWithContext.getPlayerColor()));
+                bookMoves.emplace_back(createBookMove(move, lineDetail, bookMoveDetail));
                 if (bookMoves.size() > MAX_NUMBER_OF_BOARDS_IN_A_ROW) {
                     break;
                 }
@@ -326,7 +332,8 @@ void ResultPrinter::fillNextMovesFromCalculation(NextMoves& nextMoves) const {
     nextMoves.reserve(MAX_NUMBER_OF_BOARDS_IN_A_ROW);
     for (Variation const& variation : m_calculationDetails.variations) {
         if (!variation.halfMoves.empty()) {
-            Move move(engineBoard.getMoveUsingUciNotation(variation.halfMoves.front()));            if (engineBoard.isAPossibleMove(move)) {
+            Move move(engineBoard.getMoveUsingUciNotation(variation.halfMoves.front()));
+            if (engineBoard.isAPossibleMove(move)) {
                 nextMoves.emplace_back(createNextMove(move, variation));
                 if (nextMoves.size() > MAX_NUMBER_OF_MOVES_FOR_PRINTING) {
                     break;
@@ -423,7 +430,8 @@ strings ResultPrinter::getNextMovesString(NextMoves const& nextMoves, int const 
         result.reserve(rowSize);
         for (int moveIndex = 0; moveIndex < rowSize; moveIndex++) {
             auto const& nextMove(nextMoves.at(startIndex + moveIndex));
-            result.emplace_back(formatToHeaderString(getDisplayableString(nextMove)));        }
+            result.emplace_back(formatToHeaderString(getDisplayableString(nextMove)));
+        }
     }
     return result;
 }
@@ -434,7 +442,8 @@ strings ResultPrinter::getBookMovesString(BookMoves const& bookMoves) const {
     result.reserve(rowSize);
     for (int moveIndex = 0; moveIndex < rowSize; moveIndex++) {
         auto const& bookMove(bookMoves.at(moveIndex));
-        result.emplace_back(formatToHeaderString(getDisplayableString(bookMove)));    }
+        result.emplace_back(formatToHeaderString(getDisplayableString(bookMove)));
+    }
     return result;
 }
 

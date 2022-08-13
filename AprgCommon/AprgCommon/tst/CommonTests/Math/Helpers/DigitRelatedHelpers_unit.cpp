@@ -21,7 +21,8 @@ TEST(DigitRelatedHelpersTest, GetNumberOfBase10DigitsWorks) {
     EXPECT_EQ(4U, getNumberOfBase10Digits<int>(1000));
     EXPECT_EQ(0U, getNumberOfBase10Digits<int>(0));
     EXPECT_EQ(1U, getNumberOfBase10Digits<int>(-1));
-    EXPECT_EQ(2U, getNumberOfBase10Digits<int>(-54));    EXPECT_EQ(4U, getNumberOfBase10Digits<int>(-1000));
+    EXPECT_EQ(2U, getNumberOfBase10Digits<int>(-54));
+    EXPECT_EQ(4U, getNumberOfBase10Digits<int>(-1000));
 }
 
 TEST(DigitRelatedHelpersTest, AreNumberOfDigitsOnTheIntegerLimitWorks) {

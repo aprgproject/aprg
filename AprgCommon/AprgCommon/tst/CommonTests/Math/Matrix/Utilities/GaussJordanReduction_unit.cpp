@@ -15,7 +15,8 @@ TEST(GaussJordanReductionTest, AreRowsWithAllZerosInTheBottomWorks) {
     AlbaMatrix<int> matrix5(3, 3, {0, 0, 0, 4, 5, 6, 0, 0, 0});
 
     EXPECT_TRUE(areRowsWithAllZerosInTheBottom(matrix1));
-    EXPECT_TRUE(areRowsWithAllZerosInTheBottom(matrix2));    EXPECT_TRUE(areRowsWithAllZerosInTheBottom(matrix3));
+    EXPECT_TRUE(areRowsWithAllZerosInTheBottom(matrix2));
+    EXPECT_TRUE(areRowsWithAllZerosInTheBottom(matrix3));
     EXPECT_FALSE(areRowsWithAllZerosInTheBottom(matrix4));
     EXPECT_FALSE(areRowsWithAllZerosInTheBottom(matrix5));
 }
@@ -30,7 +31,8 @@ TEST(GaussJordanReductionTest, AreLeadingEntriesInReducedRowEchelonFormWorks) {
     AlbaMatrix<int> matrix4(3, 3, {1, 1, 0, 0, 1, 0, 0, 0, 1});
 
     EXPECT_TRUE(areLeadingEntriesInReducedRowEchelonForm(matrix1));
-    EXPECT_FALSE(areLeadingEntriesInReducedRowEchelonForm(matrix2));    EXPECT_FALSE(areLeadingEntriesInReducedRowEchelonForm(matrix3));
+    EXPECT_FALSE(areLeadingEntriesInReducedRowEchelonForm(matrix2));
+    EXPECT_FALSE(areLeadingEntriesInReducedRowEchelonForm(matrix3));
     EXPECT_FALSE(areLeadingEntriesInReducedRowEchelonForm(matrix4));
 }
 
@@ -40,7 +42,8 @@ TEST(GaussJordanReductionTest, IsReducedRowEchelonFormWorks_MatrixCanBeCheckedIf
     AlbaMatrix<int> matrix3(5, 5, {1, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
 
     EXPECT_TRUE(isReducedRowEchelonForm(matrix1));
-    EXPECT_TRUE(isReducedRowEchelonForm(matrix2));    EXPECT_TRUE(isReducedRowEchelonForm(matrix3));
+    EXPECT_TRUE(isReducedRowEchelonForm(matrix2));
+    EXPECT_TRUE(isReducedRowEchelonForm(matrix3));
 }
 
 TEST(GaussJordanReductionTest, IsReducedRowEchelonFormWorks_MatrixCanBeCheckedIfItsNotInReducedRowEchelonForm) {
@@ -87,6 +90,7 @@ TEST(GaussJordanReductionTest, MultiplyValueInRowAndPutProductInAnotherRowWorks)
     AlbaMatrix<int> expectedMatrix(2, 3, {2, 4, 9, 12, 20, 24});
     EXPECT_EQ(expectedMatrix, matrix);
 }
+
 TEST(GaussJordanReductionTest, SubtractRowsWithMultiplierPutDifferenceInAnotherRowWorks) {
     AlbaMatrix<double> matrix(2, 3, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0});
 

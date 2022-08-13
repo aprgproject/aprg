@@ -525,6 +525,7 @@ string getHexEquivalentOfCharacters(string_view stringToCheck) {
     }
     return ss.str();
 }
+
 string constructFileLocator(string_view file, int const lineNumber) {
     stringstream ss;
     ss << file.substr(file.find_last_of('\\') + 1) << "[" << lineNumber << "]";

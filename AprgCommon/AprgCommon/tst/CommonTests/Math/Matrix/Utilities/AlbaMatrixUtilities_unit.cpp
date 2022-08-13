@@ -21,7 +21,8 @@ TEST(AlbaMatrixUtilitiesTest, IsZeroMatrixWorks) {
     AlbaMatrix<int> matrix3(3, 3, {0, 0, 0, 0, 1, 0, 0, 0, 0});
 
     EXPECT_TRUE(isZeroMatrix(matrix1));
-    EXPECT_TRUE(isZeroMatrix(matrix2));    EXPECT_FALSE(isZeroMatrix(matrix3));
+    EXPECT_TRUE(isZeroMatrix(matrix2));
+    EXPECT_FALSE(isZeroMatrix(matrix3));
 }
 
 TEST(AlbaMatrixUtilitiesTest, IsIdentityMatrixWorks) {
@@ -30,7 +31,8 @@ TEST(AlbaMatrixUtilitiesTest, IsIdentityMatrixWorks) {
     AlbaMatrix<int> matrix3(4, 3, {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0});
 
     EXPECT_TRUE(isIdentityMatrix(matrix1));
-    EXPECT_FALSE(isIdentityMatrix(matrix2));    EXPECT_FALSE(isIdentityMatrix(matrix3));
+    EXPECT_FALSE(isIdentityMatrix(matrix2));
+    EXPECT_FALSE(isIdentityMatrix(matrix3));
 }
 
 TEST(AlbaMatrixUtilitiesTest, IsSingularWorks) {
@@ -44,7 +46,8 @@ TEST(AlbaMatrixUtilitiesTest, GetIdentityMatrixWorks) {
     AlbaMatrix<double> matrixToVerify(getIdentityMatrix<double>(5));
 
     AlbaMatrix<double> matrixToExpect(5, 5, {1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
-                                             0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0});    EXPECT_EQ(matrixToExpect, matrixToVerify);
+                                             0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0});
+    EXPECT_EQ(matrixToExpect, matrixToVerify);
 }
 
 TEST(AlbaMatrixUtilitiesTest, DoUnaryOperationWorks) {
@@ -99,6 +102,7 @@ TEST(AlbaMatrixUtilitiesTest, MultiplyMatricesWorks3By2And4By3) {
     AlbaMatrix<int> expectedMatrix(4, 2, {38, 44, 50, 56, 83, 98, 113, 128});
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
+
 TEST(AlbaMatrixUtilitiesTest, MultiplyMatricesWorks3By2And2By3) {
     AlbaMatrix<int> matrix1(3, 2, {1, 2, -1, 3, 1, 4});
     AlbaMatrix<int> matrix2(2, 3, {-2, 5, 4, -3, 2, 1});
@@ -128,6 +132,7 @@ TEST(AlbaMatrixUtilitiesTest, MultiplyMatricesWorks2By2And2By3) {
     AlbaMatrix<int> expectedMatrix(3, 2, {9, 12, 15, 19, 26, 33});
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
+
 TEST(AlbaMatrixUtilitiesTest, GetMatrixRaiseToScalarPowerWorks) {
     AlbaMatrix<int> matrix(3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9});
 
@@ -196,4 +201,5 @@ TEST(AlbaMatrixUtilitiesTest, TraverseWithBinaryOperationForDifferentRowsWorks) 
     AlbaMatrix<int> expectedMatrix(2, 3, {1, 2, 3, 4, 12, 24});
     EXPECT_EQ(expectedMatrix, matrix);
 }
+
 }  // namespace alba::matrix

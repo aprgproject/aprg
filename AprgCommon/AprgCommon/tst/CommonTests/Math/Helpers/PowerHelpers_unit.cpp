@@ -71,6 +71,7 @@ TEST(PowerHelpersTest, GetRaiseToPowerForIntegersUsingPowWorks) {
     EXPECT_EQ(-128, getRaiseToPowerForIntegersUsingPow(-2, 7));
     EXPECT_EQ(0, getRaiseToPowerForIntegersUsingPow(-2, -1));
 }
+
 TEST(PowerHelpersTest, IsPerfectSquareForAlbaNumberWorks) {
     EXPECT_TRUE(isPerfectSquare(AlbaNumber(0)));
     EXPECT_TRUE(isPerfectSquare(AlbaNumber(1)));

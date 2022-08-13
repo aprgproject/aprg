@@ -19,7 +19,8 @@ public:
     using VertexToSetOfVerticesMap = std::map<Vertex, SetOfVerticesWithVertex>;
     static constexpr unsigned int UNUSED_COUNT = std::numeric_limits<Count>::max();
 
-    MinimumNodeCoverForTree(BaseUndirectedGraphWithVertex const& nAryTreeGraph, Vertex const rootOfTree)        : m_nAryTreeGraph(nAryTreeGraph), m_rootOfTree(rootOfTree), m_childrenInTree(m_nAryTreeGraph, m_rootOfTree) {}
+    MinimumNodeCoverForTree(BaseUndirectedGraphWithVertex const& nAryTreeGraph, Vertex const rootOfTree)
+        : m_nAryTreeGraph(nAryTreeGraph), m_rootOfTree(rootOfTree), m_childrenInTree(m_nAryTreeGraph, m_rootOfTree) {}
 
     Count getMinimumNodeCoverSize() const {
         Count result(0);
@@ -34,7 +35,8 @@ public:
         SetOfVerticesWithVertex result;
         if (!m_nAryTreeGraph.isEmpty()) {
             VertexToSetOfVerticesMap vertexToMinimumSetMap;
-            result = getMinimumNodeCoverUsingMemoizationDP(vertexToMinimumSetMap, m_rootOfTree);        }
+            result = getMinimumNodeCoverUsingMemoizationDP(vertexToMinimumSetMap, m_rootOfTree);
+        }
         return result;
     }
 
@@ -76,7 +78,8 @@ private:
                     SetOfVerticesWithVertex grandChildSet(
                         getMinimumNodeCoverUsingMemoizationDP(vertexToMinimumSetMap, grandChild));
                     copy(
-                        grandChildSet.cbegin(), grandChildSet.cend(),                        inserter(setIfVertexIsNotIncluded, setIfVertexIsNotIncluded.begin()));
+                        grandChildSet.cbegin(), grandChildSet.cend(),
+                        inserter(setIfVertexIsNotIncluded, setIfVertexIsNotIncluded.begin()));
                 }
             }
             if (setIfVertexIsIncluded.size() <= setIfVertexIsNotIncluded.size()) {
@@ -96,6 +99,7 @@ private:
 };
 
 }  // namespace algorithm
+
 }  // namespace alba
 
 // Minimum Node Cover For Tree

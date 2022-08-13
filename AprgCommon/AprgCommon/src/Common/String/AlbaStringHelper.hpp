@@ -25,6 +25,7 @@ inline bool isNewline(char const c) { return ('\n' == c || '\r' == c); }
 inline bool isNotNpos(int const index) { return static_cast<int>(std::string::npos) != index; }
 
 inline bool isNpos(int const index) { return static_cast<int>(std::string::npos) == index; }
+
 inline bool isValidIndex(int const index, int const stringLength) {
     return isNotNpos(index) && 0 <= index && stringLength >= index;
 }

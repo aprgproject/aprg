@@ -53,6 +53,7 @@ private:
 };
 
 }  // namespace algorithm
+
 }  // namespace alba
 
 // Proposition: To sort a randomly ordered array with distinct keys, insertion sort uses ~(1/4)N^2 compares and

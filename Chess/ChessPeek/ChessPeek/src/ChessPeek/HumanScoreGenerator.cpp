@@ -29,7 +29,8 @@ HumanScoreGenerator::Score HumanScoreGenerator::getHumanScore(MoveDetail const& 
            dataFromExchanges.complicatedScore;
 }
 
-HumanScoreGenerator::Score HumanScoreGenerator::getScoreLevelPart(MoveDetail const& moveDetail) const {    int scoreLevel = 0;
+HumanScoreGenerator::Score HumanScoreGenerator::getScoreLevelPart(MoveDetail const& moveDetail) const {
+    int scoreLevel = 0;
     if (moveDetail.mate > 0) {
         if (m_bestScore > LOWER_LIMIT_FOR_WINNING) {
             scoreLevel = m_highestScoreLevel;  // put mate as same level as best moves if winning (to be human)

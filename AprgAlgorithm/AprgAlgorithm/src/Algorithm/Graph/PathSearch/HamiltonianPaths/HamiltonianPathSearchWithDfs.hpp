@@ -143,6 +143,7 @@ protected:
 // Still, in some special cases, we can be certain that a graph contains a Hamiltonian path.
 // A simple observation is that if the graph is complete, i.e., there is an edge between all pairs of nodes, it also
 // contains a Hamiltonian path.
+
 // A simple way to search for a Hamiltonian path is to use a backtracking algorithm that goes through all possible ways
 // to construct the path (implemented above). The time complexity of such an algorithm is at least O(n!), because there
 // are n! different ways to choose the order of n nodes. A more efficient solution is based on dynamic programming. The

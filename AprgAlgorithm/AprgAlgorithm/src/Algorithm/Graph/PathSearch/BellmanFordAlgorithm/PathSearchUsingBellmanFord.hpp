@@ -48,7 +48,8 @@ private:
                     if (m_checkableVerticesToProcess.isNotFound(destinationVertex)) {
                         enqueue(destinationVertex);
                     }
-                },                [&]() {
+                },
+                [&]() {
                     // As soon as processed number vertices reached the total number of vertices check for a
                     // positive/negative cycle.
                     if (numberOfVerticesProcessed++ >= numberOfVertices) {
@@ -73,7 +74,8 @@ private:
                     if (m_checkableVerticesToProcess.isNotFound(destinationVertex)) {
                         enqueue(destinationVertex);
                     }
-                },                [&]() {
+                },
+                [&]() {
                     // As soon as processed number vertices reached the total number of vertices check for a
                     // postive/negative cycle.
                     if (numberOfVerticesProcessed++ != 0 && numberOfVerticesProcessed % numberOfVertices == 0) {
@@ -97,6 +99,7 @@ private:
         }
         return result;
     }
+
     void findAPositiveOrNegativeCycle() {
         // A positive cycle is a directed cycle whose sum of edge weight is positive.
         // A negative cycle is a directed cycle whose sum of edge weight is negative.
@@ -124,6 +127,7 @@ private:
 };
 
 }  // namespace algorithm
+
 }  // namespace alba
 
 // Algorithm in short terms: Relax all nodes.

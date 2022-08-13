@@ -428,7 +428,8 @@ bool shouldIncludeLine(strings const& currentLine, Book const& book) {
     bool result(false);
     constexpr int MIN_NUMBER_OF_GAMES = 10000;
 
-    Board updatedBoard(BoardOrientation::BlackUpWhiteDown);    PieceColor currentColor = PieceColor::White;
+    Board updatedBoard(BoardOrientation::BlackUpWhiteDown);
+    PieceColor currentColor = PieceColor::White;
     int size = currentLine.size();
     int index{};
     for (string const& moveString : currentLine) {
@@ -459,7 +460,8 @@ bool shouldIncludeLine(strings const& currentLine, Book const& book) {
     return result;
 }
 
-void doOnePage(strings const& currentLine, Paths const& paths) {    WebPageInfo pageInfo;
+void doOnePage(strings const& currentLine, Paths const& paths) {
+    WebPageInfo pageInfo;
 
     bool isProcessed(false);
     while (!isProcessed) {

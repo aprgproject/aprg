@@ -73,7 +73,8 @@ size_t getPivotingColumnUsingBlandsRule(AlbaMatrix<DataType> const& simplexTable
     // Finding entry q using Bland's rule: index of first column whose objective function coefficient is positive
 
     size_t lastY(simplexTable.getNumberOfRows() - 1);
-    size_t x = 0;    for (; x < simplexTable.getNumberOfColumns(); x++) {
+    size_t x = 0;
+    for (; x < simplexTable.getNumberOfColumns(); x++) {
         if (simplexTable.getEntry(x, lastY) > 0) {
             break;
         }
@@ -120,7 +121,8 @@ void pivotAt(AlbaMatrix<DataType>& simplexTable, size_t const pivotingColumn, si
     // 2) scaling the pivoting row such that the entry in the pivoting column is 1
 
     // scale all entries but pivoting row and pivoting column
-    simplexTable.iterateAllThroughYAndThenX([&](size_t const x, size_t const y) {        if (x != pivotingColumn && y != pivotingRow) {
+    simplexTable.iterateAllThroughYAndThenX([&](size_t const x, size_t const y) {
+        if (x != pivotingColumn && y != pivotingRow) {
             DataType valueToSubtract(
                 simplexTable.getEntry(x, pivotingRow) * simplexTable.getEntry(pivotingColumn, y) /
                 simplexTable.getEntry(pivotingColumn, pivotingRow));

@@ -20,7 +20,8 @@ TEST(AlbaDfaUsingMatrixTest, GetNextStateTest) {
     DfaForTest dfa(static_cast<int>(State::MAX), 6U);
     dfa.setStateTransition(State::First, State::First, 1U);
     dfa.setStateTransition(State::First, State::Second, 2U);
-    dfa.setStateTransition(State::First, State::Third, 3U);    dfa.setStateTransition(State::First, State::Fourth, 4U);
+    dfa.setStateTransition(State::First, State::Third, 3U);
+    dfa.setStateTransition(State::First, State::Fourth, 4U);
     dfa.setStateTransition(State::First, State::Fifth, 5U);
 
     EXPECT_EQ(State::First, dfa.getNextState(State::First, 1U));
@@ -39,6 +40,7 @@ TEST(AlbaDfaUsingMatrixTest, SetStateTransitionTest) {
     DfaForTest dfa(static_cast<int>(State::MAX), 6U);
 
     dfa.setStateTransition(State::First, State::First, 1U);
+
     EXPECT_EQ(State::First, dfa.getNextState(State::First, 1U));
     EXPECT_EQ(State::Unknown, dfa.getNextState(State::First, 2U));
 }
