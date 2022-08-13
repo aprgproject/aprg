@@ -12,18 +12,16 @@ namespace soosa {
 
 SoosaConfiguration::SoosaConfiguration() {}
 
-unsigned int SoosaConfiguration::getAcceptableLineDeviationForLineModelInPixels() const {
+int SoosaConfiguration::getAcceptableLineDeviationForLineModelInPixels() const {
     return m_acceptableLineDeviationForLineModelInPixels;
 }
-
 double SoosaConfiguration::getRemovalRatioForSquareErrorsInLineModel() const {
     return m_removalRatioForSquareErrorsInLineModel;
 }
 
-unsigned int SoosaConfiguration::getMinimumLineSamples() const { return m_minimumLineSamples; }
+int SoosaConfiguration::getMinimumLineSamples() const { return m_minimumLineSamples; }
 
 double SoosaConfiguration::getBitmapWidthToBarWidthMultiplier() const { return m_bitmapWidthToBarWidthMultiplier; }
-
 double SoosaConfiguration::getLineBarWidthSearchInitialBlackPointsValue() const {
     return m_lineBarWidthSearchInitialBlackPointsValue;
 }
@@ -36,10 +34,9 @@ double SoosaConfiguration::getAcceptableDistanceOverWidthRatioFromWidthMidpoint(
     return m_acceptableDistanceOverWidthRatioFromWidthMidpoint;
 }
 
-unsigned int SoosaConfiguration::getAcceptableMinimumDistanceFromWidthMidpoint() const {
+int SoosaConfiguration::getAcceptableMinimumDistanceFromWidthMidpoint() const {
     return m_acceptableMinimumDistanceFromWidthMidpoint;
 }
-
 double SoosaConfiguration::getAcceptableSdOverMeanDeviationForLine() const {
     return m_acceptableSdOverMeanDeviationForLine;
 }
@@ -64,12 +61,11 @@ double SoosaConfiguration::getAcceptableSdOverMeanDeviationForBarHeight() const 
 
 double SoosaConfiguration::getRemovalRatioForBarHeight() const { return m_removalRatioForBarHeight; }
 
-unsigned int SoosaConfiguration::getNumberOfChoices() const { return m_numberOfChoices; }
+int SoosaConfiguration::getNumberOfChoices() const { return m_numberOfChoices; }
 
-unsigned int SoosaConfiguration::getColorIntensityForWhite() const { return m_colorIntensityForWhite; }
+int SoosaConfiguration::getColorIntensityForWhite() const { return m_colorIntensityForWhite; }
 
 double SoosaConfiguration::getBarHeightToDiameterMultiplier() const { return m_barHeightToDiameterMultiplier; }
-
 double SoosaConfiguration::getMinimumPercentageOfBlackPixelsForAFilledCircle() const {
     return m_minimumPercentageOfBlackPixelsForAFilledCircle;
 }
@@ -94,17 +90,16 @@ void SoosaConfiguration::update() {
     }
 
     // Line model parameters
-    UPDATE_PARAMETER(m_acceptableLineDeviationForLineModelInPixels, unsigned int);
+    UPDATE_PARAMETER(m_acceptableLineDeviationForLineModelInPixels, int);
     UPDATE_PARAMETER(m_removalRatioForSquareErrorsInLineModel, double);
-    UPDATE_PARAMETER(m_minimumLineSamples, unsigned int);
+    UPDATE_PARAMETER(m_minimumLineSamples, int);
 
     // Line and bar parameters
     UPDATE_PARAMETER(m_bitmapWidthToBarWidthMultiplier, double);
-    UPDATE_PARAMETER(m_lineBarWidthSearchInitialBlackPointsValue, unsigned int);
+    UPDATE_PARAMETER(m_lineBarWidthSearchInitialBlackPointsValue, int);
     UPDATE_PARAMETER(m_lineBarWidthSearchAcceptedRunningBlackRatio, double);
     UPDATE_PARAMETER(m_acceptableDistanceOverWidthRatioFromWidthMidpoint, double);
-    UPDATE_PARAMETER(m_acceptableMinimumDistanceFromWidthMidpoint, double);
-    UPDATE_PARAMETER(m_acceptableSdOverMeanDeviationForLine, double);
+    UPDATE_PARAMETER(m_acceptableMinimumDistanceFromWidthMidpoint, double);    UPDATE_PARAMETER(m_acceptableSdOverMeanDeviationForLine, double);
     UPDATE_PARAMETER(m_acceptableSdOverMeanDeviationForBar, double);
     UPDATE_PARAMETER(m_removalRatioForLineAndBar, double);
     UPDATE_PARAMETER(m_initialValueForMaximumDistanceBetweenBarHeights, double);
@@ -113,11 +108,10 @@ void SoosaConfiguration::update() {
     UPDATE_PARAMETER(m_removalRatioForBarHeight, double);
 
     // Choices related parameters
-    UPDATE_PARAMETER(m_numberOfChoices, unsigned int);
-    UPDATE_PARAMETER(m_colorIntensityForWhite, unsigned int);
+    UPDATE_PARAMETER(m_numberOfChoices, int);
+    UPDATE_PARAMETER(m_colorIntensityForWhite, int);
     UPDATE_PARAMETER(m_barHeightToDiameterMultiplier, double);
     UPDATE_PARAMETER(m_minimumPercentageOfBlackPixelsForAFilledCircle, double);
-
 #undef UPDATE_PARAMETER
 }
 
