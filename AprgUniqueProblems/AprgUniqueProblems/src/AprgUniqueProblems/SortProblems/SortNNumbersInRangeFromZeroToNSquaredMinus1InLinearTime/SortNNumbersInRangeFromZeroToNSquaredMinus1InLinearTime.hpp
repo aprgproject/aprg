@@ -35,6 +35,7 @@ public:
             IsDigitFunction isDigitIndexValid = [numberOfDigits](Integer const&, int const digitIndex) -> bool {
                 return digitIndex < numberOfDigits;
             };
+
             RadixSorter radixSorter(getDigitAt, isDigitIndexValid);
             radixSorter.sort(valuesToSort);
         }

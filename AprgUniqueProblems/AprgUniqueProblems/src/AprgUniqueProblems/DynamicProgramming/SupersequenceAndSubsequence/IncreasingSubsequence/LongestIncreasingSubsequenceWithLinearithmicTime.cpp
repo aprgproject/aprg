@@ -47,6 +47,7 @@ LongestIncreasingSubsequenceWithLinearithmicTime::getLongestSubsequence() const 
             Value const& value(m_sequence.at(i));
             auto beginIt = lengthMinus1ToEndValue.begin(), endIt = lengthMinus1ToEndValue.begin() + longestLength;
             auto lowerBoundItForEndValue = lower_bound(beginIt, endIt, value);
+
             if (lowerBoundItForEndValue == endIt)  // if current value is the highest
             {
                 indexToPreviousIndex[i] = lengthMinus1ToEndIndex.at(longestLength - 1);

@@ -15,6 +15,7 @@ int FrequencyStatistics::calculateNumberOfSamples(FrequencySamples const& sample
             return partialResult + ((int)frequencyPair.second);
         });
 }
+
 double FrequencyStatistics::calculateSum(FrequencySamples const& samples) {
     return accumulate(
         samples.begin(), samples.end(), (double)0, [](double partialResult, FrequencyPair const& frequencyPair) {
@@ -27,7 +28,8 @@ double FrequencyStatistics::calculateMean(FrequencySamples const& samples) {
     int numberOfSamples = calculateNumberOfSamples(samples);
     if (numberOfSamples > 0) {
         result = calculateSum(samples) / numberOfSamples;
-    }    return result;
+    }
+    return result;
 }
 
 double FrequencyStatistics::calculateMedian(FrequencySamples const& samples) {
@@ -41,7 +43,8 @@ double FrequencyStatistics::calculateMedian(FrequencySamples const& samples) {
         int minimumValueOffset = (frequencyPair.second > 0) ? 1 : 0;
         if (rangeOffsetForCurrentValue + minimumValueOffset <= medianLocation &&
             medianLocation <= rangeOffsetForCurrentValue + frequencyPair.second) {
-            result = frequencyPair.first;            break;
+            result = frequencyPair.first;
+            break;
         } else if (
             previousMinimumValue <= medianLocation &&
             medianLocation <= rangeOffsetForCurrentValue + frequencyPair.second) {
@@ -66,7 +69,8 @@ FrequencyStatistics::MultipleValues FrequencyStatistics::calculateMode(Frequency
     int maxFrequency = iteratorForMaxFrequency->second;
 
     for_each(samples.begin(), samples.end(), [&](FrequencyPair const& frequencyPair) {
-        if (maxFrequency == frequencyPair.second) {            result.push_back(frequencyPair.first);
+        if (maxFrequency == frequencyPair.second) {
+            result.push_back(frequencyPair.first);
         }
     });
     return result;

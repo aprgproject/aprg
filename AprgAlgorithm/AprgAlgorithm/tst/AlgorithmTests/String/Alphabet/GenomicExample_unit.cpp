@@ -19,7 +19,8 @@ string compressCharactersToValues(string const& characters) {
     Alphabet<uint8_t> dnaAlphabet("ACTG");
     stringstream inputSs;
     inputSs << characters;
-    stringstream outputSs;    AlbaStreamBitReader reader(inputSs);
+    stringstream outputSs;
+    AlbaStreamBitReader reader(inputSs);
     AlbaStreamBitWriter writer(outputSs);
     while (true) {
         bitset<2> valueBitset(dnaAlphabet.getDigitValue(reader.readCharData()));
@@ -37,7 +38,8 @@ string expandValuesToCharacters(string const& characters) {
     Alphabet<uint8_t> dnaAlphabet("ACTG");
     stringstream inputSs;
     inputSs << characters;
-    stringstream outputSs;    AlbaStreamBitReader reader(inputSs);
+    stringstream outputSs;
+    AlbaStreamBitReader reader(inputSs);
     AlbaStreamBitWriter writer(outputSs);
     while (true) {
         bitset<2> valueBitset(reader.readBitsetData<2>(0, 1));
@@ -45,7 +47,8 @@ string expandValuesToCharacters(string const& characters) {
             writer.writeCharData(dnaAlphabet.getCharacter(static_cast<uint8_t>(valueBitset.to_ulong())));
         } else {
             break;
-        }    }
+        }
+    }
     writer.flush();
     return outputSs.str();
 }

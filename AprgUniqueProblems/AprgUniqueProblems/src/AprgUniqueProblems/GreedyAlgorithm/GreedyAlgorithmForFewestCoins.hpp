@@ -15,7 +15,8 @@ public:
     int getFewestNumberOfCoins(Value const value) const;
 
 private:
-    void initialize();    Coins m_sortedAvailableCoins;
+    void initialize();
+    Coins m_sortedAvailableCoins;
 };
 
 }  // namespace alba

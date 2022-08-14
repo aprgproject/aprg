@@ -30,6 +30,7 @@ int n, k, a[100000];
 void runTestCase(int const testCaseNumber) {
     my_cin >> n >> k;
     for (int i = 0; i < n; ++i) my_cin >> a[i];
+
     int lb = 1, rb = a[n - 1] - a[0];
     while (lb < rb) {
         int mb = (lb + rb) / 2;
@@ -56,6 +57,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

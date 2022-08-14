@@ -26,7 +26,8 @@ public:
     int getAcceptableMinimumDistanceFromWidthMidpoint() const;
     double getAcceptableSdOverMeanDeviationForLine() const;
     double getAcceptableSdOverMeanDeviationForBar() const;
-    double getRemovalRatioForLineAndBar() const;    double getInitialValueForMaximumDistanceBetweenBarHeights() const;
+    double getRemovalRatioForLineAndBar() const;
+    double getInitialValueForMaximumDistanceBetweenBarHeights() const;
     double getMultiplierForMaximumDistanceBetweenBarHeights() const;
     double getAcceptableSdOverMeanDeviationForBarHeight() const;
     double getRemovalRatioForBarHeight() const;
@@ -36,6 +37,7 @@ public:
     int getColorIntensityForWhite() const;
     double getBarHeightToDiameterMultiplier() const;
     double getMinimumPercentageOfBlackPixelsForAFilledCircle() const;
+
     void loadConfigurationFromFile(std::string const& filePath);
     void bufferNameAndValueString(std::string const& nameOfParameter, std::string const& valueString);
     void update();
@@ -53,7 +55,8 @@ private:
     int m_lineBarWidthSearchInitialBlackPointsValue;
     double m_lineBarWidthSearchAcceptedRunningBlackRatio;
     double m_acceptableDistanceOverWidthRatioFromWidthMidpoint;
-    double m_acceptableMinimumDistanceFromWidthMidpoint;    double m_acceptableSdOverMeanDeviationForLine;
+    double m_acceptableMinimumDistanceFromWidthMidpoint;
+    double m_acceptableSdOverMeanDeviationForLine;
     double m_acceptableSdOverMeanDeviationForBar;
     double m_removalRatioForLineAndBar;
     double m_initialValueForMaximumDistanceBetweenBarHeights;
@@ -66,6 +69,7 @@ private:
     int m_colorIntensityForWhite;
     double m_barHeightToDiameterMultiplier;
     double m_minimumPercentageOfBlackPixelsForAFilledCircle;
+
     // Buffer
     BufferMap m_nameToValueStringMapBuffer;
 };

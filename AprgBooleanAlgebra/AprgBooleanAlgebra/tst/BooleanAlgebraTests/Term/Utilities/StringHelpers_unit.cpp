@@ -26,7 +26,8 @@ TEST(StringHelpersTest, GetOperatorTypeValueWorks) {
     EXPECT_EQ(0, getOperatorPriority("notAnOperator"));
 }
 
-TEST(StringHelpersTest, GetStringWorksForOperatorType) {    EXPECT_TRUE(getString(OperatorType::Unknown).empty());
+TEST(StringHelpersTest, GetStringWorksForOperatorType) {
+    EXPECT_TRUE(getString(OperatorType::Unknown).empty());
     EXPECT_EQ("~", getString(OperatorType::Not));
     EXPECT_EQ("&", getString(OperatorType::And));
     EXPECT_EQ("|", getString(OperatorType::Or));

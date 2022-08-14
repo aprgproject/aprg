@@ -14,6 +14,7 @@ public:
     using Values = std::vector<Value>;
 
     CountNumberOfWaysToReachAGivenScoreInAGame(Value const targetScore);
+
     Value getMinimumCostUsingIterativeDP() const;
     Value getMinimumCostUsingCoinProblemSolutions() const;
 

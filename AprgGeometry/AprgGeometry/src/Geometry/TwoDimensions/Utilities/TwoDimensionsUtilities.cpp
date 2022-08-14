@@ -215,6 +215,7 @@ double getAreaOfQuadrilateral(Quadrilateral const& quadrilateral) {
 double getAreaUsingPicksTheorem(int const numberOfPointsInside, int const numberOfPointsOnTheBoundary) {
     return numberOfPointsInside + static_cast<double>(numberOfPointsOnTheBoundary) / 2 - 1;
 }
+
 ConicSectionType getConicSectionBasedOnEccentricity(double const eccentricity) {
     ConicSectionType result(ConicSectionType::Unknown);
     if (isAlmostEqual(eccentricity, 0.0)) {
@@ -481,7 +482,8 @@ Point popNearestPoint(Points& points, Point const& point) {
         for (Points::iterator it = points.begin() + 1; it != points.end(); ++it) {
             double currentDistance(getDistance(*it, point));
             if (nearestDistance > currentDistance) {
-                nearestDistance = currentDistance;                nearestPointIterator = it;
+                nearestDistance = currentDistance;
+                nearestPointIterator = it;
             }
         }
         result = *nearestPointIterator;
@@ -547,7 +549,8 @@ Points getMergedPointsInIncreasingX(Points const& firstPointsToBeMerged, Points 
                 ++iteratorForY;
             } else if (iteratorForX->getX() < iteratorForY->getX()) {
                 result.emplace_back(*iteratorForX++);
-            } else {                result.emplace_back(*iteratorForY++);
+            } else {
+                result.emplace_back(*iteratorForY++);
             }
         } else if (iteratorForX != firstPoints.cend()) {
             result.emplace_back(*iteratorForX++);
@@ -571,7 +574,8 @@ Points getMergedPointsInDecreasingX(Points const& firstPointsToBeMerged, Points 
                 ++iteratorForY;
             } else if (iteratorForX->getX() > iteratorForY->getX()) {
                 result.emplace_back(*iteratorForX++);
-            } else {                result.emplace_back(*iteratorForY++);
+            } else {
+                result.emplace_back(*iteratorForY++);
             }
         } else if (iteratorForX != firstPoints.cend()) {
             result.emplace_back(*iteratorForX++);
@@ -648,7 +652,8 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
     int i = 0;
     for (auto const& compareDataAndPointPair : compareDataToPointMap) {
         Point const& currentPoint(compareDataAndPointPair.second);
-        if (i < 2) {            convertHullPoints.push(currentPoint);  // push the first 2 points
+        if (i < 2) {
+            convertHullPoints.push(currentPoint);  // push the first 2 points
         } else {
             Point previousTop = convertHullPoints.top();
             convertHullPoints.pop();

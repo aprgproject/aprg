@@ -62,6 +62,7 @@ public:
     int getNumberOfCoinCombinationsUsingIterativeDPAndSpaceEfficient(Value const total) const;
     CoinCombinations getCoinCombinationsUsingMemoizationDP(Value const total) const;
     CoinCombinations getCoinCombinationsUsingIterativeDP(Value const total) const;
+
 private:
     Value getMaxAvailableCoin() const;
     Value getMaxOfTotalAndMaxCoinPlusOne(Value const total) const;
@@ -80,7 +81,8 @@ private:
         CountMatrix& countByValueByCoin, Value const total, int const coinIndex) const;
     CoinCombinations getCoinCombinationsUsingMemoizationDPInternal(
         CoinCombinationsPerValue& coinCombinationsPerValue, Value const total) const;
-    Coins m_availableCoins;};
+    Coins m_availableCoins;
+};
 
 }  // namespace alba
 

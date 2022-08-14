@@ -183,7 +183,8 @@ string ReplaceStringInFiles::constructCPlusPlusPrint(
                 if (printParameterIndex < static_cast<int>(printParameters.size())) {
                     appendParameterToResult(result, isOnStringLiteral, printParameters[printParameterIndex++]);
                     isParameterAppended = true;
-                }            } else if (!isNumber(c)) {
+                }
+            } else if (!isNumber(c)) {
                 appendCharacterToResult(result, isOnStringLiteral, '%');
             }
         }

@@ -46,7 +46,8 @@ public:
     void drawCharacter(AprgBitmap::BitmapXY const& upLeftPoint, char const character, uint32_t const colorToWrite);
     void saveChangesToBitmapFile();
 
-private:    bool isBitmapPointInTheBitmap(TwoDimensions::Point const& bitmapPoint);
+private:
+    bool isBitmapPointInTheBitmap(TwoDimensions::Point const& bitmapPoint);
     std::string getBitmapFilePathOfCharacter(char const character) const;
     double getLowestInterval() const;
     TwoDimensions::Point convertBitmapXYToRealPoint(AprgBitmap::BitmapXY const& bitmapPosition) const;
@@ -63,7 +64,8 @@ private:    bool isBitmapPointInTheBitmap(TwoDimensions::Point const& bitmapPoin
     void drawEquationWithYSubstitution(algebra::Equation const& equation, uint32_t const color);
     AprgBitmap::Bitmap m_bitmap;
     AprgBitmap::BitmapSnippet m_bitmapSnippet;
-    AprgBitmap::BitmapXY m_originInBitmap;    AprgBitmap::BitmapDoubleXY m_magnification;
+    AprgBitmap::BitmapXY m_originInBitmap;
+    AprgBitmap::BitmapDoubleXY m_magnification;
     double m_lowestInterval;
     TwoDimensions::Point m_realUpLeftPoint;
     TwoDimensions::Point m_realDownRightPoint;

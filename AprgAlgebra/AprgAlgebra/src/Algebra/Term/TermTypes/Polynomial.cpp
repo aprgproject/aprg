@@ -46,7 +46,8 @@ bool Polynomial::operator<(Polynomial const& second) const {
         for (int i = 0; i < size; i++) {
             Monomial const& monomial1(monomials1.at(i));
             Monomial const& monomial2(monomials2.at(i));
-            if (monomial1 != monomial2) {                result = monomial1 < monomial2;
+            if (monomial1 != monomial2) {
+                result = monomial1 < monomial2;
                 break;
             }
         }
@@ -158,7 +159,8 @@ void Polynomial::raiseToUnsignedInteger(int const exponent) {
     for (int exponentCount = 1; exponentCount < exponent; exponentCount++) {
         multiplyPolynomial(base);
     }
-    clearSimplifiedFlag();}
+    clearSimplifiedFlag();
+}
 
 void Polynomial::setAsSimplified() { m_isSimplified = true; }
 

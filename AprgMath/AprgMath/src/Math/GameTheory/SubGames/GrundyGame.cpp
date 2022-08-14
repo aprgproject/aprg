@@ -95,7 +95,8 @@ SetOfUnsignedIntegers GrundyGame::getNextGrundyNumbersWithNumberOfSticks(Unsigne
         int b = numberOfSticks - a;
         result.emplace(
             getCombinedGrundyNumber(getGrundyNumberWithNumberOfSticks(a), getGrundyNumberWithNumberOfSticks(b)));
-    }    return result;
+    }
+    return result;
 }
 
 }  // namespace math

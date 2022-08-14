@@ -14,6 +14,7 @@ TEST(TaskAndDeadlinesTest, GetTasksAsPossibleWorksOnExample1) {
     taskAndDeadlines.addTask("D", 4, 5);
 
     TaskAndDeadlines::TaskNames actualNames(taskAndDeadlines.getTasksOrderWithMaximumScore());
+
     TaskAndDeadlines::TaskNames expectedNames{"C", "B", "A", "D"};
     EXPECT_EQ(expectedNames, actualNames);
 }

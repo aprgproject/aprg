@@ -1084,7 +1084,8 @@ Term operator^(Polynomial const& polynomial, Constant const& constant) {
             int exponentAbsoluteValue(static_cast<int>(getAbsoluteValue(exponentInteger)));
             Polynomial newPolynomial(polynomial);
             newPolynomial.raiseToUnsignedInteger(exponentAbsoluteValue);
-            if (exponentInteger > 0) {                newTerm = simplifyAndConvertPolynomialToSimplestTerm(newPolynomial);
+            if (exponentInteger > 0) {
+                newTerm = simplifyAndConvertPolynomialToSimplestTerm(newPolynomial);
             } else {
                 newTerm =
                     createExpressionIfPossible({1, "/", simplifyAndConvertPolynomialToSimplestTerm(newPolynomial)});

@@ -21,7 +21,8 @@ int MinimumNumberOfPlatformsRequiredForARailwayStation::getMinimumNumberOfPlatfo
     int numberOfWaitingTrains(0);
     for (Event const& event : m_sortedEvents) {
         if (EventType::ArrivalToThePlatform == event.eventType) {
-            numberOfWaitingTrains++;            minimumNumberOfPlatforms = max(minimumNumberOfPlatforms, numberOfWaitingTrains);
+            numberOfWaitingTrains++;
+            minimumNumberOfPlatforms = max(minimumNumberOfPlatforms, numberOfWaitingTrains);
         } else if (EventType::DepartureFromThePlatform == event.eventType) {
             numberOfWaitingTrains--;
         }
@@ -33,4 +34,5 @@ void MinimumNumberOfPlatformsRequiredForARailwayStation::addTrainSchedule(int co
     m_sortedEvents.emplace(Event{startTime, EventType::ArrivalToThePlatform});
     m_sortedEvents.emplace(Event{endTime, EventType::DepartureFromThePlatform});
 }
+
 }  // namespace alba

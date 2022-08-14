@@ -22,7 +22,8 @@ void reduceEquationsBySubstitution(Equations& substitutedEquations, VariableName
         int selectedEquationIndex(0);
         selectVariableNameAndEquationNumber(
             areVariableAndEquationSelected, selectedVariableName, selectedEquationIndex, substitutedEquations,
-            variableNamesToIgnore);        substituteEquationForSelectedEquationIndex(
+            variableNamesToIgnore);
+        substituteEquationForSelectedEquationIndex(
             substitutedEquations, areVariableAndEquationSelected, selectedVariableName, selectedEquationIndex);
         removeEquationsWithoutUnknowns(substitutedEquations);
         unknownsRetriever.getSavedDataReference().clear();
@@ -40,7 +41,8 @@ void selectVariableNameAndEquationNumber(
     int equationIndex = 0;
     for (Equation const& equation : equations) {
         IsolationOfOneVariableOnEqualityEquation isolation(equation);
-        for (string const& variableName : variableNamesToCheck) {            if (isolation.canBeIsolated(variableName) &&
+        for (string const& variableName : variableNamesToCheck) {
+            if (isolation.canBeIsolated(variableName) &&
                 isolation.getIdenticalExponentForVariableIfPossible(variableName) == 1) {
                 areVariableAndEquationSelected = true;
                 selectedVariableName = variableName;
@@ -57,7 +59,8 @@ void substituteEquationForSelectedEquationIndex(
     int const selectedEquationIndex) {
     if (areVariableAndEquationSelected) {
         IsolationOfOneVariableOnEqualityEquation isolation(substitutedEquations.at(selectedEquationIndex));
-        substitutedEquations.erase(substitutedEquations.begin() + selectedEquationIndex);        SubstitutionOfVariablesToTerms substitution;
+        substitutedEquations.erase(substitutedEquations.begin() + selectedEquationIndex);
+        SubstitutionOfVariablesToTerms substitution;
         substitution.putVariableWithTerm(
             selectedVariableName, isolation.getEquivalentTermByIsolatingAVariable(selectedVariableName));
         for (Equation& substitutedEquation : substitutedEquations) {

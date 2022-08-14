@@ -15,6 +15,7 @@ bool isPerfectNthPower(Monomial const& monomial, int const nthPower);
 bool doesNotNeedToBeFactorized(Polynomial const& polynomial);
 bool doesContainOnlyConstants(Polynomials const& polynomials);
 bool IsEmptyOrContainConstantsOrOneNonConstant(Polynomials const& polynomials);
+
 void simplifyThenEmplaceBackIfPolynomialIsNotEmpty(Polynomials& polynomials, Polynomial const& polynomial);
 void emplaceBackIfPolynomialIsNotEmpty(Polynomials& polynomials, Polynomial const& polynomial);
 

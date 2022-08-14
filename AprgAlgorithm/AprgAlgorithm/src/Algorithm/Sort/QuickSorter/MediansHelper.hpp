@@ -94,6 +94,7 @@ int getIndexOfMedianOfMedians(Values const& values, int const lowIndex, int cons
 }
 
 }  // namespace algorithm
+
 }  // namespace alba
 
 // Quick selection in worst-case linear time

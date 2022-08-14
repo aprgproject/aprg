@@ -58,7 +58,8 @@ UciInterpreter::InfoDetails UciInterpreter::createInfoDetailsFromInfoTokens(stri
             infoDetails.multipv = convertStringToNumber<int>(tokens.at(++i));
         } else if ("cp" == token) {
             infoDetails.scoreInCentipawns = convertStringToNumber<int>(tokens.at(++i));
-        } else if ("mate" == token) {            infoDetails.mateValue = convertStringToNumber<int>(tokens.at(++i));
+        } else if ("mate" == token) {
+            infoDetails.mateValue = convertStringToNumber<int>(tokens.at(++i));
         } else if ("pv" == token) {
             i++;  // skip "pv"
             for (; i < static_cast<int>(tokens.size()); i++) {
@@ -78,6 +79,7 @@ void UciInterpreter::saveCommonParametersOfBestLine(InfoDetails const& infoDetai
         }
     }
 }
+
 void UciInterpreter::saveVariation(InfoDetails const& infoDetails) {
     if (infoDetails.multipv > 0 && !infoDetails.pvHalfMoves.empty()) {
         auto size = m_calculationDetails.variations.size();
@@ -89,7 +91,8 @@ void UciInterpreter::saveVariation(InfoDetails const& infoDetails) {
         } else if (possibleNewSize == static_cast<int>(size) + 1) {
             m_calculationDetails.variations.emplace_back(variation);
         } else {
-            m_calculationDetails.variations.resize(possibleNewSize);            m_calculationDetails.variations[index] = variation;
+            m_calculationDetails.variations.resize(possibleNewSize);
+            m_calculationDetails.variations[index] = variation;
         }
     }
 }

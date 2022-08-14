@@ -38,7 +38,8 @@ BitmapSnippet Bitmap::getSnippetReadFromFileWithNumberOfBytesToRead(
     BitmapXY const center, int const numberOfBytesToRead) const {
     BitmapSnippet snippet;
     if (m_configuration.isPositionWithinTheBitmap(center)) {
-        BitmapXY topLeftCorner;        BitmapXY bottomRightCorner;
+        BitmapXY topLeftCorner;
+        BitmapXY bottomRightCorner;
         calculateNewCornersBasedOnCenterAndNumberOfBytes(topLeftCorner, bottomRightCorner, center, numberOfBytesToRead);
         snippet = getSnippetReadFromFile(topLeftCorner, bottomRightCorner);
     }
@@ -86,7 +87,8 @@ void Bitmap::setSnippetWriteToFile(BitmapSnippet const& snippet) const {
                                                   byteOffsetInXForStart;
                     char const* pixelDataPointer =
                         static_cast<char const*>(snippet.getPixelDataConstReference().getConstantBufferPointer()) +
-                        snippetIndex;                    streamFile.seekg(fileOffsetForStart, streamFile.beg);
+                        snippetIndex;
+                    streamFile.seekg(fileOffsetForStart, streamFile.beg);
                     streamFile.write(pixelDataPointer, numberOfBytesToBeCopiedForX);
                     snippetIndex += numberOfBytesToBeCopiedForX;
                 }
@@ -100,7 +102,8 @@ void Bitmap::calculateNewCornersBasedOnCenterAndNumberOfBytes(
     BitmapXY& topLeftCorner, BitmapXY& bottomRightCorner, BitmapXY const center, int const numberOfBytes) const {
     int side(static_cast<int>(m_configuration.getEstimatedSquareSideInPixels(numberOfBytes)));
     int halfSide(side / 2);
-    int left(        static_cast<int>(m_configuration.getXCoordinateWithinTheBitmap(static_cast<int>(center.getX()) - halfSide)));
+    int left(
+        static_cast<int>(m_configuration.getXCoordinateWithinTheBitmap(static_cast<int>(center.getX()) - halfSide)));
     int right(
         static_cast<int>(m_configuration.getXCoordinateWithinTheBitmap(static_cast<int>(center.getX()) + halfSide)));
     adjustToTargetLength(left, right, side, m_configuration.getBitmapWidth());
@@ -129,7 +132,8 @@ void Bitmap::adjustToTargetLength(int& low, int& high, int const targetLength, i
         } else if ((int)(high + additionalSizeInX) < maxLength) {
             high = high + additionalSizeInX;
         }
-    }}
+    }
+}
 
 }  // namespace AprgBitmap
 

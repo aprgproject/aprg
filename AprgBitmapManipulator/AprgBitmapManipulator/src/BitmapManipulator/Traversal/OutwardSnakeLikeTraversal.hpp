@@ -17,6 +17,7 @@ public:
 
     bool isTraversalFinished() const;
     BitmapXY getNextPoint();
+
 private:
     BitmapXY fixPoint(BitmapXY const& point);
     void gotoNextPoint();
@@ -48,6 +49,7 @@ private:
     bool m_isStart;
     bool m_isFinished;
 };
+
 }  // namespace AprgBitmap
 
 }  // namespace alba

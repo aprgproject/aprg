@@ -21,7 +21,8 @@ public:
     void addEmployeeSchedule(int const startTime, int const endTime);  // assumption is every entry is unique
 
 private:
-    std::multiset<Event> m_sortedEvents;};
+    std::multiset<Event> m_sortedEvents;
+};
 
 }  // namespace alba
 

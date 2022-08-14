@@ -32,7 +32,8 @@ void tryToFactorizeBySplittingToSmallerPolynomials(
 int getDeltaSize(Polynomials const& polynomials, int const originalSize);
 
 bool isFactorizeUsingPatternsNeeded(Polynomial const& polynomial);
-bool isFactorizeIncreasingAndDecreasingExponentsFormNeeded(Polynomial const& polynomial);bool isFactorizeBySplittingToSmallerPolynomialsNeeded(Polynomial const& polynomial);
+bool isFactorizeIncreasingAndDecreasingExponentsFormNeeded(Polynomial const& polynomial);
+bool isFactorizeBySplittingToSmallerPolynomialsNeeded(Polynomial const& polynomial);
 
 }  // namespace Factorization
 

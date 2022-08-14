@@ -48,7 +48,8 @@ void AnimizeColor::gatherStatistics(string const& bitmapPath) {
     canvas.traverse([&](BitmapXY const&, int const color) {
         HueSaturationLightnessData hslData(convertColorToHueSaturationLightnessData(color));
         addCountToValue(m_lightnessData, hslData.lightnessDecimal);
-        addCountToValue(m_saturationData, hslData.saturationLightnessDecimal);    });
+        addCountToValue(m_saturationData, hslData.saturationLightnessDecimal);
+    });
 }
 
 void AnimizeColor::calculateNewValues() {
@@ -65,7 +66,8 @@ void AnimizeColor::saveColorData(string const& path) {
         /*for(int i=0; i<lightnessCountPair.second.count; i++)
         {
             colorDataFileStream << lightnessCountPair.first
-                                << ", " << lightnessCountPair.second.newLightness                                << "\n";
+                                << ", " << lightnessCountPair.second.newLightness
+                                << "\n";
         }*/
     }
 }
@@ -97,7 +99,8 @@ void AnimizeColor::calculateNewValues(ColorDataMap& colorDataMap) {
         int currentCount = colorDataPair.second.count;
         colorDataPair.second.newValue =
             (((static_cast<double>(currentCount) / 2) + partialCount) / totalCount * diffOfHighestAndLowestValue) +
-            m_lowestIncludedValue;        partialCount += currentCount;
+            m_lowestIncludedValue;
+        partialCount += currentCount;
     }
 }
 

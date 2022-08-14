@@ -21,6 +21,7 @@ public:
     int getSize() const;
     AlbaNumber getValueForVariable(std::string const& variable) const;
     VariablesToValuesMap const& getVariableToValuesMap() const;
+
     Term performSubstitutionTo(Variable const& variable) const;
     Term performSubstitutionTo(Monomial const& monomial) const;
     Term performSubstitutionTo(Polynomial const& polynomial) const;

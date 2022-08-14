@@ -56,7 +56,8 @@ AlbaNumber getProbability(UnsignedInteger const numberOfDesiredOutcome, Unsigned
         AlbaNumber::createFraction(static_cast<int>(numberOfDesiredOutcome), static_cast<int>(totalNumberOfOutcomes)));
 }
 
-AlbaNumber getProbabilityOnBinomialDistribution(    AlbaNumber const& probabilityOfASingleAttempt, UnsignedInteger const xTargetTries, UnsignedInteger const nTries) {
+AlbaNumber getProbabilityOnBinomialDistribution(
+    AlbaNumber const& probabilityOfASingleAttempt, UnsignedInteger const xTargetTries, UnsignedInteger const nTries) {
     // In a binomial distribution, n attempts are made and the probability that a single attempt succeeds is p.
 
     // The random variable X counts the number of successful attempts, and the probability of a value x is
@@ -71,6 +72,7 @@ AlbaNumber getProbabilityOnBinomialDistribution(    AlbaNumber const& probabilit
     return getCorrectProbability(
         probabilityOfSuccessfulAttempts * probabilityOfUnsuccessfulAttempts * numberOfCombinations);
 }
+
 AlbaNumber getProbabilityOnGeometricDistribution(
     AlbaNumber const& probabilityOfASingleAttempt, UnsignedInteger const xTargetTries) {
     // In a geometric distribution, the probability that an attempt succeeds is p, and we continue until the first
@@ -85,6 +87,7 @@ AlbaNumber getProbabilityOnGeometricDistribution(
     AlbaNumber probabilityOfFirstSuccessfulAttempt = probabilityOfASingleAttempt;
     return getCorrectProbability(probabilityOfUnsuccessfulAttempts * probabilityOfFirstSuccessfulAttempt);
 }
+
 AlbaNumber getComplementOfProbability(AlbaNumber const& probability) {
     // The complement of A means the probability that "Event A does not happen".
     // Equation: P(A') = 1-P(A)
@@ -172,7 +175,8 @@ AlbaNumber getExpectedValueInBinomialDistribution(
     return probabilityOfASingleAttempt * AlbaNumber(static_cast<int>(nTries));
 }
 
-AlbaNumber getExpectedValueInGeometricDistribution(AlbaNumber const& probability) {    // In a geometric distribution, the probability that an attempt succeeds is p, and we continue until the first
+AlbaNumber getExpectedValueInGeometricDistribution(AlbaNumber const& probability) {
+    // In a geometric distribution, the probability that an attempt succeeds is p, and we continue until the first
     // success happens.
 
     // The expected value of X in a binomial distribution is E[X] = 1/p.

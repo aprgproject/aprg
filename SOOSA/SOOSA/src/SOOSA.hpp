@@ -39,7 +39,8 @@ public:
         matrix::AlbaMatrix<int> m_frequenciesOnQuestionByAnswer;
     };
 
-    class Status {        Status();
+    class Status {
+        Status();
 
     public:
         static Status getInstance();
@@ -55,7 +56,8 @@ public:
     using Answers = std::vector<int>;
     using RangeOfInts = AlbaValueRange<int>;
     using RangeOfDoubles = AlbaValueRange<double>;
-    using VectorOfDoubles = std::vector<double>;    using Line = TwoDimensions::Line;
+    using VectorOfDoubles = std::vector<double>;
+    using Line = TwoDimensions::Line;
     using Point = TwoDimensions::Point;
     using Bitmap = AprgBitmap::Bitmap;
     using BitmapSnippet = AprgBitmap::BitmapSnippet;
@@ -64,7 +66,8 @@ public:
     using TwoDimensionSample = DataSample<2>;
     using OneDimensionSamples = std::vector<OneDimensionSample>;
     using TwoDimensionSamples = std::vector<TwoDimensionSample>;
-    using GroupOfOneDimensionSamples = std::vector<OneDimensionSamples>;    using GroupOfTwoDimensionSamples = std::vector<TwoDimensionSamples>;
+    using GroupOfOneDimensionSamples = std::vector<OneDimensionSamples>;
+    using GroupOfTwoDimensionSamples = std::vector<TwoDimensionSamples>;
     using ValueToTwoDimensionSampleMultimap = std::multimap<double, TwoDimensionSample>;
     using OneDimensionKMeans = KMeansClustering<1>;
     using TwoDimensionKMeans = KMeansClustering<2>;
@@ -84,7 +87,8 @@ public:
     int getAnswerToQuestion(int const questionIndex) const;
     void process();
 
-private:    void processDirectory(std::string const& directoryPath);
+private:
+    void processDirectory(std::string const& directoryPath);
     void processFile(std::string const& filePath);
     void processBitmapFile(Bitmap const& bitmap);
     void performStepsWhenNumberOfAnswersNotEqualToNumberOfQuestions() const;
@@ -146,7 +150,8 @@ private:    void processDirectory(std::string const& directoryPath);
         int const numberQuestionsInColumn) const;
 
     // Widths functions
-    RangeOfDoubles getMinMaxCriteriaForBar(PointAndWidthPairs const& pointAndWidthPairs) const;    RangeOfDoubles getMinMaxCriteriaForBar(
+    RangeOfDoubles getMinMaxCriteriaForBar(PointAndWidthPairs const& pointAndWidthPairs) const;
+    RangeOfDoubles getMinMaxCriteriaForBar(
         OneDimensionStatistics& firstGroupStatistics, OneDimensionStatistics& secondGroupStatistics) const;
     OneDimensionKMeans getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs) const;
     PointAndWidthPairs getAcceptablePointAndWidthPairs(
@@ -157,7 +162,8 @@ private:    void processDirectory(std::string const& directoryPath);
         int const maxLineAndBarWidth, int const sign) const;
     void addAndRetainWidthsIfPossible(
         OneDimensionKMeans& kMeansForWidths, OneDimensionStatistics& groupStatistics,
-        double const acceptableSdOverMeanDeviation) const;    void addPointAndWidthPairIfAcceptable(
+        double const acceptableSdOverMeanDeviation) const;
+    void addPointAndWidthPairIfAcceptable(
         PointAndWidthPairs& pointAndWidthPairs, BitmapSnippet const& snippet, Line const& line,
         Point const& blackPoint) const;
 
@@ -177,6 +183,7 @@ private:    void processDirectory(std::string const& directoryPath);
         int const indexToRemove) const;
     OneDimensionSamples getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints) const;
     double getHeight(TwoDimensionSamples const& barPoints) const;
+
     // output related functions
     std::string getCsvFilePath(std::string const& path) const;
     std::string getReportHtmlFilePath(std::string const& path) const;
@@ -185,14 +192,16 @@ private:    void processDirectory(std::string const& directoryPath);
         int const columnNumber, int const questionOffsetInColumn, int const answer);
     void saveDataToCsvFile(std::string const& processedFilePath) const;
     void saveHeadersToCsvFile() const;
-    void saveOutputHtmlFile(std::string const& processedFilePath) const;    void saveTableToOutputHtmlFile(std::ofstream& reportHtmlFileStream) const;
+    void saveOutputHtmlFile(std::string const& processedFilePath) const;
+    void saveTableToOutputHtmlFile(std::ofstream& reportHtmlFileStream) const;
 
     // utilities
     bool isBlackAt(BitmapSnippet const& snippet, BitmapXY const bitmapXy) const;
     int getMaximumLineAndBarWidth(BitmapSnippet const& snippet) const;
     BitmapXY convertToBitmapXY(Point const& point) const;
     BitmapXY convertToBitmapXY(TwoDimensionSample const& sample) const;
-    Point convertToPoint(BitmapXY const& bitmapXY) const;    Point convertToPoint(TwoDimensionSample const& sample) const;
+    Point convertToPoint(BitmapXY const& bitmapXY) const;
+    Point convertToPoint(TwoDimensionSample const& sample) const;
     TwoDimensionSample convertToTwoDimensionSample(Point const& point) const;
     RangeOfDoubles getMinMaxRangeOfSamples(OneDimensionSamples const& samples) const;
 
@@ -202,6 +211,7 @@ private:    void processDirectory(std::string const& directoryPath);
     std::map<int, int> m_questionToAnswersMap;
     FrequencyDatabase m_frequencyDatabase;
 };
+
 }  // namespace soosa
 
 }  // namespace alba

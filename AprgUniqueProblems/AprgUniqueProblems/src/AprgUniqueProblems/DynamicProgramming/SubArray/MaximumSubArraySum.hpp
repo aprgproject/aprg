@@ -11,7 +11,8 @@ public:
     using Index = int;
     using Value = int;
     using Values = std::vector<Value>;
-    struct SubArrayDetails {        Index lowIndex;
+    struct SubArrayDetails {
+        Index lowIndex;
         Index highIndex;
         Value sum;
     };

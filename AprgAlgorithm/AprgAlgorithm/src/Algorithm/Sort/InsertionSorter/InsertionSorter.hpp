@@ -34,6 +34,7 @@ private:
             std::swap(*rItLow, *rItHigh);
         }
     }
+
     void continuouslyCopyBackIfStillOutOfOrder(Values& valuesToSort, Iterator const insertIt) const {
         // reserve a copy instead of continuously swapping down
         // this is another implementation (from CLS book)
@@ -48,6 +49,7 @@ private:
         *rItHigh = insertItem;
     }
 };
+
 }  // namespace algorithm
 
 }  // namespace alba

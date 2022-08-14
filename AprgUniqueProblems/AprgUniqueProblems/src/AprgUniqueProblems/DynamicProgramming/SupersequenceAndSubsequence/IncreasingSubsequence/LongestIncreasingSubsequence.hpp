@@ -11,6 +11,7 @@ public:
     using Value = int;
     using Values = std::vector<Value>;
     using IndexToIndex = std::vector<Index>;
+
     LongestIncreasingSubsequence(Values const& sequence);
 
     Index getLongestLength() const;

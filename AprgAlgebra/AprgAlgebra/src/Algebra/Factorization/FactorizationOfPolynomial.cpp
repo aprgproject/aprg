@@ -66,7 +66,8 @@ void factorizePolynomialsAndPutToResult(Polynomials& result, Polynomials const& 
             int deltaSize = polynomialsToFactorize.size() - originalSize;
             tryToFactorizeCommonMonomial(polynomialsToFactorize, deltaSize, simplifiedPolynomial, originalSize);
             tryToFactorizeUsingPatterns(polynomialsToFactorize, deltaSize, simplifiedPolynomial, originalSize);
-            tryToFactorizeIncreasingAndDecreasingExponentsForm(                polynomialsToFactorize, deltaSize, simplifiedPolynomial, originalSize);
+            tryToFactorizeIncreasingAndDecreasingExponentsForm(
+                polynomialsToFactorize, deltaSize, simplifiedPolynomial, originalSize);
             tryToFactorizeBySplittingToSmallerPolynomials(
                 polynomialsToFactorize, deltaSize, simplifiedPolynomial, originalSize);
 
@@ -84,7 +85,8 @@ void tryToFactorizeCommonMonomial(
     int const originalSize) {
     if (deltaSize == 0) {
         Polynomials factorizedPolynomials;
-        factorizeCommonMonomialIfPossible(factorizedPolynomials, simplifiedPolynomial);        putFactorizedPolynomialsIfPossible(polynomialsToFactorize, factorizedPolynomials);
+        factorizeCommonMonomialIfPossible(factorizedPolynomials, simplifiedPolynomial);
+        putFactorizedPolynomialsIfPossible(polynomialsToFactorize, factorizedPolynomials);
         deltaSize = getDeltaSize(polynomialsToFactorize, originalSize);
     }
 }
@@ -94,7 +96,8 @@ void tryToFactorizeUsingPatterns(
     int const originalSize) {
     if (deltaSize == 0 && isFactorizeUsingPatternsNeeded(simplifiedPolynomial)) {
         Polynomials factorizedPolynomials;
-        factorizeUsingPatternsIfPossible(factorizedPolynomials, simplifiedPolynomial);        putFactorizedPolynomialsIfPossible(polynomialsToFactorize, factorizedPolynomials);
+        factorizeUsingPatternsIfPossible(factorizedPolynomials, simplifiedPolynomial);
+        putFactorizedPolynomialsIfPossible(polynomialsToFactorize, factorizedPolynomials);
         deltaSize = polynomialsToFactorize.size() - originalSize;
     }
 }
@@ -104,7 +107,8 @@ void tryToFactorizeIncreasingAndDecreasingExponentsForm(
     int const originalSize) {
     if (deltaSize == 0 && isFactorizeIncreasingAndDecreasingExponentsFormNeeded(simplifiedPolynomial)) {
         Polynomials factorizedPolynomials;
-        factorizeIncreasingAndDecreasingExponentsFormIfPossible(factorizedPolynomials, simplifiedPolynomial);        putFactorizedPolynomialsIfPossible(polynomialsToFactorize, factorizedPolynomials);
+        factorizeIncreasingAndDecreasingExponentsFormIfPossible(factorizedPolynomials, simplifiedPolynomial);
+        putFactorizedPolynomialsIfPossible(polynomialsToFactorize, factorizedPolynomials);
         deltaSize = polynomialsToFactorize.size() - originalSize;
     }
 }
@@ -114,7 +118,8 @@ void tryToFactorizeBySplittingToSmallerPolynomials(
     int const originalSize) {
     if (deltaSize == 0 && isFactorizeBySplittingToSmallerPolynomialsNeeded(simplifiedPolynomial)) {
         Polynomials factorizedPolynomials;
-        factorizeBySplittingToSmallerPolynomialsIfPossible(factorizedPolynomials, simplifiedPolynomial);        putFactorizedPolynomialsIfPossible(polynomialsToFactorize, factorizedPolynomials);
+        factorizeBySplittingToSmallerPolynomialsIfPossible(factorizedPolynomials, simplifiedPolynomial);
+        putFactorizedPolynomialsIfPossible(polynomialsToFactorize, factorizedPolynomials);
         deltaSize = polynomialsToFactorize.size() - originalSize;
     }
 }
@@ -143,7 +148,8 @@ int getDeltaSize(Polynomials const& polynomials, int const originalSize) {
     return static_cast<int>(polynomials.size()) - originalSize;
 }
 
-bool isFactorizeUsingPatternsNeeded(Polynomial const& polynomial) {    return polynomial.getMonomialsConstReference().size() == 2 &&
+bool isFactorizeUsingPatternsNeeded(Polynomial const& polynomial) {
+    return polynomial.getMonomialsConstReference().size() == 2 &&
            hasAMonomialWithDegreeMoreThanOneOrFractional(polynomial);
 }
 

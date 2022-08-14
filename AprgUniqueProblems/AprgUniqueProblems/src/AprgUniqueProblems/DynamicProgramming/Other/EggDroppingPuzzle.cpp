@@ -31,7 +31,8 @@ EggDroppingPuzzle::Count EggDroppingPuzzle::getMinimumNumberOfTrialsUsingIterati
     CountMatrix countMatrix(m_numberOfEggs + 1, m_numberOfFloors + 1, 0);
     for (Count remainingEggs = 1; remainingEggs <= m_numberOfEggs; remainingEggs++) {
         countMatrix.setEntry(remainingEggs, 1, 1);
-    }    for (Count floorIndexPlusOne = 1; floorIndexPlusOne <= m_numberOfFloors; floorIndexPlusOne++) {
+    }
+    for (Count floorIndexPlusOne = 1; floorIndexPlusOne <= m_numberOfFloors; floorIndexPlusOne++) {
         countMatrix.setEntry(1, floorIndexPlusOne, floorIndexPlusOne);
     }
     for (Count remainingEggs = 2; remainingEggs <= m_numberOfEggs; remainingEggs++) {
@@ -40,7 +41,8 @@ EggDroppingPuzzle::Count EggDroppingPuzzle::getMinimumNumberOfTrialsUsingIterati
             for (int currentFloor = 1; currentFloor <= floorIndexPlusOne; currentFloor++) {
                 Count countForFloor =
                     max(countMatrix.getEntry(remainingEggs - 1, currentFloor - 1),
-                        countMatrix.getEntry(remainingEggs, floorIndexPlusOne - currentFloor));                minimumCount = min(minimumCount, countForFloor);
+                        countMatrix.getEntry(remainingEggs, floorIndexPlusOne - currentFloor));
+                minimumCount = min(minimumCount, countForFloor);
             }
             countMatrix.setEntry(remainingEggs, floorIndexPlusOne, minimumCount + 1);
         }
@@ -62,7 +64,8 @@ EggDroppingPuzzle::Count EggDroppingPuzzle::getMinimumNumberOfTrialsUsingNaiveRe
         for (int currentFloor = 1; currentFloor <= floorIndexPlusOne; currentFloor++) {
             Count countForFloor =
                 max(getMinimumNumberOfTrialsUsingNaiveRecursion(remainingEggs - 1, currentFloor - 1),
-                    getMinimumNumberOfTrialsUsingNaiveRecursion(remainingEggs, floorIndexPlusOne - currentFloor));            minimumCount = min(minimumCount, countForFloor);
+                    getMinimumNumberOfTrialsUsingNaiveRecursion(remainingEggs, floorIndexPlusOne - currentFloor));
+            minimumCount = min(minimumCount, countForFloor);
         }
         return minimumCount + 1;
     }
@@ -79,7 +82,8 @@ EggDroppingPuzzle::Count EggDroppingPuzzle::getMinimumNumberOfTrialsUsingMemoiza
             for (int currentFloor = 1; currentFloor <= floorIndexPlusOne; currentFloor++) {
                 Count countForFloor =
                     max(getMinimumNumberOfTrialsUsingMemoizationDP(countMatrix, remainingEggs - 1, currentFloor - 1),
-                        getMinimumNumberOfTrialsUsingMemoizationDP(                            countMatrix, remainingEggs, floorIndexPlusOne - currentFloor));
+                        getMinimumNumberOfTrialsUsingMemoizationDP(
+                            countMatrix, remainingEggs, floorIndexPlusOne - currentFloor));
                 result = min(result, countForFloor);
             }
             result++;

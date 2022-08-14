@@ -25,6 +25,7 @@ TEST(ReversingALinkedListTest, ThreeNodes) {
     result = move(result->nextPointer);
     EXPECT_FALSE(result);
 }
+
 TEST(ReversingALinkedListTest, SevenNodes) {
     std::unique_ptr<Node> node1(new Node{1, nullptr});
     std::unique_ptr<Node> node2(new Node{2, nullptr});
@@ -58,6 +59,7 @@ TEST(ReversingALinkedListTest, SevenNodes) {
     result = move(result->nextPointer);
     EXPECT_FALSE(result);
 }
+
 }  // namespace ReversingALinkedList
 
 }  // namespace alba

@@ -20,7 +20,8 @@ public:
     using Coordinate = std::pair<int, int>;
     using CoordinatePair = std::pair<Coordinate, Coordinate>;
     using Coordinates = std::vector<Coordinate>;
-    using Graph = algorithm::UndirectedGraphWithListOfEdges<Coordinate>;    using Bfs = algorithm::PathSearchUsingBfsWithDistanceCount<Coordinate>;
+    using Graph = algorithm::UndirectedGraphWithListOfEdges<Coordinate>;
+    using Bfs = algorithm::PathSearchUsingBfsWithDistanceCount<Coordinate>;
 
     NearestEqualCells(ValueMatrix const& valueMatrix);
 
@@ -38,4 +39,5 @@ private:
     ValueMatrix const& m_valueMatrix;
     Graph m_coordinateGraph;
 };
+
 }  // namespace alba

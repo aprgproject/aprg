@@ -8,7 +8,8 @@ int sampleRate = 48000;
 int numChannels = 2;
 
 std::vector<std::vector<double>> testBuffer = {
-    {0.0,     0.0,
+    {0.0,
+     0.0,
      0.0,
      -3.0517578125e-05,
      3.0517578125e-05,

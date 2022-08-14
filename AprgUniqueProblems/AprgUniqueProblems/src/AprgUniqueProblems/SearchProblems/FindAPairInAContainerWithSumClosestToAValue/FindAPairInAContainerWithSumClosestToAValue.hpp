@@ -19,6 +19,7 @@ public:
     using Index = int;
     using Value = typename Values::value_type;
     using ValuePair = std::pair<Value, Value>;
+
     FindAPairInAContainerWithSumClosestToAValue(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
     ValuePair getValuePairWithSumClosestToAValue(Value const& targetSum) const {

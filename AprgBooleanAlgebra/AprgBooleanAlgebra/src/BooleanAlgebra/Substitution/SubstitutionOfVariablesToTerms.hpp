@@ -23,6 +23,7 @@ public:
     int getSize() const;
     Term getTermForVariable(std::string const& variable) const;
     VariablesToTermsMap const& getVariablesToTermsMap() const;
+
     Term performSubstitutionTo(VariableTerm const& variableTerm) const;
     Term performSubstitutionTo(Expression const& expression) const;
     Term performSubstitutionTo(Term const& term) const;

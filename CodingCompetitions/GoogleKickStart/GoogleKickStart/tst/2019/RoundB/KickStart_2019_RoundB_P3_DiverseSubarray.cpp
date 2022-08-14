@@ -54,6 +54,7 @@ public:
     static constexpr Index NUMBER_OF_CHILDREN = 2;  // only 2 children
 
     static inline bool isALeftChild(Index const treeIndex) { return treeIndex % 2 == 1; }
+
     static inline bool isARightChild(Index const treeIndex) { return treeIndex % 2 == 0; }
 
     static inline Index getParent(Index const treeIndex) { return ((treeIndex + 1) / NUMBER_OF_CHILDREN) - 1; }
@@ -78,12 +79,14 @@ public:
     using Value = typename Values::value_type;
     using Function = std::function<Value(Value const&, Value const&)>;
     using Utilities = SegmentTreeUtilities<Index>;
+
     RangeQueryWithStaticSegmentTree() = default;
 
     RangeQueryWithStaticSegmentTree(Values const& valuesToCheck, Function const& functionObject)
         : m_startOfChildren(0), m_treeValues(), m_function(functionObject) {
         initialize(valuesToCheck);
     }
+
     Index getStartOfChildren() const { return m_startOfChildren; }
 
     Values const& getTreeValues() const { return m_treeValues; }
@@ -113,7 +116,8 @@ public:
             if (rightChildIndex < static_cast<int>(m_treeValues.size())) {
                 if (m_treeValues.at(nextIndex) < m_treeValues.at(rightChildIndex)) {
                     nextIndex = rightChildIndex;
-                }            }
+                }
+            }
             if (nextIndex == maxSumParent) {
                 break;
             }
@@ -146,7 +150,8 @@ public:
                maxSumRightMostChild < static_cast<int>(m_treeValues.size())) {
             Value additionalValue = m_treeValues.at(maxSumRightMostChild);
             if (additionalValue >= 0) {
-                maxSum += additionalValue;                maxSumRightMostChild++;
+                maxSum += additionalValue;
+                maxSumRightMostChild++;
             } else {
                 break;
             }
@@ -227,7 +232,8 @@ protected:
                         if (treeIndex + 1 < static_cast<int>(m_treeValues.size())) {
                             m_treeValues[parentIndex] =
                                 m_function(m_treeValues.at(treeIndex), m_treeValues.at(treeIndex + 1));
-                        } else {                            m_treeValues[parentIndex] = m_treeValues.at(treeIndex);
+                        } else {
+                            m_treeValues[parentIndex] = m_treeValues.at(treeIndex);
                         }
                     } else {
                         m_treeValues[parentIndex] =
@@ -241,6 +247,7 @@ protected:
             }
         }
     }
+
     Index m_startOfChildren;
     Values m_treeValues;
     Function m_function;
@@ -263,7 +270,8 @@ int getDeltaByAddingType(int const type) {
 void runTestCase(int const testCaseNumber) {
     my_cin >> numberOfTrinkets >> allowableCountForAType;
     vector<int> typesOfTrinkets(numberOfTrinkets, 0);
-    for (int i = 0; i < numberOfTrinkets; ++i) {        my_cin >> typesOfTrinkets[i];
+    for (int i = 0; i < numberOfTrinkets; ++i) {
+        my_cin >> typesOfTrinkets[i];
     }
 
     typeToCountMap.assign(MAX_NUMBER_TYPES, 0);
@@ -348,6 +356,7 @@ void removeTypeToAllowableCount(int & allowableCount, int const type)
 void runTestCase(int const testCaseNumber)
 {
     my_cin >> numberOfTrinkets >> allowableCountForAType;
+
     vector<int> typesOfTrinkets(numberOfTrinkets, 0);
     for(int i=0; i<numberOfTrinkets; ++i)
     {
@@ -388,6 +397,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

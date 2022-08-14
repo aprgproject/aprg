@@ -95,7 +95,8 @@ int calc(int s, ll ban, int a, int b, int who) {
 void runTestCase(int const testCaseNumber) {
     int s, ra, pa, rb, pb, c;
     my_cin >> s >> ra >> pa >> rb >> pb >> c;
-    ra--, pa--, rb--, pb--;    for (int i = 0; i < s * s; i++) g[i].clear();
+    ra--, pa--, rb--, pb--;
+    for (int i = 0; i < s * s; i++) g[i].clear();
     int ptr = 0;
     for (int i = 0; i < s; i++) {
         for (int j = 0; j < 2 * i + 1; j++) {
@@ -137,6 +138,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

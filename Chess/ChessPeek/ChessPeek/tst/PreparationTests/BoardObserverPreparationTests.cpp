@@ -36,6 +36,7 @@ void checkChessCellForWhiteAndBlackPoints(
     XYs whitePoints, blackPoints;
     retriever.retrieveWhiteOffsetPoints(whitePoints, xIndex, yIndex);
     retriever.retrieveBlackOffsetPoints(blackPoints, xIndex, yIndex);
+
     for (XY const& whitePoint : whitePoints) {
         whitePointsToUniquePiecesMap[whitePoint].emplace(piece);
     }
@@ -161,6 +162,7 @@ uint32_t getLabelColor(int const label) {
     double newValue = (static_cast<double>(1) / label) * pow(10, digits + 8);
     return static_cast<uint32_t>(newValue) % 0xFFFFFF;
 }
+
 uint32_t getLabelColor(SetOfPieces const& setOfPieces) {
     return getLabelColor(getLabelBasedOnSetOfPieces(setOfPieces));
 }

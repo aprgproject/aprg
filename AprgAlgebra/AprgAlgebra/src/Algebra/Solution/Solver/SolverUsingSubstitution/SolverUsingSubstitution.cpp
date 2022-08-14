@@ -104,6 +104,7 @@ void SolverUsingSubstitution::calculateASolutionForAllVariables(
     } while (previousNumberOfVariables != static_cast<int>(variablesWithSolution.size()) &&
              m_variablesNames.size() != variablesWithSolution.size());
 }
+
 void SolverUsingSubstitution::addIfSolutionIsCompleteAndCorrect(
     MultipleVariableSolutionSet const& solutionSet, Equations const& equations) {
     if (m_variablesNames == solutionSet.getVariableNames()) {

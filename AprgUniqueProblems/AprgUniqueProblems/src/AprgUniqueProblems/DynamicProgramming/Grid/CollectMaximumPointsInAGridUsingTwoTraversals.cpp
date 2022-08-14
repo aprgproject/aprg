@@ -62,7 +62,8 @@ CollectMaximumPointsInAGridUsingTwoTraversals::getMaximumPointsUsingIterativeDP(
                      columnRight++) {
                     Value entryResult(INVALID_COUNT);
                     for (auto const& columnsOffset : columnsOffsets) {
-                        Index previousRow = row - 1;                        Index previousColumnLeft = columnLeft + columnsOffset.first;
+                        Index previousRow = row - 1;
+                        Index previousColumnLeft = columnLeft + columnsOffset.first;
                         Index previousColumnRight = columnRight + columnsOffset.second;
                         if (m_inputGrid.isInside(previousColumnLeft, previousRow) &&
                             m_inputGrid.isInside(previousColumnRight, previousRow)) {
@@ -97,7 +98,8 @@ CollectMaximumPointsInAGridUsingTwoTraversals::getMaximumPointsUsingNaiveRecursi
         // if last row did not reach destination
         result = INVALID_COUNT;
     } else {
-        for (auto const& columnsOffset : columnsOffsets) {            Index nextRow = row + 1;
+        for (auto const& columnsOffset : columnsOffsets) {
+            Index nextRow = row + 1;
             Index nextColumnLeft = columnLeft + columnsOffset.first;
             Index nextColumnRight = columnRight + columnsOffset.second;
             if (m_inputGrid.isInside(nextColumnLeft, nextRow) && m_inputGrid.isInside(nextColumnRight, nextRow)) {
@@ -125,7 +127,8 @@ CollectMaximumPointsInAGridUsingTwoTraversals::getMaximumPointsUsingMemoizationD
             // if last row did not reach destination
             result = INVALID_COUNT;
         } else {
-            for (auto const& columnsOffset : columnsOffsets) {                Index nextRow = row + 1;
+            for (auto const& columnsOffset : columnsOffsets) {
+                Index nextRow = row + 1;
                 Index nextColumnLeft = columnLeft + columnsOffset.first;
                 Index nextColumnRight = columnRight + columnsOffset.second;
                 if (m_inputGrid.isInside(nextColumnLeft, nextRow) && m_inputGrid.isInside(nextColumnRight, nextRow)) {

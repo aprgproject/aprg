@@ -12,7 +12,8 @@ namespace {
 using AlphabetForTest = Alphabet<uint8_t>;
 }
 
-TEST(AlphabetsTest, ContainsWorks) {    AlphabetForTest alphabet("ABCDEF");
+TEST(AlphabetsTest, ContainsWorks) {
+    AlphabetForTest alphabet("ABCDEF");
 
     EXPECT_TRUE(alphabet.contains('A'));
     EXPECT_TRUE(alphabet.contains('B'));

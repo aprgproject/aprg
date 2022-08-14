@@ -18,6 +18,7 @@ int getSatisfiabilityLevel(SatisfiabilityTerms const& satTerms) {
     }
     return result;
 }
+
 SatisfiabilityTerms getSatisfiabilityTerms(Term const& term) {
     SatisfiabilityTerms result;
     if (term.isVariableTerm()) {

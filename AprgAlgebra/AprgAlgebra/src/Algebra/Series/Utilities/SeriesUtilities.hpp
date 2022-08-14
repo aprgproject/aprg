@@ -25,7 +25,8 @@ bool isDivergentUsingComparisonTest(
     int const numberOfIndexesToTest);
 
 void performLimitComparisonTest(
-    bool& isConvergent, bool& isDivergent, SeriesBasedOnSummation const& series1, SeriesBasedOnSummation const& series2,    std::string const& variableName);
+    bool& isConvergent, bool& isDivergent, SeriesBasedOnSummation const& series1, SeriesBasedOnSummation const& series2,
+    std::string const& variableName);
 
 void performIntegralTest(
     bool& isConvergent, bool& isDivergent, SeriesBasedOnSummation const& series, std::string const& variableName);

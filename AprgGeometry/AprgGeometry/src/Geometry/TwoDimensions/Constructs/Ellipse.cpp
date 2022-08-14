@@ -80,7 +80,8 @@ double Ellipse::getArea() const { return getPi() * m_aValue * m_bValue; }
     for(int i = 0; i<depthOfCalculation; i++)
     {
         totalFactor += currentFactor;
-        currentFactor = currentFactor*h;    }
+        currentFactor = currentFactor*h;
+    }
     return getPi()*2*m_radius;
 }*/
 
@@ -142,7 +143,8 @@ Line Ellipse::getMajorAxis() const {
     if (2 == vertices.size()) {
         result = Line(vertices.at(0), vertices.at(1));
     }
-    return result;}
+    return result;
+}
 
 Line Ellipse::getMinorAxis() const {
     Line result;
@@ -150,7 +152,8 @@ Line Ellipse::getMinorAxis() const {
     if (2 == vertices.size()) {
         result = Line(vertices.at(0), vertices.at(1));
     }
-    return result;}
+    return result;
+}
 
 Points Ellipse::getPointsForCircumference(double const interval) const {
     Points result;

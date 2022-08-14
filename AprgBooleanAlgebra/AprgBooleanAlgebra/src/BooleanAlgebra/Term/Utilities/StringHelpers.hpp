@@ -15,7 +15,8 @@ bool isPrime(char const character);
 int getOperatorPriority(std::string const& operatorString);
 
 std::string getString(OperatorType const operatorType);
-std::string getString(OperatorLevel const operatorLevel);std::string getString(WrappedTerms const& wrappedTerms);
+std::string getString(OperatorLevel const operatorLevel);
+std::string getString(WrappedTerms const& wrappedTerms);
 std::string createVariableTermNameForSubstitution(Term const& term);
 
 Term buildTermIfPossible(std::string const& termString);

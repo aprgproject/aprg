@@ -30,6 +30,7 @@ namespace KickStart_2020_RoundE_P2_HighBuildings {
 void runTestCase(int const testCaseNumber) {
     int N, A, B, C;
     my_cin >> N >> A >> B >> C;
+
     assert(1 <= C && C <= N);
     assert(C <= A && A <= N);
     assert(C <= B && B <= N);
@@ -71,6 +72,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

@@ -14,6 +14,7 @@ public:
     using Index = int;
     using CostMatrix = matrix::AlbaMatrix<Cost>;
     static constexpr Cost MAX_COUNT = std::numeric_limits<Cost>::max();
+
     MinimumCostPolygonTriangulation(TwoDimensions::Points const& points);
 
     Cost getMinimumNumberOfOperationsUsingNaiveRecursion() const;

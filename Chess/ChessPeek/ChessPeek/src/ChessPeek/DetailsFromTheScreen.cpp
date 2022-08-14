@@ -135,7 +135,8 @@ void DetailsFromTheScreen::savePlayerColorAndOrientationFromBoardDetails() {
     constexpr int MIN_PIECE_COUNT_TO_CONSIDER = 12;
     if (m_countOfPieces.pieceCount >= MIN_PIECE_COUNT_TO_CONSIDER) {
         PieceColor lowerHalfColor{};
-        if (m_countOfPieces.whiteCountInLowerHalf > m_countOfPieces.blackCountInLowerHalf &&            m_countOfPieces.blackCountInUpperHalf > m_countOfPieces.whiteCountInUpperHalf &&
+        if (m_countOfPieces.whiteCountInLowerHalf > m_countOfPieces.blackCountInLowerHalf &&
+            m_countOfPieces.blackCountInUpperHalf > m_countOfPieces.whiteCountInUpperHalf &&
             isInLowerHalf(m_countOfPieces.whiteKingCoordinate) && isInUpperHalf(m_countOfPieces.blackKingCoordinate)) {
             lowerHalfColor = PieceColor::White;
         } else if (

@@ -38,7 +38,8 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFro
     int numberOfTimesFound(0);
     string lastVariableNameFound;
     for (auto& variableNameAndTermPair : m_variableNameToTermMap) {
-        if (variableNameAndTermPair.first == variable.getVariableName()) {            lastVariableNameFound = variableNameAndTermPair.first;
+        if (variableNameAndTermPair.first == variable.getVariableName()) {
+            lastVariableNameFound = variableNameAndTermPair.first;
             numberOfTimesFound++;
         }
     }
@@ -49,7 +50,8 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFro
     int numberOfTimesFound(0);
     string lastVariableNameFound;
     for (auto& variableNameAndTermPair : m_variableNameToTermMap) {
-        if (monomial.getExponentForVariable(variableNameAndTermPair.first) != 0) {            lastVariableNameFound = variableNameAndTermPair.first;
+        if (monomial.getExponentForVariable(variableNameAndTermPair.first) != 0) {
+            lastVariableNameFound = variableNameAndTermPair.first;
             numberOfTimesFound++;
         }
     }
@@ -77,7 +79,8 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFro
         int numberOfTimesFound(0);
         string lastVariableNameFound;
         VariableNamesRetriever variableNamesRetriever;
-        variableNamesRetriever.retrieveFromExpression(expression);        VariableNamesSet const& namesInExpression(variableNamesRetriever.getSavedData());
+        variableNamesRetriever.retrieveFromExpression(expression);
+        VariableNamesSet const& namesInExpression(variableNamesRetriever.getSavedData());
         for (auto& variableNameAndTermPair : m_variableNameToTermMap) {
             if (namesInExpression.find(variableNameAndTermPair.first) != namesInExpression.cend()) {
                 lastVariableNameFound = variableNameAndTermPair.first;
@@ -93,7 +96,8 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFro
     int numberOfTimesFound(0);
     string lastVariableNameFound;
     VariableNamesRetriever variableNamesRetriever;
-    variableNamesRetriever.retrieveFromFunction(functionObject);    VariableNamesSet const& namesInFunction(variableNamesRetriever.getSavedData());
+    variableNamesRetriever.retrieveFromFunction(functionObject);
+    VariableNamesSet const& namesInFunction(variableNamesRetriever.getSavedData());
     for (auto& variableNameAndTermPair : m_variableNameToTermMap) {
         if (namesInFunction.find(variableNameAndTermPair.first) != namesInFunction.cend()) {
             lastVariableNameFound = variableNameAndTermPair.first;
@@ -130,7 +134,8 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::saveTerm(
     Term const& term, int numberOfTimesFound, string const& variableName) {
     if (numberOfTimesFound == 0) {
         m_remainingTerm += term;
-    } else if (numberOfTimesFound == 1) {        m_variableNameToTermMap.at(variableName) += term;
+    } else if (numberOfTimesFound == 1) {
+        m_variableNameToTermMap.at(variableName) += term;
     } else {
         m_termWithMultipleVariableNames += term;
     }

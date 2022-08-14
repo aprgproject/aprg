@@ -26,7 +26,8 @@ MaximumSubArraySum::SubArrayDetails MaximumSubArraySum::getMaximumSubArraySumWit
     int index(0);
     for (Value const& value : m_values) {
         if (value > currentSubArray.sum + value)  // new sub array contains only value
-        {            currentSubArray = {index, index, value};
+        {
+            currentSubArray = {index, index, value};
         } else  // add value to current sub array
         {
             currentSubArray.highIndex = index;

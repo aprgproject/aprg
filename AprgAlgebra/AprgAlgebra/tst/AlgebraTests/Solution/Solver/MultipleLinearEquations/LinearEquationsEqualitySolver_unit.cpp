@@ -25,7 +25,8 @@ TEST(
     EXPECT_EQ(0, solutionSet.getNumberOfVariablesWithSolutions());
 }
 
-TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor1Equation) {    LinearEquationsEqualitySolver solver;
+TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor1Equation) {
+    LinearEquationsEqualitySolver solver;
     Equations equations;
     Polynomial polynomial{Monomial(1, {{"x", 1}})};
     equations.emplace_back(polynomial, "=", 4);
@@ -37,7 +38,8 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     EXPECT_EQ(1, solutionSet.getNumberOfVariablesWithSolutions());
     AlbaNumbers acceptedValuesForX(solutionSet.getSolutionSetForVariable("x").getAcceptedValues());
     ASSERT_EQ(1U, acceptedValuesForX.size());
-    EXPECT_EQ(AlbaNumber(4), acceptedValuesForX.at(0));}
+    EXPECT_EQ(AlbaNumber(4), acceptedValuesForX.at(0));
+}
 
 TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor2Equations) {
     LinearEquationsEqualitySolver solver;
@@ -54,7 +56,8 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     EXPECT_EQ(2, solutionSet.getNumberOfVariablesWithSolutions());
     AlbaNumbers acceptedValuesForX(solutionSet.getSolutionSetForVariable("x").getAcceptedValues());
     ASSERT_EQ(1U, acceptedValuesForX.size());
-    EXPECT_EQ(AlbaNumber(-2), acceptedValuesForX.at(0));    AlbaNumbers acceptedValuesForY(solutionSet.getSolutionSetForVariable("y").getAcceptedValues());
+    EXPECT_EQ(AlbaNumber(-2), acceptedValuesForX.at(0));
+    AlbaNumbers acceptedValuesForY(solutionSet.getSolutionSetForVariable("y").getAcceptedValues());
     ASSERT_EQ(1U, acceptedValuesForY.size());
     EXPECT_EQ(AlbaNumber(3), acceptedValuesForY.at(0));
 }
@@ -76,7 +79,8 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     EXPECT_EQ(3, solutionSet.getNumberOfVariablesWithSolutions());
     AlbaNumbers acceptedValuesForX(solutionSet.getSolutionSetForVariable("x").getAcceptedValues());
     ASSERT_EQ(1U, acceptedValuesForX.size());
-    EXPECT_EQ(AlbaNumber(2), acceptedValuesForX.at(0));    AlbaNumbers acceptedValuesForY(solutionSet.getSolutionSetForVariable("y").getAcceptedValues());
+    EXPECT_EQ(AlbaNumber(2), acceptedValuesForX.at(0));
+    AlbaNumbers acceptedValuesForY(solutionSet.getSolutionSetForVariable("y").getAcceptedValues());
     ASSERT_EQ(1U, acceptedValuesForY.size());
     EXPECT_EQ(AlbaNumber(-1), acceptedValuesForY.at(0));
     AlbaNumbers acceptedValuesForZ(solutionSet.getSolutionSetForVariable("z").getAcceptedValues());
@@ -98,7 +102,8 @@ TEST(
     EXPECT_EQ(0, solutionSet.getNumberOfVariablesWithSolutions());
 }
 
-TEST(    LinearEquationsEqualitySolverTest,
+TEST(
+    LinearEquationsEqualitySolverTest,
     CalculateSolutionAndReturnSolutionSetWorksAsDoesNotFindASolutionWhenEquationNumberDoesNotMatchVariableNumber) {
     LinearEquationsEqualitySolver solver;
     Polynomials polynomials;
@@ -111,7 +116,8 @@ TEST(    LinearEquationsEqualitySolverTest,
     EXPECT_EQ(0, solutionSet.getNumberOfVariablesWithSolutions());
 }
 
-TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor1Polynomial) {    LinearEquationsEqualitySolver solver;
+TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor1Polynomial) {
+    LinearEquationsEqualitySolver solver;
     Polynomials polynomials;
     polynomials.emplace_back(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-4, {})});
 
@@ -122,7 +128,8 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     EXPECT_EQ(1, solutionSet.getNumberOfVariablesWithSolutions());
     AlbaNumbers acceptedValuesForX(solutionSet.getSolutionSetForVariable("x").getAcceptedValues());
     ASSERT_EQ(1U, acceptedValuesForX.size());
-    EXPECT_EQ(AlbaNumber(4), acceptedValuesForX.at(0));}
+    EXPECT_EQ(AlbaNumber(4), acceptedValuesForX.at(0));
+}
 
 TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor2Polynomials) {
     LinearEquationsEqualitySolver solver;
@@ -137,7 +144,8 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     EXPECT_EQ(2, solutionSet.getNumberOfVariablesWithSolutions());
     AlbaNumbers acceptedValuesForX(solutionSet.getSolutionSetForVariable("x").getAcceptedValues());
     ASSERT_EQ(1U, acceptedValuesForX.size());
-    EXPECT_EQ(AlbaNumber(-2), acceptedValuesForX.at(0));    AlbaNumbers acceptedValuesForY(solutionSet.getSolutionSetForVariable("y").getAcceptedValues());
+    EXPECT_EQ(AlbaNumber(-2), acceptedValuesForX.at(0));
+    AlbaNumbers acceptedValuesForY(solutionSet.getSolutionSetForVariable("y").getAcceptedValues());
     ASSERT_EQ(1U, acceptedValuesForY.size());
     EXPECT_EQ(AlbaNumber(3), acceptedValuesForY.at(0));
 }
@@ -159,7 +167,8 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     EXPECT_EQ(3, solutionSet.getNumberOfVariablesWithSolutions());
     AlbaNumbers acceptedValuesForX(solutionSet.getSolutionSetForVariable("x").getAcceptedValues());
     ASSERT_EQ(1U, acceptedValuesForX.size());
-    EXPECT_EQ(AlbaNumber(2), acceptedValuesForX.at(0));    AlbaNumbers acceptedValuesForY(solutionSet.getSolutionSetForVariable("y").getAcceptedValues());
+    EXPECT_EQ(AlbaNumber(2), acceptedValuesForX.at(0));
+    AlbaNumbers acceptedValuesForY(solutionSet.getSolutionSetForVariable("y").getAcceptedValues());
     ASSERT_EQ(1U, acceptedValuesForY.size());
     EXPECT_EQ(AlbaNumber(-1), acceptedValuesForY.at(0));
     AlbaNumbers acceptedValuesForZ(solutionSet.getSolutionSetForVariable("z").getAcceptedValues());

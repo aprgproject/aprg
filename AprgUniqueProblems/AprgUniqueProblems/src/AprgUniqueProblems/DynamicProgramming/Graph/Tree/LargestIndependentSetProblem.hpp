@@ -18,6 +18,7 @@ public:
     static constexpr int UNUSED_COUNT = std::numeric_limits<int>::max();
 
     LargestIndependentSetProblem(Graph const& nAryTreeGraph, Vertex const rootOfTree);
+
     Count getMaximumCountUsingNaiveRecursion() const;
     Count getMaximumCountUsingMemoizationDP() const;
     SetOfVertices getMaximumSetUsingMemoizationDP() const;

@@ -42,7 +42,8 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
             for (Index left = 0; left + length <= static_cast<Index>(countMatrix.getNumberOfColumns()); left++) {
                 Index right = left + length - 1;
                 Count entryResult(0);
-                if (!isPalindrome(left, right)) {                    Count minimumCuts(MAX_COUNT);
+                if (!isPalindrome(left, right)) {
+                    Count minimumCuts(MAX_COUNT);
                     for (Index cutIndex(left); cutIndex < right; cutIndex++) {
                         minimumCuts =
                             min(minimumCuts,
@@ -110,7 +111,8 @@ bool PalindromePartitioning::isPalindrome(Index const left, Index const right) c
         int traverseLeft(left), traverseRight(right);
         while (traverseLeft < traverseRight) {
             if (m_string.at(traverseLeft++) != m_string.at(traverseRight--)) {
-                result = false;                break;
+                result = false;
+                break;
             }
         }
     }

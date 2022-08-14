@@ -117,7 +117,8 @@ bool doAllDistancesFitsOnTheDistanceLimit(vector<int> const& distanceGrid, int c
 void runTestCase(int const testCaseNumber) {
     my_cin >> rows >> columns;
     Coordinates deliveryOffices;
-    for (int y = 0; y < rows; ++y) {        string bits;
+    for (int y = 0; y < rows; ++y) {
+        string bits;
         my_cin >> bits;
         for (int x = 0; x < columns; ++x) {
             bool isDeliveryOffice = (bits.at(x) != '0');
@@ -150,6 +151,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

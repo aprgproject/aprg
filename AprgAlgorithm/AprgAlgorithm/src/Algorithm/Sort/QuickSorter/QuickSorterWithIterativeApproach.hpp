@@ -31,7 +31,8 @@ private:
         inputIndicesStack.push(highIndex);
 
         while (!inputIndicesStack.empty()) {
-            int highIndex = inputIndicesStack.top();            inputIndicesStack.pop();
+            int highIndex = inputIndicesStack.top();
+            inputIndicesStack.pop();
             int lowIndex = inputIndicesStack.top();
             inputIndicesStack.pop();
 

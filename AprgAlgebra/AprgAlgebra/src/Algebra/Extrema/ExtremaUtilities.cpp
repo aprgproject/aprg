@@ -215,7 +215,8 @@ bool isRolleTheoremSatisfied(
         AlbaNumber(0) == fb.getConstantValueConstReference()) {
         AlbaNumberIntervals continuityDomainIntervals(getContinuityDomain(term).getAcceptedIntervals());
         AlbaNumberIntervals differentiabilityDomainIntervals(
-            getDifferentiabilityDomain(term, variableName).getAcceptedIntervals());        AlbaNumberInterval abCloseInterval(createCloseEndpoint(a), createCloseEndpoint(b));
+            getDifferentiabilityDomain(term, variableName).getAcceptedIntervals());
+        AlbaNumberInterval abCloseInterval(createCloseEndpoint(a), createCloseEndpoint(b));
         AlbaNumberInterval abOpenInterval(createOpenEndpoint(a), createOpenEndpoint(b));
 
         if (isIntervalInsideTheIntervals(abCloseInterval, continuityDomainIntervals) &&
@@ -227,7 +228,8 @@ bool isRolleTheoremSatisfied(
             result = fPrimeC.isConstant() && AlbaNumber(0) == fPrimeC.getConstantValueConstReference();
         }
     }
-    return result;}
+    return result;
+}
 
 AlbaNumbers getInputValuesInIntervalWithSameAsMeanOfInterval(
     Term const& term, string const& variableName, AlbaNumber const& a, AlbaNumber const& b) {
@@ -299,7 +301,8 @@ Extremum getAbsoluteExtremumBasedOnRelativeExtremaOnInterval(
     int numberOfExtremaFoundInInterval(0);
     Extremum result;
     Extremum extremumInInterval;
-    for (Extremum const& extremum : relativeExtrema) {        if (interval.isValueInsideTheInterval(extremum.inputOutputValues.first)) {
+    for (Extremum const& extremum : relativeExtrema) {
+        if (interval.isValueInsideTheInterval(extremum.inputOutputValues.first)) {
             extremumInInterval = extremum;
             numberOfExtremaFoundInInterval++;
             if (numberOfExtremaFoundInInterval > 1) {
@@ -428,7 +431,8 @@ Extrema getRelativeExtrema(Term const& term, string const& variableName) {
     Term secondDerivative(differentiation.differentiateMultipleTimes(term, 2));
     Equation firstDerivativeEqualsZeroEquation(firstDerivative, "=", 0);
     OneEquationOneVariableEqualitySolver solver;
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(firstDerivativeEqualsZeroEquation));    AlbaNumbers const& valuesWhenFirstDerivativeIsZero(solutionSet.getAcceptedValues());
+    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(firstDerivativeEqualsZeroEquation));
+    AlbaNumbers const& valuesWhenFirstDerivativeIsZero(solutionSet.getAcceptedValues());
     Extrema result;
     for (AlbaNumber const& valueWhenFirstDerivativeIsZero : valuesWhenFirstDerivativeIsZero) {
         SubstitutionOfVariablesToValues substitution({{variableName, valueWhenFirstDerivativeIsZero}});
@@ -481,7 +485,8 @@ void putArbitiaryValuesFromInterval(AlbaNumbers& arbitiaryValues, AlbaNumberInte
     for (int level = 0; level < 5; level++) {
         AlbaNumber midpoint = (lowValue + highValue) / 2;
         lowValue = (lowValue + midpoint) / 2;
-        highValue = (highValue + midpoint) / 2;        arbitiaryValues.emplace_back(lowValue);
+        highValue = (highValue + midpoint) / 2;
+        arbitiaryValues.emplace_back(lowValue);
         arbitiaryValues.emplace_back(midpoint);
         arbitiaryValues.emplace_back(highValue);
     }
@@ -510,7 +515,8 @@ void retrieveSubstitutionsFromCriticalNumbers(
             if (static_cast<int>(substitutions.size()) <= i) {
                 substitutions.emplace_back();
             }
-            substitutions.at(i++).putVariableWithValue(nameAndCriticalNumbersPair.first, criticalNumber);        }
+            substitutions.at(i++).putVariableWithValue(nameAndCriticalNumbersPair.first, criticalNumber);
+        }
     }
 }
 

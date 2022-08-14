@@ -32,7 +32,8 @@ namespace KickStart_2020_RoundE_P3_Toys {
 void runTestCase(int const testCaseNumber) {
     int N;
     my_cin >> N;
-    vector<int64_t> E(N);    vector<pair<int64_t, int>> R(N);
+    vector<int64_t> E(N);
+    vector<pair<int64_t, int>> R(N);
     for (int i = 0; i < N; i++) {
         my_cin >> E[i] >> R[i].first;
         R[i].first += E[i];
@@ -99,6 +100,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

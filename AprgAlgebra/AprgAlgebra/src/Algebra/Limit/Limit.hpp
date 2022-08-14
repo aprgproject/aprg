@@ -34,7 +34,8 @@ AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
     AlbaNumber const& initialValueForIteration, int maxNumberOfIterations);
 AlbaNumber getLimitAtAValueUsingTrendOfValues(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach,
-    AlbaNumber const& previousAcceptedInput, AlbaNumber const& previousOfPreviousAcceptedInput);AlbaNumber getValueUsingLinearInterpolation(
+    AlbaNumber const& previousAcceptedInput, AlbaNumber const& previousOfPreviousAcceptedInput);
+AlbaNumber getValueUsingLinearInterpolation(
     AlbaNumber const& input1, AlbaNumber const& input2, AlbaNumber const& inputValue, AlbaNumber const& output1,
     AlbaNumber const& output2);
 

@@ -30,7 +30,8 @@ int InputConfiguration::getQuestionIndexInColumn(int const columnNumber, int con
     int questionIndex = 0;
     FormDetails::ColumnToNumberOfQuestionsMap::const_iterator columnMapIterator =
         m_formDetails.columnToNumberOfQuestionsMap.find(columnNumber);
-    if (columnMapIterator != m_formDetails.columnToNumberOfQuestionsMap.cend()) {        if (columnMapIterator == m_formDetails.columnToNumberOfQuestionsMap.cbegin()) {
+    if (columnMapIterator != m_formDetails.columnToNumberOfQuestionsMap.cend()) {
+        if (columnMapIterator == m_formDetails.columnToNumberOfQuestionsMap.cbegin()) {
             questionIndex = questionOffsetInColumn;
         } else {
             questionIndex = accumulate(
@@ -38,7 +39,8 @@ int InputConfiguration::getQuestionIndexInColumn(int const columnNumber, int con
                 [](int partialResult, FormDetails::ColumnToNumberOfQuestionsPair const& columnQuestionPair) {
                     return partialResult += columnQuestionPair.second;
                 });
-            questionIndex += questionOffsetInColumn;        }
+            questionIndex += questionOffsetInColumn;
+        }
     }
     return questionIndex;
 }
@@ -50,7 +52,8 @@ string InputConfiguration::getQuestionAt(int const questionIndex) const {
     if (questionIndex < static_cast<int>(m_formDetails.questions.size())) {
         question = m_formDetails.questions[questionIndex];
     }
-    return question;}
+    return question;
+}
 
 string InputConfiguration::getFormDetailsTitle() const { return m_formDetails.title; }
 
@@ -76,6 +79,7 @@ void InputConfiguration::addQuestion(int const columnNumber, string const& quest
     m_formDetails.columnToNumberOfQuestionsMap[columnNumber]++;
     m_formDetails.questions.emplace_back(question);
 }
+
 void InputConfiguration::setFormDetailsTitle(string const& title) { m_formDetails.title = title; }
 
 }  // namespace soosa

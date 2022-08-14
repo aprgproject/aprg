@@ -80,7 +80,8 @@ TEST(TermWithDetailsTest, GetAssociationPriorityWorks) {
     EXPECT_EQ(2, termWithDetails2.getAssociationPriority());
 }
 
-TEST(TermWithDetailsTest, ClearWorks) {    TermWithDetails termWithDetails(Term(10), TermAssociationType::Negative);
+TEST(TermWithDetailsTest, ClearWorks) {
+    TermWithDetails termWithDetails(Term(10), TermAssociationType::Negative);
 
     termWithDetails.clear();
 

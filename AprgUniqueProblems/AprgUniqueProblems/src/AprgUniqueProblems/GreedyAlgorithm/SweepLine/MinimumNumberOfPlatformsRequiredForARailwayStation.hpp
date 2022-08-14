@@ -21,7 +21,8 @@ public:
     void addTrainSchedule(int const startTime, int const endTime);  // assumption is every entry is unique
 
 private:
-    std::multiset<Event> m_sortedEvents;};
+    std::multiset<Event> m_sortedEvents;
+};
 
 // Given the arrival and departure times of all trains that reach a railway station,
 // the task is to find the minimum number of platforms required for the railway station so that no train waits.

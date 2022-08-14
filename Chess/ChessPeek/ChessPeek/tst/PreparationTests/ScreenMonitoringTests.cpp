@@ -28,6 +28,7 @@ TEST(ScreenMonitoringTest, DISABLED_ScreenCaptureCanBeSavedAsBitmap) {
             outputSnippet.setPixelAt(BitmapXY(x, y), screenMonitoring.getColorAt(x, y));
         }
     }
+
     outputBitmap.setSnippetWriteToFile(outputSnippet);
 }
 

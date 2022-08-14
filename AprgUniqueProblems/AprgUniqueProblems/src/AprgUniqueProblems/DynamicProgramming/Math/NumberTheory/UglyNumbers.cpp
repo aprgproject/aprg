@@ -27,7 +27,8 @@ UglyNumbers::Number UglyNumbers::getNthUglyNumberByCheckingPreviousUglyNumbersUs
                                                                        : false;
             isUglyNumber.emplace_back(isCurrentNumberUgly);
             count += isCurrentNumberUgly ? 1 : 0;
-        }        result = currentNumber;
+        }
+        result = currentNumber;
     }
     return result;
 }
@@ -47,7 +48,8 @@ UglyNumbers::Number UglyNumbers::getNthUglyNumberByMultiplesUsingIterativeDP() c
         while (static_cast<Number>(uglyNumbers.size()) < m_nth) {
             Number nextUglyNumber = min(min(next2Multiple, next3Multiple), next5Multiple);
             uglyNumbers.emplace_back(nextUglyNumber);
-            next2Multiple = (nextUglyNumber == next2Multiple) ? uglyNumbers.at(++indexFor2) * 2 : next2Multiple;            next3Multiple = (nextUglyNumber == next3Multiple) ? uglyNumbers.at(++indexFor3) * 3 : next3Multiple;
+            next2Multiple = (nextUglyNumber == next2Multiple) ? uglyNumbers.at(++indexFor2) * 2 : next2Multiple;
+            next3Multiple = (nextUglyNumber == next3Multiple) ? uglyNumbers.at(++indexFor3) * 3 : next3Multiple;
             next5Multiple = (nextUglyNumber == next5Multiple) ? uglyNumbers.at(++indexFor5) * 5 : next5Multiple;
         }
         result = uglyNumbers.back();

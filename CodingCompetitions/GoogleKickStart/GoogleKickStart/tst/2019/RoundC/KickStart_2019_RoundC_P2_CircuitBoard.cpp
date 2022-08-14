@@ -6,6 +6,7 @@
 #include <Fake/FakeNames.hpp>
 #endif
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+
 #include <cmath>
 #include <cstdint>
 #include <functional>
@@ -42,6 +43,7 @@ public:
     using Value = typename Values::value_type;
     using ValueMatrix = vector<Value>;
     using SelectorFunction = std::function<Value(Value const&, Value const&)>;
+
     RangeQueryWithSelector(Values const& valuesToCheck, SelectorFunction const& selector)
         : m_selectedValueMatrix(), m_selector(selector), m_columns(0), m_rows(0) {
         initialize(valuesToCheck);
@@ -62,7 +64,8 @@ public:
                 result = m_selectedValueMatrix.at(getMatrixIndex(start, 0));
             }
         }
-        return result;    }
+        return result;
+    }
 
 private:
     void initialize(Values const& valuesToCheck) {
@@ -78,7 +81,8 @@ private:
                 m_selectedValueMatrix[getMatrixIndex(index, 0)] = valuesToCheck.at(index);
             }
             for (Index exponentOf2 = 0; exponentOf2 < lastExponentOf2;
-                 exponentOf2++)  // put remaining values with "powers of 2 sized" ranges            {
+                 exponentOf2++)  // put remaining values with "powers of 2 sized" ranges
+            {
                 Index offset = get2ToThePowerOf(exponentOf2);
                 Index limit = valuesToCheck.size() - offset;
                 for (Index index = 0; index < limit; index++) {
@@ -131,6 +135,7 @@ void runTestCase(int const testCaseNumber) {
     int maxAllowableThickness;
     my_cin >> numberOfRows >> numberOfColumns >> maxAllowableThickness;
     vector<int> thicknessPerCell(numberOfRows * numberOfColumns);
+
     for (int i = 0; i < numberOfColumns * numberOfRows; i++) {
         my_cin >> thicknessPerCell[i];
     }
@@ -188,7 +193,8 @@ int getIndexFromMaxLength(int const x, int const y, int const z)
 void runTestCase(int const testCaseNumber)
 {
     int maxAllowableThickness;
-    my_cin >> numberOfRows >> numberOfColumns >> maxAllowableThickness;    vector<int> thicknessPerCell(numberOfRows*numberOfColumns);
+    my_cin >> numberOfRows >> numberOfColumns >> maxAllowableThickness;
+    vector<int> thicknessPerCell(numberOfRows*numberOfColumns);
 
     for(int i=0; i<numberOfColumns*numberOfRows; i++)
     {
@@ -233,6 +239,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

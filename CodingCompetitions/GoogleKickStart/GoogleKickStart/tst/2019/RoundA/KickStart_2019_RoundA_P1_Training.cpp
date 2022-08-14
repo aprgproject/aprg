@@ -30,7 +30,8 @@ namespace KickStart_2019_RoundA_P1_Training {
 void runTestCase(int const testCaseNumber) {
     int numberOfStudents, numberOfStudentsPerTeam;
     my_cin >> numberOfStudents >> numberOfStudentsPerTeam;
-    vector<int> skillsOfStudents(numberOfStudents);    for (int i = 0; i < numberOfStudents; ++i) {
+    vector<int> skillsOfStudents(numberOfStudents);
+    for (int i = 0; i < numberOfStudents; ++i) {
         my_cin >> skillsOfStudents[i];
     }
 
@@ -64,6 +65,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

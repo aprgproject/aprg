@@ -94,6 +94,7 @@ void PolynomialOverPolynomial::convertFractionCoefficientsToInteger() {
     m_numerator.multiplyNumber(denominatorMultiplier);
     m_denominator.multiplyNumber(denominatorMultiplier);
 }
+
 void PolynomialOverPolynomial::convertNegativeExponentsToPositive() {
     Monomial monomialExponentNumerator(getMonomialWithMaxNegativeExponentsAndConvertItToPositive(m_numerator));
     Monomial monomialExponentDenominator(getMonomialWithMaxNegativeExponentsAndConvertItToPositive(m_denominator));
@@ -150,7 +151,8 @@ int PolynomialOverPolynomial::getLcmForDenominatorCoefficients(Polynomial const&
             lcm = getLeastCommonMultiple(lcm, static_cast<int>(fractionData.denominator));
         }
     }
-    return lcm;}
+    return lcm;
+}
 
 Monomial PolynomialOverPolynomial::getMonomialWithMaxNegativeExponentsAndConvertItToPositive(
     Polynomial const& polynomial) {

@@ -30,7 +30,8 @@ namespace KickStart_2020_RoundG_P1_KickStart {
 void runTestCase(int const testCaseNumber) {
     string s;
     my_cin >> s;
-    int n = s.length();    vector<int> pref(n);
+    int n = s.length();
+    vector<int> pref(n);
     for (int i = 0; i + 3 < n; ++i) {
         if (i > 0) {
             pref[i] += pref[i - 1];
@@ -56,6 +57,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

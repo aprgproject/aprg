@@ -52,7 +52,8 @@ void dfs(int u) {
 void runTestCase(int const testCaseNumber) {
     my_cin >> n >> m;
     set<char> t;
-    for (int i = 0; i < n; ++i) {        my_cin >> s[i];
+    for (int i = 0; i < n; ++i) {
+        my_cin >> s[i];
         for (char c : s[i]) t.insert(c);
         if (i) {
             for (int j = 0; j < m; ++j) adj[s[i - 1][j] - 'A'].push_back(s[i][j] - 'A');
@@ -77,6 +78,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

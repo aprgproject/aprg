@@ -57,6 +57,7 @@ double getAreaUsingPicksTheorem(int const numberOfPointsInside, int const number
 
 Vector constructVector(AlbaXY<double> const& xy);
 Vector constructDeltaVector(Line const& line);
+
 ConicSectionType getConicSectionBasedOnEccentricity(double const eccentricity);
 ConicSectionType getConicSectionBasedOnGeneralForm(
     double const a, double const b, double const c, double const e, double const f);
@@ -112,7 +113,8 @@ void traverseCircleAreaBetweenTwoRadius(
 template <int numberOfVertices>
 bool isPointInsidePolygon(
     Polygon<numberOfVertices> const& polygon, Point const& point, Point const& pointForRayTesting) {
-    // Point inside a polygon    // Let us now consider the problem of testing whether a point is located inside or outside a polygon.
+    // Point inside a polygon
+    // Let us now consider the problem of testing whether a point is located inside or outside a polygon.
     // A convenient way to solve the problem is to send a ray from the point to an arbitrary direction
     // and calculate the number of times it touches the boundary of the polygon.
     // If the number is odd, the point is inside the polygon, and if the number is even, the point is outside the
@@ -123,14 +125,16 @@ bool isPointInsidePolygon(
     int numberOfIntersections = std::count_if(
         lineSegments.cbegin(), lineSegments.cend(), [&rayLineSegment](LineSegment const& lineSegmentInPolygon) {
             Point pointOfIntersection(getIntersectionOfTwoLineSegment(rayLineSegment, lineSegmentInPolygon));
-            return std::isfinite(pointOfIntersection.getX()) && std::isfinite(pointOfIntersection.getY());        });
+            return std::isfinite(pointOfIntersection.getX()) && std::isfinite(pointOfIntersection.getY());
+        });
     return mathHelper::isOdd(numberOfIntersections);
 }
 
 template <int numberOfVertices>
 double getArea(Polygon<numberOfVertices> const& polygon) {
     // shoelace formula
-    // https://en.wikipedia.org/wiki/Shoelace_formula    // check also: https://en.wikipedia.org/wiki/Green%27s_theorem
+    // https://en.wikipedia.org/wiki/Shoelace_formula
+    // check also: https://en.wikipedia.org/wiki/Green%27s_theorem
 
     double area(0);
     Points const& vertices(polygon.getVertices());
@@ -153,7 +157,8 @@ Line getPolynomialTangentLineAt(PolynomialInXEqualsY<numberOfCoefficients> polyn
 template <int numberOfCoefficients>
 Line getPolynomialTangentLineAt(PolynomialInYEqualsX<numberOfCoefficients> polynomial, double const y) {
     double slopeInY = polynomial.getValueOfFirstDerivative(y);
-    double x = polynomial.calculateXfromY(x);    return Line(Point(x, y), Point(x + slopeInY, y + 1));
+    double x = polynomial.calculateXfromY(x);
+    return Line(Point(x, y), Point(x + slopeInY, y + 1));
 }
 
 }  // namespace twoDimensionsUtilities

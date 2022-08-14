@@ -62,7 +62,8 @@ void ChessEngineHandler::sendStringToEngine(string const& stringToEngine) {
     DWORD bytesWritten(0U);
     string stringToWrite(stringToEngine);
     stringToWrite += "\n";
-    long remainingLength = stringToWrite.length();    bool isSuccessful(true);
+    long remainingLength = stringToWrite.length();
+    bool isSuccessful(true);
     do {
         isSuccessful = WriteFile(m_inputStreamOnHandler, stringToWrite.c_str(), remainingLength, &bytesWritten, NULL);
         if (isSuccessful) {
@@ -90,7 +91,8 @@ void ChessEngineHandler::startMonitoringEngineOutput() {
     DWORD bytesAvailable;  // bytes available
     char buffer[MAX_BUFFER_SIZE];
     string stringBuffer;
-    while (true) {        PeekNamedPipe(m_outputStreamOnHandler, buffer, MAX_BUFFER_SIZE, NULL, &bytesAvailable, NULL);
+    while (true) {
+        PeekNamedPipe(m_outputStreamOnHandler, buffer, MAX_BUFFER_SIZE, NULL, &bytesAvailable, NULL);
         if (bytesAvailable > 0) {
             ReadFile(m_outputStreamOnHandler, buffer, MAX_BUFFER_SIZE, &bytesRead, NULL);
             stringBuffer.reserve(stringBuffer.size() + bytesRead);
@@ -103,7 +105,8 @@ void ChessEngineHandler::startMonitoringEngineOutput() {
                 int newLineIndex = stringBuffer.find_first_of("\r\n", startIndex);
                 if (isNotNpos(static_cast<int>(newLineIndex))) {
                     string oneLine(stringBuffer.substr(startIndex, newLineIndex - startIndex));
-                    if (!oneLine.empty()) {                        processStringFromEngine(oneLine);
+                    if (!oneLine.empty()) {
+                        processStringFromEngine(oneLine);
                     }
                     currentIndex = newLineIndex + 1;
                 } else {

@@ -31,6 +31,7 @@ public:
     int getSize() const { return m_implicantsData.size(); }
 
     ImplicantWithMintermSet const& getImplicantsData() const& { return m_implicantsData; }
+
     void addImplicant(ImplicantWithMinterm const& implicant) { m_implicantsData.emplace(implicant); }
 
     void addFinalImplicant(ImplicantWithMinterm const& implicant) {

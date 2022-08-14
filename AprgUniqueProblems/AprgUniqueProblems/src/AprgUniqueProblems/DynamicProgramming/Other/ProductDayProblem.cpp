@@ -77,10 +77,12 @@ ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingMemoizationDP(
     if (day >= 0 && day < getNumberOfDays()) {
         Price result(minimumPrices.getEntry(day, productBits));
         if (UNUSED_PRICE == result) {
-            // put total of previous day            result = getMinimumPriceUsingMemoizationDP(minimumPrices, day - 1, productBits);
+            // put total of previous day
+            result = getMinimumPriceUsingMemoizationDP(minimumPrices, day - 1, productBits);
             for (Product product = 0; product < getNumberOfProducts(); product++) {
                 if (isProductIncluded(productBits, product)) {
-                    Price previousDayWithoutProduct =                        getMinimumPriceUsingMemoizationDP(minimumPrices, day - 1, removeProduct(productBits, product));
+                    Price previousDayWithoutProduct =
+                        getMinimumPriceUsingMemoizationDP(minimumPrices, day - 1, removeProduct(productBits, product));
                     if (INVALID_PRICE != previousDayWithoutProduct) {
                         result = min(
                             result,                    // current value

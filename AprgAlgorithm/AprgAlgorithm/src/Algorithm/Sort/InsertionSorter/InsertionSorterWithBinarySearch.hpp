@@ -50,7 +50,8 @@ private:
                 iLow = middleIndex + 1;
             }
         }
-        return result;    }
+        return result;
+    }
 };
 
 }  // namespace algorithm

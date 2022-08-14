@@ -89,7 +89,8 @@ string GameWithMaze::getString() {
         for (int x = 0; x < static_cast<int>(m_isBlockedMatrix.getNumberOfColumns()); x++) {
             stringstream ss;
             if (m_isBlockedMatrix.getEntry(x, y)) {
-                ss << "X";            } else {
+                ss << "X";
+            } else {
                 ss << getGrundyNumberAt(Coordinate(x, y));
             }
             table.getLastRow().addCell(ss.str());
@@ -123,7 +124,8 @@ void GameWithMaze::retrieveLeftCoordinates(Coordinates& retrievedCoordinates, Co
         Coordinate xyToCheck(x, coordinate.second);
         if (!m_isBlockedMatrix.getEntry(xyToCheck.first, xyToCheck.second)) {
             retrievedCoordinates.emplace_back(xyToCheck);
-        } else {            break;
+        } else {
+            break;
         }
     }
 }
@@ -133,7 +135,8 @@ void GameWithMaze::retrieveUpCoordinates(Coordinates& retrievedCoordinates, Coor
         Coordinate xyToCheck(coordinate.first, y);
         if (!m_isBlockedMatrix.getEntry(xyToCheck.first, xyToCheck.second)) {
             retrievedCoordinates.emplace_back(xyToCheck);
-        } else {            break;
+        } else {
+            break;
         }
     }
 }

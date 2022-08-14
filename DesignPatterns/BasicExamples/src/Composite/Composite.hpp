@@ -16,7 +16,8 @@ public:
         int const) const  // Make sure that this doesn't break interface segregation principle. (Make sure the
                                    // method/function makes sense.)
     {
-        return nullptr;    }
+        return nullptr;
+    }
 
     virtual void add(std::unique_ptr<Component>)  // Make sure that this doesn't break interface segregation principle.
                                                   // (Make sure the method/function makes sense.)
@@ -27,7 +28,8 @@ public:
     virtual void removeAtIndex(int const)  // Make sure that this doesn't break interface segregation
                                                     // principle. (Make sure the method/function makes sense.)
     {
-        //...    }
+        //...
+    }
 
     virtual void operation() = 0;
 };
@@ -45,7 +47,8 @@ public:
     void removeAtIndex(int const index) override { m_children.erase(m_children.begin() + index); }
 
     void operation() override {
-        for (auto& child : m_children) {            child->operation();
+        for (auto& child : m_children) {
+            child->operation();
         }
     }
 
@@ -68,6 +71,7 @@ private:
 };
 
 }  // namespace Composite
+
 // Composite discussion:
 
 // ONE LINE NOTE:

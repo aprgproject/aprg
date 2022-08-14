@@ -13,7 +13,8 @@ public:
     using Count = int;
     using Counts = std::vector<Count>;
     enum class PressType { Unknown, TypeA, CtrlA, CtrlC, CtrlV };
-    struct CountDetail {        Count numberInScreen;
+    struct CountDetail {
+        Count numberInScreen;
         Count numberInBuffer;
         Count numberInSelection;
     };

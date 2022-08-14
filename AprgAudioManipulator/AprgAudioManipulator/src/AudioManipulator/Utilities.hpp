@@ -32,7 +32,8 @@ void searchAndTryToReplicateSamples(
     int channelIndexInAudioToChange, int channelIndexInAudioToReplicate, int channelIndexInAudioToSearch,
     bool const alwaysPutNewValue);
 
-void searchAndTryToReplicate(    std::string const& filePathForAudioToChange, std::string const& filePathForAudioToReplicate,
+void searchAndTryToReplicate(
+    std::string const& filePathForAudioToChange, std::string const& filePathForAudioToReplicate,
     std::string const& filePathForAudioToSearch, bool const alwaysPutNewValue);
 }  // namespace AprgAudio
 

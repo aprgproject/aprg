@@ -94,7 +94,8 @@ double ans(vector<int> a, int tot) {
 void runTestCase(int const testCaseNumber) {
     mp.clear();
     my_cin >> n >> m;
-    iv = 1 / (double)m;    int k;
+    iv = 1 / (double)m;
+    int k;
     my_cin >> k;
     need.resize(k);
     for (int i = 0; i < k; i++) my_cin >> need[i];
@@ -111,6 +112,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

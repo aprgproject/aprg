@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <limits>
 #include <vector>
+
 namespace alba {
 
 class StringConstruction {

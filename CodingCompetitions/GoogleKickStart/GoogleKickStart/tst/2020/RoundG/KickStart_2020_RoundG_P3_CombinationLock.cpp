@@ -31,7 +31,8 @@ namespace KickStart_2020_RoundG_P3_CombinationLock {
 void runTestCase(int const testCaseNumber) {
     int n, k;
     my_cin >> n >> k;
-    vector<int> a(n);    for (int i = 0; i < n; ++i) {
+    vector<int> a(n);
+    for (int i = 0; i < n; ++i) {
         my_cin >> a[i];
         a[i]--;
     }
@@ -74,6 +75,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

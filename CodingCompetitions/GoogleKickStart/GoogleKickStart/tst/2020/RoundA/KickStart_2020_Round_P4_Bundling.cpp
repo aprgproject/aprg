@@ -41,7 +41,8 @@ void dfs(int u = 0, int d = 0) {
 void runTestCase(int const testCaseNumber) {
     my_cin >> n >> k;
     m = 1;
-    for (int i = 0; i < n; ++i) {        string s;
+    for (int i = 0; i < n; ++i) {
+        string s;
         my_cin >> s;
         int u = 0;
         for (char d : s) {
@@ -64,6 +65,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

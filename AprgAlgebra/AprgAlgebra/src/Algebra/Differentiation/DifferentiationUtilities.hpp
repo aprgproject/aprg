@@ -54,6 +54,7 @@ Term getApproximationOfErrorUsingTaylorsRemainder(
 
 Term getTotalDerivativeWithInnerTermsUsingChainRule(
     Term const& term, SubstitutionOfVariablesToTerms const& substitution, std::string const& commonVariable);
+
 Term getTotalDerivative(Term const& term, stringHelper::strings const& variableNames);
 
 Term getPartialDerivative(Term const& term, std::string const& variableName);

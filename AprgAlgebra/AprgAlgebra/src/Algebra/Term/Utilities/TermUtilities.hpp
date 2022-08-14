@@ -17,6 +17,7 @@ int getNumberOfTerms(Term const& term);
 
 AlbaNumber getConstantFactor(Term const& term);
 AlbaNumber getDegree(Term const& term);
+
 AlbaNumberPairs evaluateAndGetInputOutputPair(
     AlbaNumbers const& numbers, std::string const& variableName, Term const& term);
 

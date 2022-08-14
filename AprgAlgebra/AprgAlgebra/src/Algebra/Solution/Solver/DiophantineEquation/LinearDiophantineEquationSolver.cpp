@@ -60,7 +60,8 @@ void LinearDiophantineEquationSolver::retrieveDetailsFromPolynomial(
         1 == monomials.at(1).getVariablesToExponentsMapConstReference().size() &&
         monomials.at(2).getVariablesToExponentsMapConstReference().empty()) {
         a = monomials.at(0).getConstantConstReference();
-        b = monomials.at(1).getConstantConstReference();        c = -monomials.at(2).getConstantConstReference();
+        b = monomials.at(1).getConstantConstReference();
+        c = -monomials.at(2).getConstantConstReference();
         xName = monomials.at(0).getVariablesToExponentsMapConstReference().cbegin()->first;
         yName = monomials.at(1).getVariablesToExponentsMapConstReference().cbegin()->first;
         isPatternRecognized = true;

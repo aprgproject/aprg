@@ -25,6 +25,7 @@ public:
         Coordinate whiteKingCoordinate;
         Coordinate blackKingCoordinate;
     };
+
     bool canAnalyzeBoard() const;
     BoardWithContext const& getBoardWithContext() const;
 

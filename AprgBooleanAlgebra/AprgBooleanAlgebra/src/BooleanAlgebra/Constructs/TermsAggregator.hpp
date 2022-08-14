@@ -12,6 +12,7 @@ public:
     using Indexes = std::vector<int>;
 
     TermsAggregator(Terms const& terms);
+
     Terms const& getTermsConstReference() const;
 
     void buildExpressionFromTerms();
@@ -46,6 +47,7 @@ private:
     int m_endIndex;
     Terms m_terms;
 };
+
 }  // namespace booleanAlgebra
 
 }  // namespace alba

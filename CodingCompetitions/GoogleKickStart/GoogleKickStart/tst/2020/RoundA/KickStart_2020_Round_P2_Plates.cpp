@@ -32,7 +32,8 @@ int dp[51][1501];
 void runTestCase(int const testCaseNumber) {
     my_cin >> n >> k >> p;
     memset(dp, 0xc0, sizeof(dp));
-    dp[0][0] = 0;    for (int i = 0; i < n; ++i) {
+    dp[0][0] = 0;
+    for (int i = 0; i < n; ++i) {
         memcpy(dp[i + 1], dp[i], sizeof(dp[0]));
         for (int j = 0, s = 0; j < k; ++j) {
             my_cin >> a[i][j];
@@ -51,6 +52,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

@@ -91,7 +91,8 @@ typedef struct DATA2BIT {
     uint8_t* buf;
 } DataDigital;
 
-typedef struct BMPIMAGE2BIT {    int xSize;
+typedef struct BMPIMAGE2BIT {
+    int xSize;
     int ySize;
     int rasterPad;
     int setColor;
@@ -342,7 +343,8 @@ long getImageInfo(FILE* inputFile, long offset, int numberOfChars) {
     uint8_t dummy;
     int i;
 
-    dummy = '0';    ptrC = &dummy;
+    dummy = '0';
+    ptrC = &dummy;
 
     fseek(inputFile, offset, SEEK_SET);
 
@@ -464,7 +466,8 @@ int getDataFromBmp(BmpImage* inBmpImage, DataDigital* indata) {
     uint8_t* ptrC;
     int x, xsizebytes = indata->xSizeBytesAllocated;
     int y, ylow = indata->ylow, yhigh = indata->yhigh;
-    int ysize = inBmpImage->ySize, nbor = inBmpImage->numBytesOneRow;    int rasterBegin = inBmpImage->rasterBegin;
+    int ysize = inBmpImage->ySize, nbor = inBmpImage->numBytesOneRow;
+    int rasterBegin = inBmpImage->rasterBegin;
     FILE* t1fileaddress = inBmpImage->filePtr;
     long offset;
     int i;
@@ -514,7 +517,8 @@ int allocData(DataDigital* indata) {
     indata->buf = (uint8_t*)malloc((indata->xSizeBytesAllocated) * (indata->ySizeBytesAllocated) * sizeof(char));
     if (indata->buf == NULL) {
         return 1;
-    }    indata->status = 2;
+    }
+    indata->status = 2;
     return 0;
 }
 void deAllocData(DataDigital* indata) {
@@ -553,7 +557,8 @@ void printDataDigitalBuffer(DataDigital* indata) {
     uint8_t tbuf;
     for (y = 0; y < indata->ySizeBytesAllocated; y++) {
         for (x = 0; x < indata->xSizeBytesAllocated; x++) {
-            tbuf = indata->buf[(y * indata->xSizeBytesAllocated) + x];            for (m = 0; m < 8; m++) {
+            tbuf = indata->buf[(y * indata->xSizeBytesAllocated) + x];
+            for (m = 0; m < 8; m++) {
                 if ((tbuf & 0x80) == 0x80) {
                     fprintf(bufferprint, "_");
                 } else {
@@ -892,7 +897,8 @@ int findLineImageFromLeft(
     uint8_t dummy, mask;
     lt_success = 0;
     DBGPRINT(
-        "  FUNC:findLineImageFromLeft(startx=%d|starty=%d|endx=%d|endy=%d)\n", inStart._x + gddx, inStart._y + gddy,        inEnd._x + gddx, inEnd._y + gddy);
+        "  FUNC:findLineImageFromLeft(startx=%d|starty=%d|endx=%d|endy=%d)\n", inStart._x + gddx, inStart._y + gddy,
+        inEnd._x + gddx, inEnd._y + gddy);
     for (lt = 0; lt < numsamplesize; lt++) {  // lineSamples
         in_line[lt_success]._x =
             roundOffSignRobust((double)(inEnd._x - inStart._x) * lt / (numsamplesize)) + inStart._x;
@@ -956,7 +962,8 @@ int findLineImageFromRight(
     uint8_t dummy, mask;
     lt_success = 0;
     DBGPRINT(
-        "  FUNC:findLineImageFromRight(startx=%d|starty=%d|endx=%d|endy=%d)\n", inStart._x + gddx, inStart._y + gddy,        inEnd._x + gddx, inEnd._y + gddy);
+        "  FUNC:findLineImageFromRight(startx=%d|starty=%d|endx=%d|endy=%d)\n", inStart._x + gddx, inStart._y + gddy,
+        inEnd._x + gddx, inEnd._y + gddy);
     for (lt = 0; lt < numsamplesize; lt++) {  // lineSamples
         in_line[lt_success]._x =
             roundOffSignRobust((double)(inEnd._x - inStart._x) * lt / (numsamplesize)) + inStart._x;
@@ -1021,7 +1028,8 @@ int findLineImageFromTop(DataDigital* indata, PairXY* in_line, int numsamplesize
     uint8_t dummy, mask;
     lt_success = 0;
     DBGPRINT(
-        "  FUNC:findLineImageFromTop(startx=%d|starty=%d|endx=%d|endy=%d)\n", inStart._x + gddx, inStart._y + gddy,        inEnd._x + gddx, inEnd._y + gddy);
+        "  FUNC:findLineImageFromTop(startx=%d|starty=%d|endx=%d|endy=%d)\n", inStart._x + gddx, inStart._y + gddy,
+        inEnd._x + gddx, inEnd._y + gddy);
     for (lt = 0; lt < numsamplesize; lt++) {  // lineSamples
         in_line[lt_success]._x =
             roundOffSignRobust((double)(inEnd._x - inStart._x) * lt / (numsamplesize)) + inStart._x;
@@ -1081,7 +1089,8 @@ int findLineImageFromBottom(DataDigital* indata, PairXY* in_line, int numsamples
     uint8_t dummy, mask;
     lt_success = 0;
     DBGPRINT(
-        "  FUNC:findLineImageFromBottom(startx=%d|starty=%d|endx=%d|endy=%d)\n", inStart._x + gddx, inStart._y + gddy,        inEnd._x + gddx, inEnd._y + gddy);
+        "  FUNC:findLineImageFromBottom(startx=%d|starty=%d|endx=%d|endy=%d)\n", inStart._x + gddx, inStart._y + gddy,
+        inEnd._x + gddx, inEnd._y + gddy);
     for (lt = 0; lt < numsamplesize; lt++) {  // lineSamples
         in_line[lt_success]._x =
             roundOffSignRobust((double)(inEnd._x - inStart._x) * lt / (numsamplesize)) + inStart._x;

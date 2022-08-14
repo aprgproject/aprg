@@ -36,6 +36,7 @@ TEST(RealAutomationTest, DISABLED_TraverseTalonRoShops)  // DISABLED_
     for (int page = 1; page <= 1000; page++) {
         userAutomation.typeControlAndLetterSimultaneously('S');
         userAutomation.sleep(2000);
+
         stringstream fileName;
         fileName << "page_" << page << ".html";
         AlbaLocalPathHandler filePathHandler(itemDatabaseFolder.getFullPath() + fileName.str());
@@ -82,7 +83,8 @@ TEST(RealAutomationTest, DISABLED_TraverseDatabaseOnRms) {
         for (int pageNumber = 1; pageNumber <= 100; pageNumber++) {
             userAutomation.doLeftClickAt(MousePosition(2368, 52));
 
-            stringstream rmsPath;            rmsPath << R"(https://ratemyserver.net/index.php?page=mob_db&list=1&letter=)" << letter << R"(&page_num=)"
+            stringstream rmsPath;
+            rmsPath << R"(https://ratemyserver.net/index.php?page=mob_db&list=1&letter=)" << letter << R"(&page_num=)"
                     << pageNumber;
             userAutomation.sleepWithRealisticDelay();
             userAutomation.typeKey(VK_DELETE);

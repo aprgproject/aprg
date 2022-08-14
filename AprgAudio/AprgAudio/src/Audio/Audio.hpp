@@ -32,6 +32,7 @@ public:
     int getNumChannels() const;
 
     bool isMono() const;
+
     bool isStereo() const;
 
     int getBitDepth() const;
@@ -43,6 +44,7 @@ public:
 
     /** @Returns the length in seconds of the audio file based on the number of samples and sample rate */
     double getLengthInSeconds() const;
+
     /** Prints a summary of the audio file to the console */
     void printSummary() const;
 
@@ -63,6 +65,7 @@ public:
 
     /** Sets the number of channels. New channels will have the correct number of samples and be initialised to zero */
     void setNumChannels(int numChannels);
+
     /** Sets the bit depth for the audio file. If you use the save() function, this bit depth rate will be used */
     void setBitDepth(int numBitsPerSample);
 
@@ -70,7 +73,8 @@ public:
     void setSampleRate(int newSampleRate);
 
     /** A vector of vectors holding the audio samples for the Audio. You can
-     * access the samples by channel and then by sample index, i.e:     *
+     * access the samples by channel and then by sample index, i.e:
+     *
      *      samples[channel][sampleIndex]
      */
     AudioBuffer samples;
@@ -84,6 +88,7 @@ private:
 
     bool saveToWaveFile(std::string const& filePath);
     bool saveToAiffFile(std::string const& filePath);
+
     void clearAudioBuffer();
 
     int32_t fourBytesToInt(
@@ -112,7 +117,8 @@ private:
     bool writeDataToFile(std::vector<uint8_t>& fileDataBytes, std::string const& filePath);
 
     AudioFormat audioFileFormat;
-    int sampleRate;    int bitDepth;
+    int sampleRate;
+    int bitDepth;
 };
 
 }  // namespace AprgAudio

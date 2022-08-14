@@ -29,6 +29,7 @@ TEST(AlbaGrepFileTest, GrepUpdatesWorks) {
         testFile << i << "\n";
     }
     testFile.close();
+
     double capturedPercentage = 0;
     AlbaGrepFile grepFile("[0]", [&](double percentage) -> void { capturedPercentage = percentage; });
     EXPECT_FALSE(grepFile.isOutputFileWritten());

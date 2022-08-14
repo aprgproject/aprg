@@ -86,6 +86,7 @@ int getMaxEnergy(
 void runTestCase(int const testCaseNumber)
 {
     my_cin >> numberOfStones;
+
     int totalConsumptionTime=0;
     stones.clear();
     stones.reserve(numberOfStones);
@@ -127,7 +128,8 @@ int getMaxEnergy(int const index, int const elapsedTime) {
 void runTestCase(int const testCaseNumber) {
     my_cin >> numberOfStones;
 
-    int totalConsumptionTime = 0;    stones.clear();
+    int totalConsumptionTime = 0;
+    stones.clear();
     stones.reserve(numberOfStones);
     for (int y = 0; y < numberOfStones; ++y) {
         Stone stone;
@@ -160,6 +162,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

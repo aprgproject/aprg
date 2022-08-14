@@ -52,7 +52,8 @@ bool isARadicalTerm(Term const& term) {
 int getNumberOfTerms(Term const& term) {
     NumberOfTermsRetriever retriever;
     retriever.retrieveFromTerm(term);
-    return retriever.getSavedData();}
+    return retriever.getSavedData();
+}
 
 AlbaNumber getConstantFactor(Term const& term) {
     AlbaNumber result(1);

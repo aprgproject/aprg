@@ -29,7 +29,8 @@ struct TermWithDetails {
     int getAssociationPriority() const;
     void clear();
     void reverseAssociation();
-    BaseTermUniquePointer baseTermPointer;    TermAssociationType association;
+    BaseTermUniquePointer baseTermPointer;
+    TermAssociationType association;
 };
 
 using TermsWithDetails = std::vector<TermWithDetails>;

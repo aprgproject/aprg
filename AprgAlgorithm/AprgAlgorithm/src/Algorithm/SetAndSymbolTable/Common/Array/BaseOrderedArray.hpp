@@ -91,6 +91,7 @@ public:
         }
         return result;
     }
+
     static Key selectAt(int const index, Keys const& keys) {
         Key result{};
         if (index < static_cast<int>(keys.size())) {

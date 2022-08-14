@@ -39,7 +39,8 @@ bool ckmin(T& a, const T& b) {
 void runTestCase(int const testCaseNumber) {
     int N, M, S, R;
     my_cin >> N >> M >> S >> R;
-    vector<vector<int>> graph(N);    F0R(i, M) {
+    vector<vector<int>> graph(N);
+    F0R(i, M) {
         int A, B;
         my_cin >> A >> B;
         A--;
@@ -135,6 +136,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

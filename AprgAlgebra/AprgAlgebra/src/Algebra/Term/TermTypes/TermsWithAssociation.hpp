@@ -24,7 +24,8 @@ public:
     int getSize() const;
     BaseTerm const& getFirstTermConstReference() const;
     TermAssociationType getFirstAssociationType() const;
-    TermsWithDetails const& getTermsWithDetails() const;    TermsWithDetails& getTermsWithDetailsReference();
+    TermsWithDetails const& getTermsWithDetails() const;
+    TermsWithDetails& getTermsWithDetailsReference();
 
     void clear();
     void sort(bool const dontSortFirstItem);

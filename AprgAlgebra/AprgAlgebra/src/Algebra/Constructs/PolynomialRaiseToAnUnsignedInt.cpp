@@ -36,6 +36,7 @@ bool PolynomialRaiseToAnUnsignedInt::canBeSimplified(
     return gcfOfExponents != 1 &&
            (!isEven(gcfOfExponents) || (isEven(gcfOfExponents) && !isANegativeMonomial(commonMonomialInBase)));
 }
+
 void PolynomialRaiseToAnUnsignedInt::factorizeAndUpdateCommonMonomialAndFactorsToExponent(
     Polynomial const& polynomial, PolynomialToNumberMap& factorsToExponent, Monomial& commonMonomialInBase) {
     Polynomials factors(factorizeAPolynomial(polynomial));
@@ -57,7 +58,8 @@ int PolynomialRaiseToAnUnsignedInt::getGcfOfExponents(PolynomialToNumberMap cons
     int result(1);
     if (!factorsToExponent.empty()) {
         auto it = factorsToExponent.cbegin();
-        result = it->second;        it++;
+        result = it->second;
+        it++;
         for (; it != factorsToExponent.cend(); it++) {
             result = getGreatestCommonFactor(result, it->second);
         }
@@ -75,7 +77,8 @@ Polynomial PolynomialRaiseToAnUnsignedInt::getRemainingBase(
         int remainingExponent(factorsAndExponentPair.second / gcfOfExponents);
         Polynomial remainingFactor(factorsAndExponentPair.first);
         remainingFactor.raiseToUnsignedInteger(remainingExponent);
-        result.multiplyPolynomial(remainingFactor);    }
+        result.multiplyPolynomial(remainingFactor);
+    }
     return result;
 }
 

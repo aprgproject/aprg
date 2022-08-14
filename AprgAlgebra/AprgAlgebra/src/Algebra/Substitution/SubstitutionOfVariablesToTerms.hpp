@@ -23,6 +23,7 @@ public:
     int getSize() const;
     Term getTermForVariable(std::string const& variable) const;
     VariablesToTermsMap const& getVariablesToTermsMap() const;
+
     Term performSubstitutionTo(Variable const& variable) const;
     Term performSubstitutionTo(Monomial const& monomial) const;
     Term performSubstitutionTo(Polynomial const& polynomial) const;

@@ -213,7 +213,8 @@ bool TermsOverTerms::removeTermsIfNeededAndReturnIfSomeTermsAreRemoved(Terms& nu
            previousNumberOfDenominators != static_cast<int>(denominators.size());
 }
 
-void TermsOverTerms::handleZerosInNumeratorOrDenominator(Terms& denominators, Terms& numerators) {    bool hasZeroOnNumerators(hasZero(numerators));
+void TermsOverTerms::handleZerosInNumeratorOrDenominator(Terms& denominators, Terms& numerators) {
+    bool hasZeroOnNumerators(hasZero(numerators));
     bool hasZeroOnDenominators(hasZero(denominators));
     if (hasZeroOnNumerators && hasZeroOnDenominators) {
         numerators.clear();
@@ -322,6 +323,7 @@ void TermsOverTerms::populateTermsWithBase(Terms& termsToUpdate, Term const& bas
         termsToUpdate.emplace_back(base);
     }
 }
+
 void TermsOverTerms::removeTermsThatHaveNoEffect(Terms& terms) const {
     terms.erase(
         remove_if(

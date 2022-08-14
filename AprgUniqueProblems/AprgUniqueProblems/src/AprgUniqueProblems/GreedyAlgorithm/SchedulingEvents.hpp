@@ -19,14 +19,16 @@ public:
         int endTime;
     };
 
-    using Events = std::deque<Event>;    using EventNames = stringHelper::strings;
+    using Events = std::deque<Event>;
+    using EventNames = stringHelper::strings;
 
     EventNames getAsMuchEventsAsPossible() const;
 
     void addEvent(std::string const& eventName, int const startTime, int const endTime);
 
 private:
-    Events m_events;};
+    Events m_events;
+};
 
 }  // namespace alba
 

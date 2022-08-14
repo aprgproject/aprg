@@ -23,7 +23,8 @@ TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithMultiPvWithScore) {
     EXPECT_EQ(3, actualDetails.selectiveDepthInPlies);
     EXPECT_EQ(expectedVariations, actualDetails.variations);
     EXPECT_TRUE(actualDetails.bestMove.empty());
-    EXPECT_TRUE(actualDetails.responseMoveToPonder.empty());}
+    EXPECT_TRUE(actualDetails.responseMoveToPonder.empty());
+}
 
 TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithMultiPvWithMate) {
     CalculationDetails actualDetails{};
@@ -38,7 +39,8 @@ TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithMultiPvWithMate) {
     EXPECT_EQ(2, actualDetails.selectiveDepthInPlies);
     EXPECT_EQ(expectedVariations, actualDetails.variations);
     EXPECT_TRUE(actualDetails.bestMove.empty());
-    EXPECT_TRUE(actualDetails.responseMoveToPonder.empty());}
+    EXPECT_TRUE(actualDetails.responseMoveToPonder.empty());
+}
 
 TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithOverwritingVariationIfSameMultiPv) {
     CalculationDetails actualDetails{};
@@ -55,7 +57,8 @@ TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithOverwritingVariationIf
     EXPECT_EQ(12, actualDetails.selectiveDepthInPlies);
     EXPECT_EQ(expectedVariations, actualDetails.variations);
     EXPECT_TRUE(actualDetails.bestMove.empty());
-    EXPECT_TRUE(actualDetails.responseMoveToPonder.empty());}
+    EXPECT_TRUE(actualDetails.responseMoveToPonder.empty());
+}
 
 TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithExpandingVariationsByOne) {
     CalculationDetails actualDetails{};
@@ -73,7 +76,8 @@ TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithExpandingVariationsByO
     EXPECT_EQ(12, actualDetails.selectiveDepthInPlies);
     EXPECT_EQ(expectedVariations, actualDetails.variations);
     EXPECT_TRUE(actualDetails.bestMove.empty());
-    EXPECT_TRUE(actualDetails.responseMoveToPonder.empty());}
+    EXPECT_TRUE(actualDetails.responseMoveToPonder.empty());
+}
 
 TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithExpandingVariationsMoreThanOne) {
     CalculationDetails actualDetails{};
@@ -91,7 +95,8 @@ TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithExpandingVariationsMor
     EXPECT_EQ(12, actualDetails.selectiveDepthInPlies);
     EXPECT_EQ(expectedVariations, actualDetails.variations);
     EXPECT_TRUE(actualDetails.bestMove.empty());
-    EXPECT_TRUE(actualDetails.responseMoveToPonder.empty());}
+    EXPECT_TRUE(actualDetails.responseMoveToPonder.empty());
+}
 
 TEST(UciInterpreterTest, UpdateCalculationDetailsWorksOnInfoExample4) {
     CalculationDetails actualDetails{};
@@ -106,7 +111,8 @@ TEST(UciInterpreterTest, UpdateCalculationDetailsWorksOnInfoExample4) {
     EXPECT_EQ(0, actualDetails.selectiveDepthInPlies);
     EXPECT_TRUE(actualDetails.variations.empty());
     EXPECT_TRUE(actualDetails.bestMove.empty());
-    EXPECT_TRUE(actualDetails.responseMoveToPonder.empty());}
+    EXPECT_TRUE(actualDetails.responseMoveToPonder.empty());
+}
 
 TEST(UciInterpreterTest, UpdateCalculationDetailsWorksOnBestMoveExample1) {
     CalculationDetails actualDetails{};
@@ -118,7 +124,8 @@ TEST(UciInterpreterTest, UpdateCalculationDetailsWorksOnBestMoveExample1) {
     EXPECT_EQ(0, actualDetails.selectiveDepthInPlies);
     EXPECT_TRUE(actualDetails.variations.empty());
     EXPECT_EQ("b4c2", actualDetails.bestMove);
-    EXPECT_EQ("e1d1", actualDetails.responseMoveToPonder);}
+    EXPECT_EQ("e1d1", actualDetails.responseMoveToPonder);
+}
 
 TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithIgnoringStringsWithInvalidStart) {
     CalculationDetails actualDetails{};
@@ -134,7 +141,8 @@ TEST(UciInterpreterTest, UpdateCalculationDetailsWorksWithIgnoringStringsWithInv
     EXPECT_EQ(0, actualDetails.selectiveDepthInPlies);
     EXPECT_TRUE(actualDetails.variations.empty());
     EXPECT_TRUE(actualDetails.bestMove.empty());
-    EXPECT_TRUE(actualDetails.responseMoveToPonder.empty());}
+    EXPECT_TRUE(actualDetails.responseMoveToPonder.empty());
+}
 
 }  // namespace chess
 

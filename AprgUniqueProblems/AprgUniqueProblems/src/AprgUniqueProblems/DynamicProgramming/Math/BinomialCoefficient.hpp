@@ -12,6 +12,7 @@ public:
     using Values = std::vector<Value>;
     using ValueMatrix = matrix::AlbaMatrix<Value>;
     static constexpr Value UNUSED_VALUE = std::numeric_limits<Value>::max();
+
     BinomialCoefficient(Value const n, Value const k);
 
     Value getBinomialCoefficientUsingNaiveRecursion() const;

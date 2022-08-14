@@ -27,6 +27,7 @@ void retrieveDeltas(Samples& deltaSamples, Samples const& pointerOfSampleToCheck
 double getSumInRange(Samples const& samples, int const startIndexIncluded, int const endIndexExcluded) {
     return accumulate(samples.cbegin() + startIndexIncluded, samples.cbegin() + endIndexExcluded, 0.0);
 }
+
 double getAverageOfSamples(Samples const& samples) {
     return accumulate(samples.cbegin(), samples.cend(), 0.0) / samples.size();
 }
@@ -39,14 +40,16 @@ double getCommonMultiplierForDeltaSamples(
     Samples const& samples, int const startIndexIncluded, int const endIndexExcluded) {
     double multiplier = getAverageInRange(samples, startIndexIncluded, endIndexExcluded);
     if (isAlmostEqual(multiplier, 0.0)) {
-        multiplier = 1;    }
+        multiplier = 1;
+    }
     return multiplier;
 }
 
 double getCommonMultiplierUsingSumAndNumberOfItems(double const sum, int const numberOfItems) {
     double multiplier = sum / numberOfItems;
     if (isAlmostEqual(multiplier, 0.0)) {
-        multiplier = 1;    }
+        multiplier = 1;
+    }
     return multiplier;
 }
 
@@ -61,14 +64,16 @@ DoubleOptional compareDeltasAndGetDifference(
     int const startOfDeltaSamples1, int const startOfDeltaSamples2, int const numberOfSamples) {
     constexpr double limitOfOneDifference = 2;
     DoubleOptional result;
-    double currentValue1(0);    double currentValue2(0);
+    double currentValue1(0);
+    double currentValue2(0);
     double totalDifference(0);
     bool hasLimitExceeded(false);
 
     for (int i = 0; i < numberOfSamples; i += 1) {
         double deltaSample1 = deltaSamples1[startOfDeltaSamples1 + i];
         double deltaSample2 = deltaSamples2[startOfDeltaSamples2 + i];
-        currentValue1 += deltaSample1;        currentValue2 += (deltaSample2 * multiplierToSample2);
+        currentValue1 += deltaSample1;
+        currentValue2 += (deltaSample2 * multiplierToSample2);
         double currentPositiveDifference = getAbsoluteValue(currentValue1 - currentValue2);
         if (limitOfOneDifference < currentPositiveDifference) {
             hasLimitExceeded = true;
@@ -88,6 +93,7 @@ void searchForBestSampleIndexes(
     Samples const& samplesToReplicate, Samples const& samplesToSearch) {
     Samples deltaSamplesToReplicate;
     retrieveDeltas(deltaSamplesToReplicate, samplesToReplicate, samplesToReplicate.size());
+
     Samples deltaSamplesToSearch;
     retrieveDeltas(deltaSamplesToSearch, samplesToSearch, samplesToSearch.size());
 
@@ -108,7 +114,8 @@ void searchForBestSampleIndexes(
             if (lastExcludedIndex <= static_cast<int>(deltaSamplesToSearch.size())) {
                 double commonMultiplierInSearch =
                     getCommonMultiplierForDeltaSamples(deltaSamplesToSearch, searchIndex, lastExcludedIndex);
-                double multiplierForSearch = commonMultiplierInReplicate / commonMultiplierInSearch;                DoubleOptional differenceOptional = compareDeltasAndGetDifference(
+                double multiplierForSearch = commonMultiplierInReplicate / commonMultiplierInSearch;
+                DoubleOptional differenceOptional = compareDeltasAndGetDifference(
                     deltaSamplesToReplicate, deltaSamplesToSearch, multiplierForSearch, replicationIndex, searchIndex,
                     numberOfSamplesToCompare);
                 if (differenceOptional) {
@@ -132,7 +139,8 @@ void searchAndTryToReplicateSamples(
     int channelIndexInAudioToChange, int channelIndexInAudioToReplicate, int channelIndexInAudioToSearch,
     bool const alwaysPutNewValue) {
     SearchResultsDetails replicateAndSearchIndexes;
-    Samples const& samplesToReplicate(audioToReplicate.getSamplesAtChannel(channelIndexInAudioToReplicate));    Samples const& samplesToSearch(audioToSearch.getSamplesAtChannel(channelIndexInAudioToSearch));
+    Samples const& samplesToReplicate(audioToReplicate.getSamplesAtChannel(channelIndexInAudioToReplicate));
+    Samples const& samplesToSearch(audioToSearch.getSamplesAtChannel(channelIndexInAudioToSearch));
     searchForBestSampleIndexes(replicateAndSearchIndexes, 24000, 48000, 100, samplesToReplicate, samplesToSearch);
 
     Samples& samplesToChange(audioToChange.getSamplesReferenceAtChannel(channelIndexInAudioToChange));
@@ -156,7 +164,8 @@ void searchAndTryToReplicate(
     for (int i = 0; i < numberOfChannels; i++) {
         searchAndTryToReplicateSamples(
             audioToChange, audioToReplicate, audioToSearch, clampHigherBound(i, audioToChange.getNumChannels()),
-            clampHigherBound(i, audioToReplicate.getNumChannels()), clampHigherBound(i, audioToSearch.getNumChannels()),            alwaysPutNewValue);
+            clampHigherBound(i, audioToReplicate.getNumChannels()), clampHigherBound(i, audioToSearch.getNumChannels()),
+            alwaysPutNewValue);
     }
     audioToChangeManipulator.saveAudioIntoCurrentFile();
 }

@@ -29,7 +29,8 @@ namespace KickStart_2020_RoundE_P1_LongestArithmetic {
 void runTestCase(int const testCaseNumber) {
     int N;
     my_cin >> N;
-    vector<int64_t> A(N);    for (auto& a : A) my_cin >> a;
+    vector<int64_t> A(N);
+    for (auto& a : A) my_cin >> a;
     vector<int64_t> D(N - 1);
     for (int i = 0; i + 1 < N; i++) {
         D[i] = A[i + 1] - A[i];
@@ -55,6 +56,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

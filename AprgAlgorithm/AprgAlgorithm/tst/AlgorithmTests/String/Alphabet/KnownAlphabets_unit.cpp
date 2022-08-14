@@ -26,7 +26,8 @@ Alphabet<uint8_t> getLowerCaseAlphabet() { return Alphabet<uint8_t>("abcdefghijk
 Alphabet<uint8_t> getUpperCaseAlphabet() { return Alphabet<uint8_t>("ABCDEFGHIJKLMNOPQRSTUVWXYZ"); }
 }  // namespace
 
-TEST(KnownAlphabetsTest, GetBinaryAlphabetWorks) {    auto alphabet(getBinaryAlphabet());
+TEST(KnownAlphabetsTest, GetBinaryAlphabetWorks) {
+    auto alphabet(getBinaryAlphabet());
 
     EXPECT_EQ("01", alphabet.getCharacters());
 }

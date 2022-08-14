@@ -27,7 +27,8 @@ bool TermsWithAssociation::operator==(TermsWithAssociation const& second) const 
         for (int i = 0; i < commonSize; i++) {
             if (terms1.at(i) != terms2.at(i)) {
                 result = false;
-                break;            }
+                break;
+            }
         }
     }
     return result;
@@ -44,7 +45,8 @@ bool TermsWithAssociation::operator<(TermsWithAssociation const& second) const {
         for (int i = 0; i < size; i++) {
             TermWithDetails const& termWithDetails1(terms1.at(i));
             TermWithDetails const& termWithDetails2(terms2.at(i));
-            if (termWithDetails1 != termWithDetails2) {                result = termWithDetails1 < termWithDetails2;
+            if (termWithDetails1 != termWithDetails2) {
+                result = termWithDetails1 < termWithDetails2;
                 break;
             }
         }
@@ -59,7 +61,8 @@ bool TermsWithAssociation::isEmpty() const { return m_termsWithDetails.empty(); 
 int TermsWithAssociation::getSize() const { return m_termsWithDetails.size(); }
 
 BaseTerm const& TermsWithAssociation::getFirstTermConstReference() const {
-    return getBaseTermConstReferenceFromUniquePointer(m_termsWithDetails.front().baseTermPointer);}
+    return getBaseTermConstReferenceFromUniquePointer(m_termsWithDetails.front().baseTermPointer);
+}
 
 TermAssociationType TermsWithAssociation::getFirstAssociationType() const {
     return m_termsWithDetails.front().association;

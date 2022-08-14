@@ -13,7 +13,8 @@ public:
     using Cost = int;
     using Indices = std::vector<Index>;
     using Costs = std::vector<Cost>;
-    struct RecursionDetails {        Indices lineLengths;
+    struct RecursionDetails {
+        Indices lineLengths;
     };
     using ExtraSpacesGrid = matrix::AlbaMatrix<int>;
     using CostGrid = matrix::AlbaMatrix<Cost>;

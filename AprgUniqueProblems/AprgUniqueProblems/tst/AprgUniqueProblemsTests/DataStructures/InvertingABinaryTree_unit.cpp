@@ -22,7 +22,8 @@ TEST(InvertingABinaryTreeTest, ThreeNodes) {
     EXPECT_EQ(1, result->rightPointer->value);
     EXPECT_FALSE(result->leftPointer->leftPointer);
     EXPECT_FALSE(result->leftPointer->rightPointer);
-    EXPECT_FALSE(result->rightPointer->leftPointer);    EXPECT_FALSE(result->rightPointer->rightPointer);
+    EXPECT_FALSE(result->rightPointer->leftPointer);
+    EXPECT_FALSE(result->rightPointer->rightPointer);
 }
 
 TEST(InvertingABinaryTreeTest, SevenNodes) {
@@ -52,4 +53,5 @@ TEST(InvertingABinaryTreeTest, SevenNodes) {
 }
 
 }  // namespace InvertingABinaryTree
+
 }  // namespace alba

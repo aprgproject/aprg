@@ -72,7 +72,8 @@ private:
                     lowIndex++;
                 }
             }
-        }        return result;
+        }
+        return result;
     }
 
     Values const& m_sortedValues;

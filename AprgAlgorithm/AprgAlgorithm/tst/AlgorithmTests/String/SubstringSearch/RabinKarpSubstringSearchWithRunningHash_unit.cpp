@@ -15,6 +15,7 @@ using Index = int;
 using HashValue = uint64_t;
 using SubstringSearchForTest = RabinKarpSubstringSearchWithRunningHash<Index, HashValue>;
 }  // namespace
+
 TEST(RabinKarpSubstringSearchWithRunningHashTest, SearchWorksUsingEmptyStringsAndDoesNotCrash) {
     testSearchUsingEmptyStringsAndDoesNotCrash<SubstringSearchForTest, Index>();
 }

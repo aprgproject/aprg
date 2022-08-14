@@ -11,7 +11,8 @@ public:
     using Index = int;
     using Value = int;
     struct SubArrayDetails {
-        Index left;        Index right;
+        Index left;
+        Index right;
         Index up;
         Index down;
         Value sum;

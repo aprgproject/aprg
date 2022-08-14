@@ -13,6 +13,7 @@ struct CalculationDetails {
     Variations variations;
     std::string bestMove;
     std::string responseMoveToPonder;
+
     bool operator==(CalculationDetails const& other) const;
     bool operator!=(CalculationDetails const& other) const;
 };

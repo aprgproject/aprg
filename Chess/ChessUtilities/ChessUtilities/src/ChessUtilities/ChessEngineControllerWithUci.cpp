@@ -82,7 +82,8 @@ void ChessEngineControllerWithUci::goWithPonder() {
 void ChessEngineControllerWithUci::goWithDepth(int const depth) {
     log("Go with depth!");
     sendStopIfCalculating();
-    stringstream ss;    ss << "go depth " << depth;
+    stringstream ss;
+    ss << "go depth " << depth;
     send(CommandType::Go, ss.str());
 }
 
@@ -101,7 +102,8 @@ bool ChessEngineControllerWithUci::waitTillReadyAndReturnIfResetWasPerformed() {
     int countWith100ms(0U);
     while (m_waitingForReadyOkay) {
         if (countWith100ms > 10) {
-            // greater than 1 second elapsed so engine is stuck, lets reset            shouldReset = true;
+            // greater than 1 second elapsed so engine is stuck, lets reset
+            shouldReset = true;
             break;
         }
         countWith100ms++;

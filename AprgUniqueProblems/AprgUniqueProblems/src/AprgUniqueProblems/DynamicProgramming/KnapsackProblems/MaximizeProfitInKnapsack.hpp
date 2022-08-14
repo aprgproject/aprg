@@ -14,7 +14,8 @@ public:
     using ItemIndex = int;
     using Item = std::pair<Weight, Profit>;
     using Profits = std::vector<Profit>;
-    using Items = std::vector<Item>;    using ProfitMatrix = matrix::AlbaMatrix<Profit>;
+    using Items = std::vector<Item>;
+    using ProfitMatrix = matrix::AlbaMatrix<Profit>;
     static constexpr Profit UNUSED_VALUE = std::numeric_limits<Profit>::max();
 
     MaximizeProfitInKnapsack(Weight const maximumWeight, Items const items);

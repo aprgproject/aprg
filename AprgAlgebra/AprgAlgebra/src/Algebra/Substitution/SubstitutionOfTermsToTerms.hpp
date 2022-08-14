@@ -21,7 +21,8 @@ public:
     int getSize() const;
     Term getTermForTerm(Term const& term) const;
     Term performSubstitutionTo(Expression const& expression) const;
-    Term performSubstitutionTo(Function const& functionObject) const;    Term performSubstitutionTo(Term const& term) const;
+    Term performSubstitutionTo(Function const& functionObject) const;
+    Term performSubstitutionTo(Term const& term) const;
     Equation performSubstitutionTo(Equation const& equation) const;
 
     Expression performSubstitutionForExpression(Expression const& expression) const;

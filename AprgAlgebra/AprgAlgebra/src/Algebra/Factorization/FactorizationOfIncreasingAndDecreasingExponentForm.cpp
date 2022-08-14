@@ -25,7 +25,8 @@ namespace {
 constexpr int NUMBER_OF_ITERATIONS_IN_BRENT_METHOD = 1000;
 }
 
-Polynomials factorizeIncreasingAndDecreasingExponentsForm(Polynomial const& polynomial) {    Polynomials result;
+Polynomials factorizeIncreasingAndDecreasingExponentsForm(Polynomial const& polynomial) {
+    Polynomials result;
     factorizeIncreasingAndDecreasingExponentsFormIfPossible(result, polynomial);
     simplifyAndEmplaceBackPolynomialIfListIsEmpty(result, polynomial);
     return result;
@@ -40,7 +41,8 @@ void factorizeIncreasingAndDecreasingExponentsFormIfPossible(Polynomials& result
         for (int exponentDivisor = 2; exponentDivisor <= maxExponentDivisor; exponentDivisor++) {
             if (areExponentsDivisible(firstMonomial, exponentDivisor) &&
                 areExponentsDivisible(lastMonomial, exponentDivisor)) {
-                Monomial unitFirstMonomial(1, firstMonomial.getVariablesToExponentsMapConstReference());                Monomial unitSecondMonomial(1, lastMonomial.getVariablesToExponentsMapConstReference());
+                Monomial unitFirstMonomial(1, firstMonomial.getVariablesToExponentsMapConstReference());
+                Monomial unitSecondMonomial(1, lastMonomial.getVariablesToExponentsMapConstReference());
                 unitFirstMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, exponentDivisor));
                 unitSecondMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, exponentDivisor));
                 Monomials monomialsWithExponentsInOrder(
@@ -95,7 +97,8 @@ void fixCoefficientsOfFactors(
     int multiplier = getGreatestCommonFactor<int>(
         getAbsoluteValue(aCoefficientFractionData.numerator), secondFractionData.denominator);
     rootFirstCoefficient = rootFirstCoefficient * multiplier;
-    rootSecondCoefficient = rootSecondCoefficient * multiplier;    aCoefficient = aCoefficient / multiplier;
+    rootSecondCoefficient = rootSecondCoefficient * multiplier;
+    aCoefficient = aCoefficient / multiplier;
 }
 
 bool areAllMonomialsFoundInMonomialsWithExponentsInOrder(
@@ -116,6 +119,7 @@ int calculateMaxExponentDivisor(Monomial const& firstMonomial, Monomial const& l
     int maxExponentDivisor = getAbsoluteValue(maxExponent.getInteger());
     return maxExponentDivisor;
 }
+
 AlbaNumbers getCoefficientsInMonomialsWithExponentsInOrder(
     Polynomial const& polynomial, Monomials const& monomialsWithExponentsInOrder) {
     AlbaNumbers coefficients;
@@ -151,7 +155,8 @@ AlbaNumbers calculatePolynomialRootsUsingBrentMethod(
         int j = i + 1;
         brentMethod.resetCalculation(valuesForRootFinding.at(i), valuesForRootFinding.at(j));
         brentMethod.runMaxNumberOfIterationsOrUntilFinished(NUMBER_OF_ITERATIONS_IN_BRENT_METHOD);
-        AlbaNumberOptional rootOptional(brentMethod.getSolution());        if (rootOptional) {
+        AlbaNumberOptional rootOptional(brentMethod.getSolution());
+        if (rootOptional) {
             AlbaNumber const& root(rootOptional.value());
             result.emplace_back(root);
         }
@@ -186,7 +191,8 @@ Monomials getMonomialsWithExponentsInOrder(
     for (int i = 0; i <= exponentDivisor; i++) {
         Monomial firstPart(firstInPolynomial);
         firstPart.raiseToPowerNumber(exponentDivisor - i);
-        Monomial secondPart(lastInPolynomial);        secondPart.raiseToPowerNumber(i);
+        Monomial secondPart(lastInPolynomial);
+        secondPart.raiseToPowerNumber(i);
         Monomial product(firstPart);
         product.multiplyMonomial(secondPart);
         product.simplify();

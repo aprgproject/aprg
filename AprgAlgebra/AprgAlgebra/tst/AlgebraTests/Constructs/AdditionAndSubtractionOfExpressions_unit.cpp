@@ -78,7 +78,8 @@ TEST(AdditionAndSubtractionOfExpressionsTest, GetSizeWorks) {
     EXPECT_EQ(2, additionAndSubtraction2.getSize());
 }
 
-TEST(AdditionAndSubtractionOfExpressionsTest, GetAsTermsWithDetailsWorks) {    AdditionAndSubtractionOfExpressions additionAndSubtraction;
+TEST(AdditionAndSubtractionOfExpressionsTest, GetAsTermsWithDetailsWorks) {
+    AdditionAndSubtractionOfExpressions additionAndSubtraction;
     Expression expression1(createExpressionIfPossible({"x"}));
     Expression expression2(createExpressionIfPossible({"y"}));
     additionAndSubtraction.putAsAddOrSubtraction(expression1, TermAssociationType::Positive);

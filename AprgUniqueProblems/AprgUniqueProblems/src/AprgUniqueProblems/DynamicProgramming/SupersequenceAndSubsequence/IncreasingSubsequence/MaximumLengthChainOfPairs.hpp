@@ -11,6 +11,7 @@ public:
     using Pair = std::pair<int, int>;
     using Pairs = std::vector<Pair>;
     using IndexToIndex = std::vector<Index>;
+
     MaximumLengthChainOfPairs(Pairs const& sequence);
 
     Index getLongestLength() const;

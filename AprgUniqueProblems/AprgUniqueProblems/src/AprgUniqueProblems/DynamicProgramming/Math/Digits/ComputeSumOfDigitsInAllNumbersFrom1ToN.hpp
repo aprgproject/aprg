@@ -10,6 +10,7 @@ public:
     using Value = int;
     using Values = std::vector<Value>;
     static constexpr Value UNUSED_COUNT = std::numeric_limits<Value>::max();
+
     ComputeSumOfDigitsInAllNumbersFrom1ToN(Value const lastNumber);
 
     Value getValueUsingNaiveSolution() const;

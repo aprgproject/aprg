@@ -58,7 +58,8 @@ void BaseOneEquationOneVariableSolver::calculateAndSubstituteAbsoluteValueFuncti
         for (int i = 0; i < static_cast<int>(absFunctions.size()); i++) {
             bool isBitAsserted((permutationValue >> i) & 1);
             Term termToReplace;
-            Term const& absFunctionTerm(*itFunctionSet);            Term const& absFunctionInputTerm(
+            Term const& absFunctionTerm(*itFunctionSet);
+            Term const& absFunctionInputTerm(
                 getTermConstReferenceFromBaseTerm(itFunctionSet->getInputTermConstReference()));
             if (isBitAsserted) {
                 termToReplace = absFunctionInputTerm;

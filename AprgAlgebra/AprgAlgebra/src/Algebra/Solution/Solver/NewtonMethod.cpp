@@ -28,6 +28,7 @@ bool NewtonMethod::isFinished() const { return !m_currentValue.isARealFiniteValu
 int NewtonMethod::getNumberOfIterationsExecuted() const { return m_numberOfIterationsExecuted; }
 
 AlbaNumber const& NewtonMethod::getCurrentValue() const { return m_currentValue; }
+
 void NewtonMethod::runOneIteration() {
     AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
     scopeConfigurationObject.setInThisScopeTheTolerancesToZero();
@@ -44,6 +45,7 @@ void NewtonMethod::runMaxNumberOfIterationsOrUntilFinished(int const maxIteratio
         runOneIteration();
     }
 }
+
 void NewtonMethod::runUntilFinished() {
     while (!isFinished()) {
         runOneIteration();

@@ -33,7 +33,8 @@ public:
     void clearAndPutOneColorOnWholeSnippet(uint8_t const colorByte);
 
     PixelData& getPixelDataReference();
-    PixelData const& getPixelDataConstReference() const;    uint32_t getPixelAt(BitmapXY const position) const;
+    PixelData const& getPixelDataConstReference() const;
+    uint32_t getPixelAt(BitmapXY const position) const;
     uint32_t getColorAt(BitmapXY const position) const;
     bool isBlackAt(BitmapXY const position) const;
     void setPixelAt(BitmapXY const position, uint32_t const value);
@@ -51,7 +52,8 @@ private:
     void setPixelAtForMultipleBytePixels(uint8_t* writer, int const index, uint32_t const value);
     BitmapXY m_topLeftCorner;
     BitmapXY m_bottomRightCorner;
-    BitmapConfiguration m_configuration;    PixelData m_pixelData;
+    BitmapConfiguration m_configuration;
+    PixelData m_pixelData;
 };
 
 }  // namespace AprgBitmap

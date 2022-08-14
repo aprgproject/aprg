@@ -18,7 +18,8 @@ namespace {
 using MintermForTest = uint64_t;
 using ImplicantForTest = Implicant<MintermForTest>;
 using ImplicantsForTest = Implicants<MintermForTest>;
-using QuineMcCluskeyForTest = QuineMcCluskey<MintermForTest>;}  // namespace
+using QuineMcCluskeyForTest = QuineMcCluskey<MintermForTest>;
+}  // namespace
 
 TEST(QuineMcCluskeyTest, ImplicantEquivalentStringTest) {
     ImplicantForTest implicant({8, 10, 12, 14});

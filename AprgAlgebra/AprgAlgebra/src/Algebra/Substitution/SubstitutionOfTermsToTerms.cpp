@@ -28,7 +28,8 @@ bool SubstitutionOfTermsToTerms::isTermFound(Term const& term) const {
 int SubstitutionOfTermsToTerms::getSize() const { return m_termsToTermsMap.size(); }
 
 Term SubstitutionOfTermsToTerms::getTermForTerm(Term const& term) const {
-    Term result;    if (isTermFound(term)) {
+    Term result;
+    if (isTermFound(term)) {
         result = m_termsToTermsMap.at(term);
     }
     return result;

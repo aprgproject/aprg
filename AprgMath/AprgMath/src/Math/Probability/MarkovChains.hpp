@@ -10,7 +10,8 @@ namespace alba {
 template <int MAX_STATE_VALUE>
 class MarkovChains {
 public:
-    // A Markov chain is a random process that consists of states and transitions between them.    // For each state, we know the probabilities for moving to other states.
+    // A Markov chain is a random process that consists of states and transitions between them.
+    // For each state, we know the probabilities for moving to other states.
     // A Markov chain can be represented as a graph whose nodes are states and edges are transitions.
 
     using ProbabilityMatrix = matrix::AlbaMatrix<AlbaNumber>;
@@ -26,6 +27,7 @@ public:
     void setProbability(int const currentState, int const nextState, AlbaNumber const& probability) {
         m_probabilityMatrix.setEntry(currentState, nextState, probability);
     }
+
     ProbabilityDistribution getNextProbabilityDistribution(ProbabilityDistribution const& current) {
         // The probability distribution of a Markov chain is a vector [p1, p2,..., pn],
         // where pk is the probability that the current state is k.
@@ -48,7 +50,8 @@ public:
         for (int i = 0; i < numberOfSteps; i++) {
             result = getNextProbabilityDistribution(result);
         }
-        return result;    }
+        return result;
+    }
 
 private:
     ProbabilityDistribution calculateNextProbabilityDistribution(ProbabilityDistribution const& current) {
@@ -61,7 +64,8 @@ private:
         for (int i = 0; i < MAX_STATE_VALUE; i++) {
             result[i] = outputMatrix.getEntry(0U, i);
         }
-        return result;    }
+        return result;
+    }
 
     ProbabilityMatrix m_probabilityMatrix;
     DistributionToDistributionMap m_nextDistributionMap;

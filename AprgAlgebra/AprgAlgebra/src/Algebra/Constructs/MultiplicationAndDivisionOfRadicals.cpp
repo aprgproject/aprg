@@ -75,7 +75,8 @@ bool MultiplicationAndDivisionOfRadicals::isNotANegativeTermWithExponentDenomina
         if (isEven(static_cast<int>(getAbsoluteValue<int>(fractionData.denominator)))) {
             result = !isANegativeMonomial(combinedMonomial);
         }
-    }    return result;
+    }
+    return result;
 }
 
 void MultiplicationAndDivisionOfRadicals::gatherDetails(

@@ -70,6 +70,7 @@ private:
             m_endIndex = std::min(highIndex + 1, static_cast<Index>(m_values.size()));  // half open interval
         }
     }
+
     Index m_startIndex;
     Index m_endIndex;
     Values const& m_values;

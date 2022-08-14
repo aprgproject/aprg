@@ -34,6 +34,7 @@ private:
             }
         }
     }
+
 private:
     PivotType m_pivotType;
 };

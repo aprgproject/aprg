@@ -48,7 +48,8 @@ void writePointInDebug(BitmapXY const& point, uint32_t const color)
 void writeLineInDebug(Line const& line, uint32_t const color)
 {
     BitmapSnippet & debugSnippet(s_debugSnippetOptional.value());
-    BitmapXY topLeft(0,0);    BitmapXY bottomRight(debugSnippet.getConfiguration().getBitmapWidth()-1,
+    BitmapXY topLeft(0,0);
+    BitmapXY bottomRight(debugSnippet.getConfiguration().getBitmapWidth()-1,
 debugSnippet.getConfiguration().getBitmapHeight()-1);
 
     Points points(line.getPoints(Point(topLeft.getX(), topLeft.getY()), Point(bottomRight.getX(), bottomRight.getY()),
@@ -70,6 +71,7 @@ SOOSA::FrequencyDatabase::FrequencyDatabase(int const numberOfQuestions, int con
     : m_numberOfQuestions(numberOfQuestions), m_numberOfChoices(numberOfChoices) {
     initialize();
 }
+
 void SOOSA::FrequencyDatabase::initialize() {
     m_frequenciesOnQuestionByAnswer.clearAndResize(m_numberOfQuestions, m_numberOfChoices);
 }
@@ -84,7 +86,8 @@ int SOOSA::FrequencyDatabase::getFrequencyOfAnswer(int const questionIndex, int 
     int frequency = 0;
     if (m_frequenciesOnQuestionByAnswer.isInside(questionIndex, answerIndex)) {
         frequency = m_frequenciesOnQuestionByAnswer.getEntry(questionIndex, answerIndex);
-    }    return frequency;
+    }
+    return frequency;
 }
 
 SOOSA::Status::Status() {}
@@ -123,7 +126,8 @@ int SOOSA::getAnswerToQuestion(int const questionIndex) const {
     int result(0);
     auto it = m_questionToAnswersMap.find(questionIndex);
     if (it != m_questionToAnswersMap.cend()) {
-        result = it->second;    }
+        result = it->second;
+    }
     return result;
 }
 
@@ -215,6 +219,7 @@ void SOOSA::saveToFrequencyDatabase() {
         m_frequencyDatabase.addAnswer(i, getAnswerToQuestion(i) - 1);
     }
 }
+
 Line SOOSA::findLeftLine(BitmapSnippet const& snippet) const {
     RangeOfInts rangeForX(snippet.getTopLeftCorner().getX(), snippet.getBottomRightCorner().getX(), 1);
     return findVerticalLine(snippet, rangeForX);
@@ -243,7 +248,8 @@ Line SOOSA::findVerticalLine(BitmapSnippet const& snippet, RangeOfInts const& ra
         for (int x = rangeForX.getStartValue(); conditionForX(x, rangeForX.getEndValue());
              x += rangeForX.getInterval()) {
             if (isBlackAt(snippet, BitmapXY(x, y))) {
-                if (consecutiveBlackPixels.isEmpty()) {                    consecutiveBlackPixels.setStartValue((double)x);
+                if (consecutiveBlackPixels.isEmpty()) {
+                    consecutiveBlackPixels.setStartValue((double)x);
                 }
                 consecutiveBlackPixels.setEndValue((double)x);
             } else if (!consecutiveBlackPixels.isEmpty()) {
@@ -263,7 +269,8 @@ Line SOOSA::findHorizontalLine(BitmapSnippet const& snippet, RangeOfInts const& 
         for (int y = rangeForY.getStartValue(); conditionForY(y, rangeForY.getEndValue());
              y += rangeForY.getInterval()) {
             if (isBlackAt(snippet, BitmapXY(x, y))) {
-                if (consecutiveBlackPixels.isEmpty()) {                    consecutiveBlackPixels.setStartValue((double)y);
+                if (consecutiveBlackPixels.isEmpty()) {
+                    consecutiveBlackPixels.setStartValue((double)y);
                 }
                 consecutiveBlackPixels.setEndValue((double)y);
             } else if (!consecutiveBlackPixels.isEmpty()) {
@@ -292,7 +299,8 @@ Line SOOSA::findVerticalLineUsingStartingLine(
     for (int y = snippet.getTopLeftCorner().getY(); y <= snippet.getBottomRightCorner().getY(); y++) {
         AlbaValueRange<double> consecutiveBlackPixels;
         double xInLine = round(startingLine.calculateXFromY(y));
-        for (int x = (int)xInLine; conditionForX(x, rangeForX.getEndValue()); x += rangeForX.getInterval()) {            if (isBlackAt(snippet, BitmapXY(x, y))) {
+        for (int x = (int)xInLine; conditionForX(x, rangeForX.getEndValue()); x += rangeForX.getInterval()) {
+            if (isBlackAt(snippet, BitmapXY(x, y))) {
                 if (consecutiveBlackPixels.isEmpty()) {
                     consecutiveBlackPixels.setStartValue((double)x);
                 }
@@ -333,7 +341,8 @@ Line SOOSA::getLineModel(TwoDimensionSamples const& samples) const {
     if (static_cast<int>(samplesForLineModeling.size()) < m_soosaConfiguration.getMinimumLineSamples()) {
         stringstream ss;
         ss << "Line not found because not enough samples. Samples found for line modeling: "
-           << samplesForLineModeling.size()           << " Minimum number of samples: " << m_soosaConfiguration.getMinimumLineSamples() << ".";
+           << samplesForLineModeling.size()
+           << " Minimum number of samples: " << m_soosaConfiguration.getMinimumLineSamples() << ".";
         Status::getInstance().setError(ss.str());
     }
     return Line(lineModel.aCoefficient, lineModel.bCoefficient, lineModel.cCoefficient);
@@ -349,7 +358,8 @@ SOOSA::DoubleCollection SOOSA::getAcceptableSquareErrorCollectionUsingRemovalRat
     int count = 0;
     for (auto const& squareErrorToSamplePair : squareErrorToSampleMultimap) {
         squareErrorCollection.addData(squareErrorToSamplePair.first);
-        if (count++ >= retainSize) {            break;
+        if (count++ >= retainSize) {
+            break;
         }
     }
     return squareErrorCollection;
@@ -389,6 +399,7 @@ void SOOSA::processTwoColumns(
     processColumn(questionNumber, globalSnippet, leftLine, centerLeftLine, topLine, bottomLine, 1);
     processColumn(questionNumber, globalSnippet, centerRightLine, rightLine, topLine, bottomLine, 2);
 }
+
 void SOOSA::processOneColumn(
     BitmapSnippet const& globalSnippet, Line const& leftLine, Line const& rightLine, Line const& topLine,
     Line const& bottomLine) {
@@ -413,7 +424,8 @@ void SOOSA::processColumn(
         static_cast<int>(questionsBarsOnTheRight.size()) == numberQuestionsInColumn) {
         processQuestions(
             questionNumber, snippet, questionBarsOnTheLeft, questionsBarsOnTheRight, columnNumber,
-            numberQuestionsInColumn);    } else {
+            numberQuestionsInColumn);
+    } else {
         stringstream ss;
         ss << "Number of question coordinates does not match between columns. "
            << "Question bars at left line: " << questionBarsOnTheLeft.size()
@@ -430,7 +442,8 @@ void SOOSA::processQuestions(
     for (int questionInColumnIndex = 0; questionInColumnIndex < numberQuestionsInColumn; questionInColumnIndex++) {
         Answers answers = getAnswersAtQuestion(
             snippet, questionBarsOnTheLeft[questionInColumnIndex], questionsBarsOnTheRight[questionInColumnIndex]);
-        if (answers.size() == 1) {            setAnswerToQuestionInColumn(columnNumber, questionInColumnIndex, answers.front());
+        if (answers.size() == 1) {
+            setAnswerToQuestionInColumn(columnNumber, questionInColumnIndex, answers.front());
         } else {
             cout << "Question number " << questionNumber;
             if (answers.empty()) {
@@ -466,7 +479,8 @@ SOOSA::Answers SOOSA::getAnswersAtQuestion(
     for (int choiceIndex = 0; choiceIndex < numberOfChoices; choiceIndex++) {
         double shadePercentage =
             getShadePercentage(snippet, leftPoint, rightPoint, radiusForChoiceChecking, choiceIndex);
-        shadePercentagesSamples.emplace_back(OneDimensionSample{shadePercentage});        shadePercentageToChoiceMap.emplace(shadePercentage, numberOfChoices - choiceIndex);
+        shadePercentagesSamples.emplace_back(OneDimensionSample{shadePercentage});
+        shadePercentageToChoiceMap.emplace(shadePercentage, numberOfChoices - choiceIndex);
     }
 
     OneDimensionStatistics shadePercentagesStatistics(shadePercentagesSamples);
@@ -491,7 +505,8 @@ double SOOSA::getShadePercentage(
     int totalPoints(0), numberOfBlackPoints(0);
     Point centerOfCircle = getCenterOfCircleForChoiceChecking(snippet, leftPoint, rightPoint, radius, choiceIndex);
     Circle circle(centerOfCircle, radius);
-    circle.traverseArea(1, [&](Point const& pointInCircle) {        // if(!isBlackAt(snippet, convertToBitmapXY(pointInCircle)))
+    circle.traverseArea(1, [&](Point const& pointInCircle) {
+        // if(!isBlackAt(snippet, convertToBitmapXY(pointInCircle)))
         //{
         // writePointInDebug(convertToBitmapXY(pointInCircle), 0xA1BA00); //
         //}
@@ -514,7 +529,8 @@ Point SOOSA::getCenterOfCircleForChoiceChecking(
     int const choiceIndex) const {
     double choiceIndexRatio = (((double)choiceIndex * 2) + 1) / (m_soosaConfiguration.getNumberOfChoices() * 2);
     double differenceFromLeftToRightInX = rightPoint.getX() - leftPoint.getX();
-    double differenceFromLeftToRightInY = rightPoint.getY() - leftPoint.getY();    Point originalCenter(
+    double differenceFromLeftToRightInY = rightPoint.getY() - leftPoint.getY();
+    Point originalCenter(
         leftPoint.getX() + (differenceFromLeftToRightInX * choiceIndexRatio),
         leftPoint.getY() + (differenceFromLeftToRightInY * choiceIndexRatio));
     Point result = originalCenter;
@@ -522,7 +538,8 @@ Point SOOSA::getCenterOfCircleForChoiceChecking(
     int numberOfBlackPoints(1), previousNumberOfBlackPoints(0);
     while (previousNumberOfBlackPoints < numberOfBlackPoints && getDistance(originalCenter, result) < radius) {
         Circle circle(result, radius);
-        TwoDimensionSamples blackPointSamples{convertToTwoDimensionSample(result)};        circle.traverseArea(1, [&](Point const& pointInCircle) {
+        TwoDimensionSamples blackPointSamples{convertToTwoDimensionSample(result)};
+        circle.traverseArea(1, [&](Point const& pointInCircle) {
             if (isBlackAt(snippet, convertToBitmapXY(pointInCircle))) {
                 blackPointSamples.emplace_back(convertToTwoDimensionSample(pointInCircle));
             }
@@ -540,6 +557,7 @@ SOOSA::QuestionBarCoordinates SOOSA::getQuestionBarCoordinatesFromLine(
     int const numberQuestionsInColumn) const {
     QuestionBarCoordinates questionBarCoordinates;
     PointAndWidthPairs pointAndWidthPairs(getAcceptablePointAndWidthPairs(snippet, line, startPoint, endPoint));
+
     if (!pointAndWidthPairs.empty()) {
         RangeOfDoubles minMaxCriteriaForBar(getMinMaxCriteriaForBar(pointAndWidthPairs));
         TwoDimensionKMeans kMeansForBarPoints;
@@ -567,7 +585,8 @@ void SOOSA::saveQuestionBarCoordinatesFromKMeansWithBarPoints(
     int const numberQuestionsInColumn) const {
     GroupOfTwoDimensionSamples groupOfBarPoints(
         kMeansForBarPoints.getGroupOfSamplesUsingKMeans(numberQuestionsInColumn));
-    for (TwoDimensionSamples const& barPoints : groupOfBarPoints) {        if (!barPoints.empty()) {
+    for (TwoDimensionSamples const& barPoints : groupOfBarPoints) {
+        if (!barPoints.empty()) {
             // for(TwoDimensionSample const& barPoint : barPoints)
             //{
             //    writePointInDebug(convertToBitmapXY(barPoint), 0x00EE00);
@@ -605,7 +624,8 @@ SOOSA::RangeOfDoubles SOOSA::getMinMaxCriteriaForBar(PointAndWidthPairs const& p
             continueRemoval = sizeBefore > static_cast<int>(kMeansForWidths.getSamples().size());
         } else {
             result = getMinMaxCriteriaForBar(firstGroupStatistics, secondGroupStatistics);
-        }    }
+        }
+    }
     return result;
 }
 
@@ -646,7 +666,8 @@ void SOOSA::addPointAndWidthPairIfAcceptable(
     int maxLineAndBarWidth = getMaximumLineAndBarWidth(snippet);
     Point leftMostBlack =
         getLeftOrRightMostBlackPoint(snippet, nearestBlackPoint, perpendicularLine, maxLineAndBarWidth, 1);
-    Point rightMostBlack =        getLeftOrRightMostBlackPoint(snippet, nearestBlackPoint, perpendicularLine, maxLineAndBarWidth, -1);
+    Point rightMostBlack =
+        getLeftOrRightMostBlackPoint(snippet, nearestBlackPoint, perpendicularLine, maxLineAndBarWidth, -1);
 
     double width = getDistance(leftMostBlack, rightMostBlack);
     Point widthMidPoint = getMidpoint(leftMostBlack, rightMostBlack);
@@ -669,7 +690,8 @@ Point SOOSA::getLeftOrRightMostBlackPoint(
     for (int offset = 1; offset <= maxLineAndBarWidth && shouldContinue; offset++) {
         double possibleBlackPointInX = nearestBlackPoint.getX() + (static_cast<int>(offset) * sign);
         Point possibleBlackPoint(possibleBlackPointInX, perpendicularLine.calculateYFromX(possibleBlackPointInX));
-        if (isBlackAt(snippet, convertToBitmapXY(possibleBlackPoint))) {            result = possibleBlackPoint;
+        if (isBlackAt(snippet, convertToBitmapXY(possibleBlackPoint))) {
+            result = possibleBlackPoint;
             blackCount++;
         }
         totalCount++;
@@ -687,7 +709,8 @@ Point SOOSA::getNearestBlackPointFromLine(
     for (int deviation = 1; deviation <= maxLineAndBarWidth; deviation++) {
         double lowerDeviatedInX = pointInLine.getX() - deviation;
         Point lowerDeviatedPoint(lowerDeviatedInX, perpendicularLine.calculateYFromX(lowerDeviatedInX));
-        if (isBlackAt(snippet, convertToBitmapXY(lowerDeviatedPoint))) {            blackPoint = lowerDeviatedPoint;
+        if (isBlackAt(snippet, convertToBitmapXY(lowerDeviatedPoint))) {
+            blackPoint = lowerDeviatedPoint;
             break;
         }
         double higherDeviatedInX = pointInLine.getX() + deviation;
@@ -720,7 +743,8 @@ void SOOSA::addAndRetainWidthsIfPossible(
         int count(0);
         for (auto const& deviationAndWidthPair : deviationToWidthMultimap) {
             kMeansForWidths.addSample(OneDimensionSample{deviationAndWidthPair.second});
-            if (count++ >= retainSize) {                break;
+            if (count++ >= retainSize) {
+                break;
             }
         }
     } else {
@@ -736,7 +760,8 @@ void SOOSA::removeBarPointsWithFewHeightPoints(
     if (static_cast<int>(countToEndPointsIndexesMultiMap.size()) > numberQuestionsInColumn) {
         removeBarPointsWithFewHeightPointsCount(
             kMeansForBarPoints, numberQuestionsInColumn, countToEndPointsIndexesMultiMap);
-    }}
+    }
+}
 
 SOOSA::CountToEndPointIndexesMultiMap SOOSA::getHeightPointsCountToEndPointIndexesMultimap(
     TwoDimensionKMeans& kMeansForBarPoints) const {
@@ -747,7 +772,8 @@ SOOSA::CountToEndPointIndexesMultiMap SOOSA::getHeightPointsCountToEndPointIndex
     for (; endIndex < static_cast<int>(barPointsSamples.size()); endIndex++) {
         double currentHeight =
             getDistance(convertToPoint(barPointsSamples.at(startIndex)), convertToPoint(barPointsSamples.at(endIndex)));
-        if (currentHeight > previousHeight &&            currentHeight - previousHeight < getMaximumDistanceForBetweenBarHeights(previousHeight)) {
+        if (currentHeight > previousHeight &&
+            currentHeight - previousHeight < getMaximumDistanceForBetweenBarHeights(previousHeight)) {
             previousHeight = currentHeight;
             heightPointsCount++;
         } else {
@@ -756,7 +782,8 @@ SOOSA::CountToEndPointIndexesMultiMap SOOSA::getHeightPointsCountToEndPointIndex
             heightPointsCount = 1;
             startIndex = endIndex;
         }
-    }    if (startIndex != endIndex) {
+    }
+    if (startIndex != endIndex) {
         result.emplace(heightPointsCount, EndPointIndexes{startIndex, endIndex - 1});
     }
     return result;
@@ -780,7 +807,8 @@ void SOOSA::removeBarPointsWithFewHeightPointsCount(
              itForRange != barPointsSamplesCopy.begin() + range.second + 1; itForRange++) {
             kMeansForBarPoints.addSample(*itForRange);
         }
-        count++;        if (count >= numberQuestionsInColumn) {
+        count++;
+        if (count >= numberQuestionsInColumn) {
             break;
         }
     }
@@ -795,7 +823,8 @@ void SOOSA::removeBarPointsToGetConsistentHeight(
     int countForPrint(0);
     bool continueRemoval(true);
     while (continueRemoval) {
-        GroupOfTwoDimensionSamples listOfGroupOfBarPoints(            kMeansForBarPoints.getGroupOfSamplesUsingKMeans(numberQuestionsInColumn));
+        GroupOfTwoDimensionSamples listOfGroupOfBarPoints(
+            kMeansForBarPoints.getGroupOfSamplesUsingKMeans(numberQuestionsInColumn));
         OneDimensionSamples barHeights(getBarHeights(listOfGroupOfBarPoints));
         OneDimensionStatistics barHeightsStatistics(barHeights);
         double mean = barHeightsStatistics.getMean().getValueAt(0);
@@ -809,7 +838,8 @@ void SOOSA::removeBarPointsToGetConsistentHeight(
             for (int groupIndex = 0; groupIndex < static_cast<int>(listOfGroupOfBarPoints.size()); groupIndex++) {
                 TwoDimensionSamples const& barPoints(listOfGroupOfBarPoints.at(groupIndex));
                 if (!barPoints.empty()) {
-                    double signedDeviation =                        getHeight(barPoints) -
+                    double signedDeviation =
+                        getHeight(barPoints) -
                         mean;  // no absolute value because only positive deviation should be removed
                     if (largestDeviation == 0 || largestDeviation < signedDeviation) {
                         isFound = true;
@@ -825,7 +855,8 @@ void SOOSA::removeBarPointsToGetConsistentHeight(
                 continueRemoval = sizeBefore > static_cast<int>(kMeansForBarPoints.getSamples().size());
             }
         }
-        if (countForPrint == 5) {            cout << "Figuring out the correct heights. Please wait.\n";
+        if (countForPrint == 5) {
+            cout << "Figuring out the correct heights. Please wait.\n";
         }
         countForPrint++;
     }
@@ -837,7 +868,8 @@ void SOOSA::addAndRetainBarPointsIfPossible(
     for (int groupIndex = 0; groupIndex < static_cast<int>(listOfGroupOfBarPoints.size()); groupIndex++) {
         TwoDimensionSamples const& barPointsSamples(listOfGroupOfBarPoints.at(groupIndex));
         if (groupIndex == indexToRemove) {
-            TwoDimensionStatistics barPointsStatistics(barPointsSamples);            Point center = convertToPoint(barPointsStatistics.getMean());
+            TwoDimensionStatistics barPointsStatistics(barPointsSamples);
+            Point center = convertToPoint(barPointsStatistics.getMean());
 
             multimap<double, Point> deviationToPointMultimap;
             for (TwoDimensionSample const& barPointsSample : barPointsSamples) {
@@ -853,7 +885,8 @@ void SOOSA::addAndRetainBarPointsIfPossible(
                 if (static_cast<int>(acceptedBarPoints.size()) >= retainSize) {
                     break;
                 }
-            }            sort(acceptedBarPoints.begin(), acceptedBarPoints.end(), [](Point const& point1, Point const& point2) {
+            }
+            sort(acceptedBarPoints.begin(), acceptedBarPoints.end(), [](Point const& point1, Point const& point2) {
                 return point1.getY() < point2.getY();
             });
             for (Point const& acceptedBarPoint : acceptedBarPoints) {
@@ -908,6 +941,7 @@ void SOOSA::setAnswerToQuestionInColumn(int const columnNumber, int const questi
     m_questionToAnswersMap[m_inputConfiguration.getQuestionIndexInColumn(columnNumber, questionOffsetInColumn)] =
         answer;
 }
+
 void SOOSA::saveDataToCsvFile(string const& processedFilePath) const {
     ofstream outputCsvReportStream(getCsvFilePath(m_inputConfiguration.getPath()), ofstream::app);
     if (Status::getInstance().isStatusNoError()) {
@@ -915,7 +949,8 @@ void SOOSA::saveDataToCsvFile(string const& processedFilePath) const {
         for (int i = 0; i < m_inputConfiguration.getNumberOfQuestions(); i++) {
             outputCsvReportStream << "," << getAnswerToQuestion(i);
         }
-        outputCsvReportStream << "\n";    } else {
+        outputCsvReportStream << "\n";
+    } else {
         outputCsvReportStream << processedFilePath << "," << Status::getInstance().getStatusString() << "\n";
     }
 }
@@ -926,7 +961,8 @@ void SOOSA::saveHeadersToCsvFile() const {
     for (int i = 0; i < m_inputConfiguration.getNumberOfQuestions(); i++) {
         outputCsvReportStream << ",Question_" << i + 1;
     }
-    outputCsvReportStream << "\n";}
+    outputCsvReportStream << "\n";
+}
 
 void SOOSA::saveOutputHtmlFile(string const& processedFilePath) const {
     AlbaLocalPathHandler basisHtmlPath(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
@@ -977,7 +1013,8 @@ void SOOSA::saveTableToOutputHtmlFile(ofstream& reportHtmlFileStream) const {
         int numberOfSamplesForQuestion = calculateNumberOfSamples(samples);
         double median = calculateMedian(samples);
         if (questionIndex == m_inputConfiguration.getNumberOfQuestions() - 1) {
-            reportHtmlFileStream << "<td style=\"text-align:left;padding:3px\"><b>"                                 << m_inputConfiguration.getQuestionAt(questionIndex) << "</b></td>\n";
+            reportHtmlFileStream << "<td style=\"text-align:left;padding:3px\"><b>"
+                                 << m_inputConfiguration.getQuestionAt(questionIndex) << "</b></td>\n";
         } else {
             reportHtmlFileStream << "<td style=\"text-align:left;padding:3px\">"
                                  << m_inputConfiguration.getQuestionAt(questionIndex) << "</td>\n";
@@ -985,7 +1022,8 @@ void SOOSA::saveTableToOutputHtmlFile(ofstream& reportHtmlFileStream) const {
         for (int answer = m_soosaConfiguration.getNumberOfChoices(); answer > 0; answer--) {
             reportHtmlFileStream << "<td style=\"text-align:center;padding:3px\">"
                                  << getPrintableStringForPercentage(
-                                        m_frequencyDatabase.getFrequencyOfAnswer(questionIndex, answer - 1),                                        numberOfSamplesForQuestion)
+                                        m_frequencyDatabase.getFrequencyOfAnswer(questionIndex, answer - 1),
+                                        numberOfSamplesForQuestion)
                                  << "</td>\n";
         }
         reportHtmlFileStream << "<td style=\"text-align:center;padding:3px\">" << numberOfSamplesForQuestion
@@ -996,7 +1034,8 @@ void SOOSA::saveTableToOutputHtmlFile(ofstream& reportHtmlFileStream) const {
         for (int answer = m_soosaConfiguration.getNumberOfChoices(); answer > 0; answer--) {
             if (answer >= m_inputConfiguration.getMinimumSatisfactoryScore()) {
                 satisfactoryFrequency += m_frequencyDatabase.getFrequencyOfAnswer(questionIndex, answer - 1);
-            }        }
+            }
+        }
         reportHtmlFileStream << "<td style=\"text-align:center;padding:3px\">"
                              << getPrintableStringForPercentage(satisfactoryFrequency, numberOfSamplesForQuestion)
                              << "</td>\n";
@@ -1029,7 +1068,8 @@ BitmapXY SOOSA::convertToBitmapXY(Sample const& sample) const {
         (int)round(clampLowerBound(sample.getValueAt(1), (double)0)));
 }
 
-Point SOOSA::convertToPoint(BitmapXY const& bitmapXY) const {    return Point((double)bitmapXY.getX(), (double)bitmapXY.getY());
+Point SOOSA::convertToPoint(BitmapXY const& bitmapXY) const {
+    return Point((double)bitmapXY.getX(), (double)bitmapXY.getY());
 }
 
 Point SOOSA::convertToPoint(Sample const& sample) const { return Point(sample.getValueAt(0), sample.getValueAt(1)); }

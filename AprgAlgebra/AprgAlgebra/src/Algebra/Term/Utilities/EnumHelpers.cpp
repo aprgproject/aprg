@@ -12,7 +12,8 @@ int getAssociationPriority(TermAssociationType const association) {
     int result(0);
     switch (association) {
         case TermAssociationType::Positive:
-            result = 1;            break;
+            result = 1;
+            break;
         case TermAssociationType::Negative:
             result = 2;
             break;
@@ -24,7 +25,8 @@ int getOperatorLevelInversePriority(OperatorLevel const operatorLevel) {
     int result(0);
     switch (operatorLevel) {
         case OperatorLevel::Unknown:
-            result = 0;            break;
+            result = 0;
+            break;
         case OperatorLevel::AdditionAndSubtraction:
             result = 3;
             break;
@@ -42,7 +44,8 @@ int getTermTypePriorityValue(TermType const termType) {
     int result(0);
     switch (termType) {
         case TermType::Empty:
-            result = 0;            break;
+            result = 0;
+            break;
         case TermType::Operator:
             result = 1;
             break;

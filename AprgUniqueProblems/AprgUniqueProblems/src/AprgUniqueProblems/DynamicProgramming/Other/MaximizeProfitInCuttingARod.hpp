@@ -14,7 +14,8 @@ public:
     using RodIndex = int;
     using Rod = std::pair<Length, Profit>;
     using Profits = std::vector<Profit>;
-    using Rods = std::vector<Rod>;    using ProfitMatrix = matrix::AlbaMatrix<Profit>;
+    using Rods = std::vector<Rod>;
+    using ProfitMatrix = matrix::AlbaMatrix<Profit>;
     static constexpr Profit UNUSED_PROFIT = std::numeric_limits<Profit>::max();
 
     MaximizeProfitInCuttingARod(Length const length, Rods const rods);

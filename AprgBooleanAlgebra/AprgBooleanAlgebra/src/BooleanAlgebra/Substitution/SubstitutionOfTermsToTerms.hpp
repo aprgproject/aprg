@@ -23,6 +23,7 @@ public:
     Term getTermForTerm(Term const& term) const;
     Term performSubstitutionTo(Expression const& expression) const;
     Term performSubstitutionTo(Term const& term) const;
+
     Expression performSubstitutionForExpression(Expression const& expression) const;
 
     void putTermsToTermsMapping(std::initializer_list<TermTermPair> const& variablesWithValues);

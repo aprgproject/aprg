@@ -46,7 +46,8 @@ public:
         if (checkValue + 1 < endValue && !m_boolFunction(checkValue))  // if last value is false, move one
         {
             checkValue++;
-        }        if (m_boolFunction(checkValue))  // if its last value is true, save it to result
+        }
+        if (m_boolFunction(checkValue))  // if its last value is true, save it to result
         {
             result = checkValue;
         }

@@ -53,6 +53,7 @@ private:
         }
         return result;
     }
+
     Values const& m_sortedValues;
 };
 

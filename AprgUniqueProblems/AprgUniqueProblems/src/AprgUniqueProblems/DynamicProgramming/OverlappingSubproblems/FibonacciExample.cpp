@@ -40,7 +40,8 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMemoizationDP(Num
     Numbers memoizationData(size, static_cast<int>(UNUSED_VALUE));
     memoizationData[0] = 0;
     memoizationData[1] = 1;
-    return getNthFibonacciUsingMemoizationDP(memoizationData, number);}
+    return getNthFibonacciUsingMemoizationDP(memoizationData, number);
+}
 
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDP(Number const number) {
     // Time Complexity: O(n)
@@ -54,7 +55,8 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDP(Numbe
     Number size = max(number + 1, 2);
     Numbers tabulationData(size);
     tabulationData[0] = 0;
-    tabulationData[1] = 1;    for (Number i = 2; i <= number; i++) {
+    tabulationData[1] = 1;
+    for (Number i = 2; i <= number; i++) {
         tabulationData[i] = tabulationData.at(i - 1) + tabulationData.at(i - 2);
     }
     return tabulationData.at(number);
@@ -119,6 +121,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMatrixMultiplicat
         return fibonacciMatrix.getEntry(1, 1);
     }
 }
+
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMatrixPowerWithLogarithmicTime(Number const number) {
     // NOTE: Same implementation in AprgMath (Linear Recurrence)
 
@@ -138,6 +141,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMatrixPowerWithLo
         return fibonacciMatrix.getEntry(1, 1);
     }
 }
+
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicMemoizationDP(Number const number) {
     // Time Complexity: O(log(n))
     // Extra Space: O(n)
@@ -146,7 +150,8 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicMemoiz
     Numbers memoizationData(size, static_cast<int>(UNUSED_VALUE));
     memoizationData[0] = 0;
     memoizationData[1] = 1;
-    return getNthFibonacciUsingMemoizationDP(memoizationData, number);}
+    return getNthFibonacciUsingMemoizationDP(memoizationData, number);
+}
 
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicIterativeDP(Number const number) {
     // Derived using matrix power (check notes at header file)
@@ -157,6 +162,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicIterat
         Numbers iterativeData(size);
         iterativeData[0] = 0;
         iterativeData[1] = 1;
+
         NumberSet logarithmicSteps{number};
         Number k(number);
         while (k >= 3) {

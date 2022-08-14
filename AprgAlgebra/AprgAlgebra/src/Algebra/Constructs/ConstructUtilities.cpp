@@ -282,7 +282,8 @@ void createTermRaiseToTermsFromMultiplicationAndDivisionExpression(
              i < static_cast<int>(nonConstantFactorsOfExponents.size()) && i < static_cast<int>(originalBases.size());
              i++) {
             AlbaNumber uniqueConstantExponent(constantFactorsOfExponents.at(i) / constantGcf);
-            TermsRaiseToNumbers remainingNonConstantFactors(nonConstantFactorsOfExponents.at(i));            remainingNonConstantFactors.subtractExponents(commonNonConstantFactorsOfExponents);
+            TermsRaiseToNumbers remainingNonConstantFactors(nonConstantFactorsOfExponents.at(i));
+            remainingNonConstantFactors.subtractExponents(commonNonConstantFactorsOfExponents);
             remainingNonConstantFactors.simplify();
             Term uniqueExponent(Term(uniqueConstantExponent) * remainingNonConstantFactors.getCombinedTerm());
             uniqueExponent.simplify();

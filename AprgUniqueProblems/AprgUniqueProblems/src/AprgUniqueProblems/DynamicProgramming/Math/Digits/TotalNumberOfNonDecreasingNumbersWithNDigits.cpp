@@ -34,7 +34,8 @@ TotalNumberOfNonDecreasingNumbersWithNDigits::getCountUsingMemoizationDP() const
         CountMatrix countMatrix(10, m_numberOfDigits, UNUSED_COUNT);
         for (Value digitValue = 0; digitValue <= 9; digitValue++) {
             result += getCountUsingMemoizationDP(countMatrix, digitValue, m_numberOfDigits - 1);
-        }    }
+        }
+    }
     return result;
 }
 
@@ -76,7 +77,8 @@ TotalNumberOfNonDecreasingNumbersWithNDigits::getCountUsingIterativeDPAndSpaceEf
         Counts digitValueToCount(10, 1);
         for (Count digitIndex = 1; digitIndex < m_numberOfDigits; digitIndex++) {
             for (int digitValue = 9; digitValue >= 0; digitValue--) {
-                Count entryResult(0);                for (Value beforeDigitValue = 0; beforeDigitValue <= static_cast<Value>(digitValue);
+                Count entryResult(0);
+                for (Value beforeDigitValue = 0; beforeDigitValue <= static_cast<Value>(digitValue);
                      beforeDigitValue++) {
                     entryResult += digitValueToCount.at(beforeDigitValue);
                 }
@@ -88,6 +90,7 @@ TotalNumberOfNonDecreasingNumbersWithNDigits::getCountUsingIterativeDPAndSpaceEf
     }
     return result;
 }
+
 TotalNumberOfNonDecreasingNumbersWithNDigits::Count
 TotalNumberOfNonDecreasingNumbersWithNDigits::getCountUsingSummationFormula() const {
     // Using integration for finite calculus:

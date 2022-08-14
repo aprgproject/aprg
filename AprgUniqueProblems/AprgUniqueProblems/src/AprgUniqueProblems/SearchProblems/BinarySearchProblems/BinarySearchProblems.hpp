@@ -15,6 +15,7 @@ public:
     using Value = typename Values::value_type;
 
     BinarySearchProblems() = default;
+
     Value getNearestFloor(Values const& sortedValues, Value const& valueToCheck) {
         // Problem Statement:
         // Given an array of N distinct integers, find floor value of input ‘key’.
@@ -81,7 +82,8 @@ public:
         Index lowerIndex(0), higherIndex(sortedValues.size() - 1);
         if (sortedValues.at(lowerIndex) <= sortedValues.at(higherIndex)) {
             result = lowerIndex;
-        } else {            while (lowerIndex <= higherIndex) {
+        } else {
+            while (lowerIndex <= higherIndex) {
                 if (lowerIndex == higherIndex) {
                     result = lowerIndex;
                     break;
@@ -104,7 +106,8 @@ private:
         while (lowerIndex + 1 < higherIndex) {
             Index middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
             Value middleValue(sortedValues.at(middleIndex));
-            if (middleValue <= value) {                lowerIndex = middleIndex;
+            if (middleValue <= value) {
+                lowerIndex = middleIndex;
             } else {
                 higherIndex = middleIndex;
             }
@@ -118,7 +121,8 @@ private:
         while (lowerIndex + 1 < higherIndex) {
             Index middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
             Value middleValue(sortedValues.at(middleIndex));
-            if (value <= middleValue) {                higherIndex = middleIndex;
+            if (value <= middleValue) {
+                higherIndex = middleIndex;
             } else {
                 lowerIndex = middleIndex;
             }

@@ -159,7 +159,8 @@ void TermRaiseToTerms::simplifyBaseAndExponents() {
         int exponent = static_cast<int>(exponentCombinedTerm.getConstantValueConstReference().getInteger());
         simplifyAdditionAndSubtractionExpressionRaiseToPositiveInteger(
             m_base, m_base.getExpressionConstReference(), exponent);
-    } else if (        m_base.isConstant() && exponentCombinedTerm.isExpression() &&
+    } else if (
+        m_base.isConstant() && exponentCombinedTerm.isExpression() &&
         OperatorLevel::MultiplicationAndDivision ==
             exponentCombinedTerm.getExpressionConstReference().getCommonOperatorLevel()) {
         simplifyConstantRaiseToMultiplicationAndDivisionExpression(m_base, m_exponents, exponentCombinedTerm);
@@ -200,7 +201,8 @@ void TermRaiseToTerms::simplifyAdditionAndSubtractionExpressionRaiseToPositiveIn
     for (int i = 0; i < exponent; i++) {
         result = result * termToMultiply;
     }
-    result.simplify();    base = result;
+    result.simplify();
+    base = result;
 }
 
 void TermRaiseToTerms::simplifyConstantRaiseToMultiplicationAndDivisionExpression(
@@ -210,7 +212,8 @@ void TermRaiseToTerms::simplifyConstantRaiseToMultiplicationAndDivisionExpressio
     for (int i = 0; i < static_cast<int>(termsWithDetails.size()); i++) {
         TermWithDetails const& exponentWithDetails(termsWithDetails.at(i));
         Term const& exponent(getTermConstReferenceFromUniquePointer(exponentWithDetails.baseTermPointer));
-        if (exponentWithDetails.hasPositiveAssociation() && exponent.isFunction()) {            Function const& functionObject(exponent.getFunctionConstReference());
+        if (exponentWithDetails.hasPositiveAssociation() && exponent.isFunction()) {
+            Function const& functionObject(exponent.getFunctionConstReference());
             string const& functionName(functionObject.getFunctionName());
             if ((getEAsATerm() == base && "ln" == functionName) || (Term(10) == base && "log" == functionName)) {
                 base = getTermConstReferenceFromBaseTerm(functionObject.getInputTermConstReference());

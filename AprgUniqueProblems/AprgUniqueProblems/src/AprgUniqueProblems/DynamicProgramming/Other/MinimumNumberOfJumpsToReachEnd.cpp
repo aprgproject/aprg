@@ -49,7 +49,8 @@ MinimumNumberOfJumpsToReachEnd::Count MinimumNumberOfJumpsToReachEnd::getMinimum
         for (Index startOfJumpIndex(0); startOfJumpIndex < static_cast<Index>(m_sequence.size()); startOfJumpIndex++) {
             Count countOfJumps = indexToCountOfJumps.at(startOfJumpIndex) + 1;
             Index maxPossibleJumpIndex =
-                min(startOfJumpIndex + m_sequence.at(startOfJumpIndex), static_cast<Index>(m_sequence.size() - 1));            for (Index endOfJumpIndex = startOfJumpIndex + 1; endOfJumpIndex <= maxPossibleJumpIndex;
+                min(startOfJumpIndex + m_sequence.at(startOfJumpIndex), static_cast<Index>(m_sequence.size() - 1));
+            for (Index endOfJumpIndex = startOfJumpIndex + 1; endOfJumpIndex <= maxPossibleJumpIndex;
                  endOfJumpIndex++) {
                 Count& countOfJumpsAtIndex(indexToCountOfJumps[endOfJumpIndex]);
                 countOfJumpsAtIndex = min(countOfJumpsAtIndex, countOfJumps);
@@ -133,7 +134,8 @@ MinimumNumberOfJumpsToReachEnd::Count MinimumNumberOfJumpsToReachEnd::getMinimum
     if (startOfJumpIndex + 1 < static_cast<Index>(m_sequence.size())) {
         result = MAX_COUNT;
         Index maxPossibleJumpIndex =
-            min(startOfJumpIndex + m_sequence.at(startOfJumpIndex), static_cast<Index>(m_sequence.size() - 1));        for (Index endOfJumpIndex = startOfJumpIndex + 1; endOfJumpIndex <= maxPossibleJumpIndex; endOfJumpIndex++) {
+            min(startOfJumpIndex + m_sequence.at(startOfJumpIndex), static_cast<Index>(m_sequence.size() - 1));
+        for (Index endOfJumpIndex = startOfJumpIndex + 1; endOfJumpIndex <= maxPossibleJumpIndex; endOfJumpIndex++) {
             result = min(result, getMinimumNumberOfJumpsUsingNaiveRecursion(endOfJumpIndex));
         }
         result++;
@@ -148,7 +150,8 @@ MinimumNumberOfJumpsToReachEnd::Count MinimumNumberOfJumpsToReachEnd::getMinimum
         if (startOfJumpIndex + 1 < static_cast<Index>(m_sequence.size())) {
             // result is already MAX_COUNT
             Index maxPossibleJumpIndex =
-                min(startOfJumpIndex + m_sequence.at(startOfJumpIndex), static_cast<Index>(m_sequence.size() - 1));            for (Index endOfJumpIndex = startOfJumpIndex + 1; endOfJumpIndex <= maxPossibleJumpIndex;
+                min(startOfJumpIndex + m_sequence.at(startOfJumpIndex), static_cast<Index>(m_sequence.size() - 1));
+            for (Index endOfJumpIndex = startOfJumpIndex + 1; endOfJumpIndex <= maxPossibleJumpIndex;
                  endOfJumpIndex++) {
                 result = min(result, getMinimumNumberOfJumpsUsingMemoizationDP(indexToCountOfJumps, endOfJumpIndex));
             }

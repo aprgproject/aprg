@@ -19,7 +19,8 @@ protected:
         Term const& monomialPart, Term const& exponent, int const numberOfTimes) const;
 
     Term m_monomialPart;
-    Term m_exponent;};
+    Term m_exponent;
+};
 
 }  // namespace algebra
 

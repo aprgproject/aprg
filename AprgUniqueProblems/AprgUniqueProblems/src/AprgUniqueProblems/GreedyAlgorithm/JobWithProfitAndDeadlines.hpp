@@ -15,7 +15,8 @@ public:
         int deadline;
     };
 
-    using Jobs = std::deque<Job>;    using JobNames = stringHelper::strings;
+    using Jobs = std::deque<Job>;
+    using JobNames = stringHelper::strings;
 
     JobNames getJobsOrderWithMaximumProfit() const;
 
@@ -25,6 +26,7 @@ private:
     int getMaximumDeadline() const;
     Jobs m_jobs;
 };
+
 }  // namespace alba
 
 // Given a set of n jobs where each job i has a deadline di >=1 and profit pi>=0.

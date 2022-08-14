@@ -39,6 +39,7 @@ public:
     void raiseToUnsignedInteger(int const exponent);
     void setAsSimplified();
     void clearSimplifiedFlag();
+
 private:
     bool isFurtherSimplificationNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify) const;
     void setNan();

@@ -58,7 +58,8 @@ bool canModuloBeDistributedInEveryIterationOfFactorial(UnsignedInteger const num
     for (int i = 2; i <= static_cast<int>(number); i++) {
         distributed = (distributed * i) % modulo;
     }
-    distributed %= modulo;    return undistributed == distributed;
+    distributed %= modulo;
+    return undistributed == distributed;
 }
 
 bool isFermatTheoremTrue(UnsignedInteger const prime, UnsignedInteger const coPrime) {
@@ -197,7 +198,8 @@ UnsignedInteger getModularFactorial(UnsignedInteger const number, UnsignedIntege
     for (int i = 2; i <= static_cast<int>(number); i++) {
         result = (result * i) % modulo;
     }
-    result %= modulo;    return result;
+    result %= modulo;
+    return result;
 }
 
 }  // namespace math

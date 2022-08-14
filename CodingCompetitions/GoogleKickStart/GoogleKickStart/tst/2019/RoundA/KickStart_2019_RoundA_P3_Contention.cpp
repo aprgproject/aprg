@@ -82,7 +82,8 @@ int getMinimumSeatsFromRightToLeft(Intervals& bookings) {
 void runTestCase(int const testCaseNumber) {
     int numberOfSeats, numberOfBookings;
     my_cin >> numberOfSeats >> numberOfBookings;
-    Intervals bookings;    for (int y = 0; y < numberOfBookings; ++y) {
+    Intervals bookings;
+    for (int y = 0; y < numberOfBookings; ++y) {
         int leftIndex, rightIndex;
         my_cin >> leftIndex >> rightIndex;
         bookings.emplace_back(leftIndex, rightIndex);
@@ -190,7 +191,8 @@ bool isWithinTheLimit(int minimumSeatsLimit)
 void runTestCase(int const testCaseNumber)
 {
     my_cin >> numberOfSeats >> numberOfBookings;
-    bookings.resize(numberOfBookings);    int lo = 0, hi = numberOfSeats;
+    bookings.resize(numberOfBookings);
+    int lo = 0, hi = numberOfSeats;
     for (int i = 0; i < numberOfBookings; ++i) {
         int l, r;
         my_cin >> l >> r;
@@ -218,6 +220,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

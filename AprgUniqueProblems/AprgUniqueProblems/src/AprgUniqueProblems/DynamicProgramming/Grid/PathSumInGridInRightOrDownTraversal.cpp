@@ -121,7 +121,8 @@ PathSumInGridInRightOrDownTraversal::Grid PathSumInGridInRightOrDownTraversal::g
         for (Index y = 1; y < static_cast<Index>(result.getNumberOfRows()); y++) {
             result.getEntryReference(x, y) += m_minMaxFunction(result.getEntry(x - 1, y), result.getEntry(x, y - 1));
         }
-    }    return result;
+    }
+    return result;
 }
 
 void PathSumInGridInRightOrDownTraversal::initialize(Type const type) {

@@ -44,7 +44,8 @@ public:
     ImplicantsWithMinterm getImplicants(int numberOfOnes, int commonalityCount) const {
         ImplicantsWithMinterm result;
         auto numberOfOnesIt = m_computationalTable.find(numberOfOnes);
-        if (numberOfOnesIt != m_computationalTable.end()) {            ImplicantsMap const& implicantsMap(numberOfOnesIt->second);
+        if (numberOfOnesIt != m_computationalTable.end()) {
+            ImplicantsMap const& implicantsMap(numberOfOnesIt->second);
             auto commonalityCountIt = implicantsMap.find(commonalityCount);
             if (commonalityCountIt != implicantsMap.end()) {
                 ImplicantsWithMinterm const& implicants(commonalityCountIt->second);
@@ -73,7 +74,8 @@ public:
     bool doImplicantsExistAt(int numberOfOnes, int commonalityCount) const {
         bool result(false);
         auto numberOfOnesIt = m_computationalTable.find(numberOfOnes);
-        if (numberOfOnesIt != m_computationalTable.end()) {            ImplicantsMap const& implicantsMap(numberOfOnesIt->second);
+        if (numberOfOnesIt != m_computationalTable.end()) {
+            ImplicantsMap const& implicantsMap(numberOfOnesIt->second);
             result = implicantsMap.find(commonalityCount) != implicantsMap.end();
         }
         return result;
@@ -94,7 +96,8 @@ public:
                  numberOfOnes++) {
                 findCombinationOfImplicants(numberOfOnes, commonalityCount);
                 isCombinationFound = isCombinationFound | doImplicantsExistAt(numberOfOnes, commonalityCount + 1);
-            }            areAllCombinationsFound = !isCombinationFound;
+            }
+            areAllCombinationsFound = !isCombinationFound;
             commonalityCount++;
         }
         m_maxCommonalityCount = (commonalityCount > 0) ? commonalityCount - 1 : 0;
@@ -110,7 +113,8 @@ public:
         if (numberOfOnes + 1 < static_cast<int>(m_computationalTable.size())) {
             ImplicantsWithMinterm const& implicants1(m_computationalTable[numberOfOnes][commonalityCount]);
             ImplicantsWithMinterm const& implicants2(m_computationalTable[numberOfOnes + 1][commonalityCount]);
-            for (ImplicantWithMinterm const& implicant1 : implicants1.getImplicantsData()) {                for (ImplicantWithMinterm const& implicant2 : implicants2.getImplicantsData()) {
+            for (ImplicantWithMinterm const& implicant1 : implicants1.getImplicantsData()) {
+                for (ImplicantWithMinterm const& implicant2 : implicants2.getImplicantsData()) {
                     if (implicant1.isCompatible(implicant2)) {
                         m_computationalTable[numberOfOnes][commonalityCount + 1].addImplicant(implicant1 + implicant2);
                     }
@@ -144,7 +148,8 @@ public:
                 int implicantCount(0U);
                 for (auto const& inputMinterm : inputMintermsWithTrue) {
                     if (implicant.isSuperset(inputMinterm)) {
-                        inputMintermToCountMap[inputMinterm]++;                        inputMintermToImplicantMap.emplace(inputMinterm, implicant);
+                        inputMintermToCountMap[inputMinterm]++;
+                        inputMintermToImplicantMap.emplace(inputMinterm, implicant);
                         implicantCount++;
                     }
                 }
@@ -153,7 +158,8 @@ public:
             int minCount = std::numeric_limits<int>::max();
             Minterm mintermWithMinCount;
             for (auto const& inputMintermAndCountPair : inputMintermToCountMap) {
-                if (minCount > inputMintermAndCountPair.second) {                    mintermWithMinCount = inputMintermAndCountPair.first;
+                if (minCount > inputMintermAndCountPair.second) {
+                    mintermWithMinCount = inputMintermAndCountPair.first;
                     minCount = inputMintermAndCountPair.second;
                 }
             }
@@ -230,6 +236,7 @@ private:
     InputToOutputMap m_inputToOutputMap;
     ComputationalTable m_computationalTable;  // https://en.wikipedia.org/wiki/Quine%E2%80%93McCluskey_algorithm
 };
+
 }  // namespace booleanAlgebra
 
 }  // namespace alba

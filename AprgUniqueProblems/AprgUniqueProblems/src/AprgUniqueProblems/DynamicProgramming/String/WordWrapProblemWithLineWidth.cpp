@@ -19,6 +19,7 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
     }
     return result;
 }
+
 WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCostByTryingAllLengths() const {
     // Time Complexity: O(lineWidth x numberOfWords)
     // Auxiliary Space: O(lineWidth)
@@ -92,7 +93,8 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
     if (wordIndex < static_cast<Index>(m_words.size())) {
         result = MAX_COST;
         Index wordLength(m_words.at(wordIndex).length());
-        if (wordLength <= m_maxLineLength) {            Index lastLength(recursionDetails.lineLengths.back());
+        if (wordLength <= m_maxLineLength) {
+            Index lastLength(recursionDetails.lineLengths.back());
             if (lastLength + 1 + wordLength <= m_maxLineLength) {
                 // try to put word on last line
                 RecursionDetails currentDetails(recursionDetails);

@@ -26,7 +26,8 @@ void AudioManipulator::addSamplesWithValue(double const value) {
 void AudioManipulator::addSamplesAtChannelWithValue(int const channelIndex, double const value) {
     Samples& samplesAtChannel(m_audio.getSamplesReferenceAtChannel(channelIndex));
     for (double& sampleAtChannel : samplesAtChannel) {
-        sampleAtChannel += value;    }
+        sampleAtChannel += value;
+    }
 }
 
 void AudioManipulator::multiplySamplesWithValue(double const value) {
@@ -38,7 +39,8 @@ void AudioManipulator::multiplySamplesWithValue(double const value) {
 void AudioManipulator::multiplySamplesAtChannelWithValue(int const channelIndex, double const value) {
     Samples& samplesAtChannel(m_audio.getSamplesReferenceAtChannel(channelIndex));
     for (double& sampleAtChannel : samplesAtChannel) {
-        sampleAtChannel *= value;    }
+        sampleAtChannel *= value;
+    }
 }
 
 void AudioManipulator::saveAudioIntoCurrentFile() {

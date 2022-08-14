@@ -43,7 +43,8 @@ TEST(BitmapReadTest, TestForMonochromeBitmap) {
     uint8_t* reader = reinterpret_cast<uint8_t*>(pixels.getBufferPointer());
     ASSERT_EQ(3U, pixels.getSize());
     EXPECT_EQ(0x8F, reader[0]);
-    EXPECT_EQ(0xF3, reader[1]);    EXPECT_EQ(0xFF, reader[2]);
+    EXPECT_EQ(0xF3, reader[1]);
+    EXPECT_EQ(0xFF, reader[2]);
 
     EXPECT_EQ(0x00U, snippet.getPixelAt(BitmapXY(99, 97)));
     EXPECT_EQ(0x01U, snippet.getPixelAt(BitmapXY(100, 97)));
@@ -87,6 +88,7 @@ TEST(BitmapReadTest, TestForMonochromeBitmap) {
     ASSERT_EQ(0, snippet5.getPixelDataSize());
     EXPECT_EQ(0x0U, snippet5.getColorAt(BitmapXY(180, 180)));
 }
+
 TEST(BitmapReadTest, TestFor16ColorBitmap) {
     Bitmap bitmap(APRG_BITMAP_16_COLOR_TEST_FILE);
     ASSERT_TRUE(bitmap.getConfiguration().isValid());
@@ -110,7 +112,8 @@ TEST(BitmapReadTest, TestFor16ColorBitmap) {
     uint8_t* reader = reinterpret_cast<uint8_t*>(pixels.getBufferPointer());
     ASSERT_EQ(6U, pixels.getSize());
     EXPECT_EQ(0x57, reader[0]);
-    EXPECT_EQ(0x78, reader[1]);    EXPECT_EQ(0x87, reader[2]);
+    EXPECT_EQ(0x78, reader[1]);
+    EXPECT_EQ(0x87, reader[2]);
     EXPECT_EQ(0x77, reader[3]);
     EXPECT_EQ(0x8F, reader[4]);
     EXPECT_EQ(0xF8, reader[5]);
@@ -157,6 +160,7 @@ TEST(BitmapReadTest, TestFor16ColorBitmap) {
     ASSERT_EQ(0, snippet5.getPixelDataSize());
     EXPECT_EQ(0x0U, snippet5.getColorAt(BitmapXY(180, 180)));
 }
+
 TEST(BitmapReadTest, TestFor256ColorBitmap) {
     Bitmap bitmap(APRG_BITMAP_256_COLOR_TEST_FILE);
     ASSERT_TRUE(bitmap.getConfiguration().isValid());
@@ -180,7 +184,8 @@ TEST(BitmapReadTest, TestFor256ColorBitmap) {
     uint8_t* reader = reinterpret_cast<uint8_t*>(pixels.getBufferPointer());
     ASSERT_EQ(9U, pixels.getSize());
     EXPECT_EQ(0x53, reader[0]);
-    EXPECT_EQ(0xA4, reader[1]);    EXPECT_EQ(0xF5, reader[2]);
+    EXPECT_EQ(0xA4, reader[1]);
+    EXPECT_EQ(0xF5, reader[2]);
     EXPECT_EQ(0xA5, reader[3]);
     EXPECT_EQ(0x9B, reader[4]);
     EXPECT_EQ(0xA4, reader[5]);
@@ -230,6 +235,7 @@ TEST(BitmapReadTest, TestFor256ColorBitmap) {
     ASSERT_EQ(0, snippet5.getPixelDataSize());
     EXPECT_EQ(0x0U, snippet5.getColorAt(BitmapXY(180, 180)));
 }
+
 TEST(BitmapReadTest, TestFor24BitBitmap) {
     Bitmap bitmap(APRG_BITMAP_24_BIT_TEST_FILE);
     ASSERT_TRUE(bitmap.getConfiguration().isValid());
@@ -249,7 +255,8 @@ TEST(BitmapReadTest, TestFor24BitBitmap) {
     uint8_t* reader = reinterpret_cast<uint8_t*>(pixels.getBufferPointer());
     ASSERT_EQ(27U, pixels.getSize());
     EXPECT_EQ(0x5F, reader[0]);
-    EXPECT_EQ(0x4F, reader[1]);    EXPECT_EQ(0x56, reader[2]);
+    EXPECT_EQ(0x4F, reader[1]);
+    EXPECT_EQ(0x56, reader[2]);
     EXPECT_EQ(0x94, reader[3]);
     EXPECT_EQ(0x8A, reader[4]);
     EXPECT_EQ(0x82, reader[5]);
@@ -317,6 +324,7 @@ TEST(BitmapReadTest, TestFor24BitBitmap) {
     ASSERT_EQ(0, snippet5.getPixelDataSize());
     EXPECT_EQ(0x0U, snippet5.getColorAt(BitmapXY(180, 180)));
 }
+
 TEST(BitmapReadTest, TestFor32BitBitmap) {
     Bitmap bitmap(APRG_BITMAP_32_BIT_TEST_FILE);
     ASSERT_TRUE(bitmap.getConfiguration().isValid());

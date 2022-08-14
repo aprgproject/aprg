@@ -21,7 +21,8 @@ public:
     int getNumberOfVariablesWithSolutions() const;
 
     VariableNamesSet getVariableNames() const;
-    SolutionSet getSolutionSetForVariable(std::string const& variableName) const;    VariableNameToSolutionSetMap const& getVariableNameToSolutionSetMap() const;
+    SolutionSet getSolutionSetForVariable(std::string const& variableName) const;
+    VariableNameToSolutionSetMap const& getVariableNameToSolutionSetMap() const;
 
     void addSolutionSetForVariable(std::string const& variableName, SolutionSet const& solutionSet);
 

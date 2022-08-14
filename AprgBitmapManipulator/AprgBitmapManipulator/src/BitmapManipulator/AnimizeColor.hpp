@@ -16,7 +16,8 @@ public:
         int count;
         double newValue;
     };
-    using ColorDataMap = std::map<double, ColorDetails>;    using ValueAndColorDataPair = std::pair<double, ColorDetails>;
+    using ColorDataMap = std::map<double, ColorDetails>;
+    using ValueAndColorDataPair = std::pair<double, ColorDetails>;
 
     uint32_t getNewColor(uint32_t const originalColor) const;
     double getNewLightness(double const originalValue) const;

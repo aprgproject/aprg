@@ -49,6 +49,7 @@ public:
     void goInfinite();
     bool waitTillReadyAndReturnIfResetWasPerformed();
     void stop();
+
     void setAdditionalStepsInCalculationMonitoring(StepsInCalculationMonitoring const& additionalSteps);
     void setLogFile(std::string const& logFilePath);
 

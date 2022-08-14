@@ -32,6 +32,7 @@ constexpr int MAX_NUMBER_OF_ITERATIONS = 100;
 constexpr double POSITIVE_DELTA_FOR_INITIAL_VALUE = 1E-3;
 
 }  // namespace
+
 bool isAlmostEqualForLimitIteration(AlbaNumber const& value1, AlbaNumber const& value2) {
     return isAlmostEqual(value1.getDouble(), value2.getDouble(), COMPARISON_TOLERANCE_FOR_LIMIT_ITERATION);
 }
@@ -125,6 +126,7 @@ AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
     AlbaNumber const& initialValueForIteration, int maxNumberOfIterations) {
     AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
     scopeConfigurationObject.setInThisScopeTheTolerancesToZero();
+
     SubstitutionOfVariablesToValues substitution;
     AlbaNumber currentInput(initialValueForIteration);
     AlbaNumber previousAcceptedInput(currentInput);
@@ -133,7 +135,8 @@ AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
     for (int i = 0; i < maxNumberOfIterations && currentInput != previousRejectedInput; i++) {
         // As current currentInput approaches valueToApproach the calculation becomes inaccurate so limit value is not
         // accurate.
-        substitution.putVariableWithValue(variableName, currentInput);        Term currentOutputTerm = substitution.performSubstitutionTo(term);
+        substitution.putVariableWithValue(variableName, currentInput);
+        Term currentOutputTerm = substitution.performSubstitutionTo(term);
         if (currentOutputTerm.isConstant()) {
             AlbaNumber currentOutputNumber(currentOutputTerm.getConstantValueConstReference());
             if (!currentOutputNumber.isARealFiniteValue()) {
@@ -330,7 +333,8 @@ Term getObliqueAsymptote(Term const& term) {
             if (1 == variableNames.size() && AlbaNumber(1) == getMaxDegree(quotient)) {
                 result = Term(quotient);
             }
-        }    }
+        }
+    }
     return result;
 }
 

@@ -42,6 +42,7 @@ WeightedJobScheduling::Profit WeightedJobScheduling::getMaxProfitByMonitoringTim
 
         Jobs jobsSortedByEndTime(m_jobs);
         sort(jobsSortedByEndTime.begin(), jobsSortedByEndTime.end(), endTimeJobComparator);
+
         for (Job const& job : jobsSortedByEndTime) {
             Index timeIndexBeforeJob =
                 distance(timeStamps.begin(), find(timeStamps.begin(), timeStamps.end(), job.startTime));
@@ -55,7 +56,8 @@ WeightedJobScheduling::Profit WeightedJobScheduling::getMaxProfitByMonitoringTim
                  timeToUpdate++) {
                 maxProfitsAtTime[timeToUpdate] = max(maxProfitsAtTime.at(timeToUpdate), maxProfitForJob);
             }
-        }        result = maxProfitsAtTime.back();
+        }
+        result = maxProfitsAtTime.back();
     }
     return result;
 }
@@ -75,7 +77,8 @@ WeightedJobScheduling::Profit WeightedJobScheduling::getMaxProfitByMonitoringJob
         for (Index jobIndex = 1; jobIndex < static_cast<Index>(jobsSortedByEndTime.size()); jobIndex++) {
             Job const& currentJob(jobsSortedByEndTime.at(jobIndex));
             Profit currentProfit = currentJob.profit;
-            auto itLatestNonConflictingJob = lower_bound(                jobsSortedByEndTime.begin(), jobsSortedByEndTime.begin() + jobIndex, currentJob.startTime,
+            auto itLatestNonConflictingJob = lower_bound(
+                jobsSortedByEndTime.begin(), jobsSortedByEndTime.begin() + jobIndex, currentJob.startTime,
                 endTimeJobAndTimeComparator);
             if (itLatestNonConflictingJob != jobsSortedByEndTime.end()) {
                 currentProfit += maxProfitsAtJob.at(distance(jobsSortedByEndTime.begin(), itLatestNonConflictingJob));

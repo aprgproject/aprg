@@ -11,7 +11,8 @@ namespace alba {
 template <int DIMENSIONS>
 class DataStatistics {
 public:
-    using Sample = DataSample<DIMENSIONS>;    using Samples = std::vector<Sample>;
+    using Sample = DataSample<DIMENSIONS>;
+    using Samples = std::vector<Sample>;
     using StatisticsUtilities = DataStatisticsUtilities<DIMENSIONS>;
     using SampleOptional = std::optional<Sample>;
     using DoubleOptional = std::optional<double>;
@@ -81,6 +82,7 @@ protected:
             m_mean = m_sum.value() / sampleSize;
         }
     }
+
     void calculateSampleVarianceIfNeeded() { calculateVarianceIfNeeded(m_sampleVariance, m_samples.size() - 1); }
 
     void calculateSampleStandardDeviationIfNeeded() {
@@ -96,7 +98,8 @@ protected:
     void calculateVarianceIfNeeded(SampleOptional& variance, int sampleSize) {
         if (!variance) {
             if (!m_samples.empty()) {
-                Samples varianceCalculationTemp(m_samples);                calculateMeanIfNeeded();
+                Samples varianceCalculationTemp(m_samples);
+                calculateMeanIfNeeded();
                 for (Sample& sample : varianceCalculationTemp) {
                     sample = sample - m_mean.value();
                     sample = sample.calculateRaiseToPower(2);
@@ -112,7 +115,8 @@ protected:
         SampleOptional& standardDeviation, SampleOptional& variance, int sampleSize) {
         if (!standardDeviation) {
             calculateVarianceIfNeeded(variance, sampleSize);
-            Sample standardDeviationTemp(variance.value());            standardDeviationTemp = standardDeviationTemp.calculateRaiseToInversePower(2);
+            Sample standardDeviationTemp(variance.value());
+            standardDeviationTemp = standardDeviationTemp.calculateRaiseToInversePower(2);
             standardDeviation = standardDeviationTemp;
         }
     }

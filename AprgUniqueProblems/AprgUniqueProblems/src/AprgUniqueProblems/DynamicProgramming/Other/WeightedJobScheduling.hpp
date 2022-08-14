@@ -13,7 +13,8 @@ public:
     using Profit = int;
 
     struct Job {
-        Time startTime;        Time endTime;
+        Time startTime;
+        Time endTime;
         Profit profit;
     };
     using Times = std::vector<Time>;

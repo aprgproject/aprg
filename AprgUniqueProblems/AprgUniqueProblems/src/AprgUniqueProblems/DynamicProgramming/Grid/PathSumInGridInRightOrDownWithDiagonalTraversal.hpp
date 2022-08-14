@@ -14,7 +14,8 @@ public:
     using Value = int;
     using Grid = matrix::AlbaMatrix<Value>;
     using Path = std::vector<Value>;
-    using CompareFunction = std::function<bool(Value const&, Value const&)>;    using MinMaxFunction = std::function<Value(Value const&, Value const&)>;
+    using CompareFunction = std::function<bool(Value const&, Value const&)>;
+    using MinMaxFunction = std::function<Value(Value const&, Value const&)>;
     static constexpr Index UNUSED_VALUE = std::numeric_limits<Index>::max();
 
     PathSumInGridInRightOrDownWithDiagonalTraversal(Type const type, Grid const& inputGrid);

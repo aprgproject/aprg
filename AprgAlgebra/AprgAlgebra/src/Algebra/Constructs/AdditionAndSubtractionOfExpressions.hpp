@@ -17,6 +17,7 @@ public:
     TermsWithDetails getAsTermsWithDetails() const;
 
     Term getCombinedTerm();
+
     void putAsAddition(Expression const& expression);
     void putAsSubtraction(Expression const& expression);
     void putAsAddOrSubtraction(Expression const& expression, TermAssociationType const association);

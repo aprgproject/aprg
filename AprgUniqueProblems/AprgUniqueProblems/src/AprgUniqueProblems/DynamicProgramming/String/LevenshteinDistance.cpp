@@ -96,7 +96,8 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingItera
             int cost = m_string1.at(index1 - 1) == m_string2.at(index2 - 1) ? 0 : 1;
             currentCounts[index1] =
                 min(min(currentCounts.at(index1 - 1) + 1, previousCounts.at(index1) + 1),
-                    previousCounts.at(index1 - 1) + cost);        }
+                    previousCounts.at(index1 - 1) + cost);
+        }
     }
 
     Counts const& lastCurrent(previousAndCurrentCounts.at(m_string2.length() % 2));

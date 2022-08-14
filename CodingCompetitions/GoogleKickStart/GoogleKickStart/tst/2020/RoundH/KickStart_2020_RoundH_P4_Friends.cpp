@@ -25,7 +25,8 @@ namespace KickStart_2020_RoundH_P4_Friends {
 void runTestCase(int const testCaseNumber) {
     int N, Q;
     my_cin >> N >> Q;
-    const int INF = 1e9;    vector<vector<int>> dist(26, vector<int>(26, INF));
+    const int INF = 1e9;
+    vector<vector<int>> dist(26, vector<int>(26, INF));
     for (int i = 0; i < 26; i++) dist[i][i] = 0;
 
     vector<int> msks(N);
@@ -80,6 +81,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);

@@ -23,7 +23,8 @@ int getOperatorPriority(string const& operatorString) {
     int result = 0;
     if ("(" == operatorString) {
         result = 1;
-    } else if (")" == operatorString) {        result = 2;
+    } else if (")" == operatorString) {
+        result = 2;
     } else if ("+" == operatorString) {
         result = 3;
     } else if ("-" == operatorString) {

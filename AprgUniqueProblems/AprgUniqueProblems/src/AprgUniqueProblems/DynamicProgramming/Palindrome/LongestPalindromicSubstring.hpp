@@ -12,7 +12,8 @@ public:
     using Index = int;
     using Indices = std::vector<Index>;
     using IndexMatrix = matrix::AlbaMatrix<Index>;
-    using BoolMatrix = matrix::AlbaMatrix<bool>;    static constexpr Index MAX_INDEX = std::numeric_limits<Index>::max();
+    using BoolMatrix = matrix::AlbaMatrix<bool>;
+    static constexpr Index MAX_INDEX = std::numeric_limits<Index>::max();
 
     LongestPalindromicSubstring(std::string const& stringParameter);
 

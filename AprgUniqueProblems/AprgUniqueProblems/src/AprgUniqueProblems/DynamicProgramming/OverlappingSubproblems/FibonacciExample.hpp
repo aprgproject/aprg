@@ -12,7 +12,8 @@ public:
     using Number = int;
     using Numbers = std::vector<Number>;
     using NumberSet = std::set<Number>;
-    using NumberMatrix = matrix::AlbaMatrix<Number>;    static constexpr Number UNUSED_VALUE = std::numeric_limits<Number>::max();
+    using NumberMatrix = matrix::AlbaMatrix<Number>;
+    static constexpr Number UNUSED_VALUE = std::numeric_limits<Number>::max();
 
     Number getNthFibonacciUsingNaiveRecursion(Number const number) const;
     Number getNthFibonacciUsingMemoizationDP(Number const number);

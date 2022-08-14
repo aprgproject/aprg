@@ -66,6 +66,7 @@ public:
         int const leftByteInclusive, int const rightByteInclusive) const;
 
     Colors getColorTable() const;
+
     void readBitmap(std::string const& path);
 
 private:

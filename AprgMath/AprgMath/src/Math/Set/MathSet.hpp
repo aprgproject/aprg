@@ -65,7 +65,8 @@ public:
         int index = 0;
         generateFunction([&](ElementType const& element) {
             if (contains(element)) {
-                enumerateElement(descriptionStream, element, index);                index++;
+                enumerateElement(descriptionStream, element, index);
+                index++;
             }
         });
         return std::string("{... ") + descriptionStream.str() + " ...}";
@@ -161,7 +162,8 @@ private:
         int index = 0;
         for (ElementType const& elementInRoster : rosterList) {
             enumerateElement(descriptionStream, elementInRoster, index);
-            index++;        }
+            index++;
+        }
         return descriptionStream.str();
     }
 
@@ -169,7 +171,8 @@ private:
         std::stringstream& descriptionStream, ElementType const& elementInRoster, int const index) const {
         if (index == 0) {
             descriptionStream << elementInRoster;
-        } else {            descriptionStream << ", " << elementInRoster;
+        } else {
+            descriptionStream << ", " << elementInRoster;
         }
     }
 

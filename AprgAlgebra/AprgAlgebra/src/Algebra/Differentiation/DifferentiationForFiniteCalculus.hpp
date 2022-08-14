@@ -24,7 +24,8 @@ public:
     Equation differentiateMultipleTimes(Equation const& equation, int const numberOfTimes) const;
 
     Term differentiateTerm(Term const& term) const;
-    AlbaNumber differentiateConstant(Constant const&) const;    Polynomial differentiateVariable(Variable const& variable) const;
+    AlbaNumber differentiateConstant(Constant const&) const;
+    Polynomial differentiateVariable(Variable const& variable) const;
     Term differentiateMonomial(Monomial const& monomial) const;
     Term differentiatePolynomial(Polynomial const& polynomial) const;
     Term differentiateExpression(Expression const& expression) const;

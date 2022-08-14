@@ -40,7 +40,8 @@ TEST(MultipleVariableSolutionSetTest, GetNumberOfVariablesWithSolutionsWorks) {
     EXPECT_EQ(2, solutionSet.getNumberOfVariablesWithSolutions());
 }
 
-TEST(MultipleVariableSolutionSetTest, GetVariableNamesWorks) {    MultipleVariableSolutionSet solutionSet;
+TEST(MultipleVariableSolutionSetTest, GetVariableNamesWorks) {
+    MultipleVariableSolutionSet solutionSet;
     SolutionSet solutionSetForVariable;
     solutionSetForVariable.addAcceptedValue(AlbaNumber(58));
     solutionSet.addSolutionSetForVariable("a", solutionSetForVariable);

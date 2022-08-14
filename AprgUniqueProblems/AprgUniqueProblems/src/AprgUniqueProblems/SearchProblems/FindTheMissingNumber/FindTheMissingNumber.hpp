@@ -18,6 +18,7 @@ public:
     using Value = typename Values::value_type;
 
     FindTheMissingNumber() = default;
+
     Value getTheMissingNumberUsingSum(Values const& values)  // values can be unsorted because of xor
     {
         static_assert(typeHelper::isIntegralType<Value>(), "Value needs to be an integer.");

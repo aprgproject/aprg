@@ -17,6 +17,7 @@ TEST(BrentMethodTest, ConstructionWorks) {
     EXPECT_EQ(0, brentMethod2.getNumberOfIterationsExecuted());
     EXPECT_EQ(AlbaNumbers({1, 2, 3}), brentMethod2.getCoefficients());
 }
+
 TEST(BrentMethodTest, IsFinishedWorks) {
     BrentMethod brentMethod1(AlbaNumbers{});
     BrentMethod brentMethod2(AlbaNumbers{1, 4, 4});
@@ -37,7 +38,8 @@ TEST(BrentMethodTest, GetNumberOfIterationsExecutedWorks) {
     EXPECT_EQ(2, brentMethod2.getNumberOfIterationsExecuted());
 }
 
-TEST(BrentMethodTest, GetCalculationValuesWorks) {    BrentMethod brentMethod(AlbaNumbers{1, 4, 4});
+TEST(BrentMethodTest, GetCalculationValuesWorks) {
+    BrentMethod brentMethod(AlbaNumbers{1, 4, 4});
     brentMethod.resetCalculation(-4, 4);
 
     BrentMethod::CalculationValues calculationValues(brentMethod.getCalculationValues());
@@ -127,7 +129,8 @@ TEST(BrentMethodTest, ResetCalculationWorksWhenContinuouslyCalledBetweenRunning)
     EXPECT_EQ(56, brentMethod.getNumberOfIterationsExecuted());
 }
 
-TEST(BrentMethodTest, RunOneIterationWorks) {    BrentMethod brentMethod(AlbaNumbers{1, 1, -5, +3});
+TEST(BrentMethodTest, RunOneIterationWorks) {
+    BrentMethod brentMethod(AlbaNumbers{1, 1, -5, +3});
     brentMethod.resetCalculation(-4, AlbaNumber::createFraction(4, 3));
 
     cout.precision(20);
@@ -229,7 +232,8 @@ TEST(BrentMethodTest, RunWorksWithNoRealRoots) {
     EXPECT_EQ(1000, brentMethod.getNumberOfIterationsExecuted());
 }
 
-TEST(BrentMethodTest, RunWorksOnPerfectSquare) {    BrentMethod brentMethod(AlbaNumbers{1, 4, 4});
+TEST(BrentMethodTest, RunWorksOnPerfectSquare) {
+    BrentMethod brentMethod(AlbaNumbers{1, 4, 4});
     brentMethod.resetCalculation(-4, 4);
 
     brentMethod.runMaxNumberOfIterationsOrUntilFinished(1000);
@@ -240,7 +244,8 @@ TEST(BrentMethodTest, RunWorksOnPerfectSquare) {    BrentMethod brentMethod(Alba
     EXPECT_EQ(2, brentMethod.getNumberOfIterationsExecuted());
 }
 
-TEST(BrentMethodTest, RunWorksOnPerfectSquareWithACoefficient) {    BrentMethod brentMethod(AlbaNumbers{9, 6, 1});
+TEST(BrentMethodTest, RunWorksOnPerfectSquareWithACoefficient) {
+    BrentMethod brentMethod(AlbaNumbers{9, 6, 1});
     brentMethod.resetCalculation(-9, 9);
 
     brentMethod.runMaxNumberOfIterationsOrUntilFinished(1000);
@@ -251,7 +256,8 @@ TEST(BrentMethodTest, RunWorksOnPerfectSquareWithACoefficient) {    BrentMethod 
     EXPECT_EQ(26, brentMethod.getNumberOfIterationsExecuted());
 }
 
-TEST(BrentMethodTest, RunWorksOnQuadraticExample) {    BrentMethod brentMethod(AlbaNumbers{24, -2, -35});
+TEST(BrentMethodTest, RunWorksOnQuadraticExample) {
+    BrentMethod brentMethod(AlbaNumbers{24, -2, -35});
     brentMethod.resetCalculation(-35, 35);
 
     brentMethod.runMaxNumberOfIterationsOrUntilFinished(1000);
@@ -262,7 +268,8 @@ TEST(BrentMethodTest, RunWorksOnQuadraticExample) {    BrentMethod brentMethod(A
     EXPECT_EQ(47, brentMethod.getNumberOfIterationsExecuted());
 }
 
-TEST(BrentMethodTest, RunWorksOnDifferenceOfSquares) {    BrentMethod brentMethod(AlbaNumbers{1, 0, -256});
+TEST(BrentMethodTest, RunWorksOnDifferenceOfSquares) {
+    BrentMethod brentMethod(AlbaNumbers{1, 0, -256});
     brentMethod.resetCalculation(-256, 256);
 
     brentMethod.runMaxNumberOfIterationsOrUntilFinished(1000);
@@ -273,7 +280,8 @@ TEST(BrentMethodTest, RunWorksOnDifferenceOfSquares) {    BrentMethod brentMetho
     EXPECT_EQ(47, brentMethod.getNumberOfIterationsExecuted());
 }
 
-TEST(BrentMethodTest, RunWorksOnDifferenceOfCubes) {    BrentMethod brentMethod(AlbaNumbers{8, 0, 0, -27});
+TEST(BrentMethodTest, RunWorksOnDifferenceOfCubes) {
+    BrentMethod brentMethod(AlbaNumbers{8, 0, 0, -27});
     brentMethod.resetCalculation(-27, 27);
 
     brentMethod.runMaxNumberOfIterationsOrUntilFinished(1000);
@@ -284,7 +292,8 @@ TEST(BrentMethodTest, RunWorksOnDifferenceOfCubes) {    BrentMethod brentMethod(
     EXPECT_EQ(50, brentMethod.getNumberOfIterationsExecuted());
 }
 
-TEST(BrentMethodTest, RunWorksOnSumOfCubes) {    BrentMethod brentMethod(AlbaNumbers{8, 0, 0, 27});
+TEST(BrentMethodTest, RunWorksOnSumOfCubes) {
+    BrentMethod brentMethod(AlbaNumbers{8, 0, 0, 27});
     brentMethod.resetCalculation(-27, 27);
 
     brentMethod.runMaxNumberOfIterationsOrUntilFinished(1000);
@@ -295,7 +304,8 @@ TEST(BrentMethodTest, RunWorksOnSumOfCubes) {    BrentMethod brentMethod(AlbaNum
     EXPECT_EQ(50, brentMethod.getNumberOfIterationsExecuted());
 }
 
-TEST(BrentMethodTest, RunWorksOnCubicExample) {    BrentMethod brentMethod(AlbaNumbers{192, 200, -298, -315});
+TEST(BrentMethodTest, RunWorksOnCubicExample) {
+    BrentMethod brentMethod(AlbaNumbers{192, 200, -298, -315});
     brentMethod.resetCalculation(-315, 315);
 
     brentMethod.runMaxNumberOfIterationsOrUntilFinished(1000);
@@ -306,7 +316,8 @@ TEST(BrentMethodTest, RunWorksOnCubicExample) {    BrentMethod brentMethod(AlbaN
     EXPECT_EQ(57, brentMethod.getNumberOfIterationsExecuted());
 }
 
-TEST(BrentMethodTest, RunWorksOnQuarticExample_FailedExampleBasedOnInitialValues) {    BrentMethod brentMethod(AlbaNumbers{2112, -296, -5878, 409, 4095});
+TEST(BrentMethodTest, RunWorksOnQuarticExample_FailedExampleBasedOnInitialValues) {
+    BrentMethod brentMethod(AlbaNumbers{2112, -296, -5878, 409, 4095});
     brentMethod.resetCalculation(-4095, 4095);
 
     brentMethod.runMaxNumberOfIterationsOrUntilFinished(1000);
@@ -316,7 +327,8 @@ TEST(BrentMethodTest, RunWorksOnQuarticExample_FailedExampleBasedOnInitialValues
     EXPECT_EQ(1000, brentMethod.getNumberOfIterationsExecuted());
 }
 
-TEST(BrentMethodTest, RunWorksOnQuarticExample_SuccessfulExampleBasedOnInitialValues) {    BrentMethod brentMethod(AlbaNumbers{8448, -888, -11756, 409});
+TEST(BrentMethodTest, RunWorksOnQuarticExample_SuccessfulExampleBasedOnInitialValues) {
+    BrentMethod brentMethod(AlbaNumbers{8448, -888, -11756, 409});
     brentMethod.resetCalculation(-8448, -0.646933510774966);
 
     brentMethod.runMaxNumberOfIterationsOrUntilFinished(1000);
@@ -327,7 +339,8 @@ TEST(BrentMethodTest, RunWorksOnQuarticExample_SuccessfulExampleBasedOnInitialVa
     EXPECT_EQ(66, brentMethod.getNumberOfIterationsExecuted());
 }
 
-TEST(BrentMethodTest, RunWorksOnQuarticExample) {    BrentMethod brentMethod(AlbaNumbers{1, 8, 24, 32, 16});
+TEST(BrentMethodTest, RunWorksOnQuarticExample) {
+    BrentMethod brentMethod(AlbaNumbers{1, 8, 24, 32, 16});
     brentMethod.resetCalculation(-16, 16);
 
     brentMethod.runMaxNumberOfIterationsOrUntilFinished(1000);
@@ -338,7 +351,8 @@ TEST(BrentMethodTest, RunWorksOnQuarticExample) {    BrentMethod brentMethod(Alb
     EXPECT_EQ(4, brentMethod.getNumberOfIterationsExecuted());
 }
 
-TEST(BrentMethodTest, RunWorksOnPrecisionExample) {    BrentMethod brentMethod(AlbaNumbers{15, 0, 0, 2});
+TEST(BrentMethodTest, RunWorksOnPrecisionExample) {
+    BrentMethod brentMethod(AlbaNumbers{15, 0, 0, 2});
     brentMethod.resetCalculation(-15, 0);
 
     brentMethod.runMaxNumberOfIterationsOrUntilFinished(1000);
@@ -350,4 +364,5 @@ TEST(BrentMethodTest, RunWorksOnPrecisionExample) {    BrentMethod brentMethod(A
 }
 
 }  // namespace algebra
+
 }  // namespace alba

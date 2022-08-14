@@ -28,7 +28,8 @@ namespace KickStart_2019_PracticeRound_P1_NumberGuessing {
 void runTestCase(int const) {
     long long minimumValue, maximumValue;
     my_cin >> minimumValue >> maximumValue;
-    int numberOfTries;    my_cin >> numberOfTries;
+    int numberOfTries;
+    my_cin >> numberOfTries;
     int lowValue = minimumValue + 1, highValue = maximumValue;
     while (true) {
         long long m = (lowValue + highValue) / 2;
@@ -51,6 +52,7 @@ void runAllTestCases() {
         runTestCase(testCaseNumber);
     }
 }
+
 int main() {
     ios_base::sync_with_stdio(false);
     my_cin.tie(nullptr);
