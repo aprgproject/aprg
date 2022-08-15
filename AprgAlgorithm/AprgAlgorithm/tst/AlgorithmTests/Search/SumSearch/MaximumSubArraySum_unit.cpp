@@ -27,6 +27,7 @@ TEST(MaximumSubArraySumTest, GetMaximumSubArraySumWithDetailsWorksOnExample1) {
     SumSearch search(valuesToSearch);
 
     SubArrayDetailsForTest subArrayDetailsToVerify(search.getMaximumSubArraySumWithDetails());
+
     EXPECT_EQ(1, subArrayDetailsToVerify.lowIndex);
     EXPECT_EQ(5, subArrayDetailsToVerify.highIndex);
     EXPECT_EQ(10, subArrayDetailsToVerify.sum);

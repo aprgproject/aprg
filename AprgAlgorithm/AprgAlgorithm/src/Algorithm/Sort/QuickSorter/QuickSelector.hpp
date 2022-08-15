@@ -25,7 +25,8 @@ public:
             int partitionIndex = partitionAndGetPartitionIndex(valuesToSelect, lowest, highest, m_pivotType);
 
             // move lowest or highest to the partition where selectionIndex is
-            if (partitionIndex < selectionIndex) {                lowest = partitionIndex + 1;
+            if (partitionIndex < selectionIndex) {
+                lowest = partitionIndex + 1;
             } else if (selectionIndex < partitionIndex) {
                 highest = partitionIndex - 1;
             } else {

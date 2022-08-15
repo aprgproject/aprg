@@ -46,7 +46,8 @@ private:
             ++turtoise;
             if (hare != values.cend()) {
                 ++hare;
-            }        }
+            }
+        }
         return turtoise;
     }
 
@@ -70,6 +71,7 @@ private:
         result = std::move(merged);
     }
 };
+
 }  // namespace algorithm
 
 }  // namespace alba

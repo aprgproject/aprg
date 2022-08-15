@@ -36,6 +36,7 @@ private:
             mergeTwoRanges(values, firstPart, secondPart);
         }
     }
+
     ConstIterator getMiddleIterator(Values const& values) const {
         int halfSize = (values.size() + 1) / 2;
         auto middle = values.cbegin();
@@ -66,6 +67,7 @@ private:
 
     Values mergeTwoRanges(Values const& firstPart, Values const& secondPart) const {
         // this is similar with std::list::merge
+
         Values result;
         ConstIterator it1 = firstPart.cbegin(), it2 = secondPart.cbegin();
         for (; it1 != firstPart.cend() && it2 != secondPart.cend();) {
