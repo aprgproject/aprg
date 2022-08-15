@@ -39,11 +39,10 @@ public:
     double getSum() const {
         double result(0);
         for (int index = 0; index < DIMENSIONS; index++) {
-            result += m_data.at(index);
+            result += m_data[index];
         }
         return result;
     }
-
     void setValueAt(int index, double const dataSampleValue) {
         if (isIndexValid(index)) {
             m_data[index] = dataSampleValue;
