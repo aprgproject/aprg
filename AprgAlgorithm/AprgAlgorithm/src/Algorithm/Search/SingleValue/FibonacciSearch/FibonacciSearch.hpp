@@ -24,11 +24,10 @@ public:
         Index previousFibonacci(0);
         Index currentFibonacci(1);
         while (currentFibonacci < static_cast<Index>(m_sortedValues.size()) &&
-               m_sortedValues.at(currentFibonacci) < valueToCheck) {
+               m_sortedValues[currentFibonacci] < valueToCheck) {
             Index nextFibonacci = currentFibonacci + previousFibonacci;
             previousFibonacci = currentFibonacci;
-            currentFibonacci = nextFibonacci;
-        }
+            currentFibonacci = nextFibonacci;        }
 
         BinarySearchWithTwoIndices<Values> binarySearch(m_sortedValues);  // perform binary search on that block
         return binarySearch.getIndexOfValue(

@@ -88,22 +88,20 @@ private:
                 result++;
             }
             for (int c = 0; c < RADIX; c++) {
-                result += getSize(currentNodePointer->next.at(c));
+                result += getSize(currentNodePointer->next[c]);
             }
         }
-        return result;
-    }
+        return result;    }
 
     int getNumberOfNodes(NodeUniquePointer const& currentNodePointer) const {
         int result(0);
         if (currentNodePointer) {
             result++;
             for (int c = 0; c < RADIX; c++) {
-                result += getNumberOfNodes(currentNodePointer->next.at(c));
+                result += getNumberOfNodes(currentNodePointer->next[c]);
             }
         }
-        return result;
-    }
+        return result;    }
 
     Node const* get(NodeUniquePointer const& currentNodePointer, Key const& key, int const index) const {
         Node const* result(nullptr);
@@ -111,11 +109,10 @@ private:
             if (index == static_cast<int>(key.length())) {
                 result = currentNodePointer.get();
             } else {
-                result = get(currentNodePointer->next.at(key.at(index)), key, index + 1);
+                result = get(currentNodePointer->next[key[index]], key, index + 1);
             }
         }
-        return result;
-    }
+        return result;    }
 
     int getLengthOfLongestPrefix(
         Node const* const currentNodePointer, Key const& keyToCheck, int const index, int const length) const {
@@ -125,13 +122,12 @@ private:
                 currentLongestLength = index;
             }
             if (index < static_cast<int>(keyToCheck.length())) {
-                char c = keyToCheck.at(index);
+                char c = keyToCheck[index];
                 currentLongestLength = getLengthOfLongestPrefix(
-                    currentNodePointer->next.at(c).get(), keyToCheck, index + 1, currentLongestLength);
+                    currentNodePointer->next[c].get(), keyToCheck, index + 1, currentLongestLength);
             }
         }
-        return currentLongestLength;
-    }
+        return currentLongestLength;    }
 
     void collectAllKeysAtNode(
         Node const* const currentNodePointer, Key const& previousPrefix, Keys& collectedKeys) const {
@@ -142,11 +138,10 @@ private:
             }
             for (int c = 0; c < RADIX; c++) {
                 collectAllKeysAtNode(
-                    currentNodePointer->next.at(c).get(), previousPrefix + static_cast<char>(c), collectedKeys);
+                    currentNodePointer->next[c].get(), previousPrefix + static_cast<char>(c), collectedKeys);
             }
         }
     }
-
     void collectKeysThatMatchAtNode(
         Node const* const currentNodePointer, Key const& previousPrefix, Key const& patternToMatch,
         Keys& collectedKeys) const {
@@ -155,15 +150,14 @@ private:
             if (prefixLength == static_cast<int>(patternToMatch.length()) && currentNodePointer->valueUniquePointer) {
                 collectedKeys.emplace_back(previousPrefix);
             } else if (prefixLength < static_cast<int>(patternToMatch.length())) {
-                char charToMatch = patternToMatch.at(prefixLength);
+                char charToMatch = patternToMatch[prefixLength];
                 for (int c = 0; c < RADIX; c++) {
                     if ('.' == charToMatch || charToMatch == static_cast<char>(c)) {
                         collectKeysThatMatchAtNode(
-                            currentNodePointer->next.at(c).get(), previousPrefix + static_cast<char>(c), patternToMatch,
+                            currentNodePointer->next[c].get(), previousPrefix + static_cast<char>(c), patternToMatch,
                             collectedKeys);
                     }
-                }
-            }
+                }            }
         }
     }
 
@@ -174,10 +168,9 @@ private:
         if (index == static_cast<int>(key.length())) {
             currentNodePointer->valueUniquePointer = std::make_unique<Value>(value);
         } else {
-            put(currentNodePointer->next.at(key.at(index)), key, value, index + 1);
+            put(currentNodePointer->next[key[index]], key, value, index + 1);
         }
     }
-
     bool deleteBasedOnKeyAndReturnIfDeleted(NodeUniquePointer& currentNodePointer, Key const& key, int const index) {
         bool isDeleted(false);
         if (currentNodePointer) {
@@ -190,11 +183,10 @@ private:
                 }
             } else {
                 bool isASingleNextDeleted =
-                    deleteBasedOnKeyAndReturnIfDeleted(currentNodePointer->next.at(key.at(index)), key, index + 1);
+                    deleteBasedOnKeyAndReturnIfDeleted(currentNodePointer->next[key[index]], key, index + 1);
                 if (isASingleNextDeleted && isEmptyNode(currentNodePointer)) {
                     currentNodePointer.reset();
-                    isDeleted = true;
-                }
+                    isDeleted = true;                }
             }
         }
         return isDeleted;

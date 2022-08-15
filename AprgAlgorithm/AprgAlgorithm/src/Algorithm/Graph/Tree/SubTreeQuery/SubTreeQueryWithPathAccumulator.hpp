@@ -33,11 +33,10 @@ public:
         Vertex result;
         auto it = m_vertexToIndexMap.find(vertex);
         if (it != m_vertexToIndexMap.cend()) {
-            result = m_accumulatedValuesOfPaths.at(it->second);
+            result = m_accumulatedValuesOfPaths[it->second];
         }
         return result;
     }
-
 protected:
     void initializeIfNeeded() {
         if (GraphUtilities::isATree(m_graph)) {

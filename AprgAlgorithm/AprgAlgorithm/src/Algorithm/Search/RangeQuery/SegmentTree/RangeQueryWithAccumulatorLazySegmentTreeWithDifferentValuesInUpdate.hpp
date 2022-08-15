@@ -62,11 +62,10 @@ private:
         Value result{};
         performUpdateAtIndexIfNeeded(currentChild, baseLeft, baseRight);  // propagate current update before processing
         if (startInterval <= baseLeft && baseRight <= endInterval) {
-            result = b_treeValues.at(currentChild);
+            result = b_treeValues[currentChild];
         } else {
             Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
-            bool doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);
-            bool doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
+            bool doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);            bool doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
             if (doesLeftPartIntersect && doesRightPartIntersect) {
                 result = b_function(
                     getValueOnIntervalFromTopToBottom(

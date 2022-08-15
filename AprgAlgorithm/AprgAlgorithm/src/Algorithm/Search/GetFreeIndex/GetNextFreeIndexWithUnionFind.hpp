@@ -37,11 +37,10 @@ public:
 
             relativeRoots[index] = index;
             for (Index i = 0; i < index; i++) {
-                if (relativeRoots.at(i) == rootOfIndex) {
+                if (relativeRoots[i] == rootOfIndex) {
                     relativeRoots[i] = index;
                 }
-            }
-        }
+            }        }
     }
 
 private:

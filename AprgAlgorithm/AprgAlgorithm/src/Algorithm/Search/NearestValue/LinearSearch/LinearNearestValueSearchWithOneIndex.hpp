@@ -30,11 +30,10 @@ public:
         Value result{};
         Index selectedIndex(getIndexOfNearestValue(valueToCheck));
         if (selectedIndex != INVALID_INDEX) {
-            result = m_values.at(selectedIndex);
+            result = m_values[selectedIndex];
         }
         return result;
     }
-
     Index getIndexOfNearestValue(Value const& valueToCheck) {
         Index result(INVALID_INDEX);
         if (!m_values.empty()) {

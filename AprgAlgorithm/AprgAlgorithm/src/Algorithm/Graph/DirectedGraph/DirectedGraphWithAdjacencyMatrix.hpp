@@ -53,11 +53,10 @@ public:
 
         Vertices result;
         for (Vertex vertex = 0; vertex < MAX_VERTEX_VALUE; vertex++) {
-            if (isVertexIncluded.at(vertex)) {
+            if (isVertexIncluded[vertex]) {
                 result.emplace_back(vertex);
             }
-        }
-        return result;
+        }        return result;
     }
 
     Edges getEdges() const override {

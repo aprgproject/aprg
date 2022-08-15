@@ -29,11 +29,10 @@ public:
         Value result{};
         if (!m_sortedValues.empty()) {
             moveIndexesUntilCloseToValue(value);
-            result = m_sortedValues.at(getIndexOfNearestValueInBetweenTwoIndices(value));
+            result = m_sortedValues[getIndexOfNearestValueInBetweenTwoIndices(value)];
         }
         return result;
     }
-
     Index getIndexOfNearestValue(Value const& value) {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
@@ -50,26 +49,24 @@ public:
     Value getLowerValue() const {
         Value result{};
         if (!m_sortedValues.empty()) {
-            result = m_sortedValues.at(m_lowIndex);
+            result = m_sortedValues[m_lowIndex];
         }
         return result;
     }
-
     Value getHigherValue() const {
         Value result{};
         if (!m_sortedValues.empty()) {
-            result = m_sortedValues.at(m_highIndex);
+            result = m_sortedValues[m_highIndex];
         }
         return result;
     }
 
 private:
     Index getIndexOfNearestValueInBetweenTwoIndices(Value const& value) const {
-        Value deviationFromLower(mathHelper::getPositiveDelta(value, m_sortedValues.at(m_lowIndex)));
-        Value deviationFromHigher(mathHelper::getPositiveDelta(value, m_sortedValues.at(m_highIndex)));
+        Value deviationFromLower(mathHelper::getPositiveDelta(value, m_sortedValues[m_lowIndex]));
+        Value deviationFromHigher(mathHelper::getPositiveDelta(value, m_sortedValues[m_highIndex]));
         return (deviationFromLower <= deviationFromHigher) ? m_lowIndex : m_highIndex;
     }
-
     void setInitialIndexes() {
         if (!m_sortedValues.empty()) {
             m_lowIndex = 0;
@@ -100,23 +97,21 @@ private:
             // Binary search with one comparison per iteration
 
             Index middleIndex(getMidpointOfIndexes(m_lowIndex, m_highIndex));
-            Value middleValue(m_sortedValues.at(middleIndex));
+            Value middleValue(m_sortedValues[middleIndex]);
             if (value <= middleValue) {
                 m_highIndex = middleIndex;
-            } else {
-                m_lowIndex = middleIndex;
+            } else {                m_lowIndex = middleIndex;
             }
         }
     }
 
     void moveIndexesCloserWhenValueIsBeyondTheIndices(Value const& value) {
-        if (value <= m_sortedValues.at(m_lowIndex)) {
+        if (value <= m_sortedValues[m_lowIndex]) {
             m_highIndex = m_lowIndex;
-        } else if (m_sortedValues.at(m_highIndex) <= value) {
+        } else if (m_sortedValues[m_highIndex] <= value) {
             m_lowIndex = m_highIndex;
         }
     }
-
     Index m_lowIndex;
     Index m_highIndex;
     Values const& m_sortedValues;

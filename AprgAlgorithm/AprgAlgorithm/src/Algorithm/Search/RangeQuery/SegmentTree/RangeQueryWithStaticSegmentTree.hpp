@@ -86,18 +86,17 @@ protected:
                 Index treeBaseRightComplete = treeBaseRight;
                 if (Utilities::isALeftChild(treeBaseRight))  // incomplete pair
                 {
-                    m_treeValues[Utilities::getParent(treeBaseRight)] = m_treeValues.at(treeBaseRight);
+                    m_treeValues[Utilities::getParent(treeBaseRight)] = m_treeValues[treeBaseRight];
                     treeBaseRightComplete--;
                 }
                 for (Index treeIndex = treeBaseLeft; treeIndex < treeBaseRightComplete;
                      treeIndex += Utilities::NUMBER_OF_CHILDREN)  // complete pairs
                 {
                     m_treeValues[Utilities::getParent(treeIndex)] =
-                        m_function(m_treeValues.at(treeIndex), m_treeValues.at(treeIndex + 1));
+                        m_function(m_treeValues[treeIndex], m_treeValues[treeIndex + 1]);
                 }
                 treeBaseLeft = Utilities::getParent(treeBaseLeft);
-                treeBaseRight = Utilities::getParent(treeBaseRight);
-            }
+                treeBaseRight = Utilities::getParent(treeBaseRight);            }
         }
     }
 
@@ -108,26 +107,25 @@ protected:
         Index last(m_startOfChildren + end);
         if (first <= last && first < static_cast<Index>(m_treeValues.size()) &&
             last < static_cast<Index>(m_treeValues.size())) {
-            result = m_treeValues.at(first++);
+            result = m_treeValues[first++];
             while (first < last) {
                 if (Utilities::isARightChild(first)) {
                     result = m_function(
-                        result, m_treeValues.at(first++));  // move to next value (right) because current value is added
+                        result, m_treeValues[first++]);  // move to next value (right) because current value is added
                 }
                 if (Utilities::isALeftChild(last)) {
                     result = m_function(
-                        result, m_treeValues.at(last--));  // move to next value (left) because current value is added
+                        result, m_treeValues[last--]);  // move to next value (left) because current value is added
                 }
                 first = Utilities::getParent(first);
                 last = Utilities::getParent(last);
             }
             if (first == last)  // add value if it ends on the same place
             {
-                result = m_function(result, m_treeValues.at(first));
+                result = m_function(result, m_treeValues[first]);
             }
         }
-        return result;
-    }
+        return result;    }
 
     Value getValueOnIntervalFromTopToBottom(
         Index const startInterval, Index const endInterval, Index const currentChild, Index const baseLeft,
@@ -144,11 +142,10 @@ protected:
 
         Value result{};
         if (startInterval <= baseLeft && baseRight <= endInterval) {
-            result = m_treeValues.at(currentChild);
+            result = m_treeValues[currentChild];
         } else {
             Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
-            bool doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);
-            bool doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
+            bool doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);            bool doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
             if (doesLeftPartIntersect && doesRightPartIntersect) {
                 result = m_function(
                     getValueOnIntervalFromTopToBottom(
@@ -177,20 +174,19 @@ protected:
                     Index parentIndex(Utilities::getParent(treeIndex));
                     if (Utilities::isALeftChild(treeIndex)) {
                         m_treeValues[parentIndex] =
-                            m_function(m_treeValues.at(treeIndex), m_treeValues.at(treeIndex + 1));
+                            m_function(m_treeValues[treeIndex], m_treeValues[treeIndex + 1]);
                     } else {
                         m_treeValues[parentIndex] =
-                            m_function(m_treeValues.at(treeIndex - 1), m_treeValues.at(treeIndex));
+                            m_function(m_treeValues[treeIndex - 1], m_treeValues[treeIndex]);
                     }
                     treeIndex = parentIndex;
                 }
-                m_treeValues[0] = m_function(m_treeValues.at(1), m_treeValues.at(2));
+                m_treeValues[0] = m_function(m_treeValues[1], m_treeValues[2]);
             } else if (m_treeValues.size() > 1) {
-                m_treeValues[0] = m_treeValues.at(1);
+                m_treeValues[0] = m_treeValues[1];
             }
         }
     }
-
     Index m_startOfChildren;
     Values m_treeValues;
     Function m_function;

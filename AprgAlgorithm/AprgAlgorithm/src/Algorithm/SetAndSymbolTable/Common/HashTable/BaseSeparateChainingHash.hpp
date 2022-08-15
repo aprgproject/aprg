@@ -28,10 +28,9 @@ public:
 
     bool isEmpty() const override { return m_size == 0; }
 
-    bool doesContain(Key const& key) const override { return m_smallerSymbolTables.at(getHash(key)).doesContain(key); }
+    bool doesContain(Key const& key) const override { return m_smallerSymbolTables[getHash(key)].doesContain(key); }
 
     int getSize() const override { return m_size; }
-
     int getRank(Key const& key) const override {
         Keys keys(getKeys());
         return OrderedArray::getRank(key, keys);

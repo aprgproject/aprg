@@ -25,11 +25,10 @@ public:
                 std::max(total + 1, *(std::minmax_element(m_inputValues.cbegin(), m_inputValues.cend()).second));
             m_combinations.resize(newSize);
         }
-        if (m_combinations.at(total).empty()) {
+        if (m_combinations[total].empty()) {
             for (Value const inputValue : m_inputValues) {
                 if (total > inputValue) {
-                    Combinations subCombinations(getCombinationsWithSumUsingRecursion(total - inputValue));
-                    for (Combination const& subcombination : subCombinations) {
+                    Combinations subCombinations(getCombinationsWithSumUsingRecursion(total - inputValue));                    for (Combination const& subcombination : subCombinations) {
                         Combination combination(subcombination);
                         combination.emplace(inputValue);
                         m_combinations[total].emplace(combination);
@@ -39,11 +38,10 @@ public:
                 }
             }
         }
-        return m_combinations.at(total);
+        return m_combinations[total];
     }
 
-    Combinations getCombinationsWithSumUsingLoops(Value const total) {
-        // using loops
+    Combinations getCombinationsWithSumUsingLoops(Value const total) {        // using loops
         if (total >= static_cast<Value>(m_combinations.size())) {
             Value initialValue = m_combinations.size();
             Value newSize =
@@ -51,11 +49,10 @@ public:
             m_combinations.resize(newSize);
 
             for (Value const inputValue : m_inputValues) {
-                if (m_combinations.at(inputValue).empty()) {
+                if (m_combinations[inputValue].empty()) {
                     m_combinations[inputValue].emplace(Combination{inputValue});
                 }
             }
-
             for (Value partialValue = initialValue; partialValue < newSize;
                  partialValue++)  // iterate to all values with no combination (partialValue)
             {
@@ -74,11 +71,10 @@ public:
                 }
             }
         }
-        return m_combinations.at(total);
+        return m_combinations[total];
     }
 
-private:
-    Values const& m_inputValues;
+private:    Values const& m_inputValues;
     VectorOfCombinations m_combinations;  // dynamic programming
 };
 

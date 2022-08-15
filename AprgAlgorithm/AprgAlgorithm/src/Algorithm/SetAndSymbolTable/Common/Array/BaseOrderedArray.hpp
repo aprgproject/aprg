@@ -25,11 +25,10 @@ public:
         bool result(false);
         if (!isEmpty()) {
             int rank(getRank(key));
-            if (rank < m_size && m_keys.at(rank) == key) {
+            if (rank < m_size && m_keys[rank] == key) {
                 result = true;
             }
-        }
-        return result;
+        }        return result;
     }
 
     int getSize() const override { return m_size; }
@@ -39,19 +38,17 @@ public:
     Key getMinimum() const override {
         Key result{};
         if (!isEmpty()) {
-            result = m_keys.at(0);
+            result = m_keys[0];
         }
         return result;
     }
-
     Key getMaximum() const override {
         Key result{};
         if (!isEmpty()) {
-            result = m_keys.at(m_size - 1);
+            result = m_keys[m_size - 1];
         }
         return result;
     }
-
     Key selectAt(int const index) const override { return selectAt(index, m_keys); }
 
     Key getFloor(Key const& key) const override { return getFloor(key, m_keys); }
@@ -76,11 +73,10 @@ public:
         int lowIndex = 0, highIndex = keys.size() - 1;
         while (lowIndex <= highIndex) {
             int middleIndex = getMidpointOfIndexes(lowIndex, highIndex);
-            Key const& keyAtMiddleIndex(keys.at(middleIndex));
+            Key const& keyAtMiddleIndex(keys[middleIndex]);
             if (key < keyAtMiddleIndex) {
                 highIndex = middleIndex - 1;
-            } else if (key > keyAtMiddleIndex) {
-                lowIndex = middleIndex + 1;
+            } else if (key > keyAtMiddleIndex) {                lowIndex = middleIndex + 1;
             } else {
                 result = middleIndex;
                 break;
@@ -95,31 +91,28 @@ public:
     static Key selectAt(int const index, Keys const& keys) {
         Key result{};
         if (index < static_cast<int>(keys.size())) {
-            result = keys.at(index);
+            result = keys[index];
         }
         return result;
     }
-
     static Key getFloor(Key const& key, Keys const& keys) {
         Key result{};
         int rank(getRank(key, keys));
-        if (rank < static_cast<int>(keys.size()) && keys.at(rank) == key) {
+        if (rank < static_cast<int>(keys.size()) && keys[rank] == key) {
             result = key;
-        } else if (rank > 0 && rank - 1 < static_cast<int>(keys.size()) && keys.at(rank - 1) < key) {
-            result = keys.at(rank - 1);
+        } else if (rank > 0 && rank - 1 < static_cast<int>(keys.size()) && keys[rank - 1] < key) {
+            result = keys[rank - 1];
         }
         return result;
     }
-
     static Key getCeiling(Key const& key, Keys const& keys) {
         Key result{};
         int rank(getRank(key, keys));
         if (rank < static_cast<int>(keys.size())) {
-            result = keys.at(rank);
+            result = keys[rank];
         }
         return result;
     }
-
 protected:
     int m_size;
     Keys m_keys;

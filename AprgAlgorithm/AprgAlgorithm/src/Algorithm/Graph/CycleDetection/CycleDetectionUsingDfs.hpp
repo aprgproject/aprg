@@ -80,11 +80,10 @@ private:
 
     void search() {
         for (Vertex const& vertex : m_graph.getVertices()) {
-            if (VertexState::NotProcessed == m_vertexStatesMap.at(vertex)) {
+            if (VertexState::NotProcessed == m_vertexStatesMap[vertex]) {
                 searchUsingDfs(vertex);
             }
-        }
-    }
+        }    }
 
     void searchUsingDfs(Vertex const& startVertex) {
         switch (m_graph.getGraphDirectionType()) {
@@ -102,11 +101,10 @@ private:
     void searchUsingDfsWithDirectedGraph(Vertex const& startVertex) {
         m_vertexStatesMap[startVertex] = VertexState::Processing;
         for (Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(startVertex)) {
-            VertexState adjacentVertexState = m_vertexStatesMap.at(adjacentVertex);
+            VertexState adjacentVertexState = m_vertexStatesMap[adjacentVertex];
             if (SearchType::OneCycle == m_searchType &&
                 hasACycle())  // this check is needed to prune all recursion instances once cycle has been detected
-            {
-                break;
+            {                break;
             } else if (VertexState::NotProcessed == adjacentVertexState) {
                 m_vertexToPreviousVertexMap[adjacentVertex] = startVertex;
                 searchUsingDfsWithDirectedGraph(adjacentVertex);
@@ -122,11 +120,10 @@ private:
     void searchUsingDfsWithUndirectedGraph(Vertex const& startVertex, Vertex const& previousVertex) {
         m_vertexStatesMap[startVertex] = VertexState::Processing;
         for (Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(startVertex)) {
-            VertexState adjacentVertexState = m_vertexStatesMap.at(adjacentVertex);
+            VertexState adjacentVertexState = m_vertexStatesMap[adjacentVertex];
             if (SearchType::OneCycle == m_searchType &&
                 hasACycle())  // this check is needed to end all recursion instances once cycle has been detected
-            {
-                break;
+            {                break;
             } else if (VertexState::NotProcessed == adjacentVertexState) {
                 m_vertexToPreviousVertexMap[adjacentVertex] = startVertex;
                 searchUsingDfsWithUndirectedGraph(adjacentVertex, startVertex);

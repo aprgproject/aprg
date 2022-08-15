@@ -46,11 +46,10 @@ StringsSorter::GetDigitAtFunction getCharacterAtForString = [](string const& val
                                                                int const mostSignificantDigitIndex) -> int {
     int digitValue{};
     if (mostSignificantDigitIndex < static_cast<int>(value.length())) {
-        digitValue = value.at(mostSignificantDigitIndex);
+        digitValue = value[mostSignificantDigitIndex];
     }
     return digitValue;
 };
-
 StabilityCheckObjectsSorter::GetNumberOfDigitsFunction getNumberOfNibblesForStabilityCheckObject =
     [](StabilityCheckObjects const&) -> int { return 2; };
 StabilityCheckObjectsSorter::GetDigitAtFunction getNibbleAtForStabilityCheckObject =

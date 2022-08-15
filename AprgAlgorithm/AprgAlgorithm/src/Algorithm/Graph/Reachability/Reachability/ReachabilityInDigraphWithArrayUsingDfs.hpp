@@ -19,15 +19,14 @@ public:
     }
 
     bool isReachable(Vertex const& destinationVertex) const override {
-        return m_isReachableArray.at(destinationVertex);
+        return m_isReachableArray[destinationVertex];
     }
 
 private:
-    bool isNotFound(Vertex const& vertex) const { return !m_isReachableArray.at(vertex); }
+    bool isNotFound(Vertex const& vertex) const { return !m_isReachableArray[vertex]; }
 
     void initialize() {
-        // no clearing because array is brace initialized
-        traverseUsingDfs(m_sourceVertex);
+        // no clearing because array is brace initialized        traverseUsingDfs(m_sourceVertex);
     }
 
     void traverseUsingDfs(Vertex const& vertex) {
