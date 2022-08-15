@@ -39,28 +39,26 @@ size_t getLevenshteinDistance(string_view otherString, string_view basisString) 
 
         currentCounts[0] = otherIndex;  // first column
         for (size_t basisIndex = 1; basisIndex <= basisString.length(); basisIndex++) {
-            size_t cost = basisString.at(basisIndex - 1) == otherString.at(otherIndex - 1) ? 0 : 1;
+            size_t cost = basisString[basisIndex - 1] == otherString[otherIndex - 1] ? 0 : 1;
             currentCounts[basisIndex] =
-                min(min(currentCounts.at(basisIndex - 1) + 1, previousCounts.at(basisIndex) + 1),
-                    previousCounts.at(basisIndex - 1) + cost);
+                min(min(currentCounts[basisIndex - 1] + 1, previousCounts[basisIndex] + 1),
+                    previousCounts[basisIndex - 1] + cost);
         }
     }
 
-    Counts const& lastCurrent(previousAndCurrentCounts.at(otherString.length() % 2));
+    Counts const& lastCurrent(previousAndCurrentCounts[otherString.length() % 2]);
     return lastCurrent.back();
 }
-
 size_t getHammingDistance(string_view string1, string_view string2) {
     // The Hamming distance hamming(a,b) between two strings a and b of equal length is the number of positions where
     // the strings differ.
     size_t result(0);
     size_t commonLength = min(string1.length(), string2.length());
     for (size_t i = 0; i < commonLength; i++) {
-        if (string1.at(i) != string2.at(i)) {
+        if (string1[i] != string2[i]) {
             result++;
         }
-    }
-    return result;
+    }    return result;
 }
 
 size_t getNumberOfSubStrings(string_view mainString) {
@@ -101,11 +99,10 @@ int getPeriodValue(string_view mainString, string_view period) {
                 j = 0;
                 periodCount++;
             }
-            if (mainString.at(i) != period.at(j)) {
+            if (mainString[i] != period[j]) {
                 periodCount = 0;
                 break;
-            }
-        }
+            }        }
     }
     return (periodCount > 0) ? periodCount : static_cast<int>(string::npos);
 }
@@ -142,11 +139,10 @@ bool isPalindrome(string_view mainString) {
         result = true;
         size_t left(0), right(mainString.length() - 1);
         while (left < right) {
-            if (mainString.at(left++) != mainString.at(right--)) {
+            if (mainString[left++] != mainString[right--]) {
                 result = false;
                 break;
-            }
-        }
+            }        }
     }
     return result;
 }
@@ -167,11 +163,10 @@ bool isSubsequence(string_view mainString, string_view subsequence) {
 
     size_t j(0U);
     for (size_t i(0U); i < mainString.length() && j < subsequence.length(); i++) {
-        if (mainString.at(i) == subsequence.at(j)) {
+        if (mainString[i] == subsequence[j]) {
             j++;
         }
-    }
-    return j == subsequence.length();
+    }    return j == subsequence.length();
 }
 
 bool isPrefix(string_view mainString, string_view prefix) {
@@ -180,11 +175,10 @@ bool isPrefix(string_view mainString, string_view prefix) {
 
     size_t j(0U);
     for (size_t i(0U); i < mainString.length() && j < prefix.length(); i++, j++) {
-        if (mainString.at(i) != prefix.at(j)) {
+        if (mainString[i] != prefix[j]) {
             break;
         }
-    }
-    return j == prefix.length();
+    }    return j == prefix.length();
 }
 
 bool isSuffix(string_view mainString, string_view suffix) {
@@ -193,11 +187,10 @@ bool isSuffix(string_view mainString, string_view suffix) {
 
     int j = static_cast<int>(suffix.length()) - 1;
     for (int i = static_cast<int>(mainString.length()) - 1; i >= 0 && j >= 0; i--, j--) {
-        if (mainString.at(i) != suffix.at(j)) {
+        if (mainString[i] != suffix[j]) {
             break;
         }
-    }
-    return j == -1;
+    }    return j == -1;
 }
 
 bool isRotation(string_view mainString, string_view rotation) {
@@ -399,11 +392,10 @@ string getStringWithoutOpeningClosingOperators(
 string getLongestCommonPrefix(string_view first, string_view second) {
     size_t i = 0;
     for (; i < first.length() && i < second.length(); i++) {
-        if (first.at(i) != second.at(i)) {
+        if (first[i] != second[i]) {
             break;
         }
-    }
-    return string(first.substr(0, i));
+    }    return string(first.substr(0, i));
 }
 
 void copyBeforeStringAndAfterString(
