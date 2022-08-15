@@ -165,11 +165,10 @@ public:
             }
             ImplicantWithMinterm bestFinalImplicant;
             if (minCount == 1U) {
-                bestFinalImplicant = inputMintermToImplicantMap.at(mintermWithMinCount);
+                bestFinalImplicant = inputMintermToImplicantMap[mintermWithMinCount];
             } else {
                 auto it = countToImplicantMap.cend();
-                it--;
-                bestFinalImplicant = it->second;
+                it--;                bestFinalImplicant = it->second;
             }
             SetOfMinterms bestFinalImplicantMinterms(bestFinalImplicant.getMinterms());
             if (!bestFinalImplicantMinterms.empty()) {

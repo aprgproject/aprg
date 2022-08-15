@@ -247,11 +247,10 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFileWorks_HasZeroInDigitForBy
         strings entries;
         splitToStrings<SplitStringType::WithoutDelimeters>(entries, lineInFile, " ");
         if (entries.size() >= 2) {
-            MintermForTest input = convertStringToNumber<MintermForTest>(entries.at(0));
-            setInputOutput(quineMcCluskey, input, getStringWithCapitalLetters(entries.at(1)));
+            MintermForTest input = convertStringToNumber<MintermForTest>(entries[0]);
+            setInputOutput(quineMcCluskey, input, getStringWithCapitalLetters(entries[1]));
         }
     }
-
     quineMcCluskey.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     cout << "Initial computation table: \n" << quineMcCluskey.getComputationTableString() << "\n";
     quineMcCluskey.findAllCombinations();
@@ -301,13 +300,12 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_LogarithmBase2ForByte) {
         strings entries;
         splitToStrings<SplitStringType::WithoutDelimeters>(entries, lineInFile, " ");
         if (entries.size() >= 4) {
-            MintermForTest input = convertStringToNumber<MintermForTest>(entries.at(0));
-            setInputOutput(qm0, input, getStringWithCapitalLetters(entries.at(1)));
-            setInputOutput(qm1, input, getStringWithCapitalLetters(entries.at(2)));
-            setInputOutput(qm2, input, getStringWithCapitalLetters(entries.at(3)));
+            MintermForTest input = convertStringToNumber<MintermForTest>(entries[0]);
+            setInputOutput(qm0, input, getStringWithCapitalLetters(entries[1]));
+            setInputOutput(qm1, input, getStringWithCapitalLetters(entries[2]));
+            setInputOutput(qm2, input, getStringWithCapitalLetters(entries[3]));
         }
     }
-
     qm0.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     qm1.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     qm2.fillComputationalTableWithMintermsWithZeroCommonalityCount();
@@ -340,14 +338,13 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_ZeroesStartingFromMsb) {
         strings entries;
         splitToStrings<SplitStringType::WithoutDelimeters>(entries, lineInFile, " ");
         if (entries.size() >= 5) {
-            MintermForTest input = convertStringToNumber<MintermForTest>(entries.at(0));
-            setInputOutput(qm0, input, getStringWithCapitalLetters(entries.at(1)));
-            setInputOutput(qm1, input, getStringWithCapitalLetters(entries.at(2)));
-            setInputOutput(qm2, input, getStringWithCapitalLetters(entries.at(3)));
-            setInputOutput(qm3, input, getStringWithCapitalLetters(entries.at(4)));
+            MintermForTest input = convertStringToNumber<MintermForTest>(entries[0]);
+            setInputOutput(qm0, input, getStringWithCapitalLetters(entries[1]));
+            setInputOutput(qm1, input, getStringWithCapitalLetters(entries[2]));
+            setInputOutput(qm2, input, getStringWithCapitalLetters(entries[3]));
+            setInputOutput(qm3, input, getStringWithCapitalLetters(entries[4]));
         }
     }
-
     qm0.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     qm1.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     qm2.fillComputationalTableWithMintermsWithZeroCommonalityCount();
