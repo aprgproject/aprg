@@ -52,11 +52,10 @@ bool isContinuousAtWithMultipleVariablesWithDifferentApproaches(
     Term substitutedResult;
     if (!substitutionsForApproaches.empty()) {
         substitutedResult =
-            substitution.performSubstitutionTo(substitutionsForApproaches.at(0).performSubstitutionTo(term));
+            substitution.performSubstitutionTo(substitutionsForApproaches[0].performSubstitutionTo(term));
     }
     Term limitAtValue(getLimitWithMultipleVariablesWithDifferentApproaches(
-        term, variableName, valueToApproach, substitutionsForApproaches));
-    return substitutedResult == limitAtValue && isARealFiniteConstant(substitutedResult);
+        term, variableName, valueToApproach, substitutionsForApproaches));    return substitutedResult == limitAtValue && isARealFiniteConstant(substitutedResult);
 }
 
 bool isIntermediateValueTheoremSatisfied(

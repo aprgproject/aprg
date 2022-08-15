@@ -48,12 +48,11 @@ void factorizeSumOfCubesIfPossible(Polynomials& result, Polynomial const& polyno
 
 void addFactorsOfDifferenceOfSquares(Polynomials& result, Polynomial const& polynomial) {
     Monomials monomials(polynomial.getMonomialsConstReference());
-    Monomial firstMonomial(monomials.at(0));
-    Monomial secondMonomial(monomials.at(1));
+    Monomial firstMonomial(monomials[0]);
+    Monomial secondMonomial(monomials[1]);
     if (firstMonomial.getConstantConstReference() > 0 && secondMonomial.getConstantConstReference() < 0) {
         secondMonomial.multiplyNumber(-1);
-    } else if (firstMonomial.getConstantConstReference() < 0 && secondMonomial.getConstantConstReference() > 0) {
-        firstMonomial.multiplyNumber(-1);
+    } else if (firstMonomial.getConstantConstReference() < 0 && secondMonomial.getConstantConstReference() > 0) {        firstMonomial.multiplyNumber(-1);
         simplifyThenEmplaceBackIfPolynomialIsNotEmpty(result, createPolynomialFromNumber(-1));
     }
     firstMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, 2));
@@ -65,12 +64,11 @@ void addFactorsOfDifferenceOfSquares(Polynomials& result, Polynomial const& poly
 
 void addFactorsOfDifferenceOfCubes(Polynomials& result, Polynomial const& polynomial) {
     Monomials monomials(polynomial.getMonomialsConstReference());
-    Monomial firstMonomial(monomials.at(0));
-    Monomial secondMonomial(monomials.at(1));
+    Monomial firstMonomial(monomials[0]);
+    Monomial secondMonomial(monomials[1]);
     if (firstMonomial.getConstantConstReference() > 0 && secondMonomial.getConstantConstReference() < 0) {
         secondMonomial.multiplyNumber(-1);
-    } else if (firstMonomial.getConstantConstReference() < 0 && secondMonomial.getConstantConstReference() > 0) {
-        firstMonomial.multiplyNumber(-1);
+    } else if (firstMonomial.getConstantConstReference() < 0 && secondMonomial.getConstantConstReference() > 0) {        firstMonomial.multiplyNumber(-1);
         simplifyThenEmplaceBackIfPolynomialIsNotEmpty(result, createPolynomialFromNumber(-1));
     }
     firstMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, 3));
@@ -89,12 +87,11 @@ void addFactorsOfDifferenceOfCubes(Polynomials& result, Polynomial const& polyno
 
 void addFactorsOfSumOfCubes(Polynomials& result, Polynomial const& polynomial) {
     Monomials monomials(polynomial.getMonomialsConstReference());
-    Monomial firstMonomial(monomials.at(0));
-    Monomial secondMonomial(monomials.at(1));
+    Monomial firstMonomial(monomials[0]);
+    Monomial secondMonomial(monomials[1]);
     if (firstMonomial.getConstantConstReference() < 0 && secondMonomial.getConstantConstReference() < 0) {
         firstMonomial.multiplyNumber(-1);
-        secondMonomial.multiplyNumber(-1);
-        simplifyThenEmplaceBackIfPolynomialIsNotEmpty(result, createPolynomialFromNumber(-1));
+        secondMonomial.multiplyNumber(-1);        simplifyThenEmplaceBackIfPolynomialIsNotEmpty(result, createPolynomialFromNumber(-1));
     }
     firstMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, 3));
     secondMonomial.raiseToPowerNumber(AlbaNumber::createFraction(1, 3));
@@ -114,12 +111,11 @@ bool isDifferenceOfSquares(Polynomial const& polynomial) {
     bool result(false);
     Monomials monomials(polynomial.getMonomialsConstReference());
     if (monomials.size() == 2) {
-        Monomial firstMonomial(monomials.at(0));
-        Monomial secondMonomial(monomials.at(1));
+        Monomial firstMonomial(monomials[0]);
+        Monomial secondMonomial(monomials[1]);
         if (firstMonomial.getConstantConstReference() > 0 && secondMonomial.getConstantConstReference() < 0) {
             secondMonomial.multiplyNumber(-1);
-            result = isPerfectSquare(firstMonomial) && isPerfectSquare(secondMonomial);
-        } else if (firstMonomial.getConstantConstReference() < 0 && secondMonomial.getConstantConstReference() > 0) {
+            result = isPerfectSquare(firstMonomial) && isPerfectSquare(secondMonomial);        } else if (firstMonomial.getConstantConstReference() < 0 && secondMonomial.getConstantConstReference() > 0) {
             firstMonomial.multiplyNumber(-1);
             result = isPerfectSquare(firstMonomial) && isPerfectSquare(secondMonomial);
         }
@@ -131,12 +127,11 @@ bool isDifferenceOfCubes(Polynomial const& polynomial) {
     bool result(false);
     Monomials monomials(polynomial.getMonomialsConstReference());
     if (monomials.size() == 2) {
-        Monomial firstMonomial(monomials.at(0));
-        Monomial secondMonomial(monomials.at(1));
+        Monomial firstMonomial(monomials[0]);
+        Monomial secondMonomial(monomials[1]);
         if (firstMonomial.getConstantConstReference() > 0 && secondMonomial.getConstantConstReference() < 0) {
             secondMonomial.multiplyNumber(-1);
-            result = isPerfectCube(firstMonomial) && isPerfectCube(secondMonomial);
-        } else if (firstMonomial.getConstantConstReference() < 0 && secondMonomial.getConstantConstReference() > 0) {
+            result = isPerfectCube(firstMonomial) && isPerfectCube(secondMonomial);        } else if (firstMonomial.getConstantConstReference() < 0 && secondMonomial.getConstantConstReference() > 0) {
             firstMonomial.multiplyNumber(-1);
             result = isPerfectCube(firstMonomial) && isPerfectCube(secondMonomial);
         }
@@ -148,12 +143,11 @@ bool isSumOfCubes(Polynomial const& polynomial) {
     bool result(false);
     Monomials monomials(polynomial.getMonomialsConstReference());
     if (monomials.size() == 2) {
-        Monomial firstMonomial(monomials.at(0));
-        Monomial secondMonomial(monomials.at(1));
+        Monomial firstMonomial(monomials[0]);
+        Monomial secondMonomial(monomials[1]);
         if (firstMonomial.getConstantConstReference() > 0 && secondMonomial.getConstantConstReference() > 0) {
             result = isPerfectCube(firstMonomial) && isPerfectCube(secondMonomial);
-        } else if (firstMonomial.getConstantConstReference() < 0 && secondMonomial.getConstantConstReference() < 0) {
-            firstMonomial.multiplyNumber(-1);
+        } else if (firstMonomial.getConstantConstReference() < 0 && secondMonomial.getConstantConstReference() < 0) {            firstMonomial.multiplyNumber(-1);
             secondMonomial.multiplyNumber(-1);
             result = isPerfectCube(firstMonomial) && isPerfectCube(secondMonomial);
         }

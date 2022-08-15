@@ -125,11 +125,10 @@ Term getTermThatYieldsToThisGradient(
     stringHelper::strings processedCoordinates;
     stringHelper::strings allCoordinates(coordinateVariables.cbegin(), coordinateVariables.cend());
     for (size_t i = 0; isExactDifferential && i < SIZE; i++) {
-        std::string const& coordinateVariableName(coordinateVariables.at(i));
+        std::string const& coordinateVariableName(coordinateVariables[i]);
         Term termWithOtherCoordinates, termWithoutOtherCoordinates;
         retrieveWithAndWithoutOtherCoordinates(
-            termWithOtherCoordinates, termWithoutOtherCoordinates, gradient.getValueAt(i), coordinateVariableName,
-            allCoordinates);
+            termWithOtherCoordinates, termWithoutOtherCoordinates, gradient.getValueAt(i), coordinateVariableName,            allCoordinates);
         processedCoordinates.emplace_back(coordinateVariableName);
         Integration integration(coordinateVariableName);
         if (isFirst) {
@@ -189,12 +188,11 @@ Term getLineIntegral(
     SubstitutionOfVariablesToTerms substitution;
     Differentiation differentiation(linePathIntegralDetails.variableName);
     for (size_t i = 0; i < SIZE; i++) {
-        substitution.putVariableWithTerm(coordinateVariables.at(i), linePath.getValueAt(i));
-        DerivativeVariableName derivativeVariableName(1, "", coordinateVariables.at(i));
+        substitution.putVariableWithTerm(coordinateVariables[i], linePath.getValueAt(i));
+        DerivativeVariableName derivativeVariableName(1, "", coordinateVariables[i]);
         substitution.putVariableWithTerm(
             derivativeVariableName.getNameInLeibnizNotation(), differentiation.differentiate(linePath.getValueAt(i)));
-    }
-    MathVectorOfTerms<SIZE> linePathInVectorField;
+    }    MathVectorOfTerms<SIZE> linePathInVectorField;
     for (size_t i = 0; i < SIZE; i++) {
         linePathInVectorField.getValueReferenceAt(i) = substitution.performSubstitutionTo(vectorField.getValueAt(i));
     }
@@ -217,12 +215,11 @@ Term getLineIntegralIndependentOfPath(
         SubstitutionOfVariablesToValues substitutionForLowerValues;
         SubstitutionOfVariablesToValues substitutionForHigherValues;
         for (size_t i = 0; i < SIZE; i++) {
-            substitutionForLowerValues.putVariableWithValue(coordinateVariables.at(i), lowerValues.getValueAt(i));
-            substitutionForHigherValues.putVariableWithValue(coordinateVariables.at(i), higherValues.getValueAt(i));
+            substitutionForLowerValues.putVariableWithValue(coordinateVariables[i], lowerValues.getValueAt(i));
+            substitutionForHigherValues.putVariableWithValue(coordinateVariables[i], higherValues.getValueAt(i));
         }
         result = substitutionForHigherValues.performSubstitutionTo(potential) -
-                 substitutionForLowerValues.performSubstitutionTo(potential);
-    }
+                 substitutionForLowerValues.performSubstitutionTo(potential);    }
     return result;
 }
 
@@ -306,32 +303,29 @@ template <size_t SIZE>
 MathVectorOfTerms<SIZE> getGradient(Term const& term, ArrayOfStrings<SIZE> const& coordinateVariables) {
     MathVectorOfTerms<SIZE> result;
     for (size_t i = 0; i < SIZE; i++) {
-        result.getValueReferenceAt(i) = getPartialDerivative(term, coordinateVariables.at(i));
+        result.getValueReferenceAt(i) = getPartialDerivative(term, coordinateVariables[i]);
     }
     return result;
 }
-
 template <size_t SIZE>
 MathVectorOfTerms<SIZE> getDel(
     MathVectorOfTerms<SIZE> const& termVector, ArrayOfStrings<SIZE> const& coordinateVariables) {
     MathVectorOfTerms<SIZE> result(termVector);
     for (size_t i = 0; i < SIZE; i++) {
-        result.getValueReferenceAt(i) = getPartialDerivative(termVector.getValueAt(i), coordinateVariables.at(i));
+        result.getValueReferenceAt(i) = getPartialDerivative(termVector.getValueAt(i), coordinateVariables[i]);
     }
     return result;
 }
-
 template <size_t SIZE>
 MathVectorOfTerms<SIZE> getDoubleDel(
     MathVectorOfTerms<SIZE> const& termVector, ArrayOfStrings<SIZE> const& coordinateVariables) {
     MathVectorOfTerms<SIZE> result;
     for (size_t i = 0; i < SIZE; i++) {
         result.getValueReferenceAt(i) = getPartialDerivative(
-            getPartialDerivative(termVector.getValueAt(i), coordinateVariables.at(i)), coordinateVariables.at(i));
+            getPartialDerivative(termVector.getValueAt(i), coordinateVariables[i]), coordinateVariables[i]);
     }
     return result;
 }
-
 template <size_t SIZE>
 void simplifyForTermVector(MathVectorOfTerms<SIZE>& termVector) {
     for (Term& term : termVector.getValuesReference()) {

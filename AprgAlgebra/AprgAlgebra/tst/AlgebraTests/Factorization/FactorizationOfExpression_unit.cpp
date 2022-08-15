@@ -27,14 +27,13 @@ TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnMultiplicationAn
     Term termToExpect3(ln("x"));
     Term termToExpect4(createExpressionIfPossible({sin("x"), "^", -1}));
     ASSERT_EQ(4U, termsToVerify.size());
-    EXPECT_EQ(termToExpect1, termsToVerify.at(0));
-    EXPECT_EQ(termToExpect2, termsToVerify.at(1));
-    EXPECT_EQ(termToExpect3, termsToVerify.at(2));
-    EXPECT_EQ(termToExpect4, termsToVerify.at(3));
+    EXPECT_EQ(termToExpect1, termsToVerify[0]);
+    EXPECT_EQ(termToExpect2, termsToVerify[1]);
+    EXPECT_EQ(termToExpect3, termsToVerify[2]);
+    EXPECT_EQ(termToExpect4, termsToVerify[3]);
 }
 
-TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnAdditionAndSubtractionExpression) {
-    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
+TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnAdditionAndSubtractionExpression) {    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyExpressionsToFactors = true;
     ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
@@ -52,14 +51,13 @@ TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnAdditionAndSubtr
         {3, "+", Monomial(1, {{"x", 2}}), "*", cos("x"), "-", Monomial(2, {{"x", 4}}), "*", sin("x")}));
     Term termToExpect4(sin("x"));
     ASSERT_EQ(4U, termsToVerify.size());
-    EXPECT_EQ(termToExpect1, termsToVerify.at(0));
-    EXPECT_EQ(termToExpect2, termsToVerify.at(1));
-    EXPECT_EQ(termToExpect3, termsToVerify.at(2));
-    EXPECT_EQ(termToExpect4, termsToVerify.at(3));
+    EXPECT_EQ(termToExpect1, termsToVerify[0]);
+    EXPECT_EQ(termToExpect2, termsToVerify[1]);
+    EXPECT_EQ(termToExpect3, termsToVerify[2]);
+    EXPECT_EQ(termToExpect4, termsToVerify[3]);
 }
 
-TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnRaiseToPowerExpression) {
-    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
+TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnRaiseToPowerExpression) {    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyExpressionsToFactors = true;
     ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
@@ -72,12 +70,11 @@ TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnRaiseToPowerExpr
     Term termToExpect1(createExpressionIfPossible({cos("x"), "^", 17}));
     Term termToExpect2(createExpressionIfPossible({sin("x"), "^", 17}));
     ASSERT_EQ(2U, termsToVerify.size());
-    EXPECT_EQ(termToExpect1, termsToVerify.at(0));
-    EXPECT_EQ(termToExpect2, termsToVerify.at(1));
+    EXPECT_EQ(termToExpect1, termsToVerify[0]);
+    EXPECT_EQ(termToExpect2, termsToVerify[1]);
 }
 
-TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnXToTheX) {
-    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
+TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnXToTheX) {    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyExpressionsToFactors = true;
     ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
@@ -88,11 +85,10 @@ TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnXToTheX) {
 
     Term termToExpect(createExpressionIfPossible({"x", "^", "x"}));
     ASSERT_EQ(1U, termsToVerify.size());
-    EXPECT_EQ(termToExpect, termsToVerify.at(0));
+    EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
-TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksDerivativeDefinition) {
-    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
+TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksDerivativeDefinition) {    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyExpressionsToFactors = true;
     ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
@@ -110,12 +106,11 @@ TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksDerivativeDefiniti
     string stringToExpect1("deltaX");
     string stringToExpect2("(1[x^(2/3)]+(1[x^(1/3)]*((1[deltaX] + 1[x])^(1/3)))+((1[deltaX] + 1[x])^(2/3)))");
     ASSERT_EQ(2U, termsToVerify.size());
-    EXPECT_EQ(stringToExpect1, convertToString(termsToVerify.at(0)));
-    EXPECT_EQ(stringToExpect2, convertToString(termsToVerify.at(1)));
+    EXPECT_EQ(stringToExpect1, convertToString(termsToVerify[0]));
+    EXPECT_EQ(stringToExpect2, convertToString(termsToVerify[1]));
 }
 
-TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksWhenSomeAddendsAreSame) {
-    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
+TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksWhenSomeAddendsAreSame) {    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyExpressionsToFactors = true;
     ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
@@ -131,11 +126,10 @@ TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksWhenSomeAddendsAre
 
     string stringToExpect1("(1+cos(2[x])+cos(2[x])+cos(2[x])+(3*cos(2[x])*cos(2[x]))+(cos(2[x])^3))");
     ASSERT_EQ(1U, termsToVerify.size());
-    EXPECT_EQ(stringToExpect1, convertToString(termsToVerify.at(0)));
+    EXPECT_EQ(stringToExpect1, convertToString(termsToVerify[0]));
 }
 
 }  // namespace Factorization
-
 }  // namespace algebra
 
 }  // namespace alba

@@ -64,13 +64,12 @@ TEST(TermsRaiseToNumbersTest, GetTermsInMultiplicationOperationWorks) {
     Term expectedTerm2(Monomial(1, {{"y", -2}}));
     Term expectedTerm3(Monomial(1, {{"z", 3}}));
     ASSERT_EQ(3U, termsToVerify.size());
-    EXPECT_EQ(expectedTerm1, termsToVerify.at(0));
-    EXPECT_EQ(expectedTerm2, termsToVerify.at(1));
-    EXPECT_EQ(expectedTerm3, termsToVerify.at(2));
+    EXPECT_EQ(expectedTerm1, termsToVerify[0]);
+    EXPECT_EQ(expectedTerm2, termsToVerify[1]);
+    EXPECT_EQ(expectedTerm3, termsToVerify[2]);
 }
 
-TEST(TermsRaiseToNumbersTest, GetTermWithDetailsInMultiplicationAndDivisionOperationWorks) {
-    TermsRaiseToNumbers termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
+TEST(TermsRaiseToNumbersTest, GetTermWithDetailsInMultiplicationAndDivisionOperationWorks) {    TermsRaiseToNumbers termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
 
     TermsWithDetails const termsToVerify(termsRaiseToNumbers.getTermWithDetailsInMultiplicationAndDivisionOperation());
 
@@ -81,13 +80,12 @@ TEST(TermsRaiseToNumbersTest, GetTermWithDetailsInMultiplicationAndDivisionOpera
     Term expectedTerm3(Monomial(1, {{"z", 3}}));
     TermWithDetails expectedTermWithDetails3({expectedTerm3, TermAssociationType::Positive});
     ASSERT_EQ(3U, termsToVerify.size());
-    EXPECT_EQ(expectedTermWithDetails1, termsToVerify.at(0));
-    EXPECT_EQ(expectedTermWithDetails2, termsToVerify.at(1));
-    EXPECT_EQ(expectedTermWithDetails3, termsToVerify.at(2));
+    EXPECT_EQ(expectedTermWithDetails1, termsToVerify[0]);
+    EXPECT_EQ(expectedTermWithDetails2, termsToVerify[1]);
+    EXPECT_EQ(expectedTermWithDetails3, termsToVerify[2]);
 }
 
-TEST(TermsRaiseToNumbersTest, AddExponentsWorks) {
-    TermsRaiseToNumbers termsRaiseToNumbersToAdd({{"x", 1}, {"y", -2}, {"z", 3}});
+TEST(TermsRaiseToNumbersTest, AddExponentsWorks) {    TermsRaiseToNumbers termsRaiseToNumbersToAdd({{"x", 1}, {"y", -2}, {"z", 3}});
     TermsRaiseToNumbers termsRaiseToNumbers({{"x", 4}, {"y", -5}, {"z", 6}});
 
     termsRaiseToNumbers.addExponents(termsRaiseToNumbersToAdd);

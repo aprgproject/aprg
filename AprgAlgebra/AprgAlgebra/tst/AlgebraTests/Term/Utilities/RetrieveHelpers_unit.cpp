@@ -79,13 +79,12 @@ TEST(RetrieveHelpersTest, RetrieveTermsFromTermsWithDetailsWorks) {
     retrieveTermsFromTermsWithDetails(terms, termsWithDetails);
 
     ASSERT_EQ(3U, terms.size());
-    EXPECT_EQ(Term(10), terms.at(0));
-    EXPECT_EQ(Term(9), terms.at(1));
-    EXPECT_EQ(Term(11), terms.at(2));
+    EXPECT_EQ(Term(10), terms[0]);
+    EXPECT_EQ(Term(9), terms[1]);
+    EXPECT_EQ(Term(11), terms[2]);
 }
 
-TEST(RetrieveHelpersTest, RetrieveSubExpressionsAndSubFunctionsWorks) {
-    Term expesssionTerm(createExpressionIfPossible({"a", "^", 2}));
+TEST(RetrieveHelpersTest, RetrieveSubExpressionsAndSubFunctionsWorks) {    Term expesssionTerm(createExpressionIfPossible({"a", "^", 2}));
     Function functionObject(
         "functionName", expesssionTerm, [](AlbaNumber const& number) -> AlbaNumber { return number; });
     Term functionTerm(functionObject);
@@ -93,11 +92,10 @@ TEST(RetrieveHelpersTest, RetrieveSubExpressionsAndSubFunctionsWorks) {
     Terms terms(retrieveSubExpressionsAndSubFunctions(functionTerm));
 
     ASSERT_EQ(1U, terms.size());
-    EXPECT_EQ(expesssionTerm, terms.at(0));
+    EXPECT_EQ(expesssionTerm, terms[0]);
 }
 
-TEST(RetrieveHelpersTest, RetrieveSubTermsWorks) {
-    Term expesssionTerm(createExpressionIfPossible({"a", "^", 2}));
+TEST(RetrieveHelpersTest, RetrieveSubTermsWorks) {    Term expesssionTerm(createExpressionIfPossible({"a", "^", 2}));
     Function functionObject(
         "functionName", expesssionTerm, [](AlbaNumber const& number) -> AlbaNumber { return number; });
     Term functionTerm(functionObject);
@@ -105,13 +103,12 @@ TEST(RetrieveHelpersTest, RetrieveSubTermsWorks) {
     Terms terms(retrieveSubTerms(functionTerm));
 
     ASSERT_EQ(3U, terms.size());
-    EXPECT_EQ(Term(2), terms.at(0));
-    EXPECT_EQ(Term("a"), terms.at(1));
-    EXPECT_EQ(expesssionTerm, terms.at(2));
+    EXPECT_EQ(Term(2), terms[0]);
+    EXPECT_EQ(Term("a"), terms[1]);
+    EXPECT_EQ(expesssionTerm, terms[2]);
 }
 
-TEST(RetrieveHelpersTest, GetTermsWithDetailsThatSatisfiesCondition) {
-    TermsWithDetails termsWithDetails{
+TEST(RetrieveHelpersTest, GetTermsWithDetailsThatSatisfiesCondition) {    TermsWithDetails termsWithDetails{
         TermWithDetails(Term("x"), TermAssociationType::Positive),
         TermWithDetails(Term("y"), TermAssociationType::Positive),
         TermWithDetails(Term("z"), TermAssociationType::Negative)};
@@ -121,10 +118,9 @@ TEST(RetrieveHelpersTest, GetTermsWithDetailsThatSatisfiesCondition) {
         [](TermWithDetails const& termWithDetails) { return termWithDetails.hasNegativeAssociation(); });
 
     ASSERT_EQ(1U, termsWithDetailsToVerify.size());
-    EXPECT_EQ(Term("z"), getTermConstReferenceFromUniquePointer(termsWithDetailsToVerify.at(0).baseTermPointer));
-    EXPECT_EQ(TermAssociationType::Negative, termsWithDetailsToVerify.at(0).association);
+    EXPECT_EQ(Term("z"), getTermConstReferenceFromUniquePointer(termsWithDetailsToVerify[0].baseTermPointer));
+    EXPECT_EQ(TermAssociationType::Negative, termsWithDetailsToVerify[0].association);
 }
 
 }  // namespace algebra
-
 }  // namespace alba

@@ -150,11 +150,10 @@ void SubstitutionOfVariablesToTerms::putVariablesWithTerms(VariablesToTermsMap c
 
 void SubstitutionOfVariablesToTerms::putVariableWithTerm(string const& variable, Term const& term) {
     m_variableToTermsMap[variable] = term;
-    m_variableToTermsMap.at(variable).simplify();
+    m_variableToTermsMap[variable].simplify();
 }
 
-void SubstitutionOfVariablesToTerms::performSubstitutionForTermsWithAssociation(
-    TermsWithAssociation& termsWithAssociation) const {
+void SubstitutionOfVariablesToTerms::performSubstitutionForTermsWithAssociation(    TermsWithAssociation& termsWithAssociation) const {
     for (TermWithDetails& termWithDetails : termsWithAssociation.getTermsWithDetailsReference()) {
         Term& term(getTermReferenceFromUniquePointer(termWithDetails.baseTermPointer));
         term = performSubstitutionTo(term);
