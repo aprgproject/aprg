@@ -609,7 +609,8 @@ SOOSA::RangeOfDoubles SOOSA::getMinMaxCriteriaForBar(PointAndWidthPairs const& p
         OneDimensionStatistics secondGroupStatistics(twoGroupsOfSamples[1]);
         double firstSdOverMean = firstGroupStatistics.getSampleStandardDeviation().getValueAt(0) /
                                  firstGroupStatistics.getMean().getValueAt(0);
-        double secondSdOverMean = secondGroupStatistics.getSampleStandardDeviation().getValueAt(0) /                                  secondGroupStatistics.getMean().getValueAt(0);
+        double secondSdOverMean = secondGroupStatistics.getSampleStandardDeviation().getValueAt(0) /
+                                  secondGroupStatistics.getMean().getValueAt(0);
 
         continueRemoval = firstSdOverMean > m_soosaConfiguration.getAcceptableSdOverMeanDeviationForLine() ||
                           secondSdOverMean > m_soosaConfiguration.getAcceptableSdOverMeanDeviationForBar();
@@ -773,7 +774,8 @@ SOOSA::CountToEndPointIndexesMultiMap SOOSA::getHeightPointsCountToEndPointIndex
             getDistance(convertToPoint(barPointsSamples[startIndex]), convertToPoint(barPointsSamples[endIndex]));
         if (currentHeight > previousHeight &&
             currentHeight - previousHeight < getMaximumDistanceForBetweenBarHeights(previousHeight)) {
-            previousHeight = currentHeight;            heightPointsCount++;
+            previousHeight = currentHeight;
+            heightPointsCount++;
         } else {
             result.emplace(heightPointsCount, EndPointIndexes{startIndex, endIndex - 1});
             previousHeight = 0;
@@ -837,7 +839,8 @@ void SOOSA::removeBarPointsToGetConsistentHeight(
                 TwoDimensionSamples const& barPoints(listOfGroupOfBarPoints[groupIndex]);
                 if (!barPoints.empty()) {
                     double signedDeviation =
-                        getHeight(barPoints) -                        mean;  // no absolute value because only positive deviation should be removed
+                        getHeight(barPoints) -
+                        mean;  // no absolute value because only positive deviation should be removed
                     if (largestDeviation == 0 || largestDeviation < signedDeviation) {
                         isFound = true;
                         largestDeviation = signedDeviation;
@@ -867,6 +870,7 @@ void SOOSA::addAndRetainBarPointsIfPossible(
         if (groupIndex == indexToRemove) {
             TwoDimensionStatistics barPointsStatistics(barPointsSamples);
             Point center = convertToPoint(barPointsStatistics.getMean());
+
             multimap<double, Point> deviationToPointMultimap;
             for (TwoDimensionSample const& barPointsSample : barPointsSamples) {
                 Point barPoint = convertToPoint(barPointsSample);

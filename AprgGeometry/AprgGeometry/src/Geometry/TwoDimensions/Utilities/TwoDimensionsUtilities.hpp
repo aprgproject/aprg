@@ -146,6 +146,7 @@ double getArea(Polygon<numberOfVertices> const& polygon) {
     area = mathHelper::getAbsoluteValue(area) / 2;
     return area;
 }
+
 template <int numberOfCoefficients>
 Line getPolynomialTangentLineAt(PolynomialInXEqualsY<numberOfCoefficients> polynomial, double const x) {
     double slope = polynomial.getSlopeAt(x);

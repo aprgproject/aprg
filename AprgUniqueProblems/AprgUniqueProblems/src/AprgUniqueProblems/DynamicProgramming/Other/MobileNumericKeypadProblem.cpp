@@ -123,7 +123,8 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountUsingItera
             result += lastCurrent[numpadValue];
         }
     }
-    return result;}
+    return result;
+}
 
 MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountForValueUsingNaiveRecursion(
     Count const length, NumpadValue const numpadValue) const {

@@ -79,7 +79,8 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXs(
         Points points4(groupOfPointsBasedOnYValue[3]);
         result = getStartEndForXsFor4Points(points1, points2, points3, points4, interval);
     }
-    return result;}
+    return result;
+}
 
 Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor1Points(Points const& points) const {
     ListOfStartEndOfXAndY result;
@@ -88,6 +89,7 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor1Points(P
     }
     return result;
 }
+
 Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor2Points(
     Points const& points1, Points const& points2, double const interval) const {
     ListOfStartEndOfXAndY result;
@@ -99,7 +101,8 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor2Points(
         Point point23(points2[2]);
         Line line1To21(point1, point21);
         Line line1To23(point1, point23);
-        AlbaValueRange<double> rangeForY(point1.getY(), point21.getY(), interval);        rangeForY.traverse([&](double const y) {
+        AlbaValueRange<double> rangeForY(point1.getY(), point21.getY(), interval);
+        rangeForY.traverse([&](double const y) {
             result.emplace_back(line1To21.calculateXFromY(y), line1To23.calculateXFromY(y), y);
         });
     } else if (points1Size == 2 && points2Size == 2) {
@@ -109,7 +112,8 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor2Points(
         Point point22(points2[1]);
         Line line11To21(point11, point21);
         Line line12To22(point12, point22);
-        AlbaValueRange<double> rangeForY(point11.getY(), point21.getY(), interval);        rangeForY.traverse([&](double const y) {
+        AlbaValueRange<double> rangeForY(point11.getY(), point21.getY(), interval);
+        rangeForY.traverse([&](double const y) {
             result.emplace_back(line11To21.calculateXFromY(y), line12To22.calculateXFromY(y), y);
         });
     } else if (points1Size == 3 && points2Size == 1) {
@@ -118,7 +122,8 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor2Points(
         Point point2(points2[0]);
         Line line11To2(point11, point2);
         Line line13To2(point13, point2);
-        AlbaValueRange<double> rangeForY(point11.getY(), point2.getY(), interval);        rangeForY.traverse([&](double const y) {
+        AlbaValueRange<double> rangeForY(point11.getY(), point2.getY(), interval);
+        rangeForY.traverse([&](double const y) {
             result.emplace_back(line11To2.calculateXFromY(y), line13To2.calculateXFromY(y), y);
         });
     }
@@ -138,7 +143,8 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor3Points(
         Point point32(points3[1]);
         if (point1.getX() < point2.getX()) {
             Line line1To31(point1, point31);
-            Line line1To2(point1, point2);            Line line2To32(point2, point32);
+            Line line1To2(point1, point2);
+            Line line2To32(point2, point32);
             AlbaValueRange<double> rangeForY(point1.getY(), point2.getY(), interval);
             rangeForY.traverse([&](double const y) {
                 result.emplace_back(line1To31.calculateXFromY(y), line1To2.calculateXFromY(y), y);
@@ -167,7 +173,8 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor3Points(
         Point point3(points3[0]);
         Line line1To21(point1, point21);
         Line line1To22(point1, point22);
-        Line line21To3(point21, point3);        Line line22To3(point22, point3);
+        Line line21To3(point21, point3);
+        Line line22To3(point22, point3);
         AlbaValueRange<double> rangeForY(point1.getY(), point21.getY(), interval);
         rangeForY.traverse([&](double const y) {
             result.emplace_back(line1To21.calculateXFromY(y), line1To22.calculateXFromY(y), y);
@@ -183,7 +190,8 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor3Points(
         Point point3(points3[0]);
         if (point2.getX() < point3.getX()) {
             Line line11To2(point11, point2);
-            Line line12To3(point12, point3);            Line line2To3(point2, point3);
+            Line line12To3(point12, point3);
+            Line line2To3(point2, point3);
             AlbaValueRange<double> rangeForY(point11.getY(), point2.getY(), interval);
             rangeForY.traverse([&](double const y) {
                 result.emplace_back(line11To2.calculateXFromY(y), line12To3.calculateXFromY(y), y);
@@ -220,7 +228,8 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor4Points(
         Point point4(points4[0]);
         Line line1To2(point1, point2);
         Line line1To3(point1, point3);
-        Line line2To4(point2, point4);        Line line3To4(point3, point4);
+        Line line2To4(point2, point4);
+        Line line3To4(point3, point4);
         if (point2.getX() < point3.getX()) {
             AlbaValueRange<double> rangeForY(point1.getY(), point2.getY(), interval);
             rangeForY.traverse([&](double const y) {
@@ -257,5 +266,6 @@ ostream& operator<<(ostream& out, Quadrilateral const& quadrilateral) {
         << quadrilateral.m_vertices[2] << "][" << quadrilateral.m_vertices[3] << "]";
     return out;
 }
+
 }  // namespace TwoDimensions
 }  // namespace alba

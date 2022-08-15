@@ -33,7 +33,8 @@ public:
             int subTreeSizeAtSubRoot = m_subTreeSize[indexOfSubRoot];
             result.reserve(subTreeSizeAtSubRoot);
             auto start = m_verticesInDfsPreOrder.cbegin() + indexOfSubRoot;
-            auto end = m_verticesInDfsPreOrder.cbegin() + indexOfSubRoot + subTreeSizeAtSubRoot;            std::copy(start, end, std::back_inserter(result));
+            auto end = m_verticesInDfsPreOrder.cbegin() + indexOfSubRoot + subTreeSizeAtSubRoot;
+            std::copy(start, end, std::back_inserter(result));
         }
         return result;
     }

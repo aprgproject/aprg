@@ -96,7 +96,8 @@ Coordinate Board::getCoordinateFromAlgebraicNotation(string const& text) const {
         char numberChar = text[1];
         if (isAToH(letterChar) && is1To8(numberChar)) {
             result = getCorrectCoordinateFromAlgebraicNotation(letterChar - 'a', numberChar - '1');
-        }    }
+        }
+    }
     return result;
 }
 
@@ -107,6 +108,7 @@ Piece Board::getPieceAt(Coordinate const& coordinate) const {
     }
     return result;
 }
+
 Exchange Board::getExchangeAt(Coordinate const& coordinate) const {
     enum class ExchangeState { Defended, Attacked };
     constexpr int PAWN_INDEX = 0, KNIGHT_INDEX = 1, BISHOP_INDEX = 2, ROOK_INDEX = 3, QUEEN_INDEX = 4, KING_INDEX = 5,
@@ -173,7 +175,8 @@ Exchange Board::getExchangeAt(Coordinate const& coordinate) const {
             } else if (counts[di].defend == 0) {
                 di++;
             }
-        } else {            break;
+        } else {
+            break;
         }
     }
     return Exchange(exchangeValue, exchangeCount);

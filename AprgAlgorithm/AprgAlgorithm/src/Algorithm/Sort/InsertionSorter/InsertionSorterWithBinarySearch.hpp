@@ -30,7 +30,8 @@ private:
             getIndexWithGreaterValueUsingBinarySearch(valuesToSort, 0, insertIndex - 1, valuesToSort[insertIndex]);
         if (indexWithGreaterValue != INVALID_INDEX) {
             for (int swapIndex(insertIndex); swapIndex > indexWithGreaterValue; swapIndex--) {
-                std::swap(valuesToSort[swapIndex - 1], valuesToSort[swapIndex]);            }
+                std::swap(valuesToSort[swapIndex - 1], valuesToSort[swapIndex]);
+            }
         }
     }
 
@@ -43,7 +44,8 @@ private:
             Value middleValue(valuesToSort[middleIndex]);
             if (value < middleValue) {
                 result = middleIndex;
-                iHigh = middleIndex - 1;            } else  // (middleValue < value)
+                iHigh = middleIndex - 1;
+            } else  // (middleValue < value)
             {
                 iLow = middleIndex + 1;
             }

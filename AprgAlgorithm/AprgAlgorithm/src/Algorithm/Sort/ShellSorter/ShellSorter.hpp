@@ -37,7 +37,8 @@ private:
         for (int i = startingIndex; i >= skipValue && valuesToSort[i] < valuesToSort[i - skipValue];
              i -= skipValue) {
             std::swap(valuesToSort[i], valuesToSort[i - skipValue]);
-        }    }
+        }
+    }
 
     int getSkipValue(int const size) const {
         // Knuth approach. This returns: 1, 4, 13, 40, 121, 364, 1093

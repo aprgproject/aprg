@@ -28,7 +28,8 @@ bool TermsWithAssociation::operator==(TermsWithAssociation const& second) const 
             if (terms1[i] != terms2[i]) {
                 result = false;
                 break;
-            }        }
+            }
+        }
     }
     return result;
 }
@@ -46,7 +47,8 @@ bool TermsWithAssociation::operator<(TermsWithAssociation const& second) const {
             TermWithDetails const& termWithDetails2(terms2[i]);
             if (termWithDetails1 != termWithDetails2) {
                 result = termWithDetails1 < termWithDetails2;
-                break;            }
+                break;
+            }
         }
     } else {
         result = terms1.size() < terms2.size();

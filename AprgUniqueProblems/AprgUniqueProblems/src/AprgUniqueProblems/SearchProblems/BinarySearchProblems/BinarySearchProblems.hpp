@@ -35,6 +35,7 @@ public:
         }
         return result;
     }
+
     Value getNearestCeil(Values const& sortedValues, Value const& valueToCheck) {
         Value result{};
         if (!sortedValues.empty()) {
@@ -42,6 +43,7 @@ public:
         }
         return result;
     }
+
     Index getNumberOfDuplicates(Values const& sortedValues, Value const& valueToCheck) {
         // Problem Statement:
         // Given a sorted array with possible duplicate elements.
@@ -58,7 +60,8 @@ public:
             if (sortedValues[higherIndex] == valueToCheck && valueToCheck == sortedValues[lowerIndex]) {
                 result = higherIndex + 1 - lowerIndex;
             }
-        }        return result;
+        }
+        return result;
     }
 
     Index getPositionOfRotation(Values const& sortedValues) {
@@ -80,7 +83,8 @@ public:
         if (sortedValues[lowerIndex] <= sortedValues[higherIndex]) {
             result = lowerIndex;
         } else {
-            while (lowerIndex <= higherIndex) {                if (lowerIndex == higherIndex) {
+            while (lowerIndex <= higherIndex) {
+                if (lowerIndex == higherIndex) {
                     result = lowerIndex;
                     break;
                 }
@@ -88,7 +92,8 @@ public:
                 if (sortedValues[middleIndex] < sortedValues[higherIndex]) {
                     higherIndex = middleIndex;
                 } else {
-                    lowerIndex = middleIndex + 1;                }
+                    lowerIndex = middleIndex + 1;
+                }
             }
         }
         return result;
@@ -103,7 +108,8 @@ private:
             Value middleValue(sortedValues[middleIndex]);
             if (middleValue <= value) {
                 lowerIndex = middleIndex;
-            } else {                higherIndex = middleIndex;
+            } else {
+                higherIndex = middleIndex;
             }
         }
         return lowerIndex;
@@ -117,7 +123,8 @@ private:
             Value middleValue(sortedValues[middleIndex]);
             if (value <= middleValue) {
                 higherIndex = middleIndex;
-            } else {                lowerIndex = middleIndex;
+            } else {
+                lowerIndex = middleIndex;
             }
         }
         return higherIndex;

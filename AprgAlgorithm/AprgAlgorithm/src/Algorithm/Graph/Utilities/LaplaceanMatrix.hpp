@@ -34,7 +34,8 @@ LaplaceanMatrix createLaplaceanMatrix(BaseGraph<Vertex> const& graph) {
         int index2 = vertexToIndexArray[edge.second];
         result.setEntry(index1, index2, -1);
         if (isUndirectedGraph) {
-            result.setEntry(index2, index1, -1);        }
+            result.setEntry(index2, index1, -1);
+        }
     }
     return result;
 }

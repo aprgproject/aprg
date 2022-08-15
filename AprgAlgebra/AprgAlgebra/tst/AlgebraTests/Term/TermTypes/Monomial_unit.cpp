@@ -61,7 +61,8 @@ TEST(MonomialTest, CombineVariableExponentMapByMultiplicationWorks) {
     EXPECT_DOUBLE_EQ(5, variableMapToVerify2["z"].getDouble());
 }
 
-TEST(MonomialTest, CombineVariableExponentMapByDivisionWorks) {    Monomial::VariablesToExponentsMap variableMap1{{"x", 7}, {"y", 8}};
+TEST(MonomialTest, CombineVariableExponentMapByDivisionWorks) {
+    Monomial::VariablesToExponentsMap variableMap1{{"x", 7}, {"y", 8}};
     Monomial::VariablesToExponentsMap variableMap2{{"x", 1}, {"y", 8}};
     Monomial::VariablesToExponentsMap variableMap3{{"z", 5}};
 
@@ -79,7 +80,8 @@ TEST(MonomialTest, CombineVariableExponentMapByDivisionWorks) {    Monomial::Var
     EXPECT_DOUBLE_EQ(-5, variableMapToVerify2["z"].getDouble());
 }
 
-TEST(MonomialTest, EqualityOperatorWorks) {    Monomial monomial1;
+TEST(MonomialTest, EqualityOperatorWorks) {
+    Monomial monomial1;
     Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
     Monomial monomial3(-234, {{"x", 6}, {"y", -1.25}});
     Monomial monomial4(-54, {{"x", 6}});

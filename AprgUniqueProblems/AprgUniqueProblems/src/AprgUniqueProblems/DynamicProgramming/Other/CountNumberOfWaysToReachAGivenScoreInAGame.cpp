@@ -23,7 +23,8 @@ CountNumberOfWaysToReachAGivenScoreInAGame::getMinimumCostUsingIterativeDP() con
             countsPerScore[partialScore] += countsPerScore[partialScore - moveScore];
         }
     }
-    return countsPerScore.back();}
+    return countsPerScore.back();
+}
 
 CountNumberOfWaysToReachAGivenScoreInAGame::Value
 CountNumberOfWaysToReachAGivenScoreInAGame::getMinimumCostUsingCoinProblemSolutions() const {

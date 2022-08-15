@@ -56,7 +56,8 @@ NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPairByChecki
                     result = {twoCoordinates[0], twoCoordinates[1]};
                 }
             }
-        }    }
+        }
+    }
     return result;
 }
 

@@ -208,7 +208,8 @@ AlbaNumbers getRoots(RootType const rootType, Polynomial const& polynomial) {
                 Monomial secondMonomial(monomialsToCheck[1]);
                 if (isConstantOnly(secondMonomial)) {
                     AlbaNumber constant(-secondMonomial.getConstantConstReference());
-                    constant = constant / firstMonomial.getConstantConstReference();                    constant = constant ^ (AlbaNumber(1) / getMaxExponent(firstMonomial));
+                    constant = constant / firstMonomial.getConstantConstReference();
+                    constant = constant ^ (AlbaNumber(1) / getMaxExponent(firstMonomial));
 
                     if (constant.isAFiniteValue()) {
                         if (RootType::RealAndImaginaryRoots == rootType) {
@@ -234,7 +235,8 @@ Polynomial raiseBinomialToAPowerUsingBinomialExpansion(Polynomial const& binomia
         Monomial const& secondMonomial(monomials[1]);
         for (IntegerCoefficient i = 0; i <= power; i++) {
             IntegerCoefficient firstPower = i;
-            IntegerCoefficient secondPower = power - i;            Monomial firstPart(firstMonomial);
+            IntegerCoefficient secondPower = power - i;
+            Monomial firstPart(firstMonomial);
             Monomial secondPart(secondMonomial);
             firstPart.raiseToPowerNumber(AlbaNumber(firstPower));
             secondPart.raiseToPowerNumber(AlbaNumber(secondPower));

@@ -33,7 +33,8 @@ TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnMultiplicationAn
     EXPECT_EQ(termToExpect4, termsToVerify[3]);
 }
 
-TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnAdditionAndSubtractionExpression) {    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
+TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnAdditionAndSubtractionExpression) {
+    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyExpressionsToFactors = true;
     ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
@@ -57,7 +58,8 @@ TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnAdditionAndSubtr
     EXPECT_EQ(termToExpect4, termsToVerify[3]);
 }
 
-TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnRaiseToPowerExpression) {    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
+TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnRaiseToPowerExpression) {
+    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyExpressionsToFactors = true;
     ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
@@ -74,7 +76,8 @@ TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnRaiseToPowerExpr
     EXPECT_EQ(termToExpect2, termsToVerify[1]);
 }
 
-TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnXToTheX) {    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
+TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnXToTheX) {
+    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyExpressionsToFactors = true;
     ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
@@ -88,7 +91,8 @@ TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnXToTheX) {    Co
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
-TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksDerivativeDefinition) {    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
+TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksDerivativeDefinition) {
+    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyExpressionsToFactors = true;
     ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
@@ -110,7 +114,8 @@ TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksDerivativeDefiniti
     EXPECT_EQ(stringToExpect2, convertToString(termsToVerify[1]));
 }
 
-TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksWhenSomeAddendsAreSame) {    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
+TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksWhenSomeAddendsAreSame) {
+    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyExpressionsToFactors = true;
     ScopeObject scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
@@ -130,6 +135,7 @@ TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksWhenSomeAddendsAre
 }
 
 }  // namespace Factorization
+
 }  // namespace algebra
 
 }  // namespace alba

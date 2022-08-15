@@ -44,7 +44,8 @@ StringsSorter::GetDigitAtFunction getCharacterAtForString = [](string const& val
         digitValue = value[mostSignificantDigitIndex];
     }
     return digitValue;
-};StringsSorter::IsDigitFunction isDigitValidForString = [](string const& value, int const digitIndex) -> bool {
+};
+StringsSorter::IsDigitFunction isDigitValidForString = [](string const& value, int const digitIndex) -> bool {
     return digitIndex < static_cast<int>(value.length());
 };
 

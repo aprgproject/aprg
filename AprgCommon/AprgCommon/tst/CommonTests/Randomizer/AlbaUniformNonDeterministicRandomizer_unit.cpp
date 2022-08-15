@@ -49,7 +49,8 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, ResetRandomSeedWorks) {
 
 TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorks_WithinMinimumAndMaximumValues) {
     constexpr int minimumValue(0);
-    constexpr int maximumValue(9);    IntegerRandomizerForTest randomizer(minimumValue, maximumValue);
+    constexpr int maximumValue(9);
+    IntegerRandomizerForTest randomizer(minimumValue, maximumValue);
 
     for (int i = 0; i < 1000; i++) {
         auto randomValue(randomizer.getRandomValue());

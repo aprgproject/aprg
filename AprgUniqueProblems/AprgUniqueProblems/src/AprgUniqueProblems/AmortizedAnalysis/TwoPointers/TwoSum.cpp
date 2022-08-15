@@ -19,7 +19,8 @@ TwoSum::ValuesPair TwoSum::getTwoValuesWithSum(Value const targetSum) const {
             Value currentSum(m_sortedValues[lower] + m_sortedValues[higher]);
             if (currentSum == targetSum) {
                 isFound = true;
-                break;            } else if (currentSum > targetSum) {
+                break;
+            } else if (currentSum > targetSum) {
                 higher--;
             } else if (currentSum < targetSum) {
                 lower++;
@@ -30,6 +31,7 @@ TwoSum::ValuesPair TwoSum::getTwoValuesWithSum(Value const targetSum) const {
             result = {m_sortedValues[lower], m_sortedValues[higher]};
         }
     }
-    return result;}
+    return result;
+}
 
 }  // namespace alba

@@ -31,7 +31,8 @@ BoxStackingProblem::Index BoxStackingProblem::getMaximumStackedHeight() const {
             partialHeight += possibleBoxes[index].getZ();
         }
         result = *max_element(partialHeights.cbegin(), partialHeights.cend());
-    }    return result;
+    }
+    return result;
 }
 
 BoxStackingProblem::Boxes BoxStackingProblem::getBoxesWithMaximumStackedHeight() const {
@@ -72,7 +73,8 @@ BoxStackingProblem::Boxes BoxStackingProblem::getBoxesWithMaximumStackedHeight()
         result.emplace_back(possibleBoxes[traverseIndex]);
         reverse(result.begin(), result.end());
     }
-    return result;}
+    return result;
+}
 
 BoxStackingProblem::Boxes BoxStackingProblem::getAllPossibleBoxes() const {
     Boxes result;

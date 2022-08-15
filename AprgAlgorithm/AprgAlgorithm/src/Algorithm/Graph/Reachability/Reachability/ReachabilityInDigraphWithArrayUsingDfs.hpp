@@ -26,7 +26,8 @@ private:
     bool isNotFound(Vertex const& vertex) const { return !m_isReachableArray[vertex]; }
 
     void initialize() {
-        // no clearing because array is brace initialized        traverseUsingDfs(m_sourceVertex);
+        // no clearing because array is brace initialized
+        traverseUsingDfs(m_sourceVertex);
     }
 
     void traverseUsingDfs(Vertex const& vertex) {

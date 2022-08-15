@@ -35,7 +35,8 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingI
             if (m_sequence1[index1 - 1] == m_sequence2[index2 - 1]) {
                 entryResult = 1 + lengthMatrix.getEntry(index1 - 1, index2 - 1);
             } else {
-                entryResult = max(lengthMatrix.getEntry(index1 - 1, index2), lengthMatrix.getEntry(index1, index2 - 1));            }
+                entryResult = max(lengthMatrix.getEntry(index1 - 1, index2), lengthMatrix.getEntry(index1, index2 - 1));
+            }
             lengthMatrix.setEntry(index1, index2, entryResult);
         }
     }
@@ -70,6 +71,7 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingI
     Counts const& lastCurrent(previousAndCurrentCounts[(m_sequence2.size() + 1) % 2]);
     return lastCurrent.back();
 }
+
 LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingNaiveRecursion(
     Index const index1, Index const index2) const {
     if (index1 == 0 || index2 == 0) {
@@ -77,7 +79,8 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingN
     } else if (m_sequence1[index1 - 1] == m_sequence2[index2 - 1]) {
         return 1 + getLongestLengthUsingNaiveRecursion(index1 - 1, index2 - 1);
     } else {
-        return max(            getLongestLengthUsingNaiveRecursion(index1, index2 - 1),
+        return max(
+            getLongestLengthUsingNaiveRecursion(index1, index2 - 1),
             getLongestLengthUsingNaiveRecursion(index1 - 1, index2));
     }
 }
@@ -91,7 +94,8 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingM
             if (m_sequence1[index1 - 1] == m_sequence2[index2 - 1]) {
                 result = 1 + getLongestLengthUsingMemoizationDP(lengthMatrix, index1 - 1, index2 - 1);
             } else {
-                result =                    max(getLongestLengthUsingMemoizationDP(lengthMatrix, index1, index2 - 1),
+                result =
+                    max(getLongestLengthUsingMemoizationDP(lengthMatrix, index1, index2 - 1),
                         getLongestLengthUsingMemoizationDP(lengthMatrix, index1 - 1, index2));
             }
         }

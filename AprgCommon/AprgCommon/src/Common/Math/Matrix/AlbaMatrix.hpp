@@ -163,6 +163,7 @@ public:
     }
 
     MatrixData const& getMatrixData() const { return m_matrixData; }
+
     void retrieveColumn(MatrixData& column, size_t const x) const {
         column.reserve(m_numberOfRows);
         for (size_t y = 0; y < m_numberOfRows; y++) {
@@ -201,7 +202,8 @@ public:
         return m_matrixData[getMatrixIndex(x, y)];
     }
 
-    void setEntry(size_t const x, size_t const y, DataType const& value) {        assert(isInside(x, y));
+    void setEntry(size_t const x, size_t const y, DataType const& value) {
+        assert(isInside(x, y));
         m_matrixData[getMatrixIndex(x, y)] = value;
     }
 
@@ -223,6 +225,7 @@ public:
             setEntry(x, rowIndex, dataSampleValues[x]);
         }
     }
+
     void clearAndResize(size_t const numberOfColumns, size_t const numberOfRows, DataType const initialValue = {}) {
         m_numberOfColumns = numberOfColumns;
         m_numberOfRows = numberOfRows;
@@ -270,6 +273,7 @@ public:
                 tempMatrix.m_matrixData[getMatrixIndex(m_numberOfColumns + x, y, newColumns)];
         });
     }
+
     void iterateAllThroughYAndThenX(LoopFunction const& loopFunction) const {
         for (size_t y = 0; y < m_numberOfRows; y++) {
             for (size_t x = 0; x < m_numberOfColumns; x++) {

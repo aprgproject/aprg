@@ -55,7 +55,8 @@ TEST(IntegrationUtilitiesTest, GetInputForAverageValueInBetweenTwoValuesWorks) {
     EXPECT_EQ(AlbaNumber(7.76808126488466), numbersToVerify3[0]);
 }
 
-TEST(IntegrationUtilitiesTest, GetAverageValueInBetweenTwoValuesWorks) {    Term termToTest1(Monomial(1, {{"x", 1}}));
+TEST(IntegrationUtilitiesTest, GetAverageValueInBetweenTwoValuesWorks) {
+    Term termToTest1(Monomial(1, {{"x", 1}}));
     Term termToTest2(Monomial(1, {{"x", 2}}));
     Term termToTest3(Monomial(1, {{"x", 3}}));
 

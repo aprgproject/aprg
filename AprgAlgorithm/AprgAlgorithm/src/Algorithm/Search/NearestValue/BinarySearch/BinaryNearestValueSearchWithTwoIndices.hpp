@@ -33,6 +33,7 @@ public:
         }
         return result;
     }
+
     Index getIndexOfNearestValue(Value const& value) {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
@@ -53,6 +54,7 @@ public:
         }
         return result;
     }
+
     Value getHigherValue() const {
         Value result{};
         if (!m_sortedValues.empty()) {
@@ -67,6 +69,7 @@ private:
         Value deviationFromHigher(mathHelper::getPositiveDelta(value, m_sortedValues[m_highIndex]));
         return (deviationFromLower <= deviationFromHigher) ? m_lowIndex : m_highIndex;
     }
+
     void setInitialIndexes() {
         if (!m_sortedValues.empty()) {
             m_lowIndex = 0;
@@ -100,7 +103,8 @@ private:
             Value middleValue(m_sortedValues[middleIndex]);
             if (value <= middleValue) {
                 m_highIndex = middleIndex;
-            } else {                m_lowIndex = middleIndex;
+            } else {
+                m_lowIndex = middleIndex;
             }
         }
     }
@@ -112,6 +116,7 @@ private:
             m_lowIndex = m_highIndex;
         }
     }
+
     Index m_lowIndex;
     Index m_highIndex;
     Values const& m_sortedValues;

@@ -21,7 +21,8 @@ TEST(TriangleTest, GetLengthOfSidesAreCorrect) {
     EXPECT_DOUBLE_EQ(4, lengthOfSides[2]);
 }
 
-TEST(TriangleTest, GetAnglesAreCorrect) {    Triangle triangle(Point(0, 0), Point(0, 4), Point(4, 0));
+TEST(TriangleTest, GetAnglesAreCorrect) {
+    Triangle triangle(Point(0, 0), Point(0, 4), Point(4, 0));
     AlbaAngles angles(triangle.getAnglesAtVertices());
 
     ASSERT_EQ(3U, angles.size());
@@ -30,7 +31,8 @@ TEST(TriangleTest, GetAnglesAreCorrect) {    Triangle triangle(Point(0, 0), Poin
     EXPECT_DOUBLE_EQ(45, angles[2].getDegrees());
 }
 
-TEST(TriangleTest, GetSumOfAnglesIsCorrect) {    Triangle triangle(Point(0, 0), Point(0, 4), Point(4, 0));
+TEST(TriangleTest, GetSumOfAnglesIsCorrect) {
+    Triangle triangle(Point(0, 0), Point(0, 4), Point(4, 0));
 
     EXPECT_DOUBLE_EQ(180, triangle.getSumOfAngles().getDegrees());
 }
@@ -97,4 +99,5 @@ TEST(TriangleTest, GetPointsWorks) {
 }
 
 }  // namespace TwoDimensions
+
 }  // namespace alba

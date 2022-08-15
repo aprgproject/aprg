@@ -228,7 +228,8 @@ TEST(TwoDimensionsUtilitiesTest, GetIntersectionsOfParabolaAndLineWorksOnParabol
     EXPECT_EQ(Point(4.25, 0.8125), points[1]);
 }
 
-TEST(TwoDimensionsUtilitiesTest, GetIntersectionsOfParabolaAndLineWorksOnParabolaWithPolynomialY) {    Parabola<ParabolaOrientation::PolynomialY> parabola(1, -5, 4);
+TEST(TwoDimensionsUtilitiesTest, GetIntersectionsOfParabolaAndLineWorksOnParabolaWithPolynomialY) {
+    Parabola<ParabolaOrientation::PolynomialY> parabola(1, -5, 4);
     Line line(Point(-0.25, 0), Point(0, 1));
 
     Points points(getIntersectionsOfParabolaAndLine(parabola, line));
@@ -238,7 +239,8 @@ TEST(TwoDimensionsUtilitiesTest, GetIntersectionsOfParabolaAndLineWorksOnParabol
     EXPECT_EQ(Point(0, 1), points[1]);
 }
 
-TEST(TwoDimensionsUtilitiesTest, PopNearestPointWorks) {    Points points;
+TEST(TwoDimensionsUtilitiesTest, PopNearestPointWorks) {
+    Points points;
     points.emplace_back(4, 4);
     points.emplace_back(1, 1);
     points.emplace_back(3, 3);
@@ -414,7 +416,8 @@ TEST(TwoDimensionsUtilitiesTest, PointsInParabolaCanBeConnected) {
     EXPECT_EQ(Point(2, 11), connectedPoints[10]);
 }
 
-TEST(TwoDimensionsUtilitiesTest, GetConvexHullPointsUsingGrahamScanWorks) {    Points inputPoints{{-7, 8}, {-4, 6},  {2, 6},  {6, 4},   {8, 6},   {7, -2}, {4, -6},  {8, -7}, {0, 0},
+TEST(TwoDimensionsUtilitiesTest, GetConvexHullPointsUsingGrahamScanWorks) {
+    Points inputPoints{{-7, 8}, {-4, 6},  {2, 6},  {6, 4},   {8, 6},   {7, -2}, {4, -6},  {8, -7}, {0, 0},
                        {3, -2}, {6, -10}, {0, -6}, {-9, -5}, {-8, -2}, {-8, 0}, {-10, 3}, {-2, 2}, {-10, 4}};
     Points actualPoints(getConvexHullPointsUsingGrahamScan(inputPoints));
 
@@ -508,7 +511,8 @@ TEST(TwoDimensionsUtilitiesTest, AddPointIfInsideTwoPointsWorks) {
     EXPECT_EQ(Point(1, 1), points[2]);
 }
 
-TEST(TwoDimensionsUtilitiesTest, GetPointsFromTwoPointsUsingALineWithoutLastPointWorks) {    Points pointsWithoutLastPoint;
+TEST(TwoDimensionsUtilitiesTest, GetPointsFromTwoPointsUsingALineWithoutLastPointWorks) {
+    Points pointsWithoutLastPoint;
     savePointsFromTwoPointsUsingALineWithoutLastPoint(pointsWithoutLastPoint, Point(0, 0), Point(-5, -5), 1);
 
     ASSERT_EQ(5U, pointsWithoutLastPoint.size());
@@ -519,7 +523,8 @@ TEST(TwoDimensionsUtilitiesTest, GetPointsFromTwoPointsUsingALineWithoutLastPoin
     EXPECT_EQ(Point(-4, -4), pointsWithoutLastPoint[4]);
 }
 
-TEST(TwoDimensionsUtilitiesTest, TraverseCircleAreaBetweenTwoRadiusWorks) {    Points pointsInAreaTraversal;
+TEST(TwoDimensionsUtilitiesTest, TraverseCircleAreaBetweenTwoRadiusWorks) {
+    Points pointsInAreaTraversal;
 
     traverseCircleAreaBetweenTwoRadius(
         Point(3, 3), 1, 2, 1, [&](Point const& pointInArea) { pointsInAreaTraversal.emplace_back(pointInArea); });
@@ -536,4 +541,5 @@ TEST(TwoDimensionsUtilitiesTest, TraverseCircleAreaBetweenTwoRadiusWorks) {    P
 }
 
 }  // namespace TwoDimensions
+
 }  // namespace alba

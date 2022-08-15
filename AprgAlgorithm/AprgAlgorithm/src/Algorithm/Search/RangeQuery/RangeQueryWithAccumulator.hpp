@@ -37,7 +37,8 @@ public:
                 result = m_partialResults[end];
             }
         }
-        return result;    }
+        return result;
+    }
 
 private:
     void initialize(Values const& valuesToCheck) {

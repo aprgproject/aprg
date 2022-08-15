@@ -37,6 +37,7 @@ private:
             } while (itLast != valuesToSort.begin());
         }
     }
+
     void sortWithTwoLoops(Values& valuesToSort) const {
         // Based from https://en.wikipedia.org/wiki/Bubble_sort#Optimizing_bubble_sort
         if (!valuesToSort.empty()) {

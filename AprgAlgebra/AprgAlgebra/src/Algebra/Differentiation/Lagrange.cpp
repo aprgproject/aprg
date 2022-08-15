@@ -45,6 +45,7 @@ Term getTermWithLagrangeFunctions(
     }
     return result;
 }
+
 strings getLagrangeMultiplierNames(int const size) {
     strings result;
     for (int i = 0; i < size; i++) {

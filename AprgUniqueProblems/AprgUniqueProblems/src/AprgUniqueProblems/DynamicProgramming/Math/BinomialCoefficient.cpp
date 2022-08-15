@@ -94,7 +94,8 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingItera
                 partialValues[k] += partialValues[k - 1];
             }
         }
-        result = partialValues.back();    }
+        result = partialValues.back();
+    }
     return result;
 }
 BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingGcf() const {

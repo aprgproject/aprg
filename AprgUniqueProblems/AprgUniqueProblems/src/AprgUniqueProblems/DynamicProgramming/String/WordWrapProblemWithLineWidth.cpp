@@ -79,7 +79,8 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
                     possibleCost += (lastWordIndex + 1 < numberOfWords) ? costsIfFirstWord[lastWordIndex + 1]
                                                                         : 0;  // add cost of next lines
                     costIfFirstWord = min(costIfFirstWord, possibleCost);
-                }            }
+                }
+            }
         }
         result = costsIfFirstWord.front();
     }
@@ -94,7 +95,8 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
         Index wordLength(m_words[wordIndex].length());
         if (wordLength <= m_maxLineLength) {
             Index lastLength(recursionDetails.lineLengths.back());
-            if (lastLength + 1 + wordLength <= m_maxLineLength) {                // try to put word on last line
+            if (lastLength + 1 + wordLength <= m_maxLineLength) {
+                // try to put word on last line
                 RecursionDetails currentDetails(recursionDetails);
                 currentDetails.lineLengths.back() += 1 + wordLength;
                 result = min(result, getOptimizedCostUsingNaiveRecursion(currentDetails, wordIndex + 1));

@@ -166,6 +166,7 @@ TermsRaiseToNumbers getFactorizedItemsForAdditionAndSubtraction(
     }
     return getFactorizedItemsBasedFromCollectedData(constantGcf, commonNonConstantFactors, outerAddends);
 }
+
 void putRemainingConstantFactorAsAnInnerMultiplier(
     TermsWithDetails& innerMultipliers, AlbaNumber const& constantFactorOfOriginalAddend,
     AlbaNumber const& constantGcf) {

@@ -34,7 +34,8 @@ public:
                 stringOutput += wholeInputString[wholeInputString.length() - 1];
             }
         }
-        writer.writeStringData(stringOutput);    }
+        writer.writeStringData(stringOutput);
+    }
 
     void decode(std::istream& input, std::ostream& output) {
         AlbaStreamBitReader reader(input);
@@ -52,7 +53,8 @@ public:
                     possibleOutputs[index] = prefix[index] + possibleOutputs[index];  // add prefixes
                 }
                 std::sort(
-                    possibleOutputs.begin(),                    possibleOutputs.end());  // sort outputs, possible optimization to use radix sort here
+                    possibleOutputs.begin(),
+                    possibleOutputs.end());  // sort outputs, possible optimization to use radix sort here
             }
             auto it = std::find_if(
                 possibleOutputs.cbegin(), possibleOutputs.cend(),

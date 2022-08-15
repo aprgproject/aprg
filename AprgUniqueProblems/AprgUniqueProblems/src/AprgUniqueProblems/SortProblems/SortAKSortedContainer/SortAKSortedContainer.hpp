@@ -29,7 +29,8 @@ public:
                 pq.push(valuesToSort[newPqIndex]);
             }
 
-            while (!pq.empty()) {                valuesToSort[sortedIndex++] = pq.top();
+            while (!pq.empty()) {
+                valuesToSort[sortedIndex++] = pq.top();
                 pq.pop();
             }
         }

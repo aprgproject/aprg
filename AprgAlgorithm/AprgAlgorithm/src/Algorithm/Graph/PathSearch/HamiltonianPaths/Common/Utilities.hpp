@@ -52,7 +52,8 @@ bool hasHamiltonianPathBecauseOfOreTheorem(BaseGraph<Vertex> const& graph) {
                 bool isOreSatisfied = vertexToDegreeMap[vertex1] + vertexToDegreeMap[vertex2] >= numberOfVertices;
                 if (!isOreSatisfied) {
                     return false;
-                }            }
+                }
+            }
         }
     }
     return true;

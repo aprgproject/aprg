@@ -37,6 +37,7 @@ public:
         }
         return result;
     }
+
     int getDistanceBetweenVertices(Vertex const& vertex1, Vertex const& vertex2) const {
         int result{};
         auto it1 = m_vertexToFirstIndexMap.find(vertex1);
@@ -49,6 +50,7 @@ public:
         }
         return result;
     }
+
 private:
     int getLowestCommonAncestorIndex(int const vertexIndex1, int const vertexIndex2) const {
         int result = vertexIndex1;
@@ -57,7 +59,8 @@ private:
             int currentDepth(m_depths[i]);
             if (minimumDepth > currentDepth) {
                 minimumDepth = currentDepth;
-                result = i;            }
+                result = i;
+            }
         }
         return result;
     }

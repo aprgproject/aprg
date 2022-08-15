@@ -30,7 +30,8 @@ private:
             bool isAlreadySorted(valuesToSort[middle] < valuesToSort[middle + 1]);
             if (!isAlreadySorted) {
                 mergeTheTwoSortedParts(valuesToSort, auxiliary, lowest, middle, highest);  // merge the two sorted parts
-            }        }
+            }
+        }
     }
 };
 

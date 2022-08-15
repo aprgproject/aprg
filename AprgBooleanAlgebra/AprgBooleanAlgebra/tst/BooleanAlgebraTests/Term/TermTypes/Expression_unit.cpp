@@ -37,7 +37,8 @@ TEST(ExpressionTest, ConstructionWorks) {
     EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(termsToVerify4[1].baseTermPointer));
 }
 
-TEST(ExpressionTest, ExpressionThatIsDefaultConstructedHasIsSimplifiedFlagNotSet) {    Expression expression;
+TEST(ExpressionTest, ExpressionThatIsDefaultConstructedHasIsSimplifiedFlagNotSet) {
+    Expression expression;
 
     EXPECT_FALSE(expression.isSimplified());
 }
@@ -180,7 +181,8 @@ TEST(ExpressionTest, GetWrappedTermsWorks) {
     EXPECT_EQ(Term("y"), getTermConstReferenceFromUniquePointer(wrappedTermsToVerify[1].baseTermPointer));
 }
 
-TEST(ExpressionTest, GetDebugStringWorks) {    Expression expression1;
+TEST(ExpressionTest, GetDebugStringWorks) {
+    Expression expression1;
     Expression expression2(createExpressionIfPossible({true, "&", "x", "|", "y"}));
     Expression expression3;
     expression3.putTermWithAndOperationIfNeeded(Term(true));
@@ -243,7 +245,8 @@ TEST(ExpressionTest, PutTermWorks) {
     EXPECT_EQ(Term("d"), getTermConstReferenceFromUniquePointer(termsToVerify[3].baseTermPointer));
 }
 
-TEST(ExpressionTest, PutTermWithOperationLevelWorks) {    Expression expressionToTest;
+TEST(ExpressionTest, PutTermWithOperationLevelWorks) {
+    Expression expressionToTest;
 
     expressionToTest.putTerm(Term("a"), OperatorLevel::And);
     expressionToTest.putTerm(Term("b"), OperatorLevel::Or);
@@ -530,7 +533,8 @@ TEST(ExpressionTest, PutWrappedTermWorks) {
     EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(termsToVerify[2].baseTermPointer));
 }
 
-TEST(ExpressionTest, PutWrappedTermsWorks) {    Expression expressionToTest;
+TEST(ExpressionTest, PutWrappedTermsWorks) {
+    Expression expressionToTest;
     WrappedTerms wrappedTerms;
     wrappedTerms.emplace_back(Term(true));
     wrappedTerms.emplace_back(Term(false));
@@ -545,7 +549,8 @@ TEST(ExpressionTest, PutWrappedTermsWorks) {    Expression expressionToTest;
     EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(termsToVerify[2].baseTermPointer));
 }
 
-TEST(ExpressionTest, SetWorks) {    Expression expression;
+TEST(ExpressionTest, SetWorks) {
+    Expression expression;
     WrappedTerms wrappedTerms{Term(true), Term(false)};
 
     expression.set(OperatorLevel::And, wrappedTerms);

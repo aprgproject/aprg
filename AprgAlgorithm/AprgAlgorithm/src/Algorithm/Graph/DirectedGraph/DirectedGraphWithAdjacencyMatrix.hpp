@@ -56,7 +56,8 @@ public:
             if (isVertexIncluded[vertex]) {
                 result.emplace_back(vertex);
             }
-        }        return result;
+        }
+        return result;
     }
 
     Edges getEdges() const override {

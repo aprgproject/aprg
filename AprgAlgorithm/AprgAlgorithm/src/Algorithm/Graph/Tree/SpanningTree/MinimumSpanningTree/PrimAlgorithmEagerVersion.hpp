@@ -70,7 +70,8 @@ private:
                     weightForAdjacentVertex < m_vertexToEdgeWithMinimumWeightMap[adjacentVertex].weight) {
                     saveVertexAndEdgeOfLowestWeight(vertex, adjacentVertex, weightForAdjacentVertex);
                 }
-            }        }
+            }
+        }
     }
 
     void saveVertexAndEdgeOfLowestWeight(

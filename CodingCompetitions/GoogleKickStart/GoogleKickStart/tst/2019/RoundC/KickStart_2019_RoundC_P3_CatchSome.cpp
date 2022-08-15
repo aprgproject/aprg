@@ -61,7 +61,8 @@ void runTestCase(int const testCaseNumber) {
         colorDetails[colorDetailsIndex].distances.emplace_back(positionsOfDogs[i]);
     }
     for (int i = 0; i < numberOfColors; i++) {
-        Distances& distances(colorDetails[i].distances);        sort(distances.begin(), distances.end());
+        Distances& distances(colorDetails[i].distances);
+        sort(distances.begin(), distances.end());
     }
 
     constexpr int MAX_DISTANCE = INT_MAX / 2;
@@ -85,7 +86,8 @@ void runTestCase(int const testCaseNumber) {
                     int distance(distances[currentNumberOfObserves - 1]);
                     int& savedTimeWithLast(savedTimesWithLast[getIndex(currentNumberOfObserves, 0)]);
                     int& savedTimeWithoutLast(savedTimesWithoutLast[getIndex(currentNumberOfObserves, 0)]);
-                    savedTimeWithLast = min(savedTimeWithLast, distance);                    savedTimeWithoutLast = min(savedTimeWithoutLast, 2 * distance);
+                    savedTimeWithLast = min(savedTimeWithLast, distance);
+                    savedTimeWithoutLast = min(savedTimeWithoutLast, 2 * distance);
                 }
             } else {
                 int distanceIndexLimit = min(currentNumberOfObserves, (int)distances.size());
@@ -94,6 +96,7 @@ void runTestCase(int const testCaseNumber) {
                     int possibleNumberOfObserves = distanceIndex + 1;
                     int& savedTimeWithLast(savedTimesWithLast[getIndex(currentNumberOfObserves, colorIndex)]);
                     int& savedTimeWithoutLast(savedTimesWithoutLast[getIndex(currentNumberOfObserves, colorIndex)]);
+
                     int previousWithNoLast = savedTimesWithoutLast.at(
                         getIndex(currentNumberOfObserves - possibleNumberOfObserves, colorIndex - 1));
                     int previousWithLast = savedTimesWithLast.at(
@@ -113,6 +116,7 @@ void runTestCase(int const testCaseNumber) {
     int minimumTime = savedTimesWithLast[getIndex(targetNumberOfObserves, numberOfColors - 1)];
     my_cout << "Case #" << testCaseNumber << ": " << minimumTime << '\n';
 }
+
 void runAllTestCases() {
     int numberOfTestCases;
     my_cin >> numberOfTestCases;

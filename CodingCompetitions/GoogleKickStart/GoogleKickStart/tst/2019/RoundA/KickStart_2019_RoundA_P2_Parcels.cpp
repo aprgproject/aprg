@@ -90,7 +90,8 @@ bool doAllDistancesFitsOnTheDistanceLimit(vector<int> const& distanceGrid, int c
             if (distanceGrid[getIndex(x, y)] > distanceLimit) {
                 plusMaxLimit = min(plusMaxLimit, x + y + distanceLimit);
                 plusMinLimit = max(plusMinLimit, x + y - distanceLimit);
-                minusMaxLimit = min(minusMaxLimit, x - y + distanceLimit);                minusMinLimit = max(minusMinLimit, x - y - distanceLimit);
+                minusMaxLimit = min(minusMaxLimit, x - y + distanceLimit);
+                minusMinLimit = max(minusMinLimit, x - y - distanceLimit);
                 noCellIsBeyondTheLimit = false;
             }
         }
@@ -123,7 +124,8 @@ void runTestCase(int const testCaseNumber) {
             bool isDeliveryOffice = (bits[x] != '0');
             if (isDeliveryOffice) {
                 deliveryOffices.emplace_back(x, y);
-            }        }
+            }
+        }
     }
 
     vector<int> distanceGrid(rows * columns, INT_MAX);

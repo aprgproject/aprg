@@ -27,7 +27,8 @@ public:
                m_sortedValues[currentFibonacci] < valueToCheck) {
             Index nextFibonacci = currentFibonacci + previousFibonacci;
             previousFibonacci = currentFibonacci;
-            currentFibonacci = nextFibonacci;        }
+            currentFibonacci = nextFibonacci;
+        }
 
         BinarySearchWithTwoIndices<Values> binarySearch(m_sortedValues);  // perform binary search on that block
         return binarySearch.getIndexOfValue(

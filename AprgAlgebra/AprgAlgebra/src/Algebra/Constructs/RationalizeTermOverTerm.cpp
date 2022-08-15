@@ -75,6 +75,7 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomial(
         retrieveTermsForRationalizationForPolynomial(rationalizedTerm, multiplier, firstMonomial, secondMonomial);
     }
 }
+
 void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomial(
     Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial) const {
     AlbaNumber gcfOfExponents = getGreatestCommonFactor(
@@ -132,7 +133,8 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpression(
             TermWithDetails const& secondTermWithDetails(termsWithDetails[1]);
             retrieveTermsForRationalizationForExpression(
                 rationalizedTerm, multiplier, firstTermWithDetails, secondTermWithDetails);
-        }    }
+        }
+    }
 }
 
 void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpression(

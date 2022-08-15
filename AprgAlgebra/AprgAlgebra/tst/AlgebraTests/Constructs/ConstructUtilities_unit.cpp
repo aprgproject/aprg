@@ -81,6 +81,7 @@ TEST(ConstructUtilitiesTest, CreateTermsOverTermsFromTermWorksForNonExpression) 
     Terms const& denominatorsToVerify(termsOverTerms.getDenominators());
     EXPECT_TRUE(denominatorsToVerify.empty());
 }
+
 TEST(ConstructUtilitiesTest, CreateTermsOverTermsFromTermWorksForNonMultiplicationDivisionExpression) {
     Term nonMultiplicationDivisionExpressionTerm(createExpressionIfPossible({"x", "^", "x"}));
 
@@ -92,6 +93,7 @@ TEST(ConstructUtilitiesTest, CreateTermsOverTermsFromTermWorksForNonMultiplicati
     Terms const& denominatorsToVerify(termsOverTerms.getDenominators());
     EXPECT_TRUE(denominatorsToVerify.empty());
 }
+
 TEST(ConstructUtilitiesTest, CreateTermsOverTermsFromTermWorksForMultiplicationDivisionExpression) {
     Term multiplicationDivisionExpressionTerm(createExpressionIfPossible({"x", "/", "y"}));
 
@@ -105,7 +107,8 @@ TEST(ConstructUtilitiesTest, CreateTermsOverTermsFromTermWorksForMultiplicationD
     EXPECT_EQ(Term("y"), denominatorsToVerify[0]);
 }
 
-TEST(ConstructUtilitiesTest, CreateTermRaiseToANumberFromTermWorksForNonMonomialOrExpression) {    Term nonMonomialOrExpressionTerm("x");
+TEST(ConstructUtilitiesTest, CreateTermRaiseToANumberFromTermWorksForNonMonomialOrExpression) {
+    Term nonMonomialOrExpressionTerm("x");
 
     TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromTerm(nonMonomialOrExpressionTerm));
 

@@ -61,6 +61,7 @@ CountingTilings::Rows const& CountingTilings::getNextRows(Row const& currentRow)
         return m_currentRowToNextRows[currentRow];
     }
 }
+
 CountingTilings::Rows CountingTilings::calculateNextRows(Row const& currentRow) {
     // This is not exactly DP but "complete search".
 
@@ -83,7 +84,8 @@ CountingTilings::Rows CountingTilings::calculateNextRows(Row const& currentRow) 
             if (nextIndex + 1 < static_cast<Count>(currentRow.length()) && currentRow[nextIndex + 1] == ' ') {
                 possibleNextDetails.emplace(NextDetail{nextRow, nextIndex + 2});
             }
-            nextRow[nextIndex] = 'V';            possibleNextDetails.emplace(NextDetail{nextRow, nextIndex + 1});
+            nextRow[nextIndex] = 'V';
+            possibleNextDetails.emplace(NextDetail{nextRow, nextIndex + 1});
         } else {
             possibleNextDetails.emplace(NextDetail{nextRow, nextIndex + 1});
         }

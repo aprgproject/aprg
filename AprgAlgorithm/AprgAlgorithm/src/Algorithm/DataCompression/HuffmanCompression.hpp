@@ -105,13 +105,15 @@ private:
         }
         return frequency;
     }
+
     void writeHuffmanCodes(
         AlbaStreamBitWriter& writer, Characters const& wholeInput, HuffmanCodeTable const& huffmanCodeTable) {
         for (Count i = 0; i < static_cast<Count>(wholeInput.size()); i++) {
             HuffmanCode const& huffmanCode(huffmanCodeTable[wholeInput[i]]);
             for (bool const b : huffmanCode) {
                 writer.writeBoolData(b);
-            }        }
+            }
+        }
     }
 
     void expandAllCharacters(
@@ -186,7 +188,8 @@ private:
                     static_cast<char>(c), frequency[c],
                     false);  // This PQ is used to prioritize low frequency characters first
                 characterNode[c] = std::make_unique<TrieNode>(
-                    static_cast<char>(c), nullptr, nullptr);  // These character nodes are used to build trie later on            }
+                    static_cast<char>(c), nullptr, nullptr);  // These character nodes are used to build trie later on
+            }
         }
 
         while (frequenciesInMinimumOrder.size() >

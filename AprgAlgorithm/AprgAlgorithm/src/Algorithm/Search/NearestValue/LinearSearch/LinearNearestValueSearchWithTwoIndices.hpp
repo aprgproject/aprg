@@ -32,6 +32,7 @@ public:
         }
         return result;
     }
+
     Index getIndexOfNearestValue(Value const& valueToCheck) {
         Index result(INVALID_INDEX);
         if (!m_values.empty()) {

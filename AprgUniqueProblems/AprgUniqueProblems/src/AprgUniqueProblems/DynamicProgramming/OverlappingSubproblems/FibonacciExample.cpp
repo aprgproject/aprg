@@ -62,7 +62,8 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDP(Numbe
     return tabulationData[number];
 }
 
-FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDPAndSpaceEfficient(Number const number) {    // NOTE: Same implementation in AprgMath
+FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDPAndSpaceEfficient(Number const number) {
+    // NOTE: Same implementation in AprgMath
 
     // Time Complexity: O(n)
     // Extra Space: O(1)
@@ -188,6 +189,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicIterat
     }
     return result;
 }
+
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMemoizationDP(
     Numbers& memoizationData, Number const number) {
     Number& resultForNumber(memoizationData[number]);

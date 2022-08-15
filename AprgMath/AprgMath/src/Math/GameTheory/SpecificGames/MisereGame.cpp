@@ -45,7 +45,8 @@ NimState MisereGame::getOptimalNextState(NimState const& inputNimState) {
             if (hammingDistanceFromNimSum < result[i]) {
                 result[i] = hammingDistanceFromNimSum;
                 break;
-            }        }
+            }
+        }
         // When it result to maxHeapSize is 1 and its non empty heaps is even, try to make it odd.
         UnsignedInteger nonEmptyHeapsInResult = countNonEmptyHeaps(result);
         UnsignedInteger nonEmptyHeapsInInput = countNonEmptyHeaps(inputNimState);

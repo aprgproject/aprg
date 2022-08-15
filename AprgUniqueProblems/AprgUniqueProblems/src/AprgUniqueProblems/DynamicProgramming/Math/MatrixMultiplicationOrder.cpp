@@ -49,7 +49,8 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
                                              m_dimensions[rightParenthesis];
                     minimumCount = min(minimumCount, currentCount);
                 }
-                countMatrix.setEntry(leftParenthesis, rightParenthesis, minimumCount);            }
+                countMatrix.setEntry(leftParenthesis, rightParenthesis, minimumCount);
+            }
         }
         result = countMatrix.getEntry(0, countMatrix.getNumberOfRows() - 1);
     }
@@ -69,7 +70,8 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
                 m_dimensions[leftParenthesis] * m_dimensions[inBetween] * m_dimensions[rightParenthesis];
             result = min(result, currentCount);
         }
-    }    return result;
+    }
+    return result;
 }
 
 MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOperationsUsingMemoizationDP(
@@ -86,7 +88,8 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
                     m_dimensions[leftParenthesis] * m_dimensions[inBetween] * m_dimensions[rightParenthesis];
                 result = min(result, currentCount);
             }
-        } else {            result = 0;
+        } else {
+            result = 0;
         }
         countMatrix.setEntry(leftParenthesis, rightParenthesis, result);
     }

@@ -36,7 +36,8 @@ public:
                 endOfPrefix = position + result[position];
                 result[position]++;
             }
-        }        return result;
+        }
+        return result;
     }
 };
 

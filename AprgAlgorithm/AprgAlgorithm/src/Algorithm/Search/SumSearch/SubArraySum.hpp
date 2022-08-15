@@ -41,7 +41,8 @@ public:
                         currentSum += m_valuesToCheck[end];
                     } else {
                         break;
-                    }                }
+                    }
+                }
             }
         }
         return result;

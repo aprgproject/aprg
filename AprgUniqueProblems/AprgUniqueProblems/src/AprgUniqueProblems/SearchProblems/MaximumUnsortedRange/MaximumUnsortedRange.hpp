@@ -46,7 +46,8 @@ private:
             if (valuesToSort[startIndex] > valuesToSort[startIndex + 1]) {
                 break;
             }
-        }        return startIndex;
+        }
+        return startIndex;
     }
 
     Index getEndIndex(Values const& valuesToSort) const {
@@ -55,7 +56,8 @@ private:
             if (valuesToSort[endIndex] < valuesToSort[endIndex - 1]) {
                 break;
             }
-        }        return static_cast<Index>(endIndex);
+        }
+        return static_cast<Index>(endIndex);
     }
 
     ValuePair getMinMaxPairInUnsorted(Values const& valuesToSort, Index const startIndex, Index const endIndex) const {
@@ -69,7 +71,8 @@ private:
         while (adjustedStartIndex - 1 > 0 && minimum < valuesToSort[adjustedStartIndex - 1]) {
             adjustedStartIndex--;
         }
-        return static_cast<Index>(adjustedStartIndex);    }
+        return static_cast<Index>(adjustedStartIndex);
+    }
 
     Index getAdjustedEndIndex(Values const& valuesToSort, Index const endIndex, Value const& maximum) const {
         Index adjustedEndIndex(endIndex);
@@ -77,7 +80,8 @@ private:
                valuesToSort[adjustedEndIndex + 1] < maximum) {
             adjustedEndIndex++;
         }
-        return adjustedEndIndex;    }
+        return adjustedEndIndex;
+    }
 };
 
 }  // namespace algorithm

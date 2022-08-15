@@ -25,6 +25,7 @@ public:
     explicit AlbaUniformDeterministicAllBitsRandomizer(ValueType const customSeed) : m_randomEngine(customSeed) {}
 
     ValueType getRandomValue() { return m_randomEngine(); }
+
     void setRandomSeed(ValueType const customSeed) { m_randomEngine.seed(customSeed); }
 
 private:

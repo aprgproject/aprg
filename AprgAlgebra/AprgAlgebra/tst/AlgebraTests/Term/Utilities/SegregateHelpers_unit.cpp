@@ -23,7 +23,8 @@ TEST(MonomialHelpersTest, SegregateMonomialsWithAndWithoutVariable) {
     EXPECT_EQ(Monomial(4, {{"y", 5}, {"z", 6}}), monomialWithoutVariable[0]);
 }
 
-TEST(SegregateHelpersTest, SegregateMonomialsAndNonMonomialsWorksForTerms) {    Terms monomialTerms;
+TEST(SegregateHelpersTest, SegregateMonomialsAndNonMonomialsWorksForTerms) {
+    Terms monomialTerms;
     Terms nonMonomialTerms;
     Term termExpression(createExpressionIfPossible({"x", "^", "x"}));
 
@@ -35,7 +36,8 @@ TEST(SegregateHelpersTest, SegregateMonomialsAndNonMonomialsWorksForTerms) {    
     EXPECT_EQ(termExpression, nonMonomialTerms[0]);
 }
 
-TEST(SegregateHelpersTest, SegregateMonomialsAndNonMonomialsWorksForTermsWithDetails) {    TermsWithAssociation termsWithAssociation;
+TEST(SegregateHelpersTest, SegregateMonomialsAndNonMonomialsWorksForTermsWithDetails) {
+    TermsWithAssociation termsWithAssociation;
     TermsWithDetails monomialTerms;
     TermsWithDetails nonMonomialTerms;
     Term termExpression(createExpressionIfPossible({"x", "^", "x"}));
@@ -53,6 +55,7 @@ TEST(SegregateHelpersTest, SegregateMonomialsAndNonMonomialsWorksForTermsWithDet
     EXPECT_EQ(termExpression, getTermConstReferenceFromUniquePointer(termWithDetails2.baseTermPointer));
     EXPECT_EQ(TermAssociationType::Positive, termWithDetails2.association);
 }
+
 TEST(SegregateHelpersTest, SegregatePolynomialAndNonPolynomialsWorks) {
     Terms polynomialTerms;
     Terms nonPolynomialTerms;
@@ -66,7 +69,8 @@ TEST(SegregateHelpersTest, SegregatePolynomialAndNonPolynomialsWorks) {
     EXPECT_EQ(termExpression, nonPolynomialTerms[0]);
 }
 
-TEST(SegregateHelpersTest, SegregateNonExpressionsAndExpressionsWorks) {    TermsWithAssociation termsWithAssociation;
+TEST(SegregateHelpersTest, SegregateNonExpressionsAndExpressionsWorks) {
+    TermsWithAssociation termsWithAssociation;
     TermsWithDetails termsWithNonExpressions;
     TermsWithDetails termsWithExpressions;
     Term termExpression(createExpressionIfPossible({"x", "^", "x"}));
@@ -85,6 +89,7 @@ TEST(SegregateHelpersTest, SegregateNonExpressionsAndExpressionsWorks) {    Term
     EXPECT_EQ(termExpression, getTermConstReferenceFromUniquePointer(termWithDetails2.baseTermPointer));
     EXPECT_EQ(TermAssociationType::Positive, termWithDetails2.association);
 }
+
 TEST(SegregateHelpersTest, SegregateTermsWithPositiveAndNegativeAssociationsWorks) {
     TermsWithAssociation termsWithAssociation;
     TermsWithDetails termsInPositive;
@@ -104,6 +109,7 @@ TEST(SegregateHelpersTest, SegregateTermsWithPositiveAndNegativeAssociationsWork
     EXPECT_EQ(Term(753), getTermConstReferenceFromUniquePointer(termWithDetails2.baseTermPointer));
     EXPECT_EQ(TermAssociationType::Negative, termWithDetails2.association);
 }
+
 }  // namespace algebra
 
 }  // namespace alba

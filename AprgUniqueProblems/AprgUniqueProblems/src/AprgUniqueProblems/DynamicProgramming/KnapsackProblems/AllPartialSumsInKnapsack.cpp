@@ -21,7 +21,8 @@ AllPartialSumsInKnapsack::Values AllPartialSumsInKnapsack::getAllPossiblePartial
             if (partialSum >= inputValue && isPartialSumPossible[partialSum - inputValue]) {
                 isPartialSumPossible[partialSum] = true;
             }
-        }    }
+        }
+    }
     return getAllPossiblePartialSums(isPartialSumPossible);
 }
 
@@ -36,7 +37,8 @@ AllPartialSumsInKnapsack::Values AllPartialSumsInKnapsack::getAllPossiblePartial
             if (isPartialSumPossible[partialSum]) {
                 Value possibleNextValue = static_cast<Value>(partialSum) + inputValue;
                 if (possibleNextValue <= sum) {
-                    isPartialSumPossible[possibleNextValue] = true;                }
+                    isPartialSumPossible[possibleNextValue] = true;
+                }
             }
         }
     }
@@ -78,7 +80,8 @@ AllPartialSumsInKnapsack::Values AllPartialSumsInKnapsack::getAllPossiblePartial
             if (isPartialSumPossible[partialSumIndex]) {
                 for (int i = 1; i <= inputValueAndCountPair.second; i++)  // near constant time
                 {
-                    isPartialSumPossible[static_cast<Value>(partialSumIndex) + (i * inputValueAndCountPair.first)] =                        true;
+                    isPartialSumPossible[static_cast<Value>(partialSumIndex) + (i * inputValueAndCountPair.first)] =
+                        true;
                 }
             }
         }
@@ -95,7 +98,8 @@ AllPartialSumsInKnapsack::Values AllPartialSumsInKnapsack::getAllPossiblePartial
         if (isPartialSumPossible[partialSumIndex]) {
             result.emplace_back(partialSumIndex);
         }
-    }    return result;
+    }
+    return result;
 }
 
 }  // namespace alba

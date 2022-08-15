@@ -28,7 +28,8 @@ public:
             if (zArray[i] >= subStringLength) {
                 result = i - subStringLength - 1;
                 break;
-            }        }
+            }
+        }
         return result;
     }
 
@@ -42,7 +43,8 @@ public:
             if (zArray[i] >= subStringLength) {
                 result.emplace_back(i - subStringLength - 1);
             }
-        }        return result;
+        }
+        return result;
     }
 
 private:

@@ -20,7 +20,8 @@ TEST(BoardValueTest, ConstructionWorks) {
     EXPECT_EQ(0xC9C9141400000000U, data[3]);
 }
 
-TEST(BoardValueTest, DifferentOrientationsHasSameValueWorks) {    Board board1(BoardOrientation::BlackUpWhiteDown);
+TEST(BoardValueTest, DifferentOrientationsHasSameValueWorks) {
+    Board board1(BoardOrientation::BlackUpWhiteDown);
     Board board2(BoardOrientation::WhiteUpBlackDown);
     BoardValue boardValue1(board1);
     BoardValue boardValue2(board2);

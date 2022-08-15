@@ -22,7 +22,8 @@ public:
     Value get(Key const& key) const override { return b_smallerSymbolTables[this->getHash(key)].get(key); }
 
     void put(Key const& key, Value const& value) override {
-        b_smallerSymbolTables[this->getHash(key)].put(key, value);        b_size++;
+        b_smallerSymbolTables[this->getHash(key)].put(key, value);
+        b_size++;
     }
 
 private:

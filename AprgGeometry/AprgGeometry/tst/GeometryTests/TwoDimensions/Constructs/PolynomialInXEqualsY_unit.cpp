@@ -22,7 +22,8 @@ TEST(PolynomialInXEqualsYTest, GetPointsWorks) {
     EXPECT_EQ(Point(2, 11), points[4]);
 }
 
-TEST(PolynomialInXEqualsYTest, CalculateYfromXWorks) {    PolynomialInXEqualsY<3> polynomial{1, 2, 3};
+TEST(PolynomialInXEqualsYTest, CalculateYfromXWorks) {
+    PolynomialInXEqualsY<3> polynomial{1, 2, 3};
 
     EXPECT_DOUBLE_EQ(38, polynomial.calculateYfromX(5));
 }

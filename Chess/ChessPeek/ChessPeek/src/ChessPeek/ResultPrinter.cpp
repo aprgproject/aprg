@@ -151,7 +151,8 @@ void ResultPrinter::setNextMovesOnGrid(
         Move const& nextMove(genericMoves[startIndex + moveIndex].move);
         setMoveOnGrid(grid, engineBoard, nextMove, xOffset, 1, optional<char>());
         xOffset += NEXT_OFFSET_OF_GRID;
-    }}
+    }
+}
 
 void ResultPrinter::printARowOfMovesSequence(MovesSequence const& movesSequence) const {
     int rowSize = getRowSizeForHalfMoves(movesSequence.halfMoves.size());
@@ -239,7 +240,8 @@ void ResultPrinter::printHeaders(strings const& prefixHeaders, strings const& su
                 headerString += suffixHeaders[i];
             }
             cout << "|" << formatToHeaderString(headerString) << "|";
-        }        cout << "\n";
+        }
+        cout << "\n";
     }
 }
 
@@ -430,7 +432,8 @@ strings ResultPrinter::getNextMovesString(NextMoves const& nextMoves, int const 
             auto const& nextMove(nextMoves[startIndex + moveIndex]);
             result.emplace_back(formatToHeaderString(getDisplayableString(nextMove)));
         }
-    }    return result;
+    }
+    return result;
 }
 
 strings ResultPrinter::getBookMovesString(BookMoves const& bookMoves) const {
@@ -441,7 +444,8 @@ strings ResultPrinter::getBookMovesString(BookMoves const& bookMoves) const {
         auto const& bookMove(bookMoves[moveIndex]);
         result.emplace_back(formatToHeaderString(getDisplayableString(bookMove)));
     }
-    return result;}
+    return result;
+}
 
 string ResultPrinter::getDisplayableString(NextMove const& nextMove) const {
     return getDisplayableString(nextMove.mateValue, nextMove.engineScore, nextMove.humanScore);

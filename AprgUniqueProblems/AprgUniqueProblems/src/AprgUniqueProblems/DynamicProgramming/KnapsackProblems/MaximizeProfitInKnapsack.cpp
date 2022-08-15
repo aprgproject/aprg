@@ -43,7 +43,8 @@ MaximizeProfitInKnapsack::Profit MaximizeProfitInKnapsack::getBestProfitUsingIte
             Profit itemProfit(m_items[itemIndex].second);
             for (Weight weight(smallestItemWeight); weight < static_cast<Index>(profitMatrix.getNumberOfColumns());
                  weight++) {
-                if (weight >= itemWeight) {                    Profit profit =
+                if (weight >= itemWeight) {
+                    Profit profit =
                         max(profitMatrix.getEntry(weight, itemIndex + 1),
                             itemProfit + profitMatrix.getEntry(weight - itemWeight, itemIndex + 1));
                     profitMatrix.setEntry(weight, itemIndex, profit);
@@ -80,7 +81,8 @@ MaximizeProfitInKnapsack::Profit MaximizeProfitInKnapsack::getBestProfitUsingIte
                         max(weightToProfit[weight], weightToProfit[weight - itemWeight] + itemProfit);
                 }
             }
-        }        result = weightToProfit.back();
+        }
+        result = weightToProfit.back();
     }
     return result;
 }
@@ -93,7 +95,8 @@ MaximizeProfitInKnapsack::Profit MaximizeProfitInKnapsack::getBestProfitUsingNai
         Profit itemProfit(m_items[itemIndex].second);
         if (remainingWeight >= itemWeight) {
             result =
-                max(getBestProfitUsingNaiveRecursion(remainingWeight, itemIndex + 1),                    itemProfit + getBestProfitUsingNaiveRecursion(remainingWeight - itemWeight, itemIndex + 1));
+                max(getBestProfitUsingNaiveRecursion(remainingWeight, itemIndex + 1),
+                    itemProfit + getBestProfitUsingNaiveRecursion(remainingWeight - itemWeight, itemIndex + 1));
         }
     }
     return result;
@@ -109,7 +112,8 @@ MaximizeProfitInKnapsack::Profit MaximizeProfitInKnapsack::getBestProfitUsingMem
             Profit itemProfit(m_items[itemIndex].second);
             if (remainingWeight >= itemWeight) {
                 result =
-                    max(getBestProfitUsingMemoizationDP(profitMatrix, remainingWeight, itemIndex + 1),                        itemProfit +
+                    max(getBestProfitUsingMemoizationDP(profitMatrix, remainingWeight, itemIndex + 1),
+                        itemProfit +
                             getBestProfitUsingMemoizationDP(profitMatrix, remainingWeight - itemWeight, itemIndex + 1));
             }
         }

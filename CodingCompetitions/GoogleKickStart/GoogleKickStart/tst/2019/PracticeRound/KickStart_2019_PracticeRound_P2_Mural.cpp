@@ -50,6 +50,7 @@ void runTestCase(int const testCaseNumber) {
         currentAccumulatedScore -= scores[i - subarraySize];
         maxAccumulatedScore = max(maxAccumulatedScore, currentAccumulatedScore);
     }
+
     my_cout << "Case #" << testCaseNumber << ": " << maxAccumulatedScore << '\n';
 }
 

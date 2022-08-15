@@ -43,6 +43,7 @@ public:
         }
         return result;
     }
+
     void setValueAt(int index, double const dataSampleValue) {
         if (isIndexValid(index)) {
             m_data[index] = dataSampleValue;

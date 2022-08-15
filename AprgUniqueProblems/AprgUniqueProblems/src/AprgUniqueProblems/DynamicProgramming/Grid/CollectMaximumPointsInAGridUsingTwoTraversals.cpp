@@ -71,7 +71,8 @@ CollectMaximumPointsInAGridUsingTwoTraversals::getMaximumPointsUsingIterativeDP(
                                 valueGrids[previousRow].getEntry(previousColumnLeft, previousColumnRight);
                             if (INVALID_COUNT != previousValue) {
                                 entryResult =
-                                    (entryResult == INVALID_COUNT) ? previousValue : max(entryResult, previousValue);                            }
+                                    (entryResult == INVALID_COUNT) ? previousValue : max(entryResult, previousValue);
+                            }
                         }
                     }
                     if (INVALID_COUNT != entryResult) {
@@ -121,7 +122,8 @@ CollectMaximumPointsInAGridUsingTwoTraversals::getMaximumPointsUsingMemoizationD
     Value result(valueGrids[row].getEntry(columnLeft, columnRight));
     if (UNUSED_COUNT == result) {
         result = 0;
-        if (row == static_cast<Index>(m_inputGrid.getNumberOfRows()) - 1 &&            !(columnLeft == 0 && columnRight == static_cast<Index>(m_inputGrid.getNumberOfColumns()) - 1)) {
+        if (row == static_cast<Index>(m_inputGrid.getNumberOfRows()) - 1 &&
+            !(columnLeft == 0 && columnRight == static_cast<Index>(m_inputGrid.getNumberOfColumns()) - 1)) {
             // if last row did not reach destination
             result = INVALID_COUNT;
         } else {

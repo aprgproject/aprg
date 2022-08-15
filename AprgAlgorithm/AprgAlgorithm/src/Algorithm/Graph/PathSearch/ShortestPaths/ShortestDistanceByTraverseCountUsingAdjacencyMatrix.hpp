@@ -92,7 +92,8 @@ private:
             AlbaNumber currentValue = first[i] + second[i];
             if (currentValue < result) {
                 result = currentValue;
-            }        }
+            }
+        }
         return result;
     }
 

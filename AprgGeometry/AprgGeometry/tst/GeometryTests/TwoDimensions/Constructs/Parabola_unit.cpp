@@ -25,7 +25,8 @@ TEST(ParabolaTest, GetPointsWorksForParabolaOrientatedInX) {
     EXPECT_EQ(Point(2, 11), points[4]);
 }
 
-TEST(ParabolaTest, GetPointsWorksForParabolaOrientatedInY) {    Parabola<ParabolaOrientation::PolynomialY> parabola{1, 2, 3};
+TEST(ParabolaTest, GetPointsWorksForParabolaOrientatedInY) {
+    Parabola<ParabolaOrientation::PolynomialY> parabola{1, 2, 3};
     Points points(parabola.getPoints(-2, 2, 1));
 
     ASSERT_EQ(5U, points.size());
@@ -36,7 +37,8 @@ TEST(ParabolaTest, GetPointsWorksForParabolaOrientatedInY) {    Parabola<Parabol
     EXPECT_EQ(Point(11, 2), points[4]);
 }
 
-TEST(ParabolaTest, GetPointsWorksWhenBoundariesAreReversedForParabolaOrientatedInX) {    Parabola<ParabolaOrientation::PolynomialX> parabola{1, 2, 3};
+TEST(ParabolaTest, GetPointsWorksWhenBoundariesAreReversedForParabolaOrientatedInX) {
+    Parabola<ParabolaOrientation::PolynomialX> parabola{1, 2, 3};
     Points points(parabola.getPoints(2, -2, 1));
 
     ASSERT_EQ(5U, points.size());
@@ -47,7 +49,8 @@ TEST(ParabolaTest, GetPointsWorksWhenBoundariesAreReversedForParabolaOrientatedI
     EXPECT_EQ(Point(-2, 3), points[4]);
 }
 
-TEST(ParabolaTest, GetSlopeIsCorrectForParabolaOrientatedInX) {    Parabola<ParabolaOrientation::PolynomialX> parabola{1, 2, 3};
+TEST(ParabolaTest, GetSlopeIsCorrectForParabolaOrientatedInX) {
+    Parabola<ParabolaOrientation::PolynomialX> parabola{1, 2, 3};
 
     EXPECT_DOUBLE_EQ(-198, parabola.getSlopeAt(-100));
     EXPECT_DOUBLE_EQ(-18, parabola.getSlopeAt(-10));

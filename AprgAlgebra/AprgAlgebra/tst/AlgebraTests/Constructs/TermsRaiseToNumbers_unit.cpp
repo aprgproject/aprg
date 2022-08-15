@@ -69,7 +69,8 @@ TEST(TermsRaiseToNumbersTest, GetTermsInMultiplicationOperationWorks) {
     EXPECT_EQ(expectedTerm3, termsToVerify[2]);
 }
 
-TEST(TermsRaiseToNumbersTest, GetTermWithDetailsInMultiplicationAndDivisionOperationWorks) {    TermsRaiseToNumbers termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
+TEST(TermsRaiseToNumbersTest, GetTermWithDetailsInMultiplicationAndDivisionOperationWorks) {
+    TermsRaiseToNumbers termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
 
     TermsWithDetails const termsToVerify(termsRaiseToNumbers.getTermWithDetailsInMultiplicationAndDivisionOperation());
 
@@ -85,7 +86,8 @@ TEST(TermsRaiseToNumbersTest, GetTermWithDetailsInMultiplicationAndDivisionOpera
     EXPECT_EQ(expectedTermWithDetails3, termsToVerify[2]);
 }
 
-TEST(TermsRaiseToNumbersTest, AddExponentsWorks) {    TermsRaiseToNumbers termsRaiseToNumbersToAdd({{"x", 1}, {"y", -2}, {"z", 3}});
+TEST(TermsRaiseToNumbersTest, AddExponentsWorks) {
+    TermsRaiseToNumbers termsRaiseToNumbersToAdd({{"x", 1}, {"y", -2}, {"z", 3}});
     TermsRaiseToNumbers termsRaiseToNumbers({{"x", 4}, {"y", -5}, {"z", 6}});
 
     termsRaiseToNumbers.addExponents(termsRaiseToNumbersToAdd);

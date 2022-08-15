@@ -38,6 +38,7 @@ public:
         }
         return result;
     }
+
 private:
     Vertices const& b_verticesInDfsPreOrder;
     Counts const& b_subTreeSize;

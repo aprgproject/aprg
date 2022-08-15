@@ -37,7 +37,8 @@ public:
                     m_sortedValues[std::get<1>(twoSumValues.second)], m_sortedValues[std::get<2>(twoSumValues.second)]);
             }
         }
-        return result;    }
+        return result;
+    }
 
 private:
     SumsOfPairOfValues getSumsOfPairOfValuesWithPossibleDuplicates() const {
@@ -49,7 +50,8 @@ private:
                 result.emplace_back(m_sortedValues[i] + m_sortedValues[j], i, j);
             }
         }
-        return result;    }
+        return result;
+    }
 
     PairOfSumOfPairOfValues getTwoValuesWithSum(
         Value const& targetSum, SumsOfPairOfValues const& sumOfPairOfValues, Comparator const& shouldContinue) const {
@@ -62,7 +64,8 @@ private:
                     result = {sumOfPairOfValues[lowIndex], sumOfPairOfValues[highIndex]};
                     break;
                 } else if (currentSum > targetSum) {
-                    highIndex--;                } else if (currentSum < targetSum) {
+                    highIndex--;
+                } else if (currentSum < targetSum) {
                     lowIndex++;
                 }
             }

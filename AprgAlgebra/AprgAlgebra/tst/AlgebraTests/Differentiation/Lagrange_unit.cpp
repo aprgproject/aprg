@@ -27,6 +27,7 @@ TEST(LagrangeTest, GetLagrangeMultipliersWorks) {
 
     // using lagrange multipler as -2/z, we can use that to calculate the other values.
 }
+
 TEST(LagrangeTest, GetLagrangeMultipliersWorksUsingExample1) {
     // Find the relative extrema of the f if f(x,y,z) = xz+yz
     // and the point (x,y,z) lies on the intersection of the surfaces x^2+y^2=2 and yz=2
@@ -46,4 +47,5 @@ TEST(LagrangeTest, GetLagrangeMultipliersWorksUsingExample1) {
 }
 
 }  // namespace algebra
+
 }  // namespace alba

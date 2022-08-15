@@ -37,6 +37,7 @@ int32_t getPalindromeValue(string const& blocksString, Question const& question)
     }
     return result;
 }
+
 bool canPalindrome(string const& blocksString, Question const& question) {
     int length = question.second - question.first + 1;
     if (length % 2 == 0) {

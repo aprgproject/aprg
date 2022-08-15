@@ -98,6 +98,7 @@ Term buildTermIfPossible(string const& termString) {
     }
     return result;
 }
+
 Terms tokenizeToTerms(string const& inputString) {
     Terms tokenizedTerms;
     string valueString;

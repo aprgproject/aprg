@@ -21,7 +21,8 @@ int getIndexOfMedianOfThree(Values const& values, int const index1, int const in
     auto high = std::make_pair(values[index3], index3);
     if (low.first > high.first) {
         std::swap(high, low);
-    }    if (low.first > mid.first) {
+    }
+    if (low.first > mid.first) {
         std::swap(mid, low);
     }
     if (mid.first > high.first) {
@@ -63,7 +64,8 @@ int getMedianIteratorOfLessThanFive(
              lowIndex <= iLow && values[medianIndexes[iLow]] > values[medianIndexes[iHigh]];
              iLow--, iHigh--) {
             std::swap(medianIndexes[iLow], medianIndexes[iHigh]);
-        }    }
+        }
+    }
     return getMidpointOfIndexes(lowIndex, highIndex);
 }
 

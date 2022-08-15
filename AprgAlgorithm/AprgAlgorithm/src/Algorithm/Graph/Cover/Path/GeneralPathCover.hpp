@@ -88,7 +88,8 @@ private:
                 Edge const& edge(detectedEdges[i]);
                 if (pathInDeque.front() == edge.second) {
                     pathInDeque.emplace_front(edge.first);
-                    detectedEdges.erase(detectedEdges.begin() + i);                    i = 0;
+                    detectedEdges.erase(detectedEdges.begin() + i);
+                    i = 0;
                 } else if (pathInDeque.back() == edge.first) {
                     pathInDeque.emplace_back(edge.second);
                     detectedEdges.erase(detectedEdges.begin() + i);

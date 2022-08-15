@@ -251,6 +251,7 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFileWorks_HasZeroInDigitForBy
             setInputOutput(quineMcCluskey, input, getStringWithCapitalLetters(entries[1]));
         }
     }
+
     quineMcCluskey.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     cout << "Initial computation table: \n" << quineMcCluskey.getComputationTableString() << "\n";
     quineMcCluskey.findAllCombinations();
@@ -306,6 +307,7 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_LogarithmBase2ForByte) {
             setInputOutput(qm2, input, getStringWithCapitalLetters(entries[3]));
         }
     }
+
     qm0.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     qm1.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     qm2.fillComputationalTableWithMintermsWithZeroCommonalityCount();
@@ -345,6 +347,7 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_ZeroesStartingFromMsb) {
             setInputOutput(qm3, input, getStringWithCapitalLetters(entries[4]));
         }
     }
+
     qm0.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     qm1.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     qm2.fillComputationalTableWithMintermsWithZeroCommonalityCount();

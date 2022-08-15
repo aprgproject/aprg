@@ -51,7 +51,8 @@ TEST(AlbaUniformDeterministicRandomizerTest, SetRandomSeedWorks) {
 
 TEST(AlbaUniformDeterministicRandomizerTest, GetRandomIntegerWorks_WithinMinimumAndMaximumValues) {
     constexpr int minimumValue(0);
-    constexpr int maximumValue(9);    constexpr int customSeed(5);
+    constexpr int maximumValue(9);
+    constexpr int customSeed(5);
     IntegerRandomizerForTest randomizer(minimumValue, maximumValue, customSeed);
 
     for (int i = 0; i < 1000; i++) {

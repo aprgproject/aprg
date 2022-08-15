@@ -59,6 +59,7 @@ private:
             newIndexes[i + 1] += newIndexes[i];
         }
     }
+
     void copyBackUsingNewIndexes(
         Values& valuesToSort, ArrayOfCountPerDigitValue& newIndexes, int const digitIndex) const {
         Values copiedValues(valuesToSort);  // copy first and then copy back to output in the new indexes;

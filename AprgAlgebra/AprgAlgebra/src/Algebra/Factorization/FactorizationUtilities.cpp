@@ -57,7 +57,8 @@ bool doesNotNeedToBeFactorized(Polynomial const& polynomial) {
         Monomial const& second(monomials[1]);
         bool areBothConstantIntegers =
             first.getConstantConstReference().isIntegerType() && second.getConstantConstReference().isIntegerType();
-        bool areEitherConstantOne = first.getConstantConstReference() == 1 || second.getConstantConstReference() == 1;        ExponentsRetriever retriever;
+        bool areEitherConstantOne = first.getConstantConstReference() == 1 || second.getConstantConstReference() == 1;
+        ExponentsRetriever retriever;
         retriever.retrieveFromPolynomial(polynomial);
         AlbaNumbersSet const& exponents(retriever.getSavedData());
         bool areAllExponentsOneOrZero = all_of(exponents.cbegin(), exponents.cend(), [](AlbaNumber const& exponent) {

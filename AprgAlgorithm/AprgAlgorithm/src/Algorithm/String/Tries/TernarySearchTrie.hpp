@@ -121,7 +121,8 @@ private:
             char c(key[index]);
             if (c < currentNodePointer->c) {
                 result = get(currentNodePointer->left, key, index);  // search left
-            } else if (c > currentNodePointer->c) {                result = get(currentNodePointer->right, key, index);  // search right
+            } else if (c > currentNodePointer->c) {
+                result = get(currentNodePointer->right, key, index);  // search right
             } else if (index < static_cast<int>(key.length()) - 1) {
                 result = get(currentNodePointer->mid, key, index + 1);  // only advance index when character is a match
             } else {
@@ -138,7 +139,8 @@ private:
             char c(keyToCheck[index]);
             if (c < currentNodePointer->c) {
                 currentLongestLength =
-                    getLengthOfLongestPrefix(currentNodePointer->left, keyToCheck, index, currentLongestLength);            } else if (c > currentNodePointer->c) {
+                    getLengthOfLongestPrefix(currentNodePointer->left, keyToCheck, index, currentLongestLength);
+            } else if (c > currentNodePointer->c) {
                 currentLongestLength =
                     getLengthOfLongestPrefix(currentNodePointer->right, keyToCheck, index, currentLongestLength);
             } else if (index < static_cast<int>(keyToCheck.length())) {
@@ -176,7 +178,8 @@ private:
             char charToMatch = patternToMatch[previousPrefixLength];
             Key currentPrefix(previousPrefix + currentNodePointer->c);
             if (charToMatch < currentChar) {
-                collectKeysThatMatchAtNode(                    currentNodePointer->left.get(), previousPrefix, patternToMatch, collectedKeys);
+                collectKeysThatMatchAtNode(
+                    currentNodePointer->left.get(), previousPrefix, patternToMatch, collectedKeys);
             } else if (charToMatch == currentChar) {
                 if (previousPrefixLength < lastIndexToMatch) {
                     collectKeysThatMatchAtNode(
@@ -203,7 +206,8 @@ private:
         char charAtKey(key[index]);
         if (!currentNodePointer) {
             currentNodePointer = std::make_unique<Node>(Node{charAtKey, nullptr, nullptr, nullptr, nullptr});
-        }        if (charAtKey < currentNodePointer->c) {
+        }
+        if (charAtKey < currentNodePointer->c) {
             put(currentNodePointer->left, key, value, index);
         } else if (charAtKey > currentNodePointer->c) {
             put(currentNodePointer->right, key, value, index);
@@ -222,7 +226,8 @@ private:
                 char charAtKey(key[index]);
                 if (charAtKey < currentNodePointer->c) {
                     deleteBasedOnKey(currentNodePointer->left, key, index);
-                } else if (charAtKey > currentNodePointer->c) {                    deleteBasedOnKey(currentNodePointer->right, key, index);
+                } else if (charAtKey > currentNodePointer->c) {
+                    deleteBasedOnKey(currentNodePointer->right, key, index);
                 } else {
                     deleteBasedOnKey(currentNodePointer->mid, key, index + 1);
                 }

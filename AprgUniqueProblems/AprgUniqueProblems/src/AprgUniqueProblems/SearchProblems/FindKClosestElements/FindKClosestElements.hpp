@@ -29,7 +29,8 @@ public:
                 if (valueToCheck - m_values[low] <= m_values[high] - valueToCheck) {
                     low--;
                 } else {
-                    high++;                }
+                    high++;
+                }
                 count++;
             }
             while (count < numberOfClosestElements && low > 0) {

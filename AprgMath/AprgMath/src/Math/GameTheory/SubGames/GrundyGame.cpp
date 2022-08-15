@@ -37,7 +37,8 @@ GrundyGame::HeapIndexAndFirstPileAndSecondPile GrundyGame::getOptimalWayToSplit(
             UnsignedInteger const& stickHeap(m_stickHeaps[heapIndex]);
             if (stickHeap >= 3)  // sizes 1 and 2 cannot be split with different sizes
             {
-                result = make_tuple(heapIndex, 1ULL, stickHeap - 1ULL);                break;
+                result = make_tuple(heapIndex, 1ULL, stickHeap - 1ULL);
+                break;
             }
         }
     } else if (GameState::Winning == gameState) {
@@ -46,7 +47,8 @@ GrundyGame::HeapIndexAndFirstPileAndSecondPile GrundyGame::getOptimalWayToSplit(
             UnsignedInteger const& stickHeap(m_stickHeaps[heapIndex]);
             UnsignedInteger grundyNumberAtIndex = getGrundyNumberWithNumberOfSticks(stickHeap);
             UnsignedInteger hammingDistance = grundyNumberAtIndex ^ overallGrundyNumber;
-            for (int a = (static_cast<int>(stickHeap) - 1) / 2; !isFound && a > 0; a--) {                int b = static_cast<int>(stickHeap) - a;
+            for (int a = (static_cast<int>(stickHeap) - 1) / 2; !isFound && a > 0; a--) {
+                int b = static_cast<int>(stickHeap) - a;
                 if (hammingDistance ==
                     getCombinedGrundyNumber(
                         getGrundyNumberWithNumberOfSticks(a), getGrundyNumberWithNumberOfSticks(b))) {
@@ -67,7 +69,8 @@ void GrundyGame::split(HeapIndexAndFirstPileAndSecondPile const& heapIndexAndFir
         if (m_stickHeaps[index] == firstPile + secondPile) {
             m_stickHeaps.erase(m_stickHeaps.begin() + index);
             m_stickHeaps.emplace(m_stickHeaps.begin() + index, secondPile);
-            m_stickHeaps.emplace(m_stickHeaps.begin() + index, firstPile);        }
+            m_stickHeaps.emplace(m_stickHeaps.begin() + index, firstPile);
+        }
     }
 }
 

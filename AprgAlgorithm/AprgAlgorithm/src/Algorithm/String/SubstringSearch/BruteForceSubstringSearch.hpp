@@ -32,7 +32,8 @@ private:
             if (mainString[searchIndex] == substringToMatch[matchIndex]) {
                 matchIndex++;  // matchIndex represents the index of matches as well
             } else {
-                searchIndex -= matchIndex;  // if there is a mismatch, go back                matchIndex = 0;             // reset because matchIndex represents the index of matches as well
+                searchIndex -= matchIndex;  // if there is a mismatch, go back
+                matchIndex = 0;             // reset because matchIndex represents the index of matches as well
             }
         }
         if (matchIndex == substringLength)  // if matchIndex reached length
@@ -55,7 +56,8 @@ private:
                 if (mainString[offset + matchIndex] != substringToMatch[matchIndex]) {
                     // matchIndex represents the index of matches as well
                     break;
-                }            }
+                }
+            }
             if (matchIndex == substringLength)  // if matchIndex reached length
             {
                 result = offset;

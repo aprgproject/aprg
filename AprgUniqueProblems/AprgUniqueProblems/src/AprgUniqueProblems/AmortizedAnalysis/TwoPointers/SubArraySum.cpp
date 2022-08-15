@@ -33,7 +33,8 @@ SubArraySum::Values SubArraySum::getSubArrayWithSum(Value const targetSum) const
                     currentSum += m_valuesToCheck[end];
                 } else {
                     break;
-                }            }
+                }
+            }
         }
         if (isFound)  // empty if not found
         {

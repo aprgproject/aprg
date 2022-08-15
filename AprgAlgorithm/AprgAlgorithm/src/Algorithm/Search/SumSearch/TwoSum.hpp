@@ -56,7 +56,8 @@ private:
                     result = {m_sortedValues[iLow], m_sortedValues[iHigh]};
                     break;
                 } else if (currentSum > targetSum) {
-                    --iHigh;                } else {  // currentSum < targetSum
+                    --iHigh;
+                } else {  // currentSum < targetSum
                     ++iLow;
                 }
             }

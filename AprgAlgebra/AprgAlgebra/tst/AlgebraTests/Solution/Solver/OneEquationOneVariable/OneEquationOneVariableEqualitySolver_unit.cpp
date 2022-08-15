@@ -47,7 +47,8 @@ TEST(OneEquationOneVariableEqualitySolverTest, EquationsThatAreAlwaysSatisfiedRe
     EXPECT_EQ(createAllRealValuesInterval(), actualIntervals[0]);
 }
 
-TEST(OneEquationOneVariableEqualitySolverTest, PolynomialAreSolvedCorrectly) {    OneEquationOneVariableEqualitySolver solver;
+TEST(OneEquationOneVariableEqualitySolverTest, PolynomialAreSolvedCorrectly) {
+    OneEquationOneVariableEqualitySolver solver;
 
     SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(Monomial(1, {{"x", 4}}), "=", 16)));
 
@@ -127,7 +128,8 @@ TEST(OneEquationOneVariableEqualitySolverTest, TwoAbsoluteValueFunctionsAreSolve
     EXPECT_EQ(AlbaNumber::createFraction(-1, 3), acceptedValues[1]);
 }
 
-TEST(OneEquationOneVariableEqualitySolverTest, AdditionFractionsInEquationIsSolved) {    Polynomial polynomial1{Monomial(2, {{"x", 1}}), Monomial(5, {})};
+TEST(OneEquationOneVariableEqualitySolverTest, AdditionFractionsInEquationIsSolved) {
+    Polynomial polynomial1{Monomial(2, {{"x", 1}}), Monomial(5, {})};
     Polynomial polynomial2{Monomial(5, {{"x", 1}})};
     Polynomial polynomial3{Monomial(1, {{"x", 1}}), Monomial(-1, {})};
     Expression expression1(createExpressionIfPossible({polynomial1, "/", 2}));

@@ -93,6 +93,7 @@ private:
             newIndexes[i + 1] += newIndexes[i];
         }
     }
+
     void copyBackUsingNewIndexes(
         Values& valuesToSort, ArrayOfCountPerDigitValue& newIndexes, int const lowContainerIndex,
         int const highContainerIndex, int const digitIndex) const {
@@ -117,7 +118,8 @@ private:
                 int newHighContainerIndex(lowContainerIndex + newIndexes[i + 1] - 1);
                 sortStartingAtMostSignificantDigitInternal(
                     valuesToSort, newLowContainerIndex, newHighContainerIndex, digitIndex + 1);
-            }        }
+            }
+        }
     }
 
     GetDigitAtFunction m_getDigitAtFunction;

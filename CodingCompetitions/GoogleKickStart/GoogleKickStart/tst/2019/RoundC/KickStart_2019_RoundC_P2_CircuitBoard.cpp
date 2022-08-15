@@ -64,7 +64,8 @@ public:
                 result = m_selectedValueMatrix[getMatrixIndex(start, 0)];
             }
         }
-        return result;    }
+        return result;
+    }
 
 private:
     void initialize(Values const& valuesToCheck) {
@@ -80,7 +81,8 @@ private:
                 m_selectedValueMatrix[getMatrixIndex(index, 0)] = valuesToCheck[index];
             }
             for (Index exponentOf2 = 0; exponentOf2 < lastExponentOf2;
-                 exponentOf2++)  // put remaining values with "powers of 2 sized" ranges            {
+                 exponentOf2++)  // put remaining values with "powers of 2 sized" ranges
+            {
                 Index offset = get2ToThePowerOf(exponentOf2);
                 Index limit = valuesToCheck.size() - offset;
                 for (Index index = 0; index < limit; index++) {
@@ -89,7 +91,8 @@ private:
                         m_selectedValueMatrix[getMatrixIndex(index + offset, exponentOf2)]));
                     m_selectedValueMatrix[getMatrixIndex(index, exponentOf2 + 1)] = selectedValue;
                 }
-            }        }
+            }
+        }
     }
 
     Index getMatrixIndex(Index const x, Index const y) const { return y * m_columns + x; }
@@ -165,7 +168,8 @@ void runTestCase(int const testCaseNumber) {
                 commonRowThickness = min(commonRowThickness, subRowThicknessMatrix[getIndex(x, bottom)]);
                 maxSubMatrixThickness = max(maxSubMatrixThickness, commonRowThickness * rowLength++);
             }
-            maxThickness = max(maxThickness, maxSubMatrixThickness);        }
+            maxThickness = max(maxThickness, maxSubMatrixThickness);
+        }
     }
 
     my_cout << "Case #" << testCaseNumber << ": " << maxThickness << '\n';
@@ -206,7 +210,8 @@ void runTestCase(int const testCaseNumber)
                 cr = max(cr, thicknessPerCell[getIndex(k, i]));
                 if (cr - cl <= maxAllowableThickness) {
                     ok[getIndexFromMaxLength(i,j,k)] = true;
-                }                else {
+                }
+                else {
                     ok[getIndexFromMaxLength(i,j,k)] = false;
                 }
             }

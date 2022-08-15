@@ -57,7 +57,8 @@ WeightedJobScheduling::Profit WeightedJobScheduling::getMaxProfitByMonitoringTim
                 maxProfitsAtTime[timeToUpdate] = max(maxProfitsAtTime[timeToUpdate], maxProfitForJob);
             }
         }
-        result = maxProfitsAtTime.back();    }
+        result = maxProfitsAtTime.back();
+    }
     return result;
 }
 
@@ -85,7 +86,8 @@ WeightedJobScheduling::Profit WeightedJobScheduling::getMaxProfitByMonitoringJob
             maxProfitsAtJob[jobIndex] = max(maxProfitsAtJob[jobIndex - 1], currentProfit);
         }
 
-        result = maxProfitsAtJob.back();    }
+        result = maxProfitsAtJob.back();
+    }
     return result;
 }
 

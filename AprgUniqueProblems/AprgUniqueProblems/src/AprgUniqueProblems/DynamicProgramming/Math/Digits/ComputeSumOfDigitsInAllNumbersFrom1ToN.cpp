@@ -84,7 +84,8 @@ ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom
         result = mostSignificantDigit * sumAtDigitIndex[numberOfDigitsMinus1] +
                  mostSignificantDigit * (mostSignificantDigit - 1) / 2 * highestPowerOf10 +
                  mostSignificantDigit * (1 + remainingDigits) + getValueUsingMemoizationDP(remainingDigits);
-    }    return result;
+    }
+    return result;
 }
 
 ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom1ToN::getSummationFrom1ToN(

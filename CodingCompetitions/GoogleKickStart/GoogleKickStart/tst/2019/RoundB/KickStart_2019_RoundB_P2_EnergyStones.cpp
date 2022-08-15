@@ -64,7 +64,8 @@ int getMaxEnergy(
             Stone const& stone(stones[i]);
             int energyOfStone=0;
             if(stone.energy > (stone.rateOfLoss*elapsedTime))
-            {                energyOfStone = stone.energy - (stone.rateOfLoss*elapsedTime);
+            {
+                energyOfStone = stone.energy - (stone.rateOfLoss*elapsedTime);
             }
             int maxNextEnergy=0;
             if(left<i)
@@ -115,7 +116,8 @@ int getMaxEnergy(int const index, int const elapsedTime) {
             Stone stone(stones[index]);
             int remainingEnergyOfStone = max(0, stone.energy - (stone.rateOfLoss * elapsedTime));
             int energyIfEaten = getMaxEnergy(index + 1, elapsedTime + stone.timeToConsume) + remainingEnergyOfStone;
-            int energyIfSkipped = getMaxEnergy(index + 1, elapsedTime);            savedEnergy = max(energyIfEaten, energyIfSkipped);
+            int energyIfSkipped = getMaxEnergy(index + 1, elapsedTime);
+            savedEnergy = max(energyIfEaten, energyIfSkipped);
         }
         return savedEnergy;
     } else {

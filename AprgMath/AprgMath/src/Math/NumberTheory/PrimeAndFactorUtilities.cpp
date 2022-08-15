@@ -53,7 +53,8 @@ bool isTwinPrimeConjectureTrue(UnsignedInteger const number) {
         if (numbers[i + 1] - numbers[i] == 2) {
             twinPrimeCount++;
         }
-    }    return twinPrimeCount > 0;  // actually we should check if this is infinite (continuously increasing)
+    }
+    return twinPrimeCount > 0;  // actually we should check if this is infinite (continuously increasing)
 }
 
 bool isLegendreConjectureTrue(UnsignedInteger const number) {
@@ -149,7 +150,8 @@ UnsignedIntegers getPrimesBelowThisNumber(UnsignedInteger const number) {
         if (sieveOfEratosthenes[prime]) {
             result.emplace_back(prime);
         }
-    }    return result;
+    }
+    return result;
 }
 
 UnsignedIntegers getPrimeFactorsOfNumber(UnsignedInteger const number) {

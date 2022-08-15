@@ -56,7 +56,8 @@ TEST(EllipseTest, EllipseAtOriginWithRadius) {
     EXPECT_EQ(Point(2.5980762113533160118, -1), points[15]);
 }
 
-TEST(EllipseTest, IsInsideWorks) {    Ellipse ellipse(Point(0, 0), 5, 4);
+TEST(EllipseTest, IsInsideWorks) {
+    Ellipse ellipse(Point(0, 0), 5, 4);
 
     EXPECT_TRUE(ellipse.isInside(Point(0, 0)));
     EXPECT_FALSE(ellipse.isInside(Point(5, 5)));
@@ -81,7 +82,8 @@ TEST(EllipseTest, GetFociWorks) {
     EXPECT_EQ(Point(-3, 0), foci3[1]);
 }
 
-TEST(EllipseTest, GetMajorVerticesWorks) {    Ellipse ellipse1(Point(0, 0), 1, 1);
+TEST(EllipseTest, GetMajorVerticesWorks) {
+    Ellipse ellipse1(Point(0, 0), 1, 1);
     Ellipse ellipse2(Point(0, 0), 4, 5);
     Ellipse ellipse3(Point(0, 0), 5, 4);
 
@@ -98,7 +100,8 @@ TEST(EllipseTest, GetMajorVerticesWorks) {    Ellipse ellipse1(Point(0, 0), 1, 1
     EXPECT_EQ(Point(-5, 0), majorVertices3[1]);
 }
 
-TEST(EllipseTest, GetMinorVerticesWorks) {    Ellipse ellipse1(Point(0, 0), 1, 1);
+TEST(EllipseTest, GetMinorVerticesWorks) {
+    Ellipse ellipse1(Point(0, 0), 1, 1);
     Ellipse ellipse2(Point(0, 0), 4, 5);
     Ellipse ellipse3(Point(0, 0), 5, 4);
 
@@ -115,7 +118,8 @@ TEST(EllipseTest, GetMinorVerticesWorks) {    Ellipse ellipse1(Point(0, 0), 1, 1
     EXPECT_EQ(Point(0, -4), minorVertices3[1]);
 }
 
-TEST(EllipseTest, GetMajorAxisWorks) {    Ellipse ellipse1(Point(0, 0), 1, 1);
+TEST(EllipseTest, GetMajorAxisWorks) {
+    Ellipse ellipse1(Point(0, 0), 1, 1);
     Ellipse ellipse2(Point(0, 0), 4, 5);
     Ellipse ellipse3(Point(0, 0), 5, 4);
 

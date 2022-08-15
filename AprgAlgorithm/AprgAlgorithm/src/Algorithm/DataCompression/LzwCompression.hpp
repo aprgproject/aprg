@@ -75,7 +75,8 @@ public:
                     lookupTable.emplace_back(currentString + nextString[0]);  // add a new code word
                     multiCharCode++;
                 }
-                currentString = nextString;            } else {
+                currentString = nextString;
+            } else {
                 break;
             }
         }

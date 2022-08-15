@@ -23,6 +23,7 @@ public:
     Piece(uint8_t const data);
     Piece(PieceColorAndType const colorAndType);
     Piece(PieceColor const color, PieceType const type);
+
     bool operator==(Piece const& piece) const;
     bool operator!=(Piece const& piece) const;
     bool isEmpty() const;

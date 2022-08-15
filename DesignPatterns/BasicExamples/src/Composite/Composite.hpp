@@ -43,6 +43,7 @@ public:
     Component const* getChildPointerAt(int const index) const override { return m_children[index].get(); }
 
     void add(std::unique_ptr<Component> component) override { m_children.emplace_back(move(component)); }
+
     void removeAtIndex(int const index) override { m_children.erase(m_children.begin() + index); }
 
     void operation() override {

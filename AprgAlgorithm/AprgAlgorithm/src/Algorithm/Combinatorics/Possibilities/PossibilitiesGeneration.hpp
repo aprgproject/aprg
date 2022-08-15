@@ -62,7 +62,8 @@ private:
                 currentPossibility.emplace_back(objects[index]);
                 collectPossibilitiesUsingRecursion(recursionData);
                 currentPossibility.pop_back();
-            }        }
+            }
+        }
     }
 };
 

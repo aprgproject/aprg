@@ -18,7 +18,8 @@ void mergeTheTwoSortedParts(
             valuesToSort[mainIndex] = auxiliary[lowPartIndex++];  // copy and move low index
         }
     }
-    if (lowPartIndex <= middle) {        std::copy(auxiliary.cbegin() + lowPartIndex, auxiliary.cbegin() + middle + 1, valuesToSort.begin() + mainIndex);
+    if (lowPartIndex <= middle) {
+        std::copy(auxiliary.cbegin() + lowPartIndex, auxiliary.cbegin() + middle + 1, valuesToSort.begin() + mainIndex);
     }
     if (highPartIndex <= highest) {
         // copy all remaining from high part
@@ -39,7 +40,8 @@ Values mergeTwoSortedSequences(Values const& sortedValues1, Values const& sorted
             result.emplace_back(sortedValues1[i++]);   // copy and move first index
         }
     }
-    if (i < static_cast<int>(sortedValues1.size())) {        // copy remaining from the other array
+    if (i < static_cast<int>(sortedValues1.size())) {
+        // copy remaining from the other array
         std::copy(sortedValues1.cbegin() + i, sortedValues1.cend(), std::back_inserter(result));
     }
     if (j < static_cast<int>(sortedValues2.size())) {

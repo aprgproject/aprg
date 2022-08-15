@@ -40,7 +40,8 @@ public:
                 if (relativeRoots[i] == rootOfIndex) {
                     relativeRoots[i] = index;
                 }
-            }        }
+            }
+        }
     }
 
 private:

@@ -25,6 +25,7 @@ public:
         }
         return result;
     }
+
     DigitValue getDigitValue(char const c) {
         DigitValue result{};
         int indexOfCharacter = m_characters.find_first_of(c);

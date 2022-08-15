@@ -65,7 +65,8 @@ private:
                 for (Vertex const& dependentVertexAtEnd : m_vertexToDependentVertices[end]) {
                     result += getCountInternal(start, dependentVertexAtEnd);
                 }
-            } else if (distanceInTopologicalOrder == 0) {                result = 1;
+            } else if (distanceInTopologicalOrder == 0) {
+                result = 1;
             }
         }
         return result;

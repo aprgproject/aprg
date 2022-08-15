@@ -59,7 +59,8 @@ void factorizePolynomialsAndPutToResult(Polynomials& result, Polynomials const& 
         Polynomial const& polynomial(polynomialsToFactorize[i]);
         Polynomial simplifiedPolynomial(polynomial);
         simplifiedPolynomial.simplify();
-        if (doesNotNeedToBeFactorized(simplifiedPolynomial)) {            result.emplace_back(simplifiedPolynomial);
+        if (doesNotNeedToBeFactorized(simplifiedPolynomial)) {
+            result.emplace_back(simplifiedPolynomial);
         } else {
             int const originalSize(polynomialsToFactorize.size());
             int deltaSize = polynomialsToFactorize.size() - originalSize;

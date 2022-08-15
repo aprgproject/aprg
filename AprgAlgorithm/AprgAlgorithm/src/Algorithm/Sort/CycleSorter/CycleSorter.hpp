@@ -23,7 +23,8 @@ public:
             Value currentCycleValue = valuesToSort[incorrectPosition];
             int correctPosition = getCorrectPositionForValue(valuesToSort, currentCycleValue, incorrectPosition);
             if (correctPosition != incorrectPosition)  // check first unsorted
-            {                movePositionForwardUntilValueIsDifferent(valuesToSort, currentCycleValue, correctPosition);
+            {
+                movePositionForwardUntilValueIsDifferent(valuesToSort, currentCycleValue, correctPosition);
                 if (correctPosition != incorrectPosition) {
                     std::swap(currentCycleValue, valuesToSort[correctPosition]);
                     numberOfWrites++;
@@ -37,7 +38,8 @@ public:
                     if (currentCycleValue != valuesToSort[correctPosition]) {
                         std::swap(currentCycleValue, valuesToSort[correctPosition]);
                         numberOfWrites++;
-                    }                }
+                    }
+                }
             }
         }
     }
@@ -61,7 +63,8 @@ private:
         while (currentCycleValue == valuesToSort[correctPosition]) {
             correctPosition++;
         }
-    }};
+    }
+};
 
 }  // namespace algorithm
 

@@ -66,7 +66,8 @@ TwoSatisfiabilityUsingGraphs::DirectedGraph TwoSatisfiabilityUsingGraphs::create
                 result.connect(~satTerm[1], satTerm[0]);
             }
         }
-    }    return result;
+    }
+    return result;
 }
 
 }  // namespace booleanAlgebra

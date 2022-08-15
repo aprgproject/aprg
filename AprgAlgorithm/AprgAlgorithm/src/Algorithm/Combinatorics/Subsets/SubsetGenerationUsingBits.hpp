@@ -43,7 +43,8 @@ public:
                     currentSubset.emplace_back(objects[index]);
                 }
             }
-            result.emplace_back(currentSubset);        }
+            result.emplace_back(currentSubset);
+        }
         return result;
     }
 };

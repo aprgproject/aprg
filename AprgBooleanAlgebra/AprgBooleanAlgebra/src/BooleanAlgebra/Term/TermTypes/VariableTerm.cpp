@@ -62,7 +62,8 @@ void VariableTerm::initializeIfNotEmpty() {
         if (!isPrime(m_variableName[index])) {
             break;
         }
-    }    m_isNegated = isOdd(lastIndex - index);
+    }
+    m_isNegated = isOdd(lastIndex - index);
     m_variableName.resize(index + 1);
 }
 

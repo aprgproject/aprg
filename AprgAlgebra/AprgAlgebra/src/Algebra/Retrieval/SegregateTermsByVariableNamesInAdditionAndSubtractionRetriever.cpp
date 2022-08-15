@@ -138,7 +138,8 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::saveTerm(
         m_variableNameToTermMap[variableName] += term;
     } else {
         m_termWithMultipleVariableNames += term;
-    }}
+    }
+}
 
 }  // namespace algebra
 

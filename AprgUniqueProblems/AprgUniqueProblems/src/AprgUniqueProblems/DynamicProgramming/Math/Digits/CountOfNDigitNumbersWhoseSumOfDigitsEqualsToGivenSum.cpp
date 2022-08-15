@@ -81,7 +81,8 @@ CountOfNDigitNumbersWhoseSumOfDigitsEqualsToGivenSum::getCountUsingIterativeDPAn
                     partialSumToCount[partialSum] += partialSumToCount[partialSum - digitValue];
                 }
             }
-        }        result = partialSumToCount.back();
+        }
+        result = partialSumToCount.back();
     }
     return result;
 }

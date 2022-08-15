@@ -50,7 +50,8 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
             if (m_string[index] == m_string[index + 1]) {
                 isSubstrAPalindrome.setEntry(index, index + 1, true);
                 result = 2;
-            }        }
+            }
+        }
         for (Index length = 3; length <= stringLength; length++)  // length >= 3
         {
             for (Index left = 0; left + length <= stringLength; left++) {
@@ -58,7 +59,8 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
                 if (m_string[left] == m_string[right] && isSubstrAPalindrome.getEntry(left + 1, right - 1)) {
                     isSubstrAPalindrome.setEntry(left, right, true);
                     result = max(result, length);
-                }            }
+                }
+            }
         }
     }
     return result;
@@ -83,7 +85,8 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
             if (possibleLeft >= 0 && m_string[possibleLeft] == m_string[right])  // length >= 3
             {
                 palidromeLengths[right] = previousLength + 2;
-            }        }
+            }
+        }
         result = *max_element(palidromeLengths.cbegin(), palidromeLengths.cend());
     }
     return result;
@@ -116,7 +119,8 @@ string LongestPalindromicSubstring::getLongestStringUsingIterativeDPAndSpaceEffi
             result.push_back(m_string[startIndex]);
         }
     }
-    return result;}
+    return result;
+}
 
 LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLengthUsingNaiveRecursion(
     Index const left, Index const right) const {
@@ -131,7 +135,8 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
         if (m_string[left] == m_string[right]) {
             Index middleLength = getLongestLengthUsingNaiveRecursion(left + 1, right - 1);
             if (middleLength + 2 == length) {
-                isCompletePalindrome = true;                result = middleLength + 2;
+                isCompletePalindrome = true;
+                result = middleLength + 2;
             }
         }
 
@@ -158,7 +163,8 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
             if (m_string[left] == m_string[right]) {
                 Index middleLength = getLongestLengthUsingNaiveRecursion(left + 1, right - 1);
                 if (middleLength + 2 == length) {
-                    isCompletePalindrome = true;                    result = middleLength + 2;
+                    isCompletePalindrome = true;
+                    result = middleLength + 2;
                 }
             }
 

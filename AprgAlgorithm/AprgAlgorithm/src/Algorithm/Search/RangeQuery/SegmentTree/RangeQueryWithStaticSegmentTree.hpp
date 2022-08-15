@@ -96,7 +96,8 @@ protected:
                         m_function(m_treeValues[treeIndex], m_treeValues[treeIndex + 1]);
                 }
                 treeBaseLeft = Utilities::getParent(treeBaseLeft);
-                treeBaseRight = Utilities::getParent(treeBaseRight);            }
+                treeBaseRight = Utilities::getParent(treeBaseRight);
+            }
         }
     }
 
@@ -125,7 +126,8 @@ protected:
                 result = m_function(result, m_treeValues[first]);
             }
         }
-        return result;    }
+        return result;
+    }
 
     Value getValueOnIntervalFromTopToBottom(
         Index const startInterval, Index const endInterval, Index const currentChild, Index const baseLeft,
@@ -145,7 +147,8 @@ protected:
             result = m_treeValues[currentChild];
         } else {
             Index baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
-            bool doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);            bool doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
+            bool doesLeftPartIntersect = !(endInterval < baseLeft || baseMidPoint < startInterval);
+            bool doesRightPartIntersect = !(endInterval < baseMidPoint + 1 || baseRight < startInterval);
             if (doesLeftPartIntersect && doesRightPartIntersect) {
                 result = m_function(
                     getValueOnIntervalFromTopToBottom(
@@ -187,6 +190,7 @@ protected:
             }
         }
     }
+
     Index m_startOfChildren;
     Values m_treeValues;
     Function m_function;

@@ -75,7 +75,8 @@ TEST(LimaconTest, GetPointsForShapeWorks) {
     EXPECT_EQ(Point(0, -10), points[3]);
 }
 
-TEST(LimaconTest, CalculateRadiusFromThetaWorks) {    Limacon limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
+TEST(LimaconTest, CalculateRadiusFromThetaWorks) {
+    Limacon limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
 
     EXPECT_DOUBLE_EQ(10, limacon.calculateRadiusFromTheta(AlbaAngle(AngleUnitType::Degrees, 90)));
     EXPECT_DOUBLE_EQ(-3, limacon.calculateRadiusFromTheta(AlbaAngle(AngleUnitType::Degrees, 180)));

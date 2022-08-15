@@ -49,7 +49,8 @@ private:
                         m_function(m_partialValueMatrix.getEntry(left, right - 1), valuesToCheck[right]));
                 }
             }
-        }    }
+        }
+    }
 
     ValueMatrix m_partialValueMatrix;  // left by right matrix
     Function m_function;

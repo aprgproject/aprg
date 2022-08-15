@@ -49,7 +49,8 @@ private:
             DigitValue currentDigit(m_getDigitAtFunction(valuesToSort[i], digitIndex));
             if (currentDigit < partitionDigit) {
                 std::swap(valuesToSort[lowIndexWithEqualValue++], valuesToSort[i]);
-            } else if (currentDigit > partitionDigit) {                std::swap(valuesToSort[i], valuesToSort[highIndexWithEqualValue--]);
+            } else if (currentDigit > partitionDigit) {
+                std::swap(valuesToSort[i], valuesToSort[highIndexWithEqualValue--]);
             } else {
                 i++;
             }

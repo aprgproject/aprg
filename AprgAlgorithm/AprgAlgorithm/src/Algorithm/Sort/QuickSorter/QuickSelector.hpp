@@ -18,7 +18,8 @@ public:
         return valuesToSelect[selectionIndex];
     }
 
-    void doNthElement(Values& valuesToSelect, int const selectionIndex) const {        // Iterative approach
+    void doNthElement(Values& valuesToSelect, int const selectionIndex) const {
+        // Iterative approach
         int lowest = 0, highest = valuesToSelect.size() - 1;
         while (highest > lowest) {
             int partitionIndex = partitionAndGetPartitionIndex(valuesToSelect, lowest, highest, m_pivotType);

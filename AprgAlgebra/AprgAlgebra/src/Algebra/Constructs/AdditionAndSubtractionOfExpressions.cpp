@@ -50,6 +50,7 @@ TermsWithDetails AdditionAndSubtractionOfExpressions::getAsTermsWithDetails() co
     }
     return result;
 }
+
 Term AdditionAndSubtractionOfExpressions::getCombinedTerm() {
     Term combinedTerm;
     combineExpressionsIfPossible();
@@ -102,6 +103,7 @@ void AdditionAndSubtractionOfExpressions::mergeExpressionsByCheckingTwoTermsAtAT
                 mergeParts[i] = mergedTerm;
                 m_expressions[i] = createOrCopyExpressionFromATerm(mergedTerm * commonPart);
                 m_associations[i] = TermAssociationType::Positive;
+
                 mergeParts.erase(mergeParts.begin() + j);
                 commonParts.erase(commonParts.begin() + j);
                 m_expressions.erase(m_expressions.begin() + j);

@@ -23,7 +23,8 @@ Equation EquationBuilder::getEquation() const {
             result = Equation(firstTerm, m_equationOperatorStrings[0], secondTerm);
         }
     }
-    return result;}
+    return result;
+}
 
 stringHelper::strings const& EquationBuilder::getTermStrings() const { return m_termStrings; }
 

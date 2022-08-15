@@ -66,7 +66,8 @@ ostream& operator<<(ostream& out, Board const& board) {
                 string(" ") + pieceGrid[i++].getFenCharacter() + string(" "));
         }
     }
-    out << displayTable;    return out;
+    out << displayTable;
+    return out;
 }
 
 ostream& operator<<(ostream& out, BoardValue const& boardValue) {
@@ -76,6 +77,7 @@ ostream& operator<<(ostream& out, BoardValue const& boardValue) {
     out << boardValue.m_data[3];
     return out;
 }
+
 istream& operator>>(istream& in, BoardValue& boardValue) {
     in >> boardValue.m_data[0];
     in >> boardValue.m_data[1];
@@ -93,7 +95,8 @@ void printHexValuesInBoard(ostream& out, Board const& board) {
             out << "0x" << static_cast<uint32_t>(pieceGrid[i++].getData()) << ", ";
         }
     }
-    out << dec;    out << "\n";
+    out << dec;
+    out << "\n";
 }
 
 }  // namespace chess

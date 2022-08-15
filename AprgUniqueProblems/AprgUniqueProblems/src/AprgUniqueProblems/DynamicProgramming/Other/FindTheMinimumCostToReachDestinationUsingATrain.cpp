@@ -51,7 +51,8 @@ FindTheMinimumCostToReachDestinationUsingATrain::getMinimumCostUsingIterativeDP(
                         savedCosts[immediateStation] + m_pricesAtEachStation.getEntry(immediateStation, endStation));
             }
             savedCosts[endStation] = entryResult;
-        }        result = savedCosts.back();
+        }
+        result = savedCosts.back();
     }
     return result;
 }
@@ -76,7 +77,8 @@ FindTheMinimumCostToReachDestinationUsingATrain::getMinimumCostUsingMemoizationD
     Value result(savedCosts[endStation]);
     if (UNUSED_VALUE == result) {
         result = 0;
-        if (endStation > 0) {            result = MAX_VALUE;
+        if (endStation > 0) {
+            result = MAX_VALUE;
             for (int immediateStation = static_cast<int>(endStation) - 1; immediateStation >= 0; immediateStation--) {
                 result =
                     min(result, getMinimumCostUsingNaiveRecursion(immediateStation) +

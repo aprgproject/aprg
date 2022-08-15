@@ -49,7 +49,8 @@ void TermsAggregator::updateStartIndexAndEndIndexAndCheckOpeningAndClosingOperat
         Term const& term(m_terms[i]);
         if (term.isOperator()) {
             Operator const& operatorTerm(term.getOperatorConstReference());
-            if (operatorTerm.isOpeningGroupOperator()) {                m_startIndex = i;
+            if (operatorTerm.isOpeningGroupOperator()) {
+                m_startIndex = i;
                 m_endIndex = i;
             } else if (operatorTerm.isClosingGroupOperator()) {
                 m_endIndex = i;
@@ -67,7 +68,8 @@ bool TermsAggregator::combineOpeningClosingOperatorsAtStartEndIndexesAndReturnIf
         Term const& term3(m_terms[m_endIndex]);
         if (term1.isOperator() && term1.getOperatorConstReference().isOpeningGroupOperator() &&
             isNonEmptyOrNonOperatorType(term2) && term3.isOperator() &&
-            term3.getOperatorConstReference().isClosingGroupOperator()) {            eraseAndThenInsert(m_startIndex, m_endIndex, term2);
+            term3.getOperatorConstReference().isClosingGroupOperator()) {
+            eraseAndThenInsert(m_startIndex, m_endIndex, term2);
             isCombined = true;
         }
     }
@@ -131,7 +133,8 @@ TermsAggregator::Indexes TermsAggregator::getNextOperatorIndexes(OperatorInputTy
         Term const& term(m_terms[i]);
         if (term.isOperator()) {
             Operator const& operatorTerm(term.getOperatorConstReference());
-            if (operatorTerm.isSameOperatorInputType(operatorInputType)) {                operatorLevelToIndexMap.emplace(getOperatorTypeInversePriority(operatorTerm.getOperatorType()), i);
+            if (operatorTerm.isSameOperatorInputType(operatorInputType)) {
+                operatorLevelToIndexMap.emplace(getOperatorTypeInversePriority(operatorTerm.getOperatorType()), i);
             }
         }
     }
@@ -149,7 +152,8 @@ bool TermsAggregator::buildExpressionWithBinaryOperationAndReturnIfBuilt(int con
         Term const& term3(m_terms[index + 1]);
         if (isNonEmptyOrNonOperatorType(term1) && term2.isOperator() && isNonEmptyOrNonOperatorType(term3)) {
             Expression newExpression(createOrCopyExpressionFromATerm(term1));
-            Operator const& operatorTerm(term2.getOperatorConstReference());            if (operatorTerm.isAnd()) {
+            Operator const& operatorTerm(term2.getOperatorConstReference());
+            if (operatorTerm.isAnd()) {
                 newExpression.putTermWithAndOperationIfNeeded(term3);
             } else if (operatorTerm.isOr()) {
                 newExpression.putTermWithOrOperationIfNeeded(term3);
@@ -168,7 +172,8 @@ bool TermsAggregator::buildExpressionWithUnaryOperationAndReturnIfBuilt(int cons
         Term const& term2(m_terms[index + 1]);
         if (term1.isOperator() && isNonEmptyOrNonOperatorType(term2)) {
             Term finalTerm(term2);
-            Operator const& operatorTerm(term1.getOperatorConstReference());            if (operatorTerm.isNot()) {
+            Operator const& operatorTerm(term1.getOperatorConstReference());
+            if (operatorTerm.isNot()) {
                 finalTerm.negate();
             }
             eraseAndThenInsert(index, index + 1, finalTerm);
@@ -186,7 +191,8 @@ bool TermsAggregator::simplifyBinaryOperationAndReturnIfSimplified(int const ind
         Term const& term3(m_terms[index + 1]);
         if (isNonEmptyOrNonOperatorType(term1) && term2.isOperator() && isNonEmptyOrNonOperatorType(term3)) {
             Term newTerm(performOperation(term2.getOperatorConstReference(), term1, term3));
-            eraseAndThenInsert(index - 1, index + 1, newTerm);            isSimplified = true;
+            eraseAndThenInsert(index - 1, index + 1, newTerm);
+            isSimplified = true;
         }
     }
     return isSimplified;
@@ -199,7 +205,8 @@ bool TermsAggregator::simplifyUnaryOperationAndReturnIfSimplified(int const inde
         Term const& term2(m_terms[index + 1]);
         if (term1.isOperator() && isNonEmptyOrNonOperatorType(term2)) {
             Term newTerm(performOperation(term1.getOperatorConstReference(), term2));
-            eraseAndThenInsert(index, index + 1, newTerm);            isSimplified = true;
+            eraseAndThenInsert(index, index + 1, newTerm);
+            isSimplified = true;
         }
     }
     return isSimplified;
@@ -214,6 +221,7 @@ bool TermsAggregator::hasNoValueBeforeThisIndex(int const index) const {
     }
     return result;
 }
+
 void TermsAggregator::eraseAndThenInsert(int const firstIndex, int const secondIndex, Term const& term) {
     Term newTerm(term);
     eraseTermsInclusive(firstIndex, secondIndex);

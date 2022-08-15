@@ -176,7 +176,8 @@ TEST(PolynomialHelpersTest, GetRootsWorksAndRootIsZeroWhenExponentIsPositive) {
     EXPECT_EQ(AlbaNumber(0), roots[0]);
 }
 
-TEST(PolynomialHelpersTest, GetRootsWorksAndZeroIsNotIncludedWhenExponentIsNegative) {    AlbaNumbers roots(getRoots(RootType::RealRootsOnly, Polynomial{Monomial(1, {{"x", AlbaNumber(-4) / 3}})}));
+TEST(PolynomialHelpersTest, GetRootsWorksAndZeroIsNotIncludedWhenExponentIsNegative) {
+    AlbaNumbers roots(getRoots(RootType::RealRootsOnly, Polynomial{Monomial(1, {{"x", AlbaNumber(-4) / 3}})}));
 
     EXPECT_TRUE(roots.empty());
 }
@@ -188,14 +189,16 @@ TEST(PolynomialHelpersTest, GetRootsWorksAndWhenPolynomialIsNotSorted) {
     EXPECT_EQ(AlbaNumber(16), roots[0]);
 }
 
-TEST(PolynomialHelpersTest, GetRootsWorksAndRootIsCorrectlyCalculatedWhenExponentIsNotAnInteger) {    AlbaNumbers roots(
+TEST(PolynomialHelpersTest, GetRootsWorksAndRootIsCorrectlyCalculatedWhenExponentIsNotAnInteger) {
+    AlbaNumbers roots(
         getRoots(RootType::RealRootsOnly, Polynomial{Monomial(1, {{"x", AlbaNumber(4) / 3}}), Monomial(-16, {})}));
 
     ASSERT_EQ(1U, roots.size());
     EXPECT_EQ(AlbaNumber(8), roots[0]);
 }
 
-TEST(PolynomialHelpersTest, RaiseBinomialToAPowerUsingBinomialExpansionWorks) {    Polynomial binomial{Monomial(1, {{"x", 1}}), Monomial(1, {{"y", 1}})};
+TEST(PolynomialHelpersTest, RaiseBinomialToAPowerUsingBinomialExpansionWorks) {
+    Polynomial binomial{Monomial(1, {{"x", 1}}), Monomial(1, {{"y", 1}})};
 
     Polynomial actualExpansion(raiseBinomialToAPowerUsingBinomialExpansion(binomial, 4));
 
@@ -221,4 +224,5 @@ TEST(PolynomialHelpersTest, RemoveEmptyPolynomialsWorks) {
 }
 
 }  // namespace algebra
+
 }  // namespace alba

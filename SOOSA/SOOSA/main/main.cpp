@@ -19,7 +19,8 @@ int main(int argc, char *argv[]) {
         AlbaLocalPathHandler pathToProcess(getStringWithoutCharAtTheEnd(argumentsInMain[1], '"'));
 
         UserInterface ui;
-        ui.setPath(pathToProcess.getFullPath());        ui.askUserForMainDetails();
+        ui.setPath(pathToProcess.getFullPath());
+        ui.askUserForMainDetails();
         ui.askUserForFormDetails();
 
         SoosaConfiguration soosaConfiguration;

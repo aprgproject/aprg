@@ -52,7 +52,8 @@ public:
     double getC() const { return ParabolaParent::m_coefficients[0]; }
 
     double getP() const {
-        //(x-xt)^2 = 4p*(y-yt)        return 1 / (getA() * 4);
+        //(x-xt)^2 = 4p*(y-yt)
+        return 1 / (getA() * 4);
     }
 
     double getTranslationInX() const {

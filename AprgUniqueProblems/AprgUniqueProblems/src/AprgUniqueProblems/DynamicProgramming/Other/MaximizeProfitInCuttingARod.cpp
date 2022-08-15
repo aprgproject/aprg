@@ -44,7 +44,8 @@ MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUs
                     entryResult = max(entryResult, rodProfit + partialProfits[remainingLength - rodLength]);
                 }
             }
-            partialProfits[remainingLength] = entryResult;        }
+            partialProfits[remainingLength] = entryResult;
+        }
         result = partialProfits.back();
     }
     return result;
@@ -68,7 +69,8 @@ MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUs
     Profit result = partialProfits[remainingLength];
     if (UNUSED_PROFIT == result) {
         result = 0;
-        for (Rod const& rod : m_rods) {            Length rodLength(rod.first);
+        for (Rod const& rod : m_rods) {
+            Length rodLength(rod.first);
             Profit rodProfit(rod.second);
             if (remainingLength >= rodLength) {
                 result = max(

@@ -61,7 +61,8 @@ TypeToWrite AlbaStreamBitReader::readBigEndianNumberData() {
         dataBitset.set(numberOfBits - 1 - i, m_bitBuffer[i]);
     }
     eraseBitsInBitBuffer(numberOfBits);
-    return static_cast<TypeToWrite>(dataBitset.to_ullong());}
+    return static_cast<TypeToWrite>(dataBitset.to_ullong());
+}
 
 template <typename TypeToWrite>
 TypeToWrite AlbaStreamBitReader::readLittleEndianNumberData() {
@@ -75,7 +76,8 @@ TypeToWrite AlbaStreamBitReader::readLittleEndianNumberData() {
             dataBitset.set((byteIndex * AlbaBitConstants::BYTE_SIZE_IN_BITS) - 1 - i, m_bitBuffer[bitBufferIndex++]);
         }
     }
-    eraseBitsInBitBuffer(numberOfBits);    return static_cast<TypeToWrite>(dataBitset.to_ullong());
+    eraseBitsInBitBuffer(numberOfBits);
+    return static_cast<TypeToWrite>(dataBitset.to_ullong());
 }
 
 template <auto BITSET_SIZE>
@@ -90,4 +92,5 @@ std::bitset<BITSET_SIZE> AlbaStreamBitReader::readBitsetData(
     eraseBitsInBitBuffer(numberOfBitsToRead);
     return result;
 }
+
 }  // namespace alba

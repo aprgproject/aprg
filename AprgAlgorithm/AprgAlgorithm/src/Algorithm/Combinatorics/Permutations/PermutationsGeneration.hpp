@@ -86,7 +86,8 @@ private:
                     currentPermutation.emplace_back(objects[index]);
                     isProcessed[index] = true;
                     collectPermutationsUsingRecursion(recursionData);
-                    isProcessed[index] = false;                    currentPermutation.pop_back();
+                    isProcessed[index] = false;
+                    currentPermutation.pop_back();
                 }
             }
         }

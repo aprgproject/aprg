@@ -27,6 +27,7 @@ public:
         }
         return result;
     }
+
     Index getIndexOfNearestValue(Value const& valueToCheck) {
         Index previousSearchIndex(0);
         Index searchIndex(0);
@@ -34,6 +35,7 @@ public:
             previousSearchIndex = searchIndex;
             searchIndex += m_blockSize;
         }
+
         // perform linear search on that block
         LinearNearestValueSearchWithOneIndex<Values> linearSearch(
             previousSearchIndex, std::min(searchIndex, static_cast<int>(m_sortedValues.size()) - 1), m_sortedValues);

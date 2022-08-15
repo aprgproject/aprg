@@ -23,6 +23,7 @@ public:
         }
         return result;
     }
+
     Index getIndexOfNearestValue(Value const& value) const {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
@@ -47,7 +48,8 @@ private:
             while (result + forwardSkip < size && m_sortedValues[result + forwardSkip] <= value) {
                 result += forwardSkip;
             }
-        }        return result;
+        }
+        return result;
     }
 
     Index getIndexOfNearestValueFromLowerIndex(Value const& value, Index const lowIndex) const {
@@ -57,6 +59,7 @@ private:
         Value deviationFromHigher(mathHelper::getPositiveDelta(value, m_sortedValues[highIndex]));
         return (deviationFromLower <= deviationFromHigher) ? lowIndex : highIndex;
     }
+
     Index getHigherIndex(Index const lowIndex) const {
         return std::min(lowIndex + 1, static_cast<Index>(m_sortedValues.size()) - 1);
     }

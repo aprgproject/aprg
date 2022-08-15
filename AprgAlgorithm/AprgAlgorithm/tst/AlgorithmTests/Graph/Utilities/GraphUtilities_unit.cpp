@@ -439,7 +439,8 @@ TEST(GraphUtilitiesTest, GetAllInDegreesAndOutDegreesAtWorks) {
     EXPECT_EQ(0, vertexToInDegreeAndOutDegreePairMap[3].second);
 }
 
-TEST(GraphUtilitiesTest, GetEdgesOfMaximalConnectedSubgraphsWorks) {    UndirectedGraphForTest graph;
+TEST(GraphUtilitiesTest, GetEdgesOfMaximalConnectedSubgraphsWorks) {
+    UndirectedGraphForTest graph;
     graph.connect(0, 5);
     graph.connect(4, 3);
     graph.connect(0, 1);

@@ -22,7 +22,8 @@ public:
             if (m_sortedValues[possibleIndex] == value) {
                 result = possibleIndex;
             }
-        }        return result;
+        }
+        return result;
     }
 
 private:
@@ -37,7 +38,8 @@ private:
                    m_sortedValues[result + forwardSkip] <
                        value)  // less than condition to avoid redundant traversal on equal values
             {
-                result += forwardSkip;            }
+                result += forwardSkip;
+            }
         }
         result += (result + 1 < static_cast<Index>(m_sortedValues.size())) ? 1 : 0;  // move one for equal
         return result;

@@ -26,6 +26,7 @@ public:
         AdjacencyList const& adjacencyList(m_adjacencyLists[sourceVertex]);
         return adjacencyList.find(destinationVertex) != adjacencyList.cend();
     }
+
     int getNumberOfVertices() const override { return getUniqueVertices().size(); }
 
     int getNumberOfEdges() const override { return m_numberOfEdges; }
@@ -34,6 +35,7 @@ public:
         AdjacencyList const& adjacencyList(m_adjacencyLists[vertex]);
         return Vertices(adjacencyList.cbegin(), adjacencyList.cend());
     }
+
     Vertices getVertices() const override {
         SetOfVertices uniqueVertices(getUniqueVertices());
         return Vertices(uniqueVertices.cbegin(), uniqueVertices.cend());
@@ -45,7 +47,8 @@ public:
             AdjacencyList const& adjacencyList(m_adjacencyLists[vertex1]);
             for (Vertex const& vertex2 : adjacencyList) {
                 result.emplace_back(vertex1, vertex2);
-            }        }
+            }
+        }
         return result;
     }
 
@@ -77,7 +80,8 @@ protected:
             AdjacencyList const& adjacencyList(m_adjacencyLists[sourceVertex]);
             if (!adjacencyList.empty()) {
                 uniqueVertices.emplace(sourceVertex);
-                std::copy(                    adjacencyList.cbegin(), adjacencyList.cend(),
+                std::copy(
+                    adjacencyList.cbegin(), adjacencyList.cend(),
                     std::inserter(uniqueVertices, uniqueVertices.cbegin()));
             }
         }
@@ -91,7 +95,8 @@ protected:
                 graph.m_adjacencyLists[vertex]);
             if (!adjacencyList.empty()) {
                 out << "Adjacent with vertex " << vertex << ": {";
-                containerHelper::saveContentsToStream(out, adjacencyList, containerHelper::StreamFormat::String);                out << "} \n";
+                containerHelper::saveContentsToStream(out, adjacencyList, containerHelper::StreamFormat::String);
+                out << "} \n";
             }
         }
         return out;

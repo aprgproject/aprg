@@ -29,7 +29,8 @@ public:
             if (sortedBinaryValues[lowerIndex]) {
                 result = sortedBinaryValues.size() - lowerIndex;
             }
-        }        return result;
+        }
+        return result;
     }
 
     //    Implementation using FindSmallestValueWithTrue
@@ -46,7 +47,8 @@ public:
     //            if(sortedBinaryValues[smallestOneIndex])
     //            {
     //                result = sortedBinaryValues.size() - smallestOneIndex;
-    //            }    //        }
+    //            }
+    //        }
     //        return result;
     //    }
 };

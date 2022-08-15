@@ -25,7 +25,8 @@ void findDistinctNonConsecutiveFibonacciNumbersForSum(
         UnsignedInteger fibonacci(fibonaccis[i]);
         if (sum > fibonacci) {
             fibonaccisForSum.emplace_back(fibonacci);
-            findDistinctNonConsecutiveFibonacciNumbersForSum(                isComplete, fibonaccisForSum, fibonaccis, sum - fibonacci, index + 2);
+            findDistinctNonConsecutiveFibonacciNumbersForSum(
+                isComplete, fibonaccisForSum, fibonaccis, sum - fibonacci, index + 2);
             if (isComplete) {
                 break;
             }
@@ -160,6 +161,7 @@ UnsignedInteger getNthFibonacciUsingLogarithmicTabularDP(UnsignedInteger const n
     }
     return result;
 }
+
 UnsignedIntegers getFibonacciNumbersBelowThisNumber(UnsignedInteger const number) {
     UnsignedIntegers result;
     UnsignedInteger previousFibonacci(0);

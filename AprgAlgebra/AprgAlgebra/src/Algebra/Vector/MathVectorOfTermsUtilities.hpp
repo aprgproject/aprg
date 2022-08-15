@@ -128,7 +128,8 @@ Term getTermThatYieldsToThisGradient(
         std::string const& coordinateVariableName(coordinateVariables[i]);
         Term termWithOtherCoordinates, termWithoutOtherCoordinates;
         retrieveWithAndWithoutOtherCoordinates(
-            termWithOtherCoordinates, termWithoutOtherCoordinates, gradient.getValueAt(i), coordinateVariableName,            allCoordinates);
+            termWithOtherCoordinates, termWithoutOtherCoordinates, gradient.getValueAt(i), coordinateVariableName,
+            allCoordinates);
         processedCoordinates.emplace_back(coordinateVariableName);
         Integration integration(coordinateVariableName);
         if (isFirst) {
@@ -192,7 +193,8 @@ Term getLineIntegral(
         DerivativeVariableName derivativeVariableName(1, "", coordinateVariables[i]);
         substitution.putVariableWithTerm(
             derivativeVariableName.getNameInLeibnizNotation(), differentiation.differentiate(linePath.getValueAt(i)));
-    }    MathVectorOfTerms<SIZE> linePathInVectorField;
+    }
+    MathVectorOfTerms<SIZE> linePathInVectorField;
     for (size_t i = 0; i < SIZE; i++) {
         linePathInVectorField.getValueReferenceAt(i) = substitution.performSubstitutionTo(vectorField.getValueAt(i));
     }
@@ -219,7 +221,8 @@ Term getLineIntegralIndependentOfPath(
             substitutionForHigherValues.putVariableWithValue(coordinateVariables[i], higherValues.getValueAt(i));
         }
         result = substitutionForHigherValues.performSubstitutionTo(potential) -
-                 substitutionForLowerValues.performSubstitutionTo(potential);    }
+                 substitutionForLowerValues.performSubstitutionTo(potential);
+    }
     return result;
 }
 
@@ -307,6 +310,7 @@ MathVectorOfTerms<SIZE> getGradient(Term const& term, ArrayOfStrings<SIZE> const
     }
     return result;
 }
+
 template <size_t SIZE>
 MathVectorOfTerms<SIZE> getDel(
     MathVectorOfTerms<SIZE> const& termVector, ArrayOfStrings<SIZE> const& coordinateVariables) {
@@ -316,6 +320,7 @@ MathVectorOfTerms<SIZE> getDel(
     }
     return result;
 }
+
 template <size_t SIZE>
 MathVectorOfTerms<SIZE> getDoubleDel(
     MathVectorOfTerms<SIZE> const& termVector, ArrayOfStrings<SIZE> const& coordinateVariables) {
@@ -326,6 +331,7 @@ MathVectorOfTerms<SIZE> getDoubleDel(
     }
     return result;
 }
+
 template <size_t SIZE>
 void simplifyForTermVector(MathVectorOfTerms<SIZE>& termVector) {
     for (Term& term : termVector.getValuesReference()) {

@@ -305,7 +305,8 @@ void CPlusPlusFileFixer::fixSmallUToCapitalUInNumbers() {
                 line[indexOfU] = 'U';
             }
             indexOfU = line.find('u', indexOfU + 1);
-        }    }
+        }
+    }
 }
 
 void CPlusPlusFileFixer::addHeaderFileFromAngleBrackets(string const& header) {

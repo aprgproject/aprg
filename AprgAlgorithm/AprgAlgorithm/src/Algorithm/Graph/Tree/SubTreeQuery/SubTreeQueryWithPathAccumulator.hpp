@@ -37,6 +37,7 @@ public:
         }
         return result;
     }
+
 protected:
     void initializeIfNeeded() {
         if (GraphUtilities::isATree(m_graph)) {

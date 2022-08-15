@@ -30,7 +30,8 @@ public:
         ReachabilityPointer const& pointer(m_reachabilityPointerArray[sourceVertex]);
         if (pointer) {
             result = pointer->isReachable(destinationVertex);
-        }        return result;
+        }
+        return result;
     }
 
 private:

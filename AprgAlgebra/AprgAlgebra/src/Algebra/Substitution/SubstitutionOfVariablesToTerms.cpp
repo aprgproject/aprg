@@ -153,7 +153,8 @@ void SubstitutionOfVariablesToTerms::putVariableWithTerm(string const& variable,
     m_variableToTermsMap[variable].simplify();
 }
 
-void SubstitutionOfVariablesToTerms::performSubstitutionForTermsWithAssociation(    TermsWithAssociation& termsWithAssociation) const {
+void SubstitutionOfVariablesToTerms::performSubstitutionForTermsWithAssociation(
+    TermsWithAssociation& termsWithAssociation) const {
     for (TermWithDetails& termWithDetails : termsWithAssociation.getTermsWithDetailsReference()) {
         Term& term(getTermReferenceFromUniquePointer(termWithDetails.baseTermPointer));
         term = performSubstitutionTo(term);

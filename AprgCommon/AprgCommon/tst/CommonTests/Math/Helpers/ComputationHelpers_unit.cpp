@@ -77,7 +77,8 @@ TEST(ComputationHelpersTest, GetQuadraticWorksWithRealRootsOnlyWithInputHavingRe
     EXPECT_EQ(AlbaNumber(-1.5), quadraticRoots[1]);
 }
 
-TEST(ComputationHelpersTest, GetQuadraticWorksWithRealRootsOnlyWithInputHavingImaginaryRoots) {    AlbaNumbers quadraticRoots(getQuadraticRoots(RootType::RealRootsOnly, 1, 0, 4));
+TEST(ComputationHelpersTest, GetQuadraticWorksWithRealRootsOnlyWithInputHavingImaginaryRoots) {
+    AlbaNumbers quadraticRoots(getQuadraticRoots(RootType::RealRootsOnly, 1, 0, 4));
 
     EXPECT_TRUE(quadraticRoots.empty());
 }

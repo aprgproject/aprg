@@ -612,6 +612,7 @@ void Integration::retrieveImportantTermsForTrigonometricSubstitutionInExpression
         shouldProceedToTrigSub = true;
     }
 }
+
 void Integration::retrieveImportantTermsForTrigonometricSubstitutionInPolynomial(
     bool& shouldProceedToTrigSub, Term& commonFactor, Term& firstAndSecondTerm, Term& firstTerm, Term& secondTerm,
     Polynomial const& polynomial) const {
@@ -639,7 +640,8 @@ void Integration::retrieveImportantTermsForTrigonometricSubstitutionInPolynomial
             secondTerm = secondMonomials[1];
             if (isANegativeTerm(commonFactor)) {
                 commonFactor = negateTerm(commonFactor);
-                firstAndSecondTerm = negateTerm(firstAndSecondTerm);                firstTerm = negateTerm(firstTerm);
+                firstAndSecondTerm = negateTerm(firstAndSecondTerm);
+                firstTerm = negateTerm(firstTerm);
                 secondTerm = negateTerm(secondTerm);
             }
             shouldProceedToTrigSub = true;
@@ -748,7 +750,8 @@ void Integration::integrateInMultiplicationOrDivisionByTryingReverseChainRule(
             {termsWithDetailsInMultiplicationOrDivision[i]}));
         Term innerTermInFirstTerm;
         firstTerm.simplify();
-        secondTerm.simplify();        findInnerAndOuterTermForChainRule(innerTermInFirstTerm, firstTerm);
+        secondTerm.simplify();
+        findInnerAndOuterTermForChainRule(innerTermInFirstTerm, firstTerm);
         if (!innerTermInFirstTerm.isEmpty()) {
             integrateUsingReverseChainRule(result, firstTerm, innerTermInFirstTerm, secondTerm);
         }
@@ -925,7 +928,8 @@ Polynomial Integration::getTotalNumeratorWithNewVariables(
         Term currentNumeratorTerm = originalDenominator / partialDenominators[i] * partialNumerators[i];
         currentNumeratorTerm.simplify();
         if (canBeConvertedToPolynomial(currentNumeratorTerm)) {
-            numeratorWithNewVariables.addPolynomial(createPolynomialIfPossible(currentNumeratorTerm));        }
+            numeratorWithNewVariables.addPolynomial(createPolynomialIfPossible(currentNumeratorTerm));
+        }
     }
     numeratorWithNewVariables.simplify();
     return numeratorWithNewVariables;
@@ -1027,7 +1031,8 @@ void Integration::integratePartialFractionsBasedOnSolvedMatrix(
         Polynomial const& partialDenominator(partialDenominators[i]);
         Term termToIntegrate = substitution.performSubstitutionTo(partialNumerator) / partialDenominator;
         termToIntegrate.simplify();
-        Term integratedTerm(integrateInternallyWithPurpose(termToIntegrate, IntegrationPurpose::PartialFraction));        partialResult = partialResult + integratedTerm;
+        Term integratedTerm(integrateInternallyWithPurpose(termToIntegrate, IntegrationPurpose::PartialFraction));
+        partialResult = partialResult + integratedTerm;
     }
     result = partialResult;
 }
@@ -1084,7 +1089,8 @@ void Integration::integrateUsingIntegrationByPartsByTryingTwoTerms(Term& result,
                     {termsWithDetailsInMultiplicationAndDivision[i]}));
                 firstTerm.simplify();
                 secondTerm.simplify();
-                if (result.isEmpty()) {                    integrateUsingIntegrationByPartsByTryingTwoTermsWithDifferentOrder(
+                if (result.isEmpty()) {
+                    integrateUsingIntegrationByPartsByTryingTwoTermsWithDifferentOrder(
                         result, term, firstTerm, secondTerm);
                 }
             }
@@ -1140,7 +1146,8 @@ void Integration::integrateUsingPreviousIntegrationByPartsTerms(
             IntegrationByPartsTerms const& integrationByPartsTerms(termsToAnalyze[i]);
             Term quotient(currentTermToIntegrate / integrationByPartsTerms.vTimesDuToIntegrate);
             quotient.simplify();
-            if (quotient.isConstant()) {                currentTermToIntegrate = integrationByPartsTerms.uTimesDvToIntegrate;
+            if (quotient.isConstant()) {
+                currentTermToIntegrate = integrationByPartsTerms.uTimesDvToIntegrate;
                 accumulatedUTimesV = integrationByPartsTerms.uTimesV - (quotient * accumulatedUTimesV);
                 if (isFirstRelationshipFound) {
                     accumulatedCoefficient = quotient.getConstantValueConstReference();

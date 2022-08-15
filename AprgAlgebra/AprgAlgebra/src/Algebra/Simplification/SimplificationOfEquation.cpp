@@ -107,7 +107,8 @@ void SimplificationOfEquation::completeExpressionWithFractionalExponentsIfNeeded
                 Term const& secondTerm(getTermConstReferenceFromUniquePointer(termsWithDetails[1].baseTermPointer));
                 TermRaiseToANumber termRaiseToANumber1(createTermRaiseToANumberFromTerm(firstTerm));
                 TermRaiseToANumber termRaiseToANumber2(createTermRaiseToANumberFromTerm(secondTerm));
-                AlbaNumber gcfOfExponents =                    getGreatestCommonFactor(termRaiseToANumber1.getExponent(), termRaiseToANumber2.getExponent());
+                AlbaNumber gcfOfExponents =
+                    getGreatestCommonFactor(termRaiseToANumber1.getExponent(), termRaiseToANumber2.getExponent());
                 if (gcfOfExponents.isFractionType()) {
                     AlbaNumber::FractionData exponentFraction(gcfOfExponents.getFractionData());
                     termRaiseToANumber1.setExponent(termRaiseToANumber1.getExponent() * exponentFraction.denominator);
@@ -135,7 +136,8 @@ void SimplificationOfEquation::removeCommonConstant(Term& leftHandSide) {
                     Monomial& onlyMonomial(monomials[0]);
                     onlyMonomial.setConstant(getSign(onlyMonomial.getConstantConstReference()));
                     isLeftHandSideChanged = true;
-                }            }
+                }
+            }
             if (isLeftHandSideChanged) {
                 Polynomial combinedPolynomial(createPolynomialFromNumber(1));
                 for (Polynomial const& factor : factors) {

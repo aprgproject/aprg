@@ -91,7 +91,8 @@ private:
                 result += getSize(currentNodePointer->next[c]);
             }
         }
-        return result;    }
+        return result;
+    }
 
     int getNumberOfNodes(NodeUniquePointer const& currentNodePointer) const {
         int result(0);
@@ -101,7 +102,8 @@ private:
                 result += getNumberOfNodes(currentNodePointer->next[c]);
             }
         }
-        return result;    }
+        return result;
+    }
 
     Node const* get(NodeUniquePointer const& currentNodePointer, Key const& key, int const index) const {
         Node const* result(nullptr);
@@ -112,7 +114,8 @@ private:
                 result = get(currentNodePointer->next[key[index]], key, index + 1);
             }
         }
-        return result;    }
+        return result;
+    }
 
     int getLengthOfLongestPrefix(
         Node const* const currentNodePointer, Key const& keyToCheck, int const index, int const length) const {
@@ -127,7 +130,8 @@ private:
                     currentNodePointer->next[c].get(), keyToCheck, index + 1, currentLongestLength);
             }
         }
-        return currentLongestLength;    }
+        return currentLongestLength;
+    }
 
     void collectAllKeysAtNode(
         Node const* const currentNodePointer, Key const& previousPrefix, Keys& collectedKeys) const {
@@ -142,6 +146,7 @@ private:
             }
         }
     }
+
     void collectKeysThatMatchAtNode(
         Node const* const currentNodePointer, Key const& previousPrefix, Key const& patternToMatch,
         Keys& collectedKeys) const {
@@ -157,7 +162,8 @@ private:
                             currentNodePointer->next[c].get(), previousPrefix + static_cast<char>(c), patternToMatch,
                             collectedKeys);
                     }
-                }            }
+                }
+            }
         }
     }
 
@@ -171,6 +177,7 @@ private:
             put(currentNodePointer->next[key[index]], key, value, index + 1);
         }
     }
+
     bool deleteBasedOnKeyAndReturnIfDeleted(NodeUniquePointer& currentNodePointer, Key const& key, int const index) {
         bool isDeleted(false);
         if (currentNodePointer) {
@@ -186,7 +193,8 @@ private:
                     deleteBasedOnKeyAndReturnIfDeleted(currentNodePointer->next[key[index]], key, index + 1);
                 if (isASingleNextDeleted && isEmptyNode(currentNodePointer)) {
                     currentNodePointer.reset();
-                    isDeleted = true;                }
+                    isDeleted = true;
+                }
             }
         }
         return isDeleted;

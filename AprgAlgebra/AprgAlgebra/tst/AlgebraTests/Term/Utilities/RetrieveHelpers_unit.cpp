@@ -84,7 +84,8 @@ TEST(RetrieveHelpersTest, RetrieveTermsFromTermsWithDetailsWorks) {
     EXPECT_EQ(Term(11), terms[2]);
 }
 
-TEST(RetrieveHelpersTest, RetrieveSubExpressionsAndSubFunctionsWorks) {    Term expesssionTerm(createExpressionIfPossible({"a", "^", 2}));
+TEST(RetrieveHelpersTest, RetrieveSubExpressionsAndSubFunctionsWorks) {
+    Term expesssionTerm(createExpressionIfPossible({"a", "^", 2}));
     Function functionObject(
         "functionName", expesssionTerm, [](AlbaNumber const& number) -> AlbaNumber { return number; });
     Term functionTerm(functionObject);
@@ -95,7 +96,8 @@ TEST(RetrieveHelpersTest, RetrieveSubExpressionsAndSubFunctionsWorks) {    Term 
     EXPECT_EQ(expesssionTerm, terms[0]);
 }
 
-TEST(RetrieveHelpersTest, RetrieveSubTermsWorks) {    Term expesssionTerm(createExpressionIfPossible({"a", "^", 2}));
+TEST(RetrieveHelpersTest, RetrieveSubTermsWorks) {
+    Term expesssionTerm(createExpressionIfPossible({"a", "^", 2}));
     Function functionObject(
         "functionName", expesssionTerm, [](AlbaNumber const& number) -> AlbaNumber { return number; });
     Term functionTerm(functionObject);
@@ -108,7 +110,8 @@ TEST(RetrieveHelpersTest, RetrieveSubTermsWorks) {    Term expesssionTerm(create
     EXPECT_EQ(expesssionTerm, terms[2]);
 }
 
-TEST(RetrieveHelpersTest, GetTermsWithDetailsThatSatisfiesCondition) {    TermsWithDetails termsWithDetails{
+TEST(RetrieveHelpersTest, GetTermsWithDetailsThatSatisfiesCondition) {
+    TermsWithDetails termsWithDetails{
         TermWithDetails(Term("x"), TermAssociationType::Positive),
         TermWithDetails(Term("y"), TermAssociationType::Positive),
         TermWithDetails(Term("z"), TermAssociationType::Negative)};
@@ -123,4 +126,5 @@ TEST(RetrieveHelpersTest, GetTermsWithDetailsThatSatisfiesCondition) {    TermsW
 }
 
 }  // namespace algebra
+
 }  // namespace alba

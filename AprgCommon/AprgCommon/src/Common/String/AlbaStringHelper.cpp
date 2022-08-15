@@ -49,6 +49,7 @@ size_t getLevenshteinDistance(string_view otherString, string_view basisString) 
     Counts const& lastCurrent(previousAndCurrentCounts[otherString.length() % 2]);
     return lastCurrent.back();
 }
+
 size_t getHammingDistance(string_view string1, string_view string2) {
     // The Hamming distance hamming(a,b) between two strings a and b of equal length is the number of positions where
     // the strings differ.
@@ -58,7 +59,8 @@ size_t getHammingDistance(string_view string1, string_view string2) {
         if (string1[i] != string2[i]) {
             result++;
         }
-    }    return result;
+    }
+    return result;
 }
 
 size_t getNumberOfSubStrings(string_view mainString) {
@@ -102,7 +104,8 @@ int getPeriodValue(string_view mainString, string_view period) {
             if (mainString[i] != period[j]) {
                 periodCount = 0;
                 break;
-            }        }
+            }
+        }
     }
     return (periodCount > 0) ? periodCount : static_cast<int>(string::npos);
 }
@@ -142,7 +145,8 @@ bool isPalindrome(string_view mainString) {
             if (mainString[left++] != mainString[right--]) {
                 result = false;
                 break;
-            }        }
+            }
+        }
     }
     return result;
 }
@@ -166,7 +170,8 @@ bool isSubsequence(string_view mainString, string_view subsequence) {
         if (mainString[i] == subsequence[j]) {
             j++;
         }
-    }    return j == subsequence.length();
+    }
+    return j == subsequence.length();
 }
 
 bool isPrefix(string_view mainString, string_view prefix) {
@@ -178,7 +183,8 @@ bool isPrefix(string_view mainString, string_view prefix) {
         if (mainString[i] != prefix[j]) {
             break;
         }
-    }    return j == prefix.length();
+    }
+    return j == prefix.length();
 }
 
 bool isSuffix(string_view mainString, string_view suffix) {
@@ -190,7 +196,8 @@ bool isSuffix(string_view mainString, string_view suffix) {
         if (mainString[i] != suffix[j]) {
             break;
         }
-    }    return j == -1;
+    }
+    return j == -1;
 }
 
 bool isRotation(string_view mainString, string_view rotation) {
@@ -395,7 +402,8 @@ string getLongestCommonPrefix(string_view first, string_view second) {
         if (first[i] != second[i]) {
             break;
         }
-    }    return string(first.substr(0, i));
+    }
+    return string(first.substr(0, i));
 }
 
 void copyBeforeStringAndAfterString(

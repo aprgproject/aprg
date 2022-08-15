@@ -50,6 +50,7 @@ StringsSorter::GetDigitAtFunction getCharacterAtForString = [](string const& val
     }
     return digitValue;
 };
+
 StabilityCheckObjectsSorter::GetNumberOfDigitsFunction getNumberOfNibblesForStabilityCheckObject =
     [](StabilityCheckObjects const&) -> int { return 2; };
 StabilityCheckObjectsSorter::GetDigitAtFunction getNibbleAtForStabilityCheckObject =
