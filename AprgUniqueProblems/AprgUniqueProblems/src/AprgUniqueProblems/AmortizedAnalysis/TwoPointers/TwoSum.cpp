@@ -16,11 +16,10 @@ TwoSum::ValuesPair TwoSum::getTwoValuesWithSum(Value const targetSum) const {
         bool isFound(false);
         Index lower = 0, higher = m_sortedValues.size() - 1;
         while (lower < higher) {
-            Value currentSum(m_sortedValues.at(lower) + m_sortedValues.at(higher));
+            Value currentSum(m_sortedValues[lower] + m_sortedValues[higher]);
             if (currentSum == targetSum) {
                 isFound = true;
-                break;
-            } else if (currentSum > targetSum) {
+                break;            } else if (currentSum > targetSum) {
                 higher--;
             } else if (currentSum < targetSum) {
                 lower++;
@@ -28,10 +27,9 @@ TwoSum::ValuesPair TwoSum::getTwoValuesWithSum(Value const targetSum) const {
         }
         if (isFound)  // empty if not found
         {
-            result = {m_sortedValues.at(lower), m_sortedValues.at(higher)};
+            result = {m_sortedValues[lower], m_sortedValues[higher]};
         }
     }
-    return result;
-}
+    return result;}
 
 }  // namespace alba

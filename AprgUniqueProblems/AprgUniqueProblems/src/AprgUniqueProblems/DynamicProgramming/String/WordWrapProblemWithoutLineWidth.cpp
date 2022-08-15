@@ -61,11 +61,10 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
     Cost result(0);
     if (wordIndex < static_cast<Index>(m_words.size())) {
         result = MAX_COST;
-        Index wordLength(m_words.at(wordIndex).length());
+        Index wordLength(m_words[wordIndex].length());
         {
             RecursionDetails currentDetails(recursionDetails);
-            Index& lastLength(currentDetails.lengths.back());
-            lastLength += wordLength + 1;
+            Index& lastLength(currentDetails.lengths.back());            lastLength += wordLength + 1;
             currentDetails.maxLength = max(currentDetails.maxLength, lastLength);
             result = min(result, getOptimizedCostUsingNaiveRecursion(currentDetails, wordIndex + 1));
         }

@@ -31,19 +31,17 @@ public:
 
         Value result{};
         if (!sortedValues.empty()) {
-            result = sortedValues.at(getNearestFloorIndex(sortedValues, valueToCheck));
+            result = sortedValues[getNearestFloorIndex(sortedValues, valueToCheck)];
         }
         return result;
     }
-
     Value getNearestCeil(Values const& sortedValues, Value const& valueToCheck) {
         Value result{};
         if (!sortedValues.empty()) {
-            result = sortedValues.at(getNearestCielIndex(sortedValues, valueToCheck));
+            result = sortedValues[getNearestCielIndex(sortedValues, valueToCheck)];
         }
         return result;
     }
-
     Index getNumberOfDuplicates(Values const& sortedValues, Value const& valueToCheck) {
         // Problem Statement:
         // Given a sorted array with possible duplicate elements.
@@ -57,11 +55,10 @@ public:
             // reversed
             Index higherIndex = getNearestFloorIndex(sortedValues, valueToCheck);
             Index lowerIndex = getNearestCielIndex(sortedValues, valueToCheck);
-            if (sortedValues.at(higherIndex) == valueToCheck && valueToCheck == sortedValues.at(lowerIndex)) {
+            if (sortedValues[higherIndex] == valueToCheck && valueToCheck == sortedValues[lowerIndex]) {
                 result = higherIndex + 1 - lowerIndex;
             }
-        }
-        return result;
+        }        return result;
     }
 
     Index getPositionOfRotation(Values const& sortedValues) {
@@ -80,20 +77,18 @@ public:
 
         Index result(getInvalidIndex<Index>());
         Index lowerIndex(0), higherIndex(sortedValues.size() - 1);
-        if (sortedValues.at(lowerIndex) <= sortedValues.at(higherIndex)) {
+        if (sortedValues[lowerIndex] <= sortedValues[higherIndex]) {
             result = lowerIndex;
         } else {
-            while (lowerIndex <= higherIndex) {
-                if (lowerIndex == higherIndex) {
+            while (lowerIndex <= higherIndex) {                if (lowerIndex == higherIndex) {
                     result = lowerIndex;
                     break;
                 }
                 Index middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
-                if (sortedValues.at(middleIndex) < sortedValues.at(higherIndex)) {
+                if (sortedValues[middleIndex] < sortedValues[higherIndex]) {
                     higherIndex = middleIndex;
                 } else {
-                    lowerIndex = middleIndex + 1;
-                }
+                    lowerIndex = middleIndex + 1;                }
             }
         }
         return result;
@@ -105,11 +100,10 @@ private:
         Index lowerIndex(0), higherIndex(sortedValues.size() - 1);
         while (lowerIndex + 1 < higherIndex) {
             Index middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
-            Value middleValue(sortedValues.at(middleIndex));
+            Value middleValue(sortedValues[middleIndex]);
             if (middleValue <= value) {
                 lowerIndex = middleIndex;
-            } else {
-                higherIndex = middleIndex;
+            } else {                higherIndex = middleIndex;
             }
         }
         return lowerIndex;
@@ -120,11 +114,10 @@ private:
         Index lowerIndex(0), higherIndex(sortedValues.size() - 1);
         while (lowerIndex + 1 < higherIndex) {
             Index middleIndex = getMidpointOfIndexes(lowerIndex, higherIndex);
-            Value middleValue(sortedValues.at(middleIndex));
+            Value middleValue(sortedValues[middleIndex]);
             if (value <= middleValue) {
                 higherIndex = middleIndex;
-            } else {
-                lowerIndex = middleIndex;
+            } else {                lowerIndex = middleIndex;
             }
         }
         return higherIndex;

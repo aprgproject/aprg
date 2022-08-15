@@ -71,11 +71,10 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
         }
         for (Count base = 1; base * base <= immediateNode.sum; base++) {
             Count newSum = immediateNode.sum - base * base;
-            if (newSum == 0 || !isProcessed.at(newSum)) {
+            if (newSum == 0 || !isProcessed[newSum]) {
                 isProcessed[newSum] = 1;
                 immediateNodes.emplace(NodeDetails{newSum, immediateNode.count + 1});
-            }
-        }
+            }        }
     }
     return result;
 }
@@ -110,11 +109,10 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
 
 MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualToN::getMinimumCountUsingMemoizationDP(
     Counts& savedMinimumCounts, Count const sumOfSquares) const {
-    Count result(savedMinimumCounts.at(sumOfSquares));
+    Count result(savedMinimumCounts[sumOfSquares]);
     if (MAX_COUNT == result) {
         Count highestBase = getIntegerAfterFloorOfDoubleValue<Count>(pow(sumOfSquares, 0.5));
-        if (sumOfSquares == highestBase * highestBase) {
-            result = sumOfSquares > 0 ? 1 : 0;
+        if (sumOfSquares == highestBase * highestBase) {            result = sumOfSquares > 0 ? 1 : 0;
         } else {
             for (Count base = highestBase; base >= 1 && result != 1; base--) {
                 result = min(result, getMinimumCountUsingMemoizationDP(savedMinimumCounts, sumOfSquares - base * base));

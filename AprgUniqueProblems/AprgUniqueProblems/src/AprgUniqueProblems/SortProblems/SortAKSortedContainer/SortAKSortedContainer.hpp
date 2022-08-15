@@ -26,11 +26,10 @@ public:
                  newPqIndex < static_cast<int>(valuesToSort.size()); newPqIndex++) {
                 valuesToSort[sortedIndex++] = pq.top();
                 pq.pop();
-                pq.push(valuesToSort.at(newPqIndex));
+                pq.push(valuesToSort[newPqIndex]);
             }
 
-            while (!pq.empty()) {
-                valuesToSort[sortedIndex++] = pq.top();
+            while (!pq.empty()) {                valuesToSort[sortedIndex++] = pq.top();
                 pq.pop();
             }
         }

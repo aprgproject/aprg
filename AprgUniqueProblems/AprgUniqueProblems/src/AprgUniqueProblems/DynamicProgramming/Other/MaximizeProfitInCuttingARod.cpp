@@ -41,11 +41,10 @@ MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUs
                 Length rodLength(rod.first);
                 Profit rodProfit(rod.second);
                 if (remainingLength >= rodLength) {
-                    entryResult = max(entryResult, rodProfit + partialProfits.at(remainingLength - rodLength));
+                    entryResult = max(entryResult, rodProfit + partialProfits[remainingLength - rodLength]);
                 }
             }
-            partialProfits[remainingLength] = entryResult;
-        }
+            partialProfits[remainingLength] = entryResult;        }
         result = partialProfits.back();
     }
     return result;
@@ -66,11 +65,10 @@ MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUs
 
 MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUsingMemoizationDP(
     Profits& partialProfits, Length const remainingLength) const {
-    Profit result = partialProfits.at(remainingLength);
+    Profit result = partialProfits[remainingLength];
     if (UNUSED_PROFIT == result) {
         result = 0;
-        for (Rod const& rod : m_rods) {
-            Length rodLength(rod.first);
+        for (Rod const& rod : m_rods) {            Length rodLength(rod.first);
             Profit rodProfit(rod.second);
             if (remainingLength >= rodLength) {
                 result = max(

@@ -18,11 +18,10 @@ AllPartialSumsInKnapsack::Values AllPartialSumsInKnapsack::getAllPossiblePartial
         for (Value partialSum = sum; partialSum > 0;
              partialSum--)  // reverse traversal so that the changed values wont be changed again in one iteration
         {
-            if (partialSum >= inputValue && isPartialSumPossible.at(partialSum - inputValue)) {
+            if (partialSum >= inputValue && isPartialSumPossible[partialSum - inputValue]) {
                 isPartialSumPossible[partialSum] = true;
             }
-        }
-    }
+        }    }
     return getAllPossiblePartialSums(isPartialSumPossible);
 }
 
@@ -34,11 +33,10 @@ AllPartialSumsInKnapsack::Values AllPartialSumsInKnapsack::getAllPossiblePartial
         for (int partialSum = sum; partialSum >= 0;
              partialSum--)  // reverse traversal so that the changed values wont be changed again in one iteration
         {
-            if (isPartialSumPossible.at(partialSum)) {
+            if (isPartialSumPossible[partialSum]) {
                 Value possibleNextValue = static_cast<Value>(partialSum) + inputValue;
                 if (possibleNextValue <= sum) {
-                    isPartialSumPossible[possibleNextValue] = true;
-                }
+                    isPartialSumPossible[possibleNextValue] = true;                }
             }
         }
     }
@@ -77,11 +75,10 @@ AllPartialSumsInKnapsack::Values AllPartialSumsInKnapsack::getAllPossiblePartial
         // reverse traversal so that the changed values wont be changed again in one iteration
         for (int partialSumIndex = sum; partialSumIndex >= 0; partialSumIndex--)  // O(n) or linear time
         {
-            if (isPartialSumPossible.at(partialSumIndex)) {
+            if (isPartialSumPossible[partialSumIndex]) {
                 for (int i = 1; i <= inputValueAndCountPair.second; i++)  // near constant time
                 {
-                    isPartialSumPossible[static_cast<Value>(partialSumIndex) + (i * inputValueAndCountPair.first)] =
-                        true;
+                    isPartialSumPossible[static_cast<Value>(partialSumIndex) + (i * inputValueAndCountPair.first)] =                        true;
                 }
             }
         }
@@ -95,11 +92,10 @@ AllPartialSumsInKnapsack::Values AllPartialSumsInKnapsack::getAllPossiblePartial
     for (int partialSumIndex = 0; partialSumIndex < static_cast<int>(isPartialSumPossible.size());
          partialSumIndex++)  // O(n) or linear time
     {
-        if (isPartialSumPossible.at(partialSumIndex)) {
+        if (isPartialSumPossible[partialSumIndex]) {
             result.emplace_back(partialSumIndex);
         }
-    }
-    return result;
+    }    return result;
 }
 
 }  // namespace alba
