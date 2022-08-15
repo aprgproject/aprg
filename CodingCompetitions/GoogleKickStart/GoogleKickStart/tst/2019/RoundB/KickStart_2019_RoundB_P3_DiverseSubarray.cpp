@@ -108,17 +108,16 @@ public:
             Index nextIndex = maxSumParent;
             Index leftChildIndex = Utilities::getLeftChild(nextIndex);
             if (leftChildIndex < static_cast<int>(m_treeValues.size())) {
-                if (m_treeValues.at(nextIndex) < m_treeValues.at(leftChildIndex)) {
+                if (m_treeValues[nextIndex] < m_treeValues[leftChildIndex]) {
                     nextIndex = leftChildIndex;
                 }
             }
             Index rightChildIndex = Utilities::getRightChild(nextIndex);
             if (rightChildIndex < static_cast<int>(m_treeValues.size())) {
-                if (m_treeValues.at(nextIndex) < m_treeValues.at(rightChildIndex)) {
+                if (m_treeValues[nextIndex] < m_treeValues[rightChildIndex]) {
                     nextIndex = rightChildIndex;
                 }
-            }
-            if (nextIndex == maxSumParent) {
+            }            if (nextIndex == maxSumParent) {
                 break;
             }
             maxSumParent = nextIndex;
@@ -134,25 +133,23 @@ public:
             maxSumRightMostChild = Utilities::getRightChild(maxSumRightMostChild);
         }
 
-        Value maxSum(m_treeValues.at(maxSumParent));
+        Value maxSum(m_treeValues[maxSumParent]);
         maxSumLeftMostChild--;
         while (maxSumLeftMostChild >= m_startOfChildren) {
-            Value additionalValue = m_treeValues.at(maxSumLeftMostChild);
+            Value additionalValue = m_treeValues[maxSumLeftMostChild];
             if (additionalValue >= 0) {
                 maxSum += additionalValue;
-                maxSumLeftMostChild--;
-            } else {
+                maxSumLeftMostChild--;            } else {
                 break;
             }
         }
         maxSumRightMostChild++;
         while (maxSumRightMostChild >= m_startOfChildren &&
                maxSumRightMostChild < static_cast<int>(m_treeValues.size())) {
-            Value additionalValue = m_treeValues.at(maxSumRightMostChild);
+            Value additionalValue = m_treeValues[maxSumRightMostChild];
             if (additionalValue >= 0) {
                 maxSum += additionalValue;
-                maxSumRightMostChild++;
-            } else {
+                maxSumRightMostChild++;            } else {
                 break;
             }
         }
@@ -178,18 +175,17 @@ protected:
                 Index treeBaseRightComplete = treeBaseRight;
                 if (Utilities::isALeftChild(treeBaseRight))  // incomplete pair
                 {
-                    m_treeValues[Utilities::getParent(treeBaseRight)] = m_treeValues.at(treeBaseRight);
+                    m_treeValues[Utilities::getParent(treeBaseRight)] = m_treeValues[treeBaseRight];
                     treeBaseRightComplete--;
                 }
                 for (Index treeIndex = treeBaseLeft; treeIndex < treeBaseRightComplete;
                      treeIndex += Utilities::NUMBER_OF_CHILDREN)  // complete pairs
                 {
                     m_treeValues[Utilities::getParent(treeIndex)] =
-                        m_function(m_treeValues.at(treeIndex), m_treeValues.at(treeIndex + 1));
+                        m_function(m_treeValues[treeIndex], m_treeValues[treeIndex + 1]);
                 }
                 treeBaseLeft = Utilities::getParent(treeBaseLeft);
-                treeBaseRight = Utilities::getParent(treeBaseRight);
-            }
+                treeBaseRight = Utilities::getParent(treeBaseRight);            }
         }
     }
 
@@ -199,26 +195,25 @@ protected:
         Index first(m_startOfChildren + start);
         Index last(m_startOfChildren + end);
         if (first <= last && first < m_treeValues.size() && last < m_treeValues.size()) {
-            result = m_treeValues.at(first++);
+            result = m_treeValues[first++];
             while (first < last) {
                 if (Utilities::isARightChild(first)) {
                     result = m_function(
-                        result, m_treeValues.at(first++));  // move to next value (right) because current value is added
+                        result, m_treeValues[first++]);  // move to next value (right) because current value is added
                 }
                 if (Utilities::isALeftChild(last)) {
                     result = m_function(
-                        result, m_treeValues.at(last--));  // move to next value (left) because current value is added
+                        result, m_treeValues[last--]);  // move to next value (left) because current value is added
                 }
                 first = Utilities::getParent(first);
                 last = Utilities::getParent(last);
             }
             if (first == last)  // add value if it ends on the same place
             {
-                result = m_function(result, m_treeValues.at(first));
+                result = m_function(result, m_treeValues[first]);
             }
         }
-        return result;
-    }
+        return result;    }
 
     void changeValueAtIndexFromBottomToTop(Index const index, Value const& newValue) {
         // This has log(N) running time
@@ -231,23 +226,22 @@ protected:
                     if (Utilities::isALeftChild(treeIndex)) {
                         if (treeIndex + 1 < static_cast<int>(m_treeValues.size())) {
                             m_treeValues[parentIndex] =
-                                m_function(m_treeValues.at(treeIndex), m_treeValues.at(treeIndex + 1));
+                                m_function(m_treeValues[treeIndex], m_treeValues[treeIndex + 1]);
                         } else {
-                            m_treeValues[parentIndex] = m_treeValues.at(treeIndex);
+                            m_treeValues[parentIndex] = m_treeValues[treeIndex];
                         }
                     } else {
                         m_treeValues[parentIndex] =
-                            m_function(m_treeValues.at(treeIndex - 1), m_treeValues.at(treeIndex));
+                            m_function(m_treeValues[treeIndex - 1], m_treeValues[treeIndex]);
                     }
                     treeIndex = parentIndex;
                 }
-                m_treeValues[0] = m_function(m_treeValues.at(1), m_treeValues.at(2));
+                m_treeValues[0] = m_function(m_treeValues[1], m_treeValues[2]);
             } else if (m_treeValues.size() > 1) {
-                m_treeValues[0] = m_treeValues.at(1);
+                m_treeValues[0] = m_treeValues[1];
             }
         }
     }
-
     Index m_startOfChildren;
     Values m_treeValues;
     Function m_function;
@@ -280,11 +274,10 @@ void runTestCase(int const testCaseNumber) {
     vector<TypeDetail> typeDetails(MAX_NUMBER_TYPES);
     deltas.reserve(numberOfTrinkets);
     for (int i = 0; i < numberOfTrinkets; ++i) {
-        int type = typesOfTrinkets.at(i);
+        int type = typesOfTrinkets[i];
         int delta = getDeltaByAddingType(type);
         if (delta < 0) {
-            typeDetails[type].negativeDeltaIndexOptional = i;
-        }
+            typeDetails[type].negativeDeltaIndexOptional = i;        }
         if (delta == 0) {
             typeDetails[type].zeroDeltaIndices.emplace_back(i);
         }
@@ -296,11 +289,10 @@ void runTestCase(int const testCaseNumber) {
 
     for (int i = 0; i < numberOfTrinkets; ++i) {
         segmentTreeOfDeltas.changeValueAtIndex(i, 0);
-        int type = typesOfTrinkets.at(i);
+        int type = typesOfTrinkets[i];
         TypeDetail& typeDetail(typeDetails[type]);
         if (typeDetail.negativeDeltaIndexOptional) {
-            segmentTreeOfDeltas.changeValueAtIndex(typeDetail.negativeDeltaIndexOptional.value(), 1);
-            if (!typeDetail.zeroDeltaIndices.empty()) {
+            segmentTreeOfDeltas.changeValueAtIndex(typeDetail.negativeDeltaIndexOptional.value(), 1);            if (!typeDetail.zeroDeltaIndices.empty()) {
                 int firstZeroIndex = typeDetail.zeroDeltaIndices.front();
                 segmentTreeOfDeltas.changeValueAtIndex(firstZeroIndex, -allowableCountForAType);
                 typeDetail.negativeDeltaIndexOptional = firstZeroIndex;
@@ -372,23 +364,21 @@ void runTestCase(int const testCaseNumber)
         {
             for(int right=left; right<numberOfTrinkets; ++right)
             {
-                addTypeToAllowableCount(allowableCount, typesOfTrinkets.at(right));
+                addTypeToAllowableCount(allowableCount, typesOfTrinkets[right]);
                 maxAllowableCount = max(maxAllowableCount, allowableCount);
             }
-        }
-        else
+        }        else
         {
             for(int right=numberOfTrinkets-1; right>left; --right)
             {
-                removeTypeToAllowableCount(allowableCount, typesOfTrinkets.at(right));
+                removeTypeToAllowableCount(allowableCount, typesOfTrinkets[right]);
                 maxAllowableCount = max(maxAllowableCount, allowableCount);
             }
         }
-        removeTypeToAllowableCount(allowableCount, typesOfTrinkets.at(left));
+        removeTypeToAllowableCount(allowableCount, typesOfTrinkets[left]);
         maxAllowableCount = max(maxAllowableCount, allowableCount);
     }
-    my_cout << "Case #" << testCaseNumber << ": " << maxAllowableCount << '\n';
-}*/
+    my_cout << "Case #" << testCaseNumber << ": " << maxAllowableCount << '\n';}*/
 
 void runAllTestCases() {
     int numberOfTestCases;
