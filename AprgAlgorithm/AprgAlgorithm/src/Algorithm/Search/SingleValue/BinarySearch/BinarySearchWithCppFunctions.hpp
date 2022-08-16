@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Algorithm/Utilities/InvalidIndex.hpp>
+#include <Algorithm/Utilities/IndexHelper.hpp>
 #include <Common/Container/AlbaContainerHelper.hpp>
 
 #include <algorithm>
-
 namespace alba {
 
 namespace algorithm {

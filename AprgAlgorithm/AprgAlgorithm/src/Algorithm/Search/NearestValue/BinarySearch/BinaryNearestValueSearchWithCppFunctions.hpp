@@ -1,9 +1,8 @@
 #pragma once
 
-#include <Algorithm/Utilities/InvalidIndex.hpp>
+#include <Algorithm/Utilities/IndexHelper.hpp>
 #include <Common/Container/AlbaContainerHelper.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
-
 #include <algorithm>
 
 namespace alba {

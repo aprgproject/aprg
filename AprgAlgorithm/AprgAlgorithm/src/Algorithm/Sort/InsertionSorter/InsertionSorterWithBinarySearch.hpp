@@ -1,11 +1,10 @@
 #pragma once
 
 #include <Algorithm/Sort/BaseSorter.hpp>
-#include <Algorithm/Utilities/InvalidIndex.hpp>
-#include <Algorithm/Utilities/MidpointOfIndexes.hpp>
+#include <Algorithm/Utilities/IndexHelper.hpp>
+#include <Algorithm/Utilities/IndexHelper.hpp>
 
 #include <utility>
-
 namespace alba {
 
 namespace algorithm {

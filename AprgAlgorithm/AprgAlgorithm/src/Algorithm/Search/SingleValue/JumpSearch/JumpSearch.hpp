@@ -1,11 +1,10 @@
 #pragma once
 
 #include <Algorithm/Search/SingleValue/LinearSearch/LinearSearchWithOneIndex.hpp>
-#include <Algorithm/Utilities/InvalidIndex.hpp>
+#include <Algorithm/Utilities/IndexHelper.hpp>
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
 namespace alba {
-
 namespace algorithm {
 
 template <typename Values>

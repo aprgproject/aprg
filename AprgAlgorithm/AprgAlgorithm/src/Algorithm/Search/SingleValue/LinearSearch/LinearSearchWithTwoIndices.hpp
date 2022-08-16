@@ -1,9 +1,8 @@
 #pragma once
 
-#include <Algorithm/Utilities/InvalidIndex.hpp>
+#include <Algorithm/Utilities/IndexHelper.hpp>
 
 #include <iterator>
-
 namespace alba {
 
 namespace algorithm {

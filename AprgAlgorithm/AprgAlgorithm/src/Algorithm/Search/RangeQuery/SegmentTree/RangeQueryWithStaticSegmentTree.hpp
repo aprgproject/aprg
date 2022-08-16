@@ -1,10 +1,9 @@
 #pragma once
 
 #include <Algorithm/Search/Common/SegmentTreeUtilities.hpp>
-#include <Algorithm/Utilities/MidpointOfIndexes.hpp>
+#include <Algorithm/Utilities/IndexHelper.hpp>
 
 #include <functional>
-
 namespace alba {
 
 namespace algorithm {
