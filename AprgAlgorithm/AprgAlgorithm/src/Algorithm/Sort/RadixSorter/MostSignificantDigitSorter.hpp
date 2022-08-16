@@ -79,13 +79,11 @@ private:
         ArrayOfCountPerDigitValue& countPerDigitValue, bool& areAllDigitsInvalid, Values const& valuesToSort,
         int const lowContainerIndex, int const highContainerIndex, int const digitIndex) const {
         int limit(std::min(highContainerIndex + 1, static_cast<int>(valuesToSort.size())));
-        for (auto it = valuesToSort.cbegin() + lowContainerIndex; it != valuesToSort.cbegin() + limit;
-             it++)  // starts at low container index and ends at high container index
-        {
+        // starts at low container index and ends at high container index
+        for (auto it = valuesToSort.cbegin() + lowContainerIndex; it != valuesToSort.cbegin() + limit; it++) {
             Value const& value(*it);
             countPerDigitValue[m_getDigitAtFunction(value, digitIndex) + 2]++;
-            areAllDigitsInvalid &= m_isDigitInvalidFunction(value, digitIndex);
-        }
+            areAllDigitsInvalid &= m_isDigitInvalidFunction(value, digitIndex);        }
     }
 
     void computeCumulatesToGetNewIndexes(ArrayOfCountPerDigitValue& newIndexes) const {
@@ -99,13 +97,11 @@ private:
         int const highContainerIndex, int const digitIndex) const {
         Values copiedValues(valuesToSort);  // copy first and then copy back to output in the new indexes;
         int limit(std::min(highContainerIndex + 1, static_cast<int>(copiedValues.size())));
-        for (auto it = copiedValues.cbegin() + lowContainerIndex; it != copiedValues.cbegin() + limit;
-             it++)  // starts at low container index and ends at high container index
-        {
+        // starts at low container index and ends at high container index
+        for (auto it = copiedValues.cbegin() + lowContainerIndex; it != copiedValues.cbegin() + limit; it++) {
             // replace index uses the character index before it
             Value const& copiedValue(*it);
-            int replaceIndex = lowContainerIndex + newIndexes[m_getDigitAtFunction(copiedValue, digitIndex) + 1]++;
-            valuesToSort[replaceIndex] = copiedValue;
+            int replaceIndex = lowContainerIndex + newIndexes[m_getDigitAtFunction(copiedValue, digitIndex) + 1]++;            valuesToSort[replaceIndex] = copiedValue;
         }
     }
 

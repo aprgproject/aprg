@@ -24,13 +24,12 @@ public:
         : m_getNumberOfDigitsFunction(getNumberOfDigitsFunction), m_getDigitAtFunction(getDigitAtFunction) {}
 
     void sort(Values& valuesToSort) const override {
+        // highest index so least signficant first
         for (int digitIndex = static_cast<int>(m_getNumberOfDigitsFunction(valuesToSort)) - 1; 0 <= digitIndex;
-             digitIndex--)  // highest index so least signficant first
-        {
+             digitIndex--) {
             sortAtLeastSignificantDigit(valuesToSort, digitIndex);
         }
     }
-
     void sortAtLeastSignificantDigit(Values& valuesToSort, int const digitIndex) const {
         // This is called: "key indexed counting"
         // Character index starts in 1 because this array will be used to compute cumulates
