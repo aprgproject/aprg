@@ -34,10 +34,13 @@ TEST(SubstringSearchUsingZArrayTest, SearchWorksUsingExample1) {
     testSearchUsingExample1<SubstringSearchForTest, Index>();
 }
 
+TEST(SubstringSearchUsingZArrayTest, SearchWorksUsingExample2) {
+    testSearchUsingExample2<SubstringSearchForTest, Index>();
+}
+
 TEST(SubstringSearchUsingZArrayTest, SearchForFirstSubstringWorksUsingExample1) {
     SubstringSearchForTest substringSearch("ATT");
     string mainString("HATTIVATTI");
-
     EXPECT_EQ(Index(1), substringSearch.searchForFirstSubstring(mainString));
 }
 
