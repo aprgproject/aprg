@@ -127,10 +127,13 @@ protected:
             } else if (isGreaterThanWithDepth(key, currentKey, depth)) {
                 putStartingOnThisNode(nodePointer->right, key);
                 this->updateTreeNodeDetails(*nodePointer);
+            } else {
+                // if equal, just pick left
+                putStartingOnThisNode(nodePointer->left, key);
+                this->updateTreeNodeDetails(*nodePointer);
             }
         } else {
-            nodePointer.reset(new Node{key, nullptr, nullptr, 1});
-        }
+            nodePointer.reset(new Node{key, nullptr, nullptr, 1});        }
         depth--;
     }
 
@@ -139,16 +142,14 @@ protected:
         depth++;
         // this is called hibbard deletion
         if (nodePointer) {
-            if (isLessThanWithDepth(key, nodePointer->key, depth))  // search for the node in the left in less than
-            {
+            if (isLessThanWithDepth(key, nodePointer->key, depth)) {
+                // search for the node in the left in less than
                 deleteBasedOnKeyStartingOnThisNode(nodePointer->left, key);
-            } else if (isGreaterThanWithDepth(
-                           key, nodePointer->key, depth))  // search for the node in the right in greater than
-            {
+            } else if (isGreaterThanWithDepth(key, nodePointer->key, depth)) {
+                // search for the node in the right in greater than
                 deleteBasedOnKeyStartingOnThisNode(nodePointer->right, key);
             } else  // if found
-            {
-                // get the minimum on the right
+            {                // get the minimum on the right
                 // place the keys of the minimum on this node and then delete it
                 // why are we using deletion of minimum on the right instead of deletion of maximum in the left? No real
                 // reason.
@@ -158,12 +159,11 @@ protected:
                     nodePointer.reset(nullptr);
                 } else {
                     this->copyContents(*nodePointer, *minimumOnTheRight);
-                    this->deleteMinimumStartingOnThisNode(
-                        minimumOnTheRight);  // starting from the minimum so less checks
+                    // starting from the minimum so less checks
+                    this->deleteMinimumStartingOnThisNode(minimumOnTheRight);
                 }
             }
-            if (nodePointer) {
-                this->updateTreeNodeDetails(*nodePointer);
+            if (nodePointer) {                this->updateTreeNodeDetails(*nodePointer);
             }
         }
         depth--;
