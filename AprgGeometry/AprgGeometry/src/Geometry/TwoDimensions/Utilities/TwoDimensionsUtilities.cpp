@@ -36,12 +36,11 @@ bool isCongruent(Triangle const& triangle1, Triangle const& triangle2) {
     AlbaAngles anglesInTriangle2(triangle2.getAnglesAtVertices());
     sort(anglesInTriangle1.begin(), anglesInTriangle1.end());
     sort(anglesInTriangle2.begin(), anglesInTriangle2.end());
-    return (anglesInTriangle1[0] == anglesInTriangle2[0]) &&
-           (anglesInTriangle1[1] == anglesInTriangle2[1]) && (anglesInTriangle1[2] == anglesInTriangle2[2]);
+    return (anglesInTriangle1[0] == anglesInTriangle2[0]) && (anglesInTriangle1[1] == anglesInTriangle2[1]) &&
+           (anglesInTriangle1[2] == anglesInTriangle2[2]);
 }
 
-bool areLinesParallel(Line const& line1, Line const& line2) {
-    return (line1.getType() == LineType::Horizontal && line2.getType() == LineType::Horizontal) ||
+bool areLinesParallel(Line const& line1, Line const& line2) {    return (line1.getType() == LineType::Horizontal && line2.getType() == LineType::Horizontal) ||
            (line1.getType() == LineType::Vertical && line2.getType() == LineType::Vertical) ||
            (isAlmostEqual(line1.getSlope(), line2.getSlope()));
 }
@@ -645,11 +644,11 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
         compareDataToPointMap.emplace(
             CompareData(
                 getAngleOfPointWithRespectToOrigin(point - pointWithMinimumY), getDistance(pointWithMinimumY, point)),
-            point);  // sort points by polar angle
+            point);
+        // sort points by polar angle
     }
 
-    stack<Point> convertHullPoints;
-    int i = 0;
+    stack<Point> convertHullPoints;    int i = 0;
     for (auto const& compareDataAndPointPair : compareDataToPointMap) {
         Point const& currentPoint(compareDataAndPointPair.second);
         if (i < 2) {
@@ -657,15 +656,13 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
         } else {
             Point previousTop = convertHullPoints.top();
             convertHullPoints.pop();
+            // Counter clock wise must be maintained
             while (!convertHullPoints.empty() &&
                    RotationDirection::ClockWise !=
-                       getRotationDirectionTraversing3Points(previousTop, convertHullPoints.top(), currentPoint))
-            // Counter clock wise must be maintained
-            {
+                       getRotationDirectionTraversing3Points(previousTop, convertHullPoints.top(), currentPoint)) {
                 // Remove point when non counter clock wise
                 previousTop = convertHullPoints.top();
-                convertHullPoints.pop();
-            }
+                convertHullPoints.pop();            }
             convertHullPoints.push(previousTop);
             convertHullPoints.push(currentPoint);
         }
