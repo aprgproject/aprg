@@ -39,11 +39,10 @@ class AlbaFundamentalOperationsCounter : public TypeToShadow {
 public:
 #define COUNTS AlbaFundamentalOperationsCounts<TypeToShadow>::getInstance().counts
 
-    // NOTE: COMMENT operation if not needed
+    // NOTE: COMMENT OUT operation if not needed
 
     template <typename... Params>
-    AlbaFundamentalOperationsCounter(Params&&... params) : TypeToShadow(std::forward<Params>(params)...) {
-        // enable_if for isConstructible is not used here, because it still cause compiler error when not used
+    AlbaFundamentalOperationsCounter(Params&&... params) : TypeToShadow(std::forward<Params>(params)...) {        // enable_if for isConstructible is not used here, because it still cause compiler error when not used
         ++COUNTS.userConstructionCount;
     }
 
