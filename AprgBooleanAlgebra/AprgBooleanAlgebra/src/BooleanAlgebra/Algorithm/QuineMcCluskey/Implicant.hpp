@@ -43,12 +43,10 @@ public:
     }
 
     bool isCompatible(Implicant const& implicant) const {
-        int commonLength(
-            std::max(getMaxLengthOfEquivalentString(), implicant.getMaxLengthOfEquivalentString()));
+        int commonLength(std::max(getMaxLengthOfEquivalentString(), implicant.getMaxLengthOfEquivalentString()));
         std::string string1(getEquivalentString(commonLength));
         std::string string2(implicant.getEquivalentString(commonLength));
-        bool result(true);
-        int difference = 0;
+        bool result(true);        int difference = 0;
         for (int i = 0; i < commonLength; i++) {
             if (string1[i] != string2[i]) {
                 if (string1[i] == '-' || string2[i] == '-') {
@@ -121,22 +119,18 @@ public:
         return result.str();
     }
 
+    int getMaxLengthOfEquivalentString() const {
+        Minterm orResult(performOrOperationOfAllMinterms());
+        return AlbaBitValueUtilities<Minterm>::getNumberOfBits() -
+               AlbaBitValueUtilities<Minterm>::getNumberOfConsecutiveZerosFromMsb(orResult);
+    }
+
     void addMinterm(Minterm const& minterm) { m_minterms.emplace(minterm); }
 
 private:
-    int getMaxLengthOfEquivalentString() const {
-        int result = 0;
-        int orResult(performOrOperationOfAllMinterms());
-        for (; orResult > 0; orResult >>= 1) {
-            result++;
-        }
-        return result;
-    }
-
     Minterm getFirstMinterm() const {
         Minterm result(0);
-        if (!m_minterms.empty()) {
-            result = *(m_minterms.begin());
+        if (!m_minterms.empty()) {            result = *(m_minterms.begin());
         }
         return result;
     }
