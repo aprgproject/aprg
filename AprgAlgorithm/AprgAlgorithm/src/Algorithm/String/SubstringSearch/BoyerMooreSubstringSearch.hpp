@@ -4,6 +4,7 @@
 
 #include <array>
 #include <string>
+
 namespace alba {
 
 namespace algorithm {
@@ -21,6 +22,7 @@ public:
         : m_substringToMatch(substringToMatch), m_rightMostLetterIndex{} {
         initialize();
     }
+
     Index search(std::string const& mainString) {
         Index result(static_cast<Index>(std::string::npos));
         Index mainLength(mainString.size());
@@ -43,7 +45,8 @@ public:
                         skipValue = 1;
                     }
                     break;
-                }            }
+                }
+            }
             if (skipValue == 0)  // all letters matched
             {
                 result = searchIndex;
@@ -69,7 +72,8 @@ private:
     SkipTable m_rightMostLetterIndex;
 };
 
-// Intuition:// -> Scan characters in pattern from right to left
+// Intuition:
+// -> Scan characters in pattern from right to left
 // -> Can skip as many as M text chars when finding one not in the pattern
 
 // How much to skip?

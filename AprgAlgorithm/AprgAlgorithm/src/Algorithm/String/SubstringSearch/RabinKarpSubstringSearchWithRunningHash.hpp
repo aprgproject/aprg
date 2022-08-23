@@ -37,7 +37,8 @@ public:
                     result = searchIndex - m_substringLength + 1;  // Monte carlo approach (no double check)
                     break;
                 }
-            }        }
+            }
+        }
         return result;
     }
 
@@ -46,7 +47,8 @@ private:
         return m_hornerHashFunction.getHashCode(key.substr(0, m_substringLength));
     }
 
-    HashValue getNextHash(HashValue const currentHash, char const charToRemove, char const charToAdd) {        // First, subtract value for charToRemove
+    HashValue getNextHash(HashValue const currentHash, char const charToRemove, char const charToAdd) {
+        // First, subtract value for charToRemove
         HashValue result =
             (currentHash + m_largeRandomPrime - (m_radixRaiseToMatchLengthHash * charToRemove % m_largeRandomPrime)) %
             m_largeRandomPrime;
@@ -71,7 +73,8 @@ private:
     HashValue m_substringHash;
 };
 
-// Invented by two Turing award winners Michael Rabin (Turing Award '76) and Dick Karp (Turing Award '85).// Explained to Sedgewick in 15 seconds -> realized needs to be on the book.
+// Invented by two Turing award winners Michael Rabin (Turing Award '76) and Dick Karp (Turing Award '85).
+// Explained to Sedgewick in 15 seconds -> realized needs to be on the book.
 
 // Basic idea = modular hashing
 // -> Compute a hash of patterns character 0 to M-1.

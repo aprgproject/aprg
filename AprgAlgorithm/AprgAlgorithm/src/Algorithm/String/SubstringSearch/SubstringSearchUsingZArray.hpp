@@ -29,7 +29,8 @@ public:
                 result = i - substringLength - 1;
                 break;
             }
-        }        return result;
+        }
+        return result;
     }
 
     Indexes searchForAllSubstrings(std::string const& mainString) {
@@ -43,7 +44,8 @@ public:
                 result.emplace_back(i - substringLength - 1);
             }
         }
-        return result;    }
+        return result;
+    }
 
 private:
     std::string createStringForZArray(std::string const& mainString) const {

@@ -53,7 +53,8 @@ TEST(NearestPointSearchTest, GetNearestPointWorksOnExample1) {
 TEST(NearestPointSearchTest, GetNearestPointWorksOnExample2) {
     SearchForTest search;
     search.addPoint({0, 0});
-    search.addPoint({3, -2});    search.addPoint({-2, 2});
+    search.addPoint({3, -2});
+    search.addPoint({-2, 2});
     search.addPoint({-3, -4});
     search.addPoint({-4, 0});
     search.addPoint({-1, 3});
@@ -71,7 +72,8 @@ TEST(NearestPointSearchTest, GetNearestPointWorksOnExample2) {
 TEST(NearestPointSearchTest, GetNearestPointPairWorksOnExample1) {
     SearchForTest search;
     search.addPoint({0, 0});
-    search.addPoint({3, -1});    search.addPoint({3, -3});
+    search.addPoint({3, -1});
+    search.addPoint({3, -3});
     search.addPoint({-2, 0});
     search.addPoint({-2, 2});
     search.addPoint({-2, 5});

@@ -15,7 +15,8 @@ template <typename Unit>
 class NearestPointPairSearchUsingSweepLine {
 public:
     using Point = std::pair<Unit, Unit>;
-    using SetOfPoints = std::set<Point>;    using PointPair = std::pair<Point, Point>;
+    using SetOfPoints = std::set<Point>;
+    using PointPair = std::pair<Point, Point>;
     using SetOfUnits = std::set<Unit>;
     using UnitToSetOfUnitsMap = std::map<Unit, SetOfUnits>;
 
@@ -30,6 +31,7 @@ public:
             // This delete is unnecessary i think(?).
             auto itXToDelete = xToSetOfYMap.lower_bound(point.first - smallestDistance);
             xToSetOfYMap.erase(xToSetOfYMap.begin(), itXToDelete);
+
             for (auto const& xAndSetOfYPair : xToSetOfYMap) {
                 Unit const x(xAndSetOfYPair.first);
                 SetOfUnits const& ys(xAndSetOfYPair.second);
