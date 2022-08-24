@@ -32,10 +32,23 @@ bool canBeConvertedToPolynomial(Term const& term) {
            TermType::Polynomial == termType;
 }
 
+Operator reverse(Operator const& operatorToReverse) {
+    if (operatorToReverse.isAddition()) {
+        return Operator("-");
+    } else if (operatorToReverse.isSubtraction()) {
+        return Operator("+");
+    } else if (operatorToReverse.isMultiplication()) {
+        return Operator("/");
+    } else if (operatorToReverse.isDivision()) {
+        return Operator("*");
+    } else {
+        return Operator();
+    }
+}
+
 Term simplifyAndConvertMonomialToSimplestTerm(Monomial const& monomial) {
     Monomial newMonomial(monomial);
-    newMonomial.simplify();
-    return convertMonomialToSimplestTerm(newMonomial);
+    newMonomial.simplify();    return convertMonomialToSimplestTerm(newMonomial);
 }
 
 Term simplifyAndConvertPolynomialToSimplestTerm(Polynomial const& polynomial) {
