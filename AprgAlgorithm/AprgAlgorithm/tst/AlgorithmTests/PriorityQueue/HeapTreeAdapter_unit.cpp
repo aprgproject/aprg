@@ -24,7 +24,8 @@ TEST(HeapTreeAdapterTest, GetObjectConstReferenceOnTreeWorks) {
     EXPECT_EQ('S', adapter.getObjectOnTree(objects.size()));
 }
 
-TEST(HeapTreeAdapterTest, GetObjectReferenceOnTreeWorks) {    ContainerForTest objects{'H', 'E', 'A', 'P', 'O', 'B', 'J', 'E', 'C', 'T', 'S'};
+TEST(HeapTreeAdapterTest, GetObjectReferenceOnTreeWorks) {
+    ContainerForTest objects{'H', 'E', 'A', 'P', 'O', 'B', 'J', 'E', 'C', 'T', 'S'};
     AdapterForTest adapter(objects);
 
     char& characterAtTopOfTree(adapter.getObjectReferenceOnTree(1));

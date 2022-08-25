@@ -18,6 +18,7 @@ public:
     Object const& getObjectOnTree(int const treeIndex) const { return m_objects[getContainerIndex(treeIndex)]; }
 
     Object& getObjectReferenceOnTree(int const treeIndex) { return m_objects[getContainerIndex(treeIndex)]; }
+
     void swim(int const startTreeIndex) {
         // Swim is "bottom up reheapify" -> it swims up to the top of the tree
         int treeIndex(startTreeIndex);
@@ -28,7 +29,8 @@ public:
                !isInHeapOrder(getObjectOnTree(treeIndex), getObjectOnTree(getParentIndex(treeIndex)))) {
             int parentTreeIndex(getParentIndex(treeIndex));
             // swap parent and child
-            std::swap(getObjectReferenceOnTree(parentTreeIndex), getObjectReferenceOnTree(treeIndex));            treeIndex = parentTreeIndex;  // move to the next parent
+            std::swap(getObjectReferenceOnTree(parentTreeIndex), getObjectReferenceOnTree(treeIndex));
+            treeIndex = parentTreeIndex;  // move to the next parent
         }
     }
 
@@ -42,7 +44,8 @@ public:
             if (isInHeapOrder(getObjectOnTree(significantChildIndex), getObjectOnTree(treeIndex))) {
                 break;  // heap order is found so stop
             }
-            // swap if heap order is not maintained (swap to have heap order)            std::swap(getObjectReferenceOnTree(treeIndex), getObjectReferenceOnTree(significantChildIndex));
+            // swap if heap order is not maintained (swap to have heap order)
+            std::swap(getObjectReferenceOnTree(treeIndex), getObjectReferenceOnTree(significantChildIndex));
             treeIndex = significantChildIndex;
         }
     }
@@ -85,6 +88,7 @@ private:
                               // so std::less -> MaxPriority and std::greater -> MinPriority
     Objects& m_objects;
 };
+
 // Objects are kept in heap order, parents value is no smaller than children's value (in max priority queue)
 // Tree index starts at one (top of the tree)
 // Advantage no links needed for the tree.
@@ -107,4 +111,5 @@ private:
 // -> and the subtree rooted at a node contains values no smaller than that contained at the node itself
 
 }  // namespace algorithm
+
 }  // namespace alba

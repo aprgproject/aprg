@@ -119,7 +119,8 @@ private:
     Object const& getObjectOnTree(int const treeIndex) const { return m_objects[m_treeIndexToObjectIndex[treeIndex]]; }
 
     void resizeToHaveThisIndexIfNeeded(int const index) {
-        if (m_maxSize <= index) {            // resize to enlarge, no resize to reduce? // Boo not efficient.
+        if (m_maxSize <= index) {
+            // resize to enlarge, no resize to reduce? // Boo not efficient.
             m_treeIndexToObjectIndex.resize(index + 1);
             m_objectIndexToTreeIndex.resize(index + 1);
             m_objects.resize(index + 1);
@@ -141,7 +142,8 @@ private:
                !isInHeapOrder(getObjectOnTree(treeIndex), getObjectOnTree(treeIndex / NUMBER_OF_CHILDREN))) {
             swapIndexes(treeIndex / NUMBER_OF_CHILDREN, treeIndex);
             treeIndex /= NUMBER_OF_CHILDREN;
-        }    }
+        }
+    }
 
     void sink(int const startTreeIndex) { sink(startTreeIndex, m_size); }
 
@@ -162,6 +164,7 @@ private:
             treeIndex = childIndex;
         }
     }
+
     void swapIndexes(int const treeIndex1, int const treeIndex2) {
         std::swap(m_treeIndexToObjectIndex[treeIndex1], m_treeIndexToObjectIndex[treeIndex2]);
         m_objectIndexToTreeIndex[m_treeIndexToObjectIndex[treeIndex1]] = treeIndex1;

@@ -26,7 +26,8 @@ public:
         DenominatorDataType denominator;
     };
     struct ComplexNumberData  // alignas(8) has no effect on performance (tested in benchmark)
-    {        float realPart;
+    {
+        float realPart;
         float imaginaryPart;
     };
     union NumberUnionData  // alignas(8) has no effect on performance (tested in benchmark)
@@ -39,7 +40,8 @@ public:
         IntDataType intData;
         double doubleData;
         FractionData fractionData;
-        ComplexNumberData complexNumberData;    };
+        ComplexNumberData complexNumberData;
+    };
 
     struct ConfigurationDetails {
         double comparisonTolerance;
@@ -67,6 +69,7 @@ public:
     template <typename NumberType>
     static AlbaNumber createComplexNumber(NumberType const realPart, NumberType const imaginaryPart);
     static AlbaNumber createComplexNumber(ComplexFloat const& complexNumber);
+
     // constexpr functions
 
     template <typename ArithmeticType>
@@ -97,6 +100,7 @@ public:
               value)) {
         checkArithmeticType<ArithmeticType>();
     }
+
     constexpr AlbaNumber(FractionData const& fractionData) : m_type(Type::Fraction), m_data(fractionData) {}
 
     constexpr AlbaNumber(ComplexNumberData const& complexNumberData)
@@ -108,7 +112,8 @@ public:
     AlbaNumber(char const character) = delete;
 
     // This should be constexpr as well but a lot of coding is needed
-    bool operator==(AlbaNumber const& second) const;    bool operator!=(AlbaNumber const& second) const;
+    bool operator==(AlbaNumber const& second) const;
+    bool operator!=(AlbaNumber const& second) const;
     bool operator<=(AlbaNumber const& second) const;
     bool operator>=(AlbaNumber const& second) const;
     bool operator<(AlbaNumber const& second) const;
@@ -142,6 +147,7 @@ public:
     double getDouble() const;
     FractionData getFractionData() const;
     ComplexNumberData getComplexNumberData() const;
+
     void convertToInteger();
     void convertToFraction();
 
@@ -185,6 +191,7 @@ private:
         FractionData const& baseFractionData, IntDataType const exponent) const;
 
     friend std::ostream& operator<<(std::ostream& out, AlbaNumber const& number);
+
     Type m_type;  // Hotness: Type is much hotter.
     // use std variant instead? Nah, I dont wanna deal with getting the "index" to know the "type".
     NumberUnionData m_data;
@@ -201,7 +208,8 @@ constexpr AlbaNumber operator"" _AS_ALBA_NUMBER(unsigned long long int const val
     return AlbaNumber(static_cast<AlbaNumber::IntDataType>(value));
 }
 constexpr AlbaNumber operator"" _AS_ALBA_NUMBER(long double const value) {
-    return AlbaNumber(static_cast<double>(value));}
+    return AlbaNumber(static_cast<double>(value));
+}
 // AlbaNumber operator "" _AS_ALBA_NUMBER(char const value) = delete;
 // not needed to delete because there is no implicit conversion
 

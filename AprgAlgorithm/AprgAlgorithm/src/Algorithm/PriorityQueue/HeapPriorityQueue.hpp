@@ -42,6 +42,7 @@ public:
         m_heapTreeAdapter.sink(INDEX_OF_TOP_TREE);
         return top;
     }
+
 private:
     int getIndexOfLastItemOfTheTree() const { return getSize(); }
 

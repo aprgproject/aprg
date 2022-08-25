@@ -63,7 +63,8 @@ TEST(PowerHelpersTest, GetRaiseToPowerForIntegersWorks) {
     EXPECT_EQ(1, getRaiseToPowerForIntegers(-2, -1));  // this is wrong, but its easier on impl
 }
 
-TEST(PowerHelpersTest, GetRaiseToPowerForIntegersUsingPowWorks) {    EXPECT_EQ(1, getRaiseToPowerForIntegersUsingPow(0, 0));
+TEST(PowerHelpersTest, GetRaiseToPowerForIntegersUsingPowWorks) {
+    EXPECT_EQ(1, getRaiseToPowerForIntegersUsingPow(0, 0));
     EXPECT_EQ(1, getRaiseToPowerForIntegersUsingPow(1, 0));
     EXPECT_EQ(0, getRaiseToPowerForIntegersUsingPow(0, 1));
     EXPECT_EQ(243, getRaiseToPowerForIntegersUsingPow(3, 5));
@@ -109,7 +110,8 @@ TEST(PowerHelpersTest, GetNthRootWorks) {
 
 TEST(PowerHelpersTest, IsPerfectSquareForAlbaNumberWorks) {
     EXPECT_TRUE(isPerfectSquare(AlbaNumber(0)));
-    EXPECT_TRUE(isPerfectSquare(AlbaNumber(1)));    EXPECT_FALSE(isPerfectSquare(AlbaNumber(3)));
+    EXPECT_TRUE(isPerfectSquare(AlbaNumber(1)));
+    EXPECT_FALSE(isPerfectSquare(AlbaNumber(3)));
     EXPECT_TRUE(isPerfectSquare(AlbaNumber(4)));
     EXPECT_TRUE(isPerfectSquare(AlbaNumber(100)));
     EXPECT_FALSE(isPerfectSquare(AlbaNumber(101)));
