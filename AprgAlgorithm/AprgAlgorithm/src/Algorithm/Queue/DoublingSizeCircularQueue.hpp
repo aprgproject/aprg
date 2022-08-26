@@ -12,12 +12,13 @@ namespace algorithm {
 template <typename Object>
 class DoublingSizeCircularQueue : public BaseQueue<Object> {
 public:
+    static constexpr int MINUMUM_CONTAINER_SIZE = 1;
+
     DoublingSizeCircularQueue() : m_containerSize(0), m_firstIndex(0), m_afterLastIndex(0), m_objects(nullptr) {
-        initialize(INITIAL_CONTAINER_SIZE);
+        initialize(MINUMUM_CONTAINER_SIZE);
     }
 
     ~DoublingSizeCircularQueue() { deleteAllObjects(); }
-
     bool isEmpty() const override { return getSize() == 0; }
 
     int getSize() const override {
@@ -90,15 +91,13 @@ private:
 
     void resizeOnDequeueIfNeeded() {
         if (m_containerSize > 0 && getSize() == m_containerSize / 4) {
-            resize(m_containerSize / 2);
+            resize(std::max(MINUMUM_CONTAINER_SIZE, m_containerSize / 2));
         }
     }
 
-    static constexpr int INITIAL_CONTAINER_SIZE = 1;
     int m_containerSize;
     int m_firstIndex;
-    int m_afterLastIndex;
-    Object* m_objects;
+    int m_afterLastIndex;    Object* m_objects;
 };
 
 }  // namespace algorithm
