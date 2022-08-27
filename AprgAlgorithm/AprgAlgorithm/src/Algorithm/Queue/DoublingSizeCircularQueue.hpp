@@ -19,6 +19,7 @@ public:
     }
 
     ~DoublingSizeCircularQueue() { deleteAllObjects(); }
+
     bool isEmpty() const override { return getSize() == 0; }
 
     int getSize() const override {
@@ -97,7 +98,8 @@ private:
 
     int m_containerSize;
     int m_firstIndex;
-    int m_afterLastIndex;    Object* m_objects;
+    int m_afterLastIndex;
+    Object* m_objects;
 };
 
 }  // namespace algorithm

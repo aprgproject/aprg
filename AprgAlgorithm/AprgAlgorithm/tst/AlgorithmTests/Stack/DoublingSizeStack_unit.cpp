@@ -48,6 +48,7 @@ TEST(DoublingSizeStackTest, MinimumContainerSizeIsContained) {
 TEST(DoublingSizeStackTest, PushWorksWithDoublingContainerSize) {
     StackForTest stack;
     EXPECT_EQ(1, stack.getContainerSize());
+
     stack.push(1);
     stack.push(2);
     EXPECT_EQ(2, stack.getContainerSize());
