@@ -1,10 +1,9 @@
 #include "StringConstruction.hpp"
 
-#include <Algorithm/HashFunctions/ForString/HornerHashFunctionForSubstrings.hpp>
-#include <Algorithm/HashFunctions/ForString/HornerHashFunctionForWholeString.hpp>
+#include <Algorithm/HashFunctions/String/HornerHashFunctionForSubstrings.hpp>
+#include <Algorithm/HashFunctions/String/HornerHashFunctionForWholeString.hpp>
 
 #include <algorithm>
-
 using namespace alba::algorithm;
 using namespace std;
 
