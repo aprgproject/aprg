@@ -110,13 +110,11 @@ private:
             } else if (VertexState::NotProcessed == adjacentVertexState) {
                 m_vertexToPreviousVertexMap[adjacentVertex] = startVertex;
                 searchUsingDfsWithDirectedGraph(adjacentVertex);
-            } else if (VertexState::Processing == adjacentVertexState)  // there is a cycle if adjacent vertex is in
-                                                                        // processing as well
-            {
+            } else if (VertexState::Processing == adjacentVertexState) {
+                // there is a cycle if adjacent vertex is in processing as well
                 m_pathsWithCycle.emplace_back(getPathWithCycle(startVertex, adjacentVertex));
             }
-        }
-        m_vertexStatesMap[startVertex] = VertexState::Processed;
+        }        m_vertexStatesMap[startVertex] = VertexState::Processed;
     }
 
     void searchUsingDfsWithUndirectedGraph(Vertex const& startVertex, Vertex const& previousVertex) {
@@ -130,15 +128,11 @@ private:
             } else if (VertexState::NotProcessed == adjacentVertexState) {
                 m_vertexToPreviousVertexMap[adjacentVertex] = startVertex;
                 searchUsingDfsWithUndirectedGraph(adjacentVertex, startVertex);
-            } else if (
-                previousVertex != adjacentVertex &&
-                VertexState::Processing ==
-                    adjacentVertexState)  // there is a cycle if adjacent vertex is in processing as well
-            {
+            } else if (previousVertex != adjacentVertex && VertexState::Processing == adjacentVertexState) {
+                // there is a cycle if adjacent vertex is in processing as well
                 // if previous and adjacent are equal then its the same edge (and not technically a cycle)
                 m_pathsWithCycle.emplace_back(getPathWithCycle(startVertex, adjacentVertex));
-            }
-        }
+            }        }
         m_vertexStatesMap[startVertex] = VertexState::Processed;
     }
 

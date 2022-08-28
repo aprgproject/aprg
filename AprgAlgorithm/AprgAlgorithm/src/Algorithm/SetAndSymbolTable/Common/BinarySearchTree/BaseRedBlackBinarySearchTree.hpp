@@ -17,12 +17,11 @@ public:
     using Node = NodeTemplateType;
     using NodeUniquePointer = typename BaseClass::NodeUniquePointer;
 
-    ~BaseRedBlackBinarySearchTree() override = default;  // no need for virtual destructor because base destructor is
-                                                         // virtual (similar to other virtual functions)
+    // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
+    ~BaseRedBlackBinarySearchTree() override = default;
 
 protected:
-    inline bool isRed(NodeUniquePointer const& nodePointer) const {
-        bool result(false);
+    inline bool isRed(NodeUniquePointer const& nodePointer) const {        bool result(false);
         if (nodePointer) {
             result = nodePointer->parentLinkColor == RedBlackColor::Red;
         }
