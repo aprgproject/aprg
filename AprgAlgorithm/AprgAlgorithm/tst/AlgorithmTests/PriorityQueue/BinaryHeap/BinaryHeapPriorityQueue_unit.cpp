@@ -1,7 +1,6 @@
-#include <Algorithm/PriorityQueue/HeapPriorityQueue.hpp>
+#include <Algorithm/PriorityQueue/BinaryHeap/BinaryHeapPriorityQueue.hpp>
 
 #include <gtest/gtest.h>
-
 using namespace std;
 
 namespace alba {
@@ -10,34 +9,31 @@ namespace algorithm {
 
 namespace {
 using MaxPriorityQueueForTest =
-    HeapPriorityQueue<char, less>;  // less leads to Max Priority Queue same as in c++ standard
+    BinaryHeapPriorityQueue<char, less>;  // less leads to Max Priority Queue same as in c++ standard
 }
 
-TEST(HeapPriorityQueueTest, IsEmptyWorks) {
+TEST(BinaryHeapPriorityQueueTest, IsEmptyWorks) {
     MaxPriorityQueueForTest queue1;
     MaxPriorityQueueForTest queue2;
     queue2.insert('A');
-
     EXPECT_TRUE(queue1.isEmpty());
     EXPECT_FALSE(queue2.isEmpty());
 }
 
-TEST(HeapPriorityQueueTest, GetSizeWorks) {
+TEST(BinaryHeapPriorityQueueTest, GetSizeWorks) {
     MaxPriorityQueueForTest queue1;
     MaxPriorityQueueForTest queue2;
-    queue2.insert('P');
-    queue2.insert('Q');
+    queue2.insert('P');    queue2.insert('Q');
     queue2.insert('E');
 
     EXPECT_EQ(0, queue1.getSize());
     EXPECT_EQ(3, queue2.getSize());
 }
 
-TEST(HeapPriorityQueueTest, GetObjectsWorks) {
+TEST(BinaryHeapPriorityQueueTest, GetObjectsWorks) {
     MaxPriorityQueueForTest queue;
     queue.insert('P');
-    queue.insert('Q');
-    queue.insert('E');
+    queue.insert('Q');    queue.insert('E');
 
     MaxPriorityQueueForTest::Objects const& objectsToVerify(queue.getObjects());
 
@@ -45,20 +41,18 @@ TEST(HeapPriorityQueueTest, GetObjectsWorks) {
     EXPECT_EQ(objectsToExpect, objectsToVerify);
 }
 
-TEST(HeapPriorityQueueTest, GetTopWorks) {
+TEST(BinaryHeapPriorityQueueTest, GetTopWorks) {
     MaxPriorityQueueForTest queue;
     queue.insert('P');
-    queue.insert('Q');
-    queue.insert('E');
+    queue.insert('Q');    queue.insert('E');
 
     EXPECT_EQ('Q', queue.getTop());
 }
 
-TEST(HeapPriorityQueueTest, InsertWorksOnExample1) {
+TEST(BinaryHeapPriorityQueueTest, InsertWorksOnExample1) {
     MaxPriorityQueueForTest queue;
 
-    queue.insert('P');
-    queue.insert('Q');
+    queue.insert('P');    queue.insert('Q');
     queue.insert('E');
 
     MaxPriorityQueueForTest::Objects const& objectsToVerify(queue.getObjects());
@@ -66,11 +60,10 @@ TEST(HeapPriorityQueueTest, InsertWorksOnExample1) {
     EXPECT_EQ(objectsToExpect, objectsToVerify);
 }
 
-TEST(HeapPriorityQueueTest, InsertWorksOnExample2) {
+TEST(BinaryHeapPriorityQueueTest, InsertWorksOnExample2) {
     MaxPriorityQueueForTest queue;
 
-    queue.insert('S');
-    queue.insert('P');
+    queue.insert('S');    queue.insert('P');
     queue.insert('R');
     queue.insert('N');
     queue.insert('T');
@@ -86,11 +79,10 @@ TEST(HeapPriorityQueueTest, InsertWorksOnExample2) {
     EXPECT_EQ(objectsToExpect, objectsToVerify);
 }
 
-TEST(HeapPriorityQueueTest, DeleteAndGetTopObjectWorksOnExample1) {
+TEST(BinaryHeapPriorityQueueTest, DeleteAndGetTopObjectWorksOnExample1) {
     MaxPriorityQueueForTest queue;
     queue.insert('P');
-    queue.insert('Q');
-    queue.insert('E');
+    queue.insert('Q');    queue.insert('E');
 
     char objectToVerify(queue.deleteAndGetTopObject());
 
@@ -100,11 +92,10 @@ TEST(HeapPriorityQueueTest, DeleteAndGetTopObjectWorksOnExample1) {
     EXPECT_EQ(objectsToExpect, objectsToVerify);
 }
 
-TEST(HeapPriorityQueueTest, DeleteAndGetTopObjectWorksOnExample2) {
+TEST(BinaryHeapPriorityQueueTest, DeleteAndGetTopObjectWorksOnExample2) {
     MaxPriorityQueueForTest queue;
     queue.insert('S');
-    queue.insert('P');
-    queue.insert('R');
+    queue.insert('P');    queue.insert('R');
     queue.insert('N');
     queue.insert('T');
     queue.insert('O');
