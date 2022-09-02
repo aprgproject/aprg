@@ -10,11 +10,10 @@ namespace algorithm {}
 
 // -> Asymptotic Analysis
 //
-// ---> NOTE: The CLS book restricts the definitions of functions to be asymptotically non negative, other books just
+// ---> NOTE: The CLRS book restricts the definitions of functions to be asymptotically non negative, other books just
 // use limits on their definitions.
 //
-// ---> (1) Θ Notation (BIG THETA Notation):
-// -----> This is for an ASYMPTOTIC TIGHT BOUND.
+// ---> (1) Θ Notation (BIG THETA Notation):// -----> This is for an ASYMPTOTIC TIGHT BOUND.
 // -----> Theta notation encloses the function from above and below ("sandwiched").
 // -----> This is used for analyzing the GENERAL-CASE (not neccessarily average) complexity of an algorithm.
 // -----> Formal definition:

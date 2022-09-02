@@ -1,9 +1,8 @@
 #pragma once
 
-#include <Algorithm/SetAndSymbolTable/Common/BinarySearchTree/BinarySearchTreeNode.hpp>
+#include <Algorithm/SetAndSymbolTable/Common/BinarySearchTree/BinarySearchTreeNodes.hpp>
 #include <Algorithm/SetAndSymbolTable/Set/BinarySearchTree/Common/BaseRedBlackBinarySearchTreeSet.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
-
 #include <vector>
 
 namespace alba {
