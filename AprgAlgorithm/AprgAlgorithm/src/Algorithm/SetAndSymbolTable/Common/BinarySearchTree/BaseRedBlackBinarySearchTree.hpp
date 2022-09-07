@@ -4,6 +4,7 @@
 #include <Algorithm/SetAndSymbolTable/Common/BinarySearchTree/BinarySearchTreeNodes.hpp>
 
 #include <memory>
+
 namespace alba {
 
 namespace algorithm {
@@ -20,7 +21,8 @@ public:
     ~BaseRedBlackBinarySearchTree() override = default;
 
 protected:
-    inline bool isRed(NodeUniquePointer const& nodePointer) const {        bool result(false);
+    inline bool isRed(NodeUniquePointer const& nodePointer) const {
+        bool result(false);
         if (nodePointer) {
             result = nodePointer->parentLinkColor == RedBlackColor::Red;
         }

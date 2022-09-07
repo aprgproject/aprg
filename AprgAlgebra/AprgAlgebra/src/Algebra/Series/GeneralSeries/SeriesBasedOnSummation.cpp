@@ -24,6 +24,7 @@ SeriesBasedOnSummation::SeriesBasedOnSummation(
       m_isSummationModelValid(!isNan(getFormulaForSeries())) {}
 
 bool SeriesBasedOnSummation::isSummationModelValid() const { return m_isSummationModelValid; }
+
 bool SeriesBasedOnSummation::isConvergent() const {
     bool result(false);
     if (m_isSummationModelValid) {
@@ -34,6 +35,7 @@ bool SeriesBasedOnSummation::isConvergent() const {
     }
     return result;
 }
+
 Term SeriesBasedOnSummation::getValueAtIndex(int const index) const {
     Term result;
     if (m_isSummationModelValid) {
@@ -70,4 +72,5 @@ Term SeriesBasedOnSummation::getFormulaForSummation(
 }
 
 }  // namespace algebra
+
 }  // namespace alba

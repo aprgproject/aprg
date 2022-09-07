@@ -25,7 +25,8 @@ Term Summation::getSummationModelWithKnownConstant(AlbaNumber const& startNumber
     substitution.putVariableWithValue(m_variableName, startNumber);
     Term summationValueFromModel(substitution.performSubstitutionTo(m_summationModel));
     Term difference = firstTerm - summationValueFromModel;
-    Term result(m_summationModel + difference);    return result;
+    Term result(m_summationModel + difference);
+    return result;
 }
 
 Term Summation::getSummationModelWithUnknownConstant() const { return m_summationModel + Term(C); }
@@ -68,7 +69,8 @@ void Summation::calculateSumStartingFromANumber(Term& result, AlbaNumber const& 
             SubstitutionOfVariablesToTerms substitution({{m_variableName, end}});
             result = substitution.performSubstitutionTo(summationModelWithConstant);
         }
-    } else {        result = ALBA_NUMBER_NOT_A_NUMBER;
+    } else {
+        result = ALBA_NUMBER_NOT_A_NUMBER;
     }
 }
 
@@ -85,7 +87,8 @@ void Summation::calculateSumUsingEachTerm(
             substitution.putVariableWithValue(m_variableName, value);
             sum += substitution.performSubstitutionTo(m_termToSum);
         }
-    }    result = sum;
+    }
+    result = sum;
 }
 
 void Summation::calculateSumUsingModel(Term& result, AlbaNumber const& startNumber, AlbaNumber const& endNumber) const {
@@ -101,6 +104,7 @@ Term Summation::getSummationModel() const {
     SubstitutionOfVariablesToTerms substitution({{m_variableName, variablePlusOne}});
     return substitution.performSubstitutionTo(integration.integrate(m_termToSum));
 }
+
 }  // namespace algebra
 
 }  // namespace alba

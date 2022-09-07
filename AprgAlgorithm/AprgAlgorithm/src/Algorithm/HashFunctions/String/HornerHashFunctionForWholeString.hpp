@@ -25,7 +25,8 @@ private:
         for (char const c : stringToHash) {
             finalHPart = (finalHPart * m_radix + c) % m_largeRandomPrime;
         }
-        return finalHPart;    }
+        return finalHPart;
+    }
 
     HashValue m_radix;
     HashValue m_largeRandomPrime;

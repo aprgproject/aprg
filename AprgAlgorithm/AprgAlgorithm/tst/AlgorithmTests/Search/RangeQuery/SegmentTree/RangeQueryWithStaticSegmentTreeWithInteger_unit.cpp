@@ -25,7 +25,8 @@ RangeQueryForTest::Function plusFunction = plus<>();
 RangeQueryForTest::Function minusFunction = minus<>();
 }  // namespace
 
-TEST(RangeQueryWithStaticSegmentTreeTest, GetStartOfChildrenWithMinimumWorksOnExample1) {    ValuesForTest values{5, 9, 4, 8, 6, 1, 4, 2, 0};
+TEST(RangeQueryWithStaticSegmentTreeTest, GetStartOfChildrenWithMinimumWorksOnExample1) {
+    ValuesForTest values{5, 9, 4, 8, 6, 1, 4, 2, 0};
     RangeQueryForTest minimumRangeQuery(values, minimumFunction);
 
     EXPECT_EQ(15, minimumRangeQuery.getStartOfChildren());

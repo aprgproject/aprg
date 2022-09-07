@@ -4,6 +4,7 @@
 #include <Algorithm/HashFunctions/String/HornerHashFunctionForWholeString.hpp>
 
 #include <algorithm>
+
 using namespace alba::algorithm;
 using namespace std;
 

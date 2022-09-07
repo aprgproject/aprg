@@ -118,7 +118,8 @@ private:
         m_hasPositiveOrNegativeCycle = !cycleDetection.getOneCycle().empty();
     }
 
-    Graph const& b_graph;    Vertex const& b_startVertex;
+    Graph const& b_graph;
+    Vertex const& b_startVertex;
     VertexToEdgeOrderedByWeightMap& b_vertexToEdgeWithBestWeightMap;
     bool m_hasPositiveOrNegativeCycle;
     DequeOfVertices m_verticesToProcess;  // SPFA ("Shortest Path Faster Algorithm") improvement
@@ -162,7 +163,8 @@ private:
 // Other discussions:
 
 // Bellman–Ford Algorithm
-// Given a graph and a source vertex src in graph, find shortest paths from src to all vertices in the given graph.// The graph may contain negative weight edges.
+// Given a graph and a source vertex src in graph, find shortest paths from src to all vertices in the given graph.
+// The graph may contain negative weight edges.
 // We have discussed Dijkstra’s algorithm for this problem.
 // Dijkstra’s algorithm is a Greedy algorithm and time complexity is O(V+E LogV) (with the use of Fibonacci heap).
 // Dijkstra doesn’t work for Graphs with negative weight edges, Bellman-Ford works for such graphs.

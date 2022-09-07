@@ -25,7 +25,8 @@ AlbaNumber getProbabilityOnGeometricDistribution(
     AlbaNumber const& probabilityOfASingleAttempt, UnsignedInteger const xTarget);
 
 AlbaNumber getComplementOfProbability(AlbaNumber const& probability);
-AlbaNumber getUnionOfProbabilitiesOfDisjointEvents(    AlbaNumber const& probabilityOfEventA, AlbaNumber const& probabilityOfEventB);
+AlbaNumber getUnionOfProbabilitiesOfDisjointEvents(
+    AlbaNumber const& probabilityOfEventA, AlbaNumber const& probabilityOfEventB);
 AlbaNumber getUnionOfProbabilities(
     AlbaNumber const& probabilityOfEventA, AlbaNumber const& probabilityOfEventB,
     AlbaNumber const& probabilityOfEventAAndEventB);

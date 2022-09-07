@@ -31,6 +31,7 @@ public:
             replaceAllOldRootsWithNewRoot(root2, root1);
         }
     }
+
     RootArray const& getRootArray() const { return m_roots; }
 
 private:

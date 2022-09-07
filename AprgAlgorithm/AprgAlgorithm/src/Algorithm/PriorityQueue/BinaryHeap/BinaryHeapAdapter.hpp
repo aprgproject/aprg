@@ -16,6 +16,7 @@ public:
     BinaryHeapAdapter(Objects& objects) : m_comparator(), m_objects(objects) {}
 
     Object const& getObjectOnTree(int const treeIndex) const { return m_objects[getContainerIndex(treeIndex)]; }
+
     Object& getObjectReferenceOnTree(int const treeIndex) { return m_objects[getContainerIndex(treeIndex)]; }
 
     void swim(int const startTreeIndex) {

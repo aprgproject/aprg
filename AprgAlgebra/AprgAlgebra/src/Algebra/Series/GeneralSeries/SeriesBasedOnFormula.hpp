@@ -14,7 +14,8 @@ public:
     SeriesBasedOnFormula(Term const& formulaForSeries, std::string const& variableName);
     virtual bool isConvergent() const;
     virtual bool isIncreasing() const;
-    virtual bool isDecreasing() const;    virtual bool isMonotonic() const;
+    virtual bool isDecreasing() const;
+    virtual bool isMonotonic() const;
     virtual bool isBounded() const;
 
     virtual Term getFormulaForSeries() const;
@@ -37,4 +38,5 @@ protected:
 };
 
 }  // namespace algebra
+
 }  // namespace alba

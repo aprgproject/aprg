@@ -3,6 +3,7 @@
 #include <Algorithm/SetAndSymbolTable/Common/BinarySearchTree/BinarySearchTreeNodes.hpp>
 #include <Algorithm/SetAndSymbolTable/Set/BinarySearchTree/Common/BaseRedBlackBinarySearchTreeSet.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
+
 #include <vector>
 
 namespace alba {
@@ -34,6 +35,7 @@ public:
     using BooleanBinaryFunction = std::function<bool(Key const&, Key const&)>;
 
     IntervalSearchTree() : b_root(BaseClass::m_root) {}
+
     Keys getIntersectingIntervalsOf(Key const& intervalToCheck) const {
         Keys keys;
         searchForIntersectingIntervals(keys, b_root, intervalToCheck);
@@ -44,7 +46,8 @@ public:
 
 protected:
     void updateTreeNodeDetails(Node& node) const override {
-        node.numberOfNodesOnThisSubTree = this->calculateSizeOfNodeBasedFromLeftAndRight(node);        node.maxIntervalValueInSubtree = getMaxValueBasedFromLeftAndRight(node);
+        node.numberOfNodesOnThisSubTree = this->calculateSizeOfNodeBasedFromLeftAndRight(node);
+        node.maxIntervalValueInSubtree = getMaxValueBasedFromLeftAndRight(node);
     }
 
     void putStartingOnThisNode(NodeUniquePointer& nodePointer, Key const& key) override {
@@ -98,7 +101,8 @@ protected:
                 // else go left (and go right as well because all intervals should be collected)
                 searchForIntersectingIntervals(intersectingIntervals, nodePointer->left, intervalToCheck);
                 searchForIntersectingIntervals(intersectingIntervals, nodePointer->right, intervalToCheck);
-            }        }
+            }
+        }
     }
 
     IntervalUnit getMaxValueBasedFromLeftAndRight(Node& node) const {
@@ -134,6 +138,7 @@ protected:
 private:
     NodeUniquePointer& b_root;
 };
+
 }  // namespace algorithm
 
 }  // namespace alba

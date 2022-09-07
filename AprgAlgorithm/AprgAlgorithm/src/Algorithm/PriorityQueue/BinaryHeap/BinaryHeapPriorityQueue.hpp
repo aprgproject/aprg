@@ -4,6 +4,7 @@
 
 #include <utility>
 #include <vector>
+
 namespace alba {
 
 namespace algorithm {
@@ -16,6 +17,7 @@ public:
     BinaryHeapPriorityQueue() : m_objects(), m_heapTreeAdapter(m_objects) {}
 
     bool isEmpty() const { return getSize() == 0; }
+
     int getSize() const { return m_objects.size(); }
 
     Objects const& getObjects() const { return m_objects; }
@@ -49,7 +51,8 @@ private:
     BinaryHeapAdapter<Objects, 2, ComparatorTemplateType> m_heapTreeAdapter;
 };
 
-// Applications:// -> Event-driven simulation (customers in a line, colliding particles)
+// Applications:
+// -> Event-driven simulation (customers in a line, colliding particles)
 // -> Numerical computation (reducing roundoff error)
 // -> Data compression (huffman codes)
 // -> Graph searching (Dijkstra's algorithm, Prim's algorithm)

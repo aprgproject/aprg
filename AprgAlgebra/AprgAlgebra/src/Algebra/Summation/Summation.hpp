@@ -12,6 +12,7 @@ public:
 
     Term getSummationModelWithKnownConstant(AlbaNumber const& startNumber) const;
     Term getSummationModelWithUnknownConstant() const;
+
     Term getSum(Term const& start, Term const& end) const;
 
 private:
@@ -26,6 +27,7 @@ private:
     std::string m_variableName;
     Term m_summationModel;
 };
+
 }  // namespace algebra
 
 }  // namespace alba

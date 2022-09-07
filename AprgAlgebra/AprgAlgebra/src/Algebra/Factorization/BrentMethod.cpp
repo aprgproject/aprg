@@ -26,6 +26,7 @@ BrentMethod::BrentMethod(AlbaNumbers const& coefficients)
     : m_numberOfIterationsExecuted(0), m_coefficients(coefficients), m_values{} {}
 
 bool BrentMethod::isFinished() const { return m_values.solutionOptional.has_value(); }
+
 int BrentMethod::getNumberOfIterationsExecuted() const { return m_numberOfIterationsExecuted; }
 
 AlbaNumbers const& BrentMethod::getCoefficients() const { return m_coefficients; }
@@ -130,7 +131,8 @@ AlbaNumber BrentMethod::calculate(AlbaNumber const& inputValue) const {
     for (AlbaNumbers::const_reverse_iterator it = m_coefficients.crbegin(); it != m_coefficients.crend(); ++it) {
         result = result + (*it) * partialProduct;
         partialProduct = partialProduct * inputValue;
-    }    return result;
+    }
+    return result;
 }
 
 AlbaNumberOptional BrentMethod::calculateInverseQuadraticInterpolation(

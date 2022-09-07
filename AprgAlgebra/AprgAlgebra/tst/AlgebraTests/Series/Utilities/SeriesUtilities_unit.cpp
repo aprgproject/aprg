@@ -71,7 +71,8 @@ TEST(SeriesUtilitiesTest, HasLinearityWorks) {
 
 TEST(SeriesUtilitiesTest, PerformLimitComparisonTestWorks) {
     Term numerator1(1);
-    Term denominator1(Monomial(1, {{"n", AlbaNumber::createFraction(1, 2)}}));    Term formula1(createExpressionIfPossible({numerator1, "/", denominator1}));
+    Term denominator1(Monomial(1, {{"n", AlbaNumber::createFraction(1, 2)}}));
+    Term formula1(createExpressionIfPossible({numerator1, "/", denominator1}));
     SeriesBasedOnSummation series1(formula1, "n");
     Term numerator2(1);
     Term denominator2("n");

@@ -3,7 +3,8 @@
 #include <Algorithm/PriorityQueue/BinaryHeap/BinaryHeapAdapter.hpp>
 #include <Algorithm/Sort/BaseSorter.hpp>
 
-#include <functional>#include <utility>
+#include <functional>
+#include <utility>
 
 namespace alba {
 
@@ -32,7 +33,8 @@ private:
         // Note: According to CLRS this runs on O(n) / linear time.
         for (int parentIndex = getLastParentAtTheBottom(maxBinaryHeapAdapter);
              parentIndex >= maxBinaryHeapAdapter.getTopTreeIndex(); parentIndex--) {
-            maxBinaryHeapAdapter.sink(parentIndex, size);        }
+            maxBinaryHeapAdapter.sink(parentIndex, size);
+        }
     }
 
     void swapTopItemsToLastPlaces(MaxBinaryHeapAdapter& maxBinaryHeapAdapter) const {
@@ -53,6 +55,7 @@ private:
         return maxBinaryHeapAdapter.getParentIndex(maxBinaryHeapAdapter.getBottomTreeIndex());
     }
 };
+
 }  // namespace algorithm
 
 }  // namespace alba

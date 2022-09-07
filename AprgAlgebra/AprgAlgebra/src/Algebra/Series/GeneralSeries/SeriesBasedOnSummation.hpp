@@ -12,7 +12,8 @@ public:
     SeriesBasedOnSummation(Term const& formulaForEachTermInSummation, std::string const& variableName);
 
     bool isSummationModelValid() const;
-    bool isConvergent() const override;    Term getValueAtIndex(int const index) const override;
+    bool isConvergent() const override;
+    Term getValueAtIndex(int const index) const override;
 
     bool isAbsolutelyConvergent() const;
     bool isConditionallyConvergent() const;
@@ -30,6 +31,7 @@ protected:
     Summation m_summation;
     bool m_isSummationModelValid;
 };
+
 }  // namespace algebra
 
 }  // namespace alba

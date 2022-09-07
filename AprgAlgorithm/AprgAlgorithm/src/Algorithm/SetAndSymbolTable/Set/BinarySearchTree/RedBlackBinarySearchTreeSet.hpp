@@ -4,6 +4,7 @@
 #include <Algorithm/SetAndSymbolTable/Set/BinarySearchTree/Common/BaseRedBlackBinarySearchTreeSet.hpp>
 
 namespace alba {
+
 namespace algorithm {
 
 template <typename Key>

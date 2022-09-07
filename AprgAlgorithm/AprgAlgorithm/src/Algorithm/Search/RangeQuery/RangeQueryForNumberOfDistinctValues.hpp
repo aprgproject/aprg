@@ -21,7 +21,8 @@ public:
     // where count[x] indicates the number of times an element x occurs in the active range.
 
     using Index = int;
-    using Value = typename Values::value_type;    using Range = std::pair<Index, Index>;
+    using Value = typename Values::value_type;
+    using Range = std::pair<Index, Index>;
     using Ranges = std::vector<Range>;
     using InputAndOutputPair = std::pair<Range, Value>;
     using InputAndOutputPairs = std::vector<InputAndOutputPair>;
@@ -53,7 +54,8 @@ public:
             for (Range const& currentRange : validRequestsRanges) {
                 moveToTargetRange(numberOfDistinct, frequencyArray, previousRange, currentRange);
                 result.emplace_back(currentRange, numberOfDistinct);
-                previousRange = currentRange;            }
+                previousRange = currentRange;
+            }
         }
         return result;
     }

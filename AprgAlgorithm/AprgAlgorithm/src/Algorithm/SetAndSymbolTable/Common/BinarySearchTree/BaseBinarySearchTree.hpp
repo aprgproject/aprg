@@ -236,7 +236,8 @@ protected:
                 result = getSizeOnThisNode(nodePointer->left);
             }
         }
-        return result;    }
+        return result;
+    }
 
     NodeUniquePointer& getMinimumNodePointerReferenceStartingOnThisNode(NodeUniquePointer& nodePointer) {
         // specialized function to be able to get the minimum and change(delete) it
@@ -276,7 +277,8 @@ protected:
                     // delete minimum on right
                     deleteMinimumStartingOnThisNode(minimumOnTheRight);
                 }
-            }            if (nodePointer) {
+            }
+            if (nodePointer) {
                 updateTreeNodeDetails(*nodePointer);
             }
         }

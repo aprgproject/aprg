@@ -38,7 +38,8 @@ public:
                     result = searchIndex - m_substringLength + 1;
                     break;
                 }
-            }        }
+            }
+        }
         return result;
     }
 
