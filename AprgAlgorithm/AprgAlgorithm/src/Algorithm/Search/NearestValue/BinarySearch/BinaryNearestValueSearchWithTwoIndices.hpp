@@ -1,9 +1,7 @@
 #pragma once
 
 #include <Algorithm/Utilities/IndexHelper.hpp>
-#include <Algorithm/Utilities/IndexHelper.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
-
 namespace alba {
 
 namespace algorithm {
@@ -25,24 +23,23 @@ public:
         setInitialIndexes(lowIndex, highIndex);
     }
 
-    Value getNearestValue(Value const& value) {
+    Value getNearestValue(Value const& target) {
         Value result{};
         if (!m_sortedValues.empty()) {
-            moveIndexesUntilCloseToValue(value);
-            result = m_sortedValues[getIndexOfNearestValueInBetweenTwoIndices(value)];
+            moveCloserUsingIntervalsInsideTarget(target);
+            result = m_sortedValues[getIndexOfNearestValueInBetweenTwoIndices(target)];
         }
         return result;
     }
 
-    Index getIndexOfNearestValue(Value const& value) {
+    Index getIndexOfNearestValue(Value const& target) {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
-            moveIndexesUntilCloseToValue(value);
-            result = getIndexOfNearestValueInBetweenTwoIndices(value);
+            moveCloserUsingIntervalsInsideTarget(target);
+            result = getIndexOfNearestValueInBetweenTwoIndices(target);
         }
         return result;
     }
-
     inline Index getLowerIndex() const { return m_lowIndex; }
 
     inline Index getHigherIndex() const { return m_highIndex; }
@@ -64,12 +61,11 @@ public:
     }
 
 private:
-    Index getIndexOfNearestValueInBetweenTwoIndices(Value const& value) const {
-        Value deviationFromLower(mathHelper::getPositiveDelta(value, m_sortedValues[m_lowIndex]));
-        Value deviationFromHigher(mathHelper::getPositiveDelta(value, m_sortedValues[m_highIndex]));
+    Index getIndexOfNearestValueInBetweenTwoIndices(Value const& target) const {
+        Value deviationFromLower(mathHelper::getPositiveDelta(target, m_sortedValues[m_lowIndex]));
+        Value deviationFromHigher(mathHelper::getPositiveDelta(target, m_sortedValues[m_highIndex]));
         return (deviationFromLower <= deviationFromHigher) ? m_lowIndex : m_highIndex;
     }
-
     void setInitialIndexes() {
         if (!m_sortedValues.empty()) {
             m_lowIndex = 0;
@@ -88,35 +84,23 @@ private:
         }
     }
 
-    void moveIndexesUntilCloseToValue(Value const& value) {
+    void moveCloserUsingIntervalsInsideTarget(Value const& target) {
         if (!m_sortedValues.empty()) {
-            moveIndexesCloserUntilDistanceIsLessThanOrEqualToOne(value);
-            moveIndexesCloserWhenValueIsBeyondTheIndices(value);
-        }
-    }
-
-    void moveIndexesCloserUntilDistanceIsLessThanOrEqualToOne(Value const& value) {
-        while (m_lowIndex + 1 < m_highIndex) {
-            // Binary search with one comparison per iteration
-
-            Index middleIndex(getMidpointOfIndexes(m_lowIndex, m_highIndex));
-            Value middleValue(m_sortedValues[middleIndex]);
-            if (value <= middleValue) {
-                m_highIndex = middleIndex;
-            } else {
-                m_lowIndex = middleIndex;
+            while (m_lowIndex + 1 < m_highIndex) {
+                Index middleIndex(getMidpointOfIndexes(m_lowIndex, m_highIndex));
+                if (m_sortedValues[middleIndex] <= target) {
+                    m_lowIndex = middleIndex;
+                } else {
+                    m_highIndex = middleIndex;
+                }
+            }
+            if (target <= m_sortedValues[m_lowIndex]) {
+                m_highIndex = m_lowIndex;
+            } else if (m_sortedValues[m_highIndex] <= target) {
+                m_lowIndex = m_highIndex;
             }
         }
     }
-
-    void moveIndexesCloserWhenValueIsBeyondTheIndices(Value const& value) {
-        if (value <= m_sortedValues[m_lowIndex]) {
-            m_highIndex = m_lowIndex;
-        } else if (m_sortedValues[m_highIndex] <= value) {
-            m_lowIndex = m_highIndex;
-        }
-    }
-
     Index m_lowIndex;
     Index m_highIndex;
     Values const& m_sortedValues;
