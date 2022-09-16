@@ -27,7 +27,8 @@ public:
             if (*lowerBoundIt == target) {
                 result = std::distance(m_sortedValues.cbegin(), lowerBoundIt);
             }
-        }        return result;
+        }
+        return result;
     }
 
 private:

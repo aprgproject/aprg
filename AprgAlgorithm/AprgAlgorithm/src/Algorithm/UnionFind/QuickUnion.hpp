@@ -50,6 +50,7 @@ private:
         // runs in linear time
         std::iota(m_relativeRoots.begin(), m_relativeRoots.end(), 0);
     }
+
     RootArray m_relativeRoots;
 };
 

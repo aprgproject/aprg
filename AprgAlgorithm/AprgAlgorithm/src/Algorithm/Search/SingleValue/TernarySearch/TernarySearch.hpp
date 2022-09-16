@@ -50,7 +50,8 @@ private:
         } else if (lowIndex == highIndex && target == m_sortedValues[lowIndex]) {
             result = lowIndex;
         }
-        return result;    }
+        return result;
+    }
     Values const& m_sortedValues;
 };
 

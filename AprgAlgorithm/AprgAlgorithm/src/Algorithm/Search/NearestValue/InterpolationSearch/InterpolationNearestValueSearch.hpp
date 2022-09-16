@@ -48,7 +48,8 @@ private:
     Index getInterpolatedIndexInBetween(Value const& target) const {
         Index result(INVALID_INDEX);
         if (m_lowIndex + 2 == m_highIndex) {
-            result = m_lowIndex + 1;        } else if (m_lowIndex + 2 < m_highIndex) {
+            result = m_lowIndex + 1;
+        } else if (m_lowIndex + 2 < m_highIndex) {
             Value lowerValue = getLowerValueWithoutCheck();
             Value higherValue = getHigherValueWithoutCheck();
             if (lowerValue == higherValue) {
@@ -58,7 +59,8 @@ private:
                                             static_cast<double>(m_highIndex - m_lowIndex) * (target - lowerValue) /
                                             (higherValue - lowerValue));
             }
-            result += (m_lowIndex == result) ? 1 : (m_highIndex == result) ? -1 : 0;        }
+            result += (m_lowIndex == result) ? 1 : (m_highIndex == result) ? -1 : 0;
+        }
         return result;
     }
 
@@ -81,6 +83,7 @@ private:
         Value deviationFromHigher(mathHelper::getPositiveDelta(target, higherValue));
         return (deviationFromLower <= deviationFromHigher) ? m_lowIndex : m_highIndex;
     }
+
     void setInitialIndexes() {
         if (!m_sortedValues.empty()) {
             m_lowIndex = 0;
@@ -113,7 +116,8 @@ private:
                 } else if (target < valueAtInterpolatedIndex) {
                     m_highIndex = interpolatedIndex;
                 }
-            }        }
+            }
+        }
     }
 
     Index m_lowIndex;

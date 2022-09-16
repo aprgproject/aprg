@@ -2,6 +2,7 @@
 
 #include <Algorithm/Utilities/IndexHelper.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
+
 namespace alba {
 
 namespace algorithm {
@@ -40,6 +41,7 @@ public:
         }
         return result;
     }
+
     inline Index getLowerIndex() const { return m_lowIndex; }
 
     inline Index getHigherIndex() const { return m_highIndex; }
@@ -66,6 +68,7 @@ private:
         Value deviationFromHigher(mathHelper::getPositiveDelta(target, m_sortedValues[m_highIndex]));
         return (deviationFromLower <= deviationFromHigher) ? m_lowIndex : m_highIndex;
     }
+
     void setInitialIndexes() {
         if (!m_sortedValues.empty()) {
             m_lowIndex = 0;
@@ -101,6 +104,7 @@ private:
             }
         }
     }
+
     Index m_lowIndex;
     Index m_highIndex;
     Values const& m_sortedValues;

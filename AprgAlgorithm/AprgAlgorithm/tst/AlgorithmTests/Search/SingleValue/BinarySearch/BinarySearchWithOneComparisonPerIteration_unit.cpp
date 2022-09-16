@@ -41,7 +41,8 @@ TEST(
     EXPECT_EQ(5, search.getIndexOfValue(33));
 }
 
-TEST(    BinarySearchWithOneComparisonPerIterationTest,
+TEST(
+    BinarySearchWithOneComparisonPerIterationTest,
     GetIndexOfValueWorksWhenValueIsNotFoundAndWhenThereAreMultipleValues) {
     testGetIndexOfValueWhenValueIsNotFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }

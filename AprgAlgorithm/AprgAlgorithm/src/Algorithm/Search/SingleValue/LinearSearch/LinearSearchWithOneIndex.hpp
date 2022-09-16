@@ -41,7 +41,8 @@ private:
         auto it = std::find(m_values.cbegin() + startIndex, m_values.cbegin() + endIndex + 1, target);
         if (it != m_values.cbegin() + endIndex + 1) {
             result = std::distance(m_values.cbegin(), it);
-        }        return result;
+        }
+        return result;
     }
 
     Values const& m_values;

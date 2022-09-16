@@ -30,7 +30,8 @@ public:
             } else if (compareValue > 0) {
                 low = mid + 1;
             } else {
-                low = mid;                break;
+                low = mid;
+                break;
             }
         }
         return low;

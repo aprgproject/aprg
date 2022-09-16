@@ -3,6 +3,7 @@
 #include <Algorithm/Utilities/IndexHelper.hpp>
 
 namespace alba {
+
 namespace algorithm {
 
 template <typename Values>
@@ -85,7 +86,8 @@ private:
         } else if (target == m_sortedValues[highIndex]) {
             result = highIndex;
         }
-        return result;    }
+        return result;
+    }
 
     Values const& m_sortedValues;
 };

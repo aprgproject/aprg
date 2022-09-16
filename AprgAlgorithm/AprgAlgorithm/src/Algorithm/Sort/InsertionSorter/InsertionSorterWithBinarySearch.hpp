@@ -4,6 +4,7 @@
 #include <Algorithm/Utilities/IndexHelper.hpp>
 
 #include <utility>
+
 namespace alba {
 
 namespace algorithm {
@@ -46,7 +47,8 @@ private:
             } else {  // (middleValue <= value)
                 iLow = middleIndex + 1;
             }
-        }        return result;
+        }
+        return result;
     }
 };
 

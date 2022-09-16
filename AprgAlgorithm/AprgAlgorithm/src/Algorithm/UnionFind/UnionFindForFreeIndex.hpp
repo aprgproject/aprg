@@ -54,7 +54,8 @@ private:
         // runs in linear time
         m_relativeRoots.reserve(maximumSize);
         for (int i = 0; i < maximumSize; i++) {
-            m_relativeRoots.emplace_back(i);        }
+            m_relativeRoots.emplace_back(i);
+        }
         m_relativeRoots.shrink_to_fit();
     }
 

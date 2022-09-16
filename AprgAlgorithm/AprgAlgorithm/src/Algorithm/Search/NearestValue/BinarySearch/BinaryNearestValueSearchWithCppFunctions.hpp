@@ -74,7 +74,8 @@ private:
         Value deviationFromHigher(mathHelper::getPositiveDelta(target, higherBoundValue));
         return (deviationFromLower <= deviationFromHigher)
                    ? std::distance(m_sortedValues.cbegin(), lowerAndUpperBoundItPair.first)
-                   : std::distance(m_sortedValues.cbegin(), lowerAndUpperBoundItPair.second);    }
+                   : std::distance(m_sortedValues.cbegin(), lowerAndUpperBoundItPair.second);
+    }
 
     Values const& m_sortedValues;
 };

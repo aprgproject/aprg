@@ -67,6 +67,7 @@ public:
             traverseUsingDfs(startVertex);
         }
     }
+
 private:
     using BaseClass::clear;
     using BaseClass::initializeWithStartVertices;

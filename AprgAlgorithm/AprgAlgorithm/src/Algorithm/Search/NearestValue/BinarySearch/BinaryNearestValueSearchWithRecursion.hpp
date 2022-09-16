@@ -2,6 +2,7 @@
 
 #include <Algorithm/Utilities/IndexHelper.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
+
 namespace alba {
 
 namespace algorithm {
@@ -61,6 +62,7 @@ private:
         Value deviationFromHigher(mathHelper::getPositiveDelta(target, m_sortedValues[highIndex]));
         return (deviationFromLower <= deviationFromHigher) ? lowIndex : highIndex;
     }
+
     Values const& m_sortedValues;
 };
 
