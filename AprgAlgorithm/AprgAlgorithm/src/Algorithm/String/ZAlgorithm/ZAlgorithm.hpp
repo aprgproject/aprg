@@ -39,11 +39,12 @@ public:
                  ++prefixLength, ++newEndIndex) {
                 endOfPrefix = newEndIndex;
             }
-            startOfPrefix = endOfPrefix - prefixLength + 1;
+            if (prefixLength > 0) {
+                startOfPrefix = endOfPrefix - prefixLength + 1;
+            }
         }
         return prefixLengths;
-    }
-};
+    }};
 
 }  // namespace algorithm
 
@@ -61,13 +62,12 @@ public:
 // of str[0..n-1].
 // --->  The first entry of Z array is meaning less as complete string is always prefix of itself.
 // --->  Example:
-// ----->  Index            0   1   2   3   4   5   6   7   8   9  10  11
-// ----->  Text             a   a   b   c   a   a   b   x   a   a   a   z
-// ----->  Z values         X   1   0   0   3   1   0   0   2   2   1   0
+// -----> | Index    | 0   1   2   3   4   5   6   7   8   9  10  11
+// -----> | Text     | a   a   b   c   a   a   b   x   a   a   a   z
+// -----> | Z values | X   1   0   0   3   1   0   0   2   2   1   0
 // ->  More Examples:
 // --->  str  = "aaaaaa", Z[]  = {x, 5, 4, 3, 2, 1}
-// --->  str = "aabaacd", Z[] = {x, 1, 0, 2, 1, 0, 0}
-// --->  str = "abababab", Z[] = {x, 0, 6, 0, 4, 0, 2, 0}
+// --->  str = "aabaacd", Z[] = {x, 1, 0, 2, 1, 0, 0}// --->  str = "abababab", Z[] = {x, 0, 6, 0, 4, 0, 2, 0}
 // ->  How is Z array helpful in Searching Pattern in Linear time?
 // --->  The idea is to concatenate pattern and text, and create a string “P$T” where P is pattern,
 // --->  $ is a special character should not be present in pattern and text, and T is text.
