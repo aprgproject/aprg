@@ -60,6 +60,7 @@ private:
 };
 
 }  // namespace algorithm
+
 }  // namespace alba
 
 // Using the Z-array

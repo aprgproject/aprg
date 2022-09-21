@@ -33,7 +33,8 @@ public:
                 // if its the whole input string, just take the last item
                 stringOutput += wholeInputString[wholeInputString.length() - 1];
             }
-        }        writer.writeStringData(stringOutput);
+        }
+        writer.writeStringData(stringOutput);
     }
 
     void decode(std::istream& input, std::ostream& output) {
@@ -63,7 +64,8 @@ public:
                 writer.writeStringData(it->substr(0, it->length() - 1));
             }
         }
-    }};
+    }
+};
 
 // The Burrows–Wheeler transform is an algorithm used to prepare data for use with data compression techniques such as
 // bzip2. It was invented by Michael Burrows and David Wheeler in 1994 while Burrows was working at DEC Systems Research

@@ -38,7 +38,8 @@ public:
                     result = searchIndex - m_queryLength + 1;
                     break;
                 }
-            }        }
+            }
+        }
         return result;
     }
 
@@ -46,7 +47,8 @@ private:
     HashValue getHash(std::string const& key) { return m_hornerHashFunction.getHashCode(key.substr(0, m_queryLength)); }
 
     HashValue getNextHash(HashValue const currentHash, char const charToRemove, char const charToAdd) {
-        // First, subtract value for charToRemove        HashValue result =
+        // First, subtract value for charToRemove
+        HashValue result =
             (currentHash + m_largeRandomPrime - (m_radixRaiseToMatchLengthHash * charToRemove % m_largeRandomPrime)) %
             m_largeRandomPrime;
         // Then, add value for charToAdd
@@ -71,6 +73,7 @@ private:
 };
 
 }  // namespace algorithm
+
 }  // namespace alba
 
 // Invented by two Turing award winners Michael Rabin (Turing Award '76) and Dick Karp (Turing Award '85).

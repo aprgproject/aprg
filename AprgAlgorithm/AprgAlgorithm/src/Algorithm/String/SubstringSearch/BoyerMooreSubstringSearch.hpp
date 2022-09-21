@@ -33,7 +33,8 @@ public:
                     Index letterIndex(m_rightMostLetterIndex[searchSpace[searchIndex + rightMostMismatch]]);
                     if (letterIndex + 1 < static_cast<Index>(rightMostMismatch)) {
                         // (Case 1: "Mismatch character is not in pattern")
-                        // This happens if letterIndex is -1.                        // -> In this case, use the skip value to move past the mismatch character
+                        // This happens if letterIndex is -1.
+                        // -> In this case, use the skip value to move past the mismatch character
                         // (Case 2a: "Mismatch character is in the pattern")
                         // -> In this case, use the skip value to align what was previously mismatched
                         skipValue = rightMostMismatch - letterIndex;
@@ -69,6 +70,7 @@ private:
     std::string m_query;
     SkipTable m_rightMostLetterIndex;
 };
+
 }  // namespace algorithm
 
 }  // namespace alba

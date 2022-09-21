@@ -47,7 +47,8 @@ TEST(SuffixArrayTest, GetSuffixViewAtWorks) {
     EXPECT_EQ("g", suffixArray.getSuffixViewAt(9));
 }
 
-TEST(SuffixArrayTest, GetLongestCommonPrefixOfTwoSuffixesWorks) {    SuffixArrayForTest suffixArray("LetsDanceToThisSong");
+TEST(SuffixArrayTest, GetLongestCommonPrefixOfTwoSuffixesWorks) {
+    SuffixArrayForTest suffixArray("LetsDanceToThisSong");
 
     EXPECT_EQ("T", suffixArray.getLongestCommonPrefixOfTwoSuffixes(3, 4));
     EXPECT_TRUE(suffixArray.getLongestCommonPrefixOfTwoSuffixes(5, 6).empty());
