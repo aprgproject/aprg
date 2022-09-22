@@ -20,7 +20,8 @@ public:
     using Strings = typename BaseClass::Strings;
     using ValueUniquePointer = std::unique_ptr<Value>;
     struct Node;
-    using NodeUniquePointer = std::unique_ptr<Node>;    struct Node {
+    using NodeUniquePointer = std::unique_ptr<Node>;
+    struct Node {
         ValueUniquePointer valueUniquePointer;
         std::array<NodeUniquePointer, RADIX> next;  // costly
     };
@@ -72,6 +73,7 @@ public:
         collectKeysThatMatchAtNode(m_root.get(), std::string(), patternToMatch, result);
         return result;
     }
+
 private:
     bool isEmptyNode(NodeUniquePointer const& currentNodePointer) {
         return !currentNodePointer->valueUniquePointer &&
@@ -137,7 +139,8 @@ private:
         Node const* const currentNodePointer, std::string const& previousPrefix, Strings& collectedKeys) const {
         if (currentNodePointer != nullptr) {
             ValueUniquePointer const& valueUniquePointer(currentNodePointer->valueUniquePointer);
-            if (valueUniquePointer) {                collectedKeys.emplace_back(previousPrefix);
+            if (valueUniquePointer) {
+                collectedKeys.emplace_back(previousPrefix);
             }
             for (int c = 0; c < RADIX; c++) {
                 collectAllKeysAtNode(
@@ -151,7 +154,8 @@ private:
         Strings& collectedKeys) const {
         if (currentNodePointer != nullptr) {
             int prefixLength = previousPrefix.length();
-            if (prefixLength == static_cast<int>(patternToMatch.length()) && currentNodePointer->valueUniquePointer) {                collectedKeys.emplace_back(previousPrefix);
+            if (prefixLength == static_cast<int>(patternToMatch.length()) && currentNodePointer->valueUniquePointer) {
+                collectedKeys.emplace_back(previousPrefix);
             } else if (prefixLength < static_cast<int>(patternToMatch.length())) {
                 char charToMatch = patternToMatch[prefixLength];
                 for (int c = 0; c < RADIX; c++) {

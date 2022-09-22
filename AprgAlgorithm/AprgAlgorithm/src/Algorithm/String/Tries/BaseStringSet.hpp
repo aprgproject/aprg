@@ -4,6 +4,7 @@
 #include <vector>
 
 namespace alba {
+
 namespace algorithm {
 
 class BaseStringSet {
@@ -12,6 +13,7 @@ public:
     using Strings = std::vector<std::string>;
 
     virtual ~BaseStringSet() = default;  // virtual destructor because of virtual functions (vtable exists)
+
     virtual bool isEmpty() const = 0;                    // is the symbol table empty
     virtual bool doesContain(Key const& key) const = 0;  // is key exists on symbol table
 
@@ -27,6 +29,7 @@ public:
 };
 
 }  // namespace algorithm
+
 }  // namespace alba
 
 // Can we do better than generic symbol tables?
