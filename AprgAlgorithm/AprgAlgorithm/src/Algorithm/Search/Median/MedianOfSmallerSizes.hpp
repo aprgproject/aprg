@@ -23,9 +23,10 @@ public:
         m_sortedValuesInHalf.reserve(getMedianSizeWithOverFlow(m_medianSize));
         for (Value const& value : values) {
             addValueToMedianValues(value);
+            // Confirm that capacity is constant (so no reallocation) and were not "thrashing":
+            // assert(getMedianSizeWithOverFlow(m_medianSize) == m_sortedValuesInHalf.capacity());
         }
     }
-
     MedianOfSmallerSizes(
         ConstIterator const startIt,
         ConstIterator const endIt)  // half open interval
@@ -47,13 +48,10 @@ private:
 
     Index getMedianSizeWithOverFlow(Index const medianSize) const { return medianSize + 1; }
 
-    Value getMedianWithoutCheck() const {
-        return (getSmallerMedianWithoutCheck() + getLargerMedianWithoutCheck()) / 2;
-    }
+    Value getMedianWithoutCheck() const { return (getSmallerMedianWithoutCheck() + getLargerMedianWithoutCheck()) / 2; }
 
     Value getSmallerMedianWithoutCheck() const {
-        auto it = std::prev(m_sortedValuesInHalf.end());
-        if (mathHelper::isEven(m_size)) {
+        auto it = std::prev(m_sortedValuesInHalf.end());        if (mathHelper::isEven(m_size)) {
             it--;
         }
         return *it;
