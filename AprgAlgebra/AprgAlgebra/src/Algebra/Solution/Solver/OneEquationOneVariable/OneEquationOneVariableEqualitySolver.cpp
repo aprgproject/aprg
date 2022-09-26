@@ -1,11 +1,10 @@
 #include "OneEquationOneVariableEqualitySolver.hpp"
 
 #include <Algebra/Constructs/ConstructUtilities.hpp>
-#include <Algebra/Retrieval/VariableNamesRetriever.hpp>
+#include <Algebra/Retrieval/SingleVariableNameRetriever.hpp>
 #include <Algebra/Solution/SolutionUtilities.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
-#include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
-#include <Common/Math/Helpers/PrecisionHelpers.hpp>
+#include <Algebra/Term/Utilities/PolynomialHelpers.hpp>#include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
 using namespace alba::mathHelper;
 using namespace std;
@@ -35,17 +34,13 @@ void OneEquationOneVariableEqualitySolver::calculateSolution(SolutionSet& soluti
 
 void OneEquationOneVariableEqualitySolver::calculateForEquation(SolutionSet& solutionSet, Equation const& equation) {
     Term const& nonZeroLeftHandTerm(equation.getLeftHandTerm());
-    VariableNamesRetriever variableNamesRetriever;
-    variableNamesRetriever.retrieveFromTerm(nonZeroLeftHandTerm);
-    VariableNamesSet const& variableNames(variableNamesRetriever.getSavedData());
-    if (variableNames.size() == 1) {
-        string variableName = *variableNames.cbegin();
-        calculateForTermAndCheckAbsoluteValueFunctions(nonZeroLeftHandTerm, variableName);
+    string singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(nonZeroLeftHandTerm);
+    if (!singleVariableName.empty()) {
+        calculateForTermAndCheckAbsoluteValueFunctions(nonZeroLeftHandTerm, singleVariableName);
         sortAndRemoveDuplicateCalculatedValues();
-        addValuesToSolutionSetIfNeeded(solutionSet, nonZeroLeftHandTerm, variableName);
+        addValuesToSolutionSetIfNeeded(solutionSet, nonZeroLeftHandTerm, singleVariableName);
     }
 }
-
 void OneEquationOneVariableEqualitySolver::calculateForTermAndVariable(Term const& term, string const& variableName) {
     PolynomialOverPolynomialOptional popOptional(createPolynomialOverPolynomialFromTermIfPossible(term));
     if (popOptional) {
@@ -75,11 +70,10 @@ void OneEquationOneVariableEqualitySolver::addValuesToSolutionSetIfNeeded(
             substitution.putVariableWithValue(variableName, value);
             Term substitutedResult(substitution.performSubstitutionTo(term));
             if (substitutedResult.isConstant()) {
-                AlbaNumber const& computedValue(substitutedResult.getConstantValueConstReference());
+                AlbaNumber const& computedValue(substitutedResult.getAsNumber());
                 if (!computedValue.isAFiniteValue()) {
                     solutionSet.addRejectedValue(value);
-                } else if (isAlmostEqual(computedValue.getDouble(), 0.0, DIFFERENCE_TOLERANCE_FOR_ACCEPTED_VALUE)) {
-                    solutionSet.addAcceptedValue(value);
+                } else if (isAlmostEqual(computedValue.getDouble(), 0.0, DIFFERENCE_TOLERANCE_FOR_ACCEPTED_VALUE)) {                    solutionSet.addAcceptedValue(value);
                 }
             }
         }
@@ -109,11 +103,10 @@ NewtonMethod::Function OneEquationOneVariableEqualitySolver::getFunctionToIterat
         Term substitutedTerm(substitution.performSubstitutionTo(termToCheck));
         AlbaNumber computedValue;
         if (substitutedTerm.isConstant()) {
-            computedValue = substitutedTerm.getConstantValueConstReference();
+            computedValue = substitutedTerm.getAsNumber();
         }
         return computedValue;
-    };
-    return result;
+    };    return result;
 }
 
 AlbaNumber OneEquationOneVariableEqualitySolver::getMoreAccurateValueFromNewtonMethod(

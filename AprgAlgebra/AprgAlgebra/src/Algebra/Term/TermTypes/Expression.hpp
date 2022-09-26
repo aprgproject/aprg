@@ -30,11 +30,10 @@ public:
     bool isSimplified() const;
 
     OperatorLevel getCommonOperatorLevel() const;
-    BaseTerm const& getFirstTermConstReference() const;
+    BaseTerm const& getFirstTerm() const;
     TermAssociationType getFirstAssociationType() const;
     TermsWithAssociation const& getTermsWithAssociation() const;
     std::string getDebugString() const;
-
     TermsWithAssociation& getTermsWithAssociationReference();
 
     void clear();

@@ -22,11 +22,10 @@ public:
     bool isEmpty() const;
 
     int getSize() const;
-    BaseTerm const& getFirstTermConstReference() const;
+    BaseTerm const& getFirstTerm() const;
     TermAssociationType getFirstAssociationType() const;
     TermsWithDetails const& getTermsWithDetails() const;
     TermsWithDetails& getTermsWithDetailsReference();
-
     void clear();
     void sort(bool const dontSortFirstItem);
     void putTermWithDetails(TermWithDetails const& termWithDetails);

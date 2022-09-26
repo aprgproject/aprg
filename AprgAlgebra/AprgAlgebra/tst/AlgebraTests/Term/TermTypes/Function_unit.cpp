@@ -15,13 +15,12 @@ TEST(FunctionTest, ConstructionWorks) {
     Function function2("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber { return number; });
 
     EXPECT_TRUE(function1.getFunctionName().empty());
-    EXPECT_EQ(Term(), getTermConstReferenceFromBaseTerm(function1.getInputTermConstReference()));
+    EXPECT_EQ(Term(), getTermConstReferenceFromBaseTerm(function1.getInputTerm()));
     EXPECT_EQ(AlbaNumber(), function1.performFunctionAndReturnResultIfPossible());
     EXPECT_EQ("functionName", function2.getFunctionName());
-    EXPECT_EQ(Term(5), getTermConstReferenceFromBaseTerm(function2.getInputTermConstReference()));
+    EXPECT_EQ(Term(5), getTermConstReferenceFromBaseTerm(function2.getInputTerm()));
     EXPECT_EQ(AlbaNumber(5), function2.performFunctionAndReturnResultIfPossible());
 }
-
 TEST(FunctionTest, FunctionThatIsDefaultConstructedHasIsSimplifiedFlagNotSet) {
     Function function;
 
@@ -108,16 +107,15 @@ TEST(FunctionTest, PerformFunctionAndReturnResultIfPossibleWorks) {
     EXPECT_EQ(AlbaNumber(), function3.performFunctionAndReturnResultIfPossible());
 }
 
-TEST(FunctionTest, GetInputTermConstReferenceWorks) {
+TEST(FunctionTest, GetInputTermWorks) {
     Function function1;
     Function function2("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber { return number; });
 
-    EXPECT_EQ(Term(), getTermConstReferenceFromBaseTerm(function1.getInputTermConstReference()));
-    EXPECT_EQ(Term(5), getTermConstReferenceFromBaseTerm(function2.getInputTermConstReference()));
+    EXPECT_EQ(Term(), getTermConstReferenceFromBaseTerm(function1.getInputTerm()));
+    EXPECT_EQ(Term(5), getTermConstReferenceFromBaseTerm(function2.getInputTerm()));
 }
 
-TEST(FunctionTest, GetEvaluationFunctionWorks) {
-    Function::EvaluationFunction evaluationFunction = [](AlbaNumber const& number) -> AlbaNumber { return number; };
+TEST(FunctionTest, GetEvaluationFunctionWorks) {    Function::EvaluationFunction evaluationFunction = [](AlbaNumber const& number) -> AlbaNumber { return number; };
     Function functionObject("functionName", Term(5), evaluationFunction);
 
     Function::EvaluationFunction const& evaluationFunctionToVerify(functionObject.getEvaluationFunction());
@@ -130,21 +128,19 @@ TEST(FunctionTest, GetInputTermReferenceWorks) {
     Term& inputTermToChange(getTermReferenceFromBaseTerm(functionObject.getInputTermReference()));
     inputTermToChange = Term(10);
 
-    EXPECT_EQ(Term(10), getTermConstReferenceFromBaseTerm(functionObject.getInputTermConstReference()));
+    EXPECT_EQ(Term(10), getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
 }
 
-TEST(FunctionTest, SimplifyWorks) {
-    Function::EvaluationFunction evaluationFunction = [](AlbaNumber const& number) -> AlbaNumber { return number; };
+TEST(FunctionTest, SimplifyWorks) {    Function::EvaluationFunction evaluationFunction = [](AlbaNumber const& number) -> AlbaNumber { return number; };
     Function functionObject("functionName", Term(createExpressionIfPossible({5, "+", 5})), evaluationFunction);
 
     functionObject.simplify();
 
     EXPECT_EQ("functionName", functionObject.getFunctionName());
-    EXPECT_EQ(Term(10), getTermConstReferenceFromBaseTerm(functionObject.getInputTermConstReference()));
+    EXPECT_EQ(Term(10), getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
     Function::EvaluationFunction const& evaluationFunctionToVerify(functionObject.getEvaluationFunction());
     EXPECT_EQ(AlbaNumber(100), evaluationFunctionToVerify(100));
 }
-
 TEST(FunctionTest, SimplifyWorksWhenIsSimplifiedIsNotSet) {
     Function::EvaluationFunction evaluationFunction = [](AlbaNumber const& number) -> AlbaNumber { return number; };
     Function functionObject("functionName", Term(createExpressionIfPossible({5, "+", 5})), evaluationFunction);
@@ -152,11 +148,10 @@ TEST(FunctionTest, SimplifyWorksWhenIsSimplifiedIsNotSet) {
     functionObject.simplify();
 
     EXPECT_EQ("functionName", functionObject.getFunctionName());
-    EXPECT_EQ(Term(10), getTermConstReferenceFromBaseTerm(functionObject.getInputTermConstReference()));
+    EXPECT_EQ(Term(10), getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
     Function::EvaluationFunction const& evaluationFunctionToVerify(functionObject.getEvaluationFunction());
     EXPECT_EQ(AlbaNumber(100), evaluationFunctionToVerify(100));
 }
-
 TEST(FunctionTest, SimplifyWorksAsSkippedWhenIsSimplifiedIsSet) {
     Function::EvaluationFunction evaluationFunction = [](AlbaNumber const& number) -> AlbaNumber { return number; };
     Function functionObject("functionName", Term(createExpressionIfPossible({5, "+", 5})), evaluationFunction);
@@ -166,11 +161,10 @@ TEST(FunctionTest, SimplifyWorksAsSkippedWhenIsSimplifiedIsSet) {
 
     Term inputTermToExpect(createExpressionIfPossible({5, "+", 5}));
     EXPECT_EQ("functionName", functionObject.getFunctionName());
-    EXPECT_EQ(inputTermToExpect, getTermConstReferenceFromBaseTerm(functionObject.getInputTermConstReference()));
+    EXPECT_EQ(inputTermToExpect, getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
     Function::EvaluationFunction const& evaluationFunctionToVerify(functionObject.getEvaluationFunction());
     EXPECT_EQ(AlbaNumber(100), evaluationFunctionToVerify(100));
 }
-
 TEST(FunctionTest, SetAsSimplifiedWorks) {
     Function functionObject;
 
@@ -194,16 +188,15 @@ TEST(FunctionTest, ClearAllInnerSimplifiedFlagsWorks) {
     Function functionObject("functionName1", inputTerm, [](AlbaNumber const& number) -> AlbaNumber { return number; });
     functionObject.setAsSimplified();
     EXPECT_TRUE(functionObject.isSimplified());
-    EXPECT_TRUE(getTermConstReferenceFromBaseTerm(functionObject.getInputTermConstReference()).isSimplified());
+    EXPECT_TRUE(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()).isSimplified());
 
     functionObject.clearAllInnerSimplifiedFlags();
 
     EXPECT_FALSE(functionObject.isSimplified());
-    EXPECT_FALSE(getTermConstReferenceFromBaseTerm(functionObject.getInputTermConstReference()).isSimplified());
+    EXPECT_FALSE(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()).isSimplified());
 }
 
-TEST(FunctionTest, OutputStreamOperatorWorks) {
-    stringstream ss;
+TEST(FunctionTest, OutputStreamOperatorWorks) {    stringstream ss;
     Function functionObject("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber { return number; });
 
     ss << functionObject;

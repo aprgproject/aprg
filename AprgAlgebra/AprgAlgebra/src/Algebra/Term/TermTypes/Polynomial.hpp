@@ -23,11 +23,10 @@ public:
     bool operator<(Polynomial const& second) const;
     bool isEmpty() const;
     bool isSimplified() const;
-    Monomials const& getMonomialsConstReference() const;
+    Monomials const& getMonomials() const;
 
     Monomials& getMonomialsReference();
-    void clear();
-    void simplify();
+    void clear();    void simplify();
     void sortMonomialsWithInversePriority();
     void addMonomial(Monomial const& monomial);
     void addPolynomial(Polynomial const& polynomial);

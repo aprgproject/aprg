@@ -1,10 +1,10 @@
 #include "SolverUsingSubstitution.hpp"
 
 #include <Algebra/Equation/EquationUtilities.hpp>
+#include <Algebra/Retrieval/SingleVariableNameRetriever.hpp>
 #include <Algebra/Retrieval/VariableNamesRetriever.hpp>
 #include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableEqualitySolver.hpp>
-#include <Algebra/Solution/Solver/SolverUsingSubstitution/ReduceEquationsBySubstitution.hpp>
-#include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
+#include <Algebra/Solution/Solver/SolverUsingSubstitution/ReduceEquationsBySubstitution.hpp>#include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 
 using namespace std;
 
@@ -20,11 +20,10 @@ MultipleVariableSolutionSets SolverUsingSubstitution::calculateSolutionAndReturn
     if (doesAllEquationsHaveEqualityOperator(equations)) {
         VariableNamesRetriever variableNamesRetriever;
         variableNamesRetriever.retrieveFromEquations(equations);
-        m_variablesNames = variableNamesRetriever.getSavedData();
+        m_variablesNames = variableNamesRetriever.getVariableNames();
         calculateSolutions(equations);
     }
-    return m_solutionsWithAllVariables;
-}
+    return m_solutionsWithAllVariables;}
 
 bool SolverUsingSubstitution::isTheValueAlreadyExisting(string const& variableName, AlbaNumber const& value) const {
     bool result(false);
@@ -134,18 +133,14 @@ void SolverUsingSubstitution::substituteSolutionSetValuesToEquations(
 
 void SolverUsingSubstitution::solveForTheFirstOneVariableEquationAndUpdate(
     MultipleVariableSolutionSet& solutionSet, Equations const& substitutedEquations) {
-    VariableNamesRetriever variableNamesToSolveRetriever;
     if (!substitutedEquations.empty()) {
         Equation const& equationToSolve(substitutedEquations.front());
-        variableNamesToSolveRetriever.retrieveFromEquation(equationToSolve);
-        VariableNamesSet const& variableNamesToSolve(variableNamesToSolveRetriever.getSavedData());
-        if (variableNamesToSolve.size() == 1) {
-            string variableNameToSolve(*(variableNamesToSolve.cbegin()));
-            solveAndUpdate(solutionSet, equationToSolve, variableNameToSolve);
+        string singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(equationToSolve);
+        if (!singleVariableName.empty()) {
+            solveAndUpdate(solutionSet, equationToSolve, singleVariableName);
         }
     }
 }
-
 void SolverUsingSubstitution::solveAndUpdate(
     MultipleVariableSolutionSet& solutionSet, Equation const& equationToSolve, string const& variableNameToSolve) {
     OneEquationOneVariableEqualitySolver solver;

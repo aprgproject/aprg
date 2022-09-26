@@ -98,11 +98,10 @@ AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(AlbaNumber const
         Term approximateValue(getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(
             oneOverX, {"x", AlbaNumber(1), input}, numberOfSamples));
         if (approximateValue.isConstant()) {
-            result = approximateValue.getConstantValueConstReference();
+            result = approximateValue.getAsNumber();
         }
     }
-    return result;
-}
+    return result;}
 
 AlbaNumber getAnApproximateOfNaturalLogarithmUsingSimpsonRule(AlbaNumber const& input, int const numberOfSamples) {
     AlbaNumber result;
@@ -111,11 +110,10 @@ AlbaNumber getAnApproximateOfNaturalLogarithmUsingSimpsonRule(AlbaNumber const& 
         Term approximateValue(
             getAnApproximateOfDefiniteIntegralUsingSimpsonRule(oneOverX, {"x", AlbaNumber(1), input}, numberOfSamples));
         if (approximateValue.isConstant()) {
-            result = approximateValue.getConstantValueConstReference();
+            result = approximateValue.getAsNumber();
         }
     }
-    return result;
-}
+    return result;}
 
 }  // namespace algebra
 

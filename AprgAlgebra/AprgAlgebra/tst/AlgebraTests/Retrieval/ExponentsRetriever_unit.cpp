@@ -14,11 +14,10 @@ TEST(ExponentsRetrieverTest, RetrieveFromEquationsWorks) {
 
     retriever.retrieveFromEquations({equation1, equation2});
 
-    AlbaNumbersSet const& numbersSet(retriever.getSavedData());
+    AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(4U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(5), *(it++));
-    EXPECT_EQ(AlbaNumber(6), *(it++));
+    EXPECT_EQ(AlbaNumber(5), *(it++));    EXPECT_EQ(AlbaNumber(6), *(it++));
     EXPECT_EQ(AlbaNumber(7), *(it++));
     EXPECT_EQ(AlbaNumber(8), *(it++));
 }
@@ -31,11 +30,10 @@ TEST(ExponentsRetrieverTest, RetrieveFromEquationWorks) {
 
     retriever.retrieveFromEquation(equation);
 
-    AlbaNumbersSet const& numbersSet(retriever.getSavedData());
+    AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(2U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(5), *(it++));
-    EXPECT_EQ(AlbaNumber(6), *(it++));
+    EXPECT_EQ(AlbaNumber(5), *(it++));    EXPECT_EQ(AlbaNumber(6), *(it++));
 }
 
 TEST(ExponentsRetrieverTest, RetrieveFromTermWorks) {
@@ -51,11 +49,10 @@ TEST(ExponentsRetrieverTest, RetrieveFromTermWorks) {
     retriever.retrieveFromTerm(createExpressionIfPossible({678, "+", Monomial(576, {{"x", 9}})}));
     retriever.retrieveFromTerm(functionObject);
 
-    AlbaNumbersSet const& numbersSet(retriever.getSavedData());
+    AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(6U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(5), *(it++));
-    EXPECT_EQ(AlbaNumber(6), *(it++));
+    EXPECT_EQ(AlbaNumber(5), *(it++));    EXPECT_EQ(AlbaNumber(6), *(it++));
     EXPECT_EQ(AlbaNumber(7), *(it++));
     EXPECT_EQ(AlbaNumber(8), *(it++));
     EXPECT_EQ(AlbaNumber(9), *(it++));
@@ -67,29 +64,26 @@ TEST(ExponentsRetrieverTest, RetrieveFromConstantWorks) {
 
     retriever.retrieveFromConstant(Constant(110));
 
-    AlbaNumbersSet const& numbersSet(retriever.getSavedData());
+    AlbaNumbersSet const& numbersSet(retriever.getExponents());
     EXPECT_TRUE(numbersSet.empty());
 }
-
 TEST(ExponentsRetrieverTest, RetrieveFromVariableWorks) {
     ExponentsRetriever retriever;
 
     retriever.retrieveFromVariable(Variable("x"));
 
-    AlbaNumbersSet const& numbersSet(retriever.getSavedData());
+    AlbaNumbersSet const& numbersSet(retriever.getExponents());
     EXPECT_TRUE(numbersSet.empty());
 }
-
 TEST(ExponentsRetrieverTest, RetrieveFromMonomialWorks) {
     ExponentsRetriever retriever;
 
     retriever.retrieveFromMonomial(Monomial(34, {{"x", 5}, {"y", 6}}));
 
-    AlbaNumbersSet const& numbersSet(retriever.getSavedData());
+    AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(2U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(5), *(it++));
-    EXPECT_EQ(AlbaNumber(6), *(it++));
+    EXPECT_EQ(AlbaNumber(5), *(it++));    EXPECT_EQ(AlbaNumber(6), *(it++));
 }
 
 TEST(ExponentsRetrieverTest, RetrieveFromPolynomialWorks) {
@@ -97,11 +91,10 @@ TEST(ExponentsRetrieverTest, RetrieveFromPolynomialWorks) {
 
     retriever.retrieveFromPolynomial(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})});
 
-    AlbaNumbersSet const& numbersSet(retriever.getSavedData());
+    AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(2U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(7), *(it++));
-    EXPECT_EQ(AlbaNumber(8), *(it++));
+    EXPECT_EQ(AlbaNumber(7), *(it++));    EXPECT_EQ(AlbaNumber(8), *(it++));
 }
 
 TEST(ExponentsRetrieverTest, RetrieveFromExpressionWorks) {
@@ -109,11 +102,10 @@ TEST(ExponentsRetrieverTest, RetrieveFromExpressionWorks) {
 
     retriever.retrieveFromExpression(createExpressionIfPossible({678, "+", Monomial(576, {{"x", 9}})}));
 
-    AlbaNumbersSet const& numbersSet(retriever.getSavedData());
+    AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(1U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(9), *(it++));
-}
+    EXPECT_EQ(AlbaNumber(9), *(it++));}
 
 TEST(ExponentsRetrieverTest, RetrieveFromFunctionWorks) {
     ExponentsRetriever retriever;
@@ -123,11 +115,10 @@ TEST(ExponentsRetrieverTest, RetrieveFromFunctionWorks) {
 
     retriever.retrieveFromFunction(functionObject);
 
-    AlbaNumbersSet const& numbersSet(retriever.getSavedData());
+    AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(1U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(10), *(it++));
-}
+    EXPECT_EQ(AlbaNumber(10), *(it++));}
 
 TEST(ExponentsRetrieverTest, RetrieveFromPolynomialsWorks) {
     ExponentsRetriever retriever;
@@ -137,11 +128,10 @@ TEST(ExponentsRetrieverTest, RetrieveFromPolynomialsWorks) {
 
     retriever.retrieveFromPolynomials(polynomials);
 
-    AlbaNumbersSet const& numbersSet(retriever.getSavedData());
+    AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(4U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(7), *(it++));
-    EXPECT_EQ(AlbaNumber(8), *(it++));
+    EXPECT_EQ(AlbaNumber(7), *(it++));    EXPECT_EQ(AlbaNumber(8), *(it++));
     EXPECT_EQ(AlbaNumber(9), *(it++));
     EXPECT_EQ(AlbaNumber(10), *(it++));
 }

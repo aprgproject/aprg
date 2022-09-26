@@ -71,19 +71,18 @@ Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Function const& funct
 Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Term const& term) const {
     Term newTerm(term);
     if (term.isVariable()) {
-        newTerm = performSubstitutionTo(term.getVariableConstReference());
+        newTerm = performSubstitutionTo(term.getAsVariable());
     } else if (term.isMonomial()) {
-        newTerm = performSubstitutionTo(term.getMonomialConstReference());
+        newTerm = performSubstitutionTo(term.getAsMonomial());
     } else if (term.isPolynomial()) {
-        newTerm = performSubstitutionTo(term.getPolynomialConstReference());
+        newTerm = performSubstitutionTo(term.getAsPolynomial());
     } else if (term.isExpression()) {
-        newTerm = performSubstitutionTo(term.getExpressionConstReference());
+        newTerm = performSubstitutionTo(term.getAsExpression());
     } else if (term.isFunction()) {
-        newTerm = performSubstitutionTo(term.getFunctionConstReference());
+        newTerm = performSubstitutionTo(term.getAsFunction());
     }
     return newTerm;
 }
-
 Equation SubstitutionOfVariablesToTerms::performSubstitutionTo(Equation const& equation) const {
     Equation simplifiedEquation(
         performSubstitutionTo(equation.getLeftHandTerm()), equation.getEquationOperator().getOperatorString(),
@@ -93,12 +92,11 @@ Equation SubstitutionOfVariablesToTerms::performSubstitutionTo(Equation const& e
 }
 
 Expression SubstitutionOfVariablesToTerms::performSubstitutionForMonomial(Monomial const& monomial) const {
-    Monomial remainingMonomial(createMonomialFromNumber(monomial.getConstantConstReference()));
-    Monomial::VariablesToExponentsMap previousVariableExponentMap(monomial.getVariablesToExponentsMapConstReference());
+    Monomial remainingMonomial(createMonomialFromNumber(monomial.getCoefficient()));
+    Monomial::VariablesToExponentsMap previousVariableExponentMap(monomial.getVariablesToExponentsMap());
     Expression substitutedExpressions;
     for (auto const& variableExponentPair : previousVariableExponentMap) {
-        if (isVariableFound(variableExponentPair.first)) {
-            Expression substitutedExpression(getTermForVariable(variableExponentPair.first));
+        if (isVariableFound(variableExponentPair.first)) {            Expression substitutedExpression(getTermForVariable(variableExponentPair.first));
             substitutedExpression.putTermWithRaiseToPowerIfNeeded(Term(variableExponentPair.second));
             substitutedExpressions.putTermWithMultiplicationIfNeeded(Term(substitutedExpression));
         } else {
@@ -113,11 +111,10 @@ Expression SubstitutionOfVariablesToTerms::performSubstitutionForMonomial(Monomi
 
 Expression SubstitutionOfVariablesToTerms::performSubstitutionForPolynomial(Polynomial const& polynomial) const {
     Expression newExpression;
-    for (Monomial const& monomial : polynomial.getMonomialsConstReference()) {
+    for (Monomial const& monomial : polynomial.getMonomials()) {
         newExpression.putTermWithAdditionIfNeeded(Term(performSubstitutionForMonomial(monomial)));
     }
-    newExpression.simplify();
-    return newExpression;
+    newExpression.simplify();    return newExpression;
 }
 
 Expression SubstitutionOfVariablesToTerms::performSubstitutionForExpression(Expression const& expression) const {
@@ -130,11 +127,10 @@ Expression SubstitutionOfVariablesToTerms::performSubstitutionForExpression(Expr
 Function SubstitutionOfVariablesToTerms::performSubstitutionForFunction(Function const& functionObject) const {
     Function newFunction(functionObject);
     getTermReferenceFromBaseTerm(newFunction.getInputTermReference()) =
-        performSubstitutionTo(functionObject.getInputTermConstReference());
+        performSubstitutionTo(functionObject.getInputTerm());
     newFunction.simplify();
     return newFunction;
 }
-
 void SubstitutionOfVariablesToTerms::putVariablesWithTerms(
     initializer_list<VariableTermPair> const& variablesWithTerms) {
     for (VariableTermPair const& variableValuesPair : variablesWithTerms) {

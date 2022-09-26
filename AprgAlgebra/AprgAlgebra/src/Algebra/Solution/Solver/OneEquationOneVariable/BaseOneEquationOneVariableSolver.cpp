@@ -36,11 +36,10 @@ void BaseOneEquationOneVariableSolver::calculateForTermAndCheckAbsoluteValueFunc
     FunctionsRetriever absFunctionsRetriever(
         [](Function const& functionObject) { return functionObject.getFunctionName() == "abs"; });
     absFunctionsRetriever.retrieveFromTerm(term);
-    FunctionsSet const& absFunctions(absFunctionsRetriever.getSavedData());
+    FunctionsSet const& absFunctions(absFunctionsRetriever.getFunctions());
     if (absFunctions.empty()) {
         calculateForTermAndVariable(term, variableName);
-    } else {
-        calculateAndSubstituteAbsoluteValueFunctions(absFunctions, term, variableName);
+    } else {        calculateAndSubstituteAbsoluteValueFunctions(absFunctions, term, variableName);
     }
 }
 
@@ -59,12 +58,10 @@ void BaseOneEquationOneVariableSolver::calculateAndSubstituteAbsoluteValueFuncti
             bool isBitAsserted((permutationValue >> i) & 1);
             Term termToReplace;
             Term const& absFunctionTerm(*itFunctionSet);
-            Term const& absFunctionInputTerm(
-                getTermConstReferenceFromBaseTerm(itFunctionSet->getInputTermConstReference()));
+            Term const& absFunctionInputTerm(getTermConstReferenceFromBaseTerm(itFunctionSet->getInputTerm()));
             if (isBitAsserted) {
                 termToReplace = absFunctionInputTerm;
-            } else {
-                termToReplace = createExpressionIfPossible({-1, "*", absFunctionInputTerm});
+            } else {                termToReplace = createExpressionIfPossible({-1, "*", absFunctionInputTerm});
             }
             substitution.putTermToTermMapping(absFunctionTerm, termToReplace);
             itFunctionSet++;

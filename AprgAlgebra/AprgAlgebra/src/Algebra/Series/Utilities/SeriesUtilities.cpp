@@ -50,11 +50,10 @@ bool isConvergentUsingComparisonTest(
             Term convergentTerm(convergentSeries.getTermValueAtIndex(i));
             if (termToCheck.isConstant() && convergentTerm.isConstant()) {
                 areAllValuesSatisfied =
-                    (termToCheck.getConstantValueConstReference() <= convergentTerm.getConstantValueConstReference());
+                    (termToCheck.getAsNumber() <= convergentTerm.getAsNumber());
                 if (!areAllValuesSatisfied) {
                     break;
-                }
-            }
+                }            }
         }
         result = areAllValuesSatisfied;
     }
@@ -72,11 +71,10 @@ bool isDivergentUsingComparisonTest(
             Term divergentTerm(divergentSeries.getTermValueAtIndex(i));
             if (termToCheck.isConstant() && divergentTerm.isConstant()) {
                 areAllValuesSatisfied =
-                    (termToCheck.getConstantValueConstReference() >= divergentTerm.getConstantValueConstReference());
+                    (termToCheck.getAsNumber() >= divergentTerm.getAsNumber());
                 if (!areAllValuesSatisfied) {
                     break;
-                }
-            }
+                }            }
         }
         result = areAllValuesSatisfied;
     }
@@ -128,11 +126,10 @@ void performRatioTest(
     bool& isConvergent, bool& isDivergent, SeriesBasedOnSummation const& series, string const& variableName) {
     Term limitTerm(getLimitForRatioTest(series, variableName));
     if (limitTerm.isConstant()) {
-        AlbaNumber limitValue(limitTerm.getConstantValueConstReference());
+        AlbaNumber limitValue(limitTerm.getAsNumber());
         if (limitValue < 1) {
             isConvergent = true;
-        } else if (limitValue > 1) {
-            isDivergent = true;
+        } else if (limitValue > 1) {            isDivergent = true;
         }
     }
 }
@@ -146,11 +143,10 @@ void performRootTest(
     Term termForLimit(termsRaiseToTerms.getCombinedTerm());
     Term limitTerm(getLimit(termForLimit, variableName, ALBA_NUMBER_POSITIVE_INFINITY));
     if (limitTerm.isConstant()) {
-        AlbaNumber limitValue(limitTerm.getConstantValueConstReference());
+        AlbaNumber limitValue(limitTerm.getAsNumber());
         if (limitValue < 1) {
             isConvergent = true;
-        } else if (limitValue > 1) {
-            isDivergent = true;
+        } else if (limitValue > 1) {            isDivergent = true;
         }
     }
 }

@@ -14,11 +14,10 @@ TEST(SubTermsRetrieverTest, RetrieveFromEquationsWorks) {
 
     retriever.retrieveFromEquations({equation1, equation2});
 
-    TermSet const& termsSet(retriever.getSavedData());
+    TermSet const& termsSet(retriever.getSubTerms());
     ASSERT_EQ(4U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
-    EXPECT_EQ(Term(Monomial(34, {{"x", 5}})), *(it++));
-    EXPECT_EQ(Term(Monomial(41, {{"y", 6}})), *(it++));
+    EXPECT_EQ(Term(Monomial(34, {{"x", 5}})), *(it++));    EXPECT_EQ(Term(Monomial(41, {{"y", 6}})), *(it++));
     EXPECT_EQ(Term(Monomial(95, {{"x", 7}})), *(it++));
     EXPECT_EQ(Term(Monomial(18, {{"y", 8}})), *(it++));
 }
@@ -31,11 +30,10 @@ TEST(SubTermsRetrieverTest, RetrieveFromEquationWorks) {
 
     retriever.retrieveFromEquation(equation);
 
-    TermSet const& termsSet(retriever.getSavedData());
+    TermSet const& termsSet(retriever.getSubTerms());
     ASSERT_EQ(2U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
-    EXPECT_EQ(Term(Monomial(34, {{"x", 5}})), *(it++));
-    EXPECT_EQ(Term(Monomial(41, {{"y", 6}})), *(it++));
+    EXPECT_EQ(Term(Monomial(34, {{"x", 5}})), *(it++));    EXPECT_EQ(Term(Monomial(41, {{"y", 6}})), *(it++));
 }
 
 TEST(SubTermsRetrieverTest, RetrieveFromTermWorks) {
@@ -53,11 +51,10 @@ TEST(SubTermsRetrieverTest, RetrieveFromTermWorks) {
     retriever.retrieveFromTerm(expesssionTerm2);
     retriever.retrieveFromTerm(functionTerm1);
 
-    TermSet const& termsSet(retriever.getSavedData());
+    TermSet const& termsSet(retriever.getSubTerms());
     ASSERT_EQ(11U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
-    EXPECT_EQ(Term(1.234), *(it++));
-    EXPECT_EQ(Term(2), *(it++));
+    EXPECT_EQ(Term(1.234), *(it++));    EXPECT_EQ(Term(2), *(it++));
     EXPECT_EQ(Term(678), *(it++));
     EXPECT_EQ(Term("a"), *(it++));
     EXPECT_EQ(Term("b"), *(it++));
@@ -74,44 +71,40 @@ TEST(SubTermsRetrieverTest, RetrieveFromConstantWorks) {
 
     retriever.retrieveFromConstant(Constant(1.234));
 
-    TermSet const& termsSet(retriever.getSavedData());
+    TermSet const& termsSet(retriever.getSubTerms());
     ASSERT_EQ(1U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
-    EXPECT_EQ(Term(1.234), *(it++));
-}
+    EXPECT_EQ(Term(1.234), *(it++));}
 
 TEST(SubTermsRetrieverTest, RetrieveFromVariableWorks) {
     SubTermsRetriever retriever;
 
     retriever.retrieveFromVariable(Variable("x"));
 
-    TermSet const& termsSet(retriever.getSavedData());
+    TermSet const& termsSet(retriever.getSubTerms());
     ASSERT_EQ(1U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
-    EXPECT_EQ(Term("x"), *(it++));
-}
+    EXPECT_EQ(Term("x"), *(it++));}
 
 TEST(SubTermsRetrieverTest, RetrieveFromMonomialWorks) {
     SubTermsRetriever retriever;
 
     retriever.retrieveFromMonomial(Monomial(34, {{"x", 5}, {"y", 6}}));
 
-    TermSet const& termsSet(retriever.getSavedData());
+    TermSet const& termsSet(retriever.getSubTerms());
     ASSERT_EQ(1U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
-    EXPECT_EQ(Term(Monomial(34, {{"x", 5}, {"y", 6}})), *(it++));
-}
+    EXPECT_EQ(Term(Monomial(34, {{"x", 5}, {"y", 6}})), *(it++));}
 
 TEST(SubTermsRetrieverTest, RetrieveFromPolynomialWorks) {
     SubTermsRetriever retriever;
 
     retriever.retrieveFromPolynomial(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})});
 
-    TermSet const& termsSet(retriever.getSavedData());
+    TermSet const& termsSet(retriever.getSubTerms());
     ASSERT_EQ(1U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
-    EXPECT_EQ(Term(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})}), *(it++));
-}
+    EXPECT_EQ(Term(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})}), *(it++));}
 
 TEST(SubTermsRetrieverTest, RetrieveFromExpressionWorks) {
     SubTermsRetriever retriever;
@@ -119,11 +112,10 @@ TEST(SubTermsRetrieverTest, RetrieveFromExpressionWorks) {
 
     retriever.retrieveFromExpression(expression);
 
-    TermSet const& termsSet(retriever.getSavedData());
+    TermSet const& termsSet(retriever.getSubTerms());
     ASSERT_EQ(3U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
-    EXPECT_EQ(Term(678), *(it++));
-    EXPECT_EQ(Term(Monomial(576, {{"g", 9}})), *(it++));
+    EXPECT_EQ(Term(678), *(it++));    EXPECT_EQ(Term(Monomial(576, {{"g", 9}})), *(it++));
     EXPECT_EQ(Term(expression), *(it++));
 }
 
@@ -135,11 +127,10 @@ TEST(SubTermsRetrieverTest, RetrieveFromFunctionWorks) {
 
     retriever.retrieveFromFunction(functionObject);
 
-    TermSet const& termsSet(retriever.getSavedData());
+    TermSet const& termsSet(retriever.getSubTerms());
     ASSERT_EQ(4U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
-    EXPECT_EQ(Term(4516), *(it++));
-    EXPECT_EQ(Term(Monomial(7895, {{"x", 10}})), *(it++));
+    EXPECT_EQ(Term(4516), *(it++));    EXPECT_EQ(Term(Monomial(7895, {{"x", 10}})), *(it++));
     EXPECT_EQ(Term(expression), *(it++));
     EXPECT_EQ(Term(functionObject), *(it++));
 }
@@ -154,11 +145,10 @@ TEST(SubTermsRetrieverTest, RetrieveFromPolynomialsWorks) {
 
     retriever.retrieveFromPolynomials(polynomials);
 
-    TermSet const& termsSet(retriever.getSavedData());
+    TermSet const& termsSet(retriever.getSubTerms());
     ASSERT_EQ(2U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
-    EXPECT_EQ(Term(polynomial1), *(it++));
-    EXPECT_EQ(Term(polynomial2), *(it++));
+    EXPECT_EQ(Term(polynomial1), *(it++));    EXPECT_EQ(Term(polynomial2), *(it++));
 }
 
 }  // namespace algebra

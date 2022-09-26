@@ -16,11 +16,9 @@ enum class RootType {
 };
 
 bool doesThePolynomialHaveOnlyOneConstant(Polynomial const& polynomial);
-bool doesThePolynomialHaveOnlyOneVariable(Polynomial const& polynomial);
 bool doesThePolynomialHaveDoubleValue(Polynomial const& polynomial);
 bool doesOnePolynomialHaveADoubleValue(Polynomials const& polynomials);
-bool hasAMonomialWithMultipleVariables(Polynomial const& polynomial);
-bool hasAMonomialWithDegreeMoreThanOneOrFractional(Polynomial const& polynomial);
+bool hasAMonomialWithMultipleVariables(Polynomial const& polynomial);bool hasAMonomialWithDegreeMoreThanOneOrFractional(Polynomial const& polynomial);
 bool isOneMonomial(Polynomial const& polynomial);
 bool isVariableExponentInMonomialFound(Polynomial const& polynomial, Monomial const& monomial);
 bool isPolynomialLinear(Polynomial const& polynomial);
@@ -35,10 +33,11 @@ AlbaNumber getDegreeForVariable(Polynomial const& polynomial, std::string const&
 AlbaNumber getCoefficientOfVariableExponent(Polynomial const& polynomial, Monomial const& monomial);
 AlbaNumber getRemainderForOneVariablePolynomialDividedByVariableMinusConstantValue(
     Polynomial const& polynomial, AlbaNumber const& value);
+AlbaNumber getEvaluatedValueUsingHornersSubstitutionOfOneVariablePolynomial(
+    Polynomial const& polynomial, AlbaNumber const& value);
 
 AlbaNumbers getRoots(RootType const rootType, Polynomial const& polynomial);
 Polynomial raiseBinomialToAPowerUsingBinomialExpansion(Polynomial const& binomial, int const power);
-
 void removeEmptyPolynomials(Polynomials& polynomials);
 
 }  // namespace algebra

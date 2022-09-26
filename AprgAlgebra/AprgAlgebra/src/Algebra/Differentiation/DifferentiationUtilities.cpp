@@ -56,11 +56,10 @@ bool isDifferentiableAt(Term const& term, string const& variableName, AlbaNumber
     SubstitutionOfVariablesToValues substitution{{"x", value}};
     Term derivativeValue(substitution.performSubstitutionTo(derivative));
     if (derivativeValue.isConstant()) {
-        result = derivativeValue.getConstantValueConstReference().isARealFiniteValue();
+        result = derivativeValue.getAsNumber().isARealFiniteValue();
     }
     return result;
 }
-
 bool isDifferentiableAtUsingDerivativeDefinition(
     Term const& term, string const& variableName, AlbaNumber const& value) {
     bool result(false);
@@ -68,11 +67,10 @@ bool isDifferentiableAtUsingDerivativeDefinition(
     SubstitutionOfVariablesToValues substitution{{"x", value}};
     Term derivativeValue(substitution.performSubstitutionTo(derivative));
     if (derivativeValue.isConstant()) {
-        result = derivativeValue.getConstantValueConstReference().isARealFiniteValue();
+        result = derivativeValue.getAsNumber().isARealFiniteValue();
     }
     return result;
 }
-
 bool isFirstOrderDifferentialEquation(
     Term const& dyOverDx, Term const& p, Term const& q, string const& xVariableName, string const& yVariableName) {
     // First order differential equation should follow this:
@@ -85,15 +83,14 @@ bool isFirstOrderDifferentialEquation(
     if (Term(1) == remainingTermWithoutDyOverDx) {
         VariableNamesRetriever retriever;
         retriever.retrieveFromTerm(p);
-        VariableNamesSet const& namesFromP(retriever.getSavedData());
+        VariableNamesSet const& namesFromP(retriever.getVariableNames());
         if (namesFromP.find(yVariableName) != namesFromP.cend()) {
             VariableNamesRetriever retriever;
             retriever.retrieveFromTerm(q);
-            VariableNamesSet const& namesFromQ(retriever.getSavedData());
+            VariableNamesSet const& namesFromQ(retriever.getVariableNames());
             if (namesFromQ.find(xVariableName) != namesFromQ.cend()) {
                 result = true;
-            }
-        }
+            }        }
     }
     return result;
 }

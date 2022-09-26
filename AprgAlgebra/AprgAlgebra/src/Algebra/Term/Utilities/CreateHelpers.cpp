@@ -19,17 +19,16 @@ Monomial createMonomialFromVariable(Variable const& variable) { return Monomial(
 Monomial createMonomialIfPossible(Term const& term) {
     Monomial result;
     if (term.isConstant()) {
-        result = createMonomialFromNumber(term.getConstantValueConstReference());
+        result = createMonomialFromNumber(term.getAsNumber());
     } else if (term.isVariable()) {
-        result = createMonomialFromVariable(term.getVariableConstReference());
+        result = createMonomialFromVariable(term.getAsVariable());
     } else if (term.isMonomial()) {
-        result = term.getMonomialConstReference();
+        result = term.getAsMonomial();
     } else if (term.isPolynomial()) {
-        Polynomial const& polynomial(term.getPolynomialConstReference());
+        Polynomial const& polynomial(term.getAsPolynomial());
         if (isOneMonomial(polynomial)) {
             result = getFirstMonomial(polynomial);
-        }
-    }
+        }    }
     return result;
 }
 
@@ -44,17 +43,16 @@ Polynomial createPolynomialFromMonomial(Monomial const& monomial) { return Polyn
 Polynomial createPolynomialIfPossible(Term const& term) {
     Polynomial result;
     if (term.isConstant()) {
-        result = createPolynomialFromNumber(term.getConstantValueConstReference());
+        result = createPolynomialFromNumber(term.getAsNumber());
     } else if (term.isVariable()) {
-        result = createPolynomialFromVariable(term.getVariableConstReference());
+        result = createPolynomialFromVariable(term.getAsVariable());
     } else if (term.isMonomial()) {
-        result = createPolynomialFromMonomial(term.getMonomialConstReference());
+        result = createPolynomialFromMonomial(term.getAsMonomial());
     } else if (term.isPolynomial()) {
-        result = term.getPolynomialConstReference();
+        result = term.getAsPolynomial();
     }
     return result;
 }
-
 Expression createExpressionInAnExpression(Expression const& expression) { return Expression(Term(expression)); }
 
 Expression createAndWrapExpressionFromATerm(Term const& term) { return Expression(term); }
@@ -63,11 +61,10 @@ Expression createOrCopyExpressionFromATerm(Term const& term) {
     Expression result;
     if (!term.isEmpty()) {
         if (term.isExpression()) {
-            result = term.getExpressionConstReference();
+            result = term.getAsExpression();
         } else {
             result = Expression(term);
-        }
-    }
+        }    }
     return result;
 }
 

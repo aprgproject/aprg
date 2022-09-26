@@ -68,11 +68,10 @@ void LimitsAtInfinity::simplifyAsTermsOverTermsIfPossible() {
 
 void LimitsAtInfinity::simplifyPolynomialToMaxDegreeMonomialOnly() {
     if (m_simplifiedTermAtInfinity.isPolynomial()) {
-        Polynomial newPolynomial(m_simplifiedTermAtInfinity.getPolynomialConstReference());
+        Polynomial newPolynomial(m_simplifiedTermAtInfinity.getAsPolynomial());
         AlbaNumber maxDegree(getMaxDegree(m_simplifiedTermAtInfinity));
         Monomial monomialWithMaxDegree(1, {{m_variableName, maxDegree}});
-        newPolynomial.divideMonomial(monomialWithMaxDegree);
-        m_removeMonomialsWithNegativeExponentMutator.mutatePolynomial(newPolynomial);
+        newPolynomial.divideMonomial(monomialWithMaxDegree);        m_removeMonomialsWithNegativeExponentMutator.mutatePolynomial(newPolynomial);
         newPolynomial.multiplyMonomial(monomialWithMaxDegree);
         m_simplifiedTermAtInfinity = Term(newPolynomial);
         m_simplifiedTermAtInfinity.simplify();

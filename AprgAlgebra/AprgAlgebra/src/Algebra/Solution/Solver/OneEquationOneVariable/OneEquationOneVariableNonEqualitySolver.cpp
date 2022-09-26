@@ -1,11 +1,10 @@
 #include "OneEquationOneVariableNonEqualitySolver.hpp"
 
 #include <Algebra/Constructs/ConstructUtilities.hpp>
-#include <Algebra/Retrieval/VariableNamesRetriever.hpp>
+#include <Algebra/Retrieval/SingleVariableNameRetriever.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
-
 using namespace std;
 
 namespace alba {
@@ -29,17 +28,13 @@ void OneEquationOneVariableNonEqualitySolver::calculateSolution(SolutionSet& sol
 
 void OneEquationOneVariableNonEqualitySolver::calculateForEquation(SolutionSet& solutionSet, Equation const& equation) {
     Term const& nonZeroLeftHandTerm(equation.getLeftHandTerm());
-    VariableNamesRetriever variableNamesRetriever;
-    variableNamesRetriever.retrieveFromTerm(nonZeroLeftHandTerm);
-    VariableNamesSet const& variableNames(variableNamesRetriever.getSavedData());
-    if (variableNames.size() == 1) {
-        string variableName = *variableNames.cbegin();
-        calculateForTermAndCheckAbsoluteValueFunctions(nonZeroLeftHandTerm, variableName);
+    string singleVariableName = getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(equation);
+    if (!singleVariableName.empty()) {
+        calculateForTermAndCheckAbsoluteValueFunctions(nonZeroLeftHandTerm, singleVariableName);
         sortAndRemoveDuplicateCalculatedValues();
-        addIntervalsToSolutionSetIfNeeded(solutionSet, equation, variableName);
+        addIntervalsToSolutionSetIfNeeded(solutionSet, equation, singleVariableName);
     }
 }
-
 void OneEquationOneVariableNonEqualitySolver::calculateForTermAndVariable(Term const& term, string const&) {
     PolynomialOverPolynomialOptional popOptional(createPolynomialOverPolynomialFromTermIfPossible(term));
     if (popOptional) {
