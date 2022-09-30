@@ -15,21 +15,19 @@ KnightsTour::KnightsTour(int const chessBoardX, int const chessBoardY)
 KnightsTour::ChessBoardIndexes KnightsTour::getAnOpenKnightsTour() const {
     ChessBoardIndexes result;
     HamiltonianPathSearchWithDfs<VertexOfKnightsTour> hamiltonianPathSearch(m_graph);
-    for (VertexOfKnightsTour const& vertex : hamiltonianPathSearch.getOneHamiltonianPath()) {
-        result.emplace_back(vertex.second);
+    for (auto const& [count, chessBoardIndex] : hamiltonianPathSearch.getOneHamiltonianPath()) {
+        result.emplace_back(chessBoardIndex);
     }
     return result;
 }
-
 KnightsTour::ChessBoardIndexes KnightsTour::getAClosedKnightsTour() const {
     ChessBoardIndexes result;
     HamiltonianPathSearchWithDfs<VertexOfKnightsTour> hamiltonianPathSearch(m_graph);
-    for (VertexOfKnightsTour const& vertex : hamiltonianPathSearch.getOneHamiltonianCycle()) {
-        result.emplace_back(vertex.second);
+    for (auto const& [count, chessBoardIndex] : hamiltonianPathSearch.getOneHamiltonianCycle()) {
+        result.emplace_back(chessBoardIndex);
     }
     return result;
 }
-
 void KnightsTour::initialize() {
     initializeNeighborMatrix();
     initializeGraph();

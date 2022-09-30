@@ -6,11 +6,10 @@
 
 namespace alba {
 
-class MaximizeProfitInKnapsack {
+class MaximizeProfitInZeroOneKnapsack {
 public:
     using Index = int;
-    using Weight = int;
-    using Profit = int;
+    using Weight = int;    using Profit = int;
     using ItemIndex = int;
     using Item = std::pair<Weight, Profit>;
     using Profits = std::vector<Profit>;
@@ -18,11 +17,10 @@ public:
     using ProfitMatrix = matrix::AlbaMatrix<Profit>;
     static constexpr Profit UNUSED_VALUE = std::numeric_limits<Profit>::max();
 
-    MaximizeProfitInKnapsack(Weight const maximumWeight, Items const items);
+    MaximizeProfitInZeroOneKnapsack(Weight const maximumWeight, Items const items);
 
     Profit getBestProfitUsingNaiveRecursion() const;
-    Profit getBestProfitUsingMemoizationDP() const;
-    Profit getBestProfitUsingIterativeDP() const;
+    Profit getBestProfitUsingMemoizationDP() const;    Profit getBestProfitUsingIterativeDP() const;
     Profit getBestProfitUsingIterativeDPAndSpaceEfficient() const;
 
 private:
@@ -36,10 +34,11 @@ private:
 
 }  // namespace alba
 
+// This is a variant of 0-1 Knapsack Problem
+
 // APPROACH:
 // 1) Naive Recursion / Dynamic Programming by Memoization:
-// -> Each "weight" and "item index" has a "profit" possible
-// -> Start recursion at the "maximum weight" and item index as 0.
+// -> Each "weight" and "item index" has a "profit" possible// -> Start recursion at the "maximum weight" and item index as 0.
 // -> Each "profit" (with inputs "weight" and "item index") can be computed by:
 // ---> If "weight" >= weight at "item index":
 // -----> Get profit if item is USED:
