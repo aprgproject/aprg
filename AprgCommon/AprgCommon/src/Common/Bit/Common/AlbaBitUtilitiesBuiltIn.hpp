@@ -20,11 +20,10 @@ INLINE_WITHOUT_BUILT_IN namespace BitUtilitiesWithoutBuiltIn {
     constexpr inline std::size_t getNumberOfOnes(DataType const value) {
         std::size_t result(0);
         for (auto temporary(value); temporary != 0; temporary >>= 1) {
-            if ((temporary & 1) != 0) {
+            if (temporary & 1) {
                 ++result;
             }
-        }
-        return result;
+        }        return result;
     }
     template <typename DataType>
     constexpr inline bool isEvenParity(DataType const value) {

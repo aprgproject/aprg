@@ -206,10 +206,16 @@ TEST(FactorAndMulitplesHelpersTest, GetDifferenceFromGreaterMultipleWorks) {
     EXPECT_EQ(48, getDifferenceFromGreaterMultiple(57, 2346));
 }
 
+TEST(FactorAndMulitplesHelpersTest, MultiplyBySevenWorks) {
+    EXPECT_EQ(84U, multiplyBySeven(12U));
+    EXPECT_EQ(8638U, multiplyBySeven(1234U));
+    EXPECT_EQ(864192U, multiplyBySeven(123456U));
+    EXPECT_EQ(86419752308638U, multiplyBySeven(12345678901234U));
+}
+
 TEST(FactorAndMulitplesHelpersTest, GetGreatestCommonFactorForAlbaNumberWorks) {
     EXPECT_EQ(AlbaNumber(0), getGreatestCommonFactor(AlbaNumber(0), AlbaNumber(0)));
-    EXPECT_EQ(AlbaNumber(1), getGreatestCommonFactor(AlbaNumber(1), AlbaNumber(1)));
-    EXPECT_EQ(
+    EXPECT_EQ(AlbaNumber(1), getGreatestCommonFactor(AlbaNumber(1), AlbaNumber(1)));    EXPECT_EQ(
         AlbaNumber::createFraction(1, 12),
         getGreatestCommonFactor(AlbaNumber::createFraction(1, 6), AlbaNumber::createFraction(1, 4)));
     EXPECT_EQ(AlbaNumber(1), getGreatestCommonFactor(AlbaNumber(0.33), AlbaNumber::createFraction(1, 4)));
