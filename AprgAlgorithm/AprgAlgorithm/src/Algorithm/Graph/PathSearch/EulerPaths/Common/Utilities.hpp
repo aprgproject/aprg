@@ -38,13 +38,11 @@ template <typename Vertex>
 bool areAllInDegreesEqualsOutDegrees(BaseDirectedGraph<Vertex> const& graph) {
     auto vertexToDegreesPairMap(GraphUtilities::getAllInDegreesAndOutDegrees<Vertex>(graph));
     bool result(true);
-    for (auto const& vertexAndDegreesPair : vertexToDegreesPairMap) {
-        int inDegree = vertexAndDegreesPair.second.first;
-        int outDegree = vertexAndDegreesPair.second.second;
+    for (auto const& [vertex, degrees] : vertexToDegreesPairMap) {
+        auto const& [inDegree, outDegree] = degrees;
         result = inDegree == outDegree;
         if (!result) {
-            break;
-        }
+            break;        }
     }
     return result;
 }
@@ -55,13 +53,11 @@ bool hasAtLeastOneLesserAndGreaterInAndOutDegrees(BaseDirectedGraph<Vertex> cons
     int numberOfLesser(0);
     int numberOfGreater(0);
     bool result(true);
-    for (auto const& vertexAndDegreesPair : vertexToDegreesPairMap) {
-        int inDegree = vertexAndDegreesPair.second.first;
-        int outDegree = vertexAndDegreesPair.second.second;
+    for (auto const& [vertex, degrees] : vertexToDegreesPairMap) {
+        auto const& [inDegree, outDegree] = degrees;
         bool lesserByOne = inDegree + 1 == outDegree;
         bool greaterByOne = inDegree == outDegree + 1;
-        numberOfLesser += lesserByOne ? 1 : 0;
-        numberOfGreater += greaterByOne ? 1 : 0;
+        numberOfLesser += lesserByOne ? 1 : 0;        numberOfGreater += greaterByOne ? 1 : 0;
         result =
             inDegree == outDegree || (lesserByOne && numberOfLesser <= 1) || (greaterByOne && numberOfGreater <= 1);
         if (!result) {

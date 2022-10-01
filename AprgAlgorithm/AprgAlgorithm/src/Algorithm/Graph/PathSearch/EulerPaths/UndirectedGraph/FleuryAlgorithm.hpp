@@ -72,11 +72,10 @@ private:
 
     void putEulerEdgesOnPath(Path& result, Edges const& edgesInEulerCycle) const {
         result.emplace_back(edgesInEulerCycle.front().first);
-        for (Edge const& edge : edgesInEulerCycle) {
-            result.emplace_back(edge.second);
+        for (auto const& [startVertexOfEdge, endVertexOfEdge] : edgesInEulerCycle) {
+            result.emplace_back(endVertexOfEdge);
         }
     }
-
     void searchForEulerPath(Path& result, Vertex const& startVertex, Edges const& originalEdges) const {
         GraphToManipulate graphToManipulate(createGraphToManipulate(originalEdges));
         SetOfEdges& edgesReference(graphToManipulate.getSetOfEdgesReference());

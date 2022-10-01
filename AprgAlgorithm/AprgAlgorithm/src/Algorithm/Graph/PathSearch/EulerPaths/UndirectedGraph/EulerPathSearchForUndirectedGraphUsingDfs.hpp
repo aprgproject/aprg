@@ -100,14 +100,14 @@ private:
 
     Vertex getTheOtherVertex(Edge const& edge, Vertex const& currentVertex) const {
         Vertex result;
-        if (currentVertex == edge.first) {
-            result = edge.second;
+        auto const& [startVertexOfEdge, endVertexOfEdge] = edge;
+        if (currentVertex == startVertexOfEdge) {
+            result = endVertexOfEdge;
         } else {
-            result = edge.first;
+            result = startVertexOfEdge;
         }
         return result;
-    }
-    BaseUndirectedGraphWithVertex const& b_graph;
+    }    BaseUndirectedGraphWithVertex const& b_graph;
 };
 
 }  // namespace algorithm
