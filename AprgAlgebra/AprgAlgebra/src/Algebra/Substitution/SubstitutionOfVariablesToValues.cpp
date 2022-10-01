@@ -83,6 +83,7 @@ Term SubstitutionOfVariablesToValues::performSubstitutionTo(Term const& term) co
     }
     return newTerm;
 }
+
 Equation SubstitutionOfVariablesToValues::performSubstitutionTo(Equation const& equation) const {
     Equation simplifiedEquation(
         performSubstitutionTo(equation.getLeftHandTerm()), equation.getEquationOperator().getOperatorString(),
@@ -100,7 +101,8 @@ Monomial SubstitutionOfVariablesToValues::performSubstitutionForMonomial(Monomia
                 newMonomial.getCoefficient() *
                 (getValueForVariable(variableExponentPair.first) ^ variableExponentPair.second));
         } else {
-            newMonomial.putVariableWithExponent(variableExponentPair.first, variableExponentPair.second);        }
+            newMonomial.putVariableWithExponent(variableExponentPair.first, variableExponentPair.second);
+        }
     }
     newMonomial.simplify();
     return newMonomial;
@@ -111,7 +113,8 @@ Polynomial SubstitutionOfVariablesToValues::performSubstitutionForPolynomial(Pol
     for (Monomial const& monomial : polynomial.getMonomials()) {
         newPolynomial.addMonomial(performSubstitutionForMonomial(monomial));
     }
-    newPolynomial.simplify();    return newPolynomial;
+    newPolynomial.simplify();
+    return newPolynomial;
 }
 
 Expression SubstitutionOfVariablesToValues::performSubstitutionForExpression(Expression const& expression) const {
@@ -128,6 +131,7 @@ Function SubstitutionOfVariablesToValues::performSubstitutionForFunction(Functio
     newFunction.simplify();
     return newFunction;
 }
+
 void SubstitutionOfVariablesToValues::putVariablesWithValues(
     initializer_list<VariableValuePair> const& variablesWithValues) {
     for (VariableValuePair const& variableValuesPair : variablesWithValues) {

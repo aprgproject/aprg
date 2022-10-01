@@ -5,6 +5,7 @@
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
+
 using namespace std;
 
 namespace alba {
@@ -35,6 +36,7 @@ void OneEquationOneVariableNonEqualitySolver::calculateForEquation(SolutionSet& 
         addIntervalsToSolutionSetIfNeeded(solutionSet, equation, singleVariableName);
     }
 }
+
 void OneEquationOneVariableNonEqualitySolver::calculateForTermAndVariable(Term const& term, string const&) {
     PolynomialOverPolynomialOptional popOptional(createPolynomialOverPolynomialFromTermIfPossible(term));
     if (popOptional) {

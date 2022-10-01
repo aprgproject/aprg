@@ -32,7 +32,8 @@ bool canBeMergedInAMonomialByAdditionOrSubtraction(Monomial const& monomial1, Mo
     Monomial::VariablesToExponentsMap const& variablesMap2(monomial2.getVariablesToExponentsMap());
     bool result(false);
     if (variablesMap1.size() == variablesMap2.size()) {
-        using MapConstIterator = Monomial::VariablesToExponentsMap::const_iterator;        using MismatchResultType = pair<MapConstIterator, MapConstIterator>;
+        using MapConstIterator = Monomial::VariablesToExponentsMap::const_iterator;
+        using MismatchResultType = pair<MapConstIterator, MapConstIterator>;
         MismatchResultType mismatchResult =
             mismatch(variablesMap1.cbegin(), variablesMap1.end(), variablesMap2.cbegin());
         result = mismatchResult.first == variablesMap1.cend();
@@ -44,7 +45,8 @@ bool canBeMergedInAMonomialByAdditionOrSubtraction(Monomial const& monomial, Var
     Monomial::VariablesToExponentsMap const& variablesMap(monomial.getVariablesToExponentsMap());
     string variableName(variable.getVariableName());
     bool result(false);
-    if (variablesMap.size() == 1) {        if (variablesMap.find(variableName) != variablesMap.cend()) {
+    if (variablesMap.size() == 1) {
+        if (variablesMap.find(variableName) != variablesMap.cend()) {
             result = variablesMap.at(variableName) == 1;
         }
     }
@@ -64,7 +66,8 @@ bool hasNegativeExponents(Monomial const& monomial) {
     for (auto const& variableExponentsPair : monomial.getVariablesToExponentsMap()) {
         if (variableExponentsPair.second < 0) {
             result = true;
-            break;        }
+            break;
+        }
     }
     return result;
 }
@@ -89,7 +92,8 @@ string getFirstVariableName(Monomial const& monomial) {
     Monomial::VariablesToExponentsMap const& variableToExponentMap(monomial.getVariablesToExponentsMap());
     string variableName;
     if (!variableToExponentMap.empty()) {
-        variableName = (variableToExponentMap.cbegin())->first;    }
+        variableName = (variableToExponentMap.cbegin())->first;
+    }
     return variableName;
 }
 
@@ -98,14 +102,16 @@ AlbaNumber getDegree(Monomial const& monomial) {
     for (auto const& variableExponentPair : monomial.getVariablesToExponentsMap()) {
         degree = degree + variableExponentPair.second;
     }
-    return degree;}
+    return degree;
+}
 
 AlbaNumber getMaxExponent(Monomial const& monomial) {
     AlbaNumber maxExponent;
     auto const& variablesToExponentsMap(monomial.getVariablesToExponentsMap());
     if (!variablesToExponentsMap.empty()) {
         auto it = variablesToExponentsMap.cbegin();
-        maxExponent = it->second;        it++;
+        maxExponent = it->second;
+        it++;
         for (; it != variablesToExponentsMap.cend(); it++) {
             maxExponent = max(maxExponent, it->second);
         }
@@ -119,7 +125,8 @@ AlbaNumber getGcfOfExponentsInMonomial(Monomial const& monomial) {
     for (auto const& variablePair : monomial.getVariablesToExponentsMap()) {
         AlbaNumber const& exponent(variablePair.second);
         if (exponent.isIntegerOrFractionType()) {
-            if (isFirst) {                commonExponent = exponent;
+            if (isFirst) {
+                commonExponent = exponent;
                 isFirst = false;
             } else {
                 commonExponent = getGreatestCommonFactor(commonExponent, exponent);
@@ -136,7 +143,8 @@ AlbaNumber getGcfOfCoefficientsInMonomials(Monomials const& monomials) {
         AlbaNumber const& coefficient(monomial.getCoefficient());
         if (coefficient.isIntegerOrFractionType()) {
             if (isFirst) {
-                commonCoefficient = coefficient;                isFirst = false;
+                commonCoefficient = coefficient;
+                isFirst = false;
             } else {
                 commonCoefficient = getGreatestCommonFactor(commonCoefficient, coefficient);
             }
@@ -152,7 +160,8 @@ AlbaNumber getLcmOfCoefficientsInMonomials(Monomials const& monomials) {
         AlbaNumber const& coefficient(monomial.getCoefficient());
         if (coefficient.isIntegerOrFractionType()) {
             if (isFirst) {
-                commonCoefficient = coefficient;                isFirst = false;
+                commonCoefficient = coefficient;
+                isFirst = false;
             } else {
                 commonCoefficient = getLeastCommonMultiple(commonCoefficient, coefficient);
             }
@@ -169,7 +178,8 @@ AlbaNumber getCommonSignInMonomials(Monomials const& monomials) {
         if (monomial.getCoefficient() < AlbaNumber(0)) {
             negativeSignCount++;
             if (isFirstMonomial) {
-                isFirstMonomialNegative = true;            }
+                isFirstMonomialNegative = true;
+            }
         }
         isFirstMonomial = false;
     }
@@ -207,7 +217,8 @@ Monomial compareMonomialsAndSaveMinimumExponentsForEachVariable(
     for (string const& variableName : variableNamesRetriever.getVariableNames()) {
         newVariableExponentMap[variableName] = min(
             firstMonomial.getExponentForVariable(variableName), secondMonomial.getExponentForVariable(variableName));
-    }    return Monomial(1, newVariableExponentMap);
+    }
+    return Monomial(1, newVariableExponentMap);
 }
 
 Monomial compareMonomialsAndSaveMaximumExponentsForEachVariable(
@@ -219,7 +230,8 @@ Monomial compareMonomialsAndSaveMaximumExponentsForEachVariable(
     for (string const& variableName : variableNamesRetriever.getVariableNames()) {
         newVariableExponentMap[variableName] = max(
             firstMonomial.getExponentForVariable(variableName), secondMonomial.getExponentForVariable(variableName));
-    }    return Monomial(1, newVariableExponentMap);
+    }
+    return Monomial(1, newVariableExponentMap);
 }
 
 Monomial getMonomialWithMinimumExponentsInMonomials(Monomials const& monomials) {

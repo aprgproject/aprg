@@ -30,6 +30,7 @@ TEST(MonomialTest, MonomialsAreConstructedCorrectly) {
     ASSERT_EQ(1U, variableMap2.size());
     EXPECT_DOUBLE_EQ(-7, variableMap2.at("i").getDouble());
 }
+
 TEST(MonomialTest, ConstructedMonomialsHaveIsSimplifiedFlagNotSet) {
     Monomial monomial1;
     Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
@@ -151,7 +152,8 @@ TEST(MonomialTest, GetVariablesToExponentsMapWorks) {
     Monomial::VariablesToExponentsMap const& variableMap1(monomial2.getVariablesToExponentsMap());
     ASSERT_EQ(2U, variableMap1.size());
     EXPECT_DOUBLE_EQ(6, variableMap1.at("x").getDouble());
-    EXPECT_DOUBLE_EQ(-1.25, variableMap1.at("y").getDouble());}
+    EXPECT_DOUBLE_EQ(-1.25, variableMap1.at("y").getDouble());
+}
 
 TEST(MonomialTest, GetExponentForVariableWorks) {
     Monomial monomial1;
@@ -177,6 +179,7 @@ TEST(MonomialTest, ClearWorks) {
     Monomial::VariablesToExponentsMap const& variableMap2(monomial2.getVariablesToExponentsMap());
     ASSERT_TRUE(variableMap2.empty());
 }
+
 TEST(MonomialTest, SimplifyWorks) {
     Monomial monomial1;
     Monomial monomial2(6, {});
@@ -213,6 +216,7 @@ TEST(MonomialTest, SimplifyWorks) {
     Monomial::VariablesToExponentsMap const& variableMap6(monomial6.getVariablesToExponentsMap());
     EXPECT_TRUE(variableMap6.empty());
 }
+
 TEST(MonomialTest, SimplifyWorksWhenIsSimplifiedIsNotSet) {
     Monomial monomial(58, {{"x", 7}, {"y", 0}});
 
@@ -223,6 +227,7 @@ TEST(MonomialTest, SimplifyWorksWhenIsSimplifiedIsNotSet) {
     ASSERT_EQ(1U, variableMap.size());
     EXPECT_DOUBLE_EQ(7, variableMap.at("x").getDouble());
 }
+
 TEST(MonomialTest, SimplifyWorksAsSkippedWhenIsSimplifiedIsSet) {
     Monomial monomial(58, {{"x", 7}, {"y", 0}});
     monomial.setAsSimplified();
@@ -233,7 +238,8 @@ TEST(MonomialTest, SimplifyWorksAsSkippedWhenIsSimplifiedIsSet) {
     Monomial::VariablesToExponentsMap const& variableMap(monomial.getVariablesToExponentsMap());
     ASSERT_EQ(2U, variableMap.size());
     EXPECT_DOUBLE_EQ(7, variableMap.at("x").getDouble());
-    EXPECT_DOUBLE_EQ(0, variableMap.at("y").getDouble());}
+    EXPECT_DOUBLE_EQ(0, variableMap.at("y").getDouble());
+}
 
 TEST(MonomialTest, SettingANewConstantWorks) {
     Monomial monomial1;
@@ -245,7 +251,8 @@ TEST(MonomialTest, SettingANewConstantWorks) {
     EXPECT_DOUBLE_EQ(512, monomial2.getCoefficient().getDouble());
 }
 
-TEST(MonomialTest, MultiplyNumberWorks) {    Monomial monomial1(16, {{"x", 5}});
+TEST(MonomialTest, MultiplyNumberWorks) {
+    Monomial monomial1(16, {{"x", 5}});
     Monomial monomial2(20, {{"x", 7}});
 
     monomial1.multiplyNumber(3);
@@ -260,6 +267,7 @@ TEST(MonomialTest, MultiplyNumberWorks) {    Monomial monomial1(16, {{"x", 5}});
     ASSERT_EQ(1U, variableMap2.size());
     EXPECT_DOUBLE_EQ(7, variableMap2.at("x").getDouble());
 }
+
 TEST(MonomialTest, RaiseToPowerNumberWorks) {
     Monomial monomial(3, {{"x", 1}, {"y", 2}, {"z", 3}});
 
@@ -269,7 +277,8 @@ TEST(MonomialTest, RaiseToPowerNumberWorks) {
     Monomial::VariablesToExponentsMap const& variableMap(monomial.getVariablesToExponentsMap());
     ASSERT_EQ(3U, variableMap.size());
     EXPECT_DOUBLE_EQ(3, variableMap.at("x").getDouble());
-    EXPECT_DOUBLE_EQ(6, variableMap.at("y").getDouble());    EXPECT_DOUBLE_EQ(9, variableMap.at("z").getDouble());
+    EXPECT_DOUBLE_EQ(6, variableMap.at("y").getDouble());
+    EXPECT_DOUBLE_EQ(9, variableMap.at("z").getDouble());
 }
 
 TEST(MonomialTest, MultiplyMonomialWorks) {
@@ -287,7 +296,8 @@ TEST(MonomialTest, MultiplyMonomialWorks) {
     Monomial::VariablesToExponentsMap const& variableMap2(monomial2.getVariablesToExponentsMap());
     ASSERT_EQ(2U, variableMap2.size());
     EXPECT_DOUBLE_EQ(7, variableMap2.at("x").getDouble());
-    EXPECT_DOUBLE_EQ(4, variableMap2.at("y").getDouble());}
+    EXPECT_DOUBLE_EQ(4, variableMap2.at("y").getDouble());
+}
 
 TEST(MonomialTest, DivideMonomialWorks) {
     Monomial monomial1(16, {{"x", 5}});
@@ -304,7 +314,8 @@ TEST(MonomialTest, DivideMonomialWorks) {
     Monomial::VariablesToExponentsMap const& variableMap2(monomial2.getVariablesToExponentsMap());
     ASSERT_EQ(2U, variableMap2.size());
     EXPECT_DOUBLE_EQ(7, variableMap2.at("x").getDouble());
-    EXPECT_DOUBLE_EQ(-4, variableMap2.at("y").getDouble());}
+    EXPECT_DOUBLE_EQ(-4, variableMap2.at("y").getDouble());
+}
 
 TEST(MonomialTest, PuttingANewVariableWithExponentWorks) {
     Monomial monomial;
@@ -315,6 +326,7 @@ TEST(MonomialTest, PuttingANewVariableWithExponentWorks) {
     ASSERT_EQ(1U, variableMap.size());
     EXPECT_DOUBLE_EQ(62, variableMap.at("i").getDouble());
 }
+
 TEST(MonomialTest, PuttingASetOfNewVariablesWithExponentUsingInitializerListWorks) {
     Monomial monomial;
 
@@ -323,7 +335,8 @@ TEST(MonomialTest, PuttingASetOfNewVariablesWithExponentUsingInitializerListWork
     Monomial::VariablesToExponentsMap const& variableMap(monomial.getVariablesToExponentsMap());
     ASSERT_EQ(2U, variableMap.size());
     EXPECT_DOUBLE_EQ(-4, variableMap.at("j").getDouble());
-    EXPECT_DOUBLE_EQ(-0.75, variableMap.at("k").getDouble());}
+    EXPECT_DOUBLE_EQ(-0.75, variableMap.at("k").getDouble());
+}
 
 TEST(MonomialTest, PuttingASetOfNewVariablesWithExponentUsingConstReferenceObjectWorks) {
     Monomial monomial;
@@ -336,7 +349,8 @@ TEST(MonomialTest, PuttingASetOfNewVariablesWithExponentUsingConstReferenceObjec
     Monomial::VariablesToExponentsMap const& variableMapToVerify(monomial.getVariablesToExponentsMap());
     ASSERT_EQ(2U, variableMapToVerify.size());
     EXPECT_DOUBLE_EQ(23, variableMapToVerify.at("x").getDouble());
-    EXPECT_DOUBLE_EQ(45, variableMapToVerify.at("y").getDouble());}
+    EXPECT_DOUBLE_EQ(45, variableMapToVerify.at("y").getDouble());
+}
 
 TEST(MonomialTest, PuttingVariableWithExponentWorks) {
     Monomial monomial;
@@ -347,6 +361,7 @@ TEST(MonomialTest, PuttingVariableWithExponentWorks) {
     ASSERT_EQ(1U, variableMapToVerify.size());
     EXPECT_DOUBLE_EQ(67, variableMapToVerify.at("a").getDouble());
 }
+
 TEST(MonomialTest, SetAsSimplifiedWorks) {
     Monomial monomial;
 

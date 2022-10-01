@@ -43,7 +43,8 @@ AlbaNumber getCoefficientOfMonomialWithNoVariables(Polynomial const& polynomial)
             coefficientValue = monomial.getCoefficient();
             break;
         }
-    }    return coefficientValue;
+    }
+    return coefficientValue;
 }
 
 AlbaNumber getCoefficientOfMonomialWithVariableOnly(Polynomial const& polynomial, string const& variableName) {
@@ -56,7 +57,8 @@ AlbaNumber getCoefficientOfMonomialWithVariableOnly(Polynomial const& polynomial
                 coefficientValue = monomial.getCoefficient();
                 break;
             }
-        }    }
+        }
+    }
     return coefficientValue;
 }
 
@@ -69,7 +71,8 @@ VariableToValueMap getCoefficientsForVariablesOnly(Polynomial const& polynomial)
             result.emplace(variableExponentPair.first, monomial.getCoefficient());
         }
     }
-    return result;}
+    return result;
+}
 
 void retrieveTermsFromTermsWithDetails(Terms& terms, TermsWithDetails const& termsWithDetails) {
     terms.reserve(terms.size() + termsWithDetails.size());
@@ -87,7 +90,8 @@ Terms retrieveSubExpressionsAndSubFunctions(Term const& term) {
     for (Term const& retrievedTerm : retriever.getExpressionsAndFunctions()) {
         if ((retrievedTerm.isFunction() || retrievedTerm.isExpression()) && term != retrievedTerm) {
             result.emplace_back(retrievedTerm);
-        }    }
+        }
+    }
     return result;
 }
 
@@ -98,7 +102,8 @@ Terms retrieveSubTerms(Term const& term) {
     for (Term const& retrievedTerm : retriever.getSubTerms()) {
         if (term != retrievedTerm) {
             result.emplace_back(retrievedTerm);
-        }    }
+        }
+    }
     return result;
 }
 

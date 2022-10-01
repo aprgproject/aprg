@@ -10,7 +10,8 @@ TEST(AlbaBitValueUtilitiesTest, IsPowerOfTwoWorks) {
     // NOTE: Zero is not really a power of two
     EXPECT_TRUE(AlbaBitValueUtilities<uint8_t>::isPowerOfTwo(0U));
     EXPECT_TRUE(AlbaBitValueUtilities<uint8_t>::isPowerOfTwo(1U));
-    EXPECT_TRUE(AlbaBitValueUtilities<uint8_t>::isPowerOfTwo(2U));    EXPECT_FALSE(AlbaBitValueUtilities<uint8_t>::isPowerOfTwo(3U));
+    EXPECT_TRUE(AlbaBitValueUtilities<uint8_t>::isPowerOfTwo(2U));
+    EXPECT_FALSE(AlbaBitValueUtilities<uint8_t>::isPowerOfTwo(3U));
     EXPECT_TRUE(AlbaBitValueUtilities<uint8_t>::isPowerOfTwo(4U));
     EXPECT_FALSE(AlbaBitValueUtilities<uint8_t>::isPowerOfTwo(5U));
     EXPECT_FALSE(AlbaBitValueUtilities<uint8_t>::isPowerOfTwo(6U));
@@ -124,7 +125,8 @@ TEST(AlbaBitValueUtilitiesTest, GetAlternatingOnesAndZerosFromLsbWorks) {
 
 TEST(AlbaBitValueUtilitiesTest, GetAbsoluteValueWorks) {
     // EXPECT_EQ(10, AlbaBitValueUtilities<uint8_t>::getAbsoluteValue(10)); // static assert should happen
-    EXPECT_EQ(10, AlbaBitValueUtilities<int8_t>::getAbsoluteValue(10));    EXPECT_EQ(0, AlbaBitValueUtilities<int8_t>::getAbsoluteValue(0));
+    EXPECT_EQ(10, AlbaBitValueUtilities<int8_t>::getAbsoluteValue(10));
+    EXPECT_EQ(0, AlbaBitValueUtilities<int8_t>::getAbsoluteValue(0));
     EXPECT_EQ(10, AlbaBitValueUtilities<int8_t>::getAbsoluteValue(-10));
 }
 
@@ -184,7 +186,8 @@ TEST(AlbaBitValueUtilitiesTest, MultiplyBySevenWorks) {
 
 TEST(AlbaBitValueUtilitiesTest, GetGreatestPowerOf2FactorWorks) {
     EXPECT_EQ(4U, AlbaBitValueUtilities<uint8_t>::getGreatestPowerOf2Factor(12U));
-    EXPECT_EQ(2U, AlbaBitValueUtilities<uint16_t>::getGreatestPowerOf2Factor(1234U));    EXPECT_EQ(64U, AlbaBitValueUtilities<uint32_t>::getGreatestPowerOf2Factor(123456U));
+    EXPECT_EQ(2U, AlbaBitValueUtilities<uint16_t>::getGreatestPowerOf2Factor(1234U));
+    EXPECT_EQ(64U, AlbaBitValueUtilities<uint32_t>::getGreatestPowerOf2Factor(123456U));
     EXPECT_EQ(2U, AlbaBitValueUtilities<uint64_t>::getGreatestPowerOf2Factor(12345678901234U));
 }
 
@@ -385,6 +388,7 @@ TEST(AlbaBitValueUtilitiesTest, GetTwoValuesInACycleWorks) {
     EXPECT_EQ(30U, AlbaBitValueUtilities<uint8_t>::getTwoValuesInACycle(5U, 5U, 30U));
     EXPECT_EQ(5U, AlbaBitValueUtilities<uint8_t>::getTwoValuesInACycle(30U, 5U, 30U));
 }
+
 TEST(AlbaBitValueUtilitiesTest, SwapWorks) {
     uint8_t value1 = 0xA1U;
     uint8_t value2 = 0xBAU;

@@ -14,7 +14,8 @@ public:
 
     virtual void retrieveFromEquations(Equations const& equations) {
         for (Equation const& equation : equations) {
-            retrieveFromEquation(equation);        }
+            retrieveFromEquation(equation);
+        }
     }
 
     virtual void retrieveFromEquation(Equation const& equation) {
@@ -37,6 +38,7 @@ public:
             retrieveFromFunction(term.getAsFunction());
         }
     }
+
     virtual void retrieveFromConstant(Constant const&) {}
 
     virtual void retrieveFromVariable(Variable const&) {}
@@ -48,6 +50,7 @@ public:
             retrieveFromMonomial(monomial);
         }
     }
+
     virtual void retrieveFromExpression(Expression const& expression) {
         for (TermWithDetails const& termWithDetails : expression.getTermsWithAssociation().getTermsWithDetails()) {
             retrieveFromTerm(getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer));
@@ -58,7 +61,8 @@ public:
         retrieveFromTerm(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
     }
 
-    virtual void retrieveFromPolynomials(Polynomials const& polynomials) {        for (Polynomial const& polynomial : polynomials) {
+    virtual void retrieveFromPolynomials(Polynomials const& polynomials) {
+        for (Polynomial const& polynomial : polynomials) {
             retrieveFromPolynomial(polynomial);
         }
     }
@@ -77,4 +81,5 @@ public:
 };
 
 }  // namespace algebra
+
 }  // namespace alba

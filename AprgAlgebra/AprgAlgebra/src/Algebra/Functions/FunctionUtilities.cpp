@@ -50,7 +50,8 @@ AlbaNumberPairs evaluateAndGetInputOutputPair(
             result.emplace_back(number, substituteTerm.getAsNumber());
         }
     }
-    return result;}
+    return result;
+}
 
 Term getNaturalLogarithmOfTheAbsoluteValueOfTerm(Term const& term) { return ln(abs(term)); }
 

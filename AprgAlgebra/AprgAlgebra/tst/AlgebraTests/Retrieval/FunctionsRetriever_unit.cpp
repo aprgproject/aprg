@@ -17,6 +17,7 @@ TEST(FunctionsRetrieverTest, RetrieveFromEquationsWorks) {
     FunctionsSet const& functionsSet(retriever.getFunctions());
     EXPECT_TRUE(functionsSet.empty());
 }
+
 TEST(FunctionsRetrieverTest, RetrieveFromEquationWorks) {
     FunctionsRetriever::FunctionCondition conditionThatWillMatch = [](Function const& functionObject) {
         return functionObject.getFunctionName() == "functionName";
@@ -40,7 +41,8 @@ TEST(FunctionsRetrieverTest, RetrieveFromEquationWorks) {
     FunctionsSet const& functionsSets2(retriever2.getFunctions());
     ASSERT_EQ(1U, functionsSets1.size());
     EXPECT_EQ(functionObject, *(functionsSets1.begin()));
-    EXPECT_TRUE(functionsSets2.empty());}
+    EXPECT_TRUE(functionsSets2.empty());
+}
 
 TEST(FunctionsRetrieverTest, RetrieveFromTermWorks) {
     FunctionsRetriever::FunctionCondition conditionThatWillMatch = [](Function const& functionObject) {
@@ -78,7 +80,8 @@ TEST(FunctionsRetrieverTest, RetrieveFromTermWorks) {
     FunctionsSet const& functionsSets6(retriever6.getFunctions());
     EXPECT_TRUE(functionsSets1.empty());
     EXPECT_TRUE(functionsSets2.empty());
-    ASSERT_EQ(1U, functionsSets3.size());    EXPECT_EQ(functionObject, *(functionsSets3.begin()));
+    ASSERT_EQ(1U, functionsSets3.size());
+    EXPECT_EQ(functionObject, *(functionsSets3.begin()));
     EXPECT_TRUE(functionsSets4.empty());
     ASSERT_EQ(1U, functionsSets5.size());
     EXPECT_EQ(functionObject, *(functionsSets5.begin()));
@@ -93,6 +96,7 @@ TEST(FunctionsRetrieverTest, RetrieveFromConstantWorks) {
     FunctionsSet const& functionsSet(retriever.getFunctions());
     EXPECT_TRUE(functionsSet.empty());
 }
+
 TEST(FunctionsRetrieverTest, RetrieveFromVariableWorks) {
     FunctionsRetriever retriever([](Function const&) { return false; });
 
@@ -101,6 +105,7 @@ TEST(FunctionsRetrieverTest, RetrieveFromVariableWorks) {
     FunctionsSet const& functionsSet(retriever.getFunctions());
     EXPECT_TRUE(functionsSet.empty());
 }
+
 TEST(FunctionsRetrieverTest, RetrieveFromMonomialWorks) {
     FunctionsRetriever retriever([](Function const&) { return false; });
 
@@ -109,6 +114,7 @@ TEST(FunctionsRetrieverTest, RetrieveFromMonomialWorks) {
     FunctionsSet const& functionsSet(retriever.getFunctions());
     EXPECT_TRUE(functionsSet.empty());
 }
+
 TEST(FunctionsRetrieverTest, RetrieveFromPolynomialWorks) {
     FunctionsRetriever retriever([](Function const&) { return false; });
 
@@ -117,6 +123,7 @@ TEST(FunctionsRetrieverTest, RetrieveFromPolynomialWorks) {
     FunctionsSet const& functionsSet(retriever.getFunctions());
     EXPECT_TRUE(functionsSet.empty());
 }
+
 TEST(FunctionsRetrieverTest, RetrieveFromExpressionWorks) {
     FunctionsRetriever::FunctionCondition conditionThatWillMatch = [](Function const& functionObject) {
         return functionObject.getFunctionName() == "functionName";
@@ -138,7 +145,8 @@ TEST(FunctionsRetrieverTest, RetrieveFromExpressionWorks) {
     FunctionsSet const& functionsSets2(retriever2.getFunctions());
     ASSERT_EQ(1U, functionsSets1.size());
     EXPECT_EQ(functionObject, *(functionsSets1.begin()));
-    EXPECT_TRUE(functionsSets2.empty());}
+    EXPECT_TRUE(functionsSets2.empty());
+}
 
 TEST(FunctionsRetrieverTest, RetrieveFromFunctionWorks) {
     FunctionsRetriever::FunctionCondition conditionThatWillMatch = [](Function const& functionObject) {
@@ -160,7 +168,8 @@ TEST(FunctionsRetrieverTest, RetrieveFromFunctionWorks) {
     FunctionsSet const& functionsSets2(retriever2.getFunctions());
     ASSERT_EQ(1U, functionsSets1.size());
     EXPECT_EQ(functionObject, *(functionsSets1.begin()));
-    EXPECT_TRUE(functionsSets2.empty());}
+    EXPECT_TRUE(functionsSets2.empty());
+}
 
 TEST(FunctionsRetrieverTest, RetrieveFromPolynomialsWorks) {
     FunctionsRetriever retriever([](Function const&) { return false; });
@@ -173,6 +182,7 @@ TEST(FunctionsRetrieverTest, RetrieveFromPolynomialsWorks) {
     FunctionsSet const& functionsSet(retriever.getFunctions());
     EXPECT_TRUE(functionsSet.empty());
 }
+
 }  // namespace algebra
 
 }  // namespace alba

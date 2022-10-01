@@ -6,7 +6,8 @@
 #include <Algebra/Retrieval/SingleVariableNameRetriever.hpp>
 #include <Algebra/Simplification/SimplificationUtilities.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
-#include <Algebra/Term/Operators/TermOperators.hpp>#include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
+#include <Algebra/Term/Operators/TermOperators.hpp>
+#include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
 #include <Algebra/Term/Utilities/RetrieveHelpers.hpp>
 #include <Algebra/Term/Utilities/TermUtilities.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
@@ -55,6 +56,7 @@ bool hasHorizontalAsymptoteAtValue(Term const& term, string const& variableName,
     }
     return result;
 }
+
 bool isSqueezeTheoremSatisfied(
     Term const& alwaysLowerTermAtInterval, Term const& termInBetweenAtInterval, Term const& alwaysHigherTermAtInterval,
     string const& variableName, AlbaNumber const& valueToApproach) {
@@ -139,7 +141,8 @@ AlbaNumber getLimitAtAValueByIterationAndLinearInterpolation(
             AlbaNumber currentOutputNumber(currentOutputTerm.getAsNumber());
             if (!currentOutputNumber.isARealFiniteValue()) {
                 previousRejectedInput = currentInput;
-            } else {                previousOfPreviousAcceptedInput = previousAcceptedInput;
+            } else {
+                previousOfPreviousAcceptedInput = previousAcceptedInput;
                 previousAcceptedInput = currentInput;
             }
             AlbaNumber newInput(getAverage(previousAcceptedInput, previousRejectedInput));
@@ -180,7 +183,8 @@ AlbaNumber getLimitAtAValueUsingTrendOfValues(
         AlbaNumber previousOfPreviousAcceptedOutput(previousOfPreviousAcceptedOutputTerm.getAsNumber());
         if (outputAtValueToApproach.isPositiveOrNegativeInfinity()) {
             result = (previousAcceptedOutput < 0) ? ALBA_NUMBER_NEGATIVE_INFINITY : ALBA_NUMBER_POSITIVE_INFINITY;
-        } else {            result = getValueUsingLinearInterpolation(
+        } else {
+            result = getValueUsingLinearInterpolation(
                 previousOfPreviousAcceptedInput, previousAcceptedInput, valueToApproach,
                 previousOfPreviousAcceptedOutput, previousAcceptedOutput);
         }
@@ -290,7 +294,8 @@ Term getLimitAtAValue(
         AlbaNumber limitResultNumber(limitResult.getAsNumber());
         if (!limitResultNumber.isARealFiniteValue() || hasAnyFunctions(term)) {
             limitResult = Term(getLimitAtAValueByApproachType(term, variableName, valueToApproach, limitApproachType));
-        }    }
+        }
+    }
     return limitResult;
 }
 
@@ -324,7 +329,8 @@ Term getObliqueAsymptote(Term const& term) {
             if (hasOnlyASingleVariable(quotient) && AlbaNumber(1) == getMaxDegree(quotient)) {
                 result = Term(quotient);
             }
-        }    }
+        }
+    }
     return result;
 }
 

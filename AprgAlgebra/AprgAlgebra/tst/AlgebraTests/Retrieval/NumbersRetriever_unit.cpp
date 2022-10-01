@@ -17,7 +17,8 @@ TEST(NumbersRetrieverTest, RetrieveFromEquationsWorks) {
     AlbaNumbersSet const& numbersSet(retriever.getNumbers());
     ASSERT_EQ(8U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(5), *(it++));    EXPECT_EQ(AlbaNumber(6), *(it++));
+    EXPECT_EQ(AlbaNumber(5), *(it++));
+    EXPECT_EQ(AlbaNumber(6), *(it++));
     EXPECT_EQ(AlbaNumber(7), *(it++));
     EXPECT_EQ(AlbaNumber(8), *(it++));
     EXPECT_EQ(AlbaNumber(18), *(it++));
@@ -37,7 +38,8 @@ TEST(NumbersRetrieverTest, RetrieveFromEquationWorks) {
     AlbaNumbersSet const& numbersSet(retriever.getNumbers());
     ASSERT_EQ(4U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(5), *(it++));    EXPECT_EQ(AlbaNumber(6), *(it++));
+    EXPECT_EQ(AlbaNumber(5), *(it++));
+    EXPECT_EQ(AlbaNumber(6), *(it++));
     EXPECT_EQ(AlbaNumber(34), *(it++));
     EXPECT_EQ(AlbaNumber(41), *(it++));
 }
@@ -58,7 +60,8 @@ TEST(NumbersRetrieverTest, RetrieveFromTermWorks) {
     AlbaNumbersSet const& numbersSet(retriever.getNumbers());
     ASSERT_EQ(13U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(1), *(it++));    EXPECT_EQ(AlbaNumber(1.234), *(it++));
+    EXPECT_EQ(AlbaNumber(1), *(it++));
+    EXPECT_EQ(AlbaNumber(1.234), *(it++));
     EXPECT_EQ(AlbaNumber(2), *(it++));
     EXPECT_EQ(AlbaNumber(5), *(it++));
     EXPECT_EQ(AlbaNumber(6), *(it++));
@@ -80,7 +83,8 @@ TEST(NumbersRetrieverTest, RetrieveFromConstantWorks) {
     AlbaNumbersSet const& numbersSet(retriever.getNumbers());
     ASSERT_EQ(1U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(1.234), *(it++));}
+    EXPECT_EQ(AlbaNumber(1.234), *(it++));
+}
 
 TEST(NumbersRetrieverTest, RetrieveFromVariableWorks) {
     NumbersRetriever retriever;
@@ -90,7 +94,8 @@ TEST(NumbersRetrieverTest, RetrieveFromVariableWorks) {
     AlbaNumbersSet const& numbersSet(retriever.getNumbers());
     ASSERT_EQ(1U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(1), *(it++));}
+    EXPECT_EQ(AlbaNumber(1), *(it++));
+}
 
 TEST(NumbersRetrieverTest, RetrieveFromMonomialWorks) {
     NumbersRetriever retriever;
@@ -100,7 +105,8 @@ TEST(NumbersRetrieverTest, RetrieveFromMonomialWorks) {
     AlbaNumbersSet const& numbersSet(retriever.getNumbers());
     ASSERT_EQ(3U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(5), *(it++));    EXPECT_EQ(AlbaNumber(6), *(it++));
+    EXPECT_EQ(AlbaNumber(5), *(it++));
+    EXPECT_EQ(AlbaNumber(6), *(it++));
     EXPECT_EQ(AlbaNumber(34), *(it++));
 }
 
@@ -112,7 +118,8 @@ TEST(NumbersRetrieverTest, RetrieveFromPolynomialWorks) {
     AlbaNumbersSet const& numbersSet(retriever.getNumbers());
     ASSERT_EQ(4U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(7), *(it++));    EXPECT_EQ(AlbaNumber(8), *(it++));
+    EXPECT_EQ(AlbaNumber(7), *(it++));
+    EXPECT_EQ(AlbaNumber(8), *(it++));
     EXPECT_EQ(AlbaNumber(516), *(it++));
     EXPECT_EQ(AlbaNumber(643), *(it++));
 }
@@ -125,7 +132,8 @@ TEST(NumbersRetrieverTest, RetrieveFromExpressionWorks) {
     AlbaNumbersSet const& numbersSet(retriever.getNumbers());
     ASSERT_EQ(3U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(9), *(it++));    EXPECT_EQ(AlbaNumber(576), *(it++));
+    EXPECT_EQ(AlbaNumber(9), *(it++));
+    EXPECT_EQ(AlbaNumber(576), *(it++));
     EXPECT_EQ(AlbaNumber(678), *(it++));
 }
 
@@ -140,7 +148,8 @@ TEST(NumbersRetrieverTest, RetrieveFromFunctionWorks) {
     AlbaNumbersSet const& numbersSet(retriever.getNumbers());
     ASSERT_EQ(3U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(10), *(it++));    EXPECT_EQ(AlbaNumber(4516), *(it++));
+    EXPECT_EQ(AlbaNumber(10), *(it++));
+    EXPECT_EQ(AlbaNumber(4516), *(it++));
     EXPECT_EQ(AlbaNumber(7895), *(it++));
 }
 
@@ -155,7 +164,8 @@ TEST(NumbersRetrieverTest, RetrieveFromPolynomialsWorks) {
     AlbaNumbersSet const& numbersSet(retriever.getNumbers());
     ASSERT_EQ(8U, numbersSet.size());
     AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(7), *(it++));    EXPECT_EQ(AlbaNumber(8), *(it++));
+    EXPECT_EQ(AlbaNumber(7), *(it++));
+    EXPECT_EQ(AlbaNumber(8), *(it++));
     EXPECT_EQ(AlbaNumber(9), *(it++));
     EXPECT_EQ(AlbaNumber(10), *(it++));
     EXPECT_EQ(AlbaNumber(516), *(it++));

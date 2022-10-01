@@ -285,7 +285,8 @@ TEST(MonomialHelpersTest, CompareMonomialsAndSaveMinimumExponentsForEachVariable
         monomialToVerify.getVariablesToExponentsMap());
     ASSERT_EQ(4U, variableMapToVerify.size());
     EXPECT_DOUBLE_EQ(-5, variableMapToVerify.at("a").getDouble());
-    EXPECT_DOUBLE_EQ(-5, variableMapToVerify.at("b").getDouble());    EXPECT_DOUBLE_EQ(3, variableMapToVerify.at("x").getDouble());
+    EXPECT_DOUBLE_EQ(-5, variableMapToVerify.at("b").getDouble());
+    EXPECT_DOUBLE_EQ(3, variableMapToVerify.at("x").getDouble());
     EXPECT_DOUBLE_EQ(2, variableMapToVerify.at("y").getDouble());
 }
 
@@ -300,7 +301,8 @@ TEST(MonomialHelpersTest, CompareMonomialsAndSaveMaximumExponentsForEachVariable
         monomialToVerify.getVariablesToExponentsMap());
     ASSERT_EQ(4U, variableMapToVerify.size());
     EXPECT_DOUBLE_EQ(10, variableMapToVerify.at("a").getDouble());
-    EXPECT_DOUBLE_EQ(10, variableMapToVerify.at("b").getDouble());    EXPECT_DOUBLE_EQ(5, variableMapToVerify.at("x").getDouble());
+    EXPECT_DOUBLE_EQ(10, variableMapToVerify.at("b").getDouble());
+    EXPECT_DOUBLE_EQ(5, variableMapToVerify.at("x").getDouble());
     EXPECT_DOUBLE_EQ(4, variableMapToVerify.at("y").getDouble());
 }
 

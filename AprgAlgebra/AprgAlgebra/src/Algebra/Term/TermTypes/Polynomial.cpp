@@ -64,7 +64,8 @@ bool Polynomial::isSimplified() const { return m_isSimplified; }
 Monomials const& Polynomial::getMonomials() const { return m_monomials; }
 
 Monomials& Polynomial::getMonomialsReference() {
-    clearSimplifiedFlag();    return m_monomials;
+    clearSimplifiedFlag();
+    return m_monomials;
 }
 
 void Polynomial::clear() {
@@ -99,7 +100,8 @@ void Polynomial::addMonomial(Monomial const& monomial) {
                 monomialInternal.getCoefficient() + monomial.getCoefficient());
         }
     }
-    if (!isFoundInPolynomial) {        m_monomials.emplace_back(monomial);
+    if (!isFoundInPolynomial) {
+        m_monomials.emplace_back(monomial);
     }
     clearSimplifiedFlag();
 }
@@ -108,7 +110,8 @@ void Polynomial::addPolynomial(Polynomial const& polynomial) {
     for (Monomial const& monomial : polynomial.getMonomials()) {
         addMonomial(monomial);
     }
-    clearSimplifiedFlag();}
+    clearSimplifiedFlag();
+}
 
 void Polynomial::multiplyNumber(AlbaNumber const& number) {
     for (Monomial& monomial : m_monomials) {
@@ -123,6 +126,7 @@ void Polynomial::divideNumber(AlbaNumber const& number) {
     }
     clearSimplifiedFlag();
 }
+
 void Polynomial::multiplyMonomial(Monomial const& monomial) {
     for (Monomial& monomialInternal : m_monomials) {
         monomialInternal.multiplyMonomial(monomial);
@@ -136,7 +140,8 @@ void Polynomial::multiplyPolynomial(Polynomial const& polynomial) {
     for (Monomial const& monomial2 : polynomial.getMonomials()) {
         for (Monomial const& monomial1 : monomialsCopy) {
             Monomial newMonomial(monomial1);
-            newMonomial.multiplyMonomial(monomial2);            addMonomial(newMonomial);
+            newMonomial.multiplyMonomial(monomial2);
+            addMonomial(newMonomial);
         }
     }
     clearSimplifiedFlag();

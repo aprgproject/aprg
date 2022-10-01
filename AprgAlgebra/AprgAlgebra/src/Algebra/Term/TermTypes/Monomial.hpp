@@ -41,7 +41,8 @@ public:
     VariablesToExponentsMap const& getVariablesToExponentsMap() const;
     AlbaNumber getExponentForVariable(std::string const& variableName) const;
 
-    void clear();    void simplify();
+    void clear();
+    void simplify();
     void setConstant(AlbaNumber const& constant);
     void multiplyNumber(AlbaNumber const& number);
     void divideNumber(AlbaNumber const& number);

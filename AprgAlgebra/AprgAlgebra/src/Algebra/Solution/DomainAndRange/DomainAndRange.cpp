@@ -3,7 +3,8 @@
 #include <Algebra/Retrieval/SingleVariableNameRetriever.hpp>
 #include <Algebra/Retrieval/VariableNamesRetriever.hpp>
 #include <Algebra/Solution/SolutionUtilities.hpp>
-#include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableEqualitySolver.hpp>#include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
+#include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableEqualitySolver.hpp>
+#include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 #include <Common/Math/Helpers/ComputationHelpers.hpp>
 #include <Common/Math/Number/AlbaNumberConstants.hpp>
 #include <Common/Math/Number/Interval/AlbaNumberIntervalHelpers.hpp>
@@ -53,7 +54,8 @@ SolutionSet calculateDomainForTermWithOneVariable(AlbaNumbers const& valuesToChe
                 computedValue = computedTerm.getAsNumber();
             }
             return computedValue;
-        });    }
+        });
+    }
     return domain;
 }
 
@@ -69,7 +71,8 @@ SolutionSet calculateDomainForEquation(
     VariableNamesSet const& variableNames(variableNamesRetriever.getVariableNames());
     string inputName, outputName;
     retrieveTwoVariableNames(inputName, outputName, variableNames, variableNameToCheck);
-    if (!inputName.empty() && !outputName.empty()) {        domain = calculateDomainForEquationWithVariableToSubstitute(inputName, valuesToCheck, equation);
+    if (!inputName.empty() && !outputName.empty()) {
+        domain = calculateDomainForEquationWithVariableToSubstitute(inputName, valuesToCheck, equation);
     }
     return domain;
 }
@@ -86,7 +89,8 @@ SolutionSet calculateRangeForEquation(
     VariableNamesSet const& variableNames(variableNamesRetriever.getVariableNames());
     string inputName, outputName;
     retrieveTwoVariableNames(inputName, outputName, variableNames, variableNameToCheck);
-    if (!inputName.empty() && !outputName.empty()) {        domain = calculateDomainForEquationWithVariableToSubstitute(outputName, valuesToCheck, equation);
+    if (!inputName.empty() && !outputName.empty()) {
+        domain = calculateDomainForEquationWithVariableToSubstitute(outputName, valuesToCheck, equation);
     }
     return domain;
 }

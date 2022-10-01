@@ -22,7 +22,8 @@ TEST(ConstantTest, ConstantsAreConstructedCorrectly) {
     EXPECT_DOUBLE_EQ(-85.45631, constant5.getNumber().getDouble());
 }
 
-TEST(ConstantTest, EqualityOperatorWorks) {    Constant constant1;
+TEST(ConstantTest, EqualityOperatorWorks) {
+    Constant constant1;
     Constant constant2(3484);
     Constant constant3(-1561);
     Constant constant4(3484);
@@ -62,7 +63,8 @@ TEST(ConstantTest, SettingANewNumberWorks) {
     EXPECT_DOUBLE_EQ(4521, constant.getNumber().getDouble());
 }
 
-TEST(ConstantTest, OutputStreamOperatorWorks) {    stringstream ss;
+TEST(ConstantTest, OutputStreamOperatorWorks) {
+    stringstream ss;
     Constant constant1;
     Constant constant2(3484);
     Constant constant3(-1561);

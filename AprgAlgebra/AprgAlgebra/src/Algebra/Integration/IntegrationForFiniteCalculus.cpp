@@ -90,7 +90,8 @@ Monomial IntegrationForFiniteCalculus::integrateConstant(Constant const& constan
     return Monomial(constant.getNumber(), {{m_nameOfVariableToIntegrate, 1}});
 }
 
-Polynomial IntegrationForFiniteCalculus::integrateVariable(Variable const& variable) const {    Polynomial result;
+Polynomial IntegrationForFiniteCalculus::integrateVariable(Variable const& variable) const {
+    Polynomial result;
     string const& nameOfVariable(variable.getVariableName());
     if (isVariableToIntegrate(nameOfVariable)) {
         result = Polynomial{
@@ -150,7 +151,8 @@ Term IntegrationForFiniteCalculus::integratePolynomial(Polynomial const& polynom
     auto const& monomials(polynomial.getMonomials());
     if (!monomials.empty()) {
         result = integrateMonomial(monomials.front());
-        for (auto it = monomials.cbegin() + 1; it != monomials.cend(); it++) {            result = result + integrateMonomial(*it);
+        for (auto it = monomials.cbegin() + 1; it != monomials.cend(); it++) {
+            result = result + integrateMonomial(*it);
         }
         result.simplify();
     }
@@ -169,7 +171,8 @@ Monomial IntegrationForFiniteCalculus::integrateMonomialInFallingPower(Monomial 
     for (auto const& variableExponentPair : monomial.getVariablesToExponentsMap()) {
         string const& variableName(variableExponentPair.first);
         AlbaNumber const& exponent(variableExponentPair.second);
-        if (isVariableToIntegrate(variableName)) {            result.putVariableWithExponent(variableName, exponent + 1);
+        if (isVariableToIntegrate(variableName)) {
+            result.putVariableWithExponent(variableName, exponent + 1);
             result.divideNumber(exponent + 1);
             hasVariabletoIntegrate = true;
         }
@@ -186,7 +189,8 @@ Polynomial IntegrationForFiniteCalculus::integratePolynomialInFallingPower(Polyn
     for (Monomial const& monomial : polynomial.getMonomials()) {
         result.addMonomial(integrateMonomialInFallingPower(monomial));
     }
-    result.simplify();    return result;
+    result.simplify();
+    return result;
 }
 
 Polynomial IntegrationForFiniteCalculus::convertMonomialWithPositiveExponentsFromRegularPowerToFallingPower(
@@ -232,7 +236,8 @@ Polynomial IntegrationForFiniteCalculus::convertPolynomialWithPositiveExponentsF
     for (Monomial const& monomial : polynomial.getMonomials()) {
         result.addPolynomial(convertMonomialWithPositiveExponentsFromRegularPowerToFallingPower(monomial));
     }
-    result.simplify();    return result;
+    result.simplify();
+    return result;
 }
 
 Polynomial IntegrationForFiniteCalculus::convertPolynomialWithPositiveExponentsFromFallingPowerToRegularPower(
@@ -241,7 +246,8 @@ Polynomial IntegrationForFiniteCalculus::convertPolynomialWithPositiveExponentsF
     for (Monomial const& monomial : polynomial.getMonomials()) {
         result.addPolynomial(convertMonomialWithPositiveExponentsFromFallingPowerToRegularPower(monomial));
     }
-    result.simplify();    return result;
+    result.simplify();
+    return result;
 }
 
 Term IntegrationForFiniteCalculus::integrateAsTermOrExpressionIfNeeded(Expression const& expression) const {
@@ -252,7 +258,8 @@ Term IntegrationForFiniteCalculus::integrateAsTermOrExpressionIfNeeded(Expressio
         result = integrateSimplifiedExpressionOnly(simplifiedTerm.getAsExpression());
     } else {
         result = integrate(simplifiedTerm);
-    }    return result;
+    }
+    return result;
 }
 
 Term IntegrationForFiniteCalculus::integrateSimplifiedExpressionOnly(Expression const& expression) const {
@@ -395,7 +402,8 @@ bool IntegrationForFiniteCalculus::isChangingTerm(Term const& term) const {
     VariableNamesSet const& variableNames(retriever.getVariableNames());
     return any_of(variableNames.cbegin(), variableNames.cend(), [&](string const& variableName) {
         return isVariableToIntegrate(variableName);
-    });}
+    });
+}
 
 }  // namespace algebra
 

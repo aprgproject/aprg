@@ -64,7 +64,8 @@ TEST(BaseTermHelpersTest, GetTermReferenceFromUniquePointerWorks) {
     termToChange.getAsConstantReference().setNumber(763);
 
     Term const& termToVerify(getTermConstReferenceFromUniquePointer(uniquePointer));
-    EXPECT_EQ(Term(763), termToVerify);}
+    EXPECT_EQ(Term(763), termToVerify);
+}
 
 TEST(BaseTermHelpersTest, GetBaseTermConstReferenceFromTermWorks) {
     Term originalTerm(7896);

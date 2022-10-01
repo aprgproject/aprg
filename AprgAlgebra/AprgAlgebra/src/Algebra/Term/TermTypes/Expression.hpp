@@ -34,6 +34,7 @@ public:
     TermAssociationType getFirstAssociationType() const;
     TermsWithAssociation const& getTermsWithAssociation() const;
     std::string getDebugString() const;
+
     TermsWithAssociation& getTermsWithAssociationReference();
 
     void clear();

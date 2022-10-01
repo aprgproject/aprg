@@ -30,6 +30,7 @@ bool ProofByInduction::isCorrectOnASpecificValue(AlbaNumber const& value) const 
     }
     return valueFromManual == valueFromGuess;
 }
+
 bool ProofByInduction::isCorrectOnInductionStep() const {
     SubstitutionOfVariablesToTerms substitutionForNextStep{
         {m_variableName, Polynomial{Monomial(1, {{m_variableName, 1}}), Monomial(1, {})}}};

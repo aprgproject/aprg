@@ -5,6 +5,7 @@
 #include <Common/Types/AlbaTypeHelper.hpp>
 
 namespace alba::mathHelper {
+
 template <typename NumberType>
 inline bool isDivisible(NumberType const dividend, NumberType const divisor) {
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
@@ -42,7 +43,8 @@ inline bool isDivisibleByNine(NumberType const number) {
 
 }  // namespace alba::mathHelper
 
-// Even or odd discussion:// -> Bitwise operators might be better because almost all processors supports bitwise operations to take one
+// Even or odd discussion:
+// -> Bitwise operators might be better because almost all processors supports bitwise operations to take one
 // instruction.
 // -> But it will not work for negative numbers:
 // -> The C standard stipulates that negative numbers can be represented in 3 ways:

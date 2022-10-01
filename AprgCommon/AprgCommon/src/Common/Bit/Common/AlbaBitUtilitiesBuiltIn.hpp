@@ -23,7 +23,8 @@ INLINE_WITHOUT_BUILT_IN namespace BitUtilitiesWithoutBuiltIn {
             if (temporary & 1) {
                 ++result;
             }
-        }        return result;
+        }
+        return result;
     }
     template <typename DataType>
     constexpr inline bool isEvenParity(DataType const value) {

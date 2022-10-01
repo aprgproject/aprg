@@ -4,6 +4,7 @@
 #include <Algebra/Retrieval/SingleVariableNameRetriever.hpp>
 #include <Algebra/Retrieval/VariableNamesRetriever.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
+
 #include <algorithm>
 
 using namespace std;
@@ -19,7 +20,8 @@ void reduceEquationsBySubstitution(Equations& substitutedEquations, VariableName
     while (areVariableAndEquationSelected && unknownsRetriever.getVariableNames().size() > 1) {
         areVariableAndEquationSelected = false;
         string selectedVariableName;
-        int selectedEquationIndex(0);        selectVariableNameAndEquationNumber(
+        int selectedEquationIndex(0);
+        selectVariableNameAndEquationNumber(
             areVariableAndEquationSelected, selectedVariableName, selectedEquationIndex, substitutedEquations,
             variableNamesToIgnore);
         substituteEquationForSelectedEquationIndex(
@@ -29,6 +31,7 @@ void reduceEquationsBySubstitution(Equations& substitutedEquations, VariableName
         unknownsRetriever.retrieveFromEquations(substitutedEquations);
     }
 }
+
 void selectVariableNameAndEquationNumber(
     bool& areVariableAndEquationSelected, string& selectedVariableName, int& selectedEquationIndex,
     Equations const& equations, VariableNamesSet const& variableNamesToIgnore) {
@@ -81,7 +84,8 @@ VariableNamesSet getVariablesNamesToCheck(Equations const& equations, VariableNa
     VariableNamesSet variableNamesToCheck(variableNamesRetriever.getVariableNames());
     for (string const& variableNameToIgnore : variableNamesToIgnore) {
         variableNamesToCheck.erase(variableNameToIgnore);
-    }    return variableNamesToCheck;
+    }
+    return variableNamesToCheck;
 }
 
 }  // namespace algebra

@@ -9,7 +9,8 @@ namespace alba {
 class IsPartialSumPossibleInZeroOneKnapsack {
 public:
     using Index = int;
-    using Value = int;    enum class State { Unused, False, True };
+    using Value = int;
+    enum class State { Unused, False, True };
     using Values = std::vector<Value>;
     using Booleans = std::vector<bool>;
     using BooleanMatrix = matrix::AlbaMatrix<bool>;
@@ -18,7 +19,8 @@ public:
     IsPartialSumPossibleInZeroOneKnapsack(Value const targetSum, Values const& values);
 
     bool isPartialSumPossibleUsingNaiveRecursion() const;
-    bool isPartialSumPossibleUsingMemoizationDP() const;    bool isPartialSumPossibleUsingIterativeDP() const;
+    bool isPartialSumPossibleUsingMemoizationDP() const;
+    bool isPartialSumPossibleUsingIterativeDP() const;
     bool isPartialSumPossibleUsingIterativeDPAndSpaceEfficient() const;
 
 private:
@@ -36,7 +38,8 @@ private:
 
 // APPROACH:
 // 1) Naive Recursion / Dynamic Programming by Memoization:
-// -> Each "partialSum" and "value index" has a boolean "isPartialSum" possible// -> Start recursion at the "targetSum" and value index as 0.
+// -> Each "partialSum" and "value index" has a boolean "isPartialSum" possible
+// -> Start recursion at the "targetSum" and value index as 0.
 // -> Each "isPartialSum" (with inputs "partialSum" and "value index") can be computed by:
 // ---> If "partialSum" == value at "value index":
 // -----> Return true

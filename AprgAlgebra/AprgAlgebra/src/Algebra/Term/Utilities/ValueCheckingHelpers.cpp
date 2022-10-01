@@ -54,7 +54,8 @@ bool isValueSatisfyTheCondition(Monomial const& monomial, NumberCheckingConditio
     return isConstantOnly(monomial) && isValueSatisfyTheCondition(monomial.getCoefficient(), condition);
 }
 
-bool isValueSatisfyTheCondition(Polynomial const& polynomial, NumberCheckingCondition const& condition) {    return isOneMonomial(polynomial) && isValueSatisfyTheCondition(getFirstMonomial(polynomial), condition);
+bool isValueSatisfyTheCondition(Polynomial const& polynomial, NumberCheckingCondition const& condition) {
+    return isOneMonomial(polynomial) && isValueSatisfyTheCondition(getFirstMonomial(polynomial), condition);
 }
 
 bool isValueSatisfyTheCondition(Expression const& expression, NumberCheckingCondition const& condition) {
@@ -90,7 +91,8 @@ bool doAnyNumbersSatisfyTheCondition(Monomial const& monomial, NumberCheckingCon
             monomial.getVariablesToExponentsMap());
         result = any_of(
             variableExponentMap.cbegin(), variableExponentMap.cend(),
-            [&](auto const& variableExponentsPair) { return condition(variableExponentsPair.second); });    }
+            [&](auto const& variableExponentsPair) { return condition(variableExponentsPair.second); });
+    }
     return result;
 }
 
@@ -98,7 +100,8 @@ bool doAnyNumbersSatisfyTheCondition(Polynomial const& polynomial, NumberCheckin
     Monomials const& monomials(polynomial.getMonomials());
     return any_of(monomials.cbegin(), monomials.cend(), [&](Monomial const& monomial) {
         return doAnyNumbersSatisfyTheCondition(monomial, condition);
-    });}
+    });
+}
 
 bool doAnyNumbersSatisfyTheCondition(Expression const& expression, NumberCheckingCondition const& condition) {
     TermsWithDetails const& termsWithDetails(expression.getTermsWithAssociation().getTermsWithDetails());
@@ -113,13 +116,15 @@ bool doAnyNumbersSatisfyTheCondition(Function const& function, NumberCheckingCon
 }
 
 bool willHaveNoEffectOnAdditionOrSubtraction(Term const& term) { return term.isEmpty() || isTheValue(term, 0); }
+
 bool willHaveNoEffectOnAdditionOrSubtraction(Expression const& expression) {
     return expression.isEmpty() || (expression.containsOnlyOnePositivelyAssociatedTerm() &&
                                     willHaveNoEffectOnAdditionOrSubtraction(
                                         getTermConstReferenceFromBaseTerm(expression.getFirstTerm())));
 }
 
-bool willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(Term const& term) {    return term.isEmpty() || isTheValue(term, 1);
+bool willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(Term const& term) {
+    return term.isEmpty() || isTheValue(term, 1);
 }
 
 bool willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(Expression const& expression) {
@@ -155,6 +160,7 @@ bool isTheValue(Monomial const& monomial, AlbaNumber const& number) {
     }
     return result;
 }
+
 bool isTheValue(Polynomial const& polynomial, AlbaNumber const& number) {
     bool result(false);
     if (number == 0) {
@@ -230,6 +236,7 @@ bool isANegativePolynomial(Polynomial const& polynomial) {
     }
     return result;
 }
+
 bool isANegativeExpression(Expression const& expression) {
     bool result(false);
     TermsWithDetails termsWithDetails(expression.getTermsWithAssociation().getTermsWithDetails());
@@ -267,6 +274,7 @@ bool isARealFiniteConstant(Term const& term) {
     }
     return result;
 }
+
 bool hasDoubleValues(Term const& term) { return doAnyNumbersSatisfyTheCondition(term, IsDoubleCondition); }
 
 bool hasDoubleValues(Monomial const& monomial) { return doAnyNumbersSatisfyTheCondition(monomial, IsDoubleCondition); }
@@ -322,7 +330,8 @@ bool hasNegativeExponentsWithVariable(Polynomial const& polynomial, string const
     for (Monomial const& monomial : polynomial.getMonomials()) {
         result = result || (monomial.getExponentForVariable(variableName) < 0);
         if (result) {
-            break;        }
+            break;
+        }
     }
     return result;
 }

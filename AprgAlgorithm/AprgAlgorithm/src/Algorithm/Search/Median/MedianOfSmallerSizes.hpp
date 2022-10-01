@@ -27,6 +27,7 @@ public:
             // assert(getMedianSizeWithOverFlow(m_medianSize) == m_sortedValuesInHalf.capacity());
         }
     }
+
     MedianOfSmallerSizes(
         ConstIterator const startIt,
         ConstIterator const endIt)  // half open interval
@@ -51,7 +52,8 @@ private:
     Value getMedianWithoutCheck() const { return (getSmallerMedianWithoutCheck() + getLargerMedianWithoutCheck()) / 2; }
 
     Value getSmallerMedianWithoutCheck() const {
-        auto it = std::prev(m_sortedValuesInHalf.end());        if (mathHelper::isEven(m_size)) {
+        auto it = std::prev(m_sortedValuesInHalf.end());
+        if (mathHelper::isEven(m_size)) {
             it--;
         }
         return *it;

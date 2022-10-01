@@ -46,6 +46,7 @@ Term Differentiation::differentiate(Term const& term) const {
     }
     return result;
 }
+
 Term Differentiation::differentiate(Constant const& constant) const { return differentiateConstant(constant); }
 
 Term Differentiation::differentiate(Variable const& variable) const {
@@ -131,7 +132,8 @@ Polynomial Differentiation::differentiatePolynomial(Polynomial const& polynomial
     for (Monomial const& monomial : polynomial.getMonomials()) {
         result.addPolynomial(differentiateMonomial(monomial));
     }
-    result.simplify();    return result;
+    result.simplify();
+    return result;
 }
 
 Term Differentiation::differentiateExpression(Expression const& expression) const {
@@ -145,7 +147,8 @@ Term Differentiation::differentiateFunction(Function const& functionObject) cons
     Term const& inputTerm(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
     Term derivativeOfInputTermOfFunction(differentiate(inputTerm));
     Term result(createExpressionIfPossible({derivativeOfFunctionOnly, "*", derivativeOfInputTermOfFunction}));
-    simplifyForDifferentiation(result);    return result;
+    simplifyForDifferentiation(result);
+    return result;
 }
 
 Equation Differentiation::differentiateEquation(Equation const& equation) const {
@@ -181,7 +184,8 @@ void Differentiation::separateNonChangingAndChangingVariables(
     for (auto const& variableExponentPair : monomial.getVariablesToExponentsMap()) {
         string const& variableName(variableExponentPair.first);
         AlbaNumber const& exponent(variableExponentPair.second);
-        if (exponent != 0) {            if (isChangingVariableName(variableName)) {
+        if (exponent != 0) {
+            if (isChangingVariableName(variableName)) {
                 changingVariables.putVariableWithExponent(variableName, exponent);
             } else {
                 nonChangingVariablesAndConstant.putVariableWithExponent(variableName, exponent);
@@ -195,7 +199,8 @@ Polynomial Differentiation::differentiateMonomialWithChangingVariables(Monomial 
     for (auto const& variableExponentPair : changingVariables.getVariablesToExponentsMap()) {
         string const& variableName(variableExponentPair.first);
         AlbaNumber const& exponent(variableExponentPair.second);
-        Monomial monomialToAdd(changingVariables);        DerivativeVariableName derivativeVariableName(variableName);
+        Monomial monomialToAdd(changingVariables);
+        DerivativeVariableName derivativeVariableName(variableName);
         if (isVariableToDifferentiate(variableName)) {
             monomialToAdd.putVariableWithExponent(variableName, exponent - 1);
             monomialToAdd.multiplyNumber(exponent);
@@ -223,7 +228,8 @@ Term Differentiation::differentiateAsTermOrExpressionIfNeeded(Expression const& 
         result = differentiateSimplifiedExpressionOnly(simplifiedTerm.getAsExpression());
     } else {
         result = differentiate(simplifiedTerm);
-    }    return result;
+    }
+    return result;
 }
 
 Term Differentiation::differentiateSimplifiedExpressionOnly(Expression const& expression) const {
@@ -341,7 +347,8 @@ Term Differentiation::differentiateFunctionOnly(Function const& functionObject) 
     Term const& inputTerm(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
     if ("abs" == functionObject.getFunctionName()) {
         derivativeOfFunction = sgn(inputTerm);
-    } else if ("ln" == functionObject.getFunctionName()) {        derivativeOfFunction = createExpressionIfPossible({1, "/", inputTerm});
+    } else if ("ln" == functionObject.getFunctionName()) {
+        derivativeOfFunction = createExpressionIfPossible({1, "/", inputTerm});
     } else if ("log" == functionObject.getFunctionName()) {
         derivativeOfFunction = createExpressionIfPossible({::log(10), "/", inputTerm});
     } else if ("sin" == functionObject.getFunctionName()) {
@@ -425,7 +432,8 @@ bool Differentiation::isChangingTerm(Term const& term) const {
     VariableNamesSet const& variableNames(retriever.getVariableNames());
     return any_of(variableNames.cbegin(), variableNames.cend(), [&](string const& variableName) {
         return isChangingVariableName(variableName);
-    });}
+    });
+}
 
 }  // namespace algebra
 

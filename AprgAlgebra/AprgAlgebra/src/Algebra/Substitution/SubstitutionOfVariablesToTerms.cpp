@@ -83,6 +83,7 @@ Term SubstitutionOfVariablesToTerms::performSubstitutionTo(Term const& term) con
     }
     return newTerm;
 }
+
 Equation SubstitutionOfVariablesToTerms::performSubstitutionTo(Equation const& equation) const {
     Equation simplifiedEquation(
         performSubstitutionTo(equation.getLeftHandTerm()), equation.getEquationOperator().getOperatorString(),
@@ -96,7 +97,8 @@ Expression SubstitutionOfVariablesToTerms::performSubstitutionForMonomial(Monomi
     Monomial::VariablesToExponentsMap previousVariableExponentMap(monomial.getVariablesToExponentsMap());
     Expression substitutedExpressions;
     for (auto const& variableExponentPair : previousVariableExponentMap) {
-        if (isVariableFound(variableExponentPair.first)) {            Expression substitutedExpression(getTermForVariable(variableExponentPair.first));
+        if (isVariableFound(variableExponentPair.first)) {
+            Expression substitutedExpression(getTermForVariable(variableExponentPair.first));
             substitutedExpression.putTermWithRaiseToPowerIfNeeded(Term(variableExponentPair.second));
             substitutedExpressions.putTermWithMultiplicationIfNeeded(Term(substitutedExpression));
         } else {
@@ -114,7 +116,8 @@ Expression SubstitutionOfVariablesToTerms::performSubstitutionForPolynomial(Poly
     for (Monomial const& monomial : polynomial.getMonomials()) {
         newExpression.putTermWithAdditionIfNeeded(Term(performSubstitutionForMonomial(monomial)));
     }
-    newExpression.simplify();    return newExpression;
+    newExpression.simplify();
+    return newExpression;
 }
 
 Expression SubstitutionOfVariablesToTerms::performSubstitutionForExpression(Expression const& expression) const {
@@ -131,6 +134,7 @@ Function SubstitutionOfVariablesToTerms::performSubstitutionForFunction(Function
     newFunction.simplify();
     return newFunction;
 }
+
 void SubstitutionOfVariablesToTerms::putVariablesWithTerms(
     initializer_list<VariableTermPair> const& variablesWithTerms) {
     for (VariableTermPair const& variableValuesPair : variablesWithTerms) {

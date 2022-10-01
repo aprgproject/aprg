@@ -68,6 +68,7 @@ Term SubstitutionOfTermsToTerms::performSubstitutionTo(Term const& term) const {
     }
     return newTerm;
 }
+
 Equation SubstitutionOfTermsToTerms::performSubstitutionTo(Equation const& equation) const {
     Equation simplifiedEquation(
         performSubstitutionTo(equation.getLeftHandTerm()), equation.getEquationOperator().getOperatorString(),
@@ -90,6 +91,7 @@ Function SubstitutionOfTermsToTerms::performSubstitutionForFunction(Function con
     newFunction.simplify();
     return newFunction;
 }
+
 void SubstitutionOfTermsToTerms::putTermsToTermsMapping(initializer_list<TermTermPair> const& variablesWithValues) {
     for (TermTermPair const& variableValuesPair : variablesWithValues) {
         putTermToTermMapping(variableValuesPair.first, variableValuesPair.second);

@@ -17,6 +17,7 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromEquationsWorks) {
     TermSet const& termsSet(retriever.getExpressionsAndFunctions());
     EXPECT_TRUE(termsSet.empty());
 }
+
 TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromEquationWorks) {
     ExpressionAndFunctionsRetriever retriever;
     Term leftHandTerm(Monomial(34, {{"x", 5}}));
@@ -28,6 +29,7 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromEquationWorks) {
     TermSet const& termsSet(retriever.getExpressionsAndFunctions());
     EXPECT_TRUE(termsSet.empty());
 }
+
 TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromTermWorks) {
     ExpressionAndFunctionsRetriever retriever;
     Term expesssionTerm1(createExpressionIfPossible({"a", "^", 2}));
@@ -46,7 +48,8 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromTermWorks) {
     TermSet const& termsSet(retriever.getExpressionsAndFunctions());
     ASSERT_EQ(3U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
-    EXPECT_EQ(expesssionTerm1, *(it++));    EXPECT_EQ(expesssionTerm2, *(it++));
+    EXPECT_EQ(expesssionTerm1, *(it++));
+    EXPECT_EQ(expesssionTerm2, *(it++));
     EXPECT_EQ(functionTerm1, *(it++));
 }
 
@@ -58,6 +61,7 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromConstantWorks) {
     TermSet const& termsSet(retriever.getExpressionsAndFunctions());
     EXPECT_TRUE(termsSet.empty());
 }
+
 TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromVariableWorks) {
     ExpressionAndFunctionsRetriever retriever;
 
@@ -66,6 +70,7 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromVariableWorks) {
     TermSet const& termsSet(retriever.getExpressionsAndFunctions());
     EXPECT_TRUE(termsSet.empty());
 }
+
 TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromMonomialWorks) {
     ExpressionAndFunctionsRetriever retriever;
 
@@ -74,6 +79,7 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromMonomialWorks) {
     TermSet const& termsSet(retriever.getExpressionsAndFunctions());
     EXPECT_TRUE(termsSet.empty());
 }
+
 TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromPolynomialWorks) {
     ExpressionAndFunctionsRetriever retriever;
 
@@ -82,6 +88,7 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromPolynomialWorks) {
     TermSet const& termsSet(retriever.getExpressionsAndFunctions());
     EXPECT_TRUE(termsSet.empty());
 }
+
 TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromExpressionWorks) {
     ExpressionAndFunctionsRetriever retriever;
     Expression expression(createExpressionIfPossible({678, "+", Monomial(576, {{"g", 9}})}));
@@ -91,7 +98,8 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromExpressionWorks) {
     TermSet const& termsSet(retriever.getExpressionsAndFunctions());
     ASSERT_EQ(1U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
-    EXPECT_EQ(Term(expression), *(it++));}
+    EXPECT_EQ(Term(expression), *(it++));
+}
 
 TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromFunctionWorks) {
     ExpressionAndFunctionsRetriever retriever;
@@ -104,7 +112,8 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromFunctionWorks) {
     TermSet const& termsSet(retriever.getExpressionsAndFunctions());
     ASSERT_EQ(2U, termsSet.size());
     TermSet::const_iterator it = termsSet.cbegin();
-    EXPECT_EQ(Term(expression), *(it++));    EXPECT_EQ(Term(functionObject), *(it++));
+    EXPECT_EQ(Term(expression), *(it++));
+    EXPECT_EQ(Term(functionObject), *(it++));
 }
 
 TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromPolynomialsWorks) {
@@ -118,6 +127,7 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromPolynomialsWorks) {
     TermSet const& termsSet(retriever.getExpressionsAndFunctions());
     EXPECT_TRUE(termsSet.empty());
 }
+
 }  // namespace algebra
 
 }  // namespace alba

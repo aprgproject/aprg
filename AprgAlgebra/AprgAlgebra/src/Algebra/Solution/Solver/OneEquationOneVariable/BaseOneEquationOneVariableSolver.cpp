@@ -39,7 +39,8 @@ void BaseOneEquationOneVariableSolver::calculateForTermAndCheckAbsoluteValueFunc
     FunctionsSet const& absFunctions(absFunctionsRetriever.getFunctions());
     if (absFunctions.empty()) {
         calculateForTermAndVariable(term, variableName);
-    } else {        calculateAndSubstituteAbsoluteValueFunctions(absFunctions, term, variableName);
+    } else {
+        calculateAndSubstituteAbsoluteValueFunctions(absFunctions, term, variableName);
     }
 }
 
@@ -61,7 +62,8 @@ void BaseOneEquationOneVariableSolver::calculateAndSubstituteAbsoluteValueFuncti
             Term const& absFunctionInputTerm(getTermConstReferenceFromBaseTerm(itFunctionSet->getInputTerm()));
             if (isBitAsserted) {
                 termToReplace = absFunctionInputTerm;
-            } else {                termToReplace = createExpressionIfPossible({-1, "*", absFunctionInputTerm});
+            } else {
+                termToReplace = createExpressionIfPossible({-1, "*", absFunctionInputTerm});
             }
             substitution.putTermToTermMapping(absFunctionTerm, termToReplace);
             itFunctionSet++;

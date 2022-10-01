@@ -148,7 +148,8 @@ TEST(PowerHelpersTest, GetEToTheXWorks) {
 
 TEST(PowerHelpersTest, GetSquareRootUsingBinarySearchWorks) {
     EXPECT_EQ(0, getSquareRootUsingBinarySearch(0));
-    EXPECT_EQ(1, getSquareRootUsingBinarySearch(1));    EXPECT_EQ(1, getSquareRootUsingBinarySearch(2));
+    EXPECT_EQ(1, getSquareRootUsingBinarySearch(1));
+    EXPECT_EQ(1, getSquareRootUsingBinarySearch(2));
     EXPECT_EQ(1, getSquareRootUsingBinarySearch(3));
     EXPECT_EQ(6, getSquareRootUsingBinarySearch(36));
     EXPECT_EQ(5, getSquareRootUsingBinarySearch(34));

@@ -29,6 +29,7 @@ public:
     }
 
     static inline constexpr bool isEvenParity(DataType const value) { return BitUtilitiesBuiltIn::isEvenParity(value); }
+
     static constexpr inline bool areAllOnesStartingFromTheFirstOne(DataType const value) {
         // These values also follow this formula: (2^n)-1.
         return getValueWithTrailingOnesAsZeros(value) == 0;
@@ -108,6 +109,7 @@ public:
     static constexpr inline size_t getNumberOfBits() {
         // Approach based on numeric limits and if its signed
         // return std::numeric_limits<DataType>::digits + (std::numeric_limits<DataType>::is_signed ? 1 : 0);
+
         // Approach based on sizeof
         // -> sizeof: Yields the size in bytes of the object representation of type.
         return sizeof(DataType) * AlbaBitConstants::BYTE_SIZE_IN_BITS;
@@ -182,7 +184,8 @@ public:
         // There is also a different implementation on Math
 
         static_assert(typeHelper::isSignedType<DataType>(), "DataType must be a signed type");
-        auto const signedBitMoved = value >> (getNumberOfBits() - 1);        return (value ^ signedBitMoved) - signedBitMoved;
+        auto const signedBitMoved = value >> (getNumberOfBits() - 1);
+        return (value ^ signedBitMoved) - signedBitMoved;
         // return (value + signedBitMoved) ^ signedBitMoved; // This formula works as well
     }
 
@@ -221,7 +224,8 @@ public:
 
     static constexpr inline DataType getValueWithLastBitOneAsZero(DataType const value) {
         // Hackers Delight: Turn off the rightmost 1-bit in a word, producing 0 if none
-        // (e.g., 01011000 ⇒ 01010000)        return value & (value - 1);
+        // (e.g., 01011000 ⇒ 01010000)
+        return value & (value - 1);
     }
 
     static constexpr inline DataType getValueWithLastBitZeroAsOne(DataType const value) {
@@ -343,7 +347,8 @@ public:
         return value & ((DataType(1) << divisorOfPowerOfTwoExponent) - 1);
     }
 
-    static constexpr inline DataType getTwoValuesInACycle(        DataType const current, DataType const value1, DataType const value2) {
+    static constexpr inline DataType getTwoValuesInACycle(
+        DataType const current, DataType const value1, DataType const value2) {
         return value1 ^ value2 ^ current;
         // return value1 + value2 - current; // This formula works as well
     }

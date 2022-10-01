@@ -165,7 +165,8 @@ void TermRaiseToTerms::simplifyBaseAndExponents() {
             exponentCombinedTerm.getAsExpression().getCommonOperatorLevel()) {
         simplifyConstantRaiseToMultiplicationAndDivisionExpression(m_base, m_exponents, exponentCombinedTerm);
     } else {
-        m_exponents.emplace_back(exponentCombinedTerm, TermAssociationType::Positive);    }
+        m_exponents.emplace_back(exponentCombinedTerm, TermAssociationType::Positive);
+    }
 }
 
 void TermRaiseToTerms::simplifyConstantRaiseToFunction(
@@ -176,7 +177,8 @@ void TermRaiseToTerms::simplifyConstantRaiseToFunction(
         base = getTermConstReferenceFromBaseTerm(functionObject.getInputTerm());
     } else {
         exponents.emplace_back(exponentCombinedTerm, TermAssociationType::Positive);
-    }}
+    }
+}
 
 void TermRaiseToTerms::simplifyMonomialRaiseToConstant(
     Term& base, Monomial const& monomialBase, AlbaNumber const& exponent) {
@@ -217,7 +219,8 @@ void TermRaiseToTerms::simplifyConstantRaiseToMultiplicationAndDivisionExpressio
                 base = getTermConstReferenceFromBaseTerm(functionObject.getInputTerm());
                 termsWithDetails.erase(termsWithDetails.begin() + i);
                 break;
-            }        }
+            }
+        }
     }
     exponents = termsWithDetails;
 }

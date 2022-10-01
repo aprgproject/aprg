@@ -1,7 +1,8 @@
 #include "AllPartialSumsInZeroOneKnapsack.hpp"
 
 #include <algorithm>
-#include <map>#include <numeric>
+#include <map>
+#include <numeric>
 
 using namespace std;
 
@@ -18,7 +19,8 @@ AllPartialSumsInZeroOneKnapsack::Values AllPartialSumsInZeroOneKnapsack::getAllP
         for (Value partialSum = sum; partialSum > 0; partialSum--) {
             if (partialSum >= inputValue && isPartialSumPossible[partialSum - inputValue]) {
                 isPartialSumPossible[partialSum] = true;
-            }        }
+            }
+        }
     }
     return getAllPossiblePartialSums(isPartialSumPossible);
 }
@@ -33,7 +35,8 @@ AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSumsBySettingFutureValues(
         for (int partialSum = sum; partialSum >= 0; partialSum--) {
             if (isPartialSumPossible[partialSum]) {
                 Value possibleNextValue = static_cast<Value>(partialSum) + inputValue;
-                if (possibleNextValue <= sum) {                    isPartialSumPossible[possibleNextValue] = true;
+                if (possibleNextValue <= sum) {
+                    isPartialSumPossible[possibleNextValue] = true;
                 }
             }
         }
@@ -45,7 +48,8 @@ AllPartialSumsInZeroOneKnapsack::Values
 AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSumsWithSquareRootAlgorithm() {
     // Some square root algorithms are based on the following observation:
     // if a positive integer n is represented as a sum of positive integers,
-    // such a sum always contains at most O(sqrt(n)) distinct numbers.    // The reason for this is that to construct a sum that contains a maximum number of distinct numbers,
+    // such a sum always contains at most O(sqrt(n)) distinct numbers.
+    // The reason for this is that to construct a sum that contains a maximum number of distinct numbers,
     // we should choose small numbers.
     // If we choose the numbers 1,2,...,k, the resulting sum is (k*(k+1))/2
     // Thus, the maximum amount of distinct numbers is k = O(sqrt(n)).
@@ -79,14 +83,16 @@ AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSumsWithSquareRootAlgorith
                     isPartialSumPossible[static_cast<Value>(partialSumIndex) + (i * currentValue)] = true;
                 }
             }
-        }    }
+        }
+    }
     return getAllPossiblePartialSums(isPartialSumPossible);
 }
 
 AllPartialSumsInZeroOneKnapsack::Values AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSums(
     Booleans const& isPartialSumPossible) const {
     Values result;
-    for (int partialSumIndex = 0; partialSumIndex < static_cast<int>(isPartialSumPossible.size());         partialSumIndex++)  // O(n) or linear time
+    for (int partialSumIndex = 0; partialSumIndex < static_cast<int>(isPartialSumPossible.size());
+         partialSumIndex++)  // O(n) or linear time
     {
         if (isPartialSumPossible[partialSumIndex]) {
             result.emplace_back(partialSumIndex);

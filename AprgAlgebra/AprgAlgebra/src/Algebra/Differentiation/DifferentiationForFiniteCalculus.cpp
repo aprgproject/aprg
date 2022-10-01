@@ -82,6 +82,7 @@ Term DifferentiationForFiniteCalculus::differentiateTerm(Term const& term) const
     }
     return result;
 }
+
 AlbaNumber DifferentiationForFiniteCalculus::differentiateConstant(Constant const&) const { return 0; }
 
 Polynomial DifferentiationForFiniteCalculus::differentiateVariable(Variable const& variable) const {

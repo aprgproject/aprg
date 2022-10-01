@@ -28,6 +28,7 @@ public:
     AlbaNumber const& getNumber() const;
 
     void setNumber(AlbaNumber const& constantValue);
+
 private:
     friend std::ostream& operator<<(std::ostream& out, Constant const& constant);
 

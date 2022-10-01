@@ -60,6 +60,7 @@ bool isDifferentiableAt(Term const& term, string const& variableName, AlbaNumber
     }
     return result;
 }
+
 bool isDifferentiableAtUsingDerivativeDefinition(
     Term const& term, string const& variableName, AlbaNumber const& value) {
     bool result(false);
@@ -71,6 +72,7 @@ bool isDifferentiableAtUsingDerivativeDefinition(
     }
     return result;
 }
+
 bool isFirstOrderDifferentialEquation(
     Term const& dyOverDx, Term const& p, Term const& q, string const& xVariableName, string const& yVariableName) {
     // First order differential equation should follow this:
@@ -90,7 +92,8 @@ bool isFirstOrderDifferentialEquation(
             VariableNamesSet const& namesFromQ(retriever.getVariableNames());
             if (namesFromQ.find(xVariableName) != namesFromQ.cend()) {
                 result = true;
-            }        }
+            }
+        }
     }
     return result;
 }

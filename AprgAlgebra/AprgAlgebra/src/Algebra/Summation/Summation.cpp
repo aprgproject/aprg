@@ -42,7 +42,8 @@ Term Summation::getSum(Term const& start, Term const& end) const {
         calculateSumStartingFromANumber(result, start.getAsNumber(), end);
     } else {
         result = ALBA_NUMBER_NOT_A_NUMBER;
-    }    return result;
+    }
+    return result;
 }
 
 void Summation::calculateSumFromANumberToANumber(
@@ -65,7 +66,8 @@ void Summation::calculateSumStartingFromANumber(Term& result, AlbaNumber const& 
         if (end.isConstant() && end.getAsNumber().isPositiveInfinity()) {
             result = getLimit(summationModelWithConstant, m_variableName, ALBA_NUMBER_POSITIVE_INFINITY);
         } else {
-            SubstitutionOfVariablesToTerms substitution({{m_variableName, end}});            result = substitution.performSubstitutionTo(summationModelWithConstant);
+            SubstitutionOfVariablesToTerms substitution({{m_variableName, end}});
+            result = substitution.performSubstitutionTo(summationModelWithConstant);
         }
     } else {
         result = ALBA_NUMBER_NOT_A_NUMBER;

@@ -268,7 +268,8 @@ Term SimplificationOfExpression::getEachBasesRaisedToConstantIfPossible(TermRais
                 termsRaiseToNumbers.multiplyToExponents(exponent.getAsNumber());
                 Term combinedTerm(termsRaiseToNumbers.getCombinedTerm());
                 if (!hasDoubleValues(combinedTerm) && !hasNonRealFiniteNumbers(combinedTerm)) {
-                    result = combinedTerm;                }
+                    result = combinedTerm;
+                }
             }
         }
     }
@@ -341,6 +342,7 @@ void SimplificationOfExpression::convertPolynomialToPolynomialOverPolynomial(Ter
             getTermReferenceFromBaseTerm(term.getAsFunctionReference().getInputTermReference()));
     }
 }
+
 void SimplificationOfExpression::convertPolynomialToPolynomialOverPolynomial(Expression& expression) {
     TermsWithDetails& termsWithDetails(expression.getTermsWithAssociationReference().getTermsWithDetailsReference());
     for (TermWithDetails& termWithDetails : termsWithDetails) {

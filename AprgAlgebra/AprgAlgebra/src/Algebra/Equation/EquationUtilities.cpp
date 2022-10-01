@@ -58,6 +58,7 @@ bool isLessThan(Term const& leftTerm, Term const& rightTerm) {
     }
     return result;
 }
+
 bool isGreaterThan(Term const& leftTerm, Term const& rightTerm) {
     bool result(false);
     if (leftTerm.isConstant() && rightTerm.isConstant()) {
@@ -65,6 +66,7 @@ bool isGreaterThan(Term const& leftTerm, Term const& rightTerm) {
     }
     return result;
 }
+
 bool isLessThanOrEqual(Term const& leftTerm, Term const& rightTerm) {
     return isEqual(leftTerm, rightTerm) || isLessThan(leftTerm, rightTerm);
 }
@@ -126,7 +128,8 @@ Term getEquivalentTermByReducingItToAVariable(
         Monomial const& monomialWithVariable(termWithVariable.getAsMonomial());
         AlbaNumber exponent(monomialWithVariable.getExponentForVariable(variableName));
         exponent = exponent ^ (-1);
-        result = termWithWithoutVariable ^ exponent;    }
+        result = termWithWithoutVariable ^ exponent;
+    }
     return result;
 }
 
@@ -144,7 +147,8 @@ void segregateEquationsWithAndWithoutVariable(
         VariableNamesSet const& names(namesRetriever.getVariableNames());
         if (names.find(variableName) != names.cend()) {
             equationsWithVariable.emplace_back(equationToSegregate);
-        } else {            equationsWithoutVariable.emplace_back(equationToSegregate);
+        } else {
+            equationsWithoutVariable.emplace_back(equationToSegregate);
         }
     }
 }

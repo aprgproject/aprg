@@ -31,7 +31,8 @@ TEST(TermTest, TermsAsConstantsWorks) {
     EXPECT_DOUBLE_EQ(-34.8767, constantTerm4.getAsConstant().getNumber().getDouble());
 }
 
-TEST(TermTest, TermsAsVariablesWorks) {    Term variableTerm1("x");
+TEST(TermTest, TermsAsVariablesWorks) {
+    Term variableTerm1("x");
     Term variableTerm2("power");
 
     ASSERT_EQ(TermType::Variable, variableTerm1.getTermType());
@@ -41,7 +42,8 @@ TEST(TermTest, TermsAsVariablesWorks) {    Term variableTerm1("x");
     EXPECT_EQ("power", variableTerm2.getAsVariable().getVariableName());
 }
 
-TEST(TermTest, TermsAsOperatorsWorks) {    Term operatorTerm1("+");
+TEST(TermTest, TermsAsOperatorsWorks) {
+    Term operatorTerm1("+");
     Term operatorTerm2("-");
     Term operatorTerm3("*");
     Term operatorTerm4("/");
@@ -59,7 +61,8 @@ TEST(TermTest, TermsAsOperatorsWorks) {    Term operatorTerm1("+");
     EXPECT_EQ("/", operatorTerm4.getAsOperator().getOperatorString());
 }
 
-TEST(TermTest, TermsAsMonomialsWorks) {    Term monomialTerm1(Monomial(3, {}));
+TEST(TermTest, TermsAsMonomialsWorks) {
+    Term monomialTerm1(Monomial(3, {}));
     Term monomialTerm2(Monomial(1.5, {{"distance", 3.75}}));
     Term monomialTerm3(Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}}));
 
@@ -81,7 +84,8 @@ TEST(TermTest, TermsAsMonomialsWorks) {    Term monomialTerm1(Monomial(3, {}));
     Monomial::VariablesToExponentsMap const& variableMap3(monomialTerm3.getAsMonomial().getVariablesToExponentsMap());
     ASSERT_EQ(2U, variableMap3.size());
     Monomial::VariablesToExponentsMap::const_iterator variableMap3It = variableMap3.cbegin();
-    Monomial::VariableExponentPair const& variable3_1(*variableMap3It);    EXPECT_EQ("distance", variable3_1.first);
+    Monomial::VariableExponentPair const& variable3_1(*variableMap3It);
+    EXPECT_EQ("distance", variable3_1.first);
     EXPECT_DOUBLE_EQ(-3.75, variable3_1.second.getDouble());
     variableMap3It++;
     Monomial::VariableExponentPair const& variable3_2(*variableMap3It);
@@ -123,7 +127,8 @@ TEST(TermTest, TermsAsPolynomialsWorks) {
     Monomial::VariablesToExponentsMap const& variableMap3_2(monomial3_2.getVariablesToExponentsMap());
     ASSERT_EQ(2U, variableMap3_2.size());
     Monomial::VariablesToExponentsMap::const_iterator variableMap3It = variableMap3_2.cbegin();
-    Monomial::VariableExponentPair const& variable3_1(*variableMap3It);    EXPECT_EQ("distance", variable3_1.first);
+    Monomial::VariableExponentPair const& variable3_1(*variableMap3It);
+    EXPECT_EQ("distance", variable3_1.first);
     EXPECT_DOUBLE_EQ(-3.75, variable3_1.second.getDouble());
     variableMap3It++;
     Monomial::VariableExponentPair const& variable3_2(*variableMap3It);
@@ -147,7 +152,8 @@ TEST(TermTest, TermsAsExpressionsWorks) {
     Expression const& expression2(expressionTerm2.getAsExpression());
     EXPECT_EQ(OperatorLevel::AdditionAndSubtraction, expression2.getCommonOperatorLevel());
     TermsWithDetails const& termsToVerify2(expression2.getTermsWithAssociation().getTermsWithDetails());
-    ASSERT_EQ(2U, termsToVerify2.size());    EXPECT_EQ(TermAssociationType::Positive, termsToVerify2[0].association);
+    ASSERT_EQ(2U, termsToVerify2.size());
+    EXPECT_EQ(TermAssociationType::Positive, termsToVerify2[0].association);
     Term const& termToVerify1(getTermConstReferenceFromUniquePointer(termsToVerify2[0].baseTermPointer));
     EXPECT_EQ(Term(5), termToVerify1);
     EXPECT_EQ(TermAssociationType::Positive, termsToVerify2[1].association);
@@ -181,7 +187,8 @@ TEST(TermTest, TermsAsFunctionsWorks) {
     EXPECT_TRUE(getTermConstReferenceFromBaseTerm(functionToVerify3.getInputTerm()).isEmpty());
 }
 
-TEST(TermTest, TermsAsConstructedAsStringWorks) {    Term term1("");
+TEST(TermTest, TermsAsConstructedAsStringWorks) {
+    Term term1("");
     Term term2("5xxx");
     Term term3("+");
     Term term4("power");
@@ -202,7 +209,8 @@ TEST(TermTest, TermsAsConstructedAsStringWorks) {    Term term1("");
     EXPECT_EQ("x1", term5.getAsVariable().getVariableName());
 }
 
-TEST(TermTest, TermThatIsDefaultConstructedHasIsSimplifiedFlagNotSet) {    Term term;
+TEST(TermTest, TermThatIsDefaultConstructedHasIsSimplifiedFlagNotSet) {
+    Term term;
 
     EXPECT_FALSE(term.isSimplified());
 }
@@ -317,7 +325,8 @@ TEST(TermTest, TermsAsFunctionsCanBeChanged) {
     EXPECT_EQ(Term(7), getTermConstReferenceFromBaseTerm(term.getAsFunction().getInputTerm()));
 }
 
-TEST(TermTest, AssignmentOperatorWorks) {    Term term1 = 2;
+TEST(TermTest, AssignmentOperatorWorks) {
+    Term term1 = 2;
     Term term2(5);
     term2 = 7;
     Term term3(8);
@@ -331,7 +340,8 @@ TEST(TermTest, AssignmentOperatorWorks) {    Term term1 = 2;
     EXPECT_EQ(7, term3.getAsNumber().getInteger());
 }
 
-TEST(TermTest, TermThatIsAssignedHasIsSimplifiedFlagCopied) {    Term termWithSimplifiedNotSet;
+TEST(TermTest, TermThatIsAssignedHasIsSimplifiedFlagCopied) {
+    Term termWithSimplifiedNotSet;
     Term termWithSimplifiedSet;
     termWithSimplifiedSet.setAsSimplified();
     Term term1(1);
@@ -737,7 +747,8 @@ TEST(TermTest, ClearAllInnerSimplifiedFlagsWorks) {
     EXPECT_FALSE(term.getAsMonomial().isSimplified());
 }
 
-TEST(TermTest, OutputStreamOperatorWorks) {    stringstream ss;
+TEST(TermTest, OutputStreamOperatorWorks) {
+    stringstream ss;
     Term term1;
     Term term2(0);
     Term term3(Variable("length"));

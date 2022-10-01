@@ -56,7 +56,8 @@ void LinearEquationsEqualitySolver::calculateSolution(
     VariableNamesSet const& variables(variablesRetriever.getVariableNames());
     if (areExponentsEqualToOneAndZero(exponents) && variables.size() == polynomials.size()) {
         NumberMatrix coefficientsMatrix(variables.size() + 1, polynomials.size());
-        setMatrixCoefficients(coefficientsMatrix, variables, polynomials);        transformToReducedEchelonFormUsingGaussJordanReduction(coefficientsMatrix);
+        setMatrixCoefficients(coefficientsMatrix, variables, polynomials);
+        transformToReducedEchelonFormUsingGaussJordanReduction(coefficientsMatrix);
         if (isReducedRowEchelonForm(coefficientsMatrix)) {
             saveSolutionSetsFromTheCoefficientMatrix(solutionSet, coefficientsMatrix, variables);
             setAsCompleteSolution();

@@ -28,7 +28,8 @@ Monomial createMonomialIfPossible(Term const& term) {
         Polynomial const& polynomial(term.getAsPolynomial());
         if (isOneMonomial(polynomial)) {
             result = getFirstMonomial(polynomial);
-        }    }
+        }
+    }
     return result;
 }
 
@@ -53,6 +54,7 @@ Polynomial createPolynomialIfPossible(Term const& term) {
     }
     return result;
 }
+
 Expression createExpressionInAnExpression(Expression const& expression) { return Expression(Term(expression)); }
 
 Expression createAndWrapExpressionFromATerm(Term const& term) { return Expression(term); }
@@ -64,7 +66,8 @@ Expression createOrCopyExpressionFromATerm(Term const& term) {
             result = term.getAsExpression();
         } else {
             result = Expression(term);
-        }    }
+        }
+    }
     return result;
 }
 

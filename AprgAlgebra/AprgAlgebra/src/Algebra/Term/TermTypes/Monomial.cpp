@@ -81,6 +81,7 @@ AlbaNumber const& Monomial::getCoefficient() const { return m_constant; }
 Monomial::VariablesToExponentsMap const& Monomial::getVariablesToExponentsMap() const {
     return m_variablesToExponentsMap;
 }
+
 AlbaNumber Monomial::getExponentForVariable(string const& variableName) const {
     AlbaNumber exponent(0);
     if (m_variablesToExponentsMap.find(variableName) != m_variablesToExponentsMap.cend()) {
@@ -174,7 +175,8 @@ bool Monomial::isLessThanByComparingVariableNameMaps(Monomial const& monomial1, 
     for (auto const& nameExponentPair : monomial2.getVariablesToExponentsMap()) {
         variableNames.emplace(nameExponentPair.first);
     }
-    bool result(false);    for (string const& variableName : variableNames) {
+    bool result(false);
+    for (string const& variableName : variableNames) {
         AlbaNumber exponent1(monomial1.getExponentForVariable(variableName));
         AlbaNumber exponent2(monomial2.getExponentForVariable(variableName));
         if (exponent1 != exponent2) {

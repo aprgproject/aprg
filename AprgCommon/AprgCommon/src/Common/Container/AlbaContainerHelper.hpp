@@ -56,7 +56,8 @@ std::pair<ValueType, ValueType> getLowerAndUpperValuesForNonSet(
     return std::make_pair(*lowerIt, *upperIt);
 }
 
-template <typename ValueType, typename ContainerType>size_t countItemsInBetweenForNonSet(
+template <typename ValueType, typename ContainerType>
+size_t countItemsInBetweenForNonSet(
     ContainerType const& sortedContainer, ValueType const& value1, ValueType const& value2) {
     // 1D range count
     using ConstIterator = typename ContainerType::const_iterator;
@@ -97,7 +98,8 @@ std::pair<ValueType, ValueType> getLowerAndUpperValuesForSet(
     return std::make_pair(*lowerIt, *upperIt);
 }
 
-template <typename ValueType, typename ContainerType>size_t countItemsInBetweenForSet(ContainerType const& setContainer, ValueType const& value1, ValueType const& value2) {
+template <typename ValueType, typename ContainerType>
+size_t countItemsInBetweenForSet(ContainerType const& setContainer, ValueType const& value1, ValueType const& value2) {
     // 1D range count
     using ConstIterator = typename ContainerType::const_iterator;
     ConstIterator itLower(setContainer.lower_bound(value1));

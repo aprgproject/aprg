@@ -45,7 +45,8 @@ void factorizeCommonMonomialIfPossible(Polynomials& result, Polynomial const& po
         Monomial gcfMonomial(getGcfMonomialInMonomials(polynomial.getMonomials()));
         if (!isTheValue(gcfMonomial, 1)) {
             Polynomial reducedPolynomial(polynomial);
-            reducedPolynomial.divideMonomial(gcfMonomial);            reducedPolynomial.simplify();
+            reducedPolynomial.divideMonomial(gcfMonomial);
+            reducedPolynomial.simplify();
             simplifyThenEmplaceBackIfPolynomialIsNotEmpty(result, createPolynomialFromMonomial(gcfMonomial));
             simplifyThenEmplaceBackIfPolynomialIsNotEmpty(result, reducedPolynomial);
         }
@@ -151,6 +152,7 @@ bool isFactorizeUsingPatternsNeeded(Polynomial const& polynomial) {
     return polynomial.getMonomials().size() == 2 &&
            hasAMonomialWithDegreeMoreThanOneOrFractional(polynomial);
 }
+
 bool isFactorizeIncreasingAndDecreasingExponentsFormNeeded(Polynomial const& polynomial) {
     return hasAMonomialWithDegreeMoreThanOneOrFractional(polynomial);
 }
@@ -160,6 +162,7 @@ bool isFactorizeBySplittingToSmallerPolynomialsNeeded(Polynomial const& polynomi
 }
 
 }  // namespace Factorization
+
 }  // namespace algebra
 
 }  // namespace alba

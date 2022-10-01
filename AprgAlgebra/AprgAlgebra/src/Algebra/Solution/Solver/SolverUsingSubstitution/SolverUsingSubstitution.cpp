@@ -4,7 +4,8 @@
 #include <Algebra/Retrieval/SingleVariableNameRetriever.hpp>
 #include <Algebra/Retrieval/VariableNamesRetriever.hpp>
 #include <Algebra/Solution/Solver/OneEquationOneVariable/OneEquationOneVariableEqualitySolver.hpp>
-#include <Algebra/Solution/Solver/SolverUsingSubstitution/ReduceEquationsBySubstitution.hpp>#include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
+#include <Algebra/Solution/Solver/SolverUsingSubstitution/ReduceEquationsBySubstitution.hpp>
+#include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 
 using namespace std;
 
@@ -23,7 +24,8 @@ MultipleVariableSolutionSets SolverUsingSubstitution::calculateSolutionAndReturn
         m_variablesNames = variableNamesRetriever.getVariableNames();
         calculateSolutions(equations);
     }
-    return m_solutionsWithAllVariables;}
+    return m_solutionsWithAllVariables;
+}
 
 bool SolverUsingSubstitution::isTheValueAlreadyExisting(string const& variableName, AlbaNumber const& value) const {
     bool result(false);
@@ -141,6 +143,7 @@ void SolverUsingSubstitution::solveForTheFirstOneVariableEquationAndUpdate(
         }
     }
 }
+
 void SolverUsingSubstitution::solveAndUpdate(
     MultipleVariableSolutionSet& solutionSet, Equation const& equationToSolve, string const& variableNameToSolve) {
     OneEquationOneVariableEqualitySolver solver;

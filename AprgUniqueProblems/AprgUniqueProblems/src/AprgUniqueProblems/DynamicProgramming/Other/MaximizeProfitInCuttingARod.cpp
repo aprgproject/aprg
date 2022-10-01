@@ -40,7 +40,8 @@ MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUs
             for (auto const& [rodLength, rodProfit] : m_rods) {
                 if (remainingLength >= rodLength) {
                     entryResult = max(entryResult, rodProfit + partialProfits[remainingLength - rodLength]);
-                }            }
+                }
+            }
             partialProfits[remainingLength] = entryResult;
         }
         result = partialProfits.back();
@@ -54,7 +55,8 @@ MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUs
     for (auto const& [rodLength, rodProfit] : m_rods) {
         if (remainingLength >= rodLength) {
             result = max(result, rodProfit + getBestProfitUsingNaiveRecursion(remainingLength - rodLength));
-        }    }
+        }
+    }
     return result;
 }
 
@@ -66,7 +68,8 @@ MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUs
         for (auto const& [rodLength, rodProfit] : m_rods) {
             if (remainingLength >= rodLength) {
                 result = max(
-                    result, rodProfit + getBestProfitUsingMemoizationDP(partialProfits, remainingLength - rodLength));            }
+                    result, rodProfit + getBestProfitUsingMemoizationDP(partialProfits, remainingLength - rodLength));
+            }
         }
         partialProfits[remainingLength] = result;
     }

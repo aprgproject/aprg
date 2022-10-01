@@ -31,6 +31,7 @@ enum DayOfTheWeek : uint32_t {
 };
 
 constexpr std::size_t NUMBER_OF_NANOSECONDS_IN_A_MICROSECOND = 1'000;
+
 constexpr std::size_t NUMBER_OF_MICROSECONDS_IN_A_MILLISECOND = 1'000;
 constexpr std::size_t NUMBER_OF_MICROSECONDS_IN_A_SECOND = 1'000'000;
 
@@ -67,7 +68,8 @@ constexpr std::size_t NUMBER_OF_DAYS_IN_LEAP_YEAR = 366;
 
 // enum class version:
 // enum class AlbaDateTimeConstants : std::size_t
-// {//     NUMBER_OF_NANOSECONDS_IN_A_MICROSECOND = 1000,
+// {
+//     NUMBER_OF_NANOSECONDS_IN_A_MICROSECOND = 1000,
 //     NUMBER_OF_MICROSECONDS_IN_A_MILLISECOND = 1000,
 //     NUMBER_OF_MICROSECONDS_IN_A_SECOND = 1000000,
 //     NUMBER_OF_MILLISECONDS_IN_A_SECOND = 1000,

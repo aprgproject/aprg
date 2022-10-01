@@ -4,6 +4,7 @@
 #include <Algebra/Term/Utilities/TermUtilities.hpp>
 
 using namespace std;
+
 namespace alba {
 
 namespace algebra {
@@ -34,7 +35,8 @@ void SegregateTermsByConditionInAdditionAndSubtractionRetriever::retrieveFromMon
 
 void SegregateTermsByConditionInAdditionAndSubtractionRetriever::retrieveFromExpression(Expression const& expression) {
     if (OperatorLevel::AdditionAndSubtraction == expression.getCommonOperatorLevel()) {
-        for (TermWithDetails const& termWithDetails : expression.getTermsWithAssociation().getTermsWithDetails()) {            if (termWithDetails.hasPositiveAssociation()) {
+        for (TermWithDetails const& termWithDetails : expression.getTermsWithAssociation().getTermsWithDetails()) {
+            if (termWithDetails.hasPositiveAssociation()) {
                 retrieveFromTerm(getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer));
             } else {
                 retrieveFromTerm(negateTerm(getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer)));
@@ -51,7 +53,8 @@ void SegregateTermsByConditionInAdditionAndSubtractionRetriever::retrieveFromFun
 
 void SegregateTermsByConditionInAdditionAndSubtractionRetriever::saveTerm(Term const& term) {
     if (m_condition(term)) {
-        m_termWithCondition += term;    } else {
+        m_termWithCondition += term;
+    } else {
         m_termWithoutCondition += term;
     }
 }

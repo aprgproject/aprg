@@ -39,7 +39,8 @@ bool doesTheTwoLineSegmentsIntersect(LineSegment const& segment1, LineSegment co
 bool isPointInsideTriangle(Triangle const& triangle, Point const& point);
 
 double getDistance(Point const& point1, Point const& point2);
-double getDistance(Line const& line, Point const& point);double getDistance(LineSegment const& lineSegment, Point const& point);
+double getDistance(Line const& line, Point const& point);
+double getDistance(LineSegment const& lineSegment, Point const& point);
 double getDistance(Line const& line1, Line const& line2);
 double getEuclideanDistance(Point const& point1, Point const& point2);
 double getManhattanDistance(Point const& point1, Point const& point2);
@@ -64,6 +65,7 @@ ConicSectionType getConicSectionBasedOnGeneralForm(
     double const a, double const b, double const c, double const d, double const e);
 Quadrant getQuadrantOfAPoint(Point const& point);
 RotationDirection getRotationDirectionTraversing3Points(Point const a, Point const b, Point const c);
+
 AlbaAngle getAngleOfPointWithRespectToOrigin(Point const& point);
 AlbaAngle getTheInnerAngleUsingThreePoints(Point const& commonPoint, Point const& firstPoint, Point const& secondPoint);
 AlbaAngle getTheSmallerAngleBetweenTwoLines(Line const& line1, Line const& line2);
@@ -96,7 +98,8 @@ Points getPointsInSortedDecreasingX(Points const& pointsToBeSorted);
 Points getConvexHullPointsUsingJarvisAlgorithm(Points const& points);
 Points getConvexHullPointsUsingGrahamScan(Points const& points);
 
-Line getLineWithSameSlope(Line const& line, Point const& point);Line getLineWithPerpendicularSlope(Line const& line, Point const& point);
+Line getLineWithSameSlope(Line const& line, Point const& point);
+Line getLineWithPerpendicularSlope(Line const& line, Point const& point);
 Line getTangentLineAt(Circle const& circle, Point const& point);
 Line getTangentLineAt(Ellipse const& ellipse, Point const& point);
 Line getTangentLineAt(Hyperbola const& hyperbola, Point const& point);
@@ -134,6 +137,7 @@ bool isPointInsidePolygon(
         });
     return mathHelper::isOdd(numberOfIntersections);
 }
+
 template <int numberOfVertices>
 double getArea(Polygon<numberOfVertices> const& polygon) {
     // shoelace formula

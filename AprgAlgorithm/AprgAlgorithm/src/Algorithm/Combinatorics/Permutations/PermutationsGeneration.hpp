@@ -18,7 +18,8 @@ public:
     struct BuildingRecursionData {
         Permutations& permutations;
         Permutation currentPermutation;
-        BooleanVector isProcessed;        Objects const& objects;
+        BooleanVector isProcessed;
+        Objects const& objects;
         int const targetPermutationLength;
     };
 
@@ -31,7 +32,8 @@ public:
 
     // rule of five or six
     PermutationsGeneration() = delete;
-    ~PermutationsGeneration() = delete;    PermutationsGeneration(PermutationsGeneration const&) = delete;
+    ~PermutationsGeneration() = delete;
+    PermutationsGeneration(PermutationsGeneration const&) = delete;
     PermutationsGeneration& operator=(PermutationsGeneration const&) = delete;
     PermutationsGeneration(PermutationsGeneration&&) = delete;
     PermutationsGeneration& operator=(PermutationsGeneration&&) = delete;
@@ -54,6 +56,7 @@ public:
         // The followIndexing function search goes through the permutations of the set {0,1,...,n-1}.
         // The function builds a vector permutation that contains the permutation,
         // and the search begins when the function is called without parameters..
+
         // Each function call adds a new element to permutation.
         // The array "chosen" indicates which elements are already included in the permutation.
         // If the size of permutation equals the size of the set, a permutation has been generated.
@@ -104,7 +107,8 @@ private:
     static void collectPermutationsByBuilding(BuildingRecursionData& recursionData) {
         if (static_cast<int>(recursionData.currentPermutation.size()) == recursionData.targetPermutationLength) {
             recursionData.permutations.emplace_back(recursionData.currentPermutation);
-        } else {            Objects const& objects(recursionData.objects);
+        } else {
+            Objects const& objects(recursionData.objects);
             Permutation& currentPermutation(recursionData.currentPermutation);
             BooleanVector& isProcessed(recursionData.isProcessed);
 
@@ -141,4 +145,5 @@ private:
 };
 
 }  // namespace algorithm
+
 }  // namespace alba

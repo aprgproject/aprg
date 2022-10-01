@@ -52,7 +52,8 @@ TEST(ComboTest, SimplifyToCommonDenominatorAndSubstitutionWorksUsingExample1) {
     Expression simplifiedTerm(term.getAsExpression());
     simplifiedTerm.simplify();
 
-    EXPECT_EQ(Term(AlbaNumber::createFraction(-252, 25)), substitution.performSubstitutionTo(simplifiedTerm));}
+    EXPECT_EQ(Term(AlbaNumber::createFraction(-252, 25)), substitution.performSubstitutionTo(simplifiedTerm));
+}
 
 TEST(ComboTest, OneVariableInequalityCanBeSolvedUsingExample1) {
     OneEquationOneVariableNonEqualitySolver solver;

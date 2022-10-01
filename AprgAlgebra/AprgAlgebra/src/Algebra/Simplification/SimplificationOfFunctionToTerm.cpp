@@ -32,7 +32,8 @@ Term SimplificationOfFunctionToTerm::simplifyToTerm(Function const& functionObje
     Term const& inputTerm(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
     if (inputTerm.isConstant()) {
         result = Term(functionObject.performFunctionAndReturnResultIfPossible());
-    } else if (isTrigonometricFunction(functionObject)) {        result = simplifyTrigometricFunctionToExpression(functionObject);
+    } else if (isTrigonometricFunction(functionObject)) {
+        result = simplifyTrigometricFunctionToExpression(functionObject);
         result.simplify();
     } else if (isLogarithmicFunction(functionObject)) {
         result = simplifyLogarithmicFunctionToExpression(functionObject);
@@ -52,7 +53,8 @@ Term SimplificationOfFunctionToTerm::simplifyTrigometricFunctionToExpression(Fun
         Term const& inputTerm(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
         if ("tan" == functionName) {
             result = Term(createExpressionIfPossible({sin(inputTerm), "/", cos(inputTerm)}));
-        } else if ("csc" == functionName) {            result = Term(createExpressionIfPossible({1, "/", sin(inputTerm)}));
+        } else if ("csc" == functionName) {
+            result = Term(createExpressionIfPossible({1, "/", sin(inputTerm)}));
         } else if ("sec" == functionName) {
             result = Term(createExpressionIfPossible({1, "/", cos(inputTerm)}));
         } else if ("cot" == functionName) {
@@ -71,7 +73,8 @@ Term SimplificationOfFunctionToTerm::simplifyLogarithmicFunctionToExpression(Fun
             Expression const& inputExpression(inputTerm.getAsExpression());
             if (OperatorLevel::MultiplicationAndDivision == inputExpression.getCommonOperatorLevel()) {
                 TermsWithDetails newTermsWithDetails(inputExpression.getTermsWithAssociation().getTermsWithDetails());
-                for (TermWithDetails& newTermWithDetails : newTermsWithDetails) {                    Term& newTerm(getTermReferenceFromUniquePointer(newTermWithDetails.baseTermPointer));
+                for (TermWithDetails& newTermWithDetails : newTermsWithDetails) {
+                    Term& newTerm(getTermReferenceFromUniquePointer(newTermWithDetails.baseTermPointer));
                     newTerm = getLogarithmicOfTermBasedFromName(newTerm, functionObject.getFunctionName());
                 }
                 resultExpression.set(OperatorLevel::AdditionAndSubtraction, newTermsWithDetails);

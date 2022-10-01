@@ -125,6 +125,7 @@ AlbaNumbers SeriesBasedOnFormula::getBoundValues() const {
     }
     return boundValues;
 }
+
 AlbaNumbers SeriesBasedOnFormula::getExtremaIndexes() const {
     DifferentiationForFiniteCalculus differentiation(m_variableName);
     Term firstDerivative(differentiation.differentiate(m_formulaForSeries));

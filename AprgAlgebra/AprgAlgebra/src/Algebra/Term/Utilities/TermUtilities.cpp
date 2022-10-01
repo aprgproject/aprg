@@ -34,7 +34,8 @@ bool isNegatedTermSimpler(Term const& term, Term const& negatedTerm) {
     return isTermSimpler(term, negatedTerm) || firstCoefficientRetrieverForTerm.getFirstCoefficient() < 0;
 }
 
-bool isNonEmptyOrNonOperatorType(Term const& term) {    TermType termType(term.getTermType());
+bool isNonEmptyOrNonOperatorType(Term const& term) {
+    TermType termType(term.getTermType());
     return TermType::Empty != termType && TermType::Operator != termType;
 }
 
@@ -67,7 +68,8 @@ AlbaNumber getConstantFactor(Term const& term) {
                 result *= getFirstMonomial(factor).getCoefficient();
             }
         }
-    }    return result;
+    }
+    return result;
 }
 
 AlbaNumber getDegree(Term const& term) {
@@ -85,7 +87,8 @@ AlbaNumber getDegree(Term const& term) {
         Expression const& expression(term.getAsExpression());
         TermsWithDetails const& termsWithDetails(expression.getTermsWithAssociation().getTermsWithDetails());
         if (OperatorLevel::AdditionAndSubtraction == expression.getCommonOperatorLevel()) {
-            AlbaNumber maxDegree(0);            for (TermWithDetails const& termWithDetails : termsWithDetails) {
+            AlbaNumber maxDegree(0);
+            for (TermWithDetails const& termWithDetails : termsWithDetails) {
                 Term const& term(getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer));
                 maxDegree = max(maxDegree, getDegree(term));
             }
@@ -104,7 +107,8 @@ AlbaNumber getDegree(Term const& term) {
         if ("ln" == term.getAsFunction().getFunctionName()) {
             result = ALBA_NUMBER_NEGATIVE_INFINITY;
         } else {
-            result = 0;        }
+            result = 0;
+        }
     }
     return result;
 }
@@ -120,7 +124,8 @@ AlbaNumberPairs evaluateAndGetInputOutputPair(
             result.emplace_back(number, substituteTerm.getAsNumber());
         }
     }
-    return result;}
+    return result;
+}
 
 Term getPiAsATerm() { return ALBA_NUMBER_PI; }
 

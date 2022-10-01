@@ -105,7 +105,8 @@ void retrieveConstantAndNonConstantFactors(
                 constantFactor *= factor.getAsNumber();
             } else {
                 nonConstantRaiseToExponent.putTerm(factor, TermAssociationType::Positive);
-            }        }
+            }
+        }
         constantFactors.emplace_back(constantFactor);
         nonConstantFactorsPerAddends.emplace_back(nonConstantRaiseToExponent);
     }
@@ -218,6 +219,7 @@ bool dontFactorizeBaseBecauseBaseIsARaiseToPowerExpression(Term const& base) {
     }
     return result;
 }
+
 bool dontFactorizeBecauseThereIsSquareRootOfNegativeNumber(Term const& base, AlbaNumber const& exponent) {
     bool hasEvenDenominatorExponents(false);
     if (exponent.isFractionType()) {

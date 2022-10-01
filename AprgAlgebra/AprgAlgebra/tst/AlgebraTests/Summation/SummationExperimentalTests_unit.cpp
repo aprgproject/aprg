@@ -57,7 +57,8 @@ TEST(SummationTest, ExperimentalTest2) {
         substitution.performSubstitutionTo(summationFormula).getAsNumber().getInteger();
     long long display = result % 1000000007;
 
-    for (Polynomial const& polynomial : polynomials) {        cout << "Factor: " << polynomial << "\n";
+    for (Polynomial const& polynomial : polynomials) {
+        cout << "Factor: " << polynomial << "\n";
     }
     EXPECT_EQ(
         "((1/2)[C][R][minOfRSMinus1^2] + (-1/3)[C][minOfRSMinus1^3] + (-1/3)[R][minOfRSMinus1^3] + "

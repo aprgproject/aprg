@@ -18,7 +18,8 @@ TEST(VariableNamesRetrieverTest, RetrieveFromEquationsWorks) {
     VariableNamesSet const& variableNamesSet(retriever.getVariableNames());
     ASSERT_EQ(6U, variableNamesSet.size());
     auto it = variableNamesSet.cbegin();
-    EXPECT_EQ("a", *(it++));    EXPECT_EQ("b", *(it++));
+    EXPECT_EQ("a", *(it++));
+    EXPECT_EQ("b", *(it++));
     EXPECT_EQ("p", *(it++));
     EXPECT_EQ("r", *(it++));
     EXPECT_EQ("x", *(it++));
@@ -36,7 +37,8 @@ TEST(VariableNamesRetrieverTest, RetrieveFromEquationWorks) {
     VariableNamesSet const& variableNamesSet(retriever.getVariableNames());
     ASSERT_EQ(2U, variableNamesSet.size());
     VariableNamesSet::const_iterator it = variableNamesSet.cbegin();
-    EXPECT_EQ("x", *(it++));    EXPECT_EQ("y", *(it++));
+    EXPECT_EQ("x", *(it++));
+    EXPECT_EQ("y", *(it++));
 }
 
 TEST(VariableNamesRetrieverTest, RetrieveFromTermWorks) {
@@ -55,7 +57,8 @@ TEST(VariableNamesRetrieverTest, RetrieveFromTermWorks) {
     VariableNamesSet const& variableNamesSet(retriever.getVariableNames());
     ASSERT_EQ(7U, variableNamesSet.size());
     VariableNamesSet::const_iterator it = variableNamesSet.cbegin();
-    EXPECT_EQ("a", *(it++));    EXPECT_EQ("b", *(it++));
+    EXPECT_EQ("a", *(it++));
+    EXPECT_EQ("b", *(it++));
     EXPECT_EQ("c", *(it++));
     EXPECT_EQ("d", *(it++));
     EXPECT_EQ("e", *(it++));
@@ -71,6 +74,7 @@ TEST(VariableNamesRetrieverTest, RetrieveFromConstantWorks) {
     VariableNamesSet const& variableNamesSet(retriever.getVariableNames());
     EXPECT_TRUE(variableNamesSet.empty());
 }
+
 TEST(VariableNamesRetrieverTest, RetrieveFromVariableWorks) {
     VariableNamesRetriever retriever;
 
@@ -79,7 +83,8 @@ TEST(VariableNamesRetrieverTest, RetrieveFromVariableWorks) {
     VariableNamesSet const& variableNamesSet(retriever.getVariableNames());
     ASSERT_EQ(1U, variableNamesSet.size());
     VariableNamesSet::const_iterator it = variableNamesSet.cbegin();
-    EXPECT_EQ("x", *(it++));}
+    EXPECT_EQ("x", *(it++));
+}
 
 TEST(VariableNamesRetrieverTest, RetrieveFromMonomialWorks) {
     VariableNamesRetriever retriever;
@@ -89,7 +94,8 @@ TEST(VariableNamesRetrieverTest, RetrieveFromMonomialWorks) {
     VariableNamesSet const& variableNamesSet(retriever.getVariableNames());
     ASSERT_EQ(2U, variableNamesSet.size());
     VariableNamesSet::const_iterator it = variableNamesSet.cbegin();
-    EXPECT_EQ("x", *(it++));    EXPECT_EQ("y", *(it++));
+    EXPECT_EQ("x", *(it++));
+    EXPECT_EQ("y", *(it++));
 }
 
 TEST(VariableNamesRetrieverTest, RetrieveFromPolynomialWorks) {
@@ -100,7 +106,8 @@ TEST(VariableNamesRetrieverTest, RetrieveFromPolynomialWorks) {
     VariableNamesSet const& variableNamesSet(retriever.getVariableNames());
     ASSERT_EQ(2U, variableNamesSet.size());
     VariableNamesSet::const_iterator it = variableNamesSet.cbegin();
-    EXPECT_EQ("x", *(it++));    EXPECT_EQ("y", *(it++));
+    EXPECT_EQ("x", *(it++));
+    EXPECT_EQ("y", *(it++));
 }
 
 TEST(VariableNamesRetrieverTest, RetrieveFromExpressionWorks) {
@@ -111,7 +118,8 @@ TEST(VariableNamesRetrieverTest, RetrieveFromExpressionWorks) {
     VariableNamesSet const& variableNamesSet(retriever.getVariableNames());
     ASSERT_EQ(1U, variableNamesSet.size());
     VariableNamesSet::const_iterator it = variableNamesSet.cbegin();
-    EXPECT_EQ("x", *(it++));}
+    EXPECT_EQ("x", *(it++));
+}
 
 TEST(VariableNamesRetrieverTest, RetrieveFromFunctionWorks) {
     VariableNamesRetriever retriever;
@@ -124,7 +132,8 @@ TEST(VariableNamesRetrieverTest, RetrieveFromFunctionWorks) {
     VariableNamesSet const& variableNamesSet(retriever.getVariableNames());
     ASSERT_EQ(1U, variableNamesSet.size());
     VariableNamesSet::const_iterator it = variableNamesSet.cbegin();
-    EXPECT_EQ("x", *(it++));}
+    EXPECT_EQ("x", *(it++));
+}
 
 TEST(VariableNamesRetrieverTest, RetrieveFromPolynomialsWorks) {
     VariableNamesRetriever retriever;
@@ -137,7 +146,8 @@ TEST(VariableNamesRetrieverTest, RetrieveFromPolynomialsWorks) {
     VariableNamesSet const& variableNamesSet(retriever.getVariableNames());
     ASSERT_EQ(4U, variableNamesSet.size());
     VariableNamesSet::const_iterator it = variableNamesSet.cbegin();
-    EXPECT_EQ("a", *(it++));    EXPECT_EQ("b", *(it++));
+    EXPECT_EQ("a", *(it++));
+    EXPECT_EQ("b", *(it++));
     EXPECT_EQ("x", *(it++));
     EXPECT_EQ("y", *(it++));
 }

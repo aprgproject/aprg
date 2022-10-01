@@ -56,7 +56,8 @@ void splitPolynomialsByPolynomialDegree(Polynomials& result, Polynomial const& p
     Monomials monomials(polynomial.getMonomials());
     Polynomial partialPolynomial;
     if (!monomials.empty()) {
-        AlbaNumber previousDegree(getDegree(monomials.front()));        for (Monomial const& monomial : monomials) {
+        AlbaNumber previousDegree(getDegree(monomials.front()));
+        for (Monomial const& monomial : monomials) {
             AlbaNumber monomialDegree(getDegree(monomial));
             if (previousDegree != monomialDegree) {
                 previousDegree = monomialDegree;
@@ -76,7 +77,8 @@ void splitPolynomialsByDivisibilityOfExponents(Polynomials& result, Polynomial c
         Monomials remainingMonomials = polynomial.getMonomials();
         long long int degree = polynomialDegree.getInteger();
         for (; degree >= 2; degree--) {
-            Polynomial partialPolynomial;            Monomials collectedMonomials;
+            Polynomial partialPolynomial;
+            Monomials collectedMonomials;
             for (Monomial const& remainingMonomial : remainingMonomials) {
                 if (areExponentsDivisible(remainingMonomial, degree)) {
                     partialPolynomial.addMonomial(remainingMonomial);
@@ -98,7 +100,8 @@ void splitPolynomialsByFirstVariable(Polynomials& result, Polynomial const& poly
     Monomials monomials(polynomial.getMonomials());
     Polynomial partialPolynomial;
     string firstVariableName;
-    bool isFirst(true);    for (Monomial const& monomial : monomials) {
+    bool isFirst(true);
+    for (Monomial const& monomial : monomials) {
         string monomialFirstVariableName(getFirstVariableName(monomial));
         if (!monomialFirstVariableName.empty()) {
             if (isFirst) {

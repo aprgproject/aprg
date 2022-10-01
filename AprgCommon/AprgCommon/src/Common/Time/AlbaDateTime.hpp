@@ -5,6 +5,7 @@
 
 #include <cstdint>
 #include <ostream>
+
 namespace alba {
 
 using UInt32BitHelper = AlbaBitManipulation<uint32_t>;
@@ -32,7 +33,8 @@ public:
     AlbaDateTimeConstants::DayOfTheWeek getDayOfTheWeek() const;
 
     void clear();
-    void setTime(uint32_t const totalDays);    void setTime(uint16_t const years, uint8_t const month, uint8_t const days);
+    void setTime(uint32_t const totalDays);
+    void setTime(uint16_t const years, uint8_t const month, uint8_t const days);
 
 private:
     constexpr uint32_t convertToYearMonthDayFormat(

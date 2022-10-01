@@ -38,7 +38,8 @@ public:
     BaseTerm const& getInputTerm() const;
     EvaluationFunction const& getEvaluationFunction() const;
 
-    BaseTerm& getInputTermReference();    void simplify();
+    BaseTerm& getInputTermReference();
+    void simplify();
 
     void setAsSimplified();
     void clearSimplifiedFlag();

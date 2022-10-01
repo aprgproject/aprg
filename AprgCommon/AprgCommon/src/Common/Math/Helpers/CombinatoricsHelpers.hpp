@@ -123,6 +123,7 @@ NumberType getValueAtPascalTriangle(NumberType const rowIndex, NumberType const 
 
     return getNumberOfCombinations(rowIndex, columnIndex);
 }
+
 template <typename NumberType>
 typename std::make_signed<NumberType>::type getStirlingNumberOfTheSecondKind(NumberType const n, NumberType const k) {
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");

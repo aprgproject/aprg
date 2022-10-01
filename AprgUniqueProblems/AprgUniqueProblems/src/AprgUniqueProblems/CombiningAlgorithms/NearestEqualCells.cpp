@@ -111,7 +111,8 @@ NearestEqualCells::Coordinate NearestEqualCells::getCoordinateUsingBfs(
     for (auto const& [coordinate, distance] : bfs.getEndVertexToDistanceCountMap()) {
         if (value == m_valueMatrix.getEntry(coordinate.first, coordinate.second) && firstCoordinate != coordinate) {
             if (isFirst) {
-                minimumDistance = distance;                result = coordinate;
+                minimumDistance = distance;
+                result = coordinate;
                 isFirst = false;
             } else if (distance < minimumDistance) {
                 minimumDistance = distance;

@@ -53,7 +53,8 @@ bool isConvergentUsingComparisonTest(
                     (termToCheck.getAsNumber() <= convergentTerm.getAsNumber());
                 if (!areAllValuesSatisfied) {
                     break;
-                }            }
+                }
+            }
         }
         result = areAllValuesSatisfied;
     }
@@ -74,7 +75,8 @@ bool isDivergentUsingComparisonTest(
                     (termToCheck.getAsNumber() >= divergentTerm.getAsNumber());
                 if (!areAllValuesSatisfied) {
                     break;
-                }            }
+                }
+            }
         }
         result = areAllValuesSatisfied;
     }
@@ -129,7 +131,8 @@ void performRatioTest(
         AlbaNumber limitValue(limitTerm.getAsNumber());
         if (limitValue < 1) {
             isConvergent = true;
-        } else if (limitValue > 1) {            isDivergent = true;
+        } else if (limitValue > 1) {
+            isDivergent = true;
         }
     }
 }
@@ -146,7 +149,8 @@ void performRootTest(
         AlbaNumber limitValue(limitTerm.getAsNumber());
         if (limitValue < 1) {
             isConvergent = true;
-        } else if (limitValue > 1) {            isDivergent = true;
+        } else if (limitValue > 1) {
+            isDivergent = true;
         }
     }
 }

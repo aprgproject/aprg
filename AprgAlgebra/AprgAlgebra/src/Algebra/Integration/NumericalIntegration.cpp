@@ -101,7 +101,8 @@ AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(AlbaNumber const
             result = approximateValue.getAsNumber();
         }
     }
-    return result;}
+    return result;
+}
 
 AlbaNumber getAnApproximateOfNaturalLogarithmUsingSimpsonRule(AlbaNumber const& input, int const numberOfSamples) {
     AlbaNumber result;
@@ -113,7 +114,8 @@ AlbaNumber getAnApproximateOfNaturalLogarithmUsingSimpsonRule(AlbaNumber const& 
             result = approximateValue.getAsNumber();
         }
     }
-    return result;}
+    return result;
+}
 
 }  // namespace algebra
 

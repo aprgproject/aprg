@@ -4,7 +4,8 @@
 #include <Algebra/Retrieval/SingleVariableNameRetriever.hpp>
 #include <Algebra/Solution/SolutionUtilities.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
-#include <Algebra/Term/Utilities/PolynomialHelpers.hpp>#include <Common/Math/Helpers/PrecisionHelpers.hpp>
+#include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
+#include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
 using namespace alba::mathHelper;
 using namespace std;
@@ -41,6 +42,7 @@ void OneEquationOneVariableEqualitySolver::calculateForEquation(SolutionSet& sol
         addValuesToSolutionSetIfNeeded(solutionSet, nonZeroLeftHandTerm, singleVariableName);
     }
 }
+
 void OneEquationOneVariableEqualitySolver::calculateForTermAndVariable(Term const& term, string const& variableName) {
     PolynomialOverPolynomialOptional popOptional(createPolynomialOverPolynomialFromTermIfPossible(term));
     if (popOptional) {
@@ -73,7 +75,8 @@ void OneEquationOneVariableEqualitySolver::addValuesToSolutionSetIfNeeded(
                 AlbaNumber const& computedValue(substitutedResult.getAsNumber());
                 if (!computedValue.isAFiniteValue()) {
                     solutionSet.addRejectedValue(value);
-                } else if (isAlmostEqual(computedValue.getDouble(), 0.0, DIFFERENCE_TOLERANCE_FOR_ACCEPTED_VALUE)) {                    solutionSet.addAcceptedValue(value);
+                } else if (isAlmostEqual(computedValue.getDouble(), 0.0, DIFFERENCE_TOLERANCE_FOR_ACCEPTED_VALUE)) {
+                    solutionSet.addAcceptedValue(value);
                 }
             }
         }
@@ -106,7 +109,8 @@ NewtonMethod::Function OneEquationOneVariableEqualitySolver::getFunctionToIterat
             computedValue = substitutedTerm.getAsNumber();
         }
         return computedValue;
-    };    return result;
+    };
+    return result;
 }
 
 AlbaNumber OneEquationOneVariableEqualitySolver::getMoreAccurateValueFromNewtonMethod(

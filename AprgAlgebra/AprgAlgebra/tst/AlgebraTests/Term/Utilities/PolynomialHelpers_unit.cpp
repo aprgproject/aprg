@@ -15,7 +15,8 @@ TEST(PolynomialHelpersTest, DoesThePolynomialHaveOnlyOneConstantWorks) {
 
 TEST(PolynomialHelpersTest, DoesThePolynomialHaveDoubleValueWorks) {
     EXPECT_FALSE(doesThePolynomialHaveDoubleValue(Polynomial{Monomial(1, {{"x", 3}}), Monomial(-16, {})}));
-    EXPECT_TRUE(doesThePolynomialHaveDoubleValue(Polynomial{Monomial(1, {{"x", 3}}), Monomial(-0.75, {})}));    EXPECT_TRUE(doesThePolynomialHaveDoubleValue(Polynomial{Monomial(1, {{"x", 0.75}}), Monomial(-16, {})}));
+    EXPECT_TRUE(doesThePolynomialHaveDoubleValue(Polynomial{Monomial(1, {{"x", 3}}), Monomial(-0.75, {})}));
+    EXPECT_TRUE(doesThePolynomialHaveDoubleValue(Polynomial{Monomial(1, {{"x", 0.75}}), Monomial(-16, {})}));
 }
 
 TEST(PolynomialHelpersTest, DoesOnePolynomialHaveADoubleValueWorks) {
@@ -99,6 +100,7 @@ TEST(PolynomialHelpersTest, GetFirstMonomialWorks) {
     Monomial::VariablesToExponentsMap const& variableMap3(monomial3.getVariablesToExponentsMap());
     ASSERT_TRUE(variableMap3.empty());
 }
+
 TEST(PolynomialHelpersTest, GetMaxDegreeWorks) {
     Polynomial polynomial1;
     Polynomial polynomial2{Monomial(6, {})};
@@ -143,7 +145,8 @@ TEST(PolynomialHelpersTest, GetEvaluatedValueUsingHornersSubstitutionOfOneVariab
     EXPECT_EQ(AlbaNumber(-3908), getEvaluatedValueUsingHornersSubstitutionOfOneVariablePolynomial(polynomial, 2));
 }
 
-TEST(PolynomialHelpersTest, GetRootsWorksAndRootsIsEmptyWhenConstantIsGiven) {    AlbaNumbers roots(getRoots(RootType::RealRootsOnly, Polynomial{Monomial(-16, {})}));
+TEST(PolynomialHelpersTest, GetRootsWorksAndRootsIsEmptyWhenConstantIsGiven) {
+    AlbaNumbers roots(getRoots(RootType::RealRootsOnly, Polynomial{Monomial(-16, {})}));
 
     EXPECT_TRUE(roots.empty());
 }
