@@ -128,13 +128,10 @@ void retrieveCommonNonConstantFactors(
     if (!nonConstantFactorsPerAddends.empty()) {
         commonNonConstantFactors = nonConstantFactorsPerAddends.front();
         for (auto it = nonConstantFactorsPerAddends.cbegin() + 1; it != nonConstantFactorsPerAddends.cend(); it++) {
-            for (auto const& commonFactorBaseExponentPair : commonNonConstantFactors.getBaseToExponentMap()) {
-                Term const& base(commonFactorBaseExponentPair.first);
-                AlbaNumber const& exponentAtCommonFactor(commonFactorBaseExponentPair.second);
+            for (auto const& [base, exponentAtCommonFactor] : commonNonConstantFactors.getBaseToExponentMap()) {
                 AlbaNumber exponentAtAddend(it->getExponentOfBase(base));
                 if (exponentAtAddend > 0) {
-                    commonNonConstantFactors.setBaseAndExponent(base, min(exponentAtCommonFactor, exponentAtAddend));
-                } else if (exponentAtAddend < 0) {
+                    commonNonConstantFactors.setBaseAndExponent(base, min(exponentAtCommonFactor, exponentAtAddend));                } else if (exponentAtAddend < 0) {
                     commonNonConstantFactors.setBaseAndExponent(base, max(exponentAtCommonFactor, exponentAtAddend));
                 } else {
                     commonNonConstantFactors.setBaseAndExponent(base, 0);

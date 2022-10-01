@@ -24,12 +24,11 @@ int MultipleVariableSolutionSet::getNumberOfVariablesWithSolutions() const {
 
 VariableNamesSet MultipleVariableSolutionSet::getVariableNames() const {
     VariableNamesSet result;
-    for (auto const& pair : m_variableNameToSolutionSetMap) {
-        result.emplace(pair.first);
+    for (auto const& [variableName, solutionSet] : m_variableNameToSolutionSetMap) {
+        result.emplace(variableName);
     }
     return result;
 }
-
 SolutionSet MultipleVariableSolutionSet::getSolutionSetForVariable(string const& variableName) const {
     SolutionSet result;
     auto it = m_variableNameToSolutionSetMap.find(variableName);

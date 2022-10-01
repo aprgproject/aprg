@@ -168,13 +168,10 @@ Term IntegrationForFiniteCalculus::integrateFunction(Function const&) const { re
 Monomial IntegrationForFiniteCalculus::integrateMonomialInFallingPower(Monomial const& monomial) const {
     Monomial result(monomial);
     bool hasVariabletoIntegrate(false);
-    for (auto const& variableExponentPair : monomial.getVariablesToExponentsMap()) {
-        string const& variableName(variableExponentPair.first);
-        AlbaNumber const& exponent(variableExponentPair.second);
+    for (auto const& [variableName, exponent] : monomial.getVariablesToExponentsMap()) {
         if (isVariableToIntegrate(variableName)) {
             result.putVariableWithExponent(variableName, exponent + 1);
-            result.divideNumber(exponent + 1);
-            hasVariabletoIntegrate = true;
+            result.divideNumber(exponent + 1);            hasVariabletoIntegrate = true;
         }
     }
     if (!hasVariabletoIntegrate) {
