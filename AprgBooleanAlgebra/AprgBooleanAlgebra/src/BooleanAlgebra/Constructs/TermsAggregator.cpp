@@ -143,6 +143,7 @@ TermsAggregator::Indexes TermsAggregator::getNextOperatorIndexes(OperatorInputTy
     }
     return operatorIndexes;
 }
+
 bool TermsAggregator::buildExpressionWithBinaryOperationAndReturnIfBuilt(int const index) {
     bool isBuilt(false);
     if (index > 0 && index + 1 < static_cast<int>(m_terms.size())) {

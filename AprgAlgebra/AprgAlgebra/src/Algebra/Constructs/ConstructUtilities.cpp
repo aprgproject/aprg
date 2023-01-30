@@ -92,7 +92,8 @@ TermRaiseToANumber createTermRaiseToANumberFromMonomial(Monomial const& monomial
     Monomial::VariablesToExponentsMap const& variablesToExponentsMap(newMonomial.getVariablesToExponentsMap());
     AlbaNumber exponent = (variablesToExponentsMap.size() == 1) ? (variablesToExponentsMap.cbegin())->second
                                                                 : getGcfOfExponentsInMonomial(newMonomial);
-    newMonomial.raiseToPowerNumber(AlbaNumber(1) / exponent);    return TermRaiseToANumber(Term(newMonomial), exponent);
+    newMonomial.raiseToPowerNumber(AlbaNumber(1) / exponent);
+    return TermRaiseToANumber(Term(newMonomial), exponent);
 }
 
 TermRaiseToANumber createTermRaiseToANumberFromPolynomial(Polynomial const& polynomial) {
@@ -130,7 +131,8 @@ void createTermRaiseToANumberFromRaiseToPowerExpression(TermRaiseToANumber& resu
                 combinedExponentValue = combinedExponentValue * exponentTerm.getAsMonomial().getCoefficient();
                 exponentTerm.getAsMonomialReference().setConstant(1);
             }
-        }        raiseToPowerTerms.erase(
+        }
+        raiseToPowerTerms.erase(
             remove_if(
                 raiseToPowerTerms.begin() + 1, raiseToPowerTerms.end(),
                 [&](TermWithDetails const& raiseToPowerTerm) {
@@ -159,7 +161,8 @@ void createTermRaiseToANumberFromMultiplicationAndDivisionExpression(
     for (auto const& [base, exponent] : termsRaiseToNumbers.getBaseToExponentMap()) {
         if (!base.isConstant()) {
             if (exponent > 0) {
-                areAllExponentsNegative = false;            }
+                areAllExponentsNegative = false;
+            }
             if (isFirst) {
                 commonExponent = exponent;
                 isFirst = false;
@@ -175,7 +178,8 @@ void createTermRaiseToANumberFromMultiplicationAndDivisionExpression(
         termsRaiseToNumbers.setBaseAndExponent(base, exponent / commonExponent);
     }
 
-    TermsOverTerms totWithoutCommonExponent(        termsRaiseToNumbers.getTermWithDetailsInMultiplicationAndDivisionOperation());
+    TermsOverTerms totWithoutCommonExponent(
+        termsRaiseToNumbers.getTermWithDetailsInMultiplicationAndDivisionOperation());
     totWithoutCommonExponent.setAsShouldSimplifyToFactors(true);
     result = TermRaiseToANumber(totWithoutCommonExponent.getCombinedTerm(), commonExponent);
 }
@@ -189,7 +193,8 @@ TermRaiseToTerms createTermRaiseToTermsFromTerm(Term const& term) {
         TermRaiseToANumber termRaiseToANumber(createTermRaiseToANumberFromPolynomial(term.getAsPolynomial()));
         result.setBaseAndExponent(termRaiseToANumber.getBase(), termRaiseToANumber.getExponent());
     } else if (term.isExpression()) {
-        result = createTermRaiseToTermsFromExpression(term.getAsExpression());    }
+        result = createTermRaiseToTermsFromExpression(term.getAsExpression());
+    }
     if (result.isEmpty()) {
         result = TermRaiseToTerms(term, 1);
     }
@@ -233,7 +238,8 @@ void createTermRaiseToTermsFromMultiplicationAndDivisionExpression(
             originalConstants.emplace_back(base.getAsNumber() ^ exponent.getAsNumber());
         } else {
             originalBases.emplace_back(base);
-            originalExponentsWithDetails.emplace_back(exponent, TermAssociationType::Positive);        }
+            originalExponentsWithDetails.emplace_back(exponent, TermAssociationType::Positive);
+        }
     }
     retrieveConstantAndNonConstantFactors(
         nonConstantFactorsOfExponents, constantFactorsOfExponents, originalExponentsWithDetails);

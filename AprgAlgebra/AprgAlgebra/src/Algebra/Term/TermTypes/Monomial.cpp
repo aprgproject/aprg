@@ -34,6 +34,7 @@ Monomial::VariablesToExponentsMap Monomial::combineVariableExponentMapByMultipli
     }
     return newVariableMap;
 }
+
 Monomial::VariablesToExponentsMap Monomial::combineVariableExponentMapByDivision(
     VariablesToExponentsMap const& variablesMap1, VariablesToExponentsMap const& variablesMap2) {
     VariablesToExponentsMap newVariableMap;
@@ -45,6 +46,7 @@ Monomial::VariablesToExponentsMap Monomial::combineVariableExponentMapByDivision
     }
     return newVariableMap;
 }
+
 bool Monomial::operator==(Monomial const& second) const {
     return m_constant == second.m_constant && m_variablesToExponentsMap == second.m_variablesToExponentsMap;
 }
@@ -118,7 +120,8 @@ void Monomial::raiseToPowerNumber(AlbaNumber const& number) {
     for (auto& [variableName, exponent] : m_variablesToExponentsMap) {
         exponent = exponent * number;
     }
-    clearSimplifiedFlag();}
+    clearSimplifiedFlag();
+}
 
 void Monomial::multiplyMonomial(Monomial const& monomial) {
     VariablesToExponentsMap newVariablesMap(
@@ -149,6 +152,7 @@ void Monomial::putVariablesWithExponents(VariablesToExponentsMap const& variable
     }
     clearSimplifiedFlag();
 }
+
 void Monomial::putVariableWithExponent(string const& variable, AlbaNumber const& exponent) {
     m_variablesToExponentsMap[variable] = exponent;
     clearSimplifiedFlag();
@@ -167,7 +171,8 @@ bool Monomial::isLessThanByComparingVariableNameMaps(Monomial const& monomial1, 
         variableNames.emplace(variableName);
     }
     bool result(false);
-    for (string const& variableName : variableNames) {        AlbaNumber exponent1(monomial1.getExponentForVariable(variableName));
+    for (string const& variableName : variableNames) {
+        AlbaNumber exponent1(monomial1.getExponentForVariable(variableName));
         AlbaNumber exponent2(monomial2.getExponentForVariable(variableName));
         if (exponent1 != exponent2) {
             result = exponent1 < exponent2;
@@ -202,7 +207,8 @@ ostream& operator<<(ostream& out, Monomial const& monomial) {
             out << "^" << exponent;
         }
         out << "]";
-    }    return out;
+    }
+    return out;
 }
 
 }  // namespace algebra

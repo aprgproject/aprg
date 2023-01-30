@@ -55,7 +55,8 @@ public:
                 result.emplace_back(startVertexOfEdge);
             }
         }
-        return result;    }
+        return result;
+    }
 
     Edges getEdges() const override {
         Edges result;

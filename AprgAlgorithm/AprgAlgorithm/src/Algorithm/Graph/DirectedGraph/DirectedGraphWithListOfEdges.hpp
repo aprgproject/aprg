@@ -87,7 +87,8 @@ protected:
             uniqueVertices.emplace(endVertexOfEdge);
         }
         return uniqueVertices;
-    }    int m_numberOfEdges;
+    }
+    int m_numberOfEdges;
     SetOfEdges m_edges;
 };
 

@@ -86,6 +86,7 @@ void SubstitutionOfVariablesToValues::putVariablesWithValues(VariablesToValuesMa
         putVariableWithValue(variableName, value);
     }
 }
+
 void SubstitutionOfVariablesToValues::putVariableWithValue(string const& variable, bool const value) {
     m_variableToValuesMap[variable] = value;
 }

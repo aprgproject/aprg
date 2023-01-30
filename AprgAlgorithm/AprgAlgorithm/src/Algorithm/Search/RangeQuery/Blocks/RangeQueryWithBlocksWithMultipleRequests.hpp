@@ -78,7 +78,8 @@ public:
                         savedOutput, this->getResultOnInterval(currentRange.second + 1, previousRange.second));
                 }
                 result.emplace_back(currentRange, savedOutput);
-                previousRange = currentRange;            }
+                previousRange = currentRange;
+            }
         }
         return result;
     }

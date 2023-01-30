@@ -105,7 +105,8 @@ Expression SubstitutionOfVariablesToTerms::performSubstitutionForMonomial(Monomi
             remainingMonomial.putVariableWithExponent(variableName, exponent);
         }
     }
-    Expression finalExpression(getBaseTermConstReferenceFromTerm(remainingMonomial));    finalExpression.putTermWithMultiplicationIfNeeded(Term(substitutedExpressions));
+    Expression finalExpression(getBaseTermConstReferenceFromTerm(remainingMonomial));
+    finalExpression.putTermWithMultiplicationIfNeeded(Term(substitutedExpressions));
     finalExpression.simplify();
     return finalExpression;
 }
@@ -146,6 +147,7 @@ void SubstitutionOfVariablesToTerms::putVariablesWithTerms(VariablesToTermsMap c
         putVariableWithTerm(variable, term);
     }
 }
+
 void SubstitutionOfVariablesToTerms::putVariableWithTerm(string const& variable, Term const& term) {
     m_variableToTermsMap[variable] = term;
     m_variableToTermsMap[variable].simplify();

@@ -73,7 +73,8 @@ private:
                     pathInDeque.emplace_back(endVertexOfEdge);
                     detectedEdges.erase(detectedEdges.begin() + i);
                     i = 0;
-                } else {                    i++;
+                } else {
+                    i++;
                 }
             }
             paths.emplace_back(pathInDeque);
@@ -94,7 +95,8 @@ private:
         for (DequeOfVertices const& pathInDeque : paths) {
             result.emplace_back(pathInDeque.begin(), pathInDeque.cend());
         }
-        return result;    }
+        return result;
+    }
 
     Edges getEdgesOfNodeDisjointPathCoverUsingFordFulkerson(
         Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {

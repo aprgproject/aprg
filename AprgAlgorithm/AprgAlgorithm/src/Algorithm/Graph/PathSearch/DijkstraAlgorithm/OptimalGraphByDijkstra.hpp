@@ -12,7 +12,8 @@ EdgeWeightedDirectedGraph getOptimalDirectedGraph(PathSearchUsingDijkstra const&
         if (pathSearch.getStartVertex() != vertex) {
             result.connect(edgeOrderedByWeight.first, edgeOrderedByWeight.second, edgeOrderedByWeight.weight);
         }
-    }    return result;
+    }
+    return result;
 }
 
 }  // namespace algorithm

@@ -39,7 +39,8 @@ private:
         for (auto const& [vertex, distance] : bfs.getEndVertexToDistanceSumMap()) {
             auto it = m_closestDistanceForVertex.find(vertex);
             if (it != m_closestDistanceForVertex.cend()) {
-                it->second = std::min(it->second, distance);            } else {
+                it->second = std::min(it->second, distance);
+            } else {
                 m_closestDistanceForVertex.emplace(vertex, distance);
             }
         }
@@ -54,7 +55,8 @@ private:
                 result = vertex;
             }
         }
-        return result;    }
+        return result;
+    }
 
     EdgeWeightedGraph const& m_graph;
     Vertex const m_startVertex;

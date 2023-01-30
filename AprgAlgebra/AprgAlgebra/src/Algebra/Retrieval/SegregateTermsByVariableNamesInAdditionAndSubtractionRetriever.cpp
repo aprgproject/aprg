@@ -42,7 +42,8 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFro
             lastVariableNameFound = variableName;
             numberOfTimesFound++;
         }
-    }    saveTerm(Term(variable), numberOfTimesFound, lastVariableNameFound);
+    }
+    saveTerm(Term(variable), numberOfTimesFound, lastVariableNameFound);
 }
 
 void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFromMonomial(Monomial const& monomial) {
@@ -53,7 +54,8 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFro
             lastVariableNameFound = variableName;
             numberOfTimesFound++;
         }
-    }    saveTerm(Term(monomial), numberOfTimesFound, lastVariableNameFound);
+    }
+    saveTerm(Term(monomial), numberOfTimesFound, lastVariableNameFound);
 }
 
 void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFromExpression(
@@ -77,7 +79,8 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFro
                 lastVariableNameFound = variableName;
                 numberOfTimesFound++;
             }
-        }        saveTerm(Term(expression), numberOfTimesFound, lastVariableNameFound);
+        }
+        saveTerm(Term(expression), numberOfTimesFound, lastVariableNameFound);
     }
 }
 
@@ -93,7 +96,8 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFro
             lastVariableNameFound = variableName;
             numberOfTimesFound++;
         }
-    }    saveTerm(Term(functionObject), numberOfTimesFound, lastVariableNameFound);
+    }
+    saveTerm(Term(functionObject), numberOfTimesFound, lastVariableNameFound);
 }
 
 void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::initializeWithVariableNames(

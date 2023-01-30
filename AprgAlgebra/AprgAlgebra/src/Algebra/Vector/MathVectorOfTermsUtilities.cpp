@@ -238,6 +238,7 @@ void retrieveWithAndWithoutOtherCoordinates(
         }
     }
 }
+
 }  // namespace VectorUtilities
 
 }  // namespace algebra

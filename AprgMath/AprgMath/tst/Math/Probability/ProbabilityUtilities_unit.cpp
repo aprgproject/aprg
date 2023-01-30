@@ -133,7 +133,8 @@ TEST(ProbabilityUtilitiesTest, GetExpectedValueWorks_OnHatCheckProblem) {
 
 TEST(ProbabilityUtilitiesTest, GetExpectedValueInUniformDistributionWorks) {
     EXPECT_EQ(
-        AlbaNumber::createFraction(101, 2U), getExpectedValueInUniformDistribution(AlbaNumber(1), AlbaNumber(100)));}
+        AlbaNumber::createFraction(101, 2U), getExpectedValueInUniformDistribution(AlbaNumber(1), AlbaNumber(100)));
+}
 
 TEST(ProbabilityUtilitiesTest, GetExpectedValueInBinomialDistributionWorks) {
     EXPECT_EQ(AlbaNumber(75), getExpectedValueInBinomialDistribution(AlbaNumber::createFraction(3, 4), 100U));
@@ -163,4 +164,5 @@ TEST(ProbabilityUtilitiesTest, GetNumberOfPeopleForTheBirthdayParadoxUsingTaylor
 }
 
 }  // namespace math
+
 }  // namespace alba

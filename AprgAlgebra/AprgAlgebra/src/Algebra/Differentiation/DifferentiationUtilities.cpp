@@ -239,7 +239,8 @@ Term getTotalDerivativeWithInnerTermsUsingChainRule(
                   commonVariableDifferentiation.differentiate(innerTerm);
     }
     simplifyForDifferentiation(result);
-    return result;}
+    return result;
+}
 
 Term getTotalDerivative(Term const& term, strings const& variableNames) {
     Term result;

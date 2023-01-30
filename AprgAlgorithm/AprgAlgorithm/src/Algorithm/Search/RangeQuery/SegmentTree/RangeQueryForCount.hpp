@@ -75,7 +75,8 @@ private:
                     result.emplace(value, count);
                 }
             }
-            return result;        };
+            return result;
+        };
     }
 
     SegmentTree m_valueToCountMapSegmentTree;

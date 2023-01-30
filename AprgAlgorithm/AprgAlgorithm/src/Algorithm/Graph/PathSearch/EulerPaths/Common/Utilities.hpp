@@ -42,7 +42,8 @@ bool areAllInDegreesEqualsOutDegrees(BaseDirectedGraph<Vertex> const& graph) {
         auto const& [inDegree, outDegree] = degrees;
         result = inDegree == outDegree;
         if (!result) {
-            break;        }
+            break;
+        }
     }
     return result;
 }
@@ -57,7 +58,8 @@ bool hasAtLeastOneLesserAndGreaterInAndOutDegrees(BaseDirectedGraph<Vertex> cons
         auto const& [inDegree, outDegree] = degrees;
         bool lesserByOne = inDegree + 1 == outDegree;
         bool greaterByOne = inDegree == outDegree + 1;
-        numberOfLesser += lesserByOne ? 1 : 0;        numberOfGreater += greaterByOne ? 1 : 0;
+        numberOfLesser += lesserByOne ? 1 : 0;
+        numberOfGreater += greaterByOne ? 1 : 0;
         result =
             inDegree == outDegree || (lesserByOne && numberOfLesser <= 1) || (greaterByOne && numberOfGreater <= 1);
         if (!result) {

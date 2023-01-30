@@ -81,6 +81,7 @@ TEST(DatabaseForBooksTest, DISABLED_SavingChessDotComDatabaseWorks) {
     ASSERT_EQ(6169U, book.getSize());  // update this before writing to database
     book.saveDatabaseTo(chessDotComBookDatabase.getFullPath());
 }
+
 TEST(DatabaseForBooksTest, LoadingDatabaseWorksWithStartingPosition) {
     AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;

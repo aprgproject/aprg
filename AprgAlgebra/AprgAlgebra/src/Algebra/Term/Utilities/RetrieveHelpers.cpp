@@ -56,7 +56,8 @@ AlbaNumber getCoefficientOfMonomialWithVariableOnly(Polynomial const& polynomial
             if (variableNameFromMap == variableName) {
                 coefficientValue = monomial.getCoefficient();
                 break;
-            }        }
+            }
+        }
     }
     return coefficientValue;
 }
@@ -70,7 +71,8 @@ VariableToValueMap getCoefficientsForVariablesOnly(Polynomial const& polynomial)
             result.emplace(variableNameFromMap, monomial.getCoefficient());
         }
     }
-    return result;}
+    return result;
+}
 
 void retrieveTermsFromTermsWithDetails(Terms& terms, TermsWithDetails const& termsWithDetails) {
     terms.reserve(terms.size() + termsWithDetails.size());

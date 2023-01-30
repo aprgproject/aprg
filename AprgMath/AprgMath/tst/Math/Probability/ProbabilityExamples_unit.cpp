@@ -236,6 +236,7 @@ TEST(ProbabilityExampleTest, BinomialDistributionExpectedValueExampleWorks) {
 TEST(ProbabilityExampleTest, GeometricDistributionExpectedValueWorks_OnExample1) {
     // In a geometric distribution, the probability that an attempt succeeds is p, and we continue until the first
     // success happens.
+
     // For example, if we throw a dice, what is approximate number of attempts until we throw a six?
     // The expected value is 6.
     // This is the approximately the number of attempts to be made for the condition to be successful.

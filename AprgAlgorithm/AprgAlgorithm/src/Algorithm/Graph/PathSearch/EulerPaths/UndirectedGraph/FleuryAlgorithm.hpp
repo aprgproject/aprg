@@ -76,6 +76,7 @@ private:
             result.emplace_back(endVertexOfEdge);
         }
     }
+
     void searchForEulerPath(Path& result, Vertex const& startVertex, Edges const& originalEdges) const {
         GraphToManipulate graphToManipulate(createGraphToManipulate(originalEdges));
         SetOfEdges& edgesReference(graphToManipulate.getSetOfEdgesReference());

@@ -56,6 +56,7 @@ private:
             }
         }
     }
+
     void checkAdjacentEdgesOfVertex(Vertex const& vertex) {
         m_processedVertices.putVertex(vertex);
         for (Vertex const& adjacentVertex : m_graph.getAdjacentVerticesAt(vertex)) {

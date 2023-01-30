@@ -56,6 +56,7 @@ private:
             m_minimumSpanningTreeEdges.emplace_back(createSortedEdge<Vertex, Edge>(startVertexOfEdge, endVertexOfEdge));
         }
     }
+
     Graph const& m_graph;
     Vertex m_startVertex;
     Edges m_minimumSpanningTreeEdges;

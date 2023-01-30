@@ -171,7 +171,8 @@ Monomial IntegrationForFiniteCalculus::integrateMonomialInFallingPower(Monomial 
     for (auto const& [variableName, exponent] : monomial.getVariablesToExponentsMap()) {
         if (isVariableToIntegrate(variableName)) {
             result.putVariableWithExponent(variableName, exponent + 1);
-            result.divideNumber(exponent + 1);            hasVariabletoIntegrate = true;
+            result.divideNumber(exponent + 1);
+            hasVariabletoIntegrate = true;
         }
     }
     if (!hasVariabletoIntegrate) {

@@ -40,6 +40,7 @@ public:
             }
         }
     }
+
 private:
     bool areColorsEqualOnVertices(Vertex const& vertex1, Vertex const& vertex2) const {
         bool result(false);
@@ -63,7 +64,8 @@ private:
                     // if not bipartite, stop (no use continuing on it)
                     break;
                 }
-            }        }
+            }
+        }
     }
 
     void checkUsingDfs(Vertex const& vertex) {
@@ -80,7 +82,8 @@ private:
                 m_isBipartite = false;
                 break;
             }
-        }    }
+        }
+    }
 
     bool getTheOtherColor(bool const color) { return !color; }
 

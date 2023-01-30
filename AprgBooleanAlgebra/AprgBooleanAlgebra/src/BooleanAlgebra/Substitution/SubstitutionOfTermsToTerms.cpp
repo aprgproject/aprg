@@ -72,6 +72,7 @@ void SubstitutionOfTermsToTerms::putTermsToTermsMapping(TermToTermMap const& var
         putTermToTermMapping(variableName, value);
     }
 }
+
 void SubstitutionOfTermsToTerms::putTermToTermMapping(Term const& term1, Term const& term2) {
     m_termsToTermsMap[term1] = term2;
 }

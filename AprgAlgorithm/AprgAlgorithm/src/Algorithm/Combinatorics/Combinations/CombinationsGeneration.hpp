@@ -21,7 +21,8 @@ public:
         Combination currentCombination;
         int currentIndex;
         Objects const& objects;
-        int const targetCombinationLength;    };
+        int const targetCombinationLength;
+    };
 
     // rule of five or six
     CombinationsGeneration() = delete;
@@ -44,7 +45,8 @@ private:
         return RecursionData{combinations, Combination(), 0, objects, length};
     }
 
-    static void collectCombinationsUsingRecursion(RecursionData& recursionData) {        if (static_cast<int>(recursionData.currentCombination.size()) == recursionData.targetCombinationLength) {
+    static void collectCombinationsUsingRecursion(RecursionData& recursionData) {
+        if (static_cast<int>(recursionData.currentCombination.size()) == recursionData.targetCombinationLength) {
             recursionData.combinations.emplace_back(recursionData.currentCombination);
         } else {
             Objects const& objects(recursionData.objects);

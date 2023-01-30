@@ -75,7 +75,8 @@ private:
                                                            : std::distance(m_sortedValues.cbegin(), upperIt);
     }
 
-    Values const& m_sortedValues;};
+    Values const& m_sortedValues;
+};
 
 }  // namespace algorithm
 

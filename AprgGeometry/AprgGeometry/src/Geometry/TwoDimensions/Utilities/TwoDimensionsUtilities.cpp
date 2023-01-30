@@ -195,7 +195,8 @@ double getMaximumManhattanDistanceOfTwoPoints(Points const& points) {
     return max(*xMaxIt - *xMinIt, *yMaxIt - *yMinIt);
 }
 
-double getCosineOfAngleUsing1Delta(double const deltaX1, double const deltaY1) {    // cos theta = adjacent/hypotenuse
+double getCosineOfAngleUsing1Delta(double const deltaX1, double const deltaY1) {
+    // cos theta = adjacent/hypotenuse
     double adjacent = deltaX1;
     double hypotenuse = getSquareRootOfXSquaredPlusYSquared(deltaX1, deltaY1);
     return adjacent / hypotenuse;
@@ -703,7 +704,8 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
     swap(*minIt, auxiliary.front());
     Point const& firstPoint(auxiliary.front());
 
-    // sort such that the points are in counter clockwise order    sort(next(auxiliary.begin()), auxiliary.end(), [firstPoint](Point const& point1, Point const& point2) {
+    // sort such that the points are in counter clockwise order
+    sort(next(auxiliary.begin()), auxiliary.end(), [firstPoint](Point const& point1, Point const& point2) {
         RotationDirection direction = getRotationDirectionTraversing3Points(firstPoint, point1, point2);
         if (RotationDirection::Collinear == direction) {
             return getDistance(firstPoint, point1) <= getDistance(firstPoint, point2) ? true : false;

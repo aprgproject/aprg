@@ -117,6 +117,7 @@ public:
             addMintermForZeroCommonalityCount(input);
         }
     }
+
     void findCombinationOfImplicants(int numberOfOnes, int commonalityCount) {
         if (numberOfOnes + 1 < static_cast<int>(m_computationalTable.size())) {
             Implicants const& implicants1(m_computationalTable[numberOfOnes][commonalityCount]);
@@ -140,7 +141,8 @@ public:
                 printParameterWithName(ss, "Implicants", implicants);
                 ss << "\n";
             }
-        }        return ss.str();
+        }
+        return ss.str();
     }
 
     Implicants getBestPrimeImplicants(Implicants const& primeImplicants) const {
@@ -360,7 +362,8 @@ private:
                 result.emplace_back(input);
             }
         }
-        return result;    }
+        return result;
+    }
 
     SetOfMinterms getSetOfInputMintermsWithTrue() const {
         SetOfMinterms result;
@@ -369,7 +372,8 @@ private:
                 result.emplace(input);
             }
         }
-        return result;    }
+        return result;
+    }
 
     void addMintermForZeroCommonalityCount(Minterm const& minterm) {
         int numberOfOnes(getNumberOfOnes(minterm));

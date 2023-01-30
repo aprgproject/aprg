@@ -170,7 +170,8 @@ Monomial PolynomialOverPolynomial::getMonomialWithMaxNegativeExponentsAndConvert
                     resultMonomial.putVariableWithExponent(variable, newPositiveExponent);
                 }
             }
-        }    }
+        }
+    }
     return resultMonomial;
 }
 

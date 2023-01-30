@@ -46,7 +46,8 @@ protected:
                     // we can still put flow to this other vertex
                     b_processedVertices.putVertex(otherVertex);
                     b_vertexToAugmentingPathEdgeMap[otherVertex] = flowEdge;
-                    queueOfVerticesToProcess.emplace_front(otherVertex);                }
+                    queueOfVerticesToProcess.emplace_front(otherVertex);
+                }
             }
         }
         return b_processedVertices.isFound(b_flowNetwork.getSinkVertex());  // is sink vertex reached

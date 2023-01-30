@@ -34,6 +34,7 @@ void retrieveSubstitutionsFromCriticalNumbers(
 void determineExtrema(
     ExtremaWithMultipleVariables& extrema, Terms const& secondDerivatives,
     SubstitutionsOfVariablesToValues const& substitutions);
+
 }  // namespace
 
 bool willYieldToAbsoluteMaximumValue(
@@ -214,7 +215,8 @@ bool isRolleTheoremSatisfied(
     if (fa.isConstant() && fb.isConstant() && AlbaNumber(0) == fa.getAsNumber() && AlbaNumber(0) == fb.getAsNumber()) {
         AlbaNumberIntervals continuityDomainIntervals(getContinuityDomain(term).getAcceptedIntervals());
         AlbaNumberIntervals differentiabilityDomainIntervals(
-            getDifferentiabilityDomain(term, variableName).getAcceptedIntervals());        AlbaNumberInterval abCloseInterval(createCloseEndpoint(a), createCloseEndpoint(b));
+            getDifferentiabilityDomain(term, variableName).getAcceptedIntervals());
+        AlbaNumberInterval abCloseInterval(createCloseEndpoint(a), createCloseEndpoint(b));
         AlbaNumberInterval abOpenInterval(createOpenEndpoint(a), createOpenEndpoint(b));
 
         if (isIntervalInsideTheIntervals(abCloseInterval, continuityDomainIntervals) &&
@@ -276,7 +278,8 @@ AlbaNumbers getInputValuesForCauchyMeanValueTheorem(
         AlbaNumber cauchyValue = (fb.getAsNumber() - fa.getAsNumber()) / (gb.getAsNumber() - ga.getAsNumber());
         Differentiation differentiation(variableName);
         Term fPrime(differentiation.differentiate(numerator));
-        Term gPrime(differentiation.differentiate(denominator));        Term cauchyExpression(fPrime / gPrime);
+        Term gPrime(differentiation.differentiate(denominator));
+        Term cauchyExpression(fPrime / gPrime);
         Equation cauchyEquation(cauchyExpression, "=", cauchyValue);
         OneEquationOneVariableEqualitySolver solver;
         SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(cauchyEquation));
@@ -302,7 +305,8 @@ Extremum getAbsoluteExtremumBasedOnRelativeExtremaOnInterval(
         if (interval.isValueInsideTheInterval(inputValue)) {
             extremumInInterval = extremum;
             numberOfExtremaFoundInInterval++;
-            if (numberOfExtremaFoundInInterval > 1) {                break;
+            if (numberOfExtremaFoundInInterval > 1) {
+                break;
             }
         }
     }
@@ -346,7 +350,8 @@ VariableNameToCriticalNumbersMap getCriticalNumbersWithMultipleVariables(
             AlbaNumbers& criticalNumbers(result[variableName]);
             AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
             AlbaNumbers const& rejectedValues(solutionSet.getRejectedValues());
-            criticalNumbers.reserve(acceptedValues.size() + rejectedValues.size());            copy(acceptedValues.cbegin(), acceptedValues.cend(), back_inserter(criticalNumbers));
+            criticalNumbers.reserve(acceptedValues.size() + rejectedValues.size());
+            copy(acceptedValues.cbegin(), acceptedValues.cend(), back_inserter(criticalNumbers));
             copy(rejectedValues.cbegin(), rejectedValues.cend(), back_inserter(criticalNumbers));
         }
     }
@@ -443,7 +448,8 @@ Extrema getRelativeExtrema(Term const& term, string const& variableName) {
                         Extremum{ExtremumType::Minimum, {valueWhenFirstDerivativeIsZero, evaluatedTerm.getAsNumber()}});
                 }
             }
-        }    }
+        }
+    }
     return result;
 }
 
@@ -458,6 +464,7 @@ ExtremaWithMultipleVariables getRelativeExtremaWithMultipleVariables(Term const&
     determineExtrema(result, secondDerivatives, substitutions);
     return result;
 }
+
 namespace {
 
 void putArbitiaryValuesFromInterval(AlbaNumbers& arbitiaryValues, AlbaNumberInterval const& interval) {
@@ -508,6 +515,7 @@ void retrieveSubstitutionsFromCriticalNumbers(
         }
     }
 }
+
 void determineExtrema(
     ExtremaWithMultipleVariables& extrema, Terms const& secondDerivatives,
     SubstitutionsOfVariablesToValues const& substitutions) {
@@ -542,7 +550,8 @@ void determineExtrema(
             extremum.variableNamesToValues[variableName] = value;
         }
         extrema.emplace_back(extremum);
-    }}
+    }
+}
 
 }  // namespace
 

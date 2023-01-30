@@ -59,7 +59,8 @@ GameWithMaze::Coordinate GameWithMaze::getOptimalNextCoordinateAt(Coordinate con
             // move one top if possible to prolong the game
             result = oneUp;
         }
-    } else if (GameState::Winning == gameState) {        for (Coordinate const& nextCoordinate : getNextCoordinates(coordinate)) {
+    } else if (GameState::Winning == gameState) {
+        for (Coordinate const& nextCoordinate : getNextCoordinates(coordinate)) {
             if (0U == getGrundyNumberAt(nextCoordinate))  // force your opponent to losing state
             {
                 result = nextCoordinate;

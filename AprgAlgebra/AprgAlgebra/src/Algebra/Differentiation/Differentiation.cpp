@@ -184,7 +184,8 @@ void Differentiation::separateNonChangingAndChangingVariables(
     for (auto const& [variableName, exponent] : monomial.getVariablesToExponentsMap()) {
         if (exponent != 0) {
             if (isChangingVariableName(variableName)) {
-                changingVariables.putVariableWithExponent(variableName, exponent);            } else {
+                changingVariables.putVariableWithExponent(variableName, exponent);
+            } else {
                 nonChangingVariablesAndConstant.putVariableWithExponent(variableName, exponent);
             }
         }
@@ -196,7 +197,8 @@ Polynomial Differentiation::differentiateMonomialWithChangingVariables(Monomial 
     for (auto const& [variableName, exponent] : changingVariables.getVariablesToExponentsMap()) {
         Monomial monomialToAdd(changingVariables);
         DerivativeVariableName derivativeVariableName(variableName);
-        if (isVariableToDifferentiate(variableName)) {            monomialToAdd.putVariableWithExponent(variableName, exponent - 1);
+        if (isVariableToDifferentiate(variableName)) {
+            monomialToAdd.putVariableWithExponent(variableName, exponent - 1);
             monomialToAdd.multiplyNumber(exponent);
         } else if (isDependentVariable(variableName)) {
             monomialToAdd.putVariableWithExponent(variableName, exponent - 1);

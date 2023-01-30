@@ -108,7 +108,8 @@ private:
                 flowNetwork.connect(startVertexOfEdge, endVertexOfEdge, 1, 0);
             }
         }
-        return flowNetwork;    }
+        return flowNetwork;
+    }
 
     BaseUndirectedGraphWithVertex const& m_graph;
     BipartiteChecker m_bipartiteChecker;

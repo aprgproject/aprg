@@ -102,7 +102,8 @@ Monomial SubstitutionOfVariablesToValues::performSubstitutionForMonomial(Monomia
             newMonomial.putVariableWithExponent(variableName, exponent);
         }
     }
-    newMonomial.simplify();    return newMonomial;
+    newMonomial.simplify();
+    return newMonomial;
 }
 
 Polynomial SubstitutionOfVariablesToValues::performSubstitutionForPolynomial(Polynomial const& polynomial) const {
@@ -141,6 +142,7 @@ void SubstitutionOfVariablesToValues::putVariablesWithValues(VariablesToValuesMa
         putVariableWithValue(variable, value);
     }
 }
+
 void SubstitutionOfVariablesToValues::putVariableWithValue(string const& variable, AlbaNumber const& value) {
     m_variableToValuesMap[variable] = value;
 }

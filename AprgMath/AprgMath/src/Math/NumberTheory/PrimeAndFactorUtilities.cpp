@@ -42,6 +42,7 @@ bool isGoldbachConjectureTrue(UnsignedInteger const evenNumber) {
     }
     return result;
 }
+
 bool isTwinPrimeConjectureTrue(UnsignedInteger const number) {
     // Twin prime conjecture: There is an infinite number of pairs of the form {p, p+2}, where both p and p+2 are
     // primes.
@@ -91,7 +92,8 @@ UnsignedInteger getNumberOfFactors(UnsignedInteger const number) {
     for (auto const& [primeFactor, count] : primeFactorsToCountMap) {
         result *= count + 1;
     }
-    return result;}
+    return result;
+}
 
 UnsignedInteger getSumOfFactors(UnsignedInteger const number) {
     FactorsToCountMap primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
@@ -99,7 +101,8 @@ UnsignedInteger getSumOfFactors(UnsignedInteger const number) {
     for (auto const& [primeFactor, count] : primeFactorsToCountMap) {
         UnsignedInteger formulaValue = (getRaiseToPowerForIntegers(primeFactor, count + 1) - 1) / (primeFactor - 1);
         result *= formulaValue;
-    }    return result;
+    }
+    return result;
 }
 
 UnsignedInteger getProductOfFactors(UnsignedInteger const number) {
@@ -120,7 +123,8 @@ UnsignedInteger getNumberOfCoPrimesBelowThisNumber(UnsignedInteger const number)
     for (auto const& [primeFactor, count] : primeFactorsToCountMap) {
         UnsignedInteger formulaValue = getRaiseToPowerForIntegers(primeFactor, count - 1) * (primeFactor - 1);
         result *= formulaValue;
-    }    return result;
+    }
+    return result;
 }
 
 UnsignedIntegers getPrimesBelowThisNumber(UnsignedInteger const number) {
@@ -141,7 +145,8 @@ UnsignedIntegers getPrimesBelowThisNumber(UnsignedInteger const number) {
              multiple += candidatePrime) {
             sieveOfEratosthenes[multiple] = false;
         }
-        auto itLowestCandidate =            find(sieveOfEratosthenes.cbegin() + candidatePrime + 1, sieveOfEratosthenes.cend(), true);
+        auto itLowestCandidate =
+            find(sieveOfEratosthenes.cbegin() + candidatePrime + 1, sieveOfEratosthenes.cend(), true);
         candidatePrime = distance(sieveOfEratosthenes.cbegin(), itLowestCandidate);
     }
     UnsignedIntegers result;

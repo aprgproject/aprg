@@ -67,7 +67,8 @@ bool hasNegativeExponents(Monomial const& monomial) {
         if (exponent < 0) {
             result = true;
             break;
-        }    }
+        }
+    }
     return result;
 }
 
@@ -103,6 +104,7 @@ AlbaNumber getDegree(Monomial const& monomial) {
     }
     return degree;
 }
+
 AlbaNumber getMaxExponent(Monomial const& monomial) {
     AlbaNumber maxExponent;
     auto const& variablesToExponentsMap(monomial.getVariablesToExponentsMap());
@@ -123,7 +125,8 @@ AlbaNumber getGcfOfExponentsInMonomial(Monomial const& monomial) {
     for (auto const& [variableName, exponent] : monomial.getVariablesToExponentsMap()) {
         if (exponent.isIntegerOrFractionType()) {
             if (isFirst) {
-                commonExponent = exponent;                isFirst = false;
+                commonExponent = exponent;
+                isFirst = false;
             } else {
                 commonExponent = getGreatestCommonFactor(commonExponent, exponent);
             }
