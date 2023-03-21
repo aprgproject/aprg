@@ -11,7 +11,8 @@ namespace alba {
 // Examples taken from Scott Meyers lecture.
 // NOTES on type deduction:
 // 1) auto type deduction is the same with template type deduction, except for brace initializer list (automatically
-// converts to std::initializer_list type) (ill-formed in C++17)// 2) lambda capture type deduction
+// converts to std::initializer_list type) (ill-formed in C++17)
+// 2) lambda capture type deduction
 // 2.1) capture by reference -> same with template type deduction
 // 2.2) init capture in c++14 -> same with auto type deduction
 // 2.3) capture by value -> same with template type deduction, except cv qualifiers are retained
