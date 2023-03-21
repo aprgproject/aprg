@@ -52,12 +52,11 @@ private:
         }
     }
 
-    void resize(int const newSize)  // array is between 25% and 100% full
-    {
+    void resize(int const newSize) {
+        // array is between 25% and 100% full
         Object* newObjects = new Object[newSize];
         if (m_objects != nullptr) {
-            std::copy(m_objects, m_objects + std::min(m_stackSize, newSize), newObjects);
-            delete[](m_objects);
+            std::copy(m_objects, m_objects + std::min(m_stackSize, newSize), newObjects);            delete[](m_objects);
         }
         m_objects = newObjects;
         m_containerSize = newSize;
