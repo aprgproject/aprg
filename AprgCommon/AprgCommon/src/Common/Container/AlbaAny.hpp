@@ -25,11 +25,10 @@ public:
 
     // rule of zero
 
-    operator bool() const  // not explicit
+    explicit operator bool() const  // not explicit
     {
         return hasContent();
     }
-
     bool hasContent() const { return m_savedMemory.hasContent(); }
 
     template <typename ContentType>

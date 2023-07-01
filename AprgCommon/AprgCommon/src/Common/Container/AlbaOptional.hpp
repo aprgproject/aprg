@@ -39,10 +39,9 @@ public:
         return *this;
     }
 
-    operator bool() const { return hasContent(); }
+    explicit operator bool() const { return hasContent(); }
 
     operator ContentType() const { return get(); }
-
     void createObjectUsingDefaultConstructor() { m_contentPointer = std::make_unique<ContentType>(); }
 
     void setValue(ContentType content) {
@@ -144,11 +143,10 @@ public:
         return m_empty;
     }
 
-    operator bool() const { return m_hasContent; }
+    explicit operator bool() const { return m_hasContent; }
 
     operator ContentType&() const {
-        if (m_hasContent && isContentPointerValid()) {
-            return *m_contentPointer;
+        if (m_hasContent && isContentPointerValid()) {            return *m_contentPointer;
         }
         return m_empty;
     }

@@ -234,11 +234,10 @@ TEST(AlbaOptionalTest, OptionalCanBeMovedByMoveAssignmentOperator) {
     EXPECT_FALSE(static_cast<bool>(integerOptional2));
 
     // When
-    integerOptional2 = move(integerOptional1);
+    integerOptional2 = std::move(integerOptional1);
 
     // Then
-    EXPECT_FALSE(static_cast<bool>(integerOptional1));
-    EXPECT_TRUE(static_cast<bool>(integerOptional2));
+    EXPECT_FALSE(static_cast<bool>(integerOptional1));    EXPECT_TRUE(static_cast<bool>(integerOptional2));
     EXPECT_EQ(1111, integerOptional2.get());
 }
 
@@ -248,11 +247,10 @@ TEST(AlbaOptionalTest, OptionalCanBeMovedByMoveContructor) {
     EXPECT_TRUE(static_cast<bool>(integerOptional1));
 
     // When
-    AlbaOptional<int> integerOptional2(move(integerOptional1));
+    AlbaOptional<int> integerOptional2(std::move(integerOptional1));
 
     // Then
-    EXPECT_FALSE(static_cast<bool>(integerOptional1));
-    EXPECT_TRUE(static_cast<bool>(integerOptional2));
+    EXPECT_FALSE(static_cast<bool>(integerOptional1));    EXPECT_TRUE(static_cast<bool>(integerOptional2));
     EXPECT_EQ(1111, integerOptional2.get());
 }
 
