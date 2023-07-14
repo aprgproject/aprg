@@ -27,11 +27,10 @@ public:
 
     explicit AlbaMathVector(ValuesInArray const& values) : m_values(values) {}
 
-    explicit AlbaMathVector(std::initializer_list<DataType> const& values) : m_values{} {
+    AlbaMathVector(std::initializer_list<DataType> const& values) : m_values{} {
         size_t limit = std::min(SIZE, static_cast<size_t>(values.size()));
         std::copy(begin(values), begin(values) + limit, begin(m_values));
-    }
-    // rule of zero
+    }    // rule of zero
 
     bool operator==(AlbaMathVectorType const& second) const {
         return std::equal(
