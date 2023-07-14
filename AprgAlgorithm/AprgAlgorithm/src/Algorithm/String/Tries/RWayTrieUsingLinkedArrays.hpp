@@ -5,10 +5,10 @@
 #include <algorithm>
 #include <array>
 #include <memory>
+#include <string>
 #include <vector>
 
 namespace alba {
-
 namespace algorithm {
 
 template <typename Value>

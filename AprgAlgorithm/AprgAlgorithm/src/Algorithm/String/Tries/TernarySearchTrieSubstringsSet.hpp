@@ -4,10 +4,11 @@
 #include <Algorithm/String/Tries/BaseTernarySearchTrie.hpp>
 #include <Algorithm/String/Tries/TernarySearchTrieNodes.hpp>
 
+#include <string>
+
 namespace alba {
 
 namespace algorithm {
-
 class TernarySearchTrieSubstringsSet : public BaseTernarySearchTrie<TernarySearchTrieSetNode, BaseStringSet> {
 public:
     using BaseClass = BaseTernarySearchTrie<TernarySearchTrieSetNode, BaseStringSet>;

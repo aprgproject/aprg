@@ -4,10 +4,11 @@
 #include <Algorithm/Graph/Types/GraphTypes.hpp>
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 
+#include <limits>
+
 namespace alba {
 
 namespace algorithm {
-
 template <typename Vertex>
 class MinimumNodeCoverForTree {
 public:
