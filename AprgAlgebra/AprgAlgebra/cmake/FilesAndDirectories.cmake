@@ -1,10 +1,6 @@
-include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
-include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
-
 set(APRG_ALGEBRA_SOURCE_DIRECTORY
     ${APRG_ALGEBRA_DIR}/src
 )
-
 set(APRG_ALGEBRA_TEST_DIRECTORY
     ${APRG_ALGEBRA_DIR}/tst
 )
