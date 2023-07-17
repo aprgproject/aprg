@@ -9,6 +9,7 @@
 #include <vector>
 
 namespace alba {
+
 namespace algorithm {
 
 template <typename Value>

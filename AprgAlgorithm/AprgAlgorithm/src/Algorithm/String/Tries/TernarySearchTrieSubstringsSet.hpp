@@ -9,6 +9,7 @@
 namespace alba {
 
 namespace algorithm {
+
 class TernarySearchTrieSubstringsSet : public BaseTernarySearchTrie<TernarySearchTrieSetNode, BaseStringSet> {
 public:
     using BaseClass = BaseTernarySearchTrie<TernarySearchTrieSetNode, BaseStringSet>;

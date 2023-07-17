@@ -9,6 +9,7 @@
 namespace alba {
 
 namespace algorithm {
+
 template <typename Vertex>
 class MinimumNodeCoverForTree {
 public:
