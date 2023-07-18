@@ -43,23 +43,22 @@ public:
                 checkValue += forwardSkip;
             }
         }
-        if (checkValue + 1 < endValue && !m_boolFunction(checkValue))  // if last value is false, move one
-        {
+        if (checkValue + 1 < endValue && !m_boolFunction(checkValue)){
+            // if last value is false, move one
             checkValue++;
         }
-        if (m_boolFunction(checkValue))  // if its last value is true, save it to result
-        {
+        if (m_boolFunction(checkValue)) {
+            // if its last value is true, save it to result
             result = checkValue;
         }
         return result;
     }
 
 private:
-    BoolFunction const& m_boolFunction;
+    BoolFunction const m_boolFunction;
 };
 
 }  // namespace algorithm
-
 }  // namespace alba
 
 // An alternative method to implement binary search is based on an efficient way to iterate through the elements of the
