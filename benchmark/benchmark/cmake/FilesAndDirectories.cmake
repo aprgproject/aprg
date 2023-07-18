@@ -1,10 +1,6 @@
-include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
-include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
-
 set(BENCHMARK_SOURCE_DIRECTORY
     ${BENCHMARK_DIR}/src
 )
-
 set(BENCHMARK_FROM_GIT_HUB_SOURCE_DIRECTORY
     ${BENCHMARK_FROM_GIT_HUB_DIR}/src
 )
