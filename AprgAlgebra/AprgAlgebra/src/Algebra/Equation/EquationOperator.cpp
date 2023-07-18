@@ -1,9 +1,10 @@
 #include "EquationOperator.hpp"
 
+#include <ostream>
+
 using namespace std;
 
 namespace alba {
-
 namespace algebra {
 
 EquationOperator::EquationOperator(string const& operatingString) : m_operatingString(operatingString) {}

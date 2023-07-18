@@ -1,9 +1,10 @@
 #include "Variable.hpp"
 
+#include <ostream>
+
 using namespace std;
 
 namespace alba {
-
 namespace algebra {
 
 Variable::Variable() {}
