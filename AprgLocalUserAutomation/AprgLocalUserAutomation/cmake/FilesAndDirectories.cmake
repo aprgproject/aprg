@@ -1,10 +1,6 @@
-include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
-include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
-
 set(APRG_LOCAL_USER_AUTOMATION_SOURCE_DIRECTORY
     ${APRG_LOCAL_USER_AUTOMATION_DIR}/src
 )
-
 set(APRG_LOCAL_USER_AUTOMATION_TEST_DIRECTORY
     ${APRG_LOCAL_USER_AUTOMATION_DIR}/tst
 )
