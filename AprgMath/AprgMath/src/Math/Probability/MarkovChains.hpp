@@ -3,10 +3,10 @@
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 #include <Common/Math/Number/AlbaNumber.hpp>
 
+#include <array>
 #include <map>
 
 namespace alba {
-
 template <int MAX_STATE_VALUE>
 class MarkovChains {
 public:
