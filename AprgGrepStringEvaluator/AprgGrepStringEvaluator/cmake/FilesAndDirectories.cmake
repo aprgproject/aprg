@@ -1,10 +1,6 @@
-include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
-include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
-
 set(APRG_GREP_STRING_EVALUATOR_SOURCE_DIRECTORY
     ${APRG_GREP_STRING_EVALUATOR_DIR}/src
 )
-
 set(APRG_GREP_STRING_EVALUATOR_TEST_DIRECTORY
     ${APRG_GREP_STRING_EVALUATOR_DIR}/tst
 )
