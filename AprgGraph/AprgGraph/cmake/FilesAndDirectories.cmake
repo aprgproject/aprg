@@ -1,10 +1,6 @@
-include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
-include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
-
 set(APRG_GRAPH_SOURCE_DIRECTORY
     ${APRG_GRAPH_DIR}/src
 )
-
 set(APRG_GRAPH_TEST_DIRECTORY
     ${APRG_GRAPH_DIR}/tst
 )

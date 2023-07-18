@@ -269,12 +269,10 @@ void AprgGraph::drawTermWithXSubstitution(Term const& term, uint32_t const color
         substitution.putVariableWithValue("x", xValue);
         Term substitutedTerm(substitution.performSubstitutionTo(term));
         if (substitutedTerm.isConstant()) {
-            points.emplace_back(
-                xValue, substitutedTerm.getConstantConstReference().getNumberConstReference().getDouble());
+            points.emplace_back(xValue, substitutedTerm.getAsConstant().getNumber().getDouble());
         }
     });
-    drawContinuousPoints(points, color);
-}
+    drawContinuousPoints(points, color);}
 
 void AprgGraph::drawTermWithYSubstitution(Term const& term, uint32_t const color) {
     Points points;
@@ -284,12 +282,10 @@ void AprgGraph::drawTermWithYSubstitution(Term const& term, uint32_t const color
         substitution.putVariableWithValue("y", yValue);
         Term substitutedTerm(substitution.performSubstitutionTo(term));
         if (substitutedTerm.isConstant()) {
-            points.emplace_back(
-                substitutedTerm.getConstantConstReference().getNumberConstReference().getDouble(), yValue);
+            points.emplace_back(substitutedTerm.getAsConstant().getNumber().getDouble(), yValue);
         }
     });
-    drawContinuousPoints(points, color);
-}
+    drawContinuousPoints(points, color);}
 
 void AprgGraph::drawEquationWithXSubstitution(Equation const& equation, uint32_t const color) {
     Points points;
