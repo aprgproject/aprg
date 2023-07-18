@@ -1,10 +1,6 @@
-include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
-include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
-
 set(APRG_AUDIO_SOURCE_DIRECTORY
     ${APRG_AUDIO_DIR}/src
 )
-
 set(APRG_AUDIO_TEST_DIRECTORY
     ${APRG_AUDIO_DIR}/tst
 )
