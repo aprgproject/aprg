@@ -3,10 +3,11 @@
 #include <Algorithm/Graph/DirectedGraph/BaseDirectedGraph.hpp>
 #include <Algorithm/Graph/Reachability/Reachability/BaseReachabilityInDigraph.hpp>
 
+#include <array>
+
 namespace alba {
 
 namespace algorithm {
-
 template <typename Vertex, int MAX_VERTEX_VALUE>
 class ReachabilityInDigraphWithArrayUsingDfs : public BaseReachabilityInDigraph<Vertex> {
 public:

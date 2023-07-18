@@ -3,10 +3,11 @@
 #include <Algorithm/Graph/DirectedGraph/BaseDirectedGraph.hpp>
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 
+#include <array>
+
 namespace alba {
 
 namespace algorithm {
-
 template <typename Vertex, int MAX_VERTEX_VALUE>
 class DirectedGraphWithAdjacencyMatrix : public BaseDirectedGraph<Vertex> {
 public:
