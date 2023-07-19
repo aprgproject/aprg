@@ -1,10 +1,6 @@
-include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
-include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
-
 set(ZZZ_MANIPULATE_FILES_SOURCE_DIRECTORY
     ${ZZZ_MANIPULATE_FILES_DIR}/src
 )
-
 set(ZZZ_MANIPULATE_FILES_TEST_DIRECTORY
     ${ZZZ_MANIPULATE_FILES_DIR}/tst
 )
