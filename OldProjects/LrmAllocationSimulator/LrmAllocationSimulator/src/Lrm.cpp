@@ -2,9 +2,9 @@
 
 #include <algorithm>
 #include <cassert>
+#include <iterator>
 
 using namespace std;
-
 namespace alba {
 
 SelectionDspResult::SelectionDspResult()
