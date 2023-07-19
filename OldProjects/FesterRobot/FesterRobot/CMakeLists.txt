@@ -11,13 +11,11 @@ set(TEST_MODE "ON")
 #Locate APRG Directory first because its used on other cmakes
 include(${FESTER_ROBOT_DIR}/cmake/LocateAprgDirectory.cmake)
 
-#Assign common flags, definitions and macros
-include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
-include(${APRG_DIR}/AprgCMakeHelpers/CommonDefinitions.cmake)
+#Assign macros, common flags, definitions and other common steps
+include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 
 #Include other projects
-include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
-include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
+include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${APRG_DIR}/AprgLocalUserAutomation/AprgCmakeInclude/AprgLocalUserAutomation.cmake)
 
 #Add files and directories
@@ -29,11 +27,10 @@ if (TEST_MODE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
     add_executable(${OUTFILE} ${FESTER_ROBOT_SOURCES_AND_TESTS})
     include_directories(${FESTER_ROBOT_INCLUDE_DIRECTORIES} ${FESTER_ROBOT_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
-    target_link_libraries(${OUTFILE} ${CMAKE_THREAD_LIBS_INIT} APRG_LOCAL_USER_AUTOMATION APRG_COMMON gtest ${CMAKE_THREAD_LIBS_INIT})
+    target_link_libraries(${OUTFILE} APRG_LOCAL_USER_AUTOMATION APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
     add_test(${OUTFILE} ${OUTFILE})
 else()
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED}")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED}")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED}")    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED}")
     set(CMAKE_EXE_LINKER_FLAGS ${APRG_LINKER_FLAGS_FOR_RELEASE_WITH_STRIP})
     add_executable(${OUTFILE} ${FESTER_ROBOT_SOURCES} ${FESTER_ROBOT_MAIN_SOURCES})
     include_directories(${FESTER_ROBOT_INCLUDE_DIRECTORIES})
