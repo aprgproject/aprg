@@ -1,10 +1,6 @@
-include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
-include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
-
 set(CODING_COMPETITIONS_COMMON_DIRECTORY
     ${APRG_DIR}/CodingCompetitions/Common
 )
-
 set(GOOGLE_CODE_JAM_TEST_DIRECTORY
     ${GOOGLE_CODE_JAM_DIR}/tst
     #for specific rounds only:
