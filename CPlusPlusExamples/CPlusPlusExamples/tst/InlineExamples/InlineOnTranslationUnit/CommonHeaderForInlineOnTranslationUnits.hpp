@@ -18,7 +18,8 @@ constexpr int freeFunction() {
     // implicity inline (external linkage)
     return 1;
 }
-inline int inlineFreeFunction();  // explicitly inline (external linkage)// -> Note: Don't do this in production code.
+inline int inlineFreeFunction();  // explicitly inline (external linkage)
+// -> Note: Don't do this in production code.
 // ---> Its better to have the definition in the header as well.
 // ---> This is to avoid different definitions of the function (undefined behavior)
 // ---> This is to guarantee that its defined in every translation unit and have same address (otherwise its ill formed)
@@ -49,6 +50,7 @@ void restoreInitialValuesForTranslationUnit1();
 void restoreInitialValuesForTranslationUnit2();
 TranslationUnitValues getValuesInTranslationUnit1();
 TranslationUnitValues getValuesInTranslationUnit2();
+
 }  // namespace InlineOnTranslationUnits
 
 }  // namespace alba

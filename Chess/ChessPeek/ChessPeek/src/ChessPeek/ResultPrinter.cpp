@@ -364,7 +364,8 @@ void ResultPrinter::removeTooManyPawnMoves(NextMoves& nextMoves) const {
             constexpr int MAX_NUMBER_OF_PAWN_MOVES = 2;
             Move const& move(moveDetail.move);
             if (PieceType::Pawn == engineBoard.getPieceAt(move.first).getType()) {
-                if (numberOfPawnMoves < MAX_NUMBER_OF_PAWN_MOVES) {                    numberOfPawnMoves++;
+                if (numberOfPawnMoves < MAX_NUMBER_OF_PAWN_MOVES) {
+                    numberOfPawnMoves++;
                 } else {
                     return true;
                 }

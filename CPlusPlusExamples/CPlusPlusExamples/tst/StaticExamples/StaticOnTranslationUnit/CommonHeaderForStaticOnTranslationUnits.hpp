@@ -8,7 +8,8 @@ constexpr int constInteger = 100;  // static (internal linkage) by default
 static int staticInteger = 200;    // explicitly static (internal linkage)
 
 // Linking failure if we include things with external linkage in the header:
-// -> int integer; // extern(external linkage) by default// ---> Linking error: multiple definition of `alba::integer'
+// -> int integer; // extern(external linkage) by default
+// ---> Linking error: multiple definition of `alba::integer'
 // -> extern const int externConstInteger; // explicitly extern(external linkage)
 // ---> Linking error: undefined reference to `alba::externConstInteger'
 
@@ -30,6 +31,7 @@ void restoreInitialValuesForTranslationUnit1();
 void restoreInitialValuesForTranslationUnit2();
 TranslationUnitValues getValuesInTranslationUnit1();
 TranslationUnitValues getValuesInTranslationUnit2();
+
 }  // namespace StaticOnTranslationUnits
 
 }  // namespace alba

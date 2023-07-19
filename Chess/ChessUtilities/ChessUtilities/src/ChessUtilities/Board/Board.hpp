@@ -10,6 +10,7 @@
 #include <limits>
 #include <optional>
 #include <vector>
+
 namespace alba {
 
 namespace chess {
@@ -21,6 +22,7 @@ public:
     static constexpr int MAX_NUMBER_OF_MOVES = (std::numeric_limits<int>::max)();
     using PieceGrid = std::array<Piece, CHESS_SIDE_SIZE * CHESS_SIDE_SIZE>;
     using CoordinateCondition = std::function<bool(Coordinate const&)>;
+
     enum class CastleType { NotACastle, KingSideCastle, QueenSideCastle };
 
     struct DeltaRange {

@@ -68,7 +68,8 @@ double MapAnalyzer::getMultiplierForExperience(string const& mapName) {
         isStringFoundCaseSensitive(mapName, "dic_")) {
         multiplier = 2;
     }
-    return multiplier;}
+    return multiplier;
+}
 
 void MapAnalyzer::gatherData() {
     m_ragnarokOnline.readItemIdToItemMapFromFile(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\ItemIdToItemMap.txt)");

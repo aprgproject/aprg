@@ -89,7 +89,8 @@ TEST(StaticOnTranslationUnit1Test, VariableValuesAreChangedAndReflectedOnOtherTr
     restoreInitialValuesForTranslationUnit2();
 }
 
-TEST(StaticOnTranslationUnit1Test, FunctionReturnValuesAreCorrect) {    EXPECT_EQ(1, freeFunction());
+TEST(StaticOnTranslationUnit1Test, FunctionReturnValuesAreCorrect) {
+    EXPECT_EQ(1, freeFunction());
     EXPECT_EQ(1, staticFreeFunction());
 }
 

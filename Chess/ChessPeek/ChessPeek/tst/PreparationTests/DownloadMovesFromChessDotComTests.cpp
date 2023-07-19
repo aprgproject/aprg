@@ -321,7 +321,8 @@ bool readHtmlFileIfValid(WebPageInfo& pageInfo, string const& htmlFile) {
                     if (isStringFoundCaseSensitive(
                             moveList, R"("suggested-moves-suggested-black")")) {
                         moveInfo.blackWinPercentage = getStringInBetween(
-                            moveList, R"(<span class="suggested-moves-percent-label">)", R"(</span>)", moveListIndex);                    }
+                            moveList, R"(<span class="suggested-moves-percent-label">)", R"(</span>)", moveListIndex);
+                    }
                 } else {
                     moveInfo.numberOfGames = "1";
                     string moveList = getStringInBetween(
