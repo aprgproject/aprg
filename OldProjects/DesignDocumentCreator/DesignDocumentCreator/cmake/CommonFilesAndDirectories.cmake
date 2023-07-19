@@ -1,10 +1,6 @@
-include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
-include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
-
 set(DD_CREATOR_COMMON_SOURCE_DIRECTORY
     ${DD_CREATOR_DIR}/src/Common/
 )
-
 set(DD_CREATOR_COMMON_TEST_DIRECTORY
     ${DD_CREATOR_DIR}/tst/Common/
 )
