@@ -1,10 +1,6 @@
-include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
-include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
-
 set(SOOSA_SOURCE_DIRECTORY
     ${SOOSA_DIR}/src
 )
-
 set(SOOSA_TEST_DIRECTORY
     ${SOOSA_DIR}/tst
 )
