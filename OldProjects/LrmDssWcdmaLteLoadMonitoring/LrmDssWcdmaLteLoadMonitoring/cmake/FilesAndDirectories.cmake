@@ -1,10 +1,6 @@
-include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
-include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
-
 set(LRM_DSS_WCDMA_LTE_LOAD_MONITORING_SOURCE_DIRECTORY
     ${LRM_DSS_WCDMA_LTE_LOAD_MONITORING_DIR}/src
 )
-
 set(LRM_DSS_WCDMA_LTE_LOAD_MONITORING_TEST_DIRECTORY
     ${LRM_DSS_WCDMA_LTE_LOAD_MONITORING_DIR}/tst
 )
