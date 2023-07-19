@@ -1,10 +1,6 @@
-include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
-include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
-
 set(TDD_LECTURE_SOURCE_DIRECTORY
     ${TDD_LECTURE_DIR}/src
 )
-
 set(TDD_LECTURE_TEST_DIRECTORY
     ${TDD_LECTURE_DIR}/tst
 )
