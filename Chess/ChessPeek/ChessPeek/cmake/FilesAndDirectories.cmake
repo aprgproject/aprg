@@ -1,10 +1,6 @@
-include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
-include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
-
 set(CHESS_PEEK_SOURCE_DIRECTORY
     ${CHESS_PEEK_DIR}/src
 )
-
 set(CHESS_PEEK_TEST_DIRECTORY
     ${CHESS_PEEK_DIR}/tst
 )
