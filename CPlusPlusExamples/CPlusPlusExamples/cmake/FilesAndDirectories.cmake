@@ -1,10 +1,6 @@
-include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
-include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
-
 set(C_PLUS_PLUS_EXAMPLES_SOURCE_DIRECTORY
     ${C_PLUS_PLUS_EXAMPLES_DIR}/src
 )
-
 set(C_PLUS_PLUS_EXAMPLES_TEST_DIRECTORY
     ${C_PLUS_PLUS_EXAMPLES_DIR}/tst
 )

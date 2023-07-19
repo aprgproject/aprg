@@ -1,9 +1,10 @@
 #include <gtest/gtest.h>
 
+#include <algorithm>
+#include <array>
 #include <initializer_list>
 #include <iostream>
-#include <memory>
-#include <optional>
+#include <memory>#include <optional>
 #include <variant>
 
 using namespace std;
