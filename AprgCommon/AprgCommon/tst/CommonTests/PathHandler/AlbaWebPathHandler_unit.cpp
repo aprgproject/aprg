@@ -24,7 +24,8 @@ TEST(AlbaWebPathHandlerTest, EmptyPathWorks) {
 TEST(AlbaWebPathHandlerTest, DirectoryWithColonAndFileGivenAndNoProtocol) {
     AlbaWebPathHandler pathHandler(R"(\\::://directory!@#$%12345\\\\/\\\\/file.txt)");
     EXPECT_FALSE(pathHandler.hasProtocol());
-    EXPECT_TRUE(pathHandler.getProtocol().empty());    EXPECT_EQ(R"(\\::://directory!@#$%12345/file.txt)", pathHandler.getFullPath());
+    EXPECT_TRUE(pathHandler.getProtocol().empty());
+    EXPECT_EQ(R"(\\::://directory!@#$%12345/file.txt)", pathHandler.getFullPath());
     EXPECT_EQ(R"(\\::://directory!@#$%12345/)", pathHandler.getDirectory());
     EXPECT_EQ("file.txt", pathHandler.getFile());
     EXPECT_EQ("file", pathHandler.getFilenameOnly());
@@ -35,7 +36,8 @@ TEST(AlbaWebPathHandlerTest, DirectoryWithColonAndFileGivenAndNoProtocol) {
 TEST(AlbaWebPathHandlerTest, FullPathWithOnlyDirectoryGiven_HttpStyleInput) {
     AlbaWebPathHandler pathHandler(R"(hTTp://www.google.com\\\\/\\\\/!@#$%12345\\///)");
     EXPECT_TRUE(pathHandler.hasProtocol());
-    EXPECT_EQ("http", pathHandler.getProtocol());    EXPECT_EQ("hTTp://www.google.com/!@#$%12345/", pathHandler.getFullPath());
+    EXPECT_EQ("http", pathHandler.getProtocol());
+    EXPECT_EQ("hTTp://www.google.com/!@#$%12345/", pathHandler.getFullPath());
     EXPECT_EQ("hTTp://www.google.com/!@#$%12345/", pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
@@ -46,7 +48,8 @@ TEST(AlbaWebPathHandlerTest, FullPathWithOnlyDirectoryGiven_HttpStyleInput) {
 TEST(AlbaWebPathHandlerTest, FullPathWithQuestionMark) {
     AlbaWebPathHandler pathHandler("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522");
     EXPECT_TRUE(pathHandler.hasProtocol());
-    EXPECT_EQ("http", pathHandler.getProtocol());    EXPECT_EQ("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522", pathHandler.getFullPath());
+    EXPECT_EQ("http", pathHandler.getProtocol());
+    EXPECT_EQ("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522", pathHandler.getFullPath());
     EXPECT_EQ("http://a.mhcdn.net/store/manga/12114/001.0/compressed/", pathHandler.getDirectory());
     EXPECT_EQ("r049.jpg", pathHandler.getFile());
     EXPECT_EQ("r049", pathHandler.getFilenameOnly());
@@ -57,6 +60,7 @@ TEST(AlbaWebPathHandlerTest, FullPathWithQuestionMark) {
 TEST(AlbaWebPathHandlerTest, GotoLinkWhenNoProtocolIsGiven) {
     AlbaWebPathHandler pathHandler(R"(hTTp://www.google.com\\\\/\\\\/!@#$%12345\\///NewFile1.txt)");
     pathHandler.gotoLink(R"(NewDirectory1\NewFile2.ext)");
+
     EXPECT_TRUE(pathHandler.hasProtocol());
     EXPECT_EQ("http", pathHandler.getProtocol());
     EXPECT_EQ("hTTp://www.google.com/!@#$%12345/NewDirectory1/NewFile2.ext", pathHandler.getFullPath());
@@ -70,6 +74,7 @@ TEST(AlbaWebPathHandlerTest, GotoLinkWhenNoProtocolIsGiven) {
 TEST(AlbaWebPathHandlerTest, GotoLinkWhenWithProtocolIsGiven) {
     AlbaWebPathHandler pathHandler(R"(hTTp://www.google.com\\\\/\\\\/!@#$%12345\\///)");
     pathHandler.gotoLink(R"(ftP://www.yahoo.com\NewDirectory1\\NewFile2.ext)");
+
     EXPECT_TRUE(pathHandler.hasProtocol());
     EXPECT_EQ("ftp", pathHandler.getProtocol());
     EXPECT_EQ("ftP://www.yahoo.com/NewDirectory1/NewFile2.ext", pathHandler.getFullPath());
@@ -83,7 +88,8 @@ TEST(AlbaWebPathHandlerTest, GotoLinkWhenWithProtocolIsGiven) {
 TEST(AlbaWebPathHandlerTest, ProtocolCanBeChanged) {
     AlbaWebPathHandler pathHandler("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522");
     pathHandler.setProtocolWithSymbols("https://");
-    EXPECT_TRUE(pathHandler.hasProtocol());    EXPECT_EQ("https", pathHandler.getProtocol());
+    EXPECT_TRUE(pathHandler.hasProtocol());
+    EXPECT_EQ("https", pathHandler.getProtocol());
     EXPECT_EQ(
         "https://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522", pathHandler.getFullPath());
     EXPECT_EQ("https://a.mhcdn.net/store/manga/12114/001.0/compressed/", pathHandler.getDirectory());

@@ -1,6 +1,7 @@
 #include <UniqueProblems/DynamicProgramming/Subsequence/Increasing/MaximumSumIncreasingSubsequence.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

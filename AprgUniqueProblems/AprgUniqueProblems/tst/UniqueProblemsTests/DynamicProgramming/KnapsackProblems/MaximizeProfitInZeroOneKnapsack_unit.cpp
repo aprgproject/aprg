@@ -1,6 +1,7 @@
 #include <UniqueProblems/DynamicProgramming/KnapsackProblems/MaximizeProfitInZeroOneKnapsack.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

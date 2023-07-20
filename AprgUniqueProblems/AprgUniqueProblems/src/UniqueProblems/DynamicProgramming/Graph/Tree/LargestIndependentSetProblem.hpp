@@ -7,7 +7,8 @@
 
 namespace alba {
 
-class LargestIndependentSetProblem {public:
+class LargestIndependentSetProblem {
+public:
     using Count = int;
     using Index = int;
     using Vertex = int;

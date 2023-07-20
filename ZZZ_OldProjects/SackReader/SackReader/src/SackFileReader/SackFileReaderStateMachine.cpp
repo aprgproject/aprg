@@ -43,7 +43,8 @@ SackFileReaderStateMachine::SackFileReaderStateMachine(Database& database, strin
           isStringFoundNotCaseSensitive(m_filePathHandler.getFilenameOnly(), "MessageId_")),
       m_isNextLineNeeded(false),
       m_pathFromIInterface(getCorrectPathWithReplacedSlashCharacters<'/'>(
-          string(R"(\I_Interface\)") + getStringAfterThisString(m_filePathHandler.getFullPath(), R"(\I_Interface\)"))),      m_database(database) {}
+          string(R"(\I_Interface\)") + getStringAfterThisString(m_filePathHandler.getFullPath(), R"(\I_Interface\)"))),
+      m_database(database) {}
 
 bool SackFileReaderStateMachine::isNextLineNeeded() const { return m_isNextLineNeeded; }
 

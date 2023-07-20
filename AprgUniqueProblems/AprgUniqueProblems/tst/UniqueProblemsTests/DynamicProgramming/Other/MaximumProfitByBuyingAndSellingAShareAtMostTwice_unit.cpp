@@ -1,6 +1,7 @@
 #include <UniqueProblems/DynamicProgramming/Other/MaximumProfitByBuyingAndSellingAShareAtMostTwice.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

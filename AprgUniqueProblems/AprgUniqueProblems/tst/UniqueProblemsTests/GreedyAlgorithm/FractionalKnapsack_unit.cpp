@@ -1,6 +1,7 @@
 #include <UniqueProblems/GreedyAlgorithm/FractionalKnapsack.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

@@ -1,6 +1,7 @@
 #include <UniqueProblems/BranchAndBound/JobAssignmentProblem.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

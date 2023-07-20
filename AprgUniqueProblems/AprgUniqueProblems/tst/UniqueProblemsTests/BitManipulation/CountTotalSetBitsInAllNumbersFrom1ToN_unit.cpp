@@ -1,6 +1,7 @@
 #include <UniqueProblems/BitManipulation/CountTotalSetBitsInAllNumbersFrom1ToN.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

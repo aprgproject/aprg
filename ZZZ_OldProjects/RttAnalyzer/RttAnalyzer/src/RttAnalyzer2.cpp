@@ -26,7 +26,8 @@ void RttAnalyzer2::processFile(string const& file) {
             if (isStringFoundNotCaseSensitive(
                     lineInFile, "final RTT value reported to DSP explorer")) {
                 processLine(outputLogStream, lineInFile);
-            }        }
+            }
+        }
     }
 }
 
@@ -61,7 +62,8 @@ void RttAnalyzer2::processLine2(string const& fileName, string const& line) {
     } else if (isStringFoundNotCaseSensitive(line, "RXD_FILT")) {
         unsigned int maxPos = convertStringToNumber<unsigned int>(getNumberAfterThisString(line, "max_pos[0]: "));
         unsigned int refPos = convertStringToNumber<unsigned int>(getNumberAfterThisString(line, "ref_pos: "));
-        int difference = static_cast<int>(maxPos) - static_cast<int>(refPos);        m_outputLogStream << fileName << "," << dateTime << "," << maxPos << "," << refPos << "," << difference << "\n";
+        int difference = static_cast<int>(maxPos) - static_cast<int>(refPos);
+        m_outputLogStream << fileName << "," << dateTime << "," << maxPos << "," << refPos << "," << difference << "\n";
     }
 }
 
@@ -82,7 +84,8 @@ void RttAnalyzer2::processFile3(string const& file) {
             if (isStringFoundNotCaseSensitive(lineInFile, "peak_pos_cx8")) {
                 processLine3(outputLogStream, lineInFile);
             }
-        }    }
+        }
+    }
 }
 
 void RttAnalyzer2::processLine3(ofstream& outputFile, string const& line) {

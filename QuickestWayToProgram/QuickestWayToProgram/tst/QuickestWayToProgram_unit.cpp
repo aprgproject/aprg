@@ -41,6 +41,7 @@ TEST(SampleTest, PrimerTest) {
 /*TEST(SampleTest, uninintializedcopyTest) {
     std::vector<int> v1 = {1, 2, 3, 4, 5};
     std::vector<int> v2(3);
+
     std::uninitialized_copy(v1.begin(), v1.end(), v2.begin());
 
     for (int i = 0; i < static_cast<int>(v1.size()); i++) {
@@ -53,6 +54,7 @@ TEST(SampleTest, PrimerTest) {
 bool canConstructVer2(string ransomNote, string magazine) {
     array<int, 26> magazineLetterToCount{};
     auto itMagazine = magazine.begin();
+
     for (char const c : ransomNote) {
         int& count = magazineLetterToCount[c - 'a'];
         if (count > 0) {

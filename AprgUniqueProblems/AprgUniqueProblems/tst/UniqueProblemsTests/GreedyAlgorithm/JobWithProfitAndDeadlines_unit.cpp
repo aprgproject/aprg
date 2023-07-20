@@ -1,6 +1,7 @@
 #include <UniqueProblems/GreedyAlgorithm/JobWithProfitAndDeadlines.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

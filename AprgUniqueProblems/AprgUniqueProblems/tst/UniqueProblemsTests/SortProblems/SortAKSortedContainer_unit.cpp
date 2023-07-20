@@ -1,6 +1,7 @@
 #include <UniqueProblems/SortProblems/SortAKSortedContainer.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

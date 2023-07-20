@@ -6,6 +6,7 @@
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 
 namespace alba {
+
 class NearestEqualCells {
 public:
     // This is an example of combining algorithm using "Case processing".

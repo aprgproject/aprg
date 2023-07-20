@@ -1,6 +1,7 @@
 #include <UniqueProblems/DynamicProgramming/Graph/Tree/LargestIndependentSetProblem.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

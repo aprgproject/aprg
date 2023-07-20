@@ -36,7 +36,8 @@ void BtsLogAnalyzer::processFileForToCountUsersWithTracing(string const& filePat
         if (stringHelper::isStringFoundCaseSensitive(
                 lineInLogs, "RLH sends BB_UE_TRACING_REPORT_IND_MSG (0x515D)")) {
             int msgType =
-                stringHelper::convertHexStringToNumber<int>(getNumberAfterThisString(lineInLogs, "msgType: 0x"));            int nbccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
+                stringHelper::convertHexStringToNumber<int>(getNumberAfterThisString(lineInLogs, "msgType: 0x"));
+            int nbccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
             if (msgType == 0x1200) {
                 usersWithTracing.emplace(nbccId);
                 cout << "msgType: " << msgType << " nbccId: " << nbccId
@@ -84,7 +85,8 @@ void BtsLogAnalyzer::processFileForWireSharkDelay(string const& filePath) {
         } else if (stringHelper::isStringFoundNotCaseSensitive(
                        lineInLogs, R"(CRNC-CommunicationContextID: )")) {
             int crnccId = stringHelper::convertStringToNumber<int>(
-                getNumberAfterThisString(lineInLogs, "CRNC-CommunicationContextID: "));            WireSharkDelay& delayForCrnccId = m_wireSharkDelays[crnccId];
+                getNumberAfterThisString(lineInLogs, "CRNC-CommunicationContextID: "));
+            WireSharkDelay& delayForCrnccId = m_wireSharkDelays[crnccId];
             if (startTimeFetchedOptional) {
                 delayForCrnccId.startTimeOptional = startTimeFetchedOptional;
             }
@@ -106,7 +108,8 @@ void BtsLogAnalyzer::processFileForWireSharkDelay(string const& filePath) {
         } else if (stringHelper::isStringFoundNotCaseSensitive(lineInLogs, R"(No.     Time)")) {
             startTimeFetchedOptional.reset();
             endTimeFetchedOptional.reset();
-        }    }
+        }
+    }
 }
 
 void BtsLogAnalyzer::processFileForMsgQueuingTime(string const& filePath) {
@@ -123,7 +126,8 @@ void BtsLogAnalyzer::processFileForMsgQueuingTime(string const& filePath) {
         if (stringHelper::isStringFoundCaseSensitive(lineInLogs, "MSG TIME, start queuing time")) {
             int msgQueuingTime =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "msgQueuingTime: "));
-            totalMsgQueuingTime += msgQueuingTime;            if (msgQueuingTime > highestMsgQueuingTime) {
+            totalMsgQueuingTime += msgQueuingTime;
+            if (msgQueuingTime > highestMsgQueuingTime) {
                 highestMsgQueuingTime = msgQueuingTime;
             }
             m_outputStream << msgQueuingTime << "," << lineInLogs << "\n";
@@ -149,7 +153,8 @@ void BtsLogAnalyzer::processFileForBtsDelayForRlh(string const& filePath) {
         if (stringHelper::isStringFoundNotCaseSensitive(lineInLogs, R"(CTRL_RLH_RlSetupReq3G)")) {
             UniqueId uniqueKey;
             uniqueKey.crnccId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));            uniqueKey.nbccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
+            uniqueKey.nbccId =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
             uniqueKey.transactionId =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
@@ -161,7 +166,8 @@ void BtsLogAnalyzer::processFileForBtsDelayForRlh(string const& filePath) {
         } else if (stringHelper::isStringFoundNotCaseSensitive(
                        lineInLogs, R"(RLH_CTRL_RlSetupResp3G)")) {
             UniqueId uniqueKey;
-            uniqueKey.crnccId =                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
+            uniqueKey.crnccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
             uniqueKey.nbccId =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
             uniqueKey.transactionId =
@@ -204,7 +210,8 @@ void BtsLogAnalyzer::processFileForBtsDelayForRlDeletion(string const& filePath)
         if (stringHelper::isStringFoundNotCaseSensitive(
                 lineInLogs, R"(CTRL_RLH_RlDeletionReq3G)")) {
             UniqueId uniqueKey;
-            uniqueKey.crnccId =                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
+            uniqueKey.crnccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
             uniqueKey.nbccId =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
             uniqueKey.transactionId =
@@ -217,7 +224,8 @@ void BtsLogAnalyzer::processFileForBtsDelayForRlDeletion(string const& filePath)
         } else if (stringHelper::isStringFoundNotCaseSensitive(
                        lineInLogs, R"(RLH_CTRL_RlDeletionResp3G)")) {
             UniqueId uniqueKey;
-            uniqueKey.crnccId =                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crncId: "));
+            uniqueKey.crnccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crncId: "));
             uniqueKey.nbccId =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
             uniqueKey.transactionId =
@@ -298,7 +306,8 @@ void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePat
         if (stringHelper::isStringFoundNotCaseSensitive(
                 lineInLogs, R"(INF/TCOM/G, decodeRadioLinkRequest API_TCOM_RNC_MSG)")) {
             int crnccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
-            int nbccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));            int transactionId =
+            int nbccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
+            int transactionId =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
             unsigned int difference =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "diff in ms: "));
@@ -311,7 +320,8 @@ void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePat
         } else if (stringHelper::isStringFoundNotCaseSensitive(
                        lineInLogs, R"(INF/TCOM/G, Received API_TCOM_RNC_MSG)")) {
             uniqueKey.crnccId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));            uniqueKey.nbccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
+            uniqueKey.nbccId =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
             uniqueKey.transactionId =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
@@ -323,7 +333,8 @@ void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePat
         } else if (stringHelper::isStringFoundNotCaseSensitive(
                        lineInLogs, R"(INF/TCOM/G, Sending API_TCOM_RNC_MSG)")) {
             uniqueKey.crnccId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));            uniqueKey.nbccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
+            uniqueKey.nbccId =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
             uniqueKey.transactionId =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
@@ -337,7 +348,8 @@ void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePat
         } else if (stringHelper::isStringFoundNotCaseSensitive(
                        lineInLogs, R"(CTRL_RLH_RlSetupReq3G)")) {
             uniqueKey.crnccId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));            uniqueKey.nbccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
+            uniqueKey.nbccId =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
             uniqueKey.transactionId =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
@@ -351,7 +363,8 @@ void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePat
         } else if (stringHelper::isStringFoundNotCaseSensitive(
                        lineInLogs, R"(RLH_CTRL_RlSetupResp3G)")) {
             uniqueKey.crnccId =
-                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));            uniqueKey.nbccId =
+                stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
+            uniqueKey.nbccId =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
             uniqueKey.transactionId =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
@@ -427,14 +440,16 @@ void BtsLogAnalyzer::processFileForBtsDelayForGrm(string const& filePath) {
         if (stringHelper::isStringFoundNotCaseSensitive(
                 lineInLogs, R"(INF/TCOM/G, Received API_TCOM_RNC_MSG)")) {
             int nbccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
-            BtsLogDelay& delayForCrnccId = m_btsLogDelaysGrm[nbccId];            BtsLogPrint logPrint(lineInLogs);
+            BtsLogDelay& delayForCrnccId = m_btsLogDelaysGrm[nbccId];
+            BtsLogPrint logPrint(lineInLogs);
             if (!logPrint.getBtsTime().isStartup()) {
                 delayForCrnccId.startTimeOptional = logPrint.getBtsTime();
             }
         } else if (stringHelper::isStringFoundNotCaseSensitive(
                        lineInLogs, R"(CTRL_RLH_RlSetupReq3G)")) {
             int crnccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
-            int nbccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));            int transactionId =
+            int nbccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
+            int transactionId =
                 stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
             BtsLogDelay& delayForCrnccId = m_btsLogDelaysGrm[nbccId];
             BtsLogPrint logPrint(lineInLogs);
@@ -466,7 +481,8 @@ void BtsLogAnalyzer::processFileForBtsDelayForGrm(string const& filePath) {
                 || stringHelper::isStringFoundNotCaseSensitive(lineInLogs, R"(BB_2_RL_)")
                 )
         {
-            int nbccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));            m_btsLogDelaysGrm.erase(nbccId);
+            int nbccId = stringHelper::convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
+            m_btsLogDelaysGrm.erase(nbccId);
         }*/
     }
 }

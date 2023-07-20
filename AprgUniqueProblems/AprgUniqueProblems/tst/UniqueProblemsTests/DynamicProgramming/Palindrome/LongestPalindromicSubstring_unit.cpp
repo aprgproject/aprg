@@ -1,6 +1,7 @@
 #include <UniqueProblems/DynamicProgramming/Palindrome/LongestPalindromicSubstring.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

@@ -1,6 +1,7 @@
 #include <UniqueProblems/AmortizedAnalysis/TwoPointers/SubArraySum.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

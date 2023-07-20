@@ -1,6 +1,7 @@
 #include <UniqueProblems/DynamicProgramming/Other/BooleanParenthesizationProblem.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

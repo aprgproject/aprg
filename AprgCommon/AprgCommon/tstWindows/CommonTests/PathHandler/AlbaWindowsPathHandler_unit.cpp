@@ -23,7 +23,8 @@ TEST_F(AlbaWindowsPathHandlerTest, EmptyPathWorks) {
 
 TEST_F(AlbaWindowsPathHandlerTest, FullPathWithOnlyDirectoryGiven_WindowsStyleInput) {
     AlbaWindowsPathHandler pathHandler(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\)");
-    EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());    EXPECT_EQ(convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\)"), pathHandler.getDirectory());
+    EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
+    EXPECT_EQ(convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
     EXPECT_TRUE(pathHandler.getExtension().empty());

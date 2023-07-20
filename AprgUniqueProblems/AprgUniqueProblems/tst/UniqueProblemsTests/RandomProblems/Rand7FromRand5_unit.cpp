@@ -1,6 +1,7 @@
 #include <UniqueProblems/RandomProblems/Rand7FromRand5.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

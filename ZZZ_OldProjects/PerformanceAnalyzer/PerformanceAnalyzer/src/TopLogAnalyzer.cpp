@@ -67,7 +67,8 @@ void TopLogAnalyzer::readTopLogsAndSaveToDatabase(std::string const& pathOfTopLo
             stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "%Cpu0  :")) {
             saveOverallCpuData(lineInLogs, currentEntry);
         }
-        if (m_state == TopLogAnalyzerState::AfterColumnHeaders) {            saveCpuAndMem(lineInLogs, currentEntry);
+        if (m_state == TopLogAnalyzerState::AfterColumnHeaders) {
+            saveCpuAndMem(lineInLogs, currentEntry);
         }
     }
 }
@@ -106,7 +107,8 @@ stringHelper::strings TopLogAnalyzer::getProcessNamesForCpuReport() {
                 stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "Aalman"));
             double firstProcessCpuBasis(0);
             double secondProcessCpuBasis(0);
-            if (m_processToCpuMemCollectionMap.find(firstProcessName) != m_processToCpuMemCollectionMap.end()) {                firstProcessCpuBasis = m_processToCpuMemCollectionMap.at(firstProcessName).cpu.getAverage();
+            if (m_processToCpuMemCollectionMap.find(firstProcessName) != m_processToCpuMemCollectionMap.end()) {
+                firstProcessCpuBasis = m_processToCpuMemCollectionMap.at(firstProcessName).cpu.getAverage();
             }
             if (m_processToCpuMemCollectionMap.find(secondProcessName) != m_processToCpuMemCollectionMap.end()) {
                 secondProcessCpuBasis = m_processToCpuMemCollectionMap.at(secondProcessName).cpu.getAverage();
@@ -190,7 +192,8 @@ stringHelper::strings TopLogAnalyzer::getProcessNamesForMemReport() {
                 stringHelper::isStringFoundNotCaseSensitive(secondProcessName, "Aalman"));
             double firstProcessMemBasis(0);
             double secondProcessMemBasis(0);
-            if (m_processToCpuMemCollectionMap.find(firstProcessName) != m_processToCpuMemCollectionMap.end()) {                firstProcessMemBasis = m_processToCpuMemCollectionMap.at(firstProcessName).mem.getAverage();
+            if (m_processToCpuMemCollectionMap.find(firstProcessName) != m_processToCpuMemCollectionMap.end()) {
+                firstProcessMemBasis = m_processToCpuMemCollectionMap.at(firstProcessName).mem.getAverage();
             }
             if (m_processToCpuMemCollectionMap.find(secondProcessName) != m_processToCpuMemCollectionMap.end()) {
                 secondProcessMemBasis = m_processToCpuMemCollectionMap.at(secondProcessName).mem.getAverage();
@@ -244,7 +247,8 @@ bool TopLogAnalyzer::isTopCommandHeaderLine(string const& lineInLogs) const {
            stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "COMMAND");
 }
 
-void TopLogAnalyzer::saveAndClearCurrentEntry(DataEntry& currentEntry) {    if (!currentEntry.isEmpty()) {
+void TopLogAnalyzer::saveAndClearCurrentEntry(DataEntry& currentEntry) {
+    if (!currentEntry.isEmpty()) {
         m_dataEntries.emplace_back(currentEntry);
         currentEntry.clear();
     }

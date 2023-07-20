@@ -1,6 +1,7 @@
 #include <UniqueProblems/DynamicProgramming/Other/CountNumberOfWaysToReachAGivenScoreInAGame.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

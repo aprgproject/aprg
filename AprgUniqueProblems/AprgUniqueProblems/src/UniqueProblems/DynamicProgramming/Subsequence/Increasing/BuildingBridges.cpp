@@ -3,7 +3,8 @@
 #include <UniqueProblems/DynamicProgramming/Subsequence/Increasing/LongestIncreasingSubsequenceLinearithmic.hpp>
 
 #include <algorithm>
-#include <iterator>#include <numeric>
+#include <iterator>
+#include <numeric>
 
 using namespace std;
 
@@ -27,6 +28,7 @@ BuildingBridges::Index BuildingBridges::getNumberOfPossibleBridges() const {
     LongestIncreasingSubsequenceLinearithmic lis(secondPoints);
     return lis.getLongestLength();
 }
+
 BuildingBridges::Bridges BuildingBridges::getPossibleBridges() const {
     // Time Complexity – O(NlogN)
     // Space Complexity – O(N)
@@ -39,7 +41,8 @@ BuildingBridges::Bridges BuildingBridges::getPossibleBridges() const {
         LongestIncreasingSubsequenceLinearithmic::Values secondPoints;
         secondPoints.reserve(sortedBridges.size());
         transform(sortedBridges.cbegin(), sortedBridges.cend(), back_inserter(secondPoints), [](auto const& bridge) {
-            return bridge.second;        });
+            return bridge.second;
+        });
 
         Index longestLength(1);
         IndexToValue lengthMinus1ToEndValue(secondPoints.size(), 0);  // length minus one because its index

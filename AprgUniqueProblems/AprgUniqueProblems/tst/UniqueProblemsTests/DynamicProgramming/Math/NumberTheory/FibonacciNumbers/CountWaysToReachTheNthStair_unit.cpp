@@ -1,6 +1,7 @@
 #include <UniqueProblems/DynamicProgramming/Math/NumberTheory/FibonacciProblems/CountWaysToReachTheNthStair.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

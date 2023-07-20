@@ -1,6 +1,7 @@
 #include <UniqueProblems/SearchProblems/FindSmallestValueWithTrue.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

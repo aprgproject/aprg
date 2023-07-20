@@ -3,6 +3,7 @@
 #include <UniqueProblems/SortProblems/SortNNumbersFromZeroToNSquaredMinus1.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace alba::algorithm::CommonTestsWithSorter;
 using namespace std;
 
@@ -36,6 +37,7 @@ TEST(SortNNumbersFromZeroToNSquaredMinus1Test, SortWorksOnCharactersUsingExample
     CharactersSorter sorter;
     testSortUsingExample2WithCharacters<CharactersSorter, Characters>(sorter);
 }
+
 // CANNOT SORT STD::LIST, actually it might be possible if we change indexes to iterators
 // CANNOT SORT POSITIVE AND NEGATIVE VALUES
 // CANNOT SORT DOUBLE VALUES

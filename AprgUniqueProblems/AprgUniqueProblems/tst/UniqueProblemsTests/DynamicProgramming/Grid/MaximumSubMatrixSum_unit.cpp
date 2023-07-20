@@ -1,6 +1,7 @@
 #include <UniqueProblems/DynamicProgramming/Grid/MaximumSubMatrixSum.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

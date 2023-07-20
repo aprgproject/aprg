@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <numeric>
+
 using namespace std;
 
 namespace alba {
@@ -14,7 +15,8 @@ LongestIncreasingSubsequenceLinearithmic::Index
 LongestIncreasingSubsequenceLinearithmic::getLongestLength() const {
     Index longestLength(0);
     if (!m_sequence.empty()) {
-        IndexToValue lengthMinus1ToEndValue(m_sequence.size(), 0);  // dynamic programming        lengthMinus1ToEndValue[0] = m_sequence.front();
+        IndexToValue lengthMinus1ToEndValue(m_sequence.size(), 0);  // dynamic programming
+        lengthMinus1ToEndValue[0] = m_sequence.front();
         longestLength = 1;
         for (auto itValue = m_sequence.cbegin() + 1; itValue != m_sequence.cend(); itValue++) {
             auto beginIt = lengthMinus1ToEndValue.begin(), endIt = lengthMinus1ToEndValue.begin() + longestLength;
@@ -35,7 +37,8 @@ LongestIncreasingSubsequenceLinearithmic::Values
 LongestIncreasingSubsequenceLinearithmic::getLongestSubsequence() const {
     Values result;
     if (!m_sequence.empty()) {
-        Index longestLength(1);        IndexToValue lengthMinus1ToEndValue(m_sequence.size(), 0);  // length minus one because its length index
+        Index longestLength(1);
+        IndexToValue lengthMinus1ToEndValue(m_sequence.size(), 0);  // length minus one because its length index
         IndexToIndex lengthMinus1ToEndIndex(m_sequence.size(), 0);
         IndexToIndex indexToPreviousIndex(m_sequence.size());
         iota(indexToPreviousIndex.begin(), indexToPreviousIndex.end(), 0);

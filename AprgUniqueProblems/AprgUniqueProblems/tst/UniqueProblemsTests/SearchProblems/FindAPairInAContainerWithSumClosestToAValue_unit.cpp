@@ -1,6 +1,7 @@
 #include <UniqueProblems/SearchProblems/FindAPairInAContainerWithSumClosestToAValue.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

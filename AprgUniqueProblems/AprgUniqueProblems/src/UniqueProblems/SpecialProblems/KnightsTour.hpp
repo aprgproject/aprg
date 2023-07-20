@@ -5,6 +5,7 @@
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 
 namespace alba {
+
 using VertexOfKnightsTour = std::pair<int, int>;  // Count and ChessBoardIndex pair
 
 class KnightsTour {

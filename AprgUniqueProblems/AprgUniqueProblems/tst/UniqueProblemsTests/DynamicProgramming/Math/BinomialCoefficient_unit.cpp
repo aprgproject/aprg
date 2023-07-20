@@ -1,6 +1,7 @@
 #include <UniqueProblems/DynamicProgramming/Math/BinomialCoefficient.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

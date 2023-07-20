@@ -4,6 +4,7 @@
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
 #include <queue>
+
 using namespace alba::mathHelper;
 using namespace std;
 

@@ -1,6 +1,7 @@
 #include <UniqueProblems/SpecialProblems/DeBruijnSequences.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

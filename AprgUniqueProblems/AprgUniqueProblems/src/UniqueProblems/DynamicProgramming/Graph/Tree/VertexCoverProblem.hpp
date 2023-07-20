@@ -7,7 +7,8 @@
 
 namespace alba {
 
-class VertexCoverProblem {public:
+class VertexCoverProblem {
+public:
     using Count = int;
     using Index = int;
     using Vertex = int;

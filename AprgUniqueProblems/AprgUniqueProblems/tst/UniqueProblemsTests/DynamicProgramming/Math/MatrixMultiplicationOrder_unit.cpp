@@ -1,6 +1,7 @@
 #include <UniqueProblems/DynamicProgramming/Math/MatrixMultiplicationOrder.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

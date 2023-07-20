@@ -63,7 +63,8 @@ void SnapshotStatistics::saveFileListForSnapshot(string const& outputPath) {
     for (auto const& firstPair : m_fileNameToSnapshotNameToFileSize) {
         outputStream << firstPair.first;
         for (string const& snapshotName : m_snapshotNames) {
-            SnapshotNameToFileSizeMap const& snapshotNameToFileSize(firstPair.second);            if (snapshotNameToFileSize.find(snapshotName) != snapshotNameToFileSize.end()) {
+            SnapshotNameToFileSizeMap const& snapshotNameToFileSize(firstPair.second);
+            if (snapshotNameToFileSize.find(snapshotName) != snapshotNameToFileSize.end()) {
                 outputStream << "," << snapshotNameToFileSize.at(snapshotName);
             } else {
                 outputStream << ",";
@@ -78,7 +79,8 @@ void SnapshotStatistics::fetchStatisticsForSnapshot() {
         for (auto const& secondPair : firstPair.second) {
             string wildcardName(getWildcardNameIfFileGroupsIsFound(firstPair.first));
             if (wildcardName.empty()) {
-                wildcardName = firstPair.first;            }
+                wildcardName = firstPair.first;
+            }
             m_wildcardNameToSampleSizesMap[wildcardName].emplace_back(secondPair.second);
         }
     }
@@ -89,7 +91,8 @@ void SnapshotStatistics::fetchStatisticsForMemory() {
         for (auto const& secondPair : firstPair.second) {
             string wildcardName(getWildcardNameIfFileGroupsIsFound(firstPair.first));
             if (wildcardName.empty()) {
-                wildcardName = firstPair.first;            }
+                wildcardName = firstPair.first;
+            }
             m_wildcardNameToSampleSizesMap[wildcardName].emplace_back(secondPair.second);
         }
     }
@@ -102,7 +105,8 @@ void SnapshotStatistics::saveStatisticsToFile(string const& outputPath) {
     for (auto const& firstPair : m_wildcardNameToSampleSizesMap) {
         outputStream << firstPair.first;
         for (double const& size : firstPair.second) {
-            outputStream << "," << size;        }
+            outputStream << "," << size;
+        }
         outputStream << "\n";
     }
 }
@@ -139,7 +143,8 @@ void SnapshotStatistics::processMemory(string const& memoryFilePath, string cons
         } else if (stringHelper::isStringFoundCaseSensitive(lineInFile, " .")) {
             relativeFilePath = "***TotalSize***";
             fileSizeInString = stringHelper::getStringWithoutStartingAndTrailingWhiteSpace(
-                stringHelper::getStringBeforeThisString(lineInFile, " ."));            fileSizeInBytes = convertFileSizeToDouble(fileSizeInString);
+                stringHelper::getStringBeforeThisString(lineInFile, " ."));
+            fileSizeInBytes = convertFileSizeToDouble(fileSizeInString);
             addStatisticForMemory(relativeFilePath, snapshotName, fileSizeInBytes);
         }
     }
@@ -152,7 +157,8 @@ double SnapshotStatistics::convertFileSizeToDouble(string const& fileSizeInStrin
     } else if (stringHelper::isStringFoundCaseSensitive(fileSizeInString, "M")) {
         fileSizeInBytes *= 1000000;
     }
-    return fileSizeInBytes;}
+    return fileSizeInBytes;
+}
 
 void SnapshotStatistics::addStatisticForMemory(
     string const& fileName, string const& snapshotName, double const fileSize) {
@@ -172,7 +178,8 @@ void SnapshotStatistics::saveSizesForMemory(string const& outputPath) {
     for (auto const& firstPair : m_fileNameToSnapshotNameToMemorySize) {
         outputStream << firstPair.first;
         for (string const& snapshotName : m_snapshotNames) {
-            SnapshotNameToFileSizeMap const& snapshotNameToFileSize(firstPair.second);            if (snapshotNameToFileSize.find(snapshotName) != snapshotNameToFileSize.end()) {
+            SnapshotNameToFileSizeMap const& snapshotNameToFileSize(firstPair.second);
+            if (snapshotNameToFileSize.find(snapshotName) != snapshotNameToFileSize.end()) {
                 outputStream << "," << snapshotNameToFileSize.at(snapshotName);
             } else {
                 outputStream << ",";
@@ -858,4 +865,5 @@ void SnapshotStatistics::initializeFileGroups() {
                stringHelper::isStringFoundCaseSensitive(fileName, ".XML");
     });
 }
+
 }  // namespace alba

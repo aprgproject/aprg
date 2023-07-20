@@ -1,6 +1,7 @@
 #include <UniqueProblems/BitManipulation/CountingSubGrids.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

@@ -1,6 +1,7 @@
 #include <UniqueProblems/GreedyAlgorithm/GreedyAlgorithmForFewestCoins.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

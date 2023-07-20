@@ -17,7 +17,8 @@ public:
     FindThePairWithClosestToSum()  // values can be unsorted
     {}
 
-    ValuePair getValuePairThatIsClosestToSum(Values const& values1, Values const& values2, Value const& sumToCheck) {        ValuePair result{};
+    ValuePair getValuePairThatIsClosestToSum(Values const& values1, Values const& values2, Value const& sumToCheck) {
+        ValuePair result{};
         if (!values1.empty() && !values2.empty()) {
             Value minimumDeviation = std::numeric_limits<Value>::max();
             auto forwardIt1 = values1.cbegin();

@@ -1,6 +1,7 @@
 #include <UniqueProblems/DynamicProgramming/Math/Digits/ComputeSumOfDigitsInAllNumbersFrom1ToN.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {

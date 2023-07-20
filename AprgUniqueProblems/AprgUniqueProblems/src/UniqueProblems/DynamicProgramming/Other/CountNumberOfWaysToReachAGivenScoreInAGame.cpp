@@ -3,6 +3,7 @@
 #include <UniqueProblems/DynamicProgramming/Other/CoinProblem.hpp>
 
 #include <array>
+
 using namespace std;
 
 namespace alba {

@@ -1,6 +1,7 @@
 #include <UniqueProblems/CombiningAlgorithms/NearestEqualCells.hpp>
 
 #include <gtest/gtest.h>
+
 using namespace std;
 
 namespace alba {
