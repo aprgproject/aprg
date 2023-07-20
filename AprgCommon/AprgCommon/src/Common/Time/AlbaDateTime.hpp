@@ -88,12 +88,11 @@ public:
 
     template <PrintFormat printFormat>
     struct PrintObject {
-        PrintObject(AlbaDateTime const* const objectPointer) : dateTimePointer(objectPointer) {}
-        AlbaDateTime const* const dateTimePointer{nullptr};
+        explicit PrintObject(AlbaDateTime const& dataTimeToPrint) : savedDateTime(dataTimeToPrint) {}
+        AlbaDateTime const& savedDateTime;
     };
 
-    constexpr AlbaDateTime() : m_sign(1), m_yearMonthDay{}, m_hourMinuteSecond{}, m_microseconds{} {}
-    constexpr AlbaDateTime(
+    constexpr AlbaDateTime() : m_sign(1), m_yearMonthDay{}, m_hourMinuteSecond{}, m_microseconds{} {}    constexpr AlbaDateTime(
         AlbaYearMonthDay const& yearMonthDay, AlbaHourMinuteSecond const& hourMinuteSecond, uint32_t const microseconds)
         : m_sign(1), m_yearMonthDay(yearMonthDay), m_hourMinuteSecond(hourMinuteSecond), m_microseconds(microseconds) {}
     constexpr AlbaDateTime(
@@ -141,11 +140,10 @@ public:
 
     template <PrintFormat printFormat>
     PrintObject<printFormat> getPrintObject() const {
-        return PrintObject<printFormat>(this);
+        return PrintObject<printFormat>(*this);
     }
 
-private:
-    bool isLessThanInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const;
+private:    bool isLessThanInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const;
     bool isGreaterThanInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const;
     bool isEqualInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const;
     AlbaDateTime executeAddOrSubtract(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const;

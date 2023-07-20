@@ -104,11 +104,10 @@ public:
         }
     }
 
-    void clear() {
+    void clear() override {
         m_numberOfEdges = 0;
         m_adjacencyLists.clear();
     }
-
 protected:
     friend std::ostream& operator<<(std::ostream& out, UndirectedGraphWithVertexToAdjacencyListsMap const& graph) {
         out << "Adjacency Lists: \n";
