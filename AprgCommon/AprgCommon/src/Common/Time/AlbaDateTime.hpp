@@ -92,7 +92,8 @@ public:
         AlbaDateTime const& savedDateTime;
     };
 
-    constexpr AlbaDateTime() : m_sign(1), m_yearMonthDay{}, m_hourMinuteSecond{}, m_microseconds{} {}    constexpr AlbaDateTime(
+    constexpr AlbaDateTime() : m_sign(1), m_yearMonthDay{}, m_hourMinuteSecond{}, m_microseconds{} {}
+    constexpr AlbaDateTime(
         AlbaYearMonthDay const& yearMonthDay, AlbaHourMinuteSecond const& hourMinuteSecond, uint32_t const microseconds)
         : m_sign(1), m_yearMonthDay(yearMonthDay), m_hourMinuteSecond(hourMinuteSecond), m_microseconds(microseconds) {}
     constexpr AlbaDateTime(
@@ -143,7 +144,8 @@ public:
         return PrintObject<printFormat>(*this);
     }
 
-private:    bool isLessThanInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const;
+private:
+    bool isLessThanInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const;
     bool isGreaterThanInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const;
     bool isEqualInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const;
     AlbaDateTime executeAddOrSubtract(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const;

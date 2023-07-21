@@ -5,6 +5,7 @@
 #include <vector>
 
 namespace alba {
+
 namespace algorithm {
 
 template <typename NodeTemplateType, typename BaseDataStructure>
