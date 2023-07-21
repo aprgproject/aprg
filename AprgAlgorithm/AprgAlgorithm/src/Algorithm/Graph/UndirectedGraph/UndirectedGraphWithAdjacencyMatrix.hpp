@@ -102,11 +102,10 @@ public:
         }
     }
 
-    void clear() {
+    void clear() override {
         m_numberOfEdges = 0;
         m_adjacencyMatrix.clearAndResize(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE);
     }
-
 protected:
     friend std::ostream& operator<<(std::ostream& out, UndirectedGraphWithAdjacencyMatrix const& graph) {
         matrix::AlbaMatrix<std::string> matrixToDisplay(MAX_VERTEX_VALUE + 1, MAX_VERTEX_VALUE + 1);
