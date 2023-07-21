@@ -24,7 +24,8 @@
 					"autoDetect",
 					"${workspaceRoot}"
 				],
-				"pattern": {					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+				"pattern": {
+					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
 					"file": 1,
 					"line": 2,
 					"column": 3,
@@ -37,7 +38,8 @@
 				"revealProblems": "onProblem"
 			}
 		},
-		{			"label": "Build In WSL Using Clang",
+		{
+			"label": "Build In WSL Using Clang",
 			"type": "shell",
 			"command": "wsl",
 			"args": [
@@ -59,7 +61,8 @@
 					"autoDetect",
 					"${workspaceRoot}"
 				],
-				"pattern": {					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+				"pattern": {
+					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
 					"file": 1,
 					"line": 2,
 					"column": 3,
@@ -72,7 +75,8 @@
 				"revealProblems": "onProblem"
 			}
 		},
-		{			"label": "Build In WSL Using Clang With Asan",
+		{
+			"label": "Build In WSL Using Clang With Asan",
 			"type": "shell",
 			"command": "wsl",
 			"args": [
@@ -94,7 +98,8 @@
 					"autoDetect",
 					"${workspaceRoot}"
 				],
-				"pattern": {					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+				"pattern": {
+					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
 					"file": 1,
 					"line": 2,
 					"column": 3,

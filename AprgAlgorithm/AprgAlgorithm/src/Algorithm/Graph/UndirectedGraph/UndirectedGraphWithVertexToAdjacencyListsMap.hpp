@@ -82,7 +82,8 @@ public:
             auto const& vertex1(vertex);  // structured bindings with lambda does not work with clang
             if (!adjacencyList.empty()) {
                 std::for_each(adjacencyList.lower_bound(vertex1), adjacencyList.cend(), [&](Vertex const& vertex2) {
-                    result.emplace_back(vertex1, vertex2);                });
+                    result.emplace_back(vertex1, vertex2);
+                });
             }
         }
         return result;
