@@ -3,6 +3,7 @@
 #include <CommonTests/PathHandler/AlbaWindowsPathHandlerTest.hpp>
 
 #include <gtest/gtest.h>
+
 #include <fstream>
 #include <string>
 

@@ -3,6 +3,7 @@
 #include <CommonTestsUtilities/File/BaseFileReaderTest.hpp>
 
 #include <gtest/gtest.h>
+
 #include <string>
 
 using namespace std;
@@ -70,7 +71,8 @@ TEST_F(AlbaFileReaderTest, SkipLineWorksUsingVariousCharacters) {
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     for (int i = 0; i < 21; i++) {
-        fileReader.skipLine();        EXPECT_TRUE(fileReader.isNotFinished());
+        fileReader.skipLine();
+        EXPECT_TRUE(fileReader.isNotFinished());
     }
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_TRUE(fileReader.getLine().empty());
@@ -89,7 +91,8 @@ TEST_F(AlbaFileReaderTest, GetLineWorksUsingVariousCharacters) {
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ("1         ", fileReader.getLine());
-    EXPECT_EQ("12        ", fileReader.getLine());    EXPECT_EQ("123       ", fileReader.getLine());
+    EXPECT_EQ("12        ", fileReader.getLine());
+    EXPECT_EQ("123       ", fileReader.getLine());
     EXPECT_EQ("1234      ", fileReader.getLine());
     EXPECT_EQ("12345     ", fileReader.getLine());
     EXPECT_EQ("123456    ", fileReader.getLine());
@@ -125,7 +128,8 @@ TEST_F(AlbaFileReaderTest, GetLineAndIgnoreWhiteSpacesWorksUsingVariousCharacter
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ("1", fileReader.getLineAndIgnoreWhiteSpaces());
-    EXPECT_EQ("12", fileReader.getLineAndIgnoreWhiteSpaces());    EXPECT_EQ("123", fileReader.getLineAndIgnoreWhiteSpaces());
+    EXPECT_EQ("12", fileReader.getLineAndIgnoreWhiteSpaces());
+    EXPECT_EQ("123", fileReader.getLineAndIgnoreWhiteSpaces());
     EXPECT_EQ("1234", fileReader.getLineAndIgnoreWhiteSpaces());
     EXPECT_EQ("12345", fileReader.getLineAndIgnoreWhiteSpaces());
     EXPECT_EQ("123456", fileReader.getLineAndIgnoreWhiteSpaces());
@@ -153,7 +157,8 @@ TEST_F(AlbaFileReaderTest, ReadLineWithSizeLimit) {
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(2000U, fileReader.getLineAndIgnoreWhiteSpaces().length());
-    EXPECT_EQ(2000U, fileReader.getLineAndIgnoreWhiteSpaces().length());    EXPECT_EQ(1000U, fileReader.getLineAndIgnoreWhiteSpaces().length());
+    EXPECT_EQ(2000U, fileReader.getLineAndIgnoreWhiteSpaces().length());
+    EXPECT_EQ(1000U, fileReader.getLineAndIgnoreWhiteSpaces().length());
     EXPECT_FALSE(fileReader.isNotFinished());
     EXPECT_TRUE(fileReader.getLineAndIgnoreWhiteSpaces().empty());
 }
@@ -170,7 +175,8 @@ TEST_F(AlbaFileReaderTest, ReadSingleCharacterFromBinaryFile) {
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ('1', fileReader.getCharacter());
-    EXPECT_EQ('2', fileReader.getCharacter());    EXPECT_EQ('3', fileReader.getCharacter());
+    EXPECT_EQ('2', fileReader.getCharacter());
+    EXPECT_EQ('3', fileReader.getCharacter());
     EXPECT_EQ('!', fileReader.getCharacter());
     EXPECT_EQ('@', fileReader.getCharacter());
     EXPECT_EQ('#', fileReader.getCharacter());
@@ -200,7 +206,8 @@ TEST_F(AlbaFileReaderTest, ReadMultipleCharacters) {
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     size_t numberOfCharacters = 3U;
-    char* charPointer;    charPointer = fileReader.getCharacters(numberOfCharacters);
+    char* charPointer;
+    charPointer = fileReader.getCharacters(numberOfCharacters);
     EXPECT_EQ("123", string(charPointer, numberOfCharacters));
     EXPECT_EQ(3U, numberOfCharacters);
     charPointer = fileReader.getCharacters(numberOfCharacters);
@@ -241,7 +248,8 @@ TEST_F(AlbaFileReaderTest, RequestToReadMultipleCharactersThatIsTheBeyondBufferS
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     size_t numberOfCharacters = 20000;
-    char* charPointer;    charPointer = fileReader.getCharacters(numberOfCharacters);
+    char* charPointer;
+    charPointer = fileReader.getCharacters(numberOfCharacters);
     EXPECT_EQ("123", string(charPointer, numberOfCharacters));
     EXPECT_EQ(3U, numberOfCharacters);
     EXPECT_TRUE(fileReader.isNotFinished());
@@ -269,7 +277,8 @@ TEST_F(AlbaFileReaderTest, ReadOneByteNumbers) {
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0x01U, fileReader.getOneByteData<uint8_t>());
-    EXPECT_TRUE(fileReader.isNotFinished());    EXPECT_EQ(0x23U, fileReader.getOneByteData<uint8_t>());
+    EXPECT_TRUE(fileReader.isNotFinished());
+    EXPECT_EQ(0x23U, fileReader.getOneByteData<uint8_t>());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0x45U, fileReader.getOneByteData<uint8_t>());
     EXPECT_TRUE(fileReader.isNotFinished());
@@ -300,7 +309,8 @@ TEST_F(AlbaFileReaderTest, ReadTwoByteNumbers) {
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0x0123U, fileReader.getTwoByteData<uint16_t>());
-    EXPECT_TRUE(fileReader.isNotFinished());    EXPECT_EQ(0x4567U, fileReader.getTwoByteData<uint16_t>());
+    EXPECT_TRUE(fileReader.isNotFinished());
+    EXPECT_EQ(0x4567U, fileReader.getTwoByteData<uint16_t>());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0xA1BAU, fileReader.getTwoByteData<uint16_t>());
     EXPECT_TRUE(fileReader.isNotFinished());
@@ -325,7 +335,8 @@ TEST_F(AlbaFileReaderTest, ReadFourByteNumbers) {
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0x01234567U, fileReader.getFourByteData<uint32_t>());
-    EXPECT_TRUE(fileReader.isNotFinished());    EXPECT_EQ(0xA1BAU, fileReader.getFourByteData<uint32_t>());
+    EXPECT_TRUE(fileReader.isNotFinished());
+    EXPECT_EQ(0xA1BAU, fileReader.getFourByteData<uint32_t>());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
 
@@ -366,7 +377,8 @@ TEST_F(AlbaFileReaderTest, ReadSwappedTwoByteNumbers) {
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0x2301U, fileReader.getTwoByteSwappedData<uint16_t>());
-    EXPECT_TRUE(fileReader.isNotFinished());    EXPECT_EQ(0x6745U, fileReader.getTwoByteSwappedData<uint16_t>());
+    EXPECT_TRUE(fileReader.isNotFinished());
+    EXPECT_EQ(0x6745U, fileReader.getTwoByteSwappedData<uint16_t>());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0xBAA1U, fileReader.getTwoByteSwappedData<uint16_t>());
     EXPECT_TRUE(fileReader.isNotFinished());
@@ -391,7 +403,8 @@ TEST_F(AlbaFileReaderTest, ReadSwappedFourByteNumbers) {
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(0x67452301U, fileReader.getFourByteSwappedData<uint32_t>());
-    EXPECT_TRUE(fileReader.isNotFinished());    EXPECT_EQ(0xBAA10000U, fileReader.getFourByteSwappedData<uint32_t>());
+    EXPECT_TRUE(fileReader.isNotFinished());
+    EXPECT_EQ(0xBAA10000U, fileReader.getFourByteSwappedData<uint32_t>());
     EXPECT_FALSE(fileReader.isNotFinished());
 }
 
@@ -432,7 +445,8 @@ TEST_F(AlbaFileReaderTest, FileContentsCanBeSavedInMemoryBuffer) {
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
 
-    AlbaMemoryBuffer buffer;    fileReader.saveDataToMemoryBuffer(buffer, 8);
+    AlbaMemoryBuffer buffer;
+    fileReader.saveDataToMemoryBuffer(buffer, 8);
     EXPECT_EQ(8U, buffer.getSize());
     EXPECT_EQ(0x01U, buffer[0]);
     EXPECT_EQ(0x23U, buffer[1]);

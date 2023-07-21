@@ -4,6 +4,7 @@
 #include <CommonTestsUtilities/File/BaseFileReaderTest.hpp>
 
 #include <gtest/gtest.h>
+
 #include <fstream>
 #include <string>
 
@@ -86,4 +87,5 @@ TEST_F(AlbaStreamParameterReaderTest, MapTest) {
     reader.readMapData(retrievedmap);
     EXPECT_EQ(sampleMap, retrievedmap);
 }
+
 }  // namespace alba
