@@ -91,11 +91,10 @@ AlbaAngles Polygon<numberOfVertices>::getAnglesAtVertices() const {
         anglesAtVertices.emplace_back(
             getTheInnerAngleUsingThreePoints(m_vertices[i], m_vertices[i - 1], m_vertices[i + 1]));
     }
-    anglesAtVertices.emplace_back(getTheInnerAngleUsingThreePoints(
-        m_vertices[sizeMinusOne], m_vertices[sizeMinusOne - 1], m_vertices[0]));
+    anglesAtVertices.emplace_back(
+        getTheInnerAngleUsingThreePoints(m_vertices[sizeMinusOne], m_vertices[sizeMinusOne - 1], m_vertices[0]));
     return anglesAtVertices;  // RVO
 }
-
 template <int numberOfVertices>
 AlbaAngle Polygon<numberOfVertices>::getSumOfAngles() const {
     return AlbaAngle(AngleUnitType::Degrees, (numberOfVertices - 2) * 180);
@@ -122,6 +121,9 @@ void Polygon<numberOfVertices>::getPointsFromVerticesWithoutLastPoint(
     points.reserve(pointsFromCurrentLine.size());
     copy(pointsFromCurrentLine.cbegin(), pointsFromCurrentLine.cend(), back_inserter(points));
 }
+
+template class Polygon<3>;  // clang needs this on implementation file
+template class Polygon<4>;  // clang needs this on implementation file
 
 }  // namespace TwoDimensions
 }  // namespace alba
