@@ -9,12 +9,12 @@
     {
       "name": "visualstudio-windows-msvc-debug",
       "displayName": "Visual Studio Windows x64 MSVC Debug",
-      "description": "Sets Ninja generator, compilers, x64 architecture, build and install directory, debug build type",
-      "generator": "Ninja",
+      "description": "Setup for Visual Studio Compilation, manually call cmake for GCC/Clang.",
+      "generator": "Visual Studio 17 2022",
+      "toolset": "host=x64",
       "binaryDir": "${sourceDir}/../VisualStudioBuild/build/${presetName}",
       "architecture": {
-        "value": "x64",
-        "strategy": "external"
+        "value": "x64",        "strategy": "external"
       },
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
@@ -24,11 +24,12 @@
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
-          "hostOS": [ "Windows" ]
+          "hostOS": [
+            "Windows"
+          ]
         }
       }
-    }
-  ],
+    }  ],
   "buildPresets": [
     {
       "name": "default",
@@ -39,11 +40,12 @@
     {
       "name": "default",
       "configurePreset": "visualstudio-windows-msvc-debug",
-      "output": { "outputOnFailure": true },
+      "output": {
+        "outputOnFailure": true
+      },
       "execution": {
         "noTestsAction": "error",
-        "stopOnFailure": true
-      }
+        "stopOnFailure": true      }
     }
   ],
   "vendor": {
@@ -52,5 +54,3 @@
     }
   }
 }
-
-
