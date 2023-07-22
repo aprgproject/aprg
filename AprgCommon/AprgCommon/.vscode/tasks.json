@@ -39,7 +39,8 @@
 			},
 		},
 		{
-			"label": "Build In WSL Using Clang",			"type": "shell",
+			"label": "Build In WSL Using Clang",
+			"type": "shell",
 			"command": "wsl",
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
@@ -75,7 +76,8 @@
 			},
 		},
 		{
-			"label": "Build In WSL Using Clang With Asan",			"type": "shell",
+			"label": "Build In WSL Using Clang With Asan",
+			"type": "shell",
 			"command": "wsl",
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
@@ -111,7 +113,8 @@
 			},
 		},
 		{
-			"label": "Run In WSL",			"type": "shell",
+			"label": "Run In WSL",
+			"type": "shell",
 			"command": "wsl",
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
