@@ -24,7 +24,8 @@ const Home: NextPage = () => {
           In this project, there are no rigid rules or strict restrictions – it's all about having a good time while coding! <br />
         </p>
 
-        <div className={styles.grid}>          <a href="https://nextjs.org/docs" className={styles.card}>
+        <div className={styles.grid}>
+          <a href="https://nextjs.org/docs" className={styles.card}>
             <h2>Documentation &rarr;</h2>
             <p>Find in-depth information about Next.js features and API.</p>
           </a>
