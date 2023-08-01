@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Set variable values
-projectName=$1
-scriptOption=$2
-firstArgument=$3
 scriptPath=$(realpath "$0")
-scriptName=$(basename "$0")
-scriptDirectory=$(dirname "$0")
+scriptDirectory=$(dirname "$scriptPath")
+scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
 WslBuildFolderName="WslBuild"
 numberOfCoresInTheSystem=$(nproc)
 exitCode=0
+projectName=$1
+scriptOption=$2
+firstArgument=$3
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/PrintScripts/PrintUtilities.sh"

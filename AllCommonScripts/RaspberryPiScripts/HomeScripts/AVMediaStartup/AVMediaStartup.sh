@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Set variables
-scriptDirectory=$(realpath "$(dirname "$0")")
+scriptPath=$(realpath "$0")
+scriptDirectory=$(dirname "$scriptPath")
+scriptName=$(basename "$scriptPath")
 
 # Source needed scripts
 source "$scriptDirectory/PrintUtilities.sh"
