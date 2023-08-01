@@ -9,7 +9,7 @@ Common commands:
 -----> Note: git add for deleted files as well
 
 -> Stage or add multiple files to be tracked by git (multiple changed files or modified files):
----> git add -all // all files
+---> git add -all // all files and removed files as well
 ---> git add .   // all files
 ---> git add *.html  // all html files
 ---> git add :/   // adds all files under this directory
@@ -185,8 +185,8 @@ Less common commands:
 ---> ssh -vT git@github.com
 
 -> Clone:
----> git clone git@github.com:detectivemark7/aprg.git
 ---> git clone git@github.com:aprgproject/aprg.git
+---> git clone git@github.com:detectivemark7/aprg.git
 ---> DONT DO THIS(it will force it clone it from http not from ssh): 
 -----> git clone https://github.com/mevalba/aprg_test.git
 ---> git clone --shallow URL    // --shallow means avoid getting the whole version history and get just the latest snapshot (useful for big repositories)
