@@ -432,7 +432,7 @@ string getStringBeforeThisString(string_view mainText, string_view stringToSearc
     string result;
     size_t firstIndexOfFirstString = mainText.find(stringToSearch, indexToStart);
     if (isNotNpos(static_cast<int>(firstIndexOfFirstString))) {
-        result = mainText.substr(0, firstIndexOfFirstString);
+        result = mainText.substr(indexToStart, firstIndexOfFirstString - indexToStart);
     }
     return result;
 }

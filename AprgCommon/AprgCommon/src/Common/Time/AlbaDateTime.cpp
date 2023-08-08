@@ -35,6 +35,14 @@ bool AlbaYearMonthDay::operator!=(AlbaYearMonthDay const& second) const {
     return m_yearMonthDay != second.m_yearMonthDay;
 }
 
+bool AlbaYearMonthDay::operator<=(AlbaYearMonthDay const& second) const {
+    return m_yearMonthDay <= second.m_yearMonthDay;
+}
+
+bool AlbaYearMonthDay::operator>=(AlbaYearMonthDay const& second) const {
+    return m_yearMonthDay >= second.m_yearMonthDay;
+}
+
 bool AlbaYearMonthDay::isEmpty() const { return m_yearMonthDay == 0; }
 
 uint32_t AlbaYearMonthDay::getYears() const {
@@ -89,6 +97,14 @@ bool AlbaHourMinuteSecond::operator==(AlbaHourMinuteSecond const& second) const 
 
 bool AlbaHourMinuteSecond::operator!=(AlbaHourMinuteSecond const& second) const {
     return m_hourMinuteSecond != second.m_hourMinuteSecond;
+}
+
+bool AlbaHourMinuteSecond::operator<=(AlbaHourMinuteSecond const& second) const {
+    return m_hourMinuteSecond <= second.m_hourMinuteSecond;
+}
+
+bool AlbaHourMinuteSecond::operator>=(AlbaHourMinuteSecond const& second) const {
+    return m_hourMinuteSecond >= second.m_hourMinuteSecond;
 }
 
 bool AlbaHourMinuteSecond::isEmpty() const { return m_hourMinuteSecond == 0; }

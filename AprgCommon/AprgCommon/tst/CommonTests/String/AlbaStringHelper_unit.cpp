@@ -454,9 +454,11 @@ TEST(GetPartialStringFromStringTest, CopyBeforeStringAndAfterStringWhenStringIsN
 TEST(GetPartialStringFromStringTest, GetStringBeforeThisStringWithCharactersAfterQuestionMarkIsRemoved) {
     string testString("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522");
     string withCharactersAfterQuestionMarkRemoved("http://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg");
+    string withIndexStart("tore/manga/12114/001.0/compressed/r049.jpg");
     string questionMarkString("?");
 
     EXPECT_EQ(withCharactersAfterQuestionMarkRemoved, getStringBeforeThisString(testString, questionMarkString));
+    EXPECT_EQ(withIndexStart, getStringBeforeThisString(testString, questionMarkString, 20));
 }
 
 TEST(GetPartialStringFromStringTest, GetStringAfterThisStringUsingAllLettersWithSpecialCharacters) {

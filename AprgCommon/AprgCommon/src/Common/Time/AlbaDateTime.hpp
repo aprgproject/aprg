@@ -24,6 +24,8 @@ public:
     bool operator>(AlbaYearMonthDay const& second) const;
     bool operator==(AlbaYearMonthDay const& second) const;
     bool operator!=(AlbaYearMonthDay const& second) const;
+    bool operator<=(AlbaYearMonthDay const& second) const;
+    bool operator>=(AlbaYearMonthDay const& second) const;
 
     bool isEmpty() const;
     uint32_t getYears() const;
@@ -58,6 +60,8 @@ public:
     bool operator>(AlbaHourMinuteSecond const& second) const;
     bool operator==(AlbaHourMinuteSecond const& second) const;
     bool operator!=(AlbaHourMinuteSecond const& second) const;
+    bool operator<=(AlbaHourMinuteSecond const& second) const;
+    bool operator>=(AlbaHourMinuteSecond const& second) const;
 
     bool isEmpty() const;
     uint32_t getHours() const;
