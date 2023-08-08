@@ -22,6 +22,7 @@ diffFilePath="$gitDiffsPath/r${lineCount}_${revisionHash}.diff"
 echo "diffFilePath: [$diffFilePath]"
 cd "$gitNewRepoPath"
 echo "Changing directory to $(pwd)"
-dos2unix "$diffFilePath"
+# dont perform dos2unix because git handles different line endings depending on git configuration
+#dos2unix "$diffFilePath"
 git apply --check --ignore-space-change --ignore-whitespace --inaccurate-eof "$diffFilePath"
 git apply --ignore-space-change --ignore-whitespace --inaccurate-eof "$diffFilePath"

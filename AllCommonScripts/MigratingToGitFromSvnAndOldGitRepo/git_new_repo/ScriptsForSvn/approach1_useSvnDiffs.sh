@@ -17,6 +17,7 @@ diffFilePath="$svnDiffsPath/r$revision.diff"
 echo "diffFilePath: [$diffFilePath]"
 cd "$gitNewRepoPath"
 echo "Changing directory to $(pwd)"
-dos2unix "$diffFilePath"
+# perform dos2unix, because in the previous migration there were differences due to line endings
+dos2unix "$diffFilePath" 
 git apply --check --ignore-space-change --ignore-whitespace --inaccurate-eof "$diffFilePath"
 git apply --ignore-space-change --ignore-whitespace --inaccurate-eof "$diffFilePath"
