@@ -4,6 +4,15 @@ Common commands:
 -> Help:
 ---> git help
 
+-> Clone:
+---> git clone git@github.com:aprgproject/aprg.git
+---> git clone git@github.com:detectivemark7/aprg.git
+---> git clone directly to the folder (put a period at the end):
+-----> git clone git@github.com:aprgproject/aprg.git .
+---> DONT DO THIS(it will force it clone it from http not from ssh): 
+-----> git clone https://github.com/mevalba/aprg_test.git .
+---> git clone --shallow URL    // --shallow means avoid getting the whole version history and get just the latest snapshot (useful for big repositories)
+
 -> Stage or add a file one by one to be tracked by git (can be changed files or modified files):
 ---> git add FileName1 FileName2
 -----> Note: git add for deleted files as well
@@ -11,6 +20,7 @@ Common commands:
 -> Stage or add multiple files to be tracked by git (multiple changed files or modified files):
 ---> git add -all // all files and removed files as well
 ---> git add .   // all files
+---> git add -u // all files that versioned (other unversioned files are ignored)
 ---> git add *.html  // all html files
 ---> git add :/   // adds all files under this directory
 
@@ -116,13 +126,15 @@ Common commands:
 ---> then we can add *.html in ".gitignore" (put it in a new line)
 
 -> delete unversioned files:
----> discard changes
------> git checkout
+---> If you want to remove changes in a specific file and revert it to the state of the last commit, use:
+-----> git checkout -- <file_path>
+---> If you want to remove all changes in the working directory (all modified files), use:
+-----> git checkout .
 ---> check files to removed
 -----> git clean -n
 ---> remove files (forced)
 -----> git clean -f
----> remove directories (forced)
+---> remove directories (forced), if you want to remove all changes, including new files, use:
 -----> git clean -fd
 
 -> show changes (useful after git blame)
@@ -183,13 +195,6 @@ Less common commands:
 
 -> Check ssh connection to github
 ---> ssh -vT git@github.com
-
--> Clone:
----> git clone git@github.com:aprgproject/aprg.git
----> git clone git@github.com:detectivemark7/aprg.git
----> DONT DO THIS(it will force it clone it from http not from ssh): 
------> git clone https://github.com/mevalba/aprg_test.git
----> git clone --shallow URL    // --shallow means avoid getting the whole version history and get just the latest snapshot (useful for big repositories)
 
 -> Create a git local repository:
 ---> git init   
@@ -300,6 +305,7 @@ SSH key related:
 -> (2) Generating a new SSH key: 
 ---> ed25519 (newer)
 -----> ssh-keygen -t ed25519 -C "markearvinalba@gmail.com"
+-----> ssh-keygen -t ed25519 -C "detectivemark7@gmail.com"
 ---> RSA (older)
 -----> ssh-keygen -t rsa -b 4096 -C "markearvinalba@gmail.com"
 ---> IMPORTANT NOTE: Press Enter to accept the default file location and to set a passphrase for your key (recommended for added security).

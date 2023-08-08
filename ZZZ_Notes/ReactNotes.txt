@@ -1,0 +1,31 @@
+Note:
+
+-> Go to directory where the react project is
+---> cd docs/ReactProjects/aprgWebsite
+
+-> Clean Install
+---> npm ci
+--->  "Node Package Manager clean install."
+---> When you run "npm ci," it performs the following actions:
+-----> Clean Install: It removes the "node_modules" directory and any existing "package-lock.json" file (or "yarn.lock" file for Yarn) from your project directory.
+-----> Install Dependencies: It then installs all the project's dependencies listed in the "package.json" file 
+-----> using the exact versions specified in the "package-lock.json" (or "yarn.lock") file. 
+-----> This ensures a deterministic and consistent dependency tree, making it ideal for use in continuous integration (CI) or automated build environments.
+-----> Faster Install: Unlike "npm install," which may update dependencies and "package-lock.json" based on semantic versioning rules, 
+-----> "npm ci" ensures a clean, reproducible installation without any potential surprises.
+
+-> Install
+---> npm install
+---> "Node Package Manager install."
+---> When you run "npm install" in the root directory of your Node.js project, it reads the "package.json" file 
+-----> and installs all the dependencies listed under the "dependencies" section into the "node_modules" folder in your project directory.
+
+-> Scripts defined in the "scripts" section of a Node.js project's package.json file.
+---> npm run start
+-----> start hosting (using efficient build)
+---> npm run build
+-----> build project
+---> npm run dev
+-----> start developing (faster hosting, automatic compilation, not so efficient build)
+---> npm run export
+-----> export a static html (usually needs build to run first)
