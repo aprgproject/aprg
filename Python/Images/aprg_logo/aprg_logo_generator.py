@@ -175,14 +175,14 @@ def darken_edges(image):
 
 
 def generate_aprg_logo():
-    image = skimage.io.imread('sample_small.png')
+    image = skimage.io.imread('sample.png')
 
     draw_circle(image)
     draw_A(image)
     darken_edges(image)
-    draw_noise(image)
+    # draw_noise(image)
 
-    skimage.io.imsave('aprg_logo_small.png', image)
+    skimage.io.imsave('aprg_logo_clean.png', image)
 
 
 if __name__ == '__main__':
