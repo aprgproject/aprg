@@ -1,3 +1,4 @@
+#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
@@ -59,8 +60,7 @@ TEST(RealAutomationTest, DISABLED_TraverseTalonRoShops)  // DISABLED_
         bool isNextDisabled(false);
         while (fileReader.isNotFinished()) {
             string line(fileReader.getLineAndIgnoreWhiteSpaces());
-            if (isStringFoundCaseSensitive(
-                    line, R"(class="paginate_button page-item next disabled")")) {
+            if (isStringFoundCaseSensitive(line, R"(class="paginate_button page-item next disabled")")) {
                 isNextDisabled = true;
                 break;
             }
@@ -226,6 +226,131 @@ TEST(RealAutomationTest, DISABLED_NormalizeAudioForMp3Files) {
             break;
         }
         Sleep(100);
+    }
+}
+
+TEST(RealAutomationTest, GetOutputFromChatGpt) {
+    AlbaWindowsUserAutomation userAutomation;
+    ifstream commitMessagesStream(R"(F:\Branches\aprg_test\Migrate\git_old_repo\commitMessagesNoQuotations.txt)");
+    ofstream newCommitMessagesStream(
+        R"(F:\Branches\aprg_test\Migrate\git_old_repo\newCommitMessages.txt)", ios_base::app);
+    AlbaFileReader commitMessagesReader(commitMessagesStream);
+
+    constexpr int NUMBER_OF_LINES_TO_SEND = 20;
+    int lineCount = 1, lineCountToStart = 1641, pendingNumberOfLines = 0;
+    string requestHeader =
+        "improve each commit message (in each line) to be more professional and short (and dont put numbers per each "
+        "line and maintain line ordering):\r\n";
+    string requestToChatGpt = requestHeader;
+
+    userAutomation.sleep(3000);
+
+    while (commitMessagesReader.isNotFinished()) {
+        // PAUSE for stop
+        if (userAutomation.isLetterPressed(VK_PAUSE)) {
+            break;
+        }
+        string line(commitMessagesReader.getLineAndIgnoreWhiteSpaces());
+        if (lineCountToStart > lineCount) {
+            ALBA_PRINT3("skipping", lineCountToStart, lineCount);
+        } else {
+            if (pendingNumberOfLines < NUMBER_OF_LINES_TO_SEND) {
+                requestToChatGpt += line;
+                requestToChatGpt += "\r\n";
+                ++pendingNumberOfLines;
+            } else {
+                // loop until its confirm that request is in the text box (PAUSE for stop)
+                ALBA_PRINT1(lineCount);
+                int retries = 0;
+                string fromClipboard;
+                while (!userAutomation.isLetterPressed(VK_PAUSE)) {
+                    ++retries;
+                    ALBA_PRINT1(retries);
+                    if (retries > 10) {
+                        userAutomation.pressKey(VK_F5);
+                        userAutomation.sleep(10000);
+                    } else if (retries > 3) {
+                        userAutomation.doLeftClickAt(MousePosition(2030, 110));
+                        userAutomation.sleep(2000);
+                    }
+
+                    // Click at Chat GPT text box
+                    userAutomation.setStringToClipboard(requestToChatGpt);
+                    userAutomation.doLeftClickAt(MousePosition(2990, 955));
+                    userAutomation.sleep(2000);
+
+                    // Select All
+                    userAutomation.pressKey(VK_CONTROL);
+                    userAutomation.pressKey('A');
+                    userAutomation.sleepWithRealisticDelay();
+                    userAutomation.releaseKey('A');
+                    userAutomation.releaseKey(VK_CONTROL);
+                    userAutomation.sleep(2000);
+
+                    // Paste
+                    userAutomation.pressKey(VK_CONTROL);
+                    userAutomation.pressKey('V');
+                    userAutomation.sleepWithRealisticDelay();
+                    userAutomation.releaseKey('V');
+                    userAutomation.releaseKey(VK_CONTROL);
+                    userAutomation.sleep(2000);
+
+                    // Select All
+                    userAutomation.pressKey(VK_CONTROL);
+                    userAutomation.pressKey('A');
+                    userAutomation.sleepWithRealisticDelay();
+                    userAutomation.releaseKey('A');
+                    userAutomation.releaseKey(VK_CONTROL);
+                    userAutomation.sleep(2000);
+
+                    // Double check if text is really on the text box
+                    userAutomation.setStringToClipboard("");
+                    userAutomation.pressKey(VK_CONTROL);
+                    userAutomation.pressKey('C');
+                    userAutomation.sleepWithRealisticDelay();
+                    userAutomation.releaseKey('C');
+                    userAutomation.releaseKey(VK_CONTROL);
+                    userAutomation.sleep(2000);
+
+                    fromClipboard = userAutomation.getStringFromClipboard();
+
+                    ALBA_PRINT1(requestToChatGpt);
+                    ALBA_PRINT1(fromClipboard);
+                    if (requestToChatGpt != fromClipboard) {
+                        continue;
+                    }
+
+                    // Send request to chat gpt by pressing enter
+                    userAutomation.typeKey(VK_RETURN);
+
+                    // Wait for chat gpt
+                    userAutomation.sleep(20000);
+
+                    // Clear clipboard, press copy button
+                    userAutomation.setStringToClipboard("");
+                    for (int yClick = 100; yClick <= 400; yClick += 5) {
+                        userAutomation.doLeftClickAt(MousePosition(3345, yClick));
+                    }
+                    userAutomation.sleep(2000);
+
+                    // Save output to file
+                    string outputOfChatGpt = userAutomation.getStringFromClipboard();
+                    ALBA_PRINT1(outputOfChatGpt);
+                    if (outputOfChatGpt.empty()) {
+                        continue;
+                    }
+                    newCommitMessagesStream << outputOfChatGpt;
+                    if (outputOfChatGpt.back() != '\n') {
+                        newCommitMessagesStream << "\n";
+                    }
+                    break;
+                }
+
+                requestToChatGpt = requestHeader + line + "\r\n";
+                pendingNumberOfLines = 1;
+            }
+        }
+        ++lineCount;
     }
 }
 

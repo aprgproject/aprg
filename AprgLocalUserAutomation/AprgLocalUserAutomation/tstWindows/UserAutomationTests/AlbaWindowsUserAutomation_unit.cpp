@@ -10,12 +10,12 @@ using namespace std;
 
 namespace alba {
 
-TEST(AlbaWindowsUserAutomationTest, DISABLED_ShowMousePosition) {
+TEST(AlbaWindowsUserAutomationTest, DISABLED_ShowMousePositions) {
     AlbaWindowsUserAutomation userAutomation;
     while (1) {
         MousePosition position(userAutomation.getMousePosition());
         cout << "X: " << position.getX() << " Y: " << position.getY() << "\n";
-        if (0 == position.getX() && 0 == position.getY()) {
+        if (userAutomation.isLetterPressed('s') || (0 == position.getX() && 0 == position.getY())) {
             break;
         }
         Sleep(100);
