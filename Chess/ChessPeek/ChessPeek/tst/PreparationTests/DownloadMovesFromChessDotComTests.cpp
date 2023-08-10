@@ -86,24 +86,12 @@ void clickWindow() {
 
 void gotoWebPage(string const& url) {
     AlbaLocalUserAutomation userAutomation;
-    userAutomation.pressKey(VK_CONTROL);
-    userAutomation.pressKey('L');
-    userAutomation.sleepWithRealisticDelay();
-
-    userAutomation.releaseKey(VK_CONTROL);
-    userAutomation.releaseKey('L');
-    userAutomation.sleepWithRealisticDelay();
+    userAutomation.performKeyCombination({VK_CONTROL}, {'L'});
 
     userAutomation.setStringToClipboard(url);
-    userAutomation.sleepWithRealisticDelay();
+    userAutomation.sleep(1000);
 
-    userAutomation.pressKey(VK_CONTROL);
-    userAutomation.pressKey('V');
-    userAutomation.sleepWithRealisticDelay();
-
-    userAutomation.releaseKey(VK_CONTROL);
-    userAutomation.releaseKey('V');
-    userAutomation.sleepWithRealisticDelay();
+    userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
 
     userAutomation.typeKey(VK_RETURN);
     userAutomation.sleep(500);
@@ -180,24 +168,12 @@ void deleteWebPageUntilItsDeleted(string const& htmlFile) {
 
 void saveWebPage(string const& htmlFile) {
     AlbaLocalUserAutomation userAutomation;
-    userAutomation.pressKey(VK_CONTROL);
-    userAutomation.pressKey('S');
-    userAutomation.sleepWithRealisticDelay();
-
-    userAutomation.releaseKey(VK_CONTROL);
-    userAutomation.releaseKey('S');
-    userAutomation.sleepWithRealisticDelay();
+    userAutomation.performKeyCombination({VK_CONTROL}, {'S'});
 
     userAutomation.setStringToClipboard(htmlFile);
-    userAutomation.sleep(500);
+    userAutomation.sleep(1000);
 
-    userAutomation.pressKey(VK_CONTROL);
-    userAutomation.pressKey('V');
-    userAutomation.sleepWithRealisticDelay();
-
-    userAutomation.releaseKey(VK_CONTROL);
-    userAutomation.releaseKey('V');
-    userAutomation.sleepWithRealisticDelay();
+    userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
 
     userAutomation.typeKey(VK_RETURN);
 }
@@ -308,18 +284,15 @@ bool readHtmlFileIfValid(WebPageInfo& pageInfo, string const& htmlFile) {
                     string moveList = getStringInBetween(
                         line, R"(<div class="suggested-moves-suggested-moves-list">)", R"(</div></li>)", index);
                     int moveListIndex = 0;
-                    if (isStringFoundCaseSensitive(
-                            moveList, R"("suggested-moves-suggested-white")")) {
+                    if (isStringFoundCaseSensitive(moveList, R"("suggested-moves-suggested-white")")) {
                         moveInfo.whiteWinPercentage = getStringInBetween(
                             moveList, R"(<span class="suggested-moves-percent-label">)", R"(</span>)", moveListIndex);
                     }
-                    if (isStringFoundCaseSensitive(
-                            moveList, R"("suggested-moves-suggested-draw")")) {
+                    if (isStringFoundCaseSensitive(moveList, R"("suggested-moves-suggested-draw")")) {
                         moveInfo.drawPercentage = getStringInBetween(
                             moveList, R"(<span class="suggested-moves-percent-label">)", R"(</span>)", moveListIndex);
                     }
-                    if (isStringFoundCaseSensitive(
-                            moveList, R"("suggested-moves-suggested-black")")) {
+                    if (isStringFoundCaseSensitive(moveList, R"("suggested-moves-suggested-black")")) {
                         moveInfo.blackWinPercentage = getStringInBetween(
                             moveList, R"(<span class="suggested-moves-percent-label">)", R"(</span>)", moveListIndex);
                     }
