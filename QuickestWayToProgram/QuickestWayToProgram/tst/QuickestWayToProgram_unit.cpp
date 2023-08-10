@@ -1,6 +1,6 @@
-#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+#include <Common/Print/AlbaLogPrints.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 #include <FileExtractor/AprgFileExtractor.hpp>
 #include <NsapHelper.hpp>
@@ -33,9 +33,9 @@ TEST(SampleTest, PrimerTest) {
     int i;
     double d;
     d = i = 3.5;
-    ALBA_PRINT2(i, d);  // 3,3
+    ALBA_INF_PRINT2(cout, i, d);  // 3,3
     i = d = 3.5;
-    ALBA_PRINT2(i, d);  // 3, 3.5
+    ALBA_INF_PRINT2(cout, i, d);  // 3, 3.5
 }
 
 /*TEST(SampleTest, uninintializedcopyTest) {
@@ -267,14 +267,14 @@ TEST(SampleTest, CountFromMsbValue) {
         [](int const value, pair<int, int> const& intPair) { return value < intPair.first; });
     auto itLeft = prev(itRight, 1);
     if (itLeft != container.cend()) {
-        ALBA_PRINT1(*itLeft);
+        ALBA_INF_PRINT1(cout, *itLeft);
     } else {
-        ALBA_PRINT1("itLeft is end");
+        ALBA_INF_PRINT1(cout, "itLeft is end");
     }
     if (itRight != container.cend()) {
-        ALBA_PRINT1(*itRight);
+        ALBA_INF_PRINT1(cout, *itRight);
     } else {
-        ALBA_PRINT1("itRight is end");
+        ALBA_INF_PRINT1(cout, "itRight is end");
     }
 }
 
@@ -301,21 +301,21 @@ TEST(SampleTest, CountFromMsbValue) {
 TEST(SampleTest, NumeratorAndDenominator) {
     long long int numerator = static_cast<long long int>(-946400) * -5547;
     long long int denominator = static_cast<long long int>(-2146689) * -3566000;
-    ALBA_PRINT_PRECISION(30);
-    ALBA_PRINT3(numerator, denominator, static_cast<double>(numerator) / denominator);
+    ALBA_INF_PRINT_PRECISION(30);
+    ALBA_INF_PRINT3(cout, numerator, denominator, static_cast<double>(numerator) / denominator);
 }
 
 TEST(SampleTest, KBitAndNegativeK) {
     int k = 10;
     int n = 20;
     while (k <= n) {
-        ALBA_PRINT2(k, k & -k);
+        ALBA_INF_PRINT2(cout, k, k & -k);
         k += k & -k;
     }
 
     for (unsigned int k = 0; k <= 256; k++) {
         unsigned int p = k & -k;
-        ALBA_PRINT3(k, k - p + 1, k);
+        ALBA_INF_PRINT3(cout, k, k - p + 1, k);
     }
 }
 
@@ -362,8 +362,8 @@ TEST(SampleTest, FindSourceFilesToAdjust_FileList) {
                         string stringToAnalyze(lineInFile);
                         if (stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(
                                 stringToAnalyze, "createSicad")) {
-                            ALBA_PRINT1(filePath);
-                            ALBA_PRINT1(stringToAnalyze);
+                            ALBA_INF_PRINT1(cout, filePath);
+                            ALBA_INF_PRINT1(cout, stringToAnalyze);
                         }
                     }
                 }
@@ -446,11 +446,11 @@ R"(CP_DMGR\src\messages\MessageHandler)"))
                 isHeaderIncludeWithQuotationsFound = true;
                 break;
             }
-            // ALBA_PRINT3(stringToAnalyze, isHeaderFileWithH, headerIncludeWithH);
-            // ALBA_PRINT3(stringToAnalyze, isHeaderFileWithHpp, headerIncludeWithHpp);
+            // ALBA_INF_PRINT3(cout, stringToAnalyze, isHeaderFileWithH, headerIncludeWithH);
+            // ALBA_INF_PRINT3(cout, stringToAnalyze, isHeaderFileWithHpp, headerIncludeWithHpp);
         }
         if (isHeaderIncludeWithQuotationsFound == false) {
-            ALBA_PRINT1(filePathHandler.getFullPath());
+            ALBA_INF_PRINT1(cout, filePathHandler.getFullPath());
         }
     }
 }
@@ -490,14 +490,14 @@ TEST(SampleTest, FindHeaderFilesToAdjust_FileList) {
                         string lineInFile(logFileReader.getLineAndIgnoreWhiteSpaces());
                         string stringToAnalyze(lineInFile);
                         if (stringToAnalyze == "#pragma once") {
-                            // ALBA_PRINT1(filePathHandler.getFullPath());
-                            // ALBA_PRINT1(stringToAnalyze);
+                            // ALBA_INF_PRINT1(cout, filePathHandler.getFullPath());
+                            // ALBA_INF_PRINT1(cout, stringToAnalyze);
                             isPragmaOnceFound = true;
                             break;
                         }
                     }
                     if (isPragmaOnceFound == false) {
-                        ALBA_PRINT1(filePathHandler.getFullPath());
+                        ALBA_INF_PRINT1(cout, filePathHandler.getFullPath());
                     }
                 }
             }
@@ -532,8 +532,8 @@ TEST(SampleTest, FindSourceFilesToAdjust_FromDirectory) {
 fw") || stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(stringToAnalyze, "using fw::")
                             )
                     {
-                        ALBA_PRINT1(filePathHandler.getFullPath());
-                        ALBA_PRINT1(lineInFile);
+                        ALBA_INF_PRINT1(cout, filePathHandler.getFullPath());
+                        ALBA_INF_PRINT1(cout, lineInFile);
                         cout << "\n";
                         break;
                     }
@@ -576,8 +576,8 @@ TEST(SampleTest, FindSourceFilesToAdjust_FromDirectory) {
                     stringHelper::transformReplaceStringIfFound(stringToAnalyze, "fw::ObjectManager", "");
                     stringHelper::transformReplaceStringIfFound(stringToAnalyze, "using CommonLogger = fw::", "");
                     if (stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(stringToAnalyze, "fw::")) {
-                        ALBA_PRINT1(filePathHandler.getFullPath());
-                        ALBA_PRINT1(lineInFile);
+                        ALBA_INF_PRINT1(cout, filePathHandler.getFullPath());
+                        ALBA_INF_PRINT1(cout, lineInFile);
                         cout << "\n";
                         break;
                     }
@@ -603,7 +603,7 @@ TEST(SampleTest, FindNearEmptyFiles) {
                 !stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(
                     filePathHandler.getFile(), "_cppc_sup") &&
                 filePathHandler.getFileSizeEstimate() < 50) {
-                ALBA_PRINT1(filePathHandler.getFullPath());
+                ALBA_INF_PRINT1(cout, filePathHandler.getFullPath());
             }
         }
     }
@@ -656,7 +656,7 @@ TEST(SampleTest, ExtractFilesAndCopyLogsForSctTests) {
     for (string const& file : files) {
         AlbaLocalPathHandler filePath(file);
         if (filePath.getExtension() == "zip") {
-            ALBA_PRINT1(filePath.getFullPath());
+            ALBA_INF_PRINT1(cout, filePath.getFullPath());
             fileExtractor.extractAllRelevantFiles(filePath.getFullPath());
         }
     }
