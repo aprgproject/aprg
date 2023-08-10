@@ -6,6 +6,7 @@
 
 #include <functional>
 #include <string>
+#include <vector>
 
 namespace alba {
 
@@ -32,26 +33,24 @@ public:
     void releaseKey(uint16_t const key) const;
     void typeKey(uint16_t const key) const;
     void typeCharacter(char const character) const;
-    void typeString(std::string const& stringToType) const;
-    void typeControlAndLetterSimultaneously(uint16_t const letter) const;
+    void typeString(std::string_view const& stringToType) const;
+    void performKeyCombination(std::vector<uint16_t> const& keys, std::vector<char> const& characters) const;
     std::string getClassNameOfForegroundWindow() const;
-    void setForegroundWindowWithClassName(std::string const& className) const;
-    void setForegroundWindowWithWindowName(std::string const& windowName) const;
+    void setForegroundWindowWithClassName(std::string_view const& className) const;
+    void setForegroundWindowWithWindowName(std::string_view const& windowName) const;
     void sleepWithRealisticDelay() const;
     void sleep(int const milliseconds) const;
 
-    void saveBitmapOnScreen(
-        std::string const& filePath) const;  // Note: the difference on partially capturing the screen is negligible
+    void saveBitmapOnScreen(std::string_view const& filePath) const;
 
     std::string getStringFromClipboard() const;
-    void setStringToClipboard(std::string const& clipBoardText) const;
-    void saveBitmapFromClipboard(std::string const& filePath) const;
+    void setStringToClipboard(std::string_view const& clipBoardText) const;
+    void saveBitmapFromClipboard(std::string_view const& filePath) const;
 
 private:
     uint16_t convertToVirtualKey(char const character) const;
     void setForegroundWindowWithWindowHandle(HWND const windowHandle) const;
     void doOperation(InputFunction const& inputFunction) const;
-    void doOperationWithRealisticDelay(AlbaWindowsUserAutomation::InputFunction const& inputFunction) const;
     static constexpr int REALISTIC_DELAY_IN_MILLISECONDS = 100;
 };
 

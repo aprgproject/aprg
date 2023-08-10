@@ -39,12 +39,13 @@ void AlbaWindowsUserAutomation::setMousePosition(MousePosition const& position) 
     float ratioInX = position.getX() * (65535.0f / screenWidth);
     float ratioInY = position.getY() * (65535.0f / screenHeight);
 
-    doOperationWithRealisticDelay([&](INPUT& input) {
+    doOperation([&](INPUT& input) {
         input.type = INPUT_MOUSE;
         input.mi.dwFlags = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE;
         input.mi.dx = (long)ratioInX;
         input.mi.dy = (long)ratioInY;
     });
+    sleepWithRealisticDelay();
 }
 
 void AlbaWindowsUserAutomation::pressLeftButtonOnMouse() const {
@@ -62,34 +63,15 @@ void AlbaWindowsUserAutomation::releaseLeftButtonOnMouse() const {
 }
 
 void AlbaWindowsUserAutomation::doLeftClick() const {
-    doOperationWithRealisticDelay([](INPUT& input) {
-        input.type = INPUT_MOUSE;
-        input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
-    });
-    doOperationWithRealisticDelay([](INPUT& input) {
-        input.type = INPUT_MOUSE;
-        input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
-    });
+    pressLeftButtonOnMouse();
+    sleepWithRealisticDelay();
+    releaseLeftButtonOnMouse();
+    sleepWithRealisticDelay();
 }
 
 void AlbaWindowsUserAutomation::doDoubleLeftClick() const {
-    doOperation([](INPUT& input) {
-        input.type = INPUT_MOUSE;
-        input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
-    });
-    doOperation([](INPUT& input) {
-        input.type = INPUT_MOUSE;
-        input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
-    });
-    doOperation([](INPUT& input) {
-        input.type = INPUT_MOUSE;
-        input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
-    });
-    doOperation([](INPUT& input) {
-        input.type = INPUT_MOUSE;
-        input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
-    });
-    sleepWithRealisticDelay();
+    doLeftClick();
+    doLeftClick();
 }
 
 void AlbaWindowsUserAutomation::doLeftClickAt(MousePosition const& position) const {
@@ -117,14 +99,10 @@ void AlbaWindowsUserAutomation::releaseRightButtonOnMouse() const {
 }
 
 void AlbaWindowsUserAutomation::doRightClick() const {
-    doOperationWithRealisticDelay([](INPUT& input) {
-        input.type = INPUT_MOUSE;
-        input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
-    });
-    doOperationWithRealisticDelay([](INPUT& input) {
-        input.type = INPUT_MOUSE;
-        input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;
-    });
+    pressRightButtonOnMouse();
+    sleepWithRealisticDelay();
+    releaseRightButtonOnMouse();
+    sleepWithRealisticDelay();
 }
 
 void AlbaWindowsUserAutomation::doRightClickAt(MousePosition const& position) const {
@@ -155,55 +133,39 @@ void AlbaWindowsUserAutomation::releaseKey(uint16_t const key) const {
 }
 
 void AlbaWindowsUserAutomation::typeKey(uint16_t const key) const {
-    doOperationWithRealisticDelay([&](INPUT& input) {
-        input.type = INPUT_KEYBOARD;
-        input.ki.wScan = 0;
-        input.ki.time = 0;
-        input.ki.dwExtraInfo = 0;
-        input.ki.wVk = (WORD)key;
-        input.ki.dwFlags = 0;
-    });
-    doOperationWithRealisticDelay([&](INPUT& input) {
-        input.type = INPUT_KEYBOARD;
-        input.ki.wScan = 0;
-        input.ki.time = 0;
-        input.ki.dwExtraInfo = 0;
-        input.ki.wVk = (WORD)key;
-        input.ki.dwFlags = KEYEVENTF_KEYUP;
-    });
+    pressKey(key);
+    sleepWithRealisticDelay();
+    releaseKey(key);
+    sleepWithRealisticDelay();
 }
 
-void AlbaWindowsUserAutomation::typeCharacter(char const character) const {
-    doOperationWithRealisticDelay([&](INPUT& input) {
-        input.type = INPUT_KEYBOARD;
-        input.ki.wScan = 0;
-        input.ki.time = 0;
-        input.ki.dwExtraInfo = 0;
-        input.ki.wVk = (WORD)convertToVirtualKey(character);
-        input.ki.dwFlags = 0;
-    });
-    doOperationWithRealisticDelay([&](INPUT& input) {
-        input.type = INPUT_KEYBOARD;
-        input.ki.wScan = 0;
-        input.ki.time = 0;
-        input.ki.dwExtraInfo = 0;
-        input.ki.wVk = (WORD)convertToVirtualKey(character);
-        input.ki.dwFlags = KEYEVENTF_KEYUP;
-    });
-}
+void AlbaWindowsUserAutomation::typeCharacter(char const character) const { typeKey(convertToVirtualKey(character)); }
 
-void AlbaWindowsUserAutomation::typeString(string const& stringToType) const {
+void AlbaWindowsUserAutomation::typeString(string_view const& stringToType) const {
     for (char const character : stringToType) {
         typeCharacter(character);
     }
 }
 
-void AlbaWindowsUserAutomation::typeControlAndLetterSimultaneously(uint16_t const letter) const {
-    pressKey(VK_CONTROL);
-    pressKey(letter);
+void AlbaWindowsUserAutomation::performKeyCombination(
+    vector<uint16_t> const& keys, std::vector<char> const& characters) const {
+    for (auto const key : keys) {
+        pressKey(key);
+        sleepWithRealisticDelay();
+    }
+    for (auto const character : characters) {
+        pressKey(convertToVirtualKey(character));
+        sleepWithRealisticDelay();
+    }
     sleepWithRealisticDelay();
-    releaseKey(letter);
-    releaseKey(VK_CONTROL);
+    for (auto rit = characters.rbegin(); rit != characters.rend(); rit++) {
+        pressKey(convertToVirtualKey(*rit));
+        sleepWithRealisticDelay();
+    }
+    for (auto rit = keys.rbegin(); rit != keys.rend(); rit++) {
+        pressKey(*rit);
+        sleepWithRealisticDelay();
+    }
 }
 
 string AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() const {
@@ -213,21 +175,21 @@ string AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() const {
     return string(className);
 }
 
-void AlbaWindowsUserAutomation::setForegroundWindowWithClassName(string const& className) const {
+void AlbaWindowsUserAutomation::setForegroundWindowWithClassName(string_view const& className) const {
     Sleep(2000);
     int const LENGTH = 1000;
     char classNameTemp[LENGTH];
     GetClassName(GetForegroundWindow(), classNameTemp, LENGTH);
     cout << "ClassName:[" << classNameTemp << "]\n";
 
-    HWND windowHandle = FindWindowEx(nullptr, nullptr, className.c_str(), nullptr);
+    HWND windowHandle = FindWindowEx(nullptr, nullptr, className.data(), nullptr);
     cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
     cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
     setForegroundWindowWithWindowHandle(windowHandle);
 }
 
-void AlbaWindowsUserAutomation::setForegroundWindowWithWindowName(string const& windowName) const {
-    HWND windowHandle = FindWindowEx(nullptr, nullptr, nullptr, windowName.c_str());
+void AlbaWindowsUserAutomation::setForegroundWindowWithWindowName(string_view const& windowName) const {
+    HWND windowHandle = FindWindowEx(nullptr, nullptr, nullptr, windowName.data());
     setForegroundWindowWithWindowHandle(windowHandle);
 }
 
@@ -235,7 +197,8 @@ void AlbaWindowsUserAutomation::sleepWithRealisticDelay() const { Sleep(REALISTI
 
 void AlbaWindowsUserAutomation::sleep(int const milliseconds) const { Sleep(milliseconds); }
 
-void AlbaWindowsUserAutomation::saveBitmapOnScreen(string const& filePath) const {
+void AlbaWindowsUserAutomation::saveBitmapOnScreen(string_view const& filePath) const {
+    // Note: the difference on partially capturing the screen is negligible
     typeKey(VK_SNAPSHOT);
     saveBitmapFromClipboard(filePath);
 }
@@ -250,55 +213,52 @@ string AlbaWindowsUserAutomation::getStringFromClipboard() const {
     return stringInClipboard;
 }
 
-void AlbaWindowsUserAutomation::setStringToClipboard(string const& clipBoardText) const {
+void AlbaWindowsUserAutomation::setStringToClipboard(string_view const& clipBoardText) const {
     HANDLE hData;
-    char* pointerData = NULL;  // pointer to allow char copying
-    hData =
-        GlobalAlloc(GMEM_MOVEABLE | GMEM_DDESHARE, clipBoardText.length() + 1);  // get handle to memory to hold phrase
-    pointerData = (char*)GlobalLock(hData);                                      // get pointer from handle
-    memcpy(pointerData, clipBoardText.c_str(), clipBoardText.length() + 1);      // copy over the phrase
-    GlobalUnlock(hData);                                                         // free the handle
-    OpenClipboard(NULL);                                                         // allow you to work with clipboard
-    EmptyClipboard();                                                            // clear previous contents
-    SetClipboardData(CF_TEXT, hData);                                            // set our data
+    char* pointerData = NULL;
+    hData = GlobalAlloc(GMEM_MOVEABLE | GMEM_DDESHARE, clipBoardText.length() + 1);
+    pointerData = (char*)GlobalLock(hData);
+    memcpy(pointerData, clipBoardText.data(), clipBoardText.length() + 1);
+    GlobalUnlock(hData);
+    OpenClipboard(NULL);
+    EmptyClipboard();
+    SetClipboardData(CF_TEXT, hData);
     CloseClipboard();
 }
 
-void AlbaWindowsUserAutomation::saveBitmapFromClipboard(string const& filePath) const {
+void AlbaWindowsUserAutomation::saveBitmapFromClipboard(string_view const& filePath) const {
     AlbaLocalPathHandler pathHandler(filePath);
     ofstream outputBitmapFile(pathHandler.getFullPath(), ios::out | ios::binary);
-    if (outputBitmapFile) {
-        if (IsClipboardFormatAvailable(CF_DIB)) {
-            if (OpenClipboard(NULL)) {
-                HANDLE hClipboard = GetClipboardData(CF_DIB);
-                if (hClipboard != NULL && hClipboard != INVALID_HANDLE_VALUE) {
-                    void* dib = GlobalLock(hClipboard);
-                    if (dib != nullptr) {
-                        BITMAPINFOHEADER* bitmapInfoPointer = reinterpret_cast<BITMAPINFOHEADER*>(dib);
-                        if (bitmapInfoPointer != nullptr) {
-                            BITMAPFILEHEADER fileHeader{};
-                            fileHeader.bfType = 0x4D42;
-                            fileHeader.bfOffBits = 54;
-                            fileHeader.bfSize =
-                                (((bitmapInfoPointer->biWidth * bitmapInfoPointer->biBitCount + 31) & ~31) / 8 *
-                                 bitmapInfoPointer->biHeight) +
-                                fileHeader.bfOffBits;
-                            bitmapInfoPointer->biCompression = 0;
+    if (!outputBitmapFile) {
+        return;
+    }
+    if (!IsClipboardFormatAvailable(CF_DIB)) {
+        return;
+    }
+    if (OpenClipboard(NULL)) {
+        HANDLE hClipboard = GetClipboardData(CF_DIB);
+        if (hClipboard != NULL && hClipboard != INVALID_HANDLE_VALUE) {
+            void* dib = GlobalLock(hClipboard);
+            if (dib != nullptr) {
+                BITMAPINFOHEADER* bitmapInfoPointer = reinterpret_cast<BITMAPINFOHEADER*>(dib);
+                BITMAPFILEHEADER fileHeader{};
+                fileHeader.bfType = 0x4D42;
+                fileHeader.bfOffBits = 54;
+                fileHeader.bfSize = (((bitmapInfoPointer->biWidth * bitmapInfoPointer->biBitCount + 31) & ~31) / 8 *
+                                     bitmapInfoPointer->biHeight) +
+                                    fileHeader.bfOffBits;
+                bitmapInfoPointer->biCompression = 0;
 
-                            outputBitmapFile.write(reinterpret_cast<char*>(&fileHeader), sizeof(BITMAPFILEHEADER));
-                            outputBitmapFile.write(
-                                reinterpret_cast<char*>(bitmapInfoPointer), sizeof(BITMAPINFOHEADER));
+                outputBitmapFile.write(reinterpret_cast<char*>(&fileHeader), sizeof(BITMAPFILEHEADER));
+                outputBitmapFile.write(reinterpret_cast<char*>(bitmapInfoPointer), sizeof(BITMAPINFOHEADER));
 
-                            unsigned long long sizeOfBitmapData = bitmapInfoPointer->biSizeImage;
-                            char* startOfBitmapDataPointer = reinterpret_cast<char*>(++bitmapInfoPointer);
-                            outputBitmapFile.write(startOfBitmapDataPointer, sizeOfBitmapData);
-                        }
-                        GlobalUnlock(dib);
-                    }
-                }
-                CloseClipboard();
+                unsigned long long sizeOfBitmapData = bitmapInfoPointer->biSizeImage;
+                char* startOfBitmapDataPointer = reinterpret_cast<char*>(++bitmapInfoPointer);
+                outputBitmapFile.write(startOfBitmapDataPointer, sizeOfBitmapData);
+                GlobalUnlock(dib);
             }
         }
+        CloseClipboard();
     }
 }
 
@@ -338,9 +298,4 @@ void AlbaWindowsUserAutomation::doOperation(AlbaWindowsUserAutomation::InputFunc
     SendInput(1, &input, sizeof(INPUT));
 }
 
-void AlbaWindowsUserAutomation::doOperationWithRealisticDelay(
-    AlbaWindowsUserAutomation::InputFunction const& inputFunction) const {
-    doOperation(inputFunction);
-    sleepWithRealisticDelay();
-}
 }  // namespace alba

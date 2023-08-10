@@ -15,6 +15,7 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_ShowMousePositions) {
     while (1) {
         MousePosition position(userAutomation.getMousePosition());
         cout << "X: " << position.getX() << " Y: " << position.getY() << "\n";
+        cout.flush();
         if (userAutomation.isLetterPressed('s') || (0 == position.getX() && 0 == position.getY())) {
             break;
         }
@@ -22,21 +23,9 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_ShowMousePositions) {
     }
 }
 
-TEST(AlbaWindowsUserAutomationTest, DISABLED_DeleteThisTestDontGoToSleepSetMouseTest) {
-    AlbaWindowsUserAutomation userAutomation;
-    for (int x = 0; x < 300; x += 10) {
-        MousePosition position{x, x};
-        userAutomation.setMousePosition(position);
-        userAutomation.sleep(10000);
-        if (x == 290) {
-            x = 0;
-        }
-    }
-}
-
 TEST(AlbaWindowsUserAutomationTest, DISABLED_SetMouseTest) {
     AlbaWindowsUserAutomation userAutomation;
-    for (int x = 0; x < 50; x++) {
+    for (int x = 0; x < 100; x++) {
         MousePosition position{x, x};
         userAutomation.setMousePosition(position);
     }

@@ -1,6 +1,6 @@
-#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+#include <Common/Print/AlbaLogPrints.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 #include <UserAutomation/AlbaLocalUserAutomation.hpp>
 
@@ -25,31 +25,25 @@ TEST(RealAutomationTest, DISABLED_TraverseTalonRoShops)  // DISABLED_
 
     // string talonRoPath(R"(https://panel.talonro.com/whobuy/)");
     string talonRoPath(R"(https://panel.talonro.com/whosell/)");
-    userAutomation.sleepWithRealisticDelay();
     userAutomation.typeKey(VK_DELETE);
     userAutomation.setStringToClipboard(talonRoPath);
-    userAutomation.typeControlAndLetterSimultaneously('V');
-    userAutomation.sleepWithRealisticDelay();
+    userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
     userAutomation.typeKey(VK_RETURN);
 
     userAutomation.sleep(3000);
 
     for (int page = 1; page <= 1000; page++) {
-        userAutomation.typeControlAndLetterSimultaneously('S');
+        userAutomation.performKeyCombination({VK_CONTROL}, {'S'});
         userAutomation.sleep(2000);
 
         stringstream fileName;
         fileName << "page_" << page << ".html";
         AlbaLocalPathHandler filePathHandler(itemDatabaseFolder.getFullPath() + fileName.str());
         userAutomation.setStringToClipboard(filePathHandler.getFullPath());
-        userAutomation.typeControlAndLetterSimultaneously('V');
-        userAutomation.sleepWithRealisticDelay();
+        userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
         userAutomation.typeKey(VK_RETURN);
-        userAutomation.sleepWithRealisticDelay();
         userAutomation.typeKey(VK_RETURN);
-        userAutomation.sleepWithRealisticDelay();
         userAutomation.typeKey(VK_RETURN);
-        userAutomation.sleepWithRealisticDelay();
         userAutomation.typeKey(VK_RETURN);
 
         userAutomation.sleep(2000);
@@ -86,28 +80,22 @@ TEST(RealAutomationTest, DISABLED_TraverseDatabaseOnRms) {
             stringstream rmsPath;
             rmsPath << R"(https://ratemyserver.net/index.php?page=mob_db&list=1&letter=)" << letter << R"(&page_num=)"
                     << pageNumber;
-            userAutomation.sleepWithRealisticDelay();
             userAutomation.typeKey(VK_DELETE);
             userAutomation.setStringToClipboard(rmsPath.str());
-            userAutomation.typeControlAndLetterSimultaneously('V');
-            userAutomation.sleepWithRealisticDelay();
+            userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
             userAutomation.typeKey(VK_RETURN);
 
             userAutomation.sleep(3000);
 
-            userAutomation.typeControlAndLetterSimultaneously('S');
+            userAutomation.performKeyCombination({VK_CONTROL}, {'S'});
             stringstream fileName;
             fileName << "monsterWithLetter_" << letter << "_pageNumber_" << pageNumber << ".html";
             AlbaLocalPathHandler filePathHandler(itemDatabaseFolder.getFullPath() + fileName.str());
             userAutomation.setStringToClipboard(filePathHandler.getFullPath());
-            userAutomation.typeControlAndLetterSimultaneously('V');
-            userAutomation.sleepWithRealisticDelay();
+            userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
             userAutomation.typeKey(VK_RETURN);
-            userAutomation.sleepWithRealisticDelay();
             userAutomation.typeKey(VK_RETURN);
-            userAutomation.sleepWithRealisticDelay();
             userAutomation.typeKey(VK_RETURN);
-            userAutomation.sleepWithRealisticDelay();
             userAutomation.typeKey(VK_RETURN);
 
             ifstream savedWebPage(filePathHandler.getFullPath());
@@ -144,19 +132,19 @@ TEST(RealAutomationTest, DISABLED_NormalizeAudioForMp3Files) {
                     filePathHandler.getFileSizeEstimate() < 100000000)  // 100MB
                 {
                     // close previous file
-                    userAutomation.typeControlAndLetterSimultaneously('W');
+                    userAutomation.performKeyCombination({VK_CONTROL}, {'W'});
                     userAutomation.sleep(1000);
                     userAutomation.typeKey(VK_RIGHT);
                     userAutomation.typeKey(VK_RETURN);
                     userAutomation.sleep(2000);
 
                     // open file
-                    userAutomation.typeControlAndLetterSimultaneously('O');
+                    userAutomation.performKeyCombination({VK_CONTROL}, {'O'});
                     userAutomation.sleep(1000);
 
                     // paste file name
                     userAutomation.setStringToClipboard(filePathHandler.getFile());
-                    userAutomation.typeControlAndLetterSimultaneously('V');
+                    userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
 
                     // type enter key
                     userAutomation.typeKey(VK_RETURN);
@@ -165,7 +153,7 @@ TEST(RealAutomationTest, DISABLED_NormalizeAudioForMp3Files) {
                     userAutomation.sleep(10000);
 
                     // select all track
-                    userAutomation.typeControlAndLetterSimultaneously('A');
+                    userAutomation.performKeyCombination({VK_CONTROL}, {'A'});
 
                     // click effect
                     userAutomation.doDoubleLeftClickAt(MousePosition(344, 33));
@@ -180,13 +168,7 @@ TEST(RealAutomationTest, DISABLED_NormalizeAudioForMp3Files) {
                     userAutomation.sleep(10000);
 
                     // export
-                    userAutomation.pressKey(VK_CONTROL);
-                    userAutomation.pressKey(VK_SHIFT);
-                    userAutomation.pressKey('E');
-                    userAutomation.sleepWithRealisticDelay();
-                    userAutomation.releaseKey('E');
-                    userAutomation.releaseKey(VK_SHIFT);
-                    userAutomation.releaseKey(VK_CONTROL);
+                    userAutomation.performKeyCombination({VK_CONTROL, VK_SHIFT}, {'E'});
                     userAutomation.sleep(2000);
 
                     // type enter key multiple times
@@ -202,17 +184,14 @@ TEST(RealAutomationTest, DISABLED_NormalizeAudioForMp3Files) {
                     userAutomation.sleep(15000);
 
                     // type enter key multiple times to ensure everything is closed
-                    userAutomation.sleep(250);
                     userAutomation.typeKey(VK_RETURN);
-                    userAutomation.sleep(250);
                     userAutomation.typeKey(VK_RETURN);
-                    userAutomation.sleep(250);
                     userAutomation.typeKey(VK_RETURN);
-                    userAutomation.sleep(250);
+                    userAutomation.typeKey(VK_RETURN);
                     userAutomation.typeKey(VK_RETURN);
 
                     // close file
-                    userAutomation.typeControlAndLetterSimultaneously('W');
+                    userAutomation.performKeyCombination({VK_CONTROL}, {'W'});
                     userAutomation.sleep(1000);
                     userAutomation.typeKey(VK_RIGHT);
                     userAutomation.typeKey(VK_RETURN);
@@ -229,7 +208,44 @@ TEST(RealAutomationTest, DISABLED_NormalizeAudioForMp3Files) {
     }
 }
 
-TEST(RealAutomationTest, GetOutputFromChatGpt) {
+TEST(RealAutomationTest, DISABLED_DownloadFacebookImagesFromFirefox) {
+    AlbaWindowsUserAutomation userAutomation;
+
+    while (true) {
+        ALBA_INF_PRINT1(cout, "next image");
+        userAutomation.performKeyCombination({VK_CONTROL}, {'L'});
+        userAutomation.sleep(1000);
+
+        userAutomation.performKeyCombination({VK_CONTROL}, {'C'});
+        userAutomation.sleep(1000);
+
+        ALBA_INF_PRINT1(cout, "check for exit");
+        string url = userAutomation.getStringFromClipboard();
+        if (userAutomation.isLetterPressed('a') ||
+            url == R"(https://www.facebook.com/photo?fbid=10227411012716536&set=t.100000122270987)") {
+            exit(0);
+        }
+
+        userAutomation.doLeftClickAt(MousePosition(3377, 116));
+        userAutomation.sleep(1000);
+        userAutomation.doLeftClickAt(MousePosition(3377, 116));
+        userAutomation.sleep(1000);
+
+        ALBA_INF_PRINT1(cout, "clicks");
+        userAutomation.doRightClickAt(MousePosition(2740, 592));
+        userAutomation.sleep(1000);
+        userAutomation.doLeftClickAt(MousePosition(2794, 643));
+        userAutomation.sleep(3000);
+        userAutomation.typeKey(VK_RETURN);
+        userAutomation.sleep(1000);
+        userAutomation.typeKey('Y');
+        userAutomation.sleep(1000);
+        userAutomation.typeKey(VK_RIGHT);
+        userAutomation.sleep(5000);
+    }
+}
+
+TEST(RealAutomationTest, DISABLED_GetOutputFromChatGpt) {
     AlbaWindowsUserAutomation userAutomation;
     ifstream commitMessagesStream(R"(F:\Branches\aprg_test\Migrate\git_old_repo\commitMessagesNoQuotations.txt)");
     ofstream newCommitMessagesStream(
@@ -252,7 +268,7 @@ TEST(RealAutomationTest, GetOutputFromChatGpt) {
         }
         string line(commitMessagesReader.getLineAndIgnoreWhiteSpaces());
         if (lineCountToStart > lineCount) {
-            ALBA_PRINT3("skipping", lineCountToStart, lineCount);
+            ALBA_INF_PRINT3(cout, "skipping", lineCountToStart, lineCount);
         } else {
             if (pendingNumberOfLines < NUMBER_OF_LINES_TO_SEND) {
                 requestToChatGpt += line;
@@ -260,14 +276,14 @@ TEST(RealAutomationTest, GetOutputFromChatGpt) {
                 ++pendingNumberOfLines;
             } else {
                 // loop until its confirm that request is in the text box (PAUSE for stop)
-                ALBA_PRINT1(lineCount);
+                ALBA_INF_PRINT1(cout, lineCount);
                 int retries = 0;
                 string fromClipboard;
                 while (!userAutomation.isLetterPressed(VK_PAUSE)) {
                     ++retries;
-                    ALBA_PRINT1(retries);
+                    ALBA_INF_PRINT1(cout, retries);
                     if (retries > 10) {
-                        userAutomation.pressKey(VK_F5);
+                        userAutomation.typeKey(VK_F5);
                         userAutomation.sleep(10000);
                     } else if (retries > 3) {
                         userAutomation.doLeftClickAt(MousePosition(2030, 110));
@@ -280,42 +296,26 @@ TEST(RealAutomationTest, GetOutputFromChatGpt) {
                     userAutomation.sleep(2000);
 
                     // Select All
-                    userAutomation.pressKey(VK_CONTROL);
-                    userAutomation.pressKey('A');
-                    userAutomation.sleepWithRealisticDelay();
-                    userAutomation.releaseKey('A');
-                    userAutomation.releaseKey(VK_CONTROL);
+                    userAutomation.performKeyCombination({VK_CONTROL}, {'A'});
                     userAutomation.sleep(2000);
 
                     // Paste
-                    userAutomation.pressKey(VK_CONTROL);
-                    userAutomation.pressKey('V');
-                    userAutomation.sleepWithRealisticDelay();
-                    userAutomation.releaseKey('V');
-                    userAutomation.releaseKey(VK_CONTROL);
+                    userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
                     userAutomation.sleep(2000);
 
                     // Select All
-                    userAutomation.pressKey(VK_CONTROL);
-                    userAutomation.pressKey('A');
-                    userAutomation.sleepWithRealisticDelay();
-                    userAutomation.releaseKey('A');
-                    userAutomation.releaseKey(VK_CONTROL);
+                    userAutomation.performKeyCombination({VK_CONTROL}, {'A'});
                     userAutomation.sleep(2000);
 
                     // Double check if text is really on the text box
                     userAutomation.setStringToClipboard("");
-                    userAutomation.pressKey(VK_CONTROL);
-                    userAutomation.pressKey('C');
-                    userAutomation.sleepWithRealisticDelay();
-                    userAutomation.releaseKey('C');
-                    userAutomation.releaseKey(VK_CONTROL);
+                    userAutomation.performKeyCombination({VK_CONTROL}, {'C'});
                     userAutomation.sleep(2000);
 
                     fromClipboard = userAutomation.getStringFromClipboard();
 
-                    ALBA_PRINT1(requestToChatGpt);
-                    ALBA_PRINT1(fromClipboard);
+                    ALBA_INF_PRINT1(cout, requestToChatGpt);
+                    ALBA_INF_PRINT1(cout, fromClipboard);
                     if (requestToChatGpt != fromClipboard) {
                         continue;
                     }
@@ -335,7 +335,7 @@ TEST(RealAutomationTest, GetOutputFromChatGpt) {
 
                     // Save output to file
                     string outputOfChatGpt = userAutomation.getStringFromClipboard();
-                    ALBA_PRINT1(outputOfChatGpt);
+                    ALBA_INF_PRINT1(cout, outputOfChatGpt);
                     if (outputOfChatGpt.empty()) {
                         continue;
                     }
