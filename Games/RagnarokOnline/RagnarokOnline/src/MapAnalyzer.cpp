@@ -1,6 +1,6 @@
 #include "MapAnalyzer.hpp"
 
-#include <Common/Debug/AlbaDebug.hpp>
+#include <Common/Print/AlbaLogPrints.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>
@@ -63,8 +63,7 @@ void MapAnalyzer::printPotentialZenyFromMonster(string const& monsterName) const
 
 double MapAnalyzer::getMultiplierForExperience(string const& mapName) {
     double multiplier(1);
-    if (isStringFoundCaseSensitive(mapName, "xmas_") ||
-        isStringFoundCaseSensitive(mapName, "man_") ||
+    if (isStringFoundCaseSensitive(mapName, "xmas_") || isStringFoundCaseSensitive(mapName, "man_") ||
         isStringFoundCaseSensitive(mapName, "dic_")) {
         multiplier = 2;
     }
@@ -87,6 +86,7 @@ void MapAnalyzer::gatherData() {
 }
 
 void MapAnalyzer::selectMaps() {
+    cout.precision(10);
     for (auto const& mapNameToRoMap : m_ragnarokOnline.getMapNameToRoMap()) {
         MapAnalyzerData mapAnalyzerData{};
         mapAnalyzerData.mapName = mapNameToRoMap.first;
@@ -165,24 +165,23 @@ void MapAnalyzer::selectMaps() {
 
                 // print a specific map
                 if (mapAnalyzerData.mapName == "mag_dun02") {
-                    // ALBA_PRINT_PRECISION(10);
-                    // ALBA_PRINT1(mapAnalyzerData.mapName);
-                    // ALBA_PRINT4(
+                    // ALBA_INF_PRINT1(cout, mapAnalyzerData.mapName);
+                    // ALBA_INF_PRINT4(cout,
                     //     monster.name, monsterData.potentialZeny, getPotentialZenyFromMonster(monster),
                     //     monsterData.spawnCount);
-                    // ALBA_PRINT6(
+                    // ALBA_INF_PRINT6(cout,
                     //     monster.name, monster.monsterId, monster.baseExperience, monsterData.spawnCount,
                     //     monster.hitRequiredFor100Percent, monster.fleeRequiredFor95Percent);
-                    // ALBA_PRINT5(
+                    // ALBA_INF_PRINT5(cout,
                     //     mapAnalyzerData.mapName, monster.name, monsterData.potentialJobExperience,
                     //     monster.jobExperience, monsterData.spawnCount);
                     // for (auto const& dropWithRates : monster.dropsWithRates) {
-                    //     ALBA_PRINT2(dropWithRates.name, dropWithRates.rate);
+                    //     ALBA_INF_PRINT2(cout, dropWithRates.name, dropWithRates.rate);
                     // }
                 }
                 // if (monster.fleeRequiredFor95Percent <= 200) {} // for homunculus lvling
                 // if (monster.size == "Small") {  // for homunculus star glad farming
-                //     ALBA_PRINT3(monster.name, monster.size, totalPotentialZeny);
+                //     ALBA_INF_PRINT3(cout, monster.name, monster.size, totalPotentialZeny);
                 // }
                 totalPotentialZeny += monsterData.potentialZeny;
                 totalPotentialBaseExperience += monsterData.potentialBaseExperience;
