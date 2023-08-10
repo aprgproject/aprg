@@ -105,7 +105,7 @@ unsigned int BtsLogTime::getMicroSeconds() const { return m_dateTime.getMicroSec
 void BtsLogTime::clearMicroSeconds() { m_dateTime.getMicroSecondsReference() = 0; }
 
 string BtsLogTime::getPrintableString() const {
-    return convertToString(m_dateTime.getPrintObject<AlbaDateTime::PrintFormat::Type1>());
+    return convertToString(m_dateTime.getPrintObject<AlbaDateTime::PrintFormat::StandardWithSign>());
 }
 
 string BtsLogTime::getEquivalentStringPcTimeFormat() const {
@@ -122,13 +122,7 @@ string BtsLogTime::getEquivalentStringPcTimeFormat() const {
 string BtsLogTime::getEquivalentStringBtsTimeFormat() const {
     stringstream ss;
     ss << "<";
-    ss << setfill('0') << setw(4) << getYears() << "-";
-    ss << setfill('0') << setw(2) << getMonths() << "-";
-    ss << setfill('0') << setw(2) << getDays() << "T";
-    ss << setfill('0') << setw(2) << getHours() << ":";
-    ss << setfill('0') << setw(2) << getMinutes() << ":";
-    ss << setfill('0') << setw(2) << getSeconds() << ".";
-    ss << setfill('0') << setw(6) << getMicroSeconds();
+    ss << m_dateTime.getPrintObject<AlbaDateTime::PrintFormat::Iso8601>();
     ss << "Z>";
     return ss.str();
 }
