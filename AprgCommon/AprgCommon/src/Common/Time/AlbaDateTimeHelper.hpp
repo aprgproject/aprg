@@ -3,10 +3,15 @@
 #include <Common/Time/AlbaDateTimeConstants.hpp>
 
 #include <cstdint>
+#include <string>
 
 namespace alba::dateTimeHelper {
 
 // make to constexpr functions? nah, im too lazy
+
+std::string_view getMonthString(uint32_t const month);
+std::string_view getAmPmSuffix(uint32_t const hours);
+uint32_t convertTo12HourFormat(uint32_t const hours);
 
 bool isLeapYear(uint32_t const year);
 uint32_t getNumberOfDaysInAYear(uint32_t const year);

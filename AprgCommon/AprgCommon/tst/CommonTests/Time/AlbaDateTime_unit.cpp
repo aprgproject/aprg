@@ -5,6 +5,7 @@
 
 using namespace alba::stringHelper;
 using namespace std;
+using PrintFormat = alba::AlbaDateTime::PrintFormat;
 
 namespace alba {
 
@@ -292,11 +293,19 @@ TEST(AlbaDateTimeTest, OutputStreamOperatorWorks) {
 TEST(AlbaDateTimeTest, OutputStreamOperatorWorksForPrintObjectWithDifferentTypes) {
     AlbaDateTime dateTime(2017, 10, 6, 4, 59, 44, 32487);
 
+    EXPECT_EQ(" 1 * 2017-10-06 04:59:44.032487", convertToString(dateTime));
+    EXPECT_EQ("2017-10-06 04:59:44.032487", convertToString(dateTime.getPrintObject<PrintFormat::Standard>()));
     EXPECT_EQ(
-        " 1 * 2017-10-06 04:59:44.032487",
-        convertToString(dateTime.getPrintObject<AlbaDateTime::PrintFormat::Type1>()));
-    EXPECT_EQ("04:59:44", convertToString(dateTime.getPrintObject<AlbaDateTime::PrintFormat::Type2>()));
-    EXPECT_EQ("04:59:44.032487", convertToString(dateTime.getPrintObject<AlbaDateTime::PrintFormat::Type3>()));
+        " 1 * 2017-10-06 04:59:44.032487", convertToString(dateTime.getPrintObject<PrintFormat::StandardWithSign>()));
+    EXPECT_EQ("2017-10-06T04:59:44.032487", convertToString(dateTime.getPrintObject<PrintFormat::Iso8601>()));
+    EXPECT_EQ(
+        "October 6, 2017 04:59:44.032487 AM", convertToString(dateTime.getPrintObject<PrintFormat::HumanReadable>()));
+    EXPECT_EQ(
+        "736974 days, 4 hours, 59 minutes, 44 seconds, 32487 microseconds from now",
+        convertToString(dateTime.getPrintObject<PrintFormat::RelativeTime>()));
+    EXPECT_EQ("04:59:44", convertToString(dateTime.getPrintObject<PrintFormat::TimeWithColon>()));
+    EXPECT_EQ(
+        "04:59:44.032487", convertToString(dateTime.getPrintObject<PrintFormat::TimeWithColonWithMicroSeconds>()));
 }
 
 }  // namespace alba

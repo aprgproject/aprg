@@ -7,6 +7,41 @@ using namespace alba::dateTimeHelper;
 
 namespace alba {
 
+TEST(AlbaDateTimeHelperTest, GetMonthStringWorks) {
+    EXPECT_EQ("January", getMonthString(1));
+    EXPECT_EQ("February", getMonthString(2));
+    EXPECT_EQ("March", getMonthString(3));
+    EXPECT_EQ("April", getMonthString(4));
+    EXPECT_EQ("May", getMonthString(5));
+    EXPECT_EQ("June", getMonthString(6));
+    EXPECT_EQ("July", getMonthString(7));
+    EXPECT_EQ("August", getMonthString(8));
+    EXPECT_EQ("September", getMonthString(9));
+    EXPECT_EQ("October", getMonthString(10));
+    EXPECT_EQ("November", getMonthString(11));
+    EXPECT_EQ("December", getMonthString(12));
+    EXPECT_TRUE(getMonthString(0).empty());
+    EXPECT_TRUE(getMonthString(13).empty());
+}
+
+TEST(AlbaDateTimeHelperTest, GetAmPmSuffixWorks) {
+    EXPECT_EQ("AM", getAmPmSuffix(3));
+    EXPECT_EQ("AM", getAmPmSuffix(11));
+    EXPECT_EQ("PM", getAmPmSuffix(13));
+    EXPECT_EQ("AM", getAmPmSuffix(0));
+    EXPECT_EQ("PM", getAmPmSuffix(12));
+    EXPECT_EQ("PM", getAmPmSuffix(25));
+}
+
+TEST(AlbaDateTimeHelperTest, ConvertTo12HourFormatWorks) {
+    EXPECT_EQ(3U, convertTo12HourFormat(3));
+    EXPECT_EQ(11U, convertTo12HourFormat(11));
+    EXPECT_EQ(1U, convertTo12HourFormat(13));
+    EXPECT_EQ(12U, convertTo12HourFormat(0));
+    EXPECT_EQ(12U, convertTo12HourFormat(12));
+    EXPECT_EQ(13U, convertTo12HourFormat(25));
+}
+
 TEST(AlbaDateTimeHelperTest, IsLeapYearWorks) {
     EXPECT_TRUE(isLeapYear(0));
     EXPECT_FALSE(isLeapYear(3));

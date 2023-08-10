@@ -320,10 +320,8 @@ ostream& operator<<(ostream& out, AlbaDateTime::PrintObject<printFormat> const&)
 }
 
 template <>
-ostream& operator<<(ostream& out, AlbaDateTime::PrintObject<AlbaDateTime::PrintFormat::Type1> const& printObject) {
+ostream& operator<<(ostream& out, AlbaDateTime::PrintObject<AlbaDateTime::PrintFormat::Standard> const& printObject) {
     AlbaDateTime const& dateTime(printObject.savedDateTime);
-    out << setfill(' ');
-    out << setw(2) << dateTime.m_sign << " * ";
     out << setfill('0');
     out << setw(4) << dateTime.getYears() << "-";
     out << setw(2) << dateTime.getMonths() << "-";
@@ -336,7 +334,78 @@ ostream& operator<<(ostream& out, AlbaDateTime::PrintObject<AlbaDateTime::PrintF
 }
 
 template <>
-ostream& operator<<(ostream& out, AlbaDateTime::PrintObject<AlbaDateTime::PrintFormat::Type2> const& printObject) {
+ostream& operator<<(
+    ostream& out, AlbaDateTime::PrintObject<AlbaDateTime::PrintFormat::StandardWithSign> const& printObject) {
+    AlbaDateTime const& dateTime(printObject.savedDateTime);
+    out << setfill(' ');
+    out << setw(2) << dateTime.m_sign << " * ";
+    out << dateTime.getPrintObject<AlbaDateTime::PrintFormat::Standard>();
+    return out;
+}
+
+template <>
+ostream& operator<<(ostream& out, AlbaDateTime::PrintObject<AlbaDateTime::PrintFormat::Iso8601> const& printObject) {
+    AlbaDateTime const& dateTime(printObject.savedDateTime);
+    out << setfill('0');
+    out << setw(4) << dateTime.getYears() << "-";
+    out << setw(2) << dateTime.getMonths() << "-";
+    out << setw(2) << dateTime.getDays() << "T";
+    out << setw(2) << dateTime.getHours() << ":";
+    out << setw(2) << dateTime.getMinutes() << ":";
+    out << setw(2) << dateTime.getSeconds() << ".";
+    out << setw(6) << dateTime.getMicroSeconds();
+    return out;
+}
+
+template <>
+ostream& operator<<(
+    ostream& out, AlbaDateTime::PrintObject<AlbaDateTime::PrintFormat::HumanReadable> const& printObject) {
+    AlbaDateTime const& dateTime(printObject.savedDateTime);
+    out << getMonthString(dateTime.getMonths()) << " ";
+    out << dateTime.getDays() << ", ";
+    out << dateTime.getYears() << " ";
+    out << setfill('0');
+    out << setw(2) << convertTo12HourFormat(dateTime.getHours()) << ":";
+    out << setw(2) << dateTime.getMinutes() << ":";
+    out << setw(2) << dateTime.getSeconds() << ".";
+    out << setw(6) << dateTime.getMicroSeconds() << " ";
+    out << getAmPmSuffix(dateTime.getHours());
+    return out;
+}
+
+template <>
+ostream& operator<<(
+    ostream& out, AlbaDateTime::PrintObject<AlbaDateTime::PrintFormat::RelativeTime> const& printObject) {
+    AlbaDateTime const& dateTime(printObject.savedDateTime);
+    auto totalDays = dateTime.getYearMonthDay().getTotalDays();
+    if (totalDays > 0) {
+        out << totalDays << " days, ";
+    }
+    if (dateTime.getHours() > 0) {
+        out << dateTime.getHours() << " hours, ";
+    }
+    if (dateTime.getMinutes() > 0) {
+        out << dateTime.getMinutes() << " minutes, ";
+    }
+    if (dateTime.getSeconds() > 0) {
+        out << dateTime.getSeconds() << " seconds, ";
+    }
+    if (dateTime.getMicroSeconds() > 0) {
+        out << dateTime.getMicroSeconds() << " microseconds";
+    }
+    if (!dateTime.isEmpty()) {
+        if (dateTime.m_sign > 0) {
+            out << " from now";
+        } else {
+            out << " ago";
+        }
+    }
+    return out;
+}
+
+template <>
+ostream& operator<<(
+    ostream& out, AlbaDateTime::PrintObject<AlbaDateTime::PrintFormat::TimeWithColon> const& printObject) {
     AlbaDateTime const& dateTime(printObject.savedDateTime);
     out << setfill('0');
     out << setw(2) << dateTime.getHours() << ":";
@@ -346,18 +415,18 @@ ostream& operator<<(ostream& out, AlbaDateTime::PrintObject<AlbaDateTime::PrintF
 }
 
 template <>
-ostream& operator<<(ostream& out, AlbaDateTime::PrintObject<AlbaDateTime::PrintFormat::Type3> const& printObject) {
+ostream& operator<<(
+    ostream& out,
+    AlbaDateTime::PrintObject<AlbaDateTime::PrintFormat::TimeWithColonWithMicroSeconds> const& printObject) {
     AlbaDateTime const& dateTime(printObject.savedDateTime);
-    out << setfill('0');
-    out << setw(2) << dateTime.getHours() << ":";
-    out << setw(2) << dateTime.getMinutes() << ":";
-    out << setw(2) << dateTime.getSeconds() << ".";
+    out << dateTime.getPrintObject<AlbaDateTime::PrintFormat::TimeWithColon>();
+    out << setfill('0') << ".";
     out << setw(6) << dateTime.getMicroSeconds();
     return out;
 }
 
 ostream& operator<<(ostream& out, AlbaDateTime const& dateTime) {
-    out << dateTime.getPrintObject<AlbaDateTime::PrintFormat::Type1>();
+    out << dateTime.getPrintObject<AlbaDateTime::PrintFormat::StandardWithSign>();
     return out;
 }
 

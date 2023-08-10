@@ -11,6 +11,40 @@ using namespace std;
 
 namespace alba::dateTimeHelper {
 
+std::string_view getMonthString(uint32_t const month) {
+    switch (month) {
+        case JANUARY:
+            return "January";
+        case FEBRUARY:
+            return "February";
+        case MARCH:
+            return "March";
+        case APRIL:
+            return "April";
+        case MAY:
+            return "May";
+        case JUNE:
+            return "June";
+        case JULY:
+            return "July";
+        case AUGUST:
+            return "August";
+        case SEPTEMBER:
+            return "September";
+        case OCTOBER:
+            return "October";
+        case NOVEMBER:
+            return "November";
+        case DECEMBER:
+            return "December";
+    }
+    return std::string_view();
+}
+
+std::string_view getAmPmSuffix(uint32_t const hours) { return hours < 12 ? "AM" : "PM"; }
+
+uint32_t convertTo12HourFormat(uint32_t const hours) { return hours > 12 ? hours - 12 : (hours == 0 ? 12 : hours); }
+
 bool isLeapYear(uint32_t const year) {
     bool result(true);
     if (!isDivisible(year, 4U))

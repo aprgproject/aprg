@@ -9,61 +9,65 @@
 
 namespace alba {
 
+void printLogHeader(std::ostream& out, std::string_view fileName, int lineNumber, std::string_view functionName);
+void printCurrentDateTime(std::ostream& out);
+void printStringAndShortenIfPossible(
+    std::ostream& out, std::string_view longStr, size_t const prefixLength, size_t const suffixLength);
+
 // printParameter declaration
 
-void printParameter(std::ostream& outputStream, std::string const& parameter);
-void printParameter(std::ostream& outputStream, char const* const parameter);
+void printParameter(std::ostream& out, std::string const& parameter);
+void printParameter(std::ostream& out, char const* const parameter);
 
 template <typename ParameterType>
-void printParameter(std::ostream& outputStream, ParameterType const& parameter);
+void printParameter(std::ostream& out, ParameterType const& parameter);
 template <typename ParameterType>
-void printParameter(std::ostream& outputStream, std::optional<ParameterType> const& parameter);
+void printParameter(std::ostream& out, std::optional<ParameterType> const& parameter);
 template <typename... UnderlyingTypes>
-void printParameter(std::ostream& outputStream, std::pair<UnderlyingTypes...> const& parameter);
+void printParameter(std::ostream& out, std::pair<UnderlyingTypes...> const& parameter);
 template <typename... UnderlyingTypes>
-void printParameter(std::ostream& outputStream, std::tuple<UnderlyingTypes...> const& parameter);
+void printParameter(std::ostream& out, std::tuple<UnderlyingTypes...> const& parameter);
 template <typename ValueType, size_t SIZE, template <typename, size_t> class TemplateType>
 std::enable_if_t<typeHelper::hasBeginAndEnd<TemplateType<ValueType, SIZE>>(), void> printParameter(
-    std::ostream& outputStream, TemplateType<ValueType, SIZE> const& parameter);
+    std::ostream& out, TemplateType<ValueType, SIZE> const& parameter);
 template <typename... UnderlyingTypes, template <typename...> class TemplateType>
 std::enable_if_t<typeHelper::hasBeginAndEndAndSize<TemplateType<UnderlyingTypes...>>(), void> printParameter(
-    std::ostream& outputStream, TemplateType<UnderlyingTypes...> const& parameter);
+    std::ostream& out, TemplateType<UnderlyingTypes...> const& parameter);
 template <typename... UnderlyingTypes, template <typename...> class TemplateType>
 std::enable_if_t<typeHelper::hasBeginAndEndAndWithoutSize<TemplateType<UnderlyingTypes...>>(), void> printParameter(
-    std::ostream& outputStream, TemplateType<UnderlyingTypes...> const& parameter);
+    std::ostream& out, TemplateType<UnderlyingTypes...> const& parameter);
 template <typename... UnderlyingTypes, template <typename...> class TemplateType>
 std::enable_if_t<typeHelper::hasContainerType<TemplateType<UnderlyingTypes...>>(), void> printParameter(
-    std::ostream& outputStream, TemplateType<UnderlyingTypes...> const& parameter);
+    std::ostream& out, TemplateType<UnderlyingTypes...> const& parameter);
 
 // printParameterWithName declaration
 
 template <typename ParameterType>
-void printParameterWithName(std::ostream& outputStream, std::string_view parameterName, ParameterType const& parameter);
+void printParameterWithName(std::ostream& out, std::string_view parameterName, ParameterType const& parameter);
 template <typename ParameterPointerType>
-void printParameterWithName(
-    std::ostream& outputStream, std::string_view parameterName, ParameterPointerType* parameterPointer);
+void printParameterWithName(std::ostream& out, std::string_view parameterName, ParameterPointerType* parameterPointer);
 template <>
-void printParameterWithName(std::ostream& outputStream, std::string_view, char const* const parameter);
+void printParameterWithName(std::ostream& out, std::string_view, char const* const parameter);
 template <typename... UnderlyingTypes, template <typename...> class TemplateType>
 std::enable_if_t<typeHelper::isRaiiPointerWithDereference<TemplateType<UnderlyingTypes...>>(), void>
 printParameterWithName(
-    std::ostream& outputStream, std::string_view parameterName, TemplateType<UnderlyingTypes...> const& parameter);
+    std::ostream& out, std::string_view parameterName, TemplateType<UnderlyingTypes...> const& parameter);
 template <typename... UnderlyingTypes, template <typename...> class TemplateType>
 std::enable_if_t<typeHelper::isRaiiPointerWithoutDereference<TemplateType<UnderlyingTypes...>>(), void>
 printParameterWithName(
-    std::ostream& outputStream, std::string_view parameterName, TemplateType<UnderlyingTypes...> const& parameter);
+    std::ostream& out, std::string_view parameterName, TemplateType<UnderlyingTypes...> const& parameter);
 
 // Utilities
 
 template <typename... ValueTypes>
-void printTupleParameters(std::ostream& outputStream, std::tuple<ValueTypes...> const& parameter) {
+void printTupleParameters(std::ostream& out, std::tuple<ValueTypes...> const& parameter) {
     std::apply  // C++17, applies a function by unpacking a tuple to its tupleParameters
         (
-            [&outputStream](ValueTypes const&... tupleParameters) {
+            [&out](ValueTypes const&... tupleParameters) {
                 std::size_t tupleIndex{0};
-                auto printTupleParameter = [&outputStream](auto&& tupleParameter, auto& tupleIndex) {
-                    printParameter(outputStream, tupleParameter);
-                    outputStream << (++tupleIndex != sizeof...(ValueTypes) ? ", " : "");
+                auto printTupleParameter = [&out](auto&& tupleParameter, auto& tupleIndex) {
+                    printParameter(out, tupleParameter);
+                    out << (++tupleIndex != sizeof...(ValueTypes) ? ", " : "");
                 };
                 (printTupleParameter(tupleParameters, tupleIndex), ...);  // Folding expressions in C++17
             },
@@ -71,10 +75,10 @@ void printTupleParameters(std::ostream& outputStream, std::tuple<ValueTypes...> 
 }
 
 template <typename ContainerType>
-void printParametersByForEachTraversal(std::ostream& outputStream, ContainerType const& container) {
+void printParametersByForEachTraversal(std::ostream& out, ContainerType const& container) {
     for (auto const& parameter : container) {
-        printParameter(outputStream, parameter);
-        outputStream << ", ";
+        printParameter(out, parameter);
+        out << ", ";
     }
 }
 
@@ -92,101 +96,99 @@ typename Adapter::container_type const& getUnderlyingContainerForPrinting(Adapte
 // printParameter
 
 template <typename ParameterType>
-void printParameter(std::ostream& outputStream, ParameterType const& parameter) {
-    outputStream << parameter;
+void printParameter(std::ostream& out, ParameterType const& parameter) {
+    out << parameter;
 }
 
 template <typename ParameterType>
-void printParameter(std::ostream& outputStream, std::optional<ParameterType> const& parameter) {
+void printParameter(std::ostream& out, std::optional<ParameterType> const& parameter) {
     if (parameter) {
-        outputStream << parameter.value();
+        out << parameter.value();
     } else {
-        outputStream << "empty";
+        out << "empty";
     }
 }
 
 template <typename... UnderlyingTypes>
-void printParameter(std::ostream& outputStream, std::pair<UnderlyingTypes...> const& parameter) {
-    outputStream << "(";
-    printParameter(outputStream, parameter.first);
-    outputStream << ", ";
-    printParameter(outputStream, parameter.second);
-    outputStream << ")";
+void printParameter(std::ostream& out, std::pair<UnderlyingTypes...> const& parameter) {
+    out << "(";
+    printParameter(out, parameter.first);
+    out << ", ";
+    printParameter(out, parameter.second);
+    out << ")";
 }
 
 template <typename... UnderlyingTypes>
-void printParameter(std::ostream& outputStream, std::tuple<UnderlyingTypes...> const& parameter) {
-    outputStream << "(";
-    printTupleParameters<UnderlyingTypes...>(outputStream, parameter);
-    outputStream << ")";
+void printParameter(std::ostream& out, std::tuple<UnderlyingTypes...> const& parameter) {
+    out << "(";
+    printTupleParameters<UnderlyingTypes...>(out, parameter);
+    out << ")";
 }
 
 template <typename ValueType, size_t SIZE, template <typename, size_t> class TemplateType>
 std::enable_if_t<typeHelper::hasBeginAndEnd<TemplateType<ValueType, SIZE>>(), void> printParameter(
-    std::ostream& outputStream, TemplateType<ValueType, SIZE> const& parameter) {
-    outputStream << "{Constant size: " << SIZE << " | ";
-    printParametersByForEachTraversal(outputStream, parameter);
-    outputStream << "}";
+    std::ostream& out, TemplateType<ValueType, SIZE> const& parameter) {
+    out << "{Constant size: " << SIZE << " | ";
+    printParametersByForEachTraversal(out, parameter);
+    out << "}";
 }
 
 template <typename... UnderlyingTypes, template <typename...> class TemplateType>
 std::enable_if_t<typeHelper::hasBeginAndEndAndSize<TemplateType<UnderlyingTypes...>>(), void> printParameter(
-    std::ostream& outputStream, TemplateType<UnderlyingTypes...> const& parameter) {
-    outputStream << "{size: " << parameter.size() << " | ";
-    printParametersByForEachTraversal(outputStream, parameter);
-    outputStream << "}";
+    std::ostream& out, TemplateType<UnderlyingTypes...> const& parameter) {
+    out << "{size: " << parameter.size() << " | ";
+    printParametersByForEachTraversal(out, parameter);
+    out << "}";
 }
 
 template <typename... UnderlyingTypes, template <typename...> class TemplateType>
 std::enable_if_t<typeHelper::hasBeginAndEndAndWithoutSize<TemplateType<UnderlyingTypes...>>(), void> printParameter(
-    std::ostream& outputStream, TemplateType<UnderlyingTypes...> const& parameter) {
-    outputStream << "{";
-    printParametersByForEachTraversal(outputStream, parameter);
-    outputStream << "}";
+    std::ostream& out, TemplateType<UnderlyingTypes...> const& parameter) {
+    out << "{";
+    printParametersByForEachTraversal(out, parameter);
+    out << "}";
 }
 
 template <typename... UnderlyingTypes, template <typename...> class TemplateType>
 std::enable_if_t<typeHelper::hasContainerType<TemplateType<UnderlyingTypes...>>(), void> printParameter(
-    std::ostream& outputStream, TemplateType<UnderlyingTypes...> const& parameter) {
-    outputStream << "{adapter: ";
-    printParameter(outputStream, getUnderlyingContainerForPrinting(parameter));
-    outputStream << "}";
+    std::ostream& out, TemplateType<UnderlyingTypes...> const& parameter) {
+    out << "{adapter: ";
+    printParameter(out, getUnderlyingContainerForPrinting(parameter));
+    out << "}";
 }
 
 // printParameterWithName
 
 template <typename ParameterType>
-void printParameterWithName(
-    std::ostream& outputStream, std::string_view parameterName, ParameterType const& parameter) {
-    outputStream << parameterName << " : [";
-    printParameter(outputStream, parameter);
-    outputStream << "]";
+void printParameterWithName(std::ostream& out, std::string_view parameterName, ParameterType const& parameter) {
+    out << parameterName << " : [";
+    printParameter(out, parameter);
+    out << "]";
 }
 
 template <typename ParameterPointerType>
-void printParameterWithName(
-    std::ostream& outputStream, std::string_view parameterName, ParameterPointerType* parameterPointer) {
+void printParameterWithName(std::ostream& out, std::string_view parameterName, ParameterPointerType* parameterPointer) {
     if (parameterPointer == nullptr) {
-        outputStream << parameterName << " : [nullptr]";
+        out << parameterName << " : [nullptr]";
     } else {
-        outputStream << "*" << parameterName << " : [";
-        printParameter(outputStream, *parameterPointer);
-        outputStream << "]";
+        out << "*" << parameterName << " : [";
+        printParameter(out, *parameterPointer);
+        out << "]";
     }
 }
 
 template <typename... UnderlyingTypes, template <typename...> class TemplateType>
 std::enable_if_t<typeHelper::isRaiiPointerWithDereference<TemplateType<UnderlyingTypes...>>(), void>
 printParameterWithName(
-    std::ostream& outputStream, std::string_view parameterName, TemplateType<UnderlyingTypes...> const& parameter) {
-    printParameterWithName(outputStream, parameterName, parameter.get());
+    std::ostream& out, std::string_view parameterName, TemplateType<UnderlyingTypes...> const& parameter) {
+    printParameterWithName(out, parameterName, parameter.get());
 }
 
 template <typename... UnderlyingTypes, template <typename...> class TemplateType>
 std::enable_if_t<typeHelper::isRaiiPointerWithoutDereference<TemplateType<UnderlyingTypes...>>(), void>
 printParameterWithName(
-    std::ostream& outputStream, std::string_view parameterName, TemplateType<UnderlyingTypes...> const& parameter) {
-    outputStream << parameterName << " has use count: [" << parameter.use_count() << "]";
+    std::ostream& out, std::string_view parameterName, TemplateType<UnderlyingTypes...> const& parameter) {
+    out << parameterName << " has use count: [" << parameter.use_count() << "]";
 }
 
 }  // namespace alba

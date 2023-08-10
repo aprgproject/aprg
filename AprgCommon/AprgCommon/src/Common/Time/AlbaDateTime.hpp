@@ -85,9 +85,13 @@ private:
 class AlbaDateTime {
 public:
     enum class PrintFormat {
-        Type1,  // NN YYYY-MM-DD HH:MM:SS.MMMMMM
-        Type2,  // HH:MM:SS
-        Type3   // HH:MM:SS.MMMMMM
+        Standard,                      // YYYY-MM-DD HH:MM:SS.MMMMMM
+        StandardWithSign,              // NN YYYY-MM-DD HH:MM:SS.MMMMMM
+        Iso8601,                       // YYYY-MM-DDTHH:MM:SS.MMMMMM
+        HumanReadable,                 // Month D, Y 12HH:MM:SS.MMMMMM AM/PM
+        RelativeTime,                  // TD days, H hours, M minutes, S seconds, M microseconds ago/from now
+        TimeWithColon,                 // HH:MM:SS
+        TimeWithColonWithMicroSeconds  // HH:MM:SS.MMMMMM
     };
 
     template <PrintFormat printFormat>

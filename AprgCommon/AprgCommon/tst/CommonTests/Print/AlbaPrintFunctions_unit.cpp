@@ -18,6 +18,36 @@ using namespace std;
 
 namespace alba {
 
+TEST(AlbaPrintFunctionsTest, PrintLogHeaderWorks) {
+    stringstream ssToVerify;
+
+    printLogHeader(
+        ssToVerify, "Drive:/Folder1/Folder2/Folder3/Folder4/Filename.txt", 265, "prefixVeryVeryVeryVeryVeryVerySuffix");
+
+    string actualPrintString(ssToVerify.str());
+    int runningIndex = 0;
+    EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "Drive:", runningIndex));
+    EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "Filename.txt", runningIndex));
+    EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "prefix", runningIndex));
+    EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "Suffix", runningIndex));
+}
+
+TEST(AlbaPrintFunctionsTest, PrintCurrentDateTimeWorks) {
+    stringstream ssToVerify;
+
+    printCurrentDateTime(ssToVerify);
+
+    EXPECT_FALSE(ssToVerify.str().empty());
+}
+
+TEST(AlbaPrintFunctionsTest, PrintStringAndShortenIfPossibleWorks) {
+    stringstream ssToVerify;
+
+    printStringAndShortenIfPossible(ssToVerify, "ThisISVeRYvERYVEryVerYveryVERYveRYVEryLoNG", 10, 10);
+
+    EXPECT_EQ("ThisISVeRY...RYVEryLoNG", ssToVerify.str());
+}
+
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithItemsThatCanPrint) {
     stringstream ssToVerify;
     int integerToTest = 500;
