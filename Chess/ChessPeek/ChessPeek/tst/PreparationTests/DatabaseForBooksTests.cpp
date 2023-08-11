@@ -34,7 +34,7 @@ TEST(DatabaseForBooksTest, DISABLED_SavingChessDotComDatabaseWorks) {
         splitToStrings<SplitStringType::WithoutDelimeters>(initialMoveStrings, line, ",");
         string nameOfLine =
             getStringInBetweenTwoStrings(fileReader.getLineAndIgnoreWhiteSpaces(), "NameOfLine: [", "]");
-        transformReplaceStringIfFound(nameOfLine, "é", "e");  // for Reti
+        replaceAllAndReturnIfFound(nameOfLine, "é", "e");  // for Reti
         int numberOfNextMoves = convertStringToNumber<int>(
             getStringInBetweenTwoStrings(fileReader.getLineAndIgnoreWhiteSpaces(), "NumberOfNextMoves: [", "]"));
 
