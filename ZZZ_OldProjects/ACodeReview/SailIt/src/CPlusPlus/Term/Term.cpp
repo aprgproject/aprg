@@ -61,7 +61,7 @@ CPlusPlusType& Term::getValueTypeReference() const { return m_ValueTypeOptional.
 
 string Term::getPrintableString() const {
     string replacedString(m_content);
-    while (transformReplaceStringIfFound(replacedString, "\n", "(\\n)"))
+    while (replaceAllAndReturnIfFound(replacedString, "\n", "(\\n)"))
         ;
     return replacedString;
 }

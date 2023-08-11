@@ -240,7 +240,7 @@ void CMakeReader::replaceVariableWithRealValuesInStringAndDoOperation(
         auto& variableMap = *it;
         for (auto& variableValue : variableMap.second) {
             string contentsTemp(contents);
-            if (transformReplaceStringIfFound(contentsTemp, "${" + variableMap.first + "}", variableValue)) {
+            if (replaceAllAndReturnIfFound(contentsTemp, "${" + variableMap.first + "}", variableValue)) {
                 VariableMapIterator nextVariableToCheck = it;
                 nextVariableToCheck++;
                 replaceVariableWithRealValuesInStringAndDoOperation(
