@@ -345,7 +345,7 @@ void RagnarokOnline::retrieveMonsterDataFromRmsWebPage(string const& filePathOfW
                     string modes = getStringInBetweenTwoStrings(line, R"(<div class="tipstext">)", R"(</div>)");
                     while (isStringFoundCaseSensitive(modes, R"(<br>)")) {
                         string mode(fixText(getStringBeforeThisString(modes, R"(<br>)")));
-                        transformReplaceStringIfFound(mode, "- ", "");
+                        replaceAllAndReturnIfFound(mode, "- ", "");
                         monster.modes.emplace_back(mode);
                         modes = getStringAfterThisString(modes, R"(<br>)");
                     }
@@ -444,7 +444,7 @@ void RagnarokOnline::retrieveMapDataFromRmsWebPage(string const& filePathOfWebPa
                         getStringInBetweenTwoStrings(wholeMonsterString, R"(<b>(</b>)", R"(<b>)</b>)");
                     monsterDetailsOnMap.monsterName =
                         fixText(getStringBeforeThisString(wholeMonsterString, R"(<b>(</b>)"));
-                    transformReplaceStringIfFound(monsterDetailsOnMap.monsterName, "[MVP]", "");
+                    replaceAllAndReturnIfFound(monsterDetailsOnMap.monsterName, "[MVP]", "");
                     if (isStringFoundCaseSensitive(wholeSpawnString, "/")) {
                         monsterDetailsOnMap.spawnCount = convertStringToNumber<unsigned int>(
                             fixText(getStringBeforeThisString(wholeSpawnString, R"(/)")));
@@ -817,15 +817,15 @@ void RagnarokOnline::printSellingShopItems() const {
 
 string RagnarokOnline::fixText(string const& text) {
     string fixedText(text);
-    transformReplaceStringIfFound(fixedText, "<br>", " ");
-    transformReplaceStringIfFound(fixedText, "&amp;", "&");
-    transformReplaceStringIfFound(fixedText, "&nbsp;", " ");
+    replaceAllAndReturnIfFound(fixedText, "<br>", " ");
+    replaceAllAndReturnIfFound(fixedText, "&amp;", "&");
+    replaceAllAndReturnIfFound(fixedText, "&nbsp;", " ");
     while (isStringFoundCaseSensitive(fixedText, "<") &&
            isStringFoundCaseSensitive(fixedText, ">")) {
         string htmlTag("<");
         htmlTag += getStringInBetweenTwoStrings(fixedText, "<", ">");
         htmlTag += ">";
-        transformReplaceStringIfFound(fixedText, htmlTag, "");
+        replaceAllAndReturnIfFound(fixedText, htmlTag, "");
     }
     return getStringWithoutStartingAndTrailingWhiteSpace(getStringWithoutRedundantWhiteSpace(fixedText));
 }
