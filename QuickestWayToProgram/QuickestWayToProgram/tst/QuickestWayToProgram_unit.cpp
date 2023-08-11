@@ -566,15 +566,15 @@ TEST(SampleTest, FindSourceFilesToAdjust_FromDirectory) {
                 while (logFileReader.isNotFinished()) {
                     string lineInFile(logFileReader.getLineAndIgnoreWhiteSpaces());
                     string stringToAnalyze(lineInFile);
-                    stringHelper::transformReplaceStringIfFound(stringToAnalyze, "using namespace fw", "");
-                    stringHelper::transformReplaceStringIfFound(stringToAnalyze, "using fw", "");
-                    stringHelper::transformReplaceStringIfFound(stringToAnalyze, "fw::flush", "");
-                    stringHelper::transformReplaceStringIfFound(stringToAnalyze, "fw::MessageBackend", "");
-                    stringHelper::transformReplaceStringIfFound(stringToAnalyze, "fw::MessageFactory", "");
-                    stringHelper::transformReplaceStringIfFound(stringToAnalyze, "fw::MessageLogger", "");
-                    stringHelper::transformReplaceStringIfFound(stringToAnalyze, "fw::StlFileReader", "");
-                    stringHelper::transformReplaceStringIfFound(stringToAnalyze, "fw::ObjectManager", "");
-                    stringHelper::transformReplaceStringIfFound(stringToAnalyze, "using CommonLogger = fw::", "");
+                    stringHelper::replaceAllAndReturnIfFound(stringToAnalyze, "using namespace fw", "");
+                    stringHelper::replaceAllAndReturnIfFound(stringToAnalyze, "using fw", "");
+                    stringHelper::replaceAllAndReturnIfFound(stringToAnalyze, "fw::flush", "");
+                    stringHelper::replaceAllAndReturnIfFound(stringToAnalyze, "fw::MessageBackend", "");
+                    stringHelper::replaceAllAndReturnIfFound(stringToAnalyze, "fw::MessageFactory", "");
+                    stringHelper::replaceAllAndReturnIfFound(stringToAnalyze, "fw::MessageLogger", "");
+                    stringHelper::replaceAllAndReturnIfFound(stringToAnalyze, "fw::StlFileReader", "");
+                    stringHelper::replaceAllAndReturnIfFound(stringToAnalyze, "fw::ObjectManager", "");
+                    stringHelper::replaceAllAndReturnIfFound(stringToAnalyze, "using CommonLogger = fw::", "");
                     if (stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(stringToAnalyze, "fw::")) {
                         ALBA_INF_PRINT1(cout, filePathHandler.getFullPath());
                         ALBA_INF_PRINT1(cout, lineInFile);
@@ -667,7 +667,7 @@ TEST(SampleTest, ExtractFilesAndCopyLogsForSctTests) {
     inputDirectoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
     for (string const& file : files) {
         string newFilePath(file);
-        stringHelper::transformReplaceStringIfFound(newFilePath, inputDirectoryPathHandler.getFullPath(), "");
+        stringHelper::replaceAllAndReturnIfFound(newFilePath, inputDirectoryPathHandler.getFullPath(), "");
         newFilePath =
             stringHelper::getStringAfterThisString(stringHelper::getStringAfterThisString(newFilePath, R"(\)"), R"(\)");
         if (!newFilePath.empty()) {
@@ -1689,7 +1689,7 @@ NRT\1100_MegaPlexer\Ip_10.68.159.157_41786_544_160706_110531.codec.wtbin)");
         AlbaFileReader componentNameFileReader(componentNameFile);
         while (componentNameFileReader.isNotFinished()) {
             string componentName(componentNameFileReader.getLineAndIgnoreWhiteSpaces());
-            stringHelper::transformReplaceStringIfFound(componentName, ",", "");
+            stringHelper::replaceAllAndReturnIfFound(componentName, ",", "");
             if (!componentName.empty()) {
                 addComponentFile << R"(ADD_COMPONENT(ComponentName::)" << componentName << ", " << componentName
                                  << ")\n";
