@@ -121,7 +121,7 @@ bool FesterRobot::isRunningFinishedInClipboardData(string const& clipboardData) 
 
 string FesterRobot::getClipboardFormattedData() const {
     string clipboardData(m_userAutomation.getStringFromClipboard());
-    stringHelper::transformReplaceStringIfFound(clipboardData, "\r", "");
+    stringHelper::replaceAllAndReturnIfFound(clipboardData, "\r", "");
     return clipboardData;
 }
 
