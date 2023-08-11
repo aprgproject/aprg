@@ -1,0 +1,4 @@
+go to parent directory (aprg) and run this:
+/AllCommonScripts/CreateAprgProject/createAprgProject.sh TemplateForAllCases ANewProject A_NEW_PROJECT .
+/AllCommonScripts/CreateAprgProject/createAprgProject.sh TemplateForLibraries ANewProject A_NEW_PROJECT .
+/AllCommonScripts/CreateAprgProject/createAprgProject.sh TemplateForPrograms ANewProject A_NEW_PROJECT .
