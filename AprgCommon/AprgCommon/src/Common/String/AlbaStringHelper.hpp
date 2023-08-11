@@ -147,7 +147,7 @@ strings getArgumentsToStringInMain(int const argc, char const* const argv[]);
 
 // Find and replace
 
-bool transformReplaceStringIfFound(std::string& mainText, std::string_view toReplace, std::string_view replaceWith);
+bool replaceAllAndReturnIfFound(std::string& mainText, std::string_view targetStr, std::string_view replacementStr);
 
 // Split and combine
 

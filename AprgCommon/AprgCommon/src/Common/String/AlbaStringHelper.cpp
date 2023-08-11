@@ -568,15 +568,15 @@ strings getArgumentsToStringInMain(int const argc, char const* const argv[]) {
     return result;
 }
 
-bool transformReplaceStringIfFound(string& mainText, string_view toReplace, string_view replaceWith) {
+bool replaceAllAndReturnIfFound(string& mainText, string_view targetStr, string_view replacementStr) {
     bool found = false;
-    size_t toReplaceLength = toReplace.length();
-    size_t replaceWithLength = replaceWith.length();
-    size_t index = mainText.find(toReplace);
+    size_t targetStrLength = targetStr.length();
+    size_t replacementStrLength = replacementStr.length();
+    size_t index = mainText.find(targetStr);
     while (isNotNpos(static_cast<int>(index))) {
         found = true;
-        mainText.replace(index, toReplaceLength, replaceWith);
-        index = mainText.find(toReplace, index + replaceWithLength);
+        mainText.replace(index, targetStrLength, replacementStr);
+        index = mainText.find(targetStr, index + replacementStrLength);
     }
     return found;
 }
