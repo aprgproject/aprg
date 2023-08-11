@@ -20,7 +20,7 @@ void ReplaceStringInFiles::replaceStringWithStringOnDirectories(
         AlbaLocalPathHandler inputFilePathHandler(file);
         if (isCOrCPlusPlusFile(inputFilePathHandler.getExtension())) {
             string outputFilePath(inputFilePathHandler.getFullPath());
-            transformReplaceStringIfFound(
+            replaceAllAndReturnIfFound(
                 outputFilePath, inputPathHandler.getFullPath(), outputPathHandler.getFullPath());
             AlbaLocalPathHandler outputFilePathHandler(outputFilePath);
             replaceStringWithStringOnFile(
@@ -40,7 +40,7 @@ void ReplaceStringInFiles::replaceStringWithStringOnFile(
         while (inputFileReader.isNotFinished()) {
             string line(inputFileReader.getLine());
             for (auto const& replacePair : replacePairs) {
-                transformReplaceStringIfFound(line, replacePair.first, replacePair.second);
+                replaceAllAndReturnIfFound(line, replacePair.first, replacePair.second);
             }
             outputFile << getStringWithoutStartingAndTrailingWhiteSpace(line) << "\n";
         }
@@ -59,7 +59,7 @@ void ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnDirectories(
         AlbaLocalPathHandler inputFilePathHandler(file);
         if (isCOrCPlusPlusFile(inputFilePathHandler.getExtension())) {
             string outputFilePath(inputFilePathHandler.getFullPath());
-            transformReplaceStringIfFound(
+            replaceAllAndReturnIfFound(
                 outputFilePath, inputPathHandler.getFullPath(), outputPathHandler.getFullPath());
             AlbaLocalPathHandler outputFilePathHandler(outputFilePath);
             replaceCToCPlusPlusStylePrintOnFile(

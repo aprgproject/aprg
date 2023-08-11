@@ -282,7 +282,7 @@ void CPlusPlusFileFixer::fixNamespaces() {
     for (string& line : m_linesAfterTheHeader) {
         string firstWord(getStringBeforeThisString(getStringWithoutStartingAndTrailingWhiteSpace(line), " "));
         if ("namespace" == firstWord) {
-            transformReplaceStringIfFound(line, "{", "\n{");
+            replaceAllAndReturnIfFound(line, "{", "\n{");
         }
     }
 }
