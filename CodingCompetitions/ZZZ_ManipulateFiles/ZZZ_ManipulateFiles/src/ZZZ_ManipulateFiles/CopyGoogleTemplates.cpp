@@ -22,7 +22,7 @@ void CopyGoogleTemplates::copyTemplatesForOneRound(
         AlbaLocalPathHandler originalFilePathHandler(originalFilePath);
         string newFile(originalFilePathHandler.getFile());
         for (auto const& replacePair : replacePairs) {
-            transformReplaceStringIfFound(newFile, replacePair.first, replacePair.second);
+            replaceAllAndReturnIfFound(newFile, replacePair.first, replacePair.second);
         }
         if (!isStringFoundInsideTheOtherStringCaseSensitive(newFile, "SampleProblem")) {
             AlbaLocalPathHandler newFilePathHandler(destinationPath + "\\" + newFile);
@@ -43,7 +43,7 @@ void CopyGoogleTemplates::replaceStringWithStringOnFile(
         while (inputFileReader.isNotFinished()) {
             string line(inputFileReader.getLine());
             for (auto const& replacePair : replacePairs) {
-                transformReplaceStringIfFound(line, replacePair.first, replacePair.second);
+                replaceAllAndReturnIfFound(line, replacePair.first, replacePair.second);
             }
             outputFile << line << "\n";
         }
