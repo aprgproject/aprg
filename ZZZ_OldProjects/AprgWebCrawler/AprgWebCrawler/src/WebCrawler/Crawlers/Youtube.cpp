@@ -54,7 +54,7 @@ void Youtube::downloadFile(AlbaWebPathHandler const& webLinkPathHandler) {
     AutomatedFirefoxBrowser& firefoxBrowser(AutomatedFirefoxBrowser::getInstance());
 
     string ssYoutubeLink(webLinkPathHandler.getFullPath());
-    stringHelper::transformReplaceStringIfFound(ssYoutubeLink, "youtube", "ssyoutube");
+    stringHelper::replaceAllAndReturnIfFound(ssYoutubeLink, "youtube", "ssyoutube");
     AlbaWebPathHandler ssYoutubeLinkPathHandler(ssYoutubeLink);
 
     firefoxBrowser.createNewTab();

@@ -38,8 +38,8 @@ void WebCrawler::crawlForYoutube_old(string & webLink, ofstream& convertedYoutub
             break;
         }
         string ssYoutubeLink(webLink);
-        stringHelper::transformReplaceStringIfFound(ssYoutubeLink, "ssyoutube", "youtube");
-        stringHelper::transformReplaceStringIfFound(ssYoutubeLink, "youtube", "ssyoutube");
+        stringHelper::replaceAllAndReturnIfFound(ssYoutubeLink, "ssyoutube", "youtube");
+        stringHelper::replaceAllAndReturnIfFound(ssYoutubeLink, "youtube", "ssyoutube");
         AlbaWebPathHandler ssYoutubeLinkPathHandler(ssYoutubeLink);
         cout<<"Enter user input(done, retry):\n";
         //string userInput(getUserInputAfterManuallyUsingMozillaFirefox(ssYoutubeLinkPathHandler));
@@ -98,7 +98,7 @@ LinksForYoutube WebCrawler::getLinkForYoutube(AlbaWebPathHandler const& webLinkP
 {
     LinksForYoutube links;
     string ssYoutubeLink(webLinkPathHandler.getFullPath());
-    stringHelper::transformReplaceStringIfFound(ssYoutubeLink, "youtube", "ssyoutube");
+    stringHelper::replaceAllAndReturnIfFound(ssYoutubeLink, "youtube", "ssyoutube");
     AlbaWebPathHandler ssYoutubeLinkPathHandler(ssYoutubeLink);
     AlbaLocalPathHandler downloadPathHandler(m_downloadDirectoryPathHandler.getDirectory() + R"(\temp.html)");
     downloadFileUsingPhantomJs(ssYoutubeLinkPathHandler, downloadPathHandler);

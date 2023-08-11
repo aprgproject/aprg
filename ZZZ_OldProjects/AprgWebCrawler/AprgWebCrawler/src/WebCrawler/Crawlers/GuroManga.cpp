@@ -34,7 +34,7 @@ void OneDownloadPerPageCrawler::retrieveLinksForGuroManga(AlbaWebPathHandler con
             } else if (
                 isDivClassImage && isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<img src=")")) {
                 m_linkForCurrentFileToDownload = getStringInBetweenTwoStrings(lineInHtmlFile, R"(<img src=")", R"(")");
-                stringHelper::transformReplaceStringIfFound(
+                stringHelper::replaceAllAndReturnIfFound(
                     m_linkForCurrentFileToDownload, R"(&#039;)", R"(')");  // fix tis
                 isDivClassImage = false;
                 cout << m_linkForCurrentFileToDownload << "\n";

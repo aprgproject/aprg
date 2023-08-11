@@ -58,7 +58,7 @@ bool GoogleImages::checkIfGoogleImagesLink(AlbaWebPathHandler const& webLinkPath
 void GoogleImages::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandler) {
     clearLinks();
     string ssGoogleImagesLink(webLinkPathHandler.getFullPath());
-    stringHelper::transformReplaceStringIfFound(ssGoogleImagesLink, "youtube", "ssyoutube");
+    stringHelper::replaceAllAndReturnIfFound(ssGoogleImagesLink, "youtube", "ssyoutube");
     AlbaWebPathHandler ssGoogleImagesLinkPathHandler(ssGoogleImagesLink);
     AlbaLocalPathHandler downloadPathHandler(m_webCrawler.getTemporaryFilePath());
     downloadPathHandler.deleteFile();
