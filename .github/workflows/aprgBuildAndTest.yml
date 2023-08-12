@@ -84,11 +84,12 @@ jobs:
           dir
           cd "Microsoft Visual Studio"
           dir 
-          echo "Finding visual studio script..."
-          dir vcvars64.bat /s
-          echo "Found visual studio script."
           cd "Installer"
           dir 
+          echo "Finding visual studio script..."
+          dir /?
+          dir /S vcvars64.bat
+          echo "Found visual studio script."
           echo "Executing visual studio script..."
           cmd "${{ matrix.config.environment_script }}"
           echo "Finished visual studio script."
@@ -148,6 +149,8 @@ jobs:
       - name: Configure
         shell: bash
         run: |
+          git show-ref --heads
+          git log -n 5 --pretty=format:"%H"
           git fetch origin +refs/heads/*:refs/remotes/origin/*
           recentCommitHash=${{ github.sha }}
           echo "The recentCommitHash is: [$recentCommitHash]"
