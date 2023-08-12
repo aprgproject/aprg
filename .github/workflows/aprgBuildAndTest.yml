@@ -159,14 +159,12 @@ jobs:
         working-directory: AprgCommon/GitHubBuild
         run: |
           cmake --build . --config ${{ matrix.config.build_type }}
-          ls -la
-          pwd
             
       - name: Install
         shell: bash
         working-directory: AprgCommon/GitHubBuild
         run: |
-          cmake --install . --config ${{ matrix.config.build_type }}
+          cmake --install . --config ${{ matrix.config.build_type }} --verbose
           ls -la
           pwd
 
@@ -174,6 +172,7 @@ jobs:
         shell: bash
         run: |
           projectName=$(cmake -P AprgCMakeHelpers/GetProjectName.cmake)
+          echo "projectName: [$projectName]"
           if [ -z "$projectName" ]; then
               exit 1
           fi
