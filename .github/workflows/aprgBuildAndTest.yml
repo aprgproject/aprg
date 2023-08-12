@@ -81,7 +81,6 @@ jobs:
           C:
           dir
           cd "Program Files (x86)"
-          cd "Program Files"
           dir
           cd "Microsoft Visual Studio"
           dir 
