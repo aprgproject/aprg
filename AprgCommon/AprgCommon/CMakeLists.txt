@@ -14,12 +14,11 @@ include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 #Include other projects
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 
-#Add files and directories
-include(${APRG_COMMON_DIR}/cmake/FilesAndDirectories.cmake)
+#Process for files, directories and flags
+include(${APRG_COMMON_DIR}/cmake/FindFilesAndDirectories.cmake)
+include(${APRG_COMMON_DIR}/cmake/AddFlags.cmake)
 
 #Do final steps
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
 add_executable(${OUTFILE} ${APRG_COMMON_SOURCES_AND_TESTS})
 include_directories(${APRG_COMMON_INCLUDE_DIRECTORIES} ${APRG_COMMON_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
 target_link_libraries(${OUTFILE} ${APRG_GTEST_DEPENDENCIES})
