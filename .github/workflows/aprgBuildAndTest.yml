@@ -76,25 +76,9 @@ jobs:
           choco install ninja cmake
           ninja --version
           cmake --version
-          dir
-          cd C:
-          C:
-          dir
-          cd "Program Files (x86)"
-          dir
-          cd "Microsoft Visual Studio"
-          dir 
-          cd "Installer"
-          dir 
-          echo "executing help..."
-          dir /?
-          echo "help done."
-          echo "Finding visual studio script..."
-          dir -s vcvars64.bat
-          echo "Found visual studio script."
-          echo "Executing visual studio script..."
+          echo "Executing visual studio environment script..."
           cmd "${{ matrix.config.environment_script }}"
-          echo "Finished visual studio script."
+          echo "Finished visual studio environment script."
 
       - name: Install dependencies on ubuntu
         if: startsWith(matrix.config.name, 'Ubuntu_Latest_GCC')
@@ -151,8 +135,8 @@ jobs:
       - name: Configure
         shell: bash
         run: |
-          git show-ref --heads
-          git log -n 5 --pretty=format:"%H"
+          echo "$(git show-ref --heads)"
+          echo "$(git log -n 5)"
           git fetch origin +refs/heads/*:refs/remotes/origin/*
           recentCommitHash=${{ github.sha }}
           echo "The recentCommitHash is: [$recentCommitHash]"
