@@ -133,11 +133,6 @@ jobs:
         run: |
           mkdir GitHubBuild
           cd GitHubBuild
-          cmake ../AprgCommon \
-            -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
-            -DCMAKE_C_COMPILER=${{ matrix.config.c_compiler_location }} \
-            -DCMAKE_CXX_COMPILER=${{ matrix.config.cpp_compiler_location }} \
-            -G "${{ matrix.config.generators }}"
             
       - name: Configure for windows
         if: startsWith(matrix.config.os, 'windows')
