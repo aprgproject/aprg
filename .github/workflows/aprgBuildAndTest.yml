@@ -35,8 +35,8 @@ jobs:
             build_type: "Release",
             cc: "gcc",
             cxx: "g++",
-            c_compiler_location: "/usr/bin/gcc",
-            cpp_compiler_location: "/usr/bin/g++",
+            c_compiler_location: "",
+            cpp_compiler_location: "",
             generators: "Ninja"
           }
         - {
@@ -152,7 +152,7 @@ jobs:
           ls -la
           pwd
 
-      - name: Install with Strip
+      - name: Install
         shell: bash
         working-directory: AprgCommon/GitHubBuild
         run: |
