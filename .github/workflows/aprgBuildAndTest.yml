@@ -130,26 +130,32 @@ jobs:
         shell: bash
         run: |
           echo $(git diff --name-only HEAD)
-          cd AprgCommon/AprgCommon
-          mkdir build
-          mkdir installDirectory
-          cmake \
-            -S . \
-            -B . \
+          cd AprgCommon
+          mkdir GitHubBuild
+          mkdir GithubInstall
+          cd AprgCommon
+          cmake ../
             -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
             -G "${{ matrix.config.generators }}" \
-            -DCMAKE_INSTALL_PREFIX:PATH=installDirectory
+            -DCMAKE_INSTALL_PREFIX:PATH=GithubInstall
             
       - name: Build
         shell: bash
-        run: cmake --build . --config ${{ matrix.config.build_type }}
+        run: |
+          ls -la
+          pwd
+          cmake --build . --config ${{ matrix.config.build_type }}
 
       - name: Install with Strip
         shell: bash
-        run: cmake --install . --strip
+        run: |
+          ls -la
+          pwd
+          cmake --install . --strip
 
       - name: Run
         shell: bash
-        working-directory: installDirectory
+        working-directory: GithubInstall
         run: |
           ls -la
+          pwd
