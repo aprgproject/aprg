@@ -25,7 +25,7 @@ jobs:
             cc: "cl",
             cxx: "cl",
             environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat",
-            generators: "Visual Studio 16 2019"
+            generators: "\"Visual Studio 16 2019\""
           }
         - {
             name: "Windows Latest MinGW",
@@ -68,13 +68,15 @@ jobs:
         run: |
           echo github.event.action: ${{ github.event.action }}
           echo github.event_name: ${{ github.event_name }}
+          
       - name: Install dependencies on windows
         if: startsWith(matrix.config.os, 'windows')
         run: |
           choco install ninja cmake
           ninja --version
           cmake --version
-        # cmd "${{ matrix.config.environment_script }}"
+          dir
+          cmd "${{ matrix.config.environment_script }}"
 
       - name: Install dependencies on ubuntu
         if: startsWith(matrix.config.name, 'Ubuntu_Latest_GCC')
@@ -84,6 +86,7 @@ jobs:
           ninja --version
           cmake --version
           gcc --version
+          
       - name: Install dependencies on ubuntu9
         if: startsWith(matrix.config.name, 'Ubuntu_GCC_9')
         run: |
@@ -119,6 +122,7 @@ jobs:
           sudo update-alternatives --install /usr/bin/cmake cmake /opt/cmake/bin/cmake 1 --force
           echo cmake version after
           cmake --version
+          
       - name: Install dependencies on macos
         if: startsWith(matrix.config.os, 'macos')
         run: |
@@ -129,7 +133,7 @@ jobs:
       - name: Configure
         shell: bash
         run: |
-          echo "git diff: [$(git diff --name-only HEAD)]"
+          echo "git diff: [$(git diff --name-only HEAD^ HEAD)]"
           cd AprgCommon
           mkdir GitHubBuild
           mkdir GithubInstall
@@ -147,17 +151,17 @@ jobs:
         shell: bash
         working-directory: AprgCommon/GitHubBuild
         run: |
+          cmake --build . --config ${{ matrix.config.build_type }}
           ls -la
           pwd
-          cmake --build . --config ${{ matrix.config.build_type }}
 
       - name: Install with Strip
         shell: bash
         working-directory: AprgCommon/GitHubBuild
         run: |
+          cmake --install . --strip
           ls -la
           pwd
-          cmake --install . --strip
 
       - name: Run
         shell: bash
