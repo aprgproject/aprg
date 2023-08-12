@@ -145,6 +145,7 @@ jobs:
             
       - name: Build
         shell: bash
+        working-directory: AprgCommon/GitHubBuild
         run: |
           ls -la
           pwd
@@ -152,6 +153,7 @@ jobs:
 
       - name: Install with Strip
         shell: bash
+        working-directory: AprgCommon/GitHubBuild
         run: |
           ls -la
           pwd
@@ -159,7 +161,7 @@ jobs:
 
       - name: Run
         shell: bash
-        working-directory: GithubInstall
+        working-directory: AprgCommon/GithubInstall
         run: |
           ls -la
           pwd
