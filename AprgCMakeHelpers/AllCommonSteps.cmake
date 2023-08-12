@@ -1,4 +1,8 @@
-#Assign macros, common flags, definitions and other common steps
+# Assign macros, common flags, definitions and other common steps
+
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug)
+endif()
 include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
 include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
 include(${APRG_DIR}/AprgCMakeHelpers/CommonFlags.cmake)
