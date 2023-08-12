@@ -172,6 +172,8 @@ jobs:
         run: |
           projectName=$(cmake -P ../../AprgCMakeHelpers/GetProjectName.cmake)
           echo "projectName: [$projectName]"
+          ls -la
+          pwd
           if [ -z "$projectName" ]; then
               exit 1
           fi
