@@ -134,7 +134,7 @@ jobs:
           mkdir GitHubBuild
           mkdir GithubInstall
           cd AprgCommon
-          cmake ../
+          cmake ../GitHubBuild \
             -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
             -G "${{ matrix.config.generators }}" \
             -DCMAKE_INSTALL_PREFIX:PATH=GithubInstall
