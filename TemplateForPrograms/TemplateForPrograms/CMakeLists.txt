@@ -6,7 +6,7 @@ set(OUTFILE ${PROJECT_NAME})
 set(TEMPLATE_FOR_PROGRAMS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 #Comment out TEST_MODE to build static executable, other cmakes check this
-#set(TEST_MODE "ON")
+set(TEST_MODE "ON")
 
 #Locate APRG Directory first because its used on other cmakes
 include(${TEMPLATE_FOR_PROGRAMS_DIR}/cmake/LocateAprgDirectory.cmake)
