@@ -133,7 +133,11 @@ jobs:
           cd AprgCommon
           mkdir GitHubBuild
           mkdir GithubInstall
+          ls-la
+          pwd
           cd AprgCommon
+          ls-la
+          pwd
           cmake ../GitHubBuild \
             -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
             -G "${{ matrix.config.generators }}" \
