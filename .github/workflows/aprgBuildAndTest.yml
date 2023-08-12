@@ -139,7 +139,7 @@ jobs:
             -DCMAKE_CXX_COMPILER=${{ matrix.config.cpp_compiler_location }} \
             -G "${{ matrix.config.generators }}"
             
-      - name: Configure WITHOUT compiler arguments
+      - name: Configure for windows
         if: startsWith(matrix.config.os, 'windows')
         shell: bash
         working-directory: AprgCommon/GitHubBuild
@@ -148,8 +148,8 @@ jobs:
             -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
             -G "${{ matrix.config.generators }}"
             
-      - name: Configure WITH compiler arguments
-        if: ! startsWith(matrix.config.os, 'windows')
+      - name: Configure for ubuntu
+        if: startsWith(matrix.config.os, 'ubuntu')
         shell: bash
         working-directory: AprgCommon/GitHubBuild
         run: |
