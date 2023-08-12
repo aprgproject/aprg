@@ -84,6 +84,7 @@ jobs:
           choco install ninja cmake
           ninja --version
           cmake --version
+          #Not needed to run environment script
           #echo "Executing visual studio environment script..."
           #cmd "${{ matrix.config.environment_script }}"
           #echo "Finished visual studio environment script."
@@ -115,25 +116,37 @@ jobs:
 #          ninja --version
 #          cmake --version
           
-      - name: Configure
+      - name: Fix folders
         shell: bash
+        working-directory: AprgCommon
         run: |
-          revisedFiles=$(git diff --name-only HEAD^)
-          echo "revisedFiles: [$revisedFiles]"
-          cd AprgCommon
           mkdir GitHubBuild
-          mkdir GithubInstall
-          ls -la
-          pwd
           cd GitHubBuild
-          ls -la
-          pwd
           cmake ../AprgCommon \
             -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
             -DCMAKE_C_COMPILER=${{ matrix.config.c_compiler_location }} \
             -DCMAKE_CXX_COMPILER=${{ matrix.config.cpp_compiler_location }} \
-            -G "${{ matrix.config.generators }}" \
-            -DCMAKE_INSTALL_PREFIX:PATH=GithubInstall
+            -G "${{ matrix.config.generators }}"
+            
+      - name: Configure WITHOUT compiler arguments
+        if: startsWith(matrix.config.os, 'windows')
+        shell: bash
+        working-directory: AprgCommon/GitHubBuild
+        run: |
+          cmake ../AprgCommon \
+            -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
+            -G "${{ matrix.config.generators }}"
+            
+      - name: Configure WITH compiler arguments
+        if: !startsWith(matrix.config.os, 'windows')
+        shell: bash
+        working-directory: AprgCommon/GitHubBuild
+        run: |
+          cmake ../AprgCommon \
+            -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
+            -DCMAKE_C_COMPILER=${{ matrix.config.c_compiler_location }} \
+            -DCMAKE_CXX_COMPILER=${{ matrix.config.cpp_compiler_location }} \
+            -G "${{ matrix.config.generators }}"
             
       - name: Build
         shell: bash
@@ -142,10 +155,22 @@ jobs:
           cmake --build . --config ${{ matrix.config.build_type }}
           ls -la
           pwd
+            
+      - name: Install
+        shell: bash
+        working-directory: AprgCommon/GitHubBuild
+        run: |
+          cmake --install . --config ${{ matrix.config.build_type }}
+          ls -la
+          pwd
 
       - name: Run
         shell: bash
-        working-directory: AprgCommon/GithubInstall
         run: |
+          projectName=$(cmake -P AprgCMakeHelpers/GetProjectName.cmake)
+          if [ -z "$projectName" ]; then
+              exit 1
+          fi
+          "./AprgCommon/GitHubBuild/install/bin/$projectName"
           ls -la
           pwd
