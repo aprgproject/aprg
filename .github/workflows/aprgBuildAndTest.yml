@@ -140,7 +140,7 @@ jobs:
             -G "${{ matrix.config.generators }}"
             
       - name: Configure WITHOUT compiler arguments
-        if: matrix.config.os startsWith 'windows'
+        if: startsWith(matrix.config.os, 'windows')
         shell: bash
         working-directory: AprgCommon/GitHubBuild
         run: |
@@ -149,7 +149,7 @@ jobs:
             -G "${{ matrix.config.generators }}"
             
       - name: Configure WITH compiler arguments
-        if: !(matrix.config.os startsWith 'windows')
+        if: !(startsWith(matrix.config.os, 'windows'))
         shell: bash
         working-directory: AprgCommon/GitHubBuild
         run: |
