@@ -1,15 +1,11 @@
 #pragma once
 
-#ifdef OS_WINDOWS  // you could also use __has_include as well
-#include <Common/PathHandler/AlbaWindowsPathHandler.hpp>
-#endif
-
-#ifdef OS_LINUX
+#if defined(OS_APPLE) || defined(OS_LINUX)
 #include <Common/PathHandler/AlbaLinuxPathHandler.hpp>
-#endif
-
-#if !defined(OS_WINDOWS) && !defined(OS_LINUX)
-static_assert(false, "WINDOWS and LINUX are the only supported OS yet.");
+#elif defined(OS_WINDOWS)  // you could also use __has_include as well
+#include <Common/PathHandler/AlbaWindowsPathHandler.hpp>
+#else
+static_assert(false, "The OS is not supported.");
 #endif
 
 #include <Common/PathHandler/PathContantsAndTypes.hpp>
@@ -20,26 +16,22 @@ static_assert(false, "WINDOWS and LINUX are the only supported OS yet.");
 
 namespace alba {
 
-#ifdef OS_WINDOWS
+#if defined(OS_APPLE) || defined(OS_LINUX)
+class AlbaLocalPathHandler : public AlbaLinuxPathHandler
+#elif defined(OS_WINDOWS)
 class AlbaLocalPathHandler : public AlbaWindowsPathHandler
-#endif
-
-#ifdef OS_LINUX
-                             class AlbaLocalPathHandler : public AlbaLinuxPathHandler
 #endif
 
 {
 public:
-#ifdef OS_WINDOWS
-    template <typename... ArgumentTypes>
-    AlbaLocalPathHandler(ArgumentTypes&&... arguments)
-        : AlbaWindowsPathHandler(std::forward<ArgumentTypes>(arguments)...) {}
-#endif
-
-#ifdef OS_LINUX
+#if defined(OS_APPLE) || defined(OS_LINUX)
     template <typename... ArgumentTypes>
     AlbaLocalPathHandler(ArgumentTypes&&... arguments)
         : AlbaLinuxPathHandler(std::forward<ArgumentTypes>(arguments)...) {}
+#elif defined(OS_WINDOWS)
+    template <typename... ArgumentTypes>
+    AlbaLocalPathHandler(ArgumentTypes&&... arguments)
+        : AlbaWindowsPathHandler(std::forward<ArgumentTypes>(arguments)...) {}
 #endif
 
     // rule of zero

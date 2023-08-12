@@ -182,11 +182,10 @@ TEST_F(AlbaFileReaderTest, ReadSingleCharacterFromBinaryFile) {
     EXPECT_EQ('#', fileReader.getCharacter());
     EXPECT_EQ(' ', fileReader.getCharacter());
     EXPECT_EQ('\t', fileReader.getCharacter());
-#ifdef OS_WINDOWS
-    EXPECT_EQ('\r', fileReader.getCharacter());
+#if defined(OS_APPLE) || defined(OS_LINUX)
     EXPECT_EQ('\n', fileReader.getCharacter());
-#endif
-#ifdef OS_LINUX
+#elif defined(OS_WINDOWS)
+    EXPECT_EQ('\r', fileReader.getCharacter());
     EXPECT_EQ('\n', fileReader.getCharacter());
 #endif
     EXPECT_TRUE(fileReader.isNotFinished());
@@ -213,17 +212,7 @@ TEST_F(AlbaFileReaderTest, ReadMultipleCharacters) {
     charPointer = fileReader.getCharacters(numberOfCharacters);
     EXPECT_EQ("!@#", string(charPointer, numberOfCharacters));
     EXPECT_EQ(3U, numberOfCharacters);
-
-#ifdef OS_WINDOWS
-    charPointer = fileReader.getCharacters(numberOfCharacters);
-    EXPECT_EQ(" \t\r", string(charPointer, numberOfCharacters));
-    EXPECT_EQ(3U, numberOfCharacters);
-    EXPECT_TRUE(fileReader.isNotFinished());
-    charPointer = fileReader.getCharacters(numberOfCharacters);
-    EXPECT_EQ("\n", string(charPointer, numberOfCharacters));
-    EXPECT_EQ(1U, numberOfCharacters);
-#endif
-#ifdef OS_LINUX
+#if defined(OS_APPLE) || defined(OS_LINUX)
     charPointer = fileReader.getCharacters(numberOfCharacters);
     EXPECT_EQ(" \t\n", string(charPointer, numberOfCharacters));
     EXPECT_EQ(3U, numberOfCharacters);
@@ -231,6 +220,14 @@ TEST_F(AlbaFileReaderTest, ReadMultipleCharacters) {
     charPointer = fileReader.getCharacters(numberOfCharacters);
     EXPECT_TRUE(string(charPointer, numberOfCharacters).empty());
     EXPECT_EQ(0U, numberOfCharacters);
+#elif defined(OS_WINDOWS)
+    charPointer = fileReader.getCharacters(numberOfCharacters);
+    EXPECT_EQ(" \t\r", string(charPointer, numberOfCharacters));
+    EXPECT_EQ(3U, numberOfCharacters);
+    EXPECT_TRUE(fileReader.isNotFinished());
+    charPointer = fileReader.getCharacters(numberOfCharacters);
+    EXPECT_EQ("\n", string(charPointer, numberOfCharacters));
+    EXPECT_EQ(1U, numberOfCharacters);
 #endif
     EXPECT_FALSE(fileReader.isNotFinished());
 }
