@@ -122,11 +122,6 @@ jobs:
       - name: Configure
         shell: bash
         run: |
-          echo "Show ref: $(git show-ref --heads)"
-          echo "git log: $(git log -n 5)"
-          git fetch origin +refs/heads/*:refs/remotes/origin/*
-          recentCommitHash=${{ github.sha }}
-          echo "The recentCommitHash is: [$recentCommitHash]"
           revisedFiles=$(git diff --name-only HEAD^)
           echo "revisedFiles: [$revisedFiles]"
           cd AprgCommon
@@ -138,9 +133,9 @@ jobs:
           ls -la
           pwd
           cmake ../AprgCommon \
+            -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
             -DCMAKE_C_COMPILER=${{ matrix.config.c_compiler_location }} \
             -DCMAKE_CXX_COMPILER=${{ matrix.config.cpp_compiler_location }} \
-            -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
             -G "${{ matrix.config.generators }}" \
             -DCMAKE_INSTALL_PREFIX:PATH=GithubInstall
             
@@ -149,14 +144,6 @@ jobs:
         working-directory: AprgCommon/GitHubBuild
         run: |
           cmake --build . --config ${{ matrix.config.build_type }}
-          ls -la
-          pwd
-
-      - name: Install
-        shell: bash
-        working-directory: AprgCommon/GitHubBuild
-        run: |
-          cmake --install . --strip
           ls -la
           pwd
 
