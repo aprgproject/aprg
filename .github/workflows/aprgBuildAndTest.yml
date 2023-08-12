@@ -24,8 +24,8 @@ jobs:
             build_type: "Release",
             cc: "cl",
             cxx: "cl",
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat",
-            generators: "\"Visual Studio 16 2019\""
+            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat",
+            generators: "Visual Studio 17 2022"
           }
         - {
             name: "Windows Latest MinGW",
@@ -51,14 +51,15 @@ jobs:
             cxx: "g++",
             generators: "Ninja"
           }
-        - {
-            name: "macOS Latest Clang",
-            os: macos-latest,
-            build_type: "Release",
-            cc: "clang",
-            cxx: "clang++",
-            generators: "Ninja"
-          }
+# MAC OS is not supported
+#        - {
+#            name: "macOS Latest Clang",
+#            os: macos-latest,
+#            build_type: "Release",
+#            cc: "clang",
+#            cxx: "clang++",
+#            generators: "Ninja"
+#          }
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -76,6 +77,16 @@ jobs:
           ninja --version
           cmake --version
           dir
+          cd C:
+          C:
+          dir
+          cd "Program Files (x86)"
+          cd "Program Files"
+          dir
+          cd "Microsoft Visual Studio"
+          dir 
+          cd "2022"
+          dir 
           cmd "${{ matrix.config.environment_script }}"
 
       - name: Install dependencies on ubuntu
