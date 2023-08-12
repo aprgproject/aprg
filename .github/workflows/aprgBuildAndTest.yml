@@ -84,7 +84,7 @@ jobs:
           dir
           cd "Microsoft Visual Studio 14.0"
           dir 
-          cd "2022"
+          cd "SDK"
           dir 
           cmd "${{ matrix.config.environment_script }}"
 
@@ -143,8 +143,8 @@ jobs:
       - name: Configure
         shell: bash
         run: |
-          previous_commit="${{ github.sha }}"
-          echo "previous_commit: [$(previous_commit)]"
+          previous_commit=${{ github.sha }}
+          echo "previous_commit: [$previous_commit]"
           git diff --name-only $previous_commit^ $previous_commit
           echo "git diff: [$(git diff --name-only $previous_commit^ $previous_commit)]"
           cd AprgCommon
