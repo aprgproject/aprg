@@ -8,7 +8,6 @@
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
-				"${workspaceFolderBasename}",
 				"buildWithGcc"
 			],
 			"options": {
@@ -45,7 +44,6 @@
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
-				"${workspaceFolderBasename}",
 				"buildWithClang"
 			],
 			"options": {
@@ -82,7 +80,6 @@
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
-				"${workspaceFolderBasename}",
 				"buildWithClangWithAsan"
 			],
 			"options": {
@@ -119,8 +116,7 @@
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithHighlighting",
-				"${workspaceFolderBasename}",
-				"runFileWithProjectName",
+				"run",
 				"" //"--gtest_filter=*.*"
 			],
 			"options": {
@@ -136,7 +132,6 @@
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
-				"${workspaceFolderBasename}",
 				"clean"
 			],
 			"options": {
@@ -175,9 +170,26 @@
 			"dependsOn": "Configure locally with cmake and MSVC"
 		},
 		{
+			"label": "Install locally the MSVC build",
+			"type": "shell",
+			"command": "cmake",
+			"args": [
+				"--install",
+				"../VisualStudioBuild",
+				"--config Debug"
+			],
+			"group": "build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+			"problemMatcher": "$msCompile",
+			"dependsOn": "Build locally with MSVC"
+		},
+		{
 			"label": "Run the local MSVC target",
 			"type": "shell",
-			"command": "${workspaceFolder}/../VisualStudioBuild/build/visualstudio-windows-msvc-debug/Debug/${workspaceFolderBasename}.exe",
+			"command": "${workspaceFolder}/../VisualStudioBuild/install/bin/${workspaceFolderBasename}.exe",
 			"args": [
 				"" //"--gtest_filter=*.*"
 			],
@@ -187,7 +199,7 @@
 				"panel": "shared"
 			},
 			"problemMatcher": [],
-			"dependsOn": "Build locally with MSVC"
+			"dependsOn": "Install locally the MSVC build"
 		}
 	]
 }

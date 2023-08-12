@@ -11,8 +11,7 @@
             "program": "./.vscode/runWslCommonScript.sh",
             "args": [
                 "outputWithHighlighting",
-                "${workspaceFolderBasename}",
-                "runFileWithProjectName",
+                "run",
                 "" //"--gtest_filter=*.*"
             ],
             "cwd": "${workspaceFolder}",
@@ -39,7 +38,7 @@
             "name": "Run the local MSVC target",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/../VisualStudioBuild/build/visualstudio-windows-msvc-debug/Debug/${workspaceFolderBasename}.exe",
+            "program": "${workspaceFolder}/../VisualStudioBuild/install/bin/${workspaceFolderBasename}.exe",
             "args": [
                 "" //"--gtest_filter=*.*"
             ],
@@ -47,6 +46,7 @@
             "cwd": "${workspaceFolder}",
             "environment": [],
             "console": "integratedTerminal",
+            "preLaunchTask": "Install locally the MSVC build",
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
