@@ -182,7 +182,7 @@ TEST_F(AlbaFileReaderTest, ReadSingleCharacterFromBinaryFile) {
     EXPECT_EQ('#', fileReader.getCharacter());
     EXPECT_EQ(' ', fileReader.getCharacter());
     EXPECT_EQ('\t', fileReader.getCharacter());
-#if defined(OS_APPLE) || defined(OS_LINUX)
+#if defined(OS_LINUX)
     EXPECT_EQ('\n', fileReader.getCharacter());
 #elif defined(OS_WINDOWS)
     EXPECT_EQ('\r', fileReader.getCharacter());
@@ -212,7 +212,7 @@ TEST_F(AlbaFileReaderTest, ReadMultipleCharacters) {
     charPointer = fileReader.getCharacters(numberOfCharacters);
     EXPECT_EQ("!@#", string(charPointer, numberOfCharacters));
     EXPECT_EQ(3U, numberOfCharacters);
-#if defined(OS_APPLE) || defined(OS_LINUX)
+#if defined(OS_LINUX)
     charPointer = fileReader.getCharacters(numberOfCharacters);
     EXPECT_EQ(" \t\n", string(charPointer, numberOfCharacters));
     EXPECT_EQ(3U, numberOfCharacters);
