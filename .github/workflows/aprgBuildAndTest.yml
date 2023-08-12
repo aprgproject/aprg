@@ -86,8 +86,9 @@ jobs:
           dir 
           cd "Installer"
           dir 
+          echo "executing help..."
           dir /?
-          ls -la
+          echo "help done."
           echo "Finding visual studio script..."
           dir -s vcvars64.bat
           echo "Found visual studio script."
@@ -155,7 +156,7 @@ jobs:
           git fetch origin +refs/heads/*:refs/remotes/origin/*
           recentCommitHash=${{ github.sha }}
           echo "The recentCommitHash is: [$recentCommitHash]"
-          recentChanges=$(git diff "$recentCommitHash")
+          recentChanges=$(git diff --name-only "$recentCommitHash")
           echo "recentChanges: [$recentChanges]"
           cd AprgCommon
           mkdir GitHubBuild
