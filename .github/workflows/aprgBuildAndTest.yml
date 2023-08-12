@@ -86,9 +86,10 @@ jobs:
           dir 
           cd "Installer"
           dir 
-          echo "Finding visual studio script..."
           dir /?
-          dir /S vcvars64.bat
+          ls -la
+          echo "Finding visual studio script..."
+          dir -s vcvars64.bat
           echo "Found visual studio script."
           echo "Executing visual studio script..."
           cmd "${{ matrix.config.environment_script }}"
@@ -154,7 +155,7 @@ jobs:
           git fetch origin +refs/heads/*:refs/remotes/origin/*
           recentCommitHash=${{ github.sha }}
           echo "The recentCommitHash is: [$recentCommitHash]"
-          recentChanges=$(git diff --name-only "${recentCommitHash}^" "$recentCommitHash")
+          recentChanges=$(git diff "$recentCommitHash")
           echo "recentChanges: [$recentChanges]"
           cd AprgCommon
           mkdir GitHubBuild
