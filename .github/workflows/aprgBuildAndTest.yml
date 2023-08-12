@@ -170,7 +170,7 @@ jobs:
         shell: bash
         working-directory: AprgCommon/GitHubBuild
         run: |
-          projectName=$(cmake -P ../../AprgCMakeHelpers/GetProjectName.cmake)
+          projectName=$(cmake . -P ../../AprgCMakeHelpers/GetProjectName.cmake)
           echo "projectName: [$projectName]"
           ls -la
           pwd
