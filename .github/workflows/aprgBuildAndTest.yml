@@ -119,7 +119,6 @@ jobs:
           cmake --version
           clang --version
           
-
 # MAC OS is not supported          
 #      - name: Install dependencies on macos
 #        if: startsWith(matrix.config.os, 'macos')
@@ -128,10 +127,22 @@ jobs:
 #          ninja --version
 #          cmake --version
             
+      - name: Prepare aprg directories and scripts
+        shell: bash
+        run: |
+          aprgDirectory=$(realpath "$(pwd)")
+          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
+          echo "aprgDirectory: [$aprgDirectory]"
+          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
+          chmod +x $buildAndRunScriptPath
+          cd AprgCommon/AprgCommon
+            
       - name: Configure for windows
         if: startsWith(matrix.config.os, 'windows')
         shell: bash
         run: |
+          echo "aprgDirectory: [$aprgDirectory]"
+          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           aprgDirectory=$(realpath "$(pwd)")
           buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
           echo "aprgDirectory: [$aprgDirectory]"
@@ -173,8 +184,6 @@ jobs:
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
           cd AprgCommon/AprgCommon
-          pwd
-          ls -la
           $buildAndRunScriptPath build GithubBuild Debug
             
       - name: Install
@@ -186,8 +195,6 @@ jobs:
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
           cd AprgCommon/AprgCommon
-          pwd
-          ls -la
           $buildAndRunScriptPath install GithubBuild Debug
 
       - name: Run
@@ -199,6 +206,4 @@ jobs:
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
           cd AprgCommon/AprgCommon
-          pwd
-          ls -la
           $buildAndRunScriptPath run GithubBuild
