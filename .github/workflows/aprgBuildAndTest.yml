@@ -133,22 +133,28 @@ jobs:
         shell: bash
         run: |
           cd AprgCommon
+          pwd
+          ls -la
+          "./AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh" configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
           ${{ env.buildAndRunScript }}" configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
-          ./AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Configure for ubuntu/gcc
         if: matrix.config.name == 'UbuntuLatestGcc'
         shell: bash
         run: |
           cd AprgCommon
-          ./AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}""
+          pwd
+          ls -la
+          "./AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh" configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}""
             
       - name: Configure for ubuntu/clang
         if: matrix.config.name == 'UbuntuLatestClang'
         shell: bash
         run: |
           cd AprgCommon
-          ./AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh configureWithClang GithubBuild Debug "${{ matrix.config.generators }}"
+          pwd
+          ls -la
+          "./AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh" configureWithClang GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Build
         shell: bash
