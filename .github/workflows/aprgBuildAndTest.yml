@@ -177,40 +177,46 @@ jobs:
         shell: bash
         working-directory: AprgCommon/GitHubBuild
         run: |
-          aprgDirectory=$(realpath "$(pwd)")
-          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
-          echo "aprgDirectory: [$aprgDirectory]"
-          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          chmod +x $buildAndRunScriptPath
-          cd AprgCommon/AprgCommon
           pwd
           ls -la
-          $buildAndRunScriptPath build GithubBuild Debug
+#          aprgDirectory=$(realpath "$(pwd)")
+#          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
+#          echo "aprgDirectory: [$aprgDirectory]"
+#          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
+#          chmod +x $buildAndRunScriptPath
+#          cd AprgCommon/AprgCommon
+#          pwd
+#          ls -la
+#          $buildAndRunScriptPath build GithubBuild Debug
             
       - name: Install
         shell: bash
         working-directory: AprgCommon/GitHubBuild
         run: |
-          aprgDirectory=$(realpath "$(pwd)")
-          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
-          echo "aprgDirectory: [$aprgDirectory]"
-          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          chmod +x $buildAndRunScriptPath
-          cd AprgCommon/AprgCommon
           pwd
           ls -la
-          $buildAndRunScriptPath install GithubBuild Debug
+#          aprgDirectory=$(realpath "$(pwd)")
+#          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
+#          echo "aprgDirectory: [$aprgDirectory]"
+#          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
+#          chmod +x $buildAndRunScriptPath
+#          cd AprgCommon/AprgCommon
+#          pwd
+#          ls -la
+#          $buildAndRunScriptPath install GithubBuild Debug
 
       - name: Run
         shell: bash
         working-directory: AprgCommon/GitHubBuild
         run: |
-          aprgDirectory=$(realpath "$(pwd)")
-          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
-          echo "aprgDirectory: [$aprgDirectory]"
-          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          chmod +x $buildAndRunScriptPath
-          cd AprgCommon/AprgCommon
           pwd
           ls -la
-          $buildAndRunScriptPath run GithubBuild
+#          aprgDirectory=$(realpath "$(pwd)")
+#          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
+#          echo "aprgDirectory: [$aprgDirectory]"
+#          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
+#          chmod +x $buildAndRunScriptPath
+#          cd AprgCommon/AprgCommon
+#          pwd
+#          ls -la
+#          $buildAndRunScriptPath run GithubBuild
