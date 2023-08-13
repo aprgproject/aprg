@@ -132,47 +132,76 @@ jobs:
         if: startsWith(matrix.config.os, 'windows')
         shell: bash
         run: |
+          aprgDirectory=$(realpath "$(pwd)")
+          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
+          echo "aprgDirectory: [$aprgDirectory]"
+          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           cd AprgCommon
           pwd
           ls -la
-          "./AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh" configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
-          ${{ env.buildAndRunScript }}" configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
+          $buildAndRunScriptPath configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Configure for ubuntu/gcc
         if: matrix.config.name == 'UbuntuLatestGcc'
         shell: bash
         run: |
+          aprgDirectory=$(realpath "$(pwd)")
+          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
+          echo "aprgDirectory: [$aprgDirectory]"
+          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           cd AprgCommon
           pwd
           ls -la
-          "./AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh" configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}""
+          $buildAndRunScriptPath configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}""
             
       - name: Configure for ubuntu/clang
         if: matrix.config.name == 'UbuntuLatestClang'
         shell: bash
         run: |
+          aprgDirectory=$(realpath "$(pwd)")
+          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
+          echo "aprgDirectory: [$aprgDirectory]"
+          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           cd AprgCommon
           pwd
           ls -la
-          "./AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh" configureWithClang GithubBuild Debug "${{ matrix.config.generators }}"
+          $buildAndRunScriptPath configureWithClang GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Build
         shell: bash
         working-directory: AprgCommon/GitHubBuild
         run: |
+          aprgDirectory=$(realpath "$(pwd)")
+          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
+          echo "aprgDirectory: [$aprgDirectory]"
+          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           cd AprgCommon
-          ./AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh build GithubBuild Debug
+          pwd
+          ls -la
+          $buildAndRunScriptPath build GithubBuild Debug
             
       - name: Install
         shell: bash
         working-directory: AprgCommon/GitHubBuild
         run: |
+          aprgDirectory=$(realpath "$(pwd)")
+          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
+          echo "aprgDirectory: [$aprgDirectory]"
+          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           cd AprgCommon
-          ./AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh install GithubBuild Debug
+          pwd
+          ls -la
+          $buildAndRunScriptPath install GithubBuild Debug
 
       - name: Run
         shell: bash
         working-directory: AprgCommon/GitHubBuild
         run: |
+          aprgDirectory=$(realpath "$(pwd)")
+          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
+          echo "aprgDirectory: [$aprgDirectory]"
+          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           cd AprgCommon
-          ./AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh run GithubBuild
+          pwd
+          ls -la
+          $buildAndRunScriptPath run GithubBuild
