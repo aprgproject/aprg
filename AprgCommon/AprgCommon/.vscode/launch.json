@@ -12,12 +12,14 @@
             "args": [
                 "outputWithHighlighting",
                 "run",
+                "Debug",
+                "WslBuild",
                 "" //"--gtest_filter=*.*"
             ],
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
-            "preLaunchTask": "Build In WSL Using Clang With Asan",
+            "preLaunchTask": "Install In WSL",
             "runtimeExecutable": "wsl",
             "runtimeArgs": [
                 "bash"
@@ -26,9 +28,6 @@
             "stopOnEntry": true,
             "outFiles": [],
             "sourceMaps": false,
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"

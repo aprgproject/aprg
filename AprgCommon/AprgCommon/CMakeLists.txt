@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-#set project details
+#Set project details
 project(AprgCommon C CXX)
 set(OUTFILE ${PROJECT_NAME})
 set(APRG_COMMON_DIR ${CMAKE_CURRENT_SOURCE_DIR})
@@ -23,6 +23,6 @@ add_executable(${OUTFILE} ${APRG_COMMON_SOURCES_AND_TESTS})
 include_directories(${APRG_COMMON_INCLUDE_DIRECTORIES} ${APRG_COMMON_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
 target_link_libraries(${OUTFILE} ${APRG_GTEST_DEPENDENCIES})
 add_test(${OUTFILE} ${OUTFILE})
-install(TARGETS ${OUTFILE} DESTINATION)
+install(TARGETS ${OUTFILE} DESTINATION bin)
 include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
 
