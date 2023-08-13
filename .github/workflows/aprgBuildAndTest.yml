@@ -138,8 +138,6 @@ jobs:
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
           cd AprgCommon/AprgCommon
-          pwd
-          ls -la
           $buildAndRunScriptPath configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Configure for ubuntu/gcc
@@ -152,12 +150,7 @@ jobs:
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
           cd AprgCommon/AprgCommon
-          pwd
-          ls -la
           $buildAndRunScriptPath configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}"
-          cd $aprgDirectory/AprgCommon/GithubBuild
-          pwd
-          ls -la
             
       - name: Configure for ubuntu/clang
         if: matrix.config.name == 'UbuntuLatestClang'
@@ -168,52 +161,44 @@ jobs:
           echo "aprgDirectory: [$aprgDirectory]"
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
-          cd AprgCommon/AprgCommon/GithubBuild
-          pwd
-          ls -la
+          cd AprgCommon/AprgCommon
           $buildAndRunScriptPath configureWithClang GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Build
         shell: bash
         run: |
+          aprgDirectory=$(realpath "$(pwd)")
+          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
+          echo "aprgDirectory: [$aprgDirectory]"
+          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
+          chmod +x $buildAndRunScriptPath
+          cd AprgCommon/AprgCommon
           pwd
           ls -la
-#          aprgDirectory=$(realpath "$(pwd)")
-#          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
-#          echo "aprgDirectory: [$aprgDirectory]"
-#          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-#          chmod +x $buildAndRunScriptPath
-#          cd AprgCommon/AprgCommon
-#          pwd
-#          ls -la
-#          $buildAndRunScriptPath build GithubBuild Debug
+          $buildAndRunScriptPath build GithubBuild Debug
             
       - name: Install
         shell: bash
         run: |
+          aprgDirectory=$(realpath "$(pwd)")
+          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
+          echo "aprgDirectory: [$aprgDirectory]"
+          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
+          chmod +x $buildAndRunScriptPath
+          cd AprgCommon/AprgCommon
           pwd
           ls -la
-#          aprgDirectory=$(realpath "$(pwd)")
-#          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
-#          echo "aprgDirectory: [$aprgDirectory]"
-#          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-#          chmod +x $buildAndRunScriptPath
-#          cd AprgCommon/AprgCommon
-#          pwd
-#          ls -la
-#          $buildAndRunScriptPath install GithubBuild Debug
+          $buildAndRunScriptPath install GithubBuild Debug
 
       - name: Run
         shell: bash
         run: |
+          aprgDirectory=$(realpath "$(pwd)")
+          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
+          echo "aprgDirectory: [$aprgDirectory]"
+          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
+          chmod +x $buildAndRunScriptPath
+          cd AprgCommon/AprgCommon
           pwd
           ls -la
-#          aprgDirectory=$(realpath "$(pwd)")
-#          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
-#          echo "aprgDirectory: [$aprgDirectory]"
-#          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-#          chmod +x $buildAndRunScriptPath
-#          cd AprgCommon/AprgCommon
-#          pwd
-#          ls -la
-#          $buildAndRunScriptPath run GithubBuild
+          $buildAndRunScriptPath run GithubBuild
