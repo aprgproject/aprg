@@ -9,8 +9,9 @@
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
 				"configureWithGcc",
+				"WslBuild",
 				"Debug",
-				"WslBuild"
+				"Ninja"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -47,8 +48,9 @@
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
 				"configureWithClang",
+				"WslBuild",
 				"Debug",
-				"WslBuild"
+				"Ninja"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -85,8 +87,9 @@
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
 				"configureWithClangWithAsan",
+				"WslBuild",
 				"Debug",
-				"WslBuild"
+				"Ninja"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -123,8 +126,8 @@
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
 				"build",
-				"Debug",
-				"WslBuild"
+				"WslBuild",
+				"Debug"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -162,8 +165,8 @@
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
 				"install",
-				"Debug",
-				"WslBuild"
+				"WslBuild",
+				"Debug"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -201,7 +204,6 @@
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithHighlighting",
 				"run",
-				"Debug",
 				"WslBuild",
 				"" //"--gtest_filter=*.*"
 			],
@@ -220,8 +222,8 @@
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
 				"clean",
-				"Debug",
 				"WslBuild",
+				"Debug"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"

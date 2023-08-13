@@ -12,7 +12,6 @@
             "args": [
                 "outputWithHighlighting",
                 "run",
-                "Debug",
                 "WslBuild",
                 "" //"--gtest_filter=*.*"
             ],
