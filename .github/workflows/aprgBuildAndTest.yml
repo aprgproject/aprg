@@ -155,7 +155,7 @@ jobs:
           pwd
           ls -la
           $buildAndRunScriptPath configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}"
-          cd $aprgDirectory/AprgCommon
+          cd $aprgDirectory/AprgCommon/GitHubBuild
           pwd
           ls -la
             
@@ -168,14 +168,13 @@ jobs:
           echo "aprgDirectory: [$aprgDirectory]"
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
-          cd AprgCommon/AprgCommon
+          cd AprgCommon/AprgCommon/GithubBuild
           pwd
           ls -la
           $buildAndRunScriptPath configureWithClang GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Build
         shell: bash
-        working-directory: AprgCommon/GitHubBuild
         run: |
           pwd
           ls -la
@@ -191,7 +190,6 @@ jobs:
             
       - name: Install
         shell: bash
-        working-directory: AprgCommon/GitHubBuild
         run: |
           pwd
           ls -la
@@ -207,7 +205,6 @@ jobs:
 
       - name: Run
         shell: bash
-        working-directory: AprgCommon/GitHubBuild
         run: |
           pwd
           ls -la
