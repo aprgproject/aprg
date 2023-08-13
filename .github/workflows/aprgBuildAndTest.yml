@@ -155,6 +155,9 @@ jobs:
           pwd
           ls -la
           $buildAndRunScriptPath configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}"
+          cd $aprgDirectory/AprgCommon/GitHubBuild
+          pwd
+          ls -la
             
       - name: Configure for ubuntu/clang
         if: matrix.config.name == 'UbuntuLatestClang'
