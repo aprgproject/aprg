@@ -137,7 +137,7 @@ jobs:
           echo "aprgDirectory: [$aprgDirectory]"
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
-          cd AprgCommon
+          cd AprgCommon/AprgCommon
           pwd
           ls -la
           $buildAndRunScriptPath configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
@@ -151,7 +151,7 @@ jobs:
           echo "aprgDirectory: [$aprgDirectory]"
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
-          cd AprgCommon
+          cd AprgCommon/AprgCommon
           pwd
           ls -la
           $buildAndRunScriptPath configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}"
@@ -165,7 +165,7 @@ jobs:
           echo "aprgDirectory: [$aprgDirectory]"
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
-          cd AprgCommon
+          cd AprgCommon/AprgCommon
           pwd
           ls -la
           $buildAndRunScriptPath configureWithClang GithubBuild Debug "${{ matrix.config.generators }}"
@@ -179,7 +179,7 @@ jobs:
           echo "aprgDirectory: [$aprgDirectory]"
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
-          cd AprgCommon
+          cd AprgCommon/AprgCommon
           pwd
           ls -la
           $buildAndRunScriptPath build GithubBuild Debug
@@ -193,7 +193,7 @@ jobs:
           echo "aprgDirectory: [$aprgDirectory]"
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
-          cd AprgCommon
+          cd AprgCommon/AprgCommon
           pwd
           ls -la
           $buildAndRunScriptPath install GithubBuild Debug
@@ -207,7 +207,7 @@ jobs:
           echo "aprgDirectory: [$aprgDirectory]"
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
-          cd AprgCommon
+          cd AprgCommon/AprgCommon
           pwd
           ls -la
           $buildAndRunScriptPath run GithubBuild
