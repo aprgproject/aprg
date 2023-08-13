@@ -136,6 +136,7 @@ jobs:
           buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
           echo "aprgDirectory: [$aprgDirectory]"
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
+          chmod +x $buildAndRunScriptPath
           cd AprgCommon
           pwd
           ls -la
@@ -150,7 +151,7 @@ jobs:
           echo "aprgDirectory: [$aprgDirectory]"
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
-          cd $aprgDirectory/AllCommonScripts/BuildAndRunScripts/
+          cd AprgCommon
           pwd
           ls -la
           $buildAndRunScriptPath configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}"
@@ -163,6 +164,7 @@ jobs:
           buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
           echo "aprgDirectory: [$aprgDirectory]"
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
+          chmod +x $buildAndRunScriptPath
           cd AprgCommon
           pwd
           ls -la
@@ -176,6 +178,7 @@ jobs:
           buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
           echo "aprgDirectory: [$aprgDirectory]"
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
+          chmod +x $buildAndRunScriptPath
           cd AprgCommon
           pwd
           ls -la
@@ -189,6 +192,7 @@ jobs:
           buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
           echo "aprgDirectory: [$aprgDirectory]"
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
+          chmod +x $buildAndRunScriptPath
           cd AprgCommon
           pwd
           ls -la
@@ -202,6 +206,7 @@ jobs:
           buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
           echo "aprgDirectory: [$aprgDirectory]"
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
+          chmod +x $buildAndRunScriptPath
           cd AprgCommon
           pwd
           ls -la
