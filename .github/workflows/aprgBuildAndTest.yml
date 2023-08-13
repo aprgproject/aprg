@@ -155,7 +155,7 @@ jobs:
           pwd
           ls -la
           $buildAndRunScriptPath configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}"
-          cd $aprgDirectory/AprgCommon/GitHubBuild
+          cd $aprgDirectory/AprgCommon/GithubBuild
           pwd
           ls -la
             
