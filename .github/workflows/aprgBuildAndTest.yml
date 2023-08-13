@@ -149,10 +149,10 @@ jobs:
           buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
           echo "aprgDirectory: [$aprgDirectory]"
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          cd AprgCommon
+          cd $aprgDirectory/AllCommonScripts/BuildAndRunScripts/
           pwd
           ls -la
-          $buildAndRunScriptPath configureWithGcc GithubBuild Debug ${{ matrix.config.generators }}"
+          $buildAndRunScriptPath configureWithGcc GithubBuild Debug ${{ matrix.config.generators }}
             
       - name: Configure for ubuntu/clang
         if: matrix.config.name == 'UbuntuLatestClang'
