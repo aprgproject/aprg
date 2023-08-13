@@ -139,7 +139,7 @@ jobs:
           cd AprgCommon
           pwd
           ls -la
-          $buildAndRunScriptPath configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
+          $buildAndRunScriptPath configureWithDefaultCompiler GithubBuild Debug ${{ matrix.config.generators }}
             
       - name: Configure for ubuntu/gcc
         if: matrix.config.name == 'UbuntuLatestGcc'
@@ -152,7 +152,7 @@ jobs:
           cd AprgCommon
           pwd
           ls -la
-          $buildAndRunScriptPath configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}""
+          $buildAndRunScriptPath configureWithGcc GithubBuild Debug ${{ matrix.config.generators }}"
             
       - name: Configure for ubuntu/clang
         if: matrix.config.name == 'UbuntuLatestClang'
@@ -165,7 +165,7 @@ jobs:
           cd AprgCommon
           pwd
           ls -la
-          $buildAndRunScriptPath configureWithClang GithubBuild Debug "${{ matrix.config.generators }}"
+          $buildAndRunScriptPath configureWithClang GithubBuild Debug ${{ matrix.config.generators }}
             
       - name: Build
         shell: bash
