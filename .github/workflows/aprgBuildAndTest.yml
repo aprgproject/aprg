@@ -4,7 +4,7 @@ on:
     paths:
       - '**'
 env:
-  buildAndRunScript: "./AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
+  buildAndRunScriptRelativePath: ${{ env.buildAndRunScriptRelativePath }}
 
 jobs:
 
@@ -130,9 +130,7 @@ jobs:
       - name: Prepare aprg directories and scripts
         shell: bash
         run: |
-          aprgDirectory=$(realpath "$(pwd)")
-          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
-          echo "aprgDirectory: [$aprgDirectory]"
+          buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
           cd AprgCommon/AprgCommon
@@ -141,13 +139,8 @@ jobs:
         if: startsWith(matrix.config.os, 'windows')
         shell: bash
         run: |
-          echo "aprgDirectory: [$aprgDirectory]"
+          buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          aprgDirectory=$(realpath "$(pwd)")
-          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
-          echo "aprgDirectory: [$aprgDirectory]"
-          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          chmod +x $buildAndRunScriptPath
           cd AprgCommon/AprgCommon
           $buildAndRunScriptPath configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
             
@@ -155,11 +148,8 @@ jobs:
         if: matrix.config.name == 'UbuntuLatestGcc'
         shell: bash
         run: |
-          aprgDirectory=$(realpath "$(pwd)")
-          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
-          echo "aprgDirectory: [$aprgDirectory]"
+          buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          chmod +x $buildAndRunScriptPath
           cd AprgCommon/AprgCommon
           $buildAndRunScriptPath configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}"
             
@@ -167,43 +157,31 @@ jobs:
         if: matrix.config.name == 'UbuntuLatestClang'
         shell: bash
         run: |
-          aprgDirectory=$(realpath "$(pwd)")
-          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
-          echo "aprgDirectory: [$aprgDirectory]"
+          buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          chmod +x $buildAndRunScriptPath
           cd AprgCommon/AprgCommon
           $buildAndRunScriptPath configureWithClang GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Build
         shell: bash
         run: |
-          aprgDirectory=$(realpath "$(pwd)")
-          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
-          echo "aprgDirectory: [$aprgDirectory]"
+          buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          chmod +x $buildAndRunScriptPath
           cd AprgCommon/AprgCommon
           $buildAndRunScriptPath build GithubBuild Debug
             
       - name: Install
         shell: bash
         run: |
-          aprgDirectory=$(realpath "$(pwd)")
-          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
-          echo "aprgDirectory: [$aprgDirectory]"
+          buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          chmod +x $buildAndRunScriptPath
           cd AprgCommon/AprgCommon
           $buildAndRunScriptPath install GithubBuild Debug
 
       - name: Run
         shell: bash
         run: |
-          aprgDirectory=$(realpath "$(pwd)")
-          buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
-          echo "aprgDirectory: [$aprgDirectory]"
+          buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          chmod +x $buildAndRunScriptPath
           cd AprgCommon/AprgCommon
           $buildAndRunScriptPath run GithubBuild
