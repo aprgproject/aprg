@@ -39,7 +39,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: ${{ needs.detectGitChanges.outputs.projectsToBuild }}
+        project: [AprgCommon/AprgCommon,AprgMath/AprgMath]
         config: 
         - {
             name: "WindowsLatestMsvc",
