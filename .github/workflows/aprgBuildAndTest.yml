@@ -148,38 +148,38 @@ jobs:
       - name: Configure for windows
         if: startsWith(matrix.config.os, 'windows')
         shell: bash
+        working-directory: ${{ matrix.project }}
         run: |
-          cd ${{ matrix.project }}
           $buildAndRunScriptPath configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Configure for ubuntu/gcc
         if: matrix.config.name == 'UbuntuLatestGcc'
         shell: bash
+        working-directory: ${{ matrix.project }}
         run: |
-          cd ${{ matrix.project }}
           $buildAndRunScriptPath configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Configure for ubuntu/clang
         if: matrix.config.name == 'UbuntuLatestClang'
         shell: bash
+        working-directory: ${{ matrix.project }}
         run: |
-          cd ${{ matrix.project }}
           $buildAndRunScriptPath configureWithClang GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Build
         shell: bash
+        working-directory: ${{ matrix.project }}
         run: |
-          cd ${{ matrix.project }}
           $buildAndRunScriptPath build GithubBuild Debug
             
       - name: Install
         shell: bash
+        working-directory: ${{ matrix.project }}
         run: |
-          cd ${{ matrix.project }}
           $buildAndRunScriptPath install GithubBuild Debug
 
       - name: Run
         shell: bash
+        working-directory: ${{ matrix.project }}
         run: |
-          cd ${{ matrix.project }}
           $buildAndRunScriptPath run GithubBuild
