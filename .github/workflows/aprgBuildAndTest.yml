@@ -42,7 +42,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: ${{ needs.detectGitChanges.outputs.projectsToBuild[1:2] }}
+        project: ${{ needs.detectGitChanges.outputs.projectsToBuild }}[1:2]
         config: 
         - {
             name: "WindowsLatestMsvc",
