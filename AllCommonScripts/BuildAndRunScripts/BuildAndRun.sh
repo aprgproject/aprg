@@ -25,7 +25,7 @@ fi
 scriptPrint $scriptName $LINENO "The scriptPath is [$scriptPath]."
 scriptPrint $scriptName $LINENO "The scriptOption is [$scriptOption]."
 scriptPrint $scriptName $LINENO "The buildDirectoryName is [$buildDirectoryName]."
-scriptPrint $scriptName $LINENO "The argument1 is [$argument1], argument2 is [$argument2]."
+scriptPrint $scriptName $LINENO "The argument1 is [$argument1] and argument2 is [$argument2]."
 scriptPrint $scriptName $LINENO "The immediateDirectoryName is [$immediateDirectoryName]."
 
 # Setup folders for compilation

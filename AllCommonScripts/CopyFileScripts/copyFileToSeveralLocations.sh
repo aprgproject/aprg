@@ -12,6 +12,11 @@ if [ -z "$2" ]; then
 else
 	fileToCopy=$(realpath "$(pwd)/$2")
 fi
+if [ "$3" == "DeleteOriginalLocatorFiles" ]; then
+	deleteOption="DeleteOriginalLocatorFiles"
+else
+	deleteOption=""
+fi
 skipRegexPattern="\/aprg\/Python\/|\/aprg\/AllCommonScripts\/"
 shortenedPathLengthForDisplay=50
 
@@ -41,6 +46,9 @@ for locationPath in "${locationPaths[@]}"; do
 		locationDirectory=$(dirname "$locationPath")
 		shortenedLocationPath=$(echo "$locationDirectory" | tail -c $shortenedPathLengthForDisplay)
         scriptPrint $scriptName $LINENO "-> to [...$shortenedLocationPath]."
+        if [ "$3" == "DeleteOriginalLocatorFiles" ]; then
+            rm -f "$locationPath"
+        fi
         cp -f "$fileToCopy" "$locationDirectory"
 	fi
 done
