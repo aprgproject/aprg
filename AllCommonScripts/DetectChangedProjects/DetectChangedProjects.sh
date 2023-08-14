@@ -43,6 +43,11 @@ for cmakelistDirectoriesSetItem in "${!cmakelistDirectoriesSet[@]}"; do
     fi
 done
 
+# Add AprgCommon if empty
+if [[ -z $cmakelistDirectories ]]; then
+	cmakelistDirectories="\"AprgCommon/AprgCommon\""
+fi
+
 # Save the value for Github Workflow
 scriptPrint "$scriptName" "$LINENO" "The cmakelistDirectories are: [$cmakelistDirectories]"
 echo "APRG_CMAKELIST_DIRECTORIES=[$cmakelistDirectories]" >> "$GITHUB_OUTPUT"
