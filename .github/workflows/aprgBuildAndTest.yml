@@ -24,6 +24,7 @@ jobs:
         run: |
           detectChangedProjectsPath=$(realpath "$(pwd)/${{ env.detectChangedProjectsRelativePath }}")
           echo "detectChangedProjectsPath: [$detectChangedProjectsPath]"
+          chmod +x $detectChangedProjectsPath
           $detectChangedProjectsPath
           
           
