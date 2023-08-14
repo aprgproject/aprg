@@ -13,7 +13,7 @@ jobs:
     name: Detect Git Changes
     runs-on: ubuntu-latest
     outputs:
-      projectsToBuild: ${{ steps.idOfDetectGitChanges.outputs.detectedProjects }}
+      projectsToBuild: ${{ steps.idOfDetectGitChanges.outputs.APRG_CHANGED_DIRECTORIES }}
     steps:
       - name: Checkout code for changes checking
         id: idOfCheckout
@@ -28,8 +28,7 @@ jobs:
           detectChangedProjectsPath=$(realpath "$(pwd)/${{ env.detectChangedProjectsRelativePath }}")
           echo "detectChangedProjectsPath: [$detectChangedProjectsPath]"
           chmod +x $detectChangedProjectsPath
-          echo "detectedProjects=[\"AprgCommon/AprgCommon\",\"AprgMath/AprgMath\"]" >> "$GITHUB_OUTPUT"
-#          $detectChangedProjectsPath
+          $detectChangedProjectsPath
           
           
   buildAndTest:
