@@ -34,7 +34,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: ${{ needs.detect-git-changes.outputs.ProjectsToBuild ) }}
+        project: ${{ needs.detect-git-changes.outputs.ProjectsToBuild }}
         config: 
         - {
             name: "WindowsLatestMsvc",
