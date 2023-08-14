@@ -28,7 +28,7 @@ jobs:
           
           
   build-and-test:
-    name: Build and Test in ${{ matrix.config.name }} for ${{ project }}
+    name: Build and Test in ${{ matrix.config.name }} for ${{ matrix.project }}
     needs: detect-git-changes
     runs-on: ${{ matrix.config.os }}
     strategy:
