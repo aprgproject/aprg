@@ -19,19 +19,20 @@ while [ "$searchingDirectory" != "/" ]; do
     scriptPrint $scriptName $LINENO "The searchingDirectory is: [$searchingDirectory]"
 	if [ $(basename "$searchingDirectory") == "$aprgDirectoryName" ]; then
 		break
-    elif ! [[ -e $"$searchingDirectory/CMakeLists.txt" ]]; then
-        formattedRelativePath=$(echo "\"$searchingDirectory\"" || sed -E "s|$aprgDirectory|\|")
+    elif [[ -e $"$searchingDirectory/CMakeLists.txt" ]]; then
+        formattedRelativePath=$(echo "\"$searchingDirectory\"" | sed -E "s|$aprgDirectory||")
     	if [[ -z $detectedProjects ]]; then
-            detectedProjects=$formattedRelativePath
+            detectedProjects="$formattedRelativePath"
         else
-            detectedProjects=$detectedProjects,$formattedRelativePath
-        if
+            detectedProjects="$detectedProjects,$formattedRelativePath"
+        fi
+        break
 	else
 		searchingDirectory=$(dirname "$searchingDirectory")
 	fi
 done
 
 scriptPrint $scriptName $LINENO "The detectedProjects is: [$detectedProjects]"
-# Output projects
-detectedProjects="\"AprgCommon/AprgCommon\",\"AprgMath/AprgMath\""
+
+# Save the value to Github
 echo "APRG_CHANGED_DIRECTORIES=[$detectedProjects]" >> "$GITHUB_OUTPUT"
