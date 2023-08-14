@@ -43,6 +43,5 @@ done
 
 scriptPrint "$scriptName" "$LINENO" "The cmakelistDirectories are: [$cmakelistDirectories]"
 
-# Save the value to Github
-cmakelistDirectories="\"AprgCommon/AprgCommon\",\"AprgMath/AprgMath\""
+# Save the value for Github Workflow
 echo "APRG_CMAKELIST_DIRECTORIES=[$cmakelistDirectories]" >> "$GITHUB_OUTPUT"
