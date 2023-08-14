@@ -35,13 +35,13 @@ jobs:
           
           
   build-and-test:
-    name: Build and Test in ${{ matrix.config.name }} for ${{ matrix.project }}
+    name: Try ${{ matrix.project }} in ${{ matrix.config.name }}
     needs: detectGitChanges
     runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
       matrix:
-        project: [ AprgCommon/AprgCommon , AprgMath/AprgMath ]
+        project: [ ${{ needs.detectGitChanges.outputs.project1 }} , AprgMath/AprgMath ]
         config: 
         - {
             name: "WindowsLatestMsvc",
