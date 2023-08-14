@@ -23,8 +23,8 @@ findAprgDirectory() {
 	# Loop until we reach the root directory ("/")
 	while [ "$searchingDirectory" != "/" ]; do
 		# Check if the directory exists in the current directory
-		if [ -d "$searchingDirectory/$aprgDirectoryName" ]; then
-			aprgDirectory="$searchingDirectory/$aprgDirectoryName"
+		if [ $(basename "$searchingDirectory") == "$aprgDirectoryName" ]; then
+			aprgDirectory="$searchingDirectory"
 			break
 		else
 			# Go one directory up
