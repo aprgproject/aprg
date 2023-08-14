@@ -28,7 +28,7 @@ jobs:
           detectChangedProjectsPath=$(realpath "$(pwd)/${{ env.detectChangedProjectsRelativePath }}")
           echo "detectChangedProjectsPath: [$detectChangedProjectsPath]"
           chmod +x $detectChangedProjectsPath
-          echo "detectedProjects=AprgCommon/AprgCommon,AprgMath/AprgMath" >> "$GITHUB_OUTPUT"
+          echo "detectedProjects=[AprgCommon/AprgCommon,AprgMath/AprgMath]" >> "$GITHUB_OUTPUT"
 #          $detectChangedProjectsPath
           
           
@@ -39,7 +39,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [ ${{ needs.detectGitChanges.outputs.projectsToBuild }} ]
+        project: ${{ needs.detectGitChanges.outputs.projectsToBuild }}
         config: 
         - {
             name: "WindowsLatestMsvc",
