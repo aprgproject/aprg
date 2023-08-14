@@ -13,7 +13,7 @@ jobs:
     name: Detect Git Changes
     runs-on: ubuntu-latest
     outputs:
-      projectsToBuild: ${{ steps.idOfDetectGitChanges.outputs.APRG_CHANGED_DIRECTORIES }}
+      projectsToBuild: ${{ steps.idOfDetectGitChanges.outputs.APRG_CMAKELIST_DIRECTORIES }}
     steps:
       - name: Checkout code for changes checking
         id: idOfCheckout
