@@ -42,7 +42,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [${{ needs.detectGitChanges.outputs.project1 }}, ${{ needs.detectGitChanges.outputs.project2 }}]
+        project: [ AprgCommon/AprgCommon , AprgMath/AprgMath ]
         config: 
         - {
             name: "WindowsLatestMsvc",
@@ -144,7 +144,7 @@ jobs:
           buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
-          cd AprgCommon/AprgCommon
+          cd ${{ matrix.project }}
             
       - name: Configure for windows
         if: startsWith(matrix.config.os, 'windows')
@@ -152,7 +152,7 @@ jobs:
         run: |
           buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          cd AprgCommon/AprgCommon
+          cd ${{ matrix.project }}
           $buildAndRunScriptPath configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Configure for ubuntu/gcc
@@ -161,7 +161,7 @@ jobs:
         run: |
           buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          cd AprgCommon/AprgCommon
+          cd ${{ matrix.project }}
           $buildAndRunScriptPath configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Configure for ubuntu/clang
@@ -170,7 +170,7 @@ jobs:
         run: |
           buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          cd AprgCommon/AprgCommon
+          cd ${{ matrix.project }}
           $buildAndRunScriptPath configureWithClang GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Build
@@ -178,7 +178,7 @@ jobs:
         run: |
           buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          cd AprgCommon/AprgCommon
+          cd ${{ matrix.project }}
           $buildAndRunScriptPath build GithubBuild Debug
             
       - name: Install
@@ -186,7 +186,7 @@ jobs:
         run: |
           buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          cd AprgCommon/AprgCommon
+          cd ${{ matrix.project }}
           $buildAndRunScriptPath install GithubBuild Debug
 
       - name: Run
@@ -194,5 +194,5 @@ jobs:
         run: |
           buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          cd AprgCommon/AprgCommon
+          cd ${{ matrix.project }}
           $buildAndRunScriptPath run GithubBuild
