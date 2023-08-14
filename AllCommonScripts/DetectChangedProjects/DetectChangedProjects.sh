@@ -12,7 +12,7 @@ declare -A cmakelistDirectoriesSet
 source "$aprgDirectory/AllCommonScripts/PrintScripts/PrintUtilities.sh"
 
 # Detect git changes
-detectedFiles=$(git diff --name-only 07cd9c9f83422f030bff7865bb6bf58d9f9983f1 ) #HEAD^)
+detectedFiles=$(git diff --name-only HEAD^)
 
 # Add only unique directories with CMakeLists.txt to set
 while IFS= read -r detectedFile; do
@@ -32,6 +32,8 @@ while IFS= read -r detectedFile; do
     done
 done <<< "$detectedFiles"
 
+
+# Add directories with CMakeLists.txt for output
 cmakelistDirectories=""
 for cmakelistDirectoriesSetItem in "${!cmakelistDirectoriesSet[@]}"; do
     if [[ -z $cmakelistDirectories ]]; then
@@ -41,7 +43,6 @@ for cmakelistDirectoriesSetItem in "${!cmakelistDirectoriesSet[@]}"; do
     fi
 done
 
-scriptPrint "$scriptName" "$LINENO" "The cmakelistDirectories are: [$cmakelistDirectories]"
-
 # Save the value for Github Workflow
+scriptPrint "$scriptName" "$LINENO" "The cmakelistDirectories are: [$cmakelistDirectories]"
 echo "APRG_CMAKELIST_DIRECTORIES=[$cmakelistDirectories]" >> "$GITHUB_OUTPUT"
