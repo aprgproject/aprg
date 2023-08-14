@@ -34,7 +34,7 @@ jobs:
 #          $detectChangedProjectsPath
           
           
-  build-and-test:
+  buildAndTest:
     name: Try ${{ matrix.project }} in ${{ matrix.config.name }}
     needs: detectGitChanges
     runs-on: ${{ matrix.config.os }}
@@ -143,14 +143,12 @@ jobs:
           buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x $buildAndRunScriptPath
-          cd ${{ matrix.project }}
+          echo "buildAndRunScriptPath=$buildAndRunScriptPath" >> "$GITHUB_ENV"
             
       - name: Configure for windows
         if: startsWith(matrix.config.os, 'windows')
         shell: bash
         run: |
-          buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
-          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           cd ${{ matrix.project }}
           $buildAndRunScriptPath configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
             
@@ -158,8 +156,6 @@ jobs:
         if: matrix.config.name == 'UbuntuLatestGcc'
         shell: bash
         run: |
-          buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
-          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           cd ${{ matrix.project }}
           $buildAndRunScriptPath configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}"
             
@@ -167,31 +163,23 @@ jobs:
         if: matrix.config.name == 'UbuntuLatestClang'
         shell: bash
         run: |
-          buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
-          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           cd ${{ matrix.project }}
           $buildAndRunScriptPath configureWithClang GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Build
         shell: bash
         run: |
-          buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
-          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           cd ${{ matrix.project }}
           $buildAndRunScriptPath build GithubBuild Debug
             
       - name: Install
         shell: bash
         run: |
-          buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
-          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           cd ${{ matrix.project }}
           $buildAndRunScriptPath install GithubBuild Debug
 
       - name: Run
         shell: bash
         run: |
-          buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
-          echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           cd ${{ matrix.project }}
           $buildAndRunScriptPath run GithubBuild
