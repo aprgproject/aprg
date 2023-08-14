@@ -22,7 +22,7 @@ while IFS= read -r detectedFile; do
         if [ "$(basename "$searchingDirectory")" == "$aprgDirectoryName" ]; then
             break
         elif [[ -e "$searchingDirectory/CMakeLists.txt" ]]; then
-            formattedRelativePath=$(echo "\"$searchingDirectory\"" | sed -E "s|$aprgDirectory||")
+            formattedRelativePath=$(echo "\"$searchingDirectory\"" | sed -E "s|$aprgDirectory/||")
             scriptPrint "$scriptName" "$LINENO" "The formattedRelativePath is: [$formattedRelativePath]"
             cmakelistDirectoriesSet["$formattedRelativePath"]=1
             break
@@ -43,7 +43,7 @@ for cmakelistDirectoriesSetItem in "${!cmakelistDirectoriesSet[@]}"; do
     fi
 done
 
-# Add AprgCommon if empty
+# Put AprgCommon if empty
 if [[ -z $cmakelistDirectories ]]; then
 	cmakelistDirectories="\"AprgCommon/AprgCommon\""
 fi
