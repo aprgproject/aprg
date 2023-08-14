@@ -15,7 +15,6 @@ jobs:
     outputs:
       project1: ${{ steps.idOfDetectGitChanges.outputs.detectedProject1 }}
       project2: ${{ steps.idOfDetectGitChanges.outputs.detectedProject2 }}
-      projectsToBuild: [project1, project2]
     steps:
       - name: Checkout code for changes checking
         id: idOfCheckout
