@@ -12,6 +12,8 @@ jobs:
   detectGitChanges:
     name: Detect Git Changes
     runs-on: ubuntu-latest
+    outputs:
+      projectsToBuild: ${{ steps.idOfDetectGitChanges.outputs.detectedProjects }}
     steps:
       - name: Checkout code for changes checking
         id: idOfCheckout
@@ -26,8 +28,7 @@ jobs:
           detectChangedProjectsPath=$(realpath "$(pwd)/${{ env.detectChangedProjectsRelativePath }}")
           echo "detectChangedProjectsPath: [$detectChangedProjectsPath]"
           chmod +x $detectChangedProjectsPath
-          echo "detectedProject1=AprgCommon/AprgCommon" >> "$GITHUB_ENV"
-          echo "detectedProject2=AprgMath/AprgMath" >> "$GITHUB_ENV"
+          echo "detectedProjects=[\"AprgCommon/AprgCommon\",\"AprgMath/AprgMath\"]" >> "$GITHUB_OUTPUT"
 #          $detectChangedProjectsPath
           
           
@@ -38,7 +39,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [ $detectedProject1 , AprgMath/AprgMath ]
+        project: ${{ fromJSON(needs.detectGitChanges.outputs.projectsToBuild) }}
         config: 
         - {
             name: "WindowsLatestMsvc",
