@@ -9,33 +9,37 @@ env:
 
 jobs:
 
-  detect-git-changes:
+  detectGitChanges:
     name: Detect Git Changes
     runs-on: ubuntu-latest
+    outputs:
+      projectsToBuild: ${{ steps.idOfDetectGitChanges.outputs.detectedProjects }}
     steps:
-    
       - name: Checkout code for changes checking
+        id: idOfCheckout
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 2
 
       - name: Detect Git Changes
+        id: idOfDetectGitChanges
         run: |
           detectChangedProjectsPath=$(realpath "$(pwd)/${{ env.detectChangedProjectsRelativePath }}")
           echo "detectChangedProjectsPath: [$detectChangedProjectsPath]"
           chmod +x $detectChangedProjectsPath
-          $detectChangedProjectsPath
+          echo "detectedProjects=AprgCommon/AprgCommon,AprgMath/AprgMath" >> "$GITHUB_OUTPUT"
+#          $detectChangedProjectsPath
           
           
   build-and-test:
     name: Build and Test in ${{ matrix.config.name }} for ${{ matrix.project }}
-    needs: detect-git-changes
+    needs: detectGitChanges
     runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
       matrix:
-        project: ${{ needs.detect-git-changes.outputs.ProjectsToBuild }}
+        project: ${{ needs.detectGitChanges.outputs.projectsToBuild }}
         config: 
         - {
             name: "WindowsLatestMsvc",
