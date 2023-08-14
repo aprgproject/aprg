@@ -5,6 +5,7 @@ on:
       - '**'
 env:
   buildAndRunScriptRelativePath: AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh
+  detectChangedProjectsRelativePath: AllCommonScripts/DetectChangedProjects/DetectChangedProjects.sh
 
 jobs:
 
@@ -21,31 +22,33 @@ jobs:
 
       - name: Detect Git Changes
         run: |
-          changedFiles=$(git diff --name-only HEAD^)
-          echo "changedFiles: [$changedFiles]"
+          detectChangedProjectsPath=$(realpath "$(pwd)/${{ env.detectChangedProjectsRelativePath }}")
+          echo "detectChangedProjectsPath: [$detectChangedProjectsPath]"
+          $detectChangedProjectsPath
           
           
   build-and-test:
-    name: Build and Test for ${{ matrix.config.name }}
+    name: Build and Test in ${{ matrix.config.name }} for ${{ project }}
     needs: detect-git-changes
     runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
       matrix:
+        project: ${{ split(env.ProjectsToBuildInEnv, ' ') }}
         config: 
         - {
             name: "WindowsLatestMsvc",
             os: windows-latest,
-            build_type: "Release",
+            buildType: "Release",
             cc: "cl",
             cxx: "cl",
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat",
+            environmentScript: "C:/Program Files (x86)/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat",
             generators: "Visual Studio 17 2022"
           }
         - {
             name: "WindowsLatestMingw",
             os: windows-latest,
-            build_type: "Release",
+            buildType: "Release",
             cc: "gcc",
             cxx: "g++",
             generators: "Ninja"
@@ -53,28 +56,28 @@ jobs:
         - {
             name: "UbuntuLatestGcc",
             os: ubuntu-latest,
-            build_type: "Release",
+            buildType: "Release",
             cc: "gcc",
             cxx: "g++",
-            c_compiler_location: "/usr/bin/gcc",
-            cpp_compiler_location: "/usr/bin/g++",
+            cCompilerLocation: "/usr/bin/gcc",
+            cppCompilerLocation: "/usr/bin/g++",
             generators: "Ninja"
           }
         - {
             name: "UbuntuLatestClang",
             os: ubuntu-latest,
-            build_type: "Release",
+            buildType: "Release",
             cc: "clang",
             cxx: "clang++",
-            c_compiler_location: "/usr/bin/clang",
-            cpp_compiler_location: "/usr/bin/clang++",
+            cCompilerLocation: "/usr/bin/clang",
+            cppCompilerLocation: "/usr/bin/clang++",
             generators: "Ninja"
           }
 # MAC OS is not supported
 #        - {
 #            name: "macOS Latest Clang",
 #            os: macos-latest,
-#            build_type: "Release",
+#            buildType: "Release",
 #            cc: "clang",
 #            cxx: "clang++",
 #            generators: "Ninja"
@@ -98,7 +101,7 @@ jobs:
           cmake --version
           #Not needed to run environment script
           #echo "Executing visual studio environment script..."
-          #cmd "${{ matrix.config.environment_script }}"
+          #cmd "${{ matrix.config.environmentScript }}"
           #echo "Finished visual studio environment script."
 
       - name: Install dependencies on ubuntu/gcc
