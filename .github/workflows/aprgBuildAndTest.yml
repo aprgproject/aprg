@@ -5,7 +5,7 @@ on:
       - '**'
 env:
   buildAndRunScriptRelativePath: AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh
-  detectChangedProjectsRelativePath: AllCommonScripts/DetectChangedProjects/DetectChangedProjects.sh
+  detectChangedProjectsRelativePath: AllCommonScripts/DetectGitChanges/DetectGitChanges.sh
 
 jobs:
 
@@ -29,10 +29,19 @@ jobs:
           echo "detectChangedProjectsPath: [$detectChangedProjectsPath]"
           chmod +x $detectChangedProjectsPath
           $detectChangedProjectsPath
-          
+
+
+  shellcheck:
+    name: Shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+
           
   buildAndTest:
-    name: Try ${{ matrix.project }} in ${{ matrix.config.name }}
+    name: Test ${{ matrix.project }} in ${{ matrix.config.name }}
     needs: detectGitChanges
     runs-on: ${{ matrix.config.os }}
     strategy:
