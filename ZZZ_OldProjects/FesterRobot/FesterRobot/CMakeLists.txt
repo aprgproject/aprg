@@ -20,7 +20,7 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${APRG_DIR}/AprgLocalUserAutomation/AprgCmakeInclude/AprgLocalUserAutomation.cmake)
 
 #Add files and directories
-include(${FESTER_ROBOT_DIR}/cmake/FilesAndDirectories.cmake)
+include(${FESTER_ROBOT_DIR}/cmake/FindFilesAndDirectories.cmake))
 
 #Do final steps
 if (TEST_MODE)

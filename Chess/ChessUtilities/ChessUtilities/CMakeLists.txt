@@ -16,7 +16,7 @@ include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
 #Add files and directories
-include(${CHESS_UTILITIES_DIR}/cmake/FilesAndDirectories.cmake)
+include(${CHESS_UTILITIES_DIR}/cmake/FindFilesAndDirectories.cmake))
 
 #Do final steps
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")

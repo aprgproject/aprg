@@ -24,7 +24,7 @@ include(${APRG_DIR}/CurlCpp/AprgCmakeInclude/CurlCpp.cmake)
 include(${APRG_DIR}/AprgLocalUserAutomation/AprgCmakeInclude/AprgLocalUserAutomation.cmake)
 
 #Add files and directories
-include(${APRG_WEB_CRAWLER_DIR}/cmake/FilesAndDirectories.cmake)
+include(${APRG_WEB_CRAWLER_DIR}/cmake/FindFilesAndDirectories.cmake))
 
 #Do final steps
 set(CMAKE_C_FLAGS "${APRG_COMPILER_COMMON_FLAGS} ${APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED}")

@@ -22,7 +22,7 @@ include(${APRG_DIR}/AprgGeometry/AprgCmakeInclude/AprgGeometry.cmake)
 include(${APRG_DIR}/AprgBitmap/AprgCmakeInclude/AprgBitmap.cmake)
 
 #Add files and directories
-include(${SOOSA_DIR}/cmake/FilesAndDirectories.cmake)
+include(${SOOSA_DIR}/cmake/FindFilesAndDirectories.cmake))
 
 #Do final steps
 if(TEST_MODE)

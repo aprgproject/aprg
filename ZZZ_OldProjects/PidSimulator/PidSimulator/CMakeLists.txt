@@ -23,7 +23,7 @@ include(${APRG_DIR}/AprgAlgebra/AprgCmakeInclude/AprgAlgebra.cmake)
 include(${APRG_DIR}/AprgGraph/AprgCmakeInclude/AprgGraph.cmake)
 
 #Add files and directories
-include(${PID_SIMULATOR_DIR}/cmake/FilesAndDirectories.cmake)
+include(${PID_SIMULATOR_DIR}/cmake/FindFilesAndDirectories.cmake))
 
 #Do final steps
 if (TEST_MODE)

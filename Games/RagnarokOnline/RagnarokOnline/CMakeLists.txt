@@ -19,7 +19,7 @@ include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
 #Add files and directories
-include(${RAGNAROK_ONLINE_DIR}/cmake/FilesAndDirectories.cmake)
+include(${RAGNAROK_ONLINE_DIR}/cmake/FindFilesAndDirectories.cmake))
 
 #Do final steps
 if (TEST_MODE)

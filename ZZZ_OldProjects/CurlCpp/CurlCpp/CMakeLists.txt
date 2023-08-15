@@ -21,7 +21,7 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${APRG_DIR}/curl/AprgCmakeInclude/Curl.cmake)
 
 #Add files and directories
-include(${APRG_CURL_CPP_DIR}/cmake/FilesAndDirectories.cmake)
+include(${APRG_CURL_CPP_DIR}/cmake/FindFilesAndDirectories.cmake))
 
 #Do final steps
 set(CMAKE_C_FLAGS "${APRG_COMPILER_COMMON_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")

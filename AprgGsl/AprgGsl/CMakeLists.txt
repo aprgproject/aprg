@@ -18,7 +18,7 @@ include(${APRG_DIR}/AprgAlgorithm/AprgCmakeInclude/AprgAlgorithm.cmake)
 include(${APRG_DIR}/gsl/AprgCmakeInclude/Gsl.cmake)
 
 #Add files and directories
-include(${APRG_GSL_DIR}/cmake/FilesAndDirectories.cmake)
+include(${APRG_GSL_DIR}/cmake/FindFilesAndDirectories.cmake))
 
 #Do final steps
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")

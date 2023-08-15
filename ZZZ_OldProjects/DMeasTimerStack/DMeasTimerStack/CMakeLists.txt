@@ -19,7 +19,7 @@ include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
 #Add files and directories
-include(${DMEAS_TIMER_STACK_DIR}/cmake/FilesAndDirectories.cmake)
+include(${DMEAS_TIMER_STACK_DIR}/cmake/FindFilesAndDirectories.cmake))
 
 #Assign Sack Directory
 set(SackDirectory "F:/Branches/ControlPlane/sbts1/tcom")
