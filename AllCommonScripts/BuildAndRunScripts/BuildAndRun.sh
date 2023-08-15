@@ -83,8 +83,12 @@ elif [ "$scriptOption" == "run" ]; then
     cd install/bin
     for fileInBin in ./*; do
         if [[ -x "$fileInBin" ]]; then
-            scriptPrint "$scriptName" "$LINENO" "Running executable: [$fileInBin]."
-            "$fileInBin" "$gtestFilter"
+            scriptPrint "$scriptName" "$LINENO" "Running executable: [$(pwd)/$fileInBin]."
+            if [[ -z $gtestFilter ]]; then
+                "$fileInBin"
+            else 
+                "$fileInBin" "$gtestFilter"
+            fi
         fi
     done
 else
