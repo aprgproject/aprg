@@ -67,7 +67,7 @@ void FesterRobot::updateExcelFile(unsigned int freqUsageBits) {
     updateFrequenciesBasedFreqUsageBits(freqUsageBits);
     editCellInExcelWithNewFrequencies(MousePosition(EXCEL_CELL_COORDINATES1));
     editCellInExcelWithNewFrequencies(MousePosition(EXCEL_CELL_COORDINATES2));
-    m_userAutomation.typeControlAndLetterSimultaneously('S');
+    m_userAutomation.performKeyCombination({VK_CONTROL}, {'S'});
 }
 
 void FesterRobot::editCellInExcelWithNewFrequencies(MousePosition const& excelCellPosition) {
