@@ -2,7 +2,7 @@
 set(SIMPLEST_DESIGN_TO_COPY_FOR_LIBRARIES_DIR ${APRG_DIR}/SimplestDesignToCopyForLibraries/SimplestDesignToCopyForLibraries/)
 
 #Include APRG_COMMON files and directories
-include(${SIMPLEST_DESIGN_TO_COPY_FOR_LIBRARIES_DIR}/cmake/FindFilesAndDirectories.cmake))
+include(${SIMPLEST_DESIGN_TO_COPY_FOR_LIBRARIES_DIR}/cmake/FindFilesAndDirectories.cmake)
 
 include_directories(${SIMPLEST_DESIGN_TO_COPY_FOR_LIBRARIES_INCLUDE_DIRECTORIES})
 add_library(SIMPLEST_DESIGN_TO_COPY_FOR_LIBRARIES ${SIMPLEST_DESIGN_TO_COPY_FOR_LIBRARIES_SOURCES})

@@ -17,7 +17,7 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${APRG_DIR}/AprgAlgorithm/AprgCmakeInclude/AprgAlgorithm.cmake)
 
 # Process for files, directories and flags
-include(${APRG_BOOLEAN_ALGEBRA_DIR}/cmake/FindFilesAndDirectories.cmake))
+include(${APRG_BOOLEAN_ALGEBRA_DIR}/cmake/FindFilesAndDirectories.cmake)
 
 # Do final steps
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")

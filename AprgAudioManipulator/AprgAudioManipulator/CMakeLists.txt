@@ -20,7 +20,7 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${APRG_DIR}/AprgAudio/AprgCmakeInclude/AprgAudio.cmake)
 
 # Process for files, directories and flags
-include(${APRG_AUDIO_MANIPULATOR_DIR}/cmake/FindFilesAndDirectories.cmake))
+include(${APRG_AUDIO_MANIPULATOR_DIR}/cmake/FindFilesAndDirectories.cmake)
 
 # Do final steps
 if (TEST_MODE)

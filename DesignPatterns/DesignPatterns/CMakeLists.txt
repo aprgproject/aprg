@@ -19,7 +19,7 @@ include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
 # Process for files, directories and flags
-include(${DESIGN_PATTERNS_DIR}/cmake/FindFilesAndDirectories.cmake))
+include(${DESIGN_PATTERNS_DIR}/cmake/FindFilesAndDirectories.cmake)
 
 # Do final steps
 add_executable(${OUTFILE} ${DESIGN_PATTERNS_SOURCES_AND_TESTS})

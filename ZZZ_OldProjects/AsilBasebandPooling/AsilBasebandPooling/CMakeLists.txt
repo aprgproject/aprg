@@ -19,7 +19,7 @@ include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
 # Process for files, directories and flags
-include(${ASIL_BASEBAND_POOLING_AND_PROGRAMS_DIR}/cmake/FindFilesAndDirectories.cmake))
+include(${ASIL_BASEBAND_POOLING_AND_PROGRAMS_DIR}/cmake/FindFilesAndDirectories.cmake)
 
 # Do final steps
 if (TEST_MODE)

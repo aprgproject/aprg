@@ -20,7 +20,7 @@ include(${APRG_DIR}/AprgGeometry/AprgCmakeInclude/AprgGeometry.cmake)
 include(${APRG_DIR}/AprgStatistics/AprgCmakeInclude/AprgStatistics.cmake)
 
 # Process for files, directories and flags
-include(${APRG_BITMAP_MANIPULATOR_DIR}/cmake/FindFilesAndDirectories.cmake))
+include(${APRG_BITMAP_MANIPULATOR_DIR}/cmake/FindFilesAndDirectories.cmake)
 
 # Do final steps
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")

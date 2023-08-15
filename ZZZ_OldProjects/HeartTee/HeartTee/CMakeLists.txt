@@ -18,7 +18,7 @@ include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 
 # Process for files, directories and flags
-include(${HEART_TEE_DIR}/cmake/FindFilesAndDirectories.cmake))
+include(${HEART_TEE_DIR}/cmake/FindFilesAndDirectories.cmake)
 
 set(SPECIAL_INCLUDE_DIRECTORIES
     src/HeartTee

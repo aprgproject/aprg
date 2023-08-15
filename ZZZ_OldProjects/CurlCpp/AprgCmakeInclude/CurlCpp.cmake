@@ -5,7 +5,7 @@ include(${APRG_DIR}/curl/AprgCmakeInclude/Curl.cmake)
 set(APRG_CURL_CPP_DIR ${APRG_DIR}/CurlCpp/CurlCpp/)
 
 #Include APRG_CURL_CPP files and directories
-include(${APRG_CURL_CPP_DIR}/cmake/FindFilesAndDirectories.cmake))
+include(${APRG_CURL_CPP_DIR}/cmake/FindFilesAndDirectories.cmake)
 
 include_directories(${APRG_CURL_CPP_INCLUDE_DIRECTORIES})
 add_library(APRG_CURL_CPP ${APRG_CURL_CPP_SOURCES})

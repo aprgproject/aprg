@@ -16,7 +16,7 @@ include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
 # Process for files, directories and flags
-include(${GOOGLE_KICK_START_DIR}/cmake/FindFilesAndDirectories.cmake))
+include(${GOOGLE_KICK_START_DIR}/cmake/FindFilesAndDirectories.cmake)
 
 # Do final steps
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")

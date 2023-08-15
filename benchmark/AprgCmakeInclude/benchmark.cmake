@@ -3,7 +3,7 @@ set(BENCHMARK_DIR ${APRG_DIR}/benchmark/benchmark/)
 set(BENCHMARK_FROM_GIT_HUB_DIR ${APRG_DIR}/benchmark/benchmarkFromGitHub/)
 
 #Include APRG_COMMON files and directories
-include(${BENCHMARK_DIR}/cmake/FindFilesAndDirectories.cmake))
+include(${BENCHMARK_DIR}/cmake/FindFilesAndDirectories.cmake)
 
 include_directories(${BENCHMARK_INCLUDE_DIRECTORIES})
 add_library(BENCHMARK ${BENCHMARK_SOURCES})

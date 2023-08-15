@@ -23,7 +23,7 @@ include(${APRG_DIR}/AprgLocalUserAutomation/AprgCmakeInclude/AprgLocalUserAutoma
 include(${APRG_DIR}/Chess/ChessUtilities/AprgCmakeInclude/ChessUtilities.cmake)
 
 # Process for files, directories and flags
-include(${CHESS_PEEK_DIR}/cmake/FindFilesAndDirectories.cmake))
+include(${CHESS_PEEK_DIR}/cmake/FindFilesAndDirectories.cmake)
 
 # Do final steps
 if (TEST_MODE)

@@ -25,7 +25,7 @@ include(${APRG_DIR}/AprgMath/AprgCmakeInclude/AprgMath.cmake)
 include_directories(${APRG_ALGORITHM_TEST_INCLUDE_DIRECTORIES})
 
 # Process for files, directories and flags
-include(${APRG_UNIQUE_PROBLEMS_DIR}/cmake/FindFilesAndDirectories.cmake))
+include(${APRG_UNIQUE_PROBLEMS_DIR}/cmake/FindFilesAndDirectories.cmake)
 
 # Do final steps
 if(TEST_MODE)

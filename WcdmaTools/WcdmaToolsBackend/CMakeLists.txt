@@ -18,7 +18,7 @@ include(${APRG_DIR}/AprgAlgorithm/AprgCmakeInclude/AprgAlgorithm.cmake)
 include(${APRG_DIR}/AprgGrepStringEvaluator/AprgCmakeInclude/AprgGrepStringEvaluator.cmake)
 
 # Process for files, directories and flags
-include(${WCDMA_TOOLS_BACKEND_DIR}/cmake/FindFilesAndDirectories.cmake))
+include(${WCDMA_TOOLS_BACKEND_DIR}/cmake/FindFilesAndDirectories.cmake)
 
 # Do final steps
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")

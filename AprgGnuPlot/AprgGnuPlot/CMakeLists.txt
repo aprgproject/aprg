@@ -19,7 +19,7 @@ include(${APRG_DIR}/AprgAlgebra/AprgCmakeInclude/AprgAlgebra.cmake)
 include(${APRG_DIR}/AprgGeometry/AprgCmakeInclude/AprgGeometry.cmake)
 
 # Process for files, directories and flags
-include(${APRG_GNU_PLOT_DIR}/cmake/FindFilesAndDirectories.cmake))
+include(${APRG_GNU_PLOT_DIR}/cmake/FindFilesAndDirectories.cmake)
 
 # Do final steps
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")

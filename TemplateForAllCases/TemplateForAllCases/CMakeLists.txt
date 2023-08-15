@@ -19,7 +19,7 @@ include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
 # Process for files, directories and flags
-include(${TEMPLATE_FOR_ALL_CASES_DIR}/cmake/FindFilesAndDirectories.cmake))
+include(${TEMPLATE_FOR_ALL_CASES_DIR}/cmake/FindFilesAndDirectories.cmake)
 
 # Do final steps
 if (TEST_MODE)
