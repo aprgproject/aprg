@@ -1,26 +1,26 @@
 cmake_minimum_required(VERSION 3.16)
 
-#Set project details
+# Set project details
 project(AprgMath C CXX)
 set(OUTFILE ${PROJECT_NAME})
 set(APRG_MATH_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-#Locate APRG Directory first because its used on other cmakes
+# Locate APRG Directory first because its used on other cmakes
 include(${APRG_MATH_DIR}/cmake/LocateAprgDirectory.cmake)
 
-#Assign macros, common flags, definitions and other common steps
+# Assign macros, common flags, definitions and other common steps
 include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 
-#Include other projects
+# Include other projects
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${APRG_DIR}/AprgAlgorithm/AprgCmakeInclude/AprgAlgorithm.cmake)
 
-#Process for files, directories and flags
+# Process for files, directories and flags
 include(${APRG_MATH_DIR}/cmake/FindFilesAndDirectories.cmake)
 include(${APRG_MATH_DIR}/cmake/AddFlags.cmake)
 
-#Do final steps
+# Do final steps
 add_executable(${OUTFILE} ${APRG_MATH_SOURCES_AND_TESTS})
 include_directories(${APRG_MATH_INCLUDE_DIRECTORIES} ${APRG_MATH_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
 target_link_libraries(${OUTFILE} APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
