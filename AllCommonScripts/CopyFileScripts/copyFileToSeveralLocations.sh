@@ -25,32 +25,29 @@ source "$aprgDirectory/AllCommonScripts/PrintScripts/PrintUtilities.sh"
 
 # Validate input
 if [ -z "$locatorFile" ]; then
-    scriptPrint $scriptName $LINENO "Error: The filename cannot be empty."
+    scriptPrint "$scriptName" "$LINENO" "Error: The filename cannot be empty."
 	exit 1
 fi
 if ! [[ -e $fileToCopy ]]; then
-    scriptPrint $scriptName $LINENO "Error: The file [$fileToCopy] does not exist."
+    scriptPrint "$scriptName" "$LINENO" "Error: The file [$fileToCopy] does not exist."
 	exit 1
 fi
 
 # Find all files with the same name in the target folder
-scriptPrint $scriptName $LINENO "Searching all files in [$aprgDirectory] with the filename [$locatorFile]..."
-locationPaths=($(find "$aprgDirectory" -type f -name "$locatorFile"))
-
-# Replace each file with the source file
-shortenedFileToCopy=$(echo "$fileToCopy" | tail -c $shortenedPathLengthForDisplay)
-scriptPrint $scriptName $LINENO "Copying [...$shortenedFileToCopy] ->"
-for locationPath in "${locationPaths[@]}"; do
+scriptPrint "$scriptName" "$LINENO" "Searching all files in [$aprgDirectory] with the filename [$locatorFile]..."
+fileToCopyDisplay=$(echo "$fileToCopy" | tail -c "$shortenedPathLengthForDisplay")
+scriptPrint "$scriptName" "$LINENO" "Copying [...$fileToCopyDisplay] ->"
+find "$aprgDirectory" -type f -name "$locatorFile" | while read -r locationPath; do
     # Check if it can be skipped
 	if  [[ ! "$locationPath" =~ $skipRegexPattern ]]; then
 		locationDirectory=$(dirname "$locationPath")
-		shortenedLocationPath=$(echo "$locationDirectory" | tail -c $shortenedPathLengthForDisplay)
-        scriptPrint $scriptName $LINENO "-> to [...$shortenedLocationPath]."
-        if [ "$3" == "DeleteOriginalLocatorFiles" ]; then
+		locationDirectoryDisplay=$(echo "$locationDirectory" | tail -c "$shortenedPathLengthForDisplay")
+        scriptPrint "$scriptName" "$LINENO" "-> to [...$locationDirectoryDisplay]."
+        if [ "$deleteOption" == "DeleteOriginalLocatorFiles" ]; then
             rm -f "$locationPath"
         fi
         cp -f "$fileToCopy" "$locationDirectory"
 	fi
 done
 
-scriptPrint $scriptName $LINENO "File replacements completed."
+scriptPrint "$scriptName" "$LINENO" "File replacements completed."

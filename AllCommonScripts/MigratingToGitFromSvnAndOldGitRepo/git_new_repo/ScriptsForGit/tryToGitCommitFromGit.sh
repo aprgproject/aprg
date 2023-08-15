@@ -13,8 +13,8 @@ gitHistoryPath=$(realpath "$scriptDirectory/../../git_old_repo/formattedGitHisto
 currentLineCount=1
 startLineCount=1
 endLineCount=1
-read startLineCount < "$startLineCountPath"
-read endLineCount < "$endLineCountPath"
+read -r startLineCount < "$startLineCountPath"
+read -r endLineCount < "$endLineCountPath"
 
 while read -r line; do
     echo "line: [$line]"
@@ -25,22 +25,22 @@ while read -r line; do
     elif [ "$currentLineCount" -lt "$startLineCount" ]; then
         echo "skipping | currentLineCount: [$currentLineCount] line: [$line]"
     else
-        revisionHash=$(echo $line | sed -E "s|^.*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*$|\1|")
-        date=$(echo $line | sed -E "s|^.*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*$|\2|")
-        author=$(echo $line | sed -E "s|^.*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*$|\3|")
-        message=$(echo $line | sed -E "s|^.*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*$|\4|")
+        revisionHash=$(echo "$line" | sed -E "s|^.*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*$|\1|")
+        date=$(echo "$line" | sed -E "s|^.*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*$|\2|")
+        author=$(echo "$line" | sed -E "s|^.*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*$|\3|")
+        message=$(echo "$line" | sed -E "s|^.*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*\(\[\{(.*)\}\]\).*$|\4|")
         echo "revisionHash: [$revisionHash]"
         echo "date: [$date]"
         echo "author: [$author]"
         echo "message: [$message]"
-        "$approach1" $currentLineCount $revisionHash
+        "$approach1" "$currentLineCount" "$revisionHash"
         exitStatus=$?
         echo "exitStatus: [$exitStatus]"
-        if [ $exitStatus -ne 0 ]; then
-            "$approach2" $revisionHash
+        if [ "$exitStatus" -ne 0 ]; then
+            "$approach2" "$revisionHash"
             exitStatus=$?
             echo "exitStatus: [$exitStatus]"
-            if [ $exitStatus -ne 0 ]; then
+            if [ "$exitStatus" -ne 0 ]; then
                 echo "All approaches failed."
                 echo "git commit --message \"$message\" --author \"$author\" --date \"$date\"" >> "$failedGitCommitsPath"
                 exit 1

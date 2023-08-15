@@ -50,4 +50,5 @@ fi
 
 # Save the value for Github Workflow
 scriptPrint "$scriptName" "$LINENO" "The cmakelistDirectories are: [$cmakelistDirectories]"
+# shellcheck disable=SC2154
 echo "APRG_CMAKELIST_DIRECTORIES=[$cmakelistDirectories]" >> "$GITHUB_OUTPUT"

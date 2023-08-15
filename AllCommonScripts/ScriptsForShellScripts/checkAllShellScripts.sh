@@ -16,12 +16,10 @@ fi
 source "$aprgDirectory/AllCommonScripts/PrintScripts/PrintUtilities.sh"
 
 # Find all files with the same name in the target folder
-scriptPrint $scriptName $LINENO "Searching all files in [$directoryToConvertAllFiles]..."
-locationPaths=($(find "$directoryToConvertAllFiles" -type f -name "*.sh"))
-
-for locationPath in "${locationPaths[@]}"; do
-    dos2unix "$locationPaths"
-    shellcheck "$locationPaths"
+scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles]..."
+find "$directoryToConvertAllFiles" -type f -name "*.sh" | while read -r locationPath; do
+    dos2unix "$locationPath"
+    shellcheck "$locationPath"
 done
 
-scriptPrint $scriptName $LINENO "All shell scripts in the directory are processed."
+scriptPrint "$scriptName" "$LINENO" "All shell scripts in the directory are processed."
