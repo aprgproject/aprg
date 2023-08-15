@@ -205,8 +205,7 @@ void RevisionEditor::setDataOnCommitsPerDay() {
         totalNumberOfInstances += numberOfInstances;
         ++numberOfCommitsOfADay;
     }
-    m_dayInstancesRandomizer.setMinimumAndMaximum(
-        m_numberInstancesOfEachDayCommitCount.empty() ? 0 : 1, totalNumberOfInstances);
+    m_dayInstancesRandomizer.setMinimumAndMaximum(totalNumberOfInstances > 0 ? 1 : 0, totalNumberOfInstances);
     m_originalAverageCommitPerDay = static_cast<double>(totalWeight) / totalNumberOfInstances;
     ALBA_INF_PRINT3(cout, totalWeight, totalNumberOfInstances, m_originalAverageCommitPerDay);
 }
