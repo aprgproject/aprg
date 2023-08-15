@@ -19,6 +19,7 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${APRG_ALGEBRA_DIR}/cmake/FindFilesAndDirectories.cmake)
 include(${APRG_ALGEBRA_DIR}/cmake/AddFlags.cmake)
 
+
 # Do final steps
 add_executable(${OUTFILE} ${APRG_ALGEBRA_SOURCES_AND_TESTS})
 include_directories(${APRG_ALGEBRA_INCLUDE_DIRECTORIES} ${APRG_ALGEBRA_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
