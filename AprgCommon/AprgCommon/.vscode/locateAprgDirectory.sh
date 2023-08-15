@@ -4,8 +4,9 @@ findAprgDirectory() {
 	# Set variable values
 	aprgDirectory=""
 	local aprgDirectoryName="aprg"
-	local inputDirectory=$(realpath "$1")
 	local localScriptName="locateAprgDirectory"
+	local inputDirectory
+	inputDirectory=$(realpath "$1")
 	
 	# Validate input
 	if ! [ -d "$inputDirectory" ]; then
@@ -23,7 +24,7 @@ findAprgDirectory() {
 	# Loop until we reach the root directory ("/")
 	while [ "$searchingDirectory" != "/" ]; do
 		# Check if the directory exists in the current directory
-		if [ $(basename "$searchingDirectory") == "$aprgDirectoryName" ]; then
+		if [ "$(basename "$searchingDirectory")" == "$aprgDirectoryName" ]; then
 			aprgDirectory="$searchingDirectory"
 			break
 		else
