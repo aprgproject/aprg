@@ -8,37 +8,47 @@ scriptRunningOption=$1
 locateScriptPath=$(realpath "$scriptDirectory/locateAprgDirectory.sh")
 exitCode=0
 
-# Source needed scripts
+# Find aprgDirectory
+echo "$scriptName:$LINENO: Finding aprg directory..."
 if ! [[ -e $locateScriptPath ]]; then
 	echo "$scriptName:$LINENO: Error: The script [$locateScriptPath] does not exist."
 	exit 1
 fi
 source "$scriptDirectory/locateAprgDirectory.sh"
 findAprgDirectory $scriptDirectory
-# Validate path
+
+# Validate aprgDirectory
 if ! [[ -e $aprgDirectory ]]; then
 	echo "$scriptName:$LINENO: Error: The script [$aprgDirectory] does not exist."
 	exit 1
 fi
+
+# Source needed scripts
 source "$aprgDirectory/AllCommonScripts/PrintScripts/PrintUtilities.sh"
 
+# Enable the "exit on error" option to automatically stop if there is a failure
+set -e
+
 # Running WSL Build And Run Script
+buildAndRunScriptPath=$(realpath "$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh")
+if ! [[ -e $buildAndRunScriptPath ]]; then
+	scriptPrintInCppMatcherFormat $scriptPath $LINENO ${BASH_LINENO[0]} "error: The script [$buildAndRunScriptPath] does not exist."
+	exit 1
+fi
+
 if [ "$scriptRunningOption" == "outputWithHighlighting" ]; then
-	# This command prints output with highlighting because stdout and stderr are maintained
-	"$aprgDirectory/AllCommonScripts/WslScripts/BuildAndRunInWsl.sh" $2 $3 $4
-	exitCode=$?
+	$buildAndRunScriptPath $2 $3 $4 $5
+    exitCode=$?
 elif [ "$scriptRunningOption" == "outputWithAbsolutePaths" ]; then
-    # This command prints output without highlighting but with corrected absolute paths
-	"$aprgDirectory/AllCommonScripts/WslScripts/BuildAndRunInWsl.sh" $2 $3 $4 2>&1 | sed -E "s|\/mnt\/(\w+)\/|\U\1:/|g"
-	exitCode=$?
+	$buildAndRunScriptPath $2 $3 $4 $5 2>&1 | sed -E "s|\/mnt\/(\w+)\/|\U\1:/|g"
+	exitCode=${PIPESTATUS[0]}
 elif [ "$scriptRunningOption" == "outputWithRelativePaths" ]; then
-    # This command prints output without highlighting but with corrected relative paths from the project directory
-	"$aprgDirectory/AllCommonScripts/WslScripts/BuildAndRunInWsl.sh" $2 $3 $4 2>&1 | sed -E "s|$(pwd)||g"
-	exitCode=$?
+	$buildAndRunScriptPath $2 $3 $4 $5 2>&1 | sed -E "s|$(pwd)||g"
+	exitCode=${PIPESTATUS[0]}
 else
 	scriptPrint $scriptName $LINENO "The script option [$scriptOption] is not found."
-	echo "$scriptPath:$LINENO:${BASH_LINENO[0]}: error: The script option [$scriptOption] is not supported by the WSL shell script."
-	exitCode=$?
+	scriptPrintInCppMatcherFormat $scriptPath $LINENO ${BASH_LINENO[0]} "error: The script option [$scriptOption] is not supported by the WSL shell script."
+	exit 1
 fi
 
 scriptPrint $scriptName $LINENO "The exit code is: [$exitCode]"

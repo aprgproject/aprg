@@ -24,4 +24,4 @@ for locationPath in "${locationPaths[@]}"; do
     shellcheck "$locationPaths"
 done
 
-scriptPrint $scriptName $LINENO "All shell scripts converted."
+scriptPrint $scriptName $LINENO "All shell scripts in the directory are processed."
