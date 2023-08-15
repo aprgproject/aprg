@@ -1,26 +1,26 @@
 cmake_minimum_required(VERSION 3.16)
 
-#set project details
+# Set project details
 project(AprgGsl C CXX)
 set(OUTFILE ${PROJECT_NAME})
 set(APRG_GSL_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-#Locate APRG Directory first because its used on other cmakes
+# Locate APRG Directory first because its used on other cmakes
 include(${APRG_GSL_DIR}/cmake/LocateAprgDirectory.cmake)
 
-#Assign macros, common flags, definitions and other common steps
+# Assign macros, common flags, definitions and other common steps
 include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 
-#Include other projects
+# Include other projects
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${APRG_DIR}/AprgAlgorithm/AprgCmakeInclude/AprgAlgorithm.cmake)
 include(${APRG_DIR}/gsl/AprgCmakeInclude/Gsl.cmake)
 
-#Add files and directories
+# Process for files, directories and flags
 include(${APRG_GSL_DIR}/cmake/FindFilesAndDirectories.cmake))
 
-#Do final steps
+# Do final steps
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
 add_executable(${OUTFILE} ${APRG_GSL_SOURCES_AND_TESTS})

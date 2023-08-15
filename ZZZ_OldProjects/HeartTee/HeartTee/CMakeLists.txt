@@ -1,23 +1,23 @@
 cmake_minimum_required(VERSION 3.16)
 project(HeartTee C CXX)
 
-#set project details
+# Set project details
 set(OUTFILE ${PROJECT_NAME})
 set(HEART_TEE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-#Comment out TEST_MODE to build static executable, other cmakes check this
+# Comment out TEST_MODE to build static executable, other cmakes check this
 set(TEST_MODE "ON")
 
-#Locate APRG Directory first because its used on other cmakes
+# Locate APRG Directory first because its used on other cmakes
 include(${HEART_TEE_DIR}/cmake/LocateAprgDirectory.cmake)
 
-#Assign macros, common flags, definitions and other common steps
+# Assign macros, common flags, definitions and other common steps
 include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 
-#Include other projects
+# Include other projects
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 
-#Add files and directories
+# Process for files, directories and flags
 include(${HEART_TEE_DIR}/cmake/FindFilesAndDirectories.cmake))
 
 set(SPECIAL_INCLUDE_DIRECTORIES
@@ -27,7 +27,7 @@ set(SPECIAL_INCLUDE_DIRECTORIES
     src/Fourier
 )
 
-#Do final steps
+# Do final steps
 if (TEST_MODE)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")

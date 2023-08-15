@@ -1,24 +1,24 @@
 cmake_minimum_required(VERSION 3.16)
 
-#set project details
+# Set project details
 project(MessageContentChecker C CXX)
 set(OUTFILE ${PROJECT_NAME})
 set(MESSAGE_CONTENT_CHECKER_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-#Comment out TEST_MODE to build static executable, other cmakes check this
+# Comment out TEST_MODE to build static executable, other cmakes check this
 set(TEST_MODE "ON")
 
-#Locate APRG Directory first because its used on other cmakes
+# Locate APRG Directory first because its used on other cmakes
 include(${MESSAGE_CONTENT_CHECKER_DIR}/cmake/LocateAprgDirectory.cmake)
 
-#Assign macros, common flags, definitions and other common steps
+# Assign macros, common flags, definitions and other common steps
 include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 
-#Include other projects
+# Include other projects
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
-#Add files and directories
+# Process for files, directories and flags
 include(${MESSAGE_CONTENT_CHECKER_DIR}/cmake/FindFilesAndDirectories.cmake))
 
 #Assign Sack Directory

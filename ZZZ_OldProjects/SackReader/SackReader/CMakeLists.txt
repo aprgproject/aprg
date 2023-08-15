@@ -19,7 +19,7 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${SACK_READER_DIR}/cmake/FindFilesAndDirectories.cmake)
 include(${SACK_READER_DIR}/cmake/AddFlags.cmake)
 
-#Do final steps
+# Do final steps
 add_executable(${OUTFILE} ${SACK_READER_SOURCES_AND_TESTS})
 include_directories(${SACK_READER_INCLUDE_DIRECTORIES} ${SACK_READER_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
 target_link_libraries(${OUTFILE} APRG_COMMON ${APRG_GTEST_DEPENDENCIES})

@@ -1,14 +1,14 @@
 cmake_minimum_required(VERSION 3.16)
 
-#set project details
+# Set project details
 project(DesignDocumentCreator C CXX)
 set(OUTFILE ${PROJECT_NAME})
 set(DD_CREATOR_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-#Locate APRG Directory first because its used on other cmakes
+# Locate APRG Directory first because its used on other cmakes
 include(${DD_CREATOR_DIR}/cmake/LocateAprgDirectory.cmake)
 
-#Assign macros, common flags, definitions and other common steps
+# Assign macros, common flags, definitions and other common steps
 include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 
 #Assign specific definitions
@@ -17,11 +17,11 @@ add_definitions(-DCCS_BIG_ENDIAN)
 #Assign DesignDocumentCreatorDirectory
 set(DesignDocumentCreatorDirectory ${CMAKE_CURRENT_SOURCE_DIR})
 
-#Include other projects
+# Include other projects
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
-#Add files and directories
+# Process for files, directories and flags
 include(${DD_CREATOR_DIR}/cmake/CommonFilesAndDirectories.cmake)
 
 #Feature include
@@ -79,7 +79,7 @@ GET_SOURCE_FILES_FROM_DIRECTORIES(BTS_SACKS BTS_SACK_DIRECTORY_LIST)
 
 set(DD_CREATOR_INCLUDE_DIRECTORIES ${DD_CREATOR_DIR}/src ${DD_CREATOR_DIR}/tst)
 
-#Do final steps
+# Do final steps
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
 add_executable(${OUTFILE} ${DD_CREATOR_COMMON_SOURCES_AND_TESTS} ${FEATURE_SOURCES_AND_TESTS} ${TCOM_PRIVATE_SACKS} ${BTS_SACKS})

@@ -1,24 +1,24 @@
 cmake_minimum_required(VERSION 3.16)
 
-#set project details
+# Set project details
 project(DMeasTimerStack C CXX)
 set(OUTFILE ${PROJECT_NAME})
 set(DMEAS_TIMER_STACK_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-#Comment out TEST_MODE to build static executable, other cmakes check this
+# Comment out TEST_MODE to build static executable, other cmakes check this
 set(TEST_MODE "ON")
 
-#Locate APRG Directory first because its used on other cmakes
+# Locate APRG Directory first because its used on other cmakes
 include(${DMEAS_TIMER_STACK_DIR}/cmake/LocateAprgDirectory.cmake)
 
-#Assign macros, common flags, definitions and other common steps
+# Assign macros, common flags, definitions and other common steps
 include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 
-#Include other projects
+# Include other projects
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
-#Add files and directories
+# Process for files, directories and flags
 include(${DMEAS_TIMER_STACK_DIR}/cmake/FindFilesAndDirectories.cmake))
 
 #Assign Sack Directory
@@ -69,7 +69,7 @@ PRINT_STATUS("Looking for BTS_SACKS directories in: [${BTS_SACK_DIRECTORY}]")
 GET_SUB_DIRECTORY_LIST(BTS_SACK_DIRECTORY_LIST ${BTS_SACK_DIRECTORY})
 GET_SOURCE_FILES_FROM_DIRECTORIES(BTS_SACKS BTS_SACK_DIRECTORY_LIST)
 
-#Do final steps
+# Do final steps
 if (TEST_MODE)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
