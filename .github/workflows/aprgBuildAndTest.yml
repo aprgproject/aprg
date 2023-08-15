@@ -40,8 +40,8 @@ jobs:
         uses: ludeeus/action-shellcheck@master
         with:
           ignore_paths: >-
-            ./benchmark/benchmarkFromGitHub/
-            ./gtest/gtest/
+            ./benchmark/benchmarkFromGitHub/**
+            ./gtest/gtest/**
 
           
   buildAndTest:
