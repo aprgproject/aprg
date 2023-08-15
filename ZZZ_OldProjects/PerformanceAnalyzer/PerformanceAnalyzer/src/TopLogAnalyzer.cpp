@@ -86,8 +86,7 @@ void TopLogAnalyzer::generateCpuReport(std::string const& pathOfTopLog) {
 
 stringHelper::strings TopLogAnalyzer::getProcessNamesForCpuReport() {
     stringHelper::strings processNamesInReport;
-    for (std::pair<std::string, CpuMemCollection> const& processToCpuMemCollectionPair :
-         m_processToCpuMemCollectionMap) {
+    for (auto const& processToCpuMemCollectionPair : m_processToCpuMemCollectionMap) {
         if (processToCpuMemCollectionPair.second.cpu.getMaximum() != 0) {
             processNamesInReport.emplace_back(processToCpuMemCollectionPair.first);
         }
@@ -141,7 +140,7 @@ void TopLogAnalyzer::putEntriesInCpuReport(
             [](double const partialSum, DataEntry::ProcessToCpuMemPair const& processToCpuMemPair) {
                 return partialSum + processToCpuMemPair.second.cpuLoad;
             });
-        cpuReportFileStream << entry.timeInTop.getPrintObject<AlbaDateTime::PrintFormat::Type2>() << ",";
+        cpuReportFileStream << entry.timeInTop.getPrintObject<AlbaDateTime::PrintFormat::TimeWithColon>() << ",";
         cpuReportFileStream << entry.totalCpuFromTop << ",";
         cpuReportFileStream << totalCalculatedCpu << ",";
         DataEntry::ProcessToCpuMemMap const& currentProcessToCpuMemMap(entry.processToCpuMemMap);
@@ -171,8 +170,7 @@ void TopLogAnalyzer::generateMemReport(std::string const& pathOfTopLog) {
 
 stringHelper::strings TopLogAnalyzer::getProcessNamesForMemReport() {
     stringHelper::strings processNamesInReport;
-    for (std::pair<std::string, CpuMemCollection> const& processToCpuMemCollectionPair :
-         m_processToCpuMemCollectionMap) {
+    for (auto const& processToCpuMemCollectionPair : m_processToCpuMemCollectionMap) {
         if (processToCpuMemCollectionPair.second.cpu.getMaximum() != 0) {
             processNamesInReport.emplace_back(processToCpuMemCollectionPair.first);
         }
@@ -221,7 +219,7 @@ void TopLogAnalyzer::putEntriesInMemReport(
     stringHelper::strings const& processNamesInReport, ofstream& memReportFileStream) const {
     memReportFileStream.precision(3);
     for (DataEntry const& entry : m_dataEntries) {
-        memReportFileStream << entry.timeInTop.getPrintObject<AlbaDateTime::PrintFormat::Type2>() << ",";
+        memReportFileStream << entry.timeInTop.getPrintObject<AlbaDateTime::PrintFormat::TimeWithColon>() << ",";
         DataEntry::ProcessToCpuMemMap const& currentProcessToCpuMemMap(entry.processToCpuMemMap);
         for (string const& processName : processNamesInReport) {
             DataEntry::ProcessToCpuMemMap::const_iterator processToCpuMemIterator =
