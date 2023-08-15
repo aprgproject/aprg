@@ -20,6 +20,7 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${BENCHMARK_DIR}/cmake/FindFilesAndDirectories.cmake)
 include(${BENCHMARK_DIR}/cmake/AddFlags.cmake)
 
+
 # Do final steps
 add_executable(${OUTFILE} ${BENCHMARK_SOURCES_AND_TESTS})
 include_directories(${BENCHMARK_INCLUDE_DIRECTORIES} ${BENCHMARK_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
