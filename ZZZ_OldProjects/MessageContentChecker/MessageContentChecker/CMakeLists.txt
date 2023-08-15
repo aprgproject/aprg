@@ -20,7 +20,7 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
 # Process for files, directories and flags
 include(${MESSAGE_CONTENT_CHECKER_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${RTT_ANALYZER_DIR}/cmake/AddFlags.cmake)
+include(${MESSAGE_CONTENT_CHECKER_DIR}/cmake/AddFlags.cmake)
 
 #Assign Sack Directory
 set(SackDirectory "F:/Branches/ControlPlane/sbts1/tcom")
