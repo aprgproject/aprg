@@ -53,13 +53,13 @@ void FesterRobot::setupFesterEnvironmentInMatlab() {
     m_userAutomation.doLeftClickAt(MousePosition(MATLAB_COMMAND_WINDOW_COORDINATES));
     m_userAutomation.doLeftClickAt(MousePosition(MATLAB_COMMAND_WINDOW_COORDINATES));
     m_userAutomation.setStringToClipboard("clc");
-    m_userAutomation.typeControlAndLetterSimultaneously('V');
+    m_userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
     m_userAutomation.typeCharacter(VK_RETURN);
     m_userAutomation.setStringToClipboard(R"(run('C:\Users\malba\Desktop\DSS\Fester\Fester_scp.m'))");
-    m_userAutomation.typeControlAndLetterSimultaneously('V');
+    m_userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
     m_userAutomation.typeCharacter(VK_RETURN);
     m_userAutomation.setStringToClipboard(R"(format long g)");
-    m_userAutomation.typeControlAndLetterSimultaneously('V');
+    m_userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
     m_userAutomation.typeCharacter(VK_RETURN);
 }
 
@@ -76,16 +76,16 @@ void FesterRobot::editCellInExcelWithNewFrequencies(MousePosition const& excelCe
     m_userAutomation.typeCharacter(VK_DELETE);
     m_userAutomation.doDoubleLeftClickAt(excelCellPosition);
     m_userAutomation.setStringToClipboard(getFrequenciesStringForExcel());
-    m_userAutomation.typeControlAndLetterSimultaneously('V');
+    m_userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
 }
 
 void FesterRobot::runFesterFunctionInMatlab() {
     m_userAutomation.doLeftClickAt(MousePosition(MATLAB_COMMAND_WINDOW_COORDINATES));
     m_userAutomation.setStringToClipboard("clc");
-    m_userAutomation.typeControlAndLetterSimultaneously('V');
+    m_userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
     m_userAutomation.typeCharacter(VK_RETURN);
     m_userAutomation.setStringToClipboard(R"(fester('perf_rake_ilpc_gsm:1M_FixedGsm','300a');)");
-    m_userAutomation.typeControlAndLetterSimultaneously('V');
+    m_userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
     m_userAutomation.typeCharacter(VK_RETURN);
     bool isRunning(true);
     bool isRunningFinished(false);
@@ -94,8 +94,8 @@ void FesterRobot::runFesterFunctionInMatlab() {
         exitIfSpecialKeyIsPressed();
         m_userAutomation.sleep(2000);
         m_userAutomation.doLeftClickAt(MousePosition(MATLAB_COMMAND_WINDOW_COORDINATES));
-        m_userAutomation.typeControlAndLetterSimultaneously('A');
-        m_userAutomation.typeControlAndLetterSimultaneously('C');
+        m_userAutomation.performKeyCombination({VK_CONTROL}, {'A'});
+        m_userAutomation.performKeyCombination({VK_CONTROL}, {'C'});
         clipboardData = getClipboardFormattedData();
         isRunning = isRunningInClipboardData(clipboardData);
         isRunningFinished = isRunningFinishedInClipboardData(clipboardData);
