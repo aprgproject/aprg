@@ -24,21 +24,19 @@ include(${APRG_DIR}/AprgGraph/AprgCmakeInclude/AprgGraph.cmake)
 
 # Process for files, directories and flags
 include(${PID_SIMULATOR_DIR}/cmake/FindFilesAndDirectories.cmake)
+include(${PID_SIMULATOR_DIR}/cmake/AddFlags.cmake)
 
 # Do final steps
 if (TEST_MODE)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
     add_executable(${OUTFILE} ${PID_SIMULATOR_SOURCES_AND_TESTS})
     include_directories(${PID_SIMULATOR_INCLUDE_DIRECTORIES} ${PID_SIMULATOR_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
     target_link_libraries(${OUTFILE} APRG_GRAPH APRG_ALGEBRA APRG_GEOMETRY APRG_BITMAP APRG_COMMON ${APRG_GTEST_DEPENDENCIES})  # add real time library
     add_test(${OUTFILE} ${OUTFILE})
 else()
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED}")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED}")
     set(CMAKE_EXE_LINKER_FLAGS ${APRG_LINKER_FLAGS_FOR_RELEASE_WITH_STRIP})
     add_executable(${OUTFILE} ${PID_SIMULATOR_SOURCES} ${PID_SIMULATOR_MAIN_SOURCES})
     include_directories(${PID_SIMULATOR_INCLUDE_DIRECTORIES})
     target_link_libraries(${OUTFILE} APRG_GRAPH APRG_ALGEBRA APRG_GEOMETRY APRG_BITMAP APRG_COMMON) # add real time library
 endif()
+install(TARGETS ${OUTFILE} DESTINATION bin)
 include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
