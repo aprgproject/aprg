@@ -6,6 +6,7 @@ scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
 immediateDirectoryName=$(basename "$(dirname "$(pwd)")")
+numberOfCores=$(nproc)
 scriptOption=$1
 buildDirectoryName=$2
 argument1=$3
@@ -71,7 +72,7 @@ elif [ "$scriptOption" == "configureWithClangWithAsan" ]; then
 elif [ "$scriptOption" == "build" ]; then
     buildType="$argument1"
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
-	cmake --build . --config "$buildType"
+	cmake --build . --config "$buildType"  --parallel "$numberOfCores"
 elif [ "$scriptOption" == "install" ]; then
     buildType="$argument1"
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
