@@ -3,6 +3,7 @@
 #include <Algorithm/String/Tries/BaseStringSymbolTable.hpp>
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 
+#include <memory>
 #include <set>
 #include <vector>
 
