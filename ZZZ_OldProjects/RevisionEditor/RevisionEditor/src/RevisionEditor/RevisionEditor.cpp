@@ -1,16 +1,17 @@
 #include "RevisionEditor.hpp"
 
-#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/Math/Helpers/ComputationHelpers.hpp>
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+#include <Common/Print/AlbaLogPrints.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>
 #include <cassert>
 #include <fstream>
 #include <iomanip>
+#include <iostream>
 
 using namespace alba::mathHelper;
 using namespace alba::stringHelper;
@@ -83,7 +84,7 @@ void RevisionEditor::editCommitDates() {
         numberOfCommits = clampHigherBound<int>(numberOfCommits, maxCommitRandomizer.getRandomValue());
 
         AlbaYearMonthDay ymd = AlbaYearMonthDay::createFromTotalDays(currentDayCount);
-        ALBA_PRINT5(ymd.getYears(), ymd.getMonths(), ymd.getDays(), targetAverageCommit, numberOfCommits);
+        ALBA_INF_PRINT5(cout, ymd.getYears(), ymd.getMonths(), ymd.getDays(), targetAverageCommit, numberOfCommits);
         vector<AlbaHourMinuteSecond> hmses;
         for (int commitNumber = 0; commitNumber < numberOfCommits; ++commitNumber) {
             hmses.emplace_back(getRandomHour(), m_sixtyRandomizer.getRandomValue(), m_sixtyRandomizer.getRandomValue());
@@ -180,7 +181,7 @@ void RevisionEditor::setDataFromGitHistory() {
                     ++m_numberInstancesOfEachDayCommitCount[numberOfCommitsOnThisDay];
                     ++totalNumberOfInstances;
                 } else {
-                    ALBA_PRINT2(currentDateTime, numberOfCommitsOnThisDay);
+                    ALBA_INF_PRINT2(cout, currentDateTime, numberOfCommitsOnThisDay);
                 }
                 numberOfCommitsOnThisDay = 1;
                 dayToCheck = currentDateTime.getYearMonthDay();
@@ -207,7 +208,7 @@ void RevisionEditor::setDataOnCommitsPerDay() {
     m_dayInstancesRandomizer.setMinimumAndMaximum(
         m_numberInstancesOfEachDayCommitCount.empty() ? 0 : 1, totalNumberOfInstances);
     m_originalAverageCommitPerDay = static_cast<double>(totalWeight) / totalNumberOfInstances;
-    ALBA_PRINT3(totalWeight, totalNumberOfInstances, m_originalAverageCommitPerDay);
+    ALBA_INF_PRINT3(cout, totalWeight, totalNumberOfInstances, m_originalAverageCommitPerDay);
 }
 
 void RevisionEditor::saveCommitsPerHourToFile() const {
