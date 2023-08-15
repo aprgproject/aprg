@@ -22,7 +22,8 @@ TEST(UtilitiesTest, RetrieveDeltasWorks) {
 
     AudioInDouble const& audio(audioManipulator.getAudio());
     Samples deltaSamplesInChannel0;
-    retrieveDeltas(deltaSamplesInChannel0, audio.getSamplesAtChannel(0), 10000);
+    auto samplesInChannel0(audio.getSamplesAtChannel(0));
+    retrieveDeltas(deltaSamplesInChannel0, samplesInChannel0, samplesInChannel0.size());
 }
 
 TEST(UtilitiesTest, DISABLED_SearchForBestSampleIndexesWorksWithReplacingSamples) {
