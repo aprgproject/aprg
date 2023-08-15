@@ -6,6 +6,7 @@ scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
 locatorFile=$(basename "$1")
+cppProjectsPathSkipRegex=""
 if [ -z "$2" ]; then
     # If there are no second argument use the first argument
     fileToCopy=$(realpath "$(pwd)/$1")
@@ -17,11 +18,12 @@ if [ "$3" == "DeleteOriginalLocatorFiles" ]; then
 else
     deleteOption=""
 fi
-skipRegexPattern="\/aprg\/Python\/|\/aprg\/AllCommonScripts\/"
 shortenedPathLengthForDisplay=50
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/PrintScripts/PrintUtilities.sh"
+source "$aprgDirectory/AllCommonScripts/CommonRegex/CommonRegexForPaths.sh"
+skipPathRegex="$cppProjectsPathSkipRegex"
 
 # Validate input
 if [ -z "$locatorFile" ]; then
@@ -39,7 +41,7 @@ fileToCopyDisplay=$(echo "$fileToCopy" | tail -c "$shortenedPathLengthForDisplay
 scriptPrint "$scriptName" "$LINENO" "Copying [...$fileToCopyDisplay] ->"
 find "$aprgDirectory" -type f -name "$locatorFile" | while read -r locationPath; do
     # Check if it can be skipped
-    if  [[ ! "$locationPath" =~ $skipRegexPattern ]]; then
+    if  [[ ! "$locationPath" =~ $skipPathRegex ]]; then
         locationDirectory=$(dirname "$locationPath")
         locationDirectoryDisplay=$(echo "$locationDirectory" | tail -c "$shortenedPathLengthForDisplay")
         scriptPrint "$scriptName" "$LINENO" "-> to [...$locationDirectoryDisplay]."
