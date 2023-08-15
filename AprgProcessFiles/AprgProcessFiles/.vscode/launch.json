@@ -11,14 +11,14 @@
             "program": "./.vscode/runWslCommonScript.sh",
             "args": [
                 "outputWithHighlighting",
-                "${workspaceFolderBasename}",
-                "runFileWithProjectName",
+                "run",
+                "WslBuild",
                 "" //"--gtest_filter=*.*"
             ],
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
-            "preLaunchTask": "Build In WSL Using Clang With Asan",
+            "preLaunchTask": "Install In WSL",
             "runtimeExecutable": "wsl",
             "runtimeArgs": [
                 "bash"
@@ -27,9 +27,6 @@
             "stopOnEntry": true,
             "outFiles": [],
             "sourceMaps": false,
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
@@ -39,7 +36,7 @@
             "name": "Run the local MSVC target",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/../VisualStudioBuild/build/visualstudio-windows-msvc-debug/Debug/${workspaceFolderBasename}.exe",
+            "program": "${workspaceFolder}/../VisualStudioBuild/install/bin/${workspaceFolderBasename}.exe",
             "args": [
                 "" //"--gtest_filter=*.*"
             ],
@@ -47,6 +44,7 @@
             "cwd": "${workspaceFolder}",
             "environment": [],
             "console": "integratedTerminal",
+            "preLaunchTask": "Install locally the MSVC build",
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"

@@ -12,14 +12,14 @@
       "description": "Setup for Visual Studio Compilation, manually call cmake for GCC/Clang.",
       "generator": "Visual Studio 17 2022",
       "toolset": "host=x64",
-      "binaryDir": "${sourceDir}/../VisualStudioBuild/build/${presetName}",
+      "binaryDir": "${sourceDir}/../VisualStudioBuild/",
       "architecture": {
         "value": "x64",
         "strategy": "external"
       },
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_INSTALL_PREFIX": "${sourceDir}/../VisualStudioBuild/install/${presetName}",
+        "CMAKE_INSTALL_PREFIX": "",
         "CMAKE_C_COMPILER": "cl",
         "CMAKE_CXX_COMPILER": "cl"
       },

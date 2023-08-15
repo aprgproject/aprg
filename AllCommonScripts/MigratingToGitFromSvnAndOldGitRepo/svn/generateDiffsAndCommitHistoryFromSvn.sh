@@ -27,6 +27,6 @@ while read -r line; do
         echo "commit message: [$line]"
         savedMessage=$firstItem
     elif [[ "$firstItem" =~ $newEntryRegex ]]; then
-    	echo "([{$savedRevision}]) ([{$savedDate}]) ([{$savedAuthor}]) ([{$savedMessage}])" >> "$scriptDirectory/formattedSvnHistory.txt"
+        echo "([{$savedRevision}]) ([{$savedDate}]) ([{$savedAuthor}]) ([{$savedMessage}])" >> "$scriptDirectory/formattedSvnHistory.txt"
     fi
 done < "$scriptDirectory/svnRevisionsDetails.txt"

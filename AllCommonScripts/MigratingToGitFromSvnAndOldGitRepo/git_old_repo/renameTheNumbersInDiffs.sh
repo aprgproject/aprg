@@ -18,10 +18,10 @@ for file in "$diffsDirectory"/*; do
         echo "directoryWithR: $directoryWithR"
         echo "revisionCount: $revisionCount"
         echo "revisionHashWithUnderscore: $revisionHashWithUnderscore"
-		reversedCount=$((688 - "$revisionCount"))
-		newFile="$directoryWithR$reversedCount$revisionHashWithUnderscore"
+        reversedCount=$((688 - "$revisionCount"))
+        newFile="$directoryWithR$reversedCount$revisionHashWithUnderscore"
         echo "reversedCount: $reversedCount"
         echo "newFile: $newFile"
-		mv "$file" "$newFile"
+        mv "$file" "$newFile"
     fi
 done

@@ -17,8 +17,8 @@ source "$aprgDirectory/AllCommonScripts/PrintScripts/PrintUtilities.sh"
 
 # Validate inputs
 if [[ -z $scriptOption ]]; then
-	scriptPrintInCppMatcherFormat "$scriptPath" "$LINENO" "${BASH_LINENO[0]}" "error: The scriptOption: [$scriptOption] is empty."
-	exit 1
+    scriptPrintInCppMatcherFormat "$scriptPath" "$LINENO" "${BASH_LINENO[0]}" "error: The scriptOption: [$scriptOption] is empty."
+    exit 1
 fi
 
 # Display variable values
@@ -39,44 +39,44 @@ set -e
 
 # Perform script actions based from script option
 if [ "$scriptOption" == "clean" ]; then
-	if [ "$buildDirectoryName" = "$(basename "$(pwd)")" ]; then
-		scriptPrint "$scriptName" "$LINENO" "Deleting everything in [$(pwd)]."
-		rm -rf ./*
-		scriptPrint "$scriptName" "$LINENO" "After deletion in [$(pwd)] contents:"
+    if [ "$buildDirectoryName" = "$(basename "$(pwd)")" ]; then
+        scriptPrint "$scriptName" "$LINENO" "Deleting everything in [$(pwd)]."
+        rm -rf ./*
+        scriptPrint "$scriptName" "$LINENO" "After deletion in [$(pwd)] contents:"
         ls -la
-	fi
+    fi
 elif [ "$scriptOption" == "configureWithDefaultCompiler" ]; then
     buildType="$argument1"
     cmakeGenerator="$argument2"
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
     scriptPrint "$scriptName" "$LINENO" "The cmakeGenerator is [$cmakeGenerator]."
-	cmake -DCMAKE_BUILD_TYPE="$buildType" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "configureWithGcc" ]; then
     buildType="$argument1"
     cmakeGenerator="$argument2"
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
     scriptPrint "$scriptName" "$LINENO" "The cmakeGenerator is [$cmakeGenerator]."
-	cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++ "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++ "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "configureWithClang" ]; then
     buildType="$argument1"
     cmakeGenerator="$argument2"
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
     scriptPrint "$scriptName" "$LINENO" "The cmakeGenerator is [$cmakeGenerator]."
-	cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++ "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++ "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "configureWithClangWithAsan" ]; then
     buildType="$argument1"
     cmakeGenerator="$argument2"
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
     scriptPrint "$scriptName" "$LINENO" "The cmakeGenerator is [$cmakeGenerator]."
-	cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++ -DCMAKE_C_FLAGS:STRING="-g --coverage -fsanitize=address -fno-omit-frame-pointer" -DCMAKE_CXX_FLAGS:STRING="-g --coverage -fsanitize=address -fno-omit-frame-pointer" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++ -DCMAKE_C_FLAGS:STRING="-g --coverage -fsanitize=address -fno-omit-frame-pointer" -DCMAKE_CXX_FLAGS:STRING="-g --coverage -fsanitize=address -fno-omit-frame-pointer" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "build" ]; then
     buildType="$argument1"
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
-	cmake --build . --config "$buildType"  --parallel "$numberOfCores"
+    cmake --build . --config "$buildType"  --parallel "$numberOfCores"
 elif [ "$scriptOption" == "install" ]; then
     buildType="$argument1"
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
-	cmake --install . --verbose --config "$buildType"
+    cmake --install . --verbose --config "$buildType"
 elif [ "$scriptOption" == "run" ]; then
     gtestFilter="$argument1"
     scriptPrint "$scriptName" "$LINENO" "The gtestFilter is [$gtestFilter]."
@@ -88,7 +88,7 @@ elif [ "$scriptOption" == "run" ]; then
         fi
     done
 else
-	scriptPrint "$scriptName" "$LINENO" "The script option [$scriptOption] is not found."
-	scriptPrintInCppMatcherFormat "$scriptPath" "$LINENO" "${BASH_LINENO[0]}" "error: The script option [$scriptOption] is NOT supported by the shell script."
-	exit 1
+    scriptPrint "$scriptName" "$LINENO" "The script option [$scriptOption] is not found."
+    scriptPrintInCppMatcherFormat "$scriptPath" "$LINENO" "${BASH_LINENO[0]}" "error: The script option [$scriptOption] is NOT supported by the shell script."
+    exit 1
 fi

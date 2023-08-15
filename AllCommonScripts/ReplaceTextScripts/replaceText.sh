@@ -15,11 +15,11 @@ source "$aprgDirectory/AllCommonScripts/PrintScripts/PrintUtilities.sh"
 # Validate input
 if ! [[ -d $replaceDirectory ]]; then
     scriptPrint "$scriptName" "$LINENO" "Error: The directory [$replaceDirectory] does not exist."
-	exit 1
+    exit 1
 fi
 if [ -z "$targetString" ]; then
     scriptPrint "$scriptName" "$LINENO" "Error: The targetString cannot be empty, targetString: [$targetString]."
-	exit 1
+    exit 1
 fi
 
 scriptPrint "$scriptName" "$LINENO" "Replacing text with [$targetString] to [$replacementString] in [$replaceDirectory]."

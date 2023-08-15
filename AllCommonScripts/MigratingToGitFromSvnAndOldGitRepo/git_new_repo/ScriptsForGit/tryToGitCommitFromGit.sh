@@ -21,7 +21,7 @@ while read -r line; do
     echo "comparing | startLineCount: [$startLineCount] currentLineCount: [$currentLineCount] endLineCount: [$endLineCount]"
     if [ "$currentLineCount" -gt "$endLineCount" ]; then
         echo "reached end line | currentLineCount: [$currentLineCount] endLineCount: [$endLineCount]"
-		exit 0
+        exit 0
     elif [ "$currentLineCount" -lt "$startLineCount" ]; then
         echo "skipping | currentLineCount: [$currentLineCount] line: [$line]"
     else

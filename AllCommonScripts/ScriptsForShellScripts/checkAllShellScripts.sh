@@ -9,7 +9,7 @@ directoryToConvertAllFiles=$1
 
 # Use aprg directory if there are no arguments
 if [ -z "$directoryToConvertAllFiles" ]; then
-	directoryToConvertAllFiles=$aprgDirectory
+    directoryToConvertAllFiles=$aprgDirectory
 fi
 
 # Source needed scripts
@@ -17,8 +17,11 @@ source "$aprgDirectory/AllCommonScripts/PrintScripts/PrintUtilities.sh"
 
 # Find all files with the same name in the target folder
 scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles]..."
+tempFile=$(mktemp)
 find "$directoryToConvertAllFiles" -type f -name "*.sh" | while read -r locationPath; do
     dos2unix "$locationPath"
+    expand -t 4 "$locationPath" > "$tempFile"
+    mv "$tempFile" "$locationPath"
     shellcheck "$locationPath"
 done
 

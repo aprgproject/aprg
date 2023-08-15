@@ -45,7 +45,7 @@ done
 
 # Put AprgCommon if empty
 if [[ -z $cmakelistDirectories ]]; then
-	cmakelistDirectories="\"AprgCommon/AprgCommon\""
+    cmakelistDirectories="\"AprgCommon/AprgCommon\""
 fi
 
 # Save the value for Github Workflow

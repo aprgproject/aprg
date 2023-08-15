@@ -2,14 +2,16 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Build In WSL Using GCC",
+			"label": "Configure In WSL Using GCC",
 			"type": "shell",
 			"command": "wsl",
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
-				"${workspaceFolderBasename}",
-				"buildWithGcc"
+				"configureWithGcc",
+				"WslBuild",
+				"Debug",
+				"Ninja"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -39,14 +41,16 @@
 			},
 		},
 		{
-			"label": "Build In WSL Using Clang",
+			"label": "Configure In WSL Using Clang",
 			"type": "shell",
 			"command": "wsl",
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
-				"${workspaceFolderBasename}",
-				"buildWithClang"
+				"configureWithClang",
+				"WslBuild",
+				"Debug",
+				"Ninja"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -76,14 +80,54 @@
 			},
 		},
 		{
-			"label": "Build In WSL Using Clang With Asan",
+			"label": "Configure In WSL Using Clang With Asan",
 			"type": "shell",
 			"command": "wsl",
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
-				"${workspaceFolderBasename}",
-				"buildWithClangWithAsan"
+				"configureWithClangWithAsan",
+				"WslBuild",
+				"Debug",
+				"Ninja"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+			"problemMatcher": {
+				"owner": "cpp",
+				"fileLocation": [
+					"autoDetect",
+					"${workspaceRoot}"
+				],
+				"pattern": {
+					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+					"file": 1,
+					"line": 2,
+					"column": 3,
+					"severity": 4,
+					"message": 5
+				}
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+		},
+		{
+			"label": "Build In WSL",
+			"type": "shell",
+			"command": "wsl",
+			"args": [
+				"./.vscode/runWslCommonScript.sh",
+				"outputWithAbsolutePaths",
+				"build",
+				"WslBuild",
+				"Debug"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -111,6 +155,46 @@
 				"reveal": "always",
 				"panel": "shared"
 			},
+			"dependsOn": "Configure In WSL Using Clang With Asan"
+		},
+		{
+			"label": "Install In WSL",
+			"type": "shell",
+			"command": "wsl",
+			"args": [
+				"./.vscode/runWslCommonScript.sh",
+				"outputWithAbsolutePaths",
+				"install",
+				"WslBuild",
+				"Debug"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": {
+				"owner": "cpp",
+				"fileLocation": [
+					"autoDetect",
+					"${workspaceRoot}"
+				],
+				"pattern": {
+					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+					"file": 1,
+					"line": 2,
+					"column": 3,
+					"severity": 4,
+					"message": 5
+				}
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+			"dependsOn": "Build In WSL"
 		},
 		{
 			"label": "Run In WSL",
@@ -119,15 +203,16 @@
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithHighlighting",
-				"${workspaceFolderBasename}",
-				"runFileWithProjectName",
+				"run",
+				"WslBuild",
 				"" //"--gtest_filter=*.*"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
 			"group": "test",
-			"problemMatcher": []
+			"problemMatcher": [],
+			"dependsOn": "Install In WSL"
 		},
 		{
 			"label": "Clean In WSL",
@@ -136,8 +221,9 @@
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
-				"${workspaceFolderBasename}",
-				"clean"
+				"clean",
+				"WslBuild",
+				"Debug"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -175,9 +261,26 @@
 			"dependsOn": "Configure locally with cmake and MSVC"
 		},
 		{
+			"label": "Install locally the MSVC build",
+			"type": "shell",
+			"command": "cmake",
+			"args": [
+				"--install",
+				"../VisualStudioBuild",
+				"--config Debug"
+			],
+			"group": "build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+			"problemMatcher": "$msCompile",
+			"dependsOn": "Build locally with MSVC"
+		},
+		{
 			"label": "Run the local MSVC target",
 			"type": "shell",
-			"command": "${workspaceFolder}/../VisualStudioBuild/build/visualstudio-windows-msvc-debug/Debug/${workspaceFolderBasename}.exe",
+			"command": "${workspaceFolder}/../VisualStudioBuild/install/bin/${workspaceFolderBasename}.exe",
 			"args": [
 				"" //"--gtest_filter=*.*"
 			],
@@ -187,7 +290,7 @@
 				"panel": "shared"
 			},
 			"problemMatcher": [],
-			"dependsOn": "Build locally with MSVC"
+			"dependsOn": "Install locally the MSVC build"
 		}
 	]
 }
