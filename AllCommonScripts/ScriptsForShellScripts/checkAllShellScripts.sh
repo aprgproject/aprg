@@ -21,6 +21,7 @@ locationPaths=($(find "$directoryToConvertAllFiles" -type f -name "*.sh"))
 
 for locationPath in "${locationPaths[@]}"; do
     dos2unix "$locationPaths"
+    shellcheck "$locationPaths"
 done
 
 scriptPrint $scriptName $LINENO "All shell scripts converted."
