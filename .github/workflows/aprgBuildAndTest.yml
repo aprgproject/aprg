@@ -5,7 +5,8 @@ on:
       - '**'
 env:
   buildAndRunScriptRelativePath: AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh
-  detectChangedProjectsRelativePath: AllCommonScripts/DetectGitChanges/DetectGitChanges.sh
+  detectGitChangesRelativePath: AllCommonScripts/DetectGitChanges/DetectGitChanges.sh
+  checkShellScriptsRelativePath: AllCommonScripts/ScriptsForShellScripts/checkShellScripts.sh
 
 jobs:
 
@@ -25,27 +26,37 @@ jobs:
       - name: Detect Git Changes
         id: idOfDetectGitChanges
         run: |
-          detectChangedProjectsPath=$(realpath "$(pwd)/${{ env.detectChangedProjectsRelativePath }}")
+          detectChangedProjectsPath=$(realpath "$(pwd)/${{ env.detectGitChangesRelativePath }}")
           echo "detectChangedProjectsPath: [$detectChangedProjectsPath]"
-          chmod +x $detectChangedProjectsPath
-          $detectChangedProjectsPath
+          chmod +x "$detectChangedProjectsPath"
+          "$detectChangedProjectsPath"
 
 
   shellcheck:
-    name: Shellcheck
+    name: Perform shellcheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Run ShellCheck
-        uses: ludeeus/action-shellcheck@master
-        with:
-          ignore_paths: >-
-            ./benchmark/benchmarkFromGitHub/**
-            ./gtest/gtest/**
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install shellcheck on ubuntu/gcc
+        if: startsWith(matrix.config.name, 'UbuntuLatestGcc')
+        run: |
+          sudo apt-get update
+          sudo apt-get install shellcheck
+          shellcheck --version
+            
+      - name: Run shellCheck on shell scripts
+        shell: bash
+        run: |
+          checkShellScriptsPath=$(realpath "$(pwd)/${{ env.checkShellScriptsRelativePath }}")
+          echo "checkShellScriptsPath: [$checkShellScriptsPath]"
+          chmod +x "$checkShellScriptsPath"
+          "$checkShellScriptsPath"
 
           
   buildAndTest:
-    name: Test ${{ matrix.project }} in ${{ matrix.config.name }}
+    name: Test ${{ matrix.project }} on ${{ matrix.config.name }}
     needs: detectGitChanges
     runs-on: ${{ matrix.config.os }}
     strategy:
@@ -152,7 +163,7 @@ jobs:
         run: |
           buildAndRunScriptPath=$(realpath "$(pwd)/${{ env.buildAndRunScriptRelativePath }}")
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
-          chmod +x $buildAndRunScriptPath
+          chmod +x "$buildAndRunScriptPath"
           echo "buildAndRunScriptPath=$buildAndRunScriptPath" >> "$GITHUB_ENV"
             
       - name: Configure for windows
@@ -160,36 +171,36 @@ jobs:
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          $buildAndRunScriptPath configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
+          "$buildAndRunScriptPath" configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Configure for ubuntu/gcc
         if: matrix.config.name == 'UbuntuLatestGcc'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          $buildAndRunScriptPath configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}"
+          "$buildAndRunScriptPath" configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Configure for ubuntu/clang
         if: matrix.config.name == 'UbuntuLatestClang'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          $buildAndRunScriptPath configureWithClang GithubBuild Debug "${{ matrix.config.generators }}"
+          "$buildAndRunScriptPath" configureWithClang GithubBuild Debug "${{ matrix.config.generators }}"
             
       - name: Build
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          $buildAndRunScriptPath build GithubBuild Debug
+          "$buildAndRunScriptPath" build GithubBuild Debug
             
       - name: Install
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          $buildAndRunScriptPath install GithubBuild Debug
+          "$buildAndRunScriptPath" install GithubBuild Debug
 
       - name: Run
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          $buildAndRunScriptPath run GithubBuild
+          "$buildAndRunScriptPath" run GithubBuild
