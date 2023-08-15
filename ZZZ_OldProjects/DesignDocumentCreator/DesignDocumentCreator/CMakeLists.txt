@@ -23,13 +23,14 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
 # Process for files, directories and flags
 include(${DD_CREATOR_DIR}/cmake/CommonFilesAndDirectories.cmake)
+include(${DD_CREATOR_DIR}/cmake/AddFlags.cmake)
 
-#Feature include
+# Feature include
 set(FEATURE_FOLDER "CNI21985")
 include(${DD_CREATOR_DIR}/cmake/FeatureFilesAndDirectories.cmake)
 add_definitions(-DLOG_LOCATION="${DD_CREATOR_DIR}/../DesignDocumentCreatorLogs")
 
-#Assign Sack Directory
+# Assign Sack Directory
 set(SackDirectory "F:/Branches/ControlPlane/sbts1/tcom")
 
 set(SACKS_DIR_TO_INCLUDE
@@ -80,8 +81,6 @@ GET_SOURCE_FILES_FROM_DIRECTORIES(BTS_SACKS BTS_SACK_DIRECTORY_LIST)
 set(DD_CREATOR_INCLUDE_DIRECTORIES ${DD_CREATOR_DIR}/src ${DD_CREATOR_DIR}/tst)
 
 # Do final steps
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
 add_executable(${OUTFILE} ${DD_CREATOR_COMMON_SOURCES_AND_TESTS} ${FEATURE_SOURCES_AND_TESTS} ${TCOM_PRIVATE_SACKS} ${BTS_SACKS})
 include_directories(
     ${FEATURE_INCLUDE_DIRECTORIES}
@@ -91,4 +90,5 @@ include_directories(
 )
 target_link_libraries(${OUTFILE} APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
 add_test(${OUTFILE} ${OUTFILE})
+install(TARGETS ${OUTFILE} DESTINATION bin)
 include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
