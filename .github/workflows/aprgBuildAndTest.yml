@@ -132,7 +132,7 @@ jobs:
           #echo "Finished visual studio environment script."
 
       - name: Install dependencies on ubuntu/gcc
-        if: startsWith(matrix.config.name, 'UbuntuLatestGcc')
+        if: matrix.config.name == 'UbuntuLatestGcc'
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake
@@ -141,13 +141,19 @@ jobs:
           gcc --version
 
       - name: Install dependencies on ubuntu/clang
-        if: startsWith(matrix.config.name, 'UbuntuLatestClang')
+        if: matrix.config.name == 'UbuntuLatestGcc'
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake
           ninja --version
           cmake --version
           clang --version
+
+      - name: Install dependencies on File Extractor
+        if: matrix.project == 'AprgFileExtractor/AprgFileExtractor'
+        run: |
+          sudo apt-get update
+          sudo apt-get install p7zip-full
           
 # MAC OS is not supported          
 #      - name: Install dependencies on macos
