@@ -141,7 +141,7 @@ jobs:
           gcc --version
 
       - name: Install dependencies on ubuntu/clang
-        if: matrix.config.name == 'UbuntuLatestGcc'
+        if: matrix.config.name == 'UbuntuLatestClang'
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake
