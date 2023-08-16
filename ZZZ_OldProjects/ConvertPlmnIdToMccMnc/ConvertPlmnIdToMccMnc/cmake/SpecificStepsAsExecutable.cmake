@@ -1,4 +1,4 @@
 # Assign files, directories, flags, definitions and other specific steps
 
-include(${APRG_COMMON_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${APRG_COMMON_DIR}/cmake/AddFlags.cmake)
+include(${CONVERT_PLMNID_TO_MCC_MNC_DIR}/cmake/FindFilesAndDirectories.cmake)
+include(${CONVERT_PLMNID_TO_MCC_MNC_DIR}/cmake/AddFlags.cmake)

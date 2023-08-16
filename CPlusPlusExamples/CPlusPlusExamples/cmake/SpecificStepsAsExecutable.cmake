@@ -1,4 +1,4 @@
 # Assign files, directories, flags, definitions and other specific steps
 
-include(${APRG_COMMON_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${APRG_COMMON_DIR}/cmake/AddFlags.cmake)
+include(${C_PLUS_PLUS_EXAMPLES_DIR}/cmake/FindFilesAndDirectories.cmake)
+include(${C_PLUS_PLUS_EXAMPLES_DIR}/cmake/AddFlags.cmake)

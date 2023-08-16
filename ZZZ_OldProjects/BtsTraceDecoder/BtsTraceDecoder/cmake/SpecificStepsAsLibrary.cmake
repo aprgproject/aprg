@@ -1,4 +1,4 @@
 # Assign files, directories, flags, definitions and other specific steps
 
-include(${APRG_COMMON_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${APRG_COMMON_DIR}/cmake/AddFlags.cmake)
+include(${BTS_TRACE_DECODER_DIR}/cmake/FindFilesAndDirectories.cmake)
+

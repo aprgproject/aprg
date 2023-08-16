@@ -1,4 +1,4 @@
 # Assign files, directories, flags, definitions and other specific steps
 
-include(${APRG_COMMON_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${APRG_COMMON_DIR}/cmake/AddFlags.cmake)
+include(${ASIL_BASEBAND_POOLING_AND_PROGRAMS_DIR}/cmake/FindFilesAndDirectories.cmake)
+include(${ASIL_BASEBAND_POOLING_AND_PROGRAMS_DIR}/cmake/AddFlags.cmake)
