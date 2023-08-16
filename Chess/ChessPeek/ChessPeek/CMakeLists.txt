@@ -22,9 +22,8 @@ include(${APRG_DIR}/AprgBitmap/AprgCmakeInclude/AprgBitmap.cmake)
 include(${APRG_DIR}/AprgLocalUserAutomation/AprgCmakeInclude/AprgLocalUserAutomation.cmake)
 include(${APRG_DIR}/Chess/ChessUtilities/AprgCmakeInclude/ChessUtilities.cmake)
 
-# Process for files, directories and flags
-include(${CHESS_PEEK_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${CHESS_PEEK_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${CHESS_PEEK_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 if (APRG_TEST_MODE)

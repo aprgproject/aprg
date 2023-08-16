@@ -17,10 +17,8 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${APRG_DIR}/AprgAlgorithm/AprgCmakeInclude/AprgAlgorithm.cmake)
 include(${APRG_DIR}/AprgGrepStringEvaluator/AprgCmakeInclude/AprgGrepStringEvaluator.cmake)
 
-# Process for files, directories and flags
-include(${WCDMA_TOOLS_BACKEND_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${WCDMA_TOOLS_BACKEND_DIR}/cmake/AddFlags.cmake)
-
+# Assign files, directories, flags, definitions and other specific steps
+include(${WCDMA_TOOLS_BACKEND_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 add_executable(${OUTFILE} ${WCDMA_TOOLS_BACKEND_SOURCES_AND_TESTS})

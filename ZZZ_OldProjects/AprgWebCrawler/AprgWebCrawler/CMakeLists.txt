@@ -23,9 +23,8 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${APRG_DIR}/CurlCpp/AprgCmakeInclude/CurlCpp.cmake)
 include(${APRG_DIR}/AprgLocalUserAutomation/AprgCmakeInclude/AprgLocalUserAutomation.cmake)
 
-# Process for files, directories and flags
-include(${APRG_WEB_CRAWLER_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${APRG_WEB_CRAWLER_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${APRG_WEB_CRAWLER_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 add_executable(${OUTFILE} ${APRG_WEB_CRAWLER_SOURCES})

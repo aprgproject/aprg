@@ -18,9 +18,8 @@ include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
-# Process for files, directories and flags
-include(${MESSAGE_CONTENT_CHECKER_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${MESSAGE_CONTENT_CHECKER_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${MESSAGE_CONTENT_CHECKER_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 #Assign Sack Directory
 set(SackDirectory "F:/Branches/ControlPlane/sbts1/tcom")

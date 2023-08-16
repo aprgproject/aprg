@@ -16,9 +16,8 @@ include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${APRG_DIR}/AprgAlgorithm/AprgCmakeInclude/AprgAlgorithm.cmake)
 
-# Process for files, directories and flags
-include(${APRG_GREP_STRING_EVALUATOR_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${APRG_GREP_STRING_EVALUATOR_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${APRG_GREP_STRING_EVALUATOR_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 add_executable(${OUTFILE} ${APRG_GREP_STRING_EVALUATOR_SOURCES_AND_TESTS})

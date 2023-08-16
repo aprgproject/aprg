@@ -1,8 +1,8 @@
-#Assign GSL_DIR directory, this needs aprg directory
+# Assign project directory, this needs aprg directory
 set(GSL_DIR ${APRG_DIR}/gsl/)
 
 if(WIN32)
-    #Include GSL files and directories
+    # Assign files, directories, flags, definitions and other specific steps
     set(GSL_INCLUDE_DIRECTORIES ${GSL_DIR}/include/gsl2.7/)
 
     include_directories(${GSL_INCLUDE_DIRECTORIES})

@@ -25,9 +25,8 @@ include(${APRG_DIR}/AprgAlgorithm/AprgCmakeInclude/AprgAlgorithm.cmake)
 include(${APRG_DIR}/AprgFileExtractor/AprgCmakeInclude/AprgFileExtractor.cmake)
 include(${APRG_DIR}/AprgGrepStringEvaluator/AprgCmakeInclude/AprgGrepStringEvaluator.cmake)
 
-# Process for files, directories and flags
-include(${QUICKEST_WAY_TO_PROGRAM_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${QUICKEST_WAY_TO_PROGRAM_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${QUICKEST_WAY_TO_PROGRAM_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 add_executable(${OUTFILE} ${QUICKEST_WAY_TO_PROGRAM_SOURCES_AND_TESTS})

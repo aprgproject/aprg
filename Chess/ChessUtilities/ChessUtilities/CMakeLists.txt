@@ -15,9 +15,8 @@ include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
-# Process for files, directories and flags
-include(${CHESS_UTILITIES_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${CHESS_UTILITIES_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${CHESS_UTILITIES_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 add_executable(${OUTFILE} ${CHESS_UTILITIES_SOURCES_AND_TESTS})

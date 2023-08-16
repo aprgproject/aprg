@@ -15,9 +15,8 @@ include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
-# Process for files, directories and flags
-include(${GOOGLE_CODE_JAM_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${GOOGLE_CODE_JAM_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${GOOGLE_CODE_JAM_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 add_executable(${OUTFILE} ${GOOGLE_CODE_JAM_SOURCES_AND_TESTS})

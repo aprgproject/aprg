@@ -18,9 +18,8 @@ include(${APRG_DIR}/Boost/AprgCmakeInclude/boost.cmake)
 include(${APRG_DIR}/AprgAlgebra/AprgCmakeInclude/AprgAlgebra.cmake)
 include(${APRG_DIR}/AprgGeometry/AprgCmakeInclude/AprgGeometry.cmake)
 
-# Process for files, directories and flags
-include(${APRG_GNU_PLOT_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${APRG_GNU_PLOT_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${APRG_GNU_PLOT_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 add_executable(${OUTFILE} ${APRG_GNU_PLOT_SOURCES_AND_TESTS})

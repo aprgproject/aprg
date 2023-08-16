@@ -1,8 +1,8 @@
-#Assign CURL_DIR directory, this needs aprg directory
+# Assign project directory, this needs aprg directory
 set(CURL_DIR ${APRG_DIR}/CURL/)
 
 if(WIN32)
-    #Include CURL files and directories
+    # Assign files, directories, flags, definitions and other specific steps
     set(CURL_INCLUDE_DIRECTORIES ${CURL_DIR}/include/curl-7.79/)
 
     include_directories(${CURL_INCLUDE_DIRECTORIES})

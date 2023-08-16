@@ -21,7 +21,7 @@ set(DesignDocumentCreatorDirectory ${CMAKE_CURRENT_SOURCE_DIR})
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
-# Process for files, directories and flags
+# Assign files, directories, flags, definitions and other specific steps
 include(${DD_CREATOR_DIR}/cmake/CommonFilesAndDirectories.cmake)
 include(${DD_CREATOR_DIR}/cmake/AddFlags.cmake)
 

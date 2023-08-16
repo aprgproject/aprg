@@ -19,9 +19,8 @@ include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${APRG_DIR}/AprgLocalUserAutomation/AprgCmakeInclude/AprgLocalUserAutomation.cmake)
 
-# Process for files, directories and flags
-include(${FESTER_ROBOT_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${FESTER_ROBOT_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${FESTER_ROBOT_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 if (APRG_TEST_MODE)

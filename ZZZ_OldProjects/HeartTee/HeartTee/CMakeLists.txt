@@ -17,9 +17,8 @@ include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 # Include other projects
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 
-# Process for files, directories and flags
-include(${HEART_TEE_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${HEART_TEE_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${HEART_TEE_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 set(SPECIAL_INCLUDE_DIRECTORIES
     src/HeartTee

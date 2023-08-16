@@ -22,9 +22,8 @@ include(${APRG_DIR}/AprgGeometry/AprgCmakeInclude/AprgGeometry.cmake)
 include(${APRG_DIR}/AprgAlgebra/AprgCmakeInclude/AprgAlgebra.cmake)
 include(${APRG_DIR}/AprgGraph/AprgCmakeInclude/AprgGraph.cmake)
 
-# Process for files, directories and flags
-include(${PID_SIMULATOR_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${PID_SIMULATOR_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${PID_SIMULATOR_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 if (APRG_TEST_MODE)

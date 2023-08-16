@@ -19,9 +19,8 @@ include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${APRG_DIR}/AprgAudio/AprgCmakeInclude/AprgAudio.cmake)
 
-# Process for files, directories and flags
-include(${APRG_AUDIO_MANIPULATOR_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${APRG_AUDIO_MANIPULATOR_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${APRG_AUDIO_MANIPULATOR_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 if (APRG_TEST_MODE)

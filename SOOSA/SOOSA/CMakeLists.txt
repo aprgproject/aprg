@@ -21,9 +21,8 @@ include(${APRG_DIR}/AprgStatistics/AprgCmakeInclude/AprgStatistics.cmake)
 include(${APRG_DIR}/AprgGeometry/AprgCmakeInclude/AprgGeometry.cmake)
 include(${APRG_DIR}/AprgBitmap/AprgCmakeInclude/AprgBitmap.cmake)
 
-# Process for files, directories and flags
-include(${SOOSA_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${SOOSA_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${SOOSA_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 if(APRG_TEST_MODE)

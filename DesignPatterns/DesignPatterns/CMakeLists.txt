@@ -18,8 +18,8 @@ include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
-# Process for files, directories and flags
-include(${DESIGN_PATTERNS_DIR}/cmake/FindFilesAndDirectories.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${DESIGN_PATTERNS_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 add_executable(${OUTFILE} ${DESIGN_PATTERNS_SOURCES_AND_TESTS})

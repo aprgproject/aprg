@@ -1,4 +1,4 @@
-#Assign curl directory, this needs aprg directory
+# Assign project directory, this needs aprg directory
 set(ZLIB_DIR ${APRG_DIR}/zlib128/zlib-1.2.8/)
 
 #Include curl library

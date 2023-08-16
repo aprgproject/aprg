@@ -18,9 +18,8 @@ include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
-# Process for files, directories and flags
-include(${ASIL_BASEBAND_POOLING_AND_PROGRAMS_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${ASIL_BASEBAND_POOLING_AND_PROGRAMS_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${ASIL_BASEBAND_POOLING_AND_PROGRAMS_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 if (APRG_TEST_MODE)

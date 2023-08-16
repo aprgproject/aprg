@@ -1,7 +1,7 @@
-#Assign AprgCommon directory, this needs aprg directory
+# Assign project directory, this needs aprg directory
 set(APRG_COMMON_DIR ${APRG_DIR}/AprgCommon/AprgCommon/)
 
-#Include APRG_COMMON files and directories
+# Assign files, directories, flags, definitions and other specific steps
 include(${APRG_COMMON_DIR}/cmake/SpecificStepsAsLibrary.cmake)
 
 include_directories(${APRG_COMMON_INCLUDE_DIRECTORIES})

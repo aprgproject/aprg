@@ -19,9 +19,8 @@ include(${APRG_DIR}/AprgBitmap/AprgCmakeInclude/AprgBitmap.cmake)
 include(${APRG_DIR}/AprgGeometry/AprgCmakeInclude/AprgGeometry.cmake)
 include(${APRG_DIR}/AprgStatistics/AprgCmakeInclude/AprgStatistics.cmake)
 
-# Process for files, directories and flags
-include(${APRG_BITMAP_MANIPULATOR_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${APRG_BITMAP_MANIPULATOR_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${APRG_BITMAP_MANIPULATOR_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 add_executable(${OUTFILE} ${APRG_BITMAP_MANIPULATOR_SOURCES_AND_TESTS})

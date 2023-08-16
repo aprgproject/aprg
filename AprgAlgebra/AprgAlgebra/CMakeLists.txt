@@ -15,10 +15,8 @@ include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
-# Process for files, directories and flags
-include(${APRG_ALGEBRA_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${APRG_ALGEBRA_DIR}/cmake/AddFlags.cmake)
-
+# Assign files, directories, flags, definitions and other specific steps
+include(${APRG_ALGEBRA_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 add_executable(${OUTFILE} ${APRG_ALGEBRA_SOURCES_AND_TESTS})
