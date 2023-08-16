@@ -9,7 +9,12 @@ deleteDirectory="$1"
 
 deleteAllDirectoriesWithName() {
     local nameForDeletion="$1"
-    find "$deleteDirectory" -type d -name "$nameForDeletion" -exec rm -rf {} \;
+    find "$deleteDirectory" -type d -name "$nameForDeletion" -exec rm -rfv {} \;
+}
+
+deleteAllFilesWithName() {
+    local nameForDeletion="$1"
+    find "$deleteDirectory" -type f -name "$nameForDeletion" -exec rm -rfv {} \;
 }
 
 # Source needed scripts
@@ -29,5 +34,7 @@ fi
 deleteAllDirectoriesWithName "VisualStudioBuild"
 deleteAllDirectoriesWithName "WslBuild"
 deleteAllDirectoriesWithName "build-*"
+deleteAllDirectoriesWithName ".vs"
+deleteAllFilesWithName "CMakeLists.txt.user"
 
 scriptPrint "$scriptName" "$LINENO" "Cleanup completed."
