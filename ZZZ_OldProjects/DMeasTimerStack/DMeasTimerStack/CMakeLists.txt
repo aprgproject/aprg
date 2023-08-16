@@ -20,6 +20,7 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 
 # Process for files, directories and flags
 include(${DMEAS_TIMER_STACK_DIR}/cmake/FindFilesAndDirectories.cmake)
+include(${DMEAS_TIMER_STACK_DIR}/cmake/AddFlags.cmake)
 
 #Assign Sack Directory
 set(SackDirectory "F:/Branches/ControlPlane/sbts1/tcom")
@@ -71,18 +72,15 @@ GET_SOURCE_FILES_FROM_DIRECTORIES(BTS_SACKS BTS_SACK_DIRECTORY_LIST)
 
 # Do final steps
 if (TEST_MODE)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
     add_executable(${OUTFILE} ${DMEAS_TIMER_STACK_SOURCES_AND_TESTS} ${TCOM_PRIVATE_SACKS} ${BTS_SACKS})
     include_directories(${DMEAS_TIMER_STACK_INCLUDE_DIRECTORIES} ${DMEAS_TIMER_STACK_TEST_INCLUDE_DIRECTORIES} ${SACKS_DIR_TO_INCLUDE} ${GTEST_INCLUDE_DIRS})
     target_link_libraries(${OUTFILE} APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
     add_test(${OUTFILE} ${OUTFILE})
 else()
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED}")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED}")
     set(CMAKE_EXE_LINKER_FLAGS ${APRG_LINKER_FLAGS_FOR_RELEASE_WITH_STRIP})
     add_executable(${OUTFILE} ${DMEAS_TIMER_STACK_SOURCES} ${DMEAS_TIMER_STACK_MAIN_SOURCES} ${TCOM_PRIVATE_SACKS} ${BTS_SACKS})
     include_directories(${DMEAS_TIMER_STACK_INCLUDE_DIRECTORIES} ${SACKS_DIR_TO_INCLUDE})
     target_link_libraries(${OUTFILE} APRG_COMMON)
 endif()
+install(TARGETS ${OUTFILE} DESTINATION bin)
 include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
