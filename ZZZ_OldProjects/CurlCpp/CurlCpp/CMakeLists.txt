@@ -18,7 +18,7 @@ endif()
 
 # Include other projects
 include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
-include(${APRG_DIR}/curl/AprgCmakeInclude/Curl.cmake)
+include(${APRG_DIR}/ZZZ_OldProjects/curl/AprgCmakeInclude/Curl.cmake)
 
 # Process for files, directories and flags
 include(${APRG_CURL_CPP_DIR}/cmake/FindFilesAndDirectories.cmake)
