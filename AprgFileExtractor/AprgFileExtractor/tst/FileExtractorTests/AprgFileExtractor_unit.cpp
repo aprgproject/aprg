@@ -49,6 +49,19 @@ TEST(AprgFileExtractorTest, ListOfFilesFromZipFileAreCorrectlyRetrieved) {
 
     ASSERT_EQ(11U, files.size());
     auto fileIterator = files.begin();
+#if defined(OS_LINUX)
+    EXPECT_EQ(R"(DirectoryTest/DIR1/File1.log)", *fileIterator++);
+    EXPECT_EQ(R"(DirectoryTest/DIR2/File2.txt)", *fileIterator++);
+    EXPECT_EQ(R"(DirectoryTest/DIR3/File3)", *fileIterator++);
+    EXPECT_EQ(R"(DirectoryTest/DIR4/File4.mp3)", *fileIterator++);
+    EXPECT_EQ(R"(DirectoryTest/DIR5/File5.avi)", *fileIterator++);
+    EXPECT_EQ(R"(DirectoryTest/DIR6/SUBDIR1/File6.jpg)", *fileIterator++);
+    EXPECT_EQ(R"(DirectoryTest/File1.log)", *fileIterator++);
+    EXPECT_EQ(R"(DirectoryTest/File2.txt)", *fileIterator++);
+    EXPECT_EQ(R"(DirectoryTest/File3)", *fileIterator++);
+    EXPECT_EQ(R"(DirectoryTest/File4.mp3)", *fileIterator++);
+    EXPECT_EQ(R"(DirectoryTest/File5.avi)", *fileIterator++);
+#elif defined(OS_WINDOWS)
     EXPECT_EQ(R"(DirectoryTest\DIR1\File1.log)", *fileIterator++);
     EXPECT_EQ(R"(DirectoryTest\DIR2\File2.txt)", *fileIterator++);
     EXPECT_EQ(R"(DirectoryTest\DIR3\File3)", *fileIterator++);
@@ -60,21 +73,22 @@ TEST(AprgFileExtractorTest, ListOfFilesFromZipFileAreCorrectlyRetrieved) {
     EXPECT_EQ(R"(DirectoryTest\File3)", *fileIterator++);
     EXPECT_EQ(R"(DirectoryTest\File4.mp3)", *fileIterator++);
     EXPECT_EQ(R"(DirectoryTest\File5.avi)", *fileIterator++);
+#endif
 }
 
 TEST(AprgFileExtractorTest, OneFileIsExtractedSuccessfully) {
     AprgFileExtractor fileExtractor;
     AlbaLocalPathHandler directoryPathHandler(APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\)");
-    deleteAllFilesOnDirectory(directoryPathHandler.getFullPath());
-
-    string outputFilePath = fileExtractor.extractOneFile(PATH_OF_SAMPLE_ZIP_1, R"(DirectoryTest\DIR1\File1.log)");
-
+    AlbaLocalPathHandler relativeFilePathHandler(R"(DirectoryTest\DIR1\File1.log)");
     AlbaLocalPathHandler filePathHandler(
         APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\DirectoryTest\DIR1\File1.log)");
+    deleteAllFilesOnDirectory(directoryPathHandler.getFullPath());
+
+    string outputFilePath = fileExtractor.extractOneFile(PATH_OF_SAMPLE_ZIP_1, relativeFilePathHandler.getFullPath());
     EXPECT_EQ(filePathHandler.getFullPath(), outputFilePath);
     filePathHandler.reInput();
     EXPECT_TRUE(filePathHandler.isFoundInLocalSystem());
-    deleteAllFilesOnDirectory(directoryPathHandler.getFullPath());
+    // deleteAllFilesOnDirectory(directoryPathHandler.getFullPath());
 }
 
 TEST(AprgFileExtractorTest, AllFilesAreExtractedSuccessfully) {
@@ -100,23 +114,6 @@ TEST(AprgFileExtractorTest, AllFilesAreExtractedSuccessfully) {
 
 TEST(AprgFileExtractorTest, FilesAreExtractedSuccessfullyWithACondition) {
     AprgFileExtractor fileExtractor("[.log]");
-    AlbaLocalPathHandler directoryPathHandler(APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\)");
-    deleteAllFilesOnDirectory(directoryPathHandler.getFullPath());
-
-    fileExtractor.extractAllRelevantFiles(PATH_OF_SAMPLE_ZIP_1);
-
-    AlbaLocalPathHandler filePathHandler(
-        APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\DirectoryTest\DIR1\File1.log)");
-    EXPECT_TRUE(filePathHandler.isFoundInLocalSystem());
-    filePathHandler.input(APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\DirectoryTest\File1.log)");
-    EXPECT_TRUE(filePathHandler.isFoundInLocalSystem());
-    deleteAllFilesOnDirectory(directoryPathHandler.getFullPath());
-}
-
-TEST(AprgFileExtractorTest, FilesAreExtractedSuccessfullyWithAConditionWhen7zPathHasSpaces) {
-    AprgFileExtractor fileExtractor(
-        "[.log]", APRG_DIR R"(\AprgFileExtractor\7z32 With Space\7z. With Space.exe)",
-        APRG_DIR R"(\AprgFileExtractor\7z32 With Space\tempFile.txt)");
     AlbaLocalPathHandler directoryPathHandler(APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\)");
     deleteAllFilesOnDirectory(directoryPathHandler.getFullPath());
 

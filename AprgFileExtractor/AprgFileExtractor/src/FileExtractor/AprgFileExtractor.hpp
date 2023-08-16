@@ -24,6 +24,7 @@ public:
     bool isRecognizedCompressedFile(std::string const& extension) const;
 
 private:
+    void runInConsole(std::string const& command) const;
     void extractAllRelevantFilesInThisDirectory(std::string const& directoryPath);
     void extractAllRelevantFilesInThisCompressedFile(std::string const& filePathOfCompressedFile);
     void extractAllFilesRecursively(std::string const& filePathOfCompressedFile);
@@ -32,6 +33,7 @@ private:
     AlbaGrepStringEvaluator m_grepEvaluator;
     std::string m_pathOf7zExecutable;
     std::string m_pathOf7zTempFile;
+    std::string m_nullDevice;
 };
 
 }  // namespace alba

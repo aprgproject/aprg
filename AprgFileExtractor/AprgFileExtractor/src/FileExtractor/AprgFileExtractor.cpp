@@ -2,15 +2,19 @@
 
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+#include <Common/Print/AlbaLogPrints.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
-#include <windows.h>
-
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 
 #ifndef PATH_OF_7Z_EXECUTABLE
 static_assert(false, "PATH_OF_7Z_EXECUTABLE is not set in cmake");
+#endif
+
+#ifndef NULL_DEVICE
+static_assert(false, "NULL_DEVICE is not set in cmake");
 #endif
 
 #ifndef PATH_OF_7Z_TEMP_FILE
@@ -29,12 +33,14 @@ extern int numberOfFilesAnalyzedForExtraction;
 AprgFileExtractor::AprgFileExtractor()
     : m_grepEvaluator(""),
       m_pathOf7zExecutable(AlbaLocalPathHandler(PATH_OF_7Z_EXECUTABLE).getFullPath()),
-      m_pathOf7zTempFile(AlbaLocalPathHandler(PATH_OF_7Z_TEMP_FILE).getFullPath()) {}
+      m_pathOf7zTempFile(AlbaLocalPathHandler(PATH_OF_7Z_TEMP_FILE).getFullPath()),
+      m_nullDevice(AlbaLocalPathHandler(NULL_DEVICE).getFullPath()) {}
 
 AprgFileExtractor::AprgFileExtractor(string const& condition)
     : m_grepEvaluator(condition),
       m_pathOf7zExecutable(AlbaLocalPathHandler(PATH_OF_7Z_EXECUTABLE).getFullPath()),
-      m_pathOf7zTempFile(AlbaLocalPathHandler(PATH_OF_7Z_TEMP_FILE).getFullPath()) {}
+      m_pathOf7zTempFile(AlbaLocalPathHandler(PATH_OF_7Z_TEMP_FILE).getFullPath()),
+      m_nullDevice(AlbaLocalPathHandler(NULL_DEVICE).getFullPath()) {}
 
 AprgFileExtractor::AprgFileExtractor(
     string const& condition, string const& pathOf7zExecutable, string const& pathOf7zTempFile)
@@ -55,9 +61,9 @@ void AprgFileExtractor::extractAllRelevantFiles(string const& pathOfFileOrDirect
 void AprgFileExtractor::copyRelativeFilePathsFromCompressedFile(
     string const& filePathOfCompressedFile, SetOfFilePaths& files) const {
     AlbaLocalPathHandler filePathHandler(filePathOfCompressedFile);
-    string command = string(R"(cmd /S /C "")") + m_pathOf7zExecutable + R"(" l -slt ")" +
-                     filePathHandler.getFullPath() + R"(" > ")" + m_pathOf7zTempFile + R"("")";
-    system(command.c_str());
+    string command = string(R"(")") + m_pathOf7zExecutable + R"(" l -slt ")" + filePathHandler.getFullPath() +
+                     R"(" > ")" + m_pathOf7zTempFile + R"(")";
+    runInConsole(command);
 
     ifstream tempFile(m_pathOf7zTempFile);
     string path;
@@ -80,10 +86,9 @@ string AprgFileExtractor::extractOnceForAllFiles(string const& filePathOfCompres
     AlbaLocalPathHandler compressedFilePathHandler(filePathOfCompressedFile);
     AlbaLocalPathHandler outputPathHandler(
         compressedFilePathHandler.getDirectory() + R"(\)" + compressedFilePathHandler.getFilenameOnly() + R"(\)");
-    string command = string(R"(cmd /S /C "")") + m_pathOf7zExecutable + R"(" e -y -o")" +
-                     outputPathHandler.getDirectory() + R"(" ")" + compressedFilePathHandler.getFullPath() +
-                     R"(" > nul ")";
-    system(command.c_str());
+    string command = string(R"(")") + m_pathOf7zExecutable + R"(" e -y -o")" + outputPathHandler.getDirectory() +
+                     R"(" ")" + compressedFilePathHandler.getFullPath() + R"(" > )" + m_nullDevice;
+    runInConsole(command);
     cout << "extractAll: " << outputPathHandler.getImmediateDirectoryName() << R"(\)"
          << "\n";
     return outputPathHandler.getFullPath();
@@ -95,10 +100,10 @@ string AprgFileExtractor::extractOneFile(
     AlbaLocalPathHandler outputPathHandler(
         compressedFilePathHandler.getDirectory() + R"(\)" + compressedFilePathHandler.getFilenameOnly() + R"(\)" +
         relativePathOfFile);
-    string command = string(R"(cmd /S /C "")") + m_pathOf7zExecutable + R"(" e -y -o")" +
-                     outputPathHandler.getDirectory() + R"(" ")" + compressedFilePathHandler.getFullPath() + R"(" ")" +
-                     relativePathOfFile + R"(" > nul ")";
-    system(command.c_str());
+    string command = string(R"(")") + m_pathOf7zExecutable + R"(" e -y -o")" + outputPathHandler.getDirectory() +
+                     R"(" ")" + compressedFilePathHandler.getFullPath() + R"(" ")" + relativePathOfFile + R"(" > )" +
+                     m_nullDevice;
+    runInConsole(command);
     cout << "extractOneFile: " << outputPathHandler.getFile() << "\n";
     return outputPathHandler.getFullPath();
 }
@@ -109,6 +114,17 @@ bool AprgFileExtractor::isRecognizedCompressedFile(string const& extension) cons
            stringHelper::isEqualNotCaseSensitive("7z", extension) ||
            stringHelper::isEqualNotCaseSensitive("xz", extension) ||
            stringHelper::isEqualNotCaseSensitive("gz", extension);
+}
+
+void AprgFileExtractor::runInConsole(string const& command) const {
+#if defined(OS_LINUX)
+    ALBA_INF_PRINT1(cout, command);
+    system(command.c_str());
+#elif defined(OS_WINDOWS)
+    string revisedCommand = string(R"(cmd /S /C ")") + command + string(R"(")");
+    ALBA_INF_PRINT1(cout, revisedCommand);
+    system(revisedCommand.c_str());
+#endif
 }
 
 void AprgFileExtractor::extractAllRelevantFilesInThisDirectory(string const& directoryPath) {
