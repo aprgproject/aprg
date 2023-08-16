@@ -5,8 +5,8 @@ project(DMeasTimerStack C CXX)
 set(OUTFILE ${PROJECT_NAME})
 set(DMEAS_TIMER_STACK_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-# Set TEST_MODE to ON to enable tests and OFF to call main function.
-option(TEST_MODE "Enable test mode" ON)
+# Set APRG_TEST_MODE to ON to enable tests and OFF to call main function.
+option(APRG_TEST_MODE "Enable test mode" ON)
 
 # Locate APRG Directory first because its used on other cmakes
 include(${DMEAS_TIMER_STACK_DIR}/cmake/LocateAprgDirectory.cmake)
@@ -71,7 +71,7 @@ GET_SUB_DIRECTORY_LIST(BTS_SACK_DIRECTORY_LIST ${BTS_SACK_DIRECTORY})
 GET_SOURCE_FILES_FROM_DIRECTORIES(BTS_SACKS BTS_SACK_DIRECTORY_LIST)
 
 # Do final steps
-if (TEST_MODE)
+if (APRG_TEST_MODE)
     add_executable(${OUTFILE} ${DMEAS_TIMER_STACK_SOURCES_AND_TESTS} ${TCOM_PRIVATE_SACKS} ${BTS_SACKS})
     include_directories(${DMEAS_TIMER_STACK_INCLUDE_DIRECTORIES} ${DMEAS_TIMER_STACK_TEST_INCLUDE_DIRECTORIES} ${SACKS_DIR_TO_INCLUDE} ${GTEST_INCLUDE_DIRS})
     target_link_libraries(${OUTFILE} APRG_COMMON ${APRG_GTEST_DEPENDENCIES})

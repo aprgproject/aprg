@@ -5,8 +5,8 @@ project(TemplateForAllCases C CXX)
 set(OUTFILE ${PROJECT_NAME})
 set(TEMPLATE_FOR_ALL_CASES_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-# Set TEST_MODE to ON to enable tests and OFF to call main function.
-option(TEST_MODE "Enable test mode" ON)
+# Set APRG_TEST_MODE to ON to enable tests and OFF to call main function.
+option(APRG_TEST_MODE "Enable test mode" ON)
 
 # Locate APRG Directory first because its used on other cmakes
 include(${TEMPLATE_FOR_ALL_CASES_DIR}/cmake/LocateAprgDirectory.cmake)
@@ -23,7 +23,7 @@ include(${TEMPLATE_FOR_ALL_CASES_DIR}/cmake/FindFilesAndDirectories.cmake)
 include(${TEMPLATE_FOR_ALL_CASES_DIR}/cmake/AddFlags.cmake)
 
 # Do final steps
-if (TEST_MODE)
+if (APRG_TEST_MODE)
     add_executable(${OUTFILE} ${TEMPLATE_FOR_ALL_CASES_SOURCES_AND_TESTS})
     include_directories(${TEMPLATE_FOR_ALL_CASES_INCLUDE_DIRECTORIES} ${TEMPLATE_FOR_ALL_CASES_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
     target_link_libraries(${OUTFILE} APRG_COMMON ${APRG_GTEST_DEPENDENCIES})

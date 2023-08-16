@@ -5,8 +5,8 @@ project(PidSimulator C CXX)
 set(OUTFILE ${PROJECT_NAME})
 set(PID_SIMULATOR_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-# Set TEST_MODE to ON to enable tests and OFF to call main function.
-option(TEST_MODE "Enable test mode" ON)
+# Set APRG_TEST_MODE to ON to enable tests and OFF to call main function.
+option(APRG_TEST_MODE "Enable test mode" ON)
 
 # Locate APRG Directory first because its used on other cmakes
 include(${PID_SIMULATOR_DIR}/cmake/LocateAprgDirectory.cmake)
@@ -27,7 +27,7 @@ include(${PID_SIMULATOR_DIR}/cmake/FindFilesAndDirectories.cmake)
 include(${PID_SIMULATOR_DIR}/cmake/AddFlags.cmake)
 
 # Do final steps
-if (TEST_MODE)
+if (APRG_TEST_MODE)
     add_executable(${OUTFILE} ${PID_SIMULATOR_SOURCES_AND_TESTS})
     include_directories(${PID_SIMULATOR_INCLUDE_DIRECTORIES} ${PID_SIMULATOR_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
     target_link_libraries(${OUTFILE} APRG_GRAPH APRG_ALGEBRA APRG_GEOMETRY APRG_BITMAP APRG_COMMON ${APRG_GTEST_DEPENDENCIES})  # add real time library

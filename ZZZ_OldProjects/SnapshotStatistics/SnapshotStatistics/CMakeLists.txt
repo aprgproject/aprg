@@ -5,8 +5,8 @@ project(SnapshotStatistics C CXX)
 set(OUTFILE ${PROJECT_NAME})
 set(SNAPSHOT_DETAILS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-# Set TEST_MODE to ON to enable tests and OFF to call main function.
-option(TEST_MODE "Enable test mode" ON)
+# Set APRG_TEST_MODE to ON to enable tests and OFF to call main function.
+option(APRG_TEST_MODE "Enable test mode" ON)
 
 # Locate APRG Directory first because its used on other cmakes
 include(${SNAPSHOT_DETAILS_DIR}/cmake/LocateAprgDirectory.cmake)
@@ -33,7 +33,7 @@ include(${SNAPSHOT_DETAILS_DIR}/cmake/FindFilesAndDirectories.cmake)
 include(${SNAPSHOT_DETAILS_DIR}/cmake/AddFlags.cmake)
 
 # Do final steps
-if (TEST_MODE)
+if (APRG_TEST_MODE)
     add_executable(${OUTFILE} ${SNAPSHOT_DETAILS_SOURCES_AND_TESTS})
     include_directories(${SNAPSHOT_DETAILS_INCLUDE_DIRECTORIES} ${SNAPSHOT_DETAILS_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
     target_link_libraries(${OUTFILE} APRG_FILE_EXTRACTOR APRG_GREP_STRING_EVALUATOR APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
