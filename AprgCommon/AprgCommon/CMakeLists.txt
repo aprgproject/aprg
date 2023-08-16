@@ -14,9 +14,8 @@ include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 # Include other projects
 include(${APRG_DIR}/gtest/AprgCmakeInclude/gtest.cmake)
 
-# Process for files, directories and flags
-include(${APRG_COMMON_DIR}/cmake/FindFilesAndDirectories.cmake)
-include(${APRG_COMMON_DIR}/cmake/AddFlags.cmake)
+# Assign files, directories, flags, definitions and other specific steps
+include(${APRG_COMMON_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 add_executable(${OUTFILE} ${APRG_COMMON_SOURCES_AND_TESTS})
