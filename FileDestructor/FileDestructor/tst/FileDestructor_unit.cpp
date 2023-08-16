@@ -3,7 +3,6 @@
 
 #include <gtest/gtest.h>
 
-#include <cstdlib>
 #include <fstream>
 
 using namespace std;
@@ -35,10 +34,6 @@ TEST(SampleTest, DestroyOneFileTest) {
     unsigned int numberOfFiles;
     unsigned int numberOfDirectories;
     createAFileInDirectory(pathHandler.getFullPath());
-    string systemCommand1 = string("echo \" PATH:") + pathHandler.getFullPath() + "\"";
-    string systemCommand2 = string("cd ") + pathHandler.getFullPath() + " && dir";
-    system(systemCommand1.c_str());
-    system(systemCommand2.c_str());
     retrieveNumberOfFilesAndDirectoriesFromPath(pathHandler, numberOfFiles, numberOfDirectories);
     EXPECT_EQ(1U, numberOfFiles);
     EXPECT_EQ(0U, numberOfDirectories);
