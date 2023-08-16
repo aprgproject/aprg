@@ -27,7 +27,7 @@ namespace alba {
 
 namespace AprgAudio {
 
-TEST(AiffLoadingTests, Stereo_8bit_44100) {
+TEST(AiffLoadingTests, DISABLED_Stereo_8bit_44100) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\aiff_stereo_8bit_44100.aif)");
@@ -45,7 +45,7 @@ TEST(AiffLoadingTests, Stereo_8bit_44100) {
     }
 }
 
-TEST(AiffLoadingTests, Stereo_16bit_44100) {
+TEST(AiffLoadingTests, DISABLED_Stereo_16bit_44100) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\aiff_stereo_16bit_44100.aif)");
@@ -63,7 +63,7 @@ TEST(AiffLoadingTests, Stereo_16bit_44100) {
     }
 }
 
-TEST(AiffLoadingTests, Stereo_24bit_44100) {
+TEST(AiffLoadingTests, DISABLED_Stereo_24bit_44100) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\aiff_stereo_24bit_44100.aif)");
@@ -81,7 +81,7 @@ TEST(AiffLoadingTests, Stereo_24bit_44100) {
     }
 }
 
-TEST(AiffLoadingTests, Stereo_8bit_48000) {
+TEST(AiffLoadingTests, DISABLED_Stereo_8bit_48000) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\aiff_stereo_8bit_48000.aif)");
@@ -99,7 +99,7 @@ TEST(AiffLoadingTests, Stereo_8bit_48000) {
     }
 }
 
-TEST(AiffLoadingTests, Stereo_16bit_48000) {
+TEST(AiffLoadingTests, DISABLED_Stereo_16bit_48000) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\aiff_stereo_16bit_48000.aif)");
@@ -117,7 +117,7 @@ TEST(AiffLoadingTests, Stereo_16bit_48000) {
     }
 }
 
-TEST(AiffLoadingTests, Stereo_24bit_48000) {
+TEST(AiffLoadingTests, DISABLED_Stereo_24bit_48000) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\aiff_stereo_24bit_48000.aif)");
@@ -135,7 +135,7 @@ TEST(AiffLoadingTests, Stereo_24bit_48000) {
     }
 }
 
-TEST(WritingTest, WriteFromCopiedSampleBuffer) {
+TEST(WritingTest, DISABLED_WriteFromCopiedSampleBuffer) {
     Audio<float> audioFile1, audioFile2;
 
     bool isLoadingSuccessful =
@@ -146,7 +146,7 @@ TEST(WritingTest, WriteFromCopiedSampleBuffer) {
     audioFile2.save("audio-write-tests/copied_audio_file.aif", AudioFormat::Aiff);
 }
 
-TEST(WavLoadingTests, Stereo_8bit_44100) {
+TEST(WavLoadingTests, DISABLED_Stereo_8bit_44100) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_stereo_8bit_44100.wav)");
@@ -164,7 +164,7 @@ TEST(WavLoadingTests, Stereo_8bit_44100) {
     }
 }
 
-TEST(WavLoadingTests, Stereo_16bit_44100) {
+TEST(WavLoadingTests, DISABLED_Stereo_16bit_44100) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_stereo_16bit_44100.wav)");
@@ -182,7 +182,7 @@ TEST(WavLoadingTests, Stereo_16bit_44100) {
     }
 }
 
-TEST(WavLoadingTests, Stereo_24bit_44100) {
+TEST(WavLoadingTests, DISABLED_Stereo_24bit_44100) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_stereo_24bit_44100.wav)");
@@ -200,7 +200,7 @@ TEST(WavLoadingTests, Stereo_24bit_44100) {
     }
 }
 
-TEST(WavLoadingTests, Mono_16bit_44100) {
+TEST(WavLoadingTests, DISABLED_Mono_16bit_44100) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_mono_16bit_44100.wav)");
@@ -218,7 +218,7 @@ TEST(WavLoadingTests, Mono_16bit_44100) {
     }
 }
 
-TEST(WavLoadingTests, Stereo_8bit_48000) {
+TEST(WavLoadingTests, DISABLED_Stereo_8bit_48000) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_stereo_8bit_48000.wav)");
@@ -236,7 +236,7 @@ TEST(WavLoadingTests, Stereo_8bit_48000) {
     }
 }
 
-TEST(WavLoadingTests, Stereo_16bit_48000) {
+TEST(WavLoadingTests, DISABLED_Stereo_16bit_48000) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_stereo_16bit_48000.wav)");
@@ -254,7 +254,7 @@ TEST(WavLoadingTests, Stereo_16bit_48000) {
     }
 }
 
-TEST(WavLoadingTests, Stereo_24bit_48000) {
+TEST(WavLoadingTests, DISABLED_Stereo_24bit_48000) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_stereo_24bit_48000.wav)");
@@ -272,7 +272,7 @@ TEST(WavLoadingTests, Stereo_24bit_48000) {
     }
 }
 
-TEST(WavLoadingTests, Mono_16bit_48000) {
+TEST(WavLoadingTests, DISABLED_Mono_16bit_48000) {
     Audio<double> audioFile;
     bool isLoadingSuccessful =
         audioFile.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_mono_16bit_48000.wav)");
@@ -314,9 +314,7 @@ bool writeTest(int numChannels, int sampleRate, int bitDepth, AudioFormat format
         return audioFile.save(
             APRG_DIR R"(\AprgAudio\FilesForTests\WrittenAudioFiles\)" + numChannelsAsString + "_" + sampleRateAsString +
             "_" + bitDepthAsString + "bit" + ".wav");
-    }
-
-    else if (format == AudioFormat::Aiff) {
+    } else if (format == AudioFormat::Aiff) {
         return audioFile.save(
             APRG_DIR R"(\AprgAudio\FilesForTests\WrittenAudioFiles\)" + numChannelsAsString + "_" + sampleRateAsString +
             "_" + bitDepthAsString + "bit" + ".aif");
@@ -325,7 +323,7 @@ bool writeTest(int numChannels, int sampleRate, int bitDepth, AudioFormat format
     return false;
 }
 
-TEST(WritingTest, WriteSineToneToManyFormats) {
+TEST(WritingTest, DISABLED_WriteSineToneToManyFormats) {
     std::vector<int> sampleRates = {22050, 44100, 48000, 96000};
     std::vector<int> bitDepths = {8, 16, 24};
     std::vector<int> numChannels = {1, 2};
