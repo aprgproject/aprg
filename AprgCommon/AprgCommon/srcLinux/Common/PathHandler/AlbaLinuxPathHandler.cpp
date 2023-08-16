@@ -45,7 +45,7 @@ double AlbaLinuxPathHandler::getFileSizeEstimate() const {
     double fileSize(0);
     if (0 == stat(getFullPath().c_str(), &fileStatus)) {
         fileSize = fileStatus.st_size;
-    } else {
+    } else if (errno !=0 ){
         cout << "Error in AlbaLinuxPathHandler::getFileSizeEstimate() path:[" << getFullPath()
              << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
     }
@@ -59,7 +59,7 @@ AlbaDateTime AlbaLinuxPathHandler::getFileCreationTime() const {
         timespec timeSpec{};
         clock_gettime(CLOCK_REALTIME, &timeSpec);
         fileCreationTime = convertSystemTimeToAlbaDateTime(timeSpec);
-    } else {
+    } else if (errno !=0 ){
         cout << "Error in AlbaLinuxPathHandler::getFileCreationTime() path:[" << getFullPath()
              << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
     }
@@ -166,7 +166,7 @@ bool AlbaLinuxPathHandler::copyToNewFile(string_view newFilePath) {
             }
         }
         close(writeFileDescriptor);
-    } else {
+    } else if (errno !=0 ){
         cout << "Error in AlbaLinuxPathHandler::copyToNewFile() path:[" << getFullPath() << "] 'stat' errno value:["
              << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
     }
@@ -269,7 +269,7 @@ void AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth(
     if (directoryStream != nullptr) {
         loopAllFilesAndDirectoriesInDirectoryStream(
             directoryStream, currentDirectory, wildCardSearch, listOfFiles, listOfDirectories, depth);
-    } else {
+    } else if (errno !=0 ){
         cout << "Error in AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth() currentDirectory:["
              << currentDirectory << "] 'opendir' errno value:[" << errno << "] error message:["
              << getErrorMessage(errno) << "]\n";
@@ -300,7 +300,7 @@ void AlbaLinuxPathHandler::loopAllFilesAndDirectoriesInDirectoryStream(
                     listOfFiles.emplace(fullFileOrDirectoryName);
                 }
             }
-        } else {
+        } else if (errno !=0 ){
             cout << "Error in AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth() currentDirectory:["
                  << currentDirectory << "] 'readdir' errno value:[" << errno << "] error message:["
                  << getErrorMessage(errno) << "]\n";
@@ -314,7 +314,7 @@ bool AlbaLinuxPathHandler::isPathADirectory(string_view fileOrDirectoryName) con
         struct stat statBuffer {};
         if (0 == stat(fileOrDirectoryName.data(), &statBuffer)) {
             result = S_ISDIR(statBuffer.st_mode);
-        } else {
+        } else if (errno !=0 ){
             cout << "Error in AlbaLinuxPathHandler::isPathADirectory() path:[" << getFullPath()
                  << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
         }
