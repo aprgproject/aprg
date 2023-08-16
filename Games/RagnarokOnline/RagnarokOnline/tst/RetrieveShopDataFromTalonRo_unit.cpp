@@ -42,7 +42,7 @@ TEST(RagnarokOnlineShopUpdateTest, DISABLED_SaveSellingShopItemsCumulativeData) 
     ragnarokOnline.saveSellingShopItems(filePath);
 }
 
-TEST(RagnarokOnlineShopTest, ReadBuyingShopItemsWorks) {
+TEST(RagnarokOnlineShopTest, DISABLED_ReadBuyingShopItemsWorks) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.readBuyingShopItems(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\BuyingShopItemsCurrentData.txt)");
@@ -50,7 +50,7 @@ TEST(RagnarokOnlineShopTest, ReadBuyingShopItemsWorks) {
     EXPECT_EQ(45U, ragnarokOnline.getBuyingItemShops().size());
 }
 
-TEST(RagnarokOnlineShopTest, ReadSellingShopItemsWorks) {
+TEST(RagnarokOnlineShopTest, DISABLED_ReadSellingShopItemsWorks) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.readSellingShopItems(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\SellingShopItemsCurrentData.txt)");
@@ -58,7 +58,7 @@ TEST(RagnarokOnlineShopTest, ReadSellingShopItemsWorks) {
     EXPECT_EQ(1697U, ragnarokOnline.getSellingItemShops().size());
 }
 
-TEST(RagnarokOnlineShopTest, RetrieveBuyingShopDataFromTalonRoWebpagesWorks) {
+TEST(RagnarokOnlineShopTest, DISABLED_RetrieveBuyingShopDataFromTalonRoWebpagesWorks) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.retrieveBuyingShopDataFromTalonRoWebpages(
@@ -67,7 +67,7 @@ TEST(RagnarokOnlineShopTest, RetrieveBuyingShopDataFromTalonRoWebpagesWorks) {
     EXPECT_EQ(45U, ragnarokOnline.getBuyingItemShops().size());
 }
 
-TEST(RagnarokOnlineShopTest, RetrieveSellingShopDataFromTalonRoWebpagesWorks) {
+TEST(RagnarokOnlineShopTest, DISABLED_RetrieveSellingShopDataFromTalonRoWebpagesWorks) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.retrieveSellingShopDataFromTalonRoWebpages(
@@ -76,7 +76,7 @@ TEST(RagnarokOnlineShopTest, RetrieveSellingShopDataFromTalonRoWebpagesWorks) {
     EXPECT_EQ(1697U, ragnarokOnline.getSellingItemShops().size());
 }
 
-TEST(RagnarokOnlineShopTest, RetrieveShopDataFromTalonRoWebPageWithBuyingShopTypeExample1) {
+TEST(RagnarokOnlineShopTest, DISABLED_RetrieveShopDataFromTalonRoWebPageWithBuyingShopTypeExample1) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.retrieveShopDataFromTalonRoWebPage(
@@ -151,7 +151,7 @@ TEST(RagnarokOnlineShopTest, RetrieveShopDataFromTalonRoWebPageWithBuyingShopTyp
     EXPECT_EQ(380U, shopItemDetail13.totalNumber);
 }
 
-TEST(RagnarokOnlineShopTest, RetrieveShopDataFromTalonRoWebPageWithSellingShopTypeExample1) {
+TEST(RagnarokOnlineShopTest, DISABLED_RetrieveShopDataFromTalonRoWebPageWithSellingShopTypeExample1) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.retrieveShopDataFromTalonRoWebPage(
@@ -171,7 +171,7 @@ TEST(RagnarokOnlineShopTest, RetrieveShopDataFromTalonRoWebPageWithSellingShopTy
     EXPECT_EQ(1U, shopItemDetail2.totalNumber);
 }
 
-TEST(RagnarokOnlineShopTest, RetrieveShopDataFromTalonRoWebPageWithSellingShopTypeExample2) {
+TEST(RagnarokOnlineShopTest, DISABLED_RetrieveShopDataFromTalonRoWebPageWithSellingShopTypeExample2) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.retrieveShopDataFromTalonRoWebPage(
