@@ -1,8 +1,8 @@
 
 # This macro gets all C/C++ source files from a directory and adds them to a list.
 macro(GET_SOURCE_FILES_FROM_DIRECTORY outputSourceList sourceDirectory)
-    #PRINT_STATUS("Adding source group ${sourceDirectory}")
-    file(GLOB_RECURSE files ${sourceDirectory}/*.hpp ${sourceDirectory}/*.cpp ${sourceDirectory}/*.h ${sourceDirectory}/*.c ${sourceDirectory}/*.cc)
+    #PRINT_STATUS("Source directory: [${sourceDirectory}]")
+    file(GLOB_RECURSE files "${sourceDirectory}/*.hpp" "${sourceDirectory}/*.cpp" "${sourceDirectory}/*.h" "${sourceDirectory}/*.c" "${sourceDirectory}/*.cc")
     foreach(filename ${files})
         list(APPEND ${outputSourceList} ${filename})
         #PRINT_STATUS("Adding file: ${filename}")
@@ -12,8 +12,8 @@ endmacro()
 # This macro gets all C/C++ source files from all subdirectories of a directory and adds them to a list.
 macro(GET_SOURCE_FILES_FROM_SUB_DIRECTORIES outputSourceList subDirectories)
     foreach(subDirectory ${${subDirectories}})
-        #PRINT_STATUS("Adding source group ${subDirectory}")
-        file(GLOB files ${subDirectory}/*.hpp ${subDirectory}/*.cpp ${subDirectory}/*.h ${subDirectory}/*.c ${subDirectory}/*.cc)
+        #PRINT_STATUS("Source sub directory: [${subDirectory}]")
+        file(GLOB files "${sourceDirectory}/*.hpp" "${sourceDirectory}/*.cpp" "${sourceDirectory}/*.h" "${sourceDirectory}/*.c" "${sourceDirectory}/*.cc")
         foreach(filename ${files})
             list(APPEND ${outputSourceList} ${filename})
             #PRINT_STATUS("Adding file: ${filename}")
