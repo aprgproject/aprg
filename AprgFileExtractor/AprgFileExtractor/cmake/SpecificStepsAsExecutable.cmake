@@ -2,3 +2,4 @@
 
 include(${APRG_FILE_EXTRACTOR_DIR}/cmake/FindFilesAndDirectories.cmake)
 include(${APRG_FILE_EXTRACTOR_DIR}/cmake/AddFlags.cmake)
+include(${APRG_FILE_EXTRACTOR_DIR}/cmake/AddDefinitions.cmake)
