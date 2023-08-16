@@ -31,13 +31,17 @@ BtsLogSorter::BtsLogSorter(BtsLogSorterConfiguration const& configuration)
       m_filterGrepEvaluator(configuration.m_filterGrepCondition),
       m_pathOfAllTempFiles(configuration.m_pathOfTempFiles),
       m_pathOfCurrentTempFiles(
-          configuration.m_pathOfTempFiles + R"(\)" + stringHelper::getRandomAlphaNumericString(30)),
+          AlbaLocalPathHandler(configuration.m_pathOfTempFiles + R"(\)" + stringHelper::getRandomAlphaNumericString(30))
+              .getFullPath()),
       m_sorterWithPcTime(AlbaLargeSorterConfiguration(
-          configuration.m_configurationWithPcTime, m_pathOfCurrentTempFiles + R"(\BlocksWithPcTime\)")),
+          configuration.m_configurationWithPcTime,
+          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\BlocksWithPcTime\)").getFullPath())),
       m_sorterWithoutPcTime(AlbaLargeSorterConfiguration(
-          configuration.m_configurationWithoutPcTime, m_pathOfCurrentTempFiles + R"(\BlocksWithoutPcTime\)")),
-      m_directoryOfLogsWithoutPcTime(m_pathOfCurrentTempFiles + R"(\LogsWithoutPcTime\)"),
-      m_pathOfStartupLog(m_pathOfCurrentTempFiles + R"(\StartupLog\Startup.log)") {
+          configuration.m_configurationWithoutPcTime,
+          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\BlocksWithoutPcTime\)").getFullPath())),
+      m_directoryOfLogsWithoutPcTime(
+          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\LogsWithoutPcTime\)").getFullPath()),
+      m_pathOfStartupLog(AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\StartupLog\Startup.log)").getFullPath()) {
     deleteTempFilesAndDirectoriesOfOneDayOld();
     createTempDirectories();
 }

@@ -1,9 +1,11 @@
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <WcdmaToolsBackend/BtsLogTime.hpp>
 
 #include <gtest/gtest.h>
 
 #include <fstream>
 
+using namespace alba;
 using namespace std;
 
 namespace wcdmaToolsBackend {
@@ -209,7 +211,9 @@ TEST(BtsLogTimeTest, TheDataCanBeSavedToAndRetrieveFromFile) {
     BtsLogTime sampleLogTime(BtsLogTimeType::BtsTimeStamp, "2000-01-01T23:59:59.999999");
     BtsLogTime testLogTime;
     string pathOfTempFile(
-        APRG_DIR R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ImportantTestingFiles\TempTestFiles\temp.txt)");
+        AlbaLocalPathHandler(
+            APRG_DIR R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ImportantTestingFiles\TempTestFiles\temp.txt)")
+            .getFullPath());
     {
         ofstream outputStream(pathOfTempFile);
         outputStream << sampleLogTime << "\n";

@@ -1,3 +1,4 @@
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <WcdmaToolsBackend/BtsLogPrint.hpp>
 
 #include <gtest/gtest.h>
@@ -6,6 +7,7 @@
 #include <fstream>
 #include <vector>
 
+using namespace alba;
 using namespace std;
 
 namespace wcdmaToolsBackend {
@@ -428,7 +430,9 @@ TEST(BtsLogPrintTest, SortingTestWithAndWithoutPcTime2) {
 }
 
 TEST(BtsLogPrintTest, DISABLED_InputStreamWorks) {
-    ifstream inputFileStream(APRG_DIR R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ProblemFiles\BLOCK_701.txt)");
+    ifstream inputFileStream(
+        AlbaLocalPathHandler(APRG_DIR R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ProblemFiles\BLOCK_701.txt)")
+            .getFullPath());
     int count(0);
     while (inputFileStream.good()) {
         BtsLogPrint logPrint;
