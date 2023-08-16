@@ -27,12 +27,12 @@ include(${APRG_DIR}/AprgGrepStringEvaluator/AprgCmakeInclude/AprgGrepStringEvalu
 
 # Process for files, directories and flags
 include(${QUICKEST_WAY_TO_PROGRAM_DIR}/cmake/FindFilesAndDirectories.cmake)
+include(${QUICKEST_WAY_TO_PROGRAM_DIR}/cmake/AddFlags.cmake)
 
 # Do final steps
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
 add_executable(${OUTFILE} ${QUICKEST_WAY_TO_PROGRAM_SOURCES_AND_TESTS})
 include_directories(${QUICKEST_WAY_TO_PROGRAM_INCLUDE_DIRECTORIES} ${QUICKEST_WAY_TO_PROGRAM_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
 target_link_libraries(${OUTFILE} APRG_FILE_EXTRACTOR APRG_GREP_STRING_EVALUATOR APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
 add_test(${OUTFILE} ${OUTFILE})
+install(TARGETS ${OUTFILE} DESTINATION bin)
 include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
