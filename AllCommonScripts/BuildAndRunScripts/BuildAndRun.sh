@@ -5,7 +5,7 @@ scriptPath=$(realpath "$0")
 scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
-immediateDirectoryName=$(basename "$(dirname "$(pwd)")")
+immediateDirectoryName=$(basename "$(pwd)")
 numberOfCores=$(nproc)
 scriptOption=$1
 buildDirectoryName=$2
@@ -22,6 +22,7 @@ if [[ -z $scriptOption ]]; then
 fi
 
 # Display variable values
+scriptPrint "$scriptName" "$LINENO" "The current path is [$(pwd)]."
 scriptPrint "$scriptName" "$LINENO" "The scriptPath is [$scriptPath]."
 scriptPrint "$scriptName" "$LINENO" "The scriptOption is [$scriptOption]."
 scriptPrint "$scriptName" "$LINENO" "The buildDirectoryName is [$buildDirectoryName]."
