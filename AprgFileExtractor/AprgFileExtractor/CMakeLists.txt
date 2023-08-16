@@ -33,7 +33,6 @@ include(${APRG_DIR}/AprgGrepStringEvaluator/AprgCmakeInclude/AprgGrepStringEvalu
 include(${APRG_FILE_EXTRACTOR_DIR}/cmake/FindFilesAndDirectories.cmake)
 include(${APRG_FILE_EXTRACTOR_DIR}/cmake/AddFlags.cmake)
 
-
 # Do final steps
 if (APRG_TEST_MODE)
     add_executable(${OUTFILE} ${APRG_FILE_EXTRACTOR_SOURCES_AND_TESTS})
