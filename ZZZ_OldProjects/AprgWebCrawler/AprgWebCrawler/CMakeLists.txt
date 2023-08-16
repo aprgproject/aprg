@@ -25,12 +25,12 @@ include(${APRG_DIR}/AprgLocalUserAutomation/AprgCmakeInclude/AprgLocalUserAutoma
 
 # Process for files, directories and flags
 include(${APRG_WEB_CRAWLER_DIR}/cmake/FindFilesAndDirectories.cmake)
+include(${APRG_WEB_CRAWLER_DIR}/cmake/AddFlags.cmake)
 
 # Do final steps
-set(CMAKE_C_FLAGS "${APRG_COMPILER_COMMON_FLAGS} ${APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED}")
 set(CMAKE_EXE_LINKER_FLAGS ${APRG_LINKER_FLAGS_FOR_RELEASE_WITH_STRIP})
 add_executable(${OUTFILE} ${APRG_WEB_CRAWLER_SOURCES})
 include_directories(${APRG_WEB_CRAWLER_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
 target_link_libraries(${OUTFILE} APRG_CURL_CPP APRG_LOCAL_USER_AUTOMATION APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
+install(TARGETS ${OUTFILE} DESTINATION bin)
 include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
