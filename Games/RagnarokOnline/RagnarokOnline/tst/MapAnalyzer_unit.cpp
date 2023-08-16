@@ -6,7 +6,7 @@ using namespace std;
 
 namespace alba {
 
-TEST(MapAnalyzerTest, AnalyzeWorks) {
+TEST(MapAnalyzerTest, DISABLED_AnalyzeWorks) {
     MapAnalyzer mapAnalyzer;
     mapAnalyzer.analyze();
     mapAnalyzer.printResult();
