@@ -21,6 +21,7 @@ include(${APRG_DIR}/AprgGrepStringEvaluator/AprgCmakeInclude/AprgGrepStringEvalu
 include(${WCDMA_TOOLS_BACKEND_DIR}/cmake/FindFilesAndDirectories.cmake)
 include(${WCDMA_TOOLS_BACKEND_DIR}/cmake/AddFlags.cmake)
 
+
 # Do final steps
 add_executable(${OUTFILE} ${WCDMA_TOOLS_BACKEND_SOURCES_AND_TESTS})
 include_directories(${WCDMA_TOOLS_BACKEND_INCLUDE_DIRECTORIES} ${WCDMA_TOOLS_BACKEND_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
