@@ -15,7 +15,7 @@ TEST(RagnarokOnlineMapUpdateTest, DISABLED_RetrieveMapDataFromRmsWebPagesAndThen
     ragnarokOnline.saveMapNameToRoMapToFile(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\MapNameToRoMap.txt)");
 }
 
-TEST(RagnarokOnlineMapTest, ReadMapNameToRoMapFromFileWorks) {
+TEST(RagnarokOnlineMapTest, DISABLED_ReadMapNameToRoMapFromFileWorks) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.readMapNameToRoMapFromFile(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\MapNameToRoMap.txt)");
@@ -23,7 +23,7 @@ TEST(RagnarokOnlineMapTest, ReadMapNameToRoMapFromFileWorks) {
     EXPECT_EQ(316U, ragnarokOnline.getMapNameToRoMap().size());
 }
 
-TEST(RagnarokOnlineMapTest, RetrieveMapDataFromRmsWebPagesWorks) {
+TEST(RagnarokOnlineMapTest, DISABLED_RetrieveMapDataFromRmsWebPagesWorks) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.retrieveMapDataFromRmsWebpages(
@@ -32,7 +32,7 @@ TEST(RagnarokOnlineMapTest, RetrieveMapDataFromRmsWebPagesWorks) {
     EXPECT_EQ(316U, ragnarokOnline.getMapNameToRoMap().size());
 }
 
-TEST(RagnarokOnlineMapTest, RetrieveMapDataFromRmsWebPageWorksWithExample1) {
+TEST(RagnarokOnlineMapTest, DISABLED_RetrieveMapDataFromRmsWebPageWorksWithExample1) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.retrieveMapDataFromRmsWebPage(
@@ -80,7 +80,7 @@ TEST(RagnarokOnlineMapTest, RetrieveMapDataFromRmsWebPageWorksWithExample1) {
     EXPECT_EQ("30~40 min", roMap1.monstersDetailsOnMap.at(10).spawnRate);
 }
 
-TEST(RagnarokOnlineMapTest, RetrieveMapDataFromRmsWebPageWorksWithExample2) {
+TEST(RagnarokOnlineMapTest, DISABLED_RetrieveMapDataFromRmsWebPageWorksWithExample2) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.retrieveMapDataFromRmsWebPage(

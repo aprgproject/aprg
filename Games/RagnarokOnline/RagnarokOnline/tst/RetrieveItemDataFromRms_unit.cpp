@@ -15,7 +15,7 @@ TEST(RagnarokOnlineItemUpdateTest, DISABLED_RetrieveItemDataFromRmsWebPagesAndTh
     ragnarokOnline.saveItemIdToItemMapToFile(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\ItemIdToItemMap.txt)");
 }
 
-TEST(RagnarokOnlineItemTest, ReadItemIdToItemMapFromFileWorks) {
+TEST(RagnarokOnlineItemTest, DISABLED_ReadItemIdToItemMapFromFileWorks) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.readItemIdToItemMapFromFile(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\ItemIdToItemMap.txt)");
@@ -23,7 +23,7 @@ TEST(RagnarokOnlineItemTest, ReadItemIdToItemMapFromFileWorks) {
     EXPECT_EQ(6225U, ragnarokOnline.getItemIdToItemMap().size());
 }
 
-TEST(RagnarokOnlineItemTest, RetrieveItemDataFromRmsWebPagesWorks) {
+TEST(RagnarokOnlineItemTest, DISABLED_RetrieveItemDataFromRmsWebPagesWorks) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.retrieveItemDataFromRmsWebpages(
@@ -32,7 +32,7 @@ TEST(RagnarokOnlineItemTest, RetrieveItemDataFromRmsWebPagesWorks) {
     EXPECT_EQ(6225U, ragnarokOnline.getItemIdToItemMap().size());
 }
 
-TEST(RagnarokOnlineItemTest, RetrieveItemDataFromRmsWebPageWorksWithExample1) {
+TEST(RagnarokOnlineItemTest, DISABLED_RetrieveItemDataFromRmsWebPageWorksWithExample1) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.retrieveItemDataFromRmsWebPage(

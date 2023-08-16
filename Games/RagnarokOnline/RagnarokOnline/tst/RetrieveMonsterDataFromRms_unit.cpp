@@ -16,7 +16,7 @@ TEST(RagnarokOnlineMonsterUpdateTest, DISABLED_RetrieveMonsterDataFromRmsWebPage
         R"(C:\Users\detec\OneDrive\Desktop\Games\RO\MonsterIdToMonsterMap.txt)");
 }
 
-TEST(RagnarokOnlineMonsterTest, ReadMonsterIdToMonsterMapFromFileWorks) {
+TEST(RagnarokOnlineMonsterTest, DISABLED_ReadMonsterIdToMonsterMapFromFileWorks) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.readMonsterIdToMonsterMapFromFile(
@@ -25,7 +25,7 @@ TEST(RagnarokOnlineMonsterTest, ReadMonsterIdToMonsterMapFromFileWorks) {
     EXPECT_EQ(1238U, ragnarokOnline.getMonsterIdToMonsterMap().size());
 }
 
-TEST(RagnarokOnlineMonsterTest, RetrieveMonsterDataFromRmsWebPagesWorks) {
+TEST(RagnarokOnlineMonsterTest, DISABLED_RetrieveMonsterDataFromRmsWebPagesWorks) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.retrieveMonsterDataFromRmsWebpages(
@@ -34,7 +34,7 @@ TEST(RagnarokOnlineMonsterTest, RetrieveMonsterDataFromRmsWebPagesWorks) {
     EXPECT_EQ(1238U, ragnarokOnline.getMonsterIdToMonsterMap().size());
 }
 
-TEST(RagnarokOnlineMonsterTest, RetrieveMonsterDataFromRmsWebPageWorksWithExample1) {
+TEST(RagnarokOnlineMonsterTest, DISABLED_RetrieveMonsterDataFromRmsWebPageWorksWithExample1) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.retrieveMonsterDataFromRmsWebPage(

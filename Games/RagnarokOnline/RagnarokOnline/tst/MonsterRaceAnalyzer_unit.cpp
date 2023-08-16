@@ -6,7 +6,7 @@ using namespace std;
 
 namespace alba {
 
-TEST(MonsterRaceAnalyzerTest, AnalyzeWorks) {
+TEST(MonsterRaceAnalyzerTest, DISABLED_AnalyzeWorks) {
     // For faster typing
     // Use CTRL-X to ensure that its transferred to database
     //
