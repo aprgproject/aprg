@@ -1,6 +1,5 @@
 #include "CopyGoogleTemplates.hpp"
 
-#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
@@ -24,7 +23,7 @@ void CopyGoogleTemplates::copyTemplatesForOneRound(
         for (auto const& replacePair : replacePairs) {
             replaceAllAndReturnIfFound(newFile, replacePair.first, replacePair.second);
         }
-        if (!isStringFoundInsideTheOtherStringCaseSensitive(newFile, "SampleProblem")) {
+        if (!isStringFoundCaseSensitive(newFile, "SampleProblem")) {
             AlbaLocalPathHandler newFilePathHandler(destinationPath + "\\" + newFile);
             newFilePathHandler.createDirectoriesForNonExisitingDirectories();
             replaceStringWithStringOnFile(originalFilePath, newFilePathHandler.getFullPath(), replacePairs);
