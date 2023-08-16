@@ -34,6 +34,7 @@ TEST(SampleTest, DestroyOneFileTest) {
     AlbaLocalPathHandler pathHandler(APRG_DIR R"(\FileDestructor\FilesForTests\TestFolderForDestruction)");
     unsigned int numberOfFiles;
     unsigned int numberOfDirectories;
+    pathHandler.createDirectoriesForNonExisitingDirectories();
     createAFileInDirectory(pathHandler.getFullPath());
     string systemCommand1 = string("echo \" PATH:") + pathHandler.getFullPath() + "\"";
     string systemCommand2 = string("cd ") + pathHandler.getFullPath() + " && dir";
