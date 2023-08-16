@@ -324,7 +324,7 @@ TEST(RagnarokOnlineItemTest, DISABLED_RetrieveItemDataFromRmsWebPageWorksWithExa
     EXPECT_TRUE(item12.droppedByMonstersWithRates.empty());
 }
 
-TEST(RagnarokOnlineItemTest, RetrieveItemDataFromRmsWebPageWorksWithExample2) {
+TEST(RagnarokOnlineItemTest, DISABLED_RetrieveItemDataFromRmsWebPageWorksWithExample2) {
     RagnarokOnline ragnarokOnline;
 
     ragnarokOnline.retrieveItemDataFromRmsWebPage(
