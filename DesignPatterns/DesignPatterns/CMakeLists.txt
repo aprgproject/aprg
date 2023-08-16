@@ -5,8 +5,8 @@ project(DesignPatterns C CXX)
 set(OUTFILE ${PROJECT_NAME})
 set(DESIGN_PATTERNS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-# Comment out TEST_MODE to build static executable, other cmakes check this
-set(TEST_MODE "ON")
+# Set TEST_MODE to ON to enable tests and OFF to call main function.
+option(TEST_MODE "Enable test mode" ON)
 
 # Locate APRG Directory first because its used on other cmakes
 include(${DESIGN_PATTERNS_DIR}/cmake/LocateAprgDirectory.cmake)

@@ -5,8 +5,8 @@ project(FileDestructor C CXX)
 set(OUTFILE ${PROJECT_NAME})
 set(FILE_DESTRUCTOR_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-# Comment out TEST_MODE to build static executable, other cmakes check this
-set(TEST_MODE "ON")
+# Set TEST_MODE to ON to enable tests and OFF to call main function.
+option(TEST_MODE "Enable test mode" ON)
 
 # Locate APRG Directory first because its used on other cmakes
 include(${FILE_DESTRUCTOR_DIR}/cmake/LocateAprgDirectory.cmake)
@@ -29,7 +29,6 @@ if (TEST_MODE)
     target_link_libraries(${OUTFILE} APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
     add_test(${OUTFILE} ${OUTFILE})
 else()
-    set(CMAKE_EXE_LINKER_FLAGS ${APRG_LINKER_FLAGS_FOR_RELEASE_WITH_STRIP})
     add_executable(${OUTFILE} ${FILE_DESTRUCTOR_SOURCES} ${FILE_DESTRUCTOR_MAIN_SOURCES})
     include_directories(${FILE_DESTRUCTOR_INCLUDE_DIRECTORIES})
     target_link_libraries(${OUTFILE} APRG_COMMON)
