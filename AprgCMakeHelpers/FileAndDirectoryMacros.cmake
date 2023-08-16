@@ -1,9 +1,46 @@
-# Subdirectory traverse implementation
+
+# This macro gets all C/C++ source files from a directory and adds them to a list.
+macro(GET_SOURCE_FILES_FROM_DIRECTORY outputSourceList sourceDirectory)
+    #PRINT_STATUS("Adding source group ${sourceDirectory}")
+    file(GLOB_RECURSE files ${sourceDirectory}/*.hpp ${sourceDirectory}/*.cpp ${sourceDirectory}/*.h ${sourceDirectory}/*.c ${sourceDirectory}/*.cc)
+    foreach(filename ${files})
+        list(APPEND ${outputSourceList} ${filename})
+        #PRINT_STATUS("Adding file: ${filename}")
+    endforeach()
+endmacro()
+
+# This macro gets all C/C++ source files from all subdirectories of a directory and adds them to a list.
+macro(GET_SOURCE_FILES_FROM_SUB_DIRECTORIES outputSourceList subDirectories)
+    foreach(subDirectory ${${subDirectories}})
+        #PRINT_STATUS("Adding source group ${subDirectory}")
+        file(GLOB files ${subDirectory}/*.hpp ${subDirectory}/*.cpp ${subDirectory}/*.h ${subDirectory}/*.c ${subDirectory}/*.cc)
+        foreach(filename ${files})
+            list(APPEND ${outputSourceList} ${filename})
+            #PRINT_STATUS("Adding file: ${filename}")
+        endforeach()
+    endforeach()
+endmacro()
+
+# This macro gets a list of all subdirectories of a directory.
+macro(GET_SUB_DIRECTORY_LIST result currentDirectory)
+    set(resultingSubDirectories "")
+    TRAVERSE_DIRECTORY(resultingSubDirectories ${currentDirectory} "")
+    set(${result} ${resultingSubDirectories})
+endmacro()
+
+# This macro gets a list of all subdirectories of a directory, excluding any directories that match the specified filter.
+macro(GET_SUB_DIRECTORY_LIST_WITH_EXCLUSION result currentDirectory exclude_filter)
+    set(resultingSubDirectories "")
+    TRAVERSE_DIRECTORY(resultingSubDirectories ${currentDirectory} "${exclude_filter}")
+    set(${result} ${resultingSubDirectories})
+endmacro()
+
+# This macro recursively traverses a directory and its subdirectories, adding all directories to the output list, unless they match the specified exclude filter.
 macro(TRAVERSE_DIRECTORY resultingSubDirectories currentDirectory exclude_filter)
     file(GLOB children ${currentDirectory}/*)
     foreach(child ${children})
         if(IS_DIRECTORY ${child})
-            if("${child}" MATCHES "^\\.svn$" OR (NOT("${exclude_filter}" STREQUAL "") AND "${child}" MATCHES "${exclude_filter}"))
+            if(NOT("${exclude_filter}" STREQUAL "") AND "${child}" MATCHES "${exclude_filter}")
                 #PRINT_STATUS("[DEBUG] traverse - skipping: ${child}")
             else()
                 #PRINT_STATUS("[DEBUG] traverse: ${child}")
@@ -12,42 +49,4 @@ macro(TRAVERSE_DIRECTORY resultingSubDirectories currentDirectory exclude_filter
         endif()
     endforeach()
     set(${resultingSubDirectories} ${${resultingSubDirectories}} ${currentDirectory})
-endmacro()
-
-# Subdirectory traverse (without exclusion filter), returns list of directories
-macro(GET_SUB_DIRECTORY_LIST result currentDirectory)
-    set(resultingSubDirectories "")
-    TRAVERSE_DIRECTORY(resultingSubDirectories ${currentDirectory} "")
-    set(${result} ${resultingSubDirectories})
-endmacro()
-
-# Subdirectory traverse with exclusion filter, returns list of directories
-macro(GET_SUB_DIRECTORY_LIST_WITH_EXCLUSION result currentDirectory exclude_filter)
-    set(resultingSubDirectories "")
-    TRAVERSE_DIRECTORY(resultingSubDirectories ${currentDirectory} "${exclude_filter}")
-    set(${result} ${resultingSubDirectories})
-endmacro()
-
-# Subdirectory source groups creator
-macro(GET_SOURCE_FILES_FROM_DIRECTORIES outputSourceList sourceDirectory)
-    foreach(directory ${${sourceDirectory}})
-        #PRINT_STATUS("Adding source group ${directory}")
-        file(GLOB files ${directory}/*.hpp ${directory}/*.cpp ${directory}/*.h ${directory}/*.c ${directory}/*.cc)
-        foreach(filename ${files})
-            list(APPEND ${outputSourceList} ${filename})
-            #PRINT_STATUS("Adding file: ${filename}")
-        endforeach()
-    endforeach()
-endmacro()
-
-# Subdirectory source groups creator
-macro(GET_HEADER_FILES_FROM_DIRECTORIES outputSourceList sourceDirectory)
-    foreach(directory ${${sourceDirectory}})
-        #PRINT_STATUS("Adding source group ${directory}")
-        file(GLOB files ${directory}/*.hpp ${directory}/*.h)
-        foreach(filename ${files})
-            list(APPEND ${outputSourceList} ${filename})
-            #PRINT_STATUS("Adding file: ${filename}")
-        endforeach()
-    endforeach()
 endmacro()
