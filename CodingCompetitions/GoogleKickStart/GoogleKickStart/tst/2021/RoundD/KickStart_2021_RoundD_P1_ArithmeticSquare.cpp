@@ -4,7 +4,7 @@
 #include "KickStart_2021_RoundD_P1_ArithmeticSquare.hpp"
 
 #include <Fake/FakeNames.hpp>
-//#include <Common/Debug/AlbaDebug.hpp>
+
 #endif
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 

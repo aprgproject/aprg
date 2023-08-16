@@ -4,7 +4,7 @@
 #include "KickStart_2021_RoundD_P4_PrimesAndQueries.hpp"
 
 #include <Fake/FakeNames.hpp>
-//#include <Common/Debug/AlbaDebug.hpp>
+
 #endif
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
