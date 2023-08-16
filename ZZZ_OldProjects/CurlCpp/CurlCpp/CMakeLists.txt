@@ -22,12 +22,12 @@ include(${APRG_DIR}/curl/AprgCmakeInclude/Curl.cmake)
 
 # Process for files, directories and flags
 include(${APRG_CURL_CPP_DIR}/cmake/FindFilesAndDirectories.cmake)
+include(${APRG_CURL_CPP_DIR}/cmake/AddFlags.cmake)
 
 # Do final steps
-set(CMAKE_C_FLAGS "${APRG_COMPILER_COMMON_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_FLAGS_FOR_DEBUG}")
 add_executable(${OUTFILE} ${APRG_CURL_CPP_SOURCES_AND_TESTS})
 include_directories(${APRG_CURL_CPP_INCLUDE_DIRECTORIES} ${APRG_CURL_CPP_TEST_INCLUDE_DIRECTORIES})
 target_link_libraries(${OUTFILE} ${CURL_LIBRARIES_TO_LINK} wsock32 ws2_32 APRG_COMMON)
 add_test(${OUTFILE} ${OUTFILE})
+install(TARGETS ${OUTFILE} DESTINATION bin)
 include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
