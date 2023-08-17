@@ -64,9 +64,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        exclude:
-          - matrix:
-              envConfig.name: "WindowsLatestMsvc"
         project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
         envConfig: 
         - {
@@ -115,6 +112,9 @@ jobs:
 #            cxx: "clang++",
 #            generators: "Ninja"
 #          }
+    exclude:
+      - matrix:
+          envConfig.name: "WindowsLatestMsvc"
           
     steps:
     
