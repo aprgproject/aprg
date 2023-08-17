@@ -36,11 +36,7 @@ done <<< "$detectedFiles"
 # Add directories with CMakeLists.txt for output
 cppProjectsFromGit=""
 for cppProjectsSetItem in "${!cppProjectsSet[@]}"; do
-    if [[ -z $cppProjectsFromGit ]]; then
-        cppProjectsFromGit="$cppProjectsSetItem"
-    else
-        cppProjectsFromGit="$cppProjectsFromGit,$cppProjectsSetItem"
-    fi
+    cppProjectsFromGit="$cppProjectsFromGit$cppProjectsSetItem,"
 done
 
 # Save the value for Github Workflow
