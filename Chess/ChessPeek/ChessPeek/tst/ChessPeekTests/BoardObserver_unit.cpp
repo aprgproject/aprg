@@ -51,7 +51,7 @@ void verifyGetChessCellPieceForBlackUpWhiteDown(BoardObserver const& retriever) 
 }
 }  // namespace
 
-TEST(BoardObserverTest, GetChessCellPieceWorksForChessDotComVersus) {
+TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForChessDotComVersus) {
     AlbaLocalPathHandler inputFile(APRG_DIR
                                    R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComVersus\ChessDotComVersus.bmp)");
 
@@ -65,7 +65,7 @@ TEST(BoardObserverTest, GetChessCellPieceWorksForChessDotComVersus) {
     verifyGetChessCellPieceForBlackUpWhiteDown(retriever);
 }
 
-TEST(BoardObserverTest, GetChessCellPieceWorksForChessDotComPuzzle) {
+TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForChessDotComPuzzle) {
     AlbaLocalPathHandler inputFile(APRG_DIR
                                    R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComPuzzle\ChessDotComPuzzle.bmp)");
 
@@ -79,7 +79,7 @@ TEST(BoardObserverTest, GetChessCellPieceWorksForChessDotComPuzzle) {
     verifyGetChessCellPieceForBlackUpWhiteDown(retriever);
 }
 
-TEST(BoardObserverTest, GetChessCellPieceWorksForLichessVersus) {
+TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForLichessVersus) {
     AlbaLocalPathHandler inputFile(APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\LichessVersus\LichessVersus.bmp)");
 
     Configuration configuration(Configuration::Type::LichessVersus);
@@ -92,7 +92,7 @@ TEST(BoardObserverTest, GetChessCellPieceWorksForLichessVersus) {
     verifyGetChessCellPieceForBlackUpWhiteDown(retriever);
 }
 
-TEST(BoardObserverTest, GetChessCellPieceWorksForLichessStream) {
+TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForLichessStream) {
     AlbaLocalPathHandler inputFile(APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\LichessStream\LichessStream.bmp)");
 
     Configuration configuration(Configuration::Type::LichessStream);

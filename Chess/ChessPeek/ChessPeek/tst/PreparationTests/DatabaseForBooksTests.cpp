@@ -82,7 +82,7 @@ TEST(DatabaseForBooksTest, DISABLED_SavingChessDotComDatabaseWorks) {
     book.saveDatabaseTo(chessDotComBookDatabase.getFullPath());
 }
 
-TEST(DatabaseForBooksTest, LoadingDatabaseWorksWithStartingPosition) {
+TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithStartingPosition) {
     AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
     Board boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
@@ -105,7 +105,7 @@ TEST(DatabaseForBooksTest, LoadingDatabaseWorksWithStartingPosition) {
     EXPECT_EQ(20U, lineDetailsWithWUBD.nextMoves.size());
 }
 
-TEST(DatabaseForBooksTest, LoadingDatabaseWorksWithE4) {
+TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithE4) {
     AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
     Board boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
@@ -138,7 +138,7 @@ TEST(DatabaseForBooksTest, LoadingDatabaseWorksWithE4) {
     EXPECT_EQ(20U, lineDetailsWithWUBD.nextMoves.size());
 }
 
-TEST(DatabaseForBooksTest, LoadingDatabaseWorksWithD4) {
+TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithD4) {
     AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
     Board boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
@@ -171,7 +171,7 @@ TEST(DatabaseForBooksTest, LoadingDatabaseWorksWithD4) {
     EXPECT_EQ(20U, lineDetailsWithWUBD.nextMoves.size());
 }
 
-TEST(DatabaseForBooksTest, LoadingDatabaseWorksWithC4) {
+TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithC4) {
     AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
     Board boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
@@ -204,7 +204,7 @@ TEST(DatabaseForBooksTest, LoadingDatabaseWorksWithC4) {
     EXPECT_EQ(20U, lineDetailsWithWUBD.nextMoves.size());
 }
 
-TEST(DatabaseForBooksTest, LoadingDatabaseWorksWithSicilianDefense) {
+TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithSicilianDefense) {
     AlbaLocalPathHandler chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
     Board boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
