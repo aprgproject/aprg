@@ -4,8 +4,7 @@
 scriptDirectory=$(dirname "$(realpath "$0")")
 scriptName=$(basename "$(realpath "$0")")
 aprgDirectory=$(realpath "$(dirname "$0")/../../")
-#userInput="$1"
-userInput="all"
+userInput="$1"
 cppProjects=""
 
 # Source needed scripts
