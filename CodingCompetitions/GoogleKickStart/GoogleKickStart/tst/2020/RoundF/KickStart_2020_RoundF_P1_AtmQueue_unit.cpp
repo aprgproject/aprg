@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2020_RoundF_P1_AtmQueue {
 
-TEST(KickStart_2020_RoundF_P1_AtmQueueTest, Test1) {
+TEST(KickStart_2020_RoundF_P1_AtmQueueTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

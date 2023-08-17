@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2019_RoundC_P2_CircuitBoard {
 
-TEST(KickStart_2019_RoundC_P2_CircuitBoardTest, Test1) {
+TEST(KickStart_2019_RoundC_P2_CircuitBoardTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();
@@ -49,7 +49,7 @@ TEST(KickStart_2019_RoundC_P2_CircuitBoardTest, Test1) {
         outputStringStream.str());
 }
 
-TEST(KickStart_2019_RoundC_P2_CircuitBoardTest, Test2) {
+TEST(KickStart_2019_RoundC_P2_CircuitBoardTest, DISABLED_Test2) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

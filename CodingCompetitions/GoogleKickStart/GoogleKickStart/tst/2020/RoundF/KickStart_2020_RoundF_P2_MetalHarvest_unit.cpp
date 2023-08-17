@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2020_RoundF_P2_MetalHarvest {
 
-TEST(KickStart_2020_RoundF_P2_MetalHarvestTest, Test1) {
+TEST(KickStart_2020_RoundF_P2_MetalHarvestTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

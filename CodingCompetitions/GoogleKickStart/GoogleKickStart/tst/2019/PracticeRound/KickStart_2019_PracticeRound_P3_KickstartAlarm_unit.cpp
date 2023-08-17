@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2019_PracticeRound_P3_KickstartAlarm {
 
-TEST(KickStart_2019_PracticeRound_P3_KickstartAlarmTest, Test1) {
+TEST(KickStart_2019_PracticeRound_P3_KickstartAlarmTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

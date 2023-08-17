@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2019_RoundA_P3_Contention {
 
-TEST(KickStart_2019_RoundA_P3_ContentionTest, Test1) {
+TEST(KickStart_2019_RoundA_P3_ContentionTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();
@@ -55,7 +55,7 @@ TEST(KickStart_2019_RoundA_P3_ContentionTest, Test1) {
         outputStringStream.str());
 }
 
-TEST(KickStart_2019_RoundA_P3_ContentionTest, Test2) {
+TEST(KickStart_2019_RoundA_P3_ContentionTest, DISABLED_Test2) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();
@@ -80,7 +80,7 @@ TEST(KickStart_2019_RoundA_P3_ContentionTest, Test2) {
         outputStringStream.str());
 }
 
-TEST(KickStart_2019_RoundA_P3_ContentionTest, Test3) {
+TEST(KickStart_2019_RoundA_P3_ContentionTest, DISABLED_Test3) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

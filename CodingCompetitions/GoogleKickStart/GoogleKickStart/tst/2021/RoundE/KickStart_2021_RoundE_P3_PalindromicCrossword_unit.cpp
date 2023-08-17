@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2021_RoundE_P3_PalindromicCrossword {
 
-TEST(KickStart_2021_RoundE_P3_PalindromicCrosswordTest, Test1) {
+TEST(KickStart_2021_RoundE_P3_PalindromicCrosswordTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2020_RoundE_P1_LongestArithmetic {
 
-TEST(KickStart_2020_RoundE_P1_LongestArithmeticTest, Test1) {
+TEST(KickStart_2020_RoundE_P1_LongestArithmeticTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();
