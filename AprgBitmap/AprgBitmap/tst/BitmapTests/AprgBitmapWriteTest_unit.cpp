@@ -18,10 +18,10 @@ TEST(BitmapWriteTest, TestForWritingBitmap) {
     ASSERT_EQ(CompressedMethodType::RGB, bitmap.getConfiguration().getCompressedMethodType());
     ASSERT_TRUE(bitmap.getConfiguration().isCompressedMethodSupported());
 
-    BitmapSnippet snippet(bitmap.getSnippetReadFromFile(BitmapXY(50, 50), BitmapXY(150, 150)));
+    BitmapSnippet snippet(bitmap.getSnippetReadFromFile(BitmapXY(10, 10), BitmapXY(90, 90)));
 
-    for (unsigned i = 50; i <= 150; i++) {
-        snippet.setPixelAt(BitmapXY(i, round((double)100 + 40 * (sin((double)i / 10)))), 0x00FF0000);
+    for (unsigned i = 10; i <= 90; i++) {
+        snippet.setPixelAt(BitmapXY(i, round((double)50 + 40 * (sin((double)i / 5)))), 0x00FF0000);
     }
     bitmap.setSnippetWriteToFile(snippet);
 }
