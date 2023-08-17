@@ -5,38 +5,17 @@ on:
       - '**'
   workflow_dispatch:
     inputs:
-      user_input:
-        description: 'User input value'
+      cppCMakeProject:
+        description: 'C/C++ CMake Project (use "all" for all projects)'
         required: true
 
 env:
-  buildAndRunScriptRelativePath: AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh
-  detectGitChangesRelativePath: AllCommonScripts/DetectGitChanges/DetectGitChanges.sh
   checkShellScriptsRelativePath: AllCommonScripts/ScriptsForShellScripts/checkShellScripts.sh
+  detectGitChangesRelativePath: AllCommonScripts/GithubWorkflowScripts/DetectGitChanges.sh
+  determineCppProjectsRelativePath: AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh
+  buildAndRunScriptRelativePath: AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh
 
 jobs:
-
-  detectGitChanges:
-    name: Detect Git Changes
-    runs-on: ubuntu-latest
-    outputs:
-      projectsToBuild: ${{ steps.idOfDetectGitChanges.outputs.APRG_CMAKELIST_DIRECTORIES }}
-    steps:
-      - name: Checkout code for changes checking
-        id: idOfCheckout
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: 2
-
-      - name: Detect Git Changes
-        id: idOfDetectGitChanges
-        run: |
-          detectChangedProjectsPath=$(realpath "$(pwd)/${{ env.detectGitChangesRelativePath }}")
-          echo "detectChangedProjectsPath: [$detectChangedProjectsPath]"
-          chmod +x "$detectChangedProjectsPath"
-          "$detectChangedProjectsPath"
-
 
   shellcheck:
     name: Perform shellcheck
@@ -44,13 +23,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Install shellcheck on ubuntu/gcc
         run: |
           sudo apt-get update
           sudo apt-get install shellcheck
           shellcheck --version
-            
       - name: Run shellCheck on shell scripts
         shell: bash
         run: |
@@ -59,15 +36,53 @@ jobs:
           chmod +x "$checkShellScriptsPath"
           "$checkShellScriptsPath"
 
-          
+
+  detectGitChanges:
+    name: Detect Git Changes
+    if: inputs.cppCMakeProject == ''
+    runs-on: ubuntu-latest
+    outputs:
+      projectsToBuild: ${{ steps.idOfGetCppProject.outputs.APRG_DETECTED_CPP_DIRECTORIES }}
+    steps:
+      - name: Checkout code for changes checking
+        id: idOfCheckout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+      - name: Get C/C++ Projects from Git Diff
+        id: idOfGetCppProject
+        run: |
+          detectChangedProjectsPath=$(realpath "$(pwd)/${{ env.detectGitChangesRelativePath }}")
+          echo "detectChangedProjectsPath: [$detectChangedProjectsPath]"
+          chmod +x "$detectChangedProjectsPath"
+          "$detectChangedProjectsPath"
+
+
+  determineCppProjects:
+    name: Determine CPP Projects
+    needs: determineCppProjects
+    runs-on: ubuntu-latest
+    outputs:
+      projectsToBuild: ${{ steps.idOfGetCppProject.outputs.APRG_INPUT_CPP_DIRECTORIES }}
+    steps:
+      - name: Get C/C++ Projects from Git Diff and User Input
+        id: idOfGetCppProject
+        run: |
+          determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
+          echo "determineCppProjectsPath: [$determineCppProjectsPath]"
+          chmod +x "$determineCppProjectsPath"
+          "$determineCppProjectsPath" "${{ inputs.cppCMakeProject }}" "${{ env.detectGitChanges.outputs.projectsToBuild }}"
+
+
   buildAndTest:
     name: Test ${{ matrix.project }} on ${{ matrix.config.name }}
-    needs: detectGitChanges
+    needs: determineCppProjects
     runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
       matrix:
-        project: ${{ fromJSON(needs.detectGitChanges.outputs.projectsToBuild) }}
+        project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
         config: 
         - {
             name: "WindowsLatestMsvc",
