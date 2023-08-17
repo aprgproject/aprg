@@ -61,7 +61,7 @@ jobs:
 
   determineCppProjects:
     name: Determine CPP Projects
-    needs: determineCppProjects
+    needs: detectGitChanges
     runs-on: ubuntu-latest
     outputs:
       projectsToBuild: ${{ steps.idOfGetCppProject.outputs.APRG_INPUT_CPP_DIRECTORIES }}
