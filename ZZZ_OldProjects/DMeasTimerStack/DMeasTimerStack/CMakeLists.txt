@@ -21,61 +21,15 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 # Assign files, directories, flags, definitions and other specific steps
 include(${DMEAS_TIMER_STACK_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
-#Assign Sack Directory
-set(SackDirectory "F:/Branches/ControlPlane/sbts1/tcom")
-
-set(SACKS_DIR_TO_INCLUDE
-    ${SackDirectory}/I_Interface/Private/SC_TCOM/Temp
-    ${SackDirectory}/I_Interface/Global_Env/Definitions
-    ${SackDirectory}/I_Interface/Global_Env/Messages
-    ${SackDirectory}/I_Interface/Application_Env
-    ${SackDirectory}/I_Interface/Application_Env/Wn_Env/Bs_Env
-    ${SackDirectory}/I_Interface/Application_Env/Definitions
-    ${SackDirectory}/I_Interface/Application_Env/Wn_Env/Bs_Env/Definitions
-    ${SackDirectory}/I_Interface/Application_Env/Messages
-    ${SackDirectory}/I_Interface/Application_Env/Interfaces
-    ${SackDirectory}/I_Interface/Application_Env/Wn_Env/Bs_Env/Messages
-    ${SackDirectory}/I_Interface/Application_Env/Wn_Env/Bs_Env/Ppc_Env/Definitions
-    ${SackDirectory}/I_Interface/Application_Env/Wn_Env/Bs_Env/Ppc_Env/Messages
-    ${SackDirectory}/I_Interface/Application_Env/Wn_Env/Bs_Env/Dsp_Env/Definitions
-    ${SackDirectory}/I_Interface/Application_Env/Wn_Env/Bs_Env/Dsp_Env/Messages
-    ${SackDirectory}/I_Interface/Private/SC_TCOM/Definitions
-    ${SackDirectory}/I_Interface/Private/SC_TCOM/Messages
-    ${SackDirectory}/I_Interface/Platform_Env/CCS_ENV/MCU/Definitions
-    ${SackDirectory}/I_Interface/Platform_Env/CCS_ENV/MCU/Messages
-    ${SackDirectory}/I_Interface/Platform_Env/CCS_ENV/MCU/ServiceInterface
-    ${SackDirectory}/I_Interface/Platform_Env/CCS_ENV/COMMON/Definitions
-    ${SackDirectory}/I_Interface/Platform_Env/CCS_ENV/COMMON/Messages
-    ${SackDirectory}/I_Interface/Platform_Env/CCS_ENV/COMMON/ServiceInterface
-    ${SackDirectory}/I_Interface/Platform_Env/CCS_ENV/DSP/Definitions
-    ${SackDirectory}/I_Interface/Platform_Env/Messages
-    ${SackDirectory}/I_Interface/Platform_Env/MCUHWAPI_ENV/Definitions
-    ${SackDirectory}/I_Interface/Platform_Env/MCUHWAPI_ENV/Messages
-    ${SackDirectory}/I_Interface/Platform_Env/DSPHWAPI_ENV/Definitions
-    ${SackDirectory}/I_Interface/Platform_Env/DSPHWAPI_ENV/Messages
-    ${SackDirectory}/I_Interface/Platform_Env/UPHWAPI_ENV/DSP_AND_RTHWAPI_ENV/COMMON_ENV/Definitions
-    ${SackDirectory}/I_Interface/Platform_Env/UPHWAPI_ENV/DSP_AND_RTHWAPI_ENV/COMMON_ENV/Messages
-    ${SackDirectory}/I_Interface/Platform_Env/UPHWAPI_ENV/DSPHWAPI_ENV/FARADAY_ENV/Definitions
-    ${SackDirectory}/I_Interface/Platform_Env/Definitions
-)
-
-set(TCOM_PRIVATE_SACK_DIRECTORY ${SackDirectory}/I_Interface)
-PRINT_STATUS("Looking for TCOM_PRIVATE_SACKS C/C++ files in: [${TCOM_PRIVATE_SACK_DIRECTORY}]")
-GET_SOURCE_FILES_FROM_DIRECTORY(TCOM_PRIVATE_SACKS ${TCOM_PRIVATE_SACK_DIRECTORY})
-
-set(BTS_SACK_DIRECTORY ${SackDirectory}/I_Interface)
-PRINT_STATUS("Looking for BTS_SACKS C/C++ files in: [${BTS_SACK_DIRECTORY}]")
-GET_SOURCE_FILES_FROM_DIRECTORY(BTS_SACKS ${BTS_SACK_DIRECTORY})
-
 # Do final steps
 if (APRG_TEST_MODE)
-    add_executable(${OUTFILE} ${DMEAS_TIMER_STACK_SOURCES_AND_TESTS} ${TCOM_PRIVATE_SACKS} ${BTS_SACKS})
-    include_directories(${DMEAS_TIMER_STACK_INCLUDE_DIRECTORIES} ${DMEAS_TIMER_STACK_TEST_INCLUDE_DIRECTORIES} ${SACKS_DIR_TO_INCLUDE} ${GTEST_INCLUDE_DIRS})
+    add_executable(${OUTFILE} ${DMEAS_TIMER_STACK_SOURCES_AND_TESTS} ${EXTERNAL_SACKS})
+    include_directories(${DMEAS_TIMER_STACK_INCLUDE_DIRECTORIES} ${DMEAS_TIMER_STACK_TEST_INCLUDE_DIRECTORIES} ${EXTERNAL_SACK_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
     target_link_libraries(${OUTFILE} APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
     add_test(${OUTFILE} ${OUTFILE})
 else()
-    add_executable(${OUTFILE} ${DMEAS_TIMER_STACK_SOURCES} ${DMEAS_TIMER_STACK_MAIN_SOURCES} ${TCOM_PRIVATE_SACKS} ${BTS_SACKS})
-    include_directories(${DMEAS_TIMER_STACK_INCLUDE_DIRECTORIES} ${SACKS_DIR_TO_INCLUDE})
+    add_executable(${OUTFILE} ${DMEAS_TIMER_STACK_SOURCES} ${DMEAS_TIMER_STACK_MAIN_SOURCES} ${EXTERNAL_SACKS})
+    include_directories(${DMEAS_TIMER_STACK_INCLUDE_DIRECTORIES} ${EXTERNAL_SACK_DIRECTORIES})
     target_link_libraries(${OUTFILE} APRG_COMMON)
 endif()
 install(TARGETS ${OUTFILE} DESTINATION bin)
