@@ -1,34 +1,32 @@
 /** @file
-*   @brief AaPro MCU function prototypes
-*   @copyright 2017, 2019 Nokia. All rights reserved.
-*/
+ *   @brief AaPro MCU function prototypes
+ *   @copyright 2017, 2019 Nokia. All rights reserved.
+ */
 #ifndef _MCU_IFAAPRO_H_
 #define _MCU_IFAAPRO_H_
 
-#include <glo_def.h>
 #include "CcsCommon.h"
-
+#include <../../COMMON/Definitions/IfAaSysTime_Defs.h>
 #include <../../COMMON/ServiceInterface/IfAaPro.h>
-#include <../../SHARED/MCU_RT/ServiceInterface/IfAaPro.h>
 #include <../../MCU/Definitions/IfAaPro_Defs.h>
 #include <../../MCU/Messages/IfAaPro_Msg.h>
-#include <../../COMMON/Definitions/IfAaSysTime_Defs.h>
-
+#include <../../SHARED/MCU_RT/ServiceInterface/IfAaPro.h>
+#include <glo_def.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /**
-*@defgroup dgAaProApiMcu AaPro MCU API
-*@ingroup dgAaPro
-*
-* Application Programming Interface.
-*
-* API specification (current): https://sharenet-ims.inside.nokiasiemensnetworks.com/livelink/livelink?func=ll&objId=396832787&objAction=Browse
-*
-*/
-
+ *@defgroup dgAaProApiMcu AaPro MCU API
+ *@ingroup dgAaPro
+ *
+ * Application Programming Interface.
+ *
+ * API specification (current):
+ *https://sharenet-ims.inside.nokiasiemensnetworks.com/livelink/livelink?func=ll&objId=396832787&objAction=Browse
+ *
+ */
 
 /**
 *******************************************************************************
@@ -73,8 +71,8 @@ extern "C" {
 *   @see AaProEuCreateAndStart
 *
 ******************************************************************************/
-#include <pthread.h>
-pthread_t AaProEuGetSystemId(u32 euId);
+// #include <pthread.h>
+// pthread_t AaProEuGetSystemId(u32 euId);
 
 /**
 *******************************************************************************
@@ -212,16 +210,9 @@ pthread_t AaProEuGetSystemId(u32 euId);
 *   @see AaProEuCurrent, AaProEuWaitForEu, AaProEuCheckJoinable
 *
 ******************************************************************************/
-EAaProEuRetVal AaProEuCreateAndStartExternalJoin(u32                      *euIdPtr,
-                                                 const char               *euNamePtr,
-                                                 TAaProEuEntryPoint       *euEntryPoint,
-                                                 u32                      euStackSize,
-                                                 EAaProEuSchedulingPolicy euPolicy,
-                                                 u32                      euPriority,
-                                                 i32                      euNiceness,
-                                                 void                     *euArgPtr,
-                                                 u32                      sizeOfEuArg);
-
+EAaProEuRetVal AaProEuCreateAndStartExternalJoin(
+    u32 *euIdPtr, const char *euNamePtr, TAaProEuEntryPoint *euEntryPoint, u32 euStackSize,
+    EAaProEuSchedulingPolicy euPolicy, u32 euPriority, i32 euNiceness, void *euArgPtr, u32 sizeOfEuArg);
 
 /**
 *******************************************************************************
@@ -261,7 +252,6 @@ EAaProEuRetVal AaProEuCreateAndStartExternalJoin(u32                      *euIdP
 *
 ******************************************************************************/
 int AaProEuWaitForEu(u32 euId, TAaMilliSecond milliseconds);
-
 
 /**
 *******************************************************************************

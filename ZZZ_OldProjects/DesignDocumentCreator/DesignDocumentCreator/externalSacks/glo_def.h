@@ -75,7 +75,7 @@ typedef signed long long i64;
 
 
 
-#ifdef __MSC__ /* For microsoft compiler environment */
+#ifdef _MSC_VER /* For microsoft compiler environment */
 
 typedef unsigned __int64 u64;
 typedef __int64 i64;
