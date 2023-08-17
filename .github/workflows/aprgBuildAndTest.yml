@@ -11,7 +11,6 @@ on:
 
 env:
   checkShellScriptsRelativePath: AllCommonScripts/ScriptsForShellScripts/checkShellScripts.sh
-  detectGitChangesRelativePath: AllCommonScripts/GithubWorkflowScripts/DetectGitChanges.sh
   determineCppProjectsRelativePath: AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh
   buildAndRunScriptRelativePath: AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh
 
@@ -37,12 +36,11 @@ jobs:
           "$checkShellScriptsPath"
 
 
-  detectGitChanges:
-    name: Detect Git Changes
-    if: inputs.cppCMakeProject == ''
+  determineCppProjects:
+    name: Determine CPP Projects
     runs-on: ubuntu-latest
     outputs:
-      projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_DETECTED_CPP_DIRECTORIES }}
+      projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES }}
     steps:
       - name: Checkout code for changes checking
         id: idOfCheckout
@@ -50,31 +48,13 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 2
-      - name: Get C/C++ Projects from Git Diff
-        id: idOfGetCppProjectStep
-        run: |
-          detectChangedProjectsPath=$(realpath "$(pwd)/${{ env.detectGitChangesRelativePath }}")
-          echo "detectChangedProjectsPath: [$detectChangedProjectsPath]"
-          chmod +x "$detectChangedProjectsPath"
-          "$detectChangedProjectsPath"
-
-
-  determineCppProjects:
-    name: Determine CPP Projects
-    needs: detectGitChanges
-    runs-on: ubuntu-latest
-    outputs:
-      projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_INPUT_CPP_DIRECTORIES }}
-    steps:
-      - name: Checkout code for building
-        uses: actions/checkout@v3
       - name: Get C/C++ Projects from Git Diff and User Input
         id: idOfGetCppProjectStep
         run: |
           determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
           echo "determineCppProjectsPath: [$determineCppProjectsPath]"
           chmod +x "$determineCppProjectsPath"
-          "$determineCppProjectsPath" "${{ inputs.cppCMakeProject }}" "${{ env.detectGitChanges.outputs.projectsToBuild }}"
+          "$determineCppProjectsPath" "${{ inputs.cppCMakeProject }}"
 
 
   buildAndTest:
