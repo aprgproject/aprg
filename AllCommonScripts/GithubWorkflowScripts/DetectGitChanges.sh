@@ -6,13 +6,16 @@ scriptDirectory=$(dirname "$scriptPath")
 scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
 aprgDirectoryName="aprg"
-declare -A cmakelistDirectoriesSet
+declare -A cppProjectsSet
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/PrintScripts/PrintUtilities.sh"
+source "$scriptDirectory/AddingAprgLocatorFile.sh"
 
 # Detect git changes
 detectedFiles=$(git diff --name-only HEAD^)
+
+scriptPrint "$scriptName" "$LINENO" "$detectedFiles"
 
 # Add only unique directories with CMakeLists.txt to set
 while IFS= read -r detectedFile; do
@@ -21,10 +24,10 @@ while IFS= read -r detectedFile; do
     while [ "$searchingDirectory" != "/" ] && [ "$searchingDirectory" != "." ]; do
         if [ "$(basename "$searchingDirectory")" == "$aprgDirectoryName" ]; then
             break
-        elif [[ -e "$searchingDirectory/CMakeLists.txt" ]]; then
+        elif [[ -e "$searchingDirectory$aprgLocatorFile" ]]; then
             formattedRelativePath=$(echo "\"$searchingDirectory\"" | sed -E "s|$aprgDirectory/||")
             scriptPrint "$scriptName" "$LINENO" "The formattedRelativePath is: [$formattedRelativePath]"
-            cmakelistDirectoriesSet["$formattedRelativePath"]=1
+            cppProjectsSet["$formattedRelativePath"]=1
             break
         else
             searchingDirectory=$(dirname "$searchingDirectory")
@@ -34,21 +37,16 @@ done <<< "$detectedFiles"
 
 
 # Add directories with CMakeLists.txt for output
-cmakelistDirectories=""
-for cmakelistDirectoriesSetItem in "${!cmakelistDirectoriesSet[@]}"; do
-    if [[ -z $cmakelistDirectories ]]; then
-        cmakelistDirectories="$cmakelistDirectoriesSetItem"
+cppProjects=""
+for cppProjectsSetItem in "${!cppProjectsSet[@]}"; do
+    if [[ -z $cppProjects ]]; then
+        cppProjects="$cppProjectsSetItem"
     else
-        cmakelistDirectories="$cmakelistDirectories,$cmakelistDirectoriesSetItem"
+        cppProjects="$cppProjects,$cppProjectsSetItem"
     fi
 done
 
-# Put AprgCommon if empty
-if [[ -z $cmakelistDirectories ]]; then
-    cmakelistDirectories="\"AprgCommon/AprgCommon\""
-fi
-
 # Save the value for Github Workflow
-scriptPrint "$scriptName" "$LINENO" "The cmakelistDirectories are: [$cmakelistDirectories]"
+scriptPrint "$scriptName" "$LINENO" "The cppProjects are: [$cppProjects]"
 # shellcheck disable=SC2154
-echo "APRG_CMAKELIST_DIRECTORIES=[$cmakelistDirectories]" >> "$GITHUB_OUTPUT"
+echo "APRG_DETECTED_CPP_DIRECTORIES=$cppProjects" >> "$GITHUB_OUTPUT"
