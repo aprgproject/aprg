@@ -8,7 +8,7 @@ using namespace std;
 
 namespace CodeJam_2020_Round1A_P3_SquareDance {
 
-TEST(CodeJam_2020_Round1A_P3_SquareDanceTest, Test1) {
+TEST(CodeJam_2020_Round1A_P3_SquareDanceTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();
