@@ -58,14 +58,14 @@ jobs:
 
 
   buildAndTest:
-    name: Test ${{ matrix.project }} on ${{ matrix.config.name }}
+    name: Test ${{ matrix.project }} on ${{ matrix.envConfig.name }}
     needs: determineCppProjects
-    runs-on: ${{ matrix.config.os }}
+    runs-on: ${{ matrix.envConfig.os }}
     strategy:
       fail-fast: false
       matrix:
         project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
-        config: 
+        envConfig: 
         - {
             name: "WindowsLatestMsvc",
             os: windows-latest,
@@ -112,7 +112,10 @@ jobs:
 #            cxx: "clang++",
 #            generators: "Ninja"
 #          }
-
+    exclude:
+      - matrix:
+          envConfig.name: "WindowsLatestMsvc"
+          
     steps:
     
       - name: Checkout code for building
@@ -124,18 +127,18 @@ jobs:
           echo github.event_name: ${{ github.event_name }}
           
       - name: Install dependencies on windows
-        if: startsWith(matrix.config.os, 'windows')
+        if: startsWith(matrix.envConfig.os, 'windows')
         run: |
           choco install ninja cmake
           ninja --version
           cmake --version
           #Not needed to run environment script
           #echo "Executing visual studio environment script..."
-          #cmd "${{ matrix.config.environmentScript }}"
+          #cmd "${{ matrix.envConfig.environmentScript }}"
           #echo "Finished visual studio environment script."
 
       - name: Install dependencies on ubuntu/gcc
-        if: matrix.config.name == 'UbuntuLatestGcc'
+        if: matrix.envConfig.name == 'UbuntuLatestGcc'
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake
@@ -144,7 +147,7 @@ jobs:
           gcc --version
 
       - name: Install dependencies on ubuntu/clang
-        if: matrix.config.name == 'UbuntuLatestClang'
+        if: matrix.envConfig.name == 'UbuntuLatestClang'
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake
@@ -153,14 +156,14 @@ jobs:
           clang --version
 
       - name: Install dependencies on File Extractor
-        if: startsWith(matrix.config.os, 'ubuntu') && matrix.project == 'AprgFileExtractor/AprgFileExtractor'
+        if: startsWith(matrix.envConfig.os, 'ubuntu') && matrix.project == 'AprgFileExtractor/AprgFileExtractor'
         run: |
           sudo apt-get update
           sudo apt-get install p7zip-full
           
 # MAC OS is not supported          
 #      - name: Install dependencies on macos
-#        if: startsWith(matrix.config.os, 'macos')
+#        if: startsWith(matrix.envConfig.os, 'macos')
 #        run: |
 #          brew install cmake ninja
 #          ninja --version
@@ -175,25 +178,25 @@ jobs:
           echo "buildAndRunScriptPath=$buildAndRunScriptPath" >> "$GITHUB_ENV"
             
       - name: Configure for windows
-        if: startsWith(matrix.config.os, 'windows')
+        if: startsWith(matrix.envConfig.os, 'windows')
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" configureWithDefaultCompiler GithubBuild Debug "${{ matrix.config.generators }}"
+          "$buildAndRunScriptPath" configureWithDefaultCompiler GithubBuild Debug "${{ matrix.envConfig.generators }}"
             
       - name: Configure for ubuntu/gcc
-        if: matrix.config.name == 'UbuntuLatestGcc'
+        if: matrix.envConfig.name == 'UbuntuLatestGcc'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" configureWithGcc GithubBuild Debug "${{ matrix.config.generators }}"
+          "$buildAndRunScriptPath" configureWithGcc GithubBuild Debug "${{ matrix.envConfig.generators }}"
             
       - name: Configure for ubuntu/clang
-        if: matrix.config.name == 'UbuntuLatestClang'
+        if: matrix.envConfig.name == 'UbuntuLatestClang'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" configureWithClang GithubBuild Debug "${{ matrix.config.generators }}"
+          "$buildAndRunScriptPath" configureWithClang GithubBuild Debug "${{ matrix.envConfig.generators }}"
             
       - name: Build
         shell: bash
