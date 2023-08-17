@@ -1,14 +1,6 @@
-#This needs aprg directory
-include(${APRG_DIR}/gtest/AprgCmakeInclude/SetGTestDirectory.cmake)
+include(${APRG_DIR}/gtest/AprgCmakeInclude/CommonSteps.cmake)
 
 set(GOOGLE_TEST_DIR ${GTEST_DIR}/googletest)
-
-find_package(Threads)
-if (CMAKE_USE_PTHREADS_INIT)  # The pthreads library is available and allowed.
-    set(gtest_disable_pthread OFF)
-else()
-    set(gtest_disable_pthread ON)
-endif()
 
 set(GTEST_INCLUDE_DIRECTORIES
     ${GOOGLE_TEST_DIR}/include
