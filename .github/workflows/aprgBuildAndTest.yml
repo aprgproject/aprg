@@ -42,7 +42,7 @@ jobs:
     if: inputs.cppCMakeProject == ''
     runs-on: ubuntu-latest
     outputs:
-      projectsToBuild: ${{ steps.idOfGetCppProject.outputs.APRG_DETECTED_CPP_DIRECTORIES }}
+      projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_DETECTED_CPP_DIRECTORIES }}
     steps:
       - name: Checkout code for changes checking
         id: idOfCheckout
@@ -51,7 +51,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 2
       - name: Get C/C++ Projects from Git Diff
-        id: idOfGetCppProject
+        id: idOfGetCppProjectStep
         run: |
           detectChangedProjectsPath=$(realpath "$(pwd)/${{ env.detectGitChangesRelativePath }}")
           echo "detectChangedProjectsPath: [$detectChangedProjectsPath]"
@@ -64,10 +64,12 @@ jobs:
     needs: detectGitChanges
     runs-on: ubuntu-latest
     outputs:
-      projectsToBuild: ${{ steps.idOfGetCppProject.outputs.APRG_INPUT_CPP_DIRECTORIES }}
+      projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_INPUT_CPP_DIRECTORIES }}
     steps:
+      - name: Checkout code for building
+        uses: actions/checkout@v3
       - name: Get C/C++ Projects from Git Diff and User Input
-        id: idOfGetCppProject
+        id: idOfGetCppProjectStep
         run: |
           determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
           echo "determineCppProjectsPath: [$determineCppProjectsPath]"
