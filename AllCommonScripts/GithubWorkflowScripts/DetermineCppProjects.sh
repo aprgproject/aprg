@@ -12,7 +12,7 @@ source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 
 # Get C/C++ projects by git changes or searching on directories.
 if [[ -z $userInput ]]; then
-    scriptPrint "$scriptName" "$LINENO" "The userInput is empty getting C/C++ projects from Git changes."
+    scriptPrint "$scriptName" "$LINENO" "The userInput is empty so getting C/C++ projects from Git changes."
     chmod +x "$scriptDirectory/DetectGitChanges.sh"
     "$scriptDirectory/DetectGitChanges.sh"
     read -r cppProjects < "$aprgDirectory/ZZZ_Temp/cppProjectsFromGit.txt"
