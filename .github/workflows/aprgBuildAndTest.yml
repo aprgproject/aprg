@@ -3,6 +3,12 @@ on:
     branches: [main]
     paths:
       - '**'
+  workflow_dispatch:
+    inputs:
+      user_input:
+        description: 'User input value'
+        required: true
+
 env:
   buildAndRunScriptRelativePath: AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh
   detectGitChangesRelativePath: AllCommonScripts/DetectGitChanges/DetectGitChanges.sh
