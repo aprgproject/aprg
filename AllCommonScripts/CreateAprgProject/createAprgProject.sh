@@ -1,17 +1,15 @@
 #!/bin/bash
 
 # Set variable values
-scriptPath=$(realpath "$0")
-scriptDirectory=$(dirname "$scriptPath")
-scriptName=$(basename "$scriptPath")
-aprgDirectory=$(realpath "$scriptDirectory/../../")
+scriptName=$(basename "$(realpath "$0")")
+aprgDirectory=$(realpath "$(dirname "$0")/../../")
 scriptOption=$1
 projectName=$2
 capitalUnderscoreName=$3
 parentDirectory=$(realpath "$4")
 
 # Source needed scripts
-source "$aprgDirectory/AllCommonScripts/PrintScripts/PrintUtilities.sh"
+source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 
 # Validate input
 if [ -z "$scriptOption" ]; then

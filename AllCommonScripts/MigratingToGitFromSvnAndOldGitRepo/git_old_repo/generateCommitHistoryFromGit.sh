@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Set variables
-scriptPath=$(realpath "$0")
-scriptDirectory=$(dirname "$scriptPath")
+# Set variable values
+scriptDirectory=$(dirname "$(realpath "$0")")
 
 git log --oneline --pretty=format:"([{%h}]) ([{%ad}]) ([{%an <%ae>}]) ([{%s}])" --date=iso-strict > "$scriptDirectory/formattedGitHistory.txt"

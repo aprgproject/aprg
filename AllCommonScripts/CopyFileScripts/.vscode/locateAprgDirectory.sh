@@ -18,7 +18,7 @@ findAprgDirectory() {
     echo "$localScriptName:$LINENO: The aprg directory name is [$aprgDirectoryName]."
     echo "$localScriptName:$LINENO: The input directory is [$inputDirectory] for searching [$aprgDirectoryName] directory."
     
-    # Set variables for search
+    # Set variable values for search
     searchingDirectory="$inputDirectory"
     
     # Loop until we reach the root directory ("/")
@@ -40,4 +40,5 @@ findAprgDirectory() {
     fi
     
     echo "$localScriptName:$LINENO: The aprg directory is [$aprgDirectory]."
+    export aprgDirectory
 }

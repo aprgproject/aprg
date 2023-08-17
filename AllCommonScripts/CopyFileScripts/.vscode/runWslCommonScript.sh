@@ -2,8 +2,8 @@
 
 # Set variable values
 scriptPath=$(realpath "$0")
-scriptDirectory=$(dirname "$scriptPath")
-scriptName=$(basename "$scriptPath")
+scriptDirectory=$(dirname "$(realpath "$0")")
+scriptName=$(basename "$(realpath "$0")")
 scriptRunningOption=$1
 locateScriptPath=$(realpath "$scriptDirectory/locateAprgDirectory.sh")
 exitCode=0
@@ -25,7 +25,7 @@ if ! [[ -e $aprgDirectory ]]; then
 fi
 
 # Source needed scripts
-source "$aprgDirectory/AllCommonScripts/PrintScripts/PrintUtilities.sh"
+source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 
 # Enable the "exit on error" option to automatically stop if there is a failure
 set -e

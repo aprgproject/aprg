@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Set variable values
-scriptPath=$(realpath "$0")
-scriptDirectory=$(dirname "$scriptPath")
+scriptDirectory=$(dirname "$(realpath "$0")")
 copyCommand=$(realpath "$scriptDirectory/copyFileToSeveralLocations.sh")
 
 $copyCommand cmake/LocateAprgDirectory.cmake

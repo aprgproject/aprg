@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Set variables
-scriptPath=$(realpath "$0")
-scriptDirectory=$(dirname "$scriptPath")
+# Set variable values
+scriptDirectory=$(dirname "$(realpath "$0")")
 revisionsRegex="^r[0-9]"
 messagesRegex='^[a-zA-Z]'
 newEntryRegex='^--------'

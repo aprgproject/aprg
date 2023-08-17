@@ -1,32 +1,25 @@
 #!/bin/bash
 
 # Set variable values
-scriptPath=$(realpath "$0")
-scriptDirectory=$(dirname "$scriptPath")
-scriptName=$(basename "$scriptPath")
-aprgDirectory=$(realpath "$scriptDirectory/../../")
-userInput="$1"
-cppProjectsFromGit="$2"
+scriptDirectory=$(dirname "$(realpath "$0")")
+scriptName=$(basename "$(realpath "$0")")
+aprgDirectory=$(realpath "$(dirname "$0")/../../")
+#userInput="$1"
+userInput="all"
 cppProjects=""
 
 # Source needed scripts
-source "$aprgDirectory/AllCommonScripts/PrintScripts/PrintUtilities.sh"
-source "$scriptDirectory/AddingAprgLocatorFile.sh"
+source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 
-# Put AprgCommon if empty
+# Get C/C++ projects by git changes or searching on directories.
 if [[ -z $userInput ]]; then
     scriptPrint "$scriptName" "$LINENO" "The userInput is empty getting C/C++ projects from Git changes."
-    cppProjects="$cppProjectsFromGit"
+    "$scriptDirectory/DetectGitChanges.sh"
+    read -r cppProjects < "$aprgDirectory/ZZZ_Temp/cppProjectsFromGit.txt"
 else
-    searchCondition=""
-    scriptPrint "$scriptName" "$LINENO" "The userInput is [$userInput]."
-    if [ "$userInput" == "all" ]; then
-        searchCondition="*$aprgLocatorFile"
-    else
-        searchCondition="*$userInput*$aprgLocatorFile"
-    fi
-    scriptPrint "$scriptName" "$LINENO" "Searching directories for C/C++ projects using searchCondition: [$searchCondition]"
-    cppProjects=$(find "$aprgDirectory" -depth -type f -wholename "$searchCondition" -exec sh -c 'echo "$1" | sed -E "s|^.*$2/(.*)$3.*$|\"\1\"|"' sh {} "$aprgDirectory" "$aprgLocatorFile" \;  | xargs -0 -n1 | paste -sd "," -)
+    scriptPrint "$scriptName" "$LINENO" "The userInput is [$userInput], proceeding to search C/C++ projects."
+    "$scriptDirectory/FindCppProjects.sh" "$userInput"
+    read -r cppProjects < "$aprgDirectory/ZZZ_Temp/cppProjectsFound.txt"
 fi
 
 # Put AprgCommon if empty
@@ -38,4 +31,4 @@ fi
 # Save the value for Github Workflow
 scriptPrint "$scriptName" "$LINENO" "The cppProjects are: [$cppProjects]"
 # shellcheck disable=SC2154
-echo "APRG_INPUT_CPP_DIRECTORIES=[$cppProjects]" >> "$GITHUB_OUTPUT"
+echo "APRG_CPP_DIRECTORIES=[$cppProjects]" >> "$GITHUB_OUTPUT"

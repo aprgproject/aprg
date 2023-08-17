@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Set variables
-scriptPath=$(realpath "$0")
-scriptDirectory=$(dirname "$scriptPath")
+# Set variable values
+scriptDirectory=$(dirname "$(realpath "$0")")
 gitNewRepoPath=$(realpath "$scriptDirectory/../gitNewRepoHere/")
 svnDiffsPath=$(realpath "$scriptDirectory/../../svn/diffs/")
 revision=$1

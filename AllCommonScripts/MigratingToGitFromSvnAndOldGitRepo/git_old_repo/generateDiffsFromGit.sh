@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Set variables
-scriptPath=$(realpath "$0")
-scriptDirectory=$(dirname "$scriptPath")
+# Set variable values
+scriptDirectory=$(dirname "$(realpath "$0")")
 
 revisionCount=1
 while read -r line; do

@@ -1,10 +1,8 @@
 #!/bin/bash
 
 # Set variable values
-scriptPath=$(realpath "$0")
-scriptDirectory=$(dirname "$scriptPath")
-scriptName=$(basename "$scriptPath")
-aprgDirectory=$(realpath "$scriptDirectory/../../")
+scriptName=$(basename "$(realpath "$0")")
+aprgDirectory=$(realpath "$(dirname "$0")/../../")
 directoryToConvertAllFiles=$1
 aprgShellScriptsPathSkipRegex=""
 
@@ -14,7 +12,7 @@ if [ -z "$directoryToConvertAllFiles" ]; then
 fi
 
 # Source needed scripts
-source "$aprgDirectory/AllCommonScripts/PrintScripts/PrintUtilities.sh"
+source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 source "$aprgDirectory/AllCommonScripts/CommonRegex/CommonRegexForPaths.sh"
 skipPathRegex="$aprgShellScriptsPathSkipRegex"
 

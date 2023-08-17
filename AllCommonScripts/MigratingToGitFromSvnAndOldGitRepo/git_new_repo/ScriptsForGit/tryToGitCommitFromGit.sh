@@ -1,7 +1,7 @@
 #!/bin/bash
 
-scriptPath=$(realpath "$0")
-scriptDirectory=$(dirname "$scriptPath")
+# Set variable values
+scriptDirectory=$(dirname "$(realpath "$0")")
 startLineCountPath="$scriptDirectory/startLineCount.log"
 endLineCountPath="$scriptDirectory/endLineCount.log"
 failedGitCommitsPath="$scriptDirectory/failedGitCommits.log"

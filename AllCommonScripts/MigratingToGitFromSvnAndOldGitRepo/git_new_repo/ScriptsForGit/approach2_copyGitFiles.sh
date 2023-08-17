@@ -1,7 +1,7 @@
 #!/bin/bash
 
-scriptPath=$(realpath "$0")
-scriptDirectory=$(dirname "$scriptPath")
+# Set variable values
+scriptDirectory=$(dirname "$(realpath "$0")")
 gitNewRepoPath=$(realpath "$scriptDirectory/../gitNewRepoHere/")
 gitOldRepoPath=$(realpath "$scriptDirectory/../../git_old_repo/gitOldRepoHere/")
 revisionHash=$1

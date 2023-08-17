@@ -2,9 +2,8 @@
 
 # Set variable values
 scriptPath=$(realpath "$0")
-scriptDirectory=$(dirname "$scriptPath")
-scriptName=$(basename "$scriptPath")
-aprgDirectory=$(realpath "$scriptDirectory/../../")
+scriptName=$(basename "$(realpath "$0")")
+aprgDirectory=$(realpath "$(dirname "$0")/../../")
 immediateDirectoryName=$(basename "$(pwd)")
 numberOfCores=$(nproc)
 scriptOption=$1
@@ -13,7 +12,7 @@ argument1=$3
 argument2=$4
 
 # Source needed scripts
-source "$aprgDirectory/AllCommonScripts/PrintScripts/PrintUtilities.sh"
+source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 
 # Validate inputs
 if [[ -z $scriptOption ]]; then
