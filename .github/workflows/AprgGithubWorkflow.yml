@@ -112,9 +112,6 @@ jobs:
 #            cxx: "clang++",
 #            generators: "Ninja"
 #          }
-    exclude:
-      - matrix:
-          envConfig.name: "WindowsLatestMsvc"
           
     steps:
     
