@@ -23,7 +23,7 @@ namespace KickStart_2020_RoundH_P4_Friends {
 #endif
 
 void runTestCase(int const testCaseNumber) {
-    int N, Q;
+    /* int N, Q;
     my_cin >> N >> Q;
     const int INF = 1e9;
     vector<vector<int>> dist(26, vector<int>(26, INF));
@@ -71,7 +71,7 @@ void runTestCase(int const testCaseNumber) {
         if (ans == INF) ans = -1;
         my_cout << ' ' << ans;
     }
-    my_cout << '\n';
+    my_cout << '\n';*/
 }
 
 void runAllTestCases() {

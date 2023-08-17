@@ -164,7 +164,7 @@ RangeQuery::ValuesFunction xorARangeOfValues = [](Values::const_iterator itStart
 };
 
 void runTestCase(int const testCaseNumber) {
-    int numberOfValues, numberOfModifications;
+    /* int numberOfValues, numberOfModifications;
     my_cin >> numberOfValues >> numberOfModifications;
     Values values(numberOfValues);
     Modifications modifications(numberOfModifications);
@@ -193,7 +193,7 @@ void runTestCase(int const testCaseNumber) {
         }
         my_cout << " " << lengthWithEvenParity;
     }
-    my_cout << '\n';
+    my_cout << '\n';*/
 }
 
 void runAllTestCases() {

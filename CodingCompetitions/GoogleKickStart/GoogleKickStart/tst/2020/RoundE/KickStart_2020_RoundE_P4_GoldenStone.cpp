@@ -37,7 +37,7 @@ bool ckmin(T& a, const T& b) {
 }
 
 void runTestCase(int const testCaseNumber) {
-    int N, M, S, R;
+    /* int N, M, S, R;
     my_cin >> N >> M >> S >> R;
     vector<vector<int>> graph(N);
     F0R(i, M) {
@@ -127,6 +127,7 @@ void runTestCase(int const testCaseNumber) {
     F0R(i, N) ckmin(ans, cost[i][0]);
 
     my_cout << "Case #" << testCaseNumber << ": " << (ans == INF ? -1 : ans) << '\n';
+    */
 }
 
 void runAllTestCases() {

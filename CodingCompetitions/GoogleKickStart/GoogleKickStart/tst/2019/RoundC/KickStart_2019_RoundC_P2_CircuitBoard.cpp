@@ -102,10 +102,11 @@ private:
     bool isPowerOfTwo(Index const index) const { return (index & (index - 1)) == 0; }
 
     Index getCeilOfLogarithmWithBase2Of(Index const index) const {
-        constexpr Index numberOfBits = sizeof(Index) * 8;
+        /* constexpr Index numberOfBits = sizeof(Index) * 8;
         Index result = numberOfBits - __builtin_clz(index);
         result = (result == 0) ? 0 : isPowerOfTwo(index) ? result - 1 : result;
-        return result;
+        return result;*/
+        return 0;
     }
 
     // Index getCeilOfLogarithmWithBase2Of(Index const index) const
