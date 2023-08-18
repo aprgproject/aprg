@@ -15,6 +15,7 @@ detectGitChanges() {
     
     # Source needed scripts
     source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
+    aprgLocatorFile=""
     source "$scriptDirectory/AddingAprgLocatorFile.sh"
     
     # Detect git changes

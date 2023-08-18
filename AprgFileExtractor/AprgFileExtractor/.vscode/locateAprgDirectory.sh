@@ -2,23 +2,25 @@
 
 findAprgDirectory() {
     # Set variable values
-    aprgDirectory=""
-    local aprgDirectoryName="aprg"
-    local localScriptName="locateAprgDirectory"
+    local aprgDirectoryName
+    local scriptName
     local inputDirectory
+    aprgDirectoryName="aprg"
+    scriptName="locateAprgDirectory.sh"
     inputDirectory=$(realpath "$1")
+    aprgDirectory=""
     
     # Validate input
     if ! [ -d "$inputDirectory" ]; then
-        echo "$localScriptName:$LINENO: Error: The input directory [$inputDirectory] is not a directory."
-        return 1
+        echo "$scriptName:$LINENO: Error: The input directory [$inputDirectory] is not a directory."
+        exit 1
     fi
     
     # Display variable values
-    echo "$localScriptName:$LINENO: The aprg directory name is [$aprgDirectoryName]."
-    echo "$localScriptName:$LINENO: The input directory is [$inputDirectory] for searching [$aprgDirectoryName] directory."
+    echo "$scriptName:$LINENO: The aprg directory name is [$aprgDirectoryName]."
+    echo "$scriptName:$LINENO: The input directory is [$inputDirectory] for searching [$aprgDirectoryName] directory."
     
-    # Set variables for search
+    # Set variable values for search
     searchingDirectory="$inputDirectory"
     
     # Loop until we reach the root directory ("/")
@@ -33,11 +35,16 @@ findAprgDirectory() {
         fi
     done
     
-    # Validate output
-    if [ "$searchingDirectory" == "/" ]; then
-        echo "$localScriptName:$LINENO: Error: The directory name [$aprgDirectoryName] is not found in any parent directories of [$inputDirectory]."
-        return 1
+    # Validate aprgDirectory
+    if [ "$searchingDirectory" == "/" ]  || [ "$searchingDirectory" == "." ]; then
+        echo "$scriptName:$LINENO: Error: The directory name [$aprgDirectoryName] is not found in any parent directories of [$inputDirectory]."
+        exit 1
+    fi
+    if ! [[ -d $aprgDirectory ]]; then
+        echo "$scriptName:$LINENO: Error: The aprg directory [$aprgDirectory] is not a directory."
+        exit 1
     fi
     
-    echo "$localScriptName:$LINENO: The aprg directory is [$aprgDirectory]."
+    echo "$scriptName:$LINENO: The aprg directory is [$aprgDirectory]."
+    export aprgDirectory
 }

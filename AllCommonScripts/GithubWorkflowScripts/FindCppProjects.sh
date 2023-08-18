@@ -13,6 +13,7 @@ findCppProjects() {
     
     # Source needed scripts
     source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
+    aprgLocatorFile=""
     source "$scriptDirectory/AddingAprgLocatorFile.sh"
     
     searchCondition=""

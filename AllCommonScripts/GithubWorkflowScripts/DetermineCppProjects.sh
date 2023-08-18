@@ -9,6 +9,7 @@ cppProjects=""
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
+excludedConfigurations=""
 source "$scriptDirectory/ExcludedConfigurations.sh"
 
 # Get C/C++ projects by git changes or searching on directories.
