@@ -4,25 +4,21 @@
 scriptPath=$(realpath "$0")
 scriptDirectory=$(dirname "$(realpath "$0")")
 scriptName=$(basename "$(realpath "$0")")
-scriptRunningOption=$1
-locateScriptPath=$(realpath "$scriptDirectory/locateAprgDirectory.sh")
+scriptRunningOption="$1"
+locateAprgScriptPath=$(realpath "$scriptDirectory/locateAprgDirectory.sh")
 exitCode=0
 
-# Find aprgDirectory
-aprgDirectory=""
-echo "$scriptName:$LINENO: Finding aprg directory..."
-if ! [[ -e $locateScriptPath ]]; then
-    echo "$scriptName:$LINENO: Error: The script [$locateScriptPath] does not exist."
+# Validate locate aprg script path
+if ! [[ -e $locateAprgScriptPath ]]; then
+    echo "$scriptName:$LINENO: Error: The script [$locateAprgScriptPath] does not exist."
     exit 1
 fi
+
+# Find aprgDirectory
+echo "$scriptName:$LINENO: Finding aprg directory..."
+aprgDirectory=""
 source "$scriptDirectory/locateAprgDirectory.sh"
 findAprgDirectory "$scriptDirectory"
-
-# Validate aprgDirectory
-if ! [[ -e $aprgDirectory ]]; then
-    echo "$scriptName:$LINENO: Error: The script [$aprgDirectory] does not exist."
-    exit 1
-fi
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
@@ -47,7 +43,7 @@ elif [ "$scriptRunningOption" == "outputWithRelativePaths" ]; then
     $buildAndRunScriptPath "$2" "$3" "$4" "$5" 2>&1 | sed -E "s|$(pwd)||g"
     exitCode=${PIPESTATUS[0]}
 else
-    scriptPrint "$scriptName" "$LINENO" "The script running option [$scriptRunningOption] is not found."
+    scriptPrint "$scriptName" "$LINENO" "The script running option [$scriptRunningOption] is not supported."
     scriptPrintInCppMatcherFormat "$scriptPath" "$LINENO" "${BASH_LINENO[0]}" "error: The script running option [$scriptRunningOption] is not supported by the WSL shell script."
     exit 1
 fi

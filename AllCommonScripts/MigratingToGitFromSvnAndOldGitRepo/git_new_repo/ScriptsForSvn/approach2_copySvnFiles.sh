@@ -4,7 +4,7 @@
 scriptDirectory=$(dirname "$(realpath "$0")")
 gitNewRepoPath=$(realpath "$scriptDirectory/../gitNewRepoHere/")
 svnRepoPath=$(realpath "$scriptDirectory/../../svn/svnRepoHere/")
-revision=$1
+revision="$1"
 
 if [ -z "$revision" ]; then
     echo "No parameter was given. Please provide revision number as a parameter."

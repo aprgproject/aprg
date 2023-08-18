@@ -3,9 +3,9 @@
 # Set variable values
 scriptName=$(basename "$(realpath "$0")")
 aprgDirectory=$(realpath "$(dirname "$0")/../../")
-scriptOption=$1
-projectName=$2
-capitalUnderscoreName=$3
+scriptOption="$1"
+projectName="$2"
+capitalUnderscoreName="$3"
 parentDirectory=$(realpath "$4")
 
 # Source needed scripts
@@ -36,8 +36,10 @@ copyTemplateFiles() {
 }
 
 replaceAllText() {
-    local targetString="$1"
-    local replacementString="$2"
+    local targetString
+    local replacementString
+    targetString="$1"
+    replacementString="$2"
     scriptPrint "$scriptName" "$LINENO" "replaceAllText() [$targetString] [$replacementString]"
     "$aprgDirectory/AllCommonScripts/ReplaceTextScripts/replaceText.sh" "$projectDirectory" "$targetString" "$replacementString"
 }

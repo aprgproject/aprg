@@ -4,7 +4,7 @@
 scriptDirectory=$(dirname "$(realpath "$0")")
 gitNewRepoPath=$(realpath "$scriptDirectory/../gitNewRepoHere/")
 gitOldRepoPath=$(realpath "$scriptDirectory/../../git_old_repo/gitOldRepoHere/")
-revisionHash=$1
+revisionHash="$1"
 
 if [ -z "$revisionHash" ]; then
     echo "No parameter was given. Please provide revisionHash number as a parameter."

@@ -3,7 +3,7 @@
 # Set variable values
 scriptName=$(basename "$(realpath "$0")")
 aprgDirectory=$(realpath "$(dirname "$0")/../../")
-directoryToConvertAllFiles=$1
+directoryToConvertAllFiles="$1"
 aprgShellScriptsPathSkipRegex=""
 
 # Use aprg directory if there are no arguments

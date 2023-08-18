@@ -6,12 +6,14 @@ aprgDirectory=$(realpath "$(dirname "$0")/../../")
 deleteDirectory="$1"
 
 deleteAllDirectoriesWithName() {
-    local nameForDeletion="$1"
+    local nameForDeletion
+    nameForDeletion="$1"
     find "$deleteDirectory" -type d -name "$nameForDeletion" -exec rm -rfv {} \;
 }
 
 deleteAllFilesWithName() {
-    local nameForDeletion="$1"
+    local nameForDeletion
+    nameForDeletion="$1"
     find "$deleteDirectory" -type f -name "$nameForDeletion" -exec rm -rfv {} \;
 }
 

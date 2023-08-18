@@ -4,8 +4,8 @@
 scriptDirectory=$(dirname "$(realpath "$0")")
 gitNewRepoPath=$(realpath "$scriptDirectory/../gitNewRepoHere/")
 gitDiffsPath=$(realpath "$scriptDirectory/../../git_old_repo/diffs/")
-lineCount=$1
-revisionHash=$2
+lineCount="$1"
+revisionHash="$2"
 
 if [ -z "$lineCount" ]; then
     echo "Please provide lineCount number as a parameter."

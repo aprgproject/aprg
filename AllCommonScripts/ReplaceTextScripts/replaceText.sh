@@ -4,8 +4,8 @@
 scriptName=$(basename "$(realpath "$0")")
 aprgDirectory=$(realpath "$(dirname "$0")/../../")
 replaceDirectory=$(realpath "$1")
-targetString=$2
-replacementString=$3
+targetString="$2"
+replacementString="$3"
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
@@ -23,7 +23,7 @@ fi
 scriptPrint "$scriptName" "$LINENO" "Replacing text with [$targetString] to [$replacementString] in [$replaceDirectory]."
 
 # Rename directories
-find . -depth -type d -name "*$targetString*" -execdir bash -c 'newname=$(echo "$1" | sed "s/$2/$3/g"); mv "$1" "$newname"' bash {} "$targetString" "$replacementString" \;
+find . -depth -type d -name "*$targetString*" -execdir sh -c 'newname=$(echo "$1" | sed "s/$2/$3/g"); mv "$1" "$newname"' sh {} "$targetString" "$replacementString" \;
 
 # Rename filenames
 find . -depth -type f -name "*$targetString*" -execdir rename "s/$targetString/$replacementString/g" {} \;

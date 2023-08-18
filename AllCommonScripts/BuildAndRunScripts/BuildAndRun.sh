@@ -6,10 +6,10 @@ scriptName=$(basename "$(realpath "$0")")
 aprgDirectory=$(realpath "$(dirname "$0")/../../")
 immediateDirectoryName=$(basename "$(pwd)")
 numberOfCores=$(nproc)
-scriptOption=$1
-buildDirectoryName=$2
-argument1=$3
-argument2=$4
+scriptOption="$1"
+buildDirectoryName="$2"
+argument1="$3"
+argument2="$4"
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
