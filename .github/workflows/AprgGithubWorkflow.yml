@@ -44,6 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES }}
+      excludedConfigurations: ${{ steps.idOfGetCppProjectStep.outputs.APRG_EXCLUDED_CONFIGURATIONS }}
     steps:
       - name: Checkout code for changes checking
         id: idOfCheckout
@@ -69,7 +70,7 @@ jobs:
       matrix:
         project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
         configurationName: ["WindowsLatestMsvc", "WindowsLatestMingw", "UbuntuLatestGcc", "UbuntuLatestClang"] #"MacOSLatestClang"
-        exclude: [{"project": "AprgCommon/AprgCommon", "configurationName": "WindowsLatestMsvc"}]
+        exclude: ${{ fromJSON(needs.determineCppProjects.outputs.excludedConfigurations) }}
         
     steps:
     
