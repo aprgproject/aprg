@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CMakeDatabase.hpp"
-#include <File/AlbaFileReader.hpp>
+#include <Common/File/AlbaFileReader.hpp>
 
 #include <fstream>
 #include <functional>

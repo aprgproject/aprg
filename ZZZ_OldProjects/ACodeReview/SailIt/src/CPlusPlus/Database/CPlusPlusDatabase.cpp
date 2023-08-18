@@ -213,7 +213,7 @@ CPlusPlusFunctionOptional CPlusPlusDatabase::getFunctionOptionalInClass(
     if (isClassWithAlias(className)) {
         string const correctFunctionName = getCorrectClassName(className) + "::" + functionName;
         if (isFunction(correctFunctionName)) {
-            functionOptional.setReference(m_functions[correctFunctionName]);
+            functionOptional.setConstReference(m_functions[correctFunctionName]);
         }
     }
     return functionOptional;
@@ -230,7 +230,7 @@ CPlusPlusFunctionOptional CPlusPlusDatabase::getFunctionOptionalInTemplateClass(
             myFunction.replaceTemplateParameters(
                 templateClass.getTemplateSignatureReference(),
                 templateClass.getTemplateSignatureInstantiationReference(instantiationIndex));
-            functionOptional.setReference(myFunction);
+            functionOptional.setConstReference(myFunction);
         }
     }
     return functionOptional;

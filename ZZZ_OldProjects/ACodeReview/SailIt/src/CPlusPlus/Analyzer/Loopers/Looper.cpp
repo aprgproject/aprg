@@ -58,6 +58,8 @@ bool Looper::isNotFinished() const { return m_currentIndex < m_endIndex; }
 
 bool Looper::isNotFinishedWhenBackward() const { return m_currentIndex >= 0; }
 
+DequeOfTerms const& Looper::getTermsConstReference() const { return m_terms; }
+
 Term& Looper::getContentReference() const { return m_terms.at(m_currentIndex); }
 
 int Looper::getCurrentIndex() const { return m_currentIndex; }

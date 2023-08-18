@@ -36,7 +36,7 @@ bool TermAnalyzer::isModifiedDueToIncludeMacroWithAngleBrackets(Looper const& st
     DBGPRINT2("isModifiedDueToIncludeMacroWithAngleBrackets");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<Term, 2> const expectedTerms{T(TermType::Macro, "#include"), T(TermType::WhiteSpace)};
+    array<Term, 2> const expectedTerms{Term(TermType::Macro, "#include"), Term(TermType::WhiteSpace)};
     if (isSingleLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         Looper afterOpeningAngleBracket(compareLooper);
         Looper afterClosingAngleBracket(compareLooper);
@@ -61,7 +61,7 @@ bool TermAnalyzer::isModifiedDueToIncludeMacroWithConstantString(Looper const& s
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<Term, 3> const expectedTerms{
-        T(TermType::Macro, "#include"), T(TermType::WhiteSpace), T(TermType::Constant_String)};
+        Term(TermType::Macro, "#include"), Term(TermType::WhiteSpace), Term(TermType::Constant_String)};
     if (isSingleLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         VectorOfTerms terms(getTerms(startLooper, expectedTerms));
         string includeFileName(getStringWithoutQuotations(terms[2].getString()));
@@ -79,7 +79,7 @@ bool TermAnalyzer::isModifiedDueToDefineMacro(Looper const& startLooper) {
     DBGPRINT2("isModifiedDueToDefineMacro");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<Term, 3> const expectedTerms{T(TermType::Macro, "#define"), T(TermType::WhiteSpace), T(TermType::Identifier)};
+    array<Term, 3> const expectedTerms{Term(TermType::Macro, "#define"), Term(TermType::WhiteSpace), Term(TermType::Identifier)};
     if (isSingleLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         VectorOfTerms terms(getTerms(startLooper, expectedTerms));
         string macroName(getStringWithoutQuotations(terms[2].getString()));
@@ -160,7 +160,7 @@ bool TermAnalyzer::isModifiedDueToUndefMacro(Looper const& startLooper) {
     DBGPRINT2("isModifiedDueToUndefMacro");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<Term, 3> const expectedTerms{T(TermType::Macro, "#undef"), T(TermType::WhiteSpace), T(TermType::Identifier)};
+    array<Term, 3> const expectedTerms{Term(TermType::Macro, "#undef"), Term(TermType::WhiteSpace), Term(TermType::Identifier)};
     if (isSingleLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         incrementLooperIfWhiteSpaceAndOneNewLine<FindingsToAdd::ExpectsNewLineAndUnexpectsWhiteSpace>(compareLooper);
         VectorOfTerms terms(getTerms(startLooper, expectedTerms));
@@ -177,7 +177,7 @@ bool TermAnalyzer::isModifiedDueToOtherMacros(Looper const& startLooper) {
     DBGPRINT2("isModifiedDueToExtraMacros");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<TermChecker, 1> const termCheckers{TC(TermCheckerType::isOtherMacro)};
+    array<TermChecker, 1> const termCheckers{TermChecker(TermCheckerType::isOtherMacro)};
     if (isSingleLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         Looper afterNewLineLooper(compareLooper);
         if (isEndOfMacroFoundAndMoveLooper(afterNewLineLooper)) {
@@ -273,10 +273,10 @@ void TermAnalyzer::copyLooperSpanToVectorOfTermsForMacro(Looper const& startLoop
 }
 
 void TermAnalyzer::checkMacroParameters(Looper const& startLooper, CPlusPlusMacro& cPlusPlusMacro) {
-    array<Term, 3> const nextArgumentForm{T(TermType::Identifier), T(TermType::Operator, ","), T(TermType::WhiteSpace)};
-    array<Term, 1> const lastArgumentForm{T(TermType::Identifier)};
+    array<Term, 3> const nextArgumentForm{Term(TermType::Identifier), Term(TermType::Operator, ","), Term(TermType::WhiteSpace)};
+    array<Term, 1> const lastArgumentForm{Term(TermType::Identifier)};
     array<Term, 3> const variadicArgumentForm{
-        T(TermType::Operator, "."), T(TermType::Operator, "."), T(TermType::Operator, ".")};
+        Term(TermType::Operator, "."), Term(TermType::Operator, "."), Term(TermType::Operator, ".")};
     VectorOfStrings& macroParameters = cPlusPlusMacro.getMacroParameters();
     Looper parameterLooper(startLooper);
     simplifyExpressions(startLooper);

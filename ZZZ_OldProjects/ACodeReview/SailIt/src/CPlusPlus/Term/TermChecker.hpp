@@ -3,11 +3,11 @@
 #include "MultipleTerms.hpp"
 #include "Term.hpp"
 
-#include <optional>
+#include <Common/Container/AlbaOptional.hpp>
 #include <ostream>
 #include <string>
 
-using std::optional;
+using alba::AlbaOptional;
 using std::ostream;
 using std::string;
 
@@ -53,7 +53,7 @@ public:
 private:
     TermCheckerType m_termCheckerType;
     Term m_term;
-    std::Optional<MultipleTerms> m_multipleTermsOptional;
+    alba::AlbaOptional<MultipleTerms> m_multipleTermsOptional;
 };
 
 }  // namespace codeReview

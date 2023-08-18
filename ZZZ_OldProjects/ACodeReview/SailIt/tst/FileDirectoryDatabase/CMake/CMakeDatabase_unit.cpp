@@ -1,12 +1,14 @@
 #include "../../../src/FileDirectoryDatabase/CMake/CMakeDatabase.hpp"
 #include "../../MtDirectoryConstants.hpp"
 #include "gtest/gtest.h"
+#include <CommonTestsUtilities/GTest/GTestMacros.hpp>
 
 #include <fstream>
 #include <iostream>
 #include <string>
 
 using namespace codeReview;
+using namespace alba;
 using namespace std;
 
 TEST(CMakeDatabaseTest, FilesAndDirectoriesAreRecognizedWhenAdded) {
@@ -26,19 +28,19 @@ TEST(CMakeDatabaseTest, FilesAndDirectoriesAreRecognizedWhenAdded) {
     SetOfDirectories& setOfDirectories = fileDirectoryDatabase.getSetOfDirectoriesReference();
     ASSERT_EQ(setOfDirectories.size(), 3);
     auto itDirectory = setOfDirectories.begin();
-    EXPECT_EQ(*(itDirectory++), directory + "directoryA\\");
-    EXPECT_EQ(*(itDirectory++), directory + "directoryB\\");
-    EXPECT_EQ(*(itDirectory++), directory + "directoryC\\");
+    EXPECT_PATH_EQ(*(itDirectory++), directory + "directoryA\\");
+    EXPECT_PATH_EQ(*(itDirectory++), directory + "directoryB\\");
+    EXPECT_PATH_EQ(*(itDirectory++), directory + "directoryC\\");
 
     SetOfFiles& setOfFiles = fileDirectoryDatabase.getSetOfFilesReference();
     ASSERT_EQ(setOfFiles.size(), 6);
     auto itFile = setOfFiles.begin();
-    EXPECT_EQ(*(itFile++), directory + "file1.hpp");
-    EXPECT_EQ(*(itFile++), directory + "file2.hpp");
-    EXPECT_EQ(*(itFile++), directory + "file3.hpp");
-    EXPECT_EQ(*(itFile++), directory + "file4.hpp");
-    EXPECT_EQ(*(itFile++), directory + "file5.hpp");
-    EXPECT_EQ(*(itFile++), directory + "file6.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file1.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file2.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file3.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file4.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file5.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file6.hpp");
 }
 
 TEST(CMakeDatabaseTest, SubDirectoriesCanBeAdded) {
@@ -61,19 +63,19 @@ TEST(CMakeDatabaseTest, SubDirectoriesCanBeAdded) {
     SetOfDirectories& setOfDirectories = subFileDirectoryDatabaseTest.getSetOfDirectoriesReference();
     ASSERT_EQ(setOfDirectories.size(), 3);
     auto itDirectory = setOfDirectories.begin();
-    EXPECT_EQ(*(itDirectory++), directory + "directoryA\\");
-    EXPECT_EQ(*(itDirectory++), directory + "directoryB\\");
-    EXPECT_EQ(*(itDirectory++), directory + "directoryC\\");
+    EXPECT_PATH_EQ(*(itDirectory++), directory + "directoryA\\");
+    EXPECT_PATH_EQ(*(itDirectory++), directory + "directoryB\\");
+    EXPECT_PATH_EQ(*(itDirectory++), directory + "directoryC\\");
 
     SetOfFiles& setOfFiles = subFileDirectoryDatabaseTest.getSetOfFilesReference();
     ASSERT_EQ(setOfFiles.size(), 6);
     auto itFile = setOfFiles.begin();
-    EXPECT_EQ(*(itFile++), directory + "file1.hpp");
-    EXPECT_EQ(*(itFile++), directory + "file2.hpp");
-    EXPECT_EQ(*(itFile++), directory + "file3.hpp");
-    EXPECT_EQ(*(itFile++), directory + "file4.hpp");
-    EXPECT_EQ(*(itFile++), directory + "file5.hpp");
-    EXPECT_EQ(*(itFile++), directory + "file6.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file1.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file2.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file3.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file4.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file5.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file6.hpp");
 }
 
 TEST(CMakeDatabaseTest, SearchCMakeFileDirectoryInnerDirection) {
@@ -112,21 +114,21 @@ TEST(CMakeDatabaseTest, SearchCMakeFileDirectoryInnerDirection) {
     string correctFullPath;
     CMakeDatabase& foundCMakeDatabase = mainDirectory.find_InnerDirection("file2sub2", isFound, correctFullPath);
     ASSERT_TRUE(isFound);
-    EXPECT_EQ(correctFullPath, directory + "file2sub2.hpp");
+    EXPECT_PATH_EQ(correctFullPath, directory + "file2sub2.hpp");
 
     SetOfDirectories& setOfDirectories = foundCMakeDatabase.getSetOfDirectoriesReference();
     ASSERT_EQ(setOfDirectories.size(), 3);
     auto itDirectory = setOfDirectories.begin();
-    EXPECT_EQ(*(itDirectory++), directory + "directoryAsub2\\");
-    EXPECT_EQ(*(itDirectory++), directory + "directoryBsub2\\");
-    EXPECT_EQ(*(itDirectory++), directory + "directoryCsub2\\");
+    EXPECT_PATH_EQ(*(itDirectory++), directory + "directoryAsub2\\");
+    EXPECT_PATH_EQ(*(itDirectory++), directory + "directoryBsub2\\");
+    EXPECT_PATH_EQ(*(itDirectory++), directory + "directoryCsub2\\");
 
     SetOfFiles& setOfFiles = foundCMakeDatabase.getSetOfFilesReference();
     ASSERT_EQ(setOfFiles.size(), 3);
     auto itFile = setOfFiles.begin();
-    EXPECT_EQ(*(itFile++), directory + "file1sub2.hpp");
-    EXPECT_EQ(*(itFile++), directory + "file2sub2.hpp");
-    EXPECT_EQ(*(itFile++), directory + "file3sub2.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file1sub2.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file2sub2.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file3sub2.hpp");
 }
 
 TEST(CMakeDatabaseTest, SearchCMakeFileDirectoryOuterDirection) {
@@ -165,19 +167,19 @@ TEST(CMakeDatabaseTest, SearchCMakeFileDirectoryOuterDirection) {
     string correctFullPath;
     CMakeDatabase& foundCMakeDatabase = sub3.find_OuterDirection("file2sub2", isFound, correctFullPath);
     ASSERT_TRUE(isFound);
-    EXPECT_EQ(correctFullPath, directory + "file2sub2.hpp");
+    EXPECT_PATH_EQ(correctFullPath, directory + "file2sub2.hpp");
 
     SetOfDirectories& setOfDirectories = foundCMakeDatabase.getSetOfDirectoriesReference();
     ASSERT_EQ(setOfDirectories.size(), 3);
     auto itDirectory = setOfDirectories.begin();
-    EXPECT_EQ(*(itDirectory++), directory + "directoryAsub2\\");
-    EXPECT_EQ(*(itDirectory++), directory + "directoryBsub2\\");
-    EXPECT_EQ(*(itDirectory++), directory + "directoryCsub2\\");
+    EXPECT_PATH_EQ(*(itDirectory++), directory + "directoryAsub2\\");
+    EXPECT_PATH_EQ(*(itDirectory++), directory + "directoryBsub2\\");
+    EXPECT_PATH_EQ(*(itDirectory++), directory + "directoryCsub2\\");
 
     SetOfFiles& setOfFiles = foundCMakeDatabase.getSetOfFilesReference();
     ASSERT_EQ(setOfFiles.size(), 3);
     auto itFile = setOfFiles.begin();
-    EXPECT_EQ(*(itFile++), directory + "file1sub2.hpp");
-    EXPECT_EQ(*(itFile++), directory + "file2sub2.hpp");
-    EXPECT_EQ(*(itFile++), directory + "file3sub2.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file1sub2.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file2sub2.hpp");
+    EXPECT_PATH_EQ(*(itFile++), directory + "file3sub2.hpp");
 }

@@ -1,4 +1,2 @@
-SET(EXTENSION .log)
-SET(VAR_DIR VALUE_DIRNAME)
-SET(VAR1 ${VAR_DIR}\\VALUE_1c)
-SET(VAR1 ${VAR_DIR}/\/VALUE_1a)
+  sEt  (           VAR3 VALUE_abcdefghijklmnopqrstuvwxyz      )        
+   Set ((       VAR4     VALUE_DIR1\/\/\DIR2\\///\DIR3    ))       

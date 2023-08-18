@@ -1,9 +1,10 @@
 #include "TermTranslator.hpp"
 
 #include "TermListConstants.hpp"
-#include <AlbaLocalPathHandler.hpp>
-#include <File/AlbaFileReader.hpp>
-#include <String/AlbaStringHelper.hpp>
+#include <Common/File/AlbaFileReader.hpp>
+#include <Common/Math/Helpers/DivisibilityHelpers.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>
 #include <iostream>
@@ -11,6 +12,7 @@
 
 using namespace alba;
 using namespace alba::stringHelper;
+using namespace alba::mathHelper;
 using namespace std;
 
 namespace codeReview {
@@ -29,8 +31,7 @@ TermTranslator::TermTranslator(string const& fileName, Findings& findings, Deque
       m_stringOfKeywords{CPLUSPLUS_KEYWORDS},
       m_stringOfPrimitiveTypes{PRIMITIVE_TYPES},
       m_stringOfIgnorableIdentifiers{CPLUSPLUS_IGNORABLE_IDENTIFIERS} {
-    AlbaLocalPathHandler pathHandler;
-    pathHandler.inputPath(fileName);
+    AlbaLocalPathHandler pathHandler(fileName);
     if (pathHandler.isFoundInLocalSystem() && pathHandler.isFile()) {
         if (m_fileStream.is_open()) {
             m_isFileValid = true;
@@ -50,6 +51,9 @@ void TermTranslator::readFile() {
     if (m_isFileValid) {
         while (m_albaFileReader.isNotFinished()) {
             string lineString(getLine());
+            if (lineString.empty() && !m_albaFileReader.isNotFinished()) {
+                break;
+            }
             int index = lineString.find_first_not_of(WHITESPACE_STRING);
             if (isNotNpos(index)) {
                 while (getCPlusPlusTerm(lineString, index))
@@ -139,7 +143,7 @@ bool TermTranslator::hasStringConstant(string& lineString, int& index) {
                 slashCount++;
                 slashCharacterIndex--;
             }
-        } while (isEven(slashCount));
+        } while (isOdd(slashCount) && index < static_cast<int>(lineString.size()));
         m_termBuilder.addConstantString(stringLiteral);
         return true;
     }
@@ -160,7 +164,7 @@ bool TermTranslator::hasCharacterConstant(string& lineString, int& index) {
                 slashCount++;
                 slashCharacterIndex--;
             }
-        } while (isEven(slashCount));
+        } while (isOdd(slashCount) && index < static_cast<int>(lineString.size()));
         m_termBuilder.addConstantCharacter(stringLiteral);
         return true;
     }

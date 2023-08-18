@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../Term/CheckerHelpers.hpp"
 #include "Findings/TemporaryFindings.hpp"
 #include "TermAnalyzer.hpp"
-#include <String/AlbaStringHelper.hpp>
+#include <CPlusPlus/Term/CheckerHelpers.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <iostream>
 
@@ -87,7 +87,7 @@ bool TermAnalyzer::isTheMismatchWithWhiteSpaceAndMoveLooper(
     if (isWhiteSpaceInExpectedTerms && !isWhiteSpaceInMainTerms) {
         addFinding(constructFileLocator(__FILE__, __LINE__), "Expected white space", movableLooper);
     } else if (!isWhiteSpaceInExpectedTerms && isWhiteSpaceInMainTerms) {
-        addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected white space", movableLooper);
+        addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected white space (#5)", movableLooper);
     }
     if (isWhiteSpaceInExpectedTerms) {
         itExpected++;
@@ -107,7 +107,7 @@ bool TermAnalyzer::isTheMismatchWithNewLineAndMoveLooper(Looper& movableLooper, 
     if (isNewLineInExpectedTerms && !isNewLineInMainTerms) {
         addFinding(constructFileLocator(__FILE__, __LINE__), "Expected new line", movableLooper);
     } else if (!isNewLineInExpectedTerms && isNewLineInMainTerms) {
-        addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected new line", movableLooper);
+        addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected new line (#3)", movableLooper);
     }
     if (isNewLineInExpectedTerms) {
         itExpected++;
@@ -141,7 +141,7 @@ bool TermAnalyzer::isBothBracketsFoundAndMoveLoopers(
     Looper afterNewLineAndWhiteSpaces(startLooper);
     connectLooper<looperConnector>(afterNewLineAndWhiteSpaces);
     if (afterNewLineAndWhiteSpaces.isNotFinished() &&
-        (T(TermType::Operator, "[") == afterNewLineAndWhiteSpaces.getContentReference())) {
+        (Term(TermType::Operator, "[") == afterNewLineAndWhiteSpaces.getContentReference())) {
         afterOpeningBracket.setCurrentIndex(afterNewLineAndWhiteSpaces + 1);
         afterClosingBracket.copyLooper(afterOpeningBracket);
         if (isClosingPartnerFoundAndMoveLooper(afterClosingBracket, "[", "]")) {
@@ -159,7 +159,7 @@ bool TermAnalyzer::isBothParenthesesFoundAndMoveLoopers(
     Looper afterNewLineAndWhiteSpaces(startLooper);
     connectLooper<looperConnector>(afterNewLineAndWhiteSpaces);
     if (afterNewLineAndWhiteSpaces.isNotFinished() &&
-        (T(TermType::Operator, "(") == afterNewLineAndWhiteSpaces.getContentReference())) {
+        (Term(TermType::Operator, "(") == afterNewLineAndWhiteSpaces.getContentReference())) {
         afterOpeningParenthesis.setCurrentIndex(afterNewLineAndWhiteSpaces + 1);
         afterClosingParenthesis.copyLooper(afterOpeningParenthesis);
         if (isClosingPartnerFoundAndMoveLooper(afterClosingParenthesis, "(", ")")) {
@@ -177,7 +177,7 @@ bool TermAnalyzer::isBothAngleBracketsFoundAndMoveLoopers(
     Looper afterNewLineAndWhiteSpaces(startLooper);
     connectLooper<looperConnector>(afterNewLineAndWhiteSpaces);
     if (afterNewLineAndWhiteSpaces.isNotFinished() &&
-        (T(TermType::Operator, "<") == afterNewLineAndWhiteSpaces.getContentReference())) {
+        (Term(TermType::Operator, "<") == afterNewLineAndWhiteSpaces.getContentReference())) {
         afterOpeningAngleBracket.setCurrentIndex(afterNewLineAndWhiteSpaces + 1);
         afterClosingAngleBracket.copyLooper(afterOpeningAngleBracket);
         if (isClosingPartnerFoundAndMoveLooper(afterClosingAngleBracket, "<", ">")) {
@@ -197,7 +197,7 @@ bool TermAnalyzer::isBothBracesFoundAndMoveLoopers(
         afterNewLineAndWhiteSpaces);
     connectLooper<looperConnector>(afterNewLineAndWhiteSpaces);
     if (afterNewLineAndWhiteSpaces.isNotFinished() &&
-        (T(TermType::Operator, "{") == afterNewLineAndWhiteSpaces.getContentReference())) {
+        (Term(TermType::Operator, "{") == afterNewLineAndWhiteSpaces.getContentReference())) {
         afterOpeningBraces.setCurrentIndex(afterNewLineAndWhiteSpaces + 1);
         afterClosingBraces.copyLooper(afterOpeningBraces);
         incrementLooperIfWhiteSpaceAndOneNewLine<FindingsToAdd::ExpectsNewLineAndUnexpectsWhiteSpace>(
@@ -222,14 +222,14 @@ bool TermAnalyzer::isBothBracesFoundWithSemicolonAndMoveLoopers(
         afterNewLineAndWhiteSpaces);
     connectLooper<looperConnector>(afterNewLineAndWhiteSpaces);
     if (afterNewLineAndWhiteSpaces.isNotFinished() &&
-        (T(TermType::Operator, "{") == afterNewLineAndWhiteSpaces.getContentReference())) {
+        (Term(TermType::Operator, "{") == afterNewLineAndWhiteSpaces.getContentReference())) {
         afterOpeningBraces.setCurrentIndex(afterNewLineAndWhiteSpaces + 1);
         afterClosingBraces.copyLooper(afterOpeningBraces);
         incrementLooperIfWhiteSpaceAndOneNewLine<FindingsToAdd::ExpectsNewLineAndUnexpectsWhiteSpace>(
             afterClosingBraces);
         if (isClosingPartnerFoundAndMoveLooper(afterClosingBraces, "{", "}")) {
             afterSemiColon.copyLooper(afterClosingBraces);
-            if (T(TermType::Operator, ";") == afterSemiColon.getContentReference()) {
+            if (Term(TermType::Operator, ";") == afterSemiColon.getContentReference()) {
                 afterSemiColon++;
             } else {
                 addFinding(constructFileLocator(__FILE__, __LINE__), "Expected semi-colon", afterSemiColon);
@@ -249,7 +249,7 @@ bool TermAnalyzer::isSemiColonFoundAndMoveLooper(Looper& afterSemiColon) {
     Looper afterNewLineAndWhiteSpaces(afterSemiColon);
     connectLooper<looperConnector>(afterNewLineAndWhiteSpaces);
     if (afterNewLineAndWhiteSpaces.isNotFinished() &&
-        (T(TermType::Operator, ";") == afterNewLineAndWhiteSpaces.getContentReference())) {
+        (Term(TermType::Operator, ";") == afterNewLineAndWhiteSpaces.getContentReference())) {
         temporaryFindings.saveCurrentFindings();
         afterSemiColon.setCurrentIndex(afterNewLineAndWhiteSpaces + 1);
         return true;

@@ -36,7 +36,7 @@ bool TermAnalyzer::isModifiedDueToVariableDeclaration(Looper const& startLooper)
     DBGPRINT2("isModifiedDueToVariableDeclaration");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<TermChecker, 2> const termCheckers{TC(TermCheckerType::isCPlusPlusType), TC(T(TermType::WhiteSpace))};
+    array<TermChecker, 2> const termCheckers{TermChecker(TermCheckerType::isCPlusPlusType), TermChecker(Term(TermType::WhiteSpace))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         CPlusPlusType type(startLooper.getContentReference().getValueTypeReference());
         VectorOfStrings variableNames;
@@ -59,13 +59,13 @@ bool TermAnalyzer::isModifiedDueToCStyleArrayDeclaration(Looper const& startLoop
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 7> const termCheckers{
-        TC(TermCheckerType::isCPlusPlusType),
-        TC(T(TermType::WhiteSpace)),
-        TC({T(TermType::Identifier), T(TermType::Variable)}),
-        TC(T(TermType::Operator, "[")),
-        TC(T(TermType::Constant_Number)),
-        TC(T(TermType::Operator, "]")),
-        TC(T(TermType::Operator, ";"))};
+        TermChecker(TermCheckerType::isCPlusPlusType),
+        TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker({Term(TermType::Identifier), Term(TermType::Variable)}),
+        TermChecker(Term(TermType::Operator, "[")),
+        TermChecker(Term(TermType::Constant_Number)),
+        TermChecker(Term(TermType::Operator, "]")),
+        TermChecker(Term(TermType::Operator, ";"))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         string const variableName(terms[2].getString());
@@ -90,8 +90,8 @@ bool TermAnalyzer::isModifiedDueToAssignment(Looper const& startLooper) {
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 6> const termCheckers{
-        TC(TermCheckerType::isValue), TC(T(TermType::WhiteSpace)),  TC(TermCheckerType::isAssignmentOperator),
-        TC(T(TermType::WhiteSpace)),  TC(TermCheckerType::isValue), TC(T(TermType::Operator, ";"))};
+        TermChecker(TermCheckerType::isValue), TermChecker(Term(TermType::WhiteSpace)),  TermChecker(TermCheckerType::isAssignmentOperator),
+        TermChecker(Term(TermType::WhiteSpace)),  TermChecker(TermCheckerType::isValue), TermChecker(Term(TermType::Operator, ";"))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         incrementLooperIfWhiteSpaceAndOneNewLine<FindingsToAdd::ExpectsNewLineAndUnexpectsWhiteSpace>(compareLooper);
         temporaryFindings.copyCurrentFindings(m_findings);
@@ -105,7 +105,7 @@ bool TermAnalyzer::isModifiedDueToRValueCanBeALine(Looper const& startLooper) {
     DBGPRINT2("isModifiedDueToRValueCanBeALine");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<Term, 2> const expectedTerms{T(TermType::Value_RValue_CanBeALine), T(TermType::Operator, ";")};
+    array<Term, 2> const expectedTerms{Term(TermType::Value_RValue_CanBeALine), Term(TermType::Operator, ";")};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         incrementLooperIfWhiteSpaceAndOneNewLine<FindingsToAdd::ExpectsNewLineAndUnexpectsWhiteSpace>(compareLooper);
         temporaryFindings.copyCurrentFindings(m_findings);
@@ -120,8 +120,8 @@ bool TermAnalyzer::isModifiedDueToUsingNamespaceKeyword(Looper const& startLoope
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<Term, 6> const expectedTerms{
-        T(TermType::Keyword, "using"), T(TermType::WhiteSpace), T(TermType::Keyword, "namespace"),
-        T(TermType::WhiteSpace),       T(TermType::Namespace),  T(TermType::Operator, ";")};
+        Term(TermType::Keyword, "using"), Term(TermType::WhiteSpace), Term(TermType::Keyword, "namespace"),
+        Term(TermType::WhiteSpace),       Term(TermType::Namespace),  Term(TermType::Operator, ";")};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         incrementLooperIfWhiteSpaceAndOneNewLine<FindingsToAdd::ExpectsNewLineAndUnexpectsWhiteSpace>(compareLooper);
         VectorOfTerms terms(getTerms(startLooper, expectedTerms));
@@ -136,7 +136,7 @@ bool TermAnalyzer::isModifiedDueToUsingNamespaceKeyword(Looper const& startLoope
 bool TermAnalyzer::isModifiedDueToTypeDefStatement(Looper const& startLooper) {
     DBGPRINT2("isModifiedDueToTypeDefStatement");
     Looper compareLooper(startLooper);
-    array<Term, 2> const termCheckers{T(TermType::Keyword, "typedef"), T(TermType::WhiteSpace)};
+    array<Term, 2> const termCheckers{Term(TermType::Keyword, "typedef"), Term(TermType::WhiteSpace)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         simplifyPrimitiveTypesForCurrentStatement(compareLooper);
         bool isModified = true;
@@ -156,7 +156,7 @@ bool TermAnalyzer::isModifiedDueToTypeDefWithNormalParameters(Looper const& star
     DBGPRINT2("isModifiedDueToTypeDefWithNormalParameters");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(nextLooper);
-    array<TermChecker, 2> const termCheckers{TC(TermCheckerType::isCPlusPlusType), TC(T(TermType::WhiteSpace))};
+    array<TermChecker, 2> const termCheckers{TermChecker(TermCheckerType::isCPlusPlusType), TermChecker(Term(TermType::WhiteSpace))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::WhiteSpaceAndNewLine>(
             compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(nextLooper, termCheckers));
@@ -182,8 +182,8 @@ bool TermAnalyzer::isModifiedDueToTypeDefWithStructAndBracesCStyleStatement(
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(nextLooper);
     array<TermChecker, 3> const termCheckers{
-        TC(T(TermType::Keyword, "struct")), TC(T(TermType::WhiteSpace)),
-        TC({T(TermType::Identifier), T(TermType::Class)})};
+        TermChecker(Term(TermType::Keyword, "struct")), TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker({Term(TermType::Identifier), Term(TermType::Class)})};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::WhiteSpaceAndNewLine>(
             compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(nextLooper, termCheckers));
@@ -217,11 +217,11 @@ bool TermAnalyzer::isModifiedDueToTypeDefWithStructAndBracesCStyleStatement(
 bool TermAnalyzer::areVariableFoundForVariableDeclarationAndMoveLooper(
     Looper& movableLooper, VectorOfStrings& variableNames) {
     array<TermChecker, 5> const variableWithValueChecker{
-        TC({T(TermType::Identifier), T(TermType::Variable)}), TC(T(TermType::WhiteSpace)),
-        TC(TermCheckerType::isAssignmentOperator), TC(T(TermType::WhiteSpace)), TC(TermCheckerType::isValue)};
-    array<TermChecker, 1> const variableChecker{TC({T(TermType::Identifier), T(TermType::Variable)})};
-    array<Term, 2> const separator{T(TermType::Operator, ","), T(TermType::WhiteSpace)};
-    array<Term, 1> const finisher{T(TermType::Operator, ";")};
+        TermChecker({Term(TermType::Identifier), Term(TermType::Variable)}), TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker(TermCheckerType::isAssignmentOperator), TermChecker(Term(TermType::WhiteSpace)), TermChecker(TermCheckerType::isValue)};
+    array<TermChecker, 1> const variableChecker{TermChecker({Term(TermType::Identifier), Term(TermType::Variable)})};
+    array<Term, 2> const separator{Term(TermType::Operator, ","), Term(TermType::WhiteSpace)};
+    array<Term, 1> const finisher{Term(TermType::Operator, ";")};
     bool isNextVariableExpected(true);
     while (movableLooper.isNotFinished()) {
         Looper movableLooperCopy(movableLooper);
@@ -251,12 +251,12 @@ bool TermAnalyzer::areVariableFoundForVariableDeclarationAndMoveLooper(
 
 bool TermAnalyzer::areTypesFoundForTypedefThenFillAndMoveLooper(
     Looper& movableLooper, CPlusPlusType const& type, MapOfCPlusPlusTypesForTypedef& typeMap) {
-    array<TermChecker, 1> const typeChecker{TC({T(TermType::Identifier), T(TermType::Type), T(TermType::Class)})};
+    array<TermChecker, 1> const typeChecker{TermChecker({Term(TermType::Identifier), Term(TermType::Type), Term(TermType::Class)})};
     array<TermChecker, 2> const typePointerChecker{
-        TC(T(TermType::Operator, "*")), TC({T(TermType::Identifier), T(TermType::Type), T(TermType::Class)})};
-    array<Term, 1> const separator1{T(TermType::WhiteSpace)};
-    array<Term, 1> const separator2{T(TermType::Operator, ",")};
-    array<Term, 1> const finisher{T(TermType::Operator, ";")};
+        TermChecker(Term(TermType::Operator, "*")), TermChecker({Term(TermType::Identifier), Term(TermType::Type), Term(TermType::Class)})};
+    array<Term, 1> const separator1{Term(TermType::WhiteSpace)};
+    array<Term, 1> const separator2{Term(TermType::Operator, ",")};
+    array<Term, 1> const finisher{Term(TermType::Operator, ";")};
     bool isNextTypeExpected(true);
     while (movableLooper.isNotFinished()) {
         Looper movableLooperCopy(movableLooper);

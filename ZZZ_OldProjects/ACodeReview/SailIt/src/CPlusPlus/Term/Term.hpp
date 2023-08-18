@@ -1,12 +1,12 @@
 #pragma once
 
 #include "../Database/CPlusPlusType.hpp"
+#include <Common/Container/AlbaOptional.hpp>
 
-#include <optional>
 #include <ostream>
 #include <string>
 
-using std::optional;
+using alba::AlbaOptional;
 using std::ostream;
 using std::string;
 
@@ -60,7 +60,7 @@ public:
     string getString() const;
     bool hasValueType() const;
     CPlusPlusType getValueType() const;
-    CPlusPlusType& getValueTypeReference() const;
+    CPlusPlusType& getValueTypeReference();
     string getPrintableString() const;
     string getTermTypeString() const;
     TermType getTermType() const;
@@ -79,7 +79,7 @@ private:
     string m_content;
     string m_valueType;
     unsigned int m_lineNumber;
-    std::Optional<CPlusPlusType> m_ValueTypeOptional;
+    alba::AlbaOptional<CPlusPlusType> m_ValueTypeOptional;
 };
 
 }  // namespace codeReview

@@ -3,7 +3,7 @@
 #include "../Builder/TermBuilder.hpp"
 #include "../Findings/Findings.hpp"
 #include "../Term/Term.hpp"
-#include <File/AlbaFileReader.hpp>
+#include <Common/File/AlbaFileReader.hpp>
 
 #include <fstream>
 #include <string>

@@ -1,7 +1,7 @@
 #include "FileDirectoryDatabase.hpp"
 
-#include <AlbaLocalPathHandler.hpp>
-#include <String/AlbaStringHelper.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <iostream>
 
@@ -86,8 +86,7 @@ SetOfDirectories& FileDirectoryDatabase::getSetOfDirectoriesReference() { return
 void FileDirectoryDatabase::allowNonExistentDirectories() { m_isNonExistentDirectoriesAllowed = true; }
 
 void FileDirectoryDatabase::addFileOrDirectory(string const& fileOrDirectory) {
-    AlbaLocalPathHandler pathHandler;
-    pathHandler.inputPath(fileOrDirectory);
+    AlbaLocalPathHandler pathHandler(fileOrDirectory);
     if (m_isNonExistentDirectoriesAllowed || pathHandler.isFoundInLocalSystem()) {
         if (pathHandler.isFile()) {
             m_files.emplace(pathHandler.getFullPath());

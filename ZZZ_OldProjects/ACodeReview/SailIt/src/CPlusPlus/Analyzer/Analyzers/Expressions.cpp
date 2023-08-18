@@ -106,9 +106,10 @@ bool TermAnalyzer::isModifiedDueToScopeOperator(Looper const& startLooper) {
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 3> const termCheckers{
-        TC({T(TermType::Class), T(TermType::Namespace)}), TC(T(TermType::Operator, "::")),
-        TC({T(TermType::Class), T(TermType::Namespace), T(TermType::Variable), T(TermType::FunctionName),
-            T(TermType::Type), T(TermType::Identifier)})};
+        TermChecker({Term(TermType::Class), Term(TermType::Namespace)}), TermChecker(Term(TermType::Operator, "::")),
+        TermChecker(
+            {Term(TermType::Class), Term(TermType::Namespace), Term(TermType::Variable), Term(TermType::FunctionName),
+             Term(TermType::Type), Term(TermType::Identifier)})};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         temporaryFindings.copyCurrentFindings(m_findings);
@@ -124,7 +125,7 @@ bool TermAnalyzer::isModifiedDueToSuffixOperator(Looper const& startLooper) {
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 2> const termCheckers{
-        TC(TermCheckerType::isLValue), TC(TermCheckerType::isIncrementDecrementOperator)};
+        TermChecker(TermCheckerType::isLValue), TermChecker(TermCheckerType::isIncrementDecrementOperator)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         temporaryFindings.copyCurrentFindings(m_findings);
@@ -141,7 +142,8 @@ bool TermAnalyzer::isModifiedDueToPeriodOperator(Looper const& startLooper) {
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 3> const termCheckers{
-        TC(TermCheckerType::isValue), TC(T(TermType::Operator, ".")), TC(T(TermType::Identifier))};
+        TermChecker(TermCheckerType::isValue), TermChecker(Term(TermType::Operator, ".")),
+        TermChecker(Term(TermType::Identifier))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         temporaryFindings.copyCurrentFindings(m_findings);
@@ -157,7 +159,8 @@ bool TermAnalyzer::isModifiedDueToArrowOperator(Looper const& startLooper) {
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 3> const termCheckers{
-        TC(TermCheckerType::isValue), TC(T(TermType::Operator, "->")), TC(T(TermType::Identifier))};
+        TermChecker(TermCheckerType::isValue), TermChecker(Term(TermType::Operator, "->")),
+        TermChecker(Term(TermType::Identifier))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         temporaryFindings.copyCurrentFindings(m_findings);
@@ -172,7 +175,7 @@ bool TermAnalyzer::isModifiedDueToFunctionCall(Looper const& startLooper) {
     DBGPRINT2("isModifiedDueToFunctionCall");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<Term, 1> const expectedTerms{T(TermType::FunctionName)};
+    array<Term, 1> const expectedTerms{Term(TermType::FunctionName)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         Looper afterOpeningParenthesis(compareLooper);
         Looper afterClosingParenthesis(compareLooper);
@@ -203,7 +206,7 @@ bool TermAnalyzer::isModifiedDueToBracketOperator(Looper const& startLooper) {
     DBGPRINT2("isModifiedDueToBracketOperator");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<Term, 1> const expectedTerms{T(TermType::Variable)};
+    array<Term, 1> const expectedTerms{Term(TermType::Variable)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         Looper afterOpeningBracket(compareLooper);
         Looper afterClosingBracket(compareLooper);
@@ -244,7 +247,7 @@ bool TermAnalyzer::isModifiedDueToRelationalPrefixOperator(Looper const& startLo
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 2> const termCheckers{
-        TC(TermCheckerType::isRelationalPrefixOperator), TC(TermCheckerType::isLValue)};
+        TermChecker(TermCheckerType::isRelationalPrefixOperator), TermChecker(TermCheckerType::isLValue)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         temporaryFindings.copyCurrentFindings(m_findings);
         combineToASingleTermWithValueType(
@@ -260,7 +263,7 @@ bool TermAnalyzer::isModifiedDueToIncrementDecrementPrefixOperator(Looper const&
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 2> const termCheckers{
-        TC(TermCheckerType::isIncrementDecrementOperator), TC(TermCheckerType::isLValue)};
+        TermChecker(TermCheckerType::isIncrementDecrementOperator), TermChecker(TermCheckerType::isLValue)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         temporaryFindings.copyCurrentFindings(m_findings);
@@ -276,7 +279,8 @@ bool TermAnalyzer::isModifiedDueToIndirectionPrefixOperator(Looper const& startL
     DBGPRINT2("isModifiedDueToPrefixOperator");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<TermChecker, 2> const termCheckers{TC(T(TermType::Operator, "*")), TC(TermCheckerType::isValue)};
+    array<TermChecker, 2> const termCheckers{
+        TermChecker(Term(TermType::Operator, "*")), TermChecker(TermCheckerType::isValue)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         temporaryFindings.copyCurrentFindings(m_findings);
@@ -293,7 +297,8 @@ bool TermAnalyzer::isModifiedDueToAddressOfPrefixOperator(Looper const& startLoo
     DBGPRINT2("isModifiedDueToPrefixOperator");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<TermChecker, 2> const termCheckers{TC(T(TermType::Operator, "&")), TC(TermCheckerType::isValue)};
+    array<TermChecker, 2> const termCheckers{
+        TermChecker(Term(TermType::Operator, "&")), TermChecker(TermCheckerType::isValue)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         temporaryFindings.copyCurrentFindings(m_findings);
@@ -310,7 +315,8 @@ bool TermAnalyzer::isModifiedDueToPrefixOperator(Looper const& startLooper) {
     DBGPRINT2("isModifiedDueToPrefixOperator");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<TermChecker, 2> const termCheckers{TC(TermCheckerType::isPrefixOperator), TC(TermCheckerType::isValue)};
+    array<TermChecker, 2> const termCheckers{
+        TermChecker(TermCheckerType::isPrefixOperator), TermChecker(TermCheckerType::isValue)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         temporaryFindings.copyCurrentFindings(m_findings);
@@ -328,9 +334,9 @@ bool TermAnalyzer::isModifiedDueToBiDirectionalRelationalOperator(Looper const& 
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 5> const termCheckers{
-        TC(TermCheckerType::isValue), TC(T(TermType::WhiteSpace)),
-        TC(TermCheckerType::isRelationalBiDirectionalOperator), TC(T(TermType::WhiteSpace)),
-        TC(TermCheckerType::isValue)};
+        TermChecker(TermCheckerType::isValue), TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker(TermCheckerType::isRelationalBiDirectionalOperator), TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker(TermCheckerType::isValue)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         if (!CheckerHelpers::isConstant(terms[0]) && CheckerHelpers::isConstant(terms[4])) {
@@ -350,8 +356,9 @@ bool TermAnalyzer::isModifiedDueToBiDirectionalOperator(Looper const& startLoope
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 5> const termCheckers{
-        TC(TermCheckerType::isValue), TC(T(TermType::WhiteSpace)), TC(TermCheckerType::isBiDirectionalOperator),
-        TC(T(TermType::WhiteSpace)), TC(TermCheckerType::isValue)};
+        TermChecker(TermCheckerType::isValue), TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker(TermCheckerType::isBiDirectionalOperator), TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker(TermCheckerType::isValue)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         if (CheckerHelpers::isConstant(terms[0]) && !CheckerHelpers::isConstant(terms[4])) {
@@ -372,7 +379,8 @@ bool TermAnalyzer::isModifiedDueToParenthesesWithValue(Looper const& startLooper
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 3> const termCheckers{
-        TC(T(TermType::Operator, "(")), TC(TermCheckerType::isValue), TC(T(TermType::Operator, ")"))};
+        TermChecker(Term(TermType::Operator, "(")), TermChecker(TermCheckerType::isValue),
+        TermChecker(Term(TermType::Operator, ")"))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         // check if parenthesis is redundant, think of an algorithm on how to do that.
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
@@ -408,7 +416,7 @@ bool TermAnalyzer::isModifiedDueToMultipleTypes(Looper const& startLooper) {
     DBGPRINT2("isModifiedDueToMultiplePrimitiveTypes");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<Term, 3> const expectedTerms{T(TermType::Type), T(TermType::WhiteSpace), T(TermType::Type)};
+    array<Term, 3> const expectedTerms{Term(TermType::Type), Term(TermType::WhiteSpace), Term(TermType::Type)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         VectorOfTerms terms(getTerms(startLooper, expectedTerms));
         CPlusPlusType& type1(terms[0].getValueTypeReference());
@@ -429,7 +437,8 @@ bool TermAnalyzer::isModifiedDueToTypeWithConstQualifier(Looper const& startLoop
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 3> const termCheckers{
-        TC(TermCheckerType::isCPlusPlusType), TC(T(TermType::WhiteSpace)), TC(T(TermType::Keyword, "const"))};
+        TermChecker(TermCheckerType::isCPlusPlusType), TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker(Term(TermType::Keyword, "const"))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         CPlusPlusType type(terms[0].getValueType());
@@ -452,7 +461,8 @@ bool TermAnalyzer::isModifiedDueToTypeWithConstQualifierInvalidPosition(Looper c
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 3> const termCheckers{
-        TC(T(TermType::Keyword, "const")), TC(T(TermType::WhiteSpace)), TC(TermCheckerType::isCPlusPlusType)};
+        TermChecker(Term(TermType::Keyword, "const")), TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker(TermCheckerType::isCPlusPlusType)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         addFinding(constructFileLocator(__FILE__, __LINE__), "Const qualifier should be after the type", startLooper);
@@ -470,7 +480,8 @@ bool TermAnalyzer::isModifiedDueToTypeWithDereferenceOperator(Looper const& star
     DBGPRINT2("isModifiedDueToTypeWithDereferenceOperator");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<TermChecker, 2> const termCheckers{TC(TermCheckerType::isCPlusPlusType), TC(T(TermType::Operator, "&"))};
+    array<TermChecker, 2> const termCheckers{
+        TermChecker(TermCheckerType::isCPlusPlusType), TermChecker(Term(TermType::Operator, "&"))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         CPlusPlusType type(terms[0].getValueTypeReference());
@@ -489,7 +500,8 @@ bool TermAnalyzer::isModifiedDueToTypeWithPointerOperator(Looper const& startLoo
     DBGPRINT2("isModifiedDueToTypeWithPointerOperator");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<TermChecker, 2> const termCheckers{TC(TermCheckerType::isCPlusPlusType), TC(T(TermType::Operator, "*"))};
+    array<TermChecker, 2> const termCheckers{
+        TermChecker(TermCheckerType::isCPlusPlusType), TermChecker(Term(TermType::Operator, "*"))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         CPlusPlusType type(terms[0].getValueTypeReference());
@@ -509,7 +521,8 @@ bool TermAnalyzer::isModifiedDueToTypeWithExternKeyword(Looper const& startLoope
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 3> const termCheckers{
-        TC(T(TermType::Keyword, "extern")), TC(T(TermType::WhiteSpace)), TC(TermCheckerType::isCPlusPlusType)};
+        TermChecker(Term(TermType::Keyword, "extern")), TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker(TermCheckerType::isCPlusPlusType)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         temporaryFindings.copyCurrentFindings(m_findings);
         combineToASingleTerm(startLooper, compareLooper - 1, TermType::ProcessedTerm);

@@ -240,6 +240,7 @@ TEST_F(ModuleTest, MacroWithStringsTest) {
     testFile.close();
 
     processFile();
+
     ASSERT_EQ(m_terms.size(), 7);
     auto it = m_terms.begin();
     CHECK_TERM(it, TermType::ProcessedTerm, "#ifdef _POSIX_\n", 1);

@@ -32,8 +32,8 @@ bool TermAnalyzer::isModifiedDueToClassDeclaration(Looper const& startLooper) {
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 4> const termCheckers{
-        TC({T(TermType::Keyword, "class"), T(TermType::Keyword, "struct")}), TC(T(TermType::WhiteSpace)),
-        TC(T(TermType::Identifier)), TC(T(TermType::Operator, ";"))};
+        TermChecker({Term(TermType::Keyword, "class"), Term(TermType::Keyword, "struct")}), TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker(Term(TermType::Identifier)), TermChecker(Term(TermType::Operator, ";"))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         m_database.addClass(terms[2].getString());
@@ -49,8 +49,8 @@ bool TermAnalyzer::isModifiedDueToClassDefinition(Looper const& startLooper) {
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 3> const termCheckers{
-        TC({T(TermType::Keyword, "class"), T(TermType::Keyword, "struct")}), TC(T(TermType::WhiteSpace)),
-        TC(T(TermType::Identifier))};
+        TermChecker({Term(TermType::Keyword, "class"), Term(TermType::Keyword, "struct")}), TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker(Term(TermType::Identifier))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         Looper afterOpeningBraces(compareLooper);
         Looper afterClosingBraces(compareLooper);
@@ -73,7 +73,7 @@ bool TermAnalyzer::isModifiedDueToClassDefinition(Looper const& startLooper) {
 bool TermAnalyzer::isModifiedDueToCStyleStructDefinition(Looper const& startLooper) {
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<Term, 1> const expectedTerms{T(TermType::Keyword, "struct")};
+    array<Term, 1> const expectedTerms{Term(TermType::Keyword, "struct")};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         Looper afterOpeningBraces(compareLooper);
         Looper afterClosingBraces(compareLooper);
@@ -82,7 +82,7 @@ bool TermAnalyzer::isModifiedDueToCStyleStructDefinition(Looper const& startLoop
             Looper afterClosingBracesAndNewLine(afterClosingBraces);
             incrementLooperIfWhiteSpaceAndOneNewLine<FindingsToAdd::None>(afterClosingBracesAndNewLine);
             Looper afterSemiColon(afterClosingBracesAndNewLine);
-            array<Term, 2> const expectedTermsAfterBraces{T(TermType::Identifier), T(TermType::Operator, ";")};
+            array<Term, 2> const expectedTermsAfterBraces{Term(TermType::Identifier), Term(TermType::Operator, ";")};
             if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::WhiteSpaceAndNewLine>(
                     afterSemiColon, expectedTermsAfterBraces)) {
                 incrementLooperIfWhiteSpaceAndOneNewLine<FindingsToAdd::None>(afterOpeningBraces);
@@ -103,7 +103,7 @@ bool TermAnalyzer::isModifiedDueToCStyleStructDefinition(Looper const& startLoop
 bool TermAnalyzer::isModifiedDueToCStyleStructArrayDefinition(Looper const& startLooper) {
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<Term, 1> const expectedTerms{T(TermType::Keyword, "struct")};
+    array<Term, 1> const expectedTerms{Term(TermType::Keyword, "struct")};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         Looper afterOpeningBraces(compareLooper);
         Looper afterClosingBraces(compareLooper);
@@ -113,8 +113,8 @@ bool TermAnalyzer::isModifiedDueToCStyleStructArrayDefinition(Looper const& star
             incrementLooperIfWhiteSpaceAndOneNewLine<FindingsToAdd::None>(afterClosingBracesAndNewLine);
             Looper afterSemiColon(afterClosingBracesAndNewLine);
             array<Term, 5> const expectedTermsAfterBraces{
-                T(TermType::Identifier), TC(T(TermType::Operator, "[")), T(TermType::Constant_Number),
-                T(TermType::Operator, "]"), T(TermType::Operator, ";")};
+                Term(TermType::Identifier), TermChecker(Term(TermType::Operator, "[")), Term(TermType::Constant_Number),
+                Term(TermType::Operator, "]"), Term(TermType::Operator, ";")};
             if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::WhiteSpaceAndNewLine>(
                     afterSemiColon, expectedTermsAfterBraces)) {
                 incrementLooperIfWhiteSpaceAndOneNewLine<FindingsToAdd::None>(afterOpeningBraces);

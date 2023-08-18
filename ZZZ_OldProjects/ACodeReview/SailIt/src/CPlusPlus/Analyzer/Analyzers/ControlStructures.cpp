@@ -31,14 +31,14 @@ bool TermAnalyzer::isModifiedDueToControlStructures(Looper const& startLooper) {
 }
 
 bool TermAnalyzer::isModifiedDueToIfClauseAndMoveLooper(Looper const& startLooper) {
-    array<Term, 1> const expectedTerms{T(TermType::Keyword, "if")};
+    array<Term, 1> const expectedTerms{Term(TermType::Keyword, "if")};
     return isModifiedDueToOneConditionConstructAndMoveLooper(
         startLooper, expectedTerms, TermType::MultiLine_IfElseIfStartChain_Ignorable);
 }
 
 bool TermAnalyzer::isModifiedDueToElseIfClauseAndMoveLooper(Looper const& startLooper) {
     array<Term, 3> const expectedTerms{
-        T(TermType::Keyword, "else"), T(TermType::WhiteSpace), T(TermType::Keyword, "if")};
+        Term(TermType::Keyword, "else"), Term(TermType::WhiteSpace), Term(TermType::Keyword, "if")};
     if (isModifiedDueToOneConditionConstructAndMoveLooper(
             startLooper, expectedTerms, TermType::MultiLine_ElseIfClause)) {
         m_moveBackType = MoveBackType::GotoPreviousModifiedTerm;
@@ -50,7 +50,7 @@ bool TermAnalyzer::isModifiedDueToElseIfClauseAndMoveLooper(Looper const& startL
 bool TermAnalyzer::isModifiedDueToElseClauseAndMoveLooper(Looper const& startLooper) {
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<Term, 1> const expectedTerms{T(TermType::Keyword, "else")};
+    array<Term, 1> const expectedTerms{Term(TermType::Keyword, "else")};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         Looper afterOpeningBraces(compareLooper);
         Looper afterClosingBraces(compareLooper);
@@ -81,7 +81,7 @@ bool TermAnalyzer::isModifiedDueToIfElseIfChainClause(Looper const& startLooper)
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<Term, 2> const expectedTerms{
-        T(TermType::MultiLine_IfElseIfStartChain_Ignorable), T(TermType::MultiLine_ElseIfClause)};
+        Term(TermType::MultiLine_IfElseIfStartChain_Ignorable), Term(TermType::MultiLine_ElseIfClause)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         temporaryFindings.copyCurrentFindings(m_findings);
         combineToASingleTerm(startLooper, compareLooper, TermType::MultiLine_IfElseIfStartChain_Ignorable);
@@ -94,7 +94,7 @@ bool TermAnalyzer::isModifiedDueToIfElseChainStopClause(Looper const& startLoope
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<Term, 2> const expectedTerms{
-        T(TermType::MultiLine_IfElseIfStartChain_Ignorable), T(TermType::MultiLine_ElseClause)};
+        Term(TermType::MultiLine_IfElseIfStartChain_Ignorable), Term(TermType::MultiLine_ElseClause)};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         temporaryFindings.copyCurrentFindings(m_findings);
         combineToASingleTerm(startLooper, compareLooper, TermType::ProcessedTerm);
@@ -104,7 +104,7 @@ bool TermAnalyzer::isModifiedDueToIfElseChainStopClause(Looper const& startLoope
 }
 
 bool TermAnalyzer::isModifiedDueToWhileLoopAndMoveLooper(Looper const& startLooper) {
-    array<Term, 1> const expectedTerms{T(TermType::Keyword, "while")};
+    array<Term, 1> const expectedTerms{Term(TermType::Keyword, "while")};
     return isModifiedDueToOneConditionConstructAndMoveLooper(startLooper, expectedTerms, TermType::ProcessedTerm);
 }
 

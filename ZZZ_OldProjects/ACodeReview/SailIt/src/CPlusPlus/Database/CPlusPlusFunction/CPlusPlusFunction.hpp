@@ -3,7 +3,7 @@
 #include "../CPlusPlusType.hpp"
 #include "CPlusPlusFunctionSignature.hpp"
 
-#include <optional>
+#include <Common/Container/AlbaOptional.hpp>
 #include <string>
 #include <vector>
 
@@ -35,6 +35,6 @@ private:
     CPlusPlusFunctionSignatures m_signatures;
 };
 
-typedef std::optional<CPlusPlusFunction> CPlusPlusFunctionOptional;
+typedef alba::AlbaOptional<CPlusPlusFunction> CPlusPlusFunctionOptional;
 
 }  // namespace codeReview

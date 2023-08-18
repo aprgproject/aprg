@@ -23,7 +23,7 @@ TermTranslator::TermTranslator(string const& fileName, ListOfTerms& listOfTerms)
                         "(", ")", "[", "]", ".", "+", "-", "!", "~", "*", "&", "/", "%", "<", ">", "^", "|", "?", ":", "=", ","}
 {
     AlbaWindowsPathHandler pathHandler;
-    pathHandler.inputPath(fileName);
+    pathHandler.input(fileName);
     cout<<"TermTranslator::constructor| ReadFile: "<<pathHandler.getFullPath()<<"\n";
     if(pathHandler.isFoundInLocalSystem() && pathHandler.isFile())
     {

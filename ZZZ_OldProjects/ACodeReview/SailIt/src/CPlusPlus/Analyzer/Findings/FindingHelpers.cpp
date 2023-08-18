@@ -1,6 +1,6 @@
 #include "../TermAnalyzer.hpp"
 #include "FindingsToAddHelper.hpp"
-#include <String/AlbaStringHelper.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <iostream>
 
@@ -32,17 +32,17 @@ template void TermAnalyzer::addFindingsForUnexpectedWhiteSpaceIfNeeded<FindingsT
 template <>
 void TermAnalyzer::addFindingsForUnexpectedWhiteSpaceIfNeeded<FindingsToAdd::ExpectsNewLineAndUnexpectsWhiteSpace>(
     Looper const& findingLooper) {
-    addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected white space", findingLooper);
+    addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected white space (#1)", findingLooper);
 }
 template <>
 void TermAnalyzer::addFindingsForUnexpectedWhiteSpaceIfNeeded<FindingsToAdd::UnexpectsWhiteSpace>(
     Looper const& findingLooper) {
-    addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected white space", findingLooper);
+    addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected white space (#2)", findingLooper);
 }
 template <>
 void TermAnalyzer::addFindingsForUnexpectedWhiteSpaceIfNeeded<FindingsToAdd::UnexpectsNewLineAndUnexpectsWhiteSpace>(
     Looper const& findingLooper) {
-    addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected white space", findingLooper);
+    addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected white space (#3)", findingLooper);
 }
 
 template <FindingsToAdd findingsToAdd>
@@ -54,7 +54,7 @@ template void TermAnalyzer::addFindingsForUnexpectedNewLineIfNeeded<FindingsToAd
 template <>
 void TermAnalyzer::addFindingsForUnexpectedNewLineIfNeeded<FindingsToAdd::UnexpectsNewLineAndUnexpectsWhiteSpace>(
     Looper const& findingLooper) {
-    addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected new line", findingLooper);
+    addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected new line (#1)", findingLooper);
 }
 
 }  // namespace codeReview

@@ -185,23 +185,23 @@ TEST_F(TermAnalyzerTest, ExpressionsAreSimplifiedUsingScopeOperator) {
 
 TEST_F(TermAnalyzerTest, ExpressionsAreSimplifiedUsingIncrementDecrementOperators) {
     TermBuilder& termBuilder(m_termBuilder);
-    termBuilder.addTerm(T(TermType::Value_LValue, "LValue"));
+    termBuilder.addTerm(Term(TermType::Value_LValue, "LValue"));
     termBuilder.getLastTermReference().setValueType(CPlusPlusType("unsigned int", CPlusPlusTypeType::Primitive));
     termBuilder.addOperator("++");
     termBuilder.addSemiColon();
     termBuilder.addNewLine();
-    termBuilder.addTerm(T(TermType::Variable, "Variable"));
+    termBuilder.addTerm(Term(TermType::Variable, "Variable"));
     termBuilder.getLastTermReference().setValueType(CPlusPlusType("float", CPlusPlusTypeType::Primitive));
     termBuilder.addOperator("--");
     termBuilder.addSemiColon();
     termBuilder.addNewLine();
     termBuilder.addOperator("++");
-    termBuilder.addTerm(T(TermType::Value_LValue, "LValue"));
+    termBuilder.addTerm(Term(TermType::Value_LValue, "LValue"));
     termBuilder.getLastTermReference().setValueType(CPlusPlusType("unsigned int", CPlusPlusTypeType::Primitive));
     termBuilder.addSemiColon();
     termBuilder.addNewLine();
     termBuilder.addOperator("--");
-    termBuilder.addTerm(T(TermType::Value_RValue, "Variable"));
+    termBuilder.addTerm(Term(TermType::Value_RValue, "Variable"));
     termBuilder.getLastTermReference().setValueType(CPlusPlusType("float", CPlusPlusTypeType::Primitive));
     termBuilder.addSemiColon();
 
@@ -236,7 +236,7 @@ TEST_F(TermAnalyzerTest, ExpressionsAreSimplifiedUsingFunctionCall) {
     termBuilder.addOperator(")");
     termBuilder.addIdentifier("myFunction1");
     termBuilder.addOperator("(");
-    termBuilder.addTerm(T(TermType::Value_RValue, "Value1"));
+    termBuilder.addTerm(Term(TermType::Value_RValue, "Value1"));
     termBuilder.getLastTermReference().setValueType(intPrimitiveType);
     termBuilder.addOperator(")");
 
@@ -251,14 +251,14 @@ TEST_F(TermAnalyzerTest, ExpressionsAreSimplifiedUsingFunctionCall) {
 
 TEST_F(TermAnalyzerTest, ExpressionsAreSimplifiedUsingPeriodOperator) {
     TermBuilder& termBuilder(m_termBuilder);
-    termBuilder.addTerm(T(TermType::Value_RValue, "RValue"));
+    termBuilder.addTerm(Term(TermType::Value_RValue, "RValue"));
     termBuilder.getLastTermReference().setValueType(CPlusPlusType("unsigned int", CPlusPlusTypeType::Primitive));
     termBuilder.addOperator(".");
-    termBuilder.addTerm(T(TermType::Identifier, "Identifier"));
-    termBuilder.addTerm(T(TermType::Value_LValue, "LValue"));
+    termBuilder.addTerm(Term(TermType::Identifier, "Identifier"));
+    termBuilder.addTerm(Term(TermType::Value_LValue, "LValue"));
     termBuilder.getLastTermReference().setValueType(CPlusPlusType("float", CPlusPlusTypeType::Primitive));
     termBuilder.addOperator(".");
-    termBuilder.addTerm(T(TermType::Identifier, "Identifier"));
+    termBuilder.addTerm(Term(TermType::Identifier, "Identifier"));
     termBuilder.addSemiColon();
 
     processFile();
@@ -272,15 +272,15 @@ TEST_F(TermAnalyzerTest, ExpressionsAreSimplifiedUsingPeriodOperator) {
 
 TEST_F(TermAnalyzerTest, ExpressionsAreSimplifiedUsingArrowOperator) {
     TermBuilder& termBuilder(m_termBuilder);
-    termBuilder.addTerm(T(TermType::Value_RValue, "RValue"));
+    termBuilder.addTerm(Term(TermType::Value_RValue, "RValue"));
     termBuilder.getLastTermReference().setValueType(CPlusPlusType("unsigned int", CPlusPlusTypeType::Primitive));
     termBuilder.addOperator("->");
-    termBuilder.addTerm(T(TermType::Identifier, "Identifier"));
+    termBuilder.addTerm(Term(TermType::Identifier, "Identifier"));
     termBuilder.addSemiColon();
-    termBuilder.addTerm(T(TermType::Value_LValue, "LValue"));
+    termBuilder.addTerm(Term(TermType::Value_LValue, "LValue"));
     termBuilder.getLastTermReference().setValueType(CPlusPlusType("float", CPlusPlusTypeType::Primitive));
     termBuilder.addOperator("->");
-    termBuilder.addTerm(T(TermType::Identifier, "Identifier"));
+    termBuilder.addTerm(Term(TermType::Identifier, "Identifier"));
     termBuilder.addSemiColon();
 
     processFile();
@@ -296,11 +296,11 @@ TEST_F(TermAnalyzerTest, ExpressionsAreSimplifiedUsingArrowOperator) {
 TEST_F(TermAnalyzerTest, ExpressionsAreSimplifiedUsingPrefixOperator) {
     TermBuilder& termBuilder(m_termBuilder);
     termBuilder.addOperator("+");
-    termBuilder.addTerm(T(TermType::Value_RValue, "RValue"));
+    termBuilder.addTerm(Term(TermType::Value_RValue, "RValue"));
     termBuilder.getLastTermReference().setValueType(CPlusPlusType("unsigned int", CPlusPlusTypeType::Primitive));
     termBuilder.addSemiColon();
     termBuilder.addOperator("&");
-    termBuilder.addTerm(T(TermType::Value_LValue, "LValue"));
+    termBuilder.addTerm(Term(TermType::Value_LValue, "LValue"));
     termBuilder.getLastTermReference().setValueType(CPlusPlusType("float", CPlusPlusTypeType::Primitive));
     termBuilder.addSemiColon();
 
@@ -316,20 +316,20 @@ TEST_F(TermAnalyzerTest, ExpressionsAreSimplifiedUsingPrefixOperator) {
 
 TEST_F(TermAnalyzerTest, ExpressionsAreSimplifiedUsingBiDirectoryOperator) {
     TermBuilder& termBuilder(m_termBuilder);
-    termBuilder.addTerm(T(TermType::Value_LValue, "LValue"));
+    termBuilder.addTerm(Term(TermType::Value_LValue, "LValue"));
     termBuilder.getLastTermReference().setValueType(CPlusPlusType("unsigned int", CPlusPlusTypeType::Primitive));
     termBuilder.addWhiteSpace();
     termBuilder.addOperator("+");
     termBuilder.addWhiteSpace();
-    termBuilder.addTerm(T(TermType::Value_RValue, "RValue"));
+    termBuilder.addTerm(Term(TermType::Value_RValue, "RValue"));
     termBuilder.getLastTermReference().setValueType(CPlusPlusType("float", CPlusPlusTypeType::Primitive));
     termBuilder.addSemiColon();
-    termBuilder.addTerm(T(TermType::Value_LValue, "RValue"));
+    termBuilder.addTerm(Term(TermType::Value_LValue, "RValue"));
     termBuilder.getLastTermReference().setValueType(CPlusPlusType("unsigned int", CPlusPlusTypeType::Primitive));
     termBuilder.addWhiteSpace();
     termBuilder.addOperator("/");
     termBuilder.addWhiteSpace();
-    termBuilder.addTerm(T(TermType::Value_LValue, "LValue"));
+    termBuilder.addTerm(Term(TermType::Value_LValue, "LValue"));
     termBuilder.getLastTermReference().setValueType(CPlusPlusType("float", CPlusPlusTypeType::Primitive));
     termBuilder.addSemiColon();
 
@@ -500,33 +500,33 @@ TEST_F(TermAnalyzerTest, StatementsAreSimplifiedUsingRValueStatement) {
     termBuilder.addNewLine();
     termBuilder.addIdentifier("myFunction1");
     termBuilder.addOperator("(");
-    termBuilder.addTerm(T(TermType::Value_RValue, "Value1"));
+    termBuilder.addTerm(Term(TermType::Value_RValue, "Value1"));
     termBuilder.getLastTermReference().setValueType(intPrimitiveType);
     termBuilder.addOperator(")");
     termBuilder.addSemiColon();
     termBuilder.addNewLine();
     termBuilder.addIdentifier("myFunction2");
     termBuilder.addOperator("(");
-    termBuilder.addTerm(T(TermType::Value_RValue, "Value1"));
+    termBuilder.addTerm(Term(TermType::Value_RValue, "Value1"));
     termBuilder.getLastTermReference().setValueType(intPrimitiveType);
     termBuilder.addOperator(",");
     termBuilder.addWhiteSpace();
-    termBuilder.addTerm(T(TermType::Value_RValue, "Value2"));
+    termBuilder.addTerm(Term(TermType::Value_RValue, "Value2"));
     termBuilder.getLastTermReference().setValueType(intPrimitiveType);
     termBuilder.addOperator(")");
     termBuilder.addSemiColon();
     termBuilder.addNewLine();
     termBuilder.addIdentifier("myFunction3");
     termBuilder.addOperator("(");
-    termBuilder.addTerm(T(TermType::Value_RValue, "Value1"));
+    termBuilder.addTerm(Term(TermType::Value_RValue, "Value1"));
     termBuilder.getLastTermReference().setValueType(intPrimitiveType);
     termBuilder.addOperator(",");
     termBuilder.addWhiteSpace();
-    termBuilder.addTerm(T(TermType::Value_RValue, "Value2"));
+    termBuilder.addTerm(Term(TermType::Value_RValue, "Value2"));
     termBuilder.getLastTermReference().setValueType(intPrimitiveType);
     termBuilder.addOperator(",");
     termBuilder.addWhiteSpace();
-    termBuilder.addTerm(T(TermType::Value_RValue, "Value3"));
+    termBuilder.addTerm(Term(TermType::Value_RValue, "Value3"));
     termBuilder.getLastTermReference().setValueType(intPrimitiveType);
     termBuilder.addOperator(")");
     termBuilder.addSemiColon();

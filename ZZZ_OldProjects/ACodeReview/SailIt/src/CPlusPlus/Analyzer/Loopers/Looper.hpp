@@ -39,6 +39,7 @@ public:
     bool isFinished() const;
     bool isNotFinished() const;
     bool isNotFinishedWhenBackward() const;
+    DequeOfTerms const& getTermsConstReference() const;
     Term& getContentReference() const;
     int getCurrentIndex() const;
     TermsIterator getCurrentIterator() const;

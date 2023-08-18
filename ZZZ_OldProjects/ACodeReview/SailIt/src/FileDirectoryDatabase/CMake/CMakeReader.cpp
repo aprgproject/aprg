@@ -1,8 +1,8 @@
 #include "CMakeReader.hpp"
 
-#include <AlbaLocalPathHandler.hpp>
-#include <File/AlbaFileReader.hpp>
-#include <String/AlbaStringHelper.hpp>
+#include <Common/File/AlbaFileReader.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>
 #include <fstream>
@@ -21,8 +21,7 @@ CMakeReader::CMakeReader(string const& fileName, CMakeDatabase& fileDirectoryDat
       m_albaFileReader(m_fileStream),
       m_fileDirectoryDatabase(fileDirectoryDatabase),
       m_isFileValid(false) {
-    AlbaLocalPathHandler pathHandler;
-    pathHandler.inputPath(fileName);
+    AlbaLocalPathHandler pathHandler(fileName);
     if (pathHandler.isFoundInLocalSystem() && pathHandler.isFile()) {
         if (m_fileStream.is_open()) {
             m_fullPathOfFile = pathHandler.getFullPath();
@@ -273,14 +272,11 @@ void CMakeReader::separateStringsUsingWhiteSpaceAndDoOperation(
 
 void CMakeReader::addCMakeDirectoryIfNeededAndDoOperation(
     string const& string1, function<void(string)> operationForEachString) {
-    AlbaLocalPathHandler pathHandler;
-    pathHandler.inputPath(string1);
-
+    AlbaLocalPathHandler pathHandler(string1);
     if (pathHandler.isRelativePath()) {
         if (m_variableMap.find("CMAKE_CURRENT_SOURCE_DIR") != m_variableMap.end()) {
             for (string cMakeFileDirectory : m_variableMap.at("CMAKE_CURRENT_SOURCE_DIR")) {
-                AlbaLocalPathHandler pathHandlerWithCMake;
-                pathHandlerWithCMake.inputPath(cMakeFileDirectory + "\\" + pathHandler.getFullPath());
+                AlbaLocalPathHandler pathHandlerWithCMake(cMakeFileDirectory + "\\" + pathHandler.getFullPath());
                 // check if path exists before adding
                 operationForEachString(pathHandlerWithCMake.getFullPath());
             }

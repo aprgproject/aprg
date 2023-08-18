@@ -4,12 +4,13 @@
 #include "../Term/CheckerHelpers.hpp"
 #include "../Term/TermChecker.hpp"
 #include "Findings/TemporaryFindings.hpp"
-#include <String/AlbaStringHelper.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <numeric>
 
 using namespace std;
 using namespace alba::stringHelper;
@@ -102,8 +103,8 @@ bool TermAnalyzer::isModifiedDueToCStyleStruct(Looper const& startLooper) {
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 3> const termCheckers{
-        TC(T(TermType::Keyword, "struct")), TC(T(TermType::WhiteSpace)),
-        TC({T(TermType::Class), T(TermType::Identifier)})};
+        TermChecker(Term(TermType::Keyword, "struct")), TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker({Term(TermType::Class), Term(TermType::Identifier)})};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         string const className(string("struct ") + terms[2].getString());
@@ -132,7 +133,7 @@ bool TermAnalyzer::isSingleLineOrMultiLineComment(Looper const& startLooper) {
 bool TermAnalyzer::isUnexpectedWhiteSpace(Looper const& startLooper) {
     DBGPRINT1("isUnexpectedWhiteSpace");
     if (CheckerHelpers::isWhiteSpace(startLooper.getContentReference())) {
-        addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected white space", startLooper);
+        addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected white space (#4)", startLooper);
         return true;
     }
     return false;
@@ -141,7 +142,7 @@ bool TermAnalyzer::isUnexpectedWhiteSpace(Looper const& startLooper) {
 bool TermAnalyzer::isUnexpectedNewLine(Looper const& startLooper) {
     DBGPRINT1("isUnexpectedNewLine");
     if (CheckerHelpers::isNewLine(startLooper.getContentReference())) {
-        addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected new line", startLooper);
+        addFinding(constructFileLocator(__FILE__, __LINE__), "Unexpected new line (#2)", startLooper);
         return true;
     }
     return false;

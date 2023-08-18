@@ -1,2 +1,2 @@
-SET(FILENAME FileTest1)
-SET(EXTENSION .txt)
+set(VAR1 VALUE_!@#$%^&*)
+  SET  (   VAR2 VALUE_1234567890    )    

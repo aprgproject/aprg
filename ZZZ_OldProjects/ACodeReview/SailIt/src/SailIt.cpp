@@ -2,7 +2,7 @@
 
 #include "CPlusPlus/Analyzer/TermAnalyzer.hpp"
 #include "CPlusPlus/Translator/TermTranslator.hpp"
-#include <AlbaLocalPathHandler.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <algorithm>
 #include <iostream>
@@ -48,8 +48,7 @@ void SailIt::addCPlusPlusDatabaseReferenceForThisFileIfNeeded(string const& full
 }
 
 void SailIt::addAndAnalyzeThisFileToCPlusPlusDatabase(string const& fullPathFile) {
-    AlbaLocalPathHandler pathHandler;
-    pathHandler.inputPath(fullPathFile);
+    AlbaLocalPathHandler pathHandler(fullPathFile);
     if (pathHandler.isFoundInLocalSystem()) {
         CPlusPlusDatabase& database = m_fileCPlusPlusDatabasesMap[fullPathFile];
         Findings& findings = m_fileFindingsMap[fullPathFile];

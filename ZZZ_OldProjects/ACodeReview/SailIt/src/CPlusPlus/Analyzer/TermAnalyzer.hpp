@@ -4,17 +4,14 @@
 #include "Findings/FindingsBuffer.hpp"
 #include "Findings/FindingsToAdd.hpp"
 #include "Loopers/Looper.hpp"
+#include <Common/Container/AlbaOptional.hpp>
 
-#include <optional>
 #include <string>
 #include <unordered_map>
 
 using std::string;
 
-#define T(...) Term(__VA_ARGS__)
-#define TC(...) TermChecker(__VA_ARGS__)
-
-//#define DBGFLAG 2
+// #define DBGFLAG 2
 #if DBGFLAG == 3
 #define DBGPRINT1(...) cout << __VA_ARGS__ << "\n";
 #define DBGPRINT2(...) cout << __VA_ARGS__ << "\n";
@@ -243,7 +240,7 @@ private:
     CPlusPlusDatabase& m_database;
     Findings& m_findings;
     FindingsBuffer m_findingsBuffer;
-    std::optional<SailIt&> m_optionalSailIt;
+    alba::AlbaOptional<SailIt&> m_optionalSailIt;
     bool m_isTermsModified;
     ModifyDetails m_modifyDetails;
     MoveBackType m_moveBackType;

@@ -1,7 +1,7 @@
 #include "CMakeDatabase.hpp"
 
-#include <AlbaLocalPathHandler.hpp>
-#include <String/AlbaStringHelper.hpp>
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <iostream>
 
@@ -43,8 +43,7 @@ void CMakeDatabase::printFilesAndDirectories() const {
 }
 
 void CMakeDatabase::addFileOrDirectory(string const& fileOrDirectory) {
-    AlbaLocalPathHandler pathHandler;
-    pathHandler.inputPath(fileOrDirectory);
+    AlbaLocalPathHandler pathHandler(fileOrDirectory);
     if (m_isNonExistentDirectoriesAllowed || pathHandler.isFoundInLocalSystem()) {
         if (pathHandler.isFile()) {
             m_setOfFiles.emplace(pathHandler.getFullPath());
@@ -75,11 +74,10 @@ CMakeDatabase& CMakeDatabase::addCMakeSubDirectory() {
 CMakeDatabase& CMakeDatabase::find_InnerDirection(
     string const& stringPathIn, bool& isFoundResult, string& stringFullPathOut) {
     isFoundResult = false;
-    AlbaLocalPathHandler pathHandler;
-    pathHandler.inputPath(stringPathIn);
+    AlbaLocalPathHandler pathHandler(stringPathIn);
     if (pathHandler.isFile()) {
         return findFile<RecursionDirectionType::Inner>(
-            pathHandler.getFullPath(), pathHandler.getWildCardSearch(), isFoundResult, stringFullPathOut);
+            pathHandler.getFullPath(), "*.*", isFoundResult, stringFullPathOut);
     } else if (pathHandler.isDirectory()) {
         return findDirectory<RecursionDirectionType::Inner>(
             pathHandler.getFullPath(), isFoundResult, stringFullPathOut);
@@ -90,11 +88,10 @@ CMakeDatabase& CMakeDatabase::find_InnerDirection(
 CMakeDatabase& CMakeDatabase::find_OuterDirection(
     string const& stringPathIn, bool& isFoundResult, string& stringFullPathOut) {
     isFoundResult = false;
-    AlbaLocalPathHandler pathHandler;
-    pathHandler.inputPath(stringPathIn);
+    AlbaLocalPathHandler pathHandler(stringPathIn);
     if (pathHandler.isFile()) {
         return findFile<RecursionDirectionType::Outer>(
-            pathHandler.getFullPath(), pathHandler.getWildCardSearch(), isFoundResult, stringFullPathOut);
+            pathHandler.getFullPath(), "*.*", isFoundResult, stringFullPathOut);
     } else if (pathHandler.isDirectory()) {
         return findDirectory<RecursionDirectionType::Outer>(
             pathHandler.getFullPath(), isFoundResult, stringFullPathOut);
@@ -117,15 +114,14 @@ CMakeDatabase& CMakeDatabase::findFile(
     string const& stringPathIn, string const& wildCardSearch, bool& isFoundResult, string& stringFullPathOut) {
     // stl algorithm
     for (auto& file : m_setOfFiles) {
-        if (stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(file, stringPathIn)) {
+        if (stringHelper::isStringFoundNotCaseSensitive(file, stringPathIn)) {
             stringFullPathOut = file;
             isFoundResult = true;
             return (*this);
         }
     }
     for (auto& directory : m_setOfDirectories) {
-        AlbaLocalPathHandler pathHandler;
-        pathHandler.inputPath(directory);
+        AlbaLocalPathHandler pathHandler(directory);
         set<string> temporaryListOfFiles;
         set<string> temporaryListOfDirectories;
         pathHandler.findFilesAndDirectoriesOneDepth(wildCardSearch, temporaryListOfFiles, temporaryListOfDirectories);
@@ -143,7 +139,7 @@ CMakeDatabase& CMakeDatabase::findDirectory(
     string const& stringPathIn, bool& isFoundResult, string& stringFullPathOut) {
     // stl algorithm
     for (auto& directory : m_setOfDirectories) {
-        if (stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(directory, stringPathIn)) {
+        if (stringHelper::isStringFoundNotCaseSensitive(directory, stringPathIn)) {
             stringFullPathOut = directory;
             isFoundResult = true;
             return (*this);

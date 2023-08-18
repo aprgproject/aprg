@@ -1,6 +1,6 @@
 #include "Term.hpp"
 
-#include <String/AlbaStringHelper.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
 #include <iostream>
 #include <string>
@@ -48,16 +48,16 @@ bool operator!=(string const& content, Term const& term) { return term.getString
 
 string Term::getString() const { return m_content; }
 
-bool Term::hasValueType() const { return m_ValueTypeOptional; }
+bool Term::hasValueType() const { return m_ValueTypeOptional.hasContent(); }
 
 CPlusPlusType Term::getValueType() const {
     if (m_ValueTypeOptional) {
-        return m_ValueTypeOptional.getReference();
+        return m_ValueTypeOptional.getConstReference();
     }
     return CPlusPlusType();
 }
 
-CPlusPlusType& Term::getValueTypeReference() const { return m_ValueTypeOptional.getReference(); }
+CPlusPlusType& Term::getValueTypeReference() { return m_ValueTypeOptional.getReference(); }
 
 string Term::getPrintableString() const {
     string replacedString(m_content);

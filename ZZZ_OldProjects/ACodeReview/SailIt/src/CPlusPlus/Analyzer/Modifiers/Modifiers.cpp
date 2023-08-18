@@ -153,7 +153,7 @@ void TermAnalyzer::checkMacroUsageParameters(
                 macroUsageParameters[macroUsageParametersIndex].push_back(parameterUsageLooper.getContentReference());
             }
         } else {
-            if (T(TermType::Operator, ",") == term) {
+            if (Term(TermType::Operator, ",") == term) {
                 shouldIgnoreWhiteSpace = true;
                 macroUsageParametersIndex++;
                 macroUsageParameters.emplace(macroUsageParametersIndex, VectorOfTerms());
