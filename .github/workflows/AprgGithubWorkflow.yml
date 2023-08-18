@@ -84,7 +84,7 @@ jobs:
           echo github.event.action: ${{ github.event.action }}
           echo github.event_name: ${{ github.event_name }}
           
-      - name: Install dependencies on windows
+      - name: Install dependencies on Windows
         if: startsWith(matrix.configurationName, 'Windows')
         run: |
           choco install ninja cmake
@@ -95,7 +95,7 @@ jobs:
           # cmd "${{ env.windowsEnvironmentScript }}"
           # echo "Finished visual studio environment script."
 
-      - name: Install dependencies on ubuntu/gcc
+      - name: Install dependencies on Ubuntu/Gcc
         if: matrix.configurationName == 'UbuntuLatestGcc'
         run: |
           sudo apt-get update
@@ -104,7 +104,7 @@ jobs:
           cmake --version
           gcc --version
 
-      - name: Install dependencies on ubuntu/clang
+      - name: Install dependencies on Ubuntu/Clang
         if: matrix.configurationName == 'UbuntuLatestClang'
         run: |
           sudo apt-get update
@@ -112,18 +112,6 @@ jobs:
           ninja --version
           cmake --version
           clang --version
-
-      - name: Install 7zip
-        if: startsWith(matrix.configurationName, 'Ubuntu') && matrix.project == 'AprgFileExtractor/AprgFileExtractor'
-        run: |
-          sudo apt-get update
-          sudo apt-get install p7zip-full
-
-      - name: Install 7zip
-        if: startsWith(matrix.configurationName, 'Ubuntu') && matrix.project == 'Boost/Boost'
-        run: |
-          sudo apt-get update
-          sudo apt-get install libboost-all-dev
           
 # MAC OS is not supported          
 #      - name: Install dependencies on macos
@@ -132,7 +120,19 @@ jobs:
 #          brew install cmake ninja
 #          ninja --version
 #          cmake --version
-            
+
+      - name: Install 7zip
+        if: startsWith(matrix.configurationName, 'Ubuntu') && matrix.project == 'AprgFileExtractor/AprgFileExtractor'
+        run: |
+          sudo apt-get update
+          sudo apt-get install p7zip-full
+
+      - name: Install Boost on Ubuntu
+        if: startsWith(matrix.configurationName, 'Ubuntu') && matrix.project == 'Boost/Boost'
+        run: |
+          sudo apt-get update
+          sudo apt-get install libboost-all-dev
+          
       - name: Prepare aprg directories and scripts
         shell: bash
         run: |
@@ -141,28 +141,28 @@ jobs:
           chmod +x "$buildAndRunScriptPath"
           echo "buildAndRunScriptPath=$buildAndRunScriptPath" >> "$GITHUB_ENV"
             
-      - name: Configure for windows/msvc
+      - name: Configure for Windows/MSVC
         if: matrix.configurationName == 'WindowsLatestMsvc'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" configureWithDefaultCompiler "${{ env.buildDirectory }}" "${{ env.buildType }}" "Visual Studio 17 2022"
             
-      - name: Configure for windows/mingw
+      - name: Configure for Windows/Mingw
         if: matrix.configurationName == 'WindowsLatestMingw'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" configureWithDefaultCompiler "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
-      - name: Configure for ubuntu/gcc
+      - name: Configure for Ubuntu/Gcc
         if: matrix.configurationName == 'UbuntuLatestGcc'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" configureWithGcc "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
-      - name: Configure for ubuntu/clang
+      - name: Configure for Ubuntu/Clang
         if: matrix.configurationName == 'UbuntuLatestClang'
         shell: bash
         working-directory: ${{ matrix.project }}
