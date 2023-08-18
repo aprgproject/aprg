@@ -69,9 +69,7 @@ jobs:
       matrix:
         project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
         configurationName: ["WindowsLatestMsvc", "WindowsLatestMingw", "UbuntuLatestGcc", "UbuntuLatestClang"] #"MacOSLatestClang"
-        exclude:
-          - project: "AprgCommon/AprgCommon"
-            configurationName: WindowsLatestMsvc
+        exclude: [{"project": "AprgCommon/AprgCommon", "configurationName": "WindowsLatestMsvc"}]
         
     steps:
     
