@@ -18,7 +18,9 @@ detectGitChanges() {
     source "$scriptDirectory/AddingAprgLocatorFile.sh"
     
     # Detect git changes
+    scriptPrint "$scriptName" "$LINENO" "Calling Git Diff command ..."
     detectedFiles=$(git diff --name-only HEAD^)
+    scriptPrint "$scriptName" "$LINENO" "The Git Diff command is finished."
     
     # Add only unique directories with CMakeLists.txt to set
     while IFS= read -r detectedFile; do
