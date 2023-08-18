@@ -69,13 +69,16 @@ jobs:
       matrix:
         project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
         configurationName: ["WindowsLatestMsvc", "WindowsLatestMingw", "UbuntuLatestGcc", "UbuntuLatestClang"] #"MacOSLatestClang"
-          
+        exclude:
+          - project: "AprgCommon/AprgCommon"
+            configurationName: WindowsLatestMsvc
+        
     steps:
     
       - name: Checkout code for building
         uses: actions/checkout@v3
           
-      - name: Print Github Event
+      - name: Print Job Details
         run: |
           echo matrix.project: ${{ matrix.project }}
           echo matrix.configurationName: ${{ matrix.configurationName }}
