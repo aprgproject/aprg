@@ -4,6 +4,7 @@
 #include <CPlusPlus/Database/CPlusPlusDatabase.hpp>
 #include <CPlusPlus/Term/TermChecker.hpp>
 
+#include <array>
 #include <iostream>
 
 using namespace std;

@@ -3,6 +3,7 @@
 #include <CPlusPlus/Database/CPlusPlusDatabase.hpp>
 #include <CPlusPlus/Analyzer/Findings/TemporaryFindings.hpp>
 
+#include <array>
 #include <iostream>
 
 using namespace std;

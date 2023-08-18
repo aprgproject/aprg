@@ -7,6 +7,7 @@
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>
+#include <array>
 #include <fstream>
 #include <iostream>
 #include <iterator>
