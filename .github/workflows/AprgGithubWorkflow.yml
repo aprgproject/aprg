@@ -128,12 +128,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install p7zip-full
-          7z
+          echo "The dpkg details:"
+          dpkg -l | grep p7zip
 
       - name: Install Boost on Windows
         if: startsWith(matrix.configurationName, 'Windows') && matrix.project == 'Boost/Boost'
         run: |
-          choco install boost
+          choco install boost --version=1.75.0 -y
+          refreshenv
           choco info boost
 
       - name: Install Boost on Ubuntu
@@ -141,6 +143,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install libboost-all-dev
+          echo "The dpkg details:"
+          dpkg -l | grep libboost-all-dev
           
       - name: Prepare aprg directories and scripts
         shell: bash
