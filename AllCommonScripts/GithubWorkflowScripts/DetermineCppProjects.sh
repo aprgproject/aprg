@@ -30,9 +30,13 @@ if [[ -z $cppProjects ]]; then
     cppProjects='"AprgCommon/AprgCommon"'
 fi
 
-# Save the value for Github Workflow
+# Save C/C++ Projects in Github Workflow
 scriptPrint "$scriptName" "$LINENO" "The cppProjects are: [$cppProjects]"
 # shellcheck disable=SC2154
 echo "APRG_CPP_DIRECTORIES=[$cppProjects]" >> "$GITHUB_OUTPUT"
+
+
+# Save Excluded Configurations in Github Workflow
+scriptPrint "$scriptName" "$LINENO" "The excludedConfigurations are: [$excludedConfigurations]"
 # shellcheck disable=SC2154
 echo "APRG_EXCLUDED_CONFIGURATIONS=$excludedConfigurations" >> "$GITHUB_OUTPUT"
