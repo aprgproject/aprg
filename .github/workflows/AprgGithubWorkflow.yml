@@ -10,9 +10,12 @@ on:
         required: true
 
 env:
-  checkShellScriptsRelativePath: AllCommonScripts/ScriptsForShellScripts/checkShellScripts.sh
-  determineCppProjectsRelativePath: AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh
-  buildAndRunScriptRelativePath: AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh
+  checkShellScriptsRelativePath: "AllCommonScripts/ScriptsForShellScripts/checkShellScripts.sh"
+  determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
+  buildAndRunScriptRelativePath: "AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
+  buildType: "Release"
+  buildDirectory: "GithubBuild"
+  windowsEnvironmentScript: "C:/Program Files (x86)/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
 
 jobs:
 
@@ -68,49 +71,24 @@ jobs:
         envConfig: 
         - {
             name: "WindowsLatestMsvc",
-            os: windows-latest,
-            buildType: "Release",
-            cc: "cl",
-            cxx: "cl",
-            environmentScript: "C:/Program Files (x86)/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat",
-            generators: "Visual Studio 17 2022"
+            os: windows-latest
           }
         - {
             name: "WindowsLatestMingw",
-            os: windows-latest,
-            buildType: "Release",
-            cc: "gcc",
-            cxx: "g++",
-            generators: "Ninja"
+            os: windows-latest
           }
         - {
             name: "UbuntuLatestGcc",
-            os: ubuntu-latest,
-            buildType: "Release",
-            cc: "gcc",
-            cxx: "g++",
-            cCompilerLocation: "/usr/bin/gcc",
-            cppCompilerLocation: "/usr/bin/g++",
-            generators: "Ninja"
+            os: ubuntu-latest
           }
         - {
             name: "UbuntuLatestClang",
-            os: ubuntu-latest,
-            buildType: "Release",
-            cc: "clang",
-            cxx: "clang++",
-            cCompilerLocation: "/usr/bin/clang",
-            cppCompilerLocation: "/usr/bin/clang++",
-            generators: "Ninja"
+            os: ubuntu-latest
           }
 # MAC OS is not supported
 #        - {
 #            name: "macOS Latest Clang",
-#            os: macos-latest,
-#            buildType: "Release",
-#            cc: "clang",
-#            cxx: "clang++",
-#            generators: "Ninja"
+#            os: macos-latest
 #          }
           
     steps:
@@ -118,7 +96,7 @@ jobs:
       - name: Checkout code for building
         uses: actions/checkout@v3
           
-      - name: Print environment
+      - name: Print Github Event
         run: |
           echo github.event.action: ${{ github.event.action }}
           echo github.event_name: ${{ github.event_name }}
@@ -129,10 +107,10 @@ jobs:
           choco install ninja cmake
           ninja --version
           cmake --version
-          #Not needed to run environment script
-          #echo "Executing visual studio environment script..."
-          #cmd "${{ matrix.envConfig.environmentScript }}"
-          #echo "Finished visual studio environment script."
+          # Not needed to run environment script
+          # echo "Executing visual studio environment script..."
+          # cmd "${{ env.windowsEnvironmentScript }}"
+          # echo "Finished visual studio environment script."
 
       - name: Install dependencies on ubuntu/gcc
         if: matrix.envConfig.name == 'UbuntuLatestGcc'
@@ -174,41 +152,48 @@ jobs:
           chmod +x "$buildAndRunScriptPath"
           echo "buildAndRunScriptPath=$buildAndRunScriptPath" >> "$GITHUB_ENV"
             
-      - name: Configure for windows
-        if: startsWith(matrix.envConfig.os, 'windows')
+      - name: Configure for windows/msvc
+        if: matrix.envConfig.name == 'WindowsLatestMsvc'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" configureWithDefaultCompiler GithubBuild Debug "${{ matrix.envConfig.generators }}"
+          "$buildAndRunScriptPath" configureWithDefaultCompiler "${{ env.buildDirectory }}" "${{ env.buildType }}" "Visual Studio 17 2022"
+            
+      - name: Configure for windows/mingw
+        if: matrix.envConfig.name == 'WindowsLatestMingw'
+        shell: bash
+        working-directory: ${{ matrix.project }}
+        run: |
+          "$buildAndRunScriptPath" configureWithDefaultCompiler "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
       - name: Configure for ubuntu/gcc
         if: matrix.envConfig.name == 'UbuntuLatestGcc'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" configureWithGcc GithubBuild Debug "${{ matrix.envConfig.generators }}"
+          "$buildAndRunScriptPath" configureWithGcc "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
       - name: Configure for ubuntu/clang
         if: matrix.envConfig.name == 'UbuntuLatestClang'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" configureWithClang GithubBuild Debug "${{ matrix.envConfig.generators }}"
+          "$buildAndRunScriptPath" configureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
       - name: Build
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" build GithubBuild Debug
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
             
       - name: Install
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" install GithubBuild Debug
+          "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
 
       - name: Run
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" run GithubBuild
+          "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
