@@ -35,4 +35,4 @@ scriptPrint "$scriptName" "$LINENO" "The cppProjects are: [$cppProjects]"
 # shellcheck disable=SC2154
 echo "APRG_CPP_DIRECTORIES=[$cppProjects]" >> "$GITHUB_OUTPUT"
 # shellcheck disable=SC2154
-echo "APRG_EXCLUDED_CONFIGURATIONS=[$excludedConfigurations]" >> "$GITHUB_OUTPUT"
+echo "APRG_EXCLUDED_CONFIGURATIONS=$excludedConfigurations" >> "$GITHUB_OUTPUT"
