@@ -1,8 +1,8 @@
 include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
 
+PRINT_VARIABLE(BOOST_DIR)
 #set boost flags
 set(Boost_DEBUG                  ON)
-PRINT_VARIABLE(BOOST_DIR)
 if(WIN32)
     #set directories for boost in APRG
     set(Boost_USE_STATIC_LIBS        ON)
@@ -17,8 +17,10 @@ elseif(UNIX)
     set(BOOST_INCLUDEDIR             ${BOOST_ROOT})
     set(BOOST_LIBRARYDIR             ${BOOST_ROOT})
 endif()
-#Linux boost is installed as a library so no need to update location
 
+PRINT_VARIABLE(BOOST_ROOT)
+PRINT_VARIABLE(BOOST_INCLUDEDIR)
+PRINT_VARIABLE(BOOST_LIBRARYDIR)
 find_package(Boost COMPONENTS system locale filesystem iostreams REQUIRED)
 
 if(Boost_FOUND)
