@@ -27,7 +27,7 @@ fi
 # Put AprgCommon if empty
 if [[ -z $cppProjects ]]; then
     scriptPrint "$scriptName" "$LINENO" "The cppProjects is empty, adding AprgCommon to check that common functionalities are not broken."
-    cppProjects="\"AprgCommon/AprgCommon\""
+    cppProjects='"AprgCommon/AprgCommon"'
 fi
 
 # Save the value for Github Workflow
