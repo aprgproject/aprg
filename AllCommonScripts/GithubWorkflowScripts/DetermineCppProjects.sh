@@ -39,4 +39,4 @@ echo "APRG_CPP_DIRECTORIES=[$cppProjects]" >> "$GITHUB_OUTPUT"
 # Save Excluded Configurations in Github Workflow
 scriptPrint "$scriptName" "$LINENO" "The excludedConfigurations are: [$excludedConfigurations]"
 # shellcheck disable=SC2154
-echo "APRG_EXCLUDED_CONFIGURATIONS=$excludedConfigurations" >> "$GITHUB_OUTPUT"
+echo "APRG_EXCLUDED_CONFIGURATIONS=[$excludedConfigurations]" >> "$GITHUB_OUTPUT"
