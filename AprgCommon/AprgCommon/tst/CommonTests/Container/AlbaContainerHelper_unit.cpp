@@ -1,6 +1,6 @@
 #include <Common/Container/AlbaContainerHelper.hpp>
 #include <Common/File/AlbaFileReader.hpp>
-#include <CommonTestsUtilities/DirectoryConstants.hpp>
+#include <CommonTests/DirectoryConstants.hpp>
 #include <CommonTestsUtilities/File/BaseFileReaderTest.hpp>
 
 #include <gtest/gtest.h>

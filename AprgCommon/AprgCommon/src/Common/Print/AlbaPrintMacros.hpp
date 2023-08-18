@@ -9,10 +9,10 @@ namespace alba {
 // This is a revised approach in printing because of MSVC limitation on macros.
 
 #define Z_ALBA_PRINT_START(out) \
-    printLogHeader(out, ALBA_MACROS_GET_FILE, ALBA_MACROS_GET_LINE, ALBA_MACROS_GET_FUNCTION);
+    alba::printLogHeader(out, ALBA_MACROS_GET_FILE, ALBA_MACROS_GET_LINE, ALBA_MACROS_GET_FUNCTION);
 #define Z_ALBA_PRINT_END(out) out << std::endl
 #define Z_ALBA_PRINT_PARAMETER_ONLY(out, parameter) \
-    printParameterWithName(out, ALBA_MACROS_GET_STRING_LITERAL(parameter), parameter);
+    alba::printParameterWithName(out, ALBA_MACROS_GET_STRING_LITERAL(parameter), parameter);
 #define Z_ALBA_PRINT_SEPARATOR(out) out << " ";
 #define Z_ALBA_PRINT_PARAMETER(out, parameter) Z_ALBA_PRINT_PARAMETER_ONLY(out, parameter) Z_ALBA_PRINT_SEPARATOR(out)
 #define Z_ALBA_PRINT_7(out, p1, p2, p3, p4, p5, p6, p7) \

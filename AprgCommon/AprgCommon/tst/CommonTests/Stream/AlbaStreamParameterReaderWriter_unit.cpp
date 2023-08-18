@@ -1,6 +1,6 @@
 #include <Common/Stream/AlbaStreamParameterReader.hpp>
 #include <Common/Stream/AlbaStreamParameterWriter.hpp>
-#include <CommonTestsUtilities/DirectoryConstants.hpp>
+#include <CommonTests/DirectoryConstants.hpp>
 #include <CommonTestsUtilities/File/BaseFileReaderTest.hpp>
 
 #include <gtest/gtest.h>

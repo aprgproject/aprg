@@ -1,6 +1,6 @@
 #include <Common/Print/AlbaPrintMacros.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
-#include <CommonTestsUtilities/Print/PrintUtilities.hpp>
+#include <CommonTests/Print/PrintUtilities.hpp>
 
 #include <gtest/gtest.h>
 

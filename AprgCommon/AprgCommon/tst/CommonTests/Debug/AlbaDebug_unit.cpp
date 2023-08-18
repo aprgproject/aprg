@@ -12,7 +12,7 @@ std::stringstream s_debugStringStream;  // make this inline if needed on the hea
 // Start of test file
 #include <Common/Debug/AlbaDebug.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
-#include <CommonTestsUtilities/Print/PrintUtilities.hpp>
+#include <CommonTests/Print/PrintUtilities.hpp>
 
 #include <gtest/gtest.h>
 
