@@ -85,7 +85,7 @@ jobs:
           echo github.event_name: ${{ github.event_name }}
           
       - name: Install dependencies on windows
-        if: startsWith(matrix.envConfig.os, 'windows')
+        if: startsWith(matrix.configurationName, 'Windows')
         run: |
           choco install ninja cmake
           ninja --version
@@ -113,15 +113,21 @@ jobs:
           cmake --version
           clang --version
 
-      - name: Install dependencies on File Extractor
-        if: startsWith(matrix.envConfig.os, 'ubuntu') && matrix.project == 'AprgFileExtractor/AprgFileExtractor'
+      - name: Install 7zip
+        if: startsWith(matrix.configurationName, 'Ubuntu') && matrix.project == 'AprgFileExtractor/AprgFileExtractor'
         run: |
           sudo apt-get update
           sudo apt-get install p7zip-full
+
+      - name: Install 7zip
+        if: startsWith(matrix.configurationName, 'Ubuntu') && matrix.project == 'AprgFileExtractor/AprgFileExtractor'
+        run: |
+          sudo apt-get update
+          sudo apt-get install libboost-all-dev
           
 # MAC OS is not supported          
 #      - name: Install dependencies on macos
-#        if: startsWith(matrix.envConfig.os, 'macos')
+#        if: startsWith(matrix.configurationName, 'MacOS')
 #        run: |
 #          brew install cmake ninja
 #          ninja --version
