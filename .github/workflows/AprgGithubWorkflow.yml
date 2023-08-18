@@ -63,7 +63,7 @@ jobs:
   buildAndTest:
     name: Test ${{ matrix.project }} on ${{ matrix.envConfig.name }}
     needs: determineCppProjects
-    runs-on: ${{ startsWith('${{ matrix.envConfig.name }}', 'Windows') && 'windows-latest' || startsWith('${{ matrix.envConfig.name }}', 'Ubuntu') && 'ubuntu-latest' || ''}}
+    runs-on: ${{ startsWith('${{ matrix.envConfig.name }}', 'Windows') && 'windows-latest' || startsWith('${{ matrix.envConfig.name }}', 'Ubuntu') && 'ubuntu-latest' || 'macos-latest'}}
     strategy:
       fail-fast: false
       matrix:
