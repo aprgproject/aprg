@@ -9,6 +9,7 @@ cppProjects=""
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
+source "$scriptDirectory/ExcludedConfigurations.sh"
 
 # Get C/C++ projects by git changes or searching on directories.
 if [[ -z $userInput ]]; then
@@ -33,3 +34,5 @@ fi
 scriptPrint "$scriptName" "$LINENO" "The cppProjects are: [$cppProjects]"
 # shellcheck disable=SC2154
 echo "APRG_CPP_DIRECTORIES=[$cppProjects]" >> "$GITHUB_OUTPUT"
+# shellcheck disable=SC2154
+echo "APRG_EXCLUDED_CONFIGURATIONS=[$excludedConfigurations]" >> "$GITHUB_OUTPUT"
