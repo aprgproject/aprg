@@ -1,8 +1,8 @@
 #pragma once
 
-#include "CPlusPlus/Database/CPlusPlusDatabase.hpp"
-#include "CPlusPlus/Findings/Findings.hpp"
-#include "FileDirectoryDatabase/FileDirectoryDatabase.hpp"
+#include <CPlusPlus/Database/CPlusPlusDatabase.hpp>
+#include <CPlusPlus/Findings/Findings.hpp>
+#include <FileDirectoryDatabase/FileDirectoryDatabase.hpp>
 
 namespace codeReview {
 typedef map<string, CPlusPlusDatabase> FileCPlusPlusDatabasesMap;

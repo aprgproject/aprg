@@ -1,8 +1,8 @@
-#include "../../Database/CPlusPlusDatabase.hpp"
-#include "../../Term/TermChecker.hpp"
-#include "../Findings/TemporaryFindings.hpp"
-#include "../TermAnalyzer.hpp"
-#include "../TermAnalyzerTemplateFunctions.hpp"
+#include <CPlusPlus/Analyzer/Findings/TemporaryFindings.hpp>
+#include <CPlusPlus/Analyzer/TermAnalyzer.hpp>
+#include <CPlusPlus/Analyzer/TermAnalyzerTemplateFunctions.hpp>
+#include <CPlusPlus/Database/CPlusPlusDatabase.hpp>
+#include <CPlusPlus/Term/TermChecker.hpp>
 
 #include <array>
 #include <iostream>
@@ -36,7 +36,8 @@ bool TermAnalyzer::isModifiedDueToVariableDeclaration(Looper const& startLooper)
     DBGPRINT2("isModifiedDueToVariableDeclaration");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<TermChecker, 2> const termCheckers{TermChecker(TermCheckerType::isCPlusPlusType), TermChecker(Term(TermType::WhiteSpace))};
+    array<TermChecker, 2> const termCheckers{
+        TermChecker(TermCheckerType::isCPlusPlusType), TermChecker(Term(TermType::WhiteSpace))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         CPlusPlusType type(startLooper.getContentReference().getValueTypeReference());
         VectorOfStrings variableNames;
@@ -90,8 +91,12 @@ bool TermAnalyzer::isModifiedDueToAssignment(Looper const& startLooper) {
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 6> const termCheckers{
-        TermChecker(TermCheckerType::isValue), TermChecker(Term(TermType::WhiteSpace)),  TermChecker(TermCheckerType::isAssignmentOperator),
-        TermChecker(Term(TermType::WhiteSpace)),  TermChecker(TermCheckerType::isValue), TermChecker(Term(TermType::Operator, ";"))};
+        TermChecker(TermCheckerType::isValue),
+        TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker(TermCheckerType::isAssignmentOperator),
+        TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker(TermCheckerType::isValue),
+        TermChecker(Term(TermType::Operator, ";"))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         incrementLooperIfWhiteSpaceAndOneNewLine<FindingsToAdd::ExpectsNewLineAndUnexpectsWhiteSpace>(compareLooper);
         temporaryFindings.copyCurrentFindings(m_findings);
@@ -156,7 +161,8 @@ bool TermAnalyzer::isModifiedDueToTypeDefWithNormalParameters(Looper const& star
     DBGPRINT2("isModifiedDueToTypeDefWithNormalParameters");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(nextLooper);
-    array<TermChecker, 2> const termCheckers{TermChecker(TermCheckerType::isCPlusPlusType), TermChecker(Term(TermType::WhiteSpace))};
+    array<TermChecker, 2> const termCheckers{
+        TermChecker(TermCheckerType::isCPlusPlusType), TermChecker(Term(TermType::WhiteSpace))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::WhiteSpaceAndNewLine>(
             compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(nextLooper, termCheckers));
@@ -218,7 +224,8 @@ bool TermAnalyzer::areVariableFoundForVariableDeclarationAndMoveLooper(
     Looper& movableLooper, VectorOfStrings& variableNames) {
     array<TermChecker, 5> const variableWithValueChecker{
         TermChecker({Term(TermType::Identifier), Term(TermType::Variable)}), TermChecker(Term(TermType::WhiteSpace)),
-        TermChecker(TermCheckerType::isAssignmentOperator), TermChecker(Term(TermType::WhiteSpace)), TermChecker(TermCheckerType::isValue)};
+        TermChecker(TermCheckerType::isAssignmentOperator), TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker(TermCheckerType::isValue)};
     array<TermChecker, 1> const variableChecker{TermChecker({Term(TermType::Identifier), Term(TermType::Variable)})};
     array<Term, 2> const separator{Term(TermType::Operator, ","), Term(TermType::WhiteSpace)};
     array<Term, 1> const finisher{Term(TermType::Operator, ";")};
@@ -251,9 +258,11 @@ bool TermAnalyzer::areVariableFoundForVariableDeclarationAndMoveLooper(
 
 bool TermAnalyzer::areTypesFoundForTypedefThenFillAndMoveLooper(
     Looper& movableLooper, CPlusPlusType const& type, MapOfCPlusPlusTypesForTypedef& typeMap) {
-    array<TermChecker, 1> const typeChecker{TermChecker({Term(TermType::Identifier), Term(TermType::Type), Term(TermType::Class)})};
+    array<TermChecker, 1> const typeChecker{
+        TermChecker({Term(TermType::Identifier), Term(TermType::Type), Term(TermType::Class)})};
     array<TermChecker, 2> const typePointerChecker{
-        TermChecker(Term(TermType::Operator, "*")), TermChecker({Term(TermType::Identifier), Term(TermType::Type), Term(TermType::Class)})};
+        TermChecker(Term(TermType::Operator, "*")),
+        TermChecker({Term(TermType::Identifier), Term(TermType::Type), Term(TermType::Class)})};
     array<Term, 1> const separator1{Term(TermType::WhiteSpace)};
     array<Term, 1> const separator2{Term(TermType::Operator, ",")};
     array<Term, 1> const finisher{Term(TermType::Operator, ";")};

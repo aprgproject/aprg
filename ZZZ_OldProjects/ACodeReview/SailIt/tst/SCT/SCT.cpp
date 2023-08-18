@@ -1,5 +1,6 @@
-#include "../../src/SailIt.hpp"
-#include "gtest/gtest.h"
+#include <SailIt.hpp>
+
+#include <gtest/gtest.h>
 
 #include <fstream>
 
@@ -9,13 +10,18 @@ using namespace std;
 // TEST(Sct, DISABLED_ActualTest)
 TEST(Sct, ActualTest) {
     SailIt sailIt;
-    sailIt.getFileDirectoryDatabaseReference().addFileOrDirectory("C:\\APRG\\ACodeReview\\include");
-    // sailIt.addAndAnalyzeThisFileToCPlusPlusDatabase ("C:\\APRG\\ACodeReview\\include\\c++\\iostream");
-    sailIt.addAndAnalyzeThisFileToCPlusPlusDatabase("C:\\APRG\\ACodeReview\\include\\stdio.h");
-    // sailIt.addAndAnalyzeThisFileToCPlusPlusDatabase("C:\\APRG\\ACodeReview\\include\\_mingw.h");
-    // sailIt.addAndAnalyzeThisFileToCPlusPlusDatabase("C:\\APRG\\ACodeReview\\include\\_mingw_off_t.h");
-    ofstream outputFile("C:\\APRG\\ACodeReview\\outputFile.txt");
+    sailIt.getFileDirectoryDatabaseReference().addFileOrDirectory(APRG_DIR
+                                                                  "/ZZZ_OldProjects/ACodeReview/FilesForTests/include");
+    // sailIt.addAndAnalyzeThisFileToCPlusPlusDatabase (APRG_DIR
+    // "/ZZZ_OldProjects/ACodeReview/FilesForTests/include/c++/iostream");
+    sailIt.addAndAnalyzeThisFileToCPlusPlusDatabase(APRG_DIR
+                                                    "/ZZZ_OldProjects/ACodeReview/FilesForTests/include/stdio.h");
+    // sailIt.addAndAnalyzeThisFileToCPlusPlusDatabase(APRG_DIR
+    // "/ZZZ_OldProjects/ACodeReview/FilesForTests/include/_mingw.h");
+    // sailIt.addAndAnalyzeThisFileToCPlusPlusDatabase(APRG_DIR
+    // "/ZZZ_OldProjects/ACodeReview/FilesForTests/include/_mingw_off_t.h");
+    ofstream outputFile(APRG_DIR "/ZZZ_OldProjects/ACodeReview/FilesForTests/outputFile.txt");
     sailIt.printAll(outputFile);
-    ofstream unprocessedTermFile("C:\\APRG\\ACodeReview\\unprocessedTerm.txt");
+    ofstream unprocessedTermFile(APRG_DIR "/ZZZ_OldProjects/ACodeReview/FilesForTests/unprocessedTerm.txt");
     sailIt.printFindings(unprocessedTermFile, "Unprocessed term");
 }

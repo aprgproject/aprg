@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Term.hpp"
+#include <CPlusPlus/Term/Term.hpp>
 
 #include <string>
 #include <vector>

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../CPlusPlusType.hpp"
-#include "CPlusPlusFunctionParameter.hpp"
+#include <CPlusPlus/Database/CPlusPlusFunction/CPlusPlusFunctionParameter.hpp>
+#include <CPlusPlus/Database/CPlusPlusType.hpp>
 
 #include <string>
 #include <vector>

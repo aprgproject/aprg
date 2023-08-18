@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Builder/TermBuilder.hpp"
-#include "../Findings/Findings.hpp"
-#include "../Term/Term.hpp"
+#include <CPlusPlus/Builder/TermBuilder.hpp>
+#include <CPlusPlus/Findings/Findings.hpp>
+#include <CPlusPlus/Term/Term.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 
 #include <fstream>

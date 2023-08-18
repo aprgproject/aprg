@@ -1,6 +1,6 @@
 #include "CPlusPlusFunction.hpp"
 
-#include "../CPlusPlusClass/CPlusPlusClass.hpp"
+#include <CPlusPlus/Database/CPlusPlusClass/CPlusPlusClass.hpp>
 
 #include <iostream>
 

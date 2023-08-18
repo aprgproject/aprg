@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Term/Term.hpp"
+#include <CPlusPlus/Term/Term.hpp>
 
 #include <deque>
 #include <ostream>

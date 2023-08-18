@@ -1,16 +1,16 @@
 #pragma once
 
-#include "../Utilities.hpp"
-#include "CPlusPlusClass/CPlusPlusClass.hpp"
-#include "CPlusPlusFunction/CPlusPlusFunction.hpp"
-#include "CPlusPlusMacro.hpp"
-#include "CPlusPlusNamespace.hpp"
-#include "CPlusPlusScope.hpp"
-#include "CPlusPlusVariable.hpp"
+#include <CPlusPlus/Database/CPlusPlusClass/CPlusPlusClass.hpp>
+#include <CPlusPlus/Database/CPlusPlusFunction/CPlusPlusFunction.hpp>
+#include <CPlusPlus/Database/CPlusPlusMacro.hpp>
+#include <CPlusPlus/Database/CPlusPlusNamespace.hpp>
+#include <CPlusPlus/Database/CPlusPlusScope.hpp>
+#include <CPlusPlus/Database/CPlusPlusVariable.hpp>
+#include <CPlusPlus/Utilities.hpp>
+#include <Common/Container/AlbaOptional.hpp>
 
 #include <functional>
 #include <map>
-#include <Common/Container/AlbaOptional.hpp>
 #include <set>
 #include <string>
 #include <vector>

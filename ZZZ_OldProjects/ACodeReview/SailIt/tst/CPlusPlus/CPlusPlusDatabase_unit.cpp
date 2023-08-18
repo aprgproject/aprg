@@ -1,5 +1,6 @@
-#include "../../src/CPlusPlus/Database/CPlusPlusDatabase.hpp"
-#include "gtest/gtest.h"
+#include <CPlusPlus/Database/CPlusPlusDatabase.hpp>
+
+#include <gtest/gtest.h>
 
 using namespace codeReview;
 using namespace std;

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "MultipleTerms.hpp"
-#include "Term.hpp"
-
+#include <CPlusPlus/Term/MultipleTerms.hpp>
+#include <CPlusPlus/Term/Term.hpp>
 #include <Common/Container/AlbaOptional.hpp>
+
 #include <ostream>
 #include <string>
 

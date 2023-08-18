@@ -1,9 +1,9 @@
-#include "../../../SailIt.hpp"
-#include "../../Database/CPlusPlusDatabase.hpp"
-#include "../../Term/TermChecker.hpp"
-#include "../Findings/TemporaryFindings.hpp"
-#include "../TermAnalyzer.hpp"
-#include "../TermAnalyzerTemplateFunctions.hpp"
+#include <CPlusPlus/Analyzer/TermAnalyzer.hpp>
+#include <CPlusPlus/Analyzer/TermAnalyzerTemplateFunctions.hpp>
+#include <CPlusPlus/Database/CPlusPlusDatabase.hpp>
+#include <CPlusPlus/Analyzer/Findings/TemporaryFindings.hpp>
+#include <CPlusPlus/Term/TermChecker.hpp>
+#include <SailIt.hpp>
 
 #include <array>
 #include <iostream>
@@ -79,7 +79,8 @@ bool TermAnalyzer::isModifiedDueToDefineMacro(Looper const& startLooper) {
     DBGPRINT2("isModifiedDueToDefineMacro");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<Term, 3> const expectedTerms{Term(TermType::Macro, "#define"), Term(TermType::WhiteSpace), Term(TermType::Identifier)};
+    array<Term, 3> const expectedTerms{
+        Term(TermType::Macro, "#define"), Term(TermType::WhiteSpace), Term(TermType::Identifier)};
     if (isSingleLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         VectorOfTerms terms(getTerms(startLooper, expectedTerms));
         string macroName(getStringWithoutQuotations(terms[2].getString()));
@@ -160,7 +161,8 @@ bool TermAnalyzer::isModifiedDueToUndefMacro(Looper const& startLooper) {
     DBGPRINT2("isModifiedDueToUndefMacro");
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
-    array<Term, 3> const expectedTerms{Term(TermType::Macro, "#undef"), Term(TermType::WhiteSpace), Term(TermType::Identifier)};
+    array<Term, 3> const expectedTerms{
+        Term(TermType::Macro, "#undef"), Term(TermType::WhiteSpace), Term(TermType::Identifier)};
     if (isSingleLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, expectedTerms)) {
         incrementLooperIfWhiteSpaceAndOneNewLine<FindingsToAdd::ExpectsNewLineAndUnexpectsWhiteSpace>(compareLooper);
         VectorOfTerms terms(getTerms(startLooper, expectedTerms));
@@ -273,7 +275,8 @@ void TermAnalyzer::copyLooperSpanToVectorOfTermsForMacro(Looper const& startLoop
 }
 
 void TermAnalyzer::checkMacroParameters(Looper const& startLooper, CPlusPlusMacro& cPlusPlusMacro) {
-    array<Term, 3> const nextArgumentForm{Term(TermType::Identifier), Term(TermType::Operator, ","), Term(TermType::WhiteSpace)};
+    array<Term, 3> const nextArgumentForm{
+        Term(TermType::Identifier), Term(TermType::Operator, ","), Term(TermType::WhiteSpace)};
     array<Term, 1> const lastArgumentForm{Term(TermType::Identifier)};
     array<Term, 3> const variadicArgumentForm{
         Term(TermType::Operator, "."), Term(TermType::Operator, "."), Term(TermType::Operator, ".")};

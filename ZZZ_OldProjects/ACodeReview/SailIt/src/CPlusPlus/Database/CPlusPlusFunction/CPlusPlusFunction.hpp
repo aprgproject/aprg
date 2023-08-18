@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../CPlusPlusType.hpp"
-#include "CPlusPlusFunctionSignature.hpp"
-
+#include <CPlusPlus/Database/CPlusPlusFunction/CPlusPlusFunctionSignature.hpp>
+#include <CPlusPlus/Database/CPlusPlusType.hpp>
 #include <Common/Container/AlbaOptional.hpp>
+
 #include <string>
 #include <vector>
 

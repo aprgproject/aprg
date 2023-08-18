@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Term.hpp"
+#include <CPlusPlus/Term/Term.hpp>
 
 #include <initializer_list>
 #include <vector>

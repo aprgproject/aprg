@@ -1,10 +1,11 @@
-#include "../../src/CPlusPlus/Analyzer/TermAnalyzer.hpp"
-#include "../../src/CPlusPlus/Builder/TermBuilder.hpp"
-#include "../../src/CPlusPlus/Database/CPlusPlusDatabase.hpp"
-#include "../../src/FileDirectoryDatabase/FileDirectoryDatabase.hpp"
-#include "../Checkers.hpp"
-#include "../MtDirectoryConstants.hpp"
-#include "gtest/gtest.h"
+#include <CPlusPlus/Analyzer/TermAnalyzer.hpp>
+#include <CPlusPlus/Builder/TermBuilder.hpp>
+#include <CPlusPlus/Database/CPlusPlusDatabase.hpp>
+#include <Checkers.hpp>
+#include <FileDirectoryDatabase/FileDirectoryDatabase.hpp>
+#include <MtDirectoryConstants.hpp>
+
+#include <gtest/gtest.h>
 
 #include <fstream>
 

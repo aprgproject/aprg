@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CPlusPlusType.hpp"
+#include <CPlusPlus/Database/CPlusPlusType.hpp>
 
 #include <string>
 

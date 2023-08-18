@@ -1,6 +1,6 @@
 #include "CheckerHelpers.hpp"
 
-#include "TermChecker.hpp"
+#include <CPlusPlus/Term/TermChecker.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>

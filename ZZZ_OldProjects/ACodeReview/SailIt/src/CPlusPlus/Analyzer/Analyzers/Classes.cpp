@@ -1,8 +1,8 @@
-#include "../../Database/CPlusPlusDatabase.hpp"
-#include "../../Term/TermChecker.hpp"
-#include "../Findings/TemporaryFindings.hpp"
-#include "../TermAnalyzer.hpp"
-#include "../TermAnalyzerTemplateFunctions.hpp"
+#include <CPlusPlus/Analyzer/TermAnalyzer.hpp>
+#include <CPlusPlus/Analyzer/TermAnalyzerTemplateFunctions.hpp>
+#include <CPlusPlus/Database/CPlusPlusDatabase.hpp>
+#include <CPlusPlus/Analyzer/Findings/TemporaryFindings.hpp>
+#include <CPlusPlus/Term/TermChecker.hpp>
 
 #include <iostream>
 
@@ -32,8 +32,9 @@ bool TermAnalyzer::isModifiedDueToClassDeclaration(Looper const& startLooper) {
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 4> const termCheckers{
-        TermChecker({Term(TermType::Keyword, "class"), Term(TermType::Keyword, "struct")}), TermChecker(Term(TermType::WhiteSpace)),
-        TermChecker(Term(TermType::Identifier)), TermChecker(Term(TermType::Operator, ";"))};
+        TermChecker({Term(TermType::Keyword, "class"), Term(TermType::Keyword, "struct")}),
+        TermChecker(Term(TermType::WhiteSpace)), TermChecker(Term(TermType::Identifier)),
+        TermChecker(Term(TermType::Operator, ";"))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         VectorOfTerms terms(getTerms(startLooper, termCheckers));
         m_database.addClass(terms[2].getString());
@@ -49,8 +50,8 @@ bool TermAnalyzer::isModifiedDueToClassDefinition(Looper const& startLooper) {
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 3> const termCheckers{
-        TermChecker({Term(TermType::Keyword, "class"), Term(TermType::Keyword, "struct")}), TermChecker(Term(TermType::WhiteSpace)),
-        TermChecker(Term(TermType::Identifier))};
+        TermChecker({Term(TermType::Keyword, "class"), Term(TermType::Keyword, "struct")}),
+        TermChecker(Term(TermType::WhiteSpace)), TermChecker(Term(TermType::Identifier))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         Looper afterOpeningBraces(compareLooper);
         Looper afterClosingBraces(compareLooper);

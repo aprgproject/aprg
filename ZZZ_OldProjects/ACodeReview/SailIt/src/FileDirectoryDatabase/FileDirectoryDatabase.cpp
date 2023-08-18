@@ -20,8 +20,7 @@ void FileDirectoryDatabase::printFilesAndDirectories(ostream& outputStream) cons
 }
 
 bool FileDirectoryDatabase::isFileIncluded(string const& baseDirectory, string const& fileName) const {
-    string whereItShouldBePath(getCorrectPathWithoutDoublePeriod<'\\'>(
-        getCorrectPathWithReplacedSlashCharacters<'\\'>(baseDirectory + fileName)));
+    string whereItShouldBePath(AlbaLocalPathHandler(baseDirectory + fileName).getFullPath());
     for (auto fullPathOfFileFromDatabase : m_files) {
         if (whereItShouldBePath == fullPathOfFileFromDatabase) {
             return true;
@@ -33,8 +32,7 @@ bool FileDirectoryDatabase::isFileIncluded(string const& baseDirectory, string c
 }
 
 bool FileDirectoryDatabase::isFileInFullPath(string const& fullPathFromDatabase, string const& fileName) const {
-    string correctFileName(
-        getStringBeforeDoublePeriod<'\\'>(getCorrectPathWithReplacedSlashCharacters<'\\'>(string("\\") + fileName)));
+    string correctFileName(AlbaLocalPathHandler(string("\\") + fileName).getFullPath());
     int correctFileNameLength = correctFileName.length();
     int fullPathFromDatabaseLength = fullPathFromDatabase.length();
     if (correctFileNameLength < fullPathFromDatabaseLength) {
@@ -51,8 +49,7 @@ string FileDirectoryDatabase::getFullPathOfFile(string const& baseDirectory, str
     unsigned int levenshteinDistance = 0;
     int score = 0;
     string fullPathOfFirstFileFound;
-    string whereItShouldBePath(getCorrectPathWithoutDoublePeriod<'\\'>(
-        getCorrectPathWithReplacedSlashCharacters<'\\'>(baseDirectory + fileName)));
+    string whereItShouldBePath(AlbaLocalPathHandler(baseDirectory + fileName).getFullPath());
     for (string fullPathOfFileFromDatabase : m_files) {
         if (whereItShouldBePath == fullPathOfFileFromDatabase) {
             return whereItShouldBePath;

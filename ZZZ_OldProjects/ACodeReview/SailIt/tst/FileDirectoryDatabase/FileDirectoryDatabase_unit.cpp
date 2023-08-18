@@ -1,7 +1,8 @@
-#include "../../src/FileDirectoryDatabase/FileDirectoryDatabase.hpp"
-#include "../MtDirectoryConstants.hpp"
-#include "gtest/gtest.h"
 #include <CommonTestsUtilities/GTest/GTestMacros.hpp>
+#include <FileDirectoryDatabase/FileDirectoryDatabase.hpp>
+#include <MtDirectoryConstants.hpp>
+
+#include <gtest/gtest.h>
 
 #include <fstream>
 #include <iostream>
@@ -11,15 +12,10 @@ using namespace alba;
 using namespace codeReview;
 using namespace std;
 
-TEST(FileDirectoryDatabaseTest, DISABLED_ActualTest) {
-    FileDirectoryDatabase fileDirectoryDatabase;
-    fileDirectoryDatabase.addFileOrDirectory("C:\\Qt\\Qt5.3.2\\Tools\\mingw482_32\\i686-w64-mingw32\\include\\c++\\");
-    cout << "FullPath of iostream: " << fileDirectoryDatabase.getFullPathOfFile("", "iostream") << "\n";
-    // fileDirectoryDatabase.printFilesAndDirectories(cout);
-}
+TEST(FileDirectoryDatabaseTest, DISABLED_ActualTest) {}
 
 TEST(FileDirectoryDatabaseTest, FilesAndDirectoriesAreRecognizedWhenAdded) {
-    string directory(MT_FILE_READER_TEST_DIRECTORY);
+    string directory(AlbaLocalPathHandler(MT_FILE_READER_TEST_DIRECTORY).getFullPath());
     FileDirectoryDatabase fileDirectoryDatabase;
     fileDirectoryDatabase.allowNonExistentDirectories();
     fileDirectoryDatabase.addFileOrDirectory(directory + "file3.hpp");
@@ -53,7 +49,7 @@ TEST(FileDirectoryDatabaseTest, FilesAndDirectoriesAreRecognizedWhenAdded) {
 }
 
 TEST(FileDirectoryDatabaseTest, FullPathOfFilesAreFound) {
-    string directory(MT_FILE_READER_TEST_DIRECTORY);
+    string directory(AlbaLocalPathHandler(MT_FILE_READER_TEST_DIRECTORY).getFullPath());
     FileDirectoryDatabase fileDirectoryDatabase;
     fileDirectoryDatabase.allowNonExistentDirectories();
     fileDirectoryDatabase.addFileOrDirectory(directory + "file3.hpp");

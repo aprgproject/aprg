@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FindingsBuffer.hpp"
+#include <CPlusPlus/Analyzer/Findings/FindingsBuffer.hpp>
 
 namespace codeReview {
 

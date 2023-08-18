@@ -1,7 +1,7 @@
 #include "SailIt.hpp"
 
-#include "CPlusPlus/Analyzer/TermAnalyzer.hpp"
-#include "CPlusPlus/Translator/TermTranslator.hpp"
+#include <CPlusPlus/Analyzer/TermAnalyzer.hpp>
+#include <CPlusPlus/Translator/TermTranslator.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <algorithm>

@@ -1,7 +1,7 @@
 #include "TermChecker.hpp"
 
-#include "CheckerHelpers.hpp"
-#include "Term.hpp"
+#include <CPlusPlus/Term/CheckerHelpers.hpp>
+#include <CPlusPlus/Term/Term.hpp>
 
 #include <string>
 

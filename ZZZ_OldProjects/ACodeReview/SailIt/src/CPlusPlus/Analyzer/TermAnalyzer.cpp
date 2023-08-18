@@ -1,9 +1,9 @@
 #include "TermAnalyzer.hpp"
 
-#include "../Database/CPlusPlusDatabase.hpp"
-#include "../Term/CheckerHelpers.hpp"
-#include "../Term/TermChecker.hpp"
-#include "Findings/TemporaryFindings.hpp"
+#include <CPlusPlus/Database/CPlusPlusDatabase.hpp>
+#include <CPlusPlus/Analyzer/Findings/TemporaryFindings.hpp>
+#include <CPlusPlus/Term/CheckerHelpers.hpp>
+#include <CPlusPlus/Term/TermChecker.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>

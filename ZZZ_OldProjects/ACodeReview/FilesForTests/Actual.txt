@@ -2,9 +2,9 @@
 #include <string>
 #include <TermTranslator.hpp>
 #include <algorithm>
-#include "../../../AprgCommon/AprgCommon/src/AlbaFileReader.hpp"
-#include "../../../AprgCommon/AprgCommon/src/AlbaStringHelper.hpp"
-#include "../../../AprgCommon/AprgCommon/src/PathHandlers/AlbaWindowsPathHandler.hpp"
+#include <../AprgCommon/AprgCommon/src/AlbaFileReader.hpp"
+#include <../AprgCommon/AprgCommon/src/AlbaStringHelper.hpp"
+#include <../AprgCommon/AprgCommon/src/PathHandlers/AlbaWindowsPathHandler.hpp"
 
 using namespace alba;
 using namespace alba::stringHelper;

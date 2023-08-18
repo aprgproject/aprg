@@ -1,6 +1,7 @@
-#include "../Checkers.hpp"
-#include "fixtures/ModuleTest.hpp"
-#include "gtest/gtest.h"
+#include <Checkers.hpp>
+#include <MT/fixtures/ModuleTest.hpp>
+
+#include <gtest/gtest.h>
 
 #include <fstream>
 

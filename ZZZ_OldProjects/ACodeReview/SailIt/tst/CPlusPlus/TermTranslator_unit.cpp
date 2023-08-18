@@ -1,7 +1,8 @@
-#include "../../src/CPlusPlus/Translator/TermTranslator.hpp"
-#include "../Checkers.hpp"
-#include "../MtDirectoryConstants.hpp"
-#include "gtest/gtest.h"
+#include <CPlusPlus/Translator/TermTranslator.hpp>
+#include <Checkers.hpp>
+#include <MtDirectoryConstants.hpp>
+
+#include <gtest/gtest.h>
 
 #include <fstream>
 
@@ -24,7 +25,7 @@ struct TermTranslatorTest : public ::testing::Test {
 TEST_F(TermTranslatorTest, DISABLED_ActualTest) {
     Findings findings;
     DequeOfTerms terms;
-    TermTranslator termTranslator("C:\\APRG\\SailIt\\SailIt\\tst\\Actual.txt", findings, terms);
+    TermTranslator termTranslator(APRG_DIR R"(/ZZZ_OldProjects/ACodeReview/FilesForTests/Actual.txt)", findings, terms);
     termTranslator.readFile();
     // printTerms(terms);
 }

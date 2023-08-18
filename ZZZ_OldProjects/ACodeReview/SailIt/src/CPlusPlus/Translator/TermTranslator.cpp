@@ -1,6 +1,6 @@
 #include "TermTranslator.hpp"
 
-#include "TermListConstants.hpp"
+#include <CPlusPlus/Translator/TermListConstants.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/Math/Helpers/DivisibilityHelpers.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>

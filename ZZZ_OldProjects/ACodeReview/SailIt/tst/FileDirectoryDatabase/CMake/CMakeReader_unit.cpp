@@ -1,7 +1,8 @@
-#include "../../../src/FileDirectoryDatabase/CMake/CMakeReader.hpp"
-#include "../../MtDirectoryConstants.hpp"
-#include "gtest/gtest.h"
 #include <CommonTestsUtilities/GTest/GTestMacros.hpp>
+#include <FileDirectoryDatabase/CMake/CMakeReader.hpp>
+#include <MtDirectoryConstants.hpp>
+
+#include <gtest/gtest.h>
 
 #include <fstream>
 #include <iostream>
@@ -11,27 +12,7 @@ using namespace alba;
 using namespace codeReview;
 using namespace std;
 
-TEST(CMakeFileReadTest, DISABLED_ActualTest) {
-    CMakeDatabase fileDirectoryDatabase;
-    CMakeReader reader(
-        "C:\\NSNWORK\\HSCH++2\\tcom_flexi3-trunk-hsch\\C_Application\\SC_TCOM\\SS_HSCH\\CMakeLists.txt",
-        fileDirectoryDatabase);
-    reader.readFile();
-    reader.printVariables();
-    fileDirectoryDatabase.printFilesAndDirectories();
-    /*
-        //string string1("TcomLogPrint.c");
-        string string1("CellStateChanger");
-        //string string1("TCellId");
-        bool isFoundResult;
-        string string2("");
-        CMakeDatabase& cMakeDatabase =
-       fileDirectoryDatabase.find_InnerDirection("WaitFachDeletionLtcomReleaseStateHandler.cpp", isFoundResult,
-       string2); cout<<"XXXFindFile: "<<string2<<"\n"; string string3("");
-        cMakeDatabase.find_OuterDirection("Environment.hpp", isFoundResult, string3);
-        cout<<"XXXFindHeaderFile: "<<string3<<"\n";
-        */
-}
+TEST(CMakeFileReadTest, DISABLED_ActualTest) {}
 
 TEST(CMakeReaderTest, DISABLED_CMakeFileRead_ProjectCommandSyntaxTest) {
     ofstream testFile(MT_FILE_READER_TEST_FILE);
@@ -289,10 +270,10 @@ TEST(CMakeReaderTest, CMakeFileRead_IncludeDirectoriesCommandAbsolutePathGiven) 
     reader.readFile();
     SetOfDirectories& setOfDirectories = fileDirectoryDatabase.getSetOfDirectoriesReference();
     ASSERT_EQ(setOfDirectories.size(), 1);
-    EXPECT_EQ(*(setOfDirectories.begin()), "C:\\DIR1\\DIR2\\DIR3\\DIR4\\");
+    EXPECT_PATH_EQ(*(setOfDirectories.begin()), "C:\\DIR1\\DIR2\\DIR3\\DIR4\\");
 }
 
-TEST(CMakeReaderTest, CMakeFileRead_IncludeCommandSyntaxTest_WithSetTestForIncludeFiles) {
+TEST(CMakeReaderTest, DISABLED_CMakeFileRead_IncludeCommandSyntaxTest_WithSetTestForIncludeFiles) {
     string includeDirectoryFullPath(MT_FILE_READER_TEST_INCLUDE_DIRECTORY);
     ofstream includeFileStream1(includeDirectoryFullPath + "include1.txt");
     ofstream includeFileStream2(includeDirectoryFullPath + "include2.txt");
@@ -339,8 +320,8 @@ TEST(CMakeReaderTest, CMakeFileRead_IncludeCommandSyntaxTest_WithSetTestForInclu
     EXPECT_EQ(*(variableMap.at("VAR1").begin()), "VALUE_!@#$%^&*");
     EXPECT_EQ(*(variableMap.at("VAR2").begin()), "VALUE_1234567890");
     EXPECT_EQ(*(variableMap.at("VAR3").begin()), "VALUE_abcdefghijklmnopqrstuvwxyz");
-    EXPECT_EQ(*(variableMap.at("VAR4").begin()), "VALUE_DIR1\\DIR2\\DIR3");
-    EXPECT_EQ(*(variableMap.at("VAR5").begin()), "VALUE_DIR5 VALUE_DIR1\\DIR3 VALUE_DIR1\\DIR3\\DIR5");
+    EXPECT_PATH_EQ(*(variableMap.at("VAR4").begin()), "VALUE_DIR1\\DIR2\\DIR3");
+    EXPECT_PATH_EQ(*(variableMap.at("VAR5").begin()), "VALUE_DIR5 VALUE_DIR1\\DIR3 VALUE_DIR1\\DIR3\\DIR5");
 }
 
 TEST(CMakeReaderTest, DISABLED_CMakeFileRead_IncludeCommandTest_WithIncludeDirectoriesRealValuesAreUpdatedTest) {

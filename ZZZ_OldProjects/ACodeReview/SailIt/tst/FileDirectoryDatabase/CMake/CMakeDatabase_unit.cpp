@@ -1,7 +1,8 @@
-#include "../../../src/FileDirectoryDatabase/CMake/CMakeDatabase.hpp"
-#include "../../MtDirectoryConstants.hpp"
-#include "gtest/gtest.h"
 #include <CommonTestsUtilities/GTest/GTestMacros.hpp>
+#include <FileDirectoryDatabase/CMake/CMakeDatabase.hpp>
+#include <MtDirectoryConstants.hpp>
+
+#include <gtest/gtest.h>
 
 #include <fstream>
 #include <iostream>

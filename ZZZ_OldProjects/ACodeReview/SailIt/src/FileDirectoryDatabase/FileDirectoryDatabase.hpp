@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DatabaseTypes.hpp"
+#include <FileDirectoryDatabase/DatabaseTypes.hpp>
 
 #include <ostream>
 

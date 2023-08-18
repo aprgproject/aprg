@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Database/CPlusPlusType.hpp"
+#include <CPlusPlus/Database/CPlusPlusType.hpp>
 #include <Common/Container/AlbaOptional.hpp>
 
 #include <ostream>

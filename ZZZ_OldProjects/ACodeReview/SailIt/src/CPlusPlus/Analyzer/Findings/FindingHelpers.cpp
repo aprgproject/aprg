@@ -1,5 +1,5 @@
-#include "../TermAnalyzer.hpp"
-#include "FindingsToAddHelper.hpp"
+#include <CPlusPlus/Analyzer/Findings/FindingsToAddHelper.hpp>
+#include <CPlusPlus/Analyzer/TermAnalyzer.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <iostream>

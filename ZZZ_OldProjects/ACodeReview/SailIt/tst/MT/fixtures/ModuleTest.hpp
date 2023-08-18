@@ -1,11 +1,12 @@
 #pragma once
 
-#include "../../../src/CPlusPlus/Analyzer/TermAnalyzer.hpp"
-#include "../../../src/CPlusPlus/Database/CPlusPlusDatabase.hpp"
-#include "../../../src/CPlusPlus/Findings/Findings.hpp"
-#include "../../../src/CPlusPlus/Translator/TermTranslator.hpp"
-#include "../../MtDirectoryConstants.hpp"
-#include "gtest/gtest.h"
+#include <CPlusPlus/Analyzer/TermAnalyzer.hpp>
+#include <CPlusPlus/Database/CPlusPlusDatabase.hpp>
+#include <CPlusPlus/Findings/Findings.hpp>
+#include <CPlusPlus/Translator/TermTranslator.hpp>
+#include <MtDirectoryConstants.hpp>
+
+#include <gtest/gtest.h>
 
 struct ModuleTest : public ::testing::Test {
     ModuleTest();

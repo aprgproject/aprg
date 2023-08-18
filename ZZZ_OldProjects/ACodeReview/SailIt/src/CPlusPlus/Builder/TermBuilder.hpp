@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Term/Term.hpp"
-#include "../Utilities.hpp"
+#include <CPlusPlus/Term/Term.hpp>
+#include <CPlusPlus/Utilities.hpp>
 
 namespace codeReview {
 

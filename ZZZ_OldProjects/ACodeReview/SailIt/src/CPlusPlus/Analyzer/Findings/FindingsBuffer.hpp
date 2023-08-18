@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Findings/Findings.hpp"
+#include <CPlusPlus/Findings/Findings.hpp>
 
 #include <vector>
 

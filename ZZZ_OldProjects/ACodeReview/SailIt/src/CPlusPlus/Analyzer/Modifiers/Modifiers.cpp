@@ -1,6 +1,6 @@
-#include "../../Database/CPlusPlusDatabase.hpp"
-#include "../TermAnalyzer.hpp"
-#include "../TermAnalyzerTemplateFunctions.hpp"
+#include <CPlusPlus/Analyzer/TermAnalyzer.hpp>
+#include <CPlusPlus/Analyzer/TermAnalyzerTemplateFunctions.hpp>
+#include <CPlusPlus/Database/CPlusPlusDatabase.hpp>
 
 #include <iostream>
 #include <iterator>

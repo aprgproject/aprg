@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FindingsToAdd.hpp"
+#include <CPlusPlus/Analyzer/Findings/FindingsToAdd.hpp>
 
 namespace codeReview {
 

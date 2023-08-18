@@ -1,6 +1,6 @@
 #include "TermBuilder.hpp"
 
-#include "../Utilities.hpp"
+#include <CPlusPlus/Utilities.hpp>
 
 #include <iostream>
 

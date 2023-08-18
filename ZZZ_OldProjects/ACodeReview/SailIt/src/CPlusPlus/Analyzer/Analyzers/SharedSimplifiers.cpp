@@ -1,8 +1,8 @@
-#include "../../Database/CPlusPlusMacro.hpp"
-#include "../../Term/TermChecker.hpp"
-#include "../Findings/TemporaryFindings.hpp"
-#include "../TermAnalyzer.hpp"
-#include "../TermAnalyzerTemplateFunctions.hpp"
+#include <CPlusPlus/Analyzer/TermAnalyzer.hpp>
+#include <CPlusPlus/Analyzer/TermAnalyzerTemplateFunctions.hpp>
+#include <CPlusPlus/Database/CPlusPlusMacro.hpp>
+#include <CPlusPlus/Analyzer/Findings/TemporaryFindings.hpp>
+#include <CPlusPlus/Term/TermChecker.hpp>
 
 #include <iostream>
 

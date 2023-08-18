@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Finding.hpp"
+#include <CPlusPlus/Findings/Finding.hpp>
 
 #include <map>
 #include <string>

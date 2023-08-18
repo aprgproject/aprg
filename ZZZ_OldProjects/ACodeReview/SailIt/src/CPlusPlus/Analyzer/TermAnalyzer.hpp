@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../Utilities.hpp"
-#include "Findings/FindingsBuffer.hpp"
-#include "Findings/FindingsToAdd.hpp"
-#include "Loopers/Looper.hpp"
+#include <CPlusPlus/Analyzer/Findings/FindingsBuffer.hpp>
+#include <CPlusPlus/Analyzer/Findings/FindingsToAdd.hpp>
+#include <CPlusPlus/Analyzer/Loopers/Looper.hpp>
+#include <CPlusPlus/Utilities.hpp>
 #include <Common/Container/AlbaOptional.hpp>
 
 #include <string>

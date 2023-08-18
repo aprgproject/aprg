@@ -1,8 +1,8 @@
-#include "../../Database/CPlusPlusDatabase.hpp"
-#include "../../Term/TermChecker.hpp"
-#include "../Findings/TemporaryFindings.hpp"
-#include "../TermAnalyzer.hpp"
-#include "../TermAnalyzerTemplateFunctions.hpp"
+#include <CPlusPlus/Analyzer/TermAnalyzer.hpp>
+#include <CPlusPlus/Analyzer/TermAnalyzerTemplateFunctions.hpp>
+#include <CPlusPlus/Database/CPlusPlusDatabase.hpp>
+#include <CPlusPlus/Analyzer/Findings/TemporaryFindings.hpp>
+#include <CPlusPlus/Term/TermChecker.hpp>
 
 #include <iostream>
 
@@ -28,7 +28,8 @@ bool TermAnalyzer::isModifiedDueToFunctionDeclaration(Looper const& startLooper)
     TemporaryFindings temporaryFindings(m_findingsBuffer);
     Looper compareLooper(startLooper);
     array<TermChecker, 3> const termCheckers{
-        TermChecker(TermCheckerType::isCPlusPlusType), TermChecker(Term(TermType::WhiteSpace)), TermChecker(Term(TermType::Identifier))};
+        TermChecker(TermCheckerType::isCPlusPlusType), TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker(Term(TermType::Identifier))};
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         Looper afterOpeningParenthesis(compareLooper);
         Looper afterClosingParenthesis(compareLooper);
@@ -102,9 +103,11 @@ bool TermAnalyzer::isModifiedDueToFunctionDefinition(Looper const& startLooper) 
 void TermAnalyzer::fillFunctionSignatureFromFunctionDeclaration(
     Looper const& startLooper, CPlusPlusFunctionSignature& cPlusPlusFunctionSignature) {
     array<TermChecker, 3> const parameterWithName{
-        TermChecker(TermCheckerType::isCPlusPlusType), TermChecker(Term(TermType::WhiteSpace)), TermChecker(Term(TermType::Identifier))};
+        TermChecker(TermCheckerType::isCPlusPlusType), TermChecker(Term(TermType::WhiteSpace)),
+        TermChecker(Term(TermType::Identifier))};
     array<TermChecker, 1> const parameterWithoutName{TermChecker(TermCheckerType::isCPlusPlusType)};
-    array<TermChecker, 2> const separator{TermChecker(Term(TermType::Operator, ",")), TermChecker(Term(TermType::WhiteSpace))};
+    array<TermChecker, 2> const separator{
+        TermChecker(Term(TermType::Operator, ",")), TermChecker(Term(TermType::WhiteSpace))};
     simplifyExpressions(startLooper);
     bool isNextParameterExpected(true);
     Looper parameterLooper(startLooper);
@@ -144,7 +147,8 @@ void TermAnalyzer::fillFunctionSignatureFromFunctionDeclaration(
 void TermAnalyzer::fillFunctionSignatureFromFunctionCall(
     Looper const& startLooper, CPlusPlusFunctionSignature& cPlusPlusFunctionSignature) {
     array<TermChecker, 1> const parameter{TermChecker(TermCheckerType::isValue)};
-    array<TermChecker, 2> const separator{TermChecker(Term(TermType::Operator, ",")), TermChecker(Term(TermType::WhiteSpace))};
+    array<TermChecker, 2> const separator{
+        TermChecker(Term(TermType::Operator, ",")), TermChecker(Term(TermType::WhiteSpace))};
     simplifyExpressions(startLooper);
     bool isNextParameterExpected(true);
     Looper parameterLooper(startLooper);
