@@ -63,7 +63,7 @@ jobs:
   buildAndTest:
     name: Test ${{ matrix.project }} on ${{ matrix.envConfig.name }}
     needs: determineCppProjects
-    runs-on: ${{ startsWith('${{ matrix.envConfig.name }}', 'Windows') && 'windows-latest' || startsWith('${{ matrix.envConfig.name }}', 'Ubuntu') && 'ubuntu-latest' || 'macos-latest'}}
+    runs-on: ${{ startsWith(${{ matrix.envConfig.name }}, 'Windows') && 'windows-latest' || startsWith(${{ matrix.envConfig.name }}, 'Ubuntu') && 'ubuntu-latest' || 'macos-latest'}}
     strategy:
       fail-fast: false
       matrix:
@@ -98,6 +98,8 @@ jobs:
           
       - name: Print Github Event
         run: |
+          echo matrix.project: ${{ matrix.project }}
+          echo matrix.envConfig.name: ${{ matrix.envConfig.name }}
           echo github.event.action: ${{ github.event.action }}
           echo github.event_name: ${{ github.event_name }}
           
