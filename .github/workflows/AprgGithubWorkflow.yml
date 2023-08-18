@@ -61,35 +61,14 @@ jobs:
 
 
   buildAndTest:
-    name: Test ${{ matrix.project }} on ${{ matrix.envConfig.name }}
+    name: Test ${{ matrix.project }} on ${{ matrix.configurationName }}
     needs: determineCppProjects
-    runs-on: ${{ startsWith(matrix.envConfig.name, 'Windows') && 'windows-latest' || startsWith(matrix.envConfig.name, 'Ubuntu') && 'ubuntu-latest' || 'macos-latest'}}
+    runs-on: ${{ startsWith(matrix.configurationName, 'Windows') && 'windows-latest' || startsWith(matrix.configurationName, 'Ubuntu') && 'ubuntu-latest' || 'macos-latest'}}
     strategy:
       fail-fast: false
       matrix:
         project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
-        envConfig: 
-        - {
-            name: "WindowsLatestMsvc",
-            os: windows-latest
-          }
-        - {
-            name: "WindowsLatestMingw",
-            os: windows-latest
-          }
-        - {
-            name: "UbuntuLatestGcc",
-            os: ubuntu-latest
-          }
-        - {
-            name: "UbuntuLatestClang",
-            os: ubuntu-latest
-          }
-# MAC OS is not supported
-#        - {
-#            name: "MacOSLatestClang",
-#            os: macos-latest
-#          }
+        configurationName: ["WindowsLatestMsvc", "WindowsLatestMingw", "UbuntuLatestGcc", "UbuntuLatestClang"] #"MacOSLatestClang"
           
     steps:
     
@@ -99,7 +78,7 @@ jobs:
       - name: Print Github Event
         run: |
           echo matrix.project: ${{ matrix.project }}
-          echo matrix.envConfig.name: ${{ matrix.envConfig.name }}
+          echo matrix.configurationName: ${{ matrix.configurationName }}
           echo github.event.action: ${{ github.event.action }}
           echo github.event_name: ${{ github.event_name }}
           
@@ -115,7 +94,7 @@ jobs:
           # echo "Finished visual studio environment script."
 
       - name: Install dependencies on ubuntu/gcc
-        if: matrix.envConfig.name == 'UbuntuLatestGcc'
+        if: matrix.configurationName == 'UbuntuLatestGcc'
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake
@@ -124,7 +103,7 @@ jobs:
           gcc --version
 
       - name: Install dependencies on ubuntu/clang
-        if: matrix.envConfig.name == 'UbuntuLatestClang'
+        if: matrix.configurationName == 'UbuntuLatestClang'
         run: |
           sudo apt-get update
           sudo apt-get install ninja-build cmake
@@ -155,28 +134,28 @@ jobs:
           echo "buildAndRunScriptPath=$buildAndRunScriptPath" >> "$GITHUB_ENV"
             
       - name: Configure for windows/msvc
-        if: matrix.envConfig.name == 'WindowsLatestMsvc'
+        if: matrix.configurationName == 'WindowsLatestMsvc'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" configureWithDefaultCompiler "${{ env.buildDirectory }}" "${{ env.buildType }}" "Visual Studio 17 2022"
             
       - name: Configure for windows/mingw
-        if: matrix.envConfig.name == 'WindowsLatestMingw'
+        if: matrix.configurationName == 'WindowsLatestMingw'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" configureWithDefaultCompiler "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
       - name: Configure for ubuntu/gcc
-        if: matrix.envConfig.name == 'UbuntuLatestGcc'
+        if: matrix.configurationName == 'UbuntuLatestGcc'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" configureWithGcc "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
       - name: Configure for ubuntu/clang
-        if: matrix.envConfig.name == 'UbuntuLatestClang'
+        if: matrix.configurationName == 'UbuntuLatestClang'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
