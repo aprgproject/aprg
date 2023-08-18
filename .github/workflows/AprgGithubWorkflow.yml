@@ -120,7 +120,7 @@ jobs:
           sudo apt-get install p7zip-full
 
       - name: Install 7zip
-        if: startsWith(matrix.configurationName, 'Ubuntu') && matrix.project == 'AprgFileExtractor/AprgFileExtractor'
+        if: startsWith(matrix.configurationName, 'Ubuntu') && matrix.project == 'Boost/Boost'
         run: |
           sudo apt-get update
           sudo apt-get install libboost-all-dev
