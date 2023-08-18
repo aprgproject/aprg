@@ -14,14 +14,16 @@ source "$scriptDirectory/ExcludedConfigurations.sh"
 # Get C/C++ projects by git changes or searching on directories.
 if [[ -z $userInput ]]; then
     scriptPrint "$scriptName" "$LINENO" "The userInput is empty so getting C/C++ projects from Git changes."
-    chmod +x "$scriptDirectory/DetectGitChanges.sh"
-    "$scriptDirectory/DetectGitChanges.sh"
-    read -r cppProjects < "$aprgDirectory/ZZZ_Temp/cppProjectsFromGit.txt"
+    cppProjectsFromGit=""
+    source "$scriptDirectory/DetectGitChanges.sh"
+    detectGitChanges
+    cppProjects=cppProjectsFromGit
 else
     scriptPrint "$scriptName" "$LINENO" "The userInput is [$userInput], proceeding to search C/C++ projects."
-    chmod +x "$scriptDirectory/FindCppProjects.sh"
-    "$scriptDirectory/FindCppProjects.sh" "$userInput"
-    read -r cppProjects < "$aprgDirectory/ZZZ_Temp/cppProjectsFound.txt"
+    cppProjectsFound=""
+    source "$scriptDirectory/FindCppProjects.sh"
+    findCppProjects "$userInput"
+    cppProjects=cppProjectsFound
 fi
 
 # Put AprgCommon if empty
@@ -34,7 +36,6 @@ fi
 scriptPrint "$scriptName" "$LINENO" "The cppProjects are: [$cppProjects]"
 # shellcheck disable=SC2154
 echo "APRG_CPP_DIRECTORIES=[$cppProjects]" >> "$GITHUB_OUTPUT"
-
 
 # Save Excluded Configurations in Github Workflow
 scriptPrint "$scriptName" "$LINENO" "The excludedConfigurations are: [$excludedConfigurations]"
