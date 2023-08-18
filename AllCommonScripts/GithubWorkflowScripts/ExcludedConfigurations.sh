@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export excludedConfigurations='
+excludedConfigurations='
 {"project": "Chess/ChessPeek/ChessPeek", "configurationName": "UbuntuLatestGcc"},
 {"project": "Chess/ChessPeek/ChessPeek", "configurationName": "UbuntuLatestClang"},
 {"project": "Chess/ChessUtilities/ChessUtilities", "configurationName": "UbuntuLatestGcc"},
@@ -8,5 +8,7 @@ export excludedConfigurations='
 {"project": "ZZZ_OldProjects/FesterRobot/FesterRobot", "configurationName": "UbuntuLatestGcc"},
 {"project": "ZZZ_OldProjects/FesterRobot/FesterRobot", "configurationName": "UbuntuLatestClang"}
 '
+excludedConfigurations=$(echo "$excludedConfigurations" | tr '\n' ' ')
 
+export excludedConfigurations
 
