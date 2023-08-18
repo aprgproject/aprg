@@ -16,6 +16,7 @@ env:
   buildType: "Debug" #buildType: "Release"
   buildDirectory: "GithubBuild"
   windowsEnvironmentScript: "C:/Program Files (x86)/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+  operatingSystem: ${{ startsWith('${{ matrix.envConfig.name }}', 'Windows') && "windows-latest" || startsWith('${{ matrix.envConfig.name }}', 'Ubuntu') && "ubuntu-latest" || ""}}
 
 jobs:
 
@@ -63,7 +64,7 @@ jobs:
   buildAndTest:
     name: Test ${{ matrix.project }} on ${{ matrix.envConfig.name }}
     needs: determineCppProjects
-    runs-on: ${{ matrix.envConfig.os }}
+    runs-on: ${{ env.operatingSystem }}
     strategy:
       fail-fast: false
       matrix:
