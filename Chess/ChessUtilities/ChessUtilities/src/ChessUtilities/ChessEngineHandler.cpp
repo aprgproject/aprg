@@ -146,8 +146,9 @@ void ChessEngineHandler::initializeEngine() {
         InitializeSecurityDescriptor(&securityDescriptor, SECURITY_DESCRIPTOR_REVISION);
         SetSecurityDescriptorDacl(&securityDescriptor, 1, NULL, 0);
         securityAttributes.lpSecurityDescriptor = &securityDescriptor;
-    } else
+    } else {
         securityAttributes.lpSecurityDescriptor = NULL;
+    }
 
     securityAttributes.nLength = sizeof(SECURITY_ATTRIBUTES);
     securityAttributes.bInheritHandle = 1;  // allow inheritable handles
