@@ -64,7 +64,7 @@ jobs:
   buildAndTest:
     name: Test ${{ matrix.project }} on ${{ matrix.envConfig.name }}
     needs: determineCppProjects
-    runs-on: ${{ env.operatingSystem }}
+    runs-on: "${{ env.operatingSystem }}"
     strategy:
       fail-fast: false
       matrix:
