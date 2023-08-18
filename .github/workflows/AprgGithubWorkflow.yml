@@ -5,9 +5,18 @@ on:
       - '**'
   workflow_dispatch:
     inputs:
-      cppCMakeProject:
+      cppCMakeProjects:
         description: 'C/C++ CMake Project (use "all" for all projects)'
         required: true
+        default: 'all'
+      cppCMakeBuildType:
+        description: 'Build Type to use for C/C++ CMake Project'
+        required: true
+        default: 'Debug'
+        type: choice
+        options:
+        - Debug
+        - Release
 
 env:
   checkShellScriptsRelativePath: "AllCommonScripts/ScriptsForShellScripts/checkShellScripts.sh"
@@ -58,7 +67,7 @@ jobs:
           determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
           echo "determineCppProjectsPath: [$determineCppProjectsPath]"
           chmod +x "$determineCppProjectsPath"
-          "$determineCppProjectsPath" "${{ inputs.cppCMakeProject }}"
+          "$determineCppProjectsPath" "${{ inputs.cppCMakeProjects }}"
 
 
   buildAndTest:
