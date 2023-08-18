@@ -17,13 +17,13 @@ if [[ -z $userInput ]]; then
     cppProjectsFromGit=""
     source "$scriptDirectory/DetectGitChanges.sh"
     detectGitChanges
-    cppProjects=cppProjectsFromGit
+    cppProjects=$cppProjectsFromGit
 else
     scriptPrint "$scriptName" "$LINENO" "The userInput is [$userInput], proceeding to search C/C++ projects."
     cppProjectsFound=""
     source "$scriptDirectory/FindCppProjects.sh"
     findCppProjects "$userInput"
-    cppProjects=cppProjectsFound
+    cppProjects=$cppProjectsFound
 fi
 
 # Put AprgCommon if empty
