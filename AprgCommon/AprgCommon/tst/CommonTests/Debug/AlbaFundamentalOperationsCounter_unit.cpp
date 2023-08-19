@@ -116,7 +116,6 @@ TEST(AlbaFundamentalOperationsCounterTest, MoveConstructionIsCounted) {
         "copyAssignmentCount: 0 moveConstructionCount: 1 moveAssignmentCount: 0",
         CountsForSampleClass::getInstance().getReport());
 #endif
-    
 }
 
 TEST(AlbaFundamentalOperationsCounterTest, MoveAssignmentIsCounted) {
@@ -137,7 +136,6 @@ TEST(AlbaFundamentalOperationsCounterTest, MoveAssignmentIsCounted) {
         "copyAssignmentCount: 0 moveConstructionCount: 1 moveAssignmentCount: 1",
         CountsForSampleClass::getInstance().getReport());
 #endif
-    
 }
 
 TEST(AlbaFundamentalOperationsCounterTest, ObjectIsConstructedOnceDueToRvo) {
@@ -156,7 +154,6 @@ TEST(AlbaFundamentalOperationsCounterTest, ObjectIsConstructedOnceDueToRvo) {
         "copyAssignmentCount: 0 moveConstructionCount: 1 moveAssignmentCount: 0",
         CountsForSampleClass::getInstance().getReport());
 #endif
-    
 }
 
 }  // namespace alba

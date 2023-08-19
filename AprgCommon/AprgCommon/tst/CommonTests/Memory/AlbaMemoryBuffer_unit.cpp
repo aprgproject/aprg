@@ -224,7 +224,6 @@ TEST(AlbaMemoryBufferTest, SaveObjectWorksOnStandardLayoutTypes) {
     standardLayoutInput.field2 = 'A';
     standardLayoutInput.field3 = 0xA1BA;
 
-
     buffer.saveObject<SampleStandardLayoutClass>(standardLayoutInput);
 
     SampleStandardLayoutClass& output(buffer.retrieveObjectAsReference<SampleStandardLayoutClass>());

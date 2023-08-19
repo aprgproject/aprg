@@ -5,7 +5,7 @@
 namespace alba {
 
 #define ALBA_SUCCESSFUL_EXIT std::exit(EXIT_SUCCESS)  // same with std::exit(0)
-#define ALBA_FAILURE_EXIT std::exit(EXIT_FAILURE)  // same with std::exit(1)
+#define ALBA_FAILURE_EXIT std::exit(EXIT_FAILURE)     // same with std::exit(1)
 //#define ALBA_SUCCESSFUL_QUICK_EXIT std::quick_exit(EXIT_SUCCESS) // no impl in standard?
 //#define ALBA_FAILURE_QUICK_EXIT std::quick_exit(EXIT_FAILURE)
 #define ALBA_ABORT std::abort()

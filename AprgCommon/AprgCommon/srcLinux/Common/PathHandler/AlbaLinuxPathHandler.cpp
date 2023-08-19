@@ -45,7 +45,7 @@ double AlbaLinuxPathHandler::getFileSizeEstimate() const {
     double fileSize(0);
     if (0 == stat(getFullPath().c_str(), &fileStatus)) {
         fileSize = fileStatus.st_size;
-    } else if (errno !=0 ){
+    } else if (errno != 0) {
         cout << "Error in AlbaLinuxPathHandler::getFileSizeEstimate() path:[" << getFullPath()
              << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
     }
@@ -59,7 +59,7 @@ AlbaDateTime AlbaLinuxPathHandler::getFileCreationTime() const {
         timespec timeSpec{};
         clock_gettime(CLOCK_REALTIME, &timeSpec);
         fileCreationTime = convertSystemTimeToAlbaDateTime(timeSpec);
-    } else if (errno !=0 ){
+    } else if (errno != 0) {
         cout << "Error in AlbaLinuxPathHandler::getFileCreationTime() path:[" << getFullPath()
              << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
     }
@@ -70,8 +70,7 @@ void AlbaLinuxPathHandler::createDirectoriesForNonExisitingDirectories() const {
     string fullPath(getFullPath());
     size_t index = 0, length = static_cast<size_t>(fullPath.length());
     while (index < length) {
-        size_t indexWithSlashCharacter =
-            static_cast<size_t>(fullPath.find_first_of(m_slashCharacterString, index));
+        size_t indexWithSlashCharacter = static_cast<size_t>(fullPath.find_first_of(m_slashCharacterString, index));
         if (isNpos(static_cast<int>(indexWithSlashCharacter))) {
             break;
         }
@@ -155,8 +154,8 @@ bool AlbaLinuxPathHandler::copyToNewFile(string_view newFilePath) {
     if (0 == stat(getFullPath().c_str(), &statBuffer)) {
         writeFileDescriptor = open(newFilePath.data(), O_WRONLY | O_CREAT, statBuffer.st_mode);
         if (isFile()) {
-            int errorReturnValue = static_cast<int>(sendfile(
-                writeFileDescriptor, readFileDescriptor, &offset, static_cast<size_t>(statBuffer.st_size)));
+            int errorReturnValue = static_cast<int>(
+                sendfile(writeFileDescriptor, readFileDescriptor, &offset, static_cast<size_t>(statBuffer.st_size)));
             isSuccessful = errorReturnValue != -1;
             if (!isSuccessful) {
                 cout << "Error in AlbaLinuxPathHandler::copyToNewFile() path:[" << getFullPath() << "] newFilePath:["
@@ -166,7 +165,7 @@ bool AlbaLinuxPathHandler::copyToNewFile(string_view newFilePath) {
             }
         }
         close(writeFileDescriptor);
-    } else if (errno !=0 ){
+    } else if (errno != 0) {
         cout << "Error in AlbaLinuxPathHandler::copyToNewFile() path:[" << getFullPath() << "] 'stat' errno value:["
              << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
     }
@@ -256,8 +255,8 @@ void AlbaLinuxPathHandler::save(string_view path) {
 }
 
 void AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth(
-    string_view currentDirectory, string_view wildCardSearch, ListOfPaths& listOfFiles,
-    ListOfPaths& listOfDirectories, int depth) const {
+    string_view currentDirectory, string_view wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories,
+    int depth) const {
     if (depth == 0) {
         return;
     }
@@ -269,7 +268,7 @@ void AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth(
     if (directoryStream != nullptr) {
         loopAllFilesAndDirectoriesInDirectoryStream(
             directoryStream, currentDirectory, wildCardSearch, listOfFiles, listOfDirectories, depth);
-    } else if (errno !=0 ){
+    } else if (errno != 0) {
         cout << "Error in AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth() currentDirectory:["
              << currentDirectory << "] 'opendir' errno value:[" << errno << "] error message:["
              << getErrorMessage(errno) << "]\n";
@@ -300,7 +299,7 @@ void AlbaLinuxPathHandler::loopAllFilesAndDirectoriesInDirectoryStream(
                     listOfFiles.emplace(fullFileOrDirectoryName);
                 }
             }
-        } else if (errno !=0 ){
+        } else if (errno != 0) {
             cout << "Error in AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth() currentDirectory:["
                  << currentDirectory << "] 'readdir' errno value:[" << errno << "] error message:["
                  << getErrorMessage(errno) << "]\n";
@@ -314,7 +313,7 @@ bool AlbaLinuxPathHandler::isPathADirectory(string_view fileOrDirectoryName) con
         struct stat statBuffer {};
         if (0 == stat(fileOrDirectoryName.data(), &statBuffer)) {
             result = S_ISDIR(statBuffer.st_mode);
-        } else if (errno !=0 ){
+        } else if (errno != 0) {
             cout << "Error in AlbaLinuxPathHandler::isPathADirectory() path:[" << getFullPath()
                  << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
         }
@@ -330,21 +329,22 @@ bool AlbaLinuxPathHandler::canBeLocated(string_view fullPath) const {
 bool AlbaLinuxPathHandler::isSlashNeededAtTheEnd(string_view correctedPath, string_view originalPath) const {
     bool result = false;
     if (!correctedPath.empty()) {
-		bool isCorrectPathLastCharacterNotASlash(correctedPath[correctedPath.length() - 1] != m_slashCharacterString[0]);
-		if (isCorrectPathLastCharacterNotASlash) {
-			if (canBeLocated(correctedPath)) {
-				if (isPathADirectory(correctedPath)) {
-					result = true;
-				}
-			} else {
-				bool isOriginalPathLastCharacterASlash(
-					originalPath[originalPath.length() - 1] == m_slashCharacterString[0]);
-				if (isOriginalPathLastCharacterASlash) {
-					result = true;
-				}
-			}
-		}
-	}
+        bool isCorrectPathLastCharacterNotASlash(
+            correctedPath[correctedPath.length() - 1] != m_slashCharacterString[0]);
+        if (isCorrectPathLastCharacterNotASlash) {
+            if (canBeLocated(correctedPath)) {
+                if (isPathADirectory(correctedPath)) {
+                    result = true;
+                }
+            } else {
+                bool isOriginalPathLastCharacterASlash(
+                    originalPath[originalPath.length() - 1] == m_slashCharacterString[0]);
+                if (isOriginalPathLastCharacterASlash) {
+                    result = true;
+                }
+            }
+        }
+    }
     return result;
 }
 

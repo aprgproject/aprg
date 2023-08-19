@@ -16,4 +16,4 @@ string getErrorMessage(int const localErrnoCopy) {
     return string(str);
 }
 
-}  // namespace alba
+}  // namespace alba::AlbaLinuxHelper
