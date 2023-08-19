@@ -2,8 +2,9 @@
 
 # Set variable values
 scriptPath=$(realpath "$0")
-scriptName=$(basename "$(realpath "$0")")
-aprgDirectory=$(realpath "$(dirname "$0")/../../")
+scriptDirectory=$(dirname "$scriptPath")
+scriptName=$(basename "$scriptPath")
+aprgDirectory=$(realpath "$scriptDirectory/../../")
 immediateDirectoryName=$(basename "$(pwd)")
 numberOfCores=$(nproc)
 scriptOption="$1"

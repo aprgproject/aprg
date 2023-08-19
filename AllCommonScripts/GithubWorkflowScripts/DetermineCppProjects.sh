@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # Set variable values
-scriptDirectory=$(dirname "$(realpath "$0")")
-scriptName=$(basename "$(realpath "$0")")
-aprgDirectory=$(realpath "$(dirname "$0")/../../")
+scriptPath=$(realpath "$0")
+scriptDirectory=$(dirname "$scriptPath")
+scriptName=$(basename "$scriptPath")
+aprgDirectory=$(realpath "$scriptDirectory/../../")
 userInput="$1"
 cppProjects=""
 

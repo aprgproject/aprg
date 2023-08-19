@@ -1,8 +1,10 @@
 #!/bin/bash
 
 # Set variable values
-scriptName=$(basename "$(realpath "$0")")
-aprgDirectory=$(realpath "$(dirname "$0")/../../")
+scriptPath=$(realpath "$0")
+scriptDirectory=$(dirname "$scriptPath")
+scriptName=$(basename "$scriptPath")
+aprgDirectory=$(realpath "$scriptDirectory/../../")
 directoryToConvertAllFiles="$1"
 aprgShellScriptsPathSkipRegex=""
 
