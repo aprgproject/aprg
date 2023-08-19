@@ -106,10 +106,14 @@ jobs:
           # cmd "${{ env.windowsEnvironmentScript }}"
           # echo "Finished visual studio environment script."
 
+      - name: Update APT for dependencies in Ubuntu
+        if: startsWith(matrix.configurationName, 'Ubuntu')
+        run: |
+          sudo apt-get update
+
       - name: Install dependencies on Ubuntu/Gcc
         if: matrix.configurationName == 'UbuntuLatestGcc'
         run: |
-          sudo apt-get update
           sudo apt-get install ninja-build cmake
           ninja --version
           cmake --version
@@ -118,7 +122,6 @@ jobs:
       - name: Install dependencies on Ubuntu/Clang
         if: matrix.configurationName == 'UbuntuLatestClang'
         run: |
-          sudo apt-get update
           sudo apt-get install ninja-build cmake
           ninja --version
           cmake --version
@@ -135,7 +138,6 @@ jobs:
       - name: Install 7zip
         if: startsWith(matrix.configurationName, 'Ubuntu') && matrix.project == 'AprgFileExtractor/AprgFileExtractor'
         run: |
-          sudo apt-get update
           sudo apt-get install p7zip-full
           echo "The dpkg details:"
           dpkg -l | grep p7zip
@@ -143,10 +145,16 @@ jobs:
       - name: Install Boost on Ubuntu
         if: startsWith(matrix.configurationName, 'Ubuntu') && (matrix.project == 'Boost/Boost' || matrix.project == 'AprgGnuPlot/AprgGnuPlot')
         run: |
-          sudo apt-get update
           sudo apt-get install libboost-all-dev
           echo "The dpkg details:"
           dpkg -l | grep libboost-all-dev
+
+      - name: Install GSL on Ubuntu
+        if: startsWith(matrix.configurationName, 'Ubuntu') && matrix.project == 'AprgGsl/AprgGsl'
+        run: |
+          sudo apt-get install libgsl-dev
+          echo "The dpkg details:"
+          dpkg -l | grep libgsl-dev
           
       - name: Prepare aprg directories and scripts
         shell: bash
