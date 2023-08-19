@@ -22,6 +22,6 @@ add_executable(${OUTFILE} ${APRG_COMMON_SOURCES_AND_TESTS})
 include_directories(${APRG_COMMON_INCLUDE_DIRECTORIES} ${APRG_COMMON_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
 target_link_libraries(${OUTFILE} ${APRG_GTEST_DEPENDENCIES})
 add_test(${OUTFILE} ${OUTFILE})
-install(TARGETS ${OUTFILE} DESTINATION bin)
+install(TARGETS ${OUTFILE} DESTINATION runDirectory)
 include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
 

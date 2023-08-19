@@ -33,7 +33,8 @@ scriptPrint "$scriptName" "$LINENO" "The immediateDirectoryName is [$immediateDi
 cd ..
 mkdir -p "$buildDirectoryName"
 cd "$buildDirectoryName"
-scriptPrint "$scriptName" "$LINENO" "The build path is [$(pwd)]"
+scriptPrint "$scriptName" "$LINENO" "The build path is [$(pwd)] and the output of ls:"
+ls -la
 
 # Enable the "exit on error" option to automatically stop if there is a failure
 set -e
@@ -86,7 +87,7 @@ elif [ "$scriptOption" == "install" ]; then
 elif [ "$scriptOption" == "run" ]; then
     gtestFilter="$argument1"
     scriptPrint "$scriptName" "$LINENO" "The gtestFilter is [$gtestFilter]."
-    cd install/bin
+    cd install/runDirectory
     scriptPrint "$scriptName" "$LINENO" "The current directory is [$(pwd)] and the output of ls:"
     ls -la
     for fileInBin in ./*; do

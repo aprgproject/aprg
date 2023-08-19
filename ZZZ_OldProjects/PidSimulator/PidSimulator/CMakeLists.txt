@@ -36,5 +36,5 @@ else()
     include_directories(${PID_SIMULATOR_INCLUDE_DIRECTORIES})
     target_link_libraries(${OUTFILE} APRG_GRAPH APRG_ALGEBRA APRG_GEOMETRY APRG_BITMAP APRG_COMMON) # add real time library
 endif()
-install(TARGETS ${OUTFILE} DESTINATION bin)
+install(TARGETS ${OUTFILE} DESTINATION runDirectory)
 include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)

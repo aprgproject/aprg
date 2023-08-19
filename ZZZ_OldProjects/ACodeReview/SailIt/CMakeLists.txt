@@ -32,7 +32,7 @@ else()
     include_directories(${APRG_CODE_REVIEW_INCLUDE_DIRECTORIES})
     target_link_libraries(${OUTFILE} APRG_COMMON)
 endif()
-install(TARGETS ${OUTFILE} DESTINATION bin)
+install(TARGETS ${OUTFILE} DESTINATION runDirectory)
 include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
 
 

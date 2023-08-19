@@ -34,7 +34,7 @@ else()
     include_directories(${APRG_FILE_EXTRACTOR_INCLUDE_DIRECTORIES})
     target_link_libraries(${OUTFILE} APRG_COMMON APRG_GREP_STRING_EVALUATOR)
 endif()
-install(TARGETS ${OUTFILE} DESTINATION bin)
+install(TARGETS ${OUTFILE} DESTINATION runDirectory)
 include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
 
 

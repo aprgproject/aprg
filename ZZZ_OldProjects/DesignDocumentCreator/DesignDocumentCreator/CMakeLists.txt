@@ -34,5 +34,5 @@ include_directories(
 )
 target_link_libraries(${OUTFILE} APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
 add_test(${OUTFILE} ${OUTFILE})
-install(TARGETS ${OUTFILE} DESTINATION bin)
+install(TARGETS ${OUTFILE} DESTINATION runDirectory)
 include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
