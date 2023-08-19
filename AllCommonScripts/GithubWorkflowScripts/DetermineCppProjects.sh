@@ -11,6 +11,10 @@ cppProjects=""
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 excludedConfigurations=""
 source "$scriptDirectory/ExcludedConfigurations.sh"
+projectsWithBoost=""
+source "$scriptDirectory/ProjectsWithBoost.sh"
+projectsWithGsl=""
+source "$scriptDirectory/ProjectsWithGsl.sh"
 
 # Get C/C++ projects by git changes or searching on directories.
 if [[ -z $userInput ]]; then
@@ -42,3 +46,13 @@ echo "APRG_CPP_DIRECTORIES=[$cppProjects]" >> "$GITHUB_OUTPUT"
 scriptPrint "$scriptName" "$LINENO" "The excludedConfigurations are: [$excludedConfigurations]"
 # shellcheck disable=SC2154
 echo "APRG_EXCLUDED_CONFIGURATIONS=[$excludedConfigurations]" >> "$GITHUB_OUTPUT"
+
+# Save Excluded Configurations in Github Workflow
+scriptPrint "$scriptName" "$LINENO" "The projectsWithBoost are: [$projectsWithBoost]"
+# shellcheck disable=SC2154
+echo "APRG_PROJECTS_WITH_BOOST=[$projectsWithBoost]" >> "$GITHUB_OUTPUT"
+
+# Save Excluded Configurations in Github Workflow
+scriptPrint "$scriptName" "$LINENO" "The projectsWithGsl are: [$projectsWithGsl]"
+# shellcheck disable=SC2154
+echo "APRG_PROJECTS_WITH_GSL=[$projectsWithGsl]" >> "$GITHUB_OUTPUT"

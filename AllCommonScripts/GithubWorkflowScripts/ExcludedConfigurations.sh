@@ -12,6 +12,7 @@ excludedConfigurations='
 {"project": "ZZZ_OldProjects/FesterRobot/FesterRobot", "configurationName": "UbuntuLatestGcc"},
 {"project": "ZZZ_OldProjects/FesterRobot/FesterRobot", "configurationName": "UbuntuLatestClang"}
 '
+
 excludedConfigurations=$(echo "$excludedConfigurations" | tr '\n' ' ')
 
 export excludedConfigurations
