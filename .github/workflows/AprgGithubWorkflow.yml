@@ -52,8 +52,10 @@ jobs:
     name: Determine CPP Projects
     runs-on: ubuntu-latest
     outputs:
-      projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES }}
-      excludedConfigurations: ${{ steps.idOfGetCppProjectStep.outputs.APRG_EXCLUDED_CONFIGURATIONS }}
+      projectsToBuild: ${{ fromJSON(steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES) }}
+      excludedConfigurations: ${{ fromJSON(steps.idOfGetCppProjectStep.outputs.APRG_EXCLUDED_CONFIGURATIONS) }}
+      projectsWithBoost: ${{ fromJSON(steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_BOOST) }}
+      projectsWithGsl: ${{ fromJSON(steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_GSL) }}
     steps:
       - name: Checkout code for changes checking
         id: idOfCheckout
@@ -77,9 +79,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
+        project: ${{ needs.determineCppProjects.outputs.projectsToBuild }}
         configurationName: ["WindowsLatestMsvc", "WindowsLatestMingw", "UbuntuLatestGcc", "UbuntuLatestClang"] #"MacOSLatestClang"
-        exclude: ${{ fromJSON(needs.determineCppProjects.outputs.excludedConfigurations) }}
+        exclude: ${{ needs.determineCppProjects.outputs.excludedConfigurations }}
         
     steps:
     
@@ -143,14 +145,14 @@ jobs:
           dpkg -l | grep p7zip
 
       - name: Install Boost on Ubuntu
-        if: startsWith(matrix.configurationName, 'Ubuntu') && (matrix.project == 'Boost/Boost' || matrix.project == 'AprgGnuPlot/AprgGnuPlot')
+        if: startsWith(matrix.configurationName, 'Ubuntu') && contains(needs.determineCppProjects.outputs.projectsWithBoost, matrix.project)
         run: |
           sudo apt-get install libboost-all-dev
           echo "The dpkg details:"
           dpkg -l | grep libboost-all-dev
 
       - name: Install GSL on Ubuntu
-        if: startsWith(matrix.configurationName, 'Ubuntu') && matrix.project == 'AprgGsl/AprgGsl'
+        if: startsWith(matrix.configurationName, 'Ubuntu') && contains(needs.determineCppProjects.outputs.projectsWithGsl, matrix.project)
         run: |
           sudo apt-get install libgsl-dev
           echo "The dpkg details:"
