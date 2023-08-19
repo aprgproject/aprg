@@ -1,10 +1,12 @@
 #include <Algorithm/Sort/LargeSorter/AlbaLargeSorter.hpp>
+#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/PathHandler/AlbaPathHandler.hpp>
 #include <Common/Time/AlbaLocalTimeHelper.hpp>
 
 #include <gtest/gtest.h>
 
 #include <algorithm>
+#include <cstdlib>
 #include <iostream>
 #include <random>
 #include <set>
@@ -67,35 +69,47 @@ istream& operator>>(istream& in, TestObject& testObject) {
 }
 
 TEST(AlbaLargeSorterTest, ObjectsCanBeSavedAndLoadFromFile) {
-    ofstream outputTestFile(AlbaLocalPathHandler(ALBA_LARGE_SORTER_TEST_FILE).getFullPath());
+    AlbaLocalPathHandler localPathHandler(ALBA_LARGE_SORTER_TEST_FILE);
+    ALBA_DBG_PRINT1(localPathHandler.getFullPath());
+    ALBA_DBG_PRINT1(localPathHandler.isFoundInLocalSystem());
+    ofstream outputTestFile(localPathHandler.getFullPath());
     outputTestFile << TestObject(0, 0, '0', "") << "\n";
     outputTestFile << TestObject(1, 1.1, 'a', "firstString") << "\n";
     outputTestFile << TestObject(2000, 1.222, 'b', "secondString") << "\n";
     outputTestFile << TestObject(333333, 3.3, 'c', "thirdString") << "\n";
     outputTestFile.close();
 
-    ifstream inputTestFile(AlbaLocalPathHandler(ALBA_LARGE_SORTER_TEST_FILE).getFullPath());
+    string command = string("cat ") + localPathHandler.getFullPath();
+    system(command.c_str());
+    localPathHandler.reInput();
+    ALBA_DBG_PRINT1(localPathHandler.getFullPath());
+    ALBA_DBG_PRINT1(localPathHandler.isFoundInLocalSystem());
+    ifstream inputTestFile(localPathHandler.getFullPath());
     TestObject testObject;
 
     inputTestFile >> testObject;
+    ALBA_DBG_PRINT4(testObject.valueInteger, testObject.valueDouble, testObject.valueCharacter, testObject.valueString);
     EXPECT_EQ(0, testObject.valueInteger);
     EXPECT_DOUBLE_EQ(0, testObject.valueDouble);
     EXPECT_EQ('0', testObject.valueCharacter);
     EXPECT_EQ("", testObject.valueString);
 
     inputTestFile >> testObject;
+    ALBA_DBG_PRINT4(testObject.valueInteger, testObject.valueDouble, testObject.valueCharacter, testObject.valueString);
     EXPECT_EQ(1, testObject.valueInteger);
     EXPECT_DOUBLE_EQ(1.1, testObject.valueDouble);
     EXPECT_EQ('a', testObject.valueCharacter);
     EXPECT_EQ("firstString", testObject.valueString);
 
     inputTestFile >> testObject;
+    ALBA_DBG_PRINT4(testObject.valueInteger, testObject.valueDouble, testObject.valueCharacter, testObject.valueString);
     EXPECT_EQ(2000, testObject.valueInteger);
     EXPECT_DOUBLE_EQ(1.222, testObject.valueDouble);
     EXPECT_EQ('b', testObject.valueCharacter);
     EXPECT_EQ("secondString", testObject.valueString);
 
     inputTestFile >> testObject;
+    ALBA_DBG_PRINT4(testObject.valueInteger, testObject.valueDouble, testObject.valueCharacter, testObject.valueString);
     EXPECT_EQ(333333, testObject.valueInteger);
     EXPECT_DOUBLE_EQ(3.3, testObject.valueDouble);
     EXPECT_EQ('c', testObject.valueCharacter);
