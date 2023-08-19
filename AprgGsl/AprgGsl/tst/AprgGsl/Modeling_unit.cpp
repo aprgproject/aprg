@@ -7,14 +7,16 @@ using namespace std;
 
 #define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_SIMPLE_DATA_SET \
     APRG_DIR R"(\AprgGsl\FilesForTests\DataSets\SimpleDataSet.csv)"
-#define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_FILE1 APRG_DIR R"(\AprgGsl\FilesForTests\DataSets\DataSet1.csv)"
-#define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_FILE2 APRG_DIR R"(\AprgGsl\FilesForTests\DataSets\DataSet2.csv)"
-#define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT2_FILE3 \
-    APRG_DIR R"(\AprgGsl\FilesForTests\DataSets\DataSet3_FileFormat2.csv)"
+#define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_DATA1 \
+    APRG_DIR R"(\AprgGsl\FilesForTests\DataSets\FileFormat1_DataSet1.csv)"
+#define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_DATA2 \
+    APRG_DIR R"(\AprgGsl\FilesForTests\DataSets\FileFormat1_DataSet2.csv)"
+#define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT2_DATA1 \
+    APRG_DIR R"(\AprgGsl\FilesForTests\DataSets\FileFormat2_DataSet1.csv)"
 
 namespace alba {
 
-TEST(SampleTest, DISABLED_TestForSimpleDataSet) {
+TEST(SampleTest, TestForSimpleDataSet) {
     AlbaLocalPathHandler testFilePath(ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_SIMPLE_DATA_SET);
     Modeling modeling;
     modeling.retrieveDataFromFileWithFileFormat1(testFilePath.getFullPath());
@@ -34,20 +36,17 @@ TEST(SampleTest, DISABLED_TestForSimpleDataSet) {
     cout << "rootMeanSquareError: " << std::setprecision(20) << result.rootMeanSquareError << "\n";
 
     Modeling::MatrixOfDoubles coefficients(modeling.getCoefficients());
-    cout << "Coefficients:\n";
-    cout << coefficients << "\n";
+    cout << "Coefficients:" << coefficients << "\n";
 }
 
-TEST(SampleTest, DISABLED_TestForFileFormat1) {
-    AlbaLocalPathHandler testFilePath(ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_FILE1);
+TEST(SampleTest, TestForFileFormat1) {
+    AlbaLocalPathHandler testFilePath(ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_DATA1);
     Modeling modeling;
     modeling.retrieveDataFromFileWithFileFormat1(testFilePath.getFullPath());
     modeling.printRetrievedData();
     unsigned int numberOfSamples(modeling.getNumberOfSamples());
     modeling.saveRetrievedDataToModelingData(numberOfSamples);  // include all samples
     modeling.saveRetrievedDataToValidationData(numberOfSamples);
-    // modeling.saveRetrievedDataToModelingDataRandomly(numberOfSamples/2); // include some samples randomly
-    // modeling.saveRetrievedDataToValidationDataRandomly(numberOfSamples/2);
 
     modeling.modelUsingLeastSquares();
 
@@ -60,12 +59,11 @@ TEST(SampleTest, DISABLED_TestForFileFormat1) {
     cout << "rootMeanSquareError: " << std::setprecision(20) << result.rootMeanSquareError << "\n";
 
     Modeling::MatrixOfDoubles coefficients(modeling.getCoefficients());
-    cout << "Coefficients:\n";
-    cout << coefficients << "\n";
+    cout << "Coefficients:" << coefficients << "\n";
 }
 
 TEST(SampleTest, TestForFileFormat2) {
-    AlbaLocalPathHandler testFilePath(ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT2_FILE3);
+    AlbaLocalPathHandler testFilePath(ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT2_DATA1);
     Modeling modeling;
     modeling.retrieveDataFromFileWithFileFormat2(testFilePath.getFullPath());
     modeling.printRetrievedData();
@@ -84,8 +82,7 @@ TEST(SampleTest, TestForFileFormat2) {
     cout << "rootMeanSquareError: " << std::setprecision(20) << result.rootMeanSquareError << "\n";
 
     Modeling::MatrixOfDoubles coefficients(modeling.getCoefficients());
-    cout << "Coefficients:\n";
-    cout << coefficients << "\n";
+    cout << "Coefficients:" << coefficients << "\n";
 }
 
 }  // namespace alba

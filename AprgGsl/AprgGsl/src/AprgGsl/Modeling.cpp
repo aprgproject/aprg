@@ -30,16 +30,14 @@ void Modeling::retrieveDataFromFileWithFileFormat1(string const& filePath) {
         string lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
         stringHelper::strings itemsFound;
         stringHelper::splitToStrings<stringHelper::SplitStringType::WithoutDelimeters>(itemsFound, lineInFile, ",");
-
         if (!itemsFound.empty()) {
             columnsForX = max(columnsForX, static_cast<unsigned int>(itemsFound.size() - 1));
             stringHelper::strings::const_iterator it(itemsFound.begin());
-            retrievedDataForY.emplace_back(stringHelper::convertStringToNumber<double>(*it));
-            it++;
+            retrievedDataForY.emplace_back(stringHelper::convertStringToNumber<double>(*it++));
             for_each(it, itemsFound.cend(), [&](string const& item) {
                 retrievedDataForX.emplace_back(stringHelper::convertStringToNumber<double>(item));
             });
-            numberOfSamples++;
+            ++numberOfSamples;
         }
     }
     saveRetrievedDataForXAndY(columnsForX, numberOfSamples, retrievedDataForX, retrievedDataForY);
@@ -64,7 +62,7 @@ void Modeling::retrieveDataFromFileWithFileFormat2(string const& filePath) {
         if (!itemsFound.empty()) {
             if (isLineWithYValues) {
                 stringHelper::strings::const_iterator it(itemsFound.begin());
-                it++;
+                ++it;
                 for_each(it, itemsFound.cend(), [&](string const& item) {
                     retrievedDataForY.emplace_back(stringHelper::convertStringToNumber<double>(item));
                 });
@@ -73,7 +71,7 @@ void Modeling::retrieveDataFromFileWithFileFormat2(string const& filePath) {
                 reversedCoordinatesColumns =
                     max(reversedCoordinatesColumns, static_cast<unsigned int>(itemsFound.size() - 1));
                 stringHelper::strings::const_iterator it(itemsFound.begin());
-                it++;
+                ++it;
                 for_each(it, itemsFound.cend(), [&](string const& item) {
                     reversedCoordinates.emplace_back(stringHelper::convertStringToNumber<double>(item));
                 });
@@ -81,8 +79,8 @@ void Modeling::retrieveDataFromFileWithFileFormat2(string const& filePath) {
             }
         }
     }
-    for (unsigned int i = 0; i < reversedCoordinatesColumns; i++) {
-        for (unsigned int j = 0; j < reversedCoordinatesRows; j++) {
+    for (unsigned int i = 0; i < reversedCoordinatesColumns; ++i) {
+        for (unsigned int j = 0; j < reversedCoordinatesRows; ++j) {
             retrievedDataForX.emplace_back(reversedCoordinates[getIndex(i, j, reversedCoordinatesColumns)]);
         }
     }
@@ -122,27 +120,25 @@ Modeling::ValidationResult Modeling::validate() {
 
     unsigned int dataHeight = m_validationDataForY.getNumberOfRows();
     unsigned int dataWidthForX = m_validationDataForX.getNumberOfColumns();
-    unsigned int index = 0;
 
-    for (unsigned int j = 0; j < dataHeight; j++) {
+    for (unsigned int j = 0; j < dataHeight; ++j) {
         double yPredicted = 0;
-        for (unsigned int i = 0; i < dataWidthForX; i++) {
+        for (unsigned int i = 0; i < dataWidthForX; ++i) {
             yPredicted += m_validationDataForX.getEntry(i, j) * m_coefficients.getEntry(i, 0);
-            index++;
         }
         calculationDataBuffer.emplace_back(yPredicted);
     }
 
-    for (unsigned int j = 0; j < dataHeight; j++) {
+    for (unsigned int j = 0; j < dataHeight; ++j) {
         calculationDataBuffer[j] = m_validationDataForY.getEntry(0, j) - calculationDataBuffer[j];
     }
 
-    for (unsigned int j = 0; j < dataHeight; j++) {
+    for (unsigned int j = 0; j < dataHeight; ++j) {
         calculationDataBuffer[j] = pow(calculationDataBuffer[j], 2);
     }
 
     double totalSquareError(0);
-    for (unsigned int j = 0; j < dataHeight; j++) {
+    for (unsigned int j = 0; j < dataHeight; ++j) {
         totalSquareError += calculationDataBuffer[j];
     }
 
@@ -172,9 +168,9 @@ void Modeling::printValidationData() {
 }
 
 void Modeling::printData(MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY) {
-    for (unsigned int j = 0; j < matrixInY.getNumberOfRows(); j++) {
+    for (unsigned int j = 0; j < matrixInY.getNumberOfRows(); ++j) {
         cout << matrixInY.getEntry(0, j) << " <- ";
-        for (unsigned int i = 0; i < matrixInX.getNumberOfColumns(); i++) {
+        for (unsigned int i = 0; i < matrixInX.getNumberOfColumns(); ++i) {
             cout << matrixInX.getEntry(i, j) << ", ";
         }
         cout << "\n";
@@ -201,10 +197,10 @@ void Modeling::saveRetrievedDataToMatrixRandomly(
     matrixInX.clearAndResize(m_retrievedDataForX.getNumberOfColumns(), numberOfSamples);
     matrixInY.clearAndResize(1, numberOfSamples);
     AlbaUniformNonDeterministicRandomizer<unsigned int> randomizer(0, m_retrievedDataForY.getNumberOfRows() - 1);
-    for (unsigned int j = 0; j < numberOfSamples; j++) {
+    for (unsigned int j = 0; j < numberOfSamples; ++j) {
         unsigned int randomRow(randomizer.getRandomValue());
         matrixInY.setEntry(0, j, m_retrievedDataForY.getEntry(0, randomRow));
-        for (unsigned int i = 0; i < m_retrievedDataForX.getNumberOfColumns(); i++) {
+        for (unsigned int i = 0; i < m_retrievedDataForX.getNumberOfColumns(); ++i) {
             matrixInX.setEntry(i, j, m_retrievedDataForX.getEntry(i, randomRow));
         }
     }
@@ -214,9 +210,9 @@ void Modeling::saveRetrievedDataToMatrix(
     MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int numberOfSamples) {
     matrixInX.clearAndResize(m_retrievedDataForX.getNumberOfColumns(), numberOfSamples);
     matrixInY.clearAndResize(1, numberOfSamples);
-    for (unsigned int j = 0; j < numberOfSamples; j++) {
+    for (unsigned int j = 0; j < numberOfSamples; ++j) {
         matrixInY.setEntry(0, j, m_retrievedDataForY.getEntry(0, j));
-        for (unsigned int i = 0; i < m_retrievedDataForX.getNumberOfColumns(); i++) {
+        for (unsigned int i = 0; i < m_retrievedDataForX.getNumberOfColumns(); ++i) {
             matrixInX.setEntry(i, j, m_retrievedDataForX.getEntry(i, j));
         }
     }
@@ -235,13 +231,14 @@ void Modeling::calculateCoefficientsUsingLeastSquares() {
     calculatedCoefficients = gsl_vector_alloc(dataWidth);
     calculatedCovariance = gsl_matrix_alloc(dataWidth, dataWidth);
 
-    for (unsigned int y = 0; y < m_modelingDataForY.getNumberOfRows(); y++) {
-        for (unsigned int x = 1; x < m_modelingDataForY.getNumberOfColumns(); x++) {
+    for (unsigned int y = 0; y < m_modelingDataForY.getNumberOfRows(); ++y) {
+        for (unsigned int x = 0; x < m_modelingDataForY.getNumberOfColumns(); ++x) {
             gsl_vector_set(yModelingData, y, m_modelingDataForY.getEntry(x, y));
         }
     }
-    for (unsigned int x = 1; x < m_modelingDataForX.getNumberOfColumns(); x++) {
-        for (unsigned int y = 0; y < m_modelingDataForX.getNumberOfRows(); y++) {
+
+    for (unsigned int x = 0; x < m_modelingDataForX.getNumberOfColumns(); ++x) {
+        for (unsigned int y = 0; y < m_modelingDataForX.getNumberOfRows(); ++y) {
             gsl_matrix_set(xModelingData, y, x, m_modelingDataForX.getEntry(x, y));
         }
     }
@@ -253,7 +250,7 @@ void Modeling::calculateCoefficientsUsingLeastSquares() {
     cout << "Error status is [" << multifitError << "] which means: [" << gsl_strerror(multifitError) << "]\n";
 
     m_coefficients.clearAndResize(dataWidth, 1);
-    for (unsigned int i = 0; i < dataWidth; i++) {
+    for (unsigned int i = 0; i < dataWidth; ++i) {
         m_coefficients.setEntry(i, 0, gsl_vector_get(calculatedCoefficients, i));
     }
 
