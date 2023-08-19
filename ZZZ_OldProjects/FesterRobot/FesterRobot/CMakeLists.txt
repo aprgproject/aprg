@@ -5,9 +5,6 @@ project(FesterRobot C CXX)
 set(OUTFILE ${PROJECT_NAME})
 set(FESTER_ROBOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-# Set APRG_TEST_MODE to ON to enable tests and OFF to call main function.
-option(APRG_TEST_MODE "Enable test mode" ON)
-
 # Locate APRG Directory first because its used on other cmakes
 include(${FESTER_ROBOT_DIR}/cmake/LocateAprgDirectory.cmake)
 

@@ -1,4 +1,4 @@
-# Assign Definitions
+# Assign common definitions
 
 # NOTE: CMAKE_BUILD_TYPE is set as Debug in AllCommonSteps.cmake if its empty
 if(CMAKE_BUILD_TYPE MATCHES Debug)

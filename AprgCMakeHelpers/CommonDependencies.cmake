@@ -1,3 +1,5 @@
+# Assign common dependencies
+
 if(WIN32)
     if (CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
         set(APRG_GTEST_DEPENDENCIES gtest ${CMAKE_THREAD_LIBS_INIT})
