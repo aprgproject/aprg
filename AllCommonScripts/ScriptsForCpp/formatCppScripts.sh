@@ -15,7 +15,7 @@ fi
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 aprgLocatorFile=""
-source "$aprgDirectory/AllCommonScripts/GithubWorkflowScripts/AddingAprgLocatorFile.sh"
+source "$aprgDirectory/AllCommonScripts/CommonRegex/AddingAprgLocatorFile.sh"
 searchCondition="*$aprgLocatorFile"
 
 # Find all files with the same name in the target folder

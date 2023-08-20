@@ -3,18 +3,16 @@
 findCppProjects() {
     # Set variable values
     local scriptName
-    local scriptDirectory
     local aprgDirectory
     local userInput
     scriptName="FindCppProjects.sh"
-    scriptDirectory=$(dirname "$(realpath "$0")")
     aprgDirectory=$(realpath "$(dirname "$0")/../../")
     userInput="$1"
     
     # Source needed scripts
     source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
     aprgLocatorFile=""
-    source "$scriptDirectory/AddingAprgLocatorFile.sh"
+    source "$aprgDirectory/AllCommonScripts/CommonRegex/AddingAprgLocatorFile.sh"
     
     searchCondition=""
     if [[ -z $userInput ]] || [ "$userInput" == "all" ]; then

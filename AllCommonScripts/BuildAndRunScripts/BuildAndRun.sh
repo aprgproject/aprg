@@ -33,7 +33,8 @@ scriptPrint "$scriptName" "$LINENO" "The immediateDirectoryName is [$immediateDi
 cd ..
 mkdir -p "$buildDirectoryName"
 cd "$buildDirectoryName"
-scriptPrint "$scriptName" "$LINENO" "The build path is [$(pwd)] and the output of 'ls' is [$(ls)]"
+scriptPrint "$scriptName" "$LINENO" "The build path is [$(pwd)] and the output of 'ls -la':"
+ls -la
 
 # Enable the "exit on error" option to automatically stop if there is a failure
 set -e
@@ -82,7 +83,7 @@ elif [ "$scriptOption" == "configureWithClangWithStaticAnalyzers" ]; then
     cppCompilerLocation="$(command -v clazy)" # Use clazy as static analyzer
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType] and cmakeGenerator is [$cmakeGenerator]."
     scriptPrint "$scriptName" "$LINENO" "The cCompilerLocation is [$cCompilerLocation] and cppCompilerLocation is [$cppCompilerLocation]."
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator" | tee "$(pwd)/StaticAnalyzerOutput.txt"
 elif [ "$scriptOption" == "build" ]; then
     buildType="$argument1"
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."

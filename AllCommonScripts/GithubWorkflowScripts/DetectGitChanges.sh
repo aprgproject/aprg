@@ -3,12 +3,10 @@
 detectGitChanges() {
     # Set variable values
     local scriptName
-    local scriptDirectory
     local aprgDirectory
     local aprgDirectoryName
     local cppProjectsSet
     scriptName="DetectGitChanges.sh"
-    scriptDirectory=$(dirname "$(realpath "$0")")
     aprgDirectory=$(realpath "$(dirname "$0")/../../")
     aprgDirectoryName="aprg"
     declare -A cppProjectsSet
@@ -16,7 +14,7 @@ detectGitChanges() {
     # Source needed scripts
     source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
     aprgLocatorFile=""
-    source "$scriptDirectory/AddingAprgLocatorFile.sh"
+    source "$aprgDirectory/AllCommonScripts/CommonRegex/AddingAprgLocatorFile.sh"
     
     # Detect git changes
     scriptPrint "$scriptName" "$LINENO" "Calling Git Diff command ..."
