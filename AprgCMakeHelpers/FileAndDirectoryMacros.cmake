@@ -1,12 +1,11 @@
+# Macros for files and directories
 
 # This macro gets all C/C++ source files from a directory and adds them to a list.
 macro(GET_SOURCE_FILES_FROM_DIRECTORY outputSourceList sourceDirectory)
     #PRINT_STATUS("Source directory: [${sourceDirectory}]")
     file(GLOB_RECURSE files "${sourceDirectory}/*.hpp" "${sourceDirectory}/*.cpp" "${sourceDirectory}/*.h" "${sourceDirectory}/*.c" "${sourceDirectory}/*.cc")
-    foreach(filename ${files})
-        list(APPEND ${outputSourceList} ${filename})
-        #PRINT_STATUS("Adding file: ${filename}")
-    endforeach()
+    #PRINT_STATUS("Adding files: ${files}")
+    list(APPEND ${outputSourceList} ${files})
 endmacro()
 
 # This macro gets all C/C++ source files from all subdirectories of a directory and adds them to a list.
@@ -14,10 +13,8 @@ macro(GET_SOURCE_FILES_FROM_SUB_DIRECTORIES outputSourceList subDirectories)
     foreach(subDirectory ${${subDirectories}})
         #PRINT_STATUS("Source sub directory: [${subDirectory}]")
         file(GLOB files "${sourceDirectory}/*.hpp" "${sourceDirectory}/*.cpp" "${sourceDirectory}/*.h" "${sourceDirectory}/*.c" "${sourceDirectory}/*.cc")
-        foreach(filename ${files})
-            list(APPEND ${outputSourceList} ${filename})
-            #PRINT_STATUS("Adding file: ${filename}")
-        endforeach()
+        #PRINT_STATUS("Adding files: ${files}")
+        list(APPEND ${outputSourceList} ${files})
     endforeach()
 endmacro()
 

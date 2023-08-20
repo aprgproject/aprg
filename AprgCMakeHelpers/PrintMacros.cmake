@@ -1,3 +1,5 @@
+# Printing Macros
+
 macro(PRINT_VARIABLE variable)
     message(STATUS "VARIABLE: [${variable}] contains: [${${variable}}]")
 endmacro()
