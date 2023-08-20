@@ -16,6 +16,8 @@ projectsWithBoost=""
 source "$scriptDirectory/ProjectsWithBoost.sh"
 projectsWithGsl=""
 source "$scriptDirectory/ProjectsWithGsl.sh"
+projectsWith7Zip=""
+source "$scriptDirectory/ProjectsWith7Zip.sh"
 
 # Get C/C++ projects by git changes or searching on directories.
 if [[ -z $userInput ]]; then
@@ -57,3 +59,8 @@ echo "APRG_PROJECTS_WITH_BOOST=[$projectsWithBoost]" >> "$GITHUB_OUTPUT"
 scriptPrint "$scriptName" "$LINENO" "The projectsWithGsl are: [$projectsWithGsl]"
 # shellcheck disable=SC2154
 echo "APRG_PROJECTS_WITH_GSL=[$projectsWithGsl]" >> "$GITHUB_OUTPUT"
+
+# Save Excluded Configurations in Github Workflow
+scriptPrint "$scriptName" "$LINENO" "The projectsWith7Zip are: [$projectsWith7Zip]"
+# shellcheck disable=SC2154
+echo "APRG_PROJECTS_WITH_7ZIP=[$projectsWith7Zip]" >> "$GITHUB_OUTPUT"
