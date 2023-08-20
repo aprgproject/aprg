@@ -5,3 +5,5 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE PATH "Default install path" FORCE)
+
+include(${APRG_DIR}/AprgCMakeHelpers/CommonCMakeVariablesStaticAnalyzers.cmake)
