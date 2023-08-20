@@ -20,7 +20,7 @@ include(${BOOST_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
 add_executable(${OUTFILE} ${BOOST_TESTS})
-include_directories(${BOOST_INCLUDE_DIRECTORIES} ${BOOST_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRS})
+include_directories(${BOOST_INCLUDE_DIRECTORIES} ${BOOST_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRECTORIES})
 target_link_libraries(${OUTFILE} APRG_COMMON ${Boost_LIBRARIES} ${APRG_ICONV_DEPENDENCIES} ${APRG_GTEST_DEPENDENCIES})
 add_test(${OUTFILE} ${OUTFILE})
 install(TARGETS ${OUTFILE} DESTINATION runDirectory)
