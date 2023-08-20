@@ -7,8 +7,6 @@ set(GTEST_INCLUDE_DIRECTORIES
     ${GOOGLE_TEST_DIR}/
     )
 
-include_directories(${GTEST_INCLUDE_DIRECTORIES})
-
 add_library(gtest
     ${GOOGLE_TEST_DIR}/src/gtest-all.cc
     ${GOOGLE_TEST_DIR}/src/gtest_main.cc
