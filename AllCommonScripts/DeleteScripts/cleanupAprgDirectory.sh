@@ -38,5 +38,6 @@ deleteAllDirectoriesWithName "WslBuild"
 deleteAllDirectoriesWithName "build-*"
 deleteAllDirectoriesWithName ".vs"
 deleteAllFilesWithName "CMakeLists.txt.user"
+deleteAllFilesWithName "*.gch"
 
 scriptPrint "$scriptName" "$LINENO" "Cleanup completed."

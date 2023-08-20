@@ -23,7 +23,10 @@ scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvert
 tempFile=$(mktemp)
 find "$directoryToConvertAllFiles" -type f -name "*.sh" | while read -r locationPath; do
     if  [[ ! "$locationPath" =~ $skipPathRegex ]]; then
+        # unix style line endings
         dos2unix "$locationPath"
+        
+        # convert tabs to 4 spaces
         expand -t 4 "$locationPath" > "$tempFile"
         mv "$tempFile" "$locationPath"
     fi
