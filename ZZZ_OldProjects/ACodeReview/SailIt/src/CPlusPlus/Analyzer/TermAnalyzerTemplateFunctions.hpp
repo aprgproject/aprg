@@ -1,8 +1,8 @@
 #pragma once
 
 #include <CPlusPlus/Analyzer/Findings/TemporaryFindings.hpp>
-#include <CPlusPlus/Term/CheckerHelpers.hpp>
 #include <CPlusPlus/Analyzer/TermAnalyzer.hpp>
+#include <CPlusPlus/Term/CheckerHelpers.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <iostream>

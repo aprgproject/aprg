@@ -28,7 +28,8 @@ public:
     bool contains(int const objectIndex) const {
         bool result(false);
         if (objectIndex < static_cast<int>(m_objectIndexToTreeIndex.size())) {
-            result = m_objectIndexToTreeIndex[objectIndex] != IndexedBinaryHeapPriorityQueueConstants::VALUE_FOR_UNUSED_INDEX;
+            result = m_objectIndexToTreeIndex[objectIndex] !=
+                     IndexedBinaryHeapPriorityQueueConstants::VALUE_FOR_UNUSED_INDEX;
         }
         return result;
     }

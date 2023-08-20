@@ -109,23 +109,17 @@ void LyxGenerator::saveMessageDefinitionSubsubsection(string const& messageName,
 
     while (messageSubsubsectionReader.isNotFinished()) {
         string messageSubsubsectionLine(messageSubsubsectionReader.getLine());
-        if (isStringFoundCaseSensitive(
-                messageSubsubsectionLine, "LYX_TABLE_MESSAGE_NAME_REPLACE")) {
-            replaceAllAndReturnIfFound(
-                messageSubsubsectionLine, "LYX_TABLE_MESSAGE_NAME_REPLACE", messageDetails.name);
+        if (isStringFoundCaseSensitive(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_NAME_REPLACE")) {
+            replaceAllAndReturnIfFound(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_NAME_REPLACE", messageDetails.name);
             messageDefinitionsStream << messageSubsubsectionLine << "\n";
-        } else if (isStringFoundCaseSensitive(
-                       messageSubsubsectionLine, "LYX_TABLE_MESSAGE_PATH_REPLACE")) {
-            replaceAllAndReturnIfFound(
-                messageSubsubsectionLine, "LYX_TABLE_MESSAGE_PATH_REPLACE", messageDetails.path);
+        } else if (isStringFoundCaseSensitive(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_PATH_REPLACE")) {
+            replaceAllAndReturnIfFound(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_PATH_REPLACE", messageDetails.path);
             messageDefinitionsStream << messageSubsubsectionLine << "\n";
-        } else if (isStringFoundCaseSensitive(
-                       messageSubsubsectionLine, "LYX_TABLE_MESSAGE_STRUCTURE_NAME_REPLACE")) {
+        } else if (isStringFoundCaseSensitive(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_STRUCTURE_NAME_REPLACE")) {
             replaceAllAndReturnIfFound(
                 messageSubsubsectionLine, "LYX_TABLE_MESSAGE_STRUCTURE_NAME_REPLACE", structureDetails.name);
             messageDefinitionsStream << messageSubsubsectionLine << "\n";
-        } else if (isStringFoundCaseSensitive(
-                       messageSubsubsectionLine, "LYX_TABLE_MESSAGE_STRUCTURE_PATH_REPLACE")) {
+        } else if (isStringFoundCaseSensitive(messageSubsubsectionLine, "LYX_TABLE_MESSAGE_STRUCTURE_PATH_REPLACE")) {
             replaceAllAndReturnIfFound(
                 messageSubsubsectionLine, "LYX_TABLE_MESSAGE_STRUCTURE_PATH_REPLACE", structureDetails.path);
             messageDefinitionsStream << messageSubsubsectionLine << "\n";
@@ -145,13 +139,11 @@ void LyxGenerator::saveStructureDefinitionSubsubsection(
 
     while (structureSubsubsectionReader.isNotFinished()) {
         string structureSubsubsectionLine(structureSubsubsectionReader.getLine());
-        if (isStringFoundCaseSensitive(
-                structureSubsubsectionLine, "LYX_TABLE_STRUCTURE_NAME_REPLACE")) {
+        if (isStringFoundCaseSensitive(structureSubsubsectionLine, "LYX_TABLE_STRUCTURE_NAME_REPLACE")) {
             replaceAllAndReturnIfFound(
                 structureSubsubsectionLine, "LYX_TABLE_STRUCTURE_NAME_REPLACE", structureDetails.name);
             structureDefinitionsStream << structureSubsubsectionLine << "\n";
-        } else if (isStringFoundCaseSensitive(
-                       structureSubsubsectionLine, "LYX_TABLE_STRUCTURE_PATH_REPLACE")) {
+        } else if (isStringFoundCaseSensitive(structureSubsubsectionLine, "LYX_TABLE_STRUCTURE_PATH_REPLACE")) {
             replaceAllAndReturnIfFound(
                 structureSubsubsectionLine, "LYX_TABLE_STRUCTURE_PATH_REPLACE", structureDetails.path);
             structureDefinitionsStream << structureSubsubsectionLine << "\n";
@@ -173,8 +165,7 @@ void LyxGenerator::saveEnumDefinitionSubsubsection(string const& enumName, ofstr
         if (isStringFoundCaseSensitive(enumSubsubsectionLine, "LYX_TABLE_ENUM_NAME_REPLACE")) {
             replaceAllAndReturnIfFound(enumSubsubsectionLine, "LYX_TABLE_ENUM_NAME_REPLACE", enumDetails.name);
             enumDefinitionsStream << enumSubsubsectionLine << "\n";
-        } else if (isStringFoundCaseSensitive(
-                       enumSubsubsectionLine, "LYX_TABLE_ENUM_PATH_REPLACE")) {
+        } else if (isStringFoundCaseSensitive(enumSubsubsectionLine, "LYX_TABLE_ENUM_PATH_REPLACE")) {
             replaceAllAndReturnIfFound(enumSubsubsectionLine, "LYX_TABLE_ENUM_PATH_REPLACE", enumDetails.path);
             enumDefinitionsStream << enumSubsubsectionLine << "\n";
         } else if (isStringFoundCaseSensitive(enumSubsubsectionLine, "LYX_TABLE_REPLACE")) {
@@ -195,8 +186,7 @@ void LyxGenerator::saveUnionDefinitionSubsubsection(string const& unionName, ofs
         if (isStringFoundCaseSensitive(unionSubsubsectionLine, "LYX_TABLE_UNION_NAME_REPLACE")) {
             replaceAllAndReturnIfFound(unionSubsubsectionLine, "LYX_TABLE_UNION_NAME_REPLACE", unionDetails.name);
             unionDefinitionsStream << unionSubsubsectionLine << "\n";
-        } else if (isStringFoundCaseSensitive(
-                       unionSubsubsectionLine, "LYX_TABLE_UNION_PATH_REPLACE")) {
+        } else if (isStringFoundCaseSensitive(unionSubsubsectionLine, "LYX_TABLE_UNION_PATH_REPLACE")) {
             replaceAllAndReturnIfFound(unionSubsubsectionLine, "LYX_TABLE_UNION_PATH_REPLACE", unionDetails.path);
             unionDefinitionsStream << unionSubsubsectionLine << "\n";
         } else if (isStringFoundCaseSensitive(unionSubsubsectionLine, "LYX_TABLE_REPLACE")) {
@@ -215,13 +205,11 @@ void LyxGenerator::saveConstantDefinitionSubsubsection(
 
     while (constantSubsubsectionReader.isNotFinished()) {
         string constantSubsubsectionLine(constantSubsubsectionReader.getLine());
-        if (isStringFoundCaseSensitive(
-                constantSubsubsectionLine, "LYX_TABLE_COMMENT_NAME_REPLACE")) {
+        if (isStringFoundCaseSensitive(constantSubsubsectionLine, "LYX_TABLE_COMMENT_NAME_REPLACE")) {
             replaceAllAndReturnIfFound(
                 constantSubsubsectionLine, "LYX_TABLE_COMMENT_NAME_REPLACE", constantDetails.name);
             constantDefinitionsStream << constantSubsubsectionLine << "\n";
-        } else if (isStringFoundCaseSensitive(
-                       constantSubsubsectionLine, "LYX_TABLE_COMMENT_PATH_REPLACE")) {
+        } else if (isStringFoundCaseSensitive(constantSubsubsectionLine, "LYX_TABLE_COMMENT_PATH_REPLACE")) {
             replaceAllAndReturnIfFound(
                 constantSubsubsectionLine, "LYX_TABLE_COMMENT_PATH_REPLACE", constantDetails.path);
             constantDefinitionsStream << constantSubsubsectionLine << "\n";
@@ -274,15 +262,11 @@ void LyxGenerator::saveTypedefDefinitionSubsubsectionWithTypedefDetails(
 
     while (typedefSubsubsectionReader.isNotFinished()) {
         string typedefSubsubsectionLine(typedefSubsubsectionReader.getLine());
-        if (isStringFoundCaseSensitive(
-                typedefSubsubsectionLine, "LYX_TABLE_TYPEDEF_NAME_REPLACE")) {
-            replaceAllAndReturnIfFound(
-                typedefSubsubsectionLine, "LYX_TABLE_TYPEDEF_NAME_REPLACE", typedefDetails.name);
+        if (isStringFoundCaseSensitive(typedefSubsubsectionLine, "LYX_TABLE_TYPEDEF_NAME_REPLACE")) {
+            replaceAllAndReturnIfFound(typedefSubsubsectionLine, "LYX_TABLE_TYPEDEF_NAME_REPLACE", typedefDetails.name);
             typedefDefinitionsStream << typedefSubsubsectionLine << "\n";
-        } else if (isStringFoundCaseSensitive(
-                       typedefSubsubsectionLine, "LYX_TABLE_TYPEDEF_PATH_REPLACE")) {
-            replaceAllAndReturnIfFound(
-                typedefSubsubsectionLine, "LYX_TABLE_TYPEDEF_PATH_REPLACE", typedefDetails.path);
+        } else if (isStringFoundCaseSensitive(typedefSubsubsectionLine, "LYX_TABLE_TYPEDEF_PATH_REPLACE")) {
+            replaceAllAndReturnIfFound(typedefSubsubsectionLine, "LYX_TABLE_TYPEDEF_PATH_REPLACE", typedefDetails.path);
             typedefDefinitionsStream << typedefSubsubsectionLine << "\n";
         } else if (isStringFoundCaseSensitive(typedefSubsubsectionLine, "LYX_TABLE_REPLACE")) {
             saveTypedefTable(typedefDetails, typedefDefinitionsStream);
@@ -390,8 +374,7 @@ void LyxGenerator::saveDisplayTable(DisplayTable const& displayTable, ofstream& 
                             AlbaFileReader tableCellTemplateReader(tableCellTemplateStream);
                             while (tableCellTemplateReader.isNotFinished()) {
                                 string tableCellTemplateLine(tableCellTemplateReader.getLine());
-                                if (isStringFoundCaseSensitive(
-                                        tableCellTemplateLine, "LYX_TABLE_CELL_REPLACE")) {
+                                if (isStringFoundCaseSensitive(tableCellTemplateLine, "LYX_TABLE_CELL_REPLACE")) {
                                     displayTableStream << displayTable.getCellAt(row, column).getText() << "\n";
                                 } else {
                                     displayTableStream << tableCellTemplateLine << "\n";
@@ -416,8 +399,7 @@ void LyxGenerator::saveDisplayTable(DisplayTable const& displayTable, ofstream& 
             {
                 displayTableStream << tableTemplateLine << "\n";
             }
-        } else if (isStringFoundCaseSensitive(
-                       tableTemplateLine, "LYX_TABLE_DESCRIPTION_COLUMN_REPLACE")) {
+        } else if (isStringFoundCaseSensitive(tableTemplateLine, "LYX_TABLE_DESCRIPTION_COLUMN_REPLACE")) {
             displayTableStream << tableTemplateLine << "\n";  // for description
         } else {
             displayTableStream << tableTemplateLine << "\n";

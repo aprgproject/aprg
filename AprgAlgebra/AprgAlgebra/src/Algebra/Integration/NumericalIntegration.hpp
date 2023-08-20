@@ -29,11 +29,9 @@ Term getAnApproximateOfTruncationErrorInSimpsonRuleAt(
     Term const& term, DetailsForDefiniteIntegralWithValues const& integralDetails, AlbaNumber const& valueToCheckAt,
     AlbaNumber const& deltaX);
 
-AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(
-    AlbaNumber const& input, int const numberOfSamples);
+AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(AlbaNumber const& input, int const numberOfSamples);
 
-AlbaNumber getAnApproximateOfNaturalLogarithmUsingSimpsonRule(
-    AlbaNumber const& input, int const numberOfSamples);
+AlbaNumber getAnApproximateOfNaturalLogarithmUsingSimpsonRule(AlbaNumber const& input, int const numberOfSamples);
 
 }  // namespace algebra
 

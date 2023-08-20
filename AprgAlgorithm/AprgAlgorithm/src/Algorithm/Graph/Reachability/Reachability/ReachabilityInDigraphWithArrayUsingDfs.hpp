@@ -20,9 +20,7 @@ public:
         initialize();
     }
 
-    bool isReachable(Vertex const& destinationVertex) const override {
-        return m_isReachableArray[destinationVertex];
-    }
+    bool isReachable(Vertex const& destinationVertex) const override { return m_isReachableArray[destinationVertex]; }
 
 private:
     bool isNotFound(Vertex const& vertex) const { return !m_isReachableArray[vertex]; }

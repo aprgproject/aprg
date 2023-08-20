@@ -36,8 +36,7 @@ Term Summation::getSum(Term const& start, Term const& end) const {
     bool isStartAFiniteConstant = start.isConstant() && start.getAsNumber().isAFiniteValue();
     bool isEndAFiniteConstant = end.isConstant() && end.getAsNumber().isAFiniteValue();
     if (isStartAFiniteConstant && isEndAFiniteConstant) {
-        calculateSumFromANumberToANumber(
-            result, start.getAsNumber(), end.getAsNumber());
+        calculateSumFromANumberToANumber(result, start.getAsNumber(), end.getAsNumber());
     } else if (isStartAFiniteConstant) {
         calculateSumStartingFromANumber(result, start.getAsNumber(), end);
     } else {

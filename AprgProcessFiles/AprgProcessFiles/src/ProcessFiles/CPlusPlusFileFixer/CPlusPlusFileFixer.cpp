@@ -138,9 +138,7 @@ void CPlusPlusFileFixer::readContentsFromFile(string const& path) {
             if (isStringFoundCaseSensitive(line, "#include")) {
                 notifyIfThereAreCommentsInHeader(path, line);
                 readLineWithSharpInclude(line, path);
-            } else if (
-                isStringFoundCaseSensitive(line, "#pragma") &&
-                isStringFoundCaseSensitive(line, "once")) {
+            } else if (isStringFoundCaseSensitive(line, "#pragma") && isStringFoundCaseSensitive(line, "once")) {
                 m_isPragmaOnceFound = true;
             } else if (!isWhiteSpace(line)) {
                 m_linesAfterTheHeader.emplace_back(line);
@@ -362,8 +360,7 @@ void CPlusPlusFileFixer::writeHeadersWithAngleBrackets(ofstream& outputLogFileSt
 
 bool CPlusPlusFileFixer::isLineWithALoopStart(string const& line) const {
     bool result(false);
-    if (isStringFoundCaseSensitive(line, "for(") ||
-        isStringFoundCaseSensitive(line, "while(")) {
+    if (isStringFoundCaseSensitive(line, "for(") || isStringFoundCaseSensitive(line, "while(")) {
         result = true;
     }
     return result;
@@ -371,8 +368,7 @@ bool CPlusPlusFileFixer::isLineWithALoopStart(string const& line) const {
 
 bool CPlusPlusFileFixer::isLineWithALoopEnd(string const& line) const {
     bool result(false);
-    if (isStringFoundCaseSensitive(line, "}") &&
-        !isStringFoundCaseSensitive(line, "{")) {
+    if (isStringFoundCaseSensitive(line, "}") && !isStringFoundCaseSensitive(line, "{")) {
         result = true;
     }
     return result;
@@ -380,14 +376,10 @@ bool CPlusPlusFileFixer::isLineWithALoopEnd(string const& line) const {
 
 bool CPlusPlusFileFixer::isPathIgnored(string const& path) const {
     bool result(false);
-    if (isStringFoundCaseSensitive(path, "ACodeReview") ||
-        isStringFoundCaseSensitive(path, "AprgCMakeHelpers") ||
-        isStringFoundCaseSensitive(path, "CImg") ||
-        isStringFoundCaseSensitive(path, "curl-7.38.0") ||
-        isStringFoundCaseSensitive(path, "CurlCpp") ||
-        isStringFoundCaseSensitive(path, "gsl1.8") ||
-        isStringFoundCaseSensitive(path, "gtest-1.7.0") ||
-        isStringFoundCaseSensitive(path, "plantumlqeditor") ||
+    if (isStringFoundCaseSensitive(path, "ACodeReview") || isStringFoundCaseSensitive(path, "AprgCMakeHelpers") ||
+        isStringFoundCaseSensitive(path, "CImg") || isStringFoundCaseSensitive(path, "curl-7.38.0") ||
+        isStringFoundCaseSensitive(path, "CurlCpp") || isStringFoundCaseSensitive(path, "gsl1.8") ||
+        isStringFoundCaseSensitive(path, "gtest-1.7.0") || isStringFoundCaseSensitive(path, "plantumlqeditor") ||
         isStringFoundCaseSensitive(path, "zlib128")) {
         result = true;
     }
@@ -399,8 +391,7 @@ bool CPlusPlusFileFixer::isCPlusPlusHeader(string const& header) const {
 }
 
 bool CPlusPlusFileFixer::isLinuxHeader(string const& header) const {
-    return listOfLinuxHeaders.find(header) != listOfLinuxHeaders.cend() ||
-           isStringFoundCaseSensitive(header, "sys/");
+    return listOfLinuxHeaders.find(header) != listOfLinuxHeaders.cend() || isStringFoundCaseSensitive(header, "sys/");
 }
 
 bool CPlusPlusFileFixer::isWindowsHeader(string const& header) const {

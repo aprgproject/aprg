@@ -23,8 +23,7 @@ public:
     int getNumberOfColumns() const;
     int getNumberOfQuestions() const;
     int getNumberOfQuestionsAtColumn(int const column) const;
-    int getQuestionIndexInColumn(
-        int const columnNumber, int const questionOffsetInColumn) const;
+    int getQuestionIndexInColumn(int const columnNumber, int const questionOffsetInColumn) const;
     int getMinimumSatisfactoryScore() const;
 
     std::string getQuestionAt(int const questionIndex) const;
@@ -35,8 +34,7 @@ public:
     double getDischarge() const;
     void setPath(std::string const& path);
     void setMainParameters(
-        std::string const& area, std::string const& period, double const discharge,
-        int const minimumSatisfactoryScore);
+        std::string const& area, std::string const& period, double const discharge, int const minimumSatisfactoryScore);
     void addQuestion(int const columnNumber, std::string const& question);
     void setFormDetailsTitle(std::string const& title);
 

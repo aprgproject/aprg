@@ -188,8 +188,7 @@ private:
     std::string getCsvFilePath(std::string const& path) const;
     std::string getReportHtmlFilePath(std::string const& path) const;
     std::string getPrintableStringForPercentage(double const numerator, double const denominator) const;
-    void setAnswerToQuestionInColumn(
-        int const columnNumber, int const questionOffsetInColumn, int const answer);
+    void setAnswerToQuestionInColumn(int const columnNumber, int const questionOffsetInColumn, int const answer);
     void saveDataToCsvFile(std::string const& processedFilePath) const;
     void saveHeadersToCsvFile() const;
     void saveOutputHtmlFile(std::string const& processedFilePath) const;

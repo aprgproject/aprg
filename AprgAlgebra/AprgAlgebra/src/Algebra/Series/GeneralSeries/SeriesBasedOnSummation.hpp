@@ -22,10 +22,8 @@ public:
     Term getFormulaForEachTermInSummation() const;
 
 protected:
-    Summation getSummation(
-        Term const& formulaForEachTermInSummation, std::string const& variableName) const;
-    Term getFormulaForSummation(
-        Term const& formulaForEachTermInSummation, std::string const& variableName) const;
+    Summation getSummation(Term const& formulaForEachTermInSummation, std::string const& variableName) const;
+    Term getFormulaForSummation(Term const& formulaForEachTermInSummation, std::string const& variableName) const;
     Term m_formulaForEachTermInSummation;
     std::string m_variableName;
     Summation m_summation;

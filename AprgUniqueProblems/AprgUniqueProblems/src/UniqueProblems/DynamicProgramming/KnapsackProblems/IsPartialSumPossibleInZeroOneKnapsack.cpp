@@ -6,7 +6,8 @@ using namespace std;
 
 namespace alba {
 
-IsPartialSumPossibleInZeroOneKnapsack::IsPartialSumPossibleInZeroOneKnapsack(Value const targetSum, Values const& values)
+IsPartialSumPossibleInZeroOneKnapsack::IsPartialSumPossibleInZeroOneKnapsack(
+    Value const targetSum, Values const& values)
     : m_targetSum(targetSum), m_inputValues(values) {}
 
 bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingNaiveRecursion() const {

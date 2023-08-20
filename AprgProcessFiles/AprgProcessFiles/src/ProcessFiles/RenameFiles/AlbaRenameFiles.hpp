@@ -10,8 +10,7 @@ class AlbaRenameFiles {
 public:
     AlbaRenameFiles(std::string const& directoryPath);
 
-    void renameWithIncreasingNumbers(
-        std::string const& prefix, int const startingNumber, int const fieldWidth) const;
+    void renameWithIncreasingNumbers(std::string const& prefix, int const startingNumber, int const fieldWidth) const;
 
 private:
     AlbaLocalPathHandler m_directoryPathHandler;

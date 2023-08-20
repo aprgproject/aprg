@@ -39,8 +39,7 @@ TEST(TwoSumTest, GetNonDuplicateTwoValuesWithSumWithIndexesDoesNotWorkOnExample1
     ValuesForTest sortedValues{1, 4, 5, 6, 7, 9, 9, 10};
     SumSearch search(sortedValues);
 
-    ValuePairForTest pairToVerify(
-        search.getNonDuplicateTwoValuesWithSum(12, 3, 4));  // index must be within 2 and 4
+    ValuePairForTest pairToVerify(search.getNonDuplicateTwoValuesWithSum(12, 3, 4));  // index must be within 2 and 4
 
     ValuePairForTest pairToExpect{0, 0};
     EXPECT_EQ(pairToExpect, pairToVerify);

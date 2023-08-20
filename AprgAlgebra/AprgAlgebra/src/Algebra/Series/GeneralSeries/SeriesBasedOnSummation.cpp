@@ -14,10 +14,8 @@ namespace alba {
 
 namespace algebra {
 
-SeriesBasedOnSummation::SeriesBasedOnSummation(
-    Term const& formulaForEachTermInSummation, string const& variableName)
-    : SeriesBasedOnFormula(
-          getFormulaForSummation(formulaForEachTermInSummation, variableName), variableName),
+SeriesBasedOnSummation::SeriesBasedOnSummation(Term const& formulaForEachTermInSummation, string const& variableName)
+    : SeriesBasedOnFormula(getFormulaForSummation(formulaForEachTermInSummation, variableName), variableName),
       m_formulaForEachTermInSummation(formulaForEachTermInSummation),
       m_variableName(variableName),
       m_summation(getSummation(formulaForEachTermInSummation, variableName)),
@@ -30,8 +28,7 @@ bool SeriesBasedOnSummation::isConvergent() const {
     if (m_isSummationModelValid) {
         result = SeriesBasedOnFormula::isConvergent();
     } else {
-        result =
-            getLimit(m_formulaForEachTermInSummation, m_variableName, ALBA_NUMBER_POSITIVE_INFINITY) == 0;
+        result = getLimit(m_formulaForEachTermInSummation, m_variableName, ALBA_NUMBER_POSITIVE_INFINITY) == 0;
     }
     return result;
 }

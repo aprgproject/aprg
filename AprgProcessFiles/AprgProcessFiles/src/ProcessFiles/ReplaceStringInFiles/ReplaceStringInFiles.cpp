@@ -20,8 +20,7 @@ void ReplaceStringInFiles::replaceStringWithStringOnDirectories(
         AlbaLocalPathHandler inputFilePathHandler(file);
         if (isCOrCPlusPlusFile(inputFilePathHandler.getExtension())) {
             string outputFilePath(inputFilePathHandler.getFullPath());
-            replaceAllAndReturnIfFound(
-                outputFilePath, inputPathHandler.getFullPath(), outputPathHandler.getFullPath());
+            replaceAllAndReturnIfFound(outputFilePath, inputPathHandler.getFullPath(), outputPathHandler.getFullPath());
             AlbaLocalPathHandler outputFilePathHandler(outputFilePath);
             replaceStringWithStringOnFile(
                 inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath(), replacePairs);
@@ -59,8 +58,7 @@ void ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnDirectories(
         AlbaLocalPathHandler inputFilePathHandler(file);
         if (isCOrCPlusPlusFile(inputFilePathHandler.getExtension())) {
             string outputFilePath(inputFilePathHandler.getFullPath());
-            replaceAllAndReturnIfFound(
-                outputFilePath, inputPathHandler.getFullPath(), outputPathHandler.getFullPath());
+            replaceAllAndReturnIfFound(outputFilePath, inputPathHandler.getFullPath(), outputPathHandler.getFullPath());
             AlbaLocalPathHandler outputFilePathHandler(outputFilePath);
             replaceCToCPlusPlusStylePrintOnFile(
                 inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath());
@@ -225,14 +223,10 @@ bool ReplaceStringInFiles::isCOrCPlusPlusFile(string const& extension) {
 }
 
 bool ReplaceStringInFiles::hasPrintInLine(string const& line) {
-    return isStringFoundCaseSensitive(line, "TLH_DEBUG_PRINT") ||
-           isStringFoundCaseSensitive(line, "TLH_INFO_PRINT") ||
-           isStringFoundCaseSensitive(line, "TLH_WARNING_PRINT") ||
-           isStringFoundCaseSensitive(line, "TLH_ERROR_PRINT");
+    return isStringFoundCaseSensitive(line, "TLH_DEBUG_PRINT") || isStringFoundCaseSensitive(line, "TLH_INFO_PRINT") ||
+           isStringFoundCaseSensitive(line, "TLH_WARNING_PRINT") || isStringFoundCaseSensitive(line, "TLH_ERROR_PRINT");
 }
 
-bool ReplaceStringInFiles::hasEndOfPrintInLine(string const& line) {
-    return isStringFoundCaseSensitive(line, ");");
-}
+bool ReplaceStringInFiles::hasEndOfPrintInLine(string const& line) { return isStringFoundCaseSensitive(line, ");"); }
 
 }  // namespace alba

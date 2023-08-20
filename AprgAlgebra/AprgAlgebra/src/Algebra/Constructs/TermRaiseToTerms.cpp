@@ -148,8 +148,7 @@ void TermRaiseToTerms::simplifyBaseAndExponents() {
     } else if (m_base.isConstant() && exponentCombinedTerm.isFunction()) {
         simplifyConstantRaiseToFunction(m_base, m_exponents, exponentCombinedTerm);
     } else if (canBeConvertedToMonomial(m_base) && exponentCombinedTerm.isConstant()) {
-        simplifyMonomialRaiseToConstant(
-            m_base, createMonomialIfPossible(m_base), exponentCombinedTerm.getAsNumber());
+        simplifyMonomialRaiseToConstant(m_base, createMonomialIfPossible(m_base), exponentCombinedTerm.getAsNumber());
     } else if (m_base.isPolynomial() && !m_shouldSimplifyToFactors && isPositiveIntegerConstant(exponentCombinedTerm)) {
         int exponent = static_cast<int>(exponentCombinedTerm.getAsNumber().getInteger());
         simplifyPolynomialRaiseToPositiveInteger(m_base, createPolynomialIfPossible(m_base), exponent);
@@ -157,12 +156,10 @@ void TermRaiseToTerms::simplifyBaseAndExponents() {
         !m_shouldSimplifyToFactors && isPositiveIntegerConstant(exponentCombinedTerm) && m_base.isExpression() &&
         OperatorLevel::AdditionAndSubtraction == m_base.getAsExpression().getCommonOperatorLevel()) {
         int exponent = static_cast<int>(exponentCombinedTerm.getAsNumber().getInteger());
-        simplifyAdditionAndSubtractionExpressionRaiseToPositiveInteger(
-            m_base, m_base.getAsExpression(), exponent);
+        simplifyAdditionAndSubtractionExpressionRaiseToPositiveInteger(m_base, m_base.getAsExpression(), exponent);
     } else if (
         m_base.isConstant() && exponentCombinedTerm.isExpression() &&
-        OperatorLevel::MultiplicationAndDivision ==
-            exponentCombinedTerm.getAsExpression().getCommonOperatorLevel()) {
+        OperatorLevel::MultiplicationAndDivision == exponentCombinedTerm.getAsExpression().getCommonOperatorLevel()) {
         simplifyConstantRaiseToMultiplicationAndDivisionExpression(m_base, m_exponents, exponentCombinedTerm);
     } else {
         m_exponents.emplace_back(exponentCombinedTerm, TermAssociationType::Positive);

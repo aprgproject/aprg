@@ -68,8 +68,7 @@ TEST(BubbleSorterTest, SortWorksOnStringsUsingExample1) {
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);
 }
 
-TEST(BubbleSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1)
-{
+TEST(BubbleSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) {
     StabilityCheckObjectsSorter sorter;
     testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(sorter);
 }

@@ -299,7 +299,7 @@ int CoinProblem::getNumberOfCoinCombinationsUsingMemoizationDPInternal(
             Value countWithCoin(0);
             Value countWithoutCoin = getNumberOfCoinCombinationsUsingMemoizationDPInternal(
                 countByValueByCoin, total, coinIndex - 1);  // possibilities before this coin entry
-            if (total >= m_availableCoins[coinIndex])    // if coin can be subtracted to value
+            if (total >= m_availableCoins[coinIndex])       // if coin can be subtracted to value
             {
                 countWithCoin = getNumberOfCoinCombinationsUsingMemoizationDPInternal(
                     countByValueByCoin, total - m_availableCoins[coinIndex],

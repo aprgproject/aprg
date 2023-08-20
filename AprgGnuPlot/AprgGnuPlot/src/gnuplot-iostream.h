@@ -30,10 +30,10 @@ THE SOFTWARE.
  * Makefile and *.cc files are only for examples and tests).
  *
  * TODO:
- * 	What version of boost is currently required?
- * 	Callbacks via gnuplot's 'bind' function.  This would allow triggering user functions when
- * 	keys are pressed in the gnuplot window.  However, it would require a PTY reader thread.
- * 	Maybe temporary files read in a thread can replace PTY stuff.
+ *  What version of boost is currently required?
+ *  Callbacks via gnuplot's 'bind' function.  This would allow triggering user functions when
+ *  keys are pressed in the gnuplot window.  However, it would require a PTY reader thread.
+ *  Maybe temporary files read in a thread can replace PTY stuff.
  */
 
 #ifndef GNUPLOT_IOSTREAM_H
@@ -157,7 +157,7 @@ THE SOFTWARE.
 #ifdef _WIN32
 // "pgnuplot" is considered deprecated according to the Internet.  It may be faster.  It
 // doesn't seem to handle binary data though.
-//#	define GNUPLOT_DEFAULT_COMMAND "pgnuplot -persist"
+//# define GNUPLOT_DEFAULT_COMMAND "pgnuplot -persist"
 // On Windows, gnuplot echos commands to stderr.  So we forward its stderr to the bit bucket.
 // Unfortunately, this means you will miss out on legitimate error messages.
 #define GNUPLOT_DEFAULT_COMMAND "gnuplot -persist 2> NUL"
@@ -218,24 +218,24 @@ struct is_boost_tuple {
 // More fine-grained, but doesn't compile!
 // template <typename T>
 // struct is_boost_tuple {
-//	typedef boost::mpl::and_<
-//		typename boost::is_class<T>::type,
-//		typename boost::mpl::and_<
-//			typename has_head_type<T>::type,
-//			typename boost::mpl::and_<
-//				typename has_tail_type<T>::type,
-//				typename boost::mpl::or_<
-//					typename is_boost_tuple_nulltype<typename T::tail_type>::type,
-//					typename is_boost_tuple<typename T::tail_type>::type
-//				>::type
-//			>::type
-//		>::type
-//	> type;
+//  typedef boost::mpl::and_<
+//      typename boost::is_class<T>::type,
+//      typename boost::mpl::and_<
+//          typename has_head_type<T>::type,
+//          typename boost::mpl::and_<
+//              typename has_tail_type<T>::type,
+//              typename boost::mpl::or_<
+//                  typename is_boost_tuple_nulltype<typename T::tail_type>::type,
+//                  typename is_boost_tuple<typename T::tail_type>::type
+//              >::type
+//          >::type
+//      >::type
+//  > type;
 //};
 //
 // template <>
 // struct is_boost_tuple<boost::tuples::null_type> {
-//	typedef boost::mpl::bool_<false> type;
+//  typedef boost::mpl::bool_<false> type;
 //};
 
 // }}}1
@@ -359,39 +359,39 @@ private:
 //#define GNUPLOT_ENABLE_FEEDBACK
 // class GnuplotFeedbackTmpfile : public GnuplotFeedback {
 // public:
-//	explicit GnuplotFeedbackTmpfile(bool debug_messages) :
-//		tmp_file(),
-//		fh(NULL)
-//	{
-//		if(debug_messages) {
-//			std::cerr << "feedback_fn=" << filename() << std::endl;
-//		}
-//		GNUPLOT_MSVC_WARNING_4996_PUSH
-//		fh = std::fopen(filename().c_str(), "a");
-//		GNUPLOT_MSVC_WARNING_4996_POP
-//	}
+//  explicit GnuplotFeedbackTmpfile(bool debug_messages) :
+//      tmp_file(),
+//      fh(NULL)
+//  {
+//      if(debug_messages) {
+//          std::cerr << "feedback_fn=" << filename() << std::endl;
+//      }
+//      GNUPLOT_MSVC_WARNING_4996_PUSH
+//      fh = std::fopen(filename().c_str(), "a");
+//      GNUPLOT_MSVC_WARNING_4996_POP
+//  }
 //
-//	~GnuplotFeedbackTmpfile() {
-//		fclose(fh);
-//	}
+//  ~GnuplotFeedbackTmpfile() {
+//      fclose(fh);
+//  }
 //
 // private:
-//	// noncopyable
-//	GnuplotFeedbackTmpfile(const GnuplotFeedbackTmpfile &);
-//	const GnuplotFeedbackTmpfile& operator=(const GnuplotFeedbackTmpfile &);
+//  // noncopyable
+//  GnuplotFeedbackTmpfile(const GnuplotFeedbackTmpfile &);
+//  const GnuplotFeedbackTmpfile& operator=(const GnuplotFeedbackTmpfile &);
 //
 // public:
-//	std::string filename() const {
-//		return tmp_file.file.string();
-//	}
+//  std::string filename() const {
+//      return tmp_file.file.string();
+//  }
 //
-//	FILE *handle() const {
-//		return fh;
-//	}
+//  FILE *handle() const {
+//      return fh;
+//  }
 //
 // private:
-//	GnuplotTmpfile tmp_file;
-//	FILE *fh;
+//  GnuplotTmpfile tmp_file;
+//  FILE *fh;
 //};
 #endif  // GNUPLOT_ENABLE_PTY, GNUPLOT_USE_TMPFILE
 // }}}1
@@ -1850,7 +1850,7 @@ private:
             feedback = new GnuplotFeedbackPty(debug_messages);
 //#elif defined GNUPLOT_USE_TMPFILE
 //// Currently this doesn't work since fscanf doesn't block (need something like "tail -f")
-//			feedback = new GnuplotFeedbackTmpfile(debug_messages);
+//          feedback = new GnuplotFeedbackTmpfile(debug_messages);
 #else
             // This shouldn't happen because we are in an `#ifdef GNUPLOT_ENABLE_FEEDBACK`
             // block which should only be activated if GNUPLOT_ENABLE_PTY is defined.

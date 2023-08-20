@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Algorithm/Utilities/IndexHelper.hpp>
-#include <Algorithm/Utilities/IndexHelper.hpp>
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 
@@ -56,8 +55,8 @@ private:
                 result = getMidpointOfIndexes(m_lowIndex, m_highIndex);
             } else {
                 result = m_lowIndex + mathHelper::getIntegerAfterRoundingADoubleValue<Value>(
-                                            static_cast<double>(m_highIndex - m_lowIndex) * (target - lowerValue) /
-                                            (higherValue - lowerValue));
+                                          static_cast<double>(m_highIndex - m_lowIndex) * (target - lowerValue) /
+                                          (higherValue - lowerValue));
             }
             result += (m_lowIndex == result) ? 1 : (m_highIndex == result) ? -1 : 0;
         }

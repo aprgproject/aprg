@@ -118,8 +118,7 @@ protected:
     void initialize(Values const& valuesToCheck, Index const suggestedNumberOfBlocks) {
         if (!valuesToCheck.empty()) {
             m_blockSize = std::max(static_cast<int>(valuesToCheck.size() / suggestedNumberOfBlocks), 1);
-            Index numberOfBlocks =
-                getMultipleThatIsGreaterOrEqual(static_cast<int>(valuesToCheck.size()), m_blockSize);
+            Index numberOfBlocks = getMultipleThatIsGreaterOrEqual(static_cast<int>(valuesToCheck.size()), m_blockSize);
             m_blocks.reserve(numberOfBlocks);
             for (Index start = 0; start < m_values.size(); start += m_blockSize) {
                 Index end = std::min(start + m_blockSize, static_cast<int>(m_values.size()));

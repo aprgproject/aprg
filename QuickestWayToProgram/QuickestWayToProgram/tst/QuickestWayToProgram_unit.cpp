@@ -1113,10 +1113,10 @@ TEST(SampleTest, CompareProfileToLogsInStreamRoutingPoC) {
     map<unsigned int, string> ratTypeToAddressMap;
     if (profileStream.is_open()) {
         AlbaFileReader profileFileReader(profileStream);
-        string startString(R"(					")");
-        string endString(R"(					},)");
-        string axcresblockStartString(R"(				"axcresblock": {)");
-        string axcresblockendString(R"(				},)");
+        string startString(R"(                  ")");
+        string endString(R"(                    },)");
+        string axcresblockStartString(R"(               "axcresblock": {)");
+        string axcresblockendString(R"(             },)");
         unsigned int axcresblockState = 0;
         unsigned int streamState = 0;
         unsigned int currentRp3NodeAddress = 0;
@@ -1162,10 +1162,10 @@ TEST(SampleTest, CompareProfileToLogsInStreamRoutingPoC) {
     map<unsigned int, string> ratTypeToAddressMap;
     if (profileStream.is_open()) {
         AlbaFileReader profileFileReader(profileStream);
-        string startString(R"(					")");
-        string endString(R"(					},)");
-        string axcresblockStartString(R"(				"axcresblock": {)");
-        string axcresblockendString(R"(				},)");
+        string startString(R"(                  ")");
+        string endString(R"(                    },)");
+        string axcresblockStartString(R"(               "axcresblock": {)");
+        string axcresblockendString(R"(             },)");
         unsigned int axcresblockState = 0;
         unsigned int streamState = 0;
         unsigned int currentRp3NodeAddress = 0;

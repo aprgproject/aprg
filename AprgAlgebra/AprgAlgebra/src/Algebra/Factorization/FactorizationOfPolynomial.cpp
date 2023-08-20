@@ -149,8 +149,7 @@ int getDeltaSize(Polynomials const& polynomials, int const originalSize) {
 }
 
 bool isFactorizeUsingPatternsNeeded(Polynomial const& polynomial) {
-    return polynomial.getMonomials().size() == 2 &&
-           hasAMonomialWithDegreeMoreThanOneOrFractional(polynomial);
+    return polynomial.getMonomials().size() == 2 && hasAMonomialWithDegreeMoreThanOneOrFractional(polynomial);
 }
 
 bool isFactorizeIncreasingAndDecreasingExponentsFormNeeded(Polynomial const& polynomial) {

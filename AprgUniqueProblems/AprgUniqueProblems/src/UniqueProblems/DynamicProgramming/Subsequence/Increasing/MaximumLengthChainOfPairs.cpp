@@ -46,8 +46,7 @@ MaximumLengthChainOfPairs::Pairs MaximumLengthChainOfPairs::getLongestSubsequenc
             Index& subLength(subLengths[index]);
             Index& previousIndex(indexToPreviousIndex[index]);
             for (Index lowerIndex = 0; lowerIndex < index; lowerIndex++) {
-                if (m_sequence[lowerIndex].second < m_sequence[index].first &&
-                    subLength < subLengths[lowerIndex] + 1) {
+                if (m_sequence[lowerIndex].second < m_sequence[index].first && subLength < subLengths[lowerIndex] + 1) {
                     subLength = subLengths[lowerIndex] + 1;
                     previousIndex = lowerIndex;
                 }

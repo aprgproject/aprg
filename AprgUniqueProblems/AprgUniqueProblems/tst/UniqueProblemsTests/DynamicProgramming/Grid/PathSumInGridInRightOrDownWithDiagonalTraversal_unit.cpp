@@ -12,8 +12,7 @@ using Path = PathSumInGridInRightOrDownWithDiagonalTraversal::Path;
 }  // namespace
 
 TEST(PathSumInGridInRightOrDownWithDiagonalTraversalTest, GetBestPathSumWithMinimumTypeWorksOnExample1) {
-    Grid inputGrid(
-        5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
+    Grid inputGrid(5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
     PathSumInGridInRightOrDownWithDiagonalTraversal queryForTest(
         PathSumInGridInRightOrDownWithDiagonalTraversal::Type::MinimumSum, inputGrid);
 
@@ -33,8 +32,7 @@ TEST(PathSumInGridInRightOrDownWithDiagonalTraversalTest, GetBestPathSumWithMini
 }
 
 TEST(PathSumInGridInRightOrDownWithDiagonalTraversalTest, GetBestPathSumWithMaximumTypeWorksOnExample1) {
-    Grid inputGrid(
-        5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
+    Grid inputGrid(5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
     PathSumInGridInRightOrDownWithDiagonalTraversal queryForTest(
         PathSumInGridInRightOrDownWithDiagonalTraversal::Type::MaximumSum, inputGrid);
 
@@ -54,8 +52,7 @@ TEST(PathSumInGridInRightOrDownWithDiagonalTraversalTest, GetBestPathSumWithMaxi
 }
 
 TEST(PathSumInGridInRightOrDownWithDiagonalTraversalTest, GetBestPathWithMinimumTypeWorksOnExample1) {
-    Grid inputGrid(
-        5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
+    Grid inputGrid(5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
     PathSumInGridInRightOrDownWithDiagonalTraversal queryForTest(
         PathSumInGridInRightOrDownWithDiagonalTraversal::Type::MinimumSum, inputGrid);
 
@@ -63,8 +60,7 @@ TEST(PathSumInGridInRightOrDownWithDiagonalTraversalTest, GetBestPathWithMinimum
 }
 
 TEST(PathSumInGridInRightOrDownWithDiagonalTraversalTest, GetBestPathWithMaximumTypeWorksOnExample1) {
-    Grid inputGrid(
-        5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
+    Grid inputGrid(5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
     PathSumInGridInRightOrDownWithDiagonalTraversal queryForTest(
         PathSumInGridInRightOrDownWithDiagonalTraversal::Type::MaximumSum, inputGrid);
 

@@ -53,8 +53,7 @@ TEST(SummationTest, ExperimentalTest2) {
     Term summationFormula(summation.getSum(1, "minOfRSMinus1"));
     Polynomials polynomials(factorizeAPolynomial(summationFormula.getAsPolynomial()));
     SubstitutionOfVariablesToValues substitution{{"R", r}, {"C", s}, {"minOfRSMinus1", minOfRSMinus1}};
-    long long result =
-        substitution.performSubstitutionTo(summationFormula).getAsNumber().getInteger();
+    long long result = substitution.performSubstitutionTo(summationFormula).getAsNumber().getInteger();
     long long display = result % 1000000007;
 
     for (Polynomial const& polynomial : polynomials) {

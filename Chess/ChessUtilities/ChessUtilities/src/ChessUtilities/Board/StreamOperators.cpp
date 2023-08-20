@@ -62,8 +62,7 @@ ostream& operator<<(ostream& out, Board const& board) {
     int i = 0;
     for (int y = 0; y < Board::CHESS_SIDE_SIZE; y++) {
         for (int x = 0; x < Board::CHESS_SIDE_SIZE; x++) {
-            displayTable.getCellReferenceAt(x, y).setText(
-                string(" ") + pieceGrid[i++].getFenCharacter() + string(" "));
+            displayTable.getCellReferenceAt(x, y).setText(string(" ") + pieceGrid[i++].getFenCharacter() + string(" "));
         }
     }
     out << displayTable;

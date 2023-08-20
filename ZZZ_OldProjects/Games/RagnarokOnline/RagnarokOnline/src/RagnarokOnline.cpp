@@ -140,8 +140,7 @@ void RagnarokOnline::retrieveItemDataFromRmsWebPage(string const& filePathOfWebP
                     } else {
                         description += line;
                     }
-                } else if (isStringFoundCaseSensitive(
-                               line, R"(<td colspan="9" class="bb" valign="top">)")) {
+                } else if (isStringFoundCaseSensitive(line, R"(<td colspan="9" class="bb" valign="top">)")) {
                     if (isStringFoundCaseSensitive(line, R"(</td>)")) {
                         description = getStringInBetweenTwoStrings(
                             line, R"(<td colspan="9" class="bb" valign="top">)", R"(</td>)");
@@ -185,8 +184,7 @@ void RagnarokOnline::retrieveItemDataFromRmsWebPage(string const& filePathOfWebP
                     }
                 } else if ("Dropped By" == parameterName) {
                     string lineWithDroppedBy(line);
-                    while (isStringFoundCaseSensitive(
-                        lineWithDroppedBy, R"(<div class="tipstext">)")) {
+                    while (isStringFoundCaseSensitive(lineWithDroppedBy, R"(<div class="tipstext">)")) {
                         string monsterName = fixText(
                             getStringInBetweenTwoStrings(lineWithDroppedBy, ")\">", R"(<div class="tipstext">)"));
                         string monsterRate = fixText(
@@ -239,8 +237,7 @@ void RagnarokOnline::retrieveMonsterDataFromRmsWebPage(string const& filePathOfW
         }
 
         if (isContextBoxEncountered) {
-            if (isStringFoundCaseSensitive(
-                    line, R"(<div style="width: 400px; margin: 0px 5px;">)")) {
+            if (isStringFoundCaseSensitive(line, R"(<div style="width: 400px; margin: 0px 5px;">)")) {
                 monster.name = fixText(
                     getStringInBetweenTwoStrings(line, R"(<div style="width: 400px; margin: 0px 5px;">)", R"(&nbsp;)"));
             }
@@ -419,12 +416,10 @@ void RagnarokOnline::retrieveMapDataFromRmsWebPage(string const& filePathOfWebPa
         }
 
         if (isContextBoxEncountered) {
-            if (isStringFoundCaseSensitive(line, R"(- Map: )") &&
-                isStringFoundCaseSensitive(line, R"( -)")) {
+            if (isStringFoundCaseSensitive(line, R"(- Map: )") && isStringFoundCaseSensitive(line, R"( -)")) {
                 map.name = fixText(getStringInBetweenTwoStrings(line, R"(- Map: )", R"( -)"));
             }
-            if (isStringFoundCaseSensitive(line, R"(<b>Map: )") &&
-                isStringFoundCaseSensitive(line, R"(</b>)")) {
+            if (isStringFoundCaseSensitive(line, R"(<b>Map: )") && isStringFoundCaseSensitive(line, R"(</b>)")) {
                 map.name = fixText(getStringInBetweenTwoStrings(line, R"(<b>Map: )", R"(</b>)"));
             }
             if (isStringFoundCaseSensitive(line, R"(<td class="bborder" align="right">)") &&
@@ -432,11 +427,9 @@ void RagnarokOnline::retrieveMapDataFromRmsWebPage(string const& filePathOfWebPa
                 map.fullName =
                     fixText(getStringInBetweenTwoStrings(line, R"(<td class="bborder" align="right">)", R"(</td>)"));
             }
-            if (isStringFoundCaseSensitive(
-                    line, R"(Click on a monster below to view its detail:)")) {
+            if (isStringFoundCaseSensitive(line, R"(Click on a monster below to view its detail:)")) {
                 string lineWithMonsters(line);
-                while (isStringFoundCaseSensitive(
-                    lineWithMonsters, "onmouseout=\"hideddrivetip_image()\">")) {
+                while (isStringFoundCaseSensitive(lineWithMonsters, "onmouseout=\"hideddrivetip_image()\">")) {
                     MonsterDetailsOnRoMap monsterDetailsOnMap{};
                     string wholeMonsterString = getStringInBetweenTwoStrings(
                         lineWithMonsters, "onmouseout=\"hideddrivetip_image()\">", R"(</a>)");
@@ -820,8 +813,7 @@ string RagnarokOnline::fixText(string const& text) {
     replaceAllAndReturnIfFound(fixedText, "<br>", " ");
     replaceAllAndReturnIfFound(fixedText, "&amp;", "&");
     replaceAllAndReturnIfFound(fixedText, "&nbsp;", " ");
-    while (isStringFoundCaseSensitive(fixedText, "<") &&
-           isStringFoundCaseSensitive(fixedText, ">")) {
+    while (isStringFoundCaseSensitive(fixedText, "<") && isStringFoundCaseSensitive(fixedText, ">")) {
         string htmlTag("<");
         htmlTag += getStringInBetweenTwoStrings(fixedText, "<", ">");
         htmlTag += ">";

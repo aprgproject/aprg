@@ -29,8 +29,7 @@ TEST(CommonFunctionLibraryTest, GreatestIntegerFunctionWorks) {
     Function greatestIntegerFunctionObject(greatestIntegerFunction(-5.1));
 
     EXPECT_EQ("greatestIntegerFunction", greatestIntegerFunctionObject.getFunctionName());
-    EXPECT_EQ(
-        Term(-5.1), getTermConstReferenceFromBaseTerm(greatestIntegerFunctionObject.getInputTerm()));
+    EXPECT_EQ(Term(-5.1), getTermConstReferenceFromBaseTerm(greatestIntegerFunctionObject.getInputTerm()));
     EXPECT_EQ(AlbaNumber(-5), greatestIntegerFunctionObject.performFunctionAndReturnResultIfPossible());
 }
 

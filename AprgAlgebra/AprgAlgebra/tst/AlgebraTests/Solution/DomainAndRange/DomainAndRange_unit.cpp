@@ -23,8 +23,7 @@ TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunction) 
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
-    EXPECT_EQ(
-        AlbaNumberInterval(createCloseEndpoint(6), createPositiveInfinityOpenEndpoint()), acceptedIntervals[0]);
+    EXPECT_EQ(AlbaNumberInterval(createCloseEndpoint(6), createPositiveInfinityOpenEndpoint()), acceptedIntervals[0]);
 }
 
 TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunctionWithNanValues) {
@@ -48,8 +47,7 @@ TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTermWithV
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
-    EXPECT_EQ(
-        AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createCloseEndpoint(2)), acceptedIntervals[0]);
+    EXPECT_EQ(AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createCloseEndpoint(2)), acceptedIntervals[0]);
 }
 
 TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithConstant) {
@@ -79,10 +77,8 @@ TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTermWithE
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
     ASSERT_EQ(2U, acceptedIntervals.size());
-    EXPECT_EQ(
-        AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createCloseEndpoint(0)), acceptedIntervals[0]);
-    EXPECT_EQ(
-        AlbaNumberInterval(createCloseEndpoint(2), createPositiveInfinityOpenEndpoint()), acceptedIntervals[1]);
+    EXPECT_EQ(AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createCloseEndpoint(0)), acceptedIntervals[0]);
+    EXPECT_EQ(AlbaNumberInterval(createCloseEndpoint(2), createPositiveInfinityOpenEndpoint()), acceptedIntervals[1]);
 }
 
 TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquationWithValues) {
@@ -94,8 +90,7 @@ TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquationWithValues) 
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
-    EXPECT_EQ(
-        AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createCloseEndpoint(6)), acceptedIntervals[0]);
+    EXPECT_EQ(AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createCloseEndpoint(6)), acceptedIntervals[0]);
 }
 
 TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquation) {
@@ -166,8 +161,7 @@ TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquationWithValues) {
 
     AlbaNumberIntervals acceptedIntervals(actualRange.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
-    EXPECT_EQ(
-        AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createCloseEndpoint(6)), acceptedIntervals[0]);
+    EXPECT_EQ(AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createCloseEndpoint(6)), acceptedIntervals[0]);
 }
 
 TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquation) {

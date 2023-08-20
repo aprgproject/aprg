@@ -69,7 +69,7 @@ private:
         } else {
             collectSubsetsUsingOnlyRecursion(
                 subsets, currentSubset, objects,
-                index + 1);  // recursively call with next object (without object in subset)
+                index + 1);                              // recursively call with next object (without object in subset)
             currentSubset.emplace_back(objects[index]);  // add object in subset
             collectSubsetsUsingOnlyRecursion(
                 subsets, currentSubset, objects,

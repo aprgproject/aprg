@@ -7,6 +7,5 @@
 namespace alba {
 using MousePosition = AlbaXY<int>;
 
-class AlbaLinuxUserAutomation {
-};
+class AlbaLinuxUserAutomation {};
 }  // namespace alba

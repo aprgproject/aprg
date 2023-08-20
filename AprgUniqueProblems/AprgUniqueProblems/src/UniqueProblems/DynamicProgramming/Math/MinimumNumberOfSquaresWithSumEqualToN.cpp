@@ -1,7 +1,7 @@
 #include "MinimumNumberOfSquaresWithSumEqualToN.hpp"
 
-#include <UniqueProblems/DynamicProgramming/Other/CoinProblem.hpp>
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
+#include <UniqueProblems/DynamicProgramming/Other/CoinProblem.hpp>
 
 #include <queue>
 

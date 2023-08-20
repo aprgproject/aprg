@@ -213,18 +213,12 @@ private:
         InputTermToTrigonometryFunctionExponentsMap const& inputTermToExponents);
     void integrateUsingKnownTrigonometricCombinations(
         Term& result, TrigonometryFunctionExponents const& exponents, Term const& functionInputTerm);
-    void integrateSinRaiseToAnIntegerGreaterThanOne(
-        Term& result, Term const& functionInputTerm, int const exponent);
-    void integrateCosRaiseToAnIntegerGreaterThanOne(
-        Term& result, Term const& functionInputTerm, int const exponent);
-    void integrateTanRaiseToAnIntegerGreaterThanOne(
-        Term& result, Term const& functionInputTerm, int const exponent);
-    void integrateCscRaiseToAnIntegerGreaterThanOne(
-        Term& result, Term const& functionInputTerm, int const exponent);
-    void integrateSecRaiseToAnIntegerGreaterThanOne(
-        Term& result, Term const& functionInputTerm, int const exponent);
-    void integrateCotRaiseToAnIntegerGreaterThanOne(
-        Term& result, Term const& functionInputTerm, int const exponent);
+    void integrateSinRaiseToAnIntegerGreaterThanOne(Term& result, Term const& functionInputTerm, int const exponent);
+    void integrateCosRaiseToAnIntegerGreaterThanOne(Term& result, Term const& functionInputTerm, int const exponent);
+    void integrateTanRaiseToAnIntegerGreaterThanOne(Term& result, Term const& functionInputTerm, int const exponent);
+    void integrateCscRaiseToAnIntegerGreaterThanOne(Term& result, Term const& functionInputTerm, int const exponent);
+    void integrateSecRaiseToAnIntegerGreaterThanOne(Term& result, Term const& functionInputTerm, int const exponent);
+    void integrateCotRaiseToAnIntegerGreaterThanOne(Term& result, Term const& functionInputTerm, int const exponent);
     void integrateSinAndCosCombinationWithExponentsGreaterThanOne(
         Term& result, Term const& functionInputTerm, int const sinExponent, int const cosExponent);
     void integrateCscAndCotCombinationWithExponentsGreaterThanOne(
@@ -237,14 +231,10 @@ private:
         Term& outputTerm, Term const& inputTerm, int const exponent) const;
     void putReducedCosineSquaredToDoubleAngleCosineTerms(
         Term& outputTerm, Term const& inputTerm, int const exponent) const;
-    void putTangentSquaredToSecantSquaredTerms(
-        Term& outputTerm, Term const& inputTerm, int const exponent) const;
-    void putCosecantSquaredToCotangentSquaredTerms(
-        Term& outputTerm, Term const& inputTerm, int const exponent) const;
-    void putSecantSquaredToTangentSquaredTerms(
-        Term& outputTerm, Term const& inputTerm, int const exponent) const;
-    void putCotangentSquaredToCosecantSquaredTerms(
-        Term& outputTerm, Term const& inputTerm, int const exponent) const;
+    void putTangentSquaredToSecantSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent) const;
+    void putCosecantSquaredToCotangentSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent) const;
+    void putSecantSquaredToTangentSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent) const;
+    void putCotangentSquaredToCosecantSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent) const;
 
     // Simplify
     void simplifyForIntegration(Term& term, Configuration const& configuration) const;

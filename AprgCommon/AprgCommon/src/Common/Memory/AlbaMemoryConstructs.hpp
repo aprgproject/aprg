@@ -228,7 +228,7 @@
 //
 // template< class T >
 // struct alignment_of;
-// 		(since C++11)
+//      (since C++11)
 //
 // Provides the member constant value equal to the alignment requirement of the type T, as if obtained by an alignof
 // expression. If T is an array type, returns the alignment requirements of the element type. If T is a reference type,

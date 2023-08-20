@@ -61,8 +61,7 @@ TEST(CombSorterTest, SortWorksOnStringsUsingExample1) {
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);
 }
 
-TEST(CombSorterTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1)
-{
+TEST(CombSorterTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1) {
     StabilityCheckObjectsSorter sorter;
     testSortAsNotStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(
         sorter);

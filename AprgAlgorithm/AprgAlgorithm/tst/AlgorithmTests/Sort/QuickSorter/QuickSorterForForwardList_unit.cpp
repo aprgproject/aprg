@@ -61,8 +61,7 @@ TEST(QuickSorterForForwardListTest, SortWorksOnStringsUsingExample1) {
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);
 }
 
-TEST(QuickSorterForForwardListTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1)
-{
+TEST(QuickSorterForForwardListTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1) {
     StabilityCheckObjectsSorter sorter;
     testSortAsNotStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(
         sorter);

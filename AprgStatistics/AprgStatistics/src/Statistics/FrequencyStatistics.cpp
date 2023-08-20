@@ -10,8 +10,7 @@ namespace alba {
 
 int FrequencyStatistics::calculateNumberOfSamples(FrequencySamples const& samples) {
     return accumulate(
-        samples.cbegin(), samples.cend(), (int)0,
-        [](int partialResult, FrequencyPair const& frequencyPair) {
+        samples.cbegin(), samples.cend(), (int)0, [](int partialResult, FrequencyPair const& frequencyPair) {
             return partialResult + ((int)frequencyPair.second);
         });
 }

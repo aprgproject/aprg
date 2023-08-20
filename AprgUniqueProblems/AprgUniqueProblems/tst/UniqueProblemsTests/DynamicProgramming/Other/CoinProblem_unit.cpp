@@ -157,11 +157,9 @@ TEST(CoinProblemTest, GetCoinCombinationsUsingMemoizationDPWorksOnExample1) {
     CoinProblem coinProblem({1, 3, 4});
 
     EXPECT_EQ(
-        (CoinCombinations{{1, 1, 1, 1, 1}, {1, 1, 3}, {1, 4}}),
-        coinProblem.getCoinCombinationsUsingMemoizationDP(5));
+        (CoinCombinations{{1, 1, 1, 1, 1}, {1, 1, 3}, {1, 4}}), coinProblem.getCoinCombinationsUsingMemoizationDP(5));
     EXPECT_EQ(
-        (CoinCombinations{
-            {{1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 3}, {1, 1, 1, 4}, {1, 3, 3}, {3, 4}}}),
+        (CoinCombinations{{{1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 3}, {1, 1, 1, 4}, {1, 3, 3}, {3, 4}}}),
         coinProblem.getCoinCombinationsUsingMemoizationDP(7));
 }
 
@@ -169,11 +167,9 @@ TEST(CoinProblemTest, GetCoinCombinationsUsingIterativeDPWorksOnExample1) {
     CoinProblem coinProblem({1, 3, 4});
 
     EXPECT_EQ(
-        (CoinCombinations{{1, 1, 1, 1, 1}, {1, 1, 3}, {1, 4}}),
-        coinProblem.getCoinCombinationsUsingIterativeDP(5));
+        (CoinCombinations{{1, 1, 1, 1, 1}, {1, 1, 3}, {1, 4}}), coinProblem.getCoinCombinationsUsingIterativeDP(5));
     EXPECT_EQ(
-        (CoinCombinations{
-            {{1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 3}, {1, 1, 1, 4}, {1, 3, 3}, {3, 4}}}),
+        (CoinCombinations{{{1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 3}, {1, 1, 1, 4}, {1, 3, 3}, {3, 4}}}),
         coinProblem.getCoinCombinationsUsingIterativeDP(7));
 }
 

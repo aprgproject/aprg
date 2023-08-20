@@ -113,7 +113,7 @@ TEST(TernarySearchTrieSubstringsSetTest, GetKeysWorks) {
     Strings keysToVerify(trie.getKeys());
 
     Strings expectedKeys{"b",    "by",    "s",      "se",  "sea",  "sel",   "sell", "sells", "sh", "she",
-                      "shel", "shell", "shells", "sho", "shor", "shore", "t",    "th",    "the"};
+                         "shel", "shell", "shells", "sho", "shor", "shore", "t",    "th",    "the"};
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
@@ -133,7 +133,7 @@ TEST(TernarySearchTrieSubstringsSetTest, GetAllKeysWithPrefixWorks) {
     Strings keysToVerify(trie.getAllKeysWithPrefix("s"));
 
     Strings expectedKeys{"s",   "se",   "sea",   "sel",    "sell", "sells", "sh",
-                      "she", "shel", "shell", "shells", "sho",  "shor",  "shore"};
+                         "she", "shel", "shell", "shells", "sho",  "shor",  "shore"};
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 

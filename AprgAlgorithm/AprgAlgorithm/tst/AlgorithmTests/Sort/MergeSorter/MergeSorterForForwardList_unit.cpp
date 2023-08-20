@@ -61,8 +61,7 @@ TEST(MergeSorterForForwardListTest, SortWorksOnStringsUsingExample1) {
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);
 }
 
-TEST(MergeSorterForForwardListTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1)
-{
+TEST(MergeSorterForForwardListTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) {
     StabilityCheckObjectsSorter sorter;
     testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(sorter);
 }

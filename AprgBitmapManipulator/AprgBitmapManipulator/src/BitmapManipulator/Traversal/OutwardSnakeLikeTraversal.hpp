@@ -12,8 +12,8 @@ class OutwardSnakeLikeTraversal {
 public:
     enum class Direction { Up, Down, Left, Right };
     OutwardSnakeLikeTraversal(
-        BitmapXY const& currentPoint, Direction const direction, int const lowestLeft,
-        int const highestRight, int const lowestTop, int const highestBottom);
+        BitmapXY const& currentPoint, Direction const direction, int const lowestLeft, int const highestRight,
+        int const lowestTop, int const highestBottom);
 
     bool isTraversalFinished() const;
     BitmapXY getNextPoint();

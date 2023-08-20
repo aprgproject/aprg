@@ -32,11 +32,9 @@ PenCircles::CircleCenterConnections const& PenCircles::getCenterConnections() co
 PenCircles::PointAndPenCircleDetailsPairs PenCircles::getNearestPenCirclesToAPoint(
     BitmapXY const& point, int const distance) const {
     PointAndPenCircleDetailsPairs result;
-    int minX =
-        static_cast<int>(clampLowerBound(convertToSignedThenSubtract<int>(point.getX(), distance), 0));
+    int minX = static_cast<int>(clampLowerBound(convertToSignedThenSubtract<int>(point.getX(), distance), 0));
     int maxX = point.getX() + distance;
-    int minY =
-        static_cast<int>(clampLowerBound(convertToSignedThenSubtract<int>(point.getY(), distance), 0));
+    int minY = static_cast<int>(clampLowerBound(convertToSignedThenSubtract<int>(point.getY(), distance), 0));
     int maxY = point.getY() + distance;
     for (auto const& pointAndPenCircleDetailsPair : m_penCircles) {
         BitmapXY const& centerPoint(pointAndPenCircleDetailsPair.first);

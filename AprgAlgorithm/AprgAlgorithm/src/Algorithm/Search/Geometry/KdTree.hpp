@@ -106,8 +106,8 @@ protected:
                 result = getRankStartingOnThisNode(nodePointer->left, key);  // recursively check rank on the right side
             } else if (isGreaterThanWithDepth(key, currentKey, depth)) {
                 // get size of left, add one node for this node, and add the rank on the right side
-                result =
-                    1 + this->getSizeOfThisSubTree(nodePointer->left) + getRankStartingOnThisNode(nodePointer->right, key);
+                result = 1 + this->getSizeOfThisSubTree(nodePointer->left) +
+                         getRankStartingOnThisNode(nodePointer->right, key);
             } else {
                 result = this->getSizeOfThisSubTree(nodePointer->left);  // if equal, just get size of the subtree
             }

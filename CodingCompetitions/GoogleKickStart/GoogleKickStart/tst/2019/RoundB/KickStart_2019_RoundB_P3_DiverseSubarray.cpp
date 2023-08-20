@@ -236,8 +236,7 @@ protected:
                             m_treeValues[parentIndex] = m_treeValues[treeIndex];
                         }
                     } else {
-                        m_treeValues[parentIndex] =
-                            m_function(m_treeValues[treeIndex - 1], m_treeValues[treeIndex]);
+                        m_treeValues[parentIndex] = m_function(m_treeValues[treeIndex - 1], m_treeValues[treeIndex]);
                     }
                     treeIndex = parentIndex;
                 }

@@ -91,8 +91,7 @@ protected:
     friend std::ostream& operator<<(std::ostream& out, DirectedGraphWithArrayOfAdjacencyLists const& graph) {
         out << "Adjacency Lists: \n";
         for (Vertex vertex = 0; vertex < static_cast<Vertex>(graph.m_adjacencyLists.size()); vertex++) {
-            DirectedGraphWithArrayOfAdjacencyLists::AdjacencyList const& adjacencyList(
-                graph.m_adjacencyLists[vertex]);
+            DirectedGraphWithArrayOfAdjacencyLists::AdjacencyList const& adjacencyList(graph.m_adjacencyLists[vertex]);
             if (!adjacencyList.empty()) {
                 out << "Adjacent with vertex " << vertex << ": {";
                 containerHelper::saveContentsToStream(out, adjacencyList, containerHelper::StreamFormat::String);

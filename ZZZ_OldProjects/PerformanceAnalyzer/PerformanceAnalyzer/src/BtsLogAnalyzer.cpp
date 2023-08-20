@@ -489,11 +489,9 @@ void BtsLogAnalyzer::saveAdditionalPrintsRlSetup(string const& lineInLogs, LogTi
             printsAvailableForTheUser.hasBB_2_RL_SETUP_REQ_MSG = true;
         } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(BB_2_RL_SETUP_ACK_MSG)")) {
             printsAvailableForTheUser.hasBB_2_RL_SETUP_ACK_MSG = true;
-        } else if (isStringFoundNotCaseSensitive(
-                       lineInLogs, R"(TC_TRANSPORT_BEARER_REGISTER_MSG)")) {
+        } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(TC_TRANSPORT_BEARER_REGISTER_MSG)")) {
             printsAvailableForTheUser.hasTC_TRANSPORT_BEARER_REGISTER_MSG = true;
-        } else if (isStringFoundNotCaseSensitive(
-                       lineInLogs, R"(TC_TRANSPORT_BEARER_REGISTER_RESP_MSG)")) {
+        } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(TC_TRANSPORT_BEARER_REGISTER_RESP_MSG)")) {
             printsAvailableForTheUser.hasTC_TRANSPORT_BEARER_REGISTER_RESP_MSG = true;
         }
     }

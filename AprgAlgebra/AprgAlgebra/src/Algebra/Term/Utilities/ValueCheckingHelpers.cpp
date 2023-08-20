@@ -87,8 +87,7 @@ bool doAnyNumbersSatisfyTheCondition(Term const& term, NumberCheckingCondition c
 bool doAnyNumbersSatisfyTheCondition(Monomial const& monomial, NumberCheckingCondition const& condition) {
     bool result(condition(monomial.getCoefficient()));
     if (!result) {
-        Monomial::VariablesToExponentsMap const& variableExponentMap(
-            monomial.getVariablesToExponentsMap());
+        Monomial::VariablesToExponentsMap const& variableExponentMap(monomial.getVariablesToExponentsMap());
         result = any_of(
             variableExponentMap.cbegin(), variableExponentMap.cend(),
             [&](auto const& variableExponentsPair) { return condition(variableExponentsPair.second); });
@@ -118,9 +117,9 @@ bool doAnyNumbersSatisfyTheCondition(Function const& function, NumberCheckingCon
 bool willHaveNoEffectOnAdditionOrSubtraction(Term const& term) { return term.isEmpty() || isTheValue(term, 0); }
 
 bool willHaveNoEffectOnAdditionOrSubtraction(Expression const& expression) {
-    return expression.isEmpty() || (expression.containsOnlyOnePositivelyAssociatedTerm() &&
-                                    willHaveNoEffectOnAdditionOrSubtraction(
-                                        getTermConstReferenceFromBaseTerm(expression.getFirstTerm())));
+    return expression.isEmpty() ||
+           (expression.containsOnlyOnePositivelyAssociatedTerm() &&
+            willHaveNoEffectOnAdditionOrSubtraction(getTermConstReferenceFromBaseTerm(expression.getFirstTerm())));
 }
 
 bool willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(Term const& term) {
@@ -147,9 +146,7 @@ bool isTheValue(Term const& term, AlbaNumber const& number) {
     return result;
 }
 
-bool isTheValue(Constant const& constant, AlbaNumber const& number) {
-    return constant.getNumber() == number;
-}
+bool isTheValue(Constant const& constant, AlbaNumber const& number) { return constant.getNumber() == number; }
 
 bool isTheValue(Monomial const& monomial, AlbaNumber const& number) {
     bool result(false);
@@ -258,13 +255,10 @@ bool isANegativeExpression(Expression const& expression) {
     return result;
 }
 
-bool isIntegerConstant(Term const& term) {
-    return term.isConstant() && term.getAsNumber().isIntegerType();
-}
+bool isIntegerConstant(Term const& term) { return term.isConstant() && term.getAsNumber().isIntegerType(); }
 
 bool isPositiveIntegerConstant(Term const& term) {
-    return term.isConstant() && term.getAsNumber().isIntegerType() &&
-           term.getAsNumber() >= 0;
+    return term.isConstant() && term.getAsNumber().isIntegerType() && term.getAsNumber() >= 0;
 }
 
 bool isARealFiniteConstant(Term const& term) {

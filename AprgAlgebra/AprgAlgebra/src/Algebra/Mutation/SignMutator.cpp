@@ -35,9 +35,7 @@ void SignMutator::mutateTerm(Term& term) {
     term.simplify();
 }
 
-void SignMutator::mutateConstant(Constant& constant) {
-    constant.setNumber(getSign(constant.getNumber()));
-}
+void SignMutator::mutateConstant(Constant& constant) { constant.setNumber(getSign(constant.getNumber())); }
 
 void SignMutator::mutateVariable(Variable&) {}
 

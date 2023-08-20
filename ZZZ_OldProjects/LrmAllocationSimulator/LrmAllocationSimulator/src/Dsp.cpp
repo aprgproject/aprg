@@ -90,8 +90,8 @@ NyquistType Dsp::getNyquistType() const { return m_dspDetails.nyquistType; }
 
 bool Dsp::isEmpty() const {
     // For the allocation of the MCD, Telecom will first try to find a free DCD without any users nor HSPA/HS-RACH
-    // resources allocated. If such free DCD is not found, then either a DSP with already allocated users or HSPA/HS-RACH
-    // resources or a PIC device is selected. how about other allocations?
+    // resources allocated. If such free DCD is not found, then either a DSP with already allocated users or
+    // HSPA/HS-RACH resources or a PIC device is selected. how about other allocations?
     return !hasEmergencyCalls() && getMode() == DspMode::NyquistDedicatedChannelDevice && getNumberOfDchUsers() == 0 &&
            getNumberOfHsupaCfs() == 0 && getNumberOfHsRachCfs() == 0;
 }

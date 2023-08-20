@@ -77,8 +77,8 @@ void MultipleGamesWithMaze::addGameWithMaze(
 UnsignedInteger MultipleGamesWithMaze::getCombinedGrundyNumber() {
     UnsignedInteger result(0U);
     for (UnsignedInteger gameIndex = 0; gameIndex < m_games.size(); gameIndex++) {
-        result = math::getCombinedGrundyNumber(
-            result, m_games[gameIndex].getGrundyNumberAt(m_coordinateInGames[gameIndex]));
+        result =
+            math::getCombinedGrundyNumber(result, m_games[gameIndex].getGrundyNumberAt(m_coordinateInGames[gameIndex]));
     }
     return result;
 }

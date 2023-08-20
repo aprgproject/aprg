@@ -132,8 +132,8 @@ AlbaNumbers getCoefficientsInMonomialsWithExponentsInOrder(
 AlbaNumbers calculatePolynomialRoots(AlbaNumbers const& coefficients) {
     AlbaNumbers result;
     if (coefficients.size() == 3) {
-        result = getQuadraticRoots(
-            mathHelper::RootType::RealRootsOnly, coefficients[0], coefficients[1], coefficients[2]);
+        result =
+            getQuadraticRoots(mathHelper::RootType::RealRootsOnly, coefficients[0], coefficients[1], coefficients[2]);
     } else {
         AlbaNumbers derivativeRoots(calculatePolynomialRoots(getDerivativeCoefficients(coefficients)));
         result = calculatePolynomialRootsUsingBrentMethod(derivativeRoots, coefficients);

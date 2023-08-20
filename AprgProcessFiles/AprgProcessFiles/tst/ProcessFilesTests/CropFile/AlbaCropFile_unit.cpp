@@ -64,7 +64,7 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocument) {
     ASSERT_TRUE(outputTestFile.good());
     ASSERT_FALSE(outputTestFile.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
-    
+
 #if defined(OS_WINDOWS) && (defined(__clang__) || defined(__GNUC__) || defined(__GNUG__))
     // Covers Windows GCC and Clang
     // windows handling is problematic, tellg on windows works on mysterious ways

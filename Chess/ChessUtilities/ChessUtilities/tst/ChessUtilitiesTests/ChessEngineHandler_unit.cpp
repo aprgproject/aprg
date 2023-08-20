@@ -55,5 +55,3 @@ TEST(ChessEngineHandlerTest, DISABLED_ResetWorks) {
 }  // namespace chess
 
 }  // namespace alba
-
-

@@ -49,8 +49,7 @@ bool isConvergentUsingComparisonTest(
             Term termToCheck(seriesToCheck.getTermValueAtIndex(i));
             Term convergentTerm(convergentSeries.getTermValueAtIndex(i));
             if (termToCheck.isConstant() && convergentTerm.isConstant()) {
-                areAllValuesSatisfied =
-                    (termToCheck.getAsNumber() <= convergentTerm.getAsNumber());
+                areAllValuesSatisfied = (termToCheck.getAsNumber() <= convergentTerm.getAsNumber());
                 if (!areAllValuesSatisfied) {
                     break;
                 }
@@ -71,8 +70,7 @@ bool isDivergentUsingComparisonTest(
             Term termToCheck(seriesToCheck.getTermValueAtIndex(i));
             Term divergentTerm(divergentSeries.getTermValueAtIndex(i));
             if (termToCheck.isConstant() && divergentTerm.isConstant()) {
-                areAllValuesSatisfied =
-                    (termToCheck.getAsNumber() >= divergentTerm.getAsNumber());
+                areAllValuesSatisfied = (termToCheck.getAsNumber() >= divergentTerm.getAsNumber());
                 if (!areAllValuesSatisfied) {
                     break;
                 }

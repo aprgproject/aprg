@@ -183,9 +183,7 @@ Function const& Term::getAsFunction() const {
     return *static_cast<Function const*>(m_baseTermDataPointer.get());
 }
 
-AlbaNumber const& Term::getAsNumber() const {
-    return getAsConstant().getNumber();
-}
+AlbaNumber const& Term::getAsNumber() const { return getAsConstant().getNumber(); }
 
 string Term::getDebugString() const {
     stringstream ss;
@@ -265,7 +263,8 @@ Function& Term::getAsFunctionReference() {
 }
 
 BaseTermUniquePointer Term::createBasePointerByMove() {
-    return static_cast<BaseTermUniquePointer>(make_unique<Term>(m_type, m_isSimplified, std::move(m_baseTermDataPointer)));
+    return static_cast<BaseTermUniquePointer>(
+        make_unique<Term>(m_type, m_isSimplified, std::move(m_baseTermDataPointer)));
 }
 
 void Term::clear() {

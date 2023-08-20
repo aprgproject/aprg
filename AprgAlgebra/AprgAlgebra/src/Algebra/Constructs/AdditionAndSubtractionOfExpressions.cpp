@@ -97,8 +97,7 @@ void AdditionAndSubtractionOfExpressions::mergeExpressionsByCheckingTwoTermsAtAT
         for (int j = i + 1; j < size; j++) {
             // quadratic time: think on how this can be better
             if (canBeMerged(mergeParts[i], mergeParts[j], commonParts[i], commonParts[j])) {
-                Term mergedTerm(
-                    mergeTerms(mergeParts[i], mergeParts[j], m_associations[i], m_associations[j]));
+                Term mergedTerm(mergeTerms(mergeParts[i], mergeParts[j], m_associations[i], m_associations[j]));
                 Term const& commonPart(commonParts[i]);
                 mergeParts[i] = mergedTerm;
                 m_expressions[i] = createOrCopyExpressionFromATerm(mergedTerm * commonPart);

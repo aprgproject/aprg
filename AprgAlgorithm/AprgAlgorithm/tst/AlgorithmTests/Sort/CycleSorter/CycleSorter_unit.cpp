@@ -61,8 +61,7 @@ TEST(CycleSorterTest, SortWorksOnStringsUsingExample1) {
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);
 }
 
-TEST(CycleSorterTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1)
-{
+TEST(CycleSorterTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1) {
     StabilityCheckObjectsSorter sorter;
     testSortAsNotStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(
         sorter);

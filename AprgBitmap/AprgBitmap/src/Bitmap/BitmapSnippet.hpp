@@ -47,8 +47,7 @@ private:
     int calculateIndexInPixelData(BitmapXY const position) const;
     uint32_t getPixelAtForPixelInAByte(uint8_t const* reader, int const index, BitmapXY const position) const;
     uint32_t getPixelAtForMultipleBytePixels(uint8_t const* reader, int const index) const;
-    void setPixelAtForPixelInAByte(
-        uint8_t* writer, int const index, BitmapXY const position, uint32_t const value);
+    void setPixelAtForPixelInAByte(uint8_t* writer, int const index, BitmapXY const position, uint32_t const value);
     void setPixelAtForMultipleBytePixels(uint8_t* writer, int const index, uint32_t const value);
     BitmapXY m_topLeftCorner;
     BitmapXY m_bottomRightCorner;

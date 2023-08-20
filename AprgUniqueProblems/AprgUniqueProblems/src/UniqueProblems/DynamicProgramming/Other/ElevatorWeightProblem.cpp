@@ -25,8 +25,7 @@ int ElevatorWeightProblem::getNumberOfOptimalRides() {
                     newOption.first++;
                     newOption.second = m_peopleWeights[person];
                 }
-                m_numberOfRidesAndLastWeights[peopleBits] =
-                    min(m_numberOfRidesAndLastWeights[peopleBits], newOption);
+                m_numberOfRidesAndLastWeights[peopleBits] = min(m_numberOfRidesAndLastWeights[peopleBits], newOption);
             }
         }
     }

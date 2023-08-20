@@ -106,8 +106,8 @@ void PenCirclesDrawer::writeCirclesWithOverlay() {
 void PenCirclesDrawer::connectCirclesIfNeeded() {
     for (auto const& mainPair : m_penCircles.getPenCircles()) {
         BitmapXY const& centerPoint(mainPair.first);
-        PenCircles::PointAndPenCircleDetailsPairs neighborPairs(m_penCircles.getNearestPenCirclesToAPoint(
-            centerPoint, static_cast<int>(round(mainPair.second.radius))));
+        PenCircles::PointAndPenCircleDetailsPairs neighborPairs(
+            m_penCircles.getNearestPenCirclesToAPoint(centerPoint, static_cast<int>(round(mainPair.second.radius))));
         for (auto const& neighborPair : neighborPairs) {
             if (mainPair.first != neighborPair.first && isToBeConnected(mainPair, neighborPair)) {
                 m_penCircles.connectCircles(centerPoint, neighborPair.first);

@@ -1,9 +1,9 @@
 #pragma once
 
 #include <CPlusPlus/Utilities.hpp>
+#include <Common/Container/AlbaOptional.hpp>
 
 #include <map>
-#include <Common/Container/AlbaOptional.hpp>
 #include <string>
 
 using std::map;

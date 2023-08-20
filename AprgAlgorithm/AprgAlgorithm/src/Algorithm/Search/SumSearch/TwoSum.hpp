@@ -45,8 +45,7 @@ public:
 
 private:
     ValuePair getTwoValuesWithSum(
-        Value const& targetSum, Index const lowIndex, Index const highIndex,
-        Comparator const& shouldContinue) const {
+        Value const& targetSum, Index const lowIndex, Index const highIndex, Comparator const& shouldContinue) const {
         ValuePair result{};
         if (!m_sortedValues.empty()) {
             Index iLow = lowIndex, iHigh = highIndex;

@@ -22,8 +22,7 @@ public:
     Index getIndexOfValue(Value const& target) {
         Index lowIndex(0);
         Index exponentIndex(1);
-        while (exponentIndex < static_cast<Index>(m_sortedValues.size()) &&
-               m_sortedValues[exponentIndex] < target) {
+        while (exponentIndex < static_cast<Index>(m_sortedValues.size()) && m_sortedValues[exponentIndex] < target) {
             lowIndex = exponentIndex + 1;
             exponentIndex = exponentIndex * 2;
         }

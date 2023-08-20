@@ -12,8 +12,7 @@ namespace AprgBitmap {
 OutwardCircleTraversal::Coordinate::Coordinate(int const firstValue, int const secondValue)
     : coordinate1(firstValue), coordinate2(secondValue) {}
 
-OutwardCircleTraversal::OutwardCircleTraversal(int const maxRadius)
-    : m_maxRadius(maxRadius), m_radiusToCoordinates() {
+OutwardCircleTraversal::OutwardCircleTraversal(int const maxRadius) : m_maxRadius(maxRadius), m_radiusToCoordinates() {
     constructRadiusToCoordinates();
 }
 

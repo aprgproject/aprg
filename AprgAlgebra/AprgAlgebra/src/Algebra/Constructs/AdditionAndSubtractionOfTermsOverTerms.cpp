@@ -147,8 +147,7 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedNumeratorExpressio
     for (int numeratorIndex = 0; numeratorIndex < numberOfItems; numeratorIndex++) {
         Expression combinedNumeratorOnIndex(
             getCombinedExpressionForNumeratorOnIndex(numeratorIndex, lcmDenominatorTerms));
-        combineExpressionAsAddOrSubtract(
-            combinedNumerator, combinedNumeratorOnIndex, m_associations[numeratorIndex]);
+        combineExpressionAsAddOrSubtract(combinedNumerator, combinedNumeratorOnIndex, m_associations[numeratorIndex]);
     }
     return combinedNumerator;
 }

@@ -60,10 +60,8 @@ public:
     int getMaximumNumberOfPixelsBeforeOneByte() const;
     int getMinimumNumberOfBytesForOnePixel() const;
     int getEstimatedSquareSideInPixels(int const numberOfBytesToRead) const;
-    int getOneRowSizeInBytesFromPixels(
-        int const leftPixelInclusive, int const rightPixelInclusive) const;
-    int getOneRowSizeInBytesFromBytes(
-        int const leftByteInclusive, int const rightByteInclusive) const;
+    int getOneRowSizeInBytesFromPixels(int const leftPixelInclusive, int const rightPixelInclusive) const;
+    int getOneRowSizeInBytesFromBytes(int const leftByteInclusive, int const rightByteInclusive) const;
 
     Colors getColorTable() const;
 

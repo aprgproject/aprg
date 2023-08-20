@@ -114,12 +114,10 @@ TEST(PolynomialTest, GetMonomialsReferenceWorks) {
     Monomials const& monomialsToCheck(polynomial.getMonomials());
     ASSERT_EQ(2U, monomialsToCheck.size());
     EXPECT_DOUBLE_EQ(22, monomialsToCheck[0].getCoefficient().getDouble());
-    Monomial::VariablesToExponentsMap const& variableMap1(
-        monomialsToCheck[0].getVariablesToExponentsMap());
+    Monomial::VariablesToExponentsMap const& variableMap1(monomialsToCheck[0].getVariablesToExponentsMap());
     ASSERT_TRUE(variableMap1.empty());
     EXPECT_DOUBLE_EQ(-7, monomialsToCheck[1].getCoefficient().getDouble());
-    Monomial::VariablesToExponentsMap const& variableMap2(
-        monomialsToCheck[1].getVariablesToExponentsMap());
+    Monomial::VariablesToExponentsMap const& variableMap2(monomialsToCheck[1].getVariablesToExponentsMap());
     ASSERT_EQ(4U, variableMap2.size());
     EXPECT_DOUBLE_EQ(2, variableMap2.at("x").getDouble());
     EXPECT_DOUBLE_EQ(3, variableMap2.at("y").getDouble());
@@ -215,8 +213,7 @@ TEST(PolynomialTest, SimplifyWorksAsSkippedWhenIsSimplifiedIsSet) {
     Monomials const& monomials(polynomial.getMonomials());
     ASSERT_EQ(1U, monomials.size());
     EXPECT_DOUBLE_EQ(-6, monomials[0].getCoefficient().getDouble());
-    Monomial::VariablesToExponentsMap const& variableToExponentMap(
-        monomials[0].getVariablesToExponentsMap());
+    Monomial::VariablesToExponentsMap const& variableToExponentMap(monomials[0].getVariablesToExponentsMap());
     EXPECT_EQ(2U, variableToExponentMap.size());
     auto it = variableToExponentMap.cbegin();
     EXPECT_EQ("y", it->first);

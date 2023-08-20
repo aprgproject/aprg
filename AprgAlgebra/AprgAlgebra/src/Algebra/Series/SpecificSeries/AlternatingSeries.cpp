@@ -13,8 +13,7 @@ namespace alba {
 namespace algebra {
 
 AlternatingSeries::AlternatingSeries(Term const& formulaForEachTermWithoutSign, string const& variableName)
-    : SeriesBasedOnSummation(
-          getFormula(formulaForEachTermWithoutSign, variableName), variableName),
+    : SeriesBasedOnSummation(getFormula(formulaForEachTermWithoutSign, variableName), variableName),
       m_formulaForEachTermWithoutSign(formulaForEachTermWithoutSign) {}
 
 bool AlternatingSeries::isConvergent() const {
@@ -32,8 +31,7 @@ Term AlternatingSeries::getRemainderAtIndex(int const index) const {
     return result;
 }
 
-Term AlternatingSeries::getFormula(
-    Term const& formulaForEachTermWithoutSign, string const& variableName) const {
+Term AlternatingSeries::getFormula(Term const& formulaForEachTermWithoutSign, string const& variableName) const {
     Term sign(createExpressionIfPossible({-1, "^", variableName}));
     return createExpressionIfPossible({sign, "*", formulaForEachTermWithoutSign});
 }

@@ -183,8 +183,7 @@ bool PolynomialOverPolynomial::removeCommonFactorsAndReturnIfSomeFactorsAreRemov
     for (Polynomials::iterator numeratorIterator = numeratorFactors.begin();
          numeratorIterator != numeratorFactors.end(); ++numeratorIterator) {
         for (Polynomials::iterator denominatorIterator = denominatorFactors.begin();
-             denominatorIterator != denominatorFactors.end();
-             ++denominatorIterator) {
+             denominatorIterator != denominatorFactors.end(); ++denominatorIterator) {
             Polynomial const& numerator(*numeratorIterator);
             Polynomial const& denominator(*denominatorIterator);
             if (!(isOneMonomial(numerator) && isOneMonomial(denominator))) {

@@ -10,8 +10,8 @@ namespace alba {
 namespace AprgBitmap {
 
 OutwardSnakeLikeTraversal::OutwardSnakeLikeTraversal(
-    BitmapXY const& currentPoint, Direction const direction, int const lowestLeft,
-    int const highestRight, int const lowestTop, int const highestBottom)
+    BitmapXY const& currentPoint, Direction const direction, int const lowestLeft, int const highestRight,
+    int const lowestTop, int const highestBottom)
     : m_currentPoint(),
       m_direction(direction),
       m_lowestLeft(lowestLeft),

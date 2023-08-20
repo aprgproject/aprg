@@ -23,8 +23,7 @@ void RttAnalyzer2::processFile(string const& file) {
 
         while (logFileReader.isNotFinished()) {
             string lineInFile(logFileReader.getLineAndIgnoreWhiteSpaces());
-            if (isStringFoundNotCaseSensitive(
-                    lineInFile, "final RTT value reported to DSP explorer")) {
+            if (isStringFoundNotCaseSensitive(lineInFile, "final RTT value reported to DSP explorer")) {
                 processLine(outputLogStream, lineInFile);
             }
         }

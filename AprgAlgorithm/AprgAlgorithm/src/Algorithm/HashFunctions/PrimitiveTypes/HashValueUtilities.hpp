@@ -64,7 +64,8 @@ HashValue getHashUsingMultiplicationMethod(
 
 // -> What makes a good hash function
 // ---> A good hash function satisfies (approximately) the assumption of simple uniform hashing:
-// -----> each key is equally likely to hash to any of the m numberOfSlots, independently where any other key has hashed to
+// -----> each key is equally likely to hash to any of the m numberOfSlots, independently where any other key has hashed
+// to
 // ---> Unfortunately, we typically have no way to check this condition,
 // -----> since we rarely know how the probability distribution from which the keys are drawn.
 // ---> Moreover, the keys might not be drawn independently.

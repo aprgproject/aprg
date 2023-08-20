@@ -1,8 +1,8 @@
 #pragma once
 
 #include <Algorithm/Graph/UndirectedGraph/UndirectedGraphWithListOfEdges.hpp>
-#include <UniqueProblems/Utilities/PrintUtilities.hpp>
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
+#include <UniqueProblems/Utilities/PrintUtilities.hpp>
 
 namespace alba {
 

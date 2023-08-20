@@ -25,8 +25,7 @@ private:
         Polynomial const& polynomial, PolynomialToNumberMap& factorsToExponent, Monomial& commonMonomialInBase);
     int getGcfOfExponents(PolynomialToNumberMap const& factorsToExponent);
     Polynomial getRemainingBase(
-        PolynomialToNumberMap const& factorsToExponent, Monomial const& commonMonomialInBase,
-        int const gcfOfExponents);
+        PolynomialToNumberMap const& factorsToExponent, Monomial const& commonMonomialInBase, int const gcfOfExponents);
     Polynomial m_base;
     int m_exponent;
 };

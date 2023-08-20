@@ -14,7 +14,7 @@ public:
 
     virtual Component const* getChildPointerAt(
         int const) const  // Make sure that this doesn't break interface segregation principle. (Make sure the
-                                   // method/function makes sense.)
+                          // method/function makes sense.)
     {
         return nullptr;
     }
@@ -26,7 +26,7 @@ public:
     }
 
     virtual void removeAtIndex(int const)  // Make sure that this doesn't break interface segregation
-                                                    // principle. (Make sure the method/function makes sense.)
+                                           // principle. (Make sure the method/function makes sense.)
     {
         //...
     }

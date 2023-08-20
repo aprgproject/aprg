@@ -2,8 +2,9 @@
 
 # Set variable values
 scriptPath=$(realpath "$0")
-scriptDirectory=$(dirname "$(realpath "$0")")
-scriptName=$(basename "$(realpath "$0")")
+scriptDirectory=$(dirname "$scriptPath")
+scriptName=$(basename "$scriptPath")
+aprgDirectory=$(realpath "$scriptDirectory/../../")
 scriptRunningOption="$1"
 locateAprgScriptPath=$(realpath "$scriptDirectory/locateAprgDirectory.sh")
 exitCode=0

@@ -49,8 +49,7 @@ TEST(FordFulkersonUsingDfsTest, GetMaxFlowValueAndIsInMaxFlowMinCutWorksOnExampl
     flowNetwork.connect(5, 6, 2, 0);
     MaxFlowForTest maxFlow(flowNetwork);
 
-    PathsForTest expectedAugmentingPaths{
-        {1, 2, 3, 5, 6}, {1, 2, 3, 6}, {1, 4, 2, 3, 6}, {1, 4, 5, 3, 6}};
+    PathsForTest expectedAugmentingPaths{{1, 2, 3, 5, 6}, {1, 2, 3, 6}, {1, 4, 2, 3, 6}, {1, 4, 5, 3, 6}};
     EdgesForTest expectedMinCutEdges{{2, 3}, {4, 5}};
     EXPECT_DOUBLE_EQ(7, maxFlow.getMaxFlowValue());
     EXPECT_EQ(expectedAugmentingPaths, maxFlow.getAugmentingPaths());

@@ -12,8 +12,7 @@ using Path = PathSumInGridInRightOrDownTraversal::Path;
 }  // namespace
 
 TEST(PathSumInGridInRightOrDownTraversalTest, GetBestPathSumWithMinimumTypeWorksOnExample1) {
-    Grid inputGrid(
-        5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
+    Grid inputGrid(5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
     PathSumInGridInRightOrDownTraversal queryForTest(PathSumInGridInRightOrDownTraversal::Type::MinimumSum, inputGrid);
 
     EXPECT_EQ(49, queryForTest.getBestPathSumUsingNaiveRecursion());
@@ -31,8 +30,7 @@ TEST(PathSumInGridInRightOrDownTraversalTest, GetBestPathSumWithMinimumTypeWorks
 }
 
 TEST(PathSumInGridInRightOrDownTraversalTest, GetBestPathSumWithMaximumTypeWorksOnExample1) {
-    Grid inputGrid(
-        5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
+    Grid inputGrid(5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
     PathSumInGridInRightOrDownTraversal queryForTest(PathSumInGridInRightOrDownTraversal::Type::MaximumSum, inputGrid);
 
     EXPECT_EQ(67, queryForTest.getBestPathSumUsingNaiveRecursion());
@@ -50,16 +48,14 @@ TEST(PathSumInGridInRightOrDownTraversalTest, GetBestPathSumWithMaximumTypeWorks
 }
 
 TEST(PathSumInGridInRightOrDownTraversalTest, GetBestPathWithMinimumTypeWorksOnExample1) {
-    Grid inputGrid(
-        5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
+    Grid inputGrid(5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
     PathSumInGridInRightOrDownTraversal queryForTest(PathSumInGridInRightOrDownTraversal::Type::MinimumSum, inputGrid);
 
     EXPECT_EQ((Path{3, 9, 1, 3, 6, 3, 9, 7, 8}), queryForTest.getBestPathUsingIterativeDP());
 }
 
 TEST(PathSumInGridInRightOrDownTraversalTest, GetBestPathWithMaximumTypeWorksOnExample1) {
-    Grid inputGrid(
-        5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
+    Grid inputGrid(5, 5, {3, 7, 9, 2, 7, 9, 8, 3, 5, 5, 1, 7, 9, 8, 5, 3, 8, 6, 4, 10, 6, 3, 9, 7, 8});
     PathSumInGridInRightOrDownTraversal queryForTest(PathSumInGridInRightOrDownTraversal::Type::MaximumSum, inputGrid);
 
     EXPECT_EQ((Path{3, 9, 8, 7, 9, 8, 5, 10, 8}), queryForTest.getBestPathUsingIterativeDP());

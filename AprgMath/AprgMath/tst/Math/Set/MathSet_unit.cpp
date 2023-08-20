@@ -62,8 +62,7 @@ TEST(MathSetTest, MathSetCreatedWithInitializerListWorks) {
 }
 
 TEST(MathSetTest, MathSetCreatedWithASetRuleWorks) {
-    IntegerSet mathSet(
-        "set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    IntegerSet mathSet("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
 
     EXPECT_TRUE(mathSet.contains(2));
     EXPECT_FALSE(mathSet.contains(1));
@@ -75,8 +74,7 @@ TEST(MathSetTest, MathSetCreatedWithASetRuleWorks) {
 
 TEST(MathSetTest, IsASubsetOfWorks) {
     IntegerSet mathSet1({2, 4});
-    IntegerSet mathSet2(
-        "set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    IntegerSet mathSet2("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
 
     EXPECT_TRUE(mathSet1.isASubsetOf(mathSet2, generateNumbersFromZeroToTen));
     EXPECT_FALSE(mathSet2.isASubsetOf(mathSet1, generateNumbersFromZeroToTen));
@@ -91,8 +89,7 @@ TEST(MathSetTest, IsASupersetOfWorks) {
 }
 
 TEST(MathSetTest, IsDisjointWithWorks) {
-    IntegerSet mathSet1(
-        "set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    IntegerSet mathSet1("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
     IntegerSet mathSet2("set of odd numbers", [](int const& elementToCheck) { return isOdd(elementToCheck); });
     IntegerSet mathSet3({2, 4});
 
@@ -103,8 +100,7 @@ TEST(MathSetTest, IsDisjointWithWorks) {
 }
 
 TEST(MathSetTest, GetComplementWorks) {
-    IntegerSet mathSet(
-        "set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    IntegerSet mathSet("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
 
     IntegerSet complementSet(mathSet.getComplement());
 
@@ -118,8 +114,7 @@ TEST(MathSetTest, GetComplementWorks) {
 
 TEST(MathSetTest, GetUnionWithWorks) {
     IntegerSet mathSet1({1, 2, 3});
-    IntegerSet mathSet2(
-        "set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    IntegerSet mathSet2("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
 
     IntegerSet unionSet(mathSet1.getUnionWith(mathSet2));
 
@@ -133,8 +128,7 @@ TEST(MathSetTest, GetUnionWithWorks) {
 
 TEST(MathSetTest, GetIntersectionWithWorks) {
     IntegerSet mathSet1({1, 2, 3});
-    IntegerSet mathSet2(
-        "set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    IntegerSet mathSet2("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
 
     IntegerSet intersectionSet(mathSet1.getIntersectionWith(mathSet2));
 
@@ -148,8 +142,7 @@ TEST(MathSetTest, GetIntersectionWithWorks) {
 
 TEST(MathSetTest, GetDifferenceWithWorks) {
     IntegerSet mathSet1({1, 2, 3});
-    IntegerSet mathSet2(
-        "set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    IntegerSet mathSet2("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
 
     IntegerSet differenceSet(mathSet1.getDifferenceWith(mathSet2));
 
@@ -200,8 +193,7 @@ TEST(MathSetTest, GetIntersectionWorks) {
 
 TEST(MathSetTest, GetDifferenceWorks) {
     IntegerSet mathSet1({1, 2, 3});
-    IntegerSet mathSet2(
-        "set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
+    IntegerSet mathSet2("set of even numbers", [](int const& elementToCheck) { return isEven(elementToCheck); });
 
     IntegerSet differenceSet(getDifference(mathSet1, mathSet2));
 

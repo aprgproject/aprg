@@ -119,6 +119,45 @@
 			},
 		},
 		{
+			"label": "Configure In WSL Using Clang With Static Analyzers",
+			"type": "shell",
+			"command": "wsl",
+			"args": [
+				"./.vscode/runWslCommonScript.sh",
+				"outputWithAbsolutePaths",
+				"configureWithClangWithStaticAnalyzers",
+				"WslBuild",
+				"Debug",
+				"Ninja"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+			"problemMatcher": {
+				"owner": "cpp",
+				"fileLocation": [
+					"autoDetect",
+					"${workspaceRoot}"
+				],
+				"pattern": {
+					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+					"file": 1,
+					"line": 2,
+					"column": 3,
+					"severity": 4,
+					"message": 5
+				}
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+		},
+		{
 			"label": "Build In WSL",
 			"type": "shell",
 			"command": "wsl",

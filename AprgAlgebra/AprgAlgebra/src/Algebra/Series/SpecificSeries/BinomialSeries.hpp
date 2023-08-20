@@ -15,8 +15,7 @@ public:
     Term getValueAtIndex(int const index) const;
 
 protected:
-    Term getBinomialSeriesApproximation(
-        Term const& monomialPart, Term const& exponent, int const numberOfTimes) const;
+    Term getBinomialSeriesApproximation(Term const& monomialPart, Term const& exponent, int const numberOfTimes) const;
 
     Term m_monomialPart;
     Term m_exponent;

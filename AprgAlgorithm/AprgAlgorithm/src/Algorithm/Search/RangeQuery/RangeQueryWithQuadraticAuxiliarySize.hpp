@@ -45,8 +45,7 @@ private:
                 for (Index left = 0; left + length <= static_cast<Index>(valuesToCheck.size()); left++) {
                     Index right = left + length - 1;
                     m_partialValueMatrix.setEntry(
-                        left, right,
-                        m_function(m_partialValueMatrix.getEntry(left, right - 1), valuesToCheck[right]));
+                        left, right, m_function(m_partialValueMatrix.getEntry(left, right - 1), valuesToCheck[right]));
                 }
             }
         }

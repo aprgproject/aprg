@@ -1,7 +1,7 @@
+#include <CPlusPlus/Analyzer/Findings/TemporaryFindings.hpp>
 #include <CPlusPlus/Analyzer/TermAnalyzer.hpp>
 #include <CPlusPlus/Analyzer/TermAnalyzerTemplateFunctions.hpp>
 #include <CPlusPlus/Database/CPlusPlusDatabase.hpp>
-#include <CPlusPlus/Analyzer/Findings/TemporaryFindings.hpp>
 #include <CPlusPlus/Term/TermChecker.hpp>
 #include <SailIt.hpp>
 

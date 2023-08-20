@@ -76,8 +76,7 @@ TEST(CycleDetectionUsingDfsTest, CycleDetectionWorksUsingExample2WithDirectedGra
     CycleDetectionForTest cycleDetection(graph);
 
     PathForTest expectedOneCycle{0, 5, 4, 2, 0};
-    PathsForTest expectedCycles{
-        {0, 5, 4, 2, 0}, {2, 3, 2}, {5, 4, 2, 3, 5}, {6, 8, 6}, {9, 10, 12, 9}};
+    PathsForTest expectedCycles{{0, 5, 4, 2, 0}, {2, 3, 2}, {5, 4, 2, 3, 5}, {6, 8, 6}, {9, 10, 12, 9}};
     EXPECT_EQ(expectedOneCycle, cycleDetection.getOneCycle());
     EXPECT_EQ(expectedCycles, cycleDetection.getAllCycles());
 }
@@ -118,8 +117,8 @@ TEST(CycleDetectionUsingDfsTest, CycleDetectionWorksUsingExample4WithDirectedGra
     CycleDetectionForTest cycleDetection(graph);
 
     PathForTest expectedOneCycle{0, 2, 7, 3, 6, 0};
-    PathsForTest expectedCycles{{0, 2, 7, 3, 6, 0}, {2, 7, 3, 6, 2}, {3, 6, 4, 5, 1, 3}, {4, 5, 4},
-                                {7, 3, 6, 4, 5, 7}, {7, 3, 6, 4, 7}};
+    PathsForTest expectedCycles{{0, 2, 7, 3, 6, 0}, {2, 7, 3, 6, 2},    {3, 6, 4, 5, 1, 3},
+                                {4, 5, 4},          {7, 3, 6, 4, 5, 7}, {7, 3, 6, 4, 7}};
     EXPECT_EQ(expectedOneCycle, cycleDetection.getOneCycle());
     EXPECT_EQ(expectedCycles, cycleDetection.getAllCycles());
 }

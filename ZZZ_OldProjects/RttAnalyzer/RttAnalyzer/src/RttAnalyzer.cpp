@@ -33,15 +33,11 @@ void RttAnalyzer::processLine(std::string const& line) {
     static string dateTime;
     if (isStringFoundNotCaseSensitive(line, "0x4178")) {
         dateTime = getStringWithoutStartingAndTrailingWhiteSpace(getStringBeforeThisString(line, "["));
-    } else if (
-        isStringFoundNotCaseSensitive(line, "PSC") &&
-        isStringFoundNotCaseSensitive(line, "(cx8)")) {
+    } else if (isStringFoundNotCaseSensitive(line, "PSC") && isStringFoundNotCaseSensitive(line, "(cx8)")) {
         strings titles;
         splitToStrings<SplitStringType::WithoutDelimeters>(titles, line, "|");
         processTitles(titles);
-    } else if (
-        isStringFoundNotCaseSensitive(line, "SET") &&
-        isStringFoundNotCaseSensitive(line, "|")) {
+    } else if (isStringFoundNotCaseSensitive(line, "SET") && isStringFoundNotCaseSensitive(line, "|")) {
         strings values;
         splitToStrings<SplitStringType::WithoutDelimeters>(values, line, "|");
         processValues(dateTime, values);

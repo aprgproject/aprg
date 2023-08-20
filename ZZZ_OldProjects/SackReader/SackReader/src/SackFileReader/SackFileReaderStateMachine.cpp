@@ -39,8 +39,7 @@ void InnerStates::reset() {
 SackFileReaderStateMachine::SackFileReaderStateMachine(Database& database, string const& fullPath)
     : BaseSackFileReaderStateMachine(State::Idle),
       m_filePathHandler(fullPath),
-      m_isMessageIdFile(
-          isStringFoundNotCaseSensitive(m_filePathHandler.getFilenameOnly(), "MessageId_")),
+      m_isMessageIdFile(isStringFoundNotCaseSensitive(m_filePathHandler.getFilenameOnly(), "MessageId_")),
       m_isNextLineNeeded(false),
       m_pathFromIInterface(getCorrectPathWithReplacedSlashCharacters<'/'>(
           string(R"(\I_Interface\)") + getStringAfterThisString(m_filePathHandler.getFullPath(), R"(\I_Interface\)"))),

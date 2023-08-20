@@ -18,7 +18,8 @@ namespace chess {
 struct Board {
 public:
     static constexpr int CHESS_SIDE_SIZE = 8;
-    //Conflict between std::numeric_limits::max() and the max(a, b) macro defined in minwindef.h included as part of Windows.h.
+    // Conflict between std::numeric_limits::max() and the max(a, b) macro defined in minwindef.h included as part of
+    // Windows.h.
     static constexpr int MAX_NUMBER_OF_MOVES = (std::numeric_limits<int>::max)();
     using PieceGrid = std::array<Piece, CHESS_SIDE_SIZE * CHESS_SIDE_SIZE>;
     using CoordinateCondition = std::function<bool(Coordinate const&)>;

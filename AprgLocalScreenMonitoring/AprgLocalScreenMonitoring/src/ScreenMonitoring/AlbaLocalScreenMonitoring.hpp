@@ -19,7 +19,7 @@ class AlbaLocalScreenMonitoring : public AlbaWindowsScreenMonitoring
 #endif
 
 #ifdef OS_LINUX
-                                class AlbaLocalScreenMonitoring : public AlbaLinuxScreenMonitoring
+                                  class AlbaLocalScreenMonitoring : public AlbaLinuxScreenMonitoring
 #endif
 {
 };

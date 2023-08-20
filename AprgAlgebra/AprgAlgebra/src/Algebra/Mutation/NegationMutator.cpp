@@ -24,9 +24,7 @@ void NegationMutator::mutateTerm(Term &term) {
     term.simplify();
 }
 
-void NegationMutator::mutateConstant(Constant &constant) {
-    constant.setNumber(constant.getNumber() * -1);
-}
+void NegationMutator::mutateConstant(Constant &constant) { constant.setNumber(constant.getNumber() * -1); }
 
 void NegationMutator::mutateVariable(Variable &) {}
 

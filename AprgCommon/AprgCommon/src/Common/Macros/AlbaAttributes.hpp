@@ -5,9 +5,9 @@
 // C++ attribute: deprecated (since C++14)
 // -> Indicates that the name or entity declared with this attribute is deprecated, that is, the use is allowed, but
 // discouraged for some reason. Syntax:
-// -> [[deprecated]] 	(1)
-// -> [[deprecated( string-literal )]] 	(2)
-// -> string-literal 	- 	text that could be used to explain the rationale for deprecation and/or to suggest a
+// -> [[deprecated]]    (1)
+// -> [[deprecated( string-literal )]]  (2)
+// -> string-literal    -   text that could be used to explain the rationale for deprecation and/or to suggest a
 // replacing entity Explanation:
 // -> Indicates that the use of the name or entity declared with this attribute is allowed, but discouraged for some
 // reason.
@@ -52,9 +52,9 @@
 // -> If a function declared nodiscard or a function returning an enumeration or class declared nodiscard
 // -> by value is called from a discarded-value expression other than a cast to void, the compiler is encouraged to
 // issue a warning. Syntax
-// -> [[nodiscard]] 	(1)
-// -> [[nodiscard( string-literal )]] 	(2) 	(since C++20)
-// -> string-literal 	- 	text that could be used to explain the rationale for why the result should not be
+// -> [[nodiscard]]     (1)
+// -> [[nodiscard( string-literal )]]   (2)     (since C++20)
+// -> string-literal    -   text that could be used to explain the rationale for why the result should not be
 // discarded Explanation
 // -> Appears in a function declaration, enumeration declaration, or class declaration.
 // -> If, from a discarded-value expression other than a cast to void,
@@ -124,8 +124,8 @@
 // -> Allow the compiler to optimize for the case where paths of execution including that statement
 // -> are more or less likely than any alternative path of execution that does not include such a statement
 // Syntax
-// -> [[likely]] 	(1)
-// -> [[unlikely]] 	(2)
+// -> [[likely]]    (1)
+// -> [[unlikely]]  (2)
 // -> Explanation
 // -> These attributes may be applied to labels and statements (other than declaration-statements).
 // -> They may not be simultaneously applied to the same label or statement.

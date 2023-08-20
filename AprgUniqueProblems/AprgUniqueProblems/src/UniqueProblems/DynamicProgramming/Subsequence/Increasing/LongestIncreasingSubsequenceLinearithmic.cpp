@@ -7,12 +7,10 @@ using namespace std;
 
 namespace alba {
 
-LongestIncreasingSubsequenceLinearithmic::LongestIncreasingSubsequenceLinearithmic(
-    Values const& sequence)
+LongestIncreasingSubsequenceLinearithmic::LongestIncreasingSubsequenceLinearithmic(Values const& sequence)
     : m_sequence(sequence) {}
 
-LongestIncreasingSubsequenceLinearithmic::Index
-LongestIncreasingSubsequenceLinearithmic::getLongestLength() const {
+LongestIncreasingSubsequenceLinearithmic::Index LongestIncreasingSubsequenceLinearithmic::getLongestLength() const {
     Index longestLength(0);
     if (!m_sequence.empty()) {
         IndexToValue lengthMinus1ToEndValue(m_sequence.size(), 0);  // dynamic programming
@@ -33,8 +31,8 @@ LongestIncreasingSubsequenceLinearithmic::getLongestLength() const {
     return longestLength;
 }
 
-LongestIncreasingSubsequenceLinearithmic::Values
-LongestIncreasingSubsequenceLinearithmic::getLongestSubsequence() const {
+LongestIncreasingSubsequenceLinearithmic::Values LongestIncreasingSubsequenceLinearithmic::getLongestSubsequence()
+    const {
     Values result;
     if (!m_sequence.empty()) {
         Index longestLength(1);

@@ -96,8 +96,7 @@ void Polynomial::addMonomial(Monomial const& monomial) {
     for (Monomial& monomialInternal : m_monomials) {
         if (canBeMergedInAMonomialByAdditionOrSubtraction(monomialInternal, monomial)) {
             isFoundInPolynomial = true;
-            monomialInternal.setConstant(
-                monomialInternal.getCoefficient() + monomial.getCoefficient());
+            monomialInternal.setConstant(monomialInternal.getCoefficient() + monomial.getCoefficient());
         }
     }
     if (!isFoundInPolynomial) {

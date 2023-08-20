@@ -137,8 +137,7 @@ void DerivativeVariableName::processDenominator(string const& denominator) {
         if (differentiationLevelString.empty()) {
             differentiationLevelString = "1";
         }
-        int differentiationLevelInDenominator =
-            convertStringToNumber<int>(differentiationLevelString);
+        int differentiationLevelInDenominator = convertStringToNumber<int>(differentiationLevelString);
         if (differentiationLevelInDenominator == m_differentiationLevel) {
             m_isValid = true;
             m_baseVariable = baseVariable;
