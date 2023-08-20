@@ -234,7 +234,7 @@ jobs:
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
             
-      - name: Build and Run with Address Sanitizer
+      - name: Build and Run with Static Analyzers
         if: matrix.configurationName == 'UbuntuLatestClang' && inputs.enableStaticAnalyzers
         shell: bash
         working-directory: ${{ matrix.project }}
