@@ -17,6 +17,16 @@ on:
         options:
         - Debug
         - Release
+      enableAsan:
+        description: 'Enable Address Sanitizer for Ubuntu/Clang'
+        required: true
+        default: false
+        type: boolean
+      enableStaticAnalyzers:
+        description: 'Enable Static Analyzers for Ubuntu/Clang'
+        required: true
+        default: false
+        type: boolean
 
 env:
   checkShellScriptsRelativePath: "AllCommonScripts/ScriptsForShellScripts/checkShellScripts.sh"
@@ -56,6 +66,7 @@ jobs:
       excludedConfigurations: ${{ steps.idOfGetCppProjectStep.outputs.APRG_EXCLUDED_CONFIGURATIONS }}
       projectsWithBoost: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_BOOST }}
       projectsWithGsl: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_GSL }}
+      projectsWith7Zip: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_7ZIP }}
     steps:
       - name: Checkout code for changes checking
         id: idOfCheckout
@@ -137,13 +148,6 @@ jobs:
 #          ninja --version
 #          cmake --version
 
-      - name: Install 7zip
-        if: startsWith(matrix.configurationName, 'Ubuntu') && matrix.project == 'AprgFileExtractor/AprgFileExtractor'
-        run: |
-          sudo apt-get install p7zip-full
-          echo "The dpkg details:"
-          dpkg -l | grep p7zip
-
       - name: Install Boost on Ubuntu
         if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWithBoost), matrix.project)
         run: |
@@ -157,6 +161,13 @@ jobs:
           sudo apt-get install libgsl-dev
           echo "The dpkg details:"
           dpkg -l | grep libgsl-dev
+
+      - name: Install 7zip
+        if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWith7Zip), matrix.project)
+        run: |
+          sudo apt-get install p7zip-full
+          echo "The dpkg details:"
+          dpkg -l | grep p7zip
           
       - name: Prepare aprg directories and scripts
         shell: bash
@@ -210,4 +221,30 @@ jobs:
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
+          "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
+            
+      - name: Build and Run with Address Sanitizer
+        if: matrix.configurationName == 'UbuntuLatestClang' && inputs.enableAsan
+        shell: bash
+        working-directory: ${{ matrix.project }}
+        run: |
+          "$buildAndRunScriptPath" clean ${{ env.buildDirectory }}
+          "$buildAndRunScriptPath" configureWithClangWithAsan "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
+            
+      - name: Build and Run with Address Sanitizer
+        if: matrix.configurationName == 'UbuntuLatestClang' && inputs.enableStaticAnalyzers
+        shell: bash
+        working-directory: ${{ matrix.project }}
+        run: |
+          sudo apt-get install clang-tidy cppcheck clazy
+          clang-tidy --version
+          cppcheck --version
+          clazy --version
+          "$buildAndRunScriptPath" clean ${{ env.buildDirectory }}
+          "$buildAndRunScriptPath" configureWithClangWithStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
