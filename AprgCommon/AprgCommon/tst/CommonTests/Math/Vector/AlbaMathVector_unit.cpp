@@ -9,7 +9,7 @@ namespace alba {
 
 namespace {
 using VectorTwoElements = AlbaMathVector<double, 2>;
-}
+}  // anonymous namespace
 
 TEST(AlbaMathVectorTest, ConstructionWorks) {
     VectorTwoElements mathVector1;
@@ -188,12 +188,12 @@ TEST(AlbaMathVectorTest, GetValuesWorks) {
 }
 
 TEST(AlbaMathVectorTest, OutputStreamOperatorWorks) {
-    stringstream ss;
+    stringstream testStream;
     VectorTwoElements mathVector{3.5, 4.5};
 
-    ss << mathVector;
+    testStream << mathVector;
 
-    EXPECT_EQ("{3.5, 4.5}", ss.str());
+    EXPECT_EQ("{3.5, 4.5}", testStream.str());
 }
 
 }  // namespace alba

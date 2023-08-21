@@ -9,18 +9,18 @@ using namespace std;
 
 namespace alba {
 
-TEST(AlbaOldRandomizerTest, GetRandomIntegerInUniformDistributionWorks_WithinMinimumAndMaximumValues) {
+TEST(AlbaOldRandomizerTest, GetRandomIntegerInUniformDistributionWorksWithinMinimumAndMaximumValues) {
     AlbaOldRandomizer randomizer;
     constexpr int minimumValue(0);
     constexpr int maximumValue(9);
     for (int i = 0; i < 1000; i++) {
-        int random(randomizer.getRandomIntegerInUniformDistribution(minimumValue, maximumValue));
+        int random(AlbaOldRandomizer::getRandomIntegerInUniformDistribution(minimumValue, maximumValue));
         ASSERT_GE(random, minimumValue);
         ASSERT_LE(random, maximumValue);
     }
 }
 
-TEST(AlbaOldRandomizerTest, GetRandomIntegerInUniformDistributionWorks_AsUniformlyDistributed) {
+TEST(AlbaOldRandomizerTest, GetRandomIntegerInUniformDistributionWorksAsUniformlyDistributed) {
     AlbaOldRandomizer randomizer;
     constexpr int minimumValue(0);
     constexpr int maximumValue(9);
@@ -30,7 +30,7 @@ TEST(AlbaOldRandomizerTest, GetRandomIntegerInUniformDistributionWorks_AsUniform
     vector<int> hitsForEachValue(numberOfRandomValues, 0);
 
     for (int i = 0; i < iterations; i++) {
-        int random(randomizer.getRandomIntegerInUniformDistribution(minimumValue, maximumValue));
+        int random(AlbaOldRandomizer::getRandomIntegerInUniformDistribution(minimumValue, maximumValue));
         hitsForEachValue[random]++;
     }
 
@@ -40,12 +40,12 @@ TEST(AlbaOldRandomizerTest, GetRandomIntegerInUniformDistributionWorks_AsUniform
     EXPECT_LE(deviation, allowedDeviation);
 }
 
-TEST(AlbaOldRandomizerTest, GetRandomValueInUniformDistributionWorks_WithinMinimumAndMaximumValues) {
+TEST(AlbaOldRandomizerTest, GetRandomValueInUniformDistributionWorksWithinMinimumAndMaximumValues) {
     AlbaOldRandomizer randomizer;
     constexpr double minimumValue(-11.5);
     constexpr double maximumValue(23.25);
     for (int i = 0; i < 1000; i++) {
-        double random(randomizer.getRandomFloatingValueInUniformDistribution(minimumValue, maximumValue));
+        double random(AlbaOldRandomizer::getRandomFloatingValueInUniformDistribution(minimumValue, maximumValue));
         ASSERT_GE(random, minimumValue);
         ASSERT_LE(random, maximumValue);
     }

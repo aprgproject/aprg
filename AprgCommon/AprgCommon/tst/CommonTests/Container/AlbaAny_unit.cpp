@@ -15,6 +15,7 @@ TEST(AlbaAnyTest, DefaultConstructorWorks) {
 TEST(AlbaAnyTest, CopyConstructorWorks) {
     AlbaAny originalAny(1234);
 
+    // NOLINTNEXTLINE(performance-unnecessary-copy-initialization)
     AlbaAny copiedAny(originalAny);
 
     EXPECT_EQ(1234, originalAny.getContentAs<int>());
@@ -24,6 +25,7 @@ TEST(AlbaAnyTest, CopyConstructorWorks) {
 TEST(AlbaAnyTest, CopyAssignmentWorks) {
     AlbaAny originalAny(1234);
 
+    // NOLINTNEXTLINE(performance-unnecessary-copy-initialization)
     AlbaAny copiedAny = originalAny;
 
     EXPECT_EQ(1234, originalAny.getContentAs<int>());
@@ -35,6 +37,7 @@ TEST(AlbaAnyTest, MoveConstructorWorks) {
 
     AlbaAny movedAny(std::move(originalAny));
 
+    // NOLINTNEXTLINE(clang-analyzer-cplusplus.Move,bugprone-use-after-move,hicpp-invalid-access-moved)
     EXPECT_FALSE(originalAny.hasContent());
     EXPECT_EQ(1234, movedAny.getContentAs<int>());
 }
@@ -44,6 +47,7 @@ TEST(AlbaAnyTest, MoveAssignmentWorks) {
 
     AlbaAny assignedAny = std::move(originalAny);
 
+    // NOLINTNEXTLINE(clang-analyzer-cplusplus.Move,bugprone-use-after-move,hicpp-invalid-access-moved)
     EXPECT_FALSE(originalAny.hasContent());
     EXPECT_EQ(1234, assignedAny.getContentAs<int>());
 }
@@ -96,14 +100,14 @@ TEST(AlbaAnyTest, ClearWorks) {
 }
 
 TEST(AlbaAnyTest, OutputStreamOperatorWorks) {
-    stringstream ss;
+    stringstream testStream;
     AlbaAny any(1234);
 
-    ss << any;
+    testStream << any;
 
     EXPECT_EQ(
         "hasContent: 1\n savedMemory: Decimal values: {210, 4, 0, 0, }\nHexadecimal values: {d2, 4, 0, 0, }\n",
-        ss.str());
+        testStream.str());
 }
 
 }  // namespace alba

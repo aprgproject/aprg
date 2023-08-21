@@ -8,8 +8,8 @@ class AlbaScopeGuard {
 public:
     using OnExitFunction = std::function<void(void)>;
 
-    AlbaScopeGuard(OnExitFunction const& functionParameter);
-    AlbaScopeGuard(OnExitFunction&& functionParameter);
+    explicit AlbaScopeGuard(OnExitFunction const& functionParameter);
+    explicit AlbaScopeGuard(OnExitFunction&& functionParameter);
     ~AlbaScopeGuard() noexcept;
 
     void operator()();

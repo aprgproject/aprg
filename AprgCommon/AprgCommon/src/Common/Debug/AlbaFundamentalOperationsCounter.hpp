@@ -21,15 +21,15 @@ struct AlbaFundamentalOperationsCounts : public AlbaSingleton<AlbaFundamentalOpe
     };
     void resetCounts() { counts = {}; }
     std::string getReport() const {
-        std::stringstream ss;
-        ss << "userConstructionCount: " << counts.userConstructionCount;
-        ss << " defaultConstructionCount: " << counts.defaultConstructionCount;
-        ss << " destructionCount: " << counts.destructionCount;
-        ss << " copyConstructionCount: " << counts.copyConstructionCount;
-        ss << " copyAssignmentCount: " << counts.copyAssignmentCount;
-        ss << " moveConstructionCount: " << counts.moveConstructionCount;
-        ss << " moveAssignmentCount: " << counts.moveAssignmentCount;
-        return ss.str();
+        std::stringstream outputStream;
+        outputStream << "userConstructionCount: " << counts.userConstructionCount;
+        outputStream << " defaultConstructionCount: " << counts.defaultConstructionCount;
+        outputStream << " destructionCount: " << counts.destructionCount;
+        outputStream << " copyConstructionCount: " << counts.copyConstructionCount;
+        outputStream << " copyAssignmentCount: " << counts.copyAssignmentCount;
+        outputStream << " moveConstructionCount: " << counts.moveConstructionCount;
+        outputStream << " moveAssignmentCount: " << counts.moveAssignmentCount;
+        return outputStream.str();
     }
     Counts counts;
 };

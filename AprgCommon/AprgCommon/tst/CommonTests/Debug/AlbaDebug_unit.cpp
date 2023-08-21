@@ -5,8 +5,8 @@
 // Set external output stream object
 #include <sstream>
 namespace {
-std::stringstream s_debugStringStream;  // make this inline if needed on the header file
-}
+std::stringstream s_debugStringStream;  // clazy:exclude=non-pod-global-static
+}  // namespace
 #define ALBA_DBG_PRINT_EXTERNAL_OUTPUT_STREAM_OBJECT s_debugStringStream
 
 // Start of test file
@@ -26,6 +26,7 @@ TEST(AlbaDebugTest, DebugPrintingWorks) {
     s_debugStringStream.clear();
     performASimplePrintingTest(
         s_debugStringStream, [](stringstream&, int singleParameter1, int singleParameter2, int singleParameter3) {
+            // NOLINTNEXTLINE(bugprone-lambda-function-name)
             ALBA_DBG_PRINT3(singleParameter1, singleParameter2, singleParameter3);
         });
 }
@@ -55,7 +56,7 @@ class SampleClass {
 public:
     SampleClass(int parameter1, int parameter2) : m_parameter1(parameter1), m_parameter2(parameter2) {}
 
-    int getSum() const { return m_parameter1 + m_parameter2; }
+    [[nodiscard]] int getSum() const { return m_parameter1 + m_parameter2; }
 
     // Note that "friend" keyword is added here.
     friend ALBA_DBG_CLASS_OUTPUT_OPERATOR_DEFINITION(
@@ -93,6 +94,7 @@ TEST(AlbaDebugTest, PrintingWithoutSpecifyNumberOfParametersWorks) {
     s_debugStringStream.clear();
     performASimplePrintingTest(
         s_debugStringStream, [](stringstream&, int singleParameter1, int singleParameter2, int singleParameter3) {
+            // NOLINTNEXTLINE(bugprone-lambda-function-name)
             ALBA_DBG_PRINT(singleParameter1, singleParameter2, singleParameter3);
         });
 }

@@ -36,7 +36,7 @@ void AlbaMemoryBuffer::resize(size_t const size) { m_buffer.resize(size); }
 void AlbaMemoryBuffer::resize(size_t size, uint8_t const initialValue) { m_buffer.resize(size, initialValue); }
 
 void* AlbaMemoryBuffer::resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(size_t const additionalSize) {
-    size_t oldSize = m_buffer.size();
+    int oldSize = static_cast<int>(m_buffer.size());
     m_buffer.resize(oldSize + additionalSize);
     return static_cast<void*>((m_buffer.begin() + oldSize).operator->());
 }

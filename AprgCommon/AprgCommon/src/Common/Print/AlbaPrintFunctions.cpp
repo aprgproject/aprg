@@ -15,12 +15,17 @@ namespace alba {
 // }
 
 void printLogHeader(ostream& out, string_view fileName, int lineNumber, string_view functionName) {
+    constexpr int MAX_FILENAME_PREFIX_LENGTH = 10;
+    constexpr int MAX_FILENAME_SUFFIX_LENGTH = 20;
+    constexpr int MAX_FUNCTION_NAME_PREFIX_LENGTH = 10;
+    constexpr int MAX_FUNCTION_NAME_SUFFIX_LENGTH = 40;
     out << "| ";
     printCurrentDateTime(out);
     out << " | ";
-    printStringAndShortenIfPossible(out, fileName, 10, 20);
+    printStringAndShortenIfPossible(out, fileName, MAX_FILENAME_PREFIX_LENGTH, MAX_FILENAME_SUFFIX_LENGTH);
     out << ":" << lineNumber << " | ";
-    printStringAndShortenIfPossible(out, functionName, 10, 40);
+    printStringAndShortenIfPossible(
+        out, functionName, MAX_FUNCTION_NAME_PREFIX_LENGTH, MAX_FUNCTION_NAME_SUFFIX_LENGTH);
     out << "(...) | ";
 }
 
@@ -44,6 +49,7 @@ void printParameter(ostream& out, string const& parameter) { out << quoted(param
 void printParameter(ostream& out, char const* const parameter) { out << quoted(parameter); }
 
 template <>
+// NOLINTNEXTLINE(hicpp-named-parameter,readability-named-parameter)
 void printParameterWithName(ostream& out, string_view, char const* const parameter) {
     // the name is not printing to avoid printing the same string literal twice
     out << R"([")" << parameter << R"("])";

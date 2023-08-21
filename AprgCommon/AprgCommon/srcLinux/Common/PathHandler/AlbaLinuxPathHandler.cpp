@@ -3,14 +3,16 @@
 #include <Common/Linux/AlbaLinuxHelper.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Common/Time/AlbaLinuxTimeHelper.hpp>
-#include <sys/sendfile.h>
 
 #include <fcntl.h>
+#include <sys/sendfile.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
 
+#include <array>
 #include <cstdio>
+#include <cstring>
 #include <ctime>
 #include <iostream>
 #include <string>
@@ -23,7 +25,7 @@ namespace alba {
 
 AlbaLinuxPathHandler::AlbaLinuxPathHandler(string_view path)
     : AlbaPathHandler(R"(/)"), m_foundInLocalSystem(false), m_relativePath(false) {
-    save(path);
+    setPath(path);
 }
 
 AlbaLinuxPathHandler AlbaLinuxPathHandler::createPathHandlerForDetectedPath() {
@@ -44,7 +46,7 @@ double AlbaLinuxPathHandler::getFileSizeEstimate() const {
     struct stat fileStatus {};
     double fileSize(0);
     if (0 == stat(getFullPath().c_str(), &fileStatus)) {
-        fileSize = fileStatus.st_size;
+        fileSize = static_cast<double>(fileStatus.st_size);
     } else if (errno != 0) {
         cout << "Error in AlbaLinuxPathHandler::getFileSizeEstimate() path:[" << getFullPath()
              << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
@@ -69,8 +71,9 @@ AlbaDateTime AlbaLinuxPathHandler::getFileCreationTime() const {
 void AlbaLinuxPathHandler::createDirectoriesForNonExisitingDirectories() const {
     string fullPath(getFullPath());
     size_t index = 0, length = static_cast<size_t>(fullPath.length());
+    // NOLINTNEXTLINE(altera-id-dependent-backward-branch)
     while (index < length) {
-        size_t indexWithSlashCharacter = static_cast<size_t>(fullPath.find_first_of(m_slashCharacterString, index));
+        auto indexWithSlashCharacter = static_cast<size_t>(fullPath.find_first_of(m_slashCharacterString, index));
         if (isNpos(static_cast<int>(indexWithSlashCharacter))) {
             break;
         }
@@ -144,14 +147,16 @@ void AlbaLinuxPathHandler::deleteDirectoryWithFilesAndDirectories() {
 }
 
 bool AlbaLinuxPathHandler::copyToNewFile(string_view newFilePath) {
-    int readFileDescriptor;
-    int writeFileDescriptor;
+    int readFileDescriptor{};
     struct stat statBuffer {};
     off_t offset = 0;
     bool isSuccessful(false);
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-vararg,hicpp-vararg)
     readFileDescriptor = open(getFullPath().c_str(), O_RDONLY);
     if (0 == stat(getFullPath().c_str(), &statBuffer)) {
+        int writeFileDescriptor{};
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-vararg,hicpp-vararg)
         writeFileDescriptor = open(newFilePath.data(), O_WRONLY | O_CREAT, statBuffer.st_mode);
         if (isFile()) {
             int errorReturnValue = static_cast<int>(
@@ -226,19 +231,20 @@ void AlbaLinuxPathHandler::findFilesAndDirectoriesUnlimitedDepth(
 string AlbaLinuxPathHandler::getCurrentDetectedPath() {
     constexpr size_t MAX_ARGUMENT_LENGTH = 50;
     constexpr size_t MAX_PATH = 1000;
-    char argument[MAX_ARGUMENT_LENGTH];
-    char detectedLocalPath[MAX_PATH];
+    array<char, MAX_ARGUMENT_LENGTH> argument{};
+    array<char, MAX_PATH> detectedLocalPath{};
 
-    snprintf(argument, MAX_ARGUMENT_LENGTH, "/proc/%d/exe", getpid());
-    size_t length = static_cast<size_t>(readlink(argument, detectedLocalPath, MAX_PATH));
-    if (length <= 0) {
-        length = 1;
-    }
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-vararg,hicpp-vararg,cert-err33-c)
+    snprintf(argument.data(), MAX_ARGUMENT_LENGTH, "/proc/%d/exe", getpid());
+    auto length = static_cast<size_t>(readlink(argument.data(), detectedLocalPath.data(), MAX_PATH));
+    length = (length == 0) ? 1 : length;
     detectedLocalPath[length] = '\0';
-    return string(detectedLocalPath);
+    return {detectedLocalPath.cbegin(), detectedLocalPath.cend()};
 }
 
-void AlbaLinuxPathHandler::save(string_view path) {
+void AlbaLinuxPathHandler::save(string_view path) { setPath(path); }
+
+void AlbaLinuxPathHandler::setPath(string_view path) {
     string correctPath(getCorrectPathWithoutDoublePeriod(
         // getStringWithoutCharAtTheEnd(
         getCorrectPathWithReplacedSlashCharacters(path, m_slashCharacterString)
@@ -262,7 +268,7 @@ void AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth(
     }
     depth -= (depth > 0) ? 1 : 0;
 
-    DIR* directoryStream;
+    DIR* directoryStream(nullptr);
 
     directoryStream = opendir(currentDirectory.data());
     if (directoryStream != nullptr) {
@@ -273,17 +279,20 @@ void AlbaLinuxPathHandler::findFilesAndDirectoriesWithDepth(
              << currentDirectory << "] 'opendir' errno value:[" << errno << "] error message:["
              << getErrorMessage(errno) << "]\n";
     }
-    closedir(directoryStream);
+    if (directoryStream != nullptr) {
+        closedir(directoryStream);
+    }
 }
 
 void AlbaLinuxPathHandler::loopAllFilesAndDirectoriesInDirectoryStream(
     DIR* directoryStream, string_view currentDirectory, string_view wildCardSearch, set<string>& listOfFiles,
     set<string>& listOfDirectories, int depth) const {
-    struct dirent* directoryPointer;
+    struct dirent* directoryPointer = nullptr;
     do {
+        // NOLINTNEXTLINE(concurrency-mt-unsafe)
         directoryPointer = readdir(directoryStream);
         if (directoryPointer != nullptr) {
-            string immediateFileOrDirectoryName(directoryPointer->d_name);
+            string immediateFileOrDirectoryName(static_cast<const char*>(directoryPointer->d_name));
             bool canProceedBasedOnWildcard = wildCardSearch.empty() || "*.*" == wildCardSearch ||
                                              isWildcardMatch(immediateFileOrDirectoryName, wildCardSearch);
             bool isTheNameNotComposedOfPeriods =
@@ -321,7 +330,7 @@ bool AlbaLinuxPathHandler::isPathADirectory(string_view fileOrDirectoryName) con
     return result;
 }
 
-bool AlbaLinuxPathHandler::canBeLocated(string_view fullPath) const {
+bool AlbaLinuxPathHandler::canBeLocated(string_view fullPath) {
     struct stat statBuffer {};
     return stat(fullPath.data(), &statBuffer) == 0;
 }

@@ -2,6 +2,7 @@
 
 #include <Common/String/AlbaStringHelper.hpp>
 
+#include <array>
 #include <map>
 #include <string>
 
@@ -13,6 +14,7 @@ public:
     using Choices = std::map<AnswerType, std::string>;
 
     // rule of zero
+    AlbaUserInterface();
 
     std::string getUserInput();
     std::string getFilePathInput();
@@ -28,8 +30,8 @@ public:
         std::string_view question, Choices<NumberType> const& choices);
 
 private:
-    static constexpr int c_bufferSize = 1000;
-    char buffer[c_bufferSize];
+    static constexpr int BUFFER_SIZE = 1000;
+    std::array<char, BUFFER_SIZE> m_buffer;
 };
 
 template <typename NumberType>

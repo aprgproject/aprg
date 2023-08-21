@@ -59,7 +59,7 @@ TEST(LogarithmHelpersTest, GetSuperLogarithmWorks) {
     EXPECT_EQ(2, getSuperLogarithm<int>(4, 15));
 }
 
-TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTest_WithIncreasingInput) {
+TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTestWorksWithIncreasingInput) {
     // Results: ~330ms
 
     double result(0);
@@ -71,7 +71,7 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTest_WithI
     EXPECT_DOUBLE_EQ(14.287640242993977, result);
 }
 
-TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanceTest_WithIncreasingInput) {
+TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanceTestWorksWithIncreasingInput) {
     // Results: ~100ms
 
     int result(0);
@@ -83,7 +83,7 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanc
     EXPECT_EQ(14, result);
 }
 
-TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTest_WithRandomInput) {
+TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTestWorksWithRandomInput) {
     // Results: ~850ms
 
     int result(0);
@@ -97,7 +97,7 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTest_WithR
     EXPECT_LT(0LL, result);
 }
 
-TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanceTest_WithRandomInput) {
+TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanceTestWorksWithRandomInput) {
     // Results: ~790ms
 
     int result(0);

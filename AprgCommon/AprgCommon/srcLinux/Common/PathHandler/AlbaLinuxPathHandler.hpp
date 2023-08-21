@@ -13,7 +13,7 @@ namespace alba {
 
 class AlbaLinuxPathHandler : public AlbaPathHandler {
 public:
-    AlbaLinuxPathHandler(std::string_view path);
+    explicit AlbaLinuxPathHandler(std::string_view path);
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
 
     static AlbaLinuxPathHandler createPathHandlerForDetectedPath();
@@ -44,6 +44,7 @@ public:
 private:
     static std::string getCurrentDetectedPath();
     void save(std::string_view path) override;
+    void setPath(std::string_view path);
     void findFilesAndDirectoriesWithDepth(
         std::string_view currentDirectory, std::string_view wildCardSearch, ListOfPaths& listOfFiles,
         ListOfPaths& listOfDirectories, int depth) const;
@@ -51,7 +52,7 @@ private:
         DIR* directoryStream, std::string_view currentDirectory, std::string_view wildCardSearch,
         std::set<std::string>& listOfFiles, std::set<std::string>& listOfDirectories, int depth) const;
     bool isPathADirectory(std::string_view fileOrDirectoryName) const;
-    bool canBeLocated(std::string_view fullPath) const;
+    static bool canBeLocated(std::string_view fullPath);
     bool isSlashNeededAtTheEnd(std::string_view correctedPath, std::string_view originalPath) const;
     bool m_foundInLocalSystem;
     bool m_relativePath;

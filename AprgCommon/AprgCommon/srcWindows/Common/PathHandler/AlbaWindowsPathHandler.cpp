@@ -19,9 +19,7 @@ namespace alba {
 
 AlbaWindowsPathHandler::AlbaWindowsPathHandler(string_view path) : AlbaPathHandler(R"(\)") { setPath(path); }
 
-AlbaWindowsPathHandler AlbaWindowsPathHandler::createPathHandlerForDetectedPath() {
-    return AlbaWindowsPathHandler(getCurrentDetectedPath());
-}
+AlbaWindowsPathHandler AlbaWindowsPathHandler::createPathHandlerForDetectedPath() { return {getCurrentDetectedPath()}; }
 
 void AlbaWindowsPathHandler::clear() {
     AlbaPathHandler::clear();

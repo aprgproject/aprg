@@ -545,7 +545,10 @@ TEST(UtilitiesStringTest, RandomString100Characters) {
 
 TEST(UtilitiesStringTest, GetArgumentsToStringInMainWorks) {
     constexpr size_t argc = 3U;
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
     char const* const argv[argc] = {"parameter0", "parameter1", "parameter2"};
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay)
     EXPECT_EQ((strings{"parameter0", "parameter1", "parameter2"}), getArgumentsToStringInMain(argc, argv));
 }
 
@@ -609,7 +612,7 @@ TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksWithLargeTargetLength)
     }
 }
 
-TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorks_LastLineIsIncluded) {
+TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksLastLineIsIncluded) {
     string string1("TupcIlm starts when its deployed on board 0x1011 (same with legacy Aalman)");
     strings expectedStrings{"TupcIlm starts when its deployed", " on board 0x1011 (same with ", "legacy Aalman)"};
     strings actualStrings;

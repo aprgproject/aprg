@@ -6,6 +6,6 @@
 namespace alba {
 
 void performASimplePrintingTest(
-    std::stringstream &out, std::function<void(std::stringstream &, int, int, int)> printAction);
+    std::stringstream &ssToVerify, std::function<void(std::stringstream &, int, int, int)> const &printAction);
 
 }

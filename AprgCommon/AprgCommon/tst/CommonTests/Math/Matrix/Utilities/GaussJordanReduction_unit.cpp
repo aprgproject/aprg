@@ -36,7 +36,7 @@ TEST(GaussJordanReductionTest, AreLeadingEntriesInReducedRowEchelonFormWorks) {
     EXPECT_FALSE(areLeadingEntriesInReducedRowEchelonForm(matrix4));
 }
 
-TEST(GaussJordanReductionTest, IsReducedRowEchelonFormWorks_MatrixCanBeCheckedIfItsInReducedRowEchelonForm) {
+TEST(GaussJordanReductionTest, IsReducedRowEchelonFormWorksAsMatrixCanBeCheckedIfItsInReducedRowEchelonForm) {
     AlbaMatrix<int> matrix1(4, 3, {1, 0, 0, 4, 0, 1, 0, 5, 0, 0, 1, 2});
     AlbaMatrix<int> matrix2(5, 3, {1, 2, 0, 0, 2, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0});
     AlbaMatrix<int> matrix3(5, 5, {1, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
@@ -46,7 +46,7 @@ TEST(GaussJordanReductionTest, IsReducedRowEchelonFormWorks_MatrixCanBeCheckedIf
     EXPECT_TRUE(isReducedRowEchelonForm(matrix3));
 }
 
-TEST(GaussJordanReductionTest, IsReducedRowEchelonFormWorks_MatrixCanBeCheckedIfItsNotInReducedRowEchelonForm) {
+TEST(GaussJordanReductionTest, IsReducedRowEchelonFormWorksAsMatrixCanBeCheckedIfItsNotInReducedRowEchelonForm) {
     AlbaMatrix<int> matrix1(4, 3, {1, 2, 0, 4, 0, 0, 0, 0, 0, 0, 1, -3});
     AlbaMatrix<int> matrix2(4, 3, {1, 0, 3, 4, 0, 2, -2, 5, 0, 0, 1, 2});
     AlbaMatrix<int> matrix3(4, 4, {1, 0, 3, 4, 0, 1, -2, 5, 0, 1, 2, 2, 0, 0, 0, 0});

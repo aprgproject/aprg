@@ -9,9 +9,9 @@ using namespace std;
 namespace alba {
 
 TEST(AlbaStreamBitReaderTest, ReadBoolDataWorks) {
-    stringstream ss;
-    ss << "A";
-    AlbaStreamBitReader reader(ss);
+    stringstream testStream;
+    testStream << "A";
+    AlbaStreamBitReader reader(testStream);
 
     EXPECT_FALSE(reader.readBoolData());
     EXPECT_TRUE(reader.readBoolData());
@@ -25,9 +25,9 @@ TEST(AlbaStreamBitReaderTest, ReadBoolDataWorks) {
 }
 
 TEST(AlbaStreamBitReaderTest, ReadCharDataWorks) {
-    stringstream ss;
-    ss << "./*";
-    AlbaStreamBitReader reader(ss);
+    stringstream testStream;
+    testStream << "./*";
+    AlbaStreamBitReader reader(testStream);
 
     EXPECT_EQ('.', reader.readCharData());
     EXPECT_EQ('/', reader.readCharData());
@@ -36,34 +36,34 @@ TEST(AlbaStreamBitReaderTest, ReadCharDataWorks) {
 }
 
 TEST(AlbaStreamBitReaderTest, ReadStringDataWorks) {
-    stringstream ss;
-    ss << "./*";
-    AlbaStreamBitReader reader(ss);
+    stringstream testStream;
+    testStream << "./*";
+    AlbaStreamBitReader reader(testStream);
 
     EXPECT_EQ("./", reader.readStringData(2));
     EXPECT_TRUE(reader.noRemainingBitsInBuffer());
 }
 
 TEST(AlbaStreamBitReaderTest, ReadWholeStreamAsStringDataWorks) {
-    stringstream ss;
-    ss << "./*";
-    AlbaStreamBitReader reader(ss);
+    stringstream testStream;
+    testStream << "./*";
+    AlbaStreamBitReader reader(testStream);
 
     EXPECT_EQ("./*", reader.readWholeStreamAsStringData());
     EXPECT_TRUE(reader.noRemainingBitsInBuffer());
 }
 
 TEST(AlbaStreamBitReaderTest, ReadNumberDataWorks) {
-    stringstream ss;
-    ss.put(0x01);
-    ss.put(0x02);
-    ss.put(0x03);
-    ss.put(0x04);
-    ss.put(0x01);
-    ss.put(0x02);
-    ss.put(0x03);
-    ss.put(0x04);
-    AlbaStreamBitReader reader(ss);
+    stringstream testStream;
+    testStream.put(0x01);
+    testStream.put(0x02);
+    testStream.put(0x03);
+    testStream.put(0x04);
+    testStream.put(0x01);
+    testStream.put(0x02);
+    testStream.put(0x03);
+    testStream.put(0x04);
+    AlbaStreamBitReader reader(testStream);
 
     EXPECT_EQ(0x01020304U, reader.readNumberData<uint32_t>(AlbaStreamBitEndianType::BigEndian));
     EXPECT_EQ(0x04030201U, reader.readNumberData<uint32_t>(AlbaStreamBitEndianType::LittleEndian));
@@ -71,34 +71,34 @@ TEST(AlbaStreamBitReaderTest, ReadNumberDataWorks) {
 }
 
 TEST(AlbaStreamBitReaderTest, ReadBigEndianNumberDataWorks) {
-    stringstream ss;
-    ss.put(0x01);
-    ss.put(0x02);
-    ss.put(0x03);
-    ss.put(0x04);
-    AlbaStreamBitReader reader(ss);
+    stringstream testStream;
+    testStream.put(0x01);
+    testStream.put(0x02);
+    testStream.put(0x03);
+    testStream.put(0x04);
+    AlbaStreamBitReader reader(testStream);
 
     EXPECT_EQ(0x01020304U, reader.readBigEndianNumberData<uint32_t>());
     EXPECT_TRUE(reader.noRemainingBitsInBuffer());
 }
 
 TEST(AlbaStreamBitReaderTest, ReadLittleEndianNumberDataWorks) {
-    stringstream ss;
-    ss.put(0x01);
-    ss.put(0x02);
-    ss.put(0x03);
-    ss.put(0x04);
-    AlbaStreamBitReader reader(ss);
+    stringstream testStream;
+    testStream.put(0x01);
+    testStream.put(0x02);
+    testStream.put(0x03);
+    testStream.put(0x04);
+    AlbaStreamBitReader reader(testStream);
 
     EXPECT_EQ(0x04030201U, reader.readLittleEndianNumberData<uint32_t>());
     EXPECT_TRUE(reader.noRemainingBitsInBuffer());
 }
 
 TEST(AlbaStreamBitReaderTest, ReadBitsetDataWorks) {
-    stringstream ss;
-    ss.put(0x12);
-    ss.put(0x34);
-    AlbaStreamBitReader reader(ss);
+    stringstream testStream;
+    testStream.put(0x12);
+    testStream.put(0x34);
+    AlbaStreamBitReader reader(testStream);
 
     EXPECT_EQ(
         0x00000C48U,

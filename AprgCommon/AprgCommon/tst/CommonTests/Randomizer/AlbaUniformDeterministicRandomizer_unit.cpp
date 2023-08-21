@@ -16,6 +16,7 @@ using FloatingPointRandomizerForTest = AlbaUniformDeterministicRandomizer<double
 TEST(AlbaUniformDeterministicRandomizerTest, DefaultConstructorWorks) {
     IntegerRandomizerForTest randomizer;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
     EXPECT_NO_FATAL_FAILURE(randomizer.getRandomValue());
 }
 
@@ -49,7 +50,7 @@ TEST(AlbaUniformDeterministicRandomizerTest, SetRandomSeedWorks) {
     }
 }
 
-TEST(AlbaUniformDeterministicRandomizerTest, GetRandomIntegerWorks_WithinMinimumAndMaximumValues) {
+TEST(AlbaUniformDeterministicRandomizerTest, GetRandomIntegerWorksWithinMinimumAndMaximumValues) {
     constexpr int minimumValue(0);
     constexpr int maximumValue(9);
     constexpr int customSeed(5);
@@ -62,7 +63,7 @@ TEST(AlbaUniformDeterministicRandomizerTest, GetRandomIntegerWorks_WithinMinimum
     }
 }
 
-TEST(AlbaUniformDeterministicRandomizerTest, GetRandomIntegerWorks_AsDeterministic) {
+TEST(AlbaUniformDeterministicRandomizerTest, GetRandomIntegerWorksAsDeterministic) {
     constexpr int minimumValue(0);
     constexpr int maximumValue(9);
     constexpr int customSeed(5);
@@ -74,7 +75,7 @@ TEST(AlbaUniformDeterministicRandomizerTest, GetRandomIntegerWorks_AsDeterminist
     }
 }
 
-TEST(AlbaUniformDeterministicRandomizerTest, GetRandomIntegerWorks_AsUniformlyDistributed) {
+TEST(AlbaUniformDeterministicRandomizerTest, GetRandomIntegerWorksAsUniformlyDistributed) {
     constexpr int minimumValue(0);
     constexpr int maximumValue(9);
     constexpr int customSeed(5);
@@ -95,7 +96,7 @@ TEST(AlbaUniformDeterministicRandomizerTest, GetRandomIntegerWorks_AsUniformlyDi
     EXPECT_LT(deviationCount, allowedDeviationCount);
 }
 
-TEST(AlbaUniformDeterministicRandomizerTest, GetRandomFloatingValueWorks_WithinMinimumAndMaximumValues) {
+TEST(AlbaUniformDeterministicRandomizerTest, GetRandomFloatingValueWorksWithinMinimumAndMaximumValues) {
     constexpr double minimumValue(-11.5);
     constexpr double maximumValue(23.25);
     constexpr double customSeed(10);
@@ -108,7 +109,7 @@ TEST(AlbaUniformDeterministicRandomizerTest, GetRandomFloatingValueWorks_WithinM
     }
 }
 
-TEST(AlbaUniformDeterministicRandomizerTest, GetRandomFloatingValueWorks_AsDeterministic) {
+TEST(AlbaUniformDeterministicRandomizerTest, GetRandomFloatingValueWorksAsDeterministic) {
     constexpr double minimumValue(-11.5);
     constexpr double maximumValue(23.25);
     constexpr double customSeed(10);
@@ -120,7 +121,7 @@ TEST(AlbaUniformDeterministicRandomizerTest, GetRandomFloatingValueWorks_AsDeter
     }
 }
 
-TEST(AlbaUniformDeterministicRandomizerTest, GetRandomFloatingValueWorks_AsUniformlyDistributed) {
+TEST(AlbaUniformDeterministicRandomizerTest, GetRandomFloatingValueWorksAsUniformlyDistributed) {
     constexpr int minimumValue(0);
     constexpr int maximumValue(9);
     constexpr double customSeed(10);
@@ -132,8 +133,7 @@ TEST(AlbaUniformDeterministicRandomizerTest, GetRandomFloatingValueWorks_AsUnifo
     vector<int> hitsForEachValue(numberOfRandomValues, 0);
 
     for (int i = 0; i < iterations; i++) {
-        auto randomValue(randomizer.getRandomValue());
-        hitsForEachValue[randomValue]++;
+        hitsForEachValue[static_cast<int>(randomizer.getRandomValue())]++;
     }
 
     ASSERT_FALSE(hitsForEachValue.empty());

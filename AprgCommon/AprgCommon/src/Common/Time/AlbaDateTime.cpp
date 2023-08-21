@@ -16,8 +16,7 @@ AlbaYearMonthDay AlbaYearMonthDay::createFromTotalDays(uint32_t const totalDays)
     uint32_t remainingDays(totalDays);
     uint32_t years(getAndRemoveYearsFromNumberOfDays(remainingDays));
     uint32_t month(getAndRemoveMonthsFromNumberOfDays(remainingDays, years));
-    return AlbaYearMonthDay(
-        static_cast<uint16_t>(years), static_cast<uint8_t>(month), static_cast<uint8_t>(remainingDays));
+    return {static_cast<uint16_t>(years), static_cast<uint8_t>(month), static_cast<uint8_t>(remainingDays)};
 }
 
 bool AlbaYearMonthDay::operator<(AlbaYearMonthDay const& second) const {
@@ -80,8 +79,7 @@ AlbaHourMinuteSecond AlbaHourMinuteSecond::createFromTotalSeconds(uint32_t const
     uint32_t remainingSeconds(totalSeconds);
     uint32_t hours(getAndRemoveHoursFromNumberOfSeconds(remainingSeconds));
     uint32_t minutes(getAndRemoveMinutesFromNumberOfSeconds(remainingSeconds));
-    return AlbaHourMinuteSecond(
-        static_cast<uint8_t>(hours), static_cast<uint8_t>(minutes), static_cast<uint8_t>(remainingSeconds));
+    return {static_cast<uint8_t>(hours), static_cast<uint8_t>(minutes), static_cast<uint8_t>(remainingSeconds)};
 }
 
 bool AlbaHourMinuteSecond::operator<(AlbaHourMinuteSecond const& second) const {
@@ -154,9 +152,9 @@ void AlbaDateTime::reorganizeValues() {
 
 AlbaDateTime AlbaDateTime::createFromTotalDaysAndSecondsAndMicroSeconds(
     uint32_t const totalDays, uint32_t const totalSeconds, uint32_t const totalMicroseconds) {
-    return AlbaDateTime(
+    return {
         AlbaYearMonthDay::createFromTotalDays(totalDays), AlbaHourMinuteSecond::createFromTotalSeconds(totalSeconds),
-        totalMicroseconds);
+        totalMicroseconds};
 }
 
 bool AlbaDateTime::isEmpty() const {
@@ -189,32 +187,35 @@ uint32_t& AlbaDateTime::getMicroSecondsReference() { return m_microseconds; }
 
 bool AlbaDateTime::operator<(AlbaDateTime const& secondDateTime) const {
     bool result(false);
-    if (m_sign < secondDateTime.m_sign)
+    if (m_sign < secondDateTime.m_sign) {
         result = true;
-    else if (m_sign > secondDateTime.m_sign)
+    } else if (m_sign > secondDateTime.m_sign) {
         result = false;
-    else
+    } else {
         result = isLessThanInMagnitude(*this, secondDateTime);
+    }
     return result;
 }
 
 bool AlbaDateTime::operator>(AlbaDateTime const& secondDateTime) const {
     bool result(false);
-    if (m_sign < secondDateTime.m_sign)
+    if (m_sign < secondDateTime.m_sign) {
         result = false;
-    else if (m_sign > secondDateTime.m_sign)
+    } else if (m_sign > secondDateTime.m_sign) {
         result = true;
-    else
+    } else {
         result = isGreaterThanInMagnitude(*this, secondDateTime);
+    }
     return result;
 }
 
 bool AlbaDateTime::operator==(AlbaDateTime const& secondDateTime) const {
     bool result(true);
-    if (m_sign != secondDateTime.m_sign)
+    if (m_sign != secondDateTime.m_sign) {
         result = false;
-    else
+    } else {
         result = isEqualInMagnitude(*this, secondDateTime);
+    }
     return result;
 }
 
@@ -242,14 +243,14 @@ AlbaDateTime AlbaDateTime::operator-(AlbaDateTime const& secondDateTime) const {
     return executeAddOrSubtract(*this, negateSecondDateTime);
 }
 
-AlbaDateTime AlbaDateTime::executeAddOrSubtract(
-    AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const {
+AlbaDateTime AlbaDateTime::executeAddOrSubtract(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) {
     AlbaDateTime result;
     if (firstDateTime.m_sign == secondDateTime.m_sign) {
         result = addDateTimeMagnitude(firstDateTime, secondDateTime);
         result.m_sign = firstDateTime.m_sign;
     } else {
         if (isLessThanInMagnitude(firstDateTime, secondDateTime)) {
+            // NOLINTNEXTLINE(readability-suspicious-call-argument)
             result = subtractDateTimeMagnitude(secondDateTime, firstDateTime);
             result.m_sign = secondDateTime.m_sign;
         } else {
@@ -260,24 +261,22 @@ AlbaDateTime AlbaDateTime::executeAddOrSubtract(
     return result;
 }
 
-bool AlbaDateTime::isLessThanInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const {
+bool AlbaDateTime::isLessThanInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) {
     return tie(firstDateTime.m_yearMonthDay, firstDateTime.m_hourMinuteSecond, firstDateTime.m_microseconds) <
            tie(secondDateTime.m_yearMonthDay, secondDateTime.m_hourMinuteSecond, secondDateTime.m_microseconds);
 }
 
-bool AlbaDateTime::isGreaterThanInMagnitude(
-    AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const {
+bool AlbaDateTime::isGreaterThanInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) {
     return tie(firstDateTime.m_yearMonthDay, firstDateTime.m_hourMinuteSecond, firstDateTime.m_microseconds) >
            tie(secondDateTime.m_yearMonthDay, secondDateTime.m_hourMinuteSecond, secondDateTime.m_microseconds);
 }
 
-bool AlbaDateTime::isEqualInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const {
+bool AlbaDateTime::isEqualInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) {
     return tie(firstDateTime.m_yearMonthDay, firstDateTime.m_hourMinuteSecond, firstDateTime.m_microseconds) ==
            tie(secondDateTime.m_yearMonthDay, secondDateTime.m_hourMinuteSecond, secondDateTime.m_microseconds);
 }
 
-AlbaDateTime AlbaDateTime::addDateTimeMagnitude(
-    AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const {
+AlbaDateTime AlbaDateTime::addDateTimeMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) {
     AlbaDateTime result;
     uint32_t totalDays(
         firstDateTime.getYearMonthDay().getTotalDays() + secondDateTime.getYearMonthDay().getTotalDays());
@@ -293,7 +292,7 @@ AlbaDateTime AlbaDateTime::addDateTimeMagnitude(
 }
 
 AlbaDateTime AlbaDateTime::subtractDateTimeMagnitude(
-    AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) const {
+    AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) {
     AlbaDateTime result;
     int32_t totalDays(
         static_cast<int32_t>(firstDateTime.getYearMonthDay().getTotalDays()) -
@@ -312,6 +311,7 @@ AlbaDateTime AlbaDateTime::subtractDateTimeMagnitude(
 }
 
 template <AlbaDateTime::PrintFormat printFormat>
+// NOLINTNEXTLINE(hicpp-named-parameter,readability-named-parameter)
 ostream& operator<<(ostream& out, AlbaDateTime::PrintObject<printFormat> const&) {
     using PrintObjectWithFormat = AlbaDateTime::PrintObject<printFormat>;
     static_assert(

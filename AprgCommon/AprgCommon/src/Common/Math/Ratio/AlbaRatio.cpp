@@ -23,7 +23,7 @@ bool AlbaRatio::isOnlyOneValueZero() const {
 bool AlbaRatio::hasValidRatio() const { return m_type == Type::WithValidRatio; }
 
 AlbaRatio::Type AlbaRatio::determineTypeFrom2Values(double const firstValue, double const secondValue) {
-    Type type;
+    Type type{};
     if (isAlmostEqual(0.0, firstValue)) {
         if (isAlmostEqual(0.0, secondValue)) {
             type = Type::BothValuesZero;

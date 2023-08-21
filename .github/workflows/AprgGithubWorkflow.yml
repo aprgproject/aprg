@@ -32,7 +32,7 @@ env:
   checkShellScriptsRelativePath: "AllCommonScripts/ScriptsForShellScripts/checkShellScripts.sh"
   determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
   buildAndRunScriptRelativePath: "AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
-  buildType: ${{ inputs.cppCMakeBuildType != '' && inputs.cppCMakeBuildType || 'Debug'}}
+  buildType: ${{ inputs.cppCMakeBuildType != '' && inputs.cppCMakeBuildType || 'Debug'}} # ternary operator
   buildDirectory: "GithubBuild"
   windowsEnvironmentScript: "C:/Program Files (x86)/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
 
@@ -86,7 +86,7 @@ jobs:
   buildAndTest:
     name: Test ${{ matrix.project }} on ${{ matrix.configurationName }}
     needs: determineCppProjects
-    runs-on: ${{ startsWith(matrix.configurationName, 'Windows') && 'windows-latest' || startsWith(matrix.configurationName, 'Ubuntu') && 'ubuntu-latest' || 'macos-latest'}}
+    runs-on: ${{ startsWith(matrix.configurationName, 'Windows') && 'windows-latest' || startsWith(matrix.configurationName, 'Ubuntu') && 'ubuntu-latest' || 'macos-latest'}} # ternary operator
     strategy:
       fail-fast: false
       matrix:
@@ -243,8 +243,12 @@ jobs:
           clang-tidy --version
           cppcheck --version
           clazy --version
-          "$buildAndRunScriptPath" clean ${{ env.buildDirectory }}
-          "$buildAndRunScriptPath" configureWithClangWithStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
-          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}  | tee "analyzerOutput.txt"
+          unquotedProject=$(echo "${{ matrix.project }}" | tr -d '"')
+          echo "unquotedProject: [$unquotedProject]"
+          if grep -q "^.*unquotedProject.* (style|warning|error): .*$" "analyzerOutput.txt"; then
+            exit 1
+          fi
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}

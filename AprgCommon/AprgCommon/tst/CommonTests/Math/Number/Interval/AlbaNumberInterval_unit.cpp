@@ -154,12 +154,12 @@ TEST(AlbaNumberIntervalTest, SetNewEndpointWorks) {
 }
 
 TEST(AlbaNumberIntervalTest, OutputStreamOperatorWorks) {
-    stringstream ss;
+    stringstream testStream;
     AlbaNumberInterval interval(createOpenEndpoint(645), createCloseEndpoint(784));
 
-    ss << interval;
+    testStream << interval;
 
-    EXPECT_EQ("(645, 784]", ss.str());
+    EXPECT_EQ("(645, 784]", testStream.str());
 }
 
 }  // namespace alba

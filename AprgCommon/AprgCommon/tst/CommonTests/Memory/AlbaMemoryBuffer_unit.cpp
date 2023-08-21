@@ -2,6 +2,8 @@
 
 #include <gtest/gtest.h>
 
+#include <array>
+
 using namespace std;
 
 namespace alba {
@@ -55,6 +57,7 @@ TEST(AlbaMemoryBufferTest, MoveConstructorWorks) {
 
     AlbaMemoryBuffer buffer2(std::move(buffer1));
 
+    // NOLINTNEXTLINE(clang-analyzer-cplusplus.Move,bugprone-use-after-move,hicpp-invalid-access-moved)
     EXPECT_EQ(0U, buffer1.getSize());
     int output2 = *reinterpret_cast<int*>(buffer2.getBufferPointer());
     EXPECT_TRUE(buffer2);
@@ -69,6 +72,7 @@ TEST(AlbaMemoryBufferTest, MoveAssignmentWorks) {
 
     buffer2 = std::move(buffer1);
 
+    // NOLINTNEXTLINE(clang-analyzer-cplusplus.Move,bugprone-use-after-move,hicpp-invalid-access-moved)
     EXPECT_EQ(0U, buffer1.getSize());
     int output2 = *reinterpret_cast<int*>(buffer2.getBufferPointer());
     EXPECT_TRUE(buffer2);
@@ -149,11 +153,11 @@ TEST(AlbaMemoryBufferTest, ClearAndSetNewDataWorks) {
 
 TEST(AlbaMemoryBufferTest, ResizeWithAdditionalSizeAndReturnBeginOfAdditionalDataWorks) {
     AlbaMemoryBuffer buffer;
-    uint8_t inputBuffer1[] = {0x12, 0x34, 0x56, 0x78};
-    uint8_t inputBuffer2[] = {0x87, 0x65, 0x43, 0x21};
+    array<uint8_t, 4> inputBuffer1 = {0x12, 0x34, 0x56, 0x78};
+    array<uint8_t, 4> inputBuffer2 = {0x87, 0x65, 0x43, 0x21};
 
-    memcpy(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(4), inputBuffer1, 4);
-    memcpy(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(4), inputBuffer2, 4);
+    memcpy(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(4), inputBuffer1.data(), 4);
+    memcpy(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(4), inputBuffer2.data(), 4);
 
     EXPECT_TRUE(buffer);
     EXPECT_EQ(8U, buffer.getSize());
@@ -226,7 +230,7 @@ TEST(AlbaMemoryBufferTest, SaveObjectWorksOnStandardLayoutTypes) {
 
     buffer.saveObject<SampleStandardLayoutClass>(standardLayoutInput);
 
-    SampleStandardLayoutClass& output(buffer.retrieveObjectAsReference<SampleStandardLayoutClass>());
+    auto& output(buffer.retrieveObjectAsReference<SampleStandardLayoutClass>());
     EXPECT_TRUE(output.field1);
     EXPECT_EQ('A', output.field2);
     EXPECT_EQ(0xA1BA, output.field3);
@@ -235,11 +239,11 @@ TEST(AlbaMemoryBufferTest, SaveObjectWorksOnStandardLayoutTypes) {
 TEST(AlbaMemoryBufferTest, OutputStreamOperatorWorks) {
     int input = 0x12345678;
     AlbaMemoryBuffer buffer(static_cast<void*>(&input), sizeof(input));
-    stringstream ss;
+    stringstream testStream;
 
-    ss << buffer;
+    testStream << buffer;
 
-    EXPECT_EQ("Decimal values: {120, 86, 52, 18, }\nHexadecimal values: {78, 56, 34, 12, }\n", ss.str());
+    EXPECT_EQ("Decimal values: {120, 86, 52, 18, }\nHexadecimal values: {78, 56, 34, 12, }\n", testStream.str());
 }
 
 }  // namespace alba

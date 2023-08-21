@@ -8,7 +8,7 @@ using namespace std;
 
 namespace alba {
 
-TEST(AlbaEntropySourceBasedOnTimeTest, DISABLED_OperatorWorks_AsNonDeterministic) {
+TEST(AlbaEntropySourceBasedOnTimeTest, DISABLED_OperatorWorksAsNonDeterministic) {
     // This does not work because checking source1 and source2 are too close to be different.
     AlbaEntropySourceBasedOnTime source1;
     AlbaEntropySourceBasedOnTime source2;

@@ -39,14 +39,18 @@ ls -la
 # Enable the "exit on error" option to automatically stop if there is a failure
 set -e
 
-# Perform script actions based from script option
-if [ "$scriptOption" == "clean" ]; then
+performClean() {
     if [ "$buildDirectoryName" = "$(basename "$(pwd)")" ]; then
         scriptPrint "$scriptName" "$LINENO" "Deleting everything in [$(pwd)]."
         rm -rf ./*
         scriptPrint "$scriptName" "$LINENO" "After deletion in [$(pwd)] contents:"
         ls -la
     fi
+}
+
+# Perform script actions based from script option
+if [ "$scriptOption" == "clean" ]; then
+    performClean
 elif [ "$scriptOption" == "configureWithDefaultCompiler" ]; then
     buildType="$argument1"
     cmakeGenerator="$argument2"
@@ -76,18 +80,19 @@ elif [ "$scriptOption" == "configureWithClangWithAsan" ]; then
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType] and cmakeGenerator is [$cmakeGenerator]."
     scriptPrint "$scriptName" "$LINENO" "The cCompilerLocation is [$cCompilerLocation] and cppCompilerLocation is [$cppCompilerLocation]."
     cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" -DCMAKE_C_FLAGS:STRING="-g --coverage -fsanitize=address -fno-omit-frame-pointer" -DCMAKE_CXX_FLAGS:STRING="-g -fsanitize=address -fno-omit-frame-pointer" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
-elif [ "$scriptOption" == "configureWithClangWithStaticAnalyzers" ]; then
+elif [ "$scriptOption" == "cleanAndConfigureWithClangAndStaticAnalyzers" ]; then
+    performClean
     buildType="$argument1"
     cmakeGenerator="$argument2"
-    cCompilerLocation="$(command -v clang)"
     cppCompilerLocation="$(command -v clazy)" # Use clazy as static analyzer
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType] and cmakeGenerator is [$cmakeGenerator]."
-    scriptPrint "$scriptName" "$LINENO" "The cCompilerLocation is [$cCompilerLocation] and cppCompilerLocation is [$cppCompilerLocation]."
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator" | tee "$(pwd)/StaticAnalyzerOutput.txt"
+    scriptPrint "$scriptName" "$LINENO" "The cppCompilerLocation is [$cppCompilerLocation]."
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "build" ]; then
     buildType="$argument1"
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
-    cmake --build . --config "$buildType"  --parallel "$numberOfCores"
+    scriptPrint "$scriptName" "$LINENO" "The numberOfCores is [$numberOfCores]."
+    cmake --build . --config "$buildType"  --parallel "$numberOfCores" 2>&1 # | tee "$(pwd)/BuildOutput.txt"
 elif [ "$scriptOption" == "install" ]; then
     buildType="$argument1"
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."

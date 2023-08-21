@@ -26,11 +26,11 @@ class AlbaLocalPathHandler : public AlbaWindowsPathHandler
 public:
 #if defined(OS_LINUX)
     template <typename... ArgumentTypes>
-    AlbaLocalPathHandler(ArgumentTypes&&... arguments)
+    explicit AlbaLocalPathHandler(ArgumentTypes&&... arguments)
         : AlbaLinuxPathHandler(std::forward<ArgumentTypes>(arguments)...) {}
 #elif defined(OS_WINDOWS)
     template <typename... ArgumentTypes>
-    AlbaLocalPathHandler(ArgumentTypes&&... arguments)
+    explicit AlbaLocalPathHandler(ArgumentTypes&&... arguments)
         : AlbaWindowsPathHandler(std::forward<ArgumentTypes>(arguments)...) {}
 #endif
 

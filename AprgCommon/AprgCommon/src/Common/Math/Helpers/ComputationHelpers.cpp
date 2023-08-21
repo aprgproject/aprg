@@ -6,11 +6,12 @@ using namespace std;
 
 namespace alba::mathHelper {
 
-AlbaNumbers getQuadraticRoots(RootType const rootType, AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c) {
+AlbaNumbers getQuadraticRoots(
+    RootType const rootType, AlbaNumber const& aValue, AlbaNumber const& bValue, AlbaNumber const& cValue) {
     AlbaNumbers result;
-    AlbaNumber twoA = a * 2;
-    AlbaNumber firstPart((-b) / twoA);
-    AlbaNumber discriminant((b ^ 2) - (a * c * 4));
+    AlbaNumber twoA = aValue * 2;
+    AlbaNumber firstPart((-bValue) / twoA);
+    AlbaNumber discriminant((bValue ^ 2) - (aValue * cValue * 4));
     if (discriminant >= 0) {
         AlbaNumber discriminantSquaredRoot = discriminant ^ (AlbaNumber::createFraction(1, 2));
         AlbaNumber secondPart(discriminantSquaredRoot / twoA);

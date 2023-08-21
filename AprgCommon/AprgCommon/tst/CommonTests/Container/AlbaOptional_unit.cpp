@@ -184,6 +184,7 @@ TEST(AlbaOptionalTest, OptionalCanBeSelfAssigned) {
     AlbaOptional<int> integerOptional1(1111);
 
     // When
+    // NOLINTNEXTLINE(clang-diagnostic-self-assign-overloaded)
     integerOptional1 = integerOptional1;
 
     // Then
@@ -237,6 +238,7 @@ TEST(AlbaOptionalTest, OptionalCanBeMovedByMoveAssignmentOperator) {
     integerOptional2 = std::move(integerOptional1);
 
     // Then
+    // NOLINTNEXTLINE(bugprone-use-after-move,hicpp-invalid-access-moved)
     EXPECT_FALSE(static_cast<bool>(integerOptional1));
     EXPECT_TRUE(static_cast<bool>(integerOptional2));
     EXPECT_EQ(1111, integerOptional2.get());
@@ -251,18 +253,19 @@ TEST(AlbaOptionalTest, OptionalCanBeMovedByMoveContructor) {
     AlbaOptional<int> integerOptional2(std::move(integerOptional1));
 
     // Then
+    // NOLINTNEXTLINE(bugprone-use-after-move,hicpp-invalid-access-moved)
     EXPECT_FALSE(static_cast<bool>(integerOptional1));
     EXPECT_TRUE(static_cast<bool>(integerOptional2));
     EXPECT_EQ(1111, integerOptional2.get());
 }
 
 TEST(AlbaOptionalTest, OutputStreamOperatorWorks) {
-    stringstream ss;
+    stringstream testStream;
     AlbaOptional<int> integerOptional(1111);
 
-    ss << integerOptional;
+    testStream << integerOptional;
 
-    EXPECT_EQ("hasContent: 1 value: 1111", ss.str());
+    EXPECT_EQ("hasContent: 1 value: 1111", testStream.str());
 }
 
 }  // namespace alba

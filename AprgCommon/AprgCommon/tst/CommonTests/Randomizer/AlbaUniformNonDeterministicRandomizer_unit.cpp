@@ -16,6 +16,7 @@ using FloatingPointRandomizerForTest = AlbaUniformNonDeterministicRandomizer<dou
 TEST(AlbaUniformNonDeterministicRandomizerTest, DefaultConstructorWorks) {
     IntegerRandomizerForTest randomizer;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
     EXPECT_NO_FATAL_FAILURE(randomizer.getRandomValue());
 }
 
@@ -47,7 +48,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, ResetRandomSeedWorks) {
     }
 }
 
-TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorks_WithinMinimumAndMaximumValues) {
+TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorksWithinMinimumAndMaximumValues) {
     constexpr int minimumValue(0);
     constexpr int maximumValue(9);
     IntegerRandomizerForTest randomizer(minimumValue, maximumValue);
@@ -60,7 +61,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorks_WithinMini
 }
 
 // DISABLED because its not non-deterministic
-TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorks_AsNonDeterministic) {
+TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorksAsNonDeterministic) {
     constexpr int minimumValue(0);
     constexpr int maximumValue(1000);
     IntegerRandomizerForTest randomizer1(minimumValue, maximumValue);
@@ -78,7 +79,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorks_AsNonDeter
     EXPECT_LT(equalCount, allowedDeviationCount);
 }
 
-TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorks_AsUniformlyDistributed) {
+TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorksAsUniformlyDistributed) {
     constexpr int minimumValue(0);
     constexpr int maximumValue(9);
     IntegerRandomizerForTest randomizer(minimumValue, maximumValue);
@@ -98,7 +99,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorks_AsUniforml
     EXPECT_LT(deviationCount, allowedDeviationCount);
 }
 
-TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomFloatingValueWorks_WithinMinimumAndMaximumValues) {
+TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomFloatingValueWorksWithinMinimumAndMaximumValues) {
     constexpr double minimumValue(-11.5);
     constexpr double maximumValue(23.25);
     FloatingPointRandomizerForTest randomizer(minimumValue, maximumValue);
@@ -111,7 +112,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomFloatingValueWorks_With
 }
 
 // DISABLED because its not non-deterministic
-TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomFloatingValueWorks_AsNonDeterministic) {
+TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomFloatingValueWorksAsNonDeterministic) {
     constexpr double minimumValue(-11.5);
     constexpr double maximumValue(2300.25);
     FloatingPointRandomizerForTest randomizer1(minimumValue, maximumValue);
@@ -127,7 +128,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomFloatingValueWorks_AsNo
     EXPECT_LT(equalCount, allowedDeviationCount);
 }
 
-TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomFloatingValueWorks_AsUniformlyDistributed) {
+TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomFloatingValueWorksAsUniformlyDistributed) {
     constexpr int minimumValue(0);
     constexpr int maximumValue(9);
     FloatingPointRandomizerForTest randomizer(static_cast<double>(minimumValue), static_cast<double>(maximumValue));
@@ -137,8 +138,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomFloatingValueWorks_AsUn
     vector<int> hitsForEachValue(numberOfRandomValues, 0);
 
     for (int i = 0; i < iterations; i++) {
-        auto randomValue(randomizer.getRandomValue());
-        hitsForEachValue[randomValue]++;
+        hitsForEachValue[static_cast<int>(randomizer.getRandomValue())]++;
     }
 
     ASSERT_FALSE(hitsForEachValue.empty());

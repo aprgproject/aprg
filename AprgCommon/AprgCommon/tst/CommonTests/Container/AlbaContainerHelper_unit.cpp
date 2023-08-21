@@ -108,9 +108,9 @@ TEST(AlbaContainerHelperTest, GetLowerAndUpperConstIteratorsInMapWorks) {
     using MapIterator = map<int, int>::const_iterator;
     using PairOfIterators = pair<MapIterator, MapIterator>;
 
-    MapIterator firstIterator = sampleMap.find(1);
-    MapIterator secondIterator = sampleMap.find(3);
-    MapIterator thirdIterator = sampleMap.find(5);
+    auto firstIterator = sampleMap.find(1);
+    auto secondIterator = sampleMap.find(3);
+    auto thirdIterator = sampleMap.find(5);
     PairOfIterators iteratorsToVerify1(getLowerAndUpperConstIteratorsInMap(sampleMap, 0));
     EXPECT_EQ(firstIterator, iteratorsToVerify1.first);
     EXPECT_EQ(firstIterator, iteratorsToVerify1.second);
@@ -136,9 +136,9 @@ TEST(AlbaContainerHelperTest, GetLowerAndUpperIteratorsInMapWorks) {
     using MapIterator = map<int, int>::iterator;
     using PairOfIterators = pair<MapIterator, MapIterator>;
 
-    MapIterator firstIterator = sampleMap.find(1);
-    MapIterator secondIterator = sampleMap.find(3);
-    MapIterator thirdIterator = sampleMap.find(5);
+    auto firstIterator = sampleMap.find(1);
+    auto secondIterator = sampleMap.find(3);
+    auto thirdIterator = sampleMap.find(5);
     PairOfIterators iteratorsToVerify1(getLowerAndUpperIteratorsInMap(sampleMap, 0));
     EXPECT_EQ(firstIterator, iteratorsToVerify1.first);
     EXPECT_EQ(firstIterator, iteratorsToVerify1.second);
@@ -164,16 +164,16 @@ TEST(AlbaContainerHelperTest, GetLowerAndUpperConstIteratorsInMapWorksOnMultiMap
     using MultimapIterator = multimap<int, int>::const_iterator;
     using PairOfIterators = pair<MultimapIterator, MultimapIterator>;
 
-    MultimapIterator firstIterator = begin(sampleMap);
-    MultimapIterator secondIterator = firstIterator;
+    auto firstIterator = begin(sampleMap);
+    auto secondIterator = firstIterator;
     secondIterator++;
-    MultimapIterator thirdIterator = secondIterator;
+    auto thirdIterator = secondIterator;
     thirdIterator++;
-    MultimapIterator fourthIterator = thirdIterator;
+    auto fourthIterator = thirdIterator;
     fourthIterator++;
-    MultimapIterator fifthIterator = fourthIterator;
+    auto fifthIterator = fourthIterator;
     fifthIterator++;
-    MultimapIterator sixthIterator = fifthIterator;
+    auto sixthIterator = fifthIterator;
     sixthIterator++;
     PairOfIterators iteratorsToVerify1(getLowerAndUpperConstIteratorsInMap(sampleMap, 0));
     EXPECT_EQ(firstIterator, iteratorsToVerify1.first);
@@ -200,16 +200,16 @@ TEST(AlbaContainerHelperTest, GetLowerAndUpperIteratorsInMapWorksOnMultiMap) {
     using MultimapIterator = multimap<int, int>::iterator;
     using PairOfIterators = pair<MultimapIterator, MultimapIterator>;
 
-    MultimapIterator firstIterator = begin(sampleMap);
-    MultimapIterator secondIterator = firstIterator;
+    auto firstIterator = begin(sampleMap);
+    auto secondIterator = firstIterator;
     secondIterator++;
-    MultimapIterator thirdIterator = secondIterator;
+    auto thirdIterator = secondIterator;
     thirdIterator++;
-    MultimapIterator fourthIterator = thirdIterator;
+    auto fourthIterator = thirdIterator;
     fourthIterator++;
-    MultimapIterator fifthIterator = fourthIterator;
+    auto fifthIterator = fourthIterator;
     fifthIterator++;
-    MultimapIterator sixthIterator = fifthIterator;
+    auto sixthIterator = fifthIterator;
     sixthIterator++;
     PairOfIterators iteratorsToVerify1(getLowerAndUpperIteratorsInMap(sampleMap, 0));
     EXPECT_EQ(firstIterator, iteratorsToVerify1.first);
@@ -394,11 +394,12 @@ TEST_F(AlbaContainerHelperReaderTest, FetrieveContentsFromStreamWorksForAVectorO
     retrieveContentsFromStream(testFileReadStream, temporaryArray);
 
     ASSERT_EQ(4U, temporaryArray.size());
-    auto it = begin(temporaryArray);
-    EXPECT_EQ(18723, *(it++));
-    EXPECT_EQ(-608, *(it++));
-    EXPECT_EQ(-43735, *(it++));
-    EXPECT_EQ(23234, *(it++));
+    // NOLINTNEXTLINE(llvm-qualified-auto,readability-qualified-auto)
+    auto verifyIt = begin(temporaryArray);
+    EXPECT_EQ(18723, *(verifyIt++));
+    EXPECT_EQ(-608, *(verifyIt++));
+    EXPECT_EQ(-43735, *(verifyIt++));
+    EXPECT_EQ(23234, *(verifyIt++));
 }
 
 TEST_F(AlbaContainerHelperReaderTest, FetrieveContentsFromStreamWorksForAnArrayOfIntegersFromFile) {
@@ -414,11 +415,11 @@ TEST_F(AlbaContainerHelperReaderTest, FetrieveContentsFromStreamWorksForAnArrayO
     retrieveContentsFromStream(testFileReadStream, temporaryVector);
 
     ASSERT_EQ(4U, temporaryVector.size());
-    auto it = begin(temporaryVector);
-    EXPECT_EQ(18723, *(it++));
-    EXPECT_EQ(-608, *(it++));
-    EXPECT_EQ(-43735, *(it++));
-    EXPECT_EQ(23234, *(it++));
+    auto verifyIt = begin(temporaryVector);
+    EXPECT_EQ(18723, *(verifyIt++));
+    EXPECT_EQ(-608, *(verifyIt++));
+    EXPECT_EQ(-43735, *(verifyIt++));
+    EXPECT_EQ(23234, *(verifyIt++));
 }
 
 TEST_F(AlbaContainerHelperReaderTest, FetrieveContentsFromStreamWorksForASetOfIntegersFromFile) {
@@ -434,11 +435,11 @@ TEST_F(AlbaContainerHelperReaderTest, FetrieveContentsFromStreamWorksForASetOfIn
     retrieveContentsFromStream(testFileReadStream, temporarySet);
 
     ASSERT_EQ(4U, temporarySet.size());
-    auto it = begin(temporarySet);
-    EXPECT_EQ(-43735, *(it++));
-    EXPECT_EQ(-608, *(it++));
-    EXPECT_EQ(18723, *(it++));
-    EXPECT_EQ(23234, *(it++));
+    auto verifyIt = begin(temporarySet);
+    EXPECT_EQ(-43735, *(verifyIt++));
+    EXPECT_EQ(-608, *(verifyIt++));
+    EXPECT_EQ(18723, *(verifyIt++));
+    EXPECT_EQ(23234, *(verifyIt++));
 }
 
 TEST_F(AlbaContainerHelperReaderTest, FetrieveContentsFromStreamWorksForAMapOfIntegersFromFile) {
@@ -454,12 +455,12 @@ TEST_F(AlbaContainerHelperReaderTest, FetrieveContentsFromStreamWorksForAMapOfIn
     retrieveContentsFromStream(testFileReadStream, temporaryMap);
 
     ASSERT_EQ(2U, temporaryMap.size());
-    auto it = begin(temporaryMap);
-    EXPECT_EQ(1, it->first);
-    EXPECT_EQ(2, it->second);
-    it++;
-    EXPECT_EQ(3, it->first);
-    EXPECT_EQ(4, it->second);
+    auto verifyIt = begin(temporaryMap);
+    EXPECT_EQ(1, verifyIt->first);
+    EXPECT_EQ(2, verifyIt->second);
+    verifyIt++;
+    EXPECT_EQ(3, verifyIt->first);
+    EXPECT_EQ(4, verifyIt->second);
 }
 
 }  // namespace alba::containerHelper

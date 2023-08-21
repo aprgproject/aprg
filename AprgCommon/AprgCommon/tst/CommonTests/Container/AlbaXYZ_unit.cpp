@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using IntXYZ = AlbaXYZ<int>;
-}
+}  // namespace
 
 TEST(AlbaXYZTest, DefaultValuesAreZero) {
     IntXYZ xyz;
@@ -170,12 +170,12 @@ TEST(AlbaXYZTest, SaveMaximumXAndYAndZWorks) {
 }
 
 TEST(AlbaXYZTest, OutputStreamOperatorWorks) {
-    stringstream ss;
+    stringstream testStream;
     IntXYZ xyz(-5, 5, 10);
 
-    ss << xyz;
+    testStream << xyz;
 
-    EXPECT_EQ("(-5,5,10)", ss.str());
+    EXPECT_EQ("(-5,5,10)", testStream.str());
 }
 
 }  // namespace alba

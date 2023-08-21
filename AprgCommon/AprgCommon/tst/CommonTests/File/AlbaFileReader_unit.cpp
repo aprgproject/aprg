@@ -205,7 +205,7 @@ TEST_F(AlbaFileReaderTest, ReadMultipleCharacters) {
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     size_t numberOfCharacters = 3U;
-    char* charPointer;
+    char* charPointer = nullptr;
     charPointer = fileReader.getCharacters(numberOfCharacters);
     EXPECT_EQ("123", string(charPointer, numberOfCharacters));
     EXPECT_EQ(3U, numberOfCharacters);
@@ -245,7 +245,7 @@ TEST_F(AlbaFileReaderTest, RequestToReadMultipleCharactersThatIsTheBeyondBufferS
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     size_t numberOfCharacters = 20000;
-    char* charPointer;
+    char* charPointer = nullptr;
     charPointer = fileReader.getCharacters(numberOfCharacters);
     EXPECT_EQ("123", string(charPointer, numberOfCharacters));
     EXPECT_EQ(3U, numberOfCharacters);

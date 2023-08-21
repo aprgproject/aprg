@@ -157,7 +157,7 @@ void splitToStrings(strings& listOfStrings, std::string_view mainText, std::stri
 std::string combineStrings(strings const& strings, std::string_view delimiters);
 void splitLinesToAchieveTargetLength(strings& listOfStrings, std::string_view mainText, size_t const targetLength);
 void splitToStringsUsingASeriesOfDelimeters(
-    strings& listOfStrings, std::string_view mainString, strings const& seriesOfDelimiters);
+    strings& listOfStrings, std::string_view mainText, strings const& seriesOfDelimiters);
 
 // basic_string variants
 template <typename StringType>
@@ -309,28 +309,28 @@ public:
 
     StringConverterWithFormatting() = default;
 
-    StringConverterWithFormatting(int const precision)
+    explicit StringConverterWithFormatting(int const precision)
         : m_precisionOptional(precision),
           m_fieldWidthOptional(),
           m_fillCharacterOptional(),
           m_maximumLengthOptional(),
           m_floatOutputTypeOptional() {}
 
-    StringConverterWithFormatting(int const fieldWidth, char const fillCharacter)
+    explicit StringConverterWithFormatting(int const fieldWidth, char const fillCharacter)
         : m_precisionOptional(),
           m_fieldWidthOptional(fieldWidth),
           m_fillCharacterOptional(fillCharacter),
           m_maximumLengthOptional(),
           m_floatOutputTypeOptional() {}
 
-    StringConverterWithFormatting(size_t const maximumLength)
+    explicit StringConverterWithFormatting(size_t const maximumLength)
         : m_precisionOptional(),
           m_fieldWidthOptional(),
           m_fillCharacterOptional(),
           m_maximumLengthOptional(maximumLength),
           m_floatOutputTypeOptional() {}
 
-    StringConverterWithFormatting(
+    explicit StringConverterWithFormatting(
         int const precision, int const fieldWidth, char const fillCharacter, size_t const maximumLength)
         : m_precisionOptional(precision),
           m_fieldWidthOptional(fieldWidth),

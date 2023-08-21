@@ -8,7 +8,7 @@ namespace alba {
 
 class AlbaWebPathHandler : public AlbaPathHandler {
 public:
-    AlbaWebPathHandler(std::string_view path);
+    explicit AlbaWebPathHandler(std::string_view path);
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
 
     void clear() override;

@@ -9,6 +9,17 @@ using namespace alba::AlbaDateTimeConstants;
 using namespace alba::mathHelper;
 using namespace std;
 
+namespace {
+constexpr uint32_t HOURS_12 = 12U;
+constexpr uint32_t YEARS_4 = 4U;
+constexpr uint32_t YEARS_100 = 100U;
+constexpr uint32_t YEARS_400 = 400U;
+constexpr uint32_t DAYS_28_IN_MONTH = 28U;
+constexpr uint32_t DAYS_29_IN_MONTH = 29U;
+constexpr uint32_t DAYS_30_IN_MONTH = 30U;
+constexpr uint32_t DAYS_31_IN_MONTH = 31U;
+}  // namespace
+
 namespace alba::dateTimeHelper {
 
 std::string_view getMonthString(uint32_t const month) {
@@ -37,23 +48,20 @@ std::string_view getMonthString(uint32_t const month) {
             return "November";
         case DECEMBER:
             return "December";
+        default:
+            break;
     }
-    return std::string_view();
+    return {};
 }
 
-std::string_view getAmPmSuffix(uint32_t const hours) { return hours < 12 ? "AM" : "PM"; }
+std::string_view getAmPmSuffix(uint32_t const hours) { return hours < HOURS_12 ? "AM" : "PM"; }
 
-uint32_t convertTo12HourFormat(uint32_t const hours) { return hours > 12 ? hours - 12 : (hours == 0 ? 12 : hours); }
+uint32_t convertTo12HourFormat(uint32_t const hours) {
+    return hours > HOURS_12 ? hours - HOURS_12 : (hours == 0 ? HOURS_12 : hours);
+}
 
 bool isLeapYear(uint32_t const year) {
-    bool result(true);
-    if (!isDivisible(year, 4U))
-        result = false;
-    else if (!isDivisible(year, 100U))
-        result = true;
-    else if (!isDivisible(year, 400U))
-        result = false;
-    return result;
+    return (year % YEARS_4 == 0 && year % YEARS_100 != 0) || (year % YEARS_400 == 0);
 }
 
 uint32_t getNumberOfDaysInAYear(uint32_t const year) {
@@ -63,15 +71,15 @@ uint32_t getNumberOfDaysInAYear(uint32_t const year) {
 uint32_t getNumberOfDaysInAMonth(uint32_t const month, uint32_t const year) {
     uint32_t numberOfDays(0);
     if (month == APRIL || month == JUNE || month == SEPTEMBER || month == NOVEMBER) {
-        numberOfDays = 30;
+        numberOfDays = DAYS_30_IN_MONTH;
     } else if (month == FEBRUARY) {
         if (isLeapYear(year)) {
-            numberOfDays = 29;
+            numberOfDays = DAYS_29_IN_MONTH;
         } else {
-            numberOfDays = 28;
+            numberOfDays = DAYS_28_IN_MONTH;
         }
     } else if (month > 0) {
-        numberOfDays = 31;
+        numberOfDays = DAYS_31_IN_MONTH;
     }
     return numberOfDays;
 }
@@ -80,7 +88,8 @@ uint32_t getNumberOfLeapYearsBeforeThisYear(uint32_t const year) {
     uint32_t numberOfLeapYears(0);
     if (year > 0) {
         auto beforeThisYear = year - 1;
-        numberOfLeapYears = (beforeThisYear / 4) - (beforeThisYear / 100) + (beforeThisYear / 400) + 1;
+        numberOfLeapYears =
+            (beforeThisYear / YEARS_4) - (beforeThisYear / YEARS_100) + (beforeThisYear / YEARS_400) + 1;
     }
     return numberOfLeapYears;
 }
@@ -92,37 +101,37 @@ uint32_t getNumberOfDaysInTheYearBeforeThisMonth(uint32_t const month, uint32_t 
             numberOfDays = 0;
             break;
         case FEBRUARY:
-            numberOfDays = 31;
+            numberOfDays = 31;  // NOLINT(readability-magic-numbers)
             break;
         case MARCH:
-            numberOfDays = 59;
+            numberOfDays = 59;  // NOLINT(readability-magic-numbers)
             break;
         case APRIL:
-            numberOfDays = 90;
+            numberOfDays = 90;  // NOLINT(readability-magic-numbers)
             break;
         case MAY:
-            numberOfDays = 120;
+            numberOfDays = 120;  // NOLINT(readability-magic-numbers)
             break;
         case JUNE:
-            numberOfDays = 151;
+            numberOfDays = 151;  // NOLINT(readability-magic-numbers)
             break;
         case JULY:
-            numberOfDays = 181;
+            numberOfDays = 181;  // NOLINT(readability-magic-numbers)
             break;
         case AUGUST:
-            numberOfDays = 212;
+            numberOfDays = 212;  // NOLINT(readability-magic-numbers)
             break;
         case SEPTEMBER:
-            numberOfDays = 243;
+            numberOfDays = 243;  // NOLINT(readability-magic-numbers)
             break;
         case OCTOBER:
-            numberOfDays = 273;
+            numberOfDays = 273;  // NOLINT(readability-magic-numbers)
             break;
         case NOVEMBER:
-            numberOfDays = 304;
+            numberOfDays = 304;  // NOLINT(readability-magic-numbers)
             break;
         case DECEMBER:
-            numberOfDays = 334;
+            numberOfDays = 334;  // NOLINT(readability-magic-numbers)
             break;
         default:
             numberOfDays = 0;
@@ -136,13 +145,17 @@ uint32_t getNumberOfDaysInTheYearBeforeThisMonth(uint32_t const month, uint32_t 
 
 uint32_t getMonthFromNumberOfDaysInANonLeapYear(uint32_t const numberOfDays) {
     constexpr array<uint32_t, 11> accumulatedDaysForEachMonth{31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
-    auto itMonth = lower_bound(accumulatedDaysForEachMonth.cbegin(), accumulatedDaysForEachMonth.cend(), numberOfDays);
+    // NOLINTNEXTLINE(llvm-qualified-auto,readability-qualified-auto)
+    auto const itMonth =
+        lower_bound(accumulatedDaysForEachMonth.cbegin(), accumulatedDaysForEachMonth.cend(), numberOfDays);
     return static_cast<uint32_t>(JANUARY) + distance(accumulatedDaysForEachMonth.cbegin(), itMonth);
 }
 
 uint32_t getMonthFromNumberOfDaysInALeapYear(uint32_t const numberOfDays) {
     constexpr array<uint32_t, 11> accumulatedDaysForEachMonth{31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335};
-    auto itMonth = lower_bound(accumulatedDaysForEachMonth.cbegin(), accumulatedDaysForEachMonth.cend(), numberOfDays);
+    // NOLINTNEXTLINE(llvm-qualified-auto,readability-qualified-auto)
+    auto const itMonth =
+        lower_bound(accumulatedDaysForEachMonth.cbegin(), accumulatedDaysForEachMonth.cend(), numberOfDays);
     return static_cast<uint32_t>(JANUARY) + distance(accumulatedDaysForEachMonth.cbegin(), itMonth);
 }
 
@@ -173,10 +186,13 @@ DayOfTheWeek getDayOfTheWeek(uint32_t const years, uint32_t const month, uint32_
     // 1 <= month <= 12,  years > 1752 (in the U.K.)
 
     uint32_t yearValue = years;
-    static constexpr uint32_t monthOffset[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
-    yearValue -= month < 3;
+    static constexpr array<uint32_t, 12> monthOffset = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
+    yearValue -= (month < 3) ? 1 : 0;
     return static_cast<DayOfTheWeek>(
-        (yearValue + yearValue / 4 - yearValue / 100 + yearValue / 400 + monthOffset[month - 1] + days) % 7);
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
+        (yearValue + yearValue / YEARS_4 - yearValue / YEARS_100 + yearValue / YEARS_400 + monthOffset[month - 1] +
+         days) %
+        7);
 }
 
 uint32_t getAndRemoveYearsFromNumberOfDays(uint32_t& remainingDays) {
@@ -218,13 +234,16 @@ void reorganizeOverflowValues(uint32_t& totalDays, uint32_t& totalSeconds, uint3
 
 void reorganizeUnderflowValues(int32_t& totalDays, int32_t& totalSeconds, int32_t& totalMicroSeconds) {
     if (totalMicroSeconds < 0) {
-        int32_t neededSeconds =
-            (totalMicroSeconds * -1 + NUMBER_OF_MICROSECONDS_IN_A_SECOND - 1) / NUMBER_OF_MICROSECONDS_IN_A_SECOND;
+        int32_t neededSeconds = (static_cast<int32_t>(totalMicroSeconds) * -1 +
+                                 static_cast<int32_t>(NUMBER_OF_MICROSECONDS_IN_A_SECOND) - 1) /
+                                static_cast<int32_t>(NUMBER_OF_MICROSECONDS_IN_A_SECOND);
         totalSeconds -= neededSeconds;
-        totalMicroSeconds += neededSeconds * static_cast<int32_t>(NUMBER_OF_MICROSECONDS_IN_A_SECOND);
+        totalMicroSeconds +=
+            static_cast<int32_t>(neededSeconds) * static_cast<int32_t>(NUMBER_OF_MICROSECONDS_IN_A_SECOND);
     }
     if (totalSeconds < 0) {
-        int32_t neededDays = (totalSeconds * -1 + NUMBER_OF_SECONDS_IN_A_DAY - 1) / NUMBER_OF_SECONDS_IN_A_DAY;
+        int32_t neededDays = (totalSeconds * -1 + static_cast<int32_t>(NUMBER_OF_SECONDS_IN_A_DAY) - 1) /
+                             static_cast<int32_t>(NUMBER_OF_SECONDS_IN_A_DAY);
         totalDays -= neededDays;
         totalSeconds += neededDays * static_cast<int32_t>(NUMBER_OF_SECONDS_IN_A_DAY);
     }

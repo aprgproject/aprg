@@ -33,7 +33,7 @@ TEST(AlbaWebPathHandlerTest, DirectoryWithColonAndFileGivenAndNoProtocol) {
     EXPECT_EQ(PathType::File, pathHandler.getPathType());
 }
 
-TEST(AlbaWebPathHandlerTest, FullPathWithOnlyDirectoryGiven_HttpStyleInput) {
+TEST(AlbaWebPathHandlerTest, FullPathWithOnlyDirectoryGivenHttpStyleInput) {
     AlbaWebPathHandler pathHandler(R"(hTTp://www.google.com\\\\/\\\\/!@#$%12345\\///)");
     EXPECT_TRUE(pathHandler.hasProtocol());
     EXPECT_EQ("http", pathHandler.getProtocol());

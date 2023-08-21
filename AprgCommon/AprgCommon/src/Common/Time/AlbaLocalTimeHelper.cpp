@@ -25,7 +25,8 @@ AlbaDateTime convertSystemTimeToAlbaDateTime(LibrarySystemTime const& inputTime)
     constexpr size_t MONTH_OFFSET = 1;
 
     time_t currentTimeT = system_clock::to_time_t(inputTime);
-    auto localTime = *localtime(&currentTimeT);  // not thread safe
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
+    struct tm localTime = *localtime(&currentTimeT);
     AlbaDateTime result(
         localTime.tm_year + YEAR_OFFSET, localTime.tm_mon + MONTH_OFFSET, localTime.tm_mday, localTime.tm_hour,
         localTime.tm_min, localTime.tm_sec,

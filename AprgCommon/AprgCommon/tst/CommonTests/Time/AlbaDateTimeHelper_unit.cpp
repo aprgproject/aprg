@@ -344,7 +344,7 @@ TEST(AlbaDateTimeHelperTest, GetAndRemoveMinutesFromNumberOfSecondsWorks) {
     EXPECT_EQ(59U, totalSeconds);
 }
 
-TEST(AlbaDateTimeHelperTest, ReorganizeOverflowValuesWorks_IfThereIsNoOverflow) {
+TEST(AlbaDateTimeHelperTest, ReorganizeOverflowValuesWorksIfThereIsNoOverflow) {
     uint32_t days = 0, seconds = 0, microSeconds = 0;
     reorganizeOverflowValues(days, seconds, microSeconds);
     EXPECT_EQ(0U, days);
@@ -352,7 +352,7 @@ TEST(AlbaDateTimeHelperTest, ReorganizeOverflowValuesWorks_IfThereIsNoOverflow) 
     EXPECT_EQ(0U, microSeconds);
 }
 
-TEST(AlbaDateTimeHelperTest, ReorganizeOverflowValuesWorks_IfThereIsOverflow) {
+TEST(AlbaDateTimeHelperTest, ReorganizeOverflowValuesWorksIfThereIsOverflow) {
     uint32_t days = 99999999, seconds = 99999999, microSeconds = 99999999;
     reorganizeOverflowValues(days, seconds, microSeconds);
     EXPECT_EQ(100001156U, days);
@@ -360,7 +360,7 @@ TEST(AlbaDateTimeHelperTest, ReorganizeOverflowValuesWorks_IfThereIsOverflow) {
     EXPECT_EQ(999999U, microSeconds);
 }
 
-TEST(AlbaDateTimeHelperTest, ReorganizeUnderflowValuesWorks_IfThereIsNoUnderflow) {
+TEST(AlbaDateTimeHelperTest, ReorganizeUnderflowValuesWorksIfThereIsNoUnderflow) {
     int days = 0, seconds = 0, microSeconds = 0;
     reorganizeUnderflowValues(days, seconds, microSeconds);
     EXPECT_EQ(0, days);
@@ -368,7 +368,7 @@ TEST(AlbaDateTimeHelperTest, ReorganizeUnderflowValuesWorks_IfThereIsNoUnderflow
     EXPECT_EQ(0, microSeconds);
 }
 
-TEST(AlbaDateTimeHelperTest, ReorganizeUnderflowValuesWorks_IfThereIsUnderflow) {
+TEST(AlbaDateTimeHelperTest, ReorganizeUnderflowValuesWorksIfThereIsUnderflow) {
     int days = 99999999, seconds = -99999999, microSeconds = -99999999;
     reorganizeUnderflowValues(days, seconds, microSeconds);
     EXPECT_EQ(99998841, days);

@@ -179,7 +179,8 @@ double AlbaComplexNumber<DataType>::getBestAngleInRaiseToPowerInRadians(DataType
     bool isFirst(true);
     double bestAngleWithoutPi(0), minDeltaFromNearestInteger(1);
     for (size_t rootIndex = 0; rootIndex < numberRootsToProcess; rootIndex++) {
-        double possibleAngleWithoutPi = (angleWithoutPi + 2 * rootIndex) * exponent;
+        auto possibleAngleWithoutPi =
+            (angleWithoutPi + 2.0 * static_cast<double>(rootIndex)) * static_cast<double>(exponent);
         double deltaFromNearestInteger = getPositiveDelta(possibleAngleWithoutPi, round(possibleAngleWithoutPi));
         if (isFirst || deltaFromNearestInteger < minDeltaFromNearestInteger) {
             minDeltaFromNearestInteger = deltaFromNearestInteger;
@@ -207,8 +208,9 @@ template <typename DataType>
 AlbaComplexNumber<DataType> AlbaComplexNumber<DataType>::getNthRoot(
     size_t const rootIndex, size_t const rootDegree) const {
     assert(rootIndex < rootDegree);
-    double modulusPart = pow(static_cast<double>(getModulus()), static_cast<double>(1) / rootDegree);
-    double angleToBeUsed = (getAngleInRadians() + getPi() * 2 * rootIndex) / rootDegree;
+    double modulusPart =
+        pow(static_cast<double>(getModulus()), static_cast<double>(1) / static_cast<double>(rootDegree));
+    double angleToBeUsed = (getAngleInRadians() + getPi() * 2 * static_cast<double>(rootIndex)) / rootDegree;
     double realPart = modulusPart * cos(angleToBeUsed);
     double imaginaryPart = modulusPart * sin(angleToBeUsed);
     return AlbaComplexNumber<DataType>(static_cast<DataType>(realPart), static_cast<DataType>(imaginaryPart));

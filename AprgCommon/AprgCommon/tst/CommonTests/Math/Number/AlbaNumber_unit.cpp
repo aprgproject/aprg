@@ -107,7 +107,7 @@ TEST(AlbaNumberScopeObjectTest, SetInThisScopeTheTolerancesToZeroWorksAtDefaultV
 
     {
         AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
-        scopeConfigurationObject.setInThisScopeTheTolerancesToZero();
+        AlbaNumber::ScopeConfigurationObject::setInThisScopeTheTolerancesToZero();
 
         AlbaNumber number3(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
         AlbaNumber number4(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
@@ -140,7 +140,7 @@ TEST(AlbaNumberScopeObjectTest, SetInThisScopeTheTolerancesToZeroWorksWhenValues
 
     {
         AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
-        scopeConfigurationObject.setInThisScopeTheTolerancesToZero();
+        AlbaNumber::ScopeConfigurationObject::setInThisScopeTheTolerancesToZero();
 
         AlbaNumber number3(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.01));
         AlbaNumber number4(AlbaNumber::createNumberFromDoubleAndRoundIfNeeded(3.0000000000001));
@@ -1748,7 +1748,7 @@ TEST(AlbaNumberTest, PrecisionWorksOnSquareRootAndPolynomialCalculation) {
 }
 
 TEST(AlbaNumberTest, UserDefinedLiteralForAlbaNumberWorks) {
-    stringstream ss;
+    stringstream testStream;
     AlbaNumber number1 = 3484_AS_ALBA_NUMBER;
     AlbaNumber number2 = -85.45631_AS_ALBA_NUMBER;
 
@@ -1776,7 +1776,7 @@ TEST(AlbaNumberTest, ProductPrecisionTestWorks) {
 }
 
 TEST(AlbaNumberTest, OutputStreamOperatorWorks) {
-    stringstream ss;
+    stringstream testStream;
     AlbaNumber number1;
     AlbaNumber number2(3484);
     AlbaNumber number3(-1561);
@@ -1786,10 +1786,10 @@ TEST(AlbaNumberTest, OutputStreamOperatorWorks) {
     AlbaNumber number7(AlbaNumber::createFraction(-415, 41745));
     AlbaNumber number8(AlbaNumber::createComplexNumber(8.9, 7.8));
 
-    ss << number1 << "," << number2 << "," << number3 << "," << number4 << "," << number5 << "," << number6 << ","
-       << number7 << "," << number8;
+    testStream << number1 << "," << number2 << "," << number3 << "," << number4 << "," << number5 << "," << number6
+               << "," << number7 << "," << number8;
 
-    EXPECT_EQ("0,3484,-1561,-85.4563,(pi),(e),(-83/8349),(8.9 + 7.8i)", ss.str());
+    EXPECT_EQ("0,3484,-1561,-85.4563,(pi),(e),(-83/8349),(8.9 + 7.8i)", testStream.str());
 }
 
 }  // namespace alba

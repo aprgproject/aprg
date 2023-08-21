@@ -11,8 +11,8 @@ using namespace std;
 namespace alba {
 
 TEST(AlbaStreamBitWriterTest, WriteBoolDataWorks) {
-    stringstream ss;
-    AlbaStreamBitWriter writer(ss);
+    stringstream testStream;
+    AlbaStreamBitWriter writer(testStream);
 
     writer.writeBoolData(false);
     writer.writeBoolData(false);
@@ -23,84 +23,84 @@ TEST(AlbaStreamBitWriterTest, WriteBoolDataWorks) {
     writer.writeBoolData(true);
     writer.writeBoolData(true);
 
-    EXPECT_EQ(R"(3)", ss.str());
+    EXPECT_EQ(R"(3)", testStream.str());
 }
 
 TEST(AlbaStreamBitWriterTest, WriteCharDataWorks) {
-    stringstream ss;
-    AlbaStreamBitWriter writer(ss);
+    stringstream testStream;
+    AlbaStreamBitWriter writer(testStream);
 
     writer.writeCharData('.');
     writer.writeCharData('/');
     writer.writeCharData('*');
 
-    EXPECT_EQ(R"(./*)", ss.str());
+    EXPECT_EQ(R"(./*)", testStream.str());
 }
 
 TEST(AlbaStreamBitWriterTest, WriteStringDataWorks) {
-    stringstream ss;
-    AlbaStreamBitWriter writer(ss);
+    stringstream testStream;
+    AlbaStreamBitWriter writer(testStream);
 
     writer.writeStringData("A1BA");
 
-    EXPECT_EQ(R"(A1BA)", ss.str());
+    EXPECT_EQ(R"(A1BA)", testStream.str());
 }
 
 TEST(AlbaStreamBitWriterTest, WriteHexDigitDataWorks) {
-    stringstream ss;
-    AlbaStreamBitWriter writer(ss);
+    stringstream testStream;
+    AlbaStreamBitWriter writer(testStream);
 
     writer.writeHexDigitData("A1BAA1BA");
 
-    EXPECT_EQ(R"(A1BAA1BA)", getHexEquivalentOfCharacters(ss.str()));
+    EXPECT_EQ(R"(A1BAA1BA)", getHexEquivalentOfCharacters(testStream.str()));
 }
 
 TEST(AlbaStreamBitWriterTest, WriteNumberDataWorks) {
-    stringstream ss;
-    AlbaStreamBitWriter writer(ss);
+    stringstream testStream;
+    AlbaStreamBitWriter writer(testStream);
 
     writer.writeNumberData<uint32_t>(AlbaStreamBitEndianType::BigEndian, 0x0102'0304);
     writer.writeNumberData<uint32_t>(AlbaStreamBitEndianType::LittleEndian, 0x0102'0304);
 
-    EXPECT_EQ(R"(0102030404030201)", getHexEquivalentOfCharacters(ss.str()));
+    EXPECT_EQ(R"(0102030404030201)", getHexEquivalentOfCharacters(testStream.str()));
 }
 
 TEST(AlbaStreamBitWriterTest, WriteBigEndianNumberDataWorks) {
-    stringstream ss;
-    AlbaStreamBitWriter writer(ss);
+    stringstream testStream;
+    AlbaStreamBitWriter writer(testStream);
 
     writer.writeBigEndianNumberData<uint32_t>(0x0102'0304);
 
-    EXPECT_EQ(R"(01020304)", getHexEquivalentOfCharacters(ss.str()));
+    EXPECT_EQ(R"(01020304)", getHexEquivalentOfCharacters(testStream.str()));
 }
 
 TEST(AlbaStreamBitWriterTest, WriteLittleEndianNumberDataWorks) {
-    stringstream ss;
-    AlbaStreamBitWriter writer(ss);
+    stringstream testStream;
+    AlbaStreamBitWriter writer(testStream);
 
     writer.writeLittleEndianNumberData<uint32_t>(0x0102'0304);
 
-    EXPECT_EQ(R"(04030201)", getHexEquivalentOfCharacters(ss.str()));
+    EXPECT_EQ(R"(04030201)", getHexEquivalentOfCharacters(testStream.str()));
 }
 
 TEST(AlbaStreamBitWriterTest, WriteBitsetDataWorks) {
-    stringstream ss;
-    AlbaStreamBitWriter writer(ss);
+    stringstream testStream;
+    AlbaStreamBitWriter writer(testStream);
     bitset<32U> bitsetToWrite(0x1234'5678);
 
     writer.writeBitsetData<32U>(bitsetToWrite, 15U, 22U);
 
-    EXPECT_EQ(R"(16)", getHexEquivalentOfCharacters(ss.str()));
+    EXPECT_EQ(R"(16)", getHexEquivalentOfCharacters(testStream.str()));
 }
 
 TEST(AlbaStreamBitWriterTest, FlushWorks) {
-    stringstream ss;
-    AlbaStreamBitWriter writer(ss);
+    stringstream testStream;
+    AlbaStreamBitWriter writer(testStream);
     writer.writeBoolData(true);
 
     writer.flush();
 
-    EXPECT_EQ(R"(80)", getHexEquivalentOfCharacters(ss.str()));
+    EXPECT_EQ(R"(80)", getHexEquivalentOfCharacters(testStream.str()));
 }
 
 }  // namespace alba

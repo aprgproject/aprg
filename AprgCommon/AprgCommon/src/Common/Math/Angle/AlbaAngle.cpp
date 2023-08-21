@@ -25,16 +25,16 @@ bool AlbaAngle::operator!=(AlbaAngle const& angle) const { return !((*this) == a
 bool AlbaAngle::operator<(AlbaAngle const& angle) const { return m_angleValueInDegrees < angle.m_angleValueInDegrees; }
 
 AlbaAngle AlbaAngle::operator+(AlbaAngle const& secondAngle) const {
-    return AlbaAngle(AngleUnitType::Degrees, m_angleValueInDegrees + secondAngle.m_angleValueInDegrees);
+    return {AngleUnitType::Degrees, m_angleValueInDegrees + secondAngle.m_angleValueInDegrees};
 }
 
 AlbaAngle AlbaAngle::operator-(AlbaAngle const& secondAngle) const {
-    return AlbaAngle(AngleUnitType::Degrees, m_angleValueInDegrees - secondAngle.m_angleValueInDegrees);
+    return {AngleUnitType::Degrees, m_angleValueInDegrees - secondAngle.m_angleValueInDegrees};
 }
 
 AlbaAngle AlbaAngle::operator+() const { return *this; }
 
-AlbaAngle AlbaAngle::operator-() const { return AlbaAngle(AngleUnitType::Degrees, -m_angleValueInDegrees); }
+AlbaAngle AlbaAngle::operator-() const { return {AngleUnitType::Degrees, -m_angleValueInDegrees}; }
 
 AlbaAngle& AlbaAngle::operator+=(AlbaAngle const& secondAngle) {
     m_angleValueInDegrees += secondAngle.m_angleValueInDegrees;
@@ -56,7 +56,7 @@ void AlbaAngle::setAngleValueInDegreesNearestToZero() {
                                                                       : nearestPositiveAngleValueInDegrees - 360;
 }
 
-double AlbaAngle::calculateAngleValueInDegrees(AngleUnitType const angleInputType, double const angleValue) const {
+double AlbaAngle::calculateAngleValueInDegrees(AngleUnitType const angleInputType, double const angleValue) {
     double angleValueInDegrees = 0;
     if (AngleUnitType::Degrees == angleInputType) {
         angleValueInDegrees = angleValue;

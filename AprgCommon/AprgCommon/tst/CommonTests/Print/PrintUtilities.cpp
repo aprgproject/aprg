@@ -9,7 +9,8 @@ using namespace std;
 
 namespace alba {
 
-void performASimplePrintingTest(stringstream &ssToVerify, function<void(stringstream &, int, int, int)> printAction) {
+void performASimplePrintingTest(
+    stringstream &ssToVerify, function<void(stringstream &, int, int, int)> const &printAction) {
     int singleParameter1 = 12, singleParameter2 = 345, singleParameter3 = 6789;
 
     printAction(ssToVerify, singleParameter1, singleParameter2, singleParameter3);

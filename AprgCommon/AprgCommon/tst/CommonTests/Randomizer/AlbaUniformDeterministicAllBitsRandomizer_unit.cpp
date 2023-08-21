@@ -16,12 +16,13 @@ using FloatingPointRandomizerForTest = AlbaUniformDeterministicAllBitsRandomizer
 TEST(AlbaUniformDeterministicAllBitsRandomizerTest, DefaultConstructorWorks) {
     IntegerRandomizerForTest randomizer;
 
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
     EXPECT_NO_FATAL_FAILURE(randomizer.getRandomValue());
 }
 
 TEST(AlbaUniformDeterministicAllBitsRandomizerTest, SetRandomSeedWorks) {
-    constexpr long long minimumValue(static_cast<long long>(numeric_limits<int>::min()));
-    constexpr long long maximumValue(static_cast<long long>(numeric_limits<int>::max()));
+    constexpr auto minimumValue(static_cast<long long>(numeric_limits<int>::min()));
+    constexpr auto maximumValue(static_cast<long long>(numeric_limits<int>::max()));
     constexpr double customSeed(10);
     IntegerRandomizerForTest randomizer(customSeed);
 
@@ -29,26 +30,26 @@ TEST(AlbaUniformDeterministicAllBitsRandomizerTest, SetRandomSeedWorks) {
     randomizer.setRandomSeed(newCustomSeed);
 
     for (int i = 0; i < 1000; i++) {
-        long long randomValue(static_cast<long long>(randomizer.getRandomValue()));
+        auto randomValue(static_cast<long long>(randomizer.getRandomValue()));
         ASSERT_GE(randomValue, minimumValue);
         ASSERT_LE(randomValue, maximumValue);
     }
 }
 
-TEST(AlbaUniformDeterministicAllBitsRandomizerTest, GetRandomIntegerWorks_WithinMinimumAndMaximumValues) {
-    constexpr long long minimumValue(static_cast<long long>(numeric_limits<int>::min()));
-    constexpr long long maximumValue(static_cast<long long>(numeric_limits<int>::max()));
+TEST(AlbaUniformDeterministicAllBitsRandomizerTest, GetRandomIntegerWorksWithinMinimumAndMaximumValues) {
+    constexpr auto minimumValue(static_cast<long long>(numeric_limits<int>::min()));
+    constexpr auto maximumValue(static_cast<long long>(numeric_limits<int>::max()));
     constexpr int customSeed(5);
     IntegerRandomizerForTest randomizer(customSeed);
 
     for (int i = 0; i < 1000; i++) {
-        long long randomValue(static_cast<long long>(randomizer.getRandomValue()));
+        auto randomValue(static_cast<long long>(randomizer.getRandomValue()));
         ASSERT_GE(randomValue, minimumValue);
         ASSERT_LE(randomValue, maximumValue);
     }
 }
 
-TEST(AlbaUniformDeterministicAllBitsRandomizerTest, GetRandomIntegerWorks_AsDeterministic) {
+TEST(AlbaUniformDeterministicAllBitsRandomizerTest, GetRandomIntegerWorksAsDeterministic) {
     constexpr int customSeed(5);
     IntegerRandomizerForTest randomizer1(customSeed);
     IntegerRandomizerForTest randomizer2(customSeed);
@@ -58,7 +59,7 @@ TEST(AlbaUniformDeterministicAllBitsRandomizerTest, GetRandomIntegerWorks_AsDete
     }
 }
 
-TEST(AlbaUniformDeterministicAllBitsRandomizerTest, GetRandomFloatingValueWorks_AsDeterministic) {
+TEST(AlbaUniformDeterministicAllBitsRandomizerTest, GetRandomFloatingValueWorksAsDeterministic) {
     constexpr double customSeed(10);
     FloatingPointRandomizerForTest randomizer1(customSeed);
     FloatingPointRandomizerForTest randomizer2(customSeed);

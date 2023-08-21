@@ -13,8 +13,8 @@ public:
     bool hasValidRatio() const;
 
 private:
-    Type determineTypeFrom2Values(double const firstValue, double const secondValue);
-    double calculateValidRatio(double const firstValue, double const secondValue, Type const type);
+    static Type determineTypeFrom2Values(double const firstValue, double const secondValue);
+    static double calculateValidRatio(double const firstValue, double const secondValue, Type const type);
     Type m_type;
     double m_ratio;
 };

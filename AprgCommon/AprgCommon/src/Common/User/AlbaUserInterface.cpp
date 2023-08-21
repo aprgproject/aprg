@@ -10,9 +10,11 @@ using namespace std;
 
 namespace alba {
 
+AlbaUserInterface::AlbaUserInterface() : m_buffer{} {}
+
 string AlbaUserInterface::getUserInput() {
-    cin.getline(buffer, c_bufferSize);
-    return string(buffer);
+    cin.getline(m_buffer.data(), BUFFER_SIZE);
+    return {m_buffer.data()};
 }
 
 string AlbaUserInterface::getFilePathInput() {
@@ -21,9 +23,8 @@ string AlbaUserInterface::getFilePathInput() {
         AlbaLocalPathHandler filePath(pathString);
         if (filePath.isFoundInLocalSystem() && filePath.isFile()) {
             return filePath.getFullPath();
-        } else {
-            cout << "File not found\n";
         }
+        cout << "File not found\n";
     }
 }
 
@@ -42,7 +43,7 @@ NumberType AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(
     for (auto const& [choiceString, descriptionString] : choices) {
         table.addRow();
         table.getLastRow().addCell(
-            string("[" + converter.convertToString<NumberType>(choiceString) + "]"), DisplayTableCellMode::right);
+            string("[") + converter.convertToString<NumberType>(choiceString) + "]", DisplayTableCellMode::right);
         table.getLastRow().addCell("  :  ");
         table.getLastRow().addCell(descriptionString, DisplayTableCellMode::left);
     }
@@ -66,7 +67,7 @@ string AlbaUserInterface::displayQuestionAndChoicesAndGetStringAnswerInAllCapita
     for (auto const& [choiceString, descriptionString] : choices) {
         table.addRow();
         table.getLastRow().addCell(
-            string("[" + getStringWithCapitalLetters(choiceString) + "]"), DisplayTableCellMode::right);
+            string("[") + getStringWithCapitalLetters(choiceString) + "]", DisplayTableCellMode::right);
         table.getLastRow().addCell("  :  ");
         table.getLastRow().addCell(descriptionString, DisplayTableCellMode::left);
     }

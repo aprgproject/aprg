@@ -10,7 +10,7 @@ using namespace std;
 
 namespace alba {
 
-DisplayTableCell::DisplayTableCell() : m_displayText(), m_horizontalMode(DisplayTableCellMode::center) {}
+DisplayTableCell::DisplayTableCell() : m_horizontalMode(DisplayTableCellMode::center) {}
 
 DisplayTableCell::DisplayTableCell(string_view displayText)
     : m_displayText(displayText), m_horizontalMode(DisplayTableCellMode::center) {}
@@ -54,7 +54,7 @@ void DisplayTableRow::addCell(string_view text, DisplayTableCellMode const horiz
 }
 
 DisplayTable::DisplayTable(size_t const numberOfColumns, size_t const numberOfRows)
-    : m_rows(numberOfRows, numberOfColumns) {}
+    : m_rows(numberOfRows, DisplayTableRow(numberOfColumns)) {}
 
 size_t DisplayTable::getTotalRows() const { return m_rows.size(); }
 
@@ -97,7 +97,7 @@ void DisplayTable::setHorizontalBorder(std::string_view horizontalBorder) { m_ho
 
 void DisplayTable::setVerticalBorder(std::string_view verticalBorder) { m_verticalBorder = verticalBorder; }
 
-string DisplayTable::getCellTextWithDesiredLength(DisplayTableCell const& cell, size_t const desiredLength) const {
+string DisplayTable::getCellTextWithDesiredLength(DisplayTableCell const& cell, size_t const desiredLength) {
     DisplayTableCellMode mode = cell.getHorizontalMode();
     string result;
     switch (mode) {

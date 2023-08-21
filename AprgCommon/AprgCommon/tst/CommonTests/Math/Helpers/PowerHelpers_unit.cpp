@@ -197,7 +197,7 @@ TEST(PowerHelpersTest, IsPerfectNthPowerForAlbaNumberWorks) {
     EXPECT_FALSE(isPerfectNthPower(AlbaNumber::createFraction(1001, 26), 3));
 }
 
-TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformanceTest_WithIncreasingInput) {
+TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformanceTestWithIncreasingInput) {
     // Results: ~1s
 
     long long result(0);
@@ -209,7 +209,7 @@ TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformance
     EXPECT_EQ(9223358334150761985LL, result);
 }
 
-TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPerformanceTest_WithIncreasingInput) {
+TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPerformanceTestWithIncreasingInput) {
     // Results: ~1.3s
 
     long long result(0);
@@ -221,7 +221,7 @@ TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPer
     EXPECT_EQ(2146689000LL, result);
 }
 
-TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformanceTest_WithRandomInput) {
+TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformanceTestWithRandomInput) {
     // Results: ~3.1s
 
     long long result(0);
@@ -235,7 +235,7 @@ TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformance
     EXPECT_LT(0LL, result);
 }
 
-TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPerformanceTest_WithRandomInput) {
+TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPerformanceTestWithRandomInput) {
     // Results: ~3.1s
 
     long long result(0);

@@ -8,46 +8,46 @@ namespace alba {
 
 namespace {
 using IntXY = AlbaXY<int>;
-}
+}  // namespace
 
 TEST(AlbaXYTest, DefaultValuesAreZero) {
-    IntXY xy;
-    EXPECT_EQ(0, xy.getX());
-    EXPECT_EQ(0, xy.getY());
+    IntXY xyValues;
+    EXPECT_EQ(0, xyValues.getX());
+    EXPECT_EQ(0, xyValues.getY());
 }
 
 TEST(AlbaXYTest, ValuesAreSetAtConstruction) {
-    IntXY xy(-5, 5);
-    EXPECT_EQ(-5, xy.getX());
-    EXPECT_EQ(5, xy.getY());
+    IntXY xyValues(-5, 5);
+    EXPECT_EQ(-5, xyValues.getX());
+    EXPECT_EQ(5, xyValues.getY());
 }
 
 TEST(AlbaXYTest, EqualityOperatorWorks) {
-    IntXY xy(-5, 5);
+    IntXY xyValues(-5, 5);
 
-    EXPECT_TRUE(IntXY(-5, 5) == xy);
-    EXPECT_FALSE(IntXY(-5, -5) == xy);
-    EXPECT_FALSE(IntXY(5, -5) == xy);
-    EXPECT_FALSE(IntXY(5, 5) == xy);
+    EXPECT_TRUE(IntXY(-5, 5) == xyValues);
+    EXPECT_FALSE(IntXY(-5, -5) == xyValues);
+    EXPECT_FALSE(IntXY(5, -5) == xyValues);
+    EXPECT_FALSE(IntXY(5, 5) == xyValues);
 }
 
 TEST(AlbaXYTest, NonEqualityOperatorWorks) {
-    IntXY xy(-5, 5);
+    IntXY xyValues(-5, 5);
 
-    EXPECT_FALSE(IntXY(-5, 5) != xy);
-    EXPECT_TRUE(IntXY(-5, -5) != xy);
-    EXPECT_TRUE(IntXY(5, -5) != xy);
-    EXPECT_TRUE(IntXY(5, 5) != xy);
+    EXPECT_FALSE(IntXY(-5, 5) != xyValues);
+    EXPECT_TRUE(IntXY(-5, -5) != xyValues);
+    EXPECT_TRUE(IntXY(5, -5) != xyValues);
+    EXPECT_TRUE(IntXY(5, 5) != xyValues);
 }
 
 TEST(AlbaXYTest, LessThanOperatorWorks) {
-    IntXY xy(-5, 5);
+    IntXY xyValues(-5, 5);
 
-    EXPECT_FALSE(IntXY(-5, 5) < xy);
-    EXPECT_TRUE(IntXY(-6, 5) < xy);
-    EXPECT_FALSE(IntXY(-4, 5) < xy);
-    EXPECT_TRUE(IntXY(-5, 4) < xy);
-    EXPECT_FALSE(IntXY(-5, 6) < xy);
+    EXPECT_FALSE(IntXY(-5, 5) < xyValues);
+    EXPECT_TRUE(IntXY(-6, 5) < xyValues);
+    EXPECT_FALSE(IntXY(-4, 5) < xyValues);
+    EXPECT_TRUE(IntXY(-5, 4) < xyValues);
+    EXPECT_FALSE(IntXY(-5, 6) < xyValues);
 }
 
 TEST(AlbaXYTest, PlusUnaryOperatorWorks) { EXPECT_EQ(IntXY(1, 2), +IntXY(1, 2)); }
@@ -84,76 +84,76 @@ TEST(AlbaXYTest, IsEmptyWorks) {
 }
 
 TEST(AlbaXYTest, GetXWorks) {
-    IntXY xy(-5, 5);
+    IntXY xyValues(-5, 5);
 
-    EXPECT_EQ(-5, xy.getX());
+    EXPECT_EQ(-5, xyValues.getX());
 }
 
 TEST(AlbaXYTest, GetYWorks) {
-    IntXY xy(-5, 5);
+    IntXY xyValues(-5, 5);
 
-    EXPECT_EQ(5, xy.getY());
+    EXPECT_EQ(5, xyValues.getY());
 }
 
 TEST(AlbaXYTest, GetXTimesYWorks) {
-    IntXY xy(-5, 5);
+    IntXY xyValues(-5, 5);
 
-    EXPECT_EQ(-25, xy.getXTimesY());
+    EXPECT_EQ(-25, xyValues.getXTimesY());
 }
 
 TEST(AlbaXYTest, SetXWorks) {
-    IntXY xy(-5, 5);
+    IntXY xyValues(-5, 5);
 
-    xy.setX(23);
+    xyValues.setX(23);
 
-    EXPECT_EQ(IntXY(23, 5), xy);
+    EXPECT_EQ(IntXY(23, 5), xyValues);
 }
 
 TEST(AlbaXYTest, SetYWorks) {
-    IntXY xy(-5, 5);
+    IntXY xyValues(-5, 5);
 
-    xy.setY(45);
+    xyValues.setY(45);
 
-    EXPECT_EQ(IntXY(-5, 45), xy);
+    EXPECT_EQ(IntXY(-5, 45), xyValues);
 }
 
 TEST(AlbaXYTest, SetXAndYWorks) {
-    IntXY xy(-5, 5);
+    IntXY xyValues(-5, 5);
 
-    xy.setXAndY(23, 45);
+    xyValues.setXAndY(23, 45);
 
-    EXPECT_EQ(IntXY(23, 45), xy);
+    EXPECT_EQ(IntXY(23, 45), xyValues);
 }
 
 TEST(AlbaXYTest, SaveMinimumXAndYWorks) {
-    IntXY xy;
+    IntXY xyValues;
 
-    xy.saveMinimumXAndY(IntXY(-5, 5));
-    xy.saveMinimumXAndY(IntXY(5, -5));
-    xy.saveMinimumXAndY(IntXY(-5, -5));
-    xy.saveMinimumXAndY(IntXY(5, 5));
+    xyValues.saveMinimumXAndY(IntXY(-5, 5));
+    xyValues.saveMinimumXAndY(IntXY(5, -5));
+    xyValues.saveMinimumXAndY(IntXY(-5, -5));
+    xyValues.saveMinimumXAndY(IntXY(5, 5));
 
-    EXPECT_EQ(IntXY(-5, -5), xy);
+    EXPECT_EQ(IntXY(-5, -5), xyValues);
 }
 
 TEST(AlbaXYTest, SaveMaximumXAndYWorks) {
-    IntXY xy;
+    IntXY xyValues;
 
-    xy.saveMaximumXAndY(IntXY(-5, 5));
-    xy.saveMaximumXAndY(IntXY(5, -5));
-    xy.saveMaximumXAndY(IntXY(-5, -5));
-    xy.saveMaximumXAndY(IntXY(5, 5));
+    xyValues.saveMaximumXAndY(IntXY(-5, 5));
+    xyValues.saveMaximumXAndY(IntXY(5, -5));
+    xyValues.saveMaximumXAndY(IntXY(-5, -5));
+    xyValues.saveMaximumXAndY(IntXY(5, 5));
 
-    EXPECT_EQ(IntXY(5, 5), xy);
+    EXPECT_EQ(IntXY(5, 5), xyValues);
 }
 
 TEST(AlbaXYTest, OutputStreamOperatorWorks) {
-    stringstream ss;
-    IntXY xy(-5, 5);
+    stringstream testStream;
+    IntXY xyValues(-5, 5);
 
-    ss << xy;
+    testStream << xyValues;
 
-    EXPECT_EQ("(-5,5)", ss.str());
+    EXPECT_EQ("(-5,5)", testStream.str());
 }
 
 }  // namespace alba

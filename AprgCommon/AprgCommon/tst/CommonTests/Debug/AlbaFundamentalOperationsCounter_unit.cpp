@@ -12,18 +12,23 @@ namespace original {
 
 class SampleClass {
 public:
-    SampleClass() : m_dataPointer() {}
-    SampleClass(int const data) : m_dataPointer(make_unique<int>(data)) {}
+    SampleClass() = default;
+    explicit SampleClass(int const data) : m_dataPointer(make_unique<int>(data)) {}
     SampleClass(SampleClass const& parameter) : m_dataPointer(make_unique<int>(*parameter.m_dataPointer)) {}
+    // NOLINTNEXTLINE(cert-oop54-cpp)
     SampleClass& operator=(SampleClass const& parameter) {
+        if (m_dataPointer == parameter.m_dataPointer) {
+            return *this;
+        }
         m_dataPointer = make_unique<int>(*parameter.m_dataPointer);
         return *this;
     }
-    SampleClass(SampleClass&& parameter) : m_dataPointer(std::move(parameter.m_dataPointer)) {}
-    SampleClass& operator=(SampleClass&& parameter) {
+    SampleClass(SampleClass&& parameter) noexcept : m_dataPointer(std::move(parameter.m_dataPointer)) {}
+    SampleClass& operator=(SampleClass&& parameter) noexcept {
         m_dataPointer = std::move(parameter.m_dataPointer);
         return *this;
     }
+    ~SampleClass() = default;
     unique_ptr<int> m_dataPointer;
 };
 }  // namespace original

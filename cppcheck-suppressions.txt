@@ -1,0 +1,12 @@
+// Full command:
+//   cppcheck --template=gcc --enable=all --force --inline-suppr --suppressions-list=cppcheck-suppressions.txt . >> /dev/null
+
+syntaxError
+constParameter
+missingIncludeSystem
+preprocessorErrorDirective
+unassignedVariable
+unusedFunction
+unusedStructMember
+passedByValue
+missingReturn

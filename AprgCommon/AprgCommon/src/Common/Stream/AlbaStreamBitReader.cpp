@@ -23,9 +23,9 @@ char AlbaStreamBitReader::readCharData() { return AlbaStreamBitReader::readBigEn
 string AlbaStreamBitReader::readStringData(size_t const numberOfCharacters) {
     string result;
     for (size_t i = 0; i < numberOfCharacters; i++) {
-        char c(readCharData());
+        char character(readCharData());
         if (!m_stream.eof()) {
-            result += c;
+            result += character;
         } else {
             break;
         }
@@ -36,9 +36,9 @@ string AlbaStreamBitReader::readStringData(size_t const numberOfCharacters) {
 string AlbaStreamBitReader::readWholeStreamAsStringData() {
     string result;
     while (true) {
-        char c(readCharData());
+        char character(readCharData());
         if (!m_stream.eof()) {
-            result += c;
+            result += character;
         } else {
             break;
         }
@@ -50,12 +50,12 @@ istream& AlbaStreamBitReader::getInputStream() { return m_stream; }
 
 void AlbaStreamBitReader::readIfNeeded(size_t const numberOfBitsRequired) {
     if (m_bitBuffer.size() < numberOfBitsRequired) {
-        size_t numberOfBytesToRead = static_cast<size_t>(
+        auto numberOfBytesToRead = static_cast<size_t>(
             ceil(static_cast<double>(numberOfBitsRequired - m_bitBuffer.size()) / AlbaBitConstants::BYTE_SIZE_IN_BITS));
         vector<char> characterBuffer(numberOfBytesToRead, {});
-        m_stream.read(&(characterBuffer.front()), numberOfBytesToRead);
-        for (char const c : characterBuffer) {
-            bitset<8> charByte(c);
+        m_stream.read(&(characterBuffer.front()), static_cast<std::streamsize>(numberOfBytesToRead));
+        for (char const character : characterBuffer) {
+            bitset<8> charByte(character);
             m_bitBuffer.emplace_back(charByte[7]);
             m_bitBuffer.emplace_back(charByte[6]);
             m_bitBuffer.emplace_back(charByte[5]);
@@ -69,7 +69,7 @@ void AlbaStreamBitReader::readIfNeeded(size_t const numberOfBitsRequired) {
 }
 
 void AlbaStreamBitReader::eraseBitsInBitBuffer(size_t const numberOfBitsToErase) {
-    m_bitBuffer.erase(begin(m_bitBuffer), begin(m_bitBuffer) + numberOfBitsToErase);
+    m_bitBuffer.erase(begin(m_bitBuffer), begin(m_bitBuffer) + static_cast<int>(numberOfBitsToErase));
 }
 
 }  // namespace alba

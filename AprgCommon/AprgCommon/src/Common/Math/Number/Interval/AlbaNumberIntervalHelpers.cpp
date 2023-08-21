@@ -33,15 +33,15 @@ AlbaNumberIntervalEndpoint::Type getEndpointTypeWithCheckingIfItsClosed(bool con
 }
 
 AlbaNumberIntervalEndpoint createOpenEndpoint(AlbaNumber const value) {
-    return AlbaNumberIntervalEndpoint(AlbaNumberIntervalEndpoint::Type::Open, value);
+    return {AlbaNumberIntervalEndpoint::Type::Open, value};
 }
 
 AlbaNumberIntervalEndpoint createCloseEndpoint(AlbaNumber const value) {
-    return AlbaNumberIntervalEndpoint(AlbaNumberIntervalEndpoint::Type::Close, value);
+    return {AlbaNumberIntervalEndpoint::Type::Close, value};
 }
 
 AlbaNumberIntervalEndpoint createEndpoint(bool const isCloseEndpoint, AlbaNumber const value) {
-    return AlbaNumberIntervalEndpoint(getEndpointTypeWithCheckingIfItsClosed(isCloseEndpoint), value);
+    return {getEndpointTypeWithCheckingIfItsClosed(isCloseEndpoint), value};
 }
 
 AlbaNumberIntervalEndpoint createPositiveInfinityOpenEndpoint() {
@@ -53,16 +53,16 @@ AlbaNumberIntervalEndpoint createNegativeInfinityOpenEndpoint() {
 }
 
 AlbaNumberInterval createAllRealValuesInterval() {
-    return AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createPositiveInfinityOpenEndpoint());
+    return {createNegativeInfinityOpenEndpoint(), createPositiveInfinityOpenEndpoint()};
 }
 
 AlbaNumbers getNumbersInsideTheInterval(AlbaNumbers const& numbersToCheck, AlbaNumberInterval const& intervalToCheck) {
     AlbaNumbers result;
-    for (AlbaNumber const& numberToCheck : numbersToCheck) {
-        if (intervalToCheck.isValueInsideTheInterval(numberToCheck)) {
-            result.emplace_back(numberToCheck);
-        }
-    }
+    copy_if(
+        numbersToCheck.begin(), numbersToCheck.end(), back_inserter(result),
+        [&intervalToCheck](AlbaNumber const& numberToCheck) {
+            return intervalToCheck.isValueInsideTheInterval(numberToCheck);
+        });
     return result;
 }
 

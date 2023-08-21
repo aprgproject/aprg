@@ -10,13 +10,9 @@ using namespace std;
 
 namespace alba {
 
-AlbaFileReader::AlbaFileReader(ifstream& stream) : m_characterBuffer(), m_stream(stream) {
-    setMaxBufferSize(INITIAL_MAX_BUFFER_SIZE);
-}
+AlbaFileReader::AlbaFileReader(ifstream& stream) : m_stream(stream) { setMaxBufferSize(INITIAL_MAX_BUFFER_SIZE); }
 
-AlbaFileReader::AlbaFileReader(ifstream& stream, size_t const size) : m_characterBuffer(), m_stream(stream) {
-    setMaxBufferSize(size);
-}
+AlbaFileReader::AlbaFileReader(ifstream& stream, size_t const size) : m_stream(stream) { setMaxBufferSize(size); }
 
 bool AlbaFileReader::isNotFinished() {
     // return (!m_stream.eof()) && (m_stream.peek()!=EOF);
@@ -80,15 +76,17 @@ string AlbaFileReader::getLineAndIgnoreWhiteSpaces() {
 size_t AlbaFileReader::getCurrentLocation() const { return m_stream.tellg(); }
 
 size_t AlbaFileReader::getFileSize() const {
-    m_stream.seekg(0, std::ifstream::end);
+    m_stream.seekg(0, ifstream::end);
     size_t fileSize = m_stream.tellg();
     moveToTheBeginning();
     return fileSize;
 }
 
-void AlbaFileReader::moveToTheBeginning() const { m_stream.seekg(0, std::ifstream::beg); }
+void AlbaFileReader::moveToTheBeginning() const { m_stream.seekg(0, ifstream::beg); }
 
-void AlbaFileReader::moveLocation(size_t const location) const { m_stream.seekg(location, std::ifstream::beg); }
+void AlbaFileReader::moveLocation(size_t const location) const {
+    m_stream.seekg(static_cast<ifstream::off_type>(location), ifstream::beg);
+}
 
 void AlbaFileReader::setMaxBufferSize(size_t const bufferSize) {
     // This is ensuring that buffer always contains one.
@@ -98,7 +96,7 @@ void AlbaFileReader::setMaxBufferSize(size_t const bufferSize) {
 }
 
 size_t AlbaFileReader::getMaxBufferSize() const {
-    size_t bufferSize = static_cast<size_t>(m_characterBuffer.size());
+    auto bufferSize = static_cast<size_t>(m_characterBuffer.size());
     if (bufferSize > 0) {
         bufferSize--;
     }

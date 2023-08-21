@@ -33,14 +33,8 @@ void SampleStateMachine::processStateWithNoValue(Action const action) {
             saveNextState(State::State1);
             break;
         case Action::Increase:
-            saveNextState(State::StateWithNoValue);
-            break;
         case Action::Decrease:
-            saveNextState(State::StateWithNoValue);
-            break;
         case Action::NoAction:
-            saveNextState(State::StateWithNoValue);
-            break;
         case Action::MultiplyBy2:
             saveNextState(State::StateWithNoValue);
             break;

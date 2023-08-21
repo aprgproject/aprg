@@ -7,7 +7,9 @@ namespace alba {
 struct FakeCopyableExample {
     FakeCopyableExample() : value(0) { ++numberOfConstructorExecutions; }
 
-    FakeCopyableExample(int const valueAsParameter) : value(valueAsParameter) { ++numberOfConstructorExecutions; }
+    explicit FakeCopyableExample(int const valueAsParameter) : value(valueAsParameter) {
+        ++numberOfConstructorExecutions;
+    }
 
     static int numberOfConstructorExecutions;
     int value;
@@ -24,6 +26,7 @@ TEST(AlbaFakeCopyableTest, FakeCopyingWorks) {
     EXPECT_EQ(1, FakeCopyableExample::numberOfConstructorExecutions);
     EXPECT_EQ(176, example1.getObject().value);
 
+    // NOLINTNEXTLINE(performance-unnecessary-copy-initialization)
     AlbaFakeCopyableForTest example2(example1);
     EXPECT_EQ(2, FakeCopyableExample::numberOfConstructorExecutions);
     EXPECT_EQ(0, example2.getObject().value);  // value is from default constructor

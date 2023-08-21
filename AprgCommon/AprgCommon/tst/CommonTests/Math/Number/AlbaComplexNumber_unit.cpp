@@ -231,12 +231,12 @@ TEST(AlbaComplexNumberTest, GetNthRootWorks) {
 }
 
 TEST(AlbaComplexNumberTest, OutputStreamOperatorWorks) {
-    stringstream ss;
+    stringstream testStream;
     AlbaComplexNumber<double> complex(3.5, 4.5);
 
-    ss << complex;
+    testStream << complex;
 
-    EXPECT_EQ("(3.5 + 4.5i)", ss.str());
+    EXPECT_EQ("(3.5 + 4.5i)", testStream.str());
 }
 
 }  // namespace alba

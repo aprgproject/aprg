@@ -17,7 +17,9 @@ using namespace std;
 namespace alba::stringHelper {
 
 size_t generateUniqueId(string_view str) {
-    return accumulate(begin(str), end(str), 1ULL, [](size_t c1, uint8_t c2) { return (c1 * c2) + 1; });
+    return accumulate(begin(str), end(str), 1ULL, [](size_t accumulatedChar, uint8_t character) {
+        return (accumulatedChar * character) + 1;
+    });
 }
 
 size_t getLevenshteinDistance(string_view otherString, string_view basisString) {
@@ -55,8 +57,8 @@ size_t getHammingDistance(string_view string1, string_view string2) {
     // the strings differ.
     size_t result(0);
     size_t commonLength = min(string1.length(), string2.length());
-    for (size_t i = 0; i < commonLength; i++) {
-        if (string1[i] != string2[i]) {
+    for (size_t index1 = 0; index1 < commonLength; index1++) {
+        if (string1[index1] != string2[index1]) {
             result++;
         }
     }
@@ -66,8 +68,8 @@ size_t getHammingDistance(string_view string1, string_view string2) {
 size_t getNumberOfSubStrings(string_view str) {
     // A string of length n has n(n+1)/2 substrings.
 
-    size_t n = str.length();
-    return n * (n + 1) / 2;
+    size_t length = str.length();
+    return length * (length + 1) / 2;
 }
 
 size_t getNumberOfSubsequences(string_view str) {
@@ -96,12 +98,12 @@ int getPeriodValue(string_view str, string_view period) {
 
     int periodCount(0);
     if (!period.empty()) {
-        for (size_t i(0U), j(0U); i < str.length(); i++, j++) {
-            if (j == period.length()) {
-                j = 0;
+        for (size_t index1(0U), index2(0U); index1 < str.length(); index1++, index2++) {
+            if (index2 == period.length()) {
+                index2 = 0;
                 periodCount++;
             }
-            if (str[i] != period[j]) {
+            if (str[index1] != period[index2]) {
                 periodCount = 0;
                 break;
             }
@@ -166,39 +168,39 @@ bool isSubsequence(string_view mainText, string_view subsequence) {
     // A string of length n has 2n-1 subsequences.
     // For example, the subsequences of ABCD are A, B, C, D, AB, AC, AD, BC, BD, CD, ABC, ABD, ACD, BCD and ABCD.
 
-    size_t j(0U);
-    for (size_t i(0U); i < mainText.length() && j < subsequence.length(); i++) {
-        if (mainText[i] == subsequence[j]) {
-            j++;
+    size_t index2(0U);
+    for (size_t index1(0U); index1 < mainText.length() && index2 < subsequence.length(); index1++) {
+        if (mainText[index1] == subsequence[index2]) {
+            index2++;
         }
     }
-    return j == subsequence.length();
+    return index2 == subsequence.length();
 }
 
 bool isPrefix(string_view mainText, string_view prefix) {
     // A prefix is a substring that starts at the beginning of a string.
     // For example, the prefixes of ABCD are A, AB, ABC and ABCD.
 
-    size_t j(0U);
-    for (size_t i(0U); i < mainText.length() && j < prefix.length(); i++, j++) {
-        if (mainText[i] != prefix[j]) {
+    size_t index2(0U);
+    for (size_t index1(0U); index1 < mainText.length() && index2 < prefix.length(); index1++, index2++) {
+        if (mainText[index1] != prefix[index2]) {
             break;
         }
     }
-    return j == prefix.length();
+    return index2 == prefix.length();
 }
 
 bool isSuffix(string_view mainText, string_view suffix) {
     // A suffix is a substring that ends at the end of a string.
     // For example, the suffixes of ABCD are D, CD, BCD and ABCD.
 
-    int j = static_cast<int>(suffix.length()) - 1;
-    for (int i = static_cast<int>(mainText.length()) - 1; i >= 0 && j >= 0; i--, j--) {
-        if (mainText[i] != suffix[j]) {
+    int index2 = static_cast<int>(suffix.length()) - 1;
+    for (int index1 = static_cast<int>(mainText.length()) - 1; index1 >= 0 && index2 >= 0; index1--, index2--) {
+        if (mainText[index1] != suffix[index2]) {
             break;
         }
     }
-    return j == -1;
+    return index2 == -1;
 }
 
 bool isRotation(string_view mainText, string_view rotation) {
@@ -242,7 +244,7 @@ bool isStringFoundCaseSensitive(string_view mainText, string_view stringToSearch
     int foundIndex = static_cast<int>(mainText.find(stringToSearch, runningOffset));
     bool isFound = isNotNpos(foundIndex);
     if (isFound) {
-        runningOffset = foundIndex + stringToSearch.length();
+        runningOffset = foundIndex + static_cast<int>(stringToSearch.length());
     }
     return isFound;
 }
@@ -286,9 +288,9 @@ string getStringWithCapitalLetters(string_view str) {
 string getStringWithFirstNonWhiteSpaceCharacterToCapital(string_view str) {
     string result(str);
     size_t resultLength = result.length();
-    for (size_t i = 0; i < resultLength; ++i) {
-        if (!isWhiteSpace(result[i])) {
-            result[i] = static_cast<char>(::toupper(result[i]));
+    for (size_t index1 = 0; index1 < resultLength; ++index1) {
+        if (!isWhiteSpace(result[index1])) {
+            result[index1] = static_cast<char>(::toupper(result[index1]));
             break;
         }
     }
@@ -406,13 +408,13 @@ string getStringWithoutOpeningClosingOperators(
 }
 
 string getLongestCommonPrefix(string_view first, string_view second) {
-    size_t i = 0;
-    for (; i < first.length() && i < second.length(); i++) {
-        if (first[i] != second[i]) {
+    size_t index1 = 0;
+    for (; index1 < first.length() && index1 < second.length(); index1++) {
+        if (first[index1] != second[index1]) {
             break;
         }
     }
-    return string(first.substr(0, i));
+    return string(first.substr(0, index1));
 }
 
 void copyBeforeStringAndAfterString(
@@ -506,10 +508,9 @@ string getNumberAfterThisString(string_view mainText, string_view stringToSearch
     size_t firstIndexOfFirstString = mainText.find(stringToSearch);
     if (isNotNpos(static_cast<int>(firstIndexOfFirstString))) {
         size_t lastIndexOfFirstString = firstIndexOfFirstString + stringToSearch.length();
-        size_t lastIndexOfNumber;
-        for (lastIndexOfNumber = lastIndexOfFirstString;
-             lastIndexOfNumber < mainText.length() && isNumber(mainText[lastIndexOfNumber]); ++lastIndexOfNumber)
-            ;
+        size_t lastIndexOfNumber(lastIndexOfFirstString);
+        for (; lastIndexOfNumber < mainText.length() && isNumber(mainText[lastIndexOfNumber]); ++lastIndexOfNumber) {
+        }
         result = mainText.substr(lastIndexOfFirstString, lastIndexOfNumber - lastIndexOfFirstString);
     }
     return result;
@@ -521,45 +522,46 @@ string getHexNumberAfterThisString(string_view mainText, string_view stringToSea
     if (isNotNpos(static_cast<int>(firstIndexOfFirstString))) {
         size_t lastIndexOfFirstString = firstIndexOfFirstString + stringToSearch.length();
         size_t lastIndexOfNumber(lastIndexOfFirstString);
-        for (; lastIndexOfNumber < mainText.length() && isHexDigit(mainText[lastIndexOfNumber]); ++lastIndexOfNumber)
-            ;
+        for (; lastIndexOfNumber < mainText.length() && isHexDigit(mainText[lastIndexOfNumber]); ++lastIndexOfNumber) {
+        }
         result = mainText.substr(lastIndexOfFirstString, lastIndexOfNumber - lastIndexOfFirstString);
     }
     return result;
 }
 
 string getHexEquivalentOfCharacters(string_view stringToCheck) {
-    stringstream ss;
-    for (unsigned char const c : stringToCheck) {
-        ss << hex << uppercase << setfill('0') << setw(2) << static_cast<unsigned long long>(c);
+    stringstream bufferStream;
+    for (unsigned char const character : stringToCheck) {
+        bufferStream << hex << uppercase << setfill('0') << setw(2) << static_cast<uint64_t>(character);
     }
-    return ss.str();
+    return bufferStream.str();
 }
 
 string getQuotedString(string_view stringToCheck) {
-    stringstream ss;
-    ss << std::quoted(string(stringToCheck));  // remove temporary string object when quoted has string view
-    return ss.str();
+    stringstream bufferStream;
+    bufferStream << quoted(string(stringToCheck));  // remove temporary string object when quoted has string view
+    return bufferStream.str();
 }
 
 string constructFileLocator(string_view file, int const lineNumber) {
-    stringstream ss;
-    ss << file.substr(file.find_last_of('\\') + 1) << "[" << lineNumber << "]";
-    return ss.str();
+    stringstream bufferStream;
+    bufferStream << file.substr(file.find_last_of('\\') + 1) << "[" << lineNumber << "]";
+    return bufferStream.str();
 }
 
 string getRandomAlphaNumericString(size_t const length) {
     constexpr auto ALPHA_NUMERIC_CHAR_MAP = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    int alphaNumericCharMapIndexMax = static_cast<int>(strlen(ALPHA_NUMERIC_CHAR_MAP)) - 1;
-    AlbaUniformNonDeterministicRandomizer randomizer(0, alphaNumericCharMapIndexMax);
+    string_view alphaNumericView{ALPHA_NUMERIC_CHAR_MAP};
+    AlbaUniformNonDeterministicRandomizer randomizer(0, static_cast<int>(alphaNumericView.size()) - 1);
     string result;
     result.reserve(length);
     generate_n(back_inserter(result), length, [&]() {
-        return ALPHA_NUMERIC_CHAR_MAP[static_cast<size_t>(randomizer.getRandomValue())];
+        return alphaNumericView[static_cast<size_t>(randomizer.getRandomValue())];
     });
     return result;
 }
 
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
 strings getArgumentsToStringInMain(int const argc, char const* const argv[]) {
     strings result;
     for (int argumentIndex = 0; argumentIndex < argc; argumentIndex++) {
@@ -626,12 +628,12 @@ void splitLinesToAchieveTargetLength(strings& strings, string_view mainText, siz
     size_t mainTextLength = mainText.length();
     bool isPreviousCharacterAWhitespace(false);
     transitionIndexes.emplace(0);
-    for (size_t i = 0; i < mainTextLength; i++) {
-        char currentCharacter = mainText[i];
+    for (size_t index1 = 0; index1 < mainTextLength; index1++) {
+        char currentCharacter = mainText[index1];
         if (isPreviousCharacterAWhitespace && !isWhiteSpace(currentCharacter)) {
-            transitionIndexes.emplace(i - 1);
+            transitionIndexes.emplace(index1 - 1);
         } else if (!isPreviousCharacterAWhitespace && isWhiteSpace(currentCharacter)) {
-            transitionIndexes.emplace(i);
+            transitionIndexes.emplace(index1);
         }
         isPreviousCharacterAWhitespace = isWhiteSpace(currentCharacter);
     }
@@ -706,8 +708,8 @@ string getStringWithJustifyAlignment(string_view mainText, size_t const targetLe
         size_t gapLength = (targetLength - noWhiteSpace.length()) / (noRedundantWhiteSpaceLength + 1);
         string gap(gapLength, ' ');
         result += gap;
-        for (size_t i = 0; i < noRedundantWhiteSpaceLength; i++) {
-            result += noRedundantWhiteSpace[i];
+        for (size_t index1 = 0; index1 < noRedundantWhiteSpaceLength; index1++) {
+            result += noRedundantWhiteSpace[index1];
             result += gap;
         }
         result += string(targetLength - result.length(), ' ');
@@ -717,9 +719,9 @@ string getStringWithJustifyAlignment(string_view mainText, size_t const targetLe
         size_t numberOfStrings = actualStrings.size();
         size_t gapLength = (targetLength - noWhiteSpace.length()) / (numberOfStrings - 1);
         string gap(gapLength, ' ');
-        for (size_t i = 0; i < numberOfStrings; i++) {
-            result += actualStrings[i];
-            if (i < numberOfStrings - 1) {
+        for (size_t index1 = 0; index1 < numberOfStrings; index1++) {
+            result += actualStrings[index1];
+            if (index1 < numberOfStrings - 1) {
                 result += gap;
             }
         }

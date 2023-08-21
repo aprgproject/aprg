@@ -12,8 +12,8 @@ enum class DisplayTableRowMode { align, justify };
 class DisplayTableCell {
 public:
     DisplayTableCell();
-    DisplayTableCell(std::string_view displayText);
-    DisplayTableCell(std::string_view displayText, DisplayTableCellMode const horizontalMode);
+    explicit DisplayTableCell(std::string_view displayText);
+    explicit DisplayTableCell(std::string_view displayText, DisplayTableCellMode const horizontalMode);
 
     // rule of zero
 
@@ -34,7 +34,7 @@ using Cells = std::vector<DisplayTableCell>;
 class DisplayTableRow {
 public:
     DisplayTableRow() = default;
-    DisplayTableRow(size_t const numberOfCells);
+    explicit DisplayTableRow(size_t const numberOfCells);
 
     // rule of zero
 
@@ -73,7 +73,7 @@ public:
     void setVerticalBorder(std::string_view verticalBorder);
 
 private:
-    std::string getCellTextWithDesiredLength(DisplayTableCell const& cell, size_t const desiredLength) const;
+    static std::string getCellTextWithDesiredLength(DisplayTableCell const& cell, size_t const desiredLength) ;
     std::string getHorizontalBorderLine(size_t const length) const;
     std::string getVerticalBorderPoint() const;
     size_t getVerticalBorderLength() const;

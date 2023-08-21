@@ -58,7 +58,7 @@ public:
     };
     class ScopeConfigurationObject : public AlbaConfigurationScopeObject<ConfigurationDetails> {
     public:
-        void setInThisScopeTheTolerancesToZero() const;
+        static void setInThisScopeTheTolerancesToZero();
     };
 
     // static functions
@@ -93,6 +93,7 @@ public:
         typename ArithmeticType,
         typename =
             std::enable_if_t<typeHelper::isArithmeticType<ArithmeticType>()>>  // enabled via a type template parameter
+    // cppcheck-suppress noExplicitConstructor
     constexpr AlbaNumber(ArithmeticType const value)
         : m_type(getTypeBasedFromArithmeticType<ArithmeticType>()),
           m_data(static_cast<
@@ -101,8 +102,10 @@ public:
         checkArithmeticType<ArithmeticType>();
     }
 
+    // cppcheck-suppress noExplicitConstructor
     constexpr AlbaNumber(FractionData const& fractionData) : m_type(Type::Fraction), m_data(fractionData) {}
 
+    // cppcheck-suppress noExplicitConstructor
     constexpr AlbaNumber(ComplexNumberData const& complexNumberData)
         : m_type(Type::ComplexNumber), m_data(complexNumberData) {}
 
@@ -162,33 +165,33 @@ private:
     template <typename NumberType1, typename NumberType2>
     void constructBasedFromComplexNumberDetails(NumberType1 const realPart, NumberType2 const imaginaryPart);
 
-    AlbaNumber addBothIntegersAndReturnNumber(IntDataType const integerValue1, IntDataType const integerValue2) const;
-    AlbaNumber addBothDoubleAndReturnNumber(double const doubleValue1, double const doubleValue2) const;
-    AlbaNumber addBothFractionsAndReturnNumber(
-        FractionData const& fractionData1, FractionData const& fractionData2) const;
-    AlbaNumber addIntegerAndDoubleAndReturnNumber(IntDataType const integerValue, double const doubleValue) const;
-    AlbaNumber addIntegerAndFractionAndReturnNumber(
-        IntDataType const integerValue, FractionData const& fractionData) const;
-    AlbaNumber addFractionAndDoubleAndReturnNumber(FractionData const& fractionData, double const doubleValue) const;
-    AlbaNumber multiplyBothIntegersAndReturnNumber(
-        IntDataType const integerValue1, IntDataType const integerValue2) const;
-    AlbaNumber multiplyBothDoubleAndReturnNumber(double const doubleValue1, double const doubleValue2) const;
-    AlbaNumber multiplyBothFractionsAndReturnNumber(
-        FractionData const& fractionData1, FractionData const& fractionData2) const;
-    AlbaNumber multiplyIntegerAndDoubleAndReturnNumber(IntDataType const integerValue, double const doubleValue) const;
-    AlbaNumber multiplyIntegerAndFractionAndReturnNumber(
-        IntDataType const integerValue, FractionData const& fractionData) const;
-    AlbaNumber multiplyFractionAndDoubleAndReturnNumber(
-        FractionData const& fractionData, double const doubleValue) const;
-    AlbaNumber divideBothIntegersAndReturnNumber(IntDataType const dividend, IntDataType const divisor) const;
-    AlbaNumber divideDividendsAndDivisorsAndReturnNumber(
+    static AlbaNumber addBothIntegersAndReturnNumber(IntDataType const integerValue1, IntDataType const integerValue2);
+    static AlbaNumber addBothDoubleAndReturnNumber(double const doubleValue1, double const doubleValue2);
+    static AlbaNumber addBothFractionsAndReturnNumber(
+        FractionData const& fractionData1, FractionData const& fractionData2);
+    static AlbaNumber addIntegerAndDoubleAndReturnNumber(IntDataType const integerValue, double const doubleValue);
+    static AlbaNumber addIntegerAndFractionAndReturnNumber(
+        IntDataType const integerValue, FractionData const& fractionData);
+    static AlbaNumber addFractionAndDoubleAndReturnNumber(FractionData const& fractionData, double const doubleValue);
+    static AlbaNumber multiplyBothIntegersAndReturnNumber(
+        IntDataType const integerValue1, IntDataType const integerValue2);
+    static AlbaNumber multiplyBothDoubleAndReturnNumber(double const doubleValue1, double const doubleValue2);
+    static AlbaNumber multiplyBothFractionsAndReturnNumber(
+        FractionData const& fractionData1, FractionData const& fractionData2);
+    static AlbaNumber multiplyIntegerAndDoubleAndReturnNumber(IntDataType const integerValue, double const doubleValue);
+    static AlbaNumber multiplyIntegerAndFractionAndReturnNumber(
+        IntDataType const integerValue, FractionData const& fractionData);
+    static AlbaNumber multiplyFractionAndDoubleAndReturnNumber(
+        FractionData const& fractionData, double const doubleValue);
+    static AlbaNumber divideBothIntegersAndReturnNumber(IntDataType const dividend, IntDataType const divisor);
+    static AlbaNumber divideDividendsAndDivisorsAndReturnNumber(
         IntDataType const dividendInteger, DenominatorDataType const dividendUnsignedInteger,
-        IntDataType const divisorInteger, DenominatorDataType const divisorUnsignedInteger) const;
-    AlbaNumber divideBothFractionsAndReturnNumber(
-        FractionData const& dividendFractionData, FractionData const& divisorFractionData) const;
-    AlbaNumber raisePowerOfBothIntegersAndReturnNumber(IntDataType const base, IntDataType const exponent) const;
-    AlbaNumber raisePowerOfFractionsAndIntegerAndReturnNumber(
-        FractionData const& baseFractionData, IntDataType const exponent) const;
+        IntDataType const divisorInteger, DenominatorDataType const divisorUnsignedInteger);
+    static AlbaNumber divideBothFractionsAndReturnNumber(
+        FractionData const& dividendFractionData, FractionData const& divisorFractionData);
+    static AlbaNumber raisePowerOfBothIntegersAndReturnNumber(IntDataType const base, IntDataType const exponent);
+    static AlbaNumber raisePowerOfFractionsAndIntegerAndReturnNumber(
+        FractionData const& baseFractionData, IntDataType const exponent);
 
     friend std::ostream& operator<<(std::ostream& out, AlbaNumber const& number);
 

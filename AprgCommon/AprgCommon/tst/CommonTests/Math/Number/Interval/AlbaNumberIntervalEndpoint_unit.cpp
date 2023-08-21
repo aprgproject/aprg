@@ -79,13 +79,13 @@ TEST(AlbaNumberIntervalEndpointTest, SetTypeForEndpointWorks) {
 }
 
 TEST(AlbaNumberIntervalEndpointTest, OutputStreamOperatorWorks) {
-    stringstream ss;
+    stringstream testStream;
     AlbaNumberIntervalEndpoint endpoint1(AlbaNumberIntervalEndpoint::Type::Open, 645);
     AlbaNumberIntervalEndpoint endpoint2(AlbaNumberIntervalEndpoint::Type::Close, 784);
 
-    ss << endpoint1 << endpoint2;
+    testStream << endpoint1 << endpoint2;
 
-    EXPECT_EQ("(Open,645)(Close,784)", ss.str());
+    EXPECT_EQ("(Open,645)(Close,784)", testStream.str());
 }
 
 }  // namespace alba

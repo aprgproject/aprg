@@ -27,7 +27,7 @@ public:
     void setAngleValueInDegreesNearestToZero();
 
 private:
-    double calculateAngleValueInDegrees(AngleUnitType const angleInputType, double const angleValue) const;
+    static double calculateAngleValueInDegrees(AngleUnitType const angleInputType, double const angleValue);
 
     friend std::ostream& operator<<(std::ostream& out, AlbaAngle const& angle);
 

@@ -172,13 +172,13 @@ TEST(AlbaMatrixUtilitiesTest, GetIndexWithHighestSatisfiedCountWorks) {
     BoolUnaryFunction<int> conditionFor2 = [](int const& entry) { return entry == 2; };
     BoolUnaryFunction<int> conditionFor3 = [](int const& entry) { return entry == 3; };
 
-    int indexWithHighest1 = getIndexWithHighestSatisfiedCount(listOfMatrixData, conditionFor1);
-    int indexWithHighest2 = getIndexWithHighestSatisfiedCount(listOfMatrixData, conditionFor2);
-    int indexWithHighest3 = getIndexWithHighestSatisfiedCount(listOfMatrixData, conditionFor3);
+    auto indexWithHighest1 = getIndexWithHighestSatisfiedCount(listOfMatrixData, conditionFor1);
+    auto indexWithHighest2 = getIndexWithHighestSatisfiedCount(listOfMatrixData, conditionFor2);
+    auto indexWithHighest3 = getIndexWithHighestSatisfiedCount(listOfMatrixData, conditionFor3);
 
-    EXPECT_EQ(0, indexWithHighest1);
-    EXPECT_EQ(1, indexWithHighest2);
-    EXPECT_EQ(2, indexWithHighest3);
+    EXPECT_EQ(0U, indexWithHighest1);
+    EXPECT_EQ(1U, indexWithHighest2);
+    EXPECT_EQ(2U, indexWithHighest3);
 }
 
 TEST(AlbaMatrixUtilitiesTest, TraverseWithUnaryOperationForDifferentRowsWorks) {

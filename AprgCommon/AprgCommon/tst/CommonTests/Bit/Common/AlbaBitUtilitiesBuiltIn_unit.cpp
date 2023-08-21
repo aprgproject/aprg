@@ -14,7 +14,7 @@ TEST(AlbaBitUtilitiesBuiltInTest, IsEvenParityWorks) {
     EXPECT_FALSE(BitUtilitiesBuiltIn::isEvenParity(4U));
 }
 
-TEST(AlbaBitUtilitiesBuiltInTest, IsEvenParityWorks_WithoutBuiltIn) {
+TEST(AlbaBitUtilitiesBuiltInTest, IsEvenParityWorksUsingWithoutBuiltIn) {
     EXPECT_TRUE(BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::isEvenParity(0U));
     EXPECT_FALSE(BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::isEvenParity(1U));
     EXPECT_FALSE(BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::isEvenParity(2U));
@@ -29,7 +29,7 @@ TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfOnesWorks) {
     EXPECT_EQ(32U, BitUtilitiesBuiltIn::getNumberOfOnes<uint64_t>(0xA1BA'A1BA'A1BA'A1BAULL));
 }
 
-TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfOnesWorks_WithoutBuiltIn) {
+TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfOnesWorksUsingWithoutBuiltIn) {
     EXPECT_EQ(3U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint8_t>(0xA1U));
     EXPECT_EQ(8U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint16_t>(0xA1BAU));
     EXPECT_EQ(16U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint32_t>(0xA1BA'A1BAU));
@@ -52,7 +52,7 @@ TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfConsecutiveZerosFromMsbWorks) {
     EXPECT_EQ(63U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint64_t>(0x0000'0000'0000'0001ULL));
 }
 
-TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfConsecutiveZerosFromMsbWorks_WithoutBuiltIn) {
+TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfConsecutiveZerosFromMsbWorksUsingWithoutBuiltIn) {
     EXPECT_EQ(0U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint8_t>(0x80U));
     EXPECT_EQ(3U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint8_t>(0x10U));
     EXPECT_EQ(7U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb<uint8_t>(0x01U));
@@ -97,7 +97,7 @@ TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfConsecutiveZerosFromLsbWorks) {
     EXPECT_EQ(0U, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint64_t>(0x0000'0000'0000'0001ULL));
 }
 
-TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfConsecutiveZerosFromLsbWorks_WithoutBuiltIn) {
+TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfConsecutiveZerosFromLsbWorksUsingWithoutBuiltIn) {
     EXPECT_EQ(7U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint8_t>(0x80U));
     EXPECT_EQ(3U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint8_t>(0x08U));
     EXPECT_EQ(0U, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb<uint8_t>(0x01U));

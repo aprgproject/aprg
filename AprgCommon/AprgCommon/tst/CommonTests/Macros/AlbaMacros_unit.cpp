@@ -21,8 +21,8 @@ TEST(AlbaMacrosTest, StandardPredefinedMacrosWorks) {
 }
 
 TEST(AlbaMacrosTest, CompilerPredefinedMacrosWorks) {
-    EXPECT_FALSE(string(ALBA_MACROS_GET_FUNCTION).empty());
-    string actualPrettyFunction(ALBA_MACROS_GET_PRETTY_FUNCTION);
+    EXPECT_FALSE(string(static_cast<const char*>(ALBA_MACROS_GET_FUNCTION)).empty());
+    string actualPrettyFunction(static_cast<const char*>(ALBA_MACROS_GET_PRETTY_FUNCTION));
     int runningIndex = 0;
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrettyFunction, "AlbaMacrosTest", runningIndex));
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrettyFunction, "CompilerPredefinedMacrosWorks", runningIndex));
@@ -51,7 +51,7 @@ TEST(AlbaMacrosTest, GetStringLiteralWorks) {
 TEST(AlbaMacrosTest, CaseEnumStringWorks) {
     enum class SampleEnumClass { Type1, Type2 };
     struct SampleClass {
-        string getString(SampleEnumClass const enumValue) {
+        static string getString(SampleEnumClass const enumValue) {
             switch (enumValue) {
                 ALBA_MACROS_CASE_ENUM_STRING(SampleEnumClass::Type1)
                 ALBA_MACROS_CASE_ENUM_STRING(SampleEnumClass::Type2)
@@ -71,7 +71,7 @@ TEST(AlbaMacrosTest, CaseEnumStringWorks) {
 TEST(AlbaMacrosTest, CaseEnumShortStringWorks) {
     enum class SampleEnumClass { Type1, Type2 };
     struct SampleClass {
-        string getString(SampleEnumClass const enumValue) {
+        static string getString(SampleEnumClass const enumValue) {
             switch (enumValue) {
                 ALBA_MACROS_CASE_ENUM_SHORT_STRING(SampleEnumClass::Type1, "Type1")
                 ALBA_MACROS_CASE_ENUM_SHORT_STRING(SampleEnumClass::Type2, "Type2")
