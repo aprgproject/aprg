@@ -47,7 +47,7 @@ void AlbaMemoryBuffer::addData(void const* sourcePointer, size_t const additiona
 }
 
 std::ostream& operator<<(std::ostream& out, AlbaMemoryBuffer const& memoryBuffer) {
-    containerHelper::saveContentsInDecimalAndHexadecimalFormat<uint8_t, std::vector, size_t>(
+    containerHelper::saveContentsInDecimalAndHexadecimalFormat<std::vector<uint8_t>, size_t>(
         out, memoryBuffer.m_buffer);
     return out;
 }
