@@ -55,7 +55,10 @@ jobs:
           checkShellScriptsPath=$(realpath "$(pwd)/${{ env.checkShellScriptsRelativePath }}")
           echo "checkShellScriptsPath: [$checkShellScriptsPath]"
           chmod +x "$checkShellScriptsPath"
-          "$checkShellScriptsPath"
+          "$checkShellScriptsPath" | tee "shellCheckOutput.txt"
+          if grep -q "SC\d+ \((info|warning|error|style)\)" "shellCheckOutput.txt"; then
+            exit 1
+          fi
 
 
   determineCppProjects:
@@ -176,6 +179,9 @@ jobs:
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x "$buildAndRunScriptPath"
           echo "buildAndRunScriptPath=$buildAndRunScriptPath" >> "$GITHUB_ENV"
+          unquotedProject=$(echo "${{ matrix.project }}" | tr -d '"')
+          echo "unquotedProject: [$unquotedProject]"
+          echo "unquotedProject=$unquotedProject" >> "$GITHUB_ENV"
             
       - name: Configure for Windows/MSVC
         if: matrix.configurationName == 'WindowsLatestMsvc'
@@ -245,9 +251,7 @@ jobs:
           clazy --version
           "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}  | tee "analyzerOutput.txt"
-          unquotedProject=$(echo "${{ matrix.project }}" | tr -d '"')
-          echo "unquotedProject: [$unquotedProject]"
-          if grep -q "^.*unquotedProject.* (style|warning|error): .*$" "analyzerOutput.txt"; then
+          if grep -q "^.*$unquotedProject.* (style|warning|error): .*$" "analyzerOutput.txt"; then
             exit 1
           fi
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
