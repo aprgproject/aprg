@@ -123,7 +123,7 @@ stringHelper::strings TopLogAnalyzer::getProcessNamesForCpuReport() {
 }
 
 void TopLogAnalyzer::putHeadersInCpuReport(
-    stringHelper::strings const& processNamesInReport, ofstream& cpuReportFileStream) const {
+    stringHelper::strings const& processNamesInReport, ofstream& cpuReportFileStream) {
     cpuReportFileStream << "Time,TotalCpuFromTop,TotalCpuCalculated,";
     for (string const& processName : processNamesInReport) {
         cpuReportFileStream << processName << ",";
@@ -145,7 +145,7 @@ void TopLogAnalyzer::putEntriesInCpuReport(
         cpuReportFileStream << totalCalculatedCpu << ",";
         DataEntry::ProcessToCpuMemMap const& currentProcessToCpuMemMap(entry.processToCpuMemMap);
         for (string const& processName : processNamesInReport) {
-            DataEntry::ProcessToCpuMemMap::const_iterator processToCpuMemIterator =
+            auto processToCpuMemIterator =
                 currentProcessToCpuMemMap.find(processName);
             if (processToCpuMemIterator != currentProcessToCpuMemMap.cend()) {
                 cpuReportFileStream << currentProcessToCpuMemMap.at(processName).cpuLoad << ",";
@@ -207,7 +207,7 @@ stringHelper::strings TopLogAnalyzer::getProcessNamesForMemReport() {
 }
 
 void TopLogAnalyzer::putHeadersInMemReport(
-    stringHelper::strings const& processNamesInReport, ofstream& memReportFileStream) const {
+    stringHelper::strings const& processNamesInReport, ofstream& memReportFileStream) {
     memReportFileStream << "Time,";
     for (string const& processName : processNamesInReport) {
         memReportFileStream << processName << ",";
@@ -222,7 +222,7 @@ void TopLogAnalyzer::putEntriesInMemReport(
         memReportFileStream << entry.timeInTop.getPrintObject<AlbaDateTime::PrintFormat::TimeWithColon>() << ",";
         DataEntry::ProcessToCpuMemMap const& currentProcessToCpuMemMap(entry.processToCpuMemMap);
         for (string const& processName : processNamesInReport) {
-            DataEntry::ProcessToCpuMemMap::const_iterator processToCpuMemIterator =
+            auto processToCpuMemIterator =
                 currentProcessToCpuMemMap.find(processName);
             if (processToCpuMemIterator != currentProcessToCpuMemMap.cend()) {
                 memReportFileStream << currentProcessToCpuMemMap.at(processName).memLoad << ",";
@@ -234,11 +234,11 @@ void TopLogAnalyzer::putEntriesInMemReport(
     }
 }
 
-bool TopLogAnalyzer::isTopCommandFirstLine(string const& lineInLogs) const {
+bool TopLogAnalyzer::isTopCommandFirstLine(string const& lineInLogs) {
     return stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "top - ");
 }
 
-bool TopLogAnalyzer::isTopCommandHeaderLine(string const& lineInLogs) const {
+bool TopLogAnalyzer::isTopCommandHeaderLine(string const& lineInLogs) {
     return stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "PID") &&
            stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "%CPU") &&
            stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "%MEM") &&
@@ -252,7 +252,7 @@ void TopLogAnalyzer::saveAndClearCurrentEntry(DataEntry& currentEntry) {
     }
 }
 
-void TopLogAnalyzer::saveTimeFromTop(string const& lineInLogs, DataEntry& currentEntry) const {
+void TopLogAnalyzer::saveTimeFromTop(string const& lineInLogs, DataEntry& currentEntry) {
     string timeString(stringHelper::getStringInBetweenTwoStrings(lineInLogs, "top - ", " "));
     stringHelper::strings timeValues;
     stringHelper::splitToStrings<stringHelper::SplitStringType::WithoutDelimeters>(timeValues, timeString, ":");
@@ -275,7 +275,7 @@ void TopLogAnalyzer::saveDataFromHeaders(string const& lineInLogs) {
     m_columnHeaders.set(headersSize, cpuIndexInHeaders, memIndexInHeaders);
 }
 
-void TopLogAnalyzer::saveOverallCpuData(string const& lineInLogs, DataEntry& currentEntry) const {
+void TopLogAnalyzer::saveOverallCpuData(string const& lineInLogs, DataEntry& currentEntry) {
     unsigned int bracketCpuIndexInLine(lineInLogs.find("["));
     if (bracketCpuIndexInLine > 3) {
         currentEntry.totalCpuFromTop =
@@ -290,8 +290,8 @@ void TopLogAnalyzer::saveCpuAndMem(string const& lineInLogs, DataEntry& currentE
         stringHelper::strings lastContents(contents.cbegin() + m_columnHeaders.size - 1, contents.cend());
         string processName(stringHelper::getStringWithoutStartingAndTrailingCharacters(
             stringHelper::combineStrings(lastContents, "_"), "`-_"));
-        double cpuLoad = stringHelper::convertStringToNumber<double>(contents[m_columnHeaders.cpuIndex]);
-        double memLoad = stringHelper::convertStringToNumber<double>(contents[m_columnHeaders.memIndex]);
+        auto cpuLoad = stringHelper::convertStringToNumber<double>(contents[m_columnHeaders.cpuIndex]);
+        auto memLoad = stringHelper::convertStringToNumber<double>(contents[m_columnHeaders.memIndex]);
         if (cpuLoad > 0) {
             currentEntry.processToCpuMemMap[processName].cpuLoad = cpuLoad;
             m_processToCpuMemCollectionMap[processName].cpu.addData(cpuLoad);

@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using Grid = FindLengthOfTheLongestConsecutivePath::ValueGrid;
-}
+} // namespace
 
 TEST(FindLengthOfTheLongestConsecutivePathTest, GetLongestLengthWorksOnExample1) {
     Grid inputGrid(3, 3, {'a', 'c', 'd', 'h', 'b', 'e', 'i', 'g', 'f'});

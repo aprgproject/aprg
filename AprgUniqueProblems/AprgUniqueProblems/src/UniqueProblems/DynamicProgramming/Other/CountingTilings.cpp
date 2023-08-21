@@ -35,7 +35,7 @@ CountingTilings::Count CountingTilings::getNumberOfSolutionsUsingCompleteSearch(
     return m_numberOfSolutions;
 }
 
-CountingTilings::Row CountingTilings::getEmptyRow(Count const length) const { return Row(length, ' '); }
+CountingTilings::Row CountingTilings::getEmptyRow(Count const length) { return Row(length, ' '); }
 
 void CountingTilings::searchNextRow(Count const rowIndex, Row const& currentRow) {
     if (rowIndex < m_numberOfRows - 1) {
@@ -56,10 +56,9 @@ CountingTilings::Rows const& CountingTilings::getNextRows(Row const& currentRow)
     auto it = m_currentRowToNextRows.find(currentRow);
     if (it != m_currentRowToNextRows.cend()) {
         return it->second;
-    } else {
-        m_currentRowToNextRows[currentRow] = calculateNextRows(currentRow);
+    }         m_currentRowToNextRows[currentRow] = calculateNextRows(currentRow);
         return m_currentRowToNextRows[currentRow];
-    }
+   
 }
 
 CountingTilings::Rows CountingTilings::calculateNextRows(Row const& currentRow) {

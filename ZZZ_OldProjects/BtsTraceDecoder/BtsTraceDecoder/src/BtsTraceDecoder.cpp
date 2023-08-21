@@ -27,7 +27,7 @@ void BtsTraceDecoder::processInputTraceFile(std::string const& inputTraceFilePat
         AlbaFileReader traceFileReader(traceFile);
         while (traceFileReader.isNotFinished()) {
             string lineInTraceFile(traceFileReader.getLine());
-            unsigned int traceAddressValue =
+            auto traceAddressValue =
                 convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInTraceFile, "[", "]"));
             if (traceAddressValue != 0) {
                 cout << "TraceAddressValue: [0x" << std::hex << traceAddressValue << "] NearestSymbol: ["
@@ -41,7 +41,7 @@ std::string BtsTraceDecoder::getNearestLowerSymbol(int const address, int const 
     string symbol;
     if (!m_symbolMap.empty()) {
         int addressWithOffset(address + offset);
-        BtsTraceDecoder::SymbolMapType::iterator symbolIterator = m_symbolMap.lower_bound(addressWithOffset);
+        auto symbolIterator = m_symbolMap.lower_bound(addressWithOffset);
         if (static_cast<int>(symbolIterator->first) <= addressWithOffset) {
             symbol = symbolIterator->second;
         } else {
@@ -68,7 +68,7 @@ void BtsTraceDecoder::saveSymbolTable(std::string const& symbolTableFilePath, Sy
     }
 }
 
-int BtsTraceDecoder::getAddressFromLineInFile(string const& lineInFile, SymbolTableFileType const filetype) const {
+int BtsTraceDecoder::getAddressFromLineInFile(string const& lineInFile, SymbolTableFileType const filetype) {
     int address = 0;
     if (filetype == SymbolTableFileType::SymbolTableFromObjdump) {
         address = convertHexStringToNumber<int>(getStringBeforeThisString(lineInFile, " "));

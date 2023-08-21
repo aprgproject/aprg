@@ -477,7 +477,7 @@ void BitmapFilters::drawToBlurForNonCenterPoint(
 
 void BitmapFilters::updateUnionFindForLabels(
     UnionFindForLabels& unionFindForLabels, int const smallestLabel, int const neighbor1Label,
-    int const neighbor2Label) const {
+    int const neighbor2Label) {
     if (!isInvalidLabel(smallestLabel) && !isInvalidLabel(neighbor1Label)) {
         unionFindForLabels.connect(smallestLabel, neighbor1Label);
     }
@@ -487,7 +487,7 @@ void BitmapFilters::updateUnionFindForLabels(
 }
 
 bool BitmapFilters::isThisPenCircleBetter(
-    BitmapXY const& penBitmapXY, Circle const& circleToCheck, Circle const& circleToCompare) const {
+    BitmapXY const& penBitmapXY, Circle const& circleToCheck, Circle const& circleToCompare) {
     bool isBetter(false);
     if (circleToCheck.getRadius() == circleToCompare.getRadius()) {
         Point penPoint(convertBitmapXYToPoint(penBitmapXY));
@@ -508,9 +508,9 @@ uint32_t BitmapFilters::getBlurredColor(
 }
 
 uint8_t BitmapFilters::getBlurredColorPart(
-    uint8_t const centerColorPart, uint8_t const colorToComparePart, uint32_t const similarityColorLimit) const {
+    uint8_t const centerColorPart, uint8_t const colorToComparePart, uint32_t const similarityColorLimit) {
     uint8_t blurredColorPart(colorToComparePart);
-    uint32_t positiveDelta(getPositiveDelta<uint32_t>(centerColorPart, colorToComparePart));
+    auto positiveDelta(getPositiveDelta<uint32_t>(centerColorPart, colorToComparePart));
     if (positiveDelta > similarityColorLimit) {
         if (centerColorPart > colorToComparePart) {
             blurredColorPart = centerColorPart - similarityColorLimit;
@@ -555,7 +555,7 @@ uint32_t BitmapFilters::getBlurredColorUsingACircle(
     return blurredColor;
 }
 
-double BitmapFilters::getBlurWeight(double const distanceFromCenter, double const blurRadius) const {
+double BitmapFilters::getBlurWeight(double const distanceFromCenter, double const blurRadius) {
     return (blurRadius - distanceFromCenter + 1) / (blurRadius + 1);
 }
 

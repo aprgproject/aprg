@@ -17,10 +17,10 @@ public:
     Term getInfiniteSumStartingFrom(int const startingNthIndex);
 
 protected:
-    Term getFormula(AlbaNumber const& firstValue, AlbaNumber const& commonMultiplier) const;
-    Term getFormula(
+    static Term getFormula(AlbaNumber const& firstValue, AlbaNumber const& commonMultiplier) ;
+    static Term getFormula(
         AlbaNumber const& valueAtNthIndex1, int const nthIndex1, AlbaNumber const& valueAtNthIndex2,
-        int const nthIndex2) const;
+        int const nthIndex2) ;
 };
 
 }  // namespace algebra

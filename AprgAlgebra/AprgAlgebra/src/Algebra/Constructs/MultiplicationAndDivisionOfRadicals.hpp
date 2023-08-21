@@ -25,12 +25,12 @@ public:
     void simplify();
 
 private:
-    bool shouldBeCombined(
+    static bool shouldBeCombined(
         RadicalDetails const& radicalDetails, Monomial const& combinedMonomial, AlbaNumber const& gcfOfExponents);
-    bool isNotANegativeTermWithExponentDenominatorEven(
+    static bool isNotANegativeTermWithExponentDenominatorEven(
         Monomial const& combinedMonomial, AlbaNumber const& gcfOfExponents);
     void gatherDetails(RadicalDetails& radicalDetails, Monomial& combinedMonomial, TermsWithDetails& remainingTerms);
-    AlbaNumber getGcfOfExponents(RadicalDetails const& radicalDetails);
+    static AlbaNumber getGcfOfExponents(RadicalDetails const& radicalDetails);
     void combineMonomialAndRadicalsAndSave(
         RadicalDetails const& radicalDetails, Monomial const& combinedMonomial, AlbaNumber const& gcfOfExponents);
     void saveRemainingTerms(TermsWithDetails const& remainingTerms);

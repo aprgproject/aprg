@@ -92,7 +92,7 @@ public:
     void clearAllInnerSimplifiedFlags();
 
 private:
-    BaseTermDataPointer createANewDataPointerFrom(Term const& term);
+    static BaseTermDataPointer createANewDataPointerFrom(Term const& term);
     void initializeBasedOnString(std::string const& stringAsParameter);
 
     friend std::ostream& operator<<(std::ostream& out, Term const& term);

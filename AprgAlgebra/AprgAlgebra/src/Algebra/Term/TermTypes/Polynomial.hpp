@@ -41,7 +41,7 @@ public:
     void clearSimplifiedFlag();
 
 private:
-    bool isFurtherSimplificationNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify) const;
+    static bool isFurtherSimplificationNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify) ;
     void setNan();
     void simplifyContinuouslyIfChanged();
     void simplifyMonomialsAndReAdd();

@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using Distance = LevenshteinDistance::Index;
-}
+} // namespace
 
 TEST(LevenshteinDistanceTest, GetLevenshteinDistanceWorksOnExample1) {
     LevenshteinDistance queryForTest("MOVIE", "LOVE");

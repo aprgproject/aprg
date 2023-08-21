@@ -35,11 +35,13 @@ ll a[mxN];
 struct ft {
     ll a[mxN + 1];
     void upd(int i, ll x) {
-        for (++i; i <= n; i += i & -i) a[i] += x;
+        for (++i; i <= n; i += i & -i) { a[i] += x;
+}
     }
     ll qry(int i) {
         ll r = 0;
-        for (; i; i -= i & -i) r += a[i];
+        for (; i; i -= i & -i) { r += a[i];
+}
         return r;
     }
 } f0[2], f1[2];
@@ -75,7 +77,8 @@ void runTestCase(int const testCaseNumber) {
             app(i, x);
         }
     }
-    for (int i = 0; i < n; ++i) app(i, 0);
+    for (int i = 0; i < n; ++i) { app(i, 0);
+}
     my_cout << "Case #" << testCaseNumber << ": " << ans << '\n';
 }
 

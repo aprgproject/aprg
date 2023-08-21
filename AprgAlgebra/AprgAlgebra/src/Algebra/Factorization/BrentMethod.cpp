@@ -117,18 +117,18 @@ void BrentMethod::runMaxNumberOfIterationsOrUntilFinished(int const maxIteration
     }
 }
 
-bool BrentMethod::isAlmostEqualForBrentMethod(AlbaNumber const& value1, AlbaNumber const& value2) const {
+bool BrentMethod::isAlmostEqualForBrentMethod(AlbaNumber const& value1, AlbaNumber const& value2) {
     return isAlmostEqual(value1.getDouble(), value2.getDouble(), BRENT_METHOD_COMPARISON_TOLERANCE);
 }
 
-bool BrentMethod::isAlmostEqualForBrentMethod(AlbaNumber const& value1, double const value2) const {
+bool BrentMethod::isAlmostEqualForBrentMethod(AlbaNumber const& value1, double const value2) {
     return isAlmostEqual(value1.getDouble(), value2, BRENT_METHOD_COMPARISON_TOLERANCE);
 }
 
 AlbaNumber BrentMethod::calculate(AlbaNumber const& inputValue) const {
     AlbaNumber result;
     AlbaNumber partialProduct(1);
-    for (AlbaNumbers::const_reverse_iterator it = m_coefficients.crbegin(); it != m_coefficients.crend(); ++it) {
+    for (auto it = m_coefficients.crbegin(); it != m_coefficients.crend(); ++it) {
         result = result + (*it) * partialProduct;
         partialProduct = partialProduct * inputValue;
     }
@@ -167,11 +167,11 @@ AlbaNumberOptional BrentMethod::calculateSecantMethod(AlbaNumber const& a, AlbaN
     return result;
 }
 
-AlbaNumber BrentMethod::calculateBiSectionMethod(AlbaNumber const& a, AlbaNumber const& b) const { return (a + b) / 2; }
+AlbaNumber BrentMethod::calculateBiSectionMethod(AlbaNumber const& a, AlbaNumber const& b) { return (a + b) / 2; }
 
 bool BrentMethod::isBisectionMethodNeeded(
     AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c, AlbaNumber const& d, AlbaNumber const& s,
-    bool const mflag) const {
+    bool const mflag) {
     AlbaNumber first = ((a * 3) + b) / 4;
     AlbaNumber second = b;
     AlbaNumber minForConditionOne = min(first, second);

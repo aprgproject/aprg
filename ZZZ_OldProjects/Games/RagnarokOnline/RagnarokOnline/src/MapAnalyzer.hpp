@@ -27,15 +27,15 @@ public:
 
     double getPotentialZenyFromMonster(Monster const& monster) const;
     void printPotentialZenyFromMonster(std::string const& monsterName) const;
-    double getMultiplierForExperience(std::string const& mapName);
+    static double getMultiplierForExperience(std::string const& mapName);
 
 private:
     void gatherData();
     void selectMaps();
     void sortMaps();
 
-    bool isDropRateAcceptable(double const dropRate) const;
-    double getTalonRoDropRate(double const dropRate) const;
+    static bool isDropRateAcceptable(double const dropRate) ;
+    static double getTalonRoDropRate(double const dropRate) ;
     double getBestPrice(Item const& item) const;
     RagnarokOnline m_ragnarokOnline;
     MapsAnalyzerData m_mapsAnalyzerData;

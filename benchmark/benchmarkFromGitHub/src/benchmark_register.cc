@@ -137,7 +137,8 @@ bool BenchmarkFamilies::FindBenchmarks(
     int per_family_instance_index = 0;
 
     // Family was deleted or benchmark doesn't match
-    if (!family) continue;
+    if (!family) { continue;
+}
 
     if (family->ArgsCnt() == -1) {
       family->Args({});
@@ -155,7 +156,8 @@ bool BenchmarkFamilies::FindBenchmarks(
     }
     // reserve in the special case the regex ".", since we know the final
     // family size.
-    if (spec == ".") benchmarks->reserve(benchmarks->size() + family_size);
+    if (spec == ".") { benchmarks->reserve(benchmarks->size() + family_size);
+}
 
     for (auto const& args : family->args_) {
       for (int num_threads : *thread_counts) {
@@ -172,7 +174,8 @@ bool BenchmarkFamilies::FindBenchmarks(
 
           // Only bump the next family index once we've estabilished that
           // at least one instance of this family will be run.
-          if (next_family_index == family_index) ++next_family_index;
+          if (next_family_index == family_index) { ++next_family_index;
+}
         }
       }
     }
@@ -442,7 +445,8 @@ void Benchmark::SetName(const char* name) { name_ = name; }
 
 int Benchmark::ArgsCnt() const {
   if (args_.empty()) {
-    if (arg_names_.empty()) return -1;
+    if (arg_names_.empty()) { return -1;
+}
     return static_cast<int>(arg_names_.size());
   }
   return static_cast<int>(args_.front().size());

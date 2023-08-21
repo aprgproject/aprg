@@ -57,7 +57,7 @@ Quadrilateral::GroupOfPoints Quadrilateral::getGroupOfPointsBasedOnYValue() cons
 }
 
 Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXs(
-    Quadrilateral::GroupOfPoints const& groupOfPointsBasedOnYValue, double const interval) const {
+    Quadrilateral::GroupOfPoints const& groupOfPointsBasedOnYValue, double const interval) {
     ListOfStartEndOfXAndY result;
     int groupSize = groupOfPointsBasedOnYValue.size();
     if (groupSize == 1) {
@@ -82,7 +82,7 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXs(
     return result;
 }
 
-Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor1Points(Points const& points) const {
+Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor1Points(Points const& points) {
     ListOfStartEndOfXAndY result;
     if (points.size() == 4) {
         result.emplace_back(points[0].getX(), points[3].getX(), points[0].getY());
@@ -91,7 +91,7 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor1Points(P
 }
 
 Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor2Points(
-    Points const& points1, Points const& points2, double const interval) const {
+    Points const& points1, Points const& points2, double const interval) {
     ListOfStartEndOfXAndY result;
     int points1Size = points1.size();
     int points2Size = points2.size();
@@ -131,7 +131,7 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor2Points(
 }
 
 Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor3Points(
-    Points const& points1, Points const& points2, Points const& points3, double const interval) const {
+    Points const& points1, Points const& points2, Points const& points3, double const interval) {
     ListOfStartEndOfXAndY result;
     int points1Size = points1.size();
     int points2Size = points2.size();
@@ -219,7 +219,7 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor3Points(
 
 Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor4Points(
     Points const& points1, Points const& points2, Points const& points3, Points const& points4,
-    double const interval) const {
+    double const interval) {
     ListOfStartEndOfXAndY result;
     if (points1.size() == 1 && points2.size() == 1 && points3.size() == 1 && points4.size() == 1) {
         Point point1(points1[0]);

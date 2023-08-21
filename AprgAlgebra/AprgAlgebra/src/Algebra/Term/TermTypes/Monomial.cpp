@@ -162,7 +162,7 @@ void Monomial::setAsSimplified() { m_isSimplified = true; }
 
 void Monomial::clearSimplifiedFlag() { m_isSimplified = false; }
 
-bool Monomial::isLessThanByComparingVariableNameMaps(Monomial const& monomial1, Monomial const& monomial2) const {
+bool Monomial::isLessThanByComparingVariableNameMaps(Monomial const& monomial1, Monomial const& monomial2) {
     set<string> variableNames;
     for (auto const& [variableName, exponent] : monomial1.getVariablesToExponentsMap()) {
         variableNames.emplace(variableName);

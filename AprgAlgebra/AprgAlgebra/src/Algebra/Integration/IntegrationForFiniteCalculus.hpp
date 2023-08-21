@@ -16,7 +16,7 @@ public:
     Term integrate(Monomial const& monomial) const;
     Term integrate(Polynomial const& polynomial) const;
     Term integrate(Expression const& expression) const;
-    Term integrate(Function const& functionObject) const;
+    static Term integrate(Function const& functionObject) ;
 
     Term integrateWithPlusC(Term const& term) const;
     Term integrateAtDefiniteValues(Term const& term, AlbaNumber const& lowerEnd, AlbaNumber const& higherEnd) const;
@@ -27,7 +27,7 @@ public:
     Term integrateMonomial(Monomial const& monomial) const;
     Term integratePolynomial(Polynomial const& polynomial) const;
     Term integrateExpression(Expression const& expression) const;
-    Term integrateFunction(Function const& functionObject) const;
+    static Term integrateFunction(Function const& functionObject) ;
 
 private:
     // For Monomial and Polynomial
@@ -45,13 +45,13 @@ private:
     Term integrateTermsInMultiplicationOrDivision(Expression const& expression) const;
     Term integrateTermsInRaiseToPower(Expression const& expression) const;
     Term integrateNonChangingTermRaiseToChangingTerm(Term const& base, Term const& exponent) const;
-    Term integrateChangingTermRaiseToNonChangingTerm(Term const& base, Term const& exponent) const;
-    Term integrateChangingTermRaiseToChangingTerm(Term const& firstTerm, Term const& secondTerm) const;
+    static Term integrateChangingTermRaiseToNonChangingTerm(Term const& base, Term const& exponent) ;
+    static Term integrateChangingTermRaiseToChangingTerm(Term const& firstTerm, Term const& secondTerm) ;
 
     // For changing and non changing
     void integrateNonChangingAndChangingTermsInMultiplicationOrDivision(
         Term& result, TermsWithDetails const& termsWithDetails) const;
-    void integrateChangingTermsInMultiplicationOrDivision(Term& result, TermsWithDetails const&) const;
+    static void integrateChangingTermsInMultiplicationOrDivision(Term& result, TermsWithDetails const&) ;
     void segregateNonChangingAndChangingTerms(
         TermsWithDetails const& termsToSegregate, TermsWithDetails& nonChangingTerms,
         TermsWithDetails& changingTerms) const;

@@ -40,7 +40,7 @@ TEST(BitmapReadTest, TestForMonochromeBitmap) {
     EXPECT_EQ(BitmapXY(103, 99), snippet.getBottomRightCorner());
 
     PixelData pixels(snippet.getPixelDataReference());
-    uint8_t* reader = reinterpret_cast<uint8_t*>(pixels.getBufferPointer());
+    auto* reader = reinterpret_cast<uint8_t*>(pixels.getBufferPointer());
     ASSERT_EQ(3U, pixels.getSize());
     EXPECT_EQ(0x8F, reader[0]);
     EXPECT_EQ(0xF3, reader[1]);
@@ -109,7 +109,7 @@ TEST(BitmapReadTest, TestFor16ColorBitmap) {
     EXPECT_EQ(BitmapXY(101, 99), snippet.getBottomRightCorner());
 
     PixelData pixels(snippet.getPixelDataReference());
-    uint8_t* reader = reinterpret_cast<uint8_t*>(pixels.getBufferPointer());
+    auto* reader = reinterpret_cast<uint8_t*>(pixels.getBufferPointer());
     ASSERT_EQ(6U, pixels.getSize());
     EXPECT_EQ(0x57, reader[0]);
     EXPECT_EQ(0x78, reader[1]);
@@ -181,7 +181,7 @@ TEST(BitmapReadTest, TestFor256ColorBitmap) {
     EXPECT_EQ(BitmapXY(101, 99), snippet.getBottomRightCorner());
 
     PixelData pixels(snippet.getPixelDataReference());
-    uint8_t* reader = reinterpret_cast<uint8_t*>(pixels.getBufferPointer());
+    auto* reader = reinterpret_cast<uint8_t*>(pixels.getBufferPointer());
     ASSERT_EQ(9U, pixels.getSize());
     EXPECT_EQ(0x53, reader[0]);
     EXPECT_EQ(0xA4, reader[1]);
@@ -252,7 +252,7 @@ TEST(BitmapReadTest, TestFor24BitBitmap) {
     EXPECT_EQ(BitmapXY(101, 99), snippet.getBottomRightCorner());
 
     PixelData pixels(snippet.getPixelDataReference());
-    uint8_t* reader = reinterpret_cast<uint8_t*>(pixels.getBufferPointer());
+    auto* reader = reinterpret_cast<uint8_t*>(pixels.getBufferPointer());
     ASSERT_EQ(27U, pixels.getSize());
     EXPECT_EQ(0x5F, reader[0]);
     EXPECT_EQ(0x4F, reader[1]);

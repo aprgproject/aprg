@@ -144,7 +144,7 @@ public:
 
     Item getItem(std::string const& fixedItemName) const;
     Monster getMonster(std::string const& monsterName) const;
-    std::string getFixedItemName(Item const& item) const;
+    static std::string getFixedItemName(Item const& item) ;
     double getTalonRoBuyingPrice(std::string const& fixedItemName) const;
     double getTalonRoSellingPrice(std::string const& fixedItemName) const;
 
@@ -161,7 +161,7 @@ public:
     void printSellingShopItems() const;
 
 private:
-    std::string fixText(std::string const& text);
+    static std::string fixText(std::string const& text);
     ItemIdToItemMap m_itemIdToItemMap;
     MonsterIdToMonsterMap m_monsterIdToMonsterMap;
     MapNameToRoMap m_mapNameToRoMap;

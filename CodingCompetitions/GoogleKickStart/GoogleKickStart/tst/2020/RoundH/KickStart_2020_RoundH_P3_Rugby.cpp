@@ -31,14 +31,17 @@ void runTestCase(int const testCaseNumber) {
         my_cin >> X[i] >> Y[i];
     }
     sort(X.begin(), X.end());
-    for (int i = 0; i < N; i++) X[i] -= i;
+    for (int i = 0; i < N; i++) { X[i] -= i;
+}
     sort(X.begin(), X.end());
     sort(Y.begin(), Y.end());
     int64_t mx = X[N / 2];
     int64_t my = Y[N / 2];
     int64_t ans = 0;
-    for (auto& x : X) ans += abs(x - mx);
-    for (auto& y : Y) ans += abs(y - my);
+    for (auto& x : X) { ans += abs(x - mx);
+}
+    for (auto& y : Y) { ans += abs(y - my);
+}
 
     my_cout << "Case #" << testCaseNumber << ": " << ans << '\n';
 }

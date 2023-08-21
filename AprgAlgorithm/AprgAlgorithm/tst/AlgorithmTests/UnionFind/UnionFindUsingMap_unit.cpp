@@ -12,7 +12,7 @@ namespace algorithm {
 
 namespace {
 using UnionFindForTest = UnionFindUsingMap<int>;
-}
+} // namespace
 
 TEST(UnionFindUsingMapTest, IsConnectedWorks) {
     UnionFindForTest unionFind;

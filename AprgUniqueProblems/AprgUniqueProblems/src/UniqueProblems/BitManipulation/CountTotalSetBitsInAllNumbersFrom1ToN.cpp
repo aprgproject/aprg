@@ -9,7 +9,7 @@ namespace alba {
 CountTotalSetBitsInAllNumbersFrom1ToN::CountTotalSetBitsInAllNumbersFrom1ToN() {}
 
 CountTotalSetBitsInAllNumbersFrom1ToN::Value CountTotalSetBitsInAllNumbersFrom1ToN::getTotalSetBitsUsingPopcount(
-    Value const endValue) const {
+    Value const endValue) {
     Value result{};
     for (Value currentValue = 0; currentValue <= endValue; ++currentValue) {
         result += AlbaBitValueUtilities<Value>::getNumberOfOnes(currentValue);
@@ -18,7 +18,7 @@ CountTotalSetBitsInAllNumbersFrom1ToN::Value CountTotalSetBitsInAllNumbersFrom1T
 }
 
 CountTotalSetBitsInAllNumbersFrom1ToN::Value
-CountTotalSetBitsInAllNumbersFrom1ToN::getTotalSetBitsUsingPreComputedBitCounts(Value const endValue) const {
+CountTotalSetBitsInAllNumbersFrom1ToN::getTotalSetBitsUsingPreComputedBitCounts(Value const endValue) {
     constexpr auto MAX_NUMBER_OF_BITS = AlbaBitValueUtilities<Value>::getNumberOfBits();
     Values countsBeforeThisBit;
     countsBeforeThisBit.reserve(MAX_NUMBER_OF_BITS);
@@ -55,7 +55,7 @@ CountTotalSetBitsInAllNumbersFrom1ToN::getTotalSetBitsUsingPreComputedBitCounts(
 }
 
 CountTotalSetBitsInAllNumbersFrom1ToN::Value CountTotalSetBitsInAllNumbersFrom1ToN::getTotalSetBitsUsingBitCounts(
-    Value const endValue) const {
+    Value const endValue) {
     constexpr auto MAX_NUMBER_OF_BITS = AlbaBitValueUtilities<Value>::getNumberOfBits();
     Value result(endValue & 1);
     Value countBeforeThisBit = 1;

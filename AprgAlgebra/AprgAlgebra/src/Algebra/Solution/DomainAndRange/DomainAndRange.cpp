@@ -128,11 +128,11 @@ void collectAndUniqueValuesAndSort(AlbaNumbersSet& sortedValues, AlbaNumbers con
 void collectMinAndMaxValues(AlbaNumbersSet& collectedValues, AlbaNumbersSet const& sortedValues) {
     int const valuesSize = sortedValues.size();
     if (valuesSize == 1) {
-        AlbaNumbersSet::const_iterator itFront = sortedValues.cbegin();
+        auto itFront = sortedValues.cbegin();
         collectedValues.emplace(*itFront);
     } else if (sortedValues.size() >= 2) {
-        AlbaNumbersSet::const_iterator itFront = sortedValues.cbegin();
-        AlbaNumbersSet::const_iterator itBack = sortedValues.cend();
+        auto itFront = sortedValues.cbegin();
+        auto itBack = sortedValues.cend();
         itBack--;
         collectedValues.emplace(*itFront);
         collectedValues.emplace(*itBack);
@@ -190,7 +190,7 @@ void retrieveTwoVariableNames(
     string& nameThatMatch, string& nameThatDoesNotMatch, VariableNamesSet const& variableNames,
     string const& variableNameToCheck) {
     if (variableNames.size() == 2) {
-        VariableNamesSet::const_iterator it = variableNames.cbegin();
+        auto it = variableNames.cbegin();
         string variableName1 = *(it++);
         string variableName2 = *(it++);
         if (variableName1 == variableNameToCheck) {

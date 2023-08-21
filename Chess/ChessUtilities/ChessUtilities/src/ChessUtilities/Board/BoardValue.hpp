@@ -27,7 +27,7 @@ public:
     Data const& getData() const;
 
 private:
-    Coordinate getCorrectCoordinate(Board const& board, CoordinateDataType const x, CoordinateDataType const y);
+    static Coordinate getCorrectCoordinate(Board const& board, CoordinateDataType const x, CoordinateDataType const y);
     void saveBoardToData(Board const& board);
     Data m_data;
 };

@@ -18,7 +18,7 @@ public:
 
 private:
     void saveSymbolTable(std::string const& symbolTableFilePath, SymbolTableFileType const filetype);
-    int getAddressFromLineInFile(std::string const& lineInFile, SymbolTableFileType const filetype) const;
+    static int getAddressFromLineInFile(std::string const& lineInFile, SymbolTableFileType const filetype) ;
     void saveLineInSymbolMapIfValid(int const address, std::string const& lineInFile);
     SymbolMapType m_symbolMap;
 };

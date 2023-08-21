@@ -58,8 +58,7 @@ EggDroppingPuzzle::Count EggDroppingPuzzle::getMinimumNumberOfTrialsUsingNaiveRe
 
         // We need k trials for one egg and k floors.
         return floorIndexPlusOne;
-    } else {
-        // Consider all droppings from 1st floor to kth floor and return the minimum of these values plus 1.
+    }         // Consider all droppings from 1st floor to kth floor and return the minimum of these values plus 1.
         Count minimumCount(MAX_COUNT);
         for (int currentFloor = 1; currentFloor <= floorIndexPlusOne; currentFloor++) {
             Count countForFloor =
@@ -68,7 +67,7 @@ EggDroppingPuzzle::Count EggDroppingPuzzle::getMinimumNumberOfTrialsUsingNaiveRe
             minimumCount = min(minimumCount, countForFloor);
         }
         return minimumCount + 1;
-    }
+   
 }
 
 EggDroppingPuzzle::Count EggDroppingPuzzle::getMinimumNumberOfTrialsUsingMemoizationDP(

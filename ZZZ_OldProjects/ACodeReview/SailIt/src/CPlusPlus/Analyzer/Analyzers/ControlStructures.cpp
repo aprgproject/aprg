@@ -13,19 +13,19 @@ namespace codeReview {
 bool TermAnalyzer::isModifiedDueToControlStructures(Looper const& startLooper) {
     DBGPRINT1("isModifiedDueToControlStructures");
     bool isModified = true;
-    if (isModifiedDueToIfClauseAndMoveLooper(startLooper))
+    if (isModifiedDueToIfClauseAndMoveLooper(startLooper)) {
         ;
-    else if (isModifiedDueToElseIfClauseAndMoveLooper(startLooper))
+    } else if (isModifiedDueToElseIfClauseAndMoveLooper(startLooper)) {
         ;
-    else if (isModifiedDueToElseClauseAndMoveLooper(startLooper))
+    } else if (isModifiedDueToElseClauseAndMoveLooper(startLooper)) {
         ;
-    else if (isModifiedDueToIfElseIfChainClause(startLooper))
+    } else if (isModifiedDueToIfElseIfChainClause(startLooper)) {
         ;
-    else if (isModifiedDueToIfElseChainStopClause(startLooper))
+    } else if (isModifiedDueToIfElseChainStopClause(startLooper)) {
         ;
-    else if (isModifiedDueToWhileLoopAndMoveLooper(startLooper))
+    } else if (isModifiedDueToWhileLoopAndMoveLooper(startLooper)) {
         ;
-    else {
+    } else {
         isModified = false;
     }
     return isModified;
@@ -133,7 +133,7 @@ bool TermAnalyzer::isModifiedDueToOneConditionConstructAndMoveLooper(
                 temporaryFindings.copyCurrentFindings(m_findings);
                 combineToASingleTerm(startLooper, afterClosingBraces, newTermType);
                 return true;
-            } else if (isSemiColonFoundAndMoveLooper<LooperConnector::WhiteSpaceAndNewLine>(afterSemiColon)) {
+            } if (isSemiColonFoundAndMoveLooper<LooperConnector::WhiteSpaceAndNewLine>(afterSemiColon)) {
                 checkCondition(Looper(afterOpeningParenthesis, afterClosingParenthesis - 1));
                 incrementLooperIfWhiteSpaceAndOneNewLine<FindingsToAdd::UnexpectsWhiteSpace>(afterSemiColon);
                 temporaryFindings.copyCurrentFindings(m_findings);

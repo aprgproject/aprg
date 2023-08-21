@@ -35,10 +35,11 @@ void runTestCase(int const testCaseNumber) {
     int s1 = 0, s2 = 0;
     for (int i = 0; i < n; ++i) {
         my_cin >> a[i];
-        if (a[i] < 0)
+        if (a[i] < 0) {
             s1 -= a[i];
-        else
+        } else {
             s2 += a[i];
+}
     }
     int t = 0;
     ll ans = 0;
@@ -46,7 +47,8 @@ void runTestCase(int const testCaseNumber) {
     for (int i = 0; i < n; ++i) {
         t += a[i];
         for (int j = 0; j * j <= s2; ++j) {
-            if (s1 + (t - j * j) >= 0) ans += c[s1 + (t - j * j)];
+            if (s1 + (t - j * j) >= 0) { ans += c[s1 + (t - j * j)];
+}
         }
         ++c[s1 + t];
     }

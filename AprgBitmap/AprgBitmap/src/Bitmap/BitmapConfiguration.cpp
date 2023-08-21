@@ -92,11 +92,11 @@ int BitmapConfiguration::getYCoordinateWithinTheBitmap(int const coordinate) con
     return getCoordinateWithinRange(coordinate, m_bitmapHeight);
 }
 
-int BitmapConfiguration::getCoordinateWithinRange(int const coordinate, int maxLength) const {
+int BitmapConfiguration::getCoordinateWithinRange(int const coordinate, int maxLength) {
     return (coordinate < 0 || maxLength <= 0) ? 0 : (coordinate >= maxLength) ? maxLength - 1 : coordinate;
 }
 
-BitmapXY BitmapConfiguration::getUpLeftCornerPoint() const { return BitmapXY(0, 0); }
+BitmapXY BitmapConfiguration::getUpLeftCornerPoint() { return BitmapXY(0, 0); }
 
 BitmapXY BitmapConfiguration::getDownRightCornerPoint() const {
     int maxX = m_bitmapWidth == 0 ? 0 : m_bitmapWidth - 1;
@@ -258,7 +258,7 @@ void BitmapConfiguration::calculateOtherValuesAfterReading() {
     m_bitMaskForValue = AlbaBitValueUtilities<uint32_t>::generateOnesWithNumberOfBits(m_numberOfBitsPerPixel);
 }
 
-CompressedMethodType BitmapConfiguration::determineCompressedMethodType(uint32_t compressedMethodValue) const {
+CompressedMethodType BitmapConfiguration::determineCompressedMethodType(uint32_t compressedMethodValue) {
     CompressedMethodType compressedMethodType;
     switch (compressedMethodValue) {
         case 0:

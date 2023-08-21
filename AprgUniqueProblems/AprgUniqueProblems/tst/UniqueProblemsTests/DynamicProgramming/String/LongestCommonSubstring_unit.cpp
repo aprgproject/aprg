@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using Distance = LongestCommonSubstring::Index;
-}
+} // namespace
 
 TEST(LongestCommonSubstringTest, GetLongestCommonSubstringWorksOnExample1) {
     LongestCommonSubstring queryForTest("MOVIE", "LOVE");

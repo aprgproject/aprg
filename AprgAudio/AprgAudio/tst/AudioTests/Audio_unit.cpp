@@ -291,16 +291,17 @@ TEST(WavLoadingTests, DISABLED_Mono_16bit_48000) {
 }
 
 bool writeTest(int numChannels, int sampleRate, int bitDepth, AudioFormat format) {
-    float sampleRateAsFloat = (float)sampleRate;
+    auto sampleRateAsFloat = (float)sampleRate;
 
     Audio<float> audioFile;
 
     audioFile.setAudioBufferSize(numChannels, sampleRate * 4);
 
     for (int i = 0; i < static_cast<int>(audioFile.getNumSamplesPerChannel()); i++) {
-        float sample = static_cast<float>(sin(2.0 * getPi() * i / sampleRateAsFloat * 440.0));
+        auto sample = static_cast<float>(sin(2.0 * getPi() * i / sampleRateAsFloat * 440.0));
 
-        for (int k = 0; k < static_cast<int>(audioFile.getNumChannels()); k++) audioFile.samples[k][i] = sample * 0.5;
+        for (int k = 0; k < static_cast<int>(audioFile.getNumChannels()); k++) { audioFile.samples[k][i] = sample * 0.5;
+}
     }
 
     audioFile.setSampleRate(sampleRate);
@@ -314,7 +315,7 @@ bool writeTest(int numChannels, int sampleRate, int bitDepth, AudioFormat format
         return audioFile.save(
             APRG_DIR R"(\AprgAudio\FilesForTests\WrittenAudioFiles\)" + numChannelsAsString + "_" + sampleRateAsString +
             "_" + bitDepthAsString + "bit" + ".wav");
-    } else if (format == AudioFormat::Aiff) {
+    } if (format == AudioFormat::Aiff) {
         return audioFile.save(
             APRG_DIR R"(\AprgAudio\FilesForTests\WrittenAudioFiles\)" + numChannelsAsString + "_" + sampleRateAsString +
             "_" + bitDepthAsString + "bit" + ".aif");

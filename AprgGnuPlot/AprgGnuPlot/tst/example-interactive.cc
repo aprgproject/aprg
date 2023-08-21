@@ -61,7 +61,8 @@ TEST(GnuplotIostreamTest, DISABLED_ExampleInteractive)
 
         //gp.getMouse(mx, my, mb, "Left click to aim arrows, right click to exit.");
 		printf("You pressed mouse button %d at x=%f y=%f\n", mb, mx, my);
-		if(mb < 0) printf("The gnuplot window was closed.\n");
+		if(mb < 0) { printf("The gnuplot window was closed.\n");
+}
         break; //Mark's workaround
 	}
 }

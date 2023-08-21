@@ -10,7 +10,7 @@ namespace algebra {
 
 namespace {
 using SolutionStatus = LinearDiophantineEquationCoefficientSolver::SolutionStatus;
-}
+} // namespace
 
 TEST(LinearDiophantineEquationCoefficientSolverTest, WorksWhenAAndBAreZero) {
     LinearDiophantineEquationCoefficientSolver solver(0, 0, 12);

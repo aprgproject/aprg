@@ -61,8 +61,9 @@ void CSVReporter::ReportRuns(const std::vector<Run>& reports) {
     // save the names of all the user counters
     for (const auto& run : reports) {
       for (const auto& cnt : run.counters) {
-        if (cnt.first == "bytes_per_second" || cnt.first == "items_per_second")
+        if (cnt.first == "bytes_per_second" || cnt.first == "items_per_second") {
           continue;
+}
         user_counter_names_.insert(cnt.first);
       }
     }
@@ -70,7 +71,8 @@ void CSVReporter::ReportRuns(const std::vector<Run>& reports) {
     // print the header
     for (auto B = elements.begin(); B != elements.end();) {
       Out << *B++;
-      if (B != elements.end()) Out << ",";
+      if (B != elements.end()) { Out << ",";
+}
     }
     for (auto B = user_counter_names_.begin();
          B != user_counter_names_.end();) {
@@ -83,8 +85,9 @@ void CSVReporter::ReportRuns(const std::vector<Run>& reports) {
     // check that all the current counters are saved in the name set
     for (const auto& run : reports) {
       for (const auto& cnt : run.counters) {
-        if (cnt.first == "bytes_per_second" || cnt.first == "items_per_second")
+        if (cnt.first == "bytes_per_second" || cnt.first == "items_per_second") {
           continue;
+}
         BM_CHECK(user_counter_names_.find(cnt.first) !=
                  user_counter_names_.end())
             << "All counters must be present in each run. "

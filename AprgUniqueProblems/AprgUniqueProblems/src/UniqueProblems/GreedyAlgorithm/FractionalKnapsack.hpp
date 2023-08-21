@@ -13,7 +13,7 @@ public:
     using Profits = std::vector<Profit>;
     using Items = std::vector<Item>;
 
-    Profit getBestProfit(Weight const maximumWeight, Items const& items) const;
+    static Profit getBestProfit(Weight const maximumWeight, Items const& items) ;
 };
 
 }  // namespace alba

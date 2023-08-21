@@ -96,9 +96,9 @@ std::string FormatString(const char* msg, va_list args) {
   // currently there is no error handling for failure, so this is hack.
   BM_CHECK(ret >= 0);
 
-  if (ret == 0)  // handle empty expansion
+  if (ret == 0) {  // handle empty expansion
     return {};
-  else if (static_cast<size_t>(ret) < size)
+  } if (static_cast<size_t>(ret) < size)
     return local_buff;
   else {
     // we did not provide a long enough buffer on our first attempt.
@@ -150,7 +150,8 @@ void ColorPrintf(std::ostream& out, LogColor color, const char* fmt,
   SetConsoleTextAttribute(stdout_handle, old_color_attrs);
 #else
   const char* color_code = GetPlatformColorCode(color);
-  if (color_code) out << FormatString("\033[0;3%sm", color_code);
+  if (color_code) { out << FormatString("\033[0;3%sm", color_code);
+}
   out << FormatString(fmt, args) << "\033[m";
 #endif
 }

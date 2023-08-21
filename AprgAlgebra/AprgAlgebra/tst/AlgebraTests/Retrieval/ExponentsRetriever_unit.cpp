@@ -16,7 +16,7 @@ TEST(ExponentsRetrieverTest, RetrieveFromEquationsWorks) {
 
     AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(4U, numbersSet.size());
-    AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
+    auto it = numbersSet.cbegin();
     EXPECT_EQ(AlbaNumber(5), *(it++));
     EXPECT_EQ(AlbaNumber(6), *(it++));
     EXPECT_EQ(AlbaNumber(7), *(it++));
@@ -33,7 +33,7 @@ TEST(ExponentsRetrieverTest, RetrieveFromEquationWorks) {
 
     AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(2U, numbersSet.size());
-    AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
+    auto it = numbersSet.cbegin();
     EXPECT_EQ(AlbaNumber(5), *(it++));
     EXPECT_EQ(AlbaNumber(6), *(it++));
 }
@@ -53,7 +53,7 @@ TEST(ExponentsRetrieverTest, RetrieveFromTermWorks) {
 
     AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(6U, numbersSet.size());
-    AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
+    auto it = numbersSet.cbegin();
     EXPECT_EQ(AlbaNumber(5), *(it++));
     EXPECT_EQ(AlbaNumber(6), *(it++));
     EXPECT_EQ(AlbaNumber(7), *(it++));
@@ -87,7 +87,7 @@ TEST(ExponentsRetrieverTest, RetrieveFromMonomialWorks) {
 
     AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(2U, numbersSet.size());
-    AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
+    auto it = numbersSet.cbegin();
     EXPECT_EQ(AlbaNumber(5), *(it++));
     EXPECT_EQ(AlbaNumber(6), *(it++));
 }
@@ -99,7 +99,7 @@ TEST(ExponentsRetrieverTest, RetrieveFromPolynomialWorks) {
 
     AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(2U, numbersSet.size());
-    AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
+    auto it = numbersSet.cbegin();
     EXPECT_EQ(AlbaNumber(7), *(it++));
     EXPECT_EQ(AlbaNumber(8), *(it++));
 }
@@ -111,7 +111,7 @@ TEST(ExponentsRetrieverTest, RetrieveFromExpressionWorks) {
 
     AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(1U, numbersSet.size());
-    AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
+    auto it = numbersSet.cbegin();
     EXPECT_EQ(AlbaNumber(9), *(it++));
 }
 
@@ -125,7 +125,7 @@ TEST(ExponentsRetrieverTest, RetrieveFromFunctionWorks) {
 
     AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(1U, numbersSet.size());
-    AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
+    auto it = numbersSet.cbegin();
     EXPECT_EQ(AlbaNumber(10), *(it++));
 }
 
@@ -139,7 +139,7 @@ TEST(ExponentsRetrieverTest, RetrieveFromPolynomialsWorks) {
 
     AlbaNumbersSet const& numbersSet(retriever.getExponents());
     ASSERT_EQ(4U, numbersSet.size());
-    AlbaNumbersSet::const_iterator it = numbersSet.cbegin();
+    auto it = numbersSet.cbegin();
     EXPECT_EQ(AlbaNumber(7), *(it++));
     EXPECT_EQ(AlbaNumber(8), *(it++));
     EXPECT_EQ(AlbaNumber(9), *(it++));

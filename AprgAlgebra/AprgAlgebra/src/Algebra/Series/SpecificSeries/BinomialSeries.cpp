@@ -25,7 +25,7 @@ Term BinomialSeries::getValueAtIndex(int const index) const {
 }
 
 Term BinomialSeries::getBinomialSeriesApproximation(
-    Term const& monomialPart, Term const& exponent, int const numberOfTimes) const {
+    Term const& monomialPart, Term const& exponent, int const numberOfTimes) {
     // Approximation:
     // (1+x)^m = Summation of [m*(m-1)*(m-2)....(m-n+1) * (x^n)/(n!)] until n reaches infinity
     Term result(1);

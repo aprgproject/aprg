@@ -25,7 +25,7 @@ public:
         bool const alwaysPutNewValue);
 
 private:
-    void retrieveSampleMergingDetails(
+    static void retrieveSampleMergingDetails(
         SamplesMergingDetails& samplesMergingDetails, SearchResultsDetails const& details,
         Samples const& searchSamples);
     void saveToNewSamples(

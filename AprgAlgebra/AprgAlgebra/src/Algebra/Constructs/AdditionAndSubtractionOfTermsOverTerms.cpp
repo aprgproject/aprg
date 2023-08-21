@@ -85,8 +85,8 @@ void AdditionAndSubtractionOfTermsOverTerms::putAsAddOrSubtraction(
 }
 
 void AdditionAndSubtractionOfTermsOverTerms::eraseCommonFactorOrAddDistinctFactor(
-    Term const& termToCheck, Terms& commonFactors, Terms& outputFactors) const {
-    Terms::iterator matchedTermIterator = find(commonFactors.begin(), commonFactors.end(), termToCheck);
+    Term const& termToCheck, Terms& commonFactors, Terms& outputFactors) {
+    auto matchedTermIterator = find(commonFactors.begin(), commonFactors.end(), termToCheck);
     if (matchedTermIterator == commonFactors.end()) {
         outputFactors.emplace_back(termToCheck);
     } else {
@@ -95,7 +95,7 @@ void AdditionAndSubtractionOfTermsOverTerms::eraseCommonFactorOrAddDistinctFacto
 }
 
 Monomial AdditionAndSubtractionOfTermsOverTerms::getCombinedMonomialMultiplier(
-    Terms const& monomialMultiplierTerms) const {
+    Terms const& monomialMultiplierTerms) {
     Monomials monomialMultipliers;
     for (Term const& monomialMultiplierTerm : monomialMultiplierTerms) {
         monomialMultipliers.emplace_back(createMonomialIfPossible(monomialMultiplierTerm));
@@ -111,7 +111,7 @@ void AdditionAndSubtractionOfTermsOverTerms::updateMonomialAndNonMonomialMultipl
         if (canBeConvertedToMonomial(denominatorTerm)) {
             monomialMultiplier.divideMonomial(createMonomialIfPossible(denominatorTerm));
         } else {
-            Terms::iterator multiplierIterator =
+            auto multiplierIterator =
                 find(nonMonomialMultiplierTerms.begin(), nonMonomialMultiplierTerms.end(), denominatorTerm);
             if (multiplierIterator != nonMonomialMultiplierTerms.end()) {
                 nonMonomialMultiplierTerms.erase(multiplierIterator);
@@ -127,14 +127,14 @@ void AdditionAndSubtractionOfTermsOverTerms::emplaceExistingNumeratorTerms(Terms
 }
 
 void AdditionAndSubtractionOfTermsOverTerms::emplaceMonomialMultiplierIfNeeded(
-    Terms& numeratorTerms, Monomial const& monomialMultiplier) const {
+    Terms& numeratorTerms, Monomial const& monomialMultiplier) {
     if (!isTheValue(monomialMultiplier, 1)) {
         numeratorTerms.emplace_back(Term(monomialMultiplier));
     }
 }
 
 void AdditionAndSubtractionOfTermsOverTerms::emplaceNonMonomialMultipliers(
-    Terms& numeratorTerms, Terms const& nonMonomialMultiplierTerms) const {
+    Terms& numeratorTerms, Terms const& nonMonomialMultiplierTerms) {
     for (Term const& numeratorTerm : nonMonomialMultiplierTerms) {
         numeratorTerms.emplace_back(numeratorTerm);
     }
@@ -153,7 +153,7 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedNumeratorExpressio
 }
 
 Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedDenominatorExpression(
-    Terms const& lcmDenominatorTerms) const {
+    Terms const& lcmDenominatorTerms) {
     Expression combinedDenominator;
     for (Term const& denominatorTerm : lcmDenominatorTerms) {
         combinedDenominator.putTermWithMultiplicationIfNeeded(denominatorTerm);
@@ -172,7 +172,7 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpressionForNumer
 }
 
 void AdditionAndSubtractionOfTermsOverTerms::combineExpressionAsAddOrSubtract(
-    Expression& combinedExpression, Expression const& expression, TermAssociationType const association) const {
+    Expression& combinedExpression, Expression const& expression, TermAssociationType const association) {
     if (TermAssociationType::Positive == association) {
         combinedExpression.putTermWithAdditionIfNeeded(Term(expression));
     } else {

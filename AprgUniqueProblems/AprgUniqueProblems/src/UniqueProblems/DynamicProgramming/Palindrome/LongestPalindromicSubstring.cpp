@@ -78,8 +78,10 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
         for (Index centerIndex = 0; centerIndex < stringLength; centerIndex++) {
             Index lowIndex = centerIndex - 1;
             Index highIndex = centerIndex + 1;
-            while (highIndex < stringLength && m_string[highIndex] == m_string[centerIndex]) highIndex++;
-            while (lowIndex >= 0 && m_string[lowIndex] == m_string[centerIndex]) lowIndex--;
+            while (highIndex < stringLength && m_string[highIndex] == m_string[centerIndex]) { highIndex++;
+}
+            while (lowIndex >= 0 && m_string[lowIndex] == m_string[centerIndex]) { lowIndex--;
+}
             while (lowIndex >= 0 && highIndex < stringLength && m_string[lowIndex] == m_string[highIndex]) {
                 lowIndex--;
                 highIndex++;
@@ -102,8 +104,10 @@ string LongestPalindromicSubstring::getLongestStringUsingIterativeDPAndSpaceEffi
         for (Index centerIndex = 0; centerIndex < stringLength; centerIndex++) {
             Index lowIndex = centerIndex - 1;
             Index highIndex = centerIndex + 1;
-            while (highIndex < stringLength && m_string[highIndex] == m_string[centerIndex]) highIndex++;
-            while (lowIndex >= 0 && m_string[lowIndex] == m_string[centerIndex]) lowIndex--;
+            while (highIndex < stringLength && m_string[highIndex] == m_string[centerIndex]) { highIndex++;
+}
+            while (lowIndex >= 0 && m_string[lowIndex] == m_string[centerIndex]) { lowIndex--;
+}
             while (lowIndex >= 0 && highIndex < stringLength && m_string[lowIndex] == m_string[highIndex]) {
                 lowIndex--;
                 highIndex++;

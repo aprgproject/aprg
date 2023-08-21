@@ -74,7 +74,7 @@ public:
     void clearAllInnerSimplifiedFlags();
 
 private:
-    BaseTermDataPointer createANewPointerFrom(Term const& term);
+    static BaseTermDataPointer createANewPointerFrom(Term const& term);
     void initializeBasedOnString(std::string const& stringAsParameter);
 
     friend std::ostream& operator<<(std::ostream& out, Term const& term);

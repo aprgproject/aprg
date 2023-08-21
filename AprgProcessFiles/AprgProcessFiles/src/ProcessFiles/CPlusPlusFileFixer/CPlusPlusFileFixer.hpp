@@ -17,7 +17,7 @@ private:
     void checkFile(std::string const& path);
     void readContentsFromFile(std::string const& path);
     void readLineWithSharpInclude(std::string const& line, std::string const& path);
-    void notifyIfThereAreCommentsInHeader(std::string const& path, std::string const& line) const;
+    static void notifyIfThereAreCommentsInHeader(std::string const& path, std::string const& line) ;
     void notifyIfAlbaDebugHeaderExistInProductionCode(std::string const& path) const;
     void notifyIfIostreamHeaderExistInProductionCode(std::string const& path) const;
     void notifyIfCAssertHeaderExistInProductionCode(std::string const& path) const;
@@ -35,14 +35,14 @@ private:
     void writeHeadersWithQuotations(std::ofstream& outputLogFileStream) const;
     void writeHeadersWithAngleBrackets(std::ofstream& outputLogFileStream) const;
 
-    bool isLineWithALoopStart(std::string const& line) const;
-    bool isLineWithALoopEnd(std::string const& line) const;
-    bool isPathIgnored(std::string const& path) const;
-    bool isCPlusPlusHeader(std::string const& header) const;
-    bool isLinuxHeader(std::string const& header) const;
-    bool isWindowsHeader(std::string const& header) const;
-    bool isGtestHeader(std::string const& header) const;
-    bool isQtHeader(std::string const& header) const;
+    static bool isLineWithALoopStart(std::string const& line) ;
+    static bool isLineWithALoopEnd(std::string const& line) ;
+    static bool isPathIgnored(std::string const& path) ;
+    static bool isCPlusPlusHeader(std::string const& header) ;
+    static bool isLinuxHeader(std::string const& header) ;
+    static bool isWindowsHeader(std::string const& header) ;
+    static bool isGtestHeader(std::string const& header) ;
+    static bool isQtHeader(std::string const& header) ;
     bool isOtherLibraryHeaders(std::string const& header) const;
 
     std::vector<std::string> m_linesAfterTheHeader;

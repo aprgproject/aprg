@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using ChessBoardIndexes = KnightsTour::ChessBoardIndexes;
-}
+} // namespace
 
 TEST(KnightsTourTest, GetAnOpenKnightsTourWorksOn3By3) {
     KnightsTour knightsTour(3, 3);

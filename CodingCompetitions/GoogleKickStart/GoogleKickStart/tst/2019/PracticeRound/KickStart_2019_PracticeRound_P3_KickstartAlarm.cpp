@@ -32,7 +32,8 @@ long long N, K, x1, y1, C, D, E1, E2, F;
 long long raiseToPower(long long a, long long p) {
     long long result = 1, cp = a;
     while (p) {
-        if (p & 1) result = (result * cp) % MAX_MODULO;  // is even
+        if (p & 1) { result = (result * cp) % MAX_MODULO;  // is even
+}
         p >>= 1;                                         // divide by two
         cp = (cp * cp) % MAX_MODULO;
     }
@@ -51,8 +52,7 @@ long long getGeometricTerm(long long i, long long k) {
     // There is some math here that I cannot understand.
     if (i == 1) {
         return k % MAX_MODULO;
-    } else {
-        // Geometric term is (p^(K+1)-1)/(p-1)
+    }         // Geometric term is (p^(K+1)-1)/(p-1)
         // Using inverse modulo:
         // inverseModulo ≅ 1/(p-1)
         // (1/(p-1) * inverseModulo) mod m = 1
@@ -63,7 +63,7 @@ long long getGeometricTerm(long long i, long long k) {
         // -> a^(-1) ≅ a^(m-2) (mod m)
         // Thus 1/(p-1) = (p-1)^(-1) = (p-1)^(m-2)
         return ((i * (raiseToPower(i, k) - 1) % MAX_MODULO) * raiseToPower(i - 1, MAX_MODULO - 2)) % MAX_MODULO;
-    }
+   
 }
 
 void runTestCase(int const testCaseNumber) {

@@ -33,7 +33,7 @@ void RttAnalyzer2::processFile(string const& file) {
 void RttAnalyzer2::processLine(ofstream& outputFile, string const& line) {
     static string dateTime;
     string time = getStringInBetweenTwoStrings(line, "<", "Z>");
-    unsigned int rtt = convertStringToNumber<unsigned int>(
+    auto rtt = convertStringToNumber<unsigned int>(
         getStringAfterThisString(line, "final RTT value reported to DSP explorer = "));
     outputFile << time << "," << rtt << "\n";
 }
@@ -59,8 +59,8 @@ void RttAnalyzer2::processLine2(string const& fileName, string const& line) {
     if (isStringFoundNotCaseSensitive(line, "2019 Apr")) {
         dateTime = getStringInBetweenTwoStrings(line, "2019 Apr  3  ", "  [");
     } else if (isStringFoundNotCaseSensitive(line, "RXD_FILT")) {
-        unsigned int maxPos = convertStringToNumber<unsigned int>(getNumberAfterThisString(line, "max_pos[0]: "));
-        unsigned int refPos = convertStringToNumber<unsigned int>(getNumberAfterThisString(line, "ref_pos: "));
+        auto maxPos = convertStringToNumber<unsigned int>(getNumberAfterThisString(line, "max_pos[0]: "));
+        auto refPos = convertStringToNumber<unsigned int>(getNumberAfterThisString(line, "ref_pos: "));
         int difference = static_cast<int>(maxPos) - static_cast<int>(refPos);
         m_outputLogStream << fileName << "," << dateTime << "," << maxPos << "," << refPos << "," << difference << "\n";
     }
@@ -89,7 +89,7 @@ void RttAnalyzer2::processFile3(string const& file) {
 
 void RttAnalyzer2::processLine3(ofstream& outputFile, string const& line) {
     static string dateTime;
-    unsigned int peakPosCx8 = convertStringToNumber<unsigned int>(getNumberAfterThisString(line, "peak_pos_cx8 "));
+    auto peakPosCx8 = convertStringToNumber<unsigned int>(getNumberAfterThisString(line, "peak_pos_cx8 "));
     outputFile << peakPosCx8 << "\n";
 }
 

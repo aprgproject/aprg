@@ -13,7 +13,7 @@ namespace algorithm {
 
 namespace {
 using QueueForTest = QueueUsingTwoStacks<int, DoublingSizeStack<int>>;
-}
+} // namespace
 
 TEST(QueueUsingTwoStacksTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<QueueForTest>(); }
 

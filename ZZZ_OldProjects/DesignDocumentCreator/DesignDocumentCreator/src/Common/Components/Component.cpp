@@ -57,12 +57,12 @@ string Component::getQueueAsString() const {
         [](string const& partialResult, Event const& event) { return partialResult + event.getString() + ", "; });
 }
 
-void Component::log(string const& line) const {
+void Component::log(string const& line) {
     UmlLogger& umlLogger(Environment::getInstance().getUmlLogger());
     umlLogger.log(line);
 }
 
-void Component::logNoteOnPreviousMessage(string const& note) const {
+void Component::logNoteOnPreviousMessage(string const& note) {
     UmlLogger& umlLogger(Environment::getInstance().getUmlLogger());
     umlLogger.logNoteOnPreviousMessage(note);
 }
@@ -72,7 +72,7 @@ void Component::logNoteOnComponent(string const& note) const {
     umlLogger.logNoteOnComponent(m_componentName, note);
 }
 
-void Component::logNoteOnComponents(ComponentNames const& componentNames, string const& note) const {
+void Component::logNoteOnComponents(ComponentNames const& componentNames, string const& note) {
     UmlLogger& umlLogger(Environment::getInstance().getUmlLogger());
     umlLogger.logNoteOnComponents(componentNames, note);
 }

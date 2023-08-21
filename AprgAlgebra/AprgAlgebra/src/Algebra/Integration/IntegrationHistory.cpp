@@ -27,7 +27,7 @@ IntegrationPurpose IntegrationHistory::getLastIntegrationPurpose() const {
     return result;
 }
 
-string IntegrationHistory::getEnumShortString(IntegrationPurpose const purpose) const {
+string IntegrationHistory::getEnumShortString(IntegrationPurpose const purpose) {
     switch (purpose) {
         ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::NotSet, "NotSet")
         ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::IntegrationByParts, "IntegrationByParts")

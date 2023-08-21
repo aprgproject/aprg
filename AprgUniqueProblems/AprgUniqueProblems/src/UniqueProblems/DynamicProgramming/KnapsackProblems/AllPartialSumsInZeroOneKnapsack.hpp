@@ -17,7 +17,7 @@ public:
     Values getAllPossiblePartialSumsWithSquareRootAlgorithm();
 
 private:
-    Values getAllPossiblePartialSums(Booleans const& isPartialSumPossible) const;
+    static Values getAllPossiblePartialSums(Booleans const& isPartialSumPossible) ;
 
     Values m_inputValues;
 };

@@ -12,7 +12,7 @@ public:
     void functionality2() const {}
     void functionality3() const {}
 
-    UnsignedInts getUnsignedIntsOneToTen() const;
+    static UnsignedInts getUnsignedIntsOneToTen() ;
 
     void functionality10() const {}
     void functionality11() const {}

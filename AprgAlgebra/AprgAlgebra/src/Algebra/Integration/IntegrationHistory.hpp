@@ -27,7 +27,7 @@ public:
     bool didThisIntegrationPurposeAlreadyHappened(IntegrationPurpose const purpose) const;
     int getDepth() const;
     IntegrationPurpose getLastIntegrationPurpose() const;
-    std::string getEnumShortString(IntegrationPurpose const purpose) const;
+    static std::string getEnumShortString(IntegrationPurpose const purpose) ;
 
     void performStepsBeforeIntegration(Term const& input, IntegrationPurpose const purpose);
     void performStepsAfterIntegration(Term const& input, IntegrationPurpose const purpose, Term const& output);

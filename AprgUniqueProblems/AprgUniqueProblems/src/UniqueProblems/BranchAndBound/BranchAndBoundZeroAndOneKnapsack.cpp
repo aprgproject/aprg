@@ -54,7 +54,7 @@ BranchAndBoundZeroAndOneKnapsack::Profit BranchAndBoundZeroAndOneKnapsack::getBe
 }
 
 BranchAndBoundZeroAndOneKnapsack::Profit BranchAndBoundZeroAndOneKnapsack::getMaxPossibleProfit(
-    Node const& currentNode, Weight const maximumWeight, Items const& items) const {
+    Node const& currentNode, Weight const maximumWeight, Items const& items) {
     if (currentNode.weight < maximumWeight) {
         Index itemIndex = currentNode.level + 1;
         Profit maxPossibleProfit = currentNode.profit;

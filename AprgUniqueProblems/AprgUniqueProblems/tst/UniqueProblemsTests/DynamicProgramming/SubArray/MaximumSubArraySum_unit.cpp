@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using SubArrayDetails = MaximumSubArraySum::SubArrayDetails;
-}
+} // namespace
 
 TEST(MaximumSubArraySumTest, GetMaximumSubArraySumWorksOnExample1) {
     MaximumSubArraySum queryForTest({-1, 2, 4, -3, 5, 2, -5, 2});

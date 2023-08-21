@@ -178,11 +178,11 @@ Monomial PolynomialOverPolynomial::getMonomialWithMaxNegativeExponentsAndConvert
 }
 
 bool PolynomialOverPolynomial::removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(
-    Polynomials& numeratorFactors, Polynomials& denominatorFactors) const {
+    Polynomials& numeratorFactors, Polynomials& denominatorFactors) {
     bool areSomeFactorsRemoved(false);
-    for (Polynomials::iterator numeratorIterator = numeratorFactors.begin();
+    for (auto numeratorIterator = numeratorFactors.begin();
          numeratorIterator != numeratorFactors.end(); ++numeratorIterator) {
-        for (Polynomials::iterator denominatorIterator = denominatorFactors.begin();
+        for (auto denominatorIterator = denominatorFactors.begin();
              denominatorIterator != denominatorFactors.end(); ++denominatorIterator) {
             Polynomial const& numerator(*numeratorIterator);
             Polynomial const& denominator(*denominatorIterator);
@@ -207,7 +207,7 @@ bool PolynomialOverPolynomial::removeCommonFactorsAndReturnIfSomeFactorsAreRemov
     return areSomeFactorsRemoved;
 }
 
-Polynomial PolynomialOverPolynomial::multiplyAndSimplifyFactors(Polynomials const& factors) const {
+Polynomial PolynomialOverPolynomial::multiplyAndSimplifyFactors(Polynomials const& factors) {
     Polynomial product{Monomial(1, {})};
     for (Polynomial const& factor : factors) {
         product.multiplyPolynomial(factor);

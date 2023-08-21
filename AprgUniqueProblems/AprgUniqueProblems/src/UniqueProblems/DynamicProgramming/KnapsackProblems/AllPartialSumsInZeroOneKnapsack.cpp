@@ -89,7 +89,7 @@ AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSumsWithSquareRootAlgorith
 }
 
 AllPartialSumsInZeroOneKnapsack::Values AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSums(
-    Booleans const& isPartialSumPossible) const {
+    Booleans const& isPartialSumPossible) {
     Values result;
     for (int partialSumIndex = 0; partialSumIndex < static_cast<int>(isPartialSumPossible.size());
          partialSumIndex++)  // O(n) or linear time

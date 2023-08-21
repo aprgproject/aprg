@@ -35,7 +35,7 @@ private:
     Coordinate getFirstCoordinateUsingBfs(Value const value) const;
     Coordinate getSecondCoordinateUsingBfs(Value const value, Coordinate const& firstCoordinate) const;
     Coordinate getCoordinateUsingBfs(Value const value, Coordinate const& firstCoordinate, Bfs& bfs) const;
-    int getDistance(Coordinate const& coordinate1, Coordinate const& coordinate2) const;
+    static int getDistance(Coordinate const& coordinate1, Coordinate const& coordinate2) ;
     ValueMatrix const& m_valueMatrix;
     Graph m_coordinateGraph;
 };

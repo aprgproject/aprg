@@ -45,7 +45,7 @@ unsigned int AsilBasebandPooling::getNumberBasebandCardsWithMultipleLcgs() const
     return m_lcgs.size() - m_basebandCards.size();
 }
 
-unsigned int AsilBasebandPooling::getMaxNumberOfLcgsInBasebandCard(BasebandCard const& basebandCard) const {
+unsigned int AsilBasebandPooling::getMaxNumberOfLcgsInBasebandCard(BasebandCard const& basebandCard) {
     return basebandCard.getKeplers().size() / 2;
 }
 
@@ -68,7 +68,7 @@ BasebandCardsSplitBasedOnNumberOfLcgs AsilBasebandPooling::getBasebandCardsSplit
     unsigned int const numberOfBasebandCardsWithMultipleLcgs) const {
     unsigned int numberOfBasebandCardRemaining(numberOfBasebandCardsWithMultipleLcgs);
     BasebandCardsSplitBasedOnNumberOfLcgs basebandCards;
-    SetOfBasebandCards::reverse_iterator reverseTraversal = m_basebandCards.crbegin();
+    auto reverseTraversal = m_basebandCards.crbegin();
     while (reverseTraversal != m_basebandCards.crend()) {
         if (numberOfBasebandCardRemaining > 0 && canMultipleLcgsBePutOnBasebandCard(*reverseTraversal)) {
             basebandCards.basebandCardsWithMultipleLcgs.emplace(*reverseTraversal);
@@ -81,7 +81,7 @@ BasebandCardsSplitBasedOnNumberOfLcgs AsilBasebandPooling::getBasebandCardsSplit
     return basebandCards;
 }
 
-void AsilBasebandPooling::sortAndPrioritizeBasebandCards(VectorOfBasebandCards& basebandCardsWithPrioritization) const {
+void AsilBasebandPooling::sortAndPrioritizeBasebandCards(VectorOfBasebandCards& basebandCardsWithPrioritization) {
     stable_sort(
         basebandCardsWithPrioritization.begin(), basebandCardsWithPrioritization.end(),
         [](BasebandCard const& basebandCard1, BasebandCard const& basebandCard2) {
@@ -89,7 +89,7 @@ void AsilBasebandPooling::sortAndPrioritizeBasebandCards(VectorOfBasebandCards& 
         });
 }
 
-void AsilBasebandPooling::sortAndPrioritizeLcgs(VectorOfLcgs& lcgsInPriorityOrder) const {
+void AsilBasebandPooling::sortAndPrioritizeLcgs(VectorOfLcgs& lcgsInPriorityOrder) {
     stable_sort(lcgsInPriorityOrder.begin(), lcgsInPriorityOrder.end(), [](Lcg const& lcg1, Lcg const& lcg2) {
         return lcg1.getPercentageShare() > lcg2.getPercentageShare();
     });
@@ -104,7 +104,7 @@ void AsilBasebandPooling::assignBasebandCardsWithOneLcg(
         back_inserter(basebandCardsWithPrioritization));
     sortAndPrioritizeBasebandCards(basebandCardsWithPrioritization);
 
-    VectorOfLcgs::const_iterator lcgsIterator = lcgsInPriorityOrder.cbegin();
+    auto lcgsIterator = lcgsInPriorityOrder.cbegin();
     for (BasebandCard const& basebandCard : basebandCardsWithPrioritization) {
         if (lcgsIterator != lcgsInPriorityOrder.cend()) {
             unsigned int lcgId(lcgsIterator->getLcgId());
@@ -127,7 +127,7 @@ void AsilBasebandPooling::assignBasebandCardsWithMultipleLcgs(
         back_inserter(basebandCardsWithPrioritization));
     sortAndPrioritizeBasebandCards(basebandCardsWithPrioritization);
 
-    VectorOfLcgs::const_iterator lcgsIterator = lcgsInPriorityOrder.cbegin();
+    auto lcgsIterator = lcgsInPriorityOrder.cbegin();
     for (BasebandCard const& basebandCard : basebandCardsWithPrioritization) {
         SetOfKeplers keplersInBasebandCard(basebandCard.getKeplers());
         unsigned int keplerCount = 0;

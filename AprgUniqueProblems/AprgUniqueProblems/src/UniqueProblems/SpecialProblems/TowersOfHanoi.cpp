@@ -21,7 +21,7 @@ void TowersOfHanoi::transferDisksFromStartToFinish(int const numberOfDisks) cons
     transferByBulk(startStack, inBetweenStack, endStack, numberOfDisks);
 }
 
-void TowersOfHanoi::initialStartStack(StackOfDisks& startStack, int const numberOfDisks) const {
+void TowersOfHanoi::initialStartStack(StackOfDisks& startStack, int const numberOfDisks) {
     for (int i = numberOfDisks; i > 0; i--) {
         startStack.disks.push(i);
     }
@@ -56,7 +56,7 @@ void TowersOfHanoi::transferOneDisk(StackOfDisks& source, StackOfDisks& destinat
     printStacksContents(source, destination);
 }
 
-void TowersOfHanoi::printStacksContents(StackOfDisks& source, StackOfDisks& destination) const {
+void TowersOfHanoi::printStacksContents(StackOfDisks& source, StackOfDisks& destination) {
     auto const& sourceContainer(getUnderlyingContainer(source.disks));
     auto const& destinationContainer(getUnderlyingContainer(destination.disks));
     std::ostream_iterator<Disk> outputIterator(cout, ", ");

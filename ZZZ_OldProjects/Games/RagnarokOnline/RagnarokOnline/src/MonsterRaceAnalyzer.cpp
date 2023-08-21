@@ -115,7 +115,7 @@ void MonsterRaceAnalyzer::retrieveBestWinners(
     }
 }
 
-void MonsterRaceAnalyzer::showWinners(BestWinners& queueOfWinners) const {
+void MonsterRaceAnalyzer::showWinners(BestWinners& queueOfWinners) {
     vector<PossibleWinner> winnersToDisplay;
     winnersToDisplay.reserve(NUMBER_OF_WINNERS_TO_SHOW);
     while (!queueOfWinners.empty()) {
@@ -138,7 +138,7 @@ void MonsterRaceAnalyzer::showWinners(BestWinners& queueOfWinners) const {
 }
 
 void MonsterRaceAnalyzer::showBestConfiguration(
-    RaceConfiguration const& bestConfiguration, RaceConfiguration const& currentConfiguration) const {
+    RaceConfiguration const& bestConfiguration, RaceConfiguration const& currentConfiguration) {
     cout << INDENTION << "Current configuration       | luck: ";
     for (auto const value : currentConfiguration.luck) {
         cout << setfill(' ') << setw(2) << value << ", ";
@@ -167,7 +167,7 @@ void MonsterRaceAnalyzer::showBestConfiguration(
     cout << "\n";
 }
 
-int MonsterRaceAnalyzer::getDiscrepancy(RaceConfiguration const& r1, RaceConfiguration const& r2) const {
+int MonsterRaceAnalyzer::getDiscrepancy(RaceConfiguration const& r1, RaceConfiguration const& r2) {
     int result = 0;
     for (int i = 0; i < NUMBER_OF_MONSTERS; i++) {
         result += getAbsoluteValue(r1.luck[i] - r2.luck[i]);

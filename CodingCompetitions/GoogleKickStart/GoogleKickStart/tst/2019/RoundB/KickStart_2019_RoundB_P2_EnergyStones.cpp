@@ -120,9 +120,8 @@ int getMaxEnergy(int const index, int const elapsedTime) {
             savedEnergy = max(energyIfEaten, energyIfSkipped);
         }
         return savedEnergy;
-    } else {
-        return 0;
-    }
+    }         return 0;
+   
 }
 
 void runTestCase(int const testCaseNumber) {

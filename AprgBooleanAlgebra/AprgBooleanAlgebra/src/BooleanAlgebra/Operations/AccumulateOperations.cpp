@@ -27,7 +27,7 @@ void accumulateTermsWithAndOperation(Term& combinedTerm, Terms const& termsToCom
             if (isTheValue(term, false)) {
                 combinedTerm = false;
                 break;
-            } else if (willHaveNoEffectOnAndOperation(term)) {
+            } if (willHaveNoEffectOnAndOperation(term)) {
                 continue;
             } else if (isFirst) {
                 combinedTerm = term;
@@ -51,7 +51,7 @@ void accumulateTermsWithOrOperation(Term& combinedTerm, Terms const& termsToComb
             if (isTheValue(term, true)) {
                 combinedTerm = true;
                 break;
-            } else if (willHaveNoEffectOnOrOperation(term)) {
+            } if (willHaveNoEffectOnOrOperation(term)) {
                 continue;
             } else if (isFirst) {
                 combinedTerm = term;

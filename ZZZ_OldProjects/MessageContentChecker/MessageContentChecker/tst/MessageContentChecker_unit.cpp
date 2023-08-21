@@ -176,7 +176,7 @@ TEST(SampleTest, SampleTest1) {
         0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0xDC, 0x00, 0x00, 0x51, 0x44, 0x00, 0x00, 0xFD, 0x04, 0x00, 0x00, 0xDD, 0x18};
 
-    BB_2_RlSetupReq* rlSetupReqPointer = (BB_2_RlSetupReq*)dynamicPayload;
+    auto* rlSetupReqPointer = (BB_2_RlSetupReq*)dynamicPayload;
 
     u8* movablePointer = (u8*)dynamicPayload;
 
@@ -191,7 +191,7 @@ TEST(SampleTest, SampleTest1) {
         (sizeof(TCtfc) * swap4(rlSetupReqPointer->numOfDlTfc)) +
         (sizeof(SDchInfo_Ver2) * swap4(rlSetupReqPointer->numOfDch));
 
-    SEDpchInformation_Ver2* printPointer =
+    auto* printPointer =
         (SEDpchInformation_Ver2*)(dynamicPayload + sizeof(BB_2_RlSetupReq) - sizeof(TDynamicData) + offset);
 
     /*
@@ -503,7 +503,7 @@ TEST(SampleTest, SampleTest2) {
        0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
        0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};*/
 
-    BB_2_RlSetupReq* rlSetupReqPointer = (BB_2_RlSetupReq*)dynamicPayload;
+    auto* rlSetupReqPointer = (BB_2_RlSetupReq*)dynamicPayload;
 
     u8* movablePointer = (u8*)dynamicPayload;
 
@@ -519,11 +519,11 @@ TEST(SampleTest, SampleTest2) {
 
     unsigned int numOfDch = swap4(rlSetupReqPointer->numOfDch);
     for (int i = 0; i < numOfDch; i++) {
-        SDchInfo_Ver2* dchInfoPointer = (SDchInfo_Ver2*)(dynamicPayload + offset);
+        auto* dchInfoPointer = (SDchInfo_Ver2*)(dynamicPayload + offset);
         offset += sizeof(SDchInfo_Ver2) - sizeof(TDynamicData);
         unsigned int numOfDchSpecificInfo = swap4(dchInfoPointer->numOfDchSpecificInfo);
         for (int j = 0; j < numOfDchSpecificInfo; j++) {
-            SDchSpecificInfo* dchSpecificInfoPointer = (SDchSpecificInfo*)(dynamicPayload + offset);
+            auto* dchSpecificInfoPointer = (SDchSpecificInfo*)(dynamicPayload + offset);
             offset += sizeof(SDchSpecificInfo) - sizeof(SDynamicTfInfo);
             unsigned int numberOfTfUl = swap4(dchSpecificInfoPointer->numberOfTfUl);
             offset += (sizeof(SDynamicTfInfo) * numberOfTfUl);
@@ -534,7 +534,7 @@ TEST(SampleTest, SampleTest2) {
 
     offset += (sizeof(SHsDschInformation_Ver2) * swap4(rlSetupReqPointer->numOfHsDschInfo));
 
-    SEDpchInformation_Ver2* printPointer = (SEDpchInformation_Ver2*)(dynamicPayload + offset);
+    auto* printPointer = (SEDpchInformation_Ver2*)(dynamicPayload + offset);
 
     /*
         unsigned int offset = (sizeof(SDlDpchInfoRlSetup)*swap4(rlSetupReqPointer->numOfDlDpchInfo))

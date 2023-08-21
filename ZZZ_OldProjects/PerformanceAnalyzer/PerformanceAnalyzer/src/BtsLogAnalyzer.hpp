@@ -107,12 +107,12 @@ private:
     void computeRLDeletionLatencyAndUpdateIfLogTimePairIsValid(
         UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
     void saveMessageQueueingTimeToCsvFile(std::string const& lineInLogs, unsigned int const messageQueueingTime);
-    void saveUserIndentifierAndLatencyToCsvFile(
-        UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, std::ofstream& csvFileStream) const;
+    static void saveUserIndentifierAndLatencyToCsvFile(
+        UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, std::ofstream& csvFileStream) ;
     void savePrintsAvailableToCsvFile(UserIdentifiers const& userIdentifiers, std::ofstream& csvFileStream);
-    void setLogTimeIfNeeded(std::string const& lineInLogs, LogTime& logTime) const;
+    static void setLogTimeIfNeeded(std::string const& lineInLogs, LogTime& logTime) ;
     double getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser) const;
-    double getTotalMicroseconds(wcdmaToolsBackend::BtsLogTime const& btsLogTime) const;
+    static double getTotalMicroseconds(wcdmaToolsBackend::BtsLogTime const& btsLogTime) ;
     DataCollection<double> m_messageQueueingTime;
     DataCollection<double> m_rlhRlSetupLatency;
     DataCollection<double> m_rlhRlDeletionLatency;

@@ -11,7 +11,7 @@ namespace algorithm {
 
 namespace {
 using SimplexForTest = SimplexAlgorithm<double>;
-}
+} // namespace
 
 TEST(SimplexAlgorithmTest, SimplexWorksOnBrewersProblem) {
     SimplexForTest::Matrix constraintsCoefficients(

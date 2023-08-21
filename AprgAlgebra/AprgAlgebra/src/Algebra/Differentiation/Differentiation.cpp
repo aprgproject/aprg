@@ -47,7 +47,7 @@ Term Differentiation::differentiate(Term const& term) const {
     return result;
 }
 
-Term Differentiation::differentiate(Constant const& constant) const { return differentiateConstant(constant); }
+Term Differentiation::differentiate(Constant const& constant) { return differentiateConstant(constant); }
 
 Term Differentiation::differentiate(Variable const& variable) const {
     Term result(differentiateVariable(variable));
@@ -95,7 +95,7 @@ Equation Differentiation::differentiateMultipleTimes(Equation const& equation, i
     return currentResult;
 }
 
-AlbaNumber Differentiation::differentiateConstant(Constant const&) const { return 0; }
+AlbaNumber Differentiation::differentiateConstant(Constant const&) { return 0; }
 
 Monomial Differentiation::differentiateVariable(Variable const& variable) const {
     Monomial result;
@@ -334,11 +334,11 @@ Term Differentiation::differentiateChangingTermRaiseToNonChangingTerm(Term const
     return createExpressionIfPossible({base, "^", exponent - 1, "*", exponent, "*", derivativeCauseOfChainRule});
 }
 
-Term Differentiation::differentiateChangingTermRaiseToChangingTerm(Term const&, Term const&) const {
+Term Differentiation::differentiateChangingTermRaiseToChangingTerm(Term const&, Term const&) {
     return ALBA_NUMBER_NOT_A_NUMBER;
 }
 
-Term Differentiation::differentiateFunctionOnly(Function const& functionObject) const {
+Term Differentiation::differentiateFunctionOnly(Function const& functionObject) {
     Term derivativeOfFunction(ALBA_NUMBER_NOT_A_NUMBER);
     Term const& inputTerm(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
     if ("abs" == functionObject.getFunctionName()) {

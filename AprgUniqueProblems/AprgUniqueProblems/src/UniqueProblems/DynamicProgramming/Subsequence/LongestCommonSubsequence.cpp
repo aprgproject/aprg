@@ -76,7 +76,7 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingN
     Index const index1, Index const index2) const {
     if (index1 == 0 || index2 == 0) {
         return 0;
-    } else if (m_sequence1[index1 - 1] == m_sequence2[index2 - 1]) {
+    } if (m_sequence1[index1 - 1] == m_sequence2[index2 - 1]) {
         return 1 + getLongestLengthUsingNaiveRecursion(index1 - 1, index2 - 1);
     } else {
         return max(

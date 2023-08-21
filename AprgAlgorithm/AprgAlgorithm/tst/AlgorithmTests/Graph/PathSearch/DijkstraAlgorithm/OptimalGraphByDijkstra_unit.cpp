@@ -37,7 +37,7 @@ TEST(OptimalGraphByDijkstraTest, GetOptimalDirectedGraph_UndirectedToOptimizedDi
     graph.connect(4, 5, 1.0);
     ShortestPathSearchForTest pathSearch(graph, 1);
 
-    EdgeWeightedDirectedGraphForTest optimalGraph(
+    auto optimalGraph(
         getOptimalDirectedGraph<EdgeWeightedDirectedGraphForTest, ShortestPathSearchForTest>(pathSearch));
 
     EdgesWithWeightForTest expectedEdges{{1, 2, 3.0}, {1, 3, 5.0}, {2, 4, 7.0}, {4, 5, 8.0}};

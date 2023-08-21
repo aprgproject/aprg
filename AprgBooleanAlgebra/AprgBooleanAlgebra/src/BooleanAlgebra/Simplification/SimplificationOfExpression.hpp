@@ -34,15 +34,15 @@ public:
     void simplify();
 
 private:
-    bool isChangeDetected(Expression const& expression1, Expression const& expression2) const;
+    static bool isChangeDetected(Expression const& expression1, Expression const& expression2) ;
 
     void simplifyExpressionUntilNoChange();
     void simplifyExpression(Expression& expression);
 
     void processTermsBaseOnOperatorLevel(
         Expression& expression, WrappedTerms const& termsToProcess, OperatorLevel const operatorLevel);
-    void processAndSaveTermsForAndOperation(Expression& expression, WrappedTerms const& termsToProcess);
-    void processAndSaveTermsForOrOperation(Expression& expression, WrappedTerms const& termsToProcess);
+    static void processAndSaveTermsForAndOperation(Expression& expression, WrappedTerms const& termsToProcess);
+    static void processAndSaveTermsForOrOperation(Expression& expression, WrappedTerms const& termsToProcess);
 
     Expression m_expression;
 };

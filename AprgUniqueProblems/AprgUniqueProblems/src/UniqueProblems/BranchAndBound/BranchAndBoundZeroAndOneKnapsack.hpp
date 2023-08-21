@@ -22,7 +22,7 @@ public:
     Profit getBestProfit(Weight const maximumWeight, Items const& items) const;
 
 private:
-    Profit getMaxPossibleProfit(Node const& currentNode, Weight const maximumWeight, Items const& items) const;
+    static Profit getMaxPossibleProfit(Node const& currentNode, Weight const maximumWeight, Items const& items) ;
 };
 
 }  // namespace alba

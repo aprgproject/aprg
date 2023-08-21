@@ -40,8 +40,8 @@ private:
     bool isPersonIncluded(PeopleBits const peopleBits, Person const person) const;
     Person getNumberOfPeople() const;
     PeopleBits getNumberOfPeopleSubsets() const;
-    PeopleBits getProductBits(Person const person) const;
-    PeopleBits removePerson(PeopleBits const peopleBits, Person const person) const;
+    static PeopleBits getProductBits(Person const person) ;
+    static PeopleBits removePerson(PeopleBits const peopleBits, Person const person) ;
     Weight m_maximumElevatorWeight;
     Weights m_peopleWeights;
     NumberOfRidesAndWeights m_numberOfRidesAndLastWeights;

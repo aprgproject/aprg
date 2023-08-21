@@ -75,14 +75,13 @@ double Line::getAUnitIncreaseInY() const { return -m_aCoefficient; }
 
 Point Line::getAPoint() const {
     if (m_type == LineType::Invalid) {
-        return Point();
-    } else if (m_type == LineType::Vertical) {
+        return {};
+    } if (m_type == LineType::Vertical) {
         return Point(getXIntercept(), 0);
-    } else if (m_type == LineType::Horizontal) {
+    } if (m_type == LineType::Horizontal) {
         return Point(0, getYIntercept());
-    } else {
-        return Point(0, calculateYFromX(0));
-    }
+    }         return Point(0, calculateYFromX(0));
+   
 }
 
 Points Line::getPoints(Point const& first, Point const& second, double const interval) const {
@@ -208,9 +207,9 @@ void Line::getPointsForLineWithSlope(
 
 void Line::mergePointsFromPointsFromXAndY(
     Points& points, Points const& pointsFromXCoordinate, Points const& pointsFromYCoordinate,
-    bool const isDirectionAscendingForX) const {
-    Points::const_iterator iteratorForX = pointsFromXCoordinate.cbegin();
-    Points::const_iterator iteratorForY = pointsFromYCoordinate.cbegin();
+    bool const isDirectionAscendingForX) {
+    auto iteratorForX = pointsFromXCoordinate.cbegin();
+    auto iteratorForY = pointsFromYCoordinate.cbegin();
     while (iteratorForX != pointsFromXCoordinate.cend() || iteratorForY != pointsFromYCoordinate.cend()) {
         if (iteratorForX != pointsFromXCoordinate.cend() && iteratorForY != pointsFromYCoordinate.cend()) {
             if (isDirectionAscendingForX) {
@@ -240,7 +239,7 @@ void Line::mergePointsFromPointsFromXAndY(
     }
 }
 
-LineType Line::determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX) const {
+LineType Line::determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX) {
     bool isNegativeDeltaY = (deltaY < 0);
     bool isNegativeDeltaX = (deltaX < 0);
     LineType lineType(LineType::Invalid);
@@ -258,7 +257,7 @@ LineType Line::determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double
     return lineType;
 }
 
-LineType Line::determineLineTypeUsingCoefficients(double const aCoefficient, double const bCoefficient) const {
+LineType Line::determineLineTypeUsingCoefficients(double const aCoefficient, double const bCoefficient) {
     bool isNegativeA = (aCoefficient < 0);
     bool isNegativeB = (bCoefficient < 0);
     LineType lineType(LineType::Invalid);

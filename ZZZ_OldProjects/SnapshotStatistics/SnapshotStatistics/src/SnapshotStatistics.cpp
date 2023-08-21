@@ -25,7 +25,7 @@ void SnapshotStatistics::addFileSizeForSnapshot(
     m_snapshotNames.emplace(snapshotName);
 }
 
-string SnapshotStatistics::getSnapshotDirectory(string const& snapshotPath) const {
+string SnapshotStatistics::getSnapshotDirectory(string const& snapshotPath) {
     AlbaLocalPathHandler snapshotPathHandler(snapshotPath);
     return snapshotPathHandler.getDirectory() + R"(\)" + snapshotPathHandler.getFilenameOnly();
 }
@@ -150,8 +150,8 @@ void SnapshotStatistics::processMemory(string const& memoryFilePath, string cons
     }
 }
 
-double SnapshotStatistics::convertFileSizeToDouble(string const& fileSizeInString) const {
-    double fileSizeInBytes(stringHelper::convertStringToNumber<double>(fileSizeInString));
+double SnapshotStatistics::convertFileSizeToDouble(string const& fileSizeInString) {
+    auto fileSizeInBytes(stringHelper::convertStringToNumber<double>(fileSizeInString));
     if (stringHelper::isStringFoundCaseSensitive(fileSizeInString, "K")) {
         fileSizeInBytes *= 1000;
     } else if (stringHelper::isStringFoundCaseSensitive(fileSizeInString, "M")) {

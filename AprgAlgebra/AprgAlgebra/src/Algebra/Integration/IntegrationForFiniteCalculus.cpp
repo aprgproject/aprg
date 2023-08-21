@@ -53,7 +53,7 @@ Term IntegrationForFiniteCalculus::integrate(Expression const& expression) const
     return integrateExpression(expression);
 }
 
-Term IntegrationForFiniteCalculus::integrate(Function const& functionObject) const {
+Term IntegrationForFiniteCalculus::integrate(Function const& functionObject) {
     return integrateFunction(functionObject);
 }
 
@@ -163,7 +163,7 @@ Term IntegrationForFiniteCalculus::integrateExpression(Expression const& express
     return integrateAsTermOrExpressionIfNeeded(expression);
 }
 
-Term IntegrationForFiniteCalculus::integrateFunction(Function const&) const { return ALBA_NUMBER_NOT_A_NUMBER; }
+Term IntegrationForFiniteCalculus::integrateFunction(Function const&) { return ALBA_NUMBER_NOT_A_NUMBER; }
 
 Monomial IntegrationForFiniteCalculus::integrateMonomialInFallingPower(Monomial const& monomial) const {
     Monomial result(monomial);
@@ -344,11 +344,11 @@ Term IntegrationForFiniteCalculus::integrateNonChangingTermRaiseToChangingTerm(
     return result;
 }
 
-Term IntegrationForFiniteCalculus::integrateChangingTermRaiseToNonChangingTerm(Term const&, Term const&) const {
+Term IntegrationForFiniteCalculus::integrateChangingTermRaiseToNonChangingTerm(Term const&, Term const&) {
     return ALBA_NUMBER_NOT_A_NUMBER;
 }
 
-Term IntegrationForFiniteCalculus::integrateChangingTermRaiseToChangingTerm(Term const&, Term const&) const {
+Term IntegrationForFiniteCalculus::integrateChangingTermRaiseToChangingTerm(Term const&, Term const&) {
     return ALBA_NUMBER_NOT_A_NUMBER;
 }
 
@@ -372,7 +372,7 @@ void IntegrationForFiniteCalculus::integrateNonChangingAndChangingTermsInMultipl
 }
 
 void IntegrationForFiniteCalculus::integrateChangingTermsInMultiplicationOrDivision(
-    Term& result, TermsWithDetails const&) const {
+    Term& result, TermsWithDetails const&) {
     // no impl
     result = ALBA_NUMBER_NOT_A_NUMBER;
 }

@@ -77,9 +77,8 @@ CountNumberOfBinaryStringsWithoutConsecutiveOnes::getCountUsingNaiveRecursion(
     if (length > 0) {
         if (previousValue) {
             return getCountUsingNaiveRecursion(false, length - 1);
-        } else {
-            return getCountUsingNaiveRecursion(false, length - 1) + getCountUsingNaiveRecursion(true, length - 1);
-        }
+        }             return getCountUsingNaiveRecursion(false, length - 1) + getCountUsingNaiveRecursion(true, length - 1);
+       
     } else {
         return 1;
     }

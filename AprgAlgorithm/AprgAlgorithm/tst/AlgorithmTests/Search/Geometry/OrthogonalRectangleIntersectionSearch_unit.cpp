@@ -10,7 +10,7 @@ namespace algorithm {
 
 namespace {
 using SearchForTest = OrthogonalRectangleIntersectionSearch<double>;
-}
+} // namespace
 
 TEST(OrthogonalRectangleIntersectionSearchTest, GetIntersectingPointsWorksWhen2RectanglesAreInACross) {
     SearchForTest search;

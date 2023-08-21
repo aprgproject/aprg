@@ -24,9 +24,9 @@ public:
     void saveUmlLogsToFile(std::string const& filePath);
 
 private:
-    unsigned int getOptimizedTargetLength(alba::stringHelper::strings const& linesInNote);
+    static unsigned int getOptimizedTargetLength(alba::stringHelper::strings const& linesInNote);
     std::string getUmlLogsForStart() const;
-    std::string getUmlLogsForEnd() const;
+    static std::string getUmlLogsForEnd() ;
     std::stringstream m_umlLogBuffer;
     UmlParticipants m_participants;
 };

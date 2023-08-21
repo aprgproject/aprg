@@ -87,10 +87,11 @@ void runTestCase(int const testCaseNumber) {
 
     my_cout << "Case #" << testCaseNumber << ": ";
     my_cout << best_remove << ' ';
-    if (ans == INF)
+    if (ans == INF) {
         my_cout << "INDEFINITELY" << '\n';
-    else
+    } else {
         my_cout << ans << '\n';
+}
 }
 
 void runAllTestCases() {

@@ -314,7 +314,7 @@ bool hasNonRealFiniteNumbers(Function const& function) {
 }
 
 bool hasZero(Terms const& terms) {
-    Terms::const_iterator it =
+    auto it =
         find_if(terms.cbegin(), terms.cend(), [](Term const& term) { return isTheValue(term, 0); });
     return it != terms.cend();
 }

@@ -47,7 +47,7 @@ bool SolverUsingSubstitution::isTheValueAlreadyExisting(string const& variableNa
 }
 
 bool SolverUsingSubstitution::isSolutionCorrect(
-    MultipleVariableSolutionSet const& solutionSet, Equations const& equations) const {
+    MultipleVariableSolutionSet const& solutionSet, Equations const& equations) {
     bool result(true);
     SubstitutionOfVariablesToValues substitution(getSubstitutionFromSolutionSet(solutionSet));
     for (Equation const& equation : equations) {
@@ -63,7 +63,7 @@ bool SolverUsingSubstitution::isSolutionCorrect(
 }
 
 SubstitutionOfVariablesToValues SolverUsingSubstitution::getSubstitutionFromSolutionSet(
-    MultipleVariableSolutionSet const& solutionSet) const {
+    MultipleVariableSolutionSet const& solutionSet) {
     MultipleVariableSolutionSet::VariableNameToSolutionSetMap const& variableNameToSolutionSetMap(
         solutionSet.getVariableNameToSolutionSetMap());
     SubstitutionOfVariablesToValues substitution;

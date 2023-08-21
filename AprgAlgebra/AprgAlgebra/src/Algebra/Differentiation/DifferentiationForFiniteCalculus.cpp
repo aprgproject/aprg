@@ -13,7 +13,7 @@ DifferentiationForFiniteCalculus::DifferentiationForFiniteCalculus(string const&
 
 Term DifferentiationForFiniteCalculus::differentiate(Term const& term) const { return differentiateTerm(term); }
 
-Term DifferentiationForFiniteCalculus::differentiate(Constant const& constant) const {
+Term DifferentiationForFiniteCalculus::differentiate(Constant const& constant) {
     return Term(differentiateConstant(constant));
 }
 
@@ -82,7 +82,7 @@ Term DifferentiationForFiniteCalculus::differentiateTerm(Term const& term) const
     return result;
 }
 
-AlbaNumber DifferentiationForFiniteCalculus::differentiateConstant(Constant const&) const { return 0; }
+AlbaNumber DifferentiationForFiniteCalculus::differentiateConstant(Constant const&) { return 0; }
 
 Polynomial DifferentiationForFiniteCalculus::differentiateVariable(Variable const& variable) const {
     Polynomial result(createPolynomialFromNumber(0));

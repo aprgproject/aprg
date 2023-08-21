@@ -12,7 +12,7 @@ namespace algorithm {
 
 namespace {
 using SymbolTableForTest = OrderedArraySymbolTable<int, char>;
-}
+} // namespace
 
 TEST(OrderedArraySymbolTableTest, IsEmptyWorksWhenEmpty) {
     testIsEmptyWhenEmptyWithUnsignedIntAndChar<SymbolTableForTest>();

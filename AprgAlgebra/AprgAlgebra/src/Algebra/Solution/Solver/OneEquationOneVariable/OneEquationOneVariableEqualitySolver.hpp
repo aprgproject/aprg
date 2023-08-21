@@ -19,9 +19,9 @@ private:
     void calculateForTermAndVariable(Term const& term, std::string const& variableName);
     void addValuesToSolutionSetIfNeeded(SolutionSet& solutionSet, Term const& term, std::string const& variableName);
     void performNewtonMethodToFindSolution(Term const& termToCheck, std::string const& variableNameForSubstitution);
-    NewtonMethod::Function getFunctionToIterate(
+    static NewtonMethod::Function getFunctionToIterate(
         Term const& termToCheck, std::string const& variableNameForSubstitution);
-    AlbaNumber getMoreAccurateValueFromNewtonMethod(
+    static AlbaNumber getMoreAccurateValueFromNewtonMethod(
         Term const& termToCheck, std::string const& variableNameForSubstitution, AlbaNumber const& value);
 };
 

@@ -166,7 +166,7 @@ void Polynomial::setAsSimplified() { m_isSimplified = true; }
 void Polynomial::clearSimplifiedFlag() { m_isSimplified = false; }
 
 bool Polynomial::isFurtherSimplificationNeeded(
-    Polynomial const& beforeSimplify, Polynomial const& afterSimplify) const {
+    Polynomial const& beforeSimplify, Polynomial const& afterSimplify) {
     return beforeSimplify != afterSimplify && !hasNan(afterSimplify);
 }
 

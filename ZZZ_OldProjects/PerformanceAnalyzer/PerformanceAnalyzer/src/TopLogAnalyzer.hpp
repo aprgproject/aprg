@@ -50,22 +50,22 @@ private:
     void readTopLogsAndSaveToDatabase(std::string const& pathOfTopLog);
     void generateCpuReport(std::string const& pathOfTopLog);
     stringHelper::strings getProcessNamesForCpuReport();
-    void putHeadersInCpuReport(
-        stringHelper::strings const& processNamesInReport, std::ofstream& cpuReportFileStream) const;
+    static void putHeadersInCpuReport(
+        stringHelper::strings const& processNamesInReport, std::ofstream& cpuReportFileStream) ;
     void putEntriesInCpuReport(
         stringHelper::strings const& processNamesInReport, std::ofstream& cpuReportFileStream) const;
     void generateMemReport(std::string const& pathOfTopLog);
     stringHelper::strings getProcessNamesForMemReport();
-    void putHeadersInMemReport(
-        stringHelper::strings const& processNamesInReport, std::ofstream& cpuReportFileStream) const;
+    static void putHeadersInMemReport(
+        stringHelper::strings const& processNamesInReport, std::ofstream& cpuReportFileStream) ;
     void putEntriesInMemReport(
         stringHelper::strings const& processNamesInReport, std::ofstream& cpuReportFileStream) const;
-    bool isTopCommandFirstLine(std::string const& lineInLogs) const;
-    bool isTopCommandHeaderLine(std::string const& lineInLogs) const;
+    static bool isTopCommandFirstLine(std::string const& lineInLogs) ;
+    static bool isTopCommandHeaderLine(std::string const& lineInLogs) ;
     void saveAndClearCurrentEntry(DataEntry& currentEntry);
-    void saveTimeFromTop(std::string const& lineInLogs, DataEntry& currentEntry) const;
+    static void saveTimeFromTop(std::string const& lineInLogs, DataEntry& currentEntry) ;
     void saveDataFromHeaders(std::string const& lineInLogs);
-    void saveOverallCpuData(std::string const& lineInLogs, DataEntry& currentEntry) const;
+    static void saveOverallCpuData(std::string const& lineInLogs, DataEntry& currentEntry) ;
     void saveCpuAndMem(std::string const& lineInLogs, DataEntry& currentEntry);
     TopLogAnalyzerState m_state;
     ColumnHeaders m_columnHeaders;

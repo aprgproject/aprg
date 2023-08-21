@@ -223,11 +223,11 @@ char AlbaGrepStringEvaluator::convertTildeToExclamationPointIfNeeded(char const 
     return ('~' == character) ? '!' : character;
 }
 
-bool AlbaGrepStringEvaluator::isOperator(char const character) const {
+bool AlbaGrepStringEvaluator::isOperator(char const character) {
     return '!' == character || '~' == character || '&' == character || '|' == character || '^' == character;
 }
 
-bool AlbaGrepStringEvaluator::isParenthesis(char const character) const { return '(' == character || ')' == character; }
+bool AlbaGrepStringEvaluator::isParenthesis(char const character) { return '(' == character || ')' == character; }
 
 void AlbaGrepStringEvaluator::setErrorMessage(string const& errorMessage) {
     m_isEvaluatorInvalid = true;

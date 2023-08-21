@@ -147,13 +147,13 @@ string ReplaceStringInFiles::getCPlusPlusStylePrintFromC(string const& inputStri
     return result;
 }
 
-void ReplaceStringInFiles::removeStartingAndTrailingWhiteSpaceInPrintParameters(strings& printParameters) const {
+void ReplaceStringInFiles::removeStartingAndTrailingWhiteSpaceInPrintParameters(strings& printParameters) {
     for (string& printParameter : printParameters) {
         printParameter = getStringWithoutStartingAndTrailingWhiteSpace(printParameter);
     }
 }
 
-string ReplaceStringInFiles::getNewPrintStreamBasedFromOldPrintFunction(string const& printFunction) const {
+string ReplaceStringInFiles::getNewPrintStreamBasedFromOldPrintFunction(string const& printFunction) {
     string newPrintStream;
     if ("TLH_DEBUG_PRINT" == printFunction) {
         newPrintStream = "debug()";
@@ -196,7 +196,7 @@ string ReplaceStringInFiles::constructCPlusPlusPrint(
     return result;
 }
 
-void ReplaceStringInFiles::appendCharacterToResult(string& result, bool& isOnStringLiteral, char const c) const {
+void ReplaceStringInFiles::appendCharacterToResult(string& result, bool& isOnStringLiteral, char const c) {
     if (isOnStringLiteral) {
         result += c;
     } else {
@@ -207,7 +207,7 @@ void ReplaceStringInFiles::appendCharacterToResult(string& result, bool& isOnStr
 }
 
 void ReplaceStringInFiles::appendParameterToResult(
-    string& result, bool& isOnStringLiteral, string const& parameter) const {
+    string& result, bool& isOnStringLiteral, string const& parameter) {
     if (isOnStringLiteral) {
         result += R"(" << )";
         result += parameter;

@@ -14,11 +14,11 @@ namespace codeReview {
 bool TermAnalyzer::isModifiedDueToFunctions(Looper const& startLooper) {
     DBGPRINT1("isModifiedDueToFunctions");
     bool isModified = true;
-    if (isModifiedDueToFunctionDeclaration(startLooper))
+    if (isModifiedDueToFunctionDeclaration(startLooper)) {
         ;
-    else if (isModifiedDueToFunctionDefinition(startLooper))
+    } else if (isModifiedDueToFunctionDefinition(startLooper)) {
         ;
-    else {
+    } else {
         isModified = false;
     }
     return isModified;

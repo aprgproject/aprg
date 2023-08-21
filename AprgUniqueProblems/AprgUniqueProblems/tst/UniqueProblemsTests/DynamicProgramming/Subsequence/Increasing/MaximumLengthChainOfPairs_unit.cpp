@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using Values = MaximumLengthChainOfPairs::Pairs;
-}
+} // namespace
 
 TEST(MaximumLengthChainOfPairsTest, GetLongestLengthWorksOnExample1) {
     MaximumLengthChainOfPairs queryForTest({{5, 24}, {39, 60}, {15, 28}, {27, 40}, {50, 90}});

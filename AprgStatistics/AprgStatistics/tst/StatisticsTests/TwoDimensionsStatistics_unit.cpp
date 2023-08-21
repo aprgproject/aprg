@@ -184,7 +184,7 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
         TwoDimensionsStatistics::getSquareErrorToSampleMultimap(samples, lineModel));
 
     ASSERT_EQ(5U, squareErrorToSampleMultimap.size());
-    LocalValueToSampleMultimap::iterator it = squareErrorToSampleMultimap.begin();
+    auto it = squareErrorToSampleMultimap.begin();
     EXPECT_EQ((LocalSample{5, 3}), it++->second);
     EXPECT_EQ((LocalSample{5, 3}), it++->second);
     EXPECT_EQ((LocalSample{5, 3}), it++->second);
@@ -205,7 +205,7 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
         TwoDimensionsStatistics::getSquareErrorToSampleMultimap(samples, lineModel));
 
     ASSERT_EQ(6U, squareErrorToSampleMultimap.size());
-    LocalValueToSampleMultimap::iterator it = squareErrorToSampleMultimap.begin();
+    auto it = squareErrorToSampleMultimap.begin();
     EXPECT_EQ((LocalSample{5, 0}), it++->second);
     EXPECT_EQ((LocalSample{5, 1}), it++->second);
     EXPECT_EQ((LocalSample{5, 2}), it++->second);
@@ -227,7 +227,7 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
         TwoDimensionsStatistics::getSquareErrorToSampleMultimap(samples, lineModel));
 
     ASSERT_EQ(6U, squareErrorToSampleMultimap.size());
-    LocalValueToSampleMultimap::iterator it = squareErrorToSampleMultimap.begin();
+    auto it = squareErrorToSampleMultimap.begin();
     EXPECT_EQ((LocalSample{0, 5}), it++->second);
     EXPECT_EQ((LocalSample{1, 5}), it++->second);
     EXPECT_EQ((LocalSample{2, 5}), it++->second);
@@ -259,7 +259,7 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
         TwoDimensionsStatistics::getSquareErrorToSampleMultimap(samples, lineModel));
 
     ASSERT_EQ(15U, squareErrorToSampleMultimap.size());
-    LocalValueToSampleMultimap::iterator it = squareErrorToSampleMultimap.begin();
+    auto it = squareErrorToSampleMultimap.begin();
     EXPECT_EQ((LocalSample{1.75, 68.10}), it++->second);
     EXPECT_EQ((LocalSample{1.57, 57.20}), it++->second);
     EXPECT_EQ((LocalSample{1.55, 55.84}), it++->second);

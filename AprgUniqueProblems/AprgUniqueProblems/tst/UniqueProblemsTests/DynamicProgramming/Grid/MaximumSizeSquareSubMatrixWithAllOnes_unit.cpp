@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using BooleanMatrix = MaximumSizeSquareSubMatrixWithAllOnes::BooleanMatrix;
-}
+} // namespace
 
 TEST(MaximumSizeSquareSubMatrixWithAllOnesTest, GetMinimumPriceWorksOnExample1) {
     BooleanMatrix booleanMatrix(

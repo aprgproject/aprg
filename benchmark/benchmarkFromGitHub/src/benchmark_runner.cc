@@ -192,7 +192,8 @@ BenchmarkRunner::IterationResults BenchmarkRunner::DoNIterations() {
 
   // The main thread has finished. Now let's wait for the other threads.
   manager->WaitForAllThreads();
-  for (std::thread& thread : pool) thread.join();
+  for (std::thread& thread : pool) { thread.join();
+}
 
   IterationResults i;
   // Acquire the measurements/counters from the manager, UNDER THE LOCK!
@@ -208,7 +209,8 @@ BenchmarkRunner::IterationResults BenchmarkRunner::DoNIterations() {
   i.results.real_time_used /= b.threads();
   i.results.manual_time_used /= b.threads();
   // If we were measuring whole-process CPU usage, adjust the CPU time too.
-  if (b.measure_process_cpu_time()) i.results.cpu_time_used /= b.threads();
+  if (b.measure_process_cpu_time()) { i.results.cpu_time_used /= b.threads();
+}
 
   BM_VLOG(2) << "Ran in " << i.results.cpu_time_used << "/"
              << i.results.real_time_used << "\n";
@@ -290,7 +292,8 @@ void BenchmarkRunner::DoOneRepetition() {
                                          has_explicit_iteration_count ||
                                          ShouldReportIterationResults(i);
 
-    if (results_are_significant) break;  // Good, let's report them!
+    if (results_are_significant) { break;  // Good, let's report them!
+}
 
     // Nope, bad iteration. Let's re-estimate the hopefully-sufficient
     // iteration count, and run the benchmark again...
@@ -326,7 +329,8 @@ void BenchmarkRunner::DoOneRepetition() {
 
   if (reports_for_family) {
     ++reports_for_family->num_runs_done;
-    if (!report.error_occurred) reports_for_family->Runs.push_back(report);
+    if (!report.error_occurred) { reports_for_family->Runs.push_back(report);
+}
   }
 
   run_results.non_aggregates.push_back(report);

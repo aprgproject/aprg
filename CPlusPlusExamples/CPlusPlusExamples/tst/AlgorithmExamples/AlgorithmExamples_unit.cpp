@@ -57,10 +57,10 @@ TEST(AlgorithmExamplesTest, SlideWorksByUsingRotate) {
     using Iterator = decltype(input)::iterator;
     pair<Iterator, Iterator> destinationPair;
     if (destination < slideStart) {
-        Iterator it = rotate(begin(output) + destination + 1, begin(output) + slideStart, begin(output) + slideEnd + 1);
+        auto it = rotate(begin(output) + destination + 1, begin(output) + slideStart, begin(output) + slideEnd + 1);
         destinationPair = {begin(output) + destination + 1, prev(it)};
     } else if (slideEnd < destination) {
-        Iterator it = rotate(begin(output) + slideStart, begin(output) + slideEnd + 1, begin(output) + destination + 1);
+        auto it = rotate(begin(output) + slideStart, begin(output) + slideEnd + 1, begin(output) + destination + 1);
         destinationPair = {it, begin(output) + destination};
     } else {
         destinationPair = {begin(output) + slideStart, begin(output) + slideEnd};
@@ -101,9 +101,9 @@ TEST(AlgorithmExamplesTest, GatherToACenterWorksByUsingStablePartition) {
     auto output = input;
     using Iterator = decltype(input)::iterator;
     pair<Iterator, Iterator> destinationPair;
-    Iterator itRight = stable_partition(
+    auto itRight = stable_partition(
         begin(output) + center, end(output), [](auto value) { return mathHelper::isDivisible(value, 3); });
-    Iterator itLeft = stable_partition(
+    auto itLeft = stable_partition(
         begin(output), begin(output) + center, [](auto value) { return !(mathHelper::isDivisible(value, 3)); });
     destinationPair = {itLeft, prev(itRight)};
 

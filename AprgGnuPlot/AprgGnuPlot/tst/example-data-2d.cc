@@ -107,7 +107,7 @@ MyTriple<double> get_point(int u, int v) {
 	double r = 1 + 0.3*std::sin(a);
 	double x = r * std::cos(b);
 	double y = r * std::sin(b);
-	return MyTriple<double>(x, y, z);
+	return {x, y, z};
 }
 
 TEST(GnuplotIostreamTest, DISABLED_ExampleData2d)
@@ -256,9 +256,11 @@ TEST(GnuplotIostreamTest, DISABLED_ExampleData2d)
 
 	{
 		std::vector<std::vector<std::vector<double> > > pts(3);
-		for(int i=0; i<3; i++) pts[i].resize(num_u);
+		for(int i=0; i<3; i++) { pts[i].resize(num_u);
+}
 		for(int u=0; u<num_u; u++) {
-			for(int i=0; i<3; i++) pts[i][u].resize(num_v_each);
+			for(int i=0; i<3; i++) { pts[i][u].resize(num_v_each);
+}
 			for(int v=0; v<num_v_each; v++) {
 				pts[0][u][v] = get_point(u, v+shift).x;
 				pts[1][u][v] = get_point(u, v+shift).y;

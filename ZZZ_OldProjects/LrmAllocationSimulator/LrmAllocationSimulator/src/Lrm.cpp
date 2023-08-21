@@ -725,7 +725,7 @@ numberOfDspToAllocate, lcgId); bool shouldConsiderPic = isSharedLcgId && current
 }
 */
 
-unsigned int Lrm::getPriorityBasedOnLessUsersAndHsupaCfsForDsp(Dsp const& dsp) const {
+unsigned int Lrm::getPriorityBasedOnLessUsersAndHsupaCfsForDsp(Dsp const& dsp) {
     bool noUsersInDsp = dsp.getNumberOfDchUsers() == 0;
     bool noHsupaCfsInDsp = dsp.getNumberOfHsupaCfs() == 0;
     unsigned int priority = 0;
@@ -1071,13 +1071,13 @@ void Lrm::sortDspAddressesBasedOnCondition(
         });
 }
 
-void Lrm::setSelectionDspResult(SelectionDspResult& selectionDspResultReference, unsigned int const fspAddress) const {
+void Lrm::setSelectionDspResult(SelectionDspResult& selectionDspResultReference, unsigned int const fspAddress) {
     selectionDspResultReference.isSelectionSuccessful = true;
     selectionDspResultReference.address = fspAddress;
 }
 
 void Lrm::incrementNAndTnCountBasedOnNyquistType(
-    NyquistAndTurboNyquistCount& countReference, NyquistType const nyquistType) const {
+    NyquistAndTurboNyquistCount& countReference, NyquistType const nyquistType) {
     if (nyquistType == NyquistType::Nyquist) {
         countReference.numberOfNyquists++;
     } else {
@@ -1287,7 +1287,7 @@ void Lrm::removeFspPairsForCcdNbicMcdSelection(FspPairsDetails& fspPairsDetails,
 }
 
 void Lrm::sortFspPairsBasedOnCondition(
-    FspPairsDetails& fspPairsDetails, FspPairDetailsComparisonCondition const& condition) const {
+    FspPairsDetails& fspPairsDetails, FspPairDetailsComparisonCondition const& condition) {
     stable_sort(
         fspPairsDetails.begin(), fspPairsDetails.end(),
         [&](FspPairDetails const& fspPairDetails1, FspPairDetails const& fspPairDetails2) {
@@ -1296,7 +1296,7 @@ void Lrm::sortFspPairsBasedOnCondition(
 }
 
 void Lrm::removeFspPairsBasedOnCondition(
-    FspPairsDetails& fspPairsDetails, FspPairDetailsCondition const& condition) const {
+    FspPairsDetails& fspPairsDetails, FspPairDetailsCondition const& condition) {
     fspPairsDetails.erase(
         remove_if(
             fspPairsDetails.begin(), fspPairsDetails.end(),
@@ -1369,7 +1369,7 @@ bool Lrm::isSharedLcg(unsigned int const lcgId) const {
     return lcgId == m_hardwareConfigurationReference.getSharedLcgId();
 }
 
-unsigned int Lrm::getConflictingDliPoolForThisDli(unsigned int const dliPool) const {
+unsigned int Lrm::getConflictingDliPoolForThisDli(unsigned int const dliPool) {
     unsigned int conflictPool(0);
     if (dliPool == 1) {
         conflictPool = 4;
@@ -1383,7 +1383,7 @@ unsigned int Lrm::getConflictingDliPoolForThisDli(unsigned int const dliPool) co
     return conflictPool;
 }
 
-unsigned int Lrm::getLeastConflictingDliPoolForThisDli(unsigned int const dliPool) const {
+unsigned int Lrm::getLeastConflictingDliPoolForThisDli(unsigned int const dliPool) {
     unsigned int leastConflictPool(0);
     if (dliPool == 1) {
         leastConflictPool = 3;

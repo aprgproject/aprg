@@ -482,7 +482,7 @@ Point getPointAlongALineWithDistanceFromAPoint(
 
 template <ParabolaOrientation parabolaOrientation>
 Points getIntersectionsOfParabolaAndLine(Parabola<parabolaOrientation> const&, Line const&) {
-    return Points();
+    return {};
 }
 
 template <>
@@ -517,8 +517,8 @@ Point popNearestPoint(Points& points, Point const& point) {
     Point result;
     if (!points.empty()) {
         double nearestDistance = getDistance(points.front(), point);
-        Points::iterator nearestPointIterator = points.begin();
-        for (Points::iterator it = points.begin() + 1; it != points.end(); ++it) {
+        auto nearestPointIterator = points.begin();
+        for (auto it = points.begin() + 1; it != points.end(); ++it) {
             double currentDistance(getDistance(*it, point));
             if (nearestDistance > currentDistance) {
                 nearestDistance = currentDistance;
@@ -579,8 +579,8 @@ Points getMergedPointsInIncreasingX(Points const& firstPointsToBeMerged, Points 
     Points result;
     Points firstPoints(getPointsInSortedIncreasingX(firstPointsToBeMerged));
     Points secondPoints(getPointsInSortedIncreasingX(secondPointsToBeMerged));
-    Points::const_iterator iteratorForX = firstPoints.cbegin();
-    Points::const_iterator iteratorForY = secondPoints.cbegin();
+    auto iteratorForX = firstPoints.cbegin();
+    auto iteratorForY = secondPoints.cbegin();
     while (iteratorForX != firstPoints.cend() || iteratorForY != secondPoints.cend()) {
         if (iteratorForX != firstPoints.cend() && iteratorForY != secondPoints.cend()) {
             if (isAlmostEqual(iteratorForX->getX(), iteratorForY->getX())) {
@@ -604,8 +604,8 @@ Points getMergedPointsInDecreasingX(Points const& firstPointsToBeMerged, Points 
     Points result;
     Points firstPoints(getPointsInSortedDecreasingX(firstPointsToBeMerged));
     Points secondPoints(getPointsInSortedDecreasingX(secondPointsToBeMerged));
-    Points::const_iterator iteratorForX = firstPoints.cbegin();
-    Points::const_iterator iteratorForY = secondPoints.cbegin();
+    auto iteratorForX = firstPoints.cbegin();
+    auto iteratorForY = secondPoints.cbegin();
     while (iteratorForX != firstPoints.cend() || iteratorForY != secondPoints.cend()) {
         if (iteratorForX != firstPoints.cend() && iteratorForY != secondPoints.cend()) {
             if (isAlmostEqual(iteratorForX->getX(), iteratorForY->getX())) {
@@ -719,8 +719,9 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
         for (; index < auxiliarySize - 1 &&
                RotationDirection::Collinear ==
                    getRotationDirectionTraversing3Points(firstPoint, auxiliary[index], auxiliary[index + 1]);
-             ++index)
+             ++index) {
             ;
+}
         auxiliary[newIndex++] = auxiliary[index];
     }
     auxiliary.resize(newIndex);

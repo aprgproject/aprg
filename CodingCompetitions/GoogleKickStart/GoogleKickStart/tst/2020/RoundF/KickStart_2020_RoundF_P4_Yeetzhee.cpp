@@ -34,10 +34,12 @@ vector<int> need;
 int n, m;
 
 bool in(vector<int> a) {
-    if (a.size() > need.size()) return false;
+    if (a.size() > need.size()) { return false;
+}
     int ptr = (int)need.size() - (int)a.size();
     for (int i = 0; i < (int)a.size(); i++) {
-        if (ptr == (int)need.size()) return true;
+        if (ptr == (int)need.size()) { return true;
+}
         if (a[i] <= need[ptr]) {
             ptr++;
         }
@@ -53,11 +55,11 @@ double ans(vector<int> a, int tot) {
     if (!in(a)) {
         return 1e18;
     }
-    if (mp.count(a)) return mp[a];
+    if (mp.count(a)) { return mp[a];
+}
     if (tot == n) {
         return 0;
-    } else {
-        vector<pair<int, double> > go;
+    }         vector<pair<int, double> > go;
         for (int i = 0; i < (int)a.size(); i++) {
             a[i]++;
             double ret = ans(a, tot + 1);
@@ -88,7 +90,7 @@ double ans(vector<int> a, int tot) {
                 vl = vm;
         }
         return mp[a] = vr;
-    }
+   
 }
 
 void runTestCase(int const testCaseNumber) {
@@ -98,7 +100,8 @@ void runTestCase(int const testCaseNumber) {
     int k;
     my_cin >> k;
     need.resize(k);
-    for (int i = 0; i < k; i++) my_cin >> need[i];
+    for (int i = 0; i < k; i++) { my_cin >> need[i];
+}
     sort(need.begin(), need.end());
     vector<int> go;
     my_cout.precision(10);

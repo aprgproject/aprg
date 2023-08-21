@@ -124,7 +124,7 @@ void Bitmap::calculateNewCornersBasedOnCenterAndNumberOfBytes(
     bottomRightCorner.setY(bottom);
 }
 
-void Bitmap::adjustToTargetLength(int& low, int& high, int const targetLength, int const maxLength) const {
+void Bitmap::adjustToTargetLength(int& low, int& high, int const targetLength, int const maxLength) {
     if (high - low + 1 < (int)targetLength) {
         int additionalSizeInX = targetLength - (high - low + 1);
         if ((low - additionalSizeInX) >= 0) {

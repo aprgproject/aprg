@@ -163,7 +163,7 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
 }
 
 inline BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::convertBoolToCount(
-    bool const booleanValue) const {
+    bool const booleanValue) {
     return booleanValue ? 1 : 0;
 }
 

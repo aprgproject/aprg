@@ -26,7 +26,7 @@ uint32_t getLabelColor(int const label) {
 
 int LabelForPoints::getLabel(BitmapXY const& point) const {
     int label(INITIAL_LABEL_VALUE);
-    PixelsToLabelsMap::const_iterator it = m_pixelsTolabelsMap.find(point);
+    auto it = m_pixelsTolabelsMap.find(point);
     if (it != m_pixelsTolabelsMap.cend()) {
         label = it->second;
     }

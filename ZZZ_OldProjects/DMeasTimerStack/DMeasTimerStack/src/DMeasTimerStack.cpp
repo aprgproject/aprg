@@ -34,7 +34,7 @@ TimerStack::TimerIndex TimerStack::ARRAY_timers_insert(TimeCounter timerValue, T
     TimerData timerDataToBeSaved = timerData;
     timerDataToBeSaved.timerValue = timerValue;
     TimerIndex timerIndex = 0;
-    TimerTableConstIterator notConsecutiveTimerIndexIterator = adjacent_find(
+    auto notConsecutiveTimerIndexIterator = adjacent_find(
         m_timers.begin(), m_timers.end(),
         [](TimerTablePair const& timerDataPair1, TimerTablePair const& timerDataPair2) {
             return timerDataPair1.first + 1 != timerDataPair2.first;
@@ -50,7 +50,7 @@ TimerStack::TimerIndex TimerStack::ARRAY_timers_insert(TimeCounter timerValue, T
 
 TimerStack::TimerIndex TimerStack::ARRAY_timers_find(TimeCounter timeToSearch) {
     TimerIndex timerIndex = 0;
-    TimerTableConstIterator iteratorWithSameTimerValue =
+    auto iteratorWithSameTimerValue =
         find_if(m_timers.begin(), m_timers.end(), [&timeToSearch](TimerTablePair const& timerDataPair) {
             return timerDataPair.second.timerValue == timeToSearch;
         });
@@ -73,7 +73,7 @@ TimerStack::TimerIndex TimerStack::ARRAY_timers_begin(void) {
 inline TimerStack::TimerIndex TimerStack::ARRAY_timers_end(void) {
     TimerIndex timerIndex = TIMER_INVALID_ITERATOR;
     if (!m_timers.empty()) {
-        TimerTableConstIterator endIterator = m_timers.end();
+        auto endIterator = m_timers.end();
         endIterator--;
         timerIndex = (endIterator->first) + 1;
     }
@@ -337,9 +337,8 @@ void TimerStack::initIterator(TimerIndex& timerIndex) { timerIndex = ARRAY_timer
 EBoolean TimerStack::isValidIterator(TimerIndex const& timerIndex) {
     if (m_timers.find(timerIndex) != m_timers.cend()) {
         return EBoolean_True;
-    } else {
-        return EBoolean_False;
-    }
+    }         return EBoolean_False;
+   
 }
 
 EBoolean TimerStack::insertMeasurement(
@@ -410,10 +409,9 @@ EBoolean TimerStack::insert(TimeCounter timerValue, TimerData const& timerData, 
     if (ARRAY_timers_end() != timerIndex) {
         MTPRINTF("DMEAS: TimerStack: insert - ready ok ( timerValue = %u )\n", ARRAY_timers_first(timerIndex));
         return EBoolean_True;
-    } else {
-        DM_WRN_HIGH("Failed to insert timer with value %u", timerValue);
+    }         DM_WRN_HIGH("Failed to insert timer with value %u", timerValue);
         return EBoolean_False;
-    }
+   
 }
 
 EBoolean TimerStack::renewMeasurement(TimerIndex& timerIndex, TimeCounter const timeAdvance) {
@@ -433,12 +431,11 @@ EBoolean TimerStack::renewMeasurement(TimerIndex& timerIndex, TimeCounter const 
                 timerData.value.measurement.measurementId, timeAdvance, timerData.value.measurement.userId);
 
             return insert(timeCounter + timeAdvance, timerData, timerIndex);
-        } else {
-            DM_ERR_HIGH(
+        }             DM_ERR_HIGH(
                 "RenewMeasurement[%u] counter: %u, advance: %u, unable to remove timer iter: %u for nbccId: %u",
                 timerData.value.measurement.measurementId, timeCounter, timeAdvance, timerIndex,
                 timerData.value.measurement.userId);
-        }
+       
     } else {
         DM_WRN_HIGH("RenewMeasurement timeCounter: %u, timeAdvance: %u Invalid Iterator", timeCounter, timeAdvance);
     }
@@ -588,7 +585,7 @@ void TimerStack::dump(TimerIndex begin, TimerIndex end) {
             }
 
             MTPRINTF(
-                "TimersTable[%02d]:    %-4U | %s | MId: %d / nbccId: %u\n", timerIndex, timerData->timerValue,
+                "TimersTable[%02d]:    %-4U | %u | MId: %s / nbccId: %u\n", timerIndex, timerData->timerValue,
                 timerTypeStr.c_str(), timerData->value.measurement.measurementId, timerData->value.measurement.userId);
         }
 

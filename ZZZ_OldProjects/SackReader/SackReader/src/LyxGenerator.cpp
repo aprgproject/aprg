@@ -38,7 +38,7 @@ void LyxGenerator::generateLyxDocument(string const& ifsTemplatePath, string con
     }
 }
 
-void LyxGenerator::saveSubsection(string const& subsectionName, ofstream& lyxOutputFileStream) const {
+void LyxGenerator::saveSubsection(string const& subsectionName, ofstream& lyxOutputFileStream) {
     ifstream subsectionStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\Subsection.txt)");
     AlbaFileReader subsectionReader(subsectionStream);
 
@@ -356,7 +356,7 @@ void LyxGenerator::saveTypedefTable(TypedefDetails const& typedefDetails, ofstre
     }
 }
 
-void LyxGenerator::saveDisplayTable(DisplayTable const& displayTable, ofstream& displayTableStream) const {
+void LyxGenerator::saveDisplayTable(DisplayTable const& displayTable, ofstream& displayTableStream) {
     ifstream tableTemplateStream(R"(C:\APRG\SackReader\SackReader\LyxTemplates\Table.txt)");
     AlbaFileReader tableTemplateReader(tableTemplateStream);
     while (tableTemplateReader.isNotFinished()) {

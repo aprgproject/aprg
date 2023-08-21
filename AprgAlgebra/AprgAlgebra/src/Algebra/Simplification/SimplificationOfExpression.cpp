@@ -94,7 +94,7 @@ void SimplificationOfExpression::simplify() {
     simplifyExpressionUntilNoChange();
 }
 
-bool SimplificationOfExpression::isChangeDetected(Expression const& expression1, Expression const& expression2) const {
+bool SimplificationOfExpression::isChangeDetected(Expression const& expression1, Expression const& expression2) {
     return expression1 != expression2 && !hasNan(expression2);
 }
 
@@ -141,8 +141,9 @@ void SimplificationOfExpression::simplifyBySubstitutingExpressionAndFunctionsToV
         SimplificationOfExpression::ScopeObject scopeObject;
         scopeObject.setInThisScopeThisConfiguration(substitutionSimplificationConfigurationDetails);
 
-        while (tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(m_expression))
+        while (tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(m_expression)) {
             ;
+}
     }
 }
 
@@ -207,14 +208,14 @@ void SimplificationOfExpression::processAndSaveTermsForRaiseToPower(
 }
 
 void SimplificationOfExpression::addOrSubtractTermsWithExpressions(
-    Term& combinedTerm, TermsWithDetails const& termsWithExpressions) const {
+    Term& combinedTerm, TermsWithDetails const& termsWithExpressions) {
     AdditionAndSubtractionOfExpressions additionAndSubtraction(termsWithExpressions);
     additionAndSubtraction.combineExpressionsIfPossible();
     accumulateTermsForAdditionAndSubtraction(combinedTerm, additionAndSubtraction.getAsTermsWithDetails());
 }
 
 void SimplificationOfExpression::simplifyByCombiningRadicalsInMultiplicationAndDivisionIfNeeded(
-    TermsWithDetails& termsInMultiplicationAndDivision) const {
+    TermsWithDetails& termsInMultiplicationAndDivision) {
     if (shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision()) {
         MultiplicationAndDivisionOfRadicals multiplicationAndDivisionOfRadicals(termsInMultiplicationAndDivision);
         multiplicationAndDivisionOfRadicals.simplify();
@@ -223,7 +224,7 @@ void SimplificationOfExpression::simplifyByCombiningRadicalsInMultiplicationAndD
 }
 
 Term SimplificationOfExpression::getCombinedTermAndSimplifyByRationalizingNumeratorOrDenominatorIfNeeded(
-    TermsOverTerms const& termsOverTerms) const {
+    TermsOverTerms const& termsOverTerms) {
     Term combinedTerm;
     if (shouldSimplifyByRationalizingNumerator()) {
         RationalizeTermOverTerm rationalizeTermOverTerm(
@@ -276,12 +277,12 @@ Term SimplificationOfExpression::getEachBasesRaisedToConstantIfPossible(TermRais
     return result;
 }
 
-bool SimplificationOfExpression::shouldDistributeExponentConstantToEachBase() const {
+bool SimplificationOfExpression::shouldDistributeExponentConstantToEachBase() {
     return !shouldNotSimplifyByDistributingConstantExponentToEachBase() &&
            !shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision();
 }
 
-Factorization::ConfigurationDetails SimplificationOfExpression::getFactorizationConfiguration() const {
+Factorization::ConfigurationDetails SimplificationOfExpression::getFactorizationConfiguration() {
     Factorization::ConfigurationDetails configurationDetails(
         Factorization::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyExpressionsToFactors = shouldSimplifyToFactors();

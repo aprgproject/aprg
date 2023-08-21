@@ -20,8 +20,8 @@ public:
     Term getSolution() const;
 
 private:
-    VariableNamesSet createVariableNamesFromSatTerms(SatisfiabilityTerms const& satTerms);
-    DirectedGraph createDirectedGraphBasedFromSatTerms(SatisfiabilityTerms const& satTerms);
+    static VariableNamesSet createVariableNamesFromSatTerms(SatisfiabilityTerms const& satTerms);
+    static DirectedGraph createDirectedGraphBasedFromSatTerms(SatisfiabilityTerms const& satTerms);
 
     VariableNamesSet m_variableNames;
     DirectedGraph m_graph;

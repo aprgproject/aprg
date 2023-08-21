@@ -30,7 +30,8 @@ void runTestCase(int const testCaseNumber) {
     int N;
     my_cin >> N;
     vector<int> H(N);
-    for (int& a : H) my_cin >> a;
+    for (int& a : H) { my_cin >> a;
+}
     int ans = 0;
     for (int i = 1; i + 1 < N; i++) {
         ans += (H[i] > H[i - 1]) && H[i] > H[i + 1];

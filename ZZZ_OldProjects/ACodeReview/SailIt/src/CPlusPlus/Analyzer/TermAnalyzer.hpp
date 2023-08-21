@@ -72,9 +72,9 @@ private:
     bool isModifiedDueToUndefMacro(Looper const& startLooper);
     bool isModifiedDueToOtherMacros(Looper const& startLooper);
     void copyDatabaseOfIncludeFile(Looper const& startLooper, string const& includeFileName);
-    bool isEndOfMacroFoundAndMoveLooper(Looper& movableLooper);
-    bool hasTermsForMacro(Looper const& startLooper);
-    void copyLooperSpanToVectorOfTermsForMacro(Looper const& startLooper, CPlusPlusMacro& cPlusPlusMacro);
+    static bool isEndOfMacroFoundAndMoveLooper(Looper& movableLooper);
+    static bool hasTermsForMacro(Looper const& startLooper);
+    static void copyLooperSpanToVectorOfTermsForMacro(Looper const& startLooper, CPlusPlusMacro& cPlusPlusMacro);
     void checkMacroParameters(Looper const& startLooper, CPlusPlusMacro& cPlusPlusMacro);
 
     // Expressions
@@ -101,8 +101,8 @@ private:
     bool isModifiedDueToTypeWithConstQualifierInvalidPosition(Looper const& startLooper);
     bool isModifiedDueToTypeWithDereferenceOperator(Looper const& startLooper);
     bool isModifiedDueToTypeWithPointerOperator(Looper const& startLooper);
-    bool isModifiedDueToTypeWithExternKeyword(Looper const& startLooper);
-    bool areTheTypesValidForCombination(CPlusPlusType const& type1, CPlusPlusType const& type2) const;
+    bool isModifiedDueToTypeWithExternKeyword(Looper consstatic t& startLooper);
+    bool areTheTypesValidForCombination(CPlusPlusType const& type1, CPlusPle const& type2) const;
 
     // Statements
     bool isModifiedDueToStatements(Looper const& startLooper);
@@ -152,7 +152,7 @@ private:
     bool isModifiedDueToExternBlock(Looper const& startLooper);
 
     // SharedSimplifiers
-    void checkCondition(Looper const& startLooper);
+    void checkCondition(Looper costatic nst& startLooper);
     bool isClosingPartnerFoundAndMoveLooper(
         Looper& movableLooper, string const& openingOperator, string const& closingOperator);
     template <LooperConnector looperConnector>

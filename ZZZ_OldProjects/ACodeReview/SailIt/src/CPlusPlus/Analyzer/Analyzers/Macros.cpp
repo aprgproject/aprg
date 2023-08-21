@@ -16,17 +16,17 @@ namespace codeReview {
 bool TermAnalyzer::isModifiedDueToMacros(Looper const& startLooper) {
     DBGPRINT1("isModifiedDueToMacros");
     bool isModified = true;
-    if (isModifiedDueToIncludeMacroWithAngleBrackets(startLooper))
+    if (isModifiedDueToIncludeMacroWithAngleBrackets(startLooper)) {
         ;
-    else if (isModifiedDueToIncludeMacroWithConstantString(startLooper))
+    } else if (isModifiedDueToIncludeMacroWithConstantString(startLooper)) {
         ;
-    else if (isModifiedDueToDefineMacro(startLooper))
+    } else if (isModifiedDueToDefineMacro(startLooper)) {
         ;
-    else if (isModifiedDueToUndefMacro(startLooper))
+    } else if (isModifiedDueToUndefMacro(startLooper)) {
         ;
-    else if (isModifiedDueToOtherMacros(startLooper))
+    } else if (isModifiedDueToOtherMacros(startLooper)) {
         ;
-    else {
+    } else {
         isModified = false;
     }
     return isModified;
@@ -87,11 +87,11 @@ bool TermAnalyzer::isModifiedDueToDefineMacro(Looper const& startLooper) {
         Looper afterIdentifier(compareLooper);
         incrementLooperIfWhiteSpaceForMacro<FindingsToAdd::None>(afterIdentifier);
         bool isModified = true;
-        if (isModifiedDueToDefineMacroWithParameters(startLooper, afterIdentifier, macroName))
+        if (isModifiedDueToDefineMacroWithParameters(startLooper, afterIdentifier, macroName)) {
             ;
-        else if (isModifiedDueToDefineMacroWithNoParameters(startLooper, afterIdentifier, macroName))
+        } else if (isModifiedDueToDefineMacroWithNoParameters(startLooper, afterIdentifier, macroName)) {
             ;
-        else {
+        } else {
             isModified = false;
         }
         if (isModified) {

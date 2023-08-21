@@ -21,15 +21,15 @@ public:
     std::string extractOnceForAllFiles(std::string const& filePathOfCompressedFile) const;
     std::string extractOneFile(
         std::string const& filePathOfCompressedFile, std::string const& relativePathOfFile) const;
-    bool isRecognizedCompressedFile(std::string const& extension) const;
+    static bool isRecognizedCompressedFile(std::string const& extension) ;
 
 private:
-    void runInConsole(std::string const& command) const;
+    static void runInConsole(std::string const& command) ;
     void extractAllRelevantFilesInThisDirectory(std::string const& directoryPath);
     void extractAllRelevantFilesInThisCompressedFile(std::string const& filePathOfCompressedFile);
     void extractAllFilesRecursively(std::string const& filePathOfCompressedFile);
     void extractAllRelevantFilesRecursively(std::string const& filePathOfCompressedFile);
-    bool isTheExtensionXzOrGzOrTar(std::string const& extension) const;
+    static bool isTheExtensionXzOrGzOrTar(std::string const& extension) ;
     AlbaGrepStringEvaluator m_grepEvaluator;
     std::string m_pathOf7zExecutable;
     std::string m_pathOf7zTempFile;

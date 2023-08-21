@@ -161,9 +161,8 @@ void TermsOverTerms::simplify() {
 Terms TermsOverTerms::factorizeIfNeeded(Terms const& terms) const {
     if (m_shouldSimplifyToFactors || !(m_numerators.empty() && m_denominators.empty())) {
         return factorize(terms);
-    } else {
-        return terms;
-    }
+    }         return terms;
+   
 }
 
 Terms TermsOverTerms::factorize(Terms const& terms) const {
@@ -190,7 +189,7 @@ void TermsOverTerms::continueToSimplifyAndCombineFactors(Terms& factorizedNumera
     simplifyPolynomialsToPolynomialOverPolynomial();
 }
 
-Polynomial TermsOverTerms::multiplyPolynomialTerms(Terms const& polynomialTerms) const {
+Polynomial TermsOverTerms::multiplyPolynomialTerms(Terms const& polynomialTerms) {
     Polynomial polynomialResult(createPolynomialFromNumber(1));
     for (Term const& polynomialTerm : polynomialTerms) {
         if (canBeConvertedToPolynomial(polynomialTerm)) {
@@ -231,14 +230,14 @@ void TermsOverTerms::handleZerosInNumeratorOrDenominator(Terms& denominators, Te
 }
 
 void TermsOverTerms::clearTermsThenEmplacePolynomialAndRemainingTerms(
-    Polynomial const& polynomialNumerator, Terms const& remainingNumerators, Terms& termsToUpdate) const {
+    Polynomial const& polynomialNumerator, Terms const& remainingNumerators, Terms& termsToUpdate) {
     termsToUpdate.clear();
     emplacePolynomialIfNeeded(termsToUpdate, polynomialNumerator);
     termsToUpdate.reserve(remainingNumerators.size());
     copy(remainingNumerators.cbegin(), remainingNumerators.cend(), back_inserter(termsToUpdate));
 }
 
-void TermsOverTerms::emplacePolynomialIfNeeded(Terms& termsResult, Polynomial const& polynomial) const {
+void TermsOverTerms::emplacePolynomialIfNeeded(Terms& termsResult, Polynomial const& polynomial) {
     if (isTheValue(polynomial, 0)) {
         termsResult.emplace_back(0);
     } else if (!isTheValue(polynomial, 1)) {
@@ -247,7 +246,7 @@ void TermsOverTerms::emplacePolynomialIfNeeded(Terms& termsResult, Polynomial co
 }
 
 void TermsOverTerms::retrievePolynomialAndNonPolynomialsTerms(
-    Terms const& termsToCheck, Polynomial& polynomial, Terms& nonPolynomialTerms) const {
+    Terms const& termsToCheck, Polynomial& polynomial, Terms& nonPolynomialTerms) {
     polynomial = (createPolynomialFromNumber(1));
     for (Term const& termToCheck : termsToCheck) {
         if (canBeConvertedToPolynomial(termToCheck)) {
@@ -320,7 +319,7 @@ void TermsOverTerms::populateTermsWithBase(Terms& termsToUpdate, Term const& bas
     }
 }
 
-void TermsOverTerms::removeTermsThatHaveNoEffect(Terms& terms) const {
+void TermsOverTerms::removeTermsThatHaveNoEffect(Terms& terms) {
     terms.erase(
         remove_if(
             terms.begin(), terms.end(),
@@ -346,7 +345,7 @@ void TermsOverTerms::putTermsOnNumeratorAndDenominatorCorrectly(Terms& numerator
 }
 
 void TermsOverTerms::putTermsToRetainAndOnTheOtherSide(
-    Terms const& termsToCheck, Terms& termsToRetain, Terms& termsToPutOnTheOtherSide) const {
+    Terms const& termsToCheck, Terms& termsToRetain, Terms& termsToPutOnTheOtherSide) {
     for (Term const& termToCheck : termsToCheck) {
         bool isNeededToPutOnTheOtherSide(false);
         Term transformedTermOnTheOtherSide;
@@ -370,7 +369,7 @@ void TermsOverTerms::putTermsToRetainAndOnTheOtherSide(
 }
 
 void TermsOverTerms::simplifyPolynomialNumeratorAndPolynomialDenominator(
-    Polynomial& polynomialNumerator, Polynomial& polynomialDenominator) const {
+    Polynomial& polynomialNumerator, Polynomial& polynomialDenominator) {
     PolynomialOverPolynomial numeratorAndDenominator(polynomialNumerator, polynomialDenominator);
     numeratorAndDenominator.simplifyWithoutFactorization();
     polynomialNumerator = numeratorAndDenominator.getNumerator();

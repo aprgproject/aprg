@@ -46,7 +46,7 @@ TEST(PenPointsTest, AddAsPenPointsWorks) {
 
     PenPoints::PenPointsSet const& penPointsToVerify(penPoints.getPenPoints());
     ASSERT_EQ(2U, penPointsToVerify.size());
-    PenPoints::PenPointsSet::const_iterator itToVerify = penPointsToVerify.cbegin();
+    auto itToVerify = penPointsToVerify.cbegin();
     BitmapXY const& pointToVerify1(*itToVerify++);
     BitmapXY const& pointToVerify2(*itToVerify++);
     EXPECT_EQ(BitmapXY(4155U, 6416U), pointToVerify1);

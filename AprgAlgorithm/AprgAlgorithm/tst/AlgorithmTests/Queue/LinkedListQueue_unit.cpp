@@ -12,7 +12,7 @@ namespace algorithm {
 
 namespace {
 using QueueForTest = LinkedListQueue<int>;
-}
+} // namespace
 
 TEST(LinkedListQueueTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<QueueForTest>(); }
 

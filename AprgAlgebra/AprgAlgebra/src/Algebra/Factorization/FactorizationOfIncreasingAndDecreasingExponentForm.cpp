@@ -23,7 +23,7 @@ namespace Factorization {
 
 namespace {
 constexpr int NUMBER_OF_ITERATIONS_IN_BRENT_METHOD = 1000;
-}
+} // namespace
 
 Polynomials factorizeIncreasingAndDecreasingExponentsForm(Polynomial const& polynomial) {
     Polynomials result;

@@ -10,7 +10,7 @@ namespace algorithm {
 
 namespace {
 using LongestRepeatedSubstringForTest = LongestRepeatedSubstring<int>;
-}
+} // namespace
 
 TEST(LongestRepeatedSubstringTest, GetLongestRepeatedSubstringWorks) {
     string stringToTest(

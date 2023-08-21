@@ -14,9 +14,9 @@ void TcomToam::HwConfiguration::saveConfiguration(SHwConfigurationMsg const&) {
     // this is fake
 }
 
-STCWamAddressIndNew TcomToam::HwConfiguration::generateWamAddressInd() const {
+STCWamAddressIndNew TcomToam::HwConfiguration::generateWamAddressInd() {
     // this is fake
-    return STCWamAddressIndNew();
+    return {};
 }
 
 TcomToam::TcomToam(ComponentName const componentName) : Component(componentName) {}

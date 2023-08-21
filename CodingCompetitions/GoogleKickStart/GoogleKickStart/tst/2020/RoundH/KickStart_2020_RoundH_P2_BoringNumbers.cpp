@@ -31,7 +31,8 @@ void runTestCase(int const testCaseNumber) {
         auto is_good = [&](int64_t v) {
             bool d = v % 2;
             while (v > 0) {
-                if (v % 2 != d) return false;
+                if (v % 2 != d) { return false;
+}
                 d = !d;
                 v /= 10;
             }
@@ -50,7 +51,8 @@ void runTestCase(int const testCaseNumber) {
             }
         }
 
-        if (L == R) break;
+        if (L == R) { break;
+}
 
         L /= 10;
         R /= 10;

@@ -112,8 +112,8 @@ double AnimizeColor::getNewValue(ColorDataMap const& colorDataMap, double const 
         } else {
             pair<ColorDataMap::const_iterator, ColorDataMap::const_iterator> iterators =
                 containerHelper::getLowerAndUpperConstIteratorsInMap(colorDataMap, originalValue);
-            ColorDataMap::const_iterator itLower(iterators.first);
-            ColorDataMap::const_iterator itUpper(iterators.second);
+            auto itLower(iterators.first);
+            auto itUpper(iterators.second);
             double deltaX = itUpper->first - itLower->first;
             double deltaY = itUpper->second.newValue - itLower->second.newValue;
             double deltaXToInterpolate = originalValue - itLower->first;

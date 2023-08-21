@@ -63,7 +63,8 @@ void runTestCase(int const testCaseNumber) {
     }
     sort(sumAnds.begin(), sumAnds.end());
     long double ans = 0;
-    for (auto a : sumAnds) ans += a;
+    for (auto a : sumAnds) { ans += a;
+}
     ans = 1 - ans;
 
     my_cout.precision(10);

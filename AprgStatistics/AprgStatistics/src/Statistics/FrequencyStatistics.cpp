@@ -44,7 +44,7 @@ double FrequencyStatistics::calculateMedian(FrequencySamples const& samples) {
             medianLocation <= rangeOffsetForCurrentValue + frequencyPair.second) {
             result = frequencyPair.first;
             break;
-        } else if (
+        } if (
             previousMinimumValue <= medianLocation &&
             medianLocation <= rangeOffsetForCurrentValue + frequencyPair.second) {
             result = (((double)previousValue + frequencyPair.first) / 2);
@@ -61,7 +61,7 @@ double FrequencyStatistics::calculateMedian(FrequencySamples const& samples) {
 
 FrequencyStatistics::MultipleValues FrequencyStatistics::calculateMode(FrequencySamples const& samples) {
     MultipleValues result;
-    typename FrequencySamples::const_iterator iteratorForMaxFrequency = max_element(
+    auto iteratorForMaxFrequency = max_element(
         samples.cbegin(), samples.cend(), [](FrequencyPair const& frequencyPair1, FrequencyPair const& frequencyPair2) {
             return frequencyPair1.second < frequencyPair2.second;
         });

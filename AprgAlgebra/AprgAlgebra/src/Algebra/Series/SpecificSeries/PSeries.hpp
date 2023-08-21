@@ -11,7 +11,7 @@ public:
     PSeries(AlbaNumber const& power);
 
 protected:
-    Term getFormula(AlbaNumber const& power) const;
+    static Term getFormula(AlbaNumber const& power) ;
 };
 
 }  // namespace algebra

@@ -83,7 +83,7 @@ TEST(TermTest, TermsAsMonomialsWorks) {
     EXPECT_DOUBLE_EQ(-1.5, monomialTerm3.getAsMonomial().getCoefficient().getDouble());
     Monomial::VariablesToExponentsMap const& variableMap3(monomialTerm3.getAsMonomial().getVariablesToExponentsMap());
     ASSERT_EQ(2U, variableMap3.size());
-    Monomial::VariablesToExponentsMap::const_iterator variableMap3It = variableMap3.cbegin();
+    auto variableMap3It = variableMap3.cbegin();
     Monomial::VariableExponentPair const& variable3_1(*variableMap3It);
     EXPECT_EQ("distance", variable3_1.first);
     EXPECT_DOUBLE_EQ(-3.75, variable3_1.second.getDouble());
@@ -126,7 +126,7 @@ TEST(TermTest, TermsAsPolynomialsWorks) {
     EXPECT_DOUBLE_EQ(-1.5, monomial3_2.getCoefficient().getDouble());
     Monomial::VariablesToExponentsMap const& variableMap3_2(monomial3_2.getVariablesToExponentsMap());
     ASSERT_EQ(2U, variableMap3_2.size());
-    Monomial::VariablesToExponentsMap::const_iterator variableMap3It = variableMap3_2.cbegin();
+    auto variableMap3It = variableMap3_2.cbegin();
     Monomial::VariableExponentPair const& variable3_1(*variableMap3It);
     EXPECT_EQ("distance", variable3_1.first);
     EXPECT_DOUBLE_EQ(-3.75, variable3_1.second.getDouble());

@@ -11,7 +11,7 @@ class TcomToam : public Component {
     public:
         // this is fake
         void saveConfiguration(SHwConfigurationMsg const& hwConfigurationMsg);
-        STCWamAddressIndNew generateWamAddressInd() const;
+        static STCWamAddressIndNew generateWamAddressInd() ;
     };
 
 public:

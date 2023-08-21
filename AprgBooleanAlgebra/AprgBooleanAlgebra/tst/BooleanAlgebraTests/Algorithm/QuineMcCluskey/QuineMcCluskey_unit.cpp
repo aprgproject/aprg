@@ -261,7 +261,7 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFileWorks_HasZeroInDigitForBy
         strings entries;
         splitToStrings<SplitStringType::WithoutDelimeters>(entries, lineInFile, " ");
         if (entries.size() >= 2) {
-            MintermForTest input = convertStringToNumber<MintermForTest>(entries[0]);
+            auto input = convertStringToNumber<MintermForTest>(entries[0]);
             setInputOutput(quineMcCluskey, input, getStringWithCapitalLetters(entries[1]));
         }
     }
@@ -352,7 +352,7 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_LogarithmBase2ForByte) {
         strings entries;
         splitToStrings<SplitStringType::WithoutDelimeters>(entries, lineInFile, " ");
         if (entries.size() >= 4) {
-            MintermForTest input = convertStringToNumber<MintermForTest>(entries[0]);
+            auto input = convertStringToNumber<MintermForTest>(entries[0]);
             setInputOutput(qm0, input, getStringWithCapitalLetters(entries[1]));
             setInputOutput(qm1, input, getStringWithCapitalLetters(entries[2]));
             setInputOutput(qm2, input, getStringWithCapitalLetters(entries[3]));
@@ -391,7 +391,7 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_ZeroesStartingFromMsb) {
         strings entries;
         splitToStrings<SplitStringType::WithoutDelimeters>(entries, lineInFile, " ");
         if (entries.size() >= 5) {
-            MintermForTest input = convertStringToNumber<MintermForTest>(entries[0]);
+            auto input = convertStringToNumber<MintermForTest>(entries[0]);
             setInputOutput(qm0, input, getStringWithCapitalLetters(entries[1]));
             setInputOutput(qm1, input, getStringWithCapitalLetters(entries[2]));
             setInputOutput(qm2, input, getStringWithCapitalLetters(entries[3]));

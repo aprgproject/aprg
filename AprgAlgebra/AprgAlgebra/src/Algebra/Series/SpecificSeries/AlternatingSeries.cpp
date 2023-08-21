@@ -31,7 +31,7 @@ Term AlternatingSeries::getRemainderAtIndex(int const index) const {
     return result;
 }
 
-Term AlternatingSeries::getFormula(Term const& formulaForEachTermWithoutSign, string const& variableName) const {
+Term AlternatingSeries::getFormula(Term const& formulaForEachTermWithoutSign, string const& variableName) {
     Term sign(createExpressionIfPossible({-1, "^", variableName}));
     return createExpressionIfPossible({sign, "*", formulaForEachTermWithoutSign});
 }

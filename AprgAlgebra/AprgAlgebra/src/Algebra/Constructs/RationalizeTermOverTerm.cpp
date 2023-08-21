@@ -58,7 +58,7 @@ void RationalizeTermOverTerm::simplifyForRationalize(Term& term) {
 }
 
 void RationalizeTermOverTerm::retrieveTermsForRationalization(
-    Term& rationalizedTerm, Term& multiplier, Term const& term) const {
+    Term& rationalizedTerm, Term& multiplier, Term const& term) {
     if (term.isPolynomial()) {
         retrieveTermsForRationalizationForPolynomial(rationalizedTerm, multiplier, term.getAsPolynomial());
     } else if (term.isExpression()) {
@@ -67,7 +67,7 @@ void RationalizeTermOverTerm::retrieveTermsForRationalization(
 }
 
 void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomial(
-    Term& rationalizedTerm, Term& multiplier, Polynomial const& polynomial) const {
+    Term& rationalizedTerm, Term& multiplier, Polynomial const& polynomial) {
     Monomials const& monomials(polynomial.getMonomials());
     if (monomials.size() == 2) {
         Monomial const& firstMonomial(monomials[0]);
@@ -77,7 +77,7 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomial(
 }
 
 void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomial(
-    Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial) const {
+    Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial) {
     AlbaNumber gcfOfExponents = getGreatestCommonFactor(
         getGcfOfExponentsInMonomial(firstMonomial), getGcfOfExponentsInMonomial(secondMonomial));
     if (gcfOfExponents.isFractionType()) {
@@ -93,7 +93,7 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomial(
 }
 
 void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomialWhenExponentIsDivisibleByTwo(
-    Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial) const {
+    Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial) {
     Monomial newSecondMonomialOfRemainder(secondMonomial);
     newSecondMonomialOfRemainder.multiplyNumber(-1);
     multiplier = Polynomial{firstMonomial, newSecondMonomialOfRemainder};
@@ -107,7 +107,7 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomialWhenEx
 }
 
 void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomialWhenExponentIsDivisibleByThree(
-    Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial) const {
+    Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial) {
     Monomial newFirstMonomial(firstMonomial);
     Monomial newThirdMonomial(secondMonomial);
     newFirstMonomial.raiseToPowerNumber(2);
@@ -125,7 +125,7 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForPolynomialWhenEx
 }
 
 void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpression(
-    Term& rationalizedTerm, Term& multiplier, Expression const& expression) const {
+    Term& rationalizedTerm, Term& multiplier, Expression const& expression) {
     if (OperatorLevel::AdditionAndSubtraction == expression.getCommonOperatorLevel()) {
         TermsWithDetails const& termsWithDetails(expression.getTermsWithAssociation().getTermsWithDetails());
         if (termsWithDetails.size() == 2) {
@@ -139,7 +139,7 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpression(
 
 void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpression(
     Term& rationalizedTerm, Term& multiplier, TermWithDetails const& firstTermWithDetails,
-    TermWithDetails const& secondTermWithDetails) const {
+    TermWithDetails const& secondTermWithDetails) {
     Term const& firstTerm(getTermConstReferenceFromUniquePointer(firstTermWithDetails.baseTermPointer));
     Term const& secondTerm(getTermConstReferenceFromUniquePointer(secondTermWithDetails.baseTermPointer));
     TermRaiseToANumber firstTermRaiseToANumber(createTermRaiseToANumberFromTerm(firstTerm));
@@ -161,7 +161,7 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpression(
 
 void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpressionWhenExponentIsDivisibleByTwo(
     Term& rationalizedTerm, Term& multiplier, TermWithDetails const& firstTermWithDetails,
-    TermWithDetails const& secondTermWithDetails) const {
+    TermWithDetails const& secondTermWithDetails) {
     Term const& firstTerm(getTermConstReferenceFromUniquePointer(firstTermWithDetails.baseTermPointer));
     Term const& secondTerm(getTermConstReferenceFromUniquePointer(secondTermWithDetails.baseTermPointer));
 
@@ -182,7 +182,7 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpressionWhenEx
 
 void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpressionWhenExponentIsDivisibleByThree(
     Term& rationalizedTerm, Term& multiplier, TermWithDetails const& firstTermWithDetails,
-    TermWithDetails const& secondTermWithDetails) const {
+    TermWithDetails const& secondTermWithDetails) {
     Term const& firstTerm(getTermConstReferenceFromUniquePointer(firstTermWithDetails.baseTermPointer));
     Term const& secondTerm(getTermConstReferenceFromUniquePointer(secondTermWithDetails.baseTermPointer));
 

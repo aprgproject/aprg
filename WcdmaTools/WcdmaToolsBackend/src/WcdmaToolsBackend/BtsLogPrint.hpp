@@ -72,33 +72,33 @@ public:
 
 private:
     void analyzeLineInLogs(std::string const& lineInLogs);
-    inline void handleUnknownState(
+    static inline void handleUnknownState(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         int const index, char const character);
-    inline void handlePcTimeState1(BtsLogPrintStateMachine::State& state, char const character);
-    inline void handlePcTimeState2(BtsLogPrintStateMachine::State& state, char const character);
-    inline void handlePcTimeState3(BtsLogPrintStateMachine::State& state, char const character);
-    inline void handlePcTimeState4(BtsLogPrintStateMachine::State& state, char const character);
-    inline void handlePcTimeState5(BtsLogPrintStateMachine::State& state, char const character);
-    inline void handlePcTimeState6(
+    static inline void handlePcTimeState1(BtsLogPrintStateMachine::State& state, char const character);
+    static inline void handlePcTimeState2(BtsLogPrintStateMachine::State& state, char const character);
+    static inline void handlePcTimeState3(BtsLogPrintStateMachine::State& state, char const character);
+    static inline void handlePcTimeState4(BtsLogPrintStateMachine::State& state, char const character);
+    static inline void handlePcTimeState5(BtsLogPrintStateMachine::State& state, char const character);
+    static inline void handlePcTimeState6(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         int const index, char const character);
-    inline void handleHardWareAddressState1_Letters(
+    static inline void handleHardWareAddressState1_Letters(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         char const character);
-    inline void handleHardWareAddressState2_Dash(
+    static inline void handleHardWareAddressState2_Dash(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         char const character);
-    inline void handleHardWareAddressState2_Underscore(
+    static inline void handleHardWareAddressState2_Underscore(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         char const character);
-    inline void handleHardWareAddressState3_HexNumbers(
+    static inline void handleHardWareAddressState3_HexNumbers(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         int const index, char const character);
-    inline void handleHardWareAddressState3_Letters(
+    static inline void handleHardWareAddressState3_Letters(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         int const index, char const character);
-    inline void handleBtsTimeState(
+    static inline void handleBtsTimeState(
         BtsLogPrintStateMachine::State& state, BtsLogPrintStateMachine::TransactionData& transactionData,
         int const index, char const character);
 

@@ -16,7 +16,7 @@ TEST(VariableNamesRetrieverTest, RetrieveFromTermWorks) {
 
     VariableNamesSet const& variableNamesSet(retriever.getSavedData());
     ASSERT_EQ(3U, variableNamesSet.size());
-    VariableNamesSet::const_iterator it = variableNamesSet.cbegin();
+    auto it = variableNamesSet.cbegin();
     EXPECT_EQ("a", *(it++));
     EXPECT_EQ("b", *(it++));
     EXPECT_EQ("x", *(it++));
@@ -38,7 +38,7 @@ TEST(VariableNamesRetrieverTest, RetrieveFromVariableTermWorks) {
 
     VariableNamesSet const& variableNamesSet(retriever.getSavedData());
     ASSERT_EQ(1U, variableNamesSet.size());
-    VariableNamesSet::const_iterator it = variableNamesSet.cbegin();
+    auto it = variableNamesSet.cbegin();
     EXPECT_EQ("x", *(it++));
 }
 
@@ -49,7 +49,7 @@ TEST(VariableNamesRetrieverTest, RetrieveFromExpressionWorks) {
 
     VariableNamesSet const& variableNamesSet(retriever.getSavedData());
     ASSERT_EQ(2U, variableNamesSet.size());
-    VariableNamesSet::const_iterator it = variableNamesSet.cbegin();
+    auto it = variableNamesSet.cbegin();
     EXPECT_EQ("a", *(it++));
     EXPECT_EQ("b", *(it++));
 }

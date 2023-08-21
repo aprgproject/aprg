@@ -497,7 +497,7 @@ void RagnarokOnline::retrieveShopDataFromTalonRoWebPage(string const& filePathOf
                 newDetail.totalNumber = convertStringToNumber<unsigned int>(fixText(numberString));
 
                 if (ShopType::BuyingShop == shopType) {
-                    ItemNameToShopItemDetailMap::iterator it = m_buyingShopItems.find(newDetail.itemName);
+                    auto it = m_buyingShopItems.find(newDetail.itemName);
                     if (it != m_buyingShopItems.cend()) {
                         unsigned newTotalNumber = it->second.totalNumber + newDetail.totalNumber;
                         double newAveragePrice = ((it->second.averagePrice * it->second.totalNumber) +
@@ -509,7 +509,7 @@ void RagnarokOnline::retrieveShopDataFromTalonRoWebPage(string const& filePathOf
                         m_buyingShopItems[newDetail.itemName] = newDetail;
                     }
                 } else if (ShopType::SellingShop == shopType) {
-                    ItemNameToShopItemDetailMap::iterator it = m_sellingShopItems.find(newDetail.itemName);
+                    auto it = m_sellingShopItems.find(newDetail.itemName);
                     if (it != m_sellingShopItems.cend()) {
                         unsigned newTotalNumber = it->second.totalNumber + newDetail.totalNumber;
                         double newAveragePrice = ((it->second.averagePrice * it->second.totalNumber) +
@@ -613,7 +613,7 @@ Monster RagnarokOnline::getMonster(string const& monsterName) const {
     return result;
 }
 
-string RagnarokOnline::getFixedItemName(Item const& item) const {
+string RagnarokOnline::getFixedItemName(Item const& item) {
     string result(item.name);
     if (item.slot != 0) {
         stringstream slotStream;

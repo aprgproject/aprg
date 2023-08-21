@@ -53,11 +53,10 @@ Coordinate BoardValue::getCorrectCoordinate(
     Board const& board, CoordinateDataType const x, CoordinateDataType const y) {
     if (BoardOrientation::BlackUpWhiteDown == board.getOrientation()) {
         return Coordinate(x, y);
-    } else if (BoardOrientation::WhiteUpBlackDown == board.getOrientation()) {
+    } if (BoardOrientation::WhiteUpBlackDown == board.getOrientation()) {
         return Coordinate(7 - x, 7 - y);
-    } else {
-        return {};
-    }
+    }         return {};
+   
 }
 
 void BoardValue::saveBoardToData(Board const& board) {

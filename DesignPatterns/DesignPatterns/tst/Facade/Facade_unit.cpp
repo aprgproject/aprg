@@ -7,7 +7,7 @@ using namespace std;
 namespace Facade {
 
 TEST(FacadeTest, Test1) {
-    Facade *facade = new Facade();
+    auto *facade = new Facade();
 
     facade->operation1();
     facade->operation2();

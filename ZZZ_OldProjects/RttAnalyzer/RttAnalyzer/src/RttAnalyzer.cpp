@@ -114,7 +114,7 @@ void RttAnalyzer::processValues(string const& dateTime, strings const& values) {
     static RttDetails rttDetails;
     if (m_cx8IndexOptional) {
         if (m_cx8IndexOptional.value() < values.size()) {
-            unsigned int value = convertStringToNumber<unsigned int>(values[m_cx8IndexOptional.value()]);
+            auto value = convertStringToNumber<unsigned int>(values[m_cx8IndexOptional.value()]);
             if (value != 0) {
                 rttDetails.multiplePos[0] = value;
                 rttDetails.dateTime = dateTime;

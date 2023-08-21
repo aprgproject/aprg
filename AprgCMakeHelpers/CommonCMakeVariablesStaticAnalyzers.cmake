@@ -20,12 +20,12 @@ if(APRG_ENABLE_STATIC_ANALYZERS)
 	    # additional flags: --fix -warnings-as-errors=*;
 		
 		# check only
-		set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} -header-filter="^.*\/${IMMEDIATE_DIRECTORY_NAME}\/.*")
-		set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} -header-filter="^.*\/${IMMEDIATE_DIRECTORY_NAME}\/.*") 
+		#set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} -header-filter="^.*\/${IMMEDIATE_DIRECTORY_NAME}\/.*")
+		#set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} -header-filter="^.*\/${IMMEDIATE_DIRECTORY_NAME}\/.*") 
 		
 		# auto fix
-		#set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix -header-filter="^.*\/${IMMEDIATE_DIRECTORY_NAME}\/.*")
-		#set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix -header-filter="^.*\/${IMMEDIATE_DIRECTORY_NAME}\/.*")
+		set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix -header-filter="^.*\/${IMMEDIATE_DIRECTORY_NAME}\/.*")
+		set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix -header-filter="^.*\/${IMMEDIATE_DIRECTORY_NAME}\/.*")
 		
 		PRINT_VARIABLE(CMAKE_C_CLANG_TIDY)
 		PRINT_VARIABLE(CMAKE_CXX_CLANG_TIDY)

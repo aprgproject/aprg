@@ -93,7 +93,7 @@ Term SimplificationOfFunctionToTerm::simplifyLogarithmicFunctionToExpression(Fun
 }
 
 Term SimplificationOfFunctionToTerm::getLogarithmicOfTermBasedFromName(
-    Term const& term, string const& functionName) const {
+    Term const& term, string const& functionName) {
     Term result;
     if ("ln" == functionName) {
         result = ln(term);

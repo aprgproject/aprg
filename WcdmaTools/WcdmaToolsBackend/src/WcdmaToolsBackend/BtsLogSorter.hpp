@@ -30,8 +30,8 @@ private:
     void deleteLogsWithoutPcTime() const;
     void saveLogToOutputFileIfAllHavePcTime(std::string const& outputPath);
     void saveLogToOutputFileIfNotAllHavePcTime(std::string const& outputPath);
-    std::string getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
-        std::string const& directory, std::string const& hardwareAddress) const;
+    static std::string getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
+        std::string const& directory, std::string const& hardwareAddress) ;
     void openStartupLogsIfNeeded();
     void addStartupLogsOnSorterWithPcTime();
     void writeLogsWithoutPcTimeToOutputFile(std::ofstream& outputLogFileStream);
@@ -42,7 +42,7 @@ private:
         BtsPrintReaderWithRollback& printReader, BtsLogPrint const& logPrint, std::ofstream& outputLogFileStream);
     void updateOrWriteCurrentPrint(BtsLogPrint const& logPrint, std::ofstream& outputLogFileStream);
     void writeLastPrint(std::ofstream& outputLogFileStream);
-    void deleteFilesInDirectory(std::string const& directoryOfLogs) const;
+    static void deleteFilesInDirectory(std::string const& directoryOfLogs) ;
     bool m_isFilterOn;
     alba::AlbaGrepStringEvaluator m_acceptedFilesGrepEvaluator;
     alba::AlbaGrepStringEvaluator m_filterGrepEvaluator;

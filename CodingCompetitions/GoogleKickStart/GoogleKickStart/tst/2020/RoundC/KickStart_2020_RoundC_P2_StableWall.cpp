@@ -39,10 +39,11 @@ void dfs(int u) {
     act[u] = 1;
     vis[u] = 1;
     for (int v : adj[u]) {
-        if (act[v] && v ^ u)
+        if (act[v] && v ^ u) {
             bad = 1;
-        else {
-            if (!vis[v]) dfs(v);
+        } else {
+            if (!vis[v]) { dfs(v);
+}
         }
     }
     act[u] = 0;
@@ -54,21 +55,27 @@ void runTestCase(int const testCaseNumber) {
     set<char> t;
     for (int i = 0; i < n; ++i) {
         my_cin >> s[i];
-        for (char c : s[i]) t.insert(c);
+        for (char c : s[i]) { t.insert(c);
+}
         if (i) {
-            for (int j = 0; j < m; ++j) adj[s[i - 1][j] - 'A'].push_back(s[i][j] - 'A');
+            for (int j = 0; j < m; ++j) { adj[s[i - 1][j] - 'A'].push_back(s[i][j] - 'A');
+}
         }
     }
     memset(vis, 0, 26);
     memset(act, 0, 26);
     ans = "";
     bad = 0;
-    for (char c : t)
-        if (!vis[c - 'A']) dfs(c - 'A');
-    if (bad) ans = "-1";
+    for (char c : t) {
+        if (!vis[c - 'A']) { dfs(c - 'A');
+}
+}
+    if (bad) { ans = "-1";
+}
     my_cout << "Case #" << testCaseNumber << ": " << ans << '\n';
 
-    for (int i = 0; i < 26; ++i) adj[i].clear();
+    for (int i = 0; i < 26; ++i) { adj[i].clear();
+}
 }
 
 void runAllTestCases() {

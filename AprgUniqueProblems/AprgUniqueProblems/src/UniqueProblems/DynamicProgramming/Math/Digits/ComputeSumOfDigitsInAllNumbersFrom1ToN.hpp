@@ -19,7 +19,7 @@ public:
 
 private:
     Value getValueUsingMemoizationDP(Value const number) const;
-    Value getSummationFrom1ToN(Value const number) const;
+    static Value getSummationFrom1ToN(Value const number) ;
     Value const m_lastNumber;
 };
 

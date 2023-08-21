@@ -17,9 +17,11 @@ TEST(ConstExamplesTest, MutationWithConstInPrimitiveTypesDoesNotWork) {
 
     // b++; // Error because "b" is const
 
-    if (b > 4) cout << "b is greater than 4\n";
+    if (b > 4) { cout << "b is greater than 4\n";
+}
 
-    if (b == 44) cout << "b is greater than 4\n";
+    if (b == 44) { cout << "b is greater than 4\n";
+}
 
     // if(b>>=a) // Error because "b" is const
     //    cout << "b is greater than 4\n";
@@ -193,8 +195,8 @@ TEST(ConstExamplesTest, FunctionMatchingWithWithDifferentParametersWorks) {
 TEST(ConstExamplesTest, FunctionMatchingWithAndWithoutConstInFunctionSignatureOfAClassWorks) {
     class Foo {
     public:
-        void myFunction() { cout << "calling non-const\n"; }
-        void myFunction() const { cout << "calling const\n"; }
+        static void myFunction() { cout << "calling non-const\n"; }
+        static void myFunction() { cout << "calling const\n"; }
     };
 
     Foo a;
@@ -210,7 +212,7 @@ TEST(ConstExamplesTest, FunctionMatchingWithAndWithoutConstInFunctionSignatureOf
 TEST(ConstExamplesTest, FunctionMatchingWithConstInFunctionSignatureOfAClassWorks) {
     class Foo {
     public:
-        void myFunction() const { cout << "calling const\n"; }
+        static void myFunction() { cout << "calling const\n"; }
     };
 
     Foo a;
@@ -226,7 +228,7 @@ TEST(ConstExamplesTest, FunctionMatchingWithConstInFunctionSignatureOfAClassWork
 TEST(ConstExamplesTest, FunctionMatchingWithoutConstInFunctionSignatureOfAClassWorks) {
     class Foo {
     public:
-        void myFunction() { cout << "calling non-const\n"; }
+        static void myFunction() { cout << "calling non-const\n"; }
     };
 
     Foo a;

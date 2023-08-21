@@ -12,7 +12,7 @@ namespace algorithm {
 
 namespace {
 using StackForTest = LinkedListStack<int>;
-}
+} // namespace
 
 TEST(LinkedListStackTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<StackForTest>(); }
 

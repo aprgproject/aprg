@@ -69,13 +69,12 @@ bool isALuckyNumber(UnsignedInteger const number) {
         if (removedNumber > 2) {
             result = true;
             break;
-        } else if (number % removedNumber == 0) {
+        } if (number % removedNumber == 0) {
             result = false;
             break;
-        } else {
-            remainingValue = remainingValue - (remainingValue / removedNumber);
+        }             remainingValue = remainingValue - (remainingValue / removedNumber);
             removedNumber++;
-        }
+       
     }
     return result;
 }
@@ -84,7 +83,7 @@ bool isLagrangeTheoremTrue(UnsignedInteger const number) {
     // Lagrange’s theorem states that every positive integer can be represented as a sum of four squares, i.e., a^2 +
     // b^2 + c^2 + d^2. For example, the number 123 can be represented as the sum 8^2 + 5^2 + 5^2 + 3^2.
 
-    UnsignedInteger maxElement = static_cast<UnsignedInteger>(pow(number, 0.5));  // max element is square root
+    auto maxElement = static_cast<UnsignedInteger>(pow(number, 0.5));  // max element is square root
     UnsignedIntegers squaredElements;
     squaredElements.reserve(maxElement - 1);
     for (UnsignedInteger i = 1; i < maxElement; i++) {
@@ -123,8 +122,7 @@ UnsignedInteger getNthFibonacciNumber(UnsignedInteger const number) {
 
     if (number == 0) {
         return 0;
-    } else {
-        UnsignedInteger previousFibonacci(0);
+    }         UnsignedInteger previousFibonacci(0);
         UnsignedInteger currentFibonacci(1);
         for (UnsignedInteger n = 2; n <= number; n++) {
             UnsignedInteger nextFibonacci = currentFibonacci + previousFibonacci;
@@ -132,7 +130,7 @@ UnsignedInteger getNthFibonacciNumber(UnsignedInteger const number) {
             currentFibonacci = nextFibonacci;
         }
         return currentFibonacci;
-    }
+   
 }
 
 UnsignedInteger getNthFibonacciNumberUsingBinetsFormula(UnsignedInteger const number) {
@@ -152,9 +150,8 @@ UnsignedInteger getNthFibonacciNumberUsingRecursion(UnsignedInteger const number
     // O((phi)^n) = O((1 + sqrtOf5)^n) = O(1.618^n)
     if (number <= 1) {
         return number;
-    } else {
-        return getNthFibonacciNumberUsingRecursion(number - 2) + getNthFibonacciNumberUsingRecursion(number - 1);
-    }
+    }         return getNthFibonacciNumberUsingRecursion(number - 2) + getNthFibonacciNumberUsingRecursion(number - 1);
+   
 }
 
 UnsignedInteger getNthFibonacciUsingMatrixPowerWithLogarithmicTime(UnsignedInteger const number) {
@@ -163,8 +160,7 @@ UnsignedInteger getNthFibonacciUsingMatrixPowerWithLogarithmicTime(UnsignedInteg
 
     if (number == 0) {
         return 0;
-    } else {
-        // Matrix representation:
+    }         // Matrix representation:
         // |f(n-1)|f(n)  |
         // |f(n)  |f(n+1)|
 
@@ -173,7 +169,7 @@ UnsignedInteger getNthFibonacciUsingMatrixPowerWithLogarithmicTime(UnsignedInteg
         UnsignedIntegerMatrix fibonacciMatrix(
             getMatrixRaiseToScalarPower(formulaicTransform, number - 1));  // logarithmic
         return fibonacciMatrix.getEntry(1U, 1U);
-    }
+   
 }
 
 UnsignedInteger getNthFibonacciUsingLogarithmicTabularDP(UnsignedInteger const number) {

@@ -32,7 +32,7 @@ void CopyGoogleTemplates::copyTemplatesForOneRound(
 }
 
 void CopyGoogleTemplates::replaceStringWithStringOnFile(
-    string const& inputFilePath, string const& outputFilePath, StringPairs const& replacePairs) const {
+    string const& inputFilePath, string const& outputFilePath, StringPairs const& replacePairs) {
     AlbaLocalPathHandler outputFilePathHandler(outputFilePath);
     outputFilePathHandler.createDirectoriesForNonExisitingDirectories();
     ifstream inputFile(inputFilePath);

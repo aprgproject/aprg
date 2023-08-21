@@ -58,7 +58,7 @@ void PowerSeries::integrate() {
 }
 
 Term PowerSeries::getFormula(
-    Term const& multiplierForEachTerm, string const& nName, string const& xName, AlbaNumber const& aValue) const {
+    Term const& multiplierForEachTerm, string const& nName, string const& xName, AlbaNumber const& aValue) {
     Term subTerm(createExpressionIfPossible({xName, "-", aValue}));
     return createExpressionIfPossible({multiplierForEachTerm, "*", subTerm, "^", nName});
 }

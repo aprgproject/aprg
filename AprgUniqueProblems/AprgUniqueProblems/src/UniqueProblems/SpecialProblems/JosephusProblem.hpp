@@ -8,7 +8,7 @@ class JosephusProblem {
 public:
     using Value = int;
     using Values = std::vector<Value>;
-    Values getJosephusPermutationUsingIntervalTree(int const numberOfPeople, int const skipCount);
+    static Values getJosephusPermutationUsingIntervalTree(int const numberOfPeople, int const skipCount);
 
 private:
 };

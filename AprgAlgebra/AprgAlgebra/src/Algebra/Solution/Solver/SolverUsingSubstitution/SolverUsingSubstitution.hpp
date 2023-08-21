@@ -17,9 +17,9 @@ public:
 
 private:
     bool isTheValueAlreadyExisting(std::string const& variableName, AlbaNumber const& value) const;
-    bool isSolutionCorrect(MultipleVariableSolutionSet const& solutionSet, Equations const& equations) const;
-    SubstitutionOfVariablesToValues getSubstitutionFromSolutionSet(
-        MultipleVariableSolutionSet const& solutionSet) const;
+    static bool isSolutionCorrect(MultipleVariableSolutionSet const& solutionSet, Equations const& equations) ;
+    static SubstitutionOfVariablesToValues getSubstitutionFromSolutionSet(
+        MultipleVariableSolutionSet const& solutionSet) ;
 
     void clear();
     void calculateSolutions(Equations const& equations);
@@ -28,7 +28,7 @@ private:
     void addIfSolutionIsCompleteAndCorrect(MultipleVariableSolutionSet const& solutionSet, Equations const& equations);
     void calculateASolutionForOneVariable(
         MultipleVariableSolutionSet& multipleVariableSolutionSet, Equations const& equations);
-    void substituteSolutionSetValuesToEquations(
+    static void substituteSolutionSetValuesToEquations(
         Equations& substitutedEquations, MultipleVariableSolutionSet const& multipleVariableSolutionSet);
     void solveForTheFirstOneVariableEquationAndUpdate(
         MultipleVariableSolutionSet& multipleVariableSolutionSet, Equations const& substitutedEquations);

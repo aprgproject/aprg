@@ -263,9 +263,8 @@ void MapAnalyzer::sortMaps() {
                     if (first.jobExperiencePotential == second.jobExperiencePotential) {
                         if (first.annoyanceHp == second.annoyanceHp) {
                             return first.mobCount > second.mobCount;
-                        } else {
-                            return first.annoyanceHp < second.annoyanceHp;
-                        }
+                        }                             return first.annoyanceHp < second.annoyanceHp;
+                       
                     } else {
                         return first.jobExperiencePotential > second.jobExperiencePotential;
                     }
@@ -278,12 +277,12 @@ void MapAnalyzer::sortMaps() {
         });
 }
 
-bool MapAnalyzer::isDropRateAcceptable(double const /*dropRate*/) const {
+bool MapAnalyzer::isDropRateAcceptable(double const /*dropRate*/) {
     return true;
     // return dropRate >= 1; // This removes hard farming
 }
 
-double MapAnalyzer::getTalonRoDropRate(double const dropRate) const {
+double MapAnalyzer::getTalonRoDropRate(double const dropRate) {
     double talonRoDropRate(dropRate * 3);
     if (talonRoDropRate > 100) {
         talonRoDropRate = 100;

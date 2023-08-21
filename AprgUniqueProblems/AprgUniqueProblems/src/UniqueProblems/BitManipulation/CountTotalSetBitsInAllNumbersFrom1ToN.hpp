@@ -11,9 +11,9 @@ public:
     using Values = std::vector<Value>;
 
     CountTotalSetBitsInAllNumbersFrom1ToN();
-    Value getTotalSetBitsUsingPopcount(Value const endValue) const;
-    Value getTotalSetBitsUsingPreComputedBitCounts(Value const endValue) const;
-    Value getTotalSetBitsUsingBitCounts(Value const endValue) const;
+    static Value getTotalSetBitsUsingPopcount(Value const endValue) ;
+    static Value getTotalSetBitsUsingPreComputedBitCounts(Value const endValue) ;
+    static Value getTotalSetBitsUsingBitCounts(Value const endValue) ;
 };
 
 }  // namespace alba

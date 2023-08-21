@@ -70,7 +70,7 @@ EightPuzzlePossibleProblem::SearchNode EightPuzzlePossibleProblem::createNode(
 }
 
 void EightPuzzlePossibleProblem::moveTile(
-    NumberMatrix& matrix, Coordinate const& previousBlankTile, Coordinate const& nextBlankTile) const {
+    NumberMatrix& matrix, Coordinate const& previousBlankTile, Coordinate const& nextBlankTile) {
     swap(
         matrix.getEntryReference(previousBlankTile.first, previousBlankTile.second),
         matrix.getEntryReference(nextBlankTile.first, nextBlankTile.second));
@@ -116,6 +116,6 @@ void EightPuzzlePossibleProblem::printSteps(SearchNodeId const nodeId) const {
     }
 }
 
-void EightPuzzlePossibleProblem::printMatrix(NumberMatrix const& numberMatrix) const { cout << numberMatrix << "\n"; }
+void EightPuzzlePossibleProblem::printMatrix(NumberMatrix const& numberMatrix) { cout << numberMatrix << "\n"; }
 
 }  // namespace alba

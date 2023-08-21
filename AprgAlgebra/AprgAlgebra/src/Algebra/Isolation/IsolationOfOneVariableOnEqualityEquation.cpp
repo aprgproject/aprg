@@ -82,7 +82,7 @@ void IsolationOfOneVariableOnEqualityEquation::setEquation(Equation const& equat
 
 void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
     string const& variableName, Polynomial const& polynomial, Term& termWithVariable,
-    Term& termWithWithoutVariable) const {
+    Term& termWithWithoutVariable) {
     AlbaNumber identicalExponentForVariable(getIdenticalExponentForVariableIfPossible(variableName, polynomial));
     if (canBeIsolatedBasedOnExponent(identicalExponentForVariable)) {
         Monomials monomialsWithVariable;
@@ -103,7 +103,7 @@ void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
 
 void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
     string const& variableName, Expression const& expression, Term& termWithVariable,
-    Term& termWithWithoutVariable) const {
+    Term& termWithWithoutVariable) {
     Expression simplifiedExpression(expression);
     simplifyForIsolation(simplifiedExpression);
     if (OperatorLevel::AdditionAndSubtraction == expression.getCommonOperatorLevel()) {
@@ -135,12 +135,12 @@ void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
 }
 
 bool IsolationOfOneVariableOnEqualityEquation::canBeIsolatedBasedOnExponent(
-    AlbaNumber const& identicalExponentForVariable) const {
+    AlbaNumber const& identicalExponentForVariable) {
     return identicalExponentForVariable != 0;
 }
 
 AlbaNumber IsolationOfOneVariableOnEqualityEquation::getIdenticalExponentForVariableIfPossible(
-    string const& variableName, Polynomial const& polynomial) const {
+    string const& variableName, Polynomial const& polynomial) {
     AlbaNumber exponent;
     for (Monomial const& monomial : polynomial.getMonomials()) {
         AlbaNumber currentExponent = monomial.getExponentForVariable(variableName);
@@ -156,7 +156,7 @@ AlbaNumber IsolationOfOneVariableOnEqualityEquation::getIdenticalExponentForVari
     return exponent;
 }
 
-void IsolationOfOneVariableOnEqualityEquation::simplifyForIsolation(Term& term) const {
+void IsolationOfOneVariableOnEqualityEquation::simplifyForIsolation(Term& term) {
     term.simplify();
     {
         SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -172,7 +172,7 @@ void IsolationOfOneVariableOnEqualityEquation::simplifyForIsolation(Term& term) 
     }
 }
 
-void IsolationOfOneVariableOnEqualityEquation::simplifyForIsolation(Expression& expression) const {
+void IsolationOfOneVariableOnEqualityEquation::simplifyForIsolation(Expression& expression) {
     expression.simplify();
     {
         SimplificationOfExpression::ConfigurationDetails configurationDetails(

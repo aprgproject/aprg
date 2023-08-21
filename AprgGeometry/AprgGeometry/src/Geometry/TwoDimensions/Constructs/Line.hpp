@@ -46,11 +46,11 @@ private:
         Points& points, Point const& first, Point const& second, double const interval) const;
     void getPointsForLineWithSlope(
         Points& points, Point const& first, Point const& second, double const interval) const;
-    void mergePointsFromPointsFromXAndY(
+    static void mergePointsFromPointsFromXAndY(
         Points& points, Points const& pointsFromXCoordinate, Points const& pointsFromYCoordinate,
-        bool const isDirectionAscendingForX) const;
-    LineType determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX) const;
-    LineType determineLineTypeUsingCoefficients(double const aCoefficient, double const bCoefficient) const;
+        bool const isDirectionAscendingForX) ;
+    static LineType determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX) ;
+    static LineType determineLineTypeUsingCoefficients(double const aCoefficient, double const bCoefficient) ;
 
     friend std::ostream& operator<<(std::ostream& out, Line const& line);
 

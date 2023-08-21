@@ -65,7 +65,7 @@ void LinearEquationsEqualitySolver::calculateSolution(
     }
 }
 
-bool LinearEquationsEqualitySolver::areExponentsEqualToOneAndZero(AlbaNumbersSet const& exponents) const {
+bool LinearEquationsEqualitySolver::areExponentsEqualToOneAndZero(AlbaNumbersSet const& exponents) {
     return all_of(exponents.cbegin(), exponents.cend(), [](AlbaNumber const& exponent) {
         return exponent == 1 || exponent == 0;
     });
@@ -78,7 +78,7 @@ void LinearEquationsEqualitySolver::setMatrixCoefficients(
         int columnIndex = 0;
         VariableToValueMap variableToValueMap(getCoefficientsForVariablesOnly(polynomial));
         for (string const& variableName : variableNames) {
-            VariableToValueMap::const_iterator it = variableToValueMap.find(variableName);
+            auto it = variableToValueMap.find(variableName);
             if (it != variableToValueMap.cend()) {
                 coefficientsMatrix.setEntry(columnIndex++, rowIndex, it->second);
             }

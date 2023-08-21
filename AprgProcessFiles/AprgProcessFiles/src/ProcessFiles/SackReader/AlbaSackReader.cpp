@@ -89,7 +89,7 @@ string AlbaSackReader::getReaderStateString(ReaderState const state) {
         GET_ENUM_STRING(ReaderState::TypedefEnumStateLookingForClosingBrace)
         GET_ENUM_STRING(ReaderState::TypedefEnumStateLookingForType)
     }
-    return string();
+    return {};
 #undef GET_ENUM_STRING
 }
 

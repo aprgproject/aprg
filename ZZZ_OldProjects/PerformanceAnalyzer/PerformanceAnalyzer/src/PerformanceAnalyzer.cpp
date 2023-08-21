@@ -40,7 +40,7 @@ void PerformanceAnalyzer::UniqueUserId::saveTransactionId(std::string const& lin
     transactionId = getTransactionId(lineInLogs);
 }
 
-int PerformanceAnalyzer::UniqueUserId::getCrnccId(std::string const& lineInLogs) const {
+int PerformanceAnalyzer::UniqueUserId::getCrnccId(std::string const& lineInLogs) {
     int properCrnccId = 0;
     int logCrnccId = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crnccId: "));
     int logCrncId = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "crncId: "));
@@ -53,7 +53,7 @@ int PerformanceAnalyzer::UniqueUserId::getCrnccId(std::string const& lineInLogs)
     return properCrnccId;
 }
 
-int PerformanceAnalyzer::UniqueUserId::getNbccId(std::string const& lineInLogs) const {
+int PerformanceAnalyzer::UniqueUserId::getNbccId(std::string const& lineInLogs) {
     int properNbccId = 0;
     int nbccid = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccid: "));
     int nbccId = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccId: "));
@@ -66,7 +66,7 @@ int PerformanceAnalyzer::UniqueUserId::getNbccId(std::string const& lineInLogs) 
     return properNbccId;
 }
 
-int PerformanceAnalyzer::UniqueUserId::getTransactionId(std::string const& lineInLogs) const {
+int PerformanceAnalyzer::UniqueUserId::getTransactionId(std::string const& lineInLogs) {
     return convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
 }
 
@@ -352,9 +352,9 @@ void PerformanceAnalyzer::processFileForPeriodicCpuLogging(string const& filePat
             } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(TCOM/WRC)")) {
                 subsystem = "WRC";
             }
-            double inProcess =
+            auto inProcess =
                 convertStringToNumber<double>(getStringInBetweenTwoStrings(lineInLogs, "inProcess:", "%"));
-            double inSystem = convertStringToNumber<double>(getStringInBetweenTwoStrings(lineInLogs, "inSystem:", "%"));
+            auto inSystem = convertStringToNumber<double>(getStringInBetweenTwoStrings(lineInLogs, "inSystem:", "%"));
             string threadCpuTimeSpent(getStringInBetweenTwoStrings(lineInLogs, "threadCpuTimeSpent:", " ("));
             stringstream ss;
             ss << subsystem << "," << inProcess << "," << inSystem << "," << threadCpuTimeSpent;
@@ -772,12 +772,12 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
          << " transactionId: " << userIdForMaxDelay.transactionId << "\n";
 }
 
-int PerformanceAnalyzer::getDelayTimeInUs(BtsLogTime const& endTime, BtsLogTime const& startTime) const {
+int PerformanceAnalyzer::getDelayTimeInUs(BtsLogTime const& endTime, BtsLogTime const& startTime) {
     BtsLogTime delayTime = endTime - startTime;
     return delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000;
 }
 
-int PerformanceAnalyzer::getDelayTimeInMinutes(BtsLogTime const& endTime, BtsLogTime const& startTime) const {
+int PerformanceAnalyzer::getDelayTimeInMinutes(BtsLogTime const& endTime, BtsLogTime const& startTime) {
     BtsLogTime delayTime = endTime - startTime;
     return delayTime.getMinutes();
 }
@@ -817,16 +817,16 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
         if (isStringFoundNotCaseSensitive(lineInLogs, R"(No.     Time        Source                Destination)")) {
             string nextLine(fileReader.getLineAndIgnoreWhiteSpaces());
             string timeString(getStringInBetweenTwoStrings(nextLine, " ", " "));
-            double wiresharkTime = convertStringToNumber<double>(timeString);
+            auto wiresharkTime = convertStringToNumber<double>(timeString);
             endWiresharkTime = wiresharkTime;
-            unsigned int numberInWireshark =
+            auto numberInWireshark =
                 convertStringToNumber<unsigned int>(getStringBeforeThisString(nextLine, " "));
             WiresharkLogKey key;
             while (fileReader.isNotFinished()) {
                 string followingLine(fileReader.getLineAndIgnoreWhiteSpaces());
                 if (isStringFoundNotCaseSensitive(followingLine, R"(0000)")) {
-                    unsigned int msgId = convertHexStringToNumber<unsigned int>(followingLine.substr(18, 2));
-                    unsigned int upperSaidKey = convertHexStringToNumber<unsigned int>(followingLine.substr(48, 5));
+                    auto msgId = convertHexStringToNumber<unsigned int>(followingLine.substr(18, 2));
+                    auto upperSaidKey = convertHexStringToNumber<unsigned int>(followingLine.substr(48, 5));
                     if (msgId == 0x75 || msgId == 0x77 || msgId == 0x7E) {
                         string followingLine2(fileReader.getLineAndIgnoreWhiteSpaces());
                         if (isStringFoundNotCaseSensitive(followingLine2, R"(0010)")) {
@@ -848,7 +848,7 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
                     } else if (msgId == 0x74 || msgId == 0x76 || msgId == 0x7C) {
                         string followingLine2(fileReader.getLineAndIgnoreWhiteSpaces());
                         if (isStringFoundNotCaseSensitive(followingLine2, R"(0010)")) {
-                            unsigned int lowerSaidKey =
+                            auto lowerSaidKey =
                                 convertHexStringToNumber<unsigned int>(followingLine2.substr(6, 5));
                             key.said = 0;  //((upperSaidKey&0xFFFF)<<16) | (lowerSaidKey&0xFFFF);
                             if (msgId == 0x74) {
@@ -946,7 +946,7 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath) {
         if (state == 2 && isNotNpos(commmandIndexInLine) && isNotNpos(cpuIndexInLine) &&
             commmandIndexInLine < lineInLogs.length() && cpuIndexInLine + 5 < lineInLogs.length()) {
             string processName(getStringWithoutStartingAndTrailingWhiteSpace(lineInLogs.substr(commmandIndexInLine)));
-            double cpuLoad = convertStringToNumber<double>(lineInLogs.substr(cpuIndexInLine, 5));
+            auto cpuLoad = convertStringToNumber<double>(lineInLogs.substr(cpuIndexInLine, 5));
             if (cpuLoad > 0 && processName != "`- top") {
                 int i = 0;
                 bool isFound(false);
@@ -1038,7 +1038,7 @@ void PerformanceAnalyzer::processFileForTopLogsMem(string const& filePath) {
         if (state == 2 && isNotNpos(commmandIndexInLine) && isNotNpos(memIndexInLine) &&
             commmandIndexInLine < lineInLogs.length() && memIndexInLine + 5 < lineInLogs.length()) {
             string processName(getStringWithoutStartingAndTrailingWhiteSpace(lineInLogs.substr(commmandIndexInLine)));
-            double memLoad = convertStringToNumber<double>(lineInLogs.substr(memIndexInLine - 1, 4));
+            auto memLoad = convertStringToNumber<double>(lineInLogs.substr(memIndexInLine - 1, 4));
             if (memLoad > 0 && processName != "`- top") {
                 int i = 0;
                 bool isFound(false);

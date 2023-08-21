@@ -7,7 +7,7 @@ using namespace std;
 namespace Proxy {
 
 TEST(ProxyTest, Test1) {
-    Proxy *proxy = new Proxy();
+    auto *proxy = new Proxy();
     proxy->request();
 
     delete proxy;

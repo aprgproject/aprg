@@ -18,8 +18,8 @@ TEST(OutwardCircleTraversalTest, ConstructedRadiusToCoordinatesAreCorrectForZero
 
     ExpectedRadiusToCoordinates expectation;
     expectation.emplace_back(0, Coordinate(0, 0));
-    RadiusToCoordinates::const_iterator itInVerify = radiusToCoordinates.cbegin();
-    ExpectedRadiusToCoordinates::const_iterator itInExpect = expectation.cbegin();
+    auto itInVerify = radiusToCoordinates.cbegin();
+    auto itInExpect = expectation.cbegin();
     ASSERT_EQ(expectation.size(), radiusToCoordinates.size());
     for (; itInExpect != expectation.cend() && itInVerify != radiusToCoordinates.cend();) {
         EXPECT_DOUBLE_EQ(itInExpect->first, itInVerify->first);
@@ -56,8 +56,8 @@ TEST(OutwardCircleTraversalTest, ConstructedRadiusToCoordinatesAreCorrectForRadi
     expectation.emplace_back(5.8309518948453007, Coordinate(3, 5));
     expectation.emplace_back(6.4031242374328485, Coordinate(4, 5));
     expectation.emplace_back(7.0710678118654755, Coordinate(5, 5));
-    RadiusToCoordinates::const_iterator itInVerify = radiusToCoordinates.cbegin();
-    ExpectedRadiusToCoordinates::const_iterator itInExpect = expectation.cbegin();
+    auto itInVerify = radiusToCoordinates.cbegin();
+    auto itInExpect = expectation.cbegin();
     ASSERT_EQ(expectation.size(), radiusToCoordinates.size());
     for (; itInExpect != expectation.cend() && itInVerify != radiusToCoordinates.cend();) {
         EXPECT_DOUBLE_EQ(itInExpect->first, itInVerify->first);

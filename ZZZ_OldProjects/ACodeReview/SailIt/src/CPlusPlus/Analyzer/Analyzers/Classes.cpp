@@ -14,15 +14,15 @@ namespace codeReview {
 bool TermAnalyzer::isModifiedDueToClasses(Looper const& startLooper) {
     DBGPRINT1("isModifiedDueToClasses");
     bool isModified = true;
-    if (isModifiedDueToClassDeclaration(startLooper))
+    if (isModifiedDueToClassDeclaration(startLooper)) {
         ;
-    else if (isModifiedDueToClassDefinition(startLooper))
+    } else if (isModifiedDueToClassDefinition(startLooper)) {
         ;
-    else if (isModifiedDueToCStyleStructDefinition(startLooper))
+    } else if (isModifiedDueToCStyleStructDefinition(startLooper)) {
         ;
-    else if (isModifiedDueToCStyleStructArrayDefinition(startLooper))
+    } else if (isModifiedDueToCStyleStructArrayDefinition(startLooper)) {
         ;
-    else {
+    } else {
         isModified = false;
     }
     return isModified;

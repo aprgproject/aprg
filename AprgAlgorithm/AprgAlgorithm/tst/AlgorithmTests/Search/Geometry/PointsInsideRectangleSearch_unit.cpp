@@ -10,7 +10,7 @@ namespace algorithm {
 
 namespace {
 using SearchForTest = PointsInsideRectangleSearch<double>;
-}
+} // namespace
 
 TEST(PointsInsideRectangleSearchTest, GetPointsInsideTheRectangleWorksWhenRectangleIsAtTheLeft) {
     SearchForTest search({-7, -2}, {-3, 2});

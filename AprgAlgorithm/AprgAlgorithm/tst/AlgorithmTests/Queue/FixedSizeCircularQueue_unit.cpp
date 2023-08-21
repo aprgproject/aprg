@@ -12,7 +12,7 @@ namespace algorithm {
 
 namespace {
 using QueueForTest = FixedSizeCircularQueue<int, 10>;
-}
+} // namespace
 
 TEST(FixedSizeCircularQueueTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<QueueForTest>(); }
 

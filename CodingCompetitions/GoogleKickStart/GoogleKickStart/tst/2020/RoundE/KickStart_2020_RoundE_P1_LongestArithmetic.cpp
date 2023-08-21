@@ -30,7 +30,8 @@ void runTestCase(int const testCaseNumber) {
     int N;
     my_cin >> N;
     vector<int64_t> A(N);
-    for (auto& a : A) my_cin >> a;
+    for (auto& a : A) { my_cin >> a;
+}
     vector<int64_t> D(N - 1);
     for (int i = 0; i + 1 < N; i++) {
         D[i] = A[i + 1] - A[i];

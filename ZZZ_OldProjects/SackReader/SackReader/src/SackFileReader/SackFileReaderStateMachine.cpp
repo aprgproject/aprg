@@ -101,7 +101,7 @@ void SackFileReaderStateMachine::processEndOfLine() {
     }
 }
 
-bool SackFileReaderStateMachine::isNotWhiteSpaceAndNotInComment(InputToken const& inputToken) const {
+bool SackFileReaderStateMachine::isNotWhiteSpaceAndNotInComment(InputToken const& inputToken) {
     return !isWhiteSpace(inputToken.token) && inputToken.isNotInComment;
 }
 

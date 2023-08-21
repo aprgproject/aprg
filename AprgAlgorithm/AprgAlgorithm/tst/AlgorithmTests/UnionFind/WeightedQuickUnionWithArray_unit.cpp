@@ -12,7 +12,7 @@ namespace algorithm {
 
 namespace {
 using UnionFindForTest = WeightedQuickUnionWithArray<int, 13>;
-}
+} // namespace
 
 TEST(WeightedQuickUnionWithArrayTest, IsConnectedWorks) {
     UnionFindForTest unionFind;

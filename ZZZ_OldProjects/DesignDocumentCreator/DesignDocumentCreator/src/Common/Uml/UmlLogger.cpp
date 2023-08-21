@@ -96,7 +96,7 @@ string UmlLogger::getUmlLogsForStart() const {
     return startStream.str();
 }
 
-string UmlLogger::getUmlLogsForEnd() const {
+string UmlLogger::getUmlLogsForEnd() {
     stringstream endStream;
     endStream << "@enduml\n";
     return endStream.str();

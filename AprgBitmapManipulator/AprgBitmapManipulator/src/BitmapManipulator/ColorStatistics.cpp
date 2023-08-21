@@ -55,14 +55,14 @@ void AprgColorStatistics::gatherStatistics(string const& bitmapPath) {
 
 void AprgColorStatistics::saveColorData(string const& path) {
     ofstream colorDataFileStream(path);
-    multiset<double>::const_iterator colorIntensityIterator(colorIntensitySet.cbegin());
-    multiset<double>::const_iterator hueDegreesIterator(hueDegreesSet.cbegin());
-    multiset<double>::const_iterator saturationLightnessIterator(saturationLightnessSet.cbegin());
-    multiset<double>::const_iterator lightnessIterator(lightnessSet.cbegin());
-    multiset<double>::const_iterator saturationValueIterator(saturationValueSet.cbegin());
-    multiset<double>::const_iterator valueIterator(valueSet.cbegin());
-    multiset<double>::const_iterator luma601Iterator(luma601Set.cbegin());
-    multiset<double>::const_iterator luma709Iterator(luma709Set.cbegin());
+    auto colorIntensityIterator(colorIntensitySet.cbegin());
+    auto hueDegreesIterator(hueDegreesSet.cbegin());
+    auto saturationLightnessIterator(saturationLightnessSet.cbegin());
+    auto lightnessIterator(lightnessSet.cbegin());
+    auto saturationValueIterator(saturationValueSet.cbegin());
+    auto valueIterator(valueSet.cbegin());
+    auto luma601Iterator(luma601Set.cbegin());
+    auto luma709Iterator(luma709Set.cbegin());
 
     colorDataFileStream << "colorIntensity, "
                         << "hueDegreesDividedBy360, "

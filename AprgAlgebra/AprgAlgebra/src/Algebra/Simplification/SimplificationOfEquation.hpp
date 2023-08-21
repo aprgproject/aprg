@@ -17,15 +17,15 @@ public:
     void simplify();
 
 private:
-    void simplifyLeftHandSideAndRightHandSide(Term& leftHandSide, Term& rightHandSide);
-    void raiseLeftHandSideAndRightHandSideToPowerIfLogarithmic(Term& leftHandSide, Term& rightHandSide);
-    Term getNewCombinedTerm(Term const& leftHandSide, Term const& rightHandSide) const;
-    void negateTermIfNeeded(Term& leftHandSide, std::string& equationOperatorString);
-    void removeExponentIfNeeded(Term& leftHandSide);
-    void completeExpressionWithFractionalExponentsIfNeeded(Term& leftHandSide);
-    void removeCommonConstant(Term& leftHandSide);
-    void simplifyLeftHandSide(Term& term);
-    bool areTheSignsOfTwoTermsDifferent(TermWithDetails const& firstTerm, TermWithDetails const& secondTerm);
+    static void simplifyLeftHandSideAndRightHandSide(Term& leftHandSide, Term& rightHandSide);
+    static void raiseLeftHandSideAndRightHandSideToPowerIfLogarithmic(Term& leftHandSide, Term& rightHandSide);
+    static Term getNewCombinedTerm(Term const& leftHandSide, Term const& rightHandSide) ;
+    static void negateTermIfNeeded(Term& leftHandSide, std::string& equationOperatorString);
+    static void removeExponentIfNeeded(Term& leftHandSide);
+    static void completeExpressionWithFractionalExponentsIfNeeded(Term& leftHandSide);
+    static void removeCommonConstant(Term& leftHandSide);
+    static void simplifyLeftHandSide(Term& term);
+    static bool areTheSignsOfTwoTermsDifferent(TermWithDetails const& firstTerm, TermWithDetails const& secondTerm);
 
     Equation m_equation;
 };

@@ -83,7 +83,7 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
 MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualToN::getMinimumCountUsingFewestCoins()
     const {
     CoinProblem::Coins squaredValues;
-    Count highestBase = getIntegerAfterFloorOfDoubleValue<Count>(pow(m_sumOfSquares, 0.5));
+    auto highestBase = getIntegerAfterFloorOfDoubleValue<Count>(pow(m_sumOfSquares, 0.5));
     squaredValues.reserve(highestBase);
     for (Count base = 1; base <= highestBase; base++) {
         squaredValues.emplace_back(base * base);
@@ -96,7 +96,7 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
 MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualToN::getMinimumCountUsingNaiveRecursion(
     Count const sumOfSquares) const {
     Count result(MAX_COUNT);
-    Count highestBase = getIntegerAfterFloorOfDoubleValue<Count>(pow(sumOfSquares, 0.5));
+    auto highestBase = getIntegerAfterFloorOfDoubleValue<Count>(pow(sumOfSquares, 0.5));
     if (sumOfSquares == highestBase * highestBase) {
         result = sumOfSquares > 0 ? 1 : 0;
     } else {
@@ -112,7 +112,7 @@ MinimumNumberOfSquaresWithSumEqualToN::Count MinimumNumberOfSquaresWithSumEqualT
     Counts& savedMinimumCounts, Count const sumOfSquares) const {
     Count result(savedMinimumCounts[sumOfSquares]);
     if (MAX_COUNT == result) {
-        Count highestBase = getIntegerAfterFloorOfDoubleValue<Count>(pow(sumOfSquares, 0.5));
+        auto highestBase = getIntegerAfterFloorOfDoubleValue<Count>(pow(sumOfSquares, 0.5));
         if (sumOfSquares == highestBase * highestBase) {
             result = sumOfSquares > 0 ? 1 : 0;
         } else {

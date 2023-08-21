@@ -122,9 +122,8 @@ bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingMemoization
         }
         stateMatrix.setEntry(partialSum, valueIndex, result ? State::True : State::False);
         return result;
-    } else {
-        return (State::True == resultState) ? true : false;
-    }
+    }         return (State::True == resultState) ? true : false;
+   
 }
 
 }  // namespace alba

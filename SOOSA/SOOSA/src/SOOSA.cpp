@@ -367,7 +367,7 @@ SOOSA::DoubleCollection SOOSA::getAcceptableSquareErrorCollectionUsingRemovalRat
 
 void SOOSA::updateSamplesForLineModeling(
     TwoDimensionSamples& samplesLineModeling, ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap,
-    double const maxAcceptableSquareError) const {
+    double const maxAcceptableSquareError) {
     samplesLineModeling.clear();
     for (auto const& squareErrorToSamplePair : squareErrorToSampleMultimap) {
         if (squareErrorToSamplePair.first <= maxAcceptableSquareError) {
@@ -640,7 +640,7 @@ SOOSA::RangeOfDoubles SOOSA::getMinMaxCriteriaForBar(
     return result;
 }
 
-SOOSA::OneDimensionKMeans SOOSA::getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs) const {
+SOOSA::OneDimensionKMeans SOOSA::getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs) {
     OneDimensionKMeans result;
     for (PointAndWidthPair const& pointAndWidthPair : pointAndWidthPairs) {
         result.addSample(OneDimensionSample{pointAndWidthPair.second});
@@ -796,7 +796,7 @@ double SOOSA::getMaximumDistanceForBetweenBarHeights(double const previousHeight
 
 void SOOSA::removeBarPointsWithFewHeightPointsCount(
     TwoDimensionKMeans& kMeansForBarPoints, int const numberQuestionsInColumn,
-    CountToEndPointIndexesMultiMap const& countToEndPointsIndexesMultiMap) const {
+    CountToEndPointIndexesMultiMap const& countToEndPointsIndexesMultiMap) {
     TwoDimensionSamples barPointsSamplesCopy(kMeansForBarPoints.getSamples());
     kMeansForBarPoints.clear();
     int count = 0;
@@ -922,7 +922,7 @@ string SOOSA::getReportHtmlFilePath(string const& path) const {
            m_inputConfiguration.getPeriod() + ".html";
 }
 
-string SOOSA::getPrintableStringForPercentage(double const numerator, double const denominator) const {
+string SOOSA::getPrintableStringForPercentage(double const numerator, double const denominator) {
     stringstream ss;
     if (denominator == 0) {
         ss << " - ";
@@ -1057,26 +1057,26 @@ int SOOSA::getMaximumLineAndBarWidth(BitmapSnippet const& snippet) const {
     return m_soosaConfiguration.getBitmapWidthToBarWidthMultiplier() * snippet.getConfiguration().getBitmapWidth();
 }
 
-BitmapXY SOOSA::convertToBitmapXY(Point const& point) const {
+BitmapXY SOOSA::convertToBitmapXY(Point const& point) {
     return BitmapXY(
         (int)round(clampLowerBound(point.getX(), (double)0)), (int)round(clampLowerBound(point.getY(), (double)0)));
 }
 
-BitmapXY SOOSA::convertToBitmapXY(Sample const& sample) const {
+BitmapXY SOOSA::convertToBitmapXY(Sample const& sample) {
     return BitmapXY(
         (int)round(clampLowerBound(sample.getValueAt(0), (double)0)),
         (int)round(clampLowerBound(sample.getValueAt(1), (double)0)));
 }
 
-Point SOOSA::convertToPoint(BitmapXY const& bitmapXY) const {
+Point SOOSA::convertToPoint(BitmapXY const& bitmapXY) {
     return Point((double)bitmapXY.getX(), (double)bitmapXY.getY());
 }
 
-Point SOOSA::convertToPoint(Sample const& sample) const { return Point(sample.getValueAt(0), sample.getValueAt(1)); }
+Point SOOSA::convertToPoint(Sample const& sample) { return Point(sample.getValueAt(0), sample.getValueAt(1)); }
 
-Sample SOOSA::convertToTwoDimensionSample(Point const& point) const { return Sample{point.getX(), point.getY()}; }
+Sample SOOSA::convertToTwoDimensionSample(Point const& point) { return Sample{point.getX(), point.getY()}; }
 
-SOOSA::RangeOfDoubles SOOSA::getMinMaxRangeOfSamples(OneDimensionSamples const& samples) const {
+SOOSA::RangeOfDoubles SOOSA::getMinMaxRangeOfSamples(OneDimensionSamples const& samples) {
     DoubleCollection collection;
     for (OneDimensionSample const& sample : samples) {
         collection.addData(sample.getValueAt(0));

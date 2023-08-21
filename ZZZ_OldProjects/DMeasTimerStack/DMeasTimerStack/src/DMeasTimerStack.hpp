@@ -96,7 +96,7 @@ public:
     void initIterator(TimerIndex& timerIndex);
     EBoolean isValidIterator(TimerIndex const& timerIndex);
     void clearUserTimers(TNodeBCommunicationContextId const nBCCId);
-    void removeTimerPrint(TimerType const timerType, TNodeBCommunicationContextId const nBCCId);
+    static void removeTimerPrint(TimerType const timerType, TNodeBCommunicationContextId const nBCCId);
     void dump(TimerIndex begin, TimerIndex end);
     void dump(void);
 

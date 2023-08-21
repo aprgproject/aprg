@@ -15,9 +15,9 @@ private:
     void handleCmBearersSetupReqMsg(GenericMessage const& genericMessage);
     void handleCmBearersReleaseReqMsg(GenericMessage const& genericMessage);
     void handleCmBearersModifyReqMsg(GenericMessage const& genericMessage);
-    void performErqEcfMessagingToTransport();
-    void performRelRlcMessagingToTransport();
-    void performModMoaMessagingToTransport();
+    static void performErqEcfMessagingToTransport();
+    static void performRelRlcMessagingToTransport();
+    static void performModMoaMessagingToTransport();
     void sendCmBearersSetupRespBasedCmBearersSetupReq(GenericMessage const& genericMessage) const;
     void sendCmBearersReleaseRespBasedCmBearersReleaseReq(GenericMessage const& genericMessage) const;
     void sendCmBearersModifyRespBasedCmBearersModifyReq(GenericMessage const& genericMessage) const;

@@ -9,7 +9,7 @@ public:
     using Value = uint64_t;
 
     NextHigherNumberWithSameNumberOfSetBits();
-    Value getNextHigherNumber(Value const value) const;
+    static Value getNextHigherNumber(Value const value) ;
 };
 
 }  // namespace alba

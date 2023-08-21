@@ -18,11 +18,11 @@ Indexes NearestSamples::getNearestSamplesIndexes(double const value, int const r
         containerHelper::getLowerAndUpperConstIteratorsInMap(m_valuesToIndexes, value));
 
     set<int> indexesInOrder;
-    for (ValuesToIndexes::const_iterator it = lowerAndUpperIterator.first; it != lowerAndUpperIterator.second; it++) {
+    for (auto it = lowerAndUpperIterator.first; it != lowerAndUpperIterator.second; it++) {
         indexesInOrder.emplace(it->second);
     }
-    ValuesToIndexes::const_iterator itLower = lowerAndUpperIterator.first;
-    ValuesToIndexes::const_iterator itUpper = lowerAndUpperIterator.second;
+    auto itLower = lowerAndUpperIterator.first;
+    auto itUpper = lowerAndUpperIterator.second;
     while (static_cast<int>(indexesInOrder.size()) < recommendedNumberOfSamples &&
            itLower != m_valuesToIndexes.cbegin() && itUpper != m_valuesToIndexes.cend()) {
         if (itLower != m_valuesToIndexes.cbegin()) {

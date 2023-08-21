@@ -9,7 +9,7 @@ namespace alba {
 AddTwoNumbersWithoutUsingArithmeticOperators::AddTwoNumbersWithoutUsingArithmeticOperators() {}
 
 AddTwoNumbersWithoutUsingArithmeticOperators::Value AddTwoNumbersWithoutUsingArithmeticOperators::getSum(
-    Value const value1, Value const value2) const {
+    Value const value1, Value const value2) {
     Value carry = value1 & value2;
     Value sum = value1 ^ value2;
     while (carry > 0) {

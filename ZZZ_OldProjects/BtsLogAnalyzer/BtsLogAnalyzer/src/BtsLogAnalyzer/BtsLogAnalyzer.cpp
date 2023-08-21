@@ -477,7 +477,7 @@ void BtsLogAnalyzer::processFileForBtsDelayForGrm(string const& filePath) {
     }
 }
 
-double BtsLogAnalyzer::getWireSharkTime(string const& lineInLogs) const {
+double BtsLogAnalyzer::getWireSharkTime(string const& lineInLogs) {
     int length(lineInLogs.length());
     int startIndexOfTime = 0, endIndexOfTime = 0;
     int i = 0;
@@ -495,15 +495,16 @@ double BtsLogAnalyzer::getWireSharkTime(string const& lineInLogs) const {
         lineInLogs.substr(startIndexOfTime, endIndexOfTime - startIndexOfTime));
 }
 
-string BtsLogAnalyzer::getNumberAfterThisString(string const& mainString, string const& stringToSearch) const {
+string BtsLogAnalyzer::getNumberAfterThisString(string const& mainString, string const& stringToSearch) {
     string result;
     int firstIndexOfFirstString = mainString.find(stringToSearch);
     if (stringHelper::isNotNpos(firstIndexOfFirstString)) {
         int lastIndexOfFirstString = static_cast<int>(firstIndexOfFirstString + stringToSearch.length());
         int lastIndexOfNumber;
         for (lastIndexOfNumber = lastIndexOfFirstString; stringHelper::isNumber(mainString[lastIndexOfNumber]);
-             ++lastIndexOfNumber)
+             ++lastIndexOfNumber) {
             ;
+}
         result = mainString.substr(lastIndexOfFirstString, lastIndexOfNumber - lastIndexOfFirstString);
     }
     return result;

@@ -486,7 +486,7 @@ double StartupLogAnalyzer::getTotalSeconds(BtsLogTime const& beforeTime, BtsLogT
     return getTotalSeconds(latency);
 }
 
-double StartupLogAnalyzer::getTotalSeconds(BtsLogTime const& btsLogTime) const {
+double StartupLogAnalyzer::getTotalSeconds(BtsLogTime const& btsLogTime) {
     double result(
         (double)btsLogTime.getMinutes() * 1000000 * 60 + (double)btsLogTime.getSeconds() * 1000000 +
         (double)btsLogTime.getMicroSeconds());

@@ -18,12 +18,12 @@ public:
     void transferDisksFromStartToFinish(int const numberOfDisks) const;
 
 private:
-    void initialStartStack(StackOfDisks& startStack, int const numberOfDisks) const;
+    static void initialStartStack(StackOfDisks& startStack, int const numberOfDisks) ;
     void transferByBulk(
         StackOfDisks& source, StackOfDisks& temporary, StackOfDisks& destination,
         int const numberOfDisksToTransfer) const;
     void transferOneDisk(StackOfDisks& source, StackOfDisks& destination) const;
-    void printStacksContents(StackOfDisks& source, StackOfDisks& destination) const;
+    static void printStacksContents(StackOfDisks& source, StackOfDisks& destination) ;
 };
 
 }  // namespace alba

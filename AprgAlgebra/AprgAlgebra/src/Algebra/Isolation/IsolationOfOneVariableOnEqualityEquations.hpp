@@ -15,7 +15,7 @@ public:
     Term getEquivalentTermByIsolatingAVariable(std::string const& variableName) const;
 
 private:
-    void sortEquationsWithVariable(Equations& equationsWithVariable) const;
+    static void sortEquationsWithVariable(Equations& equationsWithVariable) ;
 
     Equations m_equations;
 };

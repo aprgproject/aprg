@@ -27,9 +27,8 @@ NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPair(Value c
     Coordinates coordinatesWithValue(getCoordinatesWithThisValue(value));
     if (static_cast<int>(coordinatesWithValue.size()) <= static_cast<int>(sqrt(m_valueMatrix.getNumberOfCells()))) {
         return getNearestEqualPairByCheckingAllPairs(value);
-    } else {
-        return getNearestEqualPairUsingBfs(value);
-    }
+    }         return getNearestEqualPairUsingBfs(value);
+   
 }
 
 NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPairByCheckingAllPairs(Value const value) const {
@@ -123,7 +122,7 @@ NearestEqualCells::Coordinate NearestEqualCells::getCoordinateUsingBfs(
     return result;
 }
 
-int NearestEqualCells::getDistance(Coordinate const& coordinate1, Coordinate const& coordinate2) const {
+int NearestEqualCells::getDistance(Coordinate const& coordinate1, Coordinate const& coordinate2) {
     return getPositiveDelta(coordinate1.first, coordinate2.first) +
            getPositiveDelta(coordinate1.second, coordinate2.second);
 }

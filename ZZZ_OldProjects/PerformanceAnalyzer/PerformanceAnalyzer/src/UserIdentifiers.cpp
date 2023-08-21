@@ -37,9 +37,9 @@ bool UserIdentifiers::operator<(UserIdentifiers const& userIdentifiers) const {
 }
 
 void UserIdentifiers::saveNbccId(std::string const& lineInLogs) {
-    unsigned int nbccid = stringHelper::convertStringToNumber<unsigned int>(
+    auto nbccid = stringHelper::convertStringToNumber<unsigned int>(
         stringHelper::getNumberAfterThisString(lineInLogs, "nbccid: "));
-    unsigned int nbccId = stringHelper::convertStringToNumber<unsigned int>(
+    auto nbccId = stringHelper::convertStringToNumber<unsigned int>(
         stringHelper::getNumberAfterThisString(lineInLogs, "nbccId: "));
     if (nbccid > 0) {
         m_nbccIdOptional = nbccid;
@@ -50,9 +50,9 @@ void UserIdentifiers::saveNbccId(std::string const& lineInLogs) {
 }
 
 void UserIdentifiers::saveCrnccId(std::string const& lineInLogs) {
-    unsigned int crncId = stringHelper::convertStringToNumber<unsigned int>(
+    auto crncId = stringHelper::convertStringToNumber<unsigned int>(
         stringHelper::getNumberAfterThisString(lineInLogs, "crncId: "));
-    unsigned int crnccId = stringHelper::convertStringToNumber<unsigned int>(
+    auto crnccId = stringHelper::convertStringToNumber<unsigned int>(
         stringHelper::getNumberAfterThisString(lineInLogs, "crnccId: "));
     if (crncId > 0) {
         m_crnccIdOptional = crncId;

@@ -15,7 +15,7 @@ public:
 
     void replaceStringWithStringOnDirectories(
         std::string const& inputDirectory, std::string const& outputDirectory, StringPairs const& replacePairs);
-    void replaceStringWithStringOnFile(
+    static void replaceStringWithStringOnFile(
         std::string const& inputFilePath, std::string const& outputFilePath, StringPairs const& replacePairs);
 
     void replaceCToCPlusPlusStylePrintOnDirectories(
@@ -24,16 +24,16 @@ public:
     std::string getCPlusPlusStylePrintFromC(std::string const& inputString) const;
 
 private:
-    std::string getNewPrintStreamBasedFromOldPrintFunction(std::string const& printFunction) const;
-    void removeStartingAndTrailingWhiteSpaceInPrintParameters(stringHelper::strings& printParameters) const;
+    static std::string getNewPrintStreamBasedFromOldPrintFunction(std::string const& printFunction) ;
+    static void removeStartingAndTrailingWhiteSpaceInPrintParameters(stringHelper::strings& printParameters) ;
     std::string constructCPlusPlusPrint(
         std::string const& newPrintStream, std::string const& endPrintStream, std::string const& printString,
         stringHelper::strings const& printParameters) const;
-    void appendCharacterToResult(std::string& result, bool& isOnStringLiteral, char const c) const;
-    void appendParameterToResult(std::string& result, bool& isOnStringLiteral, std::string const& parameter) const;
-    bool isCOrCPlusPlusFile(std::string const& extension);
-    bool hasPrintInLine(std::string const& line);
-    bool hasEndOfPrintInLine(std::string const& line);
+    static void appendCharacterToResult(std::string& result, bool& isOnStringLiteral, char const c) ;
+    static void appendParameterToResult(std::string& result, bool& isOnStringLiteral, std::string const& parameter) ;
+    static bool isCOrCPlusPlusFile(std::string const& extension);
+    static bool hasPrintInLine(std::string const& line);
+    static bool hasEndOfPrintInLine(std::string const& line);
 };
 
 }  // namespace alba

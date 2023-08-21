@@ -23,11 +23,11 @@ void TermAnalyzer::simplifyExpressions(Looper const& startLooper) {
                                          << m_terms.size() << " " << conditionLooper.getContentReference() << "]");
         clearFlagsForAnotherIteration();
         if (isModifiedDueToUpdatedIdentifiers(
-                conditionLooper, previousUpdatedIndexForMacro, previousUpdatedIndexForOthers))
+                conditionLooper, previousUpdatedIndexForMacro, previousUpdatedIndexForOthers)) {
             ;
-        else if (isModifiedDueToExpressions(conditionLooper))
+        } else if (isModifiedDueToExpressions(conditionLooper)) {
             ;
-        else {
+        } else {
         }
         updateAfterOneIteration(conditionLooper, previousModifiedIndex);
     }
@@ -48,11 +48,11 @@ void TermAnalyzer::simplifyPrimitiveTypesForCurrentStatement(Looper const& start
                                                                << conditionLooper.getContentReference() << "]");
         clearFlagsForAnotherIteration();
         if (isModifiedDueToUpdatedIdentifiers(
-                conditionLooper, previousUpdatedIndexForMacro, previousUpdatedIndexForOthers))
+                conditionLooper, previousUpdatedIndexForMacro, previousUpdatedIndexForOthers)) {
             ;
-        else if (isModifiedDueToMultipleTypes(conditionLooper))
+        } else if (isModifiedDueToMultipleTypes(conditionLooper)) {
             ;
-        else if (conditionLooper.getContentReference() == Term(TermType::Operator, ";")) {
+        } else if (conditionLooper.getContentReference() == Term(TermType::Operator, ";")) {
             break;
         } else {
         }
@@ -65,37 +65,37 @@ void TermAnalyzer::simplifyPrimitiveTypesForCurrentStatement(Looper const& start
 bool TermAnalyzer::isModifiedDueToExpressions(Looper const& startLooper) {
     DBGPRINT1("isModifiedDueToExpressions");
     bool isModified = true;
-    if (isModifiedDueToScopeOperator(startLooper))
+    if (isModifiedDueToScopeOperator(startLooper)) {
         ;
-    else if (isModifiedDueToSuffixOperator(startLooper))
+    } else if (isModifiedDueToSuffixOperator(startLooper)) {
         ;
-    else if (isModifiedDueToPeriodOperator(startLooper))
+    } else if (isModifiedDueToPeriodOperator(startLooper)) {
         ;
-    else if (isModifiedDueToArrowOperator(startLooper))
+    } else if (isModifiedDueToArrowOperator(startLooper)) {
         ;
-    else if (isModifiedDueToFunctionCall(startLooper))
+    } else if (isModifiedDueToFunctionCall(startLooper)) {
         ;
-    else if (isModifiedDueToBracketOperator(startLooper))
+    } else if (isModifiedDueToBracketOperator(startLooper)) {
         ;
-    else if (isModifiedDueToRelationalPrefixOperator(startLooper))
+    } else if (isModifiedDueToRelationalPrefixOperator(startLooper)) {
         ;
-    else if (isModifiedDueToIncrementDecrementPrefixOperator(startLooper))
+    } else if (isModifiedDueToIncrementDecrementPrefixOperator(startLooper)) {
         ;
-    else if (isModifiedDueToIndirectionPrefixOperator(startLooper))
+    } else if (isModifiedDueToIndirectionPrefixOperator(startLooper)) {
         ;
-    else if (isModifiedDueToAddressOfPrefixOperator(startLooper))
+    } else if (isModifiedDueToAddressOfPrefixOperator(startLooper)) {
         ;
-    else if (isModifiedDueToBiDirectionalRelationalOperator(startLooper))
+    } else if (isModifiedDueToBiDirectionalRelationalOperator(startLooper)) {
         ;
-    else if (isModifiedDueToBiDirectionalOperator(startLooper))
+    } else if (isModifiedDueToBiDirectionalOperator(startLooper)) {
         ;
-    else if (isModifiedDueToParenthesesWithValue(startLooper))
+    } else if (isModifiedDueToParenthesesWithValue(startLooper)) {
         ;
-    else if (isModifiedDueToPrefixOperator(startLooper))
+    } else if (isModifiedDueToPrefixOperator(startLooper)) {
         ;
-    else if (isModifiedDueToTypeSimplification(startLooper))
+    } else if (isModifiedDueToTypeSimplification(startLooper)) {
         ;
-    else {
+    } else {
         isModified = false;
     }
     return isModified;
@@ -394,19 +394,19 @@ bool TermAnalyzer::isModifiedDueToParenthesesWithValue(Looper const& startLooper
 
 bool TermAnalyzer::isModifiedDueToTypeSimplification(Looper const& startLooper) {
     bool isModified = true;
-    if (isModifiedDueToMultipleTypes(startLooper))
+    if (isModifiedDueToMultipleTypes(startLooper)) {
         ;
-    else if (isModifiedDueToTypeWithConstQualifier(startLooper))
+    } else if (isModifiedDueToTypeWithConstQualifier(startLooper)) {
         ;
-    else if (isModifiedDueToTypeWithConstQualifierInvalidPosition(startLooper))
+    } else if (isModifiedDueToTypeWithConstQualifierInvalidPosition(startLooper)) {
         ;
-    else if (isModifiedDueToTypeWithDereferenceOperator(startLooper))
+    } else if (isModifiedDueToTypeWithDereferenceOperator(startLooper)) {
         ;
-    else if (isModifiedDueToTypeWithPointerOperator(startLooper))
+    } else if (isModifiedDueToTypeWithPointerOperator(startLooper)) {
         ;
-    else if (isModifiedDueToTypeWithExternKeyword(startLooper))
+    } else if (isModifiedDueToTypeWithExternKeyword(startLooper)) {
         ;
-    else {
+    } else {
         isModified = false;
     }
     return isModified;
@@ -532,7 +532,7 @@ bool TermAnalyzer::isModifiedDueToTypeWithExternKeyword(Looper const& startLoope
     return false;
 }
 
-bool TermAnalyzer::areTheTypesValidForCombination(CPlusPlusType const& type1, CPlusPlusType const& type2) const {
+bool TermAnalyzer::areTheTypesValidForCombination(CPlusPlusType const& type1, CPlusPlusType const& type2) {
     if (type1.isPrimitive() && type1.isNotAPointerOrReference() && type2.isPrimitive() &&
         type2.isNotAPointerOrReference()) {
         string const typeName1(type1.getTypeName());

@@ -29,7 +29,7 @@ TEST(BasebandCardTest, BasebandCardWorksCorrectly) {
 
     SetOfKeplers keplersInBasebandCard1(basebandCard1.getKeplers());
     ASSERT_EQ(2U, keplersInBasebandCard1.size());
-    SetOfKeplers::iterator iteratorToTraverse(keplersInBasebandCard1.cbegin());
+    auto iteratorToTraverse(keplersInBasebandCard1.cbegin());
     EXPECT_EQ(0x1230U, iteratorToTraverse++->getNid());
     EXPECT_EQ(0x1240U, iteratorToTraverse++->getNid());
 }
@@ -129,7 +129,7 @@ TEST(AsilBasebandPoolingTest, GetBasebandCardsBasedOnNumberOfLcgsIsCorrect) {
     BasebandCardsSplitBasedOnNumberOfLcgs basebandCardsWith0MultipleLcgs(
         pooling.getBasebandCardsSplitBetweenOneLcgAndMultipleLcgs(0));
     ASSERT_EQ(7U, basebandCardsWith0MultipleLcgs.basebandCardsWithOneLcg.size());
-    SetOfBasebandCards::const_iterator iteratorToTraverse =
+    auto iteratorToTraverse =
         basebandCardsWith0MultipleLcgs.basebandCardsWithOneLcg.cbegin();
     EXPECT_EQ(0x11, iteratorToTraverse++->getBoardId());
     EXPECT_EQ(0x12, iteratorToTraverse++->getBoardId());

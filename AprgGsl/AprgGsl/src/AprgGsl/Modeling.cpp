@@ -262,7 +262,7 @@ void Modeling::calculateCoefficientsUsingLeastSquares() {
     gsl_matrix_free(xModelingData);
 }
 
-unsigned int Modeling::getIndex(unsigned int const i, unsigned int const j, unsigned int const numberOfColumns) const {
+unsigned int Modeling::getIndex(unsigned int const i, unsigned int const j, unsigned int const numberOfColumns) {
     return (j * numberOfColumns) + i;
 }
 

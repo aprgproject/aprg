@@ -12,7 +12,7 @@ namespace algorithm {
 
 namespace {
 using TrieForTest = TernarySearchTrieSymbolTable<int>;
-}
+} // namespace
 
 TEST(TernarySearchTrieSymbolTableTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<TrieForTest>(); }
 

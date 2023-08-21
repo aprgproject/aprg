@@ -174,7 +174,7 @@ public:
     void processEndOfLine();
 
 private:
-    bool isNotWhiteSpaceAndNotInComment(InputToken const& inputToken) const;
+    static bool isNotWhiteSpaceAndNotInComment(InputToken const& inputToken) ;
     void processStateIdle(InputToken const& inputToken);
     void processStateSharpDefineForMessageId(InputToken const& inputToken);
     void processStateSharpDefineForConstant(InputToken const& inputToken);

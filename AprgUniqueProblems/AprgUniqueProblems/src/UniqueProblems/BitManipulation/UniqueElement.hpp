@@ -14,11 +14,11 @@ public:
     UniqueElement();
     Value getAUniqueElementOnTwoDuplicatedValues(Values const& values) const;
     ValuePairs getTwoUniqueElementsOnTwoDuplicatedValues(Values const& values) const;
-    Value getAUniqueElementOnThreeDuplicatedValues(Values const& values) const;
+    static Value getAUniqueElementOnThreeDuplicatedValues(Values const& values) ;
     Value getAnElementOccuringOddNumberOfTimes(Values const& values) const;
 
 private:
-    Value getXorResult(Values const& values) const;
+    static Value getXorResult(Values const& values) ;
 
     Values m_values;
 };

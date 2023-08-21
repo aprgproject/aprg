@@ -11,7 +11,7 @@ namespace algorithm {
 
 namespace {
 using KeywordInContextIndexingForTest = KeywordInContextIndexing<int>;
-}
+} // namespace
 
 TEST(KeywordInContextIndexingTest, GetKeywordInContextIndexingWorks) {
     string searchSpace(

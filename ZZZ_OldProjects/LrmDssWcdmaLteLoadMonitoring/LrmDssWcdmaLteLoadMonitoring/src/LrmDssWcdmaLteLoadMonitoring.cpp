@@ -38,7 +38,7 @@ unsigned int LrmDssWcdmaLteLoadMonitoring::calculateCellLoad(
     return (numberOfDchUsers * m_dchLoadFactor) + ((numberOfHsdpaUsers + hsfachLoad) * m_hsdpaAndHsfachLoadFactor);
 }
 
-EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::getNextLowerLoadState(EDssWcdmaLoad const loadState) const {
+EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::getNextLowerLoadState(EDssWcdmaLoad const loadState) {
     EDssWcdmaLoad result(EDssWcdmaLoad_Low);
     unsigned int loadStateValue = static_cast<EDssWcdmaLoad>(loadState);
     constexpr unsigned int lowLoadStateValue = static_cast<EDssWcdmaLoad>(EDssWcdmaLoad_Low);
@@ -49,7 +49,7 @@ EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::getNextLowerLoadState(EDssWcdmaLoad 
 }
 
 EDssWcdmaFilterBandwidth LrmDssWcdmaLteLoadMonitoring::convertLoadStateToFilterBandwidth(
-    EDssWcdmaLoad const loadState) const {
+    EDssWcdmaLoad const loadState) {
     EDssWcdmaFilterBandwidth result(EDssWcdmaFilterBandwidth_0_KHz);
     switch (loadState) {
         case EDssWcdmaLoad_Low:
@@ -66,7 +66,7 @@ EDssWcdmaFilterBandwidth LrmDssWcdmaLteLoadMonitoring::convertLoadStateToFilterB
 }
 
 EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::convertFilterBandwidthToLoadState(
-    EDssWcdmaFilterBandwidth const filterBandwidth) const {
+    EDssWcdmaFilterBandwidth const filterBandwidth) {
     EDssWcdmaLoad result(EDssWcdmaLoad_Low);
     switch (filterBandwidth) {
         case EDssWcdmaFilterBandwidth_0_KHz:

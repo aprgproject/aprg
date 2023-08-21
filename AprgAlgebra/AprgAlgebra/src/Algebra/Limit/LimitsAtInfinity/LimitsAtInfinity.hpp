@@ -23,7 +23,7 @@ private:
     void simplifyAsTermsOverTermsIfPossible();
     void simplifyPolynomialToMaxDegreeMonomialOnly();
     AlbaNumber getMaxDegree(Term const& term);
-    AlbaNumber getDegreeToRemove(AlbaNumber const& numeratorDegree, AlbaNumber const& denominatorDegree);
+    static AlbaNumber getDegreeToRemove(AlbaNumber const& numeratorDegree, AlbaNumber const& denominatorDegree);
 
     Term m_simplifiedTermAtInfinity;
     std::string m_variableName;

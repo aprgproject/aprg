@@ -108,7 +108,7 @@ string AprgFileExtractor::extractOneFile(
     return outputPathHandler.getFullPath();
 }
 
-bool AprgFileExtractor::isRecognizedCompressedFile(string const& extension) const {
+bool AprgFileExtractor::isRecognizedCompressedFile(string const& extension) {
     return stringHelper::isEqualNotCaseSensitive("zip", extension) ||
            stringHelper::isEqualNotCaseSensitive("tar", extension) ||
            stringHelper::isEqualNotCaseSensitive("7z", extension) ||
@@ -116,7 +116,7 @@ bool AprgFileExtractor::isRecognizedCompressedFile(string const& extension) cons
            stringHelper::isEqualNotCaseSensitive("gz", extension);
 }
 
-void AprgFileExtractor::runInConsole(string const& command) const {
+void AprgFileExtractor::runInConsole(string const& command) {
 #if defined(OS_LINUX)
     ALBA_INF_PRINT1(cout, command);
     system(command.c_str());
@@ -175,7 +175,7 @@ void AprgFileExtractor::extractAllRelevantFilesRecursively(string const& filePat
     }
 }
 
-bool AprgFileExtractor::isTheExtensionXzOrGzOrTar(string const& extension) const {
+bool AprgFileExtractor::isTheExtensionXzOrGzOrTar(string const& extension) {
     return stringHelper::isEqualNotCaseSensitive("xz", extension) ||
            stringHelper::isEqualNotCaseSensitive("gz", extension) ||
            stringHelper::isEqualNotCaseSensitive("tar", extension);

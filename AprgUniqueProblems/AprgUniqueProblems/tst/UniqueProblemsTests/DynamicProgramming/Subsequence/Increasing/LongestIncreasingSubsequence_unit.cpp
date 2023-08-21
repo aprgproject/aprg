@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using Values = LongestIncreasingSubsequence::Values;
-}
+} // namespace
 
 TEST(LongestIncreasingSubsequenceTest, GetLongestLengthWorksOnExample1) {
     LongestIncreasingSubsequence queryForTest({6, 2, 5, 1, 7, 4, 8, 3});

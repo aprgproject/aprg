@@ -33,7 +33,7 @@ UniqueElement::ValuePairs UniqueElement::getTwoUniqueElementsOnTwoDuplicatedValu
     return ValuePairs{valueWithOne, valueWithZero};
 }
 
-UniqueElement::Value UniqueElement::getAUniqueElementOnThreeDuplicatedValues(Values const& values) const {
+UniqueElement::Value UniqueElement::getAUniqueElementOnThreeDuplicatedValues(Values const& values) {
     // For three elements {01, 01, 01}:
     // -> twoElementsTracker    : 00 | 00, 00 | 01, 01 | 01, 00 |
     // -> oneElementTracker     : 00 | 01, 01 | 00, 00 | 01, 00 |
@@ -64,7 +64,7 @@ UniqueElement::Value UniqueElement::getAnElementOccuringOddNumberOfTimes(Values 
     return getXorResult(values);
 }
 
-UniqueElement::Value UniqueElement::getXorResult(Values const& values) const {
+UniqueElement::Value UniqueElement::getXorResult(Values const& values) {
     return std::accumulate(values.cbegin(), values.cend(), Value{}, [](Value const partialResult, Value const value) {
         return partialResult ^ value;
     });

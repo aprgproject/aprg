@@ -10,7 +10,7 @@ namespace algorithm {
 
 namespace {
 using TrieForTest = TernarySearchSuffixTrie;
-}
+} // namespace
 
 TEST(TernarySearchSuffixTrieTest, GetIndexOfFirstOccurrenceWorks) {
     TrieForTest trie("ABCDEF");

@@ -17,13 +17,13 @@ public:
 
     Number getNthFibonacciUsingNaiveRecursion(Number const number) const;
     Number getNthFibonacciUsingMemoizationDP(Number const number);
-    Number getNthFibonacciUsingIterativeDP(Number const number);
-    Number getNthFibonacciUsingIterativeDPAndSpaceEfficient(Number const number);
-    Number getNthFibonacciNumberUsingBinetsFormula(Number const number);
-    Number getNthFibonacciUsingMatrixMultiplication(Number const number);
-    Number getNthFibonacciUsingMatrixPowerWithLogarithmicTime(Number const number);
+    static Number getNthFibonacciUsingIterativeDP(Number const number);
+    static Number getNthFibonacciUsingIterativeDPAndSpaceEfficient(Number const number);
+    static Number getNthFibonacciNumberUsingBinetsFormula(Number const number);
+    static Number getNthFibonacciUsingMatrixMultiplication(Number const number);
+    static Number getNthFibonacciUsingMatrixPowerWithLogarithmicTime(Number const number);
     Number getNthFibonacciUsingLogarithmicMemoizationDP(Number const number);
-    Number getNthFibonacciUsingLogarithmicIterativeDP(Number const number);
+    static Number getNthFibonacciUsingLogarithmicIterativeDP(Number const number);
 
 private:
     Number getNthFibonacciUsingMemoizationDP(Numbers& memoizationData, Number const number);

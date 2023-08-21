@@ -66,7 +66,7 @@ public:
     }
 
 private:
-    Interval addValueToIntervalsAndReturnChangedInterval(Intervals& lineIntervals, int const valueToInsert) {
+    static Interval addValueToIntervalsAndReturnChangedInterval(Intervals& lineIntervals, int const valueToInsert) {
         Interval changedInterval;
         if (lineIntervals.empty()) {
             lineIntervals.emplace_back(valueToInsert, valueToInsert);

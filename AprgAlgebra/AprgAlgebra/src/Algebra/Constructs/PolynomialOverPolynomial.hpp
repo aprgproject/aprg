@@ -37,11 +37,11 @@ private:
     void convertNegativeExponentsToPositive();
     void removeCommonMonomialOnAllMonomialsInNumeratorAndDenominator();
     void factorizeRemoveCommonFactorsInNumeratorAndDenominatorAndCombineRemainingFactors();
-    int getLcmForDenominatorCoefficients(Polynomial const& polynomial);
-    Monomial getMonomialWithMaxNegativeExponentsAndConvertItToPositive(Polynomial const& polynomial);
-    bool removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(
-        Polynomials& numeratorFactors, Polynomials& denominatorFactors) const;
-    Polynomial multiplyAndSimplifyFactors(Polynomials const& factors) const;
+    static int getLcmForDenominatorCoefficients(Polynomial const& polynomial);
+    static Monomial getMonomialWithMaxNegativeExponentsAndConvertItToPositive(Polynomial const& polynomial);
+    static bool removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(
+        Polynomials& numeratorFactors, Polynomials& denominatorFactors) ;
+    static Polynomial multiplyAndSimplifyFactors(Polynomials const& factors) ;
     Polynomial m_numerator;
     Polynomial m_denominator;
     bool m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue;

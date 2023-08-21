@@ -9,7 +9,7 @@ namespace alba {
 NextHigherNumberWithSameNumberOfSetBits::NextHigherNumberWithSameNumberOfSetBits() {}
 
 NextHigherNumberWithSameNumberOfSetBits::Value NextHigherNumberWithSameNumberOfSetBits::getNextHigherNumber(
-    Value const value) const {
+    Value const value) {
     Value result{};
     if (value) {
         Value lastBitOne = AlbaBitValueUtilities<Value>::getLastBitOneOnly(value);

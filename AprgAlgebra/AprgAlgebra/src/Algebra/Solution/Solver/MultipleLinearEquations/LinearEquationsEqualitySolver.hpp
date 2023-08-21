@@ -19,10 +19,10 @@ public:
 private:
     void calculateSolution(MultipleVariableSolutionSet& solutionSet, Equations const& equations);
     void calculateSolution(MultipleVariableSolutionSet& solutionSet, Polynomials const& polynomials);
-    bool areExponentsEqualToOneAndZero(AlbaNumbersSet const& exponents) const;
-    void setMatrixCoefficients(
+    static bool areExponentsEqualToOneAndZero(AlbaNumbersSet const& exponents) ;
+    static void setMatrixCoefficients(
         NumberMatrix& coefficientsMatrix, VariableNamesSet const& variableNames, Polynomials const& polynomials);
-    void saveSolutionSetsFromTheCoefficientMatrix(
+    static void saveSolutionSetsFromTheCoefficientMatrix(
         MultipleVariableSolutionSet& solutionSet, NumberMatrix const& coefficientsMatrix,
         VariableNamesSet const& variables);
 };

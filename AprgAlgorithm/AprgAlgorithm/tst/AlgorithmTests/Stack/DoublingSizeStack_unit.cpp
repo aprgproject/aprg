@@ -12,7 +12,7 @@ namespace algorithm {
 
 namespace {
 using StackForTest = DoublingSizeStack<int>;
-}
+} // namespace
 
 TEST(DoublingSizeStackTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<StackForTest>(); }
 

@@ -9,7 +9,7 @@ public:
     using Value = uint64_t;
 
     AddTwoNumbersWithoutUsingArithmeticOperators();
-    Value getSum(Value const value1, Value const value2) const;
+    static Value getSum(Value const value1, Value const value2) ;
 };
 
 }  // namespace alba

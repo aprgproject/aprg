@@ -143,7 +143,7 @@ void Line::calculateAndSaveInitialValuesIfPossible(Point const& first) {
 
 optional<double> Line::calculateOtherCoordinate(
     double const& initialValue1, double const coefficient1, double const& initialValue2, double const coefficient2,
-    double const coordinate2) const {
+    double const coordinate2) {
     optional<double> result;
     if (!isAlmostEqual(coefficient2, 0.0)) {
         result = ((coordinate2 - initialValue2) / coefficient2 * coefficient1) + initialValue1;

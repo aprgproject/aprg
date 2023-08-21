@@ -20,11 +20,11 @@ public:
     int getExponent() const;
 
 private:
-    bool canBeSimplified(int const gcfOfExponents, Monomial const& commonMonomialInBase);
-    void factorizeAndUpdateCommonMonomialAndFactorsToExponent(
+    static bool canBeSimplified(int const gcfOfExponents, Monomial const& commonMonomialInBase);
+    static void factorizeAndUpdateCommonMonomialAndFactorsToExponent(
         Polynomial const& polynomial, PolynomialToNumberMap& factorsToExponent, Monomial& commonMonomialInBase);
-    int getGcfOfExponents(PolynomialToNumberMap const& factorsToExponent);
-    Polynomial getRemainingBase(
+    static int getGcfOfExponents(PolynomialToNumberMap const& factorsToExponent);
+    static Polynomial getRemainingBase(
         PolynomialToNumberMap const& factorsToExponent, Monomial const& commonMonomialInBase, int const gcfOfExponents);
     Polynomial m_base;
     int m_exponent;

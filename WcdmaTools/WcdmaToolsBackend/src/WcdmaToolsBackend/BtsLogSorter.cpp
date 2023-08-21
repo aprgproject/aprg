@@ -154,7 +154,7 @@ void BtsLogSorter::saveLogToOutputFileIfNotAllHavePcTime(string const& outputPat
 }
 
 string BtsLogSorter::getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
-    string const& directory, string const& hardwareAddress) const {
+    string const& directory, string const& hardwareAddress) {
     string filename = hardwareAddress.empty() ? "NoHardwareAddress" : hardwareAddress;
     return AlbaLocalPathHandler(directory + R"(\)" + filename + R"(.log)").getFullPath();
 }
@@ -270,7 +270,7 @@ void BtsLogSorter::writeLastPrint(ofstream& outputLogFileStream) {
     m_currentPrintToWrite = BtsLogPrint{};
 }
 
-void BtsLogSorter::deleteFilesInDirectory(string const& directoryOfLogs) const {
+void BtsLogSorter::deleteFilesInDirectory(string const& directoryOfLogs) {
     AlbaLocalPathHandler(directoryOfLogs).deleteFilesInDirectory();
 }
 

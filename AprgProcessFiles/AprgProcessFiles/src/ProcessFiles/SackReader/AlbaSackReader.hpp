@@ -43,10 +43,10 @@ public:
 private:
     void processDirectory(std::string const& path);
     void processFile(std::string const& path);
-    std::string getReaderStateString(ReaderState const state);
-    void tokenize(stringHelper::strings& tokens, std::string const& line);
-    void combineWords(stringHelper::strings& tokens);
-    void combineArrayOperators(stringHelper::strings& tokens);
+    static std::string getReaderStateString(ReaderState const state);
+    static void tokenize(stringHelper::strings& tokens, std::string const& line);
+    static void combineWords(stringHelper::strings& tokens);
+    static void combineArrayOperators(stringHelper::strings& tokens);
     void analyze(stringHelper::strings const& tokens);
     template <ReaderState readerState>
     void analyzeInReaderState(ReaderTransactionData& transactionData, std::string const& token);

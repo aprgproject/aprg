@@ -169,7 +169,7 @@ void CPlusPlusFileFixer::readLineWithSharpInclude(string const& line, string con
     }
 }
 
-void CPlusPlusFileFixer::notifyIfThereAreCommentsInHeader(string const& path, string const& line) const {
+void CPlusPlusFileFixer::notifyIfThereAreCommentsInHeader(string const& path, string const& line) {
     if (isStringFoundCaseSensitive(line, "//")) {
         cout << "CHECK THIS: Header comments on:[" << path << "] in line:[" << line << "]\n";
     }
@@ -358,7 +358,7 @@ void CPlusPlusFileFixer::writeHeadersWithAngleBrackets(ofstream& outputLogFileSt
     }
 }
 
-bool CPlusPlusFileFixer::isLineWithALoopStart(string const& line) const {
+bool CPlusPlusFileFixer::isLineWithALoopStart(string const& line) {
     bool result(false);
     if (isStringFoundCaseSensitive(line, "for(") || isStringFoundCaseSensitive(line, "while(")) {
         result = true;
@@ -366,7 +366,7 @@ bool CPlusPlusFileFixer::isLineWithALoopStart(string const& line) const {
     return result;
 }
 
-bool CPlusPlusFileFixer::isLineWithALoopEnd(string const& line) const {
+bool CPlusPlusFileFixer::isLineWithALoopEnd(string const& line) {
     bool result(false);
     if (isStringFoundCaseSensitive(line, "}") && !isStringFoundCaseSensitive(line, "{")) {
         result = true;
@@ -374,7 +374,7 @@ bool CPlusPlusFileFixer::isLineWithALoopEnd(string const& line) const {
     return result;
 }
 
-bool CPlusPlusFileFixer::isPathIgnored(string const& path) const {
+bool CPlusPlusFileFixer::isPathIgnored(string const& path) {
     bool result(false);
     if (isStringFoundCaseSensitive(path, "ACodeReview") || isStringFoundCaseSensitive(path, "AprgCMakeHelpers") ||
         isStringFoundCaseSensitive(path, "CImg") || isStringFoundCaseSensitive(path, "curl-7.38.0") ||
@@ -386,23 +386,23 @@ bool CPlusPlusFileFixer::isPathIgnored(string const& path) const {
     return result;
 }
 
-bool CPlusPlusFileFixer::isCPlusPlusHeader(string const& header) const {
+bool CPlusPlusFileFixer::isCPlusPlusHeader(string const& header) {
     return listOfCPlusPlusHeaders.find(header) != listOfCPlusPlusHeaders.cend();
 }
 
-bool CPlusPlusFileFixer::isLinuxHeader(string const& header) const {
+bool CPlusPlusFileFixer::isLinuxHeader(string const& header) {
     return listOfLinuxHeaders.find(header) != listOfLinuxHeaders.cend() || isStringFoundCaseSensitive(header, "sys/");
 }
 
-bool CPlusPlusFileFixer::isWindowsHeader(string const& header) const {
+bool CPlusPlusFileFixer::isWindowsHeader(string const& header) {
     return listOfWindowsHeaders.find(header) != listOfWindowsHeaders.cend();
 }
 
-bool CPlusPlusFileFixer::isGtestHeader(string const& header) const {
+bool CPlusPlusFileFixer::isGtestHeader(string const& header) {
     return isStringFoundCaseSensitive(header, "gtest");
 }
 
-bool CPlusPlusFileFixer::isQtHeader(string const& header) const {
+bool CPlusPlusFileFixer::isQtHeader(string const& header) {
     bool result(false);
     AlbaLocalPathHandler headerFileHandler(header);
     if (header.length() >= 2) {

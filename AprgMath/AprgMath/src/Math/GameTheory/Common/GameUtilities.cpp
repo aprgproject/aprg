@@ -11,9 +11,8 @@ namespace math {
 GameState reverseGameState(GameState const gameState) {
     if (GameState::Losing == gameState) {
         return GameState::Winning;
-    } else {
-        return GameState::Losing;
-    }
+    }         return GameState::Losing;
+   
 }
 
 GameState getGameStateFromGrundyNumber(UnsignedInteger const grundyNumber) {
@@ -21,9 +20,8 @@ GameState getGameStateFromGrundyNumber(UnsignedInteger const grundyNumber) {
 
     if (grundyNumber > 0) {
         return GameState::Winning;
-    } else {
-        return GameState::Losing;
-    }
+    }         return GameState::Losing;
+   
 }
 
 UnsignedInteger getGrundyNumber(SetOfUnsignedIntegers const& nextGrundyNumbers) {

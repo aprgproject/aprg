@@ -66,7 +66,7 @@ void SimplificationOfEquation::raiseLeftHandSideAndRightHandSideToPowerIfLogarit
     }
 }
 
-Term SimplificationOfEquation::getNewCombinedTerm(Term const& leftHandSide, Term const& rightHandSide) const {
+Term SimplificationOfEquation::getNewCombinedTerm(Term const& leftHandSide, Term const& rightHandSide) {
     Term combinedTerm;
     if (isTheValue(leftHandSide, AlbaNumber(0))) {
         combinedTerm = rightHandSide;

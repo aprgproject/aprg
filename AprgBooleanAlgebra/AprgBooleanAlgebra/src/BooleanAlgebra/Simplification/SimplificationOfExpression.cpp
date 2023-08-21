@@ -49,7 +49,7 @@ void SimplificationOfExpression::simplify() {
     }
 }
 
-bool SimplificationOfExpression::isChangeDetected(Expression const& expression1, Expression const& expression2) const {
+bool SimplificationOfExpression::isChangeDetected(Expression const& expression1, Expression const& expression2) {
     return expression1 != expression2;
 }
 

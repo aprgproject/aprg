@@ -24,12 +24,12 @@ public:
     static bool shouldSimplifyTrigonometricFunctionsToSinAndCos();
     static bool shouldNotSimplifyLogarithmicFunctionsByReducingTheOperatorLevel();
 
-    Term simplifyToTerm(Function const& functionObject);
+    static Term simplifyToTerm(Function const& functionObject);
 
 private:
-    Term simplifyTrigometricFunctionToExpression(Function const& functionObject);
-    Term simplifyLogarithmicFunctionToExpression(Function const& functionObject);
-    Term getLogarithmicOfTermBasedFromName(Term const& term, std::string const& functionName) const;
+    static Term simplifyTrigometricFunctionToExpression(Function const& functionObject);
+    static Term simplifyLogarithmicFunctionToExpression(Function const& functionObject);
+    static Term getLogarithmicOfTermBasedFromName(Term const& term, std::string const& functionName) ;
 };
 
 }  // namespace Simplification

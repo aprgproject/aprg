@@ -36,7 +36,7 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
                 if (wordLength > targetLineLength) {
                     hasNoSolutions = true;
                     break;  // no possible solutions on all lengths
-                } else if (lineLength + 1 + wordLength <= targetLineLength) {
+                } if (lineLength + 1 + wordLength <= targetLineLength) {
                     lineLength += 1 + wordLength;  // plus one for space
                 } else                             // does not fit with line so create next line
                 {
@@ -137,7 +137,7 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getTotalCostOfA
 
 // inline optimization can work here because the usage belongs to same translation unit
 inline WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getCostFromExtraSpaces(
-    Index const numberOfExtraSpaces) const {
+    Index const numberOfExtraSpaces) {
     return numberOfExtraSpaces * numberOfExtraSpaces *
            numberOfExtraSpaces;  // sum of cubes is used for cost to avoid single long lengths
 }

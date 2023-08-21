@@ -52,7 +52,7 @@ PrintMaximumNumberOfAs::Count PrintMaximumNumberOfAs::getMaxCountOfAOnScreenUsin
     CountDetailMatrix savedCounts(m_numberOfPresses + 1, static_cast<Count>(PressType::CtrlV) + 1, CountDetail{});
     for (Count remainingNumberOfPresses = 1; remainingNumberOfPresses <= m_numberOfPresses;
          remainingNumberOfPresses++) {
-        for (Count pressTypeValue = static_cast<Count>(PressType::TypeA);
+        for (auto pressTypeValue = static_cast<Count>(PressType::TypeA);
              pressTypeValue <= static_cast<Count>(PressType::CtrlV); pressTypeValue++) {
             CountDetails previousDetails{
                 savedCounts.getEntryConstReference(remainingNumberOfPresses - 1, static_cast<Count>(PressType::TypeA)),
@@ -67,7 +67,7 @@ PrintMaximumNumberOfAs::Count PrintMaximumNumberOfAs::getMaxCountOfAOnScreenUsin
     }
 
     Count result(0);
-    for (Count pressTypeValue = static_cast<Count>(PressType::TypeA);
+    for (auto pressTypeValue = static_cast<Count>(PressType::TypeA);
          pressTypeValue <= static_cast<Count>(PressType::CtrlV); pressTypeValue++) {
         result = max(result, savedCounts.getEntryConstReference(m_numberOfPresses, pressTypeValue).numberInScreen);
     }
@@ -80,8 +80,7 @@ PrintMaximumNumberOfAs::Count PrintMaximumNumberOfAs::getMaxCountOfAOnScreenUsin
 
     if (m_numberOfPresses <= 6) {
         return m_numberOfPresses;
-    } else {
-        Counts countsOnScreen(m_numberOfPresses, 0);
+    }         Counts countsOnScreen(m_numberOfPresses, 0);
         for (Count remainingNumberOfPresses = 1; remainingNumberOfPresses <= 6; remainingNumberOfPresses++) {
             countsOnScreen[remainingNumberOfPresses - 1] = remainingNumberOfPresses;
         }
@@ -96,7 +95,7 @@ PrintMaximumNumberOfAs::Count PrintMaximumNumberOfAs::getMaxCountOfAOnScreenUsin
             }
         }
         return countsOnScreen.back();
-    }
+   
 }
 
 PrintMaximumNumberOfAs::CountDetail PrintMaximumNumberOfAs::getMaxCountOfAOnScreenUsingNaiveRecursion(
@@ -141,7 +140,7 @@ PrintMaximumNumberOfAs::CountDetail PrintMaximumNumberOfAs::getBestDetailBasedOn
                 return first.numberInScreen < second.numberInScreen;
             });
         return *it;
-    } else if (remainingNumberOfPresses + 1 == m_numberOfPresses) {
+    } if (remainingNumberOfPresses + 1 == m_numberOfPresses) {
         auto it = max_element(
             previousDetails.cbegin(), previousDetails.cend(), [](CountDetail const& first, CountDetail const& second) {
                 return first.numberInScreen + first.numberInBuffer < second.numberInScreen + second.numberInBuffer;
@@ -158,7 +157,7 @@ PrintMaximumNumberOfAs::CountDetail PrintMaximumNumberOfAs::getBestDetailBasedOn
 }
 
 void PrintMaximumNumberOfAs::updateDetailsBasedOnPressType(
-    CountDetails& previousDetails, PressType const pressType) const {
+    CountDetails& previousDetails, PressType const pressType) {
     switch (pressType) {
         case PressType::TypeA: {
             for (auto& previousDetail : previousDetails) {

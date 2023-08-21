@@ -110,9 +110,9 @@ private:
     Line getLineModel(TwoDimensionSamples const& samples) const;
     DoubleCollection getAcceptableSquareErrorCollectionUsingRemovalRatio(
         ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap) const;
-    void updateSamplesForLineModeling(
+    static void updateSamplesForLineModeling(
         TwoDimensionSamples& samplesLineModeling, ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap,
-        double const maxAcceptableSquareError) const;
+        double const maxAcceptableSquareError) ;
 
     // Column functions
     void processTwoColumns(
@@ -153,7 +153,7 @@ private:
     RangeOfDoubles getMinMaxCriteriaForBar(PointAndWidthPairs const& pointAndWidthPairs) const;
     RangeOfDoubles getMinMaxCriteriaForBar(
         OneDimensionStatistics& firstGroupStatistics, OneDimensionStatistics& secondGroupStatistics) const;
-    OneDimensionKMeans getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs) const;
+    static OneDimensionKMeans getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs) ;
     PointAndWidthPairs getAcceptablePointAndWidthPairs(
         BitmapSnippet const& snippet, Line const& line, Point const& startPoint, Point const& endPoint) const;
     Point getNearestBlackPointFromLine(BitmapSnippet const& snippet, Line const& line, Point const& pointInLine) const;
@@ -173,9 +173,9 @@ private:
     CountToEndPointIndexesMultiMap getHeightPointsCountToEndPointIndexesMultimap(
         TwoDimensionKMeans& kMeansForBarPoints) const;
     double getMaximumDistanceForBetweenBarHeights(double const previousHeight) const;
-    void removeBarPointsWithFewHeightPointsCount(
+    static void removeBarPointsWithFewHeightPointsCount(
         TwoDimensionKMeans& kMeansForBarPoints, int const numberQuestionsInColumn,
-        CountToEndPointIndexesMultiMap const& countToEndPointsIndexesMultiMap) const;
+        CountToEndPointIndexesMultiMap const& countToEndPointsIndexesMultiMap) ;
     void removeBarPointsToGetConsistentHeight(
         TwoDimensionKMeans& kMeansForBarPoints, int const numberQuestionsInColumn) const;
     void addAndRetainBarPointsIfPossible(
@@ -187,7 +187,7 @@ private:
     // output related functions
     std::string getCsvFilePath(std::string const& path) const;
     std::string getReportHtmlFilePath(std::string const& path) const;
-    std::string getPrintableStringForPercentage(double const numerator, double const denominator) const;
+    static std::string getPrintableStringForPercentage(double const numerator, double const denominator) ;
     void setAnswerToQuestionInColumn(int const columnNumber, int const questionOffsetInColumn, int const answer);
     void saveDataToCsvFile(std::string const& processedFilePath) const;
     void saveHeadersToCsvFile() const;
@@ -197,12 +197,12 @@ private:
     // utilities
     bool isBlackAt(BitmapSnippet const& snippet, BitmapXY const bitmapXy) const;
     int getMaximumLineAndBarWidth(BitmapSnippet const& snippet) const;
-    BitmapXY convertToBitmapXY(Point const& point) const;
-    BitmapXY convertToBitmapXY(TwoDimensionSample const& sample) const;
-    Point convertToPoint(BitmapXY const& bitmapXY) const;
-    Point convertToPoint(TwoDimensionSample const& sample) const;
-    TwoDimensionSample convertToTwoDimensionSample(Point const& point) const;
-    RangeOfDoubles getMinMaxRangeOfSamples(OneDimensionSamples const& samples) const;
+    static BitmapXY convertToBitmapXY(Point const& point) ;
+    static BitmapXY convertToBitmapXY(TwoDimensionSample const& sample) ;
+    static Point convertToPoint(BitmapXY const& bitmapXY) ;
+    static Point convertToPoint(TwoDimensionSample const& sample) ;
+    static TwoDimensionSample convertToTwoDimensionSample(Point const& point) ;
+    static RangeOfDoubles getMinMaxRangeOfSamples(OneDimensionSamples const& samples) ;
 
     SoosaConfiguration m_soosaConfiguration;
     InputConfiguration m_inputConfiguration;

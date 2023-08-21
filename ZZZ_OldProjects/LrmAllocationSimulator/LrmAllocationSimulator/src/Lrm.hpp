@@ -102,7 +102,7 @@ private:
     // numberOfDspToAllocate, FspAddresses const& fspAddresses, unsigned int const lcgId) const; void
     // saveNeededFspsForCcdOrMcdBasedOnTurboNyquist(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int&
     // numberOfDspToAllocate, FspAddresses const& fspAddresses, unsigned int const lcgId) const;
-    unsigned int getPriorityBasedOnLessUsersAndHsupaCfsForDsp(Dsp const& dsp) const;
+    static unsigned int getPriorityBasedOnLessUsersAndHsupaCfsForDsp(Dsp const& dsp) ;
     void saveNeededFspsForCcdOrMcdBasedOnNOrTn(
         UniqueFspAddresses& neededUniqueFspAddresses, unsigned int& numberOfDspCcdAndMcd,
         FspAddresses const& fspAddresses, unsigned int const lcgId) const;
@@ -141,9 +141,9 @@ private:
     void sortDspAddressesBasedOnCondition(
         DspAddresses& dspAddressesForLcgInFsp, DspComparisonCondition const& condition) const;
 
-    void setSelectionDspResult(SelectionDspResult& selectionDspResultReference, unsigned int const fspAddress) const;
-    void incrementNAndTnCountBasedOnNyquistType(
-        NyquistAndTurboNyquistCount& countReference, NyquistType const nyquistType) const;
+    static void setSelectionDspResult(SelectionDspResult& selectionDspResultReference, unsigned int const fspAddress) ;
+    static void incrementNAndTnCountBasedOnNyquistType(
+        NyquistAndTurboNyquistCount& countReference, NyquistType const nyquistType) ;
 
     bool canTnBeAllocatedBasedOnPicAndNumberOfTnToBeAllocated(
         NyquistAndTurboNyquistCount const& nAndTnCountInMsmOfLcg, unsigned int const numberOfTurboNyquistToBeUsed,
@@ -158,27 +158,27 @@ private:
     void copyUsedDliPoolsOnFsp(DliPools& usedDliPools, unsigned int const fspAddress) const;
     void copyUsedDliPoolsOnOtherFspsExceptThisFsp(
         DliPools& usedDliPools, unsigned int const fspAddressOfSkippedFsp) const;
-    unsigned int getConflictingDliPoolForThisDli(unsigned int const dliPool) const;
-    unsigned int getLeastConflictingDliPoolForThisDli(unsigned int const dliPool) const;
+    static unsigned int getConflictingDliPoolForThisDli(unsigned int const dliPool) ;
+    static unsigned int getLeastConflictingDliPoolForThisDli(unsigned int const dliPool) ;
     bool canAFreeDliBeAllocatedInFsp(unsigned int const fspAddress, unsigned int const lcgId) const;
 
     void copyAllFspPairs(FspPairsDetails& fspPairsDetails) const;
     void sortFspPairsForCcdMcdSelection(FspPairsDetails& fspPairsDetails) const;
     void removeFspPairsForCcdMcdSelection(FspPairsDetails& fspPairsDetails, unsigned int const lcgId) const;
     void removeFspPairsForCcdNbicMcdSelection(FspPairsDetails& fspPairsDetails, unsigned int const lcgId) const;
-    void sortFspPairsBasedOnCondition(
-        FspPairsDetails& fspPairsDetails, FspPairDetailsComparisonCondition const& condition) const;
-    void removeFspPairsBasedOnCondition(
-        FspPairsDetails& fspPairsDetails, FspPairDetailsCondition const& condition) const;
+    static void sortFspPairsBasedOnCondition(
+        FspPairsDetails& fspPairsDetails, FspPairDetailsComparisonCondition const& condition) ;
+    static void removeFspPairsBasedOnCondition(
+        FspPairsDetails& fspPairsDetails, FspPairDetailsCondition const& condition) ;
     void updatePriorityForAllFspPairs(FspPairsDetails& fspPairsDetail, unsigned int const lcgId) const;
     unsigned int getPriorityForFspPair(FspPairDetails const& fspPairDetails, unsigned int const lcgId) const;
 
     void changeModeForCcdAndUpdateDspDetails(SelectionDspResultForCcdAndMcd const& selectionDspResultForCcdAndMcd);
     void changeModeForMcdAndUpdateDspDetails(SelectionDspResultForCcdAndMcd const& selectionDspResultForCcdAndMcd);
     void changeModeAndUpdateDspDetails(SelectionDspResult const& selectionDspResult, DspMode const dspMode);
-    void changeMode(Dsp& dspToChange, DspMode const dspMode);
-    void setDliIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic, unsigned int const dliPool);
-    void setAsNbicIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic);
+    static void changeMode(Dsp& dspToChange, DspMode const dspMode);
+    static void setDliIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic, unsigned int const dliPool);
+    static void setAsNbicIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic);
 
     unsigned int getNumberOfUnallocatedPicPoolsForLcg(unsigned int const lcgId) const;
 

@@ -205,7 +205,7 @@ TEST(DomainAndRangeTest, AppendTransitionValuesWorks) {
     appendTransitionValues(collectedValues, sortedValues, [](AlbaNumber const& number) { return (number - 6) ^ 0.5; });
 
     ASSERT_EQ(1U, collectedValues.size());
-    AlbaNumbersSet::const_iterator it = collectedValues.cbegin();
+    auto it = collectedValues.cbegin();
     EXPECT_EQ(AlbaNumber(6), *(it++));
 }
 

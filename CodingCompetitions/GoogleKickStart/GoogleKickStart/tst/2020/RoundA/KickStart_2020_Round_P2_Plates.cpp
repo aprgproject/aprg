@@ -39,7 +39,8 @@ void runTestCase(int const testCaseNumber) {
             my_cin >> a[i][j];
             s += a[i][j];
             // use j+1 plates
-            for (int l = 0; l + j + 1 <= p; ++l) dp[i + 1][l + j + 1] = max(dp[i][l] + s, dp[i + 1][l + j + 1]);
+            for (int l = 0; l + j + 1 <= p; ++l) { dp[i + 1][l + j + 1] = max(dp[i][l] + s, dp[i + 1][l + j + 1]);
+}
         }
     }
     my_cout << "Case #" << testCaseNumber << ": " << dp[n][p] << '\n';

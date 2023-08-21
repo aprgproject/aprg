@@ -19,9 +19,8 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingNaiveRecursion(Nu
 
     if (number <= 1) {
         return number;
-    } else {
-        return getNthFibonacciUsingNaiveRecursion(number - 1) + getNthFibonacciUsingNaiveRecursion(number - 2);
-    }
+    }         return getNthFibonacciUsingNaiveRecursion(number - 1) + getNthFibonacciUsingNaiveRecursion(number - 2);
+   
 }
 
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMemoizationDP(Number const number) {
@@ -72,8 +71,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDPAndSpa
 
     if (number == 0) {
         return 0;
-    } else {
-        Number previousFibonacci(0);
+    }         Number previousFibonacci(0);
         Number currentFibonacci(1);
         for (Number n = 2; n <= number; n++) {
             Number nextFibonacci = currentFibonacci + previousFibonacci;
@@ -81,7 +79,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDPAndSpa
             currentFibonacci = nextFibonacci;
         }
         return currentFibonacci;
-    }
+   
 }
 
 FibonacciExample::Number FibonacciExample::getNthFibonacciNumberUsingBinetsFormula(Number const number) {
@@ -111,15 +109,14 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMatrixMultiplicat
 
     if (number == 0) {
         return 0;
-    } else {
-        NumberMatrix formulaicTransform(2, 2, {0, 1, 1, 1});
+    }         NumberMatrix formulaicTransform(2, 2, {0, 1, 1, 1});
 
         NumberMatrix fibonacciMatrix(formulaicTransform);
         for (Number i = 2; i < number; i++) {
             fibonacciMatrix *= formulaicTransform;
         }
         return fibonacciMatrix.getEntry(1, 1);
-    }
+   
 }
 
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMatrixPowerWithLogarithmicTime(Number const number) {
@@ -130,8 +127,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMatrixPowerWithLo
 
     if (number == 0) {
         return 0;
-    } else {
-        // Matrix representation:
+    }         // Matrix representation:
         // |f(n-1)|f(n)  |
         // |f(n)  |f(n+1)|
 
@@ -139,7 +135,7 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMatrixPowerWithLo
 
         NumberMatrix fibonacciMatrix(getMatrixRaiseToScalarPower(formulaicTransform, number - 1));  // logarithmic
         return fibonacciMatrix.getEntry(1, 1);
-    }
+   
 }
 
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicMemoizationDP(Number const number) {

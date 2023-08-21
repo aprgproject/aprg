@@ -94,9 +94,8 @@ ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingMemoizationDP(
             minimumPrices.setEntry(day, productBits, result);
         }
         return result;
-    } else {
-        return INVALID_PRICE;
-    }
+    }         return INVALID_PRICE;
+   
 }
 
 // inline optimization can work here because the usage belongs to same translation unit
@@ -120,17 +119,17 @@ inline ProductDayProblem::ProductBits ProductDayProblem::getProductBitsWithAllPr
     return AlbaBitValueUtilities<ProductBits>::generateOnesWithNumberOfBits(getNumberOfProducts());
 }
 
-inline ProductDayProblem::ProductBits ProductDayProblem::getProductBits(Product const product) const {
+inline ProductDayProblem::ProductBits ProductDayProblem::getProductBits(Product const product) {
     return 1 << product;
 }
 
 inline ProductDayProblem::ProductBits ProductDayProblem::addProduct(
-    ProductBits const productBits, Product const product) const {
+    ProductBits const productBits, Product const product) {
     return productBits | (1 << product);
 }
 
 inline ProductDayProblem::ProductBits ProductDayProblem::removeProduct(
-    ProductBits const productBits, Product const product) const {
+    ProductBits const productBits, Product const product) {
     return productBits & ~(1 << product);
 }
 

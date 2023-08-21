@@ -25,27 +25,27 @@ public:
 
 private:
     void rationalize(Term& termToRationalize, Term& otherTerm);
-    void simplifyForRationalize(Term& term);
-    void retrieveTermsForRationalization(Term& rationalizedTerm, Term& multiplier, Term const& term) const;
-    void retrieveTermsForRationalizationForPolynomial(
-        Term& rationalizedTerm, Term& multiplier, Polynomial const& polynomial) const;
-    void retrieveTermsForRationalizationForPolynomial(
-        Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial) const;
-    void retrieveTermsForRationalizationForPolynomialWhenExponentIsDivisibleByTwo(
-        Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial) const;
-    void retrieveTermsForRationalizationForPolynomialWhenExponentIsDivisibleByThree(
-        Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial) const;
-    void retrieveTermsForRationalizationForExpression(
-        Term& rationalizedTerm, Term& multiplier, Expression const& expression) const;
-    void retrieveTermsForRationalizationForExpression(
+    static void simplifyForRationalize(Term& term);
+    static void retrieveTermsForRationalization(Term& rationalizedTerm, Term& multiplier, Term const& term) ;
+    static void retrieveTermsForRationalizationForPolynomial(
+        Term& rationalizedTerm, Term& multiplier, Polynomial const& polynomial) ;
+    static void retrieveTermsForRationalizationForPolynomial(
+        Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial) ;
+    static void retrieveTermsForRationalizationForPolynomialWhenExponentIsDivisibleByTwo(
+        Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial) ;
+    static void retrieveTermsForRationalizationForPolynomialWhenExponentIsDivisibleByThree(
+        Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial) ;
+    static void retrieveTermsForRationalizationForExpression(
+        Term& rationalizedTerm, Term& multiplier, Expression const& expression) ;
+    static void retrieveTermsForRationalizationForExpression(
         Term& rationalizedTerm, Term& multiplier, TermWithDetails const& firstTermWithDetails,
-        TermWithDetails const& secondTermWithDetails) const;
-    void retrieveTermsForRationalizationForExpressionWhenExponentIsDivisibleByTwo(
+        TermWithDetails const& secondTermWithDetails) ;
+    static void retrieveTermsForRationalizationForExpressionWhenExponentIsDivisibleByTwo(
         Term& rationalizedTerm, Term& multiplier, TermWithDetails const& firstTermWithDetails,
-        TermWithDetails const& secondTermWithDetails) const;
-    void retrieveTermsForRationalizationForExpressionWhenExponentIsDivisibleByThree(
+        TermWithDetails const& secondTermWithDetails) ;
+    static void retrieveTermsForRationalizationForExpressionWhenExponentIsDivisibleByThree(
         Term& rationalizedTerm, Term& multiplier, TermWithDetails const& firstTermWithDetails,
-        TermWithDetails const& secondTermWithDetails) const;
+        TermWithDetails const& secondTermWithDetails) ;
     Term m_numerator;
     Term m_denominator;
 };

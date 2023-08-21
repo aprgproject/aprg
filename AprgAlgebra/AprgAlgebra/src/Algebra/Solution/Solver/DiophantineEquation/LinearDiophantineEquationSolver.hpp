@@ -20,7 +20,7 @@ public:
 protected:
     void calculateSolution(MultipleVariableSolutionSet& solutionSet, Equation const& equation);
     void calculateForEquation(MultipleVariableSolutionSet& solutionSet, Equation const& equation);
-    void retrieveDetailsFromPolynomial(
+    static void retrieveDetailsFromPolynomial(
         bool& isPatternRecognized, AlbaNumber& a, AlbaNumber& b, AlbaNumber& c, std::string& xName, std::string& yName,
         Polynomial const& polynomial);
     AlbaNumbers m_calculatedValues;

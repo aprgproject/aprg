@@ -318,10 +318,10 @@ void HardwareConfiguration::addDsp(unsigned int const dspAddress) {
 void HardwareConfiguration::setLcgIdOfDsps(LcgIds const& lcgIds) {
     assert(lcgIds.size() == m_dspAddressToDspMap.size());
 
-    AddressToDspMap::iterator mapIterator = m_dspAddressToDspMap.begin();
-    AddressToDspMap::iterator mapIteratorEnd = m_dspAddressToDspMap.end();
-    LcgIds::const_iterator lcgIdsIterator = lcgIds.cbegin();
-    LcgIds::const_iterator lcgIdsIteratorEnd = lcgIds.cend();
+    auto mapIterator = m_dspAddressToDspMap.begin();
+    auto mapIteratorEnd = m_dspAddressToDspMap.end();
+    auto lcgIdsIterator = lcgIds.cbegin();
+    auto lcgIdsIteratorEnd = lcgIds.cend();
     while (lcgIdsIterator != lcgIdsIteratorEnd && mapIterator != mapIteratorEnd) {
         mapIterator->second.setLcgId(*lcgIdsIterator);
         lcgIdsIterator++;
@@ -329,12 +329,12 @@ void HardwareConfiguration::setLcgIdOfDsps(LcgIds const& lcgIds) {
     }
 }
 
-NyquistType HardwareConfiguration::computeNyquistTypeBasedOnDspAddress(unsigned int const dspAddress) const {
+NyquistType HardwareConfiguration::computeNyquistTypeBasedOnDspAddress(unsigned int const dspAddress) {
     bool isCpuEven = isEven((dspAddress & 0x00F0) >> 4);
     return isCpuEven ? NyquistType::TurboNyquist : NyquistType::Nyquist;
 }
 
-SmType HardwareConfiguration::getSmTypeBasedOnAddress(unsigned int const fspAddress) const {
+SmType HardwareConfiguration::getSmTypeBasedOnAddress(unsigned int const fspAddress) {
     return ((fspAddress & 0xF000) >> 12 == 1) ? SmType::MSM : SmType::ESM;
 }
 

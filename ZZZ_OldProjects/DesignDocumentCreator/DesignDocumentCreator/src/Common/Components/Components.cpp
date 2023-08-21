@@ -38,7 +38,7 @@ void Components::executePendingEventsUsingRoundRobin() {
     bool isNotChanged(true);
     while (isNotChanged) {
         isNotChanged = false;
-        for (ComponentMap::iterator componentIterator = m_componentsMap.begin();
+        for (auto componentIterator = m_componentsMap.begin();
              componentIterator != m_componentsMap.end(); componentIterator++) {
             Component* componentPointer((componentIterator->second).get());
             if (!componentPointer->isEventQueueEmpty()) {
@@ -50,7 +50,7 @@ void Components::executePendingEventsUsingRoundRobin() {
 }
 
 void Components::executeAllPendingEventsPerComponent() {
-    for (ComponentMap::iterator componentIterator = m_componentsMap.begin(); componentIterator != m_componentsMap.end();
+    for (auto componentIterator = m_componentsMap.begin(); componentIterator != m_componentsMap.end();
          componentIterator++) {
         Component* componentPointer((componentIterator->second).get());
         if (!componentPointer->isEventQueueEmpty()) {

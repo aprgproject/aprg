@@ -53,7 +53,7 @@ public:
     void simplify();
 
 private:
-    bool isChangeDetected(Expression const& expression1, Expression const& expression2) const;
+    static bool isChangeDetected(Expression const& expression1, Expression const& expression2) ;
 
     void simplifyExpressionUntilNoChange();
     void simplifyExpression(Expression& expression);
@@ -63,29 +63,29 @@ private:
 
     void processTermsBaseOnOperatorLevel(
         Expression& expression, TermsWithDetails const& termsToProcess, OperatorLevel const operatorLevel);
-    void processAndSaveTermsForAdditionAndSubtraction(Expression& expression, TermsWithDetails const& termsToProcess);
-    void processAndSaveTermsForMultiplicationAndDivision(
+    static void processAndSaveTermsForAdditionAndSubtraction(Expression& expression, TermsWithDetails const& termsToProcess);
+    static void processAndSaveTermsForMultiplicationAndDivision(
         Expression& expression, TermsWithDetails const& termsToProcess);
-    void processAndSaveTermsForRaiseToPower(Expression& expression, TermsWithDetails const& termsToProcess);
+    static void processAndSaveTermsForRaiseToPower(Expression& expression, TermsWithDetails const& termsToProcess);
 
     // functions for addition/subtraction
-    void addOrSubtractTermsWithExpressions(Term& combinedTerm, TermsWithDetails const& termsWithExpressions) const;
+    static void addOrSubtractTermsWithExpressions(Term& combinedTerm, TermsWithDetails const& termsWithExpressions) ;
 
     // functions for multiplication/division
-    void simplifyByCombiningRadicalsInMultiplicationAndDivisionIfNeeded(
-        TermsWithDetails& termsInMultiplicationAndDivision) const;
-    Term getCombinedTermAndSimplifyByRationalizingNumeratorOrDenominatorIfNeeded(
-        TermsOverTerms const& termsOverTerms) const;
+    static void simplifyByCombiningRadicalsInMultiplicationAndDivisionIfNeeded(
+        TermsWithDetails& termsInMultiplicationAndDivision) ;
+    static Term getCombinedTermAndSimplifyByRationalizingNumeratorOrDenominatorIfNeeded(
+        TermsOverTerms const& termsOverTerms) ;
 
     // functions for raise to power
-    Term getCombinedTermUsingTermsRaiseToTerms(TermRaiseToTerms const& termRaiseToTerms);
-    Term getEachBasesRaisedToConstantIfPossible(TermRaiseToTerms const& termRaiseToTerms);
+    static Term getCombinedTermUsingTermsRaiseToTerms(TermRaiseToTerms const& termRaiseToTerms);
+    static Term getEachBasesRaisedToConstantIfPossible(TermRaiseToTerms const& termRaiseToTerms);
 
     // other functions
-    bool shouldDistributeExponentConstantToEachBase() const;
-    Factorization::ConfigurationDetails getFactorizationConfiguration() const;
+    static bool shouldDistributeExponentConstantToEachBase() ;
+    static Factorization::ConfigurationDetails getFactorizationConfiguration() ;
     bool tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(Expression const& expression);
-    Expression getNewExpressionWithSubstitutedVariableForTerm(Term const& mainExpression, Term const& termToSubstitute);
+    static Expression getNewExpressionWithSubstitutedVariableForTerm(Term const& mainExpression, Term const& termToSubstitute);
     void convertPolynomialOverPolynomialIfNeeded();
     void convertPolynomialToPolynomialOverPolynomial(Term& term);
     void convertPolynomialToPolynomialOverPolynomial(Expression& expression);

@@ -14,11 +14,11 @@ namespace codeReview {
 bool TermAnalyzer::isModifiedDueToNamespaces(Looper const& startLooper) {
     DBGPRINT1("isModifiedDueToNamespaces");
     bool isModified = true;
-    if (isModifiedDueToNamespaceDefinition(startLooper))
+    if (isModifiedDueToNamespaceDefinition(startLooper)) {
         ;
-    else if (isModifiedDueToExternBlock(startLooper))
+    } else if (isModifiedDueToExternBlock(startLooper)) {
         ;
-    else {
+    } else {
         isModified = false;
     }
     return isModified;

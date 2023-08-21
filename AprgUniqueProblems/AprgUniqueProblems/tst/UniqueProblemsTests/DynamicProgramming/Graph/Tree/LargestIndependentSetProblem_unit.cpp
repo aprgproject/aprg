@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using SetOfVertices = LargestIndependentSetProblem::SetOfVertices;
-}
+} // namespace
 
 TEST(LargestIndependentSetProblemTest, GetMaximumCountWorksOnExample1) {
     LargestIndependentSetProblem::Graph graph;

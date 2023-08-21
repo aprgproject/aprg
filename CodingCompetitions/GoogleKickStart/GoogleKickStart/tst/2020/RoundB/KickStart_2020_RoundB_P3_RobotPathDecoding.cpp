@@ -36,22 +36,23 @@ void runTestCase(int const testCaseNumber) {
     ll x = 0, y = 0;
     vector<ll> mul = {1};
     for (char c : s) {
-        if (c >= '2' && c <= '9')
+        if (c >= '2' && c <= '9') {
             mul.push_back(mul.back() * (c - '0') % mod);
-        else if (c == 'E')
+        } else if (c == 'E') {
             x = (x + mul.back()) % mod;
-        else if (c == 'W')
+        } else if (c == 'W') {
             x = ((x - mul.back()) % mod + mod) % mod;
-        else if (c == 'S')
+        } else if (c == 'S') {
             y = (y + mul.back()) % mod;
-        else if (c == 'N')
+        } else if (c == 'N') {
             y = ((y - mul.back()) % mod + mod) % mod;
-        else if (c == '(')
+        } else if (c == '(') {
             continue;
-        else if (c == ')')
+        } else if (c == ')') {
             mul.pop_back();
-        else
+        } else {
             assert(0);
+}
     }
     my_cout << "Case #" << testCaseNumber << ": " << x + 1 << ' ' << y + 1 << '\n';
 }

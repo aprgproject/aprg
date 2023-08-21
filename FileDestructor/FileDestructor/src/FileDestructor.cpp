@@ -49,7 +49,7 @@ void FileDestructor::destroyFilesAndDirectories(string const& path) const {
     }
 }
 
-void FileDestructor::renameDirectory(string const& directoryPath) const {
+void FileDestructor::renameDirectory(string const& directoryPath) {
     cout << "Renaming directory: [" << directoryPath << "]\n";
     AlbaLocalPathHandler directoryPathHandler(directoryPath);
     unsigned int retries = 10;
@@ -63,7 +63,7 @@ void FileDestructor::renameDirectory(string const& directoryPath) const {
     }
 }
 
-void FileDestructor::destroyFile(string const& filePath) const {
+void FileDestructor::destroyFile(string const& filePath) {
     constexpr unsigned int MAX_CHARACTERS_ON_PATH = 100;
     cout << "Destroying File: [" << filePath << "]\n";
     AlbaLocalPathHandler filePathHandler(filePath);

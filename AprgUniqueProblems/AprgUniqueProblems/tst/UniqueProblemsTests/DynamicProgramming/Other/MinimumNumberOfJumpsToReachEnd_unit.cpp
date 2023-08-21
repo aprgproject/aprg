@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using Counts = MinimumNumberOfJumpsToReachEnd::Counts;
-}
+} // namespace
 
 TEST(MinimumNumberOfJumpsToReachEndTest, GetMinimumNumberOfJumpsOnExample1) {
     MinimumNumberOfJumpsToReachEnd queryForTest({1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9});

@@ -18,7 +18,7 @@ bool PenCircles::isPenCircle(BitmapXY const& point) const { return m_penCircles.
 
 PenCircles::PenCircleDetails PenCircles::getPenCircleDetails(BitmapXY const& point) const {
     PenCircleDetails penCircleDetails;
-    PointToPenCircleDetailsMap::const_iterator it = m_penCircles.find(point);
+    auto it = m_penCircles.find(point);
     if (it != m_penCircles.cend()) {
         penCircleDetails = it->second;
     }

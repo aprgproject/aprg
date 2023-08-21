@@ -11,7 +11,7 @@ public:
     HarmonicSeries();
 
 protected:
-    Term getFormula() const;
+    static Term getFormula() ;
 };
 
 }  // namespace algebra

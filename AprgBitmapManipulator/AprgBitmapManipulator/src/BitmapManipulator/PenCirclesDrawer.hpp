@@ -34,9 +34,9 @@ public:
     void drawUsingConnectedCircles();
 
 private:
-    bool isToBeConnected(
+    static bool isToBeConnected(
         PenCircles::PointAndPenCircleDetailsPair const& pair1,
-        PenCircles::PointAndPenCircleDetailsPair const& pair2) const;
+        PenCircles::PointAndPenCircleDetailsPair const& pair2) ;
     void writeDrawnPointsInSnippet();
     void writeCirclesWithoutOverlay();
     void writeCirclesWithOverlay();

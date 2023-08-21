@@ -47,7 +47,7 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromTermWorks) {
 
     TermSet const& termsSet(retriever.getExpressionsAndFunctions());
     ASSERT_EQ(3U, termsSet.size());
-    TermSet::const_iterator it = termsSet.cbegin();
+    auto it = termsSet.cbegin();
     EXPECT_EQ(expesssionTerm1, *(it++));
     EXPECT_EQ(expesssionTerm2, *(it++));
     EXPECT_EQ(functionTerm1, *(it++));
@@ -97,7 +97,7 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromExpressionWorks) {
 
     TermSet const& termsSet(retriever.getExpressionsAndFunctions());
     ASSERT_EQ(1U, termsSet.size());
-    TermSet::const_iterator it = termsSet.cbegin();
+    auto it = termsSet.cbegin();
     EXPECT_EQ(Term(expression), *(it++));
 }
 
@@ -111,7 +111,7 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromFunctionWorks) {
 
     TermSet const& termsSet(retriever.getExpressionsAndFunctions());
     ASSERT_EQ(2U, termsSet.size());
-    TermSet::const_iterator it = termsSet.cbegin();
+    auto it = termsSet.cbegin();
     EXPECT_EQ(Term(expression), *(it++));
     EXPECT_EQ(Term(functionObject), *(it++));
 }

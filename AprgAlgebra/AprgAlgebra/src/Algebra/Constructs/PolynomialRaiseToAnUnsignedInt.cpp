@@ -43,7 +43,7 @@ void PolynomialRaiseToAnUnsignedInt::factorizeAndUpdateCommonMonomialAndFactorsT
         if (isOneMonomial(factor)) {
             commonMonomialInBase.multiplyMonomial(getFirstMonomial(factor));
         } else {
-            PolynomialToNumberMap::iterator it = factorsToExponent.find(factor);
+            auto it = factorsToExponent.find(factor);
             if (it == factorsToExponent.cend()) {
                 factorsToExponent.emplace(factor, 1);
             } else {

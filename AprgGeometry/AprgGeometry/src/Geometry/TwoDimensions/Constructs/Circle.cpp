@@ -34,9 +34,8 @@ bool Circle::operator<(Circle const& circle) const {
     bool result(false);
     if (m_center == circle.m_center) {
         return m_radius < circle.m_radius;
-    } else {
-        return m_center < circle.m_center;
-    }
+    }         return m_center < circle.m_center;
+   
     return result;
 }
 
@@ -48,7 +47,7 @@ double Circle::getArea() const { return getPi() * m_radiusSquared; }
 
 double Circle::getCircumference() const { return getPi() * 2 * m_radius; }
 
-double Circle::getEccentricity() const { return 0; }
+double Circle::getEccentricity() { return 0; }
 
 bool Circle::isInside(Point const& point) const { return getDistance(m_center, point) <= m_radius; }
 

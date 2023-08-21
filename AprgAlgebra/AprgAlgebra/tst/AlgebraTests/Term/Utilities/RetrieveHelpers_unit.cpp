@@ -54,7 +54,7 @@ TEST(RetrieveHelpersTest, GetCoefficientsForVariablesOnlyWorks) {
     VariableToValueMap variableToValueMap(getCoefficientsForVariablesOnly(polynomial));
 
     ASSERT_EQ(4U, variableToValueMap.size());
-    VariableToValueMap::const_iterator it = variableToValueMap.cbegin();
+    auto it = variableToValueMap.cbegin();
     EXPECT_EQ("a", it->first);
     EXPECT_EQ(AlbaNumber(516), it->second);
     it++;

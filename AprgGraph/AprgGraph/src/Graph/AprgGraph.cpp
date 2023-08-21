@@ -189,7 +189,7 @@ void AprgGraph::drawCharacter(BitmapXY const& upLeftPoint, char const character,
 
 void AprgGraph::saveChangesToBitmapFile() { m_bitmap.setSnippetWriteToFile(m_bitmapSnippet); }
 
-string AprgGraph::getBitmapFilePathOfCharacter(char const character) const {
+string AprgGraph::getBitmapFilePathOfCharacter(char const character) {
     string filename("NotAValidFilename");
     if (stringHelper::isNumber(character)) {
         filename = string(1, character);
@@ -225,8 +225,8 @@ Point AprgGraph::convertBitmapXYToRealPoint(BitmapXY const& bitmapPosition) cons
 }
 
 Point AprgGraph::convertRealPointToBitmapPoint(Point const& realPosition) const {
-    double xPosition = static_cast<double>(convertRealXCoordinateToBitmapXCoordinate(realPosition.getX()));
-    double yPosition = static_cast<double>(convertRealYCoordinateToBitmapYCoordinate(realPosition.getY()));
+    auto xPosition = static_cast<double>(convertRealXCoordinateToBitmapXCoordinate(realPosition.getX()));
+    auto yPosition = static_cast<double>(convertRealYCoordinateToBitmapYCoordinate(realPosition.getY()));
     return Point(xPosition, yPosition);
 }
 

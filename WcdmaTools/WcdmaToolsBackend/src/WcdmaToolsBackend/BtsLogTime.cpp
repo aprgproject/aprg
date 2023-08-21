@@ -168,13 +168,13 @@ ostream& operator<<(ostream& out, BtsLogTime const& btsLogTime) {
 
 istream& operator>>(istream& in, BtsLogTime& btsLogTime) {
     AlbaStreamParameterReader reader(in);
-    unsigned int years(reader.readData<unsigned int>());
-    unsigned int months(reader.readData<unsigned int>());
-    unsigned int days(reader.readData<unsigned int>());
-    unsigned int hours(reader.readData<unsigned int>());
-    unsigned int minutes(reader.readData<unsigned int>());
-    unsigned int seconds(reader.readData<unsigned int>());
-    unsigned int microseconds(reader.readData<unsigned int>());
+    auto years(reader.readData<unsigned int>());
+    auto months(reader.readData<unsigned int>());
+    auto days(reader.readData<unsigned int>());
+    auto hours(reader.readData<unsigned int>());
+    auto minutes(reader.readData<unsigned int>());
+    auto seconds(reader.readData<unsigned int>());
+    auto microseconds(reader.readData<unsigned int>());
     btsLogTime.m_dateTime.setTime(
         (unsigned short int)years, (unsigned char)months, (unsigned char)days, (unsigned char)hours,
         (unsigned char)minutes, (unsigned char)seconds, microseconds);

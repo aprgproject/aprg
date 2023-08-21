@@ -21,7 +21,7 @@ public:
 
 private:
     Term getTermForMutationOfVariable(Variable const& variable);
-    Term getTermForMutationOfFunction(Function const& functionObject);
+    static Term getTermForMutationOfFunction(Function const& functionObject);
     void mutateExpressionWithAdditionAndSubtraction(Expression& expression);
     void mutateExpressionWithMultiplicationAndDivision(Expression& expression);
     void mutateExpressionWithRaiseToPower(Expression& expression);

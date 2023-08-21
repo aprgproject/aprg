@@ -90,7 +90,7 @@ uint32_t BitmapSnippet::getPixelAt(BitmapXY const position) const {
     uint32_t result(0);
     if (isPositionInsideTheSnippet(position)) {
         int index = calculateIndexInPixelData(position);
-        uint8_t const* reader = static_cast<uint8_t const*>(m_pixelData.getConstantBufferPointer());
+        auto const* reader = static_cast<uint8_t const*>(m_pixelData.getConstantBufferPointer());
         if (m_configuration.getNumberOfBitsPerPixel() < AlbaBitConstants::BYTE_SIZE_IN_BITS) {
             result = getPixelAtForPixelInAByte(reader, index, position);
         } else {
@@ -113,7 +113,7 @@ bool BitmapSnippet::isBlackAt(BitmapXY const position)
 void BitmapSnippet::setPixelAt(BitmapXY const position, uint32_t const value) {
     if (isPositionInsideTheSnippet(position)) {
         int index = calculateIndexInPixelData(position);
-        uint8_t* writer = static_cast<uint8_t*>(m_pixelData.getBufferPointer());
+        auto* writer = static_cast<uint8_t*>(m_pixelData.getBufferPointer());
         if (m_configuration.getNumberOfBitsPerPixel() < AlbaBitConstants::BYTE_SIZE_IN_BITS) {
             setPixelAtForPixelInAByte(writer, index, position, value);
         } else {
@@ -186,7 +186,7 @@ uint32_t BitmapSnippet::getPixelAtForMultipleBytePixels(uint8_t const* reader, i
 void BitmapSnippet::setPixelAtForPixelInAByte(
     uint8_t* writer, int const index, BitmapXY const position, uint32_t const value) {
     if (index < static_cast<int>(m_pixelData.getSize())) {
-        uint32_t oldValue = static_cast<uint32_t>(*(writer + index));
+        auto oldValue = static_cast<uint32_t>(*(writer + index));
         int shiftValue = calculateShiftValue(position);
         uint32_t replacePart = (m_configuration.getBitMaskForValue() & value) << shiftValue;
         uint32_t retainMask =

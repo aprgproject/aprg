@@ -12,7 +12,7 @@ namespace algorithm {
 
 namespace {
 using TrieForTest = RWayTrieUsingLinkedArrays<int>;
-}
+} // namespace
 
 TEST(RWayTrieUsingLinkedArraysTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<TrieForTest>(); }
 

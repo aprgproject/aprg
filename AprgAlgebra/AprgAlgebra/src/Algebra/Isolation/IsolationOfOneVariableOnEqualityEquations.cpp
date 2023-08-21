@@ -41,7 +41,7 @@ Term IsolationOfOneVariableOnEqualityEquations::getEquivalentTermByIsolatingAVar
     return getEquivalentTermByReducingItToAVariable(variableName, termWithVariable, termWithWithoutVariable);
 }
 
-void IsolationOfOneVariableOnEqualityEquations::sortEquationsWithVariable(Equations& equationsWithVariable) const {
+void IsolationOfOneVariableOnEqualityEquations::sortEquationsWithVariable(Equations& equationsWithVariable) {
     stable_sort(
         equationsWithVariable.begin(), equationsWithVariable.end(),
         [](Equation const& equation1, Equation const& equation2) {

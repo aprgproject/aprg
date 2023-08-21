@@ -36,16 +36,16 @@ public:
     void runMaxNumberOfIterationsOrUntilFinished(int const maxIterations);
 
 private:
-    bool isAlmostEqualForBrentMethod(AlbaNumber const& value1, AlbaNumber const& value2) const;
-    bool isAlmostEqualForBrentMethod(AlbaNumber const& value1, double const value2) const;
+    static bool isAlmostEqualForBrentMethod(AlbaNumber const& value1, AlbaNumber const& value2) ;
+    static bool isAlmostEqualForBrentMethod(AlbaNumber const& value1, double const value2) ;
     AlbaNumber calculate(AlbaNumber const& inputValue) const;
     AlbaNumberOptional calculateInverseQuadraticInterpolation(
         AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c) const;
     AlbaNumberOptional calculateSecantMethod(AlbaNumber const& a, AlbaNumber const& b) const;
-    AlbaNumber calculateBiSectionMethod(AlbaNumber const& a, AlbaNumber const& b) const;
-    bool isBisectionMethodNeeded(
+    static AlbaNumber calculateBiSectionMethod(AlbaNumber const& a, AlbaNumber const& b) ;
+    static bool isBisectionMethodNeeded(
         AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c, AlbaNumber const& d, AlbaNumber const& s,
-        bool const mflag) const;
+        bool const mflag) ;
     void convertSolutionToIntegerIfNeeded();
     int m_numberOfIterationsExecuted;
     AlbaNumbers m_coefficients;

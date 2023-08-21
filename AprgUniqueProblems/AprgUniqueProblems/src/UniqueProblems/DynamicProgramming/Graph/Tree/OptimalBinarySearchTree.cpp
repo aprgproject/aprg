@@ -92,7 +92,7 @@ OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingNaiveR
 }
 
 // inline optimization can work here because the usage belongs to same translation unit
-inline OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getCost(Cost const depth, Cost const frequency) const {
+inline OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getCost(Cost const depth, Cost const frequency) {
     return depth * frequency;
 }
 

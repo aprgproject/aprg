@@ -23,7 +23,7 @@ public:
 private:
     void intialize(Equations const& constraints, Polynomial const& objectiveFunction);
     void solve();
-    void processConstraints(
+    static void processConstraints(
         Equations const& constraints, Polynomials& constraintsInStandardForm,
         VariableNamesRetriever& inputVariablesRetriever, std::set<int>& indicesWithSlackVariables);
     void saveInputVariables(VariableNamesSet const& inputVariableNames);

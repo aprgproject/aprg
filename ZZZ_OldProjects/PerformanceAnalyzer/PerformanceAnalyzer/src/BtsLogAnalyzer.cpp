@@ -103,7 +103,7 @@ void BtsLogAnalyzer::saveDspCapacityInformationInGrm(string const& lineInLogs) {
         BtsLogPrint logPrint(lineInLogs);
         strings dspCapacitiesPerDsp;
         splitToStrings<SplitStringType::WithoutDelimeters>(dspCapacitiesPerDsp, lineInLogs, "()");
-        unsigned int boardId(
+        auto boardId(
             convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInLogs, "0x", ",")));
         for (string const& dspCapacityOfOneDsp : dspCapacitiesPerDsp) {
             saveDspCapacityInformationInGrmOfOneDsp(dspCapacityOfOneDsp, boardId, logPrint);
@@ -153,7 +153,7 @@ void BtsLogAnalyzer::saveDspCapacityInformationInLrmForR3(string const& lineInLo
         BtsLogPrint logPrint(lineInLogs);
         strings dspCapacitiesPerDsp;
         splitToStrings<SplitStringType::WithoutDelimeters>(dspCapacitiesPerDsp, lineInLogs, " ");
-        unsigned int boardId(
+        auto boardId(
             convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInLogs, "0x", " ")));
         for (string const& dspCapacityOfOneDsp : dspCapacitiesPerDsp) {
             saveDspCapacityInformationInLrmOfOneDspForR3(dspCapacityOfOneDsp, boardId, logPrint);
@@ -223,7 +223,7 @@ void BtsLogAnalyzer::saveDspCapacityInformationInLrmForR2(string const& lineInLo
         strings dspCapacitiesPerDsp;
         string logsAfterLrmPrint(getStringAfterThisString(lineInLogs, "INF/TCOM/LRM/Rep"));
         splitToStrings<SplitStringType::WithoutDelimeters>(dspCapacitiesPerDsp, logsAfterLrmPrint, "(");
-        unsigned int boardId(
+        auto boardId(
             convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInLogs, ",0x", "-")));
         for (string const& dspCapacityOfOneDsp : dspCapacitiesPerDsp) {
             saveDspCapacityInformationInLrmOfOneDspForR2(dspCapacityOfOneDsp, boardId, logPrint);
@@ -551,7 +551,7 @@ void BtsLogAnalyzer::saveMessageQueueingTimeToCsvFile(
 }
 
 void BtsLogAnalyzer::saveUserIndentifierAndLatencyToCsvFile(
-    UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, ofstream& csvFileStream) const {
+    UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, ofstream& csvFileStream) {
     csvFileStream << userIdentifiers.getCrnccId() << "," << userIdentifiers.getNbccId() << ","
                   << userIdentifiers.getTransactionId() << "," << latencyInMicroseconds << ",";
 }
@@ -563,7 +563,7 @@ void BtsLogAnalyzer::savePrintsAvailableToCsvFile(UserIdentifiers const& userIde
                   << printsAvailable.hasTC_TRANSPORT_BEARER_REGISTER_RESP_MSG << ",";
 }
 
-void BtsLogAnalyzer::setLogTimeIfNeeded(string const& lineInLogs, LogTime& logTime) const {
+void BtsLogAnalyzer::setLogTimeIfNeeded(string const& lineInLogs, LogTime& logTime) {
     BtsLogPrint logPrint(lineInLogs);
     // if(!logPrint.getBtsTime().isStartup())
     //{
@@ -576,7 +576,7 @@ double BtsLogAnalyzer::getTotalMicroseconds(LogTimePair const& logTimePairOfTheU
     return getTotalMicroseconds(latency);
 }
 
-double BtsLogAnalyzer::getTotalMicroseconds(BtsLogTime const& btsLogTime) const {
+double BtsLogAnalyzer::getTotalMicroseconds(BtsLogTime const& btsLogTime) {
     double result(
         (double)btsLogTime.getMinutes() * 1000000 * 60 + (double)btsLogTime.getSeconds() * 1000000 +
         (double)btsLogTime.getMicroSeconds());

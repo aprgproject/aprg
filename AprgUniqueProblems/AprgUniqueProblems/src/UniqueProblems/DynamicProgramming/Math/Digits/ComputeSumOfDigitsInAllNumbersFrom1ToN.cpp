@@ -89,7 +89,7 @@ ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom
 }
 
 ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom1ToN::getSummationFrom1ToN(
-    Value const number) const {
+    Value const number) {
     return number * (number + 1) / 2;
 }
 

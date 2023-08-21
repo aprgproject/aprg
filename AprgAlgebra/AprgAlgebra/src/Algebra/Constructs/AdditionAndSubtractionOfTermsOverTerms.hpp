@@ -21,20 +21,20 @@ public:
     void putAsAddOrSubtraction(TermsOverTerms const& item, TermAssociationType const association);
 
 private:
-    void eraseCommonFactorOrAddDistinctFactor(
-        Term const& termToCheck, Terms& commonFactors, Terms& outputFactors) const;
-    Monomial getCombinedMonomialMultiplier(Terms const& monomialMultiplierTerms) const;
+    static void eraseCommonFactorOrAddDistinctFactor(
+        Term const& termToCheck, Terms& commonFactors, Terms& outputFactors) ;
+    static Monomial getCombinedMonomialMultiplier(Terms const& monomialMultiplierTerms) ;
     void updateMonomialAndNonMonomialMultipliersBasedOnDenominatorOnIndex(
         int itemIndex, Monomial& monomialMultiplier, Terms& nonMonomialMultiplierTerms) const;
     void emplaceExistingNumeratorTerms(Terms& numeratorTerms, int itemIndex) const;
-    void emplaceMonomialMultiplierIfNeeded(Terms& numeratorTerms, Monomial const& monomialMultiplier) const;
-    void emplaceNonMonomialMultipliers(Terms& numeratorTerms, Terms const& nonMonomialMultiplierTerms) const;
+    static void emplaceMonomialMultiplierIfNeeded(Terms& numeratorTerms, Monomial const& monomialMultiplier) ;
+    static void emplaceNonMonomialMultipliers(Terms& numeratorTerms, Terms const& nonMonomialMultiplierTerms) ;
     Expression getCombinedNumeratorExpression(Terms const& lcmDenominatorTerms) const;
-    Expression getCombinedDenominatorExpression(Terms const& lcmDenominatorTerms) const;
+    static Expression getCombinedDenominatorExpression(Terms const& lcmDenominatorTerms) ;
     Expression getCombinedExpressionForNumeratorOnIndex(int numeratorIndex, Terms const& lcmDenominatorTerms) const;
-    void combineExpressionAsAddOrSubtract(
-        Expression& combinedExpression, Expression const& expression, TermAssociationType const association) const;
-    TermsOverTerms getSimplifiedTermsOverTerms(TermsOverTerms const& termsOverTerms);
+    static void combineExpressionAsAddOrSubtract(
+        Expression& combinedExpression, Expression const& expression, TermAssociationType const association) ;
+    static TermsOverTerms getSimplifiedTermsOverTerms(TermsOverTerms const& termsOverTerms);
     void putItem(TermsOverTerms const& item, TermAssociationType const association);
     VectorOfTermsOverTerms m_items;
     TermAssociationTypes m_associations;

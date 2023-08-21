@@ -14,12 +14,12 @@ ArithmeticSeries::ArithmeticSeries(
     AlbaNumber const& valueAtIndex1, int const index1, AlbaNumber const& valueAtIndex2, int const index2)
     : SeriesBasedOnFormula(getFormula(valueAtIndex1, index1, valueAtIndex2, index2), n) {}
 
-Term ArithmeticSeries::getFormula(AlbaNumber const& firstValue, AlbaNumber const& commonDifference) const {
+Term ArithmeticSeries::getFormula(AlbaNumber const& firstValue, AlbaNumber const& commonDifference) {
     return Term(firstValue) + Term(commonDifference) * Term(n);
 }
 
 Term ArithmeticSeries::getFormula(
-    AlbaNumber const& valueAtIndex1, int const index1, AlbaNumber const& valueAtIndex2, int const index2) const {
+    AlbaNumber const& valueAtIndex1, int const index1, AlbaNumber const& valueAtIndex2, int const index2) {
     AlbaNumber commonDifference = (valueAtIndex1 - valueAtIndex2) / (index1 - index2);
     AlbaNumber firstValue = valueAtIndex1 - commonDifference * index1;
     return getFormula(firstValue, commonDifference);

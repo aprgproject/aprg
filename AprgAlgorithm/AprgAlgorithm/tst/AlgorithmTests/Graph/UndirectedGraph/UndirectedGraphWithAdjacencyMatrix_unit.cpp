@@ -13,7 +13,7 @@ namespace algorithm {
 
 namespace {
 using GraphForTest = UndirectedGraphWithAdjacencyMatrix<int, 13>;
-}
+} // namespace
 
 TEST(UndirectedGraphWithAdjacencyMatrixTest, GetGraphDirectionTypeWorks) {
     testGetGraphDirectionTypeWithVertexAsInt<GraphForTest>();

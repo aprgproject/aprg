@@ -74,7 +74,7 @@ void RevisionEditor::editCommitDates() {
                 continue;
             }
         }
-        double targetAverageCommit = clampHigherBound<double>(
+        auto targetAverageCommit = clampHigherBound<double>(
             clampLowerBound<double>(
                 static_cast<double>(numberOfRevisions - revisionIndex) / remainingNumberOfDays, 3.4),
             4.5);
@@ -138,7 +138,7 @@ RevisionEditor::RevisionEntry RevisionEditor::getRevisionEntry(string const& lin
     return {revisionHash, getDateTime(date), author, message};
 }
 
-AlbaDateTime RevisionEditor::getDateTime(string const& date) const {
+AlbaDateTime RevisionEditor::getDateTime(string const& date) {
     int index = 0;
     int year = convertStringToNumber<int>(getStringBeforeThisString(date, "-", index));
     index = date.find("-", index) + 1;
@@ -157,7 +157,7 @@ AlbaDateTime RevisionEditor::getDateTime(string const& date) const {
 
 RevisionEditor::DaysInterval RevisionEditor::createDaysInterval(
     uint32_t const year1, uint32_t const month1, uint32_t const day1, uint32_t const year2, uint32_t const month2,
-    uint32_t const day2) const {
+    uint32_t const day2) {
     return {AlbaYearMonthDay(year1, month1, day1).getTotalDays(), AlbaYearMonthDay(year2, month2, day2).getTotalDays()};
 }
 

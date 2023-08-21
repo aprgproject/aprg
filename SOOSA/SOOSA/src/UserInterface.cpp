@@ -25,7 +25,7 @@ void UserInterface::askUserForMainDetails() {
     string period(m_userInterface.getUserInput());
 
     cout << "Enter discharge:\n";
-    double discharge(m_userInterface.getNumberFromInput<double>());
+    auto discharge(m_userInterface.getNumberFromInput<double>());
 
     cout << "Enter minimum satisfactory score (inclusive):\n";
     int minimumSatisfactoryScore(m_userInterface.getNumberFromInput<int>());

@@ -49,8 +49,8 @@ public:
     void processFileForBtsDelayForRlDeletion(std::string const& filePath);
     void processFileForBtsDelayForMikhailKnife(std::string const& filePath);
     void processFileForBtsDelayForGrm(std::string const& filePath);
-    double getWireSharkTime(std::string const& lineInLogs) const;
-    std::string getNumberAfterThisString(std::string const& mainString, std::string const& stringToSearch) const;
+    static double getWireSharkTime(std::string const& lineInLogs) ;
+    static std::string getNumberAfterThisString(std::string const& mainString, std::string const& stringToSearch) ;
     double getComputedAverageDelay() const;
 
 private:

@@ -78,9 +78,8 @@ VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingMemoizationDP(
         Count result = min(countIfVertexIsIncluded, countIfVertexIsNotIncluded);
         vertexToCountMap.emplace(vertex, result);
         return result;
-    } else {
-        return it->second;
-    }
+    }         return it->second;
+   
 }
 
 VertexCoverProblem::SetOfVertices VertexCoverProblem::getMinimumSetUsingMemoizationDP(
@@ -103,10 +102,9 @@ VertexCoverProblem::SetOfVertices VertexCoverProblem::getMinimumSetUsingMemoizat
         if (setIfVertexIsIncluded.size() <= setIfVertexIsNotIncluded.size()) {
             vertexToMinimumSetMap.emplace(vertex, setIfVertexIsIncluded);
             return setIfVertexIsIncluded;
-        } else {
-            vertexToMinimumSetMap.emplace(vertex, setIfVertexIsNotIncluded);
+        }             vertexToMinimumSetMap.emplace(vertex, setIfVertexIsNotIncluded);
             return setIfVertexIsNotIncluded;
-        }
+       
     } else {
         return it->second;
     }

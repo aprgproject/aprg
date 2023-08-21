@@ -16,7 +16,7 @@ SubArraySum::Values SubArraySum::getSubArrayWithSum(Value const targetSum) const
             if (currentSum == targetSum) {
                 isFound = true;
                 break;
-            } else if (currentSum > targetSum) {
+            } if (currentSum > targetSum) {
                 if (start < end) {
                     currentSum -= m_valuesToCheck[start];
                     start++;
