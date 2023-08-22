@@ -46,7 +46,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         
-      - name: Install shellcheck on ubuntu/gcc
+      - name: Prepare for lint checks
         run: |
           sudo apt-get update
           
