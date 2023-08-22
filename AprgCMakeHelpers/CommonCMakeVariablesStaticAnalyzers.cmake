@@ -19,15 +19,17 @@ if(APRG_ENABLE_STATIC_ANALYZERS)
     find_program(CLANG_TIDY_PROGRAM "clang-tidy")
     print_variable(CLANG_TIDY_PROGRAM)
     if(CLANG_TIDY_PROGRAM)
-        # additional flags: --fix -warnings-as-errors=*;
+        set(CLANG_TIDY_HEADER_REGEX "\'^.*\/${IMMEDIATE_DIRECTORY_NAME}.*\/\.(h|hpp)\$\'")
+        print_variable(CLANG_TIDY_HEADER_REGEX)
+        # additional flags: --fix --warnings-as-errors=*;
 
         # check only
-        set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} -header-filter="^.*\/${IMMEDIATE_DIRECTORY_NAME}\/.*")
-        set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} -header-filter="^.*\/${IMMEDIATE_DIRECTORY_NAME}\/.*")
+        #set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} "--header-filter=${CLANG_TIDY_HEADER_REGEX}")
+        #set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} "--header-filter=${CLANG_TIDY_HEADER_REGEX}")
 
         # auto fix
-        #set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix -header-filter="^.*\/${IMMEDIATE_DIRECTORY_NAME}\/.*")
-        #set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix -header-filter="^.*\/${IMMEDIATE_DIRECTORY_NAME}\/.*")
+        set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix "--header-filter=${CLANG_TIDY_HEADER_REGEX}")
+        set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix "--header-filter=${CLANG_TIDY_HEADER_REGEX}")
 
         print_variable(CMAKE_C_CLANG_TIDY)
         print_variable(CMAKE_CXX_CLANG_TIDY)
@@ -45,7 +47,7 @@ if(APRG_ENABLE_STATIC_ANALYZERS)
         # level0: Very stable checks, 99.99% safe, mostly no false-positives, very desirable
         # level1: The default level. Very similar to level 0, slightly more false-positives but very few.
         # level2: Also very few false-positives, but contains noisy checks which not everyone agree should be default.
-        # manual: Checks here need to be enabled explicitly, as they don't belong to any level. They can be very stable or very unstable.
+        # manual: Checks here need to be enabled explicitly, as they can be very stable or very unstable
         # ME: Just stick to default
         # set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Xclang -plugin-arg-clazy -Xclang level2")
         # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -plugin-arg-clazy -Xclang level2")
