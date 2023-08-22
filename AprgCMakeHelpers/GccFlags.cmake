@@ -9,15 +9,18 @@ set(APRG_COMPILER_FLAGS_FOR_DEBUG "") #set(APRG_COMPILER_FLAGS_FOR_DEBUG "-g --c
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_SHOW_PREPROCESSING_RESULT "-E")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_RTTI "-g --coverage")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_NO_RTTI "-g --coverage -fno-rtti")
-set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_FAST_COMPILATION "-g --coverage -O0") #-O0 is actually the default so this is useless
+set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_FAST_COMPILATION "-g --coverage -O0"
+)#-O0 is actually the default so this is useless
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_SPEED "-g --coverage -O3")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_SPEED_AND_FAST_MATH "-g --coverage -O3 -ffast-math")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_MORE_SPEED "-g --coverage -Ofast")
-set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_NO_STACK_PROTECTOR "-g --coverage -fno-stack-protector") #let the stack smash (for debugging)
+set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_NO_STACK_PROTECTOR "-g --coverage -fno-stack-protector"
+)#let the stack smash (for debugging)
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_ASAN "-g --coverage -fsanitize=address -fno-omit-frame-pointer")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_LSAN_ONLY "-g --coverage -fsanitize=leak -fno-omit-frame-pointer")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_TSAN "-g --coverage -fsanitize=thread")
-set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_MSAN "-g --coverage -fsanitize=memory -fno-omit-frame-pointer -fPIE") # not supported by gcc, only on clang
+set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_MSAN "-g --coverage -fsanitize=memory -fno-omit-frame-pointer -fPIE"
+)# not supported by gcc, only on clang
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_UBSAN "-g --coverage -fsanitize=undefined") # looks like not working
 set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED "-O3 -DNDEBUG -fno-rtti")
 set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED_AND_FAST_MATH "-O3 -DNDEBUG -fno-rtti -ffast-math")
@@ -27,7 +30,8 @@ set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_DEBUG "-O2 -g -DNDEBUG")
 set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_MORE_SPEED "-Ofast -DNDEBUG")
 set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_STACK_PROTECTOR "-fstack-protector -DNDEBUG")
 set(APRG_COMPILER_FLAGS_WINDOWS_NON_CONSOLE "-mwindows")
-set(APRG_LINKER_FLAGS_FOR_RELEASE "-static") # "-static" is needed to make the program work in other deployments (GCC/QT libraries are missing in other deployments)
+set(APRG_LINKER_FLAGS_FOR_RELEASE "-static"
+)# "-static" is needed to make the program work in other deployments (GCC/QT libraries are missing in other deployments)
 set(APRG_LINKER_FLAGS_FOR_RELEASE_WITH_STRIP "-static -s")
 set(APRG_LINKER_FLAGS_FOR_PTHREAD "-pthread")
 set(APRG_LINKER_FLAGS_WITH_ASAN "-fsanitize=address") #Looks like this link flags are not needed in linux
@@ -40,8 +44,6 @@ set(APRG_LINKER_FLAGS_WITH_UBSAN "-fsanitize=undefined") #Looks like this link f
 #Stop after the preprocessing stage; do not run the compiler proper.
 #The output is in the form of preprocessed source code, which is sent to the standard output.
 set(APRG_COMPILER_FLAGS_STOP_AT_PREPROCESSING "-E")
-
-
 
 #APRG Common flags
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COMPILER_COMMON_C_FLAGS}")
@@ -103,9 +105,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 # -> -E: Stop after the preprocessing stage; do not run the compiler proper.
 # The output is in the form of preprocessed source code, which is sent to the standard output.
 # Input files that don’t require preprocessing are ignored.
-
-
-
 
 # Compiler Flags:
 
@@ -243,15 +242,15 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 
 # Flag:  -fomit-frame-pointer
 # -> This flag (-fno-omit-frame-pointer) is used for performance testing (particularly linux perf tool) to save the information of the function call stack.
-# -> Don't keep the frame pointer in a register for functions that don't need one. 
-# ---> This avoids the instructions to save, set up and restore frame pointers; it also makes an extra register available in many functions. 
+# -> Don't keep the frame pointer in a register for functions that don't need one.
+# ---> This avoids the instructions to save, set up and restore frame pointers; it also makes an extra register available in many functions.
 # ---> It also makes debugging impossible on some machines.
-# -> On some machines, such as the VAX, this flag has no effect, because the standard calling sequence automatically handles the frame pointer and nothing is saved by pretending it doesn't exist. 
-# ---> The machine-description macro FRAME_POINTER_REQUIRED controls whether a target machine supports this flag. 
+# -> On some machines, such as the VAX, this flag has no effect, because the standard calling sequence automatically handles the frame pointer and nothing is saved by pretending it doesn't exist.
+# ---> The machine-description macro FRAME_POINTER_REQUIRED controls whether a target machine supports this flag.
 # ---> See Register Usage.
-# -> Starting with GCC version 4.6, the default setting (when not optimizing for size) for 32-bit GNU/Linux x86 and 32-bit Darwin x86 targets has been changed to -fomit-frame-pointer. 
+# -> Starting with GCC version 4.6, the default setting (when not optimizing for size) for 32-bit GNU/Linux x86 and 32-bit Darwin x86 targets has been changed to -fomit-frame-pointer.
 # ---> The default can be reverted to -fno-omit-frame-pointer by configuring GCC with the --enable-frame-pointer configure option.
-# ---> Enabled at levels -O, -O2, -O3, -Os. 
+# ---> Enabled at levels -O, -O2, -O3, -Os.
 
 # Compiler code generations flags:
 # Flag: "-fpic (for position independent code)
@@ -278,7 +277,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 # -> Builds a dynamically linked position independent executable.
 # Flag: "-static-pie"
 # -> Builds a statically linked position independent executable.
-
 
 #  Linker Flags
 
@@ -362,7 +360,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 # -> However, if a library or main executable is supposed to throw or catch exceptions, you must link it using the G++ driver,
 # or using the option -shared-libgcc, such that it is linked with the shared libgcc.
 
-
 # Verbose
 # -> -Wl,–verbose
 # -> -Wl,–print-memory-usage
@@ -424,7 +421,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 # -> -Wl,–lager-address-aware
 # -> -Wl,–image-base,358612
 
-
 # Files Generated by the Compiler
 # Object Files
 # -> *.o -> Generated on *NIX - Linux, MacOSX … by GCC or Clang
@@ -439,8 +435,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 # -> *.dylib -> Extension used on MacOSX.
 # Static Library
 # -> *.a - extension
-
-
 
 #Sanitizers (from https://github.com/google/sanitizers)
 
@@ -483,8 +477,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 # the program will continue execution after signed integer overflows,
 # exit after the first invalid use of a null pointer, and trap after the first use of misaligned pointer.
 
-
-
 #Fuzzers (https://llvm.org/docs/LibFuzzer.html)
 
 # Recent versions of Clang (starting from 6.0) include libFuzzer, and no extra installation is necessary.
@@ -508,7 +500,5 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 
 # Check AFL (American Fuzzy Lop) as well
 # https://github.com/google/AFL
-
-
 
 # Check "Code hardening" by LLVM team as well (such as CFI and SafeStack)

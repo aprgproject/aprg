@@ -50,5 +50,3 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COM
 #    /EHr - Always generate noexcept runtime termination checks.
 #    /EHs - Enable C++ exception handling (no SEH exceptions).
 #    /EP - Copies preprocessor output to standard output.
-
-
