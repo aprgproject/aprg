@@ -17,8 +17,9 @@ elseif(UNIX)
     set(COMMON_DEFINITIONS ${COMMON_DEFINITIONS} -DOS_LINUX)
 endif()
 
-# Use Git to get code version Use [git rev-parse HEAD] to get full git version Use [git rev-parse --short HEAD] to get
-# short version
+# Use Git to get code version
+# Use [git rev-parse HEAD] to get full git version
+# Use [git rev-parse --short HEAD] to get short version
 find_package(Git) # Requires CMake 2.8.11+
 if(GIT_EXECUTABLE)
     execute_process(
@@ -33,9 +34,13 @@ if(GIT_EXECUTABLE)
 endif()
 set(COMMON_DEFINITIONS ${COMMON_DEFINITIONS} -DAPRG_CODE_REVISION="${GIT_CODE_VERSION}")
 
-# SVN is not used anymore find_package(Subversion) if(SUBVERSION_FOUND) Subversion_WC_INFO(${PROJECT_SOURCE_DIR}
-# SvnProject IGNORE_SVN_FAILURE) message("Code revision is ${SvnProject_WC_REVISION}") set(COMMON_DEFINITIONS
-# ${COMMON_DEFINITIONS} -DAPRG_CODE_REVISION="${SvnProject_WC_REVISION}") endif()
+# SVN is not used anymore
+# find_package(Subversion)
+# if(SUBVERSION_FOUND)
+#     Subversion_WC_INFO(${PROJECT_SOURCE_DIR} SvnProject IGNORE_SVN_FAILURE)
+#     message("Code revision is ${SvnProject_WC_REVISION}")
+#     set(COMMON_DEFINITIONS ${COMMON_DEFINITIONS} -DAPRG_CODE_REVISION="${SvnProject_WC_REVISION}")
+# endif()
 
 if(APRG_TEST_MODE)
     set(COMMON_DEFINITIONS ${COMMON_DEFINITIONS} -DAPRG_TEST_MODE_ON)

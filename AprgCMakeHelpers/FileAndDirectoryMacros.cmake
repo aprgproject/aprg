@@ -47,8 +47,8 @@ macro(get_sub_directory_list_with_exclusion result currentDirectory exclude_filt
     set(${result} ${resultingSubDirectories})
 endmacro()
 
-# This macro recursively traverses a directory and its subdirectories, adding all directories to the output list, unless
-# they match the specified exclude filter.
+# This macro recursively traverses a directory and its subdirectories,
+# adding all directories to the output list, unlessthey match the specified exclude filter.
 macro(traverse_directory resultingSubDirectories currentDirectory exclude_filter)
     file(GLOB children ${currentDirectory}/*)
     foreach(child ${children})
