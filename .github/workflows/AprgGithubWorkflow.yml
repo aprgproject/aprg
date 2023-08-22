@@ -54,12 +54,12 @@ jobs:
         shell: bash
         run: |
           sudo pip install cmakelang 
-          cmake-lint --version
+          echo "cmake-lint version: [$(cmake-lint --version)]"
           checkCMakeFilesPath=$(realpath "$(pwd)/${{ env.checkCmakeFilesRelativePath }}")
           echo "checkCMakeFilesPath: [$checkCMakeFilesPath]"
           chmod +x "$checkCMakeFilesPath"
-          "$checkCMakeFilesPath" | grep -P "\[\w\d+\]" | tee "checkCmakeOutput.txt"
-          if  [ -s "checkCmakeOutput.txt" ]; then
+          "$checkCMakeFilesPath" | grep -P "\[\w\d+\]" | tee "cmakeLintOutput.txt"
+          if  [[ -e "cmakeLintOutput.txt" ]] && [ -s "cmakeLintOutput.txt" ]; then
             echo "Some problems found, exiting with error status."
             exit 1
           fi
@@ -68,12 +68,12 @@ jobs:
         shell: bash
         run: |
           sudo apt-get install shellcheck
-          shellcheck --version
+          echo "shellcheck version: [$(shellcheck --version)]"
           checkShellScriptsPath=$(realpath "$(pwd)/${{ env.checkShellScriptsRelativePath }}")
           echo "checkShellScriptsPath: [$checkShellScriptsPath]"
           chmod +x "$checkShellScriptsPath"
-          "$checkShellScriptsPath" | grep -P "SC\d+ \((info|warning|error|style)\):" | tee "checkShellOutput.txt"
-          if  [ -s "checkShellOutput.txt" ]; then
+          "$checkShellScriptsPath" | grep -P "SC\d+ \((info|warning|error|style)\):" | tee "shellLintOutput.txt"
+          if  [[ -e "shellLintOutput.txt" ]] && [ -s "shellLintOutput.txt" ]; then
             echo "Some problems found, exiting with error status."
             exit 1
           fi
@@ -130,11 +130,11 @@ jobs:
       - name: Install dependencies on Windows
         if: startsWith(matrix.configurationName, 'Windows')
         run: |
-          choco install ninja cmake
-          choco info ninja
+          choco install cmake ninja
           choco info cmake
-          ninja --version
-          cmake --version
+          echo "cmake version: [$(cmake --version)]"
+          choco info ninja
+          echo "ninja version: [$(ninja --version)]"
           # Not needed to run environment script
           # echo "Executing visual studio environment script..."
           # cmd "${{ env.windowsEnvironmentScript }}"
@@ -148,18 +148,18 @@ jobs:
       - name: Install dependencies on Ubuntu/Gcc
         if: matrix.configurationName == 'UbuntuLatestGcc'
         run: |
-          sudo apt-get install ninja-build cmake
-          ninja --version
-          cmake --version
-          gcc --version
+          sudo apt-get install cmake ninja-build
+          echo "cmake version: [$(cmake --version)]"
+          echo "ninja version: [$(ninja --version)]"
+          echo "gcc version: [$(gcc --version)]"
 
       - name: Install dependencies on Ubuntu/Clang
         if: matrix.configurationName == 'UbuntuLatestClang'
         run: |
           sudo apt-get install ninja-build cmake
-          ninja --version
-          cmake --version
-          clang --version
+          echo "cmake version: [$(cmake --version)]"
+          echo "ninja version: [$(ninja --version)]"
+          echo "clang version: [$(clang --version)]"
           
 # MAC OS is not supported          
 #      - name: Install dependencies on macos
@@ -173,22 +173,19 @@ jobs:
         if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWithBoost), matrix.project)
         run: |
           sudo apt-get install libboost-all-dev
-          echo "The dpkg details:"
-          dpkg -l | grep libboost-all-dev
+          echo "libboost-all-dev version (dpkg): [$(dpkg -l | grep libboost-all-dev)]"
 
       - name: Install GSL on Ubuntu
         if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWithGsl), matrix.project)
         run: |
           sudo apt-get install libgsl-dev
-          echo "The dpkg details:"
-          dpkg -l | grep libgsl-dev
+          echo "libgsl-dev version (dpkg): [$(dpkg -l | grep libgsl-dev)]"
 
       - name: Install 7zip
         if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWith7Zip), matrix.project)
         run: |
           sudo apt-get install p7zip-full
-          echo "The dpkg details:"
-          dpkg -l | grep p7zip
+          echo "p7zip-full version (dpkg): [$(dpkg -l | grep p7zip-full)]"
           
       - name: Prepare aprg directories and scripts
         shell: bash
@@ -264,12 +261,12 @@ jobs:
         working-directory: ${{ matrix.project }}
         run: |
           sudo apt-get install clang-tidy cppcheck clazy
-          clang-tidy --version
-          cppcheck --version
-          clazy --version
+          echo "clang-tidy version: [$(clang-tidy --version)]"
+          echo "cppcheck version: [$(cppcheck --version)]"
+          echo "clazy version: [$(clazy --version)]"
           "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }} | grep -P "^.*$unquotedProject.* (style|warning|error): .*$" | tee "analyzerOutput.txt"
-          if  [ -s "analyzerOutput.txt" ]; then
+          if  [[ -e "cmakeLintOutput.txt" ]] && [ -s "cmakeLintOutput.txt" ]; then
             echo "Some problems found, exiting with error status."
             exit 1
           fi
