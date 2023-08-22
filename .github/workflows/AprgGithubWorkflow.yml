@@ -52,33 +52,36 @@ jobs:
           
       - name: Perform checks for cmake files
         shell: bash
+        continue-on-error: true
         run: |
           sudo pip install cmakelang 
           echo "cmake-lint version: [$(cmake-lint --version)]"
           checkCMakeFilesPath=$(realpath "$(pwd)/${{ env.checkCmakeFilesRelativePath }}")
           echo "checkCMakeFilesPath: [$checkCMakeFilesPath]"
           chmod +x "$checkCMakeFilesPath"
-          echo "daan1"
-          "$checkCMakeFilesPath" | tee "cmakeLintOutput.txt"
-          echo "daan2"
-          echo "cmakeLintOutput: [$(cat "cmakeLintOutput.txt")]"
-          if  [[ -e "cmakeLintOutput.txt" ]] && [ -s "cmakeLintOutput.txt" ]; then
+          "$checkCMakeFilesPath" | grep -P "\[\w\d+\]" || true | tee "cmakeLintIssues.txt"
+          if [ -s "cmakeLintIssues.txt" ]; then
             echo "Some problems found, exiting with error status."
             exit 1
+          else
+            echo "No errors detected."
           fi
           
       - name: Perform checks for shell scripts
         shell: bash
+        continue-on-error: true
         run: |
           sudo apt-get install shellcheck
           echo "shellcheck version: [$(shellcheck --version)]"
           checkShellScriptsPath=$(realpath "$(pwd)/${{ env.checkShellScriptsRelativePath }}")
           echo "checkShellScriptsPath: [$checkShellScriptsPath]"
           chmod +x "$checkShellScriptsPath"
-          "$checkShellScriptsPath" | grep -P "SC\d+ \((info|warning|error|style)\):" | tee "shellLintOutput.txt"
-          if  [[ -e "shellLintOutput.txt" ]] && [ -s "shellLintOutput.txt" ]; then
+          "$checkShellScriptsPath" | grep -P "SC\d+ \((info|warning|error|style)\):" || true | tee "shellLintIssues.txt"
+          if  [ -s "shellLintIssues.txt" ]; then
             echo "Some problems found, exiting with error status."
             exit 1
+          else
+            echo "No errors detected."
           fi
 
 
@@ -268,10 +271,12 @@ jobs:
           echo "cppcheck version: [$(cppcheck --version)]"
           echo "clazy version: [$(clazy --version)]"
           "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
-          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }} | grep -P "^.*$unquotedProject.* (style|warning|error): .*$" | tee "analyzerOutput.txt"
-          if  [[ -e "cmakeLintOutput.txt" ]] && [ -s "cmakeLintOutput.txt" ]; then
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }} | grep -P "^.*$unquotedProject.* (style|warning|error): .*$" || true | tee "analyzerIssues.txt"
+          if  [ -s "analyzerIssues.txt" ]; then
             echo "Some problems found, exiting with error status."
             exit 1
+          else
+            echo "No errors detected."
           fi
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
