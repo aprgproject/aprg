@@ -14,9 +14,9 @@ public:
         AlbaNumber const& valueAtIndex1, int const index1, AlbaNumber const& valueAtIndex2, int const index2);
 
 protected:
-    static Term getFormula(AlbaNumber const& firstValue, AlbaNumber const& commonDifference) ;
+    static Term getFormula(AlbaNumber const& firstValue, AlbaNumber const& commonDifference);
     static Term getFormula(
-        AlbaNumber const& valueAtIndex1, int const index1, AlbaNumber const& valueAtIndex2, int const index2) ;
+        AlbaNumber const& valueAtIndex1, int const index1, AlbaNumber const& valueAtIndex2, int const index2);
 };
 
 }  // namespace algebra

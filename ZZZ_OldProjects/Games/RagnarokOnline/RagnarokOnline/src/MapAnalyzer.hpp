@@ -34,8 +34,8 @@ private:
     void selectMaps();
     void sortMaps();
 
-    static bool isDropRateAcceptable(double const dropRate) ;
-    static double getTalonRoDropRate(double const dropRate) ;
+    static bool isDropRateAcceptable(double const dropRate);
+    static double getTalonRoDropRate(double const dropRate);
     double getBestPrice(Item const& item) const;
     RagnarokOnline m_ragnarokOnline;
     MapsAnalyzerData m_mapsAnalyzerData;

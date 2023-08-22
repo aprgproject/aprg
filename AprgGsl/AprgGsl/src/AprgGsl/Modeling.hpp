@@ -45,7 +45,7 @@ private:
     void saveRetrievedDataToMatrix(
         MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int numberOfSamples);
     void calculateCoefficientsUsingLeastSquares();
-    static unsigned int getIndex(unsigned int const i, unsigned int const j, unsigned int const numberOfColumns) ;
+    static unsigned int getIndex(unsigned int const i, unsigned int const j, unsigned int const numberOfColumns);
     MatrixOfDoubles m_coefficients;
     MatrixOfDoubles m_modelingDataForX;
     MatrixOfDoubles m_modelingDataForY;

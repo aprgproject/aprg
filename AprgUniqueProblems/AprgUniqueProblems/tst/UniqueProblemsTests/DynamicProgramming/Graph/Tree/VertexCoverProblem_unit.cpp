@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using SetOfVertices = VertexCoverProblem::SetOfVertices;
-} // namespace
+}  // namespace
 
 TEST(VertexCoverProblemTest, GetMinimumCountWorksOnExample1) {
     VertexCoverProblem::Graph graph;

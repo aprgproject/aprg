@@ -1295,8 +1295,7 @@ void Lrm::sortFspPairsBasedOnCondition(
         });
 }
 
-void Lrm::removeFspPairsBasedOnCondition(
-    FspPairsDetails& fspPairsDetails, FspPairDetailsCondition const& condition) {
+void Lrm::removeFspPairsBasedOnCondition(FspPairsDetails& fspPairsDetails, FspPairDetailsCondition const& condition) {
     fspPairsDetails.erase(
         remove_if(
             fspPairsDetails.begin(), fspPairsDetails.end(),

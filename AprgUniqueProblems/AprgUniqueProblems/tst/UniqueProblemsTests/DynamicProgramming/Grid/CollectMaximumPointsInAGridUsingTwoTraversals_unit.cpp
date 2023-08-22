@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using Grid = CollectMaximumPointsInAGridUsingTwoTraversals::ValueGrid;
-} // namespace
+}  // namespace
 
 TEST(CollectMaximumPointsInAGridUsingTwoTraversalsTest, GetMaximumPointsWorksOnEmptyInput) {
     Grid inputGrid;

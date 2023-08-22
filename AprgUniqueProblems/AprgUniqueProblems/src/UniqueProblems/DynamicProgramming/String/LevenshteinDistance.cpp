@@ -107,7 +107,8 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingNaive
     Index const index1, Index const index2) const {
     if (index1 == 0) {
         return index2;
-    } if (index2 == 0) {
+    }
+    if (index2 == 0) {
         return index1;
     } else if (m_string1[index1 - 1] == m_string2[index2 - 1]) {
         return getLevenshteinDistanceUsingNaiveRecursion(index1 - 1, index2 - 1);

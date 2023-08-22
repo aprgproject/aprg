@@ -24,13 +24,13 @@ public:
     std::string getCPlusPlusStylePrintFromC(std::string const& inputString) const;
 
 private:
-    static std::string getNewPrintStreamBasedFromOldPrintFunction(std::string const& printFunction) ;
-    static void removeStartingAndTrailingWhiteSpaceInPrintParameters(stringHelper::strings& printParameters) ;
+    static std::string getNewPrintStreamBasedFromOldPrintFunction(std::string const& printFunction);
+    static void removeStartingAndTrailingWhiteSpaceInPrintParameters(stringHelper::strings& printParameters);
     std::string constructCPlusPlusPrint(
         std::string const& newPrintStream, std::string const& endPrintStream, std::string const& printString,
         stringHelper::strings const& printParameters) const;
-    static void appendCharacterToResult(std::string& result, bool& isOnStringLiteral, char const c) ;
-    static void appendParameterToResult(std::string& result, bool& isOnStringLiteral, std::string const& parameter) ;
+    static void appendCharacterToResult(std::string& result, bool& isOnStringLiteral, char const c);
+    static void appendParameterToResult(std::string& result, bool& isOnStringLiteral, std::string const& parameter);
     static bool isCOrCPlusPlusFile(std::string const& extension);
     static bool hasPrintInLine(std::string const& line);
     static bool hasEndOfPrintInLine(std::string const& line);

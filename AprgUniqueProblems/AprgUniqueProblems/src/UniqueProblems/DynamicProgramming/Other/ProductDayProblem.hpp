@@ -33,9 +33,9 @@ private:
     Day getNumberOfDays() const;
     ProductBits getNumberOfProductsSubsets() const;
     ProductBits getProductBitsWithAllProducts() const;
-    static ProductBits getProductBits(Product const product) ;
-    static ProductBits addProduct(ProductBits const productBits, Product const product) ;
-    static ProductBits removeProduct(ProductBits const productBits, Product const product) ;
+    static ProductBits getProductBits(Product const product);
+    static ProductBits addProduct(ProductBits const productBits, Product const product);
+    static ProductBits removeProduct(ProductBits const productBits, Product const product);
     PriceMatrix m_pricesInDayByProduct;
 };
 

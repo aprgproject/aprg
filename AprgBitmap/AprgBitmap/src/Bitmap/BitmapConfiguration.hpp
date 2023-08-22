@@ -48,8 +48,8 @@ public:
     BitmapXY getPointWithinTheBitmap(int const xCoordinate, int const yCoordinate) const;
     int getXCoordinateWithinTheBitmap(int const coordinate) const;
     int getYCoordinateWithinTheBitmap(int const coordinate) const;
-    static int getCoordinateWithinRange(int const coordinate, int maxLength) ;
-    static BitmapXY getUpLeftCornerPoint() ;
+    static int getCoordinateWithinRange(int const coordinate, int maxLength);
+    static BitmapXY getUpLeftCornerPoint();
     BitmapXY getDownRightCornerPoint() const;
 
     uint32_t getColorUsingPixelValue(uint32_t const pixelValue) const;
@@ -72,7 +72,7 @@ private:
     void readDibHeader(AlbaFileReader& fileReader);
     void readColors(AlbaFileReader& fileReader);
     void calculateOtherValuesAfterReading();
-    static CompressedMethodType determineCompressedMethodType(uint32_t compressedMethodValue) ;
+    static CompressedMethodType determineCompressedMethodType(uint32_t compressedMethodValue);
     uint32_t m_fileSize;
     uint32_t m_pixelArrayAddress;
     uint32_t m_sizeOfHeader;

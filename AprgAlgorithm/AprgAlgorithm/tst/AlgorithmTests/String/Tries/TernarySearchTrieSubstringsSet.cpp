@@ -10,7 +10,7 @@ namespace algorithm {
 
 namespace {
 using TrieForTest = TernarySearchTrieSubstringsSet;
-} // namespace
+}  // namespace
 
 TEST(TernarySearchTrieSubstringsSetTest, IsEmptyWorksWhenEmpty) {
     TrieForTest trie;

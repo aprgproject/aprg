@@ -12,7 +12,7 @@ namespace algorithm {
 
 namespace {
 using SymbolTableForTest = UnorderedLinkedListSymbolTable<int, char>;
-} // namespace
+}  // namespace
 
 TEST(UnorderedLinkedListSymbolTableTest, IsEmptyWorksWhenEmpty) {
     testIsEmptyWhenEmptyWithUnsignedIntAndChar<SymbolTableForTest>();

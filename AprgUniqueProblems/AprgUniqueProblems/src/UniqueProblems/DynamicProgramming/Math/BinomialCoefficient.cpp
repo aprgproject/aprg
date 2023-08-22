@@ -137,7 +137,8 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingNaive
     Value const n, Value const k) const {
     if (n < k) {
         return 0;
-    } if (k == 0 || n == k) {
+    }
+    if (k == 0 || n == k) {
         return 1;
     } else {
         return getBinomialCoefficientUsingNaiveRecursion(n - 1, k) +

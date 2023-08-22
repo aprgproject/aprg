@@ -28,13 +28,13 @@ public:
     bool areLcgAndBasebandCardsValid() const;
     bool canMultipleLcgsBePutOnBasebandCard(BasebandCard const& basebandCard) const;
     unsigned int getNumberBasebandCardsWithMultipleLcgs() const;
-    static unsigned int getMaxNumberOfLcgsInBasebandCard(BasebandCard const& basebandCard) ;
+    static unsigned int getMaxNumberOfLcgsInBasebandCard(BasebandCard const& basebandCard);
     unsigned int getMaxNumberOfLcgsInAllBasebandCards() const;
     VectorOfLcgs getLcgsInPriorityOrder() const;
     BasebandCardsSplitBasedOnNumberOfLcgs getBasebandCardsSplitBetweenOneLcgAndMultipleLcgs(
         unsigned int const numberOfBasebandCardsWithMultipleLcgs) const;
-    static void sortAndPrioritizeBasebandCards(VectorOfBasebandCards& basebandCardsWithPrioritization) ;
-    static void sortAndPrioritizeLcgs(VectorOfLcgs& lcgsInPriorityOrder) ;
+    static void sortAndPrioritizeBasebandCards(VectorOfBasebandCards& basebandCardsWithPrioritization);
+    static void sortAndPrioritizeLcgs(VectorOfLcgs& lcgsInPriorityOrder);
     void assignBasebandCardsWithOneLcg(
         KeplerNidToLcgMap& poolingMap, VectorOfLcgs& lcgsInPriorityOrder,
         SetOfBasebandCards const& basebandCardsWithOneLcg) const;

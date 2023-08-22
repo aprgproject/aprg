@@ -21,7 +21,7 @@ public:
     using WildcardNameToSampleSizesPair = std::pair<std::string, SampleSizes>;
 
     void addFileSizeForSnapshot(std::string const& fileName, std::string const& snapshotName, double const fileSize);
-    static std::string getSnapshotDirectory(std::string const& snapshotPath) ;
+    static std::string getSnapshotDirectory(std::string const& snapshotPath);
     void extractFilesInSnapshot(std::string const& snapshotPath);
     void fetchFileSizesForSnapshot(std::string const& snapshotPath);
     void saveFileListForSnapshot(std::string const& outputPath);
@@ -32,7 +32,7 @@ public:
     void processSnapshot(std::string const& snapshotPath);
 
     void processMemory(std::string const& ramFilePath, std::string const& snapshotName);
-    static double convertFileSizeToDouble(std::string const& fileSizeInString) ;
+    static double convertFileSizeToDouble(std::string const& fileSizeInString);
     void addStatisticForMemory(std::string const& fileName, std::string const& snapshotName, double const fileSize);
     void saveSizesForMemory(std::string const& outputPath);
 

@@ -26,7 +26,7 @@ public:
 private:
     Cost getMinimumCostUsingNaiveRecursion(Cost const depth, Index const left, Index const right) const;
 
-    static Cost getCost(Cost const depth, Cost const frequency) ;
+    static Cost getCost(Cost const depth, Cost const frequency);
     void initialize();
     void sortByValue();
     ValueAndFrequencyPairs m_valueAndFrequencyPairs;

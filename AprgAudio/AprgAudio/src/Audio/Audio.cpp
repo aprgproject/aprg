@@ -64,8 +64,8 @@ template <class T>
 int Audio<T>::getNumSamplesPerChannel() const {
     if (!samples.empty()) {
         return samples[0].size();
-    }         return 0;
-   
+    }
+    return 0;
 }
 
 template <class T>
@@ -135,8 +135,9 @@ void Audio<T>::setNumSamplesPerChannel(int numSamples) {
         samples[i].resize(numSamples);
 
         // set any new samples to zero
-        if (numSamples > originalSize) { fill(samples[i].begin() + originalSize, samples[i].end(), (T)0);
-}
+        if (numSamples > originalSize) {
+            fill(samples[i].begin() + originalSize, samples[i].end(), (T)0);
+        }
     }
 }
 
@@ -187,11 +188,12 @@ bool Audio<T>::load(string const& filePath) {
 
     if (audioFileFormat == AudioFormat::Wave) {
         return decodeWaveFile(fileDataBytes);
-    } if (audioFileFormat == AudioFormat::Aiff) {
+    }
+    if (audioFileFormat == AudioFormat::Aiff) {
         return decodeAiffFile(fileDataBytes);
-    }         cout << "Audio File Type: Error\n";
-        return false;
-   
+    }
+    cout << "Audio File Type: Error\n";
+    return false;
 }
 
 template <class T>
@@ -283,7 +285,7 @@ bool Audio<T>::decodeWaveFile(vector<uint8_t>& fileDataBytes) {
 
                 if (sampleAsInt & 0x800000) {  //  if the 24th bit is set, this is a negative number in 24-bit world
                     sampleAsInt = sampleAsInt | ~0xFFFFFF;  // so make sure sign is extended to the 32 bit float
-}
+                }
 
                 T sample = (T)sampleAsInt / (T)8388608.;
                 samples[channel].push_back(sample);
@@ -386,7 +388,7 @@ bool Audio<T>::decodeAiffFile(vector<uint8_t>& fileDataBytes) {
 
                 if (sampleAsInt & 0x800000) {  //  if the 24th bit is set, this is a negative number in 24-bit world
                     sampleAsInt = sampleAsInt | ~0xFFFFFF;  // so make sure sign is extended to the 32 bit float
-}
+                }
 
                 T sample = (T)sampleAsInt / (T)8388608.;
                 samples[channel].push_back(sample);
@@ -402,8 +404,9 @@ bool Audio<T>::decodeAiffFile(vector<uint8_t>& fileDataBytes) {
 template <class T>
 int Audio<T>::getAiffSampleRate(vector<uint8_t>& fileDataBytes, int sampleRateStartIndex) {
     for (auto it : aiffSampleRateTable) {
-        if (tenByteMatch(fileDataBytes, sampleRateStartIndex, it.second, 0)) { return it.first;
-}
+        if (tenByteMatch(fileDataBytes, sampleRateStartIndex, it.second, 0)) {
+            return it.first;
+        }
     }
 
     return -1;
@@ -412,8 +415,9 @@ int Audio<T>::getAiffSampleRate(vector<uint8_t>& fileDataBytes, int sampleRateSt
 template <class T>
 bool Audio<T>::tenByteMatch(vector<uint8_t>& v1, int startIndex1, vector<uint8_t>& v2, int startIndex2) {
     for (int i = 0; i < 10; i++) {
-        if (v1[startIndex1 + i] != v2[startIndex2 + i]) { return false;
-}
+        if (v1[startIndex1 + i] != v2[startIndex2 + i]) {
+            return false;
+        }
     }
 
     return true;
@@ -422,8 +426,9 @@ bool Audio<T>::tenByteMatch(vector<uint8_t>& v1, int startIndex1, vector<uint8_t
 template <class T>
 void Audio<T>::addSampleRateToAiffData(vector<uint8_t>& fileDataBytes, int sampleRate) {
     if (aiffSampleRateTable.count(sampleRate) > 0) {
-        for (int i = 0; i < 10; i++) { fileDataBytes.push_back(aiffSampleRateTable[sampleRate][i]);
-}
+        for (int i = 0; i < 10; i++) {
+            fileDataBytes.push_back(aiffSampleRateTable[sampleRate][i]);
+        }
     }
 }
 
@@ -432,7 +437,8 @@ bool Audio<T>::save(string const& filePath, AudioFormat format) {
     AlbaLocalPathHandler filePathHandler(filePath);
     if (format == AudioFormat::Wave) {
         return saveToWaveFile(filePathHandler.getFullPath());
-    } if (format == AudioFormat::Aiff) {
+    }
+    if (format == AudioFormat::Aiff) {
         return saveToAiffFile(filePathHandler.getFullPath());
     }
 
@@ -661,9 +667,11 @@ AudioFormat Audio<T>::determineAudioFormat(vector<uint8_t>& fileDataBytes) {
 
     if (header == "RIFF") {
         return AudioFormat::Wave;
-    } if (header == "FORM") {
+    }
+    if (header == "FORM") {
         return AudioFormat::Aiff;
-    }         return AudioFormat::Error;
+    }
+    return AudioFormat::Error;
 }
 
 template <class T>
@@ -676,7 +684,7 @@ int32_t Audio<T>::fourBytesToInt(vector<uint8_t> const& source, int startIndex, 
     } else {
         result = (source[startIndex] << 24) | (source[startIndex + 1] << 16) | (source[startIndex + 2] << 8) |
                  source[startIndex + 3];
-}
+    }
 
     return result;
 }
@@ -689,7 +697,7 @@ int16_t Audio<T>::twoBytesToInt(vector<uint8_t> const& source, int startIndex, E
         result = (source[startIndex + 1] << 8) | source[startIndex];
     } else {
         result = (source[startIndex] << 8) | source[startIndex + 1];
-}
+    }
 
     return result;
 }

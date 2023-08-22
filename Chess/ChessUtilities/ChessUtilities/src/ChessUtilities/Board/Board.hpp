@@ -85,7 +85,7 @@ public:
     void move(Move const& move);
 
 private:
-    static PieceGrid getInitialValues(BoardOrientation const& inputType) ;
+    static PieceGrid getInitialValues(BoardOrientation const& inputType);
 
     void retrieveMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
     void retrievePawnMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
@@ -144,28 +144,28 @@ private:
         std::optional<CoordinateDataType> const& yLimitation) const;
     Move getCastleMove(CastleType const castleType, PieceColor const moveColor) const;
     Move getNonCastleMoveWithAlgebraicNotation(std::string const& text, PieceColor const moveColor) const;
-    static Coordinates getLDeltaCoordinates() ;
-    static Coordinates getDiagonalIncrementDeltaCoordinates() ;
-    static Coordinates getStraightIncrementDeltaCoordinates() ;
-    static Coordinates getOneStepDeltaCoordinates() ;
+    static Coordinates getLDeltaCoordinates();
+    static Coordinates getDiagonalIncrementDeltaCoordinates();
+    static Coordinates getStraightIncrementDeltaCoordinates();
+    static Coordinates getOneStepDeltaCoordinates();
     DeltaRange getPawnNonCaptureDeltaRange(Coordinate const& startpoint, PieceColor const moveColor) const;
     DeltaRange getPawnReverseNonCaptureDeltaRange(Coordinate const& endpoint, PieceColor const moveColor) const;
     Coordinates getPawnCapturesDeltaCoordinates(PieceColor const moveColor) const;
     Coordinates getPawnReverseCapturesDeltaCoordinates(PieceColor const moveColor) const;
-    static Coordinate getCoordinateFromGridIndex(int const gridIndex) ;
+    static Coordinate getCoordinateFromGridIndex(int const gridIndex);
     Coordinate getCorrectCoordinateFromAlgebraicNotation(CoordinateDataType const x, CoordinateDataType const y) const;
     CoordinateDataType getXInCorrectOrientation(CoordinateDataType const x) const;
     CoordinateDataType getYInCorrectOrientation(CoordinateDataType const y) const;
-    static CoordinateDataType reverse(CoordinateDataType const value) ;
-    static CoordinateDataType getOneIncrement(CoordinateDataType const coordinateDataType) ;
-    static CastleType getCastleTypeWithAlgebraicNotation(std::string const& textInAlgebraicNotation) ;
-    static int getGridIndex(int const x, int const y) ;
+    static CoordinateDataType reverse(CoordinateDataType const value);
+    static CoordinateDataType getOneIncrement(CoordinateDataType const coordinateDataType);
+    static CastleType getCastleTypeWithAlgebraicNotation(std::string const& textInAlgebraicNotation);
+    static int getGridIndex(int const x, int const y);
     int getNumberOfWaysToBlockPath(
         Coordinate const& startpoint, Coordinate const& endpoint, PieceColor const blockingPieceColor,
         int const maxSize) const;
 
-    static bool isPieceEmptyOrHasOpposingColors(Piece const& piece, PieceColor const color) ;
-    static bool isPieceNonEmptyAndHasOpposingColors(Piece const& piece, PieceColor const color) ;
+    static bool isPieceEmptyOrHasOpposingColors(Piece const& piece, PieceColor const color);
+    static bool isPieceNonEmptyAndHasOpposingColors(Piece const& piece, PieceColor const color);
     bool isPossibleMoveBasedFromPieceType(Move const& move) const;
     bool isPossiblePawnMove(Move const& move) const;
     bool isPossibleKnightMove(Move const& move) const;
@@ -178,20 +178,20 @@ private:
     bool isAPawnNonCaptureMove(Move const& move) const;
     bool isAPawnCapture(Move const& move) const;
     bool isAPawnEnPassantMove(Move const& move) const;
-    static bool isADiagonalMove(Move const& move) ;
-    static bool isAStraightMove(Move const& move) ;
-    static bool isAnLMove(Move const& move) ;
-    static bool isAOneStepMove(Move const& move) ;
+    static bool isADiagonalMove(Move const& move);
+    static bool isAStraightMove(Move const& move);
+    static bool isAnLMove(Move const& move);
+    static bool isAOneStepMove(Move const& move);
     bool isCastlingPossible(Move const& kingMove, Move const& rookMove) const;
     bool isEndpointEmptyOrHaveDifferentColors(Move const& move) const;
     bool isThereNoPieceInBetween(Move const& move) const;
     bool isSafeToCastleInBetween(Coordinate const& startpoint, Coordinate const& endpoint) const;
     static bool doesAllCellsInBetweenSatisfyTheCondition(
-        Coordinate const& startpoint, Coordinate const& endpoint, CoordinateCondition const& condition) ;
+        Coordinate const& startpoint, Coordinate const& endpoint, CoordinateCondition const& condition);
 
     static void updateAttackDefendCount(
         Board::AttackDefendCount& count, PieceColor const pieceColor, PieceColor const sameColor,
-        PieceColor oppositeColor) ;
+        PieceColor oppositeColor);
     void changePieceGridWithMove(Move const& move);
 
     BoardOrientation m_orientation;

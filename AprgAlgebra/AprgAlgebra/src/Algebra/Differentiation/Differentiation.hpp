@@ -16,7 +16,7 @@ public:
         std::string const& nameOfVariableToDifferentiate, VariableNamesSet const& namesOfDependentVariables);
 
     Term differentiate(Term const& term) const;
-    static Term differentiate(Constant const& constant) ;
+    static Term differentiate(Constant const& constant);
     Term differentiate(Variable const& variable) const;
     Term differentiate(Monomial const& monomial) const;
     Term differentiate(Polynomial const& polynomial) const;
@@ -29,7 +29,7 @@ public:
     Term differentiateMultipleTimes(Term const& term, int const numberOfTimes) const;
     Equation differentiateMultipleTimes(Equation const& equation, int const numberOfTimes) const;
 
-    static AlbaNumber differentiateConstant(Constant const&) ;
+    static AlbaNumber differentiateConstant(Constant const&);
     Monomial differentiateVariable(Variable const& variable) const;
     Polynomial differentiateMonomial(Monomial const& monomial) const;
     Polynomial differentiatePolynomial(Polynomial const& polynomial) const;
@@ -53,8 +53,8 @@ private:
     Term differentiateTermsInRaiseToPower(Expression const& expression) const;
     Term differentiateNonChangingTermRaiseToChangingTerm(Term const& base, Term const& exponent) const;
     Term differentiateChangingTermRaiseToNonChangingTerm(Term const& base, Term const& exponent) const;
-    static Term differentiateChangingTermRaiseToChangingTerm(Term const& firstTerm, Term const& secondTerm) ;
-    static Term differentiateFunctionOnly(Function const& functionObject) ;
+    static Term differentiateChangingTermRaiseToChangingTerm(Term const& firstTerm, Term const& secondTerm);
+    static Term differentiateFunctionOnly(Function const& functionObject);
     bool isVariableToDifferentiate(std::string const& variableName) const;
     bool isDependentVariable(std::string const& variableName) const;
     bool isDerivativeVariableNameAndAffectedByThisDifferentiation(

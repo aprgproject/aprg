@@ -51,8 +51,9 @@ bool Function::operator<(Function const& second) const {
     if (m_functionName == second.m_functionName) {
         return getTermConstReferenceFromBaseTerm(getInputTerm()) <
                getTermConstReferenceFromBaseTerm(second.getInputTerm());
-    }         result = m_functionName < second.m_functionName;
-   
+    }
+    result = m_functionName < second.m_functionName;
+
     return result;
 }
 

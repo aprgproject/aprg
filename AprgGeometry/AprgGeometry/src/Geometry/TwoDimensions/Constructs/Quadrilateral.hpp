@@ -30,15 +30,15 @@ public:
 private:
     GroupOfPoints getGroupOfPointsBasedOnYValue() const;
     static ListOfStartEndOfXAndY getStartEndForXs(
-        GroupOfPoints const& groupOfPointsBasedOnYValue, double const interval) ;
-    static ListOfStartEndOfXAndY getStartEndForXsFor1Points(Points const& points) ;
+        GroupOfPoints const& groupOfPointsBasedOnYValue, double const interval);
+    static ListOfStartEndOfXAndY getStartEndForXsFor1Points(Points const& points);
     static ListOfStartEndOfXAndY getStartEndForXsFor2Points(
-        Points const& points1, Points const& points2, double const interval) ;
+        Points const& points1, Points const& points2, double const interval);
     static ListOfStartEndOfXAndY getStartEndForXsFor3Points(
-        Points const& points1, Points const& points2, Points const& points3, double const interval) ;
+        Points const& points1, Points const& points2, Points const& points3, double const interval);
     static ListOfStartEndOfXAndY getStartEndForXsFor4Points(
         Points const& points1, Points const& points2, Points const& points3, Points const& points4,
-        double const interval) ;
+        double const interval);
 
     friend std::ostream& operator<<(std::ostream& out, Quadrilateral const& quadrilateral);
 };

@@ -12,7 +12,8 @@ struct PidSimulatorConfiguration {
     void saveArgumentValues(StringToStringMap& argumentsToValuesMap);
     void processArgumentsWithEqualDelimeter(
         StringToStringMap& argumentsToValuesMap, stringHelper::strings const& argumentsInMain);
-    static void processOneArgumentWithEqualDelimeter(StringToStringMap& argumentsToValuesMap, std::string const& argument);
+    static void processOneArgumentWithEqualDelimeter(
+        StringToStringMap& argumentsToValuesMap, std::string const& argument);
     void print() const;
     unsigned int numberOfLoopsOfPeriodicInputDemand;
     unsigned int amplitudeOfInputDemand;

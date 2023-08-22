@@ -12,7 +12,7 @@ namespace algorithm {
 
 namespace {
 using UnionFindForTest = UnionFindForFreeIndex<int>;
-} // namespace
+}  // namespace
 
 TEST(UnionFindForFreeIndexTest, IsConnectedWorks) {
     UnionFindForTest unionFind(13);

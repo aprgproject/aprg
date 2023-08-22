@@ -29,10 +29,10 @@ public:
 
 private:
     RevisionEntry getRevisionEntry(std::string const& line) const;
-    static AlbaDateTime getDateTime(std::string const& date) ;
+    static AlbaDateTime getDateTime(std::string const& date);
     static DaysInterval createDaysInterval(
         uint32_t const year1, uint32_t const month1, uint32_t const day1, uint32_t const year2, uint32_t const month2,
-        uint32_t const day2) ;
+        uint32_t const day2);
 
     void setDataFromGitHistory();
     void setDataOnCommitsPerDay();

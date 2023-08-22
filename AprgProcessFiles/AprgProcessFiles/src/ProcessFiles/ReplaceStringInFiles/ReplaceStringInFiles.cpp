@@ -206,8 +206,7 @@ void ReplaceStringInFiles::appendCharacterToResult(string& result, bool& isOnStr
     isOnStringLiteral = true;
 }
 
-void ReplaceStringInFiles::appendParameterToResult(
-    string& result, bool& isOnStringLiteral, string const& parameter) {
+void ReplaceStringInFiles::appendParameterToResult(string& result, bool& isOnStringLiteral, string const& parameter) {
     if (isOnStringLiteral) {
         result += R"(" << )";
         result += parameter;

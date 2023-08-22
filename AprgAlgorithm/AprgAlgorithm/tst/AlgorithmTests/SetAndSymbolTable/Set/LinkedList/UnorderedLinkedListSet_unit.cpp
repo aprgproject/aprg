@@ -12,7 +12,7 @@ namespace algorithm {
 
 namespace {
 using SetForTest = UnorderedLinkedListSet<int>;
-} // namespace
+}  // namespace
 
 TEST(UnorderedLinkedListSetTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithUnsignedIntAndChar<SetForTest>(); }
 

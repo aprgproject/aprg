@@ -113,8 +113,8 @@ string undecidedFunction() {
     string sad("Boo hoo!");
     if (getHappiness() > 50) {
         return happy;
-    }         return sad;
-   
+    }
+    return sad;
 
     // -> It has to be decidable at construction time.
     // -> Again, the compiler will still move it (Since C++11)
@@ -138,8 +138,9 @@ string willThisRvo01() { return ("I will RVO!"); }
 string willThisRvo02(bool condition) {
     if (condition) {
         return ("I will RVO!");
-    }         return ("I will RVO!");
-   
+    }
+    return ("I will RVO!");
+
     // This will RVO because returning a temporary works.
     // This will RVO even in debug builds
 }

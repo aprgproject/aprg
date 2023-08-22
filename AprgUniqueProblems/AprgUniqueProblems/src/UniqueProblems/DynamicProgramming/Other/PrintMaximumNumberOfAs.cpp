@@ -80,22 +80,22 @@ PrintMaximumNumberOfAs::Count PrintMaximumNumberOfAs::getMaxCountOfAOnScreenUsin
 
     if (m_numberOfPresses <= 6) {
         return m_numberOfPresses;
-    }         Counts countsOnScreen(m_numberOfPresses, 0);
-        for (Count remainingNumberOfPresses = 1; remainingNumberOfPresses <= 6; remainingNumberOfPresses++) {
-            countsOnScreen[remainingNumberOfPresses - 1] = remainingNumberOfPresses;
-        }
-        for (Count remainingNumberOfPresses = 7; remainingNumberOfPresses <= m_numberOfPresses;
-             remainingNumberOfPresses++) {
-            // break point will start ctrl-a, ctrl-c and then only ctrl-v all the way.
-            for (Count breakPoint = remainingNumberOfPresses - 3; breakPoint >= 1; breakPoint--) {
-                Count countIfBreakPoint = (remainingNumberOfPresses - breakPoint - 1) * countsOnScreen[breakPoint - 1];
-                if (countIfBreakPoint > countsOnScreen[remainingNumberOfPresses - 1]) {
-                    countsOnScreen[remainingNumberOfPresses - 1] = countIfBreakPoint;
-                }
+    }
+    Counts countsOnScreen(m_numberOfPresses, 0);
+    for (Count remainingNumberOfPresses = 1; remainingNumberOfPresses <= 6; remainingNumberOfPresses++) {
+        countsOnScreen[remainingNumberOfPresses - 1] = remainingNumberOfPresses;
+    }
+    for (Count remainingNumberOfPresses = 7; remainingNumberOfPresses <= m_numberOfPresses;
+         remainingNumberOfPresses++) {
+        // break point will start ctrl-a, ctrl-c and then only ctrl-v all the way.
+        for (Count breakPoint = remainingNumberOfPresses - 3; breakPoint >= 1; breakPoint--) {
+            Count countIfBreakPoint = (remainingNumberOfPresses - breakPoint - 1) * countsOnScreen[breakPoint - 1];
+            if (countIfBreakPoint > countsOnScreen[remainingNumberOfPresses - 1]) {
+                countsOnScreen[remainingNumberOfPresses - 1] = countIfBreakPoint;
             }
         }
-        return countsOnScreen.back();
-   
+    }
+    return countsOnScreen.back();
 }
 
 PrintMaximumNumberOfAs::CountDetail PrintMaximumNumberOfAs::getMaxCountOfAOnScreenUsingNaiveRecursion(
@@ -140,7 +140,8 @@ PrintMaximumNumberOfAs::CountDetail PrintMaximumNumberOfAs::getBestDetailBasedOn
                 return first.numberInScreen < second.numberInScreen;
             });
         return *it;
-    } if (remainingNumberOfPresses + 1 == m_numberOfPresses) {
+    }
+    if (remainingNumberOfPresses + 1 == m_numberOfPresses) {
         auto it = max_element(
             previousDetails.cbegin(), previousDetails.cend(), [](CountDetail const& first, CountDetail const& second) {
                 return first.numberInScreen + first.numberInBuffer < second.numberInScreen + second.numberInBuffer;
@@ -156,8 +157,7 @@ PrintMaximumNumberOfAs::CountDetail PrintMaximumNumberOfAs::getBestDetailBasedOn
     }
 }
 
-void PrintMaximumNumberOfAs::updateDetailsBasedOnPressType(
-    CountDetails& previousDetails, PressType const pressType) {
+void PrintMaximumNumberOfAs::updateDetailsBasedOnPressType(CountDetails& previousDetails, PressType const pressType) {
     switch (pressType) {
         case PressType::TypeA: {
             for (auto& previousDetail : previousDetails) {

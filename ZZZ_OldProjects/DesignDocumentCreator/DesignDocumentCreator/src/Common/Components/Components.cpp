@@ -38,8 +38,8 @@ void Components::executePendingEventsUsingRoundRobin() {
     bool isNotChanged(true);
     while (isNotChanged) {
         isNotChanged = false;
-        for (auto componentIterator = m_componentsMap.begin();
-             componentIterator != m_componentsMap.end(); componentIterator++) {
+        for (auto componentIterator = m_componentsMap.begin(); componentIterator != m_componentsMap.end();
+             componentIterator++) {
             Component* componentPointer((componentIterator->second).get());
             if (!componentPointer->isEventQueueEmpty()) {
                 isNotChanged = true;

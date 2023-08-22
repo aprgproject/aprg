@@ -35,20 +35,23 @@ int id[20][20];
 
 bool can_move(ll ban, int a) {
     for (int x : g[a]) {
-        if ((ban >> x) & 1) { continue;
-}
+        if ((ban >> x) & 1) {
+            continue;
+        }
         return true;
     }
     return false;
 }
 
 void dfs(int v, ll &mask, ll ban) {
-    if ((mask >> v) & 1) { return;
-}
+    if ((mask >> v) & 1) {
+        return;
+    }
     mask |= (1ll << v);
     for (int x : g[v]) {
-        if ((ban >> x) & 1) { continue;
-}
+        if ((ban >> x) & 1) {
+            continue;
+        }
         dfs(x, mask, ban);
     }
 }
@@ -58,8 +61,9 @@ int calc(int s, ll ban, int a, int b, int who) {
     dfs(a, msk, ban);
     dfs(b, msk, ban);
     for (int i = 0; i < s * s; i++) {
-        if ((msk >> i) & 1) { continue;
-}
+        if ((msk >> i) & 1) {
+            continue;
+        }
         ban |= (1ll << i);
     }
     if (ok[s][a][b][who].count(ban)) {
@@ -67,40 +71,41 @@ int calc(int s, ll ban, int a, int b, int who) {
     }
     if (!can_move(ban, a) && !can_move(ban, b)) {
         return 0;
-    }         if (who == 0) {
-            if (can_move(ban, a)) {
-                int score = -1e9;
-                for (int x : g[a]) {
-                    if ((ban >> x) & 1) continue;
-                    ll go = ban | (1ll << x);
-                    score = max(score, calc(s, go, x, b, 1) + 1);
-                }
-                return ok[s][a][b][who][ban] = score;
-            } else {
-                return ok[s][a][b][who][ban] = calc(s, ban, a, b, 1);
+    }
+    if (who == 0) {
+        if (can_move(ban, a)) {
+            int score = -1e9;
+            for (int x : g[a]) {
+                if ((ban >> x) & 1) continue;
+                ll go = ban | (1ll << x);
+                score = max(score, calc(s, go, x, b, 1) + 1);
             }
+            return ok[s][a][b][who][ban] = score;
         } else {
-            if (can_move(ban, b)) {
-                int score = 1e9;
-                for (int x : g[b]) {
-                    if ((ban >> x) & 1) continue;
-                    ll go = ban | (1ll << x);
-                    score = min(score, calc(s, go, a, x, 0) - 1);
-                }
-                return ok[s][a][b][who][ban] = score;
-            } else {
-                return ok[s][a][b][who][ban] = calc(s, ban, a, b, 0);
-            }
+            return ok[s][a][b][who][ban] = calc(s, ban, a, b, 1);
         }
-   
+    } else {
+        if (can_move(ban, b)) {
+            int score = 1e9;
+            for (int x : g[b]) {
+                if ((ban >> x) & 1) continue;
+                ll go = ban | (1ll << x);
+                score = min(score, calc(s, go, a, x, 0) - 1);
+            }
+            return ok[s][a][b][who][ban] = score;
+        } else {
+            return ok[s][a][b][who][ban] = calc(s, ban, a, b, 0);
+        }
+    }
 }
 
 void runTestCase(int const testCaseNumber) {
     int s, ra, pa, rb, pb, c;
     my_cin >> s >> ra >> pa >> rb >> pb >> c;
     ra--, pa--, rb--, pb--;
-    for (int i = 0; i < s * s; i++) { g[i].clear();
-}
+    for (int i = 0; i < s * s; i++) {
+        g[i].clear();
+    }
     int ptr = 0;
     for (int i = 0; i < s; i++) {
         for (int j = 0; j < 2 * i + 1; j++) {

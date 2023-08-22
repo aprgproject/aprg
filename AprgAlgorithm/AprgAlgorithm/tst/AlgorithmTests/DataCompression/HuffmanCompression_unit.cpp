@@ -13,7 +13,7 @@ namespace algorithm {
 
 namespace {
 using CompressionForTest = HuffmanCompression<int>;
-} // namespace
+}  // namespace
 
 TEST(HuffmanCompressionTest, CompressWorksUsingExample1) {
     stringstream inputSs;

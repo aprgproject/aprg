@@ -91,7 +91,7 @@ void runTestCase(int const testCaseNumber) {
         my_cout << "INDEFINITELY" << '\n';
     } else {
         my_cout << ans << '\n';
-}
+    }
 }
 
 void runAllTestCases() {

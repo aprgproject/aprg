@@ -22,7 +22,7 @@ public:
 protected:
     static Term getFormula(
         Term const& multiplierForEachTerm, std::string const& nName, std::string const& xName,
-        AlbaNumber const& aValue) ;
+        AlbaNumber const& aValue);
     std::string const m_nName;
     std::string const m_xName;
 };

@@ -6,7 +6,7 @@ namespace alba {
 
 namespace {
 vector<pair<int, int>> columnsOffsets{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 0}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
-} // namespace
+}  // namespace
 
 CollectMaximumPointsInAGridUsingTwoTraversals::CollectMaximumPointsInAGridUsingTwoTraversals(ValueGrid const& inputGrid)
     : m_inputGrid(inputGrid) {}

@@ -10,7 +10,7 @@ namespace algorithm {
 
 namespace {
 using SearchForTest = OrthogonalLineSegmentIntersectionSearch<int>;
-} // namespace
+}  // namespace
 
 TEST(OrthogonalLineSegmentIntersectionSearchTest, GetIntersectingPointsWorksWhenIntersectionIsAtTheMiddle) {
     SearchForTest search;

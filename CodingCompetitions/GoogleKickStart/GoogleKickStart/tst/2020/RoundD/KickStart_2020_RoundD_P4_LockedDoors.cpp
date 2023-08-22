@@ -39,10 +39,12 @@ struct UnionFind {
     void unite(long long x, long long y) {
         x = find(x);
         y = find(y);
-        if (x == y) { return;
-}
-        if (rs[x] < rs[y]) { swap(x, y);
-}
+        if (x == y) {
+            return;
+        }
+        if (rs[x] < rs[y]) {
+            swap(x, y);
+        }
         rs[x] += rs[y];
         ps[y] = x;
         num--;
@@ -55,22 +57,26 @@ void runTestCase(int const testCaseNumber) {
     long long n, q;
     my_cin >> n >> q;
     vector<long long> ds(n - 1);
-    for (long long i = 0; i < n - 1; i++) { my_cin >> ds[i];
-}
+    for (long long i = 0; i < n - 1; i++) {
+        my_cin >> ds[i];
+    }
 
     vector<long long> ss(q), ks(q);
-    for (long long i = 0; i < q; i++) { my_cin >> ss[i] >> ks[i], ss[i]--;
-}
+    for (long long i = 0; i < q; i++) {
+        my_cin >> ss[i] >> ks[i], ss[i]--;
+    }
 
     using P = pair<long long, long long>;
     vector<P> vp;
-    for (long long i = 0; i < n - 1; i++) { vp.emplace_back(ds[i], i);
-}
+    for (long long i = 0; i < n - 1; i++) {
+        vp.emplace_back(ds[i], i);
+    }
     sort(vp.begin(), vp.end());
 
     vector<long long> ord(n - 1);
-    for (long long i = 0; i < n - 1; i++) { ord[i] = vp[i].second;
-}
+    for (long long i = 0; i < n - 1; i++) {
+        ord[i] = vp[i].second;
+    }
 
     // check(ls[i]) = false
     // check(rs[i]) = true
@@ -85,8 +91,9 @@ void runTestCase(int const testCaseNumber) {
                 flg = 1;
             }
         }
-        if (!flg) { break;
-}
+        if (!flg) {
+            break;
+        }
         UnionFind uf(n);
         for (long long i = 0; i < n - 1; i++) {
             uf.unite(ord[i], ord[i] + 1);
@@ -95,7 +102,7 @@ void runTestCase(int const testCaseNumber) {
                     rs[k] = i;
                 } else {
                     ls[k] = i;
-}
+                }
             }
         }
     }
@@ -134,8 +141,9 @@ void runTestCase(int const testCaseNumber) {
     }
 
     my_cout << "Case #" << testCaseNumber << ":";
-    for (long long i = 0; i < q; i++) { my_cout << ' ' << ans[i] + 1;
-}
+    for (long long i = 0; i < q; i++) {
+        my_cout << ' ' << ans[i] + 1;
+    }
     my_cout << '\n';
 }
 

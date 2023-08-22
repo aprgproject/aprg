@@ -159,7 +159,7 @@ private:
     static AlbaDateTime addDateTimeMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
     static AlbaDateTime subtractDateTimeMagnitude(
         AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
-    static AlbaDateTime executeAddOrSubtract(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime) ;
+    static AlbaDateTime executeAddOrSubtract(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
 
     template <PrintFormat printFormat>
     friend std::ostream& operator<<(std::ostream& out, AlbaDateTime::PrintObject<printFormat> const&);

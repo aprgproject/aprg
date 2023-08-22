@@ -218,8 +218,7 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor3Points(
 }
 
 Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor4Points(
-    Points const& points1, Points const& points2, Points const& points3, Points const& points4,
-    double const interval) {
+    Points const& points1, Points const& points2, Points const& points3, Points const& points4, double const interval) {
     ListOfStartEndOfXAndY result;
     if (points1.size() == 1 && points2.size() == 1 && points3.size() == 1 && points4.size() == 1) {
         Point point1(points1[0]);

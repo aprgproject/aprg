@@ -31,19 +31,22 @@ void runTestCase(int const testCaseNumber) {
     int n, x;
     my_cin >> n >> x;
     vector<int> a(n);
-    for (int i = 0; i < n; i++) { my_cin >> a[i];
-}
+    for (int i = 0; i < n; i++) {
+        my_cin >> a[i];
+    }
     vector<pair<int, int> > q;
     for (int i = 0; i < n; i++) {
         q.push_back({(a[i] + x - 1) / x, i});
     }
     sort(q.begin(), q.end());
     vector<int> ord(n);
-    for (int i = 0; i < n; i++) { ord[i] = q[i].second;
-}
+    for (int i = 0; i < n; i++) {
+        ord[i] = q[i].second;
+    }
     my_cout << "Case #" << testCaseNumber << ":";
-    for (int answer : ord) { my_cout << ' ' << answer + 1;
-}
+    for (int answer : ord) {
+        my_cout << ' ' << answer + 1;
+    }
     my_cout << '\n';
 }
 

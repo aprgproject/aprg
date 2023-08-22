@@ -76,12 +76,14 @@ double Line::getAUnitIncreaseInY() const { return -m_aCoefficient; }
 Point Line::getAPoint() const {
     if (m_type == LineType::Invalid) {
         return {};
-    } if (m_type == LineType::Vertical) {
+    }
+    if (m_type == LineType::Vertical) {
         return Point(getXIntercept(), 0);
-    } if (m_type == LineType::Horizontal) {
+    }
+    if (m_type == LineType::Horizontal) {
         return Point(0, getYIntercept());
-    }         return Point(0, calculateYFromX(0));
-   
+    }
+    return Point(0, calculateYFromX(0));
 }
 
 Points Line::getPoints(Point const& first, Point const& second, double const interval) const {

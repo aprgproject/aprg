@@ -36,7 +36,8 @@ private:
     static void retrieveMergePart(Term& mergePart, Expression const& expression);
     static void retrieveCommonPart(Term& commonPart, Expression const& expression);
     bool doAllSizesMatch(Terms const& mergeParts, Terms const& commonParts) const;
-    static bool canBeMerged(Term const& mergePart1, Term const& mergePart2, Term const& commonPart1, Term const& commonPart2);
+    static bool canBeMerged(
+        Term const& mergePart1, Term const& mergePart2, Term const& commonPart1, Term const& commonPart2);
     void putItem(Expression const& expression, TermAssociationType const association);
     Expressions m_expressions;
     TermAssociationTypes m_associations;

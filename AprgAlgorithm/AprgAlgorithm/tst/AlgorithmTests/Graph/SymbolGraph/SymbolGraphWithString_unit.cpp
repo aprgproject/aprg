@@ -14,7 +14,7 @@ namespace algorithm {
 
 namespace {
 InvertedMapForSymbolGraph<int, string> invertedMap;
-} // namespace
+}  // namespace
 
 template <>
 int getUniqueVertexIdentifier<int, string>(string const& object) {

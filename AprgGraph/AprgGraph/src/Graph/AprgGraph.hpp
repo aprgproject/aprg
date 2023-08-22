@@ -48,7 +48,7 @@ public:
 
 private:
     bool isBitmapPointInTheBitmap(TwoDimensions::Point const& bitmapPoint);
-    static std::string getBitmapFilePathOfCharacter(char const character) ;
+    static std::string getBitmapFilePathOfCharacter(char const character);
     double getLowestInterval() const;
     TwoDimensions::Point convertBitmapXYToRealPoint(AprgBitmap::BitmapXY const& bitmapPosition) const;
     TwoDimensions::Point convertRealPointToBitmapPoint(TwoDimensions::Point const& realPosition) const;

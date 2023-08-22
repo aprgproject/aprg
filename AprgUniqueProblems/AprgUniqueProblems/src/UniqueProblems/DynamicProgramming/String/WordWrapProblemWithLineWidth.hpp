@@ -30,7 +30,7 @@ private:
     Cost getOptimizedCostUsingNaiveRecursion(RecursionDetails const& recursionDetails, Index const wordIndex) const;
     Cost getTotalLength() const;
     Cost getTotalCostOfAllLines(Indices const& lengths) const;
-    static Cost getCostFromExtraSpaces(Index const numberOfExtraSpaces) ;
+    static Cost getCostFromExtraSpaces(Index const numberOfExtraSpaces);
     Index m_maxLineLength;
     stringHelper::strings m_words;
 };

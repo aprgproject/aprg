@@ -145,8 +145,7 @@ void TopLogAnalyzer::putEntriesInCpuReport(
         cpuReportFileStream << totalCalculatedCpu << ",";
         DataEntry::ProcessToCpuMemMap const& currentProcessToCpuMemMap(entry.processToCpuMemMap);
         for (string const& processName : processNamesInReport) {
-            auto processToCpuMemIterator =
-                currentProcessToCpuMemMap.find(processName);
+            auto processToCpuMemIterator = currentProcessToCpuMemMap.find(processName);
             if (processToCpuMemIterator != currentProcessToCpuMemMap.cend()) {
                 cpuReportFileStream << currentProcessToCpuMemMap.at(processName).cpuLoad << ",";
             } else {
@@ -222,8 +221,7 @@ void TopLogAnalyzer::putEntriesInMemReport(
         memReportFileStream << entry.timeInTop.getPrintObject<AlbaDateTime::PrintFormat::TimeWithColon>() << ",";
         DataEntry::ProcessToCpuMemMap const& currentProcessToCpuMemMap(entry.processToCpuMemMap);
         for (string const& processName : processNamesInReport) {
-            auto processToCpuMemIterator =
-                currentProcessToCpuMemMap.find(processName);
+            auto processToCpuMemIterator = currentProcessToCpuMemMap.find(processName);
             if (processToCpuMemIterator != currentProcessToCpuMemMap.cend()) {
                 memReportFileStream << currentProcessToCpuMemMap.at(processName).memLoad << ",";
             } else {

@@ -22,7 +22,7 @@ public:
     double getRadius() const;
     double getArea() const;
     double getCircumference() const;
-    static double getEccentricity() ;
+    static double getEccentricity();
     bool isInside(Point const& point) const;
     Points getLocus(double const interval) const;
     void traverseArea(double const interval, TraverseOperation const& traverseOperation) const;

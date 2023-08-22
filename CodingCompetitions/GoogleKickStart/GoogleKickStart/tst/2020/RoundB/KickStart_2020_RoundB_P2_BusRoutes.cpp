@@ -32,8 +32,9 @@ void runTestCase(int const testCaseNumber) {
     int64_t D;
     my_cin >> D;
     vector<int64_t> X(N);
-    for (int i = 0; i < N; i++) { my_cin >> X[i];
-}
+    for (int i = 0; i < N; i++) {
+        my_cin >> X[i];
+    }
     for (int i = N - 1; i >= 0; i--) {
         D = D / X[i] * X[i];
     }

@@ -25,8 +25,9 @@ bool Sphere::operator<(Sphere const& sphere) const {
     bool result(false);
     if (m_center == sphere.m_center) {
         return m_radius < sphere.m_radius;
-    }         return m_center < sphere.m_center;
-   
+    }
+    return m_center < sphere.m_center;
+
     return result;
 }
 

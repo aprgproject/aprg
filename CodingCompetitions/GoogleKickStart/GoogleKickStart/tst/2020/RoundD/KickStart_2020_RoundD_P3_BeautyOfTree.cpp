@@ -49,12 +49,14 @@ void runTestCase(int const testCaseNumber) {
     for (int i = N - 1; i >= 0; i--) {
         for (int z = 0; z < 2; z++) {
             cnt[i][z]++;
-            if (depth[i] < A[z]) { continue;
-}
+            if (depth[i] < A[z]) {
+                continue;
+            }
             int cur = i;
             for (int l = 0, v = A[z]; v; v >>= 1, l++) {
-                if (v & 1) { cur = par[cur][l];
-}
+                if (v & 1) {
+                    cur = par[cur][l];
+                }
             }
             cnt[cur][z] += cnt[i][z];
         }

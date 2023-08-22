@@ -73,8 +73,8 @@ LargestIndependentSetProblem::Count LargestIndependentSetProblem::getMaximumCoun
         Count result = max(countIfVertexIsIncluded, countIfVertexIsNotIncluded);
         vertexToCountMap.emplace(vertex, result);
         return result;
-    }         return it->second;
-   
+    }
+    return it->second;
 }
 
 LargestIndependentSetProblem::SetOfVertices LargestIndependentSetProblem::getMaximumSetUsingMemoizationDP(
@@ -98,9 +98,10 @@ LargestIndependentSetProblem::SetOfVertices LargestIndependentSetProblem::getMax
         if (setIfVertexIsIncluded.size() >= setIfVertexIsNotIncluded.size()) {
             vertexToMaximumSetMap.emplace(vertex, setIfVertexIsIncluded);
             return setIfVertexIsIncluded;
-        }             vertexToMaximumSetMap.emplace(vertex, setIfVertexIsNotIncluded);
-            return setIfVertexIsNotIncluded;
-       
+        }
+        vertexToMaximumSetMap.emplace(vertex, setIfVertexIsNotIncluded);
+        return setIfVertexIsNotIncluded;
+
     } else {
         return it->second;
     }

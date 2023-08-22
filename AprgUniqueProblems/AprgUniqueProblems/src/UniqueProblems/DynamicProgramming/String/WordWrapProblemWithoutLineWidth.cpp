@@ -38,7 +38,8 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
                 if (wordLength > targetLineLength) {
                     hasNoSolutions = true;
                     break;  // no possible solution try next length
-                } if (lineLength + 1 + wordLength <= targetLineLength) {
+                }
+                if (lineLength + 1 + wordLength <= targetLineLength) {
                     lineLength += 1 + wordLength;  // plus one for space
                 } else                             // does not fit with line so create next line
                 {

@@ -121,7 +121,7 @@ private:
         Term& result, Term const& mainTerm, Term const& termForNewVariable, Configuration const& configuration);
     Term substituteToNewVariable(Term const& mainTerm, Term const& termForNewVariable) const;
     static Term substituteBackToOldVariable(
-        Term const& mainTerm, std::string const& newVariableName, Term const& termForNewVariable) ;
+        Term const& mainTerm, std::string const& newVariableName, Term const& termForNewVariable);
 
     // Trignometric Substitution
     void integrateTermUsingTrigonometricSubstitution(Term& result, Term const& term);
@@ -132,17 +132,17 @@ private:
         Term const& aSquaredWithSign, Term const& uSquaredWithSign);
     static void retrieveImportantTermsForTrigonometricSubstitutionInExpression(
         bool& shouldProceedToTrigSub, Term& commonFactor, Term& firstAndSecondTerm, Term& firstTerm, Term& secondTerm,
-        Expression const& expression) ;
+        Expression const& expression);
     static void retrieveImportantTermsForTrigonometricSubstitutionInPolynomial(
         bool& shouldProceedToTrigSub, Term& commonFactor, Term& firstAndSecondTerm, Term& firstTerm, Term& secondTerm,
-        Polynomial const& polynomial) ;
+        Polynomial const& polynomial);
     static TrigonometricSubstitutionDetails calculateTrigonometricSubstitutionDetails(
         Term const& a, Term const& u, std::string const& aSquaredAndUSquaredName, Term const& aSquaredAndUSquared,
-        bool const isANegative, bool const isUNegative) ;
+        bool const isANegative, bool const isUNegative);
     Term substituteToTrigonometricFunctions(
         Term const& mainTerm, TrigonometricSubstitutionDetails const& details) const;
     static Term substituteFromTrigonometricFunctionsBackToNormal(
-        Term const& mainTerm, TrigonometricSubstitutionDetails const& details) ;
+        Term const& mainTerm, TrigonometricSubstitutionDetails const& details);
 
     // Reverse chain rule
     void integrateInMultiplicationOrDivisionByTryingReverseChainRule(
@@ -164,31 +164,30 @@ private:
         Term& result, std::string const& variableName, Polynomial const& numerator, Polynomial const& denominator);
     static void retrievePartialFractions(
         Polynomials& partialNumerators, Polynomials& partialDenominators, std::string const& originalVariableName,
-        TermsRaiseToNumbers const& factorsWithExponents) ;
+        TermsRaiseToNumbers const& factorsWithExponents);
     static Polynomial getTotalNumeratorWithNewVariables(
         Polynomial const& originalDenominator, Polynomials const& partialNumerators,
-        Polynomials const& partialDenominators) ;
+        Polynomials const& partialDenominators);
     static VariableNamesSet getNamesOfNewVariablesForPartialFraction(
-        std::string const& originalVariableName, Polynomial const& numeratorWithNewVariables) ;
+        std::string const& originalVariableName, Polynomial const& numeratorWithNewVariables);
     static AlbaNumbersSet getExponentsForPartialFraction(
-        std::string const& originalVariableName, Polynomial const& numeratorWithNewVariables) ;
+        std::string const& originalVariableName, Polynomial const& numeratorWithNewVariables);
     static void fillInMatrixForPartialFractions(
         NumberMatrix& matrixWithNewVariables, std::string const& originalVariableName,
         VariableNamesSet const& newVariableNames, AlbaNumbersSet const& exponents, Polynomial const& originalNumerator,
-        Polynomial const& numeratorWithNewVariables) ;
+        Polynomial const& numeratorWithNewVariables);
     static void fillInMatrixForPartialFractionsWithVariableValues(
         NumberMatrix& matrixWithNewVariables, std::string const& originalVariableName,
         VariableNamesSet const& newVariableNames, AlbaNumbersSet const& exponents,
-        Polynomial const& numeratorWithNewVariables) ;
+        Polynomial const& numeratorWithNewVariables);
     static void fillInMatrixForPartialFractionsWithOutputValues(
         NumberMatrix& matrixWithNewVariables, std::string const& originalVariableName,
-        VariableNamesSet const& newVariableNames, AlbaNumbersSet const& exponents,
-        Polynomial const& originalNumerator) ;
+        VariableNamesSet const& newVariableNames, AlbaNumbersSet const& exponents, Polynomial const& originalNumerator);
     void integratePartialFractionsBasedOnSolvedMatrix(
         Term& result, NumberMatrix const& solvedMatrix, VariableNamesSet const& newVariableNames,
         Polynomials const& partialNumerators, Polynomials const& partialDenominators);
-    static Polynomial getPartialNumeratorForPartialFractions(int const degree, std::string const& variableName) ;
-    static std::string getNewVariableNameForPartialFractions() ;
+    static Polynomial getPartialNumeratorForPartialFractions(int const degree, std::string const& variableName);
+    static std::string getNewVariableNameForPartialFractions();
 
     // Integration by parts
     void integrateByTryingIntegrationByParts(Term& result, Term const& term);
@@ -207,7 +206,7 @@ private:
     // Trigonometry
     static void retrieveInputTermsAndTrigonometricExponents(
         InputTermToTrigonometryFunctionExponentsMap& inputTermToExponents, TermsRaiseToNumbers& remainingTerms,
-        TermsRaiseToNumbers const& termsWithExponentsToCheck) ;
+        TermsRaiseToNumbers const& termsWithExponentsToCheck);
     void integrateTrigonometricCombinationsIfPossible(
         Term& result, TermsRaiseToNumbers const& remainingTerms,
         InputTermToTrigonometryFunctionExponentsMap const& inputTermToExponents);
@@ -226,30 +225,30 @@ private:
     void integrateSecAndTanCombinationWithExponentsGreaterThanOne(
         Term& result, Term const& functionInputTerm, int const secExponent, int const tanExponent);
     static TrigonometryFunctionExponents getTrigonometricExponentsSuitableForIntegration(
-        TrigonometryFunctionExponents const& oldExponents) ;
+        TrigonometryFunctionExponents const& oldExponents);
     static void putReducedSineSquaredToDoubleAngleCosineTerms(
-        Term& outputTerm, Term const& inputTerm, int const exponent) ;
+        Term& outputTerm, Term const& inputTerm, int const exponent);
     static void putReducedCosineSquaredToDoubleAngleCosineTerms(
-        Term& outputTerm, Term const& inputTerm, int const exponent) ;
-    static void putTangentSquaredToSecantSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent) ;
-    static void putCosecantSquaredToCotangentSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent) ;
-    static void putSecantSquaredToTangentSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent) ;
-    static void putCotangentSquaredToCosecantSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent) ;
+        Term& outputTerm, Term const& inputTerm, int const exponent);
+    static void putTangentSquaredToSecantSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent);
+    static void putCosecantSquaredToCotangentSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent);
+    static void putSecantSquaredToTangentSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent);
+    static void putCotangentSquaredToCosecantSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent);
 
     // Simplify
-    static void simplifyForIntegration(Term& term, Configuration const& configuration) ;
-    static void simplifyAndFixTrigonometricFunctions(Term& term, bool const shouldFixTrigonometricFunctions) ;
+    static void simplifyForIntegration(Term& term, Configuration const& configuration);
+    static void simplifyAndFixTrigonometricFunctions(Term& term, bool const shouldFixTrigonometricFunctions);
     static void fixTrigonometricFunctionsBasedFromExponents(
         Term& term, InputTermToTrigonometryFunctionExponentsMap const& trigFunctionsInputTermToExponents,
-        TermsRaiseToNumbers const& remainingTermsWithExponents) ;
+        TermsRaiseToNumbers const& remainingTermsWithExponents);
     static void putTrigonometricFunctionsWithExponents(
-        TermsRaiseToNumbers& newTerms, Term const& inputTerm, TrigonometryFunctionExponents const& exponents) ;
+        TermsRaiseToNumbers& newTerms, Term const& inputTerm, TrigonometryFunctionExponents const& exponents);
 
     // Integration configurations
-    static Configuration getConfigurationWithFactors() ;
-    static Configuration getConfigurationWithCommonDenominator() ;
-    static Configuration getConfigurationWithoutFactors() ;
-    static Configuration getConfigurationWithCombiningRadicals() ;
+    static Configuration getConfigurationWithFactors();
+    static Configuration getConfigurationWithCommonDenominator();
+    static Configuration getConfigurationWithoutFactors();
+    static Configuration getConfigurationWithCombiningRadicals();
 
     // Initialize and Finalize steps
     void finalizeTermForIntegration(Term& term) const;
@@ -260,10 +259,10 @@ private:
     bool hasNonChangingTermRaiseToChangingTerm(Term const& term) const;
     bool wouldDifferentiationYieldToAConstant(Term const& term) const;
     static bool areExponentsSame(
-        TrigonometryFunctionExponents const& exponents1, TrigonometryFunctionExponents const& exponents2) ;
+        TrigonometryFunctionExponents const& exponents1, TrigonometryFunctionExponents const& exponents2);
     bool isIntegrationUsingSubstitutionAllowed(Term const& term) const;
     bool isIntegrationByPartsAllowed(Term const& term) const;
-    static bool isTrigonometricSubstitutionAllowed() ;
+    static bool isTrigonometricSubstitutionAllowed();
     bool isIntegrationByPartialFractionAllowed() const;
     std::string getCurrentVariableToIntegrate() const;
     stringHelper::strings m_variablesToIntegrate;

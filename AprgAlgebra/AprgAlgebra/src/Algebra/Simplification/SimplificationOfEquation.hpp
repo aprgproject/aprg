@@ -19,7 +19,7 @@ public:
 private:
     static void simplifyLeftHandSideAndRightHandSide(Term& leftHandSide, Term& rightHandSide);
     static void raiseLeftHandSideAndRightHandSideToPowerIfLogarithmic(Term& leftHandSide, Term& rightHandSide);
-    static Term getNewCombinedTerm(Term const& leftHandSide, Term const& rightHandSide) ;
+    static Term getNewCombinedTerm(Term const& leftHandSide, Term const& rightHandSide);
     static void negateTermIfNeeded(Term& leftHandSide, std::string& equationOperatorString);
     static void removeExponentIfNeeded(Term& leftHandSide);
     static void completeExpressionWithFractionalExponentsIfNeeded(Term& leftHandSide);

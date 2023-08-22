@@ -314,8 +314,7 @@ bool hasNonRealFiniteNumbers(Function const& function) {
 }
 
 bool hasZero(Terms const& terms) {
-    auto it =
-        find_if(terms.cbegin(), terms.cend(), [](Term const& term) { return isTheValue(term, 0); });
+    auto it = find_if(terms.cbegin(), terms.cend(), [](Term const& term) { return isTheValue(term, 0); });
     return it != terms.cend();
 }
 

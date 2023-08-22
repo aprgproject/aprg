@@ -108,11 +108,11 @@ private:
         UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
     void saveMessageQueueingTimeToCsvFile(std::string const& lineInLogs, unsigned int const messageQueueingTime);
     static void saveUserIndentifierAndLatencyToCsvFile(
-        UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, std::ofstream& csvFileStream) ;
+        UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, std::ofstream& csvFileStream);
     void savePrintsAvailableToCsvFile(UserIdentifiers const& userIdentifiers, std::ofstream& csvFileStream);
-    static void setLogTimeIfNeeded(std::string const& lineInLogs, LogTime& logTime) ;
+    static void setLogTimeIfNeeded(std::string const& lineInLogs, LogTime& logTime);
     double getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser) const;
-    static double getTotalMicroseconds(wcdmaToolsBackend::BtsLogTime const& btsLogTime) ;
+    static double getTotalMicroseconds(wcdmaToolsBackend::BtsLogTime const& btsLogTime);
     DataCollection<double> m_messageQueueingTime;
     DataCollection<double> m_rlhRlSetupLatency;
     DataCollection<double> m_rlhRlDeletionLatency;

@@ -133,7 +133,8 @@ bool TermAnalyzer::isModifiedDueToOneConditionConstructAndMoveLooper(
                 temporaryFindings.copyCurrentFindings(m_findings);
                 combineToASingleTerm(startLooper, afterClosingBraces, newTermType);
                 return true;
-            } if (isSemiColonFoundAndMoveLooper<LooperConnector::WhiteSpaceAndNewLine>(afterSemiColon)) {
+            }
+            if (isSemiColonFoundAndMoveLooper<LooperConnector::WhiteSpaceAndNewLine>(afterSemiColon)) {
                 checkCondition(Looper(afterOpeningParenthesis, afterClosingParenthesis - 1));
                 incrementLooperIfWhiteSpaceAndOneNewLine<FindingsToAdd::UnexpectsWhiteSpace>(afterSemiColon);
                 temporaryFindings.copyCurrentFindings(m_findings);

@@ -51,7 +51,8 @@ PathSumInGridInRightOrDownTraversal::Path PathSumInGridInRightOrDownTraversal::g
         while (true) {
             if (x == 0 && y == 0) {
                 break;
-            } if (x == 0) {
+            }
+            if (x == 0) {
                 path.emplace_back(m_inputGrid.getEntry(x, --y));
             } else if (y == 0) {
                 path.emplace_back(m_inputGrid.getEntry(--x, y));

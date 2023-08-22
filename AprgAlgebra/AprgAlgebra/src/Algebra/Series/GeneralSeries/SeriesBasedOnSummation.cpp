@@ -57,8 +57,7 @@ Term SeriesBasedOnSummation::getTermValueAtIndex(int const index) const {
 
 Term SeriesBasedOnSummation::getFormulaForEachTermInSummation() const { return m_formulaForEachTermInSummation; }
 
-Summation SeriesBasedOnSummation::getSummation(
-    Term const& formulaForEachTermInSummation, string const& variableName) {
+Summation SeriesBasedOnSummation::getSummation(Term const& formulaForEachTermInSummation, string const& variableName) {
     Summation summation(formulaForEachTermInSummation, variableName);
     return summation;
 }

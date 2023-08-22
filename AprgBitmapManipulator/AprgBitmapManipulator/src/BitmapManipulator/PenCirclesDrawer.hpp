@@ -35,8 +35,7 @@ public:
 
 private:
     static bool isToBeConnected(
-        PenCircles::PointAndPenCircleDetailsPair const& pair1,
-        PenCircles::PointAndPenCircleDetailsPair const& pair2) ;
+        PenCircles::PointAndPenCircleDetailsPair const& pair1, PenCircles::PointAndPenCircleDetailsPair const& pair2);
     void writeDrawnPointsInSnippet();
     void writeCirclesWithoutOverlay();
     void writeCirclesWithOverlay();

@@ -13,7 +13,7 @@ namespace algorithm {
 
 namespace {
 using GraphForTest = DirectedGraphWithListOfEdges<int>;
-} // namespace
+}  // namespace
 
 TEST(DirectedGraphWithListOfEdgesTest, GetGraphDirectionTypeWorks) {
     testGetGraphDirectionTypeWithVertexAsInt<GraphForTest>();

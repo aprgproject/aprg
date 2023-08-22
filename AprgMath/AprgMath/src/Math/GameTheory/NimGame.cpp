@@ -16,8 +16,8 @@ GameState NimGame::getGameState(NimHeapSize const nimSum) {
 
     if (nimSum > 0) {
         return GameState::Winning;
-    }         return GameState::Losing;
-   
+    }
+    return GameState::Losing;
 }
 
 NimState NimGame::getOptimalNextState(NimState const& nimState) {

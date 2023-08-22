@@ -34,8 +34,9 @@ bool Circle::operator<(Circle const& circle) const {
     bool result(false);
     if (m_center == circle.m_center) {
         return m_radius < circle.m_radius;
-    }         return m_center < circle.m_center;
-   
+    }
+    return m_center < circle.m_center;
+
     return result;
 }
 

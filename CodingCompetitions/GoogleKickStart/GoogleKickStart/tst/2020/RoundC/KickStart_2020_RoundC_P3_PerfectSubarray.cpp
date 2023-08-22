@@ -39,7 +39,7 @@ void runTestCase(int const testCaseNumber) {
             s1 -= a[i];
         } else {
             s2 += a[i];
-}
+        }
     }
     int t = 0;
     ll ans = 0;
@@ -47,8 +47,9 @@ void runTestCase(int const testCaseNumber) {
     for (int i = 0; i < n; ++i) {
         t += a[i];
         for (int j = 0; j * j <= s2; ++j) {
-            if (s1 + (t - j * j) >= 0) { ans += c[s1 + (t - j * j)];
-}
+            if (s1 + (t - j * j) >= 0) {
+                ans += c[s1 + (t - j * j)];
+            }
         }
         ++c[s1 + t];
     }

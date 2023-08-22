@@ -60,8 +60,7 @@ void PenCirclesDrawer::drawUsingConnectedCircles() {
 }
 
 bool PenCirclesDrawer::isToBeConnected(
-    PenCircles::PointAndPenCircleDetailsPair const& pair1,
-    PenCircles::PointAndPenCircleDetailsPair const& pair2) {
+    PenCircles::PointAndPenCircleDetailsPair const& pair1, PenCircles::PointAndPenCircleDetailsPair const& pair2) {
     return isSimilar(pair1.second.color, pair2.second.color, 0x08) &&
            getDistance(convertBitmapXYToPoint(pair1.first), convertBitmapXYToPoint(pair2.first)) <
                (pair1.second.radius + pair2.second.radius);

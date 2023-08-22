@@ -10,7 +10,7 @@ namespace algorithm {
 
 namespace {
 using BagForTest = LinkedListBag<int>;
-} // namespace
+}  // namespace
 
 TEST(LinkedListBagTest, IsEmptyWorks) {
     BagForTest bag1;

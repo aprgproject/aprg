@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using Bridges = BuildingBridges::Bridges;
-} // namespace
+}  // namespace
 
 TEST(BuildingBridgesTest, GetLongestLengthWorksOnExample1) {
     BuildingBridges queryForTest({{6, 2}, {4, 3}, {2, 6}, {1, 5}});

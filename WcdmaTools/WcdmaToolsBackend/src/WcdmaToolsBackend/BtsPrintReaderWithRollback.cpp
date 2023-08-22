@@ -20,9 +20,9 @@ BtsLogPrint BtsPrintReaderWithRollback::getPrint() {
         if (m_isRollbackActivated) {
             m_isRollbackActivated = false;
             return m_previousPrint;
-        }             m_inputStream >> m_previousPrint;
-            return m_previousPrint;
-       
+        }
+        m_inputStream >> m_previousPrint;
+        return m_previousPrint;
     }
     return BtsLogPrint{};
 }

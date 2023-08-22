@@ -34,7 +34,7 @@ public:
     void simplify();
 
 private:
-    static bool isChangeDetected(Expression const& expression1, Expression const& expression2) ;
+    static bool isChangeDetected(Expression const& expression1, Expression const& expression2);
 
     void simplifyExpressionUntilNoChange();
     void simplifyExpression(Expression& expression);

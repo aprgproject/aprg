@@ -38,7 +38,7 @@ if [ "$scriptRunningOption" == "outputWithHighlighting" ]; then
     $buildAndRunScriptPath "$2" "$3" "$4" "$5"
     exitCode=$?
 elif [ "$scriptRunningOption" == "outputWithAbsolutePaths" ]; then
-    $buildAndRunScriptPath "$2" "$3" "$4" "$5" 2>&1 | sed -E "s|\/mnt\/(\w+)\/|\U\1:/|g"
+    $buildAndRunScriptPath "$2" "$3" "$4" "$5" 2>&1 | sed -E "s|\/mnt\/(\w+)\/| \U\1:/|g"
     exitCode=${PIPESTATUS[0]}
 elif [ "$scriptRunningOption" == "outputWithRelativePaths" ]; then
     $buildAndRunScriptPath "$2" "$3" "$4" "$5" 2>&1 | sed -E "s|$(pwd)||g"

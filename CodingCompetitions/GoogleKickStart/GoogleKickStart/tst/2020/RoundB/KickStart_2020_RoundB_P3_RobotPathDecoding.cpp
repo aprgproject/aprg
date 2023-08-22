@@ -52,7 +52,7 @@ void runTestCase(int const testCaseNumber) {
             mul.pop_back();
         } else {
             assert(0);
-}
+        }
     }
     my_cout << "Case #" << testCaseNumber << ": " << x + 1 << ' ' << y + 1 << '\n';
 }

@@ -352,8 +352,7 @@ void PerformanceAnalyzer::processFileForPeriodicCpuLogging(string const& filePat
             } else if (isStringFoundNotCaseSensitive(lineInLogs, R"(TCOM/WRC)")) {
                 subsystem = "WRC";
             }
-            auto inProcess =
-                convertStringToNumber<double>(getStringInBetweenTwoStrings(lineInLogs, "inProcess:", "%"));
+            auto inProcess = convertStringToNumber<double>(getStringInBetweenTwoStrings(lineInLogs, "inProcess:", "%"));
             auto inSystem = convertStringToNumber<double>(getStringInBetweenTwoStrings(lineInLogs, "inSystem:", "%"));
             string threadCpuTimeSpent(getStringInBetweenTwoStrings(lineInLogs, "threadCpuTimeSpent:", " ("));
             stringstream ss;
@@ -819,8 +818,7 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
             string timeString(getStringInBetweenTwoStrings(nextLine, " ", " "));
             auto wiresharkTime = convertStringToNumber<double>(timeString);
             endWiresharkTime = wiresharkTime;
-            auto numberInWireshark =
-                convertStringToNumber<unsigned int>(getStringBeforeThisString(nextLine, " "));
+            auto numberInWireshark = convertStringToNumber<unsigned int>(getStringBeforeThisString(nextLine, " "));
             WiresharkLogKey key;
             while (fileReader.isNotFinished()) {
                 string followingLine(fileReader.getLineAndIgnoreWhiteSpaces());
@@ -848,8 +846,7 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
                     } else if (msgId == 0x74 || msgId == 0x76 || msgId == 0x7C) {
                         string followingLine2(fileReader.getLineAndIgnoreWhiteSpaces());
                         if (isStringFoundNotCaseSensitive(followingLine2, R"(0010)")) {
-                            auto lowerSaidKey =
-                                convertHexStringToNumber<unsigned int>(followingLine2.substr(6, 5));
+                            auto lowerSaidKey = convertHexStringToNumber<unsigned int>(followingLine2.substr(6, 5));
                             key.said = 0;  //((upperSaidKey&0xFFFF)<<16) | (lowerSaidKey&0xFFFF);
                             if (msgId == 0x74) {
                                 key.operation = 1;

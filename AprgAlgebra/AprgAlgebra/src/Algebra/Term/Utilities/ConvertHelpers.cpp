@@ -35,14 +35,17 @@ bool canBeConvertedToPolynomial(Term const& term) {
 Operator reverse(Operator const& operatorToReverse) {
     if (operatorToReverse.isAddition()) {
         return Operator("-");
-    } if (operatorToReverse.isSubtraction()) {
+    }
+    if (operatorToReverse.isSubtraction()) {
         return Operator("+");
-    } if (operatorToReverse.isMultiplication()) {
+    }
+    if (operatorToReverse.isMultiplication()) {
         return Operator("/");
-    } if (operatorToReverse.isDivision()) {
+    }
+    if (operatorToReverse.isDivision()) {
         return Operator("*");
-    }         return Operator();
-   
+    }
+    return Operator();
 }
 
 Term simplifyAndConvertMonomialToSimplestTerm(Monomial const& monomial) {

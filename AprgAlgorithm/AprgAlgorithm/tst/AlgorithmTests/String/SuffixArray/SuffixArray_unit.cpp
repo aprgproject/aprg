@@ -10,7 +10,7 @@ namespace algorithm {
 
 namespace {
 using SuffixArrayForTest = SuffixArray<int>;
-} // namespace
+}  // namespace
 
 TEST(SuffixArrayTest, GetSizeWorks) {
     SuffixArrayForTest suffixArray("LetsDanceToThisSong");

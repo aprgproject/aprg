@@ -46,9 +46,7 @@ ElevatorWeightProblem::PeopleBits ElevatorWeightProblem::getNumberOfPeopleSubset
     return 1 << getNumberOfPeople();
 }
 
-ElevatorWeightProblem::PeopleBits ElevatorWeightProblem::getProductBits(Person const person) {
-    return 1 << person;
-}
+ElevatorWeightProblem::PeopleBits ElevatorWeightProblem::getProductBits(Person const person) { return 1 << person; }
 
 ElevatorWeightProblem::PeopleBits ElevatorWeightProblem::removePerson(
     PeopleBits const peopleBits, Person const person) {

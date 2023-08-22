@@ -10,7 +10,7 @@ public:
 
     SmallestOfThreeIntegersWithoutComparisonOperators();
     UnsignedValue getSmallest(UnsignedValue const value1, UnsignedValue const value2, UnsignedValue const value3) const;
-    static bool isLessThan(UnsignedValue const value1, UnsignedValue const value2) ;
+    static bool isLessThan(UnsignedValue const value1, UnsignedValue const value2);
 };
 
 }  // namespace alba

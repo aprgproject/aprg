@@ -12,8 +12,8 @@ namespace chess {
 PieceColor Piece::extractColor(uint8_t const data) {
     if (PieceType::Empty == extractType(data)) {
         return PieceColor::Unknown;
-    }         return static_cast<PieceColor>((data >> 3 & 0B1) | 0B10);  // put 0B10 to avoid unknown
-   
+    }
+    return static_cast<PieceColor>((data >> 3 & 0B1) | 0B10);  // put 0B10 to avoid unknown
 }
 
 PieceType Piece::extractType(uint8_t const data) { return static_cast<PieceType>(data & 0B111); }

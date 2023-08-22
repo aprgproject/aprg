@@ -52,9 +52,11 @@ void accumulateTermsForAdditionAndSubtraction(Term& combinedTerm, TermsWithDetai
         if (isNan(combinedTerm) || isNan(term)) {
             combinedTerm = ALBA_NUMBER_NOT_A_NUMBER;
             break;
-        } if (willHaveNoEffectOnAdditionOrSubtraction(term)) {
+        }
+        if (willHaveNoEffectOnAdditionOrSubtraction(term)) {
             continue;
-        } if (isFirst) {
+        }
+        if (isFirst) {
             if (termWithDetails.hasPositiveAssociation()) {
                 combinedTerm = term;
             } else if (termWithDetails.hasNegativeAssociation()) {
@@ -83,7 +85,8 @@ void accumulateTermsForMultiplicationAndDivision(Term& combinedTerm, TermsWithDe
             }
             if (willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(term)) {
                 continue;
-            } if (isFirst) {
+            }
+            if (isFirst) {
                 if (termWithDetails.hasPositiveAssociation()) {
                     combinedTerm = term;
                 } else if (termWithDetails.hasNegativeAssociation()) {
@@ -107,7 +110,8 @@ void accumulateTermsForRaiseToPower(Term& combinedTerm, TermsWithDetails const& 
         Term const& term(getTermConstReferenceFromUniquePointer(termWithDetails.baseTermPointer));
         if (willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(term)) {
             continue;
-        } if (isFirst) {
+        }
+        if (isFirst) {
             combinedTerm = term;
             isFirst = false;
         } else {

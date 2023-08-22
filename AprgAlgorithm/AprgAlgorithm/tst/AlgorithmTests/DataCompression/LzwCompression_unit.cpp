@@ -13,7 +13,7 @@ namespace algorithm {
 
 namespace {
 using CompressionForTest = LzwCompression<int>;
-} // namespace
+}  // namespace
 
 TEST(LzwCompressionTest, CompressWorksUsingExample1) {
     stringstream inputSs;

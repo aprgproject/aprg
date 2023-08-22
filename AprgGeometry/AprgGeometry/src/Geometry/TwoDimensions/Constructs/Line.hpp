@@ -48,9 +48,9 @@ private:
         Points& points, Point const& first, Point const& second, double const interval) const;
     static void mergePointsFromPointsFromXAndY(
         Points& points, Points const& pointsFromXCoordinate, Points const& pointsFromYCoordinate,
-        bool const isDirectionAscendingForX) ;
-    static LineType determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX) ;
-    static LineType determineLineTypeUsingCoefficients(double const aCoefficient, double const bCoefficient) ;
+        bool const isDirectionAscendingForX);
+    static LineType determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX);
+    static LineType determineLineTypeUsingCoefficients(double const aCoefficient, double const bCoefficient);
 
     friend std::ostream& operator<<(std::ostream& out, Line const& line);
 

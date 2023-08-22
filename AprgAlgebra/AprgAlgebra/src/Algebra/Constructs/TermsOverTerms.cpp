@@ -161,8 +161,8 @@ void TermsOverTerms::simplify() {
 Terms TermsOverTerms::factorizeIfNeeded(Terms const& terms) const {
     if (m_shouldSimplifyToFactors || !(m_numerators.empty() && m_denominators.empty())) {
         return factorize(terms);
-    }         return terms;
-   
+    }
+    return terms;
 }
 
 Terms TermsOverTerms::factorize(Terms const& terms) const {

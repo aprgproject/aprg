@@ -102,7 +102,7 @@ private:
     // numberOfDspToAllocate, FspAddresses const& fspAddresses, unsigned int const lcgId) const; void
     // saveNeededFspsForCcdOrMcdBasedOnTurboNyquist(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int&
     // numberOfDspToAllocate, FspAddresses const& fspAddresses, unsigned int const lcgId) const;
-    static unsigned int getPriorityBasedOnLessUsersAndHsupaCfsForDsp(Dsp const& dsp) ;
+    static unsigned int getPriorityBasedOnLessUsersAndHsupaCfsForDsp(Dsp const& dsp);
     void saveNeededFspsForCcdOrMcdBasedOnNOrTn(
         UniqueFspAddresses& neededUniqueFspAddresses, unsigned int& numberOfDspCcdAndMcd,
         FspAddresses const& fspAddresses, unsigned int const lcgId) const;
@@ -141,9 +141,9 @@ private:
     void sortDspAddressesBasedOnCondition(
         DspAddresses& dspAddressesForLcgInFsp, DspComparisonCondition const& condition) const;
 
-    static void setSelectionDspResult(SelectionDspResult& selectionDspResultReference, unsigned int const fspAddress) ;
+    static void setSelectionDspResult(SelectionDspResult& selectionDspResultReference, unsigned int const fspAddress);
     static void incrementNAndTnCountBasedOnNyquistType(
-        NyquistAndTurboNyquistCount& countReference, NyquistType const nyquistType) ;
+        NyquistAndTurboNyquistCount& countReference, NyquistType const nyquistType);
 
     bool canTnBeAllocatedBasedOnPicAndNumberOfTnToBeAllocated(
         NyquistAndTurboNyquistCount const& nAndTnCountInMsmOfLcg, unsigned int const numberOfTurboNyquistToBeUsed,
@@ -158,8 +158,8 @@ private:
     void copyUsedDliPoolsOnFsp(DliPools& usedDliPools, unsigned int const fspAddress) const;
     void copyUsedDliPoolsOnOtherFspsExceptThisFsp(
         DliPools& usedDliPools, unsigned int const fspAddressOfSkippedFsp) const;
-    static unsigned int getConflictingDliPoolForThisDli(unsigned int const dliPool) ;
-    static unsigned int getLeastConflictingDliPoolForThisDli(unsigned int const dliPool) ;
+    static unsigned int getConflictingDliPoolForThisDli(unsigned int const dliPool);
+    static unsigned int getLeastConflictingDliPoolForThisDli(unsigned int const dliPool);
     bool canAFreeDliBeAllocatedInFsp(unsigned int const fspAddress, unsigned int const lcgId) const;
 
     void copyAllFspPairs(FspPairsDetails& fspPairsDetails) const;
@@ -167,9 +167,9 @@ private:
     void removeFspPairsForCcdMcdSelection(FspPairsDetails& fspPairsDetails, unsigned int const lcgId) const;
     void removeFspPairsForCcdNbicMcdSelection(FspPairsDetails& fspPairsDetails, unsigned int const lcgId) const;
     static void sortFspPairsBasedOnCondition(
-        FspPairsDetails& fspPairsDetails, FspPairDetailsComparisonCondition const& condition) ;
+        FspPairsDetails& fspPairsDetails, FspPairDetailsComparisonCondition const& condition);
     static void removeFspPairsBasedOnCondition(
-        FspPairsDetails& fspPairsDetails, FspPairDetailsCondition const& condition) ;
+        FspPairsDetails& fspPairsDetails, FspPairDetailsCondition const& condition);
     void updatePriorityForAllFspPairs(FspPairsDetails& fspPairsDetail, unsigned int const lcgId) const;
     unsigned int getPriorityForFspPair(FspPairDetails const& fspPairDetails, unsigned int const lcgId) const;
 

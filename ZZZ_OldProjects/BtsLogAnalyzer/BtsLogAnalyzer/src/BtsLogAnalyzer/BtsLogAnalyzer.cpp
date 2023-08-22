@@ -504,7 +504,7 @@ string BtsLogAnalyzer::getNumberAfterThisString(string const& mainString, string
         for (lastIndexOfNumber = lastIndexOfFirstString; stringHelper::isNumber(mainString[lastIndexOfNumber]);
              ++lastIndexOfNumber) {
             ;
-}
+        }
         result = mainString.substr(lastIndexOfFirstString, lastIndexOfNumber - lastIndexOfFirstString);
     }
     return result;

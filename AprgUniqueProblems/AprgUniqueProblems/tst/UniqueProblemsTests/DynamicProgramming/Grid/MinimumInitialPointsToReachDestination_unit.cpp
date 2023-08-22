@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using Grid = MinimumInitialPointsToReachDestination::Grid;
-} // namespace
+}  // namespace
 
 TEST(MinimumInitialPointsToReachDestinationTest, GetMinimalInitialPointsUsingIterativeDPWorksOnExample1) {
     Grid inputGrid(3, 3, {-2, -3, 3, -5, -10, 1, 10, 30, -5});

@@ -42,13 +42,13 @@ private:
     Terms factorize(Terms const& terms) const;
     void continueToSimplifyToFactors(Terms& factorizedNumerators, Terms& factorizedDenominators);
     void continueToSimplifyAndCombineFactors(Terms& factorizedNumerators, Terms& factorizedDenominators);
-    static Polynomial multiplyPolynomialTerms(Terms const& polynomialTerms) ;
+    static Polynomial multiplyPolynomialTerms(Terms const& polynomialTerms);
     bool removeTermsIfNeededAndReturnIfSomeTermsAreRemoved(Terms& numerators, Terms& denominators);
     static void clearTermsThenEmplacePolynomialAndRemainingTerms(
-        Polynomial const& polynomialNumerator, Terms const& remainingNumerators, Terms& termsToUpdate) ;
-    static void emplacePolynomialIfNeeded(Terms& termsResult, Polynomial const& polynomialNumerator) ;
+        Polynomial const& polynomialNumerator, Terms const& remainingNumerators, Terms& termsToUpdate);
+    static void emplacePolynomialIfNeeded(Terms& termsResult, Polynomial const& polynomialNumerator);
     static void retrievePolynomialAndNonPolynomialsTerms(
-        Terms const& termsToCheck, Polynomial& polynomial, Terms& nonPolynomialTerms) ;
+        Terms const& termsToCheck, Polynomial& polynomial, Terms& nonPolynomialTerms);
     void calculateBasesAndExponentsAndPutThatToNumeratorsAndDenominators(
         Terms& numeratorTerms, Terms& denominatorTerms);
     void putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToTerms(
@@ -57,12 +57,12 @@ private:
         Terms& numeratorTerms, Terms& denominatorTerms, TermsRaiseToNumbers const& termsRaiseToNumbers);
     static void handleZerosInNumeratorOrDenominator(Terms& denominators, Terms& numerators);
     static void populateTermsWithBase(Terms& termsToUpdate, Term const& base, AlbaNumber const& exponent);
-    static void removeTermsThatHaveNoEffect(Terms& terms) ;
+    static void removeTermsThatHaveNoEffect(Terms& terms);
     static void putTermsOnNumeratorAndDenominatorCorrectly(Terms& numerators, Terms& denominators);
     static void putTermsToRetainAndOnTheOtherSide(
-        Terms const& termsToCheck, Terms& termsToRetain, Terms& termsToPutOnTheOtherSide) ;
+        Terms const& termsToCheck, Terms& termsToRetain, Terms& termsToPutOnTheOtherSide);
     static void simplifyPolynomialNumeratorAndPolynomialDenominator(
-        Polynomial& polynomialNumerator, Polynomial& polynomialDenominator) ;
+        Polynomial& polynomialNumerator, Polynomial& polynomialDenominator);
     void simplifyMonomialsToPolynomialOverPolynomial();
     void simplifyPolynomialsToPolynomialOverPolynomial();
 

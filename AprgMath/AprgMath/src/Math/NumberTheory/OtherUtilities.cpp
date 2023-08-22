@@ -69,12 +69,13 @@ bool isALuckyNumber(UnsignedInteger const number) {
         if (removedNumber > 2) {
             result = true;
             break;
-        } if (number % removedNumber == 0) {
+        }
+        if (number % removedNumber == 0) {
             result = false;
             break;
-        }             remainingValue = remainingValue - (remainingValue / removedNumber);
-            removedNumber++;
-       
+        }
+        remainingValue = remainingValue - (remainingValue / removedNumber);
+        removedNumber++;
     }
     return result;
 }
@@ -122,15 +123,15 @@ UnsignedInteger getNthFibonacciNumber(UnsignedInteger const number) {
 
     if (number == 0) {
         return 0;
-    }         UnsignedInteger previousFibonacci(0);
-        UnsignedInteger currentFibonacci(1);
-        for (UnsignedInteger n = 2; n <= number; n++) {
-            UnsignedInteger nextFibonacci = currentFibonacci + previousFibonacci;
-            previousFibonacci = currentFibonacci;
-            currentFibonacci = nextFibonacci;
-        }
-        return currentFibonacci;
-   
+    }
+    UnsignedInteger previousFibonacci(0);
+    UnsignedInteger currentFibonacci(1);
+    for (UnsignedInteger n = 2; n <= number; n++) {
+        UnsignedInteger nextFibonacci = currentFibonacci + previousFibonacci;
+        previousFibonacci = currentFibonacci;
+        currentFibonacci = nextFibonacci;
+    }
+    return currentFibonacci;
 }
 
 UnsignedInteger getNthFibonacciNumberUsingBinetsFormula(UnsignedInteger const number) {
@@ -150,8 +151,8 @@ UnsignedInteger getNthFibonacciNumberUsingRecursion(UnsignedInteger const number
     // O((phi)^n) = O((1 + sqrtOf5)^n) = O(1.618^n)
     if (number <= 1) {
         return number;
-    }         return getNthFibonacciNumberUsingRecursion(number - 2) + getNthFibonacciNumberUsingRecursion(number - 1);
-   
+    }
+    return getNthFibonacciNumberUsingRecursion(number - 2) + getNthFibonacciNumberUsingRecursion(number - 1);
 }
 
 UnsignedInteger getNthFibonacciUsingMatrixPowerWithLogarithmicTime(UnsignedInteger const number) {
@@ -160,16 +161,14 @@ UnsignedInteger getNthFibonacciUsingMatrixPowerWithLogarithmicTime(UnsignedInteg
 
     if (number == 0) {
         return 0;
-    }         // Matrix representation:
-        // |f(n-1)|f(n)  |
-        // |f(n)  |f(n+1)|
+    }  // Matrix representation:
+    // |f(n-1)|f(n)  |
+    // |f(n)  |f(n+1)|
 
-        UnsignedIntegerMatrix formulaicTransform(2, 2, {0, 1, 1, 1});
+    UnsignedIntegerMatrix formulaicTransform(2, 2, {0, 1, 1, 1});
 
-        UnsignedIntegerMatrix fibonacciMatrix(
-            getMatrixRaiseToScalarPower(formulaicTransform, number - 1));  // logarithmic
-        return fibonacciMatrix.getEntry(1U, 1U);
-   
+    UnsignedIntegerMatrix fibonacciMatrix(getMatrixRaiseToScalarPower(formulaicTransform, number - 1));  // logarithmic
+    return fibonacciMatrix.getEntry(1U, 1U);
 }
 
 UnsignedInteger getNthFibonacciUsingLogarithmicTabularDP(UnsignedInteger const number) {

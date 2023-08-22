@@ -12,7 +12,7 @@ public:
     DifferentiationForFiniteCalculus(std::string const& nameOfVariableToDifferentiate);
 
     Term differentiate(Term const& term) const;
-    static Term differentiate(Constant const& constant) ;
+    static Term differentiate(Constant const& constant);
     Term differentiate(Variable const& variable) const;
     Term differentiate(Monomial const& monomial) const;
     Term differentiate(Polynomial const& polynomial) const;
@@ -24,7 +24,7 @@ public:
     Equation differentiateMultipleTimes(Equation const& equation, int const numberOfTimes) const;
 
     Term differentiateTerm(Term const& term) const;
-    static AlbaNumber differentiateConstant(Constant const&) ;
+    static AlbaNumber differentiateConstant(Constant const&);
     Polynomial differentiateVariable(Variable const& variable) const;
     Term differentiateMonomial(Monomial const& monomial) const;
     Term differentiatePolynomial(Polynomial const& polynomial) const;

@@ -34,9 +34,11 @@ private:
     void simplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBaseIfNeeded();
 
     void simplifyBaseAndExponents();
-    static void simplifyConstantRaiseToFunction(Term& base, TermsWithDetails& exponents, Term const& exponentCombinedTerm);
+    static void simplifyConstantRaiseToFunction(
+        Term& base, TermsWithDetails& exponents, Term const& exponentCombinedTerm);
     static void simplifyMonomialRaiseToConstant(Term& base, Monomial const& monomialBase, AlbaNumber const& exponent);
-    static void simplifyPolynomialRaiseToPositiveInteger(Term& base, Polynomial const& polynomialBase, int const exponent);
+    static void simplifyPolynomialRaiseToPositiveInteger(
+        Term& base, Polynomial const& polynomialBase, int const exponent);
     static void simplifyAdditionAndSubtractionExpressionRaiseToPositiveInteger(
         Term& base, Expression const& expressionBase, int const exponent);
     static void simplifyConstantRaiseToMultiplicationAndDivisionExpression(

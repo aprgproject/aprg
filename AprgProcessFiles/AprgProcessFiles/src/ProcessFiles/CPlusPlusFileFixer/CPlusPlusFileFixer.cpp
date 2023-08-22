@@ -398,9 +398,7 @@ bool CPlusPlusFileFixer::isWindowsHeader(string const& header) {
     return listOfWindowsHeaders.find(header) != listOfWindowsHeaders.cend();
 }
 
-bool CPlusPlusFileFixer::isGtestHeader(string const& header) {
-    return isStringFoundCaseSensitive(header, "gtest");
-}
+bool CPlusPlusFileFixer::isGtestHeader(string const& header) { return isStringFoundCaseSensitive(header, "gtest"); }
 
 bool CPlusPlusFileFixer::isQtHeader(string const& header) {
     bool result(false);

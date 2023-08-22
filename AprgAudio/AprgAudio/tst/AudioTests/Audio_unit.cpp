@@ -300,8 +300,9 @@ bool writeTest(int numChannels, int sampleRate, int bitDepth, AudioFormat format
     for (int i = 0; i < static_cast<int>(audioFile.getNumSamplesPerChannel()); i++) {
         auto sample = static_cast<float>(sin(2.0 * getPi() * i / sampleRateAsFloat * 440.0));
 
-        for (int k = 0; k < static_cast<int>(audioFile.getNumChannels()); k++) { audioFile.samples[k][i] = sample * 0.5;
-}
+        for (int k = 0; k < static_cast<int>(audioFile.getNumChannels()); k++) {
+            audioFile.samples[k][i] = sample * 0.5;
+        }
     }
 
     audioFile.setSampleRate(sampleRate);
@@ -315,7 +316,8 @@ bool writeTest(int numChannels, int sampleRate, int bitDepth, AudioFormat format
         return audioFile.save(
             APRG_DIR R"(\AprgAudio\FilesForTests\WrittenAudioFiles\)" + numChannelsAsString + "_" + sampleRateAsString +
             "_" + bitDepthAsString + "bit" + ".wav");
-    } if (format == AudioFormat::Aiff) {
+    }
+    if (format == AudioFormat::Aiff) {
         return audioFile.save(
             APRG_DIR R"(\AprgAudio\FilesForTests\WrittenAudioFiles\)" + numChannelsAsString + "_" + sampleRateAsString +
             "_" + bitDepthAsString + "bit" + ".aif");

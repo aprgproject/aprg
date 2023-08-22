@@ -81,8 +81,7 @@ void IsolationOfOneVariableOnEqualityEquation::setEquation(Equation const& equat
 }
 
 void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
-    string const& variableName, Polynomial const& polynomial, Term& termWithVariable,
-    Term& termWithWithoutVariable) {
+    string const& variableName, Polynomial const& polynomial, Term& termWithVariable, Term& termWithWithoutVariable) {
     AlbaNumber identicalExponentForVariable(getIdenticalExponentForVariableIfPossible(variableName, polynomial));
     if (canBeIsolatedBasedOnExponent(identicalExponentForVariable)) {
         Monomials monomialsWithVariable;
@@ -102,8 +101,7 @@ void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
 }
 
 void IsolationOfOneVariableOnEqualityEquation::isolateTermWithVariable(
-    string const& variableName, Expression const& expression, Term& termWithVariable,
-    Term& termWithWithoutVariable) {
+    string const& variableName, Expression const& expression, Term& termWithVariable, Term& termWithWithoutVariable) {
     Expression simplifiedExpression(expression);
     simplifyForIsolation(simplifiedExpression);
     if (OperatorLevel::AdditionAndSubtraction == expression.getCommonOperatorLevel()) {

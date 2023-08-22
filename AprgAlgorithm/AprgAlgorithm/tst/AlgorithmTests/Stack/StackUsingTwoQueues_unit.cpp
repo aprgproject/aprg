@@ -13,7 +13,7 @@ namespace algorithm {
 
 namespace {
 using StackForTest = StackUsingTwoQueues<int, DoublingSizeCircularQueue<int>>;
-} // namespace
+}  // namespace
 
 TEST(StackUsingTwoQueuesTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithInt<StackForTest>(); }
 

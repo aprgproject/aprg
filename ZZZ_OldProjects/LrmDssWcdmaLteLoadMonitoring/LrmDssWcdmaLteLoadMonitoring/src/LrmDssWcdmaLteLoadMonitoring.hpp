@@ -25,9 +25,9 @@ public:
     unsigned int calculateCellLoad(
         unsigned int const numberOfDchUsers, unsigned int const numberOfHsdpaUsers,
         bool const hasHsfachInTheCell) const;
-    static EDssWcdmaLoad getNextLowerLoadState(EDssWcdmaLoad const loadState) ;
-    static EDssWcdmaFilterBandwidth convertLoadStateToFilterBandwidth(EDssWcdmaLoad const loadState) ;
-    static EDssWcdmaLoad convertFilterBandwidthToLoadState(EDssWcdmaFilterBandwidth const filterBandwidth) ;
+    static EDssWcdmaLoad getNextLowerLoadState(EDssWcdmaLoad const loadState);
+    static EDssWcdmaFilterBandwidth convertLoadStateToFilterBandwidth(EDssWcdmaLoad const loadState);
+    static EDssWcdmaLoad convertFilterBandwidthToLoadState(EDssWcdmaFilterBandwidth const filterBandwidth);
 
     EDssWcdmaLoad determineLoadStateForTheNextFilterUpdateAndUpdateConsecutiveLowerLoadStateCountIfNeeded(
         EDssWcdmaLoad const currentLoadState, EDssWcdmaLoad const currentLoadStateOfTheAppliedFilter);

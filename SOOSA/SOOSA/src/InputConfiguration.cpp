@@ -28,8 +28,7 @@ int InputConfiguration::getNumberOfQuestionsAtColumn(int const column) const {
 
 int InputConfiguration::getQuestionIndexInColumn(int const columnNumber, int const questionOffsetInColumn) const {
     int questionIndex = 0;
-    auto columnMapIterator =
-        m_formDetails.columnToNumberOfQuestionsMap.find(columnNumber);
+    auto columnMapIterator = m_formDetails.columnToNumberOfQuestionsMap.find(columnNumber);
     if (columnMapIterator != m_formDetails.columnToNumberOfQuestionsMap.cend()) {
         if (columnMapIterator == m_formDetails.columnToNumberOfQuestionsMap.cbegin()) {
             questionIndex = questionOffsetInColumn;

@@ -37,7 +37,7 @@ private:
     void calculateAndSaveInitialValuesIfPossible(Point const& first);
     static std::optional<double> calculateOtherCoordinate(
         double const& initialValue1, double const coefficient1, double const& initialValue2, double const coefficient2,
-        double const coordinate2) ;
+        double const coordinate2);
     bool areAllCoefficientsZero() const;
 
     friend std::ostream& operator<<(std::ostream& out, Line const& line);

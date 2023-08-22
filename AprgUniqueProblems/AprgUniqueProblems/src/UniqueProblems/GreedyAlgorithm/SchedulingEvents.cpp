@@ -24,8 +24,8 @@ SchedulingEvents::EventNames SchedulingEvents::getAsMuchEventsAsPossible() const
             {
                 if (event1.endTime != event2.endTime) {
                     return event1.endTime < event2.endTime;  // sort on events that end early
-                }                     return event1.startTime < event2.startTime;  // stylistic choice, prioritize longest events first
-               
+                }
+                return event1.startTime < event2.startTime;  // stylistic choice, prioritize longest events first
             });
 
         Event selectedEvent(eventsToSchedule.front());

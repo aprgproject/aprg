@@ -29,7 +29,7 @@ public:
 private:
     static Term simplifyTrigometricFunctionToExpression(Function const& functionObject);
     static Term simplifyLogarithmicFunctionToExpression(Function const& functionObject);
-    static Term getLogarithmicOfTermBasedFromName(Term const& term, std::string const& functionName) ;
+    static Term getLogarithmicOfTermBasedFromName(Term const& term, std::string const& functionName);
 };
 
 }  // namespace Simplification

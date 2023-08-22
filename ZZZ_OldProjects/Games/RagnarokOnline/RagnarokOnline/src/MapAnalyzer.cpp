@@ -263,8 +263,9 @@ void MapAnalyzer::sortMaps() {
                     if (first.jobExperiencePotential == second.jobExperiencePotential) {
                         if (first.annoyanceHp == second.annoyanceHp) {
                             return first.mobCount > second.mobCount;
-                        }                             return first.annoyanceHp < second.annoyanceHp;
-                       
+                        }
+                        return first.annoyanceHp < second.annoyanceHp;
+
                     } else {
                         return first.jobExperiencePotential > second.jobExperiencePotential;
                     }

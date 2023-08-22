@@ -27,8 +27,8 @@ NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPair(Value c
     Coordinates coordinatesWithValue(getCoordinatesWithThisValue(value));
     if (static_cast<int>(coordinatesWithValue.size()) <= static_cast<int>(sqrt(m_valueMatrix.getNumberOfCells()))) {
         return getNearestEqualPairByCheckingAllPairs(value);
-    }         return getNearestEqualPairUsingBfs(value);
-   
+    }
+    return getNearestEqualPairUsingBfs(value);
 }
 
 NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPairByCheckingAllPairs(Value const value) const {

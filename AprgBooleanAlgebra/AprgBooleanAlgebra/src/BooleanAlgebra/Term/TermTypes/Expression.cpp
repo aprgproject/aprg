@@ -46,9 +46,10 @@ bool Expression::operator<(Expression const& second) const {
     bool result(false);
     if (m_commonOperatorLevel == second.m_commonOperatorLevel) {
         return m_wrappedTerms < second.m_wrappedTerms;
-    }         result = getOperatorLevelInversePriority(m_commonOperatorLevel) <
-                 getOperatorLevelInversePriority(second.m_commonOperatorLevel);
-   
+    }
+    result = getOperatorLevelInversePriority(m_commonOperatorLevel) <
+             getOperatorLevelInversePriority(second.m_commonOperatorLevel);
+
     return result;
 }
 

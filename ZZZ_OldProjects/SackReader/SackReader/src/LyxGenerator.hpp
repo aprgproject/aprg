@@ -14,7 +14,7 @@ public:
     void generateLyxDocument(std::string const& ifsTemplatePath, std::string const& finalDocumentPath);
 
 private:
-    static void saveSubsection(std::string const& subsectionName, std::ofstream& lyxOutputFileStream) ;
+    static void saveSubsection(std::string const& subsectionName, std::ofstream& lyxOutputFileStream);
     void saveMessageDefinitions(std::ofstream& lyxOutputFileStream);
     void saveStructureDefinitions(std::ofstream& lyxOutputFileStream);
     void saveEnumDefinitions(std::ofstream& lyxOutputFileStream);
@@ -41,7 +41,7 @@ private:
     void saveUnionTable(std::string const& unionName, std::ofstream& unionTableStream);
     void saveConstantTable(std::string const& constantName, std::ofstream& constantTableStream);
     void saveTypedefTable(TypedefDetails const& typedefDetails, std::ofstream& typedefTableStream);
-    static void saveDisplayTable(DisplayTable const& messageTable, std::ofstream& messageTableStream) ;
+    static void saveDisplayTable(DisplayTable const& messageTable, std::ofstream& messageTableStream);
     void generateStructureForDisplayTablesIfNeeded(
         std::string const& structureName, DisplayTable& messageTable, std::string const& indentionInType,
         bool const areInnerStructuresGenerated);

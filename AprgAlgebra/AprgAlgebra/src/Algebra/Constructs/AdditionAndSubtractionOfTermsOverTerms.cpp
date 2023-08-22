@@ -94,8 +94,7 @@ void AdditionAndSubtractionOfTermsOverTerms::eraseCommonFactorOrAddDistinctFacto
     }
 }
 
-Monomial AdditionAndSubtractionOfTermsOverTerms::getCombinedMonomialMultiplier(
-    Terms const& monomialMultiplierTerms) {
+Monomial AdditionAndSubtractionOfTermsOverTerms::getCombinedMonomialMultiplier(Terms const& monomialMultiplierTerms) {
     Monomials monomialMultipliers;
     for (Term const& monomialMultiplierTerm : monomialMultiplierTerms) {
         monomialMultipliers.emplace_back(createMonomialIfPossible(monomialMultiplierTerm));
@@ -152,8 +151,7 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedNumeratorExpressio
     return combinedNumerator;
 }
 
-Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedDenominatorExpression(
-    Terms const& lcmDenominatorTerms) {
+Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedDenominatorExpression(Terms const& lcmDenominatorTerms) {
     Expression combinedDenominator;
     for (Term const& denominatorTerm : lcmDenominatorTerms) {
         combinedDenominator.putTermWithMultiplicationIfNeeded(denominatorTerm);

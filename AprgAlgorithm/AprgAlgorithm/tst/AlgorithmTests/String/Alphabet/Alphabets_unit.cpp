@@ -10,7 +10,7 @@ namespace algorithm {
 
 namespace {
 using AlphabetForTest = Alphabet<uint8_t>;
-} // namespace
+}  // namespace
 
 TEST(AlphabetsTest, ContainsWorks) {
     AlphabetForTest alphabet("ABCDEF");

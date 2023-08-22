@@ -39,8 +39,8 @@ private:
     void addOperator(char const characterOperator);
     void addParenthesis(char const currentCharacter, int& parenthesisCount);
     static char convertTildeToExclamationPointIfNeeded(char const character);
-    static bool isOperator(char const character) ;
-    static bool isParenthesis(char const character) ;
+    static bool isOperator(char const character);
+    static bool isParenthesis(char const character);
     void setErrorMessage(std::string const& errorMessage);
     bool m_isEvaluatorInvalid;
     std::string m_errorMessage;

@@ -22,7 +22,7 @@ public:
     Count getNumberOfSolutionsUsingCompleteSearch();
 
 private:
-    static Row getEmptyRow(Count const length) ;
+    static Row getEmptyRow(Count const length);
     void searchNextRow(Count const rowIndex, Row const& currentRow);
     Rows const& getNextRows(Row const& currentRow);
     Rows calculateNextRows(Row const& currentRow);

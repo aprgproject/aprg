@@ -11,7 +11,7 @@ namespace algorithm {
 namespace {
 using MaxPriorityQueueForTest =
     BinaryHeapPriorityQueue<char, less>;  // less leads to Max Priority Queue same as in c++ standard
-} // namespace
+}  // namespace
 
 TEST(BinaryHeapPriorityQueueTest, IsEmptyWorks) {
     MaxPriorityQueueForTest queue1;

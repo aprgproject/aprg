@@ -36,8 +36,9 @@ void runTestCase(int const) {
         my_cout << m << endl;
         string s;
         my_cin >> s;
-        if (s == "CORRECT") { break;
-}
+        if (s == "CORRECT") {
+            break;
+        }
         if (s == "TOO_SMALL") {
             lowValue = m + 1;
         } else {

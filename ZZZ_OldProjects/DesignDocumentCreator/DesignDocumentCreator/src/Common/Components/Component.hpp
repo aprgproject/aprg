@@ -24,10 +24,10 @@ public:
     ComponentName getComponentName() const;
     std::string getComponentNameInString() const;
     std::string getQueueAsString() const;
-    static void log(std::string const& line) ;
-    static void logNoteOnPreviousMessage(std::string const& note) ;
+    static void log(std::string const& line);
+    static void logNoteOnPreviousMessage(std::string const& note);
     void logNoteOnComponent(std::string const& note) const;
-    static void logNoteOnComponents(ComponentNames const& componentNames, std::string const& note) ;
+    static void logNoteOnComponents(ComponentNames const& componentNames, std::string const& note);
 
 protected:
     virtual void handleEvent(Event const& event);

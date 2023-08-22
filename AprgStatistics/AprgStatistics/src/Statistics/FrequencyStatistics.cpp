@@ -44,8 +44,8 @@ double FrequencyStatistics::calculateMedian(FrequencySamples const& samples) {
             medianLocation <= rangeOffsetForCurrentValue + frequencyPair.second) {
             result = frequencyPair.first;
             break;
-        } if (
-            previousMinimumValue <= medianLocation &&
+        }
+        if (previousMinimumValue <= medianLocation &&
             medianLocation <= rangeOffsetForCurrentValue + frequencyPair.second) {
             result = (((double)previousValue + frequencyPair.first) / 2);
             break;

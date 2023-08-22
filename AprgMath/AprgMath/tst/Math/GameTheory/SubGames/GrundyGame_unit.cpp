@@ -10,7 +10,7 @@ namespace math {
 
 namespace {
 using StickHeaps = GrundyGame::StickHeaps;
-} // namespace
+}  // namespace
 
 TEST(GrundyGameTest, Example1Works) {
     GrundyGame game(8U);

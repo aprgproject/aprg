@@ -61,8 +61,8 @@ int getMinimumSeatsFromLeftToRight(Intervals& bookings) {
     sort(bookings.begin(), bookings.end(), [](Interval const& interval1, Interval const& interval2) {
         if (interval1.first == interval2.first) {
             return interval1.second < interval2.second;
-        }             return interval1.first > interval2.first;
-       
+        }
+        return interval1.first > interval2.first;
     });
     return getMinimumSeats(bookings);
 }
@@ -71,8 +71,8 @@ int getMinimumSeatsFromRightToLeft(Intervals& bookings) {
     sort(bookings.begin(), bookings.end(), [](Interval const& interval1, Interval const& interval2) {
         if (interval1.second == interval2.second) {
             return interval1.first > interval2.first;
-        }             return interval1.second < interval2.second;
-       
+        }
+        return interval1.second < interval2.second;
     });
     return getMinimumSeats(bookings);
 }

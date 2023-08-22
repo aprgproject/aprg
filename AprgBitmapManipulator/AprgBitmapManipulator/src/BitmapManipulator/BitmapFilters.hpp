@@ -53,8 +53,10 @@ public:
     void determineConnectedComponentsUsingTwoPass(BitmapSnippet const& inputSnippet);
 
     // draw pen and non pen functions
-    static void drawPenPoints(PenPoints const& penPoints, BitmapSnippet const& inputSnippet, BitmapSnippet& outputSnippet);
-    static void drawNonPenPoints(PenPoints const& penPoints, BitmapSnippet const& inputSnippet, BitmapSnippet& outputSnippet);
+    static void drawPenPoints(
+        PenPoints const& penPoints, BitmapSnippet const& inputSnippet, BitmapSnippet& outputSnippet);
+    static void drawNonPenPoints(
+        PenPoints const& penPoints, BitmapSnippet const& inputSnippet, BitmapSnippet& outputSnippet);
     void drawBlurredNonPenPoints(
         PenPoints const& penPoints, BitmapSnippet const& inputSnippet, BitmapSnippet& outputSnippet,
         double const blurRadius, uint32_t const similarityColorLimit);
@@ -109,19 +111,19 @@ private:
         uint32_t const similarityColorLimit);
     static void updateUnionFindForLabels(
         UnionFindForLabels& unionFindForLabels, int const smallestLabel, int const neighbor1Label,
-        int const neighbor2Label) ;
+        int const neighbor2Label);
 
     static bool isThisPenCircleBetter(
         BitmapXY const& penBitmapXY, TwoDimensions::Circle const& circleToCheck,
-        TwoDimensions::Circle const& circleToCompare) ;
+        TwoDimensions::Circle const& circleToCompare);
     uint32_t getBlurredColor(
         uint32_t const centerColor, uint32_t const colorToCompare, uint32_t const similarityColorLimit) const;
     static uint8_t getBlurredColorPart(
-        uint8_t const centerColorPart, uint8_t const colorToComparePart, uint32_t const similarityColorLimit) ;
+        uint8_t const centerColorPart, uint8_t const colorToComparePart, uint32_t const similarityColorLimit);
     uint32_t getBlurredColorUsingACircle(
         BitmapSnippet const& snippet, BitmapXY const& centerXY, double const blurRadius,
         BlurCondition const& isIncludedInBlur) const;
-    static double getBlurWeight(double const distanceFromCenter, double const blurRadius) ;
+    static double getBlurWeight(double const distanceFromCenter, double const blurRadius);
 
     uint32_t m_backgroundColor;
     Bitmap m_bitmap;

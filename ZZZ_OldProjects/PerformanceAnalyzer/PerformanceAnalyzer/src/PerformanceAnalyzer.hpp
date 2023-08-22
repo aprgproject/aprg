@@ -20,9 +20,9 @@ private:
         void saveNbccId(std::string const& lineInLogs);
         void saveCrnccId(std::string const& lineInLogs);
         void saveTransactionId(std::string const& lineInLogs);
-        static int getNbccId(std::string const& lineInLogs) ;
-        static int getCrnccId(std::string const& lineInLogs) ;
-        static int getTransactionId(std::string const& lineInLogs) ;
+        static int getNbccId(std::string const& lineInLogs);
+        static int getCrnccId(std::string const& lineInLogs);
+        static int getTransactionId(std::string const& lineInLogs);
     };
     struct BtsLogDelay {
         std::optional<wcdmaToolsBackend::BtsLogTime> startTimeOptional;
@@ -50,9 +50,9 @@ public:
     void processDirectoryForTraceLog(std::string const& traceLogPath);
 
     static int getDelayTimeInUs(
-        wcdmaToolsBackend::BtsLogTime const& endTime, wcdmaToolsBackend::BtsLogTime const& startTime) ;
+        wcdmaToolsBackend::BtsLogTime const& endTime, wcdmaToolsBackend::BtsLogTime const& startTime);
     static int getDelayTimeInMinutes(
-        wcdmaToolsBackend::BtsLogTime const& endTime, wcdmaToolsBackend::BtsLogTime const& startTime) ;
+        wcdmaToolsBackend::BtsLogTime const& endTime, wcdmaToolsBackend::BtsLogTime const& startTime);
 
 private:
     std::string m_extractGrepCondition;

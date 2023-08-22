@@ -143,7 +143,7 @@ void SimplificationOfExpression::simplifyBySubstitutingExpressionAndFunctionsToV
 
         while (tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(m_expression)) {
             ;
-}
+        }
     }
 }
 

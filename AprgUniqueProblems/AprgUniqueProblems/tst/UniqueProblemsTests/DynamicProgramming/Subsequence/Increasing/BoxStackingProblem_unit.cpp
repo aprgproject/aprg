@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using Boxes = BoxStackingProblem::Boxes;
-} // namespace
+}  // namespace
 
 TEST(BoxStackingProblemTest, GetLongestLengthWorksOnExample1) {
     BoxStackingProblem queryForTest({{4, 6, 7}, {1, 2, 3}, {4, 5, 6}, {10, 12, 32}});

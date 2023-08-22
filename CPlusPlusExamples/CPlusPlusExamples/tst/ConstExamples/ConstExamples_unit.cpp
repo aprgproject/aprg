@@ -17,11 +17,13 @@ TEST(ConstExamplesTest, MutationWithConstInPrimitiveTypesDoesNotWork) {
 
     // b++; // Error because "b" is const
 
-    if (b > 4) { cout << "b is greater than 4\n";
-}
+    if (b > 4) {
+        cout << "b is greater than 4\n";
+    }
 
-    if (b == 44) { cout << "b is greater than 4\n";
-}
+    if (b == 44) {
+        cout << "b is greater than 4\n";
+    }
 
     // if(b>>=a) // Error because "b" is const
     //    cout << "b is greater than 4\n";

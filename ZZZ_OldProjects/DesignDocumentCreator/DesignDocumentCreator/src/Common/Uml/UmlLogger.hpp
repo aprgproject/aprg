@@ -26,7 +26,7 @@ public:
 private:
     static unsigned int getOptimizedTargetLength(alba::stringHelper::strings const& linesInNote);
     std::string getUmlLogsForStart() const;
-    static std::string getUmlLogsForEnd() ;
+    static std::string getUmlLogsForEnd();
     std::stringstream m_umlLogBuffer;
     UmlParticipants m_participants;
 };

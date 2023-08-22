@@ -14,7 +14,7 @@ public:
     Term getRemainderAtIndex(int const index) const override;
 
 protected:
-    static Term getFormula(Term const& formulaForEachTermWithoutSign, std::string const& variableName) ;
+    static Term getFormula(Term const& formulaForEachTermWithoutSign, std::string const& variableName);
     Term m_formulaForEachTermWithoutSign;
 };
 

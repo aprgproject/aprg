@@ -134,8 +134,8 @@ Exchange Board::getExchangeAt(Coordinate const& coordinate) const {
     for (int ai = 0, di = 0; totalCount.attack + totalCount.defend > 0 && ai < SIZE && di < SIZE;) {
         if ((ai == KING_INDEX && totalCount.defend > 0) || (di == KING_INDEX && totalCount.attack > 0)) {
             break;  // king cant counter capture so break loop
-        } if (
-            counts[ai].attack > 0 && counts[di].defend > 0 && pieceValue[ai] == pieceValue[di] &&
+        }
+        if (counts[ai].attack > 0 && counts[di].defend > 0 && pieceValue[ai] == pieceValue[di] &&
             pendingPieceValue == pieceValue[ai] && exchangeValue == 0) {
             int sameCount = min(counts[ai].attack, counts[di].defend);
             counts[ai].attack -= sameCount;
@@ -376,11 +376,12 @@ Board::PieceGrid Board::getInitialValues(BoardOrientation const& inputType) {
     if (BoardOrientation::BlackUpWhiteDown == inputType) {
         return {12, 10, 11, 13, 14, 11, 10, 12, 9, 9, 9, 9, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 4, 2, 3, 5, 6, 3, 2, 4};
-    } if (BoardOrientation::WhiteUpBlackDown == inputType) {
+    }
+    if (BoardOrientation::WhiteUpBlackDown == inputType) {
         return {4, 2, 3, 6, 5, 3, 2, 4, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 9, 9, 9, 9, 9, 9, 9, 12, 10, 11, 14, 13, 11, 10, 12};
-    }         return {};
-   
+    }
+    return {};
 }
 
 void Board::retrieveMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const {
@@ -1133,13 +1134,9 @@ Coordinates Board::getLDeltaCoordinates() {
     return Coordinates{{-2, -1}, {-2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}};
 }
 
-Coordinates Board::getDiagonalIncrementDeltaCoordinates() {
-    return Coordinates{{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
-}
+Coordinates Board::getDiagonalIncrementDeltaCoordinates() { return Coordinates{{-1, -1}, {-1, 1}, {1, -1}, {1, 1}}; }
 
-Coordinates Board::getStraightIncrementDeltaCoordinates() {
-    return Coordinates{{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
-}
+Coordinates Board::getStraightIncrementDeltaCoordinates() { return Coordinates{{0, -1}, {0, 1}, {-1, 0}, {1, 0}}; }
 
 Coordinates Board::getOneStepDeltaCoordinates() {
     return Coordinates{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
@@ -1150,25 +1147,27 @@ Board::DeltaRange Board::getPawnNonCaptureDeltaRange(Coordinate const& startpoin
         if (PieceColor::White == moveColor) {
             if (6 == startpoint.getY()) {
                 return DeltaRange{-1, -3};
-            }                 return DeltaRange{-1, -2};
-           
-        } if (PieceColor::Black == moveColor) {
+            }
+            return DeltaRange{-1, -2};
+        }
+        if (PieceColor::Black == moveColor) {
             if (1 == startpoint.getY()) {
                 return DeltaRange{1, 3};
-            }                 return DeltaRange{1, 2};
-           
+            }
+            return DeltaRange{1, 2};
         }
     } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
         if (PieceColor::White == moveColor) {
             if (1 == startpoint.getY()) {
                 return DeltaRange{1, 3};
-            }                 return DeltaRange{1, 2};
-           
-        } if (PieceColor::Black == moveColor) {
+            }
+            return DeltaRange{1, 2};
+        }
+        if (PieceColor::Black == moveColor) {
             if (6 == startpoint.getY()) {
                 return DeltaRange{-1, -3};
-            }                 return DeltaRange{-1, -2};
-           
+            }
+            return DeltaRange{-1, -2};
         }
     }
     return {};
@@ -1180,25 +1179,27 @@ Board::DeltaRange Board::getPawnReverseNonCaptureDeltaRange(
         if (PieceColor::White == moveColor) {
             if (4 == endpoint.getY()) {
                 return DeltaRange{1, 3};
-            }                 return DeltaRange{1, 2};
-           
-        } if (PieceColor::Black == moveColor) {
+            }
+            return DeltaRange{1, 2};
+        }
+        if (PieceColor::Black == moveColor) {
             if (3 == endpoint.getY()) {
                 return DeltaRange{-1, -3};
-            }                 return DeltaRange{-1, -2};
-           
+            }
+            return DeltaRange{-1, -2};
         }
     } else if (BoardOrientation::WhiteUpBlackDown == m_orientation) {
         if (PieceColor::White == moveColor) {
             if (3 == endpoint.getY()) {
                 return DeltaRange{-1, -3};
-            }                 return DeltaRange{-1, -2};
-           
-        } if (PieceColor::Black == moveColor) {
+            }
+            return DeltaRange{-1, -2};
+        }
+        if (PieceColor::Black == moveColor) {
             if (4 == endpoint.getY()) {
                 return DeltaRange{1, 3};
-            }                 return DeltaRange{1, 2};
-           
+            }
+            return DeltaRange{1, 2};
         }
     }
     return {};

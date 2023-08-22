@@ -12,7 +12,7 @@ namespace algorithm {
 
 namespace {
 using SetForTest = OrderedArraySet<int>;
-} // namespace
+}  // namespace
 
 TEST(OrderedArraySetTest, IsEmptyWorksWhenEmpty) { testIsEmptyWhenEmptyWithUnsignedIntAndChar<SetForTest>(); }
 

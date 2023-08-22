@@ -34,12 +34,14 @@ vector<int> need;
 int n, m;
 
 bool in(vector<int> a) {
-    if (a.size() > need.size()) { return false;
-}
+    if (a.size() > need.size()) {
+        return false;
+    }
     int ptr = (int)need.size() - (int)a.size();
     for (int i = 0; i < (int)a.size(); i++) {
-        if (ptr == (int)need.size()) { return true;
-}
+        if (ptr == (int)need.size()) {
+            return true;
+        }
         if (a[i] <= need[ptr]) {
             ptr++;
         }
@@ -55,42 +57,43 @@ double ans(vector<int> a, int tot) {
     if (!in(a)) {
         return 1e18;
     }
-    if (mp.count(a)) { return mp[a];
-}
+    if (mp.count(a)) {
+        return mp[a];
+    }
     if (tot == n) {
         return 0;
-    }         vector<pair<int, double> > go;
-        for (int i = 0; i < (int)a.size(); i++) {
-            a[i]++;
-            double ret = ans(a, tot + 1);
-            go.push_back({1, ret});
-            a[i]--;
-        }
-        if ((int)a.size() != m) {
-            auto b = a;
-            b.insert(b.begin(), 1);
-            go.push_back({m - (int)a.size(), ans(b, tot + 1)});
-        }
-        auto check = [&](double x) {
-            double sum = 1;
-            for (auto c : go) {
-                sum += min(c.second, x) * c.first / m;
-            }
-            return sum <= x;
-        };
+    }
+    vector<pair<int, double> > go;
+    for (int i = 0; i < (int)a.size(); i++) {
+        a[i]++;
+        double ret = ans(a, tot + 1);
+        go.push_back({1, ret});
+        a[i]--;
+    }
+    if ((int)a.size() != m) {
+        auto b = a;
+        b.insert(b.begin(), 1);
+        go.push_back({m - (int)a.size(), ans(b, tot + 1)});
+    }
+    auto check = [&](double x) {
         double sum = 1;
-        for (auto c : go) sum += c.second * c.first / m;
-        double vl = 0, vr = sum;
-        int it = 100;
-        while (it--) {
-            double vm = (vl + vr) / 2;
-            if (check(vm))
-                vr = vm;
-            else
-                vl = vm;
+        for (auto c : go) {
+            sum += min(c.second, x) * c.first / m;
         }
-        return mp[a] = vr;
-   
+        return sum <= x;
+    };
+    double sum = 1;
+    for (auto c : go) sum += c.second * c.first / m;
+    double vl = 0, vr = sum;
+    int it = 100;
+    while (it--) {
+        double vm = (vl + vr) / 2;
+        if (check(vm))
+            vr = vm;
+        else
+            vl = vm;
+    }
+    return mp[a] = vr;
 }
 
 void runTestCase(int const testCaseNumber) {
@@ -100,8 +103,9 @@ void runTestCase(int const testCaseNumber) {
     int k;
     my_cin >> k;
     need.resize(k);
-    for (int i = 0; i < k; i++) { my_cin >> need[i];
-}
+    for (int i = 0; i < k; i++) {
+        my_cin >> need[i];
+    }
     sort(need.begin(), need.end());
     vector<int> go;
     my_cout.precision(10);

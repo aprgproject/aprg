@@ -24,15 +24,15 @@ public:
 private:
     static void isolateTermWithVariable(
         std::string const& variableName, Polynomial const& polynomial, Term& termWithVariable,
-        Term& termWithWithoutVariable) ;
+        Term& termWithWithoutVariable);
     static void isolateTermWithVariable(
         std::string const& variableName, Expression const& expression, Term& termWithVariable,
-        Term& termWithWithoutVariable) ;
-    static bool canBeIsolatedBasedOnExponent(AlbaNumber const& identicalExponentForVariable) ;
+        Term& termWithWithoutVariable);
+    static bool canBeIsolatedBasedOnExponent(AlbaNumber const& identicalExponentForVariable);
     static AlbaNumber getIdenticalExponentForVariableIfPossible(
-        std::string const& variableName, Polynomial const& polynomial) ;
-    static void simplifyForIsolation(Term& term) ;
-    static void simplifyForIsolation(Expression& expression) ;
+        std::string const& variableName, Polynomial const& polynomial);
+    static void simplifyForIsolation(Term& term);
+    static void simplifyForIsolation(Expression& expression);
     Term m_simplifiedLeftSideTerm;
 };
 

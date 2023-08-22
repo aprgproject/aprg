@@ -32,9 +32,10 @@ long long N, K, x1, y1, C, D, E1, E2, F;
 long long raiseToPower(long long a, long long p) {
     long long result = 1, cp = a;
     while (p) {
-        if (p & 1) { result = (result * cp) % MAX_MODULO;  // is even
-}
-        p >>= 1;                                         // divide by two
+        if (p & 1) {
+            result = (result * cp) % MAX_MODULO;  // is even
+        }
+        p >>= 1;  // divide by two
         cp = (cp * cp) % MAX_MODULO;
     }
     return result;
@@ -52,18 +53,17 @@ long long getGeometricTerm(long long i, long long k) {
     // There is some math here that I cannot understand.
     if (i == 1) {
         return k % MAX_MODULO;
-    }         // Geometric term is (p^(K+1)-1)/(p-1)
-        // Using inverse modulo:
-        // inverseModulo ≅ 1/(p-1)
-        // (1/(p-1) * inverseModulo) mod m = 1
-        // Using fermats little theorem:
-        // -> Fermat's little theorem states that if p is a prime number, then for any integer a, the number a^p − a is
-        // an integer multiple of p.
-        // -> a^(m-1) ≅ 1 (mod m)
-        // -> a^(-1) ≅ a^(m-2) (mod m)
-        // Thus 1/(p-1) = (p-1)^(-1) = (p-1)^(m-2)
-        return ((i * (raiseToPower(i, k) - 1) % MAX_MODULO) * raiseToPower(i - 1, MAX_MODULO - 2)) % MAX_MODULO;
-   
+    }  // Geometric term is (p^(K+1)-1)/(p-1)
+    // Using inverse modulo:
+    // inverseModulo ≅ 1/(p-1)
+    // (1/(p-1) * inverseModulo) mod m = 1
+    // Using fermats little theorem:
+    // -> Fermat's little theorem states that if p is a prime number, then for any integer a, the number a^p − a is
+    // an integer multiple of p.
+    // -> a^(m-1) ≅ 1 (mod m)
+    // -> a^(-1) ≅ a^(m-2) (mod m)
+    // Thus 1/(p-1) = (p-1)^(-1) = (p-1)^(m-2)
+    return ((i * (raiseToPower(i, k) - 1) % MAX_MODULO) * raiseToPower(i - 1, MAX_MODULO - 2)) % MAX_MODULO;
 }
 
 void runTestCase(int const testCaseNumber) {

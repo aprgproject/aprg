@@ -721,7 +721,7 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
                    getRotationDirectionTraversing3Points(firstPoint, auxiliary[index], auxiliary[index + 1]);
              ++index) {
             ;
-}
+        }
         auxiliary[newIndex++] = auxiliary[index];
     }
     auxiliary.resize(newIndex);

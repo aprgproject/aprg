@@ -6,7 +6,7 @@ namespace alba {
 
 namespace {
 vector<pair<int, int>> columnOffsets{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 0}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
-} // namespace
+}  // namespace
 
 FindLengthOfTheLongestConsecutivePath::FindLengthOfTheLongestConsecutivePath(ValueGrid const& inputGrid)
     : m_inputGrid(inputGrid) {}

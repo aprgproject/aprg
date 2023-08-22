@@ -951,8 +951,7 @@ AlbaNumbersSet Integration::getExponentsForPartialFraction(
 
 void Integration::fillInMatrixForPartialFractions(
     NumberMatrix& matrixWithNewVariables, string const& originalVariableName, VariableNamesSet const& newVariableNames,
-    AlbaNumbersSet const& exponents, Polynomial const& originalNumerator,
-    Polynomial const& numeratorWithNewVariables) {
+    AlbaNumbersSet const& exponents, Polynomial const& originalNumerator, Polynomial const& numeratorWithNewVariables) {
     fillInMatrixForPartialFractionsWithVariableValues(
         matrixWithNewVariables, originalVariableName, newVariableNames, exponents, numeratorWithNewVariables);
     fillInMatrixForPartialFractionsWithOutputValues(
@@ -1450,8 +1449,7 @@ void Integration::putReducedCosineSquaredToDoubleAngleCosineTerms(
     }
 }
 
-void Integration::putTangentSquaredToSecantSquaredTerms(
-    Term& outputTerm, Term const& inputTerm, int const exponent) {
+void Integration::putTangentSquaredToSecantSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent) {
     Term termToMultiply(
         createExpressionIfPossible({getTangentSquaredInSecant(inputTerm), "^", AlbaNumber(exponent) / 2}));
     outputTerm = outputTerm * termToMultiply;
@@ -1464,8 +1462,7 @@ void Integration::putCosecantSquaredToCotangentSquaredTerms(
     outputTerm = outputTerm * termToMultiply;
 }
 
-void Integration::putSecantSquaredToTangentSquaredTerms(
-    Term& outputTerm, Term const& inputTerm, int const exponent) {
+void Integration::putSecantSquaredToTangentSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent) {
     Term termToMultiply(
         createExpressionIfPossible({getSecantSquaredInTangent(inputTerm), "^", AlbaNumber(exponent) / 2}));
     outputTerm = outputTerm * termToMultiply;

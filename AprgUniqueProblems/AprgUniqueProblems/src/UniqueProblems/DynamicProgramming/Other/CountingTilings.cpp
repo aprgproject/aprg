@@ -56,9 +56,9 @@ CountingTilings::Rows const& CountingTilings::getNextRows(Row const& currentRow)
     auto it = m_currentRowToNextRows.find(currentRow);
     if (it != m_currentRowToNextRows.cend()) {
         return it->second;
-    }         m_currentRowToNextRows[currentRow] = calculateNextRows(currentRow);
-        return m_currentRowToNextRows[currentRow];
-   
+    }
+    m_currentRowToNextRows[currentRow] = calculateNextRows(currentRow);
+    return m_currentRowToNextRows[currentRow];
 }
 
 CountingTilings::Rows CountingTilings::calculateNextRows(Row const& currentRow) {

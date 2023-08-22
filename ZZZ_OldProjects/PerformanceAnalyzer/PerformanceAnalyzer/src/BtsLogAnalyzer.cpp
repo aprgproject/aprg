@@ -103,8 +103,7 @@ void BtsLogAnalyzer::saveDspCapacityInformationInGrm(string const& lineInLogs) {
         BtsLogPrint logPrint(lineInLogs);
         strings dspCapacitiesPerDsp;
         splitToStrings<SplitStringType::WithoutDelimeters>(dspCapacitiesPerDsp, lineInLogs, "()");
-        auto boardId(
-            convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInLogs, "0x", ",")));
+        auto boardId(convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInLogs, "0x", ",")));
         for (string const& dspCapacityOfOneDsp : dspCapacitiesPerDsp) {
             saveDspCapacityInformationInGrmOfOneDsp(dspCapacityOfOneDsp, boardId, logPrint);
         }
@@ -153,8 +152,7 @@ void BtsLogAnalyzer::saveDspCapacityInformationInLrmForR3(string const& lineInLo
         BtsLogPrint logPrint(lineInLogs);
         strings dspCapacitiesPerDsp;
         splitToStrings<SplitStringType::WithoutDelimeters>(dspCapacitiesPerDsp, lineInLogs, " ");
-        auto boardId(
-            convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInLogs, "0x", " ")));
+        auto boardId(convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInLogs, "0x", " ")));
         for (string const& dspCapacityOfOneDsp : dspCapacitiesPerDsp) {
             saveDspCapacityInformationInLrmOfOneDspForR3(dspCapacityOfOneDsp, boardId, logPrint);
         }
@@ -223,8 +221,7 @@ void BtsLogAnalyzer::saveDspCapacityInformationInLrmForR2(string const& lineInLo
         strings dspCapacitiesPerDsp;
         string logsAfterLrmPrint(getStringAfterThisString(lineInLogs, "INF/TCOM/LRM/Rep"));
         splitToStrings<SplitStringType::WithoutDelimeters>(dspCapacitiesPerDsp, logsAfterLrmPrint, "(");
-        auto boardId(
-            convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInLogs, ",0x", "-")));
+        auto boardId(convertHexStringToNumber<unsigned int>(getStringInBetweenTwoStrings(lineInLogs, ",0x", "-")));
         for (string const& dspCapacityOfOneDsp : dspCapacitiesPerDsp) {
             saveDspCapacityInformationInLrmOfOneDspForR2(dspCapacityOfOneDsp, boardId, logPrint);
         }

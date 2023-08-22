@@ -144,7 +144,7 @@ public:
 
     Item getItem(std::string const& fixedItemName) const;
     Monster getMonster(std::string const& monsterName) const;
-    static std::string getFixedItemName(Item const& item) ;
+    static std::string getFixedItemName(Item const& item);
     double getTalonRoBuyingPrice(std::string const& fixedItemName) const;
     double getTalonRoSellingPrice(std::string const& fixedItemName) const;
 

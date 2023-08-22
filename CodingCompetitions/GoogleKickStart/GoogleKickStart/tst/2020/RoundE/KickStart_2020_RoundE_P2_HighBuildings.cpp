@@ -49,16 +49,19 @@ void runTestCase(int const testCaseNumber) {
             my_cout << "2 1" << '\n';
         } else {
             assert(false);
-}
+        }
     } else {
         vector<int> res;
         res.reserve(N);
-        for (int i = 0; i < A - C; i++) { res.push_back(2);
-}
-        for (int i = 0; i < C; i++) { res.push_back(3);
-}
-        for (int i = 0; i < B - C; i++) { res.push_back(2);
-}
+        for (int i = 0; i < A - C; i++) {
+            res.push_back(2);
+        }
+        for (int i = 0; i < C; i++) {
+            res.push_back(3);
+        }
+        for (int i = 0; i < B - C; i++) {
+            res.push_back(2);
+        }
         int extra = N - (A + B - C);
         if (extra > 0) {
             res.insert(res.begin() + 1, extra, 1);

@@ -57,7 +57,7 @@ public:
     void clearSimplifiedFlag();
 
 private:
-    static bool isLessThanByComparingVariableNameMaps(Monomial const& monomial1, Monomial const& monomial2) ;
+    static bool isLessThanByComparingVariableNameMaps(Monomial const& monomial1, Monomial const& monomial2);
     void setNanIfNeeded();
     void removeZeroExponents();
 

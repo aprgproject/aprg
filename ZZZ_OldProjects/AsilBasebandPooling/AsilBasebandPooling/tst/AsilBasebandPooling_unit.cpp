@@ -129,8 +129,7 @@ TEST(AsilBasebandPoolingTest, GetBasebandCardsBasedOnNumberOfLcgsIsCorrect) {
     BasebandCardsSplitBasedOnNumberOfLcgs basebandCardsWith0MultipleLcgs(
         pooling.getBasebandCardsSplitBetweenOneLcgAndMultipleLcgs(0));
     ASSERT_EQ(7U, basebandCardsWith0MultipleLcgs.basebandCardsWithOneLcg.size());
-    auto iteratorToTraverse =
-        basebandCardsWith0MultipleLcgs.basebandCardsWithOneLcg.cbegin();
+    auto iteratorToTraverse = basebandCardsWith0MultipleLcgs.basebandCardsWithOneLcg.cbegin();
     EXPECT_EQ(0x11, iteratorToTraverse++->getBoardId());
     EXPECT_EQ(0x12, iteratorToTraverse++->getBoardId());
     EXPECT_EQ(0x13, iteratorToTraverse++->getBoardId());

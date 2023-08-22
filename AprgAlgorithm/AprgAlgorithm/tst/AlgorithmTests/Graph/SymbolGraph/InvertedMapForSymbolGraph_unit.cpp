@@ -12,7 +12,7 @@ namespace algorithm {
 
 namespace {
 using InvertedMapForTest = InvertedMapForSymbolGraph<int, string>;
-} // namespace
+}  // namespace
 
 TEST(InvertedMapForSymbolGraphTest, GetVertexIdentifierAndAddObjectIfNeededWorksWhenAddingVertices) {
     InvertedMapForTest invertedMap;

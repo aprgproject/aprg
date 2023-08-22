@@ -8,7 +8,7 @@ namespace alba {
 
 namespace {
 using Values = LongestBitonicSubsequence::Values;
-} // namespace
+}  // namespace
 
 TEST(LongestBitonicSubsequenceTest, GetLongestLengthWorksOnExample1) {
     LongestBitonicSubsequence queryForTest({6, 2, 5, 1, 7, 4, 8, 3});

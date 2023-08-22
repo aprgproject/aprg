@@ -29,7 +29,7 @@ private:
     Count getNumberOfWaysUsingMemoizationDP(
         CountMatrices& countMatrices, bool const expectedOutput, Index const left, Index const right) const;
 
-    static Count convertBoolToCount(bool const booleanValue) ;
+    static Count convertBoolToCount(bool const booleanValue);
     bool areSizesCorrect() const;
     void initialize();
     Booleans m_inputValues;

@@ -97,7 +97,8 @@ ShortestCommonSupersequence::Count ShortestCommonSupersequence::getShortestLengt
     Index const index1, Index const index2) const {
     if (index1 == 0) {
         return index2;
-    } if (index2 == 0) {
+    }
+    if (index2 == 0) {
         return index1;
     } else if (m_sequence1[index1 - 1] == m_sequence2[index2 - 1]) {
         return 1 + getShortestLengthUsingNaiveRecursion(index1 - 1, index2 - 1);

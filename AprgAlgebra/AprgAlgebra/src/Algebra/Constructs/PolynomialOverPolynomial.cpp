@@ -180,10 +180,10 @@ Monomial PolynomialOverPolynomial::getMonomialWithMaxNegativeExponentsAndConvert
 bool PolynomialOverPolynomial::removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(
     Polynomials& numeratorFactors, Polynomials& denominatorFactors) {
     bool areSomeFactorsRemoved(false);
-    for (auto numeratorIterator = numeratorFactors.begin();
-         numeratorIterator != numeratorFactors.end(); ++numeratorIterator) {
-        for (auto denominatorIterator = denominatorFactors.begin();
-             denominatorIterator != denominatorFactors.end(); ++denominatorIterator) {
+    for (auto numeratorIterator = numeratorFactors.begin(); numeratorIterator != numeratorFactors.end();
+         ++numeratorIterator) {
+        for (auto denominatorIterator = denominatorFactors.begin(); denominatorIterator != denominatorFactors.end();
+             ++denominatorIterator) {
             Polynomial const& numerator(*numeratorIterator);
             Polynomial const& denominator(*denominatorIterator);
             if (!(isOneMonomial(numerator) && isOneMonomial(denominator))) {
