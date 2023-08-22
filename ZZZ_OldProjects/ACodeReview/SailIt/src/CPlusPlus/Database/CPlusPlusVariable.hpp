@@ -11,7 +11,7 @@ namespace codeReview {
 class CPlusPlusVariable {
 public:
     CPlusPlusVariable();
-    explicit explicit explicit explicit CPlusPlusVariable(CPlusPlusType const& cPlusPlusType);
+    explicit CPlusPlusVariable(CPlusPlusType const& cPlusPlusType);
     CPlusPlusType getType() const;
 
 private:

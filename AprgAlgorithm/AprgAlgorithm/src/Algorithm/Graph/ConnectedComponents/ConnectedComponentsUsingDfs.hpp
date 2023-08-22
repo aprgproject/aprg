@@ -16,7 +16,7 @@ public:
     using VertexToIntMap = typename GraphTypes<Vertex>::VertexToIntMap;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
-    explicit explicit ConnectedComponentsUsingDfs(BaseUndirectedGraphWithVertex const& graph)
+    explicit ConnectedComponentsUsingDfs(BaseUndirectedGraphWithVertex const& graph)
         : BaseClass(graph),
           b_graph(BaseClass::m_graph),
           b_numberOfComponentIds(BaseClass::m_numberOfComponentIds),

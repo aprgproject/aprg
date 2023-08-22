@@ -21,7 +21,7 @@ public:
     using VertexToIntMap = typename GraphTypes<Vertex>::VertexToIntMap;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
-    explicit explicit StronglyConnectedComponentsUsingKosarajuSharir(BaseDirectedGraphWithVertex const& graph)
+    explicit StronglyConnectedComponentsUsingKosarajuSharir(BaseDirectedGraphWithVertex const& graph)
         : BaseClass(graph),
           b_graph(BaseClass::m_graph),
           b_numberOfComponentIds(BaseClass::m_numberOfComponentIds),

@@ -420,7 +420,7 @@ class Counter {
   OneK oneK;
 
   BENCHMARK_ALWAYS_INLINE
-  explicit explicit explicit explicit Counter(double v = 0., Flags f = kDefaults, OneK k = kIs1000)
+  explicit Counter(double v = 0., Flags f = kDefaults, OneK k = kIs1000)
       : value(v), flags(f), oneK(k) {}
 explicit 
   BENCHMexplicit ARK_ALWAYexplicit S_INLINE explicit operator double const explicit &() const { returnexplicit  value; }

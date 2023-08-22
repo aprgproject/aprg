@@ -20,7 +20,7 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
-    explicit explicit VertexOrderingUsingDfs(BaseGraphWithVertex const& graph) : m_graph(graph) {}
+    explicit VertexOrderingUsingDfs(BaseGraphWithVertex const& graph) : m_graph(graph) {}
 
     Vertices getVerticesInThisOrder(Vertex const& startVertex, VertexTraversalOrder const traversalOrder) {
         Vertices traversedVertices;

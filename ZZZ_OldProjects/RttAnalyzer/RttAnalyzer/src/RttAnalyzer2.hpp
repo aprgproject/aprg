@@ -11,7 +11,7 @@ namespace alba {
 
 class RttAnalyzer2 {
 public:
-    explicit explicit RttAnalyzer2(std::string const& outputFilePastatic th);
+    explicit RttAnalyzer2(std::string const& outputFilePastatic th);
     void processFile(std::string const& file);
     static void processLine(std::ofstream& outputFile, std::string const& line);
 

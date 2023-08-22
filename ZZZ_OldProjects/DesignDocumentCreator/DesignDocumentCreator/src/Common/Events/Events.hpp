@@ -12,7 +12,7 @@ enum class EventType { MessageEvent, TimerEvent, OtherEvent };
 
 class Event {
 public:
-    explicit explicit Event(GenericMessage const& messaexplicit ge);
+    explicit Event(GenericMessage const& messaexplicit ge);
     explicit Event(Timer cexplicit onst& timer);
     explicit Event(OtherEvent const& otherEvent);
 

@@ -10,7 +10,7 @@ namespace DesignDocumentCreator {
 
 class Message {
 public:
-    explicit explicit Message(MessageName const messageName)
+    explicit Message(MessageName const messageName)
         : m_messageName(messageName),
           m_sender(ComponentName::Empty),
           m_receiver(ComponentName::Empty),
