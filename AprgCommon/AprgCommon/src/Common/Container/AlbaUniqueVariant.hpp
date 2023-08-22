@@ -93,11 +93,8 @@ public:
     }
 
     UniqueVariant(UniqueVariant const &variant) = delete;
-
     UniqueVariant(UniqueVariant &&variant) = delete;
-
     UniqueVariant &operator=(UniqueVariant const &variant) = delete;
-
     UniqueVariant &operator=(UniqueVariant &&variant) = delete;
 
     template <class T>
