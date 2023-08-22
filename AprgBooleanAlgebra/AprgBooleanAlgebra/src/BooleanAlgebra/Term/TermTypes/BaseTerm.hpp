@@ -2,9 +2,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 class BaseTerm {
 public:
@@ -16,6 +14,4 @@ private:
 
 std::ostream& operator<<(std::ostream& out, BaseTerm const& baseTerm);
 
-}  // namespace booleanAlgebra
-
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

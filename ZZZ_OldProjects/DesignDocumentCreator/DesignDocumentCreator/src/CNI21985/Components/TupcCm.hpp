@@ -7,7 +7,7 @@ namespace DesignDocumentCreator {
 
 class TupcCm : public Component {
 public:
-    TupcCm(ComponentName const componentName);
+    explicit TupcCm(ComponentName const componentName);
 
 private:
     void handleTupcExeStartup();

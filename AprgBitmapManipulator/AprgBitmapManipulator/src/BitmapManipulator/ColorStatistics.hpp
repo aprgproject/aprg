@@ -5,9 +5,7 @@
 #include <set>
 #include <string>
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 void gatherAndSaveColorStatistics(std::string const& bitmapPath);
 
@@ -36,7 +34,5 @@ private:
     OneDimensionStatistics::Samples luma601Samples;
     OneDimensionStatistics::Samples luma709Samples;
 };
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

@@ -15,7 +15,7 @@ class TcomToam : public Component {
     };
 
 public:
-    TcomToam(ComponentName const componentName);
+    explicit TcomToam(ComponentName const componentName);
 
 private:
     void handleHwConfigurationMessage(GenericMessage const& genericMessage);

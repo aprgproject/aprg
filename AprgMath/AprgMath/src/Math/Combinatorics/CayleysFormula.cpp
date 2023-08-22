@@ -5,9 +5,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 UnsignedInteger getNumberOfLabeledTreesUsingCayleysFormula(UnsignedInteger const& numberOfNodes) {
     // Cayley’s formula states that there are nn¡2 labeled trees that contain n nodes.
@@ -31,7 +29,5 @@ UnsignedInteger getNumberOfLabeledTreesUsingCayleysFormula(UnsignedInteger const
     }
     return result;
 }
-
-}  // namespace math
 
 }  // namespace alba

@@ -28,7 +28,7 @@ namespace KickStart_2020_RoundD_P2_AlienPiano {
 #define my_cin cin
 #endif
 
-int signum(int a) { return (a > 0) - (a < 0); }
+int signum(int a) { return static_cast<int>(a > 0) - static_cast<int>(a < 0); }
 int compare(int a, int b) { return signum(a - b); }
 
 void runTestCase(int const testCaseNumber) {
@@ -43,7 +43,7 @@ void runTestCase(int const testCaseNumber) {
         array<int, 4> ndp{N + 1, N + 1, N + 1, N + 1};
         for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
-                ndp[y] = min(ndp[y], dp[x] + (compare(x, y) != compare(A[i - 1], A[i])));
+                ndp[y] = min(ndp[y], dp[x] + static_cast<int>(compare(x, y) != compare(A[i - 1], A[i])));
             }
         }
         dp = ndp;

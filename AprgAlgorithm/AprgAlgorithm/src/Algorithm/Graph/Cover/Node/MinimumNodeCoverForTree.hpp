@@ -87,16 +87,15 @@ private:
             }                 vertexToMinimumSetMap.emplace(vertex, setIfVertexIsNotIncluded);
                 return setIfVertexIsNotIncluded;
            
-        } else {
-            return it->second;
-        }
+        }             return it->second;
+       
     }
     BaseUndirectedGraphWithVertex const& m_nAryTreeGraph;
     Vertex m_rootOfTree;
     ChildrenInTreeWithVertex m_childrenInTree;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Minimum Node Cover For Tree
 

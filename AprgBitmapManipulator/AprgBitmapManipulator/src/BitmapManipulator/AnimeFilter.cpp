@@ -10,9 +10,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 void animize(string const& inputFile, string const& outputFile) {
     AlbaLocalTimer localTimer;
@@ -111,7 +109,5 @@ string getNewFilePath(string const& inputFilePath, int const step, string const&
        << inputFilePathHandler.getExtension();
     return ss.str();
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

@@ -11,9 +11,7 @@ using namespace alba::mathHelper;
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace std;
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 Line::Line() : m_type(LineType::Invalid), m_aCoefficient(0), m_bCoefficient(0), m_cCoefficient(0) {}
 
@@ -282,5 +280,4 @@ ostream& operator<<(ostream& out, Line const& line) {
     return out;
 }
 
-}  // namespace TwoDimensions
 }  // namespace alba

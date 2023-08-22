@@ -10,11 +10,9 @@ using namespace alba::mathHelper;
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace std;
 
-namespace alba {
+namespace alba::TwoDimensions {
 
-namespace TwoDimensions {
-
-Ellipse::Ellipse() : m_center(), m_aValue(0), m_bValue(0) {}
+Ellipse::Ellipse() :  m_aValue(0), m_bValue(0) {}
 
 Ellipse::Ellipse(Point const& center, double const aCoefficient, double const bCoefficient)
     : m_center(center), m_aValue(aCoefficient), m_bValue(bCoefficient) {}
@@ -240,5 +238,4 @@ ostream& operator<<(ostream& out, Ellipse const& ellipse) {
     return out;
 }
 
-}  // namespace TwoDimensions
-}  // namespace alba
+}  // namespace alba::TwoDimensions

@@ -41,7 +41,7 @@ struct ft {
     }
     ll qry(int i) {
         ll r = 0;
-        for (; i; i -= i & -i) {
+        for (; i != 0; i -= i & -i) {
             r += a[i];
         }
         return r;
@@ -64,7 +64,7 @@ void runTestCase(int const testCaseNumber) {
         app(i, a);
     }
     ll ans = 0;
-    while (q--) {
+    while ((q--) != 0) {
         char qt;
         my_cin >> qt;
         if (qt == 'Q') {

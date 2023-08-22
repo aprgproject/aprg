@@ -8,9 +8,9 @@ namespace Command {
 
 class Receiver {
 public:
-    void action() { std::cout << "Receiver: perform action\n"; }
+    static void action() { std::cout << "Receiver: perform action\n"; }
 
-    void reverseAction() { std::cout << "Receiver: perform reverse action\n"; }
+    static void reverseAction() { std::cout << "Receiver: perform reverse action\n"; }
     // ...
 };
 
@@ -35,7 +35,7 @@ protected:
 
 class ConcreteCommand : public Command {
 public:
-    ConcreteCommand(Receiver& receiver) : m_receiver(receiver) {}
+    explicit ConcreteCommand(Receiver& receiver) : m_receiver(receiver) {}
 
     void execute() override { m_receiver.action(); }
 
@@ -52,7 +52,7 @@ private:
 
 class Invoker {
 public:
-    Invoker() : m_command(nullptr) {}
+    Invoker()  {}
 
     void setCommand(Command* command) { m_command = command; }
 
@@ -70,7 +70,7 @@ public:
     // ...
 
 private:
-    Command* m_command;  // can be reference if you can but it will need the command on constructor
+    Command* m_command{nullptr};  // can be reference if you can but it will need the command on constructor
     // ...
 };
 

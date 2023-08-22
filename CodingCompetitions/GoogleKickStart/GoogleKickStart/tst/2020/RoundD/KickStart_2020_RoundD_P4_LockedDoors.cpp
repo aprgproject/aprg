@@ -33,7 +33,7 @@ struct UnionFind {
     long long num;
     vector<long long> rs, ps;
     UnionFind() {}
-    UnionFind(long long n) : num(n), rs(n, 1), ps(n, 0) { iota(ps.begin(), ps.end(), 0); }
+    explicit UnionFind(long long n) : num(n), rs(n, 1), ps(n, 0) { iota(ps.begin(), ps.end(), 0); }
     long long find(long long x) { return (x == ps[x] ? x : ps[x] = find(ps[x])); }
     bool same(long long x, long long y) { return find(x) == find(y); }
     void unite(long long x, long long y) {
@@ -81,7 +81,7 @@ void runTestCase(int const testCaseNumber) {
     // check(ls[i]) = false
     // check(rs[i]) = true
     vector<long long> ls(q, -1), rs(q, n - 1);
-    while (1) {
+    while (true) {
         long long flg = 0;
         vector<vector<long long>> G(n);
         for (long long i = 0; i < q; i++) {
@@ -91,7 +91,7 @@ void runTestCase(int const testCaseNumber) {
                 flg = 1;
             }
         }
-        if (!flg) {
+        if (flg == 0) {
             break;
         }
         UnionFind uf(n);

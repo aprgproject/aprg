@@ -5,9 +5,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 class BitmapSnippet {
 public:
@@ -54,7 +52,5 @@ private:
     BitmapConfiguration m_configuration;
     PixelData m_pixelData;
 };
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

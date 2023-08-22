@@ -9,9 +9,7 @@ using namespace alba::mathHelper;
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace std;
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 Limacon::Limacon() : m_aValue(0), m_bValue(0) {}
 
@@ -103,5 +101,4 @@ ostream& operator<<(ostream& out, Limacon const& limacon) {
     return out;
 }
 
-}  // namespace TwoDimensions
 }  // namespace alba

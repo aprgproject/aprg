@@ -4,9 +4,7 @@
 
 #include <map>
 
-namespace alba {
-
-namespace AprgAudio {
+namespace alba::AprgAudio {
 
 class NewSamplesBuilder {
 public:
@@ -18,7 +16,7 @@ public:
     };
     using SamplesMergingDetails = std::map<int, SampleMergingDetails>;
 
-    NewSamplesBuilder(Samples const& oldSamples);
+    explicit NewSamplesBuilder(Samples const& oldSamples);
 
     void putSamplesBasedOnSearchResultAndSamples(
         Samples& samplesToChange, SearchResultsDetails const& details, Samples const& searchSamples,
@@ -33,7 +31,5 @@ private:
 
     Samples const& m_oldSamples;
 };
-
-}  // namespace AprgAudio
 
 }  // namespace alba

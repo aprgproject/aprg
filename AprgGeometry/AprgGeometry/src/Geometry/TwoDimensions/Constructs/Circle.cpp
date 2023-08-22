@@ -10,17 +10,15 @@ using namespace alba::mathHelper;
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace std;
 
-namespace alba {
+namespace alba::TwoDimensions {
 
-namespace TwoDimensions {
-
-Circle::Circle() : m_center(), m_radius(0), m_radiusSquared(0) {}
+Circle::Circle() :  m_radius(0), m_radiusSquared(0) {}
 
 Circle::Circle(Point const& center, double const radius)
     : m_center(center), m_radius(radius), m_radiusSquared(radius * radius) {}
 
 Circle::Circle(double const a, double const d, double const e, double const f)
-    : m_center(), m_radius(0), m_radiusSquared(0) {
+    :  m_radius(0), m_radiusSquared(0) {
     determineAndSaveCenterAndRadiusFromCoefficients(a, d, e, f);
 }
 
@@ -205,5 +203,4 @@ ostream& operator<<(ostream& out, Circle const& circle) {
     return out;
 }
 
-}  // namespace TwoDimensions
-}  // namespace alba
+}  // namespace alba::TwoDimensions

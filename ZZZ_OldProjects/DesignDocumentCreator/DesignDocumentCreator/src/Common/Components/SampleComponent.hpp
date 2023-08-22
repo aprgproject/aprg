@@ -7,7 +7,7 @@ namespace DesignDocumentCreator {
 
 class SampleComponent : public Component {
 public:
-    SampleComponent(ComponentName const componentName);
+    explicit SampleComponent(ComponentName const componentName);
 
 private:
     virtual void handleMessageEvent(GenericMessage const& genericMessage);

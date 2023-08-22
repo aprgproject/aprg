@@ -2,9 +2,9 @@
 
 namespace alba {
 
-FspDetails::FspDetails() : smType(SmType::MSM), isMasterTcom(false), address(0), dspAddresses() {}
+FspDetails::FspDetails()  {}
 
-Fsp::Fsp() : m_fspDetails() {}
+Fsp::Fsp()  {}
 
 Fsp::Fsp(FspDetails const& fspDetails) : m_fspDetails(fspDetails) {}
 

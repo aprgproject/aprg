@@ -11,16 +11,16 @@ enum class SmType { MSM, ESM, BOTH_SM };
 
 struct FspDetails {
     FspDetails();
-    SmType smType;
-    bool isMasterTcom;
-    unsigned int address;
+    SmType smType{SmType::MSM};
+    bool isMasterTcom{false};
+    unsigned int address{0};
     DspAddresses dspAddresses;
 };
 
 class Fsp {
 public:
     Fsp();
-    Fsp(FspDetails const& fspDetails);
+    explicit Fsp(FspDetails const& fspDetails);
     SmType getSmType() const;
     bool isMasterTcom() const;
     unsigned int getAddress() const;

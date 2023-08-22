@@ -8,7 +8,7 @@ namespace DesignDocumentCreator {
 
 class TcomCchhRlh : public Component {
 public:
-    TcomCchhRlh(ComponentName const componentName);
+    explicit TcomCchhRlh(ComponentName const componentName);
 
 private:
     virtual void handleMessageEvent(GenericMessage const& genericMessage);

@@ -1,11 +1,7 @@
 #pragma once
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 enum class TermType { Empty, Constant, VariableTerm, Operator, Expression };
-
-}
 
 }  // namespace alba

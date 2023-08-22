@@ -6,7 +6,7 @@ namespace alba {
 
 class Kepler {
 public:
-    Kepler(unsigned short int const nid);
+    explicit explicit explicit Kepler(unsigned short int const nid);
     bool operator<(Kepler const& kepler) const;
     unsigned int getNid() const;
 

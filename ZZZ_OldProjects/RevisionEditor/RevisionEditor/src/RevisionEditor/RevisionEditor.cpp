@@ -25,11 +25,7 @@ std::string const END_ENTRY_PATTERN = "}])";
 namespace alba {
 
 RevisionEditor::RevisionEditor()
-    : m_originalAverageCommitPerDay{},
-      m_numberInstancesOfEachDayCommitCount{},
-      m_numberOfCommitsPerHour{},
-      m_revisionEntries(),
-      m_revisionRandomizer(),
+    : 
       m_sixtyRandomizer(1, 59) {}
 
 void RevisionEditor::setRevisionDataFromFile() {
@@ -125,7 +121,7 @@ void RevisionEditor::saveNewRevisionHistory() const {
     }
 }
 
-RevisionEditor::RevisionEntry RevisionEditor::getRevisionEntry(string const& line) const {
+RevisionEditor::RevisionEntry RevisionEditor::getRevisionEntry(string const& line) {
     int index = 0;
     string revisionHash = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
     index = line.find(END_ENTRY_PATTERN, index) + 3;

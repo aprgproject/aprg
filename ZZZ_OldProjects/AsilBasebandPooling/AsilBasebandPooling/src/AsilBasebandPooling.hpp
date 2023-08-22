@@ -26,7 +26,7 @@ public:
     AsilBasebandPooling(LcgInitializerList const& lcgs, BasebandCardInitializerList const& basebandCards);
     BasebandPoolingResult performBasebandPoolingForAsil() const;
     bool areLcgAndBasebandCardsValid() const;
-    bool canMultipleLcgsBePutOnBasebandCard(BasebandCard const& basebandCard) const;
+    static bool canMultipleLcgsBePutOnBasebandCard(BasebandCard const& basebandCard) ;
     unsigned int getNumberBasebandCardsWithMultipleLcgs() const;
     static unsigned int getMaxNumberOfLcgsInBasebandCard(BasebandCard const& basebandCard);
     unsigned int getMaxNumberOfLcgsInAllBasebandCards() const;
@@ -35,12 +35,12 @@ public:
         unsigned int const numberOfBasebandCardsWithMultipleLcgs) const;
     static void sortAndPrioritizeBasebandCards(VectorOfBasebandCards& basebandCardsWithPrioritization);
     static void sortAndPrioritizeLcgs(VectorOfLcgs& lcgsInPriorityOrder);
-    void assignBasebandCardsWithOneLcg(
+    static void assignBasebandCardsWithOneLcg(
         KeplerNidToLcgMap& poolingMap, VectorOfLcgs& lcgsInPriorityOrder,
-        SetOfBasebandCards const& basebandCardsWithOneLcg) const;
-    void assignBasebandCardsWithMultipleLcgs(
+        SetOfBasebandCards const& basebandCardsWithOneLcg) ;
+    static void assignBasebandCardsWithMultipleLcgs(
         KeplerNidToLcgMap& poolingMap, VectorOfLcgs& lcgsInPriorityOrder,
-        SetOfBasebandCards const& basebandCardsWithMultipleLcgs) const;
+        SetOfBasebandCards const& basebandCardsWithMultipleLcgs) ;
 
 private:
     SetOfLcgs m_lcgs;

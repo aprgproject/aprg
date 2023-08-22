@@ -21,7 +21,7 @@ public:
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
     using TraverseFunction = std::function<void(Vertex)>;
 
-    BaseFordFulkerson(SinkSourceFlowNetworkType const& flowNetwork)
+    explicit BaseFordFulkerson(SinkSourceFlowNetworkType const& flowNetwork)
         : m_flowNetwork(flowNetwork) {}
 
     virtual ~BaseFordFulkerson() = default;  // virtual destructor because of virtual functions (vtable exists)

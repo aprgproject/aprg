@@ -5,11 +5,9 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
+namespace alba::TwoDimensions {
 
-namespace TwoDimensions {
-
-Triangle::Triangle() : TrianglePolygonParent() {}
+Triangle::Triangle()  {}
 
 Triangle::Triangle(Point const& first, Point const& second, Point const& third)
     : TrianglePolygonParent{first, second, third} {}
@@ -33,5 +31,4 @@ ostream& operator<<(ostream& out, Triangle const& triangle) {
     return out;
 }
 
-}  // namespace TwoDimensions
 }  // namespace alba

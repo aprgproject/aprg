@@ -6,9 +6,7 @@
 #include <cstdint>
 #include <string>
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 enum class CompressedMethodType {
     RGB,
@@ -98,7 +96,5 @@ private:
 
 bool areBitmapConfigurationsCompatibleForChangingPixelData(
     BitmapConfiguration const& configuration1, BitmapConfiguration const& configuration2);
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

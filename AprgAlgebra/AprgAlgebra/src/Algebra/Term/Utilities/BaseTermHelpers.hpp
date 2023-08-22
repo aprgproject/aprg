@@ -3,9 +3,7 @@
 #include <Algebra/Term/TermTypes/BaseTermPointers.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 BaseTermUniquePointer createBasePointer(BaseTerm const& baseTerm);
 BaseTermUniquePointer createBasePointer(BaseTerm&& baseTerm);
@@ -19,7 +17,5 @@ BaseTerm const& getBaseTermConstReferenceFromTerm(Term const& term);
 BaseTerm const& getBaseTermConstReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer);
 BaseTerm& getBaseTermReferenceFromTerm(Term& term);
 BaseTerm& getBaseTermReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer);
-
-}  // namespace algebra
 
 }  // namespace alba

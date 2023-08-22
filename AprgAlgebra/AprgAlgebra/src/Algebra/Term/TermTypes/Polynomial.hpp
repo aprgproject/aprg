@@ -6,14 +6,12 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class Polynomial : public BaseTermData {
 public:
     Polynomial();
-    Polynomial(Monomials const& monomials);
+    explicit Polynomial(Monomials const& monomials);
     Polynomial(std::initializer_list<Monomial> const& monomials);
 
     // rule of zero
@@ -53,7 +51,5 @@ private:
 };
 
 using Polynomials = std::vector<Polynomial>;
-
-}  // namespace algebra
 
 }  // namespace alba

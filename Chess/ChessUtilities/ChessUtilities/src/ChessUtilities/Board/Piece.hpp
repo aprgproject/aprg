@@ -7,9 +7,7 @@
 #include <cstdint>
 #include <vector>
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 class Piece {
 public:
@@ -20,8 +18,8 @@ public:
     static uint8_t getDataFromColorAndType(PieceColor const color, PieceType const type);
 
     Piece();
-    Piece(uint8_t const data);
-    Piece(PieceColorAndType const colorAndType);
+    explicit Piece(uint8_t const data);
+    explicit Piece(PieceColorAndType const colorAndType);
     Piece(PieceColor const color, PieceType const type);
 
     bool operator==(Piece const& piece) const;
@@ -39,7 +37,5 @@ private:
 };
 
 using Pieces = std::vector<Piece>;
-
-}  // namespace chess
 
 }  // namespace alba

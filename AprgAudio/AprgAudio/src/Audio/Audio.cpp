@@ -8,9 +8,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace AprgAudio {
+namespace alba::AprgAudio {
 
 // Pre-defined 10-byte representations of common sample rates
 
@@ -243,7 +241,7 @@ bool Audio<T>::decodeWaveFile(vector<uint8_t>& fileDataBytes) {
     }
 
     // check header data is consistent
-    if ((numBytesPerSecond != numChannels * sampleRate * bitDepth) / 8 ||
+    if (((static_cast<int>(numBytesPerSecond != numChannels * sampleRate * bitDepth) / 8) != 0) ||
         (numBytesPerBlock != (numChannels * numBytesPerSample))) {
         cout << "ERROR: the header data in this WAV file seems to be inconsistent\n";
         return false;
@@ -283,7 +281,7 @@ bool Audio<T>::decodeWaveFile(vector<uint8_t>& fileDataBytes) {
                 sampleAsInt = (fileDataBytes[sampleIndex + 2] << 16) | (fileDataBytes[sampleIndex + 1] << 8) |
                               fileDataBytes[sampleIndex];
 
-                if (sampleAsInt & 0x800000) {  //  if the 24th bit is set, this is a negative number in 24-bit world
+                if ((sampleAsInt & 0x800000) != 0) {  //  if the 24th bit is set, this is a negative number in 24-bit world
                     sampleAsInt = sampleAsInt | ~0xFFFFFF;  // so make sure sign is extended to the 32 bit float
                 }
 
@@ -386,7 +384,7 @@ bool Audio<T>::decodeAiffFile(vector<uint8_t>& fileDataBytes) {
                 sampleAsInt = (fileDataBytes[sampleIndex] << 16) | (fileDataBytes[sampleIndex + 1] << 8) |
                               fileDataBytes[sampleIndex + 2];
 
-                if (sampleAsInt & 0x800000) {  //  if the 24th bit is set, this is a negative number in 24-bit world
+                if ((sampleAsInt & 0x800000) != 0) {  //  if the 24th bit is set, this is a negative number in 24-bit world
                     sampleAsInt = sampleAsInt | ~0xFFFFFF;  // so make sure sign is extended to the 32 bit float
                 }
 
@@ -753,6 +751,4 @@ T Audio<T>::clamp(T value, T minValue, T maxValue) {
 template class Audio<float>;
 template class Audio<double>;
 
-}  // namespace AprgAudio
-
-}  // namespace alba
+}  // namespace alba::AprgAudio

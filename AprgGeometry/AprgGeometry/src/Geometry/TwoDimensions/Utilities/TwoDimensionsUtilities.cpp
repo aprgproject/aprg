@@ -11,11 +11,7 @@
 using namespace alba::containerHelper;
 using namespace alba::mathHelper;
 using namespace std;
-namespace alba {
-
-namespace TwoDimensions {
-
-namespace twoDimensionsUtilities {
+namespace alba::TwoDimensions::twoDimensionsUtilities {
 
 namespace {
 bool isCollinearPointInLineSegment(LineSegment const& segment1, Point const& point) {
@@ -840,6 +836,4 @@ void traverseCircleAreaBetweenTwoRadius(
     }
 }
 
-}  // namespace twoDimensionsUtilities
-}  // namespace TwoDimensions
 }  // namespace alba

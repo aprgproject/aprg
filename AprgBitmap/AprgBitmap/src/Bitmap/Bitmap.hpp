@@ -6,13 +6,11 @@
 
 #include <string>
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 class Bitmap {
 public:
-    Bitmap(std::string const& path);
+    explicit Bitmap(std::string const& path);
 
     BitmapConfiguration getConfiguration() const;
     BitmapSnippet createColorFilledSnippetWithSizeOfWholeBitmap(uint8_t const colorByte) const;  // implement UT
@@ -30,7 +28,5 @@ private:
     static void adjustToTargetLength(int& low, int& high, int const targetLength, int const maxLength);
     BitmapConfiguration m_configuration;
 };
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

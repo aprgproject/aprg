@@ -4,20 +4,10 @@ using namespace std;
 
 namespace alba {
 DspDetails::DspDetails()
-    : address(0),
-      lcgId(0),
-      numberOfDchUsers(0),
-      numberOfPreservedHsupaCfs(0),
-      numberOfDynamicallyAllocatedHsupaCfs(0),
-      numberOfHsRachCfs(0),
-      orderCountOfCfAllocation(0),
-      dliPool(0),
-      hasEmergencyCalls(false),
-      isNbicAllocated(false),
-      mode(DspMode::NyquistDedicatedChannelDevice),
-      nyquistType(NyquistType::Nyquist) {}
+    
+      {}
 
-Dsp::Dsp() : m_dspDetails() {}
+Dsp::Dsp()  {}
 
 Dsp::Dsp(DspDetails const& dspDetails) : m_dspDetails(dspDetails) {}
 

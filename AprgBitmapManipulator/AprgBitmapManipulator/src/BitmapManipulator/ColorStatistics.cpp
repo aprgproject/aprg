@@ -8,9 +8,7 @@
 using namespace alba::AprgBitmap::ColorUtilities;
 using namespace std;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 void gatherAndSaveColorStatistics(string const& bitmapPath) {
     AlbaLocalPathHandler bitmapPathHandler(bitmapPath);
@@ -114,7 +112,5 @@ void AprgColorStatistics::saveColorStatistics(string const& path) {
     statisticsFileStream << "Luma 709 Mean: " << luma709Statistics.getMean()
                          << " StdDev: " << luma709Statistics.getSampleStandardDeviation() << "\n";
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

@@ -49,8 +49,8 @@ private:
     void setLcgIdOfDsps(LcgIds const& lcgIds);
     static NyquistType computeNyquistTypeBasedOnDspAddress(unsigned int const dspAddress);
     static SmType getSmTypeBasedOnAddress(unsigned int const fspAddress);
-    unsigned int m_sharedLcgId;
-    unsigned int m_tcomFspAddress;
+    unsigned int m_sharedLcgId{0};
+    unsigned int m_tcomFspAddress{0};
     AddressToDspMap m_dspAddressToDspMap;
     AddressToFspMap m_fspAddressToFspMap;
 };

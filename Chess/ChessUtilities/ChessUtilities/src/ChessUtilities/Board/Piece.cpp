@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 PieceColor Piece::extractColor(uint8_t const data) {
     if (PieceType::Empty == extractType(data)) {
@@ -53,7 +51,5 @@ PieceColorAndType Piece::getColorAndType() const { return extractColorAndType(m_
 uint8_t Piece::getData() const { return m_data; }
 
 char Piece::getFenCharacter() const { return convertToFenCharacter(extractType(m_data), extractColor(m_data)); }
-
-}  // namespace chess
 
 }  // namespace alba

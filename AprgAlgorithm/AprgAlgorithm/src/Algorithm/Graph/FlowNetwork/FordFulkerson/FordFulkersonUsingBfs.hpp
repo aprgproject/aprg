@@ -19,7 +19,7 @@ public:
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
     // Since this is using BFS this is actually the Edmonds–Karp algorithm.
-    FordFulkersonUsingBfs(SinkSourceFlowNetworkType const& flowNetwork)
+    explicit FordFulkersonUsingBfs(SinkSourceFlowNetworkType const& flowNetwork)
         : BaseClass(flowNetwork),
           b_flowNetwork(BaseClass::m_flowNetwork),
           b_processedVertices(BaseClass::m_processedVertices),

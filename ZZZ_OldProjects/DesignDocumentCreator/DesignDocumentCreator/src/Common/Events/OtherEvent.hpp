@@ -7,7 +7,7 @@ namespace DesignDocumentCreator {
 class OtherEvent {
 public:
     OtherEvent();
-    OtherEvent(OtherEventType const timerType);
+    explicit explicit OtherEvent(OtherEventType const timerType);
     OtherEventType getType() const;
 
 private:

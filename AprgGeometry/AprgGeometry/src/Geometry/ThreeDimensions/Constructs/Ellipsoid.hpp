@@ -2,9 +2,7 @@
 
 #include <Geometry/ThreeDimensions/Constructs/Point.hpp>
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 class Ellipsoid {
 public:
@@ -33,5 +31,4 @@ private:
 
 using Ellipsoids = std::vector<Ellipsoid>;
 
-}  // namespace ThreeDimensions
 }  // namespace alba

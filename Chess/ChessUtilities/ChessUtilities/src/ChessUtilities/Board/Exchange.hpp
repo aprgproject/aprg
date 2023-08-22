@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 class Exchange {
 public:
@@ -18,7 +16,5 @@ private:
     int m_value;
     int m_count;
 };
-
-}  // namespace chess
 
 }  // namespace alba

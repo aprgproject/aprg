@@ -5,9 +5,7 @@
 #include <CommonTypes.hpp>
 #include <Database.hpp>
 
-namespace alba {
-
-namespace SackFileReaderStateMachineNamespace {
+namespace alba::SackFileReaderStateMachineNamespace {
 
 enum class State {
     Idle,
@@ -221,7 +219,5 @@ private:
     ParameterDescriptionType m_parameterDescriptionType;
     Database& m_database;
 };
-
-}  // namespace SackFileReaderStateMachineNamespace
 
 }  // namespace alba

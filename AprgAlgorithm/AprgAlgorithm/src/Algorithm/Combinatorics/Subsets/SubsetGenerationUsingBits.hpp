@@ -47,4 +47,4 @@ public:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

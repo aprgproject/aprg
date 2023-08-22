@@ -5,9 +5,7 @@
 #include <map>
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 using ConditionFunctionForTermsWithDetails = std::function<bool(TermWithDetails const&)>;
 using VariableToValueMap = std::map<std::string, AlbaNumber>;
@@ -25,7 +23,5 @@ Terms retrieveSubExpressionsAndSubFunctions(Term const& term);
 Terms retrieveSubTerms(Term const& term);
 TermsWithDetails retrieveTermsWithDetailsThatSatisfiesCondition(
     TermsWithDetails const& termsWithDetails, ConditionFunctionForTermsWithDetails const& conditionFunction);
-
-}  // namespace algebra
 
 }  // namespace alba

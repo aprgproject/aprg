@@ -45,7 +45,7 @@ public:
 
 class RefinedAbstraction : public Abstraction {
 public:
-    RefinedAbstraction(std::unique_ptr<Implementor> implementor) : m_implementor(std::move(implementor)) {}
+    explicit RefinedAbstraction(std::unique_ptr<Implementor> implementor) : m_implementor(std::move(implementor)) {}
 
     void operation() override { m_implementor->action(); }
     // ...

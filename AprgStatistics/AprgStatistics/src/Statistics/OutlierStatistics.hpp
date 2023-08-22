@@ -12,7 +12,7 @@ public:
     using Samples = std::vector<Sample>;
     using LocalStatistics = DataStatistics<DIMENSIONS>;
 
-    OutlierStatistics(Samples const& samples) : DataStatistics<DIMENSIONS>(samples) {}
+    explicit OutlierStatistics(Samples const& samples) : DataStatistics<DIMENSIONS>(samples) {}
 
     bool isAnOutlierBasedOnChauvenetCriterion(Sample const& sample) {
         LocalStatistics::calculateMeanIfNeeded();

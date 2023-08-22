@@ -16,7 +16,7 @@ public:
     using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
     using MaximumMatchingsWithVertex = MaximumMatchings<Vertex>;
 
-    MinimumNodeCover(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph), m_maximumMatchings(m_graph) {}
+    explicit MinimumNodeCover(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph), m_maximumMatchings(m_graph) {}
 
     int getMinimumNodeCoverSize(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         // Using Konig's theorem:
@@ -43,4 +43,4 @@ private:
     MaximumMatchingsWithVertex m_maximumMatchings;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -8,7 +8,7 @@ namespace DesignDocumentCreator {
 
 class Trsw : public Component {
 public:
-    Trsw(ComponentName const componentName);
+    explicit Trsw(ComponentName const componentName);
 
 private:
     virtual void handleMessageEvent(GenericMessage const& genericMessage);

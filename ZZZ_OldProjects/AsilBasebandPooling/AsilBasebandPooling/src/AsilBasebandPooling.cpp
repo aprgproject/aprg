@@ -37,7 +37,7 @@ bool AsilBasebandPooling::areLcgAndBasebandCardsValid() const {
     return getMaxNumberOfLcgsInAllBasebandCards() >= m_lcgs.size();
 }
 
-bool AsilBasebandPooling::canMultipleLcgsBePutOnBasebandCard(BasebandCard const& basebandCard) const {
+bool AsilBasebandPooling::canMultipleLcgsBePutOnBasebandCard(BasebandCard const& basebandCard) {
     return getMaxNumberOfLcgsInBasebandCard(basebandCard) > 1;
 }
 
@@ -97,7 +97,7 @@ void AsilBasebandPooling::sortAndPrioritizeLcgs(VectorOfLcgs& lcgsInPriorityOrde
 
 void AsilBasebandPooling::assignBasebandCardsWithOneLcg(
     KeplerNidToLcgMap& poolingMap, VectorOfLcgs& lcgsInPriorityOrder,
-    SetOfBasebandCards const& basebandCardsWithOneLcg) const {
+    SetOfBasebandCards const& basebandCardsWithOneLcg) {
     VectorOfBasebandCards basebandCardsWithPrioritization;
     copy(
         basebandCardsWithOneLcg.cbegin(), basebandCardsWithOneLcg.cend(),
@@ -120,7 +120,7 @@ void AsilBasebandPooling::assignBasebandCardsWithOneLcg(
 
 void AsilBasebandPooling::assignBasebandCardsWithMultipleLcgs(
     KeplerNidToLcgMap& poolingMap, VectorOfLcgs& lcgsInPriorityOrder,
-    SetOfBasebandCards const& basebandCardsWithMultipleLcgs) const {
+    SetOfBasebandCards const& basebandCardsWithMultipleLcgs) {
     VectorOfBasebandCards basebandCardsWithPrioritization;
     copy(
         basebandCardsWithMultipleLcgs.cbegin(), basebandCardsWithMultipleLcgs.cend(),

@@ -9,18 +9,17 @@ using namespace std;
 namespace alba {
 
 SelectionDspResult::SelectionDspResult()
-    : isSelectionSuccessful(false), isNbicAllocated(false), address(0), dliPool(0) {}
+     {}
 
 SelectionDspResultForCcdAndMcd::SelectionDspResultForCcdAndMcd()
-    : isSelectionSuccessful(false), isNbicAllocated(false), ccdAddress(0), mcdAddress(0), dliPool(0) {}
+     {}
 
 FspPairDetails::FspPairDetails(
     unsigned int const firstFspTemp, unsigned int const secondFspTemp, unsigned int const priorityTemp)
     : firstFspAddress(firstFspTemp), secondFspAddress(secondFspTemp), priority(priorityTemp) {}
 
 Lrm::Lrm(HardwareConfiguration& hardwareConfiguration)
-    : m_isHibernationCommissioned(false),
-      m_maxAmountOfNonDcdsPerFsp(6),
+    : 
       m_hardwareConfigurationReference(hardwareConfiguration),
       m_addressToDspMap(m_hardwareConfigurationReference.getAddressToDspMapReference()),
       m_addressToFspMap(m_hardwareConfigurationReference.getAddressToFspMapReference()) {}
@@ -34,7 +33,7 @@ void Lrm::setMaxAmountOfNonDcdsPerFsp(unsigned int const maxAmountOfNonDcdsPerFs
 }
 
 void Lrm::setNumberOfUnallocatedPicPoolsPerLcg(unsigned int const lcgId, unsigned int const numberOfPicPools) {
-    m_lcgToUnallocatedPicPools[lcgId] = numberOfPicPools;
+    m_lcgToUnallocatedPicPools[lcgId] = (numberOfPicPools != 0u);
 }
 
 void Lrm::clearLcgToUnallocatedPicPools(unsigned int const lcgId) { m_lcgToUnallocatedPicPools.erase(lcgId); }
@@ -1434,7 +1433,7 @@ void Lrm::setAsNbicIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const 
 }
 
 unsigned int Lrm::getNumberOfUnallocatedPicPoolsForLcg(unsigned int const lcgId) const {
-    return m_lcgToUnallocatedPicPools.count(lcgId) > 0 ? m_lcgToUnallocatedPicPools.at(lcgId) : 0;
+    return m_lcgToUnallocatedPicPools.count(lcgId) > 0 ? static_cast<int>(m_lcgToUnallocatedPicPools.at(lcgId)) : 0;
 }
 
 }  // namespace alba

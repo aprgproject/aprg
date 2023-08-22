@@ -39,11 +39,11 @@ public:
         unsigned int const mediumLoadThreshold, unsigned int const highLoadThreshold);
 
 private:
-    unsigned int m_consecutiveLowerLoadStateCount;
-    unsigned int m_dchLoadFactor;
-    unsigned int m_hsdpaAndHsfachLoadFactor;
-    unsigned int m_mediumLoadThreshold;
-    unsigned int m_highLoadThreshold;
+    unsigned int m_consecutiveLowerLoadStateCount{0};
+    unsigned int m_dchLoadFactor{0};
+    unsigned int m_hsdpaAndHsfachLoadFactor{0};
+    unsigned int m_mediumLoadThreshold{0};
+    unsigned int m_highLoadThreshold{0};
 };
 
 }  // namespace alba

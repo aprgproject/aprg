@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 // Basis:
 //     00 01 02 03 04 05 06 07
@@ -118,7 +116,5 @@ bool operator==(BoardValue const& bv1, BoardValue const& bv2) {
     }
     return true;
 }
-
-}  // namespace chess
 
 }  // namespace alba

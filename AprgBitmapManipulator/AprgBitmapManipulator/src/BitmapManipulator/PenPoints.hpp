@@ -4,9 +4,7 @@
 
 #include <set>
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 class PenPoints {
 public:
@@ -23,7 +21,5 @@ public:
 private:
     PenPointsSet m_penPoints;
 };
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

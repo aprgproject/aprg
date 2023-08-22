@@ -20,7 +20,7 @@ public:
 
 class SharedConcreteFlyweight : public Flyweight {
 public:
-    SharedConcreteFlyweight(int& intrinsicState) : m_sharedIntrinsicState(intrinsicState) {}
+    explicit SharedConcreteFlyweight(int& intrinsicState) : m_sharedIntrinsicState(intrinsicState) {}
 
     void operation(int const extrinsicState) override {
         std::cout << "Concrete Flyweight with extrinsicState " << extrinsicState
@@ -38,7 +38,7 @@ private:
 
 class UnsharedConcreteFlyweight : public Flyweight {
 public:
-    UnsharedConcreteFlyweight(int const intrinsicState) : m_unsharedIntrinsicState(intrinsicState) {}
+    explicit UnsharedConcreteFlyweight(int const intrinsicState) : m_unsharedIntrinsicState(intrinsicState) {}
 
     void operation(int const extrinsicState) override {
         std::cout << "Unshared Flyweight with extrinsicState:" << extrinsicState
@@ -61,12 +61,11 @@ public:
         auto it = m_keyToSharedValueMap.find(key);
         if (it != m_keyToSharedValueMap.end()) {
             return std::make_unique<SharedConcreteFlyweight>(it->second);
-        } else {
-            auto iteratorAndFlagPair = m_keyToSharedValueMap.emplace(key, key);  // use key as value
+        }             auto iteratorAndFlagPair = m_keyToSharedValueMap.emplace(key, key);  // use key as value
             return std::make_unique<SharedConcreteFlyweight>(iteratorAndFlagPair.first->second);
-        }
+       
     }
-    std::unique_ptr<Flyweight> getUnsharedFlyweight(int const value) {
+    static std::unique_ptr<Flyweight> getUnsharedFlyweight(int const value) {
         return std::make_unique<UnsharedConcreteFlyweight>(value);
     }
     // ...

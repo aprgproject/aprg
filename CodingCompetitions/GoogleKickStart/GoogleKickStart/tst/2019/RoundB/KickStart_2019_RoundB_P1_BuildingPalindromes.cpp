@@ -45,7 +45,7 @@ bool canPalindrome(string const& blocksString, Question const& question) {
     } else {
         return __builtin_popcount(getPalindromeValue(blocksString, question)) == 1;
     }*/
-    return 0;
+    return false;
 }
 
 void runTestCase(int const testCaseNumber) {

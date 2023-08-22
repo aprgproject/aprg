@@ -7,15 +7,13 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 class Expression : public BaseTermData {
 public:
     Expression();
-    Expression(BaseTerm const& baseTerm);
-    Expression(BaseTerm&& baseTerm);
+    explicit Expression(BaseTerm const& baseTerm);
+    explicit Expression(BaseTerm&& baseTerm);
     Expression(OperatorLevel const operatorLevel, WrappedTerms const& wrappedTerms);
     Expression(OperatorLevel const operatorLevel, WrappedTerms&& wrappedTerms);
 
@@ -76,6 +74,4 @@ private:
 
 using Expressions = std::vector<Expression>;
 
-}  // namespace booleanAlgebra
-
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

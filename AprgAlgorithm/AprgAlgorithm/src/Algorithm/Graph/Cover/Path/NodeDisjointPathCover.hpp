@@ -31,7 +31,7 @@ public:
         SinkSourceFlowNetwork<VertexWithLeftRight, int, DirectedGraphWithListOfEdges<VertexWithLeftRight>>;
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
 
-    NodeDisjointPathCover(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
+    explicit NodeDisjointPathCover(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
 
     Paths getNodeDisjointPathCover(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         Edges edges(getEdgesOfNodeDisjointPathCover(newSourceVertex, newSinkVertex));
@@ -135,4 +135,4 @@ private:
     BaseDirectedGraphWithVertex const& m_graph;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

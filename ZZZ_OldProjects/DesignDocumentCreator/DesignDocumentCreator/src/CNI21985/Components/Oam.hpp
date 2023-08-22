@@ -7,7 +7,7 @@ namespace DesignDocumentCreator {
 
 class Oam : public Component {
 public:
-    Oam(ComponentName const componentName);
+    explicit Oam(ComponentName const componentName);
 
 private:
     void handleHwConfigurationMessageResponse(GenericMessage const& genericMessage) const;

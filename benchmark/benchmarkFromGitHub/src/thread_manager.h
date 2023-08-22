@@ -6,8 +6,7 @@
 #include "benchmark/benchmark.h"
 #include "mutex.h"
 
-namespace benchmark {
-namespace internal {
+namespace benchmark::internal {
 
 class ThreadManager {
  public:
@@ -58,7 +57,6 @@ class ThreadManager {
   Condition end_condition_;
 };
 
-}  // namespace internal
 }  // namespace benchmark
 
 #endif  // BENCHMARK_THREAD_MANAGER_H

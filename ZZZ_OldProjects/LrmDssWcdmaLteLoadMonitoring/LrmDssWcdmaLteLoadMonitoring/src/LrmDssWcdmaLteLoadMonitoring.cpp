@@ -3,11 +3,8 @@
 namespace alba {
 
 LrmDssWcdmaLteLoadMonitoring::LrmDssWcdmaLteLoadMonitoring()
-    : m_consecutiveLowerLoadStateCount(0),
-      m_dchLoadFactor(0),
-      m_hsdpaAndHsfachLoadFactor(0),
-      m_mediumLoadThreshold(0),
-      m_highLoadThreshold(0) {}
+    
+      {}
 
 unsigned int LrmDssWcdmaLteLoadMonitoring::getConsecutiveLowerLoadStateCount() const {
     return m_consecutiveLowerLoadStateCount;

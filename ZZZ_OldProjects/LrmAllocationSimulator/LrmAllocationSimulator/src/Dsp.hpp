@@ -17,24 +17,24 @@ enum class NyquistType { Nyquist, TurboNyquist };
 
 struct DspDetails {
     DspDetails();
-    unsigned int address;
-    unsigned int lcgId;
-    unsigned int numberOfDchUsers;
-    unsigned int numberOfPreservedHsupaCfs;
-    unsigned int numberOfDynamicallyAllocatedHsupaCfs;
-    unsigned int numberOfHsRachCfs;
-    unsigned int orderCountOfCfAllocation;
-    unsigned int dliPool;
-    bool hasEmergencyCalls;
-    bool isNbicAllocated;
-    DspMode mode;
-    NyquistType nyquistType;
+    unsigned int address{0};
+    unsigned int lcgId{0};
+    unsigned int numberOfDchUsers{0};
+    unsigned int numberOfPreservedHsupaCfs{0};
+    unsigned int numberOfDynamicallyAllocatedHsupaCfs{0};
+    unsigned int numberOfHsRachCfs{0};
+    unsigned int orderCountOfCfAllocation{0};
+    unsigned int dliPool{0};
+    bool hasEmergencyCalls{false};
+    bool isNbicAllocated{false};
+    DspMode mode{DspMode::NyquistDedicatedChanneexplicit lDevice};
+    NyquistType nyquistType{NyquistType::Nyquist};
 };
 
 class Dsp {
 public:
     Dsp();
-    Dsp(DspDetails const& dspDetails);
+    tails const& dspDetails);
     DspDetails& getDspDetailsReference();
     void setMode(DspMode const mode);
     void setNumberOfUsers(unsigned int const numberOfUsers);

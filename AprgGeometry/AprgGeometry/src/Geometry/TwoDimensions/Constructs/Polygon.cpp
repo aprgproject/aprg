@@ -6,9 +6,7 @@ using namespace alba::mathHelper;
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace std;
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 template <int numberOfVertices>
 Polygon<numberOfVertices>::Polygon() {}
@@ -126,5 +124,4 @@ void Polygon<numberOfVertices>::getPointsFromVerticesWithoutLastPoint(
 template class Polygon<3>;  // clang needs this on implementation file
 template class Polygon<4>;  // clang needs this on implementation file
 
-}  // namespace TwoDimensions
 }  // namespace alba

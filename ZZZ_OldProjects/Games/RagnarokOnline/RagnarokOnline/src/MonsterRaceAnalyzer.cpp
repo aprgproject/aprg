@@ -98,7 +98,7 @@ void MonsterRaceAnalyzer::readPreviousRaceDatabase() {
 }
 void MonsterRaceAnalyzer::retrieveBestWinners(
     RaceConfiguration& bestConfiguration, BestWinners& queueOfWinners, PreviousRaces const& previousRaces,
-    RaceConfiguration const& currentConfiguration) const {
+    RaceConfiguration const& currentConfiguration) {
     int lowestDiscrepancy = INT_MAX;
     for (auto const& race : previousRaces) {
         int discrepancy = getDiscrepancy(race.raceConfiguration, currentConfiguration);

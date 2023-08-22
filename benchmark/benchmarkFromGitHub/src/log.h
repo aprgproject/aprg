@@ -6,8 +6,7 @@
 
 #include "benchmark/benchmark.h"
 
-namespace benchmark {
-namespace internal {
+namespace benchmark::internal {
 
 typedef std::basic_ostream<char>&(EndLType)(std::basic_ostream<char>&);
 
@@ -21,7 +20,7 @@ class LogType {
   friend LogType& operator<<(LogType&, EndLType*);
 
  private:
-  LogType(std::ostream* out) : out_(out) {}
+  explicit LogType(std::ostream* out) : out_(out) {}
   std::ostream* out_;
   BENCHMARK_DISALLOW_COPY_AND_ASSIGN(LogType);
 };
@@ -35,7 +34,7 @@ LogType& operator<<(LogType& log, Tp const& value) {
 }
 
 inline LogType& operator<<(LogType& log, EndLType* m) {
-  if (log.out_) {
+  if (log.out_ != nullptr) {
     *log.out_ << m;
   }
   return log;
@@ -63,7 +62,6 @@ inline LogType& GetLogInstanceForLevel(int level) {
   return GetNullLogInstance();
 }
 
-}  // end namespace internal
 }  // end namespace benchmark
 
 // clang-format off

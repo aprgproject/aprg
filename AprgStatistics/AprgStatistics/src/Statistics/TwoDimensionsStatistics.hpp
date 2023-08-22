@@ -6,9 +6,7 @@
 #include <map>
 #include <unordered_map>
 
-namespace alba {
-
-namespace TwoDimensionsStatistics {
+namespace alba::TwoDimensionsStatistics {
 
 using Sample = DataSample<2>;
 using Statistics = DataStatistics<2>;
@@ -28,6 +26,4 @@ LineModel calculateLineModelUsingLeastSquares(Samples const& samples);
 double calculateSquareError(Sample const& sample, LineModel const& lineModel);
 ValueToSampleMultimap getSquareErrorToSampleMultimap(Samples& samples, LineModel const& lineModel);
 
-}  // namespace TwoDimensionsStatistics
-
-}  // namespace alba
+}  // namespace alba::TwoDimensionsStatistics

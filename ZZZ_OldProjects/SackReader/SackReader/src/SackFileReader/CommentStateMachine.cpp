@@ -2,9 +2,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace CommentStateMachineNamespace {
+namespace alba::CommentStateMachineNamespace {
 
 CommentStateMachine::CommentStateMachine() : AlbaBaseStateMachine(State::NotInComment) {}
 
@@ -75,7 +73,5 @@ void CommentStateMachine::processStateInCommentAsterisk(InputToken const& inputT
         saveNextState(State::InCommentNotInAsterisk);
     }
 }
-
-}  // namespace CommentStateMachineNamespace
 
 }  // namespace alba

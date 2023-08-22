@@ -26,7 +26,7 @@ public:
         }
     }
 
-    void tellSomething() {
+    static void tellSomething() {
         std::cout << "This is Singleton.\n";
         // ...
     }

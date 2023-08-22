@@ -3,11 +3,9 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
+namespace alba::ThreeDimensions {
 
-namespace ThreeDimensions {
-
-Ellipsoid::Ellipsoid() : m_center(), m_aValue(0), m_bValue(0), m_cValue(0) {}
+Ellipsoid::Ellipsoid() :  m_aValue(0), m_bValue(0), m_cValue(0) {}
 
 Ellipsoid::Ellipsoid(
     Point const& center, double const aCoefficient, double const bCoefficient, double const cCoefficient)
@@ -59,6 +57,4 @@ ostream& operator<<(ostream& out, Ellipsoid const& ellipsoid) {
     return out;
 }
 
-}  // namespace ThreeDimensions
-
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

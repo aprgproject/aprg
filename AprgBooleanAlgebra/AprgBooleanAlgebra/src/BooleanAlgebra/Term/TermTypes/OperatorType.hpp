@@ -1,11 +1,7 @@
 #pragma once
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 enum class OperatorType { Unknown, Not, And, Or };
-
-}
 
 }  // namespace alba

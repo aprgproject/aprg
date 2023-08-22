@@ -3,9 +3,7 @@
 #include <BooleanAlgebra/Term/TermTypes/BaseTermPointers.hpp>
 #include <BooleanAlgebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 BaseTermUniquePointer createBasePointer(BaseTerm const& baseTerm);
 BaseTermUniquePointer createBasePointer(BaseTerm&& baseTerm);
@@ -20,6 +18,4 @@ BaseTerm const& getBaseTermConstReferenceFromUniquePointer(BaseTermUniquePointer
 BaseTerm& getBaseTermReferenceFromTerm(Term& term);
 BaseTerm& getBaseTermReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer);
 
-}  // namespace booleanAlgebra
-
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

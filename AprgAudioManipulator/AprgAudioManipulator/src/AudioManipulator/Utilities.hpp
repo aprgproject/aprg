@@ -5,9 +5,7 @@
 #include <AudioManipulator/CommonTypes.hpp>
 #include <AudioManipulator/NewSamplesBuilder.hpp>
 
-namespace alba {
-
-namespace AprgAudio {
+namespace alba::AprgAudio {
 
 void retrieveDeltas(Samples& deltaSamples, Samples const& pointerOfSampleToCheck, int const numberOfSamples);
 
@@ -35,6 +33,4 @@ void searchAndTryToReplicateSamples(
 void searchAndTryToReplicate(
     std::string const& filePathForAudioToChange, std::string const& filePathForAudioToReplicate,
     std::string const& filePathForAudioToSearch, bool const alwaysPutNewValue);
-}  // namespace AprgAudio
-
 }  // namespace alba

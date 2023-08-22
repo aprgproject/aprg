@@ -10,9 +10,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 BitmapConfiguration::BitmapConfiguration()
     : m_fileSize(0),
@@ -32,10 +30,8 @@ BitmapConfiguration::BitmapConfiguration()
       m_numberOfBytesForDataInRow(0),
       m_paddingForRowMemoryAlignment(0),
       m_numberOfBytesPerRowInFile(0),
-      m_bitMaskForValue(0),
-      m_path(),
-      m_signature(),
-      m_colors() {}
+      m_bitMaskForValue(0)
+      {}
 
 bool BitmapConfiguration::isValid() const {
     return isSignatureValid() && isHeaderValid() && isNumberOfColorPlanesValid() && isNumberOfBitsPerPixelValid();
@@ -305,6 +301,4 @@ bool areBitmapConfigurationsCompatibleForChangingPixelData(
            configuration1.getBitmapWidth() == configuration2.getBitmapWidth();
 }
 
-}  // namespace AprgBitmap
-
-}  // namespace alba
+}  // namespace alba::AprgBitmap

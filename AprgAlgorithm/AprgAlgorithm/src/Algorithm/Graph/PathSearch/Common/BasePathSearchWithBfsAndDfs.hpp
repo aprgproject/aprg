@@ -15,7 +15,7 @@ public:
     using VertexToIntMap = typename GraphTypes<Vertex>::VertexToIntMap;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
-    BasePathSearchWithBfsAndDfs(BaseGraphWithVertex const& graph) : m_graph(graph) {}
+    explicit BasePathSearchWithBfsAndDfs(BaseGraphWithVertex const& graph) : m_graph(graph) {}
 
     bool hasPathTo(Vertex const& endVertex) const { return m_processedVertices.isFound(endVertex); }
 

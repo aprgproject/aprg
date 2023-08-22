@@ -14,7 +14,7 @@ namespace alba {
 
 constexpr unsigned int TCOM_FSP_ADDRESS = 0x1200;
 
-HardwareConfiguration::HardwareConfiguration() : m_sharedLcgId(0), m_tcomFspAddress(0) {}
+HardwareConfiguration::HardwareConfiguration()  {}
 
 AddressToDspMap& HardwareConfiguration::getAddressToDspMapReference() { return m_dspAddressToDspMap; }
 

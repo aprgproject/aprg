@@ -8,8 +8,7 @@
 #include "internal_macros.h"
 #include "log.h"
 
-namespace benchmark {
-namespace internal {
+namespace benchmark::internal {
 
 typedef void(AbortHandlerT)();
 
@@ -49,7 +48,6 @@ class CheckHandler {
   LogType& log_;
 };
 
-}  // end namespace internal
 }  // end namespace benchmark
 
 // The BM_CHECK macro returns a std::ostream object that can have extra

@@ -14,9 +14,7 @@ using namespace alba::mathHelper;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 #define CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED \
     if (static_cast<int>(result.size()) >= maxSize) {             \
@@ -1532,7 +1530,5 @@ void Board::changePieceGridWithMove(Move const& move) {
 
 #undef CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED
 #undef CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
-
-}  // namespace chess
 
 }  // namespace alba

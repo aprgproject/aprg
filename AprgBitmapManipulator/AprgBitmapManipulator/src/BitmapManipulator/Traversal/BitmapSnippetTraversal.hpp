@@ -7,15 +7,13 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 class BitmapSnippetTraversal {
 public:
     using TraverseOperation = std::function<void(BitmapXY const&)>;
 
-    BitmapSnippetTraversal(BitmapSnippet const& bitmapSnippet);
+    explicit BitmapSnippetTraversal(BitmapSnippet const& bitmapSnippet);
 
     void traverseCircleArea(TwoDimensions::Circle const& circle, TraverseOperation const& traverseOperation) const;
     void traverseQuadrilateralArea(
@@ -31,7 +29,5 @@ private:
         BitmapXY const& point, TraverseOperation const& traverseOperation) const;
     BitmapSnippet const& m_bitmapSnippet;
 };
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

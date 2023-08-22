@@ -5,11 +5,9 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
+namespace alba::AprgAudio {
 
-namespace AprgAudio {
-
-AudioManipulator::AudioManipulator(std::string const& audioFilePath) : m_filePathHandler(audioFilePath), m_audio() {
+AudioManipulator::AudioManipulator(std::string const& audioFilePath) : m_filePathHandler(audioFilePath) {
     m_audio.load(m_filePathHandler.getFullPath());
 }
 
@@ -60,7 +58,5 @@ void AudioManipulator::saveAudioIntoFileWithFullFilePath(string const& newFilePa
         m_audio.save(newFilePathHandler.getFullPath(), AudioFormat::Aiff);
     }
 }
-
-}  // namespace AprgAudio
 
 }  // namespace alba

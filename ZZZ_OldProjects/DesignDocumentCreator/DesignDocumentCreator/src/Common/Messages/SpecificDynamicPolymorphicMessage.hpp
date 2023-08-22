@@ -24,7 +24,7 @@ public:
 
 private:
     void saveStaticAndDynamicPartFromBuffer(alba::AlbaMemoryBuffer const& payloadBufferReference) {
-        unsigned char const* readingBufferPointer(
+        autoeadingBufferPointer(
             reinterpret_cast<unsigned char const*>(payloadBufferReference.getConstantBufferPointer()));
         m_staticPayload = *reinterpret_cast<SackType const*>(readingBufferPointer);
         m_dynamicPayload =

@@ -12,7 +12,7 @@ namespace DesignDocumentCreator {
 
 class Component {
 public:
-    Component(ComponentName const componentName);
+    explicit Component(ComponentName const componentName);
     Component(Component const&) = delete;
     Component& operator=(Component const&) = delete;
     void pushBackEvent(Event const& event);

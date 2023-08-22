@@ -2,9 +2,7 @@
 
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 // Unary plus: +a
 Term operator+(Term const& term);
@@ -31,7 +29,5 @@ Term& operator/=(Term& term1, Term const& term2);
 // RaiseToThePower: a ^ b
 Term operator^(Term const& term1, Term const& term2);
 Term& operator^=(Term& term1, Term const& term2);
-
-}  // namespace algebra
 
 }  // namespace alba

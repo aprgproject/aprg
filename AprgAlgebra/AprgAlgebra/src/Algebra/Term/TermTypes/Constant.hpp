@@ -5,9 +5,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class Constant : public BaseTermData {
 public:
@@ -34,7 +32,5 @@ private:
 
     AlbaNumber m_constantValue;
 };
-
-}  // namespace algebra
 
 }  // namespace alba

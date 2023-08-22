@@ -33,7 +33,7 @@ void FileDestructor::renameDirectoriesUnderneath(string const& directoryPath) co
     }
 }
 
-void FileDestructor::destroyFilesAndDirectories(string const& path) const {
+void FileDestructor::destroyFilesAndDirectories(string const& path) {
     cout << "Destroying files in: [" << path << "]\n";
     AlbaLocalPathHandler pathHandler(path);
     ListOfPaths listOfFiles;

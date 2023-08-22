@@ -16,19 +16,19 @@ struct NyquistAndTurboNyquistCount {
 
 struct SelectionDspResult {
     SelectionDspResult();
-    bool isSelectionSuccessful;
-    bool isNbicAllocated;
-    unsigned int address;
-    unsigned int dliPool;
+    bool isSelectionSuccessful{false};
+    bool isNbicAllocated{false};
+    unsigned int address{0};
+    unsigned int dliPool{0};
 };
 
 struct SelectionDspResultForCcdAndMcd {
     SelectionDspResultForCcdAndMcd();
-    bool isSelectionSuccessful;
-    bool isNbicAllocated;
-    unsigned int ccdAddress;
-    unsigned int mcdAddress;
-    unsigned int dliPool;
+    bool isSelectionSuccessful{false};
+    bool isNbicAllocated{false};
+    unsigned int ccdAddress{0};
+    unsigned int mcdAddress{0};
+    unsigned int dliPool{0};
 };
 
 struct FspPairDetails {
@@ -49,7 +49,7 @@ using DliPools = std::set<unsigned int>;
 
 class Lrm {
 public:
-    Lrm(HardwareConfiguration& hardwareConfiguration);
+    explicit Lrm(HardwareConfiguration& hardwareConfiguration);
     void setHibernationCommissioned(bool const isHibernationCommissioned);
     void setNumberOfUnallocatedPicPoolsPerLcg(unsigned int const lcgId, unsigned int const numberOfPicPools);
     void clearLcgToUnallocatedPicPools(unsigned int const lcgId);
@@ -182,8 +182,8 @@ private:
 
     unsigned int getNumberOfUnallocatedPicPoolsForLcg(unsigned int const lcgId) const;
 
-    bool m_isHibernationCommissioned;
-    unsigned int m_maxAmountOfNonDcdsPerFsp;
+    bool m_isHibernationCommissioned{false};
+    unsigned int m_maxAmountOfNonDcdsPerFsp{6};
     std::map<unsigned int, bool> m_lcgToUnallocatedPicPools;
     HardwareConfiguration& m_hardwareConfigurationReference;
     AddressToDspMap& m_addressToDspMap;

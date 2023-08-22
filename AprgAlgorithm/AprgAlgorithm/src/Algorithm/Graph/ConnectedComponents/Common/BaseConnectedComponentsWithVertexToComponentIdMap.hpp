@@ -10,7 +10,7 @@ class BaseConnectedComponentsWithVertexToComponentIdMap : public BaseConnectedCo
 public:
     using VertexToIntMap = typename GraphTypes<Vertex>::VertexToIntMap;
 
-    BaseConnectedComponentsWithVertexToComponentIdMap(Graph const& graph) : m_graph(graph) {}
+    explicit explicit explicit explicit BaseConnectedComponentsWithVertexToComponentIdMap(Graph const& graph) : m_graph(graph) {}
 
     ~BaseConnectedComponentsWithVertexToComponentIdMap() override =
         default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual

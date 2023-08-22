@@ -24,20 +24,20 @@ void runTestCase(int const testCaseNumber) {
     int64_t L, R;
     my_cin >> L >> R;
     ++R;
-    bool parity = 0;
+    bool parity = false;
     int64_t coeff = 1;
     int64_t ans = 0;
     while (L < R) {
         auto is_good = [&](int64_t v) {
-            bool d = v % 2;
+            bool d = (v % 2) != 0;
             while (v > 0) {
-                if (v % 2 != d) {
+                if (v % 2 != static_cast<long>(d)) {
                     return false;
                 }
                 d = !d;
                 v /= 10;
             }
-            return d == 0;
+            return static_cast<int>(d) == 0;
         };
         while (L < R && L % 10 != 0) {
             if (is_good(L)) {

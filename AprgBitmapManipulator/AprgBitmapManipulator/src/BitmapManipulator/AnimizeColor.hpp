@@ -3,9 +3,7 @@
 #include <map>
 #include <string>
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 void gatherAndSaveDataInAnimizeColor(std::string const& bitmapPath);
 
@@ -36,7 +34,5 @@ private:
     ColorDataMap m_lightnessData;
     ColorDataMap m_saturationData;
 };
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

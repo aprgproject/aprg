@@ -6,7 +6,7 @@ template <typename DataType>
 class DataCollection {
 public:
     DataCollection()
-        : m_minimum(0), m_maximum(0), m_theCountForMinimum(0), m_theCountForMaximum(0), m_sum(0), m_count(0) {}
+        : m_minimum(0), m_maximum(0), m_theCountForMinimum(0), m_theCountForMaximum(0), m_sum(0) {}
     DataType getMinimum() const { return m_minimum; }
     DataType getMaximum() const { return m_maximum; }
     DataType getTheCountForMinimum() const { return m_theCountForMinimum; }
@@ -45,7 +45,7 @@ private:
     DataType m_theCountForMinimum;
     DataType m_theCountForMaximum;
     DataType m_sum;
-    int m_count;
+    int m_count{0};
 };
 
 }  // namespace alba

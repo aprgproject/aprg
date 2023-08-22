@@ -12,7 +12,7 @@ public:
     using Walker = WalkInSuccessorGraph<Vertex>;
     using Path = typename GraphTypes<Vertex>::Path;
 
-    BrentAlgorithmForSuccessorGraphs(BaseDirectedGraphWithVertex const& graph)
+    explicit BrentAlgorithmForSuccessorGraphs(BaseDirectedGraphWithVertex const& graph)
         : m_graph(graph), m_walker(graph) {}
 
     bool hasACycle() const { return m_hasACycle; }
@@ -85,4 +85,4 @@ private:
     Path m_cyclePath;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

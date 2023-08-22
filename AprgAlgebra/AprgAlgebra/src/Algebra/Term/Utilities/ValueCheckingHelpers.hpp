@@ -2,9 +2,7 @@
 
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 using NumberCheckingCondition = std::function<bool(AlbaNumber const& number)>;
 
@@ -66,7 +64,5 @@ bool hasNonRealFiniteNumbers(Expression const& expression);
 bool hasNonRealFiniteNumbers(Function const& function);
 bool hasZero(Terms const& terms);
 bool hasNegativeExponentsWithVariable(Polynomial const& polynomial, std::string const& variableName);
-
-}  // namespace algebra
 
 }  // namespace alba

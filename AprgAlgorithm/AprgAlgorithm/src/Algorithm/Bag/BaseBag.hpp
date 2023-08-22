@@ -18,4 +18,4 @@ public:
     virtual void traverse(TraverseFunction const& traverseFunction) = 0;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

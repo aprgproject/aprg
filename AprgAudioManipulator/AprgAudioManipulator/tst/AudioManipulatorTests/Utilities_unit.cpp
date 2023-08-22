@@ -10,9 +10,7 @@ using namespace std;
 
 #define SAMPLE_AUDIO_FILES_DIRECTORY APRG_DIR R"(\AprgAudioManipulator\FilesForTests\SampleAudioFiles\)"
 
-namespace alba {
-
-namespace AprgAudio {
+namespace alba::AprgAudio {
 
 TEST(UtilitiesTest, RetrieveDeltasWorks) {
     AlbaLocalPathHandler audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
@@ -106,7 +104,5 @@ TEST(UtilitiesTest, DISABLED_SearchAndTryToReplicateTwoFilesWorks) {
         audioToChangeFilePathHandler.getFullPath(), audioToReplicateFilePathHandler.getFullPath(),
         audioToSearch2FilePathHandler.getFullPath(), false);
 }
-
-}  // namespace AprgAudio
 
 }  // namespace alba

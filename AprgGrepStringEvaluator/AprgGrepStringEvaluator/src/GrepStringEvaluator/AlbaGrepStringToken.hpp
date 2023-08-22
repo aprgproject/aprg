@@ -15,8 +15,8 @@ public:
         Result,
     };
     AlbaGrepStringToken();
-    AlbaGrepStringToken(std::string const& stringToFind);
-    AlbaGrepStringToken(AlbaGrepStringOperatorType const operatorType);
+    explicit AlbaGrepStringToken(std::string const& stringToFind);
+    explicit AlbaGrepStringToken(AlbaGrepStringOperatorType const operatorType);
     AlbaGrepStringToken(AlbaGrepStringOperatorType const operatorType, std::string const& operatorString);
     bool isToBeIgnored() const;
     bool isOperator() const;

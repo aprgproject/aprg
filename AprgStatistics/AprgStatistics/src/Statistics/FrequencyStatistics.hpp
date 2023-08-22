@@ -3,9 +3,7 @@
 #include <map>
 #include <vector>
 
-namespace alba {
-
-namespace FrequencyStatistics {
+namespace alba::FrequencyStatistics {
 
 using FrequencySamples = std::map<int, int>;
 using FrequencyPair = std::pair<int, int>;
@@ -16,6 +14,4 @@ double calculateMean(FrequencySamples const& samples);
 double calculateMedian(FrequencySamples const& samples);
 MultipleValues calculateMode(FrequencySamples const& samples);
 
-}  // namespace FrequencyStatistics
-
-}  // namespace alba
+}  // namespace alba::FrequencyStatistics

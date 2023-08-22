@@ -12,7 +12,7 @@ class AprgFileExtractor {
 
 public:
     AprgFileExtractor();
-    AprgFileExtractor(std::string const& condition);
+    explicit explicit AprgFileExtractor(std::string const& condition);
     AprgFileExtractor(
         std::string const& condition, std::string const& pathOf7zExecutable, std::string const& pathOf7zTempFile);
     void extractAllRelevantFiles(std::string const& pathOfFileOrDirectory);

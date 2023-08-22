@@ -6,14 +6,12 @@
 
 #include <string>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 class Operator : public BaseTermData {
 public:
     Operator() = default;
-    Operator(std::string const& operatingString);
+    explicit Operator(std::string const& operatingString);
 
     bool operator==(Operator const& second) const;
     bool operator!=(Operator const& second) const;
@@ -39,6 +37,4 @@ private:
     std::string m_operatingString;
 };
 
-}  // namespace booleanAlgebra
-
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

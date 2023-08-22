@@ -11,9 +11,7 @@
 #include <optional>
 #include <vector>
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 struct Board {
 public:
@@ -43,7 +41,7 @@ public:
     using AttackDefendCounts = std::vector<AttackDefendCount>;
 
     Board();
-    Board(BoardOrientation const& orientation);
+    explicit Board(BoardOrientation const& orientation);
     Board(BoardOrientation const& orientation, PieceGrid const& pieceGrid);
 
     bool operator==(Board const& other) const;
@@ -197,7 +195,5 @@ private:
     BoardOrientation m_orientation;
     PieceGrid m_pieceGrid;
 };
-
-}  // namespace chess
 
 }  // namespace alba

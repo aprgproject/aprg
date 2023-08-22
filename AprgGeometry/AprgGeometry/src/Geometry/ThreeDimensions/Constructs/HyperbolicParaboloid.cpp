@@ -3,11 +3,9 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
+namespace alba::ThreeDimensions {
 
-namespace ThreeDimensions {
-
-HyperbolicParaboloid::HyperbolicParaboloid() : m_center(), m_aValue(0), m_bValue(0), m_cValue(0) {}
+HyperbolicParaboloid::HyperbolicParaboloid() :  m_aValue(0), m_bValue(0), m_cValue(0) {}
 
 HyperbolicParaboloid::HyperbolicParaboloid(
     Point const& center, double const aCoefficient, double const bCoefficient, double const cCoefficient)
@@ -54,6 +52,4 @@ ostream& operator<<(ostream& out, HyperbolicParaboloid const& hyperbolicParabolo
     return out;
 }
 
-}  // namespace ThreeDimensions
-
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

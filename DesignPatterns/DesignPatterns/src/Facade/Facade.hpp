@@ -8,7 +8,7 @@ namespace Facade {
 
 class SubsystemA {
 public:
-    void suboperation() {
+    static void suboperation() {
         std::cout << "Subsystem A method\n";
         // ...
     }
@@ -17,7 +17,7 @@ public:
 
 class SubsystemB {
 public:
-    void suboperation() {
+    static void suboperation() {
         std::cout << "Subsystem B method\n";
         // ...
     }
@@ -26,7 +26,7 @@ public:
 
 class SubsystemC {
 public:
-    void suboperation() {
+    static void suboperation() {
         std::cout << "Subsystem C method\n";
         // ...
     }

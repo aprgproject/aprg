@@ -24,7 +24,7 @@ public:
 
 class ConcreteObserver : public Observer {
 public:
-    ConcreteObserver(const int state) : m_observer_state(state) {}
+    explicit ConcreteObserver(const int state) : m_observer_state(state) {}
 
     int getState() const override { return m_observer_state; }
 

@@ -10,11 +10,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace ThreeDimensions {
-
-namespace threeDimensionsUtilities {
+namespace alba::ThreeDimensions::threeDimensionsUtilities {
 // Internal functions
 
 double calculateMultiplierForIntersection(
@@ -329,6 +325,4 @@ Plane getPerpendicularPlaneOfALineAndUsingAPointInThePlane(Line const& line, Poi
     return Plane(line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient(), pointInPerpendicularPlane);
 }
 
-}  // namespace threeDimensionsUtilities
-}  // namespace ThreeDimensions
 }  // namespace alba

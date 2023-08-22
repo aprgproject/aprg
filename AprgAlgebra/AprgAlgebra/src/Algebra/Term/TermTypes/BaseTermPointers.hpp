@@ -5,12 +5,8 @@
 #include <memory>
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 using BaseTermUniquePointer = std::unique_ptr<BaseTerm>;
-
-}
 
 }  // namespace alba

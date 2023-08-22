@@ -39,7 +39,7 @@ void runTestCase(int const testCaseNumber) {
         my_cin >> par[i][0];
         par[i][0]--;
         depth[i] = depth[par[i][0]] + 1;
-        for (int z = 0; par[i][z]; z++) {
+        for (int z = 0; par[i][z] != 0; z++) {
             par[i][z + 1] = par[par[i][z]][z];
         }
     }
@@ -53,8 +53,8 @@ void runTestCase(int const testCaseNumber) {
                 continue;
             }
             int cur = i;
-            for (int l = 0, v = A[z]; v; v >>= 1, l++) {
-                if (v & 1) {
+            for (int l = 0, v = A[z]; v != 0; v >>= 1, l++) {
+                if ((v & 1) != 0) {
                     cur = par[cur][l];
                 }
             }

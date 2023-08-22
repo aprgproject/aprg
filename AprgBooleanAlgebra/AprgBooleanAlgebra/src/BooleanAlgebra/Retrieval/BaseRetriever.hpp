@@ -3,9 +3,7 @@
 #include <BooleanAlgebra/Term/TermTypes/Term.hpp>
 #include <BooleanAlgebra/Term/Utilities/BaseTermHelpers.hpp>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 template <typename DataType>
 class BaseRetriever {
@@ -39,7 +37,5 @@ public:
 protected:
     DataType m_savedData;
 };
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

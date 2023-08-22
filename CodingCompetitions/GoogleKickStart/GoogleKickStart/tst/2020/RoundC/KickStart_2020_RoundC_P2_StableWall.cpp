@@ -36,18 +36,18 @@ bool bad;
 bool vis[26], act[26];
 
 void dfs(int u) {
-    act[u] = 1;
-    vis[u] = 1;
+    act[u] = true;
+    vis[u] = true;
     for (int v : adj[u]) {
-        if (act[v] && v ^ u) {
-            bad = 1;
+        if (act[v] && ((v ^ u) != 0)) {
+            bad = true;
         } else {
             if (!vis[v]) {
                 dfs(v);
             }
         }
     }
-    act[u] = 0;
+    act[u] = false;
     ans += (char)(u + 'A');
 }
 
@@ -59,7 +59,7 @@ void runTestCase(int const testCaseNumber) {
         for (char c : s[i]) {
             t.insert(c);
         }
-        if (i) {
+        if (i != 0) {
             for (int j = 0; j < m; ++j) {
                 adj[s[i - 1][j] - 'A'].push_back(s[i][j] - 'A');
             }
@@ -68,7 +68,7 @@ void runTestCase(int const testCaseNumber) {
     memset(vis, 0, 26);
     memset(act, 0, 26);
     ans = "";
-    bad = 0;
+    bad = false;
     for (char c : t) {
         if (!vis[c - 'A']) {
             dfs(c - 'A');

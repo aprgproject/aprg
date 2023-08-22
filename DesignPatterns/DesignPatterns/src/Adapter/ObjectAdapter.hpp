@@ -18,7 +18,7 @@ public:
 
 class Adaptee {
 public:
-    void specificRequest() { std::cout << "specific request\n"; }
+    static void specificRequest() { std::cout << "specific request\n"; }
     // ...
 };
 

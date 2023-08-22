@@ -4,15 +4,11 @@
 #include <BooleanAlgebra/Term/Utilities/BaseTermHelpers.hpp>
 #include <BooleanAlgebra/Term/Utilities/EnumHelpers.hpp>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 void DualOperationMutator::mutateExpression(Expression& expression) {
     expression.setCommonOperatorLevel(getDualOperatorLevel(expression.getCommonOperatorLevel()));
     BaseMutator::mutateExpression(expression);
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

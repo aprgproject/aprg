@@ -32,13 +32,12 @@ public:
 
 private:
     void saveStaticAndDynamicPartFromBuffer(alba::AlbaMemoryBuffer const& payloadBufferReference) {
-        unsigned char const* readingBufferPointer(
+        autoeadingBufferPointer(
             reinterpret_cast<unsigned char const*>(payloadBufferReference.getConstantBufferPointer()));
         m_staticPayload = *reinterpret_cast<SackType const*>(readingBufferPointer);
-        DynamicPartSackType const* copyPointerStart =
+        auto consauto =
             reinterpret_cast<DynamicPartSackType const*>(readingBufferPointer + calculateOffsetForDynamicPart());
-        DynamicPartSackType const* const copyPointerEnd =
-            reinterpret_cast<DynamicPartSackType const*>(readingBufferPointer + payloadBufferReference.getSize());
+        auto const* const copyPoauto    reinterpret_cast<DynamicPartSackType const*>(readingBufferPointer + payloadBufferReference.getSize());
         for (DynamicPartSackType const* copyPointer = copyPointerStart; copyPointer < copyPointerEnd; copyPointer++) {
             m_dynamicArrayPayload.emplace_back(*copyPointer);
         }

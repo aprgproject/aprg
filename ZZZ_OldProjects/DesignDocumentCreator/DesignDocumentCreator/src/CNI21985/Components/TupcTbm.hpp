@@ -7,7 +7,7 @@ namespace DesignDocumentCreator {
 
 class TupcTbm : public Component {
 public:
-    TupcTbm(ComponentName const componentName);
+    explicit TupcTbm(ComponentName const componentName);
 
 private:
     void handleStartup();

@@ -2,9 +2,7 @@
 
 #include <Geometry/ThreeDimensions/Constructs/Point.hpp>
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 class HyperbolicParaboloid {
 public:
@@ -33,5 +31,4 @@ private:
 
 using HyperbolicParaboloids = std::vector<HyperbolicParaboloid>;
 
-}  // namespace ThreeDimensions
 }  // namespace alba

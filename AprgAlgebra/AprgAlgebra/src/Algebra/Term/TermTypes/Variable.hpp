@@ -4,14 +4,12 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class Variable : public BaseTermData {
 public:
     Variable();
-    Variable(std::string const& variableName);
+    explicit Variable(std::string const& variableName);
 
     // rule of zero
 
@@ -27,7 +25,5 @@ private:
 
     std::string m_variableName;
 };
-
-}  // namespace algebra
 
 }  // namespace alba

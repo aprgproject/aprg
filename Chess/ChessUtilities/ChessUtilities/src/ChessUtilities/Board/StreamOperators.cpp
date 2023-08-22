@@ -8,9 +8,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 ostream& operator<<(ostream& out, PieceColor const pieceColor) {
     out << getEnumString(pieceColor);
@@ -97,7 +95,5 @@ void printHexValuesInBoard(ostream& out, Board const& board) {
     out << dec;
     out << "\n";
 }
-
-}  // namespace chess
 
 }  // namespace alba

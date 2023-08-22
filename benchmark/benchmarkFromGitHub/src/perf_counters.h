@@ -27,8 +27,7 @@
 #include <unistd.h>
 #endif
 
-namespace benchmark {
-namespace internal {
+namespace benchmark::internal {
 
 // Typically, we can only read a small number of counters. There is also a
 // padding preceding counter values, when reading multiple counters with one
@@ -72,7 +71,7 @@ class PerfCounters final {
   static const bool kSupported;
 
   bool IsValid() const { return is_valid_; }
-  static PerfCounters NoCounters() { return PerfCounters(); }
+  static PerfCounters NoCounters() { return {}; }
 
   ~PerfCounters();
   PerfCounters(PerfCounters&&) = default;
@@ -124,7 +123,7 @@ class PerfCounters final {
 // Typical usage of the above primitives.
 class PerfCountersMeasurement final {
  public:
-  PerfCountersMeasurement(PerfCounters&& c)
+  explicit PerfCountersMeasurement(PerfCounters&& c)
       : counters_(std::move(c)),
         start_values_(counters_.IsValid() ? counters_.names().size() : 0),
         end_values_(counters_.IsValid() ? counters_.names().size() : 0) {}
@@ -166,7 +165,6 @@ class PerfCountersMeasurement final {
 
 BENCHMARK_UNUSED static bool perf_init_anchor = PerfCounters::Initialize();
 
-}  // namespace internal
 }  // namespace benchmark
 
 #endif  // BENCHMARK_PERF_COUNTERS_H

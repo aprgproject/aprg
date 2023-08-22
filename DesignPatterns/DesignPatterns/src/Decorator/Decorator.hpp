@@ -31,7 +31,7 @@ public:
 
 class Decorator : public Component {
 public:
-    Decorator(std::unique_ptr<Component> componentPointer) : m_componentPointer(std::move(componentPointer)) {}
+    explicit Decorator(std::unique_ptr<Component> componentPointer) : m_componentPointer(std::move(componentPointer)) {}
 
     virtual void operation() override { m_componentPointer->operation(); }
     // ...
@@ -46,7 +46,7 @@ private:
 
 class ConcreteDecoratorA : public Decorator {
 public:
-    ConcreteDecoratorA(std::unique_ptr<Component> componentPointer) : Decorator(std::move(componentPointer)) {}
+    explicit ConcreteDecoratorA(std::unique_ptr<Component> componentPointer) : Decorator(std::move(componentPointer)) {}
 
     void operation() override {
         Decorator::operation();
@@ -57,7 +57,7 @@ public:
 
 class ConcreteDecoratorB : public Decorator {
 public:
-    ConcreteDecoratorB(std::unique_ptr<Component> componentPointer) : Decorator(std::move(componentPointer)) {}
+    explicit ConcreteDecoratorB(std::unique_ptr<Component> componentPointer) : Decorator(std::move(componentPointer)) {}
 
     void operation() override {
         Decorator::operation();

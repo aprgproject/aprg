@@ -5,9 +5,7 @@
 #include <map>
 #include <set>
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 class PenCircles {
 public:
@@ -41,7 +39,5 @@ private:
     PointToPenCircleDetailsMap m_penCircles;
     CircleCenterConnections m_centerConnections;
 };
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

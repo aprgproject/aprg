@@ -8,9 +8,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 Line::Line()
     : m_aCoefficient(0),
@@ -162,5 +160,4 @@ ostream& operator<<(ostream& out, Line const& line) {
     return out;
 }
 
-}  // namespace ThreeDimensions
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

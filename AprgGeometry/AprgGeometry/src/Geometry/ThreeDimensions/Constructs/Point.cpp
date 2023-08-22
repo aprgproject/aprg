@@ -2,9 +2,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 Point::Point() : PointParent(0, 0, 0) {}
 
@@ -17,5 +15,4 @@ ostream& operator<<(ostream& out, Point const& point) {
     return out;
 }
 
-}  // namespace ThreeDimensions
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

@@ -6,9 +6,7 @@
 #include <cstdint>
 #include <vector>
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 enum class BoardOrientation { Unknown, BlackUpWhiteDown, WhiteUpBlackDown };
 
@@ -20,7 +18,5 @@ using Move = std::pair<Coordinate, Coordinate>;
 using Moves = std::vector<Move>;
 using MovePair = std::pair<Move, Move>;
 using MovePairs = std::vector<MovePair>;
-
-}  // namespace chess
 
 }  // namespace alba

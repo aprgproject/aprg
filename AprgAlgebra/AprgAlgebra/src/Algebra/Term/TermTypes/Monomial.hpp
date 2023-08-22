@@ -8,9 +8,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class Monomial : public BaseTermData {
 public:
@@ -69,7 +67,5 @@ private:
 };
 
 using Monomials = std::vector<Monomial>;
-
-}  // namespace algebra
 
 }  // namespace alba

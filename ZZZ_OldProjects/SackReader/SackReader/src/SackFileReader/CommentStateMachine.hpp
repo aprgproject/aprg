@@ -4,9 +4,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace CommentStateMachineNamespace {
+namespace alba::CommentStateMachineNamespace {
 
 enum class State { NotInComment, Slash, DoubleSlash, InCommentNotInAsterisk, InCommentAsterisk };
 
@@ -32,6 +30,4 @@ private:
     void processStateInCommentAsterisk(InputToken const& inputToken);
 };
 
-}  // namespace CommentStateMachineNamespace
-
-}  // namespace alba
+}  // namespace alba::CommentStateMachineNamespace

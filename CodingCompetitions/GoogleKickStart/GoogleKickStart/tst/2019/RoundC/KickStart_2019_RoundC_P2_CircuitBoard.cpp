@@ -45,7 +45,7 @@ public:
     using SelectorFunction = std::function<Value(Value const&, Value const&)>;
 
     RangeQueryWithSelector(Values const& valuesToCheck, SelectorFunction const& selector)
-        : m_selectedValueMatrix(), m_selector(selector), m_columns(0), m_rows(0) {
+        : m_selectedValueMatrix(), m_selector(selector) {
         initialize(valuesToCheck);
     }
 
@@ -116,8 +116,8 @@ private:
 
     ValueMatrix m_selectedValueMatrix;  // index by exponent matrix
     SelectorFunction m_selector;
-    Index m_columns;
-    Index m_rows;
+    Index m_columns{0};
+    Index m_rows{0};
 };
 
 int numberOfRows, numberOfColumns;

@@ -37,7 +37,7 @@ public:
 class Context {
 public:
     Context()
-        : m_statePointer()  // default state
+        
     {
         //...
     }

@@ -35,13 +35,13 @@ void runTestCase(int const testCaseNumber) {
     }
     int ans = 0;
     for (int i = k - 1; i < n; ++i) {
-        bool ok = 1;
+        bool ok = true;
         for (int j = 1; j <= k && ok; ++j) {
             if (a[i + 1 - j] != j) {
-                ok = 0;
+                ok = false;
             }
         }
-        ans += ok;
+        ans += static_cast<int>(ok);
     }
     my_cout << "Case #" << testCaseNumber << ": " << ans << '\n';
 }

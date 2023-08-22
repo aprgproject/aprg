@@ -6,14 +6,12 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class Operator : public BaseTermData {
 public:
     Operator() = default;
-    Operator(std::string const& operatingString);
+    explicit Operator(std::string const& operatingString);
 
     // rule of zero
 
@@ -41,7 +39,5 @@ private:
 
     std::string m_operatingString;
 };
-
-}  // namespace algebra
 
 }  // namespace alba

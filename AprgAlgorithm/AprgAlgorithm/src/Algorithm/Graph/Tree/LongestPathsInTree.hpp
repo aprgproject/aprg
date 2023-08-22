@@ -15,7 +15,7 @@ public:
     using Dfs = PathSearchUsingDfsWithDistanceCount<Vertex>;
     using VertexToDfs = std::map<Vertex, Dfs>;
 
-    LongestPathsInTree(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph) { initializeIfNeeded(); }
+    explicit LongestPathsInTree(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph) { initializeIfNeeded(); }
 
     EndPointPairs const& getEndPointPairsOfLongestPaths() const { return m_endPointPairsOfLongestPaths; }
 

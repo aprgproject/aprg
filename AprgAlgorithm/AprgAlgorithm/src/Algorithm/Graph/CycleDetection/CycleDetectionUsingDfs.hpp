@@ -17,7 +17,7 @@ public:
     using VertexToVertexMap = typename GraphTypes<Vertex>::VertexToVertexMap;
     using VertexToVertexStateMap = std::map<Vertex, VertexState>;
 
-    CycleDetectionUsingDfs(BaseGraphWithVertex const& graph) : m_graph(graph), m_searchType(SearchType::Unknown) {}
+    explicit CycleDetectionUsingDfs(BaseGraphWithVertex const& graph) : m_graph(graph), m_searchType(SearchType::Unknown) {}
 
     Paths getAllCycles() {
         initialize();

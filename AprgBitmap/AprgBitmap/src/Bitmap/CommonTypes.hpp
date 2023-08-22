@@ -5,9 +5,7 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 using BitmapSignedXY = AlbaXY<int>;
 using BitmapXY = AlbaXY<int>;
@@ -16,7 +14,5 @@ using BitmapXYs = std::vector<BitmapXY>;
 using BitmapSignedXYs = std::vector<BitmapSignedXY>;
 using Colors = std::vector<uint32_t>;
 using PixelData = AlbaMemoryBuffer;
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

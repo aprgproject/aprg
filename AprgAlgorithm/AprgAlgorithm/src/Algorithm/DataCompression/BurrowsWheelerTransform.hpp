@@ -160,4 +160,4 @@ public:
 // high probability of occurring before a sequence, so that in general it needs fairly long samples (a few kilobytes at
 // least) of appropriate data (such as text).
 
-}  // namespace alba
+}  // namespace alba::algorithm

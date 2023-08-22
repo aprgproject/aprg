@@ -1,11 +1,7 @@
 #pragma once
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 enum class LogicalValue { True, False, DontCare };
-
-}
 
 }  // namespace alba

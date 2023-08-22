@@ -8,9 +8,7 @@
 
 #include <algorithm>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 AdditionAndSubtractionOfTermsOverTerms::AdditionAndSubtractionOfTermsOverTerms() {}
 
@@ -191,7 +189,5 @@ void AdditionAndSubtractionOfTermsOverTerms::putItem(
     m_items.emplace_back(item);
     m_associations.emplace_back(association);
 }
-
-}  // namespace algebra
 
 }  // namespace alba

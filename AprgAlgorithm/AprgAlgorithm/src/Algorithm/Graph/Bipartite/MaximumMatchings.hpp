@@ -30,7 +30,7 @@ public:
     using FlowNetwork = SinkSourceFlowNetwork<Vertex, int, DirectedGraphWithListOfEdges<Vertex>>;
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
 
-    MaximumMatchings(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph), m_bipartiteChecker(graph) {}
+    explicit MaximumMatchings(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph), m_bipartiteChecker(graph) {}
 
     Edges getMaximumMatchings(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         Edges result;

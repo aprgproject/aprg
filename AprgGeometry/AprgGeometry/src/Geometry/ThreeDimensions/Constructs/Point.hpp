@@ -4,16 +4,14 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 using PointParent = AlbaXYZ<double>;
 
 class Point : public PointParent {
 public:
     Point();
-    Point(PointParent const& pointParent);
+    explicit Point(PointParent const& pointParent);
     Point(double const xValue, double const yValue, double const zValue);
 
 private:
@@ -22,5 +20,4 @@ private:
 
 using Points = std::vector<Point>;
 
-}  // namespace ThreeDimensions
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

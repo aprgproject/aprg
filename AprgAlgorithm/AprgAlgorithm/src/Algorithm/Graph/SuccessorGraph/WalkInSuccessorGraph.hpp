@@ -14,7 +14,7 @@ public:
     using VertexAndCountPair = std::pair<Vertex, int>;
     using VertexAndCountPairToVertexMap = std::map<VertexAndCountPair, Vertex>;
 
-    WalkInSuccessorGraph(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
+    explicit WalkInSuccessorGraph(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
 
     bool isAtTheEnd(Vertex const& vertex) const { return m_graph.getAdjacentVerticesAt(vertex).empty(); }
 
@@ -38,7 +38,7 @@ private:
                         result = adjacentVertices.front();
                     }
                 }
-                if (mathHelper::isPowerOfTwo(distance))  // save distance if power of 2
+                if (mathHelper::isPowerOfTwo(distance) != 0)  // save distance if power of 2
                 {
                     m_startAndDistancePairToDestinationMap.emplace(VertexAndCountPair{vertex, distance}, result);
                 }

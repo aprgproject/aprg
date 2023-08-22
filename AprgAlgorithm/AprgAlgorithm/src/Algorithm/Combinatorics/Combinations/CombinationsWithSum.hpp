@@ -14,7 +14,7 @@ public:
     using Combinations = std::set<Combination>;
     using VectorOfCombinations = std::vector<Combinations>;
 
-    CombinationsWithSum(Values const& values) : m_inputValues(values) {}
+    explicit CombinationsWithSum(Values const& values) : m_inputValues(values) {}
 
     Combinations getCombinationsWithSumUsingRecursion(Value const total) {
         // this recursion method is exponential
@@ -80,4 +80,4 @@ private:
     VectorOfCombinations m_combinations;  // dynamic programming
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

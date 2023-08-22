@@ -14,9 +14,9 @@ using namespace std;
 
 namespace wcdmaToolsBackend {
 
-BtsLogTime::BtsLogTime() : m_dateTime() {}
+BtsLogTime::BtsLogTime()  {}
 
-BtsLogTime::BtsLogTime(BtsLogTimeType logTimeType, string const& timeStampString) : m_dateTime() {
+BtsLogTime::BtsLogTime(BtsLogTimeType logTimeType, string const& timeStampString)  {
     setTimeByTimeStamp(logTimeType, timeStampString);
 }
 

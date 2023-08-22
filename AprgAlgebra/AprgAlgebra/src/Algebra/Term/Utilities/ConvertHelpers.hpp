@@ -2,9 +2,7 @@
 
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool canBeConvertedToConstant(Polynomial const& polynomial);
 bool canBeConvertedToMonomial(Term const& term);
@@ -20,7 +18,5 @@ Term convertMonomialToSimplestTerm(Monomial const& monomial);
 Term convertPolynomialToSimplestTerm(Polynomial const& polynomial);
 Term convertExpressionToSimplestTerm(Expression const& expression);
 Term convertFunctionToSimplestTerm(Function const& functionObject);
-
-}  // namespace algebra
 
 }  // namespace alba

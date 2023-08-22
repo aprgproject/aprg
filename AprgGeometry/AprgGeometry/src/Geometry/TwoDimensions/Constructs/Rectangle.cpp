@@ -2,11 +2,9 @@
 
 using namespace std;
 
-namespace alba {
+namespace alba::TwoDimensions {
 
-namespace TwoDimensions {
-
-Rectangle::Rectangle() : Quadrilateral() {}
+Rectangle::Rectangle()  {}
 
 Rectangle::Rectangle(Point const& topLeft, Point const& bottomRight)
     : Quadrilateral{
@@ -18,5 +16,4 @@ ostream& operator<<(ostream& out, Rectangle const& rectangle) {
     return out;
 }
 
-}  // namespace TwoDimensions
 }  // namespace alba

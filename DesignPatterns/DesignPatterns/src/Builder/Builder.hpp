@@ -63,7 +63,7 @@ public:
 
 class Director {
 public:
-    Director(std::unique_ptr<Builder> builder) : m_builder(move(builder)) {}
+    explicit Director(std::unique_ptr<Builder> builder) : m_builder(move(builder)) {}
 
     void setBuilder(std::unique_ptr<Builder> builder) { m_builder = move(builder); }
 

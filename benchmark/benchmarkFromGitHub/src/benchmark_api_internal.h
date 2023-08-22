@@ -11,10 +11,7 @@
 #include "benchmark/benchmark.h"
 #include "commandlineflags.h"
 
-namespace benchmark {
-namespace internal {
-
-// Information kept per benchmark we may want to run
+namespace benchmark::internalrmation kept per benchmark we may want to run
 class BenchmarkInstance {
  public:
   BenchmarkInstance(Benchmark* benchmark, int family_index,
@@ -72,7 +69,4 @@ bool IsZero(double n);
 
 ConsoleReporter::OutputOptions GetOutputOptions(bool force_no_color = false);
 
-}  // end namespace internal
-}  // end namespace benchmark
-
-#endif  // BENCHMARK_API_INTERNAL_H
+}  // end n} BENCHMARK_API_INTERNAL_H

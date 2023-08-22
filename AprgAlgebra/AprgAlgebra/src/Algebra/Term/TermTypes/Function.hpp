@@ -8,9 +8,7 @@
 #include <functional>
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class Function : public BaseTermData {
 public:
@@ -53,7 +51,5 @@ private:
     EvaluationFunction m_evaluationFunction;
     bool m_isSimplified;
 };
-
-}  // namespace algebra
 
 }  // namespace alba

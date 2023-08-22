@@ -169,4 +169,4 @@ private:
 // zip, 7zip, gzip, jar, png, pdf: deflate/zlib
 // iPhone, Sony Playstation 3 Apache HTTP server: deflate/zlib
 
-}  // namespace alba
+}  // namespace alba::algorithm

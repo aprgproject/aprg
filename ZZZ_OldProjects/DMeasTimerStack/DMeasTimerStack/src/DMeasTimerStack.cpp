@@ -28,7 +28,7 @@ namespace DMeas {
 TimerStack::TimerIndex TimerStack::s_timerCounter = 0;
 int const TimerStack::fibs[6] = {0, 1000, 1000, 2000, 3000, 5000};
 
-inline int TimerStack::ARRAY_timers_empty(void) { return m_timers.empty(); }
+inline int TimerStack::ARRAY_timers_empty(void) { return static_cast<int>(m_timers.empty()); }
 
 TimerStack::TimerIndex TimerStack::ARRAY_timers_insert(TimeCounter timerValue, TimerData const& timerData) {
     TimerData timerDataToBeSaved = timerData;
@@ -85,7 +85,7 @@ EBoolean TimerStack::ARRAY_timers_erase(TimerStack::TimerIndex& timerIndex) {
     TimerData& timerData(m_timers[timerIndex]);
     if (timerData.timerType != TimerType::FreeTimer) {
         if (timerData.timerType == TimerType::NbccRecovery) {
-            if (timerData.value.nbccRecovery.msg) {
+            if (timerData.value.nbccRecovery.msg != nullptr) {
                 delete timerData.value.nbccRecovery.msg;
                 timerData.value.nbccRecovery.msg = 0;
             }
@@ -108,7 +108,7 @@ void TimerStack::ARRAY_timers_clear(void) { m_timers.clear(); }
 
 TimeCounter TimerStack::ARRAY_timers_first(TimerStack::TimerIndex timerIndex) {
     TimeCounter timeCounter = TIMER_INVALID_ITERATOR;
-    if (!ARRAY_timers_empty()) {
+    if (ARRAY_timers_empty() == 0) {
         timeCounter = m_timers[timerIndex].timerValue;
     } else {
         DM_ERR_HIGH("Timer stack is empty, cannot get first timer %u", timerIndex);
@@ -118,7 +118,7 @@ TimeCounter TimerStack::ARRAY_timers_first(TimerStack::TimerIndex timerIndex) {
 
 TimerData* TimerStack::ARRAY_timers_second(TimerStack::TimerIndex timerIndex) {
     TimerData* timeDataPtr = nullptr;
-    if (!ARRAY_timers_empty()) {
+    if (ARRAY_timers_empty() == 0) {
         timeDataPtr = &m_timers[timerIndex];
     } else {
         DM_ERR_HIGH("Timer stack is empty, cannot get second timer %u", timerIndex);
@@ -295,7 +295,7 @@ EBoolean TimerStack::refresh(const TSfn newSfn) {
 
     timeCounter = timeOffsetToSFN + newSfn;
 
-    if (!ARRAY_timers_empty()) {
+    if (ARRAY_timers_empty() == 0) {
         TimeCounter timeToExpire = timeCounter;
 
         TimerIndex expiredItem = ARRAY_timers_find(timeToExpire);
@@ -362,7 +362,7 @@ EBoolean TimerStack::insertMeasurement(
 EBoolean TimerStack::mayIPrint() {
     EBoolean ret = EBoolean_False;
 
-    if (!nthFib) {
+    if (nthFib == 0u) {
         nthFib = (nthFib + 1) % 6;
         ret = EBoolean_True;
     } else {
@@ -478,7 +478,7 @@ EBoolean TimerStack::trigExpiredAndRemove(TimerIndex& timerIndex) {
 }
 
 void TimerStack::clearUserTimers(TNodeBCommunicationContextId const nBCCId) {
-    if (!ARRAY_timers_empty()) {
+    if (ARRAY_timers_empty() == 0) {
         for (TimerTablePair const& timerTablePair : m_timers) {
             TimerData* data = ARRAY_timers_second(timerTablePair.first);
             if (nullptr != data) {
@@ -491,7 +491,7 @@ void TimerStack::clearUserTimers(TNodeBCommunicationContextId const nBCCId) {
                         removeTimerPrint(data->timerType, nBCCId);
                         data->timerValue = 0;
                         data->timerType = TimerType::FreeTimer;
-                        if (ARRAY_timers_empty()) {
+                        if (ARRAY_timers_empty() != 0) {
                             return;
                         }
                     }
@@ -511,7 +511,7 @@ void TimerStack::removeTimerPrint(TimerType const timerType, TNodeBCommunication
 
 void TimerStack::dump(void) {
     // MKJ: 18108EO09P   if( !timers.empty() ) {
-    if (!ARRAY_timers_empty()) {
+    if (ARRAY_timers_empty() == 0) {
         // MKJ: 18108EO09P     dump( timers.begin(), timers.end() );
         dump(ARRAY_timers_begin(), ARRAY_timers_end());
     } else {
@@ -523,7 +523,7 @@ void TimerStack::dump(void) {
 
 TimerData* TimerStack::timersFindNbccRecovery(TNodeBCommunicationContextId nbccId, TimerIndex& timerIndex) {
     initIterator(timerIndex);
-    if (!ARRAY_timers_empty()) {
+    if (ARRAY_timers_empty() == 0) {
         for (TimerIndex traversingIndex = ARRAY_timers_begin(); traversingIndex != ARRAY_timers_end();
              traversingIndex++)  // std::find_if
         {

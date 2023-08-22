@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 bool isAToH(char const c) { return 'a' <= c && c <= 'h'; }
 
@@ -177,6 +175,4 @@ string constructFenString(
     return ss.str();
 }
 
-}  // namespace chess
-
-}  // namespace alba
+}  // namespace alba::chess

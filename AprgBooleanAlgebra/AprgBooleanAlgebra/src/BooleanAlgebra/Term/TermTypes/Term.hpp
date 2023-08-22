@@ -11,9 +11,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 class Term : public BaseTerm {
 public:
@@ -21,13 +19,13 @@ public:
 
     Term();
     Term(TermType const type, bool const isSimplified, BaseTermDataPointer&& m_baseTermDataPointer);  // for move
-    Term(bool const boolValue);
-    Term(char const* const characterString);
-    Term(std::string const& stringAsParameter);
-    Term(Constant const& constant);
-    Term(VariableTerm const& variableTerm);
-    Term(Operator const& operatorTerm);
-    Term(Expression const& expression);
+    explicit Term(bool const boolValue);
+    explicit Term(char const* const characterString);
+    explicit Term(std::string const& stringAsParameter);
+    explicit Term(Constant const& constant);
+    explicit Term(VariableTerm const& variableTerm);
+    explicit Term(Operator const& operatorTerm);
+    explicit Term(Expression const& expression);
 
     // rule of five or six
     ~Term() = default;
@@ -86,6 +84,4 @@ private:
 
 using Terms = std::vector<Term>;
 
-}  // namespace booleanAlgebra
-
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

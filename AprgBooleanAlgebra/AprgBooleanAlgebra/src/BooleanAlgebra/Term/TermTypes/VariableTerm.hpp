@@ -5,14 +5,12 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 class VariableTerm : public BaseTermData {
 public:
     VariableTerm();
-    VariableTerm(std::string const& variableName);
+    explicit VariableTerm(std::string const& variableName);
 
     // rule of zero
 
@@ -42,6 +40,4 @@ private:
 
 using VariableTerms = std::vector<VariableTerm>;
 
-}  // namespace booleanAlgebra
-
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

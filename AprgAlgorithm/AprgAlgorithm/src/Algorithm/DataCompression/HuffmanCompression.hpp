@@ -231,7 +231,7 @@ private:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Variable length codes
 // -> use different numbers of bit to encode different chars

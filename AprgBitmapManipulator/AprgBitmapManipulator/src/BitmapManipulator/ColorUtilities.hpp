@@ -2,11 +2,7 @@
 
 #include <cstdint>
 
-namespace alba {
-
-namespace AprgBitmap {
-
-namespace ColorUtilities {
+namespace alba::AprgBitmap::ColorUtilities {
 
 struct ColorPercentagesData {
     double redPercentage;
@@ -68,9 +64,5 @@ uint8_t extractGreen(uint32_t const color);
 uint8_t extractBlue(uint32_t const color);
 uint8_t extractMaxForOneColor(uint32_t const color);
 uint8_t extractMinForOneColor(uint32_t const color);
-
-}  // namespace ColorUtilities
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

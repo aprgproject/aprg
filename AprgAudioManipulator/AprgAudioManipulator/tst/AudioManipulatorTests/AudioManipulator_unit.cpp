@@ -6,9 +6,7 @@ using namespace std;
 
 #define SAMPLE_AUDIO_FILES_DIRECTORY APRG_DIR R"(\AprgAudioManipulator\FilesForTests\SampleAudioFiles\)"
 
-namespace alba {
-
-namespace AprgAudio {
+namespace alba::AprgAudio {
 
 TEST(AudioManipulatorTest, DISABLED_AddSamplesWithValueWorks) {
     AlbaLocalPathHandler audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
@@ -31,7 +29,5 @@ TEST(AudioManipulatorTest, DISABLED_MultiplySamplesWithValueWorks) {
 
     audioManipulator.saveAudioIntoFileInTheSameDirectory("output.wav");
 }
-
-}  // namespace AprgAudio
 
 }  // namespace alba

@@ -31,7 +31,7 @@ long long ans;
 
 void dfs(int u = 0, int d = 0) {
     for (int v = 0; v < 26; ++v) {
-        if (c[u][v]) {
+        if (c[u][v] != 0) {
             dfs(c[u][v], d + 1), cnt[u] += cnt[c[u][v]];
         }
     }
@@ -49,7 +49,7 @@ void runTestCase(int const testCaseNumber) {
         my_cin >> s;
         int u = 0;
         for (char d : s) {
-            if (!c[u][d - 'A']) {
+            if (c[u][d - 'A'] == 0) {
                 c[u][d - 'A'] = m++;
             }
             u = c[u][d - 'A'];

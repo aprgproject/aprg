@@ -4,9 +4,7 @@
 
 #include <map>
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 constexpr int INITIAL_LABEL_VALUE = 0;
 constexpr int INVALID_LABEL_VALUE = 0x1FFFFFFF;
@@ -28,7 +26,5 @@ public:
 private:
     PixelsToLabelsMap m_pixelsTolabelsMap;
 };
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

@@ -2,9 +2,7 @@
 
 #include <BooleanAlgebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 class BaseMutator {
 public:
@@ -15,7 +13,5 @@ public:
     virtual void mutateVariableTerm(VariableTerm &);
     virtual void mutateExpression(Expression &expression);
 };
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

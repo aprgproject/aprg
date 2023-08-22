@@ -13,9 +13,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 namespace {
 
@@ -194,7 +192,5 @@ void AdditionAndSubtractionOfExpressions::putItem(Expression const& expression, 
     m_expressions.emplace_back(correctedExpression);
     m_associations.emplace_back(correctedAssociation);
 }
-
-}  // namespace algebra
 
 }  // namespace alba

@@ -5,9 +5,7 @@
 #include <ChessUtilities/Board/PieceColorAndType.hpp>
 #include <ChessUtilities/Board/PieceType.hpp>
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 bool isAToH(char const c);
 bool is1To8(char const c);
@@ -29,7 +27,5 @@ char convertToFenCharacter(PieceType const pieceType, PieceColor const pieceColo
 std::string constructFenString(
     Board const& board, PieceColor const colorToMove, std::string const& castlingAvailability,
     std::string const& enPassantTarget, int const halfMoveClock, int const fullMoveNumber);
-
-}  // namespace chess
 
 }  // namespace alba

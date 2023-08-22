@@ -3,9 +3,7 @@
 #include <Algebra/Term/TermTypes/Term.hpp>
 #include <Common/Math/Number/AlbaNumberTypes.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool isTermSimpler(Term const& supposeToBeComplicatedTerm, Term const& supposeToBeSimpleTerm);
 bool isNegatedTermSimpler(Term const& term, Term const& negatedTerm);
@@ -32,7 +30,5 @@ Term negateTermIfHasNegativeAssociation(TermWithDetails const& termWithDetails);
 Term flipTermIfHasNegativeAssociation(TermWithDetails const& termWithDetails);
 Term invertTerm(Term const& term, std::string const& variableName);
 Expression negateExpression(Expression const& expression);
-
-}  // namespace algebra
 
 }  // namespace alba

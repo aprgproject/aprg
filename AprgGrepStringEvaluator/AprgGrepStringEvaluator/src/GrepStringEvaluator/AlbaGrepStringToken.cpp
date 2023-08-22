@@ -5,13 +5,13 @@ using namespace std;
 namespace alba {
 
 AlbaGrepStringToken::AlbaGrepStringToken()
-    : m_type(TokenType::Dummy), m_operatorType(AlbaGrepStringOperatorType::Unknown), m_string() {}
+    : m_type(TokenType::Dummy), m_operatorType(AlbaGrepStringOperatorType::Unknown) {}
 
 AlbaGrepStringToken::AlbaGrepStringToken(string const& stringToFind)
     : m_type(TokenType::StringToFind), m_operatorType(AlbaGrepStringOperatorType::Unknown), m_string(stringToFind) {}
 
 AlbaGrepStringToken::AlbaGrepStringToken(AlbaGrepStringOperatorType const operatorType)
-    : m_type(TokenType::Operator), m_operatorType(operatorType), m_string() {}
+    : m_type(TokenType::Operator), m_operatorType(operatorType) {}
 
 AlbaGrepStringToken::AlbaGrepStringToken(
     AlbaGrepStringOperatorType const operatorType, std::string const& operatorString)

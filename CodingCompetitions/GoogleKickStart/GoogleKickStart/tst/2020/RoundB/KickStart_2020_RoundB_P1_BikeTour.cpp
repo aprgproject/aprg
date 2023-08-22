@@ -35,7 +35,7 @@ void runTestCase(int const testCaseNumber) {
     }
     int ans = 0;
     for (int i = 1; i + 1 < N; i++) {
-        ans += (H[i] > H[i - 1]) && H[i] > H[i + 1];
+        ans += static_cast<int>((H[i] > H[i - 1]) && H[i] > H[i + 1]);
     }
 
     my_cout << "Case #" << testCaseNumber << ": " << ans << '\n';

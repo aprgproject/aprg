@@ -43,4 +43,4 @@ private:
     NodeUniquePointer m_first;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

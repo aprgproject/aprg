@@ -31,7 +31,7 @@ private:
 
 class ConcreteHandler1 : public Handler {
 public:
-    bool canHandle() const {
+    static bool canHandle() {
         // ...
         return false;
     }
@@ -50,7 +50,7 @@ public:
 
 class ConcreteHandler2 : public Handler {
 public:
-    bool canHandle() const {
+    static bool canHandle() {
         // ...
         return true;
     }

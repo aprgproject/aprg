@@ -40,7 +40,7 @@ public:
 
 class Context {
 public:
-    Context(std::unique_ptr<Strategy> strategy) : m_strategy(std::move(strategy)) {}
+    explicit Context(std::unique_ptr<Strategy> strategy) : m_strategy(std::move(strategy)) {}
 
     void contextInterface() { m_strategy->algorithmInterface(); }
     // ...

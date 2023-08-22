@@ -14,7 +14,7 @@ public:
     using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
     using VertexToReachabilityMap = typename std::map<Vertex, ReachabilityInDigraphWithSetUsingDfs<Vertex>>;
 
-    TransitiveClosureWithMap(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) { initialize(); }
+    explicit TransitiveClosureWithMap(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) { initialize(); }
 
     bool isReachable(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
         bool result(false);

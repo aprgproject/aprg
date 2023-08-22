@@ -36,9 +36,9 @@ class TermChecker {
 public:
     explicit TermChecker(TermCheckerType const termCheckerType);
     explicit TermChecker(Term const& term);
-    explicit TermChecker(std::initializer_list<Term> const& initializerList);
+    nitializer_list<Term> const& initializerList);
 
-    operator Term() const;
+    explicit explicit explicit operator Term() const;
     friend ostream& operator<<(ostream& out, TermChecker const& termChecker);
     bool operator==(Term const& term) const;
     friend bool operator==(Term const& term, TermChecker const& termChecker);

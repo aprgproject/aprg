@@ -2,14 +2,12 @@
 
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class AdditionAndSubtractionOfExpressions {
 public:
     AdditionAndSubtractionOfExpressions();
-    AdditionAndSubtractionOfExpressions(TermsWithDetails const& termsWithDetails);
+    explicit AdditionAndSubtractionOfExpressions(TermsWithDetails const& termsWithDetails);
 
     Expressions const& getExpressions() const;
     TermAssociationTypes const& getAssociations() const;
@@ -42,7 +40,5 @@ private:
     Expressions m_expressions;
     TermAssociationTypes m_associations;
 };
-
-}  // namespace algebra
 
 }  // namespace alba

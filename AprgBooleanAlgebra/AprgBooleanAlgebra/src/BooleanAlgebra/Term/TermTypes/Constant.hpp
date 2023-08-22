@@ -4,9 +4,7 @@
 
 #include <ostream>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 class Constant : public BaseTermData {
 public:
@@ -28,6 +26,4 @@ private:
     bool m_booleanValue;
 };
 
-}  // namespace booleanAlgebra
-
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

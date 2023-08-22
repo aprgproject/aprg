@@ -4,9 +4,7 @@
 
 // Inspired by: https://medium.com/pranayaggarwal25/unnamed-namespaces-Inline-f1498741c527
 
-namespace alba {
-
-namespace InlineOnTranslationUnits {
+namespace alba::InlineOnTranslationUnits {
 
 // constexpr int constInteger = 120;  // Error: redefinition of 'constInteger'
 // int inlineIntegerWithDefinition = 220; // Error: redefinition of 'inlineIntegerWithDefinition'
@@ -131,7 +129,5 @@ TEST(InlineOnTranslationUnit2Test, FunctionReturnValuesAreCorrect) {
     EXPECT_EQ(1, freeFunction());
     EXPECT_EQ(1, inlineFreeFunction());
 }
-
-}  // namespace InlineOnTranslationUnits
 
 }  // namespace alba

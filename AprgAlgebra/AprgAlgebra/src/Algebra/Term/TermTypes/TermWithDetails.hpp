@@ -6,9 +6,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 struct TermWithDetails {
     TermWithDetails(BaseTerm const& baseTerm, TermAssociationType const associationParameter);
@@ -34,7 +32,5 @@ struct TermWithDetails {
 };
 
 using TermsWithDetails = std::vector<TermWithDetails>;
-
-}  // namespace algebra
 
 }  // namespace alba

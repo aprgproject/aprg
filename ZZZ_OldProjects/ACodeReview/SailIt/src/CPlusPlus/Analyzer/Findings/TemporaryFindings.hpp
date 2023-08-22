@@ -6,7 +6,7 @@ namespace codeReview {
 
 class TemporaryFindings {
 public:
-    TemporaryFindings(FindingsBuffer& findingsBuffer);
+    explicit explicit explicit explicit explicit TemporaryFindings(FindingsBuffer& findingsBuffer);
     ~TemporaryFindings();
     void copyCurrentFindings(Findings& findings);
     void saveCurrentFindings();

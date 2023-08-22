@@ -25,7 +25,7 @@ public:
 
 class ConcreteAggregate : public Aggregate {
 public:
-    ConcreteAggregate(int const size) {
+    explicit ConcreteAggregate(int const size) {
         m_listPointer = std::make_unique<int[]>(size);
         m_count = size;
     }
@@ -64,7 +64,7 @@ public:
 
 class ConcreteIterator : public Iterator {
 public:
-    ConcreteIterator(ConcreteAggregate& aggregate) : m_aggregate(aggregate), index(0) {}
+    explicit ConcreteIterator(ConcreteAggregate& aggregate) : m_aggregate(aggregate) {}
 
     void gotoFirst() override { index = 0; }
 
@@ -77,7 +77,7 @@ public:
 
 private:
     ConcreteAggregate& m_aggregate;
-    int index;
+    int index{0};
     // ...
 };
 

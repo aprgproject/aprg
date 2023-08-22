@@ -17,9 +17,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class Term : public BaseTerm {
 public:
@@ -27,20 +25,20 @@ public:
 
     Term();
     Term(TermType const type, bool const isSimplified, BaseTermDataPointer&& m_baseTermDataPointer);  // for move
-    Term(AlbaNumber const& number);
-    Term(char const* const characterString);
-    Term(std::string const& stringAsParameter);
-    Term(Constant const& constant);
-    Term(Variable const& variable);
-    Term(Operator const& operatorTerm);
-    Term(Monomial const& monomial);
-    Term(Polynomial const& polynomial);
-    Term(Expression const& expression);
-    Term(Function const& function);
+    explicit Term(AlbaNumber const& number);
+    explicit Term(char const* const characterString);
+    explicit Term(std::string const& stringAsParameter);
+    explicit Term(Constant const& constant);
+    explicit Term(Variable const& variable);
+    explicit Term(Operator const& operatorTerm);
+    explicit Term(Monomial const& monomial);
+    explicit Term(Polynomial const& polynomial);
+    explicit Term(Expression const& expression);
+    explicit Term(Function const& function);
 
     // enabled via a type template parameter
     template <typename ArithmeticType, typename = std::enable_if_t<typeHelper::isArithmeticType<ArithmeticType>()>>
-    Term(ArithmeticType const value) : Term(AlbaNumber(value)) {}
+    explicit Term(ArithmeticType const value) : Term(AlbaNumber(value)) {}
 
     // rule of five or six
     ~Term() = default;
@@ -103,7 +101,5 @@ private:
 };
 
 using Terms = std::vector<Term>;
-
-}  // namespace algebra
 
 }  // namespace alba

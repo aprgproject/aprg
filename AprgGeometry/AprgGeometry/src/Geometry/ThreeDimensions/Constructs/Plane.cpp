@@ -10,9 +10,7 @@ using namespace alba::mathHelper;
 using namespace alba::ThreeDimensions::threeDimensionsUtilities;
 using namespace std;
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 Plane::Plane() : m_aCoefficient(0), m_bCoefficient(0), m_cCoefficient(0), m_dCoefficient(0) {}
 
@@ -112,5 +110,4 @@ ostream& operator<<(ostream& out, Plane const& plane) {
     return out;
 }
 
-}  // namespace ThreeDimensions
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

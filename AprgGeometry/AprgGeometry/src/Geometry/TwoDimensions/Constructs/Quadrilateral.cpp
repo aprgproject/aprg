@@ -7,11 +7,9 @@ using namespace alba::mathHelper;
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace std;
 
-namespace alba {
+namespace alba::TwoDimensions {
 
-namespace TwoDimensions {
-
-Quadrilateral::Quadrilateral() : QuadrilateralPolygonParent() {}
+Quadrilateral::Quadrilateral()  {}
 
 Quadrilateral::Quadrilateral(Point const& first, Point const& second, Point const& third, Point const& fourth)
     : QuadrilateralPolygonParent{first, second, third, fourth} {}
@@ -266,5 +264,4 @@ ostream& operator<<(ostream& out, Quadrilateral const& quadrilateral) {
     return out;
 }
 
-}  // namespace TwoDimensions
 }  // namespace alba

@@ -31,8 +31,8 @@ long long N, K, x1, y1, C, D, E1, E2, F;
 
 long long raiseToPower(long long a, long long p) {
     long long result = 1, cp = a;
-    while (p) {
-        if (p & 1) {
+    while (p != 0) {
+        if ((p & 1) != 0) {
             result = (result * cp) % MAX_MODULO;  // is even
         }
         p >>= 1;  // divide by two

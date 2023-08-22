@@ -5,14 +5,10 @@
 #include <BitmapManipulator/PenCircles.hpp>
 #include <Geometry/TwoDimensions/Constructs/Point.hpp>
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 TwoDimensions::Point convertBitmapXYToPoint(BitmapXY const& bitmapPosition);
 BitmapXY convertPointToBitmapXY(TwoDimensions::Point const& pointPosition);
 void animeColorsInPenCircles(PenCircles& penCircles, AnimizeColor const& animizeColor);
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

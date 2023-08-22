@@ -3,11 +3,9 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
+namespace alba::ThreeDimensions {
 
-namespace ThreeDimensions {
-
-EllipticParaboloid::EllipticParaboloid() : m_center(), m_aValue(0), m_bValue(0), m_cValue(0) {}
+EllipticParaboloid::EllipticParaboloid() :  m_aValue(0), m_bValue(0), m_cValue(0) {}
 
 EllipticParaboloid::EllipticParaboloid(
     Point const& center, double const aCoefficient, double const bCoefficient, double const cCoefficient)
@@ -53,6 +51,4 @@ ostream& operator<<(ostream& out, EllipticParaboloid const& ellipticParaboloid) 
     return out;
 }
 
-}  // namespace ThreeDimensions
-
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

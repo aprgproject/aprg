@@ -88,7 +88,7 @@ class SCOPED_CAPABILITY MutexLock {
   typedef std::unique_lock<std::mutex> MutexLockImp;
 
  public:
-  MutexLock(Mutex& m) ACQUIRE(m) : ml_(m.native_handle()) {}
+  explicit MutexLock(Mutex& m) ACQUIRE(m) : ml_(m.native_handle()) {}
   ~MutexLock() RELEASE() {}
   MutexLockImp& native_handle() { return ml_; }
 
@@ -98,7 +98,7 @@ class SCOPED_CAPABILITY MutexLock {
 
 class Barrier {
  public:
-  Barrier(int num_threads) : running_threads_(num_threads) {}
+  explicit Barrier(int num_threads) : running_threads_(num_threads) {}
 
   // Called by each thread
   bool wait() EXCLUDES(lock_) {
@@ -107,14 +107,16 @@ class Barrier {
       MutexLock ml(lock_);
       last_thread = createBarrier(ml);
     }
-    if (last_thread) phase_condition_.notify_all();
+    if (last_thread) { phase_condition_.notify_all();
+}
     return last_thread;
   }
 
   void removeThread() EXCLUDES(lock_) {
     MutexLock ml(lock_);
     --running_threads_;
-    if (entered_ != 0) phase_condition_.notify_all();
+    if (entered_ != 0) { phase_condition_.notify_all();
+}
   }
 
  private:
@@ -140,7 +142,8 @@ class Barrier {
                entered_ == running_threads_;  // A thread has aborted in error
       };
       phase_condition_.wait(ml.native_handle(), cb);
-      if (phase_number_ > phase_number_cp) return false;
+      if (phase_number_ > phase_number_cp) { return false;
+}
       // else (running_threads_ == entered_) and we are the last thread.
     }
     // Last thread has reached the barrier

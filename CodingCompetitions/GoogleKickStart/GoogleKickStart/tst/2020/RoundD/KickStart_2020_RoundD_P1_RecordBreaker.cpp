@@ -36,7 +36,7 @@ void runTestCase(int const testCaseNumber) {
     int cur_max = -1;
     int answer = 0;
     for (int i = 0; i < N; i++) {
-        answer += V[i] > cur_max && (i + 1 == N || V[i] > V[i + 1]);
+        answer += static_cast<int>(V[i] > cur_max && (i + 1 == N || V[i] > V[i + 1]));
         cur_max = max(cur_max, V[i]);
     }
 

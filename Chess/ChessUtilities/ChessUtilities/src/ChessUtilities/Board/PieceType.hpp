@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 enum class PieceType {
     Empty = 0,
@@ -13,7 +11,5 @@ enum class PieceType {
     Queen = 5,
     King = 6,
 };
-
-}  // namespace chess
 
 }  // namespace alba

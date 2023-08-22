@@ -5,13 +5,11 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 struct WrappedTerm {
-    WrappedTerm(BaseTerm const& baseTerm);
-    WrappedTerm(BaseTerm&& baseTerm);
+    explicit WrappedTerm(BaseTerm const& baseTerm);
+    explicit WrappedTerm(BaseTerm&& baseTerm);
 
     // rule of five or six
     ~WrappedTerm() = default;
@@ -32,6 +30,4 @@ struct WrappedTerm {
 
 using WrappedTerms = std::vector<WrappedTerm>;
 
-}  // namespace booleanAlgebra
-
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

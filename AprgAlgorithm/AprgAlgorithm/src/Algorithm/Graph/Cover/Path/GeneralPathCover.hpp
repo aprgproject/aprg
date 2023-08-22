@@ -38,7 +38,7 @@ public:
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
     using TransitiveClosure = TransitiveClosureWithMap<Vertex>;
 
-    GeneralPathCover(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
+    explicit GeneralPathCover(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
 
     Paths getGeneralPathCover(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         VertexPairs vertexPairs(getConnectedVerticesOfGeneralPathCover(newSourceVertex, newSinkVertex));
@@ -178,4 +178,4 @@ private:
     BaseDirectedGraphWithVertex const& m_graph;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

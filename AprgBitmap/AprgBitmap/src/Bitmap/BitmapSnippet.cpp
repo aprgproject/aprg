@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 BitmapSnippet::BitmapSnippet() {}
 
@@ -208,6 +206,4 @@ void BitmapSnippet::setPixelAtForMultipleBytePixels(uint8_t* writer, int const i
     }
 }
 
-}  // namespace AprgBitmap
-
-}  // namespace alba
+}  // namespace alba::AprgBitmap

@@ -26,13 +26,13 @@ class ExpressionEvaluatorTerm {
 public:
     enum class TermType { Value, Operator };
     enum class OperatorSyntaxType { Unknown, PrefixUnary, Binary, StartGroup, EndGroup };
-    ExpressionEvaluatorTerm(ValueTemplateType const& value)
+    explicit ExpressionEvaluatorTerm(ValueTemplateType const& value)
         : m_termType(TermType::Value),
           m_value(value),
           m_operator(),
           m_operatorSyntaxType(OperatorSyntaxType::Unknown),
           m_operatorPriority(0) {}
-    ExpressionEvaluatorTerm(OperatorSyntaxType const& operatorSyntaxValue)
+    explicit ExpressionEvaluatorTerm(OperatorSyntaxType const& operatorSyntaxValue)
         : m_termType(TermType::Operator),
           m_value(),
           m_operator(),
@@ -314,4 +314,4 @@ private:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm::ExpressionEvaluator

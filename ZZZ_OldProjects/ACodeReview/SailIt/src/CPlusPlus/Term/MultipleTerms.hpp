@@ -12,7 +12,7 @@ namespace codeReview {
 
 class MultipleTerms {
 public:
-    explicit MultipleTerms(initializer_list<Term> const& initializerList);
+    ializer_list<Term> const& initializerList);
     bool isEqualToAnyOfTheTerms(Term const& termToCompare) const;
 
 private:

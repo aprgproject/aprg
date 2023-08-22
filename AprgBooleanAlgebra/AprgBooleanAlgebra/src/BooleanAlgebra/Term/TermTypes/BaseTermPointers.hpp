@@ -4,12 +4,8 @@
 
 #include <memory>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 using BaseTermUniquePointer = std::unique_ptr<BaseTerm>;
-
-}
 
 }  // namespace alba

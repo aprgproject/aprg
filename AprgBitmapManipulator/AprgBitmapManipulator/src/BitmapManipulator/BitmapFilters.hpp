@@ -15,9 +15,7 @@
 #include <functional>
 #include <optional>
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 class BitmapFilters {
 public:
@@ -28,7 +26,7 @@ public:
     using PenPointToPenCircleMap = std::map<BitmapXY, TwoDimensions::Circle>;
     using PenPointAndPenCirclePair = std::pair<BitmapXY, TwoDimensions::Circle>;
 
-    BitmapFilters(std::string const& path);
+    explicit BitmapFilters(std::string const& path);
 
     bool isBackgroundColor(uint32_t const color) const;
     bool isNotBackgroundColor(uint32_t const color) const;
@@ -129,7 +127,5 @@ private:
     Bitmap m_bitmap;
     LabelForPoints m_labelForPixels;
 };
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

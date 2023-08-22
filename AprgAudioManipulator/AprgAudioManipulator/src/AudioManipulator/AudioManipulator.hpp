@@ -4,13 +4,11 @@
 #include <AudioManipulator/CommonTypes.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
-namespace alba {
-
-namespace AprgAudio {
+namespace alba::AprgAudio {
 
 class AudioManipulator {
 public:
-    AudioManipulator(std::string const& audioFilePath);
+    explicit AudioManipulator(std::string const& audioFilePath);
 
     AudioInDouble const& getAudio() const;
     AudioInDouble& getAudioReference();
@@ -29,6 +27,4 @@ private:
     AudioInDouble m_audio;
 };
 
-}  // namespace AprgAudio
-
-}  // namespace alba
+}  // namespace alba::AprgAudio::AprgAudio

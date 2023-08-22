@@ -8,9 +8,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class Expression : public BaseTermData {
 public:
@@ -97,7 +95,5 @@ private:
 };
 
 using Expressions = std::vector<Expression>;
-
-}  // namespace algebra
 
 }  // namespace alba

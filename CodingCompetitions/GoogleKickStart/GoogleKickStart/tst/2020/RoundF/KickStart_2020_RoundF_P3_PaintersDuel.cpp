@@ -35,7 +35,7 @@ int id[20][20];
 
 bool can_move(ll ban, int a) {
     for (int x : g[a]) {
-        if ((ban >> x) & 1) {
+        if (((ban >> x) & 1) != 0) {
             continue;
         }
         return true;
@@ -44,12 +44,12 @@ bool can_move(ll ban, int a) {
 }
 
 void dfs(int v, ll &mask, ll ban) {
-    if ((mask >> v) & 1) {
+    if (((mask >> v) & 1) != 0) {
         return;
     }
     mask |= (1ll << v);
     for (int x : g[v]) {
-        if ((ban >> x) & 1) {
+        if (((ban >> x) & 1) != 0) {
             continue;
         }
         dfs(x, mask, ban);
@@ -61,12 +61,12 @@ int calc(int s, ll ban, int a, int b, int who) {
     dfs(a, msk, ban);
     dfs(b, msk, ban);
     for (int i = 0; i < s * s; i++) {
-        if ((msk >> i) & 1) {
+        if (((msk >> i) & 1) != 0) {
             continue;
         }
         ban |= (1ll << i);
     }
-    if (ok[s][a][b][who].count(ban)) {
+    if (ok[s][a][b][who].count(ban) != 0u) {
         return ok[s][a][b][who][ban];
     }
     if (!can_move(ban, a) && !can_move(ban, b)) {
@@ -76,26 +76,26 @@ int calc(int s, ll ban, int a, int b, int who) {
         if (can_move(ban, a)) {
             int score = -1e9;
             for (int x : g[a]) {
-                if ((ban >> x) & 1) continue;
+                if (((ban >> x) & 1) != 0) { continue;
+}
                 ll go = ban | (1ll << x);
                 score = max(score, calc(s, go, x, b, 1) + 1);
             }
             return ok[s][a][b][who][ban] = score;
-        } else {
-            return ok[s][a][b][who][ban] = calc(s, ban, a, b, 1);
-        }
+        }             return ok[s][a][b][who][ban] = calc(s, ban, a, b, 1);
+       
     } else {
         if (can_move(ban, b)) {
             int score = 1e9;
             for (int x : g[b]) {
-                if ((ban >> x) & 1) continue;
+                if (((ban >> x) & 1) != 0) { continue;
+}
                 ll go = ban | (1ll << x);
                 score = min(score, calc(s, go, a, x, 0) - 1);
             }
             return ok[s][a][b][who][ban] = score;
-        } else {
-            return ok[s][a][b][who][ban] = calc(s, ban, a, b, 0);
-        }
+        }             return ok[s][a][b][who][ban] = calc(s, ban, a, b, 0);
+       
     }
 }
 

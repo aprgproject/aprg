@@ -19,17 +19,17 @@ struct Arg {};
 
 struct S {
     S() { cout << "Default construct\n"; }
-    S(Arg) { cout << "Value construct\n"; }
+    explicit S(Arg) { cout << "Value construct\n"; }
     explicit S(int) { cout << "Explicit value construct (1)\n"; }
     explicit S(int, int) { cout << "Explicit value construct (2)\n"; }
     ~S() { cout << "Destruct\n"; }
     S(S const&) { cout << "Copy construct\n"; }
-    S(S&&) { cout << "Move construct\n"; }
+    S(S&&)  noexcept { cout << "Move construct\n"; }
     S& operator=(S const&) {
         cout << "Copy assign\n";
         return *this;
     }
-    S& operator=(S&&) {
+    S& operator=(S&&)  noexcept {
         cout << "Move assign\n";
         return *this;
     }
@@ -220,9 +220,9 @@ string willThisRvo10() {
 }
 
 struct MoveOnlyConstExprObject {
-    constexpr MoveOnlyConstExprObject() : x{0} {}
-    constexpr MoveOnlyConstExprObject(MoveOnlyConstExprObject&&) : x{1} {}
-    int x;
+    constexpr MoveOnlyConstExprObject()  {}
+    constexpr MoveOnlyConstExprObject(MoveOnlyConstExprObject&&)  noexcept : x{1} {}
+    int x{0};
 };
 
 MoveOnlyConstExprObject willThisRvo11() {

@@ -14,7 +14,7 @@ public:
     using VertexToColorMap = std::map<Vertex, bool>;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
-    BipartiteCheckerUsingDfs(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph) {
+    explicit CheckerUsingDfs(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph) {
         initialize();
     }
 

@@ -62,7 +62,7 @@ private:
 
 class Leaf : public Component {
 public:
-    Leaf(int const id) : m_id(id) {}
+    explicit Leaf(int const id) : m_id(id) {}
 
     void operation() override { std::cout << "Leaf " << m_id << " operation\n"; }
 

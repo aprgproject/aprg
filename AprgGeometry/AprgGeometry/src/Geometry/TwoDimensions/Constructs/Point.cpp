@@ -2,11 +2,9 @@
 
 using namespace std;
 
-namespace alba {
+namespace alba::TwoDimensions {
 
-namespace TwoDimensions {
-
-Point::Point() : PointParent() {}
+Point::Point()  {}
 
 Point::Point(PointParent const& pointParent) : PointParent(pointParent) {}
 
@@ -17,5 +15,4 @@ ostream& operator<<(ostream& out, Point const& point) {
     return out;
 }
 
-}  // namespace TwoDimensions
 }  // namespace alba

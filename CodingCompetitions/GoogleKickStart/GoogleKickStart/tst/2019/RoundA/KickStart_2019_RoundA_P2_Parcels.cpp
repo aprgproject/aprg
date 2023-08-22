@@ -37,7 +37,7 @@ using Coordinates = vector<Coordinate>;
 array<Coordinate, 4> offsets{Coordinate{0, 1}, Coordinate{1, 0}, Coordinate{0, -1}, Coordinate{-1, 0}};
 int rows, columns;
 
-inline int isValid(int const x, int const y) { return x >= 0 && x < columns && y >= 0 && y < rows; }
+inline int isValid(int const x, int const y) { return static_cast<int>(x >= 0 && x < columns && y >= 0 && y < rows); }
 
 inline int getIndex(int const x, int const y) { return (y * columns) + x; }
 
@@ -58,7 +58,7 @@ void fillupDistanceGridViaBfs(vector<int>& distanceGrid, Coordinates const& deli
         nearestCoordinates.pop_back();
         for (Coordinate const& offset : offsets) {
             Coordinate nextCoordinate(coordinate.first + offset.first, coordinate.second + offset.second);
-            if (isValid(nextCoordinate.first, nextCoordinate.second)) {
+            if (isValid(nextCoordinate.first, nextCoordinate.second) != 0) {
                 int& savedDistance(distanceGrid[getIndex(nextCoordinate.first, nextCoordinate.second)]);
                 if (savedDistance == INT_MAX) {
                     int currentDistance(distanceGrid[getIndex(coordinate.first, coordinate.second)]);

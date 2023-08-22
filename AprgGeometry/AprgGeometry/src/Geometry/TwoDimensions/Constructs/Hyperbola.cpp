@@ -11,11 +11,9 @@ using namespace alba::mathHelper;
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace std;
 
-namespace alba {
+namespace alba::TwoDimensions {
 
-namespace TwoDimensions {
-
-Hyperbola::Hyperbola() : m_center(), m_aValue(0), m_bValue(0) {}
+Hyperbola::Hyperbola() :  m_aValue(0), m_bValue(0) {}
 
 Hyperbola::Hyperbola(Point const& center, double const aCoefficient, double const bCoefficient)
     : m_center(center), m_aValue(aCoefficient), m_bValue(bCoefficient) {}
@@ -149,5 +147,4 @@ ostream& operator<<(ostream& out, Hyperbola const& hyperbola) {
     return out;
 }
 
-}  // namespace TwoDimensions
 }  // namespace alba

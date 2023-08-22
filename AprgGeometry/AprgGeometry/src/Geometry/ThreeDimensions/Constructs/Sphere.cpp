@@ -6,11 +6,9 @@ using namespace alba::mathHelper;
 using namespace alba::ThreeDimensions::threeDimensionsUtilities;
 using namespace std;
 
-namespace alba {
+namespace alba::ThreeDimensions {
 
-namespace ThreeDimensions {
-
-Sphere::Sphere() : m_center(), m_radius(0), m_radiusSquared(0) {}
+Sphere::Sphere() :  m_radius(0), m_radiusSquared(0) {}
 
 Sphere::Sphere(Point const& center, double const radius)
     : m_center(center), m_radius(radius), m_radiusSquared(radius * radius) {}
@@ -69,5 +67,4 @@ ostream& operator<<(ostream& out, Sphere const& sphere) {
     return out;
 }
 
-}  // namespace ThreeDimensions
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

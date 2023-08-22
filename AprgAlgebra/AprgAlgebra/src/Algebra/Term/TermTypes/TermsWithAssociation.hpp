@@ -2,16 +2,14 @@
 
 #include <Algebra/Term/TermTypes/TermWithDetails.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class TermsWithAssociation {
 public:
     friend class Expression;
 
     TermsWithAssociation() = default;
-    TermsWithAssociation(TermsWithDetails const& termsWithDetails);
+    explicit TermsWithAssociation(TermsWithDetails const& termsWithDetails);
     TermsWithAssociation(std::initializer_list<TermWithDetails> const& termsWithDetails);
 
     // rule of zero
@@ -40,7 +38,5 @@ public:
 private:
     TermsWithDetails m_termsWithDetails;
 };
-
-}  // namespace algebra
 
 }  // namespace alba

@@ -4,9 +4,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Monomial createMonomialFromNumber(AlbaNumber const& number);
 Monomial createMonomialFromVariable(Variable const& variable);
@@ -26,7 +24,5 @@ Term createTermWithAnExpressionWithATermWithAnExpression(Expression const& expre
 Term createTermWithAdditionAndSubtractionTermsWithDetails(TermsWithDetails const& termsWithDetails);
 Term createTermWithMultiplicationAndDivisionTermsWithDetails(TermsWithDetails const& termsWithDetails);
 Term createTermWithRaiseToPowerTermsWithDetails(TermsWithDetails const& termsWithDetails);
-
-}  // namespace algebra
 
 }  // namespace alba

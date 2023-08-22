@@ -12,7 +12,7 @@ class Memento {
 private:
     friend class Originator;  // accessible only to Originator
 
-    Memento(int const state) : m_state(state) {}
+    explicit Memento(int const state) : m_state(state) {}
 
     int getState() const { return m_state; }
 
@@ -34,7 +34,7 @@ public:
 
     Originator() : m_state(INVALID_STATE) {}
 
-    Originator(int const state) : m_state(state) {}
+    explicit Originator(int const state) : m_state(state) {}
 
     std::unique_ptr<Memento> createMemento() const {
         std::cout << "In Originator, createMemento() with " << m_state << ".\n";

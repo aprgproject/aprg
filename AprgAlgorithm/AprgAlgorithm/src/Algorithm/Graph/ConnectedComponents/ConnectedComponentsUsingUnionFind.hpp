@@ -17,7 +17,7 @@ public:
     using VertexToIntMap = typename GraphTypes<Vertex>::VertexToIntMap;
     using UnionFind = UnionFindUsingMap<Vertex>;
 
-    ConnectedComponentsUsingUnionFind(BaseUndirectedGraphWithVertex const& graph)
+    explicit ConnectedComponentsUsingUnionFind(BaseUndirectedGraphWithVertex const& graph)
         : BaseClass(graph),
           b_graph(BaseClass::m_graph),
           b_numberOfComponentIds(BaseClass::m_numberOfComponentIds),
@@ -51,4 +51,4 @@ private:
     VertexToIntMap& b_vertexToComponentIdMap;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

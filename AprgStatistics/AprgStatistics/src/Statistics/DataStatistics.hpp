@@ -19,7 +19,7 @@ public:
 
     DataStatistics() {}
 
-    DataStatistics(Samples const& samples) : m_samples(samples) {}
+    explicit ples) {}
 
     void clearPreviousCalculations() {
         m_sum.reset();

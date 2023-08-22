@@ -8,7 +8,7 @@ namespace DesignDocumentCreator {
 
 class Dsp : public Component {
 public:
-    Dsp(ComponentName const componentName);
+    explicit Dsp(ComponentName const componentName);
     void handleTransportSetupReq(GenericMessage const&);
     void handleTransportReleaseReq(GenericMessage const&);
     void handleTransportTransferReq(GenericMessage const&);

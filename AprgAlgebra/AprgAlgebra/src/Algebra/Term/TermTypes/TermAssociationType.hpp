@@ -2,14 +2,10 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 enum class TermAssociationType { Positive, Negative };
 
 using TermAssociationTypes = std::vector<TermAssociationType>;
-
-}  // namespace algebra
 
 }  // namespace alba

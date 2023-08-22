@@ -2,11 +2,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
-
-namespace ExpressionEvaluator {
+namespace alba::algorithm::ExpressionEvaluator {
 
 template <>
 AlbaGrepStringEvaluatorTerm performUnaryOperation<AlbaGrepStringEvaluatorTerm, AlbaGrepStringOperatorType>(
@@ -50,8 +46,4 @@ AlbaGrepStringEvaluatorTerm performBinaryOperation<AlbaGrepStringEvaluatorTerm, 
     return AlbaGrepStringEvaluatorTerm(outputValue);
 }
 
-}  // namespace ExpressionEvaluator
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::ExpressionEvaluator

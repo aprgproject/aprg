@@ -2,9 +2,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 Bitmap::Bitmap(string const& path) { m_configuration.readBitmap(path); }
 
@@ -135,6 +133,4 @@ void Bitmap::adjustToTargetLength(int& low, int& high, int const targetLength, i
     }
 }
 
-}  // namespace AprgBitmap
-
-}  // namespace alba
+}  // namespace alba::AprgBitmap

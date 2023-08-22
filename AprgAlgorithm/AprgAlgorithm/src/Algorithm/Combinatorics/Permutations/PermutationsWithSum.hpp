@@ -14,7 +14,7 @@ public:
     using Permutations = std::set<Permutation>;
     using VectorOfPermutations = std::vector<Permutations>;
 
-    PermutationsWithSum(Values const& values) : m_inputValues(values) {}
+    explicit PermutationsWithSum(Values const& values) : m_inputValues(values) {}
 
     Permutations getPermutationsWithSumUsingLoops(Value const total) {
         // using loops
@@ -51,4 +51,4 @@ private:
     VectorOfPermutations m_permutations;  // dynamic programming
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

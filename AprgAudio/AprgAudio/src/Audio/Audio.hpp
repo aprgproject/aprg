@@ -5,9 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace AprgAudio {
+namespace alba::AprgAudio {
 
 /** The different types of audio file, plus some other types to
  * indicate a failure to load a file, or that one hasn't been
@@ -120,7 +118,5 @@ private:
     int sampleRate;
     int bitDepth;
 };
-
-}  // namespace AprgAudio
 
 }  // namespace alba
