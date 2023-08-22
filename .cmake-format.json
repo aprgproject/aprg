@@ -1,18 +1,73 @@
 {
-  "line_width": 120,
-  "tab_size": 4,
-  "enum_char": ".",
-  "bullet_char": "*",
-  "command_case": "lower",
-  "keyword_case": "upper",
-  "line_ending": "unix",
-  "always_wrap": [],
-  "enable_markup": false,
-  "dangle_parens": false,
-  "first_comment_is_literal": false,
-  "separate_fn_name_with_space": false,
-  "separate_ctrl_name_with_space": false,
-  "fence_pattern": "^\\s*([`~]{3}[`~]*)(.*)$",
-  "ruler_pattern": "^\\s*[^\\w\\s]{3}.*[^\\w\\s]{3}$",
-  "literal_comment_pattern": null
+  "encode": {
+    "emit_byteorder_mark": false,
+    "input_encoding": "utf-8",
+    "output_encoding": "utf-8"
+  },
+  "format": {
+    "line_width": 120,
+    "tab_size": 4,
+    "command_case": "lower",
+    "keyword_case": "upper",
+    "line_ending": "unix",
+    "always_wrap": [],
+    "dangle_parens": false,
+    "separate_fn_name_with_space": false,
+    "separate_ctrl_name_with_space": false,
+    "autosort": false,
+    "dangle_align": "child",
+    "disable": false,
+    "enable_sort": false,
+    "fractional_tab_policy": "use-space",
+    "layout_passes": {},
+    "max_lines_hwrap": 2,
+    "max_pargs_hwrap": 6,
+    "max_prefix_chars": 10,
+    "max_rows_cmdline": 2,
+    "max_subgroups_hwrap": 4,
+    "min_prefix_chars": 4,
+    "require_valid_layout": false,
+    "use_tabchars": false
+  },
+  "markup": {
+    "enable_markup": false,
+    "bullet_char": "*",
+    "enum_char": ".",
+    "explicit_trailing_pattern": "#<",
+    "fence_pattern": "^\\s*([`~]{3}[`~]*)(.*)$",
+    "first_comment_is_literal": false,
+    "literal_comment_pattern": null,
+    "ruler_pattern": "^\\s*[^\\w\\s]{3}.*[^\\w\\s]{3}$"
+  },
+  "lint": {
+    "argument_var_pattern": ".*",
+    "disabled_codes": [
+      "C0103"
+    ],
+    "function_pattern": ".*",
+    "global_var_pattern": ".*",
+    "internal_var_pattern": ".*",
+    "keyword_pattern": ".*",
+    "local_var_pattern": ".*",
+    "macro_pattern": ".*",
+    "max_arguments": 5,
+    "max_branches": 13,
+    "max_conditionals_custom_parser": 2,
+    "max_localvars": 15,
+    "max_returns": 6,
+    "max_statement_spacing": 2,
+    "max_statements": 50,
+    "min_statement_spacing": 1,
+    "private_var_pattern": ".*",
+    "public_var_pattern": ".*"
+  },
+  "misc": {
+    "per_command": {}
+  },
+  "parse": {
+    "additional_commands": {},
+    "override_spec": {},
+    "proptags": [],
+    "vartags": []
+  }
 }

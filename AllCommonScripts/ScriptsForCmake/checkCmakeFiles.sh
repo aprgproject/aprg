@@ -40,21 +40,26 @@ checkCmakeFile() {
     cmakeFile="$1"
 
     # use cmake lint to check
-    cmake-lint "$cmakeFile"
+    cmake-lint --suppress-decorations "$cmakeFile"
 }
 
 # Find all common cmake files
+scriptPrint "$scriptName" "$LINENO" "Searching for common cmake files in [$aprgCommonCmakeDirectory] ..."
 find "$aprgCommonCmakeDirectory" -depth -type f \( -name "CMakeLists.txt" -o -name "*.cmake" \) | while read -r aprgCmakeFile; do
     checkCmakeFile "$aprgCmakeFile"
 done
 
 # Find all cmake files in aprg directories
-scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles]..."
+scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles] ..."
 find "$aprgDirectory" -depth -type f -wholename "$searchCondition" | while read -r aprgProjectLocatorPath; do
     aprgProjectDirectory=$(echo "$aprgProjectLocatorPath" | sed -E "s|$aprgLocatorFile||")
-    aprgProjectDirectory=$(realpath "$aprgProjectDirectory/../") # move one directory up for cmakes
     scriptPrint "$scriptName" "$LINENO" "Searching in aprg project: [$aprgProjectDirectory]"
     find "$aprgProjectDirectory" -depth -type f \( -name "CMakeLists.txt" -o -name "*.cmake" \) | while read -r aprgCmakeFile; do
+        checkCmakeFile "$aprgCmakeFile"
+    done
+    aprgCmakeIncludeDirectory=$(realpath "$aprgProjectDirectory/../AprgCmakeInclude") 
+    scriptPrint "$scriptName" "$LINENO" "Searching in AprgCmakeInclude directory: [$aprgCmakeIncludeDirectory]"
+    find "$aprgCmakeIncludeDirectory" -depth -type f \( -name "CMakeLists.txt" -o -name "*.cmake" \) | while read -r aprgCmakeFile; do
         checkCmakeFile "$aprgCmakeFile"
     done
 done
