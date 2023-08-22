@@ -40,17 +40,17 @@ env:
 jobs:
 
   lintChecks:
-    name: Perform lint checks
+    name: Perform linting
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
         
-      - name: Prepare for lint checks
+      - name: Prepare for linting
         run: |
           sudo apt-get update
           
-      - name: Perform checks for cmake files
+      - name: Perform linting for cmake files
         shell: bash
         continue-on-error: true
         run: |
@@ -67,7 +67,7 @@ jobs:
             echo "No errors detected."
           fi
           
-      - name: Perform checks for shell scripts
+      - name: Perform linting for shell scripts
         shell: bash
         continue-on-error: true
         run: |
