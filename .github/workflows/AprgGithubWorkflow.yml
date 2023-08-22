@@ -58,7 +58,10 @@ jobs:
           checkCMakeFilesPath=$(realpath "$(pwd)/${{ env.checkCmakeFilesRelativePath }}")
           echo "checkCMakeFilesPath: [$checkCMakeFilesPath]"
           chmod +x "$checkCMakeFilesPath"
+          echo "daan1"
           "$checkCMakeFilesPath" | grep -P "\[\w\d+\]" | tee "cmakeLintOutput.txt"
+          echo "daan2"
+          echo "cmakeLintOutput: [$(cat "cmakeLintOutput.txt")]"
           if  [[ -e "cmakeLintOutput.txt" ]] && [ -s "cmakeLintOutput.txt" ]; then
             echo "Some problems found, exiting with error status."
             exit 1
