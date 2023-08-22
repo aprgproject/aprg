@@ -59,7 +59,7 @@ jobs:
           echo "checkCMakeFilesPath: [$checkCMakeFilesPath]"
           chmod +x "$checkCMakeFilesPath"
           echo "daan1"
-          "$checkCMakeFilesPath" | grep -P "\[\w\d+\]" | tee "cmakeLintOutput.txt"
+          "$checkCMakeFilesPath" | tee "cmakeLintOutput.txt"
           echo "daan2"
           echo "cmakeLintOutput: [$(cat "cmakeLintOutput.txt")]"
           if  [[ -e "cmakeLintOutput.txt" ]] && [ -s "cmakeLintOutput.txt" ]; then
