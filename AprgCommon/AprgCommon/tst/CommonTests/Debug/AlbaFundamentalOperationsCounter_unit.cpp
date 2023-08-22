@@ -110,17 +110,10 @@ TEST(AlbaFundamentalOperationsCounterTest, MoveConstructionIsCounted) {
 
     SampleClass object(getRValue());
 
-#if defined(__clang__) || defined(__GNUC__) || defined(__GNUG__)
     EXPECT_EQ(
         "userConstructionCount: 1 defaultConstructionCount: 0 destructionCount: 0 copyConstructionCount: 0 "
         "copyAssignmentCount: 0 moveConstructionCount: 0 moveAssignmentCount: 0",
         CountsForSampleClass::getInstance().getReport());
-#elif defined(_MSC_VER)
-    EXPECT_EQ(
-        "userConstructionCount: 1 defaultConstructionCount: 0 destructionCount: 1 copyConstructionCount: 0 "
-        "copyAssignmentCount: 0 moveConstructionCount: 1 moveAssignmentCount: 0",
-        CountsForSampleClass::getInstance().getReport());
-#endif
 }
 
 TEST(AlbaFundamentalOperationsCounterTest, MoveAssignmentIsCounted) {
@@ -130,17 +123,10 @@ TEST(AlbaFundamentalOperationsCounterTest, MoveAssignmentIsCounted) {
 
     object = getRValue();
 
-#if defined(__clang__) || defined(__GNUC__) || defined(__GNUG__)
     EXPECT_EQ(
         "userConstructionCount: 1 defaultConstructionCount: 0 destructionCount: 1 copyConstructionCount: 0 "
         "copyAssignmentCount: 0 moveConstructionCount: 0 moveAssignmentCount: 1",
         CountsForSampleClass::getInstance().getReport());
-#elif defined(_MSC_VER)
-    EXPECT_EQ(
-        "userConstructionCount: 1 defaultConstructionCount: 0 destructionCount: 2 copyConstructionCount: 0 "
-        "copyAssignmentCount: 0 moveConstructionCount: 1 moveAssignmentCount: 1",
-        CountsForSampleClass::getInstance().getReport());
-#endif
 }
 
 TEST(AlbaFundamentalOperationsCounterTest, ObjectIsConstructedOnceDueToRvo) {
@@ -148,17 +134,10 @@ TEST(AlbaFundamentalOperationsCounterTest, ObjectIsConstructedOnceDueToRvo) {
 
     SampleClass object(getRValue());
 
-#if defined(__clang__) || defined(__GNUC__) || defined(__GNUG__)
     EXPECT_EQ(
         "userConstructionCount: 1 defaultConstructionCount: 0 destructionCount: 0 copyConstructionCount: 0 "
         "copyAssignmentCount: 0 moveConstructionCount: 0 moveAssignmentCount: 0",
         CountsForSampleClass::getInstance().getReport());
-#elif defined(_MSC_VER)
-    EXPECT_EQ(
-        "userConstructionCount: 1 defaultConstructionCount: 0 destructionCount: 1 copyConstructionCount: 0 "
-        "copyAssignmentCount: 0 moveConstructionCount: 1 moveAssignmentCount: 0",
-        CountsForSampleClass::getInstance().getReport());
-#endif
 }
 
 }  // namespace alba
