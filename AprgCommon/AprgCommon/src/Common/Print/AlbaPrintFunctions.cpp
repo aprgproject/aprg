@@ -15,8 +15,8 @@ namespace alba {
 // }
 
 void printLogHeader(ostream& out, string_view fileName, int lineNumber, string_view functionName) {
-    constexpr int MAX_FILENAME_PREFIX_LENGTH = 10;
-    constexpr int MAX_FILENAME_SUFFIX_LENGTH = 20;
+    constexpr int MAX_FILENAME_PREFIX_LENGTH = 0;
+    constexpr int MAX_FILENAME_SUFFIX_LENGTH = 30;
     constexpr int MAX_FUNCTION_NAME_PREFIX_LENGTH = 10;
     constexpr int MAX_FUNCTION_NAME_SUFFIX_LENGTH = 40;
     out << "| ";

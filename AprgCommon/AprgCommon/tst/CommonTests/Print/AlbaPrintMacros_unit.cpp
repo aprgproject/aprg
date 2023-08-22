@@ -16,6 +16,7 @@ TEST(AlbaPrintMacrosTest, PrintingWorks) {
     stringstream ssToVerify;
     performASimplePrintingTest(
         ssToVerify, [](stringstream& ssToVerify, int singleParameter1, int singleParameter2, int singleParameter3) {
+            // NOLINTNEXTLINE(bugprone-lambda-function-name)
             ALBA_PRINT3(ssToVerify, singleParameter1, singleParameter2, singleParameter3);
         });
 }
@@ -72,6 +73,7 @@ TEST(AlbaPrintMacrosTest, PrintingWithoutSpecifyNumberOfParametersWorks) {
     stringstream ssToVerify;
     performASimplePrintingTest(
         ssToVerify, [](stringstream& ssToVerify, int singleParameter1, int singleParameter2, int singleParameter3) {
+            // NOLINTNEXTLINE(bugprone-lambda-function-name)
             ALBA_PRINT_ALL(ssToVerify, singleParameter1, singleParameter2, singleParameter3);
         });
 }

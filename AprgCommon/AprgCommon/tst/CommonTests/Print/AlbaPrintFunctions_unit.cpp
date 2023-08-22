@@ -24,9 +24,8 @@ TEST(AlbaPrintFunctionsTest, PrintLogHeaderWorks) {
     printLogHeader(
         ssToVerify, "Drive:/Folder1/Folder2/Folder3/Folder4/Filename.txt", 265, "prefixVeryVeryVeryVeryVeryVerySuffix");
 
-    string actualPrintString(ssToVerify.str());
+    string const actualPrintString(ssToVerify.str());
     int runningIndex = 0;
-    EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "Drive:", runningIndex));
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "Filename.txt", runningIndex));
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "prefix", runningIndex));
     EXPECT_TRUE(isStringFoundCaseSensitive(actualPrintString, "Suffix", runningIndex));
