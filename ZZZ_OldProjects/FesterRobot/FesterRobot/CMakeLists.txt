@@ -20,9 +20,10 @@ include(${APRG_DIR}/AprgLocalUserAutomation/AprgCmakeInclude/AprgLocalUserAutoma
 include(${FESTER_ROBOT_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
-if (APRG_TEST_MODE)
+if(APRG_TEST_MODE)
     add_executable(${OUTFILE} ${FESTER_ROBOT_SOURCES_AND_TESTS})
-    include_directories(${FESTER_ROBOT_INCLUDE_DIRECTORIES} ${FESTER_ROBOT_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRECTORIES})
+    include_directories(${FESTER_ROBOT_INCLUDE_DIRECTORIES} ${FESTER_ROBOT_TEST_INCLUDE_DIRECTORIES}
+                        ${GTEST_INCLUDE_DIRECTORIES})
     target_link_libraries(${OUTFILE} APRG_LOCAL_USER_AUTOMATION APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
     add_test(${OUTFILE} ${OUTFILE})
 else()

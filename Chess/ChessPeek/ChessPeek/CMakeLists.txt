@@ -23,15 +23,24 @@ include(${APRG_DIR}/Chess/ChessUtilities/AprgCmakeInclude/ChessUtilities.cmake)
 include(${CHESS_PEEK_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
-if (APRG_TEST_MODE)
+if(APRG_TEST_MODE)
     add_executable(${OUTFILE} ${CHESS_PEEK_SOURCES_AND_TESTS})
-    include_directories(${CHESS_PEEK_INCLUDE_DIRECTORIES} ${CHESS_PEEK_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRECTORIES})
-    target_link_libraries(${OUTFILE} CHESS_UTILITIES APRG_LOCAL_USER_AUTOMATION APRG_BITMAP APRG_LOCAL_SCREEN_MONITORING APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
+    include_directories(${CHESS_PEEK_INCLUDE_DIRECTORIES} ${CHESS_PEEK_TEST_INCLUDE_DIRECTORIES}
+                        ${GTEST_INCLUDE_DIRECTORIES})
+    target_link_libraries(
+        ${OUTFILE}
+        CHESS_UTILITIES
+        APRG_LOCAL_USER_AUTOMATION
+        APRG_BITMAP
+        APRG_LOCAL_SCREEN_MONITORING
+        APRG_COMMON
+        ${APRG_GTEST_DEPENDENCIES})
     add_test(${OUTFILE} ${OUTFILE})
 else()
     add_executable(${OUTFILE} ${CHESS_PEEK_SOURCES} ${CHESS_PEEK_MAIN_SOURCES})
     include_directories(${CHESS_PEEK_INCLUDE_DIRECTORIES})
-    target_link_libraries(${OUTFILE} CHESS_UTILITIES APRG_LOCAL_USER_AUTOMATION APRG_BITMAP APRG_LOCAL_SCREEN_MONITORING APRG_COMMON)
+    target_link_libraries(${OUTFILE} CHESS_UTILITIES APRG_LOCAL_USER_AUTOMATION APRG_BITMAP
+                          APRG_LOCAL_SCREEN_MONITORING APRG_COMMON)
 endif()
 install(TARGETS ${OUTFILE} DESTINATION runDirectory)
 include(${APRG_DIR}/AprgCMakeHelpers/LastStep.cmake)
