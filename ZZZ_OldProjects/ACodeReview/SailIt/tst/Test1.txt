@@ -1,4 +1,0 @@
-typedef unsigned int size_t;
-#endif
-#endif
-size_t _fread_nolock_s(void* _DstBuf, size_t _DstSize, size_t _ElementSize, size_t _Count);

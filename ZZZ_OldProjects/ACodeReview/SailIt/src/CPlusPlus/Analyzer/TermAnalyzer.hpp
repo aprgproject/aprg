@@ -101,8 +101,8 @@ private:
     bool isModifiedDueToTypeWithConstQualifierInvalidPosition(Looper const& startLooper);
     bool isModifiedDueToTypeWithDereferenceOperator(Looper const& startLooper);
     bool isModifiedDueToTypeWithPointerOperator(Looper const& startLooper);
-    bool isModifiedDueToTypeWithExternKeyword(Looper consstatic t& startLooper);
-    bool areTheTypesValidForCombination(CPlusPlusType const& type1, CPlusPle const& type2) const;
+    bool isModifiedDueToTypeWithExternKeyword(Looper const& startLooper);
+    static bool areTheTypesValidForCombination(CPlusPlusType const& type1, CPlusPlusType const& type2);
 
     // Statements
     bool isModifiedDueToStatements(Looper const& startLooper);
@@ -152,7 +152,7 @@ private:
     bool isModifiedDueToExternBlock(Looper const& startLooper);
 
     // SharedSimplifiers
-    void checkCondition(Looper costatic nst& startLooper);
+    void checkCondition(Looper const& startLooper);
     bool isClosingPartnerFoundAndMoveLooper(
         Looper& movableLooper, string const& openingOperator, string const& closingOperator);
     template <LooperConnector looperConnector>
