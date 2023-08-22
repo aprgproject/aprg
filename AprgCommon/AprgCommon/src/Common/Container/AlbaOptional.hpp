@@ -69,9 +69,8 @@ public:
         assert(m_contentPointer);  // not allowing any mistakes
         if (m_contentPointer) {
             return *(m_contentPointer);
-        } else {
-            return ContentType();
-        }
+        }             return ContentType();
+       
     }
 
     ContentType& getReference() {

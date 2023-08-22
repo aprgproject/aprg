@@ -60,9 +60,8 @@ template <typename ValueType, typename ContainerType>
 size_t countItemsInBetweenForNonSet(
     ContainerType const& sortedContainer, ValueType const& value1, ValueType const& value2) {
     // 1D range count
-    using ConstIterator = typename ContainerType::const_iterator;
-    ConstIterator itLower(std::lower_bound(sortedContainer.cbegin(), sortedContainer.cend(), value1));
-    ConstIterator itUpper(std::upper_bound(sortedContainer.cbegin(), sortedContainer.cend(), value2));
+    auto itLower(std::lower_bound(sortedContainer.cbegin(), sortedContainer.cend(), value1));
+    auto itUpper(std::upper_bound(sortedContainer.cbegin(), sortedContainer.cend(), value2));
     return static_cast<size_t>(std::distance(itLower, itUpper));
 }
 
@@ -70,9 +69,8 @@ template <typename ValueType, typename ContainerType>
 ContainerType getItemsInBetweenForNonSet(
     ContainerType const& sortedContainer, ValueType const& value1, ValueType const& value2) {
     // 1D range search
-    using ConstIterator = typename ContainerType::const_iterator;
-    ConstIterator itLower(std::lower_bound(sortedContainer.cbegin(), sortedContainer.cend(), value1));
-    ConstIterator itUpper(std::upper_bound(sortedContainer.cbegin(), sortedContainer.cend(), value2));
+    auto itLower(std::lower_bound(sortedContainer.cbegin(), sortedContainer.cend(), value1));
+    auto itUpper(std::upper_bound(sortedContainer.cbegin(), sortedContainer.cend(), value2));
     return ContainerType(itLower, itUpper);
 }
 
@@ -147,8 +145,8 @@ template <typename KeyType, typename ContainerType>
 std::pair<typename ContainerType::const_iterator, typename ContainerType::const_iterator>
 getLowerAndUpperConstIteratorsInMap(ContainerType const& container, KeyType const& keyValue) {
     using ConstIterator = typename ContainerType::const_iterator;
-    ConstIterator itLower(container.lower_bound(keyValue));
-    ConstIterator itUpper(container.upper_bound(keyValue));
+    auto itLower(container.lower_bound(keyValue));
+    auto itUpper(container.upper_bound(keyValue));
     adjustLowerAndUpperIteratorsInMap(container, keyValue, itLower, itUpper);
     return std::pair<ConstIterator, ConstIterator>(itLower, itUpper);
 }
@@ -157,8 +155,8 @@ template <typename KeyType, typename ContainerType>
 std::pair<typename ContainerType::iterator, typename ContainerType::iterator> getLowerAndUpperIteratorsInMap(
     ContainerType& container, KeyType const& keyValue) {
     using Iterator = typename ContainerType::iterator;
-    Iterator itLower(container.lower_bound(keyValue));
-    Iterator itUpper(container.upper_bound(keyValue));
+    auto itLower(container.lower_bound(keyValue));
+    auto itUpper(container.upper_bound(keyValue));
     adjustLowerAndUpperIteratorsInMap(container, keyValue, itLower, itUpper);
     return std::pair<Iterator, Iterator>(itLower, itUpper);
 }

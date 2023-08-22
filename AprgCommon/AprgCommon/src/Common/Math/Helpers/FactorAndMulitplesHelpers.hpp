@@ -71,11 +71,10 @@ NumberType getGreatestCommonFactorUsingEuclidAlgorithm(NumberType const firstNum
         if (second == 0) {
             result = first;
             break;
-        } else {
-            NumberType copyOfFirst(first);
+        }             NumberType copyOfFirst(first);
             first = second;
             second = copyOfFirst % second;
-        }
+       
     }
     return result;
 }
@@ -99,13 +98,13 @@ NumberType getGreatestCommonFactorUsingBinaryGcdAlgorithm(NumberType const first
     if (first == 0) {
         return second;
 
-    } else if (second == 0) {
+    } if (second == 0) {
         return first;
     }
 
-    NumberType trailingFirst =
+    auto trailingFirst =
         static_cast<NumberType>(AlbaBitValueUtilities<NumberType>::getNumberOfConsecutiveZerosFromLsb(first));
-    NumberType trailingSecond =
+    auto trailingSecond =
         static_cast<NumberType>(AlbaBitValueUtilities<NumberType>::getNumberOfConsecutiveZerosFromLsb(second));
     NumberType trailingMinimum = std::min(trailingFirst, trailingSecond);
 

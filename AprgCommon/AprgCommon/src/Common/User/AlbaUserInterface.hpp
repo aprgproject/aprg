@@ -31,7 +31,7 @@ public:
 
 private:
     static constexpr int BUFFER_SIZE = 1000;
-    std::array<char, BUFFER_SIZE> m_buffer;
+    std::array<char, BUFFER_SIZE> m_buffer{};
 };
 
 template <typename NumberType>

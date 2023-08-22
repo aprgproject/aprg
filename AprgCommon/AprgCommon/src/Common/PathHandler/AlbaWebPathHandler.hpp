@@ -27,7 +27,7 @@ private:
     void setUrlParameters(std::string_view urlParameters);
     std::string m_protocolWithSymbols;
     std::string m_urlParameters;
-    bool m_hasProtocol;
+    bool m_hasProtocol{false};
 };
 
 }  // namespace alba

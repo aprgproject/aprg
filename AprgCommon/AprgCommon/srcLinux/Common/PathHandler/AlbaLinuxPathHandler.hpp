@@ -54,8 +54,8 @@ private:
     bool isPathADirectory(std::string_view fileOrDirectoryName) const;
     static bool canBeLocated(std::string_view fullPath);
     bool isSlashNeededAtTheEnd(std::string_view correctedPath, std::string_view originalPath) const;
-    bool m_foundInLocalSystem;
-    bool m_relativePath;
+    bool m_foundInLocalSystem{false};
+    bool m_relativePath{false};
 };
 
 }  // namespace alba

@@ -25,7 +25,7 @@ void changeFractionToSimplestForm(NumeratorType& numerator, DenominatorType& den
     static_assert(typeHelper::isIntegralType<GcfType>(), "GcfType must be an integer");
     static_assert(typeHelper::isSignedType<NumeratorType>(), "NumeratorType must be a signed type");
 
-    GcfType gcf = getGreatestCommonFactor<GcfType>(numerator, denominator);
+    auto gcf = getGreatestCommonFactor<GcfType>(numerator, denominator);
     if (gcf != 0) {
         numerator = static_cast<NumeratorType>(numerator / gcf);
         denominator = static_cast<DenominatorType>(denominator / gcf);

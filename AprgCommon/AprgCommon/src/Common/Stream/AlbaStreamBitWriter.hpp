@@ -92,7 +92,7 @@ template <typename TypeToWrite>
 void AlbaStreamBitWriter::putLittleEndianNumberDataInBuffer(TypeToWrite const& data) {
     constexpr size_t numberOfBits(AlbaBitValueUtilities<TypeToWrite>::getNumberOfBits());
     std::bitset<numberOfBits> dataBitset(data);
-    size_t byteSize =
+    auto byteSize =
         static_cast<size_t>(ceil(static_cast<double>(numberOfBits) / AlbaBitConstants::BYTE_SIZE_IN_BITS));
     for (size_t byteIndex = 0; byteIndex < byteSize; byteIndex++) {
         for (int i = AlbaBitConstants::BYTE_SIZE_IN_BITS - 1; i >= 0; i--) {

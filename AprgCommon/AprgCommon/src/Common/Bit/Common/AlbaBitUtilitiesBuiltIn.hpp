@@ -3,6 +3,7 @@
 #include <Common/Bit/AlbaBitConstants.hpp>
 #include <Common/Types/AlbaTypeHelper.hpp>
 
+// NOLINTNEXTLINE(modernize-concat-nested-namespaces)
 namespace alba {
 
 #ifdef __has_builtin  // you could also use __has_include as well
@@ -55,7 +56,7 @@ INLINE_WITHOUT_BUILT_IN namespace BitUtilitiesWithoutBuiltIn {
         }
         return result;
     }
-}
+}  // namespace BitUtilitiesWithoutBuiltIn
 
 INLINE_WITH_BUILT_IN namespace BitUtilitiesWithBuiltIn {
 #ifdef __has_builtin
@@ -90,8 +91,7 @@ INLINE_WITH_BUILT_IN namespace BitUtilitiesWithBuiltIn {
     constexpr inline std::size_t getNumberOfConsecutiveZerosFromMsb(DataType const value) {
         if (value == 0) {
             return sizeof(DataType) * AlbaBitConstants::BYTE_SIZE_IN_BITS;  // covers undefined behavior
-        } else {
-            if constexpr (sizeof(DataType) < sizeof(unsigned int)) {
+        }             if constexpr (sizeof(DataType) < sizeof(unsigned int)) {
                 return __builtin_clz(value) -
                        ((sizeof(unsigned int) - sizeof(DataType)) * AlbaBitConstants::BYTE_SIZE_IN_BITS);
                 ;
@@ -104,14 +104,13 @@ INLINE_WITH_BUILT_IN namespace BitUtilitiesWithBuiltIn {
             } else {
                 return BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb(value);
             }
-        }
+       
     }
     template <typename DataType>
     constexpr inline std::size_t getNumberOfConsecutiveZerosFromLsb(DataType const value) {
         if (value == 0) {
             return 0;  // covers undefined behavior
-        } else {
-            if constexpr (sizeof(DataType) <= sizeof(unsigned int)) {
+        }             if constexpr (sizeof(DataType) <= sizeof(unsigned int)) {
                 return __builtin_ctz(value);
             } else if constexpr (sizeof(DataType) <= sizeof(unsigned long)) {
                 return __builtin_ctzl(value);
@@ -120,7 +119,7 @@ INLINE_WITH_BUILT_IN namespace BitUtilitiesWithBuiltIn {
             } else {
                 return BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb(value);
             }
-        }
+       
     }
 #endif
 }

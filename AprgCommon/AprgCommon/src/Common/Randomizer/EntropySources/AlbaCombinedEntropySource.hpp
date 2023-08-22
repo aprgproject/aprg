@@ -18,7 +18,7 @@ public:
     double entropy() const;
 
 private:
-    EntropySourceType m_sourceType;
+    EntropySourceType m_sourceType{EntropySourceType::RandomDevice};
     std::random_device m_randomDeviceSource;
     AlbaEntropySourceBasedOnTime m_timeSource;
 };

@@ -91,7 +91,7 @@ template <typename NumberType, size_t numberOfBytesToRead>
 NumberType AlbaFileReader::getData() {
     NumberType result(0);
     m_stream.read(getCharacterBufferPointer(), numberOfBytesToRead);
-    size_t numberOfCharacters = static_cast<size_t>(m_stream.gcount());
+    auto numberOfCharacters = static_cast<size_t>(m_stream.gcount());
     result = std::accumulate(
         m_characterBuffer.cbegin(), m_characterBuffer.cbegin() + numberOfCharacters, static_cast<NumberType>(0U),
         [&](NumberType partialSum, NumberType newValue) {

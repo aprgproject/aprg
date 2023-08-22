@@ -24,7 +24,7 @@ using namespace std;
 namespace alba {
 
 AlbaLinuxPathHandler::AlbaLinuxPathHandler(string_view path)
-    : AlbaPathHandler(R"(/)"), m_foundInLocalSystem(false), m_relativePath(false) {
+    : AlbaPathHandler(R"(/)") {
     setPath(path);
 }
 

@@ -56,19 +56,17 @@ public:
 
         if (value == 0) {
             return true;
-        } else if (value == 1) {
+        } if (value == 1) {
             return false;
-        } else if (value < 0) {
+        } if (value < 0) {
             return isMultipleOfThree(-value);
-        } else {
-            DataType countAtOddPositions = getNumberOfOnes(value & getAlternatingOnesAndZerosFromLsb());
+        }             DataType countAtOddPositions = getNumberOfOnes(value & getAlternatingOnesAndZerosFromLsb());
             DataType countAtEvenPositions = getNumberOfOnes(value & getAlternatingZerosAndOnesFromLsb());
             if (countAtOddPositions >= countAtEvenPositions) {
                 return isMultipleOfThree(static_cast<DataType>(countAtOddPositions - countAtEvenPositions));
-            } else {
-                return isMultipleOfThree(static_cast<DataType>(countAtEvenPositions - countAtOddPositions));
-            }
-        }
+            }                 return isMultipleOfThree(static_cast<DataType>(countAtEvenPositions - countAtOddPositions));
+           
+       
     }
 
     static constexpr inline bool isMultipleOfNine(DataType const value) {
@@ -92,18 +90,17 @@ public:
 
         if (value < 0) {
             return isMultipleOfNine(-value);
-        } else if (value == 0 || value == 9) {
+        } if (value == 0 || value == 9) {
             return true;
-        } else if (value < 9) {
+        } if (value < 9) {
             return false;
-        } else {
-            DataType dividedBy8 = value >> 3;
+        }             DataType dividedBy8 = value >> 3;
             DataType remainderBy8 = value & 7;
             if (dividedBy8 >= remainderBy8) {
                 return isMultipleOfThree(static_cast<DataType>(dividedBy8 - remainderBy8));
             }
             return false;
-        }
+       
     }
 
     static constexpr inline size_t getNumberOfBits() {

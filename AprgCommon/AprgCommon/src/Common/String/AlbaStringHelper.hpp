@@ -370,9 +370,8 @@ public:
         temporaryStream << object;
         if (m_maximumLengthOptional) {
             return temporaryStream.str().substr(0, m_maximumLengthOptional.value());
-        } else {
-            return temporaryStream.str();
-        }
+        }             return temporaryStream.str();
+       
     }
 
     void setPrecision(int const precision);

@@ -138,7 +138,7 @@ public:
         static_assert(typeHelper::isIntegralType<ArgumentType>(), "ArgumentType must be an integer");
 
         constexpr std::size_t NUMBER_OF_BITS = sizeof(DataType) * AlbaBitConstants::BYTE_SIZE_IN_BITS;
-        DataType newValue = static_cast<DataType>(value);
+        auto newValue = static_cast<DataType>(value);
         return (newValue << shiftValue) | (newValue >> (NUMBER_OF_BITS - shiftValue));
     }
 
@@ -148,7 +148,7 @@ public:
         static_assert(typeHelper::isIntegralType<ArgumentType>(), "ArgumentType must be an integer");
 
         constexpr std::size_t NUMBER_OF_BITS = sizeof(DataType) * AlbaBitConstants::BYTE_SIZE_IN_BITS;
-        DataType newValue = static_cast<DataType>(value);
+        auto newValue = static_cast<DataType>(value);
 
         return (newValue >> shiftValue) | (newValue << (NUMBER_OF_BITS - shiftValue));
     }

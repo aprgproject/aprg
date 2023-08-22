@@ -13,7 +13,7 @@ template <typename ContentType>
 class AlbaRaiiafPointer {
 public:
     // rule of five or six
-    AlbaRaiiafPointer() : m_voidPointer(nullptr) {}
+    AlbaRaiiafPointer()  {}
 
     ~AlbaRaiiafPointer() {
         assert(!hasContent());
@@ -44,7 +44,7 @@ public:
 
 private:
     bool hasContent() const { return m_voidPointer != nullptr; }
-    void *m_voidPointer;
+    void *m_voidPointer{nullptr};
 };
 
 }  // namespace alba

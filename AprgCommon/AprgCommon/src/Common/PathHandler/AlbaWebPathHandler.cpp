@@ -10,7 +10,7 @@ using namespace std;
 
 namespace alba {
 
-AlbaWebPathHandler::AlbaWebPathHandler(string_view path) : AlbaPathHandler("/"), m_hasProtocol(false) { setPath(path); }
+AlbaWebPathHandler::AlbaWebPathHandler(string_view path) : AlbaPathHandler("/") { setPath(path); }
 
 void AlbaWebPathHandler::clear() {
     AlbaPathHandler::clear();

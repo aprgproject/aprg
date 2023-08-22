@@ -2,7 +2,7 @@
 
 namespace alba {
 
-AlbaCombinedEntropySource::AlbaCombinedEntropySource() : m_sourceType(EntropySourceType::RandomDevice), m_timeSource() {
+AlbaCombinedEntropySource::AlbaCombinedEntropySource() :  m_timeSource() {
     if (m_randomDeviceSource.entropy() != 0) {
         m_sourceType = EntropySourceType::RandomDevice;
     } else {

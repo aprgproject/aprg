@@ -39,8 +39,8 @@ public:
     void setTime(uint16_t const years, uint8_t const month, uint8_t const days);
 
 private:
-    constexpr uint32_t convertToYearMonthDayFormat(
-        uint16_t const years, uint8_t const month, uint8_t const days) const {
+    static constexpr uint32_t convertToYearMonthDayFormat(
+        uint16_t const years, uint8_t const month, uint8_t const days) {
         return UInt32BitHelper::shiftBytesToTheLeft<2>(years) | UInt32BitHelper::shiftBytesToTheLeft<1>(month) | days;
     }
     uint32_t m_yearMonthDay;
@@ -74,8 +74,8 @@ public:
     void setTime(uint8_t const hours, uint8_t const minutes, uint8_t const seconds);
 
 private:
-    constexpr uint32_t convertToHourMinuteSecondFormat(
-        uint8_t const hours, uint8_t const minutes, uint8_t const seconds) const {
+    static constexpr uint32_t convertToHourMinuteSecondFormat(
+        uint8_t const hours, uint8_t const minutes, uint8_t const seconds) {
         return UInt32BitHelper::shiftBytesToTheLeft<2>(hours) | UInt32BitHelper::shiftBytesToTheLeft<1>(minutes) |
                seconds;
     }
