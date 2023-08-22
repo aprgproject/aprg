@@ -87,7 +87,7 @@ Expression SubstitutionOfTermsToTerms::performSubstitutionForExpression(Expressi
 Function SubstitutionOfTermsToTerms::performSubstitutionForFunction(Function const& functionObject) const {
     Function newFunction(functionObject);
     getTermReferenceFromBaseTerm(newFunction.getInputTermReference()) =
-        performSubstitutionTo(functionObject.getInputTerm());
+        performSubstitutionTo(getTermConstReferenceFromBaseTerm(functionObject.getInputTerm()));
     newFunction.simplify();
     return newFunction;
 }

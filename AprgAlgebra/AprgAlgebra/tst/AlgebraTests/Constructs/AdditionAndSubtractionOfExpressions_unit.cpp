@@ -316,10 +316,10 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksWi
     Term eToTheXTimesSinXTimes2(createExpressionIfPossible({2, "*", eToTheXTimesSinX}));
     Term eToTheXTimesCosXTimes2(createExpressionIfPossible({2, "*", eToTheXTimesCosX}));
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    additionAndSubtraction.putAsAddition(eToTheXTimesSinXTimes2);
-    additionAndSubtraction.putAsSubtraction(eToTheXTimesCosXTimes2);
-    additionAndSubtraction.putAsSubtraction(eToTheXTimesSinX);
-    additionAndSubtraction.putAsAddition(eToTheXTimesCosX);
+    additionAndSubtraction.putAsAddition(Expression(eToTheXTimesSinXTimes2));
+    additionAndSubtraction.putAsSubtraction(Expression(eToTheXTimesCosXTimes2));
+    additionAndSubtraction.putAsSubtraction(Expression(eToTheXTimesSinX));
+    additionAndSubtraction.putAsAddition(Expression(eToTheXTimesCosX));
 
     additionAndSubtraction.combineExpressionsIfPossible();
 
@@ -344,10 +344,10 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksWi
     Term xTimesSinOfLnOfX(createExpressionIfPossible({"x", "*", sinOfLnOfX}));
     Term xTimesCosOfLnOfX(createExpressionIfPossible({"x", "*", cosOfLnOfX}));
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    additionAndSubtraction.putAsAddition(twoXTimesSinOfLnOfX);
-    additionAndSubtraction.putAsSubtraction(twoXTimesCosOfLnOfX);
-    additionAndSubtraction.putAsSubtraction(xTimesSinOfLnOfX);
-    additionAndSubtraction.putAsAddition(xTimesCosOfLnOfX);
+    additionAndSubtraction.putAsAddition(Expression(twoXTimesSinOfLnOfX));
+    additionAndSubtraction.putAsSubtraction(Expression(twoXTimesCosOfLnOfX));
+    additionAndSubtraction.putAsSubtraction(Expression(xTimesSinOfLnOfX));
+    additionAndSubtraction.putAsAddition(Expression(xTimesCosOfLnOfX));
 
     additionAndSubtraction.combineExpressionsIfPossible();
 

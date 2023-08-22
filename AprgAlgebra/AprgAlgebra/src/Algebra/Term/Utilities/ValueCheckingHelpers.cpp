@@ -111,7 +111,7 @@ bool doAnyNumbersSatisfyTheCondition(Expression const& expression, NumberCheckin
 }
 
 bool doAnyNumbersSatisfyTheCondition(Function const& function, NumberCheckingCondition const& condition) {
-    return doAnyNumbersSatisfyTheCondition(function.getInputTerm(), condition);
+    return doAnyNumbersSatisfyTheCondition(getTermConstReferenceFromBaseTerm(function.getInputTerm()), condition);
 }
 
 bool willHaveNoEffectOnAdditionOrSubtraction(Term const& term) { return term.isEmpty() || isTheValue(term, 0); }

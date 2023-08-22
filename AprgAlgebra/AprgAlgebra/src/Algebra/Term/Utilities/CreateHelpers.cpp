@@ -105,6 +105,10 @@ Function createFunctionInAnFunction(Function const& functionObject) {
     return Function(functionObject.getFunctionName(), Term(functionObject), functionObject.getEvaluationFunction());
 }
 
+Term createTermWithAnExpressionWithATermWithAnExpression(Expression const& expression) {
+    return Term(Expression(Term(expression)));
+}
+
 Term createTermWithAdditionAndSubtractionTermsWithDetails(TermsWithDetails const& termsWithDetails) {
     Term result(0);
     if (!termsWithDetails.empty()) {

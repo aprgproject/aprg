@@ -32,8 +32,8 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnSimplifyingInnerTerms) {
 
 TEST(SimplificationOfExpressionTest, SimplifyWorksOnExpressionInExpressionForAMultipleTermExpression) {
     Term expressionTerm(createExpressionIfPossible({"x", "^", "x"}));
-    Term expressionInExpressionTerm(createExpressionInAnExpression(expressionTerm));
-    Term expressionInExpressionInExpressionTerm(createExpressionInAnExpression(expressionInExpressionTerm));
+    Term expressionInExpressionTerm(createAndWrapExpressionFromATerm(expressionTerm));
+    Term expressionInExpressionInExpressionTerm(createAndWrapExpressionFromATerm(expressionInExpressionTerm));
     Expression expressionToTest(createExpressionIfPossible({expressionInExpressionInExpressionTerm}));
     SimplificationOfExpression simplification(expressionToTest);
 
@@ -90,8 +90,8 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnDifferentRaiseToPowerExpress
 
 TEST(SimplificationOfExpressionTest, SimplifyWorksOnExpressionInExpressionForASingleTermExpression) {
     Term expressionTerm(createAndWrapExpressionFromATerm(967));
-    Term expressionInExpressionTerm(createExpressionInAnExpression(expressionTerm));
-    Term expressionInExpressionInExpressionTerm(createExpressionInAnExpression(expressionInExpressionTerm));
+    Term expressionInExpressionTerm(createAndWrapExpressionFromATerm(expressionTerm));
+    Term expressionInExpressionInExpressionTerm(createAndWrapExpressionFromATerm(expressionInExpressionTerm));
     Expression expressionToTest(createExpressionIfPossible({expressionInExpressionInExpressionTerm}));
     SimplificationOfExpression simplification(expressionToTest);
 
@@ -526,7 +526,7 @@ TEST(SimplificationOfExpressionTest, ShouldSimplifyToACommonDenominatorWorksWith
     Term expression1(createExpressionIfPossible({eToTheXTimesSinX, "-", eToTheXTimesCosX}));
     Term expression2(createExpressionIfPossible({expression1, "/", 2}));
     Term expressionToTest(createExpressionIfPossible({eToTheXTimesSinX, "-", eToTheXTimesCosX, "-", expression2}));
-    SimplificationOfExpression simplification(expressionToTest);
+    SimplificationOfExpression simplification((Expression(expressionToTest)));
 
     simplification.simplify();
 

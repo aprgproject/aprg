@@ -15,8 +15,8 @@ namespace algebra {
 class Expression : public BaseTermData {
 public:
     Expression();
-    Expression(BaseTerm const& baseTerm);
-    Expression(BaseTerm&& baseTerm);
+    explicit Expression(BaseTerm const& baseTerm);
+    explicit Expression(BaseTerm&& baseTerm);
     Expression(OperatorLevel const operatorLevel, TermsWithDetails const& termsWithDetails);
     Expression(OperatorLevel const operatorLevel, TermsWithDetails&& termsWithDetails);
 

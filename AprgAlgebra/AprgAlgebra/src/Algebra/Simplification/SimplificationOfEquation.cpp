@@ -37,7 +37,8 @@ void SimplificationOfEquation::simplify() {
     Term rightHandSide(m_equation.getRightHandTerm());
     simplifyLeftHandSideAndRightHandSide(leftHandSide, rightHandSide);
 
-    Term newLeftHandSide(simplifyAndConvertExpressionToSimplestTerm(getNewCombinedTerm(leftHandSide, rightHandSide)));
+    Term newLeftHandSide(
+        simplifyAndConvertExpressionToSimplestTerm(Expression(getNewCombinedTerm(leftHandSide, rightHandSide))));
     string equationOperatorString(m_equation.getEquationOperator().getOperatorString());
 
     removeExponentIfNeeded(newLeftHandSide);
