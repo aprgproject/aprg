@@ -194,7 +194,7 @@
 				"reveal": "always",
 				"panel": "shared"
 			},
-			"dependsOn": "Configure In WSL Using Clang With Asan"
+			"dependsOn": "Configure In WSL Using Clang With Static Analyzers"
 		},
 		{
 			"label": "Install In WSL",

@@ -18,13 +18,11 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 # Assign files, directories, flags, definitions and other specific steps
 include(${MESSAGE_CONTENT_CHECKER_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
-if (APRG_TEST_MODE)
+if(APRG_TEST_MODE)
     add_executable(${OUTFILE} ${MESSAGE_CONTENT_CHECKER_SOURCES_AND_TESTS} ${EXTERNAL_SACKS})
     include_directories(
-        ${MESSAGE_CONTENT_CHECKER_INCLUDE_DIRECTORIES}
-        ${MESSAGE_CONTENT_CHECKER_TEST_INCLUDE_DIRECTORIES}
-        ${EXTERNAL_SACK_DIRECTORIES}
-        ${GTEST_INCLUDE_DIRECTORIES})
+        ${MESSAGE_CONTENT_CHECKER_INCLUDE_DIRECTORIES} ${MESSAGE_CONTENT_CHECKER_TEST_INCLUDE_DIRECTORIES}
+        ${EXTERNAL_SACK_DIRECTORIES} ${GTEST_INCLUDE_DIRECTORIES})
     target_link_libraries(${OUTFILE} APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
     add_test(${OUTFILE} ${OUTFILE})
 else()

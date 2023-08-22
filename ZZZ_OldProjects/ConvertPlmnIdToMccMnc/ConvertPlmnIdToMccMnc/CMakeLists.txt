@@ -19,9 +19,10 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${CONVERT_PLMNID_TO_MCC_MNC_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
-if (APRG_TEST_MODE)
+if(APRG_TEST_MODE)
     add_executable(${OUTFILE} ${CONVERT_PLMNID_TO_MCC_MNC_SOURCES_AND_TESTS})
-    include_directories(${CONVERT_PLMNID_TO_MCC_MNC_INCLUDE_DIRECTORIES} ${CONVERT_PLMNID_TO_MCC_MNC_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRECTORIES})
+    include_directories(${CONVERT_PLMNID_TO_MCC_MNC_INCLUDE_DIRECTORIES}
+                        ${CONVERT_PLMNID_TO_MCC_MNC_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRECTORIES})
     target_link_libraries(${OUTFILE} APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
     add_test(${OUTFILE} ${OUTFILE})
 else()

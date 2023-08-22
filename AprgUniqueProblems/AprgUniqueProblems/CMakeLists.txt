@@ -18,7 +18,7 @@ include(${APRG_DIR}/AprgAlgorithm/AprgCmakeInclude/AprgAlgorithm.cmake)
 include(${APRG_DIR}/AprgGeometry/AprgCmakeInclude/AprgGeometry.cmake)
 include(${APRG_DIR}/AprgMath/AprgCmakeInclude/AprgMath.cmake)
 
-#Add Algorithm test files
+# Add Algorithm test files
 include_directories(${APRG_ALGORITHM_TEST_INCLUDE_DIRECTORIES})
 
 # Assign files, directories, flags, definitions and other specific steps
@@ -27,7 +27,8 @@ include(${APRG_UNIQUE_PROBLEMS_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 # Do final steps
 if(APRG_TEST_MODE)
     add_executable(${OUTFILE} ${APRG_UNIQUE_PROBLEMS_SOURCES_AND_TESTS})
-    include_directories(${APRG_UNIQUE_PROBLEMS_INCLUDE_DIRECTORIES} ${APRG_UNIQUE_PROBLEMS_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRECTORIES})
+    include_directories(${APRG_UNIQUE_PROBLEMS_INCLUDE_DIRECTORIES} ${APRG_UNIQUE_PROBLEMS_TEST_INCLUDE_DIRECTORIES}
+                        ${GTEST_INCLUDE_DIRECTORIES})
     target_link_libraries(${OUTFILE} APRG_MATH APRG_GEOMETRY APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
     add_test(${OUTFILE} ${OUTFILE})
 else()

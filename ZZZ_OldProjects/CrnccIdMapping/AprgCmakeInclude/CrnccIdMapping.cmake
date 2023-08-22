@@ -1,5 +1,6 @@
 # Assign project directory, this needs aprg directory
-set(SIMPLEST_DESIGN_TO_COPY_FOR_LIBRARIES_DIR ${APRG_DIR}/SimplestDesignToCopyForLibraries/SimplestDesignToCopyForLibraries/)
+set(SIMPLEST_DESIGN_TO_COPY_FOR_LIBRARIES_DIR
+    ${APRG_DIR}/SimplestDesignToCopyForLibraries/SimplestDesignToCopyForLibraries/)
 
 # Assign files, directories, flags, definitions and other specific steps
 include(${SIMPLEST_DESIGN_TO_COPY_FOR_LIBRARIES_DIR}/cmake/SpecificStepsAsLibrary.cmake)

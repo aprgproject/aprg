@@ -7,7 +7,7 @@
   "keyword_case": "upper",
   "line_ending": "unix",
   "always_wrap": [],
-  "enable_markup": true,
+  "enable_markup": false,
   "dangle_parens": false,
   "first_comment_is_literal": false,
   "separate_fn_name_with_space": false,

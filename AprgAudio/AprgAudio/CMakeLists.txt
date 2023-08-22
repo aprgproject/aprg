@@ -11,7 +11,7 @@ include(${APRG_AUDIO_DIR}/cmake/LocateAprgDirectory.cmake)
 # Assign macros, common flags, definitions and other common steps
 include(${APRG_DIR}/AprgCMakeHelpers/AllCommonSteps.cmake)
 
-#Add Audio Directory as definition
+# Add Audio Directory as definition
 add_definitions(-DAPRG_AUDIO_DIR="${APRG_AUDIO_DIR}")
 
 # Include other projects
@@ -22,9 +22,10 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${APRG_AUDIO_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
-if (APRG_TEST_MODE)
+if(APRG_TEST_MODE)
     add_executable(${OUTFILE} ${APRG_AUDIO_SOURCES_AND_TESTS})
-    include_directories(${APRG_AUDIO_INCLUDE_DIRECTORIES} ${APRG_AUDIO_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRECTORIES})
+    include_directories(${APRG_AUDIO_INCLUDE_DIRECTORIES} ${APRG_AUDIO_TEST_INCLUDE_DIRECTORIES}
+                        ${GTEST_INCLUDE_DIRECTORIES})
     target_link_libraries(${OUTFILE} APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
     add_test(${OUTFILE} ${OUTFILE})
 else()

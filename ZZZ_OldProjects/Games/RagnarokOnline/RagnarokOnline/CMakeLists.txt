@@ -19,9 +19,10 @@ include(${APRG_DIR}/AprgCommon/AprgCmakeInclude/AprgCommon.cmake)
 include(${RAGNAROK_ONLINE_DIR}/cmake/SpecificStepsAsExecutable.cmake)
 
 # Do final steps
-if (APRG_TEST_MODE)
+if(APRG_TEST_MODE)
     add_executable(${OUTFILE} ${RAGNAROK_ONLINE_SOURCES_AND_TESTS})
-    include_directories(${RAGNAROK_ONLINE_INCLUDE_DIRECTORIES} ${RAGNAROK_ONLINE_TEST_INCLUDE_DIRECTORIES} ${GTEST_INCLUDE_DIRECTORIES})
+    include_directories(${RAGNAROK_ONLINE_INCLUDE_DIRECTORIES} ${RAGNAROK_ONLINE_TEST_INCLUDE_DIRECTORIES}
+                        ${GTEST_INCLUDE_DIRECTORIES})
     target_link_libraries(${OUTFILE} APRG_COMMON ${APRG_GTEST_DEPENDENCIES})
     add_test(${OUTFILE} ${OUTFILE})
 else()
