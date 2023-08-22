@@ -8,7 +8,7 @@
 namespace alba {
 
 template <typename ContentType>
-// class [[deprecated("Use std::optional instead! (needs c++17)")]] 
+// class [[deprecated("Use std::optional instead! (needs c++17)")]]
 class AlbaOptional {
     // This requires copy constructor and default constructor on ContentType
 public:
@@ -18,13 +18,15 @@ public:
 
     explicit AlbaOptional(ContentType& content) : m_contentPointer(std::make_unique<ContentType>(content)) {}
 
+    ~AlbaOptional() = default;
+
     AlbaOptional(AlbaOptional const& optional) {
         if (optional.m_contentPointer) {
             m_contentPointer = std::make_unique<ContentType>(*(optional.m_contentPointer));
         }
     }
 
-    AlbaOptional(AlbaOptional&& optional)  noexcept : m_contentPointer(std::move(optional.m_contentPointer)) {}
+    AlbaOptional(AlbaOptional&& optional) noexcept : m_contentPointer(std::move(optional.m_contentPointer)) {}
 
     AlbaOptional& operator=(AlbaOptional const& optional) {
         if (optional.m_contentPointer) {
@@ -33,7 +35,7 @@ public:
         return *this;
     }
 
-    AlbaOptional& operator=(AlbaOptional&& optional)  noexcept {
+    AlbaOptional& operator=(AlbaOptional&& optional) noexcept {
         m_contentPointer = std::move(optional.m_contentPointer);
         return *this;
     }
@@ -68,8 +70,8 @@ public:
         assert(m_contentPointer);  // not allowing any mistakes
         if (m_contentPointer) {
             return *(m_contentPointer);
-        }             return ContentType();
-       
+        }
+        return ContentType();
     }
 
     ContentType& getReference() {
@@ -99,7 +101,7 @@ template <typename ContentType>
 // lets remove [[deprecated]] to avoid unnecessary warnings
 class AlbaOptional<ContentType&> {
 public:
-    //#warning Please make sure that object still exists in the life time of an optional reference object
+    // #warning Please make sure that object still exists in the life time of an optional reference object
 
     AlbaOptional() : m_hasContent(false), m_contentPointer(nullptr) {}
 
@@ -108,14 +110,20 @@ public:
           m_contentPointer(std::addressof(content))  // std::addressof should be used because & might be overloaded
     {}
 
+    ~AlbaOptional() = default;
+
     AlbaOptional(AlbaOptional<ContentType&> const& optional)
         : m_hasContent(optional.m_hasContent), m_contentPointer(optional.m_contentPointer) {}
+
+    AlbaOptional(AlbaOptional&& optional) = delete;
 
     AlbaOptional& operator=(AlbaOptional<ContentType&> const& optional) {
         m_hasContent = optional.m_hasContent;
         m_contentPointer = optional.m_contentPointer;
         return *this;
     }
+
+    AlbaOptional& operator=(AlbaOptional&& optional) = delete;
 
     void setValue(ContentType content) {
         if (m_hasContent && isContentPointerValid()) {

@@ -19,8 +19,10 @@ public:
     // copy assignment calls default constructor
     AlbaFakeCopyable& operator=(AlbaFakeCopyable const&) { return *this; }
 
-    AlbaFakeCopyable(AlbaFakeCopyable&&)  noexcept = default;
-    AlbaFakeCopyable& operator=(AlbaFakeCopyable&&)  noexcept = default;
+    AlbaFakeCopyable(AlbaFakeCopyable&&) noexcept = default;
+    AlbaFakeCopyable& operator=(AlbaFakeCopyable&&) noexcept = default;
+
+    ~AlbaFakeCopyable() = default;
 
     [[nodiscard]] ObjectType const& getObject() const { return m_object; }
 

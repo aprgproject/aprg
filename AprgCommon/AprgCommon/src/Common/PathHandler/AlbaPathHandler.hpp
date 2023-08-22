@@ -11,6 +11,10 @@ public:
     explicit AlbaPathHandler(std::string_view slashCharacterString);
     explicit AlbaPathHandler(std::string_view path, std::string_view slashCharacterString);
     virtual ~AlbaPathHandler() = default;  // virtual destructor because of virtual functions (vtable exists)
+    AlbaPathHandler(AlbaPathHandler const &pathHandler) = default;
+    AlbaPathHandler(AlbaPathHandler &&pathHandler) = default;
+    AlbaPathHandler &operator=(AlbaPathHandler const &pathHandler) = default;
+    AlbaPathHandler &operator=(AlbaPathHandler &&pathHandler) = default;
 
     virtual void clear();
     [[nodiscard]] virtual std::string getFullPath() const;

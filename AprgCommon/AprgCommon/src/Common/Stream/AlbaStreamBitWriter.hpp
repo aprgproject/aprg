@@ -16,6 +16,10 @@ class AlbaStreamBitWriter {
 public:
     explicit AlbaStreamBitWriter(std::ostream& stream);
     ~AlbaStreamBitWriter();
+    AlbaStreamBitWriter(AlbaStreamBitWriter const& bitWriter) = delete;
+    AlbaStreamBitWriter(AlbaStreamBitWriter&& bitWriter) = delete;
+    AlbaStreamBitWriter& operator=(AlbaStreamBitWriter const& bitWriter) = delete;
+    AlbaStreamBitWriter& operator=(AlbaStreamBitWriter&& bitWriter) = delete;
 
     // rule of zero
 
@@ -92,8 +96,7 @@ template <typename TypeToWrite>
 void AlbaStreamBitWriter::putLittleEndianNumberDataInBuffer(TypeToWrite const& data) {
     constexpr size_t numberOfBits(AlbaBitValueUtilities<TypeToWrite>::getNumberOfBits());
     std::bitset<numberOfBits> dataBitset(data);
-    auto byteSize =
-        static_cast<size_t>(ceil(static_cast<double>(numberOfBits) / AlbaBitConstants::BYTE_SIZE_IN_BITS));
+    auto byteSize = static_cast<size_t>(ceil(static_cast<double>(numberOfBits) / AlbaBitConstants::BYTE_SIZE_IN_BITS));
     for (size_t byteIndex = 0; byteIndex < byteSize; byteIndex++) {
         for (int i = AlbaBitConstants::BYTE_SIZE_IN_BITS - 1; i >= 0; i--) {
             m_bitBuffer.emplace_back(dataBitset[(byteIndex * AlbaBitConstants::BYTE_SIZE_IN_BITS) + i]);

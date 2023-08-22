@@ -128,14 +128,14 @@ public:
         return *this;
     }
 
-    size_t getSize() const { return SIZE; }
+    [[nodiscard]] size_t getSize() const { return SIZE; }
 
-    DataType const& getValueAt(size_t const index) const {
+    [[nodiscard]] DataType const& getValueAt(size_t const index) const {
         assert(index < SIZE);
         return m_values[index];
     }
 
-    DataType getMagnitude() const {
+    [[nodiscard]] DataType getMagnitude() const {
         // In 2D, in c++ complex number class this is same with abs(v).
         DataType sumOfSquaredTerms = std::accumulate(
             m_values.cbegin(), m_values.cend(), DataType(0),
@@ -146,7 +146,7 @@ public:
         return static_cast<DataType>(raiseToPowerForMathVectorDataType(sumOfSquaredTerms, DataType(1) / DataType(2)));
     }
 
-    ValuesInArray const& getValues() const { return m_values; }
+    [[nodiscard]] ValuesInArray const& getValues() const { return m_values; }
 
     DataType& getValueReferenceAt(size_t const index) {
         assert(index < SIZE);

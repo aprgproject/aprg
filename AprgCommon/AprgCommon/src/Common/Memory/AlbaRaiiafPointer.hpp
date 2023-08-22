@@ -43,7 +43,7 @@ public:
     }
 
 private:
-    bool hasContent() const { return m_voidPointer != nullptr; }
+    [[nodiscard]] bool hasContent() const { return m_voidPointer != nullptr; }
     void *m_voidPointer{nullptr};
 };
 

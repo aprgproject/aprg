@@ -14,8 +14,12 @@ namespace alba {
 
 class AlbaStreamBitReader {
 public:
-    explicit AlbaStreamBitReader(std::istream& stream);
+    explicit AlbaStreamBitReader(std::istream &stream);
     ~AlbaStreamBitReader() = default;
+    AlbaStreamBitReader(AlbaStreamBitReader const &bitReader) = delete;
+    AlbaStreamBitReader(AlbaStreamBitReader &&bitReader) = delete;
+    AlbaStreamBitReader &operator=(AlbaStreamBitReader const &bitReader) = delete;
+    AlbaStreamBitReader &operator=(AlbaStreamBitReader &&bitReader) = delete;
 
     [[nodiscard]] bool noRemainingBitsInBuffer() const;
 
@@ -32,12 +36,12 @@ public:
     template <auto BITSET_SIZE>
     std::bitset<BITSET_SIZE> readBitsetData(size_t const startBitsetIndex, size_t const endBitsetIndex);
 
-    std::istream& getInputStream();
+    std::istream &getInputStream();
 
 private:
     void readIfNeeded(size_t const numberOfBitsRequired);
     void eraseBitsInBitBuffer(size_t const numberOfBitsToErase);
-    std::istream& m_stream;
+    std::istream &m_stream;
     std::deque<bool> m_bitBuffer;
 };
 

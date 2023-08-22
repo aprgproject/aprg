@@ -84,6 +84,22 @@ class UniqueVariant {
 public:
     UniqueVariant() { allocate(); }
 
+    ~UniqueVariant() {
+        if (m_typeId != 0u) {
+            delete m_ptr;
+        } else {
+            ::operator delete(m_ptr);
+        }
+    }
+
+    UniqueVariant(UniqueVariant const &variant) = delete;
+
+    UniqueVariant(UniqueVariant &&variant) = delete;
+
+    UniqueVariant &operator=(UniqueVariant const &variant) = delete;
+
+    UniqueVariant &operator=(UniqueVariant &&variant) = delete;
+
     template <class T>
     T &acquire() {
         static_assert(
@@ -97,14 +113,6 @@ public:
             m_ptr->~VariantDataType();
         }
         m_typeId = 0;
-    }
-
-    ~UniqueVariant() {
-        if (m_typeId != 0u) {
-            delete m_ptr;
-        } else {
-            ::operator delete(m_ptr);
-        }
     }
 
 private:
