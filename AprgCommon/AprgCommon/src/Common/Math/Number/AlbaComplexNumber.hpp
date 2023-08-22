@@ -28,27 +28,27 @@ public:
     AlbaComplexNumber<DataType>& operator-=(AlbaComplexNumber<DataType> const& second);
     AlbaComplexNumber<DataType>& operator*=(AlbaComplexNumber<DataType> const& second);
     AlbaComplexNumber<DataType>& operator/=(AlbaComplexNumber<DataType> const& second);
-    DataType getRealPart() const;
-    DataType getImaginaryPart() const;
-    DataType getModulus() const;
-    DataType getModulusWithSignOfRealPart() const;
-    DataType getModulusSquared() const;
-    double getAngleInRadians() const;
-    double getBestAngleInRaiseToPowerInRadians(DataType const exponent) const;
-    AlbaComplexNumber<DataType> getConjugate() const;
-    AlbaComplexNumber<DataType> getNthRoot(size_t const rootIndex, size_t const rootDegree) const;
+    [[nodiscard]] DataType getRealPart() const;
+    [[nodiscard]] DataType getImaginaryPart() const;
+    [[nodiscard]] DataType getModulus() const;
+    [[nodiscard]] DataType getModulusWithSignOfRealPart() const;
+    [[nodiscard]] DataType getModulusSquared() const;
+    [[nodiscard]] double getAngleInRadians() const;
+    [[nodiscard]] double getBestAngleInRaiseToPowerInRadians(DataType const exponent) const;
+    [[nodiscard]] AlbaComplexNumber<DataType> getConjugate() const;
+    [[nodiscard]] AlbaComplexNumber<DataType> getNthRoot(size_t const rootIndex, size_t const rootDegree) const;
 
 private:
-    DataType getRealPartInMultiplication(
+    [[nodiscard]] DataType getRealPartInMultiplication(
         DataType const firstRealPart, DataType const firstImaginaryPart, DataType const secondRealPart,
         DataType const secondImaginaryPart) const;
-    DataType getImaginaryPartInMultiplication(
+    [[nodiscard]] DataType getImaginaryPartInMultiplication(
         DataType const firstRealPart, DataType const firstImaginaryPart, DataType const secondRealPart,
         DataType const secondImaginaryPart) const;
-    DataType getRealPartInDivision(
+    [[nodiscard]] DataType getRealPartInDivision(
         DataType const firstRealPart, DataType const firstImaginaryPart, DataType const secondRealPart,
         DataType const secondImaginaryPart) const;
-    DataType getImaginaryPartInDivision(
+    [[nodiscard]] DataType getImaginaryPartInDivision(
         DataType const firstRealPart, DataType const firstImaginaryPart, DataType const secondRealPart,
         DataType const secondImaginaryPart) const;
 

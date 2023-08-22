@@ -20,9 +20,7 @@ void adjustLowerAndUpperIterators(
     Container const& container, ValueType const& value, Iterator& itLower, Iterator& itUpper) {
     if (!container.empty()) {
         if (itLower != container.cbegin()) {
-            if (itLower == container.cend()) {
-                itLower--;
-            } else if (*itLower != value) {
+            if (itLower == container.cend() || *itLower != value) {
                 itLower--;
             }
         }
@@ -122,9 +120,7 @@ void adjustLowerAndUpperIteratorsInMap(
     Container const& container, KeyType const& keyValue, Iterator& itLower, Iterator& itUpper) {
     if (!container.empty()) {
         if (itLower != container.cbegin()) {
-            if (itLower == container.cend()) {
-                itLower--;
-            } else if (itLower->first != keyValue) {
+            if (itLower == container.cend() || itLower->first != keyValue) {
                 itLower--;
             }
         }

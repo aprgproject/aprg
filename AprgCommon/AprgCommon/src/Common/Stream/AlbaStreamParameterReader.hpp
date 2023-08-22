@@ -32,7 +32,7 @@ TypeToRetrieve AlbaStreamParameterReader::readData() const {
 }
 
 template <>
-std::string AlbaStreamParameterReader::readData<std::string>() const;
+[[nodiscard]] std::string AlbaStreamParameterReader::readData<std::string>() const;
 
 template <typename TypeToRetrieve>
 void AlbaStreamParameterReader::readVectorData(std::vector<TypeToRetrieve>& vectorOfData) const {

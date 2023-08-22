@@ -140,29 +140,33 @@ public:
         return self;
     }
 
-    bool isEmpty() const { return m_matrixData.empty(); }
+    [[nodiscard]] bool isEmpty() const { return m_matrixData.empty(); }
 
-    bool isInside(size_t const x, size_t const y) const { return x < m_numberOfColumns && y < m_numberOfRows; }
+    [[nodiscard]] bool isInside(size_t const x, size_t const y) const {
+        return x < m_numberOfColumns && y < m_numberOfRows;
+    }
 
-    size_t getNumberOfColumns() const { return m_numberOfColumns; }
+    [[nodiscard]] size_t getNumberOfColumns() const { return m_numberOfColumns; }
 
-    size_t getNumberOfRows() const { return m_numberOfRows; }
+    [[nodiscard]] size_t getNumberOfRows() const { return m_numberOfRows; }
 
-    size_t getNumberOfCells() const { return m_numberOfColumns * m_numberOfRows; }
+    [[nodiscard]] size_t getNumberOfCells() const { return m_numberOfColumns * m_numberOfRows; }
 
-    size_t getMatrixIndex(size_t const x, size_t const y) const { return getMatrixIndex(x, y, m_numberOfColumns); }
+    [[nodiscard]] size_t getMatrixIndex(size_t const x, size_t const y) const {
+        return getMatrixIndex(x, y, m_numberOfColumns);
+    }
 
-    DataType getEntry(size_t const x, size_t const y) const {
+    [[nodiscard]] DataType getEntry(size_t const x, size_t const y) const {
         assert(isInside(x, y));
         return m_matrixData[getMatrixIndex(x, y)];
     }
 
-    DataType const& getEntryConstReference(size_t const x, size_t const y) const {
+    [[nodiscard]] DataType const& getEntryConstReference(size_t const x, size_t const y) const {
         assert(isInside(x, y));
         return m_matrixData[getMatrixIndex(x, y)];
     }
 
-    MatrixData const& getMatrixData() const { return m_matrixData; }
+    [[nodiscard]] MatrixData const& getMatrixData() const { return m_matrixData; }
 
     void retrieveColumn(MatrixData& column, size_t const x) const {
         column.reserve(m_numberOfRows);
@@ -295,7 +299,7 @@ public:
     }
 
 private:
-    size_t getMatrixIndex(size_t const x, size_t const y, size_t const numberOfColumns) const {
+    [[nodiscard]] size_t getMatrixIndex(size_t const x, size_t const y, size_t const numberOfColumns) const {
         return (y * numberOfColumns) + x;
     }
 

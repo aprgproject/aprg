@@ -91,11 +91,11 @@ public:
         return result;
     }
 
-    size_t getNumberOfColumns() const { return m_numberOfColumns; }
+    [[nodiscard]] size_t getNumberOfColumns() const { return m_numberOfColumns; }
 
-    size_t getNumberOfRows() const { return m_numberOfRows; }
+    [[nodiscard]] size_t getNumberOfRows() const { return m_numberOfRows; }
 
-    size_t getMatrixIndex(size_t const x, size_t const y) const { return getMatrixIndex(x, y, m_numberOfColumns); }
+    [[nodiscard]] size_t getMatrixIndex(size_t const x, size_t const y) const { return getMatrixIndex(x, y, m_numberOfColumns); }
 
     DataType getEntry(size_t const x, size_t const y) const {
         assert((x < m_numberOfColumns) && (y < m_numberOfRows));
@@ -145,11 +145,11 @@ public:
     }
 
 private:
-    size_t getMatrixIndex(size_t const x, size_t const y, size_t const numberOfColumns) const {
+    [[nodiscard]] size_t getMatrixIndex(size_t const x, size_t const y, size_t const numberOfColumns) const {
         return (y * numberOfColumns) + x;
     }
 
-    size_t getTranposeIndex(size_t const index) const {
+    [[nodiscard]] size_t getTranposeIndex(size_t const index) const {
         return getMatrixIndex(index / m_numberOfColumns, index % m_numberOfColumns, m_numberOfRows);
     }
 

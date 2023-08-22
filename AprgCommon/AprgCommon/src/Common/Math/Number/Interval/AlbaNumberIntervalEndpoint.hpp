@@ -11,11 +11,11 @@ public:
     AlbaNumberIntervalEndpoint(Type const type, AlbaNumber const value);
 
     bool operator==(AlbaNumberIntervalEndpoint const& second) const;
-    bool isOpen() const;
-    bool isClose() const;
-    Type getType() const;
-    AlbaNumber const& getValue() const;
-    std::string getTypeString() const;
+    [[nodiscard]] bool isOpen() const;
+    [[nodiscard]] bool isClose() const;
+    [[nodiscard]] Type getType() const;
+    [[nodiscard]] AlbaNumber const& getValue() const;
+    [[nodiscard]] std::string getTypeString() const;
 
     void setType(Type const type);
 

@@ -22,8 +22,8 @@ public:
     AlbaAngle operator-() const;
     AlbaAngle& operator+=(AlbaAngle const& secondAngle);
     AlbaAngle& operator-=(AlbaAngle const& secondAngle);
-    double getDegrees() const;
-    double getRadians() const;
+    [[nodiscard]] double getDegrees() const;
+    [[nodiscard]] double getRadians() const;
     void setAngleValueInDegreesNearestToZero();
 
 private:

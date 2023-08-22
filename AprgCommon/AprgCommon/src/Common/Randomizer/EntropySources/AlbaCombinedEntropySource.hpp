@@ -15,7 +15,7 @@ public:
     AlbaCombinedEntropySource();
 
     ValueType operator()();
-    double entropy() const;
+    [[nodiscard]] double entropy() const;
 
 private:
     EntropySourceType m_sourceType{EntropySourceType::RandomDevice};

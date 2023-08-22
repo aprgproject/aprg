@@ -14,10 +14,10 @@ namespace alba {
 class AlbaAny {
     // This requires copy constructor and default constructor on ContentType
 public:
-    AlbaAny() : m_savedMemory(), m_typeId(EMPTY_TYPE_ID) {}
+    AlbaAny() :  m_typeId(EMPTY_TYPE_ID) {}
 
     template <typename ContentType>
-    AlbaAny(ContentType const& content)  // copy constructor for other ContentType
+    explicit AlbaAny(ContentType const& content)  // copy constructor for other ContentType
         : m_savedMemory(std::addressof(content), sizeof(content)), m_typeId(GetTypeId<ContentType>()) {
         // Herb Sutter: Dont xray objects. Me: It has standard layout so it can be xray-ed.
         static_assert(typeHelper::hasStandardLayout<ContentType>(), "ObjectType needs to have standard layout.");
@@ -30,10 +30,10 @@ public:
         return hasContent();
     }
 
-    bool hasContent() const { return m_savedMemory.hasContent(); }
+    [[nodiscard]] bool hasContent() const { return m_savedMemory.hasContent(); }
 
     template <typename ContentType>
-    ContentType getContentAs() const {
+    [[nodiscard]] ContentType getContentAs() const {
         assert(m_typeId == GetTypeId<ContentType>());  // not allowing any mistakes
         return m_savedMemory.retrieveObjectAsConstReference<ContentType>();
     }

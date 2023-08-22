@@ -27,12 +27,12 @@ public:
     bool operator<=(AlbaYearMonthDay const& second) const;
     bool operator>=(AlbaYearMonthDay const& second) const;
 
-    bool isEmpty() const;
-    uint32_t getYears() const;
-    uint32_t getMonths() const;
-    uint32_t getDays() const;
-    uint32_t getTotalDays() const;
-    AlbaDateTimeConstants::DayOfTheWeek getDayOfTheWeek() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] uint32_t getYears() const;
+    [[nodiscard]] uint32_t getMonths() const;
+    [[nodiscard]] uint32_t getDays() const;
+    [[nodiscard]] uint32_t getTotalDays() const;
+    [[nodiscard]] AlbaDateTimeConstants::DayOfTheWeek getDayOfTheWeek() const;
 
     void clear();
     void setTime(uint32_t const totalDays);
@@ -63,11 +63,11 @@ public:
     bool operator<=(AlbaHourMinuteSecond const& second) const;
     bool operator>=(AlbaHourMinuteSecond const& second) const;
 
-    bool isEmpty() const;
-    uint32_t getHours() const;
-    uint32_t getMinutes() const;
-    uint32_t getSeconds() const;
-    uint32_t getTotalSeconds() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] uint32_t getHours() const;
+    [[nodiscard]] uint32_t getMinutes() const;
+    [[nodiscard]] uint32_t getSeconds() const;
+    [[nodiscard]] uint32_t getTotalSeconds() const;
 
     void clear();
     void setTime(uint32_t const totalSeconds);
@@ -100,7 +100,7 @@ public:
         AlbaDateTime const& savedDateTime;
     };
 
-    constexpr AlbaDateTime() : m_sign(1), m_yearMonthDay{}, m_hourMinuteSecond{}, m_microseconds{} {}
+    constexpr AlbaDateTime() : m_sign(1),  m_microseconds{} {}
     constexpr AlbaDateTime(
         AlbaYearMonthDay const& yearMonthDay, AlbaHourMinuteSecond const& hourMinuteSecond, uint32_t const microseconds)
         : m_sign(1), m_yearMonthDay(yearMonthDay), m_hourMinuteSecond(hourMinuteSecond), m_microseconds(microseconds) {}
@@ -124,16 +124,16 @@ public:
     AlbaDateTime operator+(AlbaDateTime const& secondDateTime) const;
     AlbaDateTime operator-(AlbaDateTime const& secondDateTime) const;
 
-    bool isEmpty() const;
-    uint32_t getYears() const;
-    uint32_t getMonths() const;
-    uint32_t getDays() const;
-    uint32_t getHours() const;
-    uint32_t getMinutes() const;
-    uint32_t getSeconds() const;
-    uint32_t getMicroSeconds() const;
-    AlbaYearMonthDay const& getYearMonthDay() const;
-    AlbaHourMinuteSecond const& getHourMinutesSecond() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] uint32_t getYears() const;
+    [[nodiscard]] uint32_t getMonths() const;
+    [[nodiscard]] uint32_t getDays() const;
+    [[nodiscard]] uint32_t getHours() const;
+    [[nodiscard]] uint32_t getMinutes() const;
+    [[nodiscard]] uint32_t getSeconds() const;
+    [[nodiscard]] uint32_t getMicroSeconds() const;
+    [[nodiscard]] AlbaYearMonthDay const& getYearMonthDay() const;
+    [[nodiscard]] AlbaHourMinuteSecond const& getHourMinutesSecond() const;
 
     AlbaYearMonthDay& getYearMonthDayReference();
     AlbaHourMinuteSecond& getHourMinutesSecondReference();
@@ -148,7 +148,7 @@ public:
                               // constructor is constexpr.
 
     template <PrintFormat printFormat>
-    PrintObject<printFormat> getPrintObject() const {
+    [[nodiscard]] PrintObject<printFormat> getPrintObject() const {
         return PrintObject<printFormat>(*this);
     }
 

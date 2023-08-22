@@ -8,16 +8,15 @@
 namespace alba {
 
 template <typename ContentType>
-// class [[deprecated("Use std::optional instead! (needs c++17)")]] AlbaOptional // lets remove [[deprecated]] to avoid
-// unnecessary warnings
+// class [[deprecated("Use std::optional instead! (needs c++17)")]] 
 class AlbaOptional {
     // This requires copy constructor and default constructor on ContentType
 public:
     AlbaOptional() = default;
 
-    AlbaOptional(ContentType content) : m_contentPointer(std::make_unique<ContentType>(content)) {}
+    explicit AlbaOptional(ContentType content) : m_contentPointer(std::make_unique<ContentType>(content)) {}
 
-    AlbaOptional(ContentType& content) : m_contentPointer(std::make_unique<ContentType>(content)) {}
+    explicit AlbaOptional(ContentType& content) : m_contentPointer(std::make_unique<ContentType>(content)) {}
 
     AlbaOptional(AlbaOptional const& optional) {
         if (optional.m_contentPointer) {
@@ -25,7 +24,7 @@ public:
         }
     }
 
-    AlbaOptional(AlbaOptional&& optional) : m_contentPointer(std::move(optional.m_contentPointer)) {}
+    AlbaOptional(AlbaOptional&& optional)  noexcept : m_contentPointer(std::move(optional.m_contentPointer)) {}
 
     AlbaOptional& operator=(AlbaOptional const& optional) {
         if (optional.m_contentPointer) {
@@ -34,14 +33,14 @@ public:
         return *this;
     }
 
-    AlbaOptional& operator=(AlbaOptional&& optional) {
+    AlbaOptional& operator=(AlbaOptional&& optional)  noexcept {
         m_contentPointer = std::move(optional.m_contentPointer);
         return *this;
     }
 
     explicit operator bool() const { return hasContent(); }
 
-    operator ContentType() const { return get(); }
+    explicit operator ContentType() const { return get(); }
 
     void createObjectUsingDefaultConstructor() { m_contentPointer = std::make_unique<ContentType>(); }
 
@@ -63,9 +62,9 @@ public:
 
     void clear() { m_contentPointer.reset(); }
 
-    bool hasContent() const { return static_cast<bool>(m_contentPointer); }
+    [[nodiscard]] bool hasContent() const { return static_cast<bool>(m_contentPointer); }
 
-    ContentType get() const {
+    [[nodiscard]] ContentType get() const {
         assert(m_contentPointer);  // not allowing any mistakes
         if (m_contentPointer) {
             return *(m_contentPointer);
@@ -78,7 +77,7 @@ public:
         return *(m_contentPointer);
     }
 
-    ContentType const& getConstReference() const {
+    [[nodiscard]] ContentType const& getConstReference() const {
         assert(m_contentPointer);  // not allowing any mistakes
         return *(m_contentPointer);
     }
@@ -104,7 +103,7 @@ public:
 
     AlbaOptional() : m_hasContent(false), m_contentPointer(nullptr) {}
 
-    AlbaOptional(ContentType& content)
+    explicit AlbaOptional(ContentType& content)
         : m_hasContent(true),
           m_contentPointer(std::addressof(content))  // std::addressof should be used because & might be overloaded
     {}
@@ -134,9 +133,9 @@ public:
         m_contentPointer = nullptr;
     }
 
-    bool hasContent() const { return m_hasContent; }
+    [[nodiscard]] bool hasContent() const { return m_hasContent; }
 
-    ContentType& get() const {
+    [[nodiscard]] ContentType& get() const {
         if (m_hasContent && isContentPointerValid()) {
             return *m_contentPointer;
         }
@@ -145,7 +144,7 @@ public:
 
     explicit operator bool() const { return m_hasContent; }
 
-    operator ContentType&() const {
+    explicit operator ContentType&() const {
         if (m_hasContent && isContentPointerValid()) {
             return *m_contentPointer;
         }
@@ -153,7 +152,7 @@ public:
     }
 
 private:
-    inline bool isContentPointerValid() const { return m_contentPointer != nullptr; }
+    [[nodiscard]] inline bool isContentPointerValid() const { return m_contentPointer != nullptr; }
 
     bool m_hasContent;
     ContentType* m_contentPointer;

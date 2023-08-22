@@ -1,5 +1,7 @@
 #pragma once
 
+// NOLINTBEGIN(hicpp-signed-bitwise)
+
 #include <Common/Bit/AlbaBitConstants.hpp>
 #include <Common/Types/AlbaTypeHelper.hpp>
 
@@ -54,6 +56,7 @@ public:
     static constexpr inline DataType shiftBytesToTheLeft(ArgumentType const value) {
         static_assert(typeHelper::isIntegralType<ArgumentType>(), "ArgumentType must be an integer");
         static_assert(
+            // NOLINTNEXTLINE(bugprone-sizeof-expression)
             sizeof(DataType) > shiftValue, "shiftBytesToTheLeft: sizeof(DataType) size is greater than shift value");
 
         return static_cast<DataType>(static_cast<DataType>(value) << shiftValue * AlbaBitConstants::BYTE_SIZE_IN_BITS);
@@ -63,6 +66,7 @@ public:
     static constexpr inline DataType shiftBytesToTheRight(ArgumentType const value) {
         static_assert(typeHelper::isIntegralType<ArgumentType>(), "ArgumentType must be an integer");
         static_assert(
+            // NOLINTNEXTLINE(bugprone-sizeof-expression)
             sizeof(DataType) > shiftValue, "shiftBytesToTheRight: sizeof(DataType) size is greater than shift value");
 
         return (static_cast<DataType>(value) >> shiftValue * AlbaBitConstants::BYTE_SIZE_IN_BITS);
@@ -155,6 +159,7 @@ public:
 
     template <auto position>
     static constexpr inline uint8_t getByteAt(DataType const value) {
+        // NOLINTNEXTLINE(bugprone-sizeof-expression)
         static_assert(sizeof(DataType) > position, "getByteAt: position is greater than DataType size");
 
         return static_cast<uint8_t>(shiftBytesToTheRight<position>(value));
@@ -180,6 +185,7 @@ public:
 
     template <std::size_t size>
     static constexpr inline DataType swapWithBytes(DataType const) {
+        // NOLINTNEXTLINE(misc-redundant-expression)
         static_assert(size != size, "This size or type is not supported. Please add a specialization if needed.");
 
         return 0;
@@ -195,3 +201,5 @@ public:
 };
 
 }  // namespace alba
+
+// NOLINTEND(hicpp-signed-bitwise)

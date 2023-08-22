@@ -14,13 +14,13 @@ public:
     void resetTimer();
     void stopTimer();
 
-    size_t getElapsedTimeInNanoseconds() const;
-    size_t getElapsedTimeInMicroseconds() const;
-    size_t getElapsedTimeInMilliseconds() const;
-    size_t getElapsedTimeInSeconds() const;
-    size_t getElapsedTimeInMinutes() const;
-    size_t getElapsedTimeInHours() const;
-    AlbaDateTime getDifferenceAsAlbaDateTime() const;
+    [[nodiscard]] size_t getElapsedTimeInNanoseconds() const;
+    [[nodiscard]] size_t getElapsedTimeInMicroseconds() const;
+    [[nodiscard]] size_t getElapsedTimeInMilliseconds() const;
+    [[nodiscard]] size_t getElapsedTimeInSeconds() const;
+    [[nodiscard]] size_t getElapsedTimeInMinutes() const;
+    [[nodiscard]] size_t getElapsedTimeInHours() const;
+    [[nodiscard]] AlbaDateTime getDifferenceAsAlbaDateTime() const;
 
 private:
     LibrarySteadyTime m_time1;

@@ -13,19 +13,19 @@ public:
     virtual ~AlbaPathHandler() = default;  // virtual destructor because of virtual functions (vtable exists)
 
     virtual void clear();
-    virtual std::string getFullPath() const;
-    virtual std::string getDirectory() const;
+    [[nodiscard]] virtual std::string getFullPath() const;
+    [[nodiscard]] virtual std::string getDirectory() const;
     void input(std::string_view path);
     void reInput();
     void goUp();
-    std::string getImmediateDirectoryName() const;
-    std::string getFile() const;
-    std::string getFilenameOnly() const;
-    std::string getExtension() const;
-    PathType getPathType() const;
-    bool isDirectory() const;
-    bool isFile() const;
-    bool isEmpty() const;
+    [[nodiscard]] std::string getImmediateDirectoryName() const;
+    [[nodiscard]] std::string getFile() const;
+    [[nodiscard]] std::string getFilenameOnly() const;
+    [[nodiscard]] std::string getExtension() const;
+    [[nodiscard]] PathType getPathType() const;
+    [[nodiscard]] bool isDirectory() const;
+    [[nodiscard]] bool isFile() const;
+    [[nodiscard]] bool isEmpty() const;
 
 protected:
     virtual void save(std::string_view path);

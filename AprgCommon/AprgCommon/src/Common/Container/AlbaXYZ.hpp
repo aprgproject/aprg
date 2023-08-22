@@ -66,15 +66,15 @@ public:
         return *this;
     }
 
-    bool isEmpty() const { return CoordinateType{} == m_x && CoordinateType{} == m_y && CoordinateType{} == m_z; }
+    [[nodiscard]] bool isEmpty() const { return CoordinateType{} == m_x && CoordinateType{} == m_y && CoordinateType{} == m_z; }
 
-    CoordinateType getX() const { return m_x; }
+    [[nodiscard]] CoordinateType getX() const { return m_x; }
 
-    CoordinateType getY() const { return m_y; }
+    [[nodiscard]] CoordinateType getY() const { return m_y; }
 
-    CoordinateType getZ() const { return m_z; }
+    [[nodiscard]] CoordinateType getZ() const { return m_z; }
 
-    CoordinateType getXTimesYTimesZ() const { return m_x * m_y * m_z; }
+    [[nodiscard]] CoordinateType getXTimesYTimesZ() const { return m_x * m_y * m_z; }
 
     void setX(CoordinateType const& xValue) { m_x = xValue; }
 

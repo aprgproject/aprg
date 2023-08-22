@@ -19,10 +19,10 @@ public:
     static AlbaLinuxPathHandler createPathHandlerForDetectedPath();
 
     void clear() override;
-    bool isFoundInLocalSystem() const;
-    bool isRelativePath() const;
-    double getFileSizeEstimate() const;
-    AlbaDateTime getFileCreationTime() const;
+    [[nodiscard]] bool isFoundInLocalSystem() const;
+    [[nodiscard]] bool isRelativePath() const;
+    [[nodiscard]] double getFileSizeEstimate() const;
+    [[nodiscard]] AlbaDateTime getFileCreationTime() const;
     void createDirectoriesForNonExisitingDirectories() const;
 
     bool deleteFile();
@@ -51,9 +51,9 @@ private:
     void loopAllFilesAndDirectoriesInDirectoryStream(
         DIR* directoryStream, std::string_view currentDirectory, std::string_view wildCardSearch,
         std::set<std::string>& listOfFiles, std::set<std::string>& listOfDirectories, int depth) const;
-    bool isPathADirectory(std::string_view fileOrDirectoryName) const;
+    [[nodiscard]] bool isPathADirectory(std::string_view fileOrDirectoryName) const;
     static bool canBeLocated(std::string_view fullPath);
-    bool isSlashNeededAtTheEnd(std::string_view correctedPath, std::string_view originalPath) const;
+    [[nodiscard]] bool isSlashNeededAtTheEnd(std::string_view correctedPath, std::string_view originalPath) const;
     bool m_foundInLocalSystem{false};
     bool m_relativePath{false};
 };

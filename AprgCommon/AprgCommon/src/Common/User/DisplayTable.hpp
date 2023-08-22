@@ -17,8 +17,8 @@ public:
 
     // rule of zero
 
-    std::string getText() const;
-    DisplayTableCellMode getHorizontalMode() const;
+    [[nodiscard]] std::string getText() const;
+    [[nodiscard]] DisplayTableCellMode getHorizontalMode() const;
 
     std::string& getTextReference();
     void setText(std::string_view text);
@@ -38,10 +38,10 @@ public:
 
     // rule of zero
 
-    size_t getNumberOfColumns() const;
-    size_t getCharacters() const;
-    Cells const& getCells() const;
-    DisplayTableCell const& getCellAt(size_t const columnIndex) const;
+    [[nodiscard]] size_t getNumberOfColumns() const;
+    [[nodiscard]] size_t getCharacters() const;
+    [[nodiscard]] Cells const& getCells() const;
+    [[nodiscard]] DisplayTableCell const& getCellAt(size_t const columnIndex) const;
 
     Cells& getCellsReference();
     DisplayTableCell& getCellReferenceAt(size_t const columnIndex);
@@ -59,10 +59,10 @@ public:
 
     // rule of zero
 
-    size_t getTotalRows() const;
-    size_t getTotalColumns() const;
-    size_t getMaxCharactersInOneRow() const;
-    DisplayTableCell const& getCellAt(size_t const columnIndex, size_t const rowIndex) const;
+    [[nodiscard]] size_t getTotalRows() const;
+    [[nodiscard]] size_t getTotalColumns() const;
+    [[nodiscard]] size_t getMaxCharactersInOneRow() const;
+    [[nodiscard]] DisplayTableCell const& getCellAt(size_t const columnIndex, size_t const rowIndex) const;
 
     DisplayTableRow& getLastRow();
     DisplayTableRow& getRowReferenceAt(size_t const rowIndex);
@@ -74,10 +74,10 @@ public:
 
 private:
     static std::string getCellTextWithDesiredLength(DisplayTableCell const& cell, size_t const desiredLength);
-    std::string getHorizontalBorderLine(size_t const length) const;
-    std::string getVerticalBorderPoint() const;
-    size_t getVerticalBorderLength() const;
-    size_t getHorizontalBorderLength(size_t const totalColumnLength) const;
+    [[nodiscard]] std::string getHorizontalBorderLine(size_t const length) const;
+    [[nodiscard]] std::string getVerticalBorderPoint() const;
+    [[nodiscard]] size_t getVerticalBorderLength() const;
+    [[nodiscard]] size_t getHorizontalBorderLength(size_t const totalColumnLength) const;
 
     friend std::ostream& operator<<(std::ostream& out, DisplayTable const& displayTable);
 

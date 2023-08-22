@@ -20,7 +20,7 @@ struct AlbaFundamentalOperationsCounts : public AlbaSingleton<AlbaFundamentalOpe
         size_t moveAssignmentCount;
     };
     void resetCounts() { counts = {}; }
-    std::string getReport() const {
+    [[nodiscard]] std::string getReport() const {
         std::stringstream outputStream;
         outputStream << "userConstructionCount: " << counts.userConstructionCount;
         outputStream << " defaultConstructionCount: " << counts.defaultConstructionCount;
@@ -42,7 +42,7 @@ public:
     // NOTE: COMMENT OUT operation if not needed
 
     template <typename... Params>
-    AlbaFundamentalOperationsCounter(Params&&... params) : TypeToShadow(std::forward<Params>(params)...) {
+    explicit AlbaFundamentalOperationsCounter(Params&&... params) : TypeToShadow(std::forward<Params>(params)...) {
         // enable_if for isConstructible is not used here, because it still cause compiler error when not used
         ++COUNTS.userConstructionCount;
     }
@@ -71,12 +71,12 @@ public:
     }
 
     AlbaFundamentalOperationsCounter(AlbaFundamentalOperationsCounter&& parameter)
-        : std::enable_if_t<typeHelper::isMoveConstructible<TypeToShadow>(), TypeToShadow>(
+ noexcept         : std::enable_if_t<typeHelper::isMoveConstructible<TypeToShadow>(), TypeToShadow>(
               static_cast<TypeToShadow&&>(parameter)) {
         ++COUNTS.moveConstructionCount;
     }
 
-    AlbaFundamentalOperationsCounter& operator=(AlbaFundamentalOperationsCounter&& parameter) {
+    AlbaFundamentalOperationsCounter& operator=(AlbaFundamentalOperationsCounter&& parameter)  noexcept {
         using EnabledTypeToShadow = std::enable_if_t<typeHelper::isMoveAssignable<TypeToShadow>(), TypeToShadow>;
         static_cast<EnabledTypeToShadow&>(*this) = static_cast<EnabledTypeToShadow&&>(parameter);
         ++COUNTS.moveAssignmentCount;

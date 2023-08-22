@@ -1,4 +1,5 @@
 #pragma once
+// NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
 
 #include <Common/Container/AlbaConfigurationHolder.hpp>
 #include <Common/Math/AlbaMathConstants.hpp>
@@ -87,7 +88,7 @@ public:
 
     // no need to be explicit in the constructors (allow implicit conversions)
 
-    constexpr AlbaNumber() : m_type(Type::Integer), m_data() {}
+    constexpr AlbaNumber() : m_type(Type::Integer) {}
 
     template <
         typename ArithmeticType,
@@ -133,23 +134,23 @@ public:
     AlbaNumber& operator*=(AlbaNumber const& second);
     AlbaNumber& operator/=(AlbaNumber const& second);
 
-    bool isIntegerType() const;
-    bool isDoubleType() const;
-    bool isFractionType() const;
-    bool isComplexNumberType() const;
-    bool isIntegerOrFractionType() const;
-    bool isPositiveInfinity() const;
-    bool isNegativeInfinity() const;
-    bool isPositiveOrNegativeInfinity() const;
-    bool isNotANumber() const;
-    bool isAFiniteValue() const;
-    bool isARealFiniteValue() const;
+    [[nodiscard]] bool isIntegerType() const;
+    [[nodiscard]] bool isDoubleType() const;
+    [[nodiscard]] bool isFractionType() const;
+    [[nodiscard]] bool isComplexNumberType() const;
+    [[nodiscard]] bool isIntegerOrFractionType() const;
+    [[nodiscard]] bool isPositiveInfinity() const;
+    [[nodiscard]] bool isNegativeInfinity() const;
+    [[nodiscard]] bool isPositiveOrNegativeInfinity() const;
+    [[nodiscard]] bool isNotANumber() const;
+    [[nodiscard]] bool isAFiniteValue() const;
+    [[nodiscard]] bool isARealFiniteValue() const;
 
-    Type getType() const;
-    IntDataType getInteger() const;
-    double getDouble() const;
-    FractionData getFractionData() const;
-    ComplexNumberData getComplexNumberData() const;
+    [[nodiscard]] Type getType() const;
+    [[nodiscard]] IntDataType getInteger() const;
+    [[nodiscard]] double getDouble() const;
+    [[nodiscard]] FractionData getFractionData() const;
+    [[nodiscard]] ComplexNumberData getComplexNumberData() const;
 
     void convertToInteger();
     void convertToFraction();
@@ -220,3 +221,5 @@ template <>
 AlbaNumber::ConfigurationDetails getDefaultConfigurationDetails<AlbaNumber::ConfigurationDetails>();
 
 }  // namespace alba
+
+// NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)

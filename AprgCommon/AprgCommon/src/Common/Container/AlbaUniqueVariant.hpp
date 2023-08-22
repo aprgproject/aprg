@@ -100,7 +100,7 @@ public:
     }
 
     ~UniqueVariant() {
-        if (m_typeId) {
+        if (m_typeId != 0u) {
             delete m_ptr;
         } else {
             ::operator delete(m_ptr);

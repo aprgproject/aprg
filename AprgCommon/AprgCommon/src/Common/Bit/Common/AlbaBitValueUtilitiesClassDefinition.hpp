@@ -1,4 +1,5 @@
 #pragma once
+// NOLINTBEGIN(hicpp-signed-bitwise)
 
 #include <Common/Bit/AlbaBitConstants.hpp>
 #include <Common/Bit/Common/AlbaBitUtilitiesBuiltIn.hpp>
@@ -56,17 +57,19 @@ public:
 
         if (value == 0) {
             return true;
-        } if (value == 1) {
+        }
+        if (value == 1) {
             return false;
-        } if (value < 0) {
+        }
+        if (value < 0) {
             return isMultipleOfThree(-value);
-        }             DataType countAtOddPositions = getNumberOfOnes(value & getAlternatingOnesAndZerosFromLsb());
-            DataType countAtEvenPositions = getNumberOfOnes(value & getAlternatingZerosAndOnesFromLsb());
-            if (countAtOddPositions >= countAtEvenPositions) {
-                return isMultipleOfThree(static_cast<DataType>(countAtOddPositions - countAtEvenPositions));
-            }                 return isMultipleOfThree(static_cast<DataType>(countAtEvenPositions - countAtOddPositions));
-           
-       
+        }
+        DataType countAtOddPositions = getNumberOfOnes(value & getAlternatingOnesAndZerosFromLsb());
+        DataType countAtEvenPositions = getNumberOfOnes(value & getAlternatingZerosAndOnesFromLsb());
+        if (countAtOddPositions >= countAtEvenPositions) {
+            return isMultipleOfThree(static_cast<DataType>(countAtOddPositions - countAtEvenPositions));
+        }
+        return isMultipleOfThree(static_cast<DataType>(countAtEvenPositions - countAtOddPositions));
     }
 
     static constexpr inline bool isMultipleOfNine(DataType const value) {
@@ -90,17 +93,19 @@ public:
 
         if (value < 0) {
             return isMultipleOfNine(-value);
-        } if (value == 0 || value == 9) {
+        }
+        if (value == 0 || value == 9) {
             return true;
-        } if (value < 9) {
+        }
+        if (value < 9) {
             return false;
-        }             DataType dividedBy8 = value >> 3;
-            DataType remainderBy8 = value & 7;
-            if (dividedBy8 >= remainderBy8) {
-                return isMultipleOfThree(static_cast<DataType>(dividedBy8 - remainderBy8));
-            }
-            return false;
-       
+        }
+        DataType dividedBy8 = value >> 3;
+        DataType remainderBy8 = value & 7;
+        if (dividedBy8 >= remainderBy8) {
+            return isMultipleOfThree(static_cast<DataType>(dividedBy8 - remainderBy8));
+        }
+        return false;
     }
 
     static constexpr inline size_t getNumberOfBits() {
@@ -362,3 +367,4 @@ public:
 };
 
 }  // namespace alba
+// NOLINTEND(hicpp-signed-bitwise)

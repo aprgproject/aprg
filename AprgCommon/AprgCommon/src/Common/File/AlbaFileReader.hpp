@@ -38,12 +38,12 @@ public:
     std::string getLine();
     std::string getLineAndIgnoreWhiteSpaces();
 
-    size_t getCurrentLocation() const;
-    size_t getFileSize() const;
+    [[nodiscard]] size_t getCurrentLocation() const;
+    [[nodiscard]] size_t getFileSize() const;
     void moveToTheBeginning() const;
     void moveLocation(size_t const location) const;
     void setMaxBufferSize(size_t const bufferSize);
-    size_t getMaxBufferSize() const;
+    [[nodiscard]] size_t getMaxBufferSize() const;
 
 private:
     char* getCharacterBufferPointer();

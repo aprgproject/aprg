@@ -8,7 +8,7 @@
 namespace alba {
 
 struct BaseFileReaderTest : public testing::Test {
-    BaseFileReaderTest(std::string_view testFilePath);
+    explicit BaseFileReaderTest(std::string_view testFilePath);
 
     void SetUp() override;
     void TearDown() override;

@@ -1,4 +1,5 @@
 #pragma once
+// NOLINTBEGIN(hicpp-signed-bitwise)
 
 #include <Common/Bit/AlbaBitConstants.hpp>
 #include <Common/Types/AlbaTypeHelper.hpp>
@@ -130,3 +131,5 @@ INLINE_WITH_BUILT_IN namespace BitUtilitiesWithBuiltIn {
 #undef INLINE_WITHOUT_BUILT_IN
 
 }  // namespace alba
+
+// NOLINTEND(hicpp-signed-bitwise)

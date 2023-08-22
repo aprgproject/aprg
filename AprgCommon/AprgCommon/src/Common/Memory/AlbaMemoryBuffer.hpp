@@ -25,9 +25,9 @@ public:
     // If a class has a subscript operator, it usually should define two versions:
     // one that returns a plain reference and the other that is a const member and returns a reference to const.
 
-    bool hasContent() const;
-    size_t getSize() const;
-    void const* getConstantBufferPointer() const;
+    [[nodiscard]] bool hasContent() const;
+    [[nodiscard]] size_t getSize() const;
+    [[nodiscard]] void const* getConstantBufferPointer() const;
 
     void* getBufferPointer();
     void clear();
@@ -49,7 +49,7 @@ public:
     }
 
     template <typename ObjectType>
-    ObjectType retrieveObjectAsConstReference() const {
+    [[nodiscard]] ObjectType retrieveObjectAsConstReference() const {
         // Herb Sutter: Dont xray objects. Me: It has standard layout so it can be xray-ed.
         static_assert(typeHelper::hasStandardLayout<ObjectType>(), "ObjectType needs to have standard layout.");
         return *reinterpret_cast<ObjectType const*>(getConstantBufferPointer());

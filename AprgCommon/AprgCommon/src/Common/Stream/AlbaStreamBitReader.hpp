@@ -17,7 +17,7 @@ public:
     explicit AlbaStreamBitReader(std::istream& stream);
     ~AlbaStreamBitReader() = default;
 
-    bool noRemainingBitsInBuffer() const;
+    [[nodiscard]] bool noRemainingBitsInBuffer() const;
 
     bool readBoolData();
     char readCharData();
