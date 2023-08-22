@@ -195,8 +195,8 @@ TEST(ConstExamplesTest, FunctionMatchingWithWithDifferentParametersWorks) {
 TEST(ConstExamplesTest, FunctionMatchingWithAndWithoutConstInFunctionSignatureOfAClassWorks) {
     class Foo {
     public:
-        static void myFunction() { cout << "calling non-const\n"; }
-        static void myFunction() { cout << "calling const\n"; }
+        void myFunction() { cout << "calling non-const\n"; }
+        void myFunction() const { cout << "calling const\n"; }
     };
 
     Foo a;
