@@ -6,9 +6,7 @@
 #include <Algorithm/Graph/Utilities/GraphUtilities.hpp>
 #include <Common/Math/Helpers/DivisibilityHelpers.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 
@@ -103,6 +101,4 @@ bool hasEulerPathForDirectedGraph(BaseDirectedGraph<Vertex> const& graph) {
     return hasAtLeastOneLesserAndGreaterInAndOutDegrees(graph);
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

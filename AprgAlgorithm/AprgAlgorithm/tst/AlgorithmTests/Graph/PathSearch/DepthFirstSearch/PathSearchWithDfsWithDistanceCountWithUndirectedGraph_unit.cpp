@@ -46,4 +46,4 @@ TEST(PathSearchUsingDfsWithDistanceCountTest, GetEndVertexToDistanceCountMapWork
     EXPECT_EQ(expectedMap, pathSearch.getEndVertexToDistanceCountMap());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

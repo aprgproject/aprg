@@ -6,9 +6,7 @@
 #include <forward_list>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class PatienceSorter : public BaseSorter<Values> {
@@ -63,7 +61,7 @@ private:
         if (numberOfPiles == 2) {
             itLow->mergeWith(*itHigh);
             return itLow;
-        } else if (numberOfPiles > 2) {
+        } if (numberOfPiles > 2) {
             PilesIterator middleIt = std::next(itLow, numberOfPiles / 2);
             auto itFirstPart = mergePiles(itLow, middleIt);
             auto itSecondPart = mergePiles(std::next(middleIt), itHigh);
@@ -79,8 +77,6 @@ private:
         std::copy(mergedPileValues.cbegin(), mergedPileValues.cend(), valuesToSort.begin());
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

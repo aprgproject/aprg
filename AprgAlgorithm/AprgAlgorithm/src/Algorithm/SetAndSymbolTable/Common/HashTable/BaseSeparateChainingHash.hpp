@@ -8,9 +8,7 @@
 #include <array>
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <
     typename KeyTemplateType, typename EntryTemplateType, typename HashFunction, int HASH_TABLE_SIZE,
@@ -22,7 +20,7 @@ public:
     using Keys = std::vector<Key>;
     using HashTable = std::array<UnorderedLinkedList, HASH_TABLE_SIZE>;
 
-    BaseSeparateChainingHash() : m_size(0) {}
+    BaseSeparateChainingHash()  {}
 
     ~BaseSeparateChainingHash() override = default;  // no need for virtual destructor because base destructor is
                                                      // virtual (similar to other virtual functions)
@@ -117,7 +115,7 @@ public:
 protected:
     int getHash(Key const& key) const { return HashFunction::getHash(key); }
 
-    int m_size;
+    int m_size{0};
     HashTable m_smallerSymbolTables;
 };
 
@@ -136,6 +134,4 @@ protected:
 // -> Hash to two positions, insert key in shorter of the two chains
 // -> Reduces expected length of the longest chain to log log N
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

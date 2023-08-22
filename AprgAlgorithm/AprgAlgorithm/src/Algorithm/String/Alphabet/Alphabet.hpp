@@ -5,9 +5,7 @@
 
 #include <algorithm>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename DigitValue>
 class Alphabet {
@@ -65,6 +63,4 @@ private:
     std::string m_characters;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

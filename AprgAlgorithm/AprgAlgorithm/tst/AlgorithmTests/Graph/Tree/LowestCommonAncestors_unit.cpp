@@ -56,4 +56,4 @@ TEST(LowestCommonAncestorsTest, Example2Works) {
     EXPECT_EQ(3, lowestCommonAncestors.getDistanceBetweenVertices(5, 8));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

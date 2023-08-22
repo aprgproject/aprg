@@ -6,9 +6,7 @@
 
 #include <algorithm>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename FlowDataType, typename DirectedGraph>
 class FlowNetwork : public DirectedGraph {
@@ -191,6 +189,4 @@ private:
     EdgeToFlowEdgeDetailsMap m_edgeToFlowEdgeDetailsMap;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

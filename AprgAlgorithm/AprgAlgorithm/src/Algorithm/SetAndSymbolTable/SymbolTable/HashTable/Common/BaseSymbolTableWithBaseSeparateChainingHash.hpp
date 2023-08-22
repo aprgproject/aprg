@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value, typename BaseSeparateChainingHash>
 class BaseSymbolTableWithBaseSeparateChainingHash : public BaseSeparateChainingHash {
@@ -30,7 +28,5 @@ private:
     int& b_size;
     HashTable& b_smallerSymbolTables;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

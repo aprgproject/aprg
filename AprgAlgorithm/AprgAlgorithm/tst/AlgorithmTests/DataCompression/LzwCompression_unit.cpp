@@ -66,4 +66,4 @@ TEST(LzwCompressionTest, ExpandWorksUsingExample2) {
     EXPECT_EQ("it was the best of times it was the worst of times", outputSs.str());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

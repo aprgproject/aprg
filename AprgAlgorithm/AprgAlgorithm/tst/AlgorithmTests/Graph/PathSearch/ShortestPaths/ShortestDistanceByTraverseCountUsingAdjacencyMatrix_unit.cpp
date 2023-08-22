@@ -81,4 +81,4 @@ TEST(ShortestDistanceByTraverseCountUsingAdjacencyMatrixTest, GetShortestDistanc
     EXPECT_DOUBLE_EQ(8, shortestPaths.getShortestDistance(2, 5));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

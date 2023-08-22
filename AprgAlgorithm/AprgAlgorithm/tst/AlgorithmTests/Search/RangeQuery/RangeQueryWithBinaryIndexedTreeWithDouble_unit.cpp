@@ -95,4 +95,4 @@ TEST(RangeQueryWithBinaryIndexedTreeTest, ChangeValueAtIndexWithGeometricSumWork
     EXPECT_DOUBLE_EQ(6, geometricSumRangeQuery.getAccumulatedValueOnInterval(4, 4));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

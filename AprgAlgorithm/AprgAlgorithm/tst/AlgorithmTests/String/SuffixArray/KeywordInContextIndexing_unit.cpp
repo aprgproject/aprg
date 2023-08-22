@@ -24,4 +24,4 @@ TEST(KeywordInContextIndexingTest, GetKeywordInContextIndexingWorks) {
     EXPECT_EQ(stringsToExpect, keywordInContextIndexing.getKeywordInContextIndexing("the age", 10));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

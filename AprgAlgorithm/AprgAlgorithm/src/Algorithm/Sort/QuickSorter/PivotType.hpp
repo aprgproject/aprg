@@ -2,9 +2,7 @@
 
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 enum class PivotType {
     LowestIndex,
@@ -15,6 +13,4 @@ enum class PivotType {
     MedianOfMedians
 };
 
-}
-
-}  // namespace alba
+}  // namespace alba::algorithm

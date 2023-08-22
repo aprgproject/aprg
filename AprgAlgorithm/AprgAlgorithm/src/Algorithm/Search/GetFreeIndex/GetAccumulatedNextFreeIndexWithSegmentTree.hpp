@@ -3,9 +3,7 @@
 #include <Algorithm/Search/RangeQuery/SegmentTree/RangeQueryWithStaticSegmentTree.hpp>
 #include <Algorithm/Utilities/IndexHelper.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Indexes>
 class GetAccumulatedNextFreeIndexWithSegmentTree {
@@ -68,7 +66,5 @@ private:
     Index const m_startOfChildren;
     Indexes const& m_treeSums;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

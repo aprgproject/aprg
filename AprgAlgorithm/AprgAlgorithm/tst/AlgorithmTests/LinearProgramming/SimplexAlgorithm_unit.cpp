@@ -32,4 +32,4 @@ TEST(SimplexAlgorithmTest, SimplexWorksOnBrewersProblem) {
     EXPECT_EQ(expectedSolution, simplex.getSolution());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

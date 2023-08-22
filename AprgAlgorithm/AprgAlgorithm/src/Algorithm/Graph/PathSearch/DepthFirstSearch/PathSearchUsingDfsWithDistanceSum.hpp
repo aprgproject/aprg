@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/PathSearch/Common/BasePathSearchWithDistanceSum.hpp>
 #include <Algorithm/Graph/PathSearch/DepthFirstSearch/PathSearchUsingDfs.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename Weight, typename EdgeWeightedGraph>
 class PathSearchUsingDfsWithDistanceSum : public BasePathSearchWithDistanceSum<Vertex, Weight, EdgeWeightedGraph>,
@@ -30,6 +28,4 @@ private:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

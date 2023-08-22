@@ -6,9 +6,7 @@
 
 #include <array>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 using LaplaceanMatrix = matrix::AlbaMatrix<int>;
 
@@ -42,6 +40,4 @@ LaplaceanMatrix createLaplaceanMatrix(BaseGraph<Vertex> const& graph) {
     return result;
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

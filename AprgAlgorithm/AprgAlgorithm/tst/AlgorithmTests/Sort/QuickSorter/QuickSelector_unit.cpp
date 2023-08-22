@@ -74,4 +74,4 @@ TEST(QuickSelectorTest, DoNthElementWorksOnCharactersUsingExample1WithPivotWithV
     EXPECT_EQ(valuesToExpect, valuesToSort);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

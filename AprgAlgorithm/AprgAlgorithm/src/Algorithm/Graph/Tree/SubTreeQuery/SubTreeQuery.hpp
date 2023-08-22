@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/Utilities/CheckableVertices.hpp>
 #include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class SubTreeQuery {
@@ -85,6 +83,4 @@ protected:
     VertexToIndexMap m_vertexToIndexMap;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

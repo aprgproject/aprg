@@ -2,9 +2,7 @@
 
 #include <Algorithm/Sort/QuickSorter/QuickSorterUtilities.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class QuickSelector {
@@ -38,8 +36,6 @@ public:
 private:
     PivotType m_pivotType;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

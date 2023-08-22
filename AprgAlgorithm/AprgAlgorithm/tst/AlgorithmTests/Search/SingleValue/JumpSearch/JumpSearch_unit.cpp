@@ -49,4 +49,4 @@ TEST(JumpSearchTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereAreMultiple
     testGetIndexOfValueWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

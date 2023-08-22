@@ -179,4 +179,4 @@ TEST(AvlBinarySearchTreeSetTest, AfterDeletionOfMaximumTheTreeIsStillBalanced) {
     EXPECT_EQ(expectedAfterDelete, actualAfterDelete);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

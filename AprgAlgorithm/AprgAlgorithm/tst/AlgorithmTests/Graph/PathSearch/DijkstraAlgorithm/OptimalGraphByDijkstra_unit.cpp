@@ -41,4 +41,4 @@ TEST(OptimalGraphByDijkstraTest, GetOptimalDirectedGraph_UndirectedToOptimizedDi
     EXPECT_EQ(expectedEdges, optimalGraph.getEdgesWithWeight());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

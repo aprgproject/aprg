@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/DirectedGraph/BaseDirectedGraph.hpp>
 #include <Algorithm/Graph/SuccessorGraph/WalkInSuccessorGraph.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class BrentAlgorithmForSuccessorGraphs {
@@ -15,7 +13,7 @@ public:
     using Path = typename GraphTypes<Vertex>::Path;
 
     BrentAlgorithmForSuccessorGraphs(BaseDirectedGraphWithVertex const& graph)
-        : m_graph(graph), m_walker(graph), m_hasACycle(false) {}
+        : m_graph(graph), m_walker(graph) {}
 
     bool hasACycle() const { return m_hasACycle; }
 
@@ -83,10 +81,8 @@ private:
 
     BaseDirectedGraphWithVertex const& m_graph;
     Walker m_walker;
-    bool m_hasACycle;
+    bool m_hasACycle{false};
     Path m_cyclePath;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

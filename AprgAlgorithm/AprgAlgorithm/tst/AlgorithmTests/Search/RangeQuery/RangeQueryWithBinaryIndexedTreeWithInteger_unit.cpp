@@ -118,4 +118,4 @@ TEST(RangeQueryWithBinaryIndexedTreeTest, ChangeValueAtIndexWithSumWorksTwiceOnE
     EXPECT_EQ(6, sumRangeQuery.getAccumulatedValueOnInterval(4, 4));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

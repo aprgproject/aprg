@@ -4,9 +4,7 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values, typename BlockValues>
 class RangeQueryWithBlocksWithMultipleRequests : RangeQueryWithBlocks<Values, BlockValues> {
@@ -110,9 +108,8 @@ private:
             Index blockIndex2 = range2.first / blockSize;
             if (blockIndex1 == blockIndex2) {
                 return range1.second < range2.second;
-            } else {
-                return blockIndex1 < blockIndex2;
-            }
+            }                 return blockIndex1 < blockIndex2;
+           
         });
         return result;
     }
@@ -121,7 +118,5 @@ private:
     TwoBlocksFunction m_accumulateFunction;
     TwoBlocksFunction m_inverseAccumulateFunction;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

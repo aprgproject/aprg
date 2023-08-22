@@ -47,4 +47,4 @@ TEST(RangeQueryForNumberOfDistinctValuesTest, GetInputAndOutputPairsUsingMoAlgor
     EXPECT_EQ(expectedPairs, countRangeQuery.getInputAndOutputPairsUsingMoAlgorithm(inputRanges));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -6,9 +6,7 @@
 #include <functional>
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class HeapSorter : public BaseSorter<Values> {
@@ -55,8 +53,6 @@ private:
         return maxBinaryHeapAdapter.getParentIndex(maxBinaryHeapAdapter.getBottomTreeIndex());
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

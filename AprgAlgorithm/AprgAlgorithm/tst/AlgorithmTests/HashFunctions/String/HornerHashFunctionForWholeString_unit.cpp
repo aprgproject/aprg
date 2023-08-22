@@ -31,4 +31,4 @@ TEST(HornerHashFunctionForWholeStringTest, Example3Works) {
     EXPECT_EQ(1085070900ULL, hashFunction.getHashCode("AABRAACADABRAACAADABRA"));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

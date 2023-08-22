@@ -25,4 +25,4 @@ TEST(KnuthMorrisPrattSubstringSearchTest, SearchWorksUsingExample2) {
     testSearchUsingExample2<SubstringSearchForTest, Index>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

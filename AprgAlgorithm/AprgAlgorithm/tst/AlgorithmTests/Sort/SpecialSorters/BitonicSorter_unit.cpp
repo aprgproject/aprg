@@ -113,4 +113,4 @@ TEST(BitonicSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) {
     EXPECT_TRUE(isSortedButNotStable);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

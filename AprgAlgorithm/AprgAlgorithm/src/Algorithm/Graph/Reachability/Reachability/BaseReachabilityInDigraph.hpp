@@ -2,9 +2,7 @@
 
 #include <Algorithm/Graph/BaseGraph.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class BaseReachabilityInDigraph {
@@ -14,6 +12,4 @@ public:
     virtual bool isReachable(Vertex const& destinationVertex) const = 0;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

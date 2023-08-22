@@ -43,4 +43,4 @@ TEST(RangeQueryForTwoDimensionsWithAccumulatorTest, GetValueOn2DIntervalWorksOnE
     EXPECT_EQ(47, sumRangeQuery.getAccumulatedValueOn2DInterval(1, 1, 3, 3));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

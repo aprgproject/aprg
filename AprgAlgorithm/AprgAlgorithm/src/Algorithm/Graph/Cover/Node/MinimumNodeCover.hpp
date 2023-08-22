@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/Bipartite/MaximumMatchings.hpp>
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class MinimumNodeCover {
@@ -44,7 +42,5 @@ private:
     BaseUndirectedGraphWithVertex const& m_graph;
     MaximumMatchingsWithVertex m_maximumMatchings;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

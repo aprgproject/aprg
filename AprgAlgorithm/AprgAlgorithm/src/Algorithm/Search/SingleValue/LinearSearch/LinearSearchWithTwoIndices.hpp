@@ -4,9 +4,7 @@
 
 #include <iterator>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class LinearSearchWithTwoIndices {
@@ -45,7 +43,7 @@ private:
             if (valueAtLower == target) {
                 result = std::distance(m_values.cbegin(), itLower);
                 break;
-            } else if (valueAtHigher == target) {
+            } if (valueAtHigher == target) {
                 result = std::distance(m_values.cbegin(), itHigher);
                 break;
             }
@@ -58,8 +56,6 @@ private:
 
     Values const& m_values;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

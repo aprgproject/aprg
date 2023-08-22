@@ -4,9 +4,7 @@
 #include <Algorithm/String/Tries/BaseTernarySearchTrie.hpp>
 #include <Algorithm/String/Tries/TernarySearchTrieNodes.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename ValueTemplateType>
 class TernarySearchTrieSymbolTable
@@ -93,18 +91,17 @@ protected:
             char c(keyToCheck[index]);
             if (c < currentNodePointer->c) {
                 return getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->left, keyToCheck, index);
-            } else if (c > currentNodePointer->c) {
+            } if (c > currentNodePointer->c) {
                 return getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->right, keyToCheck, index);
-            } else {
-                int lengthWithValue = 0;
+            }                 int lengthWithValue = 0;
                 if (currentNodePointer->valueUniquePointer) {
                     lengthWithValue = index + 1;
                 }
                 return std::max(
                     lengthWithValue,
                     getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->mid, keyToCheck, index + 1));
-            }
-        } else if (index == static_cast<int>(keyToCheck.length())) {
+           
+        } if (index == static_cast<int>(keyToCheck.length())) {
             return index;
         }
         return 0;
@@ -193,6 +190,4 @@ protected:
     NodeUniquePointer& b_root;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

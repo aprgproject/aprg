@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename BaseTree>
 class BaseSetWithBaseTree : public BaseTree {
@@ -31,6 +29,4 @@ private:
     NodeUniquePointer& b_root;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

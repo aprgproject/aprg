@@ -4,9 +4,7 @@
 
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object>
 class LinkedListBag : public BaseBag<Object> {
@@ -20,7 +18,7 @@ public:
         NodeUniquePointer next;
     };
 
-    LinkedListBag() : m_size(0), m_first(nullptr) {}
+    LinkedListBag() :  m_first(nullptr) {}
 
     bool isEmpty() const override { return m_size == 0; }
 
@@ -41,10 +39,8 @@ public:
     }
 
 private:
-    int m_size;
+    int m_size{0};
     NodeUniquePointer m_first;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

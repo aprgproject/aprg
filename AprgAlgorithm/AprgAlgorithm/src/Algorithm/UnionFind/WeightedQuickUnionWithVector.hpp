@@ -4,9 +4,7 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object>
 class WeightedQuickUnionWithVector : public BaseUnionFind<Object> {
@@ -108,7 +106,5 @@ private:
     RootVector m_relativeRoots;
     SizeVector m_sizesOfRoots;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

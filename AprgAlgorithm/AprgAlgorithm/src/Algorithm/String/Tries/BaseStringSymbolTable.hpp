@@ -3,9 +3,7 @@
 #include <string_view>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value>
 class BaseStringSymbolTable {
@@ -30,9 +28,7 @@ public:
     virtual Strings getAllKeysThatMatch(Key const& patternToMatch) const = 0;  // all the keys having s as a prefix
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Can we do better than generic symbol tables?
 // Yes, if we can avoid examining the entrie key, as with string sorting.

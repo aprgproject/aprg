@@ -74,4 +74,4 @@ TEST(GetPreviousFreeIndexWithUnionFindTest, SetAsFreeWorks) {
     EXPECT_EQ(0, query.getPreviousFreeIndexAt(28));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

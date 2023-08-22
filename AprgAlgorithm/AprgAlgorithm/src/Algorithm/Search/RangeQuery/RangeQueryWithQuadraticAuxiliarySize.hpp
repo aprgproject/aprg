@@ -4,9 +4,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class RangeQueryWithQuadraticAuxiliarySize {
@@ -54,7 +52,5 @@ private:
     ValueMatrix m_partialValueMatrix;  // left by right matrix
     Function m_function;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

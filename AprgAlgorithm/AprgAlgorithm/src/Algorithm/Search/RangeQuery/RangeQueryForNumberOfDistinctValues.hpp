@@ -5,9 +5,7 @@
 #include <cmath>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values, typename Values::value_type MAX_VALUE>
 class RangeQueryForNumberOfDistinctValues {
@@ -128,16 +126,13 @@ private:
             Index blockIndex2 = range2.first / blockSize;
             if (blockIndex1 == blockIndex2) {
                 return range1.second < range2.second;
-            } else {
-                return blockIndex1 < blockIndex2;
-            }
+            }                 return blockIndex1 < blockIndex2;
+           
         });
         return result;
     }
 
     Values const& m_values;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

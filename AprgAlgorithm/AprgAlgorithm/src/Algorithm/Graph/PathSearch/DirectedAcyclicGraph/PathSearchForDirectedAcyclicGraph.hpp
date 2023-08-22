@@ -5,9 +5,7 @@
 #include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
 #include <Algorithm/Graph/VertexOrdering/VertexOrderingUsingDfs.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename Weight, typename EdgeWeightedGraph, template <class> class ComparatorTemplateType>
 class PathSearchForDirectedAcyclicGraph
@@ -51,6 +49,4 @@ private:
 // -> Parallel job scheduling
 // ---> How to find the minimum completion time? Longest path in the graph. This is critical path method (CPM).
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

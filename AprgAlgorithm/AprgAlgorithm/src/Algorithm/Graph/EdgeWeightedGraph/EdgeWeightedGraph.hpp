@@ -6,9 +6,7 @@
 #include <algorithm>
 #include <ostream>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename Weight, typename Graph>
 class EdgeWeightedGraph : public Graph {
@@ -81,9 +79,8 @@ private:
     Edge createEdgeInMap(Vertex const& vertex1, Vertex const& vertex2) const {
         if (this->DIRECTION_TYPE == GraphDirectionType::Undirected) {
             return createSortedEdge<Vertex, Edge>(vertex1, vertex2);
-        } else {
-            return Edge(vertex1, vertex2);
-        }
+        }             return Edge(vertex1, vertex2);
+       
     }
 
     friend std::ostream& operator<<(std::ostream& out, EdgeWeightedGraph const& graph) {
@@ -99,6 +96,4 @@ private:
     EdgeToWeightMap m_edgeToWeightMap;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

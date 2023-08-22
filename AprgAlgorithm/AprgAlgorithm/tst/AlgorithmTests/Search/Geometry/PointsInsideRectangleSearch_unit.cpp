@@ -65,4 +65,4 @@ TEST(PointsInsideRectangleSearchTest, GetPointsInsideTheRectangleWorksOnComplica
     EXPECT_EQ(pointsToExpect, pointsToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

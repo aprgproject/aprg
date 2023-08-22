@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename EdgeWeightedDirectedGraph, typename PathSearchUsingDijkstra>
 EdgeWeightedDirectedGraph getOptimalDirectedGraph(PathSearchUsingDijkstra const& pathSearch) {
@@ -15,7 +13,5 @@ EdgeWeightedDirectedGraph getOptimalDirectedGraph(PathSearchUsingDijkstra const&
     }
     return result;
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

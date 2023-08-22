@@ -5,9 +5,7 @@
 
 #include <stack>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class QuickSorterWithIterativeApproach : public BaseSorter<Values> {
@@ -51,8 +49,6 @@ private:
 private:
     PivotType m_pivotType;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

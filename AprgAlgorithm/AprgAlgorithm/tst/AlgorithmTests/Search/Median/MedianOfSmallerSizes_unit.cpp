@@ -48,4 +48,4 @@ TEST(MedianOfSmallerSizesTest, GetMedianOfSmallerSizesWorksOnExample2) {
     EXPECT_EQ(11, query.getMedian());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

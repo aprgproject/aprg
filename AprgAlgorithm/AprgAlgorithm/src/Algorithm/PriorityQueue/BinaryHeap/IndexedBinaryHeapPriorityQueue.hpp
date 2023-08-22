@@ -4,9 +4,7 @@
 #include <utility>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace IndexedBinaryHeapPriorityQueueConstants {
 constexpr int INDEX_OF_TOP_TREE = 1;
@@ -21,7 +19,7 @@ public:
     using Objects = std::vector<Object>;
     using Comparator = ComparatorTemplateType<Object>;
 
-    IndexedBinaryHeapPriorityQueue() : m_size(0), m_maxSize(0) {}
+    IndexedBinaryHeapPriorityQueue()  {}
 
     bool isEmpty() const { return getSize() == 0; }
 
@@ -172,14 +170,12 @@ private:
         m_objectIndexToTreeIndex[m_treeIndexToObjectIndex[treeIndex2]] = treeIndex2;
     }
 
-    int m_size;
-    int m_maxSize;
+    int m_size{0};
+    int m_maxSize{0};
     Comparator m_comparator;
     Indexes m_treeIndexToObjectIndex;
     Indexes m_objectIndexToTreeIndex;
     Objects m_objects;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

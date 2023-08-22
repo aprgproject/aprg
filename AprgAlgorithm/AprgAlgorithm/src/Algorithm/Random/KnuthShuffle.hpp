@@ -5,9 +5,7 @@
 #include <iterator>
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class KnuthShuffle {
@@ -50,8 +48,6 @@ public:
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

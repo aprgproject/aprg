@@ -53,4 +53,4 @@ TEST(SuffixArrayTest, GetLongestCommonPrefixOfTwoSuffixesWorks) {
     EXPECT_EQ("e", suffixArray.getLongestCommonPrefixOfTwoSuffixes(7, 8));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

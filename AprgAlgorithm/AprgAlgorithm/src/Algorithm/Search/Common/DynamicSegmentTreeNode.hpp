@@ -2,9 +2,7 @@
 
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value>
 struct DynamicSegmentTreeNode {
@@ -20,6 +18,4 @@ struct PersistentDynamicSegmentTreeNode {
     std::shared_ptr<PersistentDynamicSegmentTreeNode> rightChildPointer;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

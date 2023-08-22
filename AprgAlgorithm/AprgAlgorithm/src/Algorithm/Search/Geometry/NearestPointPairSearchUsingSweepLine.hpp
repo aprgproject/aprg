@@ -7,9 +7,7 @@
 #include <map>
 #include <set>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 // The one on NearestPointSearch class is better(getNearestPointPair()).
 template <typename Unit>
 class NearestPointPairSearchUsingSweepLine {
@@ -63,8 +61,6 @@ private:
 
     SetOfPoints m_setOfPoints;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

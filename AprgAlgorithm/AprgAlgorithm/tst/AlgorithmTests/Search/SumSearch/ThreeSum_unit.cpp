@@ -33,4 +33,4 @@ TEST(ThreeSumTest, GetPossibleDuplicatedThreeValuesWithSumWorksOnExample1) {
     EXPECT_EQ(threeValuesToExpect, threeValuesToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

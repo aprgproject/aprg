@@ -2,11 +2,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
-
-namespace CommonTestsWithEulerPathForDirectedGraph {
+namespace alba::algorithm::CommonTestsWithEulerPathForDirectedGraph {
 
 template <typename PathSearch, typename Graph>
 void testHasEulerCycleWorksOnGraphWithAllInDegreesEqualsOutDegrees() {
@@ -156,9 +152,5 @@ void testGetEulerCycleAndPathWorksOnExample1() {
     EXPECT_EQ(pathToExpect, pathToVerify);
     EXPECT_TRUE(cycleToVerify.empty());
 }
-
-}  // namespace CommonTestsWithEulerPathForDirectedGraph
-
-}  // namespace algorithm
 
 }  // namespace alba

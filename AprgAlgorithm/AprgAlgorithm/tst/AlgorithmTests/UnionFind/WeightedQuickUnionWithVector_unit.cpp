@@ -126,4 +126,4 @@ TEST(WeightedQuickUnionWithVectorTest, GetSizesOfRootsVectorWorks) {
     EXPECT_EQ(expectedRelativeRootVector, unionFind.getSizesOfRootsVector());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

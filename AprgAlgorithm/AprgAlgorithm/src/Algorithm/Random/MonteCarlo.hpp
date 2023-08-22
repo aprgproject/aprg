@@ -2,15 +2,11 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 using MonteCarloAlgorithm = std::function<bool(void)>;
 
 void performAMonteCarloAlgorithm(MonteCarloAlgorithm const& monteCarloAlgorithm) { monteCarloAlgorithm(); }
-
-}  // namespace algorithm
 
 }  // namespace alba
 

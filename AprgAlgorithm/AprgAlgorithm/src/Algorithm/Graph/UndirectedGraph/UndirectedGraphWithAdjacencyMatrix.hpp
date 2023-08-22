@@ -4,9 +4,7 @@
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, int MAX_VERTEX_VALUE>
 class UndirectedGraphWithAdjacencyMatrix : public BaseUndirectedGraph<Vertex> {
@@ -15,7 +13,7 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using AdjacencyMatrix = matrix::AlbaMatrix<bool>;
 
-    UndirectedGraphWithAdjacencyMatrix() : m_numberOfEdges(0), m_adjacencyMatrix(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE) {}
+    UndirectedGraphWithAdjacencyMatrix() :  m_adjacencyMatrix(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE) {}
 
     bool isEmpty() const override { return m_numberOfEdges == 0; }
 
@@ -122,10 +120,8 @@ protected:
         return out;
     }
 
-    int m_numberOfEdges;
+    int m_numberOfEdges{0};
     AdjacencyMatrix m_adjacencyMatrix;  // vertex by adjacent matrix
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -58,4 +58,4 @@ TEST(NodeDisjointPathCoverTest, GetNodeDisjointPathCoverWorksOnExample2) {
     EXPECT_EQ(expectedEdges, nodeDisjointPathCover.getEdgesOfNodeDisjointPathCover(newSourceVertex, newSinkVertex));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

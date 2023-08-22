@@ -6,9 +6,7 @@
 #include <cassert>
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object, typename QueueWithObject>
 class StackUsingTwoQueues : public BaseStack<Object> {
@@ -84,7 +82,5 @@ private:
     QueueWithObject m_queueAtTheTop;
     QueueWithObject m_queueAtTheBottom;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

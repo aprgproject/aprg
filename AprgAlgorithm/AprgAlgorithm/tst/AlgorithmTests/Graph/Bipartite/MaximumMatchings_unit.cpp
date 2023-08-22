@@ -45,4 +45,4 @@ TEST(MaximumMatchingsTest, DoesHavePerfectMatchingByCheckingASubsetWorksOnExampl
     EXPECT_FALSE(maximumMatchings.doesHavePerfectMatchingByCheckingASubset({2, 4}));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -3,9 +3,7 @@
 #include <Algorithm/Search/RangeQuery/SegmentTree/RangeQueryWithStaticSegmentTree.hpp>
 #include <Algorithm/Utilities/IndexHelper.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class RangeQueryWithAccumulatorLazySegmentTree : private RangeQueryWithStaticSegmentTree<Values> {
@@ -220,6 +218,4 @@ private:
     Values m_pendingUpdates;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

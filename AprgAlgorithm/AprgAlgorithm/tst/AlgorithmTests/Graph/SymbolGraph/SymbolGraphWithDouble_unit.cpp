@@ -120,4 +120,4 @@ TEST(SymbolGraphWithDoubleTest, DisconnectWorks) {
     EXPECT_EQ(expectedSymbolTable, symbolGraph.getSymbolTable());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

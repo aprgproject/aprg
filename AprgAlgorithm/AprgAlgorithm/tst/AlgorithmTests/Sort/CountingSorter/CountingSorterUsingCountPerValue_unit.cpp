@@ -91,4 +91,4 @@ TEST(CountingSorterUsingCountPerValueTest, SortWorksAsNotStableOnStabilityCheckO
         sorter);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

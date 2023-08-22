@@ -6,9 +6,7 @@
 #include <algorithm>
 #include <map>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class UndirectedGraphWithVertexToAdjacencyListsMap : public BaseUndirectedGraph<Vertex> {
@@ -19,7 +17,7 @@ public:
     using AdjacencyList = SetOfVertices;
     using AdjacencyLists = std::map<Vertex, AdjacencyList>;
 
-    UndirectedGraphWithVertexToAdjacencyListsMap() : m_numberOfEdges(0) {}
+    UndirectedGraphWithVertexToAdjacencyListsMap()  {}
 
     bool isEmpty() const override { return m_adjacencyLists.empty(); }
 
@@ -123,10 +121,8 @@ protected:
         return out;
     }
 
-    int m_numberOfEdges;
+    int m_numberOfEdges{0};
     AdjacencyLists m_adjacencyLists;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -137,4 +137,4 @@ TEST(BinarySearchTreeSetTest, HibbardDeletionWorks) {
     EXPECT_EQ(expectedAfterDelete, actualAfterDelete);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

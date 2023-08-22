@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value, typename BaseLinearProbingHash>
 class BaseSymbolTableWithBaseLinearProbingHash : public BaseLinearProbingHash {
@@ -59,7 +57,5 @@ private:
     int& b_size;
     EntryPointers& b_entryPointers;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

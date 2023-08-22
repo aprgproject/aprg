@@ -85,4 +85,4 @@ TEST(QuickSorterWithIterativeApproachTest, SortWorksOnCharactersUsingExample1Wit
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

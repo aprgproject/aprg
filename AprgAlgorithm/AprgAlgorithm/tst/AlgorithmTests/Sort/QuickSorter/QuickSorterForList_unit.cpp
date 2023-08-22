@@ -63,4 +63,4 @@ TEST(QuickSorterForListTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExa
         sorter);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

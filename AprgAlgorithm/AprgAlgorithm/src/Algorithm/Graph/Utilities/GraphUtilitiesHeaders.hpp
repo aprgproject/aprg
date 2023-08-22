@@ -4,11 +4,7 @@
 #include <Algorithm/Graph/DirectedGraph/BaseDirectedGraph.hpp>
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 
-namespace alba {
-
-namespace algorithm {
-
-namespace GraphUtilities {
+namespace alba::algorithm::GraphUtilities {
 
 template <typename Vertex>
 bool isASimplePath(typename GraphTypes<Vertex>::Path const& path);
@@ -77,8 +73,4 @@ typename GraphTypes<Vertex>::Path getCriticalPath(
 template <typename Vertex>
 typename GraphTypes<Vertex>::ListOfEdges getEdgesOfMaximalConnectedSubgraphs(BaseUndirectedGraph<Vertex> const& graph);
 
-}  // namespace GraphUtilities
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::GraphUtilities

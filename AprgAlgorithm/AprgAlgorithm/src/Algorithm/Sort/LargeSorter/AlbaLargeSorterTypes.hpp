@@ -3,9 +3,7 @@
 #include <list>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename ObjectToSort>
 class DataBlock;
@@ -27,6 +25,4 @@ using AlbaLargeSorterBlockCacheContainer = typename AlbaLargeSorterBlockCache<Bl
 
 using Indexes = std::vector<int>;
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -3,9 +3,7 @@
 #include <functional>
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class TwoSum {
@@ -54,7 +52,7 @@ private:
                 if (currentSum == targetSum) {
                     result = {m_sortedValues[iLow], m_sortedValues[iHigh]};
                     break;
-                } else if (currentSum > targetSum) {
+                } if (currentSum > targetSum) {
                     --iHigh;
                 } else {  // currentSum < targetSum
                     ++iLow;
@@ -67,6 +65,4 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

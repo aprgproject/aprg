@@ -68,4 +68,4 @@ TEST(RangeQueryWithSparseSegmentTreeTest, SetValueAtIndexWithGeometricSumWorksOn
     EXPECT_DOUBLE_EQ(11, geometricSumRangeQuery.getValueOnInterval(4, 4));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

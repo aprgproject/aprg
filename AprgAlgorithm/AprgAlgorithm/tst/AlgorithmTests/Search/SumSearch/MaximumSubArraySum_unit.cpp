@@ -31,4 +31,4 @@ TEST(MaximumSubArraySumTest, GetMaximumSubArraySumWithDetailsWorksOnExample1) {
     EXPECT_EQ(10, subArrayDetailsToVerify.sum);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

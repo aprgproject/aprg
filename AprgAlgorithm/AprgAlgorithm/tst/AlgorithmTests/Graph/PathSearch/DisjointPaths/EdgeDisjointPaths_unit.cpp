@@ -30,4 +30,4 @@ TEST(EdgeDisjointPathsTest, Example1Works) {
     EXPECT_EQ(expectedEdgeDisjointPaths, pathSearch.getEdgeDisjointPaths());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

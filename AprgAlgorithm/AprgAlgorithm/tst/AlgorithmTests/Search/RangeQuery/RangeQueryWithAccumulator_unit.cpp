@@ -104,4 +104,4 @@ TEST(RangeQueryWithAccumulatorTest, GetAccumulatedValueOnIntervalWithGeometricSu
     EXPECT_EQ(6, geometricSumRangeQuery.getAccumulatedValueOnInterval(4, 4));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

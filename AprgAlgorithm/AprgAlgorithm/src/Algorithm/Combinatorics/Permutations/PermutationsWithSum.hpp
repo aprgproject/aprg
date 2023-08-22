@@ -4,9 +4,7 @@
 #include <set>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class PermutationsWithSum {
@@ -52,7 +50,5 @@ private:
     Values const& m_inputValues;
     VectorOfPermutations m_permutations;  // dynamic programming
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -4,9 +4,7 @@
 
 #include <forward_list>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value>
 class MergeSorterForForwardList : public BaseSorter<std::forward_list<Value>> {
@@ -26,7 +24,7 @@ private:
             // Split to two parts
             Values& firstPart(values);
             Values secondPart;
-            ConstIterator beforeMiddle = getBeforeMiddleIterator(values);
+            auto beforeMiddle = getBeforeMiddleIterator(values);
 
             secondPart.splice_after(secondPart.cbefore_begin(), firstPart, beforeMiddle, firstPart.cend());
 
@@ -38,8 +36,8 @@ private:
     }
 
     ConstIterator getBeforeMiddleIterator(Values const& values) const {
-        ConstIterator turtoise(values.cbefore_begin());
-        ConstIterator hare(values.cbegin());
+        auto turtoise(values.cbefore_begin());
+        auto hare(values.cbegin());
         while (hare != values.cend()) {
             // std::advance with 2 for hare? no, because we need to check if we exceeded
             ++hare;
@@ -55,7 +53,7 @@ private:
         // this is similar with std::forward_list::merge
 
         Values merged;
-        ConstIterator itMerged = merged.cbefore_begin();
+        auto itMerged = merged.cbefore_begin();
         for (; firstPart.cbegin() != firstPart.cend() && secondPart.cbegin() != secondPart.cend(); ++itMerged) {
             if (firstPart.front() <= secondPart.front()) {
                 merged.splice_after(itMerged, firstPart, firstPart.cbefore_begin());
@@ -71,8 +69,6 @@ private:
         result = std::move(merged);
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

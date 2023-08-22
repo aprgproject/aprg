@@ -54,4 +54,4 @@ TEST(OrthogonalLineSegmentIntersectionSearchTest, GetIntersectingPointsWorksOnCo
     EXPECT_EQ(pointsToExpect, pointsToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

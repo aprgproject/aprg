@@ -52,4 +52,4 @@ TEST(ExponentialSearchTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereAreM
     testGetIndexOfValueWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

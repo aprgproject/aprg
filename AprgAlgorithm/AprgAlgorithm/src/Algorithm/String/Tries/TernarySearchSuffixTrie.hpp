@@ -2,9 +2,7 @@
 
 #include <Algorithm/String/Tries/TernarySearchTrieSymbolTable.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 class TernarySearchSuffixTrie : protected TernarySearchTrieSymbolTable<int> {
 public:
@@ -62,6 +60,4 @@ protected:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -5,9 +5,7 @@
 #include <Algorithm/Graph/FlowNetwork/FordFulkerson/FordFulkersonUsingBfs.hpp>
 #include <Algorithm/Graph/FlowNetwork/SinkSourceFlowNetwork.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class EdgeDisjointPaths {
@@ -44,7 +42,5 @@ private:
 
     FordFulkerson m_fordFulkerson;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

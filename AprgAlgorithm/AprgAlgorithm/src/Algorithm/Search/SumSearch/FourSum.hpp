@@ -5,9 +5,7 @@
 #include <algorithm>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class FourSum {
@@ -63,7 +61,7 @@ private:
                 if (currentSum == targetSum) {
                     result = {sumOfPairOfValues[lowIndex], sumOfPairOfValues[highIndex]};
                     break;
-                } else if (currentSum > targetSum) {
+                } if (currentSum > targetSum) {
                     highIndex--;
                 } else if (currentSum < targetSum) {
                     lowIndex++;
@@ -75,7 +73,5 @@ private:
 
     Values const& m_sortedValues;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

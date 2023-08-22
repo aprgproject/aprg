@@ -4,9 +4,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename HashValue>
 using HashingFunction = std::function<HashValue(HashValue)>;
@@ -45,8 +43,6 @@ HashValue getHashForDoubleHash(
     // Unlike the case  of linear or quadratic probing, the probe sequence here depends in two ways upon the k,
     // since the initial probe position, the offset or both may vary.
 }
-
-}  // namespace algorithm
 
 }  // namespace alba
 

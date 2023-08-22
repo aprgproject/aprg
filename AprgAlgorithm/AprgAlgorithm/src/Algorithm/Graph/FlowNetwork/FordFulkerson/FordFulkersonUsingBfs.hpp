@@ -7,9 +7,7 @@
 #include <deque>
 #include <map>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename SinkSourceFlowNetworkType>
 class FordFulkersonUsingBfs : public BaseFordFulkerson<SinkSourceFlowNetworkType> {
@@ -58,6 +56,4 @@ protected:
     VertexToFlowEdgeMap& b_vertexToAugmentingPathEdgeMap;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

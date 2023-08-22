@@ -4,9 +4,7 @@
 #include <Algorithm/SetAndSymbolTable/Common/LinkedList/LinkedListNode.hpp>
 #include <Algorithm/SetAndSymbolTable/Set/BaseSet.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key>
 class UnorderedLinkedListSet : public BaseUnorderedLinkedList<Key, LinkedListNode<Key>, BaseSet<Key>> {
@@ -38,6 +36,4 @@ private:
     NodeUniquePointer& b_first;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

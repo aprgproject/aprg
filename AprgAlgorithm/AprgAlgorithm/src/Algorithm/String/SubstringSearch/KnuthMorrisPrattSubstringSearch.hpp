@@ -4,9 +4,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Index>
 class KnuthMorrisPrattSubstringSearch {
@@ -21,7 +19,7 @@ public:
     }
 
     Index search(std::string const& searchSpace) const {
-        Index result(static_cast<Index>(std::string::npos));
+        auto result(static_cast<Index>(std::string::npos));
         Index searchSpaceLength(searchSpace.length());
         Index queryLength(m_query.length());
         Index searchIndex = 0, matchIndex = 0;
@@ -68,8 +66,6 @@ private:
     std::string m_query;
     Dfa m_nextIndexDfa;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

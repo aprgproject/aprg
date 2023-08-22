@@ -2,9 +2,7 @@
 
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename HashValue>
 HashValue getHashUsingDivisionMethod(HashValue const hashKey, HashValue const numberOfSlots) {
@@ -58,9 +56,7 @@ HashValue getHashUsingMultiplicationMethod(
     return ((hashKey * numerator) % denominator) * numberOfSlots / denominator;
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // -> What makes a good hash function
 // ---> A good hash function satisfies (approximately) the assumption of simple uniform hashing:

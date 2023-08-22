@@ -4,9 +4,7 @@
 
 #include <map>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class RangeQueryForCount {
@@ -81,7 +79,5 @@ private:
 
     SegmentTree m_valueToCountMapSegmentTree;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

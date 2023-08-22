@@ -26,4 +26,4 @@ TEST(SubsetGenerationUsingRecursionTest, GenerateSubsetsUsingOnlyRecursionWorks)
     EXPECT_EQ(expectedSubsets, actualSubsets);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -146,4 +146,4 @@ TEST(RangeQueryWithQuadraticAuxiliarySizeTest, GetValueOnIntervalWithGeometricSu
     EXPECT_EQ(6, geometricSumRangeQuery.getValueOnInterval(4, 4));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -79,4 +79,4 @@ TEST(RangeQueryWithSelectorTest, GetSelectedValueOnIntervalWithMaximumWorksOnExa
     EXPECT_EQ(8, maximumRangeQuery.getSelectedValueOnInterval(2, 4));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

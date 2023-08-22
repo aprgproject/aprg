@@ -6,9 +6,7 @@
 #include <queue>
 #include <stack>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class EulerPathSearchForUndirectedGraphUsingDfs : public BaseEulerPathSearchForUndirectedGraph<Vertex> {
@@ -110,7 +108,5 @@ private:
     }
     BaseUndirectedGraphWithVertex const& b_graph;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -6,9 +6,7 @@
 #include <Algorithm/SetAndSymbolTable/Set/BaseSet.hpp>
 #include <Algorithm/SetAndSymbolTable/Set/HashTable/Common/BaseSetWithBaseLinearProbingHash.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key, typename HashFunction>
 class BaseLinearProbingHashSet
@@ -18,7 +16,5 @@ public:
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     ~BaseLinearProbingHashSet() override = default;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

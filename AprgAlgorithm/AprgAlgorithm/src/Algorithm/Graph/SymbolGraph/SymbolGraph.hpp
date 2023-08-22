@@ -2,9 +2,7 @@
 
 #include <map>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename Object>
 Vertex getUniqueVertexIdentifier(Object const& object);
@@ -63,6 +61,4 @@ private:
     SymbolTable m_symbolTable;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

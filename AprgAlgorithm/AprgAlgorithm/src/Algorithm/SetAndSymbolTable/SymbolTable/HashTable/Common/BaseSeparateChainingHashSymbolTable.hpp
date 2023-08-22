@@ -7,9 +7,7 @@
 #include <Algorithm/SetAndSymbolTable/SymbolTable/HashTable/Common/BaseSymbolTableWithBaseSeparateChainingHash.hpp>
 #include <Algorithm/SetAndSymbolTable/SymbolTable/LinkedList/UnorderedLinkedListSymbolTable.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key, typename Value, typename HashFunction, int HASH_TABLE_SIZE>
 class BaseSeparateChainingHashSymbolTable
@@ -23,7 +21,5 @@ public:
         default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual
                   // functions)
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

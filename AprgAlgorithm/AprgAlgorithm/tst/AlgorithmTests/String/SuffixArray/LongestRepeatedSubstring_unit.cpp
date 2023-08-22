@@ -21,4 +21,4 @@ TEST(LongestRepeatedSubstringTest, GetLongestRepeatedSubstringWorks) {
     EXPECT_EQ("st of times it was the ", LongestRepeatedSubstringForTest::getLongestRepeatedSubstring(stringToTest));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -50,4 +50,4 @@ TEST(PathSearchUsingDfsWithDistanceSumTest, GetEndVertexToDistanceSumMapWorksWit
     EXPECT_EQ(expectedMap, pathSearch.getEndVertexToDistanceSumMap());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

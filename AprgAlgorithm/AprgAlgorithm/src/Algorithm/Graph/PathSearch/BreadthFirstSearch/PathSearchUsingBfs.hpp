@@ -5,9 +5,7 @@
 #include <deque>
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class PathSearchUsingBfs : public BasePathSearchWithBfsAndDfs<Vertex> {
@@ -138,6 +136,4 @@ private:
 // -----> and the predecessors nodes have been set.
 // ---> Breadth-first search produces a so-called breadth first tree.
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

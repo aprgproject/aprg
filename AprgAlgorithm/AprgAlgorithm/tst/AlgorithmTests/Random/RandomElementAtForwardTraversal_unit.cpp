@@ -23,4 +23,4 @@ TEST(RandomElementAtForwardTraversalTest, GetRandomElementAtForwardTraversalWork
     EXPECT_NE(0, algorithm.getRandomElement(values));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

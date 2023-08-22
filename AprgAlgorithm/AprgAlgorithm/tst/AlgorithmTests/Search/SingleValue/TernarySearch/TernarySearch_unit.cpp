@@ -60,4 +60,4 @@ TEST(TernarySearchTest, GetIndexOfValueWithIndicesWorksWhenValueIsFoundAndWhenTh
     testGetIndexOfValueWithIndicesWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

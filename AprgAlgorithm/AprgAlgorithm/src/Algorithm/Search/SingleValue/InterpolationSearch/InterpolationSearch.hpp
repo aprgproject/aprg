@@ -3,9 +3,7 @@
 #include <Algorithm/Utilities/IndexHelper.hpp>
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class InterpolationSearch {
@@ -42,7 +40,7 @@ private:
             Value higherValue(m_sortedValues[highIndex]);
             if (targetValue < lowerValue || higherValue < targetValue) {  // out of range
                 break;
-            } else if (lowerValue == higherValue) {
+            } if (lowerValue == higherValue) {
                 result = getMidpointOfIndexes(lowIndex, highIndex);
                 break;
             } else {
@@ -65,8 +63,6 @@ private:
 
     Values const& m_sortedValues;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

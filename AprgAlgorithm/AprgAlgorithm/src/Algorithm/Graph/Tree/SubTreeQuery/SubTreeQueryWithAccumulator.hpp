@@ -4,9 +4,7 @@
 #include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
 #include <Algorithm/Search/RangeQuery/RangeQueryWithAccumulator.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class SubTreeQueryWithAccumulator : public SubTreeQuery<Vertex> {
@@ -45,7 +43,5 @@ private:
     VertexToIndexMap const& b_vertexToIndexMap;
     RangeQuery m_rangeQuery;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

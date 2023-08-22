@@ -5,9 +5,7 @@
 
 #include <array>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, int MAX_VERTEX_VALUE>
 class ReachabilityInDigraphWithArrayUsingDfs : public BaseReachabilityInDigraph<Vertex> {
@@ -16,7 +14,7 @@ public:
     using ArrayOfBool = std::array<bool, MAX_VERTEX_VALUE>;
 
     ReachabilityInDigraphWithArrayUsingDfs(BaseDirectedGraphWithVertex const& graph, Vertex const& sourceVertex)
-        : m_graph(graph), m_sourceVertex(sourceVertex), m_isReachableArray{} {
+        : m_graph(graph), m_sourceVertex(sourceVertex) {
         initialize();
     }
 
@@ -41,9 +39,7 @@ private:
 
     BaseDirectedGraphWithVertex const& m_graph;
     Vertex m_sourceVertex;
-    ArrayOfBool m_isReachableArray;  // array for constant time query
+    ArrayOfBool m_isReachableArray{};  // array for constant time query
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

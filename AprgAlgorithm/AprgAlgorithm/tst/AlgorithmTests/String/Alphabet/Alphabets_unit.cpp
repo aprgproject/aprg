@@ -72,4 +72,4 @@ TEST(AlphabetsTest, GetCharactersWorks) {
     EXPECT_EQ("ABCDEF", alphabet.getCharacters());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

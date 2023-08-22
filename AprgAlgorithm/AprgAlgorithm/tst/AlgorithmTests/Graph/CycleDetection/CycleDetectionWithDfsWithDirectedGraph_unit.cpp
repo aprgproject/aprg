@@ -139,4 +139,4 @@ TEST(CycleDetectionUsingDfsTest, CycleDetectionWorksUsingExample5WithDirectedGra
     EXPECT_TRUE(cycleDetection.getAllCycles().empty());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

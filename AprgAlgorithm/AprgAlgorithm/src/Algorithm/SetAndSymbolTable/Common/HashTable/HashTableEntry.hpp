@@ -2,9 +2,7 @@
 
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key>
 struct HashTableEntry {
@@ -17,6 +15,4 @@ struct HashTableEntryWithValue {
     Value value;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

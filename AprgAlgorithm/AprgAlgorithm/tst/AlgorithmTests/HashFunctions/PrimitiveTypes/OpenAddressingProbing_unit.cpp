@@ -46,4 +46,4 @@ TEST(OpenAddressingProbingTest, GetHashForQuadraticProbingWorks) {
                    123456789, numberOfSlots, originalHashFunction, 4, coefficient1, coefficient2)));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

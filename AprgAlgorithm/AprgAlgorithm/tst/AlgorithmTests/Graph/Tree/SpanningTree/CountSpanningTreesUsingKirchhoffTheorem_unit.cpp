@@ -21,4 +21,4 @@ TEST(CountSpanningTreesUsingKirchhoffTheoremTest, GetCountWorks) {
     EXPECT_EQ(3, CountTrees::getCount<5>(graph));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

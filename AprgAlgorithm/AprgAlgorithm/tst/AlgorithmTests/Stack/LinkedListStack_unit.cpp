@@ -29,4 +29,4 @@ TEST(LinkedListStackTest, DISABLED_PopWorksWithAssertionWhenItsEmpty) {
     testPopAssertionWhenEmptyWithInt<StackForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -6,9 +6,7 @@
 #include <numeric>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object, int SIZE>
 class WeightedQuickUnionWithArray : public BaseUnionFind<Object> {
@@ -102,9 +100,7 @@ private:
     SizeArray m_sizesOfRoots;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Proof
 // Depth of any node x is at most log2 (SIZE)

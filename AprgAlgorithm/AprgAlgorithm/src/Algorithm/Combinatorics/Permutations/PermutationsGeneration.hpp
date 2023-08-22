@@ -3,9 +3,7 @@
 #include <algorithm>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Objects>
 class PermutationsGeneration {
@@ -143,7 +141,5 @@ private:
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

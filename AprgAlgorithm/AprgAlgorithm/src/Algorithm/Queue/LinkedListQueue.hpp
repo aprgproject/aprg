@@ -5,9 +5,7 @@
 #include <cassert>
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object>
 class LinkedListQueue : public BaseQueue<Object> {
@@ -19,7 +17,7 @@ public:
         NodeUniquePointer next;
     };
 
-    LinkedListQueue() : m_size(0), m_first(nullptr), m_nextOfLastDoublePointer(&m_first) {}
+    LinkedListQueue() :  m_first(nullptr), m_nextOfLastDoublePointer(&m_first) {}
 
     bool isEmpty() const override { return m_first == nullptr; }
 
@@ -46,11 +44,9 @@ public:
     }
 
 private:
-    int m_size;
+    int m_size{0};
     NodeUniquePointer m_first;
     NodeUniquePointer* m_nextOfLastDoublePointer;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

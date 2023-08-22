@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/Types/GraphTypes.hpp>
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename Weight, typename EdgeWeightedGraph, template <class> class ComparatorTemplateType>
 class PathSearchUsingFloydWarshall {
@@ -57,7 +55,7 @@ private:
             PathDetails const& startToEnd(m_pathDetailsMatrix.getEntryConstReference(*startIt, *endIt));
             if (startToEnd.hasAPath) {
                 if (*startIt != startToEnd.bestInBetweenVertex && *endIt != startToEnd.bestInBetweenVertex) {
-                    ListConstIterator inbetweenIt = pathInList.insert(endIt, startToEnd.bestInBetweenVertex);
+                    auto inbetweenIt = pathInList.insert(endIt, startToEnd.bestInBetweenVertex);
                     PathDetails const& firstToMiddle(
                         m_pathDetailsMatrix.getEntryConstReference(*startIt, startToEnd.bestInBetweenVertex));
                     PathDetails const& middleToSecond(
@@ -162,8 +160,6 @@ std::ostream& operator<<(
     out << pathDetails.hasAPath << "," << pathDetails.bestInBetweenVertex << "," << pathDetails.bestWeight;
     return out;
 }
-
-}  // namespace algorithm
 
 }  // namespace alba
 

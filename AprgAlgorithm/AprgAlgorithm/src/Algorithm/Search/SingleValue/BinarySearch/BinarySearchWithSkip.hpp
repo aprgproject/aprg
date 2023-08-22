@@ -2,9 +2,7 @@
 
 #include <Algorithm/Utilities/IndexHelper.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class BinarySearchWithSkip {
@@ -44,8 +42,6 @@ private:
 
     Values const& m_sortedValues;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

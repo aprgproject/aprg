@@ -3,9 +3,7 @@
 #include <Algorithm/String/SuffixArray/SuffixArray.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Index>
 class KeywordInContextIndexing {
@@ -33,8 +31,6 @@ private:
     std::string m_searchSpace;
     SuffixArray<Index> m_suffixArray;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

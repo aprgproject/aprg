@@ -21,4 +21,4 @@ TEST(ReachabilityInDigraphWithArrayUsingDfsTest, IsReachableWorksWhenNotEmpty) {
     testIsReachableWhenNotEmptyWithVertexAsInt<ReachabilityForTest, GraphForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

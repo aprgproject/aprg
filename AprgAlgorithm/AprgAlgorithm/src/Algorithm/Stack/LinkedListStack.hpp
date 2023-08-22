@@ -5,9 +5,7 @@
 #include <cassert>
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object>
 class LinkedListStack : public BaseStack<Object> {
@@ -19,7 +17,7 @@ public:
         NodeUniquePointer next;  // one pointer overhead for every item
     };
 
-    LinkedListStack() : m_size(0), m_first(nullptr) {}
+    LinkedListStack() :  m_first(nullptr) {}
 
     bool isEmpty() const override { return m_first == nullptr; }
 
@@ -46,10 +44,8 @@ public:
     }
 
 private:
-    int m_size;
+    int m_size{0};
     NodeUniquePointer m_first;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

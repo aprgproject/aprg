@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/Utilities/LaplaceanMatrix.hpp>
 #include <Common/Math/Matrix/Utilities/Determinant.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class CountSpanningTreesUsingKirchhoffTheorem {
@@ -50,7 +48,5 @@ private:
             matrix::getIndexWithHighestNumberOfNonZeros(columns), matrix::getIndexWithHighestNumberOfNonZeros(rows)};
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

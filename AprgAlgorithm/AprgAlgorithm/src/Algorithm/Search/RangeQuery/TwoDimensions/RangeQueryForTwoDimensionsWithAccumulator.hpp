@@ -3,9 +3,7 @@
 #include <Algorithm/Search/RangeQuery/SegmentTree/RangeQueryWithStaticSegmentTree.hpp>
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value>
 class RangeQueryForTwoDimensionsWithAccumulator {
@@ -67,7 +65,5 @@ private:
     AccumulatorFunction m_accumulator;
     AccumulatorFunction m_inverseAccumulator;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

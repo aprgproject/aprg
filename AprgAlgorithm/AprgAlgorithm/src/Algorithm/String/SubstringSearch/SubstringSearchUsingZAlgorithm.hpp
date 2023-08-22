@@ -5,9 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Index, char UNIQUE_DIVIDING_CHARACTER>
 class SubstringSearchUsingZAlgorithm {
@@ -19,7 +17,7 @@ public:
     Index search(std::string const& searchSpace) const { return searchForFirstSubstring(searchSpace); }
 
     Index searchForFirstSubstring(std::string const& searchSpace) const {
-        Index result = static_cast<Index>(std::string::npos);
+        auto result = static_cast<Index>(std::string::npos);
         std::string stringForZAlgorithm = createStringForZAlgorithm(searchSpace);
         Indexes prefixLengths = calculatePrefixLengths(stringForZAlgorithm);
         Index queryLength = m_query.length();
@@ -58,8 +56,6 @@ private:
 
     std::string m_query;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

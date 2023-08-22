@@ -45,4 +45,4 @@ TEST(AlbaLargeSorterProfileTest, DISABLED_FirstTest) {
     //}
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

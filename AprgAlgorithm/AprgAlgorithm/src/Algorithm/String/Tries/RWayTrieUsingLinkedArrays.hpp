@@ -8,9 +8,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value>
 class RWayTrieUsingLinkedArrays : public BaseStringSymbolTable<Value> {
@@ -205,8 +203,6 @@ private:
 
     NodeUniquePointer m_root;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

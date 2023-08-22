@@ -5,9 +5,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class RangeQueryWithStaticSegmentTree {
@@ -217,30 +215,28 @@ protected:
         if (targetValue == m_treeValues[treeIndex]) {
             if (leftChild < static_cast<int>(m_treeValues.size()) && targetValue == m_treeValues[leftChild]) {
                 return getIndexWithTargetValueInternal(leftChild, targetValue, inverseFunction);
-            } else if (rightChild < static_cast<int>(m_treeValues.size())) {
+            } if (rightChild < static_cast<int>(m_treeValues.size())) {
                 return getIndexWithTargetValueInternal(
                     rightChild, inverseFunction(targetValue, m_treeValues[leftChild]), inverseFunction);
-            } else if (leftChild < static_cast<int>(m_treeValues.size())) {
+            } if (leftChild < static_cast<int>(m_treeValues.size())) {
                 return getIndexWithTargetValueInternal(leftChild, targetValue, inverseFunction);
-            } else {
-                return treeIndex;
-            }
-        } else if (leftChild < static_cast<int>(m_treeValues.size()) && targetValue <= m_treeValues[leftChild]) {
+            }                 return treeIndex;
+           
+        } if (leftChild < static_cast<int>(m_treeValues.size()) && targetValue <= m_treeValues[leftChild]) {
             return getIndexWithTargetValueInternal(leftChild, targetValue, inverseFunction);
-        } else if (
+        } if (
             rightChild < static_cast<int>(m_treeValues.size()) &&
             targetValue <= m_treeValues[leftChild] + m_treeValues[rightChild]) {
             return getIndexWithTargetValueInternal(
                 rightChild, inverseFunction(targetValue, m_treeValues[leftChild]), inverseFunction);
-        } else if (targetValue <= m_treeValues[treeIndex]) {
+        } if (targetValue <= m_treeValues[treeIndex]) {
             // do nothing
         } else if (treeIndex > 0) {
             if (Utilities::isALeftChild(treeIndex)) {
                 return getIndexWithTargetValueInternal(parent, targetValue, inverseFunction);
-            } else {
-                return getIndexWithTargetValueInternal(
+            }                 return getIndexWithTargetValueInternal(
                     parent, m_function(m_treeValues[Utilities::getLeftChild(parent)], targetValue), inverseFunction);
-            }
+           
         }
         return result;
     }
@@ -250,6 +246,4 @@ protected:
     Function m_function;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

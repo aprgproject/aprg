@@ -6,9 +6,7 @@
 
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key, typename Value, typename Node>
 class BaseRedBlackBinarySearchTreeSymbolTable
@@ -18,7 +16,5 @@ public:
         default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual
                   // functions)
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

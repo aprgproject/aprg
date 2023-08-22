@@ -67,4 +67,4 @@ TEST(GetAccumulatedNextFreeIndexWithSegmentTreeTest, SetAsFreeWorks) {
     EXPECT_EQ(0, query.getNextFreeIndexAt(28));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

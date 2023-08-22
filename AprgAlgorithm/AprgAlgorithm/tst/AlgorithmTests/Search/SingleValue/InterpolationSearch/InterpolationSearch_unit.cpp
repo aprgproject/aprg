@@ -57,4 +57,4 @@ TEST(InterpolationSearchTest, GetIndexOfValueWithIndicesWorksWhenValueIsFoundAnd
     testGetIndexOfValueWithIndicesWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -2,11 +2,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
-
-namespace CommonTestsWithConnectedComponents {
+namespace alba::algorithm::CommonTestsWithConnectedComponents {
 
 // UndirectedGraph
 
@@ -169,8 +165,4 @@ void testIsConnectedWhenNotEmptyWithVertexAsIntWithDirectedGraph() {
     EXPECT_TRUE(connectedComponents.isConnected(9, 12));
 }
 
-}  // namespace CommonTestsWithConnectedComponents
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::CommonTestsWithConnectedComponents

@@ -94,4 +94,4 @@ TEST(EulerPathUtilitiesTest, HasEulerPathForDirectedGraphWorksWithMoreThanOneLes
     EXPECT_FALSE(hasEulerPathForDirectedGraph(graph));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

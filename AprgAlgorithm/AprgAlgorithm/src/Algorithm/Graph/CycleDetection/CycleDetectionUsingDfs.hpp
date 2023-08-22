@@ -2,9 +2,7 @@
 
 #include <Algorithm/Graph/BaseGraph.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class CycleDetectionUsingDfs {
@@ -106,7 +104,7 @@ private:
             if (SearchType::OneCycle == m_searchType && hasACycle()) {
                 // this check is needed to prune all recursion instances once cycle has been detected
                 break;
-            } else if (VertexState::NotProcessed == adjacentVertexState) {
+            } if (VertexState::NotProcessed == adjacentVertexState) {
                 m_vertexToPreviousVertexMap[adjacentVertex] = startVertex;
                 searchUsingDfsWithDirectedGraph(adjacentVertex);
             } else if (VertexState::Processing == adjacentVertexState) {
@@ -124,7 +122,7 @@ private:
             if (SearchType::OneCycle == m_searchType && hasACycle()) {
                 // this check is needed to end all recursion instances once cycle has been detected
                 break;
-            } else if (VertexState::NotProcessed == adjacentVertexState) {
+            } if (VertexState::NotProcessed == adjacentVertexState) {
                 m_vertexToPreviousVertexMap[adjacentVertex] = startVertex;
                 searchUsingDfsWithUndirectedGraph(adjacentVertex, startVertex);
             } else if (previousVertex != adjacentVertex && VertexState::Processing == adjacentVertexState) {
@@ -160,6 +158,4 @@ private:
 // every component. If a component contains c nodes and no cycle, it must contain exactly c-1 edges (so it has to be a
 // tree). If there are c or more edges, the component surely contains a cycle. This is only for undirected graph?
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

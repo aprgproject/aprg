@@ -85,4 +85,4 @@ TEST(QuickSorterWith3WayPartitioningTest, SortWorksOnCharactersUsingExample1With
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

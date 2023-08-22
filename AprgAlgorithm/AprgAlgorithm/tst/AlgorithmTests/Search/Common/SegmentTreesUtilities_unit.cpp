@@ -66,4 +66,4 @@ TEST(SegmentTreeUtilitiesTest, GetMinimumNumberOfParentsWorks) {
     EXPECT_EQ(63, UtilitiesForTest::getMinimumNumberOfParents(44));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

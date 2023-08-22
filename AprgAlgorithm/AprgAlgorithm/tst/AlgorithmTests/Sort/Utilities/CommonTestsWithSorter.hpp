@@ -8,11 +8,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
-
-namespace CommonTestsWithSorter {
+namespace alba::algorithm::CommonTestsWithSorter {
 
 template <typename Sorter, typename Values>
 void testSortUsingEmptyExampleWithCharacters(Sorter const& sorter) {
@@ -115,8 +111,4 @@ void testSortAsNotStableUsingExample1WithStabilityCheckObjects(Sorter const& sor
     EXPECT_TRUE(isSortedButNotStable);
 }
 
-}  // namespace CommonTestsWithSorter
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::CommonTestsWithSorter

@@ -5,9 +5,7 @@
 #include <iterator>
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class InsertionSorter : public BaseSorter<Values> {
@@ -46,8 +44,6 @@ private:
         *std::prev(rItLow) = insertItem;
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

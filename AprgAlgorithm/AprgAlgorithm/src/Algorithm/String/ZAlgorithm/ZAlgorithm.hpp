@@ -3,9 +3,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Index>
 class ZAlgorithm {
@@ -49,9 +47,7 @@ public:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // -> Z Algorithm
 // --->  The algorithm finds all occurrences of a pattern in a text in linear time.

@@ -29,4 +29,4 @@ TEST(ChildrenInTreeTest, GetChildrenWorks) {
     EXPECT_EQ((VerticesForTest{8}), query.getChildren(7));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -4,9 +4,7 @@
 #include <Algorithm/Utilities/IndexHelper.hpp>
 #include <Common/Math/Helpers/ComputationHelpers.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdate
@@ -160,7 +158,5 @@ private:
     IncrementFunction m_incrementFunction;
     PendingUpdateDetails m_startIndexesForPendingUpdates;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -2,9 +2,7 @@
 
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 struct TernarySearchTrieSetNode {
     char c;
@@ -22,6 +20,4 @@ struct TernarySearchTrieSymbolTableNode {
     std::unique_ptr<Value> valueUniquePointer;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

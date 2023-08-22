@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class BaseSorter {
@@ -12,9 +10,7 @@ public:
     virtual void sort(Values& valuesToSort) const = 0;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Applications
 // Obvious:

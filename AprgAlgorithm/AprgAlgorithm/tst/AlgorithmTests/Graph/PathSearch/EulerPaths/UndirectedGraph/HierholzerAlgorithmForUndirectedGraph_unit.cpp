@@ -66,4 +66,4 @@ TEST(HierholzerAlgorithmForUndirectedGraphTest, GetEulerCycleAndPathWorksOnExamp
     testGetEulerCycleAndPathWorksOnExample2<PathSearchForTest, GraphForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

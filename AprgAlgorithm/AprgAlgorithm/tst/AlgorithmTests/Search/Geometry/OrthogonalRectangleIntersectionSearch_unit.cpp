@@ -34,4 +34,4 @@ TEST(OrthogonalRectangleIntersectionSearchTest, GetIntersectingPointsWorksOnComp
     EXPECT_EQ(rectanglesToExpect, rectanglesToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

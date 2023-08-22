@@ -4,9 +4,7 @@
 #include <Common/Math/Helpers/LogarithmHelpers.hpp>
 #include <Common/Math/Helpers/PowerHelpers.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Index>
 class SegmentTreeUtilities {
@@ -49,6 +47,4 @@ public:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

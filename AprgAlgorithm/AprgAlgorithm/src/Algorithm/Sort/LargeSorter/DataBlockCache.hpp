@@ -6,9 +6,7 @@
 #include <algorithm>
 #include <deque>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename BlockInformation>
 class DataBlockCache {
@@ -50,6 +48,4 @@ private:
     BlockCacheContainer m_blocksInformationCache;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

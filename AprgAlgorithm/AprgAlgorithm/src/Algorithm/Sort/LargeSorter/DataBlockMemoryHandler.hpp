@@ -2,9 +2,7 @@
 
 #include <deque>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename ObjectToSort>
 using DataBlockMemoryContainer = std::deque<ObjectToSort>;
@@ -23,6 +21,4 @@ private:
     MemoryContainer m_DataBlockMemoryContainer;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

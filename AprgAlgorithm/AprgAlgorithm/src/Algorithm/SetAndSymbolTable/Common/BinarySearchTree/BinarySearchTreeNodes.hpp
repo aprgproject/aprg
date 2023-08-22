@@ -2,9 +2,7 @@
 
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 enum class RedBlackColor { Red, Black };
 
@@ -84,6 +82,4 @@ struct IntervalSearchTreeNodeWithValue {
     KeyDataTypeValue maxIntervalValueInSubtree;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

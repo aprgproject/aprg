@@ -2,9 +2,7 @@
 
 #include <Algorithm/String/SuffixArray/SuffixArray.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Index>
 class LongestRepeatedSubstring {
@@ -29,7 +27,5 @@ public:
         return result;
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object>
 class BaseQueue {
@@ -15,6 +13,4 @@ public:
     virtual Object dequeue() = 0;                    // Remove item from the beginning of the list
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

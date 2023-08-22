@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/PathSearch/Common/BasePathSearchWithDistanceCount.hpp>
 #include <Algorithm/Graph/PathSearch/DepthFirstSearch/PathSearchUsingDfs.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class PathSearchUsingDfsWithDistanceCount : public BasePathSearchWithDistanceCount<Vertex>,
@@ -32,6 +30,4 @@ private:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

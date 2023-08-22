@@ -61,4 +61,4 @@ TEST(GenomicExampleTest, ExpandValuesToCharactersWorks) {
     EXPECT_EQ("ATAGATGCATAG", expandValuesToCharacters("\x13\x1E\x13"));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

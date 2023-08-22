@@ -4,9 +4,7 @@
 
 #include <map>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object>
 class UnionFindUsingMap : public BaseUnionFind<Object> {
@@ -51,6 +49,4 @@ private:
     ConnectionMap m_connectionMap;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

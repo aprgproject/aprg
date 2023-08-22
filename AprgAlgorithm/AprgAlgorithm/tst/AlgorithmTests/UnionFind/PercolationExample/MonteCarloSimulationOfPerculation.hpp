@@ -10,15 +10,13 @@
 
 using namespace alba::stringHelper;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <int DIMENSION>
 class MonteCarloSimulationOfPerculation {
 public:
     MonteCarloSimulationOfPerculation()
-        : m_sites{}, m_unionFindOfIndexes(), m_numberOfOpenSites(0), m_randomizer(0, getDimensionsSquared() - 1) {}
+        :  m_unionFindOfIndexes(),  m_randomizer(0, getDimensionsSquared() - 1) {}
 
     bool isPercolated() const {
         return m_unionFindOfIndexes.isConnected(getVirtualTopIndex(), getVirtualBottomIndex());
@@ -112,13 +110,11 @@ private:
         }
     }
 
-    std::array<bool, getDimensionsSquared()> m_sites;
+    std::array<bool, getDimensionsSquared()> m_sites{};
     WeightedQuickUnionWithArray<int, getDimensionsSquared() + 2>
         m_unionFindOfIndexes;  //+2 because of virtual top site and bottom site
-    int m_numberOfOpenSites;
+    int m_numberOfOpenSites{0};
     AlbaUniformNonDeterministicRandomizer<int> m_randomizer;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

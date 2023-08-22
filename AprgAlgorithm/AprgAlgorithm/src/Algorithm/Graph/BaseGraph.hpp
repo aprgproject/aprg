@@ -4,9 +4,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class BaseGraph {
@@ -30,6 +28,4 @@ public:
     virtual void clear() = 0;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

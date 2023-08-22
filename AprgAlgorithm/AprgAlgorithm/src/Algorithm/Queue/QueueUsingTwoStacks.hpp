@@ -5,9 +5,7 @@
 #include <cassert>
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object, typename StackWithObject>
 class QueueUsingTwoStacks : public BaseQueue<Object> {
@@ -54,7 +52,5 @@ private:
     StackWithObject m_stackFromEnqueue;
     StackWithObject m_stackToDequeue;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

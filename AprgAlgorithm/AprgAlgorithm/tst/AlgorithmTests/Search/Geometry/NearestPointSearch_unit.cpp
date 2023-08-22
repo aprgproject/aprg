@@ -92,4 +92,4 @@ TEST(NearestPointSearchTest, GetNearestPointPairWorksOnExample1) {
     EXPECT_EQ(pointPairToExpect, pointPairToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

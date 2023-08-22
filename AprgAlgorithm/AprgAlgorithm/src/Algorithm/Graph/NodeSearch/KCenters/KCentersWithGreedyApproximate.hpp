@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/PathSearch/BreadthFirstSearch/PathSearchUsingBfsWithDistanceSum.hpp>
 #include <Algorithm/Graph/Types/GraphTypes.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename Weight, typename EdgeWeightedGraph>
 class KCentersWithGreedyApproximate {
@@ -64,8 +62,6 @@ private:
     VertexToWeightMap m_closestDistanceForVertex;
     Vertices m_foundCenters;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

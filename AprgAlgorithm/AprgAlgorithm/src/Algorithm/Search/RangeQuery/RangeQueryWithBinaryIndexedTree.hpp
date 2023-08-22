@@ -4,9 +4,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class RangeQueryWithBinaryIndexedTree {
@@ -115,6 +113,4 @@ private:
     AccumulatorFunction m_inverseAccumulator;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

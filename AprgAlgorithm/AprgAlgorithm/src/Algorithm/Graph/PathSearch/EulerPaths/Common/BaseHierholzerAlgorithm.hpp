@@ -2,9 +2,7 @@
 
 #include <Algorithm/Graph/Types/GraphTypes.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename BaseGraphType, typename BaseEulerPathSearchType>
 class BaseHierholzerAlgorithm : public BaseEulerPathSearchType {
@@ -44,9 +42,7 @@ protected:
     BaseGraphType const& b_graph;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Hierholzer's 1873 paper provides a different method for finding Euler cycles that is more efficient than Fleury's
 // algorithm.

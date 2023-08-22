@@ -5,9 +5,7 @@
 #include <utility>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object, template <class> class ComparatorTemplateType>
 class BinaryHeapPriorityQueue {
@@ -66,6 +64,4 @@ private:
 // Performance: insert -> log N,  deleteAndGetTopObject -> log N,  top -> log N
 // Impossible performance: insert -> constant,  deleteAndGetTopObject -> constant,  top -> constant
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

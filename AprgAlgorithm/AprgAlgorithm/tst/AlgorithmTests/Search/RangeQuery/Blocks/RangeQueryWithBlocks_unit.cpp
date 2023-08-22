@@ -202,4 +202,4 @@ TEST(RangeQueryWithBlocksTest, SquareRootSizeExampleWorks) {
     EXPECT_EQ(39, sumRangeQuery.getResultOnInterval(3, 12));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

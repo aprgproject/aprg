@@ -74,4 +74,4 @@ TEST(CountPathsWithLengthUsingAdjacencyMatrixTest, GetCountWorksWithDirectedGrap
     EXPECT_EQ(2, countPaths.getCount(2, 5));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

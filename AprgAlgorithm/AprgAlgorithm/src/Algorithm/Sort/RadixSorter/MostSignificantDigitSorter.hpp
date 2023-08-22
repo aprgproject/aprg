@@ -6,9 +6,7 @@
 #include <array>
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values, int MAX_NUMBER_OF_DIGIT_VALUES>
 class MostSignificantDigitSorter : public BaseSorter<Values> {
@@ -126,8 +124,6 @@ private:
     GetDigitAtFunction m_getDigitAtFunction;
     IsDigitFunction m_isDigitInvalidFunction;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

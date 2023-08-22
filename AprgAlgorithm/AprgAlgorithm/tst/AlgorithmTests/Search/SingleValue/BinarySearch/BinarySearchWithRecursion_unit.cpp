@@ -60,4 +60,4 @@ TEST(BinarySearchWithRecursionTest, GetIndexOfValueWithIndicesWorksWhenValueIsFo
     testGetIndexOfValueWithIndicesWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

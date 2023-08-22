@@ -5,9 +5,7 @@
 
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class InsertionSorterWithBinarySearch : public BaseSorter<Values> {
@@ -51,8 +49,6 @@ private:
         return result;
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

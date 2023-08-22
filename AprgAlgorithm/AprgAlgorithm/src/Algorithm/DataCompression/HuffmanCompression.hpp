@@ -8,9 +8,7 @@
 #include <memory>
 #include <queue>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Count>
 class HuffmanCompression {
@@ -80,7 +78,7 @@ public:
         AlbaStreamBitWriter writer(output);
 
         TrieNodeUniquePointer root(readTrie(reader));
-        Count lengthOfString(reader.readBigEndianNumberData<Count>());
+        auto lengthOfString(reader.readBigEndianNumberData<Count>());
         expandAllCharacters(reader, writer, root, lengthOfString);
     }
 
@@ -232,8 +230,6 @@ private:
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

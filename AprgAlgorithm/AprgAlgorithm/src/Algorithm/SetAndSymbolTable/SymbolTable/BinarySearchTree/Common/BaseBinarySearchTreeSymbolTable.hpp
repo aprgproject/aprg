@@ -5,9 +5,7 @@
 #include <Algorithm/SetAndSymbolTable/SymbolTable/BaseSymbolTable.hpp>
 #include <Algorithm/SetAndSymbolTable/SymbolTable/BinarySearchTree/Common/BaseSymbolTableWithBaseTree.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key, typename Value>
 class BaseBinarySearchTreeSymbolTable
@@ -17,7 +15,5 @@ public:
     ~BaseBinarySearchTreeSymbolTable() override = default;  // no need for virtual destructor because base destructor is
                                                             // virtual (similar to other virtual functions)
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

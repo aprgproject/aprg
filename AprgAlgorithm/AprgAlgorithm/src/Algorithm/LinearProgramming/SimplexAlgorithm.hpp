@@ -2,9 +2,7 @@
 
 #include <Common/Math/Matrix/Utilities/Simplex.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value>
 class SimplexAlgorithm {
@@ -46,7 +44,5 @@ public:
 private:
     Matrix m_simplexTable;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

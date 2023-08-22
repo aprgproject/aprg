@@ -48,4 +48,4 @@ TEST(GeneralPathCoverTest, GetSizeOfMaximumAntichainOnExample1) {
     EXPECT_EQ(2, generalPathCover.getSizeOfMaximumAntichain(newSourceVertex, newSinkVertex));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

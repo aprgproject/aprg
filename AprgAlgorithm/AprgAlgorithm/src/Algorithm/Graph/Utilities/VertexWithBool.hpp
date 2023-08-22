@@ -3,9 +3,7 @@
 #include <ostream>
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 using VertexWithBool = std::pair<Vertex, bool>;
@@ -16,6 +14,4 @@ std::ostream& operator<<(std::ostream& out, VertexWithBool<Vertex> const& vertex
     return out;
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

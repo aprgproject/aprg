@@ -2,9 +2,7 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key, typename Value>
 class BaseSymbolTable {
@@ -37,6 +35,4 @@ public:
         Key const& low, Key const& high) const = 0;  // get all keys that fall in range in sorted order
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

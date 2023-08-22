@@ -2,9 +2,7 @@
 
 #include <Algorithm/Utilities/IndexHelper.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class BinarySearchWithRecursion {
@@ -51,8 +49,6 @@ private:
 
     Values const& m_sortedValues;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

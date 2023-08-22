@@ -6,9 +6,7 @@
 #include <utility>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class PigeonHoleSorter : public BaseSorter<Values> {
@@ -44,8 +42,6 @@ public:
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

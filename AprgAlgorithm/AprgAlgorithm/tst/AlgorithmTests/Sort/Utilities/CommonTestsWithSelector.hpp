@@ -4,11 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
-
-namespace CommonTestsWithSelector {
+namespace alba::algorithm::CommonTestsWithSelector {
 
 template <typename Selector, typename Values>
 void testDoNthElementUsingExample1WithCharacters(Selector const& selector) {
@@ -43,9 +39,5 @@ void testGetNthElementUsingExample1WithPositiveAndNegativeIntegers(Selector cons
 
     EXPECT_EQ(-1, selector.getNthSelect(valuesToSelect, 3));
 }
-
-}  // namespace CommonTestsWithSelector
-
-}  // namespace algorithm
 
 }  // namespace alba

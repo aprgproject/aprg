@@ -100,4 +100,4 @@ TEST(LinearProbingHashSetTest, DeleteBasedOnKeyWorksWithHalvingHashTableSize) {
     EXPECT_EQ(4, setObject.getHashTableSize());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

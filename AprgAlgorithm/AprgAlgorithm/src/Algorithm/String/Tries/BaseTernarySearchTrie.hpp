@@ -4,9 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename NodeTemplateType, typename BaseDataStructure>
 class BaseTernarySearchTrie : public BaseDataStructure {
@@ -99,9 +97,7 @@ protected:
     NodeUniquePointer m_root;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Ternary search tries
 // -> Store characters and values in nodes (not keys)

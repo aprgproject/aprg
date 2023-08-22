@@ -4,9 +4,7 @@
 #include <Algorithm/Graph/Reachability/Reachability/BaseReachabilityInDigraph.hpp>
 #include <Algorithm/Graph/Utilities/CheckableVertices.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class ReachabilityInDigraphWithSetUsingDfs : public BaseReachabilityInDigraph<Vertex> {
@@ -40,6 +38,4 @@ private:
     CheckableVerticesWithVertex m_processedVertices;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

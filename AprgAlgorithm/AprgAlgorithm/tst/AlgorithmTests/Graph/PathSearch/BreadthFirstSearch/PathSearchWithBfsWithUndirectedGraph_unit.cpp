@@ -111,4 +111,4 @@ TEST(PathSearchUsingBfsTest, ReinitializeStartingFromWorksWithUndirectedGraphWit
     EXPECT_EQ(PathForTest(), pathSearch.getShortestPathTo(6));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

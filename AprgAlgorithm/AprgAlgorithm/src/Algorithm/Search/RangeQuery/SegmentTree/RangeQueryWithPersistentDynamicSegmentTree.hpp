@@ -7,9 +7,7 @@
 #include <functional>
 #include <list>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class RangeQueryWithPersistentDynamicSegmentTree {
@@ -40,7 +38,7 @@ public:
     using StepCount = int;
 
     RangeQueryWithPersistentDynamicSegmentTree(Values const& valuesToCheck, Function const& functionObject)
-        : m_maxChildrenIndex(0), m_numberOfValues(valuesToCheck.size()), m_function(functionObject) {
+        :  m_numberOfValues(valuesToCheck.size()), m_function(functionObject) {
         initialize(valuesToCheck);
     }
 
@@ -172,12 +170,10 @@ protected:
         }
     }
 
-    Index m_maxChildrenIndex;
+    Index m_maxChildrenIndex{0};
     Index const m_numberOfValues;
     Function m_function;
     NodeRoots m_roots;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

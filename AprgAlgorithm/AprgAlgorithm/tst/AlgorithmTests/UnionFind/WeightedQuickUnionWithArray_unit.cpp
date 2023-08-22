@@ -110,4 +110,4 @@ TEST(WeightedQuickUnionWithArrayTest, GetRelativeRootArrayWorks) {
     EXPECT_EQ(expectedRelativeRootArray, unionFind.getRelativeRootArray());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

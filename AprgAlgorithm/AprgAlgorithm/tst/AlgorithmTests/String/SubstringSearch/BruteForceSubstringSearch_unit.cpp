@@ -38,4 +38,4 @@ TEST(BruteForceSubstringSearchTest, SearchWorksWithTwoLoopsUsingExample2) {
     testSearchUsingExample2<BruteForceSubstringSearchWithTwoLoops, Index>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

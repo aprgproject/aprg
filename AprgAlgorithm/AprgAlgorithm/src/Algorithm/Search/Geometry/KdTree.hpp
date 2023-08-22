@@ -4,9 +4,7 @@
 
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key>
 bool isEqualThanWithDepth(Key const& key1, Key const& key2, int const depth);
@@ -194,6 +192,4 @@ protected:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

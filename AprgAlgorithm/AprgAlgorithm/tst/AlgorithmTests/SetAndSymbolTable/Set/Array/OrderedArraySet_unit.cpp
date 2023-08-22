@@ -48,4 +48,4 @@ TEST(OrderedArraySetTest, GetKeys) { testGetKeysWithUnsignedIntAndChar<SetForTes
 
 TEST(OrderedArraySetTest, GetKeysInRangeWorks) { testGetKeysInRangeInclusiveWithUnsignedIntAndChar<SetForTest>(); }
 
-}  // namespace alba
+}  // namespace alba::algorithm

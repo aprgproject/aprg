@@ -137,4 +137,4 @@ TEST(
     EXPECT_EQ(expectedStrings, stringsToTest);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

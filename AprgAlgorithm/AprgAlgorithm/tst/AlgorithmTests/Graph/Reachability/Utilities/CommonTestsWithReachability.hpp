@@ -2,11 +2,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
-
-namespace CommonTestsWithReachability {
+namespace alba::algorithm::CommonTestsWithReachability {
 
 template <typename Reachability, typename Graph>
 void testIsReachableWhenEmptyWithVertexAsInt() {
@@ -100,8 +96,4 @@ void testIsReachableWhenNotEmptyWithVertexAsInt() {
     EXPECT_TRUE(reachabilityIn9.isReachable(12));
 }
 
-}  // namespace CommonTestsWithReachability
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::CommonTestsWithReachability

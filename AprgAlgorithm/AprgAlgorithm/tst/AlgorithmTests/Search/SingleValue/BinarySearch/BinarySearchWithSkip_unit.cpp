@@ -49,4 +49,4 @@ TEST(BinarySearchWithSkipTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereA
     testGetIndexOfValueWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

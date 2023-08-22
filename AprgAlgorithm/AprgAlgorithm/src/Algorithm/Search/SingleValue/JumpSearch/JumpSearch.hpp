@@ -4,9 +4,7 @@
 #include <Algorithm/Utilities/IndexHelper.hpp>
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class JumpSearch {
@@ -41,8 +39,6 @@ private:
     Index m_blockSize;
     Values const& m_sortedValues;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

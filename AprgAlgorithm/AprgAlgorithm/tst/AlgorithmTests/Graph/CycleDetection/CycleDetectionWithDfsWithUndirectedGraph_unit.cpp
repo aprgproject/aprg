@@ -83,4 +83,4 @@ TEST(CycleDetectionUsingDfsTest, CycleDetectionWorksUsingExample3WithUndirectedG
     EXPECT_EQ(expectedCycles, cycleDetection.getAllCycles());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

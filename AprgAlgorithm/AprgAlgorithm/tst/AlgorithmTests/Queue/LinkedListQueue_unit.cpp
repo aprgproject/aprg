@@ -29,4 +29,4 @@ TEST(LinkedListQueueTest, DISABLED_DequeueWorksWithAssertionWhenItsEmpty) {
     testDequeueAssertionWhenEmptyWithInt<QueueForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

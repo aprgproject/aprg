@@ -64,4 +64,4 @@ TEST(JumpNearestValueSearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsHi
     testGetIndexOfNearestValueWhenNearestValueIsHigherWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

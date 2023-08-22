@@ -9,9 +9,7 @@
 #include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
 #include <Algorithm/Graph/Utilities/VertexWithBool.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class GeneralPathCover {
@@ -179,7 +177,5 @@ private:
 
     BaseDirectedGraphWithVertex const& m_graph;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

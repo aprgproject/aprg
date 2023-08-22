@@ -70,4 +70,4 @@ TEST(LinkedListBagTest, AddWorks) {
     });
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

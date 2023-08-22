@@ -33,4 +33,4 @@ TEST(SubTreeQueryTest, Example1Works) {
     EXPECT_EQ(expectedVerticesOfSubTreeAt4, subTreeQuery.getVerticesOfSubTreeAt(4));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

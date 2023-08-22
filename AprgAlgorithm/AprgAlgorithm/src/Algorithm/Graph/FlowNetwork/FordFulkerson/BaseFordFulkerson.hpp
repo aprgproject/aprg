@@ -6,9 +6,7 @@
 #include <functional>
 #include <map>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename SinkSourceFlowNetworkType>
 class BaseFordFulkerson {
@@ -24,7 +22,7 @@ public:
     using TraverseFunction = std::function<void(Vertex)>;
 
     BaseFordFulkerson(SinkSourceFlowNetworkType const& flowNetwork)
-        : m_flowNetwork(flowNetwork), m_maxFlowValue{}, m_augmentingPaths{} {}
+        : m_flowNetwork(flowNetwork) {}
 
     virtual ~BaseFordFulkerson() = default;  // virtual destructor because of virtual functions (vtable exists)
 
@@ -97,8 +95,8 @@ protected:
     }
 
     SinkSourceFlowNetworkType m_flowNetwork;
-    FlowDataType m_maxFlowValue;
-    Paths m_augmentingPaths;
+    FlowDataType m_maxFlowValue{};
+    Paths m_augmentingPaths{};
     CheckableVerticesWithVertex m_processedVertices;
     VertexToFlowEdgeMap m_vertexToAugmentingPathEdgeMap;
 };
@@ -196,6 +194,4 @@ protected:
 // The reason is that a graph cannot contain a flow whose size is larger than the weight of any cut of the graph.
 // Hence, always when a flow and a cut are equally large, they are a maximum flow and a minimum cut.
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

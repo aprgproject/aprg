@@ -5,9 +5,7 @@
 
 #include <algorithm>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 enum class VertexTraversalOrder {
     PreOrder,          // order: DFS traversal order (not really useful)
@@ -181,6 +179,4 @@ private:
 // However, if the graph contains a cycle, it is not possible to form a topological sort,
 // because no node of the cycle can appear before the other nodes of the cycle in the ordering.
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

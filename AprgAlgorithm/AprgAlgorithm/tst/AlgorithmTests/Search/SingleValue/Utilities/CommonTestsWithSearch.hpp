@@ -4,11 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
-
-namespace CommonTestsWithSearch {
+namespace alba::algorithm::CommonTestsWithSearch {
 
 // getIndexOfValue
 
@@ -160,8 +156,4 @@ void testGetIndexOfValueWithIndicesWhenValueIsFoundWithSortedUnsignedInts() {
     EXPECT_EQ(4, search.getIndexOfValue(0, 6, 33));
 }
 
-}  // namespace CommonTestsWithSearch
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::CommonTestsWithSearch

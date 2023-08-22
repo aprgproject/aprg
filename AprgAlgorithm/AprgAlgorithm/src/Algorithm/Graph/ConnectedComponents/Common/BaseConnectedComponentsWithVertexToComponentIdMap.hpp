@@ -3,16 +3,14 @@
 #include <Algorithm/Graph/ConnectedComponents/Common/BaseConnectedComponents.hpp>
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename Graph>
 class BaseConnectedComponentsWithVertexToComponentIdMap : public BaseConnectedComponents<Vertex> {
 public:
     using VertexToIntMap = typename GraphTypes<Vertex>::VertexToIntMap;
 
-    BaseConnectedComponentsWithVertexToComponentIdMap(Graph const& graph) : m_graph(graph), m_numberOfComponentIds(0) {}
+    BaseConnectedComponentsWithVertexToComponentIdMap(Graph const& graph) : m_graph(graph) {}
 
     ~BaseConnectedComponentsWithVertexToComponentIdMap() override =
         default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual
@@ -41,10 +39,8 @@ public:
 
 protected:
     Graph const& m_graph;
-    int m_numberOfComponentIds;
+    int m_numberOfComponentIds{0};
     VertexToIntMap m_vertexToComponentIdMap;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

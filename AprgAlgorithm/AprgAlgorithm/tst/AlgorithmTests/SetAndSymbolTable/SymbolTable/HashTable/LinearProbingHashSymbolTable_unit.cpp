@@ -114,4 +114,4 @@ TEST(LinearProbingHashSymbolTableTest, DeleteBasedOnKeyWorksWithHalvingHashTable
     EXPECT_EQ(4, symbolTable.getHashTableSize());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

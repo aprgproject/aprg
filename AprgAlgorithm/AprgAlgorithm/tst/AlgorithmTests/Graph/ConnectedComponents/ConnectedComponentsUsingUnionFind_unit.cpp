@@ -49,4 +49,4 @@ TEST(ConnectedComponentsUsingUnionFindTest, GetComponentIdWorks) {
     EXPECT_EQ(3, connectedComponents.getComponentId(7));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

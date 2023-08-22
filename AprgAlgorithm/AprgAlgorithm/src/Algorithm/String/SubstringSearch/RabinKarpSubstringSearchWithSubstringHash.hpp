@@ -5,9 +5,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Index, typename HashValue>
 class RabinKarpSubstringSearchWithSubstringHash {
@@ -22,7 +20,7 @@ public:
           m_queryHash(HornerHashFunctionForWholeString<HashValue>(RADIX, A_LARGE_PRIME).getHashCode(query)) {}
 
     Index search(std::string const& searchSpace) const {
-        Index result(static_cast<Index>(std::string::npos));
+        auto result(static_cast<Index>(std::string::npos));
         if (m_queryLength > 0 && m_queryLength <= static_cast<Index>(searchSpace.length())) {
             HornerHashFunctionForSubstrings<HashValue> hashFunction(RADIX, A_LARGE_PRIME, searchSpace);
             for (Index offset = 0; offset + m_queryLength <= static_cast<Index>(searchSpace.length()); offset++) {
@@ -40,7 +38,5 @@ private:
     Index const m_queryLength;
     HashValue m_queryHash;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

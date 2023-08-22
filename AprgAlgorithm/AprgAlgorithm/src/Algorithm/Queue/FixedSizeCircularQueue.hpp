@@ -6,25 +6,22 @@
 #include <cassert>
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object, int SIZE>
 class FixedSizeCircularQueue : public BaseQueue<Object> {
 public:
     using Objects = std::array<Object, SIZE>;
 
-    FixedSizeCircularQueue() : m_firstIndex(0), m_afterLastIndex(0) {}
+    FixedSizeCircularQueue()  {}
 
     bool isEmpty() const override { return getSize() == 0; }
 
     int getSize() const override {
         if (m_firstIndex <= m_afterLastIndex) {
             return m_afterLastIndex - m_firstIndex;
-        } else {
-            return SIZE - m_firstIndex + m_afterLastIndex;
-        }
+        }             return SIZE - m_firstIndex + m_afterLastIndex;
+       
     }
 
     void enqueue(Object const& object) override {
@@ -47,11 +44,9 @@ private:
         }
     }
 
-    int m_firstIndex;
-    int m_afterLastIndex;
+    int m_firstIndex{0};
+    int m_afterLastIndex{0};
     Objects m_objects;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

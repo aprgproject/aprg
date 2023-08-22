@@ -5,9 +5,7 @@
 #include <array>
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values, int MAX_NUMBER_OF_VALUES>
 class CountingSorterUsingCountPerValue : public BaseSorter<Values> {
@@ -43,8 +41,6 @@ private:
     ValueToIndexableValueFunction m_valueToIndexableValueFunction;
     IndexableValueToValueFunction m_indexableValueToValueFunction;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

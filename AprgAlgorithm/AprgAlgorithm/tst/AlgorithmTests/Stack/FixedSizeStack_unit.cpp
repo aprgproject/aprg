@@ -39,4 +39,4 @@ TEST(FixedSizeStackTest, DISABLED_PushWorksWithAssertionWhenItReachesMaximumSize
     EXPECT_DEATH(stack.push(100), "Assertion failed!");
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

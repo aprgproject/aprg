@@ -71,4 +71,4 @@ TEST(BubbleSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) {
     testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(sorter);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

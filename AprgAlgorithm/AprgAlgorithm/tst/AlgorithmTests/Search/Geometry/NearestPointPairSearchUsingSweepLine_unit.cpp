@@ -36,4 +36,4 @@ TEST(NearestPointPairSearchUsingSweepLineTest, GetNearestPointPairWorks) {
     EXPECT_EQ(pointPairToExpect, pointPairToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -69,4 +69,4 @@ TEST(LongestPathsInTreeTest, SearchForAllEndPointPairsWorks) {
     EXPECT_EQ(endPointPairsToExpect, endPointPairsToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

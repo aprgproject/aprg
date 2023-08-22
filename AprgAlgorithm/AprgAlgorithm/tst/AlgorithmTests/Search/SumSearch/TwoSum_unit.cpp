@@ -74,4 +74,4 @@ TEST(TwoSumTest, GetPossibleDuplicatedTwoValuesWithSumWithIndexesDoesNotWorkOnEx
     EXPECT_EQ(pairToExpect, pairToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

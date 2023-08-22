@@ -6,11 +6,7 @@
 #include <stack>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
-
-namespace ExpressionEvaluator {
+namespace alba::algorithm::ExpressionEvaluator {
 
 // Operations
 template <typename ValueTemplateType, typename OperatorTemplateType>
@@ -106,7 +102,7 @@ private:
             if (term.isOperator()) {
                 if (term.isStartGroupOperator()) {
                     continue;
-                } else if (term.isEndGroupOperator()) {
+                } if (term.isEndGroupOperator()) {
                     performOperationWithStacks(valueStack, operatorStack);
                 } else {
                     while (!operatorStack.empty() &&
@@ -239,7 +235,8 @@ public:
                 transferTermStackToTerms(operatorStack, termsInPostfix, [term](TermStack& termStack) {
                     return !termStack.top().isStartGroupOperator();
                 });
-                if (!operatorStack.empty()) operatorStack.pop();
+                if (!operatorStack.empty()) { operatorStack.pop();
+}
             } else if (term.isOperator()) {
                 transferTermStackToTerms(operatorStack, termsInPostfix, [term](TermStack& termStack) {
                     return term.getOperatorPriority() <= termStack.top().getOperatorPriority() &&
@@ -316,9 +313,5 @@ private:
         }
     }
 };
-
-}  // namespace ExpressionEvaluator
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -2,9 +2,7 @@
 
 #include <Algorithm/UnionFind/UnionFindForFreeIndex.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Index>
 class GetPreviousFreeIndexWithUnionFind {
@@ -48,7 +46,5 @@ private:
     Index m_numberOfIndexes;
     UnionFind m_unionFind;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

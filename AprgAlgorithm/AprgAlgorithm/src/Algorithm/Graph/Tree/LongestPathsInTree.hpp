@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/PathSearch/DepthFirstSearch/PathSearchUsingDfsWithDistanceCount.hpp>
 #include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class LongestPathsInTree {
@@ -99,10 +97,9 @@ private:
         auto it = m_vertexToDfs.find(vertex);
         if (it != m_vertexToDfs.cend()) {
             return it->second;
-        } else {
-            m_vertexToDfs.emplace(vertex, Dfs(m_graph, {vertex}));
+        }             m_vertexToDfs.emplace(vertex, Dfs(m_graph, {vertex}));
             return m_vertexToDfs.at(vertex);
-        }
+       
     }
 
     BaseUndirectedGraphWithVertex const& m_graph;
@@ -112,6 +109,4 @@ private:
     VertexToDfs m_vertexToDfs;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

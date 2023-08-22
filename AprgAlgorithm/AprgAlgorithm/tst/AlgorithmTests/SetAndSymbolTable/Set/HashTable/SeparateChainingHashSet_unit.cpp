@@ -58,4 +58,4 @@ TEST(SeparateChainingHashSetTest, GetKeysInRangeWorks) {
     testGetKeysInRangeInclusiveWithUnsignedIntAndChar<SetForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

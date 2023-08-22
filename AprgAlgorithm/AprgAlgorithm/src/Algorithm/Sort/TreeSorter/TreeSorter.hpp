@@ -4,9 +4,7 @@
 
 #include <set>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class TreeSorter : public BaseSorter<Values> {
@@ -20,8 +18,6 @@ public:
         std::copy(tree.cbegin(), tree.cend(), valuesToSort.begin());
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

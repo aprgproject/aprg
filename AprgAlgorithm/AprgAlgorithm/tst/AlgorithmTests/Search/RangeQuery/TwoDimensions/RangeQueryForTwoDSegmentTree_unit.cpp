@@ -74,4 +74,4 @@ TEST(RangeQueryForTwoDSegmentTreeTest, ChangeValueAtWorksOnExample1) {
     EXPECT_EQ(47, sumRangeQuery.getValueOn2DInterval(1, 1, 3, 3));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

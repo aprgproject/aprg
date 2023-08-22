@@ -75,4 +75,4 @@ TEST(HamiltonianPathSearchWithDfsTest_ForUndirectedGraph, GetOneHamiltonianCycle
     EXPECT_EQ(pathsToExpect, pathsToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

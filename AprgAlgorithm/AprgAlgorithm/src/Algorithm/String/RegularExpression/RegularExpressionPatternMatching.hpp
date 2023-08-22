@@ -7,9 +7,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Index>
 class RegularExpressionPatternMatching {
@@ -113,8 +111,6 @@ private:
     std::string m_regularExpression;
     DirectedGraphWithListOfEdges<Index> m_nullTransitionsGraph;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

@@ -39,4 +39,4 @@ TEST(FlowNetworkTest, GetSinkVerteWorks) {
     EXPECT_EQ(2, graph.getSinkVertex());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

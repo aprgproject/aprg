@@ -3,9 +3,7 @@
 #include <Algorithm/Utilities/IndexHelper.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class BinaryNearestValueSearchWithTwoIndices {
@@ -109,7 +107,5 @@ private:
     Index m_highIndex;
     Values const& m_sortedValues;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

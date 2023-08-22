@@ -50,4 +50,4 @@ TEST(LasVegasTest, GraphColoringExample) {
     EXPECT_EQ(5U, vertexToColorMap.size());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

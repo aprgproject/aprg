@@ -19,4 +19,4 @@ TEST(SubsetGenerationUsingBitsTest, GenerateSubsetsUsingBitsWorks) {
     EXPECT_EQ(expectedSubsets, actualSubsets);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

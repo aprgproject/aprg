@@ -2,9 +2,7 @@
 
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class CountPathsWithLengthUsingAdjacencyMatrix {
@@ -32,7 +30,5 @@ private:
 
     CountMatrix m_countMatrix;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

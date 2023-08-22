@@ -4,9 +4,7 @@
 
 #include <algorithm>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class LinearSearchWithOneIndex {
@@ -48,9 +46,7 @@ private:
     Values const& m_values;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // A simple approach is to do a linear search, i.e
 // -> Start from the leftmost element of arr[] and one by one compare x with each element of arr[]

@@ -3,9 +3,7 @@
 #include <Algorithm/HashFunctions/PrimitiveTypes/HashKeyUtilities.hpp>
 #include <Algorithm/HashFunctions/PrimitiveTypes/HashValueUtilities.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename HashKey, typename HashValue, HashValue HASH_TABLE_SIZE>
 class IntegerHashFunction {
@@ -15,6 +13,4 @@ public:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -4,9 +4,7 @@
 
 #include <list>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value>
 class MergeSorterForList : public BaseSorter<std::list<Value>> {
@@ -26,7 +24,7 @@ private:
             // Split to two parts
             Values& firstPart(values);
             Values secondPart;
-            ConstIterator middle = getMiddleIterator(values);
+            auto middle = getMiddleIterator(values);
 
             secondPart.splice(secondPart.cbegin(), firstPart, middle, firstPart.cend());
 
@@ -40,8 +38,9 @@ private:
     ConstIterator getMiddleIterator(Values const& values) const {
         int halfSize = (values.size() + 1) / 2;
         auto middle = values.cbegin();
-        for (int count = 0; count < halfSize && middle != values.cend(); middle++, count++)
+        for (int count = 0; count < halfSize && middle != values.cend(); middle++, count++) {
             ;
+}
         return middle;
     }
 
@@ -86,8 +85,6 @@ private:
         return result;
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

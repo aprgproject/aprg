@@ -14,4 +14,4 @@ bool isEqualForMathMatrixDataType(double const& value1, double const& value2) {
     return mathHelper::isAlmostEqual(value1, value2);
 }
 
-}  // namespace alba
+}  // namespace alba::matrix

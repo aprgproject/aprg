@@ -4,9 +4,7 @@
 
 #include <algorithm>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename VertexUnderlyingType, typename FlowDataTypeUnderlyingType, typename DirectedGraph>
 class SinkSourceFlowNetwork : public FlowNetwork<VertexUnderlyingType, FlowDataTypeUnderlyingType, DirectedGraph> {
@@ -35,6 +33,4 @@ private:
     Vertex m_sink;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

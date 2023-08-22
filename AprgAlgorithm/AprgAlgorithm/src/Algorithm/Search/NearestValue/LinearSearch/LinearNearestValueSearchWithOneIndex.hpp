@@ -5,9 +5,7 @@
 
 #include <limits>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class LinearNearestValueSearchWithOneIndex {
@@ -44,13 +42,12 @@ public:
                 if (value == target) {
                     result = std::distance(m_values.cbegin(), it);
                     break;
-                } else {
-                    Value currentDeviation(mathHelper::getPositiveDelta(value, target));
+                }                     Value currentDeviation(mathHelper::getPositiveDelta(value, target));
                     if (minimumDeviation > currentDeviation) {
                         minimumDeviation = currentDeviation;
                         result = std::distance(m_values.cbegin(), it);
                     }
-                }
+               
             }
         }
         return result;
@@ -76,6 +73,4 @@ private:
     Values const& m_values;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

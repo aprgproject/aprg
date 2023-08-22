@@ -4,9 +4,7 @@
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 #include <Algorithm/UnionFind/UnionFindUsingMap.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class ConnectedComponentsUsingUnionFind
@@ -52,7 +50,5 @@ private:
     int& b_numberOfComponentIds;
     VertexToIntMap& b_vertexToComponentIdMap;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

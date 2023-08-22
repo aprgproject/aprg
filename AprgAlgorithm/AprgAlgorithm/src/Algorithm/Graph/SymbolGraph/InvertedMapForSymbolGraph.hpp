@@ -5,9 +5,7 @@
 #include <map>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename Object>
 class InvertedMapForSymbolGraph {
@@ -51,6 +49,4 @@ private:
     Vertices m_unusedVertices;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -6,9 +6,7 @@
 #include <array>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values, int NUMBER_OF_BUCKETS>
 class BucketSorter : public BaseSorter<Values> {
@@ -46,8 +44,6 @@ public:
     Value m_minValue;
     Value m_maxValue;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

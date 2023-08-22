@@ -6,9 +6,7 @@
 
 #include <queue>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename Weight, typename EdgeWeightedGraph, template <class> class ComparatorTemplateType>
 class PathSearchUsingDijkstra
@@ -67,9 +65,7 @@ private:
     Vertex const& b_startVertex;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Algorithm in short terms: Relax the current shortest/longest node.
 

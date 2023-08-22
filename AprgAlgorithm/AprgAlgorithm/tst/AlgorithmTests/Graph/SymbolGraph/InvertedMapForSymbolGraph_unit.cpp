@@ -69,4 +69,4 @@ TEST(InvertedMapForSymbolGraphTest, ClearWorks) {
     EXPECT_TRUE(invertedMap.getUnusedVertices().empty());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

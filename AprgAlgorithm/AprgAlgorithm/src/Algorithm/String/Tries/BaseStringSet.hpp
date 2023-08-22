@@ -3,9 +3,7 @@
 #include <string_view>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 class BaseStringSet {
 public:
@@ -27,8 +25,6 @@ public:
     virtual Strings getAllKeysWithPrefix(Key const& prefix) const = 0;         // all the keys having s as a prefix
     virtual Strings getAllKeysThatMatch(Key const& patternToMatch) const = 0;  // all the keys having s as a prefix
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

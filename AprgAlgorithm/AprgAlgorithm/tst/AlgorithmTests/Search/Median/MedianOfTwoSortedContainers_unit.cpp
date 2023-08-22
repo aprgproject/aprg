@@ -61,4 +61,4 @@ TEST(MedianOfTwoSortedContainersTest, GetMedianWorksOnExample4) {
     EXPECT_EQ(13, query.getMedian());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -4,11 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
-
-namespace CommonTestsWithUnionFind {
+namespace alba::algorithm::CommonTestsWithUnionFind {
 
 template <typename UnionFind>
 void testIsConnectedWithInt(UnionFind& unionFind) {
@@ -93,8 +89,4 @@ void testConnectUsingExample2WithInt(UnionFind& unionFind) {
     EXPECT_FALSE(unionFind.isConnected(0, 9));
 }
 
-}  // namespace CommonTestsWithUnionFind
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::CommonTestsWithUnionFind

@@ -72,4 +72,4 @@ TEST(BinaryNearestValueSearchWithCppFunctionsTest, GetLowerBoundAndGetHigherBoun
     EXPECT_EQ(43, search.getHigherBound(34));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

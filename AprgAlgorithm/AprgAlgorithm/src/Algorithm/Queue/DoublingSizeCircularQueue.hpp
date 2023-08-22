@@ -5,16 +5,14 @@
 #include <cassert>
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object>
 class DoublingSizeCircularQueue : public BaseQueue<Object> {
 public:
     static constexpr int MINUMUM_CONTAINER_SIZE = 1;
 
-    DoublingSizeCircularQueue() : m_containerSize(0), m_firstIndex(0), m_afterLastIndex(0), m_objects(nullptr) {
+    DoublingSizeCircularQueue() :  m_objects(nullptr) {
         initialize(MINUMUM_CONTAINER_SIZE);
     }
 
@@ -25,9 +23,8 @@ public:
     int getSize() const override {
         if (m_firstIndex <= m_afterLastIndex) {
             return m_afterLastIndex - m_firstIndex;
-        } else {
-            return m_containerSize - m_firstIndex + m_afterLastIndex;
-        }
+        }             return m_containerSize - m_firstIndex + m_afterLastIndex;
+       
     }
 
     void enqueue(Object const& object) override {
@@ -68,7 +65,7 @@ private:
     }
 
     void resize(int const newSize) {
-        Object* newObjects = new Object[newSize];
+        auto* newObjects = new Object[newSize];
         if (m_objects != nullptr) {
             if (m_firstIndex <= m_afterLastIndex) {
                 std::copy(m_objects + m_firstIndex, m_objects + m_afterLastIndex, newObjects);
@@ -96,12 +93,10 @@ private:
         }
     }
 
-    int m_containerSize;
-    int m_firstIndex;
-    int m_afterLastIndex;
+    int m_containerSize{0};
+    int m_firstIndex{0};
+    int m_afterLastIndex{0};
     Object* m_objects;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

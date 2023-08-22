@@ -16,4 +16,4 @@ TEST(HashKeyUtilitiesTest, GetHashKeyForFloatingPointTypeWorks) {
     EXPECT_EQ(13951429491210218357ULL, (getHashKeyForFloatingPointType<double, uint64_t>(-123456789.123456789)));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

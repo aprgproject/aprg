@@ -6,9 +6,7 @@
 #include <set>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 enum class GraphDirectionType { Undirected, Directed };
 
@@ -77,6 +75,4 @@ struct GraphTypesWithWeights {
     using VertexToEdgeOrderedByWeightMap = std::map<Vertex, EdgeOrderedByWeight>;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

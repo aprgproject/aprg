@@ -42,4 +42,4 @@ TEST(WalkInSuccessorGraphTest, WalkWorksOnExample2) {
     EXPECT_EQ(2, walkPaths.walk(4, 4));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

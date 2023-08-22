@@ -6,9 +6,7 @@
 #include <algorithm>
 #include <string_view>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Index>
 class SuffixArray {
@@ -68,8 +66,6 @@ private:
     Indexes m_mainStringIndexes;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Check Manber-Myers MSD is really efficient

@@ -7,9 +7,7 @@
 #include <array>
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, int MAX_VERTEX_VALUE>
 class TransitiveClosureWithArray : public BaseTransitiveClosure<Vertex> {
@@ -21,7 +19,7 @@ public:
     using ReachabilityInitializerList = typename std::initializer_list<Reachability>;
 
     TransitiveClosureWithArray(BaseDirectedGraphWithVertex const& graph)
-        : m_graph(graph), m_reachabilityPointerArray{} {
+        : m_graph(graph) {
         initialize();
     }
 
@@ -42,9 +40,7 @@ private:
     }
 
     BaseDirectedGraphWithVertex const& m_graph;
-    ReachabilityPointerArray m_reachabilityPointerArray;
+    ReachabilityPointerArray m_reachabilityPointerArray{};
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

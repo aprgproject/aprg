@@ -6,11 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
-
-namespace CommonTestsWithSet {
+namespace alba::algorithm::CommonTestsWithSet {
 
 template <typename Set>
 void testIsEmptyWhenEmptyWithUnsignedIntAndChar() {
@@ -238,8 +234,4 @@ void testGetKeysInRangeInclusiveWithUnsignedIntAndChar() {
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
-}  // namespace CommonTestsWithSet
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::CommonTestsWithSet

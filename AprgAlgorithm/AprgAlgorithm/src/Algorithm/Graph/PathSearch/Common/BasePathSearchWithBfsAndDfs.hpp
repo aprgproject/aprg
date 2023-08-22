@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/BaseGraph.hpp>
 #include <Algorithm/Graph/Utilities/CheckableVertices.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class BasePathSearchWithBfsAndDfs {
@@ -76,6 +74,4 @@ protected:
     VertexToVertexMap m_vertexToPreviousVertexMap;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

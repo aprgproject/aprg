@@ -5,9 +5,7 @@
 
 #include <forward_list>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value>
 class QuickSorterForForwardList : public BaseSorter<std::forward_list<Value>> {
@@ -27,8 +25,8 @@ public:
 
 private:
     void sort(Values& valuesToSort, Iterator const itLow, Iterator const itHighPlusOne) const {
-        Iterator partitionIt = partitionAndGetPartitionIteratorInOneDirection<Values>(itLow, itHighPlusOne);
-        Iterator partitionItPlusOne = std::next(partitionIt, 1);
+        auto partitionIt = partitionAndGetPartitionIteratorInOneDirection<Values>(itLow, itHighPlusOne);
+        auto partitionItPlusOne = std::next(partitionIt, 1);
         if (itLow != partitionIt && itLow != partitionItPlusOne) {  // size must be at least two
             // recursively sort/partition the low part without the partitionIt
             sort(valuesToSort, itLow, partitionIt);
@@ -39,7 +37,5 @@ private:
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

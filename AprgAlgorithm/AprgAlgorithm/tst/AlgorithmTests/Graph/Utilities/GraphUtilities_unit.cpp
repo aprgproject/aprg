@@ -460,4 +460,4 @@ TEST(GraphUtilitiesTest, GetEdgesOfMaximalConnectedSubgraphsWorks) {
     EXPECT_EQ(listOfEdgesToExpect, listOfEdgesToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm::GraphUtilities

@@ -6,9 +6,7 @@
 #include <numeric>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 using Indexes = std::vector<int>;
 using IndexesIterator = Indexes::iterator;
@@ -92,9 +90,7 @@ int getIndexOfMedianOfMedians(Values const& values, int const lowIndex, int cons
     return result;
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Quick selection in worst-case linear time
 // Source: http://staff.ustc.edu.cn/~csli/graduate/algorithms/book6/chap10.htm

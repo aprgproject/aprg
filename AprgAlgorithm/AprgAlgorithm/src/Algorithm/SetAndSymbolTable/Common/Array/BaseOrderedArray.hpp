@@ -5,16 +5,14 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key, typename BaseDataStructure>
 class BaseOrderedArray : public BaseDataStructure {
 public:
     using Keys = std::vector<Key>;
 
-    BaseOrderedArray() : m_size(0) {}
+    BaseOrderedArray()  {}
 
     ~BaseOrderedArray() override = default;  // no need for virtual destructor because base destructor is virtual
                                              // (similar to other virtual functions)
@@ -121,10 +119,8 @@ public:
     }
 
 protected:
-    int m_size;
+    int m_size{0};
     Keys m_keys;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

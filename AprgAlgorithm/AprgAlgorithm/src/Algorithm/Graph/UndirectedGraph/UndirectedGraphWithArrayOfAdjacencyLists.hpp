@@ -6,9 +6,7 @@
 #include <algorithm>
 #include <array>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, int MAX_VERTEX_VALUE>
 class UndirectedGraphWithArrayOfAdjacencyLists : public BaseUndirectedGraph<Vertex> {
@@ -19,7 +17,7 @@ public:
     using AdjacencyList = SetOfVertices;
     using AdjacencyLists = std::array<AdjacencyList, MAX_VERTEX_VALUE>;
 
-    UndirectedGraphWithArrayOfAdjacencyLists() : m_numberOfVertices(0), m_numberOfEdges(0), m_adjacencyLists{} {}
+    UndirectedGraphWithArrayOfAdjacencyLists()  {}
 
     bool isEmpty() const override { return m_numberOfVertices == 0 && m_numberOfEdges == 0; }
 
@@ -112,11 +110,9 @@ protected:
         return out;
     }
 
-    int m_numberOfVertices;
-    int m_numberOfEdges;
-    AdjacencyLists m_adjacencyLists;
+    int m_numberOfVertices{0};
+    int m_numberOfEdges{0};
+    AdjacencyLists m_adjacencyLists{};
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

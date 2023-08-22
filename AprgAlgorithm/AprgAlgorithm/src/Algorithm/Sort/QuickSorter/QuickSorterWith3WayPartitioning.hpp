@@ -5,9 +5,7 @@
 
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class QuickSorterWith3WayPartitioning : public BaseSorter<Values> {
@@ -54,8 +52,6 @@ private:
 private:
     PivotType m_pivotType;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

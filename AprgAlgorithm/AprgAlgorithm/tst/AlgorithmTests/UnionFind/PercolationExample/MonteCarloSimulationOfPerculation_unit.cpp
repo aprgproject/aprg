@@ -38,4 +38,4 @@ TEST(MonteCarloSimulationOfPerculationTest, DISABLED_DimensionsByFiftyExample) {
     cout << "Percolation probability: " << simulation.getPercolationProbability() << "\n";
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

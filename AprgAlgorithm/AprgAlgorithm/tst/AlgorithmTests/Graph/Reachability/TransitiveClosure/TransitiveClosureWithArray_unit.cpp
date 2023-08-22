@@ -21,4 +21,4 @@ TEST(TransitiveClosureWithArrayTest, IsReachableWorksWhenNotEmpty) {
     testIsReachableWhenNotEmptyWithVertexAsInt<ReachabilityForTest, GraphForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class SubArraySum {
@@ -24,7 +22,7 @@ public:
                 if (currentSum == targetSum) {
                     result = Values(m_valuesToCheck.cbegin() + start, m_valuesToCheck.cbegin() + end + 1);
                     break;
-                } else if (currentSum > targetSum) {
+                } if (currentSum > targetSum) {
                     if (start < end) {
                         currentSum -= m_valuesToCheck[start];
                         start++;
@@ -51,7 +49,5 @@ public:
 private:
     Values const& m_valuesToCheck;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

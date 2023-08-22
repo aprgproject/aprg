@@ -5,9 +5,7 @@
 #include <iterator>
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class CocktailShakerSorter : public BaseSorter<Values> {
@@ -37,8 +35,6 @@ public:
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

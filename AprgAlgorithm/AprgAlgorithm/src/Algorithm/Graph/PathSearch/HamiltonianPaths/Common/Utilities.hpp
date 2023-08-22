@@ -4,9 +4,7 @@
 #include <Algorithm/Graph/Types/GraphTypes.hpp>
 #include <Algorithm/Graph/Utilities/GraphUtilities.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 bool hasHamiltonianPathBecauseItsComplete(BaseGraph<Vertex> const& graph) {
@@ -62,7 +60,5 @@ bool hasHamiltonianPathBecauseOfOreTheorem(BaseGraph<Vertex> const& graph) {
 // A common property in these theorems and other results is that they guarantee the existence of a Hamiltonian path if
 // the graph has a large number of edges. This makes sense, because the more edges the graph contains, the more
 // possibilities there is to construct a Hamiltonian path.
-
-}  // namespace algorithm
 
 }  // namespace alba

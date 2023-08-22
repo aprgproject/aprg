@@ -100,4 +100,4 @@ TEST(IntervalSearchTreeTest, MergeIntervalsWorksOnExample2) {
     EXPECT_EQ(intervalsToExpect2, intervalsToVerify2);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

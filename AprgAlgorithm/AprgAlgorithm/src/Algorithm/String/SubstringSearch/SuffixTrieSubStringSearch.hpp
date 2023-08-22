@@ -4,9 +4,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Index>
 class SuffixTrieSubStringSearch {
@@ -28,7 +26,5 @@ private:
 
     std::string m_query;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

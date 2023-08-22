@@ -52,4 +52,4 @@ TEST(BrentAlgorithmForSuccessorGraphsTest, CycleDetectionWorksUsingExample1) {
     EXPECT_EQ(expectedCycle, cycleDetection.getCycle());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

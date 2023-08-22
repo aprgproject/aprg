@@ -25,4 +25,4 @@ TEST(HashValueUtilitiesTest, GetHashUsingMultiplicationMethodWorksWithNumeratorA
     EXPECT_EQ(12012ULL, (getHashUsingMultiplicationMethod<uint64_t>(12345, 16384, knuthNumerator, knuthDenominator)));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

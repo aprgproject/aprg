@@ -64,4 +64,4 @@ TEST(BinaryHeapAdapterTest, SinkWorksOnExample2) {
     EXPECT_EQ(objectsToExpect, objects);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

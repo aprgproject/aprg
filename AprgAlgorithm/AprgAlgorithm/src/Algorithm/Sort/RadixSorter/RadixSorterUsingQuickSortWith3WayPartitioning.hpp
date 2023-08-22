@@ -5,9 +5,7 @@
 #include <functional>
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values, typename DigitValue>
 class RadixSorterUsingQuickSortWith3WayPartitioning : public BaseSorter<Values> {
@@ -97,7 +95,5 @@ private:
 // ---> Is cache-friendly
 // ---> Is in-place
 // Bottom line is 3 way string quicksort is method of choice for sorting strings.
-
-}  // namespace algorithm
 
 }  // namespace alba

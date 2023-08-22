@@ -4,9 +4,7 @@
 #include <memory>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename KeyTemplateType, typename NodeTemplateType, typename BaseDataStructure>
 class BaseBinarySearchTree : public BaseDataStructure {
@@ -244,9 +242,8 @@ protected:
             if (nodePointer->left) {
                 // find the left most node until null
                 return getMinimumNodePointerReferenceStartingOnThisNode(nodePointer->left);
-            } else {
-                return nodePointer;
-            }
+            }                 return nodePointer;
+           
         }
         return nodePointer;
     }
@@ -353,9 +350,7 @@ protected:
     NodeUniquePointer m_root;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // BST maintains symmetric order. It means that each node has a key and every node's key is:
 // -> Larger than all keys in its left subtree

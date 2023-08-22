@@ -6,9 +6,7 @@
 
 #include <queue>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename Weight, typename EdgeWeightedGraph>
 class PrimAlgorithmLazyVersion {
@@ -96,7 +94,5 @@ private:
 // Other discussions:
 // Difference between eager and lazy?
 // -> Lazy adds (edge) to search regardless of weight
-
-}  // namespace algorithm
 
 }  // namespace alba

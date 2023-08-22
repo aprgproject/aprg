@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/DirectedGraph/BaseDirectedGraph.hpp>
 #include <Algorithm/Graph/VertexOrdering/VertexOrderingUsingDfs.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class CountPathsInDirectedGraph {
@@ -77,7 +75,5 @@ private:
     VertexToIndexMap m_vertexToTopologicalIndex;
     VertexPairToCountMap m_pathCounts;  // dynamic programming
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

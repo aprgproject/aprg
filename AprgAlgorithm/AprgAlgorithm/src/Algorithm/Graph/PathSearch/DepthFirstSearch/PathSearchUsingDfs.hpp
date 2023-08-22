@@ -4,9 +4,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class PathSearchUsingDfs : public BasePathSearchWithBfsAndDfs<Vertex> {
@@ -102,9 +100,7 @@ private:
     UpdateDataFunction m_updateDataFunction;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Proposition: DFS marks all vertices connected to s in time proportional to the sum of their degrees
 // Proof:

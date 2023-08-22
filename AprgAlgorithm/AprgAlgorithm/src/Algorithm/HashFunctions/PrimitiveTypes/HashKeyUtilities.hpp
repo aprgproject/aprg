@@ -2,9 +2,7 @@
 
 #include <Common/Memory/AlbaCast.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename IntegerType, typename HashKey>
 HashKey getHashKeyForInteger(IntegerType const input) {
@@ -16,6 +14,4 @@ HashKey getHashKeyForFloatingPointType(FloatingPointType const input) {
     return getFloatingPointMemoryRepresentation<FloatingPointType, HashKey>(input);
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

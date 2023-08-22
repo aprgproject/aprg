@@ -41,4 +41,4 @@ TEST(RunLengthEncodingCompressionTest, ExpandWorksUsingExample1) {
     EXPECT_EQ("0001FC07FF", getHexEquivalentOfCharacters(outputSs.str()));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

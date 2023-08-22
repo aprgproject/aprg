@@ -5,9 +5,7 @@
 #include <algorithm>
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class CycleSorter : public BaseSorter<Values> {
@@ -59,8 +57,6 @@ private:
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

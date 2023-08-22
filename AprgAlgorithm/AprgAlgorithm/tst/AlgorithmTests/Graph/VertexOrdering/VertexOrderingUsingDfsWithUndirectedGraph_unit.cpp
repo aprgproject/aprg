@@ -164,4 +164,4 @@ TEST(VertexOrderingUsingDfsTest, GetVerticesInTopologicalOrderWorksWithDagChecki
     EXPECT_EQ(expectedPathFromAllVertices, pathFromAllVertices);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

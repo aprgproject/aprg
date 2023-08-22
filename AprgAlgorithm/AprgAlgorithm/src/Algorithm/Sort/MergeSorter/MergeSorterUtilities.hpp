@@ -2,9 +2,7 @@
 
 #include <algorithm>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 void mergeTheTwoSortedParts(
@@ -45,6 +43,4 @@ Values mergeTwoSortedSequences(Values const& sortedValues1, Values const& sorted
     return result;
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

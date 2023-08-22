@@ -6,35 +6,30 @@
 
 #include <limits>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key>
 bool isEqualThanWithDepth(Key const& key1, Key const& key2, int const depth) {
     if (mathHelper::isOdd(depth)) {
         return key1.first == key2.first;
-    } else {
-        return key1.second == key2.second;
-    }
+    }         return key1.second == key2.second;
+   
 }
 
 template <typename Key>
 bool isLessThanWithDepth(Key const& key1, Key const& key2, int const depth) {
     if (mathHelper::isOdd(depth)) {
         return key1.first < key2.first;
-    } else {
-        return key1.second < key2.second;
-    }
+    }         return key1.second < key2.second;
+   
 }
 
 template <typename Key>
 bool isGreaterThanWithDepth(Key const& key1, Key const& key2, int const depth) {
     if (mathHelper::isOdd(depth)) {
         return key1.first > key2.first;
-    } else {
-        return key1.second > key2.second;
-    }
+    }         return key1.second > key2.second;
+   
 }
 
 template <typename Unit>
@@ -181,7 +176,5 @@ private:
 
     TwoDTree m_twoDTree;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

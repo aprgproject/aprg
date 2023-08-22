@@ -5,9 +5,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values, int MAX_NUMBER_OF_DIGIT_VALUES>
 class RadixSorterUsingCountingSorter : public BaseSorter<Values> {
@@ -36,8 +34,6 @@ private:
     GetNumberOfDigitsFunction m_getNumberOfDigitsFunction;
     GetDigitAtFunction m_getDigitAtFunction;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

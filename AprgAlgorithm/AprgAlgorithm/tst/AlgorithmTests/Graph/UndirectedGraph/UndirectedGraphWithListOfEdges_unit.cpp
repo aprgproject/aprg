@@ -98,4 +98,4 @@ TEST(UndirectedGraphWithListOfEdgesTest, OutputStreamOperatorWorks) {
     EXPECT_EQ("Edges: {0<->1, 0<->2, 1<->0, 2<->0, }", convertToString(graph));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

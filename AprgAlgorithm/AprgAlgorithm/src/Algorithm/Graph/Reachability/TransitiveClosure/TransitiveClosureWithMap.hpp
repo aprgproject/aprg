@@ -6,9 +6,7 @@
 
 #include <map>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class TransitiveClosureWithMap : public BaseTransitiveClosure<Vertex> {
@@ -38,6 +36,4 @@ private:
     VertexToReachabilityMap m_vertexToReachabilityMap;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

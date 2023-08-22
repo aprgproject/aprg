@@ -2,9 +2,7 @@
 
 #include <Algorithm/Graph/BaseGraph.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class BaseDirectedGraph : public BaseGraph<Vertex> {
@@ -27,6 +25,4 @@ public:
     static constexpr GraphDirectionType DIRECTION_TYPE = GraphDirectionType::Directed;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -60,4 +60,4 @@ TEST(OrderedArraySymbolTableTest, GetKeysInRangeWorks) {
     testGetKeysInRangeInclusiveWithUnsignedIntAndChar<SymbolTableForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

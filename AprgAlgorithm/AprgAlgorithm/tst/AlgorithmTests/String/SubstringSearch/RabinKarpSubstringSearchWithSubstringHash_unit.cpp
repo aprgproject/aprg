@@ -36,4 +36,4 @@ TEST(RabinKarpSubstringSearchWithSubstringHashTest, SearchWorksUsingExample2) {
     testSearchUsingExample2<SubstringSearchForTest, Index>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

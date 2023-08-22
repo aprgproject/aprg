@@ -9,9 +9,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Index>
 class AhoCorasickMultipleSubstringsSearch {
@@ -169,8 +167,6 @@ private:
     States m_trieArtificialConnections;  // this is used to connect trie nodes
     StateToMatchBits m_stateToMatchBits;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

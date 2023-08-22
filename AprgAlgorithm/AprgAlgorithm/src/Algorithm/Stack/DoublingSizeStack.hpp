@@ -5,16 +5,14 @@
 #include <algorithm>
 #include <cassert>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object>
 class DoublingSizeStack : public BaseStack<Object> {
 public:
     static constexpr int MINUMUM_CONTAINER_SIZE = 1;
 
-    DoublingSizeStack() : m_stackSize(0), m_containerSize(0), m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
+    DoublingSizeStack() :  m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
 
     ~DoublingSizeStack() { deleteAllObjects(); }
 
@@ -54,7 +52,7 @@ private:
 
     void resize(int const newSize) {
         // array is between 25% and 100% full
-        Object* newObjects = new Object[newSize];
+        auto* newObjects = new Object[newSize];
         if (m_objects != nullptr) {
             std::copy(m_objects, m_objects + std::min(m_stackSize, newSize), newObjects);
             delete[](m_objects);
@@ -77,11 +75,9 @@ private:
         }
     }
 
-    int m_stackSize;
-    int m_containerSize;
+    int m_stackSize{0};
+    int m_containerSize{0};
     Object* m_objects;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

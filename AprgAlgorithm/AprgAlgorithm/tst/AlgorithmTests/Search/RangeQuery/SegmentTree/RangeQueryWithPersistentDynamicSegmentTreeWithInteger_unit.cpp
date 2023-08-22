@@ -216,4 +216,4 @@ TEST(
     EXPECT_EQ(0, sumRangeQuery.getValueOnIntervalOnPreviousTree(4, 4, 4));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

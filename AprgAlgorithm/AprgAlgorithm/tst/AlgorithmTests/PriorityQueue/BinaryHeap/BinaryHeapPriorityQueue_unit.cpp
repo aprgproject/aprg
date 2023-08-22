@@ -120,4 +120,4 @@ TEST(BinaryHeapPriorityQueueTest, DeleteAndGetTopObjectWorksOnExample2) {
     EXPECT_EQ(objectsToExpect, objectsToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -73,4 +73,4 @@ TEST(PatienceSorterTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample
         sorter);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -60,4 +60,4 @@ TEST(HornerHashFunctionForSubstringsTest, Example3Works) {
     EXPECT_EQ(1068681688ULL, hashFunction.getHashCodeOfSubstring(12, 16));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

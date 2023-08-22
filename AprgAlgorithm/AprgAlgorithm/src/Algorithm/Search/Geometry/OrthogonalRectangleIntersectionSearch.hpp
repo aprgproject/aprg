@@ -6,9 +6,7 @@
 #include <set>  // lets just use set when we can
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Unit>
 class OrthogonalRectangleIntersectionSearch {
@@ -75,7 +73,5 @@ public:
 private:
     std::multiset<Event> m_events;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -6,9 +6,7 @@
 
 #include <algorithm>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>  // this should be a non set container to be efficient because std::lower_bound and
                             // std::upper_bound are used
@@ -77,7 +75,5 @@ private:
 
     Values const& m_sortedValues;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

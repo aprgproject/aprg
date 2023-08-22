@@ -1,9 +1,7 @@
 #pragma once
 
 #include <string>
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <int numberOfLoops>
 class BruteForceSubstringSearch {
@@ -72,8 +70,6 @@ template <>
 int BruteForceSubstringSearch<2>::searchWithLoops(std::string const& searchSpace, std::string const& query) const {
     return searchUsingTwoLoops(searchSpace, query);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba
 

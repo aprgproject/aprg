@@ -200,4 +200,4 @@ TEST(PathSearchUsingFloydWarshallTest, GetPathToWorksWithEdgeWeightedDirectedGra
     EXPECT_EQ(PathForTest(), pathSearch.getPathTo(0, 8));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

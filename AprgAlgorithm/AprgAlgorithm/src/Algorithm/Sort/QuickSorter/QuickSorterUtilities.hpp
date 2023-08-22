@@ -7,9 +7,7 @@
 #include <cstdlib>
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 int getPivotIndex(Values& values, int const lowIndex, int const highIndex, PivotType const pivotType) {
@@ -52,11 +50,13 @@ int partitionAndGetPartitionIndexUsingHoare(
     int indexWithLesserValue = highIndex + 1;  // decrement first in the loop below corrects the first index
     while (true) {
         // Important: This loops exits when it finds a value greater than pivotValue
-        while (values[++indexWithGreaterValue] < pivotValue)
+        while (values[++indexWithGreaterValue] < pivotValue) {
             ;
+}
         // Important: This loops exits when it finds a value less than pivotValue
-        while (pivotValue < values[--indexWithLesserValue])
+        while (pivotValue < values[--indexWithLesserValue]) {
             ;
+}
 
         // Stop if the indexWithGreaterValue and indexWithLesserValue meet
         if (indexWithGreaterValue < indexWithLesserValue) {
@@ -73,11 +73,10 @@ int partitionAndGetPartitionIndexUsingHoare(
     }
     if (isPivotNotYetSwapped) {
         return lowIndex;  // return original position
-    } else {
-        // Swap at pivot at the border of the right partition.
+    }         // Swap at pivot at the border of the right partition.
         std::swap(values[indexWithPivotValue], values[indexWithGreaterValue]);
         return indexWithGreaterValue;  // return swapped position
-    }
+   
 }
 
 template <typename Values>
@@ -114,10 +113,12 @@ typename Values::iterator partitionAndGetPartitionIteratorInTwoDirections(
     auto itWithGreaterValue = itLow;             // no minus one because first index is skipped
     auto itWithLesserValue = std::next(itHigh);  // plus one because inner loop has decrement first
     while (true) {
-        while (*++itWithGreaterValue < pivotValue && itWithGreaterValue != itHigh)
+        while (*++itWithGreaterValue < pivotValue && itWithGreaterValue != itHigh) {
             ;
-        while (pivotValue < *--itWithLesserValue && itWithLesserValue != itLow)
+}
+        while (pivotValue < *--itWithLesserValue && itWithLesserValue != itLow) {
             ;
+}
         // check two positions because the iterators moves by two (one move back, one move forward)
         if (itWithGreaterValue != itWithLesserValue && itWithGreaterValue != std::next(itWithLesserValue)) {
             std::swap(*itWithGreaterValue, *itWithLesserValue);
@@ -147,9 +148,7 @@ typename Values::iterator partitionAndGetPartitionIteratorInOneDirection(
     return partitionIt;
 }
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // A improvement idea is to randomly pick a pivot element.
 // To implement randomized partition, we use a random function, rand() to generate index between l and r,

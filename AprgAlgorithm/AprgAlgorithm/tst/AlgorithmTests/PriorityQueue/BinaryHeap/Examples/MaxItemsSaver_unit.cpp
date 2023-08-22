@@ -57,4 +57,4 @@ TEST(MaxItemsSaverTest, GetMaxItemsAndClearWorks) {
     EXPECT_EQ(expectedObjects, saver.getMaxItemsAndClear());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

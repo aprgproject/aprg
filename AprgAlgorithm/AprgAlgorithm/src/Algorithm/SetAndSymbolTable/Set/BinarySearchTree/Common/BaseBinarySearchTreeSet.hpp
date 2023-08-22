@@ -5,9 +5,7 @@
 #include <Algorithm/SetAndSymbolTable/Set/BaseSet.hpp>
 #include <Algorithm/SetAndSymbolTable/Set/BinarySearchTree/Common/BaseSetWithBaseTree.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key>
 class BaseBinarySearchTreeSet
@@ -18,6 +16,4 @@ public:
     // (similar to other virtual functions)
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -72,4 +72,4 @@ TEST(KnownAlphabetsTest, GetUpperCaseAlphabetWorks) {
     EXPECT_EQ("ABCDEFGHIJKLMNOPQRSTUVWXYZ", alphabet.getCharacters());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

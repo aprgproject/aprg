@@ -3,9 +3,7 @@
 #include <Algorithm/Utilities/IndexHelper.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class BinaryNearestValueSearchWithSkip {
@@ -66,7 +64,5 @@ private:
 
     Values const& m_sortedValues;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

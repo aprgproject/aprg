@@ -7,9 +7,7 @@
 
 #include <iostream>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Index, char END_CHARACTER>
 class BurrowsWheelerTransform {
@@ -161,7 +159,5 @@ public:
 // it contains "ache ") mixed in. So it can be seen that the success of this transform depends upon one value having a
 // high probability of occurring before a sequence, so that in general it needs fairly long samples (a few kilobytes at
 // least) of appropriate data (such as text).
-
-}  // namespace algorithm
 
 }  // namespace alba

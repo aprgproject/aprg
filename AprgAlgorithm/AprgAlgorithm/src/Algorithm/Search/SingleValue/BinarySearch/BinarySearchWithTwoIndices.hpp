@@ -2,9 +2,7 @@
 
 #include <Algorithm/Utilities/IndexHelper.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class BinarySearchWithTwoIndices {
@@ -54,9 +52,7 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // The usual way to implement binary search resembles looking for a word in a dictionary.
 // The search maintains an active region in the array, which initially contains all array elements.

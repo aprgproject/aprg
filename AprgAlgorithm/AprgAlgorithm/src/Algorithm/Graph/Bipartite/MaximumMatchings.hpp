@@ -6,9 +6,7 @@
 #include <Algorithm/Graph/FlowNetwork/SinkSourceFlowNetwork.hpp>
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class MaximumMatchings {
@@ -119,6 +117,4 @@ private:
 // rarely seen in programming contests. However, in bipartite graphs, the maximum matching problem is much easier to
 // solve, because we can reduce it to the maximum flow problem.
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

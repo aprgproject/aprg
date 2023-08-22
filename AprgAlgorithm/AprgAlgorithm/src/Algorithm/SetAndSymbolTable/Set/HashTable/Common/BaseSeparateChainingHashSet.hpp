@@ -7,9 +7,7 @@
 #include <Algorithm/SetAndSymbolTable/Set/HashTable/Common/BaseSetWithBaseSeparateChainingHash.hpp>
 #include <Algorithm/SetAndSymbolTable/Set/LinkedList/UnorderedLinkedListSet.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key, typename HashFunction, int HASH_TABLE_SIZE>
 class BaseSeparateChainingHashSet : public BaseSetWithBaseSeparateChainingHash<BaseSeparateChainingHash<
@@ -19,7 +17,5 @@ public:
     ~BaseSeparateChainingHashSet() override = default;  // no need for virtual destructor because base destructor is
                                                         // virtual (similar to other virtual functions)
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

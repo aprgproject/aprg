@@ -29,4 +29,4 @@ TEST(PossibilitiesGenerationTest, GeneratePossibilitiesWithLengthWorks) {
     EXPECT_EQ(expectedPossibilities, actualPossibilities);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

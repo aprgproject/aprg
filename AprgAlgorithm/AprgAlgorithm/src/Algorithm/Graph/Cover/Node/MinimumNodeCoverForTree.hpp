@@ -6,9 +6,7 @@
 
 #include <limits>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class MinimumNodeCoverForTree {
@@ -60,9 +58,8 @@ private:
             Count result = std::min(countIfVertexIsIncluded, countIfVertexIsNotIncluded);
             vertexToCountMap.emplace(vertex, result);
             return result;
-        } else {
-            return it->second;
-        }
+        }             return it->second;
+       
     }
 
     SetOfVerticesWithVertex getMinimumNodeCoverUsingMemoizationDP(
@@ -87,10 +84,9 @@ private:
             if (setIfVertexIsIncluded.size() <= setIfVertexIsNotIncluded.size()) {
                 vertexToMinimumSetMap.emplace(vertex, setIfVertexIsIncluded);
                 return setIfVertexIsIncluded;
-            } else {
-                vertexToMinimumSetMap.emplace(vertex, setIfVertexIsNotIncluded);
+            }                 vertexToMinimumSetMap.emplace(vertex, setIfVertexIsNotIncluded);
                 return setIfVertexIsNotIncluded;
-            }
+           
         } else {
             return it->second;
         }
@@ -99,8 +95,6 @@ private:
     Vertex m_rootOfTree;
     ChildrenInTreeWithVertex m_childrenInTree;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

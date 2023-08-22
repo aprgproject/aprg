@@ -9,9 +9,7 @@
 #include <functional>
 #include <numeric>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename ObjectToSort>
 class AlbaLargeSorter {
@@ -24,7 +22,7 @@ class AlbaLargeSorter {
 
 public:
     AlbaLargeSorter(AlbaLargeSorterConfiguration const& configuration)
-        : m_size(0),
+        : 
           m_configuration(configuration),
           m_memoryCache(),
           m_fileStreamOpenedCache(),
@@ -35,7 +33,7 @@ public:
     bool isEmpty() const { return 0 == m_size; }
     AlbaLargeSorterConfiguration getConfiguration() const { return m_configuration; }
     void add(ObjectToSort const& objectToSort) {
-        BlockIterator blockIterator(m_blocks.getNearestBlockIterator(objectToSort));
+        auto blockIterator(m_blocks.getNearestBlockIterator(objectToSort));
         m_blocks.addObjectToBlock(blockIterator, objectToSort);
         splitToSmallestBlocksIfOverflow(blockIterator);
         limitMemoryConsumption();
@@ -94,7 +92,7 @@ private:
         BlockIterator iteratorAfterBlockToSplit(blockIterator);
         iteratorAfterBlockToSplit++;
         int numberOfObjectsInCurrentBlock = 0;
-        BlockIterator newBlockIterator(iteratorAfterBlockToSplit);
+        auto newBlockIterator(iteratorAfterBlockToSplit);
         blockIterator->sortThenDoFunctionThenRelease([&](ObjectToSort const& objectToSort) {
             if (numberOfObjectsInCurrentBlock == 0) {
                 limitFileStreams();
@@ -127,7 +125,7 @@ private:
     }
     void transferMemoryBlocksToFileIfNeeded(int totalMemoryConsumption) {
         while (totalMemoryConsumption > m_configuration.m_maximumNumberOfObjectsInMemory) {
-            BlockIterator blockToSwitchToFileMode(m_memoryCache.popTheEarliestAddedBlock());
+            auto blockToSwitchToFileMode(m_memoryCache.popTheEarliestAddedBlock());
             totalMemoryConsumption -= blockToSwitchToFileMode->getNumberOfObjectsInMemory();
             if (blockToSwitchToFileMode->getNumberOfObjectsInMemory() >
                 m_configuration.m_minimumNumberOfObjectsPerBlock) {
@@ -141,7 +139,7 @@ private:
     void limitFileStreams() {
         while (m_configuration.m_maximumFileStreams <
                static_cast<int>(m_fileStreamOpenedCache.getContainerReference().size())) {
-            BlockIterator iteratorOfBlockToReleaseFile(m_fileStreamOpenedCache.popTheEarliestAddedBlock());
+            auto iteratorOfBlockToReleaseFile(m_fileStreamOpenedCache.popTheEarliestAddedBlock());
             iteratorOfBlockToReleaseFile->releaseFileStream();
         }
     }
@@ -159,13 +157,11 @@ private:
             indexes.emplace_back(index);
         }
     }
-    long long m_size;
+    long long m_size{0};
     AlbaLargeSorterConfiguration const m_configuration;
     BlockCache m_memoryCache;
     BlockCache m_fileStreamOpenedCache;
     DataBlocks<ObjectToSort> m_blocks;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

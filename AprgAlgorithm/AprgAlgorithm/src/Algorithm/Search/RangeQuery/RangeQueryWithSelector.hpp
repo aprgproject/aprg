@@ -5,9 +5,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class RangeQueryWithSelector {
@@ -87,7 +85,5 @@ private:
     ValueMatrix m_selectedValueMatrix;  // index by exponent matrix
     SelectorFunction m_selector;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -3,9 +3,7 @@
 #include <Algorithm/SetAndSymbolTable/Common/Array/BaseOrderedArray.hpp>
 #include <Algorithm/SetAndSymbolTable/SymbolTable/BaseSymbolTable.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key, typename Value>
 class OrderedArraySymbolTable : public BaseOrderedArray<Key, BaseSymbolTable<Key, Value>> {
@@ -84,6 +82,4 @@ private:
     Values m_values;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

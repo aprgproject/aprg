@@ -7,9 +7,7 @@
 #include <optional>
 #include <string>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename ObjectToSort>
 class DataBlockFileHandler {
@@ -52,6 +50,4 @@ private:
     std::optional<std::ofstream> m_fileOptional;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

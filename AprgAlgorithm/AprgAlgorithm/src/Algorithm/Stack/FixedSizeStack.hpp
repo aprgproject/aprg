@@ -5,16 +5,14 @@
 #include <array>
 #include <cassert>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object, int SIZE>
 class FixedSizeStack : public BaseStack<Object> {
 public:
     using Objects = std::array<Object, SIZE>;
 
-    FixedSizeStack() : m_size(0) {}
+    FixedSizeStack()  {}
 
     bool isEmpty() const override { return m_size == 0; }
 
@@ -35,10 +33,8 @@ public:
     Objects const& getObjects() const { return m_objects; }
 
 private:
-    int m_size;
+    int m_size{0};
     Objects m_objects;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

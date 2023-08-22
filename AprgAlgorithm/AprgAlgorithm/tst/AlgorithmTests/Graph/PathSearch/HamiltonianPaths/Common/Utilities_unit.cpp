@@ -70,4 +70,4 @@ TEST(HamiltonianPathUtilitiesTest, HasHamiltonianPathBecauseOfOreTheoremWorks) {
     EXPECT_TRUE(hasHamiltonianPathBecauseOfOreTheorem(graphWithPathAndSatisfied));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -5,9 +5,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 struct AlbaLargeSorterConfiguration {
     AlbaLargeSorterConfiguration()
@@ -55,9 +53,7 @@ struct AlbaLargeSorterConfiguration {
         ss << m_directoryForBlocks << R"(\BLOCK_)" << blockNumber << ".txt";
         return getFixedPath(ss.str());
     }
-    std::string getFixedPath(std::string const& path) const { return AlbaLocalPathHandler(path).getFullPath(); }
+    static std::string getFixedPath(std::string const& path) { return AlbaLocalPathHandler(path).getFullPath(); }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

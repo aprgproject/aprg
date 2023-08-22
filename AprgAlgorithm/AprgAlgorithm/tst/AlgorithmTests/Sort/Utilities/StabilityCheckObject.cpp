@@ -80,4 +80,4 @@ ostream& operator<<(ostream& out, StabilityCheckObject const& object) {
     return out;
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

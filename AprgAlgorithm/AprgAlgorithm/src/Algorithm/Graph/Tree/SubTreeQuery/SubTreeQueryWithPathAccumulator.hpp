@@ -5,9 +5,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class SubTreeQueryWithPathAccumulator {
@@ -81,7 +79,5 @@ protected:
     Vertices m_accumulatedValuesOfPaths;
     VertexToIndexMap m_vertexToIndexMap;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

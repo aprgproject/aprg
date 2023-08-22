@@ -23,4 +23,4 @@ TEST(FourSumTest, GetPossibleDuplicatedFourValuesWithSumWorksOnExample1) {
     EXPECT_EQ(fourValuesToExpect, fourValuesToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

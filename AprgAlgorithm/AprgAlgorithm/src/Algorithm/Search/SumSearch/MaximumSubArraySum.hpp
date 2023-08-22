@@ -2,9 +2,7 @@
 
 #include <algorithm>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class MaximumSubArraySum {
@@ -71,7 +69,5 @@ public:
 private:
     Values const& m_valuesToCheck;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

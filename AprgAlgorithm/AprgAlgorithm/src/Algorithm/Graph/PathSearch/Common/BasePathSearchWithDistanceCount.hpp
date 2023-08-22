@@ -2,9 +2,7 @@
 
 #include <Algorithm/Graph/Types/GraphTypes.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class BasePathSearchWithDistanceCount {
@@ -50,6 +48,4 @@ private:
     VertexToIntMap m_endVertexToDistanceCountMap;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

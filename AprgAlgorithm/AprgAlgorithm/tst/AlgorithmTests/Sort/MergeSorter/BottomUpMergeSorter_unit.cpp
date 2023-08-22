@@ -64,4 +64,4 @@ TEST(BottomUpMergeSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExamp
     testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(sorter);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -6,9 +6,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 class TernarySearchTrieSubstringsSet : public BaseTernarySearchTrie<TernarySearchTrieSetNode, BaseStringSet> {
 public:
@@ -54,7 +52,7 @@ protected:
             char c(keyToCheck[index]);
             if (c < currentNodePointer->c) {
                 return getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->left, keyToCheck, index);
-            } else if (c > currentNodePointer->c) {
+            } if (c > currentNodePointer->c) {
                 return getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->right, keyToCheck, index);
             } else {
                 return getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->mid, keyToCheck, index + 1);
@@ -153,7 +151,5 @@ protected:
 
     NodeUniquePointer& b_root;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

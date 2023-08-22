@@ -5,9 +5,7 @@
 #include <memory>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename KeyTemplateType, typename NodeTemplateType, typename BaseDataStructure>
 class BaseUnorderedLinkedList : public BaseDataStructure {
@@ -19,7 +17,7 @@ public:
     using TraverseFunctionWithNoChange = std::function<void(Node const&, bool&)>;
     using TraverseFunctionWithChange = std::function<void(Node&, bool&)>;
 
-    BaseUnorderedLinkedList() : m_size(0), m_first(nullptr) {}
+    BaseUnorderedLinkedList() :  m_first(nullptr) {}
 
     ~BaseUnorderedLinkedList() override = default;  // no need for virtual destructor because base destructor is virtual
                                                     // (similar to other virtual functions)
@@ -190,10 +188,8 @@ protected:
         }
     }
 
-    int m_size;
+    int m_size{0};
     NodeUniquePointer m_first;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

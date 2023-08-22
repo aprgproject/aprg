@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value, typename BaseTree>
 class BaseSymbolTableWithBaseTree : public BaseTree {
@@ -53,6 +51,4 @@ private:
     NodeUniquePointer& b_root;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

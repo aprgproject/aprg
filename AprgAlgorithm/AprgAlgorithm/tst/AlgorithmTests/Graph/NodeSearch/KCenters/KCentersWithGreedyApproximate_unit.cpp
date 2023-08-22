@@ -47,4 +47,4 @@ TEST(KCentersWithGreedyApproximateTest, GetDistanceToWorksWithUndirectedGraphFor
     EXPECT_EQ(expectedCenters, nodeSearch.getFoundCenters());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

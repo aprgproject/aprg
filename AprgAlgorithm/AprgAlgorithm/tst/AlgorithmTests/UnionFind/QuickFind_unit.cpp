@@ -68,4 +68,4 @@ TEST(QuickFindTest, GetRootArrayWorks) {
     EXPECT_EQ(expectedRootArray, unionFind.getRootArray());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

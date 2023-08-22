@@ -3,9 +3,7 @@
 #include <Algorithm/Utilities/IndexHelper.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class LinearNearestValueSearchWithTwoIndices {
@@ -44,7 +42,7 @@ public:
                 if (valueAtLower == target) {
                     result = std::distance(m_values.cbegin(), itLower);
                     break;
-                } else if (valueAtHigher == target) {
+                } if (valueAtHigher == target) {
                     result = std::distance(m_values.cbegin(), itHigher);
                     break;
                 } else {
@@ -88,7 +86,5 @@ private:
     Index m_endIndex;
     Values const& m_values;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

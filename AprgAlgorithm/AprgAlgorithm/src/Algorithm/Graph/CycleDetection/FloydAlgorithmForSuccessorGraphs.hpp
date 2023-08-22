@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/DirectedGraph/BaseDirectedGraph.hpp>
 #include <Algorithm/Graph/SuccessorGraph/WalkInSuccessorGraph.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class FloydAlgorithmForSuccessorGraphs {
@@ -15,7 +13,7 @@ public:
     using Path = typename GraphTypes<Vertex>::Path;
 
     FloydAlgorithmForSuccessorGraphs(BaseDirectedGraphWithVertex const& graph)
-        : m_graph(graph), m_walker(graph), m_hasACycle(false) {}
+        : m_graph(graph), m_walker(graph) {}
 
     bool hasACycle() const { return m_hasACycle; }
 
@@ -72,7 +70,7 @@ private:
 
     BaseDirectedGraphWithVertex const& m_graph;
     Walker m_walker;
-    bool m_hasACycle;
+    bool m_hasACycle{false};
     Path m_cyclePath;
 };
 
@@ -80,7 +78,5 @@ private:
 // Both pointers begin at a node x that is the starting node of the graph.
 // Then, on each turn, the pointer a walks one step forward and the pointer b walks two steps forward.
 // The process continues until the pointers meet each other.
-
-}  // namespace algorithm
 
 }  // namespace alba

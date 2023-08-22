@@ -3,9 +3,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename HashValue>
 class HornerHashFunctionForWholeString  // horners rule: continuously mod to keep the value
@@ -31,6 +29,4 @@ private:
     HashValue m_radix;
     HashValue m_largeRandomPrime;
 };
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

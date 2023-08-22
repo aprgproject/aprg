@@ -5,9 +5,7 @@
 #include <algorithm>
 #include <ostream>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class UndirectedGraphWithListOfEdges : public BaseUndirectedGraph<Vertex> {
@@ -17,7 +15,7 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
 
-    UndirectedGraphWithListOfEdges() : m_numberOfEdges(0), m_edges{} {}
+    UndirectedGraphWithListOfEdges()  {}
 
     bool isEmpty() const override { return m_edges.empty(); }
 
@@ -101,10 +99,8 @@ protected:
         return out;
     }
 
-    int m_numberOfEdges;
-    SetOfEdges m_edges;
+    int m_numberOfEdges{0};
+    SetOfEdges m_edges{};
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

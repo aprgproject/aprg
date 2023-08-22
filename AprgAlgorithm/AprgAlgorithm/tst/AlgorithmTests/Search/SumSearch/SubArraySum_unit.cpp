@@ -22,4 +22,4 @@ TEST(SubArraySumTest, GetSubArrayWithSumWorksOnExample1) {
     EXPECT_EQ(valuesToExpect, valuesToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

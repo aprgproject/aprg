@@ -2,9 +2,7 @@
 
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key>
 struct LinkedListNode {
@@ -19,6 +17,4 @@ struct LinkedListNodeWithValue {
     std::unique_ptr<LinkedListNodeWithValue> next;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

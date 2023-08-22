@@ -3,9 +3,7 @@
 #include <Algorithm/Sort/BaseSorter.hpp>
 #include <Algorithm/Sort/MergeSorter/MergeSorterUtilities.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class BottomUpMergeSorter : public BaseSorter<Values> {
@@ -24,8 +22,6 @@ public:
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

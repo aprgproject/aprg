@@ -69,4 +69,4 @@ TEST(UnionFindUsingMapTest, GetConnectionMapWorks) {
     EXPECT_EQ(expectedConnectionMap, unionFind.getConnectionMap());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

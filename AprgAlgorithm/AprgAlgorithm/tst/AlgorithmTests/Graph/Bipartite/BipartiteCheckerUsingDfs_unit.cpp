@@ -68,4 +68,4 @@ TEST(BipartiteCheckerUsingDfsTest, IsBipartiteWorksforBarpartiteGraph) {
     EXPECT_EQ(expectedWithSecondColor, verticesWithSecondColor);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

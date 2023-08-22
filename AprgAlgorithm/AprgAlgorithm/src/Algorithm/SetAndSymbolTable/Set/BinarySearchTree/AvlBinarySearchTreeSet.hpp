@@ -4,9 +4,7 @@
 
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key>
 class AvlBinarySearchTreeSet : public BaseAvlBinarySearchTreeSet<Key> {
@@ -32,7 +30,5 @@ protected:
         this->reBalanceTreeOnPutAction(nodePointer);
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

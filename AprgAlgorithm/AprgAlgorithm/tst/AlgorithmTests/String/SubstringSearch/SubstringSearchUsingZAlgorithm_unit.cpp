@@ -50,4 +50,4 @@ TEST(SubstringSearchUsingZAlgorithmTest, SearchForAllSubstringsWorksUsingExample
     EXPECT_EQ((Indexes{1, 6}), substringSearch.searchForAllSubstrings(searchSpace));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

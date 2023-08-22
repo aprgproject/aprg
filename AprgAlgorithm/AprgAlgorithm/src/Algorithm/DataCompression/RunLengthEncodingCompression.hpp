@@ -6,9 +6,7 @@
 #include <iostream>
 #include <limits>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Count>
 class RunLengthEncodingCompression {
@@ -49,7 +47,7 @@ public:
         AlbaStreamBitWriter writer(output);
         bool bit(false);  // start with 0
         while (true) {
-            Count currentCount(reader.readBigEndianNumberData<Count>());
+            auto currentCount(reader.readBigEndianNumberData<Count>());
             if (!input.eof())  // do not continue if end of file
             {
                 for (char i = 0; i < currentCount; i++) {
@@ -79,7 +77,5 @@ public:
 // Application
 // -> Compress a bitmap
 // ---> Observation: Bits are mostly white
-
-}  // namespace algorithm
 
 }  // namespace alba

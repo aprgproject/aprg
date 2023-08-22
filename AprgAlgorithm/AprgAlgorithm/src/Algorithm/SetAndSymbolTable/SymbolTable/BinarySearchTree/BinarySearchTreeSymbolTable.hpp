@@ -4,9 +4,7 @@
 
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key, typename Value>
 class BinarySearchTreeSymbolTable : public BaseBinarySearchTreeSymbolTable<Key, Value> {
@@ -33,7 +31,5 @@ protected:
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

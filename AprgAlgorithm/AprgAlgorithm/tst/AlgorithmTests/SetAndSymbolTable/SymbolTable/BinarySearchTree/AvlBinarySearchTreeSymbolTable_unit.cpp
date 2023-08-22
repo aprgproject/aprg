@@ -197,4 +197,4 @@ TEST(AvlBinarySearchTreeSymbolTableTest, AfterDeletionOfMaximumTheTreeIsStillBal
     EXPECT_EQ(expectedAfterDelete, actualAfterDelete);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

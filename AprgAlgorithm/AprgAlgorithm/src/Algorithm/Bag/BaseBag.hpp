@@ -2,9 +2,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object>
 class BaseBag  // Bag data stucture just collects data and can traverse the data (order does not matter)
@@ -19,7 +17,5 @@ public:
     virtual void add(Object const& object) = 0;
     virtual void traverse(TraverseFunction const& traverseFunction) = 0;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

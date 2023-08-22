@@ -43,4 +43,4 @@ TEST(MinimumNodeCoverTest, GetMaximumIndependentSetSizeWorksOnExample1) {
     EXPECT_EQ(5, minimumNodeCover.getMaximumIndependentSetSize(newSourceVertex, newSinkVertex));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

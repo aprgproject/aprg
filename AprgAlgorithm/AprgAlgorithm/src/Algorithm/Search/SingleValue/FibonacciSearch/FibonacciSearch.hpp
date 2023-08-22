@@ -5,9 +5,7 @@
 
 #include <algorithm>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class FibonacciSearch {
@@ -38,8 +36,6 @@ public:
 private:
     Values const& m_sortedValues;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

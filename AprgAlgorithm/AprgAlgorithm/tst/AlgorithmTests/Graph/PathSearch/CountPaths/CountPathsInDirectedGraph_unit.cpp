@@ -36,4 +36,4 @@ TEST(CountPathsInDirectedGraphTest, GetCountWorksOnExample1) {
     EXPECT_EQ(2, countPaths.getCount(5, 6));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

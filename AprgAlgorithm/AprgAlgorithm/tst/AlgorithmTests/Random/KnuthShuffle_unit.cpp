@@ -76,4 +76,4 @@ TEST(KnuthShuffleTest, ShuffleWhileMovingBackwardWorksOnCharactersUsingExample1)
     EXPECT_EQ(valuesSetToExpect, CharactersSet(valuesToShuffle.cbegin(), valuesToShuffle.cend()));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/Utilities/CheckableVertices.hpp>
 #include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class LowestCommonAncestors {
@@ -119,7 +117,5 @@ private:
     Depths m_depths;
     VertexToIndexMap m_vertexToFirstIndexMap;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

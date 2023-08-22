@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class BaseTransitiveClosure {
@@ -12,6 +10,4 @@ public:
     virtual bool isReachable(Vertex const& sourceVertex, Vertex const& destinationVertex) const = 0;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -4,9 +4,7 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object>
 class UnionFindForFreeIndex : public BaseUnionFind<Object> {
@@ -80,6 +78,4 @@ private:
     RootVector m_relativeRoots;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

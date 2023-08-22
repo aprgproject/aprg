@@ -3,9 +3,7 @@
 #include <algorithm>
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Objects, int NUMBER_OF_CHILDREN, template <class> class ComparatorTemplateType>
 class BinaryHeapAdapter {
@@ -110,6 +108,4 @@ private:
 // Conversely, the the smallest element in a min-heap is stored at the root,
 // -> and the subtree rooted at a node contains values no smaller than that contained at the node itself
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

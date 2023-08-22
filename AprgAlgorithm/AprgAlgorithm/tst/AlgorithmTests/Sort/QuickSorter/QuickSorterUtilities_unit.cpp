@@ -109,4 +109,4 @@ TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIteratorInOneDirectionWor
     EXPECT_EQ('S', *partitionIterator);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

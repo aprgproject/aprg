@@ -66,4 +66,4 @@ TEST(FleuryAlgorithmTest, GetEulerCycleAndPathWorksOnExample2) {
     testGetEulerCycleAndPathWorksOnExample2<PathSearchForTest, GraphForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

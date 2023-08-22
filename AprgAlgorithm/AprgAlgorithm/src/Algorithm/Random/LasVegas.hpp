@@ -2,15 +2,11 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 using LasVegasAlgorithm = std::function<void(void)>;
 
 void performALasVegasAlgorithm(LasVegasAlgorithm const& lasVegasAlgorithm) { lasVegasAlgorithm(); }
-
-}  // namespace algorithm
 
 }  // namespace alba
 

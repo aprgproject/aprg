@@ -85,4 +85,4 @@ TEST(QuickSorterTest, SortWorksOnCharactersUsingExample1WithPivotWithValueAtMedi
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

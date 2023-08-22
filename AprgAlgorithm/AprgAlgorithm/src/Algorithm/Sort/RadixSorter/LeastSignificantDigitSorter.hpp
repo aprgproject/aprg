@@ -5,9 +5,7 @@
 #include <array>
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values, int MAX_NUMBER_OF_DIGIT_VALUES>
 class LeastSignificantDigitSorter : public BaseSorter<Values> {
@@ -89,7 +87,5 @@ private:
 // -> Check the other RadixSorter for proof.
 
 // LSD has history with punch cards
-
-}  // namespace algorithm
 
 }  // namespace alba

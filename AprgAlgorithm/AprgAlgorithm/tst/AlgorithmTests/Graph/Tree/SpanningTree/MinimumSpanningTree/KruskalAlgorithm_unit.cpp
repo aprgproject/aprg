@@ -41,4 +41,4 @@ TEST(KruskalAlgorithmTest, WorksOnUndirectedGraph) {
     EXPECT_EQ(expectedMinimumSpanningTree, spanningTreeSearch.getMinimumSpanningTreeEdges());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

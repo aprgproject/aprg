@@ -45,4 +45,4 @@ TEST(RangeQueryWithBlocksWithMultipleRequestsTest, GetInputAndOutputPairsUsingMo
     EXPECT_EQ(expectedPairs, sumRangeQuery.getInputAndOutputPairsUsingMoAlgorithm(inputRanges));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

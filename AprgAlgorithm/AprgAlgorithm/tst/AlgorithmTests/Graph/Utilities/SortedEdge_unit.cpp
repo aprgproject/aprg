@@ -34,4 +34,4 @@ TEST(SortedEdgeTest, CreateSortedEdgeOrderedByWeightWorks) {
     EXPECT_EQ(expectedSortedEdge, sortedEdge2ToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

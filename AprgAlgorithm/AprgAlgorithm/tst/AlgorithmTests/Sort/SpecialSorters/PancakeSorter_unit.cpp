@@ -72,4 +72,4 @@ TEST(PancakeSorterTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1
         sorter);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -7,9 +7,7 @@
 #include <set>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value, int MAX_NUMBER_IDS>
 class RWayTrieUsingMatrix : public BaseStringSymbolTable<Value> {
@@ -31,7 +29,7 @@ public:
     using Coordinate = std::pair<int, NodeId>;
     using Coordinates = std::vector<Coordinate>;
 
-    RWayTrieUsingMatrix() : m_size(0), m_nextNodeId(0), m_unusedNodeIds(), m_nodePointerMatrix(RADIX, MAX_NUMBER_IDS) {}
+    RWayTrieUsingMatrix() :  m_unusedNodeIds(), m_nodePointerMatrix(RADIX, MAX_NUMBER_IDS) {}
 
     bool isEmpty() const override { return m_size == 0; }
 
@@ -340,13 +338,11 @@ private:
             m_unusedNodeIds.emplace(nodeId);
         }
     }
-    int m_size;
-    int m_nextNodeId;
+    int m_size{0};
+    int m_nextNodeId{0};
     SetOfNodeIds m_unusedNodeIds;
     NodePointerMatrix m_nodePointerMatrix;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

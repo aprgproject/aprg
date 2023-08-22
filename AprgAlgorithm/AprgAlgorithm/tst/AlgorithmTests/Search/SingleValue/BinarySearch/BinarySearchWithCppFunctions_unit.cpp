@@ -53,4 +53,4 @@ TEST(BinarySearchWithCppFunctionsTest, GetIndexOfValueWorksWhenValueIsFoundAndWh
     testGetIndexOfValueWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

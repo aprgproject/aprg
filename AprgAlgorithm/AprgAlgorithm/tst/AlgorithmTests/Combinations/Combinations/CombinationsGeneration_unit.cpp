@@ -26,4 +26,4 @@ TEST(CombinationsGenerationTest, GenerateCombinationsWithLengthWorksWhenCombinat
     EXPECT_EQ(expectedCombinations, actualCombinations);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

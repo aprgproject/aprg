@@ -34,4 +34,4 @@ TEST(SubTreeQueryWithAccumulatorTest, GetAccumulatedValueOfSubTreeAtWorks) {
     EXPECT_EQ(28, subTreeQuery.getAccumulatedValueOfSubTreeAt(4));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

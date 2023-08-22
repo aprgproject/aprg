@@ -95,4 +95,4 @@ TEST(DirectedGraphWithArrayOfAdjacencyListsTest, OutputStreamOperatorWorks) {
         "Adjacency Lists: \nAdjacent with vertex 0: {1, } \nAdjacent with vertex 2: {0, } \n", convertToString(graph));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

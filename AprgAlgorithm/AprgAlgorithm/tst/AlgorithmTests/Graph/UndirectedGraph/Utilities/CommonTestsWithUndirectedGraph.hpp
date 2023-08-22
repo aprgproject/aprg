@@ -4,11 +4,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
-
-namespace CommonTestsWithUndirectedGraph {
+namespace alba::algorithm::CommonTestsWithUndirectedGraph {
 
 template <typename Graph>
 void testGetGraphDirectionTypeWithVertexAsInt() {
@@ -267,8 +263,4 @@ void testWithComplicatedExampleWithVertexAsInt() {
     EXPECT_EQ(edgesToExpect, edgesToVerify);
 }
 
-}  // namespace CommonTestsWithUndirectedGraph
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::CommonTestsWithUndirectedGraph

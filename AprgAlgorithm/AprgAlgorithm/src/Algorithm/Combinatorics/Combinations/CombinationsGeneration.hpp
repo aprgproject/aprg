@@ -4,9 +4,7 @@
 #include <set>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Objects>
 class CombinationsGeneration {
@@ -61,7 +59,5 @@ private:
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

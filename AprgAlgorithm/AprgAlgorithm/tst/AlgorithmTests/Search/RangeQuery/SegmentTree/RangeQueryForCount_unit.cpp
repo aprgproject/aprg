@@ -151,4 +151,4 @@ TEST(RangeQueryForCountTest, ChangeValueAtIndexWorksOnExample1) {
     EXPECT_EQ(0, countRangeQuery.getCountOfThisValueOnInterval(4, 4, 4));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

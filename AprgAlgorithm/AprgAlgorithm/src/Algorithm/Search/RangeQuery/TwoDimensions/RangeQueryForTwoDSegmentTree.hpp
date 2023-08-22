@@ -3,9 +3,7 @@
 #include <Algorithm/Search/RangeQuery/SegmentTree/RangeQueryWithStaticSegmentTree.hpp>
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value>
 class RangeQueryForTwoDSegmentTree {
@@ -87,7 +85,5 @@ private:
     OneDFunction m_function;
     TwoDSegmentTree m_twoDSegmentTree;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

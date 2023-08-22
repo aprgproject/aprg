@@ -24,4 +24,4 @@ TEST(ApproximateMedianTest, GetApproximateMedianWorksOnExample2) {
     EXPECT_NE(0, approximateMedian.getApproximateMedian(values));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

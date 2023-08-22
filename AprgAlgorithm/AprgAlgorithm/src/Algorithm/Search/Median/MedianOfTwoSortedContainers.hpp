@@ -4,9 +4,7 @@
 
 #include <algorithm>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class MedianOfTwoSortedContainers {
@@ -22,9 +20,8 @@ public:
     Value getMedian() const {
         if (m_container1.empty() && m_container2.empty()) {
             return Value{};
-        } else {
-            return getMedianAtLeastOneContainerIsNotEmpty();
-        }
+        }             return getMedianAtLeastOneContainerIsNotEmpty();
+       
     }
 
 private:
@@ -77,23 +74,19 @@ private:
         auto it = std::lower_bound(m_container2.cbegin(), m_container2.cend(), m_container1[indexOn1]);
         if (it != m_container2.cend()) {
             return std::distance(m_container2.cbegin(), it);
-        } else {
-            return m_container2.size();
-        }
+        }             return m_container2.size();
+       
     }
 
     Value getValueAtBorder(int const indexOn1, int const indexOn2) const {
         if (!m_container2.empty()) {
             return std::max(m_container1[indexOn1], m_container2[indexOn2]);
-        } else {
-            return m_container1[indexOn1];
-        }
+        }             return m_container1[indexOn1];
+       
     }
 
     Values const& m_container1;
     Values const& m_container2;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

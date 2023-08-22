@@ -162,4 +162,4 @@ TEST(
     EXPECT_DOUBLE_EQ(0, geometricSumRangeQuery.getValueOnIntervalOnPreviousTree(4, 4, 4));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

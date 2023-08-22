@@ -6,9 +6,7 @@
 #include <algorithm>
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class CombSorter : public BaseSorter<Values> {
@@ -42,8 +40,6 @@ private:
         return mathHelper::clampLowerBound(result, 1);
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

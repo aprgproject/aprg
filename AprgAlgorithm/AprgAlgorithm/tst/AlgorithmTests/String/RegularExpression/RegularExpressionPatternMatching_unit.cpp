@@ -18,4 +18,4 @@ TEST(RegularExpressionPatternMatchingTest, SearchWorksUsingExample1) {
     EXPECT_FALSE(patternMatching.isAMatch("DDD"));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -4,9 +4,7 @@
 #include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
 #include <Common/Bit/AlbaBitValueUtilities.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class AncestorsInTree {
@@ -89,7 +87,5 @@ private:
     Dfs m_dfs;
     VertexAndCountPairToVertexMap m_startAndDistancePairToDestinationMap;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

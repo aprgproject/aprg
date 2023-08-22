@@ -4,9 +4,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Index, typename HashValue>
 class RabinKarpSubstringSearchWithRunningHash {
@@ -24,7 +22,7 @@ public:
           m_queryHash(getHash(m_query)) {}
 
     Index search(std::string const& searchSpace) const {
-        Index result(static_cast<Index>(std::string::npos));
+        auto result(static_cast<Index>(std::string::npos));
         Index searchLength(searchSpace.length());
         HashValue currentHash(getHash(searchSpace));
         if (m_queryHash == currentHash) {
@@ -73,8 +71,6 @@ private:
     HashValue m_radixRaiseToMatchLengthHash;
     HashValue m_queryHash;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

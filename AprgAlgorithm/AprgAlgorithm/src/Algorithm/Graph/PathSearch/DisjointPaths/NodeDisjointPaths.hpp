@@ -6,9 +6,7 @@
 #include <Algorithm/Graph/FlowNetwork/SinkSourceFlowNetwork.hpp>
 #include <Algorithm/Graph/Utilities/VertexWithBool.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class NodeDisjointPaths {
@@ -80,7 +78,5 @@ private:
 
     FordFulkerson m_fordFulkerson;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

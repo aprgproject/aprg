@@ -131,4 +131,4 @@ TEST(FlowNetworkTest, DisconnectWorks) {
     EXPECT_EQ(expectedEdgesToDetails, graph.getEdgeToFlowEdgeDetailsMap());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

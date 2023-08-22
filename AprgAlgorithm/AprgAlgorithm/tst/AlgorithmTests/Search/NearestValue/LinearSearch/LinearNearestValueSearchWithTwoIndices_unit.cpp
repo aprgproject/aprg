@@ -89,4 +89,4 @@ TEST(LinearNearestValueSearchWithTwoIndicesTest, GetNearestValueWithInitialIndex
     EXPECT_EQ(33, search.getNearestValue(33));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

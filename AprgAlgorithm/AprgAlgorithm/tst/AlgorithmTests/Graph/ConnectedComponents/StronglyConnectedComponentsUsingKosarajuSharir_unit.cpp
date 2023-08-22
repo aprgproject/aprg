@@ -51,4 +51,4 @@ TEST(StronglyConnectedComponentsUsingKosarajuSharirTest, GetComponentIdWorks) {
     EXPECT_EQ(1, connectedComponents.getComponentId(7));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

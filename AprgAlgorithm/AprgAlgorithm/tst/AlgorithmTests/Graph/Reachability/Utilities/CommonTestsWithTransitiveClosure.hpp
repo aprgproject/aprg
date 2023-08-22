@@ -2,11 +2,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
-
-namespace CommonTestsWithTransitiveClosure {
+namespace alba::algorithm::CommonTestsWithTransitiveClosure {
 
 template <typename TransitiveClosure, typename Graph>
 void testIsReachableWhenEmptyWithVertexAsInt() {
@@ -98,8 +94,4 @@ void testIsReachableWhenNotEmptyWithVertexAsInt() {
     EXPECT_TRUE(transitiveClosure.isReachable(9, 12));
 }
 
-}  // namespace CommonTestsWithTransitiveClosure
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::CommonTestsWithTransitiveClosure

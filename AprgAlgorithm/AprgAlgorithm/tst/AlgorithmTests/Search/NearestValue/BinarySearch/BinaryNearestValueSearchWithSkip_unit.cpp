@@ -64,4 +64,4 @@ TEST(BinaryNearestValueSearchWithSkipTest, GetIndexOfNearestValueWorksWhenNeares
     testGetIndexOfNearestValueWhenNearestValueIsHigherWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

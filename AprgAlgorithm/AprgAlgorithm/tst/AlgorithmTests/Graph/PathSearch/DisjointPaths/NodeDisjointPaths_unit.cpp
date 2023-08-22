@@ -30,4 +30,4 @@ TEST(NodeDisjointPathsTest, Example1Works) {
     EXPECT_EQ(expectedNodeDisjointPaths, pathSearch.getNodeDisjointPaths());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

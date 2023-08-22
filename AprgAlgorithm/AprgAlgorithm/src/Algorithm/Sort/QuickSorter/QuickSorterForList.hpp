@@ -5,9 +5,7 @@
 
 #include <list>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value>
 class QuickSorterForList : public BaseSorter<std::list<Value>> {
@@ -21,30 +19,28 @@ public:
         if (!valuesToSort.empty() && valuesToSort.size() != 1) {
             // You can randomize inputs here to remove dependence on input (quick sort works best if input is not
             // sorted) std::shuffle should help
-            Iterator itLast = prev(valuesToSort.end());
+            auto itLast = prev(valuesToSort.end());
             sort(valuesToSort, valuesToSort.begin(), itLast);
         }
     }
 
 private:
     void sort(Values& valuesToSort, Iterator const itLow, Iterator const itHigh) const {
-        Iterator partitionIt = partitionAndGetPartitionIteratorInTwoDirections<Values>(itLow, itHigh);
+        auto partitionIt = partitionAndGetPartitionIteratorInTwoDirections<Values>(itLow, itHigh);
         if (partitionIt != valuesToSort.begin()) {
-            Iterator partitionItMinusOne = prev(partitionIt);
+            auto partitionItMinusOne = prev(partitionIt);
             if (itLow != partitionIt && itLow != partitionItMinusOne) {  // size must be at least two
                 // recursively sort/partition the low part without the partitionIt
                 sort(valuesToSort, itLow, partitionItMinusOne);
             }
         }
-        Iterator partitionItPlusOne = next(partitionIt);
+        auto partitionItPlusOne = next(partitionIt);
         if (partitionIt != itHigh && partitionItPlusOne != itHigh) {  // size must be at least two
             // recursively sort/partition the high part without the partitionIt
             sort(valuesToSort, partitionItPlusOne, itHigh);
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

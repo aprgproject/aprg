@@ -52,4 +52,4 @@ TEST(AhoCorasickMultipleSubstringsSearchTest, SearchWorksUsingExample3) {
     EXPECT_EQ(expectedResult, substringSearch.search(searchSpace));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

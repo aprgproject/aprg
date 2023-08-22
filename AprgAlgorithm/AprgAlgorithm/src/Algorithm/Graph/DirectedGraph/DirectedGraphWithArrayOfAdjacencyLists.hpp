@@ -5,9 +5,7 @@
 
 #include <array>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, int MAX_VERTEX_VALUE>
 class DirectedGraphWithArrayOfAdjacencyLists : public BaseDirectedGraph<Vertex> {
@@ -18,7 +16,7 @@ public:
     using AdjacencyList = SetOfVertices;
     using AdjacencyLists = std::array<AdjacencyList, MAX_VERTEX_VALUE>;
 
-    DirectedGraphWithArrayOfAdjacencyLists() : m_numberOfEdges(0), m_adjacencyLists{} {}
+    DirectedGraphWithArrayOfAdjacencyLists()  {}
 
     bool isEmpty() const override { return m_numberOfEdges == 0; }
 
@@ -101,10 +99,8 @@ protected:
         return out;
     }
 
-    int m_numberOfEdges;
-    AdjacencyLists m_adjacencyLists;
+    int m_numberOfEdges{0};
+    AdjacencyLists m_adjacencyLists{};
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

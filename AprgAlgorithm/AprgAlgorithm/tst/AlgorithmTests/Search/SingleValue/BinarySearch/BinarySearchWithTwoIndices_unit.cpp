@@ -61,4 +61,4 @@ TEST(BinarySearchWithTwoIndicesTest, GetIndexOfValueWithIndicesWorksWhenValueIsF
     testGetIndexOfValueWithIndicesWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

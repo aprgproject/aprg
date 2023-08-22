@@ -5,9 +5,7 @@
 #include <bitset>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Objects, typename BitDataType>
 class SubsetGenerationUsingBits {
@@ -48,7 +46,5 @@ public:
         return result;
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

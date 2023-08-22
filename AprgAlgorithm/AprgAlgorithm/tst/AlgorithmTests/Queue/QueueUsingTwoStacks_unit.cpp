@@ -30,4 +30,4 @@ TEST(QueueUsingTwoStacksTest, DISABLED_DequeueWorksWithAssertionWhenItsEmpty) {
     testDequeueAssertionWhenEmptyWithInt<QueueForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -6,11 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
-
-namespace CommonTestsWithSymbolTable {
+namespace alba::algorithm::CommonTestsWithSymbolTable {
 
 template <typename SymbolTable>
 void testIsEmptyWhenEmptyWithUnsignedIntAndChar() {
@@ -246,8 +242,4 @@ void testGetKeysInRangeInclusiveWithUnsignedIntAndChar() {
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
-}  // namespace CommonTestsWithSymbolTable
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::CommonTestsWithSymbolTable

@@ -84,4 +84,4 @@ TEST(CheckableVerticesTest, ClearWorks) {
     EXPECT_FALSE(checkableVertices.isFound(13));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

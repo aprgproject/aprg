@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/BaseGraph.hpp>
 #include <Algorithm/Graph/Utilities/CheckableVertices.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class HamiltonianPathSearchWithDfs  // The Traveling Salesman Problem. // This is an intractable problem (classical
@@ -96,7 +94,7 @@ protected:
             if (shouldStop())  // needs to stop here to prune all dfs recursion instances
             {
                 break;
-            } else if (m_processedVertices.isNotFound(adjacentVertex)) {
+            } if (m_processedVertices.isNotFound(adjacentVertex)) {
                 traverseUsingDfs(currentPath, adjacentVertex);
             }
         }
@@ -151,6 +149,4 @@ protected:
 // function indicates whether there is a Hamiltonian path that visits the nodes of S and ends at node x. It is possible
 // to implement this solution in O(2^n * n^2) time.
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

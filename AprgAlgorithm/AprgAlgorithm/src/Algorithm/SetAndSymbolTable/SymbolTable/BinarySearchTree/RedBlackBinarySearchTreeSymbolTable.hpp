@@ -3,9 +3,7 @@
 #include <Algorithm/SetAndSymbolTable/Common/BinarySearchTree/BinarySearchTreeNodes.hpp>
 #include <Algorithm/SetAndSymbolTable/SymbolTable/BinarySearchTree/Common/BaseRedBlackBinarySearchTreeSymbolTable.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key, typename Value>
 class RedBlackBinarySearchTreeSymbolTable
@@ -36,7 +34,5 @@ protected:
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

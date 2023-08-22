@@ -2,9 +2,7 @@
 
 #include <ostream>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 class StabilityCheckObject {
 public:
@@ -45,6 +43,4 @@ bool areObjectsEqualOnVisibleAndNotVisiblePart(
     StabilityCheckObject const& object1, StabilityCheckObject const& object2);
 bool areObjectsEqualOnVisibleOnly(StabilityCheckObject const& object1, StabilityCheckObject const& object2);
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

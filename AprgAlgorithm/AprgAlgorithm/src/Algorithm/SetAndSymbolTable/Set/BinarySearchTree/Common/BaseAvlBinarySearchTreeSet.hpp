@@ -5,9 +5,7 @@
 #include <Algorithm/SetAndSymbolTable/Set/BaseSet.hpp>
 #include <Algorithm/SetAndSymbolTable/Set/BinarySearchTree/Common/BaseSetWithBaseTree.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key>
 class BaseAvlBinarySearchTreeSet
@@ -17,7 +15,5 @@ public:
     // no need for virtual destructor because base destructor is virtual
     // (similar to other virtual functions)
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -47,4 +47,4 @@ TEST(MonteCarloTest, VerifyingMatrixExample) {
     EXPECT_TRUE(isEqual == isEqual);  // just to check something
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

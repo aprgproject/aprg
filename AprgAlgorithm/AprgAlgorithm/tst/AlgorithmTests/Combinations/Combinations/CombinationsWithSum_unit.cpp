@@ -32,4 +32,4 @@ TEST(CombinationsWithSumTest, GetCombinationsWithSumUsingLoopsWorks) {
     EXPECT_EQ(expectedCombinations, actualCombinations);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

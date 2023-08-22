@@ -6,9 +6,7 @@
 
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Key, typename Node>
 class BaseRedBlackBinarySearchTreeSet
@@ -18,6 +16,4 @@ public:
                                                             // virtual (similar to other virtual functions)
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

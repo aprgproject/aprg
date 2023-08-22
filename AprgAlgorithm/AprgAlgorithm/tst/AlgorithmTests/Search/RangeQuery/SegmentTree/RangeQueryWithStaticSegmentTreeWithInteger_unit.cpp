@@ -240,4 +240,4 @@ TEST(RangeQueryWithStaticSegmentTreeTest, GetIndexWithTargetValueWorksOnExample3
     EXPECT_EQ(4, sumRangeQuery.getIndexWithTargetValue(0, 3, minusFunction));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

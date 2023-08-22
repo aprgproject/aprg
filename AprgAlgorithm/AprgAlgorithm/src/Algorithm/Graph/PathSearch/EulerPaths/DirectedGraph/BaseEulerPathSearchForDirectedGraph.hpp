@@ -7,9 +7,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class BaseEulerPathSearchForDirectedGraph {
@@ -62,7 +60,5 @@ protected:
 
     BaseDirectedGraphWithVertex const& m_graph;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

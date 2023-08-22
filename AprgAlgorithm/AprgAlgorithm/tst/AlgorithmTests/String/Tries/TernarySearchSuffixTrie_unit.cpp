@@ -26,4 +26,4 @@ TEST(TernarySearchSuffixTrieTest, GetIndexOfFirstOccurrenceWorks) {
     EXPECT_EQ(-1, trie.getIndexOfFirstOccurrence("DEH"));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

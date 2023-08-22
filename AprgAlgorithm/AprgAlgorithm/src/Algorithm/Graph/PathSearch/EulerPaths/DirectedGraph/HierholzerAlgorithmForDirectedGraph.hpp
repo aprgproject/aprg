@@ -6,9 +6,7 @@
 #include <algorithm>
 #include <stack>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class HierholzerAlgorithmForDirectedGraph
@@ -60,7 +58,5 @@ private:
 
     BaseDirectedGraphWithVertex const& b_graph;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

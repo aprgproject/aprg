@@ -325,4 +325,4 @@ TEST(ExpressionEvaluatorConverterTest, PostfixInfixToConvertionWorks) {
     EXPECT_EQ(101, postfixEvaluator.evaluate());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm::ExpressionEvaluator

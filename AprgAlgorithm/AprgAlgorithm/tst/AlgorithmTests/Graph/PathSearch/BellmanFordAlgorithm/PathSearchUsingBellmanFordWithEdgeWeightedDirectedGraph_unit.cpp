@@ -200,4 +200,4 @@ TEST(PathSearchUsingBellmanFordTest, GetPathToWorksWithEdgeWeightedDirectedGraph
     EXPECT_EQ(PathForTest(), pathSearch.getPathTo(8));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

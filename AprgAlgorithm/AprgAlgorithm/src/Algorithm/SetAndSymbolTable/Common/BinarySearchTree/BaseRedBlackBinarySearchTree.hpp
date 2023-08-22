@@ -5,9 +5,7 @@
 
 #include <memory>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename KeyTemplateType, typename NodeTemplateType, typename BaseDataStructure>
 class BaseRedBlackBinarySearchTree : public BaseBinarySearchTree<KeyTemplateType, NodeTemplateType, BaseDataStructure> {
@@ -121,9 +119,7 @@ protected:
     }
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Motivation: Represent a 2-3 tree as a BST.
 // Use internal left leaning link as glue for the 3-nodes (color this link red -> so that we can know which link

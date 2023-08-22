@@ -125,4 +125,4 @@ TEST(RangeQueryWithDynamicSegmentTreeTest, ChangeValueAtIndexWithSumWorksOnExamp
     EXPECT_EQ(6, sumRangeQuery.getValueOnInterval(4, 4));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

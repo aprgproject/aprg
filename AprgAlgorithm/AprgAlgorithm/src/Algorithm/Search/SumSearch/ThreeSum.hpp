@@ -2,9 +2,7 @@
 
 #include <Algorithm/Search/SumSearch/TwoSum.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class ThreeSum {
@@ -73,7 +71,5 @@ public:
 private:
     Values const& m_sortedValues;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

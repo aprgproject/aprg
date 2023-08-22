@@ -54,4 +54,4 @@ TEST(FordFulkersonUsingDfsTest, GetMaxFlowValueAndIsInMaxFlowMinCutWorksOnExampl
     EXPECT_EQ(expectedMinCutEdges, maxFlow.getMinCutEdges());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

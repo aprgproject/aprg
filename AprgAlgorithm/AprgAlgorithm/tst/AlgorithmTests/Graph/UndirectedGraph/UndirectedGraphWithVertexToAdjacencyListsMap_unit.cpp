@@ -103,4 +103,4 @@ TEST(UndirectedGraphWithVertexToAdjacencyListsMapTest, OutputStreamOperatorWorks
         convertToString(graph));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -4,11 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
-
-namespace CommonTestsWithQueue {
+namespace alba::algorithm::CommonTestsWithQueue {
 
 template <typename Queue>
 void testIsEmptyWhenEmptyWithInt() {
@@ -74,8 +70,4 @@ void testDequeueAssertionWhenEmptyWithInt() {
     EXPECT_DEATH(queue.dequeue(), "Assertion failed!");
 }
 
-}  // namespace CommonTestsWithQueue
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::CommonTestsWithQueue

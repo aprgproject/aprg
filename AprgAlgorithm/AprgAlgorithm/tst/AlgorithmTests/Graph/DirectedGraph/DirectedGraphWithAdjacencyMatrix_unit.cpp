@@ -124,4 +124,4 @@ TEST(DirectedGraphWithAdjacencyMatrixTest, OutputStreamOperatorWorks) {
         convertToString(graph));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

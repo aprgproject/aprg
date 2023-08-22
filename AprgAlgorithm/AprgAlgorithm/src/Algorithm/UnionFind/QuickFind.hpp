@@ -5,9 +5,7 @@
 #include <array>
 #include <numeric>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object, int SIZE>
 class QuickFind : public BaseUnionFind<Object> {
@@ -50,7 +48,5 @@ private:
 
     RootArray m_roots;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

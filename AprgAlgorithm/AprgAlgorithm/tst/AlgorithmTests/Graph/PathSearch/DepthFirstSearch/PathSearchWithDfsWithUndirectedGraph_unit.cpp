@@ -111,4 +111,4 @@ TEST(PathSearchUsingDfsTest, ReinitializeStartingFromWorksWithUndirectedGraphWit
     EXPECT_EQ(PathForTest(), pathSearch.getOrderedPathTo(6));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

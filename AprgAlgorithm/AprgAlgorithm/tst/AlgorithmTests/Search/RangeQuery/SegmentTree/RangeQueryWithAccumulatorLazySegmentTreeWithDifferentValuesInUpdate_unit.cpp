@@ -87,4 +87,4 @@ TEST(RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdateTest, In
     EXPECT_EQ(11, sumRangeQuery.getValueOnInterval(4, 4));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

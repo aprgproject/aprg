@@ -29,4 +29,4 @@ TEST(ZAlgorithmTest, GetPrefixLengthsUsingTheZAlgorithmWorksWithExample3) {
     EXPECT_EQ(expectedIndexes, ZAlgorithmForTest::getPrefixLengthsUsingTheZAlgorithm("ACBACDACBACBACDA"));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

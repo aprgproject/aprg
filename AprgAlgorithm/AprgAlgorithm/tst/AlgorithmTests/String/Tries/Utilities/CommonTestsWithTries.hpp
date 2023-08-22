@@ -4,11 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
-
-namespace CommonTestsWithTries {
+namespace alba::algorithm::CommonTestsWithTries {
 
 template <typename Trie>
 void testIsEmptyWhenEmptyWithInt() {
@@ -202,8 +198,4 @@ void testExample1WithInt() {
     EXPECT_EQ(0, trie.get("THERE"));
 }
 
-}  // namespace CommonTestsWithTries
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::CommonTestsWithTries

@@ -6,9 +6,7 @@
 #include <iterator>
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value>
 class InsertionSorterForForwardList : public BaseSorter<std::forward_list<Value>> {
@@ -44,8 +42,6 @@ private:
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

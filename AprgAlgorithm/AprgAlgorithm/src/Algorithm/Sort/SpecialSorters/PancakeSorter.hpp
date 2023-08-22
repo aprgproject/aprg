@@ -4,9 +4,7 @@
 
 #include <algorithm>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class PancakeSorter : public BaseSorter<Values> {
@@ -32,8 +30,6 @@ private:
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

@@ -5,9 +5,7 @@
 
 #include <set>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class ApproximateMedian {
@@ -47,8 +45,6 @@ public:
         return result;
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

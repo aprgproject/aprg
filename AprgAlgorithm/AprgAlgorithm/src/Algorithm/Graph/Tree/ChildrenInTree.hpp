@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/Utilities/CheckableVertices.hpp>
 #include <Algorithm/Graph/Utilities/GraphUtilities.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class ChildrenInTree {
@@ -54,6 +52,4 @@ private:
     ParentVertexToChildren m_parentVertexToChildren;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

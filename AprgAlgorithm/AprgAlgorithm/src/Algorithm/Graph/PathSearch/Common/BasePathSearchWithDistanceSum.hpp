@@ -2,9 +2,7 @@
 
 #include <Algorithm/Graph/Types/GraphTypes.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename Weight, typename EdgeWeightedGraph>
 class BasePathSearchWithDistanceSum {
@@ -52,6 +50,4 @@ private:
     VertexToWeightMap m_endVertexToDistanceSumMap;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -8,9 +8,7 @@
 
 #include <map>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class StronglyConnectedComponentsUsingKosarajuSharir
@@ -111,6 +109,4 @@ private:
 // The time complexity of the algorithm is O(n + m), because the algorithm performs two depth-first searches.
 // Note: n is the number of nodes and m is the number of edges.
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

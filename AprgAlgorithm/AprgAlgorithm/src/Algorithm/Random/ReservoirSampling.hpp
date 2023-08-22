@@ -4,9 +4,7 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class ReservoirSampling {
@@ -37,8 +35,6 @@ public:
         return reservoir;
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

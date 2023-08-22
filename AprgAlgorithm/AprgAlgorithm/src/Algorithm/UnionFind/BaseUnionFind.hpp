@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Object>
 class BaseUnionFind {
@@ -15,9 +13,7 @@ public:
     virtual void connect(Object const& object1, Object const& object2) = 0;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // This can be called as a disjoint-set data structure.
 // A disjoint-set data structure is a data structure that keeps track of a set of elements partitioned

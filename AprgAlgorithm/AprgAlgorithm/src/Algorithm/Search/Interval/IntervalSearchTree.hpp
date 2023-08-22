@@ -6,9 +6,7 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename IntervalUnit>
 class Interval {
@@ -139,6 +137,4 @@ private:
     NodeUniquePointer& b_root;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

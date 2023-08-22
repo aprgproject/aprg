@@ -13,11 +13,7 @@
 #include <algorithm>
 #include <set>
 
-namespace alba {
-
-namespace algorithm {
-
-namespace GraphUtilities {
+namespace alba::algorithm::GraphUtilities {
 
 namespace {
 // utilities in utilities
@@ -402,8 +398,4 @@ typename GraphTypes<Vertex>::ListOfEdges getEdgesOfMaximalConnectedSubgraphs(Bas
     return result;
 }
 
-}  // namespace GraphUtilities
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::GraphUtilities

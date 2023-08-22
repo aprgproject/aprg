@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 #include <Algorithm/Graph/Utilities/CheckableVertices.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class BipartiteCheckerUsingDfs {
@@ -16,7 +14,7 @@ public:
     using VertexToColorMap = std::map<Vertex, bool>;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
-    BipartiteCheckerUsingDfs(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph), m_isBipartite(true) {
+    BipartiteCheckerUsingDfs(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph) {
         initialize();
     }
 
@@ -88,7 +86,7 @@ private:
     bool getTheOtherColor(bool const color) { return !color; }
 
     BaseUndirectedGraphWithVertex const& m_graph;
-    bool m_isBipartite;
+    bool m_isBipartite{true};
     CheckableVerticesWithVertex m_processedVertices;
     VertexToColorMap m_vertexToColorMap;
 };
@@ -108,6 +106,4 @@ private:
 // can be colored using k colors so that no adjacent nodes have the same color.
 // Even when k=3, no efficient algorithm is known but the problem is NP-hard.
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

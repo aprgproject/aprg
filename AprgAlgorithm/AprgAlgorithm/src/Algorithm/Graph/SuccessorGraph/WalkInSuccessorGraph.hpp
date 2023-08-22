@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/DirectedGraph/BaseDirectedGraph.hpp>
 #include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class WalkInSuccessorGraph {
@@ -53,6 +51,4 @@ private:
     VertexAndCountPairToVertexMap m_startAndDistancePairToDestinationMap;  // dynamic programming
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

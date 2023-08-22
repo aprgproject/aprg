@@ -42,4 +42,4 @@ TEST(MinimumNodeCoverForTreeTest, GetMinimumNodeCoverWorksOnExample2) {
     EXPECT_EQ((SetOfVertices{1, 2, 4, 7}), minimumNodeCover.getMinimumNodeCover());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

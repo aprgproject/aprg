@@ -4,11 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
-
-namespace CommonTestsWithStack {
+namespace alba::algorithm::CommonTestsWithStack {
 
 template <typename Stack>
 void testIsEmptyWhenEmptyWithInt() {
@@ -75,8 +71,4 @@ void testPopAssertionWhenEmptyWithInt() {
     EXPECT_DEATH(stack.pop(), "Assertion failed!");
 }
 
-}  // namespace CommonTestsWithStack
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::CommonTestsWithStack

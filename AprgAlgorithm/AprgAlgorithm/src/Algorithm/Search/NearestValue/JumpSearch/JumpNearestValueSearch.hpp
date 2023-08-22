@@ -5,9 +5,7 @@
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class JumpNearestValueSearch {
@@ -51,7 +49,5 @@ private:
     Index m_blockSize;
     Values const& m_sortedValues;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

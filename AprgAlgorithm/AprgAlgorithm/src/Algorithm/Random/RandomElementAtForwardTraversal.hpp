@@ -2,9 +2,7 @@
 
 #include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class RandomElementAtForwardTraversal {
@@ -34,8 +32,6 @@ public:
         return result;
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

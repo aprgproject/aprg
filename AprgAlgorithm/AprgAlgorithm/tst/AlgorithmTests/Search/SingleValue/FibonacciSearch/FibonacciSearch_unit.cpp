@@ -52,4 +52,4 @@ TEST(FibonacciSearchTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereAreMul
     testGetIndexOfValueWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

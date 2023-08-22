@@ -88,4 +88,4 @@ TEST(UnionFindForFreeIndexTest, GetRelativeRootVectorWorks) {
     EXPECT_EQ(expectedRelativeRootVector, unionFind.getRelativeRootVector());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -5,9 +5,7 @@
 
 #include <map>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class ConnectedComponentsUsingDfs
@@ -52,6 +50,4 @@ private:
     CheckableVerticesWithVertex m_processedVertices;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

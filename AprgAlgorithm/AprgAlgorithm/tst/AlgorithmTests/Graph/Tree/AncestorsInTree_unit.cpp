@@ -28,4 +28,4 @@ TEST(AncestorsInTreeTest, GetAncestorWorks) {
     EXPECT_EQ(1, query.getAncestor(8, 3));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

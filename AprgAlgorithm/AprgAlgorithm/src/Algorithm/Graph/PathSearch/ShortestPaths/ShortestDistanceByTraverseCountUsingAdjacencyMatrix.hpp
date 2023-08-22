@@ -5,9 +5,7 @@
 #include <Common/Math/Number/AlbaNumber.hpp>
 #include <Common/Math/Number/AlbaNumberConstants.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename Weight, typename EdgeWeightedGraph>
 class ShortestDistanceByTraverseCountUsingAdjacencyMatrix {
@@ -99,7 +97,5 @@ private:
 
     DistancetMatrix m_shortestDistanceMatrix;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

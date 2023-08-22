@@ -66,4 +66,4 @@ TEST(EulerPathSearchForUndirectedGraphUsingDfsTest, GetEulerCycleAndPathWorksOnE
     testGetEulerCycleAndPathWorksOnExample2<PathSearchForTest, GraphForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

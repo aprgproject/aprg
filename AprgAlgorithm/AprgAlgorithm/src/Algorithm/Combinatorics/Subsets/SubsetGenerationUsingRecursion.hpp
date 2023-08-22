@@ -2,9 +2,7 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Objects>
 class SubsetGenerationUsingRecursion {
@@ -78,7 +76,5 @@ private:
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

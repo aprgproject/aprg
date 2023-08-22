@@ -32,4 +32,4 @@ TEST(ReservoirSamplingTest, GetReservoirSamplingWorksOnExample3) {
     EXPECT_NE((Samples{}), reservoirSampling.getSamples(values.begin().operator->(), values.size(), 5));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

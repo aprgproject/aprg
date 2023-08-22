@@ -168,4 +168,4 @@ TEST(
     EXPECT_EQ(43, search.getHigherValue());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

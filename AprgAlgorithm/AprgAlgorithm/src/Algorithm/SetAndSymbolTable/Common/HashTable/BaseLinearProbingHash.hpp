@@ -7,9 +7,7 @@
 #include <memory>
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <
     typename KeyTemplateType, typename EntryTemplateType, typename HashFunction, typename OrderedArray,
@@ -22,7 +20,7 @@ public:
     using EntryUniquePointer = std::unique_ptr<Entry>;
     using EntryPointers = EntryUniquePointer*;
 
-    BaseLinearProbingHash() : m_size(0), m_hashTableSize(), m_entryPointers(nullptr) {
+    BaseLinearProbingHash() :  m_entryPointers(nullptr) {
         initialize(INITIAL_HASH_TABLE_SIZE);
     }
 
@@ -103,8 +101,9 @@ public:
 
     void deleteBasedOnKey(Key const& key) override {
         int i(getHash(key));
-        for (; m_entryPointers[i] && m_entryPointers[i]->key != key; incrementHashTableIndexWithWrapAround(i))
+        for (; m_entryPointers[i] && m_entryPointers[i]->key != key; incrementHashTableIndexWithWrapAround(i)) {
             ;
+}
         if (m_entryPointers[i] && m_entryPointers[i]->key == key) {
             deleteEntryOnIndex(i);
             incrementHashTableIndexWithWrapAround(i);
@@ -206,14 +205,12 @@ protected:
     void incrementHashTableIndexWithWrapAround(int& index) const { index = (index + 1) % m_hashTableSize; }
 
     static constexpr int INITIAL_HASH_TABLE_SIZE = 1;
-    int m_size;
-    int m_hashTableSize;
+    int m_size{0};
+    int m_hashTableSize{};
     EntryPointers m_entryPointers;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // General hashing notes:
 // Basic plan: Save items in a key-indexed table (index is a function of the key)

@@ -4,9 +4,7 @@
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class InterpolationNearestValueSearch {
@@ -110,7 +108,7 @@ private:
                     m_lowIndex = interpolatedIndex;
                     m_highIndex = interpolatedIndex;
                     break;
-                } else if (target > valueAtInterpolatedIndex) {
+                } if (target > valueAtInterpolatedIndex) {
                     m_lowIndex = interpolatedIndex;
                 } else if (target < valueAtInterpolatedIndex) {
                     m_highIndex = interpolatedIndex;
@@ -123,7 +121,5 @@ private:
     Index m_highIndex;
     Values const& m_sortedValues;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

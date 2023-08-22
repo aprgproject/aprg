@@ -148,4 +148,4 @@ TEST(RWayTrieUsingMatrixTest, DISABLED_AssertionWorksWhenNodeIdsReachesMaximumSi
     EXPECT_DEATH(trie.put("se", 100), "Assertion failed!");
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

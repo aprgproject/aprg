@@ -39,4 +39,4 @@ TEST(FixedSizeCircularQueueTest, DISABLED_PushWorksWithAssertionWhenItReachesMax
     EXPECT_DEATH(queue.enqueue(100), "Assertion failed!");
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

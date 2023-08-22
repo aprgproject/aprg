@@ -91,4 +91,4 @@ TEST(
     EXPECT_EQ(4, search.getIndexOfNearestValue(1, 8, 33));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

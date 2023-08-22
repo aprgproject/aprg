@@ -3,9 +3,7 @@
 #include <Algorithm/Graph/UndirectedGraph/BaseUndirectedGraph.hpp>
 #include <Algorithm/Graph/Utilities/CheckableVertices.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex>
 class CountPathsInUndirectedGraph {
@@ -54,7 +52,5 @@ private:
     BaseUndirectedGraphWithVertex const& m_graph;
     VertexPairToCountMap m_pathCounts;  // dynamic programming
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

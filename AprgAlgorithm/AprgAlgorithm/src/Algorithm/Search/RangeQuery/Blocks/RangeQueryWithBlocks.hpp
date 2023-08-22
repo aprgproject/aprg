@@ -5,9 +5,7 @@
 #include <algorithm>
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values, typename BlockValues>
 class RangeQueryWithBlocks {
@@ -38,7 +36,7 @@ public:
         Values const& valuesToCheck, Index const suggestedNumberOfBlocks, ValuesFunction const& valuesFunction,
         BlockValuesFunction const& blockValuesFunction)
         : m_values(valuesToCheck),
-          m_blockSize(0),
+          
           m_blocks(),
           m_valuesFunction(valuesFunction),
           m_blockValuesFunction(blockValuesFunction) {
@@ -110,12 +108,10 @@ protected:
     }
 
     Values m_values;
-    Index m_blockSize;
+    Index m_blockSize{0};
     BlockValues m_blocks;
     ValuesFunction m_valuesFunction;
     BlockValuesFunction m_blockValuesFunction;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

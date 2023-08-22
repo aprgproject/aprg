@@ -47,4 +47,4 @@ TEST(PermutationsGenerationTest, GeneratePermutationsBySwappingInRangeWorks) {
     EXPECT_EQ(expectedPermutations, actualPermutations);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

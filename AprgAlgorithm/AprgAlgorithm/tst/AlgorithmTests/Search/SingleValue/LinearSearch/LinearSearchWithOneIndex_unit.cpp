@@ -49,4 +49,4 @@ TEST(LinearSearchWithOneIndexTest, GetIndexOfValueWithIndicesWorksWhenValueIsFou
     testGetIndexOfValueWithIndicesWhenValueIsFoundWithUnsortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

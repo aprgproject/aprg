@@ -75,4 +75,4 @@ TEST(PigeonHoleSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingOneValueExam
     EXPECT_EQ(expectedOneCharacter, oneCharacter);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

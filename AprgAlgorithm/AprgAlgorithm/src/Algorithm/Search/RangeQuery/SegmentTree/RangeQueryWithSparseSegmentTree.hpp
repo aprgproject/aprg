@@ -6,9 +6,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Value>
 class RangeQueryWithSparseSegmentTree {
@@ -38,7 +36,7 @@ public:
 
     RangeQueryWithSparseSegmentTree(
         Index const numberOfValues, Value const& defaultValue, Function const& functionObject)
-        : m_maxChildrenIndex(0),
+        : 
           m_numberOfValues(numberOfValues),
           m_defaultValue(defaultValue),
           m_function(functionObject) {
@@ -131,13 +129,11 @@ protected:
         }
     }
 
-    Index m_maxChildrenIndex;
+    Index m_maxChildrenIndex{0};
     Index const m_numberOfValues;
     Value const m_defaultValue;
     Function m_function;
     NodePointer m_root;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

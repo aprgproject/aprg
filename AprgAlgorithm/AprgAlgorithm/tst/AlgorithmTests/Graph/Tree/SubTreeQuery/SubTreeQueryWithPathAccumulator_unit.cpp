@@ -36,4 +36,4 @@ TEST(SubTreeQueryWithPathAccumulatorTest, Example1Works) {
     EXPECT_EQ(12, subTreeQuery.getAccumulatedValueOfPathThatStartsAtTopAndEndsAt(7));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

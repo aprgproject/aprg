@@ -4,9 +4,7 @@
 
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class BitonicSorter : public BaseSorter<Values> {
@@ -29,8 +27,6 @@ public:
         }
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

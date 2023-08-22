@@ -7,9 +7,7 @@
 #include <algorithm>
 #include <queue>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename Weight, typename EdgeWeightedGraph>
 class PrimAlgorithmEagerVersion {
@@ -155,7 +153,5 @@ private:
 // If the input graph is represented using adjacency list,
 // then the time complexity of Prim’s algorithm can be reduced to O(E log V) with the help of binary heap.
 // NOTE: This is roughly the same as Kruskal algorithm.
-
-}  // namespace algorithm
 
 }  // namespace alba

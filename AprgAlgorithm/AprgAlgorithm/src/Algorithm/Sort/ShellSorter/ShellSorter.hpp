@@ -4,9 +4,7 @@
 
 #include <utility>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class ShellSorter : public BaseSorter<Values>  // This is invented by Shell in 1959
@@ -49,8 +47,6 @@ private:
         return result;
     }
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

@@ -253,4 +253,4 @@ TEST(TernarySearchTrieSubstringsSetTest, DeleteBasedOnKeyWhenEmptyStringHasNoEff
     EXPECT_EQ(0, trie.getNumberOfNodes());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -5,9 +5,7 @@
 
 #include <array>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, int MAX_VERTEX_VALUE>
 class DirectedGraphWithAdjacencyMatrix : public BaseDirectedGraph<Vertex> {
@@ -16,7 +14,7 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using AdjacencyMatrix = matrix::AlbaMatrix<bool>;
 
-    DirectedGraphWithAdjacencyMatrix() : m_numberOfEdges(0), m_adjacencyMatrix(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE) {}
+    DirectedGraphWithAdjacencyMatrix() :  m_adjacencyMatrix(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE) {}
 
     bool isEmpty() const override { return m_numberOfEdges == 0; }
 
@@ -113,10 +111,8 @@ protected:
         return out;
     }
 
-    int m_numberOfEdges;
+    int m_numberOfEdges{0};
     AdjacencyMatrix m_adjacencyMatrix;  // vertex by adjacent matrix
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

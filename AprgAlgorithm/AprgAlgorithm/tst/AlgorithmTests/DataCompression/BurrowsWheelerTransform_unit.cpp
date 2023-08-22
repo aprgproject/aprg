@@ -56,4 +56,4 @@ TEST(BurrowsWheelerTransformTest, DecodeWorksUsingExample2) {
     EXPECT_EQ("ABRACADABRA!", outputSs.str());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

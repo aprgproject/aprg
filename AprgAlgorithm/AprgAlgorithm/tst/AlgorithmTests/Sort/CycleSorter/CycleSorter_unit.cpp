@@ -65,4 +65,4 @@ TEST(CycleSorterTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample1) 
         sorter);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

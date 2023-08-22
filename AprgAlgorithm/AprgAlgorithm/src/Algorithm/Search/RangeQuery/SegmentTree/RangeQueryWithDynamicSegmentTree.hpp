@@ -6,9 +6,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class RangeQueryWithDynamicSegmentTree {
@@ -26,7 +24,7 @@ public:
     using NodePointer = std::unique_ptr<Node>;
 
     RangeQueryWithDynamicSegmentTree(Values const& valuesToCheck, Function const& functionObject)
-        : m_maxChildrenIndex(0), m_numberOfValues(valuesToCheck.size()), m_function(functionObject) {
+        :  m_numberOfValues(valuesToCheck.size()), m_function(functionObject) {
         initialize(valuesToCheck);
     }
 
@@ -138,12 +136,10 @@ protected:
         }
     }
 
-    Index m_maxChildrenIndex;
+    Index m_maxChildrenIndex{0};
     Index const m_numberOfValues;
     Function m_function;
     NodePointer m_root;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm

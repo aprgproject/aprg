@@ -4,11 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
-
-namespace CommonTestsWithNearestValueSearch {
+namespace alba::algorithm::CommonTestsWithNearestValueSearch {
 
 // getNearestValue
 
@@ -151,8 +147,4 @@ void testGetIndexOfNearestValueWhenNearestValueIsHigherWithSortedUnsignedInts() 
     EXPECT_EQ(5, search.getIndexOfNearestValue(42));
 }
 
-}  // namespace CommonTestsWithNearestValueSearch
-
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm::CommonTestsWithNearestValueSearch

@@ -5,9 +5,7 @@
 #include <array>
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values, int MAX_NUMBER_OF_VALUES>
 class CountingSorterUsingNewPositions : public BaseSorter<Values> {
@@ -43,9 +41,7 @@ private:
     ValueToIndexableValueFunction m_valueToIndexableValueFunction;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Counting sort is a sorting technique based on keys between a specific range.
 

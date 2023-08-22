@@ -95,4 +95,4 @@ TEST(EdgeWeightedGraphTest, DisconnectWorksOnUndirectedGraph) {
     EXPECT_EQ(expectedEdgesToWeight, graph.getEdgeToWeightMap());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

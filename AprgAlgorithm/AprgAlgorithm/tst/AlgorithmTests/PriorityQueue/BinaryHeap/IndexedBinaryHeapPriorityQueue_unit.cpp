@@ -273,4 +273,4 @@ TEST(IndexedBinaryHeapPriorityQueueTest, ChangeWorksWhenObjectDoesNotExist) {
     EXPECT_EQ(expectedObjectIndexToTreeIndex, indexedPq.getObjectIndexToTreeIndex());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

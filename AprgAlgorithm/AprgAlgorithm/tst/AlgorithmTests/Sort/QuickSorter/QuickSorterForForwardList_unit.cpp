@@ -65,4 +65,4 @@ TEST(QuickSorterForForwardListTest, SortWorksAsNotStableOnStabilityCheckObjectsU
         sorter);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

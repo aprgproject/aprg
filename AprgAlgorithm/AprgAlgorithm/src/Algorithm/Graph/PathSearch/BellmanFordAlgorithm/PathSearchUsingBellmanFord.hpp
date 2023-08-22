@@ -6,9 +6,7 @@
 #include <Algorithm/Graph/Utilities/CheckableVertices.hpp>
 #include <Algorithm/Graph/Utilities/GraphUtilitiesHeaders.hpp>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Vertex, typename Weight, typename EdgeWeightedGraph, template <class> class ComparatorTemplateType>
 class PathSearchUsingBellmanFord
@@ -26,8 +24,8 @@ public:
         : BaseClass(graph, startVertex),
           b_graph(BaseClass::m_graph),
           b_startVertex(BaseClass::m_startVertex),
-          b_vertexToEdgeWithBestWeightMap(BaseClass::m_vertexToEdgeWithBestWeightMap),
-          m_hasPositiveOrNegativeCycle(false) {
+          b_vertexToEdgeWithBestWeightMap(BaseClass::m_vertexToEdgeWithBestWeightMap)
+          {
         // searchForPathUsingOriginalBellmanFord(); // this is inefficient because of manual cycle detection
         searchForPathUsingAutomaticCycleDetection();
     }
@@ -121,12 +119,10 @@ private:
     Graph const& b_graph;
     Vertex const& b_startVertex;
     VertexToEdgeOrderedByWeightMap& b_vertexToEdgeWithBestWeightMap;
-    bool m_hasPositiveOrNegativeCycle;
+    bool m_hasPositiveOrNegativeCycle{false};
     DequeOfVertices m_verticesToProcess;  // SPFA ("Shortest Path Faster Algorithm") improvement
     CheckableVertices<Vertex> m_checkableVerticesToProcess;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

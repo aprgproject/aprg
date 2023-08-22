@@ -38,4 +38,4 @@ TEST(LaplaceanMatrixTest, CreateLaplaceanMatrixWorksWithDirectedGraph) {
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -86,4 +86,4 @@ TEST(DoublingSizeCircularQueueTest, DISABLED_DequeueWorksWithAssertionWhenItsEmp
     testDequeueAssertionWhenEmptyWithInt<QueueForTest>();
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

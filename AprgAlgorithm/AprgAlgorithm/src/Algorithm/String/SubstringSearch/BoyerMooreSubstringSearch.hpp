@@ -5,9 +5,7 @@
 #include <array>
 #include <string>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Index>
 class BoyerMooreSubstringSearch {
@@ -18,10 +16,10 @@ public:
     static constexpr Index INVALID_POSITION = -1;
     using SkipTable = std::array<Index, RADIX>;
 
-    BoyerMooreSubstringSearch(std::string const& query) : m_query(query), m_rightMostLetterIndex{} { initialize(); }
+    BoyerMooreSubstringSearch(std::string const& query) : m_query(query) { initialize(); }
 
     Index search(std::string const& searchSpace) const {
-        Index result(static_cast<Index>(std::string::npos));
+        auto result(static_cast<Index>(std::string::npos));
         Index searchSpaceLength(searchSpace.length());
         Index queryLength(m_query.length());
         int skipValue(0);
@@ -68,10 +66,8 @@ private:
     }
 
     std::string m_query;
-    SkipTable m_rightMostLetterIndex;
+    SkipTable m_rightMostLetterIndex{};
 };
-
-}  // namespace algorithm
 
 }  // namespace alba
 

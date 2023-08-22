@@ -4,9 +4,7 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename Values>
 class MedianOfSmallerSizes {
@@ -82,7 +80,5 @@ private:
     Index m_medianSize;
     MedianValues m_sortedValuesInHalf;
 };
-
-}  // namespace algorithm
 
 }  // namespace alba

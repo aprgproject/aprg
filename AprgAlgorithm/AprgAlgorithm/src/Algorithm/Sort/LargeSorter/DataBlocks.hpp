@@ -8,9 +8,7 @@
 #include <algorithm>
 #include <functional>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <typename ObjectToSort>
 class DataBlocks {
@@ -24,8 +22,8 @@ public:
         AlbaLargeSorterConfiguration const& configuration, BlockCache& memoryCache, BlockCache& fileStreamOpenedCache)
         : m_configuration(configuration),
           m_memoryCache(memoryCache),
-          m_fileStreamOpenedCache(fileStreamOpenedCache),
-          m_numberOfBlocks(0) {
+          m_fileStreamOpenedCache(fileStreamOpenedCache)
+          {
         initializeDataBlocks();
     }
     bool isEmpty() const {
@@ -63,7 +61,7 @@ public:
         bool const isMainIteratorDeleted = m_mainIterator == iteratorOfBlockToErase;
         m_memoryCache.deleteBlock(iteratorOfBlockToErase->getBlockId());
         m_fileStreamOpenedCache.deleteBlock(iteratorOfBlockToErase->getBlockId());
-        BlockIterator newIterator = m_blocks.erase(iteratorOfBlockToErase);
+        auto newIterator = m_blocks.erase(iteratorOfBlockToErase);
         if (isMainIteratorDeleted) {
             m_mainIterator = newIterator;
         }
@@ -113,11 +111,9 @@ private:
     AlbaLargeSorterConfiguration const& m_configuration;
     BlockCache& m_memoryCache;
     BlockCache& m_fileStreamOpenedCache;
-    int m_numberOfBlocks;
+    int m_numberOfBlocks{0};
     BlockContainer m_blocks;
     BlockIterator m_mainIterator;
 };
 
-}  // namespace algorithm
-
-}  // namespace alba
+}  // namespace alba::algorithm
