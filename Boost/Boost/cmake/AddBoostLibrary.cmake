@@ -33,6 +33,6 @@ if(Boost_FOUND)
 else()
     message(
         WARNING
-            "The cmake cannot find boost. Please set Boost_DEBUG to ON for more info. Try checking: FindBoost.cmake to investigate further."
+            "The cmake cannot find boost. Try checking: FindBoost.cmake to investigate further."
     )
 endif()

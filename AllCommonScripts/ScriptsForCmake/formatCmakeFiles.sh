@@ -49,10 +49,12 @@ find "$aprgDirectory" -depth -type f -wholename "$searchCondition" | while read 
         formatCmakeFile "$aprgCmakeFile"
     done
     aprgCmakeIncludeDirectory=$(realpath "$aprgProjectDirectory/../AprgCmakeInclude") 
-    scriptPrint "$scriptName" "$LINENO" "Searching in AprgCmakeInclude directory: [$aprgCmakeIncludeDirectory]"
-    find "$aprgCmakeIncludeDirectory" -depth -type f \( -name "CMakeLists.txt" -o -name "*.cmake" \) | while read -r aprgCmakeFile; do
-        formatCmakeFile "$aprgCmakeFile"
-    done
+    if [ -d "$aprgCmakeIncludeDirectory" ]; then
+        scriptPrint "$scriptName" "$LINENO" "Searching in AprgCmakeInclude directory: [$aprgCmakeIncludeDirectory]"
+        find "$aprgCmakeIncludeDirectory" -depth -type f \( -name "CMakeLists.txt" -o -name "*.cmake" \) | while read -r aprgCmakeFile; do
+            formatCmakeFile "$aprgCmakeFile"
+        done
+    fi
 done
 
 scriptPrint "$scriptName" "$LINENO" "All C/C++ in the directory are processed."

@@ -19,7 +19,7 @@ if(APRG_ENABLE_STATIC_ANALYZERS)
     find_program(CLANG_TIDY_PROGRAM "clang-tidy")
     print_variable(CLANG_TIDY_PROGRAM)
     if(CLANG_TIDY_PROGRAM)
-        set(CLANG_TIDY_HEADER_REGEX "\'^.*\/${IMMEDIATE_DIRECTORY_NAME}.*\/\.(h|hpp)\$\'")
+        set(CLANG_TIDY_HEADER_REGEX "\'^.*\\\/${IMMEDIATE_DIRECTORY_NAME}\\\/.*\\.(h|hpp)\$\'")
         print_variable(CLANG_TIDY_HEADER_REGEX)
         # additional flags: --fix --warnings-as-errors=*;
 
