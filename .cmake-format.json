@@ -3,7 +3,7 @@
   "tab_size": 4,
   "enum_char": ".",
   "bullet_char": "*",
-  "command_case": "canonical",
+  "command_case": "lower",
   "keyword_case": "upper",
   "line_ending": "unix",
   "always_wrap": [],

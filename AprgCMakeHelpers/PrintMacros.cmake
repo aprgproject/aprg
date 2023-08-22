@@ -1,18 +1,17 @@
 # Printing Macros
 
-macro(PRINT_VARIABLE variable)
+macro(print_variable variable)
     message(STATUS "VARIABLE: [${variable}] contains: [${${variable}}]")
 endmacro()
 
-macro(PRINT_STATUS message)
+macro(print_status message)
     message(STATUS "STATUS: [${message}]")
 endmacro()
 
-macro(PRINT_WARNING message)
+macro(print_warning message)
     message(WARNING "WARNING: [${message}]")
 endmacro()
 
-macro(PRINT_ERROR message)
+macro(print_error message)
     message(FATAL_ERROR "FATAL_ERROR: [${message}]")
 endmacro()
-

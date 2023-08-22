@@ -1,6 +1,6 @@
 # Assign macros, common flags, definitions and other common steps
 
-# Macros 
+# Macros
 include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
 include(${APRG_DIR}/AprgCMakeHelpers/FileAndDirectoryMacros.cmake)
 

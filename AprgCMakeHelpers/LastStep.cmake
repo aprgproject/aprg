@@ -1,4 +1,4 @@
-#Print final variables
+# Print final variables
 message("Final CMAKE_BUILD_TYPE is: [${CMAKE_BUILD_TYPE}]")
 message("Final CMAKE_C_COMPILER is: [${CMAKE_C_COMPILER}]")
 message("Final CMAKE_CXX_COMPILER is: [${CMAKE_CXX_COMPILER}]")
