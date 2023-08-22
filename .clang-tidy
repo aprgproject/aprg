@@ -46,6 +46,7 @@ Checks: '
 #  readability-else-after-return,
 #  modernize-return-braced-init-list,
 #  modernize-use-auto,
+#  modernize-use-default-member-init,
 #'
 
 

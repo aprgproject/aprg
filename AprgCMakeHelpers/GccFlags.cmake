@@ -3,8 +3,8 @@
 # 1) add -fno-rtti in flags because we dont want to depend on type checking on runtime.
 # 2) No need to put -fno-exceptions. We allow exceptions, we just dont catch them.
 set(APRG_COMPILER_COMMON_FLAGS "-Wall -Wextra -pedantic")
-set(APRG_COMPILER_COMMON_C_FLAGS "-std=c17")
-set(APRG_COMPILER_COMMON_CPP_FLAGS "-std=c++17")
+set(APRG_COMPILER_COMMON_C_FLAGS "-std=c20")
+set(APRG_COMPILER_COMMON_CPP_FLAGS "-std=c++20")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG "") #set(APRG_COMPILER_FLAGS_FOR_DEBUG "-g --coverage -fno-rtti")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_SHOW_PREPROCESSING_RESULT "-E")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_RTTI "-g --coverage")

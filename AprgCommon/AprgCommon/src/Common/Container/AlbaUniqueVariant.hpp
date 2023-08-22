@@ -82,7 +82,7 @@ class UniqueVariant {
     using MaxSizeClass = typename detail::MaxSizeType<Types...>::type;
 
 public:
-    UniqueVariant<Types...>() : m_ptr(nullptr), m_typeId(0) { allocate(); }
+    UniqueVariant() { allocate(); }
 
     template <class T>
     T &acquire() {
@@ -93,7 +93,7 @@ public:
     }
 
     void clear() {
-        if (m_typeId) {
+        if (m_typeId > 0) {
             m_ptr->~VariantDataType();
         }
         m_typeId = 0;
@@ -139,8 +139,8 @@ private:
         return *static_cast<T *>(m_ptr);
     }
 
-    VariantDataType *m_ptr;
-    TypeId m_typeId;
+    VariantDataType *m_ptr{nullptr};
+    TypeId m_typeId{0};
 };
 
 }  // namespace alba

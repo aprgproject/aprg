@@ -6,6 +6,7 @@ using namespace std;
 
 namespace alba {
 
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
 mutex AlbaOldRandomizer::m_mutex;
 
 AlbaOldRandomizer::AlbaOldRandomizer() { resetRandomSeed(); }

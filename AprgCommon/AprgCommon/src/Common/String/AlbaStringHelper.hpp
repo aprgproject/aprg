@@ -165,6 +165,7 @@ constexpr bool isBasicStringVariant() {
     return typeHelper::areSameTypes<StringType, std::string_view>() ||
            typeHelper::areSameTypes<StringType, std::string>() ||
            typeHelper::areSameTypes<StringType, std::wstring>() ||
+           typeHelper::areSameTypes<StringType, std::u8string>() ||
            typeHelper::areSameTypes<StringType, std::u16string>() ||
            typeHelper::areSameTypes<StringType, std::u32string>();
 }

@@ -251,8 +251,8 @@ jobs:
           cppcheck --version
           clazy --version
           "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
-          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}  | tee "analyzerOutput.txt"
-          if grep -Pq "^.*$unquotedProject.* (style|warning|error): .*$" "analyzerOutput.txt"; then
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }} | grep -Pq "^.*$unquotedProject.* (style|warning|error): .*$" | tee "analyzerOutput.txt"
+          if  [ -s "analyzerOutput.txt" ]; then
             echo "Some problems found, exiting with error status."
             exit 1
           fi
