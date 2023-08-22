@@ -19,17 +19,17 @@ if(APRG_ENABLE_STATIC_ANALYZERS)
     find_program(CLANG_TIDY_PROGRAM "clang-tidy")
     print_variable(CLANG_TIDY_PROGRAM)
     if(CLANG_TIDY_PROGRAM)
-        set(CLANG_TIDY_HEADER_REGEX "\'^.*\\\/${IMMEDIATE_DIRECTORY_NAME}\\\/.*\\.(h|hpp)\$\'")
+        set(CLANG_TIDY_HEADER_REGEX ".*\\\/${IMMEDIATE_DIRECTORY_NAME}\\\/.*")
         print_variable(CLANG_TIDY_HEADER_REGEX)
         # additional flags: --fix --warnings-as-errors=*;
 
         # check only
-        #set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} "--header-filter=${CLANG_TIDY_HEADER_REGEX}")
-        #set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} "--header-filter=${CLANG_TIDY_HEADER_REGEX}")
+        set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} "--header-filter=${CLANG_TIDY_HEADER_REGEX}")
+        set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} "--header-filter=${CLANG_TIDY_HEADER_REGEX}")
 
         # auto fix
-        set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix "--header-filter=${CLANG_TIDY_HEADER_REGEX}")
-        set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix "--header-filter=${CLANG_TIDY_HEADER_REGEX}")
+        #set(CMAKE_C_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix "--header-filter=${CLANG_TIDY_HEADER_REGEX}")
+        #set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_PROGRAM} --fix "--header-filter=${CLANG_TIDY_HEADER_REGEX}")
 
         print_variable(CMAKE_C_CLANG_TIDY)
         print_variable(CMAKE_CXX_CLANG_TIDY)
