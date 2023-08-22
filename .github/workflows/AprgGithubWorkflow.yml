@@ -56,9 +56,7 @@ jobs:
           echo "checkShellScriptsPath: [$checkShellScriptsPath]"
           chmod +x "$checkShellScriptsPath"
           "$checkShellScriptsPath" | tee "shellCheckOutput.txt"
-          echo "shellCheckOutput:"
-          cat "shellCheckOutput.txt"
-          if grep -q ".*SC\d+ \((info|warning|error|style)\):.*" "shellCheckOutput.txt"; then
+          if grep -Pq "SC\d+ \((info|warning|error|style)\):" "shellCheckOutput.txt"; then
             echo "Some problems found, exiting with error status."
             exit 1
           fi
@@ -254,7 +252,7 @@ jobs:
           clazy --version
           "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}  | tee "analyzerOutput.txt"
-          if grep -q "^.*$unquotedProject.* (style|warning|error): .*$" "analyzerOutput.txt"; then
+          if grep -Pq "^.*$unquotedProject.* (style|warning|error): .*$" "analyzerOutput.txt"; then
             echo "Some problems found, exiting with error status."
             exit 1
           fi
