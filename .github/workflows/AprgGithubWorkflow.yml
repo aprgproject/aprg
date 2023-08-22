@@ -30,6 +30,7 @@ on:
 
 env:
   checkShellScriptsRelativePath: "AllCommonScripts/ScriptsForShellScripts/checkShellScripts.sh"
+  checkCmakeFilesRelativePath: "AllCommonScripts/ScriptsForCmake/checkCmakeFiles.sh"
   determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
   buildAndRunScriptRelativePath: "AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
   buildType: ${{ inputs.cppCMakeBuildType != '' && inputs.cppCMakeBuildType || 'Debug'}} # ternary operator
@@ -38,25 +39,41 @@ env:
 
 jobs:
 
-  shellcheck:
-    name: Perform shellcheck
+  lintChecks:
+    name: Perform lint checks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        
       - name: Install shellcheck on ubuntu/gcc
         run: |
           sudo apt-get update
-          sudo apt-get install shellcheck
-          shellcheck --version
-      - name: Run shellCheck on shell scripts
+          
+      - name: Perform checks for cmake files
         shell: bash
         run: |
+          sudo pip install cmakelang 
+          cmake-lint --version
+          checkCMakeFilesPath=$(realpath "$(pwd)/${{ env.checkCmakeFilesRelativePath }}")
+          echo "checkCMakeFilesPath: [$checkCMakeFilesPath]"
+          chmod +x "$checkCMakeFilesPath"
+          "$checkCMakeFilesPath" | grep -P "\[\w\d+\]" | tee "checkCmakeOutput.txt"
+          if  [ -s "checkCmakeOutput.txt" ]; then
+            echo "Some problems found, exiting with error status."
+            exit 1
+          fi
+          
+      - name: Perform checks for shell scripts
+        shell: bash
+        run: |
+          sudo apt-get install shellcheck
+          shellcheck --version
           checkShellScriptsPath=$(realpath "$(pwd)/${{ env.checkShellScriptsRelativePath }}")
           echo "checkShellScriptsPath: [$checkShellScriptsPath]"
           chmod +x "$checkShellScriptsPath"
-          "$checkShellScriptsPath" | tee "shellCheckOutput.txt"
-          if grep -Pq "SC\d+ \((info|warning|error|style)\):" "shellCheckOutput.txt"; then
+          "$checkShellScriptsPath" | grep -P "SC\d+ \((info|warning|error|style)\):" | tee "checkShellOutput.txt"
+          if  [ -s "checkShellOutput.txt" ]; then
             echo "Some problems found, exiting with error status."
             exit 1
           fi
@@ -251,7 +268,7 @@ jobs:
           cppcheck --version
           clazy --version
           "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
-          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }} | grep -Pq "^.*$unquotedProject.* (style|warning|error): .*$" | tee "analyzerOutput.txt"
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }} | grep -P "^.*$unquotedProject.* (style|warning|error): .*$" | tee "analyzerOutput.txt"
           if  [ -s "analyzerOutput.txt" ]; then
             echo "Some problems found, exiting with error status."
             exit 1
