@@ -3,9 +3,9 @@
   "tab_size": 4,
   "enum_char": ".",
   "bullet_char": "*",
-  "command_case": "lower",
+  "command_case": "canonical",
   "keyword_case": "upper",
-  "line_ending": "unix"
+  "line_ending": "unix",
   "always_wrap": [],
   "enable_markup": true,
   "dangle_parens": false,
@@ -14,6 +14,5 @@
   "separate_ctrl_name_with_space": false,
   "fence_pattern": "^\\s*([`~]{3}[`~]*)(.*)$",
   "ruler_pattern": "^\\s*[^\\w\\s]{3}.*[^\\w\\s]{3}$",
-  "max_subargs_per_line": 5,
-  "literal_comment_pattern": null,
+  "literal_comment_pattern": null
 }
