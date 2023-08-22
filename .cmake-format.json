@@ -13,21 +13,7 @@
     "always_wrap": [],
     "dangle_parens": false,
     "separate_fn_name_with_space": false,
-    "separate_ctrl_name_with_space": false,
-    "autosort": false,
-    "dangle_align": "child",
-    "disable": false,
-    "enable_sort": false,
-    "fractional_tab_policy": "use-space",
-    "layout_passes": {},
-    "max_lines_hwrap": 2,
-    "max_pargs_hwrap": 6,
-    "max_prefix_chars": 10,
-    "max_rows_cmdline": 2,
-    "max_subgroups_hwrap": 4,
-    "min_prefix_chars": 4,
-    "require_valid_layout": false,
-    "use_tabchars": false
+    "separate_ctrl_name_with_space": false
   },
   "markup": {
     "enable_markup": false,
