@@ -7,9 +7,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Index = int;
@@ -42,7 +40,5 @@ TEST(RunLengthEncodingCompressionTest, ExpandWorksUsingExample1) {
 
     EXPECT_EQ("0001FC07FF", getHexEquivalentOfCharacters(outputSs.str()));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

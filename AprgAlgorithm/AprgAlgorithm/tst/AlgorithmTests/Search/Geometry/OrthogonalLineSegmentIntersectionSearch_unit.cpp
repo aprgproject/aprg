@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using SearchForTest = OrthogonalLineSegmentIntersectionSearch<int>;
@@ -55,7 +53,5 @@ TEST(OrthogonalLineSegmentIntersectionSearchTest, GetIntersectingPointsWorksOnCo
     SearchForTest::Points pointsToExpect{{6, 5}, {9, 2}, {11, 7}, {11, 10}, {14, 5}};
     EXPECT_EQ(pointsToExpect, pointsToVerify);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithSearch;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -50,7 +48,5 @@ TEST(BinarySearchWithSkipTest, GetIndexOfValueWorksWhenValueIsLessThanTheHighest
 TEST(BinarySearchWithSkipTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereAreMultipleValues) {
     testGetIndexOfValueWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

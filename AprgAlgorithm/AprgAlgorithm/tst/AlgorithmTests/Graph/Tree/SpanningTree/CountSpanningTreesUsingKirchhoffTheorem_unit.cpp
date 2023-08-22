@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -22,7 +20,5 @@ TEST(CountSpanningTreesUsingKirchhoffTheoremTest, GetCountWorks) {
 
     EXPECT_EQ(3, CountTrees::getCount<5>(graph));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

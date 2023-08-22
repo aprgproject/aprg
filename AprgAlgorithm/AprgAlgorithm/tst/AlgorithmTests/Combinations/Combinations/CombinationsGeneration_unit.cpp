@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Objects = vector<int>;
@@ -27,7 +25,5 @@ TEST(CombinationsGenerationTest, GenerateCombinationsWithLengthWorksWhenCombinat
     Combinations expectedCombinations{{1, 3, 5}};
     EXPECT_EQ(expectedCombinations, actualCombinations);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

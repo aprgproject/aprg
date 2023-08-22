@@ -9,11 +9,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
-
-namespace GraphUtilities {
+namespace alba::algorithm::GraphUtilities {
 
 namespace {
 using VertexForTest = int;
@@ -463,9 +459,5 @@ TEST(GraphUtilitiesTest, GetEdgesOfMaximalConnectedSubgraphsWorks) {
     listOfEdgesToExpect.emplace_back(EdgesForTest{{9, 10}, {9, 11}, {9, 12}, {11, 12}});
     EXPECT_EQ(listOfEdgesToExpect, listOfEdgesToVerify);
 }
-
-}  // namespace GraphUtilities
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -59,7 +57,5 @@ TEST(NodeDisjointPathCoverTest, GetNodeDisjointPathCoverWorksOnExample2) {
     EXPECT_EQ(expectedPaths, nodeDisjointPathCover.getNodeDisjointPathCover(newSourceVertex, newSinkVertex));
     EXPECT_EQ(expectedEdges, nodeDisjointPathCover.getEdgesOfNodeDisjointPathCover(newSourceVertex, newSinkVertex));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

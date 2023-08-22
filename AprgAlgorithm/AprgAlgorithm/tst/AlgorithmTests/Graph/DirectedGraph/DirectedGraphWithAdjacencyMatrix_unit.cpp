@@ -7,9 +7,7 @@
 using namespace alba::algorithm::CommonTestsWithDirectedGraph;
 using namespace alba::stringHelper;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using GraphForTest = DirectedGraphWithAdjacencyMatrix<int, 13>;
@@ -125,7 +123,5 @@ TEST(DirectedGraphWithAdjacencyMatrixTest, OutputStreamOperatorWorks) {
         "-------------------------------------------------------------\n",
         convertToString(graph));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 TEST(LasVegasTest, GraphColoringExample) {
     // Given a graph that contains n nodes and m edges,
@@ -51,7 +49,5 @@ TEST(LasVegasTest, GraphColoringExample) {
 
     EXPECT_EQ(5U, vertexToColorMap.size());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

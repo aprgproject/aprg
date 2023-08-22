@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using TrieForTest = TernarySearchTrieSubstringsSet;
@@ -254,7 +252,5 @@ TEST(TernarySearchTrieSubstringsSetTest, DeleteBasedOnKeyWhenEmptyStringHasNoEff
     EXPECT_TRUE(trie.isEmpty());
     EXPECT_EQ(0, trie.getNumberOfNodes());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

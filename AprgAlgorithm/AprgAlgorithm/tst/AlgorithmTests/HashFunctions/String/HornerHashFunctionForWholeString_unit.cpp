@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using HashValue = uint64_t;
@@ -32,7 +30,5 @@ TEST(HornerHashFunctionForWholeStringTest, Example3Works) {
 
     EXPECT_EQ(1085070900ULL, hashFunction.getHashCode("AABRAACADABRAACAADABRA"));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

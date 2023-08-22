@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using InvertedMapForTest = InvertedMapForSymbolGraph<int, string>;
@@ -70,7 +68,5 @@ TEST(InvertedMapForSymbolGraphTest, ClearWorks) {
     EXPECT_TRUE(invertedMap.getObjectToVertexMap().empty());
     EXPECT_TRUE(invertedMap.getUnusedVertices().empty());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

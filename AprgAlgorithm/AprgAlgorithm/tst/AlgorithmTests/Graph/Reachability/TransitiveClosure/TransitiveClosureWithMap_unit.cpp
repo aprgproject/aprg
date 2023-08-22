@@ -6,9 +6,7 @@
 
 using namespace alba::algorithm::CommonTestsWithTransitiveClosure;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using GraphForTest = DirectedGraphWithListOfEdges<int>;
@@ -22,7 +20,5 @@ TEST(TransitiveClosureWithMapTest, IsReachableWorksWhenEmpty) {
 TEST(TransitiveClosureWithMapTest, IsReachableWorksWhenNotEmpty) {
     testIsReachableWhenNotEmptyWithVertexAsInt<ReachabilityForTest, GraphForTest>();
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

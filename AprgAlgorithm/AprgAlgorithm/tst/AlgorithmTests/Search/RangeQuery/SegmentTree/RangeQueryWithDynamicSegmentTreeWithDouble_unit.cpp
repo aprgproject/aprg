@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<double>;
@@ -72,7 +70,5 @@ TEST(RangeQueryWithDynamicSegmentTreeTest, ChangeValueAtIndexWithGeometricSumWor
     EXPECT_DOUBLE_EQ(18, geometricSumRangeQuery.getValueOnInterval(3, 4));
     EXPECT_DOUBLE_EQ(6, geometricSumRangeQuery.getValueOnInterval(4, 4));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

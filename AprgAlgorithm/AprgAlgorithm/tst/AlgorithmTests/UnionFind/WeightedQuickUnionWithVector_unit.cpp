@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithUnionFind;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using UnionFindForTest = WeightedQuickUnionWithVector<int>;
@@ -127,7 +125,5 @@ TEST(WeightedQuickUnionWithVectorTest, GetSizesOfRootsVectorWorks) {
     UnionFindForTest::SizeVector expectedRelativeRootVector{1, 1, 2, 1, 4, 1, 2, 1, 1, 1, 1, 1, 1};
     EXPECT_EQ(expectedRelativeRootVector, unionFind.getSizesOfRootsVector());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

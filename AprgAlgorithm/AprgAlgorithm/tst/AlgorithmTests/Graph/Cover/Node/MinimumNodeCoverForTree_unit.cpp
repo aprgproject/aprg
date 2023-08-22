@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -43,7 +41,5 @@ TEST(MinimumNodeCoverForTreeTest, GetMinimumNodeCoverWorksOnExample2) {
     EXPECT_EQ(4, minimumNodeCover.getMinimumNodeCoverSize());
     EXPECT_EQ((SetOfVertices{1, 2, 4, 7}), minimumNodeCover.getMinimumNodeCover());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

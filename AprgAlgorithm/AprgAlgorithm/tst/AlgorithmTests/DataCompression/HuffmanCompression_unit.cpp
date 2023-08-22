@@ -7,9 +7,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using CompressionForTest = HuffmanCompression<int>;
@@ -65,7 +63,5 @@ TEST(HuffmanCompressionTest, ExpandWorksUsingExample2) {
 
     EXPECT_EQ("it was the best of times it was the worst of times", outputSs.str());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

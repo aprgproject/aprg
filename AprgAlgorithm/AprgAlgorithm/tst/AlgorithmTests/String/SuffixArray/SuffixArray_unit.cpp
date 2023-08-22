@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using SuffixArrayForTest = SuffixArray<int>;
@@ -54,7 +52,5 @@ TEST(SuffixArrayTest, GetLongestCommonPrefixOfTwoSuffixesWorks) {
     EXPECT_TRUE(suffixArray.getLongestCommonPrefixOfTwoSuffixes(5, 6).empty());
     EXPECT_EQ("e", suffixArray.getLongestCommonPrefixOfTwoSuffixes(7, 8));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

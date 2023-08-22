@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithSymbolTable;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using SymbolTableForTest = UnorderedLinkedListSymbolTable<int, char>;
@@ -73,7 +71,5 @@ TEST(UnorderedLinkedListSymbolTableTest, GetKeys) { testGetKeysWithUnsignedIntAn
 TEST(UnorderedLinkedListSymbolTableTest, GetKeysInRangeWorks) {
     testGetKeysInRangeInclusiveWithUnsignedIntAndChar<SymbolTableForTest>();
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -43,7 +41,5 @@ TEST(WalkInSuccessorGraphTest, WalkWorksOnExample2) {
     EXPECT_EQ(5, walkPaths.walk(4, 3));
     EXPECT_EQ(2, walkPaths.walk(4, 4));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

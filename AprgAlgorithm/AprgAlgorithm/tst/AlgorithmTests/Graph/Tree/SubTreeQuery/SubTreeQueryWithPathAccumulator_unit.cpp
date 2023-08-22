@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -37,7 +35,5 @@ TEST(SubTreeQueryWithPathAccumulatorTest, Example1Works) {
     EXPECT_EQ(9, subTreeQuery.getAccumulatedValueOfPathThatStartsAtTopAndEndsAt(6));
     EXPECT_EQ(12, subTreeQuery.getAccumulatedValueOfPathThatStartsAtTopAndEndsAt(7));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

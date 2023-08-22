@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using AlphabetForTest = Alphabet<uint8_t>;
@@ -73,7 +71,5 @@ TEST(AlphabetsTest, GetCharactersWorks) {
 
     EXPECT_EQ("ABCDEF", alphabet.getCharacters());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

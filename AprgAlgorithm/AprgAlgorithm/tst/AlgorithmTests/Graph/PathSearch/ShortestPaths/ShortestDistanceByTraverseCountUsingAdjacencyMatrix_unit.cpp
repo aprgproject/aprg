@@ -5,9 +5,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -82,7 +80,5 @@ TEST(ShortestDistanceByTraverseCountUsingAdjacencyMatrixTest, GetShortestDistanc
     EXPECT_DOUBLE_EQ(INFINITY, shortestPaths.getShortestDistance(1, 6));
     EXPECT_DOUBLE_EQ(8, shortestPaths.getShortestDistance(2, 5));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -24,7 +22,5 @@ TEST(FourSumTest, GetPossibleDuplicatedFourValuesWithSumWorksOnExample1) {
     FourValuesForTest fourValuesToExpect{1, 1, 7, 9};
     EXPECT_EQ(fourValuesToExpect, fourValuesToVerify);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

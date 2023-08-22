@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -180,7 +178,5 @@ TEST(VertexOrderingUsingDfsTest, GetVerticesInTopologicalOrderWithDagCheckingWor
     VerticesForTest expectedPathFromAllVertices{8, 7, 2, 3, 0, 6, 9, 11, 12, 10, 5, 4, 1};
     EXPECT_EQ(expectedPathFromAllVertices, pathFromAllVertices);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

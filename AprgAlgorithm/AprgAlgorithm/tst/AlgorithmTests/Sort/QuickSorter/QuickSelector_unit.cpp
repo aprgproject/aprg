@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithSelector;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Characters = vector<char>;
@@ -75,7 +73,5 @@ TEST(QuickSelectorTest, DoNthElementWorksOnCharactersUsingExample1WithPivotWithV
     Characters valuesToExpect{'E', 'L', 'A', 'E', 'M', 'O', 'P', 'R', 'X', 'S', 'T'};
     EXPECT_EQ(valuesToExpect, valuesToSort);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

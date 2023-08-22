@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Index = int;
@@ -19,7 +17,5 @@ TEST(RegularExpressionPatternMatchingTest, SearchWorksUsingExample1) {
     EXPECT_TRUE(patternMatching.isAMatch("AABD"));
     EXPECT_FALSE(patternMatching.isAMatch("DDD"));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 Alphabet<uint8_t> getBinaryAlphabet() { return Alphabet<uint8_t>("01"); }
@@ -73,7 +71,5 @@ TEST(KnownAlphabetsTest, GetUpperCaseAlphabetWorks) {
 
     EXPECT_EQ("ABCDEFGHIJKLMNOPQRSTUVWXYZ", alphabet.getCharacters());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

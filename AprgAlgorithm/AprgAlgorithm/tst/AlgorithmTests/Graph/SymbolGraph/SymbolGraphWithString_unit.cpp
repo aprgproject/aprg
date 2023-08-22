@@ -8,9 +8,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 InvertedMapForSymbolGraph<int, string> invertedMap;
@@ -128,7 +126,5 @@ TEST(SymbolGraphWithStringTest, DisconnectWorks) {
     EXPECT_EQ(expectedEdges, symbolGraph.getGraph().getEdges());
     EXPECT_EQ(expectedSymbolTable, symbolGraph.getSymbolTable());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

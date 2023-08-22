@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -201,7 +199,5 @@ TEST(PathSearchUsingBellmanFordTest, GetPathToWorksWithEdgeWeightedDirectedGraph
     EXPECT_EQ(PathForTest({0, 4, 5, 7}), pathSearch.getPathTo(7));
     EXPECT_EQ(PathForTest(), pathSearch.getPathTo(8));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

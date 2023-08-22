@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -46,7 +44,5 @@ TEST(RangeQueryWithBlocksWithMultipleRequestsTest, GetInputAndOutputPairsUsingMo
                                              {{0, 8}, 38}, {{3, 4}, 14}, {{4, 4}, 6}};
     EXPECT_EQ(expectedPairs, sumRangeQuery.getInputAndOutputPairsUsingMoAlgorithm(inputRanges));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

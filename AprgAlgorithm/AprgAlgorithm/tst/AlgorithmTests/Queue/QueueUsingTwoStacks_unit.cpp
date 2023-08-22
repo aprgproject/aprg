@@ -7,9 +7,7 @@
 using namespace alba::algorithm::CommonTestsWithQueue;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using QueueForTest = QueueUsingTwoStacks<int, DoublingSizeStack<int>>;
@@ -31,7 +29,5 @@ TEST(QueueUsingTwoStacksTest, DequeueWorks) { testDequeueWithInt<QueueForTest>()
 TEST(QueueUsingTwoStacksTest, DISABLED_DequeueWorksWithAssertionWhenItsEmpty) {
     testDequeueAssertionWhenEmptyWithInt<QueueForTest>();
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

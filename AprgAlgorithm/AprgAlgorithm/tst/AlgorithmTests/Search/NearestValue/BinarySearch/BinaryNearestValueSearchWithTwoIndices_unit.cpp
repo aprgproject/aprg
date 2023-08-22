@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithNearestValueSearch;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -169,7 +167,5 @@ TEST(
     EXPECT_EQ(33, search.getLowerValue());
     EXPECT_EQ(43, search.getHigherValue());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -29,7 +27,5 @@ TEST(AncestorsInTreeTest, GetAncestorWorks) {
     EXPECT_EQ(4, query.getAncestor(8, 2));
     EXPECT_EQ(1, query.getAncestor(8, 3));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

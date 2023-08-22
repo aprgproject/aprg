@@ -5,9 +5,7 @@
 using namespace alba::algorithm::IndexedBinaryHeapPriorityQueueConstants;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 // less leads to Max Priority Queue same as in c++ standard
@@ -274,7 +272,5 @@ TEST(IndexedBinaryHeapPriorityQueueTest, ChangeWorksWhenObjectDoesNotExist) {
     EXPECT_EQ(expectedTreeIndexToObjectIndex, indexedPq.getTreeIndexToObjectIndex());
     EXPECT_EQ(expectedObjectIndexToTreeIndex, indexedPq.getObjectIndexToTreeIndex());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithTries;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using TrieForTest = RWayTrieUsingMatrix<int, 50>;
@@ -149,7 +147,5 @@ TEST(RWayTrieUsingMatrixTest, DISABLED_AssertionWorksWhenNodeIdsReachesMaximumSi
 
     EXPECT_DEATH(trie.put("se", 100), "Assertion failed!");
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using BagForTest = LinkedListBag<int>;
@@ -71,7 +69,5 @@ TEST(LinkedListBagTest, AddWorks) {
         i++;
     });
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

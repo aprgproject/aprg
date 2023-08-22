@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithSet;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using SetForTest = AvlBinarySearchTreeSet<int>;
@@ -180,7 +178,5 @@ TEST(AvlBinarySearchTreeSetTest, AfterDeletionOfMaximumTheTreeIsStillBalanced) {
     EXPECT_EQ(expectedBeforeDelete, actualBeforeDelete);
     EXPECT_EQ(expectedAfterDelete, actualAfterDelete);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

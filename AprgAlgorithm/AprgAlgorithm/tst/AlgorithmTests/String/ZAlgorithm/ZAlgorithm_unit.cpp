@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ZAlgorithmForTest = ZAlgorithm<int>;
@@ -30,7 +28,5 @@ TEST(ZAlgorithmTest, GetPrefixLengthsUsingTheZAlgorithmWorksWithExample3) {
 
     EXPECT_EQ(expectedIndexes, ZAlgorithmForTest::getPrefixLengthsUsingTheZAlgorithm("ACBACDACBACBACDA"));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

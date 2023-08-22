@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using SearchForTest = OrthogonalRectangleIntersectionSearch<double>;
@@ -35,7 +33,5 @@ TEST(OrthogonalRectangleIntersectionSearchTest, GetIntersectingPointsWorksOnComp
     SearchForTest::Rectangles rectanglesToExpect{{{0, -1}, {7, 1}}, {{2, 2}, {6, 4}}, {{3, 0}, {4, 5}}};
     EXPECT_EQ(rectanglesToExpect, rectanglesToVerify);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -34,7 +32,5 @@ TEST(ThreeSumTest, GetPossibleDuplicatedThreeValuesWithSumWorksOnExample1) {
     ThreeValuesForTest threeValuesToExpect{10, 10, 10};
     EXPECT_EQ(threeValuesToExpect, threeValuesToVerify);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

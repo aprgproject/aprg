@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ContainerForTest = vector<char>;
@@ -65,7 +63,5 @@ TEST(BinaryHeapAdapterTest, SinkWorksOnExample2) {
     ContainerForTest objectsToExpect{'B', 'A'};
     EXPECT_EQ(objectsToExpect, objects);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 using ValuesForTest = vector<int>;
 using ReservoirSamplingForTest = ReservoirSampling<ValuesForTest>;
@@ -33,7 +31,5 @@ TEST(ReservoirSamplingTest, GetReservoirSamplingWorksOnExample3) {
 
     EXPECT_NE((Samples{}), reservoirSampling.getSamples(values.begin().operator->(), values.size(), 5));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

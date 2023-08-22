@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -80,7 +78,5 @@ TEST(RangeQueryWithSelectorTest, GetSelectedValueOnIntervalWithMaximumWorksOnExa
     EXPECT_EQ(8, maximumRangeQuery.getSelectedValueOnInterval(3, 6));
     EXPECT_EQ(8, maximumRangeQuery.getSelectedValueOnInterval(2, 4));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

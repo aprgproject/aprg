@@ -7,9 +7,7 @@
 using namespace alba::algorithm::CommonTestsWithSorter;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Characters = vector<char>;
@@ -86,7 +84,5 @@ TEST(QuickSorterWith3WayPartitioningTest, SortWorksOnCharactersUsingExample1With
     CharactersSorter sorter(PivotType::MedianOfMedians);
     testSortUsingExample1WithCharacters<CharactersSorter, Characters>(sorter);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

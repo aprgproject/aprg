@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -132,7 +130,5 @@ TEST(FlowNetworkTest, DisconnectWorks) {
     EXPECT_EQ(edgesToExpect, graph.getEdges());
     EXPECT_EQ(expectedEdgesToDetails, graph.getEdgeToFlowEdgeDetailsMap());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

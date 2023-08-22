@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithSet;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using SetForTest = OrderedArraySet<int>;
@@ -49,7 +47,5 @@ TEST(OrderedArraySetTest, DeleteMaximumWorks) { testDeleteMaximumWithUnsignedInt
 TEST(OrderedArraySetTest, GetKeys) { testGetKeysWithUnsignedIntAndChar<SetForTest>(); }
 
 TEST(OrderedArraySetTest, GetKeysInRangeWorks) { testGetKeysInRangeInclusiveWithUnsignedIntAndChar<SetForTest>(); }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -4,9 +4,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -55,7 +53,5 @@ TEST(FordFulkersonUsingBfsTest, GetMaxFlowValueAndIsInMaxFlowMinCutWorksOnExampl
     EXPECT_EQ(expectedAugmentingPaths, maxFlow.getAugmentingPaths());
     EXPECT_EQ(expectedMinCutEdges, maxFlow.getMinCutEdges());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

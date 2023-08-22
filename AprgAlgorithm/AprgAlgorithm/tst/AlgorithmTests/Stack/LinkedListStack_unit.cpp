@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithStack;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using StackForTest = LinkedListStack<int>;
@@ -30,7 +28,5 @@ TEST(LinkedListStackTest, PopWorks) { testPopWithInt<StackForTest>(); }
 TEST(LinkedListStackTest, DISABLED_PopWorksWithAssertionWhenItsEmpty) {
     testPopAssertionWhenEmptyWithInt<StackForTest>();
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

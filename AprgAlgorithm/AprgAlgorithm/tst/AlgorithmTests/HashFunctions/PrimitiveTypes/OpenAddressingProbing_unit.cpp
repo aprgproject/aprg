@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 TEST(OpenAddressingProbingTest, GetHashForLinearProbingWorks) {
     constexpr uint64_t numberOfSlots = 100;
@@ -47,7 +45,5 @@ TEST(OpenAddressingProbingTest, GetHashForQuadraticProbingWorks) {
         81ULL, (getHashForQuadraticProbing<uint64_t>(
                    123456789, numberOfSlots, originalHashFunction, 4, coefficient1, coefficient2)));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

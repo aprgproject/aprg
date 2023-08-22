@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 template <typename Object>
@@ -58,7 +56,5 @@ TEST(MaxItemsSaverTest, GetMaxItemsAndClearWorks) {
     MaxItemsSaverForTest::Objects expectedObjects{100, 721, 976};
     EXPECT_EQ(expectedObjects, saver.getMaxItemsAndClear());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

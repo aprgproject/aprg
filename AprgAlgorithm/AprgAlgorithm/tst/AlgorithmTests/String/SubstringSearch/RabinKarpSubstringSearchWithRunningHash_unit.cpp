@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithSubstringSearch;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Index = int;
@@ -27,7 +25,5 @@ TEST(RabinKarpSubstringSearchWithRunningHashTest, SearchWorksUsingExample1) {
 TEST(RabinKarpSubstringSearchWithRunningHashTest, SearchWorksUsingExample2) {
     testSearchUsingExample2<SubstringSearchForTest, Index>();
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

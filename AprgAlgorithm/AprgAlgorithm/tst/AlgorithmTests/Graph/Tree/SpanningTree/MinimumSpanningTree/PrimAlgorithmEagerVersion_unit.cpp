@@ -4,9 +4,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -42,7 +40,5 @@ TEST(PrimAlgorithmEagerVersionTest, WorksOnUndirectedGraph) {
     Edges expectedMinimumSpanningTree{{1, 7}, {0, 2}, {2, 3}, {4, 5}, {5, 7}, {2, 6}, {0, 7}};
     EXPECT_EQ(expectedMinimumSpanningTree, spanningTreeSearch.getMinimumSpanningTreeEdges());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -2,9 +2,7 @@
 
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
-namespace alba {
-
-namespace matrix {
+namespace alba::matrix {
 
 template <>
 bool isEqualForMathMatrixDataType(int const& value1, int const& value2) {
@@ -15,7 +13,5 @@ template <>
 bool isEqualForMathMatrixDataType(double const& value1, double const& value2) {
     return mathHelper::isAlmostEqual(value1, value2);
 }
-
-}  // namespace matrix
 
 }  // namespace alba

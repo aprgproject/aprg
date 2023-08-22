@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 using ValuesForTest = vector<int>;
 using ApproximateMedianForTest = ApproximateMedian<ValuesForTest>;
@@ -25,7 +23,5 @@ TEST(ApproximateMedianTest, GetApproximateMedianWorksOnExample2) {
 
     EXPECT_NE(0, approximateMedian.getApproximateMedian(values));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

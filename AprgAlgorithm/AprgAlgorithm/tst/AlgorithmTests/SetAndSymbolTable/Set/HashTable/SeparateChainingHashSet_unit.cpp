@@ -7,9 +7,7 @@
 using namespace alba::algorithm::CommonTestsWithSet;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using HashValue = uint32_t;
@@ -59,7 +57,5 @@ TEST(SeparateChainingHashSetTest, GetKeys) { testGetKeysWithUnsignedIntAndChar<S
 TEST(SeparateChainingHashSetTest, GetKeysInRangeWorks) {
     testGetKeysInRangeInclusiveWithUnsignedIntAndChar<SetForTest>();
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

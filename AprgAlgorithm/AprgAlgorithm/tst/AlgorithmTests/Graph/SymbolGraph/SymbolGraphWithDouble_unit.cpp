@@ -6,9 +6,7 @@
 
 #include <cstdint>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 template <>
 uint64_t getUniqueVertexIdentifier<uint64_t, double>(double const& object) {
@@ -121,7 +119,5 @@ TEST(SymbolGraphWithDoubleTest, DisconnectWorks) {
     EXPECT_EQ(expectedEdges, symbolGraph.getGraph().getEdges());
     EXPECT_EQ(expectedSymbolTable, symbolGraph.getSymbolTable());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

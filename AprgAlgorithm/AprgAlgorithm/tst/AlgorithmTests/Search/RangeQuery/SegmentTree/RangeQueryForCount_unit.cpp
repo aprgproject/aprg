@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -152,7 +150,5 @@ TEST(RangeQueryForCountTest, ChangeValueAtIndexWorksOnExample1) {
     EXPECT_EQ(1, countRangeQuery.getCountOfThisValueOnInterval(3, 4, 4));
     EXPECT_EQ(0, countRangeQuery.getCountOfThisValueOnInterval(4, 4, 4));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -6,9 +6,7 @@
 
 using namespace alba::algorithm::CommonTestsWithEulerPathForUndirectedGraph;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -67,7 +65,5 @@ TEST(HierholzerAlgorithmForUndirectedGraphTest, GetEulerCycleAndPathWorksOnExamp
 TEST(HierholzerAlgorithmForUndirectedGraphTest, GetEulerCycleAndPathWorksOnExample2) {
     testGetEulerCycleAndPathWorksOnExample2<PathSearchForTest, GraphForTest>();
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

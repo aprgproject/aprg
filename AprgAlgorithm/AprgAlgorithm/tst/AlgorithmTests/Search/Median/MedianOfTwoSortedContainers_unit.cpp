@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValueForTest = int;
@@ -62,7 +60,5 @@ TEST(MedianOfTwoSortedContainersTest, GetMedianWorksOnExample4) {
 
     EXPECT_EQ(13, query.getMedian());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

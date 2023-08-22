@@ -7,9 +7,7 @@
 using namespace alba::algorithm::CommonTestsWithSet;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using HashValue = uint32_t;
@@ -101,7 +99,5 @@ TEST(LinearProbingHashSetTest, DeleteBasedOnKeyWorksWithHalvingHashTableSize) {
     setObject.deleteBasedOnKey(9);
     EXPECT_EQ(4, setObject.getHashTableSize());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

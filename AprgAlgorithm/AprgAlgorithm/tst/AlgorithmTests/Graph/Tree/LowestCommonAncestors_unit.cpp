@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -57,7 +55,5 @@ TEST(LowestCommonAncestorsTest, Example2Works) {
     EXPECT_EQ(4, lowestCommonAncestors.getDistanceBetweenVertices(5, 7));
     EXPECT_EQ(3, lowestCommonAncestors.getDistanceBetweenVertices(5, 8));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

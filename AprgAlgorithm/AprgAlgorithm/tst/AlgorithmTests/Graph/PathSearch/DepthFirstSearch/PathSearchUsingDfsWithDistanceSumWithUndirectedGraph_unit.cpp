@@ -4,9 +4,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -51,7 +49,5 @@ TEST(PathSearchUsingDfsWithDistanceSumTest, GetEndVertexToDistanceSumMapWorksWit
     ContentMapForTest expectedMap{{0, 0.0}, {1, 0.05}, {2, 0.25}, {3, 0.5}, {4, 0.85}, {5, 0.9}};
     EXPECT_EQ(expectedMap, pathSearch.getEndVertexToDistanceSumMap());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

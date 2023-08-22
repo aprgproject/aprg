@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithNearestValueSearch;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -86,7 +84,5 @@ TEST(TernaryNearestValueSearchTest, GetIndexOfNearestValueWorksWithndexesWhenDis
 
     EXPECT_EQ(4, search.getIndexOfNearestValue(1, 8, 33));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

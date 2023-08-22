@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -44,7 +42,5 @@ TEST(MinimumNodeCoverTest, GetMaximumIndependentSetSizeWorksOnExample1) {
 
     EXPECT_EQ(5, minimumNodeCover.getMaximumIndependentSetSize(newSourceVertex, newSinkVertex));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -16,9 +16,7 @@ using namespace std;
 #define ALBA_LARGE_SORTER_TEST_FILE APRG_DIR R"(\AprgAlgorithm\FilesForTests\LargeSorterTest\Test1.txt)"
 #define ALBA_LARGE_SORTER_BLOCK_DIR APRG_DIR R"(\AprgAlgorithm\FilesForTests\LargeSorterTest\blocks\)"
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 struct TestObject {
     TestObject() : valueInteger{}, valueDouble{}, valueCharacter{}, valueString() {}
@@ -772,7 +770,5 @@ TEST(AlbaLargeSorterTest, DISABLED_FileStreamAreLimitedByMaximumFileStreams) {
         [&expectedValue](int const& actualValue) { EXPECT_EQ(expectedValue++, actualValue); });
     EXPECT_EQ(1000, expectedValue);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

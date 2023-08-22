@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 TEST(MonteCarloSimulationOfPerculationTest, DISABLED_DimensionsByEightExample) {
     MonteCarloSimulationOfPerculation<8> simulation;
@@ -39,7 +37,5 @@ TEST(MonteCarloSimulationOfPerculationTest, DISABLED_DimensionsByFiftyExample) {
     cout << simulation.getSitesToDisplay() << "\n";
     cout << "Percolation probability: " << simulation.getPercolationProbability() << "\n";
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

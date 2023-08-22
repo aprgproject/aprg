@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithStack;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using StackForTest = FixedSizeStack<int, 10>;
@@ -40,7 +38,5 @@ TEST(FixedSizeStackTest, DISABLED_PushWorksWithAssertionWhenItReachesMaximumSize
     }
     EXPECT_DEATH(stack.push(100), "Assertion failed!");
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

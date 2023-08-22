@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -32,7 +30,5 @@ TEST(MaximumSubArraySumTest, GetMaximumSubArraySumWithDetailsWorksOnExample1) {
     EXPECT_EQ(5, subArrayDetailsToVerify.highIndex);
     EXPECT_EQ(10, subArrayDetailsToVerify.sum);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

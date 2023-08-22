@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -203,7 +201,5 @@ TEST(RangeQueryWithBlocksTest, SquareRootSizeExampleWorks) {
 
     EXPECT_EQ(39, sumRangeQuery.getResultOnInterval(3, 12));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -7,9 +7,7 @@
 using namespace alba::algorithm::CommonTestsWithUndirectedGraph;
 using namespace alba::stringHelper;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using GraphForTest = UndirectedGraphWithAdjacencyMatrix<int, 13>;
@@ -103,7 +101,5 @@ TEST(UndirectedGraphWithAdjacencyMatrixTest, OutputStreamOperatorWorks) {
         "|[1]| 1 | 0 | 0 |\n-----------------\n|[2]| 1 | 0 | 0 |\n-----------------\n",
         convertToString(graph));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

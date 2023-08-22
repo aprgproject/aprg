@@ -7,9 +7,7 @@
 using namespace alba::algorithm::CommonTestsWithSymbolTable;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using HashValue = uint32_t;
@@ -77,7 +75,5 @@ TEST(SeparateChainingHashSymbolTableTest, GetKeys) { testGetKeysWithUnsignedIntA
 TEST(SeparateChainingHashSymbolTableTest, GetKeysInRangeWorks) {
     testGetKeysInRangeInclusiveWithUnsignedIntAndChar<SymbolTableForTest>();
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

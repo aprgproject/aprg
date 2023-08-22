@@ -5,9 +5,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Index = int;
@@ -57,7 +55,5 @@ TEST(BurrowsWheelerTransformTest, DecodeWorksUsingExample2) {
 
     EXPECT_EQ("ABRACADABRA!", outputSs.str());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

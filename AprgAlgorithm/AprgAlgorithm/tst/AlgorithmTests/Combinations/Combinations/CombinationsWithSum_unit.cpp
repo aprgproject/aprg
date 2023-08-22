@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Values = vector<int>;
@@ -33,7 +31,5 @@ TEST(CombinationsWithSumTest, GetCombinationsWithSumUsingLoopsWorks) {
     Combinations expectedCombinations{{1, 1, 1, 1}, {1, 1, 2}, {1, 3}, {2, 2}, {4}};
     EXPECT_EQ(expectedCombinations, actualCombinations);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

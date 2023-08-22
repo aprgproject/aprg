@@ -8,9 +8,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -42,7 +40,5 @@ TEST(OptimalGraphByDijkstraTest, GetOptimalDirectedGraph_UndirectedToOptimizedDi
     EdgesWithWeightForTest expectedEdges{{1, 2, 3.0}, {1, 3, 5.0}, {2, 4, 7.0}, {4, 5, 8.0}};
     EXPECT_EQ(expectedEdges, optimalGraph.getEdgesWithWeight());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -70,7 +68,5 @@ TEST(LongestPathsInTreeTest, SearchForAllEndPointPairsWorks) {
     EndPointPairsForTest endPointPairsToExpect{{5, 7}, {6, 7}, {7, 5}, {7, 6}};
     EXPECT_EQ(endPointPairsToExpect, endPointPairsToVerify);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

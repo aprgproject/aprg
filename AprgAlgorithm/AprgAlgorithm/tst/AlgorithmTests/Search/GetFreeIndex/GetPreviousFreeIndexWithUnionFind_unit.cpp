@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using IndexForTest = int;
@@ -75,7 +73,5 @@ TEST(GetPreviousFreeIndexWithUnionFindTest, SetAsFreeWorks) {
     EXPECT_EQ(27, query.getPreviousFreeIndexAt(27));
     EXPECT_EQ(0, query.getPreviousFreeIndexAt(28));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

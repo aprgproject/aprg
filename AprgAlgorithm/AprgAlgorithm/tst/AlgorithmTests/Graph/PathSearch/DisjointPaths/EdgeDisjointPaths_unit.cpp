@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -31,7 +29,5 @@ TEST(EdgeDisjointPathsTest, Example1Works) {
     EXPECT_EQ(2, pathSearch.getNumberOfEdgeDisjointPaths());
     EXPECT_EQ(expectedEdgeDisjointPaths, pathSearch.getEdgeDisjointPaths());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

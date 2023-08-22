@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithSymbolTable;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using SymbolTableForTest = BinarySearchTreeSymbolTable<int, char>;
@@ -155,7 +153,5 @@ TEST(BinarySearchTreeSymbolTableTest, HibbardDeletionWorks) {
     EXPECT_EQ(expectedBeforeDelete, actualBeforeDelete);
     EXPECT_EQ(expectedAfterDelete, actualAfterDelete);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

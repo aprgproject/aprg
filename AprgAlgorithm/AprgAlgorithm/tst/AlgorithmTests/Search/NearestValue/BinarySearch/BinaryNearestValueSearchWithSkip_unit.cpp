@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithNearestValueSearch;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -65,7 +63,5 @@ TEST(BinaryNearestValueSearchWithSkipTest, GetIndexOfNearestValueWorksWhenNeares
 TEST(BinaryNearestValueSearchWithSkipTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher) {
     testGetIndexOfNearestValueWhenNearestValueIsHigherWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

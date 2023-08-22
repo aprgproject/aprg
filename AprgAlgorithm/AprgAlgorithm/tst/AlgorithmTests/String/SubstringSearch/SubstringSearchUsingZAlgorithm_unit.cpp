@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithSubstringSearch;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Index = int;
@@ -51,7 +49,5 @@ TEST(SubstringSearchUsingZAlgorithmTest, SearchForAllSubstringsWorksUsingExample
 
     EXPECT_EQ((Indexes{1, 6}), substringSearch.searchForAllSubstrings(searchSpace));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

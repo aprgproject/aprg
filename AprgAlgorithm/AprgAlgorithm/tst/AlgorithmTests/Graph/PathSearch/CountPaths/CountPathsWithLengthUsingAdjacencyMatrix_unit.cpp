@@ -4,9 +4,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -75,7 +73,5 @@ TEST(CountPathsWithLengthUsingAdjacencyMatrixTest, GetCountWorksWithDirectedGrap
     EXPECT_EQ(0, countPaths.getCount(1, 6));
     EXPECT_EQ(2, countPaths.getCount(2, 5));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

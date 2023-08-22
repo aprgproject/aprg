@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithUnionFind;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using UnionFindForTest = UnionFindForFreeIndex<int>;
@@ -89,7 +87,5 @@ TEST(UnionFindForFreeIndexTest, GetRelativeRootVectorWorks) {
     UnionFindForTest::RootVector expectedRelativeRootVector{0, 1, 1, 8, 8, 5, 5, 7, 8, 8, 10, 11, 12};
     EXPECT_EQ(expectedRelativeRootVector, unionFind.getRelativeRootVector());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

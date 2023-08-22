@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -40,7 +38,5 @@ TEST(FlowNetworkTest, GetSinkVerteWorks) {
 
     EXPECT_EQ(2, graph.getSinkVertex());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

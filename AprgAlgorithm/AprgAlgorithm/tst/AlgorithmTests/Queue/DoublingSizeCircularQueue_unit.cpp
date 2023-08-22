@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithQueue;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using QueueForTest = DoublingSizeCircularQueue<int>;
@@ -87,7 +85,5 @@ TEST(DoublingSizeCircularQueueTest, PopWorksWithHalvingContainerSize) {
 TEST(DoublingSizeCircularQueueTest, DISABLED_DequeueWorksWithAssertionWhenItsEmpty) {
     testDequeueAssertionWhenEmptyWithInt<QueueForTest>();
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

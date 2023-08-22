@@ -4,9 +4,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -95,7 +93,5 @@ TEST(EulerPathUtilitiesTest, HasEulerPathForDirectedGraphWorksWithMoreThanOneLes
 
     EXPECT_FALSE(hasEulerPathForDirectedGraph(graph));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

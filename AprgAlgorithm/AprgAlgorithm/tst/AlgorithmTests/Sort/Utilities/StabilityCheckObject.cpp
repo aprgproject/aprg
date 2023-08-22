@@ -2,9 +2,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 StabilityCheckObject::StabilityCheckObject() : m_visiblePart(0), m_notVisiblePart(0) {}
 
@@ -81,7 +79,5 @@ ostream& operator<<(ostream& out, StabilityCheckObject const& object) {
     out << "(" << object.m_visiblePart << object.m_notVisiblePart << ")";
     return out;
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

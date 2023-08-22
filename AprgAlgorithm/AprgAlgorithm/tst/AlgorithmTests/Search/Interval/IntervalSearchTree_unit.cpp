@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 
@@ -101,7 +99,5 @@ TEST(IntervalSearchTreeTest, MergeIntervalsWorksOnExample2) {
     SearchTreeForTest::Keys const& intervalsToExpect2{{5, 9}};
     EXPECT_EQ(intervalsToExpect2, intervalsToVerify2);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

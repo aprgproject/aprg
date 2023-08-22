@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithSymbolTable;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using SymbolTableForTest = OrderedArraySymbolTable<int, char>;
@@ -61,7 +59,5 @@ TEST(OrderedArraySymbolTableTest, GetKeys) { testGetKeysWithUnsignedIntAndChar<S
 TEST(OrderedArraySymbolTableTest, GetKeysInRangeWorks) {
     testGetKeysInRangeInclusiveWithUnsignedIntAndChar<SymbolTableForTest>();
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

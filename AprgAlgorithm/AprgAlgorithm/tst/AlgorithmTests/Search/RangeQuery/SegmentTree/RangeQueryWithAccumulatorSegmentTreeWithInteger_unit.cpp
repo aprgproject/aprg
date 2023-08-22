@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -113,7 +111,5 @@ TEST(RangeQueryWithAccumulatorLazySegmentTreeTest, ChangeValueAtIndexWithSumWork
     EXPECT_EQ(9, sumRangeQuery.getValueOnInterval(3, 4));
     EXPECT_EQ(6, sumRangeQuery.getValueOnInterval(4, 4));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

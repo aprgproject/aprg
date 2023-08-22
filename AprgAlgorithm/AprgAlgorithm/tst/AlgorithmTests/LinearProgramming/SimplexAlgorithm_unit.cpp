@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using SimplexForTest = SimplexAlgorithm<double>;
@@ -33,7 +31,5 @@ TEST(SimplexAlgorithmTest, SimplexWorksOnBrewersProblem) {
     EXPECT_DOUBLE_EQ(800, simplex.getOptimizedObjectiveValue());
     EXPECT_EQ(expectedSolution, simplex.getSolution());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

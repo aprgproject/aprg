@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 TEST(MonteCarloTest, VerifyingMatrixExample) {
     // Our next problem is to verify if AB = C holds when A, B and C are matrices of size nxn.
@@ -48,7 +46,5 @@ TEST(MonteCarloTest, VerifyingMatrixExample) {
 
     EXPECT_TRUE(isEqual == isEqual);  // just to check something
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Characters = vector<char>;
@@ -110,7 +108,5 @@ TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIteratorInOneDirectionWor
     EXPECT_EQ(valuesToExpect, valuesToSort);
     EXPECT_EQ('S', *partitionIterator);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

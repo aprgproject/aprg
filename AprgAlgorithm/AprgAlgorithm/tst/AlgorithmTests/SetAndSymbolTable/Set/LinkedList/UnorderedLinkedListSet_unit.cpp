@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithSet;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using SetForTest = UnorderedLinkedListSet<int>;
@@ -55,7 +53,5 @@ TEST(UnorderedLinkedListSetTest, GetKeys) { testGetKeysWithUnsignedIntAndChar<Se
 TEST(UnorderedLinkedListSetTest, GetKeysInRangeWorks) {
     testGetKeysInRangeInclusiveWithUnsignedIntAndChar<SetForTest>();
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

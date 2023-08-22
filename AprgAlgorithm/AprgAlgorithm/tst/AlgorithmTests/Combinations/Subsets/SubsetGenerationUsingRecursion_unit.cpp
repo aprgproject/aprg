@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Objects = vector<int>;
@@ -27,7 +25,5 @@ TEST(SubsetGenerationUsingRecursionTest, GenerateSubsetsUsingOnlyRecursionWorks)
     Subsets expectedSubsets{{}, {5}, {3}, {3, 5}, {1}, {1, 5}, {1, 3}, {1, 3, 5}};
     EXPECT_EQ(expectedSubsets, actualSubsets);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

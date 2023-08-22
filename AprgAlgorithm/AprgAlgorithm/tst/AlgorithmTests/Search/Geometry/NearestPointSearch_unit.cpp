@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using SearchForTest = NearestPointSearch<double>;
@@ -93,7 +91,5 @@ TEST(NearestPointSearchTest, GetNearestPointPairWorksOnExample1) {
     PointPairForTest pointPairToExpect{{-1, 3}, {-2, 2}};
     EXPECT_EQ(pointPairToExpect, pointPairToVerify);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -9,9 +9,7 @@
 using namespace alba::algorithm::CommonTestsWithSorter;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 constexpr int MAX_NUMBER_OF_CHARACTERS = 256;
@@ -92,7 +90,5 @@ TEST(CountingSorterUsingCountPerValueTest, SortWorksAsNotStableOnStabilityCheckO
     testSortAsNotStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(
         sorter);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

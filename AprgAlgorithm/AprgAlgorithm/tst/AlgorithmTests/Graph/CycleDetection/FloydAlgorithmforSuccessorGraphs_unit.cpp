@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -53,7 +51,5 @@ TEST(FloydAlgorithmForSuccessorGraphsTest, CycleDetectionWorksUsingExample1) {
     EXPECT_TRUE(cycleDetection.hasACycle());
     EXPECT_EQ(expectedCycle, cycleDetection.getCycle());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

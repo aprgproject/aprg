@@ -9,9 +9,7 @@
 using namespace alba::algorithm::CommonTestsWithSorter;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Characters = vector<char>;
@@ -74,7 +72,5 @@ TEST(PatienceSorterTest, SortWorksAsNotStableOnStabilityCheckObjectsUsingExample
     testSortAsNotStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(
         sorter);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

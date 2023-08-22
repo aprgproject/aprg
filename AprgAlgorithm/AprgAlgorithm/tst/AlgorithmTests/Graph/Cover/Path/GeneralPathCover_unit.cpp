@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -49,7 +47,5 @@ TEST(GeneralPathCoverTest, GetSizeOfMaximumAntichainOnExample1) {
 
     EXPECT_EQ(2, generalPathCover.getSizeOfMaximumAntichain(newSourceVertex, newSinkVertex));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -7,9 +7,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 TEST(RandomElementAtForwardTraversalTest, GetRandomElementAtForwardTraversalWorksOnVector) {
     vector<int> values{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -24,7 +22,5 @@ TEST(RandomElementAtForwardTraversalTest, GetRandomElementAtForwardTraversalWork
 
     EXPECT_NE(0, algorithm.getRandomElement(values));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

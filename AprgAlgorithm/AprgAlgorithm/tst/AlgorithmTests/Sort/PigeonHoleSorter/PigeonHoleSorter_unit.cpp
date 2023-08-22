@@ -9,9 +9,7 @@
 using namespace alba::algorithm::CommonTestsWithSorter;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Characters = vector<char>;
@@ -76,7 +74,5 @@ TEST(PigeonHoleSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingOneValueExam
     Characters expectedOneCharacter{'J'};
     EXPECT_EQ(expectedOneCharacter, oneCharacter);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

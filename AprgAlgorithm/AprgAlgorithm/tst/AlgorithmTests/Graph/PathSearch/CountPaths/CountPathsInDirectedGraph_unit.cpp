@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -37,7 +35,5 @@ TEST(CountPathsInDirectedGraphTest, GetCountWorksOnExample1) {
     EXPECT_EQ(2, countPaths.getCount(5, 3));
     EXPECT_EQ(2, countPaths.getCount(5, 6));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using IndexForTest = int;
@@ -68,7 +66,5 @@ TEST(GetAccumulatedNextFreeIndexWithSegmentTreeTest, SetAsFreeWorks) {
     EXPECT_EQ(27, query.getNextFreeIndexAt(27));
     EXPECT_EQ(0, query.getNextFreeIndexAt(28));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithTries;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using TrieForTest = RWayTrieUsingLinkedArrays<int>;
@@ -132,7 +130,5 @@ TEST(RWayTrieUsingLinkedArraysTest, DeleteBasedOnKeyWhenEmptyStringWorks) {
     EXPECT_TRUE(trie.isEmpty());
     EXPECT_EQ(0, trie.getNumberOfNodes());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

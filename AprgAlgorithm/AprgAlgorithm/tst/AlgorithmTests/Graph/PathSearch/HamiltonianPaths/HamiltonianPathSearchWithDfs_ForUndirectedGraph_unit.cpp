@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -76,7 +74,5 @@ TEST(HamiltonianPathSearchWithDfsTest_ForUndirectedGraph, GetOneHamiltonianCycle
     PathForTest pathsToExpect{0, 1, 3, 2, 0};
     EXPECT_EQ(pathsToExpect, pathsToVerify);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

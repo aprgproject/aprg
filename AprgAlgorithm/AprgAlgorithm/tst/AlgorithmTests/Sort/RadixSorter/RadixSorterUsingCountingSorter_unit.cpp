@@ -7,9 +7,7 @@
 using namespace alba::algorithm::CommonTestsWithSorter;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 constexpr int MAX_NUMBER_OF_NIBBLES = 16;
@@ -99,7 +97,5 @@ TEST(RadixSorterUsingCountingSorterTest, SortWorksAsStableOnStabilityCheckObject
     StabilityCheckObjectsSorter sorter(getNumberOfNibblesForStabilityCheckObject, getNibbleAtForStabilityCheckObject);
     testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(sorter);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

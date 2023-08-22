@@ -4,9 +4,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -39,7 +37,5 @@ TEST(LaplaceanMatrixTest, CreateLaplaceanMatrixWorksWithDirectedGraph) {
     LaplaceanMatrix expectedMatrix(4, 4, {3, 0, 0, 0, -1, 0, 0, 0, -1, 0, 1, 0, -1, 0, -1, 0});
     EXPECT_EQ(expectedMatrix, matrixToVerify);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

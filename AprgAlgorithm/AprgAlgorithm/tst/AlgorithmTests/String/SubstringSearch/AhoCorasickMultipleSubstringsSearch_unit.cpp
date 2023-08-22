@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithSubstringSearch;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Index = int;
@@ -53,7 +51,5 @@ TEST(AhoCorasickMultipleSubstringsSearchTest, SearchWorksUsingExample3) {
     SubstringSearchForTest::SearchResult expectedResult{{"Dance", {4}}, {"Song", {15}}, {"T", {9, 11}}, {"his", {12}}};
     EXPECT_EQ(expectedResult, substringSearch.search(searchSpace));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

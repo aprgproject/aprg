@@ -9,9 +9,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 
@@ -62,7 +60,5 @@ TEST(GenomicExampleTest, CompressCharactersToValuesWorks) {
 TEST(GenomicExampleTest, ExpandValuesToCharactersWorks) {
     EXPECT_EQ("ATAGATGCATAG", expandValuesToCharacters("\x13\x1E\x13"));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

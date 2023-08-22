@@ -4,9 +4,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -71,7 +69,5 @@ TEST(HamiltonianPathUtilitiesTest, HasHamiltonianPathBecauseOfOreTheoremWorks) {
     EXPECT_FALSE(hasHamiltonianPathBecauseOfOreTheorem(graphWithPathButNotSatisfied));
     EXPECT_TRUE(hasHamiltonianPathBecauseOfOreTheorem(graphWithPathAndSatisfied));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

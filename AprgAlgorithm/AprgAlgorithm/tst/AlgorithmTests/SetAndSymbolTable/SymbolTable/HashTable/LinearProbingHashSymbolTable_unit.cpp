@@ -7,9 +7,7 @@
 using namespace alba::algorithm::CommonTestsWithSymbolTable;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using HashValue = uint32_t;
@@ -115,7 +113,5 @@ TEST(LinearProbingHashSymbolTableTest, DeleteBasedOnKeyWorksWithHalvingHashTable
     symbolTable.deleteBasedOnKey(9);
     EXPECT_EQ(4, symbolTable.getHashTableSize());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

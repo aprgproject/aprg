@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithSet;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using SetForTest = BinarySearchTreeSet<int>;
@@ -138,7 +136,5 @@ TEST(BinarySearchTreeSetTest, HibbardDeletionWorks) {
     EXPECT_EQ(expectedBeforeDelete, actualBeforeDelete);
     EXPECT_EQ(expectedAfterDelete, actualAfterDelete);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

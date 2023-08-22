@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValusForTest = int;
@@ -67,7 +65,5 @@ TEST(SegmentTreeUtilitiesTest, GetMinimumNumberOfParentsWorks) {
     EXPECT_EQ(63, UtilitiesForTest::getMinimumNumberOfParents(43));
     EXPECT_EQ(63, UtilitiesForTest::getMinimumNumberOfParents(44));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

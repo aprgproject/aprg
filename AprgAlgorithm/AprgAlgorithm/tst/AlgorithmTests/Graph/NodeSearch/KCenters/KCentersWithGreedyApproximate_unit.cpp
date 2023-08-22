@@ -4,9 +4,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -48,7 +46,5 @@ TEST(KCentersWithGreedyApproximateTest, GetDistanceToWorksWithUndirectedGraphFor
     VerticesForTest expectedCenters{2, 3};
     EXPECT_EQ(expectedCenters, nodeSearch.getFoundCenters());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

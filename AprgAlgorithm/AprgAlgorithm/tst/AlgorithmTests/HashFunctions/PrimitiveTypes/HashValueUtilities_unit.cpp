@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 TEST(HashValueUtilitiesTest, GetHashUsingDivisionMethodWorks) {
     EXPECT_EQ(89ULL, (getHashUsingDivisionMethod<uint64_t>(123456789, 100)));
@@ -26,7 +24,5 @@ TEST(HashValueUtilitiesTest, GetHashUsingMultiplicationMethodWorksWithNumeratorA
     EXPECT_EQ(18ULL, (getHashUsingMultiplicationMethod<uint64_t>(123456789, 100, knuthNumerator, knuthDenominator)));
     EXPECT_EQ(12012ULL, (getHashUsingMultiplicationMethod<uint64_t>(12345, 16384, knuthNumerator, knuthDenominator)));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

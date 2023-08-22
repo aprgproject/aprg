@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithTries;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using TrieForTest = TernarySearchTrieSymbolTable<int>;
@@ -113,7 +111,5 @@ TEST(TernarySearchTrieSymbolTableTest, DeleteBasedOnKeyWhenEmptyStringHasNoEffec
     EXPECT_TRUE(trie.isEmpty());
     EXPECT_EQ(0, trie.getNumberOfNodes());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

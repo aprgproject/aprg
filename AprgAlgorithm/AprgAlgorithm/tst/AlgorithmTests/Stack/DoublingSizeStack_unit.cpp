@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithStack;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using StackForTest = DoublingSizeStack<int>;
@@ -87,7 +85,5 @@ TEST(DoublingSizeStackTest, PopWorksWithHalvingContainerSize) {
 TEST(DoublingSizeStackTest, DISABLED_PopWorksWithAssertionWhenItsEmpty) {
     testPopAssertionWhenEmptyWithInt<StackForTest>();
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

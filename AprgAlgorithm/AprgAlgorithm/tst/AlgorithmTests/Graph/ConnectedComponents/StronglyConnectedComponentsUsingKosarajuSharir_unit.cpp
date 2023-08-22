@@ -6,9 +6,7 @@
 
 using namespace alba::algorithm::CommonTestsWithConnectedComponents;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using GraphForTest = DirectedGraphWithListOfEdges<int>;
@@ -52,7 +50,5 @@ TEST(StronglyConnectedComponentsUsingKosarajuSharirTest, GetComponentIdWorks) {
     EXPECT_EQ(1, connectedComponents.getComponentId(6));
     EXPECT_EQ(1, connectedComponents.getComponentId(7));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

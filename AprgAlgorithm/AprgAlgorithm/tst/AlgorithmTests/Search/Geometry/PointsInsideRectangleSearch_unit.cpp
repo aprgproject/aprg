@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using SearchForTest = PointsInsideRectangleSearch<double>;
@@ -66,7 +64,5 @@ TEST(PointsInsideRectangleSearchTest, GetPointsInsideTheRectangleWorksOnComplica
     SearchForTest::Points pointsToExpect{{-2, 2}, {-4, 0}};
     EXPECT_EQ(pointsToExpect, pointsToVerify);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

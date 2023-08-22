@@ -6,14 +6,10 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 TEST(IntegerHashFunctionTest, GetHashWorks) {
     EXPECT_EQ(27ULL, (IntegerHashFunction<int, uint64_t, 100>::getHash(-123456789)));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

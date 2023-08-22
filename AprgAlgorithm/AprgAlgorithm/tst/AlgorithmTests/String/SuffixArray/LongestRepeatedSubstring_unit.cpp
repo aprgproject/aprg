@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using LongestRepeatedSubstringForTest = LongestRepeatedSubstring<int>;
@@ -22,7 +20,5 @@ TEST(LongestRepeatedSubstringTest, GetLongestRepeatedSubstringWorks) {
 
     EXPECT_EQ("st of times it was the ", LongestRepeatedSubstringForTest::getLongestRepeatedSubstring(stringToTest));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

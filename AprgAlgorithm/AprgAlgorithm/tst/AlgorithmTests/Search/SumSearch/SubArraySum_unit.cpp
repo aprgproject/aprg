@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -23,7 +21,5 @@ TEST(SubArraySumTest, GetSubArrayWithSumWorksOnExample1) {
     ValuesForTest valuesToExpect{2, 5, 1};
     EXPECT_EQ(valuesToExpect, valuesToVerify);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

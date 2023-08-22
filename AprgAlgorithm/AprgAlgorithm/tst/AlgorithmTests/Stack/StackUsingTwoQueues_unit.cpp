@@ -7,9 +7,7 @@
 using namespace alba::algorithm::CommonTestsWithStack;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using StackForTest = StackUsingTwoQueues<int, DoublingSizeCircularQueue<int>>;
@@ -31,7 +29,5 @@ TEST(StackUsingTwoQueuesTest, PopWorks) { testPopWithInt<StackForTest>(); }
 TEST(StackUsingTwoQueuesTest, DISABLED_PopWorksWithAssertionWhenItsEmpty) {
     testPopAssertionWhenEmptyWithInt<StackForTest>();
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using ValuesForTest = vector<int>;
@@ -75,7 +73,5 @@ TEST(TwoSumTest, GetPossibleDuplicatedTwoValuesWithSumWithIndexesDoesNotWorkOnEx
     ValuePairForTest pairToExpect{0, 0};
     EXPECT_EQ(pairToExpect, pairToVerify);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

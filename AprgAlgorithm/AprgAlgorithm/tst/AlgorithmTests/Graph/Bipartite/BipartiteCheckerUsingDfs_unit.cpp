@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -69,7 +67,5 @@ TEST(BipartiteCheckerUsingDfsTest, IsBipartiteWorksforBarpartiteGraph) {
     EXPECT_EQ(expectedWithFirstColor, verticesWithFirstColor);
     EXPECT_EQ(expectedWithSecondColor, verticesWithSecondColor);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

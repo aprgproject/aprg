@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 constexpr int MAX_VALUE = 50;
@@ -48,7 +46,5 @@ TEST(RangeQueryForNumberOfDistinctValuesTest, GetInputAndOutputPairsUsingMoAlgor
                                              {{0, 8}, 4}, {{3, 4}, 2}, {{4, 4}, 1}};
     EXPECT_EQ(expectedPairs, countRangeQuery.getInputAndOutputPairsUsingMoAlgorithm(inputRanges));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

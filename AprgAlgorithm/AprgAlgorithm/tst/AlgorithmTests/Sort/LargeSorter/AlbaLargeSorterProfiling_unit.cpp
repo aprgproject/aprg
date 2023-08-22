@@ -14,9 +14,7 @@ using namespace std;
 
 #define ALBA_LARGE_SORTER_BLOCK_DIR APRG_DIR R"(\AprgAlgorithm\FilesForTests\LargeSorterTest\blocks\)"
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 TEST(AlbaLargeSorterProfileTest, DISABLED_FirstTest) {
     int stringSize(200);
@@ -46,7 +44,5 @@ TEST(AlbaLargeSorterProfileTest, DISABLED_FirstTest) {
     cout << "Executed in " << timer.getElapsedTimeInMilliseconds() << " ms\n";
     //}
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

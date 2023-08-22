@@ -5,9 +5,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using KeywordInContextIndexingForTest = KeywordInContextIndexing<int>;
@@ -25,7 +23,5 @@ TEST(KeywordInContextIndexingTest, GetKeywordInContextIndexingWorks) {
     strings stringsToExpect{"om it was the age of foolis", "es it was the age of wisdom"};
     EXPECT_EQ(stringsToExpect, keywordInContextIndexing.getKeywordInContextIndexing("the age", 10));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

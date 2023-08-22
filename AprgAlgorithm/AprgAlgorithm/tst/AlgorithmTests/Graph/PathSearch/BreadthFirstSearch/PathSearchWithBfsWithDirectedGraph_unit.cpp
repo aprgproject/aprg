@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -112,7 +110,5 @@ TEST(PathSearchUsingBfsTest, ReinitializeStartingFromWorksWithDirectedGraphWithM
     EXPECT_EQ(PathForTest({0, 5}), pathSearch.getShortestPathTo(5));
     EXPECT_EQ(PathForTest(), pathSearch.getShortestPathTo(6));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

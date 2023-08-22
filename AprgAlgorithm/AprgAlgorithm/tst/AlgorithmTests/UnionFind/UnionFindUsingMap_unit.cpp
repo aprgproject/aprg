@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithUnionFind;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using UnionFindForTest = UnionFindUsingMap<int>;
@@ -70,7 +68,5 @@ TEST(UnionFindUsingMapTest, GetConnectionMapWorks) {
                                                           {5, 5}, {6, 5}, {8, 3}, {9, 3}};
     EXPECT_EQ(expectedConnectionMap, unionFind.getConnectionMap());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

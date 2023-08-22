@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -46,7 +44,5 @@ TEST(MaximumMatchingsTest, DoesHavePerfectMatchingByCheckingASubsetWorksOnExampl
     EXPECT_TRUE(maximumMatchings.doesHavePerfectMatchingByCheckingASubset({1, 3}));
     EXPECT_FALSE(maximumMatchings.doesHavePerfectMatchingByCheckingASubset({2, 4}));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

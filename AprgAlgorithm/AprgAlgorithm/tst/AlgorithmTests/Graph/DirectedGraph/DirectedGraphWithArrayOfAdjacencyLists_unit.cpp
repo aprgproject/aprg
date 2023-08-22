@@ -7,9 +7,7 @@
 using namespace alba::algorithm::CommonTestsWithDirectedGraph;
 using namespace alba::stringHelper;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using GraphForTest = DirectedGraphWithArrayOfAdjacencyLists<int, 13>;
@@ -96,7 +94,5 @@ TEST(DirectedGraphWithArrayOfAdjacencyListsTest, OutputStreamOperatorWorks) {
     EXPECT_EQ(
         "Adjacency Lists: \nAdjacent with vertex 0: {1, } \nAdjacent with vertex 2: {0, } \n", convertToString(graph));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

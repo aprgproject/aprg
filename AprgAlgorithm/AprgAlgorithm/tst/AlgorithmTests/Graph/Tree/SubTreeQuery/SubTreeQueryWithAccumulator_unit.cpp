@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -35,7 +33,5 @@ TEST(SubTreeQueryWithAccumulatorTest, GetAccumulatedValueOfSubTreeAtWorks) {
     EXPECT_EQ(45, subTreeQuery.getAccumulatedValueOfSubTreeAt(1));
     EXPECT_EQ(28, subTreeQuery.getAccumulatedValueOfSubTreeAt(4));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

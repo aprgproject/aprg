@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using MaxPriorityQueueForTest =
@@ -121,7 +119,5 @@ TEST(BinaryHeapPriorityQueueTest, DeleteAndGetTopObjectWorksOnExample2) {
     MaxPriorityQueueForTest::Objects const objectsToExpect{'S', 'P', 'R', 'N', 'H', 'O', 'A', 'E', 'I', 'G'};
     EXPECT_EQ(objectsToExpect, objectsToVerify);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

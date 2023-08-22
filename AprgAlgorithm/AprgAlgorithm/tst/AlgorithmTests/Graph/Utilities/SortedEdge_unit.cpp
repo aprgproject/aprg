@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -35,7 +33,5 @@ TEST(SortedEdgeTest, CreateSortedEdgeOrderedByWeightWorks) {
     EXPECT_EQ(expectedSortedEdge, sortedEdge1ToVerify);
     EXPECT_EQ(expectedSortedEdge, sortedEdge2ToVerify);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

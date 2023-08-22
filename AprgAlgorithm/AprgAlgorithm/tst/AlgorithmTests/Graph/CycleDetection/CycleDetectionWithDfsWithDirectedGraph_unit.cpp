@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -140,7 +138,5 @@ TEST(CycleDetectionUsingDfsTest, CycleDetectionWorksUsingExample5WithDirectedGra
     EXPECT_TRUE(cycleDetection.getOneCycle().empty());
     EXPECT_TRUE(cycleDetection.getAllCycles().empty());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

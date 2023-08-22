@@ -7,9 +7,7 @@
 using namespace alba::algorithm::CommonTestsWithDirectedGraph;
 using namespace alba::stringHelper;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using GraphForTest = DirectedGraphWithListOfEdges<int>;
@@ -91,7 +89,5 @@ TEST(DirectedGraphWithListOfEdgesTest, OutputStreamOperatorWorks) {
 
     EXPECT_EQ("Edges: {0->1, 2->0, }", convertToString(graph));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

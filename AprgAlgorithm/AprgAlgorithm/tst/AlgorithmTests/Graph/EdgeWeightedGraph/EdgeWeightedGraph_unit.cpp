@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -96,7 +94,5 @@ TEST(EdgeWeightedGraphTest, DisconnectWorksOnUndirectedGraph) {
     EXPECT_EQ(edgesToExpect, graph.getEdges());
     EXPECT_EQ(expectedEdgesToWeight, graph.getEdgeToWeightMap());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

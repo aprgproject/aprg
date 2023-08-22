@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using TrieForTest = TernarySearchSuffixTrie;
@@ -27,7 +25,5 @@ TEST(TernarySearchSuffixTrieTest, GetIndexOfFirstOccurrenceWorks) {
     EXPECT_EQ(-1, trie.getIndexOfFirstOccurrence("ABCH"));
     EXPECT_EQ(-1, trie.getIndexOfFirstOccurrence("DEH"));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

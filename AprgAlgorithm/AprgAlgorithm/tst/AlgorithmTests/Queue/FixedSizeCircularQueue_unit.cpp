@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithQueue;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using QueueForTest = FixedSizeCircularQueue<int, 10>;
@@ -40,7 +38,5 @@ TEST(FixedSizeCircularQueueTest, DISABLED_PushWorksWithAssertionWhenItReachesMax
     }
     EXPECT_DEATH(queue.enqueue(100), "Assertion failed!");
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

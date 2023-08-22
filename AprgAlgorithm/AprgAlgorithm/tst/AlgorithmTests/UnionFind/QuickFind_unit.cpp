@@ -6,9 +6,7 @@
 using namespace alba::algorithm::CommonTestsWithUnionFind;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using UnionFindForTest = QuickFind<int, 13>;
@@ -69,7 +67,5 @@ TEST(QuickFindTest, GetRootArrayWorks) {
     UnionFindForTest::RootArray expectedRootArray{0, 2, 2, 9, 9, 6, 6, 7, 9, 9, 10, 11, 12};
     EXPECT_EQ(expectedRootArray, unionFind.getRootArray());
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

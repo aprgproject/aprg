@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -34,7 +32,5 @@ TEST(SubTreeQueryTest, Example1Works) {
     EXPECT_EQ(expectedSizes, subTreeQuery.getSubTreeSize());
     EXPECT_EQ(expectedVerticesOfSubTreeAt4, subTreeQuery.getVerticesOfSubTreeAt(4));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

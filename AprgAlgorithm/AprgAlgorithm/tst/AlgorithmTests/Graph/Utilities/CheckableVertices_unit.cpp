@@ -2,9 +2,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using VertexForTest = int;
@@ -85,7 +83,5 @@ TEST(CheckableVerticesTest, ClearWorks) {
     EXPECT_FALSE(checkableVertices.isFound(9));
     EXPECT_FALSE(checkableVertices.isFound(13));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

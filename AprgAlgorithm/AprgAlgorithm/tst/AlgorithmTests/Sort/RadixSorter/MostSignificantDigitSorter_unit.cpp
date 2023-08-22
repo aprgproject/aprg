@@ -7,9 +7,7 @@
 using namespace alba::algorithm::CommonTestsWithSorter;
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 constexpr int MAX_NUMBER_OF_NIBBLES = 16;
@@ -133,7 +131,5 @@ TEST(MostSignificantDigitSorterTest, SortStartingAtMostSignificantDigitWorksWith
                             "ms. puff",  "pearl",   "larry",     "plankton"};
     EXPECT_EQ(expectedStrings, stringsToTest);
 }
-
-}  // namespace algorithm
 
 }  // namespace alba

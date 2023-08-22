@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algorithm {
+namespace alba::algorithm {
 
 namespace {
 using Characters = vector<char>;
@@ -77,7 +75,5 @@ TEST(KnuthShuffleTest, ShuffleWhileMovingBackwardWorksOnCharactersUsingExample1)
     EXPECT_NE(givenValues, valuesToShuffle);
     EXPECT_EQ(valuesSetToExpect, CharactersSet(valuesToShuffle.cbegin(), valuesToShuffle.cend()));
 }
-
-}  // namespace algorithm
 
 }  // namespace alba
