@@ -6,7 +6,9 @@
 #include <cstdint>
 #include <string>
 
-namespace alba::AprgBitmap {
+namespace alba {
+
+namespace AprgBitmap {
 
 enum class CompressedMethodType {
     RGB,
@@ -25,43 +27,43 @@ enum class CompressedMethodType {
 class BitmapConfiguration {
 public:
     BitmapConfiguration();
-    [[nodiscard]] bool isValid() const;
-    [[nodiscard]] bool isSignatureValid() const;
-    [[nodiscard]] bool isHeaderValid() const;
-    [[nodiscard]] bool isNumberOfColorPlanesValid() const;
-    [[nodiscard]] bool isNumberOfBitsPerPixelValid() const;
-    [[nodiscard]] bool isCompressedMethodSupported() const;
-    [[nodiscard]] bool isPositionWithinTheBitmap(BitmapXY const position) const;
-    [[nodiscard]] bool isPositionWithinTheBitmap(int x, int y) const;
+    bool isValid() const;
+    bool isSignatureValid() const;
+    bool isHeaderValid() const;
+    bool isNumberOfColorPlanesValid() const;
+    bool isNumberOfBitsPerPixelValid() const;
+    bool isCompressedMethodSupported() const;
+    bool isPositionWithinTheBitmap(BitmapXY const position) const;
+    bool isPositionWithinTheBitmap(int x, int y) const;
 
-    [[nodiscard]] CompressedMethodType getCompressedMethodType() const;
-    [[nodiscard]] std::string getPath() const;
-    [[nodiscard]] uint32_t getPixelArrayAddress() const;
-    [[nodiscard]] uint32_t getBitmapWidth() const;
-    [[nodiscard]] uint32_t getBitmapHeight() const;
-    [[nodiscard]] uint16_t getNumberOfBitsPerPixel() const;
-    [[nodiscard]] uint32_t getNumberOfBytesPerRowInFile() const;
-    [[nodiscard]] uint32_t getBitMaskForValue() const;
+    CompressedMethodType getCompressedMethodType() const;
+    std::string getPath() const;
+    uint32_t getPixelArrayAddress() const;
+    uint32_t getBitmapWidth() const;
+    uint32_t getBitmapHeight() const;
+    uint16_t getNumberOfBitsPerPixel() const;
+    uint32_t getNumberOfBytesPerRowInFile() const;
+    uint32_t getBitMaskForValue() const;
 
-    [[nodiscard]] BitmapXY getPointWithinTheBitmap(int const xCoordinate, int const yCoordinate) const;
-    [[nodiscard]] int getXCoordinateWithinTheBitmap(int const coordinate) const;
-    [[nodiscard]] int getYCoordinateWithinTheBitmap(int const coordinate) const;
+    BitmapXY getPointWithinTheBitmap(int const xCoordinate, int const yCoordinate) const;
+    int getXCoordinateWithinTheBitmap(int const coordinate) const;
+    int getYCoordinateWithinTheBitmap(int const coordinate) const;
     static int getCoordinateWithinRange(int const coordinate, int maxLength);
     static BitmapXY getUpLeftCornerPoint();
-    [[nodiscard]] BitmapXY getDownRightCornerPoint() const;
+    BitmapXY getDownRightCornerPoint() const;
 
-    [[nodiscard]] uint32_t getColorUsingPixelValue(uint32_t const pixelValue) const;
-    [[nodiscard]] int convertPixelsToBytesRoundedToFloor(int pixels) const;
-    [[nodiscard]] int convertPixelsToBytesRoundedToCeil(int pixels) const;
-    [[nodiscard]] int convertBytesToPixels(int bytes) const;
-    [[nodiscard]] int getNumberOfPixelsForOneByte() const;
-    [[nodiscard]] int getMaximumNumberOfPixelsBeforeOneByte() const;
-    [[nodiscard]] int getMinimumNumberOfBytesForOnePixel() const;
-    [[nodiscard]] int getEstimatedSquareSideInPixels(int const numberOfBytesToRead) const;
-    [[nodiscard]] int getOneRowSizeInBytesFromPixels(int const leftPixelInclusive, int const rightPixelInclusive) const;
-    [[nodiscard]] int getOneRowSizeInBytesFromBytes(int const leftByteInclusive, int const rightByteInclusive) const;
+    uint32_t getColorUsingPixelValue(uint32_t const pixelValue) const;
+    int convertPixelsToBytesRoundedToFloor(int pixels) const;
+    int convertPixelsToBytesRoundedToCeil(int pixels) const;
+    int convertBytesToPixels(int bytes) const;
+    int getNumberOfPixelsForOneByte() const;
+    int getMaximumNumberOfPixelsBeforeOneByte() const;
+    int getMinimumNumberOfBytesForOnePixel() const;
+    int getEstimatedSquareSideInPixels(int const numberOfBytesToRead) const;
+    int getOneRowSizeInBytesFromPixels(int const leftPixelInclusive, int const rightPixelInclusive) const;
+    int getOneRowSizeInBytesFromBytes(int const leftByteInclusive, int const rightByteInclusive) const;
 
-    [[nodiscard]] Colors getColorTable() const;
+    Colors getColorTable() const;
 
     void readBitmap(std::string const& path);
 
@@ -71,24 +73,24 @@ private:
     void readColors(AlbaFileReader& fileReader);
     void calculateOtherValuesAfterReading();
     static CompressedMethodType determineCompressedMethodType(uint32_t compressedMethodValue);
-    uint32_t m_fileSize;
-    uint32_t m_pixelArrayAddress;
-    uint32_t m_sizeOfHeader;
-    uint32_t m_bitmapWidth;
-    uint32_t m_bitmapHeight;
-    uint16_t m_numberOfColorPlanes;
-    uint16_t m_numberOfBitsPerPixel;
-    CompressedMethodType m_compressionMethodType;
-    uint32_t m_imageSize;
-    uint64_t m_bitmapSize;
-    uint32_t m_horizontalResolutionPixelInAMeter;
-    uint32_t m_verticalResolutionPixelInAMeter;
-    uint32_t m_numberOfColors;
-    uint32_t m_numberImportantOfColors;
-    uint32_t m_numberOfBytesForDataInRow;
-    uint32_t m_paddingForRowMemoryAlignment;
-    uint32_t m_numberOfBytesPerRowInFile;
-    uint32_t m_bitMaskForValue;
+    uint32_t m_fileSize{0};
+    uint32_t m_pixelArrayAddress{0};
+    uint32_t m_sizeOfHeader{0};
+    uint32_t m_bitmapWidth{0};
+    uint32_t m_bitmapHeight{0};
+    uint16_t m_numberOfColorPlanes{0};
+    uint16_t m_numberOfBitsPerPixel{8};
+    CompressedMethodType m_compressionMethodType{CompressedMethodType::Unknown};
+    uint32_t m_imageSize{0};
+    uint64_t m_bitmapSize{0};
+    uint32_t m_horizontalResolutionPixelInAMeter{0};
+    uint32_t m_verticalResolutionPixelInAMeter{0};
+    uint32_t m_numberOfColors{0};
+    uint32_t m_numberImportantOfColors{0};
+    uint32_t m_numberOfBytesForDataInRow{0};
+    uint32_t m_paddingForRowMemoryAlignment{0};
+    uint32_t m_numberOfBytesPerRowInFile{0};
+    uint32_t m_bitMaskForValue{0};
     std::string m_path;
     std::string m_signature;
     Colors m_colors;
@@ -97,4 +99,6 @@ private:
 bool areBitmapConfigurationsCompatibleForChangingPixelData(
     BitmapConfiguration const& configuration1, BitmapConfiguration const& configuration2);
 
-}  // namespace alba::AprgBitmap
+}  // namespace AprgBitmap
+
+}  // namespace alba
