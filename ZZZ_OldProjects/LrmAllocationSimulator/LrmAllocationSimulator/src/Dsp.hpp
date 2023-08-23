@@ -27,38 +27,38 @@ struct DspDetails {
     unsigned int dliPool{0};
     bool hasEmergencyCalls{false};
     bool isNbicAllocated{false};
-    DspMode mode{DspMode::NyquistDedicatedChanneexplicit lDevice};
+    DspMode mode{DspMode::NyquistDedicatedChannelDevice};
     NyquistType nyquistType{NyquistType::Nyquist};
 };
 
 class Dsp {
 public:
     Dsp();
-    tails const& dspDetails);
+    explicit Dsp(DspDetails const& dspDetails);
     DspDetails& getDspDetailsReference();
     void setMode(DspMode const mode);
     void setNumberOfUsers(unsigned int const numberOfUsers);
     void setLcgId(unsigned int const lcgId);
     void setDliPool(unsigned int const dliPool);
     void setIsNbicAllocated(bool const isNbicAllocated);
-    unsigned int getAddress() const;
-    unsigned int getFspAddress() const;
-    unsigned int getLcgId() const;
-    unsigned int getNumberOfDchUsers() const;
-    unsigned int getNumberOfHsupaCfs() const;
-    unsigned int getNumberOfPreservedHsupaCfs() const;
-    unsigned int getNumberOfDynamicallyAllocatedHsupaCfs() const;
-    unsigned int getNumberOfHsRachCfs() const;
-    unsigned int getOrderCountOfCfAllocation() const;
-    unsigned int getDliPool() const;
-    DspMode getMode() const;
-    std::string getModeString() const;
-    std::string getNbicString() const;
-    NyquistType getNyquistType() const;
-    bool isEmpty() const;
-    bool hasEmergencyCalls() const;
-    bool hasFreeDli() const;
-    bool isNbicAllocated() const;
+    [[nodiscard]] unsigned int getAddress() const;
+    [[nodiscard]] unsigned int getFspAddress() const;
+    [[nodiscard]] unsigned int getLcgId() const;
+    [[nodiscard]] unsigned int getNumberOfDchUsers() const;
+    [[nodiscard]] unsigned int getNumberOfHsupaCfs() const;
+    [[nodiscard]] unsigned int getNumberOfPreservedHsupaCfs() const;
+    [[nodiscard]] unsigned int getNumberOfDynamicallyAllocatedHsupaCfs() const;
+    [[nodiscard]] unsigned int getNumberOfHsRachCfs() const;
+    [[nodiscard]] unsigned int getOrderCountOfCfAllocation() const;
+    [[nodiscard]] unsigned int getDliPool() const;
+    [[nodiscard]] DspMode getMode() const;
+    [[nodiscard]] std::string getModeString() const;
+    [[nodiscard]] std::string getNbicString() const;
+    [[nodiscard]] NyquistType getNyquistType() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool hasEmergencyCalls() const;
+    [[nodiscard]] bool hasFreeDli() const;
+    [[nodiscard]] bool isNbicAllocated() const;
 
 private:
     DspDetails m_dspDetails;
