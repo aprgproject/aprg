@@ -2,6 +2,8 @@
 
 #include <Algorithm/Graph/BaseGraph.hpp>
 
+#include <iterator>
+
 namespace alba::algorithm {
 
 template <typename Vertex>
@@ -54,7 +56,7 @@ private:
                 break;
             }
         }
-        Path result;
+        Path result{};
         if (isSuccessful) {
             reversedPath.emplace_back(lastVertex);
             result.reserve(reversedPath.size());

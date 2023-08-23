@@ -3,6 +3,7 @@
 #include <Algorithm/Graph/Types/GraphTypes.hpp>
 
 #include <algorithm>
+#include <iterator>
 
 namespace alba::algorithm {
 
