@@ -31,7 +31,7 @@ std::vector<BenchmarkReporter::Run> ComputeBigO(
     const std::vector<BenchmarkReporter::Run>& reports);
 
 // This data structure will contain the result returned by MinimalLeastSq
-//   - coef        : Estimated coeficient for the high-order term as
+//   - coef        : Estimated coefficient for the high-order term as
 //                   interpolated from data.
 //   - rms         : Normalized Root Mean Squared Error.
 //   - complexity  : Scalability form (e.g. oN, oNLogN). In case a scalability
@@ -40,11 +40,11 @@ std::vector<BenchmarkReporter::Run> ComputeBigO(
 //                   parameter will return the best fitting curve detected.
 
 struct LeastSq {
-  LeastSq()  {}
+  LeastSq() : coef(0.0), rms(0.0), complexity(oNone) {}
 
-  double coef{0.0};
-  double rms{0.0};
-  BigO complexity{oNone};
+  double coef;
+  double rms;
+  BigO complexity;
 };
 
 // Function to return an string for the calculated complexity

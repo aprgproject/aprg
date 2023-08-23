@@ -13,15 +13,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "benchmark/benchmark.h"
+#include "statistics.h"
 
 #include <algorithm>
 #include <cmath>
 #include <numeric>
 #include <string>
 #include <vector>
+
+#include "benchmark/benchmark.h"
 #include "check.h"
-#include "statistics.h"
 
 namespace benchmark {
 
@@ -30,14 +31,12 @@ auto StatisticsSum = [](const std::vector<double>& v) {
 };
 
 double StatisticsMean(const std::vector<double>& v) {
-  if (v.empty()) { return 0.0;
-}
+  if (v.empty()) return 0.0;
   return StatisticsSum(v) * (1.0 / v.size());
 }
 
 double StatisticsMedian(const std::vector<double>& v) {
-  if (v.size() < 3) { return StatisticsMean(v);
-}
+  if (v.size() < 3) return StatisticsMean(v);
   std::vector<double> copy(v);
 
   auto center = copy.begin() + v.size() / 2;
@@ -47,8 +46,7 @@ double StatisticsMedian(const std::vector<double>& v) {
   // if yes, then center is the median
   // it no, then we are looking for the average between center and the value
   // before
-  if (v.size() % 2 == 1) { return *center;
-}
+  if (v.size() % 2 == 1) return *center;
   auto center2 = copy.begin() + v.size() / 2 - 1;
   std::nth_element(copy.begin(), center2, copy.end());
   return (*center + *center2) / 2.0;
@@ -62,27 +60,23 @@ auto SumSquares = [](const std::vector<double>& v) {
 auto Sqr = [](const double dat) { return dat * dat; };
 auto Sqrt = [](const double dat) {
   // Avoid NaN due to imprecision in the calculations
-  if (dat < 0.0) { return 0.0;
-}
+  if (dat < 0.0) return 0.0;
   return std::sqrt(dat);
 };
 
 double StatisticsStdDev(const std::vector<double>& v) {
   const auto mean = StatisticsMean(v);
-  if (v.empty()) { return mean;
-}
+  if (v.empty()) return mean;
 
   // Sample standard deviation is undefined for n = 1
-  if (v.size() == 1) { return 0.0;
-}
+  if (v.size() == 1) return 0.0;
 
   const double avg_squares = SumSquares(v) * (1.0 / v.size());
   return Sqrt(v.size() / (v.size() - 1.0) * (avg_squares - Sqr(mean)));
 }
 
 double StatisticsCV(const std::vector<double>& v) {
-  if (v.size() < 2) { return 0.0;
-}
+  if (v.size() < 2) return 0.0;
 
   const auto stddev = StatisticsStdDev(v);
   const auto mean = StatisticsMean(v);
@@ -95,9 +89,8 @@ std::vector<BenchmarkReporter::Run> ComputeStats(
   typedef BenchmarkReporter::Run Run;
   std::vector<Run> results;
 
-  auto error_count =
-      std::count_if(reports.begin(), reports.end(),
-                    [](Run const& run) { return run.error_occurred; });
+  auto error_count = std::count_if(reports.begin(), reports.end(),
+                                   [](Run const& run) { return run.skipped; });
 
   if (reports.size() - error_count < 2) {
     // We don't report aggregated data if there was a single run.
@@ -124,11 +117,13 @@ std::vector<BenchmarkReporter::Run> ComputeStats(
     for (auto const& cnt : r.counters) {
       auto it = counter_stats.find(cnt.first);
       if (it == counter_stats.end()) {
-        counter_stats.insert({cnt.first, {cnt.second, std::vector<double>{}}});
-        it = counter_stats.find(cnt.first);
+        it = counter_stats
+                 .emplace(cnt.first,
+                          CounterStat{cnt.second, std::vector<double>{}})
+                 .first;
         it->second.s.reserve(reports.size());
       } else {
-        BM_CHECK_EQ(counter_stats[cnt.first].c.flags, cnt.second.flags);
+        BM_CHECK_EQ(it->second.c.flags, cnt.second.flags);
       }
     }
   }
@@ -137,8 +132,7 @@ std::vector<BenchmarkReporter::Run> ComputeStats(
   for (Run const& run : reports) {
     BM_CHECK_EQ(reports[0].benchmark_name(), run.benchmark_name());
     BM_CHECK_EQ(run_iterations, run.iterations);
-    if (run.error_occurred) { continue;
-}
+    if (run.skipped) continue;
     real_accumulated_time_stat.emplace_back(run.real_accumulated_time);
     cpu_accumulated_time_stat.emplace_back(run.cpu_accumulated_time);
     // user counters

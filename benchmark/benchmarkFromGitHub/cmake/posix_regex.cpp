@@ -1,5 +1,4 @@
 #include <regex.h>
-
 #include <string>
 int main() {
   std::string str = "test0159";
@@ -12,3 +11,4 @@ int main() {
   regfree(&re);
   return ret;
 }
+

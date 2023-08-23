@@ -28,10 +28,6 @@
 #include "timers.h"
 
 namespace benchmark {
-namespace internal {
-extern std::map<std::string, std::string>* global_context;
-} // namespace internal
-
 namespace {
 
 std::string StrEscape(const std::string& s) {
@@ -89,21 +85,15 @@ std::string FormatKV(std::string const& key, int64_t value) {
   return ss.str();
 }
 
-std::string FormatKV(std::string const& key, IterationCount value) {
-  std::stringstream ss;
-  ss << '"' << StrEscape(key) << "\": " << value;
-  return ss.str();
-}
-
 std::string FormatKV(std::string const& key, double value) {
   std::stringstream ss;
   ss << '"' << StrEscape(key) << "\": ";
 
-  if (std::isnan(value)) {
+  if (std::isnan(value))
     ss << (value < 0 ? "-" : "") << "NaN";
-  } else if (std::isinf(value)) {
+  else if (std::isinf(value))
     ss << (value < 0 ? "-" : "") << "Infinity";
-  } else {
+  else {
     const auto max_digits10 =
         std::numeric_limits<decltype(value)>::max_digits10;
     const auto max_fractional_digits10 = max_digits10 - 1;
@@ -165,8 +155,7 @@ bool JSONReporter::ReportContext(const Context& context) {
         << FormatKV("num_sharing", static_cast<int64_t>(CI.num_sharing))
         << "\n";
     out << indent << "}";
-    if (i != info.caches.size() - 1) { out << ",";
-}
+    if (i != info.caches.size() - 1) out << ",";
     out << "\n";
   }
   indent = std::string(4, ' ');
@@ -174,8 +163,7 @@ bool JSONReporter::ReportContext(const Context& context) {
   out << indent << "\"load_avg\": [";
   for (auto it = info.load_avg.begin(); it != info.load_avg.end();) {
     out << *it++;
-    if (it != info.load_avg.end()) { out << ",";
-}
+    if (it != info.load_avg.end()) out << ",";
   }
   out << "],\n";
 
@@ -186,8 +174,11 @@ bool JSONReporter::ReportContext(const Context& context) {
 #endif
   out << indent << FormatKV("library_build_type", build_type);
 
-  if (internal::global_context != nullptr) {
-    for (const auto& kv : *internal::global_context) {
+  std::map<std::string, std::string>* global_context =
+      internal::GetGlobalContext();
+
+  if (global_context != nullptr) {
+    for (const auto& kv : *global_context) {
       out << ",\n";
       out << indent << FormatKV(kv.first, kv.second);
     }
@@ -263,9 +254,12 @@ void JSONReporter::PrintRunData(Run const& run) {
       BENCHMARK_UNREACHABLE();
     }()) << ",\n";
   }
-  if (run.error_occurred) {
-    out << indent << FormatKV("error_occurred", run.error_occurred) << ",\n";
-    out << indent << FormatKV("error_message", run.error_message) << ",\n";
+  if (internal::SkippedWithError == run.skipped) {
+    out << indent << FormatKV("error_occurred", true) << ",\n";
+    out << indent << FormatKV("error_message", run.skip_message) << ",\n";
+  } else if (internal::SkippedWithMessage == run.skipped) {
+    out << indent << FormatKV("skipped", true) << ",\n";
+    out << indent << FormatKV("skip_message", run.skip_message) << ",\n";
   }
   if (!run.report_big_o && !run.report_rms) {
     out << indent << FormatKV("iterations", run.iterations) << ",\n";
@@ -297,9 +291,21 @@ void JSONReporter::PrintRunData(Run const& run) {
     out << ",\n" << indent << FormatKV(c.first, c.second);
   }
 
-  if (run.has_memory_result) {
+  if (run.memory_result) {
+    const MemoryManager::Result memory_result = *run.memory_result;
     out << ",\n" << indent << FormatKV("allocs_per_iter", run.allocs_per_iter);
-    out << ",\n" << indent << FormatKV("max_bytes_used", run.max_bytes_used);
+    out << ",\n"
+        << indent << FormatKV("max_bytes_used", memory_result.max_bytes_used);
+
+    auto report_if_present = [&out, &indent](const std::string& label,
+                                             int64_t val) {
+      if (val != MemoryManager::TombstoneValue)
+        out << ",\n" << indent << FormatKV(label, val);
+    };
+
+    report_if_present("total_allocated_bytes",
+                      memory_result.total_allocated_bytes);
+    report_if_present("net_heap_growth", memory_result.net_heap_growth);
   }
 
   if (!run.report_label.empty()) {
@@ -307,5 +313,8 @@ void JSONReporter::PrintRunData(Run const& run) {
   }
   out << '\n';
 }
+
+const int64_t MemoryManager::TombstoneValue =
+    std::numeric_limits<int64_t>::max();
 
 }  // end namespace benchmark

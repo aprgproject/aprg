@@ -33,7 +33,7 @@
 // Prefer C regex libraries when compiling w/o exceptions so that we can
 // correctly report errors.
 #if defined(BENCHMARK_HAS_NO_EXCEPTIONS) && \
-    defined(BENCHMARK_HAVE_STD_REGEX) && \
+    defined(HAVE_STD_REGEX) && \
     (defined(HAVE_GNU_POSIX_REGEX) || defined(HAVE_POSIX_REGEX))
   #undef HAVE_STD_REGEX
 #endif
@@ -60,7 +60,7 @@ namespace benchmark {
 // cleanup
 class Regex {
  public:
-  Regex()  {}
+  Regex() : init_(false) {}
 
   ~Regex();
 
@@ -74,7 +74,7 @@ class Regex {
   bool Match(const std::string& str);
 
  private:
-  bool init_{false};
+  bool init_;
 // Underlying regular expression object
 #if defined(HAVE_STD_REGEX)
   std::regex re_;
@@ -119,7 +119,7 @@ inline bool Regex::Match(const std::string& str) {
 inline bool Regex::Init(const std::string& spec, std::string* error) {
   int ec = regcomp(&re_, spec.c_str(), REG_EXTENDED | REG_NOSUB);
   if (ec != 0) {
-    if (error != nullptr) {
+    if (error) {
       size_t needed = regerror(ec, &re_, nullptr, 0);
       char* errbuf = new char[needed];
       regerror(ec, &re_, errbuf, needed);

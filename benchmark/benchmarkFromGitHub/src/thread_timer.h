@@ -4,7 +4,8 @@
 #include "check.h"
 #include "timers.h"
 
-namespace benchmark::internal {
+namespace benchmark {
+namespace internal {
 
 class ThreadTimer {
   explicit ThreadTimer(bool measure_process_cpu_time_)
@@ -61,8 +62,7 @@ class ThreadTimer {
 
  private:
   double ReadCpuTimerOfChoice() const {
-    if (measure_process_cpu_time) { return ProcessCPUUsage();
-}
+    if (measure_process_cpu_time) return ProcessCPUUsage();
     return ThreadCPUUsage();
   }
 
@@ -80,6 +80,7 @@ class ThreadTimer {
   double manual_time_used_ = 0;
 };
 
+}  // namespace internal
 }  // namespace benchmark
 
 #endif  // BENCHMARK_THREAD_TIMER_H

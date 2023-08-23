@@ -15,12 +15,13 @@
 // Source project : https://github.com/ismaelJimenez/cpp.leastsq
 // Adapted to be used with google benchmark
 
-#include "benchmark/benchmark.h"
+#include "complexity.h"
 
 #include <algorithm>
 #include <cmath>
+
+#include "benchmark/benchmark.h"
 #include "check.h"
-#include "complexity.h"
 
 namespace benchmark {
 
@@ -158,8 +159,7 @@ std::vector<BenchmarkReporter::Run> ComputeBigO(
   typedef BenchmarkReporter::Run Run;
   std::vector<Run> results;
 
-  if (reports.size() < 2) { return results;
-}
+  if (reports.size() < 2) return results;
 
   // Accumulators.
   std::vector<int64_t> n;
