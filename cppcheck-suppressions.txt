@@ -1,5 +1,3 @@
-// Full command:
-//   cppcheck --template=gcc --enable=all --force --inline-suppr --suppressions-list=cppcheck-suppressions.txt . >> /dev/null
 
 syntaxError
 constParameter
@@ -10,3 +8,9 @@ unusedFunction
 unusedStructMember
 passedByValue
 missingReturn
+noExplicitConstructor
+
+
+// Full command:
+//   cppcheck --template=gcc --enable=all --force --inline-suppr --suppressions-list=cppcheck-suppressions.txt . >> /dev/null
+// noExplicitConstructor covered in clang-tidy
