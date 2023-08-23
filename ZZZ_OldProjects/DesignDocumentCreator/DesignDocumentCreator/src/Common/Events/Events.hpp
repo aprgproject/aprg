@@ -12,15 +12,15 @@ enum class EventType { MessageEvent, TimerEvent, OtherEvent };
 
 class Event {
 public:
-    explicit Event(GenericMessage const& messaexplicit ge);
-    explicit Event(Timer cexplicit onst& timer);
+    explicit Event(GenericMessage const& message);
+    explicit Event(Timer const& timer);
     explicit Event(OtherEvent const& otherEvent);
 
-    EventType getType() const;
-    Timer getTimer() const;
-    std::string getString() const;
-    GenericMessage getMessage() const;
-    OtherEvent getOtherEvent() const;
+    [[nodiscard]] EventType getType() const;
+    [[nodiscard]] Timer getTimer() const;
+    [[nodiscard]] std::string getString() const;
+    [[nodiscard]] GenericMessage getMessage() const;
+    [[nodiscard]] OtherEvent getOtherEvent() const;
 
 private:
     EventType m_eventType;
