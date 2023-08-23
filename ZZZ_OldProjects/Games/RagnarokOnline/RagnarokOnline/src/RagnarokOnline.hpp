@@ -91,8 +91,8 @@ struct Monster {
     stringHelper::strings modes;
     stringHelper::strings monsterSkills;
     NamesAndRates dropsWithRates;
-    [[nodiscard]] [[n[[nodiscard]] odiscard]] boo[[nodiscar[[nodiscard]] d]] l isAggressive[[nodiscar[[nodiscard]] d]] () const;
-    [[nodiscar[[nodiscard]] d]] bool isMvp() const;
+    [[nodiscard]] bool isAggressive() const;
+    [[nodiscard]] bool isMvp() const;
     [[nodiscard]] bool hasStoneCurseSkill() const;
 };
 
@@ -131,22 +131,22 @@ public:
     void readMonsterIdToMonsterMapFromFile(std::string const& inputFilePath);
     void readMapNameToRoMapFromFile(std::string const& inputFilePath);
     void readBuyingShopItems(std::string const& inputFilePath);
-    void readSellin[[nodiscard]] gShopItems(std::string const& inputFilePat[[nodiscard]][[nodiscard]]  h);
+    void readSellingShopItems(std::string const& inputFilePath);
 
     void buildItemNameToItemId();
-   [[nodiscard]][[nodiscard[[nodiscard]] ]]   void buildMonsterNameToMonsterId();
+    void buildMonsterNameToMonsterId();
 
-    [[nodis[[nodiscard]] card]][[nodiscard[[nodiscard]] ]]  ItemIdToItemMap const& getItemId[[nodiscard]] ToItemMap() const[[nodiscard]] ;
-    [[nodiscard[[nodiscard]] ]] Mons[[nodiscard]] terIdToMonsterMap const& getM[[nodiscard]] onsterIdToMonst[[nodiscard]] er[[nodiscard]] Map() const;
-    [[nodiscard]] MapName[[nodiscard]] ToRoMap const& getMapNameToRo[[nodiscard]] Map() cons[[nodiscard]] t;
-  [[nodiscard]]   [[nodiscard]] ItemNameToShopItemDetailMap const& get[[[nodiscard]] [nodiscard]] BuyingItemShops() const;
-    [[nodiscard]] ItemNameTo[[nodiscard]] ShopI[[nodiscard]] temDetailMap const& getSellingItemShops() const;
+    [[nodiscard]] ItemIdToItemMap const& getItemIdToItemMap() const;
+    [[nodiscard]] MonsterIdToMonsterMap const& getMonsterIdToMonsterMap() const;
+    [[nodiscard]] MapNameToRoMap const& getMapNameToRoMap() const;
+    [[nodiscard]] ItemNameToShopItemDetailMap const& getBuyingItemShops() const;
+    [[nodiscard]] ItemNameToShopItemDetailMap const& getSellingItemShops() const;
 
-    [[[nodiscard]] [nodiscard]] Item getItem(std::string const& fixedItemName) const;[[nodiscard]] 
-    [[nodiscard]] Monster getMonster(std::string const& monsterName) cons[[nodiscard]] t;
+    [[nodiscard]] Item getItem(std::string const& fixedItemName) const;
+    [[nodiscard]] Monster getMonster(std::string const& monsterName) const;
     static std::string getFixedItemName(Item const& item);
-    [[nodiscard]] double getTalonRoBuyingPrice(std::string const& fixedItemName) const;
-    [[nodiscard]] double getTalonRoSellingPrice(std::string const& fixedItemName) const;
+    double getTalonRoBuyingPrice(std::string const& fixedItemName) const;
+    double getTalonRoSellingPrice(std::string const& fixedItemName) const;
 
     void saveItemIdToItemMapToFile(std::string const& outputFilePath) const;
     void saveMonsterIdToMonsterMapToFile(std::string const& outputFilePath) const;
