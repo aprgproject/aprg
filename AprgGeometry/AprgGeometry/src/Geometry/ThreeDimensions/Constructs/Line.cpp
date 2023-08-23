@@ -10,21 +10,9 @@ using namespace std;
 
 namespace alba::ThreeDimensions {
 
-Line::Line()
-    : m_aCoefficient(0),
-      m_bCoefficient(0),
-      m_cCoefficient(0),
-      m_xInitialValue(0),
-      m_yInitialValue(0),
-      m_zInitialValue(0) {}
+Line::Line() {}
 
-Line::Line(Point const& first, Point const& second)
-    : m_aCoefficient(0),
-      m_bCoefficient(0),
-      m_cCoefficient(0),
-      m_xInitialValue(0),
-      m_yInitialValue(0),
-      m_zInitialValue(0) {
+Line::Line(Point const& first, Point const& second) {
     double deltaX = second.getX() - first.getX();
     double deltaY = second.getY() - first.getY();
     double deltaZ = second.getZ() - first.getZ();
@@ -41,12 +29,7 @@ Line::Line(Point const& first, Point const& second)
 }
 
 Line::Line(double const aCoefficient, double const bCoefficient, double const cCoefficient, Point const& point)
-    : m_aCoefficient(aCoefficient),
-      m_bCoefficient(bCoefficient),
-      m_cCoefficient(cCoefficient),
-      m_xInitialValue(0),
-      m_yInitialValue(0),
-      m_zInitialValue(0) {
+    : m_aCoefficient(aCoefficient), m_bCoefficient(bCoefficient), m_cCoefficient(cCoefficient) {
     calculateAndSaveInitialValuesIfPossible(point);
 }
 
@@ -60,8 +43,6 @@ Line::Line(
       m_yInitialValue(yInitialValue),
       m_zInitialValue(zInitialValue) {}
 
-bool Line::isInvalid() const { return areAllCoefficientsZero(); }
-
 bool Line::operator==(Line const& line) const {
     return isAlmostEqual(m_aCoefficient, line.m_aCoefficient) && isAlmostEqual(m_bCoefficient, line.m_bCoefficient) &&
            isAlmostEqual(m_cCoefficient, line.m_cCoefficient) && isAlmostEqual(m_xInitialValue, line.m_xInitialValue) &&
@@ -69,6 +50,8 @@ bool Line::operator==(Line const& line) const {
 }
 
 bool Line::operator!=(Line const& line) const { return !((*this) == line); }
+
+bool Line::isInvalid() const { return areAllCoefficientsZero(); }
 
 double Line::getXInitialValue() const { return m_xInitialValue; }
 

@@ -11,7 +11,8 @@ using PointParent = AlbaXYZ<double>;
 class Point : public PointParent {
 public:
     Point();
-    explicit Point(PointParent const& pointParent);
+    // NOLINTNEXTLINE(google-explicit-constructor,hicpp-explicit-conversions)
+    Point(PointParent const& pointParent);
     Point(double const xValue, double const yValue, double const zValue);
 
 private:
