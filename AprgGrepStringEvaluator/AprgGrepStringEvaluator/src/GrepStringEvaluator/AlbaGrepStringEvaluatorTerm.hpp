@@ -11,7 +11,7 @@ public:
     static void setMainString(std::string const& mainString);
 
     AlbaGrepStringEvaluatorTerm();
-    explicit AlbaGrepStringEvaluatorTerm(std::string const& stringToFiexplicit nd);
+    explicit AlbaGrepStringEvaluatorTerm(std::string const& stringToFind);
     explicit AlbaGrepStringEvaluatorTerm(bool const result);
     bool getResult() const;
 
