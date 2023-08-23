@@ -5,9 +5,7 @@
 #include <Algebra/Constructs/TermRaiseToTerms.hpp>
 #include <Algebra/Constructs/TermsOverTerms.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 PolynomialOverPolynomialOptional createPolynomialOverPolynomialFromTermIfPossible(Term const& term);
 
@@ -26,6 +24,4 @@ TermRaiseToTerms createTermRaiseToTermsFromExpression(Expression const& expressi
 void createTermRaiseToTermsFromRaiseToPowerExpression(TermRaiseToTerms& result, Expression const& expression);
 void createTermRaiseToTermsFromMultiplicationAndDivisionExpression(
     TermRaiseToTerms& result, Expression const& expression);
-}  // namespace algebra
-
 }  // namespace alba

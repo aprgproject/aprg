@@ -2,23 +2,21 @@
 
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class TermRaiseToTerms {
 public:
     TermRaiseToTerms();
-    TermRaiseToTerms(TermsWithDetails const& termsInRaiseToPowerExpression);
+    explicit TermRaiseToTerms(TermsWithDetails const& termsInRaiseToPowerExpression);
     TermRaiseToTerms(Term const& base, Terms const& exponents);
     TermRaiseToTerms(Term const& base, Term const& exponent);
 
-    bool isEmpty() const;
-    bool doesEvenExponentCancellationHappen() const;
-    Term getCombinedTerm() const;
-    Term getCombinedExponents() const;
-    Term const& getBase() const;
-    TermsWithDetails const& getExponents() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool doesEvenExponentCancellationHappen() const;
+    [[nodiscard]] Term getCombinedTerm() const;
+    [[nodiscard]] Term getCombinedExponents() const;
+    [[nodiscard]] Term const& getBase() const;
+    [[nodiscard]] TermsWithDetails const& getExponents() const;
 
     Term& getBaseReference();
 
@@ -46,7 +44,7 @@ private:
 
     void initializeUsingTermsInRaiseToPowerExpression(TermsWithDetails const& termsInRaiseToPowerExpression);
     void initializeExponentsInTerms(Terms const& exponents);
-    Term getCombinedBaseAndExponents() const;
+    [[nodiscard]] Term getCombinedBaseAndExponents() const;
 
     Term m_base;
     TermsWithDetails m_exponents;
@@ -54,7 +52,5 @@ private:
     bool m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt;
     bool m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase;
 };
-
-}  // namespace algebra
 
 }  // namespace alba

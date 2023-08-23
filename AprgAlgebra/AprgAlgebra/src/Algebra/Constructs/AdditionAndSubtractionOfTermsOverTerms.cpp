@@ -190,4 +190,4 @@ void AdditionAndSubtractionOfTermsOverTerms::putItem(
     m_associations.emplace_back(association);
 }
 
-}  // namespace alba
+}  // namespace alba::algebra

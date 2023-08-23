@@ -2,19 +2,17 @@
 
 #include <Algebra/Constructs/TermsOverTerms.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class AdditionAndSubtractionOfTermsOverTerms {
 public:
     AdditionAndSubtractionOfTermsOverTerms();
 
-    VectorOfTermsOverTerms const& getItems() const;
-    TermAssociationTypes const& getAssociations() const;
-    Expression getCombinedExpression() const;
-    Terms getLcmOfDenominatorTerms() const;
-    Terms getRevisedNumeratorTermsBasedOnLcmOnIndex(int itemIndex, Terms const& lcmOfDenominatorTerms) const;
+    [[nodiscard]] VectorOfTermsOverTerms const& getItems() const;
+    [[nodiscard]] TermAssociationTypes const& getAssociations() const;
+    [[nodiscard]] Expression getCombinedExpression() const;
+    [[nodiscard]] Terms getLcmOfDenominatorTerms() const;
+    [[nodiscard]] Terms getRevisedNumeratorTermsBasedOnLcmOnIndex(int itemIndex, Terms const& lcmOfDenominatorTerms) const;
 
     void putAsAddition(TermsOverTerms const& addend);
     void putAsSubtraction(TermsOverTerms const& subtrahend);
@@ -29,9 +27,9 @@ private:
     void emplaceExistingNumeratorTerms(Terms& numeratorTerms, int itemIndex) const;
     static void emplaceMonomialMultiplierIfNeeded(Terms& numeratorTerms, Monomial const& monomialMultiplier);
     static void emplaceNonMonomialMultipliers(Terms& numeratorTerms, Terms const& nonMonomialMultiplierTerms);
-    Expression getCombinedNumeratorExpression(Terms const& lcmDenominatorTerms) const;
+    [[nodiscard]] Expression getCombinedNumeratorExpression(Terms const& lcmDenominatorTerms) const;
     static Expression getCombinedDenominatorExpression(Terms const& lcmDenominatorTerms);
-    Expression getCombinedExpressionForNumeratorOnIndex(int numeratorIndex, Terms const& lcmDenominatorTerms) const;
+    [[nodiscard]] Expression getCombinedExpressionForNumeratorOnIndex(int numeratorIndex, Terms const& lcmDenominatorTerms) const;
     static void combineExpressionAsAddOrSubtract(
         Expression& combinedExpression, Expression const& expression, TermAssociationType const association);
     static TermsOverTerms getSimplifiedTermsOverTerms(TermsOverTerms const& termsOverTerms);
@@ -39,7 +37,5 @@ private:
     VectorOfTermsOverTerms m_items;
     TermAssociationTypes m_associations;
 };
-
-}  // namespace algebra
 
 }  // namespace alba

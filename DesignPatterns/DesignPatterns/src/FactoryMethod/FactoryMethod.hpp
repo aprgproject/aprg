@@ -10,7 +10,7 @@ namespace FactoryMethod {
 class Product {
 public:
     virtual ~Product() = default;
-    virtual std::string getName() const = 0;
+    [[nodiscard]] virtual std::string getName() const = 0;
     // ...
 };
 
@@ -19,7 +19,7 @@ public:
 
 class ConcreteProductA : public Product {
 public:
-    std::string getName() const override { return "type A"; }
+    [[nodiscard]] std::string getName() const override { return "type A"; }
     // ...
 };
 
@@ -28,7 +28,7 @@ public:
 
 class ConcreteProductB : public Product {
 public:
-    std::string getName() const override { return "type B"; }
+    [[nodiscard]] std::string getName() const override { return "type B"; }
     // ...
 };
 
@@ -40,7 +40,7 @@ class Creator {
 public:
     virtual ~Creator() = default;
 
-    virtual std::unique_ptr<Product> createProduct() const = 0;
+    [[nodiscard]] virtual std::unique_ptr<Product> createProduct() const = 0;
     // ...
 };
 
@@ -51,13 +51,13 @@ public:
 
 class ConcreteCreatorA : public Creator {
 public:
-    std::unique_ptr<Product> createProduct() const override { return std::make_unique<ConcreteProductA>(); }
+    [[nodiscard]] std::unique_ptr<Product> createProduct() const override { return std::make_unique<ConcreteProductA>(); }
     // ...
 };
 
 class ConcreteCreatorB : public Creator {
 public:
-    std::unique_ptr<Product> createProduct() const override { return std::make_unique<ConcreteProductB>(); }
+    [[nodiscard]] std::unique_ptr<Product> createProduct() const override { return std::make_unique<ConcreteProductB>(); }
     // ...
 };
 

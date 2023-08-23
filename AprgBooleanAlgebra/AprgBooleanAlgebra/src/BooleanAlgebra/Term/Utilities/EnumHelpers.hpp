@@ -18,4 +18,4 @@ std::string getEnumShortString(TermType const termType);
 std::string getEnumShortString(OperatorType const operatorType);
 std::string getEnumShortString(OperatorLevel const operatorLevel);
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

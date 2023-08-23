@@ -5,9 +5,7 @@
 #include <array>
 #include <cstdint>
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 class BoardValue {
 public:
@@ -15,16 +13,16 @@ public:
     using Data = std::array<uint64_t, SIZE_OF_DATA>;
 
     BoardValue();
-    BoardValue(Board const& board);
-    BoardValue(Data const& data);
+    explicit BoardValue(Board const& board);
+    explicit BoardValue(Data const& data);
 
     friend bool operator<(BoardValue const& bv1, BoardValue const& bv2);
     friend bool operator==(BoardValue const& bv1, BoardValue const& bv2);
     friend std::ostream& operator<<(std::ostream& out, BoardValue const& boardValue);
     friend std::istream& operator>>(std::istream& in, BoardValue& boardValue);
 
-    bool isZero() const;
-    Data const& getData() const;
+    [[nodiscard]] bool isZero() const;
+    [[nodiscard]] Data const& getData() const;
 
 private:
     static Coordinate getCorrectCoordinate(Board const& board, CoordinateDataType const x, CoordinateDataType const y);
@@ -34,7 +32,5 @@ private:
 
 bool operator<(BoardValue const& bv1, BoardValue const& bv2);
 bool operator==(BoardValue const& bv1, BoardValue const& bv2);
-
-}  // namespace chess
 
 }  // namespace alba

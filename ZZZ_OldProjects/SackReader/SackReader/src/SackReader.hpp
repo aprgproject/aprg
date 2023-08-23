@@ -13,7 +13,7 @@ namespace alba {
 class SackReader {
 public:
     SackReader(std::string const& path, std::string const& pathOfLog);
-    std::string getFileFullPath(std::string const& fileName) const;
+    [[nodiscard]] std::string getFileFullPath(std::string const& fileName) const;
     void gatherAllFiles();
     void readFilesNeededForIfs();
     void readAndMarkFilesNecessaryForIfs();

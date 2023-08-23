@@ -2,9 +2,7 @@
 
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 void segregateMonomialsWithAndWithoutVariable(
     Monomials const& monomialsToSegregate, std::string const& variableName, Monomials& monomialsWithVariable,
@@ -28,7 +26,5 @@ void segregateTermsWithPositiveAndNegativeAssociations(
 void segregateTermsWithAndWithoutVariable(
     TermsWithDetails const& termsToSegregate, std::string const& variableName, TermsWithDetails& termsWithVariable,
     TermsWithDetails& termsWithoutVariable);
-
-}  // namespace algebra
 
 }  // namespace alba

@@ -15,7 +15,7 @@ public:
     bool operator!=(Constant const& second) const;
     bool operator<(Constant const& second) const;
     Constant operator~() const;
-    bool getBooleanValue() const;
+    [[nodiscard]] bool getBooleanValue() const;
 
     void setValue(bool const boolValue);
     void negate();

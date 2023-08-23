@@ -13,9 +13,7 @@ using namespace std;
 #define APRG_BITMAP_24_BIT_TEST_FILE APRG_DIR R"(\AprgBitmap\FilesForTests\SampleBitmaps\24BitBitmap.bmp)"
 #define APRG_BITMAP_32_BIT_TEST_FILE APRG_DIR R"(\AprgBitmap\FilesForTests\SampleBitmaps\32BitBitmap.bmp)"
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 TEST(BitmapReadTest, TestForInvalidBitmap) {
     Bitmap bitmap(APRG_BITMAP_INVALID_TEST_FILE);
@@ -378,7 +376,5 @@ TEST(BitmapReadTest, DISABLED_ExperimentTest) {
     EXPECT_TRUE(bitmap.getConfiguration().isValid());
     EXPECT_TRUE(bitmap.getConfiguration().isCompressedMethodSupported());
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

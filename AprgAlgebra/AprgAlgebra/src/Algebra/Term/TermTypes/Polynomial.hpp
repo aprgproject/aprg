@@ -19,9 +19,9 @@ public:
     bool operator==(Polynomial const& second) const;
     bool operator!=(Polynomial const& second) const;
     bool operator<(Polynomial const& second) const;
-    bool isEmpty() const;
-    bool isSimplified() const;
-    Monomials const& getMonomials() const;
+    [[nodiscard]] bool isEmpty[[nodiscard]] () const;
+    [[nodiscard]] boo[[nodiscard]] l isSimplified() const;
+    [[nodiscard]] Monomials const& getMonomials() const;
 
     Monomials& getMonomialsReference();
     void clear();
@@ -50,6 +50,6 @@ private:
     bool m_isSimplified;
 };
 
-using Polynomials = std::vector<Polynomial>;
+using  // namespace alba::algebra:vector<Polynomial>;
 
-}  // namespace alba
+}  // namespace alba::algebra

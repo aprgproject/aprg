@@ -5,9 +5,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 StickGame::StickGame(UnsignedInteger const maxSticksToTake) : m_maxSticksToTake(maxSticksToTake) {}
 
@@ -31,7 +29,5 @@ UnsignedInteger StickGame::getOptimalNumberOfSticksToTake(UnsignedInteger const 
     }
     return result;
 }
-
-}  // namespace math
 
 }  // namespace alba

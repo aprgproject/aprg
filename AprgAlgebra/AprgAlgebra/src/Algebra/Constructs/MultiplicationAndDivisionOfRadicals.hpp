@@ -4,9 +4,7 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class MultiplicationAndDivisionOfRadicals {
 public:
@@ -17,10 +15,10 @@ public:
     using RadicalDetails = std::vector<RadicalDetail>;
 
     MultiplicationAndDivisionOfRadicals();
-    MultiplicationAndDivisionOfRadicals(TermsWithDetails const& termsWithDetails);
+    explicit MultiplicationAndDivisionOfRadicals(TermsWithDetails const& termsWithDetails);
 
-    Term getCombinedTerm() const;
-    TermsWithDetails const& getTermsWithDetails() const;
+    [[nodiscard]] Term getCombinedTerm() const;
+    [[nodiscard]] TermsWithDetails const& getTermsWithDetails() const;
 
     void simplify();
 
@@ -37,7 +35,5 @@ private:
 
     TermsWithDetails m_termsWithDetails;
 };
-
-}  // namespace algebra
 
 }  // namespace alba

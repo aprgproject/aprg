@@ -14,14 +14,14 @@ public:
 
     virtual ~BaseGraph() = default;  // virtual destructor because of virtual functions (vtable exists)
 
-    virtual bool isEmpty() const = 0;
-    virtual bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const = 0;
-    virtual GraphDirectionType getGraphDirectionType() const = 0;
-    virtual int getNumberOfVertices() const = 0;
-    virtual int getNumberOfEdges() const = 0;
-    virtual Vertices getAdjacentVerticesAt(Vertex const& vertex) const = 0;
-    virtual Vertices getVertices() const = 0;
-    virtual Edges getEdges() const = 0;
+    [[nodiscard]] virtual bool isEmpty() const = 0;
+    [[nodiscard]] virtual bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const = 0;
+    [[nodiscard]] virtual GraphDirectionType getGraphDirectionType() const = 0;
+    [[nodiscard]] virtual int getNumberOfVertices() const = 0;
+    [[nodiscard]] virtual int getNumberOfEdges() const = 0;
+    [[nodiscard]] virtual Vertices getAdjacentVerticesAt(Vertex const& vertex) const = 0;
+    [[nodiscard]] virtual Vertices getVertices() const = 0;
+    [[nodiscard]] virtual Edges getEdges() const = 0;
 
     virtual void connect(Vertex const& sourceVertex, Vertex const& destinationVertex) = 0;
     virtual void disconnect(Vertex const& sourceVertex, Vertex const& destinationVertex) = 0;

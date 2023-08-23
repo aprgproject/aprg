@@ -2,9 +2,7 @@
 
 #include <BooleanAlgebra/Term/Utilities/BaseTermHelpers.hpp>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 void BaseMutator::mutateTerm(Term &term) {
     if (term.isConstant()) {
@@ -25,7 +23,5 @@ void BaseMutator::mutateExpression(Expression &expression) {
         mutateTerm(getTermReferenceFromUniquePointer(wrappedTerm.baseTermPointer));
     }
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

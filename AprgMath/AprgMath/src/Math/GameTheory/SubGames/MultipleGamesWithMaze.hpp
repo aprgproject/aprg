@@ -4,9 +4,7 @@
 
 #include <map>
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 class MultipleGamesWithMaze {
 public:
@@ -25,7 +23,7 @@ public:
     using Coordinates = Game::Coordinates;
     using GameIndexAndCoordinatePair = std::pair<UnsignedInteger, Coordinate>;
 
-    bool hasNoMoves() const;
+    [[nodiscard]] bool hasNoMoves() const;
     UnsignedInteger getOverallGrundyNumber();
     GameState getGameState();
     GameIndexAndCoordinatePair getOptimalNextGameAndCoordinate();
@@ -40,7 +38,5 @@ private:
     Games m_games;
     Coordinates m_coordinateInGames;
 };
-
-}  // namespace math
 
 }  // namespace alba

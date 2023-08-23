@@ -8,9 +8,7 @@
 
 namespace alba {
 
-namespace algebra {
-
-namespace Simplification {
+namespace algebra::Simplification {
 
 class SimplificationOfExpression {
 public:
@@ -34,7 +32,7 @@ public:
     class ScopeObject : public AlbaConfigurationScopeObject<ConfigurationDetails> {};
 
     SimplificationOfExpression();
-    SimplificationOfExpression(Expression const& expression);
+    explicit SimplificationOfExpression(Expression const& expression);
 
     static bool shouldSimplifyToACommonDenominator();
     static bool shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase();
@@ -48,7 +46,7 @@ public:
     static bool shouldNotSimplifyByDistributingConstantExponentToEachBase();
     static bool shouldPerformDebug();
 
-    Expression getExpression() const;
+    [[nodiscard]] Expression getExpression() const;
 
     void simplify();
 
@@ -94,8 +92,6 @@ private:
 
     Expression m_expression;
 };
-
-}  // namespace Simplification
 
 }  // namespace algebra
 

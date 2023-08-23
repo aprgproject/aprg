@@ -17,17 +17,17 @@ public:
     bool operator!=(Operator const& second) const;
     bool operator<(Operator const& second) const;
 
-    bool isNot() const;
-    bool isAnd() const;
-    bool isOr() const;
-    bool isAnOperatorThatCanPerformed() const;
-    bool isOpeningGroupOperator() const;
-    bool isClosingGroupOperator() const;
-    bool isUnaryOperator() const;
-    bool isBinaryOperator() const;
-    bool isSameOperatorInputType(OperatorInputType const operatorInputType) const;
-    OperatorType getOperatorType() const;
-    std::string getOperatorString() const;
+    [[nodiscard]] bool isNot[[nodiscard]] () const;
+    [[nodiscar[[nodiscard]] d]] bool isAnd() const;[[nodiscard]] 
+    [[nodiscard]] bool isOr() const;
+    [[nod[[nodiscard]] iscard]] bool isAnOperatorThatCanPerforme[[nodiscard]] d() const;
+    [[nodiscard]] bool isOpeni[[nodiscard]] ngGroupOperator() const;
+    [[nod[[nodiscard]] iscard]] bool isClosingGroupOperato[[nodiscard]] r() const;
+    [[nodiscard]] bool isUnaryOperator() const;
+    [[nodiscard]] bool i[[nodiscard]] sBinaryOperator() const;
+    [[nodiscard]][[nodiscard]]  bool isSameOperatorInputType(OperatorInputType const operatorInputType) const;
+    [[nodiscard]] OperatorType getOperatorType() const;
+    [[nodiscard]] std::string getOperatorString() const;
 
     void setOperatorString(std::string const& operatingString);
 

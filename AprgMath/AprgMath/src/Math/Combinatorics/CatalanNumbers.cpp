@@ -5,9 +5,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 UnsignedInteger getCatalanNumber(UnsignedInteger const n) {
     // The Catalan number Cn equals the number of valid parenthesis expressions that consist of n left parentheses and n
@@ -63,7 +61,5 @@ UnsignedInteger getNumberOfRootedTrees(UnsignedInteger const numberOfNodes) {
     // • there are Cn-1 rooted trees of n nodes
     return getCatalanNumber(numberOfNodes - 1);
 }
-
-}  // namespace math
 
 }  // namespace alba

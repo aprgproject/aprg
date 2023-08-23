@@ -11,7 +11,7 @@ class Context {
 public:
     void set(std::string const& variable, int const value) { m_variableToValueMap.emplace(variable, value); }
 
-    int getValue(std::string const& variable) const { return m_variableToValueMap.at(variable); }
+    [[nodiscard]] int getValue(std::string const& variable) const { return m_variableToValueMap.at(variable); }
     // ...
 
 private:

@@ -16,7 +16,7 @@ public:
 
     virtual ~Colleague() = default;
 
-    int getID() const { return m_id; }
+    [[nodiscard]] int getID() const { return m_id; }
 
     virtual void send(std::string const&) = 0;
     virtual void receive(std::string const&) = 0;

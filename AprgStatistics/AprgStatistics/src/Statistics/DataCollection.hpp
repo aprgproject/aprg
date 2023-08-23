@@ -7,14 +7,14 @@ class DataCollection {
 public:
     DataCollection()
         : m_minimum(0), m_maximum(0), m_theCountForMinimum(0), m_theCountForMaximum(0), m_sum(0) {}
-    DataType getMinimum() const { return m_minimum; }
-    DataType getMaximum() const { return m_maximum; }
-    DataType getTheCountForMinimum() const { return m_theCountForMinimum; }
-    DataType getTheCountForMaximum() const { return m_theCountForMaximum; }
-    DataType getSum() const { return m_sum; }
-    int getCount() const { return m_count; }
-    DataType getAverage() const { return (m_count == 0) ? 0 : m_sum / m_count; }
-    double getAverageWithDoubleFormat() const { return (double)m_sum / m_count; }
+    [[nodiscard]] DataType getMinimum() const { return m_minimum; }
+    [[nodiscard]] DataType getMaximum() const { return m_maximum; }
+    [[nodiscard]] DataType getTheCountForMinimum() const { return m_theCountForMinimum; }
+    [[nodiscard]] DataType getTheCountForMaximum() const { return m_theCountForMaximum; }
+    [[nodiscard]] DataType getSum() const { return m_sum; }
+    [[nodiscard]] int getCount() const { return m_count; }
+    [[nodiscard]] DataType getAverage() const { return (m_count == 0) ? 0 : m_sum / m_count; }
+    [[nodiscard]] double getAverageWithDoubleFormat() const { return (double)m_sum / m_count; }
     void addData(DataType const& dataValue) {
         if (m_count == 0) {
             m_minimum = dataValue;

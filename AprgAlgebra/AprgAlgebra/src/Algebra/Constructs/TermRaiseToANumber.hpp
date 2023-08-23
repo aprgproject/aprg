@@ -2,21 +2,19 @@
 
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class TermRaiseToANumber {
 public:
     TermRaiseToANumber();
     TermRaiseToANumber(Term const& base, AlbaNumber const& exponent);
 
-    bool isEmpty() const;
-    bool isRadical() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool isRadical() const;
 
-    Term getCombinedTerm() const;
-    Term const& getBase() const;
-    AlbaNumber const& getExponent() const;
+    [[nodiscard]] Term getCombinedTerm() const;
+    [[nodiscard]] Term const& getBase() const;
+    [[nodiscard]] AlbaNumber const& getExponent() const;
 
     Term& getBaseReference();
 
@@ -29,7 +27,5 @@ private:
 };
 
 using ListOfTermRaiseToANumber = std::vector<TermRaiseToANumber>;
-
-}  // namespace algebra
 
 }  // namespace alba

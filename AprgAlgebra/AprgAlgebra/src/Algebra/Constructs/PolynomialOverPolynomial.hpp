@@ -5,11 +5,7 @@
 #include <optional>
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
-
-class PolynomialOverPolynomial {
+namespace alba::algebralynomialOverPolynomial {
 public:
     struct QuotientAndRemainder {
         Polynomial quotient;
@@ -19,20 +15,20 @@ public:
     PolynomialOverPolynomial();
     PolynomialOverPolynomial(Polynomial const& numerator, Polynomial const& denominator);
 
-    bool isEmpty() const;
-    Polynomial const& getNumerator() const;
-    Polynomial const& getDenominator() const;
+    [[nodiscard][[nodiscard]] ] bool isEmpty() const;
+  [[nodiscard]]   [[nodiscard]] Polynomial const& getNumerat[[nodiscard]] or() const;
+    [[nodiscard]] Polynomial const& getDenominator() const;
 
     void setAsShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(
         bool const shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue);
 
     void simplify();
     void simplifyWithoutFactorization();
-    QuotientAndRemainder simplifyAndDivide();
-    QuotientAndRemainder divide() const;
+    QuotientAndRemai[[nodiscard]] nder simplifyAndDivide();
+    [[nodiscard]] Quotien[[nodiscard]] tAndRemainder divide() const;
 
 private:
-    bool shouldPerformFactorization() const;
+    [[nodiscard]] bool shouldPerformFactorization() const;
     void convertFractionCoefficientsToInteger();
     void convertNegativeExponentsToPositive();
     void removeCommonMonomialOnAllMonomialsInNumeratorAndDenominator();
@@ -48,8 +44,6 @@ private:
 };
 
 using ListOfPolynomialOverPolynomial = std::vector<PolynomialOverPolynomial>;
-using PolynomialOverPolynomialOptional = std::optional<PolynomialOverPolynomial>;
-
-}  // namespace algebra
+using PolynomialOverPolyn}nal<PolynomialOverPolynomial>;
 
 }  // namespace alba

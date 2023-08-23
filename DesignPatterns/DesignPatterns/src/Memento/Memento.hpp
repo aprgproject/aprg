@@ -14,7 +14,7 @@ private:
 
     explicit Memento(int const state) : m_state(state) {}
 
-    int getState() const { return m_state; }
+    [[nodiscard]] int getState() const { return m_state; }
 
     void setState(int const state) { m_state = state; }
     // ...
@@ -36,7 +36,7 @@ public:
 
     explicit Originator(int const state) : m_state(state) {}
 
-    std::unique_ptr<Memento> createMemento() const {
+    [[nodiscard]] std::unique_ptr<Memento> createMemento() const {
         std::cout << "In Originator, createMemento() with " << m_state << ".\n";
         return std::unique_ptr<Memento>(new Memento(m_state));
     }

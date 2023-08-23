@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 GameState reverseGameState(GameState const gameState) {
     if (GameState::Losing == gameState) {
@@ -76,7 +74,5 @@ UnsignedInteger getOverallGrundyNumber(UnsignedIntegers const& grundyNumbers) {
             return grundyNumber1 ^ grundyNumber2;
         });
 }
-
-}  // namespace math
 
 }  // namespace alba

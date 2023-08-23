@@ -17,9 +17,9 @@ public:
 
     UndirectedGraphWithListOfEdges()  {}
 
-    bool isEmpty() const override { return m_edges.empty(); }
+    [[nodiscard]] bool isEmpty() const override { return m_edges.empty(); }
 
-    bool hasAnyConnection(Vertex const& vertex) const override {
+    [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override {
         bool result(false);
         auto itLower = m_edges.lower_bound({vertex, Vertex{}});
         if (itLower != m_edges.cend()) {
@@ -28,15 +28,15 @@ public:
         return result;
     }
 
-    bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
+    [[nodiscard]] bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
         return m_edges.find({vertex1, vertex2}) != m_edges.cend();
     }
 
-    int getNumberOfVertices() const override { return getVertices().size(); }
+    [[nodiscard]] int getNumberOfVertices() const override { return getVertices().size(); }
 
-    int getNumberOfEdges() const override { return m_numberOfEdges; }
+    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
-    Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
+    [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
         Vertices result;
         for (auto it = m_edges.lower_bound({vertex, Vertex{}}); it != m_edges.cend() && it->first == vertex; it++) {
             result.emplace_back(it->second);
@@ -44,7 +44,7 @@ public:
         return result;
     }
 
-    Vertices getVertices() const override {
+    [[nodiscard]] Vertices getVertices() const override {
         Vertices result;
         for (auto const& [startVertexOfEdge, endVertexOfEdge] : m_edges) {
             if (result.empty()) {
@@ -56,7 +56,7 @@ public:
         return result;
     }
 
-    Edges getEdges() const override {
+    [[nodiscard]] Edges getEdges() const override {
         Edges result;
         for (auto const& edge : m_edges) {
             if (edge.first <= edge.second) {

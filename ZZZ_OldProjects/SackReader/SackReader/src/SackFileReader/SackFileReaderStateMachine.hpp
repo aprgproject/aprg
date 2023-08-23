@@ -149,24 +149,24 @@ struct InputToken {
 struct InnerStates {
     InnerStates();
     void reset();
-    StateForConstant stateForConstant;
-    StateForStruct stateForStruct;
-    StateForStructAfterOpeningBraces stateForStructAfterOpeningBraces;
-    StateForEnum stateForEnum;
-    StateForEnumAfterOpeningBraces stateForEnumAfterOpeningBraces;
-    StateForUnion stateForUnion;
-    StateForUnionAfterOpeningBraces stateForUnionAfterOpeningBraces;
-    StateForTypedef stateForTypedef;
-    StateForAtDefDescription stateForAtDefDescription;
-    StateForAtParamDescription stateForAtParamDescription;
-    StateForAtTypedefDescription stateForAtTypedefDescription;
+    StateForConstant stateForConstant{StateForConstant::BeforeName};
+    StateForStruct stateForStruct{StateForStruct::BeforeName};
+    StateForStructAfterOpeningBraces stateForStructAfterOpeningBraces{StateForStructAfterOpeningBraces::BeforeParameterType};
+    StateForEnum stateForEnum{StateForEnum::BeforeName};
+    StateForEnumAfterOpeningBraces stateForEnumAfterOpeningBraces{StateForEnumAfterOpeningBraces::BeforeEnumParameterName};
+    StateForUnion stateForUnion{StateForUnion::BeforeName};
+    StateForUnionAfterOpeningBraces stateForUnionAfterOpeningBraces{StateForUnionAfterOpeningBraces::BeforeParameterType};
+    StateForTypedef stateForTypedef{StateForTypedef::BeforeDerivedName};
+    StateForAtDefDescription stateForAtDefDescription{StateForAtDefDescription::BeforeName};
+    StateForAtParamDescription stateForAtParamDescription{StateForAtParamDescription::BeforeName};
+    StateForAtTypedefDescription stateForAtTypedefDescription{StateForAtTypedefDescription::BeforeName};
 };
 
 using BaseSackFileReaderStateMachine = AlbaBaseStateMachine<State, InputToken>;
 class SackFileReaderStateMachine : public BaseSackFileReaderStateMachine {
 public:
     SackFileReaderStateMachine(Database& database, std::string const& fullPath);
-    bool isNextLineNeeded() const;
+    [[nodiscard]] bool isNextLineNeeded() const;
 
     void processInput(InputToken const& inputToken);
     void processEndOfLine();
@@ -202,7 +202,7 @@ private:
     void saveTypedefDescriptionToDatabase(std::string const& partialString);
     AlbaLocalPathHandler m_filePathHandler;
     bool m_isMessageIdFile;
-    bool m_isNextLineNeeded;
+    bool m_is{false}NextLineNeeded;
     InnerStates m_innerStates;
     std::string m_pathFromIInterface;
     std::string m_arraySize;
@@ -217,7 +217,4 @@ private:
     EnumDetails m_enumDetails;
     EnumParameterDetails m_enumParameterDetails;
     ParameterDescriptionType m_parameterDescriptionType;
-    Database& m_database;
-};
-
-}  // namespace alba
+    Database& m_d  // namespace alba::SackFileReaderStateMachineNamespacenamespace alba::SackFileReaderStateMachineNamespace

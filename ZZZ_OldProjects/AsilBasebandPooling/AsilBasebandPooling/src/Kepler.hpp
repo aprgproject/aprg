@@ -8,7 +8,7 @@ class Kepler {
 public:
     explicit Kepler(unsigned short int const nid);
     bool operator<(Kepler const& kepler) const;
-    unsigned int getNid() const;
+    [[nodiscard]] unsigned int getNid() const;
 
 private:
     unsigned short int m_nid;

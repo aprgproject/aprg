@@ -8,9 +8,7 @@ using namespace std;
 
 #define APRG_BITMAP_WRITE_TEST_FILE APRG_DIR R"(\AprgBitmap\FilesForTests\SampleBitmaps\WriteTestFile.bmp)"
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 TEST(BitmapWriteTest, TestForWritingBitmap) {
     Bitmap bitmap(APRG_BITMAP_WRITE_TEST_FILE);
@@ -36,7 +34,5 @@ TEST(BitmapWriteTest, TestForWritingMissingBitmapFile) {
     }
     bitmap.setSnippetWriteToFile(snippet);
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

@@ -3,17 +3,13 @@
 #include <Algebra/Constructs/TermRaiseToTerms.hpp>
 #include <Algebra/Constructs/TermsRaiseToExponents.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 using TermsRaiseToTermsBase = TermsRaiseToExponents<Term, TermRaiseToTerms>;
 class TermsRaiseToTerms : public TermsRaiseToTermsBase {
 public:
     TermsRaiseToTerms();
-    TermsRaiseToTerms(BaseToExponentMap const& baseToExponentMap);
+    explicit TermsRaiseToTerms(BaseToExponentMap const& baseToExponentMap);
 };
-
-}  // namespace algebra
 
 }  // namespace alba

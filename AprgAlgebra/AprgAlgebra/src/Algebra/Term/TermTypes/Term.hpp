@@ -50,26 +50,26 @@ public:
     bool operator==(Term const& second) const;
     bool operator!=(Term const& second) const;
     bool operator<(Term const& second) const;
-    bool isEmpty() const;
-    bool isConstant() const;
-    bool isVariable() const;
-    bool isOperator() const;
-    bool isMonomial() const;
-    bool isPolynomial() const;
-    bool isExpression() const;
-    bool isFunction() const;
-    bool isSimplified() const;
+    [[nodiscard]] bool isEmpty[[nodiscard]] () const;
+    [[nodiscard]] b[[nodiscard]] ool isConstant() const;
+    [[[nodiscard]] [nodiscard]] bool isVariable([[nodiscard]] ) const;
+    [[nodiscard]] bo[[nodiscard]] ol isOperator() const;
+    [[no[[nodiscard]] discard]] bool isMonomial() con[[nodiscard]] st;
+    [[nodiscard]] bool is[[nodiscard]] Polynomial() const;
+    [[nodisc[[nodiscard]] ard]] bool isExpression() const;
+ [[nodiscard]]    [[nodiscard]] bool isFunction() const;
+ [[nodiscard]]    [[nodiscard]] bool isSimplified() const;[[nodiscard]] 
 
-    TermType getTermType() const;
-    Constant const& getAsConstant() const;
-    Variable const& getAsVariable() const;
-    Operator const& getAsOperator() const;
-    Monomial const& getAsMonomial() const;
-    Polynomial const& getAsPolynomial() const;
-    Expression const& getAsExpression() const;
-    Function const& getAsFunction() const;
-    AlbaNumber const& getAsNumber() const;
-    std::string getDebugString() const;
+    [[nodiscard]] TermType getTermType() [[nodiscard]] const;
+    [[nodiscard]] Constant const& ge[[nodiscard]] tAsConstant() const;
+    [[nodiscard]] Variable[[nodiscard]]  const& getAsVariable() const;
+    [[nodiscard][[nodiscard]] ] Operator const& getAsOperator() const;
+  [[nodiscard]]   [[nodiscard]] Monomial const& getAsMonomi[[nodiscard]] al() const;
+    [[nodiscard]] Polynomial const& getAsPolynomial() const;
+    [[nodiscard]] Expression const& getAsExpression() const;
+    [[nodiscard]] Function const& getAsFunction() const;
+    [[nodiscard]] AlbaNumber const& getAsNumber() const;
+    [[nodiscard]] std::string getDebugString() const;
 
     Constant& getAsConstantReference();
     Variable& getAsVariableReference();
@@ -91,7 +91,7 @@ public:
 
 private:
     static BaseTermDataPointer createANewDataPointerFrom(Term const& term);
-    void initializeBasedOnString(std::string const& stringAsParameter);
+    void initi  // namespace alba::algebrastd::string const& stringAsParameter);
 
     friend std::ostream& operator<<(std::ostream& out, Term const& term);
 
@@ -102,4 +102,4 @@ private:
 
 using Terms = std::vector<Term>;
 
-}  // namespace alba
+}  // namespace alba::algebra

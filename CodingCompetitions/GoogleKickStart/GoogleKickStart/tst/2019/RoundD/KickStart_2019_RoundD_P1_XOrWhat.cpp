@@ -65,11 +65,11 @@ public:
         initialize(valuesToCheck, suggestedNumberOfBlocks);
     }
 
-    Index getBlockSize() const { return m_blockSize; }
+    [[nodiscard]] Index getBlockSize() const { return m_blockSize; }
 
-    BlockValues const& getBlocks() const { return m_blocks; }
+    [[nodiscard]] BlockValues const& getBlocks() const { return m_blocks; }
 
-    Output getResultOnInterval(Index const start, Index const end) const {
+    [[nodiscard]] Output getResultOnInterval(Index const start, Index const end) const {
         // This is max(O(k), O(n/k)) time.
         Output result{};
         if (start < m_values.size() && end < m_values.size() && start <= end) {
@@ -128,7 +128,7 @@ protected:
         }
     }
 
-    Index getMultipleThatIsGreaterOrEqual(Index const multiple, Index const number) const {
+    [[nodiscard]] Index getMultipleThatIsGreaterOrEqual(Index const multiple, Index const number) const {
         Index result(0);
         if (multiple > 0 && number > 0) {
             result = ((number - 1) / multiple + 1) * multiple;
@@ -136,7 +136,7 @@ protected:
         return result;
     }
 
-    Index getMultipleThatIsLesserOrEqual(Index const multiple, Index const number) const {
+    [[nodiscard]] Index getMultipleThatIsLesserOrEqual(Index const multiple, Index const number) const {
         Index result(0);
         if (multiple > 0) {
             result = number / multiple * multiple;

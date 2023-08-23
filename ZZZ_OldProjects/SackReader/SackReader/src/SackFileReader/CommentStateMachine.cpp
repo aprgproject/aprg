@@ -74,4 +74,4 @@ void CommentStateMachine::processStateInCommentAsterisk(InputToken const& inputT
     }
 }
 
-}  // namespace alba
+}  // namespace alba::CommentStateMachineNamespace

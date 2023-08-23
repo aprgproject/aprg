@@ -7,9 +7,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 UnsignedInteger getNumberOfSymmetricCombinationsUsingBurnsideLemma(
     UnsignedInteger const numberOfWaysToChangePosition,
@@ -63,7 +61,5 @@ UnsignedInteger getNumberOfCombinationsOfAPearlNecklace(
             return getRaiseToPowerForIntegers(numberOfColors, getGreatestCommonFactor(kthWay - 1, nWays));
         });
 }
-
-}  // namespace math
 
 }  // namespace alba

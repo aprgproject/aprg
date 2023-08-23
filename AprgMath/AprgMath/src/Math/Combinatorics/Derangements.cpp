@@ -8,9 +8,7 @@ using namespace alba::AlbaMathConstants;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 UnsignedInteger getNumberOfDerangements(UnsignedInteger const n) {
     // As an example, let us count the number of derangements of elements {1,2,...,n},
@@ -184,7 +182,5 @@ UnsignedInteger getNumberOfDerangementsApproximation(UnsignedInteger const n) {
 double getDerangementsProbability(UnsignedInteger const n) {
     return static_cast<double>(getNumberOfDerangements(n)) / getNumberOfPermutations(n, n);
 }
-
-}  // namespace math
 
 }  // namespace alba

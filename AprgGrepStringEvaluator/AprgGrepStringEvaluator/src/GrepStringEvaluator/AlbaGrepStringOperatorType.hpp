@@ -16,4 +16,4 @@ enum class AlbaGrepStringOperatorType {
     XnorOperator,
 };
 
-}  // namespace alba  // namespace alba
+}  // namespace alba

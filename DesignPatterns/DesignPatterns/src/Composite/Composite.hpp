@@ -12,7 +12,7 @@ class Component {
 public:
     virtual ~Component() = default;
 
-    virtual Component const* getChildPointerAt(
+    [[nodiscard]] virtual Component const* getChildPointerAt(
         int const) const  // Make sure that this doesn't break interface segregation principle. (Make sure the
                           // method/function makes sense.)
     {
@@ -40,7 +40,7 @@ public:
 
 class Composite : public Component {
 public:
-    Component const* getChildPointerAt(int const index) const override { return m_children[index].get(); }
+    [[nodiscard]] Component const* getChildPointerAt(int const index) const override { return m_children[index].get(); }
 
     void add(std::unique_ptr<Component> component) override { m_children.emplace_back(move(component)); }
 

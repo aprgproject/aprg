@@ -16,7 +16,7 @@ public:
         default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual
                   // functions)
 
-    bool isConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
+    [[nodiscard]] bool isConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
         auto it1 = m_vertexToComponentIdMap.find(vertex1);
         auto it2 = m_vertexToComponentIdMap.find(vertex2);
         bool result(false);
@@ -26,9 +26,9 @@ public:
         return result;
     }
 
-    int getNumberOfComponentIds() const override { return m_numberOfComponentIds; }
+    [[nodiscard]] int getNumberOfComponentIds() const override { return m_numberOfComponentIds; }
 
-    int getComponentId(Vertex const& vertex) const override {
+    [[nodiscard]] int getComponentId(Vertex const& vertex) const override {
         int result(0);
         auto it = m_vertexToComponentIdMap.find(vertex);
         if (it != m_vertexToComponentIdMap.cend()) {

@@ -87,11 +87,11 @@ public:
         initialize(valuesToCheck);
     }
 
-    Index getStartOfChildren() const { return m_startOfChildren; }
+    [[nodiscard]] Index getStartOfChildren() const { return m_startOfChildren; }
 
-    Values const& getTreeValues() const { return m_treeValues; }
+    [[nodiscard]] Values const& getTreeValues() const { return m_treeValues; }
 
-    Value getValueOnInterval(Index const start, Index const end) const  // bottom to top approach
+    [[nodiscard]] Value getValueOnInterval(Index const start, Index const end) const  // bottom to top approach
     {
         // This has log(N) running time
         return getValueOnIntervalFromBottomToTop(start, end);
@@ -193,7 +193,7 @@ protected:
         }
     }
 
-    Value getValueOnIntervalFromBottomToTop(Index const start, Index const end) const {
+    [[nodiscard]] Value getValueOnIntervalFromBottomToTop(Index const start, Index const end) const {
         // This has log(N) running time
         Value result{};
         Index first(m_startOfChildren + start);

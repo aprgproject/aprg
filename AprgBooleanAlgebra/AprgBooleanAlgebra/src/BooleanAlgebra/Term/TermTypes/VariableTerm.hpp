@@ -22,9 +22,9 @@ public:
 
     VariableTerm operator~() const;
 
-    bool isNegated() const;
+    [[nodiscard]] bool isNegated([[nodiscard]] ) const;
 
-    std::string getVariableTermName() const;
+    [[nodiscard]] std::string getVariableTermName() const;
 
     void setVariableTermName(std::string const& variableName);
     void negate();

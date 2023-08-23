@@ -15,12 +15,10 @@ using namespace alba::algebra::Factorization;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 PolynomialOverPolynomial::PolynomialOverPolynomial()
-    : m_numerator(), m_denominator(), m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(false) {}
+    :  m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(false) {}
 
 PolynomialOverPolynomial::PolynomialOverPolynomial(Polynomial const& numerator, Polynomial const& denominator)
     : m_numerator(numerator),
@@ -215,7 +213,5 @@ Polynomial PolynomialOverPolynomial::multiplyAndSimplifyFactors(Polynomials cons
     product.simplify();
     return product;
 }
-
-}  // namespace algebra
 
 }  // namespace alba

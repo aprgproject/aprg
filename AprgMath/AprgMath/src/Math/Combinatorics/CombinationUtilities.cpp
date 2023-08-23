@@ -6,9 +6,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 bool isNumberOfCombinationsEqualToItsCounterpart(UnsignedInteger const n, UnsignedInteger const k) {
     // (n, k) = (n, n-k)
@@ -46,7 +44,5 @@ bool isTheSumOfAllNumberOfCombinationsEqualTo2ToTheN(UnsignedInteger const n) {
 
     return sumOfNumberOfCombinations == AlbaBitValueUtilities<UnsignedInteger>::get2ToThePowerOf(n);
 }
-
-}  // namespace math
 
 }  // namespace alba

@@ -3,9 +3,7 @@
 #include <Math/GameTheory/Common/GameState.hpp>
 #include <Math/Types.hpp>
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 class StickGame {
 public:
@@ -36,15 +34,13 @@ public:
     // requires that the number of sticks is not divisible by 4 when it is our move. If it is, there is nothing we can
     // do, and the opponent will win the game if they play optimally.
 
-    StickGame(UnsignedInteger const maxSticksToTake);
+    explicit StickGame(UnsignedInteger const maxSticksToTake);
 
-    GameState getGameState(UnsignedInteger const remainingSticks) const;
-    UnsignedInteger getOptimalNumberOfSticksToTake(UnsignedInteger const remainingSticks) const;
+    [[nodiscard]] GameState getGameState(UnsignedInteger const remainingSticks) const;
+    [[nodiscard]] UnsignedInteger getOptimalNumberOfSticksToTake(UnsignedInteger const remainingSticks) const;
 
 private:
     UnsignedInteger const m_maxSticksToTake;
 };
-
-}  // namespace math
 
 }  // namespace alba

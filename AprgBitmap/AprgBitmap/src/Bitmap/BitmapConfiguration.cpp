@@ -13,24 +13,8 @@ using namespace std;
 namespace alba::AprgBitmap {
 
 BitmapConfiguration::BitmapConfiguration()
-    : m_fileSize(0),
-      m_pixelArrayAddress(0),
-      m_sizeOfHeader(0),
-      m_bitmapWidth(0),
-      m_bitmapHeight(0),
-      m_numberOfColorPlanes(0),
-      m_numberOfBitsPerPixel(8),
-      m_compressionMethodType(CompressedMethodType::Unknown),
-      m_imageSize(0),
-      m_bitmapSize(0),
-      m_horizontalResolutionPixelInAMeter(0),
-      m_verticalResolutionPixelInAMeter(0),
-      m_numberOfColors(0),
-      m_numberImportantOfColors(0),
-      m_numberOfBytesForDataInRow(0),
-      m_paddingForRowMemoryAlignment(0),
-      m_numberOfBytesPerRowInFile(0),
-      m_bitMaskForValue(0)
+    
+      
       {}
 
 bool BitmapConfiguration::isValid() const {

@@ -18,4 +18,4 @@ BaseTerm const& getBaseTermConstReferenceFromUniquePointer(BaseTermUniquePointer
 BaseTerm& getBaseTermReferenceFromTerm(Term& term);
 BaseTerm& getBaseTermReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer);
 
-}  // namespace alba
+}  // namespace alba::algebra

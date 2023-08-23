@@ -15,4 +15,4 @@ using BitmapSignedXYs = std::vector<BitmapSignedXY>;
 using Colors = std::vector<uint32_t>;
 using PixelData = AlbaMemoryBuffer;
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap::AprgBitmap::AprgBitmap::AprgBitmap::AprgBitmap

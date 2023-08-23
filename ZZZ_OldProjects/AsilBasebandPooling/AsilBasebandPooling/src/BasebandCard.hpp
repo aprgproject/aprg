@@ -11,8 +11,8 @@ class BasebandCard {
 public:
     BasebandCard(unsigned char const boardId, KeplerInitializerList const& keplers);
     bool operator<(BasebandCard const& basebandCard) const;
-    unsigned char getBoardId() const;
-    SetOfKeplers getKeplers() const;
+    [[nodiscard]] unsigned char getBoardId[[nodiscard]] () const;
+    [[nodiscard]] SetOfKeplers getKeplers() const;
 
 private:
     unsigned char m_boardId;

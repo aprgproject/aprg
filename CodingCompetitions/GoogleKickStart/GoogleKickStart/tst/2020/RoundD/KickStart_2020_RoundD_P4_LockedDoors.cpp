@@ -50,7 +50,7 @@ struct UnionFind {
         num--;
     }
     long long size(long long x) { return rs[find(x)]; }
-    long long count() const { return num; }
+    [[nodiscard]] long long count() const { return num; }
 };
 
 void runTestCase(int const testCaseNumber) {

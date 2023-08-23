@@ -2,11 +2,7 @@
 
 #include <Algebra/Term/TermTypes/Polynomial.hpp>
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 Polynomials factorizeAPolynomial(Polynomial const& polynomial);
 Polynomials factorizePolynomials(Polynomials const& polynomials);
@@ -34,9 +30,5 @@ int getDeltaSize(Polynomials const& polynomials, int const originalSize);
 bool isFactorizeUsingPatternsNeeded(Polynomial const& polynomial);
 bool isFactorizeIncreasingAndDecreasingExponentsFormNeeded(Polynomial const& polynomial);
 bool isFactorizeBySplittingToSmallerPolynomialsNeeded(Polynomial const& polynomial);
-
-}  // namespace Factorization
-
-}  // namespace algebra
 
 }  // namespace alba

@@ -12,9 +12,7 @@ using namespace alba::mathHelper;
 using namespace alba::algebra::Simplification;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 MultiplicationAndDivisionOfRadicals::MultiplicationAndDivisionOfRadicals() {}
 
@@ -146,7 +144,5 @@ void MultiplicationAndDivisionOfRadicals::saveRemainingTerms(TermsWithDetails co
         m_termsWithDetails.emplace_back(remainingTerm);
     }
 }
-
-}  // namespace algebra
 
 }  // namespace alba

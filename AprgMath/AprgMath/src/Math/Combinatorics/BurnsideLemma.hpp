@@ -2,9 +2,7 @@
 
 #include <Math/Types.hpp>
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 UnsignedInteger getNumberOfSymmetricCombinationsUsingBurnsideLemma(
     UnsignedInteger const numberOfWaysToChangePosition,
@@ -12,7 +10,5 @@ UnsignedInteger getNumberOfSymmetricCombinationsUsingBurnsideLemma(
 
 UnsignedInteger getNumberOfCombinationsOfAPearlNecklace(
     UnsignedInteger const numberOfPearls, UnsignedInteger const& numberOfColors);
-
-}  // namespace math
 
 }  // namespace alba

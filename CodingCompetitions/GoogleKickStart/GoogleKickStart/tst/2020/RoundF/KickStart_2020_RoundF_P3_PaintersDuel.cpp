@@ -84,8 +84,7 @@ int calc(int s, ll ban, int a, int b, int who) {
             return ok[s][a][b][who][ban] = score;
         }             return ok[s][a][b][who][ban] = calc(s, ban, a, b, 1);
        
-    } else {
-        if (can_move(ban, b)) {
+    }         if (can_move(ban, b)) {
             int score = 1e9;
             for (int x : g[b]) {
                 if (((ban >> x) & 1) != 0) { continue;
@@ -96,7 +95,7 @@ int calc(int s, ll ban, int a, int b, int who) {
             return ok[s][a][b][who][ban] = score;
         }             return ok[s][a][b][who][ban] = calc(s, ban, a, b, 0);
        
-    }
+   
 }
 
 void runTestCase(int const testCaseNumber) {

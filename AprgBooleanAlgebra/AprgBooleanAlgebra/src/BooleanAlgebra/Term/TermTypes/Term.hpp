@@ -40,20 +40,20 @@ public:
 
     Term operator~() const;
 
-    bool isEmpty() const;
-    bool isConstant() const;
-    bool isVariableTerm() const;
-    bool isOperator() const;
-    bool isExpression() const;
-    bool isSimplified() const;
+    [[nodiscard]] bool isEmpty[[nodiscard]] () const;
+    [[nodiscard]] b[[nodiscard]] ool isConstant() const;
+    [[nod[[nodiscard]] iscard]] bool isVariableTerm([[nodiscard]] ) const;
+    [[nodiscard]] bool[[nodiscard]]  isOperator() const;
+    [[nodis[[nodiscard]] card]] bool isExpression() const;
+[[nodiscard]]     [[nodiscard]] bool isSimplified() const;
 
-    TermType getTermType() const;
-    Constant const& getConstantConstReference() const;
-    VariableTerm const& getVariableTermConstReference() const;
-    Operator const& getOperatorConstReference() const;
-    Expression const& getExpressionConstReference() const;
-    bool getBooleanValue() const;
-    std::string getDebugString() const;
+    [[nod[[nodiscard]] iscard]] TermType getTermType() const;
+    [[nodiscard]] Consta[[nodiscard]] nt const& getConstantConstReference() const;
+    [[nodi[[nodiscard]] scard]] VariableTerm const& getVariableTermConstReference()[[nodiscard]]  const;
+    [[nodiscard]] Operator[[nodiscard]]  const& getOperatorConstReference() const;
+    [[nodiscard]] Expression const& getExpressionConstReference() const;
+    [[nodiscard]] bool getBooleanValue() const;
+    [[nodiscard]] std::string getDebugString() const;
 
     Constant& getConstantReference();
     VariableTerm& getVariableTermReference();

@@ -20,9 +20,9 @@ public:
 
     LinkedListBag() :  m_first(nullptr) {}
 
-    bool isEmpty() const override { return m_size == 0; }
+    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
 
-    int getSize() const override { return m_size; }
+    [[nodiscard]] int getSize() const override { return m_size; }
 
     void add(Object const& object) override {
         NodeUniquePointer newNext(std::move(m_first));

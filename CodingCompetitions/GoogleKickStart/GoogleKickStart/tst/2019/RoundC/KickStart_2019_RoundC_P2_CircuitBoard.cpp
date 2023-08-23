@@ -49,7 +49,7 @@ public:
         initialize(valuesToCheck);
     }
 
-    Value getSelectedValueOnInterval(Index const start, Index const end) const {
+    [[nodiscard]] Value getSelectedValueOnInterval(Index const start, Index const end) const {
         // This is on constant time
         Value result{};
         if (start < m_columns && end < m_columns)  // this condition is correct
@@ -95,13 +95,13 @@ private:
         }
     }
 
-    Index getMatrixIndex(Index const x, Index const y) const { return y * m_columns + x; }
+    [[nodiscard]] Index getMatrixIndex(Index const x, Index const y) const { return y * m_columns + x; }
 
-    Index get2ToThePowerOf(Index const exponent) const { return Index(1) << exponent; }
+    [[nodiscard]] Index get2ToThePowerOf(Index const exponent) const { return Index(1) << exponent; }
 
-    bool isPowerOfTwo(Index const index) const { return (index & (index - 1)) == 0; }
+    [[nodiscard]] bool isPowerOfTwo(Index const index) const { return (index & (index - 1)) == 0; }
 
-    Index getCeilOfLogarithmWithBase2Of(Index const index) const {
+    [[nodiscard]] Index getCeilOfLogarithmWithBase2Of(Index const index) const {
         /* constexpr Index numberOfBits = sizeof(Index) * 8;
         Index result = numberOfBits - __builtin_clz(index);
         result = (result == 0) ? 0 : isPowerOfTwo(index) ? result - 1 : result;

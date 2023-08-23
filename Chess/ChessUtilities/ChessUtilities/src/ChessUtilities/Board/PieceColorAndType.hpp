@@ -18,4 +18,4 @@ enum class PieceColorAndType {
     BlackKing = 14     // 0b1110
 };
 
-}  // namespace alba
+}  // namespace alba::chess::chess::chess::chess

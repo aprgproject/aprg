@@ -32,7 +32,7 @@ public:
 
     std::unique_ptr<Iterator> createIterator() override;  // defined after Iterator is declared
 
-    int size() const { return m_count; }
+    [[nodiscard]] int size() const { return m_count; }
 
     int getValueAt(int const index) { return m_listPointer[index]; }
     // ...
@@ -53,8 +53,8 @@ public:
 
     virtual void gotoFirst() = 0;
     virtual void gotoNext() = 0;
-    virtual bool isDone() const = 0;
-    virtual int getCurrentItem() const = 0;
+    [[nodiscard]] virtual bool isDone() const = 0;
+    [[nodiscard]] virtual int getCurrentItem() const = 0;
     // ...
 };
 
@@ -70,9 +70,9 @@ public:
 
     void gotoNext() override { index++; }
 
-    bool isDone() const override { return (index >= m_aggregate.size()); }
+    [[nodiscard]] bool isDone() const override { return (index >= m_aggregate.size()); }
 
-    int getCurrentItem() const override { return isDone() ? -1 : m_aggregate.getValueAt(index); }
+    [[nodiscard]] int getCurrentItem() const override { return isDone() ? -1 : m_aggregate.getValueAt(index); }
     // ...
 
 private:

@@ -2,9 +2,7 @@
 
 #include <Geometry/ThreeDimensions/Constructs/Point.hpp>
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 class EllipticHyperboloid {
 public:
@@ -15,14 +13,14 @@ public:
     // ((x-center.x)^2/aCoefficient^2) + ((y-center.y)^2/bCoefficient^2) - ((z-center.z)^2/cCoefficient^2) = 1
     bool operator==(EllipticHyperboloid const& ellipticHyperboloid) const;
     bool operator!=(EllipticHyperboloid const& ellipticHyperboloid) const;
-    Point getCenter() const;
-    double getAValue() const;
-    double getBValue() const;
-    double getCValue() const;
-    bool isInside(Point const& point) const;
-    double calculateXFromYAndZ(double const y, double const z, double const signOfRoot) const;
-    double calculateYFromXAndZ(double const x, double const z, double const signOfRoot) const;
-    double calculateZFromXAndY(double const x, double const y, double const signOfRoot) const;
+    [[nodiscard]] Point getCenter() const;
+    [[nodiscard]] double getAValue() const;
+    [[nodiscard]] double getBValue() const;
+    [[nodiscard]] double getCValue() const;
+    [[nodiscard]] bool isInside(Point const& point) const;
+    [[nodiscard]] double calculateXFromYAndZ(double const y, double const z, double const signOfRoot) const;
+    [[nodiscard]] double calculateYFromXAndZ(double const x, double const z, double const signOfRoot) const;
+    [[nodiscard]] double calculateZFromXAndY(double const x, double const y, double const signOfRoot) const;
 
 private:
     friend std::ostream& operator<<(std::ostream& out, EllipticHyperboloid const& ellipticHyperboloid);
@@ -36,5 +34,4 @@ private:
 
 using EllipticHyperboloids = std::vector<EllipticHyperboloid>;
 
-}  // namespace ThreeDimensions
 }  // namespace alba

@@ -52,4 +52,4 @@ uint8_t Piece::getData() const { return m_data; }
 
 char Piece::getFenCharacter() const { return convertToFenCharacter(extractType(m_data), extractColor(m_data)); }
 
-}  // namespace alba
+}  // namespace alba::chess

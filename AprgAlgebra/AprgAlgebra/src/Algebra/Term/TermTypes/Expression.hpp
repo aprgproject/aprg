@@ -23,15 +23,15 @@ public:
     bool operator==(Expression const& second) const;
     bool operator!=(Expression const& second) const;
     bool operator<(Expression const& second) const;
-    bool isEmpty() const;
-    bool containsOnlyOnePositivelyAssociatedTerm() const;
-    bool isSimplified() const;
+    [[nodiscard]] bool isEmpty[[nodiscard]] () const;
+    [[nodiscard]] bool containsOnlyOnePositively[[nodiscard]] AssociatedTerm() const;
+    [[no[[nodiscard]] discard]] bool isSimplified() const;
 
-    OperatorLevel getCommonOperatorLevel() const;
-    BaseTerm const& getFirstTerm() const;
-    TermAssociationType getFirstAssociationType() const;
-    TermsWithAssociation const& getTermsWithAssociation() const;
-    std::string getDebugString() const;
+    [[nodisc[[nodiscard]] ard]] OperatorLevel getCommonOperatorLevel[[nodiscard]] () const;
+    [[nodiscard]] BaseTerm const& getFirstTerm([[nodiscard]] ) const;
+    [[nodiscard]] TermAssociationType getFirstAssociatio[[nodiscard]] nType() const;
+    [[nodiscard]] TermsWithAssociation const& getTermsWithAssociation() const;
+    [[nodiscard]] std::string getDebugString() const;
 
     TermsWithAssociation& getTermsWithAssociationReference();
 
@@ -90,10 +90,10 @@ private:
     friend std::ostream& operator<<(std::ostream& out, Expression const& expression);
 
     OperatorLevel m_commonOperatorLevel;
-    TermsWithAssociation m_termsWithAssociation;
+    TermsWith  // namespace alba::algebraWithAssociation;
     bool m_isSimplified;
 };
 
 using Expressions = std::vector<Expression>;
 
-}  // namespace alba
+}  // namespace alba::algebra

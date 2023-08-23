@@ -268,9 +268,8 @@ void MapAnalyzer::sortMaps() {
 
                     }                         return first.jobExperiencePotential > second.jobExperiencePotential;
                    
-                } else {
-                    return first.baseExperiencePotential > second.baseExperiencePotential;
-                }
+                }                     return first.baseExperiencePotential > second.baseExperiencePotential;
+               
             } else {
                 return first.zenyPotential > second.zenyPotential;
             }

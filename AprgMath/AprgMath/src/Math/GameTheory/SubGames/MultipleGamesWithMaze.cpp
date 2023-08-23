@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 bool MultipleGamesWithMaze::hasNoMoves() const {
     bool result(true);
@@ -82,7 +80,5 @@ UnsignedInteger MultipleGamesWithMaze::getCombinedGrundyNumber() {
     }
     return result;
 }
-
-}  // namespace math
 
 }  // namespace alba

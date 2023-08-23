@@ -2,9 +2,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 UnsignedInteger getUnionCountOfTwoSets(
     UnsignedInteger const aSize, UnsignedInteger const bSize, UnsignedInteger const abIntersection) {
@@ -29,7 +27,5 @@ UnsignedInteger getIntersectionCountOfThreeSets(
     UnsignedInteger const abcUnion) {
     return abcUnion - aSize - bSize - cSize + abIntersection + acIntersection + bcIntersection;
 }
-
-}  // namespace math
 
 }  // namespace alba

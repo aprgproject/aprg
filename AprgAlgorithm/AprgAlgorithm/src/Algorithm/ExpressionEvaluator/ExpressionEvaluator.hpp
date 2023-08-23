@@ -52,16 +52,16 @@ public:
           m_operator(operatorValue),
           m_operatorSyntaxType(operatorSyntaxValue),
           m_operatorPriority(operatorPriority) {}
-    bool isOperator() const { return m_termType == TermType::Operator; }
-    bool isValue() const { return m_termType == TermType::Value; }
-    bool isStartGroupOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::StartGroup; }
-    bool isEndGroupOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::EndGroup; }
-    bool isPrefixUnaryOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::PrefixUnary; }
-    bool isBinaryOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::Binary; }
-    ValueTemplateType getValue() const { return m_value; }
+    [[nodiscard]] bool isOperator() const { return m_termType == TermType::Operator; }
+    [[nodiscard]] bool isValue() const { return m_termType == TermType::Value; }
+    [[nodiscard]] bool isStartGroupOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::StartGroup; }
+    [[nodiscard]] bool isEndGroupOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::EndGroup; }
+    [[nodiscard]] bool isPrefixUnaryOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::PrefixUnary; }
+    [[nodiscard]] bool isBinaryOperator() const { return m_operatorSyntaxType == OperatorSyntaxType::Binary; }
+    [[nodiscard]] ValueTemplateType getValue() const { return m_value; }
     ValueTemplateType& getReferenceOfValue() { return m_value; }
-    OperatorTemplateType getOperator() const { return m_operator; }
-    int getOperatorPriority() const { return m_operatorPriority; }
+    [[nodiscard]] OperatorTemplateType getOperator() const { return m_operator; }
+    [[nodiscard]] int getOperatorPriority() const { return m_operatorPriority; }
 
 private:
     TermType m_termType;
@@ -92,7 +92,7 @@ public:
         }
         return result;
     }
-    Terms getTerms() const { return m_terms; }
+    [[nodiscard]] Terms getTerms() const { return m_terms; }
     Terms& getTermsReference() { return m_terms; }
 
 private:
@@ -154,9 +154,9 @@ public:
         }
         return result;
     }
-    Terms getTerms() const { return m_terms; }
+    [[nodiscard]] Terms getTerms() const { return m_terms; }
     Terms& getTermsReference() { return m_terms; }
-    bool isEvaluationPossible() const {
+    [[nodiscard]] bool isEvaluationPossible() const {
         int resultStackSize(0);
         for (Term const& term : m_terms) {
             if (term.isValue()) {

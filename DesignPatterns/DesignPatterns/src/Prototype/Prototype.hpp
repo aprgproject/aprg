@@ -12,7 +12,7 @@ public:
     virtual ~Prototype() = default;
 
     virtual std::unique_ptr<Prototype> clone() = 0;
-    virtual std::string getType() const = 0;
+    [[nodiscard]] virtual std::string getType() const = 0;
     // ...
 };
 
@@ -23,7 +23,7 @@ class ConcretePrototypeA : public Prototype {
 public:
     std::unique_ptr<Prototype> clone() override { return std::make_unique<ConcretePrototypeA>(); }
 
-    std::string getType() const override { return "type A"; }
+    [[nodiscard]] std::string getType() const override { return "type A"; }
     // ...
 };
 
@@ -31,7 +31,7 @@ class ConcretePrototypeB : public Prototype {
 public:
     std::unique_ptr<Prototype> clone() override { return std::make_unique<ConcretePrototypeB>(); }
 
-    std::string getType() const override { return "type B"; }
+    [[nodiscard]] std::string getType() const override { return "type B"; }
     // ...
 };
 

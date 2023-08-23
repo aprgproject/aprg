@@ -25,23 +25,23 @@ public:
 
     bool save(std::string const& filePath, AudioFormat format = AudioFormat::Wave);
 
-    int getSampleRate() const;
+    [[nodiscard]] int getSampleRate([[nodiscard]] ) const;
 
-    int getNumChannels() const;
+    [[nodiscard]] int g[[nodiscard]] etNumChannels() const;
 
-    bool isMono() const;
+  [[nodiscard]]   [[nodiscard]] bool isMono([[nodiscard]] ) const;
 
-    bool isStereo() const;
+    [[nodiscard]] bo[[nodiscard]] ol isStereo() const;
 
-    int getBitDepth() const;
+    [[nodiscard]] in[[nodiscard]] t getBitDepth() const;
 
-    int getNumSamplesPerChannel() const;
+    [[nodiscard]] int getNumSamplesPerChannel() const;
 
     std::vector<T> const& getSamplesAtChannel(int const channelIndex) const;
     std::vector<T>& getSamplesReferenceAtChannel(int const channelIndex);
 
-    /** @Returns the length in seconds of the audio file based on the number of samples and sample rate */
-    double getLengthInSeconds() const;
+    /** @Returns the length[[nodiscard]]  in seconds of the audio file based on the number of samples and sample rate */
+    [[nodiscard]] double getLengthInSeconds() const;
 
     /** Prints a summary of the audio file to the console */
     void printSummary() const;
@@ -112,11 +112,11 @@ private:
     void addInt16ToFileData(
         std::vector<uint8_t>& fileDataBytes, int16_t i, Endianness endianness = Endianness::LittleEndian);
 
-    bool writeDataToFile(std::vector<uint8_t>& fileDataBytes, std::string const& filePath);
+    bool writeDataToFile(std::vector<uint8_t>& fileDataBytes, std::stri  // namespace alba::AprgAudio;
 
     AudioFormat audioFileFormat;
     int sampleRate;
     int bitDepth;
 };
 
-}  // namespace alba
+}  // namespace alba::AprgAudio

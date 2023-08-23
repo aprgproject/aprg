@@ -17,12 +17,12 @@ public:
     bool operator==(TermsWithAssociation const& second) const;
     bool operator!=(TermsWithAssociation const& second) const;
     bool operator<(TermsWithAssociation const& second) const;
-    bool isEmpty() const;
+    [[nodiscard]] bool isEmpty([[nodiscard]] ) const;
 
-    int getSize() const;
-    BaseTerm const& getFirstTerm() const;
-    TermAssociationType getFirstAssociationType() const;
-    TermsWithDetails const& getTermsWithDetails() const;
+    [[nodiscard[[nodiscard]] ]] int getSize() const;
+    [[nodiscard]] BaseTerm const& getFirstTerm() const;
+    [[nodiscard]] T[[nodiscard]] ermAssociationType getFirstAssociationType() const;
+    [[nodiscard]] TermsWithDetails const& getTermsWithDetails() const;
     TermsWithDetails& getTermsWithDetailsReference();
 
     void clear();
@@ -33,10 +33,8 @@ public:
     void putTermWithAssociation(BaseTerm const& baseTerm, TermAssociationType const associationType);
     void putTermWithPositiveAssociation(BaseTerm const& baseTerm);
     void putTermWithNegativeAssociation(BaseTerm const& baseTerm);
-    void reverseTheAssociationOfTheTerms();
-
-private:
+    void reverseTheAssociation  // namespace alba::algebraate:
     TermsWithDetails m_termsWithDetails;
 };
 
-}  // namespace alba
+}  // namespace alba::algebra

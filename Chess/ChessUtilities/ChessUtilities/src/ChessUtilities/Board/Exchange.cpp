@@ -19,4 +19,4 @@ int Exchange::getValue() const { return m_value; }
 
 int Exchange::getCount() const { return m_count; }
 
-}  // namespace alba
+}  // namespace alba::chess

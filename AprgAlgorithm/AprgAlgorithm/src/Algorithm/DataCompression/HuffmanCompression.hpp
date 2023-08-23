@@ -50,7 +50,7 @@ public:
             TrieNodeUniquePointer rightAsParameter)
             : character(characterAsParameter), left(std::move(leftAsParameter)), right(std::move(rightAsParameter)) {}
 
-        bool isLeaf() const { return !left && !right; }
+        [[nodiscard]] bool isLeaf() const { return !left && !right; }
         char character;  // not used if internal node
         TrieNodeUniquePointer left;
         TrieNodeUniquePointer right;

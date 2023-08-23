@@ -15,4 +15,4 @@ Term& operator&=(Term& term1, Term const& term2);
 Term operator|(Term const& term1, Term const& term2);
 Term& operator|=(Term& term1, Term const& term2);
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

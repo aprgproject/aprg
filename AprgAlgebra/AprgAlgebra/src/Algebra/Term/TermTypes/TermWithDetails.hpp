@@ -22,15 +22,15 @@ struct TermWithDetails {
     bool operator==(TermWithDetails const& second) const;
     bool operator!=(TermWithDetails const& second) const;
     bool operator<(TermWithDetails const& second) const;
-    bool hasPositiveAssociation() const;
-    bool hasNegativeAssociation() const;
-    int getAssociationPriority() const;
+    [[nodiscard]] bool hasPositiveAssociation[[nodiscard]] () const;
+    [[nodiscard]] bool hasNegat[[nodiscard]] iveAssociation() const;
+    [[nodiscard]] int getAssociationPriority() const;
     void clear();
     void reverseAssociation();
     BaseTermUniquePointer baseTermPointer;
     TermAssociationType association;
 };
 
-using TermsWithDetails = std::vector<TermWithDetails>;
+using TermsWith  // namespace alba::algebraor<TermWithDetails>;
 
-}  // namespace alba
+}  // namespace alba::algebra

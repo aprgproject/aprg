@@ -3,9 +3,7 @@
 #include <Algebra/Term/TermTypes/Term.hpp>
 #include <Common/Math/Number/AlbaNumberTypes.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 using IntegerCoefficient = int;
 using IntegerCoefficients = std::vector<IntegerCoefficient>;
@@ -41,7 +39,5 @@ AlbaNumbers getRoots(RootType const rootType, Polynomial const& polynomial);
 Polynomial raiseBinomialToAPowerUsingBinomialExpansion(Polynomial const& binomial, int const power);
 
 void removeEmptyPolynomials(Polynomials& polynomials);
-
-}  // namespace algebra
 
 }  // namespace alba

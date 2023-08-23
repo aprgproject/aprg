@@ -6,9 +6,7 @@
 
 #include <map>
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 class GameWithMaze {
 public:
@@ -24,9 +22,9 @@ public:
     using Coordinates = std::vector<Coordinate>;
     static constexpr GrundyNumberEntry INVALID_GRUNDY_NUMBER = -1;
 
-    GameWithMaze(BooleanMatrix const& isBlockedMatrix);
+    explicit GameWithMaze(BooleanMatrix const& isBlockedMatrix);
 
-    bool hasNoMoves(Coordinate const& coordinate) const;
+    [[nodiscard]] bool hasNoMoves(Coordinate const& coordinate) const;
     UnsignedInteger getGrundyNumberAt(Coordinate const& coordinate);
     GameState getGameStateAt(Coordinate const& coordinate);
     Coordinate getOptimalNextCoordinateAt(Coordinate const& coordinate);
@@ -36,14 +34,12 @@ public:
 
 private:
     SetOfUnsignedIntegers getNextGrundyNumbers(Coordinate const& coordinate);
-    Coordinates getNextCoordinates(Coordinate const& coordinate) const;
+    [[nodiscard]] Coordinates getNextCoordinates(Coordinate const& coordinate) const;
     void retrieveLeftCoordinates(Coordinates& retrievedCoordinates, Coordinate const& coordinate) const;
     void retrieveUpCoordinates(Coordinates& retrievedCoordinates, Coordinate const& coordinate) const;
 
     BooleanMatrix const& m_isBlockedMatrix;
     GrundyNumberMatrix m_grundyNumberMatrix;  // dynamic programming
 };
-
-}  // namespace math
 
 }  // namespace alba

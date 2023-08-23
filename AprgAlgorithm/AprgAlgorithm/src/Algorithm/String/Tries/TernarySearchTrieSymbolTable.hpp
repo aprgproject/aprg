@@ -22,7 +22,7 @@ public:
 
     TernarySearchTrieSymbolTable() : b_root(BaseClass::m_root) {}
 
-    Value get(Key const& key) const override {
+    [[nodiscard]] Value get(Key const& key) const override {
         Value result{};
         Node const* const nodePointer(this->getStartingOnThisNode(b_root, key, 0));
         if (nodePointer != nullptr) {
@@ -34,7 +34,7 @@ public:
         return result;
     }
 
-    Strings getAllKeysWithPrefix(Key const& prefix) const override {
+    [[nodiscard]] Strings getAllKeysWithPrefix(Key const& prefix) const override {
         Strings result;
         Node const* const firstNode(this->getStartingOnThisNode(b_root, prefix, 0));
         if (firstNode != nullptr) {
@@ -71,7 +71,7 @@ protected:
         }
     }
 
-    int getSizeStartingOnThisNode(NodeUniquePointer const& currentNodePointer) const override {
+    [[nodiscard]] int getSizeStartingOnThisNode(NodeUniquePointer const& currentNodePointer) const override {
         int result(0);
         if (currentNodePointer) {
             ValueUniquePointer const& valueUniquePointer(currentNodePointer->valueUniquePointer);
@@ -85,7 +85,7 @@ protected:
         return result;
     }
 
-    int getLengthOfLongestPrefixStartingOnThisNode(
+    [[nodiscard]] int getLengthOfLongestPrefixStartingOnThisNode(
         NodeUniquePointer const& currentNodePointer, Key const& keyToCheck, int const index) const override {
         if (currentNodePointer && index < static_cast<int>(keyToCheck.length())) {
             char c(keyToCheck[index]);

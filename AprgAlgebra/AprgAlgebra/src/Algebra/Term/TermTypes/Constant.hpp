@@ -23,14 +23,11 @@ public:
     bool operator==(Constant const& second) const;
     bool operator!=(Constant const& second) const;
     bool operator<(Constant const& second) const;
-    AlbaNumber const& getNumber() const;
+    [[nodiscard]] AlbaNumber const& getNumber() const;
 
     void setNumber(AlbaNumber const& constantValue);
 
 private:
     friend std::ostream& operator<<(std::ostream& out, Constant const& constant);
 
-    AlbaNumber m_constantValue;
-};
-
-}  // namespace alba
+    AlbaNumber m_consta  // namespace alba::algebranamespace alba::algebra

@@ -14,4 +14,4 @@ public:
     virtual void mutateExpression(Expression &expression);
 };
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra::booleanAlgebra

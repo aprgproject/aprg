@@ -25,14 +25,14 @@ public:
 
     Expression operator~() const;
 
-    bool isEmpty() const;
-    bool isSimplified() const;
-    bool containsOnlyOneTerm() const;
+    [[nodiscard]] bool isEmpty[[nodiscard]] () const;
+    [[nodiscard]] boo[[nodiscard]] l isSimplified() const;
+    [[nodiscard[[nodiscard]] ]] bool containsOnlyOneTerm() const;
 
-    OperatorLevel getCommonOperatorLevel() const;
-    BaseTerm const& getFirstTermConstReference() const;
-    WrappedTerms const& getWrappedTerms() const;
-    std::string getDebugString() const;
+    [[nodisc[[nodiscard]] ard]] OperatorLevel getCommonOperatorLevel() const;
+    [[nodiscard]] BaseTerm const& getFirstTermConstRe[[nodiscard]] ference() const;
+    [[nodiscard]] WrappedTerms const& getWrappedTerms() const;
+    [[nodiscard]] std::string getDebugString() const;
 
     WrappedTerms& getWrappedTermsReference();
 

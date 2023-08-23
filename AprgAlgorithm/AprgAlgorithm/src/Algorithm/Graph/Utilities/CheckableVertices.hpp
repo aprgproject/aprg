@@ -14,11 +14,11 @@ public:
 
     CheckableVertices() = default;
 
-    bool isFound(Vertex const& vertex) const { return m_vertices.find(vertex) != m_vertices.cend(); }
+    [[nodiscard]] bool isFound(Vertex const& vertex) const { return m_vertices.find(vertex) != m_vertices.cend(); }
 
-    bool isNotFound(Vertex const& vertex) const { return m_vertices.find(vertex) == m_vertices.cend(); }
+    [[nodiscard]] bool isNotFound(Vertex const& vertex) const { return m_vertices.find(vertex) == m_vertices.cend(); }
 
-    SetOfVertices const& getVertices() const { return m_vertices; }
+    [[nodiscard]] SetOfVertices const& getVertices() const { return m_vertices; }
 
     void putVertex(Vertex const& vertex) { m_vertices.emplace(vertex); }
 

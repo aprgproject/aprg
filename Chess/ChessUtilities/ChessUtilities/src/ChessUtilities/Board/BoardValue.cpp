@@ -117,4 +117,4 @@ bool operator==(BoardValue const& bv1, BoardValue const& bv2) {
     return true;
 }
 
-}  // namespace alba
+}  // namespace alba::chess

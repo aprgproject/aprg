@@ -17,9 +17,9 @@ using BaseCommentStateMachine = AlbaBaseStateMachine<State, InputToken>;
 class CommentStateMachine : public BaseCommentStateMachine {
 public:
     CommentStateMachine();
-    bool isInSingleLineComment() const;
-    bool isInMultilineComment() const;
-    bool isInComment() const;
+    [[nodiscard]] bool isInSingleLineComment() const;
+    [[nodiscard]] bool isInMultilineComment() const;
+    [[nodiscard]] bool isInComment() const;
     void processInput(InputToken const& inputToken);
 
 private:

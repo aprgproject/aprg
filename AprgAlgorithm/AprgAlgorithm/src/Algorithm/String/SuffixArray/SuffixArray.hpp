@@ -16,11 +16,11 @@ public:
 
     explicit SuffixArray(std::string const& mainString) : m_mainString(mainString), m_mainStringIndexes() { initialize(); }
 
-    Index getSize() const { return m_mainStringIndexes.size(); }
+    [[nodiscard]] Index getSize() const { return m_mainStringIndexes.size(); }
 
-    Index getIndexOnMainStringOfSuffixAt(Index const index) const { return m_mainStringIndexes[index]; }
+    [[nodiscard]] Index getIndexOnMainStringOfSuffixAt(Index const index) const { return m_mainStringIndexes[index]; }
 
-    Index getRank(std::string_view key) const {
+    [[nodiscard]] Index getRank(std::string_view key) const {
         Index low = 0, high = getSize() - 1;
         while (low <= high) {
             Index mid = getMidpointOfIndexes(low, high);
@@ -37,12 +37,12 @@ public:
         return low;
     }
 
-    std::string_view getSuffixViewAt(Index const index) const {
+    [[nodiscard]] std::string_view getSuffixViewAt(Index const index) const {
         Index mainStringIndex = m_mainStringIndexes[index];
         return std::string_view(m_mainString.data() + mainStringIndex, m_mainStringIndexes.size() - mainStringIndex);
     }
 
-    std::string getLongestCommonPrefixOfTwoSuffixes(Index const index1, Index const index2) const {
+    [[nodiscard]] std::string getLongestCommonPrefixOfTwoSuffixes(Index const index1, Index const index2) const {
         return stringHelper::getLongestCommonPrefix(getSuffixViewAt(index1), getSuffixViewAt(index2));
     }
 

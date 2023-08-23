@@ -30,4 +30,4 @@ UnsignedInteger getNumberOfLabeledTreesUsingCayleysFormula(UnsignedInteger const
     return result;
 }
 
-}  // namespace alba
+}  // namespace alba::math

@@ -13,7 +13,7 @@ class Observer {
 public:
     virtual ~Observer() = default;
 
-    virtual int getState() const = 0;
+    [[nodiscard]] virtual int getState() const = 0;
     virtual void update(Subject const* const subject) = 0;
     // ...
 };
@@ -26,7 +26,7 @@ class ConcreteObserver : public Observer {
 public:
     explicit ConcreteObserver(const int state) : m_observer_state(state) {}
 
-    int getState() const override { return m_observer_state; }
+    [[nodiscard]] int getState() const override { return m_observer_state; }
 
     void update(Subject const* const subject) override;
     // ...
@@ -54,7 +54,7 @@ public:
         }
     }
 
-    virtual int getState() const = 0;
+    [[nodiscard]] virtual int getState() const = 0;
     virtual void setState(const int s) = 0;
     // ...
 
@@ -68,7 +68,7 @@ private:
 
 class ConcreteSubject : public Subject {
 public:
-    int getState() const override { return m_subjectState; }
+    [[nodiscard]] int getState() const override { return m_subjectState; }
 
     void setState(int const state) override { m_subjectState = state; }
     // ...

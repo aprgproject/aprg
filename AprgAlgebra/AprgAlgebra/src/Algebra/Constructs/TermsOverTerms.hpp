@@ -7,28 +7,26 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class TermsOverTerms {
 public:
     TermsOverTerms();
-    TermsOverTerms(TermsWithDetails const& termsInMultiplicationAndDivision);
+    explicit TermsOverTerms(TermsWithDetails const& termsInMultiplicationAndDivision);
     TermsOverTerms(Terms const& numerators, Terms const& denominators);
 
-    Terms const& getNumerators() const;
-    Terms const& getDenominators() const;
-    TermsWithDetails getNumeratorAndDenominatorAsTermWithDetails() const;
-    Term getCombinedTerm() const;
-    Term getCombinedNumerator() const;
-    Term getCombinedDenominator() const;
+    [[nodiscard]] Terms const& getNumerators() const;
+    [[nodiscard]] Terms const& getDenominators() const;
+    [[nodiscard]] TermsWithDetails getNumeratorAndDenominatorAsTermWithDetails() const;
+    [[nodiscard]] Term getCombinedTerm() const;
+    [[nodiscard]] Term getCombinedNumerator() const;
+    [[nodiscard]] Term getCombinedDenominator() const;
     void retrievePolynomialAndNonPolynomialNumerators(
         Polynomial& polynomialNumerator, Terms& nonPolynomialNumerators) const;
     void retrievePolynomialAndNonPolynomialsDenominators(
         Polynomial& polynomialDenominator, Terms& nonPolynomialDenominators) const;
-    TermsRaiseToNumbers getTermsRaiseToNumbers() const;
-    TermsRaiseToTerms getTermsRaiseToTerms() const;
+    [[nodiscard]] TermsRaiseToNumbers getTermsRaiseToNumbers() const;
+    [[nodiscard]] TermsRaiseToTerms getTermsRaiseToTerms() const;
 
     void flip();
 
@@ -38,8 +36,8 @@ public:
     void simplify();
 
 private:
-    Terms factorizeIfNeeded(Terms const& terms) const;
-    Terms factorize(Terms const& terms) const;
+    [[nodiscard]] Terms factorizeIfNeeded(Terms const& terms) const;
+    [[nodiscard]] Terms factorize(Terms const& terms) const;
     void continueToSimplifyToFactors(Terms& factorizedNumerators, Terms& factorizedDenominators);
     void continueToSimplifyAndCombineFactors(Terms& factorizedNumerators, Terms& factorizedDenominators);
     static Polynomial multiplyPolynomialTerms(Terms const& polynomialTerms);
@@ -75,7 +73,5 @@ private:
 };
 
 using VectorOfTermsOverTerms = std::vector<TermsOverTerms>;
-
-}  // namespace algebra
 
 }  // namespace alba

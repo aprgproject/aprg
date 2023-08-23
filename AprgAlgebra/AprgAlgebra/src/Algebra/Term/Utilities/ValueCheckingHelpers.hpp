@@ -65,4 +65,4 @@ bool hasNonRealFiniteNumbers(Function const& function);
 bool hasZero(Terms const& terms);
 bool hasNegativeExponentsWithVariable(Polynomial const& polynomial, std::string const& variableName);
 
-}  // namespace alba
+}  // namespace alba::algebra::algebra

@@ -5,22 +5,11 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace SackFileReaderStateMachineNamespace {
+namespace alba::SackFileReaderStateMachineNamespace {
 
 InnerStates::InnerStates()
-    : stateForConstant(StateForConstant::BeforeName),
-      stateForStruct(StateForStruct::BeforeName),
-      stateForStructAfterOpeningBraces(StateForStructAfterOpeningBraces::BeforeParameterType),
-      stateForEnum(StateForEnum::BeforeName),
-      stateForEnumAfterOpeningBraces(StateForEnumAfterOpeningBraces::BeforeEnumParameterName),
-      stateForUnion(StateForUnion::BeforeName),
-      stateForUnionAfterOpeningBraces(StateForUnionAfterOpeningBraces::BeforeParameterType),
-      stateForTypedef(StateForTypedef::BeforeDerivedName),
-      stateForAtDefDescription(StateForAtDefDescription::BeforeName),
-      stateForAtParamDescription(StateForAtParamDescription::BeforeName),
-      stateForAtTypedefDescription(StateForAtTypedefDescription::BeforeName) {}
+    
+      {}
 
 void InnerStates::reset() {
     stateForConstant = StateForConstant::BeforeName;
@@ -40,7 +29,7 @@ SackFileReaderStateMachine::SackFileReaderStateMachine(Database& database, strin
     : BaseSackFileReaderStateMachine(State::Idle),
       m_filePathHandler(fullPath),
       m_isMessageIdFile(isStringFoundNotCaseSensitive(m_filePathHandler.getFilenameOnly(), "MessageId_")),
-      m_isNextLineNeeded(false),
+      
       m_pathFromIInterface(getCorrectPathWithReplacedSlashCharacters<'/'>(
           string(R"(\I_Interface\)") + getStringAfterThisString(m_filePathHandler.getFullPath(), R"(\I_Interface\)"))),
       m_database(database) {}
@@ -610,7 +599,5 @@ void SackFileReaderStateMachine::saveTypedefDescriptionToDatabase(string const& 
     m_database.typedefNameToTypedefDetailsMap[m_typedefDetails.name].description =
         getStringWithoutRedundantWhiteSpace(partialString);
 }
-
-}  // namespace SackFileReaderStateMachineNamespace
 
 }  // namespace alba

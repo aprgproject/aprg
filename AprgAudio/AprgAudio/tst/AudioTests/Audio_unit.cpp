@@ -23,9 +23,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace AprgAudio {
+namespace alba::AprgAudio {
 
 TEST(AiffLoadingTests, DISABLED_Stereo_8bit_44100) {
     Audio<double> audioFile;
@@ -342,7 +340,5 @@ TEST(WritingTest, DISABLED_WriteSineToneToManyFormats) {
         }
     }
 }
-
-}  // namespace AprgAudio
 
 }  // namespace alba

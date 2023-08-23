@@ -24,18 +24,14 @@ public:
 
     bool operator==(Piece const& piece) const;
     bool operator!=(Piece const& piece) const;
-    bool isEmpty() const;
+    [[nodiscard]][[nodiscard]]  [[nodiscard]][[nodiscard]]  bool[[nodiscard]]  isEmpty([[nodiscard]] ) con[[n[[nodiscard]] odiscard]] st;
 
-    PieceColor getColor() const;
-    PieceType getType() const;
-    PieceColorAndType getColorAndType() const;
-    uint8_t getData() const;
-    char getFenCharacter() const;
-
-private:
+    [[nodiscard]] Piece[[n[[nod[[nodiscard]] iscard]] odiscard]] Color get[[nodiscard]] Color() const;
+    [[n[[nod[[nodiscard]] iscard]] odiscard]] PieceType[[nodiscard]]  getType() const;  // namespace alba::chessrd]] iscard]] PieceColorAndType ge[[nodiscard]] tColorAndType() c  // namespace alba::chessrd]] uint8_t getData() const;
+    [[nodiscard]] char getFenCharac  // namespace alba::chesste:
     uint8_t m_data;
 };
 
 using Pieces = std::vector<Piece>;
 
-}  // namespace alba
+}  // namespace alba::chess
