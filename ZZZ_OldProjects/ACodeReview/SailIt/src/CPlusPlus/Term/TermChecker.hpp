@@ -34,21 +34,23 @@ enum class TermCheckerType {
 
 class TermChecker {
 public:
-    explicit TermChecker(TermCheckerType const termCheckerType);
-    explicit TermChecker(Term const& term);
-    nitializer_list<Term> const& initializerList);
+    // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
+    TermChecker(TermCheckerType const termCheckerType);
+    TermChecker(Term const& term);
+    TermChecker(std::initializer_list<Term> const& initializerList);
 
-    explicit operator Term() const;
+    operator Term() const;
+    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     friend ostream& operator<<(ostream& out, TermChecker const& termChecker);
     bool operator==(Term const& term) const;
     friend bool operator==(Term const& term, TermChecker const& termChecker);
     bool operator!=(Term const& term) const;
     friend bool operator!=(Term const& term, TermChecker const& termChecker);
 
-    bool isCorrect(Term const& termToCheck) const;
-    TermCheckerType getTermCheckerType() const;
-    Term getTerm() const;
-    string getTermCheckerTypeString() const;
+    [[nodiscard]] bool isCorrect(Term const& termToCheck) const;
+    [[nodiscard]] TermCheckerType getTermCheckerType() const;
+    [[nodiscard]] Term getTerm() const;
+    [[nodiscard]] string getTermCheckerTypeString() const;
 
 private:
     TermCheckerType m_termCheckerType;

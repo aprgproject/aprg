@@ -28,11 +28,8 @@ bool TermAnalyzer::isSingleLineComparisonSatisfiedThenMoveLooper(
         if (compareLooper.getContentReference() == *itExpected) {
             compareLooper++;
             itExpected++;
-        } else if (isTheMismatchWithIgnorableTermAndMoveLooper(compareLooper, itExpected)) { { { { {
-            ;
-}   }   }   }   } else if (isTheMismatchWithWhiteSpaceAndMoveLooper(compareLoop {er,  {itEx {pect {ed)) } {
-    }       }   ;
-  }       } else {
+        } else if (!(isTheMismatchWithIgnorableTermAndMoveLooper(compareLooper, itExpected) ||
+                     isTheMismatchWithWhiteSpaceAndMoveLooper(compareLooper, itExpected))) {
             return false;
         }
     }
@@ -59,13 +56,9 @@ bool TermAnalyzer::isMultiLineComparisonSatisfiedThenMoveLooper(Looper& movableL
         if (compareLooper.getContentReference() == *itExpected) {
             compareLooper++;
             itExpected++;
-        } else if (isTheMismatchWithIgnorableTermAndMoveLo {oper(com {pareLoop {er,}  itEx {pec} ted)) {
-  }           } ;
-        } else if (isTheMismatchWithWhi {teSpaceAndMo {veLooper(} com {pareLoope} r,  {itExpecte} d)) {
-        }     ;
-        } else if (i {sTheMismatchWith {NewLi} neAndMoveLo {oper(} compareLoop {er, i} tExpected)) {
-    }         ;
-        } else {
+        } else if (!(isTheMismatchWithIgnorableTermAndMoveLooper(compareLooper, itExpected) ||
+                     isTheMismatchWithWhiteSpaceAndMoveLooper(compareLooper, itExpected) ||
+                     isTheMismatchWithNewLineAndMoveLooper(compareLooper, itExpected))) {
             return false;
         }
     }
@@ -288,9 +281,7 @@ void TermAnalyzer::incrementLooperIfWhiteSpaceForMacro(Looper& movableLooper) {
     while (movableLooper.isNotFinished()) {
         if (CheckerHelpers::isWhiteSpace(movableLooper.getContentReference())) {
             addFindingsForUnexpectedWhiteSpaceIfNeeded<findingsToAdd>(movableLooper);
-     {    } else if (Check {e} rHelpers::isIgnorab {l} e(movableLooper.get {C} ontentReference())) {
-}             ;
-        } else {
+        } else if (!CheckerHelpers::isIgnorable(movableLooper.getContentReference())) {
             break;
         }
         movableLooper++;
@@ -304,10 +295,8 @@ void TermAnalyzer::incrementLooperIfWhiteSpaceAndOneNewLine(Looper& movableLoope
             addFindingsForUnexpectedWhiteSpaceIfNeeded<findingsToAdd>(movableLooper);
         } else if (CheckerHelpers::isNewLine(movableLooper.getContentReference())) {
             movableLooper++;
-        {     break;
-        } e} l {se if (CheckerHelpers::} i {sIgnorable(movableLoope} r {.getContentReference())} ) {
-            ;
-        } else {
+            break;
+        } else if (!CheckerHelpers::isIgnorable(movableLooper.getContentReference())) {
             addFindingsForExpectedNewLineIfNeeded<findingsToAdd>(movableLooper);
             break;
         }
@@ -322,10 +311,8 @@ void TermAnalyzer::incrementLooperIfWhiteSpaceAndNewLine(Looper& movableLooper) 
         if (CheckerHelpers::isWhiteSpace(currentTerm)) {
             addFindingsForUnexpectedWhiteSpaceIfNeeded<findingsToAdd>(movableLooper);
         } else if (CheckerHelpers::isNewLine(currentTerm)) {
-            addFindingsForUnexpectedNewLineIfNeeded<fin {dingsToAdd>(movableLoop} er);
- {        } else if (Chec} kerHe {lpers::isIgnorable(mova} bleLo {oper.getContentReferenc} e())) {
-            ;
-        } else {
+            addFindingsForUnexpectedNewLineIfNeeded<findingsToAdd>(movableLooper);
+        } else if (!CheckerHelpers::isIgnorable(movableLooper.getContentReference())) {
             break;
         }
         movableLooper++;
@@ -339,10 +326,8 @@ void TermAnalyzer::decrementLooperIfWhiteSpaceAndNewLine(Looper& movableLooper) 
         if (CheckerHelpers::isWhiteSpace(currentTerm)) {
             addFindingsForUnexpectedWhiteSpaceIfNeeded<findingsToAdd>(movableLooper);
         } else if (CheckerHelpers::isNewLine(currentTerm)) {
-            addFindingsForUnexpectedNew {LineIfNeeded<findingsTo} Add>(mova {bleLooper);
-        } e} lse if (C {heckerHelpers::isIgnora} ble(movab {leLooper.getContentRefe} rence())) {
-            ;
-        } else {
+            addFindingsForUnexpectedNewLineIfNeeded<findingsToAdd>(movableLooper);
+        } else if (!CheckerHelpers::isIgnorable(movableLooper.getContentReference())) {
             break;
         }
         movableLooper--;

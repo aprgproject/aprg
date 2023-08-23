@@ -25,10 +25,14 @@ public:
                 out << "||" << finding.m_details << "||"
                     << "   Locator:||" << finding.m_termsLocator << "||"
                     << "   FileLocator:||" << finding.m_fileLocator << "||");
-        }             return (
-                out << "||" << finding.m_details << "||"
-                    << "   Locator:||" << finding.m_termsLocator << "||");
-       cator;
+        }
+        return (
+            out << "||" << finding.m_details << "||"
+                << "   Locator:||" << finding.m_termsLocator << "||");
+    }
+
+private:
+    string m_fileLocator;
     string m_details;
     string m_termsLocator;
     bool m_hasTermsLocator;

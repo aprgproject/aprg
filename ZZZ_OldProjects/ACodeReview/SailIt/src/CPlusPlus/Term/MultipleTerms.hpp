@@ -12,8 +12,8 @@ namespace codeReview {
 
 class MultipleTerms {
 public:
-    ializer_list<Term> const& initializerList);
-    bool isEqualToAnyOfTheTerms(Term const& termToCompare) const;
+    MultipleTerms(initializer_list<Term> const& initializerList);
+    [[nodiscard]] bool isEqualToAnyOfTheTerms(Term const& termToCompare) const;
 
 private:
     vector<Term> m_terms;
