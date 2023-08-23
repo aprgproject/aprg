@@ -1,4 +1,4 @@
-/*#include <Common/Math/Number/AlbaNumber.hpp>
+#include <Common/Math/Number/AlbaNumber.hpp>
 #include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
 #include <benchmark/benchmark.h>
 
@@ -130,5 +130,3 @@ BENCHMARK(BM_AlbaNumberComplexNumberCreation);
 BENCHMARK_MAIN();
 
 }  // namespace alba
-
-*/
