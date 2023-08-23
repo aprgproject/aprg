@@ -16,12 +16,12 @@ typedef enum EDssWcdmaLoad { EDssWcdmaLoad_Low = 0, EDssWcdmaLoad_Medium = 1, ED
 class LrmDssWcdmaLteLoadMonitoring {
 public:
     LrmDssWcdmaLteLoadMonitoring();
-    [[nodiscard]] unsigned int getConsecutiveLowerLoadStateCount[[nodiscard]] () const;
-    [[nodiscard]] unsigned int ge[[nodiscard]] tDchLoadFactor() const;
-    [[nodiscard]] unsigned int[[nodiscard]]  getHsdpaAndHsfachLoadFactor() const;
-    [[nodis[[nodiscard]] card]] unsigned int getMediumLoadThreshold() co[[nodiscard]] nst;
+    [[nodiscard]] unsigned int getConsecutiveLowerLoadStateCount() const;
+    [[nodiscard]] unsigned int getDchLoadFactor() const;
+    [[nodiscard]] unsigned int getHsdpaAndHsfachLoadFactor() const;
+    [[nodiscard]] unsigned int getMediumLoadThreshold() const;
     [[nodiscard]] unsigned int getHighLoadThreshold() const;
-    [[nodisca[[nodiscard]] rd]] EDssWcdmaLoad getLoadStateFromCellLoad(unsigned int const cellLoad) const;
+    [[nodiscard]] EDssWcdmaLoad getLoadStateFromCellLoad(unsigned int const cellLoad) const;
     [[nodiscard]] unsigned int calculateCellLoad(
         unsigned int const numberOfDchUsers, unsigned int const numberOfHsdpaUsers,
         bool const hasHsfachInTheCell) const;
