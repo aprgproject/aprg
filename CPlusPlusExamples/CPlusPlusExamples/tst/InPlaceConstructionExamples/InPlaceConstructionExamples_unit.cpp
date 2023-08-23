@@ -19,17 +19,19 @@ struct Arg {};
 
 struct S {
     S() { cout << "Default construct\n"; }
-    explicit S(Arg) { cout << "Value construct\n"; }
-    explicit S(int) { cout << "Explicit value construct (1)\n"; }
-    explicit S(int, int) { cout << "Explicit value construct (2)\n"; }
+    // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
+    S(Arg) { cout << "Value construct\n"; }
+    S(int) { cout << "Explicit value construct (1)\n"; }
+    S(int, int) { cout << "Explicit value construct (2)\n"; }
+    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     ~S() { cout << "Destruct\n"; }
     S(S const&) { cout << "Copy construct\n"; }
-    S(S&&)  noexcept { cout << "Move construct\n"; }
+    S(S&&) noexcept { cout << "Move construct\n"; }
     S& operator=(S const&) {
         cout << "Copy assign\n";
         return *this;
     }
-    S& operator=(S&&)  noexcept {
+    S& operator=(S&&) noexcept {
         cout << "Move assign\n";
         return *this;
     }
@@ -220,8 +222,8 @@ string willThisRvo10() {
 }
 
 struct MoveOnlyConstExprObject {
-    constexpr MoveOnlyConstExprObject()  {}
-    constexpr MoveOnlyConstExprObject(MoveOnlyConstExprObject&&)  noexcept : x{1} {}
+    constexpr MoveOnlyConstExprObject() {}
+    constexpr MoveOnlyConstExprObject(MoveOnlyConstExprObject&&) noexcept : x{1} {}
     int x{0};
 };
 

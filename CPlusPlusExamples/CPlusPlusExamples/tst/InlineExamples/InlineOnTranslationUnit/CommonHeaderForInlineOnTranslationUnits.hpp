@@ -2,7 +2,8 @@
 
 #include <string>
 
-namespace alba::InlineOnTranslationUnitsr int constInteger = 100;              // implicity inline (external linkage)
+namespace alba::InlineOnTranslationUnits {
+constexpr int constInteger = 100;              // implicity inline (external linkage)
 inline int inlineIntegerWithDefinition = 200;  // explicitly inline (external linkage)
 inline int inlineIntegerWithDeclaration;       // explicitly inline (external linkage)
 extern inline int externInlineInteger;         // extern so declaration only (incomplete type)
@@ -47,7 +48,12 @@ void restoreInitialValuesForTranslationUnit2();
 TranslationUnitValues getValuesInTranslationUnit1();
 TranslationUnitValues getValuesInTranslationUnit2();
 
-}  // namesp}
+}  // namespace alba::InlineOnTranslationUnits
+
+// Notes:
+
+// From cppreference:
+
 // -> The inline specifier, when used in a function's decl-specifier-seq, declares the function to be an inline
 // function.
 
