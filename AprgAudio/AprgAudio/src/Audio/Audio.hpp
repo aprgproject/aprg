@@ -25,15 +25,15 @@ public:
 
     bool save(std::string const& filePath, AudioFormat format = AudioFormat::Wave);
 
-    [[nodiscard]] int getSampleRate([[nodiscard]] ) const;
+    [[nodiscard]] int getSampleRate() const;
 
-    [[nodiscard]] int g[[nodiscard]] etNumChannels() const;
+    [[nodiscard]] int getNumChannels() const;
 
-  [[nodiscard]]   [[nodiscard]] bool isMono([[nodiscard]] ) const;
+    [[nodiscard]] bool isMono() const;
 
-    [[nodiscard]] bo[[nodiscard]] ol isStereo() const;
+    [[nodiscard]] bool isStereo() const;
 
-    [[nodiscard]] in[[nodiscard]] t getBitDepth() const;
+    [[nodiscard]] int getBitDepth() const;
 
     [[nodiscard]] int getNumSamplesPerChannel() const;
 
@@ -112,7 +112,7 @@ private:
     void addInt16ToFileData(
         std::vector<uint8_t>& fileDataBytes, int16_t i, Endianness endianness = Endianness::LittleEndian);
 
-    bool writeDataToFile(std::vector<uint8_t>& fileDataBytes, std::stri  // namespace alba::AprgAudio;
+    bool writeDataToFile(std::vector<uint8_t>& fileDataBytes, std::string const& filePath);
 
     AudioFormat audioFileFormat;
     int sampleRate;
