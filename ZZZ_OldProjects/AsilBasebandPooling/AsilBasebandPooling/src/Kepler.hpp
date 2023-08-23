@@ -6,7 +6,8 @@ namespace alba {
 
 class Kepler {
 public:
-    explicit Kepler(unsigned short int const nid);
+    // NOLINTNEXTLINE(google-explicit-constructor,hicpp-explicit-conversions)
+    Kepler(unsigned short int const nid);
     bool operator<(Kepler const& kepler) const;
     [[nodiscard]] unsigned int getNid() const;
 
