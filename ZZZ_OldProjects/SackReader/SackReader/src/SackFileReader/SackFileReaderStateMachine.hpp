@@ -23,7 +23,7 @@ enum class State {
     AtTypedefDescription
 };
 
-//#define MAX_NR_OF_CODES 2                /* 3GPP 10 Nokia 2*/
+// #define MAX_NR_OF_CODES 2                /* 3GPP 10 Nokia 2*/
 enum class StateForConstant { BeforeName, AfterNameBeforeValue };
 
 //@def MAX_NR_OF_CODES :                  3GPP 10 Nokia 2.
@@ -151,11 +151,14 @@ struct InnerStates {
     void reset();
     StateForConstant stateForConstant{StateForConstant::BeforeName};
     StateForStruct stateForStruct{StateForStruct::BeforeName};
-    StateForStructAfterOpeningBraces stateForStructAfterOpeningBraces{StateForStructAfterOpeningBraces::BeforeParameterType};
+    StateForStructAfterOpeningBraces stateForStructAfterOpeningBraces{
+        StateForStructAfterOpeningBraces::BeforeParameterType};
     StateForEnum stateForEnum{StateForEnum::BeforeName};
-    StateForEnumAfterOpeningBraces stateForEnumAfterOpeningBraces{StateForEnumAfterOpeningBraces::BeforeEnumParameterName};
+    StateForEnumAfterOpeningBraces stateForEnumAfterOpeningBraces{
+        StateForEnumAfterOpeningBraces::BeforeEnumParameterName};
     StateForUnion stateForUnion{StateForUnion::BeforeName};
-    StateForUnionAfterOpeningBraces stateForUnionAfterOpeningBraces{StateForUnionAfterOpeningBraces::BeforeParameterType};
+    StateForUnionAfterOpeningBraces stateForUnionAfterOpeningBraces{
+        StateForUnionAfterOpeningBraces::BeforeParameterType};
     StateForTypedef stateForTypedef{StateForTypedef::BeforeDerivedName};
     StateForAtDefDescription stateForAtDefDescription{StateForAtDefDescription::BeforeName};
     StateForAtParamDescription stateForAtParamDescription{StateForAtParamDescription::BeforeName};
@@ -202,7 +205,7 @@ private:
     void saveTypedefDescriptionToDatabase(std::string const& partialString);
     AlbaLocalPathHandler m_filePathHandler;
     bool m_isMessageIdFile;
-    bool m_is{false}NextLineNeeded;
+    bool m_isNextLineNeeded;
     InnerStates m_innerStates;
     std::string m_pathFromIInterface;
     std::string m_arraySize;
@@ -217,4 +220,7 @@ private:
     EnumDetails m_enumDetails;
     EnumParameterDetails m_enumParameterDetails;
     ParameterDescriptionType m_parameterDescriptionType;
-    Database& m_d  // namespace alba::SackFileReaderStateMachineNamespacenamespace alba::SackFileReaderStateMachineNamespace
+    Database& m_database;
+};
+
+}  // namespace alba::SackFileReaderStateMachineNamespace

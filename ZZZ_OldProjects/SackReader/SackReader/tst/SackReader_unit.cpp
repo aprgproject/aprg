@@ -1,6 +1,9 @@
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <SackReader.hpp>
 
 #include <gtest/gtest.h>
+
+#define SAVED_DATABASE_FILE APRG_DIR R"(\ZZZ_OldProjects\SackReader\TempFiles\SavedDatabase.txt)"
 
 using namespace std;
 
@@ -18,8 +21,9 @@ TEST(RealTest, DISABLED_UpdateTrunkFiles) {
     SackReader sackReader(
         R"(D:\Branches\trunk\wbts_integration\I_Interface)",
         R"(D:\Specifications\OAM-TCOM-IFS\SackReaderExecution.txt)");
+    AlbaLocalPathHandler databasePathHandler(SAVED_DATABASE_FILE);
 
-    // sackReader.loadDatabaseFromFile(R"(C:\APRG\SackReader\SackReader\TempFiles\Database_07_11_2018.txt)");
+    // sackReader.loadDatabaseFromFile(databasePathHandler.getFullPath());
 
     sackReader.gatherAllFiles();
     sackReader.readFilesNeededForIfs();
@@ -32,7 +36,7 @@ TEST(RealTest, DISABLED_UpdateTrunkFiles) {
         R"(D:\Specifications\OAM-TCOM-IFS\OAM_CPLANE_IFS_template.lyx)",
         R"(D:\Specifications\OAM-TCOM-IFS\OAM_CPLANE_IFS_TEST.lyx)");
 
-    sackReader.saveDatabaseToFile(R"(C:\APRG\SackReader\SackReader\TempFiles\Database_07_24_2018.txt)");
+    sackReader.saveDatabaseToFile(databasePathHandler.getFullPath());
 }
 
 }  // namespace alba

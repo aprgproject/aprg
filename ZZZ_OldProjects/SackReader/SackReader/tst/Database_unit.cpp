@@ -1,8 +1,11 @@
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <SackFileReader/SackFileReader.hpp>
 
 #include <gtest/gtest.h>
 
 using namespace std;
+
+#define SAMPLE_DATABASE_FILE APRG_DIR R"(\ZZZ_OldProjects\SackReader\TempFiles\SampleDatabase.txt)"
 
 namespace alba {
 
@@ -18,6 +21,7 @@ TEST(DatabaseTest, InitialContentsAreEmpty) {
 
 TEST(DatabaseTest, DISABLED_SaveAndLoadFile) {
     Database databaseToBeSaved;
+    AlbaLocalPathHandler databasePathHandler(SAMPLE_DATABASE_FILE);
     databaseToBeSaved.fileToPathMap["ThisIsAFile"] = "ThisIsAMap";
     databaseToBeSaved.constantNameToConstantDetailsMap["ConstantName"].name = "ConstantName";
     databaseToBeSaved.constantNameToConstantDetailsMap["ConstantName"].value = "ConstantValue";
@@ -49,10 +53,10 @@ TEST(DatabaseTest, DISABLED_SaveAndLoadFile) {
     databaseToBeSaved.enumNameToEnumDetailsMap["EnumName"].parameters["ParameterName"].descriptionFromUser =
         "ParameterDescriptionFromUser";
     databaseToBeSaved.messagesToGenerate.emplace("ThisIsAMessage");
-    databaseToBeSaved.saveDatabaseToFile(R"(C:\APRG\SackReader\SackReader\TempFiles\SampleDatabase.txt)");
+    databaseToBeSaved.saveDatabaseToFile(databasePathHandler.getFullPath());
 
     Database loadedDatabase;
-    loadedDatabase.loadDatabaseFromFile(R"(C:\APRG\SackReader\SackReader\TempFiles\SampleDatabase.txt)");
+    loadedDatabase.loadDatabaseFromFile(databasePathHandler.getFullPath());
     EXPECT_EQ("ThisIsAMap", loadedDatabase.fileToPathMap.at("ThisIsAFile"));
     EXPECT_EQ("ConstantName", loadedDatabase.constantNameToConstantDetailsMap.at("ConstantName").name);
     EXPECT_EQ("ConstantValue", loadedDatabase.constantNameToConstantDetailsMap.at("ConstantName").value);
