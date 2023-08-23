@@ -14,11 +14,9 @@ public:
     using VertexToColorMap = std::map<Vertex, bool>;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
-    explicit CheckerUsingDfs(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph) {
-        initialize();
-    }
+    explicit BipartiteCheckerUsingDfs(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph) { initialize(); }
 
-    bool isBipartite() const { return m_isBipartite; }
+    [[nodiscard]] bool isBipartite() const { return m_isBipartite; }
 
     bool hasFirstColor(Vertex const& vertex) const {
         bool result(false);
