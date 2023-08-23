@@ -11,7 +11,7 @@ namespace chess {
 namespace ChessPeek {
 
 TEST(SequenceOfMovesAnalyzerTest, CheckMoveAndCommitMoveWorks) {
-    BoardWithContext boardWithContext(PieceColor::White, BoardOrientation::BlackUpWhiteDown);
+    BoardWithContext boardWithContext(PieceColor::White, Board(BoardOrientation::BlackUpWhiteDown));
     SequenceOfMovesAnalyzer analyzer(boardWithContext);
 
     analyzer.analyzeMove({{3, 6}, {3, 4}});
@@ -27,7 +27,7 @@ TEST(SequenceOfMovesAnalyzerTest, CheckMoveAndCommitMoveWorks) {
 }
 
 TEST(SequenceOfMovesAnalyzerTest, CanPreMoveWorksOnRecapture) {
-    BoardWithContext boardWithContext(PieceColor::White, BoardOrientation::BlackUpWhiteDown);
+    BoardWithContext boardWithContext(PieceColor::White, Board(BoardOrientation::BlackUpWhiteDown));
     SequenceOfMovesAnalyzer analyzer(boardWithContext);
     analyzer.analyzeMove({{4, 6}, {4, 4}});
     analyzer.commitMove();
