@@ -94,7 +94,6 @@ public:
         typename ArithmeticType,
         typename =
             std::enable_if_t<typeHelper::isArithmeticType<ArithmeticType>()>>  // enabled via a type template parameter
-    // cppcheck-suppress noExplicitConstructor
     constexpr AlbaNumber(ArithmeticType const value)
         : m_type(getTypeBasedFromArithmeticType<ArithmeticType>()),
           m_data(static_cast<
@@ -103,10 +102,8 @@ public:
         checkArithmeticType<ArithmeticType>();
     }
 
-    // cppcheck-suppress noExplicitConstructor
     constexpr AlbaNumber(FractionData const& fractionData) : m_type(Type::Fraction), m_data(fractionData) {}
 
-    // cppcheck-suppress noExplicitConstructor
     constexpr AlbaNumber(ComplexNumberData const& complexNumberData)
         : m_type(Type::ComplexNumber), m_data(complexNumberData) {}
 
