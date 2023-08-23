@@ -8,8 +8,10 @@
 namespace alba::booleanAlgebra {
 
 struct WrappedTerm {
-    explicit WrappedTerm(BaseTerm const& baseTerm);
-    explicit WrappedTerm(BaseTerm&& baseTerm);
+    // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
+    WrappedTerm(BaseTerm const& baseTerm);
+    WrappedTerm(BaseTerm&& baseTerm);
+    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
 
     // rule of five or six
     ~WrappedTerm() = default;

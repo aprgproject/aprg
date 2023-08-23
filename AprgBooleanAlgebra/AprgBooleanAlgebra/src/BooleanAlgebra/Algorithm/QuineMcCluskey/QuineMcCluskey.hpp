@@ -153,7 +153,7 @@ public:
         bool result(false);
         if (smaller.size() <= larger.size()) {
             result = true;
-            for (Minterm const& elementOfSmaller : smaller) {
+            for (auto const& elementOfSmaller : smaller) {
                 auto it = larger.find(elementOfSmaller);
                 if (it == larger.cend()) {
                     result = false;

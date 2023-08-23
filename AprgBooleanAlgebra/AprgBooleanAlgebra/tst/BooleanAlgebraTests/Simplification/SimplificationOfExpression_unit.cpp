@@ -70,8 +70,8 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnSimplifyingInnerTerms) {
 
 TEST(SimplificationOfExpressionTest, SimplifyWorksOnExpressionInExpressionForAMultipleTermExpression) {
     Term expressionTerm(createExpressionIfPossible({"x", "&", "y"}));
-    Term expressionInExpressionTerm(createExpressionInAnExpression(expressionTerm));
-    Term expressionInExpressionInExpressionTerm(createExpressionInAnExpression(expressionInExpressionTerm));
+    Term expressionInExpressionTerm(createAndWrapExpressionFromATerm(expressionTerm));
+    Term expressionInExpressionInExpressionTerm(createAndWrapExpressionFromATerm(expressionInExpressionTerm));
     Expression expressionToTest(createExpressionIfPossible({expressionInExpressionInExpressionTerm}));
     SimplificationOfExpression simplification(expressionToTest);
 
@@ -112,8 +112,8 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnOrOperationDifferentExpressi
 
 TEST(SimplificationOfExpressionTest, SimplifyWorksOnExpressionInExpressionForASingleTermExpression) {
     Term expressionTerm(createAndWrapExpressionFromATerm("x"));
-    Term expressionInExpressionTerm(createExpressionInAnExpression(expressionTerm));
-    Term expressionInExpressionInExpressionTerm(createExpressionInAnExpression(expressionInExpressionTerm));
+    Term expressionInExpressionTerm(createAndWrapExpressionFromATerm(expressionTerm));
+    Term expressionInExpressionInExpressionTerm(createAndWrapExpressionFromATerm(expressionInExpressionTerm));
     Expression expressionToTest(createExpressionIfPossible({expressionInExpressionInExpressionTerm}));
     SimplificationOfExpression simplification(expressionToTest);
 

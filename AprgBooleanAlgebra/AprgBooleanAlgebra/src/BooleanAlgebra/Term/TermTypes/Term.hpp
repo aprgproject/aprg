@@ -19,13 +19,15 @@ public:
 
     Term();
     Term(TermType const type, bool const isSimplified, BaseTermDataPointer&& m_baseTermDataPointer);  // for move
-    explicit Term(bool const boolValue);
-    explicit Term(char const* const characterString);
-    explicit Term(std::string const& stringAsParameter);
-    explicit Term(Constant const& constant);
-    explicit Term(VariableTerm const& variableTerm);
-    explicit Term(Operator const& operatorTerm);
-    explicit Term(Expression const& expression);
+    // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
+    Term(bool const boolValue);
+    Term(char const* const characterString);
+    Term(std::string const& stringAsParameter);
+    Term(Constant const& constant);
+    Term(VariableTerm const& variableTerm);
+    Term(Operator const& operatorTerm);
+    Term(Expression const& expression);
+    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
 
     // rule of five or six
     ~Term() = default;
@@ -40,17 +42,17 @@ public:
 
     Term operator~() const;
 
-    [[nodiscard]] bool isEmpty[[nodiscard]] () const;
-    [[nodiscard]] b[[nodiscard]] ool isConstant() const;
-    [[nod[[nodiscard]] iscard]] bool isVariableTerm([[nodiscard]] ) const;
-    [[nodiscard]] bool[[nodiscard]]  isOperator() const;
-    [[nodis[[nodiscard]] card]] bool isExpression() const;
-[[nodiscard]]     [[nodiscard]] bool isSimplified() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool isConstant() const;
+    [[nodiscard]] bool isVariableTerm() const;
+    [[nodiscard]] bool isOperator() const;
+    [[nodiscard]] bool isExpression() const;
+    [[nodiscard]] bool isSimplified() const;
 
-    [[nod[[nodiscard]] iscard]] TermType getTermType() const;
-    [[nodiscard]] Consta[[nodiscard]] nt const& getConstantConstReference() const;
-    [[nodi[[nodiscard]] scard]] VariableTerm const& getVariableTermConstReference()[[nodiscard]]  const;
-    [[nodiscard]] Operator[[nodiscard]]  const& getOperatorConstReference() const;
+    [[nodiscard]] TermType getTermType() const;
+    [[nodiscard]] Constant const& getConstantConstReference() const;
+    [[nodiscard]] VariableTerm const& getVariableTermConstReference() const;
+    [[nodiscard]] Operator const& getOperatorConstReference() const;
     [[nodiscard]] Expression const& getExpressionConstReference() const;
     [[nodiscard]] bool getBooleanValue() const;
     [[nodiscard]] std::string getDebugString() const;

@@ -22,7 +22,7 @@ public:
 
     VariableTerm operator~() const;
 
-    [[nodiscard]] bool isNegated([[nodiscard]] ) const;
+    [[nodiscard]] bool isNegated() const;
 
     [[nodiscard]] std::string getVariableTermName() const;
 

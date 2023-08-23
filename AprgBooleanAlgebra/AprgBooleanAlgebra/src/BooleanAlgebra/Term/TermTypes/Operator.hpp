@@ -17,15 +17,15 @@ public:
     bool operator!=(Operator const& second) const;
     bool operator<(Operator const& second) const;
 
-    [[nodiscard]] bool isNot[[nodiscard]] () const;
-    [[nodiscar[[nodiscard]] d]] bool isAnd() const;[[nodiscard]] 
+    [[nodiscard]] bool isNot() const;
+    [[nodiscard]] bool isAnd() const;
     [[nodiscard]] bool isOr() const;
-    [[nod[[nodiscard]] iscard]] bool isAnOperatorThatCanPerforme[[nodiscard]] d() const;
-    [[nodiscard]] bool isOpeni[[nodiscard]] ngGroupOperator() const;
-    [[nod[[nodiscard]] iscard]] bool isClosingGroupOperato[[nodiscard]] r() const;
+    [[nodiscard]] bool isAnOperatorThatCanPerformed() const;
+    [[nodiscard]] bool isOpeningGroupOperator() const;
+    [[nodiscard]] bool isClosingGroupOperator() const;
     [[nodiscard]] bool isUnaryOperator() const;
-    [[nodiscard]] bool i[[nodiscard]] sBinaryOperator() const;
-    [[nodiscard]][[nodiscard]]  bool isSameOperatorInputType(OperatorInputType const operatorInputType) const;
+    [[nodiscard]] bool isBinaryOperator() const;
+    [[nodiscard]] bool isSameOperatorInputType(OperatorInputType const operatorInputType) const;
     [[nodiscard]] OperatorType getOperatorType() const;
     [[nodiscard]] std::string getOperatorString() const;
 
