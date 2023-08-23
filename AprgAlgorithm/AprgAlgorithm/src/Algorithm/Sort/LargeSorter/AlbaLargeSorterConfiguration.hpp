@@ -40,6 +40,7 @@ struct AlbaLargeSorterConfiguration {
             return false;
         }
         AlbaLocalPathHandler directoryPath(m_directoryForBlocks);
+        directoryPath.createDirectoriesForNonExisitingDirectories();
         if (!directoryPath.isFoundInLocalSystem()) {
             return false;
         }
