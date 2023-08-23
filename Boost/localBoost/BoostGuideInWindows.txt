@@ -9,11 +9,11 @@ https://cmake.org/cmake/help/v3.8/module/FindBoost.html
 Installing boost libraries for GCC (MinGW) on Windows APRG
 
 ->Folder setup
-1) Extract downloaded boost source, e.g. boost_1_59_0 to "aprg\Boost\boostLibrary\boost"
----> "aprg\Boost\boostLibrary\boost\boost\accumulators" should exist
-2) Create a folder for Boost.Build installation, e.g. "aprg\Boost\boostLibrary\boost-build"
-3) Create a folder within for building, i.e. "aprg\Boost\boostLibrary\boost\build".
-4) Use the boost folder for installation, e.g. "aprg\Boost\boostLibrary\boost".
+1) Extract downloaded boost source, e.g. boost_1_59_0 to "aprg\Boost\localBoost\boost"
+---> "aprg\Boost\localBoost\boost\boost\accumulators" should exist
+2) Create a folder for Boost.Build installation, e.g. "aprg\Boost\localBoost\boost-build"
+3) Create a folder within for building, i.e. "aprg\Boost\localBoost\boost\build".
+4) Use the boost folder for installation, e.g. "aprg\Boost\localBoost\boost".
 
 ->GCC setup
 1) Open Command Prompt.
@@ -22,18 +22,18 @@ Installing boost libraries for GCC (MinGW) on Windows APRG
 4) The QT GCC compiler is located in: "C:\Qt\Qt5.9.2\Tools\mingw530_32\bin". Add this in path for gcc to be visible in command line.
 
 -> Boost.Build setup
-1) Open Command Prompt and navigate to "aprg\Boost\boostLibrary\boost\tools\build".
+1) Open Command Prompt and navigate to "aprg\Boost\localBoost\boost\tools\build".
 2) Run 
 -> bootstrap.bat gcc"
 3) Run 
--> b2 install --prefix="xxxxx\aprg\Boost\boostLibrary\boost-build"
-4) Add "xxxxx\aprg\Boost\boostLibrary\boost-build" to Windows PATH. So we can use "b2" anywhere.
+-> b2 install --prefix="xxxxx\aprg\Boost\localBoost\boost-build"
+4) Add "xxxxx\aprg\Boost\localBoost\boost-build" to Windows PATH. So we can use "b2" anywhere.
 NOTE: Remember to replace the xxxxx!!!
 
 -> boost building
-1) Open Command Prompt and navigate to "aprg\Boost\boostLibrary\boost".
+1) Open Command Prompt and navigate to "aprg\Boost\localBoost\boost".
 2) Run:
----> b2 --build-dir="xxxxx\aprg\Boost\boostLibrary\boost\build" --prefix="xxxxx\aprg\Boost\boostLibrary\boost" toolset=gcc install
+---> b2 --build-dir="xxxxx\aprg\Boost\localBoost\boost\build" --prefix="xxxxx\aprg\Boost\localBoost\boost" toolset=gcc install
 2.1) The option “--build-type=complete” causes Boost.Build to build all supported variants of the libraries. 
 2.2) In particular, to limit the amount of time spent building, you may be interested in:
 ----> reviewing the list of library names with --show-libraries
@@ -44,7 +44,7 @@ NOTE: Remember to replace the xxxxx!!!
 
 
 -> create boost libraries
-1) Open Command Prompt and go to "aprg\Boost\boostLibrary\boost".
+1) Open Command Prompt and go to "aprg\Boost\localBoost\boost".
 2) Header-Only Libraries
 ---> The first thing many people want to know is, “how do I build Boost?” The good news is that often, there's nothing to build.
 ---> Most Boost libraries are header-only: they consist entirely of header files containing templates and inline functions, and require no separately-compiled library binaries or special treatment when linking.
@@ -53,8 +53,8 @@ NOTE: Remember to replace the xxxxx!!!
 -----> b2 --show-libraries
 4) Create and install
 ---> create and install the library using b2 by a flag "-with-NameOfLibrary" during install command. For example:
------> b2 install --prefix=xxxxx\aprg\Boost\boostLibrary\boost --with-system --with-locale --with-filesystem --with-iostreams --with-date_time --with-random link=static runtime-link=shared threading=multi toolset=gcc
----> The libraries will be generated on "aprg\Boost\boostLibrary\boost\lib" folder
+-----> b2 install --prefix=xxxxx\aprg\Boost\localBoost\boost --with-system --with-locale --with-filesystem --with-iostreams --with-date_time --with-random link=static runtime-link=shared threading=multi toolset=gcc
+---> The libraries will be generated on "aprg\Boost\localBoost\boost\lib" folder
 NOTE: Remember to replace the xxxxx!!!
 5) Add library on boost cmake
 ---> Open "aprg\Boost\Boost\cmake\IncludeBoost.cmake" and add library during searching for boost.

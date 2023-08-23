@@ -3,16 +3,15 @@ include(${APRG_DIR}/AprgCMakeHelpers/PrintMacros.cmake)
 print_variable(BOOST_DIR)
 # set boost flags
 if(WIN32)
-    # set directories for boost in APRG
     set(Boost_DEBUG ON)
     set(Boost_USE_STATIC_LIBS ON)
     set(Boost_USE_MULTITHREADED ON)
     set(Boost_USE_STATIC_RUNTIME OFF)
-    set(BOOST_ROOT ${BOOST_DIR}/../boostLibrary/boost)
+    set(BOOST_ROOT ${BOOST_DIR}/../localBoost/boost)
     set(BOOST_INCLUDEDIR ${BOOST_ROOT}/include)
     set(BOOST_LIBRARYDIR ${BOOST_ROOT}/lib)
 elseif(UNIX)
-    # set directories for boost in linux
+    set(CMAKE_THREAD_LIBS_INIT "-lpthread")
     set(Boost_DEBUG ON)
     set(BOOST_ROOT /usr/include/boost)
     set(BOOST_INCLUDEDIR ${BOOST_ROOT})
