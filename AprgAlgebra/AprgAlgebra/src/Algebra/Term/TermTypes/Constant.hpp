@@ -30,4 +30,10 @@ public:
 private:
     friend std::ostream& operator<<(std::ostream& out, Constant const& constant);
 
-    AlbaNumber m_consta  // namespace alba::algebranamespace alba::algebra
+private:
+    friend std::ostream& operator<<(std::ostream& out, Constant const& constant);
+
+    AlbaNumber m_constantValue;
+};
+
+}  // namespace alba::algebra

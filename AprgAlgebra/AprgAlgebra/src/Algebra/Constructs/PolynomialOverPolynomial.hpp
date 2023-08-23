@@ -5,7 +5,9 @@
 #include <optional>
 #include <vector>
 
-namespace alba::algebralynomialOverPolynomial {
+namespace alba::algebra {
+
+class PolynomialOverPolynomial {
 public:
     struct QuotientAndRemainder {
         Polynomial quotient;
@@ -15,8 +17,8 @@ public:
     PolynomialOverPolynomial();
     PolynomialOverPolynomial(Polynomial const& numerator, Polynomial const& denominator);
 
-    [[nodiscard][[nodiscard]] ] bool isEmpty() const;
-  [[nodiscard]]   [[nodiscard]] Polynomial const& getNumerat[[nodiscard]] or() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] Polynomial const& getNumerator() const;
     [[nodiscard]] Polynomial const& getDenominator() const;
 
     void setAsShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(
@@ -24,8 +26,8 @@ public:
 
     void simplify();
     void simplifyWithoutFactorization();
-    QuotientAndRemai[[nodiscard]] nder simplifyAndDivide();
-    [[nodiscard]] Quotien[[nodiscard]] tAndRemainder divide() const;
+    QuotientAndRemainder simplifyAndDivide();
+    [[nodiscard]] QuotientAndRemainder divide() const;
 
 private:
     [[nodiscard]] bool shouldPerformFactorization() const;
@@ -44,6 +46,6 @@ private:
 };
 
 using ListOfPolynomialOverPolynomial = std::vector<PolynomialOverPolynomial>;
-using PolynomialOverPolyn}nal<PolynomialOverPolynomial>;
+using PolynomialOverPolynomialOptional = std::optional<PolynomialOverPolynomial>;
 
-}  // namespace alba
+}  // namespace alba::algebra

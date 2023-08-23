@@ -11,7 +11,8 @@ namespace alba::algebra {
 class Operator : public BaseTermData {
 public:
     Operator() = default;
-    explicit Operator(std::string const& operatingString);
+    // NOLINTNEXTLINE(google-explicit-constructor,hicpp-explicit-conversions)
+    Operator(std::string const& operatingString);
 
     // rule of zero
 
@@ -19,20 +20,22 @@ public:
     bool operator!=(Operator const& second) const;
     bool operator<(Operator const& second) const;
 
-    [[nodiscard]] bool isAddition[[nodiscard]] () const;
-    [[nodiscard]] bool[[nodiscard]]  isSubtraction() const;
-    [[nodis[[nodiscard]] card]] bool isMultiplication([[nodiscard]] ) const;
-    [[nodiscard]] bool i[[nodiscard]] sDivision() const;
-    [[nodiscard]] bool isRai[[nodiscard]] seToPower() const;
-    [[nodiscard]] bool[[nodiscard]]  isAnOperatorThatCanPerformed() const;
-  [[nodiscard]]   [[nodiscard]] bool isOpeningGroupOperator() const;
-    [[nodiscard]] bool isClosin[[nodiscard]] gGroupOperator() const;
-    [[nodiscard]] bo[[nodiscard]] ol isSameOperatorInputType(OperatorInputType const operatorInputType) const;
+    [[nodiscard]] bool isAddition() const;
+    [[nodiscard]] bool isSubtraction() const;
+    [[nodiscard]] bool isMultiplication() const;
+    [[nodiscard]] bool isDivision() const;
+    [[nodiscard]] bool isRaiseToPower() const;
+    [[nodiscard]] bool isAnOperatorThatCanPerformed() const;
+    [[nodiscard]] bool isOpeningGroupOperator() const;
+    [[nodiscard]] bool isClosingGroupOperator() const;
+    [[nodiscard]] bool isSameOperatorInputType(OperatorInputType const operatorInputType) const;
 
     [[nodiscard]] OperatorLevel getOperatorLevel() const;
     [[nodiscard]] std::string getOperatorString() const;
 
-    void setOperatorString(std::string const& ope  // namespace alba::algebravate:
+    void setOperatorString(std::string const& operatingString);
+
+private:
     friend std::ostream& operator<<(std::ostream& out, Operator const& operatorObject);
 
     std::string m_operatingString;

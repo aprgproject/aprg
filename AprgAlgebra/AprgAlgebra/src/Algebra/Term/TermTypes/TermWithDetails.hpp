@@ -22,8 +22,8 @@ struct TermWithDetails {
     bool operator==(TermWithDetails const& second) const;
     bool operator!=(TermWithDetails const& second) const;
     bool operator<(TermWithDetails const& second) const;
-    [[nodiscard]] bool hasPositiveAssociation[[nodiscard]] () const;
-    [[nodiscard]] bool hasNegat[[nodiscard]] iveAssociation() const;
+    [[nodiscard]] bool hasPositiveAssociation() const;
+    [[nodiscard]] bool hasNegativeAssociation() const;
     [[nodiscard]] int getAssociationPriority() const;
     void clear();
     void reverseAssociation();
@@ -31,6 +31,6 @@ struct TermWithDetails {
     TermAssociationType association;
 };
 
-using TermsWith  // namespace alba::algebraor<TermWithDetails>;
+using TermsWithDetails = std::vector<TermWithDetails>;
 
 }  // namespace alba::algebra

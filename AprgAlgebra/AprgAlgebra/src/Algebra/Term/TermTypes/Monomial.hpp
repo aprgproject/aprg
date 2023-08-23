@@ -33,10 +33,10 @@ public:
     bool operator==(Monomial const& second) const;
     bool operator!=(Monomial const& second) const;
     bool operator<(Monomial const& second) const;
-    [[nodiscard]] bool isSimplified([[nodiscard]] ) const;
+    [[nodiscard]] bool isSimplified() const;
 
-    [[nodiscard]] AlbaNumber const& [[nodiscard]] getCoefficient() const;
-    [[nodiscard]] VariablesToExponentsMap const[[nodiscard]] & getVariablesToExponentsMap() const;
+    [[nodiscard]] AlbaNumber const& getCoefficient() const;
+    [[nodiscard]] VariablesToExponentsMap const& getVariablesToExponentsMap() const;
     [[nodiscard]] AlbaNumber getExponentForVariable(std::string const& variableName) const;
 
     void clear();
@@ -63,6 +63,9 @@ private:
 
     AlbaNumber m_constant;
     VariablesToExponentsMap m_variablesToExponentsMap;
-    bool m_isSim  // namespace alba::algebraMonomials = std::vector<Monomial>;
+    bool m_isSimplified;
+};
+
+using Monomials = std::vector<Monomial>;
 
 }  // namespace alba::algebra

@@ -9,7 +9,8 @@ public:
     friend class Expression;
 
     TermsWithAssociation() = default;
-    explicit TermsWithAssociation(TermsWithDetails const& termsWithDetails);
+    // NOLINTNEXTLINE(google-explicit-constructor,hicpp-explicit-conversions)
+    TermsWithAssociation(TermsWithDetails const& termsWithDetails);
     TermsWithAssociation(std::initializer_list<TermWithDetails> const& termsWithDetails);
 
     // rule of zero
@@ -17,11 +18,11 @@ public:
     bool operator==(TermsWithAssociation const& second) const;
     bool operator!=(TermsWithAssociation const& second) const;
     bool operator<(TermsWithAssociation const& second) const;
-    [[nodiscard]] bool isEmpty([[nodiscard]] ) const;
+    [[nodiscard]] bool isEmpty() const;
 
-    [[nodiscard[[nodiscard]] ]] int getSize() const;
+    [[nodiscard]] int getSize() const;
     [[nodiscard]] BaseTerm const& getFirstTerm() const;
-    [[nodiscard]] T[[nodiscard]] ermAssociationType getFirstAssociationType() const;
+    [[nodiscard]] TermAssociationType getFirstAssociationType() const;
     [[nodiscard]] TermsWithDetails const& getTermsWithDetails() const;
     TermsWithDetails& getTermsWithDetailsReference();
 
@@ -33,7 +34,9 @@ public:
     void putTermWithAssociation(BaseTerm const& baseTerm, TermAssociationType const associationType);
     void putTermWithPositiveAssociation(BaseTerm const& baseTerm);
     void putTermWithNegativeAssociation(BaseTerm const& baseTerm);
-    void reverseTheAssociation  // namespace alba::algebraate:
+    void reverseTheAssociationOfTheTerms();
+
+private:
     TermsWithDetails m_termsWithDetails;
 };
 

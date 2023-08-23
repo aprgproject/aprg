@@ -28,11 +28,11 @@ public:
     bool operator==(Function const& second) const;
     bool operator!=(Function const& second) const;
     bool operator<(Function const& second) const;
-    [[nodiscard]] bool isSimplified([[nodiscard]] ) const;
+    [[nodiscard]] bool isSimplified() const;
 
-    [[nodiscard]] std::string g[[nodiscard]] etFunctionName() const;
-    [[nodiscard][[nodiscard]] ] std::string getDebugString() const;
-    [[nodiscard]] AlbaNumbe[[nodiscard]] r performFunctionAndReturnResultIfPossible[[nodiscard]] () const;
+    [[nodiscard]] std::string getFunctionName() const;
+    [[nodiscard]] std::string getDebugString() const;
+    [[nodiscard]] AlbaNumber performFunctionAndReturnResultIfPossible() const;
     [[nodiscard]] BaseTerm const& getInputTerm() const;
     [[nodiscard]] EvaluationFunction const& getEvaluationFunction() const;
 
@@ -47,7 +47,8 @@ private:
     friend std::ostream& operator<<(std::ostream& out, Function const& functionObject);
 
     std::string m_functionName;
-    BaseTermUniquePointer m_inputTerm  // namespace alba::algebrationFunction m_evaluationFunction;
+    BaseTermUniquePointer m_inputTermPointer;
+    EvaluationFunction m_evaluationFunction;
     bool m_isSimplified;
 };
 

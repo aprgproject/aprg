@@ -23,13 +23,13 @@ public:
     bool operator==(Expression const& second) const;
     bool operator!=(Expression const& second) const;
     bool operator<(Expression const& second) const;
-    [[nodiscard]] bool isEmpty[[nodiscard]] () const;
-    [[nodiscard]] bool containsOnlyOnePositively[[nodiscard]] AssociatedTerm() const;
-    [[no[[nodiscard]] discard]] bool isSimplified() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool containsOnlyOnePositivelyAssociatedTerm() const;
+    [[nodiscard]] bool isSimplified() const;
 
-    [[nodisc[[nodiscard]] ard]] OperatorLevel getCommonOperatorLevel[[nodiscard]] () const;
-    [[nodiscard]] BaseTerm const& getFirstTerm([[nodiscard]] ) const;
-    [[nodiscard]] TermAssociationType getFirstAssociatio[[nodiscard]] nType() const;
+    [[nodiscard]] OperatorLevel getCommonOperatorLevel() const;
+    [[nodiscard]] BaseTerm const& getFirstTerm() const;
+    [[nodiscard]] TermAssociationType getFirstAssociationType() const;
     [[nodiscard]] TermsWithAssociation const& getTermsWithAssociation() const;
     [[nodiscard]] std::string getDebugString() const;
 
@@ -90,7 +90,7 @@ private:
     friend std::ostream& operator<<(std::ostream& out, Expression const& expression);
 
     OperatorLevel m_commonOperatorLevel;
-    TermsWith  // namespace alba::algebraWithAssociation;
+    TermsWithAssociation m_termsWithAssociation;
     bool m_isSimplified;
 };
 

@@ -23,4 +23,7 @@ public:
 private:
     friend std::ostream& operator<<(std::ostream& out, Variable const& variable);
 
-    std::string m_varia  // namespace alba::algebranamespace alba::algebra
+    std::string m_variableName;
+};
+
+}  // namespace alba::algebra

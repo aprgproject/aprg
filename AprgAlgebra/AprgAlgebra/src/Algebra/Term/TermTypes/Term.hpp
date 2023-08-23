@@ -25,20 +25,23 @@ public:
 
     Term();
     Term(TermType const type, bool const isSimplified, BaseTermDataPointer&& m_baseTermDataPointer);  // for move
-    explicit Term(AlbaNumber const& number);
-    explicit Term(char const* const characterString);
-    explicit Term(std::string const& stringAsParameter);
-    explicit Term(Constant const& constant);
-    explicit Term(Variable const& variable);
-    explicit Term(Operator const& operatorTerm);
-    explicit Term(Monomial const& monomial);
-    explicit Term(Polynomial const& polynomial);
-    explicit Term(Expression const& expression);
-    explicit Term(Function const& function);
+
+    // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
+    template <typename ArithmeticType, typename = std::enable_if_t<typeHelper::isArithmeticType<ArithmeticType>()>>
+    Term(ArithmeticType const value) : Term(AlbaNumber(value)) {}
+    Term(AlbaNumber const& number);
+    Term(char const* const characterString);
+    Term(std::string const& stringAsParameter);
+    Term(Constant const& constant);
+    Term(Variable const& variable);
+    Term(Operator const& operatorTerm);
+    Term(Monomial const& monomial);
+    Term(Polynomial const& polynomial);
+    Term(Expression const& expression);
+    Term(Function const& function);
+    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
 
     // enabled via a type template parameter
-    template <typename ArithmeticType, typename = std::enable_if_t<typeHelper::isArithmeticType<ArithmeticType>()>>
-    explicit Term(ArithmeticType const value) : Term(AlbaNumber(value)) {}
 
     // rule of five or six
     ~Term() = default;
@@ -50,21 +53,21 @@ public:
     bool operator==(Term const& second) const;
     bool operator!=(Term const& second) const;
     bool operator<(Term const& second) const;
-    [[nodiscard]] bool isEmpty[[nodiscard]] () const;
-    [[nodiscard]] b[[nodiscard]] ool isConstant() const;
-    [[[nodiscard]] [nodiscard]] bool isVariable([[nodiscard]] ) const;
-    [[nodiscard]] bo[[nodiscard]] ol isOperator() const;
-    [[no[[nodiscard]] discard]] bool isMonomial() con[[nodiscard]] st;
-    [[nodiscard]] bool is[[nodiscard]] Polynomial() const;
-    [[nodisc[[nodiscard]] ard]] bool isExpression() const;
- [[nodiscard]]    [[nodiscard]] bool isFunction() const;
- [[nodiscard]]    [[nodiscard]] bool isSimplified() const;[[nodiscard]] 
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool isConstant() const;
+    [[nodiscard]] bool isVariable() const;
+    [[nodiscard]] bool isOperator() const;
+    [[nodiscard]] bool isMonomial() const;
+    [[nodiscard]] bool isPolynomial() const;
+    [[nodiscard]] bool isExpression() const;
+    [[nodiscard]] bool isFunction() const;
+    [[nodiscard]] bool isSimplified() const;
 
-    [[nodiscard]] TermType getTermType() [[nodiscard]] const;
-    [[nodiscard]] Constant const& ge[[nodiscard]] tAsConstant() const;
-    [[nodiscard]] Variable[[nodiscard]]  const& getAsVariable() const;
-    [[nodiscard][[nodiscard]] ] Operator const& getAsOperator() const;
-  [[nodiscard]]   [[nodiscard]] Monomial const& getAsMonomi[[nodiscard]] al() const;
+    [[nodiscard]] TermType getTermType() const;
+    [[nodiscard]] Constant const& getAsConstant() const;
+    [[nodiscard]] Variable const& getAsVariable() const;
+    [[nodiscard]] Operator const& getAsOperator() const;
+    [[nodiscard]] Monomial const& getAsMonomial() const;
     [[nodiscard]] Polynomial const& getAsPolynomial() const;
     [[nodiscard]] Expression const& getAsExpression() const;
     [[nodiscard]] Function const& getAsFunction() const;
@@ -91,7 +94,7 @@ public:
 
 private:
     static BaseTermDataPointer createANewDataPointerFrom(Term const& term);
-    void initi  // namespace alba::algebrastd::string const& stringAsParameter);
+    void initializeBasedOnString(std::string const& stringAsParameter);
 
     friend std::ostream& operator<<(std::ostream& out, Term const& term);
 
