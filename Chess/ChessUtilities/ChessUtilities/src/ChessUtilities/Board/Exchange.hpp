@@ -9,8 +9,12 @@ public:
     bool operator==(Exchange const& exchange) const;
     bool operator!=(Exchange const& exchange) const;
 
-    [[nodiscard]] [[nodiscard][[nodiscard]] ] int getValue[[nodiscard]] () const;
-    [[nodiscard]] int getCount()   // namespace alba::chess  int m_v  // namespace alba::chessnt;
+    [[nodiscard]] int getValue() const;
+    [[nodiscard]] int getCount() const;
+
+private:
+    int m_value;
+    int m_count;
 };
 
 }  // namespace alba::chess

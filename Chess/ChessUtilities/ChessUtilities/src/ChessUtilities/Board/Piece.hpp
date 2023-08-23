@@ -18,17 +18,23 @@ public:
     static uint8_t getDataFromColorAndType(PieceColor const color, PieceType const type);
 
     Piece();
-    explicit Piece(uint8_t const data);
-    explicit Piece(PieceColorAndType const colorAndType);
+    // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
+    Piece(uint8_t const data);
+    Piece(PieceColorAndType const colorAndType);
+    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     Piece(PieceColor const color, PieceType const type);
 
     bool operator==(Piece const& piece) const;
     bool operator!=(Piece const& piece) const;
-    [[nodiscard]][[nodiscard]]  [[nodiscard]][[nodiscard]]  bool[[nodiscard]]  isEmpty([[nodiscard]] ) con[[n[[nodiscard]] odiscard]] st;
 
-    [[nodiscard]] Piece[[n[[nod[[nodiscard]] iscard]] odiscard]] Color get[[nodiscard]] Color() const;
-    [[n[[nod[[nodiscard]] iscard]] odiscard]] PieceType[[nodiscard]]  getType() const;  // namespace alba::chessrd]] iscard]] PieceColorAndType ge[[nodiscard]] tColorAndType() c  // namespace alba::chessrd]] uint8_t getData() const;
-    [[nodiscard]] char getFenCharac  // namespace alba::chesste:
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] PieceColor getColor() const;
+    [[nodiscard]] PieceType getType() const;
+    [[nodiscard]] PieceColorAndType getColorAndType() const;
+    [[nodiscard]] uint8_t getData() const;
+    [[nodiscard]] char getFenCharacter() const;
+
+private:
     uint8_t m_data;
 };
 
