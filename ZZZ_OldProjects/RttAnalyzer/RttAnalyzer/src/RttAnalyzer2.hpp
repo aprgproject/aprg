@@ -11,15 +11,15 @@ namespace alba {
 
 class RttAnalyzer2 {
 public:
-    explicit RttAnalyzer2(std::string const& outputFilePastatic th);
-    void processFile(std::string const& file);
+    explicit RttAnalyzer2(std::string const& outputFilePath);
+    static void processFile(std::string const& file);
     static void processLine(std::ofstream& outputFile, std::string const& line);
 
     void saveTitle2();
     void processFile2(std::string const& file);
-    void processLine2(std::string const& fileName, std::string const& linstatic e);
+    void processLine2(std::string const& fileName, std::string const& line);
 
-    void processFile3(std::string const& file);
+    static void processFile3(std::string const& file);
     static void processLine3(std::ofstream& outputFile, std::string const& line);
 
 private:
