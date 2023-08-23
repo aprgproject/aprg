@@ -3,24 +3,28 @@
 # 1) add -fno-rtti in flags because we dont want to depend on type checking on runtime.
 # 2) No need to put -fno-exceptions. We allow exceptions, we just dont catch them.
 set(APRG_COMPILER_COMMON_FLAGS "-Wall -Wextra -pedantic")
-set(APRG_COMPILER_COMMON_C_FLAGS "-std=c20")
+if(WIN32 AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    set(APRG_COMPILER_COMMON_C_FLAGS "-std=c2x")
+else()
+    set(APRG_COMPILER_COMMON_C_FLAGS "-std=c20")
+endif()
 set(APRG_COMPILER_COMMON_CPP_FLAGS "-std=c++20")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG "") #set(APRG_COMPILER_FLAGS_FOR_DEBUG "-g --coverage -fno-rtti")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_SHOW_PREPROCESSING_RESULT "-E")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_RTTI "-g --coverage")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_NO_RTTI "-g --coverage -fno-rtti")
-set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_FAST_COMPILATION "-g --coverage -O0"
-)#-O0 is actually the default so this is useless
+# -O0 is actually the default so this is useless
+set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_FAST_COMPILATION "-g --coverage -O0")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_SPEED "-g --coverage -O3")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_SPEED_AND_FAST_MATH "-g --coverage -O3 -ffast-math")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_MORE_SPEED "-g --coverage -Ofast")
-set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_NO_STACK_PROTECTOR "-g --coverage -fno-stack-protector"
-)#let the stack smash (for debugging)
+# -fno-stack-protector lets the stack smash (for debugging)
+set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_NO_STACK_PROTECTOR "-g --coverage -fno-stack-protector")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_ASAN "-g --coverage -fsanitize=address -fno-omit-frame-pointer")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_LSAN_ONLY "-g --coverage -fsanitize=leak -fno-omit-frame-pointer")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_TSAN "-g --coverage -fsanitize=thread")
-set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_MSAN "-g --coverage -fsanitize=memory -fno-omit-frame-pointer -fPIE"
-)# not supported by gcc, only on clang
+# -fPIE not supported by gcc, only on clang
+set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_MSAN "-g --coverage -fsanitize=memory -fno-omit-frame-pointer -fPIE")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_UBSAN "-g --coverage -fsanitize=undefined") # looks like not working
 set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED "-O3 -DNDEBUG -fno-rtti")
 set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED_AND_FAST_MATH "-O3 -DNDEBUG -fno-rtti -ffast-math")
@@ -30,8 +34,8 @@ set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_DEBUG "-O2 -g -DNDEBUG")
 set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_MORE_SPEED "-Ofast -DNDEBUG")
 set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_STACK_PROTECTOR "-fstack-protector -DNDEBUG")
 set(APRG_COMPILER_FLAGS_WINDOWS_NON_CONSOLE "-mwindows")
-set(APRG_LINKER_FLAGS_FOR_RELEASE "-static"
-)# "-static" is needed to make the program without libraries (GCC/QT libraries are missing)
+# -static is needed to make the program without libraries (GCC/QT libraries are missing)
+set(APRG_LINKER_FLAGS_FOR_RELEASE "-static")
 set(APRG_LINKER_FLAGS_FOR_RELEASE_WITH_STRIP "-static -s")
 set(APRG_LINKER_FLAGS_FOR_PTHREAD "-pthread")
 set(APRG_LINKER_FLAGS_WITH_ASAN "-fsanitize=address") #Looks like this link flags are not needed in linux
