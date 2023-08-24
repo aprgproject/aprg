@@ -64,6 +64,7 @@ jobs:
           checkCMakeFilesPath=$(realpath "$(pwd)/${{ env.checkCmakeFilesRelativePath }}")
           echo "checkCMakeFilesPath: [$checkCMakeFilesPath]"
           chmod +x "$checkCMakeFilesPath"
+          "$checkCMakeFilesPath"
           echo "cmakeLintStatus=$?" >> "$GITHUB_ENV"
           
       - name: Perform linting for shell scripts
@@ -73,6 +74,7 @@ jobs:
           checkShellScriptsPath=$(realpath "$(pwd)/${{ env.checkShellScriptsRelativePath }}")
           echo "checkShellScriptsPath: [$checkShellScriptsPath]"
           chmod +x "$checkShellScriptsPath"
+          "$checkShellScriptsPath"
           echo "shellLintStatus=$?" >> "$GITHUB_ENV"
           
       - name: Perform linting for python scripts
@@ -82,6 +84,7 @@ jobs:
           checkPythonScriptsPath=$(realpath "$(pwd)/${{ env.checkPythonScriptsRelativePath }}")
           echo "checkPythonScriptsPath: [$checkPythonScriptsPath]"
           chmod +x "$checkPythonScriptsPath"
+          "$checkPythonScriptsPath"
           echo "pythonLintStatus=$?" >> "$GITHUB_ENV"
           
       - name: Check overall linting status
