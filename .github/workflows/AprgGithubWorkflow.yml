@@ -76,19 +76,24 @@ jobs:
           "$checkShellScriptsPath" | tee "$currentDirectory/shellLintIssues.txt" || true
           
           
-      - name: Process issues from linting
+      - name: Flag an error if there are issues from linting
         shell: bash
         run: |
           lintingExitCode=0
           currentDirectory="$(pwd)"
-          if  [ -s "$currentDirectory/cmakeLintIssues.txt" ]; then
-            echo "There are some issues found regarding cmake, so the error status is set.
+          echo "Checking linting errors..."
+          if [ -s "$currentDirectory/cmakeLintIssues.txt" ]; then
+            echo "There were some issues found regarding cmake, so the error status is set.
             lintingExitCode=1
           fi
-          if  [ -s "$currentDirectory/shellLintIssues.txt" ]; then
-            echo "There are some issues found regarding shell, so the error status is set.
+          if [ -s "$currentDirectory/shellLintIssues.txt" ]; then
+            echo "There were some issues found regarding shell, so the error status is set.
             lintingExitCode=1
           fi
+          if [ $lintingExitCode -eq 0 ]; then
+            echo "There were no linting issues found.
+          fi
+          echo "lintingExitCode: [$lintingExitCode]"
           exit $lintingExitCode
 
 
@@ -280,7 +285,7 @@ jobs:
           currentDirectory="$(pwd)"
           "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }} | grep -P "^.*$unquotedProject.* (style|warning|error): .*$" | tee "$currentDirectory/analyzerIssues.txt" || true
-          if  [ -s "$currentDirectory/analyzerIssues.txt" ]; then
+          if [ -s "$currentDirectory/analyzerIssues.txt" ]; then
             echo "There are some issues found in the static analysis, so exiting with error status."
             exit 1
           else
