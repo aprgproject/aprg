@@ -91,7 +91,7 @@ jobs:
             lintingExitCode=1
           fi
           if [ $lintingExitCode -eq 0 ]; then
-            echo "There were no linting issues found.
+            echo "There were no linting issues found."
           fi
           echo "lintingExitCode: [$lintingExitCode]"
           exit $lintingExitCode
