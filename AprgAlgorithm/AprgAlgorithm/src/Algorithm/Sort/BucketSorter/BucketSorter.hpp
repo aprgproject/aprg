@@ -20,7 +20,7 @@ public:
 
     void sort(Values& valuesToSort) const override {
         Buckets buckets;  // Create n empty buckets
-        int deltaValue = m_maxValue - m_minValue;
+        auto deltaValue = static_cast<int>(m_maxValue - m_minValue);
 
         // Put array elements in different buckets
         for (Value const& value : valuesToSort) {
