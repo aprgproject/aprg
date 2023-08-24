@@ -30,8 +30,5 @@ if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
     link_directories(${Boost_LIBRARY_DIRS})
 else()
-    message(
-        WARNING
-            "The cmake cannot find boost. Try checking: FindBoost.cmake to investigate further."
-    )
+    message(WARNING "The cmake cannot find boost. Try checking: FindBoost.cmake to investigate further.")
 endif()
