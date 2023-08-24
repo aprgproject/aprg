@@ -1,44 +1,42 @@
-from mpl_toolkits import mplot3d
-
 import numpy as np
 import matplotlib.pyplot as plt
 
 graph_dimensions = (7, 7,)  # in inches
-fig = plt.figure(figsize=graph_dimensions)
-ax = plt.axes(projection='3d')
+figure = plt.figure(figsize=graph_dimensions)
+axes = plt.axes(projection='3d')
 
-# Three-dimensional Points and Lines
-# # Data for a three-dimensional line
-# zline = np.linspace(0, 15, 1000)
-# xline = np.sin(zline)
-# yline = np.cos(zline)
-# ax.plot3D(xline, yline, zline, 'gray')
-#
-# # Data for three-dimensional scattered points
-# zdata = 15 * np.random.random(100)
-# xdata = np.sin(zdata) + 0.1 * np.random.randn(100)
-# ydata = np.cos(zdata) + 0.1 * np.random.randn(100)
-# ax.scatter3D(xdata, ydata, zdata, c=zdata, cmap='Greens');
+# Data for a three-dimensional line
+# z_line = np.linspace(0, 15, 1000)
+# x_line = np.sin(z_line)
+# y_line = np.cos(z_line)
+# axes.plot3D(x_line, y_line, z_line, 'gray')
+
+# Data for three-dimensional scattered points
+# z_data = 15 * np.random.random(100)
+# x_data = np.sin(z_data) + 0.1 * np.random.randn(100)
+# y_data = np.cos(z_data) + 0.1 * np.random.randn(100)
+# axes.scatter3D(x_data, y_data, z_data, c=z_data, cmap='Greens')
 
 # Three-dimensional Contour Plots
 
 
-def f(x, y):
-    return np.sin(np.sqrt(x ** 2 + y ** 2))
+def function_to_graph(x_value, y_value):
+    return np.sin(np.sqrt(x_value ** 2 + y_value ** 2))
 
 
 x = np.linspace(-6, 6, 30)
 y = np.linspace(-6, 6, 30)
 
 X, Y = np.meshgrid(x, y)
-Z = f(X, Y)
+Z = function_to_graph(X, Y)
 
 # ax.contour3D(X, Y, Z, 50, cmap='binary')
-ax.plot_surface(X, Y, Z, rstride=1, cstride=1,
-                cmap='viridis', edgecolor='none')
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('z')
-
-
+axes.plot_surface(X, Y, Z, rstride=1, cstride=1,
+                  cmap='viridis', edgecolor='none')
+axes.set_xlabel('x')
+axes.set_ylabel('y')
+axes.set_zlabel('z')
 plt.show()
+plt.savefig('3d_graph.png')
+# save with transparent background useful when doing presentations
+# plt.savefig('3d_graph.png', transparent=True)

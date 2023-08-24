@@ -1,86 +1,84 @@
-import enum
 import random
 
 
-Cell_Hidden_Space = -1
-Cell_Hidden_Bomb = -2
-Cell_Revealed_Bomb = -3
+CELL_HIDDEN_SPACE = -1
+CELL_HIDDEN_BOMB = -2
+CELL_REVEALED_BOMB = -3
 
 
-grid_length = 10
-grid_width = 5
-grid_size = grid_length * grid_width
-number_of_bombs = int(grid_size*0.1)
+GRID_LENGTH = 10
+GRID_WIDTH = 5
+GRID_SIZE = GRID_LENGTH * GRID_WIDTH
+NUMBER_OF_BOMBS = int(GRID_SIZE*0.1)
 
 
 def get_index(coordinate):
-    return int(coordinate[1]*grid_length + coordinate[0])
+    return int(coordinate[1]*GRID_LENGTH + coordinate[0])
 
 
 def is_hidden(cell):
-    return Cell_Hidden_Bomb == cell or Cell_Hidden_Space == cell
+    return cell in (CELL_HIDDEN_BOMB, CELL_HIDDEN_SPACE)
 
 
 def is_revealed(cell):
-    return Cell_Revealed_Bomb == cell or cell >= 0
+    return CELL_REVEALED_BOMB == cell or cell >= 0
 
 
 def is_a_bomb(cell):
-    return Cell_Hidden_Bomb == cell or Cell_Revealed_Bomb == cell
+    return cell in (CELL_HIDDEN_BOMB, CELL_REVEALED_BOMB)
 
 
 def is_within_grid(coordinate):
-    return coordinate[0] >= 0 and coordinate[0] < grid_length and coordinate[1] >= 0 and coordinate[1] < grid_width
+    return coordinate[0] >= 0 and coordinate[0] < GRID_LENGTH and coordinate[1] >= 0 and coordinate[1] < GRID_WIDTH
 
 
 def are_all_spaces_revealed(grid):
-    return all([Cell_Hidden_Space != cell for cell in grid])
+    return all(CELL_HIDDEN_SPACE != cell for cell in grid)
 
 
 def create_empty_grid():
-    return [Cell_Hidden_Space] * grid_size
+    return [CELL_HIDDEN_SPACE] * GRID_SIZE
 
 
 def create_grid_with_bombs():
     grid = create_empty_grid()
-    for _ in range(number_of_bombs):
+    for _ in range(NUMBER_OF_BOMBS):
         bomb_index = random.randrange(0, len(grid))
-        grid[bomb_index] = Cell_Hidden_Bomb
+        grid[bomb_index] = CELL_HIDDEN_BOMB
     return grid
 
 
 def get_cell_display_with_hidden(cell):
-    if Cell_Hidden_Space == cell:
+    if CELL_HIDDEN_SPACE == cell:
         return '?'
-    elif Cell_Hidden_Bomb == cell:
+    if CELL_HIDDEN_BOMB == cell:
         return '?'
-    elif Cell_Revealed_Bomb == cell:
+    if CELL_REVEALED_BOMB == cell:
         return '*'
-    elif 0 == cell:
+    if 0 == cell:
         return ' '
-    else:
-        return str(cell)
+    return str(cell)
 
 
 def get_cell_display_with_reveal(cell):
-    if Cell_Hidden_Space == cell:
+    if CELL_HIDDEN_SPACE == cell:
         return ' '
-    elif Cell_Hidden_Bomb == cell:
+    if CELL_HIDDEN_BOMB == cell:
         return '*'
-    elif Cell_Revealed_Bomb == cell:
+    if CELL_REVEALED_BOMB == cell:
         return '*'
-    elif 0 == cell:
+    if 0 == cell:
         return ' '
-    else:
-        return str(cell)
+    return str(cell)
 
 
 def print_grid(grid, display_function):
-    horizontal_line = '-' * (grid_length*4+1)
+    horizontal_line = '-' * (GRID_LENGTH*4+1)
     board_display = [display_function(cell) for cell in grid]
     print(horizontal_line)
-    for y in range(grid_width):
-        grid_string = ' | '.join(board_display[y*grid_length: (y+1)*grid_length])
+    for y_position in range(GRID_WIDTH):
+        grid_string = ' | '.join(
+            board_display[y_position*GRID_LENGTH: (y_position+1)*GRID_LENGTH])
         print(f'| {grid_string} |')
         print(horizontal_line)
 
@@ -113,7 +111,7 @@ def sweep(grid, coordinate):
         cell = grid[index]
         if is_hidden(cell):
             if is_a_bomb(cell):
-                grid[index] = Cell_Revealed_Bomb
+                grid[index] = CELL_REVEALED_BOMB
             else:
                 adjacent_bombs = get_number_of_adjacent_bombs(grid, coordinate)
                 grid[index] = adjacent_bombs
@@ -123,18 +121,18 @@ def sweep(grid, coordinate):
 
 
 def get_player_input(grid):
-    isValid = False
-    while not isValid:
+    is_valid = False
+    while not is_valid:
         try:
             inputs_string = input('Input a coordinate to sweep: ')
-            inputs = [int(input_string) for input_string in inputs_string.split(',')]
+            inputs = [int(input_string)
+                      for input_string in inputs_string.split(',')]
             if len(inputs) == 2:
                 if not is_within_grid(inputs):
                     raise ValueError
-                elif is_revealed(grid[get_index(inputs)]):
+                if is_revealed(grid[get_index(inputs)]):
                     raise ValueError
-                else:
-                    isValid = True
+                is_valid = True
             else:
                 raise ValueError
         except ValueError:
@@ -152,12 +150,12 @@ def play_mine_sweeper():
             print('The bomb exploded on you. Game Over!')
             print_grid(grid, get_cell_display_with_reveal)
             break
-        else:
-            sweep(grid, coordinate)
-            if are_all_spaces_revealed(grid):
-                print('You win!')
-                print_grid(grid, get_cell_display_with_reveal)
-                break
+        sweep(grid, coordinate)
+        if are_all_spaces_revealed(grid):
+            print('You win!')
+            print_grid(grid, get_cell_display_with_reveal)
+            break
+
 
 if __name__ == '__main__':  # good practice :)
     play_mine_sweeper()

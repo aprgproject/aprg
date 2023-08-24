@@ -29,8 +29,9 @@ on:
         type: boolean
 
 env:
-  checkShellScriptsRelativePath: "AllCommonScripts/ScriptsForShellScripts/checkShellScripts.sh"
   checkCmakeFilesRelativePath: "AllCommonScripts/ScriptsForCmake/checkCmakeFiles.sh"
+  checkShellScriptsRelativePath: "AllCommonScripts/ScriptsForShellScripts/checkShellScripts.sh"
+  checkPythonScriptsRelativePath: "AllCommonScripts/ScriptsForCmake/checkPythonScripts.sh"
   determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
   buildAndRunScriptRelativePath: "AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
   buildType: ${{ inputs.cppCMakeBuildType != '' && inputs.cppCMakeBuildType || 'Debug'}} # ternary operator
@@ -49,52 +50,65 @@ jobs:
       - name: Prepare for linting
         run: |
           sudo apt-get update
+          sudo pip install cmakelang 
+          echo "cmake-lint version: [$(cmake-lint --version)]"
+          sudo apt-get install shellcheck
+          echo "shellcheck version: [$(shellcheck --version)]"
+          sudo apt-get install pylint
+          echo "pylint version: [$(pylint --version)]"
           
       - name: Perform linting for cmake files
         shell: bash
         continue-on-error: true
         run: |
-          sudo pip install cmakelang 
-          echo "cmake-lint version: [$(cmake-lint --version)]"
-          currentDirectory="$(pwd)"
-          checkCMakeFilesPath=$(realpath "$currentDirectory/${{ env.checkCmakeFilesRelativePath }}")
+          checkCMakeFilesPath=$(realpath "$(pwd)/${{ env.checkCmakeFilesRelativePath }}")
           echo "checkCMakeFilesPath: [$checkCMakeFilesPath]"
           chmod +x "$checkCMakeFilesPath"
-          "$checkCMakeFilesPath" | grep -P "\[\w\d+\]" | tee "$currentDirectory/cmakeLintIssues.txt" || true
-          
+          echo "cmakeLintStatus=$?" >> "$GITHUB_ENV"
           
       - name: Perform linting for shell scripts
         shell: bash
         continue-on-error: true
         run: |
-          sudo apt-get install shellcheck
-          echo "shellcheck version: [$(shellcheck --version)]"
-          currentDirectory="$(pwd)"
-          checkShellScriptsPath=$(realpath "$currentDirectory/${{ env.checkShellScriptsRelativePath }}")
+          checkShellScriptsPath=$(realpath "$(pwd)/${{ env.checkShellScriptsRelativePath }}")
           echo "checkShellScriptsPath: [$checkShellScriptsPath]"
           chmod +x "$checkShellScriptsPath"
-          "$checkShellScriptsPath" | tee "$currentDirectory/shellLintIssues.txt" || true
+          echo "shellLintStatus=$?" >> "$GITHUB_ENV"
           
+      - name: Perform linting for python scripts
+        shell: bash
+        continue-on-error: true
+        run: |
+          checkPythonScriptsPath=$(realpath "$(pwd)/${{ env.checkPythonScriptsRelativePath }}")
+          echo "checkPythonScriptsPath: [$checkPythonScriptsPath]"
+          chmod +x "$checkPythonScriptsPath"
+          echo "pythonLintStatus=$?" >> "$GITHUB_ENV"
           
-      - name: Flag an error if there are issues from linting
+      - name: Check overall linting status
         shell: bash
         run: |
-          lintingExitCode=0
-          currentDirectory="$(pwd)"
+          overallLintStatus=0
           echo "Checking linting errors..."
-          if [ -s "$currentDirectory/cmakeLintIssues.txt" ]; then
-            echo "There were some issues found regarding cmake, so the error status is set.
-            lintingExitCode=1
+          echo "cmakeLintStatus: [$cmakeLintStatus]"
+          if [ "$cmakeLintStatus" -gt 0 ]; then
+            echo "CMake linting failed, so the overall linting status is set to failed."
+            overallLintStatus=1
           fi
-          if [ -s "$currentDirectory/shellLintIssues.txt" ]; then
-            echo "There were some issues found regarding shell, so the error status is set.
-            lintingExitCode=1
+          echo "shellLintStatus: [$shellLintStatus]"
+          if [ "$shellLintStatus" -gt 0 ]; then
+            echo "Shell linting failed, so the overall linting status is set to failed."
+            overallLintStatus=1
           fi
-          if [ $lintingExitCode -eq 0 ]; then
+          echo "pythonLintStatus: [$pythonLintStatus]"
+          if [ "$pythonLintStatus" -gt 0 ]; then
+            echo "Python linting failed, so the overall linting status is set to failed."
+            overallLintStatus=1
+          fi
+          echo "overallLintStatus: [$overallLintStatus]"
+          if [ $overallLintStatus -eq 0 ]; then
             echo "There were no linting issues found."
           fi
-          echo "lintingExitCode: [$lintingExitCode]"
-          exit $lintingExitCode
+          exit $overallLintStatus
 
 
   determineCppProjects:
@@ -284,6 +298,8 @@ jobs:
           echo "clazy version: [$(clazy --version)]"
           currentDirectory="$(pwd)"
           "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          echo "Running Static Analysis..."
+          echo "Showing grepped output:"
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }} | grep -P "^.*$unquotedProject.* (style|warning|error): .*$" | tee "$currentDirectory/analyzerIssues.txt" || true
           if [ -s "$currentDirectory/analyzerIssues.txt" ]; then
             echo "There are some issues found in the static analysis, so exiting with error status."

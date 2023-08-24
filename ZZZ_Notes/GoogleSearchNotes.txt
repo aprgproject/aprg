@@ -1,0 +1,182 @@
+Google search operators
+-> Below is a brief description of what every Google search operator does.
+
+-> I’ve grouped them into three categories:
+---> Working – Works as intended.
+---> Unreliable – Not officially deprecated by Google, but results are hit-and-miss.
+---> Not working – Officially deprecated by Google.
+
+Working:
+
+-> site:
+---> Syntax: site:apple.com
+---> Syntax: site:example.com
+---> Description: Search for results from a particular website.
+---> Usage: Restricts search results to a specific website or domain. Helps you find content within a particular site.
+---> Example: site:wikipedia.org Albert Einstein will show search results only from Wikipedia related to Albert Einstein.
+
+-> filetype:
+---> Syntax: apple filetype:pdf
+---> Syntax: filetype:extension
+---> Description: Search for particular types of files (e.g., PDF).
+---> Usage: Limits search results to specific file types. Useful for finding documents, presentations, or files of a particular format.
+---> Example: filetype:pdf climate change will show search results with PDF files related to climate change.
+
+-> ext:
+---> Syntax: apple ext:pdf
+---> Description: Same as filetype:
+
+-> intitle:
+---> Syntax: intitle:apple
+---> Syntax: intitle:keyword
+---> Description: Search for pages with a particular word in the title tag.
+---> Usage: Finds pages with the specified keyword in the title tag.
+---> Example: intitle:OpenAI GPT-3 will show search results where "OpenAI GPT-3" appears in the title.
+
+-> inurl:
+---> Syntax: inurl:apple
+---> Syntax: inurl:keyword
+---> Description: Search for pages with a particular word in the URL.
+---> Usage: Finds pages with the specified keyword in the URL.
+---> Example: inurl:blog technology will show search results where "technology" appears in the URL and "blog" appears anywhere on the page.
+
+-> intext:
+---> Syntax: intext:apple iphone
+---> Syntax: intext:keyword
+---> Description: Search for pages with a particular word in their content.
+---> Usage: Searches for pages containing the specified keyword in the body of the page.
+---> Example: intext:machine learning will show search results where "machine learning" appears within the text content.
+
+-> related:
+---> Syntax: related:apple.com
+---> Syntax: related:example.com
+---> Description: Search for sites related to a given domain.
+---> Usage: Finds websites related to a specified domain.
+---> Example: related:nytimes.com will show websites related to The New York Times.
+
+-> cache:
+---> Syntax: cache:apple.com
+---> Syntax: cache:example.com/page
+---> Description: Find the most recent cache of a webpage.
+---> Usage: Displays the cached version of a specific webpage from Google's index.
+---> Example: cache:wikipedia.org will show the cached version of Wikipedia's homepage.
+
+-> define:
+---> Syntax: define:entrepreneur
+---> Syntax: define:term
+---> Description: Search for the definition of a word or phrase.
+---> Usage: Provides definitions and meanings for the specified term.
+---> Example: define:serendipity will display definitions of the word "serendipity."
+
+-> allintitle:
+---> Syntax: allintitle:apple iphone
+---> Description: Search for pages with multiple words in the title tag.
+
+-> allinurl:
+---> Syntax: allinurl:apple iphone
+---> Description: Search for pages with multiple words in the URL.
+
+-> allintext:
+---> Syntax: allintext:apple iphone
+---> Description: Search for pages with multiple words in their content.
+
+-> weather:
+---> Syntax: weather:san francisco
+---> Description: Search for the weather in a location.
+
+-> stocks:
+---> Syntax: stocks:aapl
+---> Description: Search for stock information for a ticker.
+
+-> map:
+---> Syntax: map:silicon valley
+---> Description: Force Google to show map results.
+
+-> movie:
+---> Syntax: movie:steve jobs
+---> Description: Search for information about a movie.
+
+-> in
+---> Syntax: $329 in GBP
+---> Description: Convert one unit to another.
+
+-> source:
+---> Syntax: apple source:the_verge
+---> Description: Search for results from a particular source in Google News.
+
+-> before:
+---> Syntax: apple before:2007-06-29
+---> Description: Search for results from before a particular date.
+
+-> after:
+---> Syntax: apple after:2007-06-29
+---> Description: Search for results from after a particular date.
+
+
+
+Working operators:
+
+-> “ ”
+---> Syntax: “steve jobs”
+---> Description: Search for results that mention a word or phrase.
+
+-> OR
+---> Syntax: jobs OR gates
+---> Description: Search for results related to X or Y.
+
+-> |
+---> Syntax: jobs | gates
+---> Description: Same as OR:
+
+-> AND
+---> Syntax: jobs AND gates
+---> Description: Search for results related to X and Y.
+
+-> -
+---> Syntax: jobs -apple
+---> Description: Search for results that don’t mention a word or phrase.
+
+-> *
+---> Syntax: steve * apple
+---> Description: Wildcard matching any word or phrase.
+
+-> ( )
+---> Syntax: (ipad OR iphone) apple
+---> Description: Group multiple searches.
+
+-> _
+---> Syntax: Hellowor__
+---> Description:  acts as a wildcard in Google Autocomplete.
+
+
+
+Unreliable
+-> #..#	Search within a range of numbers. 	iphone case $50..$60
+-> inanchor:	Search for pages with backlinks containing specific anchor text. 	inanchor:apple
+-> allinanchor:	Search for pages with backlinks containing multiple words in their anchor text. 	allinanchor:apple iphone
+-> AROUND(X)	Search for pages with two words or phrases within X words of one another. 	apple AROUND(4) iphone
+-> loc:	Find results from a given area.	loc:”san francisco” apple
+-> location:	Find news from a certain location in Google News.	location:”san francisco” apple
+-> daterange:	Search for results from a particular date range. 	daterange:11278-13278
+
+Not working (officially dropped by Google)
+-> ~	Include synonyms in the search. Dropped in 2013.	~apple
+-> "+"	Search for results mentioning an exact word or phrase. Dropped in 2011.	jobs +apple
+-> inpostauthor:	Search for posts by a specific author in the discontinued Google Blog Search.	inpostauthor:”steve jobs”
+-> allinpostauthor:	Same as inpostauthor:, but removes the need for quotes.	allinpostauthor:steve jobs
+-> inposttitle:	Search for posts with certain words in the title in Google’s discontinued Blog Search.	inposttitle:apple iphone
+-> link:	Search for pages linking to a particular domain or URL. Dropped in 2017.	link:apple.com
+-> info:	Search for information about a specific page or website. Dropped in 2017.	info:apple.com
+-> id:	Same as info:	id:apple.com
+-> phonebook:	Search for someone’s phone number. Dropped in 2010.	phonebook:tim cook
+-> #	Search for hashtags on Google+. Dropped in 2019 when Google+ shut down.	#apple
+
+-> info:
+---> Syntax: info:example.com
+---> Usage: Shows information about a specific website, including cached versions, related pages, and more.
+---> Example: info:amazon.com will provide information about Amazon's website.
+
+These advanced operators can be used individually or combined to perform more targeted and specific searches on Google.
+
+
+

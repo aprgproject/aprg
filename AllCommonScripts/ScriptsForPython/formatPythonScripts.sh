@@ -9,41 +9,39 @@ directoryToConvertAllFiles="$1"
 
 # Use aprg directory if there are no arguments
 if [ -z "$directoryToConvertAllFiles" ]; then
-    directoryToConvertAllFiles="$aprgDirectory"
+    directoryToConvertAllFiles="$aprgDirectory/Python"
 fi
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
-aprgShellScriptsPathSkipRegex=""
+pythonProjectsPathRegex=""
 source "$aprgDirectory/AllCommonScripts/CommonRegex/CommonRegexForPaths.sh"
-skipPathRegex="$aprgShellScriptsPathSkipRegex"
+pathRegex="$pythonProjectsPathRegex"
 
 # Create needed functions
-tempFile=$(mktemp)
-formatShellScriptsInDirectory() {
-    local localLintStatus
+formatPythonScriptsInDirectory() {
     local directoryPath
-    localLintStatus="$1"
-    directoryPath="$2"
+    directoryPath="$1"
 
-    scriptPrint "$scriptName" "$LINENO" "Searching for shell scripts in: [$directoryPath]"
+    scriptPrint "$scriptName" "$LINENO" "Searching for python scripts in: [$directoryPath]"
 
     while IFS= read -r filePath; do
-        if  [[ ! "$filePath" =~ $skipPathRegex ]]; then
+        if  [[ "$filePath" =~ $pathRegex ]]; then
             # unix style line endings
             dos2unix "$filePath"
         
             # convert tabs to 4 spaces
             expand -t 4 "$filePath" > "$tempFile"
             mv "$tempFile" "$filePath"
-        fi
-    done < <(find "$directoryPath" -type f -name "*.sh")
 
-    return "$localLintStatus"
+            autopep8 --in-place "$filePath"
+        fi
+    done < <(find "$directoryPath" -type f -name "*.py")
 }
 
 # Find all files with the same name in the target folder
+tempFile=$(mktemp)
 scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles]..."
-formatShellScriptsInDirectory "$directoryToConvertAllFiles"
+formatPythonScriptsInDirectory "$directoryToConvertAllFiles"
 
 scriptPrint "$scriptName" "$LINENO" "All shell scripts in the directory are processed."

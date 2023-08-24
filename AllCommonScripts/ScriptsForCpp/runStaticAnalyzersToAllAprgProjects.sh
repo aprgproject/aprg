@@ -10,7 +10,7 @@ buildAndRunScriptPath="$aprgDirectory/AllCommonScripts/BuildAndRunScripts/BuildA
 
 # Use aprg directory if there are no arguments
 if [ -z "$directoryToConvertAllFiles" ]; then
-    directoryToConvertAllFiles=$aprgDirectory
+    directoryToConvertAllFiles="$aprgDirectory"
 fi
 
 # Source needed scripts
@@ -19,14 +19,24 @@ aprgLocatorFile=""
 source "$aprgDirectory/AllCommonScripts/CommonRegex/AddingAprgLocatorFile.sh"
 searchCondition="*$aprgLocatorFile"
 
-# Find all files with the same name in the target folder
-scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles]..."
-find "$aprgDirectory" -depth -type f -wholename "$searchCondition" | while read -r aprgProjectLocatorPath; do
-    aprgProjectDirectory=$(echo "$aprgProjectLocatorPath" | sed -E "s|$aprgLocatorFile||")
-    scriptPrint "$scriptName" "$LINENO" "Searching in aprg project: [$aprgProjectDirectory]"
-    cd "$aprgProjectDirectory" || exit 1
+# Create needed functions
+runStaticAnalyzersInDirectory() {
+    local directoryPath
+    directoryPath="$1"
+
+    scriptPrint "$scriptName" "$LINENO" "Searching for C/C++ files in: [$directoryPath]"
+
+    cd "$directoryPath" || exit 1
     "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "StaticAnalyzersBuild" "Debug" "Ninja"
     "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug" | tee "$aprgDirectory/StaticAnalyzerResults.txt"
-done
+}
+
+# Find all files with the same name in the target folder
+scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles]..."
+while IFS= read -r aprgProjectLocatorPath; do
+    aprgProjectDirectory=$(echo "$aprgProjectLocatorPath" | sed -E "s|$aprgLocatorFile||")
+    scriptPrint "$scriptName" "$LINENO" "Searching in aprg project: [$aprgProjectDirectory]"
+    runStaticAnalyzersInDirectory "$aprgProjectDirectory"
+done < <(find "$aprgDirectory" -depth -type f -wholename "$searchCondition")
 
 scriptPrint "$scriptName" "$LINENO" "All C/C++ in the directory are processed."

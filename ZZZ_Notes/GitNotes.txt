@@ -131,11 +131,11 @@ Common commands:
 ---> If you want to remove all changes in the working directory (all modified files), use:
 -----> git checkout .
 ---> check files to removed
------> git clean -n
+-----> git clean -n .
 ---> remove files (forced)
------> git clean -f
+-----> git clean -f .
 ---> remove directories (forced), if you want to remove all changes, including new files, use:
------> git clean -fd
+-----> git clean -fd .
 
 -> show changes (useful after git blame)
 ---> git show HashStringOfTheCommit

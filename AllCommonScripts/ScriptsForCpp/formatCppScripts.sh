@@ -9,7 +9,7 @@ directoryToConvertAllFiles="$1"
 
 # Use aprg directory if there are no arguments
 if [ -z "$directoryToConvertAllFiles" ]; then
-    directoryToConvertAllFiles=$aprgDirectory
+    directoryToConvertAllFiles="$aprgDirectory"
 fi
 
 # Source needed scripts
@@ -18,23 +18,33 @@ aprgLocatorFile=""
 source "$aprgDirectory/AllCommonScripts/CommonRegex/AddingAprgLocatorFile.sh"
 searchCondition="*$aprgLocatorFile"
 
-# Find all files with the same name in the target folder
-scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles]..."
+# Create needed functions
 tempFile=$(mktemp)
-find "$aprgDirectory" -depth -type f -wholename "$searchCondition" | while read -r aprgProjectLocatorPath; do
-    aprgProjectDirectory=$(echo "$aprgProjectLocatorPath" | sed -E "s|$aprgLocatorFile||")
-    scriptPrint "$scriptName" "$LINENO" "Searching in aprg project: [$aprgProjectDirectory]"
-    find "$aprgProjectDirectory" -depth -type f \( -name "*.cpp" -o -name "*.hpp" -o -name "*.c" -o -name "*.h" \) | while read -r aprgCppFile; do
+formatCppFilesInDirectory() {
+    local directoryPath
+    directoryPath="$1"
+
+    scriptPrint "$scriptName" "$LINENO" "Searching for C/C++ files in: [$directoryPath]"
+
+    while IFS= read -r filePath; do
         # unix style line endings
-        dos2unix "$aprgCppFile"
+        dos2unix "$filePath"
 
         # convert tabs to 4 spaces
-        expand -t 4 "$aprgCppFile" > "$tempFile"
-        mv "$tempFile" "$aprgCppFile"
+        expand -t 4 "$filePath" > "$tempFile"
+        mv "$tempFile" "$filePath"
 
-        # use clang format as final format
-        clang-format -style=file -i "$aprgCppFile"
-    done
-done
+        # use cmake format as final format
+        clang-format -style=file -i "$filePath"
+    done < <(find "$directoryPath" -depth -type f \( -name "*.cpp" -o -name "*.hpp" -o -name "*.c" -o -name "*.h" \))
+}
+
+# Find all files with the same name in the target folder
+scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles]..."
+while IFS= read -r aprgProjectLocatorPath; do
+    aprgProjectDirectory=$(echo "$aprgProjectLocatorPath" | sed -E "s|$aprgLocatorFile||")
+    scriptPrint "$scriptName" "$LINENO" "Searching in aprg project: [$aprgProjectDirectory]"
+    formatCppFilesInDirectory "$aprgProjectDirectory"
+done < <(find "$aprgDirectory" -depth -type f -wholename "$searchCondition")
 
 scriptPrint "$scriptName" "$LINENO" "All C/C++ in the directory are processed."

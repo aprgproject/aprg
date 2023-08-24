@@ -7,35 +7,35 @@ scriptName=$(basename "$scriptPath")
 aprgDirectory=$(realpath "$scriptDirectory/../../")
 directoryToConvertAllFiles="$1"
 
-# Use aprg directory if there are no arguments
+# Use aprgDirectory/Python directory if there are no arguments
 if [ -z "$directoryToConvertAllFiles" ]; then
-    directoryToConvertAllFiles="$aprgDirectory"
+    directoryToConvertAllFiles="$aprgDirectory/Python"
 fi
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
-aprgShellScriptsPathSkipRegex=""
+pythonProjectsPathRegex=""
 source "$aprgDirectory/AllCommonScripts/CommonRegex/CommonRegexForPaths.sh"
-skipPathRegex="$aprgShellScriptsPathSkipRegex"
+pathRegex="$pythonProjectsPathRegex"
 
 # Create needed functions
-checkShellScriptsInDirectory() {
+checkPythonScriptsInDirectory() {
     local localLintStatus
     local directoryPath
     localLintStatus="$1"
     directoryPath="$2"
 
-    scriptPrint "$scriptName" "$LINENO" "Searching for shell scripts in: [$directoryPath]"
+    scriptPrint "$scriptName" "$LINENO" "Searching for python scripts in: [$directoryPath]"
 
     while IFS= read -r filePath; do
-        if  [[ ! "$filePath" =~ $skipPathRegex ]]; then
-            shellcheck --severity=error --format tty "$filePath"
+        if  [[ "$filePath" =~ $pathRegex ]]; then
+            pylint "--rcfile=$aprgDirectory/.pylintrc" "$filePath"
             currentStatus=$?
             if [ "$currentStatus" -gt "$localLintStatus" ]; then
                 localLintStatus=$currentStatus
             fi
         fi
-    done < <(find "$directoryPath" -type f -name "*.sh")
+    done < <(find "$directoryPath" -type f -name "*.py")
 
     return "$localLintStatus"
 }
@@ -45,7 +45,7 @@ lintStatus=0
 
 # Find all files with the same name in the target folder
 scriptPrint "$scriptName" "$LINENO" "Searching all files in [$directoryToConvertAllFiles]..."
-checkShellScriptsInDirectory "$lintStatus" "$directoryToConvertAllFiles"
+checkPythonScriptsInDirectory "$lintStatus" "$directoryToConvertAllFiles"
 lintStatus=$?
 
 scriptPrint "$scriptName" "$LINENO" "All shell scripts in the directory are processed."

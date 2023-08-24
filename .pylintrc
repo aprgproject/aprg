@@ -1,0 +1,15 @@
+[MASTER]
+max-line-length=120
+
+[MESSAGES CONTROL]
+
+# Disable specific messages
+disable=missing-module-docstring,missing-class-docstring,missing-function-docstring,import-error
+
+# Treat specified messages as errors
+#errors=
+
+[FORMAT]
+
+# Formatting settings
+indent-string='    '  # Set the preferred indentation

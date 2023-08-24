@@ -4,7 +4,7 @@ from pptx import Presentation
 
 
 def change_title_slide(presentation):
-    title_slide_layout = presentation.slide_layouts[0]
+    #title_slide_layout = presentation.slide_layouts[0]
     slide = presentation.slides[0]
 
     title = slide.shapes.title
@@ -35,11 +35,11 @@ def change_normal_slide(slide):
 
 def change_normal_slides(presentation):
     change_normal_slide(presentation.slides[1])
-        
 
 
 def create_pptx_file():
-    #NOTE: You need to create the same number of slides in powerpoint for the template, I know it sucks but python-pptx cant copy slides.
+    # You need to create the same number of slides in powerpoint for the template,
+    # I know it sucks but python-pptx cant copy slides.
     presentation = Presentation('aprg_template.pptx')
 
     change_title_slide(presentation)
