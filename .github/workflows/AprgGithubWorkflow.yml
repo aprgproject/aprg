@@ -60,6 +60,8 @@ jobs:
           echo "checkCMakeFilesPath: [$checkCMakeFilesPath]"
           chmod +x "$checkCMakeFilesPath"
           "$checkCMakeFilesPath" | grep -P "\[\w\d+\]" || true | tee "cmakeLintIssues.txt"
+          echo "Contents of cmakeLintIssues.txt:"
+          cat "cmakeLintIssues.txt"
           if [ -s "cmakeLintIssues.txt" ]; then
             echo "Some problems found, exiting with error status."
             exit 1
@@ -76,7 +78,9 @@ jobs:
           checkShellScriptsPath=$(realpath "$(pwd)/${{ env.checkShellScriptsRelativePath }}")
           echo "checkShellScriptsPath: [$checkShellScriptsPath]"
           chmod +x "$checkShellScriptsPath"
-          "$checkShellScriptsPath" | grep -P "SC\d+ \((info|warning|error|style)\):" || true | tee "shellLintIssues.txt"
+          "$checkShellScriptsPath" | tee "shellLintIssues.txt"
+          echo "Contents of shellLintIssues.txt:"
+          cat "shellLintIssues.txt"
           if  [ -s "shellLintIssues.txt" ]; then
             echo "Some problems found, exiting with error status."
             exit 1
@@ -272,6 +276,8 @@ jobs:
           echo "clazy version: [$(clazy --version)]"
           "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }} | grep -P "^.*$unquotedProject.* (style|warning|error): .*$" || true | tee "analyzerIssues.txt"
+          echo "Contents of analyzerIssues.txt:"
+          cat "analyzerIssues.txt"
           if  [ -s "analyzerIssues.txt" ]; then
             echo "Some problems found, exiting with error status."
             exit 1
