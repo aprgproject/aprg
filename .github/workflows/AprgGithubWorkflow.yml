@@ -31,7 +31,7 @@ on:
 env:
   checkCmakeFilesRelativePath: "AllCommonScripts/ScriptsForCmake/checkCmakeFiles.sh"
   checkShellScriptsRelativePath: "AllCommonScripts/ScriptsForShellScripts/checkShellScripts.sh"
-  checkPythonScriptsRelativePath: "AllCommonScripts/ScriptsForCmake/checkPythonScripts.sh"
+  checkPythonScriptsRelativePath: "AllCommonScripts/ScriptsForPython/checkPythonScripts.sh"
   determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
   buildAndRunScriptRelativePath: "AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
   buildType: ${{ inputs.cppCMakeBuildType != '' && inputs.cppCMakeBuildType || 'Debug'}} # ternary operator
