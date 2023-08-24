@@ -16,4 +16,4 @@ bool isUnexpectedNewLineIncluded(FindingsToAdd const findingsToAdd) {
     return findingsToAdd == FindingsToAdd::UnexpectsNewLineAndUnexpectsWhiteSpace;
 }
 
-}  // namespace codeReview
+}  // namespace codeReview::FindingsToAddHelper

@@ -557,4 +557,4 @@ double BitmapFilters::getBlurWeight(double const distanceFromCenter, double cons
     return (blurRadius - distanceFromCenter + 1) / (blurRadius + 1);
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

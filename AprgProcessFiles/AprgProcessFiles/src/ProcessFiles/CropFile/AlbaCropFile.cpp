@@ -13,8 +13,8 @@ namespace alba {
 AlbaCropFile::AlbaCropFile(string const& prioritizedLineCondition, double const cropSize)
     : m_isOutputFileWritten(false),
       m_cropSize(cropSize),
-      m_prioritizedLineEvaluator(prioritizedLineCondition),
-      m_updateFunctionAfterOneIterationOptional() {}
+      m_prioritizedLineEvaluator(prioritizedLineCondition)
+      {}
 
 AlbaCropFile::AlbaCropFile(
     string const& prioritizedLineCondition, double const cropSize,

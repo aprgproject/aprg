@@ -61,4 +61,4 @@ TEST(TermUtilitiesTest, GetTermFromVariableAndPrimeValueWorks) {
     EXPECT_EQ(Term("x"), getTermFromVariableAndPrimeValue("x", '1'));
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

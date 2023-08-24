@@ -71,4 +71,4 @@ TEST(PenPointsTest, ClearWorks) {
     ASSERT_TRUE(penPointsToVerify.empty());
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

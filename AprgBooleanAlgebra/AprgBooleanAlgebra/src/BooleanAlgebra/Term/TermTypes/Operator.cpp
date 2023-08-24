@@ -63,4 +63,4 @@ ostream& operator<<(ostream& out, Operator const& operatorObject) {
     return out;
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

@@ -23,7 +23,7 @@ public:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // No recursion approach
 // Concise industrial-strength code, if you have the space

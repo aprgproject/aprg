@@ -44,4 +44,4 @@ void NearestSamples::saveToValuesToIndexes() {
     }
 }
 
-}  // namespace alba
+}  // namespace alba::AprgAudio

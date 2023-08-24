@@ -251,4 +251,4 @@ TEST(ProbabilityExampleTest, GeometricDistributionExpectedValueWorks_OnBirthExam
     EXPECT_EQ(AlbaNumber::createFraction(1, 2), getProbability(1U, 2U));
 }
 
-}  // namespace alba
+}  // namespace alba::math

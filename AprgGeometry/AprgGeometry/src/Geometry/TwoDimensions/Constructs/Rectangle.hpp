@@ -13,4 +13,4 @@ private:
     friend std::ostream& operator<<(std::ostream& out, Rectangle const& rectangle);
 };
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

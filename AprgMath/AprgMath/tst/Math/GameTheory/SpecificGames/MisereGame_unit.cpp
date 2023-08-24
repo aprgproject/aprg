@@ -50,4 +50,4 @@ TEST(MisereGameTest, GetOptimalNextStateWorks) {
     EXPECT_EQ((NimState{0U, 0U, 0U}), MisereGame::getOptimalNextState({0U, 0U, 0U}));
 }
 
-}  // namespace alba
+}  // namespace alba::math

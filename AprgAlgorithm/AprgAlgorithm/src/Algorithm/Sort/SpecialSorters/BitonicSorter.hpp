@@ -28,7 +28,7 @@ public:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // -> Bitonic sorter
 // ---> Bitonic mergesort is a parallel algorithm for sorting. It is also used as a construction method for building a

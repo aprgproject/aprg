@@ -56,4 +56,4 @@ PythagoreanTriple getPrimitivePythagoreanTripleUsingEuclidFormula(
     return result;
 }
 
-}  // namespace alba
+}  // namespace alba::math

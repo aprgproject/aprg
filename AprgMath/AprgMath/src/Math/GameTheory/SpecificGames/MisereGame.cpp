@@ -65,4 +65,4 @@ NimHeapSize MisereGame::getMaxHeapSize(NimState const& nimState) {
     return *maxIt;
 }
 
-}  // namespace alba
+}  // namespace alba::math

@@ -62,4 +62,4 @@ void PenCircles::connectCircles(BitmapXY const& circle1Center, BitmapXY const& c
 
 void PenCircles::clear() { m_penCircles.clear(); }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

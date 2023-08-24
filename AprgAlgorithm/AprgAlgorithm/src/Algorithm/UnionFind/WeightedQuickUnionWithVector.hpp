@@ -12,15 +12,15 @@ public:
     using RootVector = std::vector<Object>;
     using SizeVector = std::vector<int>;
 
-    WeightedQuickUnionWithVector(int const maximumSize) : m_relativeRoots(), m_sizesOfRoots() {
+    explicit WeightedQuickUnionWithVector(int const maximumSize) : m_relativeRoots() {
         initialize(maximumSize);
     }
 
-    bool isConnected(Object const& object1, Object const& object2) const override {
+    [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
         return getRoot(object1) == getRoot(object2);
     }
 
-    Object getRoot(Object const& object) const override {
+    [[nodiscard]] Object getRoot(Object const& object) const override {
         // worst case runs in logarithmic time (base 2 log) -> acceptable
         // Continuously find relative root until its equal to the previous root
         Object currentRoot(object);
@@ -71,9 +71,9 @@ public:
         }
     }
 
-    RootVector const& getRelativeRootVector() const { return m_relativeRoots; }
+    [[nodiscard]] RootVector const& getRelativeRootVector() const { return m_relativeRoots; }
 
-    SizeVector const& getSizesOfRootsVector() const { return m_sizesOfRoots; }
+    [[nodiscard]] SizeVector const& getSizesOfRootsVector() const { return m_sizesOfRoots; }
 
     RootVector& getRelativeRootVectorReference() { return m_relativeRoots; }
 
@@ -107,4 +107,4 @@ private:
     SizeVector m_sizesOfRoots;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

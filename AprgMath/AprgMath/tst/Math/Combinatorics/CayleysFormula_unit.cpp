@@ -17,4 +17,4 @@ TEST(CayleysFormulaTest, GetNumberOfLabeledTreesWorks) {
     EXPECT_EQ(61917364224U, getNumberOfLabeledTreesUsingCayleysFormula(12U));
 }
 
-}  // namespace alba
+}  // namespace alba::math

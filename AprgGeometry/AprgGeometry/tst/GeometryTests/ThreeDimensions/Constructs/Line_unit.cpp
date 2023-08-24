@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 TEST(ThreeDimensionsLineTest, EmptyLine) {
     Line line;
@@ -210,7 +208,5 @@ TEST(ThreeDimensionsLineTest, LineCanBeComparedForEquality)
     EXPECT_NE(Line(1,2,3), Line(2,3,4));
 }
 */
-
-}  // namespace ThreeDimensions
 
 }  // namespace alba

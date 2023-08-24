@@ -18,8 +18,8 @@ public:
         using Container = std::forward_list<Value>;
         explicit Pile(Value const& value) : m_values({value}) {}
         bool operator<(Value const& valueToCheck) const { return getTop() < valueToCheck; }
-        Value const& getTop() const { return m_values.front(); }
-        Container const& getValues() const { return m_values; }
+        [[nodiscard]] Value const& getTop() const { return m_values.front(); }
+        [[nodiscard]] Container const& getValues() const { return m_values; }
         void putOnTop(Value const& value) { m_values.emplace_front(value); }
         void mergeWith(Pile& pile) { m_values.merge(pile.m_values); }
 
@@ -55,21 +55,21 @@ private:
 
     void mergePilesToOnePile(Piles& piles) const { mergePiles(piles.begin(), std::prev(piles.end())); }
 
-    PilesIterator mergePiles(PilesIterator itLow, PilesIterator itHigh) const {
+    [[nodiscard]] PilesIterator mergePiles(PilesIterator itLow, PilesIterator itHigh) const {
         // https://en.wikipedia.org/wiki/K-way_merge_algorithm
         int numberOfPiles = std::distance(itLow, itHigh) + 1;
         if (numberOfPiles == 2) {
             itLow->mergeWith(*itHigh);
             return itLow;
         } if (numberOfPiles > 2) {
-            PilesIterator middleIt = std::next(itLow, numberOfPiles / 2);
+            auto middleIt = std::next(itLow, numberOfPiles / 2);
             auto itFirstPart = mergePiles(itLow, middleIt);
             auto itSecondPart = mergePiles(std::next(middleIt), itHigh);
             itFirstPart->mergeWith(*itSecondPart);
             return itFirstPart;
-        } else {
+        } 
             return itLow;
-        }
+       
     }
 
     void copyMergedPileToValues(Values& valuesToSort, Piles const& piles) const {
@@ -78,7 +78,7 @@ private:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // The algorithm's name derives from a simplified variant of the patience card game.
 // The game begins with a shuffled deck of cards.

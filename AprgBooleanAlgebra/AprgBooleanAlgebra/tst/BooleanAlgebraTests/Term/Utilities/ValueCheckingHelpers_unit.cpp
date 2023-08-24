@@ -85,4 +85,4 @@ TEST(ValueCheckingHelpersTest, IsTheValueWorksWithExpression) {
     EXPECT_FALSE(isTheValue(createExpressionIfPossible({"x"}), true));
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

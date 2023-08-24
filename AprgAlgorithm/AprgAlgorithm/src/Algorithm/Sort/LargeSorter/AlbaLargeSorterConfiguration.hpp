@@ -9,7 +9,7 @@ namespace alba::algorithm {
 
 struct AlbaLargeSorterConfiguration {
     AlbaLargeSorterConfiguration()
-        : m_directoryForBlocks(),
+        : 
           m_minimumNumberOfObjectsPerBlock(100),
           m_maximumNumberOfObjectsPerBlock(1000),
           m_maximumNumberOfObjectsInMemory(2000),
@@ -32,7 +32,7 @@ struct AlbaLargeSorterConfiguration {
     int m_maximumNumberOfObjectsPerBlock;
     int m_maximumNumberOfObjectsInMemory;
     int m_maximumFileStreams;
-    bool isConfigurationValid() const {
+    [[nodiscard]] bool isConfigurationValid() const {
         if (m_minimumNumberOfObjectsPerBlock <= 0) {
             return false;
         }
@@ -50,7 +50,7 @@ struct AlbaLargeSorterConfiguration {
         }
         return true;
     }
-    std::string getFilePathWithBlockNumber(int const blockNumber) const {
+    [[nodiscard]] std::string getFilePathWithBlockNumber(int const blockNumber) const {
         std::stringstream ss;
         ss << m_directoryForBlocks << R"(\BLOCK_)" << blockNumber << ".txt";
         return getFixedPath(ss.str());

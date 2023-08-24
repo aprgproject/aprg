@@ -127,4 +127,4 @@ void addValueTermIfNotEmpty(Terms& terms, string const& valueString) {
     }
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

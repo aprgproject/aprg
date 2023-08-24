@@ -60,4 +60,4 @@ NimHeapSize NimGame::getNimSum(NimState const& nimState) {
         [](NimHeapSize const nimHeapSize1, NimHeapSize const nimHeapSize2) { return nimHeapSize1 ^ nimHeapSize2; });
 }
 
-}  // namespace alba
+}  // namespace alba::math

@@ -66,4 +66,4 @@ void accumulateTermsWithOrOperation(Term& combinedTerm, Terms const& termsToComb
     }
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

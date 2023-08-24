@@ -69,4 +69,4 @@ TEST(WrappedTermTest, OutputStreamOperatorWorks) {
     EXPECT_EQ("[true],[false]", ss.str());
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

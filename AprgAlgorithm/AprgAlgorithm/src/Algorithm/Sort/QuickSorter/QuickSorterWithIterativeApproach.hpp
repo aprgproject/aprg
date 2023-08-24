@@ -12,7 +12,7 @@ class QuickSorterWithIterativeApproach : public BaseSorter<Values> {
 public:
     using Value = typename Values::value_type;
 
-    QuickSorterWithIterativeApproach(PivotType const pivotType) : m_pivotType(pivotType) {}
+    explicit QuickSorterWithIterativeApproach(PivotType const pivotType) : m_pivotType(pivotType) {}
 
     void sort(Values& valuesToSort) const override {
         if (valuesToSort.size() > 1) {
@@ -50,7 +50,7 @@ private:
     PivotType m_pivotType;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // The above mentioned optimizations for recursive quick sort can also be applied to iterative version.
 // 1) Partition process is same in both recursive and iterative.

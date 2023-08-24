@@ -66,4 +66,4 @@ TEST(OutwardCircleTraversalTest, ConstructedRadiusToCoordinatesAreCorrectForRadi
     }
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

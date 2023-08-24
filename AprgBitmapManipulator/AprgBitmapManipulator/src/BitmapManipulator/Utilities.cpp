@@ -21,4 +21,4 @@ void animeColorsInPenCircles(PenCircles& penCircles, AnimizeColor const& animize
     }
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

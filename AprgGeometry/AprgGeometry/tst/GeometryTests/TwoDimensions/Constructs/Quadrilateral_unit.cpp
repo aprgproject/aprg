@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 TEST(QuadrilateralTest, QuadilateralCanBeCreated) {
     Quadrilateral quadrilateral(Point(1, 1), Point(2, 3), Point(0, 17), Point(-100, 4));
@@ -245,7 +243,5 @@ TEST(QuadrilateralTest, DoesNotCrashExampleDueToNearValues) {
 
     EXPECT_EQ(24U, pointsInAreaTraversal.size());
 }
-
-}  // namespace TwoDimensions
 
 }  // namespace alba

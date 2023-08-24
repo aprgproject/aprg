@@ -18,15 +18,15 @@ public:
     MonteCarloSimulationOfPerculation()
         :  m_unionFindOfIndexes(),  m_randomizer(0, getDimensionsSquared() - 1) {}
 
-    bool isPercolated() const {
+    [[nodiscard]] bool isPercolated() const {
         return m_unionFindOfIndexes.isConnected(getVirtualTopIndex(), getVirtualBottomIndex());
     }
 
-    double getPercolationProbability() const {
+    [[nodiscard]] double getPercolationProbability() const {
         return static_cast<double>(m_numberOfOpenSites) / getDimensionsSquared();
     }
 
-    std::string getSitesToDisplay() const {
+    [[nodiscard]] std::string getSitesToDisplay() const {
         DisplayTable displayTable;
         for (int y = 0; y < DIMENSION; y++) {
             displayTable.addRow();
@@ -68,9 +68,9 @@ private:
 
     static constexpr int getVirtualBottomIndex() { return getDimensionsSquared() + 1; }
 
-    bool isSiteOpen(int const index) const { return m_sites[index]; }
+    [[nodiscard]] bool isSiteOpen(int const index) const { return m_sites[index]; }
 
-    int getIndex(int const x, int const y) const { return y * DIMENSION + x; }
+    [[nodiscard]] int getIndex(int const x, int const y) const { return y * DIMENSION + x; }
 
     void retrieveCoordinates(int const index, int& x, int& y) const {
         x = index % DIMENSION;
@@ -117,4 +117,4 @@ private:
     AlbaUniformNonDeterministicRandomizer<int> m_randomizer;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -12,9 +12,9 @@ class AlbaGrepFile {
 public:
     using UpdateFunctionWithPercentage = std::function<void(double)>;
 
-    AlbaGrepFile(std::string const& lineCondition);
+    explicit AlbaGrepFile(std::string const& lineCondition);
     AlbaGrepFile(std::string const& lineCondition, UpdateFunctionWithPercentage const& function);
-    bool isOutputFileWritten() const;
+    [[nodiscard]] bool isOutputFileWritten() const;
     void processFile(std::string const& inputFilePath, std::string const& outputFilePath);
     AlbaGrepStringEvaluator& getGrepEvaluator();
 

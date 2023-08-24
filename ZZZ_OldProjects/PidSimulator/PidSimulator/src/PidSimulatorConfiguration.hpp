@@ -8,22 +8,22 @@ namespace alba {
 
 struct PidSimulatorConfiguration {
     using StringToStringMap = std::map<std::string, std::string>;
-    PidSimulatorConfiguration(stringHelper::strings const& argumentsInMain);
+    explicit PidSimulatorConfiguration(stringHelper::strings const& argumentsInMain);
     void saveArgumentValues(StringToStringMap& argumentsToValuesMap);
-    void processArgumentsWithEqualDelimeter(
+    static void processArgumentsWithEqualDelimeter(
         StringToStringMap& argumentsToValuesMap, stringHelper::strings const& argumentsInMain);
     static void processOneArgumentWithEqualDelimeter(
         StringToStringMap& argumentsToValuesMap, std::string const& argument);
     void print() const;
-    unsigned int numberOfLoopsOfPeriodicInputDemand;
-    unsigned int amplitudeOfInputDemand;
-    unsigned int numberOfSamplesOfInputDemandInOnePeriod;
-    int addedOffsetOfInputDemand;
-    double targetInPidCalculation;
-    double maxCellTxPower;
-    double kp;
-    double ki;
-    double kd;
+    unsigned int numberOfLoopsOfPeriodicInputDemand{0};
+    unsigned int amplitudeOfInputDemand{0};
+    unsigned int numberOfSamplesOfInputDemandInOnePeriod{0};
+    int addedOffsetOfInputDemand{0};
+    double targetInPidCalculation{0};
+    double maxCellTxPower{0};
+    double kp{0};
+    double ki{0};
+    double kd{0};
     std::string inputType;
     std::string machsModelType;
 };

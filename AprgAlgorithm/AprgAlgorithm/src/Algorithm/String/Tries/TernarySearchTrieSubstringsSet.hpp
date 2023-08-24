@@ -18,7 +18,7 @@ public:
 
     TernarySearchTrieSubstringsSet() : b_root(BaseClass::m_root) {}
 
-    Strings getAllKeysWithPrefix(Key const& prefix) const override {
+    [[nodiscard]] Strings getAllKeysWithPrefix(Key const& prefix) const override {
         Strings result;
         Node const* const firstNode(this->getStartingOnThisNode(b_root, prefix, 0));
         if (firstNode != nullptr) {
@@ -35,7 +35,7 @@ public:
     }
 
 protected:
-    int getSizeStartingOnThisNode(NodeUniquePointer const& currentNodePointer) const override {
+    [[nodiscard]] int getSizeStartingOnThisNode(NodeUniquePointer const& currentNodePointer) const override {
         int result(0);
         if (currentNodePointer) {
             result++;
@@ -46,7 +46,7 @@ protected:
         return result;
     }
 
-    int getLengthOfLongestPrefixStartingOnThisNode(
+    [[nodiscard]] int getLengthOfLongestPrefixStartingOnThisNode(
         NodeUniquePointer const& currentNodePointer, Key const& keyToCheck, int const index) const override {
         if (currentNodePointer && index < static_cast<int>(keyToCheck.length())) {
             char c(keyToCheck[index]);
@@ -54,9 +54,9 @@ protected:
                 return getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->left, keyToCheck, index);
             } if (c > currentNodePointer->c) {
                 return getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->right, keyToCheck, index);
-            } else {
+            } 
                 return getLengthOfLongestPrefixStartingOnThisNode(currentNodePointer->mid, keyToCheck, index + 1);
-            }
+           
         }
         return index;
     }
@@ -152,4 +152,4 @@ protected:
     NodeUniquePointer& b_root;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

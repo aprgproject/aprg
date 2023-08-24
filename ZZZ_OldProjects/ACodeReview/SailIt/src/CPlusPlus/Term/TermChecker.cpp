@@ -30,9 +30,9 @@ bool TermChecker::operator==(Term const& term) const {
         return m_multipleTermsOptional.getConstReference().isEqualToAnyOfTheTerms(term);
     } if (TermCheckerType::ConcreteTerm == m_termCheckerType) {
         return m_term == term;
-    } else {
+    } 
         return isCorrect(term);
-    }
+   
     return false;
 }
 

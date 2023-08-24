@@ -420,4 +420,4 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_ZeroesStartingFromMsb) {
     cout << qm3.getOutputTable(primeImplicants3);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

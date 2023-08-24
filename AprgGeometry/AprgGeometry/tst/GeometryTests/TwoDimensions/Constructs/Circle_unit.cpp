@@ -8,9 +8,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 TEST(CircleTest, EmptyCircle) {
     Circle circle;
@@ -111,7 +109,5 @@ TEST(CircleTest, PointsInAreaTraversalIsCorrect) {
     EXPECT_EQ(Point(3, 5), pointsInAreaTraversal[11]);
     EXPECT_EQ(Point(3, 1), pointsInAreaTraversal[12]);
 }
-
-}  // namespace TwoDimensions
 
 }  // namespace alba

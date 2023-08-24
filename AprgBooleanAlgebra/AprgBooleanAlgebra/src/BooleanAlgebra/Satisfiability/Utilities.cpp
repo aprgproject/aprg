@@ -65,4 +65,4 @@ SatisfiabilityTerms getSatisfiabilityTerms(Expression const& expression) {
     return result;
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

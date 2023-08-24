@@ -227,4 +227,4 @@ TEST(SimplificationUtilitiesTest, RetrieveTargetOperationsWorks) {
     EXPECT_EQ(OperatorLevel::And, targetInner);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra::Simplification

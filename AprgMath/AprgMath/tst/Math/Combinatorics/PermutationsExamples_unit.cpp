@@ -200,4 +200,4 @@ TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario3Works_Example2) {
     EXPECT_EQ(24U, getNumberOfPermutations(4U, 3U));
 }
 
-}  // namespace alba
+}  // namespace alba::math

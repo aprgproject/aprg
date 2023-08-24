@@ -111,4 +111,4 @@ string getEnumShortString(OperatorLevel const operatorLevel) {
     }
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

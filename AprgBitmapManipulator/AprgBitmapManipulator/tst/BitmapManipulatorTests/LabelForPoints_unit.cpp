@@ -62,4 +62,4 @@ TEST(LabelForPointsTest, SetLabelWorks) {
     EXPECT_EQ(0x123456, pairToVerify.second);
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

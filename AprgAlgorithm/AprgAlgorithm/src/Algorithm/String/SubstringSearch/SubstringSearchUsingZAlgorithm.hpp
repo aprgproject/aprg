@@ -12,11 +12,11 @@ class SubstringSearchUsingZAlgorithm {
 public:
     using Indexes = std::vector<Index>;
 
-    SubstringSearchUsingZAlgorithm(std::string const& query) : m_query(query) {}
+    explicit SubstringSearchUsingZAlgorithm(std::string const& query) : m_query(query) {}
 
-    Index search(std::string const& searchSpace) const { return searchForFirstSubstring(searchSpace); }
+    [[nodiscard]] Index search(std::string const& searchSpace) const { return searchForFirstSubstring(searchSpace); }
 
-    Index searchForFirstSubstring(std::string const& searchSpace) const {
+    [[nodiscard]] Index searchForFirstSubstring(std::string const& searchSpace) const {
         auto result = static_cast<Index>(std::string::npos);
         std::string stringForZAlgorithm = createStringForZAlgorithm(searchSpace);
         Indexes prefixLengths = calculatePrefixLengths(stringForZAlgorithm);
@@ -31,7 +31,7 @@ public:
         return result;
     }
 
-    Indexes searchForAllSubstrings(std::string const& searchSpace) const {
+    [[nodiscard]] Indexes searchForAllSubstrings(std::string const& searchSpace) const {
         Indexes result{};
         std::string stringForZAlgorithm = createStringForZAlgorithm(searchSpace);
         Indexes prefixLengths = calculatePrefixLengths(stringForZAlgorithm);
@@ -46,18 +46,18 @@ public:
     }
 
 private:
-    std::string createStringForZAlgorithm(std::string const& searchSpace) const {
+    [[nodiscard]] std::string createStringForZAlgorithm(std::string const& searchSpace) const {
         return m_query + UNIQUE_DIVIDING_CHARACTER + searchSpace;
     }
 
-    Indexes calculatePrefixLengths(std::string const& stringForZAlgorithm) const {
+    [[nodiscard]] Indexes calculatePrefixLengths(std::string const& stringForZAlgorithm) const {
         return ZAlgorithm<Index>::getPrefixLengthsUsingTheZAlgorithm(stringForZAlgorithm);
     }
 
     std::string m_query;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Using the Z-array
 // It is often a matter of taste whether to use string hashing or the Z-algorithm.

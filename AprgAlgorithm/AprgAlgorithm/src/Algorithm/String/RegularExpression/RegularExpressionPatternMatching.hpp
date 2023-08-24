@@ -14,11 +14,11 @@ class RegularExpressionPatternMatching {
 public:
     using Indexes = std::vector<Index>;  // States are indexes
 
-    RegularExpressionPatternMatching(std::string const& regularExpression) : m_regularExpression(regularExpression) {
+    explicit RegularExpressionPatternMatching(std::string const& regularExpression) : m_regularExpression(regularExpression) {
         initialize();
     }
 
-    bool isAMatch(std::string const& stringToCheck) const {
+    [[nodiscard]] bool isAMatch(std::string const& stringToCheck) const {
         bool isEndReached(false);
         Indexes nullTransitionStates(getNullTransitionsStates({0}));  // start from first index
         Index checkLength(stringToCheck.size());
@@ -53,7 +53,7 @@ public:
     }
 
 private:
-    Indexes getNullTransitionsStates(Indexes const statesFromAMatch) const {
+    [[nodiscard]] Indexes getNullTransitionsStates(Indexes const statesFromAMatch) const {
         Indexes result;
         PathSearchUsingDfs<Index> nullTransitionPathSearch(m_nullTransitionsGraph, statesFromAMatch);
         for (Index const state : m_nullTransitionsGraph.getVertices()) {
@@ -112,7 +112,7 @@ private:
     DirectedGraphWithListOfEdges<Index> m_nullTransitionsGraph;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Pattern matching
 // -> Substring search. Find a single string in text.

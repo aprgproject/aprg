@@ -131,4 +131,4 @@ TEST(SubstitutionOfVariablesToTermsTest, VariableToExpressionSubstitutionWorks) 
     EXPECT_EQ(expectTerm4, verifyTerm4);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

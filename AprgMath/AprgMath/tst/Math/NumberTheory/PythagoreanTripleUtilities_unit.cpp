@@ -35,4 +35,4 @@ TEST(PythagoreanTripleTest, GetPrimitivePythagoreanTripleUsingEuclidFormulaWorks
     EXPECT_EQ(tripleToExpect2, tripleToVerify2);
 }
 
-}  // namespace alba
+}  // namespace alba::math

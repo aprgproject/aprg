@@ -84,4 +84,4 @@ TEST(ConstantTest, OutputStreamOperatorWorks) {
     EXPECT_EQ("[false],[true],[false]", ss.str());
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

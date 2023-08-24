@@ -16,9 +16,9 @@ public:
     static constexpr Index INVALID_POSITION = -1;
     using SkipTable = std::array<Index, RADIX>;
 
-    BoyerMooreSubstringSearch(std::string const& query) : m_query(query) { initialize(); }
+    explicit BoyerMooreSubstringSearch(std::string const& query) : m_query(query) { initialize(); }
 
-    Index search(std::string const& searchSpace) const {
+    [[nodiscard]] Index search(std::string const& searchSpace) const {
         auto result(static_cast<Index>(std::string::npos));
         Index searchSpaceLength(searchSpace.length());
         Index queryLength(m_query.length());
@@ -69,7 +69,7 @@ private:
     SkipTable m_rightMostLetterIndex{};
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Intuition:
 // -> Scan characters in pattern from right to left

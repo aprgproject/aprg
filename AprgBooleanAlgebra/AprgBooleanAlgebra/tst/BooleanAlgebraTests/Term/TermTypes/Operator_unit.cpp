@@ -278,4 +278,4 @@ TEST(OperatorTest, OutputStreamOperatorWorks) {
     EXPECT_EQ(",~,&,|,(,),invalid", ss.str());
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

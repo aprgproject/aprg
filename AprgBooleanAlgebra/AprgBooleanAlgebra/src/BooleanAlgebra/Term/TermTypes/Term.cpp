@@ -311,4 +311,4 @@ ostream& operator<<(ostream& out, Term const& term) {
     return out;
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

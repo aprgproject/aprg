@@ -119,4 +119,4 @@ TEST(GameWithMazeTest, Example1Works) {
     EXPECT_EQ(Coordinate(0U, 4U), gameWithMaze.getOptimalNextCoordinateAt({4U, 4U}));
 }
 
-}  // namespace alba
+}  // namespace alba::math

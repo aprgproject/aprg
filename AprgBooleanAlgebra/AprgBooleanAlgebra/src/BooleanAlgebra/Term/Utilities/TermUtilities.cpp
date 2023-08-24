@@ -43,4 +43,4 @@ Term getTermFromVariableAndPrimeValue(string const& variableName, char const pri
     return result;
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

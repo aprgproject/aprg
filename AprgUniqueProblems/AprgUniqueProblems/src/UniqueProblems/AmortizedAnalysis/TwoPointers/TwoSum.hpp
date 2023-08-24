@@ -15,9 +15,9 @@ public:
     using Values = std::vector<Value>;
     using ValuesPair = std::pair<Value, Value>;
 
-    TwoSum(Values const& valuesToCheck);
+    explicit TwoSum(Values const& valuesToCheck);
 
-    ValuesPair getTwoValuesWithSum(Value const targetSum) const;
+    [[nodiscard]] ValuesPair getTwoValuesWithSum(Value const targetSum) const;
 
 private:
     Values m_sortedValues;

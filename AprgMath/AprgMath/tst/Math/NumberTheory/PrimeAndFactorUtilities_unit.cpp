@@ -96,4 +96,4 @@ TEST(PrimeAndFactorUtilitiesTest, GetPrimeFactorsToCountMapWorks) {
     EXPECT_EQ(expectedMap, getPrimeFactorsToCountMap(84U));
 }
 
-}  // namespace alba
+}  // namespace alba::math

@@ -37,7 +37,7 @@ public:
     }
 
 private:
-    int getCorrectIndexForValue(
+    [[nodiscard]] int getCorrectIndexForValue(
         Values const& valuesToSort, Value const& currentCycleValue, int const incorrectIndex) const {
         int numberOfLessValues = std::count_if(
             valuesToSort.cbegin() + incorrectIndex + 1, valuesToSort.cend(),
@@ -58,7 +58,7 @@ private:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Cycle sort is an in-place sorting Algorithm, unstable sorting algorithm,
 // a comparison sort that is theoretically optimal in terms of the total number of writes to the original array.

@@ -7,15 +7,8 @@ using namespace std;
 namespace alba {
 
 PidSimulatorConfiguration::PidSimulatorConfiguration(stringHelper::strings const& argumentsInMain)
-    : numberOfLoopsOfPeriodicInputDemand(0),
-      amplitudeOfInputDemand(0),
-      numberOfSamplesOfInputDemandInOnePeriod(0),
-      addedOffsetOfInputDemand(0),
-      targetInPidCalculation(0),
-      maxCellTxPower(0),
-      kp(0),
-      ki(0),
-      kd(0) {
+    
+      {
     std::map<std::string, std::string> argumentsToValuesMap;
     processArgumentsWithEqualDelimeter(argumentsToValuesMap, argumentsInMain);
     saveArgumentValues(argumentsToValuesMap);

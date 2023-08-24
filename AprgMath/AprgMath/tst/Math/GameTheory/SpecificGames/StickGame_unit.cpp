@@ -34,4 +34,4 @@ TEST(StickGameTest, GetOptimalNumberOfSticksToTakeWorks) {
     EXPECT_EQ(1U, stickGame.getOptimalNumberOfSticksToTake(8U));
 }
 
-}  // namespace alba
+}  // namespace alba::math

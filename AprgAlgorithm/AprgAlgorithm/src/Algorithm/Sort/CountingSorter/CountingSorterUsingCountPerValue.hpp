@@ -42,7 +42,7 @@ private:
     IndexableValueToValueFunction m_indexableValueToValueFunction;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // This is a linear algorithm
 // This algorithm depends on values as indices so the max value corresponds to the space cost

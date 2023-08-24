@@ -102,4 +102,4 @@ TEST(SubstitutionOfTermsToTermsTest, PerformSubstitutionForExpressionWorks) {
     EXPECT_EQ(expectExpression, verifyExpression);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

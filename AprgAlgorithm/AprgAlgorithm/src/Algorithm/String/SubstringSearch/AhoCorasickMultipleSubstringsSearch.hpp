@@ -28,7 +28,7 @@ public:
     using StateMatrix = matrix::AlbaMatrix<Index>;
     using SearchResult = std::map<std::string, Indexes>;
 
-    AhoCorasickMultipleSubstringsSearch(Strings const& queries)
+    explicit AhoCorasickMultipleSubstringsSearch(Strings const& queries)
         : m_queries(queries),
           m_maxNumberOfStates(getTotalLength(queries) + 1),
           m_trieTransitions(m_maxNumberOfStates, RADIX, UNUSED_STATE),
@@ -40,16 +40,16 @@ public:
     SearchResult search(std::string const& searchSpace) { return searchUsingTransitions(searchSpace); }
 
 private:
-    inline bool isUsedState(Index const state) const { return state != UNUSED_STATE; }
-    inline bool isUnusedState(Index const state) const { return state == UNUSED_STATE; }
+    [[nodiscard]] inline bool isUsedState(Index const state) const { return state != UNUSED_STATE; }
+    [[nodiscard]] inline bool isUnusedState(Index const state) const { return state == UNUSED_STATE; }
 
-    Index getTotalLength(Strings const& queries) const {
+    [[nodiscard]] Index getTotalLength(Strings const& queries) const {
         return std::accumulate(
             queries.cbegin(), queries.cend(), 0,
             [](Index const partialLength, std::string const& query) { return partialLength + query.length(); });
     }
 
-    SearchResult searchUsingTransitions(std::string const& searchSpace) const {
+    [[nodiscard]] SearchResult searchUsingTransitions(std::string const& searchSpace) const {
         SearchResult result;
         Index currentState = START_STATE_ZERO;
         for (Index searchIndex = 0; searchIndex < static_cast<Index>(searchSpace.size()) && isUsedState(currentState);
@@ -68,7 +68,7 @@ private:
         return result;
     }
 
-    Index getNextState(Index const state, char const character) const {
+    [[nodiscard]] Index getNextState(Index const state, char const character) const {
         // Use failure transition if next transition is not defined
         Index currentState = state;
         while (isUnusedState(m_trieTransitions.getEntry(currentState, character)) &&
@@ -168,7 +168,7 @@ private:
     StateToMatchBits m_stateToMatchBits;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Notes:
 // In computer science, the Aho–Corasick algorithm is a string-searching algorithm.

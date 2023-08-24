@@ -18,13 +18,7 @@ namespace alba {
 
 PidSimulator::PidSimulator(stringHelper::strings const& argumentsInMain)
     : m_conf(argumentsInMain),
-      m_xMagnificationToGraph(0),
-      m_yMagnificationToGraph(0),
-      m_xOffsetToGraph(0),
-      m_yOffsetToGraph(0),
-      m_xGridInterval(0),
-      m_yGridInterval(0),
-      m_inputSample(),
+      
       m_randomizer(0, static_cast<int>(m_conf.amplitudeOfInputDemand)) {}
 
 double PidSimulator::calculatePid(double const input, double const target) {

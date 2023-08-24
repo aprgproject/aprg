@@ -65,4 +65,4 @@ TEST(ModularArithmeticTest, GetModularFactorialWorks) {
     EXPECT_EQ(6U, getModularFactorial(6U, 17U));
 }
 
-}  // namespace alba
+}  // namespace alba::math

@@ -13,9 +13,9 @@ public:
     using Value = int;
     using Values = std::vector<Value>;
 
-    SubArraySum(Values const& valuesToCheck);
+    explicit SubArraySum(Values const& valuesToCheck);
 
-    Values getSubArrayWithSum(Value const targetSum) const;
+    [[nodiscard]] Values getSubArrayWithSum(Value const targetSum) const;
 
 private:
     Values m_valuesToCheck;

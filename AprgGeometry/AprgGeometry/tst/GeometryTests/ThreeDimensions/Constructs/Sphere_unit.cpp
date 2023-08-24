@@ -7,9 +7,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 TEST(SphereTest, EmptySphere) {
     Sphere sphere;
@@ -43,7 +41,5 @@ TEST(SphereTest, IsInsideWorks) {
 
     EXPECT_TRUE(sphere.isInside(Point(0, 0, 0)));
 }
-
-}  // namespace ThreeDimensions
 
 }  // namespace alba

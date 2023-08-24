@@ -154,4 +154,4 @@ TEST(SubstitutionOfVariablesToValuesTest, PutVariablesWithValueWorksWithSavingTh
     EXPECT_FALSE(substitution.getValueForVariable("a"));
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

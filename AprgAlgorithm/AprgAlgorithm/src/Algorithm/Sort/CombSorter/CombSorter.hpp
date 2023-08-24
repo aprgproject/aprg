@@ -34,14 +34,14 @@ public:
     }
 
 private:
-    int getNextGapValue(int const gap) const {
+    [[nodiscard]] int getNextGapValue(int const gap) const {
         // gap = floor(gap / shrink)
         int result = (gap * 10) / 13;  // apply shrink factor=1.3
         return mathHelper::clampLowerBound(result, 1);
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Comb Sort is mainly an improvement over Bubble Sort. Bubble sort always compares adjacent values.
 // So all inversions are removed one by one.

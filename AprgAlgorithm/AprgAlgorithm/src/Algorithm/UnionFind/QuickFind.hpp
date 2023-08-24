@@ -14,11 +14,11 @@ public:
 
     QuickFind() : m_roots() { initialize(); }
 
-    bool isConnected(Object const& object1, Object const& object2) const override {
+    [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
         return getRoot(object1) == getRoot(object2);
     }
 
-    Object getRoot(Object const& object) const override { return m_roots[object]; }
+    [[nodiscard]] Object getRoot(Object const& object) const override { return m_roots[object]; }
 
     void connect(Object const& object1, Object const& object2) override {
         // runs in linear time (too expensive it should take constant/logarithmic time)
@@ -30,7 +30,7 @@ public:
         }
     }
 
-    RootArray const& getRootArray() const { return m_roots; }
+    [[nodiscard]] RootArray const& getRootArray() const { return m_roots; }
 
 private:
     void initialize() {
@@ -49,4 +49,4 @@ private:
     RootArray m_roots;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

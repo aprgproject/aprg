@@ -25,4 +25,4 @@ TEST(LinearRecurrenceTest, GetNextNumberOfDerangementsUsingLinearRecurrenceWorks
     EXPECT_EQ(UnsignedIntegerPair(44U, 265U), getNextNumberOfDerangementsUsingLinearRecurrence(6U, {9U, 44U}));
 }
 
-}  // namespace alba
+}  // namespace alba::math

@@ -61,4 +61,4 @@ SetOfUnsignedIntegers GameWithGraph::getNextGrundyNumbers(Vertex const vertex) {
     return result;
 }
 
-}  // namespace alba
+}  // namespace alba::math

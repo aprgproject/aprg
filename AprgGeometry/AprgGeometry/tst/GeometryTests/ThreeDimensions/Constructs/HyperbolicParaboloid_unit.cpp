@@ -7,9 +7,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 TEST(HyperbolicParaboloidTest, EmptyHyperbolicParaboloid) {
     HyperbolicParaboloid hyperbolicParaboloid;
@@ -43,7 +41,5 @@ TEST(HyperbolicParaboloidTest, HyperbolicParaboloidNotAtOriginWithRadius) {
     EXPECT_DOUBLE_EQ(3.8708286933869709, hyperbolicParaboloid.calculateYFromXAndZ(3, 4, 1));
     EXPECT_DOUBLE_EQ(7.8000000000000007, hyperbolicParaboloid.calculateZFromXAndY(5, 6));
 }
-
-}  // namespace ThreeDimensions
 
 }  // namespace alba

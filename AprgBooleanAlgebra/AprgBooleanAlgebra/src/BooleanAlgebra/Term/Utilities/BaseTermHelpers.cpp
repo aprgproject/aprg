@@ -42,4 +42,4 @@ BaseTerm& getBaseTermReferenceFromUniquePointer(BaseTermUniquePointer const& uni
     return static_cast<BaseTerm&>(*uniquePointer.get());
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

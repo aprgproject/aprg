@@ -76,4 +76,4 @@ TEST(MultipleGamesWithMazeTest, Example1Works) {
     games.setCoordinateAtGame(0U, {0U, 0U});
 }
 
-}  // namespace alba
+}  // namespace alba::math

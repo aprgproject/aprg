@@ -45,7 +45,7 @@ private:
     void includeSecondArgumentToFilesAndDirectories(string& lineString, int& index);
     void replaceVariableWithRealValuesInStringAndDoOperation(
         VariableMapIterator startIterator, string const& contents, function<void(string)> operationIfFound);
-    void separateStringsUsingWhiteSpaceAndDoOperation(
+    static void separateStringsUsingWhiteSpaceAndDoOperation(
         string const& string1, function<void(string)> operationForEachString);
     void addCMakeDirectoryIfNeededAndDoOperation(string const& string1, function<void(string)> operationForEachString);
     string getNextCMakeIdentifier(string& lineString, int& index);

@@ -97,4 +97,4 @@ TEST(OtherUtilitiesTest, GetFibonacciNumbersBelowThisNumberWorks) {
     EXPECT_EQ((UnsignedIntegers{0U, 1U, 1U, 2U, 3U, 5U, 8U}), getFibonacciNumbersBelowThisNumber(9U));
 }
 
-}  // namespace alba
+}  // namespace alba::math

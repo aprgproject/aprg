@@ -35,7 +35,7 @@ private:
         }
     }
 
-    ConstIterator getMiddleIterator(Values const& values) const {
+    [[nodiscard]] ConstIterator getMiddleIterator(Values const& values) const {
         int halfSize = (values.size() + 1) / 2;
         auto middle = values.cbegin();
         for (int count = 0; count < halfSize && middle != values.cend(); middle++, count++) {
@@ -64,7 +64,7 @@ private:
         result = std::move(merged);
     }
 
-    Values mergeTwoRanges(Values const& firstPart, Values const& secondPart) const {
+    [[nodiscard]] Values mergeTwoRanges(Values const& firstPart, Values const& secondPart) const {
         // this is similar with std::list::merge
 
         Values result;
@@ -86,7 +86,7 @@ private:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Given a doubly linked list, write a function to sort the doubly linked list in increasing order using merge sort.
 

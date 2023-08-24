@@ -49,7 +49,7 @@ struct S2 {
 struct S3 {
     template <int N>
     struct A {
-        A(int) {}
+        explicit A(int) {}
     };
 };
 
@@ -178,18 +178,18 @@ namespace CrtpWorks {
 template <typename CatOrDog>
 struct DoubleSpeaker {
     void speakTwice() {
-        CatOrDog* catOrDog = static_cast<CatOrDog*>(this);
+        auto* catOrDog = static_cast<CatOrDog*>(this);
         catOrDog->speak();
         catOrDog->speak();
     }
 };
 
 struct Cat : public DoubleSpeaker<Cat> {
-    void speak() { cout << "Meow!\n"; }
+    static void speak() { cout << "Meow!\n"; }
 };
 
 struct Dog : public DoubleSpeaker<Dog> {
-    void speak() { cout << "Woof!\n"; }
+    static void speak() { cout << "Woof!\n"; }
 };
 
 TEST(TemplateIdiomsExamplesTest, CrtpWorks) {

@@ -35,4 +35,4 @@ ostream& operator<<(ostream& out, Constant const& constant) {
     return out;
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

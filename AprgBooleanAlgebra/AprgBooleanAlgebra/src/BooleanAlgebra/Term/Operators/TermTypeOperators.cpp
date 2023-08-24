@@ -148,4 +148,4 @@ Term operator|(Term const& term, VariableTerm const& variableTerm) { return perf
 
 Term operator|(Term const& term, Expression const& expression) { return performOr(term, expression); }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

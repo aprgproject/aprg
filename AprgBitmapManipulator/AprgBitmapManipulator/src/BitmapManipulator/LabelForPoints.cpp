@@ -35,4 +35,4 @@ LabelForPoints::PixelsToLabelsMap const& LabelForPoints::getPixelsToLabels() con
 
 void LabelForPoints::setLabel(BitmapXY const& point, int const label) { m_pixelsTolabelsMap[point] = label; }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

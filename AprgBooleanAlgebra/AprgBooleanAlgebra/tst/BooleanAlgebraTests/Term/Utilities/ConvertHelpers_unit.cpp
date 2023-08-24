@@ -39,4 +39,4 @@ TEST(ConvertHelpersTest, ConvertExpressionToSimplestTermWorks) {
     EXPECT_EQ(termToExpect3, termToVerify3);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

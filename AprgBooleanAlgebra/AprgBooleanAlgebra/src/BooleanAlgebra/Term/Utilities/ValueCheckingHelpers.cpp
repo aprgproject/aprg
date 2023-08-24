@@ -45,4 +45,4 @@ bool isTheValue(Expression const& expression, bool const value) {
     return result;
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

@@ -30,4 +30,4 @@ TEST(BurnsideLemmaTest, GetNumberOfCombinationsOfAPearlNecklaceWorks) {
     EXPECT_EQ(976887U, getNumberOfCombinationsOfAPearlNecklace(10U, 5U));
 }
 
-}  // namespace alba
+}  // namespace alba::math

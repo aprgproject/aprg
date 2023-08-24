@@ -265,4 +265,4 @@ uint8_t extractMinForOneColor(uint32_t const color) {
     return min(min(extractRed(color), extractGreen(color)), extractBlue(color));
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap::ColorUtilities

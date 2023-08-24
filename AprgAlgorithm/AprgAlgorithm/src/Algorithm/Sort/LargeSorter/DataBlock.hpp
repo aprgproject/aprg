@@ -36,10 +36,10 @@ public:
                 break;
         }
     }
-    DataBlockType getBlockType() const { return m_blockType; }
-    int getBlockId() const { return m_blockId; }
-    int getNumberOfObjects() const { return m_numberOfObjects; }
-    int getNumberOfObjectsInMemory() const {
+    [[nodiscard]] DataBlockType getBlockType() const { return m_blockType; }
+    [[nodiscard]] int getBlockId() const { return m_blockId; }
+    [[nodiscard]] int getNumberOfObjects() const { return m_numberOfObjects; }
+    [[nodiscard]] int getNumberOfObjectsInMemory() const {
         int numberOfObjectsInMemory(0);
         if (m_memoryBlockHandler) {
             numberOfObjectsInMemory = m_memoryBlockHandler->getContainerConstReference().size();
@@ -47,7 +47,7 @@ public:
         return numberOfObjectsInMemory;
     }
     ObjectToSort getLowestObject() const { return m_lowestValue; }
-    bool isFileStreamOpened() const {
+    [[nodiscard]] bool isFileStreamOpened() const {
         bool isOpened = false;
         if (m_blockFileHandler) {
             isOpened = m_blockFileHandler->isFileStreamOpened();

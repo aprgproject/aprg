@@ -4,9 +4,7 @@
 
 // Inspired by: https://medium.com/pranayaggarwal25/unnamed-namespaces-static-f1498741c527
 
-namespace alba {
-
-namespace StaticOnTranslationUnits {
+namespace alba::StaticOnTranslationUnits {
 
 // constexpr int constInteger = 120;  // Error: redefinition of 'constInteger'
 // static int staticInteger = 220;    // Error: redefinition of 'staticInteger'
@@ -94,7 +92,5 @@ TEST(StaticOnTranslationUnit2Test, FunctionReturnValuesAreCorrect) {
     EXPECT_EQ(1, freeFunction());
     EXPECT_EQ(2, staticFreeFunction());
 }
-
-}  // namespace StaticOnTranslationUnits
 
 }  // namespace alba

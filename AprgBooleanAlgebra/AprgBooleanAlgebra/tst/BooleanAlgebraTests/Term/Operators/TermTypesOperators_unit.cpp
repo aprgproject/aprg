@@ -239,4 +239,4 @@ TEST(TermTypesOperatorsTest, BinaryOrOperator_TermOrExpressionOperationWorks) {
     EXPECT_EQ(Term(termToExpect), term);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

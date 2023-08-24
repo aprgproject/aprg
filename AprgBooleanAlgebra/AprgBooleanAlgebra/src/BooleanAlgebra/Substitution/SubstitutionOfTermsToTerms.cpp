@@ -82,4 +82,4 @@ void SubstitutionOfTermsToTerms::performSubstitutionForWrappedTerms(WrappedTerms
     }
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

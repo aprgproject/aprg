@@ -22,4 +22,4 @@ Term convertExpressionToSimplestTerm(Expression const& expression) {
     return newTerm;
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

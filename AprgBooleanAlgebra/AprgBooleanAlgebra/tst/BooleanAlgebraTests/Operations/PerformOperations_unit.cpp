@@ -66,4 +66,4 @@ TEST(PerformOperationsTest, PerformOrWorks) {
     EXPECT_EQ(Term(true), termToVerify4);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

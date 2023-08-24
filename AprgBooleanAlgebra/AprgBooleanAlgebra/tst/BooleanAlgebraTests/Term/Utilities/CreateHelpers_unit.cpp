@@ -149,4 +149,4 @@ TEST(CreateHelpersTest, CreateTermWithMultiplicationAndDivisionWrappedTermsWorks
     EXPECT_EQ(termToVerify, termToExpect);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

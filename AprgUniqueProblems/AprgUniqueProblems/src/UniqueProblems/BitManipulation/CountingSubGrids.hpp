@@ -16,9 +16,9 @@ public:
     using BitValueGrid = matrix::AlbaMatrix<BitValue>;
     static constexpr int NUMBER_OF_BITS = BitValueUtilities::getNumberOfBits();
 
-    CountingSubGrids(BitGrid const& bitGrid);
+    explicit CountingSubGrids(BitGrid const& bitGrid);
 
-    int countSubGridsWithAllBlackCorners() const;
+    [[nodiscard]] int countSubGridsWithAllBlackCorners() const;
 
 private:
     void initialize(BitGrid const& bitGrid);

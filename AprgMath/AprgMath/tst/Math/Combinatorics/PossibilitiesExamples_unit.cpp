@@ -123,4 +123,4 @@ TEST(PossibilitiesExamplesTest, StringWithThreeSetsOfTwoRepeatingLetters) {
                       getNumberOfPossibilities(5U, 1U) * getNumberOfPossibilities(4U, 1U));
 }
 
-}  // namespace alba
+}  // namespace alba::math

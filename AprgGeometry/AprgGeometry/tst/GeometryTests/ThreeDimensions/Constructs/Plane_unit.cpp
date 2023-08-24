@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 TEST(PlaneTest, EmptyPlane) {
     Plane plane;
@@ -90,7 +88,5 @@ TEST(PlaneTest, PlaneWithConstantX) {
     EXPECT_FALSE(plane.calculateYFromXAndZ(1.0, 1.0));
     EXPECT_FALSE(plane.calculateZFromXAndY(1.0, 1.0));
 }
-
-}  // namespace ThreeDimensions
 
 }  // namespace alba

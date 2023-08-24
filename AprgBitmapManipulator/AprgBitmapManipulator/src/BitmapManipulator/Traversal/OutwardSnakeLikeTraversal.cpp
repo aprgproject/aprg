@@ -258,4 +258,4 @@ bool OutwardSnakeLikeTraversal::cannotTeleport() const {
            m_highestBottom == m_lastMostBottom;
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

@@ -30,7 +30,7 @@ private:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Merge sort was invented by J. von Neumann in 1945.
 // Merge sort has a divide and conquer approach

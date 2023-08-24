@@ -15,7 +15,7 @@ public:
     using ValueToIndexableValueFunction = std::function<int(Value const&)>;
 
     CountingSorterUsingNewPositions() = delete;
-    CountingSorterUsingNewPositions(ValueToIndexableValueFunction const& valueToIndexableValueFunction)
+    explicit CountingSorterUsingNewPositions(ValueToIndexableValueFunction const& valueToIndexableValueFunction)
         : m_valueToIndexableValueFunction(valueToIndexableValueFunction) {}
 
     void sort(Values& valuesToSort) const override {

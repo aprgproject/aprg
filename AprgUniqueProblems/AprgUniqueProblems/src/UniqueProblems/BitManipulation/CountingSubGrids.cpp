@@ -6,7 +6,7 @@ using namespace std;
 
 namespace alba {
 
-CountingSubGrids::CountingSubGrids(BitGrid const& bitGrid) : m_bitValueGrid() { initialize(bitGrid); }
+CountingSubGrids::CountingSubGrids(BitGrid const& bitGrid)  { initialize(bitGrid); }
 
 int CountingSubGrids::countSubGridsWithAllBlackCorners() const {
     int result = 0;

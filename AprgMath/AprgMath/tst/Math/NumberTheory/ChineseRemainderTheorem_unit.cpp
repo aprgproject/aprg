@@ -19,4 +19,4 @@ TEST(ChineseRemainderTheoremTest, Example1Works) {
     EXPECT_EQ(473U, chineseRemainderTheorem.getAnotherSolutionValue(2U));
 }
 
-}  // namespace alba
+}  // namespace alba::math

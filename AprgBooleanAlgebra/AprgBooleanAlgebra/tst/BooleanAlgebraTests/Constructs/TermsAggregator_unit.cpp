@@ -133,4 +133,4 @@ TEST(TermsAggregatorTest, SimplifyWorksWithNegatedTermsAndVariousOperations) {
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

@@ -200,4 +200,4 @@ UnsignedInteger getModularFactorial(UnsignedInteger const number, UnsignedIntege
     return result;
 }
 
-}  // namespace alba
+}  // namespace alba::math

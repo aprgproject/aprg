@@ -219,4 +219,4 @@ UnsignedIntegers getFibonacciNumbersBelowThisNumber(UnsignedInteger const number
     return result;
 }
 
-}  // namespace alba
+}  // namespace alba::math

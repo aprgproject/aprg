@@ -143,4 +143,4 @@ TEST(PenCirclesDrawerTest, DrawMultipleCirclesWithACommonConnection) {
     bitmapFilters.saveSnippetIntoFileInTheSameDirectory(outputSnippet, "DrawMultipleCirclesWithACommonConnection.bmp");
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

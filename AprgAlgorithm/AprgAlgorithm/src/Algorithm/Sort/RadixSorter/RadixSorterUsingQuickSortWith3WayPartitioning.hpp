@@ -96,4 +96,4 @@ private:
 // ---> Is in-place
 // Bottom line is 3 way string quicksort is method of choice for sorting strings.
 
-}  // namespace alba
+}  // namespace alba::algorithm

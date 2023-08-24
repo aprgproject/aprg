@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 TEST(ParabolaTest, ParabolaCanBeCreated) {
     Parabola<ParabolaOrientation::PolynomialX>{1, 2, 3};
@@ -170,7 +168,5 @@ TEST(ParabolaTest, GetVertexWorksForParabolaOrientatedInY) {
     EXPECT_EQ(Point(3, -1), parabola1.getVertex());
     EXPECT_EQ(Point(-6.25, 0.5), parabola2.getVertex());
 }
-
-}  // namespace TwoDimensions
 
 }  // namespace alba

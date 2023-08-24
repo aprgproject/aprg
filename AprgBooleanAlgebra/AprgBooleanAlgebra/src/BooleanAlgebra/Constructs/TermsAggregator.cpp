@@ -246,4 +246,4 @@ void TermsAggregator::insertTerm(int const index, Term const& term) {
     }
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

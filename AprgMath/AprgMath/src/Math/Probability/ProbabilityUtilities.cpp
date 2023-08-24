@@ -292,4 +292,4 @@ AlbaNumber getNumberOfPeopleForTheBirthdayParadoxUsingTaylorFormula(AlbaNumber c
     return result;
 }
 
-}  // namespace alba
+}  // namespace alba::math

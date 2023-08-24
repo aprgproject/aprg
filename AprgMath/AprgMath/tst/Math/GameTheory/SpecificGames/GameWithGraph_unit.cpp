@@ -87,4 +87,4 @@ TEST(GameWithGraphTest, Example2Works) {
     EXPECT_EQ(5U, gameWithGraph.getOptimalNextVertexAt(6U));
 }
 
-}  // namespace alba
+}  // namespace alba::math

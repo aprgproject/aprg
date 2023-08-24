@@ -186,7 +186,8 @@ bool TermAnalyzer::isStringFoundInLooper(Looper const& startLooper, string const
         if (stringToCompare == currentString) {
             return true;
         } if (m_database.isMacro(currentString)) {
-            if (isStringFoundInMacro(currentString, stringToCompare)) return true;
+            if (isStringFoundInMacro(currentString, stringToCompare)) { return true;
+}
         }
         searchLooper++;
     }
@@ -200,7 +201,8 @@ bool TermAnalyzer::isStringFoundInMacro(string const& macroName, string const& s
         if (currentString == stringToCompare) {
             return true;
         } if (m_database.isMacro(macroName)) {
-            if (isStringFoundInMacro(macroName, currentString)) return true;
+            if (isStringFoundInMacro(macroName, currentString)) { return true;
+}
         }
     };
     return false;

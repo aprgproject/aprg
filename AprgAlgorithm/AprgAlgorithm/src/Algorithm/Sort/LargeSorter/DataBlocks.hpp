@@ -26,7 +26,7 @@ public:
           {
         initializeDataBlocks();
     }
-    bool isEmpty() const {
+    [[nodiscard]] bool isEmpty() const {
         for (BlockType const& block : m_blocks) {
             if (block.getNumberOfObjects() != 0) {
                 return false;

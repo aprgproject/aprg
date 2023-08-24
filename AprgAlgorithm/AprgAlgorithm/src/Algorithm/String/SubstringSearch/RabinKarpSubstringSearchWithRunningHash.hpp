@@ -13,7 +13,7 @@ public:
     static constexpr RadixType RADIX = 256;
     static constexpr HashValue A_LARGE_PRIME = 1229952067;  // hard coded for now (think of an implementation later)
 
-    RabinKarpSubstringSearchWithRunningHash(std::string const& query)
+    explicit RabinKarpSubstringSearchWithRunningHash(std::string const& query)
         : m_query(query),
           m_queryLength(query.length()),
           m_hornerHashFunction(RADIX, A_LARGE_PRIME),
@@ -21,7 +21,7 @@ public:
           m_radixRaiseToMatchLengthHash(getRadixRaiseToMatchLengthHash()),
           m_queryHash(getHash(m_query)) {}
 
-    Index search(std::string const& searchSpace) const {
+    [[nodiscard]] Index search(std::string const& searchSpace) const {
         auto result(static_cast<Index>(std::string::npos));
         Index searchLength(searchSpace.length());
         HashValue currentHash(getHash(searchSpace));
@@ -42,11 +42,11 @@ public:
     }
 
 private:
-    HashValue getHash(std::string const& key) const {
+    [[nodiscard]] HashValue getHash(std::string const& key) const {
         return m_hornerHashFunction.getHashCode(key.substr(0, m_queryLength));
     }
 
-    HashValue getNextHash(HashValue const currentHash, char const charToRemove, char const charToAdd) const {
+    [[nodiscard]] HashValue getNextHash(HashValue const currentHash, char const charToRemove, char const charToAdd) const {
         // First, subtract value for charToRemove
         HashValue result =
             (currentHash + m_largeRandomPrime - (m_radixRaiseToMatchLengthHash * charToRemove % m_largeRandomPrime)) %
@@ -56,7 +56,7 @@ private:
         return result;
     }
 
-    HashValue getRadixRaiseToMatchLengthHash() const {
+    [[nodiscard]] HashValue getRadixRaiseToMatchLengthHash() const {
         HashValue result(1);
         for (int i = 1; i < m_queryLength; i++) {
             result = (result * RADIX) % m_largeRandomPrime;
@@ -72,7 +72,7 @@ private:
     HashValue m_queryHash;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Invented by two Turing award winners Michael Rabin (Turing Award '76) and Dick Karp (Turing Award '85).
 // Explained to Sedgewick in 15 seconds -> realized needs to be on the book.

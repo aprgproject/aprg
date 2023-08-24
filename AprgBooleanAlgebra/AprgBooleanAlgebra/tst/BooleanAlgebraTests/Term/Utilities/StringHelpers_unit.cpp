@@ -75,4 +75,4 @@ TEST(StringHelpersTest, AddValueTermIfNotEmptyWorks) {
     EXPECT_TRUE(termsToVerify1[0].getBooleanValue());
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

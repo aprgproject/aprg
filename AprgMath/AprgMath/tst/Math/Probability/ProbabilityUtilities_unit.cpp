@@ -161,4 +161,4 @@ TEST(ProbabilityUtilitiesTest, GetNumberOfPeopleForTheBirthdayParadoxUsingTaylor
     EXPECT_EQ(AlbaNumber(ALBA_NUMBER_POSITIVE_INFINITY), getNumberOfPeopleForTheBirthdayParadoxUsingTaylorFormula(1));
 }
 
-}  // namespace alba
+}  // namespace alba::math

@@ -208,4 +208,4 @@ TEST(ColorUtilitiesTest, ExtractBlueWorks) {
     EXPECT_EQ(0x57U, extractBlue(0x2E8B57));
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

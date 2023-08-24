@@ -141,4 +141,4 @@ void GameWithMaze::retrieveUpCoordinates(Coordinates& retrievedCoordinates, Coor
     }
 }
 
-}  // namespace alba
+}  // namespace alba::math

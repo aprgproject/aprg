@@ -25,9 +25,7 @@ using namespace alba::FrequencyStatistics;
 using namespace alba::TwoDimensionsStatistics;
 using namespace std;
 
-namespace alba {
-
-namespace soosa {
+namespace alba::soosa {
 
 /*namespace // for debug
 {
@@ -116,8 +114,7 @@ bool SOOSA::Status::isStatusNoError() const { return m_errors.empty(); }
 SOOSA::SOOSA(SoosaConfiguration const& soosaConfiguration, InputConfiguration const& inputConfiguration)
     : m_soosaConfiguration(soosaConfiguration),
       m_inputConfiguration(inputConfiguration),
-      m_numberOfRespondents{},
-      m_questionToAnswersMap(),
+      
       m_frequencyDatabase(m_inputConfiguration.getNumberOfQuestions(), m_soosaConfiguration.getNumberOfChoices()) {}
 
 int SOOSA::getNumberOfAnswers() const { return m_questionToAnswersMap.size(); }
@@ -572,7 +569,7 @@ SOOSA::QuestionBarCoordinates SOOSA::getQuestionBarCoordinatesFromLine(
 
 void SOOSA::retrieveBarPointsThatFitAndSaveToKMeans(
     TwoDimensionKMeans& kMeansForBarPoints, PointAndWidthPairs const& pointAndWidthPairs,
-    RangeOfDoubles const& minMaxCriteriaForBar) const {
+    RangeOfDoubles const& minMaxCriteriaForBar) {
     for (PointAndWidthPair const& pointAndWidthPair : pointAndWidthPairs) {
         if (minMaxCriteriaForBar.isValueInsideInclusive(pointAndWidthPair.second)) {
             kMeansForBarPoints.addSample(convertToTwoDimensionSample(pointAndWidthPair.first));
@@ -582,7 +579,7 @@ void SOOSA::retrieveBarPointsThatFitAndSaveToKMeans(
 
 void SOOSA::saveQuestionBarCoordinatesFromKMeansWithBarPoints(
     QuestionBarCoordinates& questionBarCoordinates, TwoDimensionKMeans const& kMeansForBarPoints,
-    int const numberQuestionsInColumn) const {
+    int const numberQuestionsInColumn) {
     GroupOfTwoDimensionSamples groupOfBarPoints(
         kMeansForBarPoints.getGroupOfSamplesUsingKMeans(numberQuestionsInColumn));
     for (TwoDimensionSamples const& barPoints : groupOfBarPoints) {
@@ -630,7 +627,7 @@ SOOSA::RangeOfDoubles SOOSA::getMinMaxCriteriaForBar(PointAndWidthPairs const& p
 }
 
 SOOSA::RangeOfDoubles SOOSA::getMinMaxCriteriaForBar(
-    OneDimensionStatistics& firstGroupStatistics, OneDimensionStatistics& secondGroupStatistics) const {
+    OneDimensionStatistics& firstGroupStatistics, OneDimensionStatistics& secondGroupStatistics) {
     RangeOfDoubles result;
     if (firstGroupStatistics.getMean().getValueAt(0) > secondGroupStatistics.getMean().getValueAt(0)) {
         result = getMinMaxRangeOfSamples(firstGroupStatistics.getSamples());
@@ -908,7 +905,7 @@ SOOSA::OneDimensionSamples SOOSA::getBarHeights(GroupOfTwoDimensionSamples const
     return barHeights;
 }
 
-double SOOSA::getHeight(TwoDimensionSamples const& barPoints) const {
+double SOOSA::getHeight(TwoDimensionSamples const& barPoints) {
     return getDistance(convertToPoint(barPoints.front()), convertToPoint(barPoints.back()));
 }
 
@@ -1083,7 +1080,5 @@ SOOSA::RangeOfDoubles SOOSA::getMinMaxRangeOfSamples(OneDimensionSamples const& 
     }
     return RangeOfDoubles(collection.getMinimum(), collection.getMaximum(), 1);
 }
-
-}  // namespace soosa
 
 }  // namespace alba

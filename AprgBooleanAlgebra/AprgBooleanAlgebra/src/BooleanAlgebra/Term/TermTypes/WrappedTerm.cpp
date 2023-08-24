@@ -42,4 +42,4 @@ ostream& operator<<(ostream& out, WrappedTerm const& wrappedTerm) {
     return out;
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

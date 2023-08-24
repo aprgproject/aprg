@@ -19,7 +19,7 @@ using namespace std;
 namespace alba::algorithm {
 
 struct TestObject {
-    TestObject() : valueInteger{}, valueDouble{}, valueCharacter{}, valueString() {}
+    TestObject() : valueInteger{}, valueDouble{}, valueCharacter{} {}
 
     TestObject(
         int const valueIntegerParameter, double const valueDoubleParameter, char const valueCharacterParameter,

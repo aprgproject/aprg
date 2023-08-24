@@ -36,4 +36,4 @@ TEST(AnimeFilterTest, DISABLED_AnimizeSingleFileTest) {
     animize(inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath());
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

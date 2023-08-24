@@ -471,4 +471,4 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnConsensusTheoremPattern2) {
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra::Simplification

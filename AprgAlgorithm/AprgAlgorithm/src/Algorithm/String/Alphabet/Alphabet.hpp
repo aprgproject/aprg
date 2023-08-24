@@ -12,7 +12,7 @@ class Alphabet {
 public:
     using DigitValues = std::vector<DigitValue>;
 
-    Alphabet(std::string const& characters) : m_characters(characters) {}
+    explicit Alphabet(std::string const& characters) : m_characters(characters) {}
 
     bool contains(char const c) { return stringHelper::isNotNpos(static_cast<int>(m_characters.find_first_of(c))); }
 

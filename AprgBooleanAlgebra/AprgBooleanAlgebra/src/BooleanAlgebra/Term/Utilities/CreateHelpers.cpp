@@ -61,4 +61,4 @@ Term createTermWithOrOperationWrappedTerms(WrappedTerms const& wrappedTerms) {
     return result;
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

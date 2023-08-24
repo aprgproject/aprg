@@ -42,7 +42,7 @@ private:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Time Complexity: Time complexity of the above implementation is same as time complexity of QuickSort() for arrays.
 // -> It takes O(n^2) time in the worst case and O(nLogn) in average and best cases.

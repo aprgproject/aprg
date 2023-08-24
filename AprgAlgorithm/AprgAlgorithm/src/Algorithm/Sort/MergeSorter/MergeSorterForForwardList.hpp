@@ -35,7 +35,7 @@ private:
         }
     }
 
-    ConstIterator getBeforeMiddleIterator(Values const& values) const {
+    [[nodiscard]] ConstIterator getBeforeMiddleIterator(Values const& values) const {
         auto turtoise(values.cbefore_begin());
         auto hare(values.cbegin());
         while (hare != values.cend()) {
@@ -70,7 +70,7 @@ private:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Merge sort is often preferred for sorting a linked list.
 // The slow random-access performance of a linked list makes some other algorithms (such as quicksort) perform poorly,

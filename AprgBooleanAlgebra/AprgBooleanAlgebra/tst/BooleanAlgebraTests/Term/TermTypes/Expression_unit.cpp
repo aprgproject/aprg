@@ -690,4 +690,4 @@ TEST(ExpressionTest, OutputStreamOperatorWorks) {
     EXPECT_EQ("(),(x|y),([true]),((x|y)&z)", ss.str());
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

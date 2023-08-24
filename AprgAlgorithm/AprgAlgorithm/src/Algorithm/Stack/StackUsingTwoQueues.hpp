@@ -13,9 +13,9 @@ class StackUsingTwoQueues : public BaseStack<Object> {
 public:
     StackUsingTwoQueues() {}
 
-    bool isEmpty() const override { return getSize() == 0; }
+    [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 
-    int getSize() const override { return m_queueAtTheTop.getSize() + m_queueAtTheBottom.getSize(); }
+    [[nodiscard]] int getSize() const override { return m_queueAtTheTop.getSize() + m_queueAtTheBottom.getSize(); }
 
     void push(Object const& object) override {
         m_queueAtTheTop.enqueue(object);
@@ -52,7 +52,7 @@ private:
         }
     }
 
-    int getTargetSizeAtTop(int const totalSize) const {
+    [[nodiscard]] int getTargetSizeAtTop(int const totalSize) const {
         // return the logarithmic size
         return std::max(
             1, static_cast<int>(
@@ -83,4 +83,4 @@ private:
     QueueWithObject m_queueAtTheBottom;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

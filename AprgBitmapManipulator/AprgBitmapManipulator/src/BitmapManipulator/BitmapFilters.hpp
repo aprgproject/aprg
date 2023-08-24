@@ -44,7 +44,7 @@ public:
     static void determinePenPoints(
         PenPoints& penPoints, BitmapSnippet const& inputSnippet, double const penSearchRadius,
         uint32_t const similarityColorLimit);
-    void determinePenCirclesFromPenPoints(
+    static void determinePenCirclesFromPenPoints(
         PenCircles& penCircles, PenPoints const& penPoints, BitmapSnippet const& inputSnippet,
         uint32_t const similarityColorLimit, double const acceptablePenPercentage);
     void determineConnectedComponentsByOneComponentAtATime(BitmapSnippet const& inputSnippet);
@@ -104,7 +104,7 @@ private:
         uint32_t const similarityColorLimit, double const acceptablePenPercentage);
     void drawToBlurForCenterPoint(
         BitmapSnippet& snippet, BitmapXYs& pointsToBlur, BitmapXY const& point, uint32_t const similarityColorLimit);
-    void drawToBlurForNonCenterPoint(
+    static void drawToBlurForNonCenterPoint(
         BitmapSnippet& snippet, BitmapXYs& pointsToBlur, BitmapXY const& point, uint32_t const centerColor,
         uint32_t const similarityColorLimit);
     static void updateUnionFindForLabels(

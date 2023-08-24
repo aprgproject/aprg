@@ -40,4 +40,4 @@ TEST(GameUtilitiesTest, GetOverallGrundyNumberWorks) {
     EXPECT_EQ(419U, getOverallGrundyNumber({124U, 196U, 687U, 948U}));
 }
 
-}  // namespace alba
+}  // namespace alba::math

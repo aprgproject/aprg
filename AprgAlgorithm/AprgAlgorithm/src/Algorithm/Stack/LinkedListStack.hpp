@@ -19,9 +19,9 @@ public:
 
     LinkedListStack() :  m_first(nullptr) {}
 
-    bool isEmpty() const override { return m_first == nullptr; }
+    [[nodiscard]] bool isEmpty() const override { return m_first == nullptr; }
 
-    int getSize() const override { return m_size; }
+    [[nodiscard]] int getSize() const override { return m_size; }
 
     void push(Object const& object)
         override  // runs in constant time, but array is still faster because here there is allocation
@@ -48,4 +48,4 @@ private:
     NodeUniquePointer m_first;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

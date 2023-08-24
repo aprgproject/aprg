@@ -68,4 +68,4 @@ TwoSatisfiabilityUsingGraphs::DirectedGraph TwoSatisfiabilityUsingGraphs::create
     return result;
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

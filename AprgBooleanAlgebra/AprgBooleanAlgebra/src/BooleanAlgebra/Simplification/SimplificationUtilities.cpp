@@ -316,4 +316,4 @@ void retrieveTargetOperations(OperatorLevel& targetOuter, OperatorLevel& targetI
     }
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra::Simplification

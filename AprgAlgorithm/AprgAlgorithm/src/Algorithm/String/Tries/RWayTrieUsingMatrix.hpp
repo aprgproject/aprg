@@ -29,15 +29,15 @@ public:
     using Coordinate = std::pair<int, NodeId>;
     using Coordinates = std::vector<Coordinate>;
 
-    RWayTrieUsingMatrix() :  m_unusedNodeIds(), m_nodePointerMatrix(RADIX, MAX_NUMBER_IDS) {}
+    RWayTrieUsingMatrix() :   m_nodePointerMatrix(RADIX, MAX_NUMBER_IDS) {}
 
-    bool isEmpty() const override { return m_size == 0; }
+    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
 
-    bool doesContain(Key const& key) const override { return static_cast<bool>(getValuePointer(0, key, 0)); }
+    [[nodiscard]] bool doesContain(Key const& key) const override { return static_cast<bool>(getValuePointer(0, key, 0)); }
 
-    int getSize() const override { return m_size; }
+    [[nodiscard]] int getSize() const override { return m_size; }
 
-    Value get(Key const& key) const override {
+    [[nodiscard]] Value get(Key const& key) const override {
         Value result{};
         ValueUniquePointer valueUniquePointer(getValuePointer(0, key, 0));
         if (valueUniquePointer) {
@@ -46,7 +46,7 @@ public:
         return result;
     }
 
-    Key getLongestPrefixOf(Key const& keyToCheck) const override {
+    [[nodiscard]] Key getLongestPrefixOf(Key const& keyToCheck) const override {
         int longestPrefixLength(getLengthOfLongestPrefix(0, keyToCheck, 0));
         return keyToCheck.substr(0, longestPrefixLength);
     }
@@ -55,13 +55,13 @@ public:
 
     void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyAndReturnIfDeleted(0, key, 0); }
 
-    Strings getKeys() const override {
+    [[nodiscard]] Strings getKeys() const override {
         Strings result;
         collectAllKeysAtNode(0, std::string(), result);
         return result;
     }
 
-    Strings getAllKeysWithPrefix(Key const& prefix) const override {
+    [[nodiscard]] Strings getAllKeysWithPrefix(Key const& prefix) const override {
         Strings result;
         Coordinate coordinateOfPrefix(getCoordinate(0, prefix, 0));
         NodePointer const& nodePointerOfPrefix(
@@ -76,15 +76,15 @@ public:
         return result;
     }
 
-    Strings getAllKeysThatMatch(Key const& patternToMatch) const override {
+    [[nodiscard]] Strings getAllKeysThatMatch(Key const& patternToMatch) const override {
         Strings result;
         collectKeysThatMatchAtNode(0, std::string(), patternToMatch, result);
         return result;
     }
 
-    SetOfNodeIds const& getUnusedNodeIds() const { return m_unusedNodeIds; }
+    [[nodiscard]] SetOfNodeIds const& getUnusedNodeIds() const { return m_unusedNodeIds; }
 
-    std::string getMatrixString() const {
+    [[nodiscard]] std::string getMatrixString() const {
         DisplayTable table;
         table.setBorders("-", "|");
         table.addRow();
@@ -114,11 +114,11 @@ public:
     }
 
 private:
-    bool isValidNodeId(NodeId const nodeId) const {
+    [[nodiscard]] bool isValidNodeId(NodeId const nodeId) const {
         return nodeId < static_cast<NodeId>(m_nodePointerMatrix.getNumberOfRows());
     }
 
-    bool isNodeEmpty(NodeId const nodeId) const {
+    [[nodiscard]] bool isNodeEmpty(NodeId const nodeId) const {
         bool result(true);
         for (int c = 0; result && c < RADIX; c++) {
             NodePointer const& nodePointer(m_nodePointerMatrix.getEntryConstReference(c, nodeId));
@@ -140,7 +140,7 @@ private:
         return result;
     }
 
-    Coordinate getCoordinate(NodeId const nodeId, Key const& key, int const startingIndex) const {
+    [[nodiscard]] Coordinate getCoordinate(NodeId const nodeId, Key const& key, int const startingIndex) const {
         Coordinate result{INVALID_NODE_ID, 0};
         NodeId currentNodeId(nodeId);
         for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); keyIndex++) {
@@ -163,7 +163,7 @@ private:
         return result;
     }
 
-    ValueUniquePointer getValuePointer(NodeId const nodeId, Key const& key, int const startingIndex) const {
+    [[nodiscard]] ValueUniquePointer getValuePointer(NodeId const nodeId, Key const& key, int const startingIndex) const {
         ValueUniquePointer result;
         NodeId currentNodeId(nodeId);
         for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(key.length()); keyIndex++) {
@@ -187,7 +187,7 @@ private:
         return result;
     }
 
-    int getLengthOfLongestPrefix(NodeId const nodeId, Key const& keyToCheck, int const startingIndex) const {
+    [[nodiscard]] int getLengthOfLongestPrefix(NodeId const nodeId, Key const& keyToCheck, int const startingIndex) const {
         int currentLongestLength(0);
         NodeId currentNodeId(nodeId);
         for (int keyIndex = startingIndex; keyIndex < static_cast<NodeId>(keyToCheck.length()); keyIndex++) {
@@ -344,7 +344,7 @@ private:
     NodePointerMatrix m_nodePointerMatrix;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // A trie is a rooted tree that maintains a set of strings.
 // Each string in the set is stored as a chain of characters that starts at the root.

@@ -26,7 +26,7 @@ public:
         double totalCpuFromTop;
         ProcessToCpuMemMap processToCpuMemMap;
         void clear();
-        bool isEmpty() const;
+        [[nodiscard]] bool isEmpty() const;
     };
 
     struct ColumnHeaders {

@@ -7,9 +7,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 TEST(EllipticHyperboloidTest, EmptyEllipticHyperboloid) {
     EllipticHyperboloid ellipticHyperboloid;
@@ -49,7 +47,5 @@ TEST(EllipticHyperboloidTest, IsInsideWorks) {
 
     EXPECT_TRUE(ellipticHyperboloid.isInside(Point(0, 0, 0)));
 }
-
-}  // namespace ThreeDimensions
 
 }  // namespace alba

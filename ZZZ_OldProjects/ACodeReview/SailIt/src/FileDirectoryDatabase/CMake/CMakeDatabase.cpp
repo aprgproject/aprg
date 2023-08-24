@@ -17,7 +17,7 @@ CMakeDatabase::CMakeDatabase()
 
 CMakeDatabase::CMakeDatabase(CMakeDatabase& parentCMake)
     : 
-      m_isNonExistentDirectoriesAllowed(false),
+      
       m_parentCMake(parentCMake),
       m_hasCMakeParent(true) {}
 

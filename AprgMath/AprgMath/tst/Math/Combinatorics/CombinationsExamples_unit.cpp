@@ -282,4 +282,4 @@ TEST(CombinationsExamplesTest, CatalanNumbersFormulaWorks) {
     EXPECT_EQ(5U, getNumberOfCombinations(6U, 3U) / (3 + 1));
 }
 
-}  // namespace alba
+}  // namespace alba::math

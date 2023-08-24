@@ -88,4 +88,4 @@ private:
 
 // LSD has history with punch cards
 
-}  // namespace alba
+}  // namespace alba::algorithm

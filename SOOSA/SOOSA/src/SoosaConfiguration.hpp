@@ -3,9 +3,7 @@
 #include <map>
 #include <string>
 
-namespace alba {
-
-namespace soosa {
+namespace alba::soosa {
 
 class SoosaConfiguration {
 public:
@@ -14,29 +12,29 @@ public:
     SoosaConfiguration();
 
     // Line model parameters
-    int getAcceptableLineDeviationForLineModelInPixels() const;
-    double getRemovalRatioForSquareErrorsInLineModel() const;
-    int getMinimumLineSamples() const;
+    [[nodiscard]] int getAcceptableLineDeviationForLineModelInPixels() const;
+    [[nodiscard]] double getRemovalRatioForSquareErrorsInLineModel() const;
+    [[nodiscard]] int getMinimumLineSamples() const;
 
     // Line and bar parameters
-    double getBitmapWidthToBarWidthMultiplier() const;
-    double getLineBarWidthSearchInitialBlackPointsValue() const;
-    double getLineBarWidthSearchAcceptedRunningBlackRatio() const;
-    double getAcceptableDistanceOverWidthRatioFromWidthMidpoint() const;
-    int getAcceptableMinimumDistanceFromWidthMidpoint() const;
-    double getAcceptableSdOverMeanDeviationForLine() const;
-    double getAcceptableSdOverMeanDeviationForBar() const;
-    double getRemovalRatioForLineAndBar() const;
-    double getInitialValueForMaximumDistanceBetweenBarHeights() const;
-    double getMultiplierForMaximumDistanceBetweenBarHeights() const;
-    double getAcceptableSdOverMeanDeviationForBarHeight() const;
-    double getRemovalRatioForBarHeight() const;
+    [[nodiscard]] double getBitmapWidthToBarWidthMultiplier() const;
+    [[nodiscard]] double getLineBarWidthSearchInitialBlackPointsValue() const;
+    [[nodiscard]] double getLineBarWidthSearchAcceptedRunningBlackRatio() const;
+    [[nodiscard]] double getAcceptableDistanceOverWidthRatioFromWidthMidpoint() const;
+    [[nodiscard]] int getAcceptableMinimumDistanceFromWidthMidpoint() const;
+    [[nodiscard]] double getAcceptableSdOverMeanDeviationForLine() const;
+    [[nodiscard]] double getAcceptableSdOverMeanDeviationForBar() const;
+    [[nodiscard]] double getRemovalRatioForLineAndBar() const;
+    [[nodiscard]] double getInitialValueForMaximumDistanceBetweenBarHeights() const;
+    [[nodiscard]] double getMultiplierForMaximumDistanceBetweenBarHeights() const;
+    [[nodiscard]] double getAcceptableSdOverMeanDeviationForBarHeight() const;
+    [[nodiscard]] double getRemovalRatioForBarHeight() const;
 
     // Choices related parameters
-    int getNumberOfChoices() const;
-    int getColorIntensityForWhite() const;
-    double getBarHeightToDiameterMultiplier() const;
-    double getMinimumPercentageOfBlackPixelsForAFilledCircle() const;
+    [[nodiscard]] int getNumberOfChoices() const;
+    [[nodiscard]] int getColorIntensityForWhite() const;
+    [[nodiscard]] double getBarHeightToDiameterMultiplier() const;
+    [[nodiscard]] double getMinimumPercentageOfBlackPixelsForAFilledCircle() const;
 
     void loadConfigurationFromFile(std::string const& filePath);
     void bufferNameAndValueString(std::string const& nameOfParameter, std::string const& valueString);
@@ -73,7 +71,5 @@ private:
     // Buffer
     BufferMap m_nameToValueStringMapBuffer;
 };
-
-}  // namespace soosa
 
 }  // namespace alba

@@ -9,9 +9,9 @@ namespace alba::algorithm {
 template <typename Index>
 class SuffixTrieSubStringSearch {
 public:
-    SuffixTrieSubStringSearch(std::string const& query) : m_query(query) {}
+    explicit SuffixTrieSubStringSearch(std::string const& query) : m_query(query) {}
 
-    Index search(std::string const& searchSpace) const {
+    [[nodiscard]] Index search(std::string const& searchSpace) const {
         if (!m_query.empty()) {
             return searchUsingTrie(searchSpace, m_query);
         }
@@ -19,7 +19,7 @@ public:
     }
 
 private:
-    int searchUsingTrie(std::string const& searchSpace, std::string const& query) const {
+    [[nodiscard]] int searchUsingTrie(std::string const& searchSpace, std::string const& query) const {
         TernarySearchSuffixTrie trie(searchSpace);
         return trie.getIndexOfFirstOccurrence(query);
     }
@@ -27,4 +27,4 @@ private:
     std::string m_query;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

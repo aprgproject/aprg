@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 TEST(PolynomialTest, PolynomialCanBeCreated) { Polynomial<3>{1, 2, 3}; }
 
@@ -21,7 +19,5 @@ TEST(PolynomialTest, GetValueOfFirstDerivativeWorks) {
 
     EXPECT_DOUBLE_EQ(12, polynomial.getValueOfFirstDerivative(5));
 }
-
-}  // namespace TwoDimensions
 
 }  // namespace alba

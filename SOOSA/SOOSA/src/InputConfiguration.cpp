@@ -7,12 +7,10 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace soosa {
+namespace alba::soosa {
 
 InputConfiguration::InputConfiguration()
-    : m_path(), m_area(), m_period(), m_discharge{}, m_minimumSatisfactoryScore{}, m_formDetails{} {}
+    :  m_formDetails{} {}
 
 int InputConfiguration::getNumberOfColumns() const { return m_formDetails.columnToNumberOfQuestionsMap.size(); }
 
@@ -80,7 +78,5 @@ void InputConfiguration::addQuestion(int const columnNumber, string const& quest
 }
 
 void InputConfiguration::setFormDetailsTitle(string const& title) { m_formDetails.title = title; }
-
-}  // namespace soosa
 
 }  // namespace alba

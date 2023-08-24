@@ -217,4 +217,4 @@ TEST(MathSetTest, GetCartesianProductWorks) {
     EXPECT_EQ("{(1,x), (1,y), (2,x), (2,y)}", cartesianProduct.getDescription());
 }
 
-}  // namespace alba
+}  // namespace alba::math

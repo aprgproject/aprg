@@ -220,4 +220,4 @@ void PenCirclesDrawer::putCircleConnectionsAndRemoveProcessedCircles() {
     }
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

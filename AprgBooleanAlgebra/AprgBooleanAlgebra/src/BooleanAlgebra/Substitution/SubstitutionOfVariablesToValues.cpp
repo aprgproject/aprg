@@ -96,4 +96,4 @@ void SubstitutionOfVariablesToValues::performSubstitutionForWrappedTerms(Wrapped
     }
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

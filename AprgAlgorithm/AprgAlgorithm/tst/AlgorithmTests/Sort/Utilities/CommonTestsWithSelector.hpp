@@ -40,4 +40,4 @@ void testGetNthElementUsingExample1WithPositiveAndNegativeIntegers(Selector cons
     EXPECT_EQ(-1, selector.getNthSelect(valuesToSelect, 3));
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm::CommonTestsWithSelector

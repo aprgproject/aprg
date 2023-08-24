@@ -36,7 +36,7 @@ public:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // -> Cocktail shaker sort or bidirectional bubble sort,
 // ---> A bubble sort traversing the list alternately from front to back and back to front

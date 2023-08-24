@@ -31,7 +31,7 @@ private:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // -> Pancake sorting
 // ---> Pancake sorting is the mathematical problem of sorting a disordered stack of pancakes in order of size when a

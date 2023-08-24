@@ -297,4 +297,4 @@ ostream& operator<<(ostream& out, Expression const& expression) {
     return out;
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

@@ -27,18 +27,18 @@ public:
 
     RWayTrieUsingLinkedArrays() : m_root(nullptr) {}
 
-    bool isEmpty() const override { return getSize() == 0; }
+    [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 
-    bool doesContain(Key const& key) const override {
+    [[nodiscard]] bool doesContain(Key const& key) const override {
         Node const* const nodePointer(get(m_root, key, 0));
         return nodePointer != nullptr;
     }
 
-    int getSize() const override { return getSize(m_root); }
+    [[nodiscard]] int getSize() const override { return getSize(m_root); }
 
-    int getNumberOfNodes() const { return getNumberOfNodes(m_root); }
+    [[nodiscard]] int getNumberOfNodes() const { return getNumberOfNodes(m_root); }
 
-    Value get(Key const& key) const override {
+    [[nodiscard]] Value get(Key const& key) const override {
         Value result{};
         Node const* const nodePointer(get(m_root, key, 0));
         if (nodePointer != nullptr) {
@@ -50,7 +50,7 @@ public:
         return result;
     }
 
-    Key getLongestPrefixOf(Key const& keyToCheck) const override {
+    [[nodiscard]] Key getLongestPrefixOf(Key const& keyToCheck) const override {
         int longestPrefixLength(getLengthOfLongestPrefix(m_root.get(), keyToCheck, 0, 0));
         return keyToCheck.substr(0, longestPrefixLength);
     }
@@ -59,15 +59,15 @@ public:
 
     void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyAndReturnIfDeleted(m_root, key, 0); }
 
-    Strings getKeys() const override { return getAllKeysWithPrefix(std::string()); }
+    [[nodiscard]] Strings getKeys() const override { return getAllKeysWithPrefix(std::string()); }
 
-    Strings getAllKeysWithPrefix(Key const& prefix) const override {
+    [[nodiscard]] Strings getAllKeysWithPrefix(Key const& prefix) const override {
         Strings result;
         collectAllKeysAtNode(get(m_root, prefix, 0), std::string(prefix), result);
         return result;
     }
 
-    Strings getAllKeysThatMatch(Key const& patternToMatch) const override {
+    [[nodiscard]] Strings getAllKeysThatMatch(Key const& patternToMatch) const override {
         Strings result;
         collectKeysThatMatchAtNode(m_root.get(), std::string(), patternToMatch, result);
         return result;
@@ -81,7 +81,7 @@ private:
                    [](NodeUniquePointer const& nodePointer) { return !nodePointer; });
     }
 
-    int getSize(NodeUniquePointer const& currentNodePointer) const {
+    [[nodiscard]] int getSize(NodeUniquePointer const& currentNodePointer) const {
         int result(0);
         if (currentNodePointer) {
             ValueUniquePointer const& valueUniquePointer(currentNodePointer->valueUniquePointer);
@@ -95,7 +95,7 @@ private:
         return result;
     }
 
-    int getNumberOfNodes(NodeUniquePointer const& currentNodePointer) const {
+    [[nodiscard]] int getNumberOfNodes(NodeUniquePointer const& currentNodePointer) const {
         int result(0);
         if (currentNodePointer) {
             result++;
@@ -106,7 +106,7 @@ private:
         return result;
     }
 
-    Node const* get(NodeUniquePointer const& currentNodePointer, Key const& key, int const index) const {
+    [[nodiscard]] Node const* get(NodeUniquePointer const& currentNodePointer, Key const& key, int const index) const {
         Node const* result(nullptr);
         if (currentNodePointer) {
             if (index == static_cast<int>(key.length())) {
@@ -204,7 +204,7 @@ private:
     NodeUniquePointer m_root;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Tries
 // -> From the word re[trie]val, but pronounced "try"

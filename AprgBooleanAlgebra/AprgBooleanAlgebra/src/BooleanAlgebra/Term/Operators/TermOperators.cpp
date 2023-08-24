@@ -20,4 +20,4 @@ Term& operator|=(Term& term1, Term const& term2) {
     return term1;
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

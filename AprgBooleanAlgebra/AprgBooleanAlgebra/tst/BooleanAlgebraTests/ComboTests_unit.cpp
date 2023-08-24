@@ -30,4 +30,4 @@ TEST(ComboTest, Example2) {
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

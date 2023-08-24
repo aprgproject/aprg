@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 TEST(HyperbolaTest, EmptyHyperbola) {
     Hyperbola hyperbola;
@@ -123,7 +121,5 @@ TEST(HyperbolaTest, GetAsymptotesWorks) {
 TEST(HyperbolaTest, AreaTraversalIsCorrect) {
     // traversal
 }
-
-}  // namespace TwoDimensions
 
 }  // namespace alba

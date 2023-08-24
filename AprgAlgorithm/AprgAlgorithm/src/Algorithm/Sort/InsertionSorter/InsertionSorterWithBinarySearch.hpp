@@ -32,7 +32,7 @@ private:
         }
     }
 
-    int getIndexWithGreaterValueUsingBinarySearch(
+    [[nodiscard]] int getIndexWithGreaterValueUsingBinarySearch(
         Values const& valuesToSort, int const lowIndex, int const highIndex, Value const& value) const {
         int result(INVALID_INDEX);
         int iLow(lowIndex), iHigh(highIndex);
@@ -50,7 +50,7 @@ private:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // We can use binary search to reduce the number of comparisons in normal insertion sort.
 // Binary Insertion Sort uses binary search to find the proper location to insert the selected item at each iteration.

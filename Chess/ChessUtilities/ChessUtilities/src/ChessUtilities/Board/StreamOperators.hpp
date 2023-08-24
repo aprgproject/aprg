@@ -22,4 +22,4 @@ std::istream& operator>>(std::istream& in, BoardValue& boardValue);
 
 void printHexValuesInBoard(std::ostream& out, Board const& board);
 
-}  // namespace alba
+}  // namespace alba::chess

@@ -10,7 +10,7 @@ using namespace std;
 namespace alba {
 
 AlbaGrepFile::AlbaGrepFile(string const& lineCondition)
-    : m_isOutputFileWritten(false), m_lineGrepEvaluator(lineCondition), m_updateFunctionAfterOneIterationOptional() {}
+    : m_isOutputFileWritten(false), m_lineGrepEvaluator(lineCondition) {}
 
 AlbaGrepFile::AlbaGrepFile(string const& lineCondition, UpdateFunctionWithPercentage const& function)
     : m_isOutputFileWritten(false),

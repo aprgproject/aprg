@@ -33,4 +33,4 @@ TEST(UtilitiesTest, ConvertPointToBitmapXYWorks) {
     EXPECT_EQ(BitmapXY(2, 2), bitmapXY3);
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

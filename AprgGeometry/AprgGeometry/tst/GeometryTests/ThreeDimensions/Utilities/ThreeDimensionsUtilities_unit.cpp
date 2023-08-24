@@ -7,9 +7,7 @@
 using namespace alba::ThreeDimensions::threeDimensionsUtilities;
 using namespace std;
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 TEST(ThreeDimensionsUtilitiesTest, PointCanBeCheckedIfItsOnLineWithSlope) {
     Point pointOnLine(-2, 2, -2);
@@ -340,7 +338,5 @@ TEST(ThreeDimensionsUtilitiesTest, GetPerpendicularPlaneWithALineAndAPointWorks)
     EXPECT_EQ(1, expectedPlane.getCCoefficient());
     EXPECT_EQ(-1, expectedPlane.getDCoefficient());
 }
-
-}  // namespace ThreeDimensions
 
 }  // namespace alba

@@ -17,11 +17,11 @@ public:
 
     WeightedQuickUnionWithArray() : m_relativeRoots(), m_sizesOfRoots() { initialize(); }
 
-    bool isConnected(Object const& object1, Object const& object2) const override {
+    [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
         return getRoot(object1) == getRoot(object2);
     }
 
-    Object getRoot(
+    [[nodiscard]] Object getRoot(
         Object const& object) const override  // worst case runs in logarithmic time (base 2 log) -> acceptable
     {
         // Continuously find relative root until its equal to the previous root
@@ -74,9 +74,9 @@ public:
         }
     }
 
-    RootArray const& getRelativeRootArray() const { return m_relativeRoots; }
+    [[nodiscard]] RootArray const& getRelativeRootArray() const { return m_relativeRoots; }
 
-    SizeArray const& getSizesOfRootsArray() const { return m_sizesOfRoots; }
+    [[nodiscard]] SizeArray const& getSizesOfRootsArray() const { return m_sizesOfRoots; }
 
 private:
     void initialize() {

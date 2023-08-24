@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 TEST(RectangleTest, GetPointsWorks) {
     Rectangle retangle(Point(-1, 1), Point(1, -1));
@@ -22,7 +20,5 @@ TEST(RectangleTest, GetPointsWorks) {
     EXPECT_EQ(Point(-1, -1), points[6]);
     EXPECT_EQ(Point(-1, 0), points[7]);
 }
-
-}  // namespace TwoDimensions
 
 }  // namespace alba

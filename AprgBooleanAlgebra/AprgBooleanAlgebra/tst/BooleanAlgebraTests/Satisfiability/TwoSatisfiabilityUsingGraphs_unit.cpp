@@ -35,4 +35,4 @@ TEST(TwoSatisfiabilityUsingGraphsTest, ExampleWithNoSolution) {
     EXPECT_TRUE(twoSat.getSolution().isEmpty());
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

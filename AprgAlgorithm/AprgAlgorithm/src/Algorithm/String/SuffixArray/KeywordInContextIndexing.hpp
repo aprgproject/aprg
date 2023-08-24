@@ -8,7 +8,7 @@ namespace alba::algorithm {
 template <typename Index>
 class KeywordInContextIndexing {
 public:
-    KeywordInContextIndexing(std::string const& searchSpace) : m_searchSpace(searchSpace), m_suffixArray(searchSpace) {}
+    explicit KeywordInContextIndexing(std::string const& searchSpace) : m_searchSpace(searchSpace), m_suffixArray(searchSpace) {}
 
     stringHelper::strings getKeywordInContextIndexing(std::string const& stringToCheck, Index const lengthOfContext) {
         stringHelper::strings result;
@@ -32,6 +32,6 @@ private:
     SuffixArray<Index> m_suffixArray;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Applications: Linguistics, databases, web search, word processing

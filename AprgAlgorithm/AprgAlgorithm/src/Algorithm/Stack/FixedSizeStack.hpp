@@ -14,9 +14,9 @@ public:
 
     FixedSizeStack()  {}
 
-    bool isEmpty() const override { return m_size == 0; }
+    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
 
-    int getSize() const override { return m_size; }
+    [[nodiscard]] int getSize() const override { return m_size; }
 
     void push(Object const& object) override  // runs in constant time and no allocation (faster than linked list)
     {
@@ -30,11 +30,11 @@ public:
         return m_objects[--m_size];
     }
 
-    Objects const& getObjects() const { return m_objects; }
+    [[nodiscard]] Objects const& getObjects() const { return m_objects; }
 
 private:
     int m_size{0};
     Objects m_objects;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

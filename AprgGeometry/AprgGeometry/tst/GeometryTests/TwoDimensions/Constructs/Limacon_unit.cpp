@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 TEST(LimaconTest, ConstructionWorks) { Limacon(1, 1, LimaconTrigonometricFunctionType::Sine); }
 
@@ -91,7 +89,5 @@ TEST(LimaconTest, CalculateThetaFromRadiusWorks) {
     EXPECT_DOUBLE_EQ(57.421029607195877, limacon.calculateThetaFromRadius(17).getDegrees());
     EXPECT_DOUBLE_EQ(0, limacon.calculateThetaFromRadius(23).getDegrees());
 }
-
-}  // namespace TwoDimensions
 
 }  // namespace alba

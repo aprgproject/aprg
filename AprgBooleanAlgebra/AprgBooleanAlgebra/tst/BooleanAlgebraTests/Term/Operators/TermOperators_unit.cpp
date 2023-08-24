@@ -68,4 +68,4 @@ TEST(TermOperatorsTest, BinaryOrAssignmentOperatorWorks) {
     EXPECT_EQ(Term(true), term4);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

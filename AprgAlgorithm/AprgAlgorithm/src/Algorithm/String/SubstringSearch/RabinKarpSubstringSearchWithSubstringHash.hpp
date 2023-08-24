@@ -14,12 +14,12 @@ public:
     static constexpr RadixType RADIX = 256;
     static constexpr HashValue A_LARGE_PRIME = 1229952067;  // hard coded for now (think of an implementation later)
 
-    RabinKarpSubstringSearchWithSubstringHash(std::string const& query)
+    explicit RabinKarpSubstringSearchWithSubstringHash(std::string const& query)
         : m_query(query),
           m_queryLength(query.length()),
           m_queryHash(HornerHashFunctionForWholeString<HashValue>(RADIX, A_LARGE_PRIME).getHashCode(query)) {}
 
-    Index search(std::string const& searchSpace) const {
+    [[nodiscard]] Index search(std::string const& searchSpace) const {
         auto result(static_cast<Index>(std::string::npos));
         if (m_queryLength > 0 && m_queryLength <= static_cast<Index>(searchSpace.length())) {
             HornerHashFunctionForSubstrings<HashValue> hashFunction(RADIX, A_LARGE_PRIME, searchSpace);
@@ -39,4 +39,4 @@ private:
     HashValue m_queryHash;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -6,19 +6,19 @@ namespace alba::algorithm {
 template <int numberOfLoops>
 class BruteForceSubstringSearch {
 public:
-    BruteForceSubstringSearch(std::string const& query) : m_query(query) {}
+    explicit BruteForceSubstringSearch(std::string const& query) : m_query(query) {}
 
-    int search(std::string const& searchSpace) const { return searchWithLoops(searchSpace, m_query); }
+    [[nodiscard]] int search(std::string const& searchSpace) const { return searchWithLoops(searchSpace, m_query); }
 
 private:
-    int searchWithLoops(std::string const&, std::string const&) const {
+    [[nodiscard]] int searchWithLoops(std::string const&, std::string const&) const {
         static_assert(
             sizeof(BruteForceSubstringSearch) != sizeof(BruteForceSubstringSearch),
             "The number of loops should be one or two. Other numbers have no implementation");
         return 0;
     }
 
-    int searchUsingOneLoop(std::string const& searchSpace, std::string const& query) const {
+    [[nodiscard]] int searchUsingOneLoop(std::string const& searchSpace, std::string const& query) const {
         int result(static_cast<int>(std::string::npos));
         int searchSpaceLength(searchSpace.length());
         int queryLength(query.length());
@@ -38,7 +38,7 @@ private:
         return result;
     }
 
-    int searchUsingTwoLoops(std::string const& searchSpace, std::string const& query) const {
+    [[nodiscard]] int searchUsingTwoLoops(std::string const& searchSpace, std::string const& query) const {
         int result(static_cast<int>(std::string::npos));
         int searchSpaceLength(searchSpace.length());
         int queryLength(query.length());
@@ -71,7 +71,7 @@ int BruteForceSubstringSearch<2>::searchWithLoops(std::string const& searchSpace
     return searchUsingTwoLoops(searchSpace, query);
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Brute-force substring search: worst case
 // -> Brute force algorithm can be slow if test and pattern are repetitive.

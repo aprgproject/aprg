@@ -125,7 +125,7 @@ private:
     IsDigitFunction m_isDigitInvalidFunction;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // MSD string (radix) sort.
 // -> Partition the array into R pieces according to first character (use key-index counting).

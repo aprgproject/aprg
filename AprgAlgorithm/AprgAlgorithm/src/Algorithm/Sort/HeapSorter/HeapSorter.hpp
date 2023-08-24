@@ -49,12 +49,12 @@ private:
         }
     }
 
-    int getLastParentAtTheBottom(MaxBinaryHeapAdapter const& maxBinaryHeapAdapter) const {
+    [[nodiscard]] int getLastParentAtTheBottom(MaxBinaryHeapAdapter const& maxBinaryHeapAdapter) const {
         return maxBinaryHeapAdapter.getParentIndex(maxBinaryHeapAdapter.getBottomTreeIndex());
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Proposition: Heap construction uses <= 2N compares and exchanges
 // Proposition: Heap sort uses <= 2N*log2(N) lo compares and exchanges

@@ -9,7 +9,7 @@ class QuickSelector {
 public:
     using Value = typename Values::value_type;
 
-    QuickSelector(PivotType const pivotType) : m_pivotType(pivotType) {}
+    explicit QuickSelector(PivotType const pivotType) : m_pivotType(pivotType) {}
 
     Value getNthSelect(Values& valuesToSelect, int const selectionIndex) const {
         doNthElement(valuesToSelect, selectionIndex);
@@ -37,7 +37,7 @@ private:
     PivotType m_pivotType;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Proposition: Quick select takes linear time on average.
 // Proof sketch: Intuitively, each partitioning step splits array approximately in half.

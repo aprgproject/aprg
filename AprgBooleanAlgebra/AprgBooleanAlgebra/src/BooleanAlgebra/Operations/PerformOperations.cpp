@@ -90,4 +90,4 @@ Term performOr(Term const& term1, Term const& term2) {
     TERM_BINARY_OPERATION_MACRO(|)
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

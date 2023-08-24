@@ -30,4 +30,4 @@ private:
 
 using Spheres = std::vector<Sphere>;
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

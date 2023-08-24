@@ -122,4 +122,4 @@ double AnimizeColor::getNewValue(ColorDataMap const& colorDataMap, double const 
     return newValue;
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

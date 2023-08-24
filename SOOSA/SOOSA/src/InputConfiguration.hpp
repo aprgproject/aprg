@@ -4,9 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace soosa {
+namespace alba::soosa {
 
 struct FormDetails {
     using ColumnToNumberOfQuestionsMap = std::map<int, int>;
@@ -20,18 +18,18 @@ class InputConfiguration {
 public:
     InputConfiguration();
 
-    int getNumberOfColumns() const;
-    int getNumberOfQuestions() const;
-    int getNumberOfQuestionsAtColumn(int const column) const;
-    int getQuestionIndexInColumn(int const columnNumber, int const questionOffsetInColumn) const;
-    int getMinimumSatisfactoryScore() const;
+    [[nodiscard]] int getNumberOfColumns() const;
+    [[nodiscard]] int getNumberOfQuestions() const;
+    [[nodiscard]] int getNumberOfQuestionsAtColumn(int const column) const;
+    [[nodiscard]] int getQuestionIndexInColumn(int const columnNumber, int const questionOffsetInColumn) const;
+    [[nodiscard]] int getMinimumSatisfactoryScore() const;
 
-    std::string getQuestionAt(int const questionIndex) const;
-    std::string getFormDetailsTitle() const;
-    std::string getPath() const;
-    std::string getArea() const;
-    std::string getPeriod() const;
-    double getDischarge() const;
+    [[nodiscard]] std::string getQuestionAt(int const questionIndex) const;
+    [[nodiscard]] std::string getFormDetailsTitle() const;
+    [[nodiscard]] std::string getPath() const;
+    [[nodiscard]] std::string getArea() const;
+    [[nodiscard]] std::string getPeriod() const;
+    [[nodiscard]] double getDischarge() const;
     void setPath(std::string const& path);
     void setMainParameters(
         std::string const& area, std::string const& period, double const discharge, int const minimumSatisfactoryScore);
@@ -42,11 +40,9 @@ private:
     std::string m_path;
     std::string m_area;
     std::string m_period;
-    double m_discharge;
-    int m_minimumSatisfactoryScore;
+    double m_discharge{};
+    int m_minimumSatisfactoryScore{};
     FormDetails m_formDetails;
 };
 
-}  // namespace soosa
-
-}  // namespace alba
+}  // namespace alba::soosa

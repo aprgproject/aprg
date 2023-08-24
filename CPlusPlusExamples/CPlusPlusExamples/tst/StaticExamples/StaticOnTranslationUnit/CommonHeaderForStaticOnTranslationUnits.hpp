@@ -1,8 +1,6 @@
 #pragma once
 
-namespace alba {
-
-namespace StaticOnTranslationUnits {
+namespace alba::StaticOnTranslationUnits {
 
 constexpr int constInteger = 100;  // static (internal linkage) by default
 static int staticInteger = 200;    // explicitly static (internal linkage)
@@ -32,9 +30,7 @@ void restoreInitialValuesForTranslationUnit2();
 TranslationUnitValues getValuesInTranslationUnit1();
 TranslationUnitValues getValuesInTranslationUnit2();
 
-}  // namespace StaticOnTranslationUnits
-
-}  // namespace alba
+}  // namespace alba::StaticOnTranslationUnits
 
 // Notes:
 

@@ -485,4 +485,4 @@ TEST(TermTest, OutputStreamOperatorWorks) {
     EXPECT_EQ("{EmptyTerm},[false],x,&,(x)", ss.str());
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

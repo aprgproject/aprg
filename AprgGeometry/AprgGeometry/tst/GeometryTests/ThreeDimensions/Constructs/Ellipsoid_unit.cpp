@@ -7,9 +7,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 TEST(EllipsoidTest, EmptyEllipsoid) {
     Ellipsoid ellipsoid;
@@ -49,7 +47,5 @@ TEST(EllipsoidTest, IsInsideWorks) {
 
     EXPECT_TRUE(ellipsoid.isInside(Point(0, 0, 0)));
 }
-
-}  // namespace ThreeDimensions
 
 }  // namespace alba

@@ -7,9 +7,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 TEST(EllipticConeTest, EmptyEllipticCone) {
     EllipticCone ellipticCone;
@@ -43,7 +41,5 @@ TEST(EllipticConeTest, EllipticConeNotAtOriginWithRadius) {
     EXPECT_DOUBLE_EQ(2, ellipticCone.calculateYFromXAndZ(1, 3, 1));
     EXPECT_DOUBLE_EQ(3, ellipticCone.calculateZFromXAndY(1, 2, 1));
 }
-
-}  // namespace ThreeDimensions
 
 }  // namespace alba

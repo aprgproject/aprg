@@ -113,7 +113,7 @@ void SimplificationOfExpression::processAndSaveTermsForOrOperation(
     expression.setTerm(combinedTerm);
 }
 
-}  // namespace booleanAlgebra
+}  // namespace booleanAlgebra::Simplification
 
 template <>
 booleanAlgebra::Simplification::SimplificationOfExpression::ConfigurationDetails getDefaultConfigurationDetails<

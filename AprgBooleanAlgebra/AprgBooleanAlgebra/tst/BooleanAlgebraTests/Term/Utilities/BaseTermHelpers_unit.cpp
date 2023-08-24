@@ -105,4 +105,4 @@ TEST(BaseTermHelpersTest, GetBaseTermReferenceFromUniquePointerWorks) {
     EXPECT_EQ(Term(true), termToVerify);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

@@ -24,7 +24,7 @@ public:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Proposition: Selection sort uses (N-1)+(N-2)+....+1+0 = (N^2)/2 compares and N exchanges
 // Proof: Trace the algorithm, double loop only happens for compare (second loop only covers not yet processed items)

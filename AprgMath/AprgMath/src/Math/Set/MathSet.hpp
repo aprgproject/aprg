@@ -217,4 +217,4 @@ std::ostream& operator<<(std::ostream& out, MathSet<ElementType> const& set) {
     return out;
 }
 
-}  // namespace alba
+}  // namespace alba::math

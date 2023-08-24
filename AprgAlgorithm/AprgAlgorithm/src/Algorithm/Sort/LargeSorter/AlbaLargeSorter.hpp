@@ -21,7 +21,7 @@ class AlbaLargeSorter {
     using BlockCacheContainer = AlbaLargeSorterBlockCacheContainer<BlockIterator>;
 
 public:
-    AlbaLargeSorter(AlbaLargeSorterConfiguration const& configuration)
+    explicit AlbaLargeSorter(AlbaLargeSorterConfiguration const& configuration)
         : 
           m_configuration(configuration),
           m_memoryCache(),
@@ -30,8 +30,8 @@ public:
         createTempDirectories();
     }
     ~AlbaLargeSorter() { deleteTempFilesAndDirectories(); }
-    bool isEmpty() const { return 0 == m_size; }
-    AlbaLargeSorterConfiguration getConfiguration() const { return m_configuration; }
+    [[nodiscard]] bool isEmpty() const { return 0 == m_size; }
+    [[nodiscard]] AlbaLargeSorterConfiguration getConfiguration() const { return m_configuration; }
     void add(ObjectToSort const& objectToSort) {
         auto blockIterator(m_blocks.getNearestBlockIterator(objectToSort));
         m_blocks.addObjectToBlock(blockIterator, objectToSort);

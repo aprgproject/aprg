@@ -42,4 +42,4 @@ private:
 
 using Limacons = std::vector<Limacon>;
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

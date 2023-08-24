@@ -45,7 +45,7 @@ CountTotalSetBitsInAllNumbersFrom1ToN::getTotalSetBitsUsingPreComputedBitCounts(
         // -> For 11: 1 + 2 + (compute for 1)  = 3 + (compute for 1)
         Value powerOfTwo = Value(1) << bitPositionPlusOne;
         Value seriesOfOnes = powerOfTwo - 1;
-        if (remainingValue & powerOfTwo) {
+        if ((remainingValue & powerOfTwo) != 0u) {
             result += countsBeforeThisBit[bitPositionPlusOne - 1] + remainingValue - seriesOfOnes;
             remainingValue ^= powerOfTwo;
         }
@@ -62,7 +62,7 @@ CountTotalSetBitsInAllNumbersFrom1ToN::Value CountTotalSetBitsInAllNumbersFrom1T
     for (Value bitPosition = 1; bitPosition < MAX_NUMBER_OF_BITS; ++bitPosition) {
         Value powerOfTwo = Value(1) << bitPosition;
         Value seriesOfOnes = powerOfTwo - 1;
-        if (endValue & powerOfTwo) {
+        if ((endValue & powerOfTwo) != 0u) {
             Value countForThisBit = (endValue & seriesOfOnes) + 1;
             result += countBeforeThisBit + countForThisBit;
         }

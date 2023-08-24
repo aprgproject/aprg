@@ -41,4 +41,4 @@ TEST(DerangementsTest, GetDerangementsProbabilityWorks) {
     // This approaches 1/e. Please check approximation formula for more information.
 }
 
-}  // namespace alba
+}  // namespace alba::math

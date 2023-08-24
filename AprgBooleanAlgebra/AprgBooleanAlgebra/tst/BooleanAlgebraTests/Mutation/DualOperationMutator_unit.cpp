@@ -56,4 +56,4 @@ TEST(DualOperationMutatorTest, MutateExpressionWorks) {
     EXPECT_EQ(expressionToExpect, expression);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

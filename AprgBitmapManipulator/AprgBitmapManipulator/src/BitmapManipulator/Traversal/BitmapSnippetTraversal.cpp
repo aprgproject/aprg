@@ -95,4 +95,4 @@ void BitmapSnippetTraversal::checkPointBeforeDoingTraverseOperation(
     }
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

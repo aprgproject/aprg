@@ -111,4 +111,4 @@ TEST(CommonFunctionLibraryTest, GetContradictionWorks) {
     EXPECT_EQ(Term(false), contradictionToTest(Term("x")));
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

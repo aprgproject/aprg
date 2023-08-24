@@ -97,4 +97,4 @@ SetOfUnsignedIntegers GrundyGame::getNextGrundyNumbersWithNumberOfSticks(Unsigne
     return result;
 }
 
-}  // namespace alba
+}  // namespace alba::math

@@ -89,4 +89,4 @@ TEST(MarkovChainsTest, GetNextProbabilityDistributionWorksWithSteps) {
         markovChain.getNextProbabilityDistribution({1, 0, 0, 0, 0}, 6));
 }
 
-}  // namespace alba
+}  // namespace alba::math

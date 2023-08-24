@@ -27,4 +27,4 @@ OutwardCircleTraversal::RadiusToCoordinates const& OutwardCircleTraversal::getRa
     return m_radiusToCoordinates;
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

@@ -54,4 +54,4 @@ void NewSamplesBuilder::saveToNewSamples(
     }
 }
 
-}  // namespace alba
+}  // namespace alba::AprgAudio

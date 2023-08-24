@@ -13,12 +13,12 @@ public:
     using Dfa = AlbaDfaUsingMatrix<Index, RadixType>;
     static constexpr RadixType RADIX = 256;
 
-    KnuthMorrisPrattSubstringSearch(std::string const& query) : m_query(query), m_nextIndexDfa(query.length(), RADIX) {
+    explicit KnuthMorrisPrattSubstringSearch(std::string const& query) : m_query(query), m_nextIndexDfa(query.length(), RADIX) {
         // In m_nextIndexDfa, x coordinate is character and y coordinate is the next state (which is index)
         initialize();
     }
 
-    Index search(std::string const& searchSpace) const {
+    [[nodiscard]] Index search(std::string const& searchSpace) const {
         auto result(static_cast<Index>(std::string::npos));
         Index searchSpaceLength(searchSpace.length());
         Index queryLength(m_query.length());
@@ -67,7 +67,7 @@ private:
     Dfa m_nextIndexDfa;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Sedgewick: This is one of the coolest algorithm.
 

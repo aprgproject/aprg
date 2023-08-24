@@ -55,4 +55,4 @@ TEST(GrundyGameTest, Example1Works) {
     EXPECT_TRUE(game.hasNoMoves());
 }
 
-}  // namespace alba
+}  // namespace alba::math

@@ -35,7 +35,7 @@ private:
     GetDigitAtFunction m_getDigitAtFunction;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // The lower bound for Comparison based sorting algorithm (Merge Sort, Heap Sort, Quick-Sort .. etc) is Ω(nLogn), i.e.,
 // they cannot do better than nLogn. Counting sort is a linear time sorting algorithm that sort in O(n+k) time when

@@ -370,4 +370,4 @@ TEST(OutwardSnakeLikeTraversalTest, TraversalAtOutOfRangeIsCorrected) {
     EXPECT_TRUE(traversal.isTraversalFinished());
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

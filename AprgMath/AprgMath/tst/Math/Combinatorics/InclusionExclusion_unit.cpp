@@ -20,4 +20,4 @@ TEST(InclusionExclusionTest, GetIntersectionCountOfThreeSetsWorks) {
     EXPECT_EQ(3U, getIntersectionCountOfThreeSets(10U, 11U, 12U, 5U, 6U, 7U, 18U));
 }
 
-}  // namespace alba
+}  // namespace alba::math

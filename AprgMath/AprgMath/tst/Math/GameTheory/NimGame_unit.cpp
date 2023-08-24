@@ -52,4 +52,4 @@ TEST(NimGameTest, GetOptimalNextStateWorks) {
     EXPECT_EQ((NimState{0U, 0U, 0U}), NimGame::getOptimalNextState({0U, 0U, 0U}));
 }
 
-}  // namespace alba
+}  // namespace alba::math

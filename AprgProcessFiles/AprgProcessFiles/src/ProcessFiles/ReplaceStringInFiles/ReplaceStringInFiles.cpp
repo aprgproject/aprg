@@ -169,7 +169,7 @@ string ReplaceStringInFiles::getNewPrintStreamBasedFromOldPrintFunction(string c
 
 string ReplaceStringInFiles::constructCPlusPlusPrint(
     string const& newPrintStream, string const& endPrintStream, string const& printString,
-    strings const& printParameters) const {
+    strings const& printParameters) {
     string result(newPrintStream);
     bool isPercentEncountered(false);
     bool isOnStringLiteral(false);

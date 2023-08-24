@@ -103,4 +103,4 @@ TEST(VariableTermTest, OutputStreamOperatorWorks) {
     EXPECT_EQ(",time", ss.str());
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

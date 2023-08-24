@@ -52,4 +52,4 @@ TEST(EnumHelpersTest, GetEnumShortStringForOperatorLevelWorks) {
     EXPECT_EQ("{|}", getEnumShortString(OperatorLevel::Or));
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

@@ -11,7 +11,7 @@ NextHigherNumberWithSameNumberOfSetBits::NextHigherNumberWithSameNumberOfSetBits
 NextHigherNumberWithSameNumberOfSetBits::Value NextHigherNumberWithSameNumberOfSetBits::getNextHigherNumber(
     Value const value) {
     Value result{};
-    if (value) {
+    if (value != 0u) {
         Value lastBitOne = AlbaBitValueUtilities<Value>::getLastBitOneOnly(value);
         Value nextHigherByOneBit = value + lastBitOne;
         Value remainingBitsAtTheRight = ((value ^ nextHigherByOneBit) / lastBitOne) >> 2;

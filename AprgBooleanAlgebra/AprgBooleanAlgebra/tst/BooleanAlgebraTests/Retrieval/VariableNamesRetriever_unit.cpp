@@ -52,4 +52,4 @@ TEST(VariableNamesRetrieverTest, RetrieveFromExpressionWorks) {
     EXPECT_EQ("b", *(it++));
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

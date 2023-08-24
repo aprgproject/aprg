@@ -9,9 +9,7 @@
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace std;
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 TEST(TwoDimensionsUtilitiesTest, IsOriginWorks) {
     EXPECT_FALSE(isOrigin(Point(-3, -3)));
@@ -600,7 +598,5 @@ TEST(TwoDimensionsUtilitiesTest, TraverseCircleAreaBetweenTwoRadiusWorks) {
     EXPECT_EQ(Point(4, 2), pointsInAreaTraversal[6]);
     EXPECT_EQ(Point(2, 2), pointsInAreaTraversal[7]);
 }
-
-}  // namespace TwoDimensions
 
 }  // namespace alba

@@ -14,11 +14,11 @@ public:
 
     QuickUnion() : m_relativeRoots() { initialize(); }
 
-    bool isConnected(Object const& object1, Object const& object2) const override {
+    [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
         return getRoot(object1) == getRoot(object2);
     }
 
-    Object getRoot(Object const& object) const override {
+    [[nodiscard]] Object getRoot(Object const& object) const override {
         // worst case (tall tree) runs in linear time (too expensive it should take constant/logarithmic time)
         // this is a lazy approach (every getRoot() -> check relative roots until main root is found)
         // Continuously find relative root until main root is found (it needs to be equal to the previous root)
@@ -41,7 +41,7 @@ public:
         }
     }
 
-    RootArray const& getRelativeRootArray() const { return m_relativeRoots; }
+    [[nodiscard]] RootArray const& getRelativeRootArray() const { return m_relativeRoots; }
 
 private:
     void initialize() {
@@ -52,4 +52,4 @@ private:
     RootArray m_relativeRoots;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

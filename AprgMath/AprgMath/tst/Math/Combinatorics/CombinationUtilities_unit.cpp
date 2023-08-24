@@ -17,4 +17,4 @@ TEST(CombinationUtilitiesTest, IsTheSumOfAllNumberOfCombinationsEqualTo2ToTheNWo
     EXPECT_TRUE(isTheSumOfAllNumberOfCombinationsEqualTo2ToTheN(10U));
 }
 
-}  // namespace alba
+}  // namespace alba::math

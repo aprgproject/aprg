@@ -72,4 +72,4 @@ TEST(AccumulateOperationsTest, AccumulateTermsWithOrOperationWorksWithEmptyTermA
     EXPECT_EQ(Term(false), termToTest);
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

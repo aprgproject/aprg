@@ -35,7 +35,7 @@ public:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // -> Odd–even sort
 // ---> In computing, an odd–even sort or odd–even transposition sort (also known as brick sort[1][self-published

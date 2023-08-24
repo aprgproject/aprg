@@ -71,4 +71,4 @@ TEST(SatisfiabilityUtilitiesTest, GetSatisfiabilityTermsWorksWithExpression_Resu
     EXPECT_TRUE(satTermsToVerify.empty());
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

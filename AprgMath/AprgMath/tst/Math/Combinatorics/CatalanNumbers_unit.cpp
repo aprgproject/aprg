@@ -42,4 +42,4 @@ TEST(CatalanNumbersTest, GetNumberOfRootedTreesWorks) {
     EXPECT_EQ(129644790U, getNumberOfRootedTrees(18U));
 }
 
-}  // namespace alba
+}  // namespace alba::math

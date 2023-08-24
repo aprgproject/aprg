@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 TEST(EllipseTest, EmptyEllipse) {
     Ellipse ellipse;
@@ -149,7 +147,5 @@ TEST(EllipseTest, GetMinorAxisWorks) {
 TEST(EllipseTest, AreaTraversalIsCorrect) {
     // traversal
 }
-
-}  // namespace TwoDimensions
 
 }  // namespace alba

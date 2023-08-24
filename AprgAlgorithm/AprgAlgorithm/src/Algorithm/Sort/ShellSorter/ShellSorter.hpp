@@ -37,7 +37,7 @@ private:
         }
     }
 
-    int getInitialSkipValue(int const size) const {
+    [[nodiscard]] int getInitialSkipValue(int const size) const {
         // Knuth approach. This returns: 1, 4, 13, 40, 121, 364, 1093
         // For more info about gap: https://en.wikipedia.org/wiki/Shellsort#Gap_sequences
         int result(1);
@@ -48,7 +48,7 @@ private:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // The idea behind shell sort is insertion sort is inefficient because elements only move one position at a time.
 // So in shell sort we can move elements several positions at a time.

@@ -18,4 +18,4 @@ void PenPoints::removePenPoint(BitmapXY const& penPoint) { m_penPoints.erase(pen
 
 void PenPoints::clear() { m_penPoints.clear(); }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

@@ -38,4 +38,4 @@ void ChineseRemainderTheorem::solve(UnsignedIntegers const& numbers, UnsignedInt
     }
 }
 
-}  // namespace alba
+}  // namespace alba::math

@@ -37,4 +37,4 @@ UnsignedIntegerPair getNextNumberOfDerangementsUsingLinearRecurrence(
     return UnsignedIntegerPair{output.getEntry(0U, 0U), output.getEntry(0U, 1U)};
 }
 
-}  // namespace alba
+}  // namespace alba::math

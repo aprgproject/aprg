@@ -155,4 +155,4 @@ TEST(BitmapFiltersTest, DISABLED_CclTestTwoPass) {
     bitmapFilters.saveSnippetIntoFileInTheSameDirectory(outputSnippet, "Ccl_TwoPass.bmp");
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

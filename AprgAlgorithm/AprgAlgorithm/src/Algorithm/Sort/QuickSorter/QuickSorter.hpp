@@ -8,7 +8,7 @@ namespace alba::algorithm {
 template <typename Values>
 class QuickSorter : public BaseSorter<Values> {
 public:
-    QuickSorter(PivotType const pivotType) : m_pivotType(pivotType) {}
+    explicit QuickSorter(PivotType const pivotType) : m_pivotType(pivotType) {}
 
     void sort(Values& valuesToSort) const override {
         if (!valuesToSort.empty()) {
@@ -41,7 +41,7 @@ private:
     PivotType m_pivotType;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Quicksort is an in-place sorting algorithm
 // Quicksort does partitioning in place so there is no extra cost of memory for sorting

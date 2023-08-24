@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 TEST(TriangleTest, TriangleCanBeCreated) { Triangle triangle(Point(1, 1), Point(2, 3), Point(0, 17)); }
 
@@ -97,7 +95,5 @@ TEST(TriangleTest, GetPointsWorks) {
     EXPECT_EQ(Point(0, 2), points[10]);
     EXPECT_EQ(Point(0, 1), points[11]);
 }
-
-}  // namespace TwoDimensions
 
 }  // namespace alba

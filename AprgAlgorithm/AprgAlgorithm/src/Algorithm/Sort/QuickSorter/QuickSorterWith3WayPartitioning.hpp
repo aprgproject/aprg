@@ -10,7 +10,7 @@ namespace alba::algorithm {
 template <typename Values>
 class QuickSorterWith3WayPartitioning : public BaseSorter<Values> {
 public:
-    QuickSorterWith3WayPartitioning(PivotType const pivotType) : m_pivotType(pivotType) {}
+    explicit QuickSorterWith3WayPartitioning(PivotType const pivotType) : m_pivotType(pivotType) {}
 
     void sort(Values& valuesToSort) const override {
         if (!valuesToSort.empty()) {
@@ -53,7 +53,7 @@ private:
     PivotType m_pivotType;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // The motivation of this algorithm is to handle items with duplicate keys more efficiently. (compared to original quick
 // sort algorithm) Put the equal items in place and focus(sort/partition) on items that are not equal. This version of
