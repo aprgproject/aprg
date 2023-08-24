@@ -76,7 +76,7 @@ jobs:
           "$checkShellScriptsPath" | tee "$currentDirectory/shellLintIssues.txt" || true
           
           
-      - name: Display linting error if needed
+      - name: Process issues from linting
         shell: bash
         run: |
           lintingExitCode=0
