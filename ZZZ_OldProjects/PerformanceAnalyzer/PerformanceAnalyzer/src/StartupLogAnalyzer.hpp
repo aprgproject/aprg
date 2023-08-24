@@ -22,7 +22,7 @@ public:
 
 private:
     void analyzeStartupDelays(std::string const& lineInLogs, wcdmaToolsBackend::BtsLogTime& previousNotableTime);
-    static [[nodiscard]] double getTotalSeconds(
+    [[nodiscard]] static double getTotalSeconds(
         wcdmaToolsBackend::BtsLogTime const& beforeTime, wcdmaToolsBackend::BtsLogTime const& afterTime) ;
     static double getTotalSeconds(wcdmaToolsBackend::BtsLogTime const& btsLogTime);
     AlbaLocalPathHandler m_btsLogPathHandler;
