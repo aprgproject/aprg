@@ -22,7 +22,17 @@ bool StabilityCheckObject::operator<(StabilityCheckObject const& object) const {
     return m_visiblePart < object.m_visiblePart;
 }
 
-StabilityCheckObject::operator int() const { return m_visiblePart; }
+bool StabilityCheckObject::operator>(StabilityCheckObject const& object) const {
+    return m_visiblePart > object.m_visiblePart;
+}
+
+bool StabilityCheckObject::operator<=(StabilityCheckObject const& object) const {
+    return m_visiblePart <= object.m_visiblePart;
+}
+
+bool StabilityCheckObject::operator>=(StabilityCheckObject const& object) const {
+    return m_visiblePart >= object.m_visiblePart;
+}
 
 StabilityCheckObject StabilityCheckObject::operator+(StabilityCheckObject const& second) const {
     return StabilityCheckObject(static_cast<char>(m_visiblePart + second.m_visiblePart), 0);

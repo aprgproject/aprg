@@ -24,7 +24,7 @@ public:
 
         // Put array elements in different buckets
         for (Value const& value : valuesToSort) {
-            int bucketIndex = (value - m_minValue) * NUMBER_OF_BUCKETS / deltaValue;
+            int bucketIndex = static_cast<int>(value - m_minValue) * NUMBER_OF_BUCKETS / deltaValue;
             if (bucketIndex < NUMBER_OF_BUCKETS) {
                 buckets[bucketIndex].emplace_back(value);
             }
@@ -45,7 +45,7 @@ public:
     Value m_maxValue;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Bucket sort is mainly useful when input is uniformly distributed over a range.
 // For example, consider the following problem.

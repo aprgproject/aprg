@@ -26,11 +26,11 @@ public:
             // Create an array of vectors.
             // Size of array range.
             // Each vector represents a hole that is going to contain matching elements.
-            Holes holes(range);
+            Holes holes(static_cast<int>(range));
 
             // Traverse through input array and put every element in its respective hole
             for (Value const& value : valuesToSort) {
-                holes[value - minimumValue].emplace_back(value);
+                holes[static_cast<int>(value - minimumValue)].emplace_back(value);
             }
 
             // Traverse through all holes one by one.
@@ -43,7 +43,7 @@ public:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Pigeonhole sorting is a sorting algorithm that is suitable
 // for sorting lists of elements where the number of elements and the number of possible key values are approximately

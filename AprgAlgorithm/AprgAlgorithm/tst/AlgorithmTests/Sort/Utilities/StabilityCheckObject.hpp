@@ -10,10 +10,17 @@ public:
     StabilityCheckObject(char const visiblePart, int const notVisiblePart);
     explicit StabilityCheckObject(int const value);
 
+    template <typename ValueType>
+    explicit operator ValueType() const {
+        return static_cast<ValueType>(m_visiblePart);
+    }
+
     bool operator==(StabilityCheckObject const& object) const;
     bool operator!=(StabilityCheckObject const& object) const;
     bool operator<(StabilityCheckObject const& object) const;
-    explicit operator int() const;
+    bool operator>(StabilityCheckObject const& object) const;
+    bool operator<=(StabilityCheckObject const& object) const;
+    bool operator>=(StabilityCheckObject const& object) const;
     StabilityCheckObject operator+(StabilityCheckObject const& second) const;
     StabilityCheckObject operator-(StabilityCheckObject const& second) const;
     StabilityCheckObject operator*(StabilityCheckObject const& second) const;
