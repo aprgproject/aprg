@@ -91,7 +91,7 @@ jobs:
             echo "There are some issues found regarding shell, setting error status."
             lintingExitCode=1
           fi
-          exit lintingExitCode
+          exit $lintingExitCode
 
 
   determineCppProjects:
