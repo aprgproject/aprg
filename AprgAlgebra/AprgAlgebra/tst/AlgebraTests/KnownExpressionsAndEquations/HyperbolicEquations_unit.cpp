@@ -8,9 +8,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(HyperbolicEquationsTest, GetEToTheXWorks) { EXPECT_EQ("((e)^x)", convertToString(getEToTheX("x"))); }
 
@@ -108,6 +106,4 @@ TEST(HyperbolicEquationsTest, GetHyperbolicArcCotangentDefinitionWorks) {
     EXPECT_EQ("arccoth(x) = ((1/2)*ln(((x+1)/(x-1))))", convertToString(getHyperbolicArcCotangentDefinition("x")));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -14,9 +14,9 @@ using namespace std;
 
 struct TermAnalyzerTest : public ::testing::Test {
     TermAnalyzerTest()
-        : m_database(),
+        : 
           m_findings(),
-          m_terms(),
+          
           m_termBuilder(m_terms),
           m_termAnalyzer(m_terms, m_database, m_findings) {}
 

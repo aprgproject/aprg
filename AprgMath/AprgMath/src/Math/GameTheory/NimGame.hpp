@@ -3,9 +3,7 @@
 #include <Math/GameTheory/Common/GameState.hpp>
 #include <Math/GameTheory/Common/NimTypes.hpp>
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 class NimGame {
 public:
@@ -26,6 +24,4 @@ public:
     static NimHeapSize getNimSum(NimState const& nimState);
 };
 
-}  // namespace math
-
-}  // namespace alba
+}  // namespace alba::math

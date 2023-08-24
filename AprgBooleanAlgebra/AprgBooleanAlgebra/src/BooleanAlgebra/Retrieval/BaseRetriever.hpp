@@ -10,7 +10,7 @@ class BaseRetriever {
 public:
     virtual ~BaseRetriever() = default;  // virtual destructor because of virtual functions (vtable exists)
 
-    DataType const& getSavedData() const { return m_savedData; }
+    [[nodiscard]] DataType const& getSavedData() const { return m_savedData; }
 
     DataType& getSavedDataReference() { return m_savedData; }
 
@@ -38,4 +38,4 @@ protected:
     DataType m_savedData;
 };
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

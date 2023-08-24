@@ -10,9 +10,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(TermRaiseToANumberTest, ConstructionWorks) {
     TermRaiseToANumber termRaiseToANumber("x", 5);
@@ -72,6 +70,4 @@ TEST(TermRaiseToANumberTest, GetBaseReferenceWorks) {
     EXPECT_EQ(Term("y"), termRaiseToANumber.getBase());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

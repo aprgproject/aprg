@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 TEST(OutwardSnakeLikeTraversalTest, ConstructionWorks) {
     OutwardSnakeLikeTraversal(BitmapXY(12, 34), OutwardSnakeLikeTraversal::Direction::Up, 0, 50, 0, 100);
@@ -371,7 +369,5 @@ TEST(OutwardSnakeLikeTraversalTest, TraversalAtOutOfRangeIsCorrected) {
     EXPECT_EQ(BitmapXY(6, 10), traversal.getNextPoint());
     EXPECT_TRUE(traversal.isTraversalFinished());
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

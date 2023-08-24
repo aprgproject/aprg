@@ -14,11 +14,9 @@
 using namespace alba::booleanAlgebra::Simplification;
 using namespace std;
 
-namespace alba {
+namespace alba::booleanAlgebra {
 
-namespace booleanAlgebra {
-
-Expression::Expression() : m_commonOperatorLevel(OperatorLevel::Unknown), m_wrappedTerms(), m_isSimplified(false) {}
+Expression::Expression() : m_commonOperatorLevel(OperatorLevel::Unknown),  m_isSimplified(false) {}
 
 Expression::Expression(BaseTerm const& baseTerm)
     : m_commonOperatorLevel(OperatorLevel::Unknown), m_wrappedTerms({baseTerm}), m_isSimplified(false) {}
@@ -298,7 +296,5 @@ ostream& operator<<(ostream& out, Expression const& expression) {
     out << ")";
     return out;
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

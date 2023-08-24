@@ -4,9 +4,7 @@
 
 using namespace alba::TwoDimensions;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 Point convertBitmapXYToPoint(BitmapXY const& bitmapPosition) {
     return Point(bitmapPosition.getX(), bitmapPosition.getY());
@@ -22,7 +20,5 @@ void animeColorsInPenCircles(PenCircles& penCircles, AnimizeColor const& animize
         pointAndPenCircleDetails.second.color = animizeColor.getNewColor(pointAndPenCircleDetails.second.color);
     }
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

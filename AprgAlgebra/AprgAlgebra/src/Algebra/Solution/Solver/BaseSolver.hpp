@@ -1,15 +1,13 @@
 #pragma once
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class BaseSolver {
 public:
     BaseSolver();
 
-    bool isSolved() const;
-    bool isACompleteSolution() const;
+    [[nodiscard]] bool isSolved() const;
+    [[nodiscard]] bool isACompleteSolution() const;
 
 protected:
     // No need for virtual destructor because this class is not destroyed polymorphically.
@@ -21,10 +19,8 @@ protected:
     void setAsIncompleteSolution();
 
 private:
-    bool m_isSolved;
-    bool m_isACompleteSolution;
+    bool m_isSolved{false};
+    bool m_isACompleteSolution{false};
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

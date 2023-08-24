@@ -43,11 +43,11 @@ public:
         initialize(valuesToCheck, suggestedNumberOfBlocks);
     }
 
-    Index getBlockSize() const { return m_blockSize; }
+    [[nodiscard]] Index getBlockSize() const { return m_blockSize; }
 
-    BlockValues const& getBlocks() const { return m_blocks; }
+    [[nodiscard]] BlockValues const& getBlocks() const { return m_blocks; }
 
-    Output getResultOnInterval(Index const start, Index const end) const {
+    [[nodiscard]] Output getResultOnInterval(Index const start, Index const end) const {
         // This is max(O(k), O(n/k)) time.
         Output result{};
         if (start < static_cast<Index>(m_values.size()) && end < static_cast<Index>(m_values.size()) && start <= end) {

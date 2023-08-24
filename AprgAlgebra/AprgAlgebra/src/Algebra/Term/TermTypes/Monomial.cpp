@@ -9,14 +9,12 @@
 using namespace alba::AlbaNumberConstants;
 using namespace std;
 
-namespace alba {
+namespace alba::algebra {
 
-namespace algebra {
-
-Monomial::Monomial() : m_constant(), m_variablesToExponentsMap(), m_isSimplified(false) {}
+Monomial::Monomial() :  m_isSimplified(false) {}
 
 Monomial::Monomial(AlbaNumber const& constant, initializer_list<VariableExponentPair> const& variablesWithExponents)
-    : m_constant(constant), m_variablesToExponentsMap(), m_isSimplified(false) {
+    : m_constant(constant),  m_isSimplified(false) {
     putVariablesWithExponents(variablesWithExponents);
 }
 
@@ -211,6 +209,4 @@ ostream& operator<<(ostream& out, Monomial const& monomial) {
     return out;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

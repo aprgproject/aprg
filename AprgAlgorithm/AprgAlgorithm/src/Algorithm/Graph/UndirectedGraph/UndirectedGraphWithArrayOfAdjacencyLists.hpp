@@ -19,25 +19,25 @@ public:
 
     UndirectedGraphWithArrayOfAdjacencyLists()  {}
 
-    bool isEmpty() const override { return m_numberOfVertices == 0 && m_numberOfEdges == 0; }
+    [[nodiscard]] bool isEmpty() const override { return m_numberOfVertices == 0 && m_numberOfEdges == 0; }
 
-    bool hasAnyConnection(Vertex const& vertex) const override { return !m_adjacencyLists[vertex].empty(); }
+    [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override { return !m_adjacencyLists[vertex].empty(); }
 
-    bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
+    [[nodiscard]] bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
         AdjacencyList const& adjacencyList(m_adjacencyLists[vertex1]);
         return adjacencyList.find(vertex2) != adjacencyList.cend();
     }
 
-    int getNumberOfVertices() const override { return m_numberOfVertices; }
+    [[nodiscard]] int getNumberOfVertices() const override { return m_numberOfVertices; }
 
-    int getNumberOfEdges() const override { return m_numberOfEdges; }
+    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
-    Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
+    [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
         AdjacencyList const& adjacencyList(m_adjacencyLists[vertex]);
         return Vertices(adjacencyList.cbegin(), adjacencyList.cend());
     }
 
-    Vertices getVertices() const override {
+    [[nodiscard]] Vertices getVertices() const override {
         Vertices result;
         for (Vertex vertex = 0; vertex < static_cast<Vertex>(m_adjacencyLists.size()); vertex++) {
             if (!m_adjacencyLists[vertex].empty()) {
@@ -47,7 +47,7 @@ public:
         return result;
     }
 
-    Edges getEdges() const override {
+    [[nodiscard]] Edges getEdges() const override {
         Edges result;
         for (Vertex vertex1 = 0; vertex1 < static_cast<Vertex>(m_adjacencyLists.size()); vertex1++) {
             AdjacencyList const& adjacencyList(m_adjacencyLists[vertex1]);
@@ -115,4 +115,4 @@ protected:
     AdjacencyLists m_adjacencyLists{};
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -27,4 +27,4 @@ private:
     HashTable& b_smallerSymbolTables;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

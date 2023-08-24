@@ -14,7 +14,7 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    JumpNearestValueSearch(Values const& values)  // values can be unsorted
+    explicit JumpNearestValueSearch(Values const& values)  // values can be unsorted
         : m_blockSize(getOptimalSize(values)), m_sortedValues(values) {}
 
     Value getNearestValue(Value const& target) {
@@ -41,7 +41,7 @@ public:
     }
 
 private:
-    Index getOptimalSize(Values const& values) const {
+    [[nodiscard]] Index getOptimalSize(Values const& values) const {
         // optimal size is squareroot size
         return std::max(1, mathHelper::getIntegerAfterFloorOfDoubleValue<Index>(sqrt(values.size())));
     }
@@ -50,4 +50,4 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

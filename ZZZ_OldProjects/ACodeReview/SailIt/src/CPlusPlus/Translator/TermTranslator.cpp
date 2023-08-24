@@ -23,8 +23,7 @@ constexpr char TermTranslator::APOSTROPHE_STRING[];
 TermTranslator::TermTranslator(string const& fileName, Findings& findings, DequeOfTerms& dequeOfTerms)
     : m_fileStream(fileName.c_str()),
       m_albaFileReader(m_fileStream),
-      m_isFileValid(false),
-      m_lineNumber(0),
+      
       m_findings(findings),
       m_termBuilder(dequeOfTerms),
       m_stringOfOperators{KEYWORD_OPERATORS, THREE_CHAR_OPERATORS, TWO_CHAR_OPERATORS, ONE_CHAR_OPERATORS},
@@ -56,8 +55,9 @@ void TermTranslator::readFile() {
             }
             int index = lineString.find_first_not_of(WHITESPACE_STRING);
             if (isNotNpos(index)) {
-                while (getCPlusPlusTerm(lineString, index))
+                while (getCPlusPlusTerm(lineString, index)) {
                     ;
+}
             }
             m_termBuilder.addNewLine();
         }
@@ -71,23 +71,23 @@ bool TermTranslator::getCPlusPlusTerm(string& lineString, int& index) {
     bool continueProcessing = true;
     if (index >= length) {
         continueProcessing = false;
-    } else if (hasSingleLineComment(lineString, index))
+    } else if (hasSingleLineComment(lineString, index)) {
         ;
-    else if (hasMultiLineComment(lineString, index))
+    } else if (hasMultiLineComment(lineString, index)) {
         ;
-    else if (hasMacro(lineString, index))
+    } else if (hasMacro(lineString, index)) {
         ;
-    else if (hasStringConstant(lineString, index))
+    } else if (hasStringConstant(lineString, index)) {
         ;
-    else if (hasCharacterConstant(lineString, index))
+    } else if (hasCharacterConstant(lineString, index)) {
         ;
-    else if (hasOperator(operatorString, index))
+    } else if (hasOperator(operatorString, index)) {
         ;
-    else if (hasWord(lineString, index))
+    } else if (hasWord(lineString, index)) {
         ;
-    else if (hasWhiteSpace(lineString, index))
+    } else if (hasWhiteSpace(lineString, index)) {
         ;
-    else {
+    } else {
         m_termBuilder.addUnknown(lineString.substr(index));
         index = length;
         continueProcessing = false;
@@ -120,7 +120,8 @@ bool TermTranslator::hasMacro(string& lineString, int& index) {
             int start = index;
             // stlalgorithm
             for (; index < length; index++) {
-                if (!isLetter(lineString[index])) break;
+                if (!isLetter(lineString[index])) { break;
+}
             }
             m_termBuilder.addMacro(string("#") + lineString.substr(start, index - start));
             return true;
@@ -185,7 +186,8 @@ bool TermTranslator::hasWord(string& lineString, int& index) {
     if (isLetterOrNumberOrUnderscore(lineString[index])) {
         int start = index;
         for (; index < length; index++) {
-            if (!isLetterOrNumberOrUnderscore(lineString[index])) break;
+            if (!isLetterOrNumberOrUnderscore(lineString[index])) { break;
+}
         }
 
         string word(lineString.substr(start, index - start));
@@ -236,7 +238,8 @@ string TermTranslator::getLine() {
 }
 
 bool TermTranslator::isEqualToFirstTwoCharacters(string const& lineString, int& index, string const& stringToCheck) {
-    if (!isLessThanStringLength(lineString, index + 1)) return false;
+    if (!isLessThanStringLength(lineString, index + 1)) { return false;
+}
     return stringToCheck == lineString.substr(index, 2);
 }
 

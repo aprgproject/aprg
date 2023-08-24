@@ -8,11 +8,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Simplification {
+namespace alba::algebra::Simplification {
 
 void simplifyTermToACommonDenominator(Term& term) {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
@@ -164,8 +160,4 @@ TermsWithAssociation getTermsWithAssociationAndReverseIfNeeded(
     return termsWithAssociation;
 }
 
-}  // namespace Simplification
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Simplification

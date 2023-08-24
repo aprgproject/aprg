@@ -8,11 +8,9 @@ using namespace std;
 
 namespace alba {
 
-namespace booleanAlgebra {
+namespace booleanAlgebra::Simplification {
 
-namespace Simplification {
-
-SimplificationOfExpression::SimplificationOfExpression() : m_expression() {}
+SimplificationOfExpression::SimplificationOfExpression()  {}
 
 SimplificationOfExpression::SimplificationOfExpression(Expression const& expression) : m_expression(expression) {}
 
@@ -114,8 +112,6 @@ void SimplificationOfExpression::processAndSaveTermsForOrOperation(
     }
     expression.setTerm(combinedTerm);
 }
-
-}  // namespace Simplification
 
 }  // namespace booleanAlgebra
 

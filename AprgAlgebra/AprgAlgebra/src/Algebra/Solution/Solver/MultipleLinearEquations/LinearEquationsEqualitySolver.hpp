@@ -5,9 +5,7 @@
 #include <Algebra/Solution/Solver/BaseSolver.hpp>
 #include <Algebra/Utilities/NumberMatrix.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class LinearEquationsEqualitySolver : public BaseSolver {
 public:
@@ -27,6 +25,4 @@ private:
         VariableNamesSet const& variables);
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

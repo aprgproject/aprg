@@ -8,9 +8,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 enum class ContinuityType {
     Unknown,
@@ -41,6 +39,4 @@ ContinuityType getContinuityTypeAt(Term const& term, std::string const& variable
 
 SolutionSet getContinuityDomain(Term const& term);
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

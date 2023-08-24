@@ -17,9 +17,7 @@ using namespace alba::AlbaNumberConstants;
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool isAxiomOfCompletenessTrue(SeriesBasedOnFormula const& series) {
     // Axiom of completeness
@@ -183,6 +181,4 @@ PowerSeries getEToTheXPowerSeries() {
     return PowerSeries(formula, n, x, 0);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

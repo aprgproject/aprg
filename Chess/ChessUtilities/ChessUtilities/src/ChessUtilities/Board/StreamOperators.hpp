@@ -3,9 +3,7 @@
 #include <ChessUtilities/Board/BoardValue.hpp>
 #include <ChessUtilities/Board/Piece.hpp>
 
-namespace alba {
-
-namespace chess {
+namespace alba::chess {
 
 std::ostream& operator<<(std::ostream& out, PieceColor const pieceColor);
 std::ostream& operator<<(std::ostream& out, PieceType const pieceType);
@@ -23,7 +21,5 @@ std::ostream& operator<<(std::ostream& out, BoardValue const& boardValue);
 std::istream& operator>>(std::istream& in, BoardValue& boardValue);
 
 void printHexValuesInBoard(std::ostream& out, Board const& board);
-
-}  // namespace chess
 
 }  // namespace alba

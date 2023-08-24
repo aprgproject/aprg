@@ -22,12 +22,12 @@ public:
     using PathDetailsMatrix = matrix::AlbaMatrix<PathDetails>;
     using Comparator = ComparatorTemplateType<Weight>;
 
-    PathSearchUsingFloydWarshall(EdgeWeightedGraph const& graph)
+    explicit PathSearchUsingFloydWarshall(EdgeWeightedGraph const& graph)
         : m_graph(graph), m_pathDetailsMatrix(graph.getNumberOfVertices(), graph.getNumberOfVertices()) {
         searchForBestPaths();
     }
 
-    bool hasPathTo(Vertex const& startVertex, Vertex const& endVertex) const {
+    [[nodiscard]] bool hasPathTo(Vertex const& startVertex, Vertex const& endVertex) const {
         bool result(false);
         if (m_pathDetailsMatrix.isInside(startVertex, endVertex)) {
             result = m_pathDetailsMatrix.getEntryConstReference(startVertex, endVertex).hasAPath;
@@ -35,7 +35,7 @@ public:
         return result;
     }
 
-    Path getPathTo(Vertex const& startVertex, Vertex const& endVertex) const {
+    [[nodiscard]] Path getPathTo(Vertex const& startVertex, Vertex const& endVertex) const {
         Path result;
         if (startVertex != endVertex && m_pathDetailsMatrix.isInside(startVertex, endVertex)) {
             PathDetails const& pathDetails(m_pathDetailsMatrix.getEntryConstReference(startVertex, endVertex));
@@ -161,7 +161,7 @@ std::ostream& operator<<(
     return out;
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Algorithm in short terms: Use a "adjacent/best weight" matrix to find shortest/longest by checking vertices in
 // between vertices.

@@ -19,9 +19,9 @@ public:
 
     LinkedListQueue() :  m_first(nullptr), m_nextOfLastDoublePointer(&m_first) {}
 
-    bool isEmpty() const override { return m_first == nullptr; }
+    [[nodiscard]] bool isEmpty() const override { return m_first == nullptr; }
 
-    int getSize() const override { return m_size; }
+    [[nodiscard]] int getSize() const override { return m_size; }
 
     void enqueue(Object const& object) override {
         m_nextOfLastDoublePointer->reset(new Node{object, nullptr});
@@ -49,4 +49,4 @@ private:
     NodeUniquePointer* m_nextOfLastDoublePointer;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

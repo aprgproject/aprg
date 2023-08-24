@@ -6,9 +6,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(EquationUtilitiesTest, IsEquationOperatorStringWorks) {
     EXPECT_FALSE(isEquationOperatorString(""));
@@ -216,6 +214,4 @@ TEST(EquationUtilitiesTest, BuildEquationIfPossibleWorks) {
     EXPECT_EQ(expectedEquation, buildEquationIfPossible("a=b"));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

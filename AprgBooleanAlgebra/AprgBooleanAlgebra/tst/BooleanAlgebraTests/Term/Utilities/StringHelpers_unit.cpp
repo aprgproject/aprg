@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(StringHelpersTest, IsOperatorWorks) {
     EXPECT_FALSE(isOperator(""));
@@ -76,7 +74,5 @@ TEST(StringHelpersTest, AddValueTermIfNotEmptyWorks) {
     ASSERT_EQ(TermType::Constant, termsToVerify1[0].getTermType());
     EXPECT_TRUE(termsToVerify1[0].getBooleanValue());
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

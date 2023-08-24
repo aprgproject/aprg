@@ -6,9 +6,7 @@
 #include <map>
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class SolutionSet {
 public:
@@ -16,11 +14,11 @@ public:
 
     SolutionSet();
 
-    bool isEmpty() const;
+    [[nodiscard]] bool isEmpty() const;
 
-    AlbaNumbers const& getAcceptedValues() const;
-    AlbaNumbers const& getRejectedValues() const;
-    AlbaNumberIntervals const& getAcceptedIntervals() const;
+    [[nodiscard]] AlbaNumbers const& getAcceptedValues() const;
+    [[nodiscard]] AlbaNumbers const& getRejectedValues() const;
+    [[nodiscard]] AlbaNumberIntervals const& getAcceptedIntervals() const;
 
     void addAcceptedValue(AlbaNumber const& value);
     void addRejectedValue(AlbaNumber const& value);
@@ -48,6 +46,4 @@ private:
     AlbaNumberIntervals m_acceptedIntervals;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

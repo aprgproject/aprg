@@ -27,4 +27,4 @@ void segregateTermsWithAndWithoutVariable(
     TermsWithDetails const& termsToSegregate, std::string const& variableName, TermsWithDetails& termsWithVariable,
     TermsWithDetails& termsWithoutVariable);
 
-}  // namespace alba
+}  // namespace alba::algebra

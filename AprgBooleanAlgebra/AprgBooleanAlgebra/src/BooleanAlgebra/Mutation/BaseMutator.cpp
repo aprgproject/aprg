@@ -24,4 +24,4 @@ void BaseMutator::mutateExpression(Expression &expression) {
     }
 }
 
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

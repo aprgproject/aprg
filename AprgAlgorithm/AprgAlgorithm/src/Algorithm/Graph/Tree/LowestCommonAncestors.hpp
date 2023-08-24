@@ -19,11 +19,11 @@ public:
         initializeIfNeeded();
     }
 
-    Vertices const& getVerticesInTreeOrder() const { return m_verticesInTreeOrder; }
+    [[nodiscard]] Vertices const& getVerticesInTreeOrder() const { return m_verticesInTreeOrder; }
 
-    Depths const& getDepths() const { return m_depths; }
+    [[nodiscard]] Depths const& getDepths() const { return m_depths; }
 
-    Vertex getLowestCommonAncestor(Vertex const& vertex1, Vertex const& vertex2) const {
+    [[nodiscard]] Vertex getLowestCommonAncestor(Vertex const& vertex1, Vertex const& vertex2) const {
         Vertex result{};
         auto it1 = m_vertexToFirstIndexMap.find(vertex1);
         auto it2 = m_vertexToFirstIndexMap.find(vertex2);
@@ -36,7 +36,7 @@ public:
         return result;
     }
 
-    int getDistanceBetweenVertices(Vertex const& vertex1, Vertex const& vertex2) const {
+    [[nodiscard]] int getDistanceBetweenVertices(Vertex const& vertex1, Vertex const& vertex2) const {
         int result{};
         auto it1 = m_vertexToFirstIndexMap.find(vertex1);
         auto it2 = m_vertexToFirstIndexMap.find(vertex2);
@@ -50,7 +50,7 @@ public:
     }
 
 private:
-    int getLowestCommonAncestorIndex(int const vertexIndex1, int const vertexIndex2) const {
+    [[nodiscard]] int getLowestCommonAncestorIndex(int const vertexIndex1, int const vertexIndex2) const {
         int result = vertexIndex1;
         int minimumDepth(m_depths[vertexIndex1]);
         for (int i = vertexIndex1 + 1; i <= vertexIndex2; i++) {
@@ -118,4 +118,4 @@ private:
     VertexToIndexMap m_vertexToFirstIndexMap;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

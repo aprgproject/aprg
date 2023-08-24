@@ -11,11 +11,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 Terms factorizeAnExpression(Expression const& expression) {
     TermsRaiseToNumbers termsRaiseToNumbers(factorizeToTermsRaiseToNumbers(expression));
@@ -226,8 +222,4 @@ bool dontFactorizeBecauseThereIsSquareRootOfNegativeNumber(Term const& base, Alb
     return hasEvenDenominatorExponents && isANegativeTerm(base);
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

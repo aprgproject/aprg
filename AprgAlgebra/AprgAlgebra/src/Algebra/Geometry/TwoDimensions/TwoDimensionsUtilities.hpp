@@ -2,11 +2,7 @@
 
 #include <Algebra/Equation/Equation.hpp>
 
-namespace alba {
-
-namespace algebra {
-
-namespace TwoDimensions {
+namespace alba::algebra::TwoDimensions {
 
 enum class LimaconTrigonometricFunctionType { Cosine, Sine };
 
@@ -25,8 +21,4 @@ Equation getParabolaEquation(ParabolaOrientation const parabolaOrientation);
 Term getSurfaceAreaOfAConicalFrustum();
 Term getVolumeOfAConicalFrustum();
 
-}  // namespace TwoDimensions
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::TwoDimensions

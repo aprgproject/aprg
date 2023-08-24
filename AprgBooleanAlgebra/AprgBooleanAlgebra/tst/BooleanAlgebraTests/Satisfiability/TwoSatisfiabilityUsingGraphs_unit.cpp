@@ -6,9 +6,7 @@
 
 using namespace alba::stringHelper;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(TwoSatisfiabilityUsingGraphsTest, ExampleWithCompleteSolution) {
     Term termToTest(buildTermIfPossible("(x2|~x1)&(~x1|~x2)&(x1|x3)&(~x2|~x3)&(x1|x4)"));
@@ -36,7 +34,5 @@ TEST(TwoSatisfiabilityUsingGraphsTest, ExampleWithNoSolution) {
     EXPECT_TRUE(twoSat.hasSolution());
     EXPECT_TRUE(twoSat.getSolution().isEmpty());
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

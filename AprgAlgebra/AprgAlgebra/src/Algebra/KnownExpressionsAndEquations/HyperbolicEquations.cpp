@@ -7,9 +7,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Term getEToTheX(Term const& term) {
     // e^x
@@ -195,6 +193,4 @@ Equation getHyperbolicArcCotangentDefinition(Term const& term) {
     return Equation(leftSideTerm, "=", rightSideTerm);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

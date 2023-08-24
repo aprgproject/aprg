@@ -36,17 +36,17 @@ public:
     void operator++(int);
     void operator--(int);
 
-    bool isFinished() const;
-    bool isNotFinished() const;
-    bool isNotFinishedWhenBackward() const;
-    DequeOfTerms const& getTermsConstReference() const;
-    Term& getContentReference() const;
-    int getCurrentIndex() const;
-    TermsIterator getCurrentIterator() const;
-    int getEndIndex() const;
-    TermsIterator getEndIterator() const;
-    int getLength() const;
-    UniqueId getUniqueFileId() const;
+    [[nodiscard]] bool isFinished() const;
+    [[nodiscard]] bool isNotFinished() const;
+    [[nodiscard]] bool isNotFinishedWhenBackward() const;
+    [[nodiscard]] DequeOfTerms const& getTermsConstReference() const;
+    [[nodiscard]] Term& getContentReference() const;
+    [[nodiscard]] int getCurrentIndex() const;
+    [[nodiscard]] TermsIterator getCurrentIterator() const;
+    [[nodiscard]] int getEndIndex() const;
+    [[nodiscard]] TermsIterator getEndIterator() const;
+    [[nodiscard]] int getLength() const;
+    [[nodiscard]] UniqueId getUniqueFileId() const;
 
     void setCurrentIndex(Looper const& indexLooper);
     void hardSetCurrentIndex(LooperIndex const index);
@@ -57,7 +57,7 @@ public:
 
 private:
     void fixIndexes(ModifyDetails const& modifyDetails);
-    int getFixedIndex(int const indexToFix, ModifyDetails const& modifyDetails);
+    static int getFixedIndex(int const indexToFix, ModifyDetails const& modifyDetails);
     void doAtConstruction();
     void doAtDestruction();
     LooperIndex m_currentIndex;

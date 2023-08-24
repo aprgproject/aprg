@@ -30,4 +30,4 @@ TEST(AudioManipulatorTest, DISABLED_MultiplySamplesWithValueWorks) {
     audioManipulator.saveAudioIntoFileInTheSameDirectory("output.wav");
 }
 
-}  // namespace alba
+}  // namespace alba::AprgAudio

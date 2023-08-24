@@ -8,9 +8,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 // These formulas are true.
 
@@ -201,7 +199,5 @@ UnsignedInteger getModularFactorial(UnsignedInteger const number, UnsignedIntege
     result %= modulo;
     return result;
 }
-
-}  // namespace math
 
 }  // namespace alba

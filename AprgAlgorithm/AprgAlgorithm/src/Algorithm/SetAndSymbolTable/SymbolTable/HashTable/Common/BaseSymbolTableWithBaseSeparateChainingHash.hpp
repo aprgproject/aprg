@@ -17,7 +17,7 @@ public:
         default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual
                   // functions)
 
-    Value get(Key const& key) const override { return b_smallerSymbolTables[this->getHash(key)].get(key); }
+    [[nodiscard]] Value get(Key const& key) const override { return b_smallerSymbolTables[this->getHash(key)].get(key); }
 
     void put(Key const& key, Value const& value) override {
         b_smallerSymbolTables[this->getHash(key)].put(key, value);
@@ -29,4 +29,4 @@ private:
     HashTable& b_smallerSymbolTables;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

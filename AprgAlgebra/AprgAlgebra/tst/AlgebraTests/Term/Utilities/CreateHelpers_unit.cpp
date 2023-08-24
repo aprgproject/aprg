@@ -4,9 +4,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(CreateHelpersTest, CreateMonomialFromNumberWorks) {
     EXPECT_EQ(Monomial(5648, {}), createMonomialFromNumber(5648));
@@ -253,6 +251,4 @@ TEST(CreateHelpersTest, CreateTermWithRaiseToPowerTermsWithDetailsWorksWithMulti
     EXPECT_EQ(termToVerify, termToExpect);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

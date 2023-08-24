@@ -13,9 +13,7 @@
 #include <sstream>
 #include <vector>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 template <typename Minterm>
 class QuineMcCluskey {
@@ -28,9 +26,9 @@ public:
     using InputToOutputMap = std::map<Minterm, LogicalValue>;
     using ComputationalTable = std::map<Minterm, MintermToImplicantsMap>;
 
-    QuineMcCluskey() : m_maxCommonalityCount(0) {}
+    QuineMcCluskey()  {}
 
-    LogicalValue getOutput(Minterm const input) const {
+    [[nodiscard]] LogicalValue getOutput(Minterm const input) const {
         LogicalValue result(LogicalValue::False);
         auto it = m_inputToOutputMap.find(input);
         if (it != m_inputToOutputMap.end()) {
@@ -39,9 +37,9 @@ public:
         return result;
     }
 
-    int getNumberOfOnes(Minterm const value) const { return AlbaBitValueUtilities<Minterm>::getNumberOfOnes(value); }
+    [[nodiscard]] int getNumberOfOnes(Minterm const value) const { return AlbaBitValueUtilities<Minterm>::getNumberOfOnes(value); }
 
-    Implicants getImplicants(int numberOfOnes, int commonalityCount) const {
+    [[nodiscard]] Implicants getImplicants(int numberOfOnes, int commonalityCount) const {
         Implicants result;
         auto numberOfOnesIt = m_computationalTable.find(numberOfOnes);
         if (numberOfOnesIt != m_computationalTable.end()) {
@@ -57,7 +55,7 @@ public:
         return result;
     }
 
-    Implicants getAllPrimeImplicants() const {
+    [[nodiscard]] Implicants getAllPrimeImplicants() const {
         Implicants result;
         for (auto it = m_computationalTable.begin(); it != m_computationalTable.end(); it++) {
             MintermToImplicantsMap const& implicantsMap(it->second);
@@ -80,7 +78,7 @@ public:
         return result;
     }
 
-    bool doImplicantsExistAt(int numberOfOnes, int commonalityCount) const {
+    [[nodiscard]] bool doImplicantsExistAt(int numberOfOnes, int commonalityCount) const {
         bool result(false);
         auto numberOfOnesIt = m_computationalTable.find(numberOfOnes);
         if (numberOfOnesIt != m_computationalTable.end()) {
@@ -132,7 +130,7 @@ public:
         }
     }
 
-    std::string getComputationTableString() const {
+    [[nodiscard]] std::string getComputationTableString() const {
         std::stringstream ss;
         for (auto const& [numberOfOnes, commonalityCountImplicantsPairs] : m_computationalTable) {
             ss << "Number of ones = " << numberOfOnes << "\n";
@@ -145,11 +143,11 @@ public:
         return ss.str();
     }
 
-    Implicants getBestPrimeImplicants(Implicants const& primeImplicants) const {
+    [[nodiscard]] Implicants getBestPrimeImplicants(Implicants const& primeImplicants) const {
         return getBestPrimeImplicantsPetricksMethod(primeImplicants);
     }
 
-    bool isASubset(std::set<int> const& smaller, std::set<int> const& larger) const {
+    [[nodiscard]] bool isASubset(std::set<int> const& smaller, std::set<int> const& larger) const {
         bool result(false);
         if (smaller.size() <= larger.size()) {
             result = true;
@@ -164,7 +162,7 @@ public:
         return result;
     }
 
-    Implicants getBestPrimeImplicantsPetricksMethod(Implicants const& primeImplicants) const {
+    [[nodiscard]] Implicants getBestPrimeImplicantsPetricksMethod(Implicants const& primeImplicants) const {
         // Based from this: https://en.wikipedia.org/wiki/Petrick%27s_method
         // Remember this simplifications:  X + XY = X and XX = X and X+X=X
 
@@ -216,9 +214,9 @@ public:
                         combinedInnerTerms.erase(combinedInnerTerms.begin() + j);
                         if (i < static_cast<int>(combinedInnerTerms.size())) {
                             continue;
-                        } else {
+                        } 
                             break;
-                        }
+                       
                     }
                 }
             }
@@ -267,7 +265,7 @@ public:
         return result;
     }
 
-    Implicants getBestPrimeImplicantsMyMethod(Implicants const& primeImplicants) const {
+    [[nodiscard]] Implicants getBestPrimeImplicantsMyMethod(Implicants const& primeImplicants) const {
         // This is an algorithm I developed on how I would solve it.
         Implicants result;
         SetOfMinterms mintermsToCover(getSetOfInputMintermsWithTrue());
@@ -295,7 +293,7 @@ public:
                 }
                 if (implicantsWithLoneMinterm.empty()) {
                     break;
-                } else {
+                } 
                     for (auto const& implicant : implicantsWithLoneMinterm) {
                         result.emplace(implicant);
                         remainingImplicants.erase(implicant);
@@ -303,7 +301,7 @@ public:
                             mintermsToCover.erase(coveredMinterm);
                         }
                     }
-                }
+               
             }
 
             // Process an implicant that covers the maximum number of minterms
@@ -332,7 +330,7 @@ public:
         return result;
     }
 
-    std::string getOutputTable(Implicants const& primeImplicants) const {
+    [[nodiscard]] std::string getOutputTable(Implicants const& primeImplicants) const {
         Minterms inputsWithTrue(getInputMintermsWithTrue());
         DisplayTable displayTable;
         displayTable.setBorders("", "|");
@@ -359,7 +357,7 @@ public:
     }
 
 private:
-    Minterms getInputMintermsWithTrue() const {
+    [[nodiscard]] Minterms getInputMintermsWithTrue() const {
         Minterms result;
         for (auto [input, output] : m_inputToOutputMap) {
             if (output == LogicalValue::True) {
@@ -369,7 +367,7 @@ private:
         return result;
     }
 
-    SetOfMinterms getSetOfInputMintermsWithTrue() const {
+    [[nodiscard]] SetOfMinterms getSetOfInputMintermsWithTrue() const {
         SetOfMinterms result;
         for (auto [input, output] : m_inputToOutputMap) {
             if (output == LogicalValue::True) {
@@ -386,11 +384,9 @@ private:
         m_computationalTable[numberOfOnes][0].emplace(implicant);
     }
 
-    int m_maxCommonalityCount;
+    int m_maxCommonalityCount{0};
     InputToOutputMap m_inputToOutputMap;
     ComputationalTable m_computationalTable;  // https://en.wikipedia.org/wiki/Quine%E2%80%93McCluskey_algorithm
 };
 
-}  // namespace booleanAlgebra
-
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

@@ -33,9 +33,9 @@ public:
     NodeDisjointPaths(BaseDirectedGraphWithVertex const& graph, Vertex const& startVertex, Vertex const& endVertex)
         : m_fordFulkerson(getFlowNetwork(graph, startVertex, endVertex)) {}
 
-    int getNumberOfNodeDisjointPaths() const { return m_fordFulkerson.getMaxFlowValue(); }
+    [[nodiscard]] int getNumberOfNodeDisjointPaths() const { return m_fordFulkerson.getMaxFlowValue(); }
 
-    Paths getNodeDisjointPaths() const {
+    [[nodiscard]] Paths getNodeDisjointPaths() const {
         Paths result;
         for (auto const& pathWithDuplicate : m_fordFulkerson.getAugmentingPaths()) {
             if (!pathWithDuplicate.empty()) {
@@ -57,7 +57,7 @@ public:
     }
 
 private:
-    FlowNetwork getFlowNetwork(
+    [[nodiscard]] FlowNetwork getFlowNetwork(
         BaseDirectedGraphWithVertex const& graph, Vertex const& startVertex, Vertex const& endVertex) const {
         // For description above:
         // A standard method for this is to divide each node into two nodes such that the first node has the incoming
@@ -79,4 +79,4 @@ private:
     FordFulkerson m_fordFulkerson;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

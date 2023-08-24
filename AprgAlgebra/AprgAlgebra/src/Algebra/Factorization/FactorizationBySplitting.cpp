@@ -11,11 +11,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 Polynomials factorizeBySplittingToSmallerPolynomials(Polynomial const& polynomial) {
     Polynomials result;
@@ -258,8 +254,4 @@ void combinePolynomialsByAdditionThenEmplaceFactoredPolynomialIfNeeded(
     simplifyThenEmplaceBackIfPolynomialIsNotEmpty(result, combinedPolynomial);
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

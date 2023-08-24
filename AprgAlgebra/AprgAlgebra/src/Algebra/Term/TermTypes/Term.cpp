@@ -11,9 +11,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Term::Term() : m_type(TermType::Empty), m_isSimplified(false), m_baseTermDataPointer(nullptr) {}
 
@@ -394,6 +392,4 @@ ostream& operator<<(ostream& out, Term const& term) {
     return out;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -6,9 +6,7 @@
 
 #include <map>
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 class GameWithGraph {
 public:
@@ -17,7 +15,7 @@ public:
     using Graph = algorithm::BaseDirectedGraph<Vertex>;
     using VertexToGrundyNumberMap = std::map<Vertex, UnsignedInteger>;
 
-    GameWithGraph(Graph const& graph);
+    explicit GameWithGraph(Graph const& graph);
 
     UnsignedInteger getGrundyNumberAt(Vertex const vertex);
     GameState getGameStateAt(Vertex const vertex);
@@ -30,6 +28,4 @@ private:
     VertexToGrundyNumberMap m_vertexToGrundyNumberMap;  // dynamic programming
 };
 
-}  // namespace math
-
-}  // namespace alba
+}  // namespace alba::math

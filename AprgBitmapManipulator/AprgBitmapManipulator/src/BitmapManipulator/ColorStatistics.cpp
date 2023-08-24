@@ -113,4 +113,4 @@ void AprgColorStatistics::saveColorStatistics(string const& path) {
                          << " StdDev: " << luma709Statistics.getSampleStandardDeviation() << "\n";
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

@@ -18,7 +18,7 @@ public:
     using VertexToFlowEdgeMap = std::map<Vertex, FlowEdge>;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
-    FordFulkersonUsingDfs(SinkSourceFlowNetworkType const& flowNetwork)
+    explicit FordFulkersonUsingDfs(SinkSourceFlowNetworkType const& flowNetwork)
         : BaseClass(flowNetwork),
           b_flowNetwork(BaseClass::m_flowNetwork),
           b_processedVertices(BaseClass::m_processedVertices),
@@ -50,4 +50,4 @@ protected:
     VertexToFlowEdgeMap& b_vertexToAugmentingPathEdgeMap;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

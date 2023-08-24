@@ -97,7 +97,7 @@ CPlusPlusType CPlusPlusFunction::getReturnTypeWithSignature(
             return signature.getReturnType();
         }
     }
-    return CPlusPlusType();
+    return {};
 }
 
 }  // namespace codeReview

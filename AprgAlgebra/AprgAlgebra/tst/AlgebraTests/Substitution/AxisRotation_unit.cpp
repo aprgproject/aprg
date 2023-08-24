@@ -11,9 +11,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(AxisRotationTest, RotateTermByAngleWorks) {
     AxisRotation rotation("x", "y", ALBA_NUMBER_PI.getDouble(), false);
@@ -105,6 +103,4 @@ TEST(AxisRotationTest, RotateFunctionByAngleWorks) {
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

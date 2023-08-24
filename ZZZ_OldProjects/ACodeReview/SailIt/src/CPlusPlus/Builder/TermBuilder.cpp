@@ -8,7 +8,7 @@ using namespace std;
 
 namespace codeReview {
 
-TermBuilder::TermBuilder(DequeOfTerms& dequeOfTerms) : m_terms(dequeOfTerms), m_lineNumber(0) {}
+TermBuilder::TermBuilder(DequeOfTerms& dequeOfTerms) : m_terms(dequeOfTerms) {}
 
 DequeOfTerms& TermBuilder::getTermsReference() { return m_terms; }
 

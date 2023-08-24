@@ -15,13 +15,13 @@ class SymbolGraph {
 public:
     using SymbolTable = std::map<Vertex, Object>;
 
-    bool contains(Object const& object) const {
+    [[nodiscard]] bool contains(Object const& object) const {
         return m_symbolTable.find(getUniqueVertexIdentifier<Vertex, Object>(object)) != m_symbolTable.cend();
     }
 
-    Vertex getVertex(Object const& object) const { return getUniqueVertexIdentifier<Vertex, Object>(object); }
+    [[nodiscard]] Vertex getVertex(Object const& object) const { return getUniqueVertexIdentifier<Vertex, Object>(object); }
 
-    Object getObject(Vertex const& key) const {
+    [[nodiscard]] Object getObject(Vertex const& key) const {
         Object result{};
         auto it = m_symbolTable.find(key);
         if (it != m_symbolTable.cend()) {

@@ -18,17 +18,17 @@ public:
 
     DirectedGraphWithListOfEdges()  {}
 
-    bool isEmpty() const override { return m_edges.empty(); }
+    [[nodiscard]] bool isEmpty() const override { return m_edges.empty(); }
 
-    bool isDirectlyConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
+    [[nodiscard]] bool isDirectlyConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
         return m_edges.find({sourceVertex, destinationVertex}) != m_edges.cend();
     }
 
-    int getNumberOfVertices() const override { return getUniqueVertices().size(); }
+    [[nodiscard]] int getNumberOfVertices() const override { return getUniqueVertices().size(); }
 
-    int getNumberOfEdges() const override { return m_numberOfEdges; }
+    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
-    Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
+    [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
         Vertices result;
         for (auto it = m_edges.lower_bound({vertex, Vertex{}}); it != m_edges.cend() && it->first == vertex; it++) {
             result.emplace_back(it->second);
@@ -36,12 +36,12 @@ public:
         return result;
     }
 
-    Vertices getVertices() const override {
+    [[nodiscard]] Vertices getVertices() const override {
         SetOfVertices uniqueVertices(getUniqueVertices());
         return Vertices(uniqueVertices.cbegin(), uniqueVertices.cend());
     }
 
-    Edges getEdges() const override {
+    [[nodiscard]] Edges getEdges() const override {
         Edges result;
         result.reserve(m_edges.size());
         std::transform(
@@ -78,7 +78,7 @@ protected:
         return out;
     }
 
-    SetOfVertices getUniqueVertices() const {
+    [[nodiscard]] SetOfVertices getUniqueVertices() const {
         SetOfVertices uniqueVertices;
         for (auto const& [startVertexOfEdge, endVertexOfEdge] : m_edges) {
             uniqueVertices.emplace(startVertexOfEdge);

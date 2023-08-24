@@ -6,9 +6,7 @@
 using namespace alba::AlbaNumberConstants;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(NewtonMethodTest, ConstructionWorks) {
     NewtonMethod(16, [](AlbaNumber const& number) { return (number ^ 2) - 16; });
@@ -115,6 +113,4 @@ TEST(NewtonMethodTest, RunMaxNumberOfIterationsOrUntilFinishedFailsToGetSolution
     EXPECT_EQ(1, newtonMethod.getNumberOfIterationsExecuted());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

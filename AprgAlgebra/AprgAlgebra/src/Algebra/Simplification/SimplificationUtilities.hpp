@@ -2,11 +2,7 @@
 
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
-
-namespace Simplification {
+namespace alba::algebra::Simplification {
 
 void simplifyTermToACommonDenominator(Term& term);
 void simplifyTermByCombiningRadicals(Term& term);
@@ -27,8 +23,4 @@ void simplifyAndCopyTermsFromAnExpressionAndChangeOperatorLevelIfNeeded(
 TermsWithAssociation getTermsWithAssociationAndReverseIfNeeded(
     Expression const& expression, TermAssociationType const overallAssociation);
 
-}  // namespace Simplification
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Simplification

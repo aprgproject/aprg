@@ -28,4 +28,4 @@ std::string constructFenString(
     Board const& board, PieceColor const colorToMove, std::string const& castlingAvailability,
     std::string const& enPassantTarget, int const halfMoveClock, int const fullMoveNumber);
 
-}  // namespace alba::chess::chess::chess
+}  // namespace alba::chess

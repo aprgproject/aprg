@@ -7,9 +7,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 enum class ExtremumType { Unknown, Maximum, Minimum, SaddlePoint };
 
@@ -91,6 +89,4 @@ Extrema getRelativeExtrema(Term const& term, std::string const& variableName);
 ExtremaWithMultipleVariables getRelativeExtremaWithMultipleVariables(
     Term const& term, stringHelper::strings const& coordinateNames);
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

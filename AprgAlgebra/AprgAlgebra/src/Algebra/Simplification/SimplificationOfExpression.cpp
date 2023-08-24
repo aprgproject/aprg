@@ -21,11 +21,9 @@ using namespace std;
 
 namespace alba {
 
-namespace algebra {
+namespace algebra::Simplification {
 
-namespace Simplification {
-
-SimplificationOfExpression::SimplificationOfExpression() : m_expression() {}
+SimplificationOfExpression::SimplificationOfExpression()  {}
 
 SimplificationOfExpression::SimplificationOfExpression(Expression const& expression) : m_expression(expression) {}
 
@@ -352,9 +350,7 @@ void SimplificationOfExpression::convertPolynomialToPolynomialOverPolynomial(Exp
     }
 }
 
-}  // namespace Simplification
-
-}  // namespace algebra
+}  // namespace algebra::Simplification
 
 template <>
 algebra::Simplification::SimplificationOfExpression::ConfigurationDetails

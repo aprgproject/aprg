@@ -27,7 +27,7 @@ public:
         initialize(valuesToCheck);
     }
 
-    Value getSelectedValueOnInterval(Index const start, Index const end) const {
+    [[nodiscard]] Value getSelectedValueOnInterval(Index const start, Index const end) const {
         // This is on constant time
         Value result{};
         if (start < static_cast<Index>(m_selectedValueMatrix.getNumberOfColumns()) &&
@@ -75,15 +75,15 @@ private:
         }
     }
 
-    Index getCeilOfLogarithmWithBase2Of(Index const size) const {
+    [[nodiscard]] Index getCeilOfLogarithmWithBase2Of(Index const size) const {
         return AlbaBitValueUtilities<Index>::getCeilOfLogarithmWithBase2Of(size);
     }
 
-    Index get2ToThePowerOf(Index const exponent) const {
+    [[nodiscard]] Index get2ToThePowerOf(Index const exponent) const {
         return AlbaBitValueUtilities<Index>::get2ToThePowerOf(exponent);
     }
     ValueMatrix m_selectedValueMatrix;  // index by exponent matrix
     SelectorFunction m_selector;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

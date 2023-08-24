@@ -3,9 +3,7 @@
 #include <Algebra/Equation/Equation.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 using TermToTermMap = std::map<Term, Term>;
 using TermTermPair = std::pair<Term, Term>;
@@ -14,19 +12,19 @@ class SubstitutionOfTermsToTerms {
 public:
     SubstitutionOfTermsToTerms();
     SubstitutionOfTermsToTerms(std::initializer_list<TermTermPair> const& variablesWithValues);
-    SubstitutionOfTermsToTerms(TermToTermMap const& variablesWithValues);
+    explicit SubstitutionOfTermsToTerms(TermToTermMap const& variablesWithValues);
 
-    bool isEmpty() const;
-    bool isTermFound(Term const& term) const;
-    int getSize() const;
-    Term getTermForTerm(Term const& term) const;
-    Term performSubstitutionTo(Expression const& expression) const;
-    Term performSubstitutionTo(Function const& functionObject) const;
-    Term performSubstitutionTo(Term const& term) const;
-    Equation performSubstitutionTo(Equation const& equation) const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool isTermFound(Term const& term) const;
+    [[nodiscard]] int getSize() const;
+    [[nodiscard]] Term getTermForTerm(Term const& term) const;
+    [[nodiscard]] Term performSubstitutionTo(Expression const& expression) const;
+    [[nodiscard]] Term performSubstitutionTo(Function const& functionObject) const;
+    [[nodiscard]] Term performSubstitutionTo(Term const& term) const;
+    [[nodiscard]] Equation performSubstitutionTo(Equation const& equation) const;
 
-    Expression performSubstitutionForExpression(Expression const& expression) const;
-    Function performSubstitutionForFunction(Function const& functionObject) const;
+    [[nodiscard]] Expression performSubstitutionForExpression(Expression const& expression) const;
+    [[nodiscard]] Function performSubstitutionForFunction(Function const& functionObject) const;
 
     void putTermsToTermsMapping(std::initializer_list<TermTermPair> const& variablesWithValues);
     void putTermsToTermsMapping(TermToTermMap const& variablesWithValues);
@@ -37,6 +35,4 @@ private:
     TermToTermMap m_termsToTermsMap;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

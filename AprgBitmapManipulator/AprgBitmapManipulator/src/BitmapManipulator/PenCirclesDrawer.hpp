@@ -4,20 +4,18 @@
 #include <BitmapManipulator/PenCircles.hpp>
 #include <BitmapManipulator/Traversal/BitmapSnippetTraversal.hpp>
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 class PenCirclesDrawer {
 public:
     struct ColorDetails {
         ColorDetails();
-        double totalRed;
-        double totalGreen;
-        double totalBlue;
-        double totalWeight;
-        bool isEmpty() const;
-        uint32_t getColor() const;
+        double totalRed{0};
+        double totalGreen{0};
+        double totalBlue{0};
+        double totalWeight{0};
+        [[nodiscard]] bool isEmpty() const;
+        [[nodiscard]] uint32_t getColor() const;
         void addColor(uint32_t const color, double const weight);
         void clear();
     };
@@ -49,6 +47,4 @@ private:
     PointToColorMap m_drawnPoints;
 };
 
-}  // namespace AprgBitmap
-
-}  // namespace alba
+}  // namespace alba::AprgBitmap

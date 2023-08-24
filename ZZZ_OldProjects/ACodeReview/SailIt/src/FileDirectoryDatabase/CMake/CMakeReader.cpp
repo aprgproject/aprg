@@ -19,8 +19,8 @@ namespace codeReview {
 CMakeReader::CMakeReader(string const& fileName, CMakeDatabase& fileDirectoryDatabase)
     : m_fileStream(fileName.c_str()),
       m_albaFileReader(m_fileStream),
-      m_fileDirectoryDatabase(fileDirectoryDatabase),
-      m_isFileValid(false) {
+      m_fileDirectoryDatabase(fileDirectoryDatabase)
+      {
     AlbaLocalPathHandler pathHandler(fileName);
     if (pathHandler.isFoundInLocalSystem() && pathHandler.isFile()) {
         if (m_fileStream.is_open()) {
@@ -235,12 +235,12 @@ void CMakeReader::replaceVariableWithRealValuesInStringAndDoOperation(
     VariableMapIterator startIterator, string const& contents, function<void(string)> operationIfFound) {
     bool found = false;
     // stl algorithm
-    for (VariableMapIterator it = startIterator; it != m_variableMap.end(); ++it) {
+    for (auto it = startIterator; it != m_variableMap.end(); ++it) {
         auto& variableMap = *it;
         for (auto& variableValue : variableMap.second) {
             string contentsTemp(contents);
             if (replaceAllAndReturnIfFound(contentsTemp, "${" + variableMap.first + "}", variableValue)) {
-                VariableMapIterator nextVariableToCheck = it;
+                auto nextVariableToCheck = it;
                 nextVariableToCheck++;
                 replaceVariableWithRealValuesInStringAndDoOperation(
                     nextVariableToCheck, contentsTemp, operationIfFound);
@@ -313,9 +313,9 @@ void CMakeReader::findOpeningParenthesisAndProceed(string& lineString, int& inde
         if (checkAndProceedIfCharacterIsFound(lineString, "(", index)) {
             continueSearching = false;
             break;
-        } else {
+        } 
             continueSearching = readAnotherLineIfPossible(lineString, index);
-        }
+       
     }
 }
 
@@ -328,11 +328,11 @@ string CMakeReader::extractContentsUntilCloseParenthesis(string& lineString, int
             checkAndProceedIfCharacterIsFound(lineString, ")", index);
             continueSearching = false;
             break;
-        } else {
+        } 
             contents += lineString;
             contents += " ";
             continueSearching = readAnotherLineIfPossible(lineString, index);
-        }
+       
     }
     return contents;
 }
@@ -378,7 +378,8 @@ void CMakeReader::ignoreEntireLine(string const& string1, int& index) { index = 
 
 bool CMakeReader::isIgnorable(string const& string1) {
     int index = string1.find_first_not_of(WHITESPACE_STRING, 0);
-    if (isNpos(index)) return false;
+    if (isNpos(index)) { return false;
+}
     return string1[index] == '#';
 }
 

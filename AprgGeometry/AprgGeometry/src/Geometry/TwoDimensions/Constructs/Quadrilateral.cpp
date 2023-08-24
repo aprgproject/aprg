@@ -264,4 +264,4 @@ ostream& operator<<(ostream& out, Quadrilateral const& quadrilateral) {
     return out;
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

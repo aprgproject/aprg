@@ -8,9 +8,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(SignMutatorTest, MutateTermWorks) {
     SignMutator mutator;
@@ -197,6 +195,4 @@ TEST(SignMutatorTest, MutateFunctionWorks) {
     EXPECT_EQ(functionToExpect, functionObject);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

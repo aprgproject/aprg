@@ -12,7 +12,7 @@ class CPlusPlusVariable {
 public:
     CPlusPlusVariable();
     explicit CPlusPlusVariable(CPlusPlusType const& cPlusPlusType);
-    CPlusPlusType getType() const;
+    [[nodiscard]] CPlusPlusType getType() const;
 
 private:
     CPlusPlusType m_type;

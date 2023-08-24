@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(WrappedTermTest, ConstructionWorks) {
     WrappedTerm wrappedTerm1(Term(true));
@@ -54,7 +52,7 @@ TEST(WrappedTermTest, LessThanOperatorWorks) {
 }
 
 TEST(WrappedTermTest, ClearWorks) {
-    WrappedTerm wrappedTerm(Term(10));
+    WrappedTerm wrappedTerm(Term(true));
 
     wrappedTerm.clear();
 
@@ -70,7 +68,5 @@ TEST(WrappedTermTest, OutputStreamOperatorWorks) {
 
     EXPECT_EQ("[true],[false]", ss.str());
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

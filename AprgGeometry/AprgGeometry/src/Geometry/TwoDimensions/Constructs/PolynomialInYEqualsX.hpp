@@ -2,9 +2,7 @@
 
 #include <Geometry/TwoDimensions/Constructs/Polynomial.hpp>
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 template <int numberOfCoefficients>
 class PolynomialInYEqualsX : public Polynomial<numberOfCoefficients> {
@@ -15,7 +13,7 @@ public:
     PolynomialInYEqualsX(std::initializer_list<double> const& coefficients)
         : PolynomialInYEqualsXParent(coefficients) {}
 
-    Points getPoints(double const startValueOfY, double const endValueOfY, double const interval) const {
+    [[nodiscard]] Points getPoints(double const startValueOfY, double const endValueOfY, double const interval) const {
         Points points;
         AlbaValueRange<double> range(startValueOfY, endValueOfY, interval);
         range.traverse([&](double const traverseValueOfY) {
@@ -24,10 +22,9 @@ public:
         return points;
     }
 
-    double calculateXfromY(double const y) const { return PolynomialInYEqualsXParent::calculateOutputFromInput(y); }
+    [[nodiscard]] double calculateXfromY(double const y) const { return PolynomialInYEqualsXParent::calculateOutputFromInput(y); }
 
-    double getSlopeAt(double const y) const { return 1 / PolynomialInYEqualsXParent::getValueOfFirstDerivative(y); }
+    [[nodiscard]] double getSlopeAt(double const y) const { return 1 / PolynomialInYEqualsXParent::getValueOfFirstDerivative(y); }
 };
 
-}  // namespace TwoDimensions
-}  // namespace alba
+}  // namespace alba::TwoDimensions

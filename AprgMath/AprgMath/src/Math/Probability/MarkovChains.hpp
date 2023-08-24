@@ -21,7 +21,7 @@ public:
 
     MarkovChains() : m_probabilityMatrix(MAX_STATE_VALUE, MAX_STATE_VALUE) {}
 
-    AlbaNumber getProbability(int const currentState, int const nextState) const {
+    [[nodiscard]] AlbaNumber getProbability(int const currentState, int const nextState) const {
         return m_probabilityMatrix.getEntry(currentState, nextState);
     }
 

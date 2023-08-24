@@ -17,7 +17,7 @@ public:
     using VertexPair = std::pair<Vertex, Vertex>;
     using VertexPairToCountMap = std::map<VertexPair, int>;
 
-    CountPathsInDirectedGraph(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) { initialize(); }
+    explicit CountPathsInDirectedGraph(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) { initialize(); }
 
     int getCount(Vertex const& start, Vertex const& end) { return getCountInternal(start, end); }
 
@@ -76,4 +76,4 @@ private:
     VertexPairToCountMap m_pathCounts;  // dynamic programming
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

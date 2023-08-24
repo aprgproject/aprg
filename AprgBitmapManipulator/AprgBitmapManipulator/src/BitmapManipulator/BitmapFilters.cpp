@@ -15,13 +15,11 @@ using namespace alba::mathHelper;
 using namespace alba::TwoDimensions;
 using namespace std;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 constexpr int MAX_PEN_CIRCLE_RADIUS_COORDINATE = 5;
 
-BitmapFilters::BitmapFilters(string const& path) : m_backgroundColor(0xFFFFFF), m_bitmap(path) {}
+BitmapFilters::BitmapFilters(string const& path) :  m_bitmap(path) {}
 
 bool BitmapFilters::isBackgroundColor(uint32_t const color) const {
     return getColorValueOnly(color) == m_backgroundColor;
@@ -500,7 +498,7 @@ bool BitmapFilters::isThisPenCircleBetter(
 }
 
 uint32_t BitmapFilters::getBlurredColor(
-    uint32_t const centerColor, uint32_t const colorToCompare, uint32_t const similarityColorLimit) const {
+    uint32_t const centerColor, uint32_t const colorToCompare, uint32_t const similarityColorLimit) {
     uint8_t red = getBlurredColorPart(extractRed(centerColor), extractRed(colorToCompare), similarityColorLimit);
     uint8_t green = getBlurredColorPart(extractGreen(centerColor), extractGreen(colorToCompare), similarityColorLimit);
     uint8_t blue = getBlurredColorPart(extractBlue(centerColor), extractBlue(colorToCompare), similarityColorLimit);
@@ -558,7 +556,5 @@ uint32_t BitmapFilters::getBlurredColorUsingACircle(
 double BitmapFilters::getBlurWeight(double const distanceFromCenter, double const blurRadius) {
     return (blurRadius - distanceFromCenter + 1) / (blurRadius + 1);
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

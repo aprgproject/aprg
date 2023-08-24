@@ -11,9 +11,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace AprgAudio {
+namespace alba::AprgAudio {
 
 void retrieveDeltas(Samples& deltaSamples, Samples const& pointerOfSampleToCheck, int const numberOfSamples) {
     deltaSamples.reserve(numberOfSamples);
@@ -169,7 +167,5 @@ void searchAndTryToReplicate(
     }
     audioToChangeManipulator.saveAudioIntoCurrentFile();
 }
-
-}  // namespace AprgAudio
 
 }  // namespace alba

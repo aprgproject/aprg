@@ -31,9 +31,7 @@ constexpr char const* const DELTA_X_NAME = "deltaX";
 
 }  // namespace
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool isTheFirstFundamentalTheoremOfCalculusTrue(Term const& term, string const& variableName) {
     // The first fundamental theorem of calculus
@@ -349,6 +347,4 @@ void simplifyForDifferentiation(Term& term) {
     simplifyTermByFactoringToNonDoubleFactors(term);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

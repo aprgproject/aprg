@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(AlternatingSeriesTest, IsSummationModelValidWorks) {
     Term numerator(1);
@@ -51,6 +49,4 @@ TEST(AlternatingSeriesTest, GetRemainderAtIndexWorks) {
     EXPECT_EQ(Term(AlbaNumber::createFraction(7, 12)), series.getRemainderAtIndex(3));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

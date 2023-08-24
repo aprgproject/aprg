@@ -23,7 +23,7 @@ public:
         OneHamiltonianCycle,
     };
 
-    HamiltonianPathSearchWithDfs(BaseGraphWithVertex const& graph)
+    explicit HamiltonianPathSearchWithDfs(BaseGraphWithVertex const& graph)
         : m_graph(graph), m_numberOfVertices(m_graph.getNumberOfVertices()), m_searchType(SearchType::Unknown) {}
 
     Paths getAllHamiltonianPaths() {
@@ -65,7 +65,7 @@ public:
     }
 
 protected:
-    bool shouldStop() const {
+    [[nodiscard]] bool shouldStop() const {
         return (SearchType::OneHamiltonianPath == m_searchType || SearchType::OneHamiltonianCycle == m_searchType) &&
                1 <= m_savedPaths.size();
     }

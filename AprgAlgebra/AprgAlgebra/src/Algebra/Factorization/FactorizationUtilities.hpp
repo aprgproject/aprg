@@ -2,11 +2,7 @@
 
 #include <Algebra/Term/TermTypes/Polynomial.hpp>
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 bool areExponentsDivisible(Monomial const& monomial, int const divisor);
 bool isPerfectSquare(Monomial const& monomial);
@@ -21,8 +17,4 @@ void emplaceBackIfPolynomialIsNotEmpty(Polynomials& polynomials, Polynomial cons
 
 void simplifyAndEmplaceBackPolynomialIfListIsEmpty(Polynomials& existingPolynomials, Polynomial const& polynomial);
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

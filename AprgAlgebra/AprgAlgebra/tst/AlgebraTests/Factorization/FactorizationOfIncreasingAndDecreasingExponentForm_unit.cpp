@@ -4,11 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 TEST(
     FactorizationOfIncreasingAndDecreasingExponentFormTest,
@@ -338,8 +334,4 @@ TEST(FactorizationOfIncreasingAndDecreasingExponentFormTest, GetMonomialsWithExp
     EXPECT_EQ(Monomial(1, {{"y", 3}}), monomialsToVerify[3]);
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

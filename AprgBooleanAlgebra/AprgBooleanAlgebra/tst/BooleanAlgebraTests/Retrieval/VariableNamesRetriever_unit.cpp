@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(VariableNamesRetrieverTest, RetrieveFromTermWorks) {
     VariableNamesRetriever retriever;
@@ -53,7 +51,5 @@ TEST(VariableNamesRetrieverTest, RetrieveFromExpressionWorks) {
     EXPECT_EQ("a", *(it++));
     EXPECT_EQ("b", *(it++));
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

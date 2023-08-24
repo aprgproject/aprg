@@ -7,9 +7,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(MultipleVariableSolutionSetTest, ConstructorWorksAndEmpty) {
     MultipleVariableSolutionSet solutionSet;
@@ -97,6 +95,4 @@ TEST(MultipleVariableSolutionSetTest, OutputStreamOperatorWorks) {
         convertToString(solutionSet));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

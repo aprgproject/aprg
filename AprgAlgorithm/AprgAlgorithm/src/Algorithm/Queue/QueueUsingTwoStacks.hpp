@@ -12,9 +12,9 @@ class QueueUsingTwoStacks : public BaseQueue<Object> {
 public:
     QueueUsingTwoStacks() {}
 
-    bool isEmpty() const override { return getSize() == 0; }
+    [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 
-    int getSize() const override { return m_stackFromEnqueue.getSize() + m_stackToDequeue.getSize(); }
+    [[nodiscard]] int getSize() const override { return m_stackFromEnqueue.getSize() + m_stackToDequeue.getSize(); }
 
     void enqueue(Object const& object) override {
         enqueueInConstantTime(object);
@@ -53,4 +53,4 @@ private:
     StackWithObject m_stackToDequeue;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

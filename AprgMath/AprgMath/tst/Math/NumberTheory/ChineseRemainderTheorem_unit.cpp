@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(ChineseRemainderTheoremTest, Example1Works) {
     // x = 3 mod 5
@@ -20,7 +18,5 @@ TEST(ChineseRemainderTheoremTest, Example1Works) {
     EXPECT_EQ(368U, chineseRemainderTheorem.getAnotherSolutionValue(1U));
     EXPECT_EQ(473U, chineseRemainderTheorem.getAnotherSolutionValue(2U));
 }
-
-}  // namespace math
 
 }  // namespace alba

@@ -28,13 +28,13 @@ public:
 
     explicit BitmapFilters(std::string const& path);
 
-    bool isBackgroundColor(uint32_t const color) const;
-    bool isNotBackgroundColor(uint32_t const color) const;
+    [[nodiscard]] bool isBackgroundColor(uint32_t const color) const;
+    [[nodiscard]] bool isNotBackgroundColor(uint32_t const color) const;
 
-    BitmapSnippet getWholeBitmapSnippet() const;
-    BitmapSnippet getBlankSnippet(uint8_t const backgroundColorByte) const;
-    BitmapSnippet getBlankSnippetWithBackground() const;
-    BitmapSnippet getBlankSnippetWithColor(uint32_t const color) const;
+    [[nodiscard]] BitmapSnippet getWholeBitmapSnippet() const;
+    [[nodiscard]] BitmapSnippet getBlankSnippet(uint8_t const backgroundColorByte) const;
+    [[nodiscard]] BitmapSnippet getBlankSnippetWithBackground() const;
+    [[nodiscard]] BitmapSnippet getBlankSnippetWithColor(uint32_t const color) const;
 
     static std::optional<TwoDimensions::Circle> getPossiblePenCircle(
         BitmapSnippet const& inputSnippet, BitmapXY const& centerPoint, uint32_t const similarityColorLimit,
@@ -62,7 +62,7 @@ public:
     static void drawPenCirclesOnly(PenCircles const& penCircles, BitmapSnippet& snippet);
 
     // draw blur functions
-    void drawWithBlurringDisimilarColors(
+    static void drawWithBlurringDisimilarColors(
         BitmapSnippet& snippet, int const numberOfPasses, uint32_t const similarityColorLimit);
     void drawBlurredColorsUsingCircles(
         BitmapSnippet& snippet, double const blurRadius, uint32_t const similarityColorLimit);
@@ -99,7 +99,7 @@ private:
         BitmapSnippet const& inputSnippet, UnionFindForLabels& unionFindForLabels);
     void determineConnectedComponentsUsingTwoPassInSecondPass(
         BitmapSnippet const& inputSnippet, UnionFindForLabels const& unionFindForLabels);
-    void determinePenPointsToPenCircles(
+    static void determinePenPointsToPenCircles(
         PenPointToPenCircleMap& penPointsToPenCircles, PenPoints const& penPoints, BitmapSnippet const& inputSnippet,
         uint32_t const similarityColorLimit, double const acceptablePenPercentage);
     void drawToBlurForCenterPoint(
@@ -114,18 +114,18 @@ private:
     static bool isThisPenCircleBetter(
         BitmapXY const& penBitmapXY, TwoDimensions::Circle const& circleToCheck,
         TwoDimensions::Circle const& circleToCompare);
-    uint32_t getBlurredColor(
-        uint32_t const centerColor, uint32_t const colorToCompare, uint32_t const similarityColorLimit) const;
+    [[nodiscard]] static uint32_t getBlurredColor(
+        uint32_t const centerColor, uint32_t const colorToCompare, uint32_t const similarityColorLimit) ;
     static uint8_t getBlurredColorPart(
         uint8_t const centerColorPart, uint8_t const colorToComparePart, uint32_t const similarityColorLimit);
-    uint32_t getBlurredColorUsingACircle(
+    [[nodiscard]] uint32_t getBlurredColorUsingACircle(
         BitmapSnippet const& snippet, BitmapXY const& centerXY, double const blurRadius,
         BlurCondition const& isIncludedInBlur) const;
     static double getBlurWeight(double const distanceFromCenter, double const blurRadius);
 
-    uint32_t m_backgroundColor;
+    uint32_t m_backgroundColor{0xFFFFFF};
     Bitmap m_bitmap;
     LabelForPoints m_labelForPixels;
 };
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

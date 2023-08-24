@@ -6,11 +6,7 @@
 #include <Algebra/Vector/VectorTypes.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
-namespace alba {
-
-namespace algebra {
-
-namespace VectorUtilities {
+namespace alba::algebra::VectorUtilities {
 
 template <size_t SIZE>
 bool isContinuousAt(
@@ -60,8 +56,4 @@ MathVectorOfTerms<SIZE> getDoubleDel(
 template <size_t SIZE>
 void simplifyForTermVector(MathVectorOfTerms<SIZE>& termVector);
 
-}  // namespace VectorUtilities
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::VectorUtilities

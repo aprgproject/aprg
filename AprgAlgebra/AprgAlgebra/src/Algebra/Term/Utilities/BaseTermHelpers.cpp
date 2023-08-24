@@ -2,9 +2,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 BaseTermUniquePointer createBasePointer(BaseTerm const& baseTerm) {
     return static_cast<BaseTermUniquePointer>(make_unique<Term>(getTermConstReferenceFromBaseTerm(baseTerm)));
@@ -44,6 +42,4 @@ BaseTerm& getBaseTermReferenceFromUniquePointer(BaseTermUniquePointer const& uni
     return static_cast<BaseTerm&>(*uniquePointer.get());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

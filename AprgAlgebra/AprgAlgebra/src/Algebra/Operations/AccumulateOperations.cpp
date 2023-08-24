@@ -10,9 +10,7 @@
 using namespace alba::AlbaNumberConstants;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 void accumulateAndDoOperationOnTermDetails(
     Term& combinedTerm, OperatorLevel const operatorLevel, TermWithDetails const& termWithDetails) {
@@ -123,6 +121,4 @@ void accumulateTermsForRaiseToPower(Term& combinedTerm, TermsWithDetails const& 
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -9,11 +9,9 @@
 
 using namespace std;
 
-namespace alba {
+namespace alba::algebra {
 
-namespace algebra {
-
-SolverUsingSubstitution::SolverUsingSubstitution() : BaseSolver() {}
+SolverUsingSubstitution::SolverUsingSubstitution()  {}
 
 MultipleVariableSolutionSets SolverUsingSubstitution::calculateSolutionAndReturnSolutionSet(
     Equations const& equations) {
@@ -163,6 +161,4 @@ void SolverUsingSubstitution::solveAndUpdate(
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

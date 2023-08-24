@@ -34,10 +34,10 @@ public:
     using SegmentTree = RangeQueryWithDynamicSegmentTree<ValueToCountMaps>;
     using Function = typename SegmentTree::Function;
 
-    RangeQueryForCount(Values const& valuesToCheck)
+    explicit RangeQueryForCount(Values const& valuesToCheck)
         : m_valueToCountMapSegmentTree(getValueToCountMaps(valuesToCheck), getFunctionForSegmentTree()) {}
 
-    Count getCountOfThisValueOnInterval(Index const start, Index const end, Value const& value) const {
+    [[nodiscard]] Count getCountOfThisValueOnInterval(Index const start, Index const end, Value const& value) const {
         Count result(0);
         ValueToCountMap valueToCountMap(m_valueToCountMapSegmentTree.getValueOnInterval(start, end));
         auto it = valueToCountMap.find(value);
@@ -52,7 +52,7 @@ public:
     }
 
 private:
-    ValueToCountMaps getValueToCountMaps(Values const& valuesToCheck) const {
+    [[nodiscard]] ValueToCountMaps getValueToCountMaps(Values const& valuesToCheck) const {
         ValueToCountMaps result;
         result.reserve(valuesToCheck.size());
         std::transform(
@@ -62,7 +62,7 @@ private:
         return result;
     }
 
-    Function getFunctionForSegmentTree() const {
+    [[nodiscard]] Function getFunctionForSegmentTree() const {
         return [](ValueToCountMap const& map1, ValueToCountMap const& map2) {
             ValueToCountMap result(map1);
             for (auto const& [value, count] : map2) {
@@ -80,4 +80,4 @@ private:
     SegmentTree m_valueToCountMapSegmentTree;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

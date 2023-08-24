@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(SingleVariableNameRetrieverTest, RetrieveFromEquationsWorks) {
     SingleVariableNameRetriever retriever;
@@ -137,6 +135,4 @@ TEST(SingleVariableNameRetrieverTest, RetrieveFromPolynomialsWorks) {
     EXPECT_TRUE(retriever.getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty().empty());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

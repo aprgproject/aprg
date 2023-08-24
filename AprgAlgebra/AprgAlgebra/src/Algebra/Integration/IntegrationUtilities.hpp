@@ -8,9 +8,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool isTheSecondFundamentalTheoremOfCalculusTrue(
     Term const& term, std::string const& variableName, AlbaNumber const& a, AlbaNumber const& b);
@@ -42,6 +40,4 @@ Term getAreaUnderACurveUsingReimannSums(
 LowerAndHigherValues getApproximateValuesForDefiniteIntegral(
     Term const& term, std::string const& variableName, AlbaNumber const& lowerEndInInterval,
     AlbaNumber const& higherEndInInterval);
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

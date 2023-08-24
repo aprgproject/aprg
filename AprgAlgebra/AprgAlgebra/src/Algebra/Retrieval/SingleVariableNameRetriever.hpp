@@ -5,18 +5,16 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class SingleVariableNameRetriever final : public BaseRetriever {
 public:
     SingleVariableNameRetriever();
 
-    std::string const& getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty() const;
-    bool hasNoVariables() const;
-    bool hasOnlyASingleVariable() const;
-    bool hasMultipleVariables() const;
+    [[nodiscard]] std::string const& getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty() const;
+    [[nodiscard]] bool hasNoVariables() const;
+    [[nodiscard]] bool hasOnlyASingleVariable() const;
+    [[nodiscard]] bool hasMultipleVariables() const;
 
     void retrieveFromEquations(Equations const& equations) override;
     void retrieveFromEquation(Equation const& equation) override;
@@ -31,8 +29,8 @@ public:
 
     // private:
     void putVariableIfPossible(std::string const& variableName);
-    bool m_hasEncounteredAVariable;
-    bool m_hasMultipleVariables;
+    bool m_hasEncounteredAVariable{false};
+    bool m_hasMultipleVariables{false};
     std::string m_singleVariableName;
 };
 
@@ -57,6 +55,4 @@ std::string getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty(DataTyp
     return retriever.getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty();
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -7,13 +7,11 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::
     SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever(strings const& variableNames)
-    : m_variableNameToTermMap(), m_termWithMultipleVariableNames(), m_remainingTerm() {
+     {
     initializeWithVariableNames(variableNames);
 }
 
@@ -118,6 +116,4 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::saveTerm(
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -28,4 +28,4 @@ UnsignedInteger getIntersectionCountOfThreeSets(
     return abcUnion - aSize - bSize - cSize + abIntersection + acIntersection + bcIntersection;
 }
 
-}  // namespace alba
+}  // namespace alba::math

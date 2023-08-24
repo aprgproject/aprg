@@ -5,13 +5,11 @@
 
 using namespace alba::mathHelper;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 LinearDiophantineEquationCoefficientSolver::LinearDiophantineEquationCoefficientSolver(
     AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c)
-    : m_solutionStatus(SolutionStatus::Unknown), m_x{}, m_y{}, m_a{}, m_b{}, m_c{}, m_gcfOfAAndB{} {
+     {
     solve(a, b, c);
 }
 
@@ -71,6 +69,4 @@ void LinearDiophantineEquationCoefficientSolver::solve(
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

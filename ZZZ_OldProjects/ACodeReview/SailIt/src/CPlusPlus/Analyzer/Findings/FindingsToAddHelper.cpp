@@ -1,8 +1,6 @@
 #include "FindingsToAddHelper.hpp"
 
-namespace codeReview {
-
-namespace FindingsToAddHelper {
+namespace codeReview::FindingsToAddHelper {
 
 bool isExpectedNewLineIncluded(FindingsToAdd const findingsToAdd) {
     return findingsToAdd == FindingsToAdd::ExpectsNewLineAndUnexpectsWhiteSpace;
@@ -17,7 +15,5 @@ bool isUnexpectedWhiteSpaceIncluded(FindingsToAdd const findingsToAdd) {
 bool isUnexpectedNewLineIncluded(FindingsToAdd const findingsToAdd) {
     return findingsToAdd == FindingsToAdd::UnexpectsNewLineAndUnexpectsWhiteSpace;
 }
-
-}  // namespace FindingsToAddHelper
 
 }  // namespace codeReview

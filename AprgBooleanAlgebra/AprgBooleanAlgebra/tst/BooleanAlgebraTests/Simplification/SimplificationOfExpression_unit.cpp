@@ -7,11 +7,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
-
-namespace Simplification {
+namespace alba::booleanAlgebra::Simplification {
 
 TEST(SimplificationOfExpressionTest, ShouldSimplifyWithOuterOrAndInnerAndWorks) {
     EXPECT_FALSE(SimplificationOfExpression::shouldSimplifyWithOuterOrAndInnerAnd());
@@ -474,9 +470,5 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnConsensusTheoremPattern2) {
     string stringToExpect("((x|y)&(x'|z))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
-
-}  // namespace Simplification
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

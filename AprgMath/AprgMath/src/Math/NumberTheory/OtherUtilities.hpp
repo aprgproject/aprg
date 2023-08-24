@@ -2,9 +2,7 @@
 
 #include <Math/Types.hpp>
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 bool isAFibonacciNumber(UnsignedInteger const number);
 bool isALuckyNumber(UnsignedInteger const number);
@@ -18,6 +16,4 @@ UnsignedInteger getNthFibonacciUsingMatrixPowerWithLogarithmicTime(UnsignedInteg
 UnsignedInteger getNthFibonacciUsingLogarithmicTabularDP(UnsignedInteger const number);
 UnsignedIntegers getFibonacciNumbersBelowThisNumber(UnsignedInteger const number);
 
-}  // namespace math
-
-}  // namespace alba
+}  // namespace alba::math

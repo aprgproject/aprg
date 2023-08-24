@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(BrentMethodTest, ConstructionWorks) {
     BrentMethod brentMethod1(AlbaNumbers{});
@@ -363,6 +361,4 @@ TEST(BrentMethodTest, RunWorksOnPrecisionExample) {
     EXPECT_EQ(49, brentMethod.getNumberOfIterationsExecuted());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

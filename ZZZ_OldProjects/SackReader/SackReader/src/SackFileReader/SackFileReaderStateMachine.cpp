@@ -600,4 +600,4 @@ void SackFileReaderStateMachine::saveTypedefDescriptionToDatabase(string const& 
         getStringWithoutRedundantWhiteSpace(partialString);
 }
 
-}  // namespace alba
+}  // namespace alba::SackFileReaderStateMachineNamespace

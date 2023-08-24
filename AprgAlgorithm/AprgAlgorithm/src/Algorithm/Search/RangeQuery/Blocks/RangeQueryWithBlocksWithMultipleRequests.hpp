@@ -37,7 +37,7 @@ public:
           m_accumulateFunction(accumulateFunction),
           m_inverseAccumulateFunction(inverseAccumulateFunction) {}
 
-    InputAndOutputPairs getInputAndOutputPairsUsingMoAlgorithm(Ranges const& inputRanges) const {
+    [[nodiscard]] InputAndOutputPairs getInputAndOutputPairsUsingMoAlgorithm(Ranges const& inputRanges) const {
         // Mo’s algorithm maintains an active range of the array, and the answer to a query concerning the active range
         // is known at each moment. The algorithm processes the queries one by one, and always moves the endpoints of
         // the active range by inserting and removing elements. The time complexity of the algorithm is
@@ -83,9 +83,9 @@ public:
     }
 
 private:
-    Index getSquareRootSize(Index const numberOfValues) const { return static_cast<Index>(sqrt(numberOfValues)); }
+    [[nodiscard]] Index getSquareRootSize(Index const numberOfValues) const { return static_cast<Index>(sqrt(numberOfValues)); }
 
-    Ranges getValidRangesAndSortForMoAlgorithm(Ranges const& ranges) const {
+    [[nodiscard]] Ranges getValidRangesAndSortForMoAlgorithm(Ranges const& ranges) const {
         Ranges result;
         result.reserve(ranges.size());
         for (Range const& range : ranges) {
@@ -119,4 +119,4 @@ private:
     TwoBlocksFunction m_inverseAccumulateFunction;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

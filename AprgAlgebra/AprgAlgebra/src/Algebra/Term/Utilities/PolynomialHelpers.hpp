@@ -40,4 +40,4 @@ Polynomial raiseBinomialToAPowerUsingBinomialExpansion(Polynomial const& binomia
 
 void removeEmptyPolynomials(Polynomials& polynomials);
 
-}  // namespace alba
+}  // namespace alba::algebra

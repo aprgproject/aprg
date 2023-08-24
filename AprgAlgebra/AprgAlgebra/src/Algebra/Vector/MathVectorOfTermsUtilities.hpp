@@ -15,11 +15,7 @@
 
 #include <algorithm>
 
-namespace alba {
-
-namespace algebra {
-
-namespace VectorUtilities {
+namespace alba::algebra::VectorUtilities {
 
 bool isDivergenceOfCurlZero(MathVectorOfThreeTerms const& termVector, ArrayOfThreeStrings const& coordinateVariables);
 bool isGaussDivergenceTheoremInAPlaneTrue(
@@ -339,8 +335,4 @@ void simplifyForTermVector(MathVectorOfTerms<SIZE>& termVector) {
     }
 }
 
-}  // namespace VectorUtilities
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::VectorUtilities

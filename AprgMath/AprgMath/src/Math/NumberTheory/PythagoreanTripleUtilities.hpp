@@ -2,9 +2,7 @@
 
 #include <Math/Types.hpp>
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 using PythagoreanTriple = std::tuple<UnsignedInteger, UnsignedInteger, UnsignedInteger>;  //{a,b,c}
 
@@ -16,6 +14,4 @@ PythagoreanTriple getNewPythagoreanTripleUsingMultiplier(
 PythagoreanTriple getPrimitivePythagoreanTripleUsingEuclidFormula(
     UnsignedInteger const seedValueM, UnsignedInteger const seedValueN);
 
-}  // namespace math
-
-}  // namespace alba
+}  // namespace alba::math

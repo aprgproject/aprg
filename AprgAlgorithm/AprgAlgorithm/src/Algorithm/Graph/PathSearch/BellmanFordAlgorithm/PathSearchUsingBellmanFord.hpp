@@ -124,7 +124,7 @@ private:
     CheckableVertices<Vertex> m_checkableVerticesToProcess;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Algorithm in short terms: Relax all nodes.
 

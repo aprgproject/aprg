@@ -6,9 +6,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Term getSummationOfArithmeticSeries(string const& countVariable) {
     // form: Summation of k from 1 to n of k
@@ -64,6 +62,4 @@ Term getSummationOfPowersOfTwo(string const& countVariable) {
     return result;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

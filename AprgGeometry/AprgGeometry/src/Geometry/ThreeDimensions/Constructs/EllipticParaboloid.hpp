@@ -31,4 +31,4 @@ private:
 
 using EllipticParaboloids = std::vector<EllipticParaboloid>;
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

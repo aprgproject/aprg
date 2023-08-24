@@ -31,4 +31,4 @@ ostream& operator<<(ostream& out, Triangle const& triangle) {
     return out;
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

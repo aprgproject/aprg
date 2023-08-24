@@ -3,9 +3,7 @@
 #include <Algebra/Series/SpecificSeries/ArithmeticSeries.hpp>
 #include <Algebra/Utilities/KnownNames.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 SummationSeriesOfArithmeticSeries::SummationSeriesOfArithmeticSeries(
     AlbaNumber const& firstValue, AlbaNumber const& commonDifference)
@@ -16,6 +14,4 @@ SummationSeriesOfArithmeticSeries::SummationSeriesOfArithmeticSeries(
     : SeriesBasedOnSummation(
           ArithmeticSeries(valueAtNthIndex1, nthIndex1, valueAtNthIndex2, nthIndex2).getFormulaForSeries(), n) {}
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

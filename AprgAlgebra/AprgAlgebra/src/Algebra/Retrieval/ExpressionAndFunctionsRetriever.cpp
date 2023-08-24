@@ -1,8 +1,6 @@
 #include "ExpressionAndFunctionsRetriever.hpp"
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TermSet const& ExpressionAndFunctionsRetriever::getExpressionsAndFunctions() const { return m_expressionsAndFunctions; }
 
@@ -18,6 +16,4 @@ void ExpressionAndFunctionsRetriever::retrieveFromFunction(Function const& funct
     BaseRetriever::retrieveFromFunction(functionObject);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -28,7 +28,7 @@ public:
         searchForMinimumSpanningTree();
     }
 
-    Edges getMinimumSpanningTreeEdges() const {
+    [[nodiscard]] Edges getMinimumSpanningTreeEdges() const {
         Edges result;
         result.reserve(m_vertexToEdgeWithMinimumWeightMap.size());
         std::transform(
@@ -40,7 +40,7 @@ public:
     }
 
 private:
-    bool hasNoWeightSaved(Vertex const& vertex) const {
+    [[nodiscard]] bool hasNoWeightSaved(Vertex const& vertex) const {
         return m_vertexToEdgeWithMinimumWeightMap.find(vertex) == m_vertexToEdgeWithMinimumWeightMap.cend();
     }
 
@@ -154,4 +154,4 @@ private:
 // then the time complexity of Prim’s algorithm can be reduced to O(E log V) with the help of binary heap.
 // NOTE: This is roughly the same as Kruskal algorithm.
 
-}  // namespace alba
+}  // namespace alba::algorithm

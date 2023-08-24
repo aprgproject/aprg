@@ -8,9 +8,7 @@
 
 using namespace alba::algebra::Functions;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(ValueCheckingHelpersTest, IsValueSatisfyTheConditionWorksForTerm) {
     Term termToTest(12345);
@@ -470,6 +468,4 @@ TEST(ValueCheckingHelpersTest, HasNegativeExponentsWithVariableWorks) {
     EXPECT_TRUE(hasNegativeExponentsWithVariable(polynomial, "z"));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

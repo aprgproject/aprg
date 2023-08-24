@@ -14,9 +14,7 @@ using namespace alba::algebra::Simplification;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 void SignMutator::mutateTerm(Term& term) {
     if (term.isConstant()) {
@@ -176,6 +174,4 @@ void SignMutator::mutateExpressionWithRaiseToPower(Expression& expression) {
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

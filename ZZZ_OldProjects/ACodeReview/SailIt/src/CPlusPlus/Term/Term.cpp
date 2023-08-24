@@ -12,7 +12,7 @@ using namespace alba::stringHelper;
 namespace codeReview {
 
 Term::Term(TermType termType, unsigned int const lineNumber)
-    : m_hasContentString(false), m_termType(termType), m_content(), m_lineNumber(lineNumber) {}
+    : m_hasContentString(false), m_termType(termType),  m_lineNumber(lineNumber) {}
 
 Term::Term(TermType termType, string const& content, unsigned int const lineNumber)
     : m_hasContentString(true), m_termType(termType), m_content(content), m_lineNumber(lineNumber) {}
@@ -54,15 +54,16 @@ CPlusPlusType Term::getValueType() const {
     if (m_ValueTypeOptional) {
         return m_ValueTypeOptional.getConstReference();
     }
-    return CPlusPlusType();
+    return {};
 }
 
 CPlusPlusType& Term::getValueTypeReference() { return m_ValueTypeOptional.getReference(); }
 
 string Term::getPrintableString() const {
     string replacedString(m_content);
-    while (replaceAllAndReturnIfFound(replacedString, "\n", "(\\n)"))
+    while (replaceAllAndReturnIfFound(replacedString, "\n", "(\\n)")) {
         ;
+}
     return replacedString;
 }
 

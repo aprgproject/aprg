@@ -6,11 +6,9 @@
 
 using namespace std;
 
-namespace alba {
+namespace alba::algebra {
 
-namespace algebra {
-
-LinearDiophantineEquationSolver::LinearDiophantineEquationSolver() : BaseSolver(), m_calculatedValues() {}
+LinearDiophantineEquationSolver::LinearDiophantineEquationSolver()  {}
 
 MultipleVariableSolutionSet LinearDiophantineEquationSolver::calculateSolutionAndReturnSolutionSet(
     Equation const& equation) {
@@ -67,6 +65,4 @@ void LinearDiophantineEquationSolver::retrieveDetailsFromPolynomial(
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

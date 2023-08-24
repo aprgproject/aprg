@@ -17,7 +17,7 @@ public:
     double getCurrentLocation();
 
 private:
-    bool m_isRollbackActivated;
+    bool m_isRollbackActivated{false};
     BtsLogPrint m_previousPrint;
     std::ifstream m_inputStream;
 };

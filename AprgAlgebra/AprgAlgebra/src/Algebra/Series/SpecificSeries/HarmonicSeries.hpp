@@ -2,9 +2,7 @@
 
 #include <Algebra/Series/GeneralSeries/SeriesBasedOnSummation.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class HarmonicSeries : public SeriesBasedOnSummation {
 public:
@@ -14,6 +12,4 @@ protected:
     static Term getFormula();
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

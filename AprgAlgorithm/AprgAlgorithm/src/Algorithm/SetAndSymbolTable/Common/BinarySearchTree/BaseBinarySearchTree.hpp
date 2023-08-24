@@ -17,15 +17,15 @@ public:
 
     virtual ~BaseBinarySearchTree() = default;  // virtual destructor because of virtual functions (vtable exists)
 
-    bool isEmpty() const override { return getSize() == 0; }
+    [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 
-    bool doesContain(Key const& key) const override { return doesContainStartingOnThisNode(m_root, key); }
+    [[nodiscard]] bool doesContain(Key const& key) const override { return doesContainStartingOnThisNode(m_root, key); }
 
-    int getSize() const override { return getSizeOfThisSubTree(m_root); }
+    [[nodiscard]] int getSize() const override { return getSizeOfThisSubTree(m_root); }
 
-    int getRank(Key const& key) const override { return getRankStartingOnThisNode(m_root, key); }
+    [[nodiscard]] int getRank(Key const& key) const override { return getRankStartingOnThisNode(m_root, key); }
 
-    Key getMinimum() const override {
+    [[nodiscard]] Key getMinimum() const override {
         Key result{};
         Node const* const nodePointer(getMinimumNodeStartingOnThisNode(m_root));
         if (nodePointer != nullptr) {
@@ -34,7 +34,7 @@ public:
         return result;
     }
 
-    Key getMaximum() const override {
+    [[nodiscard]] Key getMaximum() const override {
         Key result{};
         Node const* const nodePointer(getMaximumNodeStartingOnThisNode(m_root));
         if (nodePointer != nullptr) {
@@ -43,7 +43,7 @@ public:
         return result;
     }
 
-    Key selectAt(int const index) const override {
+    [[nodiscard]] Key selectAt(int const index) const override {
         Key result{};
         Node const* const nodePointer(selectNodeWithIndexStartingOnThisNode(m_root, index));
         if (nodePointer != nullptr) {
@@ -52,7 +52,7 @@ public:
         return result;
     }
 
-    Key getFloor(Key const& key) const override {
+    [[nodiscard]] Key getFloor(Key const& key) const override {
         Key result{};
         Node const* const nodePointer(getNodeWithFloorStartingOnThisNode(m_root, key));
         if (nodePointer != nullptr) {
@@ -61,7 +61,7 @@ public:
         return result;
     }
 
-    Key getCeiling(Key const& key) const override {
+    [[nodiscard]] Key getCeiling(Key const& key) const override {
         Key result{};
         Node const* const nodePointer(getNodeWithCeilingStartingOnThisNode(m_root, key));
         if (nodePointer != nullptr) {
@@ -70,7 +70,7 @@ public:
         return result;
     }
 
-    NodeUniquePointer const& getRoot() const { return m_root; }
+    [[nodiscard]] NodeUniquePointer const& getRoot() const { return m_root; }
 
     void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyStartingOnThisNode(m_root, key); }
 
@@ -78,13 +78,13 @@ public:
 
     void deleteMaximum() override { deleteMaximumStartingOnThisNode(m_root); }
 
-    Keys getKeys() const override {
+    [[nodiscard]] Keys getKeys() const override {
         Keys result;
         retrieveKeysStartingOnThisNode(result, m_root);
         return result;
     }
 
-    Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override {
+    [[nodiscard]] Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override {
         Keys result;
         retrieveKeysInRangeInclusiveStartingOnThisNode(result, m_root, low, high);
         return result;
@@ -101,7 +101,7 @@ public:
 protected:
     virtual void copyNodeContents(Node& destinationNode, Node const& sourceNode) const = 0;
 
-    int getSizeOfThisSubTree(NodeUniquePointer const& nodePointer) const {
+    [[nodiscard]] int getSizeOfThisSubTree(NodeUniquePointer const& nodePointer) const {
         int size(0);
         if (nodePointer) {
             size = nodePointer->sizeOfThisSubTree;
@@ -115,7 +115,7 @@ protected:
 
     virtual void updateTreeNodeDetails(Node& node) const { node.sizeOfThisSubTree = calculateSizeOfThisSubTree(node); }
 
-    virtual bool doesContainStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const {
+    [[nodiscard]] virtual bool doesContainStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const {
         bool result(false);
         if (nodePointer) {
             Key const& currentKey(nodePointer->key);
@@ -130,7 +130,7 @@ protected:
         return result;
     }
 
-    Node const* getMinimumNodeStartingOnThisNode(NodeUniquePointer const& nodePointer) const {
+    [[nodiscard]] Node const* getMinimumNodeStartingOnThisNode(NodeUniquePointer const& nodePointer) const {
         Node const* result(nullptr);
         if (nodePointer) {
             if (nodePointer->left) {
@@ -143,7 +143,7 @@ protected:
         return result;
     }
 
-    Node const* getMaximumNodeStartingOnThisNode(NodeUniquePointer const& nodePointer) const {
+    [[nodiscard]] Node const* getMaximumNodeStartingOnThisNode(NodeUniquePointer const& nodePointer) const {
         Node const* result(nullptr);
         if (nodePointer) {
             if (nodePointer->right) {
@@ -156,7 +156,7 @@ protected:
         return result;
     }
 
-    Node const* selectNodeWithIndexStartingOnThisNode(NodeUniquePointer const& nodePointer, int const index) const {
+    [[nodiscard]] Node const* selectNodeWithIndexStartingOnThisNode(NodeUniquePointer const& nodePointer, int const index) const {
         Node const* result(nullptr);
         if (nodePointer) {
             int sizeOfThisSubTree = getSizeOfThisSubTree(nodePointer->left);
@@ -171,7 +171,7 @@ protected:
         return result;
     }
 
-    virtual Node const* getNodeWithFloorStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const {
+    [[nodiscard]] virtual Node const* getNodeWithFloorStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const {
         Node const* result(nullptr);
         if (nodePointer) {
             Key const& currentKey(nodePointer->key);
@@ -195,7 +195,7 @@ protected:
         return result;
     }
 
-    virtual Node const* getNodeWithCeilingStartingOnThisNode(
+    [[nodiscard]] virtual Node const* getNodeWithCeilingStartingOnThisNode(
         NodeUniquePointer const& nodePointer, Key const& key) const {
         Node const* result(nullptr);
         if (nodePointer) {
@@ -216,7 +216,7 @@ protected:
         return result;
     }
 
-    virtual int getRankStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const {
+    [[nodiscard]] virtual int getRankStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const {
         int result(0);
         if (nodePointer) {
             Key const& currentKey(nodePointer->key);

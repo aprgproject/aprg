@@ -9,7 +9,7 @@ class GetNextFreeIndexWithUnionFind {
 public:
     using UnionFind = UnionFindForFreeIndex<Index>;
 
-    GetNextFreeIndexWithUnionFind(Index const numberOfIndexes)
+    explicit GetNextFreeIndexWithUnionFind(Index const numberOfIndexes)
         : m_numberOfIndexes(numberOfIndexes), m_unionFind(numberOfIndexes) {}
 
     Index getNextFreeIndexAt(Index const index) {
@@ -47,4 +47,4 @@ private:
     UnionFind m_unionFind;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

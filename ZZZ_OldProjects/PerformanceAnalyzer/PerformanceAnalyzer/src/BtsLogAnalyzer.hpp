@@ -18,39 +18,28 @@ public:
     enum class LogType { RlSetup, RlDeletion };
     struct PrintsAvailable {
         PrintsAvailable();
-        bool hasBB_2_RL_SETUP_REQ_MSG;
-        bool hasBB_2_RL_SETUP_ACK_MSG;
-        bool hasTC_TRANSPORT_BEARER_REGISTER_MSG;
-        bool hasTC_TRANSPORT_BEARER_REGISTER_RESP_MSG;
+        bool hasBB_2_RL_SETUP_REQ_MSG{false};
+        bool hasBB_2_RL_SETUP_ACK_MSG{false};
+        bool hasTC_TRANSPORT_BEARER_REGISTER_MSG{false};
+        bool hasTC_TRANSPORT_BEARER_REGISTER_RESP_MSG{false};
     };
     struct DspData {
         DspData()
-            : boardId(0),
-              cpuId(0),
-              lcgId(0),
-              availableUlCEs(0),
-              availableDlCEs(0),
-              rakeState(0),
-              rachHand(0),
-              rakeLoad(0),
-              hsupaCFs(0),
-              hsRachCFs(0),
-              hsupaUsers(0),
-              nbrOfEnhHsupaUsers(0),
-              dchUsers(0) {}
-        unsigned int boardId;
-        unsigned int cpuId;
-        unsigned int lcgId;
-        unsigned int availableUlCEs;
-        unsigned int availableDlCEs;
-        unsigned int rakeState;
-        unsigned int rachHand;
-        unsigned int rakeLoad;
-        unsigned int hsupaCFs;
-        unsigned int hsRachCFs;
-        unsigned int hsupaUsers;
-        unsigned int nbrOfEnhHsupaUsers;
-        unsigned int dchUsers;
+            
+              {}
+        unsigned int boardId{0};
+        unsigned int cpuId{0};
+        unsigned int lcgId{0};
+        unsigned int availableUlCEs{0};
+        unsigned int availableDlCEs{0};
+        unsigned int rakeState{0};
+        unsigned int rachHand{0};
+        unsigned int rakeLoad{0};
+        unsigned int hsupaCFs{0};
+        unsigned int hsRachCFs{0};
+        unsigned int hsupaUsers{0};
+        unsigned int nbrOfEnhHsupaUsers{0};
+        unsigned int dchUsers{0};
     };
     using LogTime = std::optional<wcdmaToolsBackend::BtsLogTime>;
     using LogTimePair = std::pair<LogTime, LogTime>;
@@ -98,10 +87,10 @@ private:
     void saveRlhSetupTime(std::string const& lineInLogs, LogTimePairs& rlSetupLogTimePairs);
     void saveRlhDeletionTime(std::string const& lineInLogs, LogTimePairs& rlDeletionLogTimePairs);
     void saveAdditionalPrintsRlSetup(std::string const& lineInLogs, LogTimePairs& rlSetupLogTimePairs);
-    void setFirstLogTimeInPair(
-        std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) const;
-    void setSecondLogTimeInPair(
-        std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) const;
+    static void setFirstLogTimeInPair(
+        std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) ;
+    static void setSecondLogTimeInPair(
+        std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) ;
     void computeRlSetupLatencyAndUpdateIfLogTimePairIsValid(
         UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
     void computeRLDeletionLatencyAndUpdateIfLogTimePairIsValid(
@@ -111,7 +100,7 @@ private:
         UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, std::ofstream& csvFileStream);
     void savePrintsAvailableToCsvFile(UserIdentifiers const& userIdentifiers, std::ofstream& csvFileStream);
     static void setLogTimeIfNeeded(std::string const& lineInLogs, LogTime& logTime);
-    double getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser) const;
+    static double getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser) ;
     static double getTotalMicroseconds(wcdmaToolsBackend::BtsLogTime const& btsLogTime);
     DataCollection<double> m_messageQueueingTime;
     DataCollection<double> m_rlhRlSetupLatency;

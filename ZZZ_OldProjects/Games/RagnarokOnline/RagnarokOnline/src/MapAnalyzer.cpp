@@ -270,9 +270,9 @@ void MapAnalyzer::sortMaps() {
                    
                 }                     return first.baseExperiencePotential > second.baseExperiencePotential;
                
-            } else {
+            } 
                 return first.zenyPotential > second.zenyPotential;
-            }
+           
         });
 }
 

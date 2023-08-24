@@ -18,8 +18,8 @@ class LabelForPoints {
 public:
     using PixelsToLabelsMap = std::map<BitmapXY, int>;
     using PixelAndLabelPair = std::pair<BitmapXY, int>;
-    int getLabel(BitmapXY const& point) const;
-    PixelsToLabelsMap const& getPixelsToLabels() const;
+    [[nodiscard]] int getLabel(BitmapXY const& point) const;
+    [[nodiscard]] PixelsToLabelsMap const& getPixelsToLabels() const;
 
     void setLabel(BitmapXY const& point, int const label);
 
@@ -27,4 +27,4 @@ private:
     PixelsToLabelsMap m_pixelsTolabelsMap;
 };
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

@@ -16,7 +16,7 @@ public:
 
     explicit WalkInSuccessorGraph(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
 
-    bool isAtTheEnd(Vertex const& vertex) const { return m_graph.getAdjacentVerticesAt(vertex).empty(); }
+    [[nodiscard]] bool isAtTheEnd(Vertex const& vertex) const { return m_graph.getAdjacentVerticesAt(vertex).empty(); }
 
     Vertex walk(Vertex const& start, int const distance) { return walkInternal(start, distance); }
 

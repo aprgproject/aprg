@@ -8,9 +8,7 @@
 using namespace alba::AlbaNumberConstants;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 AlternatingSeries::AlternatingSeries(Term const& formulaForEachTermWithoutSign, string const& variableName)
     : SeriesBasedOnSummation(getFormula(formulaForEachTermWithoutSign, variableName), variableName),
@@ -36,6 +34,4 @@ Term AlternatingSeries::getFormula(Term const& formulaForEachTermWithoutSign, st
     return createExpressionIfPossible({sign, "*", formulaForEachTermWithoutSign});
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

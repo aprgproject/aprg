@@ -36,7 +36,7 @@ public:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // -> Reservoir sampling is a family of randomized algorithms
 // ---> for randomly choosing k samples from a list of n items,

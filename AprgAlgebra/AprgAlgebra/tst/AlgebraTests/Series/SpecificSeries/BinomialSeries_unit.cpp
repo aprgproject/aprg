@@ -6,9 +6,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(BinomialSeriesTest, ConstructionWorks) { BinomialSeries("x", AlbaNumber::createFraction(1, 3)); }
 
@@ -37,6 +35,4 @@ TEST(BinomialSeriesTest, GetValueAtIndexWorks) {
     EXPECT_EQ(stringToExpect4, convertToString(series.getValueAtIndex(3)));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

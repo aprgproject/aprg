@@ -18,7 +18,7 @@ public:
 
     [[nodiscard]] bool isBipartite() const { return m_isBipartite; }
 
-    bool hasFirstColor(Vertex const& vertex) const {
+    [[nodiscard]] bool hasFirstColor(Vertex const& vertex) const {
         bool result(false);
         auto it = m_vertexToColorMap.find(vertex);
         if (it != m_vertexToColorMap.cend()) {
@@ -38,7 +38,7 @@ public:
     }
 
 private:
-    bool areColorsEqualOnVertices(Vertex const& vertex1, Vertex const& vertex2) const {
+    [[nodiscard]] bool areColorsEqualOnVertices(Vertex const& vertex1, Vertex const& vertex2) const {
         bool result(false);
         auto it1 = m_vertexToColorMap.find(vertex1);
         auto it2 = m_vertexToColorMap.find(vertex2);

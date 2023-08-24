@@ -6,9 +6,7 @@
 #include <algorithm>
 #include <array>
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 template <int numberOfCoefficients>
 class Polynomial {
@@ -22,7 +20,7 @@ public:
         saveFirstDerivativeCoefficients();
     }
 
-    double calculateOutputFromInput(double const input) const {
+    [[nodiscard]] double calculateOutputFromInput(double const input) const {
         double powerValueOfInput(1);
         double result(0);
         for (double const coefficient : m_coefficients) {
@@ -32,7 +30,7 @@ public:
         return result;
     }
 
-    double getValueOfFirstDerivative(double const input) const {
+    [[nodiscard]] double getValueOfFirstDerivative(double const input) const {
         double powerValueOfInput(1);
         double result(0);
         for (double const coefficient : m_coefficientsOfFirstDerivative) {
@@ -53,5 +51,4 @@ protected:
     std::array<double, numberOfCoefficients - 1> m_coefficientsOfFirstDerivative;  // form is c0 + c1*x + c2*x2....
 };
 
-}  // namespace TwoDimensions
-}  // namespace alba
+}  // namespace alba::TwoDimensions

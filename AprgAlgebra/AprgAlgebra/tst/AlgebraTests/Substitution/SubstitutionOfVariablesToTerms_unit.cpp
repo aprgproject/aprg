@@ -7,9 +7,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(SubstitutionOfVariablesToTermsTest, ConstructionWorks) {
     SubstitutionOfVariablesToTerms substitution1;
@@ -262,6 +260,4 @@ TEST(SubstitutionOfVariablesToTermsTest, PerformSubstitutionForFunctionWorks) {
     EXPECT_EQ(expectExpression, verifyFunction);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

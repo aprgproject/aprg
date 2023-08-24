@@ -5,9 +5,7 @@
 #include <Geometry/TwoDimensions/Constructs/PolynomialInXEqualsY.hpp>
 #include <Geometry/TwoDimensions/Constructs/PolynomialInYEqualsX.hpp>
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 enum class ParabolaOrientation {
     PolynomialX,
@@ -45,35 +43,35 @@ public:
     Parabola(double const aCoefficient, double const bCoefficient, double const cCoefficient)
         : ParabolaParent{aCoefficient, bCoefficient, cCoefficient} {}
 
-    double getA() const { return ParabolaParent::m_coefficients[2]; }
+    [[nodiscard]] double getA() const { return ParabolaParent::m_coefficients[2]; }
 
-    double getB() const { return ParabolaParent::m_coefficients[1]; }
+    [[nodiscard]] double getB() const { return ParabolaParent::m_coefficients[1]; }
 
-    double getC() const { return ParabolaParent::m_coefficients[0]; }
+    [[nodiscard]] double getC() const { return ParabolaParent::m_coefficients[0]; }
 
-    double getP() const {
+    [[nodiscard]] double getP() const {
         //(x-xt)^2 = 4p*(y-yt)
         return 1 / (getA() * 4);
     }
 
-    double getTranslationInX() const {
+    [[nodiscard]] double getTranslationInX() const {
         //(x-xt)^2 = 4p*(y-yt)
         return -2 * getB() * getP();
     }
 
-    double getTranslationInY() const {
+    [[nodiscard]] double getTranslationInY() const {
         //(x-xt)^2 = 4p*(y-yt)
         return getC() - (pow(getTranslationInX(), 2) / (4 * getP()));
     }
 
-    double getEccentricity() const { return 1; }
+    [[nodiscard]] double getEccentricity() const { return 1; }
 
-    double getLengthOfLatusRectum() const {
+    [[nodiscard]] double getLengthOfLatusRectum() const {
         // The horizontal chord through the focus is called the latus rectum; one half of it is the semi-latus rectum.
         return mathHelper::getAbsoluteValue<double>(4 * getP());
     }
 
-    Point getVertex() const {
+    [[nodiscard]] Point getVertex() const {
         double a(getA());
         double b(getB());
         double c(getC());
@@ -88,7 +86,7 @@ public:
         return vertex;
     }
 
-    Point getFocus() const {
+    [[nodiscard]] Point getFocus() const {
         double p(getP());
         double xt(getTranslationInX());
         double yt(getTranslationInY());
@@ -101,7 +99,7 @@ public:
         return focus;
     }
 
-    Line getDirectrix() const {
+    [[nodiscard]] Line getDirectrix() const {
         double p(getP());
         double xt(getTranslationInX());
         double yt(getTranslationInY());
@@ -126,5 +124,4 @@ public:
 private:
 };
 
-}  // namespace TwoDimensions
-}  // namespace alba
+}  // namespace alba::TwoDimensions

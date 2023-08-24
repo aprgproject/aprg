@@ -5,9 +5,7 @@
 #include <Algebra/Solution/Solver/BaseSolver.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class SolverUsingSubstitution : public BaseSolver {
 public:
@@ -16,7 +14,7 @@ public:
     MultipleVariableSolutionSets calculateSolutionAndReturnSolutionSet(Equations const& equations);
 
 private:
-    bool isTheValueAlreadyExisting(std::string const& variableName, AlbaNumber const& value) const;
+    [[nodiscard]] bool isTheValueAlreadyExisting(std::string const& variableName, AlbaNumber const& value) const;
     static bool isSolutionCorrect(MultipleVariableSolutionSet const& solutionSet, Equations const& equations);
     static SubstitutionOfVariablesToValues getSubstitutionFromSolutionSet(
         MultipleVariableSolutionSet const& solutionSet);
@@ -41,6 +39,4 @@ private:
     VariableNamesSet m_variablesNames;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

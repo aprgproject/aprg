@@ -7,8 +7,8 @@ class BaseUnionFind {
 public:
     virtual ~BaseUnionFind() = default;  // virtual destructor because of virtual functions (vtable exists)
 
-    virtual bool isConnected(Object const& object1, Object const& object2) const = 0;
-    virtual Object getRoot(
+    [[nodiscard]] virtual bool isConnected(Object const& object1, Object const& object2) const = 0;
+    [[nodiscard]] virtual Object getRoot(
         Object const& object) const = 0;  // this is basically an identifier for the connected components
     virtual void connect(Object const& object1, Object const& object2) = 0;
 };

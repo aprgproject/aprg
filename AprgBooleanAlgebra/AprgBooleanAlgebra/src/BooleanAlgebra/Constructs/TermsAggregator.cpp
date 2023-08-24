@@ -10,11 +10,9 @@
 
 using namespace std;
 
-namespace alba {
+namespace alba::booleanAlgebra {
 
-namespace booleanAlgebra {
-
-TermsAggregator::TermsAggregator(Terms const& terms) : m_startIndex(0), m_endIndex(0), m_terms(terms) {}
+TermsAggregator::TermsAggregator(Terms const& terms) :  m_terms(terms) {}
 
 Terms const& TermsAggregator::getTermsConstReference() const { return m_terms; }
 
@@ -247,7 +245,5 @@ void TermsAggregator::insertTerm(int const index, Term const& term) {
         m_endIndex++;
     }
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

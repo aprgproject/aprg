@@ -21,7 +21,7 @@ public:
         initialize(valueMatrix);
     }
 
-    Value getAccumulatedValueOn2DInterval(
+    [[nodiscard]] Value getAccumulatedValueOn2DInterval(
         Index const topLeftX, Index const topLeftY, Index const bottomRightX, Index const bottomRightY) const {
         // This works on constant time.
         // add outer retangle and inner retangle and subtract incomplete rectangles
@@ -34,7 +34,7 @@ public:
     }
 
 private:
-    Value getPartialResultAt(int const x, int const y) const {
+    [[nodiscard]] Value getPartialResultAt(int const x, int const y) const {
         Value result{};
         if (x >= 0 && x < static_cast<Index>(m_partialResults.getNumberOfColumns()) && y >= 0 &&
             y < static_cast<Index>(m_partialResults.getNumberOfRows())) {
@@ -66,4 +66,4 @@ private:
     AccumulatorFunction m_inverseAccumulator;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

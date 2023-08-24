@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(NumbersRetrieverTest, RetrieveFromEquationsWorks) {
     NumbersRetriever retriever;
@@ -174,6 +172,4 @@ TEST(NumbersRetrieverTest, RetrieveFromPolynomialsWorks) {
     EXPECT_EQ(AlbaNumber(975), *(it++));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

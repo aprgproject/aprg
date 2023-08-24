@@ -4,9 +4,7 @@
 #include <Algebra/Term/Utilities/ConvertHelpers.hpp>
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TermRaiseToANumber::TermRaiseToANumber() {}
 
@@ -39,6 +37,4 @@ void TermRaiseToANumber::setBase(Term const& base) { m_base = base; }
 
 void TermRaiseToANumber::setExponent(AlbaNumber const& exponent) { m_exponent = exponent; }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

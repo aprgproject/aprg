@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 using Coordinate = OutwardCircleTraversal::Coordinate;
 using RadiusToCoordinates = OutwardCircleTraversal::RadiusToCoordinates;
@@ -67,7 +65,5 @@ TEST(OutwardCircleTraversalTest, ConstructedRadiusToCoordinatesAreCorrectForRadi
         itInVerify++;
     }
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

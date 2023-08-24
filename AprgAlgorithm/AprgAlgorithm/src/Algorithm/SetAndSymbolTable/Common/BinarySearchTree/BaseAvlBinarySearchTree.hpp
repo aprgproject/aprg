@@ -39,7 +39,7 @@ protected:
         reBalanceTreeOnDeleteAction(nodePointer);
     }
 
-    int getHeightOfSubTree(NodeUniquePointer const& nodePointer) const {
+    [[nodiscard]] int getHeightOfSubTree(NodeUniquePointer const& nodePointer) const {
         int size(0);
         if (nodePointer) {
             size = nodePointer->heightOfThisSubTree;
@@ -47,11 +47,11 @@ protected:
         return size;
     }
 
-    int calculateHeightOfSubTree(Node const& node) const {
+    [[nodiscard]] int calculateHeightOfSubTree(Node const& node) const {
         return std::max(getHeightOfSubTree(node.left), getHeightOfSubTree(node.right)) + 1;
     }
 
-    int calculateBalanceFactor(Node const& node) const {
+    [[nodiscard]] int calculateBalanceFactor(Node const& node) const {
         return getHeightOfSubTree(node.left) - getHeightOfSubTree(node.right);
     }
 

@@ -2,15 +2,13 @@
 
 #include <Algebra/Retrieval/BaseRetriever.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class NumberOfTermsRetriever final : public BaseRetriever {
 public:
     NumberOfTermsRetriever();
 
-    int getNumberOfTerms() const;
+    [[nodiscard]] int getNumberOfTerms() const;
     void retrieveFromConstant(Constant const& constant) override;
     void retrieveFromVariable(Variable const& variable) override;
     void retrieveFromMonomial(Monomial const& monomial) override;
@@ -18,9 +16,7 @@ public:
     void retrieveFromFunction(Function const& functionObject) override;
 
 private:
-    int m_numberOfTerms;
+    int m_numberOfTerms{0};
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -377,4 +377,4 @@ TEST(BitmapReadTest, DISABLED_ExperimentTest) {
     EXPECT_TRUE(bitmap.getConfiguration().isCompressedMethodSupported());
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

@@ -6,11 +6,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace TwoDimensions {
+namespace alba::algebra::TwoDimensions {
 
 TEST(TwoDimensionsUtilitiesTest, GetCircleEquationWorks) {
     Equation equationToVerify(getCircleEquation());
@@ -75,8 +71,4 @@ TEST(TwoDimensionsUtilitiesTest, GetVolumeOfAConicalFrustumWorks) {
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
-}  // namespace TwoDimensions
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::TwoDimensions

@@ -7,9 +7,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 ProofByInduction::ProofByInduction(
     string const& variableName, Term const& expressionForEachStep, Operator const& accumulateOperator,
@@ -49,6 +47,4 @@ bool ProofByInduction::isCorrectOnInductionStep() const {
     return expectedDelta == deltaFromGuess;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

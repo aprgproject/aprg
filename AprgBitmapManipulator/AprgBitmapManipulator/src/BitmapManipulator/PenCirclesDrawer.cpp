@@ -15,11 +15,9 @@ using namespace alba::TwoDimensions;
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace std;
 
-namespace alba {
+namespace alba::AprgBitmap {
 
-namespace AprgBitmap {
-
-PenCirclesDrawer::ColorDetails::ColorDetails() : totalRed(0), totalGreen(0), totalBlue(0), totalWeight(0) {}
+PenCirclesDrawer::ColorDetails::ColorDetails()  {}
 
 bool PenCirclesDrawer::ColorDetails::isEmpty() const { return totalWeight == 0; }
 
@@ -44,7 +42,7 @@ void PenCirclesDrawer::ColorDetails::clear() {
 }
 
 PenCirclesDrawer::PenCirclesDrawer(PenCircles const& penCircles, BitmapSnippet& snippet)
-    : m_snippet(snippet), m_snippetTraversal(snippet), m_penCircles(penCircles), m_drawnPoints() {}
+    : m_snippet(snippet), m_snippetTraversal(snippet), m_penCircles(penCircles) {}
 
 void PenCirclesDrawer::draw() { drawUsingCirclesWithOverlay(); }
 
@@ -221,7 +219,5 @@ void PenCirclesDrawer::putCircleConnectionsAndRemoveProcessedCircles() {
         m_drawnPoints[pointAndColorDetails.first] = pointAndColorDetails.second.getColor();
     }
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

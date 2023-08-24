@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(InclusionExclusionTest, GetUnionCountOfTwoSetsWorks) { EXPECT_EQ(16U, getUnionCountOfTwoSets(10U, 11U, 5U)); }
 
@@ -21,7 +19,5 @@ TEST(InclusionExclusionTest, GetUnionCountOfThreeSetsWorks) {
 TEST(InclusionExclusionTest, GetIntersectionCountOfThreeSetsWorks) {
     EXPECT_EQ(3U, getIntersectionCountOfThreeSets(10U, 11U, 12U, 5U, 6U, 7U, 18U));
 }
-
-}  // namespace math
 
 }  // namespace alba

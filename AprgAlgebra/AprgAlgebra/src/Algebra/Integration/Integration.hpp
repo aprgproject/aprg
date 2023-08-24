@@ -12,9 +12,7 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class Integration {
 public:
@@ -56,7 +54,7 @@ public:
     using InputTermToTrigonometryFunctionExponentsMap = std::map<Term, TrigonometryFunctionExponents>;
     using Configurations = std::vector<Configuration>;
 
-    Integration(std::string const& nameOfVariableToIntegrate);
+    explicit Integration(std::string const& nameOfVariableToIntegrate);
 
     bool isConvergent(Term const& term, AlbaNumber const& lowerEnd, AlbaNumber const& higherEnd);
 
@@ -87,8 +85,8 @@ private:
         Term const& term, IntegrationPurpose const purpose, std::string const& newVariable);
 
     // For Monomial
-    Term integrateMonomialWhenExponentIsNegativeOne(Monomial const& monomial) const;
-    Monomial integrateMonomialWhenExponentIsNotNegativeOne(Monomial const& monomial) const;
+    [[nodiscard]] Term integrateMonomialWhenExponentIsNegativeOne(Monomial const& monomial) const;
+    [[nodiscard]] Monomial integrateMonomialWhenExponentIsNotNegativeOne(Monomial const& monomial) const;
 
     // For Expression
     Term integrateAsTermOrExpressionIfNeeded(Expression const& expression);
@@ -119,7 +117,7 @@ private:
     void integrateTermUsingSubstitution(Term& result, Term const& term, Configuration const& configuration);
     void integrateBySubstitutionAndUsingANewVariable(
         Term& result, Term const& mainTerm, Term const& termForNewVariable, Configuration const& configuration);
-    Term substituteToNewVariable(Term const& mainTerm, Term const& termForNewVariable) const;
+    [[nodiscard]] Term substituteToNewVariable(Term const& mainTerm, Term const& termForNewVariable) const;
     static Term substituteBackToOldVariable(
         Term const& mainTerm, std::string const& newVariableName, Term const& termForNewVariable);
 
@@ -139,7 +137,7 @@ private:
     static TrigonometricSubstitutionDetails calculateTrigonometricSubstitutionDetails(
         Term const& a, Term const& u, std::string const& aSquaredAndUSquaredName, Term const& aSquaredAndUSquared,
         bool const isANegative, bool const isUNegative);
-    Term substituteToTrigonometricFunctions(
+    [[nodiscard]] Term substituteToTrigonometricFunctions(
         Term const& mainTerm, TrigonometricSubstitutionDetails const& details) const;
     static Term substituteFromTrigonometricFunctionsBackToNormal(
         Term const& mainTerm, TrigonometricSubstitutionDetails const& details);
@@ -150,7 +148,7 @@ private:
     void integrateUsingReverseChainRule(
         Term& result, Term const& firstOuterTerm, Term const& firstInnerTerm, Term const& secondTerm);
     void findInnerAndOuterTermForChainRule(Term& innerTerm, Term& outerTerm) const;
-    Term divideFirstTermAndDerivativeOfSecondTerm(Term const& firstTerm, Term const& secondTerm) const;
+    [[nodiscard]] Term divideFirstTermAndDerivativeOfSecondTerm(Term const& firstTerm, Term const& secondTerm) const;
 
     // Polynomial over polynomial
     void integrateAsPolynomialOverPolynomialIfPossible(
@@ -251,24 +249,22 @@ private:
     static Configuration getConfigurationWithCombiningRadicals();
 
     // Initialize and Finalize steps
-    void finalizeTermForIntegration(Term& term) const;
+    static void finalizeTermForIntegration(Term& term) ;
 
     // Miscellaneous
-    bool isVariableToIntegrate(std::string const& variableName) const;
-    bool isChangingTerm(Term const& term) const;
-    bool hasNonChangingTermRaiseToChangingTerm(Term const& term) const;
-    bool wouldDifferentiationYieldToAConstant(Term const& term) const;
+    [[nodiscard]] bool isVariableToIntegrate(std::string const& variableName) const;
+    [[nodiscard]] bool isChangingTerm(Term const& term) const;
+    [[nodiscard]] bool hasNonChangingTermRaiseToChangingTerm(Term const& term) const;
+    [[nodiscard]] bool wouldDifferentiationYieldToAConstant(Term const& term) const;
     static bool areExponentsSame(
         TrigonometryFunctionExponents const& exponents1, TrigonometryFunctionExponents const& exponents2);
-    bool isIntegrationUsingSubstitutionAllowed(Term const& term) const;
-    bool isIntegrationByPartsAllowed(Term const& term) const;
+    [[nodiscard]] bool isIntegrationUsingSubstitutionAllowed(Term const& term) const;
+    [[nodiscard]] bool isIntegrationByPartsAllowed(Term const& term) const;
     static bool isTrigonometricSubstitutionAllowed();
-    bool isIntegrationByPartialFractionAllowed() const;
-    std::string getCurrentVariableToIntegrate() const;
+    [[nodiscard]] bool isIntegrationByPartialFractionAllowed() const;
+    [[nodiscard]] std::string getCurrentVariableToIntegrate() const;
     stringHelper::strings m_variablesToIntegrate;
     IntegrationHistory m_history;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

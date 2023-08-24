@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(PrimeAndFactorUtilitiesTest, IsCoPrimeWorks) {
     EXPECT_TRUE(isCoPrime(5U, 7U));
@@ -97,7 +95,5 @@ TEST(PrimeAndFactorUtilitiesTest, GetPrimeFactorsToCountMapWorks) {
 
     EXPECT_EQ(expectedMap, getPrimeFactorsToCountMap(84U));
 }
-
-}  // namespace math
 
 }  // namespace alba

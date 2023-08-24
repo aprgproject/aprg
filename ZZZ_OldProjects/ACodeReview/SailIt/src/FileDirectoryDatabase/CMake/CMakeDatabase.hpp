@@ -49,9 +49,9 @@ private:
     SetOfDirectories m_setOfDirectories;
     SubCMakeDatabases m_subCMakeDatabases;
     string m_cMakeFileDirectoryPath;
-    bool m_isNonExistentDirectoriesAllowed;
+    bool m_isNonExistentDirectoriesAllowed{false};
     CMakeDatabase& m_parentCMake;
-    bool m_hasCMakeParent;
+    bool m_hasCMakeParent{false};
 };
 
 }  // namespace codeReview

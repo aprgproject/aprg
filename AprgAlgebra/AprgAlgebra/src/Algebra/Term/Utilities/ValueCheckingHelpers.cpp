@@ -8,9 +8,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 namespace {
 
@@ -329,6 +327,4 @@ bool hasNegativeExponentsWithVariable(Polynomial const& polynomial, string const
     return result;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

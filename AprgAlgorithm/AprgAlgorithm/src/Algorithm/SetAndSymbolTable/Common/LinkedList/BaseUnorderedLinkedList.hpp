@@ -22,9 +22,9 @@ public:
     ~BaseUnorderedLinkedList() override = default;  // no need for virtual destructor because base destructor is virtual
                                                     // (similar to other virtual functions)
 
-    bool isEmpty() const override { return m_size == 0; }
+    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
 
-    bool doesContain(Key const& key) const override {
+    [[nodiscard]] bool doesContain(Key const& key) const override {
         bool result(false);
         traverseWithNoChange([&](Node const& node, bool& shouldBreak) {
             if (key == node.key) {
@@ -35,9 +35,9 @@ public:
         return result;
     }
 
-    int getSize() const override { return m_size; }
+    [[nodiscard]] int getSize() const override { return m_size; }
 
-    int getRank(Key const& key) const override {
+    [[nodiscard]] int getRank(Key const& key) const override {
         int result(0);
         traverseWithNoChange([&](Node const& node, bool&) {
             if (key > node.key) {
@@ -47,7 +47,7 @@ public:
         return result;
     }
 
-    Key getMinimum() const override {
+    [[nodiscard]] Key getMinimum() const override {
         Key result{};
         bool isFirst(true);
         traverseWithNoChange([&](Node const& node, bool&) {
@@ -61,7 +61,7 @@ public:
         return result;
     }
 
-    Key getMaximum() const override {
+    [[nodiscard]] Key getMaximum() const override {
         Key result{};
         bool isFirst(true);
         traverseWithNoChange([&](Node const& node, bool&) {
@@ -75,7 +75,7 @@ public:
         return result;
     }
 
-    Key selectAt(int const rank) const override {
+    [[nodiscard]] Key selectAt(int const rank) const override {
         Key result{};
         traverseWithNoChange([&](Node const& node, bool& shouldBreak) {
             int const rankAtTraversal(getRank(node.key));
@@ -87,7 +87,7 @@ public:
         return result;
     }
 
-    Key getFloor(Key const& key) const override {
+    [[nodiscard]] Key getFloor(Key const& key) const override {
         Key floor{};
         bool isFirst(true);
         traverseWithNoChange([&](Node const& node, bool& shouldBreak) {
@@ -105,7 +105,7 @@ public:
         return floor;
     }
 
-    Key getCeiling(Key const& key) const override {
+    [[nodiscard]] Key getCeiling(Key const& key) const override {
         Key ceiling{};
         bool isFirst(true);
         traverseWithNoChange([&](Node const& node, bool& shouldBreak) {
@@ -147,14 +147,14 @@ public:
 
     void deleteMaximum() override { deleteBasedOnKey(getMaximum()); }
 
-    Keys getKeys() const override {
+    [[nodiscard]] Keys getKeys() const override {
         Keys result;
         traverseWithNoChange([&](Node const& node, bool&) { result.emplace_back(node.key); });
         std::sort(result.begin(), result.end());
         return result;
     }
 
-    Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override {
+    [[nodiscard]] Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override {
         Keys result;
         traverseWithNoChange([&](Node const& node, bool&) {
             if (node.key >= low && node.key <= high) {

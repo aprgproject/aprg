@@ -19,4 +19,4 @@ Term convertPolynomialToSimplestTerm(Polynomial const& polynomial);
 Term convertExpressionToSimplestTerm(Expression const& expression);
 Term convertFunctionToSimplestTerm(Function const& functionObject);
 
-}  // namespace alba::algebra::algebra
+}  // namespace alba::algebra

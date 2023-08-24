@@ -17,7 +17,7 @@ public:
 
     UnorderedLinkedListSymbolTable() : BaseClass(), b_size(BaseClass::m_size), b_first(BaseClass::m_first) {}
 
-    Value get(Key const& key) const override {
+    [[nodiscard]] Value get(Key const& key) const override {
         Value result{};
         this->traverseWithNoChange([&](Node const& node, bool& shouldBreak) {
             if (key == node.key) {

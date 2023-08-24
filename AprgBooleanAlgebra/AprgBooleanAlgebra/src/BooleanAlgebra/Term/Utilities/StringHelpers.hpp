@@ -4,9 +4,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 bool isConstant(std::string const& stringObject);
 bool isOperator(std::string const& stringObject);
@@ -24,6 +22,4 @@ Term buildTermIfPossible(std::string const& termString);
 Terms tokenizeToTerms(std::string const& inputString);
 void addValueTermIfNotEmpty(Terms& terms, std::string const& valueString);
 
-}  // namespace booleanAlgebra
-
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

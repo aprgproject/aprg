@@ -7,9 +7,7 @@
 #include <map>
 #include <tuple>
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 class GrundyGame {
 public:
@@ -24,10 +22,10 @@ public:
     using SticksToGrundyNumberMap = std::map<UnsignedInteger, UnsignedInteger>;
     using HeapIndexAndFirstPileAndSecondPile = std::tuple<UnsignedInteger, UnsignedInteger, UnsignedInteger>;
 
-    GrundyGame(UnsignedInteger const totalNumberOfSticks);
+    explicit GrundyGame(UnsignedInteger const totalNumberOfSticks);
 
-    bool hasNoMoves() const;
-    StickHeaps const& getStickHeaps() const;
+    [[nodiscard]] bool hasNoMoves() const;
+    [[nodiscard]] StickHeaps const& getStickHeaps() const;
 
     UnsignedInteger getOverallGrundyNumber();
     GameState getGameState();
@@ -42,6 +40,4 @@ private:
     SticksToGrundyNumberMap m_sticksToGrundyNumberMap;  // dynamic programming
 };
 
-}  // namespace math
-
-}  // namespace alba
+}  // namespace alba::math

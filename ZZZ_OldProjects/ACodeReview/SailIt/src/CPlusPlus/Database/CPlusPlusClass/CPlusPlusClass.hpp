@@ -18,9 +18,9 @@ typedef vector<CPlusPlusClassTemplateSignature> CPlusPlusClassTemplateSignatures
 class CPlusPlusClassTemplateParameter {
 public:
     CPlusPlusClassTemplateParameter(CPlusPlusType type, string name);
-    string getString() const;
-    string getName() const;
-    CPlusPlusType getType() const;
+    [[nodiscard]] string getString() const;
+    [[nodiscard]] string getName() const;
+    [[nodiscard]] CPlusPlusType getType() const;
     bool operator==(CPlusPlusClassTemplateParameter const& cPlusPlusClassTemplateParameter) const;
 
 private:
@@ -31,10 +31,10 @@ private:
 class CPlusPlusClassTemplateSignature {
 public:
     void addParameter(CPlusPlusType type, string name);
-    string getString() const;
+    [[nodiscard]] string getString() const;
     bool operator==(CPlusPlusClassTemplateSignature const& cPlusPlusClassTemplateSignature) const;
     CPlusPlusClassTemplateParameters& getTemplateParametersReference();
-    int getNumberOfParameters() const;
+    [[nodiscard]] int getNumberOfParameters() const;
 
 private:
     CPlusPlusClassTemplateParameters m_templateParameters;
@@ -45,10 +45,10 @@ public:
     explicit CPlusPlusClass();
     explicit CPlusPlusClass(string const& className);
 
-    bool isVariable(string const& variableName) const;
-    bool isFunction(string const& functionName) const;
-    bool isClass(string const& className) const;
-    bool isNamespace(string const& namespaceName) const;
+    [[nodiscard]] bool isVariable(string const& variableName) const;
+    [[nodiscard]] bool isFunction(string const& functionName) const;
+    [[nodiscard]] bool isClass(string const& className) const;
+    [[nodiscard]] bool isNamespace(string const& namespaceName) const;
 
     CPlusPlusType& getTypeReference();
     VectorOfStrings& getClassNamesReference();

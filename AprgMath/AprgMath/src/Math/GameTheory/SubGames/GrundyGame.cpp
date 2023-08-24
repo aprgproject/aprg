@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 GrundyGame::GrundyGame(UnsignedInteger const totalNumberOfSticks) : m_stickHeaps{totalNumberOfSticks} {}
 
@@ -98,7 +96,5 @@ SetOfUnsignedIntegers GrundyGame::getNextGrundyNumbersWithNumberOfSticks(Unsigne
     }
     return result;
 }
-
-}  // namespace math
 
 }  // namespace alba

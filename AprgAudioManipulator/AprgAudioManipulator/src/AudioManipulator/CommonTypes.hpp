@@ -27,4 +27,4 @@ using AudioInDouble = Audio<double>;
 
 using ValuesToIndexes = std::multimap<double, int>;
 
-}  // namespace alba::AprgAudio::AprgAudio
+}  // namespace alba::AprgAudio

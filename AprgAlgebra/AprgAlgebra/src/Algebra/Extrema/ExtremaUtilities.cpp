@@ -18,9 +18,7 @@ using namespace alba::mathHelper;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 // functions for this file only
 namespace {
@@ -555,6 +553,4 @@ void determineExtrema(
 
 }  // namespace
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

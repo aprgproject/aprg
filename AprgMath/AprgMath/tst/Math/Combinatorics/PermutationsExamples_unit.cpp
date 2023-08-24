@@ -5,9 +5,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(PermutationsExamplesTest, BasicExamplesWorks) {
     // Find the number of permutations of a two digit number with values 1, 2, 3, and 4.
@@ -201,7 +199,5 @@ TEST(PermutationsExamplesTest, SeatsWithPeopleExampleScenario3Works_Example2) {
     // So its permutations of 6-3+1=4 taken 3
     EXPECT_EQ(24U, getNumberOfPermutations(4U, 3U));
 }
-
-}  // namespace math
 
 }  // namespace alba

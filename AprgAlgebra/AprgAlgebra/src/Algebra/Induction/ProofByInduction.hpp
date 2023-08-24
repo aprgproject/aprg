@@ -2,9 +2,7 @@
 
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class ProofByInduction {
 public:
@@ -14,8 +12,8 @@ public:
         std::string const& variableName, Term const& expressionForEachStep, Operator const& accumulateOperator,
         Term const& guessExpression, ManualCalculationFunction const& manualCalculation);
 
-    bool isCorrectOnASpecificValue(AlbaNumber const& value) const;
-    bool isCorrectOnInductionStep() const;
+    [[nodiscard]] bool isCorrectOnASpecificValue(AlbaNumber const& value) const;
+    [[nodiscard]] bool isCorrectOnInductionStep() const;
 
     std::string m_variableName;
     Term m_expressionForEachStep;
@@ -24,6 +22,4 @@ public:
     ManualCalculationFunction m_manualCalculation;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

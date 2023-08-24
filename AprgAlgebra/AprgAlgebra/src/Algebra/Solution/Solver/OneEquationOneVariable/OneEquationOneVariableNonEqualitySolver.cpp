@@ -8,12 +8,10 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 OneEquationOneVariableNonEqualitySolver::OneEquationOneVariableNonEqualitySolver()
-    : BaseOneEquationOneVariableSolver() {}
+     {}
 
 void OneEquationOneVariableNonEqualitySolver::calculateSolution(SolutionSet& solutionSet, Equation const& equation) {
     if (!equation.getEquationOperator().isEqual()) {
@@ -65,6 +63,4 @@ void OneEquationOneVariableNonEqualitySolver::addIntervalsToSolutionSetIfNeeded(
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

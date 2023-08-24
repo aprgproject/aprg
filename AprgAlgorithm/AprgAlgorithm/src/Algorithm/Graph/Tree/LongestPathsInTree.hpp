@@ -17,7 +17,7 @@ public:
 
     explicit LongestPathsInTree(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph) { initializeIfNeeded(); }
 
-    EndPointPairs const& getEndPointPairsOfLongestPaths() const { return m_endPointPairsOfLongestPaths; }
+    [[nodiscard]] EndPointPairs const& getEndPointPairsOfLongestPaths() const { return m_endPointPairsOfLongestPaths; }
 
     int getLongestDistance()  // this function is coupled with search function
     {

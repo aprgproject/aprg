@@ -34,7 +34,7 @@ public:
 
     IntervalSearchTree() : b_root(BaseClass::m_root) {}
 
-    Keys getIntersectingIntervalsOf(Key const& intervalToCheck) const {
+    [[nodiscard]] Keys getIntersectingIntervalsOf(Key const& intervalToCheck) const {
         Keys keys;
         searchForIntersectingIntervals(keys, b_root, intervalToCheck);
         return keys;
@@ -72,7 +72,7 @@ protected:
         }
     }
 
-    bool areIntersectingIntervals(Key const& interval1, Key const& interval2) const {
+    [[nodiscard]] bool areIntersectingIntervals(Key const& interval1, Key const& interval2) const {
         auto delta1(mathHelper::getPositiveDelta(interval1.start, interval1.end));
         auto delta2(mathHelper::getPositiveDelta(interval2.start, interval2.end));
         auto sumOfDeltas(delta1 + delta2);

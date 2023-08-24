@@ -8,9 +8,7 @@ using namespace std;
 
 #define APRG_BITMAP_FILTERS_BITMAP_DIRECTORY APRG_DIR R"(\AprgBitmapFilters\FilesForTests\SampleBitmaps\)"
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 TEST(BitmapFiltersTest, DISABLED_BlurringDisimilarColors) {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
@@ -156,7 +154,5 @@ TEST(BitmapFiltersTest, DISABLED_CclTestTwoPass) {
     bitmapFilters.drawNewColorForLabels(outputSnippet);
     bitmapFilters.saveSnippetIntoFileInTheSameDirectory(outputSnippet, "Ccl_TwoPass.bmp");
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

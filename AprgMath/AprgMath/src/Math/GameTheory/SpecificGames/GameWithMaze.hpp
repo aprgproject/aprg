@@ -42,4 +42,4 @@ private:
     GrundyNumberMatrix m_grundyNumberMatrix;  // dynamic programming
 };
 
-}  // namespace alba
+}  // namespace alba::math

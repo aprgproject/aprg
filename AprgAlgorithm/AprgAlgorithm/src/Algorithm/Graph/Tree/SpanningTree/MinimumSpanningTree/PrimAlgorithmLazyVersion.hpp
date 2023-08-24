@@ -24,7 +24,7 @@ public:
         searchForMinimumSpanningTree();
     }
 
-    Edges const& getMinimumSpanningTreeEdges() const { return m_minimumSpanningTreeEdges; }
+    [[nodiscard]] Edges const& getMinimumSpanningTreeEdges() const { return m_minimumSpanningTreeEdges; }
 
 private:
     void searchForMinimumSpanningTree() {
@@ -95,4 +95,4 @@ private:
 // Difference between eager and lazy?
 // -> Lazy adds (edge) to search regardless of weight
 
-}  // namespace alba
+}  // namespace alba::algorithm

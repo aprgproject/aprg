@@ -4,9 +4,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 using QuadrilateralPolygonParent = Polygon<4>;
 
@@ -28,7 +26,7 @@ public:
     void traverseArea(double const interval, TraverseOperation const& traverseOperation) const;
 
 private:
-    GroupOfPoints getGroupOfPointsBasedOnYValue() const;
+    [[nodiscard]] GroupOfPoints getGroupOfPointsBasedOnYValue() const;
     static ListOfStartEndOfXAndY getStartEndForXs(
         GroupOfPoints const& groupOfPointsBasedOnYValue, double const interval);
     static ListOfStartEndOfXAndY getStartEndForXsFor1Points(Points const& points);
@@ -43,5 +41,4 @@ private:
     friend std::ostream& operator<<(std::ostream& out, Quadrilateral const& quadrilateral);
 };
 
-}  // namespace TwoDimensions
-}  // namespace alba
+}  // namespace alba::TwoDimensions

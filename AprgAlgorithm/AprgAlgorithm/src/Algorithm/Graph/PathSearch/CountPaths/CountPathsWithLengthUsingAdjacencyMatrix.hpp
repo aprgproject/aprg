@@ -18,17 +18,17 @@ public:
     CountPathsWithLengthUsingAdjacencyMatrix(int const lengthOfPath, AdjacencyMatrix const& adjacencyMatrix)
         : m_countMatrix(createCountMatrix(lengthOfPath, adjacencyMatrix)) {}
 
-    Count getCount(Vertex const& start, Vertex const& end) const { return m_countMatrix.getEntry(start, end); }
+    [[nodiscard]] Count getCount(Vertex const& start, Vertex const& end) const { return m_countMatrix.getEntry(start, end); }
 
 private:
     CountMatrix createCountMatrix(int const lengthOfPath, AdjacencyMatrix const& adjacencyMatrix) {
         CountMatrix oneCountMatrix(adjacencyMatrix.getNumberOfColumns(), adjacencyMatrix.getNumberOfRows());
         adjacencyMatrix.iterateAllThroughYAndThenX(
-            [&](int const x, int const y) { oneCountMatrix.setEntry(x, y, adjacencyMatrix.getEntry(x, y)); });
+            [&](int const x, int const y) { oneCountMatrix.setEntry(x, y, static_cast<const int>(adjacencyMatrix.getEntry(x, y))); });
         return oneCountMatrix ^ lengthOfPath;
     }
 
     CountMatrix m_countMatrix;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

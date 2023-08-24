@@ -2,9 +2,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(PolynomialRaiseToAnUnsignedIntTest, ConstructionWorks) {
     Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})};
@@ -107,6 +105,4 @@ TEST(PolynomialRaiseToAnUnsignedIntTest, PolynomialWithPerfectSquaresAndPerfect4
     EXPECT_EQ(2, polynomialRaiseToAnUnsignedInt.getExponent());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

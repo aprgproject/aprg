@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(SummationSeriesOfGeometricSeriesTest, IsConvergentWorks) {
     SummationSeriesOfGeometricSeries seriesWithMultiplierLessThanOne(1, AlbaNumber::createFraction(1, 2));
@@ -22,6 +20,4 @@ TEST(SummationSeriesOfGeometricSeriesTest, IsConvergentWorks) {
     EXPECT_FALSE(seriesWithMultiplierMoreThanOne.isConvergent());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

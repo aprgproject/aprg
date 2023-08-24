@@ -7,9 +7,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 namespace {
 using CharSet = MathSet<char>;
@@ -218,7 +216,5 @@ TEST(MathSetTest, GetCartesianProductWorks) {
     EXPECT_FALSE(cartesianProduct.doesNotContain(pair<int, char>(2, 'x')));
     EXPECT_EQ("{(1,x), (1,y), (2,x), (2,y)}", cartesianProduct.getDescription());
 }
-
-}  // namespace math
 
 }  // namespace alba

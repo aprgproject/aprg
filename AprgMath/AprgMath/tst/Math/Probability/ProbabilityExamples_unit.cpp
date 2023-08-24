@@ -7,9 +7,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(ProbabilityExampleTest, DiceExampleWorks) {
     // For example, when throwing a dice, the outcome is an integer between 1 and 6, and the probability of each outcome
@@ -252,7 +250,5 @@ TEST(ProbabilityExampleTest, GeometricDistributionExpectedValueWorks_OnBirthExam
     EXPECT_EQ(AlbaNumber(2), getExpectedValueInGeometricDistribution(getProbability(1U, 2U)));
     EXPECT_EQ(AlbaNumber::createFraction(1, 2), getProbability(1U, 2U));
 }
-
-}  // namespace math
 
 }  // namespace alba

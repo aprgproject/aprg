@@ -4,9 +4,7 @@
 
 using namespace alba::TwoDimensions;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 BitmapSnippetTraversal::BitmapSnippetTraversal(BitmapSnippet const& bitmapSnippet) : m_bitmapSnippet(bitmapSnippet) {}
 
@@ -96,7 +94,5 @@ void BitmapSnippetTraversal::checkPointBeforeDoingTraverseOperation(
         traverseOperation(point);
     }
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

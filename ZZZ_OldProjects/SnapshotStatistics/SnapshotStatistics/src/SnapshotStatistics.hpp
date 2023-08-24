@@ -28,7 +28,7 @@ public:
     void fetchStatisticsForSnapshot();
     void fetchStatisticsForMemory();
     void saveStatisticsToFile(std::string const& outputPath);
-    std::string getWildcardNameIfFileGroupsIsFound(std::string const& fileName) const;
+    [[nodiscard]] std::string getWildcardNameIfFileGroupsIsFound(std::string const& fileName) const;
     void processSnapshot(std::string const& snapshotPath);
 
     void processMemory(std::string const& ramFilePath, std::string const& snapshotName);

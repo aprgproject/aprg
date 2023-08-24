@@ -5,19 +5,17 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class EquationBuilder {
 public:
-    EquationBuilder(std::string const& equationInString);
+    explicit EquationBuilder(std::string const& equationInString);
 
     // rule of zero
 
-    Equation getEquation() const;
-    stringHelper::strings const& getTermStrings() const;
-    stringHelper::strings const& getEquationOperatorStrings() const;
+    [[nodiscard]] Equation getEquation() const;
+    [[nodiscard]] stringHelper::strings const& getTermStrings() const;
+    [[nodiscard]] stringHelper::strings const& getEquationOperatorStrings() const;
 
 private:
     void splitAndSaveOperatorAndTermStrings(std::string const& equationInString);
@@ -25,6 +23,4 @@ private:
     stringHelper::strings m_equationOperatorStrings;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

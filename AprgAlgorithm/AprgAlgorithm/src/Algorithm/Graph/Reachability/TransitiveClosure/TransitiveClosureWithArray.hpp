@@ -18,12 +18,12 @@ public:
     using ReachabilityPointerArray = typename std::array<ReachabilityPointer, MAX_VERTEX_VALUE>;
     using ReachabilityInitializerList = typename std::initializer_list<Reachability>;
 
-    TransitiveClosureWithArray(BaseDirectedGraphWithVertex const& graph)
+    explicit TransitiveClosureWithArray(BaseDirectedGraphWithVertex const& graph)
         : m_graph(graph) {
         initialize();
     }
 
-    bool isReachable(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
+    [[nodiscard]] bool isReachable(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
         bool result(false);
         ReachabilityPointer const& pointer(m_reachabilityPointerArray[sourceVertex]);
         if (pointer) {
@@ -43,4 +43,4 @@ private:
     ReachabilityPointerArray m_reachabilityPointerArray{};
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

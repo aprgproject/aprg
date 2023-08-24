@@ -34,4 +34,4 @@ private:
 
 using EllipticHyperboloids = std::vector<EllipticHyperboloid>;
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

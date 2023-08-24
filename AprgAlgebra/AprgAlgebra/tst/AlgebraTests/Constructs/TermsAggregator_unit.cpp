@@ -8,9 +8,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithNoTerms) {
     TermsAggregator aggregator({});
@@ -157,6 +155,4 @@ TEST(TermsAggregatorTest, SimplifyWorksWithFunction) {
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

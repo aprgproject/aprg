@@ -2,15 +2,11 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(QuineMcCluskeyUtilitiesTest, GetLogicalValueWorks) {
     EXPECT_EQ(LogicalValue::False, getLogicalValue(false));
     EXPECT_EQ(LogicalValue::True, getLogicalValue(true));
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

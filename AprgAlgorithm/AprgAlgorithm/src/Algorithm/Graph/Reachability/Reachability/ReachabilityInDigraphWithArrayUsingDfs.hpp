@@ -18,10 +18,10 @@ public:
         initialize();
     }
 
-    bool isReachable(Vertex const& destinationVertex) const override { return m_isReachableArray[destinationVertex]; }
+    [[nodiscard]] bool isReachable(Vertex const& destinationVertex) const override { return m_isReachableArray[destinationVertex]; }
 
 private:
-    bool isNotFound(Vertex const& vertex) const { return !m_isReachableArray[vertex]; }
+    [[nodiscard]] bool isNotFound(Vertex const& vertex) const { return !m_isReachableArray[vertex]; }
 
     void initialize() {
         // no clearing because array is brace initialized

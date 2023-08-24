@@ -2,13 +2,11 @@
 
 #include <Algebra/Mutation/BaseMutator.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class RemoveMonomialsWithNegativeExponentMutator final : public BaseMutator {
 public:
-    RemoveMonomialsWithNegativeExponentMutator(std::string const& variableName);
+    explicit RemoveMonomialsWithNegativeExponentMutator(std::string const& variableName);
     void mutateTerm(Term& term) override;
     void mutateMonomial(Monomial& monomial) override;
     void mutatePolynomial(Polynomial& polynomial) override;
@@ -16,10 +14,8 @@ public:
     void mutateFunction(Function& functionObject) override;
 
 private:
-    bool isMonomialToBeRemoved(Monomial const& monomial) const;
+    [[nodiscard]] bool isMonomialToBeRemoved(Monomial const& monomial) const;
     std::string m_variableName;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

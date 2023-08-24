@@ -88,7 +88,7 @@ void Looper::setContent(Term const& term) { m_terms.at(m_currentIndex) = term; }
 void Looper::setEndIndex(Looper const& indexLooper) { m_endIndex = indexLooper.m_currentIndex; }
 
 void Looper::fixLoopers(UniqueId const uniqueFileId, ModifyDetails const& modifyDetails) {
-    for (ActiveLoopersMap::iterator it = s_activeLoopers.begin(); it != s_activeLoopers.end(); it++) {
+    for (auto it = s_activeLoopers.begin(); it != s_activeLoopers.end(); it++) {
         Looper& fixIndexLooper = *(it->second);
         if (fixIndexLooper.getUniqueFileId() == uniqueFileId) {
             fixIndexLooper.fixIndexes(modifyDetails);

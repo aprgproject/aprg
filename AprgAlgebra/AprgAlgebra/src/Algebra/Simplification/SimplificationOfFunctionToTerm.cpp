@@ -11,9 +11,7 @@ using namespace std;
 
 namespace alba {
 
-namespace algebra {
-
-namespace Simplification {
+namespace algebra::Simplification {
 
 SimplificationOfFunctionToTerm::SimplificationOfFunctionToTerm() {}
 
@@ -102,9 +100,7 @@ Term SimplificationOfFunctionToTerm::getLogarithmicOfTermBasedFromName(Term cons
     return result;
 }
 
-}  // namespace Simplification
-
-}  // namespace algebra
+}  // namespace algebra::Simplification
 
 template <>
 algebra::Simplification::SimplificationOfFunctionToTerm::ConfigurationDetails

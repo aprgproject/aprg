@@ -7,9 +7,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 void segregateMonomialsWithAndWithoutVariable(
     Monomials const& monomialsToSegregate, string const& variableName, Monomials& monomialsWithVariable,
@@ -93,6 +91,4 @@ void segregateTermsWithAndWithoutVariable(
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

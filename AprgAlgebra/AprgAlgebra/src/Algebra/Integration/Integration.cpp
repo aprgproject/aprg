@@ -35,11 +35,10 @@ using namespace alba::matrix;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-namespace algebra {
+namespace alba::algebra {
 
 Integration::Integration(string const& nameOfVariableToIntegrate)
-    : m_variablesToIntegrate({nameOfVariableToIntegrate}), m_history() {}
+    : m_variablesToIntegrate({nameOfVariableToIntegrate}) {}
 
 bool Integration::isConvergent(Term const& term, AlbaNumber const& lowerEnd, AlbaNumber const& higherEnd) {
     Term integratedTerm(integrateAtDefiniteValues(term, lowerEnd, higherEnd));
@@ -1591,7 +1590,7 @@ void Integration::putTrigonometricFunctionsWithExponents(
     }
 }
 
-void Integration::finalizeTermForIntegration(Term& term) const {
+void Integration::finalizeTermForIntegration(Term& term) {
     simplifyForIntegration(term, getConfigurationWithFactors());
 }
 
@@ -1669,6 +1668,4 @@ string Integration::getCurrentVariableToIntegrate() const {
     return result;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

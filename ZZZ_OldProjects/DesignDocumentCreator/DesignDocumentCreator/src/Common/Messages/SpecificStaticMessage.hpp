@@ -19,10 +19,10 @@ public:
         m_payload = *reinterpret_cast<SackType const*>(payloadBufferReference.getConstantBufferPointer());
     }
     SackType& getStaticPayloadReference() { return m_payload; }
-    alba::AlbaMemoryBuffer createBuffer() const { return createBufferFromStaticPayload(); }
+    [[nodiscard]] alba::AlbaMemoryBuffer createBuffer() const { return createBufferFromStaticPayload(); }
 
 private:
-    alba::AlbaMemoryBuffer createBufferFromStaticPayload() const {
+    [[nodiscard]] alba::AlbaMemoryBuffer createBufferFromStaticPayload() const {
         return alba::AlbaMemoryBuffer(&m_payload, sizeof(m_payload));
     }
     SackType m_payload;

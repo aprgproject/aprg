@@ -26,9 +26,9 @@ public:
     using InputAndOutputPairs = std::vector<InputAndOutputPair>;
     using FrequencyArray = std::array<Index, MAX_VALUE>;
 
-    RangeQueryForNumberOfDistinctValues(Values const& valuesToCheck) : m_values(valuesToCheck) {}
+    explicit RangeQueryForNumberOfDistinctValues(Values const& valuesToCheck) : m_values(valuesToCheck) {}
 
-    Index getCountOfDistinctValuesOnInterval(Index const start, Index const end) const {
+    [[nodiscard]] Index getCountOfDistinctValuesOnInterval(Index const start, Index const end) const {
         Index numberOfDistinct(0);
         Range targetRange{start, end};
         if (isValidRange(targetRange)) {
@@ -40,7 +40,7 @@ public:
         return numberOfDistinct;
     }
 
-    InputAndOutputPairs getInputAndOutputPairsUsingMoAlgorithm(Ranges const& inputRequestsRanges) const {
+    [[nodiscard]] InputAndOutputPairs getInputAndOutputPairsUsingMoAlgorithm(Ranges const& inputRequestsRanges) const {
         InputAndOutputPairs result;
         Ranges validRequestsRanges(getValidRangesAndSortForMoAlgorithm(inputRequestsRanges));
         if (!validRequestsRanges.empty()) {
@@ -59,11 +59,11 @@ public:
     }
 
 private:
-    bool isValidRange(Range const& range) const {
+    [[nodiscard]] bool isValidRange(Range const& range) const {
         return range.first < static_cast<Index>(m_values.size()) && range.second < static_cast<Index>(m_values.size());
     }
 
-    Index getSquareRootSize(Index const numberOfValues) const { return static_cast<Index>(sqrt(numberOfValues)); }
+    [[nodiscard]] Index getSquareRootSize(Index const numberOfValues) const { return static_cast<Index>(sqrt(numberOfValues)); }
 
     void moveToTargetRange(
         Index& numberOfDistinct, FrequencyArray& frequencyArray, Range& currentRange, Range const& targetRange) const {
@@ -104,7 +104,7 @@ private:
         }
     }
 
-    Ranges getValidRangesAndSortForMoAlgorithm(Ranges const& ranges) const {
+    [[nodiscard]] Ranges getValidRangesAndSortForMoAlgorithm(Ranges const& ranges) const {
         Ranges result;
         result.reserve(ranges.size());
         for (Range const& range : ranges) {
@@ -135,4 +135,4 @@ private:
     Values const& m_values;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

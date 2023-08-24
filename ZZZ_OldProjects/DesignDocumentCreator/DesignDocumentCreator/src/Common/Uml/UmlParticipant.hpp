@@ -9,8 +9,8 @@ enum class UmlParticipantType { actor, boundary, control, entity, database, part
 class UmlParticipant {
 public:
     UmlParticipant(UmlParticipantType const type, std::string const& name, std::string const& alias);
-    std::string getParticipantLog() const;
-    std::string getParticipantTypeString() const;
+    [[nodiscard]] std::string getParticipantLog() const;
+    [[nodiscard]] std::string getParticipantTypeString() const;
 
 private:
     UmlParticipantType m_type;

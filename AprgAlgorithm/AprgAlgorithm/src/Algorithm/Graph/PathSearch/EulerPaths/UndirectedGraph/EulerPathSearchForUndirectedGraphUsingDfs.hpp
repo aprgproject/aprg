@@ -20,10 +20,10 @@ public:
     using StackOfVertices = std::stack<Vertex>;
     using VertexToQueueOfEdgesMap = std::map<Vertex, QueueOfEdges>;
 
-    EulerPathSearchForUndirectedGraphUsingDfs(BaseUndirectedGraphWithVertex const& graph)
+    explicit EulerPathSearchForUndirectedGraphUsingDfs(BaseUndirectedGraphWithVertex const& graph)
         : BaseClass(graph), b_graph(BaseClass::m_graph) {}
 
-    Path getEulerCycle() const override {
+    [[nodiscard]] Path getEulerCycle() const override {
         Path result;
         if (this->hasEulerCycle()) {
             StackOfVertices eulerPathInStack;
@@ -33,7 +33,7 @@ public:
         return result;
     }
 
-    Path getEulerPath() const override {
+    [[nodiscard]] Path getEulerPath() const override {
         Path result;
         if (this->hasEulerPath()) {
             StackOfVertices eulerPathInStack;
@@ -75,7 +75,7 @@ private:
         }
     }
 
-    VertexToQueueOfEdgesMap createVertexToQueueOfEdgesMap() const {
+    [[nodiscard]] VertexToQueueOfEdgesMap createVertexToQueueOfEdgesMap() const {
         VertexToQueueOfEdgesMap vertexToQueueOfEdgesMap;
         for (Vertex const& vertex : b_graph.getVertices()) {
             auto adjacentVertices(b_graph.getAdjacentVerticesAt(vertex));
@@ -96,7 +96,7 @@ private:
         }
     }
 
-    Vertex getTheOtherVertex(Edge const& edge, Vertex const& currentVertex) const {
+    [[nodiscard]] Vertex getTheOtherVertex(Edge const& edge, Vertex const& currentVertex) const {
         Vertex result;
         auto const& [startVertexOfEdge, endVertexOfEdge] = edge;
         if (currentVertex == startVertexOfEdge) {
@@ -109,4 +109,4 @@ private:
     BaseUndirectedGraphWithVertex const& b_graph;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

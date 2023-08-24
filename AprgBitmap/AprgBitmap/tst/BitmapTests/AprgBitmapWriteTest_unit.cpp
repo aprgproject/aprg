@@ -35,4 +35,4 @@ TEST(BitmapWriteTest, TestForWritingMissingBitmapFile) {
     bitmap.setSnippetWriteToFile(snippet);
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

@@ -12,7 +12,7 @@ class PerformanceAnalyzer {
 private:
     struct UniqueUserId {
         UniqueUserId();
-        UniqueUserId(std::string const& lineInLogs);
+        explicit UniqueUserId(std::string const& lineInLogs);
         int nbccId;
         int crnccId;
         int transactionId;

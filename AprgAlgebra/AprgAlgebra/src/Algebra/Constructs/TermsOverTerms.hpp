@@ -74,4 +74,4 @@ private:
 
 using VectorOfTermsOverTerms = std::vector<TermsOverTerms>;
 
-}  // namespace alba
+}  // namespace alba::algebra

@@ -19,9 +19,9 @@ public:
 
     UndirectedGraphWithVertexToAdjacencyListsMap()  {}
 
-    bool isEmpty() const override { return m_adjacencyLists.empty(); }
+    [[nodiscard]] bool isEmpty() const override { return m_adjacencyLists.empty(); }
 
-    bool hasAnyConnection(Vertex const& vertex) const override {
+    [[nodiscard]] bool hasAnyConnection(Vertex const& vertex) const override {
         bool result(false);
         auto it = m_adjacencyLists.find(vertex);
         if (it != m_adjacencyLists.cend()) {
@@ -31,7 +31,7 @@ public:
         return result;
     }
 
-    bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
+    [[nodiscard]] bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
         bool result(false);
         auto it = m_adjacencyLists.find(vertex1);
         if (it != m_adjacencyLists.cend()) {
@@ -41,7 +41,7 @@ public:
         return result;
     }
 
-    int getNumberOfVertices() const override {
+    [[nodiscard]] int getNumberOfVertices() const override {
         int result(0);
         for (auto const& [vertex, adjacencyList] : m_adjacencyLists) {
             if (!adjacencyList.empty()) {
@@ -51,9 +51,9 @@ public:
         return result;
     }
 
-    int getNumberOfEdges() const override { return m_numberOfEdges; }
+    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
-    Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
+    [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
         Vertices result(false);
         auto it = m_adjacencyLists.find(vertex);
         if (it != m_adjacencyLists.cend()) {
@@ -64,7 +64,7 @@ public:
         return result;
     }
 
-    Vertices getVertices() const override {
+    [[nodiscard]] Vertices getVertices() const override {
         Vertices result;
         for (auto const& [vertex, adjacencyList] : m_adjacencyLists) {
             if (!adjacencyList.empty()) {
@@ -74,7 +74,7 @@ public:
         return result;
     }
 
-    Edges getEdges() const override {
+    [[nodiscard]] Edges getEdges() const override {
         Edges result;
         for (auto const& [vertex, adjacencyList] : m_adjacencyLists) {
             auto const& vertex1(vertex);  // structured bindings with lambda does not work with clang
@@ -125,4 +125,4 @@ protected:
     AdjacencyLists m_adjacencyLists;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

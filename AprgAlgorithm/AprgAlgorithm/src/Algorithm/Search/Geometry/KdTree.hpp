@@ -24,7 +24,7 @@ public:
     KdTree() = default;
 
 protected:
-    bool doesContainStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const override {
+    [[nodiscard]] bool doesContainStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const override {
         static int depth = 0;
         depth++;
         bool result(false);
@@ -42,7 +42,7 @@ protected:
         return result;
     }
 
-    Node const* getNodeWithFloorStartingOnThisNode(
+    [[nodiscard]] Node const* getNodeWithFloorStartingOnThisNode(
         NodeUniquePointer const& nodePointer, Key const& key) const override {
         static int depth = 0;
         depth++;
@@ -70,7 +70,7 @@ protected:
         return result;
     }
 
-    Node const* getNodeWithCeilingStartingOnThisNode(
+    [[nodiscard]] Node const* getNodeWithCeilingStartingOnThisNode(
         NodeUniquePointer const& nodePointer, Key const& key) const override {
         static int depth = 0;
         depth++;
@@ -94,7 +94,7 @@ protected:
         return result;
     }
 
-    int getRankStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const override {
+    [[nodiscard]] int getRankStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const override {
         static int depth = 0;
         depth++;
         int result(0);

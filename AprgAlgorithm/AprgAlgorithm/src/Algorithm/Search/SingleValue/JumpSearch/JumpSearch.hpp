@@ -13,7 +13,7 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    JumpSearch(Values const& values)  // values can be unsorted
+    explicit JumpSearch(Values const& values)  // values can be unsorted
         : m_blockSize(getOptimalSize(values)), m_sortedValues(values) {}
 
     Index getIndexOfValue(Value const& target) {
@@ -31,7 +31,7 @@ public:
     }
 
 private:
-    Index getOptimalSize(Values const& values) const {
+    [[nodiscard]] Index getOptimalSize(Values const& values) const {
         // optimal size is squareroot size
         return std::max(1, mathHelper::getIntegerAfterFloorOfDoubleValue<Index>(sqrt(values.size())));
     }
@@ -40,7 +40,7 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Like Binary Search, Jump Search is a searching algorithm for sorted arrays.
 // The basic idea is to check fewer elements (than linear search) by jumping ahead by fixed steps or skipping some

@@ -10,9 +10,7 @@ using namespace alba::AlbaNumberConstants;
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 SeriesBasedOnSummation::SeriesBasedOnSummation(Term const& formulaForEachTermInSummation, string const& variableName)
     : SeriesBasedOnFormula(getFormulaForSummation(formulaForEachTermInSummation, variableName), variableName),
@@ -67,6 +65,4 @@ Term SeriesBasedOnSummation::getFormulaForSummation(
     return getSummation(formulaForEachTermInSummation, variableName).getSummationModelWithKnownConstant(0);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

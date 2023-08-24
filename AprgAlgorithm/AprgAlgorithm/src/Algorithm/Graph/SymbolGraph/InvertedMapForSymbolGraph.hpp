@@ -13,9 +13,9 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using ObjectToVertexMap = std::map<Object, Vertex>;
 
-    ObjectToVertexMap const& getObjectToVertexMap() const { return m_invertedMap; }
+    [[nodiscard]] ObjectToVertexMap const& getObjectToVertexMap() const { return m_invertedMap; }
 
-    Vertices const& getUnusedVertices() const { return m_unusedVertices; }
+    [[nodiscard]] Vertices const& getUnusedVertices() const { return m_unusedVertices; }
 
     Vertex const& getVertexIdentifierAndAddObjectIfNeeded(Object const& object) {
         auto it = m_invertedMap.find(object);

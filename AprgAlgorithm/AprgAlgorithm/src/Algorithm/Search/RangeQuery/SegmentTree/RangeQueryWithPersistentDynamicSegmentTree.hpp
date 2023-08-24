@@ -42,7 +42,7 @@ public:
         initialize(valuesToCheck);
     }
 
-    Value getValueOnInterval(Index const start, Index const end) const {
+    [[nodiscard]] Value getValueOnInterval(Index const start, Index const end) const {
         // This has log(N) running time
         Value result{};
         if (start <= end && start < m_numberOfValues && end < m_numberOfValues) {
@@ -51,7 +51,7 @@ public:
         return result;
     }
 
-    Value getValueOnIntervalOnPreviousTree(
+    [[nodiscard]] Value getValueOnIntervalOnPreviousTree(
         Index const start, Index const end, StepCount const numberOfPreviousSteps) const {
         // This has log(N) running time
         Value result{};
@@ -74,7 +74,7 @@ public:
     }
 
 protected:
-    Value getValueOnIntervalFromTopToBottom(
+    [[nodiscard]] Value getValueOnIntervalFromTopToBottom(
         Index const startInterval, Index const endInterval, NodePointer const& nodePointer, Index const baseLeft,
         Index const baseRight) const {
         // This has log(N) running time
@@ -105,7 +105,7 @@ protected:
         return result;
     }
 
-    Value getCombinedValueBasedFromChildren(NodePointer const& nodePointer) const {
+    [[nodiscard]] Value getCombinedValueBasedFromChildren(NodePointer const& nodePointer) const {
         Value result{};
         if (nodePointer->leftChildPointer && nodePointer->rightChildPointer) {
             result = m_function(nodePointer->leftChildPointer->value, nodePointer->rightChildPointer->value);

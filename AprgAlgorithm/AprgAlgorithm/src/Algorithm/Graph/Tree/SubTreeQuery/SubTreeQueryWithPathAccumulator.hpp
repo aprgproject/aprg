@@ -23,9 +23,9 @@ public:
         initializeIfNeeded();
     }
 
-    Vertices const& getVerticesInDfsPreOrder() const { return m_verticesInDfsPreOrder; }
+    [[nodiscard]] Vertices const& getVerticesInDfsPreOrder() const { return m_verticesInDfsPreOrder; }
 
-    Vertices const& getAccumulatedValuesOfPaths() const { return m_accumulatedValuesOfPaths; }
+    [[nodiscard]] Vertices const& getAccumulatedValuesOfPaths() const { return m_accumulatedValuesOfPaths; }
 
     Vertex getAccumulatedValueOfPathThatStartsAtTopAndEndsAt(Vertex const& vertex) {
         Vertex result{};
@@ -80,4 +80,4 @@ protected:
     VertexToIndexMap m_vertexToIndexMap;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

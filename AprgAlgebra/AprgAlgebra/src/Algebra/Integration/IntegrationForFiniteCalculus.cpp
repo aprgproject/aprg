@@ -21,8 +21,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-namespace algebra {
+namespace alba::algebra {
 
 IntegrationForFiniteCalculus::IntegrationForFiniteCalculus(string const& nameOfVariableToIntegrate)
     : m_nameOfVariableToIntegrate(nameOfVariableToIntegrate) {}
@@ -403,6 +402,4 @@ bool IntegrationForFiniteCalculus::isChangingTerm(Term const& term) const {
     });
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

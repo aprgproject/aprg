@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TermWithDetails::TermWithDetails(BaseTerm const& baseTerm, TermAssociationType const associationParameter)
     : baseTermPointer(createBasePointer(baseTerm)), association(associationParameter) {}
@@ -57,6 +55,4 @@ void TermWithDetails::clear() {
 
 void TermWithDetails::reverseAssociation() { association = getReversedAssociationType(association); }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

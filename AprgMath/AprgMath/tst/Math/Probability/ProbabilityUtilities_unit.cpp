@@ -6,9 +6,7 @@
 using namespace alba::AlbaNumberConstants;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(ProbabilityUtilitiesTest, DoesExpectedValuesHaveLinearityWorks) {
     ValueAndProbabilityPairs firstPairs{
@@ -162,7 +160,5 @@ TEST(ProbabilityUtilitiesTest, GetNumberOfPeopleForTheBirthdayParadoxUsingTaylor
     EXPECT_EQ(AlbaNumber(28), getNumberOfPeopleForTheBirthdayParadoxUsingQuadraticFormula(0.99));
     EXPECT_EQ(AlbaNumber(ALBA_NUMBER_POSITIVE_INFINITY), getNumberOfPeopleForTheBirthdayParadoxUsingTaylorFormula(1));
 }
-
-}  // namespace math
 
 }  // namespace alba

@@ -9,9 +9,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 IsolationOfOneVariableOnEqualityEquations::IsolationOfOneVariableOnEqualityEquations(Equations const& equations)
     : m_equations(equations) {}
@@ -63,6 +61,4 @@ void IsolationOfOneVariableOnEqualityEquations::sortEquationsWithVariable(Equati
         });
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

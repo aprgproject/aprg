@@ -26,7 +26,7 @@ find "$aprgDirectory" -depth -type f -wholename "$searchCondition" | while read 
     scriptPrint "$scriptName" "$LINENO" "Searching in aprg project: [$aprgProjectDirectory]"
     cd "$aprgProjectDirectory" || exit 1
     "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "StaticAnalyzersBuild" "Debug" "Ninja"
-    "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug"
+    "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug" | tee "$aprgDirectory/StaticAnalyzerResults.txt"
 done
 
 scriptPrint "$scriptName" "$LINENO" "All C/C++ in the directory are processed."

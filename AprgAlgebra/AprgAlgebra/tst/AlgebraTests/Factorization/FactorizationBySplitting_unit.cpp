@@ -5,11 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 TEST(FactorizationBySplittingTest, FactorizeBySplittingSmallerPolynomialsWorksWhenItCannotBeFactored) {
     Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
@@ -437,8 +433,4 @@ TEST(FactorizationBySplittingTest, CombinePolynomialsByAdditionAndEmplaceBackWor
     EXPECT_EQ(polynomialToExpect, polynomialsToVerify[0]);
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

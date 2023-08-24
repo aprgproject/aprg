@@ -1,10 +1,8 @@
 #include "FirstCoefficientRetriever.hpp"
 
-namespace alba {
+namespace alba::algebra {
 
-namespace algebra {
-
-FirstCoefficientRetriever::FirstCoefficientRetriever() : m_isValueSet(false) {}
+FirstCoefficientRetriever::FirstCoefficientRetriever()  {}
 
 AlbaNumber const& FirstCoefficientRetriever::getFirstCoefficient() const { return m_firstCoefficient; }
 
@@ -69,6 +67,4 @@ void FirstCoefficientRetriever::retrieveFromPolynomials(Polynomials const& polyn
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

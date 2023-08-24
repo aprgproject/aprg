@@ -5,14 +5,12 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 OutwardCircleTraversal::Coordinate::Coordinate(int const firstValue, int const secondValue)
     : coordinate1(firstValue), coordinate2(secondValue) {}
 
-OutwardCircleTraversal::OutwardCircleTraversal(int const maxRadius) : m_maxRadius(maxRadius), m_radiusToCoordinates() {
+OutwardCircleTraversal::OutwardCircleTraversal(int const maxRadius) : m_maxRadius(maxRadius) {
     constructRadiusToCoordinates();
 }
 
@@ -28,7 +26,5 @@ void OutwardCircleTraversal::constructRadiusToCoordinates() {
 OutwardCircleTraversal::RadiusToCoordinates const& OutwardCircleTraversal::getRadiusToCoordinates() const {
     return m_radiusToCoordinates;
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

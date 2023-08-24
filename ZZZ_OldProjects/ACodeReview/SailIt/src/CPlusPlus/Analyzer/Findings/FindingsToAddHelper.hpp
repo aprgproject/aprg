@@ -2,12 +2,8 @@
 
 #include <CPlusPlus/Analyzer/Findings/FindingsToAdd.hpp>
 
-namespace codeReview {
-
-namespace FindingsToAddHelper {
+namespace codeReview::FindingsToAddHelper {
 bool isUnexpectedWhiteSpaceIncluded(FindingsToAdd const findingsToAdd);
 bool isExpectedNewLineIncluded(FindingsToAdd const findingsToAdd);
 bool isUnexpectedNewLineIncluded(FindingsToAdd const findingsToAdd);
-}  // namespace FindingsToAddHelper
-
 }  // namespace codeReview

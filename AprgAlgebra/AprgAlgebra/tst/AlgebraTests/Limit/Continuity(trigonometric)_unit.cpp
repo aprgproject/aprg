@@ -8,9 +8,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(ContinuityTest, GetContinuityDomainWorksOnSine) {
     Term termToTest(sin("x"));
@@ -32,6 +30,4 @@ TEST(ContinuityTest, GetContinuityDomainWorksOnCosine) {
     EXPECT_EQ(createAllRealValuesInterval(), intervalToVerify[0]);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

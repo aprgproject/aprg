@@ -6,9 +6,7 @@
 #include <Algebra/Series/SpecificSeries/PowerSeries.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool isAxiomOfCompletenessTrue(SeriesBasedOnFormula const& series);
 
@@ -53,6 +51,4 @@ Term getInfiniteSumOfGeometricSeriesIfCommonMultiplierIsFractional(
 
 PowerSeries getEToTheXPowerSeries();
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

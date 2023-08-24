@@ -10,11 +10,9 @@
 using namespace alba::matrix;
 using namespace std;
 
-namespace alba {
+namespace alba::algebra {
 
-namespace algebra {
-
-LinearEquationsEqualitySolver::LinearEquationsEqualitySolver() : BaseSolver() {}
+LinearEquationsEqualitySolver::LinearEquationsEqualitySolver()  {}
 
 MultipleVariableSolutionSet LinearEquationsEqualitySolver::calculateSolutionAndReturnSolutionSet(
     Equations const& equations) {
@@ -103,6 +101,4 @@ void LinearEquationsEqualitySolver::saveSolutionSetsFromTheCoefficientMatrix(
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -2,13 +2,9 @@
 
 #include <Math/Types.hpp>
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 using NimHeapSize = UnsignedInteger;
 using NimState = UnsignedIntegers;
-
-}  // namespace math
 
 }  // namespace alba

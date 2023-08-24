@@ -6,11 +6,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
-
-namespace Functions {
+namespace alba::algebra::Functions {
 
 bool isFunctionContinuous(Function const& functionObject);
 bool isTrigonometricFunction(Function const& functionObject);
@@ -23,8 +19,4 @@ AlbaNumberPairs evaluateAndGetInputOutputPair(
 
 Term getNaturalLogarithmOfTheAbsoluteValueOfTerm(Term const& term);
 
-}  // namespace Functions
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Functions

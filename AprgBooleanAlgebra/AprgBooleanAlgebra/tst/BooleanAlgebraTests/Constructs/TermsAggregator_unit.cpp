@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithNoTerms) {
     TermsAggregator aggregator({});
@@ -134,7 +132,5 @@ TEST(TermsAggregatorTest, SimplifyWorksWithNegatedTermsAndVariousOperations) {
     Term termToExpect(subExpression3);
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

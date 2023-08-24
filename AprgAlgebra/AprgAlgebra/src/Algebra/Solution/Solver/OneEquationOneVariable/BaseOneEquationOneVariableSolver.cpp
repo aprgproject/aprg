@@ -11,9 +11,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 SolutionSet BaseOneEquationOneVariableSolver::calculateSolutionAndReturnSolutionSet(Equation const& equation) {
     SolutionSet solutionSet;
@@ -56,7 +54,7 @@ void BaseOneEquationOneVariableSolver::calculateAndSubstituteAbsoluteValueFuncti
         SubstitutionOfTermsToTerms substitution;
         auto itFunctionSet = absFunctions.cbegin();
         for (int i = 0; i < static_cast<int>(absFunctions.size()); i++) {
-            bool isBitAsserted((permutationValue >> i) & 1);
+            bool isBitAsserted(((permutationValue >> i) & 1) != 0);
             Term termToReplace;
             Term const& absFunctionTerm(*itFunctionSet);
             Term const& absFunctionInputTerm(getTermConstReferenceFromBaseTerm(itFunctionSet->getInputTerm()));
@@ -73,6 +71,4 @@ void BaseOneEquationOneVariableSolver::calculateAndSubstituteAbsoluteValueFuncti
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -9,9 +9,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 namespace {
 
@@ -1151,6 +1149,4 @@ Term operator^(Term const& term, Expression const& expression) { return performR
 
 Term operator^(Term const& term, Function const& functionObject) { return performRaiseToPower(term, functionObject); }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

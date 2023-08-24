@@ -12,7 +12,7 @@ public:
 
     BasePathSearchWithDistanceCount() = default;
 
-    int getDistanceTo(Vertex const& endVertex) const {
+    [[nodiscard]] int getDistanceTo(Vertex const& endVertex) const {
         int result(0);
         auto it = m_endVertexToDistanceCountMap.find(endVertex);
         if (it != m_endVertexToDistanceCountMap.cend()) {
@@ -21,7 +21,7 @@ public:
         return result;
     }
 
-    VertexToIntMap const& getEndVertexToDistanceCountMap() const { return m_endVertexToDistanceCountMap; }
+    [[nodiscard]] VertexToIntMap const& getEndVertexToDistanceCountMap() const { return m_endVertexToDistanceCountMap; }
 
     void initializeDistances(Vertices const& vertices) {
         for (Vertex const& vertex : vertices) {

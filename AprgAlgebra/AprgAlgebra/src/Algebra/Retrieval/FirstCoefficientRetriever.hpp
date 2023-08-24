@@ -3,15 +3,13 @@
 #include <Algebra/Retrieval/BaseRetriever.hpp>
 #include <Common/Math/Number/AlbaNumber.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class FirstCoefficientRetriever final : public BaseRetriever {
 public:
     FirstCoefficientRetriever();
 
-    AlbaNumber const& getFirstCoefficient() const;
+    [[nodiscard]] AlbaNumber const& getFirstCoefficient() const;
     void retrieveFromEquations(Equations const& equations) override;
     void retrieveFromEquation(Equation const& equation) override;
     void retrieveFromTerm(Term const& term) override;
@@ -24,10 +22,8 @@ public:
     void retrieveFromPolynomials(Polynomials const& polynomials) override;
 
 private:
-    bool m_isValueSet;
+    bool m_isValueSet{false};
     AlbaNumber m_firstCoefficient;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

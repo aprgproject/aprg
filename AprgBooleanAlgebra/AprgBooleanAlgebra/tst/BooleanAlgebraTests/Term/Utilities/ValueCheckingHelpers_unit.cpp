@@ -5,9 +5,7 @@
 
 #include <cmath>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(ValueCheckingHelpersTest, WillHaveNoEffectOnAndOperationWorksWithTerm) {
     EXPECT_TRUE(willHaveNoEffectOnAndOperation(Term()));
@@ -86,7 +84,5 @@ TEST(ValueCheckingHelpersTest, IsTheValueWorksWithExpression) {
     EXPECT_FALSE(isTheValue(createExpressionIfPossible({"x"}), false));
     EXPECT_FALSE(isTheValue(createExpressionIfPossible({"x"}), true));
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

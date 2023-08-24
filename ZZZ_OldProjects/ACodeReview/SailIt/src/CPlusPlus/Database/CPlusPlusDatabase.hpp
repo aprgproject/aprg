@@ -48,18 +48,18 @@ public:
     void initializeCStyleArray();
 
     void print(ostream& outputStream);
-    bool isDatabaseModified() const;
-    bool isClass(string const& className) const;
+    [[nodiscard]] bool isDatabaseModified() const;
+    [[nodiscard]] bool isClass(string const& className) const;
     bool isClassWithAlias(string const& className);
-    bool isFunction(string const& functionName) const;
+    [[nodiscard]] bool isFunction(string const& functionName) const;
     bool isFunctionWithAlias(string const& functionName);
-    bool isMacro(string const& macroName) const;
-    bool isNamespace(string const& namespaceName) const;
+    [[nodiscard]] bool isMacro(string const& macroName) const;
+    [[nodiscard]] bool isNamespace(string const& namespaceName) const;
     bool isNamespaceWithAlias(string const& namespaceName);
-    bool isType(string const& typeDefName) const;
-    bool isVariable(string const& variableName) const;
+    [[nodiscard]] bool isType(string const& typeDefName) const;
+    [[nodiscard]] bool isVariable(string const& variableName) const;
     bool isVariableWithAlias(string const& variableName);
-    bool isTemplateClass(string const& className) const;
+    [[nodiscard]] bool isTemplateClass(string const& className) const;
     bool isTemplateClassWithAlias(string const& className);
 
     string getCorrectClassName(string const& className);
@@ -127,7 +127,7 @@ private:
     Variables m_variables;
     VectorOfStrings m_usingNamespaces;
     Scopes m_scopes;
-    bool m_isModified;
+    bool m_isModified{true};
 };
 
 }  // namespace codeReview

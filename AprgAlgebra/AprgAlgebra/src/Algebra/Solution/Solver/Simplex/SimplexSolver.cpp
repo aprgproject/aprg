@@ -11,9 +11,7 @@ using namespace alba::matrix;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 SimplexSolver::SimplexSolver(Equations const& constraints, Polynomial const& objectiveFunction) {
     intialize(constraints, objectiveFunction);
@@ -151,6 +149,4 @@ void SimplexSolver::initializeSimplexTable(
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

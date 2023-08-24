@@ -5,9 +5,7 @@
 #include <Algebra/Term/TermTypes/TermContainerTypes.hpp>
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class SimplexSolver {
 public:
@@ -16,9 +14,9 @@ public:
 
     SimplexSolver(Equations const& constraints, Polynomial const& objectiveFunction);
 
-    bool isOptimized() const;
-    AlbaNumber getOptimizedObjectiveValue() const;
-    Equations getSolutionEquations() const;
+    [[nodiscard]] bool isOptimized() const;
+    [[nodiscard]] AlbaNumber getOptimizedObjectiveValue() const;
+    [[nodiscard]] Equations getSolutionEquations() const;
 
 private:
     void intialize(Equations const& constraints, Polynomial const& objectiveFunction);
@@ -34,6 +32,4 @@ private:
     VariableNames m_inputVariables;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

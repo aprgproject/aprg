@@ -2,22 +2,18 @@
 
 #include <Algebra/Series/GeneralSeries/SeriesBasedOnSummation.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class AlternatingSeries : public SeriesBasedOnSummation {
 public:
     AlternatingSeries(Term const& formulaForEachTermWithoutSign, std::string const& variableName);
 
-    bool isConvergent() const override;
-    Term getRemainderAtIndex(int const index) const override;
+    [[nodiscard]] bool isConvergent() const override;
+    [[nodiscard]] Term getRemainderAtIndex(int const index) const override;
 
 protected:
     static Term getFormula(Term const& formulaForEachTermWithoutSign, std::string const& variableName);
     Term m_formulaForEachTermWithoutSign;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -13,11 +13,7 @@ using namespace alba::AlbaNumberConstants;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace DomainAndRange {
+namespace alba::algebra::DomainAndRange {
 
 SolutionSet calculateDomainUsingTransitionValues(
     AlbaNumbers const& domainValuesToCheck, FunctionToCheck const& functionToCheck) {
@@ -216,8 +212,4 @@ bool isOneToOne(string const& variableNameToCheck, Equation const& equation) {
     return result;
 }
 
-}  // namespace DomainAndRange
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::DomainAndRange

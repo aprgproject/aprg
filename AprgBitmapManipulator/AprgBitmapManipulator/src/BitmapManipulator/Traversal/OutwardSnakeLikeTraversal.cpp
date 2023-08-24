@@ -5,14 +5,12 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 OutwardSnakeLikeTraversal::OutwardSnakeLikeTraversal(
     BitmapXY const& currentPoint, Direction const direction, int const lowestLeft, int const highestRight,
     int const lowestTop, int const highestBottom)
-    : m_currentPoint(),
+    : 
       m_direction(direction),
       m_lowestLeft(lowestLeft),
       m_highestRight(highestRight),
@@ -21,9 +19,8 @@ OutwardSnakeLikeTraversal::OutwardSnakeLikeTraversal(
       m_lastMostLeft(currentPoint.getX()),
       m_lastMostRight(currentPoint.getX()),
       m_lastMostTop(currentPoint.getY()),
-      m_lastMostBottom(currentPoint.getY()),
-      m_isStart(true),
-      m_isFinished(false) {
+      m_lastMostBottom(currentPoint.getY())
+      {
     m_currentPoint = fixPoint(currentPoint);
     m_lastMostLeft = m_currentPoint.getX();
     m_lastMostRight = m_currentPoint.getX();
@@ -260,7 +257,5 @@ bool OutwardSnakeLikeTraversal::cannotTeleport() const {
     return m_lowestLeft == m_lastMostLeft && m_highestRight == m_lastMostRight && m_lowestTop == m_lastMostTop &&
            m_highestBottom == m_lastMostBottom;
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

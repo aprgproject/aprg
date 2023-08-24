@@ -32,9 +32,9 @@ public:
     using Value = typename Values::value_type;
     using ThreeValues = std::tuple<Value, Value, Value>;
 
-    ThreeSum(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    explicit ThreeSum(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
-    ThreeValues getNonDuplicateThreeValuesWithSum(Value const& targetSum) const {
+    [[nodiscard]] ThreeValues getNonDuplicateThreeValuesWithSum(Value const& targetSum) const {
         ThreeValues result{};
         if (!m_sortedValues.empty()) {
             TwoSum<Values> twoSum(m_sortedValues);
@@ -51,7 +51,7 @@ public:
         return result;
     }
 
-    ThreeValues getPossibleDuplicatedThreeValuesWithSum(Value const& targetSum) const {
+    [[nodiscard]] ThreeValues getPossibleDuplicatedThreeValuesWithSum(Value const& targetSum) const {
         ThreeValues result{};
         if (!m_sortedValues.empty()) {
             TwoSum<Values> twoSum(m_sortedValues);
@@ -72,4 +72,4 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

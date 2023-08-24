@@ -2,9 +2,7 @@
 
 #include <Geometry/TwoDimensions/Constructs/Quadrilateral.hpp>
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 class Rectangle : public Quadrilateral {
 public:
@@ -15,5 +13,4 @@ private:
     friend std::ostream& operator<<(std::ostream& out, Rectangle const& rectangle);
 };
 
-}  // namespace TwoDimensions
 }  // namespace alba

@@ -17,9 +17,7 @@
 using namespace alba::AlbaNumberConstants;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool isTheSecondFundamentalTheoremOfCalculusTrue(
     Term const& term, string const& variableName, AlbaNumber const& a, AlbaNumber const& b) {
@@ -135,6 +133,4 @@ LowerAndHigherValues getApproximateValuesForDefiniteIntegral(
     return result;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

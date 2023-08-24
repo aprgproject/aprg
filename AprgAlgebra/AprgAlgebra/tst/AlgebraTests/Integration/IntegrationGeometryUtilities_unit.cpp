@@ -13,9 +13,7 @@ using namespace alba::mathHelper;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(IntegrationGeometryUtilitiesTest, GetAreaInBetweenTwoTermsInAnIntervalWorks) {
     Term lowerTerm(Monomial(1, {{"x", 2}}));
@@ -423,6 +421,4 @@ TEST(IntegrationGeometryUtilitiesTest, GetTripleIntegralInSphericalCoordinatesWo
     EXPECT_EQ(termToExpect, termToVerify);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

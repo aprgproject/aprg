@@ -8,9 +8,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 bool doesExpectedValuesHaveLinearity(
     ValueAndProbabilityPairs const& firstSetOfValueAndProbabilityPairsOfX,
@@ -293,7 +291,5 @@ AlbaNumber getNumberOfPeopleForTheBirthdayParadoxUsingTaylorFormula(AlbaNumber c
     }
     return result;
 }
-
-}  // namespace math
 
 }  // namespace alba

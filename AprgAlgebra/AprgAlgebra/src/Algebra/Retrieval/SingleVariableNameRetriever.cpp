@@ -2,12 +2,10 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 SingleVariableNameRetriever::SingleVariableNameRetriever()
-    : m_hasEncounteredAVariable(false), m_hasMultipleVariables(false) {}
+     {}
 
 std::string const& SingleVariableNameRetriever::getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty() const {
     return m_singleVariableName;
@@ -94,6 +92,4 @@ void SingleVariableNameRetriever::putVariableIfPossible(string const& variableNa
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -3,40 +3,36 @@
 #include <Algebra/Equation/Equation.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class DifferentiationForFiniteCalculus {
 public:
-    DifferentiationForFiniteCalculus(std::string const& nameOfVariableToDifferentiate);
+    explicit DifferentiationForFiniteCalculus(std::string const& nameOfVariableToDifferentiate);
 
-    Term differentiate(Term const& term) const;
+    [[nodiscard]] Term differentiate(Term const& term) const;
     static Term differentiate(Constant const& constant);
-    Term differentiate(Variable const& variable) const;
-    Term differentiate(Monomial const& monomial) const;
-    Term differentiate(Polynomial const& polynomial) const;
-    Term differentiate(Expression const& expression) const;
-    Term differentiate(Function const& functionObject) const;
-    Equation differentiate(Equation const& equation) const;
+    [[nodiscard]] Term differentiate(Variable const& variable) const;
+    [[nodiscard]] Term differentiate(Monomial const& monomial) const;
+    [[nodiscard]] Term differentiate(Polynomial const& polynomial) const;
+    [[nodiscard]] Term differentiate(Expression const& expression) const;
+    [[nodiscard]] Term differentiate(Function const& functionObject) const;
+    [[nodiscard]] Equation differentiate(Equation const& equation) const;
 
-    Term differentiateMultipleTimes(Term const& term, int const numberOfTimes) const;
-    Equation differentiateMultipleTimes(Equation const& equation, int const numberOfTimes) const;
+    [[nodiscard]] Term differentiateMultipleTimes(Term const& term, int const numberOfTimes) const;
+    [[nodiscard]] Equation differentiateMultipleTimes(Equation const& equation, int const numberOfTimes) const;
 
-    Term differentiateTerm(Term const& term) const;
+    [[nodiscard]] Term differentiateTerm(Term const& term) const;
     static AlbaNumber differentiateConstant(Constant const&);
-    Polynomial differentiateVariable(Variable const& variable) const;
-    Term differentiateMonomial(Monomial const& monomial) const;
-    Term differentiatePolynomial(Polynomial const& polynomial) const;
-    Term differentiateExpression(Expression const& expression) const;
-    Term differentiateFunction(Function const& functionObject) const;
-    Equation differentiateEquation(Equation const& equation) const;
+    [[nodiscard]] Polynomial differentiateVariable(Variable const& variable) const;
+    [[nodiscard]] Term differentiateMonomial(Monomial const& monomial) const;
+    [[nodiscard]] Term differentiatePolynomial(Polynomial const& polynomial) const;
+    [[nodiscard]] Term differentiateExpression(Expression const& expression) const;
+    [[nodiscard]] Term differentiateFunction(Function const& functionObject) const;
+    [[nodiscard]] Equation differentiateEquation(Equation const& equation) const;
 
 private:
-    bool isVariableToDifferentiate(std::string const& variableName) const;
+    [[nodiscard]] bool isVariableToDifferentiate(std::string const& variableName) const;
     std::string m_nameOfVariableToDifferentiate;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

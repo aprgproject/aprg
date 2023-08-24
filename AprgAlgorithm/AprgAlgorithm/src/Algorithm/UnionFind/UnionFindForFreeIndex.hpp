@@ -11,13 +11,13 @@ class UnionFindForFreeIndex : public BaseUnionFind<Object> {
 public:
     using RootVector = std::vector<Object>;
 
-    UnionFindForFreeIndex(int const maximumSize) : m_relativeRoots() { initialize(maximumSize); }
+    explicit UnionFindForFreeIndex(int const maximumSize) : m_relativeRoots() { initialize(maximumSize); }
 
-    bool isConnected(Object const& object1, Object const& object2) const override {
+    [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
         return getRoot(object1) == getRoot(object2);
     }
 
-    Object getRoot(Object const& object) const override {
+    [[nodiscard]] Object getRoot(Object const& object) const override {
         Object currentRoot(object);
         Object nextRoot(m_relativeRoots[object]);
         while (currentRoot != nextRoot) {
@@ -43,7 +43,7 @@ public:
         saveNewRootOnRelativeRoots(mainRoot, relativeRoots);
     }
 
-    RootVector const& getRelativeRootVector() const { return m_relativeRoots; }
+    [[nodiscard]] RootVector const& getRelativeRootVector() const { return m_relativeRoots; }
 
     RootVector& getRelativeRootVectorReference() { return m_relativeRoots; }
 

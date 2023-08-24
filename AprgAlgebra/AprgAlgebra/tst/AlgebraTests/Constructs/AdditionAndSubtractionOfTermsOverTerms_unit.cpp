@@ -7,9 +7,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(AdditionAndSubtractionOfTermsOverTermsTest, ConstructionWorks) {
     AdditionAndSubtractionOfTermsOverTerms additionAndSubtraction;
@@ -444,6 +442,4 @@ TEST(AdditionAndSubtractionOfTermsOverTermsTest, PutAsAddOrSubtractionWorks) {
     EXPECT_EQ(TermAssociationType::Negative, associationToVerify[0]);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

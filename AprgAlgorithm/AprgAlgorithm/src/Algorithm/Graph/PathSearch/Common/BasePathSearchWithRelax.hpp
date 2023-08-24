@@ -23,11 +23,11 @@ public:
     BasePathSearchWithRelax(EdgeWeightedGraph const& graph, Vertex const& startVertex)
         : m_graph(graph), m_startVertex(startVertex) {}
 
-    bool hasPathTo(Vertex const& endVertex) const {
+    [[nodiscard]] bool hasPathTo(Vertex const& endVertex) const {
         return m_vertexToEdgeWithBestWeightMap.find(endVertex) != m_vertexToEdgeWithBestWeightMap.cend();
     }
 
-    Path getPathTo(Vertex const& endVertex) const {
+    [[nodiscard]] Path getPathTo(Vertex const& endVertex) const {
         Path reversedPath;
         bool shouldAddStartVertexAndReverse(endVertex != m_startVertex);
         Vertex currentVertex = endVertex;
@@ -50,9 +50,9 @@ public:
         return result;
     }
 
-    Vertex const& getStartVertex() const { return m_startVertex; }
+    [[nodiscard]] Vertex const& getStartVertex() const { return m_startVertex; }
 
-    VertexToEdgeOrderedByWeightMap const& getVertexToEdgeWithBestWeightMap() const {
+    [[nodiscard]] VertexToEdgeOrderedByWeightMap const& getVertexToEdgeWithBestWeightMap() const {
         return m_vertexToEdgeWithBestWeightMap;
     }
 
@@ -62,11 +62,11 @@ protected:
     // Source: http://www.gotw.ca/publications/mill18.htm
     ~BasePathSearchWithRelax() = default;
 
-    bool hasNoWeightSaved(Vertex const& vertex) const {
+    [[nodiscard]] bool hasNoWeightSaved(Vertex const& vertex) const {
         return m_vertexToEdgeWithBestWeightMap.find(vertex) == m_vertexToEdgeWithBestWeightMap.cend();
     }
 
-    Weight getSavedWeightAt(Vertex const& vertex) const {
+    [[nodiscard]] Weight getSavedWeightAt(Vertex const& vertex) const {
         Weight result{};
         auto it = m_vertexToEdgeWithBestWeightMap.find(vertex);
         if (it != m_vertexToEdgeWithBestWeightMap.cend()) {

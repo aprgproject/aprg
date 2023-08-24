@@ -25,4 +25,4 @@ Term createTermWithAdditionAndSubtractionTermsWithDetails(TermsWithDetails const
 Term createTermWithMultiplicationAndDivisionTermsWithDetails(TermsWithDetails const& termsWithDetails);
 Term createTermWithRaiseToPowerTermsWithDetails(TermsWithDetails const& termsWithDetails);
 
-}  // namespace alba::algebra::algebra
+}  // namespace alba::algebra

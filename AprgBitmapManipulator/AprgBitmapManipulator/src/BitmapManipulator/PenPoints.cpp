@@ -1,8 +1,6 @@
 #include "PenPoints.hpp"
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 bool PenPoints::isPenPoint(BitmapXY const& penPoint) const { return m_penPoints.find(penPoint) != m_penPoints.cend(); }
 
@@ -19,7 +17,5 @@ void PenPoints::addAsPenPoints(BitmapXYs const& bitmapPoints) {
 void PenPoints::removePenPoint(BitmapXY const& penPoint) { m_penPoints.erase(penPoint); }
 
 void PenPoints::clear() { m_penPoints.clear(); }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

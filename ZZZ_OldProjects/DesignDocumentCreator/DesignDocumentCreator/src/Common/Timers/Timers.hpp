@@ -10,8 +10,8 @@ class Timer {
 public:
     Timer();
     Timer(TimerType const timerType, TimerId const timerId);
-    TimerType getType() const;
-    TimerId getId() const;
+    [[nodiscard]] TimerType getType() const;
+    [[nodiscard]] TimerId getId() const;
 
 private:
     TimerType m_timerType;

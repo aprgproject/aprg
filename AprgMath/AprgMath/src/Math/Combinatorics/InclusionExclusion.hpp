@@ -20,4 +20,4 @@ UnsignedInteger getIntersectionCountOfThreeSets(
     UnsignedInteger const abIntersection, UnsignedInteger const bcIntersection, UnsignedInteger const acIntersection,
     UnsignedInteger const abcUnion);
 
-}  // namespace alba
+}  // namespace alba::math

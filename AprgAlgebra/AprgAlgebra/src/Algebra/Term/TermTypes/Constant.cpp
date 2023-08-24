@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Constant::Constant() {}
 
@@ -27,6 +25,4 @@ ostream& operator<<(ostream& out, Constant const& constant) {
     return out;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

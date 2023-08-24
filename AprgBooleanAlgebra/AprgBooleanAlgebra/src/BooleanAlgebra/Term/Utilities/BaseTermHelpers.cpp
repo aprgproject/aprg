@@ -2,9 +2,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 BaseTermUniquePointer createBasePointer(BaseTerm const& baseTerm) {
     return static_cast<BaseTermUniquePointer>(make_unique<Term>(getTermConstReferenceFromBaseTerm(baseTerm)));
@@ -43,7 +41,5 @@ BaseTerm& getBaseTermReferenceFromTerm(Term& term) { return static_cast<BaseTerm
 BaseTerm& getBaseTermReferenceFromUniquePointer(BaseTermUniquePointer const& uniquePointer) {
     return static_cast<BaseTerm&>(*uniquePointer.get());
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

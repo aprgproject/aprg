@@ -9,9 +9,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 namespace {
 using MintermForTest = uint64_t;
@@ -421,7 +419,5 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFromFile_ZeroesStartingFromMsb) {
     cout << qm2.getOutputTable(primeImplicants2);
     cout << qm3.getOutputTable(primeImplicants3);
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

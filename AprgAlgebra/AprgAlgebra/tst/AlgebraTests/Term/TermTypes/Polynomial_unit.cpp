@@ -6,9 +6,7 @@
 using namespace alba::AlbaNumberConstants;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(PolynomialTest, PolynomialsAreConstructedCorrectly) {
     Polynomial polynomial1;
@@ -413,6 +411,4 @@ TEST(PolynomialTest, OutputStreamOperatorWorks) {
     EXPECT_EQ("(EmptyPolynomial),(6),(6 + -7[x^2][y^3][z^4])", ss.str());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

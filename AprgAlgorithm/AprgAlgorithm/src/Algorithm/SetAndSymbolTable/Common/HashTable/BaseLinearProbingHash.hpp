@@ -29,11 +29,11 @@ public:
         deleteAllEntries();
     }
 
-    bool isEmpty() const override { return m_size == 0; }
+    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
 
-    int getSize() const override { return m_size; }
+    [[nodiscard]] int getSize() const override { return m_size; }
 
-    bool doesContain(Key const& key) const override {
+    [[nodiscard]] bool doesContain(Key const& key) const override {
         bool result(false);
         for (int i(getHash(key)); m_entryPointers[i]; incrementHashTableIndexWithWrapAround(i)) {
             EntryUniquePointer const& entryPointer(m_entryPointers[i]);
@@ -45,12 +45,12 @@ public:
         return result;
     }
 
-    int getRank(Key const& key) const override {
+    [[nodiscard]] int getRank(Key const& key) const override {
         Keys keys(getKeys());
         return OrderedArray::getRank(key, keys);
     }
 
-    Key getMinimum() const override {
+    [[nodiscard]] Key getMinimum() const override {
         Key result{};
         bool isFirst(true);
         for (int i = 0; i < m_hashTableSize; i++) {
@@ -67,7 +67,7 @@ public:
         return result;
     }
 
-    Key getMaximum() const override {
+    [[nodiscard]] Key getMaximum() const override {
         Key result{};
         bool isFirst(true);
         for (int i = 0; i < m_hashTableSize; i++) {
@@ -84,17 +84,17 @@ public:
         return result;
     }
 
-    Key selectAt(int const index) const override {
+    [[nodiscard]] Key selectAt(int const index) const override {
         Keys keys(getKeys());
         return OrderedArray::selectAt(index, keys);
     }
 
-    Key getFloor(Key const& key) const override {
+    [[nodiscard]] Key getFloor(Key const& key) const override {
         Keys keys(getKeys());
         return OrderedArray::getFloor(key, keys);
     }
 
-    Key getCeiling(Key const& key) const override {
+    [[nodiscard]] Key getCeiling(Key const& key) const override {
         Keys keys(getKeys());
         return OrderedArray::getCeiling(key, keys);
     }
@@ -121,7 +121,7 @@ public:
 
     void deleteMaximum() override { deleteBasedOnKey(getMaximum()); }
 
-    Keys getKeys() const override {
+    [[nodiscard]] Keys getKeys() const override {
         Keys result;
         for (int i = 0; i < m_hashTableSize; i++) {
             EntryUniquePointer const& entryPointer(m_entryPointers[i]);
@@ -133,7 +133,7 @@ public:
         return result;
     }
 
-    Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override {
+    [[nodiscard]] Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override {
         Keys result;
         for (int i = 0; i < m_hashTableSize; i++) {
             EntryUniquePointer const& entryPointer(m_entryPointers[i]);
@@ -148,7 +148,7 @@ public:
         return result;
     }
 
-    int getHashTableSize() const { return m_hashTableSize; }
+    [[nodiscard]] int getHashTableSize() const { return m_hashTableSize; }
 
 protected:
     virtual void putEntry(Entry const& entry) = 0;
@@ -200,7 +200,7 @@ protected:
         }
     }
 
-    int getHash(Key const& key) const { return HashFunction::getHash(key); }
+    [[nodiscard]] int getHash(Key const& key) const { return HashFunction::getHash(key); }
 
     void incrementHashTableIndexWithWrapAround(int& index) const { index = (index + 1) % m_hashTableSize; }
 

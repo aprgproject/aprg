@@ -4,11 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Simplification {
+namespace alba::algebra::Simplification {
 
 TEST(SimplificationOfExpressionTest, ShouldSimplifyToACommonDenominatorWorks) {
     EXPECT_FALSE(SimplificationOfExpression::shouldSimplifyToACommonDenominator());
@@ -164,8 +160,4 @@ TEST(SimplificationOfExpressionTest, ShouldPerformDebugWorks) {
     EXPECT_FALSE(SimplificationOfExpression::shouldPerformDebug());
 }
 
-}  // namespace Simplification
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Simplification

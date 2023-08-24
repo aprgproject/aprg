@@ -20,9 +20,7 @@ using namespace alba::algebra::Simplification;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 namespace {
 
@@ -355,6 +353,4 @@ bool continueToDifferentiateForLhopitalsRule(
     return continueBasedOnDegrees && continueBasedOnValues;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

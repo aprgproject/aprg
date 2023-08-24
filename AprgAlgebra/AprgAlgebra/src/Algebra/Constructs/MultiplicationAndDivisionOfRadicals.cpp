@@ -145,4 +145,4 @@ void MultiplicationAndDivisionOfRadicals::saveRemainingTerms(TermsWithDetails co
     }
 }
 
-}  // namespace alba
+}  // namespace alba::algebra

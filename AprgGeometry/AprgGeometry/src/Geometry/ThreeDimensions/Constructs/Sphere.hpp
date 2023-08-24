@@ -4,9 +4,7 @@
 
 #include <optional>
 
-namespace alba {
-
-namespace ThreeDimensions {
+namespace alba::ThreeDimensions {
 
 class Sphere {
 public:
@@ -15,12 +13,12 @@ public:
     bool operator==(Sphere const& sphere) const;
     bool operator!=(Sphere const& sphere) const;
     bool operator<(Sphere const& sphere) const;
-    Point getCenter() const;
-    double getRadius() const;
-    bool isInside(Point const& point) const;
-    std::optional<double> calculateXFromYAndZ(double const y, double const z, double const signOfRoot) const;
-    std::optional<double> calculateYFromXAndZ(double const x, double const z, double const signOfRoot) const;
-    std::optional<double> calculateZFromXAndY(double const x, double const y, double const signOfRoot) const;
+    [[nodiscard]] Point getCenter() const;
+    [[nodiscard]] double getRadius() const;
+    [[nodiscard]] bool isInside(Point const& point) const;
+    [[nodiscard]] std::optional<double> calculateXFromYAndZ(double const y, double const z, double const signOfRoot) const;
+    [[nodiscard]] std::optional<double> calculateYFromXAndZ(double const x, double const z, double const signOfRoot) const;
+    [[nodiscard]] std::optional<double> calculateZFromXAndY(double const x, double const y, double const signOfRoot) const;
 
 private:
     friend std::ostream& operator<<(std::ostream& out, Sphere const& sphere);
@@ -32,5 +30,4 @@ private:
 
 using Spheres = std::vector<Sphere>;
 
-}  // namespace ThreeDimensions
 }  // namespace alba

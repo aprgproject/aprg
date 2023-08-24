@@ -19,9 +19,9 @@ public:
 
     DirectedGraphWithVertexToAdjacencyListsMap()  {}
 
-    bool isEmpty() const override { return m_adjacencyLists.empty(); }
+    [[nodiscard]] bool isEmpty() const override { return m_adjacencyLists.empty(); }
 
-    bool isDirectlyConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
+    [[nodiscard]] bool isDirectlyConnected(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
         bool result(false);
         auto it = m_adjacencyLists.find(sourceVertex);
         if (it != m_adjacencyLists.cend()) {
@@ -31,11 +31,11 @@ public:
         return result;
     }
 
-    int getNumberOfVertices() const override { return getUniqueVertices().size(); }
+    [[nodiscard]] int getNumberOfVertices() const override { return getUniqueVertices().size(); }
 
-    int getNumberOfEdges() const override { return m_numberOfEdges; }
+    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
-    Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
+    [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
         Vertices result(false);
         auto it = m_adjacencyLists.find(vertex);
         if (it != m_adjacencyLists.cend()) {
@@ -46,12 +46,12 @@ public:
         return result;
     }
 
-    Vertices getVertices() const override {
+    [[nodiscard]] Vertices getVertices() const override {
         SetOfVertices uniqueVertices(getUniqueVertices());
         return Vertices(uniqueVertices.cbegin(), uniqueVertices.cend());
     }
 
-    Edges getEdges() const override {
+    [[nodiscard]] Edges getEdges() const override {
         Edges result;
         for (auto const& [sourceVertex, adjacencyList] : m_adjacencyLists) {
             for (Vertex const& destinationVertex : adjacencyList) {
@@ -81,7 +81,7 @@ public:
     }
 
 protected:
-    SetOfVertices getUniqueVertices() const {
+    [[nodiscard]] SetOfVertices getUniqueVertices() const {
         SetOfVertices uniqueVertices;
         for (auto const& [sourceVertex, adjacencyList] : m_adjacencyLists) {
             uniqueVertices.emplace(sourceVertex);
@@ -107,4 +107,4 @@ protected:
     AdjacencyLists m_adjacencyLists{};
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

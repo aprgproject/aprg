@@ -6,9 +6,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 EquationBuilder::EquationBuilder(string const& equationInString) {
     splitAndSaveOperatorAndTermStrings(equationInString);
@@ -67,6 +65,4 @@ void EquationBuilder::splitAndSaveOperatorAndTermStrings(string const& equationI
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

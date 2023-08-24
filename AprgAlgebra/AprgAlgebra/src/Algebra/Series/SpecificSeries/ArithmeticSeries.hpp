@@ -2,9 +2,7 @@
 
 #include <Algebra/Series/GeneralSeries/SeriesBasedOnFormula.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class ArithmeticSeries : public SeriesBasedOnFormula {
 public:
@@ -19,6 +17,4 @@ protected:
         AlbaNumber const& valueAtIndex1, int const index1, AlbaNumber const& valueAtIndex2, int const index2);
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

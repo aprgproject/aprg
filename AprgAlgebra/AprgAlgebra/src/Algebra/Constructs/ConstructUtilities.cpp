@@ -16,9 +16,7 @@ using namespace alba::algebra::Factorization;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 PolynomialOverPolynomialOptional createPolynomialOverPolynomialFromTermIfPossible(Term const& term) {
     PolynomialOverPolynomialOptional result;
@@ -294,6 +292,4 @@ void createTermRaiseToTermsFromMultiplicationAndDivisionExpression(
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

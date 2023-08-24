@@ -7,9 +7,7 @@
 
 #include <array>
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 template <int numberOfVertices>
 class Polygon {
@@ -19,18 +17,18 @@ public:
 
     Polygon(std::initializer_list<Point> const& vertices);
 
-    bool isEquilateral() const;
-    bool isEquiangular() const;
-    bool isRegular() const;
+    [[nodiscard]] bool isEquilateral() const;
+    [[nodiscard]] bool isEquiangular() const;
+    [[nodiscard]] bool isRegular() const;
 
-    Lines getLines() const;
-    LineSegments getLineSegments() const;
-    Points getVertices() const;
-    Distances getLengthOfSides() const;
-    AlbaAngles getAnglesAtVertices() const;
-    AlbaAngle getSumOfAngles() const;
+    [[nodiscard]] Lines getLines() const;
+    [[nodiscard]] LineSegments getLineSegments() const;
+    [[nodiscard]] Points getVertices() const;
+    [[nodiscard]] Distances getLengthOfSides() const;
+    [[nodiscard]] AlbaAngles getAnglesAtVertices() const;
+    [[nodiscard]] AlbaAngle getSumOfAngles() const;
 
-    Points getPoints(double const interval) const;
+    [[nodiscard]] Points getPoints(double const interval) const;
     void getPointsFromVerticesWithoutLastPoint(
         Points& points, double const interval, int vertexIndex1, int vertexIndex2) const;
 
@@ -38,5 +36,4 @@ protected:
     std::array<Point, numberOfVertices> m_vertices;
 };
 
-}  // namespace TwoDimensions
-}  // namespace alba
+}  // namespace alba::TwoDimensions

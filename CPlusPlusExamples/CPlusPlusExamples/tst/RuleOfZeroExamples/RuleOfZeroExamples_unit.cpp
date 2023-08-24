@@ -13,7 +13,7 @@ namespace {
 
 struct OperationPrinter {
     OperationPrinter() { cout << "Default constructor\n"; }
-    OperationPrinter(int) { cout << "Value constructor\n"; }
+    explicit OperationPrinter(int) { cout << "Value constructor\n"; }
     ~OperationPrinter() { cout << "Destructor\n"; }
     OperationPrinter(OperationPrinter const&) { cout << "Copy constructor\n"; }
     OperationPrinter(OperationPrinter&&) noexcept { cout << "Move constructor\n"; }
@@ -21,7 +21,7 @@ struct OperationPrinter {
         cout << "Copy assignment\n";
         return *this;
     }
-    OperationPrinter& operator=(OperationPrinter&&) {
+    OperationPrinter& operator=(OperationPrinter&&)  noexcept {
         cout << "Move assignment\n";
         return *this;
     }
@@ -37,7 +37,7 @@ struct OperationPrinter {
 
 class NaiveIntVector {
 public:
-    NaiveIntVector() : m_ptr(nullptr), m_size(0) {}
+    NaiveIntVector()  {}
     ~NaiveIntVector() { delete[] m_ptr; }
     NaiveIntVector(NaiveIntVector const& rightHandSide) {
         m_size = rightHandSide.m_size;
@@ -89,8 +89,8 @@ public:
     }
 
 private:
-    int* m_ptr;
-    size_t m_size;
+    int* m_ptr{nullptr};
+    size_t m_size{0};
 };
 
 }  // namespace

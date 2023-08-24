@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 int getOperatorTypeInversePriority(OperatorType const operatorType) {
     int result(0);
@@ -112,7 +110,5 @@ string getEnumShortString(OperatorLevel const operatorLevel) {
             return "default";
     }
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

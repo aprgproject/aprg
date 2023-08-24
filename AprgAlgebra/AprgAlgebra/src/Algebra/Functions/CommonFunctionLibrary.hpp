@@ -2,11 +2,7 @@
 
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
-
-namespace Functions {
+namespace alba::algebra::Functions {
 
 Function abs(Term const& term);
 Function greatestIntegerFunction(Term const& term);
@@ -49,8 +45,4 @@ Function arccoth(Term const& term);
 Function sinHarmonic(
     Term const& term, AlbaNumber const& amplitude, AlbaNumber const& period, AlbaNumber const& phaseDifference);
 
-}  // namespace Functions
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Functions

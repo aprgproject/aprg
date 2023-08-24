@@ -6,9 +6,7 @@ using namespace alba::AprgBitmap;
 using namespace alba::TwoDimensions;
 using namespace std;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 TEST(UtilitiesTest, ConvertBitmapXYToPointWorks) {
     BitmapXY bitmapXY1;
@@ -34,7 +32,5 @@ TEST(UtilitiesTest, ConvertPointToBitmapXYWorks) {
     EXPECT_EQ(BitmapXY(1, 1), bitmapXY2);
     EXPECT_EQ(BitmapXY(2, 2), bitmapXY3);
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

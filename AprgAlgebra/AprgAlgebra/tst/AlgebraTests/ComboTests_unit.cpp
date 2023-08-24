@@ -18,9 +18,7 @@ using namespace alba::AlbaNumberConstants;
 using namespace alba::algebra::Simplification;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(ComboTest, SimplifyAndSubstitutionWorksUsingExample1) {
     SubstitutionOfVariablesToValues substitution({{"x", 8}});
@@ -164,6 +162,4 @@ TEST(ComboTest, DifferentiationRelatedRatesConeWaterExampleTest) {
     EXPECT_EQ(AlbaNumbers{0.4074366543152521}, solutionSet.getAcceptedValues());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

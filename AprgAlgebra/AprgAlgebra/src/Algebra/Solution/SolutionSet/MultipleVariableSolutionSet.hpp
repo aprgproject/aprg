@@ -6,9 +6,7 @@
 #include <map>
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class MultipleVariableSolutionSet {
 public:
@@ -17,12 +15,12 @@ public:
 
     MultipleVariableSolutionSet();
 
-    bool isValueAcceptedForVariable(std::string const& variableName, AlbaNumber const& value) const;
-    int getNumberOfVariablesWithSolutions() const;
+    [[nodiscard]] bool isValueAcceptedForVariable(std::string const& variableName, AlbaNumber const& value) const;
+    [[nodiscard]] int getNumberOfVariablesWithSolutions() const;
 
-    VariableNamesSet getVariableNames() const;
-    SolutionSet getSolutionSetForVariable(std::string const& variableName) const;
-    VariableNameToSolutionSetMap const& getVariableNameToSolutionSetMap() const;
+    [[nodiscard]] VariableNamesSet getVariableNames() const;
+    [[nodiscard]] SolutionSet getSolutionSetForVariable(std::string const& variableName) const;
+    [[nodiscard]] VariableNameToSolutionSetMap const& getVariableNameToSolutionSetMap() const;
 
     void addSolutionSetForVariable(std::string const& variableName, SolutionSet const& solutionSet);
 
@@ -34,6 +32,4 @@ private:
 
 using MultipleVariableSolutionSets = std::vector<MultipleVariableSolutionSet>;
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

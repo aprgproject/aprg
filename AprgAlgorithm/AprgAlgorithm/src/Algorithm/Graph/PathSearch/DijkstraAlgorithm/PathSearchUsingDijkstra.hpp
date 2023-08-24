@@ -30,7 +30,7 @@ public:
     }
 
 private:
-    bool isComparisonLessThan() const {
+    [[nodiscard]] bool isComparisonLessThan() const {
         ComparatorTemplateType<int> comparisonInUnsignedInt;
         return (comparisonInUnsignedInt(1, 2) && !comparisonInUnsignedInt(1, 1));
     }

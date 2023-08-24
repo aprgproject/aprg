@@ -3,9 +3,7 @@
 #include <Algebra/Series/SpecificSeries/GeometricSeries.hpp>
 #include <Algebra/Utilities/KnownNames.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 SummationSeriesOfGeometricSeries::SummationSeriesOfGeometricSeries(
     AlbaNumber const& firstValue, AlbaNumber const& commonMultiplier)
@@ -16,6 +14,4 @@ SummationSeriesOfGeometricSeries::SummationSeriesOfGeometricSeries(
     : SeriesBasedOnSummation(
           GeometricSeries(valueAtNthIndex1, nthIndex1, valueAtNthIndex2, nthIndex2).getFormulaForSeries(), n) {}
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

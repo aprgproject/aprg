@@ -10,9 +10,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 bool isConstant(string const& stringObject) {
     string allCapital(getStringWithCapitalLetters(stringObject));
@@ -128,7 +126,5 @@ void addValueTermIfNotEmpty(Terms& terms, string const& valueString) {
         terms.emplace_back(Term(valueString));
     }
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

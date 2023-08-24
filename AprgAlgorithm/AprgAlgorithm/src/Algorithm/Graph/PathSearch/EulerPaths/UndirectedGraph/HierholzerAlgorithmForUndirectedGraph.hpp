@@ -21,7 +21,7 @@ public:
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using VertexToSetOfAdjacencyVerticesMap = std::map<Vertex, SetOfVertices>;
 
-    HierholzerAlgorithmForUndirectedGraph(BaseUndirectedGraphWithVertex const& graph)
+    explicit HierholzerAlgorithmForUndirectedGraph(BaseUndirectedGraphWithVertex const& graph)
         : BaseClass(graph), b_graph(BaseClass::b_graph) {}
 
 private:
@@ -52,7 +52,7 @@ private:
         std::reverse(result.begin(), result.end());
     }
 
-    VertexToSetOfAdjacencyVerticesMap createVertexToSetOfAdjacencyVerticesMap() const {
+    [[nodiscard]] VertexToSetOfAdjacencyVerticesMap createVertexToSetOfAdjacencyVerticesMap() const {
         VertexToSetOfAdjacencyVerticesMap result;
         Vertices allVertices(b_graph.getVertices());
         for (Vertex const& vertex : allVertices) {
@@ -65,4 +65,4 @@ private:
     BaseUndirectedGraphWithVertex const& b_graph;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

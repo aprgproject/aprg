@@ -28,4 +28,4 @@ private:
 
 using ListOfTermRaiseToANumber = std::vector<TermRaiseToANumber>;
 
-}  // namespace alba
+}  // namespace alba::algebra

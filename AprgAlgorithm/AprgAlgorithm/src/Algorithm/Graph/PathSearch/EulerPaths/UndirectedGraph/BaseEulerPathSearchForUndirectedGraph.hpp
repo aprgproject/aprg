@@ -16,25 +16,25 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Path = typename GraphTypes<Vertex>::Path;
 
-    BaseEulerPathSearchForUndirectedGraph(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph) {}
+    explicit BaseEulerPathSearchForUndirectedGraph(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph) {}
 
     virtual ~BaseEulerPathSearchForUndirectedGraph() =
         default;  // virtual destructor because of virtual functions (vtable exists)
 
-    bool hasEulerCycle() const { return hasEulerCycleForUndirectedGraph(m_graph); }
+    [[nodiscard]] bool hasEulerCycle() const { return hasEulerCycleForUndirectedGraph(m_graph); }
 
-    bool hasEulerPath() const { return hasEulerPathForUndirectedGraph(m_graph); }
+    [[nodiscard]] bool hasEulerPath() const { return hasEulerPathForUndirectedGraph(m_graph); }
 
     // An Euler circuit is a circuit that uses every edge in a graph with no repeats. Being a circuit, it must start and
     // end at the same vertex.
-    virtual Path getEulerCycle() const = 0;
+    [[nodiscard]] virtual Path getEulerCycle() const = 0;
 
     // An Euler path is a path that uses every edge in a graph with no repeats. Being a path, it does not have to return
     // to the starting vertex.
-    virtual Path getEulerPath() const = 0;
+    [[nodiscard]] virtual Path getEulerPath() const = 0;
 
 protected:
-    Vertex getStartingVertexForEulerCycle() const {
+    [[nodiscard]] Vertex getStartingVertexForEulerCycle() const {
         Vertex result{};
         Vertices vertices(m_graph.getVertices());
         if (!vertices.empty()) {
@@ -43,7 +43,7 @@ protected:
         return result;
     }
 
-    Vertex getStartingVertexForEulerPath() const {
+    [[nodiscard]] Vertex getStartingVertexForEulerPath() const {
         Vertex result{};
         Vertices vertices(m_graph.getVertices());
         if (!vertices.empty()) {

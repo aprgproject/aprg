@@ -57,14 +57,14 @@ public:
     bool operator!=(string const& content) const;
     friend bool operator!=(string const& content, Term const& term);
 
-    string getString() const;
-    bool hasValueType() const;
-    CPlusPlusType getValueType() const;
+    [[nodiscard]] string getString() const;
+    [[nodiscard]] bool hasValueType() const;
+    [[nodiscard]] CPlusPlusType getValueType() const;
     CPlusPlusType& getValueTypeReference();
-    string getPrintableString() const;
-    string getTermTypeString() const;
-    TermType getTermType() const;
-    unsigned int getLineNumber() const;
+    [[nodiscard]] string getPrintableString() const;
+    [[nodiscard]] string getTermTypeString() const;
+    [[nodiscard]] TermType getTermType() const;
+    [[nodiscard]] unsigned int getLineNumber() const;
 
     void clearValueType();
     void setString(string const& string1);
@@ -73,7 +73,7 @@ public:
     void setLineNumber(unsigned int lineNumber);
 
 private:
-    bool hasNoContentString() const;
+    [[nodiscard]] bool hasNoContentString() const;
     bool m_hasContentString;
     TermType m_termType;
     string m_content;

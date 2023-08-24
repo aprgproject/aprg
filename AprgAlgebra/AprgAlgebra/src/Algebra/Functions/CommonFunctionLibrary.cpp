@@ -8,11 +8,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Functions {
+namespace alba::algebra::Functions {
 
 Function abs(Term const& term) {
     return Function("abs", term, [](AlbaNumber const& number) -> AlbaNumber { return getAbsoluteValue(number); });
@@ -57,7 +53,7 @@ Function log(Term const& term) {
 Function harmonicNumber(Term const& term) {
     return Function("harmonicNumber", term, [](AlbaNumber const& number) -> AlbaNumber {
         AlbaNumber result;
-        if (number.getInteger() && number > 0) {
+        if ((number.getInteger() != 0) && number > 0) {
             int lastNumber = static_cast<int>(number.getInteger());
             for (int i = 1; i <= lastNumber; i++) {
                 result = result + AlbaNumber::createFraction(1, i);
@@ -186,8 +182,4 @@ Function sinHarmonic(
     });
 }
 
-}  // namespace Functions
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Functions

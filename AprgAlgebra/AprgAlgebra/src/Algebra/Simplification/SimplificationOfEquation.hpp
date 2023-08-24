@@ -2,17 +2,13 @@
 
 #include <Algebra/Equation/Equation.hpp>
 
-namespace alba {
-
-namespace algebra {
-
-namespace Simplification {
+namespace alba::algebra::Simplification {
 
 class SimplificationOfEquation {
 public:
-    SimplificationOfEquation(Equation const& equation);
+    explicit SimplificationOfEquation(Equation const& equation);
 
-    Equation getEquation() const;
+    [[nodiscard]] Equation getEquation() const;
 
     void simplify();
 
@@ -30,8 +26,4 @@ private:
     Equation m_equation;
 };
 
-}  // namespace Simplification
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Simplification

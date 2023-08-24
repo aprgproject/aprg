@@ -32,7 +32,7 @@ public:
         initializePartialSums();
     }
 
-    Value getAccumulatedValueOnInterval(Index const start, Index const end) const {
+    [[nodiscard]] Value getAccumulatedValueOnInterval(Index const start, Index const end) const {
         // This has log(N) running time
         Value result{};
         if (start <= end && start < static_cast<Index>(m_partialTreeSums.size()) &&
@@ -49,7 +49,7 @@ public:
         return result;
     }
 
-    Value getAccumulatedValueFrom0ToIndex(Index const index) const {
+    [[nodiscard]] Value getAccumulatedValueFrom0ToIndex(Index const index) const {
         // This has log(N) running time
         Value result{};
         if (index < static_cast<Index>(m_partialTreeSums.size())) {
@@ -92,7 +92,7 @@ private:
         m_partialTreeSums.shrink_to_fit();
     }
 
-    Value getPartialTreeSum(int const powerOf2Factor, int const indexPlusOne) const {
+    [[nodiscard]] Value getPartialTreeSum(int const powerOf2Factor, int const indexPlusOne) const {
         // This has log(N) running time
         Value result(m_values[indexPlusOne - 1]);
         int powerOf2FactorForPartialSum = powerOf2Factor / 2;
@@ -105,7 +105,7 @@ private:
         return result;
     }
 
-    Index getGreatestPowerOf2Factor(Index const index) const { return mathHelper::getGreatestPowerOf2Factor(index); }
+    [[nodiscard]] Index getGreatestPowerOf2Factor(Index const index) const { return mathHelper::getGreatestPowerOf2Factor(index); }
 
     Values m_values;
     Values m_partialTreeSums;

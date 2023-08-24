@@ -3,9 +3,7 @@
 #include <Algebra/Equation/Equation.hpp>
 #include <Algebra/Term/TermTypes/TermContainerTypes.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 void reduceEquationsBySubstitution(Equations& substitutedEquations, VariableNamesSet const& variableNamesToIgnore);
 void selectVariableNameAndEquationNumber(
@@ -17,6 +15,4 @@ void substituteEquationForSelectedEquationIndex(
 void removeEquationsWithoutUnknowns(Equations& substitutedEquations);
 VariableNamesSet getVariablesNamesToCheck(Equations const& equations, VariableNamesSet const& variableNamesToIgnore);
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

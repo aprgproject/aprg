@@ -1,8 +1,6 @@
 #include "ExponentsRetriever.hpp"
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 AlbaNumbersSet const& ExponentsRetriever::getExponents() const { return m_exponents; }
 
@@ -12,6 +10,4 @@ void ExponentsRetriever::retrieveFromMonomial(Monomial const& monomial) {
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

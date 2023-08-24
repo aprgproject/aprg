@@ -12,11 +12,7 @@ using namespace std;
 
 // https://en.wikipedia.org/wiki/HSL_and_HSV
 
-namespace alba {
-
-namespace AprgBitmap {
-
-namespace ColorUtilities {
+namespace alba::AprgBitmap::ColorUtilities {
 
 constexpr uint8_t MAX_COLOR_VALUE = 0xFF;
 
@@ -268,9 +264,5 @@ uint8_t extractMaxForOneColor(uint32_t const color) {
 uint8_t extractMinForOneColor(uint32_t const color) {
     return min(min(extractRed(color), extractGreen(color)), extractBlue(color));
 }
-
-}  // namespace ColorUtilities
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

@@ -12,9 +12,9 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    BinaryNearestValueSearchWithSkip(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    explicit BinaryNearestValueSearchWithSkip(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
-    Value getNearestValue(Value const& target) const {
+    [[nodiscard]] Value getNearestValue(Value const& target) const {
         Value result{};
         if (!m_sortedValues.empty()) {
             result = m_sortedValues[getIndexOfNearestValueWithoutCheck(target)];
@@ -22,7 +22,7 @@ public:
         return result;
     }
 
-    Index getIndexOfNearestValue(Value const& target) const {
+    [[nodiscard]] Index getIndexOfNearestValue(Value const& target) const {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
             result = getIndexOfNearestValueWithoutCheck(target);
@@ -31,12 +31,12 @@ public:
     }
 
 private:
-    Index getIndexOfNearestValueWithoutCheck(Value const& target) const {
+    [[nodiscard]] Index getIndexOfNearestValueWithoutCheck(Value const& target) const {
         Index lowIndex(getNearestLowerBoundIndex(target));
         return getIndexOfNearestValueFromLowerIndex(target, lowIndex);
     }
 
-    Index getNearestLowerBoundIndex(Value const& target) const {
+    [[nodiscard]] Index getNearestLowerBoundIndex(Value const& target) const {
         Index result(0);
         Index size(m_sortedValues.size());
         // forward skip start from half of size, then quarter of size, then eighth of size and so on
@@ -50,7 +50,7 @@ private:
         return result;
     }
 
-    Index getIndexOfNearestValueFromLowerIndex(Value const& target, Index const lowIndex) const {
+    [[nodiscard]] Index getIndexOfNearestValueFromLowerIndex(Value const& target, Index const lowIndex) const {
         Value lowerBoundValue(m_sortedValues[lowIndex]);
         Value highIndex(getHigherIndex(lowIndex));
         Value deviationFromLower(mathHelper::getPositiveDelta(target, lowerBoundValue));
@@ -58,11 +58,11 @@ private:
         return (deviationFromLower <= deviationFromHigher) ? lowIndex : highIndex;
     }
 
-    Index getHigherIndex(Index const lowIndex) const {
+    [[nodiscard]] Index getHigherIndex(Index const lowIndex) const {
         return std::min(lowIndex + 1, static_cast<Index>(m_sortedValues.size()) - 1);
     }
 
     Values const& m_sortedValues;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

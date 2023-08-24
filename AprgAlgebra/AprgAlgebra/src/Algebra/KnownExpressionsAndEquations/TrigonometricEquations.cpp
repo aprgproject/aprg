@@ -7,9 +7,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Equation getTrigonometricPythagoreanIdentity(Term const& term) {
     // sin(x)^2 + cos(x)^2 = 1
@@ -229,6 +227,4 @@ Term getCosineSquaredOfHalvedValue(Term const& term) {
     return Term(createExpressionIfPossible({numerator, "/", 2}));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

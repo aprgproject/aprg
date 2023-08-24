@@ -9,7 +9,7 @@ using namespace std;
 namespace alba {
 
 AlbaGrepStringEvaluator::AlbaGrepStringEvaluator(string const& condition)
-    : m_isEvaluatorInvalid(false) {
+     {
     extractTokens(condition);
     generateExpressionEvaluatorPostfix();
 

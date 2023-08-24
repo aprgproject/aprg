@@ -3,9 +3,7 @@
 #include <Algebra/Series/GeneralSeries/SeriesBasedOnSummation.hpp>
 #include <Common/Math/Number/Interval/AlbaNumberInterval.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class PowerSeries : public SeriesBasedOnSummation {
 public:
@@ -13,8 +11,8 @@ public:
         Term const& multiplierForEachTerm, std::string const& nName, std::string const& xName,
         AlbaNumber const& aValue);
 
-    AlbaNumberIntervals getIntervalsOfConvergence() const;
-    AlbaNumber getRadiusOfConvergence() const;
+    [[nodiscard]] AlbaNumberIntervals getIntervalsOfConvergence() const;
+    [[nodiscard]] AlbaNumber getRadiusOfConvergence() const;
 
     void differentiate();
     void integrate();
@@ -27,6 +25,4 @@ protected:
     std::string const m_xName;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

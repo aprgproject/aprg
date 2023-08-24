@@ -15,9 +15,9 @@ public:
     Finding(string const& fileLocator, string const& details, string const& locator)
         : m_fileLocator(fileLocator), m_details(details), m_termsLocator(locator), m_hasTermsLocator(true) {}
 
-    string getDetails() const { return m_details; }
+    [[nodiscard]] string getDetails() const { return m_details; }
 
-    string getLocator() const { return m_termsLocator; }
+    [[nodiscard]] string getLocator() const { return m_termsLocator; }
 
     friend ostream& operator<<(ostream& out, Finding const& finding) {
         if (finding.m_hasTermsLocator) {

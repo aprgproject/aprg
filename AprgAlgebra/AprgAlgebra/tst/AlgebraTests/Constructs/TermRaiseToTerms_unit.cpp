@@ -10,9 +10,7 @@
 using namespace alba::AlbaNumberConstants;
 using namespace alba::algebra::Functions;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(TermRaiseToTermsTest, ConstructionWithNoArgumentWorks) {
     TermRaiseToTerms termRaiseToTerms;
@@ -274,6 +272,4 @@ TEST(TermRaiseToTermsTest, SimplifyWorksWithNegativeNumberRaiseToInfinity) {
     EXPECT_TRUE(isNan(termRaiseToTerms.getCombinedTerm()));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

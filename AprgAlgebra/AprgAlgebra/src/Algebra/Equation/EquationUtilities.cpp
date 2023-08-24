@@ -11,9 +11,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool isEquationOperatorString(string const& stringToCheck) {
     return "=" == stringToCheck || "==" == stringToCheck || "!=" == stringToCheck || "<" == stringToCheck ||
@@ -153,6 +151,4 @@ void segregateEquationsWithAndWithoutVariable(
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

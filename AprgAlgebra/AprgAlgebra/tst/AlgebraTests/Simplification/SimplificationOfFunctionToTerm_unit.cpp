@@ -7,11 +7,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Simplification {
+namespace alba::algebra::Simplification {
 
 TEST(SimplificationOfFunctionToTermTest, SimplifyWorksWhenInputIsConstant) {
     SimplificationOfFunctionToTerm simplification;
@@ -171,8 +167,4 @@ TEST(
     EXPECT_EQ(termToExpect8, termToVerify8);
 }
 
-}  // namespace Simplification
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Simplification

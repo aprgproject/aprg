@@ -7,9 +7,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(SeriesUtilitiesTest, IsAxiomOfCompletenessTrueWorks) {
     Term numerator("n");
@@ -216,6 +214,4 @@ TEST(SeriesUtilitiesTest, GetEToTheXPowerSeriesWorks) {
     EXPECT_EQ(stringToExpect5, convertToString(series.getFormulaForEachTermInSummation()));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

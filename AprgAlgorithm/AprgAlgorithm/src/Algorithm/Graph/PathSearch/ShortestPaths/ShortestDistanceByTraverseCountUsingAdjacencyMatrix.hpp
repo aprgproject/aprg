@@ -22,7 +22,7 @@ public:
     ShortestDistanceByTraverseCountUsingAdjacencyMatrix(EdgeWeightedGraph const& graph, int const traverseCount)
         : m_shortestDistanceMatrix(createDistanceMatrix(traverseCount, graph)) {}
 
-    Weight getShortestDistance(Vertex const& start, Vertex const& end) const {
+    [[nodiscard]] Weight getShortestDistance(Vertex const& start, Vertex const& end) const {
         return static_cast<Weight>(m_shortestDistanceMatrix.getEntry(start, end).getDouble());
     }
 
@@ -98,4 +98,4 @@ private:
     DistancetMatrix m_shortestDistanceMatrix;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

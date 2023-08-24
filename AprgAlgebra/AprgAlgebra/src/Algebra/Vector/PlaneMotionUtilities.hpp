@@ -2,11 +2,7 @@
 
 #include <Algebra/Vector/MathVectorOfTermsUtilities.hpp>
 
-namespace alba {
-
-namespace algebra {
-
-namespace VectorUtilities {
+namespace alba::algebra::VectorUtilities {
 
 template <size_t SIZE>
 MathVectorOfTerms<SIZE> getInstantaneousVelocity(MathVectorOfTerms<SIZE> const& path, std::string const& variableName) {
@@ -49,8 +45,4 @@ MathVectorOfTerms<SIZE> getNormalPartOfAcceleration(
     return result;
 }
 
-}  // namespace VectorUtilities
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::VectorUtilities

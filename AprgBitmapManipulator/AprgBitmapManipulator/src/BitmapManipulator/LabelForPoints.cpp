@@ -8,9 +8,7 @@
 using namespace alba::AprgBitmap::ColorUtilities;
 using namespace alba::mathHelper;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 bool isInitialLabel(int const label) { return label == INITIAL_LABEL_VALUE; }
 
@@ -36,7 +34,5 @@ int LabelForPoints::getLabel(BitmapXY const& point) const {
 LabelForPoints::PixelsToLabelsMap const& LabelForPoints::getPixelsToLabels() const { return m_pixelsTolabelsMap; }
 
 void LabelForPoints::setLabel(BitmapXY const& point, int const label) { m_pixelsTolabelsMap[point] = label; }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

@@ -15,9 +15,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(LimitTest, IsAlmostEqualForLimitIterationWorks) {
     AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
@@ -432,6 +430,4 @@ TEST(LimitTest, GetObliqueAsymptoteWorksWhenThereIsAnObliqueAsymptote) {
     EXPECT_EQ(Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})}), getObliqueAsymptote(termToTest));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

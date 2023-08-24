@@ -7,11 +7,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 Terms factorizeTerm(Term const& term) { return factorizeTerms({term}); }
 
@@ -40,8 +36,4 @@ Terms factorizeTerms(Terms const& terms) {
     return result;
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

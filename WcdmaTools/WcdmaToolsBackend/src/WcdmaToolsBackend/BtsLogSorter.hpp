@@ -14,7 +14,7 @@ namespace wcdmaToolsBackend {
 
 class BtsLogSorter {
 public:
-    BtsLogSorter(BtsLogSorterConfiguration const& configuration);
+    explicit BtsLogSorter(BtsLogSorterConfiguration const& configuration);
     void processDirectory(std::string const& directoryPath);
     void processFile(std::string const& filePath);
     void processLineInFile(std::string const& filename, std::string const& lineInFile);

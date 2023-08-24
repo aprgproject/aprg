@@ -81,4 +81,4 @@ UnsignedInteger MultipleGamesWithMaze::getCombinedGrundyNumber() {
     return result;
 }
 
-}  // namespace alba
+}  // namespace alba::math

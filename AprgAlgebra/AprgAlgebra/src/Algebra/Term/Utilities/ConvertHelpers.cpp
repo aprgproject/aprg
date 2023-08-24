@@ -8,9 +8,7 @@
 using namespace alba::algebra::Simplification;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool canBeConvertedToConstant(Polynomial const& polynomial) {
     return polynomial.isEmpty() || (isOneMonomial(polynomial) && isConstantOnly(getFirstMonomial(polynomial)));
@@ -45,7 +43,7 @@ Operator reverse(Operator const& operatorToReverse) {
     if (operatorToReverse.isDivision()) {
         return Operator("*");
     }
-    return Operator();
+    return {};
 }
 
 Term simplifyAndConvertMonomialToSimplestTerm(Monomial const& monomial) {
@@ -111,6 +109,4 @@ Term convertFunctionToSimplestTerm(Function const& functionObject) {
     return simplification.simplifyToTerm(functionObject);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

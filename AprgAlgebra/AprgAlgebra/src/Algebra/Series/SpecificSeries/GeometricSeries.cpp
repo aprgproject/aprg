@@ -3,9 +3,7 @@
 #include <Algebra/Term/Operators/TermOperators.hpp>
 #include <Algebra/Utilities/KnownNames.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 GeometricSeries::GeometricSeries(AlbaNumber const& firstValue, AlbaNumber const& commonMultiplier)
     : SeriesBasedOnFormula(getFormula(firstValue, commonMultiplier), n) {}
@@ -30,6 +28,4 @@ Term GeometricSeries::getFormula(
     return getFormula(firstValue, commonMultiplier);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

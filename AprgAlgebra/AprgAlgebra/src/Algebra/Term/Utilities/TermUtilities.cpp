@@ -19,9 +19,7 @@ using namespace alba::AlbaNumberConstants;
 using namespace alba::algebra::Factorization;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool isTermSimpler(Term const& supposeToBeComplicatedTerm, Term const& supposeToBeSimpleTerm) {
     return getNumberOfTerms(supposeToBeComplicatedTerm) > getNumberOfTerms(supposeToBeSimpleTerm);
@@ -185,6 +183,4 @@ Expression negateExpression(Expression const& expression) {
     return negatedExpression;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

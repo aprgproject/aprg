@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(VariableTermTest, VariableTermsAreConstructedCorrectly) {
     VariableTerm variableTerm1;
@@ -104,7 +102,5 @@ TEST(VariableTermTest, OutputStreamOperatorWorks) {
 
     EXPECT_EQ(",time", ss.str());
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

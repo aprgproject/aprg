@@ -31,4 +31,4 @@ protected:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -4,9 +4,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool isOperator(std::string const& stringObject);
 bool isFunction(std::string const& stringObject);
@@ -23,6 +21,4 @@ Term buildTermIfPossible(std::string const& termString);
 Terms tokenizeToTerms(std::string const& inputString);
 void addValueTermIfNotEmpty(Terms& terms, std::string const& valueString);
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

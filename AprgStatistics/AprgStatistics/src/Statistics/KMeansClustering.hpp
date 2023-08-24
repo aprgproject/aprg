@@ -30,11 +30,11 @@ public:
         std::copy(samples.cbegin(), samples.cend(), std::back_inserter(m_samples));
     }
 
-    Samples getSamples() const { return m_samples; }
+    [[nodiscard]] Samples getSamples() const { return m_samples; }
 
     Samples& getSamplesReference() { return m_samples; }
 
-    GroupOfSamples getGroupOfSamplesUsingKMeans(int const numberOfGroups) const {
+    [[nodiscard]] GroupOfSamples getGroupOfSamplesUsingKMeans(int const numberOfGroups) const {
         SamplesGroupPairs samplesGroupPairs(calculateInitialSamplesGroupPairsFromSavedSamples(numberOfGroups));
         bool isSamplesGroupPairsChanged(true);
         while (isSamplesGroupPairsChanged) {
@@ -62,7 +62,7 @@ public:
     }
 
 private:
-    GroupOfSamples calculateGroupOfSamplesFromSamplesGroupPairs(
+    [[nodiscard]] GroupOfSamples calculateGroupOfSamplesFromSamplesGroupPairs(
         SamplesGroupPairs const& samplesGroupPairs, int const numberOfGroups) const {
         GroupOfSamples result;
         for (int groupIndex = 0; groupIndex < numberOfGroups; groupIndex++) {
@@ -74,7 +74,7 @@ private:
         return result;
     }
 
-    SamplesGroupPairs calculateInitialSamplesGroupPairsFromSavedSamples(int const numberOfGroups) const {
+    [[nodiscard]] SamplesGroupPairs calculateInitialSamplesGroupPairsFromSavedSamples(int const numberOfGroups) const {
         SamplesGroupPairs result;
         int count(0);
         int numberSamplesPerGroup((m_samples.size() / numberOfGroups) + 1);
@@ -84,7 +84,7 @@ private:
         return result;
     }
 
-    Samples calculateMeanForEachGroup(GroupOfSamples const& groupOfSamples) const {
+    [[nodiscard]] Samples calculateMeanForEachGroup(GroupOfSamples const& groupOfSamples) const {
         Samples meanForEachGroup;
         for (int groupIndex = 0; groupIndex < static_cast<int>(groupOfSamples.size()); groupIndex++) {
             Statistics statistics(groupOfSamples[groupIndex]);

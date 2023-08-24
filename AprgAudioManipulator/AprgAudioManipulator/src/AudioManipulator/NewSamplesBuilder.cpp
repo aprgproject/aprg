@@ -5,11 +5,9 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
+namespace alba::AprgAudio {
 
-namespace AprgAudio {
-
-NewSamplesBuilder::SampleMergingDetails::SampleMergingDetails() : isChanged(false), totalValue(0), weight(0) {}
+NewSamplesBuilder::SampleMergingDetails::SampleMergingDetails()  {}
 
 NewSamplesBuilder::NewSamplesBuilder(Samples const& oldSamples) : m_oldSamples(oldSamples) {}
 
@@ -55,7 +53,5 @@ void NewSamplesBuilder::saveToNewSamples(
         }
     }
 }
-
-}  // namespace AprgAudio
 
 }  // namespace alba

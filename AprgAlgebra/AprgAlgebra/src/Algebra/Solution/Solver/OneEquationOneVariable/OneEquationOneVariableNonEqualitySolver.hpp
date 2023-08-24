@@ -4,9 +4,7 @@
 #include <Algebra/Solution/SolutionSet/SolutionSet.hpp>
 #include <Algebra/Solution/Solver/OneEquationOneVariable/BaseOneEquationOneVariableSolver.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class OneEquationOneVariableNonEqualitySolver : public BaseOneEquationOneVariableSolver {
 public:
@@ -21,6 +19,4 @@ private:
     AlbaNumbers m_calculatedValues;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

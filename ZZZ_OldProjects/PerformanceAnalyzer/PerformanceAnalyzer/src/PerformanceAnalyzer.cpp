@@ -411,14 +411,14 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
         optional<BtsLogTime> tupcTbRegisterResponseTimeOptional;
         optional<BtsLogTime> rlhTbRegisterResponseTimeOptional;
         optional<BtsLogTime> rlhRlSetupResponseOptional;
-        bool isComplete(int nbccId) const {
+        [[nodiscard]] bool isComplete(int nbccId) const {
             return rlhRlSetupRequestOptional && rlhTbRegisterTimeOptional && tupcTbRegisterTimeOptional &&
                    tupcFirstErqSentOptional && tupcLastEcfReceivedOptional &&
                    tupcFirstTransportConnectionSetupOptional && tupcLastTransportConnectionSetupResponseOptional &&
                    tupcTbRegisterResponseTimeOptional && rlhTbRegisterResponseTimeOptional &&
                    rlhRlSetupResponseOptional;
         }
-        bool isCorrect(int nbccId) const {
+        [[nodiscard]] bool isCorrect(int nbccId) const {
             if (!isComplete(nbccId)) {
                 return false;
             }
@@ -647,12 +647,12 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
         optional<BtsLogTime> tupcLastEcfReceivedOptional;
         optional<BtsLogTime> tupcFirstTransportConnectionSetupOptional;
         optional<BtsLogTime> rlhRlSetupResponseOptional;
-        bool isComplete(int nbccId) const {
+        [[nodiscard]] bool isComplete(int nbccId) const {
             return rlhRlSetupRequestOptional && tupcTbRegisterTimeOptional && tupcFirstErqSentOptional &&
                    tupcLastEcfReceivedOptional && tupcFirstTransportConnectionSetupOptional &&
                    rlhRlSetupResponseOptional;
         }
-        bool isCorrect(int nbccId) const {
+        [[nodiscard]] bool isCorrect(int nbccId) const {
             if (!isComplete(nbccId)) {
                 return false;
             }

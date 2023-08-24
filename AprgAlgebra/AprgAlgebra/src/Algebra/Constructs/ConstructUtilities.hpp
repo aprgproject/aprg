@@ -24,4 +24,4 @@ TermRaiseToTerms createTermRaiseToTermsFromExpression(Expression const& expressi
 void createTermRaiseToTermsFromRaiseToPowerExpression(TermRaiseToTerms& result, Expression const& expression);
 void createTermRaiseToTermsFromMultiplicationAndDivisionExpression(
     TermRaiseToTerms& result, Expression const& expression);
-}  // namespace alba
+}  // namespace alba::algebra

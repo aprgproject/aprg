@@ -17,7 +17,7 @@ public:
         initialize();
     }
 
-    bool isReachable(Vertex const& destinationVertex) const override {
+    [[nodiscard]] bool isReachable(Vertex const& destinationVertex) const override {
         return m_processedVertices.isFound(destinationVertex);
     }
 

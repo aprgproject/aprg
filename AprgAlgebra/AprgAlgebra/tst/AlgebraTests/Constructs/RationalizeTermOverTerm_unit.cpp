@@ -7,9 +7,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(RationalizeTermOverTermTest, ConstructionWorks) {
     RationalizeTermOverTerm rationalizeTermOverTerm1;
@@ -279,6 +277,4 @@ TEST(RationalizeTermOverTermTest, RationalizeNumeratorWorksOnWithInnerAndOuterFr
     EXPECT_EQ(stringToExpect2, convertToString(rationalizeTermOverTerm.getDenominator()));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

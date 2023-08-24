@@ -145,8 +145,8 @@ public:
     [[nodiscard]] Item getItem(std::string const& fixedItemName) const;
     [[nodiscard]] Monster getMonster(std::string const& monsterName) const;
     static std::string getFixedItemName(Item const& item);
-    double getTalonRoBuyingPrice(std::string const& fixedItemName) const;
-    double getTalonRoSellingPrice(std::string const& fixedItemName) const;
+    [[nodiscard]] double getTalonRoBuyingPrice(std::string const& fixedItemName) const;
+    [[nodiscard]] double getTalonRoSellingPrice(std::string const& fixedItemName) const;
 
     void saveItemIdToItemMapToFile(std::string const& outputFilePath) const;
     void saveMonsterIdToMonsterMapToFile(std::string const& outputFilePath) const;

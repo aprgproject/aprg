@@ -3,9 +3,7 @@
 #include <Algebra/Mutation/BaseMutator.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class NegationMutator final : public BaseMutator {
 public:
@@ -17,6 +15,4 @@ public:
     void mutateFunction(Function &) override;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

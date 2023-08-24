@@ -8,7 +8,7 @@ using namespace std;
 
 namespace codeReview {
 
-CPlusPlusDatabase::CPlusPlusDatabase() : m_isModified(true) {
+CPlusPlusDatabase::CPlusPlusDatabase()  {
     m_scopes.emplace_back(CPlusPlusScopeType::Global, "");
 
     initializeCStyleArray();

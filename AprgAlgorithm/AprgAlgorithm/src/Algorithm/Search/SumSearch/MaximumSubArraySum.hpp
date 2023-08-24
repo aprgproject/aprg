@@ -19,7 +19,7 @@ public:
         Value sum;
     };
 
-    MaximumSubArraySum(Values const& valuesToCheck) : m_valuesToCheck(valuesToCheck) {}
+    explicit MaximumSubArraySum(Values const& valuesToCheck) : m_valuesToCheck(valuesToCheck) {}
 
     Value getMaximumSubArraySum() {
         // Surprisingly, it is possible to solve the problem in O(n) time, which means that just one loop is enough.
@@ -70,4 +70,4 @@ private:
     Values const& m_valuesToCheck;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

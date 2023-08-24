@@ -3,11 +3,7 @@
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Utilities/KnownNames.hpp>
 
-namespace alba {
-
-namespace algebra {
-
-namespace ThreeDimensions {
+namespace alba::algebra::ThreeDimensions {
 
 Equation getEllipsoidEquation() {
     Term xMinusX0(createExpressionIfPossible({x, "-", x0}));
@@ -122,8 +118,4 @@ Equation getSphereEquation() {
     return Equation(leftHandSide, "=", rightHandSide);
 }
 
-}  // namespace ThreeDimensions
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::ThreeDimensions

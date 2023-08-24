@@ -75,4 +75,4 @@ UnsignedInteger getOverallGrundyNumber(UnsignedIntegers const& grundyNumbers) {
         });
 }
 
-}  // namespace alba
+}  // namespace alba::math

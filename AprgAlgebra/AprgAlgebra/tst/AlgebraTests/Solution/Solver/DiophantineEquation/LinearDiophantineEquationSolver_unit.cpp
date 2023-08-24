@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(LinearDiophantineEquationSolverTest, ConstructionWorks) { LinearDiophantineEquationSolver(); }
 
@@ -38,6 +36,4 @@ TEST(LinearDiophantineEquationSolverTest, CalculateSolutionAndReturnSolutionSetW
     EXPECT_EQ(AlbaNumbers{-20}, solutionSet.getSolutionSetForVariable("y").getAcceptedValues());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

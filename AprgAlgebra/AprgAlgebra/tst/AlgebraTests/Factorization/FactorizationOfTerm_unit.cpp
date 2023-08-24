@@ -8,11 +8,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 TEST(FactorizationOfTermTest, FactorizeTermWorksOnNonPolynomialTerm) {
     Terms factorizedTerms(factorizeTerm(5));
@@ -65,8 +61,4 @@ TEST(FactorizationOfTermTest, FactorizeTermsWorks) {
     EXPECT_EQ(Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})}), factorizedTerms[2]);
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

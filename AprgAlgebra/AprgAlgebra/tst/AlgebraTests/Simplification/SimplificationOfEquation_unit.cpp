@@ -5,11 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Simplification {
+namespace alba::algebra::Simplification {
 
 TEST(SimplificationOfEquationTest, SimplifyWorksOnEqualityOperator) {
     SimplificationOfEquation simplification(Equation("x", "=", "y"));
@@ -194,8 +190,4 @@ TEST(SimplificationOfEquationTest, SimplifyWorksOnRemovingCommonConstantsInExpre
     EXPECT_EQ(Term(0), simplifiedEquation.getRightHandTerm());
 }
 
-}  // namespace Simplification
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Simplification

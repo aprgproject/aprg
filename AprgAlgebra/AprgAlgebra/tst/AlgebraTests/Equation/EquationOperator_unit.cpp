@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(EquationOperatorTest, EquationOperatorsAreConstructedCorrectly) {
     EquationOperator operator1;
@@ -288,6 +286,4 @@ TEST(EquationOperatorTest, OutputStreamOperatorWorks) {
     EXPECT_EQ(",=,==,!=,<,>,<=,>=,invalid", ss.str());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

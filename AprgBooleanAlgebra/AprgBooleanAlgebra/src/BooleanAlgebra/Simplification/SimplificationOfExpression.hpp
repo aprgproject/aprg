@@ -5,9 +5,7 @@
 
 namespace alba {
 
-namespace booleanAlgebra {
-
-namespace Simplification {
+namespace booleanAlgebra::Simplification {
 
 class SimplificationOfExpression {
 public:
@@ -23,13 +21,13 @@ public:
     class ScopeObject : public AlbaConfigurationScopeObject<ConfigurationDetails> {};
 
     SimplificationOfExpression();
-    SimplificationOfExpression(Expression const& expression);
+    explicit SimplificationOfExpression(Expression const& expression);
 
     static bool shouldSimplifyWithOuterOrAndInnerAnd();
     static bool shouldSimplifyWithOuterAndAndInnerOr();
     static bool shouldSimplifyByQuineMcKluskey();
 
-    Expression getExpression() const;
+    [[nodiscard]] Expression getExpression() const;
 
     void simplify();
 
@@ -39,7 +37,7 @@ private:
     void simplifyExpressionUntilNoChange();
     void simplifyExpression(Expression& expression);
 
-    void processTermsBaseOnOperatorLevel(
+    static void processTermsBaseOnOperatorLevel(
         Expression& expression, WrappedTerms const& termsToProcess, OperatorLevel const operatorLevel);
     static void processAndSaveTermsForAndOperation(Expression& expression, WrappedTerms const& termsToProcess);
     static void processAndSaveTermsForOrOperation(Expression& expression, WrappedTerms const& termsToProcess);
@@ -47,9 +45,7 @@ private:
     Expression m_expression;
 };
 
-}  // namespace Simplification
-
-}  // namespace booleanAlgebra
+}  // namespace booleanAlgebra::Simplification
 
 template <>
 booleanAlgebra::Simplification::SimplificationOfExpression::ConfigurationDetails

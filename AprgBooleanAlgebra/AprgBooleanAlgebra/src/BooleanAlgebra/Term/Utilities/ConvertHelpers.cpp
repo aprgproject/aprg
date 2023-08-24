@@ -2,9 +2,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 Term simplifyAndConvertExpressionToSimplestTerm(Expression const& expression) {
     Expression newExpression(expression);
@@ -23,7 +21,5 @@ Term convertExpressionToSimplestTerm(Expression const& expression) {
     }
     return newTerm;
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

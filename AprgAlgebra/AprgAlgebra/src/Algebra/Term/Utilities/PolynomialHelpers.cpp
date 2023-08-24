@@ -16,9 +16,7 @@ using namespace alba::algebra::Factorization;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool doesThePolynomialHaveOnlyOneConstant(Polynomial const& polynomial) {
     bool result(false);
@@ -281,6 +279,4 @@ void removeEmptyPolynomials(Polynomials& polynomials) {
         polynomials.end());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

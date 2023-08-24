@@ -59,4 +59,4 @@ void AudioManipulator::saveAudioIntoFileWithFullFilePath(string const& newFilePa
     }
 }
 
-}  // namespace alba
+}  // namespace alba::AprgAudio

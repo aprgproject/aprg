@@ -13,9 +13,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 PowerSeries::PowerSeries(
     Term const& multiplierForEachTerm, string const& nName, string const& xName, AlbaNumber const& aValue)
@@ -63,6 +61,4 @@ Term PowerSeries::getFormula(
     return createExpressionIfPossible({multiplierForEachTerm, "*", subTerm, "^", nName});
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

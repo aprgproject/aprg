@@ -6,9 +6,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 GameState MisereGame::getGameState(NimState const& nimState) {
     GameState result(GameState::Losing);
@@ -66,7 +64,5 @@ NimHeapSize MisereGame::getMaxHeapSize(NimState const& nimState) {
     auto&& [minIt, maxIt] = minmax_element(nimState.cbegin(), nimState.cend());
     return *maxIt;
 }
-
-}  // namespace math
 
 }  // namespace alba

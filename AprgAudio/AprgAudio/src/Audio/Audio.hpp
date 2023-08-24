@@ -37,7 +37,7 @@ public:
 
     [[nodiscard]] int getNumSamplesPerChannel() const;
 
-    std::vector<T> const& getSamplesAtChannel(int const channelIndex) const;
+    [[nodiscard]] std::vector<T> const& getSamplesAtChannel(int const channelIndex) const;
     std::vector<T>& getSamplesReferenceAtChannel(int const channelIndex);
 
     /** @Returns the length[[nodiscard]]  in seconds of the audio file based on the number of samples and sample rate */

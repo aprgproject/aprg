@@ -9,9 +9,7 @@
 #include <sstream>
 #include <vector>
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 // This needs to first because template needs to available so that compiler can use it.
 template <typename ElementType1, typename ElementType2>
@@ -41,7 +39,7 @@ public:
     {
     }
 
-    MathSet(RosterList const& rosterList) { constructSetBasedOnRosterList(rosterList); }
+    explicit MathSet(RosterList const& rosterList) { constructSetBasedOnRosterList(rosterList); }
 
     MathSet(RosterInitializerList const& initializerList) {
         RosterList rosterList;
@@ -54,13 +52,13 @@ public:
         m_ruleToBeInTheSet = rule;
     }
 
-    bool contains(ElementType const& elementToCheck) const { return m_ruleToBeInTheSet(elementToCheck); }
+    [[nodiscard]] bool contains(ElementType const& elementToCheck) const { return m_ruleToBeInTheSet(elementToCheck); }
 
-    bool doesNotContain(ElementType const& elementToCheck) const { return !contains(elementToCheck); }
+    [[nodiscard]] bool doesNotContain(ElementType const& elementToCheck) const { return !contains(elementToCheck); }
 
-    std::string getDescription() const { return std::string("{") + m_description + "}"; }
+    [[nodiscard]] std::string getDescription() const { return std::string("{") + m_description + "}"; }
 
-    std::string getGeneratedRosterString(GenerateFunction const& generateFunction) const {
+    [[nodiscard]] std::string getGeneratedRosterString(GenerateFunction const& generateFunction) const {
         std::stringstream descriptionStream;
         int index = 0;
         generateFunction([&](ElementType const& element) {
@@ -72,7 +70,7 @@ public:
         return std::string("{... ") + descriptionStream.str() + " ...}";
     }
 
-    bool isASubsetOf(MathSet const& mathSet2, GenerateFunction const& generateFunction) const {
+    [[nodiscard]] bool isASubsetOf(MathSet const& mathSet2, GenerateFunction const& generateFunction) const {
         bool result(true);
         generateFunction([&](ElementType const& element) {
             if (contains(element) && mathSet2.doesNotContain(element)) {
@@ -82,7 +80,7 @@ public:
         return result;
     }
 
-    bool isASupersetOf(MathSet const& mathSet2, GenerateFunction const& generateFunction) const {
+    [[nodiscard]] bool isASupersetOf(MathSet const& mathSet2, GenerateFunction const& generateFunction) const {
         bool result(true);
         generateFunction([&](ElementType const& element) {
             if (mathSet2.contains(element) && doesNotContain(element)) {
@@ -92,7 +90,7 @@ public:
         return result;
     }
 
-    bool isDisjointWith(MathSet const& mathSet2, GenerateFunction const& generateFunction) const {
+    [[nodiscard]] bool isDisjointWith(MathSet const& mathSet2, GenerateFunction const& generateFunction) const {
         bool result(true);
         generateFunction([&](ElementType const& element) {
             if (contains(element) && mathSet2.contains(element)) {
@@ -102,28 +100,28 @@ public:
         return result;
     }
 
-    MathSet getComplement() const {
+    [[nodiscard]] MathSet getComplement() const {
         Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
             return !m_ruleToBeInTheSet(elementToCheck);
         };
         return MathSet(std::string("complement of ") + getDescription(), ruleToBeInTheNewSet);
     }
 
-    MathSet getUnionWith(MathSet const& mathSet2) const {
+    [[nodiscard]] MathSet getUnionWith(MathSet const& mathSet2) const {
         Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
             return m_ruleToBeInTheSet(elementToCheck) || mathSet2.m_ruleToBeInTheSet(elementToCheck);
         };
         return MathSet(getDescription() + " union " + mathSet2.getDescription(), ruleToBeInTheNewSet);
     }
 
-    MathSet getIntersectionWith(MathSet const& mathSet2) const {
+    [[nodiscard]] MathSet getIntersectionWith(MathSet const& mathSet2) const {
         Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
             return m_ruleToBeInTheSet(elementToCheck) && mathSet2.m_ruleToBeInTheSet(elementToCheck);
         };
         return MathSet(getDescription() + " intersection " + mathSet2.getDescription(), ruleToBeInTheNewSet);
     }
 
-    MathSet getDifferenceWith(MathSet const& mathSet2) const {
+    [[nodiscard]] MathSet getDifferenceWith(MathSet const& mathSet2) const {
         // The difference (A\B) = A intersection B' consists of elements that are in A but not in B. Note that B can
         // contain elements that are not in A.
         Rule ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {
@@ -132,7 +130,7 @@ public:
         return MathSet(getDescription() + " difference " + mathSet2.getDescription(), ruleToBeInTheNewSet);
     }
 
-    MathSets getSubsets(GenerateFunction const& generateFunction) const {
+    [[nodiscard]] MathSets getSubsets(GenerateFunction const& generateFunction) const {
         RosterList roster;
         generateFunction([&](ElementType const& element) {
             if (contains(element)) {
@@ -157,7 +155,7 @@ private:
         m_description = getDescriptionForRosterList(rosterList);
     }
 
-    std::string getDescriptionForRosterList(RosterList const& rosterList) const {
+    [[nodiscard]] std::string getDescriptionForRosterList(RosterList const& rosterList) const {
         std::stringstream descriptionStream;
         int index = 0;
         for (ElementType const& elementInRoster : rosterList) {
@@ -218,7 +216,5 @@ std::ostream& operator<<(std::ostream& out, MathSet<ElementType> const& set) {
     out << set.getDescription();
     return out;
 }
-
-}  // namespace math
 
 }  // namespace alba

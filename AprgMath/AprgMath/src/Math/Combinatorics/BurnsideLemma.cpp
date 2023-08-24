@@ -62,4 +62,4 @@ UnsignedInteger getNumberOfCombinationsOfAPearlNecklace(
         });
 }
 
-}  // namespace alba
+}  // namespace alba::math

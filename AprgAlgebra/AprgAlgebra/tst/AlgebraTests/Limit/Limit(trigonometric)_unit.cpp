@@ -10,9 +10,7 @@ using namespace alba::AlbaNumberConstants;
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(LimitTest, GetLimitAtAValueWorksForSinXOverX) {
     Term sinXOverX(createExpressionIfPossible({sin("x"), "/", "x"}));
@@ -80,6 +78,4 @@ TEST(LimitTest, GetLimitAtAValueWorksForComplicatedSinOverX) {
         getNegativeInfinityAsATerm(), getLimitAtAValue(termToTest, "x", 1, LimitAtAValueApproachType::NegativeSide));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

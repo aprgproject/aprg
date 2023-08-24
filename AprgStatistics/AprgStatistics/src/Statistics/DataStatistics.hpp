@@ -31,7 +31,7 @@ public:
         m_dispersionAroundTheCentroid.reset();
     }
 
-    Samples const& getSamples() const { return m_samples; }
+    [[nodiscard]] Samples const& getSamples() const { return m_samples; }
 
     Sample getSum() {
         calculateSumIfNeeded();

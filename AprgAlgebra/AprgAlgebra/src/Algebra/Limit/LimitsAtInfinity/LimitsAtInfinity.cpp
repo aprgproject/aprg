@@ -12,9 +12,7 @@
 using namespace alba::algebra::Simplification;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 LimitsAtInfinity::LimitsAtInfinity(Term const& term, string const& variableName)
     : m_simplifiedTermAtInfinity(term),
@@ -100,6 +98,4 @@ AlbaNumber LimitsAtInfinity::getDegreeToRemove(AlbaNumber const& numeratorDegree
     return degreeToRemove;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(MultiplicationAndDivisionOfRadicalsTest, CombiningConstantAndRadicalPolynomialInMultiplicationWorks) {
     Term xPlusOneTerm(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
@@ -136,6 +134,4 @@ TEST(MultiplicationAndDivisionOfRadicalsTest, CombiningVariableAndMonomialWorks)
     EXPECT_EQ(termToExpect, radicalConstruct.getCombinedTerm());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

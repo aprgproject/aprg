@@ -28,7 +28,7 @@ ostream& operator<<(ostream& out, TermChecker const& termChecker) {
 bool TermChecker::operator==(Term const& term) const {
     if (TermCheckerType::MultipleTerms == m_termCheckerType) {
         return m_multipleTermsOptional.getConstReference().isEqualToAnyOfTheTerms(term);
-    } else if (TermCheckerType::ConcreteTerm == m_termCheckerType) {
+    } if (TermCheckerType::ConcreteTerm == m_termCheckerType) {
         return m_term == term;
     } else {
         return isCorrect(term);

@@ -7,9 +7,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Term getAreaInBetweenTwoTermsInAnInterval(
     Term const& lowerTerm, Term const& higherTerm, DetailsForDefiniteIntegralWithValues const& integralDetails);
@@ -113,6 +111,4 @@ Term getTripleIntegralInSphericalCoordinates(
 Term integrateWithCoordinateDetails(Term const& term, DetailsForDefiniteIntegralsWithTerms const& integralsDetails);
 void sortIntegralsDetailsToEvaluate(DetailsForDefiniteIntegralsWithTerms& integrals);
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

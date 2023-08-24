@@ -13,14 +13,10 @@ using namespace alba;
 using namespace alba::algorithm;
 using namespace std;
 
-namespace alba {
-
-namespace ProgressCounters {
+namespace alba::ProgressCounters {
 extern double totalSizeToBeReadForCombine;
 extern double totalSizeReadForCombine;
 extern int writeProgressForCombine;
-}  // namespace ProgressCounters
-
 }  // namespace alba
 
 namespace wcdmaToolsBackend {

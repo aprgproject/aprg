@@ -5,9 +5,7 @@
 
 #include <cmath>
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 using ValueAndProbabilityPair = std::pair<AlbaNumber, AlbaNumber>;
 using ValueAndProbabilityPairs = std::vector<ValueAndProbabilityPair>;
@@ -47,6 +45,4 @@ AlbaNumber getExpectedValueInGeometricDistribution(AlbaNumber const& probability
 AlbaNumber getNumberOfPeopleForTheBirthdayParadoxUsingQuadraticFormula(AlbaNumber const& propbabilityThatMustBeMet);
 AlbaNumber getNumberOfPeopleForTheBirthdayParadoxUsingTaylorFormula(AlbaNumber const& propbabilityThatMustBeMet);
 
-}  // namespace math
-
-}  // namespace alba
+}  // namespace alba::math

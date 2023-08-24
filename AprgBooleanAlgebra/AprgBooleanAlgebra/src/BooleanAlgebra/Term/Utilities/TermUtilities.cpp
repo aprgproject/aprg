@@ -7,9 +7,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 bool isNonEmptyOrNonOperatorType(Term const& term) {
     TermType termType(term.getTermType());
@@ -44,7 +42,5 @@ Term getTermFromVariableAndPrimeValue(string const& variableName, char const pri
     }
     return result;
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

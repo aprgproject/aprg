@@ -9,11 +9,7 @@
 using namespace alba::AlbaNumberConstants;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace DomainAndRange {
+namespace alba::algebra::DomainAndRange {
 
 TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunction) {
     AlbaNumbers values{5, 9.25};
@@ -224,8 +220,4 @@ TEST(DomainAndRangeTest, IsOneToOneWorks) {
     EXPECT_TRUE(isOneToOne("x", equation2));
 }
 
-}  // namespace DomainAndRange
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::DomainAndRange

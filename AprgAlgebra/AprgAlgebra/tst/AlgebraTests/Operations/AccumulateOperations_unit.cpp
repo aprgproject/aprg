@@ -8,9 +8,7 @@
 using namespace alba::AlbaNumberConstants;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(AccumulateOperationsTest, AccumulateAndDoOperationOnTermDetailsWorks) {
     Term termToTest1(45);
@@ -127,6 +125,4 @@ TEST(AccumulateOperationsTest, AccumulateTermsForRaiseToPowerWorksWithEmptyTermA
     EXPECT_EQ(Term(1), termToTest);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

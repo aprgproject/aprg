@@ -1,10 +1,8 @@
 #include "NumberOfTermsRetriever.hpp"
 
-namespace alba {
+namespace alba::algebra {
 
-namespace algebra {
-
-NumberOfTermsRetriever::NumberOfTermsRetriever() : m_numberOfTerms(0) {}
+NumberOfTermsRetriever::NumberOfTermsRetriever()  {}
 
 int NumberOfTermsRetriever::getNumberOfTerms() const { return m_numberOfTerms; }
 
@@ -24,6 +22,4 @@ void NumberOfTermsRetriever::retrieveFromFunction(Function const& functionObject
     BaseRetriever::retrieveFromFunction(functionObject);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

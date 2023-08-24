@@ -54,12 +54,12 @@ private:
     static bool isChangeDetected(Expression const& expression1, Expression const& expression2);
 
     void simplifyExpressionUntilNoChange();
-    void simplifyExpression(Expression& expression);
+    static void simplifyExpression(Expression& expression);
     void simplifyExpressionUntilNoChangeInitiallyIfNeeded();
     void simplifyToACommonDenominatorIfNeeded();
     void simplifyBySubstitutingExpressionAndFunctionsToVariablesIfNeeded();
 
-    void processTermsBaseOnOperatorLevel(
+    static void processTermsBaseOnOperatorLevel(
         Expression& expression, TermsWithDetails const& termsToProcess, OperatorLevel const operatorLevel);
     static void processAndSaveTermsForAdditionAndSubtraction(
         Expression& expression, TermsWithDetails const& termsToProcess);
@@ -93,7 +93,7 @@ private:
     Expression m_expression;
 };
 
-}  // namespace algebra
+}  // namespace algebra::Simplification
 
 template <>
 algebra::Simplification::SimplificationOfExpression::ConfigurationDetails

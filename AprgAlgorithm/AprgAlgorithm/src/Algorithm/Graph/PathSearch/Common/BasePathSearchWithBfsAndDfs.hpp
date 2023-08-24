@@ -17,9 +17,9 @@ public:
 
     explicit BasePathSearchWithBfsAndDfs(BaseGraphWithVertex const& graph) : m_graph(graph) {}
 
-    bool hasPathTo(Vertex const& endVertex) const { return m_processedVertices.isFound(endVertex); }
+    [[nodiscard]] bool hasPathTo(Vertex const& endVertex) const { return m_processedVertices.isFound(endVertex); }
 
-    Path getPathTo(Vertex const& endVertex) const {
+    [[nodiscard]] Path getPathTo(Vertex const& endVertex) const {
         Path reversedPath;
         bool shouldAddCurrentVertexAndReverse(m_startVertices.isNotFound(endVertex));
         Vertex currentVertex = endVertex;
@@ -43,7 +43,7 @@ public:
         return result;
     }
 
-    Vertex getPreviousVertex(Vertex const& vertex) const {
+    [[nodiscard]] Vertex getPreviousVertex(Vertex const& vertex) const {
         Vertex result{};
         auto it = m_vertexToPreviousVertexMap.find(vertex);
         if (it != m_vertexToPreviousVertexMap.cend()) {
@@ -52,7 +52,7 @@ public:
         return result;
     }
 
-    VertexToVertexMap const& getVertexToPreviousVertexMap() const { return m_vertexToPreviousVertexMap; }
+    [[nodiscard]] VertexToVertexMap const& getVertexToPreviousVertexMap() const { return m_vertexToPreviousVertexMap; }
 
 protected:
     // No need for virtual destructor because this class is not destroyed polymorphically.

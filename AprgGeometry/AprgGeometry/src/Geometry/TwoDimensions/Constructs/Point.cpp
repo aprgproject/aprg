@@ -15,4 +15,4 @@ ostream& operator<<(ostream& out, Point const& point) {
     return out;
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

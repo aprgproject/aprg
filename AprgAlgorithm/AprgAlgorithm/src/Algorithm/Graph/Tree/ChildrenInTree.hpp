@@ -18,7 +18,7 @@ public:
         initializeIfNeeded();
     }
 
-    Vertices getChildren(Vertex const& parent) const {
+    [[nodiscard]] Vertices getChildren(Vertex const& parent) const {
         Vertices result;
         auto it = m_parentVertexToChildren.find(parent);
         if (it != m_parentVertexToChildren.cend()) {

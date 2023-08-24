@@ -25,13 +25,10 @@ using namespace alba::algebra::Factorization;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TermsOverTerms::TermsOverTerms()
-    : m_numerators(),
-      m_denominators(),
+    : 
       m_shouldSimplifyToFactors(false),
       m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails()) {}
 
@@ -404,6 +401,4 @@ ostream& operator<<(ostream& out, TermsOverTerms const& termsOverTerms) {
     return out;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

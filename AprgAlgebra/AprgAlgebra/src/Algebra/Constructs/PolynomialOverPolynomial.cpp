@@ -214,4 +214,4 @@ Polynomial PolynomialOverPolynomial::multiplyAndSimplifyFactors(Polynomials cons
     return product;
 }
 
-}  // namespace alba
+}  // namespace alba::algebra

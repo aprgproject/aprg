@@ -62,7 +62,7 @@ private:
         }
     }
 
-    DirectedGraphWithListOfEdgesWithVertex getGraphWithReversedDirections(
+    [[nodiscard]] DirectedGraphWithListOfEdgesWithVertex getGraphWithReversedDirections(
         BaseDirectedGraphWithVertex const& graph) const {
         DirectedGraphWithListOfEdgesWithVertex result;
         for (auto const& [startVertexOfEdge, endVertexOfEdge] : graph.getEdges()) {

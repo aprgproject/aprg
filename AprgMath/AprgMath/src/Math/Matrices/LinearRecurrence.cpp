@@ -3,9 +3,7 @@
 using namespace alba::matrix;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 UnsignedIntegerPair getNextFibonacciNumbersUsingLinearRecurrence(UnsignedIntegerPair const integerPair) {
     // Linear recurrence: f(n) = f(n-1) + f(n-2)
@@ -38,7 +36,5 @@ UnsignedIntegerPair getNextNumberOfDerangementsUsingLinearRecurrence(
     }
     return UnsignedIntegerPair{output.getEntry(0U, 0U), output.getEntry(0U, 1U)};
 }
-
-}  // namespace math
 
 }  // namespace alba

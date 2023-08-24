@@ -38,4 +38,4 @@ private:
     TermAssociationTypes m_associations;
 };
 
-}  // namespace alba
+}  // namespace alba::algebra

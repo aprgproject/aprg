@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(BaseTermHelpersTest, CreateBasePointerWorksForLValue) {
     Term originalTerm(7896);
@@ -104,6 +102,4 @@ TEST(BaseTermHelpersTest, GetBaseTermReferenceFromUniquePointerWorks) {
     EXPECT_EQ(Term(6415), termToVerify);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

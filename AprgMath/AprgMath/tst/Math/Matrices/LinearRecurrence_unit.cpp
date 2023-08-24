@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(LinearRecurrenceTest, GetNextFibonacciNumbersUsingLinearRecurrenceWorks) {
     EXPECT_EQ(UnsignedIntegerPair(1U, 1U), getNextFibonacciNumbersUsingLinearRecurrence({0U, 1U}));
@@ -26,7 +24,5 @@ TEST(LinearRecurrenceTest, GetNextNumberOfDerangementsUsingLinearRecurrenceWorks
     EXPECT_EQ(UnsignedIntegerPair(9U, 44U), getNextNumberOfDerangementsUsingLinearRecurrence(5U, {2U, 9U}));
     EXPECT_EQ(UnsignedIntegerPair(44U, 265U), getNextNumberOfDerangementsUsingLinearRecurrence(6U, {9U, 44U}));
 }
-
-}  // namespace math
 
 }  // namespace alba

@@ -9,9 +9,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(AdditionAndSubtractionOfExpressionsTest, DefaultConstructionWorks) {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
@@ -362,6 +360,4 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksWi
     EXPECT_EQ(TermAssociationType::Positive, associations[1]);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

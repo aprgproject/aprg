@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 void accumulateTerms(Term& combinedTerm, Terms const& termsToCombine, OperatorLevel const operatorLevel) {
     if (OperatorLevel::And == operatorLevel) {
@@ -30,7 +28,7 @@ void accumulateTermsWithAndOperation(Term& combinedTerm, Terms const& termsToCom
             }
             if (willHaveNoEffectOnAndOperation(term)) {
                 continue;
-            } else if (isFirst) {
+            } if (isFirst) {
                 combinedTerm = term;
                 isFirst = false;
             } else {
@@ -55,7 +53,7 @@ void accumulateTermsWithOrOperation(Term& combinedTerm, Terms const& termsToComb
             }
             if (willHaveNoEffectOnOrOperation(term)) {
                 continue;
-            } else if (isFirst) {
+            } if (isFirst) {
                 combinedTerm = term;
                 isFirst = false;
             } else {
@@ -67,7 +65,5 @@ void accumulateTermsWithOrOperation(Term& combinedTerm, Terms const& termsToComb
         }
     }
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

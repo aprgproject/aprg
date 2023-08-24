@@ -4,9 +4,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(MonomialHelpersTest, SegregateMonomialsWithAndWithoutVariable) {
     Monomials monomialsToSegregate(
@@ -110,6 +108,4 @@ TEST(SegregateHelpersTest, SegregateTermsWithPositiveAndNegativeAssociationsWork
     EXPECT_EQ(TermAssociationType::Negative, termWithDetails2.association);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

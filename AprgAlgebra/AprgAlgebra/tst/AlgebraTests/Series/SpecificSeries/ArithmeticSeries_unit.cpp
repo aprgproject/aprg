@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(ArithmeticSeriesTest, ConstructionWorksUsingFirstTermAndCommonDifference) {
     ArithmeticSeries series(2, 3);
@@ -46,6 +44,4 @@ TEST(ArithmeticSeriesTest, GetSumIsEqualToFormulaInUtilities) {
     EXPECT_EQ(sumFromSeries, sumFromFormula);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

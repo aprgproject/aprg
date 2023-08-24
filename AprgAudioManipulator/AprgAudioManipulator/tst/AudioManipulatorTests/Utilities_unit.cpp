@@ -105,4 +105,4 @@ TEST(UtilitiesTest, DISABLED_SearchAndTryToReplicateTwoFilesWorks) {
         audioToSearch2FilePathHandler.getFullPath(), false);
 }
 
-}  // namespace alba
+}  // namespace alba::AprgAudio

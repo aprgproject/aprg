@@ -7,11 +7,7 @@
 using namespace alba::AlbaNumberConstants;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 TEST(FactorizationOfPolynomialsTest, CommonConstantCanBeFactored_FactorizeWorks) {
     Polynomial polynomialToTest{Monomial(4, {{"x", 1}}), Monomial(20, {})};
@@ -522,8 +518,4 @@ TEST(FactorizationOfPolynomialsTest, PutFactorizedPolynomialsIfPossibleWorksWhen
     EXPECT_TRUE(result.empty());
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

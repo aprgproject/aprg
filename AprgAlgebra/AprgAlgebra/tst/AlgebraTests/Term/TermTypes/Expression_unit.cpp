@@ -8,9 +8,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(ExpressionTest, ConstructionWorks) {
     TermWithDetails termWithDetails1(Term(10), TermAssociationType::Positive);
@@ -1480,6 +1478,4 @@ TEST(ExpressionTest, OutputStreamOperatorWorks) {
     EXPECT_EQ("(),(695-interest+debt),(1/96),((695-interest+debt)^cash)", ss.str());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

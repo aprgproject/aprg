@@ -101,4 +101,4 @@ ostream& operator<<(ostream& out, Limacon const& limacon) {
     return out;
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

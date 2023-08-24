@@ -12,9 +12,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(TrigonometricEquationsTest, GetTrigonometricPythagoreanIdentityWorks) {
     Equation actualEquation(getTrigonometricPythagoreanIdentity("x"));
@@ -296,6 +294,4 @@ TEST(TrigonometricEquationsTest, GetCosineSquaredOfHalvedValueWorks) {
     EXPECT_EQ(Term(0), substitution.performSubstitutionTo(termToVerify));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

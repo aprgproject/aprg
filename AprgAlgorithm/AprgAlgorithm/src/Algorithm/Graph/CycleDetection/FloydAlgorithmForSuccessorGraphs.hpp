@@ -12,12 +12,12 @@ public:
     using Walker = WalkInSuccessorGraph<Vertex>;
     using Path = typename GraphTypes<Vertex>::Path;
 
-    FloydAlgorithmForSuccessorGraphs(BaseDirectedGraphWithVertex const& graph)
+    explicit FloydAlgorithmForSuccessorGraphs(BaseDirectedGraphWithVertex const& graph)
         : m_graph(graph), m_walker(graph) {}
 
-    bool hasACycle() const { return m_hasACycle; }
+    [[nodiscard]] bool hasACycle() const { return m_hasACycle; }
 
-    Path getCycle() const { return m_cyclePath; }
+    [[nodiscard]] Path getCycle() const { return m_cyclePath; }
 
     void reinitializeStartingFrom(Vertex const& startOfGraph) {
         Vertex meetingVertex(getMeetingVertexAndCheckForACycle(startOfGraph));
@@ -62,7 +62,7 @@ private:
         m_cyclePath.emplace_back(vertex);
     }
 
-    bool isAtTheEnd(Vertex const& vertex) const { return m_walker.isAtTheEnd(vertex); }
+    [[nodiscard]] bool isAtTheEnd(Vertex const& vertex) const { return m_walker.isAtTheEnd(vertex); }
 
     Vertex walkOne(Vertex const& vertex) { return m_walker.walk(vertex, 1); }
 
@@ -79,4 +79,4 @@ private:
 // Then, on each turn, the pointer a walks one step forward and the pointer b walks two steps forward.
 // The process continues until the pointers meet each other.
 
-}  // namespace alba
+}  // namespace alba::algorithm

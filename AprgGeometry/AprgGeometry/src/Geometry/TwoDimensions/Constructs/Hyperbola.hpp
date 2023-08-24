@@ -5,9 +5,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 class Hyperbola {
 public:
@@ -18,27 +16,27 @@ public:
         double const bCoefficient);  // ((x-center.x)^2/aCoefficient^2) - ((y-center.y)^2/bCoefficient^2) = 1
     bool operator==(Hyperbola const& hyperbola) const;
     bool operator!=(Hyperbola const& hyperbola) const;
-    Point getCenter() const;
-    double getAValue() const;
-    double getBValue() const;
-    double getCValue() const;
-    double getEccentricity() const;
-    double getSemiLactusRectum() const;
+    [[nodiscard]] Point getCenter() const;
+    [[nodiscard]] double getAValue() const;
+    [[nodiscard]] double getBValue() const;
+    [[nodiscard]] double getCValue() const;
+    [[nodiscard]] double getEccentricity() const;
+    [[nodiscard]] double getSemiLactusRectum() const;
 
-    Points getFoci() const;
-    Points getVertices() const;
-    Points getPointsForShape(double const interval) const;
-    Lines getAsymptotes() const;
+    [[nodiscard]] Points getFoci() const;
+    [[nodiscard]] Points getVertices() const;
+    [[nodiscard]] Points getPointsForShape(double const interval) const;
+    [[nodiscard]] Lines getAsymptotes() const;
 
-    double calculateYFromX(double const x, double const signOfRoot) const;
-    double calculateXFromY(double const y, double const signOfRoot) const;
-    double calculateYFromXWithoutCenter(double const x, double const signOfRoot) const;
-    double calculateXFromYWithoutCenter(double const y, double const signOfRoot) const;
+    [[nodiscard]] double calculateYFromX(double const x, double const signOfRoot) const;
+    [[nodiscard]] double calculateXFromY(double const y, double const signOfRoot) const;
+    [[nodiscard]] double calculateYFromXWithoutCenter(double const x, double const signOfRoot) const;
+    [[nodiscard]] double calculateXFromYWithoutCenter(double const y, double const signOfRoot) const;
 
 private:
-    Points getPointsInTraversingXAndY(double const signOfX, double const signOfY, double const interval) const;
-    Points getPointsInTraversingY(double const signOfX, double const signOfY, double const interval) const;
-    Points getPointsInTraversingX(double const signOfX, double const signOfY, double const interval) const;
+    [[nodiscard]] Points getPointsInTraversingXAndY(double const signOfX, double const signOfY, double const interval) const;
+    [[nodiscard]] Points getPointsInTraversingY(double const signOfX, double const signOfY, double const interval) const;
+    [[nodiscard]] Points getPointsInTraversingX(double const signOfX, double const signOfY, double const interval) const;
 
     friend std::ostream& operator<<(std::ostream& out, Hyperbola const& hyperbola);
 
@@ -49,5 +47,4 @@ private:
 
 using Hyperbolas = std::vector<Hyperbola>;
 
-}  // namespace TwoDimensions
-}  // namespace alba
+}  // namespace alba::TwoDimensions

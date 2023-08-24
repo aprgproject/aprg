@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 bool willHaveNoEffectOnAndOperation(Term const& term) { return term.isEmpty() || isTheValue(term, true); }
 
@@ -46,7 +44,5 @@ bool isTheValue(Expression const& expression, bool const value) {
     }
     return result;
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

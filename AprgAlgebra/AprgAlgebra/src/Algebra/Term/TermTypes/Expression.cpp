@@ -13,12 +13,10 @@
 using namespace alba::algebra::Simplification;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Expression::Expression()
-    : m_commonOperatorLevel(OperatorLevel::Unknown), m_termsWithAssociation(), m_isSimplified(false) {}
+    : m_commonOperatorLevel(OperatorLevel::Unknown),  m_isSimplified(false) {}
 
 Expression::Expression(BaseTerm const& baseTerm)
     : m_commonOperatorLevel(OperatorLevel::Unknown),
@@ -554,6 +552,4 @@ ostream& operator<<(ostream& out, Expression const& expression) {
     return out;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

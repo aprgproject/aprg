@@ -3,11 +3,7 @@
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Term/TermTypes/Polynomial.hpp>
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 Polynomials factorizeBySplittingToSmallerPolynomials(Polynomial const& polynomial);
 
@@ -36,8 +32,4 @@ void updateToGetSubsetOfFactors(Polynomials& commonFactors, Polynomials const& c
 void combinePolynomialsByAdditionThenEmplaceFactoredPolynomialIfNeeded(
     Polynomials& result, Polynomials const& smallerPolynomials);
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

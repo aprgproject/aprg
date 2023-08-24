@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(LinearEquationsEqualitySolverTest, ConstructionWorks) { LinearEquationsEqualitySolver(); }
 
@@ -176,6 +174,4 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     EXPECT_EQ(AlbaNumber(3), acceptedValuesForZ[0]);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

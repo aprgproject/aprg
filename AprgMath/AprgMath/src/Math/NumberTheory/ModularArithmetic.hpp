@@ -2,9 +2,7 @@
 
 #include <Math/Types.hpp>
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 bool canModuloBeDistributedInAddition(
     UnsignedInteger const number1, UnsignedInteger const number2, UnsignedInteger const modulo);
@@ -26,6 +24,4 @@ UnsignedInteger getModularInverseByEulersTheorem(UnsignedInteger const number, U
 UnsignedInteger getModularInverseByFermatsLittleTheorem(UnsignedInteger const number, UnsignedInteger const modulo);
 UnsignedInteger getModularFactorial(UnsignedInteger const number, UnsignedInteger const modulo);
 
-}  // namespace math
-
-}  // namespace alba
+}  // namespace alba::math

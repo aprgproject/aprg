@@ -2,9 +2,7 @@
 
 #include <Algebra/Equation/Equation.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Equation getTrigonometricPythagoreanIdentity(Term const& term);
 Equation getSineEquationOfRightTriangle(Term const& angle, Term const& oppositeSideOfAngle, Term const& hypotenuse);
@@ -38,6 +36,4 @@ Term getCosineOfHalvedValue(Term const& term, bool const isPositiveRoot);
 Term getSineSquaredOfHalvedValue(Term const& term);
 Term getCosineSquaredOfHalvedValue(Term const& term);
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

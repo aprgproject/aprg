@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 namespace {
 Terms allFalseTerms{false, false, false};
@@ -112,7 +110,5 @@ TEST(CommonFunctionLibraryTest, GetContradictionWorks) {
     EXPECT_EQ(Term(false), contradictionToTest(Term(true)));
     EXPECT_EQ(Term(false), contradictionToTest(Term("x")));
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

@@ -7,12 +7,10 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 ChineseRemainderTheorem::ChineseRemainderTheorem(UnsignedIntegers const& numbers, UnsignedIntegers const& modulos)
-    : m_solutionValue{} {
+     {
     solve(numbers, modulos);
 }
 
@@ -39,7 +37,5 @@ void ChineseRemainderTheorem::solve(UnsignedIntegers const& numbers, UnsignedInt
         }
     }
 }
-
-}  // namespace math
 
 }  // namespace alba

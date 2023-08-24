@@ -7,7 +7,7 @@ using namespace std;
 namespace codeReview {
 
 CPlusPlusType::CPlusPlusType()
-    : m_isConst(false), m_isReference(false), m_pointerCount(0), m_typeType(CPlusPlusTypeType::NoType), m_typeName() {}
+    : m_isConst(false), m_isReference(false), m_pointerCount(0), m_typeType(CPlusPlusTypeType::NoType) {}
 
 CPlusPlusType::CPlusPlusType(string const& typeName, CPlusPlusTypeType const cPlusPlusTypeType, int pointerCount)
     : m_isConst(false),
@@ -69,7 +69,7 @@ bool CPlusPlusType::isEqualIgnoreReference(CPlusPlusType const& type) const {
     return thisType == nonReferenceType || thisType == referenceType;
 }
 
-void CPlusPlusType::swapType(CPlusPlusTypeType& type1, CPlusPlusTypeType& type2) const {
+void CPlusPlusType::swapType(CPlusPlusTypeType& type1, CPlusPlusTypeType& type2) {
     if (CPlusPlusTypeType::ConstantNumber == type2) {
         CPlusPlusTypeType tempType(type1);
         type1 = type2;
@@ -80,15 +80,21 @@ void CPlusPlusType::swapType(CPlusPlusTypeType& type1, CPlusPlusTypeType& type2)
 bool CPlusPlusType::operator==(CPlusPlusType const& cPlusPlusType) const {
     // How about primitive type, bool int double
     // implementation for primitivetypes should be equal
-    if (m_isConst != cPlusPlusType.m_isConst) return false;
-    if (m_isReference != cPlusPlusType.m_isReference) return false;
-    if (m_pointerCount != cPlusPlusType.m_pointerCount) return false;
+    if (m_isConst != cPlusPlusType.m_isConst) { return false;
+}
+    if (m_isReference != cPlusPlusType.m_isReference) { return false;
+}
+    if (m_pointerCount != cPlusPlusType.m_pointerCount) { return false;
+}
     CPlusPlusTypeType type1(m_typeType);
     CPlusPlusTypeType type2(cPlusPlusType.m_typeType);
     swapType(type1, type2);
-    if (CPlusPlusTypeType::ConstantNumber == type1 && CPlusPlusTypeType::Primitive == type2) return true;
-    if (type1 != type2) return false;
-    if (m_typeName != cPlusPlusType.m_typeName) return false;
+    if (CPlusPlusTypeType::ConstantNumber == type1 && CPlusPlusTypeType::Primitive == type2) { return true;
+}
+    if (type1 != type2) { return false;
+}
+    if (m_typeName != cPlusPlusType.m_typeName) { return false;
+}
     return true;
 }
 

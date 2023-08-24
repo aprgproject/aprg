@@ -17,10 +17,10 @@ struct BtsLogDelay {
 };
 
 struct UniqueId {
-    UniqueId() : crnccId(0), nbccId(0), transactionId(0) {}
-    int crnccId;
-    int nbccId;
-    int transactionId;
+    UniqueId()  {}
+    int crnccId{0};
+    int nbccId{0};
+    int transactionId{0};
     bool operator<(UniqueId const& uniqueId) const {
         if (crnccId != uniqueId.crnccId) {
             return crnccId < uniqueId.crnccId;
@@ -40,14 +40,14 @@ struct WireSharkDelay {
 class BtsLogAnalyzer {
 public:
     BtsLogAnalyzer();
-    BtsLogAnalyzer(std::string const& pathOfOutputFile);
-    void processFileForToCountUsersWithTracing(std::string const& filePath);
+    explicit BtsLogAnalyzer(std::string const& pathOfOutputFile);
+    static void processFileForToCountUsersWithTracing(std::string const& filePath);
     void processDirectoryForWireSharkDelay(std::string const& directoryPath);
     void processFileForWireSharkDelay(std::string const& filePath);
     void processFileForMsgQueuingTime(std::string const& filePath);
     void processFileForBtsDelayForRlh(std::string const& filePath);
     void processFileForBtsDelayForRlDeletion(std::string const& filePath);
-    void processFileForBtsDelayForMikhailKnife(std::string const& filePath);
+    static void processFileForBtsDelayForMikhailKnife(std::string const& filePath);
     void processFileForBtsDelayForGrm(std::string const& filePath);
     static double getWireSharkTime(std::string const& lineInLogs);
     static std::string getNumberAfterThisString(std::string const& mainString, std::string const& stringToSearch);

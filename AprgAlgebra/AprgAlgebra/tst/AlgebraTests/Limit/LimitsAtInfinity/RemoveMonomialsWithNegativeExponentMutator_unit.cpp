@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateEquationWorks) {
     RemoveMonomialsWithNegativeExponentMutator mutator("x");
@@ -114,6 +112,4 @@ TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateFunctionWorks) {
     EXPECT_EQ(expectedFunction, functionObject);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

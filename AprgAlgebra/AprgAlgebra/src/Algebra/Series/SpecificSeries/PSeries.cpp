@@ -3,9 +3,7 @@
 #include <Algebra/Term/Utilities/CreateHelpers.hpp>
 #include <Algebra/Utilities/KnownNames.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 PSeries::PSeries(AlbaNumber const& power) : SeriesBasedOnSummation(getFormula(power), n) {}
 
@@ -15,6 +13,4 @@ Term PSeries::getFormula(AlbaNumber const& power) {
     return Term(createExpressionIfPossible({1, "/", denominator}));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

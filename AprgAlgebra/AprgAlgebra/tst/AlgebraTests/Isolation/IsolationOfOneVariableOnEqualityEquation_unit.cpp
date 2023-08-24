@@ -7,9 +7,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(IsolationOfOneVariableOnEqualityEquationTest, CanBeIsolatedWorksOnPolynomialEquation) {
     Polynomial leftHandSide{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 2}})};
@@ -229,6 +227,4 @@ TEST(
     EXPECT_EQ(expectedTermWithoutDerivative, termWithoutVariable);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

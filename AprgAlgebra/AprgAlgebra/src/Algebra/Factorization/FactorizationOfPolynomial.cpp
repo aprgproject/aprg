@@ -15,11 +15,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 Polynomials factorizeAPolynomial(Polynomial const& polynomial) {
     Polynomials result;
@@ -160,8 +156,4 @@ bool isFactorizeBySplittingToSmallerPolynomialsNeeded(Polynomial const& polynomi
     return polynomial.getMonomials().size() >= 4 && hasAMonomialWithMultipleVariables(polynomial);
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

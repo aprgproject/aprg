@@ -6,16 +6,14 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class LimitsAtInfinity {
 public:
     LimitsAtInfinity(Term const& term, std::string const& variableName);
 
-    Term getSimplifiedTermAtInfinity() const;
-    Term getValueAtInfinity(AlbaNumber const infinityValue) const;
+    [[nodiscard]] Term getSimplifiedTermAtInfinity() const;
+    [[nodiscard]] Term getValueAtInfinity(AlbaNumber const infinityValue) const;
 
 private:
     void simplify();
@@ -31,6 +29,4 @@ private:
     RemoveMonomialsWithNegativeExponentMutator m_removeMonomialsWithNegativeExponentMutator;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

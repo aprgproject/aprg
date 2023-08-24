@@ -2,7 +2,7 @@
 
 namespace codeReview {
 
-CPlusPlusVariable::CPlusPlusVariable() : m_type() {}
+CPlusPlusVariable::CPlusPlusVariable()  {}
 
 CPlusPlusVariable::CPlusPlusVariable(CPlusPlusType const& cPlusPlusType) : m_type(cPlusPlusType) {}
 

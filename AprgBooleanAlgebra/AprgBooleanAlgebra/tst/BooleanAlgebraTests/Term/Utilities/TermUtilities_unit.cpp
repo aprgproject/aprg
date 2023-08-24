@@ -3,13 +3,11 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(TermUtilitiesTest, IsNonEmptyOrNonOperatorTypeWorks) {
     Term term1;
-    Term term2(1);
+    Term term2(true);
     Term term3(VariableTerm("x"));
     Term term4(Operator("&"));
     Term term5(Expression{});
@@ -23,7 +21,7 @@ TEST(TermUtilitiesTest, IsNonEmptyOrNonOperatorTypeWorks) {
 
 TEST(TermUtilitiesTest, IsNonEmptyOrNonOperatorOrNonExpressionTypeWorks) {
     Term term1;
-    Term term2(1);
+    Term term2(true);
     Term term3(VariableTerm("x"));
     Term term4(Operator("&"));
     Term term5(Expression{});
@@ -62,7 +60,5 @@ TEST(TermUtilitiesTest, GetTermFromVariableAndPrimeValueWorks) {
     EXPECT_EQ(Term("x'"), getTermFromVariableAndPrimeValue("x", '0'));
     EXPECT_EQ(Term("x"), getTermFromVariableAndPrimeValue("x", '1'));
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

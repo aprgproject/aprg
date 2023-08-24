@@ -19,7 +19,7 @@ public:
     ~BaseRedBlackBinarySearchTree() override = default;
 
 protected:
-    inline bool isRed(NodeUniquePointer const& nodePointer) const {
+    [[nodiscard]] inline bool isRed(NodeUniquePointer const& nodePointer) const {
         bool result(false);
         if (nodePointer) {
             result = nodePointer->parentLinkColor == RedBlackColor::Red;
@@ -27,15 +27,15 @@ protected:
         return result;
     }
 
-    inline bool hasARightLeaningRedLinkOnOneChild(NodeUniquePointer const& nodePointer) const {
+    [[nodiscard]] inline bool hasARightLeaningRedLinkOnOneChild(NodeUniquePointer const& nodePointer) const {
         return isRed(nodePointer->right) && !isRed(nodePointer->left);
     }
 
-    inline bool hasTwoLeftLeaningRedLinksInARow(NodeUniquePointer const& nodePointer) const {
+    [[nodiscard]] inline bool hasTwoLeftLeaningRedLinksInARow(NodeUniquePointer const& nodePointer) const {
         return nodePointer->left && isRed(nodePointer->left) && isRed(nodePointer->left->left);
     }
 
-    inline bool hasTwoRedLinksOnItsChildren(NodeUniquePointer const& nodePointer) const {
+    [[nodiscard]] inline bool hasTwoRedLinksOnItsChildren(NodeUniquePointer const& nodePointer) const {
         return isRed(nodePointer->left) && isRed(nodePointer->right);
     }
 

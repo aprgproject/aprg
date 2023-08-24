@@ -34,7 +34,7 @@ private:
     bool hasWhiteSpace(string& lineString, int& index);
 
     string getLine();
-    bool isEqualToFirstTwoCharacters(string const& lineString, int& index, string const& stringToCheck);
+    static bool isEqualToFirstTwoCharacters(string const& lineString, int& index, string const& stringToCheck);
     string fetchOperator(string const& lineString, int& index);
     bool isKeyword(string const& word);
     bool isCPlusPlusIgnorableIdentifier(string const& word);
@@ -48,8 +48,8 @@ private:
     static constexpr char SHARP_CHAR = '#';
     ifstream m_fileStream;
     AlbaFileReader m_albaFileReader;
-    bool m_isFileValid;
-    unsigned int m_lineNumber;
+    bool m_isFileValid{false};
+    unsigned int m_lineNumber{0};
     Findings& m_findings;
     TermBuilder m_termBuilder;
     vector<string> m_stringOfOperators;

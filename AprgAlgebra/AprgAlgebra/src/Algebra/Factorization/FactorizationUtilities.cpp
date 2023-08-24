@@ -14,11 +14,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 bool areExponentsDivisible(Monomial const& monomial, int const divisor) {
     bool result(true);
@@ -110,8 +106,4 @@ void simplifyAndEmplaceBackPolynomialIfListIsEmpty(Polynomials& existingPolynomi
     }
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

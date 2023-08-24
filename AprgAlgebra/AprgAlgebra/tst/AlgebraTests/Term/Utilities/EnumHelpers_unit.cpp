@@ -2,9 +2,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(EnumHelpersTest, GetAssociationPriorityWorks) {
     EXPECT_EQ(1, getAssociationPriority(TermAssociationType::Positive));
@@ -57,6 +55,4 @@ TEST(EnumHelpersTest, GetEnumShortStringForOperatorLevelWorks) {
     EXPECT_EQ("{^}", getEnumShortString(OperatorLevel::RaiseToPower));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

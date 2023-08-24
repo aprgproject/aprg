@@ -1,10 +1,8 @@
 #include "BaseSolver.hpp"
 
-namespace alba {
+namespace alba::algebra {
 
-namespace algebra {
-
-BaseSolver::BaseSolver() : m_isSolved(false), m_isACompleteSolution(false) {}
+BaseSolver::BaseSolver()  {}
 
 bool BaseSolver::isSolved() const { return m_isSolved; }
 
@@ -20,6 +18,4 @@ void BaseSolver::setAsIncompleteSolution() {
     m_isACompleteSolution = false;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

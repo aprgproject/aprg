@@ -15,9 +15,9 @@ public:
 
     FixedSizeCircularQueue()  {}
 
-    bool isEmpty() const override { return getSize() == 0; }
+    [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 
-    int getSize() const override {
+    [[nodiscard]] int getSize() const override {
         if (m_firstIndex <= m_afterLastIndex) {
             return m_afterLastIndex - m_firstIndex;
         }             return SIZE - m_firstIndex + m_afterLastIndex;
@@ -49,4 +49,4 @@ private:
     Objects m_objects;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

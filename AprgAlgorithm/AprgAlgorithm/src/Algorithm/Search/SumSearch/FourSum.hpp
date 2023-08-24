@@ -19,9 +19,9 @@ public:
     using PairOfSumOfPairOfValues = std::pair<SumOfPairOfValues, SumOfPairOfValues>;
     using Comparator = std::function<bool(Index const, Index const)>;
 
-    FourSum(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    explicit FourSum(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
-    FourValues getPossibleDuplicatedFourValuesWithSum(Value const& targetSum) const {
+    [[nodiscard]] FourValues getPossibleDuplicatedFourValuesWithSum(Value const& targetSum) const {
         FourValues result{};
         if (!m_sortedValues.empty()) {
             SumsOfPairOfValues sumsOfPairOfValues(getSumsOfPairOfValuesWithPossibleDuplicates());
@@ -39,7 +39,7 @@ public:
     }
 
 private:
-    SumsOfPairOfValues getSumsOfPairOfValuesWithPossibleDuplicates() const {
+    [[nodiscard]] SumsOfPairOfValues getSumsOfPairOfValuesWithPossibleDuplicates() const {
         SumsOfPairOfValues result;
         Index size = m_sortedValues.size();
         result.reserve(size * size);  // reserve this much
@@ -51,7 +51,7 @@ private:
         return result;
     }
 
-    PairOfSumOfPairOfValues getTwoValuesWithSum(
+    [[nodiscard]] PairOfSumOfPairOfValues getTwoValuesWithSum(
         Value const& targetSum, SumsOfPairOfValues const& sumOfPairOfValues, Comparator const& shouldContinue) const {
         PairOfSumOfPairOfValues result{};
         if (!sumOfPairOfValues.empty()) {
@@ -74,4 +74,4 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

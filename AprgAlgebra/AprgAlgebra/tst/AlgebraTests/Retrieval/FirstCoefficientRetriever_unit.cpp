@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(FirstCoefficientRetrieverTest, RetrieveFromEquationsWorks) {
     FirstCoefficientRetriever retriever;
@@ -106,6 +104,4 @@ TEST(FirstCoefficientRetrieverTest, RetrieveFromPolynomialsWorks) {
     EXPECT_EQ(AlbaNumber(516), retriever.getFirstCoefficient());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

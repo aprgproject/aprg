@@ -17,9 +17,7 @@ using namespace alba::AlbaNumberConstants;
 using namespace alba::algebra::Simplification;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 SeriesBasedOnFormula::SeriesBasedOnFormula(Term const& formulaForSeries, string const& variableName)
     : m_formulaForSeries(formulaForSeries), m_variableName(variableName) {}
@@ -146,6 +144,4 @@ Term SeriesBasedOnFormula::getSignDerivativeForFiniteCalculus() const {
 
 string SeriesBasedOnFormula::getNameForVariableInFormula() const { return m_variableName; }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

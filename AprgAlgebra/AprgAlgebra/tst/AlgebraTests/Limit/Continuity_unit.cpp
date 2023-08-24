@@ -10,9 +10,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(ContinuityTest, IsContinuousAtWorks) {
     Polynomial denominator{Monomial(1, {{"x", 1}}), Monomial(-2, {})};
@@ -197,6 +195,4 @@ TEST(ContinuityTest, GetContinuityDomainWorksOnFunctions) {
     EXPECT_EQ(createAllRealValuesInterval(), intervalToVerify4.front());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

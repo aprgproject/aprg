@@ -22,11 +22,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Simplification {
+namespace alba::algebra::Simplification {
 
 SimplificationOfEquation::SimplificationOfEquation(Equation const& equation) : m_equation(equation) {}
 
@@ -175,8 +171,4 @@ bool SimplificationOfEquation::areTheSignsOfTwoTermsDifferent(
     return firstTerm.hasNegativeAssociation() ^ secondTerm.hasNegativeAssociation();
 }
 
-}  // namespace Simplification
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Simplification

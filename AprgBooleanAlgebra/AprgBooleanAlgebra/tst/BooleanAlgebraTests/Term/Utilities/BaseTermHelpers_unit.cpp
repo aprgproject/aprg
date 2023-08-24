@@ -2,9 +2,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(BaseTermHelpersTest, CreateBasePointerWorksForLValue) {
     Term originalTerm(true);
@@ -64,7 +62,7 @@ TEST(BaseTermHelpersTest, GetTermReferenceFromUniquePointerWorks) {
     BaseTermUniquePointer uniquePointer(createBasePointer(Term(true)));
 
     Term& termToChange(getTermReferenceFromUniquePointer(uniquePointer));
-    termToChange.getConstantReference().setValue(763);
+    termToChange.getConstantReference().setValue(true);
 
     Term const& termToVerify(getTermConstReferenceFromUniquePointer(uniquePointer));
     EXPECT_EQ(Term(763), termToVerify);
@@ -106,7 +104,5 @@ TEST(BaseTermHelpersTest, GetBaseTermReferenceFromUniquePointerWorks) {
     Term const& termToVerify(static_cast<Term const&>(baseTerm));
     EXPECT_EQ(Term(true), termToVerify);
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

@@ -11,13 +11,12 @@ using namespace alba;
 namespace codeReview {
 
 CMakeDatabase::CMakeDatabase()
-    : m_cMakeFileDirectoryPath(),
-      m_isNonExistentDirectoriesAllowed(false),
-      m_parentCMake(*this),
-      m_hasCMakeParent(false) {}
+    : 
+      m_parentCMake(*this)
+      {}
 
 CMakeDatabase::CMakeDatabase(CMakeDatabase& parentCMake)
-    : m_cMakeFileDirectoryPath(),
+    : 
       m_isNonExistentDirectoriesAllowed(false),
       m_parentCMake(parentCMake),
       m_hasCMakeParent(true) {}
@@ -78,7 +77,7 @@ CMakeDatabase& CMakeDatabase::find_InnerDirection(
     if (pathHandler.isFile()) {
         return findFile<RecursionDirectionType::Inner>(
             pathHandler.getFullPath(), "*.*", isFoundResult, stringFullPathOut);
-    } else if (pathHandler.isDirectory()) {
+    } if (pathHandler.isDirectory()) {
         return findDirectory<RecursionDirectionType::Inner>(
             pathHandler.getFullPath(), isFoundResult, stringFullPathOut);
     }
@@ -92,7 +91,7 @@ CMakeDatabase& CMakeDatabase::find_OuterDirection(
     if (pathHandler.isFile()) {
         return findFile<RecursionDirectionType::Outer>(
             pathHandler.getFullPath(), "*.*", isFoundResult, stringFullPathOut);
-    } else if (pathHandler.isDirectory()) {
+    } if (pathHandler.isDirectory()) {
         return findDirectory<RecursionDirectionType::Outer>(
             pathHandler.getFullPath(), isFoundResult, stringFullPathOut);
     }

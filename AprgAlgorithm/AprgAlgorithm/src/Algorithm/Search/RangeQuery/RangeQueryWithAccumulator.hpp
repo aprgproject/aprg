@@ -24,7 +24,7 @@ public:
         initialize(valuesToCheck);
     }
 
-    Value getAccumulatedValueOnInterval(Index const start, Index const end) const {
+    [[nodiscard]] Value getAccumulatedValueOnInterval(Index const start, Index const end) const {
         // This is on constant time
         Value result{};
         if (start <= end && start < static_cast<Index>(m_partialResults.size()) &&

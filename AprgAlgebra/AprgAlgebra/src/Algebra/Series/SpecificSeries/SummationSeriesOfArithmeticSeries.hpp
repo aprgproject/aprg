@@ -2,9 +2,7 @@
 
 #include <Algebra/Series/GeneralSeries/SeriesBasedOnSummation.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class SummationSeriesOfArithmeticSeries : public SeriesBasedOnSummation {
 public:
@@ -17,6 +15,4 @@ public:
 protected:
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

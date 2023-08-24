@@ -4,20 +4,18 @@
 
 #include <map>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class PolynomialRaiseToAnUnsignedInt {
 public:
     using PolynomialToNumberMap = std::map<Polynomial, int>;
 
-    PolynomialRaiseToAnUnsignedInt(Polynomial const& polynomial);
+    explicit PolynomialRaiseToAnUnsignedInt(Polynomial const& polynomial);
 
-    bool isExponentOne() const;
+    [[nodiscard]] bool isExponentOne() const;
 
-    Polynomial const& getBase() const;
-    int getExponent() const;
+    [[nodiscard]] Polynomial const& getBase() const;
+    [[nodiscard]] int getExponent() const;
 
 private:
     static bool canBeSimplified(int const gcfOfExponents, Monomial const& commonMonomialInBase);
@@ -27,9 +25,7 @@ private:
     static Polynomial getRemainingBase(
         PolynomialToNumberMap const& factorsToExponent, Monomial const& commonMonomialInBase, int const gcfOfExponents);
     Polynomial m_base;
-    int m_exponent;
+    int m_exponent{1};
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

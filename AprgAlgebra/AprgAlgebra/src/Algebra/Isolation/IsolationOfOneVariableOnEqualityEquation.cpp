@@ -11,9 +11,7 @@
 using namespace alba::algebra::Simplification;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 IsolationOfOneVariableOnEqualityEquation::IsolationOfOneVariableOnEqualityEquation(Equation const& equation) {
     setEquation(equation);
@@ -186,6 +184,4 @@ void IsolationOfOneVariableOnEqualityEquation::simplifyForIsolation(Expression& 
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

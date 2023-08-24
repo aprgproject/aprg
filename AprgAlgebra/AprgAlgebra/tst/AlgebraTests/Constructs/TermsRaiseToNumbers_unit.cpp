@@ -7,9 +7,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(TermsRaiseToNumbersTest, ConstructionWorks) {
     TermsRaiseToNumbers termsRaiseToNumbers1;
@@ -250,6 +248,4 @@ TEST(TermsRaiseToNumbersTest, SimplifyWorks) {
     EXPECT_EQ(AlbaNumber(1), itToVerify->second);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

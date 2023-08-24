@@ -7,9 +7,7 @@
 
 using namespace alba::AlbaNumberConstants;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(SummationTest, SummationWorksForConstant) {
     Summation summation(5, "x");
@@ -104,6 +102,4 @@ TEST(SummationTest, SummationWorksForPolynomial) {
     EXPECT_EQ(expectSumWhenEndingIsAVariable, summation.getSum(10, "variable"));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

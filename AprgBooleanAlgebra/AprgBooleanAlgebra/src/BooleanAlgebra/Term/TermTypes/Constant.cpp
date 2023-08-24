@@ -2,9 +2,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 Constant::Constant() : m_booleanValue(false) {}
 
@@ -14,7 +12,7 @@ bool Constant::operator==(Constant const& second) const { return m_booleanValue 
 
 bool Constant::operator!=(Constant const& second) const { return m_booleanValue != second.m_booleanValue; }
 
-bool Constant::operator<(Constant const& second) const { return m_booleanValue < second.m_booleanValue; }
+bool Constant::operator<(Constant const& second) const { return static_cast<int>(m_booleanValue) < static_cast<int>(second.m_booleanValue); }
 
 Constant Constant::operator~() const {
     Constant result(*this);
@@ -36,7 +34,5 @@ ostream& operator<<(ostream& out, Constant const& constant) {
     }
     return out;
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

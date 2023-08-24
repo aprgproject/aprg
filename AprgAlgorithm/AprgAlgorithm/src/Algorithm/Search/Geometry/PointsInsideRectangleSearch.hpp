@@ -40,7 +40,7 @@ public:
     PointsInsideRectangleSearch(Point const& bottomLeft, Point const& topRight)
         : m_twoDTree(), m_rectangleBottomLeft(bottomLeft), m_rectangleTopRight(topRight) {}
 
-    Points getPointsInsideTheRectangle() const {
+    [[nodiscard]] Points getPointsInsideTheRectangle() const {
         Points result{};
         NodeUniquePointer const& root(m_twoDTree.getRoot());
         if (root) {
@@ -70,21 +70,21 @@ private:
         depth--;
     }
 
-    inline bool shouldGoToLeftChild(Point const& point, int const depth) const {
+    [[nodiscard]] inline bool shouldGoToLeftChild(Point const& point, int const depth) const {
         if (mathHelper::isOdd(depth)) {
             return m_rectangleBottomLeft.first < point.first;
         }             return m_rectangleBottomLeft.second < point.second;
        
     }
 
-    inline bool shouldGoToRightChild(Point const& point, int const depth) const {
+    [[nodiscard]] inline bool shouldGoToRightChild(Point const& point, int const depth) const {
         if (mathHelper::isOdd(depth)) {
             return m_rectangleTopRight.first > point.first;
         }             return m_rectangleTopRight.second > point.second;
        
     }
 
-    inline bool isInsideRectangle(Point const& point) const {
+    [[nodiscard]] inline bool isInsideRectangle(Point const& point) const {
         return m_rectangleBottomLeft.first <= point.first && point.first <= m_rectangleTopRight.first &&
                m_rectangleBottomLeft.second <= point.second && point.second <= m_rectangleTopRight.second;
     }
@@ -94,4 +94,4 @@ private:
     Point m_rectangleTopRight;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -16,9 +16,9 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    BinaryNearestValueSearchWithCppFunctions(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    explicit BinaryNearestValueSearchWithCppFunctions(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
-    Value getNearestValue(Value const& target) const {
+    [[nodiscard]] Value getNearestValue(Value const& target) const {
         Value result{};
         if (!m_sortedValues.empty()) {
             result = getNearestValueUsingEqualRange(target);
@@ -26,7 +26,7 @@ public:
         return result;
     }
 
-    Index getIndexOfNearestValue(Value const& target) const {
+    [[nodiscard]] Index getIndexOfNearestValue(Value const& target) const {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
             result = getIndexOfNearestValueUsingEqualRange(target);
@@ -34,7 +34,7 @@ public:
         return result;
     }
 
-    Value getLowerBound(Value const& target) const {
+    [[nodiscard]] Value getLowerBound(Value const& target) const {
         Value result{};
         if (!m_sortedValues.empty()) {
             auto lowerBoundIt = std::lower_bound(m_sortedValues.cbegin(), m_sortedValues.cend(), target);
@@ -43,7 +43,7 @@ public:
         return result;
     }
 
-    Value getHigherBound(Value const& target) const {
+    [[nodiscard]] Value getHigherBound(Value const& target) const {
         Value result{};
         if (!m_sortedValues.empty()) {
             auto upperBoundIt = std::upper_bound(m_sortedValues.cbegin(), m_sortedValues.cend(), target);
@@ -53,7 +53,7 @@ public:
     }
 
 private:
-    Value getNearestValueUsingEqualRange(Value const& target) const {
+    [[nodiscard]] Value getNearestValueUsingEqualRange(Value const& target) const {
         // assumption is non set
         auto&& [lowerBoundValue, higherBoundValue] =
             containerHelper::getLowerAndUpperValuesForNonSet(m_sortedValues, target);
@@ -62,7 +62,7 @@ private:
         return (deviationFromLower <= deviationFromHigher) ? lowerBoundValue : higherBoundValue;
     }
 
-    Index getIndexOfNearestValueUsingEqualRange(Value const& target) const {
+    [[nodiscard]] Index getIndexOfNearestValueUsingEqualRange(Value const& target) const {
         // assumption is non set
         auto&& [lowerIt, upperIt] = containerHelper::getLowerAndUpperConstIteratorsForNonSet(m_sortedValues, target);
         Value lowerBoundValue(*lowerIt);
@@ -76,4 +76,4 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

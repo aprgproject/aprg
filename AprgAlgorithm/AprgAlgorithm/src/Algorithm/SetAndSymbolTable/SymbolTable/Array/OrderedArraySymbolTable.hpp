@@ -14,7 +14,7 @@ public:
 
     OrderedArraySymbolTable() : BaseClass(), b_size(BaseClass::m_size), b_keys(BaseClass::m_keys) {}
 
-    Value get(Key const& key) const override {
+    [[nodiscard]] Value get(Key const& key) const override {
         Value result{};
         if (!this->isEmpty()) {
             int rank(this->getRank(key));

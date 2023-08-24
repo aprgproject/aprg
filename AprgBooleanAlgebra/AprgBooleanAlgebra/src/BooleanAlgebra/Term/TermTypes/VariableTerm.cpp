@@ -8,11 +8,9 @@ using namespace alba::mathHelper;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
+namespace alba::booleanAlgebra {
 
-namespace booleanAlgebra {
-
-VariableTerm::VariableTerm() : m_variableName(), m_isNegated(false) {}
+VariableTerm::VariableTerm() :  m_isNegated(false) {}
 
 VariableTerm::VariableTerm(string const& variableName)
     : m_variableName(getStringWithoutStartingAndTrailingWhiteSpace(variableName)), m_isNegated(false) {
@@ -36,7 +34,7 @@ bool VariableTerm::operator<(VariableTerm const& second) const {
     if (m_variableName != second.m_variableName) {
         result = m_variableName < second.m_variableName;
     } else {
-        result = m_isNegated < second.m_isNegated;
+        result = static_cast<int>(m_isNegated) < static_cast<int>(second.m_isNegated);
     }
     return result;
 }
@@ -74,7 +72,5 @@ ostream& operator<<(ostream& out, VariableTerm const& variableTerm) {
     }
     return out;
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

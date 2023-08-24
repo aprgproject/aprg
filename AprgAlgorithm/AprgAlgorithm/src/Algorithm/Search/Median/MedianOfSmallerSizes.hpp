@@ -17,7 +17,7 @@ public:
     using MedianValues = std::vector<Value>;  // you need to make it small because vector is used
     using ConstIterator = typename Values::const_iterator;
 
-    MedianOfSmallerSizes(Values const& values) : m_size(values.size()), m_medianSize(getMedianSize(m_size)) {
+    explicit MedianOfSmallerSizes(Values const& values) : m_size(values.size()), m_medianSize(getMedianSize(m_size)) {
         m_sortedValuesInHalf.reserve(getMedianSizeWithOverFlow(m_medianSize));
         for (Value const& value : values) {
             addValueToMedianValues(value);
@@ -38,18 +38,18 @@ public:
 
     Value getMedian() { return m_sortedValuesInHalf.empty() ? Value{} : getMedianWithoutCheck(); }
 
-    Value getSmallerMedian() const { return m_sortedValuesInHalf.empty() ? Value{} : getSmallerMedianWithoutCheck(); }
+    [[nodiscard]] Value getSmallerMedian() const { return m_sortedValuesInHalf.empty() ? Value{} : getSmallerMedianWithoutCheck(); }
 
-    Value getLargerMedian() const { return m_sortedValuesInHalf.empty() ? Value{} : getLargerMedianWithoutCheck(); }
+    [[nodiscard]] Value getLargerMedian() const { return m_sortedValuesInHalf.empty() ? Value{} : getLargerMedianWithoutCheck(); }
 
 private:
-    Index getMedianSize(Index const size) const { return (size + 2) / 2; }
+    [[nodiscard]] Index getMedianSize(Index const size) const { return (size + 2) / 2; }
 
-    Index getMedianSizeWithOverFlow(Index const medianSize) const { return medianSize + 1; }
+    [[nodiscard]] Index getMedianSizeWithOverFlow(Index const medianSize) const { return medianSize + 1; }
 
-    Value getMedianWithoutCheck() const { return (getSmallerMedianWithoutCheck() + getLargerMedianWithoutCheck()) / 2; }
+    [[nodiscard]] Value getMedianWithoutCheck() const { return (getSmallerMedianWithoutCheck() + getLargerMedianWithoutCheck()) / 2; }
 
-    Value getSmallerMedianWithoutCheck() const {
+    [[nodiscard]] Value getSmallerMedianWithoutCheck() const {
         auto it = std::prev(m_sortedValuesInHalf.end());
         if (mathHelper::isEven(m_size)) {
             it--;
@@ -57,7 +57,7 @@ private:
         return *it;
     }
 
-    Value getLargerMedianWithoutCheck() const { return m_sortedValuesInHalf.back(); }
+    [[nodiscard]] Value getLargerMedianWithoutCheck() const { return m_sortedValuesInHalf.back(); }
 
     void addValueToMedianValues(Value const& value) {
         // this is similar to insertion sort for link list
@@ -81,4 +81,4 @@ private:
     MedianValues m_sortedValuesInHalf;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

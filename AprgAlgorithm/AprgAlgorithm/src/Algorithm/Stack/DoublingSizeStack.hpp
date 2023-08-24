@@ -16,9 +16,9 @@ public:
 
     ~DoublingSizeStack() { deleteAllObjects(); }
 
-    bool isEmpty() const override { return m_stackSize == 0; }
+    [[nodiscard]] bool isEmpty() const override { return m_stackSize == 0; }
 
-    int getSize() const override { return m_stackSize; }
+    [[nodiscard]] int getSize() const override { return m_stackSize; }
 
     // constant amortized (best case: constant, worst case: linear due to resizing)
     void push(Object const& object) override {
@@ -34,7 +34,7 @@ public:
         return result;
     }
 
-    int getContainerSize() const { return m_containerSize; }
+    [[nodiscard]] int getContainerSize() const { return m_containerSize; }
 
 private:
     void deleteAllObjects() {

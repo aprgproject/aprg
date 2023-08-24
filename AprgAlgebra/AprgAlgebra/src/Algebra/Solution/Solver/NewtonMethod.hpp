@@ -4,9 +4,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class NewtonMethod {
 public:
@@ -14,24 +12,22 @@ public:
 
     NewtonMethod(AlbaNumber const& initialValue, Function const& functionToIterate);
 
-    bool isSolved() const;
-    bool isFinished() const;
-    int getNumberOfIterationsExecuted() const;
-    AlbaNumber const& getCurrentValue() const;
+    [[nodiscard]] bool isSolved() const;
+    [[nodiscard]] bool isFinished() const;
+    [[nodiscard]] int getNumberOfIterationsExecuted() const;
+    [[nodiscard]] AlbaNumber const& getCurrentValue() const;
 
     void runOneIteration();
     void runMaxNumberOfIterationsOrUntilFinished(int const maxIterations);
     void runUntilFinished();
 
 private:
-    AlbaNumber getSlopeApproximationAt(AlbaNumber const& value) const;
+    [[nodiscard]] AlbaNumber getSlopeApproximationAt(AlbaNumber const& value) const;
     void updatePositiveDeltaForSlopeIfNeeded(AlbaNumber const& newValue);
-    int m_numberOfIterationsExecuted;
+    int m_numberOfIterationsExecuted{0};
     AlbaNumber m_currentValue;
     AlbaNumber m_positiveDeltaForSlope;
     Function m_functionToIterate;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

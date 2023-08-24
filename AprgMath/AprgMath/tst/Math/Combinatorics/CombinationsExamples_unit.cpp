@@ -5,9 +5,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(CombinationsExamplesTest, BasicExamplesWorks) {
     // How many different sums of money can be made by taking one coin from a penny, a nickel, a dime, and a quarter?
@@ -283,7 +281,5 @@ TEST(CombinationsExamplesTest, CatalanNumbersFormulaWorks) {
     // ()()() -> |o| |o| |o| |
     EXPECT_EQ(5U, getNumberOfCombinations(6U, 3U) / (3 + 1));
 }
-
-}  // namespace math
 
 }  // namespace alba

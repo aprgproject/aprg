@@ -38,4 +38,4 @@ private:
 
 using Planes = std::vector<Plane>;
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

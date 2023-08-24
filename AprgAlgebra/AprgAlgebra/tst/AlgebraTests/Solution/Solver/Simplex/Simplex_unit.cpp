@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(SimplexSolverTest, SimplexWorksOnBrewersProblem) {
     Equations constraints;
@@ -102,6 +100,4 @@ TEST(SimplexSolverTest, SimplexWorksOnBrewersProblemWithAdditionalObjectiveFunct
     EXPECT_EQ(solutionEquations, solver.getSolutionEquations());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

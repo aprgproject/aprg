@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(IntegrationUtilitiesTest, IsTheSecondFundamentalTheoremOfCalculusTrueWorks) {
     Term termToTest1(Monomial(1, {{"x", 1}}));
@@ -119,6 +117,4 @@ TEST(IntegrationUtilitiesTest, GetApproximateValuesForDefiniteIntegralWorks) {
     EXPECT_EQ(AlbaNumber(5000), valuesToVerify3.higherValue);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

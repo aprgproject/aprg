@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(ProofByInductionTest, ProveTheSumOfOddIntegers) {
     // Prove that: 1 + 3 + 5 + ... + (2n-1) = n^2
@@ -50,6 +48,4 @@ TEST(ProofByInductionTest, ProveTheSumOfSquareOfOddIntegers) {
     EXPECT_TRUE(proof.isCorrectOnInductionStep());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

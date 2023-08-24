@@ -4,9 +4,7 @@
 
 namespace alba {
 
-namespace algebra {
-
-namespace Factorization {
+namespace algebra::Factorization {
 
 struct ConfigurationDetails {
     bool shouldSimplifyExpressionsToFactors;
@@ -20,9 +18,7 @@ class ScopeObject : public AlbaConfigurationScopeObject<ConfigurationDetails> {}
 bool shouldSimplifyExpressionsToFactors();
 bool shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue();
 
-}  // namespace Factorization
-
-}  // namespace algebra
+}  // namespace algebra::Factorization
 
 template <>
 algebra::Factorization::ConfigurationDetails

@@ -42,4 +42,4 @@ protected:
     BaseToExponentMap m_baseToExponentMap;
 };
 
-}  // namespace alba
+}  // namespace alba::algebra

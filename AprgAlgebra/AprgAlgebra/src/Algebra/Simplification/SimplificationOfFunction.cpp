@@ -6,11 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Simplification {
+namespace alba::algebra::Simplification {
 
 SimplificationOfFunction::SimplificationOfFunction(Function const& functionObject) : m_function(functionObject) {}
 
@@ -27,8 +23,4 @@ void SimplificationOfFunction::simplify() {
     }
 }
 
-}  // namespace Simplification
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Simplification

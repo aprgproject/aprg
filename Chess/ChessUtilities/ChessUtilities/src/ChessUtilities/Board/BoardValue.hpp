@@ -33,4 +33,4 @@ private:
 bool operator<(BoardValue const& bv1, BoardValue const& bv2);
 bool operator==(BoardValue const& bv1, BoardValue const& bv2);
 
-}  // namespace alba
+}  // namespace alba::chess

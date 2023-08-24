@@ -5,9 +5,7 @@
 
 using namespace alba::mathHelper;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 PenCircles::PenCircleDetails::PenCircleDetails() : radius(0), color(0U) {}
 
@@ -63,7 +61,5 @@ void PenCircles::connectCircles(BitmapXY const& circle1Center, BitmapXY const& c
 }
 
 void PenCircles::clear() { m_penCircles.clear(); }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

@@ -4,13 +4,9 @@
 
 #include <gtest/gtest.h>
 
-namespace DesignDocumentCreator {
-
-namespace MessageVerifier {
+namespace DesignDocumentCreator::MessageVerifier {
 void verifyOneTransportBearerRegisterForCell(GenericMessage const& genericMessage);
 void verifySuccessfulHwConfigurationResponseMessage(GenericMessage const& genericMessage);
 void verifyTcomDeploymentIndMessage(GenericMessage const& genericMessage);
 void verifyLinkStateResponseMessage(GenericMessage const& genericMessage);
-}  // namespace MessageVerifier
-
 }  // namespace DesignDocumentCreator

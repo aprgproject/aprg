@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(SeriesBasedOnSummationTest, ConstructionWorks) { SeriesBasedOnSummation("n", "n"); }
 
@@ -68,6 +66,4 @@ TEST(SeriesBasedOnSummationTest, IsConditionallyConvergentWorksWhenSummationMode
     EXPECT_TRUE(series.isConditionallyConvergent());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

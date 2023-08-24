@@ -8,11 +8,7 @@
 
 using namespace alba::algebra::Functions;
 
-namespace alba {
-
-namespace algebra {
-
-namespace TwoDimensions {
+namespace alba::algebra::TwoDimensions {
 
 Equation getCircleEquation() {
     Term xMinusX0(createExpressionIfPossible({x, "-", x0}));
@@ -120,8 +116,4 @@ Term getVolumeOfAConicalFrustum() {
         createExpressionIfPossible({AlbaNumber::createFraction(1, 3), "*", getPiAsATerm(), "*", "h", "*", radiusPart}));
 }
 
-}  // namespace TwoDimensions
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::TwoDimensions

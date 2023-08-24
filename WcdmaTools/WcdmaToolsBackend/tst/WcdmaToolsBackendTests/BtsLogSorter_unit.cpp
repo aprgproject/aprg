@@ -5,14 +5,10 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace ProgressCounters {
+namespace alba::ProgressCounters {
 double totalSizeToBeReadForCombine;
 double totalSizeReadForCombine;
 int writeProgressForCombine;
-}  // namespace ProgressCounters
-
 }  // namespace alba
 
 using namespace alba;

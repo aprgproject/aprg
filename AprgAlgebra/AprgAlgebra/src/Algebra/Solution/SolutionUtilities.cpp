@@ -6,9 +6,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 AlbaNumber getPositiveLogarithmOfLargestNumber(Term const& term) {
     NumbersRetriever retriever;
@@ -54,6 +52,4 @@ AlbaNumbers getInitialValuesForIteratingMethods(Equation const& equation) {
     return result;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -1,8 +1,6 @@
 #include "SubTermsRetriever.hpp"
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 SubTermsRetriever::SubTermsRetriever() {}
 
@@ -26,6 +24,4 @@ void SubTermsRetriever::retrieveFromFunction(Function const& functionObject) {
     BaseRetriever::retrieveFromFunction(functionObject);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 AxisRotation::AxisRotation(string const& xName, string const& yName, double const angle, bool const doRotationBack) {
     initializeSubstitution(xName, yName, angle, doRotationBack);
@@ -56,6 +54,4 @@ void AxisRotation::initializeSubstitution(
     m_substitution.putVariableWithTerm(yName, newY);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

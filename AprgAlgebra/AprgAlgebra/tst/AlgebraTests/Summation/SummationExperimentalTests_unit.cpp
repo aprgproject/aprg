@@ -12,9 +12,7 @@ using namespace alba::algebra::Factorization;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(SummationTest, ExperimentalTest1) {
     // https://www.geeksforgeeks.org/total-number-of-non-decreasing-numbers-with-n-digits/
@@ -67,6 +65,4 @@ TEST(SummationTest, ExperimentalTest2) {
     EXPECT_EQ(624937395U, display);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

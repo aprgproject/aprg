@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 namespace {
 using MarkovChainsForTest = MarkovChains<5U>;
@@ -90,7 +88,5 @@ TEST(MarkovChainsTest, GetNextProbabilityDistributionWorksWithSteps) {
         (DistributionForTest{0.3125, 0, 0.5, 0, 0.1875}),
         markovChain.getNextProbabilityDistribution({1, 0, 0, 0, 0}, 6));
 }
-
-}  // namespace math
 
 }  // namespace alba

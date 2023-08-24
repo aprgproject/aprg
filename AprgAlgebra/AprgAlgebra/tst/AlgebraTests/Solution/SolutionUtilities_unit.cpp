@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(SolutionUtilitiesTest, GetPositiveLogarithmOfLargestNumberWorks) {
     EXPECT_EQ(AlbaNumber(6.90775527898214), getPositiveLogarithmOfLargestNumber(1000));
@@ -45,6 +43,4 @@ TEST(SolutionUtilitiesTest, GetInitialValuesForIteratingMethodsWorksForEquation)
     EXPECT_DOUBLE_EQ(456, actualValues[10].getDouble());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -2,9 +2,7 @@
 
 #include <Math/Types.hpp>
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 class ChineseRemainderTheorem {
 public:
@@ -17,15 +15,13 @@ public:
 
     ChineseRemainderTheorem(UnsignedIntegers const& numbers, UnsignedIntegers const& modulos);
 
-    UnsignedInteger getSolutionValue() const;
-    UnsignedInteger getAnotherSolutionValue(UnsignedInteger const multiplier) const;
+    [[nodiscard]] UnsignedInteger getSolutionValue() const;
+    [[nodiscard]] UnsignedInteger getAnotherSolutionValue(UnsignedInteger const multiplier) const;
 
 private:
     void solve(UnsignedIntegers const& numbers, UnsignedIntegers const& modulos);
-    UnsignedInteger m_solutionValue;
+    UnsignedInteger m_solutionValue{};
     UnsignedInteger m_productOfModulos;
 };
 
-}  // namespace math
-
-}  // namespace alba
+}  // namespace alba::math

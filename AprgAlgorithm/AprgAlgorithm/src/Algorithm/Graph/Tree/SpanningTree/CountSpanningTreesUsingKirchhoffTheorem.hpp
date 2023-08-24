@@ -49,4 +49,4 @@ private:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

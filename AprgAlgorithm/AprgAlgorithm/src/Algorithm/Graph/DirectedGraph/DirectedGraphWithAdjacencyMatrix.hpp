@@ -16,17 +16,17 @@ public:
 
     DirectedGraphWithAdjacencyMatrix() :  m_adjacencyMatrix(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE) {}
 
-    bool isEmpty() const override { return m_numberOfEdges == 0; }
+    [[nodiscard]] bool isEmpty() const override { return m_numberOfEdges == 0; }
 
-    bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
+    [[nodiscard]] bool isDirectlyConnected(Vertex const& vertex1, Vertex const& vertex2) const override {
         return m_adjacencyMatrix.getEntry(vertex1, vertex2);
     }
 
-    int getNumberOfVertices() const override { return getVertices().size(); }
+    [[nodiscard]] int getNumberOfVertices() const override { return getVertices().size(); }
 
-    int getNumberOfEdges() const override { return m_numberOfEdges; }
+    [[nodiscard]] int getNumberOfEdges() const override { return m_numberOfEdges; }
 
-    Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
+    [[nodiscard]] Vertices getAdjacentVerticesAt(Vertex const& vertex) const override {
         Vertices result;
         Vertex numberOfRows(m_adjacencyMatrix.getNumberOfRows());
         for (Vertex possibleAdjacentVertex = 0; possibleAdjacentVertex < numberOfRows; possibleAdjacentVertex++) {
@@ -37,7 +37,7 @@ public:
         return result;
     }
 
-    Vertices getVertices() const override {
+    [[nodiscard]] Vertices getVertices() const override {
         std::array<bool, MAX_VERTEX_VALUE> isVertexIncluded{};
 
         Vertex numberOfColumns(m_adjacencyMatrix.getNumberOfColumns());
@@ -60,7 +60,7 @@ public:
         return result;
     }
 
-    Edges getEdges() const override {
+    [[nodiscard]] Edges getEdges() const override {
         Edges result;
         Vertex numberOfColumns(m_adjacencyMatrix.getNumberOfColumns());
         Vertex numberOfRows(m_adjacencyMatrix.getNumberOfRows());
@@ -74,7 +74,7 @@ public:
         return result;
     }
 
-    AdjacencyMatrix const& getAdjacencyMatrix() const { return m_adjacencyMatrix; }
+    [[nodiscard]] AdjacencyMatrix const& getAdjacencyMatrix() const { return m_adjacencyMatrix; }
 
     void connect(Vertex const& vertex1, Vertex const& vertex2) override {
         if (!isDirectlyConnected(vertex1, vertex2)) {

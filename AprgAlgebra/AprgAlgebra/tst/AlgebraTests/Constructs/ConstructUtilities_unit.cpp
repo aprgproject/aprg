@@ -7,9 +7,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(
     ConstructUtilitiesTest,
@@ -437,6 +435,4 @@ TEST(ConstructUtilitiesTest, CreateTermRaiseToTermsFromExpressionWorks_WithDivis
     EXPECT_EQ(Term(-2), termRaiseToTerms.getCombinedExponents());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

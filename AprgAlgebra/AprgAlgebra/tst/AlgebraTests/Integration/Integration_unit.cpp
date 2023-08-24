@@ -17,9 +17,7 @@ using namespace alba::algebra::Simplification;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(IntegrationTest, IsConvergentWorks) {
     Integration integrationForX("x");
@@ -777,6 +775,4 @@ TEST(IntegrationTest, IntegrateWorksWithSimplificationToACommonDenominator) {
     EXPECT_EQ(termToExpect, termToVerify);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

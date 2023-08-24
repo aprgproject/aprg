@@ -10,9 +10,7 @@
 #include <sstream>
 #include <string>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 template <typename Minterm>
 class ImplicantTemplate {
@@ -42,7 +40,7 @@ public:
         return result;
     }
 
-    bool isCompatible(ImplicantTemplate const& implicant) const {
+    [[nodiscard]] bool isCompatible(ImplicantTemplate const& implicant) const {
         int commonLength(std::max(getMaxLengthOfEquivalentString(), implicant.getMaxLengthOfEquivalentString()));
         std::string string1(getEquivalentString(commonLength));
         std::string string2(implicant.getEquivalentString(commonLength));
@@ -53,18 +51,18 @@ public:
                 if (string1[i] == '-' || string2[i] == '-') {
                     result = false;
                     break;
-                } else if (difference > 1) {
+                } if (difference > 1) {
                     result = false;
                     break;
-                } else {
+                } 
                     difference++;
-                }
+               
             }
         }
         return result;
     }
 
-    bool isASubsetOf(ImplicantTemplate const& larger) const {
+    [[nodiscard]] bool isASubsetOf(ImplicantTemplate const& larger) const {
         bool result(false);
         if (m_minterms.size() <= larger.m_minterms.size()) {
             result = true;
@@ -79,7 +77,7 @@ public:
         return result;
     }
 
-    bool isASupersetOf(ImplicantTemplate const& smaller) const {
+    [[nodiscard]] bool isASupersetOf(ImplicantTemplate const& smaller) const {
         bool result(false);
         if (m_minterms.size() >= smaller.m_minterms.size()) {
             result = true;
@@ -94,7 +92,7 @@ public:
         return result;
     }
 
-    bool hasMinterm(Minterm const& minterm) const {
+    [[nodiscard]] bool hasMinterm(Minterm const& minterm) const {
         bool result(false);
         if (!m_minterms.empty()) {
             auto it = m_minterms.find(minterm);
@@ -103,11 +101,11 @@ public:
         return result;
     }
 
-    Minterms const& getMinterms() const { return m_minterms; }
+    [[nodiscard]] Minterms const& getMinterms() const { return m_minterms; }
 
-    std::string getEquivalentString() const { return getEquivalentString(getMaxLengthOfEquivalentString()); }
+    [[nodiscard]] std::string getEquivalentString() const { return getEquivalentString(getMaxLengthOfEquivalentString()); }
 
-    std::string getEquivalentString(int const length) const {
+    [[nodiscard]] std::string getEquivalentString(int const length) const {
         std::string booleanEquivalent;
         if (!m_minterms.empty() && length > 0) {
             constexpr int NUMBER_OF_BITS(AlbaBitValueUtilities<Minterm>::getNumberOfBits());
@@ -127,7 +125,7 @@ public:
         return booleanEquivalent;
     }
 
-    std::string getMintermString() const {
+    [[nodiscard]] std::string getMintermString() const {
         std::stringstream result;
         for (Minterm const& minterm : m_minterms) {
             result << minterm << "|";
@@ -135,7 +133,7 @@ public:
         return result.str();
     }
 
-    int getMaxLengthOfEquivalentString() const {
+    [[nodiscard]] int getMaxLengthOfEquivalentString() const {
         Minterm orResult(performOrOperationOfAllMinterms());
         return AlbaBitValueUtilities<Minterm>::getNumberOfBits() -
                AlbaBitValueUtilities<Minterm>::getNumberOfConsecutiveZerosFromMsb(orResult);
@@ -144,7 +142,7 @@ public:
     void addMinterm(Minterm const& minterm) { m_minterms.emplace(minterm); }
 
 private:
-    Minterm getFirstMinterm() const {
+    [[nodiscard]] Minterm getFirstMinterm() const {
         Minterm result(0);
         if (!m_minterms.empty()) {
             result = *(m_minterms.begin());
@@ -152,14 +150,14 @@ private:
         return result;
     }
 
-    Minterm performAndOperationOfAllMinterms() const {
+    [[nodiscard]] Minterm performAndOperationOfAllMinterms() const {
         constexpr Minterm INITIAL_VALUE(AlbaBitValueUtilities<Minterm>::getAllOnes());
         return std::accumulate(
             m_minterms.cbegin(), m_minterms.cend(), INITIAL_VALUE,
             [](Minterm const& minterm1, Minterm const& minterm2) { return minterm1 & minterm2; });
     }
 
-    Minterm performOrOperationOfAllMinterms() const {
+    [[nodiscard]] Minterm performOrOperationOfAllMinterms() const {
         constexpr Minterm INITIAL_VALUE(0);
         return std::accumulate(
             m_minterms.cbegin(), m_minterms.cend(), INITIAL_VALUE,
@@ -181,6 +179,4 @@ private:
     Minterms m_minterms;
 };
 
-}  // namespace booleanAlgebra
-
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

@@ -14,4 +14,4 @@ EdgeWeightedDirectedGraph getOptimalDirectedGraph(PathSearchUsingDijkstra const&
     return result;
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm

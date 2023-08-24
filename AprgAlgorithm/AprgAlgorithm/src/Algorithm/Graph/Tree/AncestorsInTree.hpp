@@ -22,10 +22,10 @@ public:
         initializeIfNeeded();
     }
 
-    Vertex getAncestor(Vertex const& child, int const distance) const { return getAncestorInternal(child, distance); }
+    [[nodiscard]] Vertex getAncestor(Vertex const& child, int const distance) const { return getAncestorInternal(child, distance); }
 
 private:
-    Vertex getAncestorInternal(Vertex const& vertex, int const distance) const {
+    [[nodiscard]] Vertex getAncestorInternal(Vertex const& vertex, int const distance) const {
         Vertex result{};
         if (distance > 0)  // not zero
         {
@@ -88,4 +88,4 @@ private:
     VertexAndCountPairToVertexMap m_startAndDistancePairToDestinationMap;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -25,18 +25,18 @@ public:
     ~BaseSeparateChainingHash() override = default;  // no need for virtual destructor because base destructor is
                                                      // virtual (similar to other virtual functions)
 
-    bool isEmpty() const override { return m_size == 0; }
+    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
 
-    bool doesContain(Key const& key) const override { return m_smallerSymbolTables[getHash(key)].doesContain(key); }
+    [[nodiscard]] bool doesContain(Key const& key) const override { return m_smallerSymbolTables[getHash(key)].doesContain(key); }
 
-    int getSize() const override { return m_size; }
+    [[nodiscard]] int getSize() const override { return m_size; }
 
-    int getRank(Key const& key) const override {
+    [[nodiscard]] int getRank(Key const& key) const override {
         Keys keys(getKeys());
         return OrderedArray::getRank(key, keys);
     }
 
-    Key getMinimum() const override {
+    [[nodiscard]] Key getMinimum() const override {
         Key result{};
         bool isFirst(true);
         for (auto const& smallerSymbolTables : m_smallerSymbolTables) {
@@ -52,7 +52,7 @@ public:
         return result;
     }
 
-    Key getMaximum() const override {
+    [[nodiscard]] Key getMaximum() const override {
         Key result;
         bool isFirst(true);
         for (auto const& smallerSymbolTables : m_smallerSymbolTables) {
@@ -68,17 +68,17 @@ public:
         return result;
     }
 
-    Key selectAt(int const index) const override {
+    [[nodiscard]] Key selectAt(int const index) const override {
         Keys keys(getKeys());
         return OrderedArray::selectAt(index, keys);
     }
 
-    Key getFloor(Key const& key) const override {
+    [[nodiscard]] Key getFloor(Key const& key) const override {
         Keys keys(getKeys());
         return OrderedArray::getFloor(key, keys);
     }
 
-    Key getCeiling(Key const& key) const override {
+    [[nodiscard]] Key getCeiling(Key const& key) const override {
         Keys keys(getKeys());
         return OrderedArray::getCeiling(key, keys);
     }
@@ -92,7 +92,7 @@ public:
 
     void deleteMaximum() override { deleteBasedOnKey(getMaximum()); }
 
-    Keys getKeys() const override {
+    [[nodiscard]] Keys getKeys() const override {
         Keys result;
         for (auto const& smallerSymbolTables : m_smallerSymbolTables) {
             if (!smallerSymbolTables.isEmpty()) {
@@ -102,7 +102,7 @@ public:
         return result;
     }
 
-    Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override {
+    [[nodiscard]] Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override {
         Keys result;
         for (auto const& smallerSymbolTables : m_smallerSymbolTables) {
             if (!smallerSymbolTables.isEmpty()) {
@@ -113,7 +113,7 @@ public:
     }
 
 protected:
-    int getHash(Key const& key) const { return HashFunction::getHash(key); }
+    [[nodiscard]] int getHash(Key const& key) const { return HashFunction::getHash(key); }
 
     int m_size{0};
     HashTable m_smallerSymbolTables;

@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TermsWithAssociation::TermsWithAssociation(TermsWithDetails const& termsWithDetails)
     : m_termsWithDetails(termsWithDetails) {}
@@ -121,6 +119,4 @@ void TermsWithAssociation::reverseTheAssociationOfTheTerms() {
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -5,9 +5,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 enum class LimaconType { Unknown, WithALoop, Cardioid, WithADent, Convex };
 
@@ -23,17 +21,17 @@ public:
     bool operator==(Limacon const& limacon) const;
     bool operator!=(Limacon const& limacon) const;
 
-    double getAValue() const;
-    double getBValue() const;
-    LimaconTrigonometricFunctionType getTrigonometricFunctionType() const;
-    LimaconType getLimaconType() const;
-    Points getPointsForShape(AlbaAngle const& angleInterval) const;
-    double calculateRadiusFromTheta(AlbaAngle const& theta) const;
-    AlbaAngle calculateThetaFromRadius(double const radius) const;
+    [[nodiscard]] double getAValue() const;
+    [[nodiscard]] double getBValue() const;
+    [[nodiscard]] LimaconTrigonometricFunctionType getTrigonometricFunctionType() const;
+    [[nodiscard]] LimaconType getLimaconType() const;
+    [[nodiscard]] Points getPointsForShape(AlbaAngle const& angleInterval) const;
+    [[nodiscard]] double calculateRadiusFromTheta(AlbaAngle const& theta) const;
+    [[nodiscard]] AlbaAngle calculateThetaFromRadius(double const radius) const;
 
 private:
-    double performTrigonometricFunction(AlbaAngle const& theta) const;
-    AlbaAngle performInverseTrigonometricFunction(double const ratio) const;
+    [[nodiscard]] double performTrigonometricFunction(AlbaAngle const& theta) const;
+    [[nodiscard]] AlbaAngle performInverseTrigonometricFunction(double const ratio) const;
 
     friend std::ostream& operator<<(std::ostream& out, Limacon const& limacon);
 
@@ -44,5 +42,4 @@ private:
 
 using Limacons = std::vector<Limacon>;
 
-}  // namespace TwoDimensions
 }  // namespace alba

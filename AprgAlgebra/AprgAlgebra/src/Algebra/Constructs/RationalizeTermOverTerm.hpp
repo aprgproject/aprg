@@ -2,9 +2,7 @@
 
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class RationalizeTermOverTerm {
 public:
@@ -16,15 +14,15 @@ public:
     RationalizeTermOverTerm();
     RationalizeTermOverTerm(Term const& numerator, Term const& denominator);
 
-    Term const& getNumerator() const;
-    Term const& getDenominator() const;
-    Term getCombinedTerm() const;
+    [[nodiscard]] Term const& getNumerator() const;
+    [[nodiscard]] Term const& getDenominator() const;
+    [[nodiscard]] Term getCombinedTerm() const;
 
     void rationalizeNumerator();
     void rationalizeDenominator();
 
 private:
-    void rationalize(Term& termToRationalize, Term& otherTerm);
+    static void rationalize(Term& termToRationalize, Term& otherTerm);
     static void simplifyForRationalize(Term& term);
     static void retrieveTermsForRationalization(Term& rationalizedTerm, Term& multiplier, Term const& term);
     static void retrieveTermsForRationalizationForPolynomial(
@@ -50,6 +48,4 @@ private:
     Term m_denominator;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

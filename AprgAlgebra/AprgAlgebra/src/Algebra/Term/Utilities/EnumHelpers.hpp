@@ -17,4 +17,4 @@ std::string getEnumShortString(TermType const termType);
 std::string getEnumShortString(TermAssociationType const association);
 std::string getEnumShortString(OperatorLevel const operatorLevel);
 
-}  // namespace alba
+}  // namespace alba::algebra

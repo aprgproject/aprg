@@ -325,4 +325,4 @@ Plane getPerpendicularPlaneOfALineAndUsingAPointInThePlane(Line const& line, Poi
     return Plane(line.getACoefficient(), line.getBCoefficient(), line.getCCoefficient(), pointInPerpendicularPlane);
 }
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions::threeDimensionsUtilities

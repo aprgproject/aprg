@@ -5,17 +5,15 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class FunctionsRetriever final : public BaseRetriever {
 public:
     using FunctionCondition = std::function<bool(Function const&)>;
 
-    FunctionsRetriever(FunctionCondition const& isFunctionIncluded);
+    explicit FunctionsRetriever(FunctionCondition const& isFunctionIncluded);
 
-    FunctionsSet const& getFunctions() const;
+    [[nodiscard]] FunctionsSet const& getFunctions() const;
 
     void retrieveFromPolynomial(Polynomial const&) override;
     void retrieveFromFunction(Function const& functionObject) override;
@@ -25,6 +23,4 @@ private:
     FunctionsSet m_functions;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

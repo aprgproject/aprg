@@ -208,7 +208,7 @@ private:
         }
     }
 
-    Index isAParent(Index const treeIndex) const { return treeIndex < b_startOfChildren; }
+    [[nodiscard]] Index isAParent(Index const treeIndex) const { return treeIndex < b_startOfChildren; }
 
     Index const b_startOfChildren;
     Values& b_treeValues;

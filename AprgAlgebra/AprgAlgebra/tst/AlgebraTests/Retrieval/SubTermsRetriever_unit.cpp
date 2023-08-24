@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(SubTermsRetrieverTest, RetrieveFromEquationsWorks) {
     SubTermsRetriever retriever;
@@ -161,6 +159,4 @@ TEST(SubTermsRetrieverTest, RetrieveFromPolynomialsWorks) {
     EXPECT_EQ(Term(polynomial2), *(it++));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

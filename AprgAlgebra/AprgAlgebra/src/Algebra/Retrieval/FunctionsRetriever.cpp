@@ -1,8 +1,6 @@
 #include "FunctionsRetriever.hpp"
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 FunctionsRetriever::FunctionsRetriever(FunctionCondition const& isFunctionIncluded)
     : m_isFunctionIncluded(isFunctionIncluded) {}
@@ -17,6 +15,4 @@ void FunctionsRetriever::retrieveFromFunction(Function const& functionObject) {
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

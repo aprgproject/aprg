@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(ModularArithmeticTest, CanModuloBeDistributedInAdditionWorks) {
     EXPECT_TRUE(canModuloBeDistributedInAddition(55U, 3U, 12U));
@@ -66,7 +64,5 @@ TEST(ModularArithmeticTest, GetModularFactorialWorks) {
     EXPECT_EQ(2U, getModularFactorial(2U, 4U));
     EXPECT_EQ(6U, getModularFactorial(6U, 17U));
 }
-
-}  // namespace math
 
 }  // namespace alba

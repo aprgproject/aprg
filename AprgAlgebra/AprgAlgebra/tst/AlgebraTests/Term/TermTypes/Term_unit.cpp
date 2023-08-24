@@ -8,9 +8,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(TermTest, TermsAsConstantsWorks) {
     Term constantTerm1(4353);
@@ -768,6 +766,4 @@ TEST(TermTest, OutputStreamOperatorWorks) {
         ss.str());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

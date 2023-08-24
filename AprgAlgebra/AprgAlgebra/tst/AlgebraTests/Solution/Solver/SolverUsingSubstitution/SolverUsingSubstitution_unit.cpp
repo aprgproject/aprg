@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(SolverUsingSubstitutionTest, ConstructionWorks) { SolverUsingSubstitution(); }
 
@@ -126,6 +124,4 @@ TEST(SolverUsingSubstitutionTest, CalculateSolutionAndReturnSolutionSetWorksForL
     EXPECT_EQ(AlbaNumber(13) / 16, acceptedValuesForY2[0]);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

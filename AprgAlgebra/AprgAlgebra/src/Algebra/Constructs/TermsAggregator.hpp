@@ -2,18 +2,16 @@
 
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class TermsAggregator {
 public:
     enum class AggregatorTraverseSteps { BuildExpression, Simplify };
     using Indexes = std::vector<int>;
 
-    TermsAggregator(Terms const& terms);
+    explicit TermsAggregator(Terms const& terms);
 
-    Terms const& getTermsConstReference() const;
+    [[nodiscard]] Terms const& getTermsConstReference() const;
 
     void buildExpressionFromTerms();
     void simplifyTerms();
@@ -31,23 +29,21 @@ private:
         AggregatorTraverseSteps const traverseSteps, int const nextOperatorIndex);
     bool performTraverseStepsWithUnaryOperationAndReturnIfContinue(
         AggregatorTraverseSteps const traverseSteps, int const nextOperatorIndex);
-    Indexes getNextOperatorIndexes(OperatorInputType const operatorInputType) const;
+    [[nodiscard]] Indexes getNextOperatorIndexes(OperatorInputType const operatorInputType) const;
 
     bool buildExpressionWithBinaryOperationAndReturnIfBuilt(int const index);
     bool buildExpressionWithUnaryOperationAndReturnIfBuilt(int const index);
     bool simplifyBinaryOperationAndReturnIfSimplified(int const index);
     bool simplifyUnaryOperationAndReturnIfSimplified(int const index);
-    bool hasNoValueBeforeThisIndex(int const index) const;
+    [[nodiscard]] bool hasNoValueBeforeThisIndex(int const index) const;
 
     void eraseAndThenInsert(int const firstIndex, int const secondIndex, Term const& term);
     void eraseTermsInclusive(int const firstIndex, int const secondIndex);
     void insertTerm(int const index, Term const& term);
 
-    int m_startIndex;
-    int m_endIndex;
+    int m_startIndex{0};
+    int m_endIndex{0};
     Terms m_terms;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

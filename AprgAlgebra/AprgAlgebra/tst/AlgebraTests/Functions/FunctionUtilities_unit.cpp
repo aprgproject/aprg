@@ -7,11 +7,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Functions {
+namespace alba::algebra::Functions {
 
 TEST(FunctionUtilitiesTest, IsFunctionContinuousWorks) {
     Function unknownFunction("functionToTest", Term("x"), [](AlbaNumber const& number) { return number; });
@@ -39,8 +35,4 @@ TEST(FunctionUtilitiesTest, EvaluateAndGetInputOutputPairWorks) {
     EXPECT_EQ(AlbaNumber(2), inputAndOutputPairs[4].second);
 }
 
-}  // namespace Functions
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Functions

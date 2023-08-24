@@ -3,9 +3,7 @@
 #include <functional>
 #include <map>
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 class OutwardCircleTraversal {
 public:
@@ -17,9 +15,9 @@ public:
     using RadiusToCoordinates = std::multimap<double, Coordinate>;
     using RadiusAndCoordinatesPair = std::pair<double, Coordinate>;
 
-    OutwardCircleTraversal(int const maxRadius);
+    explicit OutwardCircleTraversal(int const maxRadius);
 
-    RadiusToCoordinates const& getRadiusToCoordinates() const;
+    [[nodiscard]] RadiusToCoordinates const& getRadiusToCoordinates() const;
 
 private:
     void constructRadiusToCoordinates();
@@ -27,6 +25,4 @@ private:
     RadiusToCoordinates m_radiusToCoordinates;
 };
 
-}  // namespace AprgBitmap
-
-}  // namespace alba
+}  // namespace alba::AprgBitmap

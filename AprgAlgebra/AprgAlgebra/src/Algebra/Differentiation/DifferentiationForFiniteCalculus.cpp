@@ -5,8 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-namespace algebra {
+namespace alba::algebra {
 
 DifferentiationForFiniteCalculus::DifferentiationForFiniteCalculus(string const& nameOfVariableToDifferentiate)
     : m_nameOfVariableToDifferentiate(nameOfVariableToDifferentiate) {}
@@ -120,6 +119,4 @@ bool DifferentiationForFiniteCalculus::isVariableToDifferentiate(string const& v
     return variableName == m_nameOfVariableToDifferentiate;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

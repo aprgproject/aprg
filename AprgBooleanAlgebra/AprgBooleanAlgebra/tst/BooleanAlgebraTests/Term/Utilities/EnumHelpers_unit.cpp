@@ -2,9 +2,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(EnumHelpersTest, GetOperatorTypeInversePriorityWorks) {
     EXPECT_EQ(0, getOperatorTypeInversePriority(OperatorType::Unknown));
@@ -53,7 +51,5 @@ TEST(EnumHelpersTest, GetEnumShortStringForOperatorLevelWorks) {
     EXPECT_EQ("{&}", getEnumShortString(OperatorLevel::And));
     EXPECT_EQ("{|}", getEnumShortString(OperatorLevel::Or));
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

@@ -62,4 +62,4 @@ UnsignedInteger getNumberOfRootedTrees(UnsignedInteger const numberOfNodes) {
     return getCatalanNumber(numberOfNodes - 1);
 }
 
-}  // namespace alba
+}  // namespace alba::math

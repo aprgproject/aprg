@@ -4,9 +4,7 @@
 
 #include <optional>
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 class OutwardSnakeLikeTraversal {
 public:
@@ -15,7 +13,7 @@ public:
         BitmapXY const& currentPoint, Direction const direction, int const lowestLeft, int const highestRight,
         int const lowestTop, int const highestBottom);
 
-    bool isTraversalFinished() const;
+    [[nodiscard]] bool isTraversalFinished() const;
     BitmapXY getNextPoint();
 
 private:
@@ -32,8 +30,8 @@ private:
     void teleportToNextOfMostRightAndSwitchDirection();
     void teleportToNextOfMostTopAndSwitchDirection();
     void teleportToNextOfMostBottomAndSwitchDirection();
-    bool isPointInCorner() const;
-    bool cannotTeleport() const;
+    [[nodiscard]] bool isPointInCorner() const;
+    [[nodiscard]] bool cannotTeleport() const;
     BitmapXY m_currentPoint;
     Direction m_direction;
     std::optional<Direction> m_scheduledTeleportDirection;
@@ -46,10 +44,8 @@ private:
     int m_lastMostRight;
     int m_lastMostTop;
     int m_lastMostBottom;
-    bool m_isStart;
-    bool m_isFinished;
+    bool m_isStart{true};
+    bool m_isFinished{false};
 };
 
-}  // namespace AprgBitmap
-
-}  // namespace alba
+}  // namespace alba::AprgBitmap

@@ -13,10 +13,10 @@ namespace codeReview {
 
 class CPlusPlusNamespace {
 public:
-    bool isVariable(string const& variableName) const;
-    bool isFunction(string const& functionName) const;
-    bool isClass(string const& className) const;
-    bool isNamespace(string const& namespaceName) const;
+    [[nodiscard]] bool isVariable(string const& variableName) const;
+    [[nodiscard]] bool isFunction(string const& functionName) const;
+    [[nodiscard]] bool isClass(string const& className) const;
+    [[nodiscard]] bool isNamespace(string const& namespaceName) const;
 
     VectorOfStrings& getVariableNamesReference();
     VectorOfStrings& getFunctionNamesReference();

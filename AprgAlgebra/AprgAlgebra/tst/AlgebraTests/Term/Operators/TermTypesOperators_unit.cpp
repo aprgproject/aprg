@@ -8,9 +8,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(TermTypesOperatorsTest, UnaryPlusOperator_PlusConstantOperationWorks) {
     Term term(+Constant(6));
@@ -2231,6 +2229,4 @@ TEST(TermTypesOperatorsTest, ValueIsSameWhenMultiplyingOneToPolynomial) {
     EXPECT_EQ(Term(Polynomial{Monomial(6, {{"x", 7}}), Monomial(5, {})}), term);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

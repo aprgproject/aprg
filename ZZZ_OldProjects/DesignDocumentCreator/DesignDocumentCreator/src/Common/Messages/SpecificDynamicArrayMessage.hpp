@@ -28,29 +28,29 @@ public:
         }
         return m_dynamicArrayPayload[position];
     }
-    alba::AlbaMemoryBuffer createBuffer() const { return createBufferFromStaticAndDynamicPart(); }
+    [[nodiscard]] alba::AlbaMemoryBuffer createBuffer() const { return createBufferFromStaticAndDynamicPart(); }
 
 private:
     void saveStaticAndDynamicPartFromBuffer(alba::AlbaMemoryBuffer const& payloadBufferReference) {
-        unsigned char const* readingBufferPointer(
+        auto const* readingBufferPointer(
             reinterpret_cast<unsigned char const*>(payloadBufferReference.getConstantBufferPointer()));
         m_staticPayload = *reinterpret_cast<SackType const*>(readingBufferPointer);
-        DynamicPartSackType const* copyPointerStart =
+        auto const* copyPointerStart =
             reinterpret_cast<DynamicPartSackType const*>(readingBufferPointer + calculateOffsetForDynamicPart());
-        DynamicPartSackType const* const copyPointerEnd =
+        auto const* const copyPointerEnd =
             reinterpret_cast<DynamicPartSackType const*>(readingBufferPointer + payloadBufferReference.getSize());
         for (DynamicPartSackType const* copyPointer = copyPointerStart; copyPointer < copyPointerEnd; copyPointer++) {
             m_dynamicArrayPayload.emplace_back(*copyPointer);
         }
     }
-    alba::AlbaMemoryBuffer createBufferFromStaticAndDynamicPart() const {
+    [[nodiscard]] alba::AlbaMemoryBuffer createBufferFromStaticAndDynamicPart() const {
         alba::AlbaMemoryBuffer buffer(&m_staticPayload, calculateOffsetForDynamicPart());
         for (DynamicPartSackType const& dynamicArrayContent : m_dynamicArrayPayload) {
             buffer.addData(&dynamicArrayContent, sizeof(DynamicPartSackType));
         }
         return buffer;
     }
-    unsigned int calculateOffsetForDynamicPart() const {
+    [[nodiscard]] unsigned int calculateOffsetForDynamicPart() const {
         return sizeof(SackType) + ((int)-1 * sizeof(DynamicPartSackType));
     }
     SackType m_staticPayload;

@@ -35,4 +35,4 @@ private:
     OneDimensionStatistics::Samples luma709Samples;
 };
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

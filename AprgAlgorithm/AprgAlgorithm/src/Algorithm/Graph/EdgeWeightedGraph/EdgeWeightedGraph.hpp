@@ -20,9 +20,9 @@ public:
 
     EdgeWeightedGraph() = default;
 
-    bool hasAUniqueMinimumSpanningTree() const { return hasNoDuplicateWeights(getSortedWeights()); }
+    [[nodiscard]] bool hasAUniqueMinimumSpanningTree() const { return hasNoDuplicateWeights(getSortedWeights()); }
 
-    Weight getWeight(Vertex const& vertex1, Vertex const& vertex2) const {
+    [[nodiscard]] Weight getWeight(Vertex const& vertex1, Vertex const& vertex2) const {
         Weight result{};
         auto it = m_edgeToWeightMap.find(createEdgeInMap(vertex1, vertex2));
         if (it != m_edgeToWeightMap.cend()) {
@@ -31,15 +31,15 @@ public:
         return result;
     }
 
-    Weights getSortedWeights() const {
+    [[nodiscard]] Weights getSortedWeights() const {
         Weights weights(getAllWeights());
         std::sort(weights.begin(), weights.end());
         return weights;
     }
 
-    EdgeToWeightMap const& getEdgeToWeightMap() const { return m_edgeToWeightMap; }
+    [[nodiscard]] EdgeToWeightMap const& getEdgeToWeightMap() const { return m_edgeToWeightMap; }
 
-    EdgesWithWeight getEdgesWithWeight() const {
+    [[nodiscard]] EdgesWithWeight getEdgesWithWeight() const {
         EdgesWithWeight result;
         result.reserve(m_edgeToWeightMap.size());
         std::transform(
@@ -63,11 +63,11 @@ public:
 
 private:
     using Graph::connect;  // prevents clang warning about hiding an overloaded virtual function
-    bool hasNoDuplicateWeights(Weights const& sortedWeights) const {
+    [[nodiscard]] bool hasNoDuplicateWeights(Weights const& sortedWeights) const {
         return std::adjacent_find(sortedWeights.cbegin(), sortedWeights.cend()) == sortedWeights.cend();
     }
 
-    Weights getAllWeights() const {
+    [[nodiscard]] Weights getAllWeights() const {
         Weights result;
         result.reserve(m_edgeToWeightMap.size());
         std::transform(
@@ -76,7 +76,7 @@ private:
         return result;
     }
 
-    Edge createEdgeInMap(Vertex const& vertex1, Vertex const& vertex2) const {
+    [[nodiscard]] Edge createEdgeInMap(Vertex const& vertex1, Vertex const& vertex2) const {
         if (this->DIRECTION_TYPE == GraphDirectionType::Undirected) {
             return createSortedEdge<Vertex, Edge>(vertex1, vertex2);
         }             return Edge(vertex1, vertex2);

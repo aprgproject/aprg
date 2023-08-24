@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(DerivativeVariableNameTest, ConstructionUsingParameterWorks) {
     DerivativeVariableName derivativeVariableName(2, "x", "y");
@@ -79,6 +77,4 @@ TEST(DerivativeVariableNameTest, GetNameInLeibnizNotationWorksWhenDifferentiatio
     EXPECT_EQ("d46[volume]/d[time]46", derivativeVariableName.getNameInLeibnizNotation());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

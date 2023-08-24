@@ -43,4 +43,4 @@ private:
     UnsignedInteger const m_maxSticksToTake;
 };
 
-}  // namespace alba
+}  // namespace alba::math

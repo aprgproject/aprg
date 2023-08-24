@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 using SatisfiabilityTerm = VariableTerms;
 using SatisfiabilityTerms = std::vector<VariableTerms>;
@@ -66,7 +64,5 @@ SatisfiabilityTerms getSatisfiabilityTerms(Expression const& expression) {
     }
     return result;
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

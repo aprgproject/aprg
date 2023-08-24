@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(OtherUtilitiesTest, IsFibonacciNumberWorks) {
     // Is zero really a fibonacci number? Yes! the definitions says so.
@@ -98,7 +96,5 @@ TEST(OtherUtilitiesTest, GetFibonacciNumbersBelowThisNumberWorks) {
     EXPECT_EQ((UnsignedIntegers{0U, 1U, 1U, 2U, 3U, 5U}), getFibonacciNumbersBelowThisNumber(8U));
     EXPECT_EQ((UnsignedIntegers{0U, 1U, 1U, 2U, 3U, 5U, 8U}), getFibonacciNumbersBelowThisNumber(9U));
 }
-
-}  // namespace math
 
 }  // namespace alba

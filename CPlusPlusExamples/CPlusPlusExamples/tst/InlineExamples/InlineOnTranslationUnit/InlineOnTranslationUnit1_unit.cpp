@@ -127,4 +127,4 @@ TEST(InlineOnTranslationUnit1Test, FunctionReturnValuesAreCorrect) {
     EXPECT_EQ(1, inlineFreeFunction());
 }
 
-}  // namespace alba
+}  // namespace alba::InlineOnTranslationUnits

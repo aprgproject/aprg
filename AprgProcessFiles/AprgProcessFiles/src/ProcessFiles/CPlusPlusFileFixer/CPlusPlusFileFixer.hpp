@@ -43,7 +43,7 @@ private:
     static bool isWindowsHeader(std::string const& header);
     static bool isGtestHeader(std::string const& header);
     static bool isQtHeader(std::string const& header);
-    bool isOtherLibraryHeaders(std::string const& header) const;
+    static [[nodiscard]] bool isOtherLibraryHeaders(std::string const& header) ;
 
     std::vector<std::string> m_linesAfterTheHeader;
     std::vector<std::string> m_headerListFromAngleBrackets;

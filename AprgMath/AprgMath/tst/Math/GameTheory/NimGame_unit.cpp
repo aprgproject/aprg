@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(NimGameTest, GetGameStateWorks) {
     EXPECT_EQ(GameState::Winning, NimGame::getGameState({10U, 12U, 5U}));
@@ -53,7 +51,5 @@ TEST(NimGameTest, GetOptimalNextStateWorks) {
     EXPECT_EQ((NimState{0U, 0U, 0U}), NimGame::getOptimalNextState({0U, 0U, 1U}));
     EXPECT_EQ((NimState{0U, 0U, 0U}), NimGame::getOptimalNextState({0U, 0U, 0U}));
 }
-
-}  // namespace math
 
 }  // namespace alba

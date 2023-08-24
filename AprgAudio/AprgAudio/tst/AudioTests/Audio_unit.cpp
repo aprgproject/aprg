@@ -341,4 +341,4 @@ TEST(WritingTest, DISABLED_WriteSineToneToManyFormats) {
     }
 }
 
-}  // namespace alba
+}  // namespace alba::AprgAudio

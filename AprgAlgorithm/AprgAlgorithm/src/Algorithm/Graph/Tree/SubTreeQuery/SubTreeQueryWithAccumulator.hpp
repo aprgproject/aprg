@@ -44,4 +44,4 @@ private:
     RangeQuery m_rangeQuery;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

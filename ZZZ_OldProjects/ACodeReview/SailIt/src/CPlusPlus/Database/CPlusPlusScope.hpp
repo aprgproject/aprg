@@ -16,13 +16,13 @@ enum class CPlusPlusScopeType { Class, Global, Normal, Namespace, TemplateClass 
 class CPlusPlusScope {
 public:
     CPlusPlusScope(CPlusPlusScopeType const scopeType, string const& name);
-    bool isClass() const;
-    bool isSpecializedScope() const;
-    bool isGlobal() const;
-    bool isNamespace() const;
-    bool isTemplateClass() const;
-    string getName() const;
-    string getAliasForThisScope(string const& name) const;
+    [[nodiscard]] bool isClass() const;
+    [[nodiscard]] bool isSpecializedScope() const;
+    [[nodiscard]] bool isGlobal() const;
+    [[nodiscard]] bool isNamespace() const;
+    [[nodiscard]] bool isTemplateClass() const;
+    [[nodiscard]] string getName() const;
+    [[nodiscard]] string getAliasForThisScope(string const& name) const;
 
     VectorOfStrings& getClassNamesReference();
     VectorOfStrings& getFunctionNamesReference();

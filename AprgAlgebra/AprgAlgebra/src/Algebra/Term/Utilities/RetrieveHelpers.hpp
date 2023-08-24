@@ -24,4 +24,4 @@ Terms retrieveSubTerms(Term const& term);
 TermsWithDetails retrieveTermsWithDetailsThatSatisfiesCondition(
     TermsWithDetails const& termsWithDetails, ConditionFunctionForTermsWithDetails const& conditionFunction);
 
-}  // namespace alba
+}  // namespace alba::algebra

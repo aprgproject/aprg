@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(ConstantTest, ConstantsAreConstructedCorrectly) {
     Constant constant1;
@@ -85,7 +83,5 @@ TEST(ConstantTest, OutputStreamOperatorWorks) {
 
     EXPECT_EQ("[false],[true],[false]", ss.str());
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

@@ -6,15 +6,13 @@
 #include <string>
 #include <unordered_map>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever : public BaseRetriever {
 public:
     using VariableNameToTermMap = std::unordered_map<std::string, Term>;
 
-    SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever(stringHelper::strings const& variableNames);
+    explicit SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever(stringHelper::strings const& variableNames);
 
     VariableNameToTermMap const& getVariableNameToTermMap() const;
     Term const& getTermWithMultipleVariableNames() const;
@@ -34,6 +32,4 @@ private:
     Term m_remainingTerm;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

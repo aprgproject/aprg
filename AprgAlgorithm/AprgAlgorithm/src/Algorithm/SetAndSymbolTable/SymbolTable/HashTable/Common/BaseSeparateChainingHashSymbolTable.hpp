@@ -22,4 +22,4 @@ public:
                   // functions)
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

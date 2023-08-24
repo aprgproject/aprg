@@ -183,4 +183,4 @@ double getDerangementsProbability(UnsignedInteger const n) {
     return static_cast<double>(getNumberOfDerangements(n)) / getNumberOfPermutations(n, n);
 }
 
-}  // namespace alba
+}  // namespace alba::math

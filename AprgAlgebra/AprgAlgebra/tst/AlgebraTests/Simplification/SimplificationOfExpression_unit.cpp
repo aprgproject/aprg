@@ -12,11 +12,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Simplification {
+namespace alba::algebra::Simplification {
 
 TEST(SimplificationOfExpressionTest, SimplifyWorksOnSimplifyingInnerTerms) {
     Expression monomialRaiseToMonomial(
@@ -941,8 +937,4 @@ TEST(TermsOverTermsTest, SimplifyBySimplifyingToFactorsWithoutDoubleValueWorks) 
     EXPECT_EQ(expressionToExpect, expressionToVerify);
 }
 
-}  // namespace Simplification
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Simplification

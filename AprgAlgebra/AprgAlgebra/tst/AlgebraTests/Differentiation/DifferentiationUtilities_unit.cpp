@@ -14,9 +14,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(DifferentiationUtilitiesTest, IsTheFirstFundamentalTheoremOfCalculusTrueWorks) {
     Term termToTest1(Monomial(1, {{"x", 1}}));
@@ -300,6 +298,4 @@ TEST(DifferentiationUtilitiesTest, SimplifyDerivativeByDefinitionWorks) {
     EXPECT_EQ(stringToExpect, convertToString(termToTest));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

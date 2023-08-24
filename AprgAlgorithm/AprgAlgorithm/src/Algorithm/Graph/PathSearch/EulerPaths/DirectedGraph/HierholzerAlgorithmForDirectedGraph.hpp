@@ -19,7 +19,7 @@ public:
     using Path = typename GraphTypes<Vertex>::Path;
     using VertexToAdjacencyVerticesMap = std::map<Vertex, Vertices>;
 
-    HierholzerAlgorithmForDirectedGraph(BaseDirectedGraphWithVertex const& graph)
+    explicit HierholzerAlgorithmForDirectedGraph(BaseDirectedGraphWithVertex const& graph)
         : BaseClass(graph), b_graph(BaseClass::b_graph) {}
 
 private:
@@ -47,7 +47,7 @@ private:
         std::reverse(result.begin(), result.end());
     }
 
-    VertexToAdjacencyVerticesMap createVertexToAdjacentVerticesMap() const {
+    [[nodiscard]] VertexToAdjacencyVerticesMap createVertexToAdjacentVerticesMap() const {
         VertexToAdjacencyVerticesMap result;
         Vertices allVertices(b_graph.getVertices());
         for (Vertex const& vertex : allVertices) {
@@ -59,4 +59,4 @@ private:
     BaseDirectedGraphWithVertex const& b_graph;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

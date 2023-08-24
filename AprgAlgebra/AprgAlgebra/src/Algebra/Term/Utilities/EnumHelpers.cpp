@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 int getAssociationPriority(TermAssociationType const association) {
     int result(0);
@@ -117,6 +115,4 @@ string getEnumShortString(OperatorLevel const operatorLevel) {
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

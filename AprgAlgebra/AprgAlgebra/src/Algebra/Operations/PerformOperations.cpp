@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Term performOperation(Operator const& operatorTerm, Term const& term) {
     Term newTerm;
@@ -186,6 +184,4 @@ Term performRaiseToPower(Term const& term1, Term const& term2) {
     TERM_BINARY_OPERATION_MACRO(^)
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

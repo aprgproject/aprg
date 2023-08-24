@@ -9,9 +9,7 @@ using namespace std;
 
 #define APRG_BITMAP_FILTERS_BITMAP_DIRECTORY APRG_DIR R"(\AprgBitmapFilters\FilesForTests\SampleBitmaps\)"
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 TEST(PenCirclesDrawerTest, DrawACircle) {
     AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
@@ -144,7 +142,5 @@ TEST(PenCirclesDrawerTest, DrawMultipleCirclesWithACommonConnection) {
     drawer.draw();
     bitmapFilters.saveSnippetIntoFileInTheSameDirectory(outputSnippet, "DrawMultipleCirclesWithACommonConnection.bmp");
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

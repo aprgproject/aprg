@@ -7,9 +7,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool isAlmostEqualForLimitIteration(AlbaNumber const& value1, AlbaNumber const& value2);
 bool isAlmostEqualForLimitChecking(AlbaNumber const& value1, AlbaNumber const& value2);
@@ -70,6 +68,4 @@ Term getObliqueAsymptote(Term const& term);
 bool continueToDifferentiateForLhopitalsRule(
     Term const& numerator, Term const& denominator, Term const& numeratorValue, Term const& denominatorValue);
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

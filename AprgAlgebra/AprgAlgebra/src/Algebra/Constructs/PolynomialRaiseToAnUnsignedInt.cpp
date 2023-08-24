@@ -9,12 +9,10 @@ using namespace alba::algebra::Factorization;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 PolynomialRaiseToAnUnsignedInt::PolynomialRaiseToAnUnsignedInt(Polynomial const& polynomial)
-    : m_base(polynomial), m_exponent(1) {
+    : m_base(polynomial) {
     PolynomialToNumberMap factorsToExponent;
     Monomial commonMonomialInBase(1, {});
     factorizeAndUpdateCommonMonomialAndFactorsToExponent(polynomial, factorsToExponent, commonMonomialInBase);
@@ -80,6 +78,4 @@ Polynomial PolynomialRaiseToAnUnsignedInt::getRemainingBase(
     return result;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

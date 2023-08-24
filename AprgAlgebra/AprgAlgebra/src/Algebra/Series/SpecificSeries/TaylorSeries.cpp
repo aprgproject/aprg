@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TaylorSeries::TaylorSeries(Term const& formulaForTaylorSeries, string const& variableName)
     : m_formulaForTaylorSeries(formulaForTaylorSeries), m_variableName(variableName) {}
@@ -25,6 +23,4 @@ Term TaylorSeries::getValueAtIndex(int const index, Term const& startingValue) c
 
 Term TaylorSeries::getValueForMaclaurinSeriesAtIndex(int const index) const { return getValueAtIndex(index, 0); }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

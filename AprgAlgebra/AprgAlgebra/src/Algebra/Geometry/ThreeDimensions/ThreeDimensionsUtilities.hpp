@@ -2,11 +2,7 @@
 
 #include <Algebra/Equation/Equation.hpp>
 
-namespace alba {
-
-namespace algebra {
-
-namespace ThreeDimensions {
+namespace alba::algebra::ThreeDimensions {
 
 Equation getEllipsoidEquation();
 Equation getEllipticConeEquation();
@@ -18,8 +14,4 @@ Equation getPlaneEquation();
 Equation getPlaneEquationWithPointCoordinates();
 Equation getSphereEquation();
 
-}  // namespace ThreeDimensions
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::ThreeDimensions

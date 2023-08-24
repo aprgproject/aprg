@@ -17,9 +17,7 @@ namespace alba {
 
 StartupLogAnalyzer::StartupLogAnalyzer()
     : m_btsLogPathHandler(""),
-      m_firstLogTime(),
-      m_processingAndMessagingTotalDelay(0),
-      m_processingAndMessagingTotalDelaysDescriptionString(),
+      
       m_firstDspToBecomeAvailableTimeDescriptionString("First DSP to become available time: "),
       m_allDspsBecomeAvailableTimeDescriptionString("All DSPs become available time: "),
       m_settingSrioRoutesTimeDescriptionString("Setting SRIO routes time: "),
@@ -481,7 +479,7 @@ void StartupLogAnalyzer::analyzeStartupDelays(string const& lineInLogs, BtsLogTi
     }
 }
 
-double StartupLogAnalyzer::getTotalSeconds(BtsLogTime const& beforeTime, BtsLogTime const& afterTime) const {
+double StartupLogAnalyzer::getTotalSeconds(BtsLogTime const& beforeTime, BtsLogTime const& afterTime) {
     BtsLogTime latency = afterTime - beforeTime;
     return getTotalSeconds(latency);
 }

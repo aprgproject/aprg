@@ -3,9 +3,7 @@
 #include <Algebra/Equation/Equation.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class BaseMutator {
 public:
@@ -21,6 +19,4 @@ public:
     virtual void mutateFunction(Function &functionObject);
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(DualOperationMutatorTest, MutateTermWorks) {
     DualOperationMutator mutator;
@@ -57,7 +55,5 @@ TEST(DualOperationMutatorTest, MutateExpressionWorks) {
     Expression expressionToExpect(createExpressionIfPossible({subExpression, "&", "c"}));
     EXPECT_EQ(expressionToExpect, expression);
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

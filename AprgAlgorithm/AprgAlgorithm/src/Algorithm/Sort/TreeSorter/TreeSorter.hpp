@@ -19,7 +19,7 @@ public:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // -> Tree sort (binary tree sort):
 // ---> This build binary tree, then traverse it to create sorted list

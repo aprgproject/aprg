@@ -14,11 +14,11 @@ public:
 
     UnionFindUsingMap() = default;
 
-    bool isConnected(Object const& object1, Object const& object2) const override {
+    [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
         return getRoot(object1) == getRoot(object2);
     }
 
-    Object getRoot(Object const& object) const override {
+    [[nodiscard]] Object getRoot(Object const& object) const override {
         // Is it log(N) * log(N) * log(N)...?
         // Is it log(log(log(N)))...? if its then its log*(N)
         Object currentObject(object);
@@ -42,7 +42,7 @@ public:
         m_connectionMap[object2] = root;
     }
 
-    ConnectionMap const& getConnectionMap() const { return m_connectionMap; }
+    [[nodiscard]] ConnectionMap const& getConnectionMap() const { return m_connectionMap; }
 
 private:
     void initializeToConnectionMapIfNeeded(Object const& object) { m_connectionMap.emplace(object, object); }

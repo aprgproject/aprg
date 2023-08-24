@@ -6,9 +6,7 @@
 using namespace alba::algorithm;
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TwoSatisfiabilityUsingGraphs::TwoSatisfiabilityUsingGraphs(SatisfiabilityTerms const& satTerms)
     : m_variableNames(createVariableNamesFromSatTerms(satTerms)),
@@ -69,7 +67,5 @@ TwoSatisfiabilityUsingGraphs::DirectedGraph TwoSatisfiabilityUsingGraphs::create
     }
     return result;
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

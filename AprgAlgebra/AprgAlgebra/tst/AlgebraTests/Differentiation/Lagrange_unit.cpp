@@ -6,9 +6,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(LagrangeTest, GetLagrangeMultipliersWorks) {
     // Let x units be the length of the base of a box, y units be the width of the base of the box, z units be the depth
@@ -46,6 +44,4 @@ TEST(LagrangeTest, GetLagrangeMultipliersWorksUsingExample1) {
     EXPECT_EQ(stringToExpect2, convertToString(langrangeMultipliers[1]));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

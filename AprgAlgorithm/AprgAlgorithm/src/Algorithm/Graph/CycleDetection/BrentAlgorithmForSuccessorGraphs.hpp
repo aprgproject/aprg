@@ -15,9 +15,9 @@ public:
     explicit BrentAlgorithmForSuccessorGraphs(BaseDirectedGraphWithVertex const& graph)
         : m_graph(graph), m_walker(graph) {}
 
-    bool hasACycle() const { return m_hasACycle; }
+    [[nodiscard]] bool hasACycle() const { return m_hasACycle; }
 
-    Path getCycle() const { return m_cyclePath; }
+    [[nodiscard]] Path getCycle() const { return m_cyclePath; }
 
     void reinitializeStartingFrom(Vertex const& startOfGraph) {
         int cycleLength(getCycleLength(startOfGraph));
@@ -73,7 +73,7 @@ private:
         m_cyclePath.emplace_back(vertex);  // append last/first vertex to demonstrate a cycle
     }
 
-    bool isAtTheEnd(Vertex const& vertex) const { return m_walker.isAtTheEnd(vertex); }
+    [[nodiscard]] bool isAtTheEnd(Vertex const& vertex) const { return m_walker.isAtTheEnd(vertex); }
 
     Vertex walkOne(Vertex const& vertex) { return m_walker.walk(vertex, 1); }
 

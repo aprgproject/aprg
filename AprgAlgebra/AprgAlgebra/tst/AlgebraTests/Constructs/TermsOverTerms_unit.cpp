@@ -11,9 +11,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(TermsOverTermsTest, ConstructionWorks) {
     TermWithDetails termWithDetails(Term(10), TermAssociationType::Positive);
@@ -572,6 +570,4 @@ TEST(TermsOverTermsTest, SimplifyWorksOnDistributingTerms) {
     EXPECT_EQ(expectedDenominator1, denominatorsToVerify[0]);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

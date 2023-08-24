@@ -10,9 +10,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(DifferentiationTest, DifferentiateWorksForTerm) {
     Differentiation differentiationForX("x");
@@ -504,6 +502,4 @@ TEST(DifferentiationTest, DifferentiateWorksWithSquareRootOfAPolynomial) {
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

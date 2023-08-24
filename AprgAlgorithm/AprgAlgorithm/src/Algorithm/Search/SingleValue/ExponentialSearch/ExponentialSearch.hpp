@@ -14,7 +14,7 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    ExponentialSearch(Values const& values)  // values can be unsorted
+    explicit ExponentialSearch(Values const& values)  // values can be unsorted
         : m_sortedValues(values) {}
 
     Index getIndexOfValue(Value const& target) {
@@ -34,7 +34,7 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // The name of this searching algorithm may be misleading as it works in O(Log n) time.
 // The name comes from the way it searches an element.

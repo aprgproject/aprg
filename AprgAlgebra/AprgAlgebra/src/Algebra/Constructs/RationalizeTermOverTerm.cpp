@@ -12,9 +12,7 @@
 using namespace alba::algebra::Simplification;
 using namespace alba::mathHelper;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 RationalizeTermOverTerm::RationalizeTermOverTerm() {}
 
@@ -207,6 +205,4 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpressionWhenEx
     rationalizedTerm = createTermWithAdditionAndSubtractionTermsWithDetails(rationalizedTermsWithDetails);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

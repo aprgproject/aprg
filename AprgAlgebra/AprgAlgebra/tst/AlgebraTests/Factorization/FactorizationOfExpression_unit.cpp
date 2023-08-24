@@ -10,11 +10,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksOnMultiplicationAndDivisionExpression) {
     Polynomial polynomial({Monomial(1, {{"x", 2}}), Monomial(-4, {})});
@@ -134,8 +130,4 @@ TEST(FactorizationOfExpressionTest, FactorizeAnExpressionWorksWhenSomeAddendsAre
     EXPECT_EQ(stringToExpect1, convertToString(termsToVerify[0]));
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

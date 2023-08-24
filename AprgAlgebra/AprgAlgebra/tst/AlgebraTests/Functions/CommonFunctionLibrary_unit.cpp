@@ -11,11 +11,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Functions {
+namespace alba::algebra::Functions {
 
 TEST(CommonFunctionLibraryTest, AbsoluteValueFunctionWorks) {
     Function absoluteValueFunction(abs(-5));
@@ -265,8 +261,4 @@ TEST(CommonFunctionLibraryTest, SineHarmonicFunctionWorks) {
     EXPECT_EQ(AlbaNumber(4), sineFunction.performFunctionAndReturnResultIfPossible());
 }
 
-}  // namespace Functions
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Functions

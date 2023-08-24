@@ -33,7 +33,7 @@ public:
         }
     };
 
-    Points getIntersectingPoints() const {
+    [[nodiscard]] Points getIntersectingPoints() const {
         // sweep line algorithm
         Points result;
         std::set<Unit> yCheckInterval;
@@ -70,7 +70,7 @@ private:
     std::multiset<Event> m_events;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Given a set of n line segments, each of them being either horizontal or vertical,
 // consider the problem of counting the total number of intersection points.

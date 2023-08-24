@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 Expression createExpressionInAnExpression(Expression const& expression) { return Expression(Term(expression)); }
 
@@ -62,7 +60,5 @@ Term createTermWithOrOperationWrappedTerms(WrappedTerms const& wrappedTerms) {
     }
     return result;
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

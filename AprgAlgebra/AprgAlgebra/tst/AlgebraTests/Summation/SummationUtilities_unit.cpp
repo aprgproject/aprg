@@ -5,9 +5,7 @@
 
 using namespace alba::stringHelper;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(SummationUtilitiesTest, GetSummationOfArithmeticSeriesWorks) {
     Term term(getSummationOfArithmeticSeries("n"));
@@ -51,6 +49,4 @@ TEST(SummationUtilitiesTest, GetSummationOfPowersOfTwoWorks) {
     EXPECT_EQ("(-1+(2^(1[n] + 1)))", convertToString(term));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

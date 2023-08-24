@@ -20,9 +20,9 @@ public:
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
     using GraphToManipulate = UndirectedGraphWithListOfEdges<Vertex>;
 
-    FleuryAlgorithm(BaseUndirectedGraphWithVertex const& graph) : BaseClass(graph), b_graph(BaseClass::m_graph) {}
+    explicit FleuryAlgorithm(BaseUndirectedGraphWithVertex const& graph) : BaseClass(graph), b_graph(BaseClass::m_graph) {}
 
-    Path getEulerCycle() const override {
+    [[nodiscard]] Path getEulerCycle() const override {
         // Fleury’s Algorithm
         // 1. Start at any vertex if finding an Euler circuit. If finding an Euler path, start at one of the two
         // vertices with odd degree.
@@ -40,7 +40,7 @@ public:
         return result;
     }
 
-    Path getEulerPath() const override {
+    [[nodiscard]] Path getEulerPath() const override {
         Path result;
         Edges originalEdges(b_graph.getEdges());
         if (!originalEdges.empty()) {
@@ -51,7 +51,7 @@ public:
     }
 
 private:
-    bool isStillConnectedAfterRemovingThisEdge(GraphToManipulate const& graph, Edge const& edgeToDelete) const {
+    [[nodiscard]] bool isStillConnectedAfterRemovingThisEdge(GraphToManipulate const& graph, Edge const& edgeToDelete) const {
         // THIS IS COSTLY!
         GraphToManipulate graphWithDeletedEdge(graph);
         graphWithDeletedEdge.disconnect(edgeToDelete.first, edgeToDelete.second);
@@ -60,7 +60,7 @@ private:
                && connectedComponents.getComponentId(edgeToDelete.second) > 0;  // destination is still connected
     }
 
-    GraphToManipulate createGraphToManipulate(Edges const& originalEdges) const {
+    [[nodiscard]] GraphToManipulate createGraphToManipulate(Edges const& originalEdges) const {
         GraphToManipulate graphToManipulate;
         for (Edge const& originalEdge : originalEdges) {
             graphToManipulate.connect(originalEdge.first, originalEdge.second);
@@ -111,7 +111,7 @@ private:
     BaseUndirectedGraphWithVertex const& b_graph;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Fleury's algorithm is an elegant but inefficient algorithm that dates to 1883.
 

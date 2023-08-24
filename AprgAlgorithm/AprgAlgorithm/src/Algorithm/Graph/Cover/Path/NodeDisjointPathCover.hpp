@@ -33,12 +33,12 @@ public:
 
     explicit NodeDisjointPathCover(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
 
-    Paths getNodeDisjointPathCover(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
+    [[nodiscard]] Paths getNodeDisjointPathCover(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         Edges edges(getEdgesOfNodeDisjointPathCover(newSourceVertex, newSinkVertex));
         return getNodeDisjointPathCover(edges);
     }
 
-    Edges getEdgesOfNodeDisjointPathCover(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
+    [[nodiscard]] Edges getEdgesOfNodeDisjointPathCover(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         // A path cover is a set of paths in a graph such that each node of the graph belongs to at least one path.
         // It turns out that in directed, acyclic graphs,
         // we can reduce the problem of finding a minimum path cover to the problem of finding a maximum flow in another
@@ -52,7 +52,7 @@ public:
     }
 
 private:
-    Paths getNodeDisjointPathCover(Edges const& edges) const {
+    [[nodiscard]] Paths getNodeDisjointPathCover(Edges const& edges) const {
         Paths result;
         DequeOfEdges detectedEdges(edges.cbegin(), edges.cend());
         VectorOfDequeOfVertices paths;
@@ -96,7 +96,7 @@ private:
         return result;
     }
 
-    Edges getEdgesOfNodeDisjointPathCoverUsingFordFulkerson(
+    [[nodiscard]] Edges getEdgesOfNodeDisjointPathCoverUsingFordFulkerson(
         Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         Edges result;
         FordFulkerson fordFulkerson(getFlowNetwork(m_graph, newSourceVertex, newSinkVertex));
@@ -111,7 +111,7 @@ private:
         return result;
     }
 
-    FlowNetwork getFlowNetwork(
+    [[nodiscard]] FlowNetwork getFlowNetwork(
         BaseDirectedGraphWithVertex const& graph, Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         // We can find a minimum node-disjoint path cover by constructing a matching graph
         // where each node of the original graph is represented by two nodes: a left node and a right node.

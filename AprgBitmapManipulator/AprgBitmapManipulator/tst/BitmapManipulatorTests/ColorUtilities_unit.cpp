@@ -5,9 +5,7 @@
 using namespace alba::AprgBitmap::ColorUtilities;
 using namespace std;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 TEST(ColorUtilitiesTest, CalculateColorPercentagesDataWorks) {
     ColorPercentagesData data3(calculateColorPercentagesData(0xB2C368));
@@ -209,7 +207,5 @@ TEST(ColorUtilitiesTest, ExtractBlueWorks) {
     EXPECT_EQ(0x0U, extractBlue(0x0));
     EXPECT_EQ(0x57U, extractBlue(0x2E8B57));
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

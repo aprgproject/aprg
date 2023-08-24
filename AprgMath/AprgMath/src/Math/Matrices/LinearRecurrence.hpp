@@ -2,9 +2,7 @@
 
 #include <Math/Types.hpp>
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 // A linear recurrence is a function f (n) whose initial values are f (0), f (1),..., f (k-1)
 // and larger values are calculated recursively using the formula:
@@ -15,6 +13,4 @@ UnsignedIntegerPair getNextFibonacciNumbersUsingLinearRecurrence(UnsignedInteger
 UnsignedIntegerPair getNextNumberOfDerangementsUsingLinearRecurrence(
     UnsignedInteger const nthValue, UnsignedIntegerPair const integerPair);
 
-}  // namespace math
-
-}  // namespace alba
+}  // namespace alba::math

@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms(
     initializer_list<VariableTermPair> const& variablesWithTerms) {
@@ -98,7 +96,5 @@ void SubstitutionOfVariablesToTerms::performSubstitutionForWrappedTerms(WrappedT
         term = performSubstitutionTo(term);
     }
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

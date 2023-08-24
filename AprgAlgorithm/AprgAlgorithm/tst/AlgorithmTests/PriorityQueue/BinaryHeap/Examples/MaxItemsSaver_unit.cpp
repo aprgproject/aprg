@@ -15,7 +15,7 @@ public:
     using MinPriorityQueue = BinaryHeapPriorityQueue<Object, greater>;
     using Objects = vector<Object>;
 
-    MaxItemsSaver(int const numberOfItemsToSave) : m_numberOfItemsToSave(numberOfItemsToSave) {}
+    explicit MaxItemsSaver(int const numberOfItemsToSave) : m_numberOfItemsToSave(numberOfItemsToSave) {}
 
     void save(Object const& object) {
         m_minimumPriorityQueue.insert(object);

@@ -20,16 +20,16 @@ class CPlusPlusFunction {
 public:
     CPlusPlusFunction();
     void printSignatures() const;
-    bool isFunctionSignatureExist(CPlusPlusFunctionSignature const& cPlusPlusFunctionSignature) const;
-    bool isFunctionSignatureExistBasedFromFunctionCall(
+    [[nodiscard]] bool isFunctionSignatureExist(CPlusPlusFunctionSignature const& cPlusPlusFunctionSignature) const;
+    [[nodiscard]] bool isFunctionSignatureExistBasedFromFunctionCall(
         CPlusPlusFunctionSignature const& cPlusPlusFunctionSignature) const;
-    bool isFunctionSignatureExistAndNamesDoesNotMatch(
+    [[nodiscard]] bool isFunctionSignatureExistAndNamesDoesNotMatch(
         CPlusPlusFunctionSignature const& cPlusPlusFunctionSignature) const;
     void addFunctionSignature(CPlusPlusFunctionSignature const& cPlusPlusFunctionSignature);
     void replaceTemplateParameters(
         CPlusPlusClassTemplateSignature& templateSignature, CPlusPlusClassTemplateSignature& templateInstantiation);
     CPlusPlusFunctionSignatures& getFunctionSignaturesReference();
-    CPlusPlusType getReturnTypeWithSignature(CPlusPlusFunctionSignature const& cPlusPlusFunctionSignature) const;
+    [[nodiscard]] CPlusPlusType getReturnTypeWithSignature(CPlusPlusFunctionSignature const& cPlusPlusFunctionSignature) const;
 
 private:
     CPlusPlusFunctionSignatures m_signatures;

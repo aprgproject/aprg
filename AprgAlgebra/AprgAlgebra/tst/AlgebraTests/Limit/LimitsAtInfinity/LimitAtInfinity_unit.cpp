@@ -11,9 +11,7 @@ using namespace alba::AlbaNumberConstants;
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(LimitsAtInfinityTest, XWorksAndSimplifiesToZero) {
     LimitsAtInfinity limits("x", "x");
@@ -114,6 +112,4 @@ TEST(LimitsAtInfinityTest, ExpressionWithTrigonometricFunctionsWorks) {
     EXPECT_TRUE(isNan(limits.getValueAtInfinity(ALBA_NUMBER_POSITIVE_INFINITY)));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

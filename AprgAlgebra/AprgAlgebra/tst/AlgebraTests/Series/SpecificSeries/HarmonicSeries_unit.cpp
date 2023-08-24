@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(HarmonicSeriesTest, IsSummationModelValidWorks) {
     HarmonicSeries series;
@@ -23,6 +21,4 @@ TEST(HarmonicSeriesTest, GetValueAtIndexWorks) {
     EXPECT_EQ(Term(AlbaNumber::createFraction(25, 12)), series.getValueAtIndex(3));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

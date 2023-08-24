@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 namespace {
 
@@ -149,7 +147,5 @@ Term operator|(Term const& term, Constant const& constant) { return performOr(te
 Term operator|(Term const& term, VariableTerm const& variableTerm) { return performOr(term, variableTerm); }
 
 Term operator|(Term const& term, Expression const& expression) { return performOr(term, expression); }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

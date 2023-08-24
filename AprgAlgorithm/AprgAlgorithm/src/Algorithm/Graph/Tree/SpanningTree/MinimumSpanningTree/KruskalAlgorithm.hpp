@@ -23,7 +23,7 @@ public:
         searchForMinimumSpanningTree();
     }
 
-    Edges const& getMinimumSpanningTreeEdges() const { return m_minimumSpanningTreeEdges; }
+    [[nodiscard]] Edges const& getMinimumSpanningTreeEdges() const { return m_minimumSpanningTreeEdges; }
 
 private:
     void searchForMinimumSpanningTree() {
@@ -100,4 +100,4 @@ private:
 // Therefore, the overall time complexity is O(ElogE) or O(ElogV)
 // NOTE: This is roughly the same as Prim's algorithm.
 
-}  // namespace alba
+}  // namespace alba::algorithm

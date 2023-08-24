@@ -3,23 +3,21 @@
 #include <Algebra/Series/GeneralSeries/SeriesBasedOnFormula.hpp>
 #include <Algebra/Summation/Summation.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class SeriesBasedOnSummation : public SeriesBasedOnFormula {
 public:
     SeriesBasedOnSummation(Term const& formulaForEachTermInSummation, std::string const& variableName);
 
-    bool isSummationModelValid() const;
-    bool isConvergent() const override;
-    Term getValueAtIndex(int const index) const override;
+    [[nodiscard]] bool isSummationModelValid() const;
+    [[nodiscard]] bool isConvergent() const override;
+    [[nodiscard]] Term getValueAtIndex(int const index) const override;
 
-    bool isAbsolutelyConvergent() const;
-    bool isConditionallyConvergent() const;
+    [[nodiscard]] bool isAbsolutelyConvergent() const;
+    [[nodiscard]] bool isConditionallyConvergent() const;
 
-    Term getTermValueAtIndex(int const index) const;
-    Term getFormulaForEachTermInSummation() const;
+    [[nodiscard]] Term getTermValueAtIndex(int const index) const;
+    [[nodiscard]] Term getFormulaForEachTermInSummation() const;
 
 protected:
     static Summation getSummation(Term const& formulaForEachTermInSummation, std::string const& variableName);
@@ -30,6 +28,4 @@ protected:
     bool m_isSummationModelValid;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -6,11 +6,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace ThreeDimensions {
+namespace alba::algebra::ThreeDimensions {
 
 TEST(ThreeDimensionsUtilitiesTest, GetEllipsoidEquationWorks) {
     Equation equationToVerify(getEllipsoidEquation());
@@ -81,8 +77,4 @@ TEST(ThreeDimensionsUtilitiesTest, GetSphereEquationWorks) {
     EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
 }
 
-}  // namespace ThreeDimensions
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::ThreeDimensions

@@ -2,9 +2,7 @@
 
 #include <Algebra/Series/GeneralSeries/SeriesBasedOnFormula.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class GeometricSeries : public SeriesBasedOnFormula {
 public:
@@ -23,6 +21,4 @@ protected:
         int const nthIndex2);
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

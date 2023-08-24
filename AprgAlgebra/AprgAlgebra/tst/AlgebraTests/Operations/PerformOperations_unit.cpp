@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(PerformOperationsTest, PerformOperationUnaryOperationWorks) {
     Term termToVerify1(performOperation(Operator("+"), 215));
@@ -30,6 +28,4 @@ TEST(PerformOperationsTest, PerformOperationBinaryOperationWorks) {
     EXPECT_EQ(Term(625), termToVerify5);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

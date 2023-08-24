@@ -2,9 +2,7 @@
 
 #include <Algebra/Equation/Equation.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Term getEToTheX(Term const& term);
 Term getEToTheNegativeX(Term const& term);
@@ -32,6 +30,4 @@ Equation getHyperbolicArcCosineDefinition(Term const& term);
 Equation getHyperbolicArcTangentDefinition(Term const& term);
 Equation getHyperbolicArcCotangentDefinition(Term const& term);
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

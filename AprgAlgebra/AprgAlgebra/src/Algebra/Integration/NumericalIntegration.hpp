@@ -5,9 +5,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Term getAnApproximateOfDefiniteIntegralUsingTrapezoidalRule(
     Term const& term, DetailsForDefiniteIntegralWithValues const& integralDetails, int const numberOfSamples);
@@ -33,6 +31,4 @@ AlbaNumber getAnApproximateOfNaturalLogarithmUsingTrapezoidRule(AlbaNumber const
 
 AlbaNumber getAnApproximateOfNaturalLogarithmUsingSimpsonRule(AlbaNumber const& input, int const numberOfSamples);
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

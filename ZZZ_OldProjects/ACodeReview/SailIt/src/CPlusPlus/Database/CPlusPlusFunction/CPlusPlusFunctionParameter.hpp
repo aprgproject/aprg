@@ -10,10 +10,10 @@ class CPlusPlusFunctionParameter {
 public:
     explicit CPlusPlusFunctionParameter(CPlusPlusType const& type, string const& name);
     bool operator==(CPlusPlusFunctionParameter const& cPlusPlusFunctionParameter) const;
-    bool isEqualBasedFromFunctionCall(CPlusPlusFunctionParameter const& cPlusPlusFunctionParameter) const;
-    bool areTheNamesEqual(CPlusPlusFunctionParameter const& cPlusPlusFunctionParameter) const;
-    string getName() const;
-    CPlusPlusType getType() const;
+    [[nodiscard]] bool isEqualBasedFromFunctionCall(CPlusPlusFunctionParameter const& cPlusPlusFunctionParameter) const;
+    [[nodiscard]] bool areTheNamesEqual(CPlusPlusFunctionParameter const& cPlusPlusFunctionParameter) const;
+    [[nodiscard]] string getName() const;
+    [[nodiscard]] CPlusPlusType getType() const;
     void set(CPlusPlusType const& type, string const& name);
 
 private:

@@ -12,4 +12,4 @@ enum class PieceType {
     King = 6,
 };
 
-}  // namespace alba::chess::chess::chess::chess
+}  // namespace alba::chess

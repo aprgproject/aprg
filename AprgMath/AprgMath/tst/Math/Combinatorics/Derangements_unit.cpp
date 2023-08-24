@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(DerangementsTest, GetNumberOfDerangementsWorks) {
     EXPECT_EQ(0U, getNumberOfDerangements(0U));
@@ -42,7 +40,5 @@ TEST(DerangementsTest, GetDerangementsProbabilityWorks) {
     EXPECT_DOUBLE_EQ(0.36785714285714288, getDerangementsProbability(7U));
     // This approaches 1/e. Please check approximation formula for more information.
 }
-
-}  // namespace math
 
 }  // namespace alba

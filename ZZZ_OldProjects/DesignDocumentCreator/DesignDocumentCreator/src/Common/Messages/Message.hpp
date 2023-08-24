@@ -20,10 +20,10 @@ public:
           m_sender(sender),
           m_receiver(receiver),
           m_messageNameInString(StringHelpers::convertToString(messageName)) {}
-    std::string getMessageNameInString() const { return m_messageNameInString; }
-    MessageName getMessageName() const { return m_messageName; }
-    ComponentName getSender() const { return m_sender; }
-    ComponentName getReceiver() const { return m_receiver; }
+    [[nodiscard]] std::string getMessageNameInString() const { return m_messageNameInString; }
+    [[nodiscard]] MessageName getMessageName() const { return m_messageName; }
+    [[nodiscard]] ComponentName getSender() const { return m_sender; }
+    [[nodiscard]] ComponentName getReceiver() const { return m_receiver; }
     void setSender(ComponentName const sender) { m_sender = sender; }
     void setReceiver(ComponentName const receiver) { m_receiver = receiver; }
 

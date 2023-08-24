@@ -9,15 +9,13 @@
 using namespace alba::AlbaNumberConstants;
 using namespace std;
 
-namespace alba {
+namespace alba::algebra {
 
-namespace algebra {
-
-Polynomial::Polynomial() : m_monomials(), m_isSimplified(false) {}
+Polynomial::Polynomial() :  m_isSimplified(false) {}
 
 Polynomial::Polynomial(Monomials const& monomials) : m_monomials(monomials), m_isSimplified(false) {}
 
-Polynomial::Polynomial(initializer_list<Monomial> const& monomials) : m_monomials(), m_isSimplified(false) {
+Polynomial::Polynomial(initializer_list<Monomial> const& monomials) :  m_isSimplified(false) {
     m_monomials.reserve(monomials.size());
     copy(monomials.begin(), monomials.end(), back_inserter(m_monomials));
 }
@@ -210,6 +208,4 @@ ostream& operator<<(ostream& out, Polynomial const& polynomial) {
     return out;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

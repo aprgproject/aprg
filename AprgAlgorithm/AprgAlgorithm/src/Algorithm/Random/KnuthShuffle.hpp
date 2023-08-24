@@ -49,7 +49,7 @@ public:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // How does this work?
 // -> NOTE: The backward version is what is referenced here.

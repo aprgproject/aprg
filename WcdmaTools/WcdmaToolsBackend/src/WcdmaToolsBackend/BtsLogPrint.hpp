@@ -27,26 +27,18 @@ enum class State {
 
 struct TransactionData {
     TransactionData()
-        : isPcTimeSaved(false),
-          isHardwareAddressSaved(false),
-          isBtsTimeSaved(false),
-          pcTimeStartIndex(0),
-          pcTimeEndIndex(0),
-          hardwareAddressStartIndex(0),
-          hardwareAddressEndIndex(0),
-          btsTimeStartIndex(0),
-          btsTimeEndIndex(0),
-          count(0) {}
-    bool isPcTimeSaved;
-    bool isHardwareAddressSaved;
-    bool isBtsTimeSaved;
-    int pcTimeStartIndex;
-    int pcTimeEndIndex;
-    int hardwareAddressStartIndex;
-    int hardwareAddressEndIndex;
-    int btsTimeStartIndex;
-    int btsTimeEndIndex;
-    int count;
+        
+          {}
+    bool isPcTimeSaved{false};
+    bool isHardwareAddressSaved{false};
+    bool isBtsTimeSaved{false};
+    int pcTimeStartIndex{0};
+    int pcTimeEndIndex{0};
+    int hardwareAddressStartIndex{0};
+    int hardwareAddressEndIndex{0};
+    int btsTimeStartIndex{0};
+    int btsTimeEndIndex{0};
+    int count{0};
 };
 
 }  // namespace BtsLogPrintStateMachine
@@ -54,15 +46,15 @@ struct TransactionData {
 class BtsLogPrint {
 public:
     BtsLogPrint();
-    BtsLogPrint(std::string const& lineInLogs);
+    explicit BtsLogPrint(std::string const& lineInLogs);
     BtsLogPrint(std::string const& filename, std::string const& lineInLogs);
     void clear();
-    bool isEmpty() const;
-    BtsLogTime getBtsTime() const;
-    BtsLogTime getPcTime() const;
-    std::string getHardwareAddress() const;
-    std::string getPrint() const;
-    std::string getPrintWithAllDetails() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] BtsLogTime getBtsTime() const;
+    [[nodiscard]] BtsLogTime getPcTime() const;
+    [[nodiscard]] std::string getHardwareAddress() const;
+    [[nodiscard]] std::string getPrint() const;
+    [[nodiscard]] std::string getPrintWithAllDetails() const;
     void updatePcTimeAndFileNameDetails(BtsLogPrint const& logPrint);
     bool operator<(BtsLogPrint const& btsLogPrintToCompare) const;
     bool operator>(BtsLogPrint const& btsLogPrintToCompare) const;

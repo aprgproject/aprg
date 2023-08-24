@@ -31,4 +31,4 @@ bool isFactorizeUsingPatternsNeeded(Polynomial const& polynomial);
 bool isFactorizeIncreasingAndDecreasingExponentsFormNeeded(Polynomial const& polynomial);
 bool isFactorizeBySplittingToSmallerPolynomialsNeeded(Polynomial const& polynomial);
 
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

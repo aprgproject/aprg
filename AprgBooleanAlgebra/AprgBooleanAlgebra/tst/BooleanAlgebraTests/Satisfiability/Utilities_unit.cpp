@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(SatisfiabilityUtilitiesTest, GetSatisfiabilityLevelWorks) {
     SatisfiabilityTerms satTermsToTest{
@@ -72,7 +70,5 @@ TEST(SatisfiabilityUtilitiesTest, GetSatisfiabilityTermsWorksWithExpression_Resu
 
     EXPECT_TRUE(satTermsToVerify.empty());
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

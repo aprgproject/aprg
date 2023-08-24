@@ -15,11 +15,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 namespace {
 constexpr int NUMBER_OF_ITERATIONS_IN_BRENT_METHOD = 1000;
@@ -207,8 +203,4 @@ bool areRootsAcceptable(AlbaNumbers const& rootValues) {
     return !(shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue() && doAnyRootsHaveDoubleValues);
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

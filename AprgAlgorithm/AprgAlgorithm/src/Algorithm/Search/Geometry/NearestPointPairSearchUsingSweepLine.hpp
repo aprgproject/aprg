@@ -18,7 +18,7 @@ public:
     using SetOfUnits = std::set<Unit>;
     using UnitToSetOfUnitsMap = std::map<Unit, SetOfUnits>;
 
-    PointPair getNearestPointPair() const {
+    [[nodiscard]] PointPair getNearestPointPair() const {
         // sweep line algorithm
         // Mark: The running time of this algorithm is O(n*(log n[for X] *(log n)[for Y])
         PointPair result{};
@@ -54,7 +54,7 @@ public:
     void addPoint(Point const& point) { m_setOfPoints.emplace(point); }
 
 private:
-    inline Unit getDistance(Point const& point1, Point const& point2) const {
+    [[nodiscard]] inline Unit getDistance(Point const& point1, Point const& point2) const {
         return mathHelper::getSquareRootOfXSquaredPlusYSquared(
             point1.first - point2.first, point1.second - point2.second);
     }
@@ -62,7 +62,7 @@ private:
     SetOfPoints m_setOfPoints;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Given a set of n points, our next problem is to find two points whose Euclidean distance is minimum.
 

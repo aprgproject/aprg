@@ -9,9 +9,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool isTheFirstFundamentalTheoremOfCalculusTrue(Term const& term, std::string const& variableName);
 
@@ -74,6 +72,4 @@ Equation getIntegralEquationForFirstOrderDifferentialEquation(
 void simplifyDerivativeByDefinition(Term& term);
 void simplifyForDifferentiation(Term& term);
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

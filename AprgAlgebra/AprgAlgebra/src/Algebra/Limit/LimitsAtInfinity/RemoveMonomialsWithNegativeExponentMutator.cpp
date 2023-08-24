@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 RemoveMonomialsWithNegativeExponentMutator::RemoveMonomialsWithNegativeExponentMutator(string const& variableName)
     : m_variableName(variableName) {}
@@ -51,6 +49,4 @@ bool RemoveMonomialsWithNegativeExponentMutator::isMonomialToBeRemoved(Monomial 
     return result;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

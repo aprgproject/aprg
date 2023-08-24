@@ -22,7 +22,7 @@ public:
     MinimumNodeCoverForTree(BaseUndirectedGraphWithVertex const& nAryTreeGraph, Vertex const rootOfTree)
         : m_nAryTreeGraph(nAryTreeGraph), m_rootOfTree(rootOfTree), m_childrenInTree(m_nAryTreeGraph, m_rootOfTree) {}
 
-    Count getMinimumNodeCoverSize() const {
+    [[nodiscard]] Count getMinimumNodeCoverSize() const {
         Count result(0);
         if (!m_nAryTreeGraph.isEmpty()) {
             VertexToCountMap vertexToCountMap;
@@ -31,7 +31,7 @@ public:
         return result;
     }
 
-    SetOfVerticesWithVertex getMinimumNodeCover() const {
+    [[nodiscard]] SetOfVerticesWithVertex getMinimumNodeCover() const {
         SetOfVerticesWithVertex result;
         if (!m_nAryTreeGraph.isEmpty()) {
             VertexToSetOfVerticesMap vertexToMinimumSetMap;

@@ -15,4 +15,4 @@ AlbaGrepStringEvaluatorTerm performBinaryOperation<AlbaGrepStringEvaluatorTerm, 
     AlbaGrepStringEvaluatorTerm const& value1, AlbaGrepStringOperatorType const& operatorObject,
     AlbaGrepStringEvaluatorTerm const& value2);
 
-}  // namespace alba
+}  // namespace alba::algorithm::ExpressionEvaluator

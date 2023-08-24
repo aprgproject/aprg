@@ -5,9 +5,7 @@
 #include <Algebra/Solution/Solver/BaseSolver.hpp>
 #include <Algebra/Term/TermTypes/TermContainerTypes.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class BaseOneEquationOneVariableSolver : public BaseSolver {
 public:
@@ -31,6 +29,4 @@ protected:
     AlbaNumbers m_calculatedValues;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

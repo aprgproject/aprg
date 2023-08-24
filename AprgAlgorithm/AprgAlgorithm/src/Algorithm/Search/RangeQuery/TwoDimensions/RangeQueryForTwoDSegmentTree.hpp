@@ -32,7 +32,7 @@ public:
           m_function(functionObject),
           m_twoDSegmentTree(createAllRowSegmentTrees(), getFunctionForSegmentTree2D()) {}
 
-    Value getValueOn2DInterval(
+    [[nodiscard]] Value getValueOn2DInterval(
         Index const topLeftX, Index const topLeftY, Index const bottomRightX, Index const bottomRightY) const {
         // Works on O(log(n)^2) time
 
@@ -45,13 +45,13 @@ public:
     }
 
 private:
-    OneDSegmentTree createRowSegmentTree(Index const y) const {
+    [[nodiscard]] OneDSegmentTree createRowSegmentTree(Index const y) const {
         Values row;
         m_valueMatrix.retrieveRow(row, y);
         return OneDSegmentTree(row, m_function);
     }
 
-    OneDSegmentTrees createAllRowSegmentTrees() const {
+    [[nodiscard]] OneDSegmentTrees createAllRowSegmentTrees() const {
         OneDSegmentTrees result;
         ListOfValues rows;
         m_valueMatrix.retrieveRows(rows);
@@ -63,7 +63,7 @@ private:
         return result;
     }
 
-    TwoDFunction getFunctionForSegmentTree2D() const {
+    [[nodiscard]] TwoDFunction getFunctionForSegmentTree2D() const {
         return [&](OneDSegmentTree const& tree1, OneDSegmentTree const& tree2) {
             Values newValues;
             Values const& treeValues1(tree1.getTreeValues());
@@ -86,4 +86,4 @@ private:
     TwoDSegmentTree m_twoDSegmentTree;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

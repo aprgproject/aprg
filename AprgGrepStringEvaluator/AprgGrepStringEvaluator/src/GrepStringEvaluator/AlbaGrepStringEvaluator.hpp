@@ -25,24 +25,24 @@ class AlbaGrepStringEvaluator {
         AlbaGrepStringEvaluatorTerm, AlbaGrepStringOperatorType>;
 
 public:
-    AlbaGrepStringEvaluator(std::string const& condition);
+    explicit AlbaGrepStringEvaluator(std::string const& condition);
     bool evaluate(std::string const& stringToEvaluate);
-    bool isInvalid() const;
-    std::string getErrorMessage() const;
+    [[nodiscard]] bool isInvalid() const;
+    [[nodiscard]] std::string getErrorMessage() const;
 
 private:
     void extractTokens(std::string const& condition);
     void extractTokensWhileOnString(bool& isOnString, std::string& stringToBuild, char const& currentCharacter);
     void extractTokensWhileNotOnString(bool& isOnString, char const& currentCharacter, int& parenthesisCount);
     void generateExpressionEvaluatorPostfix();
-    bool isEvaluationPossible() const;
+    [[nodiscard]] bool isEvaluationPossible() const;
     void addOperator(char const characterOperator);
     void addParenthesis(char const currentCharacter, int& parenthesisCount);
     static char convertTildeToExclamationPointIfNeeded(char const character);
     static bool isOperator(char const character);
     static bool isParenthesis(char const character);
     void setErrorMessage(std::string const& errorMessage);
-    bool m_isEvaluatorInvalid;
+    bool m_isEvaluatorInvalid{false};
     std::string m_errorMessage;
     VectorOfTokens m_tokens;
     PostfixEvaluator m_postfixEvaluator;

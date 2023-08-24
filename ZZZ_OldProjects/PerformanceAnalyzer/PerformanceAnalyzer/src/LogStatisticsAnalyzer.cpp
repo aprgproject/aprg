@@ -29,7 +29,7 @@ bool LogDetails::operator==(LogDetails const& logDetails) const {
     return string1 == string2;
 }
 
-LogStatisticsAnalyzer::LogStatisticsAnalyzer() : m_btsLogPathHandler(""), m_totalLinesFound(0), m_totalLines(0) {
+LogStatisticsAnalyzer::LogStatisticsAnalyzer() : m_btsLogPathHandler("") {
     initializeLogDetailsToCheck();
 }
 

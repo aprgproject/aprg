@@ -20,7 +20,7 @@ public:
         ComponentName const receiver)
         : Message(messageName, sender, receiver), m_payloadBuffer(payloadBuffer, payloadSize) {}
     alba::AlbaMemoryBuffer& getPayloadBufferReference() { return m_payloadBuffer; }
-    alba::AlbaMemoryBuffer const& getPayloadBufferConstReference() const { return m_payloadBuffer; }
+    [[nodiscard]] alba::AlbaMemoryBuffer const& getPayloadBufferConstReference() const { return m_payloadBuffer; }
 
 private:
     alba::AlbaMemoryBuffer m_payloadBuffer;

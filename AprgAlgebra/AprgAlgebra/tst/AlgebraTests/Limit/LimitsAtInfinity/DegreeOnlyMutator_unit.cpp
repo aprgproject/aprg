@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(DegreeOnlyMutatorTest, MutateEquationWorks) {
     DegreeOnlyMutator mutator("x");
@@ -123,6 +121,4 @@ TEST(DegreeOnlyMutatorTest, MutateFunctionWorks) {
     EXPECT_EQ(expectedFunction, functionObject);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -16,10 +16,8 @@ using wcdmaToolsBackend::BtsLogTimeType;
 namespace alba {
 
 BtsLogAnalyzer::PrintsAvailable::PrintsAvailable()
-    : hasBB_2_RL_SETUP_REQ_MSG(false),
-      hasBB_2_RL_SETUP_ACK_MSG(false),
-      hasTC_TRANSPORT_BEARER_REGISTER_MSG(false),
-      hasTC_TRANSPORT_BEARER_REGISTER_RESP_MSG(false) {}
+    
+      {}
 
 BtsLogAnalyzer::BtsLogAnalyzer() : m_btsLogPathHandler("") {}
 
@@ -495,13 +493,13 @@ void BtsLogAnalyzer::saveAdditionalPrintsRlSetup(string const& lineInLogs, LogTi
 }
 
 void BtsLogAnalyzer::setFirstLogTimeInPair(
-    string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) const {
+    string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) {
     LogTimePair& logTimePairOfTheUser(logTimePairs[userIdentifiers]);
     setLogTimeIfNeeded(lineInLogs, logTimePairOfTheUser.first);
 }
 
 void BtsLogAnalyzer::setSecondLogTimeInPair(
-    string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) const {
+    string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) {
     LogTimePair& logTimePairOfTheUser(logTimePairs[userIdentifiers]);
     setLogTimeIfNeeded(lineInLogs, logTimePairOfTheUser.second);
 }
@@ -568,7 +566,7 @@ void BtsLogAnalyzer::setLogTimeIfNeeded(string const& lineInLogs, LogTime& logTi
     //}
 }
 
-double BtsLogAnalyzer::getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser) const {
+double BtsLogAnalyzer::getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser) {
     BtsLogTime latency = logTimePairOfTheUser.second.value() - logTimePairOfTheUser.first.value();
     return getTotalMicroseconds(latency);
 }

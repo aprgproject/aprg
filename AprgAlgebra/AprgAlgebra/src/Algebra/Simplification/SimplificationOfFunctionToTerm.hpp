@@ -4,9 +4,7 @@
 
 namespace alba {
 
-namespace algebra {
-
-namespace Simplification {
+namespace algebra::Simplification {
 
 class SimplificationOfFunctionToTerm {
 public:
@@ -32,9 +30,7 @@ private:
     static Term getLogarithmicOfTermBasedFromName(Term const& term, std::string const& functionName);
 };
 
-}  // namespace Simplification
-
-}  // namespace algebra
+}  // namespace algebra::Simplification
 
 template <>
 algebra::Simplification::SimplificationOfFunctionToTerm::ConfigurationDetails

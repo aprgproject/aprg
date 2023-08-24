@@ -6,9 +6,7 @@
 #include <Algebra/Term/TermTypes/TermContainerTypes.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool isEquationOperatorString(std::string const& stringToCheck);
 bool isEquationOperatorCharacterString(std::string const& stringToCheck);
@@ -40,6 +38,4 @@ void segregateEquationsWithAndWithoutVariable(
     Equations const& equationsToSegregate, std::string const& variableName, Equations& equationsWithVariable,
     Equations& equationsWithoutVariable);
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -2,17 +2,15 @@
 
 #include <Algebra/Equation/Equation.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class IsolationOfOneVariableOnEqualityEquations {
 public:
-    IsolationOfOneVariableOnEqualityEquations(Equations const& equations);
+    explicit IsolationOfOneVariableOnEqualityEquations(Equations const& equations);
 
     void isolateTermWithVariable(
         std::string const& variableName, Term& termWithVariable, Term& termWithWithoutVariable) const;
-    Term getEquivalentTermByIsolatingAVariable(std::string const& variableName) const;
+    [[nodiscard]] Term getEquivalentTermByIsolatingAVariable(std::string const& variableName) const;
 
 private:
     static void sortEquationsWithVariable(Equations& equationsWithVariable);
@@ -20,6 +18,4 @@ private:
     Equations m_equations;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

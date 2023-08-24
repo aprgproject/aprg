@@ -53,4 +53,4 @@ private:
     bool m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase;
 };
 
-}  // namespace alba
+}  // namespace alba::algebra

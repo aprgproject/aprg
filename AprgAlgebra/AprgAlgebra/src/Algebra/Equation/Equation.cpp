@@ -6,9 +6,7 @@
 using namespace alba::algebra::Simplification;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Equation::Equation(Term const& leftHandTerm, string const& equationOperator, Term const& rightHandTerm)
     : m_equationOperator(equationOperator), m_leftHandTerm(leftHandTerm), m_rightHandTerm(rightHandTerm) {}
@@ -63,6 +61,4 @@ ostream& operator<<(ostream& out, Equation const& equation) {
     return out;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

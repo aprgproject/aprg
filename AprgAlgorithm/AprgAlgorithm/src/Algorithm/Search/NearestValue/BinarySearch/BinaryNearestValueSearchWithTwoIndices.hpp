@@ -12,7 +12,7 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    BinaryNearestValueSearchWithTwoIndices(Values const& sortedValues)
+    explicit BinaryNearestValueSearchWithTwoIndices(Values const& sortedValues)
         : m_lowIndex(INVALID_INDEX), m_highIndex(INVALID_INDEX), m_sortedValues(sortedValues) {
         setInitialIndexes();
     }
@@ -40,11 +40,11 @@ public:
         return result;
     }
 
-    inline Index getLowerIndex() const { return m_lowIndex; }
+    [[nodiscard]] inline Index getLowerIndex() const { return m_lowIndex; }
 
-    inline Index getHigherIndex() const { return m_highIndex; }
+    [[nodiscard]] inline Index getHigherIndex() const { return m_highIndex; }
 
-    Value getLowerValue() const {
+    [[nodiscard]] Value getLowerValue() const {
         Value result{};
         if (!m_sortedValues.empty()) {
             result = m_sortedValues[m_lowIndex];
@@ -52,7 +52,7 @@ public:
         return result;
     }
 
-    Value getHigherValue() const {
+    [[nodiscard]] Value getHigherValue() const {
         Value result{};
         if (!m_sortedValues.empty()) {
             result = m_sortedValues[m_highIndex];
@@ -61,7 +61,7 @@ public:
     }
 
 private:
-    Index getIndexOfNearestValueInBetweenTwoIndices(Value const& target) const {
+    [[nodiscard]] Index getIndexOfNearestValueInBetweenTwoIndices(Value const& target) const {
         Value deviationFromLower(mathHelper::getPositiveDelta(target, m_sortedValues[m_lowIndex]));
         Value deviationFromHigher(mathHelper::getPositiveDelta(target, m_sortedValues[m_highIndex]));
         return (deviationFromLower <= deviationFromHigher) ? m_lowIndex : m_highIndex;
@@ -108,4 +108,4 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

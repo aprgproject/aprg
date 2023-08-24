@@ -21,12 +21,12 @@ public:
     using CircleCenterConnection = std::pair<BitmapXY, BitmapXY>;
     using CircleCenterConnections = std::set<CircleCenterConnection>;
 
-    bool isPenCircle(BitmapXY const& point) const;
+    [[nodiscard]] bool isPenCircle(BitmapXY const& point) const;
 
-    PenCircleDetails getPenCircleDetails(BitmapXY const& point) const;
-    PointToPenCircleDetailsMap const& getPenCircles() const;
-    CircleCenterConnections const& getCenterConnections() const;
-    PointAndPenCircleDetailsPairs getNearestPenCirclesToAPoint(BitmapXY const& point, int const distance) const;
+    [[nodiscard]] PenCircleDetails getPenCircleDetails(BitmapXY const& point) const;
+    [[nodiscard]] PointToPenCircleDetailsMap const& getPenCircles() const;
+    [[nodiscard]] CircleCenterConnections const& getCenterConnections() const;
+    [[nodiscard]] PointAndPenCircleDetailsPairs getNearestPenCirclesToAPoint(BitmapXY const& point, int const distance) const;
 
     PointToPenCircleDetailsMap& getPenCirclesReference();
 
@@ -40,4 +40,4 @@ private:
     CircleCenterConnections m_centerConnections;
 };
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

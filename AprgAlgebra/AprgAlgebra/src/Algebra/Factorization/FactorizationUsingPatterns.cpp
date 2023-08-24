@@ -5,11 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 Polynomials factorizeUsingPatterns(Polynomial const& polynomial) {
     Polynomials result;
@@ -161,8 +157,4 @@ bool isSumOfCubes(Polynomial const& polynomial) {
     return result;
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

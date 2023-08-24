@@ -8,11 +8,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
-
-namespace Simplification {
+namespace alba::booleanAlgebra::Simplification {
 
 TEST(SimplificationUtilitiesTest, SimplifyTermWithOuterOrAndInnerAndWorks) {
     Term subTerm1(createExpressionIfPossible({"a", "&", "b"}));
@@ -230,9 +226,5 @@ TEST(SimplificationUtilitiesTest, RetrieveTargetOperationsWorks) {
     EXPECT_EQ(OperatorLevel::Or, targetOuter);
     EXPECT_EQ(OperatorLevel::And, targetInner);
 }
-
-}  // namespace Simplification
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

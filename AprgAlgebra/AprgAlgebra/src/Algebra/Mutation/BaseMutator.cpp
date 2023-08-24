@@ -2,9 +2,7 @@
 
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 void BaseMutator::mutateEquation(Equation &equation) {
     mutateTerm(equation.getLeftHandTermReference());
@@ -50,6 +48,4 @@ void BaseMutator::mutateFunction(Function &functionObject) {
     mutateTerm(getTermReferenceFromBaseTerm(functionObject.getInputTermReference()));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -1,10 +1,7 @@
 #pragma once
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 enum class Quadrant { Invalid, I, II, III, IV };
 
-}
 }  // namespace alba

@@ -7,7 +7,7 @@ namespace codeReview {
 
 class TermBuilder {
 public:
-    TermBuilder(DequeOfTerms& dequeOfTerms);
+    explicit TermBuilder(DequeOfTerms& dequeOfTerms);
     DequeOfTerms& getTermsReference();
 
     void setLineNumber(unsigned int const lineNumber);
@@ -33,7 +33,7 @@ public:
 
 private:
     DequeOfTerms& m_terms;
-    unsigned int m_lineNumber;
+    unsigned int m_lineNumber{0};
 };
 
 }  // namespace codeReview

@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(NumericalIntegrationUtilitiesTest, GetAnApproximateOfDefiniteIntegralUsingTrapezoidalRuleWorks) {
     Term termToTest1(Monomial(1, {{"x", 1}}));
@@ -114,6 +112,4 @@ TEST(NumericalIntegrationUtilitiesTest, GetAnApproximateOfNaturalLogarithmUsingS
     EXPECT_EQ(AlbaNumber(-7.439211364315156), getAnApproximateOfNaturalLogarithmUsingSimpsonRule(0.001, 200));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

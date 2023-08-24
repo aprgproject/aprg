@@ -150,7 +150,7 @@ private:
         valueToChange = b_function(valueToChange, m_incrementFunction(startInterval, endInterval));
     }
 
-    Index isAParent(Index const treeIndex) const { return treeIndex < b_startOfChildren; }
+    [[nodiscard]] Index isAParent(Index const treeIndex) const { return treeIndex < b_startOfChildren; }
 
     Index const b_startOfChildren;
     Values& b_treeValues;
@@ -159,4 +159,4 @@ private:
     PendingUpdateDetails m_startIndexesForPendingUpdates;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

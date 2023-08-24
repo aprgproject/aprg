@@ -2,17 +2,15 @@
 
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class BinomialSeries {
 public:
     BinomialSeries(Term const& monomialPart, Term const& exponent);
 
-    Term getMonomialPart() const;
-    Term getExponent() const;
-    Term getValueAtIndex(int const index) const;
+    [[nodiscard]] Term getMonomialPart() const;
+    [[nodiscard]] Term getExponent() const;
+    [[nodiscard]] Term getValueAtIndex(int const index) const;
 
 protected:
     static Term getBinomialSeriesApproximation(Term const& monomialPart, Term const& exponent, int const numberOfTimes);
@@ -21,6 +19,4 @@ protected:
     Term m_exponent;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

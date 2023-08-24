@@ -19,11 +19,11 @@ public:
     void handleOneEvent();
     void handleAllEvents();
     void send(ComponentName const receiver, GenericMessage const& message) const;
-    bool isEventQueueEmpty() const;
-    GenericMessage peekMessageAtStartOfTheEventQueue() const;
-    ComponentName getComponentName() const;
-    std::string getComponentNameInString() const;
-    std::string getQueueAsString() const;
+    [[nodiscard]] bool isEventQueueEmpty() const;
+    [[nodiscard]] GenericMessage peekMessageAtStartOfTheEventQueue() const;
+    [[nodiscard]] ComponentName getComponentName() const;
+    [[nodiscard]] std::string getComponentNameInString() const;
+    [[nodiscard]] std::string getQueueAsString() const;
     static void log(std::string const& line);
     static void logNoteOnPreviousMessage(std::string const& note);
     void logNoteOnComponent(std::string const& note) const;

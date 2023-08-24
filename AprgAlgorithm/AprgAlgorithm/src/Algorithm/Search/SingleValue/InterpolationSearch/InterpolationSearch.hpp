@@ -12,9 +12,9 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    InterpolationSearch(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    explicit InterpolationSearch(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
-    Index getIndexOfValue(Value const& target) const {
+    [[nodiscard]] Index getIndexOfValue(Value const& target) const {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
             result = getIndexOfValueWithoutCheck(0, m_sortedValues.size() - 1, target);
@@ -22,7 +22,7 @@ public:
         return result;
     }
 
-    Index getIndexOfValue(Index const startIndex, Index const endIndex, Value const& target) const {
+    [[nodiscard]] Index getIndexOfValue(Index const startIndex, Index const endIndex, Value const& target) const {
         Index result(INVALID_INDEX);
         if (startIndex < static_cast<Index>(m_sortedValues.size()) &&
             endIndex < static_cast<Index>(m_sortedValues.size()) && startIndex <= endIndex) {
@@ -32,7 +32,7 @@ public:
     }
 
 private:
-    Index getIndexOfValueWithoutCheck(Index const startIndex, Index const endIndex, Value const& targetValue) const {
+    [[nodiscard]] Index getIndexOfValueWithoutCheck(Index const startIndex, Index const endIndex, Value const& targetValue) const {
         Index result(INVALID_INDEX);
         Index lowIndex(startIndex), highIndex(endIndex);
         while (lowIndex <= highIndex) {
@@ -43,7 +43,7 @@ private:
             } if (lowerValue == higherValue) {
                 result = getMidpointOfIndexes(lowIndex, highIndex);
                 break;
-            } else {
+            } 
                 Index interpolatedIndex = lowIndex + mathHelper::getIntegerAfterRoundingADoubleValue<Index>(
                                                          static_cast<double>(highIndex - lowIndex) *
                                                          (targetValue - lowerValue) / (higherValue - lowerValue));
@@ -56,7 +56,7 @@ private:
                     result = interpolatedIndex;
                     break;
                 }
-            }
+           
         }
         return result;
     }
@@ -64,7 +64,7 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Given a sorted array of n uniformly distributed values arr[], write a function to search for a particular element x
 // in the array. Linear Search finds the element in O(n) time, Jump Search takes O(√n) time and Binary Search take O(Log

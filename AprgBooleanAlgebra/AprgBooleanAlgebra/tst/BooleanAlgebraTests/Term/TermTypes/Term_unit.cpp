@@ -8,9 +8,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(TermTest, TermsAsConstantsWorks) {
     Term constantTerm1(false);
@@ -273,7 +271,7 @@ TEST(TermTest, IsEmptyWorks) {
 
 TEST(TermTest, IsConstantWorks) {
     Term term1;
-    Term term2(1);
+    Term term2(true);
     Term term3(VariableTerm("x"));
     Term term4(Operator("&"));
     Term term5(Expression{});
@@ -287,7 +285,7 @@ TEST(TermTest, IsConstantWorks) {
 
 TEST(TermTest, IsVariableTermWorks) {
     Term term1;
-    Term term2(1);
+    Term term2(true);
     Term term3(VariableTerm("x"));
     Term term4(Operator("&"));
     Term term5(Expression{});
@@ -301,7 +299,7 @@ TEST(TermTest, IsVariableTermWorks) {
 
 TEST(TermTest, IsOperatorWorks) {
     Term term1;
-    Term term2(1);
+    Term term2(true);
     Term term3(VariableTerm("x"));
     Term term4(Operator("&"));
     Term term5(Expression{});
@@ -315,7 +313,7 @@ TEST(TermTest, IsOperatorWorks) {
 
 TEST(TermTest, IsExpressionWorks) {
     Term term1;
-    Term term2(1);
+    Term term2(true);
     Term term3(VariableTerm("x"));
     Term term4(Operator("&"));
     Term term5(Expression{});
@@ -486,7 +484,5 @@ TEST(TermTest, OutputStreamOperatorWorks) {
 
     EXPECT_EQ("{EmptyTerm},[false],x,&,(x)", ss.str());
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

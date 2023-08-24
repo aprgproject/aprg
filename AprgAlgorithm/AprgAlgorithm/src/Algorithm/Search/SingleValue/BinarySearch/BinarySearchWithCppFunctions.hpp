@@ -15,9 +15,9 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    BinarySearchWithCppFunctions(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    explicit BinarySearchWithCppFunctions(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
-    Index getIndexOfValue(Value const& target) const {
+    [[nodiscard]] Index getIndexOfValue(Value const& target) const {
         Index result(INVALID_INDEX);
         auto lowerBoundIt =
             std::lower_bound(m_sortedValues.cbegin(), m_sortedValues.cend(), target);  // assumption is non set
@@ -33,7 +33,7 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // The C++ standard library contains the following functions that are based on binary search and work in logarithmic
 // time: • lower_bound returns a pointer to the first array element whose target is at least x. • upper_bound returns a

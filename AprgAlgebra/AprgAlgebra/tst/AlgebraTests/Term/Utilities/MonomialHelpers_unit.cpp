@@ -2,9 +2,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(MonomialHelpersTest, CanBeMergedByAdditionOrSubtractionForTermsWorks) {
     EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(73), Term(84)));
@@ -357,6 +355,4 @@ TEST(MonomialHelpersTest, GetMonomialWithMaximumExponentsInMonomialsWorks) {
     EXPECT_EQ(monomialToExpect6, monomialToVerify6);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

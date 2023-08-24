@@ -5,9 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 enum class IntegrationPurpose {
     NotSet,
@@ -24,9 +22,9 @@ using IntegrationPurposes = std::vector<IntegrationPurpose>;
 class IntegrationHistory {
 public:
     IntegrationHistory();
-    bool didThisIntegrationPurposeAlreadyHappened(IntegrationPurpose const purpose) const;
-    int getDepth() const;
-    IntegrationPurpose getLastIntegrationPurpose() const;
+    [[nodiscard]] bool didThisIntegrationPurposeAlreadyHappened(IntegrationPurpose const purpose) const;
+    [[nodiscard]] int getDepth() const;
+    [[nodiscard]] IntegrationPurpose getLastIntegrationPurpose() const;
     static std::string getEnumShortString(IntegrationPurpose const purpose);
 
     void performStepsBeforeIntegration(Term const& input, IntegrationPurpose const purpose);
@@ -40,6 +38,4 @@ private:
     IntegrationPurposes m_recordOfIntegrationPurposes;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(AccumulateOperationsTest, AccumulateTermsWorks) {
     Term termToTest1;
@@ -73,7 +71,5 @@ TEST(AccumulateOperationsTest, AccumulateTermsWithOrOperationWorksWithEmptyTermA
 
     EXPECT_EQ(Term(false), termToTest);
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

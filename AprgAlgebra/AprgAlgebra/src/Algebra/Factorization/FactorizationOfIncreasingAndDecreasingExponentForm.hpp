@@ -3,11 +3,7 @@
 #include <Algebra/Term/TermTypes/Polynomial.hpp>
 #include <Common/Math/Number/AlbaNumberTypes.hpp>
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 Polynomials factorizeIncreasingAndDecreasingExponentsForm(Polynomial const& polynomial);
 void factorizeIncreasingAndDecreasingExponentsFormIfPossible(Polynomials& result, Polynomial const& polynomial);
@@ -30,8 +26,4 @@ AlbaNumbers getDerivativeCoefficients(AlbaNumbers const& coefficients);
 Monomials getMonomialsWithExponentsInOrder(
     int const exponentDivisor, Monomial const& firstInPolynomial, Monomial const& lastInPolynomial);
 bool areRootsAcceptable(AlbaNumbers const& rootValues);
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

@@ -3,9 +3,7 @@
 #include <Algebra/Term/Operators/TermOperators.hpp>
 #include <Algebra/Utilities/KnownNames.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 ArithmeticSeries::ArithmeticSeries(AlbaNumber const& firstValue, AlbaNumber const& commonDifference)
     : SeriesBasedOnFormula(getFormula(firstValue, commonDifference), n) {}
@@ -25,6 +23,4 @@ Term ArithmeticSeries::getFormula(
     return getFormula(firstValue, commonDifference);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

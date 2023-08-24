@@ -5,9 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 enum class LineType { Horizontal, Vertical, WithPositiveSlope, WithNegativeSlope, Invalid };
 
@@ -19,21 +17,21 @@ public:
     Line(double const aCoefficient, double const bCoefficient, Point const& point);         // ax+by+c=0
     bool operator==(Line const& line) const;
     bool operator!=(Line const& line) const;
-    LineType getType() const;
-    double getXIntercept() const;  // form: a*(x-x0) + b*(y-y0) = 0
-    double getYIntercept() const;  // form: a*(x-x0) + b*(y-y0) = 0
-    double getSlope() const;
-    double getPerpendicularSlope() const;
-    double getACoefficient() const;
-    double getBCoefficient() const;
-    double getCCoefficient() const;
-    double getAUnitIncreaseInX() const;
-    double getAUnitIncreaseInY() const;
-    Point getAPoint() const;
-    Points getPoints(Point const& first, Point const& second, double const interval) const;
-    Points getPointsWithoutLastPoint(Point const& first, Point const& second, double const interval) const;
-    double calculateYFromX(double const x) const;
-    double calculateXFromY(double const y) const;
+    [[nodiscard]] LineType getType() const;
+    [[nodiscard]] double getXIntercept() const;  // form: a*(x-x0) + b*(y-y0) = 0
+    [[nodiscard]] double getYIntercept() const;  // form: a*(x-x0) + b*(y-y0) = 0
+    [[nodiscard]] double getSlope() const;
+    [[nodiscard]] double getPerpendicularSlope() const;
+    [[nodiscard]] double getACoefficient() const;
+    [[nodiscard]] double getBCoefficient() const;
+    [[nodiscard]] double getCCoefficient() const;
+    [[nodiscard]] double getAUnitIncreaseInX() const;
+    [[nodiscard]] double getAUnitIncreaseInY() const;
+    [[nodiscard]] Point getAPoint() const;
+    [[nodiscard]] Points getPoints(Point const& first, Point const& second, double const interval) const;
+    [[nodiscard]] Points getPointsWithoutLastPoint(Point const& first, Point const& second, double const interval) const;
+    [[nodiscard]] double calculateYFromX(double const x) const;
+    [[nodiscard]] double calculateXFromY(double const y) const;
 
 private:
     void setLineParametersBasedOnDeltas(double const deltaX, double const deltaY, Point const& point);
@@ -62,5 +60,4 @@ private:
 
 using Lines = std::vector<Line>;
 
-}  // namespace TwoDimensions
-}  // namespace alba
+}  // namespace alba::TwoDimensions

@@ -14,13 +14,13 @@ public:
 
     BinaryHeapPriorityQueue() : m_objects(), m_heapTreeAdapter(m_objects) {}
 
-    bool isEmpty() const { return getSize() == 0; }
+    [[nodiscard]] bool isEmpty() const { return getSize() == 0; }
 
-    int getSize() const { return m_objects.size(); }
+    [[nodiscard]] int getSize() const { return m_objects.size(); }
 
-    Objects const& getObjects() const { return m_objects; }
+    [[nodiscard]] Objects const& getObjects() const { return m_objects; }
 
-    Object const& getTop() const { return m_heapTreeAdapter.getObjectOnTree(INDEX_OF_TOP_TREE); }
+    [[nodiscard]] Object const& getTop() const { return m_heapTreeAdapter.getObjectOnTree(INDEX_OF_TOP_TREE); }
 
     void insert(Object const& object) {
         // put the object at the bottom of the tree
@@ -42,7 +42,7 @@ public:
     }
 
 private:
-    int getIndexOfLastItemOfTheTree() const { return getSize(); }
+    [[nodiscard]] int getIndexOfLastItemOfTheTree() const { return getSize(); }
 
     static constexpr int INDEX_OF_TOP_TREE = 1;
     Objects m_objects;

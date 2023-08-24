@@ -16,8 +16,8 @@ typedef map<int, int> MapOfPositionToParameter;
 
 class CPlusPlusMacro {
 public:
-    bool isPositionInMap(int const positionIndex) const;
-    bool isEqualToVariadicParameterIndex(int const parameterIndex) const;
+    [[nodiscard]] bool isPositionInMap(int const positionIndex) const;
+    [[nodiscard]] bool isEqualToVariadicParameterIndex(int const parameterIndex) const;
     VectorOfTerms& getMacroEquivalent();
     VectorOfStrings& getMacroParameters();
     MapOfPositionToParameter& getPositionToParameter();

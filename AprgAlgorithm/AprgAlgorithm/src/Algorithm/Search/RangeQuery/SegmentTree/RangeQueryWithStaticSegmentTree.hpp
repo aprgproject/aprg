@@ -40,17 +40,17 @@ public:
         initialize(valuesToCheck);
     }
 
-    Index getStartOfChildren() const { return m_startOfChildren; }
+    [[nodiscard]] Index getStartOfChildren() const { return m_startOfChildren; }
 
-    Values const& getTreeValues() const { return m_treeValues; }
+    [[nodiscard]] Values const& getTreeValues() const { return m_treeValues; }
 
-    Value getValueOnInterval(Index const start, Index const end) const  // bottom to top approach
+    [[nodiscard]] Value getValueOnInterval(Index const start, Index const end) const  // bottom to top approach
     {
         // This has log(N) running time
         return getValueOnIntervalFromBottomToTop(start, end);
     }
 
-    Value getValueOnIntervalFromTopToBottom(Index const start, Index const end) const  // top to bottom approach
+    [[nodiscard]] Value getValueOnIntervalFromTopToBottom(Index const start, Index const end) const  // top to bottom approach
     {
         // This has log(N) running time
         Value result{};
@@ -67,7 +67,7 @@ public:
         changeValueAtIndexFromBottomToTop(index, newValue);
     }
 
-    Index getIndexWithTargetValue(Index const start, Value const targetValue, Function const& inverseFunction) const {
+    [[nodiscard]] Index getIndexWithTargetValue(Index const start, Value const targetValue, Function const& inverseFunction) const {
         Index result(-1);
         Index startTreeIndex = m_startOfChildren + start;
         if (startTreeIndex < static_cast<Index>(m_treeValues.size())) {
@@ -113,7 +113,7 @@ protected:
         }
     }
 
-    Value getValueOnIntervalFromBottomToTop(Index const start, Index const end) const {
+    [[nodiscard]] Value getValueOnIntervalFromBottomToTop(Index const start, Index const end) const {
         // This has log(N) running time
         Value result{};
         Index first(m_startOfChildren + start);
@@ -141,7 +141,7 @@ protected:
         return result;
     }
 
-    Value getValueOnIntervalFromTopToBottom(
+    [[nodiscard]] Value getValueOnIntervalFromTopToBottom(
         Index const startInterval, Index const endInterval, Index const currentChild, Index const baseLeft,
         Index const baseRight) const {
         // This has log(N) running time
@@ -206,7 +206,7 @@ protected:
         }
     }
 
-    Index getIndexWithTargetValueInternal(
+    [[nodiscard]] Index getIndexWithTargetValueInternal(
         Index const treeIndex, Value const targetValue, Function const& inverseFunction) const {
         Index result(-1);
         Index parent = Utilities::getParent(treeIndex);

@@ -14,7 +14,7 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    FibonacciSearch(Values const& values)  // values can be unsorted
+    explicit FibonacciSearch(Values const& values)  // values can be unsorted
         : m_sortedValues(values) {}
 
     Index getIndexOfValue(Value const& target) {
@@ -37,7 +37,7 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // -> Fibonacci search technique:
 // ---> This search a sorted sequence using a divide and conquer algorithm that narrows down possible locations with the

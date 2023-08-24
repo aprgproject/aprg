@@ -48,7 +48,7 @@ public:
         Unit nearestDistance;
     };
 
-    Point getNearestPoint(Point const& pointToCheck) const {
+    [[nodiscard]] Point getNearestPoint(Point const& pointToCheck) const {
         Point result{};
         NodeUniquePointer const& root(m_twoDTree.getRoot());
         SearchDetails searchDetails{pointToCheck, root->key, getInitialMaxDistance()};
@@ -57,7 +57,7 @@ public:
         return result;
     }
 
-    PointPair getNearestPointPair() const {
+    [[nodiscard]] PointPair getNearestPointPair() const {
         // This is O(n*log(n))
         PointPair result{};
         Unit nearestDistance(getInitialMaxDistance());
@@ -100,7 +100,7 @@ private:
         depth--;
     }
 
-    SearchAction getSearchAction(
+    [[nodiscard]] SearchAction getSearchAction(
         NodeUniquePointer const& nodePointer, Point const& pointToCheck, int const depth) const {
         SearchAction result(SearchAction::Nothing);
         if (nodePointer) {
@@ -167,14 +167,14 @@ private:
         return result;
     }
 
-    inline Unit getDistance(Point const& point1, Point const& point2) const {
+    [[nodiscard]] inline Unit getDistance(Point const& point1, Point const& point2) const {
         return mathHelper::getSquareRootOfXSquaredPlusYSquared(
             point1.first - point2.first, point1.second - point2.second);
     }
 
-    inline Unit getInitialMaxDistance() const { return std::numeric_limits<Unit>::max(); }
+    [[nodiscard]] inline Unit getInitialMaxDistance() const { return std::numeric_limits<Unit>::max(); }
 
     TwoDTree m_twoDTree;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

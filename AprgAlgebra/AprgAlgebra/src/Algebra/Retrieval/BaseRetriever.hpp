@@ -4,9 +4,7 @@
 #include <Algebra/Term/TermTypes/Term.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class BaseRetriever {
 public:
@@ -80,6 +78,4 @@ public:
     void retrieve(Polynomials const& polynomials) { retrieveFromPolynomials(polynomials); }
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

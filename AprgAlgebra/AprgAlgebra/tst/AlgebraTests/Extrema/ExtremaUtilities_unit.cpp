@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(ExtremaUtilitiesTest, WillYieldToAbsoluteMinimumValueWorks) {
     Term xSquared(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-9, {})});
@@ -374,6 +372,4 @@ TEST(ExtremaUtilitiesTest, GetRelativeExtremaWithMultipleVariablesWithExample3) 
     EXPECT_EQ(AlbaNumber(1), it->second);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

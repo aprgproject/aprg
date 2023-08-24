@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(PythagoreanTripleTest, IsPythagoreanTripleWorks) {
     EXPECT_FALSE(isPythagoreanTriple(PythagoreanTriple{5U, 6U, 7U}));
@@ -36,7 +34,5 @@ TEST(PythagoreanTripleTest, GetPrimitivePythagoreanTripleUsingEuclidFormulaWorks
     EXPECT_EQ(tripleToExpect1, tripleToVerify1);
     EXPECT_EQ(tripleToExpect2, tripleToVerify2);
 }
-
-}  // namespace math
 
 }  // namespace alba

@@ -36,4 +36,4 @@ private:
     TermsWithDetails m_termsWithDetails;
 };
 
-}  // namespace alba
+}  // namespace alba::algebra

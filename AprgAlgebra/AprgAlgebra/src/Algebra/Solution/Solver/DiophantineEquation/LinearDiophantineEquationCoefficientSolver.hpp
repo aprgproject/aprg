@@ -2,9 +2,7 @@
 
 #include <Common/Math/Number/AlbaNumber.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class LinearDiophantineEquationCoefficientSolver {
 public:
@@ -16,25 +14,23 @@ public:
 
     LinearDiophantineEquationCoefficientSolver(AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c);
 
-    bool isSolved() const;
+    [[nodiscard]] bool isSolved() const;
 
-    SolutionStatus getSolutionStatus() const;
-    Integer getX() const;
-    Integer getY() const;
-    Integer getAnotherXValue(Integer const muliplier) const;
-    Integer getAnotherYValue(Integer const muliplier) const;
+    [[nodiscard]] SolutionStatus getSolutionStatus() const;
+    [[nodiscard]] Integer getX() const;
+    [[nodiscard]] Integer getY() const;
+    [[nodiscard]] Integer getAnotherXValue(Integer const muliplier) const;
+    [[nodiscard]] Integer getAnotherYValue(Integer const muliplier) const;
 
 private:
     void solve(AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c);
-    SolutionStatus m_solutionStatus;
-    Integer m_x;
-    Integer m_y;
-    Integer m_a;
-    Integer m_b;
-    Integer m_c;
-    Integer m_gcfOfAAndB;
+    SolutionStatus m_solutionStatus{SolutionStatus::Unknown};
+    Integer m_x{};
+    Integer m_y{};
+    Integer m_a{};
+    Integer m_b{};
+    Integer m_c{};
+    Integer m_gcfOfAAndB{};
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

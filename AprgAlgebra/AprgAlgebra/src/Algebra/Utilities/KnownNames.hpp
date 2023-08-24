@@ -2,9 +2,7 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 constexpr const char* a = "a";
 constexpr const char* b = "b";
@@ -29,6 +27,4 @@ constexpr const char* z0 = "z0";
 
 constexpr const char* theta = "theta";
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

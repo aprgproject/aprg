@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 SubstitutionOfVariablesToTerms::SubstitutionOfVariablesToTerms() {}
 
@@ -161,6 +159,4 @@ void SubstitutionOfVariablesToTerms::performSubstitutionForTermsWithAssociation(
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

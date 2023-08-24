@@ -2,17 +2,9 @@
 
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 Terms factorizeTerm(Term const& term);
 Terms factorizeTerms(Terms const& terms);
-
-}  // namespace Factorization
-
-}  // namespace algebra
 
 }  // namespace alba

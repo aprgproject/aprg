@@ -10,8 +10,8 @@ class PenPoints {
 public:
     using PenPointsSet = std::set<BitmapXY>;
 
-    bool isPenPoint(BitmapXY const& penPoint) const;
-    PenPointsSet const& getPenPoints() const;
+    [[nodiscard]] bool isPenPoint(BitmapXY const& penPoint) const;
+    [[nodiscard]] PenPointsSet const& getPenPoints() const;
 
     void addAsPenPoint(BitmapXY const& penPoint);
     void addAsPenPoints(BitmapXYs const& bitmapPoints);
@@ -22,4 +22,4 @@ private:
     PenPointsSet m_penPoints;
 };
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

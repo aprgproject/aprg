@@ -17,4 +17,4 @@ public:
     ~BaseLinearProbingHashSet() override = default;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -13,9 +13,7 @@ using namespace alba::AlbaNumberConstants;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 SolutionSet::SolutionSet() {}
 
@@ -144,6 +142,4 @@ ostream& operator<<(ostream& out, SolutionSet const& solutionSet) {
     return out;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

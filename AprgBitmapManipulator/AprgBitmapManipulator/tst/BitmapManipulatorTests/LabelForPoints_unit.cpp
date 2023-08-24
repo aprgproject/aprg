@@ -5,9 +5,7 @@
 using namespace alba::AprgBitmap;
 using namespace std;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 TEST(LabelForPointsTest, IsInitialLabelWorks) {
     EXPECT_TRUE(isInitialLabel(INITIAL_LABEL_VALUE));
@@ -63,7 +61,5 @@ TEST(LabelForPointsTest, SetLabelWorks) {
     EXPECT_EQ(BitmapXY(12, 34), pairToVerify.first);
     EXPECT_EQ(0x123456, pairToVerify.second);
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

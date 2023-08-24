@@ -2,21 +2,19 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class DerivativeVariableName {
 public:
     DerivativeVariableName(
         int const differentiationLevel, std::string const& baseVariable, std::string const& dependentVariable);
-    DerivativeVariableName(std::string const& derivativeVariableInLeibnizNotation);
+    explicit DerivativeVariableName(std::string const& derivativeVariableInLeibnizNotation);
 
-    bool isValid() const;
-    int getDifferentiationLevel() const;
-    std::string const& getBaseVariable() const;
-    std::string const& getDependentVariable() const;
-    std::string getNameInLeibnizNotation() const;
+    [[nodiscard]] bool isValid() const;
+    [[nodiscard]] int getDifferentiationLevel() const;
+    [[nodiscard]] std::string const& getBaseVariable() const;
+    [[nodiscard]] std::string const& getDependentVariable() const;
+    [[nodiscard]] std::string getNameInLeibnizNotation() const;
 
     void differentiate();
 
@@ -29,6 +27,4 @@ private:
     std::string m_dependentVariable;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

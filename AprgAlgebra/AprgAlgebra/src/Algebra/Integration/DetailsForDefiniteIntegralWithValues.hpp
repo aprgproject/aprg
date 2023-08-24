@@ -5,9 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 struct DetailsForDefiniteIntegralWithValues {
     std::string variableName;
@@ -17,6 +15,4 @@ struct DetailsForDefiniteIntegralWithValues {
 
 using DetailsForDefiniteIntegralsWithValues = std::vector<DetailsForDefiniteIntegralWithValues>;
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

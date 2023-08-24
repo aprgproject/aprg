@@ -9,9 +9,7 @@
 using namespace alba::algebra::DomainAndRange;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool isContinuousAt(Term const& term, string const& variableName, AlbaNumber const& valueToApproach) {
     SubstitutionOfVariablesToValues substitution{{variableName, valueToApproach}};
@@ -119,6 +117,4 @@ SolutionSet getContinuityDomain(Term const& term) {
     return calculateDomainForTermWithOneVariable(term);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

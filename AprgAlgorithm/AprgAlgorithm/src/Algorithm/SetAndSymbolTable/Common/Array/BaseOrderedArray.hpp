@@ -17,9 +17,9 @@ public:
     ~BaseOrderedArray() override = default;  // no need for virtual destructor because base destructor is virtual
                                              // (similar to other virtual functions)
 
-    bool isEmpty() const override { return m_size == 0; }
+    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
 
-    bool doesContain(Key const& key) const override {
+    [[nodiscard]] bool doesContain(Key const& key) const override {
         bool result(false);
         if (!isEmpty()) {
             int rank(getRank(key));
@@ -30,11 +30,11 @@ public:
         return result;
     }
 
-    int getSize() const override { return m_size; }
+    [[nodiscard]] int getSize() const override { return m_size; }
 
-    int getRank(Key const& key) const override { return getRank(key, m_keys); }
+    [[nodiscard]] int getRank(Key const& key) const override { return getRank(key, m_keys); }
 
-    Key getMinimum() const override {
+    [[nodiscard]] Key getMinimum() const override {
         Key result{};
         if (!isEmpty()) {
             result = m_keys[0];
@@ -42,7 +42,7 @@ public:
         return result;
     }
 
-    Key getMaximum() const override {
+    [[nodiscard]] Key getMaximum() const override {
         Key result{};
         if (!isEmpty()) {
             result = m_keys[m_size - 1];
@@ -50,15 +50,15 @@ public:
         return result;
     }
 
-    Key selectAt(int const index) const override { return selectAt(index, m_keys); }
+    [[nodiscard]] Key selectAt(int const index) const override { return selectAt(index, m_keys); }
 
-    Key getFloor(Key const& key) const override { return getFloor(key, m_keys); }
+    [[nodiscard]] Key getFloor(Key const& key) const override { return getFloor(key, m_keys); }
 
-    Key getCeiling(Key const& key) const override { return getCeiling(key, m_keys); }
+    [[nodiscard]] Key getCeiling(Key const& key) const override { return getCeiling(key, m_keys); }
 
-    Keys getKeys() const override { return m_keys; }
+    [[nodiscard]] Keys getKeys() const override { return m_keys; }
 
-    Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override {
+    [[nodiscard]] Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override {
         Keys result;
         for (Key const& currentKey : m_keys) {
             if (currentKey >= low && currentKey <= high) {

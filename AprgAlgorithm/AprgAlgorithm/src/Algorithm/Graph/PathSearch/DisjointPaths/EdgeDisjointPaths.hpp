@@ -26,12 +26,12 @@ public:
     EdgeDisjointPaths(BaseDirectedGraphWithVertex const& graph, Vertex const& startVertex, Vertex const& endVertex)
         : m_fordFulkerson(getFlowNetwork(graph, startVertex, endVertex)) {}
 
-    int getNumberOfEdgeDisjointPaths() const { return m_fordFulkerson.getMaxFlowValue(); }
+    [[nodiscard]] int getNumberOfEdgeDisjointPaths() const { return m_fordFulkerson.getMaxFlowValue(); }
 
-    Paths getEdgeDisjointPaths() const { return m_fordFulkerson.getAugmentingPaths(); }
+    [[nodiscard]] Paths getEdgeDisjointPaths() const { return m_fordFulkerson.getAugmentingPaths(); }
 
 private:
-    FlowNetwork getFlowNetwork(
+    [[nodiscard]] FlowNetwork getFlowNetwork(
         BaseDirectedGraphWithVertex const& graph, Vertex const& startVertex, Vertex const& endVertex) const {
         FlowNetwork flowNetwork(startVertex, endVertex);
         for (Edge const& edge : graph.getEdges()) {
@@ -43,4 +43,4 @@ private:
     FordFulkerson m_fordFulkerson;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

@@ -9,9 +9,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 void reduceEquationsBySubstitution(Equations& substitutedEquations, VariableNamesSet const& variableNamesToIgnore) {
     VariableNamesRetriever unknownsRetriever;
@@ -88,6 +86,4 @@ VariableNamesSet getVariablesNamesToCheck(Equations const& equations, VariableNa
     return variableNamesToCheck;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

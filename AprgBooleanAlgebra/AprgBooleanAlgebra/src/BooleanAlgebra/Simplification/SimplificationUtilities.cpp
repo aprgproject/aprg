@@ -14,11 +14,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
-
-namespace Simplification {
+namespace alba::booleanAlgebra::Simplification {
 
 using Minterm = uint64_t;
 using QuineMcCluskey = QuineMcCluskey<Minterm>;
@@ -319,9 +315,5 @@ void retrieveTargetOperations(OperatorLevel& targetOuter, OperatorLevel& targetI
         targetInner = OperatorLevel::And;
     }
 }
-
-}  // namespace Simplification
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

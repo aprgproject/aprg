@@ -40,12 +40,12 @@ public:
 
     explicit GeneralPathCover(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
 
-    Paths getGeneralPathCover(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
+    [[nodiscard]] Paths getGeneralPathCover(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         VertexPairs vertexPairs(getConnectedVerticesOfGeneralPathCover(newSourceVertex, newSinkVertex));
         return getGeneralPathCover(vertexPairs);
     }
 
-    VertexPairs getConnectedVerticesOfGeneralPathCover(
+    [[nodiscard]] VertexPairs getConnectedVerticesOfGeneralPathCover(
         Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         VertexPairs result;
         if (GraphUtilities::isDirectedAcyclicGraph(m_graph)) {
@@ -54,7 +54,7 @@ public:
         return result;
     }
 
-    int getSizeOfMaximumAntichain(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
+    [[nodiscard]] int getSizeOfMaximumAntichain(Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         // Using Dilworth's theorem:
         // An antichain is a set of nodes of a graph such that there is no path from any node to another node using the
         // edges of the graph. Dilworth’s theorem states that in a directed acyclic graph, the size of a minimum general
@@ -64,7 +64,7 @@ public:
     }
 
 private:
-    Paths getGeneralPathCover(VertexPairs const& vertexPairs) const {
+    [[nodiscard]] Paths getGeneralPathCover(VertexPairs const& vertexPairs) const {
         Paths result;
         Edges allEdges(m_graph.getEdges());
         DequeOfEdges detectedEdges;
@@ -135,7 +135,7 @@ private:
         return result;
     }
 
-    VertexPairs getConnectedVerticesOfGeneralPathCoverUsingFordFulkerson(
+    [[nodiscard]] VertexPairs getConnectedVerticesOfGeneralPathCoverUsingFordFulkerson(
         Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         Edges result;
         FordFulkerson fordFulkerson(getFlowNetwork(m_graph, newSourceVertex, newSinkVertex));
@@ -150,7 +150,7 @@ private:
         return result;
     }
 
-    FlowNetwork getFlowNetwork(
+    [[nodiscard]] FlowNetwork getFlowNetwork(
         BaseDirectedGraphWithVertex const& graph, Vertex const& newSourceVertex, Vertex const& newSinkVertex) const {
         // A minimum general path cover can be found almost like a minimum node-disjoint path cover.
         // It suffices to add some new edges to the matching graph so that there is an edge a->b always

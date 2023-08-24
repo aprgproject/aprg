@@ -17,13 +17,13 @@ class CPlusPlusFunctionSignature {
 public:
     void printSignature() const;
     CPlusPlusType& getReturnTypeReference();
-    CPlusPlusType getReturnType() const;
+    [[nodiscard]] CPlusPlusType getReturnType() const;
     void setReturnType(CPlusPlusType const& type);
     void addParameter(CPlusPlusType const& type);
     void addParameter(CPlusPlusType const& type, string const& name);
     bool operator==(CPlusPlusFunctionSignature const& cPlusPlusFunctionSignature) const;
-    bool isEqualBasedFromFunctionCall(CPlusPlusFunctionSignature const& cPlusPlusFunctionSignature) const;
-    bool areTheNamesEqual(CPlusPlusFunctionSignature const& cPlusPlusFunctionSignature) const;
+    [[nodiscard]] bool isEqualBasedFromFunctionCall(CPlusPlusFunctionSignature const& cPlusPlusFunctionSignature) const;
+    [[nodiscard]] bool areTheNamesEqual(CPlusPlusFunctionSignature const& cPlusPlusFunctionSignature) const;
     CPlusPlusFunctionParameters& getFunctionParametersReference();
 
 private:

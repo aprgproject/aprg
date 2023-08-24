@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(StickGameTest, GetGameStateWorks) {
     StickGame stickGame(3U);
@@ -35,7 +33,5 @@ TEST(StickGameTest, GetOptimalNumberOfSticksToTakeWorks) {
     EXPECT_EQ(3U, stickGame.getOptimalNumberOfSticksToTake(7U));
     EXPECT_EQ(1U, stickGame.getOptimalNumberOfSticksToTake(8U));
 }
-
-}  // namespace math
 
 }  // namespace alba

@@ -1,8 +1,6 @@
 #include "VariableNamesRetriever.hpp"
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 VariableNamesSet const& VariableNamesRetriever::getVariableNames() const { return m_variableNames; }
 
@@ -18,6 +16,4 @@ void VariableNamesRetriever::retrieveFromMonomial(Monomial const& monomial) {
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

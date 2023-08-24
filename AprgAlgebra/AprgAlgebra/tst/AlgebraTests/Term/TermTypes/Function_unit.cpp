@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(FunctionTest, ConstructionWorks) {
     Function function1;
@@ -211,6 +209,4 @@ TEST(FunctionTest, OutputStreamOperatorWorks) {
     EXPECT_EQ("functionName(5)", ss.str());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

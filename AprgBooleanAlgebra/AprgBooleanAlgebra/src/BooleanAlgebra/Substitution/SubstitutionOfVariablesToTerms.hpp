@@ -5,9 +5,7 @@
 #include <map>
 #include <vector>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 using VariablesToTermsMap = std::map<std::string, Term>;
 using VariableTermPair = std::pair<std::string, Term>;
@@ -16,19 +14,19 @@ class SubstitutionOfVariablesToTerms {
 public:
     SubstitutionOfVariablesToTerms() = default;
     SubstitutionOfVariablesToTerms(std::initializer_list<VariableTermPair> const& variablesWithTerms);
-    SubstitutionOfVariablesToTerms(VariablesToTermsMap const& variablesWithTerms);
+    explicit SubstitutionOfVariablesToTerms(VariablesToTermsMap const& variablesWithTerms);
 
-    bool isEmpty() const;
-    bool isVariableFound(std::string const& variable) const;
-    int getSize() const;
-    Term getTermForVariable(std::string const& variable) const;
-    VariablesToTermsMap const& getVariablesToTermsMap() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool isVariableFound(std::string const& variable) const;
+    [[nodiscard]] int getSize() const;
+    [[nodiscard]] Term getTermForVariable(std::string const& variable) const;
+    [[nodiscard]] VariablesToTermsMap const& getVariablesToTermsMap() const;
 
-    Term performSubstitutionTo(VariableTerm const& variableTerm) const;
-    Term performSubstitutionTo(Expression const& expression) const;
-    Term performSubstitutionTo(Term const& term) const;
+    [[nodiscard]] Term performSubstitutionTo(VariableTerm const& variableTerm) const;
+    [[nodiscard]] Term performSubstitutionTo(Expression const& expression) const;
+    [[nodiscard]] Term performSubstitutionTo(Term const& term) const;
 
-    Expression performSubstitutionForExpression(Expression const& expression) const;
+    [[nodiscard]] Expression performSubstitutionForExpression(Expression const& expression) const;
 
     void putVariablesWithTerms(std::initializer_list<VariableTermPair> const& variablesWithTerms);
     void putVariablesWithTerms(VariablesToTermsMap const& variablesWithTerms);
@@ -41,6 +39,4 @@ private:
 
 using SubstitutionsOfVariablesToTerms = std::vector<SubstitutionOfVariablesToTerms>;
 
-}  // namespace booleanAlgebra
-
-}  // namespace alba
+}  // namespace alba::booleanAlgebra

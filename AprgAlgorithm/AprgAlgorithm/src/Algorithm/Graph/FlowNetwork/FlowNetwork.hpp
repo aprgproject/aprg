@@ -32,9 +32,9 @@ public:
                    mathHelper::isAlmostEqual(capacity, second.capacity) && mathHelper::isAlmostEqual(flow, second.flow);
         }
 
-        Vertex getTheOtherVertex(Vertex const& mainVertex) const { return source == mainVertex ? destination : source; }
+        [[nodiscard]] Vertex getTheOtherVertex(Vertex const& mainVertex) const { return source == mainVertex ? destination : source; }
 
-        FlowDataType getResidualCapacityTo(Vertex const& vertex) const {
+        [[nodiscard]] FlowDataType getResidualCapacityTo(Vertex const& vertex) const {
             FlowDataType result{};
             if (source == vertex) {
                 result = flow;
@@ -61,13 +61,13 @@ public:
             "Flow network's underlying graph should be a directed graph");
     }
 
-    bool hasAUniqueMinimumSpanningTree() const { return hasNoDuplicateValues(getSortedWeights()); }
+    [[nodiscard]] bool hasAUniqueMinimumSpanningTree() const { return hasNoDuplicateValues(getSortedWeights()); }
 
-    bool hasLocalEquilibrium(Vertex const& vertex) const {
+    [[nodiscard]] bool hasLocalEquilibrium(Vertex const& vertex) const {
         return mathHelper::isAlmostEqual(getDeltaFlowAt(vertex), static_cast<FlowDataType>(0));
     }
 
-    FlowEdgeDetails getFlowEdgeDetails(Vertex const& vertex1, Vertex const& vertex2) const {
+    [[nodiscard]] FlowEdgeDetails getFlowEdgeDetails(Vertex const& vertex1, Vertex const& vertex2) const {
         FlowEdgeDetails result{};
         auto it = m_edgeToFlowEdgeDetailsMap.find({vertex1, vertex2});
         if (it != m_edgeToFlowEdgeDetailsMap.cend()) {
@@ -76,12 +76,12 @@ public:
         return result;
     }
 
-    FlowEdge getFlowEdge(Vertex const& vertex1, Vertex const& vertex2) const {
+    [[nodiscard]] FlowEdge getFlowEdge(Vertex const& vertex1, Vertex const& vertex2) const {
         FlowEdgeDetails flowEdgeDetails(getFlowEdgeDetails(vertex1, vertex2));
         return FlowEdge{vertex1, vertex2, flowEdgeDetails.capacity, flowEdgeDetails.flow};
     }
 
-    FlowDataType getDeltaFlowAt(Vertex const& vertex) const {
+    [[nodiscard]] FlowDataType getDeltaFlowAt(Vertex const& vertex) const {
         // this is linear (not optimized)
         FlowDataType result{};
         for (auto const& [edge, details] : m_edgeToFlowEdgeDetailsMap) {
@@ -95,23 +95,23 @@ public:
         return result;
     }
 
-    FlowDataTypes getSortedCapacities() const {
+    [[nodiscard]] FlowDataTypes getSortedCapacities() const {
         FlowDataTypes capacities(getAllCapacities());
         std::sort(capacities.begin(), capacities.end());
         return capacities;
     }
 
-    FlowDataTypes getSortedFlows() const {
+    [[nodiscard]] FlowDataTypes getSortedFlows() const {
         FlowDataTypes flows(getAllFlows());
         std::sort(flows.begin(), flows.end());
         return flows;
     }
 
-    FlowDataTypes getSortedWeights() const { return getSortedCapacities(); }
+    [[nodiscard]] FlowDataTypes getSortedWeights() const { return getSortedCapacities(); }
 
-    EdgeToFlowEdgeDetailsMap const& getEdgeToFlowEdgeDetailsMap() const { return m_edgeToFlowEdgeDetailsMap; }
+    [[nodiscard]] EdgeToFlowEdgeDetailsMap const& getEdgeToFlowEdgeDetailsMap() const { return m_edgeToFlowEdgeDetailsMap; }
 
-    FlowEdges getFlowEdges() const {
+    [[nodiscard]] FlowEdges getFlowEdges() const {
         FlowEdges result;
         result.reserve(m_edgeToFlowEdgeDetailsMap.size());
         std::transform(
@@ -124,7 +124,7 @@ public:
         return result;
     }
 
-    FlowEdges getFlowEdgesWithVertex(Vertex const& vertex) const {
+    [[nodiscard]] FlowEdges getFlowEdgesWithVertex(Vertex const& vertex) const {
         // this is linear (not optimized)
         FlowEdges result;
         for (auto const& [edge, details] : m_edgeToFlowEdgeDetailsMap) {
@@ -154,11 +154,11 @@ public:
 private:
     void connect(Vertex const& vertex1, Vertex const& vertex2) override { BaseClass::connect(vertex1, vertex2); }
 
-    bool hasNoDuplicateValues(FlowDataTypes const& flowDataTypes) const {
+    [[nodiscard]] bool hasNoDuplicateValues(FlowDataTypes const& flowDataTypes) const {
         return std::adjacent_find(flowDataTypes.cbegin(), flowDataTypes.cend()) == flowDataTypes.cend();
     }
 
-    FlowDataTypes getAllCapacities() const {
+    [[nodiscard]] FlowDataTypes getAllCapacities() const {
         FlowDataTypes result;
         result.reserve(m_edgeToFlowEdgeDetailsMap.size());
         std::transform(
@@ -167,7 +167,7 @@ private:
         return result;
     }
 
-    FlowDataTypes getAllFlows() const {
+    [[nodiscard]] FlowDataTypes getAllFlows() const {
         FlowDataTypes result;
         result.reserve(m_edgeToFlowEdgeDetailsMap.size());
         std::transform(

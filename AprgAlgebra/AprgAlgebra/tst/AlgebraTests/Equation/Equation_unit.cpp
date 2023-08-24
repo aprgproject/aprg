@@ -6,9 +6,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(EquationTest, EquationsAreConstructedCorrectly) {
     Equation equation1(Term(), "=", Term());
@@ -151,6 +149,4 @@ TEST(EquationTest, OutputStreamOperatorWorks) {
     EXPECT_EQ("7 > 8", convertToString(equation2));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 GameState NimGame::getGameState(NimState const& nimState) { return getGameState(getNimSum(nimState)); }
 
@@ -61,7 +59,5 @@ NimHeapSize NimGame::getNimSum(NimState const& nimState) {
         nimState.cbegin(), nimState.cend(), 0U,
         [](NimHeapSize const nimHeapSize1, NimHeapSize const nimHeapSize2) { return nimHeapSize1 ^ nimHeapSize2; });
 }
-
-}  // namespace math
 
 }  // namespace alba

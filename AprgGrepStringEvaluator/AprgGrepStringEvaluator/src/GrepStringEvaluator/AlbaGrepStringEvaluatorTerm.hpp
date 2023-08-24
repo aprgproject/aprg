@@ -13,7 +13,7 @@ public:
     AlbaGrepStringEvaluatorTerm();
     explicit AlbaGrepStringEvaluatorTerm(std::string const& stringToFind);
     explicit AlbaGrepStringEvaluatorTerm(bool const result);
-    bool getResult() const;
+    [[nodiscard]] bool getResult() const;
 
 private:
     static std::string s_mainString;

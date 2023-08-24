@@ -1,8 +1,6 @@
 #include "NumbersRetriever.hpp"
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 AlbaNumbersSet const& NumbersRetriever::getNumbers() const { return m_numbers; }
 
@@ -17,6 +15,4 @@ void NumbersRetriever::retrieveFromMonomial(Monomial const& monomial) {
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

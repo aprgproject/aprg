@@ -13,9 +13,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Term getAreaInBetweenTwoTermsInAnInterval(
     Term const& lowerTerm, Term const& higherTerm, DetailsForDefiniteIntegralWithValues const& integralDetails) {
@@ -326,6 +324,4 @@ void sortIntegralsDetailsToEvaluate(DetailsForDefiniteIntegralsWithTerms& integr
         });
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

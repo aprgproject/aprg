@@ -23,11 +23,7 @@
 #include <cmath>
 #include <functional>
 
-namespace alba {
-
-namespace TwoDimensions {
-
-namespace twoDimensionsUtilities {
+namespace alba::TwoDimensions::twoDimensionsUtilities {
 
 bool isOrigin(Point const& point);
 bool isInsideTwoPoints(Point const& point, Point const& minimumXAndY, Point const& maximumXAndY);
@@ -169,8 +165,4 @@ Line getPolynomialTangentLineAt(PolynomialInYEqualsX<numberOfCoefficients> polyn
     return Line(Point(x, y), Point(x + slopeInY, y + 1));
 }
 
-}  // namespace twoDimensionsUtilities
-
-}  // namespace TwoDimensions
-
-}  // namespace alba
+}  // namespace alba::TwoDimensions::twoDimensionsUtilities

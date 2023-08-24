@@ -2,9 +2,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(PolynomialHelpersTest, DoesThePolynomialHaveOnlyOneConstantWorks) {
     EXPECT_FALSE(doesThePolynomialHaveOnlyOneConstant(
@@ -220,6 +218,4 @@ TEST(PolynomialHelpersTest, RemoveEmptyPolynomialsWorks) {
     EXPECT_EQ(polynomial4, polynomials[1]);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

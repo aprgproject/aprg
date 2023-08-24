@@ -17,7 +17,7 @@ public:
         default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual
                   // functions)
 
-    Value get(Key const& key) const override {
+    [[nodiscard]] Value get(Key const& key) const override {
         Value result{};
         for (int i(this->getHash(key)); b_entryPointers[i]; this->incrementHashTableIndexWithWrapAround(i)) {
             EntryUniquePointer const& entryPointer(b_entryPointers[i]);
@@ -58,4 +58,4 @@ private:
     EntryPointers& b_entryPointers;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

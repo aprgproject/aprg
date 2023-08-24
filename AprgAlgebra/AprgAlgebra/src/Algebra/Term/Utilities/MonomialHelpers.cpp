@@ -7,9 +7,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool canBeMergedInAMonomialByAdditionOrSubtraction(Term const& term1, Term const& term2) {
     bool result(false);
@@ -259,6 +257,4 @@ Monomial getMonomialWithMaximumExponentsInMonomials(Monomials const& monomials) 
     return monomialWithMaximumExponents;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

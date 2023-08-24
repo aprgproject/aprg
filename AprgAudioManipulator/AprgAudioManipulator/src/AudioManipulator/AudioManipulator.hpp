@@ -10,7 +10,7 @@ class AudioManipulator {
 public:
     explicit AudioManipulator(std::string const& audioFilePath);
 
-    AudioInDouble const& getAudio() const;
+    [[nodiscard]] AudioInDouble const& getAudio() const;
     AudioInDouble& getAudioReference();
 
     void addSamplesWithValue(double const value);
@@ -27,4 +27,4 @@ private:
     AudioInDouble m_audio;
 };
 
-}  // namespace alba::AprgAudio::AprgAudio
+}  // namespace alba::AprgAudio

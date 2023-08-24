@@ -7,11 +7,7 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algebra {
-
-namespace DomainAndRange {
+namespace alba::algebra::DomainAndRange {
 
 using FunctionToCheck = std::function<AlbaNumber(AlbaNumber const&)>;
 
@@ -47,8 +43,4 @@ void retrieveTwoVariableNames(
 
 bool isOneToOne(std::string const& variableNameToCheck, Equation const& equation);
 
-}  // namespace DomainAndRange
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::DomainAndRange

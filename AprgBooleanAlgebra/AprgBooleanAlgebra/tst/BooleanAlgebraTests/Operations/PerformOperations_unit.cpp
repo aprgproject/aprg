@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(PerformOperationsTest, PerformOperationUnaryOperationWorks) {
     Term termToVerify1(performOperation(Operator("~"), false));
@@ -67,7 +65,5 @@ TEST(PerformOperationsTest, PerformOrWorks) {
     EXPECT_EQ(Term(true), termToVerify3);
     EXPECT_EQ(Term(true), termToVerify4);
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

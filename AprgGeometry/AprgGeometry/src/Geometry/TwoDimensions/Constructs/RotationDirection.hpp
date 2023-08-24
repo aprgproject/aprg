@@ -1,10 +1,7 @@
 #pragma once
 
-namespace alba {
-
-namespace TwoDimensions {
+namespace alba::TwoDimensions {
 
 enum class RotationDirection { Collinear, ClockWise, CounterClockWise };
 
-}
 }  // namespace alba

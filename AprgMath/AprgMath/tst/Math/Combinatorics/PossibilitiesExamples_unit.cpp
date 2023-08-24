@@ -5,9 +5,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(PossibilitiesExamplesTest, BasicExamplesWorks) {
     // Get number of possible DNA strings of length 7
@@ -124,7 +122,5 @@ TEST(PossibilitiesExamplesTest, StringWithThreeSetsOfTwoRepeatingLetters) {
                       getNumberOfPermutations(2U, 1U) * getNumberOfCombinations(8U, 3U) *
                       getNumberOfPossibilities(5U, 1U) * getNumberOfPossibilities(4U, 1U));
 }
-
-}  // namespace math
 
 }  // namespace alba

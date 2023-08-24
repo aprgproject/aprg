@@ -55,7 +55,7 @@ public:
         reinitializeStartingFrom(startVertices);
     }
 
-    Path getShortestPathTo(Vertex const& endVertex) const { return this->getPathTo(endVertex); }
+    [[nodiscard]] Path getShortestPathTo(Vertex const& endVertex) const { return this->getPathTo(endVertex); }
 
     void reinitializeStartingFrom(Vertices const& startVertices) {
         clear();

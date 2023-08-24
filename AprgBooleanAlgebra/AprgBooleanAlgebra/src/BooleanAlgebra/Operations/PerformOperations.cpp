@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 Term performOperation(Operator const& operatorTerm, Term const& term) {
     Term newTerm;
@@ -91,7 +89,5 @@ Term performAnd(Term const& term1, Term const& term2){TERM_BINARY_OPERATION_MACR
 Term performOr(Term const& term1, Term const& term2) {
     TERM_BINARY_OPERATION_MACRO(|)
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

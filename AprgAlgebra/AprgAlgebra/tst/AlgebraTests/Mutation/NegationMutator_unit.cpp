@@ -7,9 +7,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(NegationMutatorTest, MutateTermWorks) {
     NegationMutator mutator;
@@ -101,6 +99,4 @@ TEST(NegationMutatorTest, MutateFunctionWorks) {
     EXPECT_EQ(functionToExpect, functionObject);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

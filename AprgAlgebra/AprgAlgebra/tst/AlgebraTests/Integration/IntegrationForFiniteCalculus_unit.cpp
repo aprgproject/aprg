@@ -9,9 +9,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(IntegrationForFiniteCalculusTest, IntegrateWorksForTerm) {
     IntegrationForFiniteCalculus integrationForX("x");
@@ -249,6 +247,4 @@ TEST(IntegrationForFiniteCalculusTest, IntegrateFunctionWorks) {
     EXPECT_TRUE(termToVerify.getAsNumber().isNotANumber());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

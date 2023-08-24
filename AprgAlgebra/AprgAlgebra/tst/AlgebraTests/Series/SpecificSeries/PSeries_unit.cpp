@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(PSeriesTest, IsSummationModelValidWorks) {
     PSeries series(2);
@@ -23,6 +21,4 @@ TEST(PSeriesTest, GetValueAtIndexWorks) {
     EXPECT_EQ(Term(AlbaNumber::createFraction(205, 144)), series.getValueAtIndex(3));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

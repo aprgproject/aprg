@@ -10,11 +10,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace VectorUtilities {
+namespace alba::algebra::VectorUtilities {
 
 TEST(PlaneMotionUtilitiesTest, GetInstantaneousVelocityWorks) {
     Term x(createExpressionIfPossible({getEAsATerm(), "^", "(", -2, "*", "t", ")"}));
@@ -75,8 +71,4 @@ TEST(PlaneMotionUtilitiesTest, GetNormalPartOfAccelerationWorks) {
     EXPECT_EQ(stringToExpect, convertToString(vectorToVerify));
 }
 
-}  // namespace VectorUtilities
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::VectorUtilities

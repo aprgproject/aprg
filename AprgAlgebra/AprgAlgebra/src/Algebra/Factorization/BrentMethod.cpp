@@ -13,9 +13,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 namespace {
 constexpr double BRENT_METHOD_COMPARISON_TOLERANCE = 1E-13;
@@ -23,7 +21,7 @@ constexpr double BRENT_METHOD_TOLERANCE_TO_ZERO_FOR_A_AND_B = 1E-11;
 }  // namespace
 
 BrentMethod::BrentMethod(AlbaNumbers const& coefficients)
-    : m_numberOfIterationsExecuted(0), m_coefficients(coefficients), m_values{} {}
+    :  m_coefficients(coefficients), m_values{} {}
 
 bool BrentMethod::isFinished() const { return m_values.solutionOptional.has_value(); }
 
@@ -199,6 +197,4 @@ void BrentMethod::convertSolutionToIntegerIfNeeded() {
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -7,9 +7,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Terms getLagrangeMultipliers(Term const& term, strings const& coordinateNames, Terms const& lagrangeFunctions) {
     strings lagrangeMultiplierNames(getLagrangeMultiplierNames(lagrangeFunctions.size()));
@@ -59,6 +57,4 @@ string getLagrangeMultiplierName(int const index) {
     return "multiplier" + converter.convertToString(index);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

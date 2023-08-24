@@ -24,14 +24,14 @@ bool FileDirectoryDatabase::isFileIncluded(string const& baseDirectory, string c
     for (auto fullPathOfFileFromDatabase : m_files) {
         if (whereItShouldBePath == fullPathOfFileFromDatabase) {
             return true;
-        } else if (isFileInFullPath(fullPathOfFileFromDatabase, fileName)) {
+        } if (isFileInFullPath(fullPathOfFileFromDatabase, fileName)) {
             return true;
         }
     }
     return false;
 }
 
-bool FileDirectoryDatabase::isFileInFullPath(string const& fullPathFromDatabase, string const& fileName) const {
+bool FileDirectoryDatabase::isFileInFullPath(string const& fullPathFromDatabase, string const& fileName) {
     string correctFileName(AlbaLocalPathHandler(string("\\") + fileName).getFullPath());
     int correctFileNameLength = correctFileName.length();
     int fullPathFromDatabaseLength = fullPathFromDatabase.length();
@@ -53,7 +53,7 @@ string FileDirectoryDatabase::getFullPathOfFile(string const& baseDirectory, str
     for (string fullPathOfFileFromDatabase : m_files) {
         if (whereItShouldBePath == fullPathOfFileFromDatabase) {
             return whereItShouldBePath;
-        } else if (isFileInFullPath(fullPathOfFileFromDatabase, fileName)) {
+        } if (isFileInFullPath(fullPathOfFileFromDatabase, fileName)) {
             unsigned int currentLevenshteinDistance =
                 getLevenshteinDistance(whereItShouldBePath, fullPathOfFileFromDatabase);
             int lengthDifference = abs((int)(whereItShouldBePath.length() - fullPathOfFileFromDatabase.length()));

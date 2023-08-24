@@ -18,9 +18,9 @@ public:
 
     ~DoublingSizeCircularQueue() { deleteAllObjects(); }
 
-    bool isEmpty() const override { return getSize() == 0; }
+    [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 
-    int getSize() const override {
+    [[nodiscard]] int getSize() const override {
         if (m_firstIndex <= m_afterLastIndex) {
             return m_afterLastIndex - m_firstIndex;
         }             return m_containerSize - m_firstIndex + m_afterLastIndex;
@@ -42,7 +42,7 @@ public:
         return result;
     }
 
-    int getContainerSize() const { return m_containerSize; }
+    [[nodiscard]] int getContainerSize() const { return m_containerSize; }
 
 private:
     void deleteAllObjects() {

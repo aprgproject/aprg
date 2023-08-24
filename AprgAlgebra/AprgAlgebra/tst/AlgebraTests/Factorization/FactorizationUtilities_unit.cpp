@@ -4,11 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 TEST(FactorizationUtilitiesTest, AreExponentsDivisibleWorks) {
     Monomial monomial1;
@@ -155,8 +151,4 @@ TEST(FactorizationUtilitiesTest, SimplifyAndEmplacePolynomialIfListIsEmptyWorksW
     EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

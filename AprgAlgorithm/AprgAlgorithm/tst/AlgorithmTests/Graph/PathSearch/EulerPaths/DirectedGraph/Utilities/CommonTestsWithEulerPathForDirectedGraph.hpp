@@ -153,4 +153,4 @@ void testGetEulerCycleAndPathWorksOnExample1() {
     EXPECT_TRUE(cycleToVerify.empty());
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm::CommonTestsWithEulerPathForDirectedGraph

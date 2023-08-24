@@ -12,12 +12,12 @@ public:
     using Utilities = SegmentTreeUtilities<Index>;
     using SegmentTree = RangeQueryWithStaticSegmentTree<Indexes>;
 
-    GetAccumulatedNextFreeIndexWithSegmentTree(Index const numberOfIndexes)
+    explicit GetAccumulatedNextFreeIndexWithSegmentTree(Index const numberOfIndexes)
         : m_segmentTree(Indexes(numberOfIndexes, 1), std::plus<Index>()),
           m_startOfChildren(m_segmentTree.getStartOfChildren()),
           m_treeSums(m_segmentTree.getTreeValues()) {}
 
-    Index getNextFreeIndexAt(Index const index) const {
+    [[nodiscard]] Index getNextFreeIndexAt(Index const index) const {
         // This has log(N) running time
 
         Index result{};
@@ -33,7 +33,7 @@ public:
     void setAsFree(Index const index) { m_segmentTree.changeValueAtIndex(index, 1); }
 
 private:
-    Index getNextFreeIndexAt(
+    [[nodiscard]] Index getNextFreeIndexAt(
         Index const index, Index const currentChild, Index const baseLeft, Index const baseRight) const {
         // This has log(N) running time
 
@@ -67,4 +67,4 @@ private:
     Indexes const& m_treeSums;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

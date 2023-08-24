@@ -19,9 +19,9 @@ public:
         initializeIfNeeded();
     }
 
-    Vertices const& getVerticesInDfsPreOrder() const { return m_verticesInDfsPreOrder; }
+    [[nodiscard]] Vertices const& getVerticesInDfsPreOrder() const { return m_verticesInDfsPreOrder; }
 
-    Counts const& getSubTreeSize() const { return m_subTreeSize; }
+    [[nodiscard]] Counts const& getSubTreeSize() const { return m_subTreeSize; }
 
     Vertices getVerticesOfSubTreeAt(Vertex const& subRoot) {
         Vertices result;

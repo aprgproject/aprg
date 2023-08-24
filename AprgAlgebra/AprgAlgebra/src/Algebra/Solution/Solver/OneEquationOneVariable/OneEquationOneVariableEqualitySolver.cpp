@@ -10,16 +10,14 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 namespace {
 constexpr int NUMBER_OF_ITERATIONS_IN_NEWTON_METHOD = 1000;
 constexpr double DIFFERENCE_TOLERANCE_FOR_ACCEPTED_VALUE = 1E-11;
 }  // namespace
 
-OneEquationOneVariableEqualitySolver::OneEquationOneVariableEqualitySolver() : BaseOneEquationOneVariableSolver() {}
+OneEquationOneVariableEqualitySolver::OneEquationOneVariableEqualitySolver()  {}
 
 void OneEquationOneVariableEqualitySolver::calculateSolution(SolutionSet& solutionSet, Equation const& equation) {
     if (equation.getEquationOperator().isEqual()) {
@@ -125,6 +123,4 @@ AlbaNumber OneEquationOneVariableEqualitySolver::getMoreAccurateValueFromNewtonM
     return result;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

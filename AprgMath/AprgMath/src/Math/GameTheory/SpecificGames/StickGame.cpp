@@ -30,4 +30,4 @@ UnsignedInteger StickGame::getOptimalNumberOfSticksToTake(UnsignedInteger const 
     return result;
 }
 
-}  // namespace alba
+}  // namespace alba::math

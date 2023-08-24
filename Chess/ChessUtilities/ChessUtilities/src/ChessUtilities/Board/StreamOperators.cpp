@@ -96,4 +96,4 @@ void printHexValuesInBoard(ostream& out, Board const& board) {
     out << "\n";
 }
 
-}  // namespace alba
+}  // namespace alba::chess

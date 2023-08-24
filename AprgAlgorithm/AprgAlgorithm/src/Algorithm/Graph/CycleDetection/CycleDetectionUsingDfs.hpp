@@ -40,9 +40,9 @@ public:
     }
 
 private:
-    bool hasACycle() const { return !m_pathsWithCycle.empty(); }
+    [[nodiscard]] bool hasACycle() const { return !m_pathsWithCycle.empty(); }
 
-    Path getPathWithCycle(Vertex const& secondToTheLastVertex, Vertex const& lastVertex) const {
+    [[nodiscard]] Path getPathWithCycle(Vertex const& secondToTheLastVertex, Vertex const& lastVertex) const {
         bool isSuccessful(true);
         Path reversedPath{lastVertex};
         Vertex currentVertex = secondToTheLastVertex;

@@ -6,9 +6,7 @@
 using namespace alba::AlbaNumberConstants;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(MonomialTest, MonomialsAreConstructedCorrectly) {
     Monomial monomial1;
@@ -395,6 +393,4 @@ TEST(MonomialTest, OutputStreamOperatorWorks) {
     EXPECT_EQ("0,-54[x^6][y^-1.25],-54[x^6],-54[x],0[x],1[x],1", ss.str());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

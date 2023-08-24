@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(TermTypesOperatorsTest, UnaryNotOperator_NotConstantOperationWorks) {
     Term term(~Constant(false));
@@ -240,7 +238,5 @@ TEST(TermTypesOperatorsTest, BinaryOrOperator_TermOrExpressionOperationWorks) {
     Term termToExpect(true);
     EXPECT_EQ(Term(termToExpect), term);
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

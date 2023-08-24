@@ -43,4 +43,4 @@ private:
     EntryPointers& b_entryPointers;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

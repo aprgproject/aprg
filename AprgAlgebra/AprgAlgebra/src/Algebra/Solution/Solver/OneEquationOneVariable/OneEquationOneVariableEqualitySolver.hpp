@@ -5,9 +5,7 @@
 #include <Algebra/Solution/Solver/NewtonMethod.hpp>
 #include <Algebra/Solution/Solver/OneEquationOneVariable/BaseOneEquationOneVariableSolver.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class OneEquationOneVariableEqualitySolver : public BaseOneEquationOneVariableSolver {
 public:
@@ -25,6 +23,4 @@ private:
         Term const& termToCheck, std::string const& variableNameForSubstitution, AlbaNumber const& value);
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 Operator::Operator(string const& operatingString) : m_operatingString(operatingString) {}
 
@@ -64,7 +62,5 @@ ostream& operator<<(ostream& out, Operator const& operatorObject) {
     out << operatorObject.m_operatingString;
     return out;
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

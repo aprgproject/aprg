@@ -53,17 +53,17 @@ private:
     string extractContentsUntilCloseParenthesis(string& lineString, int& index);
     void findAndProceedNotWhiteSpaceMultiLineSearch(string& lineString, int& index);
     bool readAnotherLineIfPossible(string& lineString, int& index);
-    bool checkAndProceedIfCharacterIsFound(string const& string1, string const& characters, int& index);
-    bool checkIfCharacterIsFound(string const& string1, string const& characters, int& index);
-    void ignoreEntireLine(string const& string1, int& index);
-    bool isIgnorable(string const& string1);
-    bool hasCMakeVariables(string const& string1);
+    static bool checkAndProceedIfCharacterIsFound(string const& string1, string const& characters, int& index);
+    static bool checkIfCharacterIsFound(string const& string1, string const& characters, int& index);
+    static void ignoreEntireLine(string const& string1, int& index);
+    static bool isIgnorable(string const& string1);
+    static bool hasCMakeVariables(string const& string1);
     ifstream m_fileStream;
     AlbaFileReader m_albaFileReader;
     CMakeDatabase& m_fileDirectoryDatabase;
     VariableMapType m_variableMap;
     string m_fullPathOfFile;
-    bool m_isFileValid;
+    bool m_isFileValid{false};
 };
 
 }  // namespace codeReview

@@ -16,7 +16,7 @@ public:
     virtual ~BaseSymbolTableWithBaseTree() =
         default;  // virtual destructor because of virtual functions (vtable exists)
 
-    Value get(Key const& key) const override {  // overrides in BaseSymbolTable
+    [[nodiscard]] Value get(Key const& key) const override {  // overrides in BaseSymbolTable
         return getStartingOnThisNode(b_root, key);
     }
 
@@ -30,7 +30,7 @@ protected:
         destinationNode.value = sourceNode.value;
     }
 
-    virtual Value getStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const {
+    [[nodiscard]] virtual Value getStartingOnThisNode(NodeUniquePointer const& nodePointer, Key const& key) const {
         Value result{};
         if (nodePointer) {
             Key const& currentKey(nodePointer->key);

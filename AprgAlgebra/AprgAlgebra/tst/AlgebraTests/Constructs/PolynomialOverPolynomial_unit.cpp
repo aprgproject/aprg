@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(PolynomialOverPolynomialTest, ConstructionWorks) {
     PolynomialOverPolynomial actual1;
@@ -314,6 +312,4 @@ TEST(PolynomialOverPolynomialTest, DivideWithRemainder) {
     EXPECT_EQ(remainderToExpect, quotientAndRemainder.remainder);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

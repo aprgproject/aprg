@@ -8,11 +8,9 @@
 
 using namespace std;
 
-namespace alba {
+namespace alba::algebra {
 
-namespace algebra {
-
-TermsAggregator::TermsAggregator(Terms const& terms) : m_startIndex(0), m_endIndex(0), m_terms(terms) {}
+TermsAggregator::TermsAggregator(Terms const& terms) :  m_terms(terms) {}
 
 Terms const& TermsAggregator::getTermsConstReference() const { return m_terms; }
 
@@ -269,6 +267,4 @@ void TermsAggregator::insertTerm(int const index, Term const& term) {
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

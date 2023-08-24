@@ -14,19 +14,19 @@ namespace codeReview {
 bool TermAnalyzer::isModifiedDueToStatements(Looper const& startLooper) {
     DBGPRINT1("isModifiedDueToStatements");
     bool isModified = true;
-    if (isModifiedDueToVariableDeclaration(startLooper))
+    if (isModifiedDueToVariableDeclaration(startLooper)) {
         ;
-    else if (isModifiedDueToCStyleArrayDeclaration(startLooper))
+    } else if (isModifiedDueToCStyleArrayDeclaration(startLooper)) {
         ;
-    else if (isModifiedDueToAssignment(startLooper))
+    } else if (isModifiedDueToAssignment(startLooper)) {
         ;
-    else if (isModifiedDueToRValueCanBeALine(startLooper))
+    } else if (isModifiedDueToRValueCanBeALine(startLooper)) {
         ;
-    else if (isModifiedDueToUsingNamespaceKeyword(startLooper))
+    } else if (isModifiedDueToUsingNamespaceKeyword(startLooper)) {
         ;
-    else if (isModifiedDueToTypeDefStatement(startLooper))
+    } else if (isModifiedDueToTypeDefStatement(startLooper)) {
         ;
-    else {
+    } else {
         isModified = false;
     }
     return isModified;
@@ -145,11 +145,11 @@ bool TermAnalyzer::isModifiedDueToTypeDefStatement(Looper const& startLooper) {
     if (isMultiLineComparisonSatisfiedThenMoveLooper<LooperConnector::None>(compareLooper, termCheckers)) {
         simplifyPrimitiveTypesForCurrentStatement(compareLooper);
         bool isModified = true;
-        if (isModifiedDueToTypeDefWithNormalParameters(startLooper, compareLooper))
+        if (isModifiedDueToTypeDefWithNormalParameters(startLooper, compareLooper)) {
             ;
-        else if (isModifiedDueToTypeDefWithStructAndBracesCStyleStatement(startLooper, compareLooper))
+        } else if (isModifiedDueToTypeDefWithStructAndBracesCStyleStatement(startLooper, compareLooper)) {
             ;
-        else {
+        } else {
             isModified = false;
         }
         return isModified;

@@ -6,9 +6,7 @@
 
 using namespace alba::algebra::Functions;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(ConvertHelpersTest, CanBeConvertedToConstantWorks) {
     EXPECT_TRUE(canBeConvertedToConstant(Polynomial()));
@@ -196,6 +194,4 @@ TEST(ConvertHelpersTest, ConvertFunctionToSimplestTermWorks) {
     EXPECT_EQ(termToExpect, termToVerify4);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

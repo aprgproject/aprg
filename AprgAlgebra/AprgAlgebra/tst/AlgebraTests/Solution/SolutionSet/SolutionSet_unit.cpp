@@ -11,9 +11,7 @@ using namespace alba::AlbaNumberConstants;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(SolutionSetTest, IsEmptyWorks) {
     SolutionSet solutionSet1;
@@ -232,6 +230,4 @@ TEST(SolutionSetTest, OutputStreamOperatorWorks) {
         convertToString(solutionSet));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -5,38 +5,34 @@
 
 #include <string>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class SeriesBasedOnFormula {
 public:
     SeriesBasedOnFormula(Term const& formulaForSeries, std::string const& variableName);
-    virtual bool isConvergent() const;
-    virtual bool isIncreasing() const;
-    virtual bool isDecreasing() const;
-    virtual bool isMonotonic() const;
-    virtual bool isBounded() const;
+    [[nodiscard]] virtual bool isConvergent() const;
+    [[nodiscard]] virtual bool isIncreasing() const;
+    [[nodiscard]] virtual bool isDecreasing() const;
+    [[nodiscard]] virtual bool isMonotonic() const;
+    [[nodiscard]] virtual bool isBounded() const;
 
-    virtual Term getFormulaForSeries() const;
-    virtual Term getValueAtIndex(int const index) const;
-    virtual Term getSum(int const startingIndex, int const endingIndex) const;
-    virtual Term getSumStartingAtIndexAndToInfinity(int const startingIndex) const;
-    virtual Term getValueAtInfinity() const;
-    virtual Term getRemainderAtIndex(int const index) const;
-    virtual AlbaNumberOptional getGreatestLowerBound() const;
-    virtual AlbaNumberOptional getLeastUpperBound() const;
+    [[nodiscard]] virtual Term getFormulaForSeries() const;
+    [[nodiscard]] virtual Term getValueAtIndex(int const index) const;
+    [[nodiscard]] virtual Term getSum(int const startingIndex, int const endingIndex) const;
+    [[nodiscard]] virtual Term getSumStartingAtIndexAndToInfinity(int const startingIndex) const;
+    [[nodiscard]] virtual Term getValueAtInfinity() const;
+    [[nodiscard]] virtual Term getRemainderAtIndex(int const index) const;
+    [[nodiscard]] virtual AlbaNumberOptional getGreatestLowerBound() const;
+    [[nodiscard]] virtual AlbaNumberOptional getLeastUpperBound() const;
 
-    virtual std::string getNameForVariableInFormula() const;
+    [[nodiscard]] virtual std::string getNameForVariableInFormula() const;
 
 protected:
-    AlbaNumbers getBoundValues() const;
-    AlbaNumbers getExtremaIndexes() const;
-    Term getSignDerivativeForFiniteCalculus() const;
+    [[nodiscard]] AlbaNumbers getBoundValues() const;
+    [[nodiscard]] AlbaNumbers getExtremaIndexes() const;
+    [[nodiscard]] Term getSignDerivativeForFiniteCalculus() const;
     Term m_formulaForSeries;
     std::string m_variableName;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -1531,4 +1531,4 @@ void Board::changePieceGridWithMove(Move const& move) {
 #undef CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED
 #undef CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED
 
-}  // namespace alba
+}  // namespace alba::chess

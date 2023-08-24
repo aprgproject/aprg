@@ -9,9 +9,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(VectorTypesTest, GettingMagnitudeWorks) {
     Term x(createExpressionIfPossible({2, "*", cos("t")}));
@@ -25,6 +23,4 @@ TEST(VectorTypesTest, GettingMagnitudeWorks) {
     EXPECT_EQ(stringToExpect, convertToString(magnitude));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

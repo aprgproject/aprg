@@ -11,9 +11,9 @@ public:
     using Index = int;
     using Value = typename Values::value_type;
 
-    SubArraySum(Values const& valuesToCheck) : m_valuesToCheck(valuesToCheck) {}
+    explicit SubArraySum(Values const& valuesToCheck) : m_valuesToCheck(valuesToCheck) {}
 
-    Values getSubArrayWithSum(Value const& targetSum) const {
+    [[nodiscard]] Values getSubArrayWithSum(Value const& targetSum) const {
         Values result;
         if (!m_valuesToCheck.empty()) {
             Index start = 0, end = 0, size = m_valuesToCheck.size();
@@ -50,4 +50,4 @@ private:
     Values const& m_valuesToCheck;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

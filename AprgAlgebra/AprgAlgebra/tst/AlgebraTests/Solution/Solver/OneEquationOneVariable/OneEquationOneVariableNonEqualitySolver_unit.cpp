@@ -7,9 +7,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(OneEquationOneVariableNonEqualitySolverTest, ConstructionWorks) { OneEquationOneVariableNonEqualitySolver(); }
 
@@ -182,6 +180,4 @@ TEST(OneEquationOneVariableNonEqualitySolverTest, PolynomialsInEquationAreSolved
 //    acceptedIntervals[0]);
 //}
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

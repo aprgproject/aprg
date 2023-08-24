@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(VariableTest, VariablesAreConstructedCorrectly) {
     Variable variable1;
@@ -67,6 +65,4 @@ TEST(VariableTest, OutputStreamOperatorWorks) {
     EXPECT_EQ(",time", ss.str());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

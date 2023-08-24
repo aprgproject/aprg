@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 namespace {
 using BooleanMatrix = MultipleGamesWithMaze::BooleanMatrix;
@@ -77,7 +75,5 @@ TEST(MultipleGamesWithMazeTest, Example1Works) {
     EXPECT_TRUE(games.hasNoMoves());
     games.setCoordinateAtGame(0U, {0U, 0U});
 }
-
-}  // namespace math
 
 }  // namespace alba

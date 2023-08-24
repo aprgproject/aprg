@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(CatalanNumbersTest, GetCatalanNumberWorks) {
     EXPECT_EQ(1U, getCatalanNumber(0U));
@@ -43,7 +41,5 @@ TEST(CatalanNumbersTest, GetNumberOfRootedTreesWorks) {
     EXPECT_EQ(9694845U, getNumberOfRootedTrees(16U));
     EXPECT_EQ(129644790U, getNumberOfRootedTrees(18U));
 }
-
-}  // namespace math
 
 }  // namespace alba

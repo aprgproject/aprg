@@ -11,9 +11,9 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    BinarySearchWithOneComparisonPerIteration(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    explicit BinarySearchWithOneComparisonPerIteration(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
-    Index getIndexOfValue(Value const& target) const {
+    [[nodiscard]] Index getIndexOfValue(Value const& target) const {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
             result = getIndexUsingIntervalsCanBeOutsideTarget(0, m_sortedValues.size() - 1, target);
@@ -22,7 +22,7 @@ public:
         return result;
     }
 
-    Index getIndexOfValue(Index const startIndex, Index const endIndex, Value const& target) const {
+    [[nodiscard]] Index getIndexOfValue(Index const startIndex, Index const endIndex, Value const& target) const {
         Index result(INVALID_INDEX);
         if (startIndex < static_cast<Index>(m_sortedValues.size()) &&
             endIndex < static_cast<Index>(m_sortedValues.size()) && startIndex <= endIndex) {
@@ -33,7 +33,7 @@ public:
     }
 
 private:
-    Index getIndexUsingIntervalsCanBeOutsideTarget(
+    [[nodiscard]] Index getIndexUsingIntervalsCanBeOutsideTarget(
         Index const startIndex, Index const endIndex, Value const& target) const {
         // Some end cases analysis:
         // -> If interval is one element[a], loop ends, we check low target
@@ -62,7 +62,7 @@ private:
         return result;
     }
 
-    Index getIndexUsingIntervalsInsideTarget(Index const startIndex, Index const endIndex, Value const& target) const {
+    [[nodiscard]] Index getIndexUsingIntervalsInsideTarget(Index const startIndex, Index const endIndex, Value const& target) const {
         // Some end cases analysis:
         // -> If interval is one element[a], loop ends, we check either low or high target
         // -> If interval is two elements[a,b], loop ends, we check either low or high target
@@ -90,7 +90,7 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Theoretically we need log N + 1 comparisons in worst case.
 // If we observe, we are using two comparisons per iteration except during final successful match, if any.

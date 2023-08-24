@@ -5,9 +5,7 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 using VariablesToTermsMap = std::map<std::string, Term>;
 using VariableTermPair = std::pair<std::string, Term>;
@@ -16,26 +14,26 @@ class SubstitutionOfVariablesToTerms {
 public:
     SubstitutionOfVariablesToTerms();
     SubstitutionOfVariablesToTerms(std::initializer_list<VariableTermPair> const& variablesWithTerms);
-    SubstitutionOfVariablesToTerms(VariablesToTermsMap const& variablesWithTerms);
+    explicit SubstitutionOfVariablesToTerms(VariablesToTermsMap const& variablesWithTerms);
 
-    bool isEmpty() const;
-    bool isVariableFound(std::string const& variable) const;
-    int getSize() const;
-    Term getTermForVariable(std::string const& variable) const;
-    VariablesToTermsMap const& getVariablesToTermsMap() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool isVariableFound(std::string const& variable) const;
+    [[nodiscard]] int getSize() const;
+    [[nodiscard]] Term getTermForVariable(std::string const& variable) const;
+    [[nodiscard]] VariablesToTermsMap const& getVariablesToTermsMap() const;
 
-    Term performSubstitutionTo(Variable const& variable) const;
-    Term performSubstitutionTo(Monomial const& monomial) const;
-    Term performSubstitutionTo(Polynomial const& polynomial) const;
-    Term performSubstitutionTo(Expression const& expression) const;
-    Term performSubstitutionTo(Function const& functionObject) const;
-    Term performSubstitutionTo(Term const& term) const;
-    Equation performSubstitutionTo(Equation const& equation) const;
+    [[nodiscard]] Term performSubstitutionTo(Variable const& variable) const;
+    [[nodiscard]] Term performSubstitutionTo(Monomial const& monomial) const;
+    [[nodiscard]] Term performSubstitutionTo(Polynomial const& polynomial) const;
+    [[nodiscard]] Term performSubstitutionTo(Expression const& expression) const;
+    [[nodiscard]] Term performSubstitutionTo(Function const& functionObject) const;
+    [[nodiscard]] Term performSubstitutionTo(Term const& term) const;
+    [[nodiscard]] Equation performSubstitutionTo(Equation const& equation) const;
 
-    Expression performSubstitutionForMonomial(Monomial const& monomial) const;
-    Expression performSubstitutionForPolynomial(Polynomial const& polynomial) const;
-    Expression performSubstitutionForExpression(Expression const& expression) const;
-    Function performSubstitutionForFunction(Function const& functionObject) const;
+    [[nodiscard]] Expression performSubstitutionForMonomial(Monomial const& monomial) const;
+    [[nodiscard]] Expression performSubstitutionForPolynomial(Polynomial const& polynomial) const;
+    [[nodiscard]] Expression performSubstitutionForExpression(Expression const& expression) const;
+    [[nodiscard]] Function performSubstitutionForFunction(Function const& functionObject) const;
 
     void putVariablesWithTerms(std::initializer_list<VariableTermPair> const& variablesWithTerms);
     void putVariablesWithTerms(VariablesToTermsMap const& variablesWithTerms);
@@ -48,6 +46,4 @@ private:
 
 using SubstitutionsOfVariablesToTerms = std::vector<SubstitutionOfVariablesToTerms>;
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -10,9 +10,7 @@ using namespace alba::AprgBitmap;
 using namespace alba::AprgBitmap::ColorUtilities;
 using namespace std;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 void gatherAndSaveDataInAnimizeColor(string const& bitmapPath) {
     AlbaLocalPathHandler bitmapPathHandler(bitmapPath);
@@ -25,7 +23,7 @@ void gatherAndSaveDataInAnimizeColor(string const& bitmapPath) {
     statistics.saveColorData(colorDataPathHandler.getFullPath());
 }
 
-AnimizeColor::AnimizeColor() : m_lowestIncludedValue(0.1), m_highestIncludedValue(0.9) {}
+AnimizeColor::AnimizeColor()  {}
 
 uint32_t AnimizeColor::getNewColor(uint32_t const originalColor) const {
     HueSaturationLightnessData newHslData(convertColorToHueSaturationLightnessData(originalColor));
@@ -123,7 +121,5 @@ double AnimizeColor::getNewValue(ColorDataMap const& colorDataMap, double const 
     }
     return newValue;
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

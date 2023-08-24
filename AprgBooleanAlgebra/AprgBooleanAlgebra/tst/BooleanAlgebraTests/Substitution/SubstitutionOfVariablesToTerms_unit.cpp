@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(SubstitutionOfVariablesToTermsTest, ConstructionWorks) {
     SubstitutionOfVariablesToTerms substitution1;
@@ -132,7 +130,5 @@ TEST(SubstitutionOfVariablesToTermsTest, VariableToExpressionSubstitutionWorks) 
     EXPECT_EQ(expectTerm3, verifyTerm3);
     EXPECT_EQ(expectTerm4, verifyTerm4);
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

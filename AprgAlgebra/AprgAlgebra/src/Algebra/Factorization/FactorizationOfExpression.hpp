@@ -4,11 +4,7 @@
 #include <Algebra/Term/TermTypes/Term.hpp>
 #include <Common/Math/Number/AlbaNumberTypes.hpp>
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 Terms factorizeAnExpression(Expression const& expression);
 Terms factorizeAnExpressionWithConfigurationChanged(Expression const& expression);
@@ -43,8 +39,4 @@ TermsRaiseToNumbers getFactorizedItemsBasedFromCollectedData(
 
 bool dontFactorizeBaseBecauseBaseIsARaiseToPowerExpression(Term const& base);
 bool dontFactorizeBecauseThereIsSquareRootOfNegativeNumber(Term const& base, AlbaNumber const& exponent);
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

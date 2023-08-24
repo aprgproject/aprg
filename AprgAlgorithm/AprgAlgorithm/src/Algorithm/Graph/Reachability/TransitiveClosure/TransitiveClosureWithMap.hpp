@@ -16,7 +16,7 @@ public:
 
     explicit TransitiveClosureWithMap(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) { initialize(); }
 
-    bool isReachable(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
+    [[nodiscard]] bool isReachable(Vertex const& sourceVertex, Vertex const& destinationVertex) const override {
         bool result(false);
         auto it = m_vertexToReachabilityMap.find(sourceVertex);
         if (it != m_vertexToReachabilityMap.cend()) {

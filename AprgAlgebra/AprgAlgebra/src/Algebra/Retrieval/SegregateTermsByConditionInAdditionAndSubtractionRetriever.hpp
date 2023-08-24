@@ -4,18 +4,16 @@
 
 #include <functional>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class SegregateTermsByConditionInAdditionAndSubtractionRetriever : public BaseRetriever {
 public:
     using ConditionFunction = std::function<bool(Term const&)>;
 
-    SegregateTermsByConditionInAdditionAndSubtractionRetriever(ConditionFunction const& condition);
+    explicit SegregateTermsByConditionInAdditionAndSubtractionRetriever(ConditionFunction const& condition);
 
-    Term const& getTermWithCondition() const;
-    Term const& getTermWithoutCondition() const;
+    [[nodiscard]] Term const& getTermWithCondition() const;
+    [[nodiscard]] Term const& getTermWithoutCondition() const;
 
     void retrieveFromConstant(Constant const& constant) override;
     void retrieveFromVariable(Variable const& variable) override;
@@ -30,6 +28,4 @@ private:
     Term m_termWithoutCondition;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

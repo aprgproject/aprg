@@ -2,9 +2,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(StringHelpersTest, IsOperatorWorks) {
     EXPECT_FALSE(isOperator(""));
@@ -108,6 +106,4 @@ TEST(StringHelpersTest, AddValueTermIfNotEmptyWorks) {
     EXPECT_DOUBLE_EQ(5, termsToVerify1[0].getAsNumber().getDouble());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

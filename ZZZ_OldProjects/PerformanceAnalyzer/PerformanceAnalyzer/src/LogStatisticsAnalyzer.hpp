@@ -34,8 +34,8 @@ private:
     void initializeLogDetailsToCheck();
     AlbaLocalPathHandler m_btsLogPathHandler;
     std::vector<LogDetails> m_logDetailsToCheck;
-    unsigned int m_totalLinesFound;
-    unsigned int m_totalLines;
+    unsigned int m_totalLinesFound{0};
+    unsigned int m_totalLines{0};
 };
 
 }  // namespace alba

@@ -20,7 +20,7 @@ public:
         reinitializeHPartsAndPParts();
     }
 
-    HashValue getHashCodeOfWholeString() const {
+    [[nodiscard]] HashValue getHashCodeOfWholeString() const {
         // The hash value of any substring s[a...b] can be calculated in O(1) time using the formula:
         // (h[b] - (h[a-1] * p[b-a+1])) mod B
         // assuming that a>0.
@@ -33,7 +33,7 @@ public:
         return result;
     }
 
-    HashValue getHashCodeOfSubstring(int const startIndex, int const endIndex) const {
+    [[nodiscard]] HashValue getHashCodeOfSubstring(int const startIndex, int const endIndex) const {
         // The hash value of any substring s[a...b] can be calculated in O(1) time using the formula:
         // (h[b] - (h[a-1] * p[b-a+1])) mod B
         // assuming that a>0.

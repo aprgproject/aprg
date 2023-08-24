@@ -44,7 +44,7 @@ HashValue getHashForDoubleHash(
     // since the initial probe position, the offset or both may vary.
 }
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Check other discussion in other files as well, they are understandable insights (like BaseLinearProbingHash.hpp).
 

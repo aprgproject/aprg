@@ -30,4 +30,4 @@ private:
 
 using EllipticCones = std::vector<EllipticCone>;
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

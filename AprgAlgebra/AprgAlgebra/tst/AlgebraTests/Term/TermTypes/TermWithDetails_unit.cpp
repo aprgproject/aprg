@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(TermWithDetailsTest, ConstructionWorks) {
     TermWithDetails termWithDetails1(Term(10), TermAssociationType::Negative);
@@ -89,6 +87,4 @@ TEST(TermWithDetailsTest, ClearWorks) {
     EXPECT_EQ(TermAssociationType::Positive, termWithDetails.association);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

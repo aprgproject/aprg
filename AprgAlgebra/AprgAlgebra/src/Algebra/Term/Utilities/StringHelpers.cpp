@@ -8,9 +8,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool isOperator(string const& stringObject) {
     return "+" == stringObject || "-" == stringObject || "*" == stringObject || "/" == stringObject ||
@@ -124,6 +122,4 @@ void addValueTermIfNotEmpty(Terms& terms, string const& valueString) {
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

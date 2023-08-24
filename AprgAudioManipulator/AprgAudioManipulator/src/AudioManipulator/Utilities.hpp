@@ -33,4 +33,4 @@ void searchAndTryToReplicateSamples(
 void searchAndTryToReplicate(
     std::string const& filePathForAudioToChange, std::string const& filePathForAudioToReplicate,
     std::string const& filePathForAudioToSearch, bool const alwaysPutNewValue);
-}  // namespace alba
+}  // namespace alba::AprgAudio

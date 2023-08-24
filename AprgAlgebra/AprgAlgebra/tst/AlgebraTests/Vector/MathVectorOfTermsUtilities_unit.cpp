@@ -12,11 +12,7 @@ using namespace alba::mathHelper;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace VectorUtilities {
+namespace alba::algebra::VectorUtilities {
 
 TEST(MathVectorOfTermsUtilitiesTest, IsDivergenceOfCurlZeroWorks) {
     Term x(createExpressionIfPossible({getEAsATerm(), "^", Monomial(2, {{"x", 1}})}));
@@ -459,8 +455,4 @@ TEST(MathVectorOfTermsUtilitiesTest, GetDelWorks) {
     EXPECT_EQ(stringToExpect, convertToString(vectorToVerify));
 }
 
-}  // namespace VectorUtilities
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::VectorUtilities

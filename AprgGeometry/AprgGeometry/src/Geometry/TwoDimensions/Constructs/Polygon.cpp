@@ -124,4 +124,4 @@ void Polygon<numberOfVertices>::getPointsFromVerticesWithoutLastPoint(
 template class Polygon<3>;  // clang needs this on implementation file
 template class Polygon<4>;  // clang needs this on implementation file
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

@@ -5,8 +5,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-namespace algebra {
+namespace alba::algebra {
 
 DerivativeVariableName::DerivativeVariableName(
     int const differentiationLevel, string const& baseVariable, string const& dependentVariable)
@@ -149,6 +148,4 @@ void DerivativeVariableName::processDenominator(string const& denominator) {
     }
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -33,7 +33,7 @@ public:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // -> How does this work?
 // ---> Let there be total N nodes in the list. It is easier to understand from the last node.

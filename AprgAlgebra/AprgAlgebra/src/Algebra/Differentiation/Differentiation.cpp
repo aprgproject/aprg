@@ -18,8 +18,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::algebra::Simplification;
 using namespace std;
 
-namespace alba {
-namespace algebra {
+namespace alba::algebra {
 
 Differentiation::Differentiation(string const& nameOfVariableToDifferentiate)
     : m_nameOfVariableToDifferentiate(nameOfVariableToDifferentiate) {}
@@ -431,6 +430,4 @@ bool Differentiation::isChangingTerm(Term const& term) const {
     });
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

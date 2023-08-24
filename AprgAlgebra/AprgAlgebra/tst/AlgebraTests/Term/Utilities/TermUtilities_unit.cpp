@@ -8,9 +8,7 @@
 using namespace alba::AlbaNumberConstants;
 using namespace alba::algebra::Functions;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(TermUtilitiesTest, IsNegatedTermSimplerWorks) {
     Term xToTheX(createExpressionIfPossible({"x", "^", "x"}));
@@ -223,6 +221,4 @@ TEST(TermUtilitiesTest, NegateExpressionWorks) {
     EXPECT_EQ(expectedExpression5, expressionToVerify5);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

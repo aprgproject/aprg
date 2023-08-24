@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 BinomialSeries::BinomialSeries(Term const& monomialPart, Term const& exponent)
     : m_monomialPart(monomialPart), m_exponent(exponent) {}
@@ -44,6 +42,4 @@ Term BinomialSeries::getBinomialSeriesApproximation(
     return result;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

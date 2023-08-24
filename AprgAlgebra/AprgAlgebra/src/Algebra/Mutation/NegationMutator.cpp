@@ -3,9 +3,7 @@
 #include <Algebra/Term/Operators/TermOperators.hpp>
 #include <Algebra/Term/Utilities/BaseTermHelpers.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 void NegationMutator::mutateTerm(Term &term) {
     if (term.isConstant()) {
@@ -45,6 +43,4 @@ void NegationMutator::mutateExpression(Expression &expression) {
 
 void NegationMutator::mutateFunction(Function &) {}
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

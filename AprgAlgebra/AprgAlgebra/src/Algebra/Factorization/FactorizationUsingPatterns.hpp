@@ -2,11 +2,7 @@
 
 #include <Algebra/Term/TermTypes/Polynomial.hpp>
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 Polynomials factorizeUsingPatterns(Polynomial const& polynomial);
 void factorizeUsingPatternsIfPossible(Polynomials& result, Polynomial const& polynomial);
@@ -20,8 +16,4 @@ bool isDifferenceOfSquares(Polynomial const& polynomial);
 bool isDifferenceOfCubes(Polynomial const& polynomial);
 bool isSumOfCubes(Polynomial const& polynomial);
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

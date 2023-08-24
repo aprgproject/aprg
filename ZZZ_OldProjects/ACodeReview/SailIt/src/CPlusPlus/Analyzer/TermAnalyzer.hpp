@@ -153,7 +153,7 @@ private:
 
     // SharedSimplifiers
     void checkCondition(Looper const& startLooper);
-    bool isClosingPartnerFoundAndMoveLooper(
+    static bool isClosingPartnerFoundAndMoveLooper(
         Looper& movableLooper, string const& openingOperator, string const& closingOperator);
     template <LooperConnector looperConnector>
     void connectLooper(Looper&);
@@ -231,10 +231,10 @@ private:
     void updateAfterOneIteration(Looper& movableLooper, LooperIndex& previousModifiedIndex);
     bool isStringFoundInLooper(Looper const& startLooper, string const& stringToCompare);
     bool isStringFoundInMacro(string const& macroName, string const& stringToCompare);
-    void moveLooperToPreviousModifiedIndex(Looper& movableLooper, LooperIndex const previousModifiedIndex);
-    string getLocatorString(Looper const& startLooper);
-    string accumulateLooperContentsToString(Looper const& startLooper);
-    string accumulateLooperContentsToPrintableString(Looper const& startLooper);
+    static void moveLooperToPreviousModifiedIndex(Looper& movableLooper, LooperIndex const previousModifiedIndex);
+    static string getLocatorString(Looper const& startLooper);
+    static string accumulateLooperContentsToString(Looper const& startLooper);
+    static string accumulateLooperContentsToPrintableString(Looper const& startLooper);
 
     DequeOfTerms& m_terms;
     CPlusPlusDatabase& m_database;

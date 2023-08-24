@@ -3,9 +3,7 @@
 #include <Algebra/Substitution/SubstitutionOfVariablesToTerms.hpp>
 #include <Algebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class AxisRotation {
 public:
@@ -25,6 +23,4 @@ private:
     SubstitutionOfVariablesToTerms m_substitution;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

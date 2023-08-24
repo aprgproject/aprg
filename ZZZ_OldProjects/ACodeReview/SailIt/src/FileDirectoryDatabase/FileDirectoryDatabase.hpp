@@ -11,11 +11,11 @@ typedef set<string> SetOfDirectories;
 class FileDirectoryDatabase {
 public:
     void printFilesAndDirectories(std::ostream& outputStream) const;
-    bool isFileIncluded(string const& baseDirectory, string const& fileName) const;
-    string getFullPathOfFile(string const& baseDirectory, string const& fileName) const;
+    [[nodiscard]] bool isFileIncluded(string const& baseDirectory, string const& fileName) const;
+    [[nodiscard]] string getFullPathOfFile(string const& baseDirectory, string const& fileName) const;
     SetOfFiles& getSetOfFilesReference();
     SetOfDirectories& getSetOfDirectoriesReference();
-    bool isFileInFullPath(string const& fullPathFromDatabase, string const& fileName) const;
+    [[nodiscard]] static bool isFileInFullPath(string const& fullPathFromDatabase, string const& fileName) ;
 
     void allowNonExistentDirectories();
     void addFileOrDirectory(string const& fileOrDirectory);

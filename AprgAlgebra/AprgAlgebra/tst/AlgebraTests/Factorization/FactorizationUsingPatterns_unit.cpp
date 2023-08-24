@@ -4,11 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 TEST(FactorizationUsingPatternsTest, FactorizeUsingPatternsWorksWhenItCannotBeFactored) {
     Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
@@ -336,8 +332,4 @@ TEST(FactorizationUsingPatternsTest, IsSumOfCubesWorks) {
     EXPECT_FALSE(isSumOfCubes(polynomial9));
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

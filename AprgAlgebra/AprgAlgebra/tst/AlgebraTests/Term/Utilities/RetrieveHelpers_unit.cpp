@@ -7,9 +7,7 @@
 
 using namespace alba::algebra::Functions;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(RetrieveHelpersTest, HasAnyFunctionsWorks) {
     Term term1(5);
@@ -125,6 +123,4 @@ TEST(RetrieveHelpersTest, GetTermsWithDetailsThatSatisfiesCondition) {
     EXPECT_EQ(TermAssociationType::Negative, termsWithDetailsToVerify[0].association);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

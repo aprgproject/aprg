@@ -6,9 +6,7 @@
 #include <string>
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class Equation {
 public:
@@ -21,12 +19,12 @@ public:
     bool operator!=(Equation const& second) const;
     bool operator<(Equation const& second) const;
 
-    bool isEmpty() const;
-    bool isEquationSatisfied() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool isEquationSatisfied() const;
 
-    EquationOperator const& getEquationOperator() const;
-    Term const& getLeftHandTerm() const;
-    Term const& getRightHandTerm() const;
+    [[nodiscard]] EquationOperator const& getEquationOperator() const;
+    [[nodiscard]] Term const& getLeftHandTerm() const;
+    [[nodiscard]] Term const& getRightHandTerm() const;
 
     Term& getLeftHandTermReference();
     Term& getRightHandTermReference();
@@ -43,6 +41,4 @@ private:
 
 using Equations = std::vector<Equation>;
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

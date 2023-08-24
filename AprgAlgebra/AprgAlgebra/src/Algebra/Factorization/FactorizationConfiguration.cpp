@@ -2,9 +2,7 @@
 
 namespace alba {
 
-namespace algebra {
-
-namespace Factorization {
+namespace algebra::Factorization {
 
 bool shouldSimplifyExpressionsToFactors() {
     return Configuration::getInstance().getConfigurationDetails().shouldSimplifyExpressionsToFactors;
@@ -16,9 +14,7 @@ bool shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue() {
         .shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue;
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
+}  // namespace algebra::Factorization
 
 template <>
 algebra::Factorization::ConfigurationDetails

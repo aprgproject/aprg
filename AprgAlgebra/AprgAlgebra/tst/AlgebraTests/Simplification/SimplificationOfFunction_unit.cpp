@@ -5,11 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Simplification {
+namespace alba::algebra::Simplification {
 
 TEST(SimplificationOfFunctionTest, SimplifyWorksOnAbsoluteValueExpressionWithPositiveFirstCoefficient) {
     SimplificationOfFunction simplification(
@@ -33,8 +29,4 @@ TEST(SimplificationOfFunctionTest, SimplifyWorksOnAbsoluteValueExpressionWithNeg
     EXPECT_EQ(expectedFunction, actualEquation);
 }
 
-}  // namespace Simplification
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Simplification

@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(GeometricSeriesTest, ConstructionWorksUsingFirstTermAndCommonDifference) {
     GeometricSeries series(-8, AlbaNumber::createFraction(-1, 2));
@@ -83,6 +81,4 @@ TEST(GeometricSeriesTest, ExperimentalTest) {
     EXPECT_EQ(Term(AlbaNumber::createFraction(16, 11)), series.getInfiniteSumStartingFrom(0));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

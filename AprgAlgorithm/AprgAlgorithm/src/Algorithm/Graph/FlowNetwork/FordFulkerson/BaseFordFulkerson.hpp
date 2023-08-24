@@ -26,13 +26,13 @@ public:
 
     virtual ~BaseFordFulkerson() = default;  // virtual destructor because of virtual functions (vtable exists)
 
-    FlowDataType getMaxFlowValue() const { return m_maxFlowValue; }
+    [[nodiscard]] FlowDataType getMaxFlowValue() const { return m_maxFlowValue; }
 
-    Paths const& getAugmentingPaths() const { return m_augmentingPaths; }
+    [[nodiscard]] Paths const& getAugmentingPaths() const { return m_augmentingPaths; }
 
-    SinkSourceFlowNetworkType const& getFlowNetwork() const { return m_flowNetwork; }
+    [[nodiscard]] SinkSourceFlowNetworkType const& getFlowNetwork() const { return m_flowNetwork; }
 
-    Edges getMinCutEdges() const {
+    [[nodiscard]] Edges getMinCutEdges() const {
         // Let A be the set of nodes that can be reached from the source using positive-weight edges.
         // The processed vertices have positive-weight edges from source of last iteration.
 

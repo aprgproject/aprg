@@ -8,9 +8,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Monomial createMonomialFromNumber(AlbaNumber const& number) { return Monomial(number, {}); }
 
@@ -130,6 +128,4 @@ Term createTermWithRaiseToPowerTermsWithDetails(TermsWithDetails const& termsWit
     return convertExpressionToSimplestTerm(Expression(OperatorLevel::RaiseToPower, termsWithDetails));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

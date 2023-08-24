@@ -60,7 +60,7 @@ public:
     }
 
 protected:
-    Value getCombinedValueBasedFromChildren(NodePointer const& nodePointer) const {
+    [[nodiscard]] Value getCombinedValueBasedFromChildren(NodePointer const& nodePointer) const {
         Value result{};
         if (nodePointer->leftChildPointer && nodePointer->rightChildPointer) {
             result = m_function(nodePointer->leftChildPointer->value, nodePointer->rightChildPointer->value);

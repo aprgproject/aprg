@@ -18,15 +18,15 @@ public:
 
     SinkSourceFlowNetwork(Vertex const& source, Vertex const& sink) : BaseClass(), m_source(source), m_sink(sink) {}
 
-    bool isAnStCut(Vertices const& partWithSource, Vertices const& partWithSink) const {
+    [[nodiscard]] bool isAnStCut(Vertices const& partWithSource, Vertices const& partWithSink) const {
         // An st-cut is a cut that places vertex "source" in one of this its sets and vertex "sink" in the other
         return std::find(partWithSource.cbegin(), partWithSource.cend(), m_source) != partWithSource.cend() &&
                std::find(partWithSink.cbegin(), partWithSink.cend(), m_sink) != partWithSink.cend();
     }
 
-    Vertex getSourceVertex() const { return m_source; }
+    [[nodiscard]] Vertex getSourceVertex() const { return m_source; }
 
-    Vertex getSinkVertex() const { return m_sink; }
+    [[nodiscard]] Vertex getSinkVertex() const { return m_sink; }
 
 private:
     Vertex m_source;

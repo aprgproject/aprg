@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace AprgAudio {
+namespace alba::AprgAudio {
 
 NearestSamples::NearestSamples(Samples const& samples) : m_samples(samples) { saveToValuesToIndexes(); }
 
@@ -45,7 +43,5 @@ void NearestSamples::saveToValuesToIndexes() {
         m_valuesToIndexes.emplace(sample, i++);
     }
 }
-
-}  // namespace AprgAudio
 
 }  // namespace alba

@@ -3,9 +3,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(ConvertHelpersTest, SimplifyAndConvertExpressionToSimplestTermWorks) {
     Expression expression1(createExpressionIfPossible({true}));
@@ -40,7 +38,5 @@ TEST(ConvertHelpersTest, ConvertExpressionToSimplestTermWorks) {
     Term termToExpect3(createExpressionIfPossible({"x", "&", "y"}));
     EXPECT_EQ(termToExpect3, termToVerify3);
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

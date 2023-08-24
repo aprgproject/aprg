@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Term operator+(Term const& term) { return performUnaryPlus(term); }
 
@@ -47,6 +45,4 @@ Term& operator^=(Term& term1, Term const& term2) {
     return term1;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

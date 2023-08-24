@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 IntegrationHistory::IntegrationHistory() {}
 
@@ -73,6 +71,4 @@ void IntegrationHistory::logAfter(
     Term const&)               // output)
 {}
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

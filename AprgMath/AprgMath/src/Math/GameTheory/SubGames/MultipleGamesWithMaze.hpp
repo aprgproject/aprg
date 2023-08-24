@@ -39,4 +39,4 @@ private:
     Coordinates m_coordinateInGames;
 };
 
-}  // namespace alba
+}  // namespace alba::math

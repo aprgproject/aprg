@@ -5,9 +5,7 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Terms getLagrangeMultipliers(
     Term const& term, stringHelper::strings const& coordinateNames, Terms const& lagrangeFunctions);
@@ -20,6 +18,4 @@ Term getTermWithLagrangeFunctions(
 stringHelper::strings getLagrangeMultiplierNames(int const size);
 std::string getLagrangeMultiplierName(int const index);
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

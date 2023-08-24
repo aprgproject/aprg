@@ -21,9 +21,9 @@ public:
 
     IndexedBinaryHeapPriorityQueue()  {}
 
-    bool isEmpty() const { return getSize() == 0; }
+    [[nodiscard]] bool isEmpty() const { return getSize() == 0; }
 
-    bool contains(int const objectIndex) const {
+    [[nodiscard]] bool contains(int const objectIndex) const {
         bool result(false);
         if (objectIndex < static_cast<int>(m_objectIndexToTreeIndex.size())) {
             result = m_objectIndexToTreeIndex[objectIndex] !=
@@ -32,21 +32,21 @@ public:
         return result;
     }
 
-    int getSize() const { return m_size; }
+    [[nodiscard]] int getSize() const { return m_size; }
 
-    Objects const& getObjects() const { return m_objects; }
+    [[nodiscard]] Objects const& getObjects() const { return m_objects; }
 
-    Indexes const& getTreeIndexToObjectIndex() const { return m_treeIndexToObjectIndex; }
+    [[nodiscard]] Indexes const& getTreeIndexToObjectIndex() const { return m_treeIndexToObjectIndex; }
 
-    Indexes const& getObjectIndexToTreeIndex() const { return m_objectIndexToTreeIndex; }
+    [[nodiscard]] Indexes const& getObjectIndexToTreeIndex() const { return m_objectIndexToTreeIndex; }
 
-    int getIndexOfTopObject() const {
+    [[nodiscard]] int getIndexOfTopObject() const {
         return m_treeIndexToObjectIndex[IndexedBinaryHeapPriorityQueueConstants::INDEX_OF_TOP_TREE];
     }
 
-    Object const& getTopObject() const { return m_objects[getIndexOfTopObject()]; }
+    [[nodiscard]] Object const& getTopObject() const { return m_objects[getIndexOfTopObject()]; }
 
-    Object const& getObjectAt(int const objectIndex) const { return m_objects[objectIndex]; }
+    [[nodiscard]] Object const& getObjectAt(int const objectIndex) const { return m_objects[objectIndex]; }
 
     void setNumberOfItems(int const numberOfItems) { resizeToHaveThisIndexIfNeeded(numberOfItems); }
 
@@ -110,12 +110,12 @@ public:
 private:
     bool isInHeapOrder(Object const& child, Object const& parent) { return m_comparator(child, parent); }
 
-    int getContainerIndex(int const treeIndex) const {
+    [[nodiscard]] int getContainerIndex(int const treeIndex) const {
         // This is not used because size usage is not efficient. No use to make it efficient.
         return treeIndex - 1;
     }
 
-    Object const& getObjectOnTree(int const treeIndex) const { return m_objects[m_treeIndexToObjectIndex[treeIndex]]; }
+    [[nodiscard]] Object const& getObjectOnTree(int const treeIndex) const { return m_objects[m_treeIndexToObjectIndex[treeIndex]]; }
 
     void resizeToHaveThisIndexIfNeeded(int const index) {
         if (m_maxSize <= index) {
@@ -178,4 +178,4 @@ private:
     Objects m_objects;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

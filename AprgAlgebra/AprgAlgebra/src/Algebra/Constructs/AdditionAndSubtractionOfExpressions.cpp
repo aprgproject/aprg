@@ -193,4 +193,4 @@ void AdditionAndSubtractionOfExpressions::putItem(Expression const& expression, 
     m_associations.emplace_back(correctedAssociation);
 }
 
-}  // namespace alba
+}  // namespace alba::algebra

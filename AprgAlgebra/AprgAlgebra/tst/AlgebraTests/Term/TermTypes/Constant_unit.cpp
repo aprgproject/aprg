@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(ConstantTest, ConstantsAreConstructedCorrectly) {
     Constant constant1;
@@ -76,6 +74,4 @@ TEST(ConstantTest, OutputStreamOperatorWorks) {
     EXPECT_EQ("0,3484,-1561,(-83/8349),-85.4563", ss.str());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

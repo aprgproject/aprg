@@ -12,9 +12,9 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    TernaryNearestValueSearch(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    explicit TernaryNearestValueSearch(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
-    Value getNearestValue(Value const& target) const {
+    [[nodiscard]] Value getNearestValue(Value const& target) const {
         Value result{};
         if (!m_sortedValues.empty()) {
             Index selectedIndex(getIndexOfNearestValueWithoutCheck(0, m_sortedValues.size() - 1, target));
@@ -25,7 +25,7 @@ public:
         return result;
     }
 
-    Index getIndexOfNearestValue(Value const& target) const {
+    [[nodiscard]] Index getIndexOfNearestValue(Value const& target) const {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
             result = getIndexOfNearestValueWithoutCheck(0, m_sortedValues.size() - 1, target);
@@ -33,7 +33,7 @@ public:
         return result;
     }
 
-    Index getIndexOfNearestValue(Index const lowIndex, Index const highIndex, Value const& target) const {
+    [[nodiscard]] Index getIndexOfNearestValue(Index const lowIndex, Index const highIndex, Value const& target) const {
         Index result(INVALID_INDEX);
         if (lowIndex < static_cast<Index>(m_sortedValues.size()) &&
             highIndex < static_cast<Index>(m_sortedValues.size()) && lowIndex <= highIndex) {
@@ -43,7 +43,7 @@ public:
     }
 
 private:
-    Index getIndexOfNearestValueWithoutCheck(Index const lowIndex, Index const highIndex, Value const& target) const {
+    [[nodiscard]] Index getIndexOfNearestValueWithoutCheck(Index const lowIndex, Index const highIndex, Value const& target) const {
         Index result(INVALID_INDEX);
         if (target < m_sortedValues[lowIndex]) {
             result = (lowIndex == 0) ? 0 : getIndexOfNearestValueInBetweenTwoIndices(lowIndex - 1, lowIndex, target);
@@ -66,7 +66,7 @@ private:
         return result;
     }
 
-    Index getIndexOfNearestValueInBetweenTwoIndices(
+    [[nodiscard]] Index getIndexOfNearestValueInBetweenTwoIndices(
         Index const lowIndex, Index const highIndex, Value const& target) const {
         Value deviationFromLower(mathHelper::getPositiveDelta(target, m_sortedValues[lowIndex]));
         Value deviationFromHigher(mathHelper::getPositiveDelta(target, m_sortedValues[highIndex]));
@@ -76,4 +76,4 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

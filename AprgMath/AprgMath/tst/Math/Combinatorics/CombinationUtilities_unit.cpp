@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(CombinationUtilitiesTest, IsNumberOfCombinationsEqualToItsCounterpartWorks) {
     EXPECT_FALSE(isNumberOfCombinationsEqualToItsCounterpart(2U, 4U));  // Wrong input so its false, it should be n>k
@@ -18,7 +16,5 @@ TEST(CombinationUtilitiesTest, IsTheSumOfAllNumberOfCombinationsEqualTo2ToTheNWo
     EXPECT_TRUE(isTheSumOfAllNumberOfCombinationsEqualTo2ToTheN(4U));
     EXPECT_TRUE(isTheSumOfAllNumberOfCombinationsEqualTo2ToTheN(10U));
 }
-
-}  // namespace math
 
 }  // namespace alba

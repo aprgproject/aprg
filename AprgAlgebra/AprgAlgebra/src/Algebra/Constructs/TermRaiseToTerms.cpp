@@ -18,9 +18,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TermRaiseToTerms::TermRaiseToTerms()
     : m_shouldSimplifyToFactors(false),
@@ -36,7 +34,7 @@ TermRaiseToTerms::TermRaiseToTerms(TermsWithDetails const& termsInRaiseToPowerEx
 
 TermRaiseToTerms::TermRaiseToTerms(Term const& base, Terms const& exponents)
     : m_base(base),
-      m_exponents(),
+      
       m_shouldSimplifyToFactors(false),
       m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt(false),
       m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase(false) {
@@ -253,6 +251,4 @@ Term TermRaiseToTerms::getCombinedBaseAndExponents() const {
     return combinedTerm;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

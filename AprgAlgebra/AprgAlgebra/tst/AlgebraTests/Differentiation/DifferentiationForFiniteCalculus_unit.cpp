@@ -9,9 +9,7 @@ using namespace alba::algebra::Functions;
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(DifferentiationForFiniteCalculusTest, DifferentiateWorksForTerm) {
     DifferentiationForFiniteCalculus differentiationForX("x");
@@ -312,6 +310,4 @@ TEST(DifferentiationForFiniteCalculusTest, DifferentiateEquationWorks) {
     EXPECT_EQ(stringToExpect2, convertToString(equationToVerify2));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

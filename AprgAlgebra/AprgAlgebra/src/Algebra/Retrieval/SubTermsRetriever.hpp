@@ -3,15 +3,13 @@
 #include <Algebra/Retrieval/BaseRetriever.hpp>
 #include <Algebra/Term/TermTypes/TermContainerTypes.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class SubTermsRetriever final : public BaseRetriever {
 public:
     SubTermsRetriever();
 
-    TermSet const& getSubTerms() const;
+    [[nodiscard]] TermSet const& getSubTerms() const;
     void retrieveFromConstant(Constant const& constant) override;
     void retrieveFromVariable(Variable const& variable) override;
     void retrieveFromMonomial(Monomial const& monomial) override;
@@ -23,6 +21,4 @@ private:
     TermSet m_subTerms;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

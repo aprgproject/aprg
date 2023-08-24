@@ -16,4 +16,4 @@ ostream& operator<<(ostream& out, Rectangle const& rectangle) {
     return out;
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

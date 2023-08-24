@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Operator::Operator(string const& operatingString) : m_operatingString(operatingString) {}
 
@@ -67,6 +65,4 @@ ostream& operator<<(ostream& out, Operator const& operatorObject) {
     return out;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

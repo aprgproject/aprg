@@ -11,9 +11,9 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    BinarySearchWithTwoIndices(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    explicit BinarySearchWithTwoIndices(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
-    Index getIndexOfValue(Value const& target) const {
+    [[nodiscard]] Index getIndexOfValue(Value const& target) const {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
             result = getIndexUsingInterval(0, m_sortedValues.size() - 1, target);
@@ -21,7 +21,7 @@ public:
         return result;
     }
 
-    Index getIndexOfValue(Index const startIndex, Index const endIndex, Value const& target) const {
+    [[nodiscard]] Index getIndexOfValue(Index const startIndex, Index const endIndex, Value const& target) const {
         Index result(INVALID_INDEX);
         if (startIndex < static_cast<Index>(m_sortedValues.size()) &&
             endIndex < static_cast<Index>(m_sortedValues.size()) && startIndex <= endIndex) {
@@ -31,7 +31,7 @@ public:
     }
 
 private:
-    Index getIndexUsingInterval(Index const startIndex, Index const endIndex, Value const& target) const {
+    [[nodiscard]] Index getIndexUsingInterval(Index const startIndex, Index const endIndex, Value const& target) const {
         Index result(INVALID_INDEX);
         Index lowIndex(startIndex), highIndex(endIndex);
         while (lowIndex <= highIndex) {

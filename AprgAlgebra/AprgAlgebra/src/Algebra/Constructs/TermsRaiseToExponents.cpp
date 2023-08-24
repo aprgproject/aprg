@@ -8,9 +8,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 template Term TermsRaiseToExponents<AlbaNumber, TermRaiseToANumber>::convertToTerm(
     Term const& base, AlbaNumber const& exponent) const;
 template Term TermsRaiseToExponents<Term, TermRaiseToTerms>::convertToTerm(
@@ -253,6 +251,4 @@ Term TermsRaiseToExponents<ExponentType, BaseRaiseToExponentType>::convertToTerm
     return result;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

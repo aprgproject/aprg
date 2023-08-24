@@ -8,9 +8,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(TaylorSeriesTest, ConstructionWorks) {
     Term formula(createExpressionIfPossible({getEAsATerm(), "^", "x"}));
@@ -61,6 +59,4 @@ TEST(TaylorSeriesTest, GetValueForMaclaurinSeriesAtIndexWorks) {
     EXPECT_EQ(stringToExpect5, convertToString(series.getValueForMaclaurinSeriesAtIndex(4)));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

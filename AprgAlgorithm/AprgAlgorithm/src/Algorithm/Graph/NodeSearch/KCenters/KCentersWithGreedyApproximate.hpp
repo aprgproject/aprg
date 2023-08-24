@@ -18,7 +18,7 @@ public:
         initialize();
     }
 
-    Vertices const& getFoundCenters() const { return m_foundCenters; }
+    [[nodiscard]] Vertices const& getFoundCenters() const { return m_foundCenters; }
 
 private:
     void initialize() { traverseWithGreedyApproach(); }
@@ -63,7 +63,7 @@ private:
     Vertices m_foundCenters;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Given n cities and distances between every pair of cities, select k cities to place warehouses (or ATMs or Cloud
 // Server) such that the maximum distance of a city to a warehouse (or ATM or Cloud Server) is minimized.

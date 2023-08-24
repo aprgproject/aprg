@@ -5,9 +5,7 @@
 using namespace alba::AprgBitmap;
 using namespace std;
 
-namespace alba {
-
-namespace AprgBitmap {
+namespace alba::AprgBitmap {
 
 TEST(PenPointsTest, IsPenPointWorks) {
     PenPoints penPoints;
@@ -72,7 +70,5 @@ TEST(PenPointsTest, ClearWorks) {
     PenPoints::PenPointsSet const& penPointsToVerify(penPoints.getPenPoints());
     ASSERT_TRUE(penPointsToVerify.empty());
 }
-
-}  // namespace AprgBitmap
 
 }  // namespace alba

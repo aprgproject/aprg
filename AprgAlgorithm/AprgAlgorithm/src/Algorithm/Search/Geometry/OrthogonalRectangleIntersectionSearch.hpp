@@ -33,7 +33,7 @@ public:
         }
     };
 
-    Rectangles getIntersectingRectangles() const {
+    [[nodiscard]] Rectangles getIntersectingRectangles() const {
         // sweep line algorithm
         std::set<Rectangle> intersectingRectangles;
         std::map<PairOfUnits, Rectangle> intervalToRectangleMap;
@@ -74,4 +74,4 @@ private:
     std::multiset<Event> m_events;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

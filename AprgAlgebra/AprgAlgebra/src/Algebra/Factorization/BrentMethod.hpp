@@ -4,9 +4,7 @@
 
 #include <vector>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class BrentMethod {
 public:
@@ -23,12 +21,12 @@ public:
     };
     using ListOfCoefficients = std::vector<AlbaNumbers>;
 
-    BrentMethod(AlbaNumbers const& coefficients);
+    explicit BrentMethod(AlbaNumbers const& coefficients);
 
-    bool isFinished() const;
-    int getNumberOfIterationsExecuted() const;
-    AlbaNumbers const& getCoefficients() const;
-    CalculationValues const& getCalculationValues() const;
+    [[nodiscard]] bool isFinished() const;
+    [[nodiscard]] int getNumberOfIterationsExecuted() const;
+    [[nodiscard]] AlbaNumbers const& getCoefficients() const;
+    [[nodiscard]] CalculationValues const& getCalculationValues() const;
 
     AlbaNumberOptional const& getSolution();
     void resetCalculation(AlbaNumber const& start, AlbaNumber const& end);
@@ -38,20 +36,18 @@ public:
 private:
     static bool isAlmostEqualForBrentMethod(AlbaNumber const& value1, AlbaNumber const& value2);
     static bool isAlmostEqualForBrentMethod(AlbaNumber const& value1, double const value2);
-    AlbaNumber calculate(AlbaNumber const& inputValue) const;
-    AlbaNumberOptional calculateInverseQuadraticInterpolation(
+    [[nodiscard]] AlbaNumber calculate(AlbaNumber const& inputValue) const;
+    [[nodiscard]] AlbaNumberOptional calculateInverseQuadraticInterpolation(
         AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c) const;
-    AlbaNumberOptional calculateSecantMethod(AlbaNumber const& a, AlbaNumber const& b) const;
+    [[nodiscard]] AlbaNumberOptional calculateSecantMethod(AlbaNumber const& a, AlbaNumber const& b) const;
     static AlbaNumber calculateBiSectionMethod(AlbaNumber const& a, AlbaNumber const& b);
     static bool isBisectionMethodNeeded(
         AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c, AlbaNumber const& d, AlbaNumber const& s,
         bool const mflag);
     void convertSolutionToIntegerIfNeeded();
-    int m_numberOfIterationsExecuted;
+    int m_numberOfIterationsExecuted{0};
     AlbaNumbers m_coefficients;
     CalculationValues m_values;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

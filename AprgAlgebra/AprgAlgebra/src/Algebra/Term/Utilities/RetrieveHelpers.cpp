@@ -11,9 +11,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 bool hasAnyFunctions(Term const& term) {
     FunctionsRetriever functionsRetriever([](Function const&) { return true; });
@@ -118,6 +116,4 @@ TermsWithDetails retrieveTermsWithDetailsThatSatisfiesCondition(
     return result;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

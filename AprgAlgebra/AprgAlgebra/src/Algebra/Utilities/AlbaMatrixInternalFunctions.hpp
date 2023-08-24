@@ -2,9 +2,7 @@
 
 #include <Common/Math/Number/AlbaNumber.hpp>
 
-namespace alba {
-
-namespace matrix {
+namespace alba::matrix {
 
 // Template declaration
 
@@ -16,6 +14,4 @@ bool isEqualForMathMatrixDataType(DataType const& value1, DataType const& value2
 template <>
 bool isEqualForMathMatrixDataType(AlbaNumber const& value1, AlbaNumber const& value2);
 
-}  // namespace matrix
-
-}  // namespace alba
+}  // namespace alba::matrix

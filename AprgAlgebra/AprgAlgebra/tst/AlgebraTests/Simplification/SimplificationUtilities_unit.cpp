@@ -8,11 +8,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Simplification {
+namespace alba::algebra::Simplification {
 
 TEST(SimplificationUtilitiesTest, SimplifyTermToACommonDenominatorWorks) {
     Term denominator1(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {})});
@@ -94,8 +90,4 @@ TEST(
     EXPECT_EQ(expectedTermsWithDetails, outputTermsWithDetails);
 }
 
-}  // namespace Simplification
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Simplification

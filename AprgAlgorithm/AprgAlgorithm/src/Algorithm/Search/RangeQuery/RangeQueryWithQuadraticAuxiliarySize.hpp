@@ -21,7 +21,7 @@ public:
         initialize(valuesToCheck);
     }
 
-    Value getValueOnInterval(Index const start, Index const end) const {
+    [[nodiscard]] Value getValueOnInterval(Index const start, Index const end) const {
         // This is on constant time
         Value result{};
         if (start <= end && start < static_cast<Index>(m_partialValueMatrix.getNumberOfColumns()) &&
@@ -53,4 +53,4 @@ private:
     Function m_function;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

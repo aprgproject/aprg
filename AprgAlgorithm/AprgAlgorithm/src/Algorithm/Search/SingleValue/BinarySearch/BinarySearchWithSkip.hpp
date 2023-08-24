@@ -11,9 +11,9 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    BinarySearchWithSkip(Values const& sortedValues) : m_sortedValues(sortedValues) {}
+    explicit BinarySearchWithSkip(Values const& sortedValues) : m_sortedValues(sortedValues) {}
 
-    Index getIndexOfValue(Value const& target) const {
+    [[nodiscard]] Index getIndexOfValue(Value const& target) const {
         Index result(INVALID_INDEX);
         if (!m_sortedValues.empty()) {
             Index possibleIndex(getIndexUsingForwardSkip(target));
@@ -25,7 +25,7 @@ public:
     }
 
 private:
-    Index getIndexUsingForwardSkip(Value const& target) const {
+    [[nodiscard]] Index getIndexUsingForwardSkip(Value const& target) const {
         Index result(0);
         Index size(m_sortedValues.size());
         // forward skip start from half of size, then quarter of size, then eighth of size and so on
@@ -43,7 +43,7 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // An alternative method to implement binary search is based on an efficient way to iterate through the elements of the
 // array. The idea is to make jumps and slow the speed when we get closer to the target element.

@@ -110,4 +110,4 @@ string getNewFilePath(string const& inputFilePath, int const step, string const&
     return ss.str();
 }
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

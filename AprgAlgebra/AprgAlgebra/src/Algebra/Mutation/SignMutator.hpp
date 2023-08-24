@@ -3,9 +3,7 @@
 #include <Algebra/Mutation/BaseMutator.hpp>
 #include <Algebra/Substitution/SubstitutionOfVariablesToValues.hpp>
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 class SignMutator final : public BaseMutator {
 public:
@@ -29,6 +27,4 @@ private:
     SubstitutionOfVariablesToValues m_substitution;
 };
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

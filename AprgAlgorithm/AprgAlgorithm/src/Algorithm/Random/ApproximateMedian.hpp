@@ -15,7 +15,7 @@ public:
 
     ApproximateMedian() = default;
 
-    Value getApproximateMedian(Values const& values) const {
+    [[nodiscard]] Value getApproximateMedian(Values const& values) const {
         // What if we want in less than O(n) time with low probable error allowed?
         // -> Following steps represent an algorithm that is O((Log n) x (Log Log n)) time
         // -> and produces incorrect result with probability less than or equal to 2/n2.
@@ -46,7 +46,7 @@ public:
     }
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
 
 // Problem Statement :
 // Given an unsorted array A[] of n numbers and ε > 0,

@@ -49,4 +49,4 @@ Plane getPlaneWithTwoIntersectingLines(Line const& line1, Line const& line2);
 Plane getPlaneOfTwoDifferentLinesWithSameSlope(Line const& line1, Line const& line2);
 Plane getPerpendicularPlaneOfALineAndUsingAPointInThePlane(Line const& line, Point const& pointInPerpendicularPlane);
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions::threeDimensionsUtilities

@@ -6,9 +6,7 @@
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 bool isPythagoreanTriple(PythagoreanTriple const& triple) {
     // A Pythagorean triple is a triple (a,b, c) that satisfies the Pythagorean theorem a^2 + b^2 = c^2,
@@ -57,7 +55,5 @@ PythagoreanTriple getPrimitivePythagoreanTripleUsingEuclidFormula(
     }
     return result;
 }
-
-}  // namespace math
 
 }  // namespace alba

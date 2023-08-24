@@ -8,7 +8,7 @@ class OtherEvent {
 public:
     OtherEvent();
     explicit OtherEvent(OtherEventType const timerType);
-    OtherEventType getType() const;
+    [[nodiscard]] OtherEventType getType() const;
 
 private:
     OtherEventType m_type;

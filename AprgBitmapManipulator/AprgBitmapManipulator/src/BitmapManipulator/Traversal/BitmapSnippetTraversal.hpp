@@ -30,4 +30,4 @@ private:
     BitmapSnippet const& m_bitmapSnippet;
 };
 
-}  // namespace alba
+}  // namespace alba::AprgBitmap

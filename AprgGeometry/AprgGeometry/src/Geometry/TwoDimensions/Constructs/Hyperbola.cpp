@@ -147,4 +147,4 @@ ostream& operator<<(ostream& out, Hyperbola const& hyperbola) {
     return out;
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

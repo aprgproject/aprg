@@ -22,7 +22,7 @@ bool TermAnalyzer::isModifiedDueToUpdatedIdentifiers(
                 replaceTermWithMacroEquivalent(replaceLooper, m_database.getMacroReference(identifierName));
                 temporaryFindings.copyCurrentFindings(m_findings);
                 return true;
-            } else if (m_database.isNamespaceWithAlias(identifierName)) {
+            } if (m_database.isNamespaceWithAlias(identifierName)) {
                 term.setTermType(TermType::Namespace);
             } else if (m_database.isClassWithAlias(identifierName)) {
                 term.setTermType(TermType::Class);
@@ -146,9 +146,9 @@ void TermAnalyzer::checkMacroUsageParameters(
     while (parameterUsageLooper.isNotFinished()) {
         Term const& term = parameterUsageLooper.getContentReference();
         if (cPlusPlusMacro.isEqualToVariadicParameterIndex(macroUsageParametersIndex)) {
-            if (shouldIgnoreWhiteSpace && CheckerHelpers::isWhiteSpace(term))
+            if (shouldIgnoreWhiteSpace && CheckerHelpers::isWhiteSpace(term)) {
                 ;
-            else {
+            } else {
                 shouldIgnoreWhiteSpace = false;
                 macroUsageParameters[macroUsageParametersIndex].push_back(parameterUsageLooper.getContentReference());
             }
@@ -157,9 +157,9 @@ void TermAnalyzer::checkMacroUsageParameters(
                 shouldIgnoreWhiteSpace = true;
                 macroUsageParametersIndex++;
                 macroUsageParameters.emplace(macroUsageParametersIndex, VectorOfTerms());
-            } else if (shouldIgnoreWhiteSpace && CheckerHelpers::isWhiteSpace(term))
+            } else if (shouldIgnoreWhiteSpace && CheckerHelpers::isWhiteSpace(term)) {
                 ;
-            else {
+            } else {
                 shouldIgnoreWhiteSpace = false;
                 macroUsageParameters[macroUsageParametersIndex].push_back(parameterUsageLooper.getContentReference());
             }

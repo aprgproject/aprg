@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 GameWithGraph::GameWithGraph(Graph const& graph) : m_graph(graph) {}
 
@@ -62,7 +60,5 @@ SetOfUnsignedIntegers GameWithGraph::getNextGrundyNumbers(Vertex const vertex) {
         [&](Vertex const nextVertex) { return getGrundyNumberAt(nextVertex); });
     return result;
 }
-
-}  // namespace math
 
 }  // namespace alba

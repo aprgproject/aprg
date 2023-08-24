@@ -7,9 +7,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 WrappedTerm::WrappedTerm(BaseTerm const& baseTerm) : baseTermPointer(createBasePointer(baseTerm)) {}
 
@@ -43,7 +41,5 @@ ostream& operator<<(ostream& out, WrappedTerm const& wrappedTerm) {
     out << getTermConstReferenceFromUniquePointer(wrappedTerm.baseTermPointer);
     return out;
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

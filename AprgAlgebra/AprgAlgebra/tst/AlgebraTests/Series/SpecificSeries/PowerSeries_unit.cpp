@@ -8,9 +8,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(PowerSeriesTest, IsSummationModelValidWorks) {
     Term multiplier("n");
@@ -55,6 +53,4 @@ TEST(PowerSeriesTest, IntegrateWorks) {
     EXPECT_EQ(stringToExpect, convertToString(series.getFormulaForEachTermInSummation()));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

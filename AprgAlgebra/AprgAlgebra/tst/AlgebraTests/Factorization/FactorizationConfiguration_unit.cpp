@@ -4,11 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
-
-namespace Factorization {
+namespace alba::algebra::Factorization {
 
 TEST(FactorizationConfigurationTest, SomeConditionWorksAsDefault) {
     EXPECT_FALSE(shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue());
@@ -26,8 +22,4 @@ TEST(FactorizationConfigurationTest, SomeConditionWorksAndCanBeChangedAndChanged
     EXPECT_FALSE(shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue());
 }
 
-}  // namespace Factorization
-
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra::Factorization

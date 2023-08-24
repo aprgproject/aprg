@@ -7,12 +7,12 @@ namespace alba {
 
 struct UserIdentifiers {
     UserIdentifiers();
-    UserIdentifiers(std::string const& lineInLogs);
+    explicit UserIdentifiers(std::string const& lineInLogs);
     void saveUserIndentfiers(std::string const& lineInLogs);
     bool operator<(UserIdentifiers const& userIdentifiers) const;
-    unsigned int getNbccId() const;
-    unsigned int getCrnccId() const;
-    unsigned int getTransactionId() const;
+    [[nodiscard]] unsigned int getNbccId() const;
+    [[nodiscard]] unsigned int getCrnccId() const;
+    [[nodiscard]] unsigned int getTransactionId() const;
 
 private:
     void saveNbccId(std::string const& lineInLogs);

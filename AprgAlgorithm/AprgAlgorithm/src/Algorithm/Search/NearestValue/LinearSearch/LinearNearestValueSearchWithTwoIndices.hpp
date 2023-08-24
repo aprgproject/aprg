@@ -12,7 +12,7 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    LinearNearestValueSearchWithTwoIndices(Values const& values)  // values can be unsorted
+    explicit LinearNearestValueSearchWithTwoIndices(Values const& values)  // values can be unsorted
         : m_startIndex(INVALID_INDEX), m_endIndex(INVALID_INDEX), m_values(values) {
         setInitialIndexes();
     }
@@ -87,4 +87,4 @@ private:
     Values const& m_values;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

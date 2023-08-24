@@ -7,9 +7,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(SeriesBasedOnFormulaTest, ConstructionWorks) { SeriesBasedOnFormula series("n", "n"); }
 
@@ -132,6 +130,4 @@ TEST(SeriesBasedOnFormulaTest, GetLeastUpperBoundWorks) {
     EXPECT_EQ(AlbaNumber::createFraction(1, 2), leastUpperBoundOptional.value());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

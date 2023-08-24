@@ -412,7 +412,7 @@ bool CPlusPlusFileFixer::isQtHeader(string const& header) {
     return result;
 }
 
-bool CPlusPlusFileFixer::isOtherLibraryHeaders(string const& header) const {
+bool CPlusPlusFileFixer::isOtherLibraryHeaders(string const& header) {
     bool result(false);
     if (isLinuxHeader(header) || isWindowsHeader(header) || isGtestHeader(header) || isQtHeader(header)) {
         result = true;

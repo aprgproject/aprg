@@ -280,4 +280,4 @@ ostream& operator<<(ostream& out, Line const& line) {
     return out;
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

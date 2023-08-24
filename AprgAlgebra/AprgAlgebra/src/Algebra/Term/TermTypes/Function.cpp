@@ -6,12 +6,10 @@
 using namespace alba::algebra::Simplification;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 Function::Function()
-    : m_functionName(), m_inputTermPointer(make_unique<Term>()), m_evaluationFunction(), m_isSimplified(false) {}
+    :  m_inputTermPointer(make_unique<Term>()),  m_isSimplified(false) {}
 
 Function::Function(string const& functionName, BaseTerm const& baseTerm, EvaluationFunction const& evaluationFunction)
     : m_functionName(functionName),
@@ -110,6 +108,4 @@ ostream& operator<<(ostream& out, Function const& functionObject) {
     return out;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

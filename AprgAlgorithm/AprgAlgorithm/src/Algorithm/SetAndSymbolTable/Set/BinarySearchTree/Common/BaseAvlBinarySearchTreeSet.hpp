@@ -16,4 +16,4 @@ public:
     // (similar to other virtual functions)
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

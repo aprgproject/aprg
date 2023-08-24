@@ -22,18 +22,18 @@ TermAnalyzer::TermAnalyzer(DequeOfTerms& terms, CPlusPlusDatabase& database, Fin
     : m_terms(terms),
       m_database(database),
       m_findings(findings),
-      m_findingsBuffer(),
-      m_isTermsModified(false),
-      m_modifyDetails() {}
+      
+      m_isTermsModified(false)
+      {}
 
 TermAnalyzer::TermAnalyzer(DequeOfTerms& terms, CPlusPlusDatabase& database, Findings& findings, SailIt& sailIt)
     : m_terms(terms),
       m_database(database),
       m_findings(findings),
-      m_findingsBuffer(),
+      
       m_optionalSailIt(sailIt),
-      m_isTermsModified(false),
-      m_modifyDetails() {}
+      m_isTermsModified(false)
+      {}
 
 void TermAnalyzer::setFileName(string const& directory, string const& fileName) {
     m_baseDirectory = directory;
@@ -65,31 +65,31 @@ void TermAnalyzer::analyzeThisScope(Looper const& startLooper) {
                                       << " " << mainLooper.getContentReference() << "]");
         clearFlagsForAnotherIteration();
 
-        if (isModifiedDueToUpdatedIdentifiers(mainLooper, previousUpdatedIndexForMacro, previousUpdatedIndexForOthers))
+        if (isModifiedDueToUpdatedIdentifiers(mainLooper, previousUpdatedIndexForMacro, previousUpdatedIndexForOthers)) {
             ;
-        else if (isModifiedDueToMacros(mainLooper))
+        } else if (isModifiedDueToMacros(mainLooper)) {
             ;
-        else if (isModifiedDueToExpressions(mainLooper))
+        } else if (isModifiedDueToExpressions(mainLooper)) {
             ;
-        else if (isModifiedDueToStatements(mainLooper))
+        } else if (isModifiedDueToStatements(mainLooper)) {
             ;
-        else if (isModifiedDueToControlStructures(mainLooper))
+        } else if (isModifiedDueToControlStructures(mainLooper)) {
             ;
-        else if (isModifiedDueToFunctions(mainLooper))
+        } else if (isModifiedDueToFunctions(mainLooper)) {
             ;
-        else if (isModifiedDueToClasses(mainLooper))
+        } else if (isModifiedDueToClasses(mainLooper)) {
             ;
-        else if (isModifiedDueToNamespaces(mainLooper))
+        } else if (isModifiedDueToNamespaces(mainLooper)) {
             ;
-        else if (isModifiedDueToCStyleStruct(mainLooper))
+        } else if (isModifiedDueToCStyleStruct(mainLooper)) {
             ;
-        else if (isSingleLineOrMultiLineComment(mainLooper))
+        } else if (isSingleLineOrMultiLineComment(mainLooper)) {
             ;
-        else if (isUnexpectedWhiteSpace(mainLooper))
+        } else if (isUnexpectedWhiteSpace(mainLooper)) {
             ;
-        else if (isUnexpectedNewLine(mainLooper))
+        } else if (isUnexpectedNewLine(mainLooper)) {
             ;
-        else {
+        } else {
             addFindingForUnprocessedFirstTerm(mainLooper);
         }
 
@@ -183,9 +183,9 @@ bool TermAnalyzer::isStringFoundInLooper(Looper const& startLooper, string const
     Looper searchLooper(startLooper);
     while (searchLooper.isNotFinished()) {
         string currentString(searchLooper.getContentReference().getString());
-        if (stringToCompare == currentString)
+        if (stringToCompare == currentString) {
             return true;
-        else if (m_database.isMacro(currentString)) {
+        } if (m_database.isMacro(currentString)) {
             if (isStringFoundInMacro(currentString, stringToCompare)) return true;
         }
         searchLooper++;
@@ -197,9 +197,9 @@ bool TermAnalyzer::isStringFoundInMacro(string const& macroName, string const& s
     VectorOfTerms& macroEquivalent = m_database.getMacroReference(macroName).getMacroEquivalent();
     for (Term const& term : macroEquivalent) {
         string currentString(term.getString());
-        if (currentString == stringToCompare)
+        if (currentString == stringToCompare) {
             return true;
-        else if (m_database.isMacro(macroName)) {
+        } if (m_database.isMacro(macroName)) {
             if (isStringFoundInMacro(macroName, currentString)) return true;
         }
     };
@@ -228,10 +228,10 @@ string TermAnalyzer::getLocatorString(Looper const& startLooper) {
         if (length > numberOfCharactersLeftToPrint) {
             locator = stringToPrint.substr(length - numberOfCharactersLeftToPrint) + locator;
             break;
-        } else {
+        } 
             locator = stringToPrint + locator;
             numberOfCharactersLeftToPrint -= length;
-        }
+       
         printBackward--;
     }
     Looper printForward(startLooper + 1);
@@ -243,10 +243,10 @@ string TermAnalyzer::getLocatorString(Looper const& startLooper) {
         if (length > numberOfCharactersLeftToPrint) {
             locator = locator + stringToPrint.substr(0, numberOfCharactersLeftToPrint);
             break;
-        } else {
+        } 
             locator = locator + stringToPrint;
             numberOfCharactersLeftToPrint -= length;
-        }
+       
         printForward++;
     }
     return locator;

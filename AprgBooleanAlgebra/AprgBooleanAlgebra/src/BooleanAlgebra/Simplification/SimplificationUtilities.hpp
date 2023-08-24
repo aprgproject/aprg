@@ -2,11 +2,7 @@
 
 #include <BooleanAlgebra/Term/TermTypes/Term.hpp>
 
-namespace alba {
-
-namespace booleanAlgebra {
-
-namespace Simplification {
+namespace alba::booleanAlgebra::Simplification {
 
 void simplifyTermWithOuterOrAndInnerAnd(Term& term);
 void simplifyTermWithOuterAndAndInnerOr(Term& term);
@@ -30,8 +26,4 @@ void distributeTermsIfNeeded(
 
 void retrieveTargetOperations(OperatorLevel& targetOuter, OperatorLevel& targetInner);
 
-}  // namespace Simplification
-
-}  // namespace booleanAlgebra
-
-}  // namespace alba
+}  // namespace alba::booleanAlgebra::Simplification

@@ -6,9 +6,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(IsolationOfOneVariableOnEqualityEquationsTest, IsolateTermWithVariableWorks) {
     Equations equationsToTest;
@@ -56,6 +54,4 @@ TEST(IsolationOfOneVariableOnEqualityEquationsTest, GetEquivalentTermByIsolating
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

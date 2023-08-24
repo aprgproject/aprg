@@ -130,10 +130,10 @@ TEST(LambdaExamplesTest, CapturingStaticVariablesWorks) {
 namespace ClassMemberFunctionTemplatesWorks {
 class Kitten {
 public:
-    Kitten(int value) : m_value(value) {}
+    explicit Kitten(int value) : m_value(value) {}
 
     template <class T>
-    auto plusMe(T x) const {
+    [[nodiscard]] [[nodiscard]] auto plusMe(T x) const {
         return x + m_value;
     }
 
@@ -183,7 +183,7 @@ TEST(LambdaExamplesTest, ClassMemberFunctionTemplatesWorks) {
 namespace ClassMemberFunctionVariadicTemplatesWorks {
 class Kitten {
 public:
-    Kitten(int value) : m_value(value) {}
+    explicit Kitten(int value) : m_value(value) {}
 
     template <class... Ts>
     auto operator()(Ts... xs) const {

@@ -8,9 +8,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 TEST(ExpressionTest, ConstructionWorks) {
     WrappedTerm wrappedTerm1(Term(false));
@@ -691,7 +689,5 @@ TEST(ExpressionTest, OutputStreamOperatorWorks) {
 
     EXPECT_EQ("(),(x|y),([true]),((x|y)&z)", ss.str());
 }
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

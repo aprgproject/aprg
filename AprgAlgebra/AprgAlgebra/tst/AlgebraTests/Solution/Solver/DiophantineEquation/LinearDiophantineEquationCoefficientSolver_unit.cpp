@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 namespace {
 using SolutionStatus = LinearDiophantineEquationCoefficientSolver::SolutionStatus;
@@ -86,6 +84,4 @@ TEST(LinearDiophantineEquationCoefficientSolverTest, GetAnotherXValueAndGetAnoth
     EXPECT_EQ(-46, solver.getAnotherYValue(2));
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

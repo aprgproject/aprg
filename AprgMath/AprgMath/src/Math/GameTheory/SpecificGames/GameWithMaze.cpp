@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 GameWithMaze::GameWithMaze(BooleanMatrix const& isBlockedMatrix)
     : m_isBlockedMatrix(isBlockedMatrix),
@@ -142,7 +140,5 @@ void GameWithMaze::retrieveUpCoordinates(Coordinates& retrievedCoordinates, Coor
         }
     }
 }
-
-}  // namespace math
 
 }  // namespace alba

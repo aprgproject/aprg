@@ -10,9 +10,9 @@ class NewSamplesBuilder {
 public:
     struct SampleMergingDetails {
         SampleMergingDetails();
-        bool isChanged;
-        double totalValue;
-        double weight;
+        bool isChanged{false};
+        double totalValue{0};
+        double weight{0};
     };
     using SamplesMergingDetails = std::map<int, SampleMergingDetails>;
 
@@ -32,4 +32,4 @@ private:
     Samples const& m_oldSamples;
 };
 
-}  // namespace alba
+}  // namespace alba::AprgAudio

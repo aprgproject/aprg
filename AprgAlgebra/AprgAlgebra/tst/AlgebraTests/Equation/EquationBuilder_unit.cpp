@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(EquationBuilderTest, ConstructionWorks) { EquationBuilder(""); }
 
@@ -51,6 +49,4 @@ TEST(EquationBuilderTest, GetEquationOperatorStringsWorks) {
     EXPECT_EQ(">=", equationOperatorStrings[6]);
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

@@ -9,9 +9,7 @@
 using namespace alba::algebra::Functions;
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 TEST(OneEquationOneVariableEqualitySolverTest, ConstructionWorks) { OneEquationOneVariableEqualitySolver(); }
 
@@ -175,6 +173,4 @@ TEST(OneEquationOneVariableEqualitySolverTest, RadicalOverRadicalInEquationAreSo
     EXPECT_EQ(AlbaNumbers{3}, solutionSet.getRejectedValues());
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

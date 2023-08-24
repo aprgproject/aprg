@@ -11,9 +11,9 @@ public:
     using Object = typename Objects::value_type;
     using Comparator = ComparatorTemplateType<Object>;
 
-    BinaryHeapAdapter(Objects& objects) : m_comparator(), m_objects(objects) {}
+    explicit BinaryHeapAdapter(Objects& objects) : m_comparator(), m_objects(objects) {}
 
-    Object const& getObjectOnTree(int const treeIndex) const { return m_objects[getContainerIndex(treeIndex)]; }
+    [[nodiscard]] Object const& getObjectOnTree(int const treeIndex) const { return m_objects[getContainerIndex(treeIndex)]; }
 
     Object& getObjectReferenceOnTree(int const treeIndex) { return m_objects[getContainerIndex(treeIndex)]; }
 
@@ -48,25 +48,25 @@ public:
         }
     }
 
-    inline int getSize() const { return m_objects.size(); }
+    [[nodiscard]] inline int getSize() const { return m_objects.size(); }
 
-    inline int getTopTreeIndex() const { return 1; }
+    [[nodiscard]] inline int getTopTreeIndex() const { return 1; }
 
-    inline int getBottomTreeIndex() const { return m_objects.size(); }
+    [[nodiscard]] inline int getBottomTreeIndex() const { return m_objects.size(); }
 
-    int getContainerIndex(int const treeIndex) const {
+    [[nodiscard]] int getContainerIndex(int const treeIndex) const {
         // Tree index starts at one (top of the tree)
         return treeIndex - 1;
     }
 
-    inline int getParentIndex(int const treeIndex) const { return treeIndex / NUMBER_OF_CHILDREN; }
+    [[nodiscard]] inline int getParentIndex(int const treeIndex) const { return treeIndex / NUMBER_OF_CHILDREN; }
 
-    inline int getFirstChildIndex(int const treeIndex) const { return treeIndex * NUMBER_OF_CHILDREN; }
+    [[nodiscard]] inline int getFirstChildIndex(int const treeIndex) const { return treeIndex * NUMBER_OF_CHILDREN; }
 
-    inline int getLastChildIndex(int const treeIndex) const { return (treeIndex + 1) * NUMBER_OF_CHILDREN - 1; }
+    [[nodiscard]] inline int getLastChildIndex(int const treeIndex) const { return (treeIndex + 1) * NUMBER_OF_CHILDREN - 1; }
 
 private:
-    inline int getChildIndexThatWouldMostBreakTheHeapOrder(int const treeIndex, int const treeSize) const {
+    [[nodiscard]] inline int getChildIndexThatWouldMostBreakTheHeapOrder(int const treeIndex, int const treeSize) const {
         int firstChildIndex(getFirstChildIndex(treeIndex));
         int lastPossibleChildIndex(std::min(getLastChildIndex(treeIndex), treeSize));
         int significantChildIndex = firstChildIndex;
@@ -80,7 +80,7 @@ private:
         return significantChildIndex;
     }
 
-    bool isInHeapOrder(Object const& child, Object const& parent) const { return m_comparator(child, parent); }
+    [[nodiscard]] bool isInHeapOrder(Object const& child, Object const& parent) const { return m_comparator(child, parent); }
 
     Comparator m_comparator;  // Heap order: isInHeapOrder(child, parent) is true,
                               // so std::less -> MaxPriority and std::greater -> MinPriority

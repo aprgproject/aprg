@@ -18,14 +18,14 @@ public:
         matrix::solveSimplexTable(m_simplexTable);
     }
 
-    bool isOptimized() const { return matrix::isOptimal(m_simplexTable); }
+    [[nodiscard]] bool isOptimized() const { return matrix::isOptimal(m_simplexTable); }
 
-    Value getOptimizedObjectiveValue() const {
+    [[nodiscard]] Value getOptimizedObjectiveValue() const {
         return m_simplexTable.getEntry(m_simplexTable.getNumberOfColumns() - 1, m_simplexTable.getNumberOfRows() - 1) *
                -1;
     }
 
-    Matrix getSolution() const {
+    [[nodiscard]] Matrix getSolution() const {
         int numberOfRows = m_simplexTable.getNumberOfRows() - 1;
         int numberOfColumns = m_simplexTable.getNumberOfColumns() - numberOfRows;
         Matrix result(numberOfColumns, numberOfRows);
@@ -45,4 +45,4 @@ private:
     Matrix m_simplexTable;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm

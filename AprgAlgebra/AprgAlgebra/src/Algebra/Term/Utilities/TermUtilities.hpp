@@ -31,4 +31,4 @@ Term flipTermIfHasNegativeAssociation(TermWithDetails const& termWithDetails);
 Term invertTerm(Term const& term, std::string const& variableName);
 Expression negateExpression(Expression const& expression);
 
-}  // namespace alba
+}  // namespace alba::algebra

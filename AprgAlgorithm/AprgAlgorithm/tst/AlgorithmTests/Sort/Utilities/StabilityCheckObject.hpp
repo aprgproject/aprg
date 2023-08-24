@@ -8,12 +8,12 @@ class StabilityCheckObject {
 public:
     StabilityCheckObject();
     StabilityCheckObject(char const visiblePart, int const notVisiblePart);
-    StabilityCheckObject(int const value);
+    explicit StabilityCheckObject(int const value);
 
     bool operator==(StabilityCheckObject const& object) const;
     bool operator!=(StabilityCheckObject const& object) const;
     bool operator<(StabilityCheckObject const& object) const;
-    operator int() const;
+    explicit operator int() const;
     StabilityCheckObject operator+(StabilityCheckObject const& second) const;
     StabilityCheckObject operator-(StabilityCheckObject const& second) const;
     StabilityCheckObject operator*(StabilityCheckObject const& second) const;
@@ -25,8 +25,8 @@ public:
 
     double operator*(double const multiplier) const;
 
-    char getVisiblePart() const;
-    int getNotVisiblePart() const;
+    [[nodiscard]] char getVisiblePart() const;
+    [[nodiscard]] int getNotVisiblePart() const;
 
     friend double operator/(double const dividend, StabilityCheckObject const& divisor);
     friend bool areObjectsEqualOnVisibleAndNotVisiblePart(

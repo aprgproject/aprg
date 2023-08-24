@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 MultipleVariableSolutionSet::MultipleVariableSolutionSet() {}
 
@@ -56,6 +54,4 @@ ostream& operator<<(ostream& out, MultipleVariableSolutionSet const& solutionSet
     return out;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

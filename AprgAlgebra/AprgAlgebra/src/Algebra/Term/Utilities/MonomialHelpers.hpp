@@ -32,4 +32,4 @@ Monomial compareMonomialsAndSaveMaximumExponentsForEachVariable(
 Monomial getMonomialWithMinimumExponentsInMonomials(Monomials const& monomials);
 Monomial getMonomialWithMaximumExponentsInMonomials(Monomials const& monomials);
 
-}  // namespace alba::algebra::algebra
+}  // namespace alba::algebra

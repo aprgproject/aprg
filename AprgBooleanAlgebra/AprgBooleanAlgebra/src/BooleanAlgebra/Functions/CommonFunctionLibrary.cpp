@@ -4,9 +4,7 @@
 
 #include <algorithm>
 
-namespace alba {
-
-namespace booleanAlgebra {
+namespace alba::booleanAlgebra {
 
 // use https://en.wikipedia.org/wiki/List_of_logic_symbols
 
@@ -143,7 +141,5 @@ UnaryBooleanFunction getContradiction() {
 // Symbol: ⊨
 // Read as: "models"
 // Note: x ⊨ y means x models (semantically entails) y
-
-}  // namespace booleanAlgebra
 
 }  // namespace alba

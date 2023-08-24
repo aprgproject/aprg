@@ -2,9 +2,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace algebra {
+namespace alba::algebra {
 
 DegreeOnlyMutator::DegreeOnlyMutator(string const& variableName) : m_variableName(variableName) {}
 
@@ -60,6 +58,4 @@ Monomial DegreeOnlyMutator::getMonomialWithDegree(AlbaNumber const& degree) cons
     return result;
 }
 
-}  // namespace algebra
-
-}  // namespace alba
+}  // namespace alba::algebra

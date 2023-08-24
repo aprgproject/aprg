@@ -4,9 +4,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace math {
+namespace alba::math {
 
 TEST(GameUtilitiesTest, ReverseGameStateWorks) {
     EXPECT_EQ(GameState::Winning, reverseGameState(GameState::Losing));
@@ -41,7 +39,5 @@ TEST(GameUtilitiesTest, GetOverallGrundyNumberWorks) {
     EXPECT_EQ(4U, getOverallGrundyNumber({0U, 1U, 2U, 3U, 4U}));
     EXPECT_EQ(419U, getOverallGrundyNumber({124U, 196U, 687U, 948U}));
 }
-
-}  // namespace math
 
 }  // namespace alba

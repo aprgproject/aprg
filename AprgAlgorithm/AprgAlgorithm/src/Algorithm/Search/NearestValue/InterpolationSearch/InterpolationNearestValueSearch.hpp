@@ -13,7 +13,7 @@ public:
     using Value = typename Values::value_type;
     static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
-    InterpolationNearestValueSearch(Values const& sortedValues)
+    explicit InterpolationNearestValueSearch(Values const& sortedValues)
         : m_lowIndex(INVALID_INDEX), m_highIndex(INVALID_INDEX), m_sortedValues(sortedValues) {
         setInitialIndexes();
     }
@@ -42,7 +42,7 @@ public:
     }
 
 private:
-    Index getInterpolatedIndexInBetween(Value const& target) const {
+    [[nodiscard]] Index getInterpolatedIndexInBetween(Value const& target) const {
         Index result(INVALID_INDEX);
         if (m_lowIndex + 2 == m_highIndex) {
             result = m_lowIndex + 1;
@@ -61,11 +61,11 @@ private:
         return result;
     }
 
-    inline Value getLowerValueWithoutCheck() const { return m_sortedValues[m_lowIndex]; }
+    [[nodiscard]] inline Value getLowerValueWithoutCheck() const { return m_sortedValues[m_lowIndex]; }
 
-    inline Value getHigherValueWithoutCheck() const { return m_sortedValues[m_highIndex]; }
+    [[nodiscard]] inline Value getHigherValueWithoutCheck() const { return m_sortedValues[m_highIndex]; }
 
-    Value getNearestValueFromLowerAndHigherIndices(Value const& target) const {
+    [[nodiscard]] Value getNearestValueFromLowerAndHigherIndices(Value const& target) const {
         Value lowerValue(getLowerValueWithoutCheck());
         Value higherValue(getHigherValueWithoutCheck());
         Value deviationFromLower(mathHelper::getPositiveDelta(target, lowerValue));
@@ -73,7 +73,7 @@ private:
         return (deviationFromLower <= deviationFromHigher) ? lowerValue : higherValue;
     }
 
-    Index getIndexNearestValueFromLowerAndHigherIndices(Value const& target) const {
+    [[nodiscard]] Index getIndexNearestValueFromLowerAndHigherIndices(Value const& target) const {
         Value lowerValue(getLowerValueWithoutCheck());
         Value higherValue(getHigherValueWithoutCheck());
         Value deviationFromLower(mathHelper::getPositiveDelta(target, lowerValue));
@@ -122,4 +122,4 @@ private:
     Values const& m_sortedValues;
 };
 
-}  // namespace alba
+}  // namespace alba::algorithm
