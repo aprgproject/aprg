@@ -61,14 +61,7 @@ jobs:
           echo "checkCMakeFilesPath: [$checkCMakeFilesPath]"
           chmod +x "$checkCMakeFilesPath"
           "$checkCMakeFilesPath" | grep -P "\[\w\d+\]" | tee "$currentDirectory/cmakeLintIssues.txt" || true
-          echo "Contents of $currentDirectory/cmakeLintIssues.txt:"
-          cat "$currentDirectory/cmakeLintIssues.txt"
-          if [ -s "$currentDirectory/cmakeLintIssues.txt" ]; then
-            echo "Some problems found, exiting with error status."
-            exit 1
-          else
-            echo "No errors detected."
-          fi
+          
           
       - name: Perform linting for shell scripts
         shell: bash
@@ -81,14 +74,21 @@ jobs:
           echo "checkShellScriptsPath: [$checkShellScriptsPath]"
           chmod +x "$checkShellScriptsPath"
           "$checkShellScriptsPath" | tee "$currentDirectory/shellLintIssues.txt" || true
-          echo "Contents of $currentDirectory/shellLintIssues.txt:"
-          cat "$currentDirectory/shellLintIssues.txt"
-          if  [ -s "$currentDirectory/shellLintIssues.txt" ]; then
-            echo "Some problems found, exiting with error status."
-            exit 1
-          else
-            echo "No errors detected."
+          
+          
+      - name: Display linting error if needed
+        shell: bash
+        run: |
+          lintingExitCode=0
+          if  [ -s "$currentDirectory/cmakeLintIssues.txt" ]; then
+            echo "There are some issues found regarding cmake, setting error status."
+            lintingExitCode=1
           fi
+          if  [ -s "$currentDirectory/shellLintIssues.txt" ]; then
+            echo "There are some issues found regarding shell, setting error status."
+            lintingExitCode=1
+          fi
+          exit lintingExitCode
 
 
   determineCppProjects:
@@ -279,10 +279,8 @@ jobs:
           currentDirectory="$(pwd)"
           "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }} | grep -P "^.*$unquotedProject.* (style|warning|error): .*$" | tee "$currentDirectory/analyzerIssues.txt" || true
-          echo "Contents of $currentDirectory/analyzerIssues.txt:"
-          cat "$currentDirectory/analyzerIssues.txt"
           if  [ -s "$currentDirectory/analyzerIssues.txt" ]; then
-            echo "Some problems found, exiting with error status."
+            echo "There are some issues found in the static analysis, exiting with error status."
             exit 1
           else
             echo "No errors detected."
