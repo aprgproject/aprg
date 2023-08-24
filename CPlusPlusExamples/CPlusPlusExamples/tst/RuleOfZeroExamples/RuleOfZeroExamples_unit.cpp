@@ -21,7 +21,7 @@ struct OperationPrinter {
         cout << "Copy assignment\n";
         return *this;
     }
-    OperationPrinter& operator=(OperationPrinter&&)  noexcept {
+    OperationPrinter& operator=(OperationPrinter&&) noexcept {
         cout << "Move assignment\n";
         return *this;
     }
@@ -37,7 +37,7 @@ struct OperationPrinter {
 
 class NaiveIntVector {
 public:
-    NaiveIntVector()  {}
+    NaiveIntVector() {}
     ~NaiveIntVector() { delete[] m_ptr; }
     NaiveIntVector(NaiveIntVector const& rightHandSide) {
         m_size = rightHandSide.m_size;
@@ -99,7 +99,7 @@ TEST(RuleOfZeroExamplesTest, InitializationIsNotAssignment) {
     OperationPrinter object1;
 
     // Even though "=" operation is used:
-    OperationPrinter object2 = 3;        // Calls the value constructor
+    OperationPrinter object2(3);         // Calls the value constructor
     OperationPrinter object3 = object1;  // Calls the copy constructor
 
     object3 = object2;  // now it calls the copy assignment (operator=);
