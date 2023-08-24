@@ -81,14 +81,12 @@ jobs:
         run: |
           lintingExitCode=0
           currentDirectory="$(pwd)"
-          cat "$currentDirectory/cmakeLintIssues.txt"
-          cat "$currentDirectory/shellLintIssues.txt"
           if  [ -s "$currentDirectory/cmakeLintIssues.txt" ]; then
-            echo "There are some issues found regarding cmake, setting error status."
+            echo "There are some issues found regarding cmake, so the error status is set.
             lintingExitCode=1
           fi
           if  [ -s "$currentDirectory/shellLintIssues.txt" ]; then
-            echo "There are some issues found regarding shell, setting error status."
+            echo "There are some issues found regarding shell, so the error status is set.
             lintingExitCode=1
           fi
           exit $lintingExitCode
@@ -283,7 +281,7 @@ jobs:
           "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }} | grep -P "^.*$unquotedProject.* (style|warning|error): .*$" | tee "$currentDirectory/analyzerIssues.txt" || true
           if  [ -s "$currentDirectory/analyzerIssues.txt" ]; then
-            echo "There are some issues found in the static analysis, exiting with error status."
+            echo "There are some issues found in the static analysis, so exiting with error status."
             exit 1
           else
             echo "No errors detected."
