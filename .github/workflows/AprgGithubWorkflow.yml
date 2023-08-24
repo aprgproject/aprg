@@ -80,6 +80,9 @@ jobs:
         shell: bash
         run: |
           lintingExitCode=0
+          currentDirectory="$(pwd)"
+          cat "$currentDirectory/cmakeLintIssues.txt"
+          cat "$currentDirectory/shellLintIssues.txt"
           if  [ -s "$currentDirectory/cmakeLintIssues.txt" ]; then
             echo "There are some issues found regarding cmake, setting error status."
             lintingExitCode=1
