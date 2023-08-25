@@ -6,13 +6,10 @@
 
 namespace alba {
 
-template <typename DataType>
-bool isEqualForMathVectorDataType(DataType const& value1, DataType const& value2);
-
 template <typename DataType, size_t SIZE>
 bool areVectorsPerpendicular(
     AlbaMathVector<DataType, SIZE> const& vector1, AlbaMathVector<DataType, SIZE> const& vector2) {
-    return isEqualForMathVectorDataType(getDotProduct(vector1, vector2), DataType(0));
+    return isEqualForMathVectorDataType(getDotProduct(vector1, vector2), static_cast<DataType>(0));
 }
 
 template <typename DataType, size_t SIZE>

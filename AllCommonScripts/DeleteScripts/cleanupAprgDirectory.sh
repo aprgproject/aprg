@@ -33,7 +33,9 @@ if ! [[ -d $deleteDirectory ]]; then
     exit 1
 fi
 
-deleteAllDirectoriesWithName "VisualStudioBuild"
+deleteAllDirectoriesWithName "WindowsMsvcBuild"
+deleteAllDirectoriesWithName "WindowsMinGWBuild"
+deleteAllDirectoriesWithName "WindowsClangBuild"
 deleteAllDirectoriesWithName "WslBuild"
 deleteAllDirectoriesWithName "build-*"
 deleteAllDirectoriesWithName ".vs"

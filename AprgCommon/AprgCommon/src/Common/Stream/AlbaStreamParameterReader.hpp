@@ -36,7 +36,7 @@ template <>
 
 template <typename TypeToRetrieve>
 void AlbaStreamParameterReader::readVectorData(std::vector<TypeToRetrieve>& vectorOfData) const {
-    size_t size;
+    size_t size{};
     m_stream >> size;
     for (size_t i = 0; i < size; i++) {
         vectorOfData.emplace_back(readData<TypeToRetrieve>());
@@ -46,7 +46,7 @@ void AlbaStreamParameterReader::readVectorData(std::vector<TypeToRetrieve>& vect
 template <typename TypeToRetrieve>
 void AlbaStreamParameterReader::readSetData(std::set<TypeToRetrieve>& setOfData) const  // test
 {
-    size_t size;
+    size_t size{};
     m_stream >> size;
     for (size_t i = 0; i < size; i++) {
         setOfData.emplace(readData<TypeToRetrieve>());
@@ -55,7 +55,7 @@ void AlbaStreamParameterReader::readSetData(std::set<TypeToRetrieve>& setOfData)
 
 template <typename TypeToRetrieve1, typename TypeToRetrieve2>
 void AlbaStreamParameterReader::readMapData(std::map<TypeToRetrieve1, TypeToRetrieve2>& mapOfData) const {
-    size_t size;
+    size_t size{};
     m_stream >> size;
     for (size_t i = 0; i < size; i++) {
         auto data1(readData<TypeToRetrieve1>());

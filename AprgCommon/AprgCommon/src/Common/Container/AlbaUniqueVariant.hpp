@@ -85,7 +85,7 @@ public:
     UniqueVariant() { allocate(); }
 
     ~UniqueVariant() {
-        if (m_typeId != 0u) {
+        if (m_typeId != 0U) {
             delete m_ptr;
         } else {
             ::operator delete(m_ptr);

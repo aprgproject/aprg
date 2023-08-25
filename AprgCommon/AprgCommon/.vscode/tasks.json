@@ -14,10 +14,11 @@
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
-			}
+			},
+			"problemMatcher": []
 		},
 		{
-			"label": "Configure In WSL",
+			"label": "Clean And Configure In WSL",
 			"type": "shell",
 			"command": "wsl",
 			"args": [
@@ -39,6 +40,7 @@
 				"reveal": "always",
 				"panel": "shared"
 			},
+			"problemMatcher": []
 		},
 		{
 			"label": "Build In WSL",
@@ -49,11 +51,10 @@
 				"outputWithAbsolutePaths",
 				"build",
 				"WslBuild",
-				"Debug",
-				"${input:cmakeConfiguration}"
+				"Debug"
 			],
 			"options": {
-				"cwd": "${workspaceFolder}",
+				"cwd": "${workspaceFolder}"
 			},
 			"group": {
 				"kind": "build",
@@ -78,7 +79,6 @@
 				"reveal": "always",
 				"panel": "shared"
 			}
-			//, "dependsOn": "Configure In WSL" // dont automatically call this
 		},
 		{
 			"label": "Install In WSL",
@@ -113,7 +113,7 @@
 				"outputWithAbsolutePaths",
 				"run",
 				"WslBuild",
-				"" //"--gtest_filter=*.*"
+				""
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -122,7 +122,6 @@
 			"problemMatcher": [],
 			"dependsOn": "Install In WSL"
 		},
-		// For local builds, just run cmake in command palette (Ctrl + Shift + P)
 		{
 			"label": "Run locally",
 			"type": "shell",
@@ -142,9 +141,9 @@
 			"type": "pickString",
 			"description": "Select cmake configuration task:",
 			"options": [
-				"configureWithGcc",
-				"configureWithClang",
-				"configureWithClangWithAsan",
+				"cleanAndConfigureWithGcc",
+				"cleanAndConfigureWithClang",
+				"cleanAndConfigureWithClangWithAsan",
 				"cleanAndConfigureWithClangAndStaticAnalyzers"
 			],
 			"default": "configureWithClang"

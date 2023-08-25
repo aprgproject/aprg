@@ -33,8 +33,8 @@ inline NumberType getSquareRootOfXSquaredPlusYSquared(NumberType const xValue, N
 
 template <typename NumberType>
 inline NumberType getSquareRootOfXSquaredPlusYSquaredPlusZSquared(
-    NumberType const xValue, NumberType const yValue, NumberType const z) {
-    return static_cast<NumberType>(pow(xValue * xValue + yValue * yValue + z * z, 0.5));
+    NumberType const xValue, NumberType const yValue, NumberType const zValue) {
+    return static_cast<NumberType>(pow(xValue * xValue + yValue * yValue + zValue * zValue, 0.5));
 }
 
 template <typename NumberType>

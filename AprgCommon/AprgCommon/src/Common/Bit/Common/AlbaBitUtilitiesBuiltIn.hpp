@@ -35,8 +35,8 @@ INLINE_WITHOUT_BUILT_IN namespace BitUtilitiesWithoutBuiltIn {
     template <typename DataType>
     constexpr inline std::size_t getNumberOfConsecutiveZerosFromMsb(DataType const value) {
         std::size_t result(0);
-        for (DataType mask = DataType(1) << ((sizeof(DataType) * AlbaBitConstants::BYTE_SIZE_IN_BITS) - 1); mask != 0;
-             mask >>= 1) {
+        for (DataType mask = static_cast<DataType>(1) << ((sizeof(DataType) * AlbaBitConstants::BYTE_SIZE_IN_BITS) - 1);
+             mask != 0; mask >>= 1) {
             if ((value & mask) == 0) {
                 ++result;
             } else {

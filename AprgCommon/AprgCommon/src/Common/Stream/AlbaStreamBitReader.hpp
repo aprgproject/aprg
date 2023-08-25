@@ -73,7 +73,7 @@ TypeToWrite AlbaStreamBitReader::readLittleEndianNumberData() {
     constexpr size_t numberOfBits(AlbaBitValueUtilities<TypeToWrite>::getNumberOfBits());
     readIfNeeded(numberOfBits);
     std::bitset<numberOfBits> dataBitset;
-    size_t byteSize = round(numberOfBits / AlbaBitConstants::BYTE_SIZE_IN_BITS);
+    size_t byteSize = round(static_cast<double>(numberOfBits) / AlbaBitConstants::BYTE_SIZE_IN_BITS);
     size_t bitBufferIndex = 0;
     for (size_t byteIndex = 1; byteIndex <= byteSize; byteIndex++) {
         for (size_t i = 0; i < AlbaBitConstants::BYTE_SIZE_IN_BITS; i++) {

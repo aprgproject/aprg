@@ -16,7 +16,10 @@ namespace detail {
 template <class T>
 class TypeIdGenerator {
 public:
-    static TypeId GetTypeId() { return reinterpret_cast<TypeId>(std::addressof(GetTypeId)); }
+    static TypeId GetTypeId() {
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        return reinterpret_cast<TypeId>(std::addressof(GetTypeId));
+    }
 };
 
 }  // namespace detail

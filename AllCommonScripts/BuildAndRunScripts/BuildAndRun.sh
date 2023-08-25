@@ -59,7 +59,8 @@ getClangCompilers() {
     cppCompilerLocation="$(command -v clang++)"
 }
 
-getClazyCompiler() {
+getClangAndClazyCompiler() {
+    cCompilerLocation="$(command -v clang)"
     cppCompilerLocation="$(command -v clazy)" # Use clazy as static analyzer
 }
 
@@ -139,21 +140,25 @@ performRun(){
 # Perform script actions based from script option
 if [ "$scriptOption" == "clean" ]; then
     performClean
-elif [ "$scriptOption" == "configureWithDefaultCompiler" ]; then
+elif [ "$scriptOption" == "cleanAndConfigureWithDefaultCompiler" ]; then
+    performClean
     getArgumentsForConfigure
     printConfigureParameters
     cmake -DCMAKE_BUILD_TYPE="$buildType" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
-elif [ "$scriptOption" == "configureWithGcc" ]; then
+elif [ "$scriptOption" == "cleanAndConfigureWithGcc" ]; then
+    performClean
     getArgumentsForConfigure
     getGccCompilers
     printConfigureParameters
     cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
-elif [ "$scriptOption" == "configureWithClang" ]; then
+elif [ "$scriptOption" == "cleanAndConfigureWithClang" ]; then
+    performClean
     getArgumentsForConfigure
     getClangCompilers
     printConfigureParameters
     cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
-elif [ "$scriptOption" == "configureWithClangWithAsan" ]; then
+elif [ "$scriptOption" == "cleanAndConfigureWithClangWithAsan" ]; then
+    performClean
     getArgumentsForConfigure
     getClangCompilers
     printConfigureParameters
@@ -161,7 +166,7 @@ elif [ "$scriptOption" == "configureWithClangWithAsan" ]; then
 elif [ "$scriptOption" == "cleanAndConfigureWithClangAndStaticAnalyzers" ]; then
     performClean
     getArgumentsForConfigure
-    getClazyCompiler
+    getClangAndClazyCompiler
     printConfigureParameters
     cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "build" ]; then

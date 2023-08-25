@@ -33,8 +33,9 @@ class AlbaMatrix {
 public:
     using MatrixData = AlbaMatrixData<DataType>;
     using ListOfMatrixData = ListOfAlbaMatrixData<DataType>;
-    using LoopFunction = std::function<void(size_t const x, size_t const y)>;
-    using LoopWithValueFunction = std::function<void(size_t const x, size_t const y, DataType const& value)>;
+    using LoopFunction = std::function<void(size_t const xPosition, size_t const yPosition)>;
+    using LoopWithValueFunction =
+        std::function<void(size_t const xPosition, size_t const yPosition, DataType const& value)>;
     using MatrixIndexRange = AlbaValueRange<size_t>;
 
     // Do we have to make rows and columns as template parameter?
@@ -66,9 +67,7 @@ public:
 
     bool operator==(AlbaMatrix const& secondMatrix) const {
         bool isEqual(true);
-        if (m_numberOfColumns != secondMatrix.m_numberOfColumns) {
-            isEqual = false;
-        } else if (m_numberOfRows != secondMatrix.m_numberOfRows) {
+        if (m_numberOfColumns != secondMatrix.m_numberOfColumns || m_numberOfRows != secondMatrix.m_numberOfRows) {
             isEqual = false;
         } else if (m_matrixData != secondMatrix.m_matrixData) {
             isEqual = std::equal(
@@ -142,8 +141,8 @@ public:
 
     [[nodiscard]] bool isEmpty() const { return m_matrixData.empty(); }
 
-    [[nodiscard]] bool isInside(size_t const x, size_t const y) const {
-        return x < m_numberOfColumns && y < m_numberOfRows;
+    [[nodiscard]] bool isInside(size_t const xPosition, size_t const yPosition) const {
+        return xPosition < m_numberOfColumns && yPosition < m_numberOfRows;
     }
 
     [[nodiscard]] size_t getNumberOfColumns() const { return m_numberOfColumns; }
@@ -152,63 +151,63 @@ public:
 
     [[nodiscard]] size_t getNumberOfCells() const { return m_numberOfColumns * m_numberOfRows; }
 
-    [[nodiscard]] size_t getMatrixIndex(size_t const x, size_t const y) const {
-        return getMatrixIndex(x, y, m_numberOfColumns);
+    [[nodiscard]] size_t getMatrixIndex(size_t const xPosition, size_t const yPosition) const {
+        return getMatrixIndex(xPosition, yPosition, m_numberOfColumns);
     }
 
-    [[nodiscard]] DataType getEntry(size_t const x, size_t const y) const {
-        assert(isInside(x, y));
-        return m_matrixData[getMatrixIndex(x, y)];
+    [[nodiscard]] DataType getEntry(size_t const xPosition, size_t const yPosition) const {
+        assert(isInside(xPosition, yPosition));
+        return m_matrixData[getMatrixIndex(xPosition, yPosition)];
     }
 
-    [[nodiscard]] DataType const& getEntryConstReference(size_t const x, size_t const y) const {
-        assert(isInside(x, y));
-        return m_matrixData[getMatrixIndex(x, y)];
+    [[nodiscard]] DataType const& getEntryConstReference(size_t const xPosition, size_t const yPosition) const {
+        assert(isInside(xPosition, yPosition));
+        return m_matrixData[getMatrixIndex(xPosition, yPosition)];
     }
 
     [[nodiscard]] MatrixData const& getMatrixData() const { return m_matrixData; }
 
-    void retrieveColumn(MatrixData& column, size_t const x) const {
+    void retrieveColumn(MatrixData& column, size_t const xPosition) const {
         column.reserve(m_numberOfRows);
-        for (size_t y = 0; y < m_numberOfRows; y++) {
-            column.emplace_back(getEntry(x, y));
+        for (size_t yPosition = 0; yPosition < m_numberOfRows; yPosition++) {
+            column.emplace_back(getEntry(xPosition, yPosition));
         }
     }
 
-    void retrieveRow(MatrixData& row, size_t const y) const {
+    void retrieveRow(MatrixData& row, size_t const yPosition) const {
         row.reserve(m_numberOfColumns);
-        for (size_t x = 0; x < m_numberOfColumns; x++) {
-            row.emplace_back(getEntry(x, y));
+        for (size_t xPosition = 0; xPosition < m_numberOfColumns; xPosition++) {
+            row.emplace_back(getEntry(xPosition, yPosition));
         }
     }
 
     void retrieveColumns(ListOfMatrixData& columns) const {
-        for (size_t x = 0; x < m_numberOfColumns; x++) {
+        for (size_t xPosition = 0; xPosition < m_numberOfColumns; xPosition++) {
             columns.emplace_back();
-            retrieveColumn(columns.back(), x);
+            retrieveColumn(columns.back(), xPosition);
         }
     }
 
     void retrieveRows(ListOfMatrixData& rows) const {
-        for (size_t y = 0; y < m_numberOfRows; y++) {
+        for (size_t yPosition = 0; yPosition < m_numberOfRows; yPosition++) {
             rows.emplace_back();
-            retrieveRow(rows.back(), y);
+            retrieveRow(rows.back(), yPosition);
         }
     }
 
-    void retrieveXAndYFromIndex(size_t& x, size_t& y, size_t index) const {
-        x = index % m_numberOfColumns;
-        y = index / m_numberOfColumns;
+    void retrieveXAndYFromIndex(size_t& xPosition, size_t& yPosition, size_t index) const {
+        xPosition = index % m_numberOfColumns;
+        yPosition = index / m_numberOfColumns;
     }
 
-    DataType& getEntryReference(size_t const x, size_t const y) {
-        assert(isInside(x, y));
-        return m_matrixData[getMatrixIndex(x, y)];
+    DataType& getEntryReference(size_t const xPosition, size_t const yPosition) {
+        assert(isInside(xPosition, yPosition));
+        return m_matrixData[getMatrixIndex(xPosition, yPosition)];
     }
 
-    void setEntry(size_t const x, size_t const y, DataType const& value) {
-        assert(isInside(x, y));
-        m_matrixData[getMatrixIndex(x, y)] = value;
+    void setEntry(size_t const xPosition, size_t const yPosition, DataType const& value) {
+        assert(isInside(xPosition, yPosition));
+        m_matrixData[getMatrixIndex(xPosition, yPosition)] = value;
     }
 
     void setEntries(MatrixData const& dataSampleValues) {
@@ -218,15 +217,15 @@ public:
 
     void setColumn(size_t const columnIndex, MatrixData const& dataSampleValues) {
         size_t limit = std::min(m_numberOfRows, static_cast<size_t>(dataSampleValues.size()));
-        for (size_t y = 0; y < limit; y++) {
-            setEntry(columnIndex, y, dataSampleValues[y]);
+        for (size_t yPosition = 0; yPosition < limit; yPosition++) {
+            setEntry(columnIndex, yPosition, dataSampleValues[yPosition]);
         }
     }
 
     void setRow(size_t const rowIndex, MatrixData const& dataSampleValues) {
         size_t limit = std::min(m_numberOfColumns, static_cast<size_t>(dataSampleValues.size()));
-        for (size_t x = 0; x < limit; x++) {
-            setEntry(x, rowIndex, dataSampleValues[x]);
+        for (size_t xPosition = 0; xPosition < limit; xPosition++) {
+            setEntry(xPosition, rowIndex, dataSampleValues[xPosition]);
         }
     }
 
@@ -251,8 +250,9 @@ public:
         clearAndResize(oldRows, oldColumns);
         MatrixIndexRange yRange(0, oldRows - 1, 1);
         MatrixIndexRange xRange(0, oldColumns - 1, 1);
-        iterateThroughYAndThenXWithRanges(yRange, xRange, [&](size_t const x, size_t const y) {
-            m_matrixData[getMatrixIndex(y, x)] = oldMatrixData[getMatrixIndex(x, y, oldColumns)];
+        iterateThroughYAndThenXWithRanges(yRange, xRange, [&](size_t const xPosition, size_t const yPosition) {
+            m_matrixData[getMatrixIndex(yPosition, xPosition)] =
+                oldMatrixData[getMatrixIndex(xPosition, yPosition, oldColumns)];
         });
     }
 
@@ -264,24 +264,24 @@ public:
         assert(m_numberOfColumns == m_numberOfRows);
         size_t newColumns = m_numberOfColumns * 2;
         AlbaMatrix tempMatrix(newColumns, m_numberOfRows);
-        iterateAllThroughYAndThenX([&](size_t const x, size_t const y) {
-            tempMatrix.m_matrixData[getMatrixIndex(x, y, newColumns)] = getEntry(x, y);
+        iterateAllThroughYAndThenX([&](size_t const xPosition, size_t const yPosition) {
+            tempMatrix.m_matrixData[getMatrixIndex(xPosition, yPosition, newColumns)] = getEntry(xPosition, yPosition);
         });
         size_t diagonalLimit = std::min(m_numberOfColumns, m_numberOfRows);
-        for (size_t d = 0; d < diagonalLimit; d++) {
-            tempMatrix.m_matrixData[getMatrixIndex(m_numberOfColumns + d, d, newColumns)] = 1;
+        for (size_t diagonalCount = 0; diagonalCount < diagonalLimit; diagonalCount++) {
+            tempMatrix.m_matrixData[getMatrixIndex(m_numberOfColumns + diagonalCount, diagonalCount, newColumns)] = 1;
         }
         transformToReducedEchelonFormUsingGaussJordanReduction(tempMatrix);
-        iterateAllThroughYAndThenX([&](size_t const x, size_t const y) {
-            m_matrixData[getMatrixIndex(x, y)] =
-                tempMatrix.m_matrixData[getMatrixIndex(m_numberOfColumns + x, y, newColumns)];
+        iterateAllThroughYAndThenX([&](size_t const xPosition, size_t const yPosition) {
+            m_matrixData[getMatrixIndex(xPosition, yPosition)] =
+                tempMatrix.m_matrixData[getMatrixIndex(m_numberOfColumns + xPosition, yPosition, newColumns)];
         });
     }
 
     void iterateAllThroughYAndThenX(LoopFunction const& loopFunction) const {
-        for (size_t y = 0; y < m_numberOfRows; y++) {
-            for (size_t x = 0; x < m_numberOfColumns; x++) {
-                loopFunction(x, y);
+        for (size_t yPosition = 0; yPosition < m_numberOfRows; yPosition++) {
+            for (size_t xPosition = 0; xPosition < m_numberOfColumns; xPosition++) {
+                loopFunction(xPosition, yPosition);
             }
         }
     }
@@ -299,8 +299,9 @@ public:
     }
 
 private:
-    [[nodiscard]] size_t getMatrixIndex(size_t const x, size_t const y, size_t const numberOfColumns) const {
-        return (y * numberOfColumns) + x;
+    [[nodiscard]] size_t getMatrixIndex(
+        size_t const xPosition, size_t const yPosition, size_t const numberOfColumns) const {
+        return (yPosition * numberOfColumns) + xPosition;
     }
 
     void fillRemainingEntriesToZeroIfNeeded(size_t const numberOfColumns, size_t const numberOfRows) {
@@ -315,10 +316,11 @@ private:
     friend std::ostream& operator<<(std::ostream& out, AlbaMatrix<DataType> const& matrix) {
         DisplayTable table;
         table.setBorders("-", "|");
-        for (size_t y = 0; y < matrix.m_numberOfRows; y++) {
+        for (size_t yPosition = 0; yPosition < matrix.m_numberOfRows; yPosition++) {
             table.addRow();
-            for (size_t x = 0; x < matrix.m_numberOfColumns; x++) {
-                table.getLastRow().addCell(alba::stringHelper::convertToString(matrix.getEntryConstReference(x, y)));
+            for (size_t xPosition = 0; xPosition < matrix.m_numberOfColumns; xPosition++) {
+                table.getLastRow().addCell(
+                    alba::stringHelper::convertToString(matrix.getEntryConstReference(xPosition, yPosition)));
             }
         }
 

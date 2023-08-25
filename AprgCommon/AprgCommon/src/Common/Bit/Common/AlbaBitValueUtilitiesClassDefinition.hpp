@@ -137,7 +137,7 @@ public:
     }
 
     static constexpr inline DataType generateOnesWithNumberOfBits(size_t const numberOfOnes) {
-        return (DataType(1) << numberOfOnes) - 1;
+        return (static_cast<DataType>(1) << numberOfOnes) - 1;
     }
 
     static constexpr inline DataType getAllOnes() {
@@ -200,7 +200,9 @@ public:
         return -(-(value >> numberOfBitsMinus1) | (-value >> numberOfBitsMinus1));
     }
 
-    static constexpr inline DataType get2ToThePowerOf(DataType const exponent) { return DataType(1) << exponent; }
+    static constexpr inline DataType get2ToThePowerOf(DataType const exponent) {
+        return static_cast<DataType>(1) << exponent;
+    }
 
     static constexpr inline DataType getLogarithmWithBase2Of(DataType const value) {
         DataType result = getNumberOfBits() - getNumberOfConsecutiveZerosFromMsb(value);
@@ -346,7 +348,7 @@ public:
 
     static constexpr inline DataType getModuloOfPowerOfTwo(
         DataType const value, DataType const divisorOfPowerOfTwoExponent) {
-        return value & ((DataType(1) << divisorOfPowerOfTwoExponent) - 1);
+        return value & ((static_cast<DataType>(1) << divisorOfPowerOfTwoExponent) - 1);
     }
 
     static constexpr inline DataType getTwoValuesInACycle(
