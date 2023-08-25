@@ -11,6 +11,7 @@ scriptOption="$1"
 buildDirectoryName="$2"
 argument1="$3"
 argument2="$4"
+lsCommand="ls -la --color=always"
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
@@ -33,8 +34,8 @@ scriptPrint "$scriptName" "$LINENO" "The immediateDirectoryName is [$immediateDi
 cd ..
 mkdir -p "$buildDirectoryName"
 cd "$buildDirectoryName"
-scriptPrint "$scriptName" "$LINENO" "The build path is [$(pwd)] and the output of 'ls -la':"
-ls -la
+scriptPrint "$scriptName" "$LINENO" "The build path is [$(pwd)] and the output of [$lsCommand]:"
+$lsCommand
 
 # Enable the "exit on error" option to automatically stop if there is a failure
 set -e
@@ -44,7 +45,7 @@ performClean() {
         scriptPrint "$scriptName" "$LINENO" "Deleting everything in [$(pwd)]."
         rm -rf ./*
         scriptPrint "$scriptName" "$LINENO" "After deletion in [$(pwd)] contents:"
-        ls -la
+        $lsCommand
     fi
 }
 
@@ -101,8 +102,8 @@ elif [ "$scriptOption" == "run" ]; then
     gtestFilter="$argument1"
     scriptPrint "$scriptName" "$LINENO" "The gtestFilter is [$gtestFilter]."
     cd install/runDirectory
-    scriptPrint "$scriptName" "$LINENO" "The current directory is [$(pwd)] and the output of ls:"
-    ls -la
+    scriptPrint "$scriptName" "$LINENO" "The current directory is [$(pwd)] and the output of [$lsCommand]:"
+    $lsCommand
     for fileInBin in ./*; do
         if [[ -x "$fileInBin" ]]; then
             scriptPrint "$scriptName" "$LINENO" "Running executable: [$(pwd)/$fileInBin]."
