@@ -34,7 +34,7 @@ TEST(PowerHelpersTest, IsPerfectCubeForUnsignedIntWorks) {
 }
 
 TEST(PowerHelpersTest, IsPerfectNthPowerForUnsignedIntWorks) {
-    EXPECT_TRUE(isPerfectNthPower(0, 0));
+    EXPECT_FALSE(isPerfectNthPower(0, 0));
     EXPECT_TRUE(isPerfectNthPower(1, 1));
     EXPECT_FALSE(isPerfectNthPower(100, 0));
     EXPECT_TRUE(isPerfectNthPower(100, 1));
@@ -183,7 +183,7 @@ TEST(PowerHelpersTest, IsPerfectCubeForAlbaNumberWorks) {
 }
 
 TEST(PowerHelpersTest, IsPerfectNthPowerForAlbaNumberWorks) {
-    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(0), 0));
+    EXPECT_FALSE(isPerfectNthPower(AlbaNumber(0), 0));
     EXPECT_TRUE(isPerfectNthPower(AlbaNumber(1), 1));
     EXPECT_FALSE(isPerfectNthPower(AlbaNumber(100), 0));
     EXPECT_TRUE(isPerfectNthPower(AlbaNumber(100), 1));

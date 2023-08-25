@@ -94,9 +94,9 @@ NumberType AlbaFileReader::getData() {
     auto numberOfCharacters = static_cast<size_t>(m_stream.gcount());
     result = std::accumulate(
         m_characterBuffer.cbegin(), m_characterBuffer.cbegin() + numberOfCharacters, static_cast<NumberType>(0U),
-        [&](NumberType partialSum, NumberType newValue) {
-            partialSum = static_cast<NumberType>(partialSum << 8);
-            partialSum |= (0xFF & newValue);
+        [&](NumberType partialSum, char newValue) {
+            partialSum = partialSum << 8;
+            partialSum |= static_cast<NumberType>(AlbaBitConstants::ALL_ONES_8_BITS & newValue);
             return partialSum;
         });
     return result;

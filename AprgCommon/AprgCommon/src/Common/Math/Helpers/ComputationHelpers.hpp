@@ -22,19 +22,19 @@ inline NumberType getAverage(NumberType const value1, NumberType const value2, N
 }
 
 template <typename NumberType>
-inline NumberType getXSquaredPlusYSquared(NumberType const x, NumberType const y) {
-    return x * x + y * y;
+inline NumberType getXSquaredPlusYSquared(NumberType const xValue, NumberType const yValue) {
+    return xValue * xValue + yValue * yValue;
 }
 
 template <typename NumberType>
-inline NumberType getSquareRootOfXSquaredPlusYSquared(NumberType const x, NumberType const y) {
-    return static_cast<NumberType>(pow(x * x + y * y, 0.5));
+inline NumberType getSquareRootOfXSquaredPlusYSquared(NumberType const xValue, NumberType const yValue) {
+    return static_cast<NumberType>(pow(xValue * xValue + yValue * yValue, 0.5));
 }
 
 template <typename NumberType>
 inline NumberType getSquareRootOfXSquaredPlusYSquaredPlusZSquared(
-    NumberType const x, NumberType const y, NumberType const z) {
-    return static_cast<NumberType>(pow(x * x + y * y + z * z, 0.5));
+    NumberType const xValue, NumberType const yValue, NumberType const z) {
+    return static_cast<NumberType>(pow(xValue * xValue + yValue * yValue + z * z, 0.5));
 }
 
 template <typename NumberType>
@@ -58,6 +58,7 @@ inline AlbaNumber getAverage(AlbaNumber const& value1, AlbaNumber const& value2)
     return (value1 + value2) / 2;
 }
 
-AlbaNumbers getQuadraticRoots(RootType const rootType, AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c);
+AlbaNumbers getQuadraticRoots(
+    RootType const rootType, AlbaNumber const& aValue, AlbaNumber const& bValue, AlbaNumber const& cValue);
 
 }  // namespace alba::mathHelper

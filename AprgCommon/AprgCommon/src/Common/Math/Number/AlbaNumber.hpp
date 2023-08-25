@@ -194,7 +194,7 @@ private:
     friend std::ostream& operator<<(std::ostream& out, AlbaNumber const& number);
 
     Type m_type;  // Hotness: Type is much hotter.
-    // use std variant instead? Nah, I dont wanna deal with getting the "index" to know the "type".
+    // use std::variant instead? Nah, I dont wanna deal with getting the "index" to know the "type".
     NumberUnionData m_data;
 
     static_assert(sizeof(m_type) == 4, "The size of AlbaNumber type should be 4 bytes/32 bits.");
@@ -205,6 +205,7 @@ static_assert(sizeof(AlbaNumber) == 16, "The size of AlbaNumber should be 16 byt
 
 // Source: https://en.cppreference.com/w/cpp/language/user_literal
 // NOTE: The string needs to have a underscore '_' prefix because all letters as prefix are reserved.
+// NOLINTNEXTLINE(google-runtime-int)
 constexpr AlbaNumber operator"" _AS_ALBA_NUMBER(unsigned long long int const value) {
     return {static_cast<AlbaNumber::IntDataType>(value)};
 }

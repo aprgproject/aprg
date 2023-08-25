@@ -10,7 +10,7 @@ TEST(AlbaUniqueVariantTest, AcquiringVariantTypeInvokesDefaultConstructor) {
         ExampleStructure1() = default;
 
         uint8_t unsignedField{};
-        float floatField{0.F};
+        float floatField{};
     };
 
     struct ExampleStructure2 : public VariantDataType {
@@ -28,8 +28,7 @@ TEST(AlbaUniqueVariantTest, AcquiringVariantTypeInvokesDefaultConstructor) {
 
     // Then
     ASSERT_EQ(0U, exampleStructure1.unsignedField);
-    // ASSERT_FLOAT_EQ(0.F, exampleStructure1.floatField); // commented out because of warning: 4th function call
-    // argument is an uninitialized value [clang-analyzer-core.CallAndMessage]
+    ASSERT_FLOAT_EQ(0.F, exampleStructure1.floatField);
     ASSERT_DOUBLE_EQ(0.0, exampleStructure2.doubleField);
     ASSERT_EQ('\0', exampleStructure2.charField);
 }
@@ -50,11 +49,14 @@ bool DestructorClass::s_destructorInvoked = false;
 
 TEST(AlbaUniqueVariantTest, AcquiringVariantTypeDifferentThanAlreadyInVariantInvokesDestructor) {
     // Given
-    UniqueVariant<DestructorClass, VariantDataType> variant;
+    DestructorClass::s_destructorInvoked = false;
 
     // When
-    variant.acquire<DestructorClass>();
-    variant.acquire<VariantDataType>();
+    {
+        UniqueVariant<DestructorClass, VariantDataType> variant;
+        variant.acquire<DestructorClass>();
+        variant.acquire<VariantDataType>();
+    }
 
     // Then
     ASSERT_TRUE(DestructorClass::s_destructorInvoked);
