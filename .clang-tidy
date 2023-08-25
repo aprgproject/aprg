@@ -13,6 +13,7 @@ Checks: '
   -cppcoreguidelines-pro-bounds-pointer-arithmetic,
   -cppcoreguidelines-pro-type-union-access,
   -fuchsia-default-arguments-calls,
+  -fuchsia-default-arguments-declarations,
   -fuchsia-overloaded-operator,
   -google-build-using-namespace,
   -hicpp-named-parameter,
