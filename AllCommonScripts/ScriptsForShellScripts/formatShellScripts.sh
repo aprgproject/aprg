@@ -30,6 +30,8 @@ formatShellScriptsInDirectory() {
 
     while IFS= read -r filePath; do
         if  [[ ! "$filePath" =~ $skipPathRegex ]]; then
+            scriptPrint "$scriptName" "$LINENO" "Processing shell script: [$filePath]"
+            
             # unix style line endings
             dos2unix "$filePath"
         

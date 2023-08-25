@@ -29,6 +29,8 @@ checkPythonScriptsInDirectory() {
 
     while IFS= read -r filePath; do
         if  [[ "$filePath" =~ $pathRegex ]]; then
+            scriptPrint "$scriptName" "$LINENO" "Processing python file: [$filePath]"
+            
             pylint "--rcfile=$aprgDirectory/.pylintrc" "$filePath"
             currentStatus=$?
             if [ "$currentStatus" -gt "$localLintStatus" ]; then

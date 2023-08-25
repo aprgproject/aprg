@@ -27,6 +27,8 @@ formatPythonScriptsInDirectory() {
 
     while IFS= read -r filePath; do
         if  [[ "$filePath" =~ $pathRegex ]]; then
+            scriptPrint "$scriptName" "$LINENO" "Processing python file: [$filePath]"
+            
             # unix style line endings
             dos2unix "$filePath"
         

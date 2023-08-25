@@ -29,6 +29,8 @@ checkShellScriptsInDirectory() {
 
     while IFS= read -r filePath; do
         if  [[ ! "$filePath" =~ $skipPathRegex ]]; then
+            scriptPrint "$scriptName" "$LINENO" "Processing shell script: [$filePath]"
+
             shellcheck --severity=error --format tty "$filePath"
             currentStatus=$?
             if [ "$currentStatus" -gt "$localLintStatus" ]; then
