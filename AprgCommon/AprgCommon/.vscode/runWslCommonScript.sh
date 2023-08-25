@@ -34,14 +34,11 @@ if ! [[ -e $buildAndRunScriptPath ]]; then
     exit 1
 fi
 
-if [ "$scriptRunningOption" == "outputWithHighlighting" ]; then
-    unbuffer "$buildAndRunScriptPath" "$2" "$3" "$4" "$5" | sed -E "s|\/mnt\/(\w+)\/| \U\1:/|g"
-    exitCode=$?
-elif [ "$scriptRunningOption" == "outputWithAbsolutePaths" ]; then
-    unbuffer "$buildAndRunScriptPath" "$2" "$3" "$4" "$5" | sed -E "s|\/mnt\/(\w+)\/| \U\1:/|g"
+if [ "$scriptRunningOption" == "outputWithAbsolutePaths" ]; then
+    unbuffer "$buildAndRunScriptPath" "$2" "$3" "$4" "$5" | sed -E "s@\/mnt\/(\w+)\/@ \U\1:/@g"
     exitCode=${PIPESTATUS[0]}
 elif [ "$scriptRunningOption" == "outputWithRelativePaths" ]; then
-    unbuffer "$buildAndRunScriptPath" "$2" "$3" "$4" "$5" | sed -E "s|$(pwd)||g"
+    unbuffer "$buildAndRunScriptPath" "$2" "$3" "$4" "$5" | sed -E "s$(pwd)@@g"
     exitCode=${PIPESTATUS[0]}
 else
     scriptPrint "$scriptName" "$LINENO" "The script running option [$scriptRunningOption] is not supported."

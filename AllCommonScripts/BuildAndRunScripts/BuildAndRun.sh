@@ -11,7 +11,9 @@ scriptOption="$1"
 buildDirectoryName="$2"
 argument1="$3"
 argument2="$4"
-lsCommand="ls -la --color=always"
+cCompilerLocation=""
+cppCompilerLocation=""
+lsCommand="ls -la --color=auto"
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
@@ -34,11 +36,57 @@ scriptPrint "$scriptName" "$LINENO" "The immediateDirectoryName is [$immediateDi
 cd ..
 mkdir -p "$buildDirectoryName"
 cd "$buildDirectoryName"
-scriptPrint "$scriptName" "$LINENO" "The build path is [$(pwd)] and the output of [$lsCommand]:"
-$lsCommand
 
 # Enable the "exit on error" option to automatically stop if there is a failure
 set -e
+
+getArgumentsForConfigure() {
+    buildType="$argument1"
+    cmakeGenerator="$argument2"
+}
+
+getArgumentsForBuild() {
+    buildType="$argument1"
+}
+
+getGccCompilers() {
+    cCompilerLocation="$(command -v gcc)"
+    cppCompilerLocation="$(command -v g++)"
+}
+
+getClangCompilers() {
+    cCompilerLocation="$(command -v clang)"
+    cppCompilerLocation="$(command -v clang++)"
+}
+
+getClazyCompiler() {
+    cppCompilerLocation="$(command -v clazy)" # Use clazy as static analyzer
+}
+
+printConfigureParameters() {
+    scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType] and cmakeGenerator is [$cmakeGenerator]."
+    if ! [[ -z $cCompilerLocation ]]; then
+        scriptPrint "$scriptName" "$LINENO" "The cCompilerLocation is [$cCompilerLocation]."
+    fi
+    if ! [[ -z $cppCompilerLocation ]]; then
+        scriptPrint "$scriptName" "$LINENO" "The cppCompilerLocation is [$cppCompilerLocation]."
+    fi
+    scriptPrint "$scriptName" "$LINENO" "The build path is [$(pwd)] and the output of [$lsCommand]:"
+    $lsCommand
+}
+
+printBuildParameters() {
+    scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
+    scriptPrint "$scriptName" "$LINENO" "The numberOfCores is [$numberOfCores]."
+    scriptPrint "$scriptName" "$LINENO" "The build path is [$(pwd)] and the output of [$lsCommand]:"
+    $lsCommand
+}
+
+printInstallParameters() {
+    scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
+    scriptPrint "$scriptName" "$LINENO" "The build path is [$(pwd)] and the output of [$lsCommand]:"
+    $lsCommand
+}
 
 performClean() {
     if [ "$buildDirectoryName" = "$(basename "$(pwd)")" ]; then
@@ -49,71 +97,83 @@ performClean() {
     fi
 }
 
+performRun(){
+    scriptPrint "$scriptName" "$LINENO" "The first argument is [$argument1]."
+    outputLogPath="$(pwd)/runOutput.log"
+    scriptPrint "$scriptName" "$LINENO" "The outputLogPath is [$outputLogPath]."
+    cd install/runDirectory
+    scriptPrint "$scriptName" "$LINENO" "The current directory is [$(pwd)] and the output of [$lsCommand]:"
+    $lsCommand
+    for fileInInstall in ./*; do
+        if [[ -x "$fileInInstall" ]]; then
+            scriptPrint "$scriptName" "$LINENO" "Running executable: [$(pwd)/$fileInInstall]."
+            if [[ -z $argument1 ]] || [[ $argument1 == "--gtest_filter=*.*" ]]; then
+                
+                set +e
+                "$fileInInstall" | tee "$outputLogPath"
+                set -e
+                failingTests=$(sed -n -E 's@^.*\[  FAILED  \]\s+((\w|\.)+)\s+\(.*$@\1@p' "$outputLogPath")
+                scriptPrint "$scriptName" "$LINENO" "The contents of failingTests are: [$failingTests]"
+                if [[ -z "$failingTests" ]]; then
+                    scriptPrint "$scriptName" "$LINENO" "All tests passed!"
+                else
+                    scriptPrint "$scriptName" "$LINENO" "Running the failing tests again..."
+                
+                    while IFS= read -r failingTestName; do
+                        echo "Running failing test: [$failingTestName]"
+                        set +e
+                        "$fileInInstall" "--gtest_filter=$failingTestName"
+                        set -e
+                    done <<< "$failingTests"
+                    exit 1
+                fi
+                
+            else 
+                "$fileInInstall" "$argument1"
+            fi
+        fi
+    done
+    scriptPrint "$scriptName" "$LINENO" "The outputLogPath is [$outputLogPath]."
+}
+
 # Perform script actions based from script option
 if [ "$scriptOption" == "clean" ]; then
     performClean
 elif [ "$scriptOption" == "configureWithDefaultCompiler" ]; then
-    buildType="$argument1"
-    cmakeGenerator="$argument2"
-    scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType] and cmakeGenerator is [$cmakeGenerator]."
+    getArgumentsForConfigure
+    printConfigureParameters
     cmake -DCMAKE_BUILD_TYPE="$buildType" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "configureWithGcc" ]; then
-    buildType="$argument1"
-    cmakeGenerator="$argument2"
-    cCompilerLocation="$(command -v gcc)"
-    cppCompilerLocation="$(command -v g++)"
-    scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType] and cmakeGenerator is [$cmakeGenerator]."
-    scriptPrint "$scriptName" "$LINENO" "The cCompilerLocation is [$cCompilerLocation] and cppCompilerLocation is [$cppCompilerLocation]."
+    getArgumentsForConfigure
+    getGccCompilers
+    printConfigureParameters
     cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "configureWithClang" ]; then
-    buildType="$argument1"
-    cmakeGenerator="$argument2"
-    cCompilerLocation="$(command -v clang)"
-    cppCompilerLocation="$(command -v clang++)"
-    scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType] and cmakeGenerator is [$cmakeGenerator]."
-    scriptPrint "$scriptName" "$LINENO" "The cCompilerLocation is [$cCompilerLocation] and cppCompilerLocation is [$cppCompilerLocation]."
+    getArgumentsForConfigure
+    getClangCompilers
+    printConfigureParameters
     cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "configureWithClangWithAsan" ]; then
-    buildType="$argument1"
-    cmakeGenerator="$argument2"
-    cCompilerLocation="$(command -v clang)"
-    cppCompilerLocation="$(command -v clang++)"
-    scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType] and cmakeGenerator is [$cmakeGenerator]."
-    scriptPrint "$scriptName" "$LINENO" "The cCompilerLocation is [$cCompilerLocation] and cppCompilerLocation is [$cppCompilerLocation]."
+    getArgumentsForConfigure
+    getClangCompilers
+    printConfigureParameters
     cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cCompilerLocation" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" -DCMAKE_C_FLAGS:STRING="-g --coverage -fsanitize=address -fno-omit-frame-pointer" -DCMAKE_CXX_FLAGS:STRING="-g -fsanitize=address -fno-omit-frame-pointer" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "cleanAndConfigureWithClangAndStaticAnalyzers" ]; then
     performClean
-    buildType="$argument1"
-    cmakeGenerator="$argument2"
-    cppCompilerLocation="$(command -v clazy)" # Use clazy as static analyzer
-    scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType] and cmakeGenerator is [$cmakeGenerator]."
-    scriptPrint "$scriptName" "$LINENO" "The cppCompilerLocation is [$cppCompilerLocation]."
+    getArgumentsForConfigure
+    getClazyCompiler
+    printConfigureParameters
     cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "build" ]; then
-    buildType="$argument1"
-    scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
-    scriptPrint "$scriptName" "$LINENO" "The numberOfCores is [$numberOfCores]."
+    getArgumentsForBuild
+    printBuildParameters
     cmake --build . --config "$buildType"  --parallel "$numberOfCores" 2>&1 # | tee "$(pwd)/BuildOutput.txt"
 elif [ "$scriptOption" == "install" ]; then
-    buildType="$argument1"
-    scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
+    getArgumentsForBuild
+    printInstallParameters
     cmake --install . --verbose --config "$buildType"
 elif [ "$scriptOption" == "run" ]; then
-    gtestFilter="$argument1"
-    scriptPrint "$scriptName" "$LINENO" "The gtestFilter is [$gtestFilter]."
-    cd install/runDirectory
-    scriptPrint "$scriptName" "$LINENO" "The current directory is [$(pwd)] and the output of [$lsCommand]:"
-    $lsCommand
-    for fileInBin in ./*; do
-        if [[ -x "$fileInBin" ]]; then
-            scriptPrint "$scriptName" "$LINENO" "Running executable: [$(pwd)/$fileInBin]."
-            if [[ -z $gtestFilter ]]; then
-                "$fileInBin"
-            else 
-                "$fileInBin" "$gtestFilter"
-            fi
-        fi
-    done
+    performRun
 else
     scriptPrint "$scriptName" "$LINENO" "The script option [$scriptOption] is not found."
     scriptPrintInCppMatcherFormat "$scriptPath" "$LINENO" "${BASH_LINENO[0]}" "error: The script option [$scriptOption] is NOT supported by the shell script."

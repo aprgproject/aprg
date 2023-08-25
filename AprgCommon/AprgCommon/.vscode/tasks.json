@@ -241,7 +241,7 @@
 			"command": "wsl",
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
-				"outputWithHighlighting",
+				"outputWithAbsolutePaths",
 				"run",
 				"WslBuild",
 				"" //"--gtest_filter=*.*"
@@ -269,67 +269,18 @@
 			},
 			"problemMatcher": []
 		},
+		// For local builds, just run cmake in command palette (Ctrl + Shift + P)
 		{
-			"label": "Configure locally with cmake and MSVC",
+			"label": "Run locally",
 			"type": "shell",
-			"command": "cmake",
-			"args": [
-				"--preset=visualstudio-windows-msvc-debug"
-			],
-			"group": "none",
-			"presentation": {
-				"reveal": "always",
-				"panel": "shared"
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Build locally with MSVC",
-			"type": "shell",
-			"command": "cmake",
-			"args": [
-				"--build",
-				"--preset=default"
-			],
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"panel": "shared"
-			},
-			"problemMatcher": "$msCompile",
-			"dependsOn": "Configure locally with cmake and MSVC"
-		},
-		{
-			"label": "Install locally the MSVC build",
-			"type": "shell",
-			"command": "cmake",
-			"args": [
-				"--install",
-				"../VisualStudioBuild",
-				"--config Debug"
-			],
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"panel": "shared"
-			},
-			"problemMatcher": "$msCompile",
-			"dependsOn": "Build locally with MSVC"
-		},
-		{
-			"label": "Run the local MSVC target",
-			"type": "shell",
-			"command": "${workspaceFolder}/../VisualStudioBuild/install/bin/${workspaceFolderBasename}.exe",
-			"args": [
-				"" //"--gtest_filter=*.*"
-			],
+			"command": "${command:cmake.launchTargetPath}",
+			"args": [],
 			"group": "test",
 			"presentation": {
 				"reveal": "always",
 				"panel": "shared"
 			},
-			"problemMatcher": [],
-			"dependsOn": "Install locally the MSVC build"
+			"problemMatcher": []
 		}
 	]
 }
