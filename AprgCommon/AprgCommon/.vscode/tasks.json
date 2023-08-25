@@ -2,52 +2,28 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Configure In WSL Using GCC",
+			"label": "Clean In WSL",
 			"type": "shell",
 			"command": "wsl",
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
-				"configureWithGcc",
+				"clean",
 				"WslBuild",
-				"Debug",
-				"Ninja"
+				"Debug"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
-			"problemMatcher": {
-				"owner": "cpp",
-				"fileLocation": [
-					"autoDetect",
-					"${workspaceRoot}"
-				],
-				"pattern": {
-					"regexp": "^(.*):(\\d+):(\\d+):\\s+(style|warning|error):\\s+(.*)$",
-					"file": 1,
-					"line": 2,
-					"column": 3,
-					"severity": 4,
-					"message": 5
-				}
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "shared"
-			},
+			}
 		},
 		{
-			"label": "Configure In WSL Using Clang",
+			"label": "Configure In WSL",
 			"type": "shell",
 			"command": "wsl",
 			"args": [
 				"./.vscode/runWslCommonScript.sh",
 				"outputWithAbsolutePaths",
-				"configureWithClang",
+				"${input:cmakeConfiguration}",
 				"WslBuild",
 				"Debug",
 				"Ninja"
@@ -58,99 +34,6 @@
 			"group": {
 				"kind": "build",
 				"isDefault": false
-			},
-			"problemMatcher": {
-				"owner": "cpp",
-				"fileLocation": [
-					"autoDetect",
-					"${workspaceRoot}"
-				],
-				"pattern": {
-					"regexp": "^(.*):(\\d+):(\\d+):\\s+(style|warning|error):\\s+(.*)$",
-					"file": 1,
-					"line": 2,
-					"column": 3,
-					"severity": 4,
-					"message": 5
-				}
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "shared"
-			},
-		},
-		{
-			"label": "Configure In WSL Using Clang With Asan",
-			"type": "shell",
-			"command": "wsl",
-			"args": [
-				"./.vscode/runWslCommonScript.sh",
-				"outputWithAbsolutePaths",
-				"configureWithClangWithAsan",
-				"WslBuild",
-				"Debug",
-				"Ninja"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
-			"problemMatcher": {
-				"owner": "cpp",
-				"fileLocation": [
-					"autoDetect",
-					"${workspaceRoot}"
-				],
-				"pattern": {
-					"regexp": "^(.*):(\\d+):(\\d+):\\s+(style|warning|error):\\s+(.*)$",
-					"file": 1,
-					"line": 2,
-					"column": 3,
-					"severity": 4,
-					"message": 5
-				}
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "shared"
-			},
-		},
-		{
-			"label": "Configure In WSL Using Clang With Static Analyzers",
-			"type": "shell",
-			"command": "wsl",
-			"args": [
-				"./.vscode/runWslCommonScript.sh",
-				"outputWithAbsolutePaths",
-				"cleanAndConfigureWithClangAndStaticAnalyzers",
-				"WslBuild",
-				"Debug",
-				"Ninja"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}"
-			},
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
-			"problemMatcher": {
-				"owner": "cpp",
-				"fileLocation": [
-					"autoDetect",
-					"${workspaceRoot}"
-				],
-				"pattern": {
-					"regexp": "^(.*):(\\d+):(\\d+):\\s+(style|warning|error):\\s+(.*)$",
-					"file": 1,
-					"line": 2,
-					"column": 3,
-					"severity": 4,
-					"message": 5
-				}
 			},
 			"presentation": {
 				"reveal": "always",
@@ -166,10 +49,11 @@
 				"outputWithAbsolutePaths",
 				"build",
 				"WslBuild",
-				"Debug"
+				"Debug",
+				"${input:cmakeConfiguration}"
 			],
 			"options": {
-				"cwd": "${workspaceFolder}"
+				"cwd": "${workspaceFolder}",
 			},
 			"group": {
 				"kind": "build",
@@ -193,8 +77,8 @@
 			"presentation": {
 				"reveal": "always",
 				"panel": "shared"
-			},
-			"dependsOn": "Configure In WSL Using Clang With Static Analyzers"
+			}
+			//, "dependsOn": "Configure In WSL" // dont automatically call this
 		},
 		{
 			"label": "Install In WSL",
@@ -213,21 +97,6 @@
 			"group": {
 				"kind": "build",
 				"isDefault": false
-			},
-			"problemMatcher": {
-				"owner": "cpp",
-				"fileLocation": [
-					"autoDetect",
-					"${workspaceRoot}"
-				],
-				"pattern": {
-					"regexp": "^(.*):(\\d+):(\\d+):\\s+(style|warning|error):\\s+(.*)$",
-					"file": 1,
-					"line": 2,
-					"column": 3,
-					"severity": 4,
-					"message": 5
-				}
 			},
 			"presentation": {
 				"reveal": "always",
@@ -253,22 +122,6 @@
 			"problemMatcher": [],
 			"dependsOn": "Install In WSL"
 		},
-		{
-			"label": "Clean In WSL",
-			"type": "shell",
-			"command": "wsl",
-			"args": [
-				"./.vscode/runWslCommonScript.sh",
-				"outputWithAbsolutePaths",
-				"clean",
-				"WslBuild",
-				"Debug"
-			],
-			"options": {
-				"cwd": "${workspaceFolder}"
-			},
-			"problemMatcher": []
-		},
 		// For local builds, just run cmake in command palette (Ctrl + Shift + P)
 		{
 			"label": "Run locally",
@@ -281,6 +134,20 @@
 				"panel": "shared"
 			},
 			"problemMatcher": []
+		}
+	],
+	"inputs": [
+		{
+			"id": "cmakeConfiguration",
+			"type": "pickString",
+			"description": "Select cmake configuration task:",
+			"options": [
+				"configureWithGcc",
+				"configureWithClang",
+				"configureWithClangWithAsan",
+				"cleanAndConfigureWithClangAndStaticAnalyzers"
+			],
+			"default": "configureWithClang"
 		}
 	]
 }
