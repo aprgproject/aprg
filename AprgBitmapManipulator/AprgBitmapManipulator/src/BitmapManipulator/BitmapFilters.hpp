@@ -66,7 +66,7 @@ public:
         BitmapSnippet& snippet, int const numberOfPasses, uint32_t const similarityColorLimit);
     void drawBlurredColorsUsingCircles(
         BitmapSnippet& snippet, double const blurRadius, uint32_t const similarityColorLimit);
-    void drawWithBlurUsingSnakeLikeTraversal(BitmapSnippet& snippet, uint32_t const similarityColorLimit);
+    static void drawWithBlurUsingSnakeLikeTraversal(BitmapSnippet& snippet, uint32_t const similarityColorLimit);
 
     // other draw functions
     void drawToFillGapsUsingBlur(BitmapSnippet& snippet, double const blurRadius);
