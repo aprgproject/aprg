@@ -180,7 +180,7 @@ private:
         TwoDimensionKMeans& kMeansForBarPoints, GroupOfTwoDimensionSamples const& listOfGroupOfBarPoints,
         int const indexToRemove) const;
     [[nodiscard]] OneDimensionSamples getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints) const;
-    static [[nodiscard]] double getHeight(TwoDimensionSamples const& barPoints) ;
+    [[nodiscard]] static double getHeight(TwoDimensionSamples const& barPoints) ;
 
     // output related functions
     [[nodiscard]] std::string getCsvFilePath(std::string const& path) const;

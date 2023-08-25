@@ -26,7 +26,7 @@ public:
 private:
     static std::string getNewPrintStreamBasedFromOldPrintFunction(std::string const& printFunction);
     static void removeStartingAndTrailingWhiteSpaceInPrintParameters(stringHelper::strings& printParameters);
-    static [[nodiscard]] std::string constructCPlusPlusPrint(
+    [[nodiscard]] static std::string constructCPlusPlusPrint(
         std::string const& newPrintStream, std::string const& endPrintStream, std::string const& printString,
         stringHelper::strings const& printParameters) ;
     static void appendCharacterToResult(std::string& result, bool& isOnStringLiteral, char const c);
