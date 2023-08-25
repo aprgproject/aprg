@@ -42,4 +42,4 @@ TEST(EllipticConeTest, EllipticConeNotAtOriginWithRadius) {
     EXPECT_DOUBLE_EQ(3, ellipticCone.calculateZFromXAndY(1, 2, 1));
 }
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

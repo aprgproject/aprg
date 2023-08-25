@@ -90,4 +90,4 @@ TEST(LimaconTest, CalculateThetaFromRadiusWorks) {
     EXPECT_DOUBLE_EQ(0, limacon.calculateThetaFromRadius(23).getDegrees());
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

@@ -244,4 +244,4 @@ TEST(QuadrilateralTest, DoesNotCrashExampleDueToNearValues) {
     EXPECT_EQ(24U, pointsInAreaTraversal.size());
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

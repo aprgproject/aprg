@@ -209,4 +209,4 @@ TEST(ThreeDimensionsLineTest, LineCanBeComparedForEquality)
 }
 */
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

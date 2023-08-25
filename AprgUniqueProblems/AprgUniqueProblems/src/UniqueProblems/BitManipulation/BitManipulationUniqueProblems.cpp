@@ -16,4 +16,4 @@ uint64_t changeAllOnesToZeroExceptForLast(uint64_t const value) { return value &
 
 uint64_t invertAllBitsAfterTheLastOne(uint64_t const value) { return value | (value - 1); }
 
-}  // namespace alba
+}  // namespace alba::BitManipulation

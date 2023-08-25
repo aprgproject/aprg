@@ -169,4 +169,4 @@ TEST(ParabolaTest, GetVertexWorksForParabolaOrientatedInY) {
     EXPECT_EQ(Point(-6.25, 0.5), parabola2.getVertex());
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

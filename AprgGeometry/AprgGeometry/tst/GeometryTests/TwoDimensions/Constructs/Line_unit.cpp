@@ -366,4 +366,4 @@ TEST(TwoDimensionsLineTest, LineCanBeComparedForEquality) {
     EXPECT_NE(Line(1, 2, 3), Line(2, 3, 4));
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

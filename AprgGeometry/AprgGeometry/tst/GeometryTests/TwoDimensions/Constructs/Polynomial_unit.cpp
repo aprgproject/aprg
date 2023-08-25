@@ -20,4 +20,4 @@ TEST(PolynomialTest, GetValueOfFirstDerivativeWorks) {
     EXPECT_DOUBLE_EQ(12, polynomial.getValueOfFirstDerivative(5));
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

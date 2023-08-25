@@ -122,4 +122,4 @@ TEST(HyperbolaTest, AreaTraversalIsCorrect) {
     // traversal
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

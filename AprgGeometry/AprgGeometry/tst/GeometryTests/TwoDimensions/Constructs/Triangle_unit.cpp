@@ -96,4 +96,4 @@ TEST(TriangleTest, GetPointsWorks) {
     EXPECT_EQ(Point(0, 1), points[11]);
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

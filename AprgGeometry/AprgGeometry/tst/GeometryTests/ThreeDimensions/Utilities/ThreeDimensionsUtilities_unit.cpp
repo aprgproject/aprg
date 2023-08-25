@@ -339,4 +339,4 @@ TEST(ThreeDimensionsUtilitiesTest, GetPerpendicularPlaneWithALineAndAPointWorks)
     EXPECT_EQ(-1, expectedPlane.getDCoefficient());
 }
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

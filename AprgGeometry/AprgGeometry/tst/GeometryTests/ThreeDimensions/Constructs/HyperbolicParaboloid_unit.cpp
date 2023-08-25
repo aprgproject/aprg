@@ -42,4 +42,4 @@ TEST(HyperbolicParaboloidTest, HyperbolicParaboloidNotAtOriginWithRadius) {
     EXPECT_DOUBLE_EQ(7.8000000000000007, hyperbolicParaboloid.calculateZFromXAndY(5, 6));
 }
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

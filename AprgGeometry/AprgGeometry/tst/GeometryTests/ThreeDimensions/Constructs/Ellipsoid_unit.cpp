@@ -48,4 +48,4 @@ TEST(EllipsoidTest, IsInsideWorks) {
     EXPECT_TRUE(ellipsoid.isInside(Point(0, 0, 0)));
 }
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

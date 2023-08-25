@@ -599,4 +599,4 @@ TEST(TwoDimensionsUtilitiesTest, TraverseCircleAreaBetweenTwoRadiusWorks) {
     EXPECT_EQ(Point(2, 2), pointsInAreaTraversal[7]);
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

@@ -89,4 +89,4 @@ TEST(PlaneTest, PlaneWithConstantX) {
     EXPECT_FALSE(plane.calculateZFromXAndY(1.0, 1.0));
 }
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

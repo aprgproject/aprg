@@ -148,4 +148,4 @@ TEST(EllipseTest, AreaTraversalIsCorrect) {
     // traversal
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

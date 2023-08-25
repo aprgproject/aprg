@@ -110,4 +110,4 @@ TEST(CircleTest, PointsInAreaTraversalIsCorrect) {
     EXPECT_EQ(Point(3, 1), pointsInAreaTraversal[12]);
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

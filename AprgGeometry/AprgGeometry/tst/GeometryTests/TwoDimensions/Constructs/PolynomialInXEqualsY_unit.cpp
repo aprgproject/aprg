@@ -32,4 +32,4 @@ TEST(PolynomialInXEqualsYTest, GetValueOfFirstDerivativeWorks) {
     EXPECT_DOUBLE_EQ(12, polynomial.getSlopeAt(5));
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

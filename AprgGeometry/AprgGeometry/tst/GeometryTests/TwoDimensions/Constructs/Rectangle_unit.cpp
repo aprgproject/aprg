@@ -21,4 +21,4 @@ TEST(RectangleTest, GetPointsWorks) {
     EXPECT_EQ(Point(-1, 0), points[7]);
 }
 
-}  // namespace alba
+}  // namespace alba::TwoDimensions

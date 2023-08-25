@@ -42,4 +42,4 @@ TEST(EllipticParaboloidTest, EllipticParaboloidNotAtOriginWithRadius) {
     EXPECT_DOUBLE_EQ(3, ellipticParaboloid.calculateZFromXAndY(1, 2));
 }
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

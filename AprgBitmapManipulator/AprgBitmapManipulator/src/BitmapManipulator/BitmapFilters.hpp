@@ -102,7 +102,7 @@ private:
     static void determinePenPointsToPenCircles(
         PenPointToPenCircleMap& penPointsToPenCircles, PenPoints const& penPoints, BitmapSnippet const& inputSnippet,
         uint32_t const similarityColorLimit, double const acceptablePenPercentage);
-    void drawToBlurForCenterPoint(
+    static void drawToBlurForCenterPoint(
         BitmapSnippet& snippet, BitmapXYs& pointsToBlur, BitmapXY const& point, uint32_t const similarityColorLimit);
     static void drawToBlurForNonCenterPoint(
         BitmapSnippet& snippet, BitmapXYs& pointsToBlur, BitmapXY const& point, uint32_t const centerColor,

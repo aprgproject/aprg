@@ -48,4 +48,4 @@ TEST(EllipticHyperboloidTest, IsInsideWorks) {
     EXPECT_TRUE(ellipticHyperboloid.isInside(Point(0, 0, 0)));
 }
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions

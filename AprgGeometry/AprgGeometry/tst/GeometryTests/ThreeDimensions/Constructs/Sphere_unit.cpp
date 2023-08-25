@@ -42,4 +42,4 @@ TEST(SphereTest, IsInsideWorks) {
     EXPECT_TRUE(sphere.isInside(Point(0, 0, 0)));
 }
 
-}  // namespace alba
+}  // namespace alba::ThreeDimensions
