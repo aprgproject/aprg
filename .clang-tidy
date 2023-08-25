@@ -25,18 +25,19 @@ Checks: '
   -readability-avoid-const-params-in-decls,
   -readability-isolate-declaration,
   -readability-named-parameter,
-  -cert-err58-cpp,
-  -cppcoreguidelines-owning-memory,
-  -cppcoreguidelines-pro-type-reinterpret-cast,
-  -cppcoreguidelines-pro-type-vararg,
-  -cppcoreguidelines-avoid-non-const-global-variables,
-  -fuchsia-statically-constructed-objects,
-  -google-runtime-int,
-  -hicpp-vararg,
-  -readability-magic-numbers,
-  -readability-function-cognitive-complexity,
-  -misc-non-private-member-variables-in-classes
 '
+#  -cert-err58-cpp,
+#  -cppcoreguidelines-owning-memory,
+#  -cppcoreguidelines-pro-type-reinterpret-cast,
+#  -cppcoreguidelines-pro-type-vararg,
+#  -cppcoreguidelines-avoid-non-const-global-variables,
+#  -fuchsia-statically-constructed-objects,
+#  -google-runtime-int,
+#  -hicpp-vararg,
+#  -readability-magic-numbers,
+#  -readability-function-cognitive-complexity,
+#  -misc-non-private-member-variables-in-classes
+#'
 
 # -> Checkers that should be auto fixed
 #Checks: '
