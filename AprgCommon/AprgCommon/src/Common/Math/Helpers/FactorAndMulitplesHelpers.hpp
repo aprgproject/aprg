@@ -71,10 +71,10 @@ NumberType getGreatestCommonFactorUsingEuclidAlgorithm(NumberType const firstNum
         if (second == 0) {
             result = first;
             break;
-        }             NumberType copyOfFirst(first);
-            first = second;
-            second = copyOfFirst % second;
-       
+        }
+        NumberType copyOfFirst(first);
+        first = second;
+        second = copyOfFirst % second;
     }
     return result;
 }
@@ -97,8 +97,8 @@ NumberType getGreatestCommonFactorUsingBinaryGcdAlgorithm(NumberType const first
     NumberType first(getAbsoluteValue(firstNumber)), second(getAbsoluteValue(secondNumber));  // only consider positive
     if (first == 0) {
         return second;
-
-    } if (second == 0) {
+    }
+    if (second == 0) {
         return first;
     }
 
@@ -108,6 +108,7 @@ NumberType getGreatestCommonFactorUsingBinaryGcdAlgorithm(NumberType const first
         static_cast<NumberType>(AlbaBitValueUtilities<NumberType>::getNumberOfConsecutiveZerosFromLsb(second));
     NumberType trailingMinimum = std::min(trailingFirst, trailingSecond);
 
+    // NOLINTBEGIN(hicpp-signed-bitwise)
     first >>= trailingFirst;
     second >>= trailingSecond;
     while (true) {
@@ -120,6 +121,7 @@ NumberType getGreatestCommonFactorUsingBinaryGcdAlgorithm(NumberType const first
         }
         second >>= AlbaBitValueUtilities<NumberType>::getNumberOfConsecutiveZerosFromLsb(second);
     }
+    // NOLINTEND(hicpp-signed-bitwise)
 }
 
 template <typename NumberType>

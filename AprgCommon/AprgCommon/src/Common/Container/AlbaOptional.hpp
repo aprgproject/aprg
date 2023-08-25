@@ -164,6 +164,7 @@ private:
 
     bool m_hasContent;
     ContentType* m_contentPointer;
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
     static ContentType m_empty;  // think of how to remove this
 
     friend std::ostream& operator<<(std::ostream& out, AlbaOptional<ContentType&> const& optional) {
@@ -175,6 +176,8 @@ private:
     }
 };
 
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
 template <typename ContentType>
-ContentType AlbaOptional<ContentType&>::m_empty;
+ContentType AlbaOptional<ContentType&>::m_empty{};
+
 }  // namespace alba

@@ -52,6 +52,7 @@ public:
     [[nodiscard]] ObjectType retrieveObjectAsConstReference() const {
         // Herb Sutter: Dont xray objects. Me: It has standard layout so it can be xray-ed.
         static_assert(typeHelper::hasStandardLayout<ObjectType>(), "ObjectType needs to have standard layout.");
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         return *reinterpret_cast<ObjectType const*>(getConstantBufferPointer());
     }
 
@@ -59,6 +60,7 @@ public:
     ObjectType& retrieveObjectAsReference() {
         // Herb Sutter: Dont xray objects. Me: It has standard layout so it can be xray-ed.
         static_assert(typeHelper::hasStandardLayout<ObjectType>(), "ObjectType needs to have standard layout.");
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
         return *reinterpret_cast<ObjectType*>(getBufferPointer());
     }
 

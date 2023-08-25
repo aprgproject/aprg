@@ -36,7 +36,11 @@ inline bool isPerfectCube(NumberType const value) {
 template <typename NumberType>
 inline bool isPerfectNthPower(NumberType const value, NumberType const nthPower) {
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
-
+    if (nthPower == 0) {
+        // Is one a perfect zeroth root? Bard: Yes, ChatGPT: Yes
+        // Is zero a perfect zeroth root? Bard: No, ChatGPT: No
+        return value == 1;
+    }
     return isAlmostAnInteger<double, NumberType>(pow(value, static_cast<double>(1) / nthPower));
 }
 

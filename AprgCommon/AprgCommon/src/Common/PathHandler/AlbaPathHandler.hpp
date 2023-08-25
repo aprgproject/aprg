@@ -37,11 +37,13 @@ protected:
     void setExtensionFromPath(std::string_view path);
     void setDirectoryAndFileFromPath(std::string_view path);
     void setFileType();
+    // NOLINTBEGIN(cppcoreguidelines-non-private-member-variables-in-classes,misc-non-private-member-variables-in-classes)
     PathType m_pathType;
     std::string m_slashCharacterString;
     std::string m_directory;
     std::string m_file;
     std::string m_extension;
+    // NOLINTEND(cppcoreguidelines-non-private-member-variables-in-classes,misc-non-private-member-variables-in-classes)
 };
 
 }  // namespace alba

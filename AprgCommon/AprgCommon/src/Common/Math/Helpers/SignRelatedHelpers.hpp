@@ -18,7 +18,7 @@ inline NumberType getAbsoluteValue(NumberType const value) {
 template <typename NumberType>
 inline NumberType getSign(NumberType const value) {
     if constexpr (typeHelper::isUnsignedType<NumberType>()) {
-        return value / value;  // return 1; has warnings
+        return 1;
     } else {
         return (value < 0) ? -1 : 1;
     }

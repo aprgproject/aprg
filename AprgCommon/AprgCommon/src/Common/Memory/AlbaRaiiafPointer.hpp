@@ -13,7 +13,7 @@ template <typename ContentType>
 class AlbaRaiiafPointer {
 public:
     // rule of five or six
-    AlbaRaiiafPointer()  {}
+    AlbaRaiiafPointer() = default;
 
     ~AlbaRaiiafPointer() {
         assert(!hasContent());
@@ -39,6 +39,7 @@ public:
 
     void setAndAllocateNewContent(ContentType const &reference) {
         assert(!hasContent());
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         m_voidPointer = new ContentType(reference);
     }
 

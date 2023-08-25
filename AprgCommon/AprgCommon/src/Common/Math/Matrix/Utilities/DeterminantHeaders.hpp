@@ -5,10 +5,10 @@
 namespace alba::matrix {
 
 template <typename DataType>
-size_t getIndexWithHighestNumberOfZeros(ListOfAlbaMatrixData<DataType> const& rowsAndColumns);
+size_t getIndexWithHighestNumberOfZeros(ListOfAlbaMatrixData<DataType> const& rowsOrColumns);
 
 template <typename DataType>
-size_t getIndexWithHighestNumberOfNonZeros(ListOfAlbaMatrixData<DataType> const& rowsAndColumns);
+size_t getIndexWithHighestNumberOfNonZeros(ListOfAlbaMatrixData<DataType> const& rowsOrColumns);
 
 template <typename DataType>
 DataType getDeterminant(AlbaMatrix<DataType> const& matrix);
@@ -18,7 +18,7 @@ DataType getValueUsingCramerRule(
     AlbaMatrix<DataType> const& matrix, size_t const columnIndex, AlbaMatrixData<DataType> const& newColumnValues);
 
 template <typename DataType>
-DataType getValueFromCoFactorExpansion(AlbaMatrix<DataType> const& matrix, size_t x, size_t y);
+DataType getValueFromCoFactorExpansion(AlbaMatrix<DataType> const& matrix, size_t xPosition, size_t yPosition);
 
 template <typename DataType>
 DataType getDeterminantWhenSideIsMoreThan2(AlbaMatrix<DataType> const& matrix);

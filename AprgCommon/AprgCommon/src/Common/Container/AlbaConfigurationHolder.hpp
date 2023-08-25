@@ -31,6 +31,7 @@ public:
     }
 
 protected:
+    // NOLINTNEXTLINE(cppcoreguidelines-non-private-member-variables-in-classes,misc-non-private-member-variables-in-classes)
     ConfigurationDetails m_configurationDetails;
 };
 

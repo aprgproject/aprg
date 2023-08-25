@@ -56,7 +56,7 @@ while IFS= read -r aprgProjectLocatorPath; do
 
     aprgCmakeIncludeDirectory=$(realpath "$aprgProjectDirectory/../AprgCmakeInclude") 
     if [ -d "$aprgCmakeIncludeDirectory" ]; then
-        checkCmakeFilesInDirectory "$lintStatus" "$aprgProjectDirectory"
+        checkCmakeFilesInDirectory "$lintStatus" "$aprgCmakeIncludeDirectory"
         lintStatus=$?
     fi
 done < <(find "$directoryToConvertAllFiles" -depth -type f -wholename "$searchCondition")

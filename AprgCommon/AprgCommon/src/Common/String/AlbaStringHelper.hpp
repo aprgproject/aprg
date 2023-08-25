@@ -19,10 +19,11 @@ using StringPairs = std::vector<StringPair>;
 
 constexpr auto WHITESPACE_STRING = " \t\n\r";
 
-inline bool isWhiteSpace(char const c) { return isspace(c) != 0; }
-// inline bool isWhiteSpace(char const c) { return (' ' == c || '\t' == c || '\n' == c || '\r' == c); }
+inline bool isWhiteSpace(char const character) { return isspace(character) != 0; }
+// inline bool isWhiteSpace(char const character) { return (' ' == character || '\t' == character || '\n' == character
+// || '\r' == character); }
 
-inline bool isNewline(char const c) { return ('\n' == c || '\r' == c); }
+inline bool isNewline(char const character) { return ('\n' == character || '\r' == character); }
 
 inline bool isNotNpos(int const index) { return static_cast<int>(std::string::npos) != index; }
 
@@ -32,35 +33,39 @@ inline bool isValidIndex(int const index, int const stringLength) {
     return isNotNpos(index) && 0 <= index && stringLength >= index;
 }
 
-inline bool isCapitalLetter(char const c) { return isupper(c) != 0; }
-// inline bool isCapitalLetter(char const c) { return ('A' <= c && 'Z' >= c); }
+inline bool isCapitalLetter(char const character) { return isupper(character) != 0; }
+// inline bool isCapitalLetter(char const character) { return ('A' <= character && 'Z' >= character); }
 
-inline bool isLowerCaseLetter(char const c) { return islower(c) != 0; }
-// inline bool isLowerCaseLetter(char const c) { return ('a' <= c && 'z' >= c); }
+inline bool isLowerCaseLetter(char const character) { return islower(character) != 0; }
+// inline bool isLowerCaseLetter(char const character) { return ('a' <= character && 'z' >= character); }
 
-inline bool isLetter(char const c) { return isalpha(c) != 0; }
-// inline bool isLetter(char const c) { return ('a' <= c && 'z' >= c) || ('A' <= c && 'Z' >= c); }
+inline bool isLetter(char const character) { return isalpha(character) != 0; }
+// inline bool isLetter(char const character) { return ('a' <= character && 'z' >= character) || ('A' <= character &&
+// 'Z' >= character); }
 
-inline bool isNumber(char const c) { return isdigit(c) != 0; }
-// inline bool isNumber(char const c) { return ('0' <= c && '9' >= c); }
+inline bool isNumber(char const character) { return isdigit(character) != 0; }
+// inline bool isNumber(char const character) { return ('0' <= character && '9' >= character); }
 
-inline bool isHexDigit(char const c) { return isxdigit(c) != 0; }
-// inline bool isHexDigit(char const c) { return isNumber(c) || ('a' <= c && 'f' >= c) || ('A' <= c && 'F' >= c); }
+inline bool isHexDigit(char const character) { return isxdigit(character) != 0; }
+// inline bool isHexDigit(char const character) { return isNumber(character) || ('a' <= character && 'f' >= character)
+// || ('A' <= character && 'F' >= character); }
 
-inline bool isLetterOrNumber(char const c) { return isalnum(c) != 0; }
-// inline bool isLetterOrNumber(char const c) { return isLetter(c) || isNumber(c); }
+inline bool isLetterOrNumber(char const character) { return isalnum(character) != 0; }
+// inline bool isLetterOrNumber(char const character) { return isLetter(character) || isNumber(character); }
 
-inline bool isPunctuation(char const c) { return ispunct(c) != 0; }
+inline bool isPunctuation(char const character) { return ispunct(character) != 0; }
 
-inline bool isUnderscore(char const c) { return '_' == c; }
+inline bool isUnderscore(char const character) { return '_' == character; }
 
-inline bool isLetterOrNumberOrUnderscore(char const c) { return isLetterOrNumber(c) || isUnderscore(c); }
+inline bool isLetterOrNumberOrUnderscore(char const character) {
+    return isLetterOrNumber(character) || isUnderscore(character);
+}
 
-inline bool isSlashCharacter(char const c) { return ('\\' == c || '/' == c); }
+inline bool isSlashCharacter(char const character) { return ('\\' == character || '/' == character); }
 
-inline bool isDisplayableCharacter(char const c) { return isprint(c) != 0; }
-// true if c is a printable character (i.e., a space or a character that has a visible representation)
-// inline bool isDisplayableCharacter(char const c) { return (' ' <= c && '~' >= c); }
+inline bool isDisplayableCharacter(char const character) { return isprint(character) != 0; }
+// true if character is a printable character (i.e., a space or a character that has a visible representation)
+// inline bool isDisplayableCharacter(char const character) { return (' ' <= character && '~' >= character); }
 
 inline bool isNotEmptyLine(std::string_view str) {
     return isNotNpos(static_cast<int>(str.find_first_not_of(WHITESPACE_STRING)));
@@ -143,6 +148,7 @@ std::string getQuotedString(std::string_view stringToCheck);
 
 std::string constructFileLocator(std::string_view file, int const lineNumber);
 std::string getRandomAlphaNumericString(size_t const length);
+// NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays)
 strings getArgumentsToStringInMain(int const argc, char const* const argv[]);
 
 // Find and replace
@@ -310,28 +316,19 @@ public:
 
     StringConverterWithFormatting() = default;
 
-    explicit StringConverterWithFormatting(int const precision)
-        : m_precisionOptional(precision)
-          {}
+    explicit StringConverterWithFormatting(int const precision) : m_precisionOptional(precision) {}
 
     explicit StringConverterWithFormatting(int const fieldWidth, char const fillCharacter)
-        : 
-          m_fieldWidthOptional(fieldWidth),
-          m_fillCharacterOptional(fillCharacter)
-          {}
+        : m_fieldWidthOptional(fieldWidth), m_fillCharacterOptional(fillCharacter) {}
 
-    explicit StringConverterWithFormatting(size_t const maximumLength)
-        : 
-          m_maximumLengthOptional(maximumLength)
-          {}
+    explicit StringConverterWithFormatting(size_t const maximumLength) : m_maximumLengthOptional(maximumLength) {}
 
     explicit StringConverterWithFormatting(
         int const precision, int const fieldWidth, char const fillCharacter, size_t const maximumLength)
         : m_precisionOptional(precision),
           m_fieldWidthOptional(fieldWidth),
           m_fillCharacterOptional(fillCharacter),
-          m_maximumLengthOptional(maximumLength)
-          {}
+          m_maximumLengthOptional(maximumLength) {}
 
     template <typename AnyType>
     [[nodiscard]] std::string convertToString(AnyType const& object) const {
@@ -364,8 +361,8 @@ public:
         temporaryStream << object;
         if (m_maximumLengthOptional) {
             return temporaryStream.str().substr(0, m_maximumLengthOptional.value());
-        }             return temporaryStream.str();
-       
+        }
+        return temporaryStream.str();
     }
 
     void setPrecision(int const precision);

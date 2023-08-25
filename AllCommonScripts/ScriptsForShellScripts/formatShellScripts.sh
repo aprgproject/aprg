@@ -21,15 +21,15 @@ skipPathRegex="$aprgShellScriptsPathSkipRegex"
 # Create needed functions
 tempFile=$(mktemp)
 formatShellScriptsInDirectory() {
-    local localLintStatus
     local directoryPath
-    localLintStatus="$1"
-    directoryPath="$2"
+    directoryPath="$1"
 
     scriptPrint "$scriptName" "$LINENO" "Searching for shell scripts in: [$directoryPath]"
 
     while IFS= read -r filePath; do
         if  [[ ! "$filePath" =~ $skipPathRegex ]]; then
+            scriptPrint "$scriptName" "$LINENO" "Processing shell script: [$filePath]"
+            
             # unix style line endings
             dos2unix "$filePath"
         
@@ -38,8 +38,6 @@ formatShellScriptsInDirectory() {
             mv "$tempFile" "$filePath"
         fi
     done < <(find "$directoryPath" -type f -name "*.sh")
-
-    return "$localLintStatus"
 }
 
 # Find all files with the same name in the target folder

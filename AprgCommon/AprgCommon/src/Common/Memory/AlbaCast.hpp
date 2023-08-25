@@ -93,6 +93,7 @@ OutputType getFloatingPointMemoryRepresentation(InputType const floatingPointVal
         typeHelper::isFloatingPointType<InputType>(), "Input type needs to be should be floating point type.");
     static_assert(typeHelper::isIntegralType<OutputType>(), "Output type needs to be should be integral point type.");
     static_assert(sizeof(InputType) == sizeof(OutputType), "Input type and output type sizes must match.");
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
     return *reinterpret_cast<OutputType const*>(&floatingPointValue);
 }
 

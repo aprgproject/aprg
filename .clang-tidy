@@ -13,6 +13,7 @@ Checks: '
   -cppcoreguidelines-pro-bounds-pointer-arithmetic,
   -cppcoreguidelines-pro-type-union-access,
   -fuchsia-default-arguments-calls,
+  -fuchsia-default-arguments-declarations,
   -fuchsia-overloaded-operator,
   -google-build-using-namespace,
   -hicpp-named-parameter,
@@ -25,30 +26,33 @@ Checks: '
   -readability-avoid-const-params-in-decls,
   -readability-isolate-declaration,
   -readability-named-parameter,
-  -cert-err58-cpp,
-  -cppcoreguidelines-owning-memory,
-  -cppcoreguidelines-pro-type-reinterpret-cast,
-  -cppcoreguidelines-pro-type-vararg,
-  -cppcoreguidelines-avoid-non-const-global-variables,
-  -fuchsia-statically-constructed-objects,
-  -google-runtime-int,
-  -hicpp-vararg,
-  -readability-magic-numbers,
-  -readability-function-cognitive-complexity,
-  -misc-non-private-member-variables-in-classes
 '
+#  -cert-err58-cpp,
+#  -cppcoreguidelines-owning-memory,
+#  -cppcoreguidelines-pro-type-reinterpret-cast,
+#  -cppcoreguidelines-pro-type-vararg,
+#  -cppcoreguidelines-avoid-non-const-global-variables,
+#  -fuchsia-statically-constructed-objects,
+#  -google-runtime-int,
+#  -hicpp-vararg,
+#  -readability-magic-numbers,
+#  -readability-function-cognitive-complexity,
+#  -misc-non-private-member-variables-in-classes
+#'
 
 # -> Checkers that should be auto fixed
 #Checks: '
 #  cppcoreguidelines-special-member-functions,
 #  google-explicit-constructor,
 #  google-readability-braces-around-statements,
+#  google-readability-casting,
 #  google-readability-namespace-comments,
 #  hicpp-braces-around-statements,
 #  hicpp-explicit-conversions,
 #  hicpp-noexcept-move,
 #  hicpp-special-member-function,
 #  hicpp-use-auto,
+#  hicpp-use-equals-default,
 #  llvm-else-after-return,
 #  readability-braces-around-statements,
 #  readability-convert-member-functions-to-static,
@@ -59,6 +63,7 @@ Checks: '
 #  modernize-return-braced-init-list,
 #  modernize-use-auto,
 #  modernize-use-default-member-init,
+#  modernize-use-equals-default,
 #  modernize-use-nodiscard,
 #  performance-noexcept-move-constructor
 #'

@@ -10,7 +10,7 @@ using namespace std;
 
 namespace alba {
 
-AlbaUserInterface::AlbaUserInterface()  {}
+AlbaUserInterface::AlbaUserInterface() = default;
 
 string AlbaUserInterface::getUserInput() {
     cin.getline(m_buffer.data(), BUFFER_SIZE);

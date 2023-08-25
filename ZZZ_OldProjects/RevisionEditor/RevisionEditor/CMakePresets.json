@@ -7,12 +7,12 @@
   },
   "configurePresets": [
     {
-      "name": "visualstudio-windows-msvc-debug",
-      "displayName": "Visual Studio Windows x64 MSVC Debug",
-      "description": "Setup for Visual Studio Compilation, manually call cmake for GCC/Clang.",
+      "name": "windows-msvc-vstudio-debug",
+      "displayName": "Windows x64 MSVC Visual Studio Debug",
+      "description": "This configures a Windows Debug build with MSVC (in Visual Studio) for 64-bit architecture.",
       "generator": "Visual Studio 17 2022",
       "toolset": "host=x64",
-      "binaryDir": "${sourceDir}/../VisualStudioBuild/",
+      "binaryDir": "${sourceDir}/../WindowsMsvcBuild/",
       "architecture": {
         "value": "x64",
         "strategy": "external"
@@ -30,18 +30,68 @@
           ]
         }
       }
+    },
+    {
+      "name": "windows-mingw-qt-debug",
+      "displayName": "Windows x64 MinGW QT Debug",
+      "description": "This configures a Windows Debug build with GCC/G++ (in QT) for 64-bit architecture.",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/../WindowsMinGWBuild/",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+		"CMAKE_MAKE_PROGRAM":"C:/Qt/Tools/Ninja/ninja.exe",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_INSTALL_PREFIX": "",
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": [
+            "Windows"
+          ]
+        }
+      }
+    },
+    {
+      "name": "windows-clang-qt-debug",
+      "displayName": "Windows x64 Clang QT Debug",
+      "description": "This configures a Windows Debug build with Clang (in QT) for 64-bit architecture.",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/../WindowsClangBuild/",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+		"CMAKE_MAKE_PROGRAM":"C:/Qt/Tools/Ninja/ninja.exe",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_INSTALL_PREFIX": "",
+        "CMAKE_C_COMPILER": "C:/Compilers/LLVM-MINGW/llvm-mingw-20230614-msvcrt-x86_64/bin/x86_64-w64-mingw32-clang.exe",
+        "CMAKE_CXX_COMPILER": "C:/Compilers/LLVM-MINGW/llvm-mingw-20230614-msvcrt-x86_64/bin/x86_64-w64-mingw32-clang++.exe"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": [
+            "Windows"
+          ]
+        }
+      }
     }
   ],
   "buildPresets": [
     {
       "name": "default",
-      "configurePreset": "visualstudio-windows-msvc-debug"
+      "configurePreset": "windows-msvc-vstudio-debug"
     }
   ],
   "testPresets": [
     {
       "name": "default",
-      "configurePreset": "visualstudio-windows-msvc-debug",
+      "configurePreset": "windows-msvc-vstudio-debug",
       "output": {
         "outputOnFailure": true
       },

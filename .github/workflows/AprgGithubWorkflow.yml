@@ -238,28 +238,28 @@ jobs:
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" configureWithDefaultCompiler "${{ env.buildDirectory }}" "${{ env.buildType }}" "Visual Studio 17 2022"
+          "$buildAndRunScriptPath" cleanAndConfigureWithDefaultCompiler "${{ env.buildDirectory }}" "${{ env.buildType }}" "Visual Studio 17 2022"
             
       - name: Configure for Windows/Mingw
         if: matrix.configurationName == 'WindowsLatestMingw'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" configureWithDefaultCompiler "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          "$buildAndRunScriptPath" cleanAndConfigureWithDefaultCompiler "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
       - name: Configure for Ubuntu/Gcc
         if: matrix.configurationName == 'UbuntuLatestGcc'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" configureWithGcc "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          "$buildAndRunScriptPath" cleanAndConfigureWithGcc "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
       - name: Configure for Ubuntu/Clang
         if: matrix.configurationName == 'UbuntuLatestClang'
         shell: bash
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" configureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
             
       - name: Build
         shell: bash

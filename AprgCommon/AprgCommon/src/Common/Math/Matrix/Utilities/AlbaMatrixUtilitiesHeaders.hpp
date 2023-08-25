@@ -47,7 +47,7 @@ template <typename DataType>
 AlbaMatrix<DataType> getMatrixRaiseToScalarPower(AlbaMatrix<DataType> const& base, size_t const scalarExponent);
 
 template <typename DataType>
-void interchangeRows(AlbaMatrix<DataType>& matrix, size_t const y1, size_t const y2);
+void interchangeRows(AlbaMatrix<DataType>& matrix, size_t const yPosition1, size_t const yPosition2);
 
 template <typename DataType>
 void addTwoRowsAndPutSumInAnotherRow(

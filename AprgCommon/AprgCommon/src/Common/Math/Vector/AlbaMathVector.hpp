@@ -138,12 +138,13 @@ public:
     [[nodiscard]] DataType getMagnitude() const {
         // In 2D, in c++ complex number class this is same with abs(v).
         DataType sumOfSquaredTerms = std::accumulate(
-            m_values.cbegin(), m_values.cend(), DataType(0),
+            m_values.cbegin(), m_values.cend(), static_cast<DataType>(0),
             [](DataType const partialResult, DataType const currentValue) {
                 return partialResult +
-                       static_cast<DataType>(raiseToPowerForMathVectorDataType(currentValue, DataType(2)));
+                       static_cast<DataType>(raiseToPowerForMathVectorDataType(currentValue, static_cast<DataType>(2)));
             });
-        return static_cast<DataType>(raiseToPowerForMathVectorDataType(sumOfSquaredTerms, DataType(1) / DataType(2)));
+        return static_cast<DataType>(
+            raiseToPowerForMathVectorDataType(sumOfSquaredTerms, static_cast<DataType>(1) / static_cast<DataType>(2)));
     }
 
     [[nodiscard]] ValuesInArray const& getValues() const { return m_values; }

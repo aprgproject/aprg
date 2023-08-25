@@ -4,7 +4,7 @@ from pptx import Presentation
 
 
 def change_title_slide(presentation):
-    #title_slide_layout = presentation.slide_layouts[0]
+    # title_slide_layout = presentation.slide_layouts[0]
     slide = presentation.slides[0]
 
     title = slide.shapes.title

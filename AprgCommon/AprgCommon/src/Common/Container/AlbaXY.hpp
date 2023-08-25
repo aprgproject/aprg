@@ -16,8 +16,8 @@ public:
 
     // rule of zero
 
-    bool operator==(AlbaXY const& xy) const {
-        return mathHelper::isAlmostEqual(m_x, xy.m_x) && mathHelper::isAlmostEqual(m_y, xy.m_y);
+    bool operator==(AlbaXY const& xyValues) const {
+        return mathHelper::isAlmostEqual(m_x, xyValues.m_x) && mathHelper::isAlmostEqual(m_y, xyValues.m_y);
     }
 
     bool operator!=(AlbaXY const& secondXy) const {
@@ -25,9 +25,9 @@ public:
         return !(firstXy == secondXy);
     }
 
-    bool operator<(AlbaXY const& xy) const  // this is added so it can be used in map
+    bool operator<(AlbaXY const& xyValues) const  // this is added so it can be used in map
     {
-        return std::tie(m_x, m_y) < std::tie(xy.m_x, xy.m_y);
+        return std::tie(m_x, m_y) < std::tie(xyValues.m_x, xyValues.m_y);
     }
 
     AlbaXY operator+() const { return *this; }
@@ -83,27 +83,27 @@ public:
         m_y = yValue;
     }
 
-    void saveMinimumXAndY(AlbaXY const xy) {
-        if (m_x > xy.m_x) {
-            m_x = xy.m_x;
+    void saveMinimumXAndY(AlbaXY const xyValues) {
+        if (m_x > xyValues.m_x) {
+            m_x = xyValues.m_x;
         }
-        if (m_y > xy.m_y) {
-            m_y = xy.m_y;
+        if (m_y > xyValues.m_y) {
+            m_y = xyValues.m_y;
         }
     }
 
-    void saveMaximumXAndY(AlbaXY const xy) {
-        if (m_x < xy.m_x) {
-            m_x = xy.m_x;
+    void saveMaximumXAndY(AlbaXY const xyValues) {
+        if (m_x < xyValues.m_x) {
+            m_x = xyValues.m_x;
         }
-        if (m_y < xy.m_y) {
-            m_y = xy.m_y;
+        if (m_y < xyValues.m_y) {
+            m_y = xyValues.m_y;
         }
     }
 
 private:
-    friend std::ostream& operator<<(std::ostream& out, AlbaXY<CoordinateType> const& xy) {
-        out << "(" << xy.m_x << "," << xy.m_y << ")";
+    friend std::ostream& operator<<(std::ostream& out, AlbaXY<CoordinateType> const& xyValues) {
+        out << "(" << xyValues.m_x << "," << xyValues.m_y << ")";
         return out;
     }
 

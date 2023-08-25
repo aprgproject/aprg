@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "./.vscode/runWslCommonScript.sh",
             "args": [
-                "outputWithHighlighting",
+                "outputWithAbsolutePaths",
                 "run",
                 "WslBuild",
                 "" //"--gtest_filter=*.*"
@@ -32,11 +32,12 @@
                 "panel": "shared"
             },
         },
+        // For local builds, just run cmake in command palette (Ctrl + Shift + P)
         {
-            "name": "Run the local MSVC target",
+            "name": "Run locally",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/../VisualStudioBuild/install/bin/${workspaceFolderBasename}.exe",
+            "program": "${command:cmake.launchTargetPath}",
             "args": [
                 "" //"--gtest_filter=*.*"
             ],
@@ -44,7 +45,6 @@
             "cwd": "${workspaceFolder}",
             "environment": [],
             "console": "integratedTerminal",
-            "preLaunchTask": "Install locally the MSVC build",
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"

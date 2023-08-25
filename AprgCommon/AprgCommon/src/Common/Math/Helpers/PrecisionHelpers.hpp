@@ -85,7 +85,7 @@ inline bool isAlmostAnInteger(double const value, double const differenceToleran
 }
 
 inline double getFractionalPartInDouble(double const doubleValue) {
-    return doubleValue - getIntegerPartOfDoubleValue<long long int>(doubleValue);
+    return doubleValue - static_cast<double>(getIntegerPartOfDoubleValue<int64_t>(doubleValue));
 }
 
 AlbaNumber convertIfInfinityToNearestFiniteValue(AlbaNumber const& value);

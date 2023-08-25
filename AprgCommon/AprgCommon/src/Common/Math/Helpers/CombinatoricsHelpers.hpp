@@ -26,42 +26,42 @@ NumberType getFactorial(NumberType const number) {
 }
 
 template <typename NumberType>
-NumberType getNumberOfPermutations(NumberType const n, NumberType const r) {
+NumberType getNumberOfPermutations(NumberType const nValue, NumberType const rValue) {
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     NumberType result(0);
-    if (n >= r) {
+    if (nValue >= rValue) {
         result = 1;
-        for (NumberType currentNumber = n; currentNumber > n - r; currentNumber--) {
+        for (NumberType currentNumber = nValue; currentNumber > nValue - rValue; currentNumber--) {
             result *= currentNumber;
         }
     }
     return result;
 }
 template <typename NumberType>
-NumberType getNumberOfCombinations(NumberType const n, NumberType const r) {
+NumberType getNumberOfCombinations(NumberType const nValue, NumberType const rValue) {
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
-    // Formula 1(recursive formula): (n, k) = (n-1, k-1) + (n-1, k)
-    // Base cases: (n, 0) = 1, (n, n) = 1
+    // Formula 1(recursive formula): (nValue, kValue) = (nValue-1, kValue-1) + (nValue-1, kValue)
+    // Base cases: (nValue, 0) = 1, (nValue, nValue) = 1
     // Idea: The idea is to fix an element x in the set.
-    // If x is included in the subset, we have to choose k-1 elements from n-1 elements,
-    // and if x is not included in the subset, we have to choose k elements from n-1 elements.
+    // If x is included in the subset, we have to choose kValue-1 elements from nValue-1 elements,
+    // and if x is not included in the subset, we have to choose kValue elements from nValue-1 elements.
     // Note: Formula 1 might be useful in dynamic programming
 
-    // Formula 2(factorial formula): (n, k) = n! / (k! * (n-k)!)
-    // Idea: There are n! permutations of n elements.
-    // We go through all permutations and always include the first k elements of the permutation in the subset.
+    // Formula 2(factorial formula): (nValue, kValue) = nValue! / (kValue! * (nValue-kValue)!)
+    // Idea: There are nValue! permutations of nValue elements.
+    // We go through all permutations and always include the first kValue elements of the permutation in the subset.
     // Since the order of the elements in the subset and outside the subset does not matter,
-    // the result is divided by k! and (n-k)!
+    // the result is divided by kValue! and (nValue-kValue)!
 
     // Formula 2 is the one implemented below:
 
-    if (n >= r) {
-        NumberType smallerR = (n < 2 * r) ? n - r : r;
+    if (nValue >= rValue) {
+        NumberType smallerR = (nValue < 2 * rValue) ? nValue - rValue : rValue;
         NumberType accumulatedNumerator = 1;
         NumberType accumulatedDenominator = 1;
-        NumberType numeratorMultiplier = n;
+        NumberType numeratorMultiplier = nValue;
         NumberType denominatorMultiplier = smallerR;
         for (NumberType iterations = 0; iterations < smallerR; iterations++) {
             accumulatedNumerator *= numeratorMultiplier--;
@@ -79,24 +79,24 @@ NumberType getNumberOfCombinations(NumberType const n, NumberType const r) {
 }
 
 template <typename NumberType>
-NumberType getNumberOfCombinationsFasterButPossibleOfRange(NumberType const n, NumberType const r) {
+NumberType getNumberOfCombinationsFasterButPossibleOfRange(NumberType const nValue, NumberType const rValue) {
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
-    // C(n, k)
-    // -> = n! / (n-k)! * k!
-    // -> = [n * (n-1) *....* 1]  / [ ( (n-k) * (n-k-1) * .... * 1) *
-    //                             ( k * (k-1) * .... * 1 ) ]
+    // C(nValue, kValue)
+    // -> = nValue! / (nValue-kValue)! * kValue!
+    // -> = [nValue * (nValue-1) *....* 1]  / [ ( (nValue-kValue) * (nValue-kValue-1) * .... * 1) *
+    //                             ( kValue * (kValue-1) * .... * 1 ) ]
     // After simplifying, we get
-    // -> C(n, k)
-    // -> = [n * (n-1) * .... * (n-k+1)] / [k * (k-1) * .... * 1]
+    // -> C(nValue, kValue)
+    // -> = [nValue * (nValue-1) * .... * (nValue-kValue+1)] / [kValue * (kValue-1) * .... * 1]
     //
-    // Also, C(n, k) = C(n, n-k)
-    // -> So r can be changed to n-r if (n-r < r) or (n < 2*r)
+    // Also, C(nValue, kValue) = C(nValue, nValue-kValue)
+    // -> So rValue can be changed to nValue-rValue if (nValue-rValue < rValue) or (nValue < 2*rValue)
 
-    if (n >= r) {
-        NumberType smallerR = (n < 2 * r) ? n - r : r;
+    if (nValue >= rValue) {
+        NumberType smallerR = (nValue < 2 * rValue) ? nValue - rValue : rValue;
         NumberType result(1);
         for (NumberType offset = 0; offset < smallerR; offset++) {
-            result *= (n - offset);
+            result *= (nValue - offset);
             result /= (offset + 1);
         }
         return result;
@@ -108,8 +108,8 @@ template <typename NumberType>
 NumberType getBinomialCoefficient(NumberType const rowIndex, NumberType const columnIndex) {
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
-    // The binomial coefficient equals the number of ways we can choose a subset of k elements from a set of n elements.
-    // The binomial coefficient = the number of combinations
+    // The binomial coefficient equals the number of ways we can choose a subset of kValue elements from a set of nValue
+    // elements. The binomial coefficient = the number of combinations
 
     return getNumberOfCombinations(rowIndex, columnIndex);
 }
@@ -124,11 +124,12 @@ NumberType getValueAtPascalTriangle(NumberType const rowIndex, NumberType const 
 }
 
 template <typename NumberType>
-typename std::make_signed<NumberType>::type getStirlingNumberOfTheSecondKind(NumberType const n, NumberType const k) {
+typename std::make_signed<NumberType>::type getStirlingNumberOfTheSecondKind(
+    NumberType const nValue, NumberType const kValue) {
     static_assert(typeHelper::isIntegralType<NumberType>(), "Number type must be an integer");
 
     // In mathematics, particularly in combinatorics, a Stirling number of the second kind (or Stirling partition
-    // number) is the number of ways to partition a set of n objects into k non-empty subsets
+    // number) is the number of ways to partition a set of nValue objects into kValue non-empty subsets
 
     // Stirling numbers of the second kind occur in the field of mathematics called combinatorics and the study of
     // partitions.
@@ -137,12 +138,12 @@ typename std::make_signed<NumberType>::type getStirlingNumberOfTheSecondKind(Num
 
     SignedType sum(0);
     bool isDivisibleByTwo(true);
-    for (NumberType i = 0; i <= k; i++) {
+    for (NumberType i = 0; i <= kValue; i++) {
         SignedType sign = isDivisibleByTwo ? 1 : -1;
-        sum += sign * getNumberOfCombinations(k, i) * getRaiseToPowerForIntegersUsingPow(k - i, n);
+        sum += sign * getNumberOfCombinations(kValue, i) * getRaiseToPowerForIntegersUsingPow(kValue - i, nValue);
         isDivisibleByTwo = !isDivisibleByTwo;
     }
-    sum /= getFactorial(k);
+    sum /= getFactorial(kValue);
     return sum;
 }
 

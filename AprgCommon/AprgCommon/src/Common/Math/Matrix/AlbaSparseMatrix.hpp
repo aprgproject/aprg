@@ -39,9 +39,7 @@ public:
 
     bool operator==(AlbaSparseMatrix const& secondMatrix) const {
         bool isEqual(true);
-        if (m_numberOfColumns != secondMatrix.m_numberOfColumns) {
-            isEqual = false;
-        } else if (m_numberOfRows != secondMatrix.m_numberOfRows) {
+        if (m_numberOfColumns != secondMatrix.m_numberOfColumns || m_numberOfRows != secondMatrix.m_numberOfRows) {
             isEqual = false;
         } else if (m_matrixData != secondMatrix.m_matrixData) {
             UniqueIndexes allIndexes(getAllIndexes(m_matrixData, secondMatrix.m_matrixData));
@@ -69,23 +67,21 @@ public:
         return doBinaryOperation(*this, secondMatrix, BinaryFunction(std::minus<DataType>()));
     }
 
-    AlbaSparseMatrix operator*(DataType const& scalarMultiplier) const  // scalar multiplication
-    {
+    AlbaSparseMatrix operator*(DataType const& scalarMultiplier) const {  // scalar multiplication
         return doUnaryOperation(*this, [&scalarMultiplier](DataType const& data) { return scalarMultiplier * data; });
     }
 
-    AlbaSparseMatrix operator*(AlbaSparseMatrix const& secondMatrix) const  // matrix multiplication
-    {
+    AlbaSparseMatrix operator*(AlbaSparseMatrix const& secondMatrix) const {  // matrix multiplication
         assert(m_numberOfColumns == secondMatrix.m_numberOfRows);
         size_t size(std::min(m_numberOfColumns, secondMatrix.m_numberOfRows));
         AlbaSparseMatrix result(m_numberOfRows, secondMatrix.m_numberOfColumns);
-        for (size_t y = 0; y < m_numberOfRows; y++) {
-            for (size_t x = 0; x < secondMatrix.m_numberOfColumns; x++) {
+        for (size_t yPosition = 0; yPosition < m_numberOfRows; yPosition++) {
+            for (size_t xPosition = 0; xPosition < secondMatrix.m_numberOfColumns; xPosition++) {
                 DataType cellValue{};
-                for (size_t k = 0; k < size; k++) {
-                    cellValue += getEntry(k, y) * secondMatrix.getEntry(x, k);
+                for (size_t kPosition = 0; kPosition < size; kPosition++) {
+                    cellValue += getEntry(kPosition, yPosition) * secondMatrix.getEntry(xPosition, kPosition);
                 }
-                result.setEntry(x, y, cellValue);
+                result.setEntry(xPosition, yPosition, cellValue);
             }
         }
         return result;
@@ -95,23 +91,25 @@ public:
 
     [[nodiscard]] size_t getNumberOfRows() const { return m_numberOfRows; }
 
-    [[nodiscard]] size_t getMatrixIndex(size_t const x, size_t const y) const { return getMatrixIndex(x, y, m_numberOfColumns); }
+    [[nodiscard]] size_t getMatrixIndex(size_t const xPosition, size_t const yPosition) const {
+        return getMatrixIndex(xPosition, yPosition, m_numberOfColumns);
+    }
 
-    DataType getEntry(size_t const x, size_t const y) const {
-        assert((x < m_numberOfColumns) && (y < m_numberOfRows));
-        return getEntry(getMatrixIndex(x, y));
+    DataType getEntry(size_t const xPosition, size_t const yPosition) const {
+        assert((xPosition < m_numberOfColumns) && (yPosition < m_numberOfRows));
+        return getEntry(getMatrixIndex(xPosition, yPosition));
     }
 
     MatrixData const& getMatrixData() const { return m_matrixData; }
 
-    DataType& getEntryReference(size_t const x, size_t const y) {
-        assert((x < m_numberOfColumns) && (y < m_numberOfRows));
-        return m_matrixData[getMatrixIndex(x, y)];
+    DataType& getEntryReference(size_t const xPosition, size_t const yPosition) {
+        assert((xPosition < m_numberOfColumns) && (yPosition < m_numberOfRows));
+        return m_matrixData[getMatrixIndex(xPosition, yPosition)];
     }
 
-    void setEntry(size_t const x, size_t const y, DataType const& value) {
-        assert((x < m_numberOfColumns) && (y < m_numberOfRows));
-        m_matrixData[getMatrixIndex(x, y)] = value;
+    void setEntry(size_t const xPosition, size_t const yPosition, DataType const& value) {
+        assert((xPosition < m_numberOfColumns) && (yPosition < m_numberOfRows));
+        m_matrixData[getMatrixIndex(xPosition, yPosition)] = value;
     }
 
     void setEntries(ListedMatrixData const& dataSampleValues) {
@@ -145,8 +143,9 @@ public:
     }
 
 private:
-    [[nodiscard]] size_t getMatrixIndex(size_t const x, size_t const y, size_t const numberOfColumns) const {
-        return (y * numberOfColumns) + x;
+    [[nodiscard]] size_t getMatrixIndex(
+        size_t const xPosition, size_t const yPosition, size_t const numberOfColumns) const {
+        return (yPosition * numberOfColumns) + xPosition;
     }
 
     [[nodiscard]] size_t getTranposeIndex(size_t const index) const {
@@ -199,10 +198,10 @@ private:
     friend std::ostream& operator<<(std::ostream& out, AlbaSparseMatrix<DataType> const& matrix) {
         DisplayTable table;
         table.setBorders("-", "|");
-        for (size_t y = 0; y < matrix.m_numberOfRows; y++) {
+        for (size_t yPosition = 0; yPosition < matrix.m_numberOfRows; yPosition++) {
             table.addRow();
-            for (size_t x = 0; x < matrix.m_numberOfColumns; x++) {
-                table.getLastRow().addCell(alba::stringHelper::convertToString(matrix.getEntry(x, y)));
+            for (size_t xPosition = 0; xPosition < matrix.m_numberOfColumns; xPosition++) {
+                table.getLastRow().addCell(alba::stringHelper::convertToString(matrix.getEntry(xPosition, yPosition)));
             }
         }
 

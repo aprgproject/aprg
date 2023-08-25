@@ -137,18 +137,18 @@ public:
     }
 
     static constexpr inline DataType generateOnesWithNumberOfBits(size_t const numberOfOnes) {
-        return (DataType(1) << numberOfOnes) - 1;
+        return (static_cast<DataType>(1) << numberOfOnes) - 1;
     }
 
     static constexpr inline DataType getAllOnes() {
         if constexpr (sizeof(DataType) == 1) {
-            return 0xFF;
+            return static_cast<DataType>(AlbaBitConstants::ALL_ONES_8_BITS);
         } else if constexpr (sizeof(DataType) == 2) {
-            return 0xFFFF;
+            return static_cast<DataType>(AlbaBitConstants::ALL_ONES_16_BITS);
         } else if constexpr (sizeof(DataType) == 4) {
-            return 0xFFFFFFFF;
+            return static_cast<DataType>(AlbaBitConstants::ALL_ONES_32_BITS);
         } else if constexpr (sizeof(DataType) == 8) {
-            return 0xFFFFFFFF'FFFFFFFF;
+            return static_cast<DataType>(AlbaBitConstants::ALL_ONES_64_BITS);
         }
         static_assert(true, "This size or type is not supported. Please add a specialization if needed.");
         return 0;
@@ -156,13 +156,13 @@ public:
 
     static constexpr inline DataType getAlternatingZerosAndOnesFromLsb() {
         if constexpr (sizeof(DataType) == 1) {
-            return 0xAA;
+            return static_cast<DataType>(AlbaBitConstants::ZERO_THEN_ONE_8_BITS);
         } else if constexpr (sizeof(DataType) == 2) {
-            return 0xAAAA;
+            return static_cast<DataType>(AlbaBitConstants::ZERO_THEN_ONE_16_BITS);
         } else if constexpr (sizeof(DataType) == 4) {
-            return 0xAAAAAAAA;
+            return static_cast<DataType>(AlbaBitConstants::ZERO_THEN_ONE_32_BITS);
         } else if constexpr (sizeof(DataType) == 8) {
-            return 0xAAAAAAAA'AAAAAAAA;
+            return static_cast<DataType>(AlbaBitConstants::ZERO_THEN_ONE_64_BITS);
         }
         static_assert(true, "This size or type is not supported. Please add a specialization if needed.");
         return 0;
@@ -170,13 +170,13 @@ public:
 
     static constexpr inline DataType getAlternatingOnesAndZerosFromLsb() {
         if constexpr (sizeof(DataType) == 1) {
-            return 0x55;
+            return static_cast<DataType>(AlbaBitConstants::ONE_THEN_ZERO_8_BITS);
         } else if constexpr (sizeof(DataType) == 2) {
-            return 0x5555;
+            return static_cast<DataType>(AlbaBitConstants::ONE_THEN_ZERO_16_BITS);
         } else if constexpr (sizeof(DataType) == 4) {
-            return 0x55555555;
+            return static_cast<DataType>(AlbaBitConstants::ONE_THEN_ZERO_32_BITS);
         } else if constexpr (sizeof(DataType) == 8) {
-            return 0x55555555'55555555;
+            return static_cast<DataType>(AlbaBitConstants::ONE_THEN_ZERO_64_BITS);
         }
         static_assert(true, "This size or type is not supported. Please add a specialization if needed.");
         return 0;
@@ -200,7 +200,9 @@ public:
         return -(-(value >> numberOfBitsMinus1) | (-value >> numberOfBitsMinus1));
     }
 
-    static constexpr inline DataType get2ToThePowerOf(DataType const exponent) { return DataType(1) << exponent; }
+    static constexpr inline DataType get2ToThePowerOf(DataType const exponent) {
+        return static_cast<DataType>(1) << exponent;
+    }
 
     static constexpr inline DataType getLogarithmWithBase2Of(DataType const value) {
         DataType result = getNumberOfBits() - getNumberOfConsecutiveZerosFromMsb(value);
@@ -346,7 +348,7 @@ public:
 
     static constexpr inline DataType getModuloOfPowerOfTwo(
         DataType const value, DataType const divisorOfPowerOfTwoExponent) {
-        return value & ((DataType(1) << divisorOfPowerOfTwoExponent) - 1);
+        return value & ((static_cast<DataType>(1) << divisorOfPowerOfTwoExponent) - 1);
     }
 
     static constexpr inline DataType getTwoValuesInACycle(
