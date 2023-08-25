@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace soosa {
+namespace alba::soosa {
 
 TEST(SoosaConfigurationTest, AParameterCanBeUpdated) {
     SoosaConfiguration soosaConfiguration;
@@ -60,7 +58,5 @@ TEST(SoosaConfigurationTest, LoadConfigurationFromFileWorks) {
     EXPECT_DOUBLE_EQ(0.75, soosaConfiguration.getBarHeightToDiameterMultiplier());
     EXPECT_DOUBLE_EQ(0.40, soosaConfiguration.getMinimumPercentageOfBlackPixelsForAFilledCircle());
 }
-
-}  // namespace soosa
 
 }  // namespace alba

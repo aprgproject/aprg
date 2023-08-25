@@ -92,4 +92,4 @@ TEST(StaticOnTranslationUnit1Test, FunctionReturnValuesAreCorrect) {
     EXPECT_EQ(1, staticFreeFunction());
 }
 
-}  // namespace alba
+}  // namespace alba::StaticOnTranslationUnits

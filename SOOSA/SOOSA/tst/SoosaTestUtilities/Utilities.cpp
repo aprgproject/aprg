@@ -2,9 +2,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace soosa {
+namespace alba::soosa {
 
 SoosaConfiguration getSoosaConfiguration() {
     SoosaConfiguration soosaConfiguration;
@@ -421,7 +419,5 @@ void checkAnswersForSpecialUnitsPattern3(SOOSA const& soosa) {
 }
 
 void checkAnswersForEmptyForm(SOOSA const& soosa) { EXPECT_EQ(0, soosa.getNumberOfAnswers()); }
-
-}  // namespace soosa
 
 }  // namespace alba

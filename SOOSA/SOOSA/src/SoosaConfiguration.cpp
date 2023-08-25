@@ -6,9 +6,7 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
-
-namespace soosa {
+namespace alba::soosa {
 
 SoosaConfiguration::SoosaConfiguration() {}
 
@@ -140,7 +138,5 @@ void SoosaConfiguration::readNamesAndValuesFromFile(string const& filePath) {
         }
     }
 }
-
-}  // namespace soosa
 
 }  // namespace alba

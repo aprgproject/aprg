@@ -4,9 +4,7 @@
 
 #include <gtest/gtest.h>
 
-namespace alba {
-
-namespace soosa {
+namespace alba::soosa {
 
 SoosaConfiguration getSoosaConfiguration();
 InputConfiguration getInputConfigurationForCharityPayWards(std::string const& inputPath);
@@ -24,6 +22,4 @@ void checkAnswersForSpecialUnitsPattern2(SOOSA const& soosa);
 void checkAnswersForSpecialUnitsPattern3(SOOSA const& soosa);
 void checkAnswersForEmptyForm(SOOSA const& soosa);
 
-}  // namespace soosa
-
-}  // namespace alba
+}  // namespace alba::soosa

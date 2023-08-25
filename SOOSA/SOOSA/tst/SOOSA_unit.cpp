@@ -6,9 +6,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace soosa {
+namespace alba::soosa {
 
 TEST(SoosaTest, DISABLED_InvalidBitmapWorks) {
     AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\InvalidBitmap.txt)");
@@ -395,7 +393,5 @@ TEST(SoosaTest, DISABLED_ProcessWorksWithADirectory) {
 
     soosa.process();
 }
-
-}  // namespace soosa
 
 }  // namespace alba

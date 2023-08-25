@@ -179,7 +179,7 @@ private:
     void addAndRetainBarPointsIfPossible(
         TwoDimensionKMeans& kMeansForBarPoints, GroupOfTwoDimensionSamples const& listOfGroupOfBarPoints,
         int const indexToRemove) const;
-    [[nodiscard]] OneDimensionSamples getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints) const;
+    [[nodiscard]] static OneDimensionSamples getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints) ;
     [[nodiscard]] static double getHeight(TwoDimensionSamples const& barPoints) ;
 
     // output related functions
@@ -209,4 +209,4 @@ private:
     FrequencyDatabase m_frequencyDatabase;
 };
 
-}  // namespace alba
+}  // namespace alba::soosa

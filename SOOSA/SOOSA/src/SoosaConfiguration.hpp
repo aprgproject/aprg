@@ -72,4 +72,4 @@ private:
     BufferMap m_nameToValueStringMapBuffer;
 };
 
-}  // namespace alba
+}  // namespace alba::soosa

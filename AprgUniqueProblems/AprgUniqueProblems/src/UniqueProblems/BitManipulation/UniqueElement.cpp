@@ -10,11 +10,11 @@ namespace alba {
 
 UniqueElement::UniqueElement() {}
 
-UniqueElement::Value UniqueElement::getAUniqueElementOnTwoDuplicatedValues(Values const& values) const {
+UniqueElement::Value UniqueElement::getAUniqueElementOnTwoDuplicatedValues(Values const& values) {
     return getXorResult(values);
 }
 
-UniqueElement::ValuePairs UniqueElement::getTwoUniqueElementsOnTwoDuplicatedValues(Values const& values) const {
+UniqueElement::ValuePairs UniqueElement::getTwoUniqueElementsOnTwoDuplicatedValues(Values const& values) {
     // Given an array in which all numbers except two are repeated once.
     // (i.e. we have 2n+2 numbers and n numbers are occurring twice and remaining two have occurred once).
     // Find those two numbers in the most efficient way.
@@ -24,7 +24,7 @@ UniqueElement::ValuePairs UniqueElement::getTwoUniqueElementsOnTwoDuplicatedValu
 
     Value valueWithOne{}, valueWithZero{};
     for (Value const& value : values) {
-        if (value & lastBitOne) {
+        if ((value & lastBitOne) != 0u) {
             valueWithOne ^= value;
         } else {
             valueWithZero ^= value;
@@ -57,7 +57,7 @@ UniqueElement::Value UniqueElement::getAUniqueElementOnThreeDuplicatedValues(Val
     return oneElementTracker;
 }
 
-UniqueElement::Value UniqueElement::getAnElementOccuringOddNumberOfTimes(Values const& values) const {
+UniqueElement::Value UniqueElement::getAnElementOccuringOddNumberOfTimes(Values const& values) {
     // Given an array of positive integers.
     // All numbers occur an even number of times except one number which occurs an odd number of times.
     // Find the number in O(n) time & constant space.

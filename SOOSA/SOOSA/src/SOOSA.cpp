@@ -895,7 +895,7 @@ void SOOSA::addAndRetainBarPointsIfPossible(
     }
 }
 
-SOOSA::OneDimensionSamples SOOSA::getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints) const {
+SOOSA::OneDimensionSamples SOOSA::getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints) {
     OneDimensionSamples barHeights;
     for (TwoDimensionSamples const& barPoints : groupOfBarPoints) {
         if (!barPoints.empty()) {
@@ -1081,4 +1081,4 @@ SOOSA::RangeOfDoubles SOOSA::getMinMaxRangeOfSamples(OneDimensionSamples const& 
     return RangeOfDoubles(collection.getMinimum(), collection.getMaximum(), 1);
 }
 
-}  // namespace alba
+}  // namespace alba::soosa

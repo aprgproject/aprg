@@ -14,9 +14,9 @@ public:
     typedef std::set<std::string> TypeNames;
 
     AlbaSackReaderType();
-    bool isUnion() const;
-    Parameters getParameters() const;
-    TypeNames getOtherTypes() const;
+    [[nodiscard]] bool isUnion() const;
+    [[nodiscard]] Parameters getParameters() const;
+    [[nodiscard]] TypeNames getOtherTypes() const;
     void clear();
     void copyContents(AlbaSackReaderType const& type);
     void addParameter(AlbaSackReaderParameter const& parameter);
@@ -25,7 +25,7 @@ public:
     void printAll() const;
 
 private:
-    bool m_isUnion;
+    bool m_isUnion{false};
     Parameters m_parameters;
     TypeNames m_otherTypes;
 };

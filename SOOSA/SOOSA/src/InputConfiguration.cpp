@@ -79,4 +79,4 @@ void InputConfiguration::addQuestion(int const columnNumber, string const& quest
 
 void InputConfiguration::setFormDetailsTitle(string const& title) { m_formDetails.title = title; }
 
-}  // namespace alba
+}  // namespace alba::soosa

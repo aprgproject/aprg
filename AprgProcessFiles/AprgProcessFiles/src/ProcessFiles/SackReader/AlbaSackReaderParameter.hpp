@@ -7,8 +7,8 @@ namespace alba {
 class AlbaSackReaderParameter {
 public:
     AlbaSackReaderParameter(std::string const& typeName, std::string const& parameterName);
-    std::string getTypeName() const;
-    std::string getParameterName() const;
+    [[nodiscard]] std::string getTypeName() const;
+    [[nodiscard]] std::string getParameterName() const;
 
 private:
     std::string m_typeName;

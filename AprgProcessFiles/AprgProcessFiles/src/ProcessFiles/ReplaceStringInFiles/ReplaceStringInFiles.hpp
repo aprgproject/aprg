@@ -21,7 +21,7 @@ public:
     void replaceCToCPlusPlusStylePrintOnDirectories(
         std::string const& inputDirectory, std::string const& outputDirectory);
     void replaceCToCPlusPlusStylePrintOnFile(std::string const& inputFilePath, std::string const& outputFilePath);
-    [[nodiscard]] std::string getCPlusPlusStylePrintFromC(std::string const& inputString) const;
+    [[nodiscard]] static std::string getCPlusPlusStylePrintFromC(std::string const& inputString) ;
 
 private:
     static std::string getNewPrintStreamBasedFromOldPrintFunction(std::string const& printFunction);

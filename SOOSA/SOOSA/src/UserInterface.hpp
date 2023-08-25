@@ -5,13 +5,11 @@
 
 #include <string>
 
-namespace alba {
-
-namespace soosa {
+namespace alba::soosa {
 
 class UserInterface {
 public:
-    InputConfiguration getSavedConfiguration() const;
+    [[nodiscard]] InputConfiguration getSavedConfiguration() const;
     void setPath(std::string const& path);
     void askUserForMainDetails();
     void askUserForFormDetails();
@@ -22,7 +20,5 @@ private:
     InputConfiguration m_savedConfiguration;
     AlbaUserInterface m_userInterface;
 };
-
-}  // namespace soosa
 
 }  // namespace alba

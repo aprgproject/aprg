@@ -34,9 +34,9 @@ public:
         std::string secondIdentifier;
         AlbaSackReaderType type;
     };
-    AlbaSackReader(std::string const& inputFilePath);
+    explicit AlbaSackReader(std::string const& inputFilePath);
     AlbaSackReader(std::string const& inputFilePath, std::string const& fileCondition);
-    AlbaSackReaderType getType(std::string const& typeName) const;
+    [[nodiscard]] AlbaSackReaderType getType(std::string const& typeName) const;
     void process();
     void printAll() const;
 

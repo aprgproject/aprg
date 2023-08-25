@@ -12,10 +12,10 @@ public:
     using Values = std::vector<Value>;
 
     UniqueElement();
-    Value getAUniqueElementOnTwoDuplicatedValues(Values const& values) const;
-    ValuePairs getTwoUniqueElementsOnTwoDuplicatedValues(Values const& values) const;
+    static [[nodiscard]] Value getAUniqueElementOnTwoDuplicatedValues(Values const& values) ;
+    static [[nodiscard]] ValuePairs getTwoUniqueElementsOnTwoDuplicatedValues(Values const& values) ;
     static Value getAUniqueElementOnThreeDuplicatedValues(Values const& values);
-    Value getAnElementOccuringOddNumberOfTimes(Values const& values) const;
+    static [[nodiscard]] Value getAnElementOccuringOddNumberOfTimes(Values const& values) ;
 
 private:
     static Value getXorResult(Values const& values);

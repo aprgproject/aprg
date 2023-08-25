@@ -8,9 +8,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace soosa {
+namespace alba::soosa {
 
 InputConfiguration UserInterface::getSavedConfiguration() const { return m_savedConfiguration; }
 
@@ -77,7 +75,5 @@ void UserInterface::saveFormDetailsFromFormDetailPath(string const& formDetailsF
         }
     }
 }
-
-}  // namespace soosa
 
 }  // namespace alba

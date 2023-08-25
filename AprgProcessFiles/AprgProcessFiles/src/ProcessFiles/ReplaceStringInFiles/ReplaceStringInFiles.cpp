@@ -119,7 +119,7 @@ void ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnFile(
     }
 }
 
-string ReplaceStringInFiles::getCPlusPlusStylePrintFromC(string const& inputString) const {
+string ReplaceStringInFiles::getCPlusPlusStylePrintFromC(string const& inputString) {
     string result;
     strings splittedStrings;
     strings delimeters{R"((")", R"(",)", ");"};

@@ -5,9 +5,7 @@
 
 using namespace std;
 
-namespace alba {
-
-namespace soosa {
+namespace alba::soosa {
 
 TEST(InputConfigurationTest, GetNumberOfColumnsWorks) {
     InputConfiguration inputConfiguration;
@@ -176,7 +174,5 @@ TEST(InputConfigurationTest, SetFormDetailsTitleWorks) {
 
     EXPECT_EQ("FormDetailsTitleToTest", inputConfiguration.getFormDetailsTitle());
 }
-
-}  // namespace soosa
 
 }  // namespace alba
