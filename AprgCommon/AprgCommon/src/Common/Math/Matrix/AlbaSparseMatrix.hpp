@@ -154,9 +154,9 @@ private:
 
     DataType getEntry(size_t const index) const {
         DataType result{};
-        auto it = m_matrixData.find(index);
-        if (it != m_matrixData.cend()) {
-            result = it->second;
+        auto matrixIt = m_matrixData.find(index);
+        if (matrixIt != m_matrixData.cend()) {
+            result = matrixIt->second;
         }
         return result;
     }

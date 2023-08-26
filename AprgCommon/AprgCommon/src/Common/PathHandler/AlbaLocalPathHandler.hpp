@@ -27,10 +27,12 @@ public:
 #if defined(OS_LINUX)
     template <typename... ArgumentTypes>
     explicit AlbaLocalPathHandler(ArgumentTypes&&... arguments)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay)
         : AlbaLinuxPathHandler(std::forward<ArgumentTypes>(arguments)...) {}
 #elif defined(OS_WINDOWS)
     template <typename... ArgumentTypes>
     explicit AlbaLocalPathHandler(ArgumentTypes&&... arguments)
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay)
         : AlbaWindowsPathHandler(std::forward<ArgumentTypes>(arguments)...) {}
 #endif
 

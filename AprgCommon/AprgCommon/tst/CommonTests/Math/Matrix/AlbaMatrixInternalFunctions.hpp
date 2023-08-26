@@ -5,6 +5,7 @@ namespace alba::matrix {
 // Template declaration
 
 template <typename DataType>
+// NOLINTNEXTLINE(readability-redundant-declaration)
 bool isEqualForMathMatrixDataType(DataType const& value1, DataType const& value2);
 
 // Template specialization

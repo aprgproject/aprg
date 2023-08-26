@@ -1,4 +1,4 @@
- -> Checkers that should be auto fixed
+# -> Checkers that should be auto fixed
 Checks: '
   cppcoreguidelines-special-member-functions,
   google-explicit-constructor,

@@ -4,9 +4,11 @@ namespace alba {
 // Template declaration
 
 template <typename DataType>
+// NOLINTNEXTLINE(readability-redundant-declaration)
 bool isEqualForMathVectorDataType(DataType const& value1, DataType const& value2);
 
 template <typename DataType>
+// NOLINTNEXTLINE(readability-redundant-declaration)
 DataType raiseToPowerForMathVectorDataType(DataType const& value1, DataType const& value2);
 
 // Template specialization

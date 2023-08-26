@@ -15,12 +15,10 @@ public:
     SampleClass() = default;
     explicit SampleClass(int const data) : m_dataPointer(make_unique<int>(data)) {}
     SampleClass(SampleClass const& parameter) : m_dataPointer(make_unique<int>(*parameter.m_dataPointer)) {}
-    // NOLINTNEXTLINE(cert-oop54-cpp)
     SampleClass& operator=(SampleClass const& parameter) {
-        if (m_dataPointer == parameter.m_dataPointer) {
-            return *this;
+        if (this != &parameter) {
+            m_dataPointer = make_unique<int>(*parameter.m_dataPointer);
         }
-        m_dataPointer = make_unique<int>(*parameter.m_dataPointer);
         return *this;
     }
     SampleClass(SampleClass&& parameter) noexcept : m_dataPointer(std::move(parameter.m_dataPointer)) {}

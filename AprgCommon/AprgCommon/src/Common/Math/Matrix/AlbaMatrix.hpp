@@ -251,6 +251,7 @@ public:
         MatrixIndexRange yRange(0, oldRows - 1, 1);
         MatrixIndexRange xRange(0, oldColumns - 1, 1);
         iterateThroughYAndThenXWithRanges(yRange, xRange, [&](size_t const xPosition, size_t const yPosition) {
+            // NOLINTNEXTLINE(readability-suspicious-call-argument)
             m_matrixData[getMatrixIndex(yPosition, xPosition)] =
                 oldMatrixData[getMatrixIndex(xPosition, yPosition, oldColumns)];
         });

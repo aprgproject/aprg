@@ -97,10 +97,11 @@ public:
     template <PrintFormat printFormat>
     struct PrintObject {
         explicit PrintObject(AlbaDateTime const& dataTimeToPrint) : savedDateTime(dataTimeToPrint) {}
+        // NOLINTNEXTLINE(cppcoreguidelines-non-private-member-variables-in-classes,misc-non-private-member-variables-in-classes)
         AlbaDateTime const& savedDateTime;
     };
 
-    constexpr AlbaDateTime() : m_sign(1),  m_microseconds{} {}
+    constexpr AlbaDateTime() : m_sign(1), m_microseconds{} {}
     constexpr AlbaDateTime(
         AlbaYearMonthDay const& yearMonthDay, AlbaHourMinuteSecond const& hourMinuteSecond, uint32_t const microseconds)
         : m_sign(1), m_yearMonthDay(yearMonthDay), m_hourMinuteSecond(hourMinuteSecond), m_microseconds(microseconds) {}

@@ -17,6 +17,7 @@ public:
     AlbaFakeCopyable(AlbaFakeCopyable const&) : m_object() {}
 
     // copy assignment calls default constructor
+    // NOLINTNEXTLINE(cert-oop54-cpp)
     AlbaFakeCopyable& operator=(AlbaFakeCopyable const&) { return *this; }
 
     AlbaFakeCopyable(AlbaFakeCopyable&&) noexcept = default;

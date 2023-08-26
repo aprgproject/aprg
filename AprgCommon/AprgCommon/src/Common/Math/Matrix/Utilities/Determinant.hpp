@@ -50,12 +50,12 @@ DataType getValueUsingCramerRule(
 }
 
 template <typename DataType>
-DataType getValueFromCoFactorExpansion(AlbaMatrix<DataType> const& matrix, size_t x, size_t y) {
+DataType getValueFromCoFactorExpansion(AlbaMatrix<DataType> const& matrix, size_t xPosition, size_t yPosition) {
     DataType value{};
-    DataType entry = matrix.getEntry(x, y);
+    DataType entry = matrix.getEntry(xPosition, yPosition);
     if (!isEqualForMathMatrixDataType(entry, 0)) {
-        int sign = mathHelper::isEven(x + y) ? 1 : -1;
-        DataType subDeterminant = getDeterminant(getMatrixWithOneColumnAndOneRowRemoved(matrix, x, y));
+        int sign = mathHelper::isEven(xPosition + yPosition) ? 1 : -1;
+        DataType subDeterminant = getDeterminant(getMatrixWithOneColumnAndOneRowRemoved(matrix, xPosition, yPosition));
         value = entry * subDeterminant * sign;
     }
     return value;
@@ -73,14 +73,14 @@ DataType getDeterminantWhenSideIsMoreThan2(AlbaMatrix<DataType> const& matrix) {
     size_t numberOfColumns(matrix.getNumberOfColumns());
     size_t bestIndex = getIndexWithHighestNumberOfZeros(rowsAndColumns);
     if (bestIndex < numberOfRows) {
-        size_t y = bestIndex;
-        for (size_t x = 0; x < numberOfColumns; x++) {
-            determinant += getValueFromCoFactorExpansion(matrix, x, y);
+        size_t yPosition = bestIndex;
+        for (size_t xPosition = 0; xPosition < numberOfColumns; xPosition++) {
+            determinant += getValueFromCoFactorExpansion(matrix, xPosition, yPosition);
         }
     } else {
-        size_t x = bestIndex - numberOfRows;
-        for (size_t y = 0; y < numberOfRows; y++) {
-            determinant += getValueFromCoFactorExpansion(matrix, x, y);
+        size_t xPosition = bestIndex - numberOfRows;
+        for (size_t yPosition = 0; yPosition < numberOfRows; yPosition++) {
+            determinant += getValueFromCoFactorExpansion(matrix, xPosition, yPosition);
         }
     }
     return determinant;
@@ -93,11 +93,11 @@ AlbaMatrix<DataType> getMatrixWithOneColumnAndOneRowRemoved(
     size_t numberOfColumns(matrix.getNumberOfColumns());
     assert((columnIndex < numberOfColumns) && (rowIndex < numberOfRows));
     AlbaMatrix<DataType> result(numberOfColumns - 1, numberOfRows - 1);
-    matrix.iterateAllThroughYAndThenX([&](size_t const x, size_t const y) {
-        if (columnIndex != x && rowIndex != y) {
-            size_t newX = (x >= columnIndex) ? x - 1 : x;
-            size_t newY = (y >= rowIndex) ? y - 1 : y;
-            result.setEntry(newX, newY, matrix.getEntry(x, y));
+    matrix.iterateAllThroughYAndThenX([&](size_t const xPosition, size_t const yPosition) {
+        if (columnIndex != xPosition && rowIndex != yPosition) {
+            size_t newX = (xPosition >= columnIndex) ? xPosition - 1 : xPosition;
+            size_t newY = (yPosition >= rowIndex) ? yPosition - 1 : yPosition;
+            result.setEntry(newX, newY, matrix.getEntry(xPosition, yPosition));
         }
     });
     return result;

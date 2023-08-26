@@ -27,8 +27,8 @@ runStaticAnalyzersInDirectory() {
     scriptPrint "$scriptName" "$LINENO" "Searching for C/C++ files in: [$directoryPath]"
 
     cd "$directoryPath" || exit 1
-    "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "StaticAnalyzersBuild" "Debug" "Ninja"
-    "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug" | tee "$aprgDirectory/StaticAnalyzerResults.txt"
+    "$buildAndRunScriptPath" cleanAndConfigureWithStaticAnalyzersWithAutoFix "StaticAnalyzersBuild" "Debug" "Ninja"
+    "$buildAndRunScriptPath" build "StaticAnalyzersBuild" "Debug"
 }
 
 # Find all files with the same name in the target folder

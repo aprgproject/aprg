@@ -168,10 +168,20 @@ elif [ "$scriptOption" == "cleanAndConfigureWithClangAndStaticAnalyzers" ]; then
     getClangAndClazyCompiler
     printConfigureParameters
     cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+elif [ "$scriptOption" == "cleanAndConfigureWithStaticAnalyzersWithAutoFix" ]; then
+    performClean
+    getArgumentsForConfigure
+    getClangAndClazyCompiler
+    printConfigureParameters
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_CXX_COMPILER="$cppCompilerLocation" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "-DAPRG_ENABLE_STATIC_ANALYZERS_AUTO_FIX=ON" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "build" ]; then
     getArgumentsForBuild
     printBuildParameters
-    cmake --build . --config "$buildType"  --parallel "$numberOfCores" 2>&1 # | tee "$(pwd)/BuildOutput.txt"
+    cmake --build . --config "$buildType" --parallel "$numberOfCores"
+elif [ "$scriptOption" == "buildOnOneCore" ]; then
+    getArgumentsForBuild
+    printBuildParameters
+    cmake --build . --config "$buildType" --parallel 1
 elif [ "$scriptOption" == "install" ]; then
     getArgumentsForBuild
     printInstallParameters

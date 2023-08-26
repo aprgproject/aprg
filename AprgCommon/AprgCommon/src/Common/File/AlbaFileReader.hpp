@@ -95,7 +95,8 @@ NumberType AlbaFileReader::getData() {
     result = std::accumulate(
         m_characterBuffer.cbegin(), m_characterBuffer.cbegin() + numberOfCharacters, static_cast<NumberType>(0U),
         [&](NumberType partialSum, char newValue) {
-            partialSum = partialSum << 8;
+            // NOLINTNEXTLINE(hicpp-signed-bitwise)
+            partialSum <<= 8;
             partialSum |= static_cast<NumberType>(AlbaBitConstants::ALL_ONES_8_BITS & static_cast<uint8_t>(newValue));
             return partialSum;
         });

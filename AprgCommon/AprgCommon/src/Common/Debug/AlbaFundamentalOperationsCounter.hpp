@@ -64,19 +64,21 @@ public:
     }
 
     AlbaFundamentalOperationsCounter& operator=(AlbaFundamentalOperationsCounter const& parameter) {
-        using EnabledTypeToShadow = std::enable_if_t<typeHelper::isCopyAssignable<TypeToShadow>(), TypeToShadow>;
-        static_cast<EnabledTypeToShadow&>(*this) = static_cast<EnabledTypeToShadow const&>(parameter);
-        ++COUNTS.copyAssignmentCount;
+        if (this != &parameter) {
+            using EnabledTypeToShadow = std::enable_if_t<typeHelper::isCopyAssignable<TypeToShadow>(), TypeToShadow>;
+            static_cast<EnabledTypeToShadow&>(*this) = static_cast<EnabledTypeToShadow const&>(parameter);
+            ++COUNTS.copyAssignmentCount;
+        }
         return *this;
     }
 
-    AlbaFundamentalOperationsCounter(AlbaFundamentalOperationsCounter&& parameter)
- noexcept         : std::enable_if_t<typeHelper::isMoveConstructible<TypeToShadow>(), TypeToShadow>(
+    AlbaFundamentalOperationsCounter(AlbaFundamentalOperationsCounter&& parameter) noexcept
+        : std::enable_if_t<typeHelper::isMoveConstructible<TypeToShadow>(), TypeToShadow>(
               static_cast<TypeToShadow&&>(parameter)) {
         ++COUNTS.moveConstructionCount;
     }
 
-    AlbaFundamentalOperationsCounter& operator=(AlbaFundamentalOperationsCounter&& parameter)  noexcept {
+    AlbaFundamentalOperationsCounter& operator=(AlbaFundamentalOperationsCounter&& parameter) noexcept {
         using EnabledTypeToShadow = std::enable_if_t<typeHelper::isMoveAssignable<TypeToShadow>(), TypeToShadow>;
         static_cast<EnabledTypeToShadow&>(*this) = static_cast<EnabledTypeToShadow&&>(parameter);
         ++COUNTS.moveAssignmentCount;

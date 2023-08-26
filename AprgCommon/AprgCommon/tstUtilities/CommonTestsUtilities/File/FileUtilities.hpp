@@ -6,4 +6,4 @@ namespace alba {
 
 void clearContentsOfFile(std::string_view path);
 
-}
+}  // namespace alba

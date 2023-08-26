@@ -29,7 +29,7 @@ public:
     AlbaOptional(AlbaOptional&& optional) noexcept : m_contentPointer(std::move(optional.m_contentPointer)) {}
 
     AlbaOptional& operator=(AlbaOptional const& optional) {
-        if (optional.m_contentPointer) {
+        if (this != &optional && optional.m_contentPointer) {
             m_contentPointer = std::make_unique<ContentType>(*(optional.m_contentPointer));
         }
         return *this;
@@ -118,8 +118,10 @@ public:
     AlbaOptional(AlbaOptional&& optional) = delete;
 
     AlbaOptional& operator=(AlbaOptional<ContentType&> const& optional) {
-        m_hasContent = optional.m_hasContent;
-        m_contentPointer = optional.m_contentPointer;
+        if (this != &optional) {
+            m_hasContent = optional.m_hasContent;
+            m_contentPointer = optional.m_contentPointer;
+        }
         return *this;
     }
 
