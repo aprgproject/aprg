@@ -14,7 +14,7 @@ include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 # Include other projects
 include(${APRG_DIR}/gtest/AprgCMakeToInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCMakeToInclude/AprgCommon.cmake)
-include(${APRG_DIR}/Boost/AprgCMakeToInclude/boost.cmake)
+include(${APRG_DIR}/boost/AprgCMakeToInclude/boost.cmake)
 include(${APRG_DIR}/AprgAlgebra/AprgCMakeToInclude/AprgAlgebra.cmake)
 include(${APRG_DIR}/AprgGeometry/AprgCMakeToInclude/AprgGeometry.cmake)
 

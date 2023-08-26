@@ -1,7 +1,7 @@
 #!/bin/bash
 
 projectsWithBoost='
-"Boost/Boost",
+"boost/BoostTest",
 "AprgGnuPlot/AprgGnuPlot"
 '
 

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 excludedConfigurations='
-{"project": "Boost/Boost", "configurationName": "WindowsLatestMsvc"},
-{"project": "Boost/Boost", "configurationName": "WindowsLatestMingw"},
+{"project": "boost/BoostTest", "configurationName": "WindowsLatestMsvc"},
+{"project": "boost/BoostTest", "configurationName": "WindowsLatestMingw"},
 {"project": "AprgGnuPlot/AprgGnuPlot", "configurationName": "WindowsLatestMsvc"},
 {"project": "AprgGnuPlot/AprgGnuPlot", "configurationName": "WindowsLatestMingw"},
 {"project": "Chess/ChessPeek/ChessPeek", "configurationName": "UbuntuLatestGcc"},

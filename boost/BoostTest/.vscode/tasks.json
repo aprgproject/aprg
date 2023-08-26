@@ -1,0 +1,152 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Clean In WSL",
+			"type": "shell",
+			"command": "wsl",
+			"args": [
+				"./.vscode/runWslCommonScript.sh",
+				"outputWithAbsolutePaths",
+				"clean",
+				"WslBuild",
+				"Debug"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Clean And Configure In WSL",
+			"type": "shell",
+			"command": "wsl",
+			"args": [
+				"./.vscode/runWslCommonScript.sh",
+				"outputWithAbsolutePaths",
+				"${input:cmakeConfiguration}",
+				"WslBuild",
+				"Debug",
+				"Ninja"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Build In WSL",
+			"type": "shell",
+			"command": "wsl",
+			"args": [
+				"./.vscode/runWslCommonScript.sh",
+				"outputWithAbsolutePaths",
+				"build",
+				"WslBuild",
+				"Debug"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": {
+				"owner": "cpp",
+				"fileLocation": [
+					"autoDetect",
+					"${workspaceRoot}"
+				],
+				"pattern": {
+					"regexp": "^(.*):(\\d+):(\\d+):\\s+(style|warning|error):\\s+(.*)$",
+					"file": 1,
+					"line": 2,
+					"column": 3,
+					"severity": 4,
+					"message": 5
+				}
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "Install In WSL",
+			"type": "shell",
+			"command": "wsl",
+			"args": [
+				"./.vscode/runWslCommonScript.sh",
+				"outputWithAbsolutePaths",
+				"install",
+				"WslBuild",
+				"Debug"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+			"dependsOn": "Build In WSL"
+		},
+		{
+			"label": "Run In WSL",
+			"type": "shell",
+			"command": "wsl",
+			"args": [
+				"./.vscode/runWslCommonScript.sh",
+				"outputWithAbsolutePaths",
+				"run",
+				"WslBuild",
+				""
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": "test",
+			"problemMatcher": [],
+			"dependsOn": "Install In WSL"
+		},
+		{
+			"label": "Run locally",
+			"type": "shell",
+			"command": "${command:cmake.launchTargetPath}",
+			"args": [],
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		}
+	],
+	"inputs": [
+		{
+			"id": "cmakeConfiguration",
+			"type": "pickString",
+			"description": "Select cmake configuration task:",
+			"options": [
+				"cleanAndConfigureWithGcc",
+				"cleanAndConfigureWithClang",
+				"cleanAndConfigureWithClangWithAsan",
+				"cleanAndConfigureWithClangAndStaticAnalyzers"
+			],
+			"default": "configureWithClang"
+		}
+	]
+}
