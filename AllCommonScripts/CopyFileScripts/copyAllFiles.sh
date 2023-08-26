@@ -15,7 +15,6 @@ source "$aprgDirectory/AllCommonScripts/CommonRegex/CommonRegexForPaths.sh"
 
 scriptPrint "$scriptName" "$LINENO" "Started copying of files for cpp projects..."
 $copyUsingLocatorFile ".*" "$cppSkipPathRegex" CppProjects/cmake/LocateAprgDirectory.cmake
-$copyUsingLocatorFile ".*" "$cppSkipPathRegex" CppProjects/cmake/AddFlags.cmake
 $copyUsingLocatorFile ".*" "$cppSkipPathRegex" CppProjects/.vscode/c_cpp_properties.json
 $copyUsingLocatorFile ".*" "$cppSkipPathRegex" CppProjects/.vscode/launch.json
 $copyUsingLocatorFile ".*" "$cppSkipPathRegex" CppProjects/.vscode/settings.json
