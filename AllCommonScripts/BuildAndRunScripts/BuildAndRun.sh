@@ -134,7 +134,6 @@ performRun(){
             fi
         fi
     done
-    scriptPrint "$scriptName" "$LINENO" "The outputLogPath is [$outputLogPath]."
 }
 
 # Perform script actions based from script option
