@@ -29,5 +29,5 @@ jobs:
         run: |
           git add delete_this.txt
           git commit -m "Automatic commit for Static Analyzers With Auto Fixes"
-          git remote set-url --push origin https://aprgproject:${{ secrets.PAT_TOKEN }}@github.com/aprgproject/aprg
+          git remote set-url --push origin https://aprgproject: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@github.com/aprgproject/aprg
           git push origin main
