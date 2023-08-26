@@ -15,7 +15,7 @@ include(${APRG_DIR}/AllCommonCMakeFiles/AllCommonSteps.cmake)
 include(${APRG_DIR}/gtest/AprgCMakeToInclude/gtest.cmake)
 include(${APRG_DIR}/AprgCommon/AprgCMakeToInclude/AprgCommon.cmake)
 include(${APRG_DIR}/AprgAlgorithm/AprgCMakeToInclude/AprgAlgorithm.cmake)
-include(${APRG_DIR}/gsl/AprgCMakeToInclude/Gsl.cmake)
+include(${APRG_DIR}/gsl/AprgCMakeToInclude/gsl.cmake)
 
 # Assign files, directories, flags, definitions and other specific steps
 include(${APRG_MODELLING_DIR}/cmake/SpecificStepsAsExecutable.cmake)
