@@ -18,7 +18,7 @@ TEST(AlbaSackReaderTest, SackTest) {
 }
 
 TEST(AlbaSackReaderTest, ClassesAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
+    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "class myClass\n";
@@ -40,7 +40,7 @@ TEST(AlbaSackReaderTest, ClassesAreRecognized) {
 }
 
 TEST(AlbaSackReaderTest, ClassesAreRecognizedInForwardDeclaration) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
+    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "class myClass;\n";
@@ -54,7 +54,7 @@ TEST(AlbaSackReaderTest, ClassesAreRecognizedInForwardDeclaration) {
 }
 
 TEST(AlbaSackReaderTest, TypedefAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
+    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef type1 type2;\n";
@@ -77,7 +77,7 @@ TEST(AlbaSackReaderTest, TypedefAreRecognized) {
 }
 
 TEST(AlbaSackReaderTest, TypedefArrayAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
+    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef type1 type2 [ 5 ] ;\n";
@@ -100,7 +100,7 @@ TEST(AlbaSackReaderTest, TypedefArrayAreRecognized) {
 }
 
 TEST(AlbaSackReaderTest, TypedefWithStructAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
+    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef struct type1 type2;\n";
@@ -116,7 +116,7 @@ TEST(AlbaSackReaderTest, TypedefWithStructAreRecognized) {
 }
 
 TEST(AlbaSackReaderTest, TypedefWithStructWithParametersAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
+    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef struct myStruct1\n";
@@ -140,7 +140,7 @@ TEST(AlbaSackReaderTest, TypedefWithStructWithParametersAreRecognized) {
 }
 
 TEST(AlbaSackReaderTest, TypedefWithSingleStructWithParametersAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
+    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef struct\n";
@@ -165,7 +165,7 @@ TEST(AlbaSackReaderTest, TypedefWithSingleStructWithParametersAreRecognized) {
 }
 
 TEST(AlbaSackReaderTest, TypedefWithUnionWithParametersAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
+    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef union myUnion1\n";
@@ -190,7 +190,7 @@ TEST(AlbaSackReaderTest, TypedefWithUnionWithParametersAreRecognized) {
 }
 
 TEST(AlbaSackReaderTest, TypedefWithEnumAreRecognized) {
-    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1_TO_READ);
+    AlbaLocalPathHandler file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << "typedef enum {\n";

@@ -1,5 +1,6 @@
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
-#include <FileDestructor.hpp>
+#include <ProcessFiles/FileDestructor/FileDestructor.hpp>
+#include <ProcessFilesTests/DirectoryConstants.hpp>
 
 #include <gtest/gtest.h>
 
@@ -30,7 +31,7 @@ void retrieveNumberOfFilesAndDirectoriesFromPath(
 
 TEST(SampleTest, DestroyOneFileTest) {
     FileDestructor fileDestructor;
-    AlbaLocalPathHandler pathHandler(APRG_DIR R"(\FileDestructor\FilesForTests\TestFolderForDestruction)");
+    AlbaLocalPathHandler pathHandler(APRG_FILE_DESTRUCTION_TEST_DIRECTORY);
     unsigned int numberOfFiles;
     unsigned int numberOfDirectories;
     createAFileInDirectory(pathHandler.getFullPath());
