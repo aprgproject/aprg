@@ -28,8 +28,6 @@ jobs:
       - name: Push Changes
         run: |
           git add delete_this.txt
-          git commit -m "Auto-commit: Update automated_file.txt"
-          git remote set-url --push origin https://aprgproject:$PAT_TOKEN@github.com/aprgproject/aprg
+          git commit -m "Automatic commit for Static Analyzers With Auto Fixes"
+          git remote set-url --push origin https://aprgproject:${{ secrets.PAT_TOKEN }}@github.com/aprgproject/aprg
           git push origin main
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
