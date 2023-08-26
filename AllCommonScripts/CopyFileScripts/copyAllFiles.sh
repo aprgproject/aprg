@@ -24,3 +24,9 @@ $copyUsingLocatorFile ".*" "$cppSkipPathRegex" CppProjects/.vscode/locateAprgDir
 $copyUsingLocatorFile ".*" "$cppSkipPathRegex" CppProjects/.vscode/runWslCommonScript.sh
 $copyUsingLocatorFile ".*" "$cppSkipPathRegex" CppProjects/CMakePresets.json
 scriptPrint "$scriptName" "$LINENO" "The copying of files for cpp projects is finished."
+
+scriptPrint "$scriptName" "$LINENO" "Started copying of files for clang tidy..."
+cp -f "$aprgDirectory/Clang/ClangTidyFiles/tests.clang-tidy" "$aprgDirectory/.clang-tidy"
+$copyUsingLocatorFile ".*" "$cppSkipPathRegex" "$aprgDirectory/.clang-tidy"
+cp -f "$aprgDirectory/Clang/ClangTidyFiles/general.clang-tidy" "$aprgDirectory/.clang-tidy"
+scriptPrint "$scriptName" "$LINENO" "The copying of files for clang tidy is finished."
