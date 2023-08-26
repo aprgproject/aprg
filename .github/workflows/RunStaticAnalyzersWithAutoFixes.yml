@@ -1,0 +1,34 @@
+name: Run Static Analyzers With Auto Fixes
+
+on:
+  workflow_dispatch:
+    inputs:
+      cppCMakeProjects:
+        description: 'C/C++ CMake Project (use "all" for all projects)'
+        required: true
+        default: 'all'
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Set up Git
+        run: |
+          git config user.name "aprgproject"
+          git config user.email "aprgproject@example.com"
+        
+      - name: Make Changes
+        run: |
+          echo "Automated commit" > delete_this.txt
+        
+      - name: Push Changes
+        run: |
+          git add delete_this.txt
+          git commit -m "Auto-commit: Update automated_file.txt"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
