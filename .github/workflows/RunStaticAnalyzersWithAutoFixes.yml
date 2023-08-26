@@ -31,4 +31,4 @@ jobs:
           git commit -m "Auto-commit: Update automated_file.txt"
           git push origin main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
