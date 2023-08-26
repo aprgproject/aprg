@@ -1,6 +1,7 @@
 #!/bin/bash
 
 projectsWithGsl='
+"gsl/GslTest"
 "AprgModelling/AprgModelling"
 '
 
